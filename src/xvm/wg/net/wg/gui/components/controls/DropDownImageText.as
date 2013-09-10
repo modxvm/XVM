@@ -19,7 +19,9 @@ package net.wg.gui.components.controls
             super.populateText(arg1);
             this.icon.visible = true;
             if (arg1) 
+            {
                 this.icon.source = arg1.icon;
+            }
             return;
         }
 

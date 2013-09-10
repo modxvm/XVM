@@ -22,7 +22,9 @@ package net.wg.gui.lobby.techtree.nodes
         public override function cleanUp():void
         {
             if (this.xpLabel != null) 
+            {
                 this.xpLabel.dispose();
+            }
             super.cleanUp();
             return;
         }
@@ -30,7 +32,9 @@ package net.wg.gui.lobby.techtree.nodes
         public override function isAvailable4Buy():Boolean
         {
             if (!dataInited) 
+            {
                 return false;
+            }
             return !(container == null) && this.containerEx.canInstallItems() && (_valueObject.state & net.wg.gui.lobby.techtree.constants.NodeState.INSTALLED) == 0 && super.isAvailable4Buy();
         }
 
@@ -38,7 +42,9 @@ package net.wg.gui.lobby.techtree.nodes
         {
             var loc1:*=super.isActionEnabled();
             if (loc1 && stateProps.enough == net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_MONEY) 
+            {
                 loc1 = !(container == null) && this.containerEx.canInstallItems() && (_valueObject.state & net.wg.gui.lobby.techtree.constants.NodeState.INSTALLED) == 0;
+            }
             return loc1;
         }
 
@@ -63,26 +69,34 @@ package net.wg.gui.lobby.techtree.nodes
                     this.typeIcon.gotoAndPlay(loc2);
                 }
                 else 
+                {
                     this.typeIcon.visible = false;
+                }
             }
             if (this.levelIcon != null) 
             {
                 loc3 = getLevel();
                 if (loc3 > -1) 
+                {
                     this.levelIcon.gotoAndStop(loc3);
+                }
             }
             if (this.xpLabel != null) 
             {
                 this.xpLabel.visible = !this.isAutoUnlocked();
                 if (this.xpLabel.visible) 
+                {
                     this.xpLabel.setOwner(this, _doValidateNow);
+                }
             }
             if (button != null) 
             {
                 button.label = getNamedLabel(stateProps.label);
                 button.enabled = this.isActionEnabled();
                 if (button.setAnimation(stateProps.id, stateProps.animation)) 
+                {
                     button.visible = stateProps.visible;
+                }
                 button.setOwner(this, _doValidateNow);
             }
             this.applyExtraSource();
@@ -98,7 +112,9 @@ package net.wg.gui.lobby.techtree.nodes
         public override function showContextMenu():void
         {
             if (button != null) 
+            {
                 button.endAnimation(true);
+            }
             net.wg.gui.lobby.techtree.MenuHandler.getInstance().showResearchItemMenu(this);
             return;
         }
@@ -121,7 +137,9 @@ package net.wg.gui.lobby.techtree.nodes
         public function isAvailable4Install():Boolean
         {
             if (!dataInited) 
+            {
                 return false;
+            }
             return !(container == null) && this.containerEx.canInstallItems() && inInventory() && (_valueObject.state & net.wg.gui.lobby.techtree.constants.NodeState.INSTALLED) == 0;
         }
 
@@ -134,7 +152,9 @@ package net.wg.gui.lobby.techtree.nodes
         public override function set container(arg1:net.wg.gui.lobby.techtree.interfaces.INodesContainer):void
         {
             if (arg1 is net.wg.gui.lobby.techtree.interfaces.IResearchContainer) 
+            {
                 _container = arg1;
+            }
             return;
         }
 
@@ -158,7 +178,9 @@ package net.wg.gui.lobby.techtree.nodes
             super.handleClick(arg1);
             net.wg.gui.lobby.techtree.MenuHandler.getInstance().hideMenu();
             if (button != null) 
+            {
                 button.endAnimation(true);
+            }
             dispatchEvent(new net.wg.gui.lobby.techtree.TechTreeEvent(net.wg.gui.lobby.techtree.TechTreeEvent.CLICK_2_OPEN, 0, _index, _entityType));
             return;
         }
@@ -178,7 +200,9 @@ package net.wg.gui.lobby.techtree.nodes
                 this.extraIcon.setSource(loc1);
                 this.extraIcon.visible = !(button && button.visible || this.xpLabel && this.xpLabel.visible);
                 if (this.extraIcon.visible) 
+                {
                     this.extraIcon.alpha = stateProps.index != 0 ? 1 : 0.5;
+                }
             }
             return;
         }

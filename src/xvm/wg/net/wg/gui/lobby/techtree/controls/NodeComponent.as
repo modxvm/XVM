@@ -19,7 +19,9 @@ package net.wg.gui.lobby.techtree.controls
         public function set state(arg1:String):void
         {
             if (this._state == arg1) 
+            {
                 return;
+            }
             this._state = arg1;
             return;
         }
@@ -27,10 +29,14 @@ package net.wg.gui.lobby.techtree.controls
         public function setOwner(arg1:net.wg.gui.lobby.techtree.interfaces.IRenderer, arg2:Boolean=false):void
         {
             if (this._owner != arg1) 
+            {
                 this._owner = arg1;
+            }
             invalidateData();
             if (arg2) 
+            {
                 validateNow();
+            }
             return;
         }
 

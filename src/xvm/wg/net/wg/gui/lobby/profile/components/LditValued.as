@@ -18,7 +18,9 @@ package net.wg.gui.lobby.profile.components
             if (tooltip) 
             {
                 if (this._value) 
+                {
                     loc1 = {"value":"<b>" + this._value + "</b>"};
+                }
                 App.toolTipMgr.showComplexWithParams(tooltip, new net.wg.data.managers.impl.ToolTipParams({}, loc1));
             }
             return;

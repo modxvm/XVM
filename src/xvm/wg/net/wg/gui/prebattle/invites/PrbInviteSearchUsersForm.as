@@ -25,7 +25,9 @@ package net.wg.gui.prebattle.invites
                 this.nameInput.addEventListener(scaleform.clik.events.InputEvent.INPUT, this.handleInput);
             }
             if (rosterList != null) 
+            {
                 rosterList.labelField = "displayName";
+            }
             super.configUI();
             return;
         }
@@ -33,11 +35,13 @@ package net.wg.gui.prebattle.invites
         public override function handleInput(arg1:scaleform.clik.events.InputEvent):void
         {
             if (arg1.details.code == flash.ui.Keyboard.ENTER && arg1.details.value == scaleform.clik.constants.InputValue.KEY_UP) 
+            {
                 if ((this.nameInput.focused || this.searchButton.focused) && this.searchButton.enabled) 
                 {
                     this.handleSearchUsers();
                     arg1.handled = true;
                 }
+            }
             return;
         }
 
@@ -45,7 +49,9 @@ package net.wg.gui.prebattle.invites
         {
             var loc1:*=org.idmedia.as3commons.util.StringUtils.trim(this.nameInput.text);
             if (loc1 == null) 
+            {
                 return;
+            }
             rosterList.selectedIndex = -1;
             this.coolDownButton();
             var loc2:*=new net.wg.gui.prebattle.invites.SendInvitesEvent(net.wg.gui.prebattle.invites.SendInvitesEvent.SEARCH_TOKEN, true);
@@ -65,21 +71,27 @@ package net.wg.gui.prebattle.invites
         {
             this.searchButton.enabled = arg1;
             if (this.searchButtonIntervalID != 0) 
+            {
                 flash.utils.clearTimeout(this.searchButtonIntervalID);
+            }
             return;
         }
 
         internal function showHandler(arg1:scaleform.clik.events.ComponentEvent):void
         {
             if (visible) 
+            {
                 flash.utils.setTimeout(this.setDefaultFocus, 50);
+            }
             return;
         }
 
         internal function setDefaultFocus():void
         {
             if (!this.nameInput.hasFocus) 
+            {
                 App.utils.focusHandler.setFocus(this.nameInput);
+            }
             return;
         }
 

@@ -29,9 +29,13 @@ package net.wg.gui.components.common.crosshair
             this.initCallbacks();
             this.initView();
             if (stage) 
+            {
                 this.initStage();
+            }
             else 
+            {
                 addEventListener(flash.events.Event.ADDED_TO_STAGE, this.initStage);
+            }
             return;
         }
 
@@ -60,16 +64,24 @@ package net.wg.gui.components.common.crosshair
             this.isReloaded = false;
             this.onSetMarkerType(MARKER_STATE_RELOADING);
             if (arg1 != 0) 
+            {
                 if (arg1 != -1) 
+                {
                     if (arg4 > 0) 
                     {
                         this.radiusFW.setPosAsPercent(arg4);
                         this.radiusFW.restartFromCurrentFrame(arg1);
                     }
                     else 
+                    {
                         this.radiusFW.start(arg1, arg2);
+                    }
+                }
                 else 
+                {
                     this.radiusFW.setPosAsPercent(0);
+                }
+            }
             else 
             {
                 this.radiusFW.setPosAsPercent(100);
@@ -87,7 +99,9 @@ package net.wg.gui.components.common.crosshair
                 this.onSetMarkerType(MARKER_STATE_RELOADED);
             }
             else 
+            {
                 this.radiusFW.setPosAsPercent(arg1);
+            }
             return;
         }
 
@@ -113,7 +127,9 @@ package net.wg.gui.components.common.crosshair
             this.crosshairMC.markerMC.alpha = arg1;
             this.onSetMarkerType(MARKER_STATE_NORMAL);
             if (this.isReloaded) 
+            {
                 this.onSetReloading(0, 0, false);
+            }
             return;
         }
 
@@ -122,7 +138,9 @@ package net.wg.gui.components.common.crosshair
             this.crosshairMC.radiusMC.gotoAndStop("type" + arg2);
             this.crosshairMC.radiusMC.mixingMC.alpha = arg1;
             if (this.isReloaded) 
+            {
                 this.onSetReloading(0, 0, false);
+            }
             this.radiusFW.setTarget(this.crosshairMC.radiusMC.mixingMC);
             return;
         }

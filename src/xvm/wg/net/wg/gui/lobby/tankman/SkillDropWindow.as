@@ -127,7 +127,9 @@ package net.wg.gui.lobby.tankman
                 this.recalculateData();
             }
             if (isInvalid(INVALID_MONEY)) 
+            {
                 this.updateSavingModes();
+            }
             return;
         }
 
@@ -146,17 +148,25 @@ package net.wg.gui.lobby.tankman
             switch (loc2) 
             {
                 case 2:
+                {
                     loc1 = this.goldButton;
                     break;
+                }
                 case 1:
+                {
                     loc1 = this.creditsButton;
                     break;
+                }
                 default:
+                {
                     loc1 = this.freeButton;
                     break;
+                }
             }
             if (loc1.enabled) 
+            {
                 loc1.selected = true;
+            }
             return;
         }
 
@@ -167,16 +177,24 @@ package net.wg.gui.lobby.tankman
             switch (loc2) 
             {
                 case this.goldButton:
+                {
                     loc1 = this.model.dropSkillGold;
                     break;
+                }
                 case this.creditsButton:
+                {
                     loc1 = this.model.dropSkillCredits;
                     break;
+                }
                 case this.freeButton:
+                {
                     loc1 = this.model.dropSkillFree;
                     break;
+                }
                 default:
+                {
                     break;
+                }
             }
             return loc1;
         }

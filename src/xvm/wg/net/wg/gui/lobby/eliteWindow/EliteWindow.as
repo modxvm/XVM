@@ -69,9 +69,13 @@ package net.wg.gui.lobby.eliteWindow
             if (isInvalid(this.INVALIDATE_TANK_DATA)) 
             {
                 if (this.vType && this.vType.length > 0) 
+                {
                     this.icon.source = "../maps/icons/elitewindow/" + this.vType + ".png";
+                }
                 if (this.vName && this.vName.length > 0) 
+                {
                     this.titleTF.text = App.utils.locale.makeString(DIALOGS.ELITE_HEADER, {"name":this.vName});
+                }
             }
             return;
         }

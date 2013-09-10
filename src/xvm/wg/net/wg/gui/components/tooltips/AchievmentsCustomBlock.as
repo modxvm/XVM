@@ -59,12 +59,14 @@ package net.wg.gui.components.tooltips
             var loc1:*=null;
             super.dispose();
             if (this.items) 
+            {
                 while (this.items.length > 0) 
                 {
                     loc1 = this.items.pop();
                     this.removeChild(loc1);
                     loc1 = null;
                 }
+            }
             return;
         }
 

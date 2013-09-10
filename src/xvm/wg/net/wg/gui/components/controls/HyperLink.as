@@ -17,7 +17,9 @@ package net.wg.gui.components.controls
             {
                 textField.text = _label;
                 if (this.isUnderline) 
+                {
                     textField.htmlText = "<u>" + textField.text + "</u>";
+                }
             }
             return;
         }

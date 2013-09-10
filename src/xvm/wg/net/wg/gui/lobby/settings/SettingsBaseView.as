@@ -17,7 +17,9 @@ package net.wg.gui.lobby.settings
         {
             super.configUI();
             if (this._data) 
+            {
                 this.setData(this._data);
+            }
             return;
         }
 
@@ -31,14 +33,24 @@ package net.wg.gui.lobby.settings
             {
                 loc1 = "";
                 if (this._data[arg1].current != null) 
+                {
                     loc1 = net.wg.gui.lobby.settings.SettingsConfig.LOCALIZATION + arg2 + arg1;
+                }
                 if (this._data[arg1].hasLabel && this[arg1 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_LABEL]) 
+                {
                     if (this[arg1 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_LABEL] is net.wg.gui.components.controls.LabelControl) 
+                    {
                         (loc2 = this[arg1 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_LABEL]).text = loc1;
+                    }
                     else 
+                    {
                         (loc3 = this[arg1 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_LABEL]).text = loc1;
+                    }
+                }
                 else if (this[arg1 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_CHECKBOX] && this[arg1 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_CHECKBOX].label == "") 
+                {
                     (loc4 = this[arg1 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_CHECKBOX]).label = loc1;
+                }
             }
             return;
         }
@@ -48,7 +60,9 @@ package net.wg.gui.lobby.settings
             this._viewId = arg1.id;
             this._data = arg1.data;
             if (this.initialized) 
+            {
                 this.setData(this._data);
+            }
             return;
         }
 

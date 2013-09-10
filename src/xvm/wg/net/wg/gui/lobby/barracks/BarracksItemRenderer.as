@@ -25,20 +25,30 @@ package net.wg.gui.lobby.barracks
         public override function setData(arg1:Object):void
         {
             if (!arg1) 
+            {
                 return;
+            }
             this.btnDissmiss.focusTarget = this;
             this.data = arg1;
             this.empty = arg1.empty;
             this.buy = arg1.buy;
             if (arg1.iconFile && !(arg1.iconFile == this.icon.source)) 
+            {
                 this.icon.source = "../maps/icons/tankmen/icons/barracks/" + arg1.iconFile;
+            }
             if (arg1.rankIconFile && !(arg1.rankIconFile == this.iconRank.source)) 
+            {
                 this.iconRank.source = "../maps/icons/tankmen/ranks/small/" + arg1.rankIconFile;
+            }
             if (arg1.roleIconFile && !(arg1.roleIconFile == this.iconRole.source)) 
+            {
                 this.iconRole.source = arg1.roleIconFile;
+            }
             this.inCurrentTank = arg1.inCurrentTank;
             if (!this.inCurrentTank) 
+            {
                 this.inTank = arg1.inTank;
+            }
             this.btnDissmiss.enabled = !(arg1.locked || arg1.vehicleBroken);
             this.btnDissmiss.label = MENU.BARRACKS_BTNDISSMISS;
             this.btnDissmiss.soundId = "btnDissmiss";
@@ -57,24 +67,38 @@ package net.wg.gui.lobby.barracks
         public function onBtnDissmissClick(arg1:scaleform.clik.events.ButtonEvent):void
         {
             if (this._inTank || this._inCurrentTank) 
+            {
                 dispatchEvent(new net.wg.gui.events.CrewEvent(net.wg.gui.events.CrewEvent.UNLOAD_TANKMAN, data));
+            }
             else 
+            {
                 dispatchEvent(new net.wg.gui.events.CrewEvent(net.wg.gui.events.CrewEvent.DISMISS_TANKMAN, data));
+            }
             return;
         }
 
         public function onBarracksItemRendererClick(arg1:flash.events.MouseEvent):void
         {
             if (arg1.target == this.btnDissmiss) 
+            {
                 return;
+            }
             var loc1:*=App.utils.commons;
             if (loc1.isLeftButton(arg1)) 
+            {
                 if (this._empty) 
+                {
                     dispatchEvent(new net.wg.gui.events.CrewEvent(net.wg.gui.events.CrewEvent.SHOW_RECRUIT_WINDOW, null, true));
+                }
                 else if (this._buy) 
+                {
                     dispatchEvent(new net.wg.gui.events.CrewEvent(net.wg.gui.events.CrewEvent.SHOW_BERTH_BUY_DIALOG));
+                }
+            }
             if (loc1.isRightButton(arg1) && !this._buy && !this._empty) 
+            {
                 dispatchEvent(new net.wg.gui.events.CrewEvent(net.wg.gui.events.CrewEvent.OPEN_PERSONAL_CASE, data, false, 0));
+            }
             return;
         }
 
@@ -82,9 +106,13 @@ package net.wg.gui.lobby.barracks
         {
             setState("out");
             if (this._inTank || this._inCurrentTank) 
+            {
                 App.toolTipMgr.showComplex(TOOLTIPS.BARRACKS_TANKMEN_UNLOAD);
+            }
             else 
+            {
                 App.toolTipMgr.showComplex(TOOLTIPS.BARRACKS_TANKMEN_DISMISS);
+            }
             return;
         }
 
@@ -99,11 +127,17 @@ package net.wg.gui.lobby.barracks
         protected override function getStatePrefixes():__AS3__.vec.Vector.<String>
         {
             if (this._empty) 
+            {
                 return Vector.<String>(["empty_"]);
+            }
             if (this._buy) 
+            {
                 return Vector.<String>(["buy_"]);
+            }
             if (_selected) 
+            {
                 return Vector.<String>(["selected_", ""]);
+            }
             return Vector.<String>([""]);
         }
 
@@ -115,7 +149,9 @@ package net.wg.gui.lobby.barracks
         public function set inTank(arg1:Boolean):void
         {
             if (this._inTank == arg1) 
+            {
                 return;
+            }
             this._inTank = arg1;
             invalidate(INVALIDATE_IN_TANK);
             return;
@@ -129,7 +165,9 @@ package net.wg.gui.lobby.barracks
         public function set inCurrentTank(arg1:Boolean):void
         {
             if (this._inCurrentTank == arg1) 
+            {
                 return;
+            }
             this._inCurrentTank = arg1;
             invalidate(INVALIDATE_IN_TANK);
             return;
@@ -170,11 +208,17 @@ package net.wg.gui.lobby.barracks
             this.icon.visible = loc2;
             this.btnDissmiss.visible = loc1;
             if (this.buy) 
+            {
                 soundType = net.wg.data.constants.SoundTypes.BARRACKS_BUY_SOUND_TYPE;
+            }
             else if (this.empty) 
+            {
                 soundType = net.wg.data.constants.SoundTypes.BARRACKS_EMPTY_SOUND_TYPE;
+            }
             else 
+            {
                 soundType = net.wg.data.constants.SoundTypes.BARRACKS_TANKMAN_SOUND_TYPE;
+            }
             return;
         }
 
@@ -225,9 +269,13 @@ package net.wg.gui.lobby.barracks
                 {
                     loc1 = "barracks";
                     if (this._inTank) 
+                    {
                         loc1 = "tank";
+                    }
                     if (this._inCurrentTank) 
+                    {
                         loc1 = "current_tank";
+                    }
                     this.selection.gotoAndPlay(loc1);
                 }
                 if (isInvalid(INVALIDATE_PARAMS) && data) 
@@ -235,10 +283,16 @@ package net.wg.gui.lobby.barracks
                     loc2 = new flash.geom.Point(mouseX, mouseY);
                     loc2 = this.localToGlobal(loc2);
                     if (this.hitTestPoint(loc2.x, loc2.y, true)) 
+                    {
                         if (this.btnDissmiss.hitTestPoint(loc2.x, loc2.y, true) && !(this._buy || this.empty)) 
+                        {
                             this.showTooltip(null);
+                        }
                         else 
+                        {
                             dispatchEvent(new scaleform.clik.events.ListEvent(scaleform.clik.events.ListEvent.ITEM_ROLL_OVER, true, true, -1, -1, -1, null, data));
+                        }
+                    }
                     this.countField.text = "";
                     if (this._buy) 
                     {
@@ -248,12 +302,15 @@ package net.wg.gui.lobby.barracks
                         this.descrField.replaceText(this.descrField.text.indexOf("{"), this.descrField.text.indexOf("}") + 1, String(data.count));
                     }
                     if (this.role) 
+                    {
                         this.role.htmlText = data.role;
+                    }
                     if (!(this._buy || this.empty)) 
                     {
                         loc3 = data.specializationLevel + "%";
                         loc4 = App.utils.locale.makeString(MENU.tankmen(data.tankType));
                         if (data.isInSelfVehicleClass) 
+                        {
                             if (data.isInSelfVehicleType) 
                             {
                                 this.levelSpecializationMain.htmlText = loc3;
@@ -264,6 +321,7 @@ package net.wg.gui.lobby.barracks
                                 this.levelSpecializationMain.htmlText = " <font color=\'" + DEBUFF + "\'>" + loc3 + "</font>";
                                 this.role.htmlText = this.role.htmlText + (", " + loc4 + " <font color=\'" + DEBUFF + "\'> " + data.vehicleType + "</font>");
                             }
+                        }
                         else 
                         {
                             this.levelSpecializationMain.htmlText = " <font color=\'" + DEBUFF + "\'>" + loc3 + "</font>";

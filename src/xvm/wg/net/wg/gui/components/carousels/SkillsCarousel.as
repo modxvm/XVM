@@ -15,7 +15,9 @@ package net.wg.gui.components.carousels
         {
             super.updateContainerPosition();
             if (_renderers.length <= 0) 
+            {
                 this.visible = false;
+            }
             else if (_renderers.length <= countVisibleSlots) 
             {
                 var loc1:*;
@@ -50,7 +52,9 @@ package net.wg.gui.components.carousels
                 }
             }
             else 
+            {
                 this.setCursorListeners();
+            }
             return;
         }
 

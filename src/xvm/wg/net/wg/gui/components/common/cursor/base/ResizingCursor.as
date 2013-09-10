@@ -20,7 +20,9 @@ package net.wg.gui.components.common.cursor.base
             arg1.addEventListener(flash.events.MouseEvent.ROLL_OVER, this.onResizableObjectRollOver, false, 0, true);
             arg1.addEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.onResizableObjectMouseDn, false, 0, true);
             if (arg1 is net.wg.infrastructure.interfaces.IView) 
+            {
                 arg1.addEventListener(net.wg.infrastructure.events.LifeCycleEvent.ON_BEFORE_DISPOSE, this.onBeforeResizableObjDispose, false, 0, true);
+            }
             return;
         }
 
@@ -30,7 +32,9 @@ package net.wg.gui.components.common.cursor.base
             arg1.removeEventListener(flash.events.MouseEvent.ROLL_OVER, this.onResizableObjectRollOver);
             arg1.removeEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.onResizableObjectMouseDn);
             if (arg1 is net.wg.infrastructure.interfaces.IView) 
+            {
                 arg1.removeEventListener(net.wg.infrastructure.events.LifeCycleEvent.ON_BEFORE_DISPOSE, this.onBeforeResizableObjDispose);
+            }
             return;
         }
 

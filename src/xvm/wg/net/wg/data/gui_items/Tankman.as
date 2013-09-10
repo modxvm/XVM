@@ -36,7 +36,9 @@ package net.wg.data.gui_items
         {
             var loc1:*=_getAttr("currentVehicle");
             if (loc1 != null) 
+            {
                 return new net.wg.data.gui_items.Vehicle(uint(loc1));
+            }
             return null;
         }
 
@@ -120,7 +122,9 @@ package net.wg.data.gui_items
             var loc4:*=0;
             var loc5:*=loc1;
             for each (loc3 in loc5) 
+            {
                 loc2.push(new net.wg.data.gui_items.TankmanSkill(loc3, this.inventoryID));
+            }
             return loc2;
         }
     }

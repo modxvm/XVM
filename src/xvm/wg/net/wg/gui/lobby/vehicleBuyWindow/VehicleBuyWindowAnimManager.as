@@ -79,7 +79,9 @@ package net.wg.gui.lobby.vehicleBuyWindow
         {
             var loc1:*=null;
             if (arg3) 
+            {
                 arg1.y = arg2;
+            }
             else 
             {
                 (loc1 = {}).y = arg2;
@@ -92,7 +94,9 @@ package net.wg.gui.lobby.vehicleBuyWindow
         {
             var loc1:*=null;
             if (arg3) 
+            {
                 arg1.alpha = arg2;
+            }
             else 
             {
                 (loc1 = {}).alpha = arg2;
@@ -105,7 +109,9 @@ package net.wg.gui.lobby.vehicleBuyWindow
         {
             var loc1:*=null;
             if (arg3) 
+            {
                 arg1.height = arg2;
+            }
             else 
             {
                 (loc1 = {}).height = arg2;

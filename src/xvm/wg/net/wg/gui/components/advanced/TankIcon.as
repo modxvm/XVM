@@ -18,7 +18,9 @@ package net.wg.gui.components.advanced
         public function set tankName(arg1:String):void
         {
             if (arg1 == this._tankName) 
+            {
                 return;
+            }
             this._tankName = arg1;
             this._tankNameDirty = true;
             invalidate();
@@ -38,7 +40,9 @@ package net.wg.gui.components.advanced
         public function set favorite(arg1:Boolean):void
         {
             if (this._favorite == arg1) 
+            {
                 return;
+            }
             this._favorite = arg1;
             this._favoriteDirty = true;
             invalidate();
@@ -87,7 +91,9 @@ package net.wg.gui.components.advanced
         public function set nation(arg1:Number):void
         {
             if (arg1 < 0 || arg1 == this._nation) 
+            {
                 return;
+            }
             this._nation = arg1;
             this._nationDirty = true;
             this._nationNameDirty = false;
@@ -103,7 +109,9 @@ package net.wg.gui.components.advanced
         public function set nationName(arg1:String):void
         {
             if (!arg1 || arg1 == this._nationName) 
+            {
                 return;
+            }
             this._nationName = arg1;
             this._nationNameDirty = true;
             this._nationDirty = false;
@@ -119,7 +127,9 @@ package net.wg.gui.components.advanced
         public function set image(arg1:String):void
         {
             if (!arg1 || arg1 == this._image) 
+            {
                 return;
+            }
             this._image = arg1;
             this._imageDirty = true;
             invalidate();
@@ -134,7 +144,9 @@ package net.wg.gui.components.advanced
         public function set tankType(arg1:String):void
         {
             if (!arg1 || arg1 == this._tankType) 
+            {
                 return;
+            }
             this._tankType = arg1;
             this._tankTypeDirty = true;
             invalidate();
@@ -149,7 +161,9 @@ package net.wg.gui.components.advanced
         public function set level(arg1:Number):void
         {
             if (arg1 == this._level) 
+            {
                 return;
+            }
             this._level = arg1;
             this._levelDirty = true;
             invalidate();
@@ -164,7 +178,9 @@ package net.wg.gui.components.advanced
         public function set multyXpVal(arg1:Number):void
         {
             if (arg1 == this._multyXpVal) 
+            {
                 return;
+            }
             this._multyXpVal = arg1;
             this._multyXpValDirty = true;
             invalidate();
@@ -179,7 +195,9 @@ package net.wg.gui.components.advanced
         public function set xpVal(arg1:Number):void
         {
             if (arg1 == this._xpVal) 
+            {
                 return;
+            }
             this._xpVal = arg1;
             this._xpValDirty = true;
             invalidate();
@@ -199,7 +217,9 @@ package net.wg.gui.components.advanced
         public function set isElite(arg1:Boolean):void
         {
             if (arg1 == this._isElite) 
+            {
                 return;
+            }
             this._isElite = arg1;
             this._isEliteDirty = true;
             invalidate();
@@ -214,7 +234,9 @@ package net.wg.gui.components.advanced
         public function set isPremium(arg1:Boolean):void
         {
             if (arg1 == this._isPremium) 
+            {
                 return;
+            }
             this._isPremium = arg1;
             this._isPremiumDirty = true;
             invalidate();
@@ -242,7 +264,9 @@ package net.wg.gui.components.advanced
             {
                 this.xp.visible = this.showXp;
                 if (this.showXp) 
+                {
                     this.xp.textField.text = String(this.xpVal);
+                }
                 this._showXpDirty = loc1 = false;
                 this._xpValDirty = loc1;
             }
@@ -251,7 +275,9 @@ package net.wg.gui.components.advanced
                 this.tankNameBg.visible = loc1 = this.showName;
                 this.tankNameField.visible = loc1;
                 if (this.showName) 
+                {
                     this.tankNameField.text = this.tankName;
+                }
                 this.updateTankName();
                 this._showNameDirty = loc1 = false;
                 this._tankNameDirty = loc1 = loc1;
@@ -290,18 +316,26 @@ package net.wg.gui.components.advanced
                 this._favoriteDirty = false;
             }
             if (this._showMultyXpDirty || this._showXpDirty || this._showNameDirty || this._nationDirty || this._imageDirty || this._tankTypeDirty || this._levelDirty || this._multyXpValDirty || this._xpValDirty || this._tankNameDirty || this._isEliteDirty || this._isPremiumDirty || this._favoriteDirty) 
+            {
                 invalidate();
+            }
             return;
         }
 
         internal function updateTankType():void
         {
             if (this.tankType) 
+            {
                 this.tankTypeMc.gotoAndStop(this.tankType + (this.isElite ? "_elite" : ""));
+            }
             if (this.isElite) 
+            {
                 this.levelMc.x = 21;
+            }
             else 
+            {
                 this.levelMc.x = Math.round(this.tankTypeMc.x + this.tankTypeMc.width + 3);
+            }
             return;
         }
 
@@ -324,7 +358,9 @@ package net.wg.gui.components.advanced
                 }
             }
             else 
+            {
                 this.multyXp.visible = false;
+            }
             return;
         }
 
@@ -391,7 +427,9 @@ package net.wg.gui.components.advanced
                 this.tankNameField.textColor = loc4;
             }
             else 
+            {
                 this.tankNameField.filters = [];
+            }
             return;
         }
 

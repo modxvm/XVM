@@ -42,7 +42,9 @@ package net.wg.infrastructure.managers.utils.impl
             if (this._modalBackground != null) 
             {
                 if (this._modalBackground.parent) 
+                {
                     App.utils.popupMgr.remove(this._modalBackground);
+                }
                 this._modalBackground = null;
             }
             return;
@@ -59,7 +61,9 @@ package net.wg.infrastructure.managers.utils.impl
             var loc2:*=loc1.asserter.assertNotNull;
             loc2(arg1, "helpLayoutControl" + net.wg.data.constants.Errors.CANT_NULL);
             if (arg1.parent) 
+            {
                 loc1.popupMgr.remove(arg1);
+            }
             return;
         }
 

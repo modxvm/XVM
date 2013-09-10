@@ -19,7 +19,9 @@ package net.wg.gui.components.common.crosshair
         public function set mode(arg1:String):void
         {
             if (arg1 == this._mode || !(arg1 == MODE_AMMO) && !(arg1 == MODE_PERCENT) && !(arg1 == MODE_BURST)) 
+            {
                 return;
+            }
             this._mode = arg1;
             this.quantityBarTotalFrames = this.calcTotalFrames();
             this.quantityBarCurrentFrame = this.calcCurrentFrame();
@@ -46,9 +48,13 @@ package net.wg.gui.components.common.crosshair
             if (initialized) 
             {
                 if (arg4 && this._quantityInClip == this._clipCapacity) 
+                {
                     gotoAndPlay(STATE_RELOADED);
+                }
                 else if (this._clipState != arg3) 
+                {
                     gotoAndStop(arg3);
+                }
                 this._clipState = arg3;
                 invalidate();
             }
@@ -67,10 +73,16 @@ package net.wg.gui.components.common.crosshair
         {
             var loc1:*=this.capacityBar.totalFrames;
             if (this._mode != MODE_AMMO) 
+            {
                 if (this._mode == MODE_QUEUE) 
+                {
                     loc1 = Math.min(Math.ceil(this._clipCapacity / this._burst) + 1, loc1);
+                }
+            }
             else 
+            {
                 loc1 = Math.min(this._clipCapacity + 1, loc1);
+            }
             return loc1;
         }
 
@@ -79,11 +91,17 @@ package net.wg.gui.components.common.crosshair
             var loc1:*=this.quantityBarCurrentFrame;
             var loc2:*=this.quantityBarTotalFrames > this._clipCapacity / Math.max(this._burst, 1);
             if (this._mode == MODE_AMMO && loc2) 
+            {
                 loc1 = this._quantityInClip > 0 ? this._quantityInClip + 1 : 0;
+            }
             else if (this._mode == MODE_QUEUE && loc2) 
+            {
                 loc1 = Math.ceil(this._quantityInClip / this._burst) + 1;
+            }
             else if (this._clipCapacity > 0) 
+            {
                 loc1 = Math.ceil(this.quantityBarTotalFrames * this._quantityInClip / this._clipCapacity);
+            }
             return Math.min(loc1, this.quantityBarTotalFrames);
         }
 
@@ -100,7 +118,9 @@ package net.wg.gui.components.common.crosshair
             var loc2:*=MODE_PERCENT;
             var loc3:*=arg1;
             if (arg2 > 1) 
+            {
                 loc3 = Math.ceil(loc3 / arg2);
+            }
             if (loc3 < HEAVY_LIMIT) 
             {
                 loc1 = TYPE_HEAVY;
@@ -151,7 +171,9 @@ package net.wg.gui.components.common.crosshair
         public function set clipCapacity(arg1:Number):void
         {
             if (arg1 == this._clipCapacity || arg1 < 0) 
+            {
                 return;
+            }
             this._clipCapacity = arg1;
             if (initialized || true) 
             {
@@ -169,7 +191,9 @@ package net.wg.gui.components.common.crosshair
         public function set quantityInClip(arg1:Number):void
         {
             if (arg1 == this._quantityInClip || arg1 < 0) 
+            {
                 return;
+            }
             this._quantityInClip = arg1;
             var loc1:*=this.calcCurrentFrame();
             if (loc1 != this.quantityBarCurrentFrame) 
@@ -188,7 +212,9 @@ package net.wg.gui.components.common.crosshair
         public function set quantity(arg1:Number):void
         {
             if (arg1 == this._quantity || arg1 < -1) 
+            {
                 return;
+            }
             this._quantity = arg1;
             return;
         }
@@ -201,7 +227,9 @@ package net.wg.gui.components.common.crosshair
         public function set clipState(arg1:String):void
         {
             if (arg1 == this._clipState) 
+            {
                 return;
+            }
             this._clipState = arg1;
             gotoAndStop(this._clipState);
             return;

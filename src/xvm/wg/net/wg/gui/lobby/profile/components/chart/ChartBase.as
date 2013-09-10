@@ -26,11 +26,15 @@ package net.wg.gui.lobby.profile.components.chart
             if (isInvalid(RENDERER_CLASS_INV)) 
             {
                 while (this._renderers.length > 0) 
+                {
                     this.removeRendererAt((this._renderers.length - 1));
+                }
                 invalidateData();
             }
             if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+            {
                 this.updateRenderers();
+            }
             if (isInvalid(LAYOUT_INV) && this._currentLayout) 
             {
                 loc1 = 0;
@@ -49,14 +53,18 @@ package net.wg.gui.lobby.profile.components.chart
             var loc1:*=null;
             var loc3:*=null;
             while (this._renderers.length > this.getDataProviderLength()) 
+            {
                 this.removeRendererAt((this._renderers.length - 1));
+            }
             var loc2:*=this.getDataProviderLength();
             var loc4:*=0;
             while (loc4 < loc2) 
             {
                 loc3 = this._dataProvider[loc4];
                 if (loc4 != this._renderers.length) 
+                {
                     loc1 = this._renderers[loc4];
+                }
                 else if (this._itemRenderer) 
                 {
                     loc1 = this.createRenderer();
@@ -79,7 +87,9 @@ package net.wg.gui.lobby.profile.components.chart
             var loc2:*=flash.display.DisplayObject(loc1);
             loc2.parent.removeChild(loc2);
             if (loc1 is net.wg.infrastructure.interfaces.entity.IDisposable) 
+            {
                 net.wg.infrastructure.interfaces.entity.IDisposable(loc1).dispose();
+            }
             loc1 = null;
             return;
         }
@@ -95,7 +105,9 @@ package net.wg.gui.lobby.profile.components.chart
         internal function getDataProviderLength():int
         {
             if (this._dataProvider) 
+            {
                 return this._dataProvider.length;
+            }
             return 0;
         }
 
@@ -120,16 +132,26 @@ package net.wg.gui.lobby.profile.components.chart
         {
             var loc1:*=null;
             if (_inspector && arg1 == "" || arg1 == "") 
+            {
                 return;
+            }
             this._itemRendererName = arg1;
             if (App.utils) 
+            {
                 loc1 = App.utils.classFactory.getClass(arg1);
+            }
             else 
+            {
                 loc1 = flash.utils.getDefinitionByName(arg1) as Class;
+            }
             if (loc1 == null) 
+            {
                 trace("Error: " + this + ", The class " + arg1 + " cannot be found in your library. Please ensure it is there.");
+            }
             else 
+            {
                 this.itemRenderer = loc1;
+            }
             return;
         }
 
@@ -141,12 +163,18 @@ package net.wg.gui.lobby.profile.components.chart
         public function set dataProvider(arg1:scaleform.clik.interfaces.IDataProvider):void
         {
             if (this._dataProvider == arg1) 
+            {
                 return;
+            }
             if (this._dataProvider != null) 
+            {
                 this._dataProvider.removeEventListener(flash.events.Event.CHANGE, this.handleDataChange, false);
+            }
             this._dataProvider = arg1;
             if (this._dataProvider == null) 
+            {
                 return;
+            }
             this._dataProvider.addEventListener(flash.events.Event.CHANGE, this.handleDataChange, false, 0, true);
             invalidateData();
             return;
@@ -178,14 +206,18 @@ package net.wg.gui.lobby.profile.components.chart
             {
                 loc1 = this._renderers.splice((this._renderers.length - 1), 1)[0];
                 try 
+                {
                     loc1.dispose();
+                }
                 catch (e:Error)
                 {
                 };
                 loc1 = null;
             }
             if (this._dataProvider) 
+            {
                 this._dataProvider = null;
+            }
             return;
         }
 

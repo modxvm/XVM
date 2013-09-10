@@ -37,7 +37,9 @@ package net.wg.gui.lobby.settings
             var loc6:*=null;
             this.id = arg1;
             if (arg2 == null) 
+            {
                 this.disableAllControls();
+            }
             else 
             {
                 this._data = arg2;
@@ -47,26 +49,36 @@ package net.wg.gui.lobby.settings
                 {
                     loc2 = net.wg.gui.lobby.settings.vo.SettingsControlProp(this._data[loc1]);
                     if (!this[loc1 + loc2.type]) 
+                    {
                         continue;
+                    }
                     var loc9:*=loc2.type;
                     switch (loc9) 
                     {
                         case net.wg.gui.lobby.settings.SettingsConfig.TYPE_SLIDER:
+                        {
                             (loc3 = this[loc1 + loc2.type]).value = loc2.current;
                             loc3.addEventListener(scaleform.clik.events.SliderEvent.VALUE_CHANGE, this.onSliderValueChanged);
                             loc3.enabled = loc2.current != null ? true : false;
                             if (loc2.hasValue && this[loc1 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_VALUE]) 
+                            {
                                 (loc5 = this[loc1 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_VALUE]).text = loc2.current ? loc2.current : "";
+                            }
                             if (loc2.hasLabel && this[loc1 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_LABEL]) 
+                            {
                                 (loc6 = this[loc1 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_LABEL]).text = SETTINGS.arcade(loc1);
+                            }
                             continue label514;
+                        }
                         case net.wg.gui.lobby.settings.SettingsConfig.TYPE_DROPDOWN:
+                        {
                             (loc4 = this[loc1 + loc2.type]).dataProvider = new scaleform.clik.data.DataProvider(loc2.options);
                             loc4.menuRowCount = loc2.options is Array ? loc2.options.length : 0;
                             loc4.selectedIndex = loc2.current;
                             loc4.enabled = loc2.current != null ? true : false;
                             loc4.addEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onDropDownChange);
                             continue label514;
+                        }
                     }
                 }
             }
@@ -88,7 +100,9 @@ package net.wg.gui.lobby.settings
             var loc2:*=net.wg.gui.lobby.settings.SettingsConfig.getControlId(loc1.name, net.wg.gui.lobby.settings.SettingsConfig.TYPE_SLIDER);
             var loc3:*;
             if ((loc3 = net.wg.gui.lobby.settings.vo.SettingsControlProp(this._data[loc2])).hasValue && this[loc2 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_VALUE]) 
+            {
                 (loc4 = this[loc2 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_VALUE]).text = loc1.value.toString();
+            }
             dispatchEvent(new net.wg.gui.lobby.settings.evnts.SettingsSubVewEvent(net.wg.gui.lobby.settings.evnts.SettingsSubVewEvent.ON_CONTROL_CHANGE, this._id, loc2, loc1.value));
             return;
         }
@@ -135,17 +149,23 @@ package net.wg.gui.lobby.settings
                 {
                     loc2 = net.wg.gui.lobby.settings.vo.SettingsControlProp(this._data[loc1]);
                     if (!this[loc1 + loc2.type]) 
+                    {
                         continue;
+                    }
                     var loc7:*=loc2.type;
                     switch (loc7) 
                     {
                         case net.wg.gui.lobby.settings.SettingsConfig.TYPE_SLIDER:
+                        {
                             loc3 = this[loc1 + loc2.type];
                             loc3.removeEventListener(scaleform.clik.events.SliderEvent.VALUE_CHANGE, this.onSliderValueChanged);
                             continue label244;
+                        }
                         case net.wg.gui.lobby.settings.SettingsConfig.TYPE_DROPDOWN:
+                        {
                             (loc4 = this[loc1 + loc2.type]).removeEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onDropDownChange);
                             continue label244;
+                        }
                     }
                 }
                 this._data = null;

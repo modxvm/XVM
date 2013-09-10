@@ -31,7 +31,9 @@ package net.wg.gui.lobby.training
         internal function clearAll():void
         {
             while (icons.numChildren > 0) 
+            {
                 icons.removeChildAt(0);
+            }
             return;
         }
 

@@ -35,7 +35,9 @@ package net.wg.gui.lobby.store.views
         protected override function onFitsArrayRequest():Array
         {
             if (getUIName() == net.wg.data.constants.generated.STORE_TYPES.SHOP) 
+            {
                 return [new net.wg.gui.lobby.store.views.base.ViewUIElementVO("locked", this.lockedChkBx), new net.wg.gui.lobby.store.views.base.ViewUIElementVO("inHangar", this.inHangarChkBx)];
+            }
             return [new net.wg.gui.lobby.store.views.base.ViewUIElementVO("locked", this.lockedChkBx), new net.wg.gui.lobby.store.views.base.ViewUIElementVO("brocken", this.brockenChckBx)];
         }
 
@@ -54,7 +56,9 @@ package net.wg.gui.lobby.store.views
                 addHandlerToGroup(this.allRadioBtn);
             }
             else 
+            {
                 selectFilter(getTagsArray(), loc2, false, true);
+            }
             selectFilter(getFitsArray(), arg1, true, false);
             return;
         }

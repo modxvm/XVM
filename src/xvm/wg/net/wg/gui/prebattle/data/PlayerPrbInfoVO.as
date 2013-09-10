@@ -100,19 +100,37 @@ package net.wg.gui.prebattle.data
         {
             var loc1:*=net.wg.gui.prebattle.constants.PrebattleStateString.UNKNOWN;
             if (this._state && !(this._state == net.wg.gui.prebattle.constants.PrebattleStateFlags.UNKNOWN)) 
+            {
                 if (this.isOffline()) 
+                {
                     loc1 = (this._state & net.wg.gui.prebattle.constants.PrebattleStateFlags.NOT_READY) == 0 ? net.wg.gui.prebattle.constants.PrebattleStateString.OFFLINE_READY : net.wg.gui.prebattle.constants.PrebattleStateString.OFFLINE;
+                }
                 else if (this._state != net.wg.gui.prebattle.constants.PrebattleStateFlags.NOT_READY) 
+                {
                     if (this._state != net.wg.gui.prebattle.constants.PrebattleStateFlags.AFK) 
+                    {
                         if (this._state != net.wg.gui.prebattle.constants.PrebattleStateFlags.READY) 
+                        {
                             if (this._state == net.wg.gui.prebattle.constants.PrebattleStateFlags.IN_BATTLE) 
+                            {
                                 loc1 = net.wg.gui.prebattle.constants.PrebattleStateString.IN_BATTLE;
+                            }
+                        }
                         else 
+                        {
                             loc1 = net.wg.gui.prebattle.constants.PrebattleStateString.READY;
+                        }
+                    }
                     else 
+                    {
                         loc1 = net.wg.gui.prebattle.constants.PrebattleStateString.AFK;
+                    }
+                }
                 else 
+                {
                     loc1 = net.wg.gui.prebattle.constants.PrebattleStateString.NOT_READY;
+                }
+            }
             return loc1;
         }
 

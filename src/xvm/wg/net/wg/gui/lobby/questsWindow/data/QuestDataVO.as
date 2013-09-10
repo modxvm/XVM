@@ -17,13 +17,19 @@ package net.wg.gui.lobby.questsWindow.data
             switch (loc1) 
             {
                 case "header":
+                {
                     this._header = arg2 ? new net.wg.gui.lobby.questsWindow.data.HeaderDataVO(arg2) : null;
                     return false;
+                }
                 case "info":
+                {
                     this._info = arg2 ? new net.wg.gui.lobby.questsWindow.data.InfoDataVO(arg2) : null;
                     return false;
+                }
                 default:
+                {
                     return true;
+                }
             }
         }
 

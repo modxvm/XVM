@@ -51,7 +51,9 @@ package net.wg.gui.lobby.store.views.base
             {
                 (loc1 = App.utils.asserter).assertNotNull(arg1, arg2 + ".group" + net.wg.data.constants.Errors.CANT_NULL, net.wg.infrastructure.exceptions.NullPointerException);
                 if (arg3) 
+                {
                     loc1.assertNotNull(arg1.selectedButton, arg2 + ".group.selectedButton" + net.wg.data.constants.Errors.CANT_NULL);
+                }
             }
             return;
         }
@@ -65,12 +67,16 @@ package net.wg.gui.lobby.store.views.base
             for each (loc2 in loc4) 
             {
                 if (!(loc2.instance.selected || arg3 && arg3.selected)) 
+                {
                     continue;
+                }
                 App.utils.asserter.assertNotNull(loc2.instance.data, loc2.instance.name + ".data" + net.wg.data.constants.Errors.CANT_NULL);
                 loc1.push(loc2.instance.data);
             }
             if (arg2) 
+            {
                 loc1.unshift(loc1.length);
+            }
             return loc1;
         }
 
@@ -84,7 +90,9 @@ package net.wg.gui.lobby.store.views.base
                 for each (loc1 in loc3) 
                 {
                     if (!loc1.instance.visible) 
+                    {
                         continue;
+                    }
                     loc1.instance.data = loc1.name;
                     loc1.instance.label = arg5(arg1 + "/" + arg4 + "/" + loc1.name + "/name");
                 }
@@ -102,7 +110,9 @@ package net.wg.gui.lobby.store.views.base
                 var loc3:*=0;
                 var loc4:*=this._tagsArr;
                 for each (loc1 in loc4) 
+                {
                     loc1.dispose();
+                }
                 this._tagsArr.splice(0);
                 this._tagsArr = null;
             }
@@ -111,7 +121,9 @@ package net.wg.gui.lobby.store.views.base
                 loc3 = 0;
                 loc4 = this._fitsArr;
                 for each (loc2 in loc4) 
+                {
                     loc2.dispose();
+                }
                 this._fitsArr.splice(0);
                 this._fitsArr = null;
             }
@@ -184,7 +196,9 @@ package net.wg.gui.lobby.store.views.base
         public function get fittingType():String
         {
             if (this._fittingType == null) 
+            {
                 DebugUtils.LOG_WARNING("fitting type accessor invoked before field has been initialized.");
+            }
             return this._fittingType;
         }
 
@@ -204,18 +218,26 @@ package net.wg.gui.lobby.store.views.base
                 for each (loc3 in loc7) 
                 {
                     if (loc3 != loc2.data) 
+                    {
                         continue;
+                    }
                     loc2.selected = true;
                     break;
                 }
                 if (!arg3) 
+                {
                     continue;
+                }
                 if (loc2.hasEventListener(flash.events.Event.SELECT)) 
+                {
                     continue;
+                }
                 loc2.addEventListener(flash.events.Event.SELECT, this.onFilterChangeHandler);
             }
             if (arg4) 
+            {
                 this.addHandlerToGroup(loc2);
+            }
             return;
         }
 
@@ -223,7 +245,9 @@ package net.wg.gui.lobby.store.views.base
         {
             var loc1:*=arg1.group;
             if (App.instance) 
+            {
                 App.utils.asserter.assertNotNull(arg1, "instance" + net.wg.data.constants.Errors.CANT_NULL, net.wg.infrastructure.exceptions.NullPointerException);
+            }
             assertGroupSelection(loc1, arg1.name);
             loc1.addEventListener(flash.events.Event.CHANGE, this.onFilterChangeHandler);
             return;
@@ -240,7 +264,9 @@ package net.wg.gui.lobby.store.views.base
             {
                 loc2 = loc1.instance;
                 if (arg2 != loc2.data) 
+                {
                     continue;
+                }
                 loc2.selected = true;
                 break;
             }
@@ -259,9 +285,13 @@ package net.wg.gui.lobby.store.views.base
             var loc2:*=0;
             var loc3:*=arg1;
             for each (loc1 in loc3) 
+            {
                 loc1.instance.removeEventListener(flash.events.Event.SELECT, this.onFilterChangeHandler);
+            }
             if (arg2) 
+            {
                 arg2.group.removeEventListener(flash.events.Event.CHANGE, this.onFilterChangeHandler);
+            }
             return;
         }
 
@@ -307,7 +337,9 @@ package net.wg.gui.lobby.store.views.base
         protected final function getTagsArray():Array
         {
             if (this._tagsArr == null) 
+            {
                 this._tagsArr = this.onTagsArrayRequest();
+            }
             return this._tagsArr;
         }
 
@@ -319,7 +351,9 @@ package net.wg.gui.lobby.store.views.base
         protected final function getFitsArray():Array
         {
             if (this._fitsArr == null) 
+            {
                 this._fitsArr = this.onFitsArrayRequest();
+            }
             return this._fitsArr;
         }
 

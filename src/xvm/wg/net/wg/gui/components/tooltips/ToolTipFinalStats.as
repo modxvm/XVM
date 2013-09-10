@@ -61,10 +61,14 @@ package net.wg.gui.components.tooltips
             {
                 case net.wg.gui.components.tooltips.VO.ToolTipFinalStatsVO.TYPE_KILL:
                 case net.wg.gui.components.tooltips.VO.ToolTipFinalStatsVO.TYPE_TEAM_KILL:
+                {
                     loc5 = loc6.makeString(BATTLE_RESULTS.common_tooltip(loc1.type + loc1.value + "/description"));
                     break;
+                }
                 default:
+                {
                     loc5 = loc6.makeString(BATTLE_RESULTS.common_tooltip(loc1.type + "/description"));
+                }
             }
             loc5 = loc4 + net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(loc5, net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NORMAL, 12, "$FieldFont");
             var loc7:*=net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(loc6.makeString(BATTLE_RESULTS.common_tooltip(loc1.type + "/header")), net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_HEADER, loc3, "$TitleFont") + loc5;
@@ -100,29 +104,47 @@ package net.wg.gui.components.tooltips
             switch (loc12) 
             {
                 case net.wg.gui.components.tooltips.VO.ToolTipFinalStatsVO.TYPE_STOTTED:
+                {
                     break;
+                }
                 case net.wg.gui.components.tooltips.VO.ToolTipFinalStatsVO.TYPE_ASSIST:
+                {
                     loc9 = loc1.value;
                     loc10 = loc1.values;
                     loc11 = loc1.discript;
                     break;
+                }
                 case net.wg.gui.components.tooltips.VO.ToolTipFinalStatsVO.TYPE_CRITS:
+                {
                     loc9 = loc1.value;
                     if (loc1.critDamage) 
+                    {
                         topPosition = this.createCritPart(net.wg.gui.components.tooltips.VO.ToolTipFinalStatsVO.CRIT_TYPE_DAMAGE, loc1.critDamage, topPosition);
+                    }
                     if (loc1.critDestruction) 
+                    {
                         topPosition = this.createCritPart(net.wg.gui.components.tooltips.VO.ToolTipFinalStatsVO.CRIT_TYPE_DISTRUCTION, loc1.critDestruction, topPosition);
+                    }
                     if (loc1.critWound) 
+                    {
                         topPosition = this.createCritPart(net.wg.gui.components.tooltips.VO.ToolTipFinalStatsVO.CRIT_TYPE_WOUND, loc1.critWound, topPosition);
+                    }
                     break;
+                }
                 case net.wg.gui.components.tooltips.VO.ToolTipFinalStatsVO.TYPE_DAMAGE:
+                {
                     loc10 = loc1.values;
                     loc11 = loc1.discript;
                     break;
+                }
                 case net.wg.gui.components.tooltips.VO.ToolTipFinalStatsVO.TYPE_KILL:
+                {
                     break;
+                }
                 case net.wg.gui.components.tooltips.VO.ToolTipFinalStatsVO.TYPE_TEAM_KILL:
+                {
                     break;
+                }
             }
             if (!(loc10 == "") && !(loc11 == "")) 
             {
@@ -204,12 +226,14 @@ package net.wg.gui.components.tooltips
                 this.efficiencyBlock = null;
             }
             if (this.critBlocks) 
+            {
                 while (this.critBlocks.length > 0) 
                 {
                     loc1 = this.critBlocks.pop();
                     content.removeChild(loc1);
                     loc1 = null;
                 }
+            }
             super.dispose();
             return;
         }

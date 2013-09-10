@@ -28,7 +28,9 @@ package net.wg.gui.components.controls
             super.configUI();
             buttonMode = true;
             if (App.soundMgr) 
+            {
                 App.soundMgr.addSoundsHdlrs(this);
+            }
             return;
         }
 
@@ -60,7 +62,9 @@ package net.wg.gui.components.controls
         public function set useRightButton(arg1:Boolean):void
         {
             if (this._useRightButton == arg1) 
+            {
                 return;
+            }
             this._useRightButton = arg1;
             return;
         }
@@ -73,27 +77,39 @@ package net.wg.gui.components.controls
         protected override function handleMousePress(arg1:flash.events.MouseEvent):void
         {
             if (this._useRightButton) 
+            {
                 this.handleMousePressEx(arg1);
+            }
             else 
+            {
                 super.handleMousePress(arg1);
+            }
             return;
         }
 
         protected override function handleMouseRelease(arg1:flash.events.MouseEvent):void
         {
             if (this._useRightButton) 
+            {
                 this.handleMouseReleaseEx(arg1);
+            }
             else 
+            {
                 super.handleMouseRelease(arg1);
+            }
             return;
         }
 
         protected override function handleReleaseOutside(arg1:flash.events.MouseEvent):void
         {
             if (this._useRightButton) 
+            {
                 this.handleReleaseOutsideEx(arg1);
+            }
             else 
+            {
                 super.handleReleaseOutside(arg1);
+            }
             return;
         }
 
@@ -107,7 +123,9 @@ package net.wg.gui.components.controls
             if (enabled) 
             {
                 if (loc3 == 0) 
+                {
                     setState("down");
+                }
                 if (autoRepeat && _repeatTimer == null) 
                 {
                     _autoRepeatEvent = new scaleform.clik.events.ButtonEvent(scaleform.clik.events.ButtonEvent.CLICK, true, false, loc2, loc3, false, true);
@@ -127,7 +145,9 @@ package net.wg.gui.components.controls
             var loc4:*=null;
             _autoRepeatEvent = null;
             if (!enabled) 
+            {
                 return;
+            }
             var loc1:*=arg1 as scaleform.gfx.MouseEventEx;
             var loc2:*=loc1 != null ? loc1.mouseIdx : 0;
             loc3 = loc1 != null ? loc1.buttonIdx : 0;
@@ -159,7 +179,9 @@ package net.wg.gui.components.controls
             var loc3:*=0;
             _autoRepeatEvent = null;
             if (contains(arg1.target as flash.display.DisplayObject)) 
+            {
                 return;
+            }
             var loc1:*=arg1 as scaleform.gfx.MouseEventEx;
             var loc2:*=loc1 != null ? loc1.mouseIdx : 0;
             loc3 = loc1 != null ? loc1.buttonIdx : 0;
@@ -167,12 +189,20 @@ package net.wg.gui.components.controls
             _mouseDown = _mouseDown ^ 1 << loc2;
             dispatchEvent(new scaleform.clik.events.ButtonEvent(scaleform.clik.events.ButtonEvent.RELEASE_OUTSIDE));
             if (!enabled) 
+            {
                 return;
+            }
             if (lockDragStateChange && loc3 == 0) 
+            {
                 if (_focused || _displayFocus) 
+                {
                     setState(focusIndicator != null ? "kb_release" : "release");
+                }
                 else 
+                {
                     setState("kb_release");
+                }
+            }
             return;
         }
 

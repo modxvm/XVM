@@ -26,7 +26,9 @@ package scaleform.clik.utils
         public function addElement(arg1:String, arg2:flash.display.DisplayObject, arg3:uint):void
         {
             if (arg2 == null) 
+            {
                 return;
+            }
             var loc1:*=this.scope.width;
             var loc2:*=this.scope.height;
             if (!(this.scope.parent == null) && this.scope.parent is flash.display.Stage) 
@@ -65,7 +67,9 @@ package scaleform.clik.utils
             for (loc1 in loc3) 
             {
                 if (!(this.elements[loc1] is scaleform.clik.utils.ConstrainedElement)) 
+                {
                     continue;
+                }
                 var loc4:*;
                 var loc5:*=((loc4 = this).elementCount - 1);
                 loc4.elementCount = loc5;
@@ -82,10 +86,14 @@ package scaleform.clik.utils
         public function updateElement(arg1:String, arg2:flash.display.DisplayObject):void
         {
             if (arg2 == null) 
+            {
                 return;
+            }
             var loc1:*=this.elements[arg1] as scaleform.clik.utils.ConstrainedElement;
             if (loc1 == null) 
+            {
                 return;
+            }
             loc1.clip = arg2;
             return;
         }
@@ -93,14 +101,18 @@ package scaleform.clik.utils
         public function getXAdjust():Number
         {
             if (this.scaleMode == scaleform.clik.constants.ConstrainMode.REFLOW) 
+            {
                 return this.parentXAdjust;
+            }
             return this.parentXAdjust / this.scope.scaleX;
         }
 
         public function getYAdjust():Number
         {
             if (this.scaleMode == scaleform.clik.constants.ConstrainMode.REFLOW) 
+            {
                 return this.parentYAdjust;
+            }
             return this.parentYAdjust / this.scope.scaleY;
         }
 
@@ -115,7 +127,9 @@ package scaleform.clik.utils
             this.lastWidth = arg1;
             this.lastHeight = arg2;
             if (this.elementCount == 0) 
+            {
                 return;
+            }
             var loc1:*=this.getXAdjust();
             var loc2:*=this.getYAdjust();
             var loc3:*=this.scaleMode == scaleform.clik.constants.ConstrainMode.COUNTER_SCALE;
@@ -130,6 +144,7 @@ package scaleform.clik.utils
                     loc7.scaleX = loc5.scaleX * loc1;
                     loc7.scaleY = loc5.scaleY * loc2;
                     if ((loc6 & scaleform.clik.utils.Constraints.CENTER_H) == 0) 
+                    {
                         if ((loc6 & scaleform.clik.utils.Constraints.LEFT) > 0) 
                         {
                             loc7.x = loc5.left * loc1;
@@ -137,13 +152,19 @@ package scaleform.clik.utils
                             {
                                 loc8 = arg1 - loc5.left - loc5.right;
                                 if (!(loc7 is flash.text.TextField)) 
+                                {
                                     loc8 = loc8 * loc1;
+                                }
                                 loc7.width = loc8;
                             }
                         }
                         else if ((loc6 & scaleform.clik.utils.Constraints.RIGHT) > 0) 
+                        {
                             loc7.x = (arg1 - loc5.right) * loc1 - loc7.width;
+                        }
+                    }
                     if ((loc6 & scaleform.clik.utils.Constraints.CENTER_V) == 0) 
+                    {
                         if ((loc6 & scaleform.clik.utils.Constraints.TOP) > 0) 
                         {
                             loc7.y = loc5.top * loc2;
@@ -151,32 +172,55 @@ package scaleform.clik.utils
                             {
                                 loc9 = arg2 - loc5.top - loc5.bottom;
                                 if (!(loc7 is flash.text.TextField)) 
+                                {
                                     loc9 = loc9 * loc2;
+                                }
                                 loc7.height = loc9;
                             }
                         }
                         else if ((loc6 & scaleform.clik.utils.Constraints.BOTTOM) > 0) 
+                        {
                             loc7.y = (arg2 - loc5.bottom) * loc2 - loc7.height;
+                        }
+                    }
                 }
                 else 
                 {
                     if ((loc6 & scaleform.clik.utils.Constraints.CENTER_H) == 0 && (loc6 & scaleform.clik.utils.Constraints.RIGHT) > 0) 
+                    {
                         if ((loc6 & scaleform.clik.utils.Constraints.LEFT) > 0) 
+                        {
                             loc7.width = arg1 - loc5.left - loc5.right;
+                        }
                         else 
+                        {
                             loc7.x = arg1 - loc7.width - loc5.right;
+                        }
+                    }
                     if ((loc6 & scaleform.clik.utils.Constraints.CENTER_V) == 0 && (loc6 & scaleform.clik.utils.Constraints.BOTTOM) > 0) 
+                    {
                         if ((loc6 & scaleform.clik.utils.Constraints.TOP) > 0) 
+                        {
                             loc7.height = arg2 - loc5.top - loc5.bottom;
+                        }
                         else 
+                        {
                             loc7.y = arg2 - loc7.height - loc5.bottom;
+                        }
+                    }
                     if (loc7 is scaleform.clik.core.UIComponent) 
+                    {
                         (loc7 as scaleform.clik.core.UIComponent).validateNow();
+                    }
                 }
                 if ((loc6 & scaleform.clik.utils.Constraints.CENTER_H) > 0) 
+                {
                     loc7.x = arg1 * 0.5 * loc1 - loc7.width * 0.5;
+                }
                 if (!((loc6 & scaleform.clik.utils.Constraints.CENTER_V) > 0)) 
+                {
                     continue;
+                }
                 loc7.y = arg2 * 0.5 * loc2 - loc7.height * 0.5;
             }
             if (!loc3) 
@@ -185,7 +229,9 @@ package scaleform.clik.utils
                 this.scope.scaleY = this.parentYAdjust;
             }
             if (hasEventListener(scaleform.clik.events.ResizeEvent.RESIZE)) 
+            {
                 dispatchEvent(new scaleform.clik.events.ResizeEvent(scaleform.clik.events.ResizeEvent.RESIZE, loc1, loc2));
+            }
             return;
         }
 
@@ -197,7 +243,9 @@ package scaleform.clik.utils
             var loc4:*=0;
             var loc5:*=this.elements;
             for (loc3 in loc5) 
+            {
                 loc2 = loc2 + ("\n\t" + loc3 + ": " + this.elements[loc3].toString());
+            }
             return loc2;
         }
 
@@ -210,20 +258,28 @@ package scaleform.clik.utils
         protected function addToParentConstraints():void
         {
             if (this.parentConstraints != null) 
+            {
                 this.parentConstraints.removeEventListener(scaleform.clik.events.ResizeEvent.RESIZE, this.handleParentConstraintsResize);
+            }
             this.parentConstraints = null;
             var loc1:*=this.scope.parent;
             if (loc1 == null) 
+            {
                 return;
+            }
             while (loc1 != null) 
             {
                 if (loc1.hasOwnProperty("constraints")) 
                 {
                     this.parentConstraints = loc1["constraints"] as scaleform.clik.utils.Constraints;
                     if (!(this.parentConstraints == null) && this.parentConstraints.scaleMode == scaleform.clik.constants.ConstrainMode.REFLOW) 
+                    {
                         return;
+                    }
                     if (!(this.parentConstraints == null) && this.scaleMode == scaleform.clik.constants.ConstrainMode.REFLOW) 
+                    {
                         return;
+                    }
                     if (this.parentConstraints != null) 
                     {
                         this.parentConstraints.addEventListener(scaleform.clik.events.ResizeEvent.RESIZE, this.handleParentConstraintsResize, false, 0, true);

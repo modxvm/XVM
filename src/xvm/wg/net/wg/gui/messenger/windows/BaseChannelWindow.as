@@ -46,7 +46,9 @@ package net.wg.gui.messenger.windows
         {
             super.setFocus();
             if (this.channelComponent) 
+            {
                 this.channelComponent.setFocusToInput();
+            }
             return;
         }
 

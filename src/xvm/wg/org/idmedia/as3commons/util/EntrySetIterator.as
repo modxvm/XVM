@@ -24,14 +24,18 @@ package org.idmedia.as3commons.util
             loc2.cursor = loc3;
             this.current = this.s.get((loc2 = this).cursor) as org.idmedia.as3commons.util.Entry;
             if (this.current == null) 
+            {
                 throw new org.idmedia.as3commons.lang.NoSuchElementException();
+            }
             return this.current;
         }
 
         public function remove():void
         {
             if (this.current == null) 
+            {
                 throw new org.idmedia.as3commons.lang.IllegalStateException();
+            }
             var loc1:*=this.current.getKey();
             this.current = null;
             this.s.removeEntryForKey(loc1);

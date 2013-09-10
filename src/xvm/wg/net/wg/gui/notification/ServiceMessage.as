@@ -113,7 +113,9 @@ package net.wg.gui.notification
         internal function onMessageLinkClick(arg1:flash.events.TextEvent):void
         {
             if (!this._isTFClickedByMBR) 
+            {
                 dispatchEvent(new net.wg.gui.notification.ServiceMessageEvent(net.wg.gui.notification.ServiceMessageEvent.MESSAGE_LINK_CLICKED, true, false, arg1.text));
+            }
             return;
         }
 
@@ -164,11 +166,17 @@ package net.wg.gui.notification
                     this.textField.htmlText = loc1.message;
                     loc2 = loc1.type;
                     if (loc2) 
+                    {
                         this.markerMc.gotoAndStop(loc2);
+                    }
                     if (loc1.icon) 
+                    {
                         this.icon.source = loc1.icon;
+                    }
                     if (loc1.defaultIcon) 
+                    {
                         this.icon.sourceAlt = loc1.defaultIcon;
+                    }
                     if (!(loc2 == null) && allowBgFill.join().indexOf(loc2, 0) > -1) 
                     {
                         this.bmpFill.visible = true;
@@ -178,7 +186,9 @@ package net.wg.gui.notification
                         this.bmpFill.setSize(100, 50);
                     }
                     else 
+                    {
                         this.bmpFill.visible = false;
+                    }
                     this.btnMoreInfo.visible = loc1.showMoreVO.enabled;
                 }
                 invalidate(LAYOUT_INVALID);
@@ -188,19 +198,27 @@ package net.wg.gui.notification
                 this.textField.y = this._messageTopOffset;
                 loc3 = 0;
                 if (this.btnMoreInfo.visible) 
+                {
                     loc3 = this.btnMoreInfo.height + this._buttonPadding + 8;
+                }
                 loc4 = this.textField.height;
                 loc5 = Math.round(loc4 + this._messageTopOffset + this._messageBottomOffset + loc3);
                 loc6 = 3;
                 this.icon.x = loc6 + Math.round((this.textField.x - loc6 - this.icon.width) / 2);
                 if (this.textField.textHeight < this.icon.height) 
+                {
                     this.icon.y = Math.round(this.textField.y + (-this.icon.height + this.textField.textHeight) / 2 + 2);
+                }
                 this.markerMc.height = loc5 - 2 * this.markerMc.y;
                 this.background.height = loc5;
                 if (this.btnMoreInfo.visible) 
+                {
                     this.btnMoreInfo.y = loc4 + this.textField.y + this._buttonPadding;
+                }
                 if (this.bmpFill.visible) 
+                {
                     this.bmpFill.setSize(this.markerMc.width, loc5 - 2 * this.bmpFill.y);
+                }
                 dispatchEvent(new flash.events.Event(RESIZED));
             }
             return;

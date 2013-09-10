@@ -17,14 +17,22 @@ package net.wg.gui.lobby.profile.components
         public function setSource(arg1:String):void
         {
             if (this.currentSourcePath == arg1) 
+            {
                 return;
+            }
             if (this.loader) 
+            {
                 this.loader.unloadAndStop(true);
+            }
             this.currentSourcePath = arg1;
             if (arg1 && !(arg1 == "")) 
+            {
                 this.startLoading(arg1);
+            }
             else 
+            {
                 this.clear();
+            }
             return;
         }
 

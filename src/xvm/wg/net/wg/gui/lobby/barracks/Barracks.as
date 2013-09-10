@@ -64,9 +64,13 @@ package net.wg.gui.lobby.barracks
             this.tank.dataProvider = new scaleform.clik.data.DataProvider(arg1);
             this.tank.selectedIndex = 0;
             if (arg1.length > 0) 
+            {
                 this.locationButtonBar.dataProvider[0].data = this.tank.dataProvider[this.tank.selectedIndex].data;
+            }
             else 
+            {
                 this.locationButtonBar.dataProvider[0].data = "";
+            }
             this.tank.validateNow();
             this.tank.enabled = arg1.length > 0;
             return;
@@ -218,15 +222,25 @@ package net.wg.gui.lobby.barracks
                     this.locationButtonBar.selectedIndex = loc1;
                 }
                 if (!this.roleButtonBar.hasEventListener(scaleform.clik.events.IndexEvent.INDEX_CHANGE)) 
+                {
                     this.roleButtonBar.addEventListener(scaleform.clik.events.IndexEvent.INDEX_CHANGE, this.onFilterChange);
+                }
                 if (!this.tankTypeButtonBar.hasEventListener(scaleform.clik.events.IndexEvent.INDEX_CHANGE)) 
+                {
                     this.tankTypeButtonBar.addEventListener(scaleform.clik.events.IndexEvent.INDEX_CHANGE, this.tankListInvalidate);
+                }
                 if (!this.tank.hasEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE)) 
+                {
                     this.tank.addEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onFilterTankChange);
+                }
                 if (!this.tank.hasEventListener(scaleform.clik.events.IndexEvent.INDEX_CHANGE)) 
+                {
                     this.locationButtonBar.addEventListener(scaleform.clik.events.IndexEvent.INDEX_CHANGE, this.onFilterChange);
+                }
                 if (!this.nationDDM.hasEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE)) 
+                {
                     this.nationDDM.addEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.tankListInvalidate);
+                }
                 this.checkFilters();
             }
             return;
@@ -300,9 +314,13 @@ package net.wg.gui.lobby.barracks
             var loc3:*=this.tankTypeButtonBar.dataProvider[this.tankTypeButtonBar.selectedIndex].data;
             var loc4:*;
             if ((loc4 = this.locationButtonBar.dataProvider[this.locationButtonBar.selectedIndex].data) is String || loc4 == null) 
+            {
                 setFilterS(loc1, loc2, loc3, loc4.toString(), null);
+            }
             else 
+            {
                 setFilterS(loc1, loc2, loc3, loc4.typeID, loc4.nationID);
+            }
             return;
         }
 
@@ -332,11 +350,17 @@ package net.wg.gui.lobby.barracks
         {
             App.toolTipMgr.hide();
             if (arg1.itemData.empty) 
+            {
                 App.toolTipMgr.showComplex(TOOLTIPS.BARRACKS_ITEM_EMPTY);
+            }
             else if (arg1.itemData.buy) 
+            {
                 App.toolTipMgr.showComplex(TOOLTIPS.BARRACKS_ITEM_BUY);
+            }
             else 
+            {
                 App.toolTipMgr.showSpecial(net.wg.data.constants.Tooltips.TANKMAN, null, arg1.itemData.tankmanID, false);
+            }
             return;
         }
 

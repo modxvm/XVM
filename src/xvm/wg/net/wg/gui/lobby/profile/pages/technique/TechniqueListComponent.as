@@ -32,7 +32,9 @@ package net.wg.gui.lobby.profile.pages.technique
         {
             super.draw();
             if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+            {
                 this.techniqueList.dataProvider = new scaleform.clik.data.DataProvider(this._pendingDataProvider);
+            }
             return;
         }
 

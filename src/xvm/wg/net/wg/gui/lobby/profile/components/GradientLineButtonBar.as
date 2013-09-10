@@ -28,7 +28,9 @@ package net.wg.gui.lobby.profile.components
             line.y = this.actualHeight - line.height;
             var loc5:*;
             if (loc5 = line.parent) 
+            {
                 loc5.setChildIndex(line, (loc5.numChildren - 1));
+            }
             return;
         }
 

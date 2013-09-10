@@ -16,14 +16,18 @@ package net.wg.gui.components.common.markers
         {
             var loc1:*=this._actionRendererMap[arg1];
             if (loc1) 
+            {
                 this.currentRenderer = this.createActionRenderer(loc1);
+            }
             return;
         }
 
         public function stopAction():void
         {
             if (this.currentRenderer) 
+            {
                 this.hideTween = new scaleform.clik.motion.Tween(HIDE_DURATION, this.currentRenderer, {"alpha":0});
+            }
             return;
         }
 
@@ -36,7 +40,9 @@ package net.wg.gui.components.common.markers
         internal function removeActionRenderer():void
         {
             if (!this.currentRenderer) 
+            {
                 return;
+            }
             removeChild(this.currentRenderer);
             this.currentRenderer = null;
             return;
@@ -48,7 +54,9 @@ package net.wg.gui.components.common.markers
             this.removeActionRenderer();
             loc1 = App.utils.classFactory.getObject(arg1) as flash.display.MovieClip;
             if (loc1) 
+            {
                 addChild(loc1);
+            }
             return loc1;
         }
 

@@ -14,7 +14,9 @@ package net.wg.gui.lobby.profile.pages.statistics
         {
             var loc1:*={};
             if (arg1 && arg1.hasOwnProperty("xField")) 
+            {
                 loc1.value = App.utils.locale.makeString(DIALOGS.vehicleselldialog_vehicletype(arg1["xField"]));
+            }
             App.toolTipMgr.showComplexWithParams(arg2, new net.wg.data.managers.impl.ToolTipParams(loc1, {}));
             return;
         }
@@ -34,7 +36,9 @@ package net.wg.gui.lobby.profile.pages.statistics
                 for each (loc4 in loc6) 
                 {
                     if (loc4.data != loc3) 
+                    {
                         continue;
+                    }
                     loc1.value = App.utils.locale.makeString(loc4.label);
                     break;
                 }
@@ -50,7 +54,9 @@ package net.wg.gui.lobby.profile.pages.statistics
             {
                 loc1 = {};
                 if (arg1 && arg1.hasOwnProperty("xField")) 
+                {
                     loc1.value = arg1["xField"].toString();
+                }
                 App.toolTipMgr.showComplexWithParams(arg2, new net.wg.data.managers.impl.ToolTipParams(loc1, {}));
             }
             return;

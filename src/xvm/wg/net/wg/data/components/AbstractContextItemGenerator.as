@@ -40,7 +40,9 @@ package net.wg.data.components
             for each (loc3 in loc5) 
             {
                 if (loc3 == net.wg.data.constants.Values.EMPTY_STR) 
+                {
                     continue;
+                }
                 loc1.push(new net.wg.data.components.UserContextItem(loc3, loc2.get(loc3)));
             }
             return loc1;
@@ -58,7 +60,9 @@ package net.wg.data.components
             var loc3:*=arg1.isFriend ? "createPrivateChannel" : net.wg.data.constants.Values.EMPTY_STR;
             var loc4:*=net.wg.data.constants.Values.EMPTY_STR;
             if (App.voiceChatMgr.isVOIPEnabledS()) 
+            {
                 loc4 = arg1.isMuted ? "unsetMuted" : "setMuted";
+            }
             return this.createSimpleDataIDs(loc3, loc1, loc2, loc4);
         }
 

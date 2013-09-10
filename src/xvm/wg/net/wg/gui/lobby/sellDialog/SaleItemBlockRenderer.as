@@ -42,7 +42,9 @@ package net.wg.gui.lobby.sellDialog
             this.money.dispose();
             this.clickArea.dispose();
             if (this._dataInfo) 
+            {
                 this._dataInfo = null;
+            }
             return;
         }
 
@@ -65,7 +67,9 @@ package net.wg.gui.lobby.sellDialog
                 this.clickArea.buttonMode = false;
             }
             if (!(_focusIndicator == null) && !_focused && _focusIndicator.totalFrames == 1) 
+            {
                 focusIndicator.visible = false;
+            }
             return;
         }
 
@@ -136,9 +140,13 @@ package net.wg.gui.lobby.sellDialog
             {
                 this.ddm.addEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onChangeHandler);
                 if (this.inInventory) 
+                {
                     this.ddm.selectedIndex = 1;
+                }
                 else 
+                {
                     this.ddm.selectedIndex = 0;
+                }
                 if (this.ddm.selectedIndex != 1) 
                 {
                     this.money.text = this.getCreditsString(this._moneyValue);
@@ -162,14 +170,18 @@ package net.wg.gui.lobby.sellDialog
                 }
             }
             if (this._type == "shells" || this._type == "invShells") 
+            {
                 if (this._dataInfo.hasOwnProperty("kind")) 
                 {
                     loc1 = App.utils.locale.makeString(ITEM_TYPES.shell_kindsabbreviation(this._dataInfo.kind));
                     this.tfShort.label = loc1 + " " + this._id;
                     this.tfShort.altToolTip = App.utils.locale.makeString(ITEM_TYPES.shell_kinds(this._dataInfo.kind)) + " " + data.id;
                 }
+            }
             else 
+            {
                 this.tfShort.label = this._id;
+            }
             constraints.update(this._width, this._height);
             return;
         }

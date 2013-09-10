@@ -30,7 +30,9 @@ package net.wg.gui.lobby.customization.renderers
         public function set lock(arg1:Boolean):void
         {
             if (this._lock == arg1) 
+            {
                 return;
+            }
             this._lock = arg1;
             this.enabled = !arg1;
             return;
@@ -39,7 +41,9 @@ package net.wg.gui.lobby.customization.renderers
         public override function set enabled(arg1:Boolean):void
         {
             if (this.lock) 
+            {
                 return;
+            }
             super.enabled = arg1;
             invalidateData();
             return;
@@ -55,20 +59,26 @@ package net.wg.gui.lobby.customization.renderers
         {
             super.draw();
             if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+            {
                 if (data) 
                 {
                     visible = true;
                     this.populateData();
                 }
                 else 
+                {
                     visible = false;
+                }
+            }
             return;
         }
 
         protected override function handleClick(arg1:uint=0):void
         {
             if (toggle) 
+            {
                 selected = !_selected;
+            }
             this.checkBox.selected = !this.checkBox.selected;
             data.selected = this.checkBox.selected;
             dispatchEvent(new net.wg.gui.lobby.customization.CustomizationEvent(net.wg.gui.lobby.customization.CustomizationEvent.PRICE_ITEM_CLICK));
@@ -81,9 +91,13 @@ package net.wg.gui.lobby.customization.renderers
             this.checkBox.enabled = enabled;
             this.checkBox.mouseEnabled = enabled;
             if (data.label != null) 
+            {
                 this.checkBox.label = data.label;
+            }
             if (data.selected != null) 
+            {
                 this.checkBox.selected = data.selected;
+            }
             this.checkBox.validateNow();
             if (!(this.costField == null) && !(data.price == null)) 
             {

@@ -29,48 +29,80 @@ package scaleform.clik.managers
         {
             var loc1:*=arg3 * MAX_KEY_CODES + arg1;
             if (arg2) 
+            {
                 this.keyHash[loc1] = this.keyHash[loc1] & ~KEY_SUPRESSED;
+            }
             else 
+            {
                 this.keyHash[loc1] = this.keyHash[loc1] | KEY_SUPRESSED;
+            }
             return;
         }
 
         public function inputToNav(arg1:String, arg2:Number, arg3:Boolean=false, arg4:*=null):String
         {
             if (this.externalInputHandler != null) 
+            {
                 return this.externalInputHandler(arg1, arg2, arg4);
+            }
             if (arg1 == "key") 
             {
                 var loc1:*=arg2;
                 switch (loc1) 
                 {
                     case flash.ui.Keyboard.UP:
+                    {
                         return scaleform.clik.constants.NavigationCode.UP;
+                    }
                     case flash.ui.Keyboard.DOWN:
+                    {
                         return scaleform.clik.constants.NavigationCode.DOWN;
+                    }
                     case flash.ui.Keyboard.LEFT:
+                    {
                         return scaleform.clik.constants.NavigationCode.LEFT;
+                    }
                     case flash.ui.Keyboard.RIGHT:
+                    {
                         return scaleform.clik.constants.NavigationCode.RIGHT;
+                    }
                     case flash.ui.Keyboard.ENTER:
                     case flash.ui.Keyboard.SPACE:
+                    {
                         return scaleform.clik.constants.NavigationCode.ENTER;
+                    }
                     case flash.ui.Keyboard.BACKSPACE:
+                    {
                         return scaleform.clik.constants.NavigationCode.BACK;
+                    }
                     case flash.ui.Keyboard.TAB:
+                    {
                         if (arg3) 
+                        {
                             return scaleform.clik.constants.NavigationCode.SHIFT_TAB;
+                        }
                         return scaleform.clik.constants.NavigationCode.TAB;
+                    }
                     case flash.ui.Keyboard.HOME:
+                    {
                         return scaleform.clik.constants.NavigationCode.HOME;
+                    }
                     case flash.ui.Keyboard.END:
+                    {
                         return scaleform.clik.constants.NavigationCode.END;
+                    }
                     case flash.ui.Keyboard.PAGE_DOWN:
+                    {
                         return scaleform.clik.constants.NavigationCode.PAGE_DOWN;
+                    }
                     case flash.ui.Keyboard.PAGE_UP:
+                    {
                         return scaleform.clik.constants.NavigationCode.PAGE_UP;
+                    }
                     case flash.ui.Keyboard.ESCAPE:
+                    {
                         return scaleform.clik.constants.NavigationCode.ESCAPE;
+                    }
                 }
             }
             return null;
@@ -89,8 +121,12 @@ package scaleform.clik.managers
             var loc4:*=loc2 * MAX_KEY_CODES + loc3;
             var loc5:*;
             if ((loc5 = this.keyHash[loc4]) & KEY_PRESSED) 
+            {
                 if ((loc5 & KEY_SUPRESSED) == 0) 
+                {
                     this.handleKeyPress(scaleform.clik.constants.InputValue.KEY_HOLD, loc3, loc2, arg1.ctrlKey, arg1.altKey, arg1.shiftKey);
+                }
+            }
             else 
             {
                 this.handleKeyPress(scaleform.clik.constants.InputValue.KEY_DOWN, loc3, loc2, arg1.ctrlKey, arg1.altKey, arg1.shiftKey);
@@ -120,7 +156,9 @@ package scaleform.clik.managers
         public static function getInstance():scaleform.clik.managers.InputDelegate
         {
             if (instance == null) 
+            {
                 instance = new InputDelegate();
+            }
             return instance;
         }
 

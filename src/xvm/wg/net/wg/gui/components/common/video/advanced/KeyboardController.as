@@ -22,28 +22,38 @@ package net.wg.gui.components.common.video.advanced
             switch (loc3) 
             {
                 case scaleform.clik.constants.NavigationCode.ENTER:
+                {
                     if (loc2.value == scaleform.clik.constants.InputValue.KEY_UP) 
+                    {
                         videoPlayer.togglePlayback();
+                    }
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.UP:
                 case scaleform.clik.constants.NavigationCode.RIGHT:
+                {
                     if (loc2.value == scaleform.clik.constants.InputValue.KEY_HOLD || loc2.value == scaleform.clik.constants.InputValue.KEY_DOWN) 
                     {
                         videoPlayer.volume = videoPlayer.volume + VOLUME_STEP;
                         loc1 = true;
                     }
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.DOWN:
                 case scaleform.clik.constants.NavigationCode.LEFT:
+                {
                     if (loc2.value == scaleform.clik.constants.InputValue.KEY_HOLD || loc2.value == scaleform.clik.constants.InputValue.KEY_DOWN) 
                     {
                         videoPlayer.volume = videoPlayer.volume - VOLUME_STEP;
                         loc1 = true;
                     }
                     break;
+                }
             }
             if (!loc1) 
+            {
                 arg1.handled = true;
+            }
             return;
         }
 

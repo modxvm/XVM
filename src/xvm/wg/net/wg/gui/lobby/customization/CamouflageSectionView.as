@@ -63,7 +63,9 @@ package net.wg.gui.lobby.customization
             {
                 loc2 = this.getDropButton(loc3);
                 if (loc2 != null) 
+                {
                     loc2.enabled = !arg1.locked;
+                }
                 ++loc3;
             }
             return;
@@ -74,7 +76,9 @@ package net.wg.gui.lobby.customization
             App.toolTipMgr.hide();
             this._droppingKind = arg1.kind;
             if (form) 
+            {
                 form.dropCurrentItemInSection(this.getSectionName(), this._droppingKind);
+            }
             return;
         }
 
@@ -109,7 +113,9 @@ package net.wg.gui.lobby.customization
                 ++loc2;
             }
             if (timeLeftField) 
+            {
                 timeLeftField.visible = loc1;
+            }
             return;
         }
 
@@ -119,7 +125,9 @@ package net.wg.gui.lobby.customization
             var loc6:*=null;
             var loc1:*=arg2.id;
             if (this.currentItemData.id != loc1) 
+            {
                 this.newItemData = arg2;
+            }
             else 
             {
                 this.newItemData = this.getEmptyDataItem();
@@ -129,9 +137,13 @@ package net.wg.gui.lobby.customization
             this.newItemData.priceIndex = view.selectedPriceIdx;
             var loc2:*;
             if ((loc2 = form.getSectionData(this.getSectionName())) != null) 
+            {
                 loc3 = loc2.selectedItems;
+            }
             else 
+            {
                 loc3 = [null, null, null];
+            }
             loc3[arg3] = this.newItemData;
             var loc4:*=false;
             var loc5:*=[];
@@ -144,9 +156,13 @@ package net.wg.gui.lobby.customization
                 if (loc8 = loc3[loc9]) 
                 {
                     if (!loc4) 
+                    {
                         loc4 = !(loc8.index == -1);
+                    }
                     if (loc8.id) 
+                    {
                         loc5.push(form.getItemCost(this.getSectionName(), loc8.id, loc8.priceIndex));
+                    }
                 }
                 ++loc9;
             }
@@ -218,7 +234,9 @@ package net.wg.gui.lobby.customization
         {
             this.newItemData = this.getEmptyDataItem();
             if (view != null) 
+            {
                 view.list.selectedIndex = -1;
+            }
             return;
         }
 
@@ -246,13 +264,17 @@ package net.wg.gui.lobby.customization
                 loc3 = this.getCurrRenderer(loc2);
                 loc3.setData(this.currentData[loc2]);
                 if ((loc4 = this.getDropButton(loc2)) != null) 
+                {
                     loc4.visible = true;
+                }
                 this.newData[loc2] = this.getEmptyDataItem();
                 ++loc2;
             }
             this.updateTimeLeftVisibility();
             if (view != null) 
+            {
                 view.invalidateListData(true);
+            }
             return;
         }
 
@@ -261,17 +283,23 @@ package net.wg.gui.lobby.customization
             var loc1:*=this.getEmptyDataItem();
             var loc2:*=net.wg.gui.lobby.customization.data.CamouflagesDataProvider(this.getItemsDP()).getDefaultDescription(this._droppingKind);
             if (loc2.length > 0) 
+            {
                 loc1.description = loc2;
+            }
             this.currentData[this._droppingKind] = loc1;
             var loc3:*=this.getCurrRenderer(this._droppingKind);
             loc3.setData(this.currentData[this._droppingKind]);
             var loc4:*;
             if ((loc4 = this.getDropButton(this._droppingKind)) != null) 
+            {
                 loc4.visible = false;
+            }
             this._droppingKind = -1;
             this.updateTimeLeftVisibility();
             if (view != null) 
+            {
                 view.invalidateListData(true);
+            }
             return;
         }
 
@@ -316,10 +344,14 @@ package net.wg.gui.lobby.customization
                     view.setListSelectedIndex(loc1.name, loc5);
                 }
                 else 
+                {
                     view.setListSelectedIndex(loc1.name, null);
+                }
                 view.invalidateListData(false);
                 if ((loc5 == null || loc5.id == null) && this.currentData[this._selectedKind].id) 
+                {
                     form.setNewItemId(this.getSectionName(), this.currentData[this._selectedKind].id, this._selectedKind, view.selectedPriceIdx);
+                }
                 loc6 = 0;
                 loc6 = 0;
                 while (loc6 < 3) 
@@ -341,7 +373,9 @@ package net.wg.gui.lobby.customization
                 form.removeEventListener(net.wg.gui.lobby.customization.CustomizationEvent.RESET_NEW_ITEM, this.handleResetNewItem);
             }
             if (view != null) 
+            {
                 view.removeEventListener(net.wg.gui.lobby.customization.CustomizationEvent.SELECT_NEW, this.handleSelectNewItem);
+            }
             if (list != null) 
             {
                 list.removeEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.handleChangeGroupSelectedIndex);
@@ -395,9 +429,13 @@ package net.wg.gui.lobby.customization
                 if ((loc6 = form.getSectionData(this.getSectionName())) != null) 
                 {
                     if (loc6._new.id != null) 
+                    {
                         this.newItemData = loc6._new;
+                    }
                     if (loc6.selectedGroupIdx != null) 
+                    {
                         loc1 = loc6.selectedGroupIdx;
+                    }
                 }
                 form.addEventListener(net.wg.gui.lobby.customization.CustomizationEvent.CHANGE_ACTIONS_LOCK, this.handleChangeActionLock);
                 form.addEventListener(net.wg.gui.lobby.customization.CustomizationEvent.RESET_NEW_ITEM, this.handleResetNewItem);
@@ -468,9 +506,13 @@ package net.wg.gui.lobby.customization
                     loc2 = this.getCurrRenderer(loc4);
                     loc5 = this.currentData[loc4];
                     if (loc7 == null) 
+                    {
                         loc6 = null;
+                    }
                     else 
+                    {
                         loc6 = loc7.selectedItems[loc4];
+                    }
                     this.newData[loc4] = loc6;
                     loc1 = !(loc2 == null);
                     if (loc1) 
@@ -491,13 +533,19 @@ package net.wg.gui.lobby.customization
                         loc8.enabled = !(form == null) && !form.isActionsLocked();
                     }
                     else 
+                    {
                         break;
+                    }
                     ++loc4;
                 }
                 if (loc1) 
+                {
                     this.currentDataDirty = false;
+                }
                 else 
+                {
                     invalidate();
+                }
                 this.updateTimeLeftVisibility();
             }
             return;

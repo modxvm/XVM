@@ -58,7 +58,9 @@ package net.wg.gui.notification
                 this.captuteIcon.source = "img://" + this._imageURL;
             }
             if (isInvalid(INVALID_MESSAGE)) 
+            {
                 this.errorField.text = this._errorMessage;
+            }
             return;
         }
 
@@ -85,7 +87,9 @@ package net.wg.gui.notification
             this.inputField.text = "";
             this.errorField.text = "";
             if (!this.inputField.focused) 
+            {
                 App.utils.focusHandler.setFocus(this.inputField);
+            }
             return;
         }
 
@@ -120,7 +124,9 @@ package net.wg.gui.notification
         {
             super.handleInput(arg1);
             if (arg1.handled) 
+            {
                 return;
+            }
             var loc1:*=arg1.details.code;
             if (arg1.details.value == scaleform.clik.constants.InputValue.KEY_UP) 
             {
@@ -128,9 +134,11 @@ package net.wg.gui.notification
                 switch (loc2) 
                 {
                     case flash.ui.Keyboard.ENTER:
+                    {
                         arg1.handled = true;
                         this.onSubmitClick();
                         break;
+                    }
                 }
             }
             return;

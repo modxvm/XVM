@@ -42,7 +42,9 @@ package net.wg.gui.components.common.crosshair
         internal function updateAmmoInfoPos():void
         {
             if (g_modeMC.ammoInfo.visible) 
+            {
                 g_modeMC.ammoInfo.y = Math.round(g_modeMC.playerInfo.y + g_modeMC.playerInfo.textHeight + AMMO_INFO_VERTICAL_OFFSET);
+            }
             return;
         }
 

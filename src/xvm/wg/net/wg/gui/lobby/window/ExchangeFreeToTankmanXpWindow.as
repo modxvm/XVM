@@ -66,7 +66,9 @@ package net.wg.gui.lobby.window
             this.cancelBtn.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onClickCancelButton, false, 0, true);
             this.nsLevel.addEventListener(scaleform.clik.events.IndexEvent.INDEX_CHANGE, this.nsFirstCurrencyChangeHandler, false, 0, true);
             try 
+            {
                 this.warningMc.textField.text = App.utils.locale.makeString(MENU.TEACHINGSKILL_FREEXPISTIGHT);
+            }
             catch (e:Error)
             {
             };
@@ -90,6 +92,7 @@ package net.wg.gui.lobby.window
             var loc1:*=false;
             super.draw();
             if (isInvalid(INIT_DATA_INVALID)) 
+            {
                 if (this.initData) 
                 {
                     this.nsLevel.minimum = this.initData.lastSkillLevel;
@@ -103,9 +106,14 @@ package net.wg.gui.lobby.window
                     invalidate(SELECTED_VALUE_INVALID);
                     invalidate(WARNING_INVALID);
                 }
+            }
             if (isInvalid(SELECTED_VALUE_INVALID)) 
+            {
                 if (this.initData) 
+                {
                     calcValueRequestS(this.selectedValue);
+                }
+            }
             if (isInvalid(WARNING_INVALID) && !isNaN(this.originalWindowHeight)) 
             {
                 loc1 = !this.nsLevel.enabled;
@@ -113,9 +121,13 @@ package net.wg.gui.lobby.window
                 {
                     this.warningMc.visible = loc1;
                     if (loc1) 
+                    {
                         window.height = this.expandedWindowHeight;
+                    }
                     else 
+                    {
                         window.height = this.originalWindowHeight;
+                    }
                 }
             }
             return;

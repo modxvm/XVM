@@ -50,7 +50,9 @@ package net.wg.gui.messenger.controls
             {
                 updateText();
                 if (autoSize != flash.text.TextFieldAutoSize.NONE) 
+                {
                     invalidateSize();
+                }
             }
             if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
             {
@@ -60,14 +62,18 @@ package net.wg.gui.messenger.controls
                     setActualSize(_width, _height);
                 }
                 if (!constraintsDisabled) 
+                {
                     constraints.update(_width, _height);
+                }
             }
             textField.text = _label;
             if (textField.getLineLength(0) < textField.text.length) 
             {
                 loc1 = textField.getLineLength(0);
                 if (loc1 < 3) 
+                {
                     loc1 = textField.getLineLength(1);
+                }
                 textField.text = textField.text.substring(0, loc1 - 2) + "..";
             }
             _toolTip = _label;

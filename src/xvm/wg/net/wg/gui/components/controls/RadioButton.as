@@ -22,7 +22,9 @@ package net.wg.gui.components.controls
             allowDeselect = false;
             buttonMode = true;
             if (_group == null) 
+            {
                 groupName = null;
+            }
             return;
         }
 

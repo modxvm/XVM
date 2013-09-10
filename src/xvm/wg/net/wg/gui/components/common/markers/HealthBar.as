@@ -20,7 +20,9 @@ package net.wg.gui.components.common.markers
         public function set color(arg1:String):void
         {
             if (arg1 == this._color) 
+            {
                 return;
+            }
             this._color = arg1;
             invalidate(INVALIDATE_COLOR);
             return;
@@ -59,10 +61,14 @@ package net.wg.gui.components.common.markers
         public function updateHealth(arg1:Number, arg2:String):void
         {
             if (this.maxHealth == 0) 
+            {
                 return;
+            }
             this.hitSplash.setAnimationType(arg2);
             if (!this.isSplashRunning) 
+            {
                 this.beforeLastHit = this.curHealth;
+            }
             this.curHealth = arg1;
             this._isSplashRunning = true;
             this.hitSplash.x = this.getXforHealth(this.curHealth, true);
@@ -85,14 +91,18 @@ package net.wg.gui.components.common.markers
             var loc2:*=NaN;
             super.draw();
             if (isInvalid(INVALIDATE_COLOR)) 
+            {
                 gotoAndStop(this._color);
+            }
             if (isInvalid(INVALIDATE_BAR)) 
+            {
                 if (!isNaN(this.maxHealth) && !isNaN(this.curHealth)) 
                 {
                     loc1 = this.curHealth / this.maxHealth;
                     loc2 = Math.ceil(loc1 * (this.healthBar.totalFrames - 1)) + 1;
                     this.healthBar.gotoAndStop(loc2);
                 }
+            }
             return;
         }
 

@@ -17,11 +17,19 @@ package net.wg.gui.components.common.waiting
         {
             super.draw();
             if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
+            {
                 if (this.waitingComponent) 
+                {
                     this.waitingComponent.setSize(_width, _height);
+                }
+            }
             if (isInvalid(TEXT_INVALID)) 
+            {
                 if (this.waitingComponent) 
+                {
                     this.waitingComponent.setMessage(this._text);
+                }
+            }
             return;
         }
 
@@ -56,7 +64,9 @@ package net.wg.gui.components.common.waiting
             if (this.waitingComponent) 
             {
                 if (this.waitingComponent.parent) 
+                {
                     this.waitingComponent.parent.removeChild(this.waitingComponent);
+                }
                 this.waitingComponent = null;
             }
             if (this.waitingComponent) 

@@ -14,7 +14,9 @@ package net.wg.gui.components.controls
         public function set textAlign(arg1:String):void
         {
             if (this._textAlign == arg1) 
+            {
                 return;
+            }
             this._textAlign = arg1;
             invalidateData();
             return;

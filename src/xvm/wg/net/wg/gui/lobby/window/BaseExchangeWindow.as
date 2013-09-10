@@ -38,9 +38,13 @@ package net.wg.gui.lobby.window
         {
             super.draw();
             if (isInvalid(RATES_INVALID)) 
+            {
                 this.applyRatesChanges();
+            }
             if (isInvalid(TOTAL_PRIMARY_CURRENCY_INVALID)) 
+            {
                 this.applyPrimaryCurrencyChange();
+            }
             return;
         }
 

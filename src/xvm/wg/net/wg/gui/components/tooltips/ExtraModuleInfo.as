@@ -13,7 +13,9 @@ package net.wg.gui.components.tooltips
             this._textField.autoSize = flash.text.TextFieldAutoSize.LEFT;
             this._textField.setTextFormat(arg1);
             if (arg2) 
+            {
                 this._textField.styleSheet = arg2;
+            }
             addChild(this._textField);
             return;
         }
@@ -30,7 +32,9 @@ package net.wg.gui.components.tooltips
         {
             super.startLoading(arg1);
             if (loader) 
+            {
                 loader.parent.setChildIndex(loader, 0);
+            }
             return;
         }
 

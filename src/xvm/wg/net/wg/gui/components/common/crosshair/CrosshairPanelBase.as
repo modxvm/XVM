@@ -21,9 +21,13 @@ package net.wg.gui.components.common.crosshair
             this.initFrameWalkers();
             this.initView();
             if (stage) 
+            {
                 this.initStage();
+            }
             else 
+            {
                 addEventListener(flash.events.Event.ADDED_TO_STAGE, this.initStage);
+            }
             return;
         }
 
@@ -68,21 +72,31 @@ package net.wg.gui.components.common.crosshair
             this._reloadingSettings = [arg1, arg2, arg3];
             this._reloadingBarFW.stop();
             if (arg1 != 0) 
+            {
                 if (arg1 != -1) 
+                {
                     if (arg4 > 0) 
                     {
                         this._reloadingBarFW.setPosAsPercent(arg4);
                         this._reloadingBarFW.restartFromCurrentFrame(arg1);
                     }
                     else 
+                    {
                         this._reloadingBarFW.start(arg1, arg2);
+                    }
+                }
                 else 
+                {
                     this._reloadingBarFW.setPosAsPercent(0);
+                }
+            }
             else 
             {
                 this._reloadingBarFW.setPosAsPercent(100);
                 if (arg3) 
+                {
                     this._reloadingBarFW.play("reloaded");
+                }
             }
             return;
         }
@@ -95,7 +109,9 @@ package net.wg.gui.components.common.crosshair
                 this._reloadingBarFW.play("reloaded");
             }
             else 
+            {
                 this._reloadingBarFW.setPosAsPercent(arg1);
+            }
             return;
         }
 
@@ -129,9 +145,13 @@ package net.wg.gui.components.common.crosshair
             (loc1 = this.g_modeMC.ammoCountMC).gotoAndStop(arg3 ? "ammo_low" : "ammo_normal");
             loc1.count.text = arg1.toString();
             if (this.clipQuanityBar && this.clipQuanityBar.initialized) 
+            {
                 this.clipQuanityBar.change(arg1, arg2, arg4, arg5);
+            }
             else 
+            {
                 net.wg.gui.components.common.crosshair.ClipQuantityBar.store(arg1, arg2, arg4);
+            }
             return;
         }
 
@@ -139,7 +159,9 @@ package net.wg.gui.components.common.crosshair
         {
             var loc1:*=null;
             if (this._clipCapacity == arg1) 
+            {
                 return;
+            }
             this._clipCapacity = arg1;
             if (this._clipCapacity > 1) 
             {
@@ -244,7 +266,9 @@ package net.wg.gui.components.common.crosshair
             if (loc1 && this.clipQuanityBar) 
             {
                 if (loc1.contains(this.clipQuanityBar)) 
+                {
                     loc1.removeChild(this.clipQuanityBar);
+                }
                 this.clipQuanityBar = null;
             }
             return;

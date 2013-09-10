@@ -24,7 +24,9 @@ package scaleform.clik.managers
         public function set stage(arg1:flash.display.Stage):void
         {
             if (this._stage == null)
+            {
                 this._stage = arg1;
+            }
             this._stage.stageFocusRect = false;
             if (scaleform.gfx.Extensions.enabled)
             {
@@ -55,44 +57,66 @@ package scaleform.clik.managers
             var loc11:*=false;
             var loc1:*=arg1;
             if (arg1 != null)
+            {
                 for (;;)
                 {
-                    loc2 = arg1 as scaleform.clik.core.UIComponent;
+                    if ((loc2 = arg1 as scaleform.clik.core.UIComponent) != null)
+                    {
+                    };
                     if (loc2.focusTarget != null)
                     {
                         arg1 = loc2.focusTarget;
                         continue;
                     }
                 }
+            }
             if (loc2 != null)
+            {
                 if (loc2.focusable == false)
+                {
                     arg1 = null;
+                }
+            }
             var loc3:*;
             if ((loc3 = arg1 as flash.display.Sprite) && arg3 && loc3.tabEnabled == false)
+            {
                 arg1 = null;
+            }
             if (scaleform.clik.core.CLIK.disableNullFocusMoves && (arg1 == null || arg1 == this._stage))
+            {
                 return;
+            }
             var loc4:*=this.getActualFocusDisplayObject(arg2);
             var loc5:*;
             if ((loc5 = this.getCurrentFocusDisplayObject(arg2)) != arg1)
             {
                 if ((loc2 = loc5 as scaleform.clik.core.UIComponent) != null)
+                {
                     loc2.focused = loc2.focused & ~(1 << arg2);
+                }
                 if (loc5 != null)
+                {
                     loc5.dispatchEvent(new scaleform.clik.events.FocusHandlerEvent(scaleform.clik.events.FocusHandlerEvent.FOCUS_OUT, true, false, arg2));
+                }
                 loc5 = arg1;
                 this.setCurrentFocusDisplayObject(arg2, arg1);
                 if ((loc2 = loc5 as scaleform.clik.core.UIComponent) != null)
+                {
                     loc2.focused = loc2.focused | 1 << arg2;
+                }
                 if (loc5 != null)
+                {
                     loc5.dispatchEvent(new scaleform.clik.events.FocusHandlerEvent(scaleform.clik.events.FocusHandlerEvent.FOCUS_IN, true, false, arg2));
+                }
             }
             var loc6:*=loc4 is flash.text.TextField;
             var loc7:*=loc5 is scaleform.clik.core.UIComponent;
             if (!(loc4 == loc5) && (!loc6 || loc6 && !loc7))
             {
                 if (loc1 is flash.text.TextField && !(loc1 == arg1) && arg1 == null)
+                {
                     arg1 = loc1;
+                }
                 this.preventStageFocusChanges = true;
                 if (scaleform.gfx.Extensions.isScaleform)
                 {
@@ -103,12 +127,16 @@ package scaleform.clik.managers
                     {
                         loc11 = !((loc8 >> loc10 & 1) == 0);
                         if (loc11)
+                        {
                             this.setSystemFocus(arg1 as flash.display.InteractiveObject, loc10);
+                        }
                         ++loc10;
                     }
                 }
                 else
+                {
                     this.setSystemFocus(arg1 as flash.display.InteractiveObject);
+                }
                 this._stage.addEventListener(flash.events.Event.ENTER_FRAME, this.clearFocusPrevention, false, 0, true);
             }
             return;
@@ -118,7 +146,9 @@ package scaleform.clik.managers
         {
             var loc1:*=this.currentFocusLookup[arg1] as scaleform.clik.utils.WeakReference;
             if (loc1)
+            {
                 return loc1.value as flash.display.InteractiveObject;
+            }
             return null;
         }
 
@@ -132,7 +162,9 @@ package scaleform.clik.managers
         {
             var loc1:*=this.actualFocusLookup[arg1] as scaleform.clik.utils.WeakReference;
             if (loc1)
+            {
                 return loc1.value as flash.display.InteractiveObject;
+            }
             return null;
         }
 
@@ -145,16 +177,22 @@ package scaleform.clik.managers
         protected function setSystemFocus(arg1:flash.display.InteractiveObject, arg2:uint=0):void
         {
             if (scaleform.gfx.Extensions.isScaleform)
+            {
                 scaleform.gfx.FocusManager.setFocus(arg1, arg2);
+            }
             else
+            {
                 this._stage.focus = arg1;
+            }
             return;
         }
 
         protected function getSystemFocus(arg1:uint=0):flash.display.InteractiveObject
         {
             if (scaleform.gfx.Extensions.isScaleform)
+            {
                 return scaleform.gfx.FocusManager.getFocus(arg1);
+            }
             return this._stage.focus;
         }
 
@@ -185,33 +223,55 @@ package scaleform.clik.managers
             var loc2:*=scaleform.gfx.FocusManager.getControllerFocusGroup(loc1);
             var loc3:*;
             if ((loc3 = this.getCurrentFocusDisplayObject(loc2)) == null)
+            {
                 loc3 = this._stage;
+            }
             var loc4:*=arg1.clone() as scaleform.clik.events.InputEvent;
             var loc5:*;
             if (!(loc5 = loc3.dispatchEvent(loc4)) || loc4.handled)
+            {
                 return;
+            }
             if (arg1.details.value == scaleform.clik.constants.InputValue.KEY_UP)
+            {
                 return;
+            }
             var loc6:*;
             if ((loc6 = arg1.details.navEquivalent) == null)
+            {
                 return;
+            }
             var loc7:*=this.getCurrentFocusDisplayObject(loc2);
             var loc8:*=this.getActualFocusDisplayObject(loc2);
             var loc9:*=this.getSystemFocus(loc2);
             if (loc8 is flash.text.TextField && loc8 == loc7 && this.handleTextFieldInput(loc6, loc1))
+            {
                 return;
+            }
             if (loc8 is flash.text.TextField && this.handleTextFieldInput(loc6, loc1))
+            {
                 return;
+            }
             var loc10:*=loc6 == scaleform.clik.constants.NavigationCode.LEFT || loc6 == scaleform.clik.constants.NavigationCode.RIGHT;
             var loc11:*=loc6 == scaleform.clik.constants.NavigationCode.UP || scaleform.clik.constants.NavigationCode.DOWN;
             if (loc7 == null)
+            {
                 if (loc9 && loc9 is scaleform.clik.core.UIComponent)
+                {
                     loc7 = loc9 as scaleform.clik.core.UIComponent;
+                }
+            }
             if (loc7 == null)
+            {
                 if (loc8 && loc8 is scaleform.clik.core.UIComponent)
+                {
                     loc7 = loc8 as scaleform.clik.core.UIComponent;
+                }
+            }
             if (loc7 == null)
+            {
                 return;
+            }
             var loc12:*=loc7.parent;
             var loc13:*=scaleform.clik.constants.FocusMode.DEFAULT;
             if (loc10 || loc11)
@@ -222,7 +282,9 @@ package scaleform.clik.managers
                     if (loc15 in loc12)
                     {
                         if (!((loc13 = loc12[loc15]) == null) && !(loc13 == scaleform.clik.constants.FocusMode.DEFAULT))
+                        {
                             break;
+                        }
                         loc12 = loc12.parent;
                         continue;
                     }
@@ -230,12 +292,18 @@ package scaleform.clik.managers
                 }
             }
             else
+            {
                 loc12 = null;
+            }
             if (loc8 is flash.text.TextField && loc8.parent == loc7)
+            {
                 loc7 = this.getSystemFocus(loc1);
+            }
             var loc14:*;
             if ((loc14 = scaleform.gfx.FocusManager.findFocus(loc6, null, loc13 == scaleform.clik.constants.FocusMode.LOOP, loc7, false, loc1)) != null)
+            {
                 this.setFocus(loc14, loc2);
+            }
             return;
         }
 
@@ -254,6 +322,7 @@ package scaleform.clik.managers
                 return;
             }
             if (scaleform.clik.core.CLIK.disableDynamicTextFieldFocus && arg2 is flash.text.TextField)
+            {
                 if ((loc4 = arg2 as flash.text.TextField).type == "dynamic")
                 {
                     arg3.stopImmediatePropagation();
@@ -261,8 +330,11 @@ package scaleform.clik.managers
                     arg3.preventDefault();
                     return;
                 }
+            }
             if (arg2 is scaleform.clik.core.UIComponent)
+            {
                 arg3.preventDefault();
+            }
             if (arg1 is flash.text.TextField && arg2 == null && scaleform.clik.core.CLIK.disableTextFieldToNullFocusMoves)
             {
                 arg3.preventDefault();
@@ -291,24 +363,34 @@ package scaleform.clik.managers
                 loc2 = arg1.target as flash.display.InteractiveObject;
             }
             if (arg1.type == flash.events.FocusEvent.FOCUS_OUT)
+            {
                 if (this.preventStageFocusChanges)
                 {
                     arg1.stopImmediatePropagation();
                     arg1.stopPropagation();
                 }
+            }
             var loc3:*;
             var loc4:*=(loc3 = arg1 as scaleform.gfx.FocusEventEx) != null ? loc3.controllerIdx : 0;
             var loc5:*=scaleform.gfx.FocusManager.getControllerFocusGroup(loc4);
             this.setActualFocusDisplayObject(loc5, loc2);
             var loc6:*=this.getCurrentFocusDisplayObject(loc5);
             if (!(loc2 == null) && loc2 is flash.text.TextField && !(loc2.parent == null) && loc6 == loc2.parent && loc6 == loc1)
+            {
                 return;
+            }
             var loc7:*=loc2 is flash.text.TextField;
             var loc8:*=loc6 is scaleform.clik.core.UIComponent;
             if (loc2 != loc6)
+            {
                 if (!(loc7 && loc8) || loc2 == null)
+                {
                     if (!this.preventStageFocusChanges || loc7)
+                    {
                         this.setFocus(loc2, loc5);
+                    }
+                }
+            }
             return;
         }
 
@@ -316,22 +398,36 @@ package scaleform.clik.managers
         {
             var loc1:*=this.getActualFocusDisplayObject(arg2) as flash.text.TextField;
             if (loc1 == null)
+            {
                 return false;
+            }
             var loc2:*=loc1.caretIndex;
             var loc3:*=0;
             var loc4:*=arg1;
             switch (loc4)
             {
                 case scaleform.clik.constants.NavigationCode.UP:
+                {
                     if (!loc1.multiline)
+                    {
                         return false;
+                    }
+                }
                 case scaleform.clik.constants.NavigationCode.LEFT:
+                {
                     return loc2 > 0;
+                }
                 case scaleform.clik.constants.NavigationCode.DOWN:
+                {
                     if (!loc1.multiline)
+                    {
                         return false;
+                    }
+                }
                 case scaleform.clik.constants.NavigationCode.RIGHT:
+                {
                     return loc2 < loc1.length;
+                }
             }
             return false;
         }
@@ -339,14 +435,18 @@ package scaleform.clik.managers
         public static function getInstance():scaleform.clik.managers.FocusHandler
         {
             if (instance == null)
+            {
                 instance = new FocusHandler();
+            }
             return instance;
         }
 
         public static function init(arg1:flash.display.Stage, arg2:scaleform.clik.core.UIComponent):void
         {
             if (initialized)
+            {
                 return;
+            }
             var loc1:*=scaleform.clik.managers.FocusHandler.getInstance();
             loc1.stage = arg1;
             scaleform.gfx.FocusManager.alwaysEnableArrowKeys = true;

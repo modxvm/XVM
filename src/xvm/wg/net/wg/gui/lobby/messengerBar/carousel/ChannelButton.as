@@ -49,7 +49,9 @@ package net.wg.gui.lobby.messengerBar.carousel
         {
             var loc1:*=iconSource ? "icon_" : "";
             if (blinking) 
+            {
                 return Vector.<String>(_selected ? ["selected_", loc1 + "blinking_"] : [loc1 + "blinking_"]);
+            }
             return Vector.<String>(_selected ? ["selected_", loc1] : [loc1]);
         }
 
@@ -63,7 +65,9 @@ package net.wg.gui.lobby.messengerBar.carousel
         {
             super.handleMouseRollOver(arg1);
             if (tooltip) 
+            {
                 App.toolTipMgr.show(tooltip);
+            }
             return;
         }
 

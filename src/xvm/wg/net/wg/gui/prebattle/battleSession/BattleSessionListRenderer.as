@@ -27,7 +27,9 @@ package net.wg.gui.prebattle.battleSession
         {
             super.draw();
             if (isInvalid(INVALIDATE_DATA) && this.dataVO) 
+            {
                 this.afterSetData();
+            }
             return;
         }
 
@@ -49,7 +51,9 @@ package net.wg.gui.prebattle.battleSession
                 return;
             }
             if (!visible) 
+            {
                 visible = true;
+            }
             this.dataVO = new net.wg.gui.prebattle.battleSession.BSListRendererVO(arg1);
             super.setData(arg1);
             this.label = this.dataVO.descr;

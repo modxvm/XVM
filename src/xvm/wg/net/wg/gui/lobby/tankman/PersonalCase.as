@@ -72,7 +72,9 @@ package net.wg.gui.lobby.tankman
                 this.skills_mc.x = SKILLS_CAROUSEL_POSITION.x;
                 this.skills_mc.y = SKILLS_CAROUSEL_POSITION.y;
                 if (!this.skills_mc.hasEventListener(net.wg.gui.events.PersonalCaseEvent.CHANGE_TAB_ON_TWO)) 
+                {
                     this.skills_mc.addEventListener(net.wg.gui.events.PersonalCaseEvent.CHANGE_TAB_ON_TWO, this.changeTabToTwoHandler);
+                }
             }
             this.isUpdateList = true;
             invalidate(UPDATE_SCROLLING_LIST);
@@ -87,9 +89,13 @@ package net.wg.gui.lobby.tankman
             this.tankmanInBattle = !(data.currentVehicle == null) && data.currentVehicle.currentVehicleLocked;
             this.initializeSkillBtn(this.tankmanInBattle);
             if (this.skillsBtn.visible) 
+            {
                 this.skills_mc.visible = false;
+            }
             else 
+            {
                 this.initSkillsCarousel();
+            }
             this.initializeDropSkillsButton(this.__isEnableDropSkillsButton());
             if (data.wg_freeXpToTankman && data.skills.length > 0 && data.skillsCountForLearn == 0 && Number(data.specializationLevel) == 100) 
             {
@@ -104,7 +110,9 @@ package net.wg.gui.lobby.tankman
             }
             this.initializeGeneralProperties();
             if (window) 
+            {
                 window.title = this._name.text + ", " + data.role + " - " + loc1.locale.makeString(MENU.TANKMANPERSONALCASE_TITLE);
+            }
             this.initializeTabButton();
             validateNow();
             return;
@@ -121,11 +129,13 @@ package net.wg.gui.lobby.tankman
             var loc2:*=null;
             var loc1:*=[];
             if (data.currentVehicle == null || !data.currentVehicle.currentVehicleLocked) 
+            {
                 if (this.tabs.dataProvider.length <= 1) 
                 {
                     loc1 = [{"label":MENU.TANKMANPERSONALCASE_TABBATTLEINFO, "linkage":net.wg.data.constants.Linkages.PERSONAL_CASE_STATS}, {"label":MENU.TANKMANPERSONALCASE_TABTRAINING, "linkage":net.wg.data.constants.Linkages.PERSONAL_CASE_RETRAINING}, {"label":MENU.TANKMANPERSONALCASE_TABSKILLS, "linkage":net.wg.data.constants.Linkages.PERSONAL_CASE_SKILLS}, {"label":MENU.TANKMANPERSONALCASE_TABDOCS, "linkage":net.wg.data.constants.Linkages.PERSONAL_CASE_DOCS}];
                     this.tabs.dataProvider = new scaleform.clik.data.DataProvider(loc1);
                 }
+            }
             else 
             {
                 loc1 = [{"label":MENU.TANKMANPERSONALCASE_TABBATTLEINFO, "linkage":net.wg.data.constants.Linkages.PERSONAL_CASE_STATS}];
@@ -159,7 +169,9 @@ package net.wg.gui.lobby.tankman
                 this.rankIcon.source = data.rankIconFile;
             }
             if (data.nativeVehicle.contourIconFile != null) 
+            {
                 this.contourIcon.visible = true;
+            }
             this._name.text = data.firstname + " " + data.lastname;
             this.rank.text = data.rank;
             this.role.text = data.role;
@@ -188,30 +200,42 @@ package net.wg.gui.lobby.tankman
             }
             this.unloadBtn.enabled = this.enableButtons(!data.inTank, this.tankmanInBattle);
             if (data.inTank) 
+            {
                 this.dismissBtn.enabled = this.enableButtons(data.currentVehicle.currentVehicleLocked, data.currentVehicle.currentVehicleBroken);
+            }
             else 
+            {
                 this.dismissBtn.enabled = true;
+            }
             return;
         }
 
         internal function enableButtons(arg1:Boolean, arg2:Boolean):Boolean
         {
             if (arg1) 
+            {
                 return false;
+            }
             if (arg2) 
+            {
                 return false;
+            }
             return true;
         }
 
         internal function __isEnableDropSkillsButton():Boolean
         {
             if (data.currentVehicle && (data.currentVehicle.currentVehicleLocked || data.currentVehicle.currentVehicleBroken)) 
+            {
                 return false;
+            }
             var loc1:*=0;
             while (loc1 < data.skills.length) 
             {
                 if (!data.skills[loc1].isNewSkill) 
+                {
                     return true;
+                }
                 ++loc1;
             }
             return false;
@@ -241,11 +265,17 @@ package net.wg.gui.lobby.tankman
                 flash.events.EventDispatcher(loc1).addEventListener(net.wg.gui.events.PersonalCaseEvent.GET_TANKMAN_ID, this.getTankmanIDHandler);
             }
             else if (loc1 is net.wg.gui.lobby.tankman.CrewTankmanRetraining && !flash.events.EventDispatcher(loc1).hasEventListener(net.wg.gui.events.PersonalCaseEvent.APPLY_RETRAINING)) 
+            {
                 flash.events.EventDispatcher(loc1).addEventListener(net.wg.gui.events.PersonalCaseEvent.APPLY_RETRAINING, this.applyRetrainingHandler);
+            }
             else if (loc1 is net.wg.gui.lobby.tankman.PersonalCaseSkills && !flash.events.EventDispatcher(loc1).hasEventListener(net.wg.gui.events.PersonalCaseEvent.TRAINING_SKILL)) 
+            {
                 flash.events.EventDispatcher(loc1).addEventListener(net.wg.gui.events.PersonalCaseEvent.TRAINING_SKILL, this.trainingSkillHandler);
+            }
             else if (loc1 is net.wg.gui.lobby.tankman.PersonalCaseDocs && !flash.events.EventDispatcher(loc1).hasEventListener(net.wg.gui.events.PersonalCaseEvent.CHANGE_PASSPORT)) 
+            {
                 flash.events.EventDispatcher(loc1).addEventListener(net.wg.gui.events.PersonalCaseEvent.CHANGE_PASSPORT, this.changePassportHandler);
+            }
             this.currentView = arg1.view;
             this.runtimeUpdateByInstance(this.currentView);
             return;
@@ -254,25 +284,35 @@ package net.wg.gui.lobby.tankman
         protected override function runtimeUpdateByModel(arg1:Class, arg2:Object):void
         {
             if (this.currentView is arg1) 
+            {
                 this.currentView.update(arg2);
+            }
             return;
         }
 
         internal function runtimeUpdateByInstance(arg1:net.wg.infrastructure.interfaces.IViewStackContent=null):void
         {
             if (arg1 == null) 
+            {
                 return;
+            }
             if (arg1 is net.wg.gui.lobby.tankman.PersonalCaseStats && stats) 
+            {
                 arg1.update(stats);
+            }
             if (arg1 is net.wg.gui.lobby.tankman.CrewTankmanRetraining && retrainingData && rentainingTabUpdated) 
             {
                 arg1.update(retrainingData);
                 rentainingTabUpdated = false;
             }
             if (arg1 is net.wg.gui.lobby.tankman.PersonalCaseSkills && skillsModel) 
+            {
                 arg1.update(skillsModel);
+            }
             if (arg1 is net.wg.gui.lobby.tankman.PersonalCaseDocs && documentsData) 
+            {
                 arg1.update(documentsData);
+            }
             return;
         }
 
@@ -280,14 +320,24 @@ package net.wg.gui.lobby.tankman
         {
             var loc1:*=data.inTank && !data.currentVehicle.currentVehicleLocked;
             if (arg1 != 0) 
+            {
                 if (arg1 == 1 && loc1) 
+                {
                     this.view.show(net.wg.data.constants.Linkages.PERSONAL_CASE_RETRAINING);
+                }
                 else if (arg1 == 2 && loc1) 
+                {
                     this.view.show(net.wg.data.constants.Linkages.PERSONAL_CASE_SKILLS);
+                }
                 else if (arg1 == 3 && loc1) 
+                {
                     this.view.show(net.wg.data.constants.Linkages.PERSONAL_CASE_DOCS);
+                }
+            }
             else 
+            {
                 this.view.show(net.wg.data.constants.Linkages.PERSONAL_CASE_STATS);
+            }
             this.currentView = this.view.currentView as net.wg.infrastructure.interfaces.IViewStackContent;
             this.runtimeUpdateByInstance(this.currentView);
             return;
@@ -333,10 +383,16 @@ package net.wg.gui.lobby.tankman
         {
             var loc1:*="";
             if (arg1.target != this.unloadBtn) 
+            {
                 if (arg1.target == this.dismissBtn) 
+                {
                     loc1 = TOOLTIPS.BARRACKS_TANKMEN_DISMISS;
+                }
+            }
             else 
+            {
                 loc1 = TOOLTIPS.BARRACKS_TANKMEN_UNLOAD;
+            }
             App.toolTipMgr.showComplex(loc1);
             return;
         }
@@ -404,9 +460,13 @@ package net.wg.gui.lobby.tankman
         internal function getTankmanIDHandler(arg1:net.wg.gui.events.PersonalCaseEvent):void
         {
             if (data.skills.length > 0) 
+            {
                 arg1.tankmanIdDelegate(data.inventoryID, data.skills[(data.skills.length - 1)].name);
+            }
             else 
+            {
                 arg1.tankmanIdDelegate(data.inventoryID, "empty");
+            }
             return;
         }
 

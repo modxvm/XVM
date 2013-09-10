@@ -43,9 +43,13 @@ package net.wg.gui.lobby.questsWindow
                 {
                     loc2 = 20;
                     if (this.awardDescrTF.numLines > 1) 
+                    {
                         loc2 = 10;
+                    }
                     else 
+                    {
                         loc2 = 20;
+                    }
                     this.awardTF.y = TEXT_TOP + loc2;
                     this.awardDescrTF.y = TEXT_TOP + loc2 + 1;
                     loc3 = this.awardDescrTF.y + this.awardDescrTF.textHeight + loc2;
@@ -54,7 +58,9 @@ package net.wg.gui.lobby.questsWindow
                     loc1 = this.maskMC.height;
                 }
                 else 
+                {
                     loc1 = 0;
+                }
                 setSize(this.width, loc1);
                 dispatchEvent(new flash.events.Event(flash.events.Event.RESIZE));
             }

@@ -14,7 +14,9 @@ package net.wg.data.constants
         public static function get mapping():Object
         {
             if (!inited) 
+            {
                 init();
+            }
             return __mapping;
         }
 

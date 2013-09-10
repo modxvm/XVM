@@ -110,9 +110,13 @@ package net.wg.infrastructure.managers.utils.impl
             var loc2:*;
             _addEventCnt++;
             if (this._isEnabled) 
+            {
                 this._addEvent(arg1, arg2, arg3, arg4, arg5, arg6);
+            }
             else 
+            {
                 this.doAddEventListener(arg1, arg2, arg3, arg4, arg5, arg6);
+            }
             _addEventTime = _addEventTime + (new Date().getTime() - loc1);
             return;
         }
@@ -145,6 +149,7 @@ package net.wg.infrastructure.managers.utils.impl
             _remEventCnt++;
             this.checkObject(arg1);
             if (this._isEnabled) 
+            {
                 if (this.objectIsRegistered(arg1)) 
                 {
                     loc2 = this._objStack[arg1];
@@ -152,12 +157,17 @@ package net.wg.infrastructure.managers.utils.impl
                     while (loc5 >= 0) 
                     {
                         if ((loc4 = loc3[loc5]).event === arg2 && loc4.func == arg3 && loc4.useCapture == arg4) 
+                        {
                             this.deleteProxy(loc4);
+                        }
                         --loc5;
                     }
                 }
+            }
             else 
+            {
                 this.doRemoveEventListener(arg1, arg2, arg3, arg4);
+            }
             _remEventTime = _remEventTime + (new Date().getTime() - loc1);
             return;
         }
@@ -198,7 +208,9 @@ package net.wg.infrastructure.managers.utils.impl
             loc7 = 0;
             loc8 = this._objStack;
             for (loc2 in loc8) 
+            {
                 loc6.push(loc2);
+            }
             loc7 = 0;
             loc8 = loc6;
             for each (loc2 in loc8) 
@@ -303,7 +315,9 @@ package net.wg.infrastructure.managers.utils.impl
             var loc5:*="";
             var loc6:*=0;
             var loc7:*=this._objStack;
-            for (loc3 in loc7) ;
+            for (loc3 in loc7) 
+            {
+            };
             loc6 = 0;
             loc7 = this._moduleStack;
             for (loc1 in loc7) 
@@ -311,11 +325,15 @@ package net.wg.infrastructure.managers.utils.impl
                 loc4 = this._moduleStack[loc1];
                 var loc8:*=0;
                 var loc9:*=loc4;
-                for each (loc3 in loc9) ;
+                for each (loc3 in loc9) 
+                {
+                };
             }
             loc6 = 0;
             loc7 = this._dynamicContents;
-            for each (loc3 in loc7) ;
+            for each (loc3 in loc7) 
+            {
+            };
             return;
         }
 
@@ -340,11 +358,17 @@ package net.wg.infrastructure.managers.utils.impl
             {
                 loc2 = null;
                 if (loc3 = this._objStack[arg1]) 
+                {
                     loc2 = loc3[DYN_CONTENT];
+                }
                 else if (arg1 is flash.display.DisplayObject) 
+                {
                     loc2 = (loc4 = this.findModuleAndDynamicContent(flash.display.DisplayObject(arg1))).dynamicContent;
+                }
                 if (loc2) 
+                {
                     this.addRemovingFromStageListener(flash.display.DisplayObject(loc2));
+                }
             }
             _enableDispTime = _enableDispTime + (new Date().getTime() - loc1);
             return;
@@ -356,7 +380,9 @@ package net.wg.infrastructure.managers.utils.impl
             var loc2:*;
             _disableDispCnt++;
             if (this._isEnabled) 
+            {
                 this.removeCustomObjectManaging(flash.display.DisplayObject(arg1));
+            }
             _disableDispTime = _disableDispTime + (new Date().getTime() - loc1);
             return;
         }
@@ -444,10 +470,14 @@ package net.wg.infrastructure.managers.utils.impl
                 loc3 = (loc6 = this.findModuleAndDynamicContent(flash.display.DisplayObject(arg1))).module;
                 loc4 = loc6.dynamicContent;
                 if (loc3 && loc3.disposed) 
+                {
                     return;
+                }
             }
             if (this._objStack[arg1] != undefined) 
+            {
                 loc1 = this._objStack[arg1][PROXIES];
+            }
             else 
             {
                 loc1 = [];
@@ -458,15 +488,21 @@ package net.wg.infrastructure.managers.utils.impl
             for each (loc2 in loc8) 
             {
                 if (!this.checkProxy(loc2, arg1, arg2, arg3, arg4)) 
+                {
                     continue;
+                }
                 return;
             }
             loc2 = new net.wg.infrastructure.managers.utils.impl.EventListnerProxy(arg1, arg2, arg3, arg4);
             this.doAddEventListener(arg1, arg2, arg3, arg4, arg5, arg6);
             loc1.push(loc2);
             if (loc3) 
+            {
                 this.addCustomModuleManaging(loc3, arg1);
-            else if (!(loc4 == null && arg1 is flash.display.DisplayObject)) ;
+            }
+            else if (!(loc4 == null && arg1 is flash.display.DisplayObject)) 
+            {
+            };
             return;
         }
 
@@ -474,7 +510,9 @@ package net.wg.infrastructure.managers.utils.impl
         {
             var loc1:*=this._moduleStack[arg1];
             if (loc1) 
+            {
                 loc1.push(arg2);
+            }
             else 
             {
                 loc1 = [arg2];
@@ -487,7 +525,9 @@ package net.wg.infrastructure.managers.utils.impl
         internal function checkSlowWorking(arg1:Object):void
         {
             if (arg1 is net.wg.infrastructure.interfaces.IDynamicContent) 
+            {
                 DebugUtils.LOG_WARNING("DAAPIModule \"" + flash.utils.getQualifiedClassName(arg1) + "\" is DynamicContent. It may provide to slow working in the EventCollector! ");
+            }
             return;
         }
 
@@ -524,7 +564,9 @@ package net.wg.infrastructure.managers.utils.impl
         internal function checkObject(arg1:Object):void
         {
             if (arg1 == null) 
+            {
                 throw new net.wg.infrastructure.exceptions.NullPointerException();
+            }
             return;
         }
 
@@ -544,20 +586,36 @@ package net.wg.infrastructure.managers.utils.impl
                 loc3 = this._objStack[loc1][PROXIES];
                 loc3.splice(loc3.indexOf(arg1), 1);
                 if (!(arg1.event == null) && !(arg1.func == null)) 
+                {
                     this.doRemoveEventListener(loc1, arg1.event, arg1.func, arg1.useCapture);
+                }
                 else 
+                {
                     DebugUtils.LOG_ERROR("No event or func data in EventListnerProxy", arg1.obj, arg1.event, arg1.func);
+                }
                 if (loc3.length == 0) 
+                {
                     delete this._objStack[loc1];
+                }
             }
             else 
+            {
                 DebugUtils.LOG_ERROR("No object data in EventListnerProxy", arg1.obj, arg1.event, arg1.func);
+            }
             if (loc1 is flash.display.DisplayObject && !this.objectIsRegistered(loc1)) 
+            {
                 if (loc2) 
+                {
                     if (arg2) 
+                    {
                         this.cleanupInModuleStack(loc1, loc2);
+                    }
+                }
                 else 
+                {
                     this.removeRemovingFromStageListener(flash.display.DisplayObject(loc1));
+                }
+            }
             arg1.finalize();
             return;
         }
@@ -581,18 +639,26 @@ package net.wg.infrastructure.managers.utils.impl
         internal function doRemoveEventListener(arg1:Object, arg2:String, arg3:Function, arg4:Boolean=false):void
         {
             if (arg1.hasOwnProperty("removeSuperEventListener")) 
+            {
                 arg1.removeSuperEventListener(arg2, arg3, arg4);
+            }
             else 
+            {
                 arg1.removeEventListener(arg2, arg3, arg4);
+            }
             return;
         }
 
         internal function doAddEventListener(arg1:Object, arg2:String, arg3:Function, arg4:Boolean=false, arg5:int=0, arg6:Boolean=false):void
         {
             if (arg1.hasOwnProperty("addSuperEventListener")) 
+            {
                 arg1.addSuperEventListener(arg2, arg3, arg4, arg5, arg6);
+            }
             else 
+            {
                 arg1.addEventListener(arg2, arg3, arg4, arg5, arg6);
+            }
             return;
         }
 

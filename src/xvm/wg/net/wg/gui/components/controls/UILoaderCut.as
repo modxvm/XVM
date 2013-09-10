@@ -38,7 +38,9 @@ package net.wg.gui.components.controls
         public function set source(arg1:String):void
         {
             if (arg1 == null || arg1 == "" || arg1 == this._source) 
+            {
                 return;
+            }
             this._source = arg1;
             var loc1:*=new flash.net.URLRequest(arg1);
             var loc2:*=new flash.system.LoaderContext(false, flash.system.ApplicationDomain.currentDomain);
@@ -78,7 +80,9 @@ package net.wg.gui.components.controls
             this._source = null;
             this._cutRect = null;
             if (this.loader) 
+            {
                 this.loader.unloadAndStop(true);
+            }
             return;
         }
 

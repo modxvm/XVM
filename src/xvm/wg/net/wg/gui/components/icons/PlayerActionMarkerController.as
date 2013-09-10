@@ -1,11 +1,13 @@
-package net.wg.gui.components.icons
+package net.wg.gui.components.icons 
 {
     public class PlayerActionMarkerController extends Object
     {
         public function PlayerActionMarkerController()
         {
             super();
-            //if (__allowInstantiation) ;
+            if (__allowInstantiation) 
+            {
+            };
             return;
         }
 
@@ -21,12 +23,14 @@ package net.wg.gui.components.icons
             this.__allActions = new Array();
             var loc3:*=0;
             var loc4:*=this.__ACTIONS;
-            for (loc1 in loc4)
+            for (loc1 in loc4) 
             {
                 var loc5:*=0;
                 var loc6:*=this.__ACTIONS[loc1];
-                for (loc2 in loc6)
+                for (loc2 in loc6) 
+                {
                     this.__allActions.push(loc2);
+                }
             }
             return;
         }
@@ -43,10 +47,12 @@ package net.wg.gui.components.icons
             var loc1:*=new Array();
             var loc4:*=0;
             var loc5:*=this.__ACTIONS[arg1];
-            for (loc2 in loc5)
+            for (loc2 in loc5) 
             {
-                if (!((loc3 = this.__ACTIONS[arg1][loc2]) & arg2))
+                if (!((loc3 = this.__ACTIONS[arg1][loc2]) & arg2)) 
+                {
                     continue;
+                }
                 loc1.push(loc2);
             }
             return loc1;
@@ -54,7 +60,7 @@ package net.wg.gui.components.icons
 
         public static function get instance():net.wg.gui.components.icons.PlayerActionMarkerController
         {
-            if (!__instance)
+            if (!__instance) 
             {
                 __allowInstantiation = true;
                 __instance = new PlayerActionMarkerController();
@@ -64,7 +70,7 @@ package net.wg.gui.components.icons
             return __instance;
         }
 
-
+        
         {
             __allowInstantiation = false;
         }

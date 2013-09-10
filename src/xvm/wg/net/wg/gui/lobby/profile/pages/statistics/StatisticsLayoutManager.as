@@ -29,7 +29,9 @@ package net.wg.gui.lobby.profile.pages.statistics
             {
                 loc1 = store[arg1].item;
                 if (loc1 is net.wg.gui.lobby.profile.components.LineDescrIconText) 
+                {
                     loc1.x = this.stepW + arg1 * (loc1.width + this.stepW);
+                }
             }
             return;
         }

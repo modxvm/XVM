@@ -39,8 +39,12 @@ package net.wg.gui.lobby.vehicleBuyWindow
             {
                 this.disposeWindowRefHandlers();
                 if (arg1) 
+                {
                     if (arg1.getConstraints()) 
+                    {
                         arg1.getConstraints().addEventListener(flash.events.Event.RESIZE, this.windowRefResizeHandler);
+                    }
+                }
             }
             super.window = arg1;
             return;
@@ -83,6 +87,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
             var loc8:*=NaN;
             var loc9:*=false;
             if (isInvalid(UPDATE_STAGE_INVALID) && window) 
+            {
                 if (isCentered) 
                 {
                     window.x = App.appWidth - window.width >> 1;
@@ -93,10 +98,15 @@ package net.wg.gui.lobby.vehicleBuyWindow
                     loc2 = window.width + window.x;
                     loc3 = window.getBackground().height + window.y;
                     if (loc2 > App.appWidth) 
+                    {
                         window.x = window.x - (loc2 - App.appWidth);
+                    }
                     if (loc3 > App.appHeight) 
+                    {
                         window.y = window.y - (loc3 - App.appHeight);
+                    }
                 }
+            }
             var loc1:*=App.utils.locale;
             if (this.isInitInfoChanged) 
             {
@@ -148,14 +158,24 @@ package net.wg.gui.lobby.vehicleBuyWindow
                 loc7 = loc7 + (this.bodyMc.slotCheckbox.selected ? this.initInfo.slotPrice : 0);
                 loc8 = loc8 + (this.bodyMc.ammoCheckbox.selected ? this.initInfo.ammoPrice : 0);
                 if (this.initInfo.isPremium) 
+                {
                     loc7 = loc7 + this.initInfo.actualPrice;
+                }
                 else 
+                {
                     loc8 = loc8 + this.initInfo.actualPrice;
+                }
                 if (!this.bodyMc.crewCheckbox.selected) 
+                {
                     if (this.bodyMc.isGoldPriceSelected) 
+                    {
                         loc7 = loc7 + this.bodyMc.selectedPrice;
+                    }
                     else 
+                    {
                         loc8 = loc8 + this.bodyMc.selectedPrice;
+                    }
+                }
                 this.footerMc.totalGoldPrice.text = loc1.gold(loc7);
                 loc8 = isNaN(loc8) ? 0 : loc8;
                 this.footerMc.totalCreditsPrice.text = loc1.integer(loc8);
@@ -166,14 +186,18 @@ package net.wg.gui.lobby.vehicleBuyWindow
                     loc9 = false;
                 }
                 else 
+                {
                     this.footerMc.totalGoldPrice.textColor = goldColor;
+                }
                 if (loc8 > this.userTotalCredits) 
                 {
                     this.footerMc.totalCreditsPrice.textColor = errorColor;
                     loc9 = false;
                 }
                 else 
+                {
                     this.footerMc.totalCreditsPrice.textColor = creditsColor;
+                }
                 this.footerMc.submitBtn.enabled = loc9;
             }
             return;
@@ -211,7 +235,9 @@ package net.wg.gui.lobby.vehicleBuyWindow
             {
                 loc1 = window.getConstraints();
                 if (loc1) 
+                {
                     window.removeEventListener(flash.events.Event.RESIZE, this.windowRefResizeHandler);
+                }
             }
             return;
         }

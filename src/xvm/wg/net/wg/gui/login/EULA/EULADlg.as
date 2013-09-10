@@ -35,9 +35,13 @@ package net.wg.gui.login.EULA
         public override function updateStage(arg1:Number, arg2:Number):void
         {
             if (this.isAutoResize()) 
+            {
                 this.updatePosition();
+            }
             else 
+            {
                 super.updateStage(arg1, arg2);
+            }
             return;
         }
 
@@ -55,9 +59,9 @@ package net.wg.gui.login.EULA
                 this.textArea.validateNow();
                 if (this.textArea.height - this.textArea.textField.textHeight > 5) 
                 {
-                    this.textArea.height = this.textArea.textField.textHeight;
+                    this.textArea.height = this.textArea.textField.textHeight + 5;
                     this.textArea.validateNow();
-                    loc4 = loc3 + this.textArea.textField.textHeight;
+                    loc4 = loc3 + this.textArea.height;
                     this.dynamicUpdateSize(width, loc4);
                 }
             }
@@ -142,9 +146,13 @@ package net.wg.gui.login.EULA
         {
             super.handleInput(arg1);
             if (arg1.handled) 
+            {
                 return;
+            }
             if (arg1.details.value == scaleform.clik.constants.InputValue.KEY_DOWN && arg1.details.code == flash.ui.Keyboard.ENTER) 
+            {
                 onApply();
+            }
             return;
         }
 

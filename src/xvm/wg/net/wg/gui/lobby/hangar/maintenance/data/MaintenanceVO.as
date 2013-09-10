@@ -20,7 +20,9 @@ package net.wg.gui.lobby.hangar.maintenance.data
                 for each (loc1 in loc3) 
                 {
                     if (!loc1) 
+                    {
                         continue;
+                    }
                     loc1.dispose();
                 }
                 this.shells.splice(0);
@@ -57,7 +59,9 @@ package net.wg.gui.lobby.hangar.maintenance.data
                     this.shells.push(loc3);
                     loc5 = loc5 + loc3.count;
                     if (loc4) 
+                    {
                         continue;
+                    }
                     loc4 = loc3.maxAmmo;
                 }
                 loc6 = 0;
@@ -84,7 +88,9 @@ package net.wg.gui.lobby.hangar.maintenance.data
                 var loc3:*=0;
                 var loc4:*=this.shells;
                 for each (loc2 in loc4) 
+                {
                     loc1.push(loc2.toHash());
+                }
                 arg2[arg1] = loc1;
                 return false;
             }

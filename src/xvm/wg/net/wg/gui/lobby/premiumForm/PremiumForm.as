@@ -36,14 +36,18 @@ package net.wg.gui.lobby.premiumForm
         {
             super.draw();
             if (isInvalid(UPDATE_WINDOW)) 
+            {
                 this.updateWindowSize();
+            }
             return;
         }
 
         internal function onScrollingListItemClickHandler(arg1:scaleform.clik.events.ListEvent):void
         {
             if (arg1.itemData == null) 
+            {
                 return;
+            }
             this.scrollingList.dataProvider.invalidate();
             this.selectedItem = arg1.itemData as net.wg.data.VO.PremiumFormModel;
             return;
@@ -67,7 +71,9 @@ package net.wg.gui.lobby.premiumForm
         internal function applyButtonClickHandler(arg1:scaleform.clik.events.ButtonEvent):void
         {
             if (this.selectedItem) 
+            {
                 onPremiumBuyS(this.selectedItem.days, this.selectedItem.discountPrice);
+            }
             return;
         }
 
@@ -107,9 +113,13 @@ package net.wg.gui.lobby.premiumForm
                         return;
                     }
                     if (loc1 && loc1.discountPrice < loc3.discountPrice) 
+                    {
                         loc1 = loc3;
+                    }
                     else if (!loc1) 
+                    {
                         loc1 = loc3;
+                    }
                 }
                 ++loc2;
             }
@@ -120,7 +130,9 @@ package net.wg.gui.lobby.premiumForm
                 this.changeButtonsFocus(true);
             }
             else 
+            {
                 this.changeButtonsFocus(false);
+            }
             return;
         }
 
@@ -183,11 +195,17 @@ package net.wg.gui.lobby.premiumForm
                 this.dataProvider.setSource(this.models);
             }
             else 
+            {
                 this.dataProvider = new scaleform.clik.data.DataProvider(this.models);
+            }
             if (this.isFirstRun) 
+            {
                 this.dataProvider.invalidate();
+            }
             else 
+            {
                 this.updateScrollingSize();
+            }
             this.updateWindowSize();
             invalidate(UPDATE_WINDOW);
             return;
@@ -196,7 +214,9 @@ package net.wg.gui.lobby.premiumForm
         internal function onChange():void
         {
             if (!this.isAccessData()) 
+            {
                 return;
+            }
             this.changeButtonsFocus(false);
             this.updateDataProvider = true;
             this.createDataProvider();
@@ -271,7 +291,9 @@ package net.wg.gui.lobby.premiumForm
                 var loc2:*=0;
                 var loc3:*=this.models;
                 for each (loc1 in loc3) 
+                {
                     loc1.dispose();
+                }
                 this.models.splice(0, this.models.length);
                 this.models = null;
             }

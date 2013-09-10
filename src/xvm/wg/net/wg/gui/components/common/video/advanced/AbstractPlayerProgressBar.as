@@ -15,7 +15,9 @@ package net.wg.gui.components.common.video.advanced
         {
             super.draw();
             if (isInvalid(POSITION_INVALID)) 
+            {
                 this.applyTimeUpdating();
+            }
             return;
         }
 

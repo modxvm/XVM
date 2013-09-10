@@ -18,7 +18,9 @@ package net.wg.gui.notification
             super.configUI();
             textField.selectable = false;
             if (!isNaN(this._livingTime)) 
+            {
                 App.utils.scheduler.scheduleTask(this.startMessageHiding, this._livingTime);
+            }
             return;
         }
 
@@ -26,7 +28,9 @@ package net.wg.gui.notification
         {
             var loc1:*=null;
             if (isNaN(this._animationSpeed)) 
+            {
                 dispatchEvent(new flash.events.Event(HIDED));
+            }
             else 
             {
                 loc1 = this.tweenManager.registerAndLaunch(this._animationSpeed, this, {"alpha":0}, {"onComplete":this.onHideTweenComplete});

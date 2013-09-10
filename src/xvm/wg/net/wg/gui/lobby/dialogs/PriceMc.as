@@ -25,7 +25,9 @@ package net.wg.gui.lobby.dialogs
         {
             super.draw();
             if (isInvalid(OPERATION_INVALID)) 
+            {
                 this.priceValue.textColor = this._allowed ? this.normalTextColor : 16711680;
+            }
             return;
         }
 

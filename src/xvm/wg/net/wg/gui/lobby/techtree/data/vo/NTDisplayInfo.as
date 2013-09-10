@@ -54,18 +54,26 @@ package net.wg.gui.lobby.techtree.data.vo
         {
             var loc1:*=null;
             if (arg1 == null) 
+            {
                 return;
+            }
             if (arg1.row != null) 
+            {
                 this._row = int(arg1.row);
+            }
             if (arg1.column != null) 
+            {
                 this._column = int(arg1.column);
+            }
             if (arg1.position != null) 
             {
                 loc1 = arg1.position;
                 this._position = new flash.geom.Point(loc1[0], loc1[1]);
             }
             if (arg1.lines != null) 
+            {
                 this._lines = arg1.lines;
+            }
             return;
         }
 
@@ -75,7 +83,9 @@ package net.wg.gui.lobby.techtree.data.vo
             this._column = -1;
             this._position = null;
             if (this._lines != null) 
+            {
                 this._lines.splice(0, this._lines.length);
+            }
             return;
         }
 

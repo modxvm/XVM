@@ -19,7 +19,9 @@ package net.wg.gui.lobby.hangar.crew
             {
                 loc1.handleInput(arg1);
                 if (arg1.handled) 
+                {
                     return;
+                }
             }
             return;
         }

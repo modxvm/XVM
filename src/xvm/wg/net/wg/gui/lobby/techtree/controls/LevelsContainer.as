@@ -31,7 +31,9 @@ package net.wg.gui.lobby.techtree.controls
             var loc5:*=0;
             var loc8:*=false;
             while (this.delimiters.length > loc1) 
+            {
                 this.removeLevelDelimiter(this.delimiters.pop());
+            }
             var loc9:*=0;
             while (loc9 < loc1) 
             {
@@ -39,17 +41,25 @@ package net.wg.gui.lobby.techtree.controls
                 loc3 = null;
                 loc8 = false;
                 if (loc9 >= this.delimiters.length) 
+                {
                     this.delimiters.push(null);
+                }
                 if (loc2) 
                 {
                     if (loc9 != 0) 
                     {
                         if (arg1[(loc9 - 1)] != null) 
+                        {
                             loc4 = loc2.start - arg3 - arg1[(loc9 - 1)].end >> 1;
+                        }
                         if (loc9 < (loc1 - 1) && !(arg1[loc9 + 1] == null)) 
+                        {
                             loc5 = arg1[loc9 + 1].start - loc2.end - arg3 >> 1;
+                        }
                         else 
+                        {
                             loc5 = loc4;
+                        }
                     }
                     else if (arg1[loc9 + 1] == null) 
                     {
@@ -70,7 +80,9 @@ package net.wg.gui.lobby.techtree.controls
                         loc8 = true;
                     }
                     else 
+                    {
                         updateLevelDelimiter(loc3, loc7, 0, loc6, arg2);
+                    }
                     if (loc3 != null) 
                     {
                         loc3.validateNow();
@@ -82,8 +94,12 @@ package net.wg.gui.lobby.techtree.controls
                     }
                 }
                 else if (this.delimiters[loc9] != null) 
+                {
                     if (this.removeLevelDelimiter(this.delimiters[loc9])) 
+                    {
                         this.delimiters[loc9] = null;
+                    }
+                }
                 ++loc9;
             }
             return loc5;
@@ -96,11 +112,15 @@ package net.wg.gui.lobby.techtree.controls
             {
                 loc1 = this.delimiters.pop();
                 if (!loc1) 
+                {
                     continue;
+                }
                 loc1.dispose();
             }
             while (numChildren > 0) 
+            {
                 removeChildAt(0);
+            }
             return;
         }
 

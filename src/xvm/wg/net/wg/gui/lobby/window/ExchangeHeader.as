@@ -87,9 +87,13 @@ package net.wg.gui.lobby.window
         {
             var loc1:*=App.utils.locale;
             if (this._rateLabelFunction == null) 
+            {
                 this.rate_part_2.text = loc1.gold(this.actualRate);
+            }
             else 
+            {
                 this.rate_part_2.text = this._rateLabelFunction(this.actualRate);
+            }
             this.rate_part_2.validateNow();
             return;
         }

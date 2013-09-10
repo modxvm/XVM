@@ -81,7 +81,9 @@ package net.wg.gui.lobby.header
                 removeEventListener(flash.events.MouseEvent.ROLL_OUT, hideTooltip);
             }
             if (this.buttondropdown) 
+            {
                 this.buttondropdown.removeEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onFightSelect);
+            }
             this.demonstrationButton.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onDemoClick);
             return;
         }
@@ -141,7 +143,9 @@ package net.wg.gui.lobby.header
         internal function showTooltip(arg1:flash.events.Event):void
         {
             if (this.button && this.toolTip) 
+            {
                 App.toolTipMgr.showComplex(this.toolTip, net.wg.data.managers.impl.TooltipProps.WARNING);
+            }
             return;
         }
 

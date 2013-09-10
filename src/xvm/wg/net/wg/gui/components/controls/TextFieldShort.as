@@ -23,7 +23,9 @@ package net.wg.gui.components.controls
         public function set textAlign(arg1:String):void
         {
             if (this._textAlign == arg1) 
+            {
                 return;
+            }
             this._textAlign = arg1;
             invalidateData();
             return;
@@ -37,7 +39,9 @@ package net.wg.gui.components.controls
         public function set textColor(arg1:Number):void
         {
             if (this._textColor == arg1) 
+            {
                 return;
+            }
             this._textColor = arg1;
             invalidateData();
             return;
@@ -51,7 +55,9 @@ package net.wg.gui.components.controls
         public function set shadowColor(arg1:String):void
         {
             if (this._shadowColor == arg1) 
+            {
                 return;
+            }
             this._shadowColor = arg1;
             invalidateData();
             return;
@@ -65,7 +71,9 @@ package net.wg.gui.components.controls
         public function set toolTip(arg1:String):void
         {
             if (this._toolTip == arg1) 
+            {
                 return;
+            }
             this._toolTip = App.utils.locale.makeString(arg1);
             return;
         }
@@ -78,7 +86,9 @@ package net.wg.gui.components.controls
         public function set altToolTip(arg1:String):void
         {
             if (this._altToolTip == arg1) 
+            {
                 return;
+            }
             this._altToolTip = App.utils.locale.makeString(arg1);
             return;
         }
@@ -115,10 +125,16 @@ package net.wg.gui.components.controls
         {
             super.handleMouseRollOver(arg1);
             if (this._showToolTip) 
+            {
                 if (this._altToolTip) 
+                {
                     App.toolTipMgr.show(this._altToolTip);
+                }
                 else if (this._toolTip) 
+                {
                     App.toolTipMgr.show(this._toolTip);
+                }
+            }
             return;
         }
 
@@ -147,7 +163,9 @@ package net.wg.gui.components.controls
                 {
                     loc2 = textField.getLineLength(0);
                     if (loc2 < 3) 
+                    {
                         loc2 = textField.getLineLength(1);
+                    }
                     textField.text = textField.text.substring(0, loc2 - 2) + "..";
                     textField.setTextFormat(this._textFormat);
                 }
@@ -183,7 +201,9 @@ package net.wg.gui.components.controls
         public function set textFont(arg1:String):void
         {
             if (this._textFont == arg1) 
+            {
                 return;
+            }
             this._textFont = arg1;
             invalidateData();
             return;
@@ -197,7 +217,9 @@ package net.wg.gui.components.controls
         public function set useHtml(arg1:Boolean):void
         {
             if (this._useHtml == arg1) 
+            {
                 return;
+            }
             this._useHtml = arg1;
             invalidateData();
             return;
@@ -211,7 +233,9 @@ package net.wg.gui.components.controls
         public function set textSize(arg1:Number):void
         {
             if (this._textSize == arg1) 
+            {
                 return;
+            }
             this._textSize = arg1;
             invalidateData();
             return;

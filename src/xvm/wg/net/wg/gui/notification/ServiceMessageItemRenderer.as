@@ -66,7 +66,9 @@ package net.wg.gui.notification
             {
                 loc2 = getChildAt(loc1) as flash.display.InteractiveObject;
                 if (loc2 && !(loc2 == textField) && !(loc2 == btnMoreInfo)) 
+                {
                     loc2.mouseEnabled = false;
+                }
                 ++loc1;
             }
             return;

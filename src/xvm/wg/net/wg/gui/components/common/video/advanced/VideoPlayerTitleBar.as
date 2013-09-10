@@ -17,7 +17,9 @@ package net.wg.gui.components.common.video.advanced
             if (this.closeBtn) 
             {
                 if (this.closeBtn.parent) 
+                {
                     this.closeBtn.parent.removeChild(this.closeBtn);
+                }
                 this.closeBtn = null;
             }
             return;

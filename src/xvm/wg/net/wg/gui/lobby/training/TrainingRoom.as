@@ -218,6 +218,7 @@ package net.wg.gui.lobby.training
                 y = -SUB_VIEW_MARGIN;
             }
             if (isInvalid(scaleform.clik.constants.InvalidationType.STATE)) 
+            {
                 if (!this.isCreator) 
                 {
                     this.settingsButton.visible = false;
@@ -226,6 +227,7 @@ package net.wg.gui.lobby.training
                     this.inviteButton.visible = false;
                     this.swapButton.visible = false;
                 }
+            }
             return;
         }
 
@@ -260,7 +262,9 @@ package net.wg.gui.lobby.training
                 for each (loc3 in loc7) 
                 {
                     if (loc3.uid != arg2) 
+                    {
                         continue;
+                    }
                     loc3.isPlayerSpeaking = arg1;
                     loc1.invalidateData();
                 }
@@ -314,7 +318,9 @@ package net.wg.gui.lobby.training
             var loc2:*=0;
             var loc3:*=this._slots;
             for each (loc1 in loc3) 
+            {
                 this.curPlayersCount = this.curPlayersCount + loc1.dataProvider.length;
+            }
             this.maxPlayers.label = this.curPlayersCount + "/" + this.maxPlayersCount;
             App.toolTipMgr.hide();
             App.contextMenuMgr.hide();
@@ -386,7 +392,9 @@ package net.wg.gui.lobby.training
             for each (loc2 in loc4) 
             {
                 if (loc2.uid != arg2) 
+                {
                     continue;
+                }
                 loc2.stateString = arg3;
                 loc2.icon = arg4;
                 loc2.vShortName = arg5;
@@ -406,7 +414,9 @@ package net.wg.gui.lobby.training
             for each (loc2 in loc4) 
             {
                 if (loc2.uid != arg2) 
+                {
                     continue;
+                }
                 loc2.chatRoster = arg3;
                 arg1.invalidateData();
                 break;
@@ -427,7 +437,9 @@ package net.wg.gui.lobby.training
             var loc3:*=0;
             var loc4:*=arg1;
             for each (loc2 in loc4) 
+            {
                 loc1.push(new net.wg.data.VO.TrainingRoomRendererVO(loc2));
+            }
             return loc1;
         }
 

@@ -74,9 +74,13 @@ package net.wg.gui.lobby.profile.pages.summary
         public function dispose():void
         {
             while (this.leftPairs.length > 0) 
+            {
                 this.leftPairs.splice((this.leftPairs.length - 1), 1);
+            }
             while (this.rightPairs.length > 0) 
+            {
                 this.rightPairs.splice((this.rightPairs.length - 1), 1);
+            }
             return;
         }
 

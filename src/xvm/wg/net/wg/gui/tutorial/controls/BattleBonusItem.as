@@ -52,7 +52,9 @@ package net.wg.gui.tutorial.controls
         public function setBonuses(arg1:Number, arg2:Number):void
         {
             if (this._credits == arg1 && this._freeXP == arg2) 
+            {
                 return;
+            }
             this._credits = isNaN(arg1) ? 0 : arg1;
             this._freeXP = isNaN(arg2) ? 0 : arg2;
             invalidate();

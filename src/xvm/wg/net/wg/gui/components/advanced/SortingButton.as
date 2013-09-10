@@ -28,7 +28,9 @@ package net.wg.gui.components.advanced
             if (!(value == ASCENDING_SORT) && !(value == DESCENDING_SORT) && !(value == WITHOUT_SORT)) 
             {
                 try 
+                {
                     DebugUtils.LOG_WARNING("Flash :: Unknown sorting button state: ", value);
+                }
                 catch (e:Error)
                 {
                     trace("Flash :: Unknown sorting button state:", value);
@@ -52,13 +54,21 @@ package net.wg.gui.components.advanced
             {
                 loc1 = net.wg.gui.components.advanced.SortingButtonInfo(arg1);
                 if (!isNaN(loc1.buttonWidth)) 
+                {
                     width = loc1.buttonWidth;
+                }
                 if (!isNaN(loc1.buttonHeight)) 
+                {
                     height = loc1.buttonHeight;
+                }
                 if (loc1.defaultSortDirection) 
+                {
                     this.defaultSortDirection = loc1.defaultSortDirection;
+                }
                 if (loc1.toolTip) 
+                {
                     tooltip = loc1.toolTip;
+                }
                 enabled = loc1.enabled;
                 this._id = loc1.iconId;
                 this.ascendingIconSource = loc1.ascendingIconSource;
@@ -137,9 +147,13 @@ package net.wg.gui.components.advanced
         {
             super.draw();
             if (isInvalid(ASCENDING_ICON_INVALID)) 
+            {
                 this.mcAscendingIcon.source = this._ascendingIconSource;
+            }
             if (isInvalid(DESCENDING_ICON_INVALID)) 
+            {
                 this.mcDescendingIcon.source = this._descendingIconSource;
+            }
             if (this.isSortIconLoadingCompete) 
             {
                 this.isSortIconLoadingCompete = false;
@@ -148,7 +162,9 @@ package net.wg.gui.components.advanced
                 invalidate();
             }
             if (isInvalid(SORT_DIRECTION_INVALID)) 
+            {
                 this.applySortDirection();
+            }
             if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
             {
                 this.bg.width = _width;
@@ -165,26 +181,40 @@ package net.wg.gui.components.advanced
         protected function applySortDirection():void
         {
             if (this._sortDirection != ASCENDING_SORT) 
+            {
                 if (this._sortDirection != DESCENDING_SORT) 
                 {
                     if (this.mcAscendingIcon) 
+                    {
                         this.mcAscendingIcon.visible = false;
+                    }
                     if (this.mcDescendingIcon) 
+                    {
                         this.mcDescendingIcon.visible = false;
+                    }
                 }
                 else 
                 {
                     if (this.mcAscendingIcon) 
+                    {
                         this.mcAscendingIcon.visible = false;
+                    }
                     if (this.mcDescendingIcon) 
+                    {
                         this.mcDescendingIcon.visible = true;
+                    }
                 }
+            }
             else 
             {
                 if (this.mcAscendingIcon) 
+                {
                     this.mcAscendingIcon.visible = true;
+                }
                 if (this.mcDescendingIcon) 
+                {
                     this.mcDescendingIcon.visible = false;
+                }
             }
             return;
         }

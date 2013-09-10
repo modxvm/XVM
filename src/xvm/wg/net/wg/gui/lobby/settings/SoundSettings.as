@@ -33,7 +33,9 @@ package net.wg.gui.lobby.settings
             var loc2:*=net.wg.gui.lobby.settings.SettingsConfig.getControlId(this.captureDeviceDropDown.name, net.wg.gui.lobby.settings.SettingsConfig.TYPE_DROPDOWN);
             var loc3:*=net.wg.gui.lobby.settings.vo.SettingsControlProp(_data[loc2]);
             if (arg2.length != loc3.options.length) 
+            {
                 loc3.current = -1;
+            }
             loc3.options = arg2;
             dispatchEvent(new net.wg.gui.lobby.settings.evnts.SettingViewEvent(net.wg.gui.lobby.settings.evnts.SettingViewEvent.ON_CONTROL_CHANGED, _viewId, loc2, arg1));
             this.onVoiceChatEnabledSelect();
@@ -73,7 +75,9 @@ package net.wg.gui.lobby.settings
         internal function onBtnVivoxTest(arg1:scaleform.clik.events.ButtonEvent):void
         {
             if (this.isVoiceTestStarted) 
+            {
                 return;
+            }
             dispatchEvent(new net.wg.gui.lobby.settings.evnts.SettingViewEvent(net.wg.gui.lobby.settings.evnts.SettingViewEvent.ON_VIVOX_TEST, _viewId, "", true));
             return;
         }
@@ -87,14 +91,18 @@ package net.wg.gui.lobby.settings
         public function breakSoundCheck():void
         {
             if (this.isVoiceTestStarted) 
+            {
                 dispatchEvent(new net.wg.gui.lobby.settings.evnts.SettingViewEvent(net.wg.gui.lobby.settings.evnts.SettingViewEvent.ON_VIVOX_TEST, _viewId, "", false));
+            }
             return;
         }
 
         public function setVoiceTestState(arg1:Boolean):void
         {
             if (this.isVoiceTestStarted == arg1) 
+            {
                 return;
+            }
             this.isVoiceTestStarted = arg1;
             this.voiceAnimation.speak(arg1);
             var loc1:*;
@@ -106,7 +114,9 @@ package net.wg.gui.lobby.settings
                 this.voiceTestTimerID = flash.utils.setInterval(this.voiceTimerTest, 100, this);
             }
             else 
+            {
                 this.forceFinishVivoxTest();
+            }
             return;
         }
 
@@ -120,7 +130,9 @@ package net.wg.gui.lobby.settings
                 arg1.voiceAnimationText.text = loc1;
             }
             else 
+            {
                 arg1.dispatchEvent(new net.wg.gui.lobby.settings.evnts.SettingViewEvent(net.wg.gui.lobby.settings.evnts.SettingViewEvent.ON_VIVOX_TEST, arg1._viewId, "", false));
+            }
             return;
         }
 
@@ -170,38 +182,56 @@ package net.wg.gui.lobby.settings
                     switch (loc11) 
                     {
                         case net.wg.gui.lobby.settings.SettingsConfig.TYPE_CHECKBOX:
+                        {
                             (loc4 = net.wg.gui.components.controls.CheckBox(this[loc1 + loc2.type])).selected = loc2.current;
                             loc4.addEventListener(flash.events.Event.SELECT, this.onCheckBoxSelected);
                             if (loc1 != net.wg.gui.lobby.settings.SettingsConfig.ENABLE_VO_IP) 
+                            {
                                 loc4.enabled = loc3;
+                            }
                             else 
+                            {
                                 loc4.enabled = net.wg.gui.lobby.settings.vo.SettingsControlProp(_data[net.wg.gui.lobby.settings.SettingsConfig.VOICE_CHAT_SUPORTED]).current && loc3;
+                            }
                             break;
+                        }
                         case net.wg.gui.lobby.settings.SettingsConfig.TYPE_SLIDER:
+                        {
                             (loc5 = net.wg.gui.components.controls.Slider(this[loc1 + loc2.type])).value = loc2.current;
                             loc5.addEventListener(scaleform.clik.events.SliderEvent.VALUE_CHANGE, this.onSliderValueChanged);
                             loc5.enabled = loc2.current != null ? true : false;
                             if (loc2.hasValue && this[loc1 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_VALUE]) 
+                            {
                                 (loc8 = this[loc1 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_VALUE]).text = loc2.current;
+                            }
                             loc5.enabled = loc3;
                             break;
+                        }
                         case net.wg.gui.lobby.settings.SettingsConfig.TYPE_DROPDOWN:
+                        {
                             (loc6 = net.wg.gui.components.controls.DropdownMenu(this[loc1 + loc2.type])).dataProvider = new scaleform.clik.data.DataProvider(loc2.options);
                             loc6.selectedIndex = loc2.current;
                             loc6.addEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onDropDownChange);
                             loc6.enabled = loc3;
                             if (loc1 == net.wg.gui.lobby.settings.SettingsConfig.ALTERNATIVE_VOICES) 
+                            {
                                 this.showHideAlternativeVoices(loc3 && loc2.options.length > 1);
+                            }
                             break;
+                        }
                         case net.wg.gui.lobby.settings.SettingsConfig.TYPE_KEYINPUT:
+                        {
                             (loc7 = net.wg.gui.lobby.settings.components.KeyInput(this[loc1 + loc2.type])).key = loc2.current;
                             break;
+                        }
                     }
                     trySetLabel(loc1, this.LOCALIZATION_PREFIX);
                     continue;
                 }
                 if (loc2.readOnly) 
+                {
                     continue;
+                }
                 DebugUtils.LOG_WARNING("ERROR in" + this + " control " + (loc1 + loc2.type) + " can not find");
             }
             if (this.PTTKeyInput) 
@@ -270,7 +300,9 @@ package net.wg.gui.lobby.settings
             var loc1:*=net.wg.gui.components.controls.CheckBox(arg1.target);
             var loc2:*=net.wg.gui.lobby.settings.SettingsConfig.getControlId(loc1.name, net.wg.gui.lobby.settings.SettingsConfig.TYPE_CHECKBOX);
             if (loc2 == net.wg.gui.lobby.settings.SettingsConfig.ENABLE_VO_IP) 
+            {
                 this.onVoiceChatEnabledSelect();
+            }
             dispatchEvent(new net.wg.gui.lobby.settings.evnts.SettingViewEvent(net.wg.gui.lobby.settings.evnts.SettingViewEvent.ON_CONTROL_CHANGED, _viewId, loc2, loc1.selected));
             return;
         }
@@ -282,9 +314,13 @@ package net.wg.gui.lobby.settings
             var loc2:*=net.wg.gui.lobby.settings.SettingsConfig.getControlId(loc1.name, net.wg.gui.lobby.settings.SettingsConfig.TYPE_SLIDER);
             var loc3:*;
             if ((loc3 = net.wg.gui.lobby.settings.vo.SettingsControlProp(_data[loc2])).hasValue && this[loc2 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_VALUE]) 
+            {
                 (loc4 = this[loc2 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_VALUE]).text = loc1.value.toString();
+            }
             if (loc2 == net.wg.gui.lobby.settings.SettingsConfig.MIC_VIVOX_VOLUME) 
+            {
                 this.setVivoxMicVolume(loc1.value);
+            }
             dispatchEvent(new net.wg.gui.lobby.settings.evnts.SettingViewEvent(net.wg.gui.lobby.settings.evnts.SettingViewEvent.ON_CONTROL_CHANGED, _viewId, loc2, loc1.value));
             return;
         }
@@ -307,17 +343,29 @@ package net.wg.gui.lobby.settings
             this.breakSoundCheck();
             var loc1:*=this.enableVoIPCheckbox.selected && net.wg.gui.lobby.settings.vo.SettingsControlProp(_data[net.wg.gui.lobby.settings.SettingsConfig.VOICE_CHAT_SUPORTED]).current;
             if (this.captureDeviceDropDown != null) 
+            {
                 this.captureDeviceDropDown.enabled = loc1;
+            }
             if (this.micVivoxVolumeSlider != null) 
+            {
                 this.micVivoxVolumeSlider.enabled = loc1;
+            }
             if (this.btnVivoxTest != null) 
+            {
                 this.btnVivoxTest.enabled = loc1;
+            }
             if (this.btnCaptureDevicesUpdate != null) 
+            {
                 this.btnCaptureDevicesUpdate.enabled = loc1;
+            }
             if (this.masterVivoxVolumeSlider != null) 
+            {
                 this.masterVivoxVolumeSlider.enabled = loc1;
+            }
             if (this.masterFadeVivoxVolumeSlider != null) 
+            {
                 this.masterFadeVivoxVolumeSlider.enabled = loc1;
+            }
             if (this.captureDeviceDropDown.dataProvider.length == 0) 
             {
                 var loc2:*;
@@ -364,9 +412,13 @@ package net.wg.gui.lobby.settings
             var loc5:*=null;
             this.breakSoundCheck();
             if (this.btnCaptureDevicesUpdate.hasEventListener(scaleform.clik.events.ButtonEvent.CLICK)) 
+            {
                 this.btnCaptureDevicesUpdate.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onCaptureDevicesBtnClick);
+            }
             if (this.btnVivoxTest.hasEventListener(scaleform.clik.events.ButtonEvent.CLICK)) 
+            {
                 this.btnVivoxTest.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onBtnVivoxTest);
+            }
             this.forceFinishVivoxTest();
             var loc6:*=0;
             var loc7:*=_data;
@@ -374,39 +426,65 @@ package net.wg.gui.lobby.settings
             {
                 loc2 = net.wg.gui.lobby.settings.vo.SettingsControlProp(_data[loc1]);
                 if (!this[loc1 + loc2.type]) 
+                {
                     continue;
+                }
                 var loc8:*=loc2.type;
                 switch (loc8) 
                 {
                     case net.wg.gui.lobby.settings.SettingsConfig.TYPE_CHECKBOX:
+                    {
                         loc3 = this[loc1 + loc2.type];
                         if (loc3.hasEventListener(flash.events.Event.SELECT)) 
+                        {
                             loc3.removeEventListener(flash.events.Event.SELECT, this.onCheckBoxSelected);
+                        }
                         continue label417;
+                    }
                     case net.wg.gui.lobby.settings.SettingsConfig.TYPE_SLIDER:
+                    {
                         if ((loc4 = this[loc1 + loc2.type]).hasEventListener(scaleform.clik.events.SliderEvent.VALUE_CHANGE)) 
+                        {
                             loc4.removeEventListener(scaleform.clik.events.SliderEvent.VALUE_CHANGE, this.onSliderValueChanged);
+                        }
                         continue label417;
+                    }
                     case net.wg.gui.lobby.settings.SettingsConfig.TYPE_DROPDOWN:
+                    {
                         if ((loc5 = this[loc1 + loc2.type]).hasEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE)) 
+                        {
                             loc5.removeEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onDropDownChange);
+                        }
                         continue label417;
+                    }
                 }
             }
             if (this.testAlternativeVoicesButton.hasEventListener(scaleform.clik.events.ButtonEvent.CLICK)) 
+            {
                 this.testAlternativeVoicesButton.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onTestAlternativeVoicesButtonClick);
+            }
             if (this.testAlternativeVoicesButton.hasEventListener(flash.events.MouseEvent.MOUSE_OVER)) 
+            {
                 this.testAlternativeVoicesButton.removeEventListener(flash.events.MouseEvent.MOUSE_OVER, this.onTestAlternativeVoicesButtonOver);
+            }
             if (this.testAlternativeVoicesButton.hasEventListener(flash.events.MouseEvent.MOUSE_OUT)) 
+            {
                 this.testAlternativeVoicesButton.removeEventListener(flash.events.MouseEvent.MOUSE_OUT, this.onTestAlternativeVoicesButtonOut);
+            }
             if (this.PTTKeyInput) 
             {
                 if (this.PTTKeyInput.hasEventListener(net.wg.gui.lobby.settings.components.evnts.KeyInputEvents.DISABLE_OVER)) 
+                {
                     this.PTTKeyInput.removeEventListener(net.wg.gui.lobby.settings.components.evnts.KeyInputEvents.DISABLE_OVER, this.handleMouseRollOverPTTKey);
+                }
                 if (this.PTTKeyInput.hasEventListener(net.wg.gui.lobby.settings.components.evnts.KeyInputEvents.DISABLE_OUT)) 
+                {
                     this.PTTKeyInput.removeEventListener(net.wg.gui.lobby.settings.components.evnts.KeyInputEvents.DISABLE_OUT, this.handleMouseRollOutPTTKey);
+                }
                 if (this.PTTKeyInput.hasEventListener(net.wg.gui.lobby.settings.components.evnts.KeyInputEvents.DISABLE_PRESS)) 
+                {
                     this.PTTKeyInput.removeEventListener(net.wg.gui.lobby.settings.components.evnts.KeyInputEvents.DISABLE_PRESS, this.handleMousePressPTTKey);
+                }
             }
             super.dispose();
             return;

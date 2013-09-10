@@ -19,10 +19,16 @@ package net.wg.gui.lobby.premiumForm
         {
             super.draw();
             if (isInvalid(PRICE_POSITION) && !(data == null)) 
+            {
                 if (data.isDiscountPackage) 
+                {
                     this.price.width = NORMAL_PRICE_WIDTH;
+                }
                 else 
+                {
                     this.price.x = this.discount.x + this.discount.width - this.price.width;
+                }
+            }
             return;
         }
 
@@ -68,7 +74,9 @@ package net.wg.gui.lobby.premiumForm
         public override function setData(arg1:Object):void
         {
             if (arg1 == null) 
+            {
                 return;
+            }
             super.setData(arg1);
             this.days = MENU.premium_periods("days" + String(arg1.days));
             this.updateData();
@@ -111,9 +119,13 @@ package net.wg.gui.lobby.premiumForm
         {
             var loc1:*=0;
             if (arg2 > 0) 
+            {
                 loc1 = Math.round(100 - arg2 / arg1 * 100);
+            }
             else 
+            {
                 DebugUtils.LOG_ERROR("discountPrice must be greater than 0");
+            }
             if (loc1 < 0 || loc1 > 100) 
             {
                 DebugUtils.LOG_ERROR("Incorrect discountPrice value. DiscountPercent was changed to 0%.");
@@ -127,7 +139,9 @@ package net.wg.gui.lobby.premiumForm
             super.selected = arg1;
             this.pdays.selected = arg1;
             if (data) 
+            {
                 data.isUserSelected = arg1;
+            }
             this.updateSelection();
             return;
         }
@@ -171,7 +185,9 @@ package net.wg.gui.lobby.premiumForm
         protected override function handlePress(arg1:uint=0):void
         {
             if (enabled == false) 
+            {
                 return;
+            }
             super.handlePress(arg1);
             return;
         }

@@ -18,32 +18,44 @@ package net.wg.gui.lobby.vehicleBuyWindow
         public function get selectedPrice():Number
         {
             if (this.btnGroup && this.btnGroup.selectedButton) 
+            {
                 return Number(net.wg.gui.components.controls.TankmanTrainingButton(this.btnGroup.selectedButton).data);
+            }
             return NaN;
         }
 
         public function get isGoldPriceSelected():Boolean
         {
             if (this.btnGroup && this.btnGroup.selectedButton) 
+            {
                 return net.wg.gui.components.controls.TankmanTrainingButton(this.btnGroup.selectedButton).type == "academy";
+            }
             return false;
         }
 
         public function get groupEnabled():Boolean
         {
             if (this.lastSelectedButton) 
+            {
                 return this.lastSelectedButton.selected;
+            }
             return false;
         }
 
         public function set groupEnabled(arg1:Boolean):void
         {
             if (this.groupEnabled == arg1) 
+            {
                 return;
+            }
             if (this.lastSelectedButton) 
+            {
                 this.lastSelectedButton.selected = arg1;
+            }
             if (!arg1) 
+            {
                 this.btnGroup.selectedButton = null;
+            }
             return;
         }
 
@@ -54,11 +66,17 @@ package net.wg.gui.lobby.vehicleBuyWindow
             {
                 loc1 = net.wg.gui.components.controls.TankmanTrainingButton(this.btnGroup.selectedButton);
                 if (loc1.type == "academy") 
+                {
                     return 2;
+                }
                 if (loc1.type == "scool") 
+                {
                     return 1;
+                }
                 if (loc1.type == "free") 
+                {
                     return 0;
+                }
             }
             return -1;
         }
@@ -88,7 +106,9 @@ package net.wg.gui.lobby.vehicleBuyWindow
         internal function groupChangeHandler(arg1:flash.events.Event):void
         {
             if (this.btnGroup.selectedButton) 
+            {
                 this.lastSelectedButton = this.btnGroup.selectedButton;
+            }
             dispatchEvent(new flash.events.Event(BUTTONS_GROUP_SELECTION_CHANGED));
             return;
         }

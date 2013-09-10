@@ -16,7 +16,9 @@ package net.wg.gui.components.common.cursor.base
         public function attachToCursor(arg1:flash.display.Sprite, arg2:Number, arg3:Number):void
         {
             if (this._attachedSprite != null) 
+            {
                 this.detachFromCursor();
+            }
             assertNotNull(arg1, "sprite");
             this._attachedSprite = arg1;
             addChildAt(this._attachedSprite, 0);
@@ -48,7 +50,9 @@ package net.wg.gui.components.common.cursor.base
         {
             this._lastCursor = arg1;
             if (this.cursorIsFree()) 
+            {
                 this.forceSetCursor(arg1);
+            }
             return;
         }
 
@@ -63,7 +67,9 @@ package net.wg.gui.components.common.cursor.base
         {
             this.removeServiceListeners();
             if (this._attachedSprite) 
+            {
                 this.detachFromCursor();
+            }
             super.onDispose();
             return;
         }
@@ -82,7 +88,9 @@ package net.wg.gui.components.common.cursor.base
         protected final function tryToResetCursor():void
         {
             if (this.cursorIsFree()) 
+            {
                 this.resetCursor();
+            }
             return;
         }
 

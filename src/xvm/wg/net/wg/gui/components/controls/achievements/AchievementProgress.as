@@ -16,6 +16,7 @@ package net.wg.gui.components.controls.achievements
             if (isInvalid(PROGRESS_BAR_INVALID)) 
             {
                 if (this.progressBarNeedToShow) 
+                {
                     if (!this.progress) 
                     {
                         this.progress = net.wg.gui.components.controls.achievements.AchievementProgressComponent(App.utils.classFactory.getObject("AchievementProgressComponent_UI"));
@@ -23,6 +24,7 @@ package net.wg.gui.components.controls.achievements
                         this.progress.y = loader.y + loader.originalHeight;
                         addChild(this.progress);
                     }
+                }
                 else if (this.progress) 
                 {
                     this.progress.dispose();
@@ -88,10 +90,14 @@ package net.wg.gui.components.controls.achievements
         {
             var loc1:*=arg1 / 1000000;
             if (loc1 >= 1) 
+            {
                 return getIntegral(Math.floor(loc1)) + "M";
+            }
             loc1 = arg1 / 1000;
             if (loc1 >= 1) 
+            {
                 return getIntegral(Math.floor(loc1)) + "K";
+            }
             return arg1.toString();
         }
 
@@ -99,9 +105,13 @@ package net.wg.gui.components.controls.achievements
         {
             var loc1:*=null;
             if (App.utils) 
+            {
                 loc1 = App.utils.locale.integer(arg1);
+            }
             else 
+            {
                 loc1 = arg1.toString();
+            }
             return loc1;
         }
 

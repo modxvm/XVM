@@ -15,7 +15,9 @@ package net.wg.gui.components.common.video.advanced
         public function get volume():Number
         {
             if (this.soundSlider) 
+            {
                 return this.soundSlider.value;
+            }
             return this._volume;
         }
 
@@ -23,7 +25,9 @@ package net.wg.gui.components.common.video.advanced
         {
             arg1 = isNaN(arg1) ? 0 : arg1;
             if (this.volume == arg1) 
+            {
                 return;
+            }
             this._volume = arg1;
             this.isVolumeInvalid = true;
             invalidate();
@@ -102,7 +106,9 @@ package net.wg.gui.components.common.video.advanced
             {
                 arg1.dispose();
                 if (arg1.parent) 
+                {
                     arg1.parent.removeChild(arg1);
+                }
             }
             return;
         }

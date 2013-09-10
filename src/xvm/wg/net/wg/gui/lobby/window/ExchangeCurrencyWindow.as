@@ -110,7 +110,9 @@ package net.wg.gui.lobby.window
                 this.submitBtn.enabled = this.isSubmitOperationAllowed();
             }
             if (this.isUpdateResult) 
+            {
                 this.applyResultUpdating();
+            }
             return;
         }
 

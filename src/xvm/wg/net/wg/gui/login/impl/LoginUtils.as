@@ -24,7 +24,9 @@ package net.wg.gui.login.impl
         public static function get instance():LoginUtils
         {
             if (ms_instance == null) 
+            {
                 ms_instance = new LoginUtils();
+            }
             return ms_instance;
         }
 

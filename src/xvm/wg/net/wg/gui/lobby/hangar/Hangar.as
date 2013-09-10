@@ -34,7 +34,9 @@ package net.wg.gui.lobby.hangar
             registerComponent(this.ammunitionPanel, net.wg.data.Aliases.AMMUNITION_PANEL);
             addEventListener(net.wg.gui.lobby.hangar.CrewDropDownEvent.SHOW_DROP_DOWN, this.onShowCrewDropwDownHandler);
             if (this.vehResearchPanel != null) 
+            {
                 registerComponent(this.vehResearchPanel, net.wg.data.Aliases.RESEARCH_PANEL);
+            }
             return;
         }
 
@@ -74,7 +76,9 @@ package net.wg.gui.lobby.hangar
         {
             super.draw();
             if (isInvalid(INVALIDATE_ENABLED_CREW)) 
+            {
                 this.crew.enabled = this.crewEnabled;
+            }
             return;
         }
 
@@ -82,7 +86,9 @@ package net.wg.gui.lobby.hangar
         {
             App.contextMenuMgr.hide();
             if (App.helpLayout.isShowed()) 
+            {
                 onEscapeS();
+            }
             return;
         }
 
@@ -125,7 +131,9 @@ package net.wg.gui.lobby.hangar
         internal function updateIgrPosition(arg1:net.wg.gui.events.UILoaderEvent=null):void
         {
             if (this.igrLabel) 
+            {
                 this.igrLabel.x = width - this.igrLabel.width >> 1;
+            }
             return;
         }
 
@@ -148,7 +156,9 @@ package net.wg.gui.lobby.hangar
             }
             this.updateIgrPosition();
             if (this.params) 
+            {
                 this.params.x = arg1 - this.params.width - PARAMS_RIGHT_MARGIN;
+            }
             if (this.ammunitionPanel) 
             {
                 this.ammunitionPanel.x = arg1 - this.ammunitionPanel.width >> 1;
@@ -157,9 +167,13 @@ package net.wg.gui.lobby.hangar
                 this.ammunitionPanel.updateStage(arg1, arg2 - loc1);
             }
             if (this.vehResearchPanel != null) 
+            {
                 this.vehResearchPanel.x = arg1 - RESEARCH_PANEL_RIGHT_MARGIN;
+            }
             if (this._isShowHelpLayout) 
+            {
                 this.as_closeHelpLayout();
+            }
             return;
         }
 
@@ -186,15 +200,25 @@ package net.wg.gui.lobby.hangar
             {
                 this._isShowHelpLayout = true;
                 if (this.crew.visible) 
+                {
                     this.crew.showHelpLayout();
+                }
                 if (this.params.visible) 
+                {
                     this.params.showHelpLayout();
+                }
                 if (this.ammunitionPanel.visible) 
+                {
                     this.ammunitionPanel.showHelpLayout();
+                }
                 if (this.carousel.visible) 
+                {
                     this.carousel.showHelpLayout();
+                }
                 if (this.vehResearchPanel.visible) 
+                {
                     this.vehResearchPanel.showHelpLayout();
+                }
             }
             return;
         }
@@ -226,7 +250,9 @@ package net.wg.gui.lobby.hangar
                 this.igrLabel.source = IGR_LOGO;
             }
             else 
+            {
                 this.igrLabel.visible = false;
+            }
             return;
         }
 

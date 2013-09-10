@@ -29,16 +29,24 @@ package net.wg.gui.lobby.store.inventory.base
                 loc1 = App.utils.locale;
                 credits.gotoAndStop(arg1.currency);
                 if (arg1.currency != net.wg.data.constants.Currencies.GOLD) 
+                {
                     credits.price.text = loc1.integer(arg3);
+                }
                 else 
+                {
                     credits.price.text = loc1.gold(arg2);
+                }
                 if (errorField) 
                 {
                     errorField.text = arg1.disabled;
                     if (arg1.statusLevel) 
+                    {
                         errorField.textColor = net.wg.gui.lobby.store.STORE_STATUS_COLOR.getColor(arg1.statusLevel);
+                    }
                     else 
+                    {
                         errorField.textColor = net.wg.gui.lobby.store.STORE_STATUS_COLOR.INFO;
+                    }
                 }
             }
             enabled = !arg1.disabled;
@@ -55,7 +63,9 @@ package net.wg.gui.lobby.store.inventory.base
         {
             super.setData(arg1);
             if (App.instance && arg1) 
+            {
                 App.utils.asserter.assert(arg1 is net.wg.data.VO.StoreTableData, "data must extends a StoreTableData class.");
+            }
             invalidateData();
             return;
         }

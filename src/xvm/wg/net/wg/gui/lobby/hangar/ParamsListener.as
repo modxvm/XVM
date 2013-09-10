@@ -28,19 +28,33 @@ package net.wg.gui.lobby.hangar
             switch (loc1) 
             {
                 case "vehicleGun":
+                {
                     return this.vehicleGun;
+                }
                 case "vehicleTurret":
+                {
                     return this.vehicleTurret;
+                }
                 case "vehicleEngine":
+                {
                     return this.vehicleEngine;
+                }
                 case "vehicleChassis":
+                {
                     return this.vehicleChassis;
+                }
                 case "vehicleRadio":
+                {
                     return this.vehicleRadio;
+                }
                 case "empty":
+                {
                     return this.empty;
+                }
                 default:
+                {
                     return this.empty;
+                }
             }
         }
 

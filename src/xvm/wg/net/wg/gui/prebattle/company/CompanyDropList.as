@@ -37,25 +37,35 @@ package net.wg.gui.prebattle.company
         internal function mouseOverHandler(arg1:flash.events.MouseEvent):void
         {
             if (!enabled) 
+            {
                 return;
+            }
             if (!_focused) 
+            {
                 setState("over");
+            }
             return;
         }
 
         internal function mouseOutHandler(arg1:flash.events.MouseEvent):void
         {
             if (!enabled) 
+            {
                 return;
+            }
             if (!_focused) 
+            {
                 setState("out");
+            }
             return;
         }
 
         internal function clickHandler(arg1:flash.events.MouseEvent):void
         {
             if (enabled) 
+            {
                 return;
+            }
             setState("down");
             return;
         }

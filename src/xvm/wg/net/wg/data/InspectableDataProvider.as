@@ -47,7 +47,9 @@ package net.wg.data
         {
             var loc1:*=this[arg1];
             if (arg2 != null) 
+            {
                 arg2(loc1);
+            }
             return loc1;
         }
     }

@@ -75,10 +75,14 @@ package net.wg.gui.lobby.store
                 descField.text = loc1.desc;
                 this.updateTexts(loc1, loc5, loc4);
                 if (hitTestPoint(App.stage.mouseX, App.stage.mouseY, true)) 
+                {
                     this.shopTooltip();
+                }
             }
             else 
+            {
                 visible = false;
+            }
             return;
         }
 
@@ -122,21 +126,31 @@ package net.wg.gui.lobby.store
         protected override function handleMouseRollOut(arg1:flash.events.MouseEvent):void
         {
             if (App.instance) 
+            {
                 App.toolTipMgr.hide();
+            }
             if (enabled) 
+            {
                 if (!_focused && !_displayFocus || !(focusIndicator == null)) 
+                {
                     setState("out");
+                }
+            }
             return;
         }
 
         protected override function handleMousePress(arg1:flash.events.MouseEvent):void
         {
             if (App.instance) 
+            {
                 App.toolTipMgr.hide();
+            }
             if (enabled) 
             {
                 setState("down");
-                if (!autoRepeat) ;
+                if (!autoRepeat) 
+                {
+                };
             }
             return;
         }
@@ -162,21 +176,29 @@ package net.wg.gui.lobby.store
                 switch (loc5) 
                 {
                     case net.wg.data.constants.FittingTypes.VEHICLE:
+                    {
                         loc1.showSpecial(this.getTooltipMapping().vehId, null, loc2.id);
                         break;
+                    }
                     case net.wg.data.constants.FittingTypes.SHELL:
+                    {
                         loc1.showSpecial(this.getTooltipMapping().shellId, null, loc2.id, loc2.inventoryCount);
                         break;
+                    }
                     default:
+                    {
                         loc3 = this.getTooltipMapping().defaultId;
                         if (loc3 != net.wg.data.constants.Tooltips.INVENTORY_MODULE) 
+                        {
                             loc1.showSpecial(loc3, null, loc2.id, loc2.inventoryCount, loc2.vehicleCount);
+                        }
                         else 
                         {
                             loc4 = loc2.currency != net.wg.data.constants.Currencies.GOLD ? loc2.credits : loc2.gold;
                             loc1.showSpecial(loc3, null, loc2.id, loc4, loc2.currency, loc2.inventoryCount, loc2.vehicleCount);
                         }
                         break;
+                    }
                 }
             }
             return;
@@ -185,9 +207,13 @@ package net.wg.gui.lobby.store
         internal function onMouseClickHandler(arg1:flash.events.MouseEvent):void
         {
             if (App.utils.commons.isRightButton(arg1)) 
+            {
                 this.onRightButtonClick();
+            }
             else if (App.utils.commons.isLeftButton(arg1) && enabled) 
+            {
                 this.onLeftButtonClick();
+            }
             return;
         }
 

@@ -29,7 +29,9 @@ package net.wg.gui.lobby.profile.pages.statistics
         {
             super.draw();
             if (isInvalid(LAYOUT_INV)) 
+            {
                 this.layoutAll(currentLayout);
+            }
             return;
         }
 
@@ -53,7 +55,9 @@ package net.wg.gui.lobby.profile.pages.statistics
             var loc1:*=null;
             super.layoutAll(arg1);
             if (!renderers) 
+            {
                 return;
+            }
             var loc2:*=0;
             while (loc2 < renderers.length) 
             {

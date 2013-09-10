@@ -35,31 +35,45 @@ package net.wg.gui.lobby.battleResults
             var loc3:*=Math.round(this.renderers[0].width);
             var loc4:*;
             if ((loc4 = (loc3 + this._gap) * loc1) > width) 
+            {
                 this._gap = Math.round((width - loc3 * loc1) / (loc1 - 1));
+            }
             var loc5:*=Math.round(this._gap + loc3 + 2);
             var loc6:*=0;
             if (this._align != ALIGN_RIGHT) 
+            {
                 if (this._align == ALIGN_CENTER) 
+                {
                     loc6 = Math.round((width - loc5 * loc1) / 2);
+                }
+            }
             else 
+            {
                 loc6 = Math.round(width - loc5);
+            }
             var loc7:*=0;
             while (loc1 > loc7) 
             {
                 loc2 = flash.display.MovieClip(this.renderers[loc7]);
                 if (this._align == ALIGN_LEFT || this._align == ALIGN_CENTER) 
+                {
                     loc2.x = Math.round(loc6 + Math.round(loc5 * loc7));
+                }
                 else if (this._align == ALIGN_RIGHT) 
+                {
                     loc2.x = Math.round(loc6 - Math.round(loc5 * loc7));
+                }
                 loc2.y = Math.round((height - loc2.height) / 2);
                 loc2.index = loc7;
                 if (!(this._stripeRenderer == "") && loc2.data.isEpic) 
+                {
                     if (loc8 = this.stripes[loc7]) 
                     {
                         loc8.x = loc2.x - Math.round((loc8.width - loc2.width) / 2);
                         loc8.y = loc2.y - Math.round((loc8.height - loc2.height) / 2);
                         loc8.visible = true;
                     }
+                }
                 loc2.visible = true;
                 ++loc7;
             }
@@ -94,7 +108,9 @@ package net.wg.gui.lobby.battleResults
             arg1.addEventListener(flash.events.MouseEvent.ROLL_OVER, this.dispatchItemEvent, false, 0, true);
             arg1.addEventListener(flash.events.MouseEvent.ROLL_OUT, this.dispatchItemEvent, false, 0, true);
             if (arg1 is net.wg.gui.lobby.battleResults.CustomAchievement) 
+            {
                 net.wg.gui.lobby.battleResults.CustomAchievement(arg1).loader.addEventListener(net.wg.gui.events.UILoaderEvent.COMPLETE, this.onComplete, false, 0, true);
+            }
             return;
         }
 
@@ -111,45 +127,75 @@ package net.wg.gui.lobby.battleResults
             switch (loc8) 
             {
                 case scaleform.clik.events.ButtonEvent.PRESS:
+                {
                     loc1 = scaleform.clik.events.ListEvent.ITEM_PRESS;
                     break;
+                }
                 case scaleform.clik.events.ButtonEvent.CLICK:
+                {
                     loc1 = scaleform.clik.events.ListEvent.ITEM_CLICK;
                     break;
+                }
                 case flash.events.MouseEvent.ROLL_OVER:
+                {
                     loc1 = scaleform.clik.events.ListEvent.ITEM_ROLL_OVER;
                     break;
+                }
                 case flash.events.MouseEvent.ROLL_OUT:
+                {
                     loc1 = scaleform.clik.events.ListEvent.ITEM_ROLL_OUT;
                     break;
+                }
                 case flash.events.MouseEvent.DOUBLE_CLICK:
+                {
                     loc1 = scaleform.clik.events.ListEvent.ITEM_DOUBLE_CLICK;
                     break;
+                }
                 default:
+                {
                     return true;
+                }
             }
             var loc2:*=arg1.currentTarget as scaleform.clik.interfaces.IListItemRenderer;
             var loc3:*=0;
             if (arg1 is scaleform.clik.events.ButtonEvent) 
+            {
                 loc3 = (arg1 as scaleform.clik.events.ButtonEvent).controllerIdx;
+            }
             else if (arg1 is scaleform.gfx.MouseEventEx) 
+            {
                 loc3 = (arg1 as scaleform.gfx.MouseEventEx).mouseIdx;
+            }
             var loc4:*=0;
             if (arg1 is scaleform.clik.events.ButtonEvent) 
+            {
                 loc4 = (arg1 as scaleform.clik.events.ButtonEvent).buttonIdx;
+            }
             else if (arg1 is scaleform.gfx.MouseEventEx) 
+            {
                 loc4 = (arg1 as scaleform.gfx.MouseEventEx).buttonIdx;
+            }
             var loc5:*=false;
             if (arg1 is scaleform.clik.events.ButtonEvent) 
+            {
                 loc5 = (arg1 as scaleform.clik.events.ButtonEvent).isKeyboard;
+            }
             var loc6:*=new scaleform.clik.events.ListEvent(loc1, false, true, loc2.index, 0, loc2.index, loc2, this.dataProvider[loc2.index], loc3, loc4, loc5);
             if (loc1 != scaleform.clik.events.ListEvent.ITEM_ROLL_OVER) 
+            {
                 if (loc1 == scaleform.clik.events.ListEvent.ITEM_ROLL_OUT) 
+                {
                     this.hideTooltip();
+                }
+            }
             else if ((loc7 = this.dataProvider[loc2.index]).type != "markOfMastery") 
+            {
                 this.showToolTip(net.wg.data.constants.Tooltips.BATTLE_STATS_ACHIEVS, loc7);
+            }
             else 
+            {
                 this.showToolTip(net.wg.data.constants.Tooltips.TANK_CLASS, loc7);
+            }
             return dispatchEvent(loc6);
         }
 
@@ -169,7 +215,9 @@ package net.wg.gui.lobby.battleResults
         {
             var loc1:*=arg1.target.index;
             if (isNaN(loc1)) 
+            {
                 return;
+            }
             this.dispatchItemEvent(arg1);
             return;
         }
@@ -247,12 +295,18 @@ package net.wg.gui.lobby.battleResults
         public function set dataProvider(arg1:scaleform.clik.interfaces.IDataProvider):void
         {
             if (this._dataProvider == arg1) 
+            {
                 return;
+            }
             if (this._dataProvider != null) 
+            {
                 this._dataProvider.removeEventListener(flash.events.Event.CHANGE, this.onDataChange, false);
+            }
             this._dataProvider = arg1;
             if (this._dataProvider == null) 
+            {
                 return;
+            }
             this._dataProvider.addEventListener(flash.events.Event.CHANGE, this.onDataChange, false, 0, true);
             invalidateData();
             return;
@@ -261,9 +315,13 @@ package net.wg.gui.lobby.battleResults
         public function clear():void
         {
             while (this.renderers.length) 
+            {
                 this.renderers.pop().removeMovieClip();
+            }
             while (this.stripes.length) 
+            {
                 this.stripes.pop().removeMovieClip();
+            }
             return;
         }
 
@@ -290,23 +348,35 @@ package net.wg.gui.lobby.battleResults
             {
                 this.drawRenderers(this._dataProvider.length);
                 if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+                {
                     this._dataProvider.requestItemRange(0, (this._dataProvider.length - 1), this.populateData);
+                }
                 if (this.renderers.length) 
+                {
                     this.drawLayout();
+                }
             }
             if (isInvalid(INVALIDATE_FILTERS)) 
+            {
                 this.updateFilters();
+            }
             return;
         }
 
         internal function drawRenderers(arg1:Number):void
         {
             while (this.renderers.length) 
+            {
                 this.contentArea.removeChild(this.renderers.pop());
+            }
             while (this.stripes.length) 
+            {
                 this.stripesArea.removeChild(this.stripes.pop());
+            }
             while (this.renderers.length < arg1) 
+            {
                 this.renderers.push(this.createItemRenderer());
+            }
             return;
         }
 

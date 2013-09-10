@@ -30,14 +30,20 @@ package net.wg.gui.lobby.techtree.nodes
         {
             super.draw();
             if (!_baseDisposed) 
+            {
                 if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+                {
                     if (this._valueObject == null) 
+                    {
                         visible = false;
+                    }
                     else 
                     {
                         visible = true;
                         this.populateUI();
                     }
+                }
+            }
             return;
         }
 
@@ -45,9 +51,13 @@ package net.wg.gui.lobby.techtree.nodes
         {
             var loc1:*=new Vector.<flash.display.DisplayObjectContainer>();
             if (this.hit != null) 
+            {
                 loc1.push(this.hit);
+            }
             if (this.button != null) 
+            {
                 loc1.push(this.button);
+            }
             return loc1;
         }
 
@@ -102,7 +112,9 @@ package net.wg.gui.lobby.techtree.nodes
         protected override function updateAfterStateChange():void
         {
             if (this.isDelegateEvents) 
+            {
                 this.disableMouseChildren();
+            }
             super.updateAfterStateChange();
             return;
         }
@@ -110,9 +122,13 @@ package net.wg.gui.lobby.techtree.nodes
         protected override function handleMouseRollOver(arg1:flash.events.MouseEvent):void
         {
             if (App.soundMgr) 
+            {
                 App.soundMgr.playControlsSnd(net.wg.data.constants.SoundManagerStates.SND_OVER, soundId, soundType);
+            }
             if (this._tooltipID && !(App.toolTipMgr == null)) 
+            {
                 App.toolTipMgr.showSpecial(this._tooltipID, null, this._valueObject, this._container == null ? null : this._container.getRootNode().getID());
+            }
             super.handleMouseRollOver(arg1);
             return;
         }
@@ -121,9 +137,13 @@ package net.wg.gui.lobby.techtree.nodes
         {
             this.container = null;
             if (this.button != null) 
+            {
                 this.button.dispose();
+            }
             if (this.isDelegateEvents && !(this.hit == null)) 
+            {
                 this.removeEventsHandlers();
+            }
             this.dataInited = false;
             this._valueObject = null;
             super.dispose();
@@ -133,9 +153,13 @@ package net.wg.gui.lobby.techtree.nodes
         protected override function handleMouseRollOut(arg1:flash.events.MouseEvent):void
         {
             if (App.soundMgr) 
+            {
                 App.soundMgr.playControlsSnd(net.wg.data.constants.SoundManagerStates.SND_OUT, soundId, soundType);
+            }
             if (App.toolTipMgr != null) 
+            {
                 App.toolTipMgr.hide();
+            }
             super.handleMouseRollOut(arg1);
             return;
         }
@@ -144,16 +168,22 @@ package net.wg.gui.lobby.techtree.nodes
         {
             super.handleMouseRelease(arg1);
             if (arg1.eventPhase == flash.events.EventPhase.AT_TARGET && arg1 is scaleform.gfx.MouseEventEx && (arg1 as scaleform.gfx.MouseEventEx).buttonIdx == scaleform.gfx.MouseEventEx.RIGHT_BUTTON) 
+            {
                 this.showContextMenu();
+            }
             return;
         }
 
         protected override function handleMousePress(arg1:flash.events.MouseEvent):void
         {
             if (App.soundMgr) 
+            {
                 App.soundMgr.playControlsSnd(net.wg.data.constants.SoundManagerStates.SND_PRESS, soundId, soundType);
+            }
             if (App.toolTipMgr != null) 
+            {
                 App.toolTipMgr.hide();
+            }
             super.handleMousePress(arg1);
             return;
         }
@@ -178,19 +208,27 @@ package net.wg.gui.lobby.techtree.nodes
         {
             var loc2:*=null;
             if (arg3 != 0) 
+            {
                 this._entityType = arg3;
+            }
             this._index = arg1;
             this._matrixPosition = arg4;
             if (this._valueObject == arg2 || arg2 == null) 
+            {
                 return;
+            }
             this._valueObject = arg2;
             this.dataInited = true;
             this.updateStatesProps();
             setState(state);
             var loc1:*;
             if (!((loc1 = this.getDisplayInfo()) == null) && loc1 is net.wg.gui.lobby.techtree.data.vo.NTDisplayInfo) 
+            {
                 if ((loc2 = (loc1 as net.wg.gui.lobby.techtree.data.vo.NTDisplayInfo).position) != null) 
+                {
                     this.setPosition(loc2);
+                }
+            }
             return;
         }
 
@@ -266,7 +304,9 @@ package net.wg.gui.lobby.techtree.nodes
         public function isAvailable4Unlock():Boolean
         {
             if (!this.dataInited) 
+            {
                 return false;
+            }
             var loc1:*=this._valueObject.state;
             return (loc1 & net.wg.gui.lobby.techtree.constants.NodeState.NEXT_2_UNLOCK) > 0 && (loc1 & net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_XP) > 0;
         }
@@ -274,7 +314,9 @@ package net.wg.gui.lobby.techtree.nodes
         public function isAvailable4Buy():Boolean
         {
             if (!this.dataInited) 
+            {
                 return false;
+            }
             var loc1:*=this._valueObject.state;
             return (loc1 & net.wg.gui.lobby.techtree.constants.NodeState.UNLOCKED) > 0 && (loc1 & net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_MONEY) > 0 && (loc1 & net.wg.gui.lobby.techtree.constants.NodeState.IN_INVENTORY) == 0;
         }
@@ -287,7 +329,9 @@ package net.wg.gui.lobby.techtree.nodes
         public function isActionEnabled():Boolean
         {
             if (!this.dataInited) 
+            {
                 return false;
+            }
             return this.stateProps.enough == 0 || (this._valueObject.state & this.stateProps.enough) > 0;
         }
 
@@ -315,24 +359,36 @@ package net.wg.gui.lobby.techtree.nodes
         {
             var loc1:*=null;
             if (!this.dataInited) 
+            {
                 return "";
+            }
             var loc2:*=arg1;
             switch (loc2) 
             {
                 case net.wg.gui.lobby.techtree.constants.NamedLabels.XP_COST:
+                {
                     loc1 = this._valueObject.unlockProps.xpCostLabel;
                     break;
+                }
                 case net.wg.gui.lobby.techtree.constants.NamedLabels.EARNED_XP:
+                {
                     loc1 = this._valueObject.earnedXPLabel;
                     break;
+                }
                 case net.wg.gui.lobby.techtree.constants.NamedLabels.CREDITS_PRICE:
+                {
                     loc1 = this._valueObject.shopPrice.creditsLabel;
                     break;
+                }
                 case net.wg.gui.lobby.techtree.constants.NamedLabels.GOLD_PRICE:
+                {
                     loc1 = this._valueObject.shopPrice.goldLabel;
                     break;
+                }
                 default:
+                {
                     loc1 = "";
+                }
             }
             return loc1;
         }
@@ -360,11 +416,19 @@ package net.wg.gui.lobby.techtree.nodes
         {
             var loc1:*=net.wg.gui.lobby.techtree.constants.ColorIndex.LOCKED;
             if (this.isUnlocked()) 
+            {
                 if (arg1 == -1 || arg1 > 0 && this.isParentUnlocked(arg1)) 
+                {
                     loc1 = net.wg.gui.lobby.techtree.constants.ColorIndex.UNLOCKED;
+                }
+            }
             else if (this.isNext2Unlock()) 
+            {
                 if (arg1 == -1 || arg1 > 0 && this.isParentUnlocked(arg1)) 
+                {
                     loc1 = net.wg.gui.lobby.techtree.constants.ColorIndex.NEXT2UNLOCK;
+                }
+            }
             return loc1;
         }
 
@@ -372,11 +436,19 @@ package net.wg.gui.lobby.techtree.nodes
         {
             var loc1:*=net.wg.gui.lobby.techtree.constants.ColorIndex.LOCKED;
             if (this.isUnlocked()) 
+            {
                 if (arg1 == null || arg1.isUnlocked()) 
+                {
                     loc1 = net.wg.gui.lobby.techtree.constants.ColorIndex.UNLOCKED;
+                }
+            }
             else if (this.isNext2Unlock()) 
+            {
                 if (arg1 == null || arg1.isUnlocked()) 
+                {
                     loc1 = net.wg.gui.lobby.techtree.constants.ColorIndex.NEXT2UNLOCK;
+                }
+            }
             return loc1;
         }
 
@@ -487,9 +559,13 @@ package net.wg.gui.lobby.techtree.nodes
         protected override function configUI():void
         {
             if (this.isDelegateEvents && !(this.hit == null)) 
+            {
                 this.delegateEventsHandlers();
+            }
             else 
+            {
                 super.configUI();
+            }
             return;
         }
 

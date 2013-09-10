@@ -14,9 +14,13 @@ package net.wg.gui.lobby.hangar.tcarousel
         public function close():void
         {
             if (this.nationFilter && this.nationFilter.isOpen()) 
+            {
                 this.nationFilter.close();
+            }
             if (this.tankFilter && this.tankFilter.isOpen()) 
+            {
                 this.tankFilter.close();
+            }
             return;
         }
 
@@ -28,7 +32,9 @@ package net.wg.gui.lobby.hangar.tcarousel
         public override function set enabled(arg1:Boolean):void
         {
             if (arg1 == super.enabled) 
+            {
                 return;
+            }
             this.nationFilter.enabled = arg1;
             this.tankFilter.enabled = arg1;
             this.checkBoxToMain.enabled = arg1;

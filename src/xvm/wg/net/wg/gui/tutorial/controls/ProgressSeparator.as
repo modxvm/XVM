@@ -21,7 +21,9 @@ package net.wg.gui.tutorial.controls
             this.label.text = String(arg1 + 1);
             this.labelMc.x = arg2 - this.label.textWidth >> 1;
             if (arg1 == 0) 
+            {
                 this.marker.visible = false;
+            }
             return;
         }
 

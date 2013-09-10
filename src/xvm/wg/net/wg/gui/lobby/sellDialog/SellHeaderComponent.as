@@ -72,9 +72,13 @@ package net.wg.gui.lobby.sellDialog
             var loc1:*=null;
             this.tankNameTF.text = arg1.userName;
             if (arg1.isElite) 
+            {
                 loc1 = this.locale.makeString(TOOLTIPS.tankcaruseltooltip_vehicletype_elite(arg1.type), {});
+            }
             else 
+            {
                 loc1 = this.locale.makeString(DIALOGS.vehicleselldialog_vehicletype(arg1.type), {});
+            }
             this.tankDescribeTF.text = loc1;
             var loc2:*=new flash.text.TextFormat();
             loc2 = this.tankLevelTF.getTextFormat();
@@ -95,7 +99,9 @@ package net.wg.gui.lobby.sellDialog
             while (loc6 < arg1.crew.length) 
             {
                 if (arg1.crew[loc6] != (null || undefined)) 
+                {
                     ++loc5;
+                }
                 ++loc6;
             }
             if (loc5 != 0) 

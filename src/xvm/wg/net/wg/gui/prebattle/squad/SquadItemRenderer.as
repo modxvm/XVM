@@ -55,7 +55,9 @@ package net.wg.gui.prebattle.squad
                 return;
             }
             if (!visible) 
+            {
                 visible = true;
+            }
             this.data = arg1;
             invalidate(UPDATE_STATUS);
             return;
@@ -96,11 +98,17 @@ package net.wg.gui.prebattle.squad
         protected function afterSetData():void
         {
             if (this.status) 
+            {
                 this.status.visible = false;
+            }
             else 
+            {
                 return;
+            }
             if (this.model == null) 
+            {
                 return;
+            }
             var loc4:*;
             this.vehicleNameField.alpha = loc4 = 1;
             textField.alpha = loc4;
@@ -116,7 +124,9 @@ package net.wg.gui.prebattle.squad
                 }
                 this.status.visible = true;
                 if (this.hitTestPoint(mouseX, mouseY, true)) 
+                {
                     this.showToolTips();
+                }
             }
             var loc2:*=4290295975;
             var loc3:*=loc2;
@@ -136,7 +146,9 @@ package net.wg.gui.prebattle.squad
         {
             super.updateAfterStateChange();
             if (!initialized || this.model == null) 
+            {
                 return;
+            }
             this.vehicleNameField.text = this.model.vShortName;
             this.updateVoiceWave();
             var loc1:*=this.model.getCurrentColor();
@@ -153,7 +165,9 @@ package net.wg.gui.prebattle.squad
             super.handleMouseRollOver(arg1);
             this.showToolTips();
             if (enabled) 
+            {
                 this.playSound("over");
+            }
             return;
         }
 
@@ -161,7 +175,9 @@ package net.wg.gui.prebattle.squad
         {
             var loc1:*=this.model.accID != -1 ? this.getToolTipData() : MESSENGER.DIALOGS_TEAMCHANNEL_BUTTONS_INVITE;
             if (loc1 && loc1.length > 0) 
+            {
                 App.toolTipMgr.show(loc1);
+            }
             return;
         }
 
@@ -170,7 +186,9 @@ package net.wg.gui.prebattle.squad
             super.handleMouseRollOut(arg1);
             App.toolTipMgr.hide();
             if (enabled) 
+            {
                 this.playSound("out");
+            }
             return;
         }
 
@@ -178,14 +196,18 @@ package net.wg.gui.prebattle.squad
         {
             super.handleMousePress(arg1);
             if (enabled) 
+            {
                 this.playSound("press");
+            }
             return;
         }
 
         protected function getToolTipData():String
         {
             if (this.statusString && this.statusString == net.wg.gui.prebattle.constants.PrebattleStateString.OFFLINE_READY) 
+            {
                 this.statusString = net.wg.gui.prebattle.constants.PrebattleStateString.OFFLINE;
+            }
             return this.statusString == null ? null : "#messenger:dialogs/squadChannel/tooltips/status/" + this.statusString;
         }
 
@@ -204,7 +226,9 @@ package net.wg.gui.prebattle.squad
         public function onPlayerSpeak(arg1:uint, arg2:Boolean):void
         {
             if (this.model && arg1 == this.model.uid) 
+            {
                 this.setSpeakers(arg2);
+            }
             return;
         }
 
@@ -218,9 +242,13 @@ package net.wg.gui.prebattle.squad
         protected function setSpeakers(arg1:Boolean, arg2:Boolean=false):void
         {
             if (arg1) 
+            {
                 arg2 = false;
+            }
             if (this.voiceWave is net.wg.gui.components.controls.VoiceWave) 
+            {
                 this.voiceWave.setSpeaking(arg1, arg2);
+            }
             return;
         }
 

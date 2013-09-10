@@ -25,7 +25,9 @@ package net.wg.gui.lobby.settings.components
         public override function dispose():void
         {
             if (data) 
+            {
                 data = null;
+            }
             if (this.keyInput && this.keyInput.hasEventListener(net.wg.gui.lobby.settings.components.evnts.KeyInputEvents.CHANGE)) 
             {
                 this.keyInput.removeEventListener(net.wg.gui.lobby.settings.components.evnts.KeyInputEvents.CHANGE, this.onKeyChange);
@@ -56,9 +58,13 @@ package net.wg.gui.lobby.settings.components
             super.enabled = arg1;
             mouseChildren = true;
             if (super.enabled) 
+            {
                 loc1 = _focusIndicator == null && (_displayFocus || _focused) ? "over" : "up";
+            }
             else 
+            {
                 loc1 = "disabled";
+            }
             setState(loc1);
             return;
         }
@@ -71,7 +77,9 @@ package net.wg.gui.lobby.settings.components
         public override function set label(arg1:String):void
         {
             if (_label == arg1) 
+            {
                 return;
+            }
             _label = arg1;
             invalidate(this.INVALID_TEXT);
             return;
@@ -85,7 +93,9 @@ package net.wg.gui.lobby.settings.components
         public function set header(arg1:Boolean):void
         {
             if (arg1 == this._header) 
+            {
                 return;
+            }
             this._header = arg1;
             setState("up");
             return;
@@ -124,7 +134,9 @@ package net.wg.gui.lobby.settings.components
                     }
                 }
                 if (isInvalid(this.INVALID_TEXT)) 
+                {
                     this.setText();
+                }
             }
             super.draw();
             return;
@@ -133,29 +145,39 @@ package net.wg.gui.lobby.settings.components
         protected override function updateText():void
         {
             if (this._header) 
+            {
                 super.updateText();
+            }
             return;
         }
 
         protected override function getStatePrefixes():__AS3__.vec.Vector.<String>
         {
             if (this._header) 
+            {
                 return Vector.<String>(["header_", ""]);
+            }
             return _selected ? statesSelected : statesDefault;
         }
 
         internal function keyCodeWasUsed(arg1:Number):Object
         {
             if (arg1 == net.wg.data.constants.KeysMap.KEY_NONE) 
+            {
                 return null;
+            }
             var loc1:*=net.wg.gui.lobby.settings.components.KeysScrollingList(owner).dataProvider;
             var loc2:*=loc1.length;
             var loc3:*=0;
             while (loc3 < loc2) 
             {
                 if (!loc1[loc3].header && !(loc3 == this.index)) 
+                {
                     if (this.keyInput.keyCode == loc1[loc3].key) 
+                    {
                         return loc1[loc3];
+                    }
+                }
                 ++loc3;
             }
             return null;
@@ -187,9 +209,13 @@ package net.wg.gui.lobby.settings.components
         {
             var loc1:*=this.keyCodeWasUsed(arg1.keyCode);
             if (loc1) 
+            {
                 loc1.key = net.wg.data.constants.KeysMap.KEY_NONE;
+            }
             if (data && data.hasOwnProperty("key")) 
+            {
                 data.key = arg1.keyCode;
+            }
             dispatchEvent(new net.wg.gui.lobby.settings.components.evnts.KeyInputEvents(net.wg.gui.lobby.settings.components.evnts.KeyInputEvents.CHANGE, arg1.keyCode));
             return;
         }

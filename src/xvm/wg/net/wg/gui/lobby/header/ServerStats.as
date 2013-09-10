@@ -65,14 +65,20 @@ package net.wg.gui.lobby.header
             switch (loc1) 
             {
                 case TYPE_CLUSTER:
+                {
                     App.toolTipMgr.showComplex(TOOLTIPS.HEADER_INFO_PLAYERS_ONLINE_REGION);
                     break;
+                }
                 case TYPE_FULL:
+                {
                     App.toolTipMgr.showComplex(this.tooltipFullData);
                     break;
+                }
                 default:
+                {
                     App.toolTipMgr.showComplex(TOOLTIPS.HEADER_INFO_PLAYERS_ONLINE_REGION);
                     break;
+                }
             }
             return;
         }

@@ -20,7 +20,9 @@ package net.wg.gui.lobby.techtree.controls
         public function setData(arg1:net.wg.gui.lobby.techtree.data.vo.ExtraInformation):void
         {
             if (arg1 == null) 
+            {
                 return;
+            }
             this._data = arg1;
             invalidateData();
             return;
@@ -44,7 +46,9 @@ package net.wg.gui.lobby.techtree.controls
                     this.titleField.width = this.titleField.textWidth + TITLE_PADDING;
                 }
                 if (this.benefitField != null) 
+                {
                     this.benefitField.text = this._data.benefitsHead == null ? "" : this._data.benefitsHead;
+                }
                 if (this.contentField != null) 
                 {
                     this.contentField.multiline = true;
@@ -53,7 +57,9 @@ package net.wg.gui.lobby.techtree.controls
                     this.contentField.htmlText = this._data.benefitsList == null ? "" : this._data.benefitsList;
                 }
                 if (this.typeIcon != null) 
+                {
                     this.typeIcon.gotoAndStop(this._data.type + ELITE_SUFFIX);
+                }
             }
             super.draw();
             return;

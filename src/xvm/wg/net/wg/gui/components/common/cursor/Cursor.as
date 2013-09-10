@@ -22,14 +22,20 @@ package net.wg.gui.components.common.cursor
         public override function registerDragging(arg1:net.wg.infrastructure.interfaces.entity.IDragDropHitArea, arg2:String=null):void
         {
             if (!(arg1 is net.wg.infrastructure.interfaces.entity.IDraggable) && !(arg1 is net.wg.infrastructure.interfaces.entity.IDroppable)) 
+            {
                 DebugUtils.LOG_ERROR(CAST_MSG_ERROR);
+            }
             else 
             {
                 super.registerDragging(arg1, arg2);
                 if (arg1 is net.wg.infrastructure.interfaces.entity.IDraggable) 
+                {
                     this.registerDrag(net.wg.infrastructure.interfaces.entity.IDraggable(arg1), arg2);
+                }
                 if (arg1 is net.wg.infrastructure.interfaces.IView) 
+                {
                     net.wg.infrastructure.interfaces.IView(arg1).addEventListener(net.wg.infrastructure.events.LifeCycleEvent.ON_AFTER_DISPOSE, this.onAfterDraggableObjDispose);
+                }
             }
             return;
         }
@@ -42,17 +48,25 @@ package net.wg.gui.components.common.cursor
         public override function unRegisterDragging(arg1:net.wg.infrastructure.interfaces.entity.IDragDropHitArea):void
         {
             if (!disposed) 
+            {
                 if (!(arg1 is net.wg.infrastructure.interfaces.entity.IDraggable) && !(arg1 is net.wg.infrastructure.interfaces.entity.IDroppable)) 
+                {
                     DebugUtils.LOG_ERROR(CAST_MSG_ERROR);
+                }
                 else 
                 {
                     super.unRegisterDragging(arg1);
                     assertNotNull(arg1, "container");
                     if (arg1 is net.wg.infrastructure.interfaces.entity.IDraggable) 
+                    {
                         this.unRegisterDrag(net.wg.infrastructure.interfaces.entity.IDraggable(arg1));
+                    }
                     if (arg1 is net.wg.infrastructure.interfaces.IView) 
+                    {
                         flash.events.EventDispatcher(arg1).removeEventListener(net.wg.infrastructure.events.LifeCycleEvent.ON_AFTER_DISPOSE, this.onAfterDraggableObjDispose);
+                    }
                 }
+            }
             return;
         }
 
@@ -136,7 +150,9 @@ package net.wg.gui.components.common.cursor
             {
                 this._isOnDragging = arg1;
                 if (arg2) 
+                {
                     tryToResetCursor();
+                }
             }
             return;
         }
@@ -144,7 +160,9 @@ package net.wg.gui.components.common.cursor
         internal function onEnterToDragMode(arg1:flash.events.MouseEvent):void
         {
             if (!this._isOnDragging) 
+            {
                 forceSetCursor(net.wg.data.constants.Cursors.DRAG_OPEN);
+            }
             return;
         }
 
@@ -223,7 +241,9 @@ package net.wg.gui.components.common.cursor
             net.wg.infrastructure.interfaces.IView(loc1).removeEventListener(net.wg.infrastructure.events.LifeCycleEvent.ON_AFTER_DISPOSE, this.onAfterDraggableObjDispose);
             var loc2:*=net.wg.gui.components.common.cursor.base.BaseInfo.getHitFromContainer(loc1);
             if (this._dragObjects[loc2] != undefined) 
+            {
                 this.unRegisterDragging(loc1);
+            }
             return;
         }
 

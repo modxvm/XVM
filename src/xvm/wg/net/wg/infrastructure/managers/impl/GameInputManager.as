@@ -41,9 +41,13 @@ package net.wg.infrastructure.managers.impl
         {
             this.assertEventType(arg2);
             if (this._inputHandlers[arg1] == undefined) 
+            {
                 this._inputHandlers[arg1] = new flash.utils.Dictionary();
+            }
             if (this._inputHandlers[arg1][arg2] != undefined) 
+            {
                 DebugUtils.LOG_WARNING("GameInputHandler.setKeyHandler. Existing handler for keyCode = " + arg1 + " and event = " + arg2 + " is to be reset!");
+            }
             this._inputHandlers[arg1][arg2] = new GameInputCallback(arg3, arg4);
             return;
         }
@@ -54,7 +58,9 @@ package net.wg.infrastructure.managers.impl
             this._inputHandlers[arg1][arg2].dispose();
             delete this._inputHandlers[arg1][arg2];
             if (this.getDictLength(this._inputHandlers[arg1]) == 0) 
+            {
                 delete this._inputHandlers[arg1];
+            }
             return;
         }
 
@@ -116,7 +122,9 @@ package net.wg.infrastructure.managers.impl
             var loc3:*=0;
             var loc4:*=arg1;
             for (loc2 in loc4) 
+            {
                 ++loc1;
+            }
             return loc1;
         }
 
@@ -136,17 +144,27 @@ package net.wg.infrastructure.managers.impl
             {
                 details = event.details;
                 if (event.handled || this._ignoredKeyCode == details.code) 
+                {
                     return;
+                }
                 callback = null;
                 if (this._inputHandlers[details.code] == undefined) 
+                {
                     return;
+                }
                 callback = this._inputHandlers[details.code][details.value] as GameInputCallback;
                 if (!callback) 
+                {
                     return;
+                }
                 focused = App.utils.focusHandler.getFocus(0) as scaleform.clik.controls.TextInput;
                 if (callback.isIgnoreText && !(focused == null)) 
+                {
                     if (focused.editable && focused.enabled) 
+                    {
                         return;
+                    }
+                }
                 callback.envoke(event);
             }
             catch (e:Error)

@@ -28,7 +28,9 @@ package net.wg.gui.lobby.battleResults
         public override function setData(arg1:Object):void
         {
             if (arg1 == null) 
+            {
                 return;
+            }
             this.data = arg1;
             this._dataDirty = true;
             this.drawLoader();
@@ -40,16 +42,24 @@ package net.wg.gui.lobby.battleResults
             if (this._dataDirty) 
             {
                 if (data == null) 
+                {
                     return;
+                }
                 if (this.getDataOwnValue("isRare", false)) 
+                {
                     this.tryToLoadRareAchievement();
+                }
                 else if (!(this.loader == null) && data.icon) 
                 {
                     this.loader.addEventListener(net.wg.gui.events.UILoaderEvent.COMPLETE, this.onComplete);
                     if (data.icon is net.wg.data.VO.IconVO) 
+                    {
                         this.loader.source = data.icon.big;
+                    }
                     else 
+                    {
                         this.loader.source = data.icon;
+                    }
                 }
                 this._dataDirty = false;
             }
@@ -73,7 +83,9 @@ package net.wg.gui.lobby.battleResults
             {
                 loc1 = data.hasOwnProperty(arg1) ? data[arg1] : arg2;
                 if (loc1 is Function) 
+                {
                     return loc1();
+                }
             }
             return loc1;
         }
@@ -89,7 +101,9 @@ package net.wg.gui.lobby.battleResults
         {
             this.loader.removeEventListener(net.wg.gui.events.UILoaderEvent.COMPLETE, this.onComplete);
             if (data.hasOwnProperty("inactive") && data.inactive) 
+            {
                 this.changeSaturation();
+            }
             return;
         }
 

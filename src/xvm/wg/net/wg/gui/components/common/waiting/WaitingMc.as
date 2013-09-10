@@ -22,7 +22,9 @@ package net.wg.gui.components.common.waiting
         {
             super.draw();
             if (isInvalid(TEXT_INVALID)) 
+            {
                 this.textField.text = this._text;
+            }
             return;
         }
 

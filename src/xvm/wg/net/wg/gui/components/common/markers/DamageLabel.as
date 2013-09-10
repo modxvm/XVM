@@ -15,9 +15,13 @@ package net.wg.gui.components.common.markers
         {
             super.draw();
             if (isInvalid(INVALIDATE_COLOR)) 
+            {
                 gotoAndStop(this._color);
+            }
             if (isInvalid(INVALIDATE_TEXT)) 
+            {
                 this.label.text = this._text;
+            }
             return;
         }
 

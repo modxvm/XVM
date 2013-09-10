@@ -42,6 +42,7 @@ package net.wg.gui.lobby.hangar.maintenance
             var loc1:*=null;
             super.draw();
             if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+            {
                 if (data) 
                 {
                     visible = true;
@@ -55,7 +56,10 @@ package net.wg.gui.lobby.hangar.maintenance
                     this.price.validateNow();
                 }
                 else 
+                {
                     visible = false;
+                }
+            }
             return;
         }
 
@@ -79,7 +83,9 @@ package net.wg.gui.lobby.hangar.maintenance
             {
                 loc1 = arg1 as scaleform.gfx.MouseEventEx;
                 if (loc1.buttonIdx == scaleform.gfx.MouseEventEx.RIGHT_BUTTON) 
+                {
                     dispatchEvent(new net.wg.gui.events.ModuleInfoEvent(net.wg.gui.events.ModuleInfoEvent.SHOW_INFO, net.wg.gui.lobby.hangar.maintenance.data.ShellVO(data).id));
+                }
             }
             return;
         }

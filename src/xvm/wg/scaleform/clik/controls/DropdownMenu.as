@@ -34,13 +34,21 @@ package scaleform.clik.controls
         public function itemToLabel(arg1:Object):String
         {
             if (arg1 == null) 
+            {
                 return "";
+            }
             if (this._labelFunction != null) 
+            {
                 return this._labelFunction(arg1);
+            }
             if (arg1 is String) 
+            {
                 return arg1.toString();
+            }
             if (!(this._labelField == null) && !(arg1[this._labelField] == null)) 
+            {
                 return arg1[this._labelField];
+            }
             return arg1.toString();
         }
 
@@ -80,12 +88,16 @@ package scaleform.clik.controls
         public override function handleInput(arg1:scaleform.clik.events.InputEvent):void
         {
             if (arg1.handled) 
+            {
                 return;
+            }
             if (!(this._dropdownRef == null) && this.selected) 
             {
                 this._dropdownRef.handleInput(arg1);
                 if (arg1.handled) 
+                {
                     return;
+                }
             }
             super.handleInput(arg1);
             var loc1:*=arg1.details;
@@ -94,14 +106,20 @@ package scaleform.clik.controls
             switch (loc3) 
             {
                 case scaleform.clik.constants.NavigationCode.ESCAPE:
+                {
                     if (this.selected) 
                     {
                         if (loc2) 
+                        {
                             this.close();
+                        }
                         arg1.handled = true;
                     }
+                }
                 default:
+                {
                     break;
+                }
             }
             return;
         }
@@ -126,7 +144,9 @@ package scaleform.clik.controls
         {
             super.changeFocus();
             if (_selected && this._dropdownRef) 
+            {
                 this.close();
+            }
             return;
         }
 
@@ -152,9 +172,13 @@ package scaleform.clik.controls
         protected function handleStageClick(arg1:flash.events.MouseEvent):void
         {
             if (this.contains(arg1.target as flash.display.DisplayObject)) 
+            {
                 return;
+            }
             if (this._dropdownRef.contains(arg1.target as flash.display.DisplayObject)) 
+            {
                 return;
+            }
             this.close();
             return;
         }
@@ -164,23 +188,35 @@ package scaleform.clik.controls
             var loc1:*=null;
             var loc2:*=null;
             if (this.dropdown == null) 
+            {
                 return;
+            }
             if (this.dropdown is String && !(this.dropdown == "")) 
             {
                 loc2 = flash.utils.getDefinitionByName(this.dropdown.toString()) as Class;
                 if (loc2 != null) 
+                {
                     loc1 = new loc2() as scaleform.clik.controls.CoreList;
+                }
             }
             if (loc1) 
             {
                 if (this.itemRenderer is String && !(this.itemRenderer == "")) 
+                {
                     loc1.itemRenderer = flash.utils.getDefinitionByName(this.itemRenderer.toString()) as Class;
+                }
                 else if (this.itemRenderer is Class) 
+                {
                     loc1.itemRenderer = this.itemRenderer as Class;
+                }
                 if (this.scrollBar is String && !(this.scrollBar == "")) 
+                {
                     loc1.scrollBar = flash.utils.getDefinitionByName(this.scrollBar.toString()) as Class;
+                }
                 else if (this.scrollBar is Class) 
+                {
                     loc1.scrollBar = this.scrollBar as Class;
+                }
                 loc1.selectedIndex = this._selectedIndex;
                 loc1.width = this.menuWidth != -1 ? this.menuWidth : width + this.menuOffset.left + this.menuOffset.right;
                 loc1.dataProvider = this._dataProvider;
@@ -274,9 +310,13 @@ package scaleform.clik.controls
         protected override function handleClick(arg1:uint=0):void
         {
             if (_selected) 
+            {
                 this.close();
+            }
             else 
+            {
                 this.open();
+            }
             super.handleClick();
             return;
         }
@@ -284,7 +324,9 @@ package scaleform.clik.controls
         public function set inspectableMenuPadding(arg1:Object):void
         {
             if (!componentInspectorSetting) 
+            {
                 return;
+            }
             this.menuPadding = new scaleform.clik.utils.Padding(arg1.top, arg1.right, arg1.bottom, arg1.left);
             return;
         }
@@ -292,7 +334,9 @@ package scaleform.clik.controls
         public function set inspectableMenuOffset(arg1:Object):void
         {
             if (!componentInspectorSetting) 
+            {
                 return;
+            }
             this.menuOffset = new scaleform.clik.utils.Padding(arg1.top, arg1.right, arg1.bottom, arg1.left);
             return;
         }
@@ -300,7 +344,9 @@ package scaleform.clik.controls
         public function set inspectableThumbOffset(arg1:Object):void
         {
             if (!componentInspectorSetting) 
+            {
                 return;
+            }
             this.thumbOffsetTop = Number(arg1.top);
             this.thumbOffsetBottom = Number(arg1.bottom);
             return;
@@ -327,7 +373,9 @@ package scaleform.clik.controls
             var loc1:*=null;
             var loc2:*=0;
             if (this._selectedIndex == arg1) 
+            {
                 return;
+            }
             this._selectedIndex = arg1;
             this.invalidateSelectedIndex();
             if (this._dropdownRef != null) 
@@ -347,15 +395,23 @@ package scaleform.clik.controls
         public function set dataProvider(arg1:scaleform.clik.interfaces.IDataProvider):void
         {
             if (this._dataProvider == arg1) 
+            {
                 return;
+            }
             if (this._dataProvider != null) 
+            {
                 this._dataProvider.removeEventListener(flash.events.Event.CHANGE, this.handleDataChange, false);
+            }
             this._dataProvider = arg1;
             var loc1:*=this._dataProvider.length;
             if (!this.menuRowsFixed && loc1 > 0 && loc1 < this.menuRowCount) 
+            {
                 this.menuRowCount = loc1;
+            }
             if (this._dataProvider == null) 
+            {
                 return;
+            }
             this._dataProvider.addEventListener(flash.events.Event.CHANGE, this.handleDataChange, false, 0, true);
             invalidateData();
             return;

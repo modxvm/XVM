@@ -42,17 +42,23 @@ package net.wg.gui.lobby.techtree
         public function as_setAvailableNations(arg1:Array):void
         {
             if (this.nationsBar != null) 
+            {
                 this.nationsBar.dataProvider = new scaleform.clik.data.DataProvider(arg1);
+            }
             return;
         }
 
         public function as_setSelectedNation(arg1:String):void
         {
             if (!this.nationsBar) 
+            {
                 return;
+            }
             var loc1:*=this.nationsBar.dataProvider.indexOf(arg1);
             if (loc1 > -1) 
+            {
                 this.nationsBar.selectedIndex = loc1;
+            }
             return;
         }
 
@@ -60,7 +66,9 @@ package net.wg.gui.lobby.techtree
         {
             var loc1:*=null;
             if (getNationTreeData != null) 
+            {
                 loc1 = getNationTreeDataS(arg1);
+            }
             if (this.nationTree != null) 
             {
                 this.nationTree.storeScrollPosition();
@@ -72,42 +80,54 @@ package net.wg.gui.lobby.techtree
         public function as_setNodesStates(arg1:Number, arg2:Array):void
         {
             if (this.nationTree != null) 
+            {
                 this.nationTree.setNodesStates(arg1, arg2);
+            }
             return;
         }
 
         public function as_setNext2Unlock(arg1:Array):void
         {
             if (this.nationTree != null) 
+            {
                 this.nationTree.setNodesStates(net.wg.gui.lobby.techtree.constants.NodeState.NEXT_2_UNLOCK, arg1, net.wg.gui.lobby.techtree.data.vo.NodeData.UNLOCK_PROPS_FIELD);
+            }
             return;
         }
 
         public function as_setVehicleTypeXP(arg1:Array):void
         {
             if (this.nationTree != null) 
+            {
                 this.nationTree.setVehicleTypeXP(arg1);
+            }
             return;
         }
 
         public function as_setInventoryItems(arg1:Array):void
         {
             if (this.nationTree != null) 
+            {
                 this.nationTree.setNodesStates(net.wg.gui.lobby.techtree.constants.NodeState.IN_INVENTORY, arg1, net.wg.gui.lobby.techtree.data.vo.NodeData.NODE_DUMP_FIELD);
+            }
             return;
         }
 
         public function as_setUnlockProps(arg1:Array):void
         {
             if (this.nationTree != null) 
+            {
                 this.nationTree.setItemsField(arg1, net.wg.gui.lobby.techtree.data.vo.NodeData.UNLOCK_PROPS_FIELD);
+            }
             return;
         }
 
         public function as_useXMLDumping():void
         {
             if (this.nationTree != null) 
+            {
                 this.nationTree.dataProvider = new net.wg.gui.lobby.techtree.data.NationXMLDataProvider();
+            }
             return;
         }
 
@@ -115,7 +135,9 @@ package net.wg.gui.lobby.techtree
         {
             super.onPopulate();
             if (!initialized) 
+            {
                 validateNow();
+            }
             requestNationTreeDataS();
             return;
         }
@@ -135,7 +157,9 @@ package net.wg.gui.lobby.techtree
                 this.nationsBar.dispose();
             }
             if (this.nationTree != null) 
+            {
                 this.nationTree.dispose();
+            }
             return;
         }
 
@@ -154,7 +178,9 @@ package net.wg.gui.lobby.techtree
                 this.nationsBar.focused = 1;
             }
             if (this.nationTree != null) 
+            {
                 this.nationTree.view = this;
+            }
             if (this.treeRightBG != null) 
             {
                 var loc1:*;
@@ -169,16 +195,22 @@ package net.wg.gui.lobby.techtree
         {
             super.draw();
             if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
+            {
                 this.updateLayouts();
+            }
             return;
         }
 
         protected function updateLayouts():void
         {
             if (this.nationsBar != null) 
+            {
                 this.nationsBar.height = _height;
+            }
             if (this.nationTree != null) 
+            {
                 this.nationTree.setSize(Math.round(_width - this.nationTree.x), Math.round(_height));
+            }
             if (this.treeRightBG != null) 
             {
                 this.treeRightBG.x = _width - this.treeRightBG.width;
@@ -199,12 +231,20 @@ package net.wg.gui.lobby.techtree
             var loc1:*=this.nationsBar.itemToLabel(arg1.data);
             var loc2:*=null;
             if (getNationTreeData != null) 
+            {
                 loc2 = getNationTreeDataS(loc1);
+            }
             if (this.titleField != null) 
+            {
                 if (loc3 = MENU.nation_tree_title(loc1)) 
+                {
                     this.titleField.text = loc3;
+                }
                 else 
+                {
                     this.titleField.text = "";
+                }
+            }
             if (this.nationTree != null) 
             {
                 this.nationTree.storeScrollPosition();

@@ -18,14 +18,22 @@ package org.idmedia.as3commons.util
             var loc1:*;
             o = arg1;
             if (o === this) 
+            {
                 return true;
+            }
             if (!(o is org.idmedia.as3commons.util.Set)) 
+            {
                 return false;
+            }
             c = org.idmedia.as3commons.util.Collection(o);
             if (c.size() != size()) 
+            {
                 return false;
+            }
             try 
+            {
                 return containsAll(c);
+            }
             catch (unused:org.idmedia.as3commons.lang.NullPointerException)
             {
                 return false;

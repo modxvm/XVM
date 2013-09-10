@@ -64,9 +64,13 @@ package net.wg.gui.lobby.profile.pages.technique
                     this.typeIcon.source = loc5.typeIconPath;
                     this.tankSmallIcon.source = loc5.tankIconPath;
                     if (loc7 = getSmallMasteryIconPath(loc5.markOfMastery)) 
+                    {
                         this.masteryIcon.source = loc7;
+                    }
                     else 
+                    {
                         this.masteryIcon.unload();
+                    }
                     this.masteryIcon.data = loc5;
                     this.levelMC.gotoAndStop(loc5.level);
                 }
@@ -81,7 +85,9 @@ package net.wg.gui.lobby.profile.pages.technique
                 {
                     loc2 = getChildAt(loc4);
                     if (loc2 != this.background) 
+                    {
                         loc2.visible = loc1;
+                    }
                     ++loc4;
                 }
             }
@@ -91,14 +97,18 @@ package net.wg.gui.lobby.profile.pages.technique
         internal static function getSmallMasteryIconPath(arg1:int):String
         {
             if (arg1 > 0) 
+            {
                 return "../maps/icons/library/proficiency/class_icons_" + arg1 + ".png";
+            }
             return null;
         }
 
         internal static function getString(arg1:Number):String
         {
             if (App.utils) 
+            {
                 return App.utils.locale.integer(arg1);
+            }
             return arg1.toString();
         }
 

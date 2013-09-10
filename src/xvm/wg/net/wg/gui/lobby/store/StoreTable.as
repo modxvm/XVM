@@ -77,9 +77,13 @@ package net.wg.gui.lobby.store
             {
                 this._rightOrientedCount = arg1;
                 if (this._rightOrientedCount) 
+                {
                     this.header.headerInfo.countField.x = RIGHT_ORIENTED_COUNT_POSITION;
+                }
                 else 
+                {
                     this.header.headerInfo.countField.x = DEFAULT_COUNT_POSITION;
+                }
             }
             return;
         }
@@ -88,7 +92,9 @@ package net.wg.gui.lobby.store
         {
             super.draw();
             if (isInvalid(INVALID_TABLE) && this._tableVO) 
+            {
                 this.updateTable();
+            }
             return;
         }
 
@@ -97,7 +103,9 @@ package net.wg.gui.lobby.store
             super.onPopulate();
             this._tableVO = new net.wg.data.VO.StoreTableVO();
             if (this._data) 
+            {
                 invalidate(INVALID_TABLE);
+            }
             return;
         }
 
@@ -139,13 +147,17 @@ package net.wg.gui.lobby.store
             type = arg1;
             rendererName = this.moduleRendererLinkage;
             if (type == net.wg.data.constants.FittingTypes.VEHICLE) 
+            {
                 rendererName = this.vehicleRendererLinkage;
+            }
             this.detectRendererHeight(rendererName);
             try 
             {
                 classRef = App.utils.classFactory.getClass(rendererName);
                 if (this.list.itemRenderer != classRef) 
+                {
                     this.list.itemRendererName = rendererName;
+                }
             }
             catch (error:ReferenceError)
             {
@@ -170,9 +182,13 @@ package net.wg.gui.lobby.store
                 loc2.push(loc1);
             }
             if (App.instance) 
+            {
                 this.headerTitle.text = App.utils.locale.makeString(MENU.SHOP_TABLE_FIND) + " " + loc2.length.toString();
+            }
             else 
+            {
                 this.headerTitle.text = MENU.SHOP_TABLE_FIND + " " + loc2.length.toString();
+            }
             return;
         }
 
@@ -190,7 +206,9 @@ package net.wg.gui.lobby.store
         internal static function assertNotNull(arg1:Object, arg2:String):void
         {
             if (App.instance) 
+            {
                 App.utils.asserter.assert(!(arg1 == null), arg2 + net.wg.data.constants.Errors.CANT_NULL, net.wg.infrastructure.exceptions.NullPointerException);
+            }
             return;
         }
 

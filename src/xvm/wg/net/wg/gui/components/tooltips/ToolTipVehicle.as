@@ -85,9 +85,13 @@ package net.wg.gui.components.tooltips
             loc6 = App.utils.locale;
             var loc7:*="";
             if (loc5.isElite) 
+            {
                 loc7 = loc6.makeString(TOOLTIPS.tankcaruseltooltip_vehicletype_elite(loc5.vType));
+            }
             else 
+            {
                 loc7 = (loc7 = loc6.makeString(MENU.tankmen(_data.type))).slice(0, 1).toUpperCase() + loc7.slice(1, loc7.length);
+            }
             var loc8:*=loc6.makeString(TOOLTIPS.level(_data.level));
             var loc9:*=loc6.makeString(TOOLTIPS.VEHICLE_LEVEL);
             var loc10:*;
@@ -123,19 +127,33 @@ package net.wg.gui.components.tooltips
                     loc15 = loc5.stats[loc4][0];
                     loc16 = Number(loc5.stats[loc4][1]);
                     if (loc15 != this.DAILY_XP_FACTOR) 
+                    {
                         loc14 = net.wg.gui.components.tooltips.helpers.Utils.instance.getIcont(loc15, _component, loc5.isPremium, loc5.isElite);
+                    }
                     else if (loc16 > 2) 
+                    {
                         loc14 = net.wg.gui.components.tooltips.helpers.Utils.instance.getIcont(this.ACTION_XP_FACTOR);
+                    }
                     else if (loc16 != 2) 
+                    {
                         loc14 = net.wg.gui.components.tooltips.helpers.Utils.instance.getIcont("");
+                    }
                     else 
+                    {
                         loc14 = net.wg.gui.components.tooltips.helpers.Utils.instance.getIcont(this.DOUBLE_XP_FACTOR);
+                    }
                     loc17 = "";
                     if (loc15 == this.BUY_PRICE || loc15 == this.SELL_PRICE) 
+                    {
                         if (loc6) 
+                        {
                             loc17 = loc6 ? loc14 != "gold" ? loc6.integer(loc16) : loc6.gold(loc16) : loc16.toString();
+                        }
+                    }
                     else 
+                    {
                         loc17 = loc6 ? loc6.integer(loc16) : loc16.toString();
+                    }
                     loc17 = loc15 != this.DAILY_XP_FACTOR ? loc17 : "x" + loc17;
                     loc18 = loc5.stats[loc4][2] ? loc6 ? loc14 != "gold" ? loc6.integer(Number(loc5.stats[loc4][2])) : loc6.gold(Number(loc5.stats[loc4][2])) : loc5.stats[loc4][2] : "";
                     loc19 = net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NUMBER;
@@ -144,21 +162,32 @@ package net.wg.gui.components.tooltips
                     {
                         loc22 = "";
                         if (loc15 == this.BUY_PRICE) 
+                        {
                             if (loc18 == "") 
+                            {
                                 loc12 = "";
+                            }
                             else 
                             {
                                 loc19 = net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_ALERT;
                                 if (loc14 != "gold") 
+                                {
                                     loc22 = " <img vspace=\"-4\" src=\"img://gui/maps/icons/library/CreditsIcon-2.png\" />";
+                                }
                                 else 
+                                {
                                     loc22 = " <img vspace=\"-4\" src=\"img://gui/maps/icons/library/GoldIcon-2.png\" />";
+                                }
                                 loc12 = " ( <font color=\"#8c0000\">" + loc13 + "</font> " + loc18 + loc22 + ")";
                                 loc20 = -1;
                             }
+                        }
                         if (loc15 == this.UNLOCK_PRICE) 
+                        {
                             if (loc18 == "") 
+                            {
                                 loc12 = "";
+                            }
                             else 
                             {
                                 loc19 = net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_ALERT;
@@ -166,6 +195,7 @@ package net.wg.gui.components.tooltips
                                 loc12 = " ( <font color=\"#8c0000\">" + loc13 + "</font> " + loc18 + loc22 + ")";
                                 loc20 = -1;
                             }
+                        }
                     }
                     loc11.leftText = loc11.leftText + (net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(loc17, loc19, 12, "$TextFont", false) + "<br/>");
                     loc21 = loc6 ? loc6.makeString(TOOLTIPS.vehicle(loc15), {}) : TOOLTIPS.vehicle(loc15);
@@ -230,11 +260,17 @@ package net.wg.gui.components.tooltips
                     loc27 = loc5.equipments[loc4].total;
                     loc28 = loc5.equipments[loc4].label;
                     if (loc26 < loc27 && loc28 == "crew" && (_component == COMPONENT_CAROUSEL || _component == COMPONENT_INVENTORY)) 
+                    {
                         loc25.leftText = loc25.leftText + (net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(loc26.toString(), net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_ALERT) + net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper("/" + loc27.toString(), net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NUMBER) + "<br/>");
+                    }
                     else if (loc28 == "crew" && _component == COMPONENT_SHOP) 
+                    {
                         loc25.leftText = loc25.leftText + net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(loc27.toString(), net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NUMBER);
+                    }
                     else 
+                    {
                         loc25.leftText = loc25.leftText + (net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(loc26.toString(), net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NUMBER) + net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper("/" + loc27.toString(), net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NUMBER) + "<br/>");
+                    }
                     loc25.rightTextList[loc4] = new net.wg.gui.components.tooltips.VO.ToolTipBlockRightListItemVO(TOOLTIPS.vehicle(loc28));
                     ++loc4;
                 }
@@ -285,7 +321,9 @@ package net.wg.gui.components.tooltips
                 this.tooltipStatus.visible = false;
                 this.tooltipStatus.y = 0;
                 if (loc5.clanLock) 
+                {
                     contentMargin.bottom = 2;
+                }
                 loc1 = seaprators.pop();
                 content.removeChild(loc1);
                 loc1 = null;

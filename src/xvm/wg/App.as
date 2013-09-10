@@ -21,9 +21,13 @@ package
         public static function set instance(arg1:net.wg.app.IApplication):void
         {
             if (ms_instance != null) 
+            {
                 DebugUtils.LOG_ERROR("Application already set to App!");
+            }
             else 
+            {
                 ms_instance = arg1;
+            }
             return;
         }
 

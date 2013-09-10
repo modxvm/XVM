@@ -20,7 +20,9 @@ package scaleform.clik.events
         public function set handled(arg1:Boolean):void
         {
             if (arg1) 
+            {
                 preventDefault();
+            }
             return;
         }
 

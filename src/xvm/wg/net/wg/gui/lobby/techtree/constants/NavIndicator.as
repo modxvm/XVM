@@ -17,7 +17,9 @@ package net.wg.gui.lobby.techtree.constants
         {
             var loc1:*=NEXT_NAV_INDICATOR_SOURCE;
             if (arg1 == net.wg.gui.lobby.techtree.constants.NodeEntityType.TOP_VEHICLE) 
+            {
                 loc1 = TOP_NAV_INDICATOR_SOURCE;
+            }
             return loc1;
         }
 

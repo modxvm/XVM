@@ -73,18 +73,24 @@ package net.wg.gui.notification
             var loc2:*=null;
             super.draw();
             if (isInvalid(DATA_INVALID)) 
+            {
                 if (this.messageData) 
                 {
                     loc1 = this.messageData.auxData;
                     if (loc1 && loc1.length > 1) 
+                    {
                         App.utils.scheduler.scheduleTask(onWindowCloseS, loc1[1]);
+                    }
                     loc2 = this.messageData.messageVO;
                     if (loc2.icon) 
+                    {
                         this.icon.source = loc2.icon;
+                    }
                     this.textField.htmlText = loc2.message;
                     invalidate(DIMENSIONS_INVALID);
                     invalidate(ICON_POSITION_INV);
                 }
+            }
             if (isInvalid(DIMENSIONS_INVALID) && window) 
             {
                 this.bgMc.height = Math.round(this.textField.height + this.textField.y * 2);
@@ -93,8 +99,12 @@ package net.wg.gui.notification
                 App.utils.scheduler.envokeInNextFrame(this.refreshWindowSize);
             }
             if (isInvalid(ICON_POSITION_INV)) 
+            {
                 if (this.textField.textHeight < this.icon.height) 
+                {
                     this.icon.y = Math.round(this.textField.y + (-this.icon.height + this.textField.height) / 2) + 2;
+                }
+            }
             if (isInvalid(INIT_DATA_INVALID) && window) 
             {
                 window.title = this.initInfo.title;

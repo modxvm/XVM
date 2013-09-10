@@ -26,7 +26,9 @@ package net.wg.infrastructure.managers.impl
             this.hide();
             var loc1:*=App.utils;
             if (this._props.showDelay != 0) 
+            {
                 loc1.scheduler.scheduleTask(this.hide, this._props.showDelay);
+            }
             this._currentTooltip = flash.display.DisplayObject(loc1.classFactory.getObject(arg2, this._props));
             if (this._currentTooltip != null) 
             {
@@ -67,17 +69,27 @@ package net.wg.infrastructure.managers.impl
         public function showComplexWithParams(arg1:String, arg2:net.wg.data.managers.IToolTipParams, arg3:net.wg.data.managers.ITooltipProps=null):void
         {
             if (!arg2) 
+            {
                 return;
+            }
             var loc1:*=new net.wg.gui.utils.ComplexTooltipHelper();
             if (arg2.header) 
+            {
                 loc1.addHeader(App.utils.locale.makeString(arg1 + "/header", arg2.header));
+            }
             if (arg2.body) 
+            {
                 loc1.addBody(App.utils.locale.makeString(arg1 + "/body", arg2.body));
+            }
             if (arg2.note) 
+            {
                 loc1.addNote(App.utils.locale.makeString(arg1 + "/note", arg2.note));
+            }
             var loc2:*;
             if ((loc2 = loc1.make()).length > 0) 
+            {
                 App.toolTipMgr.showComplex(loc2);
+            }
             return;
         }
 
@@ -99,7 +111,9 @@ package net.wg.infrastructure.managers.impl
         internal function prepareProperties(arg1:net.wg.data.managers.ITooltipProps):net.wg.data.managers.ITooltipProps
         {
             if (arg1 == null) 
+            {
                 return net.wg.data.managers.impl.TooltipProps.DEFAULT;
+            }
             return arg1;
         }
 

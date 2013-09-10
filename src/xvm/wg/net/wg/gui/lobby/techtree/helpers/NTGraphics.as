@@ -46,12 +46,16 @@ package net.wg.gui.lobby.techtree.helpers
             var loc13:*=null;
             var loc1:*=arg1.getDisplayInfo();
             if (loc1 == null || loc1.lines == null) 
+            {
                 return;
+            }
             var loc2:*=loc1.lines[0];
             var loc3:*=arg1.getID();
             clearLinesAndArrows(arg1);
             if (loc2 == null) 
+            {
                 return;
+            }
             var loc4:*=loc2.outPin;
             var loc5:*=loc2.inPins;
             var loc6:*=new flash.geom.Point(loc4[0], loc4[1]);
@@ -67,9 +71,13 @@ package net.wg.gui.lobby.techtree.helpers
                 if (!isNaN(loc12.childID)) 
                 {
                     if (loc6.y > loc7.y) 
+                    {
                         loc14.push(new TopLineInfo(loc12.childID, loc7));
+                    }
                     else if (loc6.y < loc7.y) 
+                    {
                         loc15.push(new TopLineInfo(loc12.childID, loc7));
+                    }
                     else if (loc6.y == loc7.y) 
                     {
                         loc13 = _container.getNodeByID(loc12.childID);
@@ -102,7 +110,9 @@ package net.wg.gui.lobby.techtree.helpers
                 drawArrow(arg1, loc9, loc12.point);
                 drawLine(arg1, colorIdxs[loc17], loc16, loc7);
                 if (!arg2) 
+                {
                     loc13.addEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.STATE_CHANGED, this.handleRootChildStateChanged, false, 0, true);
+                }
                 ++loc11;
             }
             loc8 = loc15.length;
@@ -119,7 +129,9 @@ package net.wg.gui.lobby.techtree.helpers
                 drawArrow(arg1, loc9, loc12.point);
                 drawLine(arg1, colorIdxs[loc18], loc16, loc7);
                 if (!arg2) 
+                {
                     loc13.addEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.STATE_CHANGED, this.handleRootChildStateChanged, false, 0, true);
+                }
                 ++loc11;
             }
             loc16.y = loc6.y;
@@ -130,27 +142,39 @@ package net.wg.gui.lobby.techtree.helpers
         public function drawLineSet(arg1:net.wg.gui.lobby.techtree.interfaces.IRenderer, arg2:Object, arg3:Boolean):void
         {
             if (arg1 == null || arg2 == null) 
+            {
                 return;
+            }
             var loc1:*=arg2.outLiteral;
             clearLinesAndArrows(arg1, loc1);
             var loc2:*=loc1;
             switch (loc2) 
             {
                 case net.wg.gui.lobby.techtree.constants.OutLiteral.RIGHT_MIDDLE:
+                {
                     this.drawLineRSet(arg1, arg2, arg3);
                     break;
+                }
                 case net.wg.gui.lobby.techtree.constants.OutLiteral.TOP_MIDDLE:
+                {
                     this.drawLineTMSet(arg1, arg2, arg3);
                     break;
+                }
                 case net.wg.gui.lobby.techtree.constants.OutLiteral.BOTTOM_MIDDLE:
+                {
                     this.drawLineBMSet(arg1, arg2, arg3);
                     break;
+                }
                 case net.wg.gui.lobby.techtree.constants.OutLiteral.TOP_RIGHT:
+                {
                     this.drawLineTRSet(arg1, arg2, arg3);
                     break;
+                }
                 case net.wg.gui.lobby.techtree.constants.OutLiteral.BOTTOM_RIGHT:
+                {
                     this.drawLineBRSet(arg1, arg2, arg3);
                     break;
+                }
             }
             return;
         }
@@ -160,16 +184,22 @@ package net.wg.gui.lobby.techtree.helpers
             var loc3:*=null;
             var loc1:*=arg1.getDisplayInfo();
             if (loc1 == null) 
+            {
                 return;
+            }
             if (!arg2) 
+            {
                 arg1.addEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.STATE_CHANGED, this.handleNodeStateChanged, false, 0, true);
+            }
             var loc2:*;
             var loc4:*=(loc2 = loc1.lines).length;
             var loc5:*=0;
             while (loc5 < loc4) 
             {
                 if ((loc3 = loc2[loc5]) == null) 
+                {
                     return;
+                }
                 this.drawLineSet(arg1, loc3, arg2);
                 ++loc5;
             }
@@ -179,7 +209,9 @@ package net.wg.gui.lobby.techtree.helpers
         public function drawLevelsDelimiters(arg1:__AS3__.vec.Vector.<net.wg.gui.lobby.techtree.helpers.Distance>, arg2:Number, arg3:Number):Number
         {
             if (this.levels == null) 
+            {
                 return 0;
+            }
             return this.levels.updateLevels(arg1, arg2, arg3);
         }
 
@@ -198,14 +230,18 @@ package net.wg.gui.lobby.techtree.helpers
             var loc1:*=0;
             var loc2:*=0;
             if (this.levels != null) 
+            {
                 ++loc2;
+            }
             while (numChildren > loc2) 
             {
                 loc3 = getChildAt(loc1);
                 if (loc3 != this.levels) 
                 {
                     if (loc3 is net.wg.gui.lobby.techtree.interfaces.IRenderer) 
+                    {
                         this.clearUpRenderer(net.wg.gui.lobby.techtree.interfaces.IRenderer(loc3));
+                    }
                     removeChildAt(loc1);
                     continue;
                 }
@@ -233,11 +269,15 @@ package net.wg.gui.lobby.techtree.helpers
         {
             var loc1:*=arg2.getID();
             if (this.parentIDs[loc1] == undefined) 
+            {
                 this.parentIDs[loc1] = [];
+            }
             var loc2:*=this.parentIDs[loc1];
             loc1 = arg1.getID();
             if (loc2.indexOf(loc1) == -1) 
+            {
                 loc2.push(loc1);
+            }
             return;
         }
 
@@ -248,7 +288,9 @@ package net.wg.gui.lobby.techtree.helpers
             var loc8:*=NaN;
             var loc1:*;
             if (!(loc1 = container.getNodeByID(arg3.childID))) 
+            {
                 return;
+            }
             var loc2:*=arg3.inPin;
             var loc3:*=arg3.viaPins;
             var loc4:*=colorIdxs[Math.max(arg1.getColorIdx(), loc1.getColorIdx(arg1.getID()))];
@@ -275,7 +317,9 @@ package net.wg.gui.lobby.techtree.helpers
                 drawArrowEx(arg1, loc4, loc5, loc6);
             }
             if (!arg4) 
+            {
                 this.addParentID(arg1, loc1);
+            }
             return;
         }
 
@@ -297,7 +341,9 @@ package net.wg.gui.lobby.techtree.helpers
             if ((loc3 = (loc2 = arg2.inPins).length) < 2) 
             {
                 if (loc3 == 1) 
+                {
                     this.drawSingleLine(arg1, loc1, loc2[0], arg3);
+                }
                 return;
             }
             var loc4:*=new flash.geom.Point(loc1[0], loc1[1]);
@@ -317,14 +363,22 @@ package net.wg.gui.lobby.techtree.helpers
                     {
                         loc5 = new flash.geom.Point(loc7[0][0], loc7[0][1]);
                         if (loc4.y != loc5.y) 
+                        {
                             loc13.push(loc15);
+                        }
                         else 
+                        {
                             loc12.push(new RSetLineInfo(loc15, loc5.x, false, loc14));
+                        }
                     }
                     else if (loc4.y != loc8[1]) 
+                    {
                         loc13.push(loc15);
+                    }
                     else 
+                    {
                         loc12.push(new RSetLineInfo(loc15, loc8[0], true, loc14));
+                    }
                 }
                 ++loc15;
             }
@@ -355,9 +409,13 @@ package net.wg.gui.lobby.techtree.helpers
                 loc5 = new flash.geom.Point(loc11.x, loc4.y);
                 drawLine(arg1, colorIdxs[loc14], loc4, loc5);
                 if (loc11.drawArrow) 
+                {
                     drawArrowEx(arg1, colorIdxs[loc14], loc4, loc5);
+                }
                 if (!arg3) 
+                {
                     this.addParentID(arg1, loc16);
+                }
                 ++loc15;
             }
             loc3 = loc13.length;
@@ -377,10 +435,14 @@ package net.wg.gui.lobby.techtree.helpers
             var loc3:*=(loc2 = arg2.inPins)[0];
             var loc4:*;
             if (!((loc4 = container.getNodeByID(loc3.childID)) == null) && loc4.isButtonVisible() && this.inButtonOffset > 0) 
+            {
                 loc3 = {"childID":loc3.childID, "inPin":[Number(loc3.inPin[0]), Number(loc3.inPin[1]) + this.inButtonOffset], "viaPins":loc3.viaPins};
+            }
             this.drawSingleLine(arg1, loc1, loc3, arg3);
             if (loc2.length > 1) 
+            {
                 trace("Warning! From top part of node can goes only one line.");
+            }
             return;
         }
 
@@ -391,7 +453,9 @@ package net.wg.gui.lobby.techtree.helpers
             var loc3:*=(loc2 = arg2.inPins)[0];
             this.drawSingleLine(arg1, loc1, loc3, arg3);
             if (loc2.length > 1) 
+            {
                 trace("Warning! From top part of node can goes only one line.");
+            }
             return;
         }
 
@@ -400,10 +464,14 @@ package net.wg.gui.lobby.techtree.helpers
             var loc1:*=arg2.outPin;
             var loc2:*=arg2.inPins;
             if (arg1.isButtonVisible() && this.outButtonOffset > 0) 
+            {
                 loc1 = [Number(loc1[0]), Number(loc1[1]) + this.outButtonOffset];
+            }
             this.drawSingleLine(arg1, loc1, loc2[0], arg3);
             if (loc2.length > 1) 
+            {
                 trace("Warning! From bottom part of node can goes only one line.");
+            }
             return;
         }
 
@@ -414,7 +482,9 @@ package net.wg.gui.lobby.techtree.helpers
             var loc3:*=(loc2 = arg2.inPins)[0];
             this.drawSingleLine(arg1, loc1, loc3, arg3);
             if (loc2.length > 1) 
+            {
                 trace("Warning! From bottom part of node can goes only one line.");
+            }
             return;
         }
 
@@ -422,7 +492,9 @@ package net.wg.gui.lobby.techtree.helpers
         {
             var loc1:*=container.getRootNode();
             if (!(loc1 == null) && net.wg.gui.lobby.techtree.data.state.NodeStateCollection.isRedrawNTLines(arg1.primary)) 
+            {
                 this.drawTopLines(loc1, true);
+            }
             return;
         }
 
@@ -447,7 +519,9 @@ package net.wg.gui.lobby.techtree.helpers
                         while (loc5 < loc3) 
                         {
                             if ((loc4 = container.getNodeByID(loc2[loc5])) != null) 
+                            {
                                 this.drawNodeLines(loc4, true);
+                            }
                             ++loc5;
                         }
                     }

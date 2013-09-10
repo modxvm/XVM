@@ -37,56 +37,72 @@ package net.wg.gui.lobby.techtree
         {
             var loc1:*=getResearchItemsDataS(arg2, false);
             if (this.researchItems != null) 
+            {
                 this.researchItems.invalidateNodesData(arg1, loc1);
+            }
             return;
         }
 
         public function as_setNodesStates(arg1:Number, arg2:Array):void
         {
             if (this.researchItems != null) 
+            {
                 this.researchItems.setNodesStates(arg1, arg2);
+            }
             return;
         }
 
         public function as_setNext2Unlock(arg1:Array):void
         {
             if (this.researchItems != null) 
+            {
                 this.researchItems.setNodesStates(net.wg.gui.lobby.techtree.constants.NodeState.NEXT_2_UNLOCK, arg1, net.wg.gui.lobby.techtree.data.vo.NodeData.UNLOCK_PROPS_FIELD);
+            }
             return;
         }
 
         public function as_setFreeXP(arg1:Number):void
         {
             if (this.researchItems != null) 
+            {
                 this.researchItems.setFreeXP(arg1);
+            }
             return;
         }
 
         public function as_setVehicleTypeXP(arg1:Array):void
         {
             if (this.researchItems != null) 
+            {
                 this.researchItems.setVehicleTypeXP(arg1);
+            }
             return;
         }
 
         public function as_setInventoryItems(arg1:Array):void
         {
             if (this.researchItems != null) 
+            {
                 this.researchItems.setNodesStates(net.wg.gui.lobby.techtree.constants.NodeState.IN_INVENTORY, arg1, net.wg.gui.lobby.techtree.data.vo.NodeData.NODE_DUMP_FIELD);
+            }
             return;
         }
 
         public function as_setInstalledItems(arg1:Array):void
         {
             if (this.researchItems != null) 
+            {
                 this.researchItems.setNodesStates(net.wg.gui.lobby.techtree.constants.NodeState.INSTALLED, arg1, net.wg.gui.lobby.techtree.data.vo.NodeData.NODE_DUMP_FIELD);
+            }
             return;
         }
 
         public function as_useXMLDumping():void
         {
             if (this.researchItems != null) 
+            {
                 this.researchItems.dataProvider = new net.wg.gui.lobby.techtree.data.ResearchXMLDataProvider();
+            }
             return;
         }
 
@@ -94,7 +110,9 @@ package net.wg.gui.lobby.techtree
         {
             super.onPopulate();
             if (!initialized) 
+            {
                 validateNow();
+            }
             requestNationDataS();
             return;
         }
@@ -104,7 +122,9 @@ package net.wg.gui.lobby.techtree
             App.gameInputMgr.clearKeyHandler(flash.ui.Keyboard.ESCAPE, flash.events.KeyboardEvent.KEY_DOWN);
             super.onDispose();
             if (this.researchItems != null) 
+            {
                 this.researchItems.dispose();
+            }
             return;
         }
 
@@ -112,7 +132,9 @@ package net.wg.gui.lobby.techtree
         {
             super.configUI();
             if (this.researchItems != null) 
+            {
                 this.researchItems.view = this;
+            }
             App.gameInputMgr.setKeyHandler(flash.ui.Keyboard.ESCAPE, flash.events.KeyboardEvent.KEY_DOWN, this.handleEscape, true);
             return;
         }
@@ -121,7 +143,9 @@ package net.wg.gui.lobby.techtree
         {
             super.draw();
             if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
+            {
                 this.updateLayouts();
+            }
             return;
         }
 

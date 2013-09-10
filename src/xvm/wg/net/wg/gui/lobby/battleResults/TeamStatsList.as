@@ -37,7 +37,9 @@ package net.wg.gui.lobby.battleResults
                 loc8.y = Math.round(loc5 + loc7 * loc2);
                 loc8.width = loc3;
                 if (!loc6) 
+                {
                     loc8.validateNow();
+                }
                 ++loc7;
             }
             drawScrollBar();
@@ -48,23 +50,33 @@ package net.wg.gui.lobby.battleResults
         {
             var loc1:*=(arg1.currentTarget as scaleform.clik.interfaces.IListItemRenderer).index;
             if (isNaN(loc1)) 
+            {
                 return;
+            }
             if (dispatchItemEvent(arg1)) 
+            {
                 if (useRightButton && useRightButtonForSelect || arg1.buttonIdx == 0) 
+                {
                     selectedIndex = loc1;
+                }
+            }
             return;
         }
 
         public override function handleInput(arg1:scaleform.clik.events.InputEvent):void
         {
             if (arg1.handled) 
+            {
                 return;
+            }
             var loc1:*=getRendererAt(_selectedIndex, _scrollPosition);
             if (loc1 != null) 
             {
                 loc1.handleInput(arg1);
                 if (arg1.handled) 
+                {
                     return;
+                }
             }
             var loc2:*=arg1.details;
             var loc3:*=loc2.value == scaleform.clik.constants.InputValue.KEY_DOWN || loc2.value == scaleform.clik.constants.InputValue.KEY_HOLD;
@@ -72,49 +84,99 @@ package net.wg.gui.lobby.battleResults
             switch (loc4) 
             {
                 case scaleform.clik.constants.NavigationCode.UP:
+                {
                     if (selectedIndex != -1) 
+                    {
                         if (_selectedIndex > 0) 
+                        {
                             if (loc3) 
+                            {
                                 selectedIndex--;
+                            }
+                        }
                         else if (wrapping != scaleform.clik.constants.WrappingMode.STICK) 
+                        {
                             if (wrapping != scaleform.clik.constants.WrappingMode.WRAP) 
+                            {
                                 return;
+                            }
                             else if (loc3) 
+                            {
                                 selectedIndex = (_dataProvider.length - 1);
+                            }
+                        }
+                    }
                     else if (loc3) 
+                    {
                         return;
+                    }
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.DOWN:
+                {
                     if (_selectedIndex != -1) 
+                    {
                         if (_selectedIndex < (_dataProvider.length - 1)) 
+                        {
                             if (loc3) 
+                            {
                                 selectedIndex++;
+                            }
+                        }
                         else if (wrapping != scaleform.clik.constants.WrappingMode.STICK) 
+                        {
                             if (wrapping != scaleform.clik.constants.WrappingMode.WRAP) 
+                            {
                                 return;
+                            }
                             else if (loc3) 
+                            {
                                 selectedIndex = 0;
+                            }
+                        }
+                    }
                     else if (loc3) 
+                    {
                         selectedIndex = _scrollPosition;
+                    }
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.END:
+                {
                     if (!loc3) 
+                    {
                         selectedIndex = (_dataProvider.length - 1);
+                    }
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.HOME:
+                {
                     if (!loc3) 
+                    {
                         selectedIndex = 0;
+                    }
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.PAGE_UP:
+                {
                     if (loc3) 
+                    {
                         selectedIndex = Math.max(0, _selectedIndex - _totalRenderers);
+                    }
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.PAGE_DOWN:
+                {
                     if (loc3) 
+                    {
                         selectedIndex = Math.min((_dataProvider.length - 1), _selectedIndex + _totalRenderers);
+                    }
                     break;
+                }
                 default:
+                {
                     return;
+                }
             }
             arg1.handled = true;
             return;

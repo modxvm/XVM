@@ -25,9 +25,13 @@ package net.wg.gui.lobby.battlequeue
             if (this.data) 
             {
                 if (this.textField && !(this.data.type == null)) 
+                {
                     this.textField.text = typeof this.data.type != "number" ? this.data.type : String(this.data.type);
+                }
                 if (this.countField && !(this.data.count == null)) 
+                {
                     this.countField.text = typeof this.data.count != "number" ? this.data.count : App.utils.locale.integer(this.data.count);
+                }
             }
             super.draw();
             return;
@@ -79,7 +83,9 @@ package net.wg.gui.lobby.battlequeue
         public function set selected(arg1:Boolean):void
         {
             if (this._selected == arg1) 
+            {
                 return;
+            }
             this._selected = arg1;
             return;
         }

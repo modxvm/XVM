@@ -27,11 +27,17 @@ package net.wg.gui.lobby.profile.components
         {
             super.draw();
             if (isInvalid(DATA_PROVIDER_INV)) 
+            {
                 this.applyDataChanges();
+            }
             if (isInvalid(LABEL_INV)) 
+            {
                 this.applyLabel();
+            }
             if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
+            {
                 this.applySizeChanges();
+            }
             return;
         }
 
@@ -87,7 +93,9 @@ package net.wg.gui.lobby.profile.components
                 this.tileList = null;
             }
             if (this.dataProvider) 
+            {
                 this.dataProvider = null;
+            }
             super.dispose();
             return;
         }

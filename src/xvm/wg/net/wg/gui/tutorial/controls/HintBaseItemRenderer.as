@@ -40,7 +40,9 @@ package net.wg.gui.tutorial.controls
         {
             super.draw();
             if (isInvalid(scaleform.clik.constants.InvalidationType.DATA) && this._data) 
+            {
                 this.drawData();
+            }
             return;
         }
 

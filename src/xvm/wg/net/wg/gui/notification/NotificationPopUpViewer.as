@@ -43,7 +43,9 @@ package net.wg.gui.notification
                 {
                     loc3 = this.pendingForDisplay.shift();
                     if (!(this.pendingForDisplay.length < loc1)) 
+                    {
                         continue;
+                    }
                     (loc5 = new this.popupClass()).animationSpeed = this.animationSpeed;
                     loc5.livingTime = this.messageLivingTime;
                     App.instance.systemMessages.addChild(loc5);
@@ -58,7 +60,9 @@ package net.wg.gui.notification
                     ++loc2;
                 }
                 while (this.displayingNowPopUps.length > this.maxAvailaleMessagesCount) 
+                {
                     this.removePopupAt((this.displayingNowPopUps.length - 1), true);
+                }
             }
             if (this.arrangeLayout) 
             {
@@ -102,10 +106,14 @@ package net.wg.gui.notification
             switch (loc1) 
             {
                 case "securityLink":
+                {
                     onSecuritySettingsLinkClickS();
                     break;
+                }
                 default:
+                {
                     break;
+                }
             }
             return;
         }
@@ -120,7 +128,9 @@ package net.wg.gui.notification
         public function as_removeAllMessages():void
         {
             while (this.displayingNowPopUps.length > 0) 
+            {
                 this.removePopupAt(0, false);
+            }
             return;
         }
 
@@ -128,14 +138,18 @@ package net.wg.gui.notification
         {
             var loc1:*;
             if ((loc1 = this.displayingNowPopUps.splice(arg1, 1)[0]).parent) 
+            {
                 loc1.parent.removeChild(loc1);
+            }
             loc1.dispose();
             loc1.removeEventListener(net.wg.gui.notification.ServiceMessagePopUp.HIDED, this.removePopupHandler);
             loc1.removeEventListener(net.wg.gui.notification.ServiceMessageEvent.MESSAGE_AREA_CLICKED, this.messageClickHandler);
             loc1.removeEventListener(net.wg.gui.notification.ServiceMessageEvent.MESSAGE_BUTTON_CLICKED, this.mouseButtonClickHandler);
             loc1.removeEventListener(net.wg.gui.notification.ServiceMessageEvent.MESSAGE_LINK_CLICKED, this.messageLinkClickHandler);
             if (arg3) 
+            {
                 onMessageHidedS(arg2, net.wg.gui.notification.NotificationInfoVO(loc1.data).notify);
+            }
             if (this.displayingNowPopUps.length > 0) 
             {
                 this.arrangeLayout = true;
@@ -188,7 +202,9 @@ package net.wg.gui.notification
         protected override function onDispose():void
         {
             while (this.displayingNowPopUps.length > 0) 
+            {
                 this.removePopupAt(0, false, false);
+            }
             super.onDispose();
             return;
         }

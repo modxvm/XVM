@@ -36,7 +36,9 @@ package net.wg.gui.lobby.moduleInfo
                 for each (loc2 in loc4) 
                 {
                     if (this.paramValue.htmlText.length > 0) 
+                    {
                         scaleform.gfx.TextFieldEx.appendHtml(this.paramValue, "\n");
+                    }
                     scaleform.gfx.TextFieldEx.appendHtml(this.paramValue, loc2.value);
                     scaleform.gfx.TextFieldEx.appendHtml(this.paramType, loc2.type);
                 }
@@ -51,7 +53,9 @@ package net.wg.gui.lobby.moduleInfo
         {
             super.draw();
             if (isInvalid(this.HEADER_TEXT_INV)) 
+            {
                 this.header.htmlText = this._headerText;
+            }
             return;
         }
 

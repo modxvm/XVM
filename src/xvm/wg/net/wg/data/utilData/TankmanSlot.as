@@ -20,7 +20,9 @@ package net.wg.data.utilData
         public function get tankman():net.wg.data.gui_items.Tankman
         {
             if (this._tankmanInvID != -1) 
+            {
                 return new net.wg.data.gui_items.Tankman(this._tankmanInvID);
+            }
             return null;
         }
 

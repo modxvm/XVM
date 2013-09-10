@@ -124,7 +124,9 @@ package net.wg.gui.components.advanced
             super.configUI();
             this.view.groupRef = this;
             if (this.border) 
+            {
                 this.border.visible = this._showBgForm;
+            }
             return;
         }
 
@@ -160,7 +162,9 @@ package net.wg.gui.components.advanced
                 updateRenderers();
             }
             if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+            {
                 refreshData();
+            }
             if (isInvalid(INVALID_BORDER)) 
             {
                 if (this.border) 
@@ -169,7 +173,9 @@ package net.wg.gui.components.advanced
                     this.border.height = height;
                 }
                 if (this.texture) 
+                {
                     this.texture.setSize(width, height);
+                }
             }
             this.drawLayout(width, this.rowHeight);
             this.view.alpha = 1;
@@ -180,7 +186,9 @@ package net.wg.gui.components.advanced
         {
             super.setupRenderer(arg1, arg2);
             if (arg1 is net.wg.infrastructure.interfaces.IAccordionItemRenderer) 
+            {
                 net.wg.infrastructure.interfaces.IAccordionItemRenderer(arg1).enableConstraints = this.enableHeaderConstraints;
+            }
             arg1.tabEnabled = false;
             return;
         }
@@ -190,7 +198,9 @@ package net.wg.gui.components.advanced
             super.populateRendererData(arg1, arg2);
             var loc1:*=_dataProvider.requestItemAt(arg2);
             if (loc1.hasOwnProperty("enabled")) 
+            {
                 arg1.enabled = loc1.enabled;
+            }
             return;
         }
 

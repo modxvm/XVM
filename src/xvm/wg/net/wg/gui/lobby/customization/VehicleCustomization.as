@@ -56,7 +56,9 @@ package net.wg.gui.lobby.customization
         {
             super.handleInput(arg1);
             if (arg1.handled) 
+            {
                 return;
+            }
             var loc1:*=arg1.details;
             if (arg1.details.code == flash.ui.Keyboard.ESCAPE && loc1.value == scaleform.clik.constants.InputValue.KEY_DOWN) 
             {
@@ -121,7 +123,9 @@ package net.wg.gui.lobby.customization
         public function as_setActionsLocked(arg1:Boolean):void
         {
             if (this._actionsLocked == arg1) 
+            {
                 return;
+            }
             this._actionsLocked = arg1;
             this.calculateTotalPrice();
             var loc1:*=new net.wg.gui.lobby.customization.CustomizationEvent(net.wg.gui.lobby.customization.CustomizationEvent.CHANGE_ACTIONS_LOCK);
@@ -139,7 +143,9 @@ package net.wg.gui.lobby.customization
         public function as_onCurrentChanged(arg1:String):void
         {
             if (arg1 == this._sectionsDataProvider[this.accordion.selectedIndex].section) 
+            {
                 this.accordion.view.currentView.onCurrentChanged();
+            }
             return;
         }
 
@@ -224,9 +230,13 @@ package net.wg.gui.lobby.customization
                         while (loc6 < arg3.price.length) 
                         {
                             if ((loc1 = arg3.price[loc6]).isGold) 
+                            {
                                 loc3.push(loc1);
+                            }
                             else 
+                            {
                                 loc4.push(loc1);
+                            }
                             ++loc6;
                         }
                         if (loc3.length > 0 && loc4.length > 0) 
@@ -235,10 +245,14 @@ package net.wg.gui.lobby.customization
                             loc7.price = this.getSummCost(loc3);
                         }
                         else 
+                        {
                             loc7.price = this.getSummCost(arg3.price);
+                        }
                     }
                     else 
+                    {
                         loc7.price = arg3.price;
+                    }
                     loc7.selected = arg2;
                     if (arg3.hasOwnProperty("selectedItems")) 
                     {
@@ -248,20 +262,28 @@ package net.wg.gui.lobby.customization
                         for each (loc8 in loc11) 
                         {
                             if (loc8) 
+                            {
                                 loc9 = loc8.id > 0;
+                            }
                             if (!loc9) 
+                            {
                                 continue;
+                            }
                             break;
                         }
                         loc7.enabled = loc9;
                     }
                     else 
+                    {
                         loc7.enabled = arg3._new.id > 0;
+                    }
                 }
                 ++loc5;
             }
             if (loc2 != null) 
+            {
                 this._priceDataProvider.splice(0, 0, loc2);
+            }
             this._priceDataProvider.invalidate();
             this.calculateTotalPrice();
             return;
@@ -382,19 +404,24 @@ package net.wg.gui.lobby.customization
                 {
                     loc3 = false;
                     if ((loc6 = loc8.price) != null) 
+                    {
                         if (loc6 is Array) 
                         {
                             loc9 = 0;
                             while (loc9 < loc6.lengh) 
                             {
                                 if ((loc10 = loc6[loc9]) != null) 
+                                {
                                     if (loc6.isGold) 
                                     {
                                         loc3 = true;
                                         loc2 = loc2 + loc10.cost;
                                     }
                                     else 
+                                    {
                                         loc1 = loc1 + loc10.cost;
+                                    }
+                                }
                                 ++loc9;
                             }
                         }
@@ -404,20 +431,27 @@ package net.wg.gui.lobby.customization
                             loc2 = loc2 + loc6.cost;
                         }
                         else 
+                        {
                             loc1 = loc1 + loc6.cost;
+                        }
+                    }
                     this._selectedSections.push({"sectionName":loc8.section, "isGold":loc3});
                 }
                 ++loc7;
             }
             if (loc1 <= this._accountCredits) 
+            {
                 this.totalCreditsField.textColor = this.textColor;
+            }
             else 
             {
                 this.totalCreditsField.textColor = this.errorColor;
                 loc4 = false;
             }
             if (loc2 <= this._accountGold) 
+            {
                 this.totalGoldField.textColor = this.textColor;
+            }
             else 
             {
                 this.totalGoldField.textColor = this.errorColor;

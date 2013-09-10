@@ -64,10 +64,14 @@ package net.wg.gui.lobby.demonstration.data
                 case "standard":
                 case "assault":
                 case "encounter":
+                {
                     this[arg1] = this.convertToDataProvider(arg2 as Array);
                     return false;
+                }
                 default:
+                {
                     return true;
+                }
             }
         }
 
@@ -78,7 +82,9 @@ package net.wg.gui.lobby.demonstration.data
             var loc3:*=0;
             var loc4:*=arg1;
             for each (loc2 in loc4) 
+            {
                 loc1.push(new net.wg.gui.lobby.demonstration.data.MapItemVO(loc2));
+            }
             return loc1;
         }
 

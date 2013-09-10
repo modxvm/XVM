@@ -32,7 +32,9 @@ package net.wg.gui.lobby.profile.pages.technique
         public static function getBigRendererWidth():Number
         {
             if (defaultIR_smallWidth == -1) 
+            {
                 defaultIR_smallWidth = getDefaultWidth(net.wg.data.constants.Linkages.ACHIEVEMENT_COMMON);
+            }
             return defaultIR_smallWidth;
         }
 
@@ -46,7 +48,9 @@ package net.wg.gui.lobby.profile.pages.technique
         internal static function getClass(arg1:String):Class
         {
             if (App.utils) 
+            {
                 return App.utils.classFactory.getClass(arg1);
+            }
             return flash.utils.getDefinitionByName(arg1) as Class;
         }
 

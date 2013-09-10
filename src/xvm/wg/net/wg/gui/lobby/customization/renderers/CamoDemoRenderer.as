@@ -49,26 +49,36 @@ package net.wg.gui.lobby.customization.renderers
                     while (loc1 < KINDS.length) 
                     {
                         if (KINDS[loc1] == this.kind) 
+                        {
                             this.kindMc.gotoAndStop(loc1 + 1);
+                        }
                         ++loc1;
                     }
                 }
                 else 
+                {
                     this.showKind(false);
+                }
                 this._kindDirty = false;
             }
             if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
             {
                 if (this.timeLeftFld) 
+                {
                     if (data && data.timeLeft && data.timeLeft.length > 0) 
                     {
                         this.timeLeftFld.visible = true;
                         this.timeLeftFld.text = data.timeLeft;
                     }
                     else 
+                    {
                         this.timeLeftFld.visible = false;
+                    }
+                }
                 else 
+                {
                     invalidateData();
+                }
                 costField.text = "";
             }
             return;
@@ -78,7 +88,9 @@ package net.wg.gui.lobby.customization.renderers
         {
             super.setState(arg1);
             if (!current && !selected) 
+            {
                 border.state = "up";
+            }
             return;
         }
 

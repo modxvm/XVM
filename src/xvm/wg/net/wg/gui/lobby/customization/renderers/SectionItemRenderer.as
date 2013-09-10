@@ -47,7 +47,9 @@ package net.wg.gui.lobby.customization.renderers
         {
             super.draw();
             if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+            {
                 visible = !(data == null);
+            }
             return;
         }
 
@@ -55,9 +57,13 @@ package net.wg.gui.lobby.customization.renderers
         {
             super.updateAfterStateChange();
             if (!initialized || data == null) 
+            {
                 return;
+            }
             if (this.newMarker != null) 
+            {
                 this.newMarker.visible = data.hasNew;
+            }
             return;
         }
 

@@ -64,9 +64,13 @@ package net.wg.gui.lobby.header
             if (isInvalid(NEW)) 
             {
                 if (this._hasNew) 
+                {
                     this.anim.gotoAndPlay(ANIMATE);
+                }
                 else 
+                {
                     this.anim.gotoAndStop(PAUSE);
+                }
                 setState("up");
             }
             if (isInvalid(scaleform.clik.constants.InvalidationType.STATE)) 
@@ -86,7 +90,9 @@ package net.wg.gui.lobby.header
                 invalidate(scaleform.clik.constants.InvalidationType.DATA, scaleform.clik.constants.InvalidationType.SIZE);
             }
             if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+            {
                 updateText();
+            }
             return;
         }
 

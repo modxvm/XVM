@@ -14,10 +14,11 @@ package net.wg.gui.lobby.questsWindow
 
 import flash.display.*;
 import flash.events.*;
+import net.wg.gui.lobby.questsWindow.data.*;
 
 
 
 {
-    var loc1:*=net.wg.gui.lobby.questsWindow.QuestScrollPane;
+    var loc1:*=net.wg.gui.lobby.questsWindow.data.ComplexTooltipVO;
     loc1;
 }

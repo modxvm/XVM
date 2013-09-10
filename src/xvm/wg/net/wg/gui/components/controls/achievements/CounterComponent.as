@@ -29,9 +29,13 @@ package net.wg.gui.components.controls.achievements
             {
                 loc1 = textField.width - this._minBgWindowWidth;
                 if (loc1 > 0) 
+                {
                     loc2 = this.originalBgWidth + loc1;
+                }
                 else 
+                {
                     loc2 = this.originalBgWidth;
+                }
                 this.background.width = loc2;
                 textField.x = loc2 - textField.width >> 1;
             }
@@ -46,7 +50,9 @@ package net.wg.gui.components.controls.achievements
                 addEventListener(flash.events.Event.RENDER, validateNow, false, 0, true);
                 addEventListener(flash.events.Event.ENTER_FRAME, validateNow, false, 0, true);
                 if (stage != null) 
+                {
                     stage.invalidate();
+                }
             }
             return;
         }

@@ -36,7 +36,9 @@ package net.wg.gui.prebattle.invites
         protected override function configUI():void
         {
             if (this.focusIndicatorA) 
+            {
                 focusIndicator = this.focusIndicatorA;
+            }
             super.configUI();
             this.voiceWave.visible = App.voiceChatMgr.isVOIPEnabledS();
             this.voiceWave.validateNow();
@@ -60,7 +62,9 @@ package net.wg.gui.prebattle.invites
             }
             super.draw();
             if (loc1) 
+            {
                 this.afterSetData();
+            }
             return;
         }
 
@@ -90,42 +94,56 @@ package net.wg.gui.prebattle.invites
         internal function afterSetData():void
         {
             if (this.status == null) 
+            {
                 return;
+            }
             this.status.visible = false;
             if (data == null) 
+            {
                 return;
+            }
             this.label = data.displayName;
             if (data.hasOwnProperty("chatRoster") && net.wg.gui.prebattle.squad.MessengerUtils.isIgnored(data)) 
             {
                 this.status.gotoAndPlay("ignored");
                 this.status.visible = true;
                 if (data.colors[1] != null) 
+                {
                     textField.textColor = data.colors[1];
+                }
             }
             else 
             {
                 if (data.hasOwnProperty("himself") && data.himself) 
                 {
                     if (data.hasOwnProperty("colors") && !(data.colors[0] == null)) 
+                    {
                         textField.textColor = data.colors[0];
+                    }
                     this.status.gotoAndPlay("himself");
                 }
                 else if (data.hasOwnProperty("online") && data.online) 
                 {
                     if (data.colors[0] != null) 
+                    {
                         textField.textColor = data.colors[0];
+                    }
                     this.status.gotoAndPlay("online");
                 }
                 else 
                 {
                     if (data.hasOwnProperty("colors") && !(data.colors[1] == null)) 
+                    {
                         textField.textColor = data.colors[1];
+                    }
                     this.status.gotoAndPlay("offline");
                 }
                 this.status.visible = true;
             }
             if (data.hasOwnProperty("chatRoster")) 
+            {
                 this.updateVoiceWave();
+            }
             invalidate();
             return;
         }
@@ -133,7 +151,9 @@ package net.wg.gui.prebattle.invites
         protected override function updateAfterStateChange():void
         {
             if (data == null) 
+            {
                 return;
+            }
             var loc1:*=false;
             var loc2:*=false;
             if (data.hasOwnProperty("chatRoster")) 
@@ -142,17 +162,31 @@ package net.wg.gui.prebattle.invites
                 loc2 = net.wg.gui.prebattle.squad.MessengerUtils.isIgnored(data);
             }
             if (!initialized || data == null) 
+            {
                 return;
+            }
             this.updateVoiceWave();
             if (data.hasOwnProperty("colors") && data.hasOwnProperty("online")) 
+            {
                 if (loc2) 
+                {
                     if (data.colors[1] != null) 
+                    {
                         textField.textColor = data.colors[1];
+                    }
+                }
                 else if (data.online) 
+                {
                     if (data.colors[0] != null) 
+                    {
                         textField.textColor = data.colors[0];
+                    }
+                }
                 else if (data.colors[1] != null) 
+                {
                     textField.textColor = data.colors[1];
+                }
+            }
             super.updateAfterStateChange();
             return;
         }

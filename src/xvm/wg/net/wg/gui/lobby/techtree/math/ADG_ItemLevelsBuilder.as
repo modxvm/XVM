@@ -27,7 +27,9 @@ package net.wg.gui.lobby.techtree.math
             {
                 this.maxPaths[arg2] = arg4;
                 if (arg4 > this.widthPartitioning) 
+                {
                     this.widthPartitioning = arg4;
+                }
                 return;
             }
             var loc1:*=arg3.length;
@@ -35,8 +37,12 @@ package net.wg.gui.lobby.techtree.math
             while (loc2 < loc1) 
             {
                 if (loc2 != arg1) 
+                {
                     if (arg3[loc2] == -1) 
+                    {
                         this.searchMaxPathLegth(arg1, arg2, this.adjacencyMatrix[loc2], arg4 + 1);
+                    }
+                }
                 ++loc2;
             }
             return;
@@ -79,6 +85,7 @@ package net.wg.gui.lobby.techtree.math
                     while (loc9 < loc8.length) 
                     {
                         if (loc8[loc9] == -1) 
+                        {
                             if (loc5[loc9] != null) 
                             {
                                 this.adjacencyMatrix[loc6.index][loc5[loc9]] = -2;
@@ -89,7 +96,10 @@ package net.wg.gui.lobby.techtree.math
                                 this.removeLevelItem(loc3, loc6.index);
                             }
                             else 
+                            {
                                 loc5[loc9] = this.addFakeNodes(loc6, loc3, loc9, loc7);
+                            }
+                        }
                         ++loc9;
                     }
                 }
@@ -110,12 +120,16 @@ package net.wg.gui.lobby.techtree.math
             var loc15:*=NaN;
             var loc1:*=[];
             if (arg1 == 0) 
+            {
                 return loc1;
+            }
             var loc3:*;
             var loc4:*=(loc3 = this.levels[arg1]).length;
             var loc5:*;
             if (!(loc5 = this.levels[arg2 ? arg1 + 1 : (arg1 - 1)])) 
+            {
                 return loc1;
+            }
             var loc6:*=loc5.length;
             var loc11:*=arg2 ? 1 : -1;
             var loc12:*=arg2 ? 2 : -2;
@@ -169,7 +183,9 @@ package net.wg.gui.lobby.techtree.math
                     loc5 = loc3.start - loc4.start;
                     loc6 = loc3.end - loc4.end;
                     if ((loc4.start - loc3.start) * (loc4.end - loc3.end) < 0 && loc5 * loc6 < 0 || !(loc3.start == loc3.end) && loc5 == loc6 && Math.abs(loc3.start - loc4.start) == 1) 
+                    {
                         loc1 = loc1 + (this.maxLevelWidth + 1);
+                    }
                     ++loc8;
                 }
                 ++loc7;
@@ -184,7 +200,9 @@ package net.wg.gui.lobby.techtree.math
             while (loc1 < this.levels.length) 
             {
                 if (this.levels[loc1].length > this.maxLevelWidth) 
+                {
                     this.zipLevel(loc1);
+                }
                 ++loc1;
             }
             loc1 = 0;
@@ -216,7 +234,9 @@ package net.wg.gui.lobby.techtree.math
                     loc5 = loc3.start - loc4.start;
                     loc6 = loc3.end - loc4.end;
                     if ((loc4.start - loc3.start) * (loc4.end - loc3.end) < 0 && loc5 * loc6 < 0 || !(loc3.start == loc3.end) && !(loc4.start == loc4.end) && (loc3.end >= loc4.start && loc3.start <= loc4.end || loc4.end <= loc3.start && loc3.end <= loc4.start) && !(loc3.start == loc4.start)) 
+                    {
                         loc1 = loc1 + (this.maxLevelWidth + 1);
+                    }
                     ++loc8;
                 }
                 ++loc7;
@@ -228,7 +248,9 @@ package net.wg.gui.lobby.techtree.math
         {
             var loc3:*=NaN;
             if (this.isCyclicReference || arg1 == null) 
+            {
                 return 0;
+            }
             var loc1:*=[];
             var loc2:*=0;
             loc3 = 0;
@@ -269,25 +291,31 @@ package net.wg.gui.lobby.techtree.math
             while (loc3 < loc2) 
             {
                 if ((loc4 = loc1[loc3]) != null) 
+                {
                     if (loc5 > 0) 
                     {
                         loc5 = 0;
                         break;
                     }
+                }
                 else 
                 {
                     ++loc5;
                     if (!(loc1[(loc3 - 1)] == null) && loc1[(loc3 - 1)].fake && !(loc1[loc3 + 1] == null)) 
                     {
                         if (loc3 == 1) 
+                        {
                             loc5 = 0;
+                        }
                         break;
                     }
                 }
                 ++loc3;
             }
             if (loc5 < 1) 
+            {
                 return;
+            }
             var loc7:*=false;
             var loc8:*=0;
             var loc9:*=0;
@@ -295,6 +323,7 @@ package net.wg.gui.lobby.techtree.math
             while (loc3 < loc2) 
             {
                 if ((loc4 = loc1[loc3]) != null) 
+                {
                     if ((loc8 = (this.findMaxChildCount(this.adjacencyMatrix[loc4.index]) - 1)) > 0) 
                     {
                         loc10 = 0;
@@ -310,10 +339,13 @@ package net.wg.gui.lobby.techtree.math
                         }
                         ++loc9;
                     }
+                }
                 ++loc3;
             }
             if (!loc7) 
+            {
                 return;
+            }
             this.mapLevel(arg1, loc6);
             return;
         }
@@ -374,19 +406,27 @@ package net.wg.gui.lobby.techtree.math
                     if (i != x) 
                     {
                         if (node != null) 
+                        {
                             node.dx = x;
+                        }
                         other = checkLevel[x];
                         if (other != null) 
+                        {
                             other.dx = i;
+                        }
                     }
                     lines = this.getLines(levelIdx, next);
                     crossings[x] = this.getTotalCost(lines);
                     if (other != null) 
+                    {
                         other.dx = x;
+                    }
                     ++x;
                 }
                 if (node != null) 
+                {
                     node.dx = holdDxs[i];
+                }
                 matrix[i] = crossings;
                 ++i;
             }
@@ -405,7 +445,9 @@ package net.wg.gui.lobby.techtree.math
                 column = position.column;
                 node = checkLevel[row];
                 if (node != null) 
+                {
                     node.dx = column;
+                }
                 newLevel[column] = node;
                 profit = profit + matrix[row][column];
                 ++i;
@@ -449,12 +491,16 @@ package net.wg.gui.lobby.techtree.math
             {
                 loc1 = this.findNodePositionInLevel(loc2, false);
                 if (this.hasFakeNode(loc2)) 
+                {
                     this.breedNodesByNextRelations(loc2);
+                }
                 if (this.getCrossingCostEx(loc1) > 0) 
                 {
                     loc3 = this.makeMinCrossing((loc2 - 1), true);
                     if (!(loc3 == 0) && loc2 == (this.levels.length - 1)) 
+                    {
                         this.findNodePositionInLevel(loc2, false);
+                    }
                 }
                 ++loc2;
             }
@@ -485,7 +531,9 @@ package net.wg.gui.lobby.techtree.math
                 while (loc3 >= 0) 
                 {
                     if (loc4[loc3] != null) 
+                    {
                         break;
+                    }
                     --loc3;
                 }
                 loc2 = Math.max(loc3 + 1, loc2);
@@ -551,7 +599,9 @@ package net.wg.gui.lobby.techtree.math
             {
                 loc2 = arg1[loc3];
                 if (loc2.start != loc2.end) 
+                {
                     loc1 = loc1 + Math.abs(loc2.start - loc2.end);
+                }
                 ++loc3;
             }
             return loc1;
@@ -572,7 +622,9 @@ package net.wg.gui.lobby.techtree.math
             while (loc3 < loc1.length) 
             {
                 if (loc1[loc3] != null) 
+                {
                     loc1[loc3].dx = loc3;
+                }
                 ++loc3;
             }
             return;
@@ -583,7 +635,9 @@ package net.wg.gui.lobby.techtree.math
             var loc1:*=arg2.length;
             var loc2:*;
             if ((loc2 = this.levels[arg1]) == null) 
+            {
                 return;
+            }
             var loc3:*=new Array(loc1);
             var loc4:*=0;
             var loc5:*=0;
@@ -599,7 +653,9 @@ package net.wg.gui.lobby.techtree.math
                     }
                     loc3[loc5] = loc2[loc6];
                     if (loc3[loc5] != null) 
+                    {
                         loc3[loc5].dx = loc5;
+                    }
                     ++loc6;
                 }
                 else 
@@ -617,10 +673,14 @@ package net.wg.gui.lobby.techtree.math
         {
             var loc2:*=NaN;
             if (this.levels[arg1] == undefined) 
+            {
                 this.levels[arg1] = [];
+            }
             this.levels[arg1].push(new LevelItem(arg2, this.levels[arg1].length, arg3));
             if (!arg4) 
+            {
                 return;
+            }
             var loc1:*=this.adjacencyMatrix[arg2];
             var loc3:*=0;
             while (loc3 < loc1.length) 
@@ -643,7 +703,9 @@ package net.wg.gui.lobby.techtree.math
             while (loc3 < loc1.length) 
             {
                 if (loc1[loc3].index != arg2) 
+                {
                     loc2.push(loc1[loc3]);
+                }
                 ++loc3;
             }
             this.levels[arg1] = loc2;
@@ -666,7 +728,9 @@ package net.wg.gui.lobby.techtree.math
             var loc15:*=NaN;
             var loc16:*=NaN;
             if (arg1 < 1) 
+            {
                 return;
+            }
             var loc1:*=this.levels[(arg1 - 1)];
             var loc2:*=loc1.length;
             var loc10:*=0;
@@ -704,7 +768,9 @@ package net.wg.gui.lobby.techtree.math
                                 if (loc6.index == loc16 && loc4 > loc14) 
                                 {
                                     if (loc13) 
+                                    {
                                         loc12 = this.addFakeNode(loc6, arg1, loc5.index);
+                                    }
                                     else if (loc12 > 0) 
                                     {
                                         this.addFakeRelations(loc5.index, loc6.index, loc12);
@@ -751,7 +817,9 @@ package net.wg.gui.lobby.techtree.math
                 while (loc4 < loc2) 
                 {
                     if ((loc6 = loc5[loc4]) != null) 
+                    {
                         this.levelByNode[loc3][loc6.index] = loc4;
+                    }
                     ++loc4;
                 }
                 ++loc3;
@@ -773,9 +841,13 @@ package net.wg.gui.lobby.techtree.math
                         while (loc11 < loc8) 
                         {
                             if ((loc12 = loc7[loc11]) == 1 || loc12 == 2) 
+                            {
                                 loc9.push(this.levelByNode[loc3 + 1][loc11]);
+                            }
                             if (loc12 == -1 || loc12 == -2) 
+                            {
                                 loc10.push(this.levelByNode[(loc3 - 1)][loc11]);
+                            }
                             ++loc11;
                         }
                         this.parentLevelIdxs[loc6.index] = loc10;
@@ -837,7 +909,9 @@ package net.wg.gui.lobby.techtree.math
             {
                 loc2 = this.addFakeNode(arg1, arg2, arg3);
                 if (loc3 == 0) 
+                {
                     loc1 = loc2;
+                }
                 arg1 = this.levels[arg2][(this.levels[arg2].length - 1)];
                 ++loc3;
             }
@@ -851,7 +925,9 @@ package net.wg.gui.lobby.techtree.math
             while (loc2 < loc1.length) 
             {
                 if (!(loc1[loc2] == null) && loc1[loc2].fake) 
+                {
                     return true;
+                }
                 ++loc2;
             }
             return false;

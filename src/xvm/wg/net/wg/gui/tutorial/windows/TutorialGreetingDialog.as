@@ -44,9 +44,13 @@ package net.wg.gui.tutorial.windows
                     if (!Boolean(loc5.received)) 
                     {
                         if ((loc6 = loc5.values).credits) 
+                        {
                             loc2 = loc2 + Number(loc6.credits);
+                        }
                         if (loc6.freeXP) 
+                        {
                             loc3 = loc3 + Number(loc6.freeXP);
+                        }
                     }
                     ++loc4;
                 }

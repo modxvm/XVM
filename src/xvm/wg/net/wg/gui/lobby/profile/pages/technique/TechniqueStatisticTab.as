@@ -37,15 +37,21 @@ package net.wg.gui.lobby.profile.pages.technique
             var loc4:*=0;
             var loc5:*=this.firstAlignedGroup;
             for each (loc1 in loc5) 
+            {
                 loc1.width = 350;
+            }
             loc4 = 0;
             loc5 = this.secontAlignedGroup;
             for each (loc2 in loc5) 
+            {
                 loc2.width = 365;
+            }
             loc4 = 0;
             loc5 = this.thirdAlignedGroup;
             for each (loc3 in loc5) 
+            {
                 loc3.width = 350;
+            }
             this.setupLabels();
             this.winsDL.value = convertPercentValue(0);
             this.defeatsDL.value = convertPercentValue(0);

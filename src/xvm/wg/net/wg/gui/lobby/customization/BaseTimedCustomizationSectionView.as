@@ -47,9 +47,13 @@ package net.wg.gui.lobby.customization
                 if (loc2 != null) 
                 {
                     if (loc2._new.id != null) 
+                    {
                         this.newItemData = loc2._new;
+                    }
                     if (loc2.selectedGroupIdx != null) 
+                    {
                         loc1 = loc2.selectedGroupIdx;
+                    }
                 }
                 this.form.addEventListener(net.wg.gui.lobby.customization.CustomizationEvent.CHANGE_ACTIONS_LOCK, this.handleChangeActionLock);
                 this.form.addEventListener(net.wg.gui.lobby.customization.CustomizationEvent.RESET_NEW_ITEM, this.handleResetNewItem);
@@ -101,7 +105,9 @@ package net.wg.gui.lobby.customization
         {
             var loc1:*=arg2.id;
             if (this.currentItemData.id != loc1) 
+            {
                 this.newItemData = arg2;
+            }
             else 
             {
                 this.newItemData = this.getEmptyDataItem();
@@ -120,7 +126,9 @@ package net.wg.gui.lobby.customization
         {
             this.requestCurrentItem();
             if (this.view != null) 
+            {
                 this.view.invalidateListData();
+            }
             return;
         }
 
@@ -154,7 +162,9 @@ package net.wg.gui.lobby.customization
             this.newItemRenderer.setData(this.newItemData);
             this.newItemRenderer.enabled = false;
             if (this.view != null) 
+            {
                 this.view.list.selectedIndex = -1;
+            }
             return;
         }
 
@@ -162,7 +172,9 @@ package net.wg.gui.lobby.customization
         {
             App.toolTipMgr.hide();
             if (this.form) 
+            {
                 this.form.dropCurrentItemInSection(this.getSectionName(), arg1.kind);
+            }
             return;
         }
 
@@ -172,14 +184,20 @@ package net.wg.gui.lobby.customization
             this.currentItemRenderer.setData(this.currentItemData);
             this.currentItemRenderer.enabled = true;
             if (this.dropButton != null) 
+            {
                 this.dropButton.visible = true;
+            }
             if (this.timeLeftField != null) 
+            {
                 this.timeLeftField.text = "";
+            }
             this.newItemData = this.getEmptyDataItem();
             this.newItemRenderer.setData(this.newItemData);
             this.newItemRenderer.enabled = false;
             if (this.view != null) 
+            {
                 this.view.invalidateListData(true);
+            }
             return;
         }
 
@@ -189,11 +207,17 @@ package net.wg.gui.lobby.customization
             this.currentItemRenderer.setData(this.currentItemData);
             this.currentItemRenderer.enabled = false;
             if (this.dropButton != null) 
+            {
                 this.dropButton.visible = false;
+            }
             if (this.timeLeftField != null) 
+            {
                 this.timeLeftField.text = "";
+            }
             if (this.view != null) 
+            {
                 this.view.invalidateListData(true);
+            }
             return;
         }
 
@@ -223,11 +247,15 @@ package net.wg.gui.lobby.customization
         {
             this.currentItemData = this.form.getCurrentItemS(this.getSectionName());
             if (this.currentItemData && !(this.timeLeftField == null)) 
+            {
                 this.timeLeftField.text = this.currentItemData.timeLeft;
+            }
             this.currentItemRenderer.setData(this.currentItemData);
             var loc1:*=this.currentItemData && this.currentItemData.id == null;
             if (!loc1 && this.currentItemData.hasOwnProperty("canDrop")) 
+            {
                 loc1 = !Boolean(this.currentItemData.canDrop);
+            }
             this.currentItemRenderer.enabled = !loc1;
             if (this.dropButton != null) 
             {
@@ -248,9 +276,13 @@ package net.wg.gui.lobby.customization
                 {
                     loc2 = this.form.getSectionData(this.getSectionName());
                     if (loc2 == null) 
+                    {
                         this.view.setListSelectedIndex(loc1.name, null);
+                    }
                     else 
+                    {
                         this.view.setListSelectedIndex(loc2.groupName, loc2._new);
+                    }
                 }
                 this.view.invalidateListData(false);
             }
@@ -329,7 +361,9 @@ package net.wg.gui.lobby.customization
                 this.list.dataProvider = null;
             }
             if (this.currentItemRenderer != null) 
+            {
                 this.currentItemRenderer.setData(null);
+            }
             if (this.dropButton != null) 
             {
                 this.dropButton.removeEventListener(flash.events.MouseEvent.ROLL_OVER, this.hadleRollOverDropButton);
@@ -337,7 +371,9 @@ package net.wg.gui.lobby.customization
                 this.dropButton.removeEventListener(net.wg.gui.lobby.customization.CustomizationEvent.DROP_ITEM, this.handleClickDropButton);
             }
             if (this.newItemRenderer != null) 
+            {
                 this.newItemRenderer.setData(null);
+            }
             this._currentItemData = null;
             this._newItemData = null;
             this._groupsDataProvider = null;

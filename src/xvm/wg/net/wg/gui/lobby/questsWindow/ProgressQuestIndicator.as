@@ -4,6 +4,8 @@ package net.wg.gui.lobby.questsWindow
     import flash.events.*;
     import flash.text.*;
     import net.wg.data.constants.*;
+    import net.wg.gui.lobby.questsWindow.data.*;
+    import net.wg.gui.utils.*;
     import scaleform.clik.constants.*;
     import scaleform.clik.core.*;
     
@@ -43,6 +45,12 @@ package net.wg.gui.lobby.questsWindow
             return;
         }
 
+        public function setTooltip(arg1:Object):void
+        {
+            this._tooltip = arg1 ? new net.wg.gui.lobby.questsWindow.data.ComplexTooltipVO(arg1) : null;
+            return;
+        }
+
         protected override function draw():void
         {
             var loc1:*=NaN;
@@ -55,9 +63,13 @@ package net.wg.gui.lobby.questsWindow
                 this.maskMC.width = this._currentValue / this._totalValue * MASK_WIDTH;
                 this.textField.text = App.utils.locale.integer(this._currentValue) + " / " + App.utils.locale.integer(this._totalValue);
                 if (this.bgMC.contains(this.container)) 
+                {
                     this.bgMC.removeChild(this.container);
+                }
                 if (this._type == net.wg.data.constants.QuestsStates.CURRENT) 
+                {
                     this.lineMC.gotoAndStop(net.wg.data.constants.QuestsStates.CURRENT);
+                }
                 if (this._type == net.wg.data.constants.QuestsStates.STRATEGIC) 
                 {
                     this.lineMC.gotoAndStop(net.wg.data.constants.QuestsStates.STRATEGIC);
@@ -81,11 +93,26 @@ package net.wg.gui.lobby.questsWindow
 
         internal function showTooltip(arg1:flash.events.MouseEvent):void
         {
-            if (this._type != net.wg.data.constants.QuestsStates.STRATEGIC) 
+            var loc1:*=null;
+            if (this._tooltip) 
+            {
+                loc1 = new net.wg.gui.utils.ComplexTooltipHelper().addHeader(this._tooltip.header).addBody(this._tooltip.body, false).addNote(this._tooltip.note ? this._tooltip.note : null, false).make();
+                if (loc1.length > 0) 
+                {
+                    App.toolTipMgr.showComplex(loc1);
+                }
+            }
+            else if (this._type != net.wg.data.constants.QuestsStates.STRATEGIC) 
+            {
                 if (this._type == net.wg.data.constants.QuestsStates.CURRENT) 
+                {
                     App.toolTipMgr.show(TOOLTIPS.QUESTS_PROGRESS_CURRENT);
+                }
+            }
             else 
+            {
                 App.toolTipMgr.show(TOOLTIPS.QUESTS_PROGRESS_STRATEGIC);
+            }
             return;
         }
 
@@ -112,6 +139,8 @@ package net.wg.gui.lobby.questsWindow
         internal var _currentValue:Number=0;
 
         internal var _totalValue:Number=100;
+
+        internal var _tooltip:net.wg.gui.lobby.questsWindow.data.ComplexTooltipVO=null;
 
         public var container:flash.display.Sprite;
     }

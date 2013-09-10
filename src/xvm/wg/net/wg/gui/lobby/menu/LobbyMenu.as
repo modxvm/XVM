@@ -59,9 +59,13 @@ package net.wg.gui.lobby.menu
         internal function onLogoffClick(arg1:scaleform.clik.events.ButtonEvent):void
         {
             if (App.globalVarsMgr.isTutorialRunningS()) 
+            {
                 refuseTrainingS();
+            }
             else 
+            {
                 logoffClickS();
+            }
             return;
         }
 

@@ -16,7 +16,9 @@ package net.wg.gui.components.common
         public function setLocale(arg1:String):void
         {
             if (this.hasOverride(arg1)) 
+            {
                 gotoAndStop(arg1);
+            }
             return;
         }
 
@@ -32,7 +34,9 @@ package net.wg.gui.components.common
             var loc2:*=0;
             var loc3:*=currentLabels;
             for each (loc1 in loc3) 
+            {
                 this.overrides.push(loc1.name);
+            }
             return;
         }
 

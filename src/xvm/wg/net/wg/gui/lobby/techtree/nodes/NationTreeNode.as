@@ -30,11 +30,17 @@ package net.wg.gui.lobby.techtree.nodes
         {
             removeEventListener(flash.events.MouseEvent.MOUSE_MOVE, this.handleMouseMove, false);
             if (this.typeAndLevel != null) 
+            {
                 this.typeAndLevel.dispose();
+            }
             if (this.nameAndXp != null) 
+            {
                 this.nameAndXp.dispose();
+            }
             if (this.vIconLoader != null) 
+            {
                 this.vIconLoader.dispose();
+            }
             super.cleanUp();
             return;
         }
@@ -48,9 +54,13 @@ package net.wg.gui.lobby.techtree.nodes
         {
             var loc1:*=false;
             if (hit == null) 
+            {
                 loc1 = super.hitTestPoint(arg1, arg2, arg3);
+            }
             else 
+            {
                 loc1 = hit.hitTestPoint(arg1, arg2, arg3);
+            }
             return loc1 && (button == null || !button.visible || !button.hitTestPoint(arg1, arg2, arg3));
         }
 
@@ -63,7 +73,9 @@ package net.wg.gui.lobby.techtree.nodes
         public override function showContextMenu():void
         {
             if (button != null) 
+            {
                 button.endAnimation(true);
+            }
             this.stopDragNode();
             net.wg.gui.lobby.techtree.MenuHandler.getInstance().showNationTreeMenu(this);
             return;
@@ -83,15 +95,21 @@ package net.wg.gui.lobby.techtree.nodes
                 }
             }
             if (this.typeAndLevel != null) 
+            {
                 this.typeAndLevel.setOwner(this, _doValidateNow);
+            }
             if (this.nameAndXp != null) 
+            {
                 this.nameAndXp.setOwner(this, _doValidateNow);
+            }
             if (button != null) 
             {
                 button.label = getNamedLabel(stateProps.label);
                 button.enabled = isActionEnabled();
                 if (button.setAnimation(stateProps.id, stateProps.animation)) 
+                {
                     button.visible = stateProps.visible;
+                }
                 button.setOwner(this, _doValidateNow);
             }
             super.populateUI();
@@ -117,7 +135,9 @@ package net.wg.gui.lobby.techtree.nodes
         {
             super.handleMouseRollOver(arg1);
             if (button != null) 
+            {
                 button.startAnimation();
+            }
             return;
         }
 
@@ -125,7 +145,9 @@ package net.wg.gui.lobby.techtree.nodes
         {
             super.handleMouseRollOut(arg1);
             if (button != null) 
+            {
                 button.endAnimation(false);
+            }
             return;
         }
 
@@ -140,9 +162,13 @@ package net.wg.gui.lobby.techtree.nodes
         {
             super.handleReleaseOutside(arg1);
             if (button != null) 
+            {
                 button.endAnimation(false);
+            }
             if (!this.hitTestPoint(stage.mouseX, stage.mouseY)) 
+            {
                 this.stopDragNode();
+            }
             return;
         }
 
@@ -150,10 +176,14 @@ package net.wg.gui.lobby.techtree.nodes
         {
             net.wg.gui.lobby.techtree.MenuHandler.getInstance().hideMenu();
             if (button != null) 
+            {
                 button.endAnimation(true);
+            }
             super.handleClick(arg1);
             if (!this.isMouseMoved) 
+            {
                 dispatchEvent(new net.wg.gui.lobby.techtree.TechTreeEvent(net.wg.gui.lobby.techtree.TechTreeEvent.CLICK_2_OPEN, 0, _index, _entityType));
+            }
             this.stopDragNode();
             return;
         }
@@ -161,7 +191,9 @@ package net.wg.gui.lobby.techtree.nodes
         internal function startDragNode():void
         {
             if (container is net.wg.infrastructure.interfaces.entity.IDraggable) 
+            {
                 addEventListener(flash.events.MouseEvent.MOUSE_MOVE, this.handleMouseMove, false, 0, true);
+            }
             return;
         }
 

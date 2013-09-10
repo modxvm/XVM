@@ -109,6 +109,17 @@ package net.wg.gui.lobby.questsWindow.data
             return;
         }
 
+        public function get progrTooltip():Object
+        {
+            return this._progrTooltip;
+        }
+
+        public function set progrTooltip(arg1:Object):void
+        {
+            this._progrTooltip = arg1;
+            return;
+        }
+
         internal var _title:String="";
 
         internal var _date:String="";
@@ -126,5 +137,7 @@ package net.wg.gui.lobby.questsWindow.data
         internal var _currentProgrVal:Number=0;
 
         internal var _tasksCount:int=0;
+
+        internal var _progrTooltip:Object=null;
     }
 }

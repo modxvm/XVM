@@ -27,21 +27,29 @@ package net.wg.gui.lobby.profile.components
                 this._scrollBar.removeEventListener(flash.events.Event.CHANGE, this.handleScroll, false);
                 this._scrollBar.focusTarget = null;
                 if (this.contains(this._scrollBar as flash.display.DisplayObject)) 
+                {
                     this.removeChild(this._scrollBar as flash.display.DisplayObject);
+                }
                 this._scrollBar = null;
             }
             if (!this._scrollBarValue || this._scrollBarValue == "") 
+            {
                 return;
+            }
             this._autoScrollBar = false;
             if (this._scrollBarValue is String) 
             {
                 if (parent != null) 
+                {
                     loc1 = parent.getChildByName(this._scrollBarValue.toString()) as scaleform.clik.interfaces.IScrollBar;
+                }
                 if (loc1 == null) 
                 {
                     loc2 = flash.utils.getDefinitionByName(this._scrollBarValue.toString()) as Class;
                     if (loc2) 
+                    {
                         loc1 = new loc2() as scaleform.clik.interfaces.IScrollBar;
+                    }
                     if (loc1) 
                     {
                         this._autoScrollBar = true;
@@ -69,11 +77,15 @@ package net.wg.gui.lobby.profile.components
                 }
             }
             else 
+            {
                 loc1 = this._scrollBarValue as scaleform.clik.interfaces.IScrollBar;
+            }
             this._scrollBar = loc1;
             invalidateSize();
             if (this._scrollBar == null) 
+            {
                 return;
+            }
             this._scrollBar.addEventListener(flash.events.Event.SCROLL, this.handleScroll, false, 0, true);
             this._scrollBar.addEventListener(flash.events.Event.CHANGE, this.handleScroll, false, 0, true);
             this._scrollBar.focusTarget = this;
@@ -96,7 +108,9 @@ package net.wg.gui.lobby.profile.components
         {
             arg1 = Math.max(0, Math.min(this.maxScroll, Math.round(arg1)));
             if (this._scrollPosition == arg1) 
+            {
                 return;
+            }
             this._scrollPosition = arg1;
             invalidate(SCROLL_UPDATE_INV);
             return;
@@ -110,7 +124,9 @@ package net.wg.gui.lobby.profile.components
         protected function getContentHeight():Number
         {
             if (this._target) 
+            {
                 return this._target.height;
+            }
             return 0;
         }
 
@@ -141,7 +157,9 @@ package net.wg.gui.lobby.profile.components
             {
                 loc1 = this._scrollBar as flash.display.DisplayObject;
                 if (loc1.parent) 
+                {
                     loc1.parent.removeChild(loc1);
+                }
                 this._scrollBar.removeEventListener(flash.events.MouseEvent.MOUSE_WHEEL, this.blockMouseWheel);
                 this._scrollBar.removeEventListener(flash.events.Event.SCROLL, this.handleScroll);
                 this._scrollBar.removeEventListener(flash.events.Event.CHANGE, this.handleScroll);
@@ -156,7 +174,9 @@ package net.wg.gui.lobby.profile.components
             }
             this.removeSource();
             if (this._target is net.wg.infrastructure.interfaces.entity.IDisposable) 
+            {
                 net.wg.infrastructure.interfaces.entity.IDisposable(this._target).dispose();
+            }
             this._target = null;
             return;
         }
@@ -183,7 +203,9 @@ package net.wg.gui.lobby.profile.components
         {
             super.draw();
             if (isInvalid(TARGET_INVALID)) 
+            {
                 this.applyTargetChanges();
+            }
             if (isInvalid(scaleform.clik.constants.InvalidationType.SCROLL_BAR)) 
             {
                 this.createScrollBar();
@@ -197,7 +219,9 @@ package net.wg.gui.lobby.profile.components
                 invalidate(SCROLL_UPDATE_INV);
             }
             if (isInvalid(SCROLL_UPDATE_INV)) 
+            {
                 this.applyScrollBarUpdating();
+            }
             return;
         }
 
@@ -247,9 +271,13 @@ package net.wg.gui.lobby.profile.components
             var loc4:*=(this.scrollBar.position - loc2) / (loc3 - loc2);
             var loc5:*;
             if (!(loc5 = !(isNaN(loc4) || isNaN(loc1) || loc3 <= 0 || loc3 == Infinity))) 
+            {
                 this._scrollPosition = 0;
+            }
             if (this._target) 
+            {
                 this._target.y = -this._scrollStepFactor * this._scrollPosition;
+            }
             this.scrollBar.visible = loc5;
             this.scrollBar.position = this._scrollPosition;
             this.scrollBar.trackScrollPageSize = loc1;
@@ -259,7 +287,9 @@ package net.wg.gui.lobby.profile.components
         protected function drawScrollBar():void
         {
             if (!this._autoScrollBar) 
+            {
                 return;
+            }
             this._scrollBar.x = _width - this._scrollBar.width;
             this._scrollBar.height = this.availableHeight;
             this._scrollBar.validateNow();
@@ -280,7 +310,9 @@ package net.wg.gui.lobby.profile.components
         {
             this._target = arg1;
             if (_invalidHash) 
+            {
                 invalidate(TARGET_INVALID);
+            }
             return;
         }
 
@@ -296,7 +328,9 @@ package net.wg.gui.lobby.profile.components
             {
                 loc1 = this._target.parent;
                 if (loc1) 
+                {
                     loc1.removeChild(this._target);
+                }
                 this._target.removeEventListener(flash.events.MouseEvent.MOUSE_WHEEL, this.targetMouseWheelHandler);
             }
             return this._target;

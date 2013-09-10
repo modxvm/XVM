@@ -16,10 +16,14 @@ package net.wg.gui.lobby.techtree.controls
         public override function setOwner(arg1:net.wg.gui.lobby.techtree.interfaces.IRenderer, arg2:Boolean=false):void
         {
             if (_owner != null) 
+            {
                 _owner.removeEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.STATE_CHANGED, this.handleOwnerStateChanged);
+            }
             super.setOwner(arg1);
             if (_owner != null) 
+            {
                 _owner.addEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.STATE_CHANGED, this.handleOwnerStateChanged, false, 0, true);
+            }
             invalidate(net.wg.gui.lobby.techtree.constants.TTInvalidationType.ELITE, net.wg.gui.lobby.techtree.constants.TTInvalidationType.VEH_XP);
             return;
         }
@@ -27,7 +31,9 @@ package net.wg.gui.lobby.techtree.controls
         public function setFreeXP(arg1:Number):void
         {
             if (this._freeXP == arg1) 
+            {
                 return;
+            }
             this._freeXP = arg1;
             invalidate(net.wg.gui.lobby.techtree.constants.TTInvalidationType.FREE_XP);
             return;
@@ -36,11 +42,17 @@ package net.wg.gui.lobby.techtree.controls
         protected override function configUI():void
         {
             if (this.vehXPLabel != null) 
+            {
                 this.vehXPLabel.text = MENU.RESEARCH_LABELS_VEHXP;
+            }
             if (this.freeXPLabel != null) 
+            {
                 this.freeXPLabel.text = MENU.RESEARCH_LABELS_FREEXP;
+            }
             if (this.totalXPLabel != null) 
+            {
                 this.totalXPLabel.text = MENU.RESEARCH_LABELS_TOTALXP;
+            }
             super.configUI();
             return;
         }
@@ -49,9 +61,13 @@ package net.wg.gui.lobby.techtree.controls
         {
             super.draw();
             if (_owner == null) 
+            {
                 return;
+            }
             if (isInvalid(net.wg.gui.lobby.techtree.constants.TTInvalidationType.ELITE)) 
+            {
                 this.changeStars();
+            }
             var loc1:*=isInvalid(net.wg.gui.lobby.techtree.constants.TTInvalidationType.VEH_XP, net.wg.gui.lobby.techtree.constants.TTInvalidationType.FREE_XP);
             if (loc1) 
             {
@@ -75,9 +91,13 @@ package net.wg.gui.lobby.techtree.controls
             var loc2:*=null;
             var loc1:*=_owner.getEarnedXP();
             if (App.utils == null) 
+            {
                 loc2 = loc1.toString();
+            }
             else 
+            {
                 loc2 = App.utils.locale.integer(loc1);
+            }
             this.vehXPField.text = loc2;
             return;
         }
@@ -86,9 +106,13 @@ package net.wg.gui.lobby.techtree.controls
         {
             var loc1:*=null;
             if (App.utils == null) 
+            {
                 loc1 = this._freeXP.toString();
+            }
             else 
+            {
                 loc1 = App.utils.locale.integer(this._freeXP);
+            }
             this.freeXPField.text = loc1;
             return;
         }
@@ -98,9 +122,13 @@ package net.wg.gui.lobby.techtree.controls
             var loc2:*=null;
             var loc1:*=_owner.getEarnedXP() + this._freeXP;
             if (App.utils == null) 
+            {
                 loc2 = loc1.toString();
+            }
             else 
+            {
                 loc2 = App.utils.locale.integer(loc1);
+            }
             this.totalXPField.text = loc2;
             return;
         }
@@ -108,10 +136,16 @@ package net.wg.gui.lobby.techtree.controls
         internal function handleOwnerStateChanged(arg1:net.wg.gui.lobby.techtree.TechTreeEvent):void
         {
             if (arg1.primary != net.wg.gui.lobby.techtree.constants.NodeState.ELITE) 
+            {
                 if (arg1.primary == 0) 
+                {
                     invalidate(net.wg.gui.lobby.techtree.constants.TTInvalidationType.VEH_XP);
+                }
+            }
             else 
+            {
                 invalidate(net.wg.gui.lobby.techtree.constants.TTInvalidationType.ELITE);
+            }
             return;
         }
 

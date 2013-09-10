@@ -26,7 +26,9 @@ package net.wg.gui.lobby.vehicleBuyWindow
         public override function set label(arg1:String):void
         {
             if (_label == arg1) 
+            {
                 return;
+            }
             _label = arg1;
             return;
         }
@@ -35,14 +37,18 @@ package net.wg.gui.lobby.vehicleBuyWindow
         {
             var loc1:*=new Vector.<String>();
             if (this._expanded) 
+            {
                 loc1.push("expanded_");
+            }
             else if (_selected) 
             {
                 loc1.push("selected_");
                 loc1.push("");
             }
             else 
+            {
                 loc1.push("");
+            }
             return loc1;
         }
 

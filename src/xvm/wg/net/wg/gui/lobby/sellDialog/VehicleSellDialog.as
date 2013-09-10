@@ -42,7 +42,9 @@ package net.wg.gui.lobby.sellDialog
         protected override function draw():void
         {
             if (isInvalid("updateStage") && window) 
+            {
                 this.updateWindowPosition();
+            }
             if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
             {
                 this.setHeader(this.vehicleData);
@@ -62,22 +64,32 @@ package net.wg.gui.lobby.sellDialog
             var loc3:*=true;
             var loc4:*;
             if ((loc4 = this.headerComponent.tankGoldPrice > 0 ? this.headerComponent.tankGoldPrice - arg2 : arg2) >= 0) 
+            {
                 loc3 = this.headerComponent.tankGoldPrice > 0 ? false : true;
+            }
             else 
+            {
                 loc4 = loc4 * -1;
+            }
             var loc5:*=loc1.gold(loc4);
             var loc6:*=arg1 + this.creditsComplDev;
             if (loc4 == 0) 
+            {
                 this.result_mc.goldIT.text = "0";
+            }
             else 
             {
                 this.result_mc.goldIT.visible = true;
                 this.result_mc.goldIT.text = loc3 ? "- " + loc5 : "+ " + loc5;
             }
             if (loc6 > 0) 
+            {
                 this.result_mc.creditsIT.text = "+ " + loc1.gold(loc6);
+            }
             else 
+            {
                 this.result_mc.creditsIT.text = "0";
+            }
             if (this.controlQuestion && this.controlQuestion.visible) 
             {
                 this.controlQuestion.cleanField();
@@ -90,7 +102,9 @@ package net.wg.gui.lobby.sellDialog
                 this.slidingComponent.settingsBtn.creditsIT.validateNow();
             }
             else 
+            {
                 this.slidingComponent.settingsBtn.creditsIT.text = "0";
+            }
             if (this.slidingComponent.settingsBtn.setingsDropBtn.selected) 
             {
                 this.slidingComponent.settingsBtn.creditsIT.alpha = 0;
@@ -140,9 +154,13 @@ package net.wg.gui.lobby.sellDialog
                 loc1 = window.width + window.x;
                 loc2 = window.getBackground().height + window.y;
                 if (loc1 > App.appWidth) 
+                {
                     window.x = window.x - (loc1 - App.appWidth);
+                }
                 if (loc2 > App.appHeight) 
+                {
                     window.y = window.y - (loc2 - App.appHeight);
+                }
             }
             return;
         }
@@ -180,15 +198,22 @@ package net.wg.gui.lobby.sellDialog
                     switch (loc9) 
                     {
                         case "optDevices":
+                        {
                             loc1.push(this.renderersArr[loc7].dataInfo);
                             break;
+                        }
                         case "shells":
+                        {
                             loc2.push(this.renderersArr[loc7].dataInfo);
                             break;
+                        }
                         case "eqs":
+                        {
                             loc3.push(this.renderersArr[loc7].dataInfo);
                             break;
+                        }
                         case "modules":
+                        {
                             loc8 = 0;
                             while (loc8 < this.modulesData.length) 
                             {
@@ -196,9 +221,12 @@ package net.wg.gui.lobby.sellDialog
                                 ++loc8;
                             }
                             break;
+                        }
                         case "invShells":
+                        {
                             loc5.push(this.renderersArr[loc7].dataInfo);
                             break;
+                        }
                     }
                 }
                 ++loc7;
@@ -207,11 +235,15 @@ package net.wg.gui.lobby.sellDialog
             while (loc7 < this.complexDeviceRenderers.length) 
             {
                 if (!this.complexDeviceRenderers[loc7].inInventory) 
+                {
                     loc1.push(this.complexDeviceRenderers[loc7].dataInfo);
+                }
                 ++loc7;
             }
             if (this.headerComponent.inBarracsDrop.selectedIndex == 1) 
+            {
                 loc6 = true;
+            }
             setDialogSettingsS(this.slidingComponent.settingsBtn.setingsDropBtn.selected);
             sellS(this.vehicleData, loc2, loc3, loc1, loc5, loc6);
             onWindowCloseS();
@@ -245,7 +277,9 @@ package net.wg.gui.lobby.sellDialog
                 loc1 = this.controlQuestion.y + this.controlQuestion.getNextPosition();
             }
             else 
+            {
                 loc1 = this.result_mc.y + this.result_mc.getSize();
+            }
             this.windBgForm.height = loc1;
             var loc3:*;
             this.cancelBtn.y = loc3 = this.windBgForm.y + this.windBgForm.height + 3;
@@ -275,7 +309,9 @@ package net.wg.gui.lobby.sellDialog
             while (loc1 < this.renderersArr.length) 
             {
                 if (!this.renderersArr[loc1].inInventory) 
+                {
                     this.headerComponent.creditsCommon = this.headerComponent.creditsCommon + this.renderersArr[loc1].moneyValue;
+                }
                 ++loc1;
             }
             this.complexDeviceRenderers = this.devicesComponent.deviceItemRenderer;
@@ -283,10 +319,16 @@ package net.wg.gui.lobby.sellDialog
             while (loc2 < this.complexDeviceRenderers.length) 
             {
                 if (this.complexDeviceRenderers[loc2].inInventory) 
+                {
                     if (!this.complexDeviceRenderers[loc2].isRemovable) 
+                    {
                         this.goldCommon = this.goldCommon + this.devicesComponent.removePrice;
+                    }
+                }
                 else 
+                {
                     this.creditsComplDev = this.creditsComplDev + this.complexDeviceRenderers[loc2].moneyValue;
+                }
                 ++loc2;
             }
             this.setGoldText(this.headerComponent.creditsCommon, this.goldCommon);
@@ -406,9 +448,13 @@ package net.wg.gui.lobby.sellDialog
             {
                 this.controlQuestion.visible = arg1;
                 if (arg1) 
+                {
                     App.utils.scheduler.envokeInNextFrame(this.updateFocus, this.controlQuestion.userInput);
+                }
                 else 
+                {
                     this.controlQuestion.y = 0;
+                }
             }
             return;
         }
@@ -421,7 +467,9 @@ package net.wg.gui.lobby.sellDialog
                 loc1 = this.submitBtn.enabled;
                 this.submitBtn.enabled = this.controlQuestion.isValidControlInput && arg1 && this.accGold >= this.isHasGold();
                 if (this.submitBtn.enabled && !loc1) 
+                {
                     App.utils.scheduler.envokeInNextFrame(this.updateFocus, this.submitBtn);
+                }
             }
             return;
         }
@@ -451,7 +499,9 @@ package net.wg.gui.lobby.sellDialog
         internal function enabledSubmitBtn(arg1:Boolean):void
         {
             if (this.submitBtn.enabled != arg1) 
+            {
                 this.submitBtn.enabled = arg1;
+            }
             return;
         }
 
@@ -482,11 +532,13 @@ package net.wg.gui.lobby.sellDialog
             while (loc2 < this.complexDeviceRenderers.length) 
             {
                 if (this.complexDeviceRenderers[loc2].inInventory) 
+                {
                     if (!this.complexDeviceRenderers[loc2].isRemovable) 
                     {
                         this.complexDeviceRenderers[loc2].setColor(loc1);
                         this.complexDeviceRenderers[loc2].validateNow();
                     }
+                }
                 ++loc2;
             }
             this.result_mc.goldIT.textColor = loc1;
@@ -519,9 +571,13 @@ package net.wg.gui.lobby.sellDialog
             this.cancelBtn.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.handleClose);
             this.submitBtn.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.handleSubmit);
             if (this.controlQuestion.visible) 
+            {
                 App.utils.scheduler.envokeInNextFrame(this.updateFocus, this.controlQuestion.userInput);
+            }
             else 
+            {
                 App.utils.scheduler.envokeInNextFrame(this.updateFocus, this.submitBtn);
+            }
             return;
         }
 

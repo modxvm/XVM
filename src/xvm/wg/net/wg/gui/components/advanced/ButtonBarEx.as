@@ -46,7 +46,9 @@ package net.wg.gui.components.advanced
         public function get selectedRenderer():scaleform.clik.interfaces.IListItemRenderer
         {
             if (_selectedIndex >= 0) 
+            {
                 return _renderers[_selectedIndex];
+            }
             return null;
         }
 
@@ -69,18 +71,26 @@ package net.wg.gui.components.advanced
                 if (loc3 != null) 
                 {
                     if (loc4 = loc3 as net.wg.infrastructure.interfaces.entity.IDisposable) 
+                    {
                         loc4.dispose();
+                    }
                     loc5 = loc3 as flash.display.DisplayObject;
                     if (container) 
+                    {
                         if (container.contains(loc5)) 
+                        {
                             container.removeChild(loc5);
+                        }
+                    }
                 }
                 _renderers.splice(loc2, 1);
                 --loc2;
             }
             this.removeChild(container);
             if (_dataProvider) 
+            {
                 _dataProvider.cleanUp();
+            }
             _dataProvider = null;
             return;
         }
@@ -89,7 +99,9 @@ package net.wg.gui.components.advanced
         {
             removeEventListener(scaleform.clik.events.InputEvent.INPUT, handleInput, false);
             if (_dataProvider) 
+            {
                 _dataProvider.removeEventListener(flash.events.Event.CHANGE, handleDataChange, false);
+            }
             this.disposeRenderers();
             if (_group) 
             {
@@ -105,7 +117,9 @@ package net.wg.gui.components.advanced
         {
             var loc1:*=_dataProvider.requestItemAt(arg2);
             if (arg1.hasOwnProperty("tooltip") && loc1 && loc1.hasOwnProperty("tooltip")) 
+            {
                 arg1["tooltip"] = loc1.tooltip;
+            }
             super.populateRendererData(arg1, arg2);
             return;
         }

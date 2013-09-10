@@ -153,24 +153,32 @@ package net.wg.gui.lobby.battleResults
                 switch (loc3) 
                 {
                     case net.wg.gui.lobby.battleResults.EfficiencyIconRenderer.DAMAGE:
+                    {
                         loc2.values = arg1.data.damageDealtVals;
                         loc2.discript = arg1.data.damageDealtNames;
                         break;
+                    }
                     case net.wg.gui.lobby.battleResults.EfficiencyIconRenderer.ASSIST:
+                    {
                         loc2.value = arg1.data.damageAssisted;
                         loc2.values = arg1.data.damageAssistedVals;
                         loc2.discript = arg1.data.damageAssistedNames;
                         break;
+                    }
                     case net.wg.gui.lobby.battleResults.EfficiencyIconRenderer.CRITS:
+                    {
                         loc2.value = arg1.data.critsCount;
                         loc2.critDamage = arg1.data.criticalDevices;
                         loc2.critDestruction = arg1.data.destroyedDevices;
                         loc2.critWound = arg1.data.destroyedTankmen;
                         break;
+                    }
                     case net.wg.gui.lobby.battleResults.EfficiencyIconRenderer.KILL:
                     case net.wg.gui.lobby.battleResults.EfficiencyIconRenderer.TEAMKILL:
+                    {
                         loc2.value = arg1.data.deathReason;
                         break;
+                    }
                 }
                 App.toolTipMgr.showSpecial(net.wg.data.constants.Tooltips.EFFICIENCY_PARAM, null, arg1.data.hoveredKind, loc2);
             }

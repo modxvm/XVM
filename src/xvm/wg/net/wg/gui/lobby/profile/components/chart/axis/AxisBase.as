@@ -28,13 +28,17 @@ package net.wg.gui.lobby.profile.components.chart.axis
             {
                 loc2 = this._data ? this._data.length : 0;
                 while (this._points.length > loc2) 
+                {
                     this.removePointAt((this._points.length - 1));
+                }
                 loc4 = 0;
                 while (loc4 < loc2) 
                 {
                     loc3 = this._data[loc4];
                     if (loc4 != this._points.length) 
+                    {
                         loc1 = this._points[loc4];
+                    }
                     else 
                     {
                         loc1 = this.createPoint(loc3);
@@ -45,7 +49,9 @@ package net.wg.gui.lobby.profile.components.chart.axis
                     ++loc4;
                 }
                 if (loc2 > 0) 
+                {
                     this.layoutAll(this.currentLayout);
+                }
             }
             return;
         }
@@ -78,7 +84,9 @@ package net.wg.gui.lobby.profile.components.chart.axis
         {
             var loc1:*=this._points.splice(arg1, 1)[0];
             if (loc1 is net.wg.infrastructure.interfaces.entity.IDisposable) 
+            {
                 net.wg.infrastructure.interfaces.entity.IDisposable(loc1).dispose();
+            }
             return loc1;
         }
 
@@ -93,7 +101,9 @@ package net.wg.gui.lobby.profile.components.chart.axis
             {
                 loc1 = this._points.splice((this._points.length - 1), 1)[0];
                 try 
+                {
                     loc1.dispose();
+                }
                 catch (e:Error)
                 {
                 };

@@ -57,7 +57,9 @@ package net.wg.gui.lobby.settings
                 for (loc2 in loc7) 
                 {
                     if (!this._dynamicCursorsData.hasOwnProperty(loc1)) 
+                    {
                         this._dynamicCursorsData[loc1] = {};
+                    }
                     this._dynamicCursorsData[loc1][loc2] = net.wg.gui.lobby.settings.vo.SettingsControlProp(arg1[loc1][loc2]).current ? net.wg.gui.lobby.settings.vo.SettingsControlProp(arg1[loc1][loc2]).current : 0;
                 }
             }
@@ -74,7 +76,9 @@ package net.wg.gui.lobby.settings
             var loc3:*;
             (loc3 = {})[loc2] = arg1.controlValue;
             if (this._dynamicCursorsData != null) 
+            {
                 this._dynamicCursorsData[loc1][arg1.controlId] = arg1.controlValue;
+            }
             dispatchEvent(new net.wg.gui.lobby.settings.evnts.SettingViewEvent(net.wg.gui.lobby.settings.evnts.SettingViewEvent.ON_CONTROL_CHANGED, _viewId, loc1, loc3));
             this.updateCrosshairs(this.__currentTab);
             return;
@@ -121,11 +125,15 @@ package net.wg.gui.lobby.settings
             switch (loc12) 
             {
                 case 0:
+                {
                     loc11 = this.arcadeCursor;
                     break;
+                }
                 case 1:
+                {
                     loc11 = this.snipperCursor;
                     break;
+                }
             }
             if (loc11) 
             {
@@ -140,17 +148,25 @@ package net.wg.gui.lobby.settings
                 switch (loc12) 
                 {
                     case 1:
+                    {
                         loc3 = -1;
                         break;
+                    }
                     case 2:
+                    {
                         loc3 = 13;
                         break;
+                    }
                     case 3:
+                    {
                         loc3 = -11;
                         break;
+                    }
                     default:
+                    {
                         loc3 = 0;
                         break;
+                    }
                 }
                 loc11.cassette.y = loc3;
                 loc11.targetMC.gotoAndStop(60);
@@ -177,14 +193,22 @@ package net.wg.gui.lobby.settings
         {
             this._dynamicCursorsData = {};
             if (this.cassete && this.arcadeCursor) 
+            {
                 flash.display.MovieClip(this.arcadeCursor.cassette).removeChild(this.cassete);
+            }
             if (this.snpCassete && this.snipperCursor) 
+            {
                 flash.display.MovieClip(this.snipperCursor.cassette).removeChild(this.snpCassete);
+            }
             this.tabs.removeEventListener(scaleform.clik.events.IndexEvent.INDEX_CHANGE, this.onTabChange);
             if (this.arcadeForm.hasEventListener(net.wg.gui.lobby.settings.evnts.SettingsSubVewEvent.ON_CONTROL_CHANGE)) 
+            {
                 this.arcadeForm.removeEventListener(net.wg.gui.lobby.settings.evnts.SettingsSubVewEvent.ON_CONTROL_CHANGE, this.onControlChange);
+            }
             if (this.sniperForm.hasEventListener(net.wg.gui.lobby.settings.evnts.SettingsSubVewEvent.ON_CONTROL_CHANGE)) 
+            {
                 this.sniperForm.removeEventListener(net.wg.gui.lobby.settings.evnts.SettingsSubVewEvent.ON_CONTROL_CHANGE, this.onControlChange);
+            }
             super.dispose();
             return;
         }

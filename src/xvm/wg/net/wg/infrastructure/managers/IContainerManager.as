@@ -1,9 +1,9 @@
-package net.wg.infrastructure.managers 
+package net.wg.infrastructure.managers
 {
     import flash.events.*;
     import net.wg.infrastructure.base.meta.*;
     import net.wg.infrastructure.interfaces.*;
-    
+
     public interface IContainerManager extends flash.events.IEventDispatcher
     {
         function get loader():net.wg.infrastructure.base.meta.ILoaderManagerMeta;

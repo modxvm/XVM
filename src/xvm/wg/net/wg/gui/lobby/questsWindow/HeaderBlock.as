@@ -59,7 +59,9 @@ package net.wg.gui.lobby.questsWindow
                     this.layoutComponents();
                 }
                 else 
+                {
                     setSize(this.width, 0);
+                }
                 dispatchEvent(new flash.events.Event(flash.events.Event.RESIZE));
             }
             return;
@@ -130,7 +132,10 @@ package net.wg.gui.lobby.questsWindow
         {
             this.progressIndicator.visible = Boolean(this.headerData.progrBarType);
             if (this.headerData.progrBarType) 
+            {
                 this.progressIndicator.setValues(this.headerData.progrBarType, this.headerData.currentProgrVal, this.headerData.maxProgrVal);
+                this.progressIndicator.setTooltip(this.headerData.progrTooltip);
+            }
             return;
         }
 

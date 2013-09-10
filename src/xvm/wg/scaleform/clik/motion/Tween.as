@@ -19,9 +19,13 @@ package scaleform.clik.motion
             }
             this.props = arg3;
             if (arg4)
+            {
                 this.quickSet(arg4);
+            }
             if (arg4 == null || arg4.paused == null)
+            {
                 this.paused = false;
+            }
             return;
         }
 
@@ -54,10 +58,14 @@ package scaleform.clik.motion
         public function set paused(arg1:Boolean):void
         {
             if (arg1 == this._paused)
+            {
                 return;
+            }
             this._paused = arg1;
             if (arg1)
+            {
                 removeTween(this);
+            }
             else
             {
                 if (firstTween)
@@ -67,7 +75,9 @@ package scaleform.clik.motion
                 }
                 firstTween = this;
                 if (this._position >= this.delay + this.duration)
+                {
                     this._position = 0;
+                }
             }
             return;
         }
@@ -84,7 +94,9 @@ package scaleform.clik.motion
             var loc2:*=0;
             var loc3:*=arg1;
             for (loc1 in loc3)
+            {
                 this[loc1] = arg1[loc1];
+            }
             return;
         }
 
@@ -94,7 +106,9 @@ package scaleform.clik.motion
             loc1.name = arg1;
             loc1.prev = null;
             if (this.firstProp)
+            {
                 this.firstProp.prev = loc1;
+            }
             loc1.next = this.firstProp;
             var loc2:*;
             this.firstProp = loc2 = loc1;
@@ -142,9 +156,13 @@ package scaleform.clik.motion
             }
             this._position = this._position + arg1;
             if (this._position <= this.delay)
+            {
                 return;
+            }
             if (this.props)
+            {
                 this.init();
+            }
             var loc1:*=(this._position - this.delay) / this.duration;
             loc2 = loc1 >= 1;
             if (loc2)
@@ -153,7 +171,9 @@ package scaleform.clik.motion
                 this._position = this.duration + this.delay;
             }
             if (this.ease != null)
+            {
                 loc1 = this.easeParam != null ? this.ease(loc1, 0, 1, 1, this.easeParam) : this.ease(loc1, 0, 1, 1);
+            }
             if (this.startMatrix)
             {
                 loc4 = this.startMatrix.b + this.deltaMatrix.b * loc1;
@@ -175,7 +195,9 @@ package scaleform.clik.motion
                 workingMatrix.ty = this.startMatrix.ty + this.deltaMatrix.ty * loc1;
                 this.transform.matrix = workingMatrix;
                 if (this.deltaMatrix.c)
+                {
                     this.targetDO.alpha = this.startMatrix.c + this.deltaMatrix.c * loc1;
+                }
             }
             var loc3:*=this.firstProp;
             while (loc3)
@@ -184,17 +206,27 @@ package scaleform.clik.motion
                 loc3 = loc3.next;
             }
             if (this.onChange != null)
+            {
                 this.onChange(this);
+            }
             if (loc2)
             {
                 if (this.loop)
+                {
                     this.reset();
+                }
                 else
+                {
                     this.paused = true;
+                }
                 if (this.nextTween)
+                {
                     this.nextTween.paused = false;
+                }
                 if (this.onComplete != null)
+                {
                     this.onComplete(this);
+                }
             }
             return;
         }
@@ -218,11 +250,17 @@ package scaleform.clik.motion
         protected static function removeTween(arg1:scaleform.clik.motion.Tween):void
         {
             if (arg1.prev)
+            {
                 arg1.prev.next = arg1.next;
+            }
             if (arg1.next)
+            {
                 arg1.next.prev = arg1.prev;
+            }
             if (arg1 == firstTween)
+            {
                 firstTween = arg1.next;
+            }
             var loc1:*;
             arg1.next = loc1 = null;
             arg1.prev = loc1;

@@ -32,7 +32,9 @@ package net.wg.gui.components.advanced
         public override function setData(arg1:Object):void
         {
             if (arg1 == null) 
+            {
                 return;
+            }
             super.setData(arg1);
             this.loader.source = "../maps/icons/tankmen/icons/barracks/" + arg1.value;
             return;
@@ -41,7 +43,9 @@ package net.wg.gui.components.advanced
         protected override function configUI():void
         {
             if (this.emptyFocusIndicator) 
+            {
                 focusIndicator = this.emptyFocusIndicator;
+            }
             soundType = net.wg.data.constants.SoundTypes.CAROUSEL_BTN;
             soundId = net.wg.data.constants.SoundManagerStates.CAROUSEL_CELL_BTN;
             super.configUI();
@@ -63,7 +67,9 @@ package net.wg.gui.components.advanced
         protected override function handleMouseRelease(arg1:flash.events.MouseEvent):void
         {
             if (this.canSelected) 
+            {
                 super.handleMouseRelease(arg1);
+            }
             return;
         }
 

@@ -15,7 +15,9 @@ package net.wg.gui.components.controls
         public function set icon(arg1:String):void
         {
             if (iconSource != "../maps/icons/buttons/" + arg1) 
+            {
                 iconSource = "../maps/icons/buttons/" + arg1;
+            }
             return;
         }
 
@@ -24,7 +26,9 @@ package net.wg.gui.components.controls
             iconOffsetTop = 1;
             iconOffsetLeft = 2;
             if (iconSource && iconSource.indexOf("../maps/icons/buttons/") == -1) 
+            {
                 iconSource = "../maps/icons/buttons/" + iconSource;
+            }
             super.configUI();
             return;
         }
@@ -51,7 +55,9 @@ package net.wg.gui.components.controls
         public function set caps(arg1:Boolean):void
         {
             if (this._caps == arg1) 
+            {
                 return;
+            }
             this._caps = arg1;
             invalidate();
             return;
@@ -61,29 +67,47 @@ package net.wg.gui.components.controls
         {
             var loc1:*=null;
             if (this.caps) 
+            {
                 if (_label != null) 
                 {
                     loc1 = App.utils.locale.makeString(_label, {});
                     if (loc1) 
+                    {
                         loc1 = loc1.toUpperCase();
+                    }
                     else 
+                    {
                         loc1 = "";
+                    }
                     if (textField != null) 
+                    {
                         textField.text = loc1;
+                    }
                     if (textField1 != null) 
+                    {
                         textField1.text = loc1;
+                    }
                     if (blurTextField != null) 
+                    {
                         blurTextField.text = loc1;
+                    }
                     if (!(filtersMC == null) && !(filtersMC.textField == null)) 
+                    {
                         filtersMC.textField.text = loc1;
+                    }
                 }
+            }
             else 
             {
                 super.updateText();
                 if (blurTextField != null) 
+                {
                     blurTextField.text = _label;
+                }
                 if (!(filtersMC == null) && !(filtersMC.textField == null)) 
+                {
                     filtersMC.textField.text = _label;
+                }
             }
             return;
         }

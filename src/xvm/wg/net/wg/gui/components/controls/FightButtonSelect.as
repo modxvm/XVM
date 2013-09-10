@@ -21,7 +21,9 @@ package net.wg.gui.components.controls
         public override function open():void
         {
             if (selected) 
+            {
                 return;
+            }
             selected = true;
             stage.addEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.handleStageClick, false, 0, true);
             this.showDropdown();
@@ -43,7 +45,9 @@ package net.wg.gui.components.controls
         public function set fightBtnlabel(arg1:String):void
         {
             if (this._fightBtnlabel == arg1) 
+            {
                 return;
+            }
             this._fightBtnlabel = arg1;
             invalidateData();
             return;
@@ -52,7 +56,9 @@ package net.wg.gui.components.controls
         public override function close():void
         {
             if (!selected) 
+            {
                 return;
+            }
             selected = false;
             stage.removeEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.handleStageClick, false);
             if (_dropdownRef) 
@@ -99,7 +105,9 @@ package net.wg.gui.components.controls
             var loc1:*=null;
             var loc2:*=0;
             if (_selectedIndex == arg1) 
+            {
                 return;
+            }
             _selectedIndex = arg1;
             invalidateSelectedIndex();
             if (_dropdownRef != null) 
@@ -114,12 +122,16 @@ package net.wg.gui.components.controls
         public override function handleInput(arg1:scaleform.clik.events.InputEvent):void
         {
             if (arg1.handled) 
+            {
                 return;
+            }
             if (!(_dropdownRef == null) && selected) 
             {
                 _dropdownRef.handleInput(arg1);
                 if (arg1.handled) 
+                {
                     return;
+                }
             }
             super.handleInput(arg1);
             var loc1:*=arg1.details;
@@ -128,14 +140,20 @@ package net.wg.gui.components.controls
             switch (loc3) 
             {
                 case scaleform.clik.constants.NavigationCode.ESCAPE:
+                {
                     if (selected) 
                     {
                         if (loc2) 
+                        {
                             this.close();
+                        }
                         arg1.handled = true;
                     }
+                }
                 default:
+                {
                     break;
+                }
             }
             return;
         }
@@ -144,7 +162,9 @@ package net.wg.gui.components.controls
         {
             super.dataProvider = arg1;
             if (_dropdownRef) 
+            {
                 scaleform.clik.controls.CoreList(_dropdownRef).dataProvider = _dataProvider;
+            }
             return;
         }
 
@@ -152,7 +172,9 @@ package net.wg.gui.components.controls
         {
             super.changeFocus();
             if (_selected && _dropdownRef) 
+            {
                 this.close();
+            }
             return;
         }
 
@@ -161,23 +183,35 @@ package net.wg.gui.components.controls
             var loc1:*=null;
             var loc2:*=null;
             if (dropdown == null) 
+            {
                 return;
+            }
             if (dropdown is String && !(dropdown == "")) 
             {
                 loc2 = flash.utils.getDefinitionByName(dropdown.toString()) as Class;
                 if (loc2 != null) 
+                {
                     loc1 = new loc2();
+                }
             }
             if (loc1) 
             {
                 if (itemRenderer is String && !(itemRenderer == "")) 
+                {
                     loc1.itemRenderer = flash.utils.getDefinitionByName(itemRenderer.toString()) as Class;
+                }
                 else if (itemRenderer is Class) 
+                {
                     loc1.itemRenderer = itemRenderer as Class;
+                }
                 if (scrollBar is String && !(scrollBar == "")) 
+                {
                     loc1.scrollBar = flash.utils.getDefinitionByName(scrollBar.toString()) as Class;
+                }
                 else if (scrollBar is Class) 
+                {
                     loc1.scrollBar = scrollBar as Class;
+                }
                 loc1.selectedIndex = _selectedIndex;
                 loc1.width = menuWidth != -1 ? menuWidth : width + menuOffset.left + menuOffset.right;
                 loc1.dataProvider = _dataProvider;
@@ -211,9 +245,13 @@ package net.wg.gui.components.controls
         protected override function handleStageClick(arg1:flash.events.MouseEvent):void
         {
             if (this.contains(arg1.target as flash.display.DisplayObject)) 
+            {
                 return;
+            }
             if (this._dropdownRef.contains(arg1.target as flash.display.DisplayObject)) 
+            {
                 return;
+            }
             this.close();
             return;
         }

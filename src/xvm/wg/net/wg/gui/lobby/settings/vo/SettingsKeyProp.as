@@ -19,6 +19,7 @@ package net.wg.gui.lobby.settings.vo
             var loc1:*=null;
             loc1 = null;
             if (arg7) 
+            {
                 if (loc2 = arg7.length) 
                 {
                     loc1 = "";
@@ -32,10 +33,15 @@ package net.wg.gui.lobby.settings.vo
                         ++loc4;
                     }
                 }
+            }
             if (loc1) 
+            {
                 this.label = loc1;
+            }
             else 
+            {
                 this.label = App.utils.locale.makeString(this.header ? SETTINGS.keyboard_keysblocks_group(arg3) : SETTINGS.keyboard_keysblocks_command(arg3));
+            }
             this.command = arg4;
             this.key = arg5;
             this.keyDefault = arg6;

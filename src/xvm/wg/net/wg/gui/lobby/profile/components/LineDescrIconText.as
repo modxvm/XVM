@@ -71,7 +71,9 @@ package net.wg.gui.lobby.profile.components
         protected function showToolTip(arg1:net.wg.data.managers.IToolTipParams):void
         {
             if (this._tooltip) 
+            {
                 App.toolTipMgr.showComplex(this._tooltip);
+            }
             return;
         }
 

@@ -41,7 +41,9 @@ package net.wg.gui.tutorial.windows
         {
             var loc1:*=arg1.itemData;
             if (loc1.type == net.wg.gui.tutorial.constants.HintItemType.VIDEO_LINK) 
+            {
                 showVideoDialogS();
+            }
             return;
         }
 
@@ -89,9 +91,13 @@ package net.wg.gui.tutorial.windows
                 if ((loc4 = arg1[loc6]).received) 
                 {
                     if ((loc5 = loc4.bonus).credits) 
+                    {
                         loc1 = loc1 + Number(loc5.credits);
+                    }
                     if (loc5.freeXP) 
+                    {
                         loc2 = loc2 + Number(loc5.freeXP);
+                    }
                 }
                 ++loc6;
             }

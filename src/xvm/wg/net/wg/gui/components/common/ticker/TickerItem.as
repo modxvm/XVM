@@ -38,7 +38,9 @@ package net.wg.gui.components.common.ticker
         protected override function draw():void
         {
             if (isInvalid(INVALID_MODEL) && this._model) 
+            {
                 label = this._model.title;
+            }
             super.draw();
             return;
         }

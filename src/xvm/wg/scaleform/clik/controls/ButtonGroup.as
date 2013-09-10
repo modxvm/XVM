@@ -52,7 +52,9 @@ package scaleform.clik.controls
             this.removeButton(arg1);
             this._children.push(arg1);
             if (arg1.selected) 
+            {
                 this.updateSelectedButton(arg1, true);
+            }
             arg1.addEventListener(flash.events.Event.SELECT, this.handleSelect, false, 0, true);
             arg1.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.handleClick, false, 0, true);
             arg1.addEventListener(flash.events.Event.REMOVED, this.handleRemoved, false, 0, true);
@@ -63,7 +65,9 @@ package scaleform.clik.controls
         {
             var loc1:*=this._children.indexOf(arg1);
             if (loc1 == -1) 
+            {
                 return;
+            }
             this._children.splice(loc1, 1);
             arg1.removeEventListener(flash.events.Event.SELECT, this.handleSelect, false);
             arg1.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.handleClick, false);
@@ -108,26 +112,40 @@ package scaleform.clik.controls
         {
             var loc1:*=arg1.target as scaleform.clik.controls.Button;
             if (loc1.selected) 
+            {
                 this.updateSelectedButton(loc1, true);
+            }
             else 
+            {
                 this.updateSelectedButton(loc1, false);
+            }
             return;
         }
 
         protected function updateSelectedButton(arg1:scaleform.clik.controls.Button, arg2:Boolean=true):void
         {
             if (arg2 && arg1 == this.selectedButton) 
+            {
                 return;
+            }
             var loc1:*=!arg2 && arg1 == this.selectedButton && arg1.allowDeselect;
             var loc2:*=this.selectedButton;
             if (arg2) 
+            {
                 this.selectedButton = arg1;
+            }
             if (arg2 && !(loc2 == null)) 
+            {
                 loc2.selected = false;
+            }
             if (loc1) 
+            {
                 this.selectedButton = null;
+            }
             else if (!arg2) 
+            {
                 return;
+            }
             dispatchEvent(new flash.events.Event(flash.events.Event.CHANGE));
             return;
         }

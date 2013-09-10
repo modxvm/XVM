@@ -18,7 +18,9 @@ package net.wg.gui.components.icons
         public function set action(arg1:Number):void
         {
             if (this._actionBitMask == arg1) 
+            {
                 return;
+            }
             this._actionBitMask = arg1;
             invalidate();
             return;
@@ -32,7 +34,9 @@ package net.wg.gui.components.icons
         public function set team(arg1:String):void
         {
             if (this._team == arg1) 
+            {
                 return;
+            }
             this._team = arg1;
             invalidate();
             return;
@@ -55,13 +59,19 @@ package net.wg.gui.components.icons
                 gotoAndStop("actions");
                 var loc2:*=0;
                 var loc3:*=allActions;
-                for (elName in loc3) ;
+                for (elName in loc3) 
+                {
+                };
                 loc2 = 0;
                 loc3 = actions;
-                for (elName in loc3) ;
+                for (elName in loc3) 
+                {
+                };
             }
             else 
+            {
                 gotoAndStop(1);
+            }
             return;
         }
 

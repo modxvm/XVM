@@ -16,7 +16,9 @@ package net.wg.gui.lobby.profile.components
         {
             super.configUI();
             if (this.mcBG) 
+            {
                 this.mcBG.visible = false;
+            }
             addChild(this.line);
             return;
         }
@@ -24,11 +26,15 @@ package net.wg.gui.lobby.profile.components
         public override function set selectedIndex(arg1:int):void
         {
             if (arg1 == _selectedIndex) 
+            {
                 return;
+            }
             super.selectedIndex = arg1;
             var loc1:*=_renderers[_selectedIndex];
             if (loc1) 
+            {
                 loc1.parent.setChildIndex(loc1, (loc1.parent.numChildren - 1));
+            }
             invalidate(LINE_INVALID);
             return;
         }
@@ -37,7 +43,9 @@ package net.wg.gui.lobby.profile.components
         {
             super.draw();
             if (isInvalid(LINE_INVALID)) 
+            {
                 this.drawLine();
+            }
             return;
         }
 
@@ -54,14 +62,18 @@ package net.wg.gui.lobby.profile.components
                 loc4 = loc3.x;
                 loc1.moveTo(0, 0);
                 if (loc4 > 0) 
+                {
                     loc1.lineTo(loc4, 0);
+                }
                 loc1.moveTo(loc4 + loc3.width, 0);
                 loc1.lineTo(width, 0);
             }
             this.line.y = this.height - this.line.height - 2;
             var loc2:*=this.line.parent;
             if (loc2) 
+            {
                 loc2.setChildIndex(this.line, (loc2.numChildren - 1));
+            }
             return;
         }
 

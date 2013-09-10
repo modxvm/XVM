@@ -18,7 +18,9 @@ package scaleform.clik.core
         public static function initialize(arg1:flash.display.Stage, arg2:scaleform.clik.core.UIComponent):void
         {
             if (initialized) 
+            {
                 return;
+            }
             scaleform.clik.core.CLIK.stage = arg1;
             scaleform.gfx.Extensions.enabled = true;
             initialized = true;
@@ -33,7 +35,9 @@ package scaleform.clik.core
         {
             var loc1:*=null;
             if (!arg1.parent) 
+            {
                 return arg1.name;
+            }
             loc1 = arg1.name;
             return getTargetPathImpl(arg1.parent as flash.display.DisplayObjectContainer, loc1);
         }
@@ -45,7 +49,9 @@ package scaleform.clik.core
             var loc4:*=null;
             var loc1:*=getTargetPathFor(arg1);
             if (useImmediateCallbacks || firingInitCallbacks) 
+            {
                 scaleform.gfx.Extensions.CLIK_addedToStageCallback(arg1.name, loc1, arg1);
+            }
             else 
             {
                 loc2 = loc1.split(".");
@@ -56,7 +62,9 @@ package scaleform.clik.core
                     initQueue[loc3] = loc4;
                     validDictIndices.push(loc3);
                     if (validDictIndices.length > 1) 
+                    {
                         validDictIndices.sort(sortFunc);
+                    }
                 }
                 loc4[arg1] = loc1;
                 if (!isInitListenerActive) 
@@ -104,16 +112,22 @@ package scaleform.clik.core
             var loc2:*=0;
             var loc3:*=initQueue;
             for (loc1 in loc3) 
+            {
                 initQueue[loc1] = null;
+            }
             return;
         }
 
         protected static function sortFunc(arg1:uint, arg2:uint):Number
         {
             if (arg1 < arg2) 
+            {
                 return -1;
+            }
             if (arg1 > arg2) 
+            {
                 return 1;
+            }
             return 0;
         }
 
@@ -121,7 +135,9 @@ package scaleform.clik.core
         {
             var loc1:*=null;
             if (!arg1) 
+            {
                 return arg2;
+            }
             loc1 = arg1.name ? arg1.name + "." : "";
             arg2 = loc1 + arg2;
             return getTargetPathImpl(arg1.parent as flash.display.DisplayObjectContainer, arg2);

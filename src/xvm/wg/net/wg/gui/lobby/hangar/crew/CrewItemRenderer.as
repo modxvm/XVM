@@ -47,9 +47,13 @@ package net.wg.gui.lobby.hangar.crew
             dropdown = arg1.length > 1 ? "RecruitScrollingList" : "RecruitScrollingList2";
             menuRowCount = arg1.length < 5 ? arg1.length : 5;
             if (arg1.length > this.menuRowCount) 
+            {
                 super.scrollBar = "ScrollBar";
+            }
             else 
+            {
                 super.scrollBar = null;
+            }
             super.dataProvider = arg1;
             return;
         }
@@ -103,23 +107,35 @@ package net.wg.gui.lobby.hangar.crew
             var loc1:*=null;
             var loc2:*=null;
             if (dropdown == null) 
+            {
                 return;
+            }
             if (dropdown is String && !(dropdown == "")) 
             {
                 loc2 = flash.utils.getDefinitionByName(dropdown.toString()) as Class;
                 if (loc2 != null) 
+                {
                     loc1 = new loc2() as scaleform.clik.controls.CoreList;
+                }
             }
             if (loc1) 
             {
                 if (itemRenderer is String && !(itemRenderer == "")) 
+                {
                     loc1.itemRenderer = flash.utils.getDefinitionByName(itemRenderer.toString()) as Class;
+                }
                 else if (itemRenderer is Class) 
+                {
                     loc1.itemRenderer = itemRenderer as Class;
+                }
                 if (scrollBar is String && !(scrollBar == "")) 
+                {
                     loc1.scrollBar = flash.utils.getDefinitionByName(scrollBar.toString()) as Class;
+                }
                 else if (scrollBar is Class) 
+                {
                     loc1.scrollBar = scrollBar as Class;
+                }
                 loc1.selectedIndex = 1;
                 loc1.width = menuWidth != -1 ? menuWidth : width + menuOffset.left + menuOffset.right;
                 loc1.dataProvider = _dataProvider;
@@ -136,7 +152,9 @@ package net.wg.gui.lobby.hangar.crew
                 scaleform.clik.managers.PopUpManager.show(_dropdownRef, x + menuOffset.left, menuDirection != "down" ? y - _dropdownRef.height + menuOffset.bottom : y + height + menuOffset.top, parent);
             }
             if (_dropdownRef) 
+            {
                 dispatchEvent(new net.wg.gui.lobby.hangar.CrewDropDownEvent(net.wg.gui.lobby.hangar.CrewDropDownEvent.SHOW_DROP_DOWN, _dropdownRef));
+            }
             return;
         }
 
@@ -146,7 +164,9 @@ package net.wg.gui.lobby.hangar.crew
             {
                 _dropdownRef.removeEventListener(scaleform.clik.events.ListEvent.ITEM_CLICK, handleMenuItemClick, false);
                 if (_dropdownRef is net.wg.infrastructure.interfaces.entity.IDisposable) 
+                {
                     net.wg.infrastructure.interfaces.entity.IDisposable(_dropdownRef).dispose();
+                }
                 App.utils.commons.releaseReferences(_dropdownRef);
                 _dropdownRef.parent.removeChild(_dropdownRef);
                 _dropdownRef = null;
@@ -164,7 +184,9 @@ package net.wg.gui.lobby.hangar.crew
                 loc1 = net.wg.gui.lobby.hangar.crew.RecruitRendererVO(this.data);
                 this.tankmenName.textfield.text = loc1.rank + " " + loc1.firstname + " " + loc1.lastname;
                 if (_state == "up" || _state == "disabled" || _state == "out" && !selected) 
+                {
                     this.tankmenName.textfield.text = loc1.rank + " " + loc1.lastname;
+                }
             }
             return;
         }
@@ -192,7 +214,9 @@ package net.wg.gui.lobby.hangar.crew
                 {
                     gotoAndPlay(_newFrame);
                     if (_baseDisposed) 
+                    {
                         return;
+                    }
                     _newFrame = null;
                 }
                 if (focusIndicator && _newFocusIndicatorFrame) 
@@ -208,12 +232,20 @@ package net.wg.gui.lobby.hangar.crew
             {
                 updateText();
                 if (autoSize != flash.text.TextFieldAutoSize.NONE) 
+                {
                     invalidateSize();
+                }
             }
             if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
+            {
                 if (!constraintsDisabled) 
+                {
                     if (constraints) 
+                    {
                         constraints.update(_width, _height);
+                    }
+                }
+            }
             return;
         }
 
@@ -238,7 +270,9 @@ package net.wg.gui.lobby.hangar.crew
                             if (loc4.mouseX > 0 && loc4.mouseX < loc5 && loc4.mouseY > 0 && loc4.mouseY < loc5) 
                             {
                                 if (selected) 
+                                {
                                     close();
+                                }
                                 if (loc2.tankmanID > 0) 
                                 {
                                     this.openPersonalCase(2);
@@ -265,11 +299,13 @@ package net.wg.gui.lobby.hangar.crew
                 }
             }
             if (loc1.isRightButton(arg1)) 
+            {
                 if (loc2.tankmanID > 0 && this.enabled) 
                 {
                     App.contextMenuMgr.show(Vector.<net.wg.infrastructure.interfaces.IContextItem>([new net.wg.data.components.UserContextItem("personalCase"), new net.wg.data.VO.SeparateItem(), new net.wg.data.components.UserContextItem("tankmanUnload"), new net.wg.data.components.UserContextItem("tankmanUnloadAll")]), this, this.onContextMenuAction);
                     App.toolTipMgr.hide();
                 }
+            }
             super.handleMouseRelease(arg1);
             return;
         }
@@ -321,14 +357,20 @@ package net.wg.gui.lobby.hangar.crew
             switch (loc1) 
             {
                 case "personalCase":
+                {
                     this.openPersonalCase();
                     break;
+                }
                 case "tankmanUnload":
+                {
                     dispatchEvent(new net.wg.gui.events.CrewEvent(net.wg.gui.events.CrewEvent.UNLOAD_TANKMAN, this.data));
                     break;
+                }
                 case "tankmanUnloadAll":
+                {
                     dispatchEvent(new net.wg.gui.events.CrewEvent(net.wg.gui.events.CrewEvent.UNLOAD_ALL_TANKMAN, this.data));
                     break;
+                }
             }
             return;
         }
@@ -352,7 +394,9 @@ package net.wg.gui.lobby.hangar.crew
             {
                 _dropdownRef.removeEventListener(scaleform.clik.events.ListEvent.ITEM_CLICK, handleMenuItemClick, false);
                 if (_dropdownRef is net.wg.infrastructure.interfaces.entity.IDisposable) 
+                {
                     net.wg.infrastructure.interfaces.entity.IDisposable(_dropdownRef).dispose();
+                }
                 _dropdownRef.parent.removeChild(_dropdownRef);
                 _dropdownRef = null;
             }
@@ -363,7 +407,9 @@ package net.wg.gui.lobby.hangar.crew
                 _dataProvider = null;
             }
             if (scrollBar && scrollBar is net.wg.infrastructure.interfaces.entity.IDisposable) 
+            {
                 net.wg.infrastructure.interfaces.entity.IDisposable(scrollBar).dispose();
+            }
             scrollBar = null;
             if (this.icon) 
             {
@@ -428,7 +474,9 @@ package net.wg.gui.lobby.hangar.crew
             var loc3:*=0;
             var loc4:*=arg1;
             for each (loc2 in loc4) 
+            {
                 loc1.push(new net.wg.gui.lobby.hangar.crew.RecruitRendererVO(loc2));
+            }
             return loc1;
         }
 
@@ -471,21 +519,37 @@ package net.wg.gui.lobby.hangar.crew
                 this.dataProvider = setupDataProvider(rendererData.recruitList.sort(function (arg1:Object, arg2:Object):Number
                 {
                     if (arg1.personalCase && !arg2.personalCase) 
+                    {
                         return -1;
+                    }
                     if (!arg1.personalCase && arg2.personalCase) 
+                    {
                         return 1;
+                    }
                     if (arg1.recruit && !arg2.recruit) 
+                    {
                         return -1;
+                    }
                     if (!arg1.recruit && arg2.recruit) 
+                    {
                         return 1;
+                    }
                     if (arg1.selected && !arg2.selected) 
+                    {
                         return -1;
+                    }
                     if (!arg1.selected && arg2.selected) 
+                    {
                         return 1;
+                    }
                     if (arg1.specializationLevel > arg2.specializationLevel) 
+                    {
                         return -1;
+                    }
                     if (arg1.specializationLevel < arg2.specializationLevel) 
+                    {
                         return 1;
+                    }
                     return 0;
                 }))
                 listHeight = _height * (rendererData.recruitList.length < menuRowCount ? rendererData.recruitList.length : menuRowCount);
@@ -504,14 +568,18 @@ package net.wg.gui.lobby.hangar.crew
                 this.iconRank.imageLoader.source = "../maps/icons/tankmen/ranks/small/" + rendererData.rankIconFile;
             }
             else 
+            {
                 this.iconRank.imageLoader.visible = false;
+            }
             if (!(rendererData.roleIconFile == this.iconRole.imageLoader.source) && rendererData.roleIconFile) 
             {
                 this.iconRole.imageLoader.visible = true;
                 this.iconRole.imageLoader.source = rendererData.roleIconFile;
             }
             if (rendererData.role) 
+            {
                 this.role.textfield.htmlText = rendererData.role;
+            }
             levelText = rendererData.specializationLevel + "%";
             ttype = App.utils.locale.makeString(MENU.tankmen(rendererData.tankType), {});
             if (isNaN(rendererData.tankmanID)) 
@@ -520,6 +588,7 @@ package net.wg.gui.lobby.hangar.crew
                 this.role.textfield.htmlText = this.role.textfield.htmlText + (", " + ttype + " " + rendererData.vehicleType);
             }
             else if (rendererData.curVehicleType == rendererData.tankType) 
+            {
                 if (rendererData.curVehicleName == rendererData.vehicleType) 
                 {
                     this.levelSpecializationMain.textfield.htmlText = rendererData.isLessMastered ? "<font color=\'#ffd387\'>" + levelText + "</font>" : levelText;
@@ -528,11 +597,16 @@ package net.wg.gui.lobby.hangar.crew
                 else 
                 {
                     if (rendererData.vehicleElite) 
+                    {
                         this.levelSpecializationMain.textfield.htmlText = levelText;
+                    }
                     else 
+                    {
                         this.levelSpecializationMain.textfield.htmlText = " <font color=\'" + DEBUFF + "\'>" + levelText + "</font>";
+                    }
                     this.role.textfield.htmlText = this.role.textfield.htmlText + (", " + ttype + " <font color=\'" + DEBUFF + "\'> " + rendererData.vehicleType + "</font>");
                 }
+            }
             else 
             {
                 this.levelSpecializationMain.textfield.htmlText = " <font color=\'" + DEBUFF + "\'>" + levelText + "</font>";
@@ -584,7 +658,9 @@ package net.wg.gui.lobby.hangar.crew
                     this.goups_icons.visible = true;
                     loc4 = 0;
                     if (arg1.lastSkillLevel == 100 && arg1.availableSkillsCount == arg1.skills.length && !arg1.skills[(arg1.skills.length - 1)].buy) 
+                    {
                         loc4 = 1;
+                    }
                     loc5 = arg1.skills.length - 2;
                     this.goups_icons.skillsGroupNum.text = "x" + (loc5 + 1 + loc4);
                     loc6 = (arg1.skills.length - 1) - loc4;
@@ -603,7 +679,9 @@ package net.wg.gui.lobby.hangar.crew
                 this.skills.dataProvider = new scaleform.clik.data.DataProvider(loc1);
                 this.lastSkillLevel.text = "";
                 if (arg1.skills.length > 0 && !arg1.skills[0].buy && !isNaN(arg1.lastSkillLevel) && !(arg1.lastSkillLevel == 100)) 
+                {
                     this.lastSkillLevel.text = arg1.lastSkillLevel + "%";
+                }
                 this.lastSkillLevel.x = this.skills.x + (this.skills.columnWidth + this.skills.paddingRight) * loc1.length;
             }
             else 

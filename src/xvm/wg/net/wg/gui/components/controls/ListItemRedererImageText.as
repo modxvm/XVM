@@ -16,7 +16,9 @@ package net.wg.gui.components.controls
             this.ico_border.visible = false;
             super.configUI();
             if (this.data) 
+            {
                 this.setup();
+            }
             return;
         }
 
@@ -43,14 +45,18 @@ package net.wg.gui.components.controls
         {
             this.ico_border.visible = true;
             if (this.icon.hasEventListener(net.wg.gui.events.UILoaderEvent.COMPLETE)) 
+            {
                 this.icon.removeEventListener(net.wg.gui.events.UILoaderEvent.COMPLETE, this.completeLoadA);
+            }
             return;
         }
 
         protected override function draw():void
         {
             if (isInvalid("data")) 
+            {
                 this.setup();
+            }
             super.draw();
             return;
         }

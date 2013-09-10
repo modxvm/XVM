@@ -13,7 +13,9 @@ package net.wg.gui.components.tooltips.helpers
         public function Utils()
         {
             super();
-            if (__allowInstantiation) ;
+            if (__allowInstantiation) 
+            {
+            };
             return;
         }
 
@@ -24,29 +26,47 @@ package net.wg.gui.components.tooltips.helpers
             switch (loc2) 
             {
                 case "xp":
+                {
                     loc1 = arg4 ? net.wg.gui.components.controls.IconText.ELITE_XP : net.wg.gui.components.controls.IconText.XP;
                     break;
+                }
                 case "doubleXPFactor":
+                {
                     loc1 = net.wg.gui.components.controls.IconText.DOUBLE_XP_FACTOR;
                     break;
+                }
                 case "actionXPFactor":
+                {
                     loc1 = net.wg.gui.components.controls.IconText.ACTION_XP_FACTOR;
                     break;
+                }
                 case "unlock_price":
+                {
                     loc1 = net.wg.gui.components.controls.IconText.XP_PRICE;
                     break;
+                }
                 case "buy_price_action":
+                {
                     loc1 = arg3 ? net.wg.gui.components.controls.IconText.CREDITS : net.wg.gui.components.controls.IconText.GOLD;
                     break;
+                }
                 case "buy_price":
                 case "sell_price":
+                {
                     if (arg3 && arg2 == "shop" || arg2 == "hangar" && arg3) 
+                    {
                         loc1 = net.wg.gui.components.controls.IconText.GOLD;
+                    }
                     else 
+                    {
                         loc1 = net.wg.gui.components.controls.IconText.CREDITS;
+                    }
                     break;
+                }
                 default:
+                {
                     loc1 = net.wg.gui.components.controls.IconText.EMPTY;
+                }
             }
             return loc1;
         }
@@ -56,7 +76,9 @@ package net.wg.gui.components.tooltips.helpers
             var loc1:*=(loc1 = (loc1 = (loc1 = "") + (arg4 != "" ? " face=\"" + arg4 + "\"" : "")) + (arg2 != "" ? " color=\"" + arg2 + "\"" : "")) + (arg3 ? " size=\"" + arg3 + "\"" : "");
             arg1 = "<font" + loc1 + ">" + arg1 + "</font>";
             if (arg5) 
+            {
                 arg1 = "<b>" + arg1 + "</b>";
+            }
             return arg1 + arg6;
         }
 
@@ -136,7 +158,9 @@ package net.wg.gui.components.tooltips.helpers
                 loc14.textSize = 11;
                 loc14.textFieldYOffset = 0;
                 if (arg1.rightTextCSS) 
+                {
                     loc14.css = arg1.rightTextCSS;
+                }
                 loc15 = net.wg.gui.components.tooltips.VO.ToolTipBlockRightListItemVO(arg1.rightTextList[loc3]);
                 loc14.xCorrect = loc15.textXOffset;
                 loc14.icon = loc15.icon;
@@ -146,7 +170,9 @@ package net.wg.gui.components.tooltips.helpers
                 loc14.iconClip.y = loc15.textYOffset;
                 loc14.validateNow();
                 if (!(loc14.iconClip.currentFrame == 1) && !loc5) 
+                {
                     loc5 = true;
+                }
                 loc12 = loc12 + loc11;
                 arg1.contener.addChild(loc14);
                 loc7.push(loc14);
@@ -179,31 +205,39 @@ package net.wg.gui.components.tooltips.helpers
             switch (loc7) 
             {
                 case this.STATUS_ADDITIONAL:
+                {
                     loc1.textColor = 16761699;
                     loc1.filters = [];
                     return loc1;
+                }
                 case this.STATUS_CRITICAL:
+                {
                     loc1.textColor = 16721687;
                     loc2 = 16711680;
                     loc3 = 0.5;
                     loc4 = 0.27;
                     loc5 = 11;
                     break;
+                }
                 case this.STATUS_WARNING:
+                {
                     loc1.textColor = 16117989;
                     loc2 = 15521204;
                     loc3 = 0.3;
                     loc4 = 0.11;
                     loc5 = 11;
                     break;
+                }
                 case this.STATUS_INFO:
                 default:
+                {
                     loc1.textColor = 8041216;
                     loc2 = 3997440;
                     loc3 = 0.5;
                     loc4 = 0.24;
                     loc5 = 11;
                     break;
+                }
             }
             loc1.filters = [];
             var loc6:*;

@@ -339,7 +339,9 @@ package net.wg.data.gui_items.dossier
             var loc4:*=0;
             var loc5:*=loc1;
             for each (loc3 in loc5) 
+            {
                 ++loc2;
+            }
             return loc2;
         }
 
@@ -370,7 +372,9 @@ package net.wg.data.gui_items.dossier
             var loc3:*=0;
             var loc4:*=arg1;
             for each (loc2 in loc4) 
+            {
                 loc1.push(new net.wg.gui.lobby.profile.data.ProfileAchievementVO(loc2));
+            }
             return loc1;
         }
 
@@ -386,8 +390,12 @@ package net.wg.data.gui_items.dossier
             {
                 loc2 = new net.wg.gui.lobby.profile.pages.technique.TechniqueListVehicleVO(loc4);
                 if (arg2) 
+                {
                     if (!loc2.isInHangar) 
+                    {
                         continue;
+                    }
+                }
                 loc1.push(loc2);
             }
             return loc1;

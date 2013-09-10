@@ -20,7 +20,9 @@ package net.wg.gui.lobby.profile.pages.statistics
         protected override function showToolTip(arg1:net.wg.data.managers.IToolTipParams):void
         {
             if (tooltip) 
+            {
                 net.wg.gui.lobby.profile.pages.statistics.StatisticsChartsUtils.showTypeTooltip(_data, tooltip);
+            }
             return;
         }
     }

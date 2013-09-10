@@ -1,7 +1,7 @@
 package net.wg.data.components
 {
     import __AS3__.vec.*;
-    import net.wg.infrastructure.interfaces.*;
+    import net.wg.infrastructure.interfaces.IContextItem;
 
     public class UserContextItem extends net.wg.data.components.ContextItem
     {

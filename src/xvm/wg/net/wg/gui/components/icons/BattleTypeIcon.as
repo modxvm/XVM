@@ -39,7 +39,9 @@ package net.wg.gui.components.icons
         public function set typeByNumber(arg1:uint):void
         {
             if (this._typeByNumber == arg1) 
+            {
                 return;
+            }
             this._typeByNumber = arg1;
             this.type = flash.display.FrameLabel(this.currentLabels[(this._typeByNumber - 1)]).name;
             invalidate();
@@ -59,7 +61,9 @@ package net.wg.gui.components.icons
         public override function dispose():void
         {
             if (this._allTypes) 
+            {
                 this._allTypes.splice(0, this._allTypes.length);
+            }
             this._allTypes = null;
             super.dispose();
             return;

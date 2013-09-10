@@ -70,18 +70,30 @@ package net.wg.gui.prebattle.invites
         internal function updateComponents():void
         {
             if (!this.inviteVO) 
+            {
                 return;
+            }
             var loc1:*=SIMPLE_INVITE_LABEL;
             if (this.inviteVO.hasNote()) 
+            {
                 loc1 = INVITE_WITH_NOTE_LABEL;
+            }
             if (loc1 != currentFrameLabel) 
+            {
                 gotoAndStop(loc1);
+            }
             if (this.inviteTextArea != null) 
+            {
                 this.inviteTextArea.htmlText = this.inviteVO.text;
+            }
             if (this.messageTextArea != null) 
+            {
                 this.messageTextArea.htmlText = this.inviteVO.comment;
+            }
             if (this.noteTextField != null) 
+            {
                 this.noteTextField.text = this.inviteVO.note;
+            }
             var loc2:*=!isNaN(this.inviteVO.id) && (this.inviteVO.canAccept || this.inviteVO.canDecline);
             if (this.acceptButton != null) 
             {

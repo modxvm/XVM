@@ -131,7 +131,9 @@ package net.wg.gui.messenger.windows
         protected override function draw():void
         {
             if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
+            {
                 this.updateViewSize();
+            }
             if (isInvalid(INVALIDATE_VIEW)) 
             {
                 this.updateViewData();
@@ -170,7 +172,9 @@ package net.wg.gui.messenger.windows
             {
                 (loc5 = this.viewStack.cachedViews[loc4] as scaleform.clik.core.UIComponent).setSize(loc2, loc3);
                 if (loc5 != this.viewStack.currentView) 
+                {
                     continue;
+                }
                 loc5.validateNow();
             }
             return;
@@ -179,7 +183,9 @@ package net.wg.gui.messenger.windows
         internal function updateFocusInViewContainer():void
         {
             if (this.viewStack == null || this.viewStack.currentView == null) 
+            {
                 return;
+            }
             var loc1:*=this.viewStack.currentView as net.wg.infrastructure.interfaces.IViewStackContent;
             loc1.update(null);
             return;
@@ -193,10 +199,16 @@ package net.wg.gui.messenger.windows
             {
                 loc2 = flash.utils.getQualifiedClassName(loc1);
                 if (loc2 != VIEW_LIST) 
+                {
                     if (loc2 == VIEW_SEARCH) 
+                    {
                         loc1.update({"searchDP":this.searchDP, "resultText":this.searchResultText, "freezeSearch":this.freezeSearch});
+                    }
+                }
                 else 
+                {
                     loc1.update({"friendsDP":this.friendsDP, "clanDP":this.clanDP, "ignoredDP":this.ignoredDP, "mutedDP":this.mutedDP});
+                }
             }
             return;
         }
@@ -207,14 +219,20 @@ package net.wg.gui.messenger.windows
             switch (loc1) 
             {
                 case net.wg.gui.messenger.evnts.ContactsFormEvent.SEARCH:
+                {
                     searchContactS(arg1.searchValue);
                     break;
+                }
                 case net.wg.gui.messenger.evnts.ContactsFormEvent.ADD_TO_FRIENDS:
+                {
                     addToFriendsS(arg1.uid, arg1.name);
                     break;
+                }
                 case net.wg.gui.messenger.evnts.ContactsFormEvent.ADD_TO_IGNORED:
+                {
                     addToIgnoredS(arg1.uid, arg1.name);
                     break;
+                }
             }
             return;
         }

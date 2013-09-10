@@ -34,7 +34,9 @@ package net.wg.gui.lobby.techtree.data
             var loc3:*=0;
             var loc4:*=this.depthOfPaths;
             for each (loc2 in loc4) 
+            {
                 loc1 = Math.max(loc1, loc2);
+            }
             return loc1;
         }
 
@@ -112,7 +114,9 @@ package net.wg.gui.lobby.techtree.data
             while (loc9 < loc2) 
             {
                 if ((loc8 = (loc6 = nodeData[loc9]).displayInfo as net.wg.gui.lobby.techtree.data.vo.ResearchDisplayInfo).level > -1) 
+                {
                     arg1.addFixedPath(loc9, loc8.level);
+                }
                 loc5 = 0;
                 loc7 = loc8.path;
                 loc10 = 0;
@@ -188,12 +192,16 @@ package net.wg.gui.lobby.techtree.data
             switch (loc3) 
             {
                 case net.wg.gui.lobby.techtree.data.vo.NodeData.NODE_DUMP_FIELD:
+                {
                     loc1 = this.setTopLevelDump(arg2, String(arg3));
                     break;
+                }
                 case net.wg.gui.lobby.techtree.data.vo.NodeData.UNLOCK_PROPS_FIELD:
+                {
                     (loc2 = new net.wg.gui.lobby.techtree.data.vo.UnlockProps()).fromArray(arg3 as Array, App.utils.locale);
                     loc1 = this.setTopLevelUnlockProps(arg2, loc2);
                     break;
+                }
             }
             return loc1;
         }
@@ -203,11 +211,19 @@ package net.wg.gui.lobby.techtree.data
             var loc2:*=null;
             var loc1:*=0;
             if (arg1 != null) 
+            {
                 if ((loc2 = arg1.displayInfo as net.wg.gui.lobby.techtree.data.vo.ResearchDisplayInfo) != null) 
+                {
                     if (loc2.isDrawVehicle()) 
+                    {
                         loc1 = arg2 ? net.wg.gui.lobby.techtree.constants.NodeEntityType.TOP_VEHICLE : net.wg.gui.lobby.techtree.constants.NodeEntityType.NEXT_VEHICLE;
+                    }
                     else 
+                    {
                         loc1 = net.wg.gui.lobby.techtree.constants.NodeEntityType.RESEARCH_ITEM;
+                    }
+                }
+            }
             return loc1;
         }
 

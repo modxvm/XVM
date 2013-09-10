@@ -1,4 +1,4 @@
-package net.wg.gui.lobby.hangar.tcarousel
+package net.wg.gui.lobby.hangar.tcarousel 
 {
     import __AS3__.vec.*;
     import flash.display.*;
@@ -15,7 +15,7 @@ package net.wg.gui.lobby.hangar.tcarousel
     import scaleform.clik.data.*;
     import scaleform.clik.events.*;
     import scaleform.clik.interfaces.*;
-
+    
     public class TankCarousel extends net.wg.infrastructure.base.meta.impl.TankCarouselMeta implements net.wg.infrastructure.base.meta.ITankCarouselMeta, net.wg.infrastructure.interfaces.IDAAPIModule, net.wg.infrastructure.interfaces.IHelpLayoutComponent
     {
         public function TankCarousel()
@@ -36,14 +36,16 @@ package net.wg.gui.lobby.hangar.tcarousel
         protected override function onItemRollOver(arg1:net.wg.gui.events.ListEventEx):void
         {
             var loc1:*=arg1.itemData;
-            if (net.wg.gui.lobby.hangar.tcarousel.TankCarouselItemRenderer(arg1.itemRenderer).empty)
+            if (net.wg.gui.lobby.hangar.tcarousel.TankCarouselItemRenderer(arg1.itemRenderer).empty) 
+            {
                 return;
-            if (loc1.buyTank)
+            }
+            if (loc1.buyTank) 
             {
                 App.toolTipMgr.showComplex(TOOLTIPS.TANKS_CAROUSEL_BUY_VEHICLE);
                 return;
             }
-            if (loc1.buySlot)
+            if (loc1.buySlot) 
             {
                 App.toolTipMgr.showComplex(TOOLTIPS.TANKS_CAROUSEL_BUY_SLOT);
                 return;
@@ -68,44 +70,62 @@ package net.wg.gui.lobby.hangar.tcarousel
         protected override function handleItemClick(arg1:scaleform.clik.events.ButtonEvent):void
         {
             App.toolTipMgr.hide();
-            if (needCanceledClick)
+            if (needCanceledClick) 
+            {
                 return;
+            }
             var loc1:*=arg1.currentTarget as scaleform.clik.interfaces.IListItemRenderer;
             var loc2:*=loc1.index;
-            if (loc2 > (dataProvider.length - 1))
+            if (loc2 > (dataProvider.length - 1)) 
+            {
                 return;
+            }
             var loc3:*=dataProvider[loc1.index];
             var loc4:*=(arg1 as scaleform.clik.events.ButtonEvent).buttonIdx;
-            if (isNaN(loc2))
+            if (isNaN(loc2)) 
+            {
                 return;
-            if (dispatchItemEvent(arg1))
-                if ((useRightButton && useRightButtonForSelect || loc4 == 0) && !loc3.buyTank && !loc3.buySlot)
+            }
+            if (dispatchItemEvent(arg1)) 
+            {
+                if ((useRightButton && useRightButtonForSelect || loc4 == 0) && !loc3.buyTank && !loc3.buySlot) 
+                {
                     selectedIndex = loc2;
+                }
+            }
             return;
         }
 
         protected override function onItemClick(arg1:net.wg.gui.events.ListEventEx):void
         {
             var loc1:*=arg1.itemData;
-            if (loc1.empty)
+            if (loc1.empty) 
+            {
                 return;
-            if (loc1.buyTank && arg1.buttonIdx == 0)
+            }
+            if (loc1.buyTank && arg1.buttonIdx == 0) 
             {
                 (arg1.itemRenderer as flash.display.MovieClip).mouseEnabled = false;
                 (arg1.itemRenderer as flash.display.MovieClip).mouseChildren = false;
                 this.tryBuyTank(loc1);
                 return;
             }
-            if (loc1.buySlot && arg1.buttonIdx == 0)
+            if (loc1.buySlot && arg1.buttonIdx == 0) 
             {
                 this.tryBuySlot(loc1);
                 return;
             }
-            if (arg1.buttonIdx != 0)
-                if (arg1.buttonIdx == 1 && !loc1.buyTank && !loc1.buySlot && slidingIntervalId == 0 && !isTween && arrowSlideIntervalId == 0)
+            if (arg1.buttonIdx != 0) 
+            {
+                if (arg1.buttonIdx == 1 && !loc1.buyTank && !loc1.buySlot && slidingIntervalId == 0 && !isTween && arrowSlideIntervalId == 0) 
+                {
                     this.showContextMenu(loc1);
-            else
+                }
+            }
+            else 
+            {
                 this.selectItem(loc1.id);
+            }
             return;
         }
 
@@ -117,14 +137,14 @@ package net.wg.gui.lobby.hangar.tcarousel
             var loc2:*=loc1.getNationsData();
             var loc3:*=[{"label":MENU.NATIONS_ALL, "data":net.wg.gui.lobby.hangar.tcarousel.TankCarouselFilters.FILTER_ALL_NATION, "icon":"../maps/icons/filters/nations/all.png"}];
             var loc4:*=0;
-            while (loc4 < loc2.length)
+            while (loc4 < loc2.length) 
             {
                 loc2[loc4]["icon"] = "../maps/icons/filters/nations/" + loc1.getNationName(loc2[loc4]["data"]) + ".png";
                 loc3.push(loc2[loc4]);
                 ++loc4;
             }
             this.nationFilter.dataProvider = new scaleform.clik.data.DataProvider(loc3);
-            if (!this.filterData.hasOwnProperty("nation"))
+            if (!this.filterData.hasOwnProperty("nation")) 
             {
                 this.filterData.nation = net.wg.gui.lobby.hangar.tcarousel.TankCarouselFilters.FILTER_ALL_NATION;
                 this.filterData.tankType = net.wg.gui.lobby.hangar.tcarousel.TankCarouselFilters.FILTER_ALL_TYPES;
@@ -141,19 +161,21 @@ package net.wg.gui.lobby.hangar.tcarousel
 
         internal function showHideFilters(arg1:Boolean):void
         {
-            if (arg1)
-                if (arg1)
+            if (arg1) 
+            {
+                if (arg1) 
                 {
                     leftArrow.x = this.vehicleFilters.x + this.vehicleFilters.width + FILTERS_CAROUSEL_OFFSET ^ 0;
                     this.vehicleFilters.visible = true;
                 }
-            else
+            }
+            else 
             {
                 leftArrow.x = this.vehicleFilters.x;
                 this.vehicleFilters.visible = false;
                 this.vehicleFilters.close();
             }
-            if (container && slidingIntervalId == 0 && !isTween)
+            if (container && slidingIntervalId == 0 && !isTween) 
             {
                 container.x = getDefContainerPos() - currentFirstRenederer * getSlotWidth();
                 renderersMask.x = leftArrow.x + leftArrow.width;
@@ -171,18 +193,18 @@ package net.wg.gui.lobby.hangar.tcarousel
         {
             var loc1:*=NaN;
             var loc2:*=NaN;
-            if (!initialized)
+            if (!initialized) 
             {
                 invalidate();
                 return;
             }
-            if (this.filterDataInvalid)
+            if (this.filterDataInvalid) 
             {
                 this.filterDataInvalid = false;
                 loc1 = 0;
-                while (loc1 < this.nationFilter.dataProvider.length)
+                while (loc1 < this.nationFilter.dataProvider.length) 
                 {
-                    if (this.nationFilter.dataProvider[loc1].data == this.filterData.nation)
+                    if (this.nationFilter.dataProvider[loc1].data == this.filterData.nation) 
                     {
                         this.nationFilter.selectedIndex = loc1;
                         break;
@@ -190,9 +212,9 @@ package net.wg.gui.lobby.hangar.tcarousel
                     ++loc1;
                 }
                 loc2 = 0;
-                while (loc2 < this.tankFilter.dataProvider.length)
+                while (loc2 < this.tankFilter.dataProvider.length) 
                 {
-                    if (this.tankFilter.dataProvider[loc2].data == this.filterData.tankType)
+                    if (this.tankFilter.dataProvider[loc2].data == this.filterData.tankType) 
                     {
                         this.tankFilter.selectedIndex = loc2;
                         break;
@@ -224,14 +246,16 @@ package net.wg.gui.lobby.hangar.tcarousel
 
         internal function setData(arg1:Object):void
         {
-            if (this.availableTanksCount != arg1.slots.length)
+            if (this.availableTanksCount != arg1.slots.length) 
+            {
                 tryClearTween();
+            }
             this.slotPrice = arg1.slotPrice;
             this.selectedTankID = arg1.selectedTankID;
             this.availableTanksCount = arg1.slots.length;
             this.emptySlotsCountForByTank = arg1.availableSlotsForBuy;
             this.allTanksCount = arg1.allTanksCount;
-            if (this.allTanksCount == 0)
+            if (this.allTanksCount == 0) 
             {
                 visible = false;
                 return;
@@ -239,9 +263,9 @@ package net.wg.gui.lobby.hangar.tcarousel
             visible = true;
             var loc1:*=-1;
             var loc2:*=0;
-            while (loc2 < arg1.slots.length)
+            while (loc2 < arg1.slots.length) 
             {
-                if (arg1.slots[loc2].id == this.selectedTankID)
+                if (arg1.slots[loc2].id == this.selectedTankID) 
                 {
                     loc1 = loc2;
                     break;
@@ -250,8 +274,10 @@ package net.wg.gui.lobby.hangar.tcarousel
             }
             this.firstRun = selectedIndex == loc1 ? false : true;
             selectedIndex = loc1;
-            if (this.emptySlotsCountForByTank > 0)
+            if (this.emptySlotsCountForByTank > 0) 
+            {
                 arg1.slots.push(this.getSlotDataForBuyTank());
+            }
             arg1.slots.push(this.getSlotDataForBuySlot());
             dataProvider = new scaleform.clik.data.DataProvider(arg1.slots);
             return;
@@ -294,23 +320,33 @@ package net.wg.gui.lobby.hangar.tcarousel
         {
             var loc1:*=arg1.memberItemData;
             var loc2:*=arg1.id;
-            switch (loc2)
+            switch (loc2) 
             {
                 case "vehicleInfo":
+                {
                     showVehicleInfoS(loc1.id);
                     break;
+                }
                 case "vehicleSell":
+                {
                     vehicleSellS(loc1.inventoryId);
                     break;
+                }
                 case "vehicleResearch":
+                {
                     toResearchS(loc1.compactDescr);
                     break;
+                }
                 case "vehicleCheck":
+                {
                     favoriteVehicleS(loc1.id, true);
                     break;
+                }
                 case "vehicleUncheck":
+                {
                     favoriteVehicleS(loc1.id, false);
                     break;
+                }
             }
             return;
         }
@@ -325,7 +361,7 @@ package net.wg.gui.lobby.hangar.tcarousel
         {
             var loc1:*=null;
             var loc2:*=null;
-            if (container)
+            if (container) 
             {
                 this._isShowHelpLayout = true;
                 loc1 = App.utils.helpLayout;
@@ -346,11 +382,12 @@ package net.wg.gui.lobby.hangar.tcarousel
         public function normalizeData(arg1:Object):Object
         {
             var loc1:*=0;
-            if (arg1)
-                if (arg1.slots)
+            if (arg1) 
+            {
+                if (arg1.slots) 
                 {
                     loc1 = 0;
-                    while (loc1 < arg1.slots.length)
+                    while (loc1 < arg1.slots.length) 
                     {
                         arg1.slots[loc1].data = arg1.slots[loc1].data == undefined ? 0 : arg1.slots[loc1].data;
                         arg1.slots[loc1].id = arg1.slots[loc1].id == undefined ? "id_" + loc1 : arg1.slots[loc1].id;
@@ -379,6 +416,7 @@ package net.wg.gui.lobby.hangar.tcarousel
                         ++loc1;
                     }
                 }
+            }
             return arg1;
         }
 
@@ -409,12 +447,18 @@ package net.wg.gui.lobby.hangar.tcarousel
 
         public function as_dispose():void
         {
-            if (this.tankFilter.hasEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE))
+            if (this.tankFilter.hasEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE)) 
+            {
                 this.tankFilter.removeEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onTankDropDownFilterChanged);
-            if (this.checkBoxToMain.hasEventListener(flash.events.Event.SELECT))
+            }
+            if (this.checkBoxToMain.hasEventListener(flash.events.Event.SELECT)) 
+            {
                 this.checkBoxToMain.removeEventListener(flash.events.Event.SELECT, this.onFilterCheckBoxChanged);
-            if (this.nationFilter.hasEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE))
+            }
+            if (this.nationFilter.hasEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE)) 
+            {
                 this.nationFilter.removeEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onNatiDropDownFilterChanged);
+            }
             super.dispose();
             App.contextMenuMgr.hide();
             return;
@@ -469,8 +513,10 @@ package net.wg.gui.lobby.hangar.tcarousel
 
         protected override function handleMouseWheel(arg1:flash.events.MouseEvent):void
         {
-            if (enabled && dragHitArea.hitTestPoint(stage.mouseX, stage.mouseY) && !isDragging)
+            if (enabled && dragHitArea.hitTestPoint(stage.mouseX, stage.mouseY) && !isDragging) 
+            {
                 super.handleMouseWheel(arg1);
+            }
             return;
         }
 
@@ -485,15 +531,19 @@ package net.wg.gui.lobby.hangar.tcarousel
         protected override function updateVisibleSlots():Number
         {
             var loc1:*=0;
-            if (this.availableTanksCount == this.allTanksCount)
+            if (this.availableTanksCount == this.allTanksCount) 
             {
                 loc1 = this.vehicleFilters.x;
                 visibleSlots = (_allowW - (loc1 + leftArrow.width + rightArrow.width + CAROUSEL_BUTTON_ARROW_OFFSET * 2 + contentMargin + padding.horizontal)) / getSlotWidth() ^ 0;
-                if (visibleSlots < this.calculateRendererTotal(0, 0))
+                if (visibleSlots < this.calculateRendererTotal(0, 0)) 
+                {
                     loc1 = this.vehicleFilters.x + this.vehicleFilters.width + FILTERS_CAROUSEL_OFFSET ^ 0;
+                }
             }
-            else
+            else 
+            {
                 loc1 = this.vehicleFilters.x + this.vehicleFilters.width + FILTERS_CAROUSEL_OFFSET ^ 0;
+            }
             visibleSlots = (_allowW - (loc1 + leftArrow.width + rightArrow.width + CAROUSEL_BUTTON_ARROW_OFFSET * 2 + contentMargin + padding.horizontal)) / getSlotWidth() ^ 0;
             return visibleSlots;
         }
@@ -501,18 +551,20 @@ package net.wg.gui.lobby.hangar.tcarousel
         protected override function calculateRendererTotal(arg1:Number, arg2:Number):uint
         {
             var loc1:*=0;
-            if (_dataProvider.length > 0)
+            if (_dataProvider.length > 0) 
+            {
                 loc1 = this.emptySlotsCountForByTank > 0 ? this.availableTanksCount + 2 : this.availableTanksCount + 1;
+            }
             return loc1;
         }
 
         protected override function updateLayout():void
         {
-            if (initialized && _renderers)
+            if (initialized && _renderers) 
             {
                 this.showHideFilters(visibleSlots < this.calculateRendererTotal(0, 0) || !(this.availableTanksCount == this.allTanksCount));
                 super.updateLayout();
-                if (this._isShowHelpLayout)
+                if (this._isShowHelpLayout) 
                 {
                     this.closeHelpLayout();
                     this.showHelpLayout();
@@ -530,7 +582,7 @@ package net.wg.gui.lobby.hangar.tcarousel
         protected override function refreshData():void
         {
             super.refreshData();
-            if (this.firstRun)
+            if (this.firstRun) 
             {
                 scrollToIndex(Math.max(selectedIndex, 0));
                 this.firstRun = false;
@@ -546,7 +598,7 @@ package net.wg.gui.lobby.hangar.tcarousel
             var loc1:*=arg1.length;
             var loc2:*=_renderers.length;
             var loc3:*=0;
-            while (loc3 < loc2)
+            while (loc3 < loc2) 
             {
                 loc4 = getRendererAt(loc3) as net.wg.gui.lobby.hangar.tcarousel.TankCarouselItemRenderer;
                 loc5 = loc3;
@@ -569,16 +621,18 @@ package net.wg.gui.lobby.hangar.tcarousel
             var loc3:*=0;
             var loc4:*=NaN;
             var loc5:*=0;
-            if (_renderers)
+            if (_renderers) 
             {
                 loc3 = getEmptySlotsNumForShow();
                 loc4 = padding.left + padding.right;
                 loc1 = _renderers.length;
                 loc5 = loc1;
-                while (loc5 < loc1 + loc3)
+                while (loc5 < loc1 + loc3) 
                 {
                     loc2 = createRenderer(loc5);
-                    //if (loc2 != null) ;
+                    if (loc2 != null) 
+                    {
+                    };
                     loc2.x = loc4 + loc5 * (slotImageWidth + loc4);
                     loc2.setListData(new scaleform.clik.data.ListData(loc5));
                     loc2.setData(this.getEmptyRendererData());
@@ -598,20 +652,22 @@ package net.wg.gui.lobby.hangar.tcarousel
             var loc3:*=null;
             var loc4:*=null;
             var loc5:*=0;
-            if (_renderers)
+            if (_renderers) 
             {
                 loc2 = _renderers.length;
                 --loc5;
-                while (loc5 >= 0)
+                while (loc5 >= 0) 
                 {
                     loc1 = getRendererAt(loc5);
-                    if (!(loc1 == null) && net.wg.gui.lobby.hangar.tcarousel.TankCarouselItemRenderer(loc1).empty)
+                    if (!(loc1 == null) && net.wg.gui.lobby.hangar.tcarousel.TankCarouselItemRenderer(loc1).empty) 
                     {
                         cleanUpRenderer(loc1);
                         (loc4 = loc1 as net.wg.infrastructure.interfaces.entity.IDisposable).dispose();
                         loc3 = loc1 as flash.display.DisplayObject;
-                        if (container.contains(loc3))
+                        if (container.contains(loc3)) 
+                        {
                             container.removeChild(loc3);
+                        }
                         loc1 = null;
                         loc3 = null;
                         loc4 = null;

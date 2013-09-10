@@ -14,7 +14,9 @@ package net.wg.gui.utils
             this.width = arg4;
             this.height = arg5;
             if (arg6) 
+            {
                 this.loadImage();
+            }
             return;
         }
 
@@ -32,6 +34,7 @@ package net.wg.gui.utils
             BitmapDataClass = null;
             result = true;
             if (!(this.source == null) && this.source.length > 0) 
+            {
                 try 
                 {
                     BitmapDataClass = flash.utils.getDefinitionByName(this.source) as Class;
@@ -43,6 +46,7 @@ package net.wg.gui.utils
                     image = null;
                     result = false;
                 }
+            }
             return result;
         }
 

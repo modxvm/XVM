@@ -25,7 +25,9 @@ package net.wg.gui.lobby.training
         {
             super.configUI();
             if (!constraintsDisabled) 
+            {
                 constraints.addElement(this.vehicleField.name, this.vehicleField, scaleform.clik.utils.Constraints.RIGHT);
+            }
             this.defColorTrans = this.iconLoader.transform.colorTransform;
             this.voiceWave.visible = App.voiceChatMgr.isVOIPEnabledS();
             selectable = false;
@@ -60,7 +62,9 @@ package net.wg.gui.lobby.training
                 this.voiceWave = null;
             }
             if (_data && _data is net.wg.infrastructure.interfaces.entity.IDisposable) 
+            {
                 net.wg.infrastructure.interfaces.entity.IDisposable(_data).dispose();
+            }
             _data = null;
             super.dispose();
             return;
@@ -69,23 +73,31 @@ package net.wg.gui.lobby.training
         internal function showToolTip(arg1:flash.events.MouseEvent):void
         {
             if (data) 
+            {
                 App.toolTipMgr.show(net.wg.data.VO.TrainingRoomRendererVO(data).fullName);
+            }
             return;
         }
 
         public function speak(arg1:Boolean, arg2:Boolean):void
         {
             if (arg1) 
+            {
                 arg2 = false;
+            }
             if (this.voiceWave) 
+            {
                 this.voiceWave.setSpeaking(arg1, arg2);
+            }
             return;
         }
 
         public override function set selected(arg1:Boolean):void
         {
             if (_selectable) 
+            {
                 super.selected = arg1;
+            }
             return;
         }
 
@@ -109,7 +121,9 @@ package net.wg.gui.lobby.training
                 loc1 = net.wg.data.VO.TrainingRoomRendererVO(arg1);
                 this.iconLoader.visible = !(loc1.icon == "");
                 if (!(this.iconLoader.source == loc1.icon) && loc1.icon) 
+                {
                     this.iconLoader.source = loc1.icon;
+                }
             }
             invalidate(scaleform.clik.constants.InvalidationType.DATA);
             return;
@@ -121,6 +135,7 @@ package net.wg.gui.lobby.training
             var loc2:*=null;
             super.draw();
             if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+            {
                 if (data) 
                 {
                     loc1 = net.wg.data.VO.TrainingRoomRendererVO(data);
@@ -147,26 +162,41 @@ package net.wg.gui.lobby.training
                     }
                     this.speak(loc1.isPlayerSpeaking, true);
                     if (this.voiceWave) 
+                    {
                         this.voiceWave.setMuted(net.wg.gui.prebattle.squad.MessengerUtils.isMuted(data));
+                    }
                     this.nameField.label = loc1.fullName;
                 }
                 else 
                 {
                     if (this.nameField) 
+                    {
                         this.nameField.label = "";
+                    }
                     if (this.vehicleField) 
+                    {
                         this.vehicleField.text = "";
+                    }
                     if (this.vehicleLevelField) 
+                    {
                         this.vehicleLevelField.text = "";
+                    }
                     if (this.stateField) 
+                    {
                         this.stateField.text = "";
+                    }
                     if (this.iconLoader) 
+                    {
                         this.iconLoader.visible = false;
+                    }
                     enabled = false;
                     this.speak(false, true);
                     if (this.voiceWave) 
+                    {
                         this.voiceWave.setMuted(false);
+                    }
                 }
+            }
             return;
         }
 

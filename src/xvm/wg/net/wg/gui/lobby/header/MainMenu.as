@@ -20,7 +20,9 @@ package net.wg.gui.lobby.header
             super.configUI();
             this.bar.selectedIndex = -1;
             if (App.globalVarsMgr.isChinaS()) 
+            {
                 this.buttonsArr.push({"label":MENU.HEADERBUTTONS_BROWSER, "value":"browser", "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_BROWSER});
+            }
             this.bar.validateNow();
             this.bar.dataProvider = this.buttonsArr;
             this.bar.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.buttonClickHandler, false, 0, true);
@@ -43,7 +45,9 @@ package net.wg.gui.lobby.header
             while (loc1 < this.buttonsArr.length) 
             {
                 if (this.current == this.buttonsArr[loc1].value) 
+                {
                     this.bar.selectedIndex = loc1;
+                }
                 ++loc1;
             }
             return;
@@ -60,7 +64,9 @@ package net.wg.gui.lobby.header
         protected function buttonClickHandler(arg1:scaleform.clik.events.ButtonEvent):void
         {
             if (arg1.target.data != null) 
+            {
                 dispatchEvent(new net.wg.gui.events.HeaderEvent(net.wg.gui.events.HeaderEvent.LOAD_VIEW, arg1.target.data.value));
+            }
             return;
         }
 

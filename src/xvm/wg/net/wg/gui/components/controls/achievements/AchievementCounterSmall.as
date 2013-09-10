@@ -12,9 +12,13 @@ package net.wg.gui.components.controls.achievements
         {
             super.applyData();
             if (data && data.hasOwnProperty("value") && data.value == 0) 
+            {
                 counterType = net.wg.gui.components.controls.achievements.AchievementCounter.NONE;
+            }
             else 
+            {
                 counterType = net.wg.gui.components.controls.achievements.AchievementCounter.SMALL;
+            }
             return;
         }
 

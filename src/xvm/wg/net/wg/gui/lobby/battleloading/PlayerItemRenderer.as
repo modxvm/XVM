@@ -26,17 +26,29 @@ package net.wg.gui.lobby.battleloading
             App.voiceChatMgr.addEventListener(net.wg.infrastructure.events.VoiceChatEvent.START_SPEAKING, this.speakHandler);
             App.voiceChatMgr.addEventListener(net.wg.infrastructure.events.VoiceChatEvent.STOP_SPEAKING, this.speakHandler);
             if (hasEventListener(flash.events.MouseEvent.ROLL_OVER)) 
+            {
                 removeEventListener(flash.events.MouseEvent.ROLL_OVER, handleMouseRollOver);
+            }
             if (hasEventListener(flash.events.MouseEvent.ROLL_OUT)) 
+            {
                 removeEventListener(flash.events.MouseEvent.ROLL_OUT, handleMouseRollOut);
+            }
             if (hasEventListener(flash.events.MouseEvent.MOUSE_DOWN)) 
+            {
                 removeEventListener(flash.events.MouseEvent.MOUSE_DOWN, handleMousePress);
+            }
             if (hasEventListener(flash.events.MouseEvent.CLICK)) 
+            {
                 removeEventListener(flash.events.MouseEvent.CLICK, handleMouseRelease);
+            }
             if (hasEventListener(flash.events.MouseEvent.DOUBLE_CLICK)) 
+            {
                 removeEventListener(flash.events.MouseEvent.DOUBLE_CLICK, handleMouseRelease);
+            }
             if (hasEventListener(scaleform.clik.events.InputEvent.INPUT)) 
+            {
                 removeEventListener(scaleform.clik.events.InputEvent.INPUT, handleInput);
+            }
             this.updateState();
             return;
         }
@@ -50,7 +62,9 @@ package net.wg.gui.lobby.battleloading
         public function onPlayerSpeak(arg1:uint, arg2:Boolean):void
         {
             if (data && arg1 == data.id && this.voiceWave) 
+            {
                 this.voiceWave.setSpeaking(arg2);
+            }
             return;
         }
 
@@ -82,25 +96,39 @@ package net.wg.gui.lobby.battleloading
             {
                 this.selfBg.visible = _selected;
                 if (data.label) 
+                {
                     label = App.utils.commons.formatPlayerName(textField, data.label, data.clanAbbrev, null, data.isIGR);
+                }
                 if (!(this.vehicleField == null) && !(data.vehicle == null)) 
+                {
                     this.vehicleField.text = data.vehicle;
+                }
                 if (this.iconLoader != null) 
                 {
                     this.iconLoader.visible = true;
                     if (this.iconLoader.source != data.icon) 
+                    {
                         this.iconLoader.source = data.icon;
+                    }
                 }
                 if (!(this.squad == null) && this.squad.setSquad && !(data.squad == null)) 
+                {
                     this.squad.setSquad(data.squad);
+                }
                 if (data.enabled != null) 
+                {
                     this.enabled = data.enabled;
+                }
                 if (this.voiceWave != null) 
                 {
                     if (data.speak) 
+                    {
                         this.voiceWave.setSpeaking(true);
+                    }
                     if (data.muted != null) 
+                    {
                         this.voiceWave.setMuted(data.muted);
+                    }
                 }
                 if (!(this.playerActionMarker == null) && !(data.vehAction == null) && !(data.team == null)) 
                 {
@@ -123,7 +151,9 @@ package net.wg.gui.lobby.battleloading
                     this.voiceWave.setMuted(false);
                 }
                 if (this.playerActionMarker != null) 
+                {
                     this.playerActionMarker.action = 0;
+                }
             }
             return;
         }
@@ -136,7 +166,9 @@ package net.wg.gui.lobby.battleloading
         protected override function updateText():void
         {
             if (!(_label == null) && !(textField == null)) 
+            {
                 textField.htmlText = _label;
+            }
             return;
         }
 
@@ -154,13 +186,19 @@ package net.wg.gui.lobby.battleloading
                 loc1 = App.colorSchemeMgr.getScheme(super.enabled ? "selected" : "selected_dead");
             }
             else if (!(data == null) && data.isTeamKiller) 
+            {
                 loc1 = App.colorSchemeMgr.getScheme(super.enabled ? "teamkiller" : "teamkiller_dead");
+            }
             else 
+            {
                 loc1 = App.colorSchemeMgr.getScheme(super.enabled ? "normal" : "normal_dead");
+            }
             if (loc1) 
             {
                 if (data) 
+                {
                     label = App.utils.commons.formatPlayerName(textField, data.label, data.clanAbbrev, null, data.isIGR, loc1);
+                }
                 this.vehicleField.textColor = loc1.rgb;
                 if (loc2) 
                 {
@@ -202,7 +240,9 @@ package net.wg.gui.lobby.battleloading
         public override function set enabled(arg1:Boolean):void
         {
             if (this._enabled == arg1) 
+            {
                 return;
+            }
             this._enabled = arg1;
             super.enabled = this._enabled;
             this.updateState();
@@ -217,7 +257,9 @@ package net.wg.gui.lobby.battleloading
         public override function set selected(arg1:Boolean):void
         {
             if (_selected == arg1) 
+            {
                 return;
+            }
             _selected = arg1;
             this.updateState();
             dispatchEvent(new flash.events.Event(flash.events.Event.SELECT));

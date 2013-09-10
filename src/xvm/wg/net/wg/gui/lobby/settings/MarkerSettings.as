@@ -74,7 +74,9 @@ package net.wg.gui.lobby.settings
                 for (loc2 in loc7) 
                 {
                     if (!this._dynamicMarkersData.hasOwnProperty(loc1)) 
+                    {
                         this._dynamicMarkersData[loc1] = {};
+                    }
                     this._dynamicMarkersData[loc1][loc2] = net.wg.gui.lobby.settings.vo.SettingsControlProp(arg1[loc1][loc2]).current;
                 }
             }
@@ -91,7 +93,9 @@ package net.wg.gui.lobby.settings
             var loc3:*;
             (loc3 = {})[loc2] = arg1.controlValue;
             if (this._dynamicMarkersData != null) 
+            {
                 this._dynamicMarkersData[loc1][arg1.controlId] = arg1.controlValue;
+            }
             dispatchEvent(new net.wg.gui.lobby.settings.evnts.SettingViewEvent(net.wg.gui.lobby.settings.evnts.SettingViewEvent.ON_CONTROL_CHANGED, _viewId, loc1, loc3));
             this.updateShowContent();
             return;
@@ -101,11 +105,17 @@ package net.wg.gui.lobby.settings
         {
             this.tabs.removeEventListener(scaleform.clik.events.IndexEvent.INDEX_CHANGE, this.onTabChange);
             if (this.enemyForm.hasEventListener(net.wg.gui.lobby.settings.evnts.SettingsSubVewEvent.ON_CONTROL_CHANGE)) 
+            {
                 this.enemyForm.removeEventListener(net.wg.gui.lobby.settings.evnts.SettingsSubVewEvent.ON_CONTROL_CHANGE, this.onControlChange);
+            }
             if (this.allyForm.hasEventListener(net.wg.gui.lobby.settings.evnts.SettingsSubVewEvent.ON_CONTROL_CHANGE)) 
+            {
                 this.allyForm.removeEventListener(net.wg.gui.lobby.settings.evnts.SettingsSubVewEvent.ON_CONTROL_CHANGE, this.onControlChange);
+            }
             if (this.deadForm.hasEventListener(net.wg.gui.lobby.settings.evnts.SettingsSubVewEvent.ON_CONTROL_CHANGE)) 
+            {
                 this.deadForm.removeEventListener(net.wg.gui.lobby.settings.evnts.SettingsSubVewEvent.ON_CONTROL_CHANGE, this.onControlChange);
+            }
             this.enemyForm.dispose();
             this.allyForm.dispose();
             this.deadForm.dispose();
@@ -143,7 +153,9 @@ package net.wg.gui.lobby.settings
                 loc4 = net.wg.gui.lobby.settings.SettingsConfig.markerTabsDataProvider[loc1].id;
                 loc5 = net.wg.gui.lobby.settings.SettingsConfig.markerTabsDataProvider[loc1].markerFlag;
                 if (this[loc2]) 
+                {
                     (loc6 = net.wg.gui.lobby.settings.SettingsMarkersForm(this[loc2])).visible = this.__currentTab != loc1 ? false : true;
+                }
                 if (this[loc3]) 
                 {
                     (loc7 = net.wg.gui.components.common.markers.VehicleMarker(this[loc3])).visible = this.__currentTab != loc1 ? false : true;

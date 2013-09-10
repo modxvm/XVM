@@ -50,17 +50,27 @@ package net.wg.gui.lobby.messengerBar.carousel
             var loc1:*=arg2.currentTarget.parent as scaleform.clik.interfaces.IListItemRenderer;
             var loc2:*=0;
             if (arg2 is scaleform.clik.events.ButtonEvent) 
+            {
                 loc2 = (arg2 as scaleform.clik.events.ButtonEvent).controllerIdx;
+            }
             else if (arg2 is scaleform.gfx.MouseEventEx) 
+            {
                 loc2 = (arg2 as scaleform.gfx.MouseEventEx).mouseIdx;
+            }
             var loc3:*=0;
             if (arg2 is scaleform.clik.events.ButtonEvent) 
+            {
                 loc3 = (arg2 as scaleform.clik.events.ButtonEvent).buttonIdx;
+            }
             else if (arg2 is scaleform.gfx.MouseEventEx) 
+            {
                 loc3 = (arg2 as scaleform.gfx.MouseEventEx).buttonIdx;
+            }
             var loc4:*=false;
             if (arg2 is scaleform.clik.events.ButtonEvent) 
+            {
                 loc4 = (arg2 as scaleform.clik.events.ButtonEvent).isKeyboard;
+            }
             var loc5:*;
             return loc5 = new net.wg.gui.lobby.messengerBar.carousel.events.ChannelListEvent(arg1, false, true, loc1.index, 0, loc1.index, loc1, dataProvider.requestItemAt(loc1.index), loc2, loc3, loc4);
         }

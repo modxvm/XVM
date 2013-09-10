@@ -36,11 +36,17 @@ package net.wg.gui.lobby.techtree.data.vo
         public function fromObject(arg1:Object, arg2:net.wg.utils.ILocale):void
         {
             if (arg1 == null) 
+            {
                 return;
+            }
             if (arg1.nodeRendererName != null) 
+            {
                 this._nodeRendererName = arg1.nodeRendererName;
+            }
             if (arg1.isLevelDisplayed != null) 
+            {
                 this._isLevelDisplayed = arg1.isLevelDisplayed;
+            }
             return;
         }
 

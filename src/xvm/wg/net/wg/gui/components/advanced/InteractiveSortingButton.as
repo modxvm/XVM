@@ -24,7 +24,9 @@ package net.wg.gui.components.advanced
         public override function set sortDirection(arg1:String):void
         {
             if (!(sortDirection == arg1) && selected) 
+            {
                 this._previousSelectedSorDirection = sortDirection;
+            }
             super.sortDirection = arg1;
             return;
         }
@@ -44,26 +46,46 @@ package net.wg.gui.components.advanced
         protected override function handleClick(arg1:uint=0):void
         {
             if (selected) 
+            {
                 if (sortDirection != ASCENDING_SORT) 
+                {
                     if (sortDirection == DESCENDING_SORT) 
+                    {
                         this.sortDirection = ASCENDING_SORT;
+                    }
+                }
                 else 
+                {
                     this.sortDirection = DESCENDING_SORT;
+                }
+            }
             else 
+            {
                 super.handleClick(arg1);
+            }
             return;
         }
 
         public override function set selected(arg1:Boolean):void
         {
             if (selected != arg1) 
+            {
                 if (arg1 != false) 
+                {
                     if (!(this._previousSelectedSorDirection == ASCENDING_SORT) && !(this._previousSelectedSorDirection == DESCENDING_SORT)) 
+                    {
                         this.sortDirection = defaultSortDirection != WITHOUT_SORT ? defaultSortDirection : ASCENDING_SORT;
+                    }
                     else 
+                    {
                         this.sortDirection = defaultSortDirection != WITHOUT_SORT ? defaultSortDirection : this._previousSelectedSorDirection;
+                    }
+                }
                 else 
+                {
                     this.sortDirection = WITHOUT_SORT;
+                }
+            }
             super.selected = arg1;
             return;
         }

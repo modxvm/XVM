@@ -75,9 +75,13 @@ package net.wg.gui.lobby.battleResults
             if (arg1.type == net.wg.gui.events.ListEventEx.ITEM_CLICK) 
             {
                 if (arg1.target.selectedIndex != -1) 
+                {
                     arg1.target.selectedIndex = -1;
+                }
                 if (App.stage.focus != arg1.target) 
+                {
                     App.utils.focusHandler.setFocus(flash.display.InteractiveObject(arg1.target));
+                }
             }
             if (arg1.target.selectedIndex != -1) 
             {
@@ -132,11 +136,17 @@ package net.wg.gui.lobby.battleResults
         {
             var loc1:*=0;
             if (this.iconTypeToKey[arg1].isNumeric) 
+            {
                 loc1 = loc1 | Array.NUMERIC;
+            }
             else 
+            {
                 loc1 = loc1 | Array.CASEINSENSITIVE;
+            }
             if (arg2 == net.wg.gui.components.advanced.SortingButton.DESCENDING_SORT) 
+            {
                 loc1 = loc1 | Array.DESCENDING;
+            }
             var loc2:*;
             (loc2 = scaleform.clik.data.DataProvider(this.team1List.dataProvider).slice()).sortOn(this.iconTypeToKey[arg1].key, loc1);
             this.team1List.selectedIndex = -1;

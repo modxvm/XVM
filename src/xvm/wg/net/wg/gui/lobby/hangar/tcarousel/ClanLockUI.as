@@ -41,7 +41,9 @@ package net.wg.gui.lobby.hangar.tcarousel
                 this.visible = true;
             }
             else 
+            {
                 this.visible = false;
+            }
             return loc1;
         }
 

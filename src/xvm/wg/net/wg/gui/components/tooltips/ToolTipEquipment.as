@@ -89,13 +89,19 @@ package net.wg.gui.components.tooltips
             switch (loc38) 
             {
                 case this.TYPE_SHELL:
+                {
                     loc17 = (loc17 = loc7.makeString(ITEM_TYPES.shell_kinds(loc3.type))).slice(0, 1).toUpperCase() + loc17.slice(1);
                     loc6 = loc6 + (net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(loc17, net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NORMAL, 12, "$TextFont") + "<br/>");
                     break;
+                }
                 case this.TYPE_MODULE:
+                {
                     if (loc3.level > 0) 
+                    {
                         loc6 = net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(loc7.makeString(TOOLTIPS.level(loc3.level.toString())) + " " + loc7.makeString(TOOLTIPS.VEHICLE_LEVEL), net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NORMAL, 12, "$TextFont") + "<br/>";
+                    }
                     break;
+                }
             }
             var loc8:*=net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(loc3.eName, net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_HEADER, 18, "$TitleFont");
             var loc9:*;
@@ -169,21 +175,31 @@ package net.wg.gui.components.tooltips
                             {
                                 case "buy_price_action":
                                 case "buy_price":
+                                {
                                     if (loc25 != "gold") 
+                                    {
                                         loc28 = " <img vspace=\"-4\" src=\"img://gui/maps/icons/library/CreditsIcon-2.png\" />";
+                                    }
                                     else 
+                                    {
                                         loc28 = " <img vspace=\"-4\" src=\"img://gui/maps/icons/library/GoldIcon-2.png\" />";
+                                    }
                                     break;
+                                }
                                 case "unlock_price":
+                                {
                                     loc28 = " <img vspace=\"-4\" src=\"img://gui/maps/icons/library/UnlockPrice.png\" />";
                                     break;
+                                }
                             }
                             loc26 = net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_ALERT;
                             loc27 = " ( <font color=\"" + net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_ALERT + "\">" + loc21 + "</font> " + loc7.integer(loc24) + loc28 + ")";
                             loc29 = -1;
                         }
                         else 
+                        {
                             loc27 = "";
+                        }
                         if (loc30 = loc22 == "textDelimiter/or") 
                         {
                             loc13.leftText = loc13.leftText + (net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(loc7.makeString(TOOLTIPS.vehicle(loc22)), net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NORMAL, 10, "$TextFont") + "<br/>");
@@ -417,9 +433,13 @@ package net.wg.gui.components.tooltips
                 loc5 = arg1[loc4][0];
                 loc6 = arg1[loc4][1];
                 if (loc5 == "weight" && arg3) 
+                {
                     loc2 = net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_ALERT;
+                }
                 else 
+                {
                     loc2 = net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NUMBER;
+                }
                 loc1.leftText = loc1.leftText + (net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(loc6, loc2, 12, "$TextFont") + "<br/>");
                 loc1.rightTextList[loc4] = new net.wg.gui.components.tooltips.VO.ToolTipBlockRightListItemVO(App.utils.locale.makeString(MENU.moduleinfo_params(loc5)));
                 ++loc4;
@@ -461,7 +481,9 @@ package net.wg.gui.components.tooltips
                     while (loc3 < loc4) 
                     {
                         if ((loc5 = seaprators[loc3]).y > loc2) 
+                        {
                             loc5.y = loc5.y + loc1;
+                        }
                         ++loc3;
                     }
                 }
@@ -474,7 +496,9 @@ package net.wg.gui.components.tooltips
                         if ((loc6 = net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO(blockResults[loc3])).leftTextField.y > loc2) 
                         {
                             if (loc6.headerTextField) 
+                            {
                                 loc6.headerTextField.y = loc6.headerTextField.y + loc1;
+                            }
                             loc6.leftTextField.y = loc6.leftTextField.y + loc1;
                             loc7 = loc6.elRightList.length;
                             loc8 = 0;
@@ -488,7 +512,9 @@ package net.wg.gui.components.tooltips
                     }
                 }
                 if (this.complexStatus.visible) 
+                {
                     this.complexStatus.y = this.complexStatus.y + loc1;
+                }
                 topPosition = topPosition + loc1;
             }
             return;

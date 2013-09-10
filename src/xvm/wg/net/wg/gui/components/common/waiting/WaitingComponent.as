@@ -50,12 +50,20 @@ package net.wg.gui.components.common.waiting
                 this.waitingMc.y = this.waitingMc.y ^ 0;
             }
             if (isInvalid(TEXT_INVALID)) 
+            {
                 this.waitingMc.setMessage(this.text);
+            }
             if (isInvalid(ANIMATION_STATUS_INVALID)) 
+            {
                 if (this._isStopped) 
+                {
                     this.waitingMc.stop();
+                }
                 else 
+                {
                     this.waitingMc.play();
+                }
+            }
             return;
         }
 

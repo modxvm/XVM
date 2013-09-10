@@ -55,6 +55,7 @@ package net.wg.gui.lobby.battleResults
             if (this._stateDirty) 
             {
                 if (this.state != STATE_WIDE) 
+                {
                     if (this.state != STATE_TIME) 
                     {
                         this.statsLbl.width = 280;
@@ -73,6 +74,7 @@ package net.wg.gui.lobby.battleResults
                         this.lineType = STATS_LINE;
                         width = 362;
                     }
+                }
                 else 
                 {
                     this.statsLbl.width = 280;
@@ -126,7 +128,9 @@ package net.wg.gui.lobby.battleResults
         internal function clearLines():void
         {
             if (this.linesContainer) 
+            {
                 removeChild(this.linesContainer);
+            }
             this.linesContainer = new flash.display.MovieClip();
             addChild(this.linesContainer);
             return;
@@ -135,9 +139,13 @@ package net.wg.gui.lobby.battleResults
         internal function invalidateFast():void
         {
             if (initialized) 
+            {
                 validateNow();
+            }
             else 
+            {
                 invalidate();
+            }
             return;
         }
 

@@ -38,7 +38,9 @@ package net.wg.infrastructure.base
         protected final function assert(arg1:Boolean, arg2:String="failed assert", arg3:Class=null):void
         {
             if (App.instance) 
+            {
                 App.utils.asserter.assert(arg1, arg2, arg3);
+            }
             return;
         }
 
@@ -51,14 +53,18 @@ package net.wg.infrastructure.base
         protected final function assertNotNull(arg1:Object, arg2:String="object", arg3:Class=null):void
         {
             if (App.instance) 
+            {
                 App.utils.asserter.assertNotNull(arg1, arg2 + net.wg.data.constants.Errors.CANT_NULL, arg3);
+            }
             return;
         }
 
         protected final function assertNull(arg1:Object, arg2:String="object", arg3:Class=null):void
         {
             if (App.instance) 
+            {
                 App.utils.asserter.assertNull(arg1, arg2 + net.wg.data.constants.Errors.MUST_NULL, arg3);
+            }
             return;
         }
 
@@ -241,7 +247,9 @@ package net.wg.infrastructure.base
         {
             super.draw();
             if (constraints && isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
+            {
                 constraints.update(_width, _height);
+            }
             return;
         }
 

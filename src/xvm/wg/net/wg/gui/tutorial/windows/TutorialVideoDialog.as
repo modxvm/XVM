@@ -27,7 +27,9 @@ package net.wg.gui.tutorial.windows
         internal function onVideoStopped(arg1:net.wg.gui.components.common.video.VideoPlayerEvent):void
         {
             if (this._isPopulated) 
+            {
                 onWindowCloseS();
+            }
             return;
         }
 

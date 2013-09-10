@@ -29,7 +29,9 @@ package net.wg.gui.lobby.profile.pages
                 requestDataS(currentDossier ? currentDossier.id : null);
             }
             if (isInvalid(net.wg.gui.lobby.profile.ProfileInvalidationTypes.ACHIEVEMENT_RESPONSE_INVALID) && currentDossier) 
+            {
                 updateByDossier(currentDossier);
+            }
             return;
         }
 

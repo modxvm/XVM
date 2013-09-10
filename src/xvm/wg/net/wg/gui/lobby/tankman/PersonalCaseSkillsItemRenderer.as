@@ -22,9 +22,13 @@ package net.wg.gui.lobby.tankman
             removeEventListener(flash.events.MouseEvent.ROLL_OVER, this.showTooltip);
             removeEventListener(flash.events.MouseEvent.ROLL_OUT, this.hideTooltip);
             if (this.icon) 
+            {
                 this.icon.dispose();
+            }
             if (this.rank) 
+            {
                 this.rank.dispose();
+            }
             super.dispose();
             return;
         }
@@ -42,23 +46,31 @@ package net.wg.gui.lobby.tankman
         public function showTooltip(arg1:flash.events.MouseEvent=null):void
         {
             if (this.isHeader) 
+            {
                 App.toolTipMgr.hide();
+            }
             else 
+            {
                 App.toolTipMgr.showSpecial(net.wg.data.constants.Tooltips.TANKMAN_SKILL, null, data.title, data.tankmanID);
+            }
             return;
         }
 
         public function hideTooltip(arg1:flash.events.MouseEvent=null):void
         {
             if (!this.isHeader) 
+            {
                 App.toolTipMgr.hide();
+            }
             return;
         }
 
         public function onSelect(arg1:scaleform.clik.events.ButtonEvent):void
         {
             if (!this.isHeader) 
+            {
                 App.toolTipMgr.hide();
+            }
             return;
         }
 
@@ -67,11 +79,15 @@ package net.wg.gui.lobby.tankman
             if (arg1 == null) 
             {
                 if (this.visible) 
+                {
                     this.visible = false;
+                }
                 return;
             }
             if (!this.visible) 
+            {
                 this.visible = true;
+            }
             super.setData(arg1);
             var loc1:*=new flash.geom.Point(mouseX, mouseY);
             loc1 = this.localToGlobal(loc1);
@@ -81,7 +97,9 @@ package net.wg.gui.lobby.tankman
                 App.utils.scheduler.scheduleTask(this.showTooltip, 100);
             }
             else 
+            {
                 this.hideTooltip();
+            }
             this.initVisibleElements();
             return;
         }
@@ -90,7 +108,9 @@ package net.wg.gui.lobby.tankman
         {
             super.draw();
             if (isInvalid(this.UPDATE_DATA) && this.isData) 
+            {
                 this.updateData();
+            }
             return;
         }
 
@@ -113,11 +133,15 @@ package net.wg.gui.lobby.tankman
                 if (data.title != "common") 
                 {
                     if (!this.icon.visible) 
+                    {
                         this.icon.visible = true;
+                    }
                     loc1 = "../maps/icons/tankmen/skills/big/" + data.title + ".png";
                     this.icon.source = loc1;
                     if (data.rankId == "common") 
+                    {
                         this.rank.visible = false;
+                    }
                     else 
                     {
                         this.rank.visible = true;
@@ -128,7 +152,9 @@ package net.wg.gui.lobby.tankman
                     }
                 }
                 else 
+                {
                     this.rank.visible = false;
+                }
             }
             this.isData = false;
             return;
@@ -138,7 +164,9 @@ package net.wg.gui.lobby.tankman
         {
             this.isHeader = data.isHeader;
             if (data.isHeader) 
+            {
                 enabled = false;
+            }
             this.isData = true;
             invalidate(this.UPDATE_DATA);
             return;

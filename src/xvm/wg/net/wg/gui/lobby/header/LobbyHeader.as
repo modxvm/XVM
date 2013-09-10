@@ -137,16 +137,22 @@ package net.wg.gui.lobby.header
         {
             var loc1:*=NaN;
             if (isInvalid(INVALIDATE_SERVER_STATS) && this._serverStats) 
+            {
                 this.serverStats.setValues(this._serverStats);
+            }
             if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
             {
                 constraints.update(width, height);
                 this.buttonsBlock.x = Math.round((App.appWidth - this.buttonsBlock.bar.bg.width) / 2);
                 loc1 = App.appWidth - this.ticker.width >> 1;
                 if (loc1 - this.account.width < 0) 
+                {
                     loc1 = loc1 + ((this.MenuButton.x + this.MenuButton.width - this.account.width >> 1) + 15);
+                }
                 else 
+                {
                     loc1 = loc1 - 15;
+                }
                 this.ticker.x = loc1;
                 this.fightBtn.x = this.fightBtn.x ^ 0;
             }
@@ -281,9 +287,13 @@ package net.wg.gui.lobby.header
             if (arg1.isHimself()) 
             {
                 if (arg1.type == net.wg.infrastructure.events.VoiceChatEvent.START_SPEAKING) 
+                {
                     this.voiceWave.setSpeaking(true);
+                }
                 if (arg1.type == net.wg.infrastructure.events.VoiceChatEvent.STOP_SPEAKING) 
+                {
                     this.voiceWave.setSpeaking(false);
+                }
             }
             return;
         }

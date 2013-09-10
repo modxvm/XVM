@@ -76,11 +76,15 @@ package net.wg.infrastructure.managers
             name = data.name;
             view = loader.content as net.wg.infrastructure.interfaces.IView;
             if (!view) 
+            {
                 try 
+                {
                     view = net.wg.infrastructure.interfaces.IView(loader.content["main"]);
+                }
                 catch (e:*)
                 {
                 };
+            }
             if (view) 
             {
                 view.as_token = token;
@@ -92,7 +96,9 @@ package net.wg.infrastructure.managers
                 viewLoadedS(token, view);
             }
             else 
+            {
                 viewInitializationErrorS(token, config, alias);
+            }
             data.dispose();
             delete this.loaderToToken[loader];
             return;

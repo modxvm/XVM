@@ -65,26 +65,40 @@ package net.wg.gui.lobby.techtree.math
                 switch (loc8) 
                 {
                     case 1:
+                    {
                         loc4 = this.step1();
                         continue label430;
+                    }
                     case 2:
+                    {
                         loc4 = this.step2();
                         continue label430;
+                    }
                     case 3:
+                    {
                         loc4 = this.step3();
                         continue label430;
+                    }
                     case 4:
+                    {
                         loc4 = this.step4();
                         continue label430;
+                    }
                     case 5:
+                    {
                         loc4 = this.step5();
                         continue label430;
+                    }
                     case 6:
+                    {
                         loc4 = this.step6();
                         continue label430;
+                    }
                     case 7:
+                    {
                         loc5 = true;
                         continue label430;
+                    }
                 }
             }
             var loc6:*=[];
@@ -95,7 +109,9 @@ package net.wg.gui.lobby.techtree.math
                 while (loc7 < loc2) 
                 {
                     if (this.marked[loc3][loc7] == 1) 
+                    {
                         loc6.push(new net.wg.gui.lobby.techtree.math.MatrixPosition(loc3, loc7));
+                    }
                     ++loc7;
                 }
                 ++loc3;
@@ -198,12 +214,16 @@ package net.wg.gui.lobby.techtree.math
                         loc4 = true;
                     }
                     if (!((loc5 = loc5 + 1) >= this.n)) 
+                    {
                         continue;
+                    }
                     break;
                 }
                 loc3 = loc3 + 1;
                 if (!(loc3 >= this.n)) 
+                {
                     continue;
+                }
                 loc4 = true;
             }
             return {"row":loc1, "col":loc2};
@@ -220,8 +240,12 @@ package net.wg.gui.lobby.techtree.math
                 while (loc3 < this.n) 
                 {
                     if (!this.rowCovered[loc2] && !this.columnCovered[loc3]) 
+                    {
                         if (loc1 > this.C[loc2][loc3]) 
+                        {
                             loc1 = this.C[loc2][loc3];
+                        }
+                    }
                     ++loc3;
                 }
                 ++loc2;
@@ -283,9 +307,13 @@ package net.wg.gui.lobby.techtree.math
             while (loc1 < arg2 + 1) 
             {
                 if (this.marked[arg1[loc1][0]][arg1[loc1][1]] != 1) 
+                {
                     this.marked[arg1[loc1][0]][arg1[loc1][1]] = 1;
+                }
                 else 
+                {
                     this.marked[arg1[loc1][0]][arg1[loc1][1]] = 0;
+                }
                 ++loc1;
             }
             return;
@@ -301,7 +329,9 @@ package net.wg.gui.lobby.techtree.math
                 while (loc2 < this.n) 
                 {
                     if (this.marked[loc1][loc2] == 2) 
+                    {
                         this.marked[loc1][loc2] = 0;
+                    }
                     ++loc2;
                 }
                 ++loc1;
@@ -435,9 +465,13 @@ package net.wg.gui.lobby.techtree.math
                     this.path[loc1][1] = this.path[(loc1 - 1)][1];
                 }
                 else 
+                {
                     loc2 = true;
+                }
                 if (loc2) 
+                {
                     continue;
+                }
                 loc4 = this.findPrimeInRow(this.path[loc1][0]);
                 loc1 = loc1 + 1;
                 this.path[loc1][0] = this.path[(loc1 - 1)][0];
@@ -460,9 +494,13 @@ package net.wg.gui.lobby.techtree.math
                 while (loc3 < this.n) 
                 {
                     if (this.rowCovered[loc2]) 
+                    {
                         this.C[loc2][loc3] = this.C[loc2][loc3] + loc1;
+                    }
                     if (!this.columnCovered[loc3]) 
+                    {
                         this.C[loc2][loc3] = this.C[loc2][loc3] - loc1;
+                    }
                     ++loc3;
                 }
                 ++loc2;

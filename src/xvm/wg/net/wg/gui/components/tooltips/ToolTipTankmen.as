@@ -34,7 +34,9 @@ package net.wg.gui.components.tooltips
         public override function dispose():void
         {
             if (this.vehicleIco.hasEventListener(net.wg.gui.events.UILoaderEvent.COMPLETE)) 
+            {
                 this.vehicleIco.removeEventListener(net.wg.gui.events.UILoaderEvent.COMPLETE, this.onIcoLoaded);
+            }
             super.dispose();
             return;
         }
@@ -142,11 +144,17 @@ package net.wg.gui.components.tooltips
                     loc8.leftText = loc8.leftText + (net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(this.dataVO.params[loc4][1], loc9, 12, "$TextFont") + "<br/>");
                     loc10 = "";
                     if (loc4 != 0) 
+                    {
                         loc10 = "<h1>" + loc5.makeString(this.dataVO.params[loc4][0]) + "</h1>";
+                    }
                     else if (this.dataVO.vehicleName == this.dataVO.currentVehicleName || this.dataVO.currentVehicleName == "") 
+                    {
                         loc10 = "<h1>" + loc5.makeString(this.dataVO.params[loc4][0]) + " " + this.dataVO.vehicleName + "</h1>";
+                    }
                     else 
+                    {
                         loc10 = "<h1>" + loc5.makeString(this.dataVO.params[loc4][0]) + " <p>" + this.dataVO.vehicleName + "</p></h1>";
+                    }
                     loc8.rightTextList[loc4] = new net.wg.gui.components.tooltips.VO.ToolTipBlockRightListItemVO(loc10);
                     ++loc4;
                 }
@@ -224,7 +232,9 @@ package net.wg.gui.components.tooltips
         internal function onIcoLoaded(arg1:net.wg.gui.events.UILoaderEvent):void
         {
             if (this.vehicleIco.hasEventListener(net.wg.gui.events.UILoaderEvent.COMPLETE)) 
+            {
                 this.vehicleIco.removeEventListener(net.wg.gui.events.UILoaderEvent.COMPLETE, this.onIcoLoaded);
+            }
             this.vehicleIco.scaleX = -1;
             this.vehicleIco.x = contentMargin.left + bgShadowMargin.left + this.vehicleIco.width;
             this.tankInfoTF.x = this.vehicleIco.x + 5;

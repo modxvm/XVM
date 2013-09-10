@@ -19,7 +19,9 @@ package net.wg.data.gui_items
             var loc3:*=0;
             var loc4:*=_getAttr(arg2) as Array;
             for each (loc2 in loc4) 
+            {
                 loc1.push(new net.wg.data.gui_items.FittingItem(arg1, loc2));
+            }
             return loc1;
         }
 

@@ -46,7 +46,9 @@ package net.wg.gui.lobby.dialogs
                 this.priceMc.dispose();
                 loc1 = this.priceMc.parent;
                 if (loc1) 
+                {
                     loc1.removeChild(this.priceMc);
+                }
                 this.priceMc = null;
             }
             super.onDispose();

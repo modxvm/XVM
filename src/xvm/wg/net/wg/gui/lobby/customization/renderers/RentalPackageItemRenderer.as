@@ -39,7 +39,9 @@ package net.wg.gui.lobby.customization.renderers
         {
             super.draw();
             if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+            {
                 visible = !(data == null);
+            }
             return;
         }
 

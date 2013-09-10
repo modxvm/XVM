@@ -63,14 +63,22 @@ package net.wg.data.VO
             switch (loc1) 
             {
                 case "team1":
+                {
                     return this._team1;
+                }
                 case "team2":
+                {
                     return this._team2;
+                }
                 case "other":
+                {
                     return this._other;
+                }
                 default:
+                {
                     DebugUtils.LOG_DEBUG("undefined " + arg1 + "in TrainingRoomListVO");
                     return [];
+                }
             }
         }
 

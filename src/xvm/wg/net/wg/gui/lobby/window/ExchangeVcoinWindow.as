@@ -152,7 +152,9 @@ package net.wg.gui.lobby.window
             {
                 loc1 = this.getChildAt(loc3);
                 if (loc1 != waiting) 
+                {
                     loc1.visible = !showWaiting;
+                }
                 ++loc3;
             }
             return;
@@ -162,7 +164,9 @@ package net.wg.gui.lobby.window
         {
             var loc1:*=-1;
             if (this.exchangeData) 
+            {
                 loc1 = this.exchangeData.minTransactVal;
+            }
             return totalPrimaryCurrency >= loc1;
         }
 
@@ -201,14 +205,18 @@ package net.wg.gui.lobby.window
         protected override function submitBtnClickHandler(arg1:flash.events.Event):void
         {
             if (!showWaiting) 
+            {
                 super.submitBtnClickHandler(arg1);
+            }
             return;
         }
 
         protected override function cancelBtnClickHandler(arg1:flash.events.Event):void
         {
             if (!showWaiting) 
+            {
                 super.cancelBtnClickHandler(arg1);
+            }
             return;
         }
 
@@ -221,7 +229,9 @@ package net.wg.gui.lobby.window
         internal function buyVcoinBtnHandler(arg1:scaleform.clik.events.ButtonEvent):void
         {
             if (!showWaiting) 
+            {
                 this.buyVcoinS();
+            }
             return;
         }
 

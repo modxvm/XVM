@@ -29,7 +29,9 @@ package net.wg.gui.components.carousels
         protected function getDefContainerPos():Number
         {
             if (this.leftArrow && this.leftArrow.visible) 
+            {
                 return this.leftArrow.x + this.leftArrow.width ^ 0;
+            }
             return 0;
         }
 
@@ -44,6 +46,7 @@ package net.wg.gui.components.carousels
                 this.allowDrag = false;
             }
             else if (this.currentFirstRenederer != 0) 
+            {
                 if (this.currentFirstRenederer >= loc1 - this.countVisibleSlots) 
                 {
                     this.enableLeftArrow(true);
@@ -57,6 +60,7 @@ package net.wg.gui.components.carousels
                     this.enableRightArrow(true);
                     this.allowDrag = true;
                 }
+            }
             else 
             {
                 this.enableLeftArrow(false);
@@ -95,7 +99,9 @@ package net.wg.gui.components.carousels
         protected function set currentFirstRenederer(arg1:uint):void
         {
             if (arg1 == this._currentFirstRenederer) 
+            {
                 return;
+            }
             this._currentFirstRenederer = arg1;
             this.updateArrowsState();
             return;
@@ -118,9 +124,13 @@ package net.wg.gui.components.carousels
             while (loc2 < loc1) 
             {
                 if (_renderers[loc2] is net.wg.infrastructure.interfaces.IPersonalCaseItemRenderer) 
+                {
                     net.wg.infrastructure.interfaces.IPersonalCaseItemRenderer(_renderers[loc2]).canSelected = arg1;
+                }
                 else 
+                {
                     return;
+                }
                 ++loc2;
             }
             return;
@@ -133,9 +143,13 @@ package net.wg.gui.components.carousels
             {
                 loc1 = arg2.scopeStartX + (arg1.mouseX - arg2.startMouseX);
                 if (loc1 > arg2.scopeDefPosition + MAX_DRAG_ODDSET) 
+                {
                     loc1 = arg2.scopeDefPosition + MAX_DRAG_ODDSET;
+                }
                 else if (loc1 < arg2.scopeDefPosition - arg2.allowDragDistance - MAX_DRAG_ODDSET) 
+                {
                     loc1 = arg2.scopeDefPosition - arg2.allowDragDistance - MAX_DRAG_ODDSET;
+                }
                 container.x = container.x + (loc1 - container.x) / DRAG_ACCELERATOR;
                 container.x = container.x ^ 0;
                 this.lastDx = container.x - this.lastContenerXPos;
@@ -211,13 +225,21 @@ package net.wg.gui.components.carousels
             var loc2:*=this._padding.left + this._padding.right + 10;
             var loc3:*=this.currentFirstRenederer;
             if (arg1 == "right" && loc1 > loc2) 
+            {
                 loc3 = this.currentFirstRenederer + Math.round(loc1 / this.getSlotWidth()) + 1;
+            }
             else if (arg1 == "left" && loc1 < -loc2) 
+            {
                 loc3 = (this.currentFirstRenederer - Math.floor((-loc1) / this.getSlotWidth()) - 1);
+            }
             if (loc3 < 0) 
+            {
                 loc3 = 0;
+            }
             else if (loc3 > _renderers.length - this.countVisibleSlots) 
+            {
                 loc3 = _renderers.length - this.countVisibleSlots;
+            }
             this.currentFirstRenederer = loc3;
             this.courceFactor = 0;
             return;
@@ -227,15 +249,21 @@ package net.wg.gui.components.carousels
         {
             this.clearSlidingIntervalId();
             if (this.skippCall) 
+            {
                 this.skippCall = arg2;
+            }
             else 
             {
                 this.skippCall = arg2;
                 this.currentFirstRenederer = arg1 != "left" ? Math.min(_renderers.length - this.countVisibleSlots, this.currentFirstRenederer + 1) : Math.max(0, (this.currentFirstRenederer - 1));
                 if (this.currentFirstRenederer == 0 || this.currentFirstRenederer == _renderers.length - this.countVisibleSlots) 
+                {
                     this.courceFactor = 0;
+                }
                 else 
+                {
                     this.courceFactor = arg1 != "left" ? -1 : 1;
+                }
                 if (this.arrowSlideIntervaId == 0 && container) 
                 {
                     this.slideSelfAcceleratorDynamic = SLIDE_SELF_ACCELERATOR;
@@ -298,9 +326,13 @@ package net.wg.gui.components.carousels
         {
             var loc1:*=-Math.round((container.x - this.getDefContainerPos()) / this.getSlotWidth());
             if (loc1 < 0) 
+            {
                 loc1 = 0;
+            }
             else if (loc1 > _renderers.length - this.countVisibleSlots) 
+            {
                 loc1 = _renderers.length - this.countVisibleSlots;
+            }
             return loc1;
         }
 
@@ -323,7 +355,9 @@ package net.wg.gui.components.carousels
             var loc4:*=null;
             var loc5:*=null;
             if (_renderers == null || _dataProvider == null) 
+            {
                 return;
+            }
             var loc1:*=_renderers.length;
             --loc2;
             while (loc2 >= 0) 
@@ -333,10 +367,14 @@ package net.wg.gui.components.carousels
                 {
                     cleanUpRenderer(loc3);
                     if (loc4 = loc3 as net.wg.infrastructure.interfaces.entity.IDisposable) 
+                    {
                         loc4.dispose();
+                    }
                     loc5 = loc3 as flash.display.DisplayObject;
                     if (container.contains(loc5)) 
+                    {
                         container.removeChild(loc5);
+                    }
                 }
                 _renderers.splice(loc2, 1);
                 --loc2;
@@ -359,7 +397,9 @@ package net.wg.gui.components.carousels
         {
             var loc1:*=this.mouseX > this.dragHitArea.x && this.mouseX < this.dragHitArea.x + this.dragHitArea.width;
             if (arg1.target == this.leftArrow || arg1.target == this.rightArrow || loc1 == false) 
+            {
                 return false;
+            }
             return true;
         }
 
@@ -402,9 +442,13 @@ package net.wg.gui.components.carousels
                 App.stage.addEventListener(flash.events.MouseEvent.MOUSE_MOVE, this.carouselMouseMoveHandler);
             }
             else if (this.isMouseOnDragArea(arg1) && App.cursor) 
+            {
                 App.cursor.setCursor(net.wg.data.constants.Cursors.DRAG_OPEN);
+            }
             else if (App.cursor) 
+            {
                 App.cursor.setCursor(net.wg.data.constants.Cursors.BUTTON);
+            }
             return;
         }
 
@@ -425,13 +469,23 @@ package net.wg.gui.components.carousels
             this.isDragging = false;
             var loc2:*=App.cursor;
             if (this.mouseIn) 
+            {
                 if (loc2) 
+                {
                     if (this.isMouseOnDragArea(arg1)) 
+                    {
                         loc2.setCursor(net.wg.data.constants.Cursors.DRAG_OPEN);
+                    }
                     else 
+                    {
                         loc2.setCursor(net.wg.data.constants.Cursors.BUTTON);
+                    }
+                }
+            }
             else 
+            {
                 loc2.setCursor(this.lastCursor);
+            }
             return;
         }
 
@@ -439,7 +493,9 @@ package net.wg.gui.components.carousels
         {
             this.mouseIn = false;
             if (!this.isDragging && App.cursor) 
+            {
                 App.cursor.setCursor(net.wg.data.constants.Cursors.ARROW);
+            }
             return;
         }
 
@@ -467,12 +523,18 @@ package net.wg.gui.components.carousels
         public override function set dataProvider(arg1:scaleform.clik.interfaces.IDataProvider):void
         {
             if (_dataProvider == arg1) 
+            {
                 return;
+            }
             if (_dataProvider != null) 
+            {
                 _dataProvider.removeEventListener(flash.events.Event.CHANGE, handleDataChange, false);
+            }
             _dataProvider = arg1;
             if (_dataProvider == null) 
+            {
                 return;
+            }
             _dataProvider.addEventListener(flash.events.Event.CHANGE, handleDataChange, false, 0, true);
             return;
         }
@@ -485,7 +547,9 @@ package net.wg.gui.components.carousels
         public function set padding(arg1:Object):void
         {
             if (!arg1) 
+            {
                 return;
+            }
             this._padding = new scaleform.clik.utils.Padding(arg1.top, arg1.right, arg1.bottom, arg1.left);
             return;
         }
@@ -505,7 +569,9 @@ package net.wg.gui.components.carousels
         {
             super.draw();
             if (!_usingExternalRenderers && isInvalid(scaleform.clik.constants.InvalidationType.SIZE) && this.useShadow) 
+            {
                 this.setChildIndex(this.shadow, (this.numChildren - 1));
+            }
             if (isInvalid(INIT_CAROUSEL) && !(dataProvider == null) && dataProvider.length > 0) 
             {
                 this.isUpdated = true;
@@ -529,7 +595,9 @@ package net.wg.gui.components.carousels
             this.shadow.tabChildren = loc1 = loc1;
             this.shadow.tabEnabled = loc1;
             if (this.dragHitArea) 
+            {
                 this.addEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.startDragging);
+            }
             if (this.leftArrow && this.rightArrow) 
             {
                 this.leftArrow.autoRepeat = true;
@@ -554,12 +622,16 @@ package net.wg.gui.components.carousels
             var loc3:*=null;
             var loc4:*=null;
             if (_itemRenderer == null) 
+            {
                 return;
+            }
             loc1 = _renderers.length;
             while (loc1 < arg1) 
             {
                 if ((loc3 = createRenderer(loc1)) == null) 
+                {
                     break;
+                }
                 _renderers.push(loc3);
                 container.addChild(loc3 as flash.display.DisplayObject);
                 ++loc1;
@@ -573,7 +645,9 @@ package net.wg.gui.components.carousels
                     cleanUpRenderer(loc3);
                     loc4 = loc3 as flash.display.DisplayObject;
                     if (container.contains(loc4)) 
+                    {
                         container.removeChild(loc4);
+                    }
                 }
                 _renderers.splice(loc1, 1);
                 --loc1;
@@ -607,17 +681,23 @@ package net.wg.gui.components.carousels
                     loc6 = getRendererAt(loc5);
                     this.updateRenderPosition(loc6, loc5, loc4, loc2);
                     loc4 = loc6.x;
-                    if (loc3) ;
+                    if (loc3) 
+                    {
+                    };
                     ++loc5;
                 }
                 if (this.isInitSize) 
                 {
                     this.updateContainerPosition();
                     if (this.useShadow) 
+                    {
                         this.shadow.visible = this.leftArrow.visible;
+                    }
                 }
                 else 
+                {
                     this.initPosition();
+                }
             }
             return;
         }
@@ -640,12 +720,16 @@ package net.wg.gui.components.carousels
             var loc3:*=null;
             var loc1:*=this.mouseX > this.dragHitArea.x && this.mouseX < this.dragHitArea.x + this.dragHitArea.width;
             if (arg1.target == this.leftArrow || arg1.target == this.rightArrow || loc1 == false) 
+            {
                 return;
+            }
             if (DRAG_ENABLE && this.allowDrag) 
             {
                 this.mouseIn = true;
                 if (App.cursor) 
+                {
                     App.cursor.setCursor(net.wg.data.constants.Cursors.MOVE);
+                }
                 loc2 = App.stage;
                 loc2.addEventListener(flash.events.MouseEvent.MOUSE_UP, this.stopDragging);
                 loc2.addEventListener(scaleform.gfx.MouseCursorEvent.CURSOR_CHANGE, this.onChangeCursorHandler);
@@ -692,7 +776,9 @@ package net.wg.gui.components.carousels
                 loc4.setData(arg1[loc3]);
                 loc4.validateNow();
                 if (!this.showEmptyItems) 
+                {
                     scaleform.clik.core.UIComponent(loc4).visible = !(arg1[loc3] == null);
+                }
                 ++loc3;
             }
             return;

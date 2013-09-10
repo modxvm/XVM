@@ -35,14 +35,18 @@ package net.wg.data.daapi.base
                 loc4 = arg1[loc3];
                 loc5 = loc3;
                 if (!this.onDataWrite(loc5, loc4)) 
+                {
                     continue;
+                }
                 loc1.assert(hasOwnProperty(loc5), loc2 + loc5, net.wg.infrastructure.exceptions.DAAPIBindException);
                 if (loc4 != undefined) 
                 {
                     loc6 = typeof this[loc3];
                     loc7 = typeof loc4;
                     if (loc6 == "object") 
+                    {
                         loc1.assert(loc7 == "object", "incorrect cast value \'" + loc4 + "\' to field with type Object." + " Please, change type of \'" + avmplus.getQualifiedClassName(this) + "." + loc3 + "\' field  to \'" + loc7 + "\' type or initialize it as Values.EMPTY_STR", net.wg.infrastructure.exceptions.DAAPIBindException);
+                    }
                     else 
                     {
                         loc8 = "invalid type on property \'" + avmplus.getQualifiedClassName(this) + "." + loc3 + "\': can`t cast value \'" + loc4 + "\' with type \'" + loc7 + "\'to \'" + loc6 + "\'";
@@ -84,7 +88,9 @@ package net.wg.data.daapi.base
                 loc3 = loc1[loc2];
                 loc4 = loc2.substr(1);
                 if (!this.onDataRead(loc2, loc1)) 
+                {
                     continue;
+                }
                 loc1[loc4] = loc3;
             }
             return loc1;

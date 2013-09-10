@@ -29,7 +29,9 @@ package net.wg.gui.utils
         public function unregister(arg1:scaleform.clik.motion.Tween):void
         {
             if (this.currentTweens && this.currentTweens[arg1.target]) 
+            {
                 delete this.currentTweens[arg1.target];
+            }
             return;
         }
 

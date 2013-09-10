@@ -24,7 +24,9 @@ package net.wg.gui.lobby.demonstration
         {
             super.draw();
             if (isInvalid(scaleform.clik.constants.InvalidationType.DATA) && data) 
+            {
                 textField.text = net.wg.gui.lobby.demonstration.data.MapItemVO(data).name;
+            }
             return;
         }
 

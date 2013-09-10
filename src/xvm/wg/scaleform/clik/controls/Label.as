@@ -17,7 +17,9 @@ package scaleform.clik.controls
         protected override function preInitialize():void
         {
             if (!this.constraintsDisabled) 
+            {
                 constraints = new scaleform.clik.utils.Constraints(this, scaleform.clik.constants.ConstrainMode.COUNTER_SCALE);
+            }
             return;
         }
 
@@ -35,7 +37,9 @@ package scaleform.clik.controls
         public override function set enabled(arg1:Boolean):void
         {
             if (arg1 == super.enabled) 
+            {
                 return;
+            }
             super.enabled = arg1;
             var loc1:*;
             mouseChildren = loc1 = arg1;
@@ -52,7 +56,9 @@ package scaleform.clik.controls
         public function set text(arg1:String):void
         {
             if (arg1 == null) 
+            {
                 arg1 == "";
+            }
             this.isHtml = false;
             this._text = arg1;
             invalidateData();
@@ -67,7 +73,9 @@ package scaleform.clik.controls
         public function set htmlText(arg1:String):void
         {
             if (arg1 == null) 
+            {
                 arg1 == "";
+            }
             this.isHtml = true;
             this._text = arg1;
             invalidateData();
@@ -82,7 +90,9 @@ package scaleform.clik.controls
         public function set autoSize(arg1:String):void
         {
             if (arg1 == this._autoSize) 
+            {
                 return;
+            }
             this._autoSize = arg1;
             invalidateData();
             return;
@@ -123,7 +133,9 @@ package scaleform.clik.controls
         {
             super.configUI();
             if (!this.constraintsDisabled) 
+            {
                 constraints.addElement("textField", this.textField, scaleform.clik.utils.Constraints.ALL);
+            }
             focusable = false;
             return;
         }
@@ -132,9 +144,13 @@ package scaleform.clik.controls
         {
             var loc2:*=null;
             if (constraints == null || this.textField == null) 
+            {
                 return actualWidth;
+            }
             if (!this.constraintsDisabled) 
+            {
                 loc2 = constraints.getElement("textField");
+            }
             var loc1:*=Math.ceil(this.textField.textWidth + loc2.left + loc2.right + 5);
             return loc1;
         }
@@ -145,7 +161,9 @@ package scaleform.clik.controls
             var loc3:*=NaN;
             var loc4:*=NaN;
             if (!initialized || this._autoSize == flash.text.TextFieldAutoSize.NONE || this.textField == null) 
+            {
                 return;
+            }
             loc1 = _width;
             var loc5:*;
             _width = loc5 = this.calculateWidth();
@@ -154,13 +172,17 @@ package scaleform.clik.controls
             switch (loc5) 
             {
                 case flash.text.TextFieldAutoSize.RIGHT:
+                {
                     loc3 = x + loc1;
                     x = loc3 - loc2;
                     break;
+                }
                 case flash.text.TextFieldAutoSize.CENTER:
+                {
                     loc4 = x + loc1 * 0.5;
                     x = loc4 - loc2 * 0.5;
                     break;
+                }
             }
             return;
         }
@@ -191,7 +213,9 @@ package scaleform.clik.controls
             {
                 setActualSize(_width, _height);
                 if (!this.constraintsDisabled) 
+                {
                     constraints.update(_width, _height);
+                }
             }
             return;
         }
@@ -199,19 +223,29 @@ package scaleform.clik.controls
         protected function updateText():void
         {
             if (!(this._text == null) && !(this.textField == null)) 
+            {
                 if (this.isHtml) 
+                {
                     this.textField.htmlText = this._text;
+                }
                 else 
+                {
                     this.textField.text = this._text;
+                }
+            }
             return;
         }
 
         protected function updateAfterStateChange():void
         {
             if (!initialized) 
+            {
                 return;
+            }
             if (!(constraints == null) && !this.constraintsDisabled) 
+            {
                 constraints.updateElement("textField", this.textField);
+            }
             this.updateText();
             dispatchEvent(new scaleform.clik.events.ComponentEvent(scaleform.clik.events.ComponentEvent.STATE_CHANGE));
             return;

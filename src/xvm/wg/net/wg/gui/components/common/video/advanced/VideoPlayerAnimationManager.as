@@ -43,7 +43,9 @@ package net.wg.gui.components.common.video.advanced
                 this.tweenManager.registerAndLaunch(arg1, loc1, animationTweenObect, arg3());
                 this.tweenManager.registerAndLaunch(arg1, loc2, animationTweenObect, arg3());
                 if (loc3) 
+                {
                     this.tweenManager.registerAndLaunch(arg1, loc3, animationTweenObect, arg3());
+                }
             }
             else 
             {
@@ -51,12 +53,16 @@ package net.wg.gui.components.common.video.advanced
                 loc1.alpha = arg2;
                 loc2.alpha = arg2;
                 if (loc3) 
+                {
                     loc3.alpha = arg2;
+                }
             }
             loc1.visible = loc4;
             loc2.visible = loc4;
             if (loc3) 
+            {
                 loc3.visible = loc4;
+            }
             return;
         }
 

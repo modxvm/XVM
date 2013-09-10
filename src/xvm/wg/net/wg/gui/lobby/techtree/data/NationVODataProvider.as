@@ -31,9 +31,13 @@ package net.wg.gui.lobby.techtree.data
             var loc1:*=arg1.nodes;
             var loc2:*=App.utils.locale;
             if (arg1.hasOwnProperty("scrollIndex")) 
+            {
                 this._scrollIndex = arg1.scrollIndex;
+            }
             if (arg1.hasOwnProperty("displaySettings")) 
+            {
                 this._displaySettings.fromObject(arg1.displaySettings, loc2);
+            }
             var loc3:*=loc1.length;
             var loc5:*=0;
             while (loc5 < loc3) 

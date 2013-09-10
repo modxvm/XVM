@@ -67,7 +67,9 @@ package net.wg.gui.components.advanced
             if (this._targetGroup != loc1) 
             {
                 if (this._targetGroup != null) 
+                {
                     this._targetGroup.removeEventListener(scaleform.clik.events.IndexEvent.INDEX_CHANGE, this.onChangeViewHandler);
+                }
                 this._targetGroup = loc1;
                 if (this._targetGroup != null) 
                 {
@@ -81,7 +83,9 @@ package net.wg.gui.components.advanced
         internal function assertTargetGroup(arg1:String):void
         {
             if (!App.utils) 
+            {
                 return;
+            }
             var loc1:*="component with instance \'" + arg1 + "\'";
             var loc2:*=App.utils.asserter;
             loc2.assert(parent.hasOwnProperty(arg1), "container \'" + parent + "\' has no " + loc1, net.wg.infrastructure.exceptions.ArgumentException);
@@ -104,14 +108,20 @@ package net.wg.gui.components.advanced
             {
                 loc1 = this._targetGroup.data;
                 if (loc1 != null) 
+                {
                     if (loc1.hasOwnProperty("linkage")) 
+                    {
                         if (loc1.linkage != null) 
+                        {
                             this.show(loc1.linkage);
+                        }
+                    }
                     else 
                     {
                         loc2 = "renderers data for View stack must have a linkage property!";
                         DebugUtils.LOG_DEBUG(loc2);
                     }
+                }
             }
             return;
         }
@@ -119,6 +129,7 @@ package net.wg.gui.components.advanced
         public function show(arg1:String):flash.display.MovieClip
         {
             if (this.currentView != null) 
+            {
                 if (this.currentView["__cached__"] != true) 
                 {
                     this.container.removeChild(this.currentView);
@@ -126,12 +137,17 @@ package net.wg.gui.components.advanced
                     this.currentView = null;
                 }
                 else 
+                {
                     this.currentView.visible = false;
+                }
+            }
             var loc1:*=this.createView(arg1);
             this.currentView = loc1;
             this._currentLinkage = arg1;
             if (loc1 != null) 
+            {
                 loc1.visible = true;
+            }
             invalidate();
             return loc1;
         }
@@ -164,7 +180,9 @@ package net.wg.gui.components.advanced
                 }
             }
             else 
+            {
                 loc1 = this.cachedViews[arg1];
+            }
             dispatchEvent(new net.wg.gui.events.ViewStackEvent(net.wg.gui.events.ViewStackEvent.VIEW_CHANGED, net.wg.infrastructure.interfaces.IViewStackContent(loc1), arg1));
             return loc1;
         }
@@ -185,7 +203,9 @@ package net.wg.gui.components.advanced
                     var loc3:*=0;
                     var loc4:*=this.cachedViews;
                     for (loc2 in loc4) 
+                    {
                         delete this.cachedViews[loc2];
+                    }
                     this.cachedViews = null;
                 }
                 while (this.container.numChildren > 0) 

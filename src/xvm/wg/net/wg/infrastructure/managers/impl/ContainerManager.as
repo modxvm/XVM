@@ -41,7 +41,9 @@ package net.wg.infrastructure.managers.impl
             for (loc1 in loc4)
             {
                 if (!(loc2 = this.containersMap[loc1]).manageSize)
+                {
                     continue;
+                }
                 loc2.updateStage(arg1, arg2);
             }
             return;
@@ -73,12 +75,18 @@ package net.wg.infrastructure.managers.impl
                 this.nameToView[loc2.view.as_name] = loc2;
                 loc1 = true;
                 if (loc2.view.as_config.type == net.wg.data.constants.ContainerTypes.CURSOR)
+                {
                     dispatchEvent(new net.wg.infrastructure.events.LoaderEvent(net.wg.infrastructure.events.LoaderEvent.CURSOR_LOADED, loc2.view.as_config, arg1, loc2.view));
+                }
                 if (loc2.view.as_config.type == net.wg.data.constants.ContainerTypes.WAITING)
+                {
                     dispatchEvent(new net.wg.infrastructure.events.LoaderEvent(net.wg.infrastructure.events.LoaderEvent.WAITING_LOADED, loc2.view.as_config, arg1, loc2.view));
+                }
             }
             else
+            {
                 throw new Error("net.wg.infrastructure.base.BaseView is not found using token = " + arg1);
+            }
             return loc1;
         }
 
@@ -96,7 +104,9 @@ package net.wg.infrastructure.managers.impl
                 this.updateFocus();
             }
             else
+            {
                 throw new Error("net.wg.infrastructure.base.AbstractView is not found using token = " + arg1);
+            }
             return loc1;
         }
 
@@ -223,7 +233,9 @@ package net.wg.infrastructure.managers.impl
         {
             this._loader = arg1;
             if (this._loader)
+            {
                 this._loader.addEventListener(net.wg.infrastructure.events.LoaderEvent.VIEW_LOADED, this.handleViewLoaded);
+            }
             return;
         }
 
@@ -235,7 +247,9 @@ package net.wg.infrastructure.managers.impl
         public function set lastFocusedView(arg1:net.wg.infrastructure.interfaces.IView):void
         {
             if (this._lastFocusedView && !(this._lastFocusedView == arg1))
+            {
                 this.lastFocusedView.removeFocus();
+            }
             this._lastFocusedView = arg1;
             return;
         }
@@ -255,12 +269,14 @@ package net.wg.infrastructure.managers.impl
             container = null;
             try
             {
-                var loc2:Number = 0;
+                var loc2:* = 0;
                 var loc3:*=this.tokenToView;
                 for (key in loc3)
                 {
                     if (this.as_hide(key))
+                    {
                         continue;
+                    }
                     delete this.tokenToView[key];
                 }
                 this.tokenToView = null;
@@ -293,7 +309,9 @@ package net.wg.infrastructure.managers.impl
         {
             var loc1:*=null;
             if (this.containersMap.hasOwnProperty(arg1))
+            {
                 loc1 = this.containersMap[arg1] as net.wg.infrastructure.interfaces.IManagedContainer;
+            }
             return loc1;
         }
 
@@ -326,7 +344,9 @@ package net.wg.infrastructure.managers.impl
         internal function onContainerFocusOut(arg1:flash.events.FocusEvent):void
         {
             if (arg1.target == arg1.currentTarget)
+            {
                 this.updateFocus(arg1.target);
+            }
             return;
         }
 
@@ -340,7 +360,9 @@ package net.wg.infrastructure.managers.impl
             {
                 loc2 = this.getContainer(loc1);
                 if (!(loc2 && !(loc2 == arg1) && loc2.setFocused(true)))
+                {
                     continue;
+                }
                 break;
             }
             return;
@@ -396,7 +418,9 @@ class ViewInfo extends Object
     {
         var loc1:*=this.view is net.wg.infrastructure.interfaces.IAbstractWindowView ? flash.display.DisplayObject((this.view as net.wg.infrastructure.interfaces.IAbstractWindowView).window) : this.view;
         if (this.container.contains(loc1))
+        {
             this.container.removeChild(this.view);
+        }
         return;
     }
 

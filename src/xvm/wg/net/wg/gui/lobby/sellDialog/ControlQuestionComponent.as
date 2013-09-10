@@ -107,10 +107,16 @@ package net.wg.gui.lobby.sellDialog
                 this.showErrorState(false);
                 App.utils.scheduler.cancelTask(this.runtimeValidate);
                 if (arg1.details.code != flash.ui.Keyboard.ENTER) 
+                {
                     if (!this.isEmptyText) 
+                    {
                         App.utils.scheduler.scheduleTask(this.runtimeValidate, AUTO_UPDATE_TIMER);
+                    }
+                }
                 else 
+                {
                     this.showErrorState(!this.isValidControlInput);
+                }
                 dispatchEvent(new flash.events.Event(USER_INPUT_HANDLER));
             }
             return;
@@ -142,7 +148,9 @@ package net.wg.gui.lobby.sellDialog
         public function cleanField():void
         {
             if (this.userInput) 
+            {
                 this.userInput.text = "";
+            }
             this.showErrorState(false);
             return;
         }

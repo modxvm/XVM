@@ -31,12 +31,20 @@ package net.wg.gui.lobby.techtree.helpers
             var loc1:*=NaN;
             var loc2:*;
             if ((loc2 = arg2.subtract(arg1)).y != 0) 
+            {
                 if (loc2.x != 0) 
+                {
                     loc1 = Math.round(180 * Math.atan(loc2.y / loc2.x) / Math.PI);
+                }
                 else 
+                {
                     loc1 = arg1.y > arg2.y ? -90 : 90;
+                }
+            }
             else 
+            {
                 loc1 = 0;
+            }
             return loc1;
         }
 
@@ -44,10 +52,16 @@ package net.wg.gui.lobby.techtree.helpers
         {
             var loc1:*=arg1.clone();
             if (arg2 != 0) 
+            {
                 if (Math.abs(arg2) == 90) 
+                {
                     loc1.x = loc1.x + this.lineRatio;
+                }
+            }
             else 
+            {
                 loc1.y = loc1.y + this.lineRatio;
+            }
             return loc1;
         }
 
@@ -87,12 +101,20 @@ package net.wg.gui.lobby.techtree.helpers
             var loc2:*=null;
             var loc1:*=getChildByName(LINES_AND_ARROWS_NAME + arg1.index) as flash.display.Sprite;
             if (loc1 == null) 
+            {
                 return;
+            }
             if (!(arg2 == null) && arg2.length > 0) 
+            {
                 if ((loc2 = this.getSubSprite(arg1, arg2, false)) != null) 
+                {
                     loc1.removeChild(loc2);
+                }
+            }
             else 
+            {
                 removeChild(loc1);
+            }
             return;
         }
 
@@ -125,7 +147,9 @@ package net.wg.gui.lobby.techtree.helpers
             this.clearUpRenderer(arg1);
             this.clearLinesAndArrows(arg1);
             if (contains(flash.display.DisplayObject(arg1))) 
+            {
                 removeChild(flash.display.DisplayObject(arg1));
+            }
             return;
         }
 
@@ -140,15 +164,19 @@ package net.wg.gui.lobby.techtree.helpers
                 addChild(loc2);
                 loc4 = flash.display.DisplayObject(arg1);
                 if (getChildIndex(loc2) > getChildIndex(loc4)) 
+                {
                     swapChildren(loc4, loc2);
+                }
             }
             var loc3:*=loc2;
             if (!(arg2 == null) && !(loc2 == null)) 
+            {
                 if ((loc3 = loc2.getChildByName(arg2) as flash.display.Sprite) == null && arg3) 
                 {
                     (loc3 = new flash.display.Sprite()).name = arg2;
                     loc2.addChild(loc3);
                 }
+            }
             return loc3;
         }
 

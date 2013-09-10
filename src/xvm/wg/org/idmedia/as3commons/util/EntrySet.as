@@ -20,7 +20,9 @@ package org.idmedia.as3commons.util
         public override function add(arg1:*):Boolean
         {
             if (!(arg1 is org.idmedia.as3commons.util.Entry)) 
+            {
                 throw new org.idmedia.as3commons.lang.IllegalArgumentException();
+            }
             if (!contains(arg1)) 
             {
                 this.table.push(arg1);

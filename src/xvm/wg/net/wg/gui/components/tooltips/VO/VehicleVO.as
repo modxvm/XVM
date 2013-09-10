@@ -30,7 +30,9 @@ package net.wg.gui.components.tooltips.VO
                 {
                     this.clanLockTime = arg1["locks"][loc3];
                     if (isNaN(this.clanLockTime)) 
+                    {
                         continue;
+                    }
                     this.clanLock = true;
                     this.clanLockType = loc3;
                     this.clanLockTimeStr = loc2.shortDate(this.clanLockTime) + " " + loc2.shortTime(this.clanLockTime);
@@ -41,9 +43,13 @@ package net.wg.gui.components.tooltips.VO
             if (loc1) 
             {
                 if (loc1[0]) 
+                {
                     this.characteristics = loc1[0];
+                }
                 if (loc1[1]) 
+                {
                     this.equipments = loc1[1];
+                }
             }
             if (arg1.hasOwnProperty("status") && !(arg1["status"] == undefined)) 
             {
@@ -59,7 +65,9 @@ package net.wg.gui.components.tooltips.VO
                 this.statusText = null;
             }
             if (this.statusHeader || this.statusText) 
+            {
                 this.status = true;
+            }
             return;
         }
 

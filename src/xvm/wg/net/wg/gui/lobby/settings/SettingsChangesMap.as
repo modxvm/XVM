@@ -47,15 +47,21 @@ package net.wg.gui.lobby.settings
         {
             var loc1:*=null;
             if (arg1.hasOwnProperty(arg2)) 
+            {
                 if (!(arg3 is String) && !(arg3 is Number) && !(arg3 is Boolean)) 
                 {
                     loc2 = 0;
                     loc3 = arg3;
                     for (loc1 in loc3) 
+                    {
                         this.addChanges(arg1[arg2], loc1, arg3[loc1]);
+                    }
                 }
                 else 
+                {
                     arg1[arg2] = arg3;
+                }
+            }
             else 
             {
                 var loc2:*;
@@ -87,14 +93,20 @@ package net.wg.gui.lobby.settings
                     for (loc1 in loc6) 
                     {
                         if (!(loc2 = this.cutChanges(arg1[arg2], loc1, arg3[loc1]))) 
+                        {
                             continue;
+                        }
                         loc3 = 0;
                         var loc7:*=0;
                         var loc8:*=arg1[arg2];
                         for (loc4 in loc8) 
+                        {
                             ++loc3;
+                        }
                         if (loc3 != 0) 
+                        {
                             continue;
+                        }
                         delete arg1[arg2];
                         return true;
                     }
@@ -134,7 +146,9 @@ package net.wg.gui.lobby.settings
                 var loc5:*=0;
                 var loc6:*=this._data[loc1];
                 for (loc2 in loc6) 
+                {
                     trace("------", loc2, this._data[loc1][loc2]);
+                }
             }
             trace("**************************************************************");
             return;

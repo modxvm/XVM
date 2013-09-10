@@ -28,7 +28,9 @@ package net.wg.gui.lobby.tankman
         public function set type(arg1:String):void
         {
             if (this._type == arg1) 
+            {
                 return;
+            }
             this._type = arg1;
             this.typeSwitcher.gotoAndStop(arg1);
             return;

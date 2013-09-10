@@ -96,14 +96,18 @@ package net.wg.gui.login.impl
         public override function handleInput(arg1:scaleform.clik.events.InputEvent):void
         {
             if (arg1.details.value == scaleform.clik.constants.InputValue.KEY_DOWN) 
+            {
                 this._lastDownKeyCode = arg1.details.code;
+            }
             return;
         }
 
         internal function onRememberPwdCheckboxToggle(arg1:flash.events.Event):void
         {
             if (this._isIgrCredentialsReset) 
+            {
                 this.igrWarning.visible = this.rememberPwdCheckbox.selected;
+            }
             return;
         }
 
@@ -137,7 +141,9 @@ package net.wg.gui.login.impl
                 {
                     loc1 = this._pass.text.slice(-1);
                     if (loc1 == "*" && !(this._lastDownKeyCode == MULTI_SYMBOL_CODE)) 
+                    {
                         loc1 = "";
+                    }
                 }
                 this._pass.text = loc1;
                 dispatchEvent(new net.wg.gui.login.impl.LoginEvent(net.wg.gui.login.impl.LoginEvent.TOKEN_RESET));
@@ -167,7 +173,7 @@ package net.wg.gui.login.impl
             return;
         }
 
-        public function setDefaultValues(arg1:String, arg2:String, arg3:Boolean, arg4:Boolean, arg5:Boolean):void
+        public function setDefaultValues(arg1:String, arg2:String, arg3:Boolean, arg4:Boolean, arg5:Boolean, arg6:Boolean):void
         {
             if (arg5) 
             {
@@ -185,6 +191,7 @@ package net.wg.gui.login.impl
             this._isIgrCredentialsReset = arg5;
             this._rememberPwdCheckbox.selected = arg3;
             this._rememberPwdCheckbox.visible = arg4;
+            this._recoveryLink.visible = arg6;
             return;
         }
 
@@ -199,9 +206,13 @@ package net.wg.gui.login.impl
                 ++loc3;
             }
             if (loc1.length > this.server.menuRowCount) 
+            {
                 this.server.scrollBar = net.wg.data.constants.Linkages.SCROLL_BAR;
+            }
             else 
+            {
                 this.server.scrollBar = net.wg.data.constants.Values.EMPTY_STR;
+            }
             this.server.dataProvider = new scaleform.clik.data.DataProvider(loc1);
             this.server.selectedIndex = arg2;
             this.server.menuRowCount = Math.min(this.server.dataProvider.length, MAX_SERVER_ROW_COUNT);

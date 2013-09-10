@@ -57,9 +57,13 @@ package scaleform.clik.controls
         {
             initSize();
             if (hitArea != null) 
+            {
                 constraints.addElement("hitArea", hitArea, scaleform.clik.utils.Constraints.ALL);
+            }
             if (this.background != null) 
+            {
                 constraints.addElement("background", this.background, scaleform.clik.utils.Constraints.ALL);
+            }
             if (this.titleBtn != null) 
             {
                 this.titleBtn.label = this._title || "My Window";
@@ -92,9 +96,13 @@ package scaleform.clik.controls
                 this.reflowContent();
             }
             else if (isInvalid("padding")) 
+            {
                 this.reflowContent();
+            }
             if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
+            {
                 constraints.update(_width, _height);
+            }
             return;
         }
 
@@ -110,7 +118,9 @@ package scaleform.clik.controls
                 }
                 loc1 = flash.utils.getDefinitionByName(this._src) as Class;
                 if (loc1) 
+                {
                     this._content = new loc1();
+                }
                 else 
                 {
                     this._content = null;
@@ -128,7 +138,9 @@ package scaleform.clik.controls
         {
             var loc1:*=null;
             if (!this._content) 
+            {
                 return;
+            }
             loc1 = this._contentPadding;
             var loc2:*=constraints.getElement("content");
             var loc3:*;
@@ -211,7 +223,9 @@ package scaleform.clik.controls
         {
             this._title = arg1;
             if (!(this.titleBtn == null) && this.titleBtn.initialized) 
+            {
                 this.titleBtn.label = this._title;
+            }
             return;
         }
 

@@ -27,6 +27,7 @@ package net.wg.gui.utils
             {
                 case net.wg.data.constants.VehicleState.IN_BATTLE:
                 case net.wg.data.constants.VehicleState.IN_PREBATTLE:
+                {
                     loc2 = 13617064;
                     (loc3 = new flash.filters.DropShadowFilter()).distance = 0;
                     loc3.angle = 90;
@@ -41,8 +42,10 @@ package net.wg.gui.utils
                     loc3.hideObject = false;
                     loc1.push(loc3);
                     break;
+                }
                 case net.wg.data.constants.VehicleState.BUY_VEHICLE:
                 case net.wg.data.constants.VehicleState.BUY_SLOT:
+                {
                     loc2 = 15329754;
                     (loc3 = new flash.filters.GlowFilter()).color = 16777150;
                     loc3.alpha = 0.2;
@@ -54,11 +57,13 @@ package net.wg.gui.utils
                     loc3.knockout = false;
                     loc1.push(loc3);
                     break;
+                }
                 case net.wg.data.constants.VehicleState.AMMO_NOT_FULL:
                 case net.wg.data.constants.VehicleState.CREW_NOT_FULL:
                 case net.wg.data.constants.VehicleState.EXPLODED:
                 case net.wg.data.constants.VehicleState.DESTROYED:
                 case net.wg.data.constants.VehicleState.DAMAGED:
+                {
                     loc2 = 15400960;
                     (loc3 = new flash.filters.DropShadowFilter()).distance = 0;
                     loc3.angle = 90;
@@ -73,6 +78,7 @@ package net.wg.gui.utils
                     loc3.hideObject = false;
                     loc1.push(loc3);
                     break;
+                }
             }
             arg1.text = getI18nKey(arg2);
             arg1.textColor = loc2;

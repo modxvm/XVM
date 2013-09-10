@@ -56,7 +56,9 @@ package net.wg.infrastructure.managers.impl
         internal function canPlaySound(arg1:net.wg.infrastructure.interfaces.entity.ISoundable):Boolean
         {
             if (arg1 is scaleform.clik.interfaces.IUIComponent) 
+            {
                 return scaleform.clik.interfaces.IUIComponent(arg1).enabled;
+            }
             return true;
         }
 
@@ -80,7 +82,9 @@ package net.wg.infrastructure.managers.impl
         {
             var loc1:*=net.wg.infrastructure.interfaces.entity.ISoundable(arg1.currentTarget);
             if (this.canPlaySound(loc1)) 
+            {
                 this.playControlsSnd(this._mouseToSoundEvents[arg1.type], loc1.getSoundType(), loc1.getSoundId());
+            }
             return;
         }
 

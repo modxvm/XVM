@@ -35,7 +35,9 @@ package net.wg.gui.lobby.window
             var loc1:*;
             super.configUI();
             try 
+            {
                 registerComponent(this.tabNavigator, net.wg.data.Aliases.PROFILE_TAB_NAVIGATOR);
+            }
             catch (e:Error)
             {
                 trace(e);
@@ -77,7 +79,9 @@ package net.wg.gui.lobby.window
         {
             super.window = arg1;
             if (arg1) 
+            {
                 invalidate(INIT_DATA_INV);
+            }
             return;
         }
 
@@ -102,7 +106,9 @@ package net.wg.gui.lobby.window
                 loc3.drawRect(0, 0, _width, _height);
                 loc3.endFill();
                 if (!this.mask) 
+                {
                     this.mask = this.maskObj;
+                }
                 this.tabNavigator.setAvailableSize(_width, _height);
             }
             return;

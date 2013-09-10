@@ -26,7 +26,9 @@ package net.wg.gui.lobby.training
         public function showAction(arg1:String):void
         {
             if (this.markMC != null) 
+            {
                 this.markMC.gotoAndStop(1);
+            }
             this.markLabel = arg1;
             validateNow();
             return;
@@ -41,20 +43,34 @@ package net.wg.gui.lobby.training
                 loc1 = 1;
                 loc2 = 4;
                 if (!(ms_lastLitEntry == null) && arg1) 
+                {
                     if (ms_lastLitEntry == this) 
+                    {
                         ms_lastLitEntry = null;
+                    }
                     else 
+                    {
                         ms_lastLitEntry.player.litIcon.gotoAndStop(loc1);
+                    }
+                }
                 if (this.player.litIcon.currentFrame == (arg1 ? loc1 : loc2)) 
                 {
                     if (arg1) 
+                    {
                         ms_lastLitEntry = this;
+                    }
                     else 
+                    {
                         ms_lastLitEntry = null;
+                    }
                     if (this.getMinimap().visible) 
+                    {
                         App.utils.scheduler.envokeInNextFrame(this.playPlayer);
+                    }
                     else 
+                    {
                         this.player.litIcon.gotoAndStop(arg1 ? loc2 : loc1);
+                    }
                 }
             }
             return;
@@ -110,7 +126,9 @@ package net.wg.gui.lobby.training
         internal function updateType():void
         {
             if (this.m_type != null) 
+            {
                 gotoAndStop(this.m_type);
+            }
             return;
         }
 
@@ -129,11 +147,15 @@ package net.wg.gui.lobby.training
                     this.player.icon.isDeadPermanent = this.isDeadPermanent;
                 }
                 else if (this.isPostmortem) 
+                {
                     this.player.gotoAndStop("postmortem");
+                }
                 else 
                 {
                     if (loc1 != null) 
+                    {
                         this.player.gotoAndStop(loc1);
+                    }
                     this.player.litIcon.icon.gotoAndStop(this.vehicleClass);
                 }
             }
@@ -154,7 +176,9 @@ package net.wg.gui.lobby.training
             {
                 this.selfIcon.gotoAndStop(this.entryName);
                 if (this.rotation != 0) 
+                {
                     this.markMC.rotation = -this.rotation;
+                }
             }
             if (this.isTeamPoint()) 
             {
@@ -166,9 +190,13 @@ package net.wg.gui.lobby.training
                 this.teamPoint.pointType.gotoAndStop(loc3);
                 this.teamPoint.pointType.teamColor.gotoAndStop(this.markLabel);
                 if (loc4 == null) 
+                {
                     this.teamPoint.pointType.teamColor.filters = [];
+                }
                 else 
+                {
                     this.teamPoint.pointType.teamColor.filters = [loc4];
+                }
             }
             else if (this.isBackMarker()) 
             {
@@ -178,8 +206,12 @@ package net.wg.gui.lobby.training
                 this.backMarker.marker.gotoAndStop(loc6);
             }
             else if (this.markMC != null) 
+            {
                 if (this.markLabel != null) 
+                {
                     this.markMC.gotoAndStop(this.markLabel);
+                }
+            }
             super.draw();
             return;
         }
@@ -192,7 +224,9 @@ package net.wg.gui.lobby.training
         public static function unhighlightLastEntry():void
         {
             if (ms_lastLitEntry) 
+            {
                 ms_lastLitEntry.lightPlayer(false);
+            }
             return;
         }
 

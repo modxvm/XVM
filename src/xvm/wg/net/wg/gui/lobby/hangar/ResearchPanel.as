@@ -19,7 +19,9 @@ package net.wg.gui.lobby.hangar
         {
             super.onPopulate();
             if (this.button != null) 
+            {
                 this.button.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.handleButtonClick, false, 0, true);
+            }
             return;
         }
 
@@ -27,14 +29,18 @@ package net.wg.gui.lobby.hangar
         {
             super.onDispose();
             if (this.button != null) 
+            {
                 this.button.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.handleButtonClick);
+            }
             return;
         }
 
         public function as_setEarnedXP(arg1:Number):void
         {
             if (this._earnedXP == arg1) 
+            {
                 return;
+            }
             this._earnedXP = arg1;
             invalidateData();
             return;
@@ -43,7 +49,9 @@ package net.wg.gui.lobby.hangar
         public function as_setElite(arg1:Boolean):void
         {
             if (this._isElite == arg1) 
+            {
                 return;
+            }
             this._isElite = arg1;
             invalidateData();
             return;

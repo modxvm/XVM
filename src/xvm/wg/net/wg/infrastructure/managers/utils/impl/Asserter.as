@@ -41,7 +41,9 @@ package net.wg.infrastructure.managers.utils.impl
                 this.assertNotNull(loc1, "ex argument must be Error object class");
             }
             else 
+            {
                 loc1 = new net.wg.infrastructure.exceptions.AssertionException(arg1);
+            }
             loc1.message = arg1;
             DebugUtils.LOG_DEBUG(!scaleform.gfx.Extensions.isGFxPlayer && scaleform.gfx.Extensions.isScaleform);
             if (!scaleform.gfx.Extensions.isGFxPlayer && scaleform.gfx.Extensions.isScaleform) 
@@ -56,14 +58,22 @@ package net.wg.infrastructure.managers.utils.impl
         {
             var loc1:*;
             if ((loc1 = Object(App.globalVarsMgr).isDevelopment) == null) 
+            {
                 if (!arg1) 
+                {
                     this.throwException(arg2, arg3);
+                }
+            }
             else 
             {
                 if (loc1()) 
+                {
                     this.assertProcessing = this.debugAssertProcessing;
+                }
                 else 
+                {
                     this.assertProcessing = this.releaseAssertProcessing;
+                }
                 this.assertProcessing(arg1, arg2, arg3);
             }
             return;
@@ -72,7 +82,9 @@ package net.wg.infrastructure.managers.utils.impl
         internal function debugAssertProcessing(arg1:Boolean, arg2:String, arg3:Class):void
         {
             if (!arg1) 
+            {
                 this.throwException(arg2, arg3);
+            }
             return;
         }
 

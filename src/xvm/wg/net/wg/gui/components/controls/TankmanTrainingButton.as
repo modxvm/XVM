@@ -24,7 +24,9 @@ package net.wg.gui.components.controls
         public function set buy(arg1:Boolean):void
         {
             if (this._buy == arg1) 
+            {
                 return;
+            }
             this._buy = arg1;
             this.priceLabel.visible = !this._buy && !(this._type == "free");
             clearRepeatInterval();
@@ -35,7 +37,9 @@ package net.wg.gui.components.controls
         protected override function handleMouseRollOver(arg1:flash.events.MouseEvent):void
         {
             if (this._buy == true) 
+            {
                 return;
+            }
             super.handleMouseRollOver(arg1);
             return;
         }
@@ -43,7 +47,9 @@ package net.wg.gui.components.controls
         protected override function handleMouseRollOut(arg1:flash.events.MouseEvent):void
         {
             if (this._buy == true) 
+            {
                 return;
+            }
             super.handleMouseRollOut(arg1);
             return;
         }
@@ -51,7 +57,9 @@ package net.wg.gui.components.controls
         protected override function handleMousePress(arg1:flash.events.MouseEvent):void
         {
             if (this._buy == true) 
+            {
                 return;
+            }
             super.handleMousePress(arg1);
             return;
         }
@@ -59,7 +67,9 @@ package net.wg.gui.components.controls
         protected override function handlePress(arg1:uint=0):void
         {
             if (this._buy == true) 
+            {
                 return;
+            }
             super.handlePress(arg1);
             return;
         }
@@ -67,7 +77,9 @@ package net.wg.gui.components.controls
         protected override function handleMouseRelease(arg1:flash.events.MouseEvent):void
         {
             if (this._buy == true) 
+            {
                 return;
+            }
             super.handleMouseRelease(arg1);
             return;
         }
@@ -75,7 +87,9 @@ package net.wg.gui.components.controls
         protected override function handleRelease(arg1:uint=0):void
         {
             if (this._buy == true) 
+            {
                 return;
+            }
             super.handleRelease(arg1);
             return;
         }
@@ -83,7 +97,9 @@ package net.wg.gui.components.controls
         protected override function handleReleaseOutside(arg1:flash.events.MouseEvent):void
         {
             if (this._buy == true) 
+            {
                 return;
+            }
             super.handleReleaseOutside(arg1);
             return;
         }
@@ -143,7 +159,9 @@ package net.wg.gui.components.controls
         {
             super.draw();
             if (isInvalid("_nation")) 
+            {
                 this.bg.gotoAndPlay(isNaN(this._nation) ? "empty" : App.utils.nations.getNationName(this._nation));
+            }
             if (isInvalid(TYPE_INVALID)) 
             {
                 this.priceLabel.visible = !(this._type == "free");

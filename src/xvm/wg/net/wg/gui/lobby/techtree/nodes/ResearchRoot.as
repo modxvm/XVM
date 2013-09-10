@@ -29,11 +29,17 @@ package net.wg.gui.lobby.techtree.nodes
         public override function cleanUp():void
         {
             if (this.nameAndXp != null) 
+            {
                 this.nameAndXp.dispose();
+            }
             if (this.typeAndLevel != null) 
+            {
                 this.typeAndLevel.dispose();
+            }
             if (this.vIconLoader != null) 
+            {
                 this.vIconLoader.dispose();
+            }
             super.cleanUp();
             return;
         }
@@ -54,9 +60,13 @@ package net.wg.gui.lobby.techtree.nodes
             var loc2:*=null;
             var loc1:*=_container.getNation();
             if (!(this.flag == null) && !(this.flag.currentFrameLabel == loc1)) 
+            {
                 this.flag.gotoAndStop(loc1);
+            }
             if (!(this.statusField == null) && !(this.statusString == null)) 
+            {
                 net.wg.gui.utils.VehicleStateString.appendText(this.statusField, this.statusString);
+            }
             if (this.vIconLoader != null) 
             {
                 loc2 = getIconPath();
@@ -68,9 +78,13 @@ package net.wg.gui.lobby.techtree.nodes
                 }
             }
             if (this.nameAndXp != null) 
+            {
                 this.nameAndXp.setOwner(this, _doValidateNow);
+            }
             if (this.typeAndLevel != null) 
+            {
                 this.typeAndLevel.setOwner(this, _doValidateNow);
+            }
             if (button != null) 
             {
                 button.label = getNamedLabel(stateProps.label);
@@ -85,7 +99,9 @@ package net.wg.gui.lobby.techtree.nodes
         public override function showContextMenu():void
         {
             if (button != null) 
+            {
                 button.endAnimation(true);
+            }
             net.wg.gui.lobby.techtree.MenuHandler.getInstance().showResearchRootMenu(this);
             return;
         }
@@ -94,11 +110,19 @@ package net.wg.gui.lobby.techtree.nodes
         {
             var loc1:*=net.wg.gui.lobby.techtree.constants.ColorIndex.LOCKED;
             if (isUnlocked()) 
+            {
                 if (arg1 == null || this.isParentUnlocked(arg1.getID())) 
+                {
                     loc1 = net.wg.gui.lobby.techtree.constants.ColorIndex.UNLOCKED;
+                }
+            }
             else if (isNext2Unlock()) 
+            {
                 if (arg1 == null || this.isParentUnlocked(arg1.getID())) 
+                {
                     loc1 = net.wg.gui.lobby.techtree.constants.ColorIndex.NEXT2UNLOCK;
+                }
+            }
             return loc1;
         }
 
@@ -127,7 +151,9 @@ package net.wg.gui.lobby.techtree.nodes
         {
             super.handleMouseRollOver(arg1);
             if (button != null) 
+            {
                 button.startAnimation();
+            }
             return;
         }
 
@@ -135,7 +161,9 @@ package net.wg.gui.lobby.techtree.nodes
         {
             super.handleMouseRollOut(arg1);
             if (button != null) 
+            {
                 button.endAnimation(false);
+            }
             return;
         }
 
@@ -144,7 +172,9 @@ package net.wg.gui.lobby.techtree.nodes
             super.handleClick(arg1);
             net.wg.gui.lobby.techtree.MenuHandler.getInstance().hideMenu();
             if (button != null) 
+            {
                 button.endAnimation(true);
+            }
             dispatchEvent(new net.wg.gui.lobby.techtree.TechTreeEvent(net.wg.gui.lobby.techtree.TechTreeEvent.CLICK_2_OPEN, 0, _index, _entityType));
             return;
         }

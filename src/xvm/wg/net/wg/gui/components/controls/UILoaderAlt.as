@@ -1,4 +1,4 @@
-package net.wg.gui.components.controls
+package net.wg.gui.components.controls 
 {
     import flash.display.*;
     import flash.events.*;
@@ -7,7 +7,7 @@ package net.wg.gui.components.controls
     import net.wg.gui.events.*;
     import net.wg.infrastructure.interfaces.entity.*;
     import scaleform.clik.events.*;
-
+    
     public class UILoaderAlt extends flash.display.Sprite implements net.wg.infrastructure.interfaces.entity.IDisposable
     {
         public function UILoaderAlt()
@@ -45,13 +45,19 @@ package net.wg.gui.components.controls
 
         public function unload():void
         {
-            if (this._loadInProgress)
+            if (this._loadInProgress) 
+            {
                 this.loader.close();
+            }
             this._unloadInProgress = true;
-            if (this.loader.contentLoaderInfo.contentType != CONTENT_TYPE_SWF)
+            if (this.loader.contentLoaderInfo.contentType != CONTENT_TYPE_SWF) 
+            {
                 this.loader.unload();
-            else
+            }
+            else 
+            {
                 this.loader.unloadAndStop(true);
+            }
             this._source = null;
             this._sizeRetries = 0;
             return;
@@ -64,32 +70,40 @@ package net.wg.gui.components.controls
 
         public function invalidate():void
         {
-            if (this._invalid)
-                if (stage != null)
+            if (this._invalid) 
+            {
+                if (stage != null) 
+                {
                     stage.invalidate();
-            else
+                }
+            }
+            else 
             {
                 this._invalid = true;
-                if (stage != null)
+                if (stage != null) 
                 {
                     addEventListener(flash.events.Event.ENTER_FRAME, this.handleEnterFrameValidation, false, 0, true);
                     addEventListener(flash.events.Event.RENDER, this.updateSize, false, 0, true);
                     stage.invalidate();
                 }
-                else
+                else 
+                {
                     addEventListener(flash.events.Event.ADDED_TO_STAGE, this.handleStageChange, false, 0, true);
+                }
             }
             return;
         }
 
         protected function handleStageChange(arg1:flash.events.Event):void
         {
-            if (arg1.type == flash.events.Event.ADDED_TO_STAGE)
+            if (arg1.type == flash.events.Event.ADDED_TO_STAGE) 
             {
                 removeEventListener(flash.events.Event.ADDED_TO_STAGE, this.handleStageChange, false);
                 addEventListener(flash.events.Event.RENDER, this.updateSize, false, 0, true);
-                if (stage != null)
+                if (stage != null) 
+                {
                     stage.invalidate();
+                }
             }
             return;
         }
@@ -102,8 +116,10 @@ package net.wg.gui.components.controls
 
         internal function toggleVisible(arg1:Boolean):void
         {
-            if (this.hideLoader)
+            if (this.hideLoader) 
+            {
                 this.loader.visible = arg1;
+            }
             return;
         }
 
@@ -113,34 +129,36 @@ package net.wg.gui.components.controls
             removeEventListener(flash.events.Event.ADDED_TO_STAGE, this.handleStageChange);
             removeEventListener(flash.events.Event.ENTER_FRAME, this.handleEnterFrameValidation);
             removeEventListener(flash.events.Event.RENDER, this.updateSize);
-            if (this._autoSize)
+            if (this._autoSize) 
             {
-                if (this.loader.width <= 0)
+                if (this.loader.width <= 0) 
                 {
-                    if (this._sizeRetries < 10)
+                    if (this._sizeRetries < 10) 
                     {
                         var loc2:*;
                         var loc3:*=((loc2 = this)._sizeRetries + 1);
                         loc2._sizeRetries = loc3;
                         this.invalidate();
                     }
-                    else
+                    else 
+                    {
                         DebugUtils.LOG_DEBUG("Warning: " + this + "cannot be autoSized because content width is <= 0!");
+                    }
                     return;
                 }
-                if (this._maintainAspectRatio)
+                if (this._maintainAspectRatio) 
                 {
                     loc1 = Math.min(this._height / this.loader.height, this._width / this.loader.width);
                     this.loader.width = Math.round(this.loader.width * loc1);
                     this.loader.height = Math.round(this.loader.height * loc1);
                 }
-                else
+                else 
                 {
                     this.loader.width = Math.round(this.loader.width * this._width / this.loader.width);
                     this.loader.height = Math.round(this.loader.height * this._height / this.loader.height);
                 }
             }
-            else
+            else 
             {
                 width = this.loader.width;
                 height = this.loader.height;
@@ -156,8 +174,10 @@ package net.wg.gui.components.controls
         internal function startLoad(arg1:String):void
         {
             this._source = arg1;
-            if (!this._previousContentUnloaded)
+            if (!this._previousContentUnloaded) 
+            {
                 this.loader.unload();
+            }
             this.toggleVisible(false);
             this._loadInProgress = true;
             this._previousContentUnloaded = false;
@@ -169,12 +189,12 @@ package net.wg.gui.components.controls
 
         internal function onIOError(arg1:flash.events.IOErrorEvent):void
         {
-            if (!this._loadFailed && this._sourceAlt)
+            if (!this._loadFailed && this._sourceAlt) 
             {
                 this._loadFailed = true;
                 this.startLoad(this._sourceAlt);
             }
-            else
+            else 
             {
                 dispatchEvent(new net.wg.gui.events.UILoaderEvent(net.wg.gui.events.UILoaderEvent.IOERROR));
                 this._loadInProgress = false;
@@ -211,14 +231,14 @@ package net.wg.gui.components.controls
 
         public function dispose():void
         {
-            if (this.loader)
+            if (this.loader) 
             {
                 this.removeLoaderListener();
                 this.unload();
                 removeChild(this.loader);
                 this.loader = null;
             }
-            if (this.background)
+            if (this.background) 
             {
                 removeChild(this.background);
                 this.background = null;
@@ -259,8 +279,10 @@ package net.wg.gui.components.controls
         public function set source(arg1:String):void
         {
             this._loadFailed = false;
-            if (!arg1 || arg1 == this._source)
+            if (!arg1 || arg1 == this._source) 
+            {
                 return;
+            }
             this.startLoad(arg1);
             return;
         }
@@ -272,11 +294,15 @@ package net.wg.gui.components.controls
 
         public function set sourceAlt(arg1:String):void
         {
-            if (!arg1 || this._sourceAlt == arg1)
+            if (!arg1 || this._sourceAlt == arg1) 
+            {
                 return;
+            }
             this._sourceAlt = arg1;
-            if (this._loadFailed)
+            if (this._loadFailed) 
+            {
                 this.startLoad(this._sourceAlt);
+            }
             return;
         }
 

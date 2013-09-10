@@ -13,7 +13,9 @@ package net.wg.gui.lobby.store
         {
             super();
             if (App.instance) 
+            {
                 App.utils.asserter.assertNull(ms_instance, "StoreHelper already created.", net.wg.infrastructure.exceptions.LifecycleException);
+            }
             return;
         }
 
@@ -24,6 +26,7 @@ package net.wg.gui.lobby.store
             {
                 loc1 = App.utils.locale;
                 if (arg3.requestType != net.wg.data.constants.FittingTypes.SHELL) 
+                {
                     if (arg3.requestType == net.wg.data.constants.FittingTypes.VEHICLE) 
                     {
                         arg2.text = "";
@@ -34,6 +37,7 @@ package net.wg.gui.lobby.store
                         arg1.text = loc1.integer(arg3.inventoryCount);
                         arg2.text = loc1.integer(arg3.vehicleCount);
                     }
+                }
                 else 
                 {
                     arg1.text = loc1.integer(arg3.inventoryCount);
@@ -69,14 +73,18 @@ package net.wg.gui.lobby.store
                 arg1.validateNow();
             }
             else 
+            {
                 DebugUtils.LOG_WARNING("vehicleIcon argument is null. It provides to some problems!");
+            }
             return;
         }
 
         public static function getInstance():net.wg.gui.lobby.store.StoreHelper
         {
             if (ms_instance == null) 
+            {
                 ms_instance = new StoreHelper();
+            }
             return ms_instance;
         }
 

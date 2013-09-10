@@ -69,14 +69,22 @@ package net.wg.gui.lobby.tankman
                 this.addListenersToIcon();
             }
             if (loc2) 
+            {
                 this.skills.source = loc2;
+            }
             this.label.text = loc1;
             if (!(this.model.value == null) && !(this.model.value == undefined)) 
+            {
                 this.value.text = this.model.value.toString();
+            }
             if (this.model.hasOwnProperty("extra") && !(this.model.extra == null) && !(this.model.extra == "")) 
+            {
                 this.extra.text = this.model.extra.toString();
+            }
             else 
+            {
                 this.extra.visible = false;
+            }
             return;
         }
 
@@ -94,11 +102,17 @@ package net.wg.gui.lobby.tankman
         {
             App.cursor.setCursor(net.wg.data.constants.Cursors.BUTTON);
             if (!this.model.hasOwnProperty("name") && !this.model.hasOwnProperty("tankmanID") && !(this.model.name == null)) 
+            {
                 return;
+            }
             if (this.model.hasOwnProperty("imageType") && this.model.imageType == "new_skill") 
+            {
                 App.toolTipMgr.showSpecial(net.wg.data.constants.Tooltips.TANKMAN_NEW_SKILL, net.wg.data.managers.impl.TooltipProps.DEFAULT, this._tankmanID);
+            }
             else 
+            {
                 App.toolTipMgr.showSpecial(net.wg.data.constants.Tooltips.TANKMAN_SKILL, null, this._skillName, this._tankmanID);
+            }
             return;
         }
 

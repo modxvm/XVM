@@ -22,7 +22,9 @@ package net.wg.gui.components.advanced
             super.configUI();
             _stateMap = {"up":["up"], "over":["over"], "down":["down"], "release":["release", "over"], "out":["out", "up"], "disabled":["disabled"], "selecting":["selecting", "over"], "kb_selecting":["kb_selecting", "up"], "kb_release":["kb_release", "out", "up"], "kb_down":["kb_down", "down"]};
             if (hitMc != null) 
+            {
                 this.hitArea = hitMc;
+            }
             addEventListener(flash.events.MouseEvent.MOUSE_OVER, this.onOver);
             addEventListener(flash.events.MouseEvent.MOUSE_OUT, this.onOut);
             return;
@@ -44,7 +46,9 @@ package net.wg.gui.components.advanced
             {
                 this.iconLoader.visible = !(this.shellIcon == "");
                 if (this.shellIcon != "") 
+                {
                     this.iconLoader.source = this.shellIcon;
+                }
             }
             if (this.count_txt) 
             {

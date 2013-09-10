@@ -36,7 +36,9 @@ package scaleform.clik.controls
         public function set minimum(arg1:Number):void
         {
             if (this._minimum == arg1) 
+            {
                 return;
+            }
             this._minimum = arg1;
             this.updatePosition();
             return;
@@ -51,7 +53,9 @@ package scaleform.clik.controls
         {
             var loc1:*=Math.max(this._minimum, Math.min(this._maximum, arg1));
             if (this._value == loc1) 
+            {
                 return;
+            }
             this._value = loc1;
             this.updatePosition();
             return;
@@ -85,16 +89,22 @@ package scaleform.clik.controls
         protected override function draw():void
         {
             if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
+            {
                 setActualSize(_width, _height);
+            }
             if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+            {
                 this.updatePosition();
+            }
             return;
         }
 
         protected function updatePosition():void
         {
             if (!enabled) 
+            {
                 return;
+            }
             var loc1:*=(this._value - this._minimum) / (this._maximum - this._minimum);
             gotoAndStop(Math.max(1, Math.round(loc1 * totalFrames)));
             return;

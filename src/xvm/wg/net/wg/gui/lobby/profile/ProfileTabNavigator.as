@@ -1,6 +1,7 @@
 package net.wg.gui.lobby.profile 
 {
     import flash.display.*;
+    import net.wg.data.*;
     import net.wg.gui.components.advanced.*;
     import net.wg.gui.events.*;
     import net.wg.gui.lobby.profile.components.*;
@@ -27,13 +28,17 @@ package net.wg.gui.lobby.profile
             if (this.btnTemplate) 
             {
                 if (this.btnTemplate.parent) 
+                {
                     this.btnTemplate.parent.removeChild(this.btnTemplate);
+                }
                 this.btnTemplate = null;
             }
             if (this.templatesHolder) 
             {
                 if (this.templatesHolder.parent) 
+                {
                     this.templatesHolder.parent.removeChild(this.templatesHolder);
+                }
                 this.templatesHolder = null;
             }
             this.viewStack.cache = true;
@@ -46,7 +51,9 @@ package net.wg.gui.lobby.profile
         {
             var loc1:*=this._sectionsDataUtil.getAliasByLinkage(arg1.linkage);
             if (!isFlashComponentRegisteredS(loc1)) 
+            {
                 registerFlashComponentS(net.wg.infrastructure.interfaces.IDAAPIModule(arg1.view), loc1);
+            }
             return;
         }
 
@@ -57,24 +64,33 @@ package net.wg.gui.lobby.profile
             var loc3:*=null;
             var loc4:*=null;
             var loc5:*=0;
+            var loc6:*=0;
             super.draw();
             if (isInvalid(INIT_DATA_INV) && this.initData) 
             {
                 loc1 = this.initData.sectionsData;
                 loc2 = loc1.length;
                 loc3 = [];
-                loc5 = 0;
-                while (loc5 < loc2) 
+                loc5 = -1;
+                loc6 = 0;
+                while (loc6 < loc2) 
                 {
-                    loc4 = loc1[loc5];
+                    loc4 = loc1[loc6];
                     loc3.push({"label":loc4.label, "alias":loc4.alias, "linkage":this._sectionsDataUtil.register(loc4.alias), "tooltip":loc4.tooltip});
-                    ++loc5;
+                    if (loc4.alias == net.wg.data.Aliases.PROFILE_AWARDS) 
+                    {
+                        loc5 = loc6;
+                    }
+                    ++loc6;
                 }
                 this.bar.dataProvider = new scaleform.clik.data.DataProvider(loc3);
+                this.bar.selectedIndex = loc5;
                 this.bar.selectedIndex = 0;
             }
             if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
+            {
                 invalidate(OFFSET_INVALID);
+            }
             if (isInvalid(OFFSET_INVALID)) 
             {
                 this.bar.x = Math.round(_width / 2 - this._centerOffset);

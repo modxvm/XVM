@@ -45,7 +45,9 @@ package net.wg.infrastructure.base
         public function set geometry(arg1:net.wg.infrastructure.interfaces.IWindowGeometry):void
         {
             if (!this._geometry.canOverwrite()) 
+            {
                 return;
+            }
             this._geometry = arg1;
             return;
         }
@@ -71,7 +73,9 @@ package net.wg.infrastructure.base
             {
                 this.waiting.dispose();
                 if (this.waiting.parent) 
+                {
                     this.waiting.parent.removeChild(this.waiting);
+                }
                 this.waiting = null;
             }
             if (this._window) 
@@ -88,7 +92,9 @@ package net.wg.infrastructure.base
         protected override function draw():void
         {
             if (isInvalid(net.wg.infrastructure.constants.WindowViewInvalidationType.WAITING_INVALID)) 
+            {
                 this.applyWaitingChanges();
+            }
             super.draw();
             if (this.geometry && this.window && isInvalid(net.wg.infrastructure.constants.WindowViewInvalidationType.POSITION_INVALID)) 
             {
@@ -112,10 +118,16 @@ package net.wg.infrastructure.base
                 this.waiting.setMessage(this.waitingMessage);
             }
             if (this.waiting) 
+            {
                 if (this._showWaiting) 
+                {
                     this.waiting.show();
+                }
                 else 
+                {
                     this.waiting.hide();
+                }
+            }
             return;
         }
 
@@ -124,16 +136,22 @@ package net.wg.infrastructure.base
             var loc1:*=this.window.width + this.window.x;
             var loc2:*=this.window.height + this.window.y;
             if (loc1 > App.appWidth) 
+            {
                 this.window.x = this.window.x - (loc1 - App.appWidth);
+            }
             if (loc2 > App.appHeight) 
+            {
                 this.window.y = this.window.y - (loc2 - App.appHeight);
+            }
             return;
         }
 
         internal function validateView():void
         {
             if (this.window != null) 
+            {
                 scaleform.clik.core.UIComponent(this.window).invalidate(net.wg.gui.components.windows.Window.INVALID_SRC_VIEW);
+            }
             return;
         }
 
@@ -141,7 +159,9 @@ package net.wg.infrastructure.base
         {
             super.handleInput(arg1);
             if (arg1.handled) 
+            {
                 return;
+            }
             var loc1:*=arg1.details;
             if (loc1.code == flash.ui.Keyboard.ESCAPE && loc1.value == scaleform.clik.constants.InputValue.KEY_DOWN) 
             {
@@ -164,14 +184,18 @@ package net.wg.infrastructure.base
         public override function setFocus():void
         {
             if (this.window && this.window.getBackground()) 
+            {
                 this.window.getBackground().gotoAndPlay("enable");
+            }
             return;
         }
 
         public override function removeFocus():void
         {
             if (this.window && this.window.getBackground()) 
+            {
                 this.window.getBackground().gotoAndPlay("disable");
+            }
             return;
         }
 
@@ -209,7 +233,9 @@ package net.wg.infrastructure.base
         public function as_getGeometry():Array
         {
             if (this.window) 
+            {
                 return [this.window.x, this.window.y, this.window.width, this.window.height];
+            }
             return null;
         }
 
@@ -234,7 +260,9 @@ package net.wg.infrastructure.base
         protected override function configUI():void
         {
             if (this.window) 
+            {
                 this.window.addEventListener(scaleform.clik.events.InputEvent.INPUT, this.handleInput, false, 0, true);
+            }
             initSize();
             return;
         }

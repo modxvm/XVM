@@ -37,11 +37,15 @@ package net.wg.gui.components.controls
         {
             this._speakVisible = App.voiceChatMgr.isVOIPEnabledS();
             if (arg1 == this._speak || this._muted) 
+            {
                 return;
+            }
             this._farcedStop = arg2;
             this._speak = arg1;
             if (!this.hasEventListener(flash.events.Event.ENTER_FRAME)) 
+            {
                 this.addEventListener(flash.events.Event.ENTER_FRAME, this.frameHandler);
+            }
             invalidate(INVALIDATE_SPEAKING);
             return;
         }
@@ -82,9 +86,13 @@ package net.wg.gui.components.controls
         public function setMuted(arg1:Boolean):void
         {
             if (this._muted == arg1) 
+            {
                 return;
+            }
             if (arg1 && this._speak) 
+            {
                 this.setSpeaking(false, true);
+            }
             var loc1:*;
             this._muted = loc1 = arg1;
             this.mutedClip.visible = loc1;
@@ -94,7 +102,9 @@ package net.wg.gui.components.controls
         protected override function draw():void
         {
             if (isInvalid(INVALIDATE_SPEAKING)) 
+            {
                 this.visible = this._speakVisible;
+            }
             return;
         }
 

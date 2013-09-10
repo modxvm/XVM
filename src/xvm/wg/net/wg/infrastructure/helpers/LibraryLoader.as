@@ -87,7 +87,9 @@ package net.wg.infrastructure.helpers
             var loc2:*=((loc1 = this).processedCounter + 1);
             loc1.processedCounter = loc2;
             if (this.processedCounter == this.librariesList.length) 
+            {
                 DebugUtils.LOG_DEBUG("Libraries loading has been completed.");
+            }
             return;
         }
 

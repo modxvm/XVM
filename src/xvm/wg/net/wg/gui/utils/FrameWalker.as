@@ -45,7 +45,9 @@ package net.wg.gui.utils
                 this._targetMC.gotoAndStop(this._isInverted ? this._framesCount - loc1 : loc1);
             }
             else 
+            {
                 this._targetMC.gotoAndStop(this._isInverted ? 0 : this._framesCount);
+            }
             return;
         }
 
@@ -75,7 +77,9 @@ package net.wg.gui.utils
                 this._intervalID = flash.utils.setInterval(this.run, arg1 * 1000 / this._framesCount);
             }
             else 
+            {
                 this.walkEnd();
+            }
             return;
         }
 
@@ -92,12 +96,16 @@ package net.wg.gui.utils
                 this._startTime = flash.utils.getTimer();
                 this._startFrame = this._targetMC.currentFrame;
                 if (this._isInverted && this._startFrame == 0 || !this._isInverted && this._startFrame >= this._endFrame) 
+                {
                     return;
+                }
                 this._totalTime = arg1 * 1000;
                 this._intervalID = flash.utils.setInterval(this.run, this._totalTime / this._framesCount);
             }
             else 
+            {
                 this.walkEnd();
+            }
             return;
         }
 
@@ -121,7 +129,9 @@ package net.wg.gui.utils
                 this.walkEnd();
             }
             else 
+            {
                 this._targetMC.gotoAndStop(this.calculateFrameNumber(loc1));
+            }
             return;
         }
 
@@ -135,9 +145,13 @@ package net.wg.gui.utils
         {
             this._targetMC.gotoAndStop(this._endFrame);
             if (this._postEffKeyFrame) 
+            {
                 this._targetMC.gotoAndPlay(this._postEffKeyFrame);
+            }
             if (Boolean(this._callback)) 
+            {
                 this._callback.call();
+            }
             return;
         }
 

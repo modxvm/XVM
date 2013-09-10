@@ -32,9 +32,13 @@ package net.wg.gui.components.tooltips.VO
             var loc7:*=loc2 != 0 ? this.getSign(loc2) + loc2.toString() : "";
             var loc8:*=loc3 != 0 ? this.getSign(loc3) + loc3.toString() : "";
             if (!(loc1 == 0) || !(loc2 == 0) || !(loc3 == 0)) 
+            {
                 loc5 = " (" + loc4 + loc6 + loc7 + loc8 + ")";
+            }
             else 
+            {
                 loc5 = "";
+            }
             loc4 = loc4 + (loc1 + loc2 + loc3);
             this.vehicleName = arg1.hasOwnProperty("vehicleName") && !(arg1["vehicleName"] == undefined) ? arg1["vehicleName"] : "";
             this.currentVehicleName = arg1.hasOwnProperty("currentVehicleName") && !(arg1["currentVehicleName"] == undefined) ? arg1["currentVehicleName"] : "";
@@ -70,7 +74,9 @@ package net.wg.gui.components.tooltips.VO
                 this.statusText = null;
             }
             if (this.statusHeader || this.statusText) 
+            {
                 this.status = true;
+            }
             return;
         }
 

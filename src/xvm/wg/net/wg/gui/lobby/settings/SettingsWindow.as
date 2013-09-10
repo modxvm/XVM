@@ -37,7 +37,9 @@ package net.wg.gui.lobby.settings
             App.toolTipMgr.hide();
             var loc1:*=net.wg.gui.lobby.settings.SoundSettings(this.tryGetView(net.wg.gui.lobby.settings.SettingsConfig.SOUND_SETTINGS));
             if (loc1) 
+            {
                 loc1.onViewChanged();
+            }
             return;
         }
 
@@ -46,7 +48,9 @@ package net.wg.gui.lobby.settings
             var loc1:*=arg1.view;
             loc1.update({"id":arg1.linkage, "data":this._settingsData[arg1.linkage]});
             if (arg1.linkage == net.wg.gui.lobby.settings.SettingsConfig.GRAPHIC_SETTINGS && net.wg.gui.lobby.settings.SettingsConfig.liveUpdateVideoSettingsData) 
+            {
                 net.wg.gui.lobby.settings.GraphicSettings(loc1).updateLiveVideoData();
+            }
             return;
         }
 
@@ -67,7 +71,9 @@ package net.wg.gui.lobby.settings
             loc1.current = arg1.controlValue;
             var loc2:*=net.wg.gui.lobby.settings.SoundSettings(this.tryGetView(net.wg.gui.lobby.settings.SettingsConfig.SOUND_SETTINGS));
             if (loc2) 
+            {
                 loc2.updatePTTControl(loc1.current);
+            }
             return;
         }
 
@@ -85,9 +91,13 @@ package net.wg.gui.lobby.settings
         internal function checkChanges(arg1:Boolean, arg2:String, arg3:*):void
         {
             if (arg1) 
+            {
                 this.changesData.tryCutChanges(arg2, arg3);
+            }
             else 
+            {
                 this.changesData.tryAddChanges(arg2, arg3);
+            }
             this.updateApplayBtnState();
             return;
         }
@@ -98,7 +108,9 @@ package net.wg.gui.lobby.settings
             var loc2:*=startVOIPTestS(loc1);
             var loc3:*;
             if ((loc3 = net.wg.gui.lobby.settings.SoundSettings(this.tryGetView(net.wg.gui.lobby.settings.SettingsConfig.SOUND_SETTINGS))) != null) 
+            {
                 loc3.setVoiceTestState(!(loc2 || !loc1));
+            }
             return;
         }
 
@@ -107,7 +119,9 @@ package net.wg.gui.lobby.settings
             var loc1:*=autodetectQualityS();
             var loc2:*=net.wg.gui.lobby.settings.GraphicSettings(this.tryGetView(net.wg.gui.lobby.settings.SettingsConfig.GRAPHIC_SETTINGS));
             if (loc2 != null) 
+            {
                 loc2.setPresetAfterAutoDetect(loc1);
+            }
             return;
         }
 
@@ -121,7 +135,9 @@ package net.wg.gui.lobby.settings
         {
             var loc1:*=net.wg.gui.lobby.settings.SoundSettings(this.tryGetView(net.wg.gui.lobby.settings.SettingsConfig.SOUND_SETTINGS));
             if (loc1) 
+            {
                 loc1.breakSoundCheck();
+            }
             closeWindowS();
             return;
         }
@@ -142,7 +158,9 @@ package net.wg.gui.lobby.settings
         {
             super.handleInput(arg1);
             if (arg1.handled) 
+            {
                 return;
+            }
             var loc1:*=arg1.details;
             if (arg1.details.code == flash.ui.Keyboard.ESCAPE && loc1.value == scaleform.clik.constants.InputValue.KEY_DOWN) 
             {
@@ -168,7 +186,9 @@ package net.wg.gui.lobby.settings
         {
             var loc1:*=net.wg.gui.lobby.settings.SoundSettings(this.tryGetView(net.wg.gui.lobby.settings.SettingsConfig.SOUND_SETTINGS));
             if (loc1 != null) 
+            {
                 loc1.setCaptureDevices(arg1, arg2);
+            }
             return;
         }
 
@@ -177,7 +197,9 @@ package net.wg.gui.lobby.settings
             net.wg.gui.lobby.settings.vo.SettingsControlProp(net.wg.gui.lobby.settings.SettingsConfig.settingsData[net.wg.gui.lobby.settings.SettingsConfig.GAME_SETTINGS].vibroIsConnected).current = arg1;
             var loc1:*=net.wg.gui.lobby.settings.GameSettings(this.tryGetView(net.wg.gui.lobby.settings.SettingsConfig.GAME_SETTINGS));
             if (loc1 != null) 
+            {
                 loc1.onVibroManagerConnect();
+            }
             return;
         }
 
@@ -200,14 +222,20 @@ package net.wg.gui.lobby.settings
                     {
                         loc6 = new net.wg.gui.lobby.settings.vo.SettingsControlProp();
                         if (arg1[loc5] is Boolean || arg1[loc5] is String || arg1[loc5] is Number) 
+                        {
                             loc6.current = arg1[loc5];
+                        }
                         else if (arg1[loc5].current is Object && !(arg1[loc5].current == undefined)) 
                         {
                             loc6.current = arg1[loc5].real == null ? arg1[loc5].current : arg1[loc5].real;
                             if (arg1[loc5].options == undefined) 
+                            {
                                 loc6.options = [];
+                            }
                             else 
+                            {
                                 loc6.options = loc3.cloneObject(arg1[loc5].options);
+                            }
                         }
                     }
                     net.wg.gui.lobby.settings.SettingsConfig.liveUpdateVideoSettingsData[loc5] = loc6;
@@ -216,7 +244,9 @@ package net.wg.gui.lobby.settings
             }
             var loc1:*=net.wg.gui.lobby.settings.GraphicSettings(this.tryGetView(net.wg.gui.lobby.settings.SettingsConfig.GRAPHIC_SETTINGS));
             if (loc1) 
+            {
                 loc1.updateLiveVideoData();
+            }
             return;
         }
 
@@ -233,14 +263,18 @@ package net.wg.gui.lobby.settings
                     loc1 = net.wg.gui.lobby.settings.vo.SettingsControlProp(net.wg.gui.lobby.settings.SettingsConfig.settingsData[net.wg.gui.lobby.settings.SettingsConfig.SOUND_SETTINGS]["alternativeVoices"]);
                     loc1.current = 0;
                     if (!((loc2 = net.wg.gui.lobby.settings.SoundSettings(this.tryGetView(net.wg.gui.lobby.settings.SettingsConfig.SOUND_SETTINGS))) == null) && !(loc2.alternativeVoicesDropDown == null)) 
+                    {
                         loc2.alternativeVoicesDropDown.selectedIndex = 0;
+                    }
                 }
             }
             else 
             {
                 loc3 = 2;
                 if (arg2.indexOf(this.CONTROLS_WARNING, 0) >= 0) 
+                {
                     loc3 = 3;
+                }
                 this.tabs.selectedIndex = loc3;
             }
             return;
@@ -292,7 +326,9 @@ package net.wg.gui.lobby.settings
         protected override function draw():void
         {
             if (this.tabs.selectedIndex == -1) 
+            {
                 this.tabs.selectedIndex = __currentTab;
+            }
             return;
         }
 
@@ -308,7 +344,9 @@ package net.wg.gui.lobby.settings
                 this.view.removeEventListener(net.wg.gui.events.ViewStackEvent.VIEW_CHANGED, this.onViewChangeHandler);
             }
             if (this.tabs) 
+            {
                 this.tabs.removeEventListener(scaleform.clik.events.IndexEvent.INDEX_CHANGE, this.onTabChange);
+            }
             this.removeEventListener(net.wg.gui.lobby.settings.evnts.SettingViewEvent.ON_PTT_CONTROL_CHANGED, this.onPTTControlChanged);
             this.removeEventListener(net.wg.gui.lobby.settings.evnts.SettingViewEvent.ON_CONTROL_CHANGED, this.onControlChanged);
             this.removeEventListener(net.wg.gui.lobby.settings.evnts.SettingViewEvent.ON_AUTO_DETECT_QUALITY, this.onAutodetectQuality);
@@ -325,9 +363,13 @@ package net.wg.gui.lobby.settings
         {
             var loc1:*=null;
             if (arg1 is net.wg.gui.lobby.settings.vo.SettingsControlProp) 
+            {
                 return net.wg.gui.lobby.settings.vo.SettingsControlProp(arg1).current == arg2;
+            }
             if (arg1 is net.wg.gui.lobby.settings.vo.SettingsKeyProp) 
+            {
                 return net.wg.gui.lobby.settings.vo.SettingsKeyProp(arg1).key == arg2;
+            }
             if (!(arg2 is String) && !(arg2 is Number) && !(arg2 is Boolean)) 
             {
                 var loc2:*=0;
@@ -335,11 +377,17 @@ package net.wg.gui.lobby.settings
                 for (loc1 in loc3) 
                 {
                     if (arg1[loc1] == null) 
+                    {
                         continue;
+                    }
                     if (arg1[loc1] is net.wg.gui.lobby.settings.vo.SettingsControlProp) 
+                    {
                         return net.wg.gui.lobby.settings.vo.SettingsControlProp(arg1[loc1]).current == arg2[loc1];
+                    }
                     if (arg1[loc1] is net.wg.gui.lobby.settings.vo.SettingsKeyProp) 
+                    {
                         return net.wg.gui.lobby.settings.vo.SettingsKeyProp(arg1[loc1]).key == arg2[loc1];
+                    }
                     return this.controlDefValEqNewVal(arg1[loc1], arg2[loc1]);
                 }
             }
@@ -355,7 +403,9 @@ package net.wg.gui.lobby.settings
             var loc5:*=null;
             var loc6:*=null;
             if (isSoundModeValidS()) 
+            {
                 altVoicesPreviewS();
+            }
             else 
             {
                 loc1 = net.wg.gui.lobby.settings.SoundSettings(this.tryGetView(net.wg.gui.lobby.settings.SettingsConfig.SOUND_SETTINGS));
@@ -379,9 +429,13 @@ package net.wg.gui.lobby.settings
         {
             var loc1:*=null;
             if (!this.view) 
+            {
                 return null;
+            }
             if (this.view.cachedViews[arg1] != null) 
+            {
                 loc1 = this.view.cachedViews[arg1];
+            }
             return loc1;
         }
 
@@ -395,7 +449,9 @@ package net.wg.gui.lobby.settings
             for (loc1 in loc5) 
             {
                 if (arg1[loc1] == undefined) 
+                {
                     continue;
+                }
                 this.normalizeInside(arg1, net.wg.gui.lobby.settings.SettingsConfig.settingsData[loc1], loc1);
             }
             if (net.wg.gui.lobby.settings.SettingsConfig.settingsData[net.wg.gui.lobby.settings.SettingsConfig.SOUND_SETTINGS][net.wg.gui.lobby.settings.SettingsConfig.PTT] && net.wg.gui.lobby.settings.SettingsConfig.settingsData[net.wg.gui.lobby.settings.SettingsConfig.CONTROLS_SETTINGS][net.wg.gui.lobby.settings.SettingsConfig.KEYBOARD][net.wg.gui.lobby.settings.SettingsConfig.PUSH_TO_TALK]) 
@@ -418,7 +474,9 @@ package net.wg.gui.lobby.settings
             for (loc2 in loc5) 
             {
                 if (arg1[arg3][loc2] == undefined) 
+                {
                     continue;
+                }
                 if (loc2 == net.wg.gui.lobby.settings.SettingsConfig.PRESETS || loc2 == net.wg.gui.lobby.settings.SettingsConfig.QUALITY_ORDER) 
                 {
                     arg2[loc2] = loc1.cloneObject(arg1[arg3][loc2]);
@@ -435,30 +493,50 @@ package net.wg.gui.lobby.settings
                 {
                     loc3 = net.wg.gui.lobby.settings.vo.SettingsControlProp(arg2[loc2]);
                     if (arg1[arg3][loc2] is Boolean || arg1[arg3][loc2] is String || arg1[arg3][loc2] is Number) 
+                    {
                         loc3.current = arg1[arg3][loc2];
+                    }
                     else if (arg1[arg3][loc2].current is Object && !(arg1[arg3][loc2].current == undefined)) 
+                    {
                         if (loc3.type != net.wg.gui.lobby.settings.SettingsConfig.TYPE_CHECKBOX) 
                         {
                             loc3.current = Math.max(arg1[arg3][loc2].current, 0);
                             if (arg3 == net.wg.gui.lobby.settings.SettingsConfig.CONTROLS_SETTINGS) 
+                            {
                                 if (arg1[arg3][loc2].hasOwnProperty("default")) 
+                                {
                                     loc3._default = Math.max(arg1[arg3][loc2].default, 0);
+                                }
                                 else 
+                                {
                                     loc3._default = 0;
+                                }
+                            }
                             if (arg1[arg3][loc2].options == undefined) 
+                            {
                                 loc3.options = [];
+                            }
                             else 
+                            {
                                 loc3.options = loc1.cloneObject(arg1[arg3][loc2].options);
+                            }
                         }
                         else 
                         {
                             loc3.current = Boolean(arg1[arg3][loc2].current);
                             if (arg3 == net.wg.gui.lobby.settings.SettingsConfig.CONTROLS_SETTINGS) 
+                            {
                                 if (arg1[arg3][loc2].hasOwnProperty("default")) 
+                                {
                                     loc3._default = arg1[arg3][loc2].default != undefined ? Boolean(arg1[arg3][loc2].default) : false;
+                                }
                                 else 
+                                {
                                     loc3._default = false;
+                                }
+                            }
                         }
+                    }
                     continue;
                 }
                 this.normalizeInside(arg1[arg3], arg2[loc2], loc2);
@@ -512,7 +590,9 @@ package net.wg.gui.lobby.settings
             var loc4:*=null;
             var loc1:*=net.wg.gui.lobby.settings.SoundSettings(this.tryGetView(net.wg.gui.lobby.settings.SettingsConfig.SOUND_SETTINGS));
             if (loc1) 
+            {
                 loc1.breakSoundCheck();
+            }
             var loc2:*=this.checkControlsWrong();
             var loc3:*=!isSoundModeValidS();
             if (loc2 || loc3) 
@@ -561,7 +641,9 @@ package net.wg.gui.lobby.settings
                 for (loc7 in loc10) 
                 {
                     if ((loc8 = net.wg.gui.lobby.settings.vo.SettingsKeyProp(loc6[loc7])).key != net.wg.data.constants.KeysMap.KEY_NONE) 
+                    {
                         continue;
+                    }
                     loc1 = true;
                     break;
                 }
@@ -595,24 +677,34 @@ package net.wg.gui.lobby.settings
                 {
                     loc2 = null;
                     if (arg1 != 0) 
+                    {
                         loc2 = arg2[loc1];
+                    }
                     else 
+                    {
                         loc2 = this.getPropObj(arg2, loc1);
+                    }
                     this.searchAndOverride(arg1 + 1, loc2, arg3[loc1]);
                     continue;
                 }
                 loc3 = null;
                 if (arg1 != 0) 
+                {
                     loc3 = arg2[loc1];
+                }
                 else 
+                {
                     loc3 = this.getPropObj(arg2, loc1);
+                }
                 if (!(loc3 == null) && loc3 is net.wg.gui.lobby.settings.vo.SettingsControlProp) 
                 {
                     net.wg.gui.lobby.settings.vo.SettingsControlProp(loc3).current = arg3[loc1];
                     continue;
                 }
                 if (!(!(loc3 == null) && loc3 is net.wg.gui.lobby.settings.vo.SettingsKeyProp)) 
+                {
                     continue;
+                }
                 net.wg.gui.lobby.settings.vo.SettingsKeyProp(loc3).key = arg3[loc1];
             }
             return;
@@ -626,7 +718,9 @@ package net.wg.gui.lobby.settings
             for (loc1 in loc3) 
             {
                 if (!arg1[loc1].hasOwnProperty(arg2)) 
+                {
                     continue;
+                }
                 return arg1[loc1][arg2];
             }
             return null;

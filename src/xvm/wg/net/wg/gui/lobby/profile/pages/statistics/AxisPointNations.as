@@ -12,7 +12,9 @@ package net.wg.gui.lobby.profile.pages.statistics
         protected override function showToolTip():void
         {
             if (tooltip) 
+            {
                 net.wg.gui.lobby.profile.pages.statistics.StatisticsChartsUtils.showNationTooltip(_data, tooltip);
+            }
             return;
         }
     }

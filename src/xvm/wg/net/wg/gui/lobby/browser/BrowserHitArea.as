@@ -66,9 +66,13 @@ package net.wg.gui.lobby.browser
         internal function onMouseDownHandler(arg1:flash.events.MouseEvent):void
         {
             if (arg1.target != this) 
+            {
                 dispatchEvent(new net.wg.gui.lobby.browser.BrowserEvent(net.wg.gui.lobby.browser.BrowserEvent.BROWSER_FOCUS_OUT));
+            }
             else 
+            {
                 dispatchEvent(new net.wg.gui.lobby.browser.BrowserEvent(net.wg.gui.lobby.browser.BrowserEvent.BROWSER_DOWN, this.mouseX, this.mouseY));
+            }
             return;
         }
 

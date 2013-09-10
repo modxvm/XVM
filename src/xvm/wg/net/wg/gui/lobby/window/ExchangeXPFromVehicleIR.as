@@ -52,7 +52,9 @@ package net.wg.gui.lobby.window
             if (loc2 == scaleform.gfx.MouseEventEx.LEFT_BUTTON) 
             {
                 if (App.utils) 
+                {
                     App.utils.asserter.assertNotNull("vehicleData in ExchangeXPFromVehicleIR" + net.wg.data.constants.Errors.CANT_NULL, this.toString());
+                }
                 this.toggleSelection();
             }
             return;
@@ -65,7 +67,9 @@ package net.wg.gui.lobby.window
             if (loc1.value == scaleform.clik.constants.InputValue.KEY_UP) 
             {
                 if (loc1.code == flash.ui.Keyboard.ENTER || loc1.code == flash.ui.Keyboard.SPACE) 
+                {
                     this.toggleSelection();
+                }
                 arg1.handled = true;
             }
             return;
@@ -95,6 +99,7 @@ package net.wg.gui.lobby.window
         protected override function draw():void
         {
             if (isInvalid(this.DATA_INVALIDATE)) 
+            {
                 if (this.vehicleData) 
                 {
                     this.xpLabel.text = App.utils ? App.utils.locale.integer(this.vehicleData.xp) : this.vehicleData.xp.toString();
@@ -122,12 +127,15 @@ package net.wg.gui.lobby.window
                     this.vehicleTypeIcon.source = null;
                     this.vehicleNation.source = null;
                 }
+            }
             if (isInvalid(this.SELECTION_INVALIDATE)) 
+            {
                 if (this.vehicleData) 
                 {
                     this.checkboxVehicle.selected = this.vehicleData.isSelectCandidate;
                     setState(state);
                 }
+            }
             super.draw();
             return;
         }

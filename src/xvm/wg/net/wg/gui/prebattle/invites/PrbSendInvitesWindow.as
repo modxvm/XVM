@@ -82,7 +82,9 @@ package net.wg.gui.prebattle.invites
         internal function receiverList_itemDoubleClickHandler(arg1:scaleform.clik.events.ListEvent):void
         {
             if (arg1.buttonIdx == scaleform.gfx.MouseEventEx.RIGHT_BUTTON) 
+            {
                 return;
+            }
             this.removeReceiveItem();
             return;
         }
@@ -90,7 +92,9 @@ package net.wg.gui.prebattle.invites
         public function as_setDefaultOnlineFlag(arg1:Boolean):void
         {
             if (this.onlineCheckBox != null) 
+            {
                 this.onlineCheckBox.selected = arg1;
+            }
             return;
         }
 
@@ -108,7 +112,9 @@ package net.wg.gui.prebattle.invites
                 return;
             }
             if (this.hasUserInReceiverList(loc1)) 
+            {
                 showErrorS(MENU.PREBATTLE_INVITATIONS_ERRORS_EXISTSINRECEIVELIST);
+            }
             else 
             {
                 this.receiverData.push(loc1);
@@ -122,12 +128,20 @@ package net.wg.gui.prebattle.invites
         {
             var loc1:*=net.wg.gui.components.controls.ScrollingListEx(this.usersAccordion.view.currentView.rosterList);
             if (loc1.dataProvider.length > 0) 
+            {
                 if (loc1.selectedIndex > -1) 
+                {
                     loc1.dataProvider.requestItemAt(loc1.selectedIndex, this.onReceiveUserInfo);
+                }
                 else 
+                {
                     showErrorS(MENU.PREBATTLE_INVITATIONS_ERRORS_SELECTUSERTOADD);
+                }
+            }
             else 
+            {
                 showErrorS(MENU.PREBATTLE_INVITATIONS_ERRORS_USERLISTEMPTY);
+            }
             return;
         }
 
@@ -135,12 +149,18 @@ package net.wg.gui.prebattle.invites
         {
             var loc1:*=net.wg.data.daapi.base.DAAPIDataProvider(this.usersAccordion.view.currentView.rosterList.dataProvider);
             if (loc1 == null) 
+            {
                 return;
+            }
             var loc2:*=loc1.length;
             if (loc2 > 0) 
+            {
                 loc1.requestItemRange(0, (loc1.length - 1), this.onReceiveUsersInfo);
+            }
             else 
+            {
                 showErrorS(MENU.PREBATTLE_INVITATIONS_ERRORS_USERLISTEMPTY);
+            }
             return;
         }
 
@@ -158,14 +178,20 @@ package net.wg.gui.prebattle.invites
             {
                 loc4 = makeRoster(arg1[loc2]);
                 if (!(net.wg.gui.prebattle.squad.MessengerUtils.isIgnored(loc4) || !loc4.online)) 
+                {
                     if (!this.hasUserInReceiverList(loc4)) 
+                    {
                         this.receiverData.push(loc4);
+                    }
+                }
                 ++loc2;
             }
             this.receiverData.invalidate();
             var loc3:*;
             if (!(loc3 = this.receiverData.length > 0)) 
+            {
                 showErrorS(MENU.PREBATTLE_INVITATIONS_ERRORS_NOTFOUNDUSERS);
+            }
             this.sendButton.enabled = loc3;
             return;
         }
@@ -179,6 +205,7 @@ package net.wg.gui.prebattle.invites
         internal function removeReceiveItem():void
         {
             if (this.receiverData.length > 0) 
+            {
                 if (this.receiverList.selectedIndex > -1) 
                 {
                     this.receiverData.splice(this.receiverList.selectedIndex, 1);
@@ -186,9 +213,14 @@ package net.wg.gui.prebattle.invites
                     this.sendButton.enabled = !(this.receiverData.length == 0);
                 }
                 else 
+                {
                     showErrorS(MENU.PREBATTLE_INVITATIONS_ERRORS_SELECTUSERTOREMOVE);
+                }
+            }
             else 
+            {
                 showErrorS(MENU.PREBATTLE_INVITATIONS_ERRORS_RECEIVERLISTEMPTY);
+            }
             return;
         }
 
@@ -201,7 +233,9 @@ package net.wg.gui.prebattle.invites
                 this.sendButton.enabled = false;
             }
             else 
+            {
                 showErrorS(MENU.PREBATTLE_INVITATIONS_ERRORS_RECEIVERLISTEMPTY);
+            }
             return;
         }
 
@@ -210,10 +244,14 @@ package net.wg.gui.prebattle.invites
             var loc1:*=arg1.currentTarget.selected;
             var loc2:*=false;
             if (!(this.lastToken == null) && !(this.lastToken == "") && this.onSearchResultReceived && !(this.lastIsOnlineFlag == loc1)) 
+            {
                 loc2 = true;
+            }
             setOnlineFlagS(loc1);
             if (loc2) 
+            {
                 this.setToken(this.lastToken);
+            }
             this.lastIsOnlineFlag = loc1;
             return;
         }
@@ -223,7 +261,9 @@ package net.wg.gui.prebattle.invites
             var loc1:*=[];
             var loc2:*="";
             if (this.messageTextInput.textField.getTextFormat()["color"] != this.inviteDefaultTextColor) 
+            {
                 loc2 = org.idmedia.as3commons.util.StringUtils.trim(this.messageTextInput.text);
+            }
             var loc3:*=0;
             while (loc3 < this.receiverData.length) 
             {
@@ -247,7 +287,9 @@ package net.wg.gui.prebattle.invites
         internal function setToken(arg1:String):void
         {
             if (arg1 == null) 
+            {
                 return;
+            }
             searchTokenS(arg1);
             return;
         }
@@ -260,13 +302,23 @@ package net.wg.gui.prebattle.invites
             {
                 loc2 = flash.utils.getQualifiedClassName(loc1);
                 if (loc2 != net.wg.data.constants.Linkages.INVITES_FRIENDS) 
+                {
                     if (loc2 != net.wg.data.constants.Linkages.INVITES_CLAN) 
+                    {
                         if (loc2 == net.wg.data.constants.Linkages.INVITES_SEARCH) 
+                        {
                             loc1.update(this.searchMemberDataProvider);
+                        }
+                    }
                     else 
+                    {
                         loc1.update(this.clanMemberDataProvider);
+                    }
+                }
                 else 
+                {
                     loc1.update(this.friendMemberDataProvider);
+                }
             }
             return;
         }
@@ -335,7 +387,9 @@ package net.wg.gui.prebattle.invites
         internal function showContextMenu(arg1:net.wg.gui.prebattle.invites.SendInvitesEvent):void
         {
             if (arg1.initItem) 
+            {
                 App.contextMenuMgr.showUserContextMenu(this, arg1.initItem, new net.wg.gui.prebattle.invites.PrbSendInviteCIGenerator());
+            }
             return;
         }
 

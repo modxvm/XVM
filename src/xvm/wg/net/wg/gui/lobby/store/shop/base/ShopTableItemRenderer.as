@@ -23,7 +23,9 @@ package net.wg.gui.lobby.store.shop.base
         {
             super.setData(arg1);
             if (App.instance && arg1) 
+            {
                 App.utils.asserter.assert(arg1 is net.wg.data.VO.StoreTableData, "data must extends a StoreTableData class.");
+            }
             invalidateData();
             return;
         }
@@ -43,27 +45,37 @@ package net.wg.gui.lobby.store.shop.base
                 loc2 = arg1.tableVO.credits;
             }
             if (0 == loc1 && !(arg1.requestType == net.wg.data.constants.FittingTypes.VEHICLE)) 
+            {
                 arg1.disabled = " ";
+            }
             var loc3:*=false;
             if (this._isUseAction) 
             {
                 this.updateCreditPriceForAction(arg3, arg2, arg1);
                 if (arg2 > arg1.tableVO.gold && arg3 > arg1.tableVO.credits) 
+                {
                     loc3 = true;
+                }
             }
             else 
             {
                 if (loc1 > loc2) 
+                {
                     loc3 = true;
+                }
                 this.updateCredits(arg2, arg1, arg3, loc3);
             }
             if (errorField) 
             {
                 errorField.text = arg1.disabled;
                 if (arg1.statusLevel) 
+                {
                     errorField.textColor = net.wg.gui.lobby.store.STORE_STATUS_COLOR.getColor(arg1.statusLevel);
+                }
                 else 
+                {
                     errorField.textColor = net.wg.gui.lobby.store.STORE_STATUS_COLOR.INFO;
+                }
             }
             enabled = !(arg1.disabled || loc3);
             return;
@@ -81,14 +93,18 @@ package net.wg.gui.lobby.store.shop.base
         {
             var loc1:*=net.wg.data.VO.StoreTableData(data);
             if (loc1.disabled) 
+            {
                 return;
+            }
             var loc2:*=loc1.itemTypeName == net.wg.data.constants.FittingTypes.SHELL && loc1.goldShellsForCredits;
             var loc3:*=loc1.itemTypeName == net.wg.data.constants.FittingTypes.EQUIPMENT && loc1.goldEqsForCredits;
             var loc4:*=loc1.tableVO.gold >= loc1.gold;
             var loc5:*=loc1.tableVO.credits >= loc1.credits;
             var loc6:*;
             if (loc6 = loc2 || loc3 ? loc4 || loc5 : loc4 && loc5) 
+            {
                 this.buyItem();
+            }
             return;
         }
 
@@ -124,13 +140,21 @@ package net.wg.gui.lobby.store.shop.base
             {
                 loc1 = App.utils.locale;
                 if (arg4) 
+                {
                     credits.gotoAndStop(arg2.currency + "Error");
+                }
                 else 
+                {
                     credits.gotoAndStop(arg2.currency);
+                }
                 if (arg2.currency != net.wg.data.constants.Currencies.GOLD) 
+                {
                     credits.price.text = loc1.integer(arg3);
+                }
                 else 
+                {
                     credits.price.text = loc1.gold(arg1);
+                }
             }
             return;
         }

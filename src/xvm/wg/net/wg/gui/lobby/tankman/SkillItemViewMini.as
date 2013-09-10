@@ -56,7 +56,9 @@ package net.wg.gui.lobby.tankman
         public function set type(arg1:String):void
         {
             if (this._type == arg1) 
+            {
                 return;
+            }
             this._type = arg1;
             this.updateType();
             return;
@@ -65,7 +67,9 @@ package net.wg.gui.lobby.tankman
         protected function updateType():void
         {
             if (this._type == TYPE_CURRENT_NEW_SKILL || this._type == TYPE_NEW_SKILL || this._type == TYPE_NEW_SKILLS) 
+            {
                 this.iconSource = null;
+            }
             gotoAndPlay(this._type);
             return;
         }

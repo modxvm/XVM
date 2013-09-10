@@ -102,9 +102,13 @@ package net.wg.gui.lobby.questsWindow
                 this.notSelected.visible = loc1;
                 this.noQuestsMC.visible = !loc1;
                 if (loc1) 
+                {
                     this.checkSelectedQuest();
+                }
                 else 
+                {
                     this.scrollPane.visible = false;
+                }
             }
             return;
         }
@@ -127,7 +131,9 @@ package net.wg.gui.lobby.questsWindow
                         this.questInfo.setData(getQuestInfoS(this.currentQuest));
                     }
                     else 
+                    {
                         this.questsList.scrollToIndex(loc5);
+                    }
                     loc4 = true;
                     this.notSelected.visible = false;
                     this.scrollPane.visible = true;
@@ -136,7 +142,9 @@ package net.wg.gui.lobby.questsWindow
                 ++loc5;
             }
             if (!loc4) 
+            {
                 this.setNotSelected();
+            }
             return;
         }
 
@@ -156,6 +164,7 @@ package net.wg.gui.lobby.questsWindow
             var loc2:*=null;
             var loc3:*=null;
             if (arg1.type != net.wg.gui.events.ListEventEx.ITEM_CLICK) 
+            {
                 if (arg1.index >= 0) 
                 {
                     this.notSelected.visible = false;
@@ -169,14 +178,23 @@ package net.wg.gui.lobby.questsWindow
                     this.currentQuest = loc1.questID;
                     loc2 = getQuestInfoS(this.currentQuest);
                     if (loc2) 
+                    {
                         this.questInfo.setData(loc2);
+                    }
                     else 
+                    {
                         this.setNotSelected();
+                    }
                 }
                 else 
+                {
                     this.setNotSelected();
+                }
+            }
             else if (arg1.index == this.questsList.selectedIndex) 
+            {
                 this.questsList.selectedIndex = -1;
+            }
             return;
         }
 
@@ -208,7 +226,9 @@ package net.wg.gui.lobby.questsWindow
                         this.questInfo.setData(getQuestInfoS(arg1.questID));
                     }
                     else 
+                    {
                         this.questsList.scrollToIndex(loc4);
+                    }
                     break;
                 }
                 ++loc4;
@@ -223,7 +243,9 @@ package net.wg.gui.lobby.questsWindow
             var loc3:*=0;
             var loc4:*=arg1;
             for each (loc2 in loc4) 
+            {
                 loc1.push(new net.wg.gui.lobby.questsWindow.data.QuestRendererVO(loc2));
+            }
             return loc1;
         }
 

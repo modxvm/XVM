@@ -39,7 +39,9 @@ package net.wg.gui.components.controls
         protected function onMouseOver(arg1:flash.events.MouseEvent):void
         {
             if (data.tooltip) 
+            {
                 App.toolTipMgr.showComplex(this.data.tooltip);
+            }
             return;
         }
 
@@ -65,7 +67,9 @@ package net.wg.gui.components.controls
         protected override function updateAfterStateChange():void
         {
             if (!initialized) 
+            {
                 return;
+            }
             this.setup();
             dispatchEvent(new net.wg.gui.events.StateManagerEvent(scaleform.clik.events.ComponentEvent.STATE_CHANGE, state));
             return;

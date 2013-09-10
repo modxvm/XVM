@@ -26,7 +26,9 @@ package scaleform.clik.controls
         public override function handleInput(arg1:scaleform.clik.events.InputEvent):void
         {
             if (arg1.isDefaultPrevented()) 
+            {
                 return;
+            }
             var loc1:*=arg1.details;
             var loc2:*=loc1.controllerIndex;
             var loc3:*=loc1.value == scaleform.clik.constants.InputValue.KEY_DOWN || loc1.value == scaleform.clik.constants.InputValue.KEY_HOLD;
@@ -34,31 +36,47 @@ package scaleform.clik.controls
             switch (loc4) 
             {
                 case scaleform.clik.constants.NavigationCode.RIGHT:
+                {
                     if (this._value < this._maximum) 
                     {
                         if (loc3) 
+                        {
                             this.onNext(null);
+                        }
                         arg1.handled = true;
                     }
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.LEFT:
+                {
                     if (this._value > this._minimum) 
                     {
                         if (loc3) 
+                        {
                             this.onPrev(null);
+                        }
                         arg1.handled = true;
                     }
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.HOME:
+                {
                     if (!loc3) 
+                    {
                         this.value = this._minimum;
+                    }
                     arg1.handled = true;
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.END:
+                {
                     if (!loc3) 
+                    {
                         this.value = this._maximum;
+                    }
                     arg1.handled = true;
                     break;
+                }
             }
             return;
         }
@@ -71,7 +89,9 @@ package scaleform.clik.controls
         protected override function configUI():void
         {
             if (!this.constraintsDisabled) 
+            {
                 constraints.addElement("textField", this.textField, scaleform.clik.utils.Constraints.LEFT | scaleform.clik.utils.Constraints.RIGHT);
+            }
             addEventListener(scaleform.clik.events.InputEvent.INPUT, this.handleInput, false, 0, true);
             this.nextBtn.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onNext, false, 0, true);
             this.prevBtn.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onPrev, false, 0, true);
@@ -123,12 +143,16 @@ package scaleform.clik.controls
                 dispatchEvent(new scaleform.clik.events.ComponentEvent(scaleform.clik.events.ComponentEvent.STATE_CHANGE));
             }
             if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+            {
                 this.updateLabel();
+            }
             if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
             {
                 setActualSize(_width, _height);
                 if (!this.constraintsDisabled) 
+                {
                     constraints.update(_width, _height);
+                }
             }
             return;
         }
@@ -136,9 +160,13 @@ package scaleform.clik.controls
         protected override function changeFocus():void
         {
             if (_focused || _displayFocus) 
+            {
                 this.setState("focused", "default");
+            }
             else 
+            {
                 this.setState("default");
+            }
             this.updateAfterStateChange();
             var loc1:*;
             this.nextBtn.displayFocus = loc1 = _focused > 0;
@@ -156,7 +184,9 @@ package scaleform.clik.controls
         {
             var loc1:*=this._value.toString();
             if (this._labelFunction != null) 
+            {
                 loc1 = this._labelFunction(this._value);
+            }
             this.textField.text = loc1;
             return;
         }
@@ -215,7 +245,9 @@ package scaleform.clik.controls
         protected override function preInitialize():void
         {
             if (!this.constraintsDisabled) 
+            {
                 constraints = new scaleform.clik.utils.Constraints(this, scaleform.clik.constants.ConstrainMode.COUNTER_SCALE);
+            }
             return;
         }
 
@@ -233,14 +265,18 @@ package scaleform.clik.controls
         public override function set enabled(arg1:Boolean):void
         {
             if (arg1 == super.enabled) 
+            {
                 return;
+            }
             super.enabled = arg1;
             var loc1:*;
             tabEnabled = loc1 = arg1;
             mouseEnabled = loc1;
             gotoAndPlay(arg1 ? _focused > 0 ? "focused" : "default" : "disabled");
             if (!initialized) 
+            {
                 return;
+            }
             this.updateAfterStateChange();
             this.nextBtn.enabled = loc1 = arg1;
             this.prevBtn.enabled = loc1;
@@ -279,7 +315,9 @@ package scaleform.clik.controls
                 this.container.tabEnabled = loc1;
             }
             if (!(constraints == null) && !this.constraintsDisabled) 
+            {
                 constraints.updateElement("textField", this.textField);
+            }
             return;
         }
 
@@ -304,11 +342,15 @@ package scaleform.clik.controls
         {
             arg1 = this.lockValue(arg1);
             if (arg1 == this._value) 
+            {
                 return;
+            }
             var loc1:*=this._value;
             this._value = arg1;
             if (initialized) 
+            {
                 dispatchEventAndSound(new scaleform.clik.events.IndexEvent(scaleform.clik.events.IndexEvent.INDEX_CHANGE, true, false, this.value, loc1, null));
+            }
             invalidate();
             return;
         }

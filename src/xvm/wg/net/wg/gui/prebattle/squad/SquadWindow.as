@@ -37,8 +37,12 @@ package net.wg.gui.prebattle.squad
             var loc3:*=null;
             var loc4:*=null;
             if (arg1.buttonIdx != scaleform.gfx.MouseEventEx.RIGHT_BUTTON) 
+            {
                 if ((loc4 = net.wg.gui.prebattle.squad.SquadItemRenderer(arg1.itemRenderer).data) && loc4.hasOwnProperty("dummy") && loc4.dummy) 
+                {
                     showPrebattleSendInvitesWindowS();
+                }
+            }
             else 
             {
                 loc1 = net.wg.gui.prebattle.data.PlayerPrbInfoVO(arg1.itemData);
@@ -49,7 +53,9 @@ package net.wg.gui.prebattle.squad
                     App.contextMenuMgr.showUserContextMenu(this, loc1, loc3);
                 }
                 else 
+                {
                     App.contextMenuMgr.hide();
+                }
             }
             return;
         }
@@ -59,7 +65,9 @@ package net.wg.gui.prebattle.squad
             var loc4:*=null;
             var loc5:*=null;
             if (canSendInviteS()) 
+            {
                 arg1.push(this.getInviteRoster());
+            }
             var loc1:*=[];
             var loc2:*=arg1.length;
             var loc3:*=0;
@@ -71,9 +79,13 @@ package net.wg.gui.prebattle.squad
                 {
                     loc5 = "";
                     if (loc4.colors[0] != null) 
+                    {
                         loc5 = loc5 + (" [0] " + loc4.colors[0]);
+                    }
                     if (loc4.colors[1] != null) 
+                    {
                         loc5 = loc5 + (" [1] " + loc4.colors[1]);
+                    }
                 }
                 ++loc3;
             }
@@ -91,8 +103,12 @@ package net.wg.gui.prebattle.squad
             {
                 loc3 = this.memberList.getRendererAt(loc2) as net.wg.gui.prebattle.squad.SquadItemRenderer;
                 if (loc3 != null) 
+                {
                     if (loc3 && loc3.data && loc3.data.dummy == true) 
+                    {
                         return true;
+                    }
+                }
                 ++loc2;
             }
             return false;
@@ -132,13 +148,17 @@ package net.wg.gui.prebattle.squad
             while (loc3 < loc1) 
             {
                 if ((loc4 = this.memberList.getRendererAt(loc3) as net.wg.gui.prebattle.squad.SquadItemRenderer) != null) 
+                {
                     if (loc4 && loc4.data && loc4.data.dummy == true) 
                     {
                         net.wg.gui.prebattle.squad.SquadItemRenderer(this.memberList.getRendererAt(loc3)).visible = arg1;
                         loc2 = true;
                     }
+                }
                 else 
+                {
                     loc2 = true;
+                }
                 ++loc3;
             }
             if (!loc2 && arg1) 
@@ -183,7 +203,9 @@ package net.wg.gui.prebattle.squad
         {
             super.setFocus();
             if (this.squadChannelComponent) 
+            {
                 this.squadChannelComponent.setFocusToInput();
+            }
             return;
         }
 
@@ -193,9 +215,13 @@ package net.wg.gui.prebattle.squad
             var loc3:*=null;
             var loc4:*=null;
             if (arg3) 
+            {
                 loc1 = new net.wg.gui.prebattle.data.PlayerPrbInfoVO(arg3);
+            }
             else 
+            {
                 return;
+            }
             var loc2:*=0;
             while (loc2 < this.memberList.dataProvider.length) 
             {
@@ -253,7 +279,9 @@ package net.wg.gui.prebattle.squad
                 _height = loc2;
                 constraints.update(loc1, loc2);
                 if (this.memberList) 
+                {
                     this.memberList.x = loc1 - this.memberList.width;
+                }
                 this.squadChannelComponent.invalidate(scaleform.clik.constants.InvalidationType.SIZE);
             }
             return;
@@ -271,11 +299,17 @@ package net.wg.gui.prebattle.squad
             constraints.addElement("messageInput", this.squadChannelComponent.messageInput, scaleform.clik.utils.Constraints.LEFT | scaleform.clik.utils.Constraints.RIGHT | scaleform.clik.utils.Constraints.BOTTOM);
             constraints.addElement("sendButton", this.squadChannelComponent.sendButton, scaleform.clik.utils.Constraints.RIGHT | scaleform.clik.utils.Constraints.BOTTOM);
             if (this.memberList) 
+            {
                 this.memberList.addEventListener(net.wg.gui.events.ListEventEx.ITEM_CLICK, this.onMemberItemClickHandler);
+            }
             if (this.readyButton) 
+            {
                 this.readyButton.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.handleReadyClick);
+            }
             if (this.leaveButton) 
+            {
                 this.leaveButton.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.handleLeaveClick);
+            }
             this.squadChannelComponent.invalidate(scaleform.clik.constants.InvalidationType.SIZE);
             this.updateMemberList();
             this.updatePermissions();
@@ -319,9 +353,13 @@ package net.wg.gui.prebattle.squad
         internal function updateMainButtons():void
         {
             if (this.leaveButton != null) 
+            {
                 this.leaveButton.label = isPlayerCreatorS() ? MESSENGER.DIALOGS_SQUADCHANNEL_BUTTONS_DISMISS : MESSENGER.DIALOGS_SQUADCHANNEL_BUTTONS_LEAVE;
+            }
             if (this.readyButton != null) 
+            {
                 this.readyButton.label = isPlayerReadyS() ? MESSENGER.DIALOGS_SQUADCHANNEL_BUTTONS_NOTREADY : MESSENGER.DIALOGS_SQUADCHANNEL_BUTTONS_READY;
+            }
             return;
         }
 

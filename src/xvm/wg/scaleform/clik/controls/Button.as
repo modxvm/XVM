@@ -27,7 +27,9 @@ package scaleform.clik.controls
         public function set autoSize(arg1:String):void
         {
             if (arg1 == this._autoSize) 
+            {
                 return;
+            }
             this._autoSize = arg1;
             invalidateData();
             return;
@@ -49,26 +51,34 @@ package scaleform.clik.controls
         public override function handleInput(arg1:scaleform.clik.events.InputEvent):void
         {
             if (arg1.isDefaultPrevented()) 
+            {
                 return;
+            }
             var loc1:*=arg1.details;
             var loc2:*=loc1.controllerIndex;
             var loc3:*=loc1.navEquivalent;
             switch (loc3) 
             {
                 case scaleform.clik.constants.NavigationCode.ENTER:
+                {
                     if (loc1.value != scaleform.clik.constants.InputValue.KEY_DOWN) 
+                    {
                         if (loc1.value == scaleform.clik.constants.InputValue.KEY_UP) 
+                        {
                             if (this._pressedByKeyboard) 
                             {
                                 this.handleRelease(loc2);
                                 arg1.handled = true;
                             }
+                        }
+                    }
                     else 
                     {
                         this.handlePress(loc2);
                         arg1.handled = true;
                     }
                     break;
+                }
             }
             return;
         }
@@ -94,7 +104,9 @@ package scaleform.clik.controls
         protected override function configUI():void
         {
             if (!this.constraintsDisabled) 
+            {
                 constraints.addElement("textField", this.textField, scaleform.clik.utils.Constraints.ALL);
+            }
             super.configUI();
             tabEnabled = _focusable && this.enabled && tabEnabled;
             var loc1:*;
@@ -107,7 +119,9 @@ package scaleform.clik.controls
             addEventListener(flash.events.MouseEvent.DOUBLE_CLICK, this.handleMouseRelease, false, 0, true);
             addEventListener(scaleform.clik.events.InputEvent.INPUT, this.handleInput, false, 0, true);
             if (!(this._focusIndicator == null) && !_focused && this._focusIndicator.totalFrames == 1) 
+            {
                 this.focusIndicator.visible = false;
+            }
             return;
         }
 
@@ -119,7 +133,9 @@ package scaleform.clik.controls
                 {
                     gotoAndPlay(this._newFrame);
                     if (_baseDisposed) 
+                    {
                         return;
+                    }
                     this._newFrame = null;
                 }
                 if (this.focusIndicator && this._newFocusIndicatorFrame) 
@@ -135,7 +151,9 @@ package scaleform.clik.controls
             {
                 this.updateText();
                 if (this.autoSize != flash.text.TextFieldAutoSize.NONE) 
+                {
                     invalidateSize();
+                }
             }
             if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
             {
@@ -145,8 +163,12 @@ package scaleform.clik.controls
                     setActualSize(_width, _height);
                 }
                 if (!this.constraintsDisabled) 
+                {
                     if (constraints) 
+                    {
                         constraints.update(_width, _height);
+                    }
+                }
             }
             return;
         }
@@ -160,7 +182,9 @@ package scaleform.clik.controls
             }
             var loc1:*=scaleform.clik.controls.ButtonGroup.getGroup(this._groupName, parent);
             if (loc1 == this.group) 
+            {
                 return;
+            }
             this.group = loc1;
             return;
         }
@@ -181,7 +205,9 @@ package scaleform.clik.controls
                 {
                     loc2 = this._owner.focusTarget;
                     if (loc2 != null) 
+                    {
                         loc1 = !(loc2 == 0);
+                    }
                 }
             }
             return loc1;
@@ -205,7 +231,9 @@ package scaleform.clik.controls
             var loc3:*=NaN;
             var loc4:*=NaN;
             if (!initialized || this._autoSize == flash.text.TextFieldAutoSize.NONE || this.textField == null) 
+            {
                 return;
+            }
             loc1 = _width;
             var loc5:*;
             _width = loc5 = this.calculateWidth();
@@ -214,13 +242,17 @@ package scaleform.clik.controls
             switch (loc5) 
             {
                 case flash.text.TextFieldAutoSize.RIGHT:
+                {
                     loc3 = x + loc1;
                     x = loc3 - loc2;
                     break;
+                }
                 case flash.text.TextFieldAutoSize.CENTER:
+                {
                     loc4 = x + loc1 * 0.5;
                     x = loc4 - loc2 * 0.5;
                     break;
+                }
             }
             return;
         }
@@ -228,7 +260,9 @@ package scaleform.clik.controls
         protected function updateText():void
         {
             if (!(this._label == null) && !(this.textField == null)) 
+            {
                 this.textField.text = this._label;
+            }
             return;
         }
 
@@ -236,20 +270,28 @@ package scaleform.clik.controls
         {
             var loc1:*=null;
             if (!this.enabled) 
+            {
                 return;
+            }
             if (this._focusIndicator != null) 
             {
                 if (this._focusIndicator.totalframes != 1) 
                 {
                     loc1 = "state" + _focused;
                     if (this._focusIndicatorLabelHash[loc1]) 
+                    {
                         this._newFocusIndicatorFrame = "state" + _focused;
+                    }
                     else 
+                    {
                         this._newFocusIndicatorFrame = _focused || _displayFocus ? "show" : "hide";
+                    }
                     invalidateState();
                 }
                 else 
+                {
                     this._focusIndicator.visible = _focused > 0;
+                }
                 if (this._pressedByKeyboard && !_focused) 
                 {
                     this.setState("kb_release");
@@ -260,7 +302,9 @@ package scaleform.clik.controls
             {
                 this.setState(_focused || _displayFocus ? "over" : "out");
                 if (this._pressedByKeyboard && !_focused) 
+                {
                     this._pressedByKeyboard = false;
+                }
             }
             return;
         }
@@ -273,23 +317,39 @@ package scaleform.clik.controls
             {
                 dispatchEvent(new scaleform.clik.events.ButtonEvent(scaleform.clik.events.ButtonEvent.DRAG_OVER));
                 if (!this.enabled) 
+                {
                     return;
+                }
                 if (this.lockDragStateChange && Boolean(this._mouseDown << loc2 & 1)) 
+                {
                     return;
+                }
                 if (_focused || _displayFocus) 
+                {
                     this.setState(this.focusIndicator != null ? "kb_down" : "down");
+                }
                 else 
+                {
                     this.setState("over");
+                }
             }
             else 
             {
                 if (!this.enabled) 
+                {
                     return;
+                }
                 if (_focused || _displayFocus) 
+                {
                     if (this._focusIndicator != null) 
+                    {
                         this.setState("over");
+                    }
+                }
                 else 
+                {
                     this.setState("over");
+                }
             }
             return;
         }
@@ -302,24 +362,42 @@ package scaleform.clik.controls
             {
                 dispatchEvent(new scaleform.clik.events.ButtonEvent(scaleform.clik.events.ButtonEvent.DRAG_OUT));
                 if (Boolean(this._mouseDown & 1 << loc2)) 
+                {
                     if (stage != null) 
+                    {
                         stage.addEventListener(flash.events.MouseEvent.MOUSE_UP, this.handleReleaseOutside, false, 0, true);
+                    }
+                }
                 if (this.lockDragStateChange || !this.enabled) 
+                {
                     return;
+                }
                 if (_focused || _displayFocus) 
+                {
                     this.setState(this._focusIndicator != null ? "kb_release" : "release");
+                }
                 else 
+                {
                     this.setState("out");
+                }
             }
             else 
             {
                 if (!this.enabled) 
+                {
                     return;
+                }
                 if (_focused || _displayFocus) 
+                {
                     if (this._focusIndicator != null) 
+                    {
                         this.setState("out");
+                    }
+                }
                 else 
+                {
                     this.setState("out");
+                }
             }
             return;
         }
@@ -331,7 +409,9 @@ package scaleform.clik.controls
             var loc2:*=loc1 != null ? loc1.mouseIdx : 0;
             var loc3:*;
             if ((loc3 = loc1 != null ? loc1.buttonIdx : 0) != 0) 
+            {
                 return;
+            }
             this._mouseDown = this._mouseDown | 1 << loc2;
             if (this.enabled) 
             {
@@ -354,12 +434,16 @@ package scaleform.clik.controls
             var loc4:*=null;
             this._autoRepeatEvent = null;
             if (!this.enabled) 
+            {
                 return;
+            }
             var loc1:*=arg1 as scaleform.gfx.MouseEventEx;
             var loc2:*=loc1 != null ? loc1.mouseIdx : 0;
             var loc3:*;
             if ((loc3 = loc1 != null ? loc1.buttonIdx : 0) != 0) 
+            {
                 return;
+            }
             this._mouseDown = this._mouseDown ^ 1 << loc2;
             if (this._mouseDown == 0 && this._repeatTimer) 
             {
@@ -384,23 +468,37 @@ package scaleform.clik.controls
         {
             this._autoRepeatEvent = null;
             if (contains(arg1.target as flash.display.DisplayObject)) 
+            {
                 return;
+            }
             var loc1:*=arg1 as scaleform.gfx.MouseEventEx;
             var loc2:*=loc1 != null ? loc1.mouseIdx : 0;
             var loc3:*;
             if ((loc3 = loc1 != null ? loc1.buttonIdx : 0) != 0) 
+            {
                 return;
+            }
             if (stage) 
+            {
                 stage.removeEventListener(flash.events.MouseEvent.MOUSE_UP, this.handleReleaseOutside, false);
+            }
             this._mouseDown = this._mouseDown ^ 1 << loc2;
             dispatchEvent(new scaleform.clik.events.ButtonEvent(scaleform.clik.events.ButtonEvent.RELEASE_OUTSIDE));
             if (!this.enabled) 
+            {
                 return;
+            }
             if (this.lockDragStateChange) 
+            {
                 if (_focused || _displayFocus) 
+                {
                     this.setState(this.focusIndicator != null ? "kb_release" : "release");
+                }
                 else 
+                {
                     this.setState("kb_release");
+                }
+            }
             return;
         }
 
@@ -408,7 +506,9 @@ package scaleform.clik.controls
         {
             var loc1:*=null;
             if (!this.enabled) 
+            {
                 return;
+            }
             this.setState(this.focusIndicator != null ? "kb_release" : "release");
             if (this._repeatTimer) 
             {
@@ -432,7 +532,9 @@ package scaleform.clik.controls
         protected function handleClick(arg1:uint=0):void
         {
             if (this.toggle && (!this.selected || this.allowDeselect)) 
+            {
                 this.selected = !this.selected;
+            }
             return;
         }
 
@@ -475,7 +577,9 @@ package scaleform.clik.controls
             var loc1:*=this.getStatePrefixes();
             var loc2:*=this._stateMap[arg1];
             if (loc2 == null || loc2.length == 0) 
+            {
                 return;
+            }
             var loc3:*=loc1.length;
             var loc4:*=0;
             while (loc4 < loc3) 
@@ -507,9 +611,13 @@ package scaleform.clik.controls
         protected function updateAfterStateChange():void
         {
             if (!initialized) 
+            {
                 return;
+            }
             if (!(constraints == null) && !this.constraintsDisabled && !(this.textField == null)) 
+            {
                 constraints.updateElement("textField", this.textField);
+            }
             return;
         }
 
@@ -544,7 +652,9 @@ package scaleform.clik.controls
         protected override function preInitialize():void
         {
             if (!this.constraintsDisabled) 
+            {
                 constraints = new scaleform.clik.utils.Constraints(this, scaleform.clik.constants.ConstrainMode.COUNTER_SCALE);
+            }
             return;
         }
 
@@ -588,9 +698,13 @@ package scaleform.clik.controls
             super.enabled = arg1;
             mouseChildren = false;
             if (super.enabled) 
+            {
                 loc1 = this._focusIndicator == null && (_displayFocus || _focused) ? "over" : "up";
+            }
             else 
+            {
                 loc1 = "disabled";
+            }
             this.setState(loc1);
             return;
         }
@@ -620,7 +734,9 @@ package scaleform.clik.controls
         protected function handlePress(arg1:uint=0):void
         {
             if (!this.enabled) 
+            {
                 return;
+            }
             this._pressedByKeyboard = true;
             this.setState(this._focusIndicator != null ? "kb_down" : "down");
             if (this.autoRepeat && this._repeatTimer == null) 
@@ -655,17 +771,27 @@ package scaleform.clik.controls
         {
             var loc1:*=false;
             if (this._selected == arg1) 
+            {
                 return;
+            }
             this._selected = arg1;
             if (this.enabled) 
             {
                 if (_focused) 
+                {
                     if (this._pressedByKeyboard && !(this._focusIndicator == null)) 
+                    {
                         this.setState("kb_selecting");
+                    }
                     else 
+                    {
                         this.setState("selecting");
+                    }
+                }
                 else 
+                {
                     this.setState("toggle");
+                }
                 if (this.owner) 
                 {
                     loc1 = this._selected && !(this.owner == null) && this.checkOwnerFocused();
@@ -674,7 +800,9 @@ package scaleform.clik.controls
                 }
             }
             else 
+            {
                 this.setState("disabled");
+            }
             validateNow();
             dispatchEvent(new flash.events.Event(flash.events.Event.SELECT));
             return;
@@ -688,10 +816,14 @@ package scaleform.clik.controls
         public function set group(arg1:scaleform.clik.controls.ButtonGroup):void
         {
             if (this._group != null) 
+            {
                 this._group.removeButton(this);
+            }
             this._group = arg1;
             if (this._group != null) 
+            {
                 this._group.addButton(this);
+            }
             return;
         }
 
@@ -703,9 +835,13 @@ package scaleform.clik.controls
         public function set groupName(arg1:String):void
         {
             if (_inspector && arg1 == "") 
+            {
                 return;
+            }
             if (this._groupName == arg1) 
+            {
                 return;
+            }
             if (arg1 == null) 
             {
                 removeEventListener(flash.events.Event.ADDED, this.addToAutoGroup, false);
@@ -729,7 +865,9 @@ package scaleform.clik.controls
         public function set label(arg1:String):void
         {
             if (this._label == arg1) 
+            {
                 return;
+            }
             this._label = arg1;
             invalidateData();
             return;

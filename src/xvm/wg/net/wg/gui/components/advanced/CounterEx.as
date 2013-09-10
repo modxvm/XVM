@@ -24,7 +24,9 @@ package net.wg.gui.components.advanced
         public function set color(arg1:Number):void
         {
             if (arg1 == this._color) 
+            {
                 return;
+            }
             this._color = arg1;
             this.startAnim();
             return;
@@ -38,7 +40,9 @@ package net.wg.gui.components.advanced
         public function set letterSpacing(arg1:Number):void
         {
             if (arg1 == this._letterSpacing) 
+            {
                 return;
+            }
             this._letterSpacing = arg1;
             this.startAnim();
             return;
@@ -52,7 +56,9 @@ package net.wg.gui.components.advanced
         public function set number(arg1:Number):void
         {
             if (arg1 == this._number) 
+            {
                 return;
+            }
             this._number = arg1;
             this.startAnim();
             return;
@@ -61,7 +67,9 @@ package net.wg.gui.components.advanced
         public function set speed(arg1:Number):void
         {
             if (arg1 == this._speed) 
+            {
                 return;
+            }
             this._speed = arg1;
             this.startAnim();
             return;
@@ -75,7 +83,9 @@ package net.wg.gui.components.advanced
         public function set font(arg1:String):void
         {
             if (arg1 == this._font) 
+            {
                 return;
+            }
             this._font = arg1;
             this.startAnim();
             return;
@@ -89,7 +99,9 @@ package net.wg.gui.components.advanced
         public function set localizationSymbol(arg1:String):void
         {
             if (arg1 == this._localizationSymbol) 
+            {
                 return;
+            }
             this._localizationSymbol = arg1;
             return;
         }
@@ -160,11 +172,17 @@ package net.wg.gui.components.advanced
                 this.tween = null;
             }
             while (this.contener_mc.numChildren > 0) 
+            {
                 this.contener_mc.removeChildAt(0);
+            }
             if (this.lines) 
+            {
                 this.lines = this.lines.splice(0, this.lines.length);
+            }
             else 
+            {
                 this.lines = [];
+            }
             return;
         }
 
@@ -172,7 +190,9 @@ package net.wg.gui.components.advanced
         {
             var loc1:*=0;
             if (this.playAnim) 
+            {
                 this.tween = new scaleform.clik.motion.Tween(this.speed, this, {"tweenNum":this.number}, {"paused":false, "ease":fl.motion.easing.Cubic.easeOut, "onComplete":null});
+            }
             else 
             {
                 loc1 = 0;
@@ -197,7 +217,9 @@ package net.wg.gui.components.advanced
                     this.lines[loc1].gotoAndStop(this.checkTruePosition[loc1].num);
                 }
                 else if (!this.checkTruePosition[loc1].stand) 
+                {
                     this.lines[loc1].gotoAndStop(Math.floor(START_FRAME + ANIMATE_STEP_FRAMES * arg1 / Math.pow(10, loc1) % 10));
+                }
                 ++loc1;
             }
             return;
@@ -211,7 +233,9 @@ package net.wg.gui.components.advanced
         public function set tweenNum(arg1:Number):void
         {
             if (this._tweenNum == arg1) 
+            {
                 return;
+            }
             this._tweenNum = arg1;
             this.setLinesPosition(this._tweenNum);
             return;
@@ -243,7 +267,9 @@ package net.wg.gui.components.advanced
             this.tfMetrics = null;
             this.tween = null;
             if (this.checkTruePosition) 
+            {
                 this.checkTruePosition = this.checkTruePosition.splice(0, this.checkTruePosition.length);
+            }
             return;
         }
 
@@ -278,7 +304,9 @@ package net.wg.gui.components.advanced
                     loc1 = loc1 - Math.round(loc4.textWidth + this.letterSpacing);
                     loc4.x = loc1;
                     if (this.areSpaces(this.localizationSymbol)) 
+                    {
                         this.contener_mc.removeChild(loc4);
+                    }
                 }
                 loc3 = loc5.getComponent("NumberLine", flash.display.MovieClip);
                 this.contener_mc.addChild(loc3);
@@ -314,7 +342,9 @@ package net.wg.gui.components.advanced
         public function set playAnim(arg1:Boolean):void
         {
             if (arg1 == this._playAnim) 
+            {
                 return;
+            }
             this._playAnim = arg1;
             return;
         }
@@ -327,7 +357,9 @@ package net.wg.gui.components.advanced
         public function set size(arg1:Number):void
         {
             if (arg1 == this._size) 
+            {
                 return;
+            }
             this._size = arg1;
             this.startAnim();
             return;

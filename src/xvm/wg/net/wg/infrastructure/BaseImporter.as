@@ -21,7 +21,9 @@ package net.wg.infrastructure
                 var loc2:*=0;
                 var loc3:*=arg1;
                 for each (loc1 in loc3) 
+                {
                     trace("--" + loc1);
+                }
             }
             return;
         }

@@ -50,9 +50,13 @@ package net.wg.gui.components.windows
                 loc1 = this.moduleInfo.type;
                 this.moduleName.text = this.moduleInfo.name;
                 if (loc1 != net.wg.data.constants.FittingTypes.EQUIPMENT) 
+                {
                     this.moduleDescription.text = this.moduleInfo.description;
+                }
                 else 
+                {
                     this.moduleDescription.text = "";
+                }
                 this.moduleIcon.setValues(loc1, this.moduleInfo.level);
                 this.moduleIcon.extraIconSource = this.moduleInfo[net.wg.data.constants.ValObject.EXTRA_MODULE_INFO];
                 this.moduleParams.headerText = this.moduleInfo.parameters.headerText;
@@ -97,7 +101,9 @@ package net.wg.gui.components.windows
                 }
                 loc4 = this.moduleEffects.y + this.moduleEffects.height;
                 if (loc2 < loc4) 
+                {
                     loc2 = loc4;
+                }
                 this.closeBottomBtn.y = loc2 + 5;
                 height = loc2 + this.closeBottomBtn.height + 5;
             }
@@ -132,7 +138,9 @@ package net.wg.gui.components.windows
             {
                 removeChild(loc1);
                 if (!(loc1 is scaleform.clik.core.UIComponent)) 
+                {
                     continue;
+                }
                 (loc1 as scaleform.clik.core.UIComponent).dispose();
             }
             this.addedChildren.splice(0);

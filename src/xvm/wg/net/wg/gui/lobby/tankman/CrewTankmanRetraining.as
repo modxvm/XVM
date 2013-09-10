@@ -43,7 +43,9 @@ package net.wg.gui.lobby.tankman
         internal function checkEnabledResetBtn(arg1:int):void
         {
             if (this.model.currentVehicle) 
+            {
                 this.btnReset.enabled = !(arg1 == this.model.currentVehicle.innationID);
+            }
             this.currentSelectedInnationID = arg1;
             this.updateRetrainingButtons();
             return;
@@ -58,7 +60,9 @@ package net.wg.gui.lobby.tankman
         public function update(arg1:Object):void
         {
             if (arg1 == null) 
+            {
                 return;
+            }
             this.model = arg1 as net.wg.gui.lobby.tankman.PersonalCaseRetrainingModel;
             this.btnReset.enabled = !(this.model.currentVehicle == null);
             this.needUpdateData = true;
@@ -84,23 +88,35 @@ package net.wg.gui.lobby.tankman
             switch (loc4) 
             {
                 case net.wg.data.constants.VehicleTypes.LIGHT_TANK:
+                {
                     loc1 = new scaleform.clik.data.DataProvider(this.model.lightTanks);
                     break;
+                }
                 case net.wg.data.constants.VehicleTypes.MEDIUM_TANK:
+                {
                     loc1 = new scaleform.clik.data.DataProvider(this.model.mediumTanks);
                     break;
+                }
                 case net.wg.data.constants.VehicleTypes.HEAVY_TANK:
+                {
                     loc1 = new scaleform.clik.data.DataProvider(this.model.heavyTanks);
                     break;
+                }
                 case net.wg.data.constants.VehicleTypes.AT_SPG:
+                {
                     loc1 = new scaleform.clik.data.DataProvider(this.model.AT_SPG);
                     break;
+                }
                 case net.wg.data.constants.VehicleTypes.SPG:
+                {
                     loc1 = new scaleform.clik.data.DataProvider(this.model.SPG);
                     break;
+                }
                 default:
+                {
                     DebugUtils.LOG_DEBUG("ERROR unknown tank type");
                     break;
+                }
             }
             this.vehiclesDropdown.labelField = "userName";
             this.vehiclesDropdown.dataProvider = loc1;
@@ -119,10 +135,14 @@ package net.wg.gui.lobby.tankman
                     ++loc3;
                 }
                 if (!loc2) 
+                {
                     this.vehiclesDropdown.selectedIndex = 0;
+                }
             }
             else 
+            {
                 this.vehiclesDropdown.selectedIndex = 0;
+            }
             this.checkEnabledResetBtn(this.vehiclesDropdown.dataProvider[this.vehiclesDropdown.selectedIndex].innationID);
             this.currentSelectedCostIndex = -1;
             this.autoSelectRetrainingButtons();
@@ -136,7 +156,9 @@ package net.wg.gui.lobby.tankman
             while (loc1 < this.vehicleButtons.length) 
             {
                 if (this.currentSelectedVehicleType == this.vehicleButtons[loc1].type) 
+                {
                     this.vehicleButtons[loc1].selected = true;
+                }
                 ++loc1;
             }
             return;
@@ -151,7 +173,9 @@ package net.wg.gui.lobby.tankman
                 this.currentSelectedVehicleType = net.wg.gui.lobby.tankman.VehicleTypeButton(arg1.currentTarget).type;
                 loc1 = false;
                 if (this.model.currentVehicle) 
+                {
                     loc1 = this.currentSelectedVehicleType == this.model.currentVehicle.type;
+                }
                 loc2 = this.currentSelectedVehicleType == this.model.nativeVehicle.type;
                 this.currentSelectedInnationID = loc1 ? this.model.currentVehicle.innationID : this.model.nativeVehicle.innationID;
                 this.autoSelectVehicle(loc1 || loc2);
@@ -169,7 +193,9 @@ package net.wg.gui.lobby.tankman
         {
             var loc1:*=null;
             if (this.toolTipBindHash[arg1.currentTarget.name] != null) 
+            {
                 loc1 = this.toolTipBindHash[arg1.currentTarget.name];
+            }
             App.toolTipMgr.showComplex(loc1);
             return;
         }
@@ -257,7 +283,9 @@ package net.wg.gui.lobby.tankman
         {
             this.enableVehicleTypeButton();
             if (this.currentSelectedVehicleType == null) 
+            {
                 this.currentSelectedVehicleType = this.model.nativeVehicle.type;
+            }
             this.currentSelectedInnationID = this.model.nativeVehicle.innationID;
             this.autoSelectVehicleType();
             this.autoSelectVehicle();

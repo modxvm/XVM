@@ -53,9 +53,13 @@ package net.wg.gui.lobby.moduleInfo
                 loc2 + 25;
             }
             if (loc1 != "") 
+            {
                 loc1 = net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(App.utils.locale.makeString(TOOLTIPS.EQUIPMENT_EFFECT), "#cbad78", 14, "$TitleFont", true) + loc1;
+            }
             if (!(arg1.effectRestriction == "") && !(arg1.effectRestriction == "") && !(arg1.effectRestriction == undefined)) 
+            {
                 loc1 = loc1 + ("<br/>" + net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(App.utils.locale.makeString(arg1.effectRestriction), "#cbad78", 13, "$FieldFont") + net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(" ", "#cbad78", 28, "$FieldFont"));
+            }
             return loc1;
         }
 

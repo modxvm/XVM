@@ -53,9 +53,13 @@ package net.wg.gui.login.EULA
         internal function handleScroll(arg1:flash.events.Event):void
         {
             if (this.agreeCheckBox.enabled) 
+            {
                 return;
+            }
             if (textArea.textField.scrollV == textArea.textField.maxScrollV || !textArea.scrollBar.visible) 
+            {
                 this.agreeCheckBox.enabled = true;
+            }
             return;
         }
 

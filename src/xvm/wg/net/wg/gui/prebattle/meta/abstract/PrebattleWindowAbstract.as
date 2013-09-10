@@ -54,7 +54,9 @@ package net.wg.gui.prebattle.meta.abstract
         {
             super.handleInput(arg1);
             if (arg1.handled) 
+            {
                 return;
+            }
             if (arg1.details.code == flash.ui.Keyboard.F1 && arg1.details.value == scaleform.clik.constants.InputValue.KEY_UP) 
             {
                 showFAQWindowS();

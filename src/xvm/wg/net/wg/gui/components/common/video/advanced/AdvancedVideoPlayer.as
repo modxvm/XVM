@@ -18,20 +18,28 @@ package net.wg.gui.components.common.video.advanced
         {
             super.draw();
             if (isInvalid(PROGRESS_BAR_INVALID)) 
+            {
                 this.applyProgressBarRefreshing();
+            }
             if (isInvalid(this.ANIM_SHOW_INVALID)) 
             {
                 this.animationManager.show(this._animationSpeed);
                 invalidate(HIDE_DELAY_INVALID);
             }
             if (isInvalid(this.ANIM_HIDE_INVALID)) 
+            {
                 this.animationManager.hide(this._animationSpeed);
+            }
             if (isInvalid(HIDE_DELAY_INVALID)) 
             {
                 this.cancelHideDelay();
                 if (this._hideDelay > 0) 
+                {
                     if (App.utils) 
+                    {
                         App.utils.scheduler.scheduleTask(this.hideDelayTimerCompleteHandler, this._hideDelay);
+                    }
+                }
             }
             return;
         }
@@ -60,7 +68,9 @@ package net.wg.gui.components.common.video.advanced
             {
                 this._progressBar.dispose();
                 if (this._progressBar.parent) 
+                {
                     this._progressBar.parent.removeChild(this._progressBar);
+                }
                 this.progressBarController.dispose();
                 this.progressBarController = null;
                 this._progressBar = null;
@@ -112,7 +122,9 @@ package net.wg.gui.components.common.video.advanced
         internal function cancelHideDelay():void
         {
             if (App.utils) 
+            {
                 App.utils.scheduler.cancelTask(this.hideDelayTimerCompleteHandler);
+            }
             return;
         }
 
@@ -130,7 +142,9 @@ package net.wg.gui.components.common.video.advanced
             {
                 this._progressBar.dispose();
                 if (this._progressBar.parent) 
+                {
                     this._progressBar.parent.removeChild(this._progressBar);
+                }
                 this._progressBar = null;
             }
             if (this.progressBarController) 
@@ -153,7 +167,9 @@ package net.wg.gui.components.common.video.advanced
                 this.titleBar.closeBtn.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.closeButtonClickHandler);
                 this.titleBar.dispose();
                 if (this.titleBar.parent) 
+                {
                     this.titleBar.parent.removeChild(this.titleBar);
+                }
                 this.titleBar = null;
             }
             this.removeEventListener(net.wg.gui.components.common.video.VideoPlayerEvent.SUBTITLE_CHANGED, this.subtitleChangeHandler);
@@ -178,7 +194,9 @@ package net.wg.gui.components.common.video.advanced
         internal function mouseMoveHandler(arg1:flash.events.MouseEvent):void
         {
             if (App.utils.commons.isLeftButton(arg1)) 
+            {
                 invalidate(this.ANIM_SHOW_INVALID);
+            }
             return;
         }
 
@@ -191,13 +209,21 @@ package net.wg.gui.components.common.video.advanced
         {
             var loc1:*=null;
             if (arg1 == "" || arg1 == this._progressBarClassName) 
+            {
                 return;
+            }
             if (App.utils) 
+            {
                 loc1 = App.utils.classFactory.getClass(arg1);
+            }
             else 
+            {
                 loc1 = flash.utils.getDefinitionByName(arg1) as Class;
+            }
             if (loc1 == null) 
+            {
                 trace("Error: " + this + ", The class " + arg1 + " cannot be found in your library. Please ensure it is there.");
+            }
             else 
             {
                 this.progressBarClass = loc1;

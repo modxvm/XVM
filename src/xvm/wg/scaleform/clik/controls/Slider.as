@@ -37,7 +37,9 @@ package scaleform.clik.controls
         public override function handleInput(arg1:scaleform.clik.events.InputEvent):void
         {
             if (arg1.isDefaultPrevented()) 
+            {
                 return;
+            }
             var loc1:*=arg1.details;
             var loc2:*=loc1.controllerIndex;
             var loc3:*=loc1.value == scaleform.clik.constants.InputValue.KEY_DOWN || loc1.value == scaleform.clik.constants.InputValue.KEY_HOLD;
@@ -45,35 +47,45 @@ package scaleform.clik.controls
             switch (loc4) 
             {
                 case scaleform.clik.constants.NavigationCode.RIGHT:
+                {
                     if (loc3) 
                     {
                         this.value = this.value + this._snapInterval;
                         arg1.handled = true;
                     }
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.LEFT:
+                {
                     if (loc3) 
                     {
                         this.value = this.value - this._snapInterval;
                         arg1.handled = true;
                     }
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.HOME:
+                {
                     if (!loc3) 
                     {
                         this.value = this.minimum;
                         arg1.handled = true;
                     }
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.END:
+                {
                     if (!loc3) 
                     {
                         this.value = this.maximum;
                         arg1.handled = true;
                     }
                     break;
+                }
                 default:
+                {
                     break;
+                }
             }
             return;
         }
@@ -110,7 +122,9 @@ package scaleform.clik.controls
         protected override function draw():void
         {
             if (isInvalid(scaleform.clik.constants.InvalidationType.STATE)) 
+            {
                 gotoAndPlay(this.enabled ? _focused ? "focused" : "default" : "disabled");
+            }
             if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
             {
                 setActualSize(_width, _height);
@@ -127,9 +141,13 @@ package scaleform.clik.controls
             if (this.enabled) 
             {
                 if (!this._thumbPressed) 
+                {
                     this.thumb.displayFocus = !(_focused == 0);
+                }
                 if (!this._trackPressed) 
+                {
                     this.track.displayFocus = !(_focused == 0);
+                }
             }
             return;
         }
@@ -137,7 +155,9 @@ package scaleform.clik.controls
         protected function updateThumb():void
         {
             if (!this.enabled) 
+            {
                 return;
+            }
             var loc1:*=_width - this.offsetLeft - this.offsetRight;
             this.thumb.x = (this._value - this._minimum) / (this._maximum - this._minimum) * loc1 - this.thumb.width / 2 + this.offsetLeft;
             return;
@@ -150,11 +170,15 @@ package scaleform.clik.controls
             var loc3:*=_width - this.offsetLeft - this.offsetRight;
             var loc4:*=this.lockValue((loc2 - this.offsetLeft) / loc3 * (this._maximum - this._minimum) + this._minimum);
             if (this.value == loc4) 
+            {
                 return;
+            }
             this._value = loc4;
             this.updateThumb();
             if (this.liveDragging) 
+            {
                 dispatchEvent(new scaleform.clik.events.SliderEvent(scaleform.clik.events.SliderEvent.VALUE_CHANGE, false, true, this._value));
+            }
             return;
         }
 
@@ -163,7 +187,9 @@ package scaleform.clik.controls
             stage.removeEventListener(flash.events.MouseEvent.MOUSE_MOVE, this.doDrag, false);
             stage.removeEventListener(flash.events.MouseEvent.MOUSE_UP, this.endDrag, false);
             if (!this.liveDragging) 
+            {
                 dispatchEvent(new scaleform.clik.events.SliderEvent(scaleform.clik.events.SliderEvent.VALUE_CHANGE, false, true, this._value));
+            }
             this._trackDragMouseIndex = undefined;
             this._thumbPressed = false;
             this._trackPressed = false;
@@ -177,10 +203,14 @@ package scaleform.clik.controls
             var loc1:*=_width - this.offsetLeft - this.offsetRight;
             var loc2:*=this.lockValue((arg1.localX * scaleX - this.offsetLeft) / loc1 * (this._maximum - this._minimum) + this._minimum);
             if (this.value == loc2) 
+            {
                 return;
+            }
             this.value = loc2;
             if (!this.liveDragging) 
+            {
                 dispatchEvent(new scaleform.clik.events.SliderEvent(scaleform.clik.events.SliderEvent.VALUE_CHANGE, false, true, this._value));
+            }
             this._trackDragMouseIndex = 0;
             this._dragOffset = {"x":0};
             return;
@@ -190,7 +220,9 @@ package scaleform.clik.controls
         {
             arg1 = Math.max(this._minimum, Math.min(this._maximum, arg1));
             if (!this.snapping) 
+            {
                 return arg1;
+            }
             var loc1:*=Math.round(arg1 / this.snapInterval) * this.snapInterval;
             return loc1;
         }
@@ -229,7 +261,9 @@ package scaleform.clik.controls
         public override function set enabled(arg1:Boolean):void
         {
             if (arg1 == super.enabled) 
+            {
                 return;
+            }
             super.enabled = arg1;
             var loc1:*;
             this.track.enabled = loc1 = arg1;

@@ -39,7 +39,9 @@ package net.wg.gui.lobby.training
         public override function set enabled(arg1:Boolean):void
         {
             if (arg1 == super.enabled) 
+            {
                 return;
+            }
             super.enabled = arg1;
             this.voiceChatDD.enabled = arg1;
             this.textField.enabled = arg1;
@@ -49,7 +51,9 @@ package net.wg.gui.lobby.training
         public function setCanChangeArenaVOIP(arg1:Boolean):void
         {
             if (this.canChangeArenaVOIP == arg1) 
+            {
                 return;
+            }
             this.canChangeArenaVOIP = arg1;
             invalidate(ArenaVoipSettings.CHANGE_ARENA_VOIP);
             return;
@@ -65,7 +69,9 @@ package net.wg.gui.lobby.training
         internal function handleChange(arg1:scaleform.clik.events.ListEvent):void
         {
             if (this.canChangeArenaVOIP) 
+            {
                 dispatchEvent(new net.wg.gui.events.ArenaVoipSettingsEvent(net.wg.gui.events.ArenaVoipSettingsEvent.SELECT_USE_COMMON_VOICE_CHAT, this.voiceChatDD.selectedIndex));
+            }
             return;
         }
 
@@ -78,19 +84,31 @@ package net.wg.gui.lobby.training
                 this.textField.visible = !this.canChangeArenaVOIP;
             }
             if (isInvalid(ArenaVoipSettings.USE_ARENA_VOIP)) 
+            {
                 if (this.canChangeArenaVOIP) 
+                {
                     this.voiceChatDD.selectedIndex = this.useArenaVoip;
+                }
                 else 
                 {
                     if (this.useArenaVoip != -1) 
+                    {
                         if (this.useArenaVoip != 0) 
+                        {
                             this.textField.label = MENU.TRAINING_INFO_USESEPARATEVOIPCHAT;
+                        }
                         else 
+                        {
                             this.textField.label = MENU.TRAINING_INFO_USECOMMONVOICECHAT;
+                        }
+                    }
                     else 
+                    {
                         this.textField.label = MENU.TRAINING_INFO_NOTUSECHAT;
+                    }
                     this.textField.validateNow();
                 }
+            }
             return;
         }
 

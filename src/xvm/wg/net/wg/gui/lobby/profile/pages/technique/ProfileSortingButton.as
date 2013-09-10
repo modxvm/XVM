@@ -27,7 +27,9 @@ package net.wg.gui.lobby.profile.pages.technique
         {
             var loc1:*=net.wg.gui.components.controls.UILoaderAlt(arg1.target);
             if (arg1.target == mcAscendingIcon) 
+            {
                 loc1.y = _height - loc1.height;
+            }
             loc1.x = (_width - loc1.width) / 2;
             isSortIconLoadingCompete = true;
             invalidate();
@@ -65,10 +67,16 @@ package net.wg.gui.lobby.profile.pages.technique
                 this.labelField.height = _height;
             }
             if (scaleform.clik.constants.InvalidationType.DATA) 
+            {
                 if (!(_label == null) && !(_label == "") && !(this.labelField == null)) 
+                {
                     this.labelField.text = _label;
+                }
                 else 
+                {
                     this.labelField.text = "";
+                }
+            }
             return;
         }
 

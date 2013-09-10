@@ -19,14 +19,18 @@ package net.wg.gui.lobby.profile.pages
         {
             super.draw();
             if (isInvalid(net.wg.gui.lobby.profile.components.ResizableInvalidationTypes.CURRENT_DIMENSION_INVALID) && this.currentDimension) 
+            {
                 this.applyResizing();
+            }
             return;
         }
 
         protected function applyResizing():void
         {
             if (this.layoutManager) 
+            {
                 this.layoutManager.setDimension(this.currentDimension.x, this.currentDimension.y);
+            }
             this.x = Math.round(this.currentDimension.x / 2 - this._centerOffset);
             return;
         }
@@ -34,7 +38,9 @@ package net.wg.gui.lobby.profile.pages
         public function setViewSize(arg1:Number, arg2:Number):void
         {
             if (!this.currentDimension) 
+            {
                 this.currentDimension = new flash.geom.Point();
+            }
             this.currentDimension.x = arg1;
             this.currentDimension.y = arg2;
             invalidate(net.wg.gui.lobby.profile.components.ResizableInvalidationTypes.CURRENT_DIMENSION_INVALID);

@@ -21,12 +21,16 @@ package
         {
             var loc2:*=null;
             if (arg1 == null) 
+            {
                 arg1 = App.stage;
+            }
             var loc1:*=0;
             while (loc1 < arg1.numChildren) 
             {
                 if ((loc2 = arg1.getChildAt(loc1)) is flash.display.DisplayObjectContainer) 
+                {
                     traceDisplayList(flash.display.DisplayObjectContainer(loc2));
+                }
                 ++loc1;
             }
             return;
@@ -72,7 +76,9 @@ package
             trace("[" + arguments[0] + "] " + String(arguments.slice(1)));
             var loc1:*=[LOG];
             while (arguments.length) 
+            {
                 loc1.push(String(arguments.shift()));
+            }
             App.environment.call.apply(null, loc1);
             return;
         }
@@ -81,7 +87,9 @@ package
         {
             var loc1:*=[LOG_FMT];
             while (arguments.length) 
+            {
                 loc1.push(String(arguments.shift()));
+            }
             App.environment.call.apply(null, loc1);
             return;
         }

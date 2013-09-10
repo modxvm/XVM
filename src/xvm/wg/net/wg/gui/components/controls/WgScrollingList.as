@@ -32,7 +32,9 @@ package net.wg.gui.components.controls
                 loc4.setListData(loc6);
                 loc4.setData(arg1[loc3]);
                 if (!this.showEmptyItems)
+                {
                     scaleform.clik.core.UIComponent(loc4).visible = !(arg1[loc3] == null);
+                }
                 loc4.validateNow();
                 ++loc3;
             }
@@ -48,7 +50,9 @@ package net.wg.gui.components.controls
                 _dataProvider = null;
             }
             if (_scrollBar)
+            {
                 _scrollBar.dispose();
+            }
             thumbOffset = null;
             _padding = null;
             super.dispose();
@@ -71,10 +75,14 @@ package net.wg.gui.components.controls
                     cleanUpRenderer(loc3);
                     loc4 = loc3 as net.wg.infrastructure.interfaces.entity.IDisposable;
                     if (loc4)
+                    {
                         loc4.dispose();
+                    }
                     loc5 = loc3 as flash.display.DisplayObject;
                     if (container.contains(loc5))
+                    {
                         container.removeChild(loc5);
+                    }
                 }
                 _renderers.splice(loc2, 1);
                 --loc2;

@@ -24,7 +24,9 @@ package net.wg.gui.lobby.settings.components
                 this.finishFrame = 1;
             }
             if (hasEventListener(flash.events.Event.ENTER_FRAME)) 
+            {
                 this.removeEventListener(flash.events.Event.ENTER_FRAME, this.anim);
+            }
             this.addEventListener(flash.events.Event.ENTER_FRAME, this.anim);
             return;
         }
@@ -33,7 +35,9 @@ package net.wg.gui.lobby.settings.components
         {
             this.gotoAndStop(this.currentFrame + this.step);
             if (this.currentFrame == this.finishFrame) 
+            {
                 this.removeEventListener(flash.events.Event.ENTER_FRAME, this.anim);
+            }
             return;
         }
 

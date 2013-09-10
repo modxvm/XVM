@@ -20,7 +20,9 @@ package net.wg.gui.tutorial.controls
             var loc1:*=this.phaseFrame;
             this.lineMC.gotoAndStop(arg1);
             if (loc1 != this.phaseFrame) 
+            {
                 this.highlight();
+            }
             return;
         }
 

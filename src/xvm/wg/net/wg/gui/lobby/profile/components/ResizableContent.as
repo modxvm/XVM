@@ -15,9 +15,13 @@ package net.wg.gui.lobby.profile.components
         {
             super.draw();
             if (isInvalid(net.wg.gui.lobby.profile.components.ResizableInvalidationTypes.CURRENT_DIMENSION_INVALID) && this.currentDimension) 
+            {
                 this.applyResizing();
+            }
             if (isInvalid(net.wg.gui.lobby.profile.components.ResizableInvalidationTypes.ACTIVE_INVALID)) 
+            {
                 this.applyActivation();
+            }
             return;
         }
 
@@ -34,7 +38,9 @@ package net.wg.gui.lobby.profile.components
         public function setViewSize(arg1:Number, arg2:Number):void
         {
             if (!this.currentDimension) 
+            {
                 this.currentDimension = new flash.geom.Point();
+            }
             this.currentDimension.x = arg1;
             this.currentDimension.y = arg2;
             invalidate(net.wg.gui.lobby.profile.components.ResizableInvalidationTypes.CURRENT_DIMENSION_INVALID);

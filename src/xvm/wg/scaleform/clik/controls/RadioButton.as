@@ -14,7 +14,9 @@ package scaleform.clik.controls
             this.toggle = true;
             allowDeselect = false;
             if (_group == null) 
+            {
                 this.groupName = DEFAULT_GROUPNAME;
+            }
             return;
         }
 

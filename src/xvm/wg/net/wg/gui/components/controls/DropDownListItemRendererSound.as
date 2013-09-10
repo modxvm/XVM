@@ -23,7 +23,9 @@ package net.wg.gui.components.controls
         protected override function updateText():void
         {
             if (!(_label == null) && !(textField == null)) 
+            {
                 textField.htmlText = _label;
+            }
             return;
         }
 
@@ -31,6 +33,7 @@ package net.wg.gui.components.controls
         {
             var loc1:*=null;
             if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+            {
                 if (enabled) 
                 {
                     loc1 = new flash.geom.Point(mouseX, mouseY);
@@ -41,6 +44,7 @@ package net.wg.gui.components.controls
                         dispatchEvent(new flash.events.MouseEvent(flash.events.MouseEvent.ROLL_OVER));
                     }
                 }
+            }
             super.draw();
             return;
         }
@@ -48,7 +52,9 @@ package net.wg.gui.components.controls
         protected override function configUI():void
         {
             if (this.focusElement) 
+            {
                 focusIndicator = this.focusElement;
+            }
             buttonMode = true;
             super.configUI();
             return;

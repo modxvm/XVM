@@ -146,9 +146,13 @@ package net.wg.gui.lobby.battleResults
                         this.vehicleIcon.filters = [this.getDimmFilter()];
                     }
                     else 
+                    {
                         this.vehicleIcon.filters = [];
+                    }
                     if (data.damageDealt > 0) 
+                    {
                         this.damageLbl.text = App.utils.locale.integer(data.damageDealt);
+                    }
                     if (data.squadID > 0) 
                     {
                         this.sqadIcon.visible = true;
@@ -165,7 +169,9 @@ package net.wg.gui.lobby.battleResults
                     {
                         this.fragsLbl.htmlText = data.kills;
                         if (this.fragsLbl.text == "0") 
+                        {
                             this.fragsLbl.text = " ";
+                        }
                     }
                     if (data.tkills > 0) 
                     {
@@ -205,7 +211,9 @@ package net.wg.gui.lobby.battleResults
             defaultColor = arg2;
             result = undefined;
             try 
+            {
                 result = App.colorSchemeMgr.getRGB(alias);
+            }
             catch (e:Error)
             {
                 result = defaultColor;
@@ -213,7 +221,9 @@ package net.wg.gui.lobby.battleResults
             finally
             {
                 if (!result) 
+                {
                     result = defaultColor;
+                }
             }
             return result;
         }

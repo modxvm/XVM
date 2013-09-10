@@ -76,7 +76,9 @@ package net.wg.gui.components.carousels
                 }
             }
             else 
+            {
                 this.setCursorListeners();
+            }
             return;
         }
 
@@ -94,7 +96,9 @@ package net.wg.gui.components.carousels
         {
             super.populateData(arg1);
             if (_renderers.length > countVisibleSlots) 
+            {
                 this.initPosition();
+            }
             return;
         }
 

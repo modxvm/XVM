@@ -43,7 +43,9 @@ package net.wg.gui.lobby.hangar
         public function set text(arg1:String):void
         {
             if (this._text == arg1) 
+            {
                 return;
+            }
             this._text = arg1;
             invalidate(INVALIDATE_TEXT);
             return;
@@ -53,20 +55,36 @@ package net.wg.gui.lobby.hangar
         {
             super.draw();
             if (isInvalid(INVALIDATE_TEXT)) 
+            {
                 if (this.tfField != null) 
+                {
                     this.tfField.htmlText = this._text;
+                }
+            }
             if (isInvalid(INVALIDATE_VALUE)) 
+            {
                 if (this.paramField != null) 
+                {
                     this.paramField.text = this._value;
+                }
+            }
             if (this.tfField != null) 
             {
                 if (super.enabled) 
+                {
                     if (_selected) 
+                    {
                         this.tfField.styleSheet = this._styles.selected;
+                    }
                     else 
+                    {
                         this.tfField.styleSheet = this._styles.normal;
+                    }
+                }
                 else 
+                {
                     this.tfField.styleSheet = this._styles.disabled;
+                }
                 this.tfField.htmlText = this._text;
             }
             return;
@@ -95,7 +113,9 @@ package net.wg.gui.lobby.hangar
         public function set param(arg1:String):void
         {
             if (this._value == arg1) 
+            {
                 return;
+            }
             this._value = arg1;
             invalidate(INVALIDATE_VALUE);
             return;
@@ -115,7 +135,9 @@ package net.wg.gui.lobby.hangar
         public override function set selected(arg1:Boolean):void
         {
             if (_selected == arg1) 
+            {
                 return;
+            }
             _selected = arg1;
             validateNow();
             return;
@@ -127,9 +149,13 @@ package net.wg.gui.lobby.hangar
             super.enabled = arg1;
             mouseChildren = false;
             if (super.enabled) 
+            {
                 loc1 = "normal";
+            }
             else 
+            {
                 loc1 = "disabled";
+            }
             setState(loc1);
             return;
         }

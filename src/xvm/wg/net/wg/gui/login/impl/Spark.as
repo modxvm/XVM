@@ -38,7 +38,9 @@ package net.wg.gui.login.impl
                 this.sparkAnimation.addFrameScript(loc1, this.sparkAnimationDispatch);
             }
             else 
+            {
                 addEventListener(flash.events.Event.ADDED_TO_STAGE, this.startAnimation, false);
+            }
             return;
         }
 
@@ -52,9 +54,13 @@ package net.wg.gui.login.impl
         {
             var loc1:*=1;
             if (Math.random() > 0.75) 
+            {
                 loc1 = randRange(0.7, 1);
+            }
             else 
+            {
                 loc1 = randRange(0.2, 0.4);
+            }
             x = Math.floor(randRange(this._zone.x, this._zone.width));
             y = Math.floor(randRange(this._zone.y, this._zone.height));
             var loc2:*;

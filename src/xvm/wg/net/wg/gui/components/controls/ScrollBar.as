@@ -33,7 +33,9 @@ package net.wg.gui.components.controls
             var loc1:*=arg1 as scaleform.gfx.MouseEventEx;
             var loc2:*=loc1 != null ? loc1.buttonIdx : 0;
             if (loc2 != 0) 
+            {
                 return;
+            }
             super.handleThumbPress(arg1);
             return;
         }
@@ -43,7 +45,9 @@ package net.wg.gui.components.controls
             var loc1:*=arg1 as scaleform.gfx.MouseEventEx;
             var loc2:*=loc1 != null ? loc1.buttonIdx : 0;
             if (loc2 != 0) 
+            {
                 return;
+            }
             super.handleTrackPress(arg1);
             return;
         }
@@ -51,7 +55,9 @@ package net.wg.gui.components.controls
         protected override function handleTrackClick(arg1:scaleform.clik.events.ButtonEvent):void
         {
             if (arg1.buttonIdx != 0) 
+            {
                 return;
+            }
             super.handleTrackClick(arg1);
             return;
         }

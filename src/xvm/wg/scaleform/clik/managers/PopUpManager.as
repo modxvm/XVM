@@ -17,7 +17,9 @@ package scaleform.clik.managers
         public static function init(arg1:flash.display.Stage):void
         {
             if (initialized) 
+            {
                 return;
+            }
             scaleform.clik.managers.PopUpManager._stage = arg1;
             _defaultPopupCanvas = new flash.display.MovieClip();
             _defaultPopupCanvas.addEventListener(flash.events.Event.REMOVED, handleRemovePopup, false, 0, true);
@@ -41,12 +43,16 @@ package scaleform.clik.managers
             var loc1:*;
             (loc1 = App.utils.events).disableDisposingForObj(arg1);
             if (arg1.parent) 
+            {
                 arg1.parent.removeChild(arg1);
+            }
             handleStageAddedEvent(null);
             _defaultPopupCanvas.addChild(arg1);
             loc1.enableDisposingForObj(arg1);
             if (!arg4) 
+            {
                 arg4 = _stage;
+            }
             var loc2:*=new flash.geom.Point(arg2, arg3);
             loc2 = arg4.localToGlobal(loc2);
             arg1.x = loc2.x;
@@ -64,9 +70,13 @@ package scaleform.clik.managers
                 return;
             }
             if (_modalMc) 
+            {
                 _defaultPopupCanvas.removeChild(_modalMc);
+            }
             if (arg1 == null) 
+            {
                 return;
+            }
             if (arg4 == null) 
             {
                 (arg4 = new flash.display.Sprite()).graphics.lineStyle(0, 16777215, 0);
@@ -103,7 +113,9 @@ package scaleform.clik.managers
         {
             _modalBg.removeEventListener(flash.events.Event.REMOVED_FROM_STAGE, handleRemoveModalMc, false);
             if (_modalBg) 
+            {
                 _defaultPopupCanvas.removeChild(_modalBg);
+            }
             _modalMc = null;
             _modalBg = null;
             scaleform.gfx.FocusManager.setModalClip(null);
@@ -114,7 +126,9 @@ package scaleform.clik.managers
         protected static function removeAddedToStageListener():void
         {
             if (_defaultPopupCanvas.numChildren == 0 && _modalMc == null) 
+            {
                 _stage.removeEventListener(flash.events.Event.ADDED, scaleform.clik.managers.PopUpManager.handleStageAddedEvent, false);
+            }
             return;
         }
 

@@ -67,30 +67,40 @@ package net.wg.gui.components.advanced
         internal function setConnectorPosition():void
         {
             if (this.connector == null) 
+            {
                 return;
+            }
             this.connector.height = this._connectorLength;
             var loc1:*=this._direction;
             switch (loc1) 
             {
                 case "T":
+                {
                     this.connector.rotation = 180;
                     this.connector.x = this._borderWidth >> 1;
                     this.connector.y = 0;
                     break;
+                }
                 case "R":
+                {
                     this.connector.rotation = -90;
                     this.connector.x = this._borderWidth;
                     this.connector.y = (this._borderHeight >> 1) - (this.connector.height >> 1);
                     break;
+                }
                 case "B":
+                {
                     this.connector.x = this._borderWidth >> 1;
                     this.connector.y = this._borderHeight;
                     break;
+                }
                 case "L":
+                {
                     this.connector.rotation = 90;
                     this.connector.x = 0;
                     this.connector.y = (this._borderHeight >> 1) - (this.connector.height >> 1);
                     break;
+                }
             }
             return;
         }
@@ -98,40 +108,50 @@ package net.wg.gui.components.advanced
         internal function setTextFieldPosition():void
         {
             if (this.textField == null) 
+            {
                 return;
+            }
             this.textField.wordWrap = true;
             var loc1:*=new flash.text.TextFormat();
             var loc2:*=this._direction;
             switch (loc2) 
             {
                 case "T":
+                {
                     this.textField.autoSize = flash.text.TextFieldAutoSize.CENTER;
                     loc1.align = flash.text.TextFormatAlign.CENTER;
                     this.textField.text = this._text;
                     this.textField.x = (this._borderWidth >> 1) - (this.textField.width >> 1);
                     this.textField.y = -(this.connector.height + this.textField.textHeight + 2);
                     break;
+                }
                 case "R":
+                {
                     this.textField.autoSize = flash.text.TextFieldAutoSize.LEFT;
                     loc1.align = flash.text.TextFormatAlign.LEFT;
                     this.textField.text = this._text;
                     this.textField.x = this._borderWidth + this.connector.width;
                     this.textField.y = (this._borderHeight >> 1) - (this.textField.textHeight >> 1) - 4;
                     break;
+                }
                 case "B":
+                {
                     this.textField.autoSize = flash.text.TextFieldAutoSize.CENTER;
                     loc1.align = flash.text.TextFormatAlign.CENTER;
                     this.textField.text = this._text;
                     this.textField.x = (this._borderWidth >> 1) - (this.textField.width >> 1);
                     this.textField.y = this._borderHeight + this.connector.height + 2;
                     break;
+                }
                 case "L":
+                {
                     this.textField.autoSize = flash.text.TextFieldAutoSize.RIGHT;
                     loc1.align = flash.text.TextFormatAlign.RIGHT;
                     this.textField.text = this._text;
                     this.textField.x = -(this.connector.width + this.textField.width);
                     this.textField.y = (this._borderHeight >> 1) - (this.textField.textHeight >> 1) - 4;
                     break;
+                }
             }
             this.textField.setTextFormat(loc1);
             return;

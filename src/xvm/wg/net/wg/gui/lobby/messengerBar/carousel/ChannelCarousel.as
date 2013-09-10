@@ -155,7 +155,9 @@ package net.wg.gui.lobby.messengerBar.carousel
             var loc10:*=null;
             var loc11:*=false;
             if (arg1.eventPhase != flash.events.EventPhase.BUBBLING_PHASE) 
+            {
                 return;
+            }
             var loc1:*=this.findIndexByClientID(arg1.clientID);
             if (loc1 > -1) 
             {
@@ -177,14 +179,22 @@ package net.wg.gui.lobby.messengerBar.carousel
                     loc9 = (loc8 = loc2.x) + loc2.width - loc5;
                     loc10 = new flash.geom.Point(0, -loc4.height);
                     if (loc7 < loc4.height) 
+                    {
                         loc10.y = this.height - App.appHeight - net.wg.gui.lobby.messengerBar.WindowOffsetsInBar.WINDOW_TOP_OFFSET;
+                    }
                     loc11 = this.list.columnCount < this._dataProvider.length;
                     if (loc8 + loc5 < loc6) 
+                    {
                         loc10.x = loc11 ? Math.round(loc8 + this.scrollBar.upArrow.width + net.wg.gui.lobby.messengerBar.WindowOffsetsInBar.WINDOW_LEFT_OFFSET) : loc8 - net.wg.gui.lobby.messengerBar.WindowOffsetsInBar.CHANNEL_WINDOW_LEFT_OFFSET;
+                    }
                     else if (loc9 > 0) 
+                    {
                         loc10.x = loc11 ? Math.round(loc9 + this.scrollBar.upArrow.width + net.wg.gui.lobby.messengerBar.WindowOffsetsInBar.WINDOW_RIGHT_OFFSET) : loc9 + net.wg.gui.lobby.messengerBar.WindowOffsetsInBar.CHANNEL_WINDOW_RIGHT_OFFSET;
+                    }
                     else 
+                    {
                         loc10.x = loc6 - loc5 - x >> 1;
+                    }
                     loc10 = localToGlobal(loc10);
                     loc4.x = Math.round(loc10.x);
                     loc4.y = Math.round(loc10.y);
@@ -197,7 +207,9 @@ package net.wg.gui.lobby.messengerBar.carousel
         {
             var loc1:*=net.wg.gui.components.windows.Window(arg1.window);
             if (loc1.visible != arg2) 
+            {
                 loc1.visible = arg2;
+            }
             return;
         }
 

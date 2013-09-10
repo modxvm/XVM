@@ -66,9 +66,13 @@ package net.wg.gui.components.tooltips
                     }
                 }
                 else if (loc1 < loc7.width) 
+                {
                     loc1 = this.contentList[loc5].width;
+                }
                 if (loc2 < loc7.y + loc7.textHeight) 
+                {
                     loc2 = loc7.y + loc7.textHeight;
+                }
                 ++loc5;
             }
             loc1 = loc1 + 5;
@@ -92,6 +96,7 @@ package net.wg.gui.components.tooltips
             switch (loc7) 
             {
                 case "string":
+                {
                     (loc6 = new flash.text.TextField()).x = this.contLeftMargin;
                     loc6.y = loc1;
                     loc6.width = loc5;
@@ -102,6 +107,7 @@ package net.wg.gui.components.tooltips
                     this.contentList.push(loc6);
                     addChild(loc6);
                     break;
+                }
             }
             return;
         }
@@ -116,11 +122,17 @@ package net.wg.gui.components.tooltips
             arg1.embedFonts = true;
             var loc1:*;
             if ((loc1 = arg2.toLowerCase().indexOf("face=\"", 0)) > 0) 
+            {
                 arg3.font = arg2.slice(loc1 + 6, arg2.indexOf("\"", loc1 + 6));
+            }
             else 
+            {
                 arg3.font = "$TextFont";
+            }
             if (arg2.slice(0, 1) != "#") 
+            {
                 arg1.htmlText = "<font color=\"" + COLOR_HEADER + "\" size=\"12\">" + arg2 + "</font>";
+            }
             else 
             {
                 arg1.htmlText = arg2;

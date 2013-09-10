@@ -18,7 +18,9 @@ package net.wg.gui.lobby.window
         {
             super.window = arg1;
             if (arg1) 
+            {
                 window.title = MENU.EXCHANGE_TITLE;
+            }
             return;
         }
 

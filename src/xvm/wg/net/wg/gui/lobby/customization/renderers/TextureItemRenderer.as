@@ -17,12 +17,16 @@ package net.wg.gui.lobby.customization.renderers
             var loc3:*=null;
             var loc4:*=NaN;
             if (demoMode == net.wg.gui.lobby.customization.renderers.CustomizationItemRenderer.DEMO_NEW) 
+            {
                 arg1 = "up";
+            }
             super.setState(arg1);
             var loc1:*=getStatePrefixes();
             var loc2:*=_stateMap[arg1];
             if (loc2 == null || loc2.length == 0) 
+            {
                 return;
+            }
             do 
             {
                 loc3 = loc1.pop().toString();

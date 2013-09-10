@@ -24,7 +24,9 @@ package net.wg.gui.lobby.hangar.crew
                 loc1 = net.wg.gui.lobby.hangar.crew.SkillsVO(arg1);
                 this.inprogress = loc1.inprogress == true;
                 if (loc1.name && loc1.desc) 
+                {
                     this._tooltipID = loc1.name + "\n\n" + loc1.desc;
+                }
                 invalidateData();
             }
             return;

@@ -96,9 +96,13 @@ package net.wg.gui.lobby.questsWindow
             var loc4:*=this._tanks.length * loc1;
             var loc5:*=0;
             if (loc4 > 0) 
+            {
                 loc5 = loc2 + loc4 + AFTER_TANKS_PADDING;
+            }
             else 
+            {
                 loc5 = loc2 + ONLY_TEXT_PADDING;
+            }
             setSize(this.width, loc5);
             return;
         }

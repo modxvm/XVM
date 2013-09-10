@@ -29,7 +29,9 @@ package net.wg.gui.lobby.tankman
             while (loc2 >= 0) 
             {
                 if (this.getChildAt(loc2) is net.wg.infrastructure.interfaces.entity.IDisposable) 
+                {
                     net.wg.infrastructure.interfaces.entity.IDisposable(this.getChildAt(loc2)).dispose();
+                }
                 this.removeChildAt(loc2);
                 --loc2;
             }
@@ -39,12 +41,18 @@ package net.wg.gui.lobby.tankman
         public function setData(arg1:Array):void
         {
             if (!App.instance || arg1 == null) 
+            {
                 return;
+            }
             this.data = arg1;
             if (this.isElementsCreated) 
+            {
                 this.updateBlocks();
+            }
             else 
+            {
                 this.initializeBlocks();
+            }
             return;
         }
 
@@ -59,7 +67,9 @@ package net.wg.gui.lobby.tankman
             {
                 loc3 = this.getChildAt(loc2);
                 if (this.getChildAt(loc2) is flash.display.Shape == false) 
+                {
                     this.removeChildAt(loc2);
+                }
                 --loc2;
             }
             this.initializeBlocks();
@@ -84,9 +94,13 @@ package net.wg.gui.lobby.tankman
         {
             var loc1:*=this.classFactory(net.wg.data.constants.Linkages.PERSONAL_CASE_TITLE_BLOCK);
             if (scaleform.gfx.Extensions.isScaleform) 
+            {
                 loc1["blockName"].text = MENU.profile_stats_blocks(arg1.label);
+            }
             else 
+            {
                 loc1["blockName"].text = arg1.label;
+            }
             loc1.y = this.paddingY;
             this.addChild(loc1);
             this.paddingY = this.paddingY + PADDING_BETWEEN_BLOCKS;

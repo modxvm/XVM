@@ -32,9 +32,13 @@ package net.wg.gui.lobby.tankman
             if (isInvalid(this.UPDATE_DATA)) 
             {
                 if (this.imageUrl) 
+                {
                     this.iconRank.source = this.imageUrl;
+                }
                 if (enabled != this.isEnabled) 
+                {
                     enabled = this.isEnabled;
+                }
             }
             return;
         }

@@ -64,7 +64,9 @@ package net.wg.gui.components.advanced
         public function set showLabel(arg1:Boolean):void
         {
             if (this._showLabel == arg1) 
+            {
                 return;
+            }
             this._showLabel = arg1;
             this.textField.visible = this._showLabel;
             invalidate();
@@ -79,7 +81,9 @@ package net.wg.gui.components.advanced
         public function set margin(arg1:Number):void
         {
             if (this._margin == arg1) 
+            {
                 return;
+            }
             this._margin = arg1;
             invalidate();
             return;
@@ -88,9 +92,13 @@ package net.wg.gui.components.advanced
         protected override function draw():void
         {
             if (this.showLabel) 
+            {
                 this.line.x = this.textField.x + this.textField.textWidth + this.margin;
+            }
             else 
+            {
                 this.line.x = 10;
+            }
             this.line.width = this.bg.width - 10 - this.line.x + 1;
             return;
         }

@@ -45,29 +45,39 @@ package net.wg.gui.lobby.settings
                     switch (loc12) 
                     {
                         case net.wg.gui.lobby.settings.SettingsConfig.TYPE_CHECKBOX:
+                        {
                             (loc6 = net.wg.gui.components.controls.CheckBox(this[loc1 + loc4.type])).selected = loc4.current;
                             loc6.enabled = loc5;
                             loc6.addEventListener(flash.events.Event.SELECT, this.onCheckBoxSelected);
                             break;
+                        }
                         case net.wg.gui.lobby.settings.SettingsConfig.TYPE_SLIDER:
+                        {
                             (loc7 = net.wg.gui.components.controls.Slider(this[loc1 + loc4.type])).value = loc4.current;
                             loc7.enabled = loc5;
                             loc7.addEventListener(scaleform.clik.events.SliderEvent.VALUE_CHANGE, this.onSliderValueChanged);
                             if (loc4.hasValue && this[loc1 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_VALUE]) 
+                            {
                                 (loc8 = this[loc1 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_VALUE]).text = loc4.current;
+                            }
                             break;
+                        }
                     }
                     if (loc4.isDependOn) 
                     {
                         if (loc4.isDependOn == net.wg.gui.lobby.settings.SettingsConfig.VIBRO_IS_CONNECTED) 
+                        {
                             this.vibroContolsList.push(loc1);
+                        }
                         loc9 = net.wg.gui.lobby.settings.vo.SettingsControlProp(_data[loc4.isDependOn]).current;
                         this.showHideControl(loc1, loc4, loc9);
                     }
                     continue;
                 }
                 if (loc4.readOnly) 
+                {
                     continue;
+                }
                 DebugUtils.LOG_WARNING("ERROR in" + this + " control " + (loc1 + loc4.type) + " can not find");
             }
             loc2 = net.wg.gui.lobby.settings.vo.SettingsControlProp(_data.vibroIsConnected).current;
@@ -126,11 +136,17 @@ package net.wg.gui.lobby.settings
         internal function showHideControl(arg1:String, arg2:net.wg.gui.lobby.settings.vo.SettingsControlProp, arg3:Boolean):void
         {
             if (this[arg1 + arg2.type]) 
+            {
                 this[arg1 + arg2.type].visible = arg3;
+            }
             if (arg2.hasLabel && this[arg1 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_LABEL]) 
+            {
                 this[arg1 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_LABEL].visible = arg3;
+            }
             if (arg2.hasValue && this[arg1 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_VALUE]) 
+            {
                 this[arg1 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_VALUE].visible = arg3;
+            }
             return;
         }
 
@@ -141,7 +157,9 @@ package net.wg.gui.lobby.settings
             var loc2:*=net.wg.gui.lobby.settings.SettingsConfig.getControlId(loc1.name, net.wg.gui.lobby.settings.SettingsConfig.TYPE_SLIDER);
             var loc3:*;
             if ((loc3 = net.wg.gui.lobby.settings.vo.SettingsControlProp(_data[loc2])).hasValue && this[loc2 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_VALUE]) 
+            {
                 (loc4 = net.wg.gui.components.controls.LabelControl(this[loc2 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_VALUE])).text = loc1.value.toString();
+            }
             dispatchEvent(new net.wg.gui.lobby.settings.evnts.SettingViewEvent(net.wg.gui.lobby.settings.evnts.SettingViewEvent.ON_CONTROL_CHANGED, _viewId, loc2, loc1.value));
             return;
         }
@@ -191,18 +209,24 @@ package net.wg.gui.lobby.settings
                 label236: for (loc1 in loc6) 
                 {
                     if (!this[loc1 + _data[loc1].type]) 
+                    {
                         continue;
+                    }
                     loc2 = _data[loc1];
                     var loc7:*=loc2.type;
                     switch (loc7) 
                     {
                         case net.wg.gui.lobby.settings.SettingsConfig.TYPE_CHECKBOX:
+                        {
                             loc3 = this[loc1 + loc2.type];
                             loc3.removeEventListener(flash.events.Event.SELECT, this.onCheckBoxSelected);
                             continue label236;
+                        }
                         case net.wg.gui.lobby.settings.SettingsConfig.TYPE_SLIDER:
+                        {
                             (loc4 = this[loc1 + loc2.type]).removeEventListener(scaleform.clik.events.SliderEvent.VALUE_CHANGE, this.onSliderValueChanged);
                             continue label236;
+                        }
                     }
                 }
             }

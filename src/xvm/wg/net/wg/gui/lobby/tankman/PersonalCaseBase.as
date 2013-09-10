@@ -42,11 +42,15 @@ package net.wg.gui.lobby.tankman
                     ++loc6;
                 }
                 if (loc3 < (loc2 - 1) && loc1.length > 0) 
+                {
                     loc1[(loc1.length - 1)].showSeparator = true;
+                }
                 ++loc3;
             }
             if (loc1.length > 0) 
+            {
                 loc1[(loc1.length - 1)].showSeparator = false;
+            }
             this.stats = {};
             this.stats.achievements = loc1;
             this.stats.stats = arg1.stats;
@@ -73,23 +77,35 @@ package net.wg.gui.lobby.tankman
                 switch (loc4) 
                 {
                     case net.wg.data.constants.VehicleTypes.LIGHT_TANK:
+                    {
                         this.retrainingData.lightTanks.push(loc3);
                         break;
+                    }
                     case net.wg.data.constants.VehicleTypes.MEDIUM_TANK:
+                    {
                         this.retrainingData.mediumTanks.push(loc3);
                         break;
+                    }
                     case net.wg.data.constants.VehicleTypes.HEAVY_TANK:
+                    {
                         this.retrainingData.heavyTanks.push(loc3);
                         break;
+                    }
                     case net.wg.data.constants.VehicleTypes.AT_SPG:
+                    {
                         this.retrainingData.AT_SPG.push(loc3);
                         break;
+                    }
                     case net.wg.data.constants.VehicleTypes.SPG:
+                    {
                         this.retrainingData.SPG.push(loc3);
                         break;
+                    }
                     default:
+                    {
                         DebugUtils.LOG_DEBUG("ERROR unknown tank type");
                         break;
+                    }
                 }
                 ++loc2;
             }
@@ -144,12 +160,16 @@ package net.wg.gui.lobby.tankman
                         }
                     }
                     else 
+                    {
                         DebugUtils.LOG_DEBUG("ERROR :: not found skills in the title : " + loc3.title);
+                    }
                 }
                 ++loc2;
             }
             if (loc1) 
+            {
                 this.skillsModel = [];
+            }
             this.runtimeUpdateByModel(net.wg.gui.lobby.tankman.PersonalCaseSkills, this.skillsModel);
             return;
         }
@@ -295,9 +315,13 @@ package net.wg.gui.lobby.tankman
             {
                 loc3 = arg1[loc2]["value"].length;
                 if (arg3 == "firstNames" && loc3 > arg2.fistNameMaxChars) 
+                {
                     arg2.fistNameMaxChars = loc3;
+                }
                 else if (arg3 == "lastNames" && loc3 > arg2.lastNameMaxChars) 
+                {
                     arg2.lastNameMaxChars = loc3;
+                }
                 ++loc2;
             }
             return;

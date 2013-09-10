@@ -100,6 +100,7 @@ package net.wg.gui.lobby.questsWindow
             var loc1:*=NaN;
             super.draw();
             if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+            {
                 if (this.data) 
                 {
                     this.visible = true;
@@ -117,7 +118,10 @@ package net.wg.gui.lobby.questsWindow
                     dispatchEvent(new flash.events.Event(flash.events.Event.RESIZE));
                 }
                 else 
+                {
                     this.visible = false;
+                }
+            }
             return;
         }
 
@@ -127,10 +131,13 @@ package net.wg.gui.lobby.questsWindow
             {
                 this.progressIndicator.visible = true;
                 this.progressIndicator.setValues(this.data.questInfo.progrBarType, this.data.questInfo.currentProgrVal, this.data.questInfo.maxProgrVal);
+                this.progressIndicator.setTooltip(this.data.questInfo.progrTooltip);
                 this.progressIndicator.validateNow();
             }
             else 
+            {
                 this.progressIndicator.visible = false;
+            }
             return;
         }
 
@@ -142,7 +149,9 @@ package net.wg.gui.lobby.questsWindow
                 this.counter.textField.text = this.data.questInfo.tasksCount.toString();
             }
             else 
+            {
                 this.counter.visible = false;
+            }
             return;
         }
 
@@ -150,6 +159,7 @@ package net.wg.gui.lobby.questsWindow
         {
             this.taskTF.textColor = 6644049;
             if (this.data.questInfo.status != net.wg.data.constants.QuestsStates.NOT_AVAILABLE) 
+            {
                 if (this.data.questInfo.status != net.wg.data.constants.QuestsStates.DONE) 
                 {
                     this.statusMC.visible = false;
@@ -164,6 +174,7 @@ package net.wg.gui.lobby.questsWindow
                     flash.text.TextField(this.statusMC.textField).textColor = 7785801;
                     this._statusTooltip = TOOLTIPS.QUESTS_STATUS_DONE;
                 }
+            }
             else 
             {
                 this.statusMC.visible = true;

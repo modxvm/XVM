@@ -69,7 +69,9 @@ package net.wg.gui.lobby.techtree.data
             var loc1:*=this.getIndexByID(arg1);
             var loc2:*=null;
             if (this.nodeData.length > loc1 > -1) 
+            {
                 loc2 = this.nodeData[loc1];
+            }
             return loc2;
         }
 
@@ -119,12 +121,16 @@ package net.wg.gui.lobby.techtree.data
             switch (loc3) 
             {
                 case net.wg.gui.lobby.techtree.data.vo.NodeData.NODE_DUMP_FIELD:
+                {
                     loc1 = this.setDump(arg2, String(arg3));
                     break;
+                }
                 case net.wg.gui.lobby.techtree.data.vo.NodeData.UNLOCK_PROPS_FIELD:
+                {
                     (loc2 = new net.wg.gui.lobby.techtree.data.vo.UnlockProps()).fromArray(arg3 as Array, App.utils.locale);
                     loc1 = this.setUnlockProps(arg2, loc2);
                     break;
+                }
             }
             return loc1;
         }

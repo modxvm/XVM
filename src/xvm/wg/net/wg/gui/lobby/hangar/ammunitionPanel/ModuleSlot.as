@@ -31,7 +31,9 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         {
             this._slotType = arg1;
             if (this._slotType > 1) 
+            {
                 this.icon.gotoAndStop(this.slotType);
+            }
             return;
         }
 
@@ -49,7 +51,9 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
                 levelMC.gotoAndStop(this.level);
             }
             else if (levelMC) 
+            {
                 levelMC.visible = false;
+            }
             return;
         }
 
@@ -57,9 +61,13 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         {
             super.applyIconData(arg1);
             if (arg1) 
+            {
                 this.level = arg1.icon;
+            }
             else 
+            {
                 this.level = 0;
+            }
             return;
         }
 

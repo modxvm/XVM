@@ -28,7 +28,9 @@ package net.wg.gui.notification
             {
                 loc1 = scrollPosition == 0 || scrollPosition == maxScroll;
                 if (!dataProvider) 
+                {
                     dataProvider = new scaleform.clik.data.DataProvider([]);
+                }
                 while (this.pendingDataList.length > 0) 
                 {
                     _dataProvider.removeEventListener(flash.events.Event.CHANGE, handleDataChange);
@@ -37,7 +39,9 @@ package net.wg.gui.notification
                     _dataProvider.addEventListener(flash.events.Event.CHANGE, handleDataChange, false, 0, true);
                 }
                 if (loc1) 
+                {
                     scrollPosition = maxScroll;
+                }
                 container.y = -scrollStepFactor * _scrollPosition;
                 scrollBar.setScrollProperties(scrollPageSize, 0, maxScroll);
                 scrollBar.position = scrollPosition;
@@ -50,7 +54,9 @@ package net.wg.gui.notification
         {
             super.drawRenderers(arg1);
             if (totalHeight > maskObject.height) 
+            {
                 scrollPosition = maxScroll;
+            }
             return;
         }
 

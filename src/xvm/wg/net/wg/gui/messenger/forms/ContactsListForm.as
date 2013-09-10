@@ -96,7 +96,9 @@ package net.wg.gui.messenger.forms
         {
             var loc1:*=[{"label":MESSENGER.DIALOGS_CONTACTS_TREE_FRIENDS, "linkage":FRIENDS_ROSTER}, {"label":MESSENGER.DIALOGS_CONTACTS_TREE_CLAN, "linkage":CLAN_ROSTER}, {"label":MESSENGER.DIALOGS_CONTACTS_TREE_IGNORED, "linkage":IGNORED_ROSTER}];
             if (App.voiceChatMgr.isVOIPEnabledS()) 
+            {
                 loc1.push({"label":MESSENGER.DIALOGS_CONTACTS_TREE_MUTED, "linkage":MUTED_ROSTER});
+            }
             this.accordion.view.cache = true;
             this.accordion.dataProvider = new scaleform.clik.data.DataProvider(loc1);
             this.accordion.selectedIndex = 0;
@@ -112,7 +114,9 @@ package net.wg.gui.messenger.forms
         internal function showContextMenu(arg1:net.wg.gui.prebattle.invites.SendInvitesEvent):void
         {
             if (arg1.initItem) 
+            {
                 App.contextMenuMgr.showUserContextMenu(this, arg1.initItem, new net.wg.gui.prebattle.invites.PrbSendInviteCIGenerator());
+            }
             return;
         }
 
@@ -128,22 +132,34 @@ package net.wg.gui.messenger.forms
                 switch (loc4) 
                 {
                     case FRIENDS_ROSTER:
+                    {
                         loc3 = this.friendsDP;
                         break;
+                    }
                     case CLAN_ROSTER:
+                    {
                         loc3 = this.clanDP;
                         break;
+                    }
                     case IGNORED_ROSTER:
+                    {
                         loc3 = this.ignoredDP;
                         break;
+                    }
                     case MUTED_ROSTER:
+                    {
                         loc3 = this.mutedDP;
                         break;
+                    }
                     default:
+                    {
                         break;
+                    }
                 }
                 if (loc3) 
+                {
                     loc1.update(loc3);
+                }
             }
             return;
         }
@@ -159,7 +175,9 @@ package net.wg.gui.messenger.forms
                 loc2 = this.accordion.view.cachedViews[loc1] as scaleform.clik.core.UIComponent;
                 loc2.setSize(this.accordion.actualViewWidth, this.accordion.actualViewHeight);
                 if (loc2 != this.accordion.view.currentView) 
+                {
                     continue;
+                }
                 loc2.validateNow();
             }
             return;

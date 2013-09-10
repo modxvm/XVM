@@ -110,7 +110,9 @@ package net.wg.gui.lobby.profile.pages.awards
                 loc1.removeEventListener(flash.events.Event.RESIZE, this.blockResizeHandler);
                 loc1.dispose();
                 if (loc1.parent) 
+                {
                     loc1.parent.removeChild(loc1);
+                }
                 loc1 = null;
             }
             this._allMedalsData = null;

@@ -40,7 +40,9 @@ package net.wg.gui.lobby.tankman
         public function update(arg1:Object):void
         {
             if (arg1 == null) 
+            {
                 return;
+            }
             this.data = arg1;
             if (arg1.achievements.length > 0) 
             {

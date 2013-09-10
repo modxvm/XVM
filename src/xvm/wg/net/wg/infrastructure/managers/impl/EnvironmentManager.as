@@ -43,9 +43,13 @@ package net.wg.infrastructure.managers.impl
         public final function addCallback(arg1:String, arg2:Function):void
         {
             if (this._useEventSystem) 
+            {
                 addEventListener(arg1, arg2);
+            }
             else 
+            {
                 flash.external.ExternalInterface.addCallback(arg1, arg2);
+            }
             return;
         }
 
@@ -71,7 +75,9 @@ package net.wg.infrastructure.managers.impl
                 dispatchEvent(new net.wg.infrastructure.events.EnvironmentEvent(loc1, rest));
             }
             else 
+            {
                 return flash.external.ExternalInterface.call.apply(this, rest);
+            }
             return this._result;
         }
 
@@ -79,9 +85,13 @@ package net.wg.infrastructure.managers.impl
         {
             this._result = null;
             if (this._useEventSystem) 
+            {
                 dispatchEvent(new net.wg.infrastructure.events.EnvironmentEvent(arg1, []));
+            }
             else 
+            {
                 return flash.external.ExternalInterface.call(arg1);
+            }
             return;
         }
 
@@ -94,16 +104,22 @@ package net.wg.infrastructure.managers.impl
         internal function dofsCommand(arg1:String):void
         {
             if (this._useEventSystem) 
+            {
                 dispatchEvent(new net.wg.infrastructure.events.EnvironmentEvent(arg1));
+            }
             else 
+            {
                 flash.system.fscommand(arg1);
+            }
             return;
         }
 
         public static function getInstance():net.wg.infrastructure.managers.IEnvironmentManager
         {
             if (ms_instance == null) 
+            {
                 ms_instance = new EnvironmentManager();
+            }
             return ms_instance;
         }
 

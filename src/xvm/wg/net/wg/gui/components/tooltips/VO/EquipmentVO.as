@@ -41,7 +41,9 @@ package net.wg.gui.components.tooltips.VO
                 this.paramsAdd = null;
             }
             if (arg1.hasOwnProperty("paramsEx")) 
+            {
                 this.paramsEx = new net.wg.gui.components.tooltips.VO.EquipmentParamVO(arg1["paramsEx"]);
+            }
             this.status = arg1.hasOwnProperty("status") && !(arg1["status"] == undefined) ? arg1["status"] : false;
             if (this.status) 
             {

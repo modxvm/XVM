@@ -41,6 +41,7 @@ package net.wg.gui.lobby.hangar.maintenance
         protected override function draw():void
         {
             if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+            {
                 if (data) 
                 {
                     visible = true;
@@ -58,17 +59,27 @@ package net.wg.gui.lobby.hangar.maintenance
                     this.icon.source = this.module.icon;
                     this.priceMC.visible = false;
                     if (this.module.target != 3) 
+                    {
                         if (this.module.target != 2) 
+                        {
                             if (this.module.target == 1) 
                             {
                                 this.targetMC.gotoAndPlay("vehicle");
                                 this.targetMC.textField.text = this.module.status != "" ? MENU.FITTINGLISTITEMRENDERER_REPLACE : "";
                             }
+                        }
                         else if (this.module.status != "") 
+                        {
                             if (!(this.module.status == MENU.MODULEFITS_CREDIT_ERROR) && this.module.status == MENU.MODULEFITS_GOLD_ERROR) 
+                            {
                                 this.targetMC.gotoAndPlay("hangarCantInstall");
+                            }
+                        }
                         else 
+                        {
                             this.targetMC.gotoAndPlay("hangar");
+                        }
+                    }
                     else 
                     {
                         this.priceMC.visible = true;
@@ -83,9 +94,13 @@ package net.wg.gui.lobby.hangar.maintenance
                             this.priceMC.textColor = net.wg.data.constants.Currencies.TEXT_COLORS[net.wg.data.constants.Currencies.GOLD];
                         }
                         if (this.module.status == MENU.MODULEFITS_CREDIT_ERROR || this.module.status == MENU.MODULEFITS_GOLD_ERROR) 
+                        {
                             this.priceMC.textColor = net.wg.data.constants.Currencies.TEXT_COLORS[net.wg.data.constants.Currencies.ERROR];
+                        }
                         else if (this.module.status != "") 
+                        {
                             this.priceMC.textColor = 6710886;
+                        }
                         this.priceMC.icon = this.module.currency;
                         this.priceMC.validateNow();
                         this.targetMC.gotoAndStop("shop");
@@ -95,7 +110,10 @@ package net.wg.gui.lobby.hangar.maintenance
                     mouseEnabled = true;
                 }
                 else 
+                {
                     visible = false;
+                }
+            }
             super.draw();
             return;
         }
@@ -120,7 +138,9 @@ package net.wg.gui.lobby.hangar.maintenance
             {
                 loc1 = arg1 as scaleform.gfx.MouseEventEx;
                 if (loc1.buttonIdx == scaleform.gfx.MouseEventEx.RIGHT_BUTTON) 
+                {
                     dispatchEvent(new net.wg.gui.events.ModuleInfoEvent(net.wg.gui.events.ModuleInfoEvent.SHOW_INFO, this.module.id));
+                }
             }
             return;
         }

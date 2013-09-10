@@ -33,17 +33,27 @@ package net.wg.gui.lobby.techtree.data.vo
         public function fromObject(arg1:Object, arg2:net.wg.utils.ILocale):void
         {
             if (arg1 == null) 
+            {
                 return;
+            }
             if (arg1.enableInstallItems != null) 
+            {
                 this.enableInstallItems = arg1.enableInstallItems;
+            }
             if (arg1.statusString != null) 
+            {
                 this.statusString = arg1.statusString;
+            }
             this.extraInfo = new net.wg.gui.lobby.techtree.data.vo.ExtraInformation();
             if (arg1.extraInfo != null) 
+            {
                 this.extraInfo.fromObject(arg1.extraInfo, arg2);
+            }
             this.freeXP = isNaN(arg1.freeXP) ? 0 : arg1.freeXP;
             if (arg1.hasNationTree != null) 
+            {
                 this.hasNationTree = arg1.hasNationTree;
+            }
             return;
         }
 

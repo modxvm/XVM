@@ -78,10 +78,14 @@ package net.wg.gui.components.tooltips
                 this.skillCount.type = loc2 > 2 ? net.wg.gui.lobby.tankman.SkillItemViewMini.TYPE_NEW_SKILLS : net.wg.gui.lobby.tankman.SkillItemViewMini.TYPE_NEW_SKILL;
                 this.skillCount.text = "<font size=\"12\" color=\"#7B7969\" face=\"$FieldFont\">" + App.utils.locale.makeString(TOOLTIPS.BUYSKILL_FULLY, {"count":"<font size=\"12\" face=\"$TitleFont\" color=\"#FFAC34\">" + String((loc2 - 1)) + " x 100%</font>"}) + "</font>";
                 if (loc3 > 0) 
+                {
                     this.skillLevel.y = Math.round(this.skillCount.y + LINE_HEIGHT);
+                }
             }
             else if (loc3 > 0) 
+            {
                 this.skillLevel.y = loc1;
+            }
             if (loc3 > 0) 
             {
                 this.skillLevel.type = net.wg.gui.lobby.tankman.SkillItemViewMini.TYPE_CURRENT_NEW_SKILL;
@@ -98,9 +102,13 @@ package net.wg.gui.components.tooltips
             loc1.width = loc1.width > this.header.textWidth ? loc1.width : this.header.textWidth;
             loc1.height = this.header.x + this.header.textHeight;
             if (this.skillCount) 
+            {
                 loc1.width = loc1.width > this.skillCount.width ? loc1.width : this.skillCount.width;
+            }
             if (this.skillLevel) 
+            {
                 loc1.width = loc1.width > this.skillLevel.width ? loc1.width : this.skillLevel.width;
+            }
             loc1.width = loc1.width < this._maxWidth ? this._maxWidth : loc1.width;
             loc1.width = Math.round(loc1.width);
             loc1.height = this.skillLevel ? Math.round(this.skillLevel.y + this.skillLevel.height - 6) : this.skillCount ? Math.round(this.skillCount.y + this.skillCount.height - 6) : loc1.height;

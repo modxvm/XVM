@@ -51,7 +51,9 @@ package net.wg.gui.components.common.video
         public function pausePlayback():void
         {
             if (this._status == net.wg.gui.components.common.video.PlayerStatus.PLAYING) 
+            {
                 this.setPause();
+            }
             return;
         }
 
@@ -89,10 +91,16 @@ package net.wg.gui.components.common.video
         public function togglePlayback():void
         {
             if (this._status != net.wg.gui.components.common.video.PlayerStatus.PLAYING) 
+            {
                 if (this._status == net.wg.gui.components.common.video.PlayerStatus.PAUSE) 
+                {
                     this.setPlay();
+                }
+            }
             else 
+            {
                 this.setPause();
+            }
             return;
         }
 
@@ -114,22 +122,44 @@ package net.wg.gui.components.common.video
         {
             super.draw();
             if (isInvalid(VIDEO_SOURCE_INVALID)) 
+            {
                 this.applyVideoLoading();
+            }
             if (isInvalid(SOUND_LEVEL_INVALID)) 
+            {
                 if (this.nsStream) 
+                {
                     this.nsStream.soundTransform = new flash.media.SoundTransform(this._volume);
+                }
+            }
             if (isInvalid(SELECTED_SUBTITLE_TRACK_INVALID)) 
+            {
                 if (this.nsStream.hasOwnProperty(SUBTITLE_TRACK_PROP_NAME)) 
+                {
                     if (this._subtitleTotalTracks >= this._subtitleTrack) 
+                    {
                         this.nsStream[SUBTITLE_TRACK_PROP_NAME] = this._subtitleTrack;
+                    }
                     else 
+                    {
                         this.nsStream[SUBTITLE_TRACK_PROP_NAME] = 0;
+                    }
+                }
+            }
             if (isInvalid(SELECTED_AUDIO_TRACK_INVALID)) 
+            {
                 if (this.nsStream.hasOwnProperty(AUDIO_TRACK_PROP_NAME)) 
+                {
                     if (this._audioTotalTracks > this._audioTrack) 
+                    {
                         this.nsStream[AUDIO_TRACK_PROP_NAME] = this._audioTrack;
+                    }
                     else 
+                    {
                         this.nsStream[AUDIO_TRACK_PROP_NAME] = 0;
+                    }
+                }
+            }
             return;
         }
 
@@ -194,22 +224,30 @@ package net.wg.gui.components.common.video
             switch (loc4) 
             {
                 case net.wg.gui.components.common.video.NetStreamStatusCode.START:
+                {
                     this.setStatus(net.wg.gui.components.common.video.PlayerStatus.PLAYING);
                     App.utils.scheduler.scheduleTask(invalidate, 50, SOUND_LEVEL_INVALID);
                     break;
+                }
                 case net.wg.gui.components.common.video.NetStreamStatusCode.SEEK_NOTIFY:
+                {
                     dispatchEvent(new flash.events.Event(net.wg.gui.components.common.video.VideoPlayerEvent.SEEK_COMPLETE));
                     break;
+                }
                 case net.wg.gui.components.common.video.NetStreamStatusCode.STOP:
+                {
                     this.onPlaybackStopped();
                     break;
+                }
                 default:
+                {
                     if (loc1.level == net.wg.gui.components.common.video.NetStreamStatusLevel.ERROR) 
                     {
                         this.setStatus(net.wg.gui.components.common.video.PlayerStatus.STOP);
                         (loc3 = new net.wg.gui.components.common.video.VideoPlayerStatusEvent(net.wg.gui.components.common.video.VideoPlayerStatusEvent.ERROR)).errorCode = loc2;
                         dispatchEvent(loc3);
                     }
+                }
             }
             return;
         }
@@ -229,7 +267,9 @@ package net.wg.gui.components.common.video
         internal function onPlaybackStopped():void
         {
             if (this._status == net.wg.gui.components.common.video.PlayerStatus.PLAYING || this._status == net.wg.gui.components.common.video.PlayerStatus.PAUSE) 
+            {
                 this.setStatus(net.wg.gui.components.common.video.PlayerStatus.STOP);
+            }
             dispatchEvent(new net.wg.gui.components.common.video.VideoPlayerEvent(net.wg.gui.components.common.video.VideoPlayerEvent.PLAYBACK_STOPPED));
             return;
         }
@@ -237,7 +277,9 @@ package net.wg.gui.components.common.video
         public function resumePlayback():void
         {
             if (this._status == net.wg.gui.components.common.video.PlayerStatus.PAUSE) 
+            {
                 this.setPlay();
+            }
             return;
         }
 
@@ -265,7 +307,9 @@ package net.wg.gui.components.common.video
         public function get currentTime():Number
         {
             if (this.nsStream) 
+            {
                 return this.nsStream.time;
+            }
             return NaN;
         }
 
@@ -293,7 +337,9 @@ package net.wg.gui.components.common.video
             {
                 this.video.clear();
                 if (this.video.parent) 
+                {
                     this.video.parent.removeChild(this.video);
+                }
                 this.video = null;
             }
             return;

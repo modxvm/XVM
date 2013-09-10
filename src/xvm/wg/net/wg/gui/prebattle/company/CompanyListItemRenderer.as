@@ -30,9 +30,13 @@ package net.wg.gui.prebattle.company
             super.dispose();
             this.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.clickHandler);
             if (this.dd) 
+            {
                 this.dd.dispose();
+            }
             if (this.listRefreshData != null) 
+            {
                 this.listRefreshData = null;
+            }
             return;
         }
 
@@ -53,7 +57,9 @@ package net.wg.gui.prebattle.company
         {
             super.draw();
             if (isInvalid(scaleform.clik.constants.InvalidationType.DATA) && data) 
+            {
                 this.afterSetData();
+            }
             return;
         }
 
@@ -91,20 +97,30 @@ package net.wg.gui.prebattle.company
                 return;
             }
             if (!visible) 
+            {
                 visible = true;
+            }
             super.setData(arg1);
             this.dd.prbID = arg1.prbID;
             if (this.isPlayersData()) 
             {
                 while (arg1.players.length < 15) 
+                {
                     arg1.players.push({"label":"", "color":null});
+                }
                 this.dd.dataProvider = new scaleform.clik.data.DataProvider(arg1.players);
             }
             if (this._showPlayers && this.isPlayersData() && selected) 
+            {
                 if (!this.dd.isOpen()) 
+                {
                     this.dd.open();
+                }
+            }
             else if (this.dd.isOpen()) 
+            {
                 this.dd.close();
+            }
             this.afterSetData();
             invalidate(scaleform.clik.constants.InvalidationType.DATA);
             return;
@@ -113,18 +129,30 @@ package net.wg.gui.prebattle.company
         internal function clickHandler(arg1:scaleform.clik.events.ButtonEvent):void
         {
             if (arg1.isKeyboard) 
+            {
                 return;
+            }
             App.utils.focusHandler.setFocus(this);
             this.dispatchIsSelectedItem(selected);
             if (this._showPlayers) 
+            {
                 if (this.dd.isOpen()) 
+                {
                     this.dd.close();
+                }
                 else if (selected) 
+                {
                     this.dd.open();
+                }
+            }
             else if (this.dd.isOpen()) 
+            {
                 this.dropDownState = -1;
+            }
             else 
+            {
                 this.dropDownState = 1;
+            }
             return;
         }
 
@@ -152,7 +180,9 @@ package net.wg.gui.prebattle.company
         public override function set selected(arg1:Boolean):void
         {
             if (!arg1 && this.dd.isOpen()) 
+            {
                 this.dd.close();
+            }
             super.selected = arg1;
             return;
         }
@@ -186,7 +216,9 @@ package net.wg.gui.prebattle.company
         protected override function handleMouseRelease(arg1:flash.events.MouseEvent):void
         {
             if (this.pressEvent) 
+            {
                 super.handleMousePress(this.pressEvent);
+            }
             super.handleMouseRelease(arg1);
             return;
         }

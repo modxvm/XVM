@@ -11,9 +11,13 @@ package net.wg.gui.components.common.markers
         public function damage(arg1:Number, arg2:String):void
         {
             if (!(tweenState == INACTIVE_STATE) && !(tweenState == IMITATION_STATE)) 
+            {
                 this._damage = this._damage + arg1;
+            }
             else 
+            {
                 this._damage = arg1;
+            }
             this.damageLabel.color = arg2;
             this.damageLabel.text = this._damage > 0 ? String(-this._damage) : "";
             return;
@@ -27,7 +31,9 @@ package net.wg.gui.components.common.markers
         public function set fakeDamage(arg1:Number):void
         {
             if (this._fakeDamage == arg1) 
+            {
                 return;
+            }
             this._fakeDamage = arg1;
             invalidate(INVALIDATE_DAMAGE);
             return;
@@ -41,7 +47,9 @@ package net.wg.gui.components.common.markers
         public function set imitationFlag(arg1:String):void
         {
             if (arg1 == this._imitationFlag) 
+            {
                 return;
+            }
             this._imitationFlag = arg1;
             invalidate(INVALIDATE_DAMAGE);
             return;
@@ -55,7 +63,9 @@ package net.wg.gui.components.common.markers
         public function set imitation(arg1:Boolean):void
         {
             if (this._imitation == arg1) 
+            {
                 return;
+            }
             this._imitation = arg1;
             invalidate(INVALIDATE_DAMAGE);
             return;
@@ -65,7 +75,9 @@ package net.wg.gui.components.common.markers
         {
             super.draw();
             if (isInvalid(INVALIDATE_DAMAGE)) 
+            {
                 this.imitationDamage(this.imitation, this.fakeDamage, this.imitationFlag);
+            }
             return;
         }
 

@@ -13,7 +13,7 @@ package net.wg.gui.login
 
         function removeChangeHandler(arg1:Function):void;
 
-        function setDefaultValues(arg1:String, arg2:String, arg3:Boolean, arg4:Boolean, arg5:Boolean):void;
+        function setDefaultValues(arg1:String, arg2:String, arg3:Boolean, arg4:Boolean, arg5:Boolean, arg6:Boolean):void;
 
         function setServersList(arg1:Array, arg2:int):void;
 

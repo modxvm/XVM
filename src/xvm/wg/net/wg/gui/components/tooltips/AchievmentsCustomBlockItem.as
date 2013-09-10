@@ -25,14 +25,18 @@ package net.wg.gui.components.tooltips
             if (this.dataDirty) 
             {
                 if (this._name) 
+                {
                     this.vehicleName.text = this._name;
+                }
                 if (!isNaN(this._nation)) 
                 {
                     loc1 = "../maps/icons/filters/nations/" + App.utils.getNationNamesS()[this._nation] + ".png";
                     this.nationIco.source = loc1;
                 }
                 if (this._type) 
+                {
                     this.vehicleType.source = "../maps/icons/filters/tanks/" + this._type + ".png";
+                }
                 this.dataDirty = false;
             }
             return;

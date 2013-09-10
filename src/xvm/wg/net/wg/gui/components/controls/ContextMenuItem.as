@@ -22,7 +22,9 @@ package net.wg.gui.components.controls
         protected override function configUI():void
         {
             if (!constraintsDisabled && this.textFieldSub) 
+            {
                 constraints.addElement("textFieldSub", this.textFieldSub, scaleform.clik.utils.Constraints.ALL);
+            }
             super.configUI();
             return;
         }
@@ -34,23 +36,29 @@ package net.wg.gui.components.controls
             switch (loc1) 
             {
                 case this.CONTEXT_MENU_ITEM_MAIN:
+                {
                     this.arrowMc.visible = false;
                     this.circleMc.visible = false;
                     textField.visible = true;
                     this.textFieldSub.visible = false;
                     break;
+                }
                 case this.CONTEXT_MENU_ITEM_GROUP:
+                {
                     this.arrowMc.visible = true;
                     this.circleMc.visible = false;
                     textField.visible = true;
                     this.textFieldSub.visible = false;
                     break;
+                }
                 case this.CONTEXT_MENU_ITEM_SUB:
+                {
                     this.arrowMc.visible = false;
                     this.circleMc.visible = true;
                     textField.visible = false;
                     this.textFieldSub.visible = true;
                     break;
+                }
             }
             return;
         }
@@ -58,10 +66,14 @@ package net.wg.gui.components.controls
         public function set type(arg1:String):void
         {
             if (arg1 == this._type) 
+            {
                 return;
+            }
             this._type = arg1;
             if (enabled) 
+            {
                 setState("up");
+            }
             invalidateState();
             return;
         }
@@ -74,14 +86,22 @@ package net.wg.gui.components.controls
         public function set items(arg1:__AS3__.vec.Vector.<net.wg.infrastructure.interfaces.IContextItem>):void
         {
             if (!this._items) 
+            {
                 this._items = new Vector.<net.wg.infrastructure.interfaces.IContextItem>();
+            }
             if (arg1 == this._items) 
+            {
                 return;
+            }
             this._items = arg1;
             if (this._items.length > 0) 
+            {
                 this.type = this.CONTEXT_MENU_ITEM_GROUP;
+            }
             else 
+            {
                 this.type = this.CONTEXT_MENU_ITEM_MAIN;
+            }
             return;
         }
 
@@ -93,10 +113,14 @@ package net.wg.gui.components.controls
         public function set isOpened(arg1:Boolean):void
         {
             if (arg1 == this._isOpened) 
+            {
                 return;
+            }
             this._isOpened = arg1;
             if (this.arrowMc.visible) 
+            {
                 this.arrowMc.gotoAndStop(this._isOpened ? "down" : "up");
+            }
             return;
         }
 
@@ -114,17 +138,23 @@ package net.wg.gui.components.controls
         {
             super.updateText();
             if (!(_label == null) && !(this.textFieldSub == null)) 
+            {
                 this.textFieldSub.text = _label;
+            }
             return;
         }
 
         protected override function updateAfterStateChange():void
         {
             if (!initialized) 
+            {
                 return;
+            }
             super.updateAfterStateChange();
             if (!(constraints == null) && !constraintsDisabled && !(this.textFieldSub == null)) 
+            {
                 constraints.updateElement("textFieldSub", this.textFieldSub);
+            }
             return;
         }
 

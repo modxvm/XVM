@@ -32,16 +32,22 @@ package net.wg.gui.lobby.techtree.sub
             {
                 case net.wg.gui.lobby.techtree.constants.NodeEntityType.TOP_VEHICLE:
                 case net.wg.gui.lobby.techtree.constants.NodeEntityType.NEXT_VEHICLE:
+                {
                     loc1 = new this._vehicleNodeClass();
                     this.setupVehicleRenderer(loc1);
                     break;
+                }
                 case net.wg.gui.lobby.techtree.constants.NodeEntityType.RESEARCH_ITEM:
+                {
                     loc1 = new this._itemNodeClass();
                     this.setupItemRenderer(loc1);
                     break;
+                }
                 case net.wg.gui.lobby.techtree.constants.NodeEntityType.UNDEFINED:
+                {
                     loc1 = new this._fakeNodeClass();
                     break;
+                }
             }
             return loc1;
         }
@@ -49,7 +55,9 @@ package net.wg.gui.lobby.techtree.sub
         internal function setupItemRenderer(arg1:net.wg.gui.lobby.techtree.interfaces.IRenderer):void
         {
             if (arg1 == null) 
+            {
                 return;
+            }
             arg1.container = this;
             arg1.addEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.CLICK_2_UNLOCK, this.handleUnlockItem, false, 0, true);
             arg1.addEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.CLICK_2_BUY, this.handleBuyItem, false, 0, true);
@@ -62,14 +70,18 @@ package net.wg.gui.lobby.techtree.sub
         internal function setupVehicleRenderer(arg1:net.wg.gui.lobby.techtree.interfaces.IRenderer, arg2:Boolean=false):void
         {
             if (arg1 == null) 
+            {
                 return;
+            }
             arg1.container = this;
             arg1.addEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.CLICK_2_UNLOCK, this.handleUnlockItem, false, 0, true);
             arg1.addEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.CLICK_2_BUY, this.handleBuyItem, false, 0, true);
             arg1.addEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.CLICK_2_SELL, this.handleSellItem, false, 0, true);
             arg1.addEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.CLICK_2_VEHICLE_INFO, this.handleRequestVehicleInfo, false, 0, true);
             if (!arg2) 
+            {
                 arg1.addEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.CLICK_2_OPEN, this.handleOpenVehicle, false, 0, true);
+            }
             return;
         }
 
@@ -77,15 +89,21 @@ package net.wg.gui.lobby.techtree.sub
         {
             var loc1:*=null;
             while (this.topRenderers.length > 0) 
+            {
                 this.cleanUpRenderer(this.topRenderers.pop());
+            }
             while (this.renderers.length > 0) 
             {
                 loc1 = this.renderers.pop();
                 while (loc1.length > 0) 
+                {
                     this.cleanUpRenderer(loc1.pop());
+                }
             }
             if (this.rGraphics != null) 
+            {
                 this.rGraphics.clearUp();
+            }
             this.positionByID = {};
             return;
         }
@@ -102,7 +120,9 @@ package net.wg.gui.lobby.techtree.sub
                 loc2 = this.topRenderers.pop();
                 this.cleanUpRenderer(loc2);
                 if (this.rGraphics == null) 
+                {
                     continue;
+                }
                 this.rGraphics.removeRenderer(loc2);
             }
             var loc6:*=0;
@@ -175,7 +195,9 @@ package net.wg.gui.lobby.techtree.sub
                         loc4 = null;
                         loc12 = false;
                         if (-1 < loc3.index && loc3.index < this._dataProvider.length) 
+                        {
                             loc4 = this._dataProvider.getItemAt(loc3.index);
+                        }
                         loc13 = this._dataProvider.resolveEntityType(loc4);
                         loc2 = new net.wg.gui.lobby.techtree.math.MatrixPosition(loc10, loc11);
                         loc1 = arg1.getRenderer(loc13);
@@ -188,10 +210,14 @@ package net.wg.gui.lobby.techtree.sub
                         {
                             this.renderers[loc10][loc11] = loc1;
                             if (loc4 != null) 
+                            {
                                 this.positionByID[loc4.id] = loc2;
+                            }
                             loc1.setup(loc3.index, loc4, loc13, loc2);
                             if (loc1.isFake()) 
+                            {
                                 loc7.push(loc1 as net.wg.gui.lobby.techtree.nodes.FakeNode);
+                            }
                             if (loc12) 
                             {
                                 loc1.validateNowEx();
@@ -215,7 +241,9 @@ package net.wg.gui.lobby.techtree.sub
                 while (loc11 < loc16.length) 
                 {
                     if ((loc19 = this.renderers[loc18.matrixPosition.row + 1][loc16[loc11]]) != null) 
+                    {
                         loc14.push(loc19);
+                    }
                     ++loc11;
                 }
                 loc18.setChildren(loc14);
@@ -225,7 +253,9 @@ package net.wg.gui.lobby.techtree.sub
                 while (loc11 < loc17.length) 
                 {
                     if ((loc20 = this.renderers[(loc18.matrixPosition.row - 1)][loc17[loc11]]) != null) 
+                    {
                         loc15.push(loc20);
+                    }
                     ++loc11;
                 }
                 loc18.setParents(loc15);
@@ -237,7 +267,9 @@ package net.wg.gui.lobby.techtree.sub
         internal function drawRenderers():Boolean
         {
             if (this._levelsBuilder == null || this.rGraphics == null) 
+            {
                 return false;
+            }
             var loc1:*=false;
             var loc2:*=this.flushRenderersOnScene();
             this.renderers = this.createRenderersMatrix();
@@ -295,7 +327,9 @@ package net.wg.gui.lobby.techtree.sub
                     if ((loc7 = loc10[loc15]) != null) 
                     {
                         if (!((loc14 = loc7.getDisplayInfo() as net.wg.gui.lobby.techtree.data.vo.ResearchDisplayInfo) == null) && loc14.isDrawVehicle()) 
+                        {
                             loc11 = new flash.geom.Point(this.nextLevelX, loc8[loc15] - loc7.getRatioY());
+                        }
                         else 
                         {
                             loc11 = new flash.geom.Point(loc12, loc8[loc15] - loc7.getRatioY());
@@ -316,9 +350,13 @@ package net.wg.gui.lobby.techtree.sub
             var loc1:*=0;
             var loc2:*;
             if ((loc2 = this._dataProvider.getIndexByID(arg1)) > -1 && this._dataProvider.length > loc2) 
+            {
                 loc1 = this._dataProvider.getItemAt(loc2).state;
+            }
             else if ((loc2 = this._dataProvider.getTopLevelIndexByID(arg1)) > -1 && this._dataProvider.topLength > loc2) 
+            {
                 loc1 = this._dataProvider.getTopLevelAt(loc2).state;
+            }
             return (loc1 & net.wg.gui.lobby.techtree.constants.NodeState.UNLOCKED) > 0;
         }
 
@@ -358,9 +396,13 @@ package net.wg.gui.lobby.techtree.sub
         {
             var loc1:*=null;
             if (arg1.entityType != net.wg.gui.lobby.techtree.constants.NodeEntityType.TOP_VEHICLE) 
+            {
                 loc1 = this._dataProvider.getItemAt(arg1.index);
+            }
             else 
+            {
                 loc1 = this._dataProvider.getTopLevelAt(arg1.index);
+            }
             App.utils.asserter.assertNotNull(loc1, "Data of node not found by event = " + arg1);
             return loc1;
         }
@@ -381,7 +423,9 @@ package net.wg.gui.lobby.techtree.sub
         internal function handleReturn2TechTree(arg1:net.wg.gui.lobby.techtree.TechTreeEvent):void
         {
             if (this.view != null) 
+            {
                 this.view.goToTechTreeS(this._dataProvider.nation);
+            }
             return;
         }
 
@@ -472,10 +516,14 @@ package net.wg.gui.lobby.techtree.sub
             var loc1:*;
             name = arg1;
             if (name == "") 
+            {
                 return null;
+            }
             classRef = null;
             try 
+            {
                 classRef = flash.utils.getDefinitionByName(name) as Class;
+            }
             catch (error:*)
             {
                 trace("error", error.message);
@@ -535,10 +583,14 @@ package net.wg.gui.lobby.techtree.sub
         public function set dataProvider(arg1:net.wg.gui.lobby.techtree.interfaces.IResearchDataProvider):void
         {
             if (this._dataProvider != null) 
+            {
                 this._dataProvider.removeEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.DATA_BUILD_COMPLETE, this.handleDataComplete);
+            }
             this._dataProvider = arg1;
             if (this._dataProvider != null) 
+            {
                 this._dataProvider.addEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.DATA_BUILD_COMPLETE, this.handleDataComplete, false, 0, true);
+            }
             return;
         }
 
@@ -554,9 +606,13 @@ package net.wg.gui.lobby.techtree.sub
                 this.titleAppearance = null;
             }
             if (this.rGraphics != null) 
+            {
                 this.rGraphics.removeReferences();
+            }
             if (this.premiumLayout != null) 
+            {
                 this.premiumLayout.dispose();
+            }
             if (this.titleBar != null) 
             {
                 this.titleBar.removeEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.RETURN_2_TECHTREE, this.handleReturn2TechTree);
@@ -596,19 +652,25 @@ package net.wg.gui.lobby.techtree.sub
                 if ((loc6 = this._dataProvider.getIndexByID(loc5)) > -1 && this._dataProvider.length > loc6) 
                 {
                     if (arg3 != null) 
+                    {
                         this._dataProvider.setItemField(arg3, loc6, loc2[2]);
+                    }
                     loc3 = this._dataProvider.setState(loc6, arg1, loc2[1]);
                     loc4 = this.getNodeByID(loc5);
                 }
                 else if ((loc6 = this._dataProvider.getTopLevelIndexByID(loc5)) > -1 && this._dataProvider.topLength > loc6) 
                 {
                     if (arg3 != null) 
+                    {
                         this._dataProvider.setTopLevelField(arg3, loc6, loc2[2]);
+                    }
                     loc3 = this._dataProvider.setTopLevelState(loc6, arg1, loc2[1]);
                     loc4 = this.getNodeByID(loc5);
                 }
                 if (loc3 && !(loc4 == null)) 
+                {
                     loc4.invalidateNodeState(arg1);
+                }
                 ++loc7;
             }
             return;
@@ -638,7 +700,9 @@ package net.wg.gui.lobby.techtree.sub
                     loc3 = this.getNodeByID(loc4);
                 }
                 if (loc3 != null) 
+                {
                     loc3.invalidateNodeState(0);
+                }
                 ++loc6;
             }
             return;
@@ -647,7 +711,9 @@ package net.wg.gui.lobby.techtree.sub
         public function setFreeXP(arg1:Number):void
         {
             if (this.xpInfo != null) 
+            {
                 this.xpInfo.setFreeXP(arg1);
+            }
             return;
         }
 
@@ -669,7 +735,9 @@ package net.wg.gui.lobby.techtree.sub
             while (loc3 < loc1.length) 
             {
                 if (!((loc2 = this.renderers[arg1][loc1[loc3]]) == null) && loc2.isUnlocked()) 
+                {
                     return true;
+                }
                 ++loc3;
             }
             return false;
@@ -687,7 +755,9 @@ package net.wg.gui.lobby.techtree.sub
                 if (this.view != null) 
                 {
                     if (App.utils != null) 
+                    {
                         this.view.showSystemMessageS("Error", App.utils.locale.makeString(SYSTEM_MESSAGES.UNLOCKS_DRAWFAILED));
+                    }
                     this.view.onResearchItemsDrawnS();
                 }
                 return;
@@ -712,9 +782,13 @@ package net.wg.gui.lobby.techtree.sub
             var loc1:*=this.positionByID[arg1];
             var loc2:*=null;
             if (loc1.column != -1) 
+            {
                 loc2 = this.renderers[loc1.row][loc1.column];
+            }
             else 
+            {
                 loc2 = this.topRenderers[loc1.row];
+            }
             return loc2;
         }
 
@@ -734,7 +808,9 @@ package net.wg.gui.lobby.techtree.sub
                 loc1 = Vector.<net.wg.gui.lobby.techtree.interfaces.IRenderer>(this.renderers[loc2].filter(loc3.doFilter, loc3));
             }
             else 
+            {
                 loc1 = new Vector.<net.wg.gui.lobby.techtree.interfaces.IRenderer>();
+            }
             return loc1;
         }
 
@@ -749,7 +825,9 @@ package net.wg.gui.lobby.techtree.sub
                 loc1 = Vector.<net.wg.gui.lobby.techtree.interfaces.IRenderer>(this.renderers[loc2].filter(loc3.doFilter, loc3));
             }
             else 
+            {
                 loc1 = new Vector.<net.wg.gui.lobby.techtree.interfaces.IRenderer>();
+            }
             return loc1;
         }
 
@@ -761,7 +839,9 @@ package net.wg.gui.lobby.techtree.sub
         public function cleanUpRenderer(arg1:net.wg.gui.lobby.techtree.interfaces.IRenderer):void
         {
             if (arg1 == null) 
+            {
                 return;
+            }
             arg1.cleanUp();
             arg1.removeEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.CLICK_2_UNLOCK, this.handleUnlockItem);
             arg1.removeEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.CLICK_2_BUY, this.handleBuyItem);
@@ -783,7 +863,9 @@ package net.wg.gui.lobby.techtree.sub
             this.topRenderers = new Vector.<net.wg.gui.lobby.techtree.interfaces.IRenderer>();
             this.positionByID = {};
             if (this.rGraphics != null) 
+            {
                 this.rGraphics.container = this;
+            }
             return;
         }
 
@@ -792,9 +874,13 @@ package net.wg.gui.lobby.techtree.sub
             this.titleAppearance = new net.wg.gui.lobby.techtree.helpers.TitleAppearance(this.titleBar);
             this.setupVehicleRenderer(this.rootRenderer, true);
             if (this.titleBar != null) 
+            {
                 this.titleBar.addEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.RETURN_2_TECHTREE, this.handleReturn2TechTree, false, 0, true);
+            }
             if (this.rGraphics != null) 
+            {
                 this.rGraphics.xRatio = this.xRatio >> 1;
+            }
             super.configUI();
             return;
         }
@@ -802,19 +888,29 @@ package net.wg.gui.lobby.techtree.sub
         protected override function draw():void
         {
             if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
+            {
                 this.updateLayouts();
+            }
             if (!this.drawEnabled) 
+            {
                 return;
+            }
             super.draw();
             if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
             {
                 if (this.rGraphics != null) 
+                {
                     this.rGraphics.setup();
+                }
                 if (this.drawRenderers()) 
+                {
                     this.drawLines();
+                }
                 this.drawEnabled = false;
                 if (this.view != null) 
+                {
                     this.view.onResearchItemsDrawnS();
+                }
             }
             return;
         }
@@ -822,13 +918,21 @@ package net.wg.gui.lobby.techtree.sub
         protected function updateLayouts():void
         {
             if (this.titleAppearance != null) 
+            {
                 this.titleAppearance.updateInResearch(_width, App.appHeight, this.titleDefaultY);
+            }
             if (this.rGraphics != null) 
+            {
                 this.rGraphics.y = (this.titleDefaultY - 1) + (_height >> 1);
+            }
             if (this.premiumLayout != null) 
+            {
                 this.premiumLayout.height = _height;
+            }
             if (this.background != null) 
+            {
                 this.background.height = _height;
+            }
             return;
         }
 
@@ -841,6 +945,7 @@ package net.wg.gui.lobby.techtree.sub
             var loc6:*=false;
             var loc1:*=false;
             if (this._levelsBuilder.nodesByLevel[0][1] == null) 
+            {
                 if (this.rootRenderer) 
                 {
                     trace("Sets root data.");
@@ -861,17 +966,30 @@ package net.wg.gui.lobby.techtree.sub
                         this.titleBar.setTitle(loc6 ? "" : loc2.longName);
                     }
                     if (this.xpInfo != null) 
+                    {
                         this.xpInfo.setFreeXP(loc3.freeXP);
+                    }
                     if (loc6) 
+                    {
                         if (!this.premiumLayout) 
+                        {
                             this.premiumLayout = net.wg.gui.lobby.techtree.controls.PremiumLayout.show(this);
+                        }
+                    }
                     else 
+                    {
                         this.premiumLayout = null;
+                    }
                 }
                 else 
+                {
                     trace("ERROR: Root renderer must be on display list.");
+                }
+            }
             else 
+            {
                 trace("ERROR: In zero level must has one node only.");
+            }
             return loc1;
         }
 
@@ -983,14 +1101,20 @@ class RenderersOnScene extends Object
         switch (loc1) 
         {
             case net.wg.gui.lobby.techtree.constants.NodeEntityType.NEXT_VEHICLE:
+            {
                 this.vehicles.push(arg1);
                 break;
+            }
             case net.wg.gui.lobby.techtree.constants.NodeEntityType.RESEARCH_ITEM:
+            {
                 this.items.push(arg1);
                 break;
+            }
             case net.wg.gui.lobby.techtree.constants.NodeEntityType.UNDEFINED:
+            {
                 this.fakes.push(arg1);
                 break;
+            }
         }
         return;
     }
@@ -1002,16 +1126,28 @@ class RenderersOnScene extends Object
         switch (loc2) 
         {
             case net.wg.gui.lobby.techtree.constants.NodeEntityType.NEXT_VEHICLE:
+            {
                 if (this.vehicles.length > 0) 
+                {
                     loc1 = this.vehicles.pop();
+                }
                 break;
+            }
             case net.wg.gui.lobby.techtree.constants.NodeEntityType.RESEARCH_ITEM:
+            {
                 if (this.items.length > 0) 
+                {
                     loc1 = this.items.pop();
+                }
                 break;
+            }
             case net.wg.gui.lobby.techtree.constants.NodeEntityType.UNDEFINED:
+            {
                 if (this.fakes.length > 0) 
+                {
                     loc1 = this.fakes.pop();
+                }
+            }
         }
         return loc1;
     }

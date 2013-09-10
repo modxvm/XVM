@@ -28,7 +28,9 @@ package net.wg.gui.lobby.techtree.controls
                 loc1 = this.xpLabel.length > 0 ? _owner.getNamedLabel(this.xpLabel) : "";
                 this.setXpField(loc1);
                 if (this.xpIcon != null) 
+                {
                     this.xpIcon.validateNow();
+                }
             }
             super.draw();
             return;
@@ -37,7 +39,9 @@ package net.wg.gui.lobby.techtree.controls
         internal function setXpField(arg1:String):void
         {
             if (this.textField != null) 
+            {
                 this.textField.text = arg1;
+            }
             return;
         }
 

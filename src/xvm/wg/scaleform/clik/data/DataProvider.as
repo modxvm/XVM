@@ -17,7 +17,9 @@ package scaleform.clik.data
         {
             var loc1:*=super.indexOf(arg1);
             if (arg2 != null) 
+            {
                 arg2(loc1);
+            }
             return loc1;
         }
 
@@ -25,7 +27,9 @@ package scaleform.clik.data
         {
             var loc1:*=this[arg1];
             if (arg2 != null) 
+            {
                 arg2(loc1);
+            }
             return loc1;
         }
 
@@ -33,7 +37,9 @@ package scaleform.clik.data
         {
             var loc1:*=this.slice(arg1, arg2 + 1);
             if (arg3 != null) 
+            {
                 arg3(loc1);
+            }
             return loc1;
         }
 
@@ -63,7 +69,9 @@ package scaleform.clik.data
         protected function parseSource(arg1:Array):void
         {
             if (arg1 == null) 
+            {
                 return;
+            }
             var loc1:*=arg1.length;
             var loc2:*=0;
             while (loc2 < loc1) 

@@ -17,14 +17,18 @@ package net.wg.gui.lobby.profile.components.chart
         {
             super.draw();
             if (isInvalid(scaleform.clik.constants.InvalidationType.DATA, LAYOUT_INV)) 
+            {
                 this.applyAxisUpdate();
+            }
             return;
         }
 
         internal function applyAxisUpdate():void
         {
             if (this._horizontalAxis) 
+            {
                 this._horizontalAxis.setData(dataProvider, _renderers, currentLayout);
+            }
             return;
         }
 
@@ -61,9 +65,13 @@ package net.wg.gui.lobby.profile.components.chart
                 if (!(this._horizontalAxisName == null) || !(this._horizontalAxisName == "")) 
                 {
                     if (App.utils) 
+                    {
                         loc1 = net.wg.gui.lobby.profile.components.chart.axis.IChartAxis(App.utils.classFactory.getObject(this._horizontalAxisName));
+                    }
                     else 
+                    {
                         loc1 = net.wg.gui.lobby.profile.components.chart.axis.IChartAxis(flash.utils.getDefinitionByName(this._horizontalAxisName));
+                    }
                     this.horizontalAxis = loc1;
                 }
             }

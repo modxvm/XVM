@@ -36,11 +36,17 @@ package net.wg.gui.lobby.techtree.data.vo
         public function fromObject(arg1:Object, arg2:net.wg.utils.ILocale):void
         {
             if (arg1 == null) 
+            {
                 return;
+            }
             if (arg1.name != null) 
+            {
                 this._name = arg1.name;
+            }
             if (arg1.userString != null) 
+            {
                 this._userString = arg1.userString;
+            }
             return;
         }
 

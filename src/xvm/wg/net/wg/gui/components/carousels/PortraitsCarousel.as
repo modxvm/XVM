@@ -42,7 +42,9 @@ package net.wg.gui.components.carousels
         {
             super.updateRenderPosition(arg1, arg2, arg3, arg4);
             if (!this.buttonGroup.hasButton(scaleform.clik.controls.Button(arg1))) 
+            {
                 this.buttonGroup.addButton(scaleform.clik.controls.Button(arg1));
+            }
             return;
         }
 

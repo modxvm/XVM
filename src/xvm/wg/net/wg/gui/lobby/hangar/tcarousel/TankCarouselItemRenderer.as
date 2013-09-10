@@ -14,7 +14,9 @@ package net.wg.gui.lobby.hangar.tcarousel
             super();
             focusIndicator = this.focusIndicator1;
             if (this.hitMC) 
+            {
                 this.hitArea = this.hitMC;
+            }
             return;
         }
 
@@ -39,7 +41,9 @@ package net.wg.gui.lobby.hangar.tcarousel
         public function set buyTank(arg1:Boolean):void
         {
             if (this._buyTank == arg1) 
+            {
                 return;
+            }
             this._buyTank = arg1;
             _dataDirty = true;
             var loc1:*;
@@ -128,9 +132,13 @@ package net.wg.gui.lobby.hangar.tcarousel
                     this.vehicleIcon.validateNow();
                     this.clanLockUI.timer = this._clanLock;
                     if (this._clanLock >= 0) 
+                    {
                         this.statusText.y = Math.round(this.clanLockUI.y - this.clanLockUI.textField.height);
+                    }
                     else 
+                    {
                         this.statusText.y = 39;
+                    }
                 }
                 loc1 = !(this._stat == "undamaged") && !_empty;
                 this.statusText.visible = loc1;
@@ -142,9 +150,13 @@ package net.wg.gui.lobby.hangar.tcarousel
                     this.emptyInfoTxt.visible = true;
                 }
                 if (this.buySlot) 
+                {
                     this.slotPrice.text = this._slotPrice.toString();
+                }
                 if (empty) 
+                {
                     this.emptyInfoTxt.text = "";
+                }
                 _dataDirty = false;
             }
             var loc2:*;
@@ -161,7 +173,9 @@ package net.wg.gui.lobby.hangar.tcarousel
         public function set favorite(arg1:Boolean):void
         {
             if (this._favorite == arg1) 
+            {
                 return;
+            }
             this._favorite = arg1;
             _dataDirty = true;
             invalidate();
@@ -181,7 +195,9 @@ package net.wg.gui.lobby.hangar.tcarousel
         public function set buySlot(arg1:Boolean):void
         {
             if (this._buySlot == arg1) 
+            {
                 return;
+            }
             this._buySlot = arg1;
             _dataDirty = true;
             var loc1:*;
@@ -199,7 +215,9 @@ package net.wg.gui.lobby.hangar.tcarousel
         public function set id(arg1:String):void
         {
             if (arg1 != "") 
+            {
                 this._id = arg1;
+            }
             return;
         }
 
@@ -290,7 +308,9 @@ package net.wg.gui.lobby.hangar.tcarousel
         public function set current(arg1:Number):void
         {
             if (arg1 >= 0) 
+            {
                 this._current = arg1;
+            }
             return;
         }
 
@@ -316,6 +336,7 @@ package net.wg.gui.lobby.hangar.tcarousel
             switch (loc17) 
             {
                 case "battle":
+                {
                     loc1.color = 13617064;
                     loc2 = 0;
                     loc3 = 90;
@@ -342,8 +363,10 @@ package net.wg.gui.lobby.hangar.tcarousel
                     loc13.push(loc14);
                     loc1.filterArray = loc13;
                     break;
+                }
                 case "buyTank":
                 case "buySlot":
+                {
                     loc1.color = 15329754;
                     loc4 = 16777150;
                     loc5 = 0.2;
@@ -364,11 +387,13 @@ package net.wg.gui.lobby.hangar.tcarousel
                     loc13.push(loc15);
                     loc1.filterArray = loc13;
                     break;
+                }
                 case "ammoNotFull":
                 case "exploded":
                 case "destroyed":
                 case "damaged":
                 case "crewNotFull":
+                {
                     loc1.color = 15400960;
                     loc2 = 0;
                     loc3 = 90;
@@ -395,8 +420,11 @@ package net.wg.gui.lobby.hangar.tcarousel
                     loc13.push(loc16);
                     loc1.filterArray = loc13;
                     break;
+                }
                 default:
+                {
                     break;
+                }
             }
             return loc1;
         }
@@ -404,13 +432,21 @@ package net.wg.gui.lobby.hangar.tcarousel
         protected override function getStatePrefixes():__AS3__.vec.Vector.<String>
         {
             if (_selected && !_empty && !this._buyTank && !this._buySlot) 
+            {
                 return Vector.<String>(["selected_", ""]);
+            }
             if (_empty) 
+            {
                 return Vector.<String>(["empty_"]);
+            }
             if (this._buyTank) 
+            {
                 return Vector.<String>(["buyTank_"]);
+            }
             if (this._buySlot) 
+            {
                 return Vector.<String>(["buySlot_"]);
+            }
             return Vector.<String>([""]);
         }
 
@@ -427,7 +463,9 @@ package net.wg.gui.lobby.hangar.tcarousel
         public override function set displayFocus(arg1:Boolean):void
         {
             if (arg1 == _displayFocus) 
+            {
                 return;
+            }
             _displayFocus = arg1;
             changeFocus();
             return;

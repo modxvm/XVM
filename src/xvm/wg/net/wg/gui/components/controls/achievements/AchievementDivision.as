@@ -38,7 +38,9 @@ package net.wg.gui.components.controls.achievements
         public override function setData(arg1:Object):void
         {
             if (arg1 == null) 
+            {
                 return;
+            }
             super.setData(net.wg.data.VO.AchievementItemVO(arg1));
             return;
         }
@@ -46,11 +48,15 @@ package net.wg.gui.components.controls.achievements
         protected override function applyData():void
         {
             if (data == null) 
+            {
                 return;
+            }
             this.divisionLine.visible = data.hasOwnProperty("showSeparator") ? data.showSeparator : false;
             super.applyData();
             if (data.value <= 1 && counter) 
+            {
                 counter.visible = false;
+            }
             return;
         }
 

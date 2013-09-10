@@ -30,15 +30,25 @@ package net.wg.gui.lobby.techtree.data.vo
         public function fromObject(arg1:Object, arg2:net.wg.utils.ILocale):void
         {
             if (arg1 == null) 
+            {
                 return;
+            }
             if (arg1.type != null) 
+            {
                 this.type = arg1.type;
+            }
             if (arg1.title != null) 
+            {
                 this.title = arg1.title;
+            }
             if (arg1.benefitsHead != null) 
+            {
                 this.benefitsHead = arg1.benefitsHead;
+            }
             if (arg1.benefitsList != null) 
+            {
                 this.benefitsList = arg1.benefitsList;
+            }
             return;
         }
 

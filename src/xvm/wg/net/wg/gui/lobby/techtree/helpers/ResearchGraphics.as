@@ -29,9 +29,13 @@ package net.wg.gui.lobby.techtree.helpers
             var loc9:*=null;
             var loc1:*;
             if ((loc1 = arg2.length) == 0) 
+            {
                 return;
+            }
             if (arg3) 
+            {
                 clearLinesAndArrows(arg1, OUTGOING_LINES_LITERAL);
+            }
             var loc2:*=new flash.geom.Point(arg1.getOutX(), arg1.getY());
             var loc3:*=new flash.geom.Point(loc2.x + this.xRatio, loc2.y);
             var loc4:*=[];
@@ -46,11 +50,17 @@ package net.wg.gui.lobby.techtree.helpers
                     loc8 = new flash.geom.Point(loc9.getInX() - lineRatio, loc9.getY());
                     loc7 = new ResearchLineInfo(arg1, loc9, loc8, !loc9.isFake());
                     if (loc2.y > loc8.y) 
+                    {
                         loc4.push(loc7);
+                    }
                     else if (loc2.y < loc8.y) 
+                    {
                         loc5.push(loc7);
+                    }
                     else if (loc2.y == loc8.y) 
+                    {
                         loc6 = loc7;
+                    }
                 }
                 ++loc10;
             }
@@ -61,25 +71,35 @@ package net.wg.gui.lobby.techtree.helpers
             {
                 loc9 = loc6.child;
                 if (arg4) 
+                {
                     loc11 = loc9.getColorIdxEx(arg1);
+                }
                 if (loc1 != 1) 
                 {
                     drawLine(arg1, colorIdxs[loc11], new flash.geom.Point(loc3.x + lineRatio, loc2.y), loc6.point, OUTGOING_LINES_LITERAL);
                     if (loc6.drawArrow) 
+                    {
                         drawArrowEx(arg1, colorIdxs[loc11], loc3, loc6.point, OUTGOING_LINES_LITERAL);
+                    }
                     loc12 = Math.min(loc11, loc12);
                 }
                 else 
                 {
                     drawLine(arg1, colorIdxs[loc11], loc2, loc6.point, OUTGOING_LINES_LITERAL);
                     if (loc6.drawArrow) 
+                    {
                         drawArrowEx(arg1, colorIdxs[loc11], loc2, loc6.point, OUTGOING_LINES_LITERAL);
+                    }
                 }
                 if (!arg3) 
+                {
                     this.addNodeStateChangedListener(loc9);
+                }
             }
             if (loc1 > 1 || loc6 == null) 
+            {
                 drawLine(arg1, colorIdxs[Math.min(loc12, loc13)], loc2, loc3, OUTGOING_LINES_LITERAL);
+            }
             return;
         }
 
@@ -90,10 +110,14 @@ package net.wg.gui.lobby.techtree.helpers
             var loc13:*=NaN;
             var loc1:*;
             if ((loc1 = arg2.length) == 0 || arg1 == null) 
+            {
                 return;
+            }
             clearLinesAndArrows(arg1, TOP_LINES_LITERAL);
             if (!arg3) 
+            {
                 this.addTopStateChangedListener(arg1);
+            }
             var loc3:*=new flash.geom.Point(arg1.getInX(), arg1.getY());
             var loc4:*=new flash.geom.Point(loc3.x - this.xRatio, loc3.y);
             var loc6:*=[];
@@ -109,9 +133,13 @@ package net.wg.gui.lobby.techtree.helpers
                     loc2 = new flash.geom.Point(loc5.getOutX(), loc5.getY());
                     loc9 = new ResearchLineInfo(loc5, arg1, loc2, false);
                     if (loc2.y < loc3.y) 
+                    {
                         loc6.push(loc9);
+                    }
                     else if (loc2.y > loc3.y) 
+                    {
                         loc7.push(loc9);
+                    }
                     else if (loc2.y == loc3.y) 
                     {
                         loc9.drawArrow = true;
@@ -137,7 +165,9 @@ package net.wg.gui.lobby.techtree.helpers
                     drawArrowEx(loc5, colorIdxs[loc13], loc8.point, loc3, OUTGOING_LINES_LITERAL);
                 }
                 if (!arg3) 
+                {
                     this.addTopStateChangedListener(loc5);
+                }
             }
             if (loc1 > 1 || loc8 == null) 
             {
@@ -145,7 +175,9 @@ package net.wg.gui.lobby.techtree.helpers
                 drawLine(arg1, colorIdxs[loc13], loc4, loc3, TOP_LINES_LITERAL);
                 drawArrowEx(arg1, colorIdxs[loc13], loc4, loc3, TOP_LINES_LITERAL);
                 if (!arg3) 
+                {
                     this.addTopStateChangedListener(arg1);
+                }
             }
             return;
         }
@@ -154,7 +186,9 @@ package net.wg.gui.lobby.techtree.helpers
         {
             super.setup();
             if (this.xpInfo != null) 
+            {
                 this.xpInfo.setOwner(this.rootRenderer);
+            }
             return;
         }
 
@@ -165,16 +199,22 @@ package net.wg.gui.lobby.techtree.helpers
             var loc1:*=0;
             var loc2:*=0;
             if (this.rootRenderer != null) 
+            {
                 ++loc2;
+            }
             if (this.xpInfo != null) 
+            {
                 ++loc2;
+            }
             while (numChildren > loc2) 
             {
                 loc3 = getChildAt(loc1);
                 if (!(loc3 == this.rootRenderer) && !(loc3 == this.xpInfo)) 
                 {
                     if (loc3 is net.wg.gui.lobby.techtree.interfaces.IRenderer) 
+                    {
                         this.clearUpRenderer(net.wg.gui.lobby.techtree.interfaces.IRenderer(loc3));
+                    }
                     removeChildAt(loc1);
                     continue;
                 }
@@ -194,7 +234,9 @@ package net.wg.gui.lobby.techtree.helpers
         {
             container = null;
             if (this.xpInfo != null) 
+            {
                 this.xpInfo.dispose();
+            }
             return;
         }
 
@@ -223,13 +265,21 @@ package net.wg.gui.lobby.techtree.helpers
                 loc7 = new flash.geom.Point(arg2.x, (loc9 != (loc1 - 1) ? arg1[loc9 + 1].point.y : arg2.y) - lineThickness);
                 drawLine(loc2, colorIdxs[loc5], loc6, loc8.point, OUTGOING_LINES_LITERAL);
                 if (loc8.drawArrow) 
+                {
                     drawArrowEx(loc2, colorIdxs[loc5], loc6, loc8.point, OUTGOING_LINES_LITERAL);
+                }
                 drawLine(loc2, colorIdxs[loc4], loc6, loc7, OUTGOING_LINES_LITERAL);
                 if (!arg3) 
+                {
                     if (arg5) 
+                    {
                         this.addTopStateChangedListener(loc2);
+                    }
                     else 
+                    {
                         this.addNodeStateChangedListener(loc3);
+                    }
+                }
                 ++loc9;
             }
             return loc4;
@@ -261,12 +311,20 @@ package net.wg.gui.lobby.techtree.helpers
                 drawLine(loc2, colorIdxs[loc4], loc6, loc7, OUTGOING_LINES_LITERAL);
                 drawLine(loc2, colorIdxs[loc5], loc6, loc8.point, OUTGOING_LINES_LITERAL);
                 if (loc8.drawArrow) 
+                {
                     drawArrowEx(loc2, colorIdxs[loc5], loc6, loc8.point, OUTGOING_LINES_LITERAL);
+                }
                 if (!arg3) 
+                {
                     if (arg5) 
+                    {
                         this.addTopStateChangedListener(loc2);
+                    }
                     else 
+                    {
                         this.addNodeStateChangedListener(loc3);
+                    }
+                }
                 ++loc9;
             }
             return loc4;
@@ -287,7 +345,9 @@ package net.wg.gui.lobby.techtree.helpers
         internal function handleTopLevelStatesChanged(arg1:net.wg.gui.lobby.techtree.TechTreeEvent):void
         {
             if (net.wg.gui.lobby.techtree.data.state.NodeStateCollection.isRedrawResearchLines(arg1.primary)) 
+            {
                 this.drawTopLevelLines(this.rootRenderer, this.containerEx.getTopLevel(), true);
+            }
             return;
         }
 

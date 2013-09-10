@@ -56,7 +56,9 @@ package net.wg.gui.prebattle.battleSession
             var loc2:*=0;
             var loc3:*=arg1;
             for (loc1 in loc3) 
+            {
                 this.requirementInfo.textFields[loc1].text = arg1[loc1];
+            }
             return;
         }
 
@@ -72,7 +74,9 @@ package net.wg.gui.prebattle.battleSession
                 this.requirementInfo.x = Math.round(_width / 2);
             }
             if (isInvalid(INVALIDATE_TEAMS)) 
+            {
                 this.redrawList();
+            }
             return;
         }
 
@@ -80,7 +84,9 @@ package net.wg.gui.prebattle.battleSession
         {
             super.setFocus();
             if (this.channelComponent) 
+            {
                 this.channelComponent.setFocusToInput();
+            }
             return;
         }
 
@@ -120,9 +126,13 @@ package net.wg.gui.prebattle.battleSession
                 ++loc1;
             }
             if (arg2) 
+            {
                 this.memberList.dataProvider = new scaleform.clik.data.DataProvider(arg3);
+            }
             else 
+            {
                 this.memberStackList.dataProvider = new scaleform.clik.data.DataProvider(arg3);
+            }
             invalidate(INVALIDATE_TEAMS);
             return;
         }
@@ -142,9 +152,13 @@ package net.wg.gui.prebattle.battleSession
         public function as_setCommonLimits(arg1:Number, arg2:Number, arg3:Number, arg4:Number):void
         {
             if (arg2 <= arg1 && arg1 <= arg3) 
+            {
                 this.topStats.valueTF.text = String(arg1);
+            }
             else 
+            {
                 this.topStats.valueTF.htmlText = "<font color=\"#ff0000\">" + arg1 + "</font>";
+            }
             this._maxPlayers = arg4;
             invalidate(INVALIDATE_TEAMS);
             return;
@@ -183,9 +197,13 @@ package net.wg.gui.prebattle.battleSession
         public override function as_setPlayerState(arg1:int, arg2:Boolean, arg3:Object):void
         {
             if (arg2) 
+            {
                 checkStatus(this.memberList, arg3);
+            }
             else 
+            {
                 checkStatus(this.memberStackList, arg3);
+            }
             return;
         }
 
@@ -242,7 +260,9 @@ package net.wg.gui.prebattle.battleSession
                     App.contextMenuMgr.showUserContextMenu(this, loc1, loc3);
                 }
                 else 
+                {
                     App.contextMenuMgr.hide();
+                }
             }
             return;
         }
@@ -284,22 +304,32 @@ package net.wg.gui.prebattle.battleSession
         {
             var loc1:*=null;
             if (this.memberStackList.dataProvider.length > 0) 
+            {
                 if (this.memberStackList.selectedIndex > -1) 
                 {
                     loc1 = new net.wg.gui.prebattle.data.PlayerPrbInfoVO(this.memberStackList.dataProvider.requestItemAt(this.memberStackList.selectedIndex));
                     requestToAssignMemberS(loc1.accID);
                 }
+            }
             return;
         }
 
         internal function handleDoubleClick(arg1:net.wg.gui.events.ListEventEx):void
         {
             if (arg1.target == this.memberList) 
+            {
                 if (canMoveToUnassignedS()) 
+                {
                     requestToUnassignMemberS(arg1.itemData.accID);
+                }
+            }
             if (arg1.target == this.memberStackList) 
+            {
                 if (canMoveToAssignedS()) 
+                {
                     requestToAssignMemberS(arg1.itemData.accID);
+                }
+            }
             return;
         }
 
@@ -307,11 +337,13 @@ package net.wg.gui.prebattle.battleSession
         {
             var loc1:*=null;
             if (this.memberList.dataProvider.length > 0) 
+            {
                 if (this.memberList.selectedIndex > -1) 
                 {
                     loc1 = new net.wg.gui.prebattle.data.PlayerPrbInfoVO(this.memberList.dataProvider.requestItemAt(this.memberList.selectedIndex));
                     requestToUnassignMemberS(loc1.accID);
                 }
+            }
             return;
         }
 
@@ -329,9 +361,13 @@ package net.wg.gui.prebattle.battleSession
             this.downButton.enabled = canMoveToUnassignedS() && this.memberList.dataProvider.length > 0;
             this.upButton.enabled = canMoveToAssignedS() && this.memberStackList.dataProvider.length > 0;
             if (this.firstLength < this._maxPlayers) 
+            {
                 this.playersStats.valueTF.text = this.firstLength + "/" + this._maxPlayers;
+            }
             else 
+            {
                 this.playersStats.valueTF.htmlText = "<font color=\"#ff0000\">" + this.firstLength + "/" + this._maxPlayers + "</font>";
+            }
             return;
         }
 
@@ -440,7 +476,9 @@ package net.wg.gui.prebattle.battleSession
                     for (loc7 in loc9) 
                     {
                         if (!loc6.hasOwnProperty(loc7)) 
+                        {
                             continue;
+                        }
                         loc6[loc7] = arg2[loc7];
                     }
                     arg1.invalidateData();

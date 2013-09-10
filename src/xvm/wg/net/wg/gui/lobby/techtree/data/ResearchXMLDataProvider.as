@@ -29,7 +29,9 @@ package net.wg.gui.lobby.techtree.data
                 loc6 = this.getNodeData(loc5);
                 loc4 = topData.length;
                 if (isNaN(loc6.id)) 
+                {
                     continue;
+                }
                 topLevelIdxCache[loc6.id] = loc4;
                 topData.push(loc6);
             }
@@ -41,7 +43,9 @@ package net.wg.gui.lobby.techtree.data
                 loc6 = this.getNodeData(loc5);
                 loc4 = nodeData.length;
                 if (isNaN(loc6.id)) 
+                {
                     continue;
+                }
                 nodeIdxCache[loc6.id] = loc4;
                 nodeData.push(loc6);
                 loc7 = loc6.displayInfo as net.wg.gui.lobby.techtree.data.vo.ResearchDisplayInfo;
@@ -59,7 +63,9 @@ package net.wg.gui.lobby.techtree.data
             var loc3:*=0;
             var loc4:*=arg1.child("path").children();
             for each (loc2 in loc4) 
+            {
                 loc1.push(loc2.text());
+            }
             return new net.wg.gui.lobby.techtree.data.vo.ResearchDisplayInfo(loc1, arg1.child("renderer").text(), arg1.child("level").text());
         }
 
@@ -72,7 +78,9 @@ package net.wg.gui.lobby.techtree.data
             var loc4:*=0;
             var loc5:*=arg1.child("unlockProps").child("required").children();
             for each (loc3 in loc5) 
+            {
                 loc2.push(Number(loc3.toString()));
+            }
             loc1.id = arg1.child("id").text();
             loc1.nameString = arg1.child("nameString").text();
             loc1.primaryClass = new net.wg.gui.lobby.techtree.data.vo.PrimaryClass(arg1.child("class").child("name").text(), arg1.child("class").child("userString").text());

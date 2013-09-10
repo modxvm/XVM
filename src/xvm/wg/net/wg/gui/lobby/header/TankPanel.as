@@ -47,7 +47,9 @@ package net.wg.gui.lobby.header
         {
             var loc1:*=null;
             if (arg1.length == 0) 
+            {
                 this.tank_name.text = "";
+            }
             else 
             {
                 loc1 = App.utils.locale.makeString(arg1, {});
@@ -74,7 +76,9 @@ package net.wg.gui.lobby.header
         {
             var loc1:*=null;
             if (arg1.length == 0) 
+            {
                 this.tank_type.text = "";
+            }
             else 
             {
                 loc1 = App.utils.locale.makeString(MENU.tankmen(arg1), {});
@@ -86,7 +90,9 @@ package net.wg.gui.lobby.header
         public function setTankElite(arg1:Boolean):void
         {
             if (this._eliteVisible == arg1) 
+            {
                 return;
+            }
             this._eliteVisible = arg1;
             invalidate(INVALIDATE_TANK_ELITE);
             return;
@@ -95,9 +101,13 @@ package net.wg.gui.lobby.header
         protected override function draw():void
         {
             if (isInvalid(INVALIDATE_TANK_ELITE)) 
+            {
                 this.elite.visible = this._eliteVisible;
+            }
             if (isInvalid(INVALIDATE_CLAN_EMBLEM)) 
+            {
                 this.clanEmblem.visible = this._clanEmblemVisible;
+            }
             return;
         }
 

@@ -29,7 +29,9 @@ package net.wg.gui.prebattle.battleSession
         {
             super.setFocus();
             if (this.channelComponent) 
+            {
                 this.channelComponent.setFocusToInput();
+            }
             return;
         }
 

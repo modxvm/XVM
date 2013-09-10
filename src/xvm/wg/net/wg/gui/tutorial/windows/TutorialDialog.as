@@ -34,9 +34,13 @@ package net.wg.gui.tutorial.windows
         {
             super.configUI();
             if (this.cancelBtn) 
+            {
                 this.cancelBtn.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onCancelClick);
+            }
             if (this.submitBtn) 
+            {
                 this.submitBtn.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onSubmitClick);
+            }
             return;
         }
 
@@ -44,7 +48,9 @@ package net.wg.gui.tutorial.windows
         {
             super.draw();
             if (isInvalid(scaleform.clik.constants.InvalidationType.DATA) && this._data) 
+            {
                 this.drawData();
+            }
             return;
         }
 
@@ -57,7 +63,9 @@ package net.wg.gui.tutorial.windows
                 this.cancelBtn.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onCancelClick);
                 this.cancelBtn.dispose();
                 if (this.cancelBtn.parent) 
+                {
                     this.cancelBtn.parent.removeChild(this.cancelBtn);
+                }
                 this.cancelBtn = null;
             }
             if (this.submitBtn) 
@@ -65,7 +73,9 @@ package net.wg.gui.tutorial.windows
                 this.submitBtn.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onSubmitClick);
                 this.submitBtn.dispose();
                 if (this.submitBtn.parent) 
+                {
                     this.submitBtn.parent.removeChild(this.submitBtn);
+                }
                 this.submitBtn = null;
             }
             return;

@@ -57,7 +57,9 @@ package net.wg.gui.lobby.profile.pages.statistics
                 while (loc4 < loc3) 
                 {
                     if (loc5 = loc1[loc4]) 
+                    {
                         loc2 = loc2 + loc5.width;
+                    }
                     ++loc4;
                 }
                 loc7 = loc6 = (_width - loc2) / (loc3 + 1);

@@ -84,7 +84,9 @@ package net.wg.gui.lobby.messengerBar
             var loc2:*=null;
             var loc3:*=null;
             if (arg1.eventPhase != flash.events.EventPhase.BUBBLING_PHASE) 
+            {
                 return;
+            }
             var loc1:*=arg1.target as net.wg.infrastructure.interfaces.IAbstractWindowView;
             if (loc1 != null) 
             {
@@ -100,9 +102,13 @@ package net.wg.gui.lobby.messengerBar
         {
             var loc1:*=null;
             if (arg2 != this.notificationInvitesBtn) 
+            {
                 loc1 = new flash.geom.Point(arg2.x + net.wg.gui.lobby.messengerBar.WindowOffsetsInBar.WINDOW_LEFT_OFFSET, -arg1.height);
+            }
             else 
+            {
                 loc1 = new flash.geom.Point(arg2.x - arg1.width + this.notificationInvitesBtn.width + net.wg.gui.lobby.messengerBar.WindowOffsetsInBar.WINDOW_RIGHT_OFFSET, -arg1.height);
+            }
             return localToGlobal(loc1);
         }
 

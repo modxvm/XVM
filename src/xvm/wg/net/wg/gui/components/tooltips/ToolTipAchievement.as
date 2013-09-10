@@ -33,6 +33,7 @@ package net.wg.gui.components.tooltips
             var loc1:*=null;
             super.dispose();
             if (this.flagsBlocks) 
+            {
                 while (this.flagsBlocks.length > 0) 
                 {
                     loc1 = this.flagsBlocks.pop();
@@ -40,6 +41,7 @@ package net.wg.gui.components.tooltips
                     content.removeChild(loc1);
                     loc1 = null;
                 }
+            }
             return;
         }
 
@@ -214,7 +216,9 @@ package net.wg.gui.components.tooltips
                         ++loc21;
                     }
                     if (!loc18) 
+                    {
                         loc12.push({"level":loc14, "data":[loc19]});
+                    }
                     ++loc2;
                 }
                 if (loc12.length > 0) 
@@ -230,7 +234,9 @@ package net.wg.gui.components.tooltips
                         topPosition = this.addCustomBlock(content, loc12[loc22], topPosition);
                         loc6 = net.wg.gui.components.tooltips.helpers.Utils.instance.createSeparate(content);
                         if (loc22 == (loc3 - 1)) 
+                        {
                             topPosition = topPosition + 5;
+                        }
                         loc6.y = topPosition;
                         seaprators.push(loc6);
                         topPosition = topPosition + net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_SEPARATE;
@@ -296,6 +302,7 @@ package net.wg.gui.components.tooltips
                 switch (loc4) 
                 {
                     case this.TYPE_SERIES:
+                    {
                         loc2 = 0;
                         while (loc2 < loc3) 
                         {
@@ -303,7 +310,9 @@ package net.wg.gui.components.tooltips
                             ++loc2;
                         }
                         break;
+                    }
                     case this.TYPE_CLASS:
+                    {
                         loc2 = 0;
                         while (loc2 < loc3) 
                         {
@@ -311,7 +320,9 @@ package net.wg.gui.components.tooltips
                             ++loc2;
                         }
                         break;
+                    }
                     case this.TYPE_CUSTOM:
+                    {
                         loc2 = 0;
                         while (loc2 < loc3) 
                         {
@@ -319,6 +330,7 @@ package net.wg.gui.components.tooltips
                             ++loc2;
                         }
                         break;
+                    }
                 }
             }
             return loc1;

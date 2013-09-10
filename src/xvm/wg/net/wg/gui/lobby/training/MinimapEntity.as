@@ -25,8 +25,12 @@ package net.wg.gui.lobby.training
             {
                 loc2 = this.icons.getChildAt(loc3) as net.wg.infrastructure.interfaces.IMinimapEntry;
                 if (loc2) 
+                {
                     if (loc2.isTeamPoint()) 
+                    {
                         loc2.update(null);
+                    }
+                }
                 ++loc3;
             }
             return;

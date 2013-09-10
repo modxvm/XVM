@@ -73,9 +73,13 @@ package net.wg.gui.components.common.markers
             var loc2:*="marker" + (this.exInfo ? "Alt" : "Base") + arg1;
             var loc3:*="marker" + (this.exInfo ? "Alt" : "Base") + "Dead";
             if (arg1 != HEALTH_LBL) 
+            {
                 loc1 = this.markerSettings[loc2];
+            }
             else 
+            {
                 loc1 = !(this.markerSettings[loc2] == net.wg.gui.components.common.markers.data.HPDisplayMode.HIDDEN);
+            }
             return loc1;
         }
 
@@ -91,7 +95,9 @@ package net.wg.gui.components.common.markers
             if (initialized) 
             {
                 if (this.model.speaking) 
+                {
                     this.setVehicleClass();
+                }
                 loc1 = this.colorScheme.rgb;
                 if (!isNaN(loc1)) 
                 {
@@ -106,7 +112,9 @@ package net.wg.gui.components.common.markers
                         this.updateIconColor();
                         this.setDestroyedColorForHP();
                         if (this._markerState == STATE_IMMEDIATE_DEAD) 
+                        {
                             this.hitLabel.transform.colorTransform = this.colorsManager.getTransform(this.colorSchemeName);
+                        }
                     }
                     this.updateMarkerSettings();
                     this.vehicleTypeMarker.gotoAndPlay(this._markerState);
@@ -118,9 +126,13 @@ package net.wg.gui.components.common.markers
         public function updateState(arg1:String, arg2:Boolean):void
         {
             if (this.vehicleDestroyed) 
+            {
                 return;
+            }
             if (arg2 && arg1 == STATE_DEAD) 
+            {
                 arg1 = STATE_IMMEDIATE_DEAD;
+            }
             this.setMarkerState(arg1);
             return;
         }
@@ -133,10 +145,14 @@ package net.wg.gui.components.common.markers
         public function setSpeaking(arg1:Boolean):void
         {
             if (this.model.speaking == arg1) 
+            {
                 return;
+            }
             this.model.speaking = arg1;
             if (initialized) 
+            {
                 this.setVehicleClass();
+            }
             return;
         }
 
@@ -144,15 +160,21 @@ package net.wg.gui.components.common.markers
         {
             var loc1:*=this.model.speaking && !this.vehicleDestroyed ? "dynamic" : this.model.vClass;
             if (this.vehicleTypeMarker.marker.iconHunt == null) 
+            {
                 this.vehicleTypeMarker.marker.icon.gotoAndStop(loc1);
+            }
             else 
             {
                 this.vehicleTypeMarker.marker.icon.visible = !this.model.hunt;
                 this.vehicleTypeMarker.marker.iconHunt.visible = this.model.hunt;
                 if (this.model.hunt) 
+                {
                     this.vehicleTypeMarker.marker.iconHunt.gotoAndStop(loc1);
+                }
                 else 
+                {
                     this.vehicleTypeMarker.marker.icon.gotoAndStop(loc1);
+                }
             }
             return;
         }
@@ -201,12 +223,16 @@ package net.wg.gui.components.common.markers
             this.vehicleNameField.visible = loc4;
             this.vehicleNameField.text = this.model.vType;
             if (loc5) 
+            {
                 this.healthBar.curHealth = this.model.curHealth;
+            }
             this.healthBar.visible = loc5;
             this.hpFieldContainer.gotoAndStop(loc5 ? "withBar" : "withoutBar");
             this.hpFieldContainer.visible = loc6;
             if (this.vehicleDestroyed) 
+            {
                 this.setDestroyedColorForHP();
+            }
             this.setHealthText();
             this.hitLabel.visible = loc7;
             this.hitExplosion.visible = loc7;
@@ -223,14 +249,18 @@ package net.wg.gui.components.common.markers
         internal function onSplashHidden(arg1:flash.events.Event):void
         {
             if (this.vehicleDestroyed || this.model.curHealth <= 0) 
+            {
                 this.updateMarkerSettings();
+            }
             return;
         }
 
         public function setEntityName(arg1:String):void
         {
             if (arg1 == this._entityName) 
+            {
                 return;
+            }
             this._entityName = arg1;
             this.update();
             return;
@@ -257,11 +287,17 @@ package net.wg.gui.components.common.markers
         {
             var loc1:*=null;
             if (this._markerSettingsOverride) 
+            {
                 loc1 = this._markerSettingsOverride;
+            }
             else if (this.vehicleDestroyed) 
+            {
                 loc1 = s_markerSettings["dead"];
+            }
             else 
+            {
                 loc1 = s_markerSettings[this.model.entityType];
+            }
             return loc1;
         }
 
@@ -306,7 +342,9 @@ package net.wg.gui.components.common.markers
                 this.model = null;
             }
             if (this._markerSettingsOverride) 
+            {
                 this._markerSettingsOverride = null;
+            }
             super.dispose();
             return;
         }
@@ -328,7 +366,9 @@ package net.wg.gui.components.common.markers
                 this.setupIconLoader();
                 this.levelIcon.gotoAndStop(this.model.vLevel);
                 if (this.model.vClass) 
+                {
                     this.setVehicleClass();
+                }
                 this.setMarkerState(this._markerState);
                 this.updateMarkerSettings();
                 this._isPopulated = true;
@@ -340,7 +380,9 @@ package net.wg.gui.components.common.markers
         {
             this.model = new net.wg.gui.components.common.markers.data.VehicleMarkerVO(arg1);
             if (this.model.entityName) 
+            {
                 this._entityName = this.model.entityName;
+            }
             invalidate(scaleform.clik.constants.InvalidationType.DATA);
             return;
         }
@@ -356,11 +398,15 @@ package net.wg.gui.components.common.markers
         {
             var loc1:*=this.colorsManager.getAliasColor(this.colorSchemeName);
             if (this._markerColor == loc1) 
+            {
                 return;
+            }
             this._markerColor = loc1;
             this.applyColor();
             if (this.model.vClass) 
+            {
                 this.setVehicleClass();
+            }
             this.setMarkerState(this._markerState);
             this.updateIconColor();
             return;
@@ -413,7 +459,9 @@ package net.wg.gui.components.common.markers
             if (this._isPopulated) 
             {
                 if (this.getIsPartVisible(HEALTH_BAR)) 
+                {
                     this.healthBar.updateHealth(arg1, net.wg.gui.components.common.markers.data.VehicleMarkerFlags.DAMAGE_COLOR[loc1][this._markerColor]);
+                }
                 if (this.getIsPartVisible(DAMAGE_PANEL)) 
                 {
                     this.hitLabel.damage(loc2, net.wg.gui.components.common.markers.data.VehicleMarkerFlags.DAMAGE_COLOR[loc1][this._markerColor]);
@@ -428,7 +476,9 @@ package net.wg.gui.components.common.markers
                 if (this.getIsPartVisible(HEALTH_LBL)) 
                 {
                     if (this.vehicleDestroyed) 
+                    {
                         this.setDestroyedColorForHP();
+                    }
                     this.setHealthText();
                 }
             }
@@ -449,17 +499,25 @@ package net.wg.gui.components.common.markers
             switch (loc3) 
             {
                 case net.wg.gui.components.common.markers.data.HPDisplayMode.PERCENTS:
+                {
                     loc1 = this.getHealthPercents() + "%";
                     break;
+                }
                 case net.wg.gui.components.common.markers.data.HPDisplayMode.CURRENT_AND_MAXIMUM:
+                {
                     loc1 = this.model.curHealth + " / " + this.model.maxHealth;
                     break;
+                }
                 case net.wg.gui.components.common.markers.data.HPDisplayMode.CURRENT:
+                {
                     loc1 = this.model.curHealth.toString();
                     break;
+                }
                 default:
+                {
                     loc1 = "";
                     break;
+                }
             }
             this.hpFieldContainer.hpField.text = loc1;
             return;

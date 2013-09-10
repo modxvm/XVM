@@ -16,7 +16,9 @@ package net.wg.gui.components.controls.achievements
             var loc6:*=false;
             var loc7:*=false;
             if (data == null) 
+            {
                 return;
+            }
             var loc1:*=getDataOwnValue("type", "");
             var loc2:*=getDataOwnValue("section", "");
             var loc3:*=getDataOwnValue("value", NaN);
@@ -35,43 +37,65 @@ package net.wg.gui.components.controls.achievements
                 switch (loc8) 
                 {
                     case net.wg.data.constants.AchievementType.REPEATABLE:
+                    {
                         loc8 = loc2;
                         switch (loc8) 
                         {
                             case net.wg.data.constants.AchievementSection.SPECIAL:
+                            {
                                 this.checkReceived(loc3, net.wg.gui.components.controls.achievements.AchievementCounter.RED);
                                 if (loc4 > 0) 
+                                {
                                     this.showProgress();
+                                }
                                 else 
+                                {
                                     hideProgress();
+                                }
                                 break;
+                            }
                             default:
+                            {
                                 this.checkReceived(loc3, net.wg.gui.components.controls.achievements.AchievementCounter.RED);
                                 hideProgress();
+                            }
                         }
                         break;
+                    }
                     case net.wg.data.constants.AchievementType.SERIES:
+                    {
                         loc8 = loc2;
                         switch (loc8) 
                         {
                             case net.wg.data.constants.AchievementSection.SPECIAL:
+                            {
                                 counterType = net.wg.gui.components.controls.achievements.AchievementCounter.NONE;
                                 this.setRecordRepeatable(net.wg.gui.components.controls.achievements.AchievementCounter.YELLOW);
                                 if (!isNaN(loc3) && loc5 / loc4 >= 0.9) 
+                                {
                                     this.showProgress();
+                                }
                                 else 
+                                {
                                     hideProgress();
+                                }
                                 break;
+                            }
                             default:
+                            {
                                 this.setRecordRepeatable(net.wg.gui.components.controls.achievements.AchievementCounter.YELLOW);
                                 hideProgress();
+                            }
                         }
                         break;
+                    }
                     case net.wg.data.constants.AchievementType.CUSTOM:
+                    {
                         loc8 = loc2;
                         switch (loc8) 
                         {
                             case net.wg.data.constants.AchievementSection.SPECIAL:
+                            {
                                 counterType = net.wg.gui.components.controls.achievements.AchievementCounter.NONE;
                                 if (loc7 = getDataOwnValue("isInDossier", false)) 
                                 {
@@ -84,26 +108,40 @@ package net.wg.gui.components.controls.achievements
                                     this.showProgress();
                                 }
                                 break;
+                            }
                             default:
+                            {
                                 this.showProgress();
+                            }
                         }
                         break;
+                    }
                     case net.wg.data.constants.AchievementType.CLASS:
+                    {
                         loc8 = loc2;
                         switch (loc8) 
                         {
                             case net.wg.data.constants.AchievementSection.CLASS:
+                            {
                                 this.checkReceived(loc3, net.wg.gui.components.controls.achievements.AchievementCounter.BEIGE);
                                 counterType = net.wg.gui.components.controls.achievements.AchievementCounter.BEIGE;
                                 if (loc5 == loc4) 
+                                {
                                     hideProgress();
+                                }
                                 else 
+                                {
                                     this.showProgress();
+                                }
                                 break;
+                            }
                         }
                         break;
+                    }
                     default:
+                    {
                         this.showProgress();
+                    }
                 }
             }
             super.applyData();
@@ -113,7 +151,9 @@ package net.wg.gui.components.controls.achievements
         protected override function showProgress():void
         {
             if (!getDataOwnValue("isDossierForCurrentUser", null)) 
+            {
                 return;
+            }
             super.showProgress();
             return;
         }
@@ -143,9 +183,13 @@ package net.wg.gui.components.controls.achievements
         protected function setRecordRepeatable(arg1:String):void
         {
             if (getDataOwnValue("isInDossier", false)) 
+            {
                 this.showIcon();
+            }
             else 
+            {
                 this.hideIcon();
+            }
             this.counterType = arg1;
             return;
         }
@@ -181,7 +225,9 @@ package net.wg.gui.components.controls.achievements
         public override function dispose():void
         {
             if (counter && contains(counter)) 
+            {
                 removeChild(counter);
+            }
             super.dispose();
             return;
         }

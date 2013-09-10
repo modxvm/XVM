@@ -56,11 +56,17 @@ package net.wg.gui.lobby.techtree.sub
                 if ((loc2 = this._dataProvider.getIndexByID(loc3[0])) > -1 && this._dataProvider.length > loc2) 
                 {
                     if (arg3 == null) 
+                    {
                         loc4 = false;
+                    }
                     else 
+                    {
                         loc4 = this._dataProvider.setItemField(arg3, loc2, loc3[2]);
+                    }
                     if (this._dataProvider.setState(loc2, arg1, loc3[1]) || loc4) 
+                    {
                         this.renderers[loc2].invalidateNodeState(arg1);
+                    }
                 }
                 ++loc5;
             }
@@ -74,7 +80,9 @@ package net.wg.gui.lobby.techtree.sub
             this._dataProvider.addEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.DATA_BUILD_COMPLETE, this.handleDataComplete, false, 0, true);
             this.renderers = new Vector.<net.wg.gui.lobby.techtree.interfaces.IRenderer>();
             if (this.ntGraphics != null) 
+            {
                 this.ntGraphics.container = this;
+            }
             return;
         }
 
@@ -90,16 +98,22 @@ package net.wg.gui.lobby.techtree.sub
             }
             addEventListener(flash.events.MouseEvent.MOUSE_WHEEL, this.handleMouseWheel, false, 0, true);
             if (App.cursor != null) 
+            {
                 App.cursor.registerDragging(this, net.wg.data.constants.Cursors.MOVE);
+            }
             return;
         }
 
         protected override function draw():void
         {
             if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
+            {
                 this.updateLayouts();
+            }
             if (!this.drawTreeEnabled) 
+            {
                 return;
+            }
             super.draw();
             if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
             {
@@ -112,7 +126,9 @@ package net.wg.gui.lobby.techtree.sub
                 this.drawRenderers();
                 this.updateScrollBar();
                 if (this.scrollToNode && this._dataProvider.scrollIndex > -1) 
+                {
                     this.scrollToIndex(this._dataProvider.scrollIndex);
+                }
                 else if (this.scrollToPosition >= 0) 
                 {
                     this.scrollPosition = this.scrollToPosition;
@@ -120,7 +136,9 @@ package net.wg.gui.lobby.techtree.sub
                 }
                 this.scrollToNode = false;
                 if (this.renderers.length > 0) 
+                {
                     this.drawLines();
+                }
                 this.ntGraphics.show();
                 this.drawTreeEnabled = false;
             }
@@ -154,10 +172,14 @@ package net.wg.gui.lobby.techtree.sub
         public function set dataProvider(arg1:net.wg.gui.lobby.techtree.interfaces.INationTreeDataProvider):void
         {
             if (this._dataProvider != null) 
+            {
                 this._dataProvider.removeEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.DATA_BUILD_COMPLETE, this.handleDataComplete);
+            }
             this._dataProvider = arg1;
             if (this._dataProvider != null) 
+            {
                 this._dataProvider.addEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.DATA_BUILD_COMPLETE, this.handleDataComplete, false, 0, true);
+            }
             return;
         }
 
@@ -172,7 +194,9 @@ package net.wg.gui.lobby.techtree.sub
         {
             var loc1:*=arg1.target.position;
             if (isNaN(loc1)) 
+            {
                 return;
+            }
             this.scrollPosition = loc1;
             net.wg.gui.lobby.techtree.MenuHandler.getInstance().hideMenu();
             return;
@@ -277,9 +301,13 @@ package net.wg.gui.lobby.techtree.sub
         internal function removeItemRenderers():void
         {
             while (this.renderers.length > 0) 
+            {
                 this.cleanUpRenderer(this.renderers.pop());
+            }
             if (this.ntGraphics != null) 
+            {
                 this.ntGraphics.clearUp();
+            }
             return;
         }
 
@@ -289,16 +317,22 @@ package net.wg.gui.lobby.techtree.sub
             var loc5:*=null;
             var loc6:*=0;
             if (this._itemRendererClass == null) 
+            {
                 return;
+            }
             if (this.ntGraphics != null) 
+            {
                 this.ntGraphics.clearCache();
+            }
             var loc1:*=this._dataProvider.length;
             while (this.renderers.length > loc1) 
             {
                 loc2 = this.renderers.pop();
                 this.cleanUpRenderer(loc2);
                 if (this.ntGraphics == null) 
+                {
                     continue;
+                }
                 this.ntGraphics.removeRenderer(loc2);
             }
             var loc3:*=0;
@@ -330,14 +364,20 @@ package net.wg.gui.lobby.techtree.sub
                     this.renderers.push(loc2);
                 }
                 if (loc8) 
+                {
                     if ((loc6 = (loc2.getLevel() - 1)) > -1) 
+                    {
                         if (loc4[loc6] == null) 
+                        {
                             loc4[loc6] = new net.wg.gui.lobby.techtree.helpers.Distance(loc2.getInX(), loc2.getInX());
+                        }
                         else 
                         {
                             (loc5 = loc4[loc6]).start = Math.min(loc5.start, loc2.getInX());
                             loc5.end = Math.max(loc5.end, loc2.getInX());
                         }
+                    }
+                }
                 loc3 = Math.max(loc3, loc2.getInX() + this.nodeWidth);
                 ++loc9;
             }
@@ -351,7 +391,9 @@ package net.wg.gui.lobby.techtree.sub
         {
             var loc1:*=this.renderers.length;
             if (loc1 > 0) 
+            {
                 this.ntGraphics.drawTopLines(this.renderers[0], false);
+            }
             var loc2:*=1;
             while (loc2 < loc1) 
             {
@@ -380,12 +422,18 @@ package net.wg.gui.lobby.techtree.sub
         public function set view(arg1:net.wg.gui.lobby.techtree.interfaces.ITechTreePage):void
         {
             if (arg1 == this._view) 
+            {
                 return;
+            }
             this._view = arg1;
             if (this._view == null) 
+            {
                 this.scrollBar = null;
+            }
             else if (arg1["scrollBar"] != null) 
+            {
                 this.scrollBar = arg1["scrollBar"];
+            }
             return;
         }
 
@@ -400,10 +448,14 @@ package net.wg.gui.lobby.techtree.sub
             renderer = null;
             value = arg1;
             if (value == "" || this._itemRendererName == value) 
+            {
                 return;
+            }
             this._itemRendererName = value;
             try 
+            {
                 classRef = flash.utils.getDefinitionByName(this._itemRendererName) as Class;
+            }
             catch (error:*)
             {
                 trace("error", error.message);
@@ -417,7 +469,9 @@ package net.wg.gui.lobby.techtree.sub
                     renderer = this.renderers.pop();
                     this.cleanUpRenderer(renderer);
                     if (this.ntGraphics == null) 
+                    {
                         continue;
+                    }
                     this.ntGraphics.removeRenderer(renderer);
                 }
             }
@@ -431,7 +485,9 @@ package net.wg.gui.lobby.techtree.sub
             this.view = null;
             net.wg.gui.lobby.techtree.data.vo.NodeData.setDisplayInfoClass(null);
             if (this.ntGraphics != null) 
+            {
                 this.ntGraphics.dispose();
+            }
             if (this.scrollBar != null) 
             {
                 this.scrollBar.focusTarget = null;
@@ -439,7 +495,9 @@ package net.wg.gui.lobby.techtree.sub
             }
             removeEventListener(flash.events.MouseEvent.MOUSE_WHEEL, this.handleMouseWheel);
             if (App.cursor != null) 
+            {
                 App.cursor.unRegisterDragging(this);
+            }
             if (this._dataProvider != null) 
             {
                 this._dataProvider.removeEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.DATA_BUILD_COMPLETE, this.handleDataComplete);
@@ -457,7 +515,9 @@ package net.wg.gui.lobby.techtree.sub
             {
                 loc1 = this.renderers[arg1];
                 if (loc1 != null) 
+                {
                     this.scrollPosition = Math.round((loc1.x + (this.nodeWidth + x - width >> 1)) / this.scrollStepFactor);
+                }
             }
             return;
         }
@@ -471,7 +531,9 @@ package net.wg.gui.lobby.techtree.sub
         {
             arg1 = Math.max(0, Math.min(this.maxScroll, Math.round(arg1)));
             if (this._scrollPosition == arg1) 
+            {
                 return;
+            }
             this._scrollPosition = arg1;
             this.ntGraphics.x = -Math.min(Math.abs(this._totalWidth - width), this.scrollStepFactor * this._scrollPosition);
             this.updateScrollBar();
@@ -491,7 +553,9 @@ package net.wg.gui.lobby.techtree.sub
         public function storeScrollPosition():void
         {
             if (this._dataProvider != null) 
+            {
                 this.positionByNation[this._dataProvider.nation] = this._scrollPosition;
+            }
             return;
         }
 
@@ -545,7 +609,9 @@ package net.wg.gui.lobby.techtree.sub
         public function onStartDrag():void
         {
             if (this.isDragging == true) 
+            {
                 return;
+            }
             this.isDragging = true;
             this.dragOffset = stage.mouseX - this.ntGraphics.x;
             return;

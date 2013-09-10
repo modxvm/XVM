@@ -54,7 +54,9 @@ package net.wg.gui.lobby.profile.pages.technique
                 loc8.y = Math.round(loc5 + loc7 * loc2);
                 loc8.width = loc3;
                 if (!loc6) 
+                {
                     loc8.validateNow();
+                }
                 ++loc7;
             }
             drawScrollBar();
@@ -85,7 +87,9 @@ package net.wg.gui.lobby.profile.pages.technique
         internal function indexChangedHandler(arg1:scaleform.clik.events.ListEvent):void
         {
             if (!this.isSortingTheLastActivity) 
+            {
                 dispatchEvent(new flash.events.Event(SELECTED_DATA_CHANGED));
+            }
             return;
         }
 
@@ -99,6 +103,7 @@ package net.wg.gui.lobby.profile.pages.technique
             this.invalidateSorting(sortPropName);
             super.dataProvider = arg1;
             if (!this.isValidationChecked) 
+            {
                 if (arg1 && arg1.length > 0) 
                 {
                     this.isValidationChecked = true;
@@ -115,8 +120,11 @@ package net.wg.gui.lobby.profile.pages.technique
                     var loc4:*=0;
                     var loc5:*=loc1;
                     for each (loc3 in loc5) 
+                    {
                         App.utils.asserter.assert(loc2.hasOwnProperty(loc3), "There is no property \'" + loc3 + "\' in the " + flash.utils.getQualifiedClassName(loc2) + " to apply sort operation! " + flash.utils.getQualifiedClassName(this));
+                    }
                 }
+            }
             return;
         }
 
@@ -127,7 +135,9 @@ package net.wg.gui.lobby.profile.pages.technique
             var loc1:*=-1;
             var loc2:*;
             if ((loc2 = dataProvider.length) > 0) 
+            {
                 loc1 = 0;
+            }
             var loc4:*=0;
             while (loc4 < loc2) 
             {
@@ -166,7 +176,9 @@ package net.wg.gui.lobby.profile.pages.technique
         public function get selectedItem():Object
         {
             if (dataProvider && dataProvider.length > 0) 
+            {
                 return dataProvider[selectedIndex];
+            }
             return null;
         }
 
@@ -230,7 +242,9 @@ package net.wg.gui.lobby.profile.pages.technique
             {
                 sortMask = Array.CASEINSENSITIVE;
                 if (!arg1) 
+                {
                     sortMask = sortMask | Array.DESCENDING;
+                }
                 this.invalidateSorting(SHORT_USER_NAME);
             }
             return;

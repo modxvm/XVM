@@ -48,7 +48,9 @@ package net.wg.gui.lobby.profile.pages.statistics
                 var loc8:*=0;
                 var loc9:*=loc1;
                 for each (loc4 in loc9) 
+                {
                     loc3 = loc3 + Math.round(loc4.actualWidth);
+                }
                 loc6 = loc5 = Math.round((this.currentDimension.x - loc3) / (loc2 + 1));
                 loc7 = 0;
                 while (loc7 < loc2) 
@@ -118,7 +120,9 @@ package net.wg.gui.lobby.profile.pages.statistics
         public function setViewSize(arg1:Number, arg2:Number):void
         {
             if (!this.currentDimension) 
+            {
                 this.currentDimension = new flash.geom.Point();
+            }
             this.currentDimension.x = arg1;
             this.currentDimension.y = arg2;
             invalidate(LAYOUT_INV);
@@ -148,9 +152,13 @@ package net.wg.gui.lobby.profile.pages.statistics
                 loc1.push(loc2);
             }
             if (loc2.hasOwnProperty("xField")) 
+            {
                 loc1.sortOn("xField", [Array.NUMERIC]);
+            }
             else 
+            {
                 throw new Error("There is no property: \'xField\' in the target Array. Couldn\'t perform sort operation!");
+            }
             return new scaleform.clik.data.DataProvider(loc1);
         }
 

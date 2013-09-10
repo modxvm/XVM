@@ -18,7 +18,7 @@ package net.wg.gui.lobby.profile.data
 
         public var dossierType:int;
 
-        public var rareIconId:int;
+        public var rareIconId:String="";
 
         public var isRare:Boolean;
 

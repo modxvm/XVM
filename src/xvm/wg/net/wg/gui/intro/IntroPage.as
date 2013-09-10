@@ -40,7 +40,9 @@ package net.wg.gui.intro
         public override function updateStage(arg1:Number, arg2:Number):void
         {
             if (!this.stageDimensions) 
+            {
                 this.stageDimensions = new flash.geom.Point();
+            }
             this.stageDimensions.x = arg1;
             this.stageDimensions.y = arg2;
             invalidate(STAGE_RESIZED);
@@ -92,14 +94,20 @@ package net.wg.gui.intro
         {
             super.draw();
             if (isInvalid(INTRO_INFO_CHANGED)) 
+            {
                 if (this.introInfo) 
                 {
                     this.videoPlayer.volume = this.introInfo.volume;
                     this.videoPlayer.source = this.introInfo.source;
                 }
+            }
             if (isInvalid(STAGE_RESIZED)) 
+            {
                 if (this.stageDimensions) 
+                {
                     net.wg.gui.intro.IntroPage.imitateNoBorderScaleMode(this, this.stageDimensions.x, this.stageDimensions.y, this.playerOriginalWidth, this.playerOriginalHeight);
+                }
+            }
             return;
         }
 
@@ -111,11 +119,15 @@ package net.wg.gui.intro
                 this.videoPlayer.removeEventListener(net.wg.gui.components.common.video.VideoPlayerStatusEvent.ERROR, this.videoPlayerErrorHandler);
                 this.videoPlayer.dispose();
                 if (this.videoPlayer.parent) 
+                {
                     this.videoPlayer.parent.removeChild(this.videoPlayer);
+                }
                 this.videoPlayer = null;
             }
             if (stage) 
+            {
                 stage.removeEventListener(flash.events.MouseEvent.CLICK, this.clickMainHandler);
+            }
             super.onDispose();
             return;
         }

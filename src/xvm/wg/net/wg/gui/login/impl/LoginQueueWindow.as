@@ -23,7 +23,9 @@ package net.wg.gui.login.impl
             var loc1:*=App.appWidth - window.width >> 1;
             var loc2:*=App.appHeight - window.height >> 1;
             if (this.isFirstUpdateStage) 
+            {
                 this.isFirstUpdateStage = false;
+            }
             else 
             {
                 window.x = loc1;

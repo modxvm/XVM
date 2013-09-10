@@ -34,7 +34,9 @@ package net.wg.gui.components.advanced
         public override function dispose():void
         {
             if (this.extraIcon && contains(this.extraIcon)) 
+            {
                 removeChild(this.extraIcon);
+            }
             super.dispose();
             return;
         }

@@ -21,7 +21,9 @@ package net.wg.gui.lobby.customization.renderers
             var loc1:*=getStatePrefixes();
             var loc2:*=_stateMap[arg1];
             if (loc2 == null || loc2.length == 0) 
+            {
                 return;
+            }
             do 
             {
                 loc5 = loc1.pop().toString();
@@ -29,7 +31,9 @@ package net.wg.gui.lobby.customization.renderers
                 while (loc3 >= 0) 
                 {
                     if ((loc4 = loc5 + loc2[loc3]) != border.state) 
+                    {
                         border.state = loc4;
+                    }
                     --loc3;
                 }
             }

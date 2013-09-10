@@ -23,7 +23,9 @@ package net.wg.infrastructure.managers.utils.impl
             classpath = arg1;
             outcomeClass = null;
             try 
+            {
                 outcomeClass = flash.utils.getDefinitionByName(classpath) as Class;
+            }
             catch (e:ReferenceError)
             {
                 DebugUtils.LOG_ERROR(net.wg.data.constants.Errors.BAD_LINKAGE + classpath);

@@ -14,7 +14,9 @@ package net.wg.data.VO
         public function get slidingScrListY():Number
         {
             if (this._isOpen) 
+            {
                 return Math.round(LIST_Y + this.devHeight);
+            }
             return 0;
         }
 
@@ -23,7 +25,9 @@ package net.wg.data.VO
             if (!this.isEmpty) 
             {
                 if (this._isOpen) 
+                {
                     return Math.round(RESULT_Y + MARGIN + this.listHeight + this.devHeight);
+                }
                 return Math.round(RESULT_Y + this.devHeight);
             }
             return Math.round(DEF_RESULT_Y + this.devHeight);
@@ -34,7 +38,9 @@ package net.wg.data.VO
             if (!this.isEmpty) 
             {
                 if (this._isOpen) 
+                {
                     return Math.round(BGFORM_HEIGHT + MARGIN + this.listHeight + this.devHeight);
+                }
                 return Math.round(BGFORM_HEIGHT + this.devHeight);
             }
             return Math.round(DEF_BGFORM_HEIGHT + this.devHeight);
@@ -43,7 +49,9 @@ package net.wg.data.VO
         public function get windBgHeight():Number
         {
             if (this._isOpen) 
+            {
                 return Math.round(WINDOW_HEIGHT + MARGIN + this.listHeight + this.devHeight);
+            }
             return Math.round(WINDOW_HEIGHT + this.devHeight);
         }
 
@@ -73,7 +81,9 @@ package net.wg.data.VO
             if (!this.isEmpty) 
             {
                 if (this._isOpen) 
+                {
                     return Math.round(ARROW_BG_HEIGHT + this.listHeight + this.devHeight);
+                }
                 return Math.round(ARROW_BG_HEIGHT + MARGIN + this.devHeight);
             }
             return Math.round(DEF_ARROW_BG_HEIGHT + this.devHeight);
@@ -84,7 +94,9 @@ package net.wg.data.VO
             if (!this.isEmpty) 
             {
                 if (this._isOpen) 
+                {
                     return Math.round(BTNS_Y + MARGIN + this.listHeight + this.devHeight);
+                }
                 return Math.round(BTNS_Y + this.devHeight);
             }
             return Math.round(DEF_BTNS_Y + this.devHeight);
@@ -93,28 +105,36 @@ package net.wg.data.VO
         public function get dropdownResultY():Number
         {
             if (this._isOpen) 
+            {
                 return Math.round(DROPDOWNRESULT_Y + this.listHeight + this.devHeight);
+            }
             return Math.round(DEF_DROPDOWNRESULT_Y + this.devHeight);
         }
 
         public function get alpha():Number
         {
             if (this._isOpen) 
+            {
                 return 0;
+            }
             return 1;
         }
 
         public function get expandBgHeight():Number
         {
             if (this._isOpen) 
+            {
                 return Math.round(EXPANDBG_HEIGHT + MARGIN + this.listHeight);
+            }
             return Math.round(EXPANDBG_HEIGHT);
         }
 
         public function get maskMcHeight():Number
         {
             if (this._isOpen) 
+            {
                 return Math.round(this.listHeight - MARGIN);
+            }
             return 0;
         }
 

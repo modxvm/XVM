@@ -46,7 +46,9 @@ package net.wg.gui.lobby.store.inventory
         protected override function onMenuChange():void
         {
             if (!initializing) 
+            {
                 updateTable();
+            }
             super.onMenuChange();
             return;
         }
@@ -60,7 +62,9 @@ package net.wg.gui.lobby.store.inventory
         {
             super.onViewNeedUpdate(arg1, arg2);
             if (!initializing) 
+            {
                 arg1.setSubFilterData(nation, subFilterData);
+            }
             arg1.update(getViewData(arg2));
             storeTable.updateHeaderCountTitle(MENU.shop_table_header_count(arg1.fittingType));
             return;

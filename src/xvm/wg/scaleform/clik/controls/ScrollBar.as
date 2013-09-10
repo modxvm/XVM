@@ -37,9 +37,13 @@ package scaleform.clik.controls
                 this._dragOffset = new flash.geom.Point(0, thumb.height / 2);
             }
             if (_isDragging || this.position == this._trackScrollPosition) 
+            {
                 return;
+            }
             if (mouseY > thumb.y && mouseY < thumb.y + thumb.height) 
+            {
                 return;
+            }
             this.position = this.position + (thumb.y < mouseY ? this.trackScrollPageSize : -this.trackScrollPageSize);
             return;
         }
@@ -49,9 +53,13 @@ package scaleform.clik.controls
             if (arg1.isRepeat) 
             {
                 if (_isDragging || this.position == this._trackScrollPosition) 
+                {
                     return;
+                }
                 if (mouseY > thumb.y && mouseY < thumb.y + thumb.height) 
+                {
                     return;
+                }
                 this.position = this.position + (thumb.y < mouseY ? this.trackScrollPageSize : -this.trackScrollPageSize);
             }
             return;
@@ -60,10 +68,14 @@ package scaleform.clik.controls
         protected function updateScrollTarget():void
         {
             if (_scrollTarget == null || !this.enabled) 
+            {
                 return;
+            }
             var loc1:*=_scrollTarget as flash.text.TextField;
             if (loc1 != null) 
+            {
                 _scrollTarget.scrollV = _position;
+            }
             return;
         }
 
@@ -131,7 +143,9 @@ package scaleform.clik.controls
             var loc1:*=rotation;
             rotation = 0;
             if (this.downArrow) 
+            {
                 constraints.addElement("downArrow", this.downArrow, scaleform.clik.utils.Constraints.BOTTOM);
+            }
             constraints.addElement("track", track, scaleform.clik.utils.Constraints.TOP | scaleform.clik.utils.Constraints.BOTTOM);
             rotation = loc1;
             return;
@@ -151,7 +165,9 @@ package scaleform.clik.controls
         public override function set enabled(arg1:Boolean):void
         {
             if (this.enabled == arg1) 
+            {
                 return;
+            }
             super.enabled = arg1;
             gotoAndPlay(this.enabled ? "default" : "disabled");
             invalidate(scaleform.clik.constants.InvalidationType.STATE);
@@ -167,7 +183,9 @@ package scaleform.clik.controls
         {
             arg1 = Math.round(arg1);
             if (arg1 == this.position) 
+            {
                 return;
+            }
             super.position = arg1;
             this.updateScrollTarget();
             return;
@@ -181,10 +199,14 @@ package scaleform.clik.controls
         public function set trackMode(arg1:String):void
         {
             if (arg1 == this._trackMode) 
+            {
                 return;
+            }
             this._trackMode = arg1;
             if (initialized) 
+            {
                 track.autoRepeat = this.trackMode == scaleform.clik.constants.ScrollBarTrackMode.SCROLL_PAGE;
+            }
             return;
         }
 
@@ -228,7 +250,9 @@ package scaleform.clik.controls
             track.addEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.handleTrackPress, false, 0, true);
             track.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.handleTrackClick, false, 0, true);
             if (track is scaleform.clik.core.UIComponent) 
+            {
                 (track as scaleform.clik.core.UIComponent).focusTarget = this;
+            }
             track.autoRepeat = this.trackMode == scaleform.clik.constants.ScrollBarTrackMode.SCROLL_PAGE;
             return;
         }
@@ -250,9 +274,13 @@ package scaleform.clik.controls
             var loc1:*=NaN;
             thumb.y = track.y - offsetTop;
             if (isHorizontal) 
+            {
                 constraints.update(_height, _width);
+            }
             else 
+            {
                 constraints.update(_width, _height);
+            }
             if (isHorizontal && !(actualWidth == width)) 
             {
                 loc1 = width / actualWidth;
@@ -267,7 +295,9 @@ package scaleform.clik.controls
             var loc2:*=track.height + offsetTop + offsetBottom;
             thumb.height = Math.max(_minThumbSize, Math.min(loc2, _pageSize / loc1 * loc2));
             if (thumb is scaleform.clik.core.UIComponent) 
+            {
                 (thumb as scaleform.clik.core.UIComponent).validateNow();
+            }
             this.updateThumbPosition();
             return;
         }
@@ -299,7 +329,9 @@ package scaleform.clik.controls
         protected function handleUpArrowClick(arg1:scaleform.clik.events.ButtonEvent):void
         {
             if (arg1.isRepeat) 
+            {
                 this.scrollUp();
+            }
             return;
         }
 
@@ -312,7 +344,9 @@ package scaleform.clik.controls
         protected function handleDownArrowClick(arg1:scaleform.clik.events.ButtonEvent):void
         {
             if (arg1.isRepeat) 
+            {
                 this.scrollDown();
+            }
             return;
         }
 
@@ -325,7 +359,9 @@ package scaleform.clik.controls
         protected function handleThumbPress(arg1:flash.events.Event):void
         {
             if (_isDragging) 
+            {
                 return;
+            }
             _isDragging = true;
             stage.addEventListener(flash.events.MouseEvent.MOUSE_MOVE, this.doDrag, false, 0, true);
             stage.addEventListener(flash.events.MouseEvent.MOUSE_UP, this.endDrag, false, 0, true);

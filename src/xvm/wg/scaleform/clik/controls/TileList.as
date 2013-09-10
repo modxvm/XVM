@@ -21,40 +21,58 @@ package scaleform.clik.controls
         public override function getRendererAt(arg1:uint, arg2:int=0):scaleform.clik.interfaces.IListItemRenderer
         {
             if (_renderers == null) 
+            {
                 return null;
+            }
             var loc1:*=arg1 - arg2 * (this._direction != scaleform.clik.constants.DirectionMode.HORIZONTAL ? this._totalColumns : this._totalRows);
             if (loc1 >= _renderers.length) 
+            {
                 return null;
+            }
             return _renderers[loc1] as scaleform.clik.interfaces.IListItemRenderer;
         }
 
         public override function scrollToIndex(arg1:uint):void
         {
             if (_totalRenderers == 0) 
+            {
                 return;
+            }
             var loc1:*=this._direction != scaleform.clik.constants.DirectionMode.HORIZONTAL ? this._totalColumns : this._totalRows;
             var loc2:*=this._scrollPosition * loc1;
             if (loc1 == 0) 
+            {
                 return;
+            }
             if (arg1 >= loc2 && arg1 < loc2 + this._totalRows * this._totalColumns) 
+            {
                 return;
+            }
             if (arg1 < loc2) 
+            {
                 this.scrollPosition = arg1 / loc1 >> 0;
+            }
             else 
+            {
                 this.scrollPosition = Math.floor(arg1 / loc1) - (this._direction != scaleform.clik.constants.DirectionMode.HORIZONTAL ? this._totalRows : this._totalColumns) + 1;
+            }
             return;
         }
 
         public override function handleInput(arg1:scaleform.clik.events.InputEvent):void
         {
             if (arg1.handled) 
+            {
                 return;
+            }
             var loc1:*=this.getRendererAt(_selectedIndex, this._scrollPosition);
             if (loc1 != null) 
             {
                 loc1.handleInput(arg1);
                 if (arg1.handled) 
+                {
                     return;
+                }
             }
             var loc2:*=arg1.details;
             var loc3:*=loc2.value == scaleform.clik.constants.InputValue.KEY_DOWN || loc2.value == scaleform.clik.constants.InputValue.KEY_HOLD;
@@ -66,17 +84,25 @@ package scaleform.clik.controls
                 switch (loc6) 
                 {
                     case scaleform.clik.constants.NavigationCode.DOWN:
+                    {
                         loc4 = _selectedIndex + this._totalColumns;
                         break;
+                    }
                     case scaleform.clik.constants.NavigationCode.UP:
+                    {
                         loc4 = _selectedIndex - this._totalColumns;
                         break;
+                    }
                     case scaleform.clik.constants.NavigationCode.LEFT:
+                    {
                         loc4 = (_selectedIndex - 1);
                         break;
+                    }
                     case scaleform.clik.constants.NavigationCode.RIGHT:
+                    {
                         loc4 = _selectedIndex + 1;
                         break;
+                    }
                 }
             }
             else 
@@ -85,17 +111,25 @@ package scaleform.clik.controls
                 switch (loc6) 
                 {
                     case scaleform.clik.constants.NavigationCode.RIGHT:
+                    {
                         loc4 = _selectedIndex + this._totalRows;
                         break;
+                    }
                     case scaleform.clik.constants.NavigationCode.LEFT:
+                    {
                         loc4 = _selectedIndex - this._totalRows;
                         break;
+                    }
                     case scaleform.clik.constants.NavigationCode.UP:
+                    {
                         loc4 = (_selectedIndex - 1);
                         break;
+                    }
                     case scaleform.clik.constants.NavigationCode.DOWN:
+                    {
                         loc4 = _selectedIndex + 1;
                         break;
+                    }
                 }
             }
             if (loc4 == int.MIN_VALUE) 
@@ -104,17 +138,25 @@ package scaleform.clik.controls
                 switch (loc6) 
                 {
                     case scaleform.clik.constants.NavigationCode.HOME:
+                    {
                         loc4 = 0;
                         break;
+                    }
                     case scaleform.clik.constants.NavigationCode.END:
+                    {
                         loc4 = (_dataProvider.length - 1);
                         break;
+                    }
                     case scaleform.clik.constants.NavigationCode.PAGE_DOWN:
+                    {
                         loc4 = Math.min((_dataProvider.length - 1), _selectedIndex + this._totalColumns * this._totalRows);
                         break;
+                    }
                     case scaleform.clik.constants.NavigationCode.PAGE_UP:
+                    {
                         loc4 = Math.max(0, _selectedIndex - this._totalColumns * this._totalRows);
                         break;
+                    }
                 }
             }
             if (loc4 != int.MIN_VALUE) 
@@ -130,16 +172,20 @@ package scaleform.clik.controls
                     arg1.handled = true;
                 }
                 else if (this.wrapping != scaleform.clik.constants.WrappingMode.STICK) 
+                {
                     if (this.wrapping == scaleform.clik.constants.WrappingMode.WRAP) 
                     {
                         this.selectedIndex = loc4 < 0 ? (_dataProvider.length - 1) : selectedIndex < (_dataProvider.length - 1) ? (_dataProvider.length - 1) : 0;
                         arg1.handled = true;
                     }
+                }
                 else 
                 {
                     loc4 = Math.max(0, Math.min((_dataProvider.length - 1), loc4));
                     if (selectedIndex != loc4) 
+                    {
                         this.selectedIndex = loc4;
+                    }
                     arg1.handled = true;
                 }
             }
@@ -155,16 +201,22 @@ package scaleform.clik.controls
         {
             super.configUI();
             if (this.padding == null) 
+            {
                 this.padding = new scaleform.clik.utils.Padding();
+            }
             if (_itemRenderer == null && !_usingExternalRenderers) 
+            {
                 itemRendererName = _itemRendererName;
+            }
             return;
         }
 
         protected override function draw():void
         {
             if (isInvalid(scaleform.clik.constants.InvalidationType.SCROLL_BAR)) 
+            {
                 this.createScrollBar();
+            }
             if (isInvalid(scaleform.clik.constants.InvalidationType.RENDERERS)) 
             {
                 this._autoRowHeight = NaN;
@@ -177,7 +229,9 @@ package scaleform.clik.controls
             }
             super.draw();
             if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+            {
                 this.updateScrollBar();
+            }
             return;
         }
 
@@ -197,21 +251,29 @@ package scaleform.clik.controls
                 this._scrollBar.removeEventListener(flash.events.Event.CHANGE, this.handleScroll);
                 this._scrollBar.focusTarget = null;
                 if (container.contains(this._scrollBar as flash.display.DisplayObject)) 
+                {
                     container.removeChild(this._scrollBar as flash.display.DisplayObject);
+                }
                 this._scrollBar = null;
             }
             if (!this._scrollBarValue || this._scrollBarValue == "") 
+            {
                 return;
+            }
             this._autoScrollBar = false;
             if (this._scrollBarValue is String) 
             {
                 if (parent != null) 
+                {
                     loc1 = parent.getChildByName(this._scrollBarValue.toString()) as scaleform.clik.interfaces.IScrollBar;
+                }
                 if (loc1 == null) 
                 {
                     loc2 = flash.utils.getDefinitionByName(this._scrollBarValue.toString()) as Class;
                     if (loc2) 
+                    {
                         loc1 = new loc2() as scaleform.clik.interfaces.IScrollBar;
+                    }
                     if (loc1) 
                     {
                         this._autoScrollBar = true;
@@ -239,12 +301,16 @@ package scaleform.clik.controls
                 }
             }
             else 
+            {
                 loc1 = this._scrollBarValue as scaleform.clik.interfaces.IScrollBar;
+            }
             this._scrollBar = loc1;
             this._siWidth = this._scrollBar.width;
             invalidateSize();
             if (this._scrollBar == null) 
+            {
                 return;
+            }
             this._scrollBar.addEventListener(flash.events.Event.SCROLL, this.handleScroll, false, 0, true);
             this._scrollBar.addEventListener(flash.events.Event.CHANGE, this.handleScroll, false, 0, true);
             this._scrollBar.focusTarget = this;
@@ -261,9 +327,13 @@ package scaleform.clik.controls
             {
                 loc3 = createRenderer(0);
                 if (loc1) 
+                {
                     this._autoRowHeight = loc3.height;
+                }
                 if (loc2) 
+                {
                     this._autoColumnWidth = loc3.width;
+                }
                 cleanUpRenderer(loc3);
             }
             this._totalRows = this.availableHeight / this.rowHeight >> 0;
@@ -275,9 +345,13 @@ package scaleform.clik.controls
         protected override function updateSelectedIndex():void
         {
             if (_selectedIndex == _newSelectedIndex) 
+            {
                 return;
+            }
             if (_totalRenderers == 0) 
+            {
                 return;
+            }
             var loc1:*=this.getRendererAt(_selectedIndex, this.scrollPosition);
             if (loc1 != null) 
             {
@@ -286,7 +360,9 @@ package scaleform.clik.controls
             }
             super.selectedIndex = _newSelectedIndex;
             if (_selectedIndex < 0 || _selectedIndex >= _dataProvider.length) 
+            {
                 return;
+            }
             loc1 = this.getRendererAt(_selectedIndex, this._scrollPosition);
             if (loc1 == null) 
             {
@@ -357,7 +433,9 @@ package scaleform.clik.controls
         protected function drawScrollBar():void
         {
             if (!this._autoScrollBar) 
+            {
                 return;
+            }
             var loc1:*=this._scrollBar as scaleform.clik.controls.ScrollIndicator;
             loc1.direction = this._direction;
             if (this._direction != scaleform.clik.constants.DirectionMode.VERTICAL) 
@@ -383,11 +461,17 @@ package scaleform.clik.controls
             var loc1:*=NaN;
             var loc2:*=null;
             if (this._scrollBar == null) 
+            {
                 return;
+            }
             if (this.direction != scaleform.clik.constants.DirectionMode.HORIZONTAL) 
+            {
                 loc1 = Math.ceil(_dataProvider.length / this._totalColumns) - this._totalRows;
+            }
             else 
+            {
                 loc1 = Math.ceil(_dataProvider.length / this._totalRows) - this._totalColumns;
+            }
             if (this._scrollBar is scaleform.clik.controls.ScrollIndicator) 
             {
                 loc2 = this._scrollBar as scaleform.clik.controls.ScrollIndicator;
@@ -445,7 +529,9 @@ package scaleform.clik.controls
             {
                 arg1 = NaN;
                 if (_inspector) 
+                {
                     return;
+                }
             }
             this._rowHeight = arg1;
             this._autoRowHeight = NaN;
@@ -464,7 +550,9 @@ package scaleform.clik.controls
             {
                 arg1 = NaN;
                 if (_inspector) 
+                {
                     return;
+                }
             }
             this._columnWidth = arg1;
             this._autoColumnWidth = NaN;
@@ -532,7 +620,9 @@ package scaleform.clik.controls
                 loc8.width = loc3;
                 loc8.height = loc2;
                 if (!loc6) 
+                {
                     loc8.validateNow();
+                }
                 ++loc7;
             }
             this.drawScrollBar();
@@ -542,7 +632,9 @@ package scaleform.clik.controls
         public function set direction(arg1:String):void
         {
             if (arg1 == this._direction) 
+            {
                 return;
+            }
             this._direction = arg1;
             invalidate();
             return;
@@ -551,7 +643,9 @@ package scaleform.clik.controls
         public override function set selectedIndex(arg1:int):void
         {
             if (arg1 == _selectedIndex || arg1 == _newSelectedIndex) 
+            {
                 return;
+            }
             _newSelectedIndex = arg1;
             invalidateSelectedIndex();
             return;
@@ -584,7 +678,9 @@ package scaleform.clik.controls
         public function set inspectablePadding(arg1:Object):void
         {
             if (!componentInspectorSetting) 
+            {
                 return;
+            }
             this.padding = new scaleform.clik.utils.Padding(arg1.top, arg1.right, arg1.bottom, arg1.left);
             return;
         }
@@ -609,7 +705,9 @@ package scaleform.clik.controls
             var loc1:*=Math.ceil((_dataProvider.length - this._totalRows * this._totalColumns) / (this._direction != scaleform.clik.constants.DirectionMode.HORIZONTAL ? this._totalColumns : this._totalRows));
             arg1 = Math.max(0, Math.min(loc1, Math.round(arg1)));
             if (this._scrollPosition == arg1) 
+            {
                 return;
+            }
             this._scrollPosition = arg1;
             invalidateData();
             return;

@@ -27,7 +27,9 @@ package net.wg.gui.components.controls
         {
             arg1 = Math.max(0, Math.min(this.maxScroll, Math.round(arg1)));
             if (this._scrollPosition == arg1) 
+            {
                 return;
+            }
             this._scrollPosition = arg1;
             invalidate(SCROLL_UPDATE_INV);
             return;
@@ -63,12 +65,18 @@ package net.wg.gui.components.controls
             {
                 loc2 = new _itemRenderer() as scaleform.clik.interfaces.IListItemRenderer;
                 if (loc2 != null) 
+                {
                     return loc2;
+                }
                 else 
+                {
                     loc1 = loc1 + "_itemRenderer have to be implementer of IListItemRenderer";
+                }
             }
             else 
+            {
                 loc1 = loc1 + "item renderer class have to be not null!";
+            }
             return null;
         }
 
@@ -99,36 +107,60 @@ package net.wg.gui.components.controls
         public override function handleInput(arg1:scaleform.clik.events.InputEvent):void
         {
             if (arg1.handled) 
+            {
                 return;
+            }
             var loc1:*=arg1.details;
             var loc2:*=loc1.value == scaleform.clik.constants.InputValue.KEY_DOWN || loc1.value == scaleform.clik.constants.InputValue.KEY_HOLD;
             var loc3:*=loc1.navEquivalent;
             switch (loc3) 
             {
                 case scaleform.clik.constants.NavigationCode.UP:
+                {
                     --this.scrollPosition;
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.DOWN:
+                {
                     this.scrollPosition = this.scrollPosition + 1;
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.END:
+                {
                     if (!loc2) 
+                    {
                         this.scrollPosition = this.maxScroll;
+                    }
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.HOME:
+                {
                     if (!loc2) 
+                    {
                         this.scrollPosition = 0;
+                    }
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.PAGE_UP:
+                {
                     if (loc2) 
+                    {
                         this.scrollPosition = this.scrollPosition - this.scrollPageSize;
+                    }
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.PAGE_DOWN:
+                {
                     if (loc2) 
+                    {
                         this.scrollPosition = this.scrollPosition + this.scrollPageSize;
+                    }
                     break;
+                }
                 default:
+                {
                     return;
+                }
             }
             arg1.handled = true;
             return;
@@ -160,11 +192,13 @@ package net.wg.gui.components.controls
                 loc5.endFill();
             }
             if (isInvalid(scaleform.clik.constants.InvalidationType.STATE)) 
+            {
                 if (_newFrame) 
                 {
                     gotoAndPlay(_newFrame);
                     _newFrame = null;
                 }
+            }
             if (!_usingExternalRenderers && isInvalid(scaleform.clik.constants.InvalidationType.RENDERERS, scaleform.clik.constants.InvalidationType.DATA)) 
             {
                 if (_renderers != null) 
@@ -177,16 +211,22 @@ package net.wg.gui.components.controls
                         cleanUpRenderer(loc3);
                         loc4 = loc3 as flash.display.DisplayObject;
                         if (container.contains(loc4)) 
+                        {
                             container.removeChild(loc4);
+                        }
                         ++loc1;
                     }
                 }
                 _renderers = new Vector.<scaleform.clik.interfaces.IListItemRenderer>();
                 if (_dataProvider) 
+                {
                     this.drawRenderers(_dataProvider.length);
+                }
             }
             if (isInvalid(SCROLL_UPDATE_INV)) 
+            {
                 this.applyScrollBarUpdating();
+            }
             return;
         }
 
@@ -202,7 +242,9 @@ package net.wg.gui.components.controls
         protected function drawScrollBar():void
         {
             if (!this._autoScrollBar) 
+            {
                 return;
+            }
             this._scrollBar.x = _width - this._scrollBar.width;
             this._scrollBar.height = availableHeight;
             this._scrollBar.validateNow();
@@ -226,7 +268,9 @@ package net.wg.gui.components.controls
         {
             var loc1:*=this.createRenderer(arg1);
             if (loc1 == null) 
+            {
                 return;
+            }
             container.addChild(loc1 as flash.display.DisplayObject);
             _renderers.push(loc1);
             var loc2:*=_dataProvider[arg1];
@@ -242,7 +286,9 @@ package net.wg.gui.components.controls
         public function get maxScroll():Number
         {
             if (this.maskObject) 
+            {
                 return Math.round((this.totalHeight - this.maskObject.height) / this._scrollStepFactor);
+            }
             return 0;
         }
 
@@ -262,21 +308,29 @@ package net.wg.gui.components.controls
                 this._scrollBar.removeEventListener(flash.events.Event.CHANGE, this.handleScroll, false);
                 this._scrollBar.focusTarget = null;
                 if (this.contains(this._scrollBar as flash.display.DisplayObject)) 
+                {
                     this.removeChild(this._scrollBar as flash.display.DisplayObject);
+                }
                 this._scrollBar = null;
             }
             if (!this._scrollBarValue || this._scrollBarValue == "") 
+            {
                 return;
+            }
             this._autoScrollBar = false;
             if (this._scrollBarValue is String) 
             {
                 if (parent != null) 
+                {
                     loc1 = parent.getChildByName(this._scrollBarValue.toString()) as scaleform.clik.interfaces.IScrollBar;
+                }
                 if (loc1 == null) 
                 {
                     loc2 = flash.utils.getDefinitionByName(this._scrollBarValue.toString()) as Class;
                     if (loc2) 
+                    {
                         loc1 = new loc2() as scaleform.clik.interfaces.IScrollBar;
+                    }
                     if (loc1) 
                     {
                         this._autoScrollBar = true;
@@ -304,11 +358,15 @@ package net.wg.gui.components.controls
                 }
             }
             else 
+            {
                 loc1 = this._scrollBarValue as scaleform.clik.interfaces.IScrollBar;
+            }
             this._scrollBar = loc1;
             invalidateSize();
             if (this._scrollBar == null) 
+            {
                 return;
+            }
             this._scrollBar.addEventListener(flash.events.Event.SCROLL, this.handleScroll, false, 0, true);
             this._scrollBar.addEventListener(flash.events.Event.CHANGE, this.handleScroll, false, 0, true);
             this._scrollBar.focusTarget = this;

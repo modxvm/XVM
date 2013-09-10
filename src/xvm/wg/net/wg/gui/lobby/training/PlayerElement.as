@@ -53,6 +53,7 @@ package net.wg.gui.lobby.training
         {
             var loc1:*=null;
             if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+            {
                 if (this.data) 
                 {
                     this.nameField.label = this.data.fullName;
@@ -61,12 +62,15 @@ package net.wg.gui.lobby.training
                     this.vehicleLevelField.text = this.data.vLevel;
                     this.iconLoader.visible = true;
                     if (this.iconLoader.source != this.data.icon) 
+                    {
                         this.iconLoader.source = this.data.icon;
+                    }
                     enabled = true;
                     this.nameField.textColor = NAME_COLOR;
                     this.vehicleField.textColor = VEHICLE_COLOR;
                     loc1 = new flash.geom.ColorTransform();
                     if (enabled) 
+                    {
                         if (this.data.himself) 
                         {
                             this.nameField.textColor = GOLD_COLOR;
@@ -77,7 +81,10 @@ package net.wg.gui.lobby.training
                             loc1.greenMultiplier = 0.87;
                         }
                         else 
+                        {
                             loc1 = this.defColorTrans;
+                        }
+                    }
                     else 
                     {
                         loc1.alphaMultiplier = 0.7;
@@ -95,6 +102,7 @@ package net.wg.gui.lobby.training
                     this.iconLoader.visible = false;
                     enabled = false;
                 }
+            }
             return;
         }
 

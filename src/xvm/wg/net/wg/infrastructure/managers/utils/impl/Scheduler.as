@@ -73,7 +73,9 @@ package net.wg.infrastructure.managers.utils.impl
             loc1.invoke();
             loc1.dispose();
             if (!this._disposed) 
+            {
                 this.updateTimer();
+            }
             return;
         }
 
@@ -81,7 +83,9 @@ package net.wg.infrastructure.managers.utils.impl
         {
             var loc1:*=NaN;
             if (this._taskStack.isEmpty()) 
+            {
                 this._timer.stop();
+            }
             else 
             {
                 loc1 = this._taskStack.top().finishTime - new Date().time;
@@ -92,7 +96,9 @@ package net.wg.infrastructure.managers.utils.impl
                     this._timer.start();
                 }
                 else 
+                {
                     this.processFrame();
+                }
             }
             return;
         }
@@ -137,9 +143,13 @@ class Task extends Object implements net.wg.infrastructure.interfaces.entity.ICa
     public function invoke():void
     {
         if (this._args.length > 0) 
+        {
             this._handler.apply(null, this._args);
+        }
         else 
+        {
             this._handler();
+        }
         return;
     }
 
@@ -172,7 +182,9 @@ class TaskStack extends Object
         while (loc1 > 0) 
         {
             if (this._tasks[(loc1 - 1)].finishTime > arg1.finishTime) 
+            {
                 break;
+            }
             --loc1;
         }
         this._tasks.splice(loc1, 0, arg1);

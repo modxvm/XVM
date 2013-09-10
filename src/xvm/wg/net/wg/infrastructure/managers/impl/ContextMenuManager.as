@@ -31,9 +31,13 @@ package net.wg.infrastructure.managers.impl
             var loc2:*=arg2.localToGlobal(new flash.geom.Point(arg2.mouseX, arg2.mouseY));
             this._currentMenu.build(arg1, loc2.x, loc2.y);
             if (arg4) 
+            {
                 this._currentMenu.setMemberItemData(arg4);
+            }
             if (this._handler != null) 
+            {
                 flash.display.DisplayObject(this._currentMenu).addEventListener(net.wg.gui.events.ContextMenuEvent.ON_ITEM_SELECT, this.onContextMenuAction);
+            }
             flash.display.DisplayObject(this._currentMenu).addEventListener(net.wg.gui.events.ContextMenuEvent.ON_MENU_RELEASE_OUTSIDE, this.destroy);
             flash.display.DisplayObject(this._currentMenu).stage.addEventListener(flash.events.Event.RESIZE, this.destroy);
             return this._currentMenu;
@@ -62,8 +66,10 @@ package net.wg.infrastructure.managers.impl
             switch (loc2) 
             {
                 case "userInfo":
+                {
                     showUserInfoS(loc1.uid, loc1.userName);
                     break;
+                }
                 case "offend":
                 case "flood":
                 case "openingOfAllyPos":
@@ -71,38 +77,62 @@ package net.wg.infrastructure.managers.impl
                 case "notFairPlay":
                 case "teamKill":
                 case "bot":
+                {
                     appealS(loc1.uid, loc1.userName, arg1.id);
                     break;
+                }
                 case "createPrivateChannel":
+                {
                     createPrivateChannelS(loc1.uid, loc1.userName);
                     break;
+                }
                 case "addToFriends":
+                {
                     addFriendS(loc1.uid, loc1.userName);
                     break;
+                }
                 case "removeFromFriends":
+                {
                     removeFriendS(loc1.uid);
                     break;
+                }
                 case "addToIgnored":
+                {
                     setIgnoredS(loc1.uid, loc1.userName);
                     break;
+                }
                 case "removeFromIgnored":
+                {
                     unsetIgnoredS(loc1.uid);
                     break;
+                }
                 case "copyToClipBoard":
+                {
                     copyToClipboardS(loc1.userName);
                     break;
+                }
                 case "setMuted":
+                {
                     setMutedS(loc1.uid, loc1.userName);
                     break;
+                }
                 case "unsetMuted":
+                {
                     unsetMutedS(loc1.uid);
                     break;
+                }
                 case "kickPlayer":
+                {
                     kickPlayerS(loc1.accID);
                     break;
+                }
                 default:
+                {
                     if (this._extraHandler != null) 
+                    {
                         this._extraHandler(arg1);
+                    }
+                }
             }
             this.hide();
             return;
@@ -134,11 +164,17 @@ package net.wg.infrastructure.managers.impl
                     this._handler = null;
                 }
                 if (flash.display.DisplayObject(this._currentMenu).hasEventListener(net.wg.gui.events.ContextMenuEvent.ON_MENU_RELEASE_OUTSIDE)) 
+                {
                     flash.display.DisplayObject(this._currentMenu).removeEventListener(net.wg.gui.events.ContextMenuEvent.ON_MENU_RELEASE_OUTSIDE, this.destroy);
+                }
                 if (flash.display.DisplayObject(this._currentMenu).stage.hasEventListener(flash.events.Event.RESIZE)) 
+                {
                     flash.display.DisplayObject(this._currentMenu).stage.removeEventListener(flash.events.Event.RESIZE, this.destroy);
+                }
                 if (this._currentMenu is net.wg.infrastructure.interfaces.entity.IDisposable) 
+                {
                     net.wg.infrastructure.interfaces.entity.IDisposable(this._currentMenu).dispose();
+                }
                 App.utils.popupMgr.popupCanvas.removeChild(flash.display.DisplayObject(this._currentMenu));
                 this._currentMenu = null;
                 this._extraHandler = null;

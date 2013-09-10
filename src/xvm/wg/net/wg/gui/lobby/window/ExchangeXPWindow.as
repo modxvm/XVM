@@ -141,7 +141,9 @@ package net.wg.gui.lobby.window
             {
                 loc2 = net.wg.gui.lobby.window.ExchangeXPVehicleVO(this.scrollListProvider[loc3]);
                 if (loc2.isSelectCandidate) 
+                {
                     loc1.push(loc2.id);
+                }
                 ++loc3;
             }
             App.utils.asserter.assert(loc1.length > 0, "Flash Asserter warning: Exchange XP Window submit method have empty data array");
@@ -178,8 +180,11 @@ package net.wg.gui.lobby.window
             var loc1:*=net.wg.gui.components.advanced.SortingButton(arg1.target);
             var loc2:*=loc1.sortDirection == net.wg.gui.components.advanced.SortingButton.ASCENDING_SORT;
             if (loc1.sortDirection != net.wg.gui.components.advanced.SortingButton.WITHOUT_SORT) 
+            {
                 if ("btnOk" != loc1.id) 
+                {
                     if ("btnTank" != loc1.id) 
+                    {
                         if ("btnStar" != loc1.id) 
                         {
                             loc3 = "FLASH::Unexpected sorting button id! " + this;
@@ -187,11 +192,20 @@ package net.wg.gui.lobby.window
                             throw new Error(loc3);
                         }
                         else 
+                        {
                             this.scrollList.sortByExperience(loc2);
+                        }
+                    }
                     else 
+                    {
                         this.scrollList.sortByVehicleName(loc2);
+                    }
+                }
                 else 
+                {
                     this.scrollList.sortSelection(loc2);
+                }
+            }
             return;
         }
 
@@ -244,13 +258,17 @@ package net.wg.gui.lobby.window
             {
                 this.scrollList.dataProvider = new scaleform.clik.data.DataProvider(this.scrollListProvider);
                 if (this.isHaveEliteVehicles) 
+                {
                     if (this.scrollListProvider == null || this.scrollListProvider.length == 0) 
                     {
                         this.warningScreen.text = App.utils.locale.makeString(DIALOGS.EXCHANGEXPWINDOW_ERROR_NOVEHICLESWITHXP);
                         this.warningScreen.visible = true;
                     }
                     else 
+                    {
                         this.warningScreen.visible = false;
+                    }
+                }
                 else 
                 {
                     this.warningScreen.text = App.utils.locale.makeString(DIALOGS.EXCHANGEXPWINDOW_ERROR_NOELITEVEHICLEINHANGAR);
@@ -272,7 +290,9 @@ package net.wg.gui.lobby.window
                     {
                         loc4 = (loc7 = this.scrollListProvider[loc8]).xp;
                         if (loc7.isSelectCandidate) 
+                        {
                             loc3 = loc3 + loc4;
+                        }
                         loc5 = loc5 && loc7.isSelectCandidate;
                         loc2 = loc2 + loc4;
                         ++loc8;

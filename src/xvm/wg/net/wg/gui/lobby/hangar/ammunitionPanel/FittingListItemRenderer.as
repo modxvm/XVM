@@ -80,11 +80,17 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
                 this.targetMC.mouseEnabled = loc2;
             }
             if (this.titleField) 
+            {
                 this.titleField.mouseEnabled = false;
+            }
             if (this.descField) 
+            {
                 this.descField.mouseEnabled = false;
+            }
             if (this.errorField) 
+            {
                 this.errorField.mouseEnabled = false;
+            }
             loc1.addEvent(this, flash.events.MouseEvent.CLICK, this.onClick);
             loc1.addEvent(this, flash.events.MouseEvent.ROLL_OVER, this.onRollOver);
             loc1.addEvent(this, flash.events.MouseEvent.ROLL_OUT, this.onRollOut);
@@ -94,7 +100,9 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         protected override function draw():void
         {
             if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+            {
                 this.setup();
+            }
             super.draw();
             return;
         }
@@ -112,49 +120,85 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         internal function setup():void
         {
             if (!data) 
+            {
                 return;
+            }
             this.titleField.text = data.name;
             if (this.descField) 
+            {
                 this.descField.text = data.desc;
+            }
             if (net.wg.data.constants.FittingTypes.MANDATORY_SLOTS.indexOf(data.type) > -1) 
+            {
                 (this.icon as flash.display.MovieClip).gotoAndStop(data.icon);
+            }
             else 
+            {
                 (this.icon as net.wg.gui.components.controls.UILoaderAlt).source = data.icon;
+            }
             if (data.hasOwnProperty(net.wg.gui.lobby.hangar.ammunitionPanel.ExtraIcon.EXTRA_ICON_PROP_NAME)) 
             {
                 if (!this.extraIcon) 
+                {
                     this.createExtraIcon();
+                }
                 this.extraIcon.setSource(data[net.wg.gui.lobby.hangar.ammunitionPanel.ExtraIcon.EXTRA_ICON_PROP_NAME]);
             }
             else if (this.extraIcon) 
+            {
                 this.extraIcon.clear();
+            }
             if (this.priceMC) 
             {
                 this.targetMC.visible = true;
                 this.priceMC.visible = false;
                 if (data.target != 3) 
+                {
                     if (data.target != 2) 
+                    {
                         if (data.target == 1) 
+                        {
                             this.targetMC.gotoAndPlay(VEHICLE_STATE);
+                        }
+                    }
                     else if (data.status != "") 
+                    {
                         if (data.status != MENU.MODULEFITS_CREDIT_ERROR) 
+                        {
                             this.targetMC.gotoAndPlay(HANGAR_CANT_INSTALL_STATE);
+                        }
+                    }
                     else 
+                    {
                         this.targetMC.gotoAndPlay(HANGAR_STATE);
+                    }
+                }
                 else 
                 {
                     this.priceMC.icon = data.currency;
                     if (data.currency != net.wg.data.constants.Currencies.GOLD) 
+                    {
                         this.priceMC.text = App.utils.locale.integer(data.price);
+                    }
                     else 
+                    {
                         this.priceMC.text = App.utils.locale.gold(data.price);
+                    }
                     if (data.status != MENU.MODULEFITS_CREDIT_ERROR) 
+                    {
                         if (data.status == "") 
+                        {
                             this.priceMC.textColor = 13556185;
+                        }
                         else 
+                        {
                             this.priceMC.textColor = 6710886;
+                        }
+                    }
                     else 
+                    {
                         this.priceMC.textColor = 10158594;
+                    }
                     this.targetMC.gotoAndPlay(SHOP_STATE);
                     this.priceMC.visible = true;
                     this.targetMC.visible = false;
@@ -162,9 +206,13 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
                 }
             }
             else 
+            {
                 this.targetMC.visible = false;
+            }
             if (this.locked) 
+            {
                 this.locked.visible = !data.removable;
+            }
             this.errorField.text = data.status;
             this.enabled = !(data.status == MENU.MODULEFITS_CREDIT_ERROR || data.status == MENU.MODULEFITS_UNLOCK_ERROR || data.status == MENU.MODULEFITS_WRONG_SLOT);
             if (this.destroyButton) 
@@ -203,7 +251,9 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             {
                 loc1 = arg1 as scaleform.gfx.MouseEventEx;
                 if (loc1.buttonIdx == scaleform.gfx.MouseEventEx.RIGHT_BUTTON) 
+                {
                     dispatchEvent(new net.wg.gui.events.ModuleInfoEvent(net.wg.gui.events.ModuleInfoEvent.SHOW_INFO, data.id));
+                }
             }
             return;
         }

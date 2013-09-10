@@ -25,12 +25,15 @@ package net.wg.gui.components.advanced
             var loc1:*=NaN;
             super.draw();
             if (isInvalid(scaleform.clik.constants.InvalidationType.STATE)) 
+            {
                 if (textField != null) 
                 {
                     this.selectionTextColor = this._selectionTextColor;
                     this.selectionBgColor = this._selectionBgColor;
                 }
+            }
             if (_autoScrollBar) 
+            {
                 if (this._showBgForm) 
                 {
                     loc1 = 3;
@@ -44,6 +47,7 @@ package net.wg.gui.components.advanced
                     _scrollBar.x = (width - _scrollBar.width - 1);
                     _scrollBar.height = height - 2;
                 }
+            }
             this.updateText();
             return;
         }
@@ -52,9 +56,13 @@ package net.wg.gui.components.advanced
         {
             super.updateText();
             if (this.autoScroll) 
+            {
                 position = this._safePosition ? textField.scrollV : textField.maxScrollV;
+            }
             if (_scrollBar) 
+            {
                 constraints.update(availableWidth, _height);
+            }
             return;
         }
 
@@ -91,7 +99,9 @@ package net.wg.gui.components.advanced
             {
                 loc1 = new flash.geom.Point(stage.mouseX, stage.mouseY);
                 if (visible && hitTestPoint(loc1.x, loc1.y, true)) 
+                {
                     loc2 = getObjectsUnderPoint(loc1);
+                }
             }
             return;
         }
@@ -102,46 +112,68 @@ package net.wg.gui.components.advanced
             var loc3:*=NaN;
             var loc4:*=NaN;
             if (arg1.handled) 
+            {
                 return;
+            }
             var loc1:*=arg1.details;
             if (loc1.value == scaleform.clik.constants.InputValue.KEY_DOWN || loc1.value == scaleform.clik.constants.InputValue.KEY_HOLD) 
+            {
                 return;
+            }
             if (arg1.handled) 
+            {
                 return;
+            }
             loc2 = arg1.details.navEquivalent;
             var loc5:*=loc2;
             switch (loc5) 
             {
                 case scaleform.clik.constants.NavigationCode.UP:
+                {
                     if (position == 1) 
+                    {
                         return;
+                    }
                     position = Math.max(1, (position - 1));
                     arg1.handled = true;
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.DOWN:
+                {
                     if (position == _maxScroll) 
+                    {
                         return;
+                    }
                     position = Math.min(_maxScroll, position + 1);
                     arg1.handled = true;
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.END:
+                {
                     position = _maxScroll;
                     arg1.handled = true;
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.HOME:
+                {
                     position = 1;
                     arg1.handled = true;
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.PAGE_UP:
+                {
                     loc3 = textField.bottomScrollV - textField.scrollV;
                     position = Math.max(1, position - loc3);
                     arg1.handled = true;
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.PAGE_DOWN:
+                {
                     loc4 = textField.bottomScrollV - textField.scrollV;
                     position = Math.min(_maxScroll, position + loc4);
                     arg1.handled = true;
                     break;
+                }
             }
             return;
         }
@@ -245,12 +277,18 @@ package net.wg.gui.components.advanced
         {
             _focusable = arg1;
             if (!_focusable && enabled) 
+            {
                 tabChildren = false;
+            }
             changeFocus();
             if (_focusable && this.selectable) 
+            {
                 addEventListener(flash.events.MouseEvent.MOUSE_DOWN, handleMouseDown, false, 0, true);
+            }
             else 
+            {
                 removeEventListener(flash.events.MouseEvent.MOUSE_DOWN, handleMouseDown, false);
+            }
             return;
         }
 
@@ -263,7 +301,9 @@ package net.wg.gui.components.advanced
         {
             _editable = arg1;
             if (textField != null) 
+            {
                 textField.type = _editable && enabled ? flash.text.TextFieldType.INPUT : flash.text.TextFieldType.DYNAMIC;
+            }
             this.focusable = _editable ? _editable : this.selectable;
             return;
         }
@@ -285,11 +325,15 @@ package net.wg.gui.components.advanced
                 textField.height = textField.height - (this._textPadding.top + this._textPadding.bottom);
             }
             if (!constraintsDisabled) 
+            {
                 constraints.addElement("textField", textField, scaleform.clik.utils.Constraints.ALL);
+            }
             addEventListener(scaleform.clik.events.InputEvent.INPUT, this.handleInput, false, 0, true);
             textField.addEventListener(flash.events.FocusEvent.FOCUS_IN, handleTextFieldFocusIn, false, 0, true);
             if (this.focusable && this._selectable) 
+            {
                 addEventListener(flash.events.MouseEvent.MOUSE_DOWN, handleMouseDown, false, 0, true);
+            }
             setState(defaultState, "default");
             addEventListener(flash.events.MouseEvent.MOUSE_WHEEL, this.onMouseWheel);
             textField.selectable = enabled ? this.editable || this._selectable : false;
@@ -313,12 +357,18 @@ package net.wg.gui.components.advanced
             textField.tabEnabled = this._selectable && enabled && _focusable;
             textField.addEventListener(flash.events.Event.CHANGE, handleTextChange, false, 0, true);
             if (textField.hasEventListener(flash.events.FocusEvent.FOCUS_IN)) 
+            {
                 textField.removeEventListener(flash.events.FocusEvent.FOCUS_IN, handleTextFieldFocusIn, false);
+            }
             textField.addEventListener(flash.events.FocusEvent.FOCUS_IN, handleTextFieldFocusIn, false, 0, true);
             if (!textField.hasEventListener(flash.events.FocusEvent.FOCUS_IN)) 
+            {
                 textField.addEventListener(flash.events.FocusEvent.FOCUS_IN, this.onSetFocusHdlr);
+            }
             if (!textField.hasEventListener(flash.events.FocusEvent.FOCUS_OUT)) 
+            {
                 textField.addEventListener(flash.events.FocusEvent.FOCUS_OUT, this.onKillFocusHdlr);
+            }
             textField.selectable = enabled ? this.editable || this._selectable : enabled;
             return;
         }

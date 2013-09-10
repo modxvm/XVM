@@ -22,17 +22,25 @@ package net.wg.gui.tutorial.controls
             switch (loc2) 
             {
                 case 0:
+                {
                     loc1 = PHASE_NONE;
                     break;
+                }
                 case 1:
+                {
                     loc1 = PHASE_FAIL;
                     break;
+                }
                 case 2:
+                {
                     loc1 = PHASE_NONE;
                     break;
+                }
                 case 3:
+                {
                     loc1 = PHASE_DONE;
                     break;
+                }
             }
             return loc1;
         }
@@ -42,14 +50,18 @@ package net.wg.gui.tutorial.controls
             var loc1:*=null;
             loc1 = App.utils.classFactory.getObject(arg2) as flash.display.MovieClip;
             if (loc1) 
+            {
                 arg1.addChild(loc1);
+            }
             return loc1;
         }
 
         internal function clearItems(arg1:flash.display.Sprite, arg2:Array):void
         {
             while (arg1.numChildren) 
+            {
                 arg1.removeChildAt(0);
+            }
             arg2.splice(0, arg2.legth);
             return;
         }

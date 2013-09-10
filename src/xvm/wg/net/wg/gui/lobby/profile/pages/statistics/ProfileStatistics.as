@@ -34,7 +34,9 @@ package net.wg.gui.lobby.profile.pages.statistics
             super.configUI();
             this.ddMenuLabel.autoSize = flash.text.TextFieldAutoSize.RIGHT;
             if (App.utils) 
+            {
                 this.ddMenuLabel.text = App.utils.locale.makeString(PROFILE.SECTION_STATISTICS_DROPDOWN_TYPELABEL);
+            }
             this.dropdownMenu.addEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.menuIndexChangeHandler, false, 0, true);
             return;
         }
@@ -108,7 +110,9 @@ package net.wg.gui.lobby.profile.pages.statistics
                 addEventListener(flash.events.Event.RENDER, validateNow, false, 0, true);
                 addEventListener(flash.events.Event.ENTER_FRAME, validateNow, false, 0, true);
                 if (stage != null) 
+                {
                     stage.invalidate();
+                }
             }
             return;
         }

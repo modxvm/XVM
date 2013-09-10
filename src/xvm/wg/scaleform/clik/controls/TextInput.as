@@ -29,10 +29,14 @@ package scaleform.clik.controls
         public override function handleInput(arg1:scaleform.clik.events.InputEvent):void
         {
             if (arg1.handled) 
+            {
                 return;
+            }
             var loc1:*=arg1.details;
             if (loc1.value == scaleform.clik.constants.InputValue.KEY_DOWN || loc1.value == scaleform.clik.constants.InputValue.KEY_HOLD) 
+            {
                 return;
+            }
             return;
         }
 
@@ -45,11 +49,15 @@ package scaleform.clik.controls
         {
             super.configUI();
             if (!this.constraintsDisabled) 
+            {
                 constraints.addElement("textField", this.textField, scaleform.clik.utils.Constraints.ALL);
+            }
             addEventListener(scaleform.clik.events.InputEvent.INPUT, this.handleInput, false, 0, true);
             this.textField.addEventListener(flash.events.FocusEvent.FOCUS_IN, this.handleTextFieldFocusIn, false, 0, true);
             if (this.focusable && this.editable) 
+            {
                 addEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.handleMouseDown, false, 0, true);
+            }
             this.setState(this.defaultState, "default");
             return;
         }
@@ -69,12 +77,16 @@ package scaleform.clik.controls
                 invalidate(scaleform.clik.constants.InvalidationType.SIZE);
             }
             else if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+            {
                 this.updateText();
+            }
             if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
             {
                 setActualSize(_width, _height);
                 if (!this.constraintsDisabled) 
+                {
                     constraints.update(_width, _height);
+                }
             }
             return;
         }
@@ -105,7 +117,9 @@ package scaleform.clik.controls
             this.textField.tabEnabled = this._editable && this.enabled && _focusable;
             this.textField.addEventListener(flash.events.Event.CHANGE, this.handleTextChange, false, 0, true);
             if (this.textField.hasEventListener(flash.events.FocusEvent.FOCUS_IN)) 
+            {
                 this.textField.removeEventListener(flash.events.FocusEvent.FOCUS_IN, this.handleTextFieldFocusIn, false);
+            }
             this.textField.addEventListener(flash.events.FocusEvent.FOCUS_IN, this.handleTextFieldFocusIn, false, 0, true);
             return;
         }
@@ -154,9 +168,12 @@ package scaleform.clik.controls
             var loc1:*=0;
             var loc2:*=0;
             if (!initialized) 
+            {
                 return;
+            }
             constraints.updateElement("textField", this.textField);
             if (_focused) 
+            {
                 if (scaleform.gfx.Extensions.isScaleform) 
                 {
                     loc1 = scaleform.gfx.Extensions.numControllers;
@@ -164,19 +181,26 @@ package scaleform.clik.controls
                     while (loc2 < loc1) 
                     {
                         if (scaleform.gfx.FocusManager.getFocus(loc2) == this) 
+                        {
                             scaleform.gfx.FocusManager.setFocus(this.textField, loc2);
+                        }
                         ++loc2;
                     }
                 }
                 else 
+                {
                     stage.focus = this.textField;
+                }
+            }
             return;
         }
 
         protected function handleRollOver(arg1:flash.events.MouseEvent):void
         {
             if (focused || !this.enabled) 
+            {
                 return;
+            }
             this.setState("over");
             return;
         }
@@ -184,7 +208,9 @@ package scaleform.clik.controls
         protected function handleRollOut(arg1:flash.events.MouseEvent):void
         {
             if (focused || !this.enabled) 
+            {
                 return;
+            }
             this.setState("out", "default");
             return;
         }
@@ -192,18 +218,26 @@ package scaleform.clik.controls
         protected function handleMouseDown(arg1:flash.events.MouseEvent):void
         {
             if (focused || !this.enabled) 
+            {
                 return;
+            }
             if (arg1 is scaleform.gfx.MouseEventEx) 
+            {
                 scaleform.gfx.FocusManager.setFocus(this.textField, (arg1 as scaleform.gfx.MouseEventEx).mouseIdx);
+            }
             else 
+            {
                 stage.focus = this.textField;
+            }
             return;
         }
 
         protected function handleTextChange(arg1:flash.events.Event):void
         {
             if (!_focused) 
+            {
                 return;
+            }
             this._text = this._isHtml ? this.textField.htmlText : this.textField.text;
             dispatchEvent(new flash.events.Event(flash.events.Event.CHANGE));
             return;
@@ -227,7 +261,9 @@ package scaleform.clik.controls
         protected override function preInitialize():void
         {
             if (!this.constraintsDisabled) 
+            {
                 constraints = new scaleform.clik.utils.Constraints(this, scaleform.clik.constants.ConstrainMode.COUNTER_SCALE);
+            }
             return;
         }
 
@@ -269,12 +305,18 @@ package scaleform.clik.controls
         {
             _focusable = arg1;
             if (!_focusable && this.enabled) 
+            {
                 tabChildren = false;
+            }
             this.changeFocus();
             if (_focusable && this.editable) 
+            {
                 addEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.handleMouseDown, false, 0, true);
+            }
             else 
+            {
                 removeEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.handleMouseDown, false);
+            }
             return;
         }
 
@@ -325,7 +367,9 @@ package scaleform.clik.controls
         {
             this._displayAsPassword = arg1;
             if (this.textField != null) 
+            {
                 this.textField.displayAsPassword = arg1;
+            }
             return;
         }
 
@@ -336,7 +380,9 @@ package scaleform.clik.controls
                 this.textField.defaultTextFormat = this._textFormat;
                 this._usingDefaultTextFormat = false;
                 if (this._displayAsPassword && !this.textField.displayAsPassword) 
+                {
                     this.textField.displayAsPassword = true;
+                }
             }
             if (this._text == "") 
             {
@@ -344,17 +390,25 @@ package scaleform.clik.controls
                 if (!_focused && !(this._defaultText == "")) 
                 {
                     if (this._displayAsPassword) 
+                    {
                         this.textField.displayAsPassword = false;
+                    }
                     this.textField.text = this._defaultText;
                     this._usingDefaultTextFormat = true;
                     if (this.defaultTextFormat != null) 
+                    {
                         this.textField.setTextFormat(this.defaultTextFormat);
+                    }
                 }
             }
             else if (this._isHtml) 
+            {
                 this.textField.htmlText = this._text;
+            }
             else 
+            {
                 this.textField.text = this._text;
+            }
             return;
         }
 
@@ -362,7 +416,9 @@ package scaleform.clik.controls
         {
             this._maxChars = arg1;
             if (this.textField != null) 
+            {
                 this.textField.maxChars = arg1;
+            }
             return;
         }
 
@@ -375,7 +431,9 @@ package scaleform.clik.controls
         {
             this._editable = arg1;
             if (this.textField != null) 
+            {
                 this.textField.type = this._editable && this.enabled ? flash.text.TextFieldType.INPUT : flash.text.TextFieldType.DYNAMIC;
+            }
             this.focusable = arg1;
             return;
         }
@@ -410,7 +468,9 @@ package scaleform.clik.controls
         public function set actAsButton(arg1:Boolean):void
         {
             if (this._actAsButton == arg1) 
+            {
                 return;
+            }
             this._actAsButton = arg1;
             if (arg1) 
             {
@@ -434,7 +494,9 @@ package scaleform.clik.controls
         {
             this._alwaysShowSelection = arg1;
             if (this.textField != null) 
+            {
                 this.textField.alwaysShowSelection = arg1;
+            }
             return;
         }
 

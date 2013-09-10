@@ -215,31 +215,53 @@ package net.wg.gui.lobby.hangar.crew
             switch (loc3) 
             {
                 case "roles":
+                {
                     if (App.instance) 
+                    {
                         App.utils.asserter.assert(arg2 is Array, "value must extends an Array class.");
+                    }
                     if (this._roles) 
+                    {
                         this._roles.splice(0, this._roles.length);
+                    }
                     else 
+                    {
                         this._roles = [];
+                    }
                     loc3 = 0;
                     var loc4:*=arg2;
                     for each (loc1 in loc4) 
+                    {
                         this._roles.push(loc1);
+                    }
                     return false;
+                }
                 case "skills":
+                {
                     if (App.instance) 
+                    {
                         App.utils.asserter.assert(arg2 is Array, "value must extends an Array class.");
+                    }
                     if (this._skills) 
+                    {
                         this._skills.splice(0, this._skills.length);
+                    }
                     else 
+                    {
                         this._skills = [];
+                    }
                     loc3 = 0;
                     loc4 = arg2;
                     for each (loc2 in loc4) 
+                    {
                         this._skills.push(new net.wg.gui.lobby.hangar.crew.SkillsVO(loc2));
+                    }
                     return false;
+                }
                 default:
+                {
                     return true;
+                }
             }
         }
 

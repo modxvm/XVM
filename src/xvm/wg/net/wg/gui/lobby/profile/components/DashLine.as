@@ -44,9 +44,13 @@ package net.wg.gui.lobby.profile.components
                 while (loc2 < _width) 
                 {
                     if ((loc4 = loc2 + this._dashLength) <= _width) 
+                    {
                         loc3 = this._dashLength;
+                    }
                     else 
+                    {
                         loc3 = _width - loc4;
+                    }
                     loc1.drawRect(loc2, 0, loc3, _height);
                     loc2 = loc2 + (loc3 + this._gap);
                 }

@@ -1,4 +1,4 @@
-package net.wg.gui.login.impl
+package net.wg.gui.login.impl 
 {
     import flash.display.*;
     import flash.events.*;
@@ -15,7 +15,7 @@ package net.wg.gui.login.impl
     import org.idmedia.as3commons.util.*;
     import scaleform.clik.constants.*;
     import scaleform.clik.events.*;
-
+    
     public class LoginPage extends net.wg.infrastructure.base.meta.impl.LoginPageMeta implements net.wg.infrastructure.base.meta.ILoginPageMeta
     {
         public function LoginPage()
@@ -26,10 +26,14 @@ package net.wg.gui.login.impl
 
         internal function initFocus():void
         {
-            if (this.form.login.text.length > 0)
+            if (this.form.login.text.length > 0) 
+            {
                 App.utils.focusHandler.setFocus(this.form.pass);
-            else
+            }
+            else 
+            {
                 App.utils.focusHandler.setFocus(this.form.login);
+            }
             return;
         }
 
@@ -47,7 +51,7 @@ package net.wg.gui.login.impl
             var loc1:*;
             event = arg1;
             isToken = isTokenS();
-            try
+            try 
             {
                 onExitFromAutoLoginS();
                 this.form.update(event.target, isToken);
@@ -77,24 +81,30 @@ package net.wg.gui.login.impl
             return;
         }
 
-        public function as_setDefaultValues(arg1:String, arg2:String, arg3:Boolean, arg4:Boolean, arg5:Boolean):void
+        public function as_setDefaultValues(arg1:String, arg2:String, arg3:Boolean, arg4:Boolean, arg5:Boolean, arg6:Boolean):void
         {
-            this.form.setDefaultValues(arg1, arg2, arg3, arg4, arg5);
+            this.form.setDefaultValues(arg1, arg2, arg3, arg4, arg5, arg6);
             return;
         }
 
         internal function onMessageLinkClick(arg1:flash.events.TextEvent):void
         {
-            if (this.isTFClickedByMBR)
+            if (this.isTFClickedByMBR) 
+            {
                 return;
+            }
             var loc1:*=arg1.text;
-            switch (loc1)
+            switch (loc1) 
             {
                 case "passwordRecovery":
+                {
                     onRecoveryS();
                     break;
+                }
                 default:
+                {
                     break;
+                }
             }
             return;
         }
@@ -129,8 +139,10 @@ package net.wg.gui.login.impl
         public override function updateStage(arg1:Number, arg2:Number):void
         {
             this.updateContent();
-            if (this._sparksManager)
+            if (this._sparksManager) 
+            {
                 this._sparksManager.resetZone(this.getSparkZone());
+            }
             return;
         }
 
@@ -138,12 +150,14 @@ package net.wg.gui.login.impl
         {
             var loc1:*=null;
             super.handleInput(arg1);
-            if (arg1.handled)
+            if (arg1.handled) 
+            {
                 return;
-            if (arg1.details.value == scaleform.clik.constants.InputValue.KEY_DOWN)
+            }
+            if (arg1.details.value == scaleform.clik.constants.InputValue.KEY_DOWN) 
             {
                 loc1 = this.keyMappings.get(arg1.details.code);
-                if (loc1 != null)
+                if (loc1 != null) 
                 {
                     loc1();
                     arg1.handled = true;
@@ -178,9 +192,11 @@ package net.wg.gui.login.impl
             visible = false;
             this.bg_image.source = arg2;
             this.useWallpaper = arg1;
-            if (this.useWallpaper)
+            if (this.useWallpaper) 
+            {
                 invalidate();
-            else
+            }
+            else 
             {
                 this.bg_image.autoSize = true;
                 invalidate();
@@ -218,10 +234,12 @@ package net.wg.gui.login.impl
         {
             super.configUI();
             this.bottomLogos = this.copyright.logos;
-            if (this.bg_image != null)
+            if (this.bg_image != null) 
+            {
                 this.bg_image.addEventListener(net.wg.gui.events.UILoaderEvent.COMPLETE, this.onLoadingImageCompleteHandler, false, 0, true);
+            }
             var loc1:*=App.globalVarsMgr.getLocaleOverrideS();
-            if (loc1)
+            if (loc1) 
             {
                 this.wotLogo.setLocale(loc1);
                 this.bottomLogos.setLocale(loc1);
@@ -266,7 +284,7 @@ package net.wg.gui.login.impl
             this.enableInputs(false);
             this.keyMappings.clear();
             this.keyMappings = null;
-            if (this._sparksManager)
+            if (this._sparksManager) 
             {
                 this._sparksManager.dispose();
                 this._sparksManager = null;
@@ -335,23 +353,29 @@ package net.wg.gui.login.impl
             var loc1:*=NaN;
             var loc2:*=NaN;
             var loc3:*=NaN;
-            if (this.useWallpaper)
-                if (this.bg_image)
+            if (this.useWallpaper) 
+            {
+                if (this.bg_image) 
                 {
                     loc1 = App.appWidth / 1920;
                     loc2 = App.appHeight / 1200;
                     loc3 = 1;
-                    if (loc1 > loc2)
+                    if (loc1 > loc2) 
+                    {
                         loc3 = loc2;
-                    else
+                    }
+                    else 
+                    {
                         loc3 = loc1;
+                    }
                     var loc4:*;
                     this.bg_image.scaleY = loc4 = loc3;
                     this.bg_image.scaleX = loc4;
                     this.bg_image.x = App.appWidth - this.bg_image.width >> 1;
                     this.bg_image.y = App.appHeight - this.bg_image.height >> 1;
                 }
-            else
+            }
+            else 
             {
                 this.bg_image.scaleY = loc4 = 1;
                 this.bg_image.scaleX = loc4;
@@ -367,34 +391,46 @@ package net.wg.gui.login.impl
             var loc2:*=this.getPass();
             var loc3:*=this.getSelectedServerName();
             trace(isPwdInvalidS(loc2));
-            if (loc1 != "")
-                if (isPwdInvalidS(loc2))
+            if (loc1 != "") 
+            {
+                if (isPwdInvalidS(loc2)) 
+                {
                     this.form.setErrorMessage(MENU.LOGIN_STATUS_INVALID_PASSWORD, ErrorStates.PASSWORD_INVALID);
-                else if (loc3 != "")
+                }
+                else if (loc3 != "") 
                 {
                     this.form.setErrorMessage(MENU.LOGIN_STATUS_CONNECTING, ErrorStates.NONE);
                     onLoginS(loc1, loc2, loc3);
                 }
-                else
+                else 
+                {
                     this.form.setErrorMessage(MENU.LOGIN_STATUS_EMPTY_SERVER, ErrorStates.NONE);
-            else
+                }
+            }
+            else 
+            {
                 this.form.setErrorMessage(MENU.LOGIN_STATUS_EMPTY_LOGIN, ErrorStates.LOGIN_INVALID);
+            }
             return;
         }
 
         internal function enableInputs(arg1:Boolean):void
         {
-            if (arg1)
+            if (arg1) 
+            {
                 addEventListener(scaleform.clik.events.InputEvent.INPUT, this.handleInput);
-            else
+            }
+            else 
+            {
                 removeEventListener(scaleform.clik.events.InputEvent.INPUT, this.handleInput);
+            }
             return;
         }
 
         internal function createSparks():void
         {
             var loc1:*=null;
-            if (this._sparksManager == null)
+            if (this._sparksManager == null) 
             {
                 loc1 = {"scope":this.sparksMc, "sparkQuantity":SPARK_QUANTITY, "zone":this.getSparkZone()};
                 this._sparksManager = net.wg.gui.login.ISparksManager(App.utils.classFactory.getObject(net.wg.data.constants.Linkages.SPARKS_MGR, loc1));

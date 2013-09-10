@@ -46,9 +46,13 @@ package net.wg.gui.messenger.windows
         protected override function draw():void
         {
             if (this.tabs.selectedIndex == -1) 
+            {
                 this.tabs.selectedIndex = this.__currentTab;
+            }
             if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
+            {
                 this.updateViewSize();
+            }
             super.draw();
             return;
         }
@@ -119,12 +123,16 @@ package net.wg.gui.messenger.windows
             switch (loc2) 
             {
                 case this.SEARCH_CHANNEL_FORM_ID:
+                {
                     net.wg.gui.messenger.forms.ChannelsSearchForm(loc1).searchResultText = this.searchLimitLabel;
                     net.wg.gui.messenger.forms.ChannelsSearchForm(loc1).searchResultList.dataProvider = this._searchResDataProvider;
                     net.wg.gui.messenger.forms.ChannelsSearchForm(loc1).searchResultList.labelField = "name";
                     break;
+                }
                 case this.CREATE_CHANNEL_FORM_ID:
+                {
                     break;
+                }
             }
             loc1.update({});
             this.updateViewSize();
@@ -197,7 +205,9 @@ package net.wg.gui.messenger.windows
         {
             var loc1:*=net.wg.gui.messenger.forms.ChannelsSearchForm(this.tryGetView(this.SEARCH_CHANNEL_FORM_ID));
             if (loc1) 
+            {
                 loc1.lockSearchButton(!arg1);
+            }
             return;
         }
 
@@ -205,9 +215,13 @@ package net.wg.gui.messenger.windows
         {
             var loc1:*=null;
             if (!this.view) 
+            {
                 return null;
+            }
             if (this.view.cachedViews[arg1] != null) 
+            {
                 loc1 = this.view.cachedViews[arg1];
+            }
             return loc1;
         }
 

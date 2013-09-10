@@ -21,7 +21,9 @@ package net.wg.gui.components.controls
             super.configUI();
             this.paddingHorizontal = 0;
             if (blurTextField) 
+            {
                 constraints.addElement("blurTextField", blurTextField, scaleform.clik.utils.Constraints.ALL);
+            }
             if (filtersMC != null) 
             {
                 constraints.addElement("filtersMC", filtersMC, scaleform.clik.utils.Constraints.ALL);
@@ -53,7 +55,9 @@ package net.wg.gui.components.controls
         public function set caps(arg1:Boolean):void
         {
             if (this._caps == arg1) 
+            {
                 return;
+            }
             this._caps = arg1;
             invalidate();
             return;
@@ -63,7 +67,9 @@ package net.wg.gui.components.controls
         {
             super.enabled = arg1;
             if (arg1) 
+            {
                 this.checkBrowserEffect();
+            }
             return;
         }
 
@@ -71,29 +77,47 @@ package net.wg.gui.components.controls
         {
             var loc1:*=null;
             if (this.caps) 
+            {
                 if (_label != null) 
                 {
                     loc1 = App.utils.locale.makeString(_label, {});
                     if (loc1) 
+                    {
                         loc1 = loc1.toUpperCase();
+                    }
                     else 
+                    {
                         loc1 = "";
+                    }
                     if (textField != null) 
+                    {
                         textField.text = loc1;
+                    }
                     if (textField1 != null) 
+                    {
                         textField1.text = loc1;
+                    }
                     if (blurTextField != null) 
+                    {
                         blurTextField.text = loc1;
+                    }
                     if (!(filtersMC == null) && !(filtersMC.textField == null)) 
+                    {
                         filtersMC.textField.text = loc1;
+                    }
                 }
+            }
             else 
             {
                 super.updateText();
                 if (blurTextField != null) 
+                {
                     blurTextField.text = _label;
+                }
                 if (!(filtersMC == null) && !(filtersMC.textField == null)) 
+                {
                     filtersMC.textField.text = _label;
+                }
             }
             return;
         }
@@ -104,7 +128,9 @@ package net.wg.gui.components.controls
             var loc3:*=NaN;
             var loc4:*=NaN;
             if (!initialized || _autoSize == flash.text.TextFieldAutoSize.NONE || !textField && !filtersMC) 
+            {
                 return;
+            }
             loc1 = _width;
             var loc5:*;
             _width = loc5 = this.calculateWidth();
@@ -113,13 +139,17 @@ package net.wg.gui.components.controls
             switch (loc5) 
             {
                 case flash.text.TextFieldAutoSize.RIGHT:
+                {
                     loc3 = x + loc1;
                     x = loc3 - loc2;
                     break;
+                }
                 case flash.text.TextFieldAutoSize.CENTER:
+                {
                     loc4 = x + loc1 * 0.5;
                     x = loc4 - loc2 * 0.5;
                     break;
+                }
             }
             return;
         }
@@ -135,7 +165,9 @@ package net.wg.gui.components.controls
                     constraints.updateElement("filtersMC", filtersMC);
                 }
                 if (blurTextField != null) 
+                {
                     constraints.updateElement("blurTextField", blurTextField);
+                }
             }
             return;
         }
@@ -158,8 +190,12 @@ package net.wg.gui.components.controls
         {
             super.draw();
             if (_textColor && enabled) 
+            {
                 if (!(filtersMC == null) && !(filtersMC.textField == null)) 
+                {
                     filtersMC.textField.textColor = _textColor;
+                }
+            }
             return;
         }
 
@@ -168,7 +204,9 @@ package net.wg.gui.components.controls
             var loc1:*=App.utils.helpLayout;
             var loc2:*={"borderWidth":width, "borderHeight":filtersMC.textField.textHeight - 4, "direction":data["helpDirection"], "text":data["helpText"], "x":0, "y":(filtersMC.height - filtersMC.textField.textHeight) / 2, "connectorLength":data["helpConnectorLength"]};
             if (data["helpText"]) 
+            {
                 setHelpLayout(loc1.create(root, loc2, this));
+            }
             return;
         }
 
@@ -202,7 +240,9 @@ package net.wg.gui.components.controls
                 filters = [new flash.filters.ColorMatrixFilter(loc1)];
             }
             else 
+            {
                 filters = [];
+            }
             App.utils.scheduler.scheduleTask(this.changeEffectState, 1000);
             return;
         }

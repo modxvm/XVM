@@ -32,13 +32,21 @@ package net.wg.gui.components.tooltips
             var loc4:*=this._props.y == 0 ? App.stage.mouseY : this._props.y;
             loc3 = loc3 + this.CURSOR_OFFSET;
             if ((loc4 = loc4 + this.CURSOR_OFFSET) + this.actualHeight > loc2) 
+            {
                 loc4 = loc4 - this.actualHeight - this.CURSOR_OFFSET * 2;
+            }
             if (loc4 < 0) 
+            {
                 loc4 = this.BORDER_OFFSET;
+            }
             if (loc3 + this.actualWidth > loc1) 
+            {
                 loc3 = loc3 - this.actualWidth - this.CURSOR_OFFSET * 2;
+            }
             if (loc3 < 0) 
+            {
                 loc3 = this.BORDER_OFFSET;
+            }
             this.x = loc3 | 0;
             this.y = loc4 | 0;
             this.visible = true;
@@ -104,7 +112,9 @@ package net.wg.gui.components.tooltips
         {
             super.configUI();
             if (this._data && !this.isRedrawed) 
+            {
                 this.redraw();
+            }
             return;
         }
 
@@ -117,7 +127,9 @@ package net.wg.gui.components.tooltips
             this.topPosition = this.bgShadowMargin.top + this.contentMargin.top;
             this.leftPartMaxW = 0;
             if (this.stage && !this.isRedrawed) 
+            {
                 this.redraw();
+            }
             return;
         }
 

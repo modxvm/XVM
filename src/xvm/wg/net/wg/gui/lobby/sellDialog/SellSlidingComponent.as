@@ -60,6 +60,7 @@ package net.wg.gui.lobby.sellDialog
             while (loc3 < arg1.shells.length) 
             {
                 if (arg1.shells[loc3] != undefined) 
+                {
                     if (arg1.shells[loc3].count != 0) 
                     {
                         (loc4 = new net.wg.data.VO.SellDialogElement()).id = arg1.shells[loc3].userName + " (" + arg1.shells[loc3].count + " " + loc2.makeString(DIALOGS.VEHICLESELLDIALOG_COUNT) + ")";
@@ -67,12 +68,17 @@ package net.wg.gui.lobby.sellDialog
                         loc4.type = "shells";
                         loc4.data = arg1.shells[loc3];
                         if (arg1.shells[loc3].buyPrice[1] > 0) 
+                        {
                             loc4.inInventory = true;
+                        }
                         else 
+                        {
                             loc4.inInventory = false;
+                        }
                         loc4.moneyValue = arg1.shells[loc3].sellPrice[0] * arg1.shells[loc3].count;
                         loc1.elements.push(loc4);
                     }
+                }
                 ++loc3;
             }
             if (loc1.elements.length != 0) 
@@ -145,7 +151,9 @@ package net.wg.gui.lobby.sellDialog
                 loc2 = loc2 + arg1[loc5][0].sellPrice[0] * arg1[loc5][0].inventoryCount;
                 loc4 = loc4 + arg1[loc5][0].inventoryCount;
                 if (arg1[loc5][1]) 
+                {
                     loc3.inInventory = true;
+                }
                 ++loc5;
             }
             var loc6:*=App.utils.locale;
@@ -162,6 +170,7 @@ package net.wg.gui.lobby.sellDialog
             while (loc7 < arg2.length) 
             {
                 if (arg2[loc7][0] != undefined) 
+                {
                     if (arg2[loc7][0].inventoryCount != 0) 
                     {
                         (loc8 = new net.wg.data.VO.SellDialogElement()).id = arg2[loc7][0].userName + " (" + arg2[loc7][0].inventoryCount + " " + loc6.makeString(DIALOGS.VEHICLESELLDIALOG_COUNT) + ")";
@@ -169,12 +178,17 @@ package net.wg.gui.lobby.sellDialog
                         loc8.data = arg2[loc7][0];
                         loc8.type = "invShells";
                         if (arg2[loc7][0].buyPrice[1] > 0 || arg2[loc7][1]) 
+                        {
                             loc8.inInventory = true;
+                        }
                         else 
+                        {
                             loc8.inInventory = false;
+                        }
                         loc8.moneyValue = arg2[loc7][0].sellPrice[0] * arg2[loc7][0].inventoryCount;
                         loc1.elements.push(loc8);
                     }
+                }
                 ++loc7;
             }
             if (loc1.elements.length != 0) 

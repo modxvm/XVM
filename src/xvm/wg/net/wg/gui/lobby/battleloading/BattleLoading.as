@@ -15,7 +15,9 @@ package net.wg.gui.lobby.battleloading
         public function as_setProgress(arg1:Number):void
         {
             if (this.progress == arg1) 
+            {
                 return;
+            }
             this.progress = arg1;
             invalidate(PROGRESS_IS_INVALID);
             return;
@@ -24,7 +26,9 @@ package net.wg.gui.lobby.battleloading
         public function as_setMapName(arg1:String):void
         {
             if (this.mapName == arg1) 
+            {
                 return;
+            }
             this.mapName = arg1;
             invalidate(MAP_NAME_IS_INVALID);
             return;
@@ -33,7 +37,9 @@ package net.wg.gui.lobby.battleloading
         public function as_setBattleTypeName(arg1:String):void
         {
             if (this.battleTypeName == arg1) 
+            {
                 return;
+            }
             this.battleTypeName = arg1;
             invalidate(BT_NAME_IS_INVALID);
             return;
@@ -42,7 +48,9 @@ package net.wg.gui.lobby.battleloading
         public function as_setBattleTypeFrameNum(arg1:Number):void
         {
             if (this.battleTypeFrameNum == arg1) 
+            {
                 return;
+            }
             this.battleTypeFrameNum = arg1;
             invalidate(BT_FRAME_NUM_IS_INVALID);
             return;
@@ -51,7 +59,9 @@ package net.wg.gui.lobby.battleloading
         public function as_setBattleTypeFrameName(arg1:String):void
         {
             if (this.battleTypeFrameName == arg1) 
+            {
                 return;
+            }
             this.battleTypeFrameName = arg1;
             invalidate(BT_FRAME_NAME_IS_INVALID);
             return;
@@ -60,7 +70,9 @@ package net.wg.gui.lobby.battleloading
         public function as_setWinText(arg1:String):void
         {
             if (this.winText == arg1) 
+            {
                 return;
+            }
             this.winText = arg1;
             invalidate(WIN_TEXT_IS_INVALID);
             return;
@@ -69,7 +81,9 @@ package net.wg.gui.lobby.battleloading
         public function as_setTeams(arg1:String, arg2:String):void
         {
             if (this.teamName1 == arg1 || this.teamName2 == arg2) 
+            {
                 return;
+            }
             this.teamName1 = arg1;
             this.teamName2 = arg2;
             invalidate(TEAMS_IS_INVALID);
@@ -79,7 +93,9 @@ package net.wg.gui.lobby.battleloading
         public function as_setTip(arg1:String):void
         {
             if (this.tip == arg1) 
+            {
                 return;
+            }
             this.tip = arg1;
             invalidate(TIP_IS_INVALID);
             return;
@@ -145,35 +161,55 @@ package net.wg.gui.lobby.battleloading
         protected override function draw():void
         {
             if (isInvalid(MAP_BG_IS_INVALID) && this.mapBG) 
+            {
                 this.mapBG.source = this.mapBgSource;
+            }
             if (isInvalid(PROGRESS_IS_INVALID) && this.form) 
+            {
                 this.form.updateProgress(this.progress);
+            }
             if (isInvalid(MAP_NAME_IS_INVALID) && this.form) 
+            {
                 this.form.updateMapName(this.mapName);
+            }
             if (isInvalid(BT_NAME_IS_INVALID) && this.form && this.battleTypeName) 
+            {
                 this.form.setBattleTypeName(this.battleTypeName);
+            }
             if (isInvalid(BT_FRAME_NUM_IS_INVALID) && this.form && !isNaN(this.battleTypeFrameNum)) 
+            {
                 this.form.setBattleTypeFrameNum(this.battleTypeFrameNum);
+            }
             if (isInvalid(BT_FRAME_NAME_IS_INVALID) && this.form && this.battleTypeFrameName) 
+            {
                 this.form.setBattleTypeFrameName(this.battleTypeFrameName);
+            }
             if (isInvalid(WIN_TEXT_IS_INVALID) && this.form) 
+            {
                 this.form.updateWinText(this.winText);
+            }
             if (isInvalid(TEAMS_IS_INVALID) && this.form) 
             {
                 invalidate(TEAMS_IS_INVALID);
                 this.form.updateTeamsHeaders(this.teamName1, this.teamName2);
             }
             if (isInvalid(TIP_IS_INVALID) && this.form) 
+            {
                 this.form.updateTip(this.tip);
+            }
             if (isInvalid(TEAM_VALUES_IS_INVALID) && this.form) 
+            {
                 this.form.updateTeamValues(this.teamValues);
+            }
             return;
         }
 
         public function as_setMapBG(arg1:String):void
         {
             if (this.mapBgSource == arg1) 
+            {
                 return;
+            }
             this.mapBgSource = arg1;
             invalidate(MAP_BG_IS_INVALID);
             return;

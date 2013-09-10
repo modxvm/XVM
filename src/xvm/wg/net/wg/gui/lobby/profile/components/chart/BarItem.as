@@ -15,7 +15,9 @@ package net.wg.gui.lobby.profile.components.chart
         {
             super.draw();
             if (isInvalid(PERCENT_INV)) 
+            {
                 this.gotoAndStop(this._percent);
+            }
             return;
         }
 

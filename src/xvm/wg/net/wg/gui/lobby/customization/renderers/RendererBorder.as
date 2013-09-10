@@ -18,7 +18,9 @@ package net.wg.gui.lobby.customization.renderers
         public function set state(arg1:String):void
         {
             if (this.state == arg1) 
+            {
                 return;
+            }
             this._state = arg1;
             gotoAndPlay(this.state);
             return;

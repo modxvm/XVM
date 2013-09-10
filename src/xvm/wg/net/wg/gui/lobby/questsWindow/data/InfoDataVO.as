@@ -18,10 +18,14 @@ package net.wg.gui.lobby.questsWindow.data
             switch (loc1) 
             {
                 case "descr":
+                {
                     this._descr = arg2 ? new net.wg.gui.lobby.questsWindow.data.DescriptionVO(arg2) : null;
                     return false;
+                }
                 default:
+                {
                     return true;
+                }
             }
         }
 

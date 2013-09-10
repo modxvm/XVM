@@ -37,7 +37,9 @@ package net.wg.gui.lobby.sellDialog
                 var loc7:*=0;
                 var loc8:*=loc3;
                 for each (loc4 in loc8) 
+                {
                     loc1.push(loc4);
+                }
             }
             return loc1;
         }
@@ -67,7 +69,9 @@ package net.wg.gui.lobby.sellDialog
                 var loc7:*=0;
                 var loc8:*=loc3;
                 for each (loc4 in loc8) 
+                {
                     net.wg.gui.lobby.sellDialog.SaleItemBlockRenderer(loc4).ddm.close();
+                }
             }
             return;
         }
@@ -84,9 +88,13 @@ package net.wg.gui.lobby.sellDialog
             addEventListener(flash.events.MouseEvent.MOUSE_WHEEL, this.handleMouseWheel, true, 0, true);
             addEventListener(scaleform.clik.events.InputEvent.INPUT, handleInput, false, 0, true);
             if (padding == null) 
+            {
                 padding = new scaleform.clik.utils.Padding();
+            }
             if (_itemRenderer == null && !_usingExternalRenderers) 
+            {
                 itemRendererName = _itemRendererName;
+            }
             this.useHandCursor = false;
             this._defaultListHeight = Math.round(_height);
             this.scrRect = new flash.geom.Rectangle(0, 0, _width, this._defaultListHeight + this.downMargin);
@@ -103,17 +111,25 @@ package net.wg.gui.lobby.sellDialog
             var loc3:*=null;
             var loc4:*=null;
             if (isInvalid(scaleform.clik.constants.InvalidationType.SCROLL_BAR)) 
+            {
                 this.createScrollBar();
+            }
             if (isInvalid(scaleform.clik.constants.InvalidationType.RENDERERS)) 
+            {
                 _autoRowHeight = NaN;
+            }
             if (isInvalid(scaleform.clik.constants.InvalidationType.SELECTED_INDEX)) 
+            {
                 updateSelectedIndex();
+            }
             if (isInvalid(scaleform.clik.constants.InvalidationType.STATE)) 
+            {
                 if (_newFrame) 
                 {
                     gotoAndPlay(_newFrame);
                     _newFrame = null;
                 }
+            }
             if (!_usingExternalRenderers && isInvalid(scaleform.clik.constants.InvalidationType.RENDERERS)) 
             {
                 if (_renderers != null) 
@@ -126,7 +142,9 @@ package net.wg.gui.lobby.sellDialog
                         cleanUpRenderer(loc3);
                         loc4 = loc3 as flash.display.DisplayObject;
                         if (container.contains(loc4)) 
+                        {
                             container.removeChild(loc4);
+                        }
                         ++loc1;
                     }
                 }
@@ -144,7 +162,9 @@ package net.wg.gui.lobby.sellDialog
                 invalidateData();
             }
             if (!_usingExternalRenderers && isInvalid(scaleform.clik.constants.InvalidationType.RENDERERS, scaleform.clik.constants.InvalidationType.SIZE)) 
+            {
                 drawRenderers(_totalRenderers);
+            }
             if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
             {
                 refreshData();
@@ -159,7 +179,9 @@ package net.wg.gui.lobby.sellDialog
             this.stepSize = Math.round(20 * this.height / this.totalHeight);
             var loc1:*=Math.round(this.height / this.totalHeight * 100);
             if (_scrollBar == null) 
+            {
                 return;
+            }
             if (_scrollBar is scaleform.clik.controls.ScrollIndicator) 
             {
                 loc2 = _scrollBar as scaleform.clik.controls.ScrollIndicator;
@@ -207,12 +229,18 @@ package net.wg.gui.lobby.sellDialog
             {
                 (loc6 = getRendererAt(loc7)).x = loc4;
                 if (loc7 != 0) 
+                {
                     loc6.y = getRendererAt((loc7 - 1)).y + getRendererAt((loc7 - 1)).height + loc2;
+                }
                 else 
+                {
                     loc6.y = 0;
+                }
                 this.totalHeight = loc6.y + loc6.height;
                 if (!loc5) 
+                {
                     loc6.validateNow();
+                }
                 ++loc7;
             }
             if (this.totalHeight < this.height) 
@@ -223,7 +251,9 @@ package net.wg.gui.lobby.sellDialog
                     _scrollBar.removeEventListener(flash.events.Event.CHANGE, handleScroll, false);
                     _scrollBar.focusTarget = null;
                     if (this.upperContainer.contains(_scrollBar as flash.display.DisplayObject)) 
+                    {
                         this.upperContainer.removeChild(_scrollBar as flash.display.DisplayObject);
+                    }
                     _scrollBar = null;
                     _autoScrollBar = false;
                 }
@@ -233,9 +263,13 @@ package net.wg.gui.lobby.sellDialog
                 removeEventListener(flash.events.MouseEvent.MOUSE_WHEEL, this.handleMouseWheel);
             }
             else 
+            {
                 this.drawScrollBar();
+            }
             if (this.totalHeight == 0) 
+            {
                 this.listVisibleHight = 0;
+            }
             var loc8:*=0;
             while (loc8 < loc1) 
             {
@@ -258,21 +292,29 @@ package net.wg.gui.lobby.sellDialog
                 _scrollBar.removeEventListener(flash.events.Event.CHANGE, handleScroll, false);
                 _scrollBar.focusTarget = null;
                 if (this.upperContainer.contains(_scrollBar as flash.display.DisplayObject)) 
+                {
                     this.upperContainer.removeChild(_scrollBar as flash.display.DisplayObject);
+                }
                 _scrollBar = null;
             }
             if (!_scrollBarValue || _scrollBarValue == "") 
+            {
                 return;
+            }
             _autoScrollBar = false;
             if (_scrollBarValue is String) 
             {
                 if (parent != null) 
+                {
                     loc1 = parent.getChildByName(_scrollBarValue.toString()) as scaleform.clik.interfaces.IScrollBar;
+                }
                 if (loc1 == null) 
                 {
                     loc2 = flash.utils.getDefinitionByName(_scrollBarValue.toString()) as Class;
                     if (loc2) 
+                    {
                         loc1 = new loc2() as scaleform.clik.interfaces.IScrollBar;
+                    }
                     if (loc1) 
                     {
                         _autoScrollBar = true;
@@ -300,11 +342,15 @@ package net.wg.gui.lobby.sellDialog
                 }
             }
             else 
+            {
                 loc1 = _scrollBarValue as scaleform.clik.interfaces.IScrollBar;
+            }
             _scrollBar = loc1;
             invalidateSize();
             if (_scrollBar == null) 
+            {
                 return;
+            }
             _scrollBar.addEventListener(flash.events.Event.SCROLL, handleScroll, false, 0, true);
             _scrollBar.addEventListener(flash.events.Event.CHANGE, handleScroll, false, 0, true);
             _scrollBar.focusTarget = this;
@@ -315,7 +361,9 @@ package net.wg.gui.lobby.sellDialog
         protected override function drawScrollBar():void
         {
             if (!_autoScrollBar) 
+            {
                 return;
+            }
             _scrollBar.x = _width - _scrollBar.width - this.sbPadding;
             _scrollBar.y = this.sbPadding;
             _scrollBar.height = availableHeight - this.sbPadding * 2;

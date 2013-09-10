@@ -21,7 +21,9 @@ package net.wg.gui.lobby.techtree.controls
         public function setTitle(arg1:String):void
         {
             if (this._title == arg1) 
+            {
                 return;
+            }
             this._title = arg1;
             invalidate(net.wg.gui.lobby.techtree.constants.TTInvalidationType.TITLE);
             return;
@@ -30,7 +32,9 @@ package net.wg.gui.lobby.techtree.controls
         public function setNation(arg1:String):void
         {
             if (this._nation == arg1) 
+            {
                 return;
+            }
             this._nation = arg1;
             invalidate(net.wg.gui.lobby.techtree.constants.TTInvalidationType.NATION);
             return;
@@ -51,7 +55,9 @@ package net.wg.gui.lobby.techtree.controls
         {
             constraints = new scaleform.clik.utils.Constraints(this);
             if (this.titleField != null) 
+            {
                 constraints.addElement(this.titleField.name, this.titleField, scaleform.clik.utils.Constraints.LEFT | scaleform.clik.utils.Constraints.RIGHT);
+            }
             if (this.returnButton != null) 
             {
                 constraints.addElement(this.returnButton.name, this.returnButton, scaleform.clik.utils.Constraints.TOP | scaleform.clik.utils.Constraints.LEFT);
@@ -70,15 +76,21 @@ package net.wg.gui.lobby.techtree.controls
                 this.titleField.text = this._title;
             }
             if (isInvalid(net.wg.gui.lobby.techtree.constants.TTInvalidationType.NATION) && !(this.returnButton == null)) 
+            {
                 if (this._nation.length > 0) 
                 {
                     this.returnButton.label = this._nation;
                     this.returnButton.visible = true;
                 }
                 else 
+                {
                     this.returnButton.visible = false;
+                }
+            }
             if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
+            {
                 constraints.update(_width, _height);
+            }
             return;
         }
 

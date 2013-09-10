@@ -30,7 +30,9 @@ package net.wg.gui.lobby.dialogs
             var loc2:*=0;
             var loc3:*=this.getButtonsOrder();
             for each (loc1 in loc3) 
+            {
                 arg1(loc1);
+            }
             return;
         }
 
@@ -54,7 +56,9 @@ package net.wg.gui.lobby.dialogs
         public function set minWidth(arg1:Number):void
         {
             if (arg1 == this._minWidth) 
+            {
                 return;
+            }
             this._minWidth = arg1;
             return;
         }
@@ -73,7 +77,9 @@ package net.wg.gui.lobby.dialogs
         public function set minHeight(arg1:Number):void
         {
             if (arg1 == this._minHeight) 
+            {
                 return;
+            }
             this._minHeight = arg1;
             this.updateActualSize();
             return;
@@ -103,7 +109,9 @@ package net.wg.gui.lobby.dialogs
         public function as_setButtonEnabling(arg1:String, arg2:Boolean):void
         {
             if (!this._btnEnableCandidate) 
+            {
                 this._btnEnableCandidate = new net.wg.gui.lobby.dialogs.ItemStatusData();
+            }
             this._btnEnableCandidate.id = arg1;
             this._btnEnableCandidate.status = arg2;
             invalidate(BUTTON_ENABLE_INVALID);
@@ -136,7 +144,9 @@ package net.wg.gui.lobby.dialogs
             {
                 this.textField.text = "";
                 if (this.textField.parent) 
+                {
                     this.textField.parent.removeChild(this.textField);
+                }
                 this.textField = null;
             }
             super.onDispose();
@@ -169,7 +179,9 @@ package net.wg.gui.lobby.dialogs
             var loc8:*=null;
             super.draw();
             if (isInvalid(LAYOUT_INVALID)) 
+            {
                 this.applyLayout();
+            }
             if (isInvalid(BUTTON_ENABLE_INVALID) && this._btnEnableCandidate) 
             {
                 loc1 = this._btnEnableCandidate.id;
@@ -180,8 +192,12 @@ package net.wg.gui.lobby.dialogs
                 while (loc6 < loc5) 
                 {
                     if ((loc4 = loc3[loc6]).data && loc4.data.hasOwnProperty("id")) 
+                    {
                         if (loc1 == loc4.data.id) 
+                        {
                             loc4.enabled = loc2;
+                        }
+                    }
                     ++loc6;
                 }
             }
@@ -193,9 +209,13 @@ package net.wg.gui.lobby.dialogs
                 for each (loc8 in loc10) 
                 {
                     if (!(loc8.data && loc8.data.hasOwnProperty("id") && this._btnFocusCandidateId == loc8.data.id)) 
+                    {
                         continue;
+                    }
                     if (loc8.enabled) 
+                    {
                         App.utils.focusHandler.setFocus(loc8);
+                    }
                     break;
                 }
             }
@@ -280,12 +300,18 @@ package net.wg.gui.lobby.dialogs
                     loc5.data = arg1[loc4];
                     loc5.label = arg1[loc4].label;
                     if (arg1[loc4].focused) 
+                    {
                         loc3.setFocus(loc5);
+                    }
                     loc5.visible = true;
                     if (loc6 != SUBMIT_BUTTON) 
+                    {
                         loc5.soundType = net.wg.data.constants.SoundTypes.NORMAL_BTN;
+                    }
                     else 
+                    {
                         loc5.soundType = net.wg.data.constants.SoundTypes.OK_BTN;
+                    }
                 }
                 else 
                 {
@@ -294,7 +320,9 @@ package net.wg.gui.lobby.dialogs
                     this.dynamicWhiteButton.data = arg1[loc4];
                     this.dynamicWhiteButton.label = arg1[loc4].label;
                     if (arg1[loc4].focused) 
+                    {
                         loc3.setFocus(this.dynamicWhiteButton);
+                    }
                     this.dynamicWhiteButton.visible = true;
                     this.dynamicWhiteButton.soundType = net.wg.data.constants.SoundTypes.CANCEL_BTN;
                     this.addListenerButtonProcessor(this.dynamicWhiteButton);

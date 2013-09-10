@@ -19,12 +19,18 @@ package net.wg.gui.lobby.techtree.data.vo
         public function set earnedXP(arg1:Number):void
         {
             if (this._earnedXP == arg1) 
+            {
                 return;
+            }
             this._earnedXP = arg1;
             if (this._earnedXP > 0) 
+            {
                 this._earnedXPLabel = App.utils.locale.integer(this._earnedXP);
+            }
             else 
+            {
                 this._earnedXPLabel = "";
+            }
             return;
         }
 
@@ -42,44 +48,76 @@ package net.wg.gui.lobby.techtree.data.vo
         {
             var loc1:*=null;
             if (arg1 == null) 
+            {
                 return;
+            }
             if (!isNaN(arg1.id)) 
+            {
                 this.id = arg1.id;
+            }
             if (arg1.nameString != null) 
+            {
                 this.nameString = arg1.nameString;
+            }
             this.primaryClass = new net.wg.gui.lobby.techtree.data.vo.PrimaryClass();
             if (arg1.primaryClass != null) 
+            {
                 this.primaryClass.fromObject(arg1.primaryClass, arg2);
+            }
             if (arg1.level != null) 
+            {
                 this.level = arg1.level;
+            }
             if (!isNaN(arg1.earnedXP)) 
+            {
                 this.earnedXP = arg1.earnedXP;
+            }
             if (!isNaN(arg1.state)) 
+            {
                 this.state = arg1.state;
+            }
             this.unlockProps = new net.wg.gui.lobby.techtree.data.vo.UnlockProps();
             if (arg1.unlockProps != null) 
+            {
                 this.unlockProps.fromArray(arg1.unlockProps, arg2);
+            }
             if (arg1.hasOwnProperty("extraInfo")) 
             {
                 loc1 = arg1["extraInfo"];
                 if (loc1) 
+                {
                     this.extraInfo = loc1;
+                }
             }
             if (arg1.smallIconPath != null) 
+            {
                 this.smallIconPath = arg1.smallIconPath;
+            }
             if (arg1.iconPath != null) 
+            {
                 this.iconPath = arg1.iconPath;
+            }
             if (arg1.longName != null) 
+            {
                 this.longName = arg1.longName;
+            }
             if (arg1.pickleDump != null) 
+            {
                 this.pickleDump = arg1.pickleDump;
+            }
             this.shopPrice = new net.wg.gui.lobby.techtree.data.vo.ShopPrice();
             if (arg1.shopPrice != null) 
+            {
                 this.shopPrice.fromArray(arg1.shopPrice, arg2);
+            }
             if (displayInfoClass != null) 
+            {
                 this.displayInfo = new displayInfoClass();
+            }
             if (!(arg1.displayInfo == null) && !(this.displayInfo == null is net.wg.gui.lobby.techtree.interfaces.IValueObject)) 
+            {
                 (this.displayInfo as net.wg.gui.lobby.techtree.interfaces.IValueObject).fromObject(arg1.displayInfo, arg2);
+            }
             return;
         }
 
@@ -98,9 +136,13 @@ package net.wg.gui.lobby.techtree.data.vo
             this.shopPrice = null;
             this.extraInfo = null;
             if (this.unlockProps != null) 
+            {
                 this.unlockProps.clearUp();
+            }
             if (this.displayInfo != null) 
+            {
                 this.displayInfo.clearUp();
+            }
             return;
         }
 

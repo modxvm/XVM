@@ -31,7 +31,9 @@ package net.wg.gui.prebattle.company
             {
                 loc3 = getRendererAt(loc2) as net.wg.gui.prebattle.company.CompanyListItemRenderer;
                 if (loc3.selected) 
+                {
                     return true;
+                }
                 ++loc2;
             }
             return false;
@@ -61,9 +63,13 @@ package net.wg.gui.prebattle.company
             {
                 loc1 = net.wg.gui.components.controls.ScrollBar(scrollBar);
                 if (loc1.upArrowWg.hitTestPoint(arg1.stageX, arg1.stageY) && !loc1.upArrowWg.enabled) 
+                {
                     this.unselectedRenderers();
+                }
                 if (loc1.downArrowWg.hitTestPoint(arg1.stageX, arg1.stageY) && !loc1.downArrowWg.enabled) 
+                {
                     this.unselectedRenderers();
+                }
             }
             return;
         }
@@ -134,7 +140,9 @@ package net.wg.gui.prebattle.company
                 {
                     loc5 = _scrollPosition + loc3;
                     if (!(loc6 = this.isItemSelected ? _selectedIndex == loc5 : false) && loc4.dd.isOpen()) 
+                    {
                         loc4.dd.close();
+                    }
                     loc7 = new scaleform.clik.data.ListData(loc5, itemToLabel(arg1[loc3]), loc6);
                     loc4.enabled = loc3 >= loc1 ? false : true;
                     loc4.setListData(loc7);
@@ -152,13 +160,17 @@ package net.wg.gui.prebattle.company
         public override function handleInput(arg1:scaleform.clik.events.InputEvent):void
         {
             if (arg1.handled) 
+            {
                 return;
+            }
             var loc1:*=getRendererAt(_selectedIndex, _scrollPosition);
             if (loc1 != null) 
             {
                 loc1.handleInput(arg1);
                 if (arg1.handled) 
+                {
                     return;
+                }
             }
             var loc2:*=arg1.details;
             var loc3:*=loc2.value == scaleform.clik.constants.InputValue.KEY_DOWN || loc2.value == scaleform.clik.constants.InputValue.KEY_HOLD;
@@ -166,49 +178,99 @@ package net.wg.gui.prebattle.company
             switch (loc4) 
             {
                 case scaleform.clik.constants.NavigationCode.UP:
+                {
                     if (selectedIndex != -1) 
+                    {
                         if (_selectedIndex > 0) 
+                        {
                             if (loc3) 
+                            {
                                 scrollPosition--;
+                            }
+                        }
                         else if (wrapping != scaleform.clik.constants.WrappingMode.STICK) 
+                        {
                             if (wrapping != scaleform.clik.constants.WrappingMode.WRAP) 
+                            {
                                 return;
+                            }
                             else if (loc3) 
+                            {
                                 scrollPosition = (_dataProvider.length - 1);
+                            }
+                        }
+                    }
                     else if (loc3) 
+                    {
                         scrollPosition = (scrollPosition + _totalRenderers - 1);
+                    }
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.DOWN:
+                {
                     if (_selectedIndex != -1) 
+                    {
                         if (_selectedIndex < (_dataProvider.length - 1)) 
+                        {
                             if (loc3) 
+                            {
                                 scrollPosition++;
+                            }
+                        }
                         else if (wrapping != scaleform.clik.constants.WrappingMode.STICK) 
+                        {
                             if (wrapping != scaleform.clik.constants.WrappingMode.WRAP) 
+                            {
                                 return;
+                            }
                             else if (loc3) 
+                            {
                                 scrollPosition = 0;
+                            }
+                        }
+                    }
                     else if (loc3) 
+                    {
                         scrollPosition = _scrollPosition;
+                    }
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.END:
+                {
                     if (!loc3) 
+                    {
                         scrollPosition = (_dataProvider.length - 1);
+                    }
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.HOME:
+                {
                     if (!loc3) 
+                    {
                         scrollPosition = 0;
+                    }
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.PAGE_UP:
+                {
                     if (loc3) 
+                    {
                         scrollList(_totalRenderers);
+                    }
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.PAGE_DOWN:
+                {
                     if (loc3) 
+                    {
                         scrollList(-_totalRenderers);
+                    }
                     break;
+                }
                 default:
+                {
                     return;
+                }
             }
             arg1.handled = true;
             return;

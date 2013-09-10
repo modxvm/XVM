@@ -19,7 +19,9 @@ package net.wg.gui.lobby.techtree.data.state
             var loc2:*=0;
             var loc3:*=this.to;
             for (loc1 in loc3) 
+            {
                 arg1[loc1] = this.to[loc1];
+            }
             return;
         }
 
@@ -29,7 +31,9 @@ package net.wg.gui.lobby.techtree.data.state
             var loc2:*=0;
             var loc3:*=this.from;
             for (loc1 in loc3) 
+            {
                 arg1[loc1] = this.from[loc1];
+            }
             return;
         }
 

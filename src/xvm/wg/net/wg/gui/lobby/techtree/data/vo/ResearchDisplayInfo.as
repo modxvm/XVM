@@ -43,13 +43,21 @@ package net.wg.gui.lobby.techtree.data.vo
         public function fromObject(arg1:Object, arg2:net.wg.utils.ILocale):void
         {
             if (arg1 == null) 
+            {
                 return;
+            }
             if (arg1.path) 
+            {
                 this._path = arg1.path;
+            }
             if (arg1.renderer) 
+            {
                 this._renderer = arg1.renderer;
+            }
             if (arg1.level) 
+            {
                 this._level = arg1.level;
+            }
             return;
         }
 
@@ -58,7 +66,9 @@ package net.wg.gui.lobby.techtree.data.vo
             this._renderer = "";
             this._level = -1;
             if (this._path != null) 
+            {
                 this._path.splice(0, this._path.length);
+            }
             return;
         }
 

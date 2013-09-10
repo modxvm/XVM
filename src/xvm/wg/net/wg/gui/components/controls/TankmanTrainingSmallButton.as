@@ -103,19 +103,29 @@ package net.wg.gui.components.controls
             this._buy = arg1;
             var loc1:*=this._buy ? "buy" : "up";
             if (this.isNativeVehicle) 
+            {
                 if (this._buy) 
+                {
                     this.setState("buy");
+                }
+            }
             else if (currentLabel != "buy") 
+            {
                 return;
+            }
             else 
+            {
                 this.setState(this.hasMoney ? "up" : "disabled");
+            }
             return;
         }
 
         public function setData(arg1:Object, arg2:Number, arg3:Number, arg4:Number, arg5:Boolean, arg6:Boolean, arg7:int):void
         {
             if (arg1 == null) 
+            {
                 return;
+            }
             this.isUpdated = false;
             this.model = arg1;
             this.isNativeVehicle = arg5;
@@ -155,18 +165,24 @@ package net.wg.gui.components.controls
         {
             super.draw();
             if (isInvalid(UPDATE_DATA) && !this.isUpdated) 
+            {
                 this.refreshData();
+            }
             this.setTextColorToPriceLabel();
             var loc1:*=this._scopeType;
             switch (loc1) 
             {
                 case "dropSkills":
+                {
                     this.labelField.text = MENU.skilldropwindow_study(this.getLabelType(this._type));
                     this.trainingLabel.text = MENU.tankmantrainingwindow(this._type);
                     break;
+                }
                 default:
+                {
                     this.labelField.text = MENU.tankmantrainingwindow(this._type);
                     break;
+                }
             }
             return;
         }
@@ -186,14 +202,20 @@ package net.wg.gui.components.controls
             switch (loc2) 
             {
                 case "academy":
+                {
                     loc1 = "goldLabel";
                     break;
+                }
                 case "scool":
+                {
                     loc1 = "creditsLabel";
                     break;
+                }
                 case "free":
+                {
                     loc1 = "freeLabel";
                     break;
+                }
             }
             return loc1;
         }
@@ -203,31 +225,43 @@ package net.wg.gui.components.controls
             var loc1:*=null;
             var loc2:*=null;
             if (this.model == null || this._specializationLevel == 0 || !this.priceLabel) 
+            {
                 return;
+            }
             if (this.isNativeVehicle) 
+            {
                 if (this._specializationLevel >= this.level) 
+                {
                     this.priceLabel.textColor = this._priceColors["buy"];
+                }
                 else 
                 {
                     loc1 = this.hasMoney ? "normal" : "disabled";
                     this.priceLabel.textColor = this._priceColors[loc1];
                 }
+            }
             else if (this.hasMoney) 
             {
                 loc2 = enabled ? "normal" : "buy";
                 this.priceLabel.textColor = this._priceColors[loc2];
             }
             else 
+            {
                 this.priceLabel.textColor = this._priceColors["disabled"];
+            }
             return;
         }
 
         internal function setEnabled():void
         {
             if (this.isNativeVehicle) 
+            {
                 enabled = this._specializationLevel < this.level && this.hasMoney;
+            }
             else 
+            {
                 enabled = this.hasMoney;
+            }
             return;
         }
 
@@ -238,7 +272,9 @@ package net.wg.gui.components.controls
             var loc2:*=this.model.baseRoleLoss;
             var loc3:*=this.model.classChangeRoleLoss;
             if (arg1) 
+            {
                 loc1 = arg2 - Math.floor(arg2 * loc2);
+            }
             else 
             {
                 loc4 = loc2 + loc3;
@@ -252,17 +288,27 @@ package net.wg.gui.components.controls
         {
             var loc1:*=false;
             if (_selected == arg1) 
+            {
                 return;
+            }
             _selected = arg1;
             if (enabled) 
             {
                 if (_focused) 
+                {
                     if (_pressedByKeyboard && !(_focusIndicator == null)) 
+                    {
                         this.setState("kb_selecting");
+                    }
                     else 
+                    {
                         this.setState("selecting");
+                    }
+                }
                 else 
+                {
                     this.setState("toggle");
+                }
                 if (owner) 
                 {
                     loc1 = _selected && !(owner == null) && checkOwnerFocused();
@@ -271,9 +317,13 @@ package net.wg.gui.components.controls
                 }
             }
             else if (this._specializationLevel >= this.level) 
+            {
                 this.setState("buy");
+            }
             else 
+            {
                 this.setState("disabled");
+            }
             validateNow();
             dispatchEvent(new flash.events.Event(flash.events.Event.SELECT));
             return;
@@ -296,7 +346,9 @@ package net.wg.gui.components.controls
             var loc1:*=getStatePrefixes();
             var loc2:*=_stateMap[arg1];
             if (loc2 == null || loc2.length == 0) 
+            {
                 return;
+            }
             var loc3:*=loc1.length;
             var loc4:*=0;
             while (loc4 < loc3) 
@@ -342,7 +394,9 @@ package net.wg.gui.components.controls
         public function setDataForDropSkills(arg1:Number, arg2:Boolean):void
         {
             if (!isNaN(arg1)) 
+            {
                 this.price = arg1.toString();
+            }
             var loc1:*;
             this.hasMoney = loc1 = arg2;
             enabled = loc1;
@@ -357,9 +411,13 @@ package net.wg.gui.components.controls
         internal function setBUY():void
         {
             if (this.isNativeVehicle) 
+            {
                 this.buy = this._specializationLevel >= this.level;
+            }
             else 
+            {
                 this.buy = false;
+            }
             return;
         }
 

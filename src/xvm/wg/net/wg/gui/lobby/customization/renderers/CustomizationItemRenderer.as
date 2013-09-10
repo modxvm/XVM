@@ -21,7 +21,9 @@ package net.wg.gui.lobby.customization.renderers
         public function set demoMode(arg1:String):void
         {
             if (this._demoMode == arg1) 
+            {
                 return;
+            }
             this._demoMode = arg1;
             var loc1:*=this._useHandCursorForse || this._demoMode == DEMO_OFF;
             super.enabled = loc1;
@@ -48,8 +50,10 @@ package net.wg.gui.lobby.customization.renderers
             if (data) 
             {
                 if (data.current != this.current) 
+                {
                     this.current = data.current;
-                this.costVisible = this.demoMode == net.wg.gui.lobby.customization.renderers.CustomizationItemRenderer.DEMO_NEW && data.id > 0 || this.demoMode == net.wg.gui.lobby.customization.renderers.CustomizationItemRenderer.DEMO_OFF;
+                }
+                this.costVisible = this.demoMode == CustomizationItemRenderer.DEMO_NEW && data.id > 0 || this.demoMode == CustomizationItemRenderer.DEMO_OFF;
                 if (data.price) 
                 {
                     this.costVal = data.price.isGold ? App.utils.locale.gold(data.price.cost) : App.utils.locale.integer(data.price.cost);
@@ -57,10 +61,14 @@ package net.wg.gui.lobby.customization.renderers
                 }
                 loc1 = data.isNew;
                 if (this.uiLoader) 
+                {
                     this.loadTexture(data.texturePath);
+                }
             }
             if (loc1 != this.isNew) 
+            {
                 this.showIsNew(loc1);
+            }
             invalidateData();
             this.hideTooltip();
             return;
@@ -80,7 +88,9 @@ package net.wg.gui.lobby.customization.renderers
             this.uiLoader.dispose();
             this.uiLoader.removeEventListener(net.wg.gui.events.UILoaderEvent.COMPLETE, this.onImageLoadComplete);
             if (this.newMarker && contains(this.newMarker)) 
+            {
                 removeChild(this.newMarker);
+            }
             data = null;
             return;
         }
@@ -96,7 +106,9 @@ package net.wg.gui.lobby.customization.renderers
             addEventListener(flash.events.MouseEvent.ROLL_OVER, this.showTooltip);
             addEventListener(flash.events.MouseEvent.ROLL_OUT, this.hideTooltip);
             if (data) 
+            {
                 this.loadTexture(data.texturePath);
+            }
             return;
         }
 
@@ -117,15 +129,25 @@ package net.wg.gui.lobby.customization.renderers
         protected override function getStatePrefixes():__AS3__.vec.Vector.<String>
         {
             if (this.prefixesVector) 
+            {
                 this.prefixesVector.splice(0, this.prefixesVector.length);
+            }
             else 
+            {
                 this.prefixesVector = new Vector.<String>();
+            }
             if (enabled && this._current) 
+            {
                 this.prefixesVector.push("current_");
+            }
             else if (enabled && _selected) 
+            {
                 this.prefixesVector.push("selected_");
+            }
             else 
+            {
                 this.prefixesVector.push("");
+            }
             return this.prefixesVector;
         }
 
@@ -145,7 +167,9 @@ package net.wg.gui.lobby.customization.renderers
                 this.newMarker.visible = arg1;
             }
             else if (this.newMarker) 
+            {
                 this.newMarker.visible = arg1;
+            }
             return;
         }
 
@@ -159,16 +183,22 @@ package net.wg.gui.lobby.customization.renderers
         {
             this.texturePath = arg1;
             if (!(this.texturePath == null) && !(this.texturePath.length == 0)) 
+            {
                 this.uiLoader.source = arg1;
+            }
             else 
+            {
                 this.uiLoader.unload();
+            }
             return;
         }
 
         internal function showTooltip(arg1:flash.events.MouseEvent=null):void
         {
             if (data && data.description.length > 0) 
+            {
                 App.toolTipMgr.showComplex(data.description);
+            }
             return;
         }
 
@@ -186,7 +216,9 @@ package net.wg.gui.lobby.customization.renderers
         public function set current(arg1:Boolean):void
         {
             if (this._current == arg1) 
+            {
                 return;
+            }
             this._current = arg1;
             setState(state);
             return;

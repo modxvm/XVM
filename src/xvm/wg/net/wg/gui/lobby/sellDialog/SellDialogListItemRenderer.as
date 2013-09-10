@@ -41,7 +41,9 @@ package net.wg.gui.lobby.sellDialog
             this.clickArea.buttonMode = false;
             this.mouseChildren = true;
             if (!(_focusIndicator == null) && !_focused && _focusIndicator.totalFrames == 1) 
+            {
                 focusIndicator.visible = false;
+            }
             if (this.container == null) 
             {
                 this.container = new flash.display.Sprite();
@@ -70,7 +72,9 @@ package net.wg.gui.lobby.sellDialog
             {
                 loc1.push(this.createItemRenderer(loc2));
                 if (loc2 == (arg1 - 1)) 
+                {
                     loc1[loc2].hideLine();
+                }
                 ++loc2;
             }
             return Vector.<net.wg.infrastructure.interfaces.ISaleItemBlockRenderer>(loc1);
@@ -103,7 +107,9 @@ package net.wg.gui.lobby.sellDialog
                 ++loc4;
             }
             if (this.renderers) 
+            {
                 loc3 = this.renderers.length * loc2 + loc1;
+            }
             var loc5:*;
             this.clickArea.height = loc5 = loc3;
             this.height = loc5;

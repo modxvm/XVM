@@ -29,11 +29,13 @@ package net.wg.gui.notification
             this.list.addEventListener(net.wg.gui.notification.ServiceMessageEvent.MESSAGE_BUTTON_CLICKED, this.messageButtonClickHandler, false, 0, true);
             this.list.addEventListener(net.wg.gui.notification.ServiceMessageEvent.MESSAGE_LINK_CLICKED, this.messageLinkClickHandler, false, 0, true);
             if (this.rendererTemplate) 
+            {
                 if (this.rendererTemplate.parent) 
                 {
                     this.rendererTemplate.parent.removeChild(this.rendererTemplate);
                     this.rendererTemplate = null;
                 }
+            }
             return;
         }
 
@@ -51,10 +53,14 @@ package net.wg.gui.notification
             switch (loc1) 
             {
                 case "securityLink":
+                {
                     onSecuritySettingsLinkClickS();
                     break;
+                }
                 default:
+                {
                     break;
+                }
             }
             return;
         }
@@ -74,11 +80,15 @@ package net.wg.gui.notification
         {
             var loc1:*=arg1.target as flash.display.DisplayObject;
             if (!loc1) 
+            {
                 return;
+            }
             while (loc1) 
             {
                 if (loc1 == this) 
+                {
                     return;
+                }
                 loc1 = loc1.parent;
             }
             onWindowCloseS();
@@ -115,14 +125,18 @@ package net.wg.gui.notification
         {
             var loc1:*="scrollStepFactor";
             if (arg1.hasOwnProperty(loc1)) 
+            {
                 this.list.scrollStepFactor = arg1[loc1];
+            }
             return;
         }
 
         public function as_setMessagesList(arg1:Array):void
         {
             if (arg1 == null) 
+            {
                 return;
+            }
             var loc1:*=[];
             var loc2:*=arg1.length;
             var loc3:*=0;
@@ -151,7 +165,9 @@ package net.wg.gui.notification
         protected override function onDispose():void
         {
             if (stage) 
+            {
                 stage.removeEventListener(flash.events.MouseEvent.CLICK, this.stageClickHandler);
+            }
             this.list.removeEventListener(net.wg.gui.notification.ServiceMessageEvent.MESSAGE_BUTTON_CLICKED, this.messageButtonClickHandler);
             this.list.removeEventListener(net.wg.gui.notification.ServiceMessageEvent.MESSAGE_LINK_CLICKED, this.messageLinkClickHandler);
             super.onDispose();

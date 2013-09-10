@@ -31,10 +31,16 @@ package net.wg.gui.lobby.browser
             this.icon.mouseEnabled = false;
             this.icon.mouseChildren = false;
             if (this.action != ACTION_RELOAD) 
+            {
                 if (this._isMouseOver) 
+                {
                     this.showStopIcon(true);
+                }
+            }
             else 
+            {
                 this.showStopIcon(false);
+            }
             return;
         }
 

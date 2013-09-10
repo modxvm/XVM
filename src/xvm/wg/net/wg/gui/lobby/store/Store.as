@@ -70,7 +70,9 @@ package net.wg.gui.lobby.store
         protected function onPopulateMenuFilterNeed(arg1:String):void
         {
             if (!this.initializing) 
+            {
                 requestFilterDataS(arg1);
+            }
             return;
         }
 
@@ -220,7 +222,9 @@ package net.wg.gui.lobby.store
             var loc2:*=0;
             var loc3:*=this._viewsHash;
             for each (loc1 in loc3) 
+            {
                 delete this._viewsHash[loc1];
+            }
             this._viewsHash = null;
             App.gameInputMgr.clearKeyHandler(flash.ui.Keyboard.ESCAPE, flash.events.KeyboardEvent.KEY_DOWN);
             super.onDispose();
@@ -262,7 +266,9 @@ package net.wg.gui.lobby.store
             this.nationFilter.nation.menuRowCount = arg1.length;
             this.nationFilter.nation.createNationFilter(arg1);
             if (this.initializing) 
+            {
                 this.initMenu(this.getLocalizator());
+            }
             return;
         }
 
@@ -306,11 +312,13 @@ package net.wg.gui.lobby.store
             var loc1:*=null;
             var loc2:*=null;
             if (this.nation != (this.nationFilter.nation.selectedIndex - 1)) 
+            {
                 if (this._currentView) 
                 {
                     this.nation = (this.nationFilter.nation.selectedIndex - 1);
                     this._currentView.updateSubFilter(this.nation);
                 }
+            }
             if (this.menu.enabled && this._currentView && !this._programUpdating) 
             {
                 loc1 = this._currentView.getFilter();

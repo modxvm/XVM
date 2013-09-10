@@ -33,9 +33,13 @@ package net.wg.gui.lobby.profile.components
                 this.applyText();
             }
             if (this.isPaddingChanged) 
+            {
                 this.isPaddingChanged = false;
+            }
             if (this.isIconSourceChanged) 
+            {
                 this.icon.source = this._iconSource;
+            }
             return;
         }
 

@@ -20,17 +20,25 @@ package net.wg.gui.lobby.techtree.data.state
                 case net.wg.gui.lobby.techtree.constants.NodeEntityType.NATION_TREE:
                 case net.wg.gui.lobby.techtree.constants.NodeEntityType.TOP_VEHICLE:
                 case net.wg.gui.lobby.techtree.constants.NodeEntityType.NEXT_VEHICLE:
+                {
                     loc1 = getNTNodeStateProps(arg2);
                     break;
+                }
                 case net.wg.gui.lobby.techtree.constants.NodeEntityType.RESEARCH_ROOT:
+                {
                     loc1 = getNTNodeStateProps(arg2);
                     break;
+                }
                 case net.wg.gui.lobby.techtree.constants.NodeEntityType.RESEARCH_ITEM:
+                {
                     loc1 = getResearchNodeStateProps(arg2, arg3.rootState, arg3.isParentUnlocked);
                     break;
+                }
             }
             if (loc1 == null) 
+            {
                 loc1 = new net.wg.gui.lobby.techtree.data.state.StateProperties(0, 0);
+            }
             return loc1;
         }
 
@@ -60,7 +68,9 @@ package net.wg.gui.lobby.techtree.data.state
             {
                 loc1 = nationNodeStates[loc4];
                 if (loc2 == loc1.getState()) 
+                {
                     return loc1.getProps();
+                }
                 ++loc4;
             }
             return nationNodeStates[0].getProps();
@@ -76,7 +86,9 @@ package net.wg.gui.lobby.techtree.data.state
             {
                 loc1 = itemStates[loc4];
                 if (loc2 == loc1.getState()) 
+                {
                     return loc1.resolveProps(arg1, arg2, arg3);
+                }
                 ++loc4;
             }
             return itemStates[0].getProps();
@@ -86,13 +98,21 @@ package net.wg.gui.lobby.techtree.data.state
         {
             var loc1:*=arg1;
             if ((arg1 & net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_XP) > 0) 
+            {
                 loc1 = loc1 ^ net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_XP;
+            }
             if ((arg1 & net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_MONEY) > 0) 
+            {
                 loc1 = loc1 ^ net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_MONEY;
+            }
             if ((arg1 & net.wg.gui.lobby.techtree.constants.NodeState.ELITE) > 0) 
+            {
                 loc1 = loc1 ^ net.wg.gui.lobby.techtree.constants.NodeState.ELITE;
+            }
             if ((arg1 & net.wg.gui.lobby.techtree.constants.NodeState.CAN_SELL) > 0) 
+            {
                 loc1 = loc1 ^ net.wg.gui.lobby.techtree.constants.NodeState.CAN_SELL;
+            }
             return loc1;
         }
 
@@ -100,13 +120,21 @@ package net.wg.gui.lobby.techtree.data.state
         {
             var loc1:*=arg1;
             if ((arg1 & net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_XP) > 0) 
+            {
                 loc1 = loc1 ^ net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_XP;
+            }
             if ((arg1 & net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_MONEY) > 0) 
+            {
                 loc1 = loc1 ^ net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_MONEY;
+            }
             if ((arg1 & net.wg.gui.lobby.techtree.constants.NodeState.AUTO_UNLOCKED) > 0) 
+            {
                 loc1 = loc1 ^ net.wg.gui.lobby.techtree.constants.NodeState.AUTO_UNLOCKED;
+            }
             if ((arg1 & net.wg.gui.lobby.techtree.constants.NodeState.CAN_SELL) > 0) 
+            {
                 loc1 = loc1 ^ net.wg.gui.lobby.techtree.constants.NodeState.CAN_SELL;
+            }
             return loc1;
         }
 

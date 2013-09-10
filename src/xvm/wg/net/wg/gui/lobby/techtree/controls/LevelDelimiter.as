@@ -21,7 +21,9 @@ package net.wg.gui.lobby.techtree.controls
         public function set levelNumber(arg1:int):void
         {
             if (this._levelNumber == arg1) 
+            {
                 return;
+            }
             this._levelNumber = arg1;
             invalidateData();
             return;
@@ -40,9 +42,13 @@ package net.wg.gui.lobby.techtree.controls
         {
             super.draw();
             if (!(this.level == null) && isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+            {
                 this.level.gotoAndStop(this._levelNumber);
+            }
             if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
+            {
                 constraints.update(_width, _height);
+            }
             return;
         }
 

@@ -49,7 +49,9 @@ package net.wg.gui.components.tooltips
                 this.textField.y = arg1 ? this.textFieldHeader.textHeight + 4 | 0 : 0;
             }
             else 
+            {
                 this.textField.visible = false;
+            }
             this.textFieldHeader.setTextFormat(this.textFormat);
             this.textField.setTextFormat(this.textFormat);
             this.filters = arg3.filters;
@@ -75,7 +77,9 @@ package net.wg.gui.components.tooltips
             this.textFieldHeader.width = arg1;
             this.textField.width = arg1;
             if (this._text) 
+            {
                 this.textField.y = this._header ? this.textFieldHeader.textHeight + 4 | 0 : 0;
+            }
             return;
         }
 

@@ -34,9 +34,13 @@ package net.wg.gui.lobby.hangar.maintenance
         public function toggleSelectChange(arg1:Boolean):void
         {
             if (arg1) 
+            {
                 App.utils.events.addEvent(this.select, scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onItemRendererClick);
+            }
             else 
+            {
                 App.utils.events.removeEvent(this.select, scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onItemRendererClick);
+            }
             return;
         }
 
@@ -96,9 +100,13 @@ package net.wg.gui.lobby.hangar.maintenance
         {
             var loc1:*=this.selectedItem;
             if (loc1) 
+            {
                 App.toolTipMgr.showSpecial(net.wg.data.constants.Tooltips.TECH_MAIN_MODULE, null, loc1.id, loc1.prices, loc1.inventoryCount, loc1.vehicleCount);
+            }
             else 
+            {
                 App.toolTipMgr.showComplex(TOOLTIPS.EQUIPMENT_EMPTY, null);
+            }
             return;
         }
 
@@ -109,10 +117,13 @@ package net.wg.gui.lobby.hangar.maintenance
             switch (loc2) 
             {
                 case MODULE_INFO:
+                {
                     dispatchEvent(new net.wg.gui.events.ModuleInfoEvent(net.wg.gui.events.ModuleInfoEvent.SHOW_INFO, this.selectedItem.id));
                     break;
+                }
                 case UNLOAD:
                 case CANCEL_BUY:
+                {
                     loc1 = App.utils.events;
                     loc1.removeEvent(this.select, scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onItemRendererClick);
                     this.selectedIndexOld = -1;
@@ -120,6 +131,7 @@ package net.wg.gui.lobby.hangar.maintenance
                     loc1.addEvent(this.select, scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onItemRendererClick);
                     dispatchEvent(new net.wg.gui.events.EquipmentEvent(net.wg.gui.events.EquipmentEvent.EQUIPMENT_CHANGE));
                     break;
+                }
             }
             return;
         }
@@ -128,11 +140,17 @@ package net.wg.gui.lobby.hangar.maintenance
         {
             var loc1:*=null;
             if (this.artifactsData[this.select.selectedIndex].target != 1) 
+            {
                 loc1 = new net.wg.gui.events.EquipmentEvent(net.wg.gui.events.EquipmentEvent.EQUIPMENT_CHANGE);
+            }
             else 
+            {
                 loc1 = new net.wg.gui.events.EquipmentEvent(net.wg.gui.events.EquipmentEvent.EQUIPMENT_CHANGE, this.selectedItem ? this.selectedItem.index : -1, this.selectedIndexOld, this.selectedIndexOld > -1 ? this.artifactsData[this.selectedIndexOld].currency : net.wg.data.constants.Values.EMPTY_STR);
+            }
             if (this.select.hitTestPoint(App.stage.mouseX, App.stage.mouseY)) 
+            {
                 this.showTooltip(null);
+            }
             dispatchEvent(loc1);
             return;
         }
@@ -151,7 +169,9 @@ package net.wg.gui.lobby.hangar.maintenance
             var loc1:*=new Array(arg1.length);
             var loc2:*=arg1.length;
             while (loc2--) 
+            {
                 loc1[loc2] = arg1[loc2];
+            }
             return loc1;
         }
 
@@ -165,11 +185,17 @@ package net.wg.gui.lobby.hangar.maintenance
             var loc3:*=0;
             var loc4:*="";
             if (loc1.count == 0 && this.changed && this.installedData.indexOf(loc1.compactDescr) == -1) 
+            {
                 loc2 = 1;
+            }
             if (this.toBuyDropdown.visible) 
+            {
                 loc3 = loc1.prices[this.toBuyDropdown.selectedIndex];
+            }
             else 
+            {
                 loc3 = loc1.prices[loc1.currency != net.wg.data.constants.Currencies.CREDITS ? 1 : 0];
+            }
             var loc5:*=App.utils.locale;
             loc4 = loc1.currency != net.wg.data.constants.Currencies.CREDITS ? loc5.gold(loc3 * loc2) : loc5.integer(loc3 * loc2);
             this.toBuy.textColor = net.wg.data.constants.Currencies.TEXT_COLORS[loc1.currency];
@@ -282,11 +308,17 @@ package net.wg.gui.lobby.hangar.maintenance
             while (loc3 < loc4) 
             {
                 if ((loc2 = arg1[loc3]).target == 1 && arg2 == loc2.index) 
+                {
                     this.selectedIndexOld = loc3;
+                }
                 if (loc2.compactDescr == arg3[arg2]) 
+                {
                     loc1 = loc3;
+                }
                 if (loc2.compactDescr == arg4[arg2]) 
+                {
                     this.initialId = loc2.id;
+                }
                 ++loc3;
             }
             this.select.close();
@@ -304,16 +336,22 @@ package net.wg.gui.lobby.hangar.maintenance
             this.select.scrollBar = arg1.length > this.select.menuRowCount ? "ScrollBar" : null;
             loc5.addEvent(this.select, scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onItemRendererClick);
             if (this.select.selectedIndex == -1) 
+            {
                 this.clear();
+            }
             else 
+            {
                 this.update();
+            }
             return;
         }
 
         public function get changed():Boolean
         {
             if (this.select.selectedIndex > -1) 
+            {
                 return !(this.initialId == this.artifactsData[this.select.selectedIndex].id);
+            }
             return false;
         }
 

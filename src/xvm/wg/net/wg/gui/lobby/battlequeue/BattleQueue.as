@@ -45,7 +45,9 @@ package net.wg.gui.lobby.battlequeue
         public function as_setTimer(arg1:String, arg2:String):void
         {
             if (arg2 != null) 
+            {
                 arg1 = arg1 + (" <font color=\"#FFFFFF\">" + arg2 + "</font>");
+            }
             this.timerLabel.htmlText = arg1;
             return;
         }
@@ -124,9 +126,13 @@ package net.wg.gui.lobby.battlequeue
             this.listByLevel.disposeRenderers();
             this.listByType.disposeRenderers();
             if (this.startButton.hasEventListener(scaleform.clik.events.ButtonEvent.CLICK)) 
+            {
                 this.startButton.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onStartClick);
+            }
             if (this.exitButton.hasEventListener(scaleform.clik.events.ButtonEvent.CLICK)) 
+            {
                 this.exitButton.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onExitButton);
+            }
             super.onDispose();
             return;
         }

@@ -34,7 +34,9 @@ package net.wg.gui.prebattle.invites
         public function update(arg1:Object):void
         {
             if (arg1 == null) 
+            {
                 return;
+            }
             this.dataProvider = arg1 as net.wg.data.daapi.base.DAAPIDataProvider;
             this.rosterList.dataProvider = this.dataProvider;
             this.rosterList.validateNow();
@@ -60,14 +62,18 @@ package net.wg.gui.prebattle.invites
         {
             super.draw();
             if (constraints && isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
+            {
                 constraints.update(_width, _height);
+            }
             return;
         }
 
         internal function showContextMenu(arg1:net.wg.gui.events.ListEventEx):void
         {
             if (arg1.buttonIdx == scaleform.gfx.MouseEventEx.RIGHT_BUTTON) 
+            {
                 this.initDispatcher(net.wg.gui.prebattle.invites.SendInvitesEvent.SHOW_CONTEXT_MENU, arg1.itemData);
+            }
             return;
         }
 
@@ -82,8 +88,12 @@ package net.wg.gui.prebattle.invites
         internal function rosterList_itemDoubleClickHandler(arg1:net.wg.gui.events.ListEventEx):void
         {
             if (arg1.buttonIdx == scaleform.gfx.MouseEventEx.LEFT_BUTTON) 
+            {
                 if (arg1.itemData) 
+                {
                     this.initDispatcher(net.wg.gui.prebattle.invites.SendInvitesEvent.LIST_DOUBLE_CLICK, arg1.itemData);
+                }
+            }
             return;
         }
 

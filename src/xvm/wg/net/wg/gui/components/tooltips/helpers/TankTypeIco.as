@@ -23,7 +23,9 @@ package net.wg.gui.components.tooltips.helpers
         {
             super.draw();
             if (_labelHash[this.type]) 
+            {
                 gotoAndStop(this.type);
+            }
             return;
         }
 

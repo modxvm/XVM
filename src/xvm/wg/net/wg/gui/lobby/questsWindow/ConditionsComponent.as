@@ -75,7 +75,9 @@ package net.wg.gui.lobby.questsWindow
                 addChild(loc3);
                 loc3.setData(this._data[loc2]);
                 if (loc2 == (loc1 - 1)) 
+                {
                     loc3.line.visible = false;
+                }
                 loc3.validateNow();
                 ++loc2;
             }

@@ -22,7 +22,9 @@ package org.idmedia.as3commons.util
             while (loc1.hasNext()) 
             {
                 if ((loc2 = org.idmedia.as3commons.util.Entry(loc1.next())).getKey() !== arg1) 
+                {
                     continue;
+                }
                 loc3 = loc2.getValue();
                 loc2.setValue(arg2);
                 return loc3;
@@ -38,7 +40,9 @@ package org.idmedia.as3commons.util
             var loc3:*=0;
             var loc4:*=loc1;
             for each (loc2 in loc4) 
+            {
                 arg1(loc2, this.get(loc2));
+            }
             return;
         }
 

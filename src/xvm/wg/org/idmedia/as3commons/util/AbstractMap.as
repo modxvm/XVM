@@ -19,14 +19,18 @@ package org.idmedia.as3commons.util
         {
             var loc3:*=null;
             if (arg1 === undefined) 
+            {
                 return null;
+            }
             var loc1:*=arg1;
             var loc2:*=this.entrySet().iterator();
             while (loc2.hasNext()) 
             {
                 loc3 = loc2.next() as org.idmedia.as3commons.util.Entry;
                 if (loc1 !== loc3.getKey()) 
+                {
                     continue;
+                }
                 return loc3.getValue();
             }
             return null;
@@ -41,7 +45,9 @@ package org.idmedia.as3commons.util
             {
                 loc3 = loc2.next() as org.idmedia.as3commons.util.Entry;
                 if (loc1 !== loc3.getKey()) 
+                {
                     continue;
+                }
                 return true;
             }
             return false;
@@ -56,7 +62,9 @@ package org.idmedia.as3commons.util
             {
                 loc3 = loc2.next() as org.idmedia.as3commons.util.Entry;
                 if (loc1 !== loc3.getValue()) 
+                {
                     continue;
+                }
                 return true;
             }
             return false;
@@ -72,7 +80,9 @@ package org.idmedia.as3commons.util
             {
                 loc5 = org.idmedia.as3commons.util.Entry(loc2.next());
                 if (arg1 !== loc5.getKey()) 
+                {
                     continue;
+                }
                 loc3 = loc5;
             }
             var loc4:*=null;
@@ -98,14 +108,18 @@ package org.idmedia.as3commons.util
         public function values():org.idmedia.as3commons.util.Collection
         {
             if (this.v == null) 
+            {
                 this.v = new CollectionImpl(this);
+            }
             return this.v;
         }
 
         public function keySet():org.idmedia.as3commons.util.Set
         {
             if (this.k == null) 
+            {
                 this.k = new AbstractEntrySet(this);
+            }
             return this.k;
         }
 

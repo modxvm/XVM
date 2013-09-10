@@ -21,7 +21,9 @@ package net.wg.gui.components.controls
         protected override function scrollWheel(arg1:Number):void
         {
             if (!this.enabled) 
+            {
                 return;
+            }
             value = value + arg1 * _snapInterval;
             dispatchEvent(new flash.events.Event(flash.events.Event.CHANGE));
             return;
@@ -38,14 +40,18 @@ package net.wg.gui.components.controls
         protected override function beginDrag(arg1:flash.events.MouseEvent):void
         {
             if (App.utils.commons.isLeftButton(arg1)) 
+            {
                 super.beginDrag(arg1);
+            }
             return;
         }
 
         protected override function trackPress(arg1:flash.events.MouseEvent):void
         {
             if (App.utils.commons.isLeftButton(arg1)) 
+            {
                 super.trackPress(arg1);
+            }
             return;
         }
 
@@ -63,7 +69,9 @@ package net.wg.gui.components.controls
         public function set undefinedDisabled(arg1:Boolean):void
         {
             if (this._undefined == arg1) 
+            {
                 return;
+            }
             this._undefined = arg1;
             super.enabled = !arg1;
             var loc1:*;
@@ -83,11 +91,15 @@ package net.wg.gui.components.controls
         public override function set enabled(arg1:Boolean):void
         {
             if (arg1 == super.enabled) 
+            {
                 return;
+            }
             super.enabled = arg1;
             thumb.visible = arg1;
             if (!initialized) 
+            {
                 return;
+            }
             invalidate(scaleform.clik.constants.InvalidationType.STATE);
             return;
         }
@@ -99,11 +111,15 @@ package net.wg.gui.components.controls
             var loc3:*=track.width - offsetLeft - offsetRight;
             var loc4:*=lockValue((loc2 - offsetLeft) / loc3 * (_maximum - _minimum) + _minimum);
             if (value == loc4) 
+            {
                 return;
+            }
             _value = loc4;
             this.updateThumb();
             if (liveDragging) 
+            {
                 dispatchEvent(new scaleform.clik.events.SliderEvent(scaleform.clik.events.SliderEvent.VALUE_CHANGE, false, true, _value));
+            }
             return;
         }
 
@@ -118,7 +134,9 @@ package net.wg.gui.components.controls
                 return;
             }
             if (this._undefined) 
+            {
                 track["progress_mask"].gotoAndStop(0);
+            }
             else 
             {
                 loc2 = (position - _minimum) / (_maximum - _minimum);

@@ -21,14 +21,20 @@ package net.wg.gui.components.common.crosshair
             switch (loc2) 
             {
                 case 1:
+                {
                     loc1 = CASSETE_POSITION_ARCADE;
                     break;
+                }
                 case 2:
+                {
                     loc1 = CASSETE_POSITION_SNIPER;
                     break;
+                }
                 case 3:
+                {
                     loc1 = CASSETE_POSITION_PANZER;
                     break;
+                }
             }
             g_modeMC.cassette.y = loc1;
             return;

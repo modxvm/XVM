@@ -37,7 +37,9 @@ package net.wg.gui.lobby.tankman
         {
             super.dispose();
             if (this.submitBtn) 
+            {
                 this.submitBtn.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.submitBtn_buttonClickHandler);
+            }
             if (this.firstnames) 
             {
                 this.firstnames.removeEventListener(net.wg.gui.lobby.tankman.PersonalCaseInputList.NAME_SELECTED, this.firstnames_nameSelectedHandler);
@@ -75,7 +77,9 @@ package net.wg.gui.lobby.tankman
         public function update(arg1:Object):void
         {
             if (arg1 == null) 
+            {
                 return;
+            }
             this.model = arg1 as net.wg.gui.lobby.tankman.PersonalCaseDocsModel;
             this.cleanTempData();
             this.firstnames.updateData(this.model.firstNames, this.model.currentTankmanFirstName);
@@ -113,7 +117,9 @@ package net.wg.gui.lobby.tankman
         internal function isHasMoney():Boolean
         {
             if (this.model.useOnlyGold) 
+            {
                 return this.model.userGold >= this.model.priceOfGold;
+            }
             return this.model.userGold >= this.model.priceOfGold || this.model.userCredits >= this.model.priveOfCredits;
         }
 
@@ -140,13 +146,21 @@ package net.wg.gui.lobby.tankman
         internal function checkAllData():Boolean
         {
             if (!this.isHasMoney()) 
+            {
                 return false;
+            }
             if (this.selectedFirstName && !(this.selectedFirstName.value == this.model.currentTankmanFirstName)) 
+            {
                 return true;
+            }
             if (this.selectedLastName && !(this.selectedLastName.value == this.model.currentTankmanLastName)) 
+            {
                 return true;
+            }
             if (this.selectedIcon && this.checkOriginalIcon(this.selectedIcon.value)) 
+            {
                 return true;
+            }
             return false;
         }
 
@@ -177,7 +191,9 @@ package net.wg.gui.lobby.tankman
         internal function portraitsCarousel_listIndexChangeHandler(arg1:scaleform.clik.events.ListEvent):void
         {
             if (arg1.itemData == null) 
+            {
                 return;
+            }
             if (arg1.itemData && this.checkOriginalIcon(arg1.itemData.value)) 
             {
                 this.selectedIcon = {};
@@ -185,7 +201,9 @@ package net.wg.gui.lobby.tankman
                 this.selectedIcon.value = arg1.itemData.value;
             }
             else 
+            {
                 this.selectedIcon = null;
+            }
             this.checkSelectedItems();
             return;
         }
@@ -193,7 +211,9 @@ package net.wg.gui.lobby.tankman
         internal function checkOriginalIcon(arg1:String=null):Boolean
         {
             if (this.model.originalIconFile.indexOf(arg1, 0) == -1) 
+            {
                 return true;
+            }
             return false;
         }
 

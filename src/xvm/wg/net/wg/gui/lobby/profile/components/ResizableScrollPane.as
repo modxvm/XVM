@@ -13,7 +13,9 @@ package net.wg.gui.lobby.profile.components
         protected override function applyTargetChanges():void
         {
             if (target) 
+            {
                 target.removeEventListener(flash.events.Event.RESIZE, this.resizeHandler);
+            }
             target.addEventListener(flash.events.Event.RESIZE, this.resizeHandler, false, 0, true);
             super.applyTargetChanges();
             return;
@@ -29,7 +31,9 @@ package net.wg.gui.lobby.profile.components
         public override function dispose():void
         {
             if (target) 
+            {
                 target.removeEventListener(flash.events.Event.RESIZE, this.resizeHandler);
+            }
             super.dispose();
             return;
         }

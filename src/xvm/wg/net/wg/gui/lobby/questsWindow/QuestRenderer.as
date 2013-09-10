@@ -43,11 +43,16 @@ package net.wg.gui.lobby.questsWindow
             {
                 this.progressIndicator.visible = true;
                 this.progressIndicator.setValues(arg1.progrBarType, arg1.currentProgrVal, arg1.maxProgrVal);
+                this.progressIndicator.setTooltip(arg1.progrTooltip);
             }
             else 
+            {
                 this.progressIndicator.visible = false;
+            }
             if (this.counter.visible && this.progressIndicator.visible) 
+            {
                 this.counter.y = COMPLEX_COUNTER_Y;
+            }
             return;
         }
 
@@ -60,7 +65,9 @@ package net.wg.gui.lobby.questsWindow
                 this.counter.y = DEF_COUNTER_Y;
             }
             else 
+            {
                 this.counter.visible = false;
+            }
             return;
         }
 
@@ -74,12 +81,18 @@ package net.wg.gui.lobby.questsWindow
         internal function checkNew(arg1:net.wg.gui.lobby.questsWindow.data.QuestRendererVO):void
         {
             if (arg1.isNew) 
+            {
                 this.newIndicator.newLabel.gotoAndStop("show");
+            }
             this.newIndicator.visible = arg1.isNew;
             if (arg1.isNew && !this.wasAnimated) 
+            {
                 this.newIndicator.gotoAndPlay("shine");
+            }
             else 
+            {
                 this.newIndicator.gotoAndStop("pause");
+            }
             return;
         }
 
@@ -87,6 +100,7 @@ package net.wg.gui.lobby.questsWindow
         {
             this.descrTF.textColor = 6644049;
             if (arg1.status != net.wg.data.constants.QuestsStates.NOT_AVAILABLE) 
+            {
                 if (arg1.status != net.wg.data.constants.QuestsStates.DONE) 
                 {
                     this._statusTooltip = "";
@@ -101,6 +115,7 @@ package net.wg.gui.lobby.questsWindow
                     flash.text.TextField(this.statusMC.textField).textColor = DONE_COLOR;
                     this._statusTooltip = TOOLTIPS.QUESTS_STATUS_DONE;
                 }
+            }
             else 
             {
                 this.statusMC.visible = true;
@@ -267,7 +282,9 @@ package net.wg.gui.lobby.questsWindow
                     this.visible = true;
                 }
                 else 
+                {
                     this.visible = false;
+                }
                 this.wasAnimated = true;
             }
             this.mouseChildren = true;

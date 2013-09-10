@@ -85,7 +85,9 @@ package net.wg.gui.messenger.controls
         {
             super.updateAfterStateChange();
             if (this.model) 
+            {
                 textField.textColor = this.model.color;
+            }
             return;
         }
 
@@ -99,7 +101,9 @@ package net.wg.gui.messenger.controls
         {
             super.handleMouseRollOver(arg1);
             if (this.tooltip) 
+            {
                 App.toolTipMgr.show(this.tooltip);
+            }
             return;
         }
 
@@ -108,8 +112,12 @@ package net.wg.gui.messenger.controls
             super.handleMouseRollOut(arg1);
             App.toolTipMgr.hide();
             if (enabled) 
+            {
                 if (!_focused && !_displayFocus || !(focusIndicator == null)) 
+                {
                     setState("out");
+                }
+            }
             return;
         }
 
@@ -153,16 +161,22 @@ package net.wg.gui.messenger.controls
             var loc1:*=arg1.getAccountDBID();
             var loc2:*=arg1.type == net.wg.infrastructure.events.VoiceChatEvent.START_SPEAKING;
             if (this.model && this.model.uid == loc1) 
+            {
                 this.setSpeaking(loc2, false);
+            }
             return;
         }
 
         internal function setSpeaking(arg1:Boolean, arg2:Boolean=false):void
         {
             if (arg1) 
+            {
                 arg2 = false;
+            }
             if (this.voiceWave is net.wg.gui.components.controls.VoiceWave) 
+            {
                 this.voiceWave.setSpeaking(arg1, arg2);
+            }
             return;
         }
 

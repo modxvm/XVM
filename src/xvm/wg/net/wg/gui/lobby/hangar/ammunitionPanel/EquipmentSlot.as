@@ -40,9 +40,13 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         protected override function applyIconData(arg1:*):void
         {
             if (arg1) 
+            {
                 this.setIcon(arg1.icon, arg1.removable);
+            }
             else 
+            {
                 this.setIcon(net.wg.data.constants.FittingTypes.EMPTY_ARTIFACT_ICON, true);
+            }
             return;
         }
 

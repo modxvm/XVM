@@ -19,10 +19,14 @@ package net.wg.gui.lobby.techtree.controls
         public function set type(arg1:String):void
         {
             if (this._type == arg1) 
+            {
                 return;
+            }
             this._type = arg1;
             if (this._type != currentFrameLabel) 
+            {
                 invalidateData();
+            }
             return;
         }
 
@@ -39,7 +43,9 @@ package net.wg.gui.lobby.techtree.controls
         protected override function draw():void
         {
             if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+            {
                 this.updateIcon();
+            }
             super.draw();
             return;
         }
@@ -47,7 +53,9 @@ package net.wg.gui.lobby.techtree.controls
         internal function updateIcon():void
         {
             if (_labelHash[this._type] && !(this._type == currentFrameLabel)) 
+            {
                 gotoAndStop(this._type);
+            }
             return;
         }
 

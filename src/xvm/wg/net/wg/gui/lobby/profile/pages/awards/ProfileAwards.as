@@ -69,7 +69,9 @@ package net.wg.gui.lobby.profile.pages.awards
         {
             super.draw();
             if (isInvalid(INVOKE_UPD_INVALID) && this.daapiInitialized) 
+            {
                 this.updateByDossier(new net.wg.data.gui_items.dossier.AccountDossier(currentDossier ? currentDossier.id : null));
+            }
             return;
         }
 
@@ -103,11 +105,15 @@ package net.wg.gui.lobby.profile.pages.awards
             switch (loc11) 
             {
                 case 1:
+                {
                     loc2 = arg1.getAchievements(true);
                     break;
+                }
                 case 2:
+                {
                     loc2 = arg1.getAchievements(false);
                     break;
+                }
             }
             loc7 = 0;
             while (loc7 < loc5) 
@@ -115,7 +121,9 @@ package net.wg.gui.lobby.profile.pages.awards
                 loc6 = loc3[loc7];
                 loc8 = loc2[loc7];
                 if (loc4 != 0) 
+                {
                     loc6.currentCount = loc8.length;
+                }
                 else 
                 {
                     loc9 = 0;
@@ -124,7 +132,9 @@ package net.wg.gui.lobby.profile.pages.awards
                     for each (loc10 in loc12) 
                     {
                         if (!loc10.isInDossier) 
+                        {
                             continue;
+                        }
                         ++loc9;
                     }
                     loc6.currentCount = loc9;

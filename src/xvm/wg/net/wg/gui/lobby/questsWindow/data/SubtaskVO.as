@@ -16,10 +16,14 @@ package net.wg.gui.lobby.questsWindow.data
             switch (loc1) 
             {
                 case "questInfo":
+                {
                     this._questInfo = new net.wg.gui.lobby.questsWindow.data.QuestRendererVO(arg2 ? arg2 : {});
                     return false;
+                }
                 default:
+                {
                     return true;
+                }
             }
         }
 

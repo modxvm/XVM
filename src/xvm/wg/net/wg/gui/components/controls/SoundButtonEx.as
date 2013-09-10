@@ -25,7 +25,9 @@ package net.wg.gui.components.controls
         public function set tooltip(arg1:String):void
         {
             if (this._tooltip == arg1) 
+            {
                 return;
+            }
             this._tooltip = arg1;
             invalidate();
             return;
@@ -45,7 +47,9 @@ package net.wg.gui.components.controls
         public function closeHelpLayout():void
         {
             if (this.getHelpLayout() != null) 
+            {
                 App.utils.helpLayout.destroy(this.getHelpLayout());
+            }
             return;
         }
 
@@ -63,13 +67,19 @@ package net.wg.gui.components.controls
         protected override function updateAfterStateChange():void
         {
             if (!initialized) 
+            {
                 return;
+            }
             if (!(constraints == null) && !constraintsDisabled) 
             {
                 if (textField != null) 
+                {
                     constraints.updateElement("textField", textField);
+                }
                 if (this.textField1 != null) 
+                {
                     constraints.updateElement("textField1", this.textField1);
+                }
             }
             dispatchEvent(new net.wg.gui.events.StateManagerEvent(scaleform.clik.events.ComponentEvent.STATE_CHANGE, state));
             return;
@@ -118,7 +128,9 @@ package net.wg.gui.components.controls
             {
                 loc2 = 0;
                 if (autoSize != "none") 
+                {
                     loc2 = this._paddingHorizontal;
+                }
                 loc3 = constraints.getElement("textField");
                 loc1 = Math.ceil(textField.textWidth + loc3.left + loc3.right + 5 + loc2 * 2);
             }
@@ -152,7 +164,9 @@ package net.wg.gui.components.controls
             {
                 this.updateText();
                 if (autoSize != flash.text.TextFieldAutoSize.NONE) 
+                {
                     invalidateSize();
+                }
             }
             if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
             {
@@ -162,7 +176,9 @@ package net.wg.gui.components.controls
                     setActualSize(_width, _height);
                 }
                 if (!constraintsDisabled) 
+                {
                     constraints.update(_width, _height);
+                }
             }
             this.updateDisable();
             return;
@@ -172,13 +188,19 @@ package net.wg.gui.components.controls
         {
             super.configUI();
             if (!constraintsDisabled) 
+            {
                 if (this.textField1 != null) 
+                {
                     constraints.addElement("textField1", this.textField1, scaleform.clik.utils.Constraints.ALL);
+                }
+            }
             addEventListener(flash.events.MouseEvent.ROLL_OVER, this.showTooltip);
             addEventListener(flash.events.MouseEvent.ROLL_OUT, this.hideTooltip);
             addEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.handleMouseDown);
             if (!(focusIndicator == null) && !_focused && focusIndicator.totalFrames == 1) 
+            {
                 focusIndicator.visible = false;
+            }
             return;
         }
 
@@ -204,14 +226,18 @@ package net.wg.gui.components.controls
         public function showTooltip(arg1:flash.events.MouseEvent):void
         {
             if (this._tooltip && App.toolTipMgr) 
+            {
                 App.toolTipMgr.showComplex(this._tooltip);
+            }
             return;
         }
 
         public function hideTooltip(arg1:flash.events.MouseEvent):void
         {
             if (App.toolTipMgr) 
+            {
                 App.toolTipMgr.hide();
+            }
             return;
         }
 
@@ -229,7 +255,9 @@ package net.wg.gui.components.controls
         public function set fillPadding(arg1:Number):void
         {
             if (arg1 == this._fillPadding) 
+            {
                 return;
+            }
             this._fillPadding = arg1;
             return;
         }
@@ -238,8 +266,12 @@ package net.wg.gui.components.controls
         {
             super.updateText();
             if (_label != null) 
+            {
                 if (this.textField1 != null) 
+                {
                     this.textField1.text = _label;
+                }
+            }
             return;
         }
 
@@ -251,7 +283,9 @@ package net.wg.gui.components.controls
         public function set textColor(arg1:Number):void
         {
             if (this._textColor == arg1) 
+            {
                 return;
+            }
             this._textColor = arg1;
             invalidate();
             return;

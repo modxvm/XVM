@@ -53,16 +53,24 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
                 this.select.dataProvider = new scaleform.clik.data.DataProvider(this.dataValues);
                 this.select.selectedIndex = this.selectedIndex;
                 if (this.selectedIndex >= 0) 
+                {
                     if ((loc4 = this.dataValues[this.selectedIndex]).hasOwnProperty(net.wg.gui.lobby.hangar.ammunitionPanel.ExtraIcon.EXTRA_ICON_PROP_NAME)) 
                     {
                         if (!this.extraIcon) 
+                        {
                             this.createExtraIcon();
+                        }
                         this.extraIcon.setSource(loc4[net.wg.gui.lobby.hangar.ammunitionPanel.ExtraIcon.EXTRA_ICON_PROP_NAME]);
                     }
                     else if (this.extraIcon) 
+                    {
                         this.extraIcon.clear();
+                    }
+                }
                 else if (this.extraIcon) 
+                {
                     this.extraIcon.clear();
+                }
                 this.applyIconData(loc4);
                 this.select.enabled = loc3;
             }
@@ -106,7 +114,9 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
                 App.toolTipMgr.showSpecial(net.wg.data.constants.Tooltips.HANGAR_MODULE, null, loc1.id, loc2, loc1.inventoryCount, loc1.vehicleCount, loc1.slotIndex ? loc1.slotIndex : 0);
             }
             else 
+            {
                 App.toolTipMgr.showComplex(this.tooltip);
+            }
             return;
         }
 
@@ -125,9 +135,13 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
                 loc1 = null;
                 loc2 = null;
                 if (this.selectedIndex > -1) 
+                {
                     loc1 = this.dataValues[this.selectedIndex];
+                }
                 if (this.select.selectedIndex > -1) 
+                {
                     loc2 = this.dataValues[this.select.selectedIndex];
+                }
                 dispatchEvent(new net.wg.gui.events.DeviceEvent(net.wg.gui.events.DeviceEvent.DEVICE_CHANGE, loc2, loc1));
                 this.select.selectedIndex = this.selectedIndex;
             }
@@ -147,7 +161,9 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             {
                 loc1 = arg1 as scaleform.gfx.MouseEventEx;
                 if (loc1.buttonIdx == scaleform.gfx.MouseEventEx.RIGHT_BUTTON) 
+                {
                     this.select.close();
+                }
             }
             return;
         }

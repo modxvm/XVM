@@ -35,25 +35,29 @@ package scaleform.clik.core
             this.removeEventListener(flash.events.Event.ENTER_FRAME, this.handleEnterFrameValidation, false);
             this.removeEventListener(flash.events.Event.RENDER, this.validateNow, false);
             if (!this._invalid)
+            {
                 return;
+            }
             this.draw();
             this._invalidHash = {};
             this._invalid = false;
             return;
         }
 
-        public override function addEventListener(type:String, listener:Function, useCapture:Boolean=false, priority:int=0, useWeakReference:Boolean=false):void
+        public override function addEventListener(arg1:String, arg2:Function, arg3:Boolean=false, arg4:int=0, arg5:Boolean=false):void
         {
             this.throwLifeCycleException();
             var loc1:*;
             if ((loc1 = App.instance ? App.utils : null) && loc1.events && this._listenerFlag)
             {
                 this._listenerFlag = false;
-                loc1.events.addEvent(this, type, listener, useCapture, priority, useWeakReference);
+                loc1.events.addEvent(this, arg1, arg2, arg3, arg4, arg5);
                 this._listenerFlag = true;
             }
             else
-                super.addEventListener(type, listener, useCapture, priority, useWeakReference);
+            {
+                super.addEventListener(arg1, arg2, arg3, arg4, arg5);
+            }
             return;
         }
 
@@ -67,7 +71,9 @@ package scaleform.clik.core
                 this._listenerFlag = true;
             }
             else
+            {
                 super.removeEventListener(arg1, arg2, arg3);
+            }
             return;
         }
 
@@ -87,17 +93,25 @@ package scaleform.clik.core
         {
             this.throwLifeCycleException();
             if (!this._invalid)
+            {
                 return false;
+            }
             var loc1:*=rest.length;
             if (loc1 == 0)
+            {
                 return this._invalid;
+            }
             if (this._invalidHash[scaleform.clik.constants.InvalidationType.ALL])
+            {
                 return true;
+            }
             var loc2:*=0;
             while (loc2 < loc1)
             {
                 if (this._invalidHash[rest[loc2]])
+                {
                     return true;
+                }
                 ++loc2;
             }
             return false;
@@ -125,9 +139,13 @@ package scaleform.clik.core
         {
             this.removeEventListener(flash.events.Event.ADDED_TO_STAGE, this.addedToStage, false);
             if (!scaleform.clik.core.CLIK.initialized)
+            {
                 scaleform.clik.core.CLIK.initialize(stage, this);
+            }
             if (this._enableInitCallback && !(scaleform.gfx.Extensions.CLIK_addedToStageCallback == null))
+            {
                 scaleform.clik.core.CLIK.queueInitCallback(this);
+            }
             return;
         }
 
@@ -138,7 +156,9 @@ package scaleform.clik.core
                 this.removeEventListener(flash.events.Event.ADDED_TO_STAGE, this.handleStageChange, false);
                 this.addEventListener(flash.events.Event.RENDER, this.validateNow, false, 0, true);
                 if (stage != null)
+                {
                     stage.invalidate();
+                }
             }
             return;
         }
@@ -166,7 +186,9 @@ package scaleform.clik.core
             for (loc4 in loc6)
             {
                 if (loc2.indexOf(loc4))
+                {
                     continue;
+                }
                 loc1.push("* " + loc4 + ": true");
             }
             return "Invalid " + this + ": \n" + loc1.join("\n");
@@ -189,17 +211,23 @@ package scaleform.clik.core
                 this.constraints = null;
             }
             while (numChildren > 0)
+            {
                 removeChildAt(0);
+            }
             this._focusTarget = null;
             var loc2:*=0;
             var loc3:*=this._invalidHash;
             for (loc1 in loc3)
+            {
                 delete this._invalidHash[loc1];
+            }
             this._invalidHash = null;
             loc2 = 0;
             loc3 = this._labelHash;
             for (loc1 in loc3)
+            {
                 delete this._labelHash[loc1];
+            }
             this._labelHash = null;
             this._layoutData = null;
             this.removeEventListener(flash.events.Event.ADDED_TO_STAGE, this.addedToStage, false);
@@ -214,7 +242,9 @@ package scaleform.clik.core
             if (!arg1)
             {
                 if (arg3 == null)
+                {
                     arg3 = net.wg.infrastructure.exceptions.AssertionException;
+                }
                 throw new arg3(arg2);
             }
             return;
@@ -238,9 +268,13 @@ package scaleform.clik.core
             this._originalWidth = super.width / super.scaleX;
             this._originalHeight = super.height / super.scaleY;
             if (this._width == 0)
+            {
                 this._width = super.width;
+            }
             if (this._height == 0)
+            {
                 this._height = super.height;
+            }
             this.invalidate();
             return;
         }
@@ -249,7 +283,9 @@ package scaleform.clik.core
         {
             var loc1:*={};
             if (!arg1)
+            {
                 return loc1;
+            }
             var loc2:*=arg1.currentLabels;
             var loc3:*=loc2.length;
             var loc4:*=0;
@@ -270,9 +306,13 @@ package scaleform.clik.core
         {
             this._inspector = arg1;
             if (arg1)
+            {
                 this.beforeInspectorParams();
+            }
             else
+            {
                 this.afterInspectorParams();
+            }
             return;
         }
 
@@ -307,7 +347,9 @@ package scaleform.clik.core
         {
             super.scaleX = arg1;
             if (rotation == 0)
+            {
                 this.width = super.width;
+            }
             return;
         }
 
@@ -320,7 +362,9 @@ package scaleform.clik.core
         {
             super.scaleY = arg1;
             if (rotation == 0)
+            {
                 this.height = super.height;
+            }
             return;
         }
 
@@ -332,7 +376,9 @@ package scaleform.clik.core
         public override function set enabled(arg1:Boolean):void
         {
             if (arg1 == super.enabled)
+            {
                 return;
+            }
             super.enabled = arg1;
             tabEnabled = this.enabled ? this._focusable : false;
             mouseEnabled = arg1;
@@ -372,9 +418,13 @@ package scaleform.clik.core
                 tabEnabled = loc2;
             }
             else if (this._focusable && this.enabled)
+            {
                 tabEnabled = true;
+            }
             if (loc1)
+            {
                 this.changeFocus();
+            }
             return;
         }
 
@@ -393,7 +443,9 @@ package scaleform.clik.core
             var loc6:*=NaN;
             var loc7:*=false;
             if (arg1 == this._focused || !this._focusable)
+            {
                 return;
+            }
             this._focused = arg1;
             if (scaleform.gfx.Extensions.isScaleform)
             {
@@ -402,7 +454,7 @@ package scaleform.clik.core
                 loc3 = 0;
                 while (loc3 < loc1)
                 {
-                    loc4 = !((this._focused >> loc3 & 1) == 0)
+                    loc4 = !((this._focused >> loc3 & 1) == 0);
                     if (loc4)
                     {
                         loc5 = scaleform.gfx.FocusManager.getControllerMaskByFocusGroup(loc3);
@@ -410,7 +462,9 @@ package scaleform.clik.core
                         while (loc6 < loc2)
                         {
                             if ((loc7 = !((loc5 >> loc6 & 1) == 0)) && !(scaleform.gfx.FocusManager.getFocus(loc6) == this))
+                            {
                                 scaleform.gfx.FocusManager.setFocus(this, loc6);
+                            }
                             ++loc6;
                         }
                     }
@@ -418,7 +472,9 @@ package scaleform.clik.core
                 }
             }
             else if (!(stage == null) && this._focused > 0)
+            {
                 stage.focus = this;
+            }
             this.changeFocus();
             return;
         }
@@ -431,7 +487,9 @@ package scaleform.clik.core
         public function set displayFocus(arg1:Boolean):void
         {
             if (arg1 == this._displayFocus)
+            {
                 return;
+            }
             this._displayFocus = arg1;
             this.changeFocus();
             return;
@@ -467,12 +525,16 @@ package scaleform.clik.core
         public function set enableInitCallback(arg1:Boolean):void
         {
             if (arg1 == this._enableInitCallback)
+            {
                 return;
+            }
             this._enableInitCallback = arg1;
             if (this._enableInitCallback && !(stage == null) && !(scaleform.gfx.Extensions.CLIK_addedToStageCallback == null))
             {
                 if (!scaleform.clik.core.CLIK.initialized)
+                {
                     scaleform.clik.core.CLIK.initialize(stage, this);
+                }
                 scaleform.clik.core.CLIK.queueInitCallback(this);
             }
             return;
@@ -602,10 +664,16 @@ package scaleform.clik.core
                     }
                 }
                 else
+                {
                     this._invalidHash[scaleform.clik.constants.InvalidationType.ALL] = true;
+                }
                 if (this._invalid)
+                {
                     if (stage != null)
+                    {
                         stage.invalidate();
+                    }
+                }
                 else
                 {
                     this._invalid = true;
@@ -616,7 +684,9 @@ package scaleform.clik.core
                         stage.invalidate();
                     }
                     else
+                    {
                         this.addEventListener(flash.events.Event.ADDED_TO_STAGE, this.handleStageChange, false, 0, true);
+                    }
                 }
             }
             return;

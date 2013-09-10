@@ -10,14 +10,22 @@ package net.wg.gui.lobby.techtree.data.vo
             super();
             this._credits = arg1;
             if (this._credits > 0) 
+            {
                 this._creditsLabel = App.utils.locale.integer(this._credits);
+            }
             else 
+            {
                 this._creditsLabel = "0";
+            }
             this._gold = arg2;
             if (this._gold > 0) 
+            {
                 this._goldLabel = App.utils.locale.integer(this._gold);
+            }
             else 
+            {
                 this._goldLabel = "0";
+            }
             return;
         }
 
@@ -56,7 +64,9 @@ package net.wg.gui.lobby.techtree.data.vo
         public function fromObject(arg1:Object, arg2:net.wg.utils.ILocale):void
         {
             if (arg1 == null) 
+            {
                 return;
+            }
             if (arg1.credits != null) 
             {
                 this._credits = arg1.credits;

@@ -41,7 +41,9 @@ package net.wg.gui.components.common
                 {
                     loc3 = null;
                     if (loc1.as_config.hasOwnProperty("group")) 
+                    {
                         loc3 = (loc3 = loc1.as_config.group).length ? loc3 : null;
+                    }
                     if (loc3) 
                     {
                         this.addGroupCounter(loc3, loc1.as_token);
@@ -49,14 +51,22 @@ package net.wg.gui.components.common
                     }
                 }
                 if (this.manageFocus) 
+                {
                     arg1.addEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.onViewClick, true, 0, true);
+                }
             }
             else 
+            {
                 throw new Error(this.ADD_CHILD_ERROR_STR);
+            }
             if (arg1 is net.wg.infrastructure.base.AbstractView) 
+            {
                 (arg1 as net.wg.infrastructure.base.AbstractView).updateStage(width, height);
+            }
             else if (arg1 is net.wg.infrastructure.interfaces.IWindow) 
+            {
                 (arg1 as net.wg.infrastructure.interfaces.IWindow).sourceView.updateStage(width, height);
+            }
             return loc1;
         }
 
@@ -80,19 +90,27 @@ package net.wg.gui.components.common
                 {
                     loc4 = null;
                     if (loc2.as_config.hasOwnProperty("group")) 
+                    {
                         loc4 = (loc4 = loc2.as_config.group).length ? loc4 : null;
+                    }
                     if (loc4 && this.groupsCounter.hasOwnProperty(loc4)) 
                     {
                         (loc5 = this.groupsCounter[loc4]).decrement(loc2.as_token);
                         if (loc5.views.length == 0) 
+                        {
                             delete this.groupsCounter[loc4];
+                        }
                     }
                 }
                 if (!loc2.playHideTween(arg1, this.onTweenEnd)) 
+                {
                     this.performRemoveChild(arg1);
+                }
             }
             else 
+            {
                 throw new Error(this.REMOVE_CHILD_ERROR_STR);
+            }
             return loc2;
         }
 
@@ -119,7 +137,9 @@ package net.wg.gui.components.common
             {
                 loc1 = getChildAt((numChildren - 1));
                 if (loc1 == this._modalBg) 
+                {
                     loc1 = null;
+                }
             }
             return loc1;
         }
@@ -132,23 +152,35 @@ package net.wg.gui.components.common
             {
                 App.utils.focusHandler.setFocus(flash.display.InteractiveObject(arg1));
                 if (arg1 is net.wg.infrastructure.interfaces.IAbstractWindowView) 
+                {
                     loc1 = (arg1 as net.wg.infrastructure.interfaces.IAbstractWindowView).window;
+                }
                 else 
+                {
                     loc1 = arg1 as net.wg.infrastructure.interfaces.IWindow;
+                }
                 if (loc1) 
                 {
                     arg1 = flash.display.DisplayObject(loc1);
                     scaleform.gfx.FocusManager.setModalClip(arg1 as flash.display.Sprite);
                     if (loc1.sourceView.isModal) 
+                    {
                         this.createModalBg();
+                    }
                 }
                 setChildIndex(arg1, (numChildren - 1));
                 if (arg1 is net.wg.infrastructure.base.AbstractView) 
+                {
                     loc2 = arg1 as net.wg.infrastructure.interfaces.IView;
+                }
                 else if (loc1) 
+                {
                     loc2 = loc1.sourceView as net.wg.infrastructure.interfaces.IView;
+                }
                 if (loc2) 
+                {
                     loc2.setFocus();
+                }
                 App.containerMgr.lastFocusedView = loc2;
             }
             return;
@@ -178,13 +210,17 @@ package net.wg.gui.components.common
             {
                 loc1 = this.getTopmostView();
                 if (loc1) 
+                {
                     this.setFocusedView(loc1);
+                }
                 else 
                 {
                     App.utils.focusHandler.setFocus(null);
                     scaleform.gfx.FocusManager.setModalClip(null);
                     if (!arg1) 
+                    {
                         dispatchEvent(new flash.events.FocusEvent(flash.events.FocusEvent.FOCUS_OUT));
+                    }
                 }
             }
             return !(loc1 == null);
@@ -206,9 +242,13 @@ package net.wg.gui.components.common
             while (loc1 > -1) 
             {
                 if ((loc2 = getChildAt(loc1)) is net.wg.infrastructure.base.AbstractView) 
+                {
                     (loc2 as net.wg.infrastructure.base.AbstractView).updateStage(arg1, arg2);
+                }
                 else if (loc2 is net.wg.infrastructure.interfaces.IWindow) 
+                {
                     (loc2 as net.wg.infrastructure.interfaces.IWindow).sourceView.updateStage(arg1, arg2);
+                }
                 --loc1;
             }
             return;
@@ -217,7 +257,9 @@ package net.wg.gui.components.common
         public function onTweenEnd(arg1:scaleform.clik.motion.Tween=null):void
         {
             if (super.getChildByName(flash.display.DisplayObject(arg1.target).name) != null) 
+            {
                 this.performRemoveChild(flash.display.DisplayObject(arg1.target));
+            }
             return;
         }
 
@@ -253,7 +295,9 @@ package net.wg.gui.components.common
         protected function removeAllChildren():void
         {
             while (numChildren) 
+            {
                 removeChildAt((numChildren - 1));
+            }
             return;
         }
 
@@ -271,7 +315,9 @@ package net.wg.gui.components.common
             }
             super.removeChild(arg1);
             if (this.manageFocus) 
+            {
                 arg1.removeEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.onViewClick, true);
+            }
             dispatchEvent(new net.wg.gui.events.ManagedContainerEvent(net.wg.gui.events.ManagedContainerEvent.CHILD_REMOVED));
             return;
         }
@@ -279,9 +325,13 @@ package net.wg.gui.components.common
         internal function addGroupCounter(arg1:String, arg2:String):void
         {
             if (arg1 == null) 
+            {
                 return;
+            }
             if (!this.groupsCounter.hasOwnProperty(arg1)) 
+            {
                 this.groupsCounter[arg1] = new GroupCounter();
+            }
             var loc1:*=this.groupsCounter[arg1];
             loc1.increment(arg2);
             return;
@@ -291,7 +341,9 @@ package net.wg.gui.components.common
         {
             var loc1:*=this.groupsCounter[arg2];
             if (!loc1) 
+            {
                 return;
+            }
             var loc2:*=arg1.x + (loc1.xAdjust - 1) * this.GROUP_X_OFFSET;
             var loc3:*=arg1.y + (loc1.yAdjust - 1) * this.GROUP_Y_OFFSET;
             var loc4:*=arg1.width;
@@ -328,17 +380,27 @@ package net.wg.gui.components.common
             if (contains(loc1)) 
             {
                 if (loc1 is net.wg.infrastructure.interfaces.IWindow) 
+                {
                     loc2 = net.wg.infrastructure.interfaces.IWindow(loc1).sourceView;
+                }
                 if (loc2) 
+                {
                     if (loc2 != App.containerMgr.lastFocusedView) 
+                    {
                         this.setFocusedView(loc1);
+                    }
+                }
                 else 
                 {
                     loc2 = this.getTopmostView() as net.wg.infrastructure.interfaces.IView;
                     if (loc2) 
+                    {
                         App.containerMgr.lastFocusedView = loc2;
+                    }
                     else 
+                    {
                         DebugUtils.LOG_WARNING(loc1 + " is Not IView!");
+                    }
                 }
             }
             return;
@@ -397,7 +459,9 @@ class GroupCounter extends Object
         for each (loc1 in loc3) 
         {
             if (loc1.id != arg1) 
+            {
                 continue;
+            }
             this.views.splice(this.views.indexOf(loc1), 1);
             break;
         }

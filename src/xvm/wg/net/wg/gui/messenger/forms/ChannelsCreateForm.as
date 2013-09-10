@@ -48,24 +48,30 @@ package net.wg.gui.messenger.forms
         public override function handleInput(arg1:scaleform.clik.events.InputEvent):void
         {
             if (arg1.isDefaultPrevented()) 
+            {
                 return;
+            }
             var loc1:*=arg1.details;
             var loc2:*=loc1.controllerIndex;
             if (loc1.navEquivalent != null) 
+            {
                 if (loc1.code != flash.ui.Keyboard.SPACE) 
                 {
                     var loc3:*=loc1.navEquivalent;
                     switch (loc3) 
                     {
                         case scaleform.clik.constants.NavigationCode.ENTER:
+                        {
                             if (loc1.value == scaleform.clik.constants.InputValue.KEY_DOWN) 
                             {
                                 this.handlePress(loc2);
                                 arg1.handled = true;
                             }
                             break;
+                        }
                     }
                 }
+            }
             else if (loc1.code == flash.ui.Keyboard.ENTER) 
             {
                 this.handlePress(loc2);
@@ -116,7 +122,9 @@ package net.wg.gui.messenger.forms
         {
             super.draw();
             if (constraints && isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
+            {
                 constraints.update(_width, _height);
+            }
             if (this.channelPasswordInput && isInvalid(UPDATE_PASSWORD_TEXT)) 
             {
                 var loc1:*;

@@ -36,7 +36,9 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             var loc3:*=0;
             var loc4:*=loc2;
             for each (loc1 in loc4)
+            {
                 loc1.updateStage(arg1, arg2);
+            }
             return;
         }
 
@@ -88,30 +90,44 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
                 switch (loc2)
                 {
                     case net.wg.data.constants.FittingTypes.VEHICLE_CHASSIS:
+                    {
                         this.chassis.setValues(data);
                         break;
+                    }
                     case net.wg.data.constants.FittingTypes.VEHICLE_TURRET:
+                    {
                         this.turret.setValues(data);
                         break;
+                    }
                     case net.wg.data.constants.FittingTypes.VEHICLE_GUN:
+                    {
                         this.gun.setValues(data);
                         break;
+                    }
                     case net.wg.data.constants.FittingTypes.VEHICLE_ENGINE:
+                    {
                         this.engine.setValues(data);
                         break;
+                    }
                     case net.wg.data.constants.FittingTypes.VEHICLE_RADIO:
+                    {
                         this.radio.setValues(data);
                         break;
+                    }
                     case net.wg.data.constants.FittingTypes.OPTIONAL_DEVICE:
+                    {
                         this.optionalDevice1.setValues(data[0]);
                         this.optionalDevice2.setValues(data[1]);
                         this.optionalDevice3.setValues(data[2]);
                         break;
+                    }
                     case net.wg.data.constants.FittingTypes.EQUIPMENT:
+                    {
                         this.equipment1.setValues(data[0]);
                         this.equipment2.setValues(data[1]);
                         this.equipment3.setValues(data[2]);
                         break;
+                    }
                 }
             }
             catch (e:Error)
@@ -180,7 +196,9 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         {
             arg1 = App.utils.locale.makeString(arg1);
             if (initialized && arg1.length > 0)
+            {
                 this.__setVehicleStatus(arg1, this.__stateLevelToColor(arg2));
+            }
             return;
         }
 
@@ -233,7 +251,9 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             loc4 = 0;
             loc5 = loc3;
             for each (loc2 in loc5)
+            {
                 this.events.addEvent(loc2, flash.events.MouseEvent.CLICK, this.onModuleClick);
+            }
             this.events.addEvent(App.stage, net.wg.gui.events.ModuleInfoEvent.SHOW_INFO, this.onShowModuleInfo);
             this.events.addEvent(App.stage, net.wg.gui.events.DeviceEvent.DEVICE_REMOVE, this.onDeviceRemove);
             return;
@@ -275,10 +295,16 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             {
                 loc1 = arg1 as scaleform.gfx.MouseEventEx;
                 if (loc1.buttonIdx != scaleform.gfx.MouseEventEx.RIGHT_BUTTON)
+                {
                     if (loc1.buttonIdx == scaleform.gfx.MouseEventEx.LEFT_BUTTON && !([this.shell1, this.shell2, this.shell3, this.equipment1, this.equipment2, this.equipment3].indexOf(arg1.currentTarget) == -1))
+                    {
                         showTechnicalMaintenanceS();
+                    }
+                }
                 else if (loc1.currentTarget.id)
+                {
                     showModuleInfoS(arg1.currentTarget.id);
+                }
             }
             return;
         }
@@ -298,7 +324,9 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         internal function onHighlightParams(arg1:net.wg.gui.events.ParamsEvent):void
         {
             if ([this.gun, this.turret, this.engine, this.chassis, this.radio].indexOf(arg1.target) > -1)
+            {
                 highlightParamsS(arg1.paramsType);
+            }
             return;
         }
 
@@ -312,10 +340,16 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         {
             var loc1:*=null;
             if (arg1.target != this.maitenanceBtn)
+            {
                 if (arg1.target == this.tuningBtn)
+                {
                     loc1 = TOOLTIPS.HANGAR_TUNING;
+                }
+            }
             else
+            {
                 loc1 = TOOLTIPS.HANGAR_MAINTENANCE;
+            }
             App.toolTipMgr.showComplex(loc1);
             return;
         }
@@ -347,11 +381,17 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             switch (loc1)
             {
                 case "info":
+                {
                     return GREEN_COLOR;
+                }
                 case "warning":
+                {
                     return YELLOW_COLOR;
+                }
                 case "critical":
+                {
                     return RED_COLOR;
+                }
             }
             return GREEN_COLOR;
         }

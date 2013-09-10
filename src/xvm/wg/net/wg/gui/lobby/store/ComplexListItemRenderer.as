@@ -83,7 +83,9 @@ package net.wg.gui.lobby.store
         internal static function assertNotNull(arg1:Object, arg2:String):void
         {
             if (App.instance) 
+            {
                 App.utils.asserter.assertNotNull(arg1, arg2 + net.wg.data.constants.Errors.CANT_NULL, net.wg.infrastructure.exceptions.NullPointerException);
+            }
             return;
         }
 

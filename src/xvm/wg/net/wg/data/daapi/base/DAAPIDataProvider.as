@@ -20,7 +20,9 @@ package net.wg.data.daapi.base
         public function get length():uint
         {
             if (this.lengthHandler != null) 
+            {
                 return this.lengthHandler();
+            }
             return 0;
         }
 
@@ -28,24 +30,32 @@ package net.wg.data.daapi.base
         {
             var loc1:*=this.requestItemAtHandler(arg1);
             if (arg2 != null) 
+            {
                 arg2(loc1);
+            }
             return loc1;
         }
 
         public function requestItemRange(arg1:int, arg2:int, arg3:Function=null):Array
         {
             if (!Boolean(this.requestItemRangeHandler)) 
+            {
                 return [];
+            }
             var loc1:*=this.requestItemRangeHandler(arg1, arg2);
             if (arg3 != null) 
+            {
                 arg3(loc1);
+            }
             return loc1;
         }
 
         public function indexOf(arg1:Object, arg2:Function=null):int
         {
             if (arg2 != null) 
+            {
                 arg2(-1);
+            }
             return -1;
         }
 

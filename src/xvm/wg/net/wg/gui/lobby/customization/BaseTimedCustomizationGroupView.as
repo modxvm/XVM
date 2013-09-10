@@ -33,7 +33,9 @@ package net.wg.gui.lobby.customization
         public function invalidateListData(arg1:Boolean=false):void
         {
             if (this.list.initialized && !arg1) 
+            {
                 this.list.scrollPosition = 0;
+            }
             this.itemsDP.invalidateRemote(arg1);
             return;
         }
@@ -44,7 +46,9 @@ package net.wg.gui.lobby.customization
             {
                 this.selectedItemIdx = this.selectedGroupName == arg1 && arg2 ? arg2.index : -1;
                 if (this.selectedItemIdx > -1 && arg2 && arg2.hasOwnProperty("priceIndex")) 
+                {
                     this.rentalPackageList.selectedIndex = arg2.priceIndex;
+                }
                 this.list.selectedIndex = this.selectedItemIdx;
             }
             return;
@@ -99,7 +103,9 @@ package net.wg.gui.lobby.customization
                 this.list.addEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.handleItemChange);
             }
             if (this.timeSectionLabel != null) 
+            {
                 this.timeSectionLabel.text = this.timeLabel;
+            }
             this.itemsDP.addEventListener(flash.events.Event.CHANGE, this.handleItemDataChanged);
             return;
         }
@@ -119,7 +125,9 @@ package net.wg.gui.lobby.customization
                 this.rentalPackageList.removeEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.handlePeriodDaysItemChange);
             }
             if (this.itemsDP) 
+            {
                 this.itemsDP.removeEventListener(flash.events.Event.CHANGE, this.handleItemDataChanged);
+            }
             this.itemsDP = null;
             this.rentalPackageDP = null;
             return;
@@ -147,7 +155,9 @@ package net.wg.gui.lobby.customization
         {
             this.selectedPriceIdx = arg1.index;
             if (arg1.index > -1) 
+            {
                 this.rentalPackageDP.setSelectedPackageIndex(arg1.index);
+            }
             return;
         }
 

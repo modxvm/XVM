@@ -30,7 +30,9 @@ package net.wg.gui.tutorial.windows
         {
             super.draw();
             if (isInvalid(INVALIDATE_MESSAGE)) 
+            {
                 messageField.htmlText = this._messageText;
+            }
             return;
         }
 
@@ -77,17 +79,25 @@ package net.wg.gui.tutorial.windows
                 loc2 = this._timePointcuts.length;
                 loc3 = App.utils.locale;
                 if (loc2 > 0) 
+                {
                     if (this._waitingTime < this._timePointcuts[0]) 
+                    {
                         loc1 = loc3.makeString(BATTLE_TUTORIAL.LABELS_LESS_N_MINUTES, {"minutes":this._timePointcuts[0].toString()});
+                    }
                     else if (this._waitingTime > this._timePointcuts[(loc2 - 1)]) 
                     {
                         loc1 = loc3.makeString(BATTLE_TUTORIAL.LABELS_MORE_N_MINUTES, {"minutes":this._timePointcuts[(loc2 - 1)].toString()});
                         App.utils.scheduler.cancelTask(this.updateWaitingTime);
                     }
                     else 
+                    {
                         loc1 = loc3.makeString(BATTLE_TUTORIAL.LABELS_MINUTES, {"minutes":this._waitingTime.toString()});
+                    }
+                }
                 else 
+                {
                     loc1 = loc3.makeString(BATTLE_TUTORIAL.LABELS_MINUTES, {"minutes":this._waitingTime.toString()});
+                }
                 this._messageText = this._baseMessage ? this._baseMessage : "";
                 this._messageText = this._messageText + (this._playerTimeTextStart + loc1 + this._playerTimeTextEnd);
                 this._messageText = this._messageText + this._avgTimeText;

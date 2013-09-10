@@ -36,7 +36,9 @@ package net.wg.gui.lobby.messengerBar
         public function as_setState(arg1:Boolean):void
         {
             if (this.button.blinking != arg1) 
+            {
                 this.button.blinking = arg1;
+            }
             return;
         }
 

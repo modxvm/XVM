@@ -43,7 +43,9 @@ package net.wg.gui.lobby.hangar
             var loc3:*=0;
             var loc4:*=arg1;
             for each (loc2 in loc4) 
+            {
                 loc1.push(new net.wg.gui.lobby.hangar.ParamsVO(loc2));
+            }
             return loc1;
         }
 
@@ -55,7 +57,9 @@ package net.wg.gui.lobby.hangar
             var loc4:*=0;
             var loc5:*=loc1;
             for each (loc3 in loc5) 
+            {
                 loc3.selected = this.paramsListeners.getParams(arg1).indexOf(loc3.text) > -1;
+            }
             this.list.invalidateData();
             return;
         }

@@ -68,7 +68,9 @@ package net.wg.gui.lobby.messengerBar.carousel.data
         protected override function onDataWrite(arg1:String, arg2:Object):Boolean
         {
             if (excluded.indexOf(arg1) > -1) 
+            {
                 return false;
+            }
             return super.onDataWrite(arg1, arg2);
         }
 

@@ -37,7 +37,9 @@ package net.wg.gui.lobby.techtree.controls
         public function set action(arg1:String):void
         {
             if (this._action == arg1) 
+            {
                 return;
+            }
             this._action = arg1;
             this.makeStatesPrefixes();
             setState(this.state);
@@ -47,25 +49,35 @@ package net.wg.gui.lobby.techtree.controls
         public function setOwner(arg1:scaleform.clik.core.UIComponent, arg2:Boolean=false):void
         {
             if (_owner != arg1) 
+            {
                 _owner = arg1;
+            }
             if (arg2) 
+            {
                 validateNow();
+            }
             return;
         }
 
         public function setAnimation(arg1:Number, arg2:net.wg.gui.lobby.techtree.data.state.AnimationProperties):Boolean
         {
             if (this.animID == arg1) 
+            {
                 return false;
+            }
             this.animID = arg1;
             if (this.animProps != null) 
+            {
                 this.animProps.setTo(this);
+            }
             this.animProps = arg2;
             if (arg2 != null) 
             {
                 this.animProps.setFrom(this);
                 if (alpha == 0) 
+                {
                     enabled = false;
+                }
             }
             return true;
         }
@@ -73,7 +85,9 @@ package net.wg.gui.lobby.techtree.controls
         public function startAnimation():void
         {
             if (this.animProps != null) 
+            {
                 this.animTween = new scaleform.clik.motion.Tween(this.animProps.duration, this, this.animProps.to, {"ease":fl.transitions.easing.Strong.easeOut, "onComplete":this.onTweenComplete});
+            }
             return;
         }
 
@@ -86,17 +100,25 @@ package net.wg.gui.lobby.techtree.controls
                 loc1 = scaleform.gfx.Extensions.getMouseTopMostEntity(true);
                 loc2 = false;
                 if (!(loc1 == null) && !(owner == null)) 
+                {
                     loc2 = loc1 == owner || owner.contains(loc1);
+                }
                 if (!arg1 && owner.hitTestPoint(stage.mouseX, stage.mouseY, true) && loc2) 
+                {
                     return;
+                }
                 if (this.hitTestPoint(stage.mouseX, stage.mouseY, true) && loc2) 
                 {
                     if (this.animTween != null) 
+                    {
                         this.animTween.reset();
+                    }
                     this.animProps.setTo(this);
                 }
                 else 
+                {
                     this.animTween = new scaleform.clik.motion.Tween(this.animProps.duration, this, this.animProps.from, {"ease":fl.transitions.easing.Strong.easeOut, "onComplete":this.onTweenComplete});
+                }
             }
             return;
         }
@@ -109,9 +131,13 @@ package net.wg.gui.lobby.techtree.controls
         public function onTweenComplete():void
         {
             if (alpha != 0) 
+            {
                 mouseEnabled = enabled;
+            }
             else 
+            {
                 mouseEnabled = false;
+            }
             return;
         }
 
@@ -140,20 +166,26 @@ package net.wg.gui.lobby.techtree.controls
         {
             super.draw();
             if (isInvalid(scaleform.clik.constants.InvalidationType.STATE) && !(this.disableIndicator == null)) 
+            {
                 this.disableIndicator.visible = state == "disabled";
+            }
             return;
         }
 
         protected override function updateText():void
         {
             if (!(_label == null) && !(textField == null)) 
+            {
                 if (!(this._imgSubstitution == null) && this._imgSubstitution.valid) 
                 {
                     scaleform.gfx.TextFieldEx.setImageSubstitutions(textField, this._imgSubstitution);
                     textField.text = label + this._imgSubstitution.subString;
                 }
                 else 
+                {
                     textField.text = label;
+                }
+            }
             return;
         }
 
@@ -186,17 +218,23 @@ package net.wg.gui.lobby.techtree.controls
             switch (loc3) 
             {
                 case net.wg.gui.lobby.techtree.constants.ActionName.UNLOCK:
+                {
                     loc1 = net.wg.gui.lobby.techtree.TechTreeEvent.CLICK_2_UNLOCK;
                     break;
+                }
                 case net.wg.gui.lobby.techtree.constants.ActionName.BUY:
+                {
                     loc1 = net.wg.gui.lobby.techtree.TechTreeEvent.CLICK_2_BUY;
                     break;
+                }
             }
             if (!(loc1 == null) && !(owner == null)) 
             {
                 loc2 = owner as net.wg.gui.lobby.techtree.interfaces.IRenderer;
                 if (loc2 != null) 
+                {
                     dispatchEvent(new net.wg.gui.lobby.techtree.TechTreeEvent(loc1, 0, loc2.index, loc2.getEntityType()));
+                }
             }
             return;
         }

@@ -18,15 +18,23 @@ package net.wg.data.VO
             if (arg1 == "dataProvider") 
             {
                 if (App.instance) 
+                {
                     App.utils.asserter.assert(arg2 is Array, "value must extends an Array class.");
+                }
                 if (this._dataProvider) 
+                {
                     this._dataProvider.cleanUp();
+                }
                 else 
+                {
                     this._dataProvider = new scaleform.clik.data.DataProvider();
+                }
                 var loc2:*=0;
                 var loc3:*=arg2;
                 for each (loc1 in loc3) 
+                {
                     this._dataProvider.push(new net.wg.data.VO.ShopVehicleFilterElementData(loc1));
+                }
                 return false;
             }
             return true;
@@ -49,7 +57,9 @@ package net.wg.data.VO
             {
                 loc1 = "invalid current value for filter data: " + arg1;
                 if (arg1 == null) 
+                {
                     DebugUtils.LOG_WARNING("value \"current\" for filter data" + net.wg.data.constants.Errors.CANT_NULL);
+                }
                 App.utils.asserter.assert(!(arg1 == "0"), loc1);
             }
             this._current = arg1;

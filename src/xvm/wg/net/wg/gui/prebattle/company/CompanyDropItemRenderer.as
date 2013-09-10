@@ -18,9 +18,13 @@ package net.wg.gui.prebattle.company
         public override function setData(arg1:Object):void
         {
             if (arg1 == null) 
+            {
                 return;
+            }
             if (!(this.data == null) && arg1 == this.data) 
+            {
                 return;
+            }
             super.setData(arg1);
             invalidate("invalidateWindow");
             return;
@@ -51,7 +55,9 @@ package net.wg.gui.prebattle.company
             {
                 this.label = String(data["label"]);
                 if (data["color"] != null) 
+                {
                     textField.textColor = data["color"];
+                }
             }
             this.numberField.text = String(index + 1);
             this.bg.visible = !Boolean(index % 2);

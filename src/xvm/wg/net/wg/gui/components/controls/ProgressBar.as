@@ -15,7 +15,9 @@ package net.wg.gui.components.controls
         {
             super.draw();
             if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+            {
                 this.applyDataChanges();
+            }
             return;
         }
 

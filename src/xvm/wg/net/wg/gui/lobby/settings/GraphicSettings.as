@@ -39,20 +39,28 @@ package net.wg.gui.lobby.settings
                     switch (loc10) 
                     {
                         case net.wg.gui.lobby.settings.SettingsConfig.TYPE_CHECKBOX:
+                        {
                             continue label332;
+                        }
                         case net.wg.gui.lobby.settings.SettingsConfig.TYPE_SLIDER:
+                        {
                             continue label332;
+                        }
                         case net.wg.gui.lobby.settings.SettingsConfig.TYPE_DROPDOWN:
+                        {
                             loc4.options = new Array();
                             loc10 = 0;
                             var loc11:*=_data[loc1].options;
                             for (loc5 in loc11) 
                             {
                                 if (!(arg1 || !_data[loc1].options[loc5].advanced)) 
+                                {
                                     continue;
+                                }
                                 loc4.options.push(net.wg.gui.lobby.settings.vo.SettingsControlProp(_data[loc1]).options[loc5]);
                             }
                             continue label332;
+                        }
                     }
                 }
                 loc2 = this.useAdvancedGraphic ? net.wg.gui.lobby.settings.SettingsConfig.CUSTOM_AA : net.wg.gui.lobby.settings.SettingsConfig.MULTISAMPLING;
@@ -88,7 +96,9 @@ package net.wg.gui.lobby.settings
                 {
                     loc4 = this.qualityOrder[loc3];
                     if (loc1[loc4] != undefined) 
+                    {
                         this.graphicsQualityDataProv[loc4] = net.wg.gui.lobby.settings.vo.SettingsControlProp(loc1[loc4]).clone();
+                    }
                     ++loc3;
                 }
             }
@@ -99,9 +109,13 @@ package net.wg.gui.lobby.settings
         public override function dispose():void
         {
             if (this.graphicsQualityDropDown.hasEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE)) 
+            {
                 this.graphicsQualityDropDown.removeEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onGraphicsQualityChangePresset);
+            }
             if (this.autodetectQuality.hasEventListener(scaleform.clik.events.ButtonEvent.CLICK)) 
+            {
                 this.autodetectQuality.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onAutodetectPress);
+            }
             var loc1:*="";
             var loc2:*=null;
             var loc3:*=null;
@@ -112,23 +126,35 @@ package net.wg.gui.lobby.settings
             label392: for (loc1 in loc7) 
             {
                 if (!(!(_data[loc1] == undefined) && this[loc1 + _data[loc1].type])) 
+                {
                     continue;
+                }
                 loc5 = net.wg.gui.lobby.settings.vo.SettingsControlProp(_data[loc1]);
                 var loc8:*=loc5.type;
                 switch (loc8) 
                 {
                     case net.wg.gui.lobby.settings.SettingsConfig.TYPE_CHECKBOX:
+                    {
                         loc2 = this[loc1 + loc5.type];
                         if (loc2.hasEventListener(flash.events.Event.SELECT)) 
+                        {
                             loc2.removeEventListener(flash.events.Event.SELECT, this.onGraphicsCheckBoxChange);
+                        }
                         continue label392;
+                    }
                     case net.wg.gui.lobby.settings.SettingsConfig.TYPE_SLIDER:
+                    {
                         continue label392;
+                    }
                     case net.wg.gui.lobby.settings.SettingsConfig.TYPE_DROPDOWN:
+                    {
                         loc3 = this[loc1 + loc5.type];
                         if (loc3.hasEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE)) 
+                        {
                             loc3.removeEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onGraphicsDropDownChange);
+                        }
                         continue label392;
+                    }
                 }
             }
             loc6 = 0;
@@ -136,25 +162,39 @@ package net.wg.gui.lobby.settings
             label742: for (loc1 in loc7) 
             {
                 if (!(_data[loc1] && this[loc1 + _data[loc1].type])) 
+                {
                     continue;
+                }
                 loc5 = net.wg.gui.lobby.settings.vo.SettingsControlProp(_data[loc1]);
                 loc8 = loc5.type;
                 switch (loc8) 
                 {
                     case net.wg.gui.lobby.settings.SettingsConfig.TYPE_CHECKBOX:
+                    {
                         loc2 = this[loc1 + loc5.type];
                         if (loc2.hasEventListener(flash.events.Event.SELECT)) 
+                        {
                             loc2.removeEventListener(flash.events.Event.SELECT, this.onCheckBoxChange);
+                        }
                         continue label742;
+                    }
                     case net.wg.gui.lobby.settings.SettingsConfig.TYPE_SLIDER:
+                    {
                         if ((loc4 = this[loc1 + loc5.type]).hasEventListener(scaleform.clik.events.SliderEvent.VALUE_CHANGE)) 
+                        {
                             loc4.removeEventListener(scaleform.clik.events.SliderEvent.VALUE_CHANGE, this.onSliderValueChanged);
+                        }
                         continue label742;
+                    }
                     case net.wg.gui.lobby.settings.SettingsConfig.TYPE_DROPDOWN:
+                    {
                         loc3 = this[loc1 + loc5.type];
                         if (loc3.hasEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE)) 
+                        {
                             loc3.removeEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onDropDownChange);
+                        }
                         continue label742;
+                    }
                 }
             }
             super.dispose();
@@ -203,12 +243,17 @@ package net.wg.gui.lobby.settings
                     switch (loc12) 
                     {
                         case net.wg.gui.lobby.settings.SettingsConfig.TYPE_CHECKBOX:
+                        {
                             loc1 = net.wg.gui.components.controls.CheckBox(this[loc6 + loc7.type]);
                             loc1.selected = Boolean(loc8.current);
                             break;
+                        }
                         case net.wg.gui.lobby.settings.SettingsConfig.TYPE_SLIDER:
+                        {
                             break;
+                        }
                         case net.wg.gui.lobby.settings.SettingsConfig.TYPE_DROPDOWN:
+                        {
                             loc2 = net.wg.gui.components.controls.DropdownMenu(this[loc6 + loc7.type]);
                             if (loc6 != net.wg.gui.lobby.settings.SettingsConfig.SIZE) 
                             {
@@ -228,10 +273,13 @@ package net.wg.gui.lobby.settings
                                 }
                             }
                             break;
+                        }
                     }
                 }
                 if (loc6 != net.wg.gui.lobby.settings.SettingsConfig.SIZE) 
+                {
                     dispatchEvent(new net.wg.gui.lobby.settings.evnts.SettingViewEvent(net.wg.gui.lobby.settings.evnts.SettingViewEvent.ON_CONTROL_CHANGED, _viewId, loc6, loc8.current));
+                }
                 ++loc5;
             }
             return;
@@ -285,7 +333,9 @@ package net.wg.gui.lobby.settings
                 while (loc3 < loc2) 
                 {
                     if (_data.presets.current == _data.presets.options[loc3].index) 
+                    {
                         loc1 = _data.presets.options[loc3].key != net.wg.gui.lobby.settings.SettingsConfig.CUSTOM ? false : true;
+                    }
                     ++loc3;
                 }
             }
@@ -332,27 +382,46 @@ package net.wg.gui.lobby.settings
                     switch (loc25) 
                     {
                         case net.wg.gui.lobby.settings.SettingsConfig.TYPE_CHECKBOX:
+                        {
                             if ((loc7 = this[loc1 + loc5.type]).label == "") 
+                            {
                                 loc7.label = net.wg.gui.lobby.settings.SettingsConfig.LOCALIZATION + loc1;
+                            }
                             if (loc4 || !loc2) 
+                            {
                                 loc7.selected = loc5.current;
+                            }
                             if (loc2) 
+                            {
                                 loc7.addEventListener(flash.events.Event.SELECT, this.onGraphicsCheckBoxChange);
+                            }
                             else 
+                            {
                                 loc7.addEventListener(flash.events.Event.SELECT, this.onCheckBoxChange);
+                            }
                             loc7.enabled = loc6;
                             break;
+                        }
                         case net.wg.gui.lobby.settings.SettingsConfig.TYPE_SLIDER:
+                        {
                             loc8 = this[loc1 + loc5.type];
                             if (loc4 || !loc2) 
+                            {
                                 loc8.value = loc5.current;
+                            }
                             if (!loc2) 
+                            {
                                 loc8.addEventListener(scaleform.clik.events.SliderEvent.VALUE_CHANGE, this.onSliderValueChanged);
+                            }
                             if (loc1 == net.wg.gui.lobby.settings.SettingsConfig.GAMMA) 
+                            {
                                 loc6 = (loc3 = net.wg.gui.lobby.settings.vo.SettingsControlProp(_data[net.wg.gui.lobby.settings.SettingsConfig.FULL_SCREEN]).current) && loc6;
+                            }
                             loc8.enabled = loc6;
                             break;
+                        }
                         case net.wg.gui.lobby.settings.SettingsConfig.TYPE_DROPDOWN:
+                        {
                             loc9 = this[loc1 + loc5.type];
                             if (loc1 == net.wg.gui.lobby.settings.SettingsConfig.SIZE) 
                             {
@@ -381,7 +450,9 @@ package net.wg.gui.lobby.settings
                                 }
                             }
                             if (loc1 == net.wg.gui.lobby.settings.SettingsConfig.ASPECTRATIO) 
+                            {
                                 loc6 = (loc3 = net.wg.gui.lobby.settings.vo.SettingsControlProp(_data[net.wg.gui.lobby.settings.SettingsConfig.FULL_SCREEN]).current) && loc6;
+                            }
                             if (loc1 == net.wg.gui.lobby.settings.SettingsConfig.SMOOTHING) 
                             {
                                 loc18 = _data[net.wg.gui.lobby.settings.SettingsConfig.RENDER_PIPELINE].current != 0 ? net.wg.gui.lobby.settings.SettingsConfig.MULTISAMPLING : net.wg.gui.lobby.settings.SettingsConfig.CUSTOM_AA;
@@ -404,26 +475,39 @@ package net.wg.gui.lobby.settings
                                     for (loc22 in loc26) 
                                     {
                                         if (loc5.options[loc22].hasOwnProperty("data") && loc5.current == loc5.options[loc22].data) 
+                                        {
                                             break;
+                                        }
                                         ++loc21;
                                     }
                                     loc9.selectedIndex = loc21;
                                 }
                                 else 
+                                {
                                     loc9.selectedIndex = loc5.current;
+                                }
                             }
                             if (loc2) 
+                            {
                                 loc9.addEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onGraphicsDropDownChange);
+                            }
                             else 
+                            {
                                 loc9.addEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onDropDownChange);
+                            }
                             loc9.enabled = loc6;
                             break;
+                        }
                     }
                 }
                 else if (loc1 == net.wg.gui.lobby.settings.SettingsConfig.PRESETS && !this._presets) 
+                {
                     this._presets = _data[loc1];
+                }
                 else if (!loc5.readOnly && net.wg.gui.lobby.settings.SettingsConfig.reservedImaginaryControls.indexOf(loc1) == -1) 
+                {
                     DebugUtils.LOG_WARNING("ERROR in" + this + " control " + loc1 + " can not find");
+                }
                 trySetLabel(loc1);
             }
             return;
@@ -436,13 +520,17 @@ package net.wg.gui.lobby.settings
             var loc6:*=0;
             var loc7:*=this._presets.options;
             for (loc2 in loc7) 
+            {
                 loc1[this._presets.options[loc2].index] = {"label":SETTINGS.graphicsquality(this._presets.options[loc2].key), "settings":this._presets.options[loc2].settings, "key":this._presets.options[loc2].key};
+            }
             this.graphicsQualityDropDown.dataProvider = new scaleform.clik.data.DataProvider(loc1);
             this.graphicsQualityDropDown.addEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onGraphicsQualityChangePresset);
             this.graphicsQualityDropDown.selectedIndex = this._presets.current;
             this.graphicsQualityDropDown.enabled = true;
             if (net.wg.gui.lobby.settings.SettingsConfig.settingsData.GraphicSettings.graphicsQuality != undefined) 
+            {
                 net.wg.gui.lobby.settings.SettingsConfig.settingsData.GraphicSettings.graphicsQuality.current = this._presets.current;
+            }
             var loc3:*=null;
             var loc4:*=this._presets.options is Array ? this._presets.options.length : 0;
             var loc5:*=0;
@@ -456,7 +544,9 @@ package net.wg.gui.lobby.settings
                 ++loc5;
             }
             if (loc3) 
+            {
                 this.updateGraphicsQualityControlsForPresset(this._presets.current, loc3);
+            }
             else 
             {
                 this.graphicsQualityDropDown.enabled = false;
@@ -482,9 +572,13 @@ package net.wg.gui.lobby.settings
             this.allowCheckPresets = false;
             var loc5:*=false;
             if (loc1 != net.wg.gui.lobby.settings.SettingsConfig.CUSTOM) 
+            {
                 loc5 = arg2.settings[net.wg.gui.lobby.settings.SettingsConfig.RENDER_PIPELINE] == 0;
+            }
             else 
+            {
                 loc5 = (loc6 = this[net.wg.gui.lobby.settings.SettingsConfig.RENDER_PIPELINE + net.wg.gui.lobby.settings.SettingsConfig.TYPE_DROPDOWN]).selectedIndex == 0;
+            }
             this.updateGraphicsQualityDataForAdvanced(loc5);
             if (loc1 != net.wg.gui.lobby.settings.SettingsConfig.CUSTOM) 
             {
@@ -499,13 +593,18 @@ package net.wg.gui.lobby.settings
                         switch (loc13) 
                         {
                             case net.wg.gui.lobby.settings.SettingsConfig.TYPE_CHECKBOX:
+                            {
                                 (loc8 = this[loc2 + loc7.type]).selected = Boolean(arg2.settings[loc2]);
                                 loc8.enabled = Boolean(this.useAdvancedGraphic || !loc7.advanced);
                                 dispatchEvent(new net.wg.gui.lobby.settings.evnts.SettingViewEvent(net.wg.gui.lobby.settings.evnts.SettingViewEvent.ON_CONTROL_CHANGED, _viewId, loc2, loc8.selected));
                                 break;
+                            }
                             case net.wg.gui.lobby.settings.SettingsConfig.TYPE_SLIDER:
+                            {
                                 break;
+                            }
                             case net.wg.gui.lobby.settings.SettingsConfig.TYPE_DROPDOWN:
+                            {
                                 (loc9 = this[loc2 + loc7.type]).menuRowCount = loc7.options.length;
                                 loc9.dataProvider = new scaleform.clik.data.DataProvider(loc7.options);
                                 loc10 = 0;
@@ -525,6 +624,7 @@ package net.wg.gui.lobby.settings
                                 loc9.selectedIndex = loc10;
                                 dispatchEvent(new net.wg.gui.lobby.settings.evnts.SettingViewEvent(net.wg.gui.lobby.settings.evnts.SettingViewEvent.ON_CONTROL_CHANGED, _viewId, loc2, loc11));
                                 break;
+                            }
                         }
                     }
                     ++loc4;
@@ -552,23 +652,34 @@ package net.wg.gui.lobby.settings
             label573: for (loc1 in loc12) 
             {
                 if (!this[loc1 + net.wg.gui.lobby.settings.vo.SettingsControlProp(this.graphicsQualityDataProv[loc1]).type]) 
+                {
                     continue;
+                }
                 loc2 = net.wg.gui.lobby.settings.vo.SettingsControlProp(this.graphicsQualityDataProv[loc1]);
                 var loc13:*=loc2.type;
                 switch (loc13) 
                 {
                     case net.wg.gui.lobby.settings.SettingsConfig.TYPE_CHECKBOX:
+                    {
                         loc3 = this[loc1 + loc2.type];
                         loc4 = loc3.selected;
                         if (!this.useAdvancedGraphic) 
+                        {
                             loc3.selected = Boolean(this.useAdvancedGraphic || !loc2.advanced);
+                        }
                         loc3.enabled = Boolean(this.useAdvancedGraphic || !loc2.advanced);
                         if (loc4 != loc3.selected) 
+                        {
                             dispatchEvent(new net.wg.gui.lobby.settings.evnts.SettingViewEvent(net.wg.gui.lobby.settings.evnts.SettingViewEvent.ON_CONTROL_CHANGED, _viewId, loc1, loc3.selected));
+                        }
                         continue label573;
+                    }
                     case net.wg.gui.lobby.settings.SettingsConfig.TYPE_SLIDER:
+                    {
                         continue label573;
+                    }
                     case net.wg.gui.lobby.settings.SettingsConfig.TYPE_DROPDOWN:
+                    {
                         loc6 = (loc5 = this[loc1 + loc2.type]).dataProvider[loc5.selectedIndex].data;
                         loc7 = -1;
                         loc8 = loc2.options.length;
@@ -587,8 +698,11 @@ package net.wg.gui.lobby.settings
                         loc5.selectedIndex = loc7 == -1 ? (loc2.options.length - 1) : loc7;
                         loc9 = loc2.options[loc5.selectedIndex].data;
                         if (loc6 != loc9) 
+                        {
                             dispatchEvent(new net.wg.gui.lobby.settings.evnts.SettingViewEvent(net.wg.gui.lobby.settings.evnts.SettingViewEvent.ON_CONTROL_CHANGED, _viewId, loc1, loc9));
+                        }
                         continue label573;
+                    }
                 }
             }
             this.allowCheckPresets = true;
@@ -603,7 +717,9 @@ package net.wg.gui.lobby.settings
             var loc12:*=null;
             var loc13:*=null;
             if (!this.allowCheckPresets) 
+            {
                 return;
+            }
             var loc1:*=0;
             loc2 = "";
             var loc3:*={};
@@ -619,15 +735,21 @@ package net.wg.gui.lobby.settings
                     switch (loc14) 
                     {
                         case net.wg.gui.lobby.settings.SettingsConfig.TYPE_CHECKBOX:
+                        {
                             loc11 = this[loc2 + loc10.type];
                             loc3[loc2] = Number(loc11.selected);
                             break;
+                        }
                         case net.wg.gui.lobby.settings.SettingsConfig.TYPE_SLIDER:
+                        {
                             break;
+                        }
                         case net.wg.gui.lobby.settings.SettingsConfig.TYPE_DROPDOWN:
+                        {
                             loc12 = this[loc2 + loc10.type];
                             loc3[loc2] = net.wg.gui.lobby.settings.vo.SettingsControlProp(this.graphicsQualityDataProv[loc2]).options[loc12.selectedIndex].data;
                             break;
+                        }
                     }
                 }
                 ++loc1;
@@ -648,7 +770,9 @@ package net.wg.gui.lobby.settings
                     for (loc9 in loc15) 
                     {
                         if (this._presets.options[loc1].settings[loc9] == loc3[loc9]) 
+                        {
                             continue;
+                        }
                         loc7 = false;
                         break;
                     }
@@ -696,7 +820,9 @@ package net.wg.gui.lobby.settings
             var loc4:*="";
             var loc5:*=0;
             if (loc3 != net.wg.gui.lobby.settings.SettingsConfig.SMOOTHING) 
+            {
                 if (loc3 != net.wg.gui.lobby.settings.SettingsConfig.SIZE) 
+                {
                     if (loc3 == net.wg.gui.lobby.settings.SettingsConfig.MONITOR) 
                     {
                         loc4 = this.fullScreenCheckbox.selected ? net.wg.gui.lobby.settings.SettingsConfig.RESOLUTION : net.wg.gui.lobby.settings.SettingsConfig.WINDOW_SIZE;
@@ -706,12 +832,14 @@ package net.wg.gui.lobby.settings
                         this.sizesDropDown.selectedIndex = net.wg.gui.lobby.settings.vo.SettingsControlProp(_data[loc4]).lastVal[loc5];
                         dispatchEvent(new net.wg.gui.lobby.settings.evnts.SettingViewEvent(net.wg.gui.lobby.settings.evnts.SettingViewEvent.ON_CONTROL_CHANGED, _viewId, loc4, this.sizesDropDown.selectedIndex));
                     }
+                }
                 else 
                 {
                     loc3 = (loc9 = this.fullScreenCheckbox.selected) ? net.wg.gui.lobby.settings.SettingsConfig.RESOLUTION : net.wg.gui.lobby.settings.SettingsConfig.WINDOW_SIZE;
                     loc5 = this.monitorDropDown.selectedIndex;
                     net.wg.gui.lobby.settings.vo.SettingsControlProp(_data[loc3]).lastVal[loc5] = loc2;
                 }
+            }
             else 
             {
                 loc8 = (loc7 = (loc6 = net.wg.gui.lobby.settings.vo.SettingsControlProp(_data[net.wg.gui.lobby.settings.SettingsConfig.RENDER_PIPELINE])).options[this.RENDER_PIPELINEDropDown.selectedIndex].data != 0 ? false : true) ? net.wg.gui.lobby.settings.SettingsConfig.CUSTOM_AA : net.wg.gui.lobby.settings.SettingsConfig.MULTISAMPLING;
@@ -768,11 +896,13 @@ package net.wg.gui.lobby.settings
             var loc4:*=net.wg.gui.lobby.settings.SettingsConfig.getControlId(loc3.name, net.wg.gui.lobby.settings.SettingsConfig.TYPE_DROPDOWN);
             var loc5:*=net.wg.gui.lobby.settings.vo.SettingsControlProp(this.graphicsQualityDataProv[loc4]).options[loc1].data;
             if (loc4 == net.wg.gui.lobby.settings.SettingsConfig.RENDER_PIPELINE) 
+            {
                 if (!Boolean(loc5) != this.useAdvancedGraphic) 
                 {
                     this.updateGraphicsQualityDataForAdvanced(!Boolean(loc5));
                     this.updateGraphicsQualityIfChangeAdvanced();
                 }
+            }
             dispatchEvent(new net.wg.gui.lobby.settings.evnts.SettingViewEvent(net.wg.gui.lobby.settings.evnts.SettingViewEvent.ON_CONTROL_CHANGED, _viewId, loc4, loc5));
             this.checkForCustomsPreset();
             return;

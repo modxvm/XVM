@@ -38,12 +38,18 @@ package net.wg.gui.components.common.ticker
             removeEventListener(flash.events.MouseEvent.MOUSE_OVER, this.onMouseOver);
             removeEventListener(flash.events.MouseEvent.MOUSE_OUT, this.onMouseOut);
             while (this._renderers.length) 
+            {
                 this.removeRenderer();
+            }
             this._showHideTween = null;
             if (this._rssItems) 
+            {
                 this._rssItems.splice(0, this._rssItems.length);
+            }
             if (this._renderers) 
+            {
                 this._renderers.splice(0, this._renderers.length);
+            }
             return;
         }
 
@@ -60,7 +66,9 @@ package net.wg.gui.components.common.ticker
         {
             super.draw();
             if (isInvalid(INVALID_ITEMS) && this.hasItems) 
+            {
                 this.startAnimation();
+            }
             return;
         }
 
@@ -68,7 +76,9 @@ package net.wg.gui.components.common.ticker
         {
             this.show();
             if (this._intervalID == -1) 
+            {
                 this._intervalID = flash.utils.setInterval(this.animate, UPDATE_INTERVAL);
+            }
             return;
         }
 
@@ -111,16 +121,24 @@ package net.wg.gui.components.common.ticker
                 var loc4:*=0;
                 var loc5:*=this._renderers;
                 for each (loc1 in loc5) 
+                {
                     loc1.x = loc1.x - this.animationXSpeed;
+                }
                 loc2 = this._renderers[0];
                 loc3 = this._renderers[(this._renderers.length - 1)];
                 if (loc2.x + loc2.width < 0) 
+                {
                     this.removeRenderer();
+                }
                 if (loc3.x + loc3.width + ITEMS_GAP < this.maskView.width && this.hasItems) 
+                {
                     this.addRenderer();
+                }
             }
             else if (this._rssItems.length > 0) 
+            {
                 this.addRenderer();
+            }
             else 
             {
                 this.pauseAnimation();
@@ -135,7 +153,9 @@ package net.wg.gui.components.common.ticker
             var loc4:*=((loc3 = this)._itemIndex + 1);
             loc3._itemIndex = loc4;
             if (this._itemIndex >= this._rssItems.length) 
+            {
                 this._itemIndex = 0;
+            }
             var loc1:*=this._rssItems[this._itemIndex];
             var loc2:*=App.utils.classFactory.getComponent(net.wg.data.constants.Linkages.TICKER_ITEM, net.wg.gui.components.common.ticker.TickerItem);
             loc2.model = new net.wg.gui.components.common.ticker.RSSEntryVO(loc1);
@@ -178,15 +198,21 @@ package net.wg.gui.components.common.ticker
             switch (loc2) 
             {
                 case flash.events.MouseEvent.MOUSE_OVER:
+                {
                     App.toolTipMgr.showSpecial(net.wg.data.constants.Tooltips.RSS_NEWS, null, loc1.title, loc1.summary);
                     break;
+                }
                 case flash.events.MouseEvent.MOUSE_OUT:
+                {
                     App.toolTipMgr.hide();
                     break;
+                }
                 case flash.events.MouseEvent.MOUSE_DOWN:
+                {
                     App.toolTipMgr.hide();
                     showBrowserS(loc1.id);
                     break;
+                }
             }
             return;
         }

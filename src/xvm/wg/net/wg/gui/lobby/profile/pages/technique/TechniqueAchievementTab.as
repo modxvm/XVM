@@ -81,7 +81,9 @@ package net.wg.gui.lobby.profile.pages.technique
             for each (loc1 in loc3) 
             {
                 if (!(loc1.length > 0)) 
+                {
                     continue;
+                }
                 return true;
             }
             return false;

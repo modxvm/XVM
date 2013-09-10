@@ -37,7 +37,9 @@ package net.wg.gui.components.advanced
         protected override function draw():void
         {
             if (isInvalid(DATA_CHANGED)) 
+            {
                 this.setup(this.data);
+            }
             return;
         }
 
@@ -51,7 +53,9 @@ package net.wg.gui.components.advanced
         public override function setData(arg1:Object):void
         {
             if (arg1 == null) 
+            {
                 return;
+            }
             super.setData(arg1);
             invalidate(DATA_CHANGED);
             return;
@@ -68,11 +72,17 @@ package net.wg.gui.components.advanced
         internal function onRollOver(arg1:flash.events.MouseEvent):void
         {
             if (!data.hasOwnProperty("name") && !data.hasOwnProperty("tankmanID") && !(data.name == null)) 
+            {
                 return;
+            }
             if (data.isNewSkill) 
+            {
                 App.toolTipMgr.showSpecial(net.wg.data.constants.Tooltips.TANKMAN_NEW_SKILL, null, data.tankmanID);
+            }
             else 
+            {
                 App.toolTipMgr.showSpecial(net.wg.data.constants.Tooltips.TANKMAN_SKILL, null, data.name, data.tankmanID);
+            }
             return;
         }
 
@@ -91,13 +101,17 @@ package net.wg.gui.components.advanced
             c = null;
             data = arg1;
             if (data == null) 
+            {
                 return;
+            }
             buttonMode = true;
             this.roleIco = this.rank_mc.icoLoader;
             try 
             {
                 if (data.icon == null) 
+                {
                     this.loader.visible = false;
+                }
                 else 
                 {
                     this.loader.visible = !data.isNewSkill;
@@ -120,7 +134,9 @@ package net.wg.gui.components.advanced
                     this.loader.transform.colorTransform = c;
                 }
                 else 
+                {
                     this.loader.transform.colorTransform = new flash.geom.ColorTransform();
+                }
                 this.bg.gotoAndPlay(data.isNewSkill ? "new_skill" : !data.isActive || !data.enabled ? "not_active_up" : "active_up");
                 this.notActive.visible = (!data.isActive || !data.enabled) && !data.isNewSkill;
                 this.loadingBar.visible = !data.isNewSkill;
@@ -136,9 +152,13 @@ package net.wg.gui.components.advanced
                         this.level_mc.rankTf.filters = getRankGlowFilter();
                     }
                     else 
+                    {
                         this.level_mc.visible = false;
+                    }
                     if (!this.hasOwnProperty(scaleform.clik.events.ButtonEvent.CLICK)) 
+                    {
                         this.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onShowSkillTab);
+                    }
                 }
                 else 
                 {
@@ -146,14 +166,18 @@ package net.wg.gui.components.advanced
                     if (data.level == 100) 
                     {
                         if (this.loadingBar is scaleform.clik.controls.StatusIndicator) 
+                        {
                             this.loadingBar.visible = false;
+                        }
                         this._titleLabel.visible = false;
                     }
                     if (this.loadingBar is scaleform.clik.controls.StatusIndicator) 
                     {
                         this.loadingBar.position = Number(data.level);
                         if (Number(data.level) != 0) 
+                        {
                             this.loadingBar.setActualSize(PROGRESS_BAR_WIDTH, PROGRESS_BAR_HEIGHT);
+                        }
                     }
                     this._titleLabel.text = String(data.level) + "%";
                     this.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onShowSkillTab);

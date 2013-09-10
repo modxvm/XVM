@@ -37,7 +37,9 @@ package net.wg.gui.lobby.settings
             var loc4:*=null;
             this._id = arg1;
             if (arg2 == null) 
+            {
                 this.disableAllControls();
+            }
             else 
             {
                 this._data = arg2;
@@ -47,21 +49,27 @@ package net.wg.gui.lobby.settings
                 {
                     loc2 = net.wg.gui.lobby.settings.vo.SettingsControlProp(this._data[loc1]);
                     if (!this[loc1 + loc2.type]) 
+                    {
                         continue;
+                    }
                     var loc7:*=loc2.type;
                     switch (loc7) 
                     {
                         case net.wg.gui.lobby.settings.SettingsConfig.TYPE_CHECKBOX:
+                        {
                             (loc3 = this[loc1 + loc2.type]).selected = loc2.current;
                             loc3.addEventListener(flash.events.Event.SELECT, this.onCheckBoxSelected);
                             continue label325;
+                        }
                         case net.wg.gui.lobby.settings.SettingsConfig.TYPE_DROPDOWN:
+                        {
                             (loc4 = this[loc1 + loc2.type]).menuRowCount = loc2.options.length;
                             loc4.dataProvider = new scaleform.clik.data.DataProvider(loc2.options);
                             loc4.selectedIndex = loc2.current;
                             loc4.enabled = loc2.current != null ? true : false;
                             loc4.addEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onDropDownChange);
                             continue label325;
+                        }
                     }
                 }
             }
@@ -125,19 +133,29 @@ package net.wg.gui.lobby.settings
                 {
                     loc2 = net.wg.gui.lobby.settings.vo.SettingsControlProp(this._data[loc1]);
                     if (!this[loc1 + loc2.type]) 
+                    {
                         continue;
+                    }
                     var loc7:*=loc2.type;
                     switch (loc7) 
                     {
                         case net.wg.gui.lobby.settings.SettingsConfig.TYPE_CHECKBOX:
+                        {
                             loc3 = this[loc1 + loc2.type];
                             if (loc3.hasEventListener(flash.events.Event.SELECT)) 
+                            {
                                 loc3.removeEventListener(flash.events.Event.SELECT, this.onCheckBoxSelected);
+                            }
                             continue label274;
+                        }
                         case net.wg.gui.lobby.settings.SettingsConfig.TYPE_DROPDOWN:
+                        {
                             if ((loc4 = this[loc1 + loc2.type]).hasEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE)) 
+                            {
                                 loc4.removeEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onDropDownChange);
+                            }
                             continue label274;
+                        }
                     }
                 }
                 this._data = null;

@@ -18,34 +18,34 @@ package net.wg.gui.lobby.hangar.maintenance.data
 
         public function set userCount(arg1:int):void
         {
-            var loc2:*=null;
-            var loc4:*=null;
-            var loc5:*=0;
-            var loc1:*=this._userCount;
+            var loc1:*=null;
+            var loc3:*=null;
             this._userCount = arg1;
-            var loc3:*=this.userCount;
-            var loc6:*=0;
-            var loc7:*=this.list;
-            for each (loc2 in loc7) 
+            var loc2:*=this.userCount;
+            var loc5:*=0;
+            var loc6:*=this.list;
+            for each (loc1 in loc6) 
             {
-                loc3 = loc3 + loc2.userCount;
-                if (!(loc4 == null || loc2.userCount > loc4.userCount)) 
-                    continue;
-                loc4 = loc2;
-            }
-            if (loc3 > this.maxAmmo) 
-                this._userCount = this.maxAmmo - loc3 + this.userCount;
-            else 
-            {
-                loc5 = (loc5 = loc3 - this.maxAmmo) > 0 ? loc5 : 0;
-                this.possibleMax = this.maxAmmo - loc3 + loc5 + this.userCount;
-                loc6 = 0;
-                loc7 = this.list;
-                for each (loc2 in loc7) 
+                loc2 = loc2 + loc1.userCount;
+                if (!(loc3 == null || loc1.userCount > loc3.userCount)) 
                 {
-                    loc2.possibleMax = this.maxAmmo - loc3 + loc5 + loc2.userCount;
-                    loc2.setUserCount(loc2.userCount - (loc2 != loc4 ? 0 : loc5));
+                    continue;
                 }
+                loc3 = loc1;
+            }
+            if (loc2 > this.maxAmmo) 
+            {
+                this._userCount = this._userCount - (loc2 - this.maxAmmo);
+                loc2 = loc2 - (loc2 - this.maxAmmo);
+            }
+            var loc4:*=(loc4 = loc2 - this.maxAmmo) > 0 ? loc4 : 0;
+            this.possibleMax = this.maxAmmo - loc2 + loc4 + this.userCount;
+            loc5 = 0;
+            loc6 = this.list;
+            for each (loc1 in loc6) 
+            {
+                loc1.possibleMax = this.maxAmmo - loc2 + loc4 + loc1.userCount;
+                loc1.setUserCount(loc1.userCount - (loc1 != loc3 ? 0 : loc4));
             }
             dispatchEvent(new net.wg.gui.events.ShellRendererEvent(net.wg.gui.events.ShellRendererEvent.USER_COUNT_CHANGED));
             return;

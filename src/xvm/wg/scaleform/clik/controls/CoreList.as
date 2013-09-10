@@ -50,7 +50,9 @@ package scaleform.clik.controls
             while (loc1 < this._totalRenderers) 
             {
                 if ((loc3 = this.createRenderer(loc1)) == null) 
+                {
                     break;
+                }
                 this._renderers.push(loc3);
                 this.container.addChild(loc3 as flash.display.DisplayObject);
                 ++loc1;
@@ -64,7 +66,9 @@ package scaleform.clik.controls
                     this.cleanUpRenderer(loc3);
                     loc4 = loc3 as flash.display.DisplayObject;
                     if (this.container.contains(loc4)) 
+                    {
                         this.container.removeChild(loc4);
+                    }
                 }
                 this._renderers.splice(loc1, 1);
                 --loc1;
@@ -96,7 +100,9 @@ package scaleform.clik.controls
             arg1.addEventListener(flash.events.MouseEvent.ROLL_OVER, this.dispatchItemEvent, false, 0, true);
             arg1.addEventListener(flash.events.MouseEvent.ROLL_OUT, this.dispatchItemEvent, false, 0, true);
             if (this._usingExternalRenderers) 
+            {
                 arg1.addEventListener(flash.events.MouseEvent.MOUSE_WHEEL, this.handleMouseWheel, false, 0, true);
+            }
             return;
         }
 
@@ -128,37 +134,59 @@ package scaleform.clik.controls
             switch (loc7) 
             {
                 case scaleform.clik.events.ButtonEvent.PRESS:
+                {
                     loc1 = scaleform.clik.events.ListEvent.ITEM_PRESS;
                     break;
+                }
                 case scaleform.clik.events.ButtonEvent.CLICK:
+                {
                     loc1 = scaleform.clik.events.ListEvent.ITEM_CLICK;
                     break;
+                }
                 case flash.events.MouseEvent.ROLL_OVER:
+                {
                     loc1 = scaleform.clik.events.ListEvent.ITEM_ROLL_OVER;
                     break;
+                }
                 case flash.events.MouseEvent.ROLL_OUT:
+                {
                     loc1 = scaleform.clik.events.ListEvent.ITEM_ROLL_OUT;
                     break;
+                }
                 case flash.events.MouseEvent.DOUBLE_CLICK:
+                {
                     loc1 = scaleform.clik.events.ListEvent.ITEM_DOUBLE_CLICK;
                     break;
+                }
                 default:
+                {
                     return true;
+                }
             }
             var loc2:*=arg1.currentTarget as scaleform.clik.interfaces.IListItemRenderer;
             var loc3:*=0;
             if (arg1 is scaleform.clik.events.ButtonEvent) 
+            {
                 loc3 = (arg1 as scaleform.clik.events.ButtonEvent).controllerIdx;
+            }
             else if (arg1 is scaleform.gfx.MouseEventEx) 
+            {
                 loc3 = (arg1 as scaleform.gfx.MouseEventEx).mouseIdx;
+            }
             var loc4:*=0;
             if (arg1 is scaleform.clik.events.ButtonEvent) 
+            {
                 loc4 = (arg1 as scaleform.clik.events.ButtonEvent).buttonIdx;
+            }
             else if (arg1 is scaleform.gfx.MouseEventEx) 
+            {
                 loc4 = (arg1 as scaleform.gfx.MouseEventEx).buttonIdx;
+            }
             var loc5:*=false;
             if (arg1 is scaleform.clik.events.ButtonEvent) 
+            {
                 loc5 = (arg1 as scaleform.clik.events.ButtonEvent).isKeyboard;
+            }
             var loc6:*=new scaleform.clik.events.ListEvent(loc1, false, true, loc2.index, 0, loc2.index, loc2, this.dataProvider.requestItemAt(loc2.index), loc3, loc4, loc5);
             return dispatchEvent(loc6);
         }
@@ -173,9 +201,13 @@ package scaleform.clik.controls
         {
             var loc1:*=(arg1.currentTarget as scaleform.clik.interfaces.IListItemRenderer).index;
             if (isNaN(loc1)) 
+            {
                 return;
+            }
             if (this.dispatchItemEvent(arg1)) 
+            {
                 this.selectedIndex = loc1;
+            }
             return;
         }
 
@@ -242,12 +274,18 @@ package scaleform.clik.controls
         public function set itemRendererName(arg1:String):void
         {
             if (_inspector && arg1 == "" || arg1 == "") 
+            {
                 return;
+            }
             var loc1:*=flash.utils.getDefinitionByName(arg1) as Class;
             if (loc1 == null) 
+            {
                 trace("Error: " + this + ", The class " + arg1 + " cannot be found in your library. Please ensure it is there.");
+            }
             else 
+            {
                 this.itemRenderer = loc1;
+            }
             return;
         }
 
@@ -267,7 +305,9 @@ package scaleform.clik.controls
         {
             var loc3:*=null;
             if (arg1 == null || arg1 == "" || parent == null) 
+            {
                 return;
+            }
             var loc1:*=0;
             var loc2:*=new Vector.<scaleform.clik.interfaces.IListItemRenderer>();
             while (++loc1) 
@@ -275,7 +315,9 @@ package scaleform.clik.controls
                 if ((loc3 = parent.getChildByName(arg1 + loc1) as scaleform.clik.interfaces.IListItemRenderer) == null) 
                 {
                     if (loc1 == 0) 
+                    {
                         continue;
+                    }
                     break;
                 }
                 loc2.push(loc3);
@@ -283,7 +325,9 @@ package scaleform.clik.controls
             if (loc2.length == 0) 
             {
                 if (componentInspectorSetting) 
+                {
                     return;
+                }
                 loc2 = null;
             }
             this.itemRendererList = loc2;
@@ -329,7 +373,9 @@ package scaleform.clik.controls
         public function set selectedIndex(arg1:int):void
         {
             if (this._selectedIndex == arg1) 
+            {
                 return;
+            }
             this._selectedIndex = arg1;
             this.invalidateSelectedIndex();
             dispatchEvent(new scaleform.clik.events.ListEvent(scaleform.clik.events.ListEvent.INDEX_CHANGE, true, false, this._selectedIndex, -1, -1, this.getRendererAt(this._selectedIndex), this.dataProvider.requestItemAt(this._selectedIndex)));
@@ -369,12 +415,18 @@ package scaleform.clik.controls
         public function set dataProvider(arg1:scaleform.clik.interfaces.IDataProvider):void
         {
             if (this._dataProvider == arg1) 
+            {
                 return;
+            }
             if (this._dataProvider != null) 
+            {
                 this._dataProvider.removeEventListener(flash.events.Event.CHANGE, this.handleDataChange, false);
+            }
             this._dataProvider = arg1;
             if (this._dataProvider == null) 
+            {
                 return;
+            }
             this._dataProvider.addEventListener(flash.events.Event.CHANGE, this.handleDataChange, false, 0, true);
             invalidateData();
             return;
@@ -428,21 +480,31 @@ package scaleform.clik.controls
         public function itemToLabel(arg1:Object):String
         {
             if (arg1 == null) 
+            {
                 return "";
+            }
             if (this._labelFunction != null) 
+            {
                 return this._labelFunction(arg1);
+            }
             if (!(this._labelField == null) && this._labelField in arg1 && !(arg1[this._labelField] == null)) 
+            {
                 return arg1[this._labelField];
+            }
             return arg1.toString();
         }
 
         public function getRendererAt(arg1:uint, arg2:int=0):scaleform.clik.interfaces.IListItemRenderer
         {
             if (this._renderers == null) 
+            {
                 return null;
+            }
             var loc1:*=arg1 - arg2;
             if (loc1 >= this._renderers.length) 
+            {
                 return null;
+            }
             return this._renderers[loc1] as scaleform.clik.interfaces.IListItemRenderer;
         }
 
@@ -486,13 +548,17 @@ package scaleform.clik.controls
             var loc4:*=null;
             var loc5:*=null;
             if (isInvalid(scaleform.clik.constants.InvalidationType.SELECTED_INDEX)) 
+            {
                 this.updateSelectedIndex();
+            }
             if (isInvalid(scaleform.clik.constants.InvalidationType.STATE)) 
+            {
                 if (this._newFrame) 
                 {
                     gotoAndPlay(this._newFrame);
                     this._newFrame = null;
                 }
+            }
             if (!this._usingExternalRenderers && isInvalid(scaleform.clik.constants.InvalidationType.RENDERERS)) 
             {
                 if (this._renderers != null) 
@@ -505,7 +571,9 @@ package scaleform.clik.controls
                         this.cleanUpRenderer(loc3);
                         loc4 = loc3 as flash.display.DisplayObject;
                         if (this.container.contains(loc4)) 
+                        {
                             this.container.removeChild(loc4);
+                        }
                         ++loc1;
                     }
                 }
@@ -530,16 +598,22 @@ package scaleform.clik.controls
                 this.drawLayout();
             }
             if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+            {
                 this.refreshData();
+            }
             return;
         }
 
         protected override function changeFocus():void
         {
             if (_focused || _displayFocus) 
+            {
                 this.setState("focused", "default");
+            }
             else 
+            {
                 this.setState("default");
+            }
             return;
         }
 

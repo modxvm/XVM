@@ -35,7 +35,9 @@ package net.wg.gui.lobby.training
             this.data = arg1;
             this.itemClicked = false;
             if (arg1) 
+            {
                 this.dataVO = new net.wg.data.VO.TrainingFormRendererVO(arg1);
+            }
             invalidate(scaleform.clik.constants.InvalidationType.DATA);
             return;
         }
@@ -80,7 +82,9 @@ package net.wg.gui.lobby.training
                 this.textOwner.label = this.dataVO.owner;
                 this.iconLoader.visible = true;
                 if (this.iconLoader.source != this.dataVO.icon) 
+                {
                     this.iconLoader.source = this.dataVO.icon;
+                }
                 this.enabled = !(this.dataVO.disabled || this.itemClicked);
             }
             return;

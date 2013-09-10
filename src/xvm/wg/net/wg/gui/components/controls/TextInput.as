@@ -29,10 +29,14 @@ package net.wg.gui.components.controls
                 this.selectionTextColor = this._selectionTextColor;
                 this.selectionBgColor = this._selectionBgColor;
                 if (textField.hasEventListener(flash.events.FocusEvent.FOCUS_OUT)) 
+                {
                     textField.removeEventListener(flash.events.FocusEvent.FOCUS_OUT, this.handleTextFieldFocusOut, false);
+                }
                 textField.addEventListener(flash.events.FocusEvent.FOCUS_OUT, this.handleTextFieldFocusOut, false, 0, true);
                 if (textField.hasEventListener(flash.events.FocusEvent.FOCUS_IN)) 
+                {
                     textField.removeEventListener(flash.events.FocusEvent.FOCUS_IN, this.handleTextFieldFocusIn, false);
+                }
                 textField.addEventListener(flash.events.FocusEvent.FOCUS_IN, this.handleTextFieldFocusIn, false, 0, true);
             }
             return;
@@ -68,8 +72,10 @@ package net.wg.gui.components.controls
                 case flash.ui.Keyboard.RIGHT:
                 case flash.ui.Keyboard.UP:
                 case flash.ui.Keyboard.DOWN:
+                {
                     arg1.handled = true;
                     return;
+                }
             }
             super.handleInput(arg1);
             return;
@@ -94,9 +100,13 @@ package net.wg.gui.components.controls
                     {
                         case "\n":
                         case "\r":
+                        {
                             break;
+                        }
                         default:
+                        {
                             loc2 = loc2 + loc1.charAt(loc3);
+                        }
                     }
                     ++loc3;
                 }
@@ -144,7 +154,9 @@ package net.wg.gui.components.controls
         public function set extractEscapes(arg1:Boolean):void
         {
             if (this._extractEscapes == arg1) 
+            {
                 return;
+            }
             this._extractEscapes = arg1;
             return;
         }

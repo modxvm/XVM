@@ -37,11 +37,19 @@ package net.wg.gui.lobby.techtree.nodes
         {
             var loc1:*=net.wg.gui.lobby.techtree.constants.ColorIndex.LOCKED;
             if (this.hasUnlockedChild()) 
+            {
                 if (arg1 == -1 || arg1 > 0 && isParentUnlocked(arg1)) 
+                {
                     loc1 = net.wg.gui.lobby.techtree.constants.ColorIndex.UNLOCKED;
+                }
+            }
             else if (this.hasNext2UnlockChild()) 
+            {
                 if (arg1 == -1 || arg1 > 0 && isParentUnlocked(arg1)) 
+                {
                     loc1 = net.wg.gui.lobby.techtree.constants.ColorIndex.NEXT2UNLOCK;
+                }
+            }
             return loc1;
         }
 
@@ -49,11 +57,19 @@ package net.wg.gui.lobby.techtree.nodes
         {
             var loc1:*=net.wg.gui.lobby.techtree.constants.ColorIndex.LOCKED;
             if (this.hasUnlockedChild()) 
+            {
                 if (arg1 == null || arg1.isUnlocked()) 
+                {
                     loc1 = net.wg.gui.lobby.techtree.constants.ColorIndex.UNLOCKED;
+                }
+            }
             else if (this.hasNext2UnlockChild()) 
+            {
                 if (arg1 == null || arg1.isUnlocked()) 
+                {
                     loc1 = net.wg.gui.lobby.techtree.constants.ColorIndex.NEXT2UNLOCK;
+                }
+            }
             return loc1;
         }
 
@@ -123,7 +139,9 @@ package net.wg.gui.lobby.techtree.nodes
             {
                 loc1 = this.parents.pop();
                 if (loc1 == null) 
+                {
                     continue;
+                }
                 loc1.removeEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.STATE_CHANGED, this.handleParentStateChanged);
             }
             return;
@@ -136,7 +154,9 @@ package net.wg.gui.lobby.techtree.nodes
             {
                 loc1 = this.children.pop();
                 if (loc1 == null) 
+                {
                     continue;
+                }
                 loc1.removeEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.STATE_CHANGED, this.handleChildStateChanged);
             }
             return;
@@ -151,7 +171,9 @@ package net.wg.gui.lobby.techtree.nodes
             {
                 loc1 = this.parents[loc3];
                 if (loc1.isUnlocked()) 
+                {
                     return true;
+                }
                 ++loc3;
             }
             return false;
@@ -166,10 +188,16 @@ package net.wg.gui.lobby.techtree.nodes
             {
                 loc1 = this.children[loc3];
                 if (loc1.isFake()) 
+                {
                     if ((loc1 as net.wg.gui.lobby.techtree.nodes.FakeNode).hasUnlockedChild()) 
+                    {
                         return true;
+                    }
+                }
                 else if (loc1.isUnlocked()) 
+                {
                     return true;
+                }
                 ++loc3;
             }
             return false;
@@ -184,10 +212,16 @@ package net.wg.gui.lobby.techtree.nodes
             {
                 loc1 = this.children[loc3];
                 if (loc1.isFake()) 
+                {
                     if ((loc1 as net.wg.gui.lobby.techtree.nodes.FakeNode).hasNext2UnlockChild()) 
+                    {
                         return true;
+                    }
+                }
                 else if (loc1.isNext2Unlock()) 
+                {
                     return true;
+                }
                 ++loc3;
             }
             return false;

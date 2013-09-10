@@ -32,7 +32,9 @@ package net.wg.gui.components.advanced
         public function set blinking(arg1:Boolean):void
         {
             if (this._blinking == arg1) 
+            {
                 return;
+            }
             this._blinking = arg1;
             setState(state);
             return;

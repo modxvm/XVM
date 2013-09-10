@@ -43,9 +43,13 @@ package net.wg.gui.lobby
             this.subViewContainer.updateStage(arg1, loc1);
             this.header.width = arg1;
             if (this.notificationPopupViewer) 
+            {
                 this.notificationPopupViewer.updateStage(arg1, arg2);
+            }
             if (this._isShowHelpLayout) 
+            {
                 this.as_closeHelpLayout();
+            }
             return;
         }
 
@@ -130,7 +134,9 @@ package net.wg.gui.lobby
         {
             super.draw();
             if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
+            {
                 constraints.update(width, height);
+            }
             return;
         }
 

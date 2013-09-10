@@ -20,15 +20,21 @@ package net.wg.gui.components.common.cursor.base
         public function registerDragging(arg1:net.wg.infrastructure.interfaces.entity.IDragDropHitArea, arg2:String=null):void
         {
             if (arg1 is net.wg.infrastructure.interfaces.entity.IDroppable) 
+            {
                 this.registerDrop(net.wg.infrastructure.interfaces.entity.IDroppable(arg1), arg2);
+            }
             return;
         }
 
         public function unRegisterDragging(arg1:net.wg.infrastructure.interfaces.entity.IDragDropHitArea):void
         {
             if (arg1) 
+            {
                 if (arg1 is net.wg.infrastructure.interfaces.entity.IDroppable) 
+                {
                     this.unRegisterDrop(net.wg.infrastructure.interfaces.entity.IDroppable(arg1));
+                }
+            }
             return;
         }
 
@@ -57,10 +63,16 @@ package net.wg.gui.components.common.cursor.base
         internal function onEnterToDropMode(arg1:flash.events.MouseEvent):void
         {
             if (arg1.target is net.wg.infrastructure.interfaces.entity.IDropItem) 
+            {
                 if (this._isOnDropping) 
+                {
                     setCursor(net.wg.data.constants.Cursors.DRAG_OPEN);
+                }
                 else 
+                {
                     forceSetCursor(net.wg.data.constants.Cursors.DRAG_OPEN);
+                }
+            }
             return;
         }
 
@@ -68,7 +80,9 @@ package net.wg.gui.components.common.cursor.base
         {
             assertLifeCycle();
             if (!this._isOnDropping) 
+            {
                 resetCursor();
+            }
             return;
         }
 
@@ -111,7 +125,9 @@ package net.wg.gui.components.common.cursor.base
             this._dropSenderInfo.hit.removeEventListener(flash.events.MouseEvent.MOUSE_MOVE, this.droppingHandler);
             var loc1:*=this._dropSenderInfo.container.getHitArea();
             if (this._dropItem is net.wg.infrastructure.interfaces.entity.IDropItem) 
+            {
                 this.removeDropListeners(this._dropSenderInfo);
+            }
             assertNotNull(this._dropItem, "_dropItem");
             this.removeAfterDropUpHandlers(this.mouseUpDropHdlr);
             this.onAfterDrop();
@@ -212,7 +228,9 @@ package net.wg.gui.components.common.cursor.base
                 var loc3:*=0;
                 var loc4:*=loc1;
                 for each (loc2 in loc4) 
+                {
                     loc2.addEventListener(flash.events.MouseEvent.MOUSE_UP, this.onDropHandler, true, END_DROP_PRIORITY);
+                }
             }
             return;
         }
@@ -226,7 +244,9 @@ package net.wg.gui.components.common.cursor.base
                 var loc3:*=0;
                 var loc4:*=loc1;
                 for each (loc2 in loc4) 
+                {
                     loc2.removeEventListener(flash.events.MouseEvent.MOUSE_UP, this.onDropHandler, true);
+                }
             }
             return;
         }
@@ -241,7 +261,9 @@ package net.wg.gui.components.common.cursor.base
             {
                 loc2 = loc1.container.getDropGroup();
                 if (loc2.indexOf(arg1) == -1) 
+                {
                     continue;
+                }
                 return loc1;
             }
             throw new net.wg.infrastructure.exceptions.ArgumentException("Unknown slot: " + arg1);

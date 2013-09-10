@@ -23,7 +23,9 @@ package net.wg.gui.lobby.dialogs
         {
             super.draw();
             if (this.model && isInvalid(UPDATE_BLOCK)) 
+            {
                 this.setData();
+            }
             return;
         }
 
@@ -94,7 +96,9 @@ package net.wg.gui.lobby.dialogs
         public function as_tankMan(arg1:Object):void
         {
             if (arg1 == null) 
+            {
                 return;
+            }
             this.model = net.wg.gui.lobby.tankman.SkillDropModel.parseFromObject(arg1);
             invalidate(UPDATE_BLOCK);
             return;
@@ -103,7 +107,9 @@ package net.wg.gui.lobby.dialogs
         public function as_setQuestionForUser(arg1:String):void
         {
             if (arg1 == null) 
+            {
                 return;
+            }
             this.questionForUser = arg1;
             invalidate(UPDATE_BLOCK);
             return;
@@ -134,10 +140,16 @@ package net.wg.gui.lobby.dialogs
                 this.showAlertState(false);
                 App.utils.scheduler.cancelTask(this.runtimeValidate);
                 if (arg1.details.code != flash.ui.Keyboard.ENTER) 
+                {
                     if (!this.isEmptyText) 
+                    {
                         App.utils.scheduler.scheduleTask(this.runtimeValidate, AUTO_UPDATE_INTERVAL);
+                    }
+                }
                 else 
+                {
                     this.showAlertState(!this.isValidText);
+                }
                 sendControlNumberS(this.controlText.text);
             }
             return;

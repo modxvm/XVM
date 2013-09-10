@@ -21,7 +21,9 @@ package net.wg.gui.prebattle.company
         {
             super.dispose();
             if (_dropdownRef) 
+            {
                 _dropdownRef.removeEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.onClickDropDownMenu, false);
+            }
             return;
         }
 

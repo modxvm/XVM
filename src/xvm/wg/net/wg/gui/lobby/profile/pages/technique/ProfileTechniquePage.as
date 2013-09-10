@@ -36,7 +36,9 @@ package net.wg.gui.lobby.profile.pages.technique
         internal function checkBoxSelectHandler(arg1:flash.events.Event):void
         {
             if (currentDossier) 
+            {
                 this.updateByDossier(currentDossier);
+            }
             return;
         }
 
@@ -56,9 +58,13 @@ package net.wg.gui.lobby.profile.pages.technique
         protected override function updateByDossier(arg1:net.wg.data.gui_items.dossier.AccountDossier):void
         {
             if (this.checkBoxExistence.selected) 
+            {
                 listComponent.dataProvider = arg1.getHangarVehiclesList();
+            }
             else 
+            {
                 listComponent.dataProvider = arg1.getAllVehiclesList();
+            }
             return;
         }
 

@@ -18,7 +18,9 @@ package scaleform.clik.utils
             var loc2:*=0;
             var loc3:*=this._dictionary;
             for (loc1 in loc3) 
+            {
                 return loc1;
+            }
             return null;
         }
 

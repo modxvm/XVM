@@ -28,10 +28,14 @@ package net.wg.gui.lobby.hangar.maintenance
         {
             var loc1:*=App.utils.events;
             if (this.shell) 
+            {
                 loc1.removeEvent(this.shell, net.wg.gui.events.ShellRendererEvent.USER_COUNT_CHANGED, this.onUserCountChange, false);
+            }
             super.setData(arg1);
             if (this.shell) 
+            {
                 loc1.addEvent(this.shell, net.wg.gui.events.ShellRendererEvent.USER_COUNT_CHANGED, this.onUserCountChange, false, 0, true);
+            }
             invalidate(scaleform.clik.constants.InvalidationType.DATA);
             return;
         }
@@ -110,10 +114,14 @@ package net.wg.gui.lobby.hangar.maintenance
                         this.select.open();
                     }
                     if (this.select.hitTestPoint(App.stage.mouseX, App.stage.mouseY)) 
+                    {
                         this.onRollOver();
+                    }
                 }
                 else 
+                {
                     visible = false;
+                }
             }
             return;
         }
@@ -156,7 +164,9 @@ package net.wg.gui.lobby.hangar.maintenance
         internal function onShellOrderChange(arg1:scaleform.clik.events.ListEvent):void
         {
             if (this.select.selectedIndex == -1 || this.shell.id == this.shell.list[this.select.selectedIndex].id) 
+            {
                 return;
+            }
             dispatchEvent(new net.wg.gui.events.ShellRendererEvent(net.wg.gui.events.ShellRendererEvent.CHANGE_ORDER, this.shell, this.shell.list[this.select.selectedIndex]));
             return;
         }
@@ -168,7 +178,9 @@ package net.wg.gui.lobby.hangar.maintenance
             var loc3:*="";
             var loc4:*=App.utils.locale;
             if (this.toBuyDropdown.visible) 
+            {
                 loc2 = this.shell.prices[this.toBuyDropdown.selectedIndex];
+            }
             else 
             {
                 loc2 = this.shell.prices[this.shell.currency != net.wg.data.constants.Currencies.CREDITS ? 1 : 0];
@@ -225,7 +237,9 @@ package net.wg.gui.lobby.hangar.maintenance
             {
                 loc1 = arg1 as scaleform.gfx.MouseEventEx;
                 if (loc1.buttonIdx == scaleform.gfx.MouseEventEx.RIGHT_BUTTON) 
+                {
                     dispatchEvent(new net.wg.gui.events.ModuleInfoEvent(net.wg.gui.events.ModuleInfoEvent.SHOW_INFO, net.wg.gui.lobby.hangar.maintenance.data.ShellVO(data).id));
+                }
             }
             return;
         }

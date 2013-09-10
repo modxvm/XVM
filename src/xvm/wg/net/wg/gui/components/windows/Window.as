@@ -67,7 +67,9 @@ package net.wg.gui.components.windows
         public function set useBottomBtns(arg1:Boolean):void
         {
             if (this._useBottomBtns == arg1) 
+            {
                 return;
+            }
             this._useBottomBtns = arg1;
             var loc1:*=this.formBgPadding;
             loc1.bottom = this._useBottomBtns ? this.BG_FORM_DEF_PADDING.bottom + this.BTN_PADDING_Y : this.BG_FORM_DEF_PADDING.bottom;
@@ -90,7 +92,9 @@ package net.wg.gui.components.windows
         public function set useTabs(arg1:Boolean):void
         {
             if (this._useTabs == arg1) 
+            {
                 return;
+            }
             this._useTabs = arg1;
             var loc1:*=this.formBgPadding;
             loc1.top = this._useTabs ? this.BG_FORM_DEF_PADDING.top + this.TAB_PADDING_Y : this.BG_FORM_DEF_PADDING.top;
@@ -107,7 +111,9 @@ package net.wg.gui.components.windows
         public function set showBgForm(arg1:Boolean):void
         {
             if (arg1 == this.showBgForm) 
+            {
                 return;
+            }
             this._showBgForm = arg1;
             _contentPadding = this._showBgForm ? this.CONTENT_DEF_PADDING : _contentPadding;
             invalidate("padding");
@@ -134,11 +140,17 @@ package net.wg.gui.components.windows
                 this.minimizeBtn.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onMinimizeButtonClick);
             }
             if (hit) 
+            {
                 hitArea = hit;
+            }
             if (background) 
+            {
                 background.mouseEnabled = false;
+            }
             if (titleBtn) 
+            {
                 titleBtn.removeEventListener(flash.events.MouseEvent.MOUSE_DOWN, onWindowStartDrag);
+            }
             return;
         }
 
@@ -180,7 +192,9 @@ package net.wg.gui.components.windows
         protected override function onCloseButtonClick(arg1:flash.events.MouseEvent):void
         {
             if (this.sourceView) 
+            {
                 this.sourceView.onWindowCloseS();
+            }
             return;
         }
 
@@ -193,7 +207,9 @@ package net.wg.gui.components.windows
         protected function onMinimizeButtonClick(arg1:scaleform.clik.events.ButtonEvent):void
         {
             if (this.sourceView && this.sourceView.canMinimize) 
+            {
                 this.sourceView.handleWindowMinimize();
+            }
             return;
         }
 
@@ -201,9 +217,13 @@ package net.wg.gui.components.windows
         {
             super.dispose();
             if (_content && contains(_content)) 
+            {
                 removeChild(_content);
+            }
             if (this.sourceView.canDrag) 
+            {
                 App.cursor.unRegisterDragging(this);
+            }
             this.isDisposing = true;
             this.minimizeBtn.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onMinimizeButtonClick);
             titleBtn.removeEventListener(flash.events.MouseEvent.MOUSE_DOWN, onWindowStartDrag);
@@ -211,7 +231,9 @@ package net.wg.gui.components.windows
             closeBtn.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.closeButtonClickHandler);
             resizeBtn.removeEventListener(flash.events.MouseEvent.MOUSE_DOWN, onResizeStartDrag);
             if (okBtn) 
+            {
                 okBtn.removeEventListener(flash.events.MouseEvent.CLICK, this.onCloseButtonClick);
+            }
             this.bgForm = null;
             this._formBgPadding = null;
             okBtn = null;
@@ -297,6 +319,7 @@ package net.wg.gui.components.windows
                 closeBtn.visible = this.sourceView.canClose;
                 closeBtn.enabled = this.sourceView.enabledCloseBtn;
                 if (this.sourceView.canDrag && !this.draggingRegistered) 
+                {
                     try 
                     {
                         App.cursor.registerDragging(this);
@@ -306,11 +329,16 @@ package net.wg.gui.components.windows
                     {
                         trace(e);
                     }
+                }
             }
             if (isInvalid("padding", INVALID_SRC_VIEW)) 
+            {
                 this.reflowContent();
+            }
             if (!this.isDisposing && isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
+            {
                 constraints.update(_width, _height);
+            }
             if (isInvalid(INVALID_TITLE)) 
             {
                 titleBtn.label = _title || "";

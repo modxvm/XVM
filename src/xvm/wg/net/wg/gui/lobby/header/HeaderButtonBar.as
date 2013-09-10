@@ -52,7 +52,9 @@ package net.wg.gui.lobby.header
         public override function handleInput(arg1:scaleform.clik.events.InputEvent):void
         {
             if (!this._disableNav)
+            {
                 super.handleInput(arg1);
+            }
             return;
         }
 
@@ -67,17 +69,23 @@ package net.wg.gui.lobby.header
             var loc2:*=this.paddingTop;
             var loc3:*=-1;
             if (_renderers[0] is Class(_itemRendererClass))
+            {
                 while (_renderers.length > _dataProvider.length)
                 {
                     loc5 = (_renderers.length - 1);
                     if (container.contains(_renderers[loc5]))
+                    {
                         container.removeChild(_renderers[loc5]);
+                    }
                     _renderers.splice(loc5--, 1);
                 }
+            }
             else
             {
                 while (container.numChildren > 0)
+                {
                     container.removeChildAt(0);
+                }
                 _renderers.length = 0;
             }
             var loc4:*=0;
@@ -85,7 +93,9 @@ package net.wg.gui.lobby.header
             {
                 loc7 = false;
                 if (loc4 < _renderers.length)
+                {
                     loc6 = _renderers[loc4];
+                }
                 else
                 {
                     loc6 = new _itemRendererClass();
@@ -94,9 +104,13 @@ package net.wg.gui.lobby.header
                 }
                 this.populateRendererData(loc6, loc4);
                 if (_autoSize == flash.text.TextFieldAutoSize.NONE && _buttonWidth > 0)
+                {
                     loc6.width = Math.round(_buttonWidth);
+                }
                 else if (_autoSize != flash.text.TextFieldAutoSize.NONE)
+                {
                     loc6.autoSize = _autoSize;
+                }
                 loc6.validateNow();
                 if (loc6.width + _spacing + loc1 < MAX_WIDTH)
                 {
@@ -127,7 +141,9 @@ package net.wg.gui.lobby.header
                     if (loc9)
                     {
                         if (container.contains(loc9))
+                        {
                             container.removeChild(loc9);
+                        }
                         _renderers.splice(loc8, 1);
                     }
                     --loc8;
@@ -146,9 +162,13 @@ package net.wg.gui.lobby.header
             arg1.data = _dataProvider.requestItemAt(arg2);
             arg1.selected = arg2 == selectedIndex;
             if (_dataProvider[arg2].textColor)
+            {
                 net.wg.gui.components.controls.SoundButtonEx(arg1).textColor = _dataProvider[arg2].textColor;
+            }
             if (_dataProvider[arg2].tooltip)
+            {
                 net.wg.gui.components.controls.SoundButtonEx(arg1).tooltip = _dataProvider[arg2].tooltip;
+            }
             return;
         }
 

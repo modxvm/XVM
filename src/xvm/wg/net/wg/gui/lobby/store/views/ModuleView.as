@@ -31,7 +31,9 @@ package net.wg.gui.lobby.store.views
                 var loc2:*=0;
                 var loc3:*=this._kindsArr;
                 for each (loc1 in loc3) 
+                {
                     loc1.dispose();
+                }
                 this._kindsArr.splice(0, this._kindsArr.length);
                 this._kindsArr = null;
             }
@@ -92,7 +94,9 @@ package net.wg.gui.lobby.store.views
         protected override function onTagsArrayRequest():Array
         {
             if (getUIName() == net.wg.data.constants.generated.STORE_TYPES.SHOP) 
+            {
                 return [new net.wg.gui.lobby.store.views.base.ViewUIElementVO("locked", this.lockedChkBx), new net.wg.gui.lobby.store.views.base.ViewUIElementVO("onVehicle", onVehicleChkBx), new net.wg.gui.lobby.store.views.base.ViewUIElementVO("inHangar", this.inHangarChkBx)];
+            }
             return [new net.wg.gui.lobby.store.views.base.ViewUIElementVO("onVehicle", onVehicleChkBx)];
         }
 
@@ -115,7 +119,9 @@ package net.wg.gui.lobby.store.views
         internal function getKindsArray():Array
         {
             if (this._kindsArr == null) 
+            {
                 this._kindsArr = [new net.wg.gui.lobby.store.views.base.ViewUIElementVO("vehicleGun", this.vehicleGunChkBx), new net.wg.gui.lobby.store.views.base.ViewUIElementVO("vehicleTurret", this.vehicleTurretChkBx), new net.wg.gui.lobby.store.views.base.ViewUIElementVO("vehicleEngine", this.vehicleEngineChkBx), new net.wg.gui.lobby.store.views.base.ViewUIElementVO("vehicleChassis", this.vehicleChassisChkBx), new net.wg.gui.lobby.store.views.base.ViewUIElementVO("vehicleRadio", this.vehicleRadioChkBx)];
+            }
             return this._kindsArr;
         }
 

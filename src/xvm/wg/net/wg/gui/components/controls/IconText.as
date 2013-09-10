@@ -24,7 +24,9 @@ package net.wg.gui.components.controls
         public function set textColor(arg1:Number):void
         {
             if (this._textColor == arg1) 
+            {
                 return;
+            }
             this._textColor = arg1;
             invalidate();
             return;
@@ -38,7 +40,9 @@ package net.wg.gui.components.controls
         protected function handleMouseRollOut(arg1:flash.events.MouseEvent):void
         {
             if (!enabled) 
+            {
                 return;
+            }
             App.toolTipMgr.hide();
             return;
         }
@@ -46,9 +50,13 @@ package net.wg.gui.components.controls
         protected function handleMouseRollOver(arg1:flash.events.MouseEvent):void
         {
             if (!enabled) 
+            {
                 return;
+            }
             if (this.toolTip) 
+            {
                 App.toolTipMgr.showComplex(this.toolTip);
+            }
             return;
         }
 
@@ -67,7 +75,9 @@ package net.wg.gui.components.controls
         public function set toolTip(arg1:String):void
         {
             if (this._toolTip == arg1) 
+            {
                 return;
+            }
             this._toolTip = arg1;
             invalidate();
             return;
@@ -89,36 +99,64 @@ package net.wg.gui.components.controls
                 this.textField.antiAliasType = this._antiAliasing;
                 this.textField.height = _height;
                 if (this._styleSheet) 
+                {
                     this.textField.styleSheet = this._styleSheet;
+                }
                 this.textField.text = this.text;
                 if (!this._styleSheet) 
+                {
                     this.textField.setTextFormat(this._textFormat);
+                }
                 this.textField.y = this.textFieldYOffset;
                 if (this.iconClip) 
                 {
                     if (this._iconPosition != net.wg.data.constants.IconTextPosition.LEFT) 
+                    {
                         this.textField.x = 0;
+                    }
                     else 
+                    {
                         this.textField.x = this.iconClip.width + this.xCorrect;
+                    }
                     loc1 = Math.round(this.textField.width * scaleX);
                     if (this._fitIconPosition) 
+                    {
                         loc1 = Math.min(this.textField.textWidth, loc1);
+                    }
                     loc2 = 0;
                     if (this._iconPosition != net.wg.data.constants.IconTextPosition.LEFT) 
+                    {
                         if (this._textAlign != flash.text.TextFormatAlign.RIGHT) 
+                        {
                             if (this._textAlign != flash.text.TextFormatAlign.LEFT) 
+                            {
                                 loc2 = (_width + loc1 - this._iconWidth) / 2;
+                            }
                             else 
+                            {
                                 loc2 = loc1;
+                            }
+                        }
                         else 
+                        {
                             loc2 = _width - this._iconWidth;
+                        }
+                    }
                     else if (this._textAlign != flash.text.TextFormatAlign.LEFT) 
+                    {
                         if (this._textAlign != flash.text.TextFormatAlign.RIGHT) 
+                        {
                             loc2 = (_width - loc1 - this._iconWidth) / 2;
+                        }
                         else 
+                        {
                             loc2 = _width - loc1 - this._iconWidth;
+                        }
+                    }
                     else 
+                    {
                         loc2 = 0;
+                    }
                     this.iconClip.x = Math.round(loc2 * this.iconClip.scaleX);
                     this.iconClip.gotoAndStop(this._icon);
                     this.iconClip.visible = !(this._icon == "empty");
@@ -148,7 +186,9 @@ package net.wg.gui.components.controls
         public function set textFieldYOffset(arg1:Number):void
         {
             if (arg1 == this._textFieldYOffset) 
+            {
                 return;
+            }
             this._textFieldYOffset = arg1;
             invalidate();
             return;
@@ -162,7 +202,9 @@ package net.wg.gui.components.controls
         public function set icon(arg1:String):void
         {
             if (this._icon == arg1) 
+            {
                 return;
+            }
             this._icon = arg1;
             invalidate();
             return;
@@ -176,10 +218,14 @@ package net.wg.gui.components.controls
         public function set text(arg1:String):void
         {
             if (this._text == arg1) 
+            {
                 return;
+            }
             this._text = arg1;
             if (!(this._text == "") && !(this._text == null) && !(this._text == null)) 
+            {
                 this.iconClip.visible = true;
+            }
             invalidate();
             return;
         }
@@ -220,7 +266,9 @@ package net.wg.gui.components.controls
         public function set iconPosition(arg1:String):void
         {
             if (this._iconPosition == arg1) 
+            {
                 return;
+            }
             this._iconPosition = arg1;
             invalidate();
             return;
@@ -234,7 +282,9 @@ package net.wg.gui.components.controls
         public function set antiAliasing(arg1:String):void
         {
             if (this._antiAliasing == arg1) 
+            {
                 return;
+            }
             this._antiAliasing = arg1;
             invalidate();
             return;
@@ -248,7 +298,9 @@ package net.wg.gui.components.controls
         public function set fitIconPosition(arg1:Boolean):void
         {
             if (this._fitIconPosition == arg1) 
+            {
                 return;
+            }
             this._fitIconPosition = arg1;
             invalidate();
             return;
@@ -262,7 +314,9 @@ package net.wg.gui.components.controls
         public function set textAlign(arg1:String):void
         {
             if (this._textAlign == arg1) 
+            {
                 return;
+            }
             this._textAlign = arg1;
             invalidate();
             return;
@@ -276,7 +330,9 @@ package net.wg.gui.components.controls
         public function set textFont(arg1:String):void
         {
             if (this._textFont == arg1) 
+            {
                 return;
+            }
             this._textFont = arg1;
             invalidate();
             return;
@@ -290,7 +346,9 @@ package net.wg.gui.components.controls
         public function set textSize(arg1:Number):void
         {
             if (this._textSize == arg1) 
+            {
                 return;
+            }
             this._textSize = arg1;
             invalidate();
             return;

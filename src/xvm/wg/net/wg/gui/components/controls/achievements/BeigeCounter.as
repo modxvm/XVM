@@ -37,7 +37,9 @@ package net.wg.gui.components.controls.achievements
                     {
                         loc2 = this._labels[loc1];
                         if (loc2.name == "level" + this._classValue) 
+                        {
                             gotoAndStop(loc2.name);
+                        }
                         ++loc1;
                     }
                 }

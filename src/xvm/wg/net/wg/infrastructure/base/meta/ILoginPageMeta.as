@@ -1,7 +1,7 @@
-package net.wg.infrastructure.base.meta
+package net.wg.infrastructure.base.meta 
 {
     import flash.events.*;
-
+    
     public interface ILoginPageMeta extends flash.events.IEventDispatcher
     {
         function onLoginS(arg1:String, arg2:String, arg3:String):void;
@@ -26,7 +26,7 @@ package net.wg.infrastructure.base.meta
 
         function isLoginInvalidS(arg1:String):Boolean;
 
-        function as_setDefaultValues(arg1:String, arg2:String, arg3:Boolean, arg4:Boolean, arg5:Boolean):void;
+        function as_setDefaultValues(arg1:String, arg2:String, arg3:Boolean, arg4:Boolean, arg5:Boolean, arg6:Boolean):void;
 
         function as_setErrorMessage(arg1:String, arg2:int):void;
 

@@ -61,7 +61,9 @@ package net.wg.gui.lobby.hangar.maintenance
         {
             var loc1:*=true;
             if (this.vehicleIdOld && this.maintenanceData) 
+            {
                 loc1 = !(this.vehicleIdOld == this.maintenanceData.vehicleId);
+            }
             return loc1;
         }
 
@@ -78,7 +80,9 @@ package net.wg.gui.lobby.hangar.maintenance
             this.updateShellsBlock();
             this.updateTotalPrice();
             if (loc1) 
+            {
                 loc1.dispose();
+            }
             return;
         }
 
@@ -86,16 +90,24 @@ package net.wg.gui.lobby.hangar.maintenance
         {
             var loc1:*=null;
             if (this.equipmentList) 
+            {
                 this.equipmentList.splice(0);
+            }
             if (this.equipmentSetup) 
+            {
                 this.equipmentSetup.splice(0);
+            }
             if (this.equipmentInstalled) 
+            {
                 this.equipmentInstalled.splice(0);
+            }
             this.equipmentList = [];
             var loc2:*=0;
             var loc3:*=arg3;
             for each (loc1 in loc3) 
+            {
                 this.equipmentList.push(new net.wg.gui.lobby.hangar.maintenance.data.ModuleVO(loc1));
+            }
             this.equipmentSetup = arg2;
             this.equipmentInstalled = arg1;
             invalidate(EQUIPMENT);
@@ -136,11 +148,17 @@ package net.wg.gui.lobby.hangar.maintenance
                 this.updateShellsBlock();
             }
             if (isInvalid(EQUIPMENT)) 
+            {
                 this.updateEquipmentBlock(this.equipmentInstalled, this.equipmentSetup, this.equipmentList);
+            }
             if (isInvalid(net.wg.gui.events.ShellRendererEvent.TOTAL_PRICE_CHANGED, MONEY, EQUIPMENT)) 
+            {
                 this.updateTotalPrice();
+            }
             if (invalidate(EQUIPMENT_CHANGED)) 
+            {
                 getEquipmentS(this.eqItem1.selectedItem ? this.eqItem1.selectedItem.id : undefined, this.eqItem1.selectedItem ? this.eqItem1.selectedItem.currency : undefined, this.eqItem2.selectedItem ? this.eqItem2.selectedItem.id : undefined, this.eqItem2.selectedItem ? this.eqItem2.selectedItem.currency : undefined, this.eqItem3.selectedItem ? this.eqItem3.selectedItem.id : undefined, this.eqItem3.selectedItem ? this.eqItem3.selectedItem.currency : undefined, undefined);
+            }
             return;
         }
 
@@ -253,15 +271,27 @@ package net.wg.gui.lobby.hangar.maintenance
         {
             var loc1:*=null;
             if (arg1.target != this.repairAuto) 
+            {
                 if (arg1.target != this.shellsAuto) 
+                {
                     if (arg1.target == this.eqAuto) 
+                    {
                         loc1 = TOOLTIPS.EQUIPMENT_AUTO;
+                    }
+                }
                 else 
+                {
                     loc1 = TOOLTIPS.AMMO_AUTO;
+                }
+            }
             else 
+            {
                 loc1 = TOOLTIPS.REPAIR_AUTO;
+            }
             if (loc1) 
+            {
                 App.toolTipMgr.showComplex(loc1, null);
+            }
             return;
         }
 
@@ -292,10 +322,14 @@ package net.wg.gui.lobby.hangar.maintenance
                 loc4.removeEvent(loc2, net.wg.gui.events.EquipmentEvent.EQUIPMENT_CHANGE, this.onEquipmentChange);
                 loc3.toggleSelectChange(false);
                 if (loc2.selectedItem) 
+                {
                     loc2.selectedItem.currency = loc3.selectedItem ? loc3.selectedItem.currency : net.wg.data.constants.Values.EMPTY_STR;
+                }
                 loc3.select.selectedIndex = arg1.changePos;
                 if (loc3.selectedItem) 
+                {
                     loc3.selectedItem.currency = arg1.changeCurrency;
+                }
                 loc3.toggleSelectChange(true);
                 loc4.addEvent(loc3, net.wg.gui.events.EquipmentEvent.EQUIPMENT_CHANGE, this.onEquipmentChange);
                 loc4.addEvent(loc2, net.wg.gui.events.EquipmentEvent.EQUIPMENT_CHANGE, this.onEquipmentChange);
@@ -303,7 +337,9 @@ package net.wg.gui.lobby.hangar.maintenance
             }
             getEquipmentS(this.eqItem1.selectedItem ? this.eqItem1.selectedItem.id : undefined, this.eqItem1.selectedItem ? this.eqItem1.selectedItem.currency : undefined, this.eqItem2.selectedItem ? this.eqItem2.selectedItem.id : undefined, this.eqItem2.selectedItem ? this.eqItem2.selectedItem.currency : undefined, this.eqItem3.selectedItem ? this.eqItem3.selectedItem.id : undefined, this.eqItem3.selectedItem ? this.eqItem3.selectedItem.currency : undefined, (arg1.target as net.wg.gui.lobby.hangar.maintenance.EquipmentItem).index);
             if (!this.eqChanged) 
+            {
                 !(this.eqChanged == this.eqOrderChanged);
+            }
             return;
         }
 
@@ -319,12 +355,16 @@ package net.wg.gui.lobby.hangar.maintenance
             this.repairIndicator.maximum = this.maintenanceData.maxRepairCost;
             this.repairIndicator.value = this.maintenanceData.maxRepairCost - this.maintenanceData.repairCost;
             if (this.maintenanceData.maxRepairCost == 0) 
+            {
                 this.repairIndicator.label = "";
+            }
             else 
             {
                 loc2 = Math.round((this.maintenanceData.maxRepairCost - this.maintenanceData.repairCost) * 100 / this.maintenanceData.maxRepairCost);
                 if (loc2 < 0) 
+                {
                     loc2 = 0;
+                }
                 this.repairIndicator.label = loc2 + PERCENT_CHAR;
             }
             return;
@@ -337,7 +377,9 @@ package net.wg.gui.lobby.hangar.maintenance
             var loc5:*=null;
             var loc6:*=null;
             if (this.isResetWindow()) 
+            {
                 this.shellsOrderChanged = false;
+            }
             else if (!arg1) 
             {
                 loc6 = [];
@@ -350,8 +392,11 @@ package net.wg.gui.lobby.hangar.maintenance
                     for each (loc5 in loc10) 
                     {
                         if (loc4.compactDescr != loc5.compactDescr) 
+                        {
                             continue;
-                        loc5.userCount = loc4.userCount;
+                        }
+                        loc5.setUserCount(loc4.userCount);
+                        loc5.possibleMax = loc4.possibleMax;
                         loc5.currency = loc4.currency;
                         loc6.push(loc5);
                     }
@@ -368,7 +413,9 @@ package net.wg.gui.lobby.hangar.maintenance
             if (this.shells.dataProvider != this.maintenanceData.shells) 
             {
                 if (this.shells.dataProvider) 
+                {
                     this.shells.dataProvider.cleanUp();
+                }
                 this.shells.dataProvider = new scaleform.clik.data.DataProvider(this.maintenanceData.shells);
             }
             var loc1:*=App.utils.events;
@@ -421,10 +468,14 @@ package net.wg.gui.lobby.hangar.maintenance
                     }
                 }
                 else 
+                {
                     loc7 = arg3.slice(0);
+                }
                 loc5.setData(loc7, loc2, arg2, arg1, this.maintenanceData.credits, this.maintenanceData.gold);
                 if (arg1[loc2] != 0) 
+                {
                     loc10 = loc10 + 1;
+                }
                 ++loc2;
             }
             this.eqIndicator.maximum = loc4.length;
@@ -510,11 +561,15 @@ package net.wg.gui.lobby.hangar.maintenance
             {
                 loc1 = loc1 + loc3.userCount;
                 if (loc3.userCount == loc3.count) 
+                {
                     continue;
+                }
                 this.shellsCountChanged = true;
             }
             if (this.shellsOrderChanged && this.maintenanceData.gold >= loc2.gold && this.maintenanceData.credits >= loc2.credits) 
+            {
                 this.buy_ammo = false;
+            }
             this.shellsIndicator.maximum = this.maintenanceData.maxAmmo;
             this.shellsIndicator.value = loc1;
             this.shellsIndicator.label = loc1 + SPLITTER_CHAR + this.maintenanceData.maxAmmo;
@@ -526,7 +581,9 @@ package net.wg.gui.lobby.hangar.maintenance
             for each (loc7 in loc9) 
             {
                 if (!loc7.selectedItem) 
+                {
                     continue;
+                }
                 loc5 = loc5 + 1;
             }
             this.eqIndicator.value = loc5;
@@ -542,7 +599,9 @@ package net.wg.gui.lobby.hangar.maintenance
             var loc3:*=0;
             var loc4:*=this.maintenanceData.shells;
             for each (loc2 in loc4) 
+            {
                 loc1[loc2.currency] = loc1[loc2.currency] + loc2.buyShellsCount * loc2.price;
+            }
             return loc1;
         }
 
@@ -556,7 +615,9 @@ package net.wg.gui.lobby.hangar.maintenance
             for each (loc3 in loc5) 
             {
                 if (!(loc3.selectedItem && loc3.selectedItem.count == 0 && this.equipmentInstalled.indexOf(loc3.selectedItem.compactDescr) == -1)) 
+                {
                     continue;
+                }
                 loc1[loc3.selectedItem.currency] = loc1[loc3.selectedItem.currency] + loc3.selectedItem.price;
             }
             return loc1;
@@ -565,7 +626,9 @@ package net.wg.gui.lobby.hangar.maintenance
         internal function updateRefillSettings(arg1:flash.events.Event):void
         {
             if (this.maintenanceData) 
+            {
                 setRefillSettingsS(this.maintenanceData.vehicleId, this.repairAuto.selected, this.shellsAuto.selected, this.eqAuto.selected);
+            }
             return;
         }
 
@@ -602,7 +665,9 @@ package net.wg.gui.lobby.hangar.maintenance
             for each (loc2 in loc10) 
             {
                 if (!(loc2.userCount - loc2.count)) 
+                {
                     continue;
+                }
                 loc1 = true;
                 break;
             }

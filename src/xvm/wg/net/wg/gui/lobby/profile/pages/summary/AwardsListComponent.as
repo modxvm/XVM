@@ -29,6 +29,7 @@ package net.wg.gui.lobby.profile.pages.summary
                 invalidate(TEXT_INVALID);
             }
             if (isInvalid(TEXT_INVALID)) 
+            {
                 if (this._isShowError) 
                 {
                     this.textField.text = this._errorText;
@@ -39,6 +40,7 @@ package net.wg.gui.lobby.profile.pages.summary
                     this.textField.text = this._label;
                     this.textField.y = 0;
                 }
+            }
             return;
         }
 

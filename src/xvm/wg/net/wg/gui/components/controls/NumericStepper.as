@@ -25,14 +25,18 @@ package net.wg.gui.components.controls
         {
             invalidateSize();
             if (!(constraints == null) && !constraintsDisabled) 
+            {
                 constraints.updateElement("textField", textField);
+            }
             return;
         }
 
         protected override function onNext(arg1:scaleform.clik.events.ButtonEvent):void
         {
             if (!isNaN(this._manualValue)) 
+            {
                 this.normalizeValue();
+            }
             super.onNext(arg1);
             var loc1:*;
             this.selectionPosEnd = loc1 = String(value).length;
@@ -44,7 +48,9 @@ package net.wg.gui.components.controls
         protected override function onPrev(arg1:scaleform.clik.events.ButtonEvent):void
         {
             if (!isNaN(this._manualValue)) 
+            {
                 this.normalizeValue();
+            }
             super.onPrev(arg1);
             var loc1:*;
             this.selectionPosEnd = loc1 = String(value).length;
@@ -59,10 +65,14 @@ package net.wg.gui.components.controls
             loc1.cancelTask(this.normalizeValue);
             var loc2:*=stripNulls(textField.text);
             if (this.integral) 
+            {
                 loc2 = stripDecimal(loc2);
+            }
             var loc3:*=Number(loc2);
             if (textField.text == "" || isNaN(loc3)) 
+            {
                 loc3 = _minimum;
+            }
             this._manualValue = loc3;
             loc1.scheduleTask(this.normalizeValue, 1000);
             return;
@@ -83,7 +93,9 @@ package net.wg.gui.components.controls
         public function set textFilter(arg1:Array):void
         {
             if (this._textFilter == arg1) 
+            {
                 return;
+            }
             this._textFilter = arg1;
             this.isTextFilterChanged = true;
             invalidate();
@@ -146,7 +158,9 @@ package net.wg.gui.components.controls
         protected static function stripNulls(arg1:String):String
         {
             while (arg1.length > 1 && !(arg1.substr(0, 2) == "0.") && arg1.length > 0 && arg1.substr(0, 1) == "0") 
+            {
                 arg1 = arg1.substr(1, (arg1.length - 1));
+            }
             return arg1;
         }
 
@@ -168,7 +182,9 @@ package net.wg.gui.components.controls
         public override function set maximum(arg1:Number):void
         {
             if (_maximum == arg1) 
+            {
                 return;
+            }
             _maximum = stepSize * Math.floor(arg1 / stepSize);
             this.value = _value;
             return;
@@ -177,7 +193,9 @@ package net.wg.gui.components.controls
         public override function set minimum(arg1:Number):void
         {
             if (_minimum == arg1) 
+            {
                 return;
+            }
             _minimum = stepSize * Math.floor(arg1 / stepSize);
             this.value = _value;
             return;
@@ -191,7 +209,9 @@ package net.wg.gui.components.controls
         public function set integral(arg1:Boolean):void
         {
             if (this._integral == arg1) 
+            {
                 return;
+            }
             this._integral = arg1;
             this._integralDirty = true;
             invalidate();
@@ -202,11 +222,15 @@ package net.wg.gui.components.controls
         {
             arg1 = lockValue(arg1);
             if (arg1 == _value) 
+            {
                 return;
+            }
             var loc1:*=_value;
             _value = arg1;
             if (initialized) 
+            {
                 dispatchEventAndSound(new scaleform.clik.events.IndexEvent(scaleform.clik.events.IndexEvent.INDEX_CHANGE, true, false, value, loc1, null));
+            }
             this.isValueChanged = true;
             invalidate();
             return;
@@ -220,7 +244,9 @@ package net.wg.gui.components.controls
         public function set textColor(arg1:Number):void
         {
             if (this._textColor == arg1) 
+            {
                 return;
+            }
             this._textColor = arg1;
             this.isTextColorChanged = true;
             invalidate();
@@ -235,11 +261,17 @@ package net.wg.gui.components.controls
         protected function scrollWheel(arg1:Number):void
         {
             if (!enabled) 
+            {
                 return;
+            }
             if (arg1 > 0) 
+            {
                 this.onNext(null);
+            }
             else 
+            {
                 this.onPrev(null);
+            }
             return;
         }
 
@@ -277,16 +309,23 @@ package net.wg.gui.components.controls
         public override function handleInput(arg1:scaleform.clik.events.InputEvent):void
         {
             if (arg1.isDefaultPrevented()) 
+            {
                 return;
+            }
             var loc1:*=arg1.details;
             var loc2:*=loc1.value == scaleform.clik.constants.InputValue.KEY_DOWN || loc1.value == scaleform.clik.constants.InputValue.KEY_HOLD;
             var loc3:*=loc1.navEquivalent;
             switch (loc3) 
             {
                 case scaleform.clik.constants.NavigationCode.UP:
+                {
                     if (_value < _maximum) 
+                    {
                         if (loc2) 
+                        {
                             this.onNext(null);
+                        }
+                    }
                     else 
                     {
                         this.selectionPosEnd = loc3 = String(value).length;
@@ -296,32 +335,53 @@ package net.wg.gui.components.controls
                     }
                     arg1.handled = true;
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.LEFT:
                 case scaleform.clik.constants.NavigationCode.RIGHT:
+                {
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.DOWN:
+                {
                     if (loc2 && _value > _minimum) 
+                    {
                         this.onPrev(null);
+                    }
                     arg1.handled = true;
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.HOME:
+                {
                     if (!loc2 && !loc1.shiftKey) 
+                    {
                         this.value = _minimum;
+                    }
                     arg1.handled = true;
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.END:
+                {
                     if (!loc2 && !loc1.shiftKey) 
+                    {
                         this.value = _maximum;
+                    }
                     arg1.handled = true;
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.ENTER:
+                {
                     if (!loc2) 
+                    {
                         if (loc1.code == flash.ui.Keyboard.ENTER) 
                         {
                             this.normalizeValue();
                             if (initialized) 
+                            {
                                 dispatchEvent(new net.wg.gui.events.NumericStepperEvent(net.wg.gui.events.NumericStepperEvent.SUBMIT));
+                            }
                         }
+                    }
+                }
             }
             return;
         }

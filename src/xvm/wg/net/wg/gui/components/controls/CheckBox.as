@@ -52,7 +52,9 @@ package net.wg.gui.components.controls
         public function set textFont(arg1:String):void
         {
             if (this._textFont == arg1) 
+            {
                 return;
+            }
             this._textFont = arg1;
             invalidate(this.TEXT_FORMAT_INV);
             return;
@@ -66,21 +68,27 @@ package net.wg.gui.components.controls
         public override function set label(arg1:String):void
         {
             if (!this._dynamicFrameUpdating || arg1.length > 0) 
+            {
                 super.label = arg1;
+            }
             return;
         }
 
         public override function set data(arg1:Object):void
         {
             if (!this._dynamicFrameUpdating || arg1.length > 0) 
+            {
                 super.data = arg1;
+            }
             return;
         }
 
         public function set textSize(arg1:Number):void
         {
             if (this._textSize == arg1) 
+            {
                 return;
+            }
             this._textSize = arg1;
             invalidate(this.TEXT_FORMAT_INV);
             return;
@@ -94,7 +102,9 @@ package net.wg.gui.components.controls
         public function set textColor(arg1:Number):void
         {
             if (this._textColor == arg1) 
+            {
                 return;
+            }
             this._textColor = arg1;
             invalidate(this.TEXT_FORMAT_INV);
             return;
@@ -108,7 +118,9 @@ package net.wg.gui.components.controls
         public function set disabledTextAlpha(arg1:Number):void
         {
             if (this._disabledTextAlpha == arg1) 
+            {
                 return;
+            }
             this._disabledTextAlpha = arg1;
             invalidate(this.TEXT_FORMAT_INV);
             return;
@@ -119,7 +131,9 @@ package net.wg.gui.components.controls
             super.configUI();
             buttonMode = true;
             if (App.soundMgr != null) 
+            {
                 App.soundMgr.addSoundsHdlrs(this);
+            }
             return;
         }
 
@@ -128,6 +142,7 @@ package net.wg.gui.components.controls
             var loc1:*=null;
             super.draw();
             if (isInvalid(this.TEXT_FORMAT_INV)) 
+            {
                 if (textField) 
                 {
                     textField.textColor = this._textColor;
@@ -137,6 +152,7 @@ package net.wg.gui.components.controls
                     textField.setTextFormat(loc1);
                     textField.alpha = enabled ? 1 : this._disabledTextAlpha;
                 }
+            }
             return;
         }
 

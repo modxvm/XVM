@@ -20,14 +20,18 @@ package net.wg.gui.components.controls
         protected function setSortMask(arg1:Boolean):void
         {
             if (arg1) 
+            {
                 this.sortMask = this.sortMask | Array.DESCENDING;
+            }
             return;
         }
 
         protected override function draw():void
         {
             if (isInvalid(SORTING_INVALID)) 
+            {
                 this.sortWithMask(this.sortPropName, this.sortMask);
+            }
             super.draw();
             return;
         }

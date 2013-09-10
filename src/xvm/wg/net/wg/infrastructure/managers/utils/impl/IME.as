@@ -101,7 +101,9 @@ package net.wg.infrastructure.managers.utils.impl
         public function setVisible(arg1:Boolean):void
         {
             if (App.globalVarsMgr.isShowLangaugeBarS()) 
+            {
                 this._container.visible = arg1;
+            }
             return;
         }
 

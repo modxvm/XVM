@@ -17,9 +17,13 @@ package net.wg.gui.lobby.techtree.data.state
         {
             var loc1:*=super.resolveProps(arg1, arg2, arg3);
             if ((arg2 & net.wg.gui.lobby.techtree.constants.NodeState.UNLOCKED) > 0) 
+            {
                 loc1 = (arg2 & net.wg.gui.lobby.techtree.constants.NodeState.IN_INVENTORY) > 0 ? this.rootInInventory : this.rootNotInventory;
+            }
             else if ((arg1 & net.wg.gui.lobby.techtree.constants.NodeState.AUTO_UNLOCKED) > 0) 
+            {
                 loc1 = this.autoUnlocked;
+            }
             return loc1;
         }
 

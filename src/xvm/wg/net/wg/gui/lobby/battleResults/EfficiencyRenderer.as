@@ -29,8 +29,12 @@ package net.wg.gui.lobby.battleResults
         {
             this.data = arg1;
             if (arg1) 
+            {
                 if (arg1.hoveredKind) 
+                {
                     arg1.hoveredKind = null;
+                }
+            }
             this._dataDirty = true;
             invalidate();
             return;
@@ -65,7 +69,9 @@ package net.wg.gui.lobby.battleResults
         internal function handleIconRoll(arg1:flash.events.MouseEvent):void
         {
             if (arg1.type != flash.events.MouseEvent.ROLL_OVER) 
+            {
                 dispatchEvent(new net.wg.gui.events.FinalStatisticEvent(net.wg.gui.events.FinalStatisticEvent.EFFENSY_ICON_ROLL_OUT));
+            }
             else 
             {
                 this.data.isDisabled = !arg1.target.enabled;
@@ -94,7 +100,9 @@ package net.wg.gui.lobby.battleResults
             if (this._dataDirty) 
             {
                 if (this.data == null) 
+                {
                     this.visible = false;
+                }
                 else 
                 {
                     this.playerName.textColor = 13224374;
@@ -130,7 +138,9 @@ package net.wg.gui.lobby.battleResults
                         this.killIcon.enabled = false;
                         this.killIcon.kind = this.data.isAlly ? net.wg.gui.lobby.battleResults.EfficiencyIconRenderer.TEAMKILL : net.wg.gui.lobby.battleResults.EfficiencyIconRenderer.KILL;
                         if (this.data.deathReason > -1) 
+                        {
                             this.killIcon.enabled = true;
+                        }
                         if (this.data.killed) 
                         {
                             this.playerName.textColor = 6381391;
@@ -139,7 +149,9 @@ package net.wg.gui.lobby.battleResults
                             this.vehicleIcon.filters = [this.getDimmFilter()];
                         }
                         else 
+                        {
                             this.vehicleIcon.filters = [];
+                        }
                         if (this.data.damageDealt > 0) 
                         {
                             this.damageIcon.enabled = true;
@@ -151,9 +163,13 @@ package net.wg.gui.lobby.battleResults
                             this.critsIcon.value = this.data.critsCount;
                         }
                         if (this.data.damageAssisted > 0) 
+                        {
                             this.evilIcon.enabled = true;
+                        }
                         if (this.data.spotted > 0) 
+                        {
                             this.spottedIcon.enabled = true;
+                        }
                     }
                 }
                 this._dataDirty = false;
@@ -202,7 +218,9 @@ package net.wg.gui.lobby.battleResults
         public function set selected(arg1:Boolean):void
         {
             if (this._selected == arg1) 
+            {
                 return;
+            }
             this._selected = arg1;
             return;
         }

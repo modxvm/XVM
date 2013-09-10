@@ -34,7 +34,9 @@ package net.wg.gui.lobby.window
             {
                 sortMask = Array.CASEINSENSITIVE;
                 if (!arg1) 
+                {
                     sortMask = sortMask | Array.DESCENDING;
+                }
                 sortPropName = "vehicleName";
                 invalidate(SORTING_INVALID);
             }

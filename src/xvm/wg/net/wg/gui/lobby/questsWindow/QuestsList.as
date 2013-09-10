@@ -36,7 +36,9 @@ package net.wg.gui.lobby.questsWindow
                 (loc8 = getRendererAt(loc7)).x = Math.round(loc4);
                 loc8.y = Math.round(loc5 + loc7 * loc2);
                 if (!loc6) 
+                {
                     loc8.validateNow();
+                }
                 ++loc7;
             }
             drawScrollBar();

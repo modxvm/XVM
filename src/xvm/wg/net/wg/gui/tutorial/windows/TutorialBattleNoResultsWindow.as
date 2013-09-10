@@ -23,7 +23,9 @@ package net.wg.gui.tutorial.windows
         {
             super.draw();
             if (isInvalid(scaleform.clik.constants.InvalidationType.DATA) && this.data) 
+            {
                 this.textField.text = this.data.text;
+            }
             return;
         }
 

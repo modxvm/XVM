@@ -38,11 +38,15 @@ package net.wg.gui.components.common.video.advanced
             var loc1:*=0;
             loc1 = videoPlayer.status;
             if (loc1 != net.wg.gui.components.common.video.PlayerStatus.PLAYING) 
+            {
                 this.stopTimer();
+            }
             else 
             {
                 if (!this.timer) 
+                {
                     this.timer = new flash.utils.Timer(DISPLAY_TIMER_UPDATE_DELAY);
+                }
                 this.timer.addEventListener(flash.events.TimerEvent.TIMER, this.updateTime, false, 0, true);
                 this.timer.reset();
                 this.timer.start();

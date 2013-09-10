@@ -71,7 +71,9 @@ package net.wg.gui.prebattle.company
         public function as_setMaxCountLimitLabel(arg1:String):void
         {
             if (this.crewStuffField) 
+            {
                 this.crewStuffField.htmlText = arg1;
+            }
             return;
         }
 
@@ -83,19 +85,37 @@ package net.wg.gui.prebattle.company
             while (loc2 < loc1) 
             {
                 if ((loc3 = arg1[loc2]).vehClass != net.wg.data.constants.VehicleTypes.HEAVY_TANK) 
+                {
                     if (loc3.vehClass != net.wg.data.constants.VehicleTypes.MEDIUM_TANK) 
+                    {
                         if (loc3.vehClass != net.wg.data.constants.VehicleTypes.LIGHT_TANK) 
+                        {
                             if (loc3.vehClass != net.wg.data.constants.VehicleTypes.AT_SPG) 
+                            {
                                 if (loc3.vehClass == net.wg.data.constants.VehicleTypes.SPG) 
+                                {
                                     this.spgLevelField.htmlText = loc3.limit;
+                                }
+                            }
                             else 
+                            {
                                 this.atspgLevelField.htmlText = loc3.limit;
+                            }
+                        }
                         else 
+                        {
                             this.lightLevelField.htmlText = loc3.limit;
+                        }
+                    }
                     else 
+                    {
                         this.mediumLevelField.htmlText = loc3.limit;
+                    }
+                }
                 else 
+                {
                     this.heavyLevelField.htmlText = loc3.limit;
+                }
                 ++loc2;
             }
             return;
@@ -136,7 +156,9 @@ package net.wg.gui.prebattle.company
                 this.commentText.visible = false;
                 this.forseSetTextToTextInput(this.lastComment);
                 if (!this.commentInput.focused) 
+                {
                     App.utils.scheduler.envokeInNextFrame(this.updateFocus, this.commentInput);
+                }
                 App.utils.scheduler.envokeInNextFrame(this.changeVisibleState);
             }
             else 
@@ -171,7 +193,9 @@ package net.wg.gui.prebattle.company
         internal function changeVisibleState():void
         {
             if (this.commentInput.visible != this.editState) 
+            {
                 this.commentInput.visible = this.editState;
+            }
             return;
         }
 
@@ -213,7 +237,9 @@ package net.wg.gui.prebattle.company
             while (loc2 < loc1) 
             {
                 if ((loc3 = arg2.getRendererAt(loc2) as net.wg.gui.prebattle.controls.TeamMemberRenderer) && loc3.model) 
+                {
                     loc3.isVehicleValid = arg1.indexOf(loc3.model.accID) == -1;
+                }
                 ++loc2;
             }
             return;
@@ -229,15 +255,23 @@ package net.wg.gui.prebattle.company
         internal function enableChangeSettings(arg1:Boolean=false):void
         {
             if (arg1) 
+            {
                 this.commentInput.addEventListener(scaleform.clik.events.InputEvent.INPUT, this.commentInput_inputHandler);
+            }
             else if (this.commentInput.hasEventListener(scaleform.clik.events.InputEvent.INPUT)) 
+            {
                 this.commentInput.removeEventListener(scaleform.clik.events.InputEvent.INPUT, this.commentInput_inputHandler);
+            }
             this.commitEditButton.enabled = arg1;
             this.isOpenCheckbox.enabled = arg1;
             if (arg1) 
+            {
                 this.division.enabled = this._canChangeDivision;
+            }
             else 
+            {
                 this.division.enabled = arg1;
+            }
             return;
         }
 
@@ -245,12 +279,14 @@ package net.wg.gui.prebattle.company
         {
             var loc1:*=null;
             if (this.unassignedList.dataProvider.length > 0) 
+            {
                 if (this.unassignedList.selectedIndex > -1) 
                 {
                     loc1 = this.unassignedList.dataProvider[this.unassignedList.selectedIndex];
                     this.requestToAssignImp(loc1);
                     this.clearCommentEditState();
                 }
+            }
             return;
         }
 
@@ -258,19 +294,23 @@ package net.wg.gui.prebattle.company
         {
             var loc1:*=null;
             if (this.assignedList.dataProvider.length > 0) 
+            {
                 if (this.assignedList.selectedIndex > -1) 
                 {
                     loc1 = this.assignedList.dataProvider[this.assignedList.selectedIndex];
                     this.requestToUnassignImp(loc1);
                     this.clearCommentEditState();
                 }
+            }
             return;
         }
 
         internal function handleMember17ItemDoubleClick(arg1:net.wg.gui.events.ListEventEx):void
         {
             if (this.unassignedList.useRightButtonForSelect == false && arg1.buttonIdx == 1) 
+            {
                 return;
+            }
             this.handleUpClick();
             return;
         }
@@ -278,7 +318,9 @@ package net.wg.gui.prebattle.company
         internal function assignedList_itemDoubleClickHandler(arg1:net.wg.gui.events.ListEventEx):void
         {
             if (this.assignedList.useRightButtonForSelect == false && arg1.buttonIdx == 1) 
+            {
                 return;
+            }
             this.handleDownClick();
             return;
         }
@@ -286,14 +328,18 @@ package net.wg.gui.prebattle.company
         internal function requestToAssignImp(arg1:Object):void
         {
             if (this._canAssignPlayer) 
+            {
                 requestToAssignS(arg1.accID);
+            }
             return;
         }
 
         internal function requestToUnassignImp(arg1:Object):void
         {
             if (this._canUnassignPlayer) 
+            {
                 requestToUnassignS(arg1.accID);
+            }
             return;
         }
 
@@ -312,7 +358,9 @@ package net.wg.gui.prebattle.company
                     App.contextMenuMgr.showUserContextMenu(this, loc1, loc3);
                 }
                 else 
+                {
                     App.contextMenuMgr.hide();
+                }
             }
             return;
         }
@@ -324,7 +372,9 @@ package net.wg.gui.prebattle.company
             var loc3:*=false;
             var loc4:*=null;
             if (!arg1.itemData) 
+            {
                 return;
+            }
             if (arg1.buttonIdx == scaleform.gfx.MouseEventEx.RIGHT_BUTTON) 
             {
                 loc1 = isPlayerCreatorS();
@@ -333,13 +383,19 @@ package net.wg.gui.prebattle.company
                 {
                     loc3 = loc2.uid > -1;
                     if (loc1) 
+                    {
                         loc4 = new net.wg.data.components.BattleSessionCIGenerator(loc3, canKickPlayerS());
+                    }
                     else 
+                    {
                         loc4 = new net.wg.gui.prebattle.squad.SquadWindowCIGenerator(loc3, canKickPlayerS(), true);
+                    }
                     App.contextMenuMgr.showUserContextMenu(this, loc2, loc4);
                 }
                 else 
+                {
                     App.contextMenuMgr.hide();
+                }
             }
             return;
         }
@@ -412,7 +468,9 @@ package net.wg.gui.prebattle.company
         internal function handleOverVehicleStats():void
         {
             if (this.levelTooltip.length > 0) 
+            {
                 App.toolTipMgr.showSpecial(this.levelTooltip, null);
+            }
             return;
         }
 
@@ -425,7 +483,9 @@ package net.wg.gui.prebattle.company
         internal function handleOverTotalStats():void
         {
             if (this.levelTotalTooltip.length > 0) 
+            {
                 App.toolTipMgr.showSpecial(this.levelTotalTooltip, null);
+            }
             return;
         }
 
@@ -444,7 +504,9 @@ package net.wg.gui.prebattle.company
             while (loc2 < loc1) 
             {
                 if ((loc3 = this.division.dataProvider.requestItemAt(loc2)).data == arg1) 
+                {
                     this.division.selectedIndex = loc2;
+                }
                 ++loc2;
             }
             this.division.addEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.handleDivisionChange);
@@ -466,7 +528,9 @@ package net.wg.gui.prebattle.company
             this.assignedDataProvider = new scaleform.clik.data.DataProvider(arg1);
             this.assignedList.dataProvider = this.assignedDataProvider;
             if (this.assignedList.selectedIndex == -1 && this._isPlayerCreator) 
+            {
                 this.assignedList.selectedIndex = 0;
+            }
             this.assignedList.validateNow();
             return;
         }
@@ -476,7 +540,9 @@ package net.wg.gui.prebattle.company
             this.unassignedDataProvider = new scaleform.clik.data.DataProvider(arg1);
             this.unassignedList.dataProvider = this.unassignedDataProvider;
             if (this.unassignedList.selectedIndex == -1 && this._isPlayerCreator) 
+            {
                 this.unassignedList.selectedIndex = 0;
+            }
             this.unassignedList.validateNow();
             return;
         }
@@ -521,7 +587,9 @@ package net.wg.gui.prebattle.company
             else 
             {
                 if (this.isDefaultComment) 
+                {
                     this.commentText.text = "";
+                }
                 this.commentInput.visible = false;
                 this.commentText.visible = true;
             }
@@ -534,12 +602,18 @@ package net.wg.gui.prebattle.company
             this.commentInput.visible = false;
             this.changeEditIcon(false);
             if (this.isDefaultComment) 
+            {
                 this.commentText.text = PREBATTLE.LABELS_COMPANY_DEFAULTCOMMENT;
+            }
             else 
+            {
                 this.commentText.text = org.idmedia.as3commons.util.StringUtils.trim(this.lastComment) != "" ? this.lastComment : PREBATTLE.LABELS_COMPANY_DEFAULTCOMMENT;
+            }
             this.changeAlign(this.isDefaultComment);
             if (this._canChangeComment && !this.isDefaultComment) 
+            {
                 this.commentText.visible = true;
+            }
             return;
         }
 
@@ -564,13 +638,21 @@ package net.wg.gui.prebattle.company
         internal function updateInviteBtn():void
         {
             if (this._canSendInvite) 
+            {
                 this.inviteButton.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onInviteBtnClick);
+            }
             else if (this.inviteButton.hasEventListener(scaleform.clik.events.ButtonEvent.CLICK)) 
+            {
                 this.inviteButton.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onInviteBtnClick);
+            }
             if (this._isPlayerCreator) 
+            {
                 this.inviteButton.enabled = this._canSendInvite;
+            }
             else 
+            {
                 this.inviteButton.visible = this._canSendInvite;
+            }
             return;
         }
 
@@ -674,7 +756,9 @@ package net.wg.gui.prebattle.company
         {
             super.setFocus();
             if (this.channelComponent) 
+            {
                 this.channelComponent.setFocusToInput();
+            }
             return;
         }
 
@@ -719,10 +803,14 @@ package net.wg.gui.prebattle.company
             this.assignedDataProvider.cleanUp();
             this.assignedDataProvider = null;
             if (this.division.hasEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE)) 
+            {
                 this.division.removeEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.handleDivisionChange);
+            }
             this.division.dispose();
             if (this.isOpenCheckbox.hasEventListener(scaleform.clik.events.ButtonEvent.CLICK)) 
+            {
                 this.isOpenCheckbox.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.handleIsOpenChange);
+            }
             this.isOpenCheckbox.dispose();
             App.utils.scheduler.cancelTask(this.enableReadyButton);
             App.utils.scheduler.cancelTask(this.enableChangeSettings);
@@ -759,9 +847,13 @@ package net.wg.gui.prebattle.company
                 this.commentText.visible = false;
             }
             else if (arg1 != "") 
+            {
                 this.commentText.visible = true;
+            }
             if (arg1 != "") 
+            {
                 this.isDefaultComment = false;
+            }
             else 
             {
                 arg1 = PREBATTLE.LABELS_COMPANY_DEFAULTCOMMENT;
@@ -786,7 +878,9 @@ package net.wg.gui.prebattle.company
         internal function handleOverVehicleSPGStats():void
         {
             if (this.levelSPGTooltip.length > 0) 
+            {
                 App.toolTipMgr.showSpecial(this.levelSPGTooltip, null);
+            }
             return;
         }
 
@@ -823,9 +917,13 @@ package net.wg.gui.prebattle.company
                 ++loc4;
             }
             if (arg2) 
+            {
                 this.updateAssignList(loc1);
+            }
             else 
+            {
                 this.updateUnassignList(loc1);
+            }
             return;
         }
 
@@ -854,9 +952,13 @@ package net.wg.gui.prebattle.company
                 }
             }
             if (arg2) 
+            {
                 this.updateAssignList(loc1);
+            }
             else 
+            {
                 this.updateUnassignList(loc1);
+            }
             this.updateMoveButtons();
             return;
         }
@@ -864,7 +966,9 @@ package net.wg.gui.prebattle.company
         public function as_setDivisionsList(arg1:Array, arg2:uint):void
         {
             if (!this.division) 
+            {
                 return;
+            }
             this.division.dataProvider = new scaleform.clik.data.DataProvider(arg1);
             this.division.labelField = "label";
             this.autoSelectDivision(arg2);

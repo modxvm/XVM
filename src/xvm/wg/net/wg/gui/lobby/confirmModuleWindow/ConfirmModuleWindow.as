@@ -66,18 +66,26 @@ package net.wg.gui.lobby.confirmModuleWindow
                     else 
                     {
                         if (this.moduleInfo.currency != net.wg.data.constants.Currencies.GOLD) 
+                        {
                             this.price.text = loc1.integer(loc2);
+                        }
                         else 
+                        {
                             this.price.text = loc1.gold(loc3);
+                        }
                         this.priceLabel.textColor = NORMAL_COLOR;
                         this.totalLabel.textColor = NORMAL_COLOR;
                     }
                     this.dropdownMenu.visible = this.moduleInfo.isActionNow;
                     this.price.visible = !this.moduleInfo.isActionNow;
                     if (this.moduleInfo.defaultValue == -1) 
+                    {
                         this.selectedCount = this.nsCount.value;
+                    }
                     else 
+                    {
                         this.selectedCount = this.moduleInfo.defaultValue;
+                    }
                 }
                 invalidate(SELECTED_CURRENCY_INVALID);
             }
@@ -86,14 +94,24 @@ package net.wg.gui.lobby.confirmModuleWindow
                 if (this.moduleInfo) 
                 {
                     if (this.moduleInfo.isActionNow) 
+                    {
                         if (this.dropdownMenu.selectedIndex != 0) 
+                        {
                             loc5 = this.moduleInfo.maxAvailableCount[1];
+                        }
                         else 
+                        {
                             loc5 = this.moduleInfo.maxAvailableCount[0];
+                        }
+                    }
                     else if (this.moduleInfo.currency != net.wg.data.constants.Currencies.GOLD) 
+                    {
                         loc5 = this.moduleInfo.maxAvailableCount[0];
+                    }
                     else 
+                    {
                         loc5 = this.moduleInfo.maxAvailableCount[1];
+                    }
                     loc6 = Math.min(1, loc5);
                     this.nsCount.minimum = loc6;
                     this.nsCount.maximum = loc5;
@@ -103,10 +121,12 @@ package net.wg.gui.lobby.confirmModuleWindow
                 invalidate(RESULT_INVALID);
             }
             if (isInvalid(RESULT_INVALID)) 
+            {
                 if (this.moduleInfo) 
                 {
                     loc7 = App.utils.locale;
                     if (this.moduleInfo.isActionNow) 
+                    {
                         if (this.dropdownMenu.selectedIndex != 0) 
                         {
                             loc9 = "0";
@@ -119,6 +139,7 @@ package net.wg.gui.lobby.confirmModuleWindow
                             loc10 = loc9 = loc7.integer(this.nsCount.value * this.moduleInfo.price[0]);
                             this.currency = net.wg.data.constants.Currencies.CREDITS;
                         }
+                    }
                     else 
                     {
                         this.currency = this.moduleInfo.currency;
@@ -141,13 +162,16 @@ package net.wg.gui.lobby.confirmModuleWindow
                     this.total.textColor = net.wg.data.constants.Currencies.TEXT_COLORS[this.currency];
                     this.total.text = loc10;
                 }
+            }
             if (isInvalid(SETTINGS_INVALID)) 
+            {
                 if (window && this.settings) 
                 {
                     window.title = this.settings.title;
                     this.submitBtn.label = this.settings.submitBtnLabel;
                     this.cancelBtn.label = this.settings.cancelBtnLabel;
                 }
+            }
             return;
         }
 
@@ -170,7 +194,9 @@ package net.wg.gui.lobby.confirmModuleWindow
         {
             super.window = arg1;
             if (arg1) 
+            {
                 invalidate(SETTINGS_INVALID);
+            }
             return;
         }
 
@@ -217,7 +243,9 @@ package net.wg.gui.lobby.confirmModuleWindow
         {
             super.onDispose();
             if (this.dropdownMenu) 
+            {
                 this.dropdownMenu.removeEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.currencyChangedHandler);
+            }
             this.cancelBtn.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.cancelBtnClickHandler);
             this.submitBtn.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.submitBtnClickHandler);
             this.nsCount.removeEventListener(scaleform.clik.events.IndexEvent.INDEX_CHANGE, this.selectedCountChangeHandler);

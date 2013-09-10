@@ -31,13 +31,17 @@ package net.wg.gui.lobby.techtree.controls
                 this.visible = loc1.length > 0;
                 loc2 = _owner.isElite() ? "elite_" + loc1 : loc1;
                 if (!(currentFrameLabel == loc2) && _labelHash[loc2]) 
+                {
                     gotoAndStop(loc2);
+                }
                 loc3 = _owner.getLevel();
                 if (!(this.levelIcon == null) && !(this.levelIcon.currentFrame == loc3)) 
                 {
                     this.levelIcon.visible = loc3 > -1;
                     if (loc3 > -1 && !(this.levelIcon.currentFrame == loc3)) 
+                    {
                         this.levelIcon.gotoAndStop(loc3);
+                    }
                 }
             }
             super.draw();

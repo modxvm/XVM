@@ -27,6 +27,7 @@ package net.wg.gui.components.tooltips.VO
             this.icon = arg1.hasOwnProperty("icon") && !(arg1["icon"] == undefined) ? arg1["icon"] : null;
             var loc1:*=arg1.hasOwnProperty("params") && !(arg1["params"] == undefined) ? true : false;
             if (loc1) 
+            {
                 if (arg1["params"] is Array && arg1["params"][0] is Array) 
                 {
                     loc2 = arg1["params"][0];
@@ -43,17 +44,24 @@ package net.wg.gui.components.tooltips.VO
                             loc5 = loc7[2];
                             this.vehicleToKillLeft = loc5 - this.vehicleToKill.length;
                             if (this.vehicleToKillLeft < 0) 
+                            {
                                 this.vehicleToKillLeft = 0;
+                            }
                         }
                         else 
+                        {
                             loc5 = loc7[1];
+                        }
                         this.params.push({"id":loc4, "val":loc5});
                         ++loc6;
                     }
                 }
+            }
             this.stats = arg1.hasOwnProperty("stats") && !(arg1["stats"] == undefined) ? arg1["stats"] : null;
             if (this.stats) 
+            {
                 this.classParams = arg1["stats"].hasOwnProperty("classParams") && !(arg1["stats"]["classParams"] == undefined) ? arg1["stats"]["classParams"] : null;
+            }
             return;
         }
 

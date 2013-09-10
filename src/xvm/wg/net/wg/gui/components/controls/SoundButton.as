@@ -19,10 +19,14 @@ package net.wg.gui.components.controls
         {
             super.configUI();
             if (this.hitMc != null) 
+            {
                 this.hitArea = this.hitMc;
+            }
             buttonMode = true;
             if (App.soundMgr != null) 
+            {
                 App.soundMgr.addSoundsHdlrs(this);
+            }
             return;
         }
 
@@ -76,9 +80,13 @@ package net.wg.gui.components.controls
         public override function set enabled(arg1:Boolean):void
         {
             if (arg1 == enabled) 
+            {
                 return;
+            }
             if (this.focusable && this.focused && !arg1) 
+            {
                 this.focused = 0;
+            }
             super.enabled = arg1;
             return;
         }

@@ -18,7 +18,9 @@ package net.wg.gui.lobby.profile.data
         {
             arg2 = Math.max(this.minH, Math.min(this.maxH, arg2));
             if (this.currentValue == arg2) 
+            {
                 return;
+            }
             this.currentValue = arg2;
             var loc1:*=this.store.length;
             var loc2:*=0;
@@ -60,7 +62,9 @@ package net.wg.gui.lobby.profile.data
         {
             var loc1:*=this.store.indexOf(arg1);
             if (loc1 != -1) 
+            {
                 this.store.splice(loc1, 1);
+            }
             return;
         }
 
@@ -68,7 +72,9 @@ package net.wg.gui.lobby.profile.data
         {
             this.currentValue = 0;
             while (this.store.length > 0) 
+            {
                 this.store.splice((this.store.length - 1), 1);
+            }
             return;
         }
 

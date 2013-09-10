@@ -37,7 +37,9 @@ package net.wg.infrastructure.helpers
             if (App.cursor.getAttachedSprite() != null) 
             {
                 if (App.cursor.getAttachedSprite() is net.wg.infrastructure.interfaces.entity.IDisposable) 
+                {
                     net.wg.infrastructure.interfaces.entity.IDisposable(App.cursor.getAttachedSprite()).dispose();
+                }
                 App.cursor.detachFromCursor();
             }
             return;

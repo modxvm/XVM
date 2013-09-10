@@ -71,34 +71,45 @@ package net.wg.gui.lobby.hangar.crew
         internal function showTooltip(arg1:flash.events.MouseEvent):void
         {
             if (owner.visible) 
+            {
                 App.toolTipMgr.showSpecial(net.wg.data.constants.Tooltips.TANKMAN, null, data.tankmanID, true);
+            }
             return;
         }
 
         public function onItemClick(arg1:flash.events.MouseEvent):void
         {
             if (App.utils.commons.isLeftButton(arg1)) 
+            {
                 this.checkClick();
+            }
             return;
         }
 
         public override function handleInput(arg1:scaleform.clik.events.InputEvent):void
         {
             if (arg1.isDefaultPrevented()) 
+            {
                 return;
+            }
             var loc1:*=arg1.details;
             var loc2:*=loc1.controllerIndex;
             var loc3:*=loc1.navEquivalent;
             switch (loc3) 
             {
                 case scaleform.clik.constants.NavigationCode.ENTER:
+                {
                     if (loc1.value != scaleform.clik.constants.InputValue.KEY_DOWN) 
+                    {
                         if (loc1.value == scaleform.clik.constants.InputValue.KEY_UP) 
+                        {
                             if (_pressedByKeyboard) 
                             {
                                 handleRelease(loc2);
                                 arg1.handled = true;
                             }
+                        }
+                    }
                     else 
                     {
                         handlePress(loc2);
@@ -106,6 +117,7 @@ package net.wg.gui.lobby.hangar.crew
                         arg1.handled = true;
                     }
                     break;
+                }
             }
             return;
         }
@@ -114,16 +126,24 @@ package net.wg.gui.lobby.hangar.crew
         {
             var loc1:*=null;
             if (this._recruit != true) 
+            {
                 if (data) 
                 {
                     loc1 = net.wg.gui.lobby.hangar.crew.RecruitRendererVO(data);
                     if (loc1.tankmanID == loc1.parentTankmanID) 
+                    {
                         return;
+                    }
                     if (loc1.tankmanID != loc1.parentTankmanID) 
+                    {
                         dispatchEvent(new net.wg.gui.events.CrewEvent(net.wg.gui.events.CrewEvent.EQUIP_TANKMAN, data));
+                    }
                 }
+            }
             else 
+            {
                 dispatchEvent(new net.wg.gui.events.CrewEvent(net.wg.gui.events.CrewEvent.SHOW_RECRUIT_WINDOW, data));
+            }
             return;
         }
 
@@ -135,7 +155,9 @@ package net.wg.gui.lobby.hangar.crew
             var loc8:*=NaN;
             var loc9:*=0;
             if (!arg1) 
+            {
                 return;
+            }
             this.data = arg1;
             var loc1:*=net.wg.gui.lobby.hangar.crew.RecruitRendererVO(arg1);
             this.recruit = loc1.recruit == true;
@@ -160,6 +182,7 @@ package net.wg.gui.lobby.hangar.crew
                 this.iconRole.imageLoader.source = loc1.roleIconFile;
             }
             if (this.skills) 
+            {
                 if (loc1.skills) 
                 {
                     loc5 = [];
@@ -180,7 +203,9 @@ package net.wg.gui.lobby.hangar.crew
                         this.goups_icons_prop.visible = true;
                         loc7 = 0;
                         if (loc1.lastSkillLevel == 100 && loc1.availableSkillsCount == loc1.skills.length && !loc1.skills[(loc1.skills.length - 1)].buy) 
+                        {
                             loc7 = 1;
+                        }
                         loc8 = loc1.skills.length - 2;
                         this.goups_icons_prop.autoSize = flash.text.TextFieldAutoSize.LEFT;
                         this.goups_icons_prop.text = "x" + (loc8 + 1 + loc7);
@@ -200,6 +225,7 @@ package net.wg.gui.lobby.hangar.crew
                     invalidate(INVALIDATE_GROUP_PROPS);
                     this.skills.dataProvider = new scaleform.clik.data.DataProvider(loc5);
                 }
+            }
             this.textObj = new net.wg.gui.lobby.hangar.crew.TextObject();
             this.textObj.nameTF = loc1.firstname + " " + loc1.lastname;
             this.textObj.rank = loc1.rank;
@@ -212,6 +238,7 @@ package net.wg.gui.lobby.hangar.crew
                 this.textObj.roleHtml = this.textObj.roleHtml + (", " + loc3 + " " + loc1.vehicleType);
             }
             else if (loc1.curVehicleType == loc1.tankType) 
+            {
                 if (loc1.curVehicleName == loc1.vehicleType) 
                 {
                     this.textObj.levelSpecializationMainHtml = loc2;
@@ -220,11 +247,16 @@ package net.wg.gui.lobby.hangar.crew
                 else 
                 {
                     if (loc1.vehicleElite) 
+                    {
                         this.textObj.levelSpecializationMainHtml = loc2;
+                    }
                     else 
+                    {
                         this.textObj.levelSpecializationMainHtml = " <font color=\'" + DEBUFF + "\'>" + loc2 + "</font>";
+                    }
                     this.textObj.roleHtml = this.textObj.roleHtml + (", " + loc3 + " <font color=\'" + DEBUFF + "\'> " + loc1.vehicleType + "</font>");
                 }
+            }
             else 
             {
                 this.textObj.levelSpecializationMainHtml = " <font color=\'" + DEBUFF + "\'>" + loc2 + "</font>";
@@ -238,14 +270,20 @@ package net.wg.gui.lobby.hangar.crew
                 this.lastSkillLevel.text = loc1.lastSkillLevel + "%";
             }
             else 
+            {
                 this.lastSkillLevel.visible = false;
+            }
             this.lastSkillLevel.x = this.skills.x + (this.skills.columnWidth + this.skills.paddingRight) * Math.min(5, this.skills.dataProvider.length);
             setState("up");
             var loc4:*=new flash.geom.Point(mouseX, mouseY);
             loc4 = this.localToGlobal(loc4);
             if (this.hitTestPoint(loc4.x, loc4.y, true)) 
+            {
                 if (owner.visible) 
+                {
                     App.toolTipMgr.showSpecial(net.wg.data.constants.Tooltips.TANKMAN, null, loc1.tankmanID, true);
+                }
+            }
             return;
         }
 
@@ -288,6 +326,7 @@ package net.wg.gui.lobby.hangar.crew
                 this.lastSkillLevel.text = "";
             }
             if (this.nameTF && this.rank && this.role && this.levelSpecializationMain) 
+            {
                 if (this.textObj != null) 
                 {
                     this.nameTF.text = this.textObj.nameTF;
@@ -295,14 +334,19 @@ package net.wg.gui.lobby.hangar.crew
                     this.role.htmlText = this.textObj.roleHtml;
                     this.levelSpecializationMain.htmlText = this.textObj.levelSpecializationMainHtml;
                 }
+            }
             this.visible = true;
             if (isInvalid(scaleform.clik.constants.InvalidationType.DATA) && data) 
             {
                 loc2 = new flash.geom.Point(mouseX, mouseY);
                 loc2 = this.localToGlobal(loc2);
                 if (this.hitTestPoint(loc2.x, loc2.y, true)) 
+                {
                     if (owner.visible) 
+                    {
                         App.toolTipMgr.showSpecial(net.wg.data.constants.Tooltips.TANKMAN, null, loc1.tankmanID, true);
+                    }
+                }
             }
             return;
         }
@@ -310,9 +354,13 @@ package net.wg.gui.lobby.hangar.crew
         protected override function getStatePrefixes():__AS3__.vec.Vector.<String>
         {
             if (this._recruit) 
+            {
                 return Vector.<String>(["recruit_"]);
+            }
             if (this._personalCase) 
+            {
                 return Vector.<String>(["personalCase_"]);
+            }
             return _selected ? statesSelected : statesDefault;
         }
 

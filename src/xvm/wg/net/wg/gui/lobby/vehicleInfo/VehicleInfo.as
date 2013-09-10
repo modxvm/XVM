@@ -52,7 +52,9 @@ package net.wg.gui.lobby.vehicleInfo
         protected override function draw():void
         {
             if (this.tabs.selectedIndex == -1 && this.uiInited) 
+            {
                 this.tabs.selectedIndex = 0;
+            }
             super.draw();
             return;
         }

@@ -21,14 +21,18 @@ package net.wg.gui.components.advanced
             this.artefact.visible = net.wg.data.constants.FittingTypes.ARTEFACT_SLOTS.indexOf(arg1) > -1;
             this.shell.visible = arg1 == net.wg.data.constants.FittingTypes.SHELL;
             if (net.wg.data.constants.FittingTypes.ARTEFACT_SLOTS.indexOf(arg1) > -1) 
+            {
                 this.artefact.source = arg2;
+            }
             else if (arg1 != net.wg.data.constants.FittingTypes.SHELL) 
             {
                 this.moduleType.gotoAndPlay(arg1);
                 this.moduleLevel.gotoAndStop(arg2);
             }
             else 
+            {
                 this.shell.source = arg2;
+            }
             return;
         }
 
@@ -37,6 +41,7 @@ package net.wg.gui.components.advanced
             this.moduleType.gotoAndStop(1);
             this.moduleLevel.gotoAndStop(1);
             if (arg1 != net.wg.data.constants.FittingTypes.MODULE) 
+            {
                 if (arg1 != net.wg.data.constants.FittingTypes.SHELL) 
                 {
                     this.shell.unload();
@@ -51,6 +56,7 @@ package net.wg.gui.components.advanced
                     this.shell.source = arg2;
                     this.moduleLevel.visible = false;
                 }
+            }
             else 
             {
                 this.artefact.unload();

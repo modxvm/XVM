@@ -21,7 +21,9 @@ package net.wg.gui.lobby.profile.pages.statistics
         {
             var loc2:*=null;
             if (!arg1) 
+            {
                 return;
+            }
             var loc1:*=0;
             var loc3:*=arg1.length;
             var loc4:*=0;
@@ -29,7 +31,9 @@ package net.wg.gui.lobby.profile.pages.statistics
             {
                 loc2 = arg1[loc4];
                 if (loc1 < loc2.yField) 
+                {
                     loc1 = Number(loc2.yField);
+                }
                 this.adjustProviderItem(loc2, loc4);
                 ++loc4;
             }

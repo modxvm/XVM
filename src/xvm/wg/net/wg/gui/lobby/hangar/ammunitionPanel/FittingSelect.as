@@ -31,7 +31,9 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
         public override function close():void
         {
             if (!selected || this.closeOnlyClickItem && !this.itemClicked)
+            {
                 return;
+            }
             super.close();
             focused = 0;
             App.soundMgr.playControlsSnd("close", soundType, soundId);
@@ -75,8 +77,11 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
                 loc1 = 58;
                 if (_dropdownRef && _dropdownRef as scaleform.clik.controls.CoreList)
                 {
-//                    if (loc4 = (_dropdownRef as scaleform.clik.controls.CoreList).getRendererAt(0))
-//                        loc1 = loc4.height;
+                    loc4 = (_dropdownRef as scaleform.clik.controls.CoreList).getRendererAt(0);
+                    if (loc4)
+                    {
+                        loc1 = loc4.height;
+                    }
                 }
                 loc2 = menuPadding ? menuPadding.top + menuPadding.bottom : 0;
                 loc3 = 15;

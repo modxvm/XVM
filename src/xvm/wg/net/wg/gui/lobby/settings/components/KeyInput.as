@@ -36,11 +36,17 @@ package net.wg.gui.lobby.settings.components
         internal function ClearEventListenerS():void
         {
             if (this.hasEventListener(scaleform.clik.events.ButtonEvent.PRESS)) 
+            {
                 this.removeEventListener(scaleform.clik.events.ButtonEvent.PRESS, this.onKeyDown);
+            }
             if (this.hasEventListener(scaleform.clik.events.ButtonEvent.RELEASE_OUTSIDE)) 
+            {
                 this.removeEventListener(scaleform.clik.events.ButtonEvent.RELEASE_OUTSIDE, this.onKeyDown);
+            }
             if (App.stage.hasEventListener(flash.events.MouseEvent.MOUSE_DOWN)) 
+            {
                 App.stage.removeEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.handleReleaseOutside, false);
+            }
             return;
         }
 
@@ -90,9 +96,13 @@ package net.wg.gui.lobby.settings.components
         internal function onButtonSelect(arg1:flash.events.Event):void
         {
             if (this.selected) 
+            {
                 this.AddEventListenerS();
+            }
             else 
+            {
                 this.ClearEventListenerS();
+            }
             return;
         }
 
@@ -109,11 +119,15 @@ package net.wg.gui.lobby.settings.components
             if (selected) 
             {
                 if (arg1.isDefaultPrevented()) 
+                {
                     return;
+                }
                 loc1 = arg1.details;
                 loc2 = loc1.controllerIndex;
                 if (loc1.value == scaleform.clik.constants.InputValue.KEY_DOWN && selected) 
+                {
                     this.__processCode(loc1.code);
+                }
                 return;
             }
             super.handleInput(arg1);
@@ -135,7 +149,9 @@ package net.wg.gui.lobby.settings.components
         public override function set enabled(arg1:Boolean):void
         {
             if (arg1 == enabled) 
+            {
                 return;
+            }
             buttonMode = arg1;
             super.enabled = arg1;
             return;
@@ -170,9 +186,13 @@ package net.wg.gui.lobby.settings.components
         public function set key(arg1:Number):void
         {
             if (this._keyCode == arg1) 
+            {
                 return;
+            }
             if (arg1 == net.wg.data.constants.KeysMap.KEY_NONE) 
+            {
                 dispatchEvent(new net.wg.gui.lobby.settings.components.evnts.KeyInputEvents(net.wg.gui.lobby.settings.components.evnts.KeyInputEvents.CHANGE, net.wg.data.constants.KeysMap.KEY_NONE));
+            }
             this._keyCode = arg1;
             this._keyString = App.utils.commons.keyToString(this._keyCode).keyName;
             invalidateData();
@@ -234,7 +254,9 @@ package net.wg.gui.lobby.settings.components
                 dispatchEvent(loc4);
             }
             else 
+            {
                 dispatchEvent(new net.wg.gui.lobby.settings.components.evnts.KeyInputEvents(net.wg.gui.lobby.settings.components.evnts.KeyInputEvents.DISABLE_PRESS, NaN, true, false));
+            }
             return;
         }
 
@@ -242,7 +264,9 @@ package net.wg.gui.lobby.settings.components
         {
             _autoRepeatEvent = null;
             if (contains(arg1.target as flash.display.DisplayObject)) 
+            {
                 return;
+            }
             var loc1:*=arg1 as scaleform.gfx.MouseEventEx;
             var loc2:*=loc1 != null ? loc1.mouseIdx : 0;
             var loc3:*=loc1 != null ? loc1.buttonIdx : 0;
@@ -250,19 +274,29 @@ package net.wg.gui.lobby.settings.components
             _mouseDown = _mouseDown ^ 1 << loc2;
             dispatchEvent(new scaleform.clik.events.ButtonEvent(scaleform.clik.events.ButtonEvent.RELEASE_OUTSIDE, true, false, loc2, loc3, false, false));
             if (!enabled) 
+            {
                 return;
+            }
             if (lockDragStateChange) 
+            {
                 if (_focused || _displayFocus) 
+                {
                     setState(focusIndicator != null ? "kb_release" : "release");
+                }
                 else 
+                {
                     setState("kb_release");
+                }
+            }
             return;
         }
 
         protected override function handleMouseRollOver(arg1:flash.events.MouseEvent):void
         {
             if (!enabled) 
+            {
                 dispatchEvent(new net.wg.gui.lobby.settings.components.evnts.KeyInputEvents(net.wg.gui.lobby.settings.components.evnts.KeyInputEvents.DISABLE_OVER, NaN, true, false));
+            }
             super.handleMouseRollOver(arg1);
             return;
         }
@@ -270,7 +304,9 @@ package net.wg.gui.lobby.settings.components
         protected override function handleMouseRollOut(arg1:flash.events.MouseEvent):void
         {
             if (!enabled) 
+            {
                 dispatchEvent(new net.wg.gui.lobby.settings.components.evnts.KeyInputEvents(net.wg.gui.lobby.settings.components.evnts.KeyInputEvents.DISABLE_OUT, NaN, true, false));
+            }
             super.handleMouseRollOut(arg1);
             return;
         }

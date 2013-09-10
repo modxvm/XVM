@@ -50,17 +50,27 @@ package net.wg.infrastructure.managers.utils.impl
             {
                 loc5 = arg1.charAt(loc3);
                 if (net.wg.data.constants.Values.DIGIT.indexOf(loc5) != -1) 
+                {
                     if (loc2 != "") 
+                    {
                         break;
+                    }
+                }
                 else 
+                {
                     loc2 = loc2 + loc5;
+                }
                 ++loc3;
             }
             var loc4:*=arg1;
             if (loc2 == arg1) 
+            {
                 loc2 = "";
+            }
             else 
+            {
                 loc4 = arg1.split(loc2).join(net.wg.data.constants.Values.EMPTY_STR);
+            }
             return new net.wg.data.utilData.FormattedInteger(Number(loc4), loc2);
         }
 
@@ -87,7 +97,9 @@ package net.wg.infrastructure.managers.utils.impl
         public function makeString(arg1:String, arg2:Object=null):String
         {
             if (arg2 == null) 
+            {
                 arg2 = {};
+            }
             return this.envokeCFormatted(net.wg.data.constants.EngineMethods.GET_FMTED_LCLZED_STR, arg1, App.utils.JSON.encode(arg2));
         }
 
@@ -105,11 +117,13 @@ package net.wg.infrastructure.managers.utils.impl
         {
             var loc1:*=0;
             if (arg2 != net.wg.data.constants.Currencies.CREDITS) 
+            {
                 if (arg2 == net.wg.data.constants.Currencies.GOLD) 
                 {
                     loc1 = App.colorSchemeMgr.getRGB(net.wg.data.constants.ColorSchemeNames.TEXT_COLOR_GOLD);
                     arg2 = "Gold";
                 }
+            }
             else 
             {
                 loc1 = App.colorSchemeMgr.getRGB(net.wg.data.constants.ColorSchemeNames.TEXT_COLOR_CREDITS);

@@ -30,21 +30,29 @@ package scaleform.clik.controls
                 this._scrollBar.removeEventListener(flash.events.Event.CHANGE, this.handleScroll, false);
                 this._scrollBar.focusTarget = null;
                 if (this.container.contains(this._scrollBar as flash.display.DisplayObject)) 
+                {
                     this.container.removeChild(this._scrollBar as flash.display.DisplayObject);
+                }
                 this._scrollBar = null;
             }
             if (!this._scrollBarValue || this._scrollBarValue == "") 
+            {
                 return;
+            }
             this._autoScrollBar = false;
             if (this._scrollBarValue is String) 
             {
                 if (parent != null) 
+                {
                     loc1 = parent.getChildByName(this._scrollBarValue.toString()) as scaleform.clik.interfaces.IScrollBar;
+                }
                 if (loc1 == null) 
                 {
                     loc2 = flash.utils.getDefinitionByName(this._scrollBarValue.toString()) as Class;
                     if (loc2) 
+                    {
                         loc1 = new loc2() as scaleform.clik.interfaces.IScrollBar;
+                    }
                     if (loc1) 
                     {
                         this._autoScrollBar = true;
@@ -74,7 +82,9 @@ package scaleform.clik.controls
                 }
             }
             else 
+            {
                 loc1 = this._scrollBarValue as scaleform.clik.interfaces.IScrollBar;
+            }
             this._scrollBar = loc1;
             invalidateSize();
             if (this._scrollBar != null) 
@@ -91,7 +101,9 @@ package scaleform.clik.controls
         protected function drawScrollBar():void
         {
             if (!this._autoScrollBar) 
+            {
                 return;
+            }
             this._scrollBar.x = _width - this._scrollBar.width;
             this._scrollBar.height = this.availableHeight;
             this._scrollBar.validateNow();
@@ -103,7 +115,9 @@ package scaleform.clik.controls
             this._maxScroll = textField.maxScrollV;
             var loc1:*=this._scrollBar as scaleform.clik.controls.ScrollIndicator;
             if (loc1 == null) 
+            {
                 return;
+            }
             var loc2:*=constraints.getElement("textField");
             if (this._scrollPolicy == "on" || this._scrollPolicy == "auto" && textField.maxScrollV > 1) 
             {
@@ -119,6 +133,7 @@ package scaleform.clik.controls
                 loc1.visible = true;
             }
             if (this._scrollPolicy == "off" || this._scrollPolicy == "auto" && textField.maxScrollV == 1) 
+            {
                 if (this._autoScrollBar && loc1.visible) 
                 {
                     loc1.visible = false;
@@ -128,8 +143,11 @@ package scaleform.clik.controls
                         invalidate();
                     }
                 }
+            }
             if (loc1.enabled != this.enabled) 
+            {
                 loc1.enabled = this.enabled;
+            }
             return;
         }
 
@@ -162,7 +180,9 @@ package scaleform.clik.controls
         protected override function handleTextChange(arg1:flash.events.Event):void
         {
             if (this._maxScroll != textField.maxScrollV) 
+            {
                 this.updateScrollBar();
+            }
             super.handleTextChange(arg1);
             return;
         }
@@ -170,9 +190,13 @@ package scaleform.clik.controls
         protected function onScroller(arg1:flash.events.Event):void
         {
             if (this._resetScrollPosition) 
+            {
                 textField.scrollV = this._position;
+            }
             else 
+            {
                 this._position = textField.scrollV;
+            }
             this._resetScrollPosition = false;
             return;
         }
@@ -188,10 +212,16 @@ package scaleform.clik.controls
                 this._scrollBar.focusTarget = null;
                 (this._scrollBar as Object).scrollTarget = null;
                 if (this._scrollBar is net.wg.infrastructure.interfaces.entity.IDisposable) 
+                {
                     net.wg.infrastructure.interfaces.entity.IDisposable(this._scrollBar).dispose();
+                }
                 if (this.container) 
+                {
                     if (this.container.contains(this._scrollBar as flash.display.DisplayObject)) 
+                    {
                         this.container.removeChild(this._scrollBar as flash.display.DisplayObject);
+                    }
+                }
             }
             if (this.container) 
             {
@@ -208,7 +238,9 @@ package scaleform.clik.controls
         protected override function preInitialize():void
         {
             if (!constraintsDisabled) 
+            {
                 constraints = new scaleform.clik.utils.Constraints(this, scaleform.clik.constants.ConstrainMode.COUNTER_SCALE);
+            }
             return;
         }
 
@@ -268,7 +300,9 @@ package scaleform.clik.controls
         {
             this._minThumbSize = arg1;
             if (!this._autoScrollBar) 
+            {
                 return;
+            }
             var loc1:*=this._scrollBar as scaleform.clik.controls.ScrollIndicator;
             loc1.minThumbSize = arg1;
             return;
@@ -283,7 +317,9 @@ package scaleform.clik.controls
         {
             this._thumbOffset = arg1;
             if (!this._autoScrollBar) 
+            {
                 return;
+            }
             var loc1:*=this._scrollBar as scaleform.clik.controls.ScrollIndicator;
             loc1.offsetTop = this._thumbOffset.top;
             loc1.offsetBottom = this._thumbOffset.bottom;
@@ -312,43 +348,63 @@ package scaleform.clik.controls
             var loc3:*=NaN;
             super.handleInput(arg1);
             if (arg1.handled) 
+            {
                 return;
+            }
             if (_editable) 
+            {
                 return;
+            }
             loc1 = arg1.details.navEquivalent;
             var loc4:*=loc1;
             switch (loc4) 
             {
                 case scaleform.clik.constants.NavigationCode.UP:
+                {
                     if (this.position == 1) 
+                    {
                         return;
+                    }
                     this.position = Math.max(1, (this.position - 1));
                     arg1.handled = true;
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.DOWN:
+                {
                     if (this.position == this._maxScroll) 
+                    {
                         return;
+                    }
                     this.position = Math.min(this._maxScroll, this.position + 1);
                     arg1.handled = true;
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.END:
+                {
                     this.position = this._maxScroll;
                     arg1.handled = true;
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.HOME:
+                {
                     this.position = 1;
                     arg1.handled = true;
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.PAGE_UP:
+                {
                     loc2 = textField.bottomScrollV - textField.scrollV;
                     this.position = Math.max(1, this.position - loc2);
                     arg1.handled = true;
                     break;
+                }
                 case scaleform.clik.constants.NavigationCode.PAGE_DOWN:
+                {
                     loc3 = textField.bottomScrollV - textField.scrollV;
                     this.position = Math.min(this._maxScroll, this.position + loc3);
                     arg1.handled = true;
                     break;
+                }
             }
             return;
         }
@@ -357,7 +413,9 @@ package scaleform.clik.controls
         {
             super.configUI();
             if (textField != null) 
+            {
                 textField.addEventListener(flash.events.Event.SCROLL, this.onScroller, false, 0, true);
+            }
             return;
         }
 
@@ -365,7 +423,9 @@ package scaleform.clik.controls
         {
             var loc1:*=0;
             if (isInvalid(scaleform.clik.constants.InvalidationType.SCROLL_BAR)) 
+            {
                 this.createScrollBar();
+            }
             if (isInvalid(scaleform.clik.constants.InvalidationType.STATE)) 
             {
                 if (_newFrame) 
@@ -379,7 +439,9 @@ package scaleform.clik.controls
                 invalidate(scaleform.clik.constants.InvalidationType.SIZE);
             }
             else if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+            {
                 this.updateText();
+            }
             if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
             {
                 removeChild(this.container);
@@ -390,11 +452,15 @@ package scaleform.clik.controls
                 {
                     constraints.update(this.availableWidth, _height);
                     if (!scaleform.gfx.Extensions.enabled) 
+                    {
                         loc1 = textField.textWidth;
+                    }
                 }
                 addChild(this.container);
                 if (this._autoScrollBar) 
+                {
                     this.drawScrollBar();
+                }
             }
             return;
         }

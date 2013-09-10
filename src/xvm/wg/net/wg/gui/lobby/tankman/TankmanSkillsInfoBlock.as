@@ -85,9 +85,13 @@ package net.wg.gui.lobby.tankman
         {
             var loc1:*=arg1.toString();
             if (!isNaN(arg2) && !(arg2 - arg1 == 0)) 
+            {
                 loc1 = loc1 + ("<font color=\'#ffffff\'>+" + (arg2 - arg1) + "%</font>");
+            }
             else 
+            {
                 loc1 = loc1 + "%";
+            }
             this.roleLevelField.htmlText = loc1;
             this.specLevelBar.frontPosition = arg1;
             this.specLevelBar.backPosition = arg2;
@@ -104,18 +108,24 @@ package net.wg.gui.lobby.tankman
                 return;
             }
             if (arg4 != 100) 
+            {
                 if (arg1 != 1) 
                 {
                     this.buildSkillsPack(this.mainSkillItem, arg2, arg1);
                     this.buildCurrentSkill(this.additionalSkillItem, arg3, arg4);
                 }
                 else 
+                {
                     this.buildCurrentSkill(this.mainSkillItem, arg3, arg4);
+                }
+            }
             else 
             {
                 this.buildSkillsPack(this.mainSkillItem, arg3, arg1 + 1);
                 if (arg5) 
+                {
                     this.buildCurrentSkill(this.additionalSkillItem, net.wg.gui.lobby.tankman.SkillItemViewMini.TYPE_NEW_SKILL, NaN);
+                }
             }
             return;
         }
@@ -128,7 +138,9 @@ package net.wg.gui.lobby.tankman
                 arg1.iconSource = arg2;
             }
             else 
+            {
                 arg1.type = net.wg.gui.lobby.tankman.SkillItemViewMini.TYPE_CURRENT_NEW_SKILL;
+            }
             arg1.level = arg3;
             arg1.visible = true;
             return;
@@ -142,7 +154,9 @@ package net.wg.gui.lobby.tankman
                 arg1.iconSource = arg2;
             }
             else 
+            {
                 arg1.type = arg3 > 2 ? net.wg.gui.lobby.tankman.SkillItemViewMini.TYPE_NEW_SKILLS : net.wg.gui.lobby.tankman.SkillItemViewMini.TYPE_NEW_SKILL;
+            }
             arg1.count = (arg3 - 1);
             arg1.visible = true;
             return;

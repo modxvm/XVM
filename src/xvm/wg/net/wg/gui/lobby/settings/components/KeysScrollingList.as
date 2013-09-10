@@ -41,19 +41,25 @@ package net.wg.gui.lobby.settings.components
                 loc5.endFill();
             }
             if (isInvalid(scaleform.clik.constants.InvalidationType.STATE)) 
+            {
                 if (_newFrame) 
                 {
                     gotoAndPlay(_newFrame);
                     _newFrame = null;
                 }
+            }
             if (!_usingExternalRenderers && isInvalid(scaleform.clik.constants.InvalidationType.RENDERERS, scaleform.clik.constants.InvalidationType.DATA) && _renderers == null) 
             {
                 _renderers = new Vector.<scaleform.clik.interfaces.IListItemRenderer>();
                 if (_dataProvider) 
+                {
                     this.drawRenderers(_dataProvider.length);
+                }
             }
             if (isInvalid(SCROLL_UPDATE_INV)) 
+            {
                 applyScrollBarUpdating();
+            }
             return;
         }
 
@@ -83,7 +89,9 @@ package net.wg.gui.lobby.settings.components
         {
             var loc1:*=this.createRenderer(arg1);
             if (loc1 == null) 
+            {
                 return;
+            }
             container.addChild(loc1 as flash.display.DisplayObject);
             _renderers.push(loc1);
             var loc2:*=_dataProvider[arg1];
@@ -138,7 +146,9 @@ package net.wg.gui.lobby.settings.components
             arg1.addEventListener(flash.events.MouseEvent.ROLL_OUT, this.dispatchItemEvent, false, 0, true);
             arg1.addEventListener(net.wg.gui.lobby.settings.components.evnts.KeyInputEvents.CHANGE, this.dispatchItemEvent, false, 0, true);
             if (_usingExternalRenderers) 
+            {
                 arg1.addEventListener(flash.events.MouseEvent.MOUSE_WHEEL, handleMouseWheel, false, 0, true);
+            }
             return;
         }
 
@@ -165,42 +175,68 @@ package net.wg.gui.lobby.settings.components
             switch (loc7) 
             {
                 case scaleform.clik.events.ButtonEvent.PRESS:
+                {
                     loc1 = net.wg.gui.events.ListEventEx.ITEM_PRESS;
                     break;
+                }
                 case scaleform.clik.events.ButtonEvent.CLICK:
+                {
                     loc1 = net.wg.gui.events.ListEventEx.ITEM_CLICK;
                     break;
+                }
                 case flash.events.MouseEvent.ROLL_OVER:
+                {
                     loc1 = net.wg.gui.events.ListEventEx.ITEM_ROLL_OVER;
                     break;
+                }
                 case flash.events.MouseEvent.ROLL_OUT:
+                {
                     loc1 = net.wg.gui.events.ListEventEx.ITEM_ROLL_OUT;
                     break;
+                }
                 case flash.events.MouseEvent.DOUBLE_CLICK:
+                {
                     loc1 = net.wg.gui.events.ListEventEx.ITEM_DOUBLE_CLICK;
                     break;
+                }
                 case net.wg.gui.lobby.settings.components.evnts.KeyInputEvents.CHANGE:
+                {
                     loc1 = net.wg.gui.events.ListEventEx.ITEM_TEXT_CHANGE;
                     break;
+                }
                 default:
+                {
                     return true;
+                }
             }
             var loc2:*=arg1.currentTarget as scaleform.clik.interfaces.IListItemRenderer;
             var loc3:*=0;
             if (arg1 is scaleform.clik.events.ButtonEvent) 
+            {
                 loc3 = (arg1 as scaleform.clik.events.ButtonEvent).controllerIdx;
+            }
             else if (arg1 is net.wg.gui.lobby.settings.components.evnts.KeyInputEvents) 
+            {
                 loc3 = net.wg.gui.lobby.settings.components.evnts.KeyInputEvents(arg1).keyCode;
+            }
             else if (arg1 is scaleform.gfx.MouseEventEx) 
+            {
                 loc3 = (arg1 as scaleform.gfx.MouseEventEx).mouseIdx;
+            }
             var loc4:*=0;
             if (arg1 is scaleform.clik.events.ButtonEvent) 
+            {
                 loc4 = (arg1 as scaleform.clik.events.ButtonEvent).buttonIdx;
+            }
             else if (arg1 is scaleform.gfx.MouseEventEx) 
+            {
                 loc4 = (arg1 as scaleform.gfx.MouseEventEx).buttonIdx;
+            }
             var loc5:*=false;
             if (arg1 is scaleform.clik.events.ButtonEvent) 
+            {
                 loc5 = (arg1 as scaleform.clik.events.ButtonEvent).isKeyboard;
+            }
             var loc6:*=new net.wg.gui.events.ListEventEx(loc1, false, true, loc2.index, 0, loc2.index, loc2, dataProvider[loc2.index], loc3, loc4, loc5);
             return dispatchEvent(loc6);
         }
@@ -208,7 +244,9 @@ package net.wg.gui.lobby.settings.components
         protected override function scrollList(arg1:int):void
         {
             if (this.isSelected()) 
+            {
                 return;
+            }
             super.scrollList(arg1);
             return;
         }
@@ -216,7 +254,9 @@ package net.wg.gui.lobby.settings.components
         public override function scrollToIndex(arg1:uint):void
         {
             if (this.isSelected()) 
+            {
                 return;
+            }
             super.scrollToIndex(arg1);
             return;
         }
@@ -230,7 +270,9 @@ package net.wg.gui.lobby.settings.components
             {
                 loc3 = getRendererAt(loc2) as net.wg.gui.lobby.settings.components.KeysItemRenderer;
                 if (loc3.isSelected()) 
+                {
                     return true;
+                }
                 ++loc2;
             }
             return false;
@@ -289,7 +331,9 @@ package net.wg.gui.lobby.settings.components
                     this.cleanUpRenderer(loc3);
                     loc4 = loc3 as flash.display.DisplayObject;
                     if (container.contains(loc4)) 
+                    {
                         container.removeChild(loc4);
+                    }
                     ++loc2;
                 }
             }

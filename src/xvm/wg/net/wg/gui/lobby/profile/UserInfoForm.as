@@ -16,7 +16,9 @@ package net.wg.gui.lobby.profile
         protected override function draw():void
         {
             if (this.dataUpdated) 
+            {
                 this.dataUpdated = false;
+            }
             return;
         }
 

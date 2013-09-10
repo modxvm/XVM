@@ -49,7 +49,9 @@ package net.wg.gui.components.common.video.advanced
         internal function startSeekingByCoolDown():void
         {
             if (!this.timer) 
+            {
                 this.timer = new flash.utils.Timer(SEEK_INVOKE_COOLDOWN_TIME);
+            }
             this.timer.addEventListener(flash.events.TimerEvent.TIMER, this.invokeSeeking, false, 0, true);
             this.timer.start();
             return;
@@ -69,7 +71,9 @@ package net.wg.gui.components.common.video.advanced
         {
             var loc1:*=roundDecimal(this.progressBarPosition * videoPlayer.metaData.duration, 2);
             if (videoPlayer.status == net.wg.gui.components.common.video.PlayerStatus.STOP) 
+            {
                 videoPlayer.runPlayback();
+            }
             videoPlayer.seek(loc1);
             return;
         }
@@ -91,7 +95,9 @@ package net.wg.gui.components.common.video.advanced
         {
             this.progressBarPosition = arg1.position;
             if (!this.progressBar.underUsing) 
+            {
                 this.invokeSeeking(null);
+            }
             return;
         }
 

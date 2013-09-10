@@ -30,14 +30,22 @@ package net.wg.gui.lobby.techtree.controls
                 loc1 = this.xpLabel.length > 0 ? _owner.getNamedLabel(this.xpLabel) : "";
                 loc2 = statesMap[state][loc1.length > 0 ? 1 : 0];
                 if (!(currentFrameLabel == loc2) && _labelHash[loc2]) 
+                {
                     gotoAndStop(loc2);
+                }
                 this.setNameField(_owner.getItemName());
                 this.setXpField(loc1);
                 if (this.changeXpIconToElite) 
+                {
                     if (_owner.isElite()) 
+                    {
                         this.setXpIcon(net.wg.gui.lobby.techtree.constants.XpTypeStrings.ELITE_XP_TYPE);
+                    }
                     else 
+                    {
                         this.setXpIcon(net.wg.gui.lobby.techtree.constants.XpTypeStrings.EARNED_XP_TYPE);
+                    }
+                }
             }
             super.draw();
             return;
@@ -46,14 +54,18 @@ package net.wg.gui.lobby.techtree.controls
         internal function setNameField(arg1:String):void
         {
             if (!(this.nameField == null) && !(arg1 == null)) 
+            {
                 this.nameField.text = arg1;
+            }
             return;
         }
 
         internal function setXpField(arg1:String):void
         {
             if (!(this.xpField == null) && !(arg1 == null)) 
+            {
                 this.xpField.text = arg1;
+            }
             return;
         }
 

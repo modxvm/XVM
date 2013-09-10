@@ -28,9 +28,13 @@ package net.wg.gui.lobby.profile.components
             {
                 loc3 = createRenderer(0);
                 if (loc1) 
+                {
                     _autoRowHeight = loc3.height;
+                }
                 if (loc2) 
+                {
                     _autoColumnWidth = loc3.width;
+                }
                 cleanUpRenderer(loc3);
             }
             _totalColumns = availableWidth / columnWidth >> 0;

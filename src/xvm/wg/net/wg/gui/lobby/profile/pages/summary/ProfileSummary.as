@@ -36,7 +36,9 @@ package net.wg.gui.lobby.profile.pages.summary
         protected override function applyResizing():void
         {
             if (layoutManager) 
+            {
                 layoutManager.setDimension(currentDimension.x, currentDimension.y);
+            }
             this.x = Math.round(currentDimension.x / 2 - _centerOffset);
             return;
         }
@@ -118,7 +120,9 @@ package net.wg.gui.lobby.profile.pages.summary
                 addEventListener(flash.events.Event.RENDER, validateNow, false, 0, true);
                 addEventListener(flash.events.Event.ENTER_FRAME, validateNow, false, 0, true);
                 if (stage != null) 
+                {
                     stage.invalidate();
+                }
             }
             return;
         }
@@ -143,9 +147,13 @@ package net.wg.gui.lobby.profile.pages.summary
             {
                 loc2 = arg1.getChildAt(loc1) as flash.display.DisplayObjectContainer;
                 if (loc3 = loc2 as scaleform.clik.core.UIComponent) 
+                {
                     loc3.validateNow();
+                }
                 if (loc2) 
+                {
                     validateChildren(loc2);
+                }
                 ++loc1;
             }
             return;

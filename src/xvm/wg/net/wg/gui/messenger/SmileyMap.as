@@ -20,7 +20,9 @@ package net.wg.gui.messenger
             var loc2:*=0;
             var loc3:*=this.map;
             for each (loc1 in loc3) 
+            {
                 scaleform.gfx.TextFieldEx.setImageSubstitutions(arg1, loc1);
+            }
             return;
         }
 

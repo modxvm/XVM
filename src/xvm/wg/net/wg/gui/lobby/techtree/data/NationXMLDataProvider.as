@@ -28,12 +28,16 @@ package net.wg.gui.lobby.techtree.data
                 loc7 = this.getNodeData(loc5);
                 loc4 = nodeData.length;
                 if (isNaN(loc7.id)) 
+                {
                     continue;
+                }
                 nodeIdxCache[loc7.id] = loc4;
                 nodeData.push(loc7);
             }
             if ((loc4 = loc2.children()[1].text()) > -1) 
+            {
                 _scrollIndex = loc4;
+            }
             var loc6:*=loc2.children()[2];
             _displaySettings = new net.wg.gui.lobby.techtree.data.vo.NationDisplaySettings(loc6.child("nodeRendererName").text(), loc6.child("isLevelDisplayed").text());
             return;
@@ -60,7 +64,9 @@ package net.wg.gui.lobby.techtree.data
                     var loc11:*=0;
                     var loc12:*=loc5.child("viaPins").children();
                     for each (loc6 in loc12) 
+                    {
                         loc2.viaPins.push([loc6.child("x").text(), loc6.child("y").text()]);
+                    }
                     loc3.inPins.push(loc2);
                 }
                 loc1.push(loc3);
@@ -76,7 +82,9 @@ package net.wg.gui.lobby.techtree.data
             var loc4:*=0;
             var loc5:*=arg1.child("unlockProps").child("topIDs").children();
             for each (loc3 in loc5) 
+            {
                 loc2.push(Number(loc3.toString()));
+            }
             loc1.id = arg1.child("id").text();
             loc1.nameString = arg1.child("nameString").text();
             loc1.primaryClass = new net.wg.gui.lobby.techtree.data.vo.PrimaryClass(arg1.child("class").child("name").text(), arg1.child("class").child("userString").text());

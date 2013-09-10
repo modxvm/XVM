@@ -48,7 +48,9 @@ package net.wg.gui.lobby.profile.headerBar
             {
                 loc2 = this.background as net.wg.gui.lobby.profile.headerBar.ProfileTabButtonBg;
                 if (loc2) 
+                {
                     loc2.lastLine.visible = this._showLastLineItem;
+                }
             }
             return;
         }
@@ -57,9 +59,13 @@ package net.wg.gui.lobby.profile.headerBar
         {
             super.data = arg1;
             if (data is String) 
+            {
                 this.label = arg1.toString();
+            }
             else 
+            {
                 this.label = data.label;
+            }
             return;
         }
 
@@ -72,7 +78,9 @@ package net.wg.gui.lobby.profile.headerBar
         internal function receiveWidth():uint
         {
             if (textField) 
+            {
                 return Math.round(textField.width + 2 * this.textHOffset);
+            }
             return super.width;
         }
 

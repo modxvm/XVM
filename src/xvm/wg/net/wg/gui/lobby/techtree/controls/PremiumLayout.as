@@ -22,7 +22,9 @@ package net.wg.gui.lobby.techtree.controls
         public function set context(arg1:net.wg.gui.lobby.techtree.sub.ResearchItems):void
         {
             if (this._context == arg1) 
+            {
                 return;
+            }
             this._context = arg1;
             invalidate(net.wg.gui.lobby.techtree.constants.TTInvalidationType.NATION, net.wg.gui.lobby.techtree.constants.TTInvalidationType.DESCRIPTION);
             return;
@@ -47,27 +49,41 @@ package net.wg.gui.lobby.techtree.controls
             var loc2:*=NaN;
             super.draw();
             if (this._context == null) 
+            {
                 return;
+            }
             if (isInvalid(net.wg.gui.lobby.techtree.constants.TTInvalidationType.NATION)) 
+            {
                 if (this.flags != null) 
+                {
                     this.flags.gotoAndStop(this._context.dataProvider.nation);
+                }
+            }
             if (isInvalid(net.wg.gui.lobby.techtree.constants.TTInvalidationType.DESCRIPTION)) 
+            {
                 if (this.description != null) 
                 {
                     this.description.setData(this._context.dataProvider.getGlobalStats().extraInfo);
                     this.description.validateNow();
                     invalidateSize();
                 }
+            }
             if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
             {
                 loc1 = this._context.rGraphics == null ? 0 : this._context.rGraphics.y;
                 loc2 = this._context.rootRenderer == null ? _height >> 1 : this._context.rootRenderer.getY();
                 if (this.background != null) 
+                {
                     this.background.height = _height;
+                }
                 if (this.flags != null) 
+                {
                     this.flags.y = loc1 - (this.flags.height >> 1);
+                }
                 if (this.description != null) 
+                {
                     this.description.y = loc1 + loc2 - (this.description.actualHeight >> 1);
+                }
             }
             return;
         }

@@ -17,7 +17,9 @@ package net.wg.gui.lobby.profile.components
         internal function rollOverHandler(arg1:flash.events.MouseEvent):void
         {
             if (this._data) 
+            {
                 App.toolTipMgr.showSpecial(net.wg.data.constants.Tooltips.TANK_CLASS, null, "markOfMastery", this._data.markOfMastery);
+            }
             return;
         }
 

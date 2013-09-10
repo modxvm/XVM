@@ -78,7 +78,9 @@ package net.wg.gui.messenger.forms
         {
             super.handleInput(arg1);
             if (arg1.handled) 
+            {
                 return;
+            }
             var loc1:*=arg1.details.code;
             if (arg1.details.value == scaleform.clik.constants.InputValue.KEY_UP) 
             {
@@ -86,10 +88,12 @@ package net.wg.gui.messenger.forms
                 switch (loc2) 
                 {
                     case flash.ui.Keyboard.ENTER:
+                    {
                         arg1.handled = true;
                         dispatchEvent(this.generateEvent(net.wg.gui.messenger.evnts.ContactsFormEvent.SEARCH));
                         arg1.handled = true;
                         break;
+                    }
                 }
             }
             return;
@@ -119,7 +123,9 @@ package net.wg.gui.messenger.forms
         internal function showContextMenu(arg1:net.wg.gui.events.ListEventEx):void
         {
             if (arg1.buttonIdx == scaleform.gfx.MouseEventEx.RIGHT_BUTTON) 
+            {
                 App.contextMenuMgr.showUserContextMenu(this, arg1.itemData, new net.wg.data.components.ContextItemGenerator());
+            }
             return;
         }
 
@@ -127,7 +133,9 @@ package net.wg.gui.messenger.forms
         {
             super.draw();
             if (constraints && isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
+            {
                 constraints.update(_width, _height);
+            }
             return;
         }
 

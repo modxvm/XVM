@@ -27,7 +27,9 @@ package net.wg.gui.lobby.techtree.controls
         protected override function configUI():void
         {
             if (this.barBG != null) 
+            {
                 this.barBG.mouseEnabled = false;
+            }
             super.configUI();
             return;
         }
@@ -46,19 +48,23 @@ package net.wg.gui.lobby.techtree.controls
             switch (loc2) 
             {
                 case CENTER_ALIGN:
+                {
                     if (_renderers.length > 0 && _dataProvider.length >= _renderers.length) 
                     {
                         loc1 = _renderers[(_renderers.length - 1)];
                         this.repositionRenderers((actualHeight >> 1) - (loc1.y + loc1.height >> 1));
                     }
                     break;
+                }
                 case BOTTOM_ALIGN:
+                {
                     if (_renderers.length > 0 && _dataProvider.length >= _renderers.length) 
                     {
                         loc1 = _renderers[(_renderers.length - 1)];
                         this.repositionRenderers(actualHeight - (loc1.y + loc1.height));
                     }
                     break;
+                }
             }
             return;
         }

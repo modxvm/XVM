@@ -38,16 +38,22 @@ package net.wg.gui.lobby.header
             super.draw();
             visible = this._visibleTD;
             if (this.titleField && this._title) 
+            {
                 this.titleField.text = this._title;
+            }
             if (this.stateField) 
+            {
                 this.stateField.text = this._isRunning ? this._refuseStatus : this._restartStatus;
+            }
             return;
         }
 
         protected override function getStatePrefixes():__AS3__.vec.Vector.<String>
         {
             if (!enabled) 
+            {
                 return Vector.<String>([this.getLevelPrefix()]);
+            }
             var loc1:*=this._isRunning ? PREFIX_RUN : PREFIX_PAUSE + this.getLevelPrefix();
             return Vector.<String>([loc1]);
         }
@@ -85,9 +91,13 @@ package net.wg.gui.lobby.header
             {
                 this.hideToolTip();
                 if (this._isRunning) 
+                {
                     dispatchEvent(new net.wg.gui.events.HeaderEvent(net.wg.gui.events.HeaderEvent.SHOW_MESSAGE_DIALOG, "refuseTraining"));
+                }
                 else 
+                {
                     restartS();
+                }
             }
             return;
         }
@@ -102,7 +112,9 @@ package net.wg.gui.lobby.header
         {
             var loc1:*=new net.wg.gui.utils.ComplexTooltipHelper().addHeader(this._title).addBody(this._description).addNote(this._isRunning ? null : TUTORIAL.TOOLTIP_NOTES_RESTART, true).make();
             if (loc1.length > 0) 
+            {
                 App.toolTipMgr.showComplex(loc1);
+            }
             return;
         }
 

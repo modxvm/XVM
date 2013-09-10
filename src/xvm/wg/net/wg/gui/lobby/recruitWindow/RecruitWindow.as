@@ -29,7 +29,9 @@ package net.wg.gui.lobby.recruitWindow
             this.vehicleTypeDropdown.dataProvider = new scaleform.clik.data.DataProvider(arg1);
             this.vehicleTypeDropdown.selectedIndex = 0;
             if (this.vehicleTypeDropdown.selectedIndex == 0) 
+            {
                 this.roleDropdown.selectedIndex = 0;
+            }
             this.roleDropdown.enabled = !(this.vehicleTypeDropdown.selectedIndex == 0);
             if (!this.data.menuEnabled) 
             {
@@ -38,7 +40,9 @@ package net.wg.gui.lobby.recruitWindow
                 for (loc1 in loc3) 
                 {
                     if (this.vehicleTypeDropdown.dataProvider[loc1].id != this.data.data.typeID) 
+                    {
                         continue;
+                    }
                     this.vehicleTypeDropdown.selectedIndex = Number(loc1);
                     break;
                 }
@@ -59,7 +63,9 @@ package net.wg.gui.lobby.recruitWindow
                 for (loc1 in loc3) 
                 {
                     if (this.roleDropdown.dataProvider[loc1].id != this.data.data.roleType) 
+                    {
                         continue;
+                    }
                     this.roleDropdown.selectedIndex = Number(loc1);
                     break;
                 }
@@ -84,15 +90,25 @@ package net.wg.gui.lobby.recruitWindow
         {
             var loc1:*=App.utils.focusHandler;
             if (this.nationDropdown.enabled && this.nationDropdown.visible) 
+            {
                 loc1.setFocus(this.nationDropdown);
+            }
             else if (this.vehicleClassDropdown.enabled && this.vehicleClassDropdown.visible) 
+            {
                 loc1.setFocus(this.vehicleClassDropdown);
+            }
             else if (this.vehicleTypeDropdown.enabled && this.vehicleTypeDropdown.visible) 
+            {
                 loc1.setFocus(this.vehicleTypeDropdown);
+            }
             else if (this.roleDropdown.enabled && this.roleDropdown.visible) 
+            {
                 loc1.setFocus(this.roleDropdown);
+            }
             else 
+            {
                 loc1.setFocus(this.btnCourses);
+            }
             return;
         }
 
@@ -102,16 +118,24 @@ package net.wg.gui.lobby.recruitWindow
             switch (loc1) 
             {
                 case this.btnAcademy:
+                {
                     this.studyType = 2;
                     break;
+                }
                 case this.btnScool:
+                {
                     this.studyType = 1;
                     break;
+                }
                 case this.btnCourses:
+                {
                     this.studyType = 0;
                     break;
+                }
                 default:
+                {
                     this.studyType = 0;
+                }
             }
             return;
         }
@@ -141,7 +165,9 @@ package net.wg.gui.lobby.recruitWindow
             var loc2:*=this.vehicleClassDropdown.dataProvider[this.vehicleClassDropdown.selectedIndex].id;
             this.vehicleTypeDropdown.enabled = !(!this.vehicleClassDropdown.enabled || loc2 == null || !loc2);
             if (!this.vehicleClassDropdown.enabled || loc2 == null || !loc2) 
+            {
                 this.vehicleTypeDropdown.selectedIndex = 0;
+            }
             this.updateVehicleTypeDropdownS(loc1, loc2);
             return;
         }
@@ -153,7 +179,9 @@ package net.wg.gui.lobby.recruitWindow
             var loc3:*=this.vehicleTypeDropdown.dataProvider[this.vehicleTypeDropdown.selectedIndex].id;
             this.roleDropdown.enabled = !(!this.vehicleTypeDropdown.enabled || isNaN(loc3));
             if (!this.vehicleTypeDropdown.enabled || isNaN(loc3) || !loc3) 
+            {
                 this.roleDropdown.selectedIndex = 0;
+            }
             this.updateRoleDropdownS(loc1, loc2, loc3);
             return;
         }
@@ -171,7 +199,9 @@ package net.wg.gui.lobby.recruitWindow
             var loc3:*=this.roleDropdown.dataProvider[this.roleDropdown.selectedIndex].id;
             var loc4:*=this.data.data ? this.data.data.slot : -1;
             if (!isNaN(loc1) && !isNaN(loc2) && !isNaN(loc4) && loc3) 
+            {
                 buyTankmanS(loc1, loc2, loc3, this.studyType, loc4);
+            }
             return;
         }
 
@@ -230,10 +260,14 @@ package net.wg.gui.lobby.recruitWindow
                 this.roleDropdown.validateNow();
                 this.btnAcademy.price = String(this.data.academyUpgrade);
                 if (this.data.gold < this.data.academyUpgrade) 
+                {
                     this.btnAcademy.enabled = false;
+                }
                 this.btnScool.price = String(this.data.schoolUpgrade);
                 if (this.data.credits < this.data.schoolUpgrade) 
+                {
                     this.btnScool.enabled = false;
+                }
                 if (this.menuEnabled) 
                 {
                     this.nationDropdown.addEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onChangeNation);
@@ -284,11 +318,17 @@ package net.wg.gui.lobby.recruitWindow
             this.vehicleTypeDropdown.removeEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.recruitButtonCheck);
             this.roleDropdown.removeEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.recruitButtonCheck);
             if (this.vehicleTypeDropdown.hasEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE)) 
+            {
                 this.vehicleTypeDropdown.removeEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onChangeVehicleType);
+            }
             if (this.vehicleClassDropdown.hasEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE)) 
+            {
                 this.vehicleClassDropdown.removeEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onChangeVehicleClass);
+            }
             if (this.nationDropdown.hasEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE)) 
+            {
                 this.nationDropdown.removeEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onChangeNation);
+            }
             this.btnCancel.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onClose);
             this.btnRecruit.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onRecruitTankman);
             return;
@@ -330,7 +370,9 @@ package net.wg.gui.lobby.recruitWindow
                 for (loc1 in loc3) 
                 {
                     if (this.nationDropdown.dataProvider[loc1].id != this.data.data.nationID) 
+                    {
                         continue;
+                    }
                     this.nationDropdown.selectedIndex = Number(loc1);
                     break;
                 }
@@ -358,7 +400,9 @@ package net.wg.gui.lobby.recruitWindow
                 for (loc1 in loc3) 
                 {
                     if (this.vehicleClassDropdown.dataProvider[loc1].id != this.data.data.tankType) 
+                    {
                         continue;
+                    }
                     this.vehicleClassDropdown.selectedIndex = Number(loc1);
                     break;
                 }

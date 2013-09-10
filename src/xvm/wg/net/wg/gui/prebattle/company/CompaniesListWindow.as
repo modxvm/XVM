@@ -143,9 +143,13 @@ package net.wg.gui.prebattle.company
         internal function enableFilterButtons(arg1:Boolean):void
         {
             if (arg1) 
+            {
                 this.filterTextField.addEventListener(scaleform.clik.events.InputEvent.INPUT, this.filterTextField_inputHandler);
+            }
             else if (this.filterTextField.hasEventListener(scaleform.clik.events.InputEvent.INPUT)) 
+            {
                 this.filterTextField.removeEventListener(scaleform.clik.events.InputEvent.INPUT, this.filterTextField_inputHandler);
+            }
             this.refreshButton.enabled = arg1;
             this.filterButton.enabled = arg1 != false ? !(this.filterTextField.text == "") : false;
             this.division.enabled = arg1;
@@ -173,7 +177,9 @@ package net.wg.gui.prebattle.company
         internal function selectedItemHandler(arg1:net.wg.gui.prebattle.company.CompanyEvent):void
         {
             if (arg1.prbID > -1) 
+            {
                 requestPlayersListS(arg1.prbID);
+            }
             return;
         }
 
@@ -202,7 +208,9 @@ package net.wg.gui.prebattle.company
         public function as_showPlayersList(arg1:uint):void
         {
             if (this.cmpList) 
+            {
                 this.cmpList.setIndexCompany = arg1;
+            }
             return;
         }
 
@@ -215,7 +223,9 @@ package net.wg.gui.prebattle.company
         public function as_disableCreateButton(arg1:Boolean):void
         {
             if (this.createButton != null) 
+            {
                 this.createButton.enabled = !arg1;
+            }
             return;
         }
 
@@ -223,13 +233,16 @@ package net.wg.gui.prebattle.company
         {
             super.setFocus();
             if (this.channelComponent) 
+            {
                 this.channelComponent.setFocusToInput();
+            }
             return;
         }
 
         public override function handleInput(arg1:scaleform.clik.events.InputEvent):void
         {
             if (arg1.details.code == flash.ui.Keyboard.ESCAPE && arg1.details.value == scaleform.clik.constants.InputValue.KEY_DOWN) 
+            {
                 if (this.cmpList.isOpenedState) 
                 {
                     this.cmpList.unselectedRenderers();
@@ -237,9 +250,12 @@ package net.wg.gui.prebattle.company
                     arg1.stopImmediatePropagation();
                     return;
                 }
+            }
             super.handleInput(arg1);
             if (arg1.handled) 
+            {
                 return;
+            }
             if (arg1.details.code == flash.ui.Keyboard.F1 && arg1.details.value == scaleform.clik.constants.InputValue.KEY_UP) 
             {
                 showFAQWindowS();

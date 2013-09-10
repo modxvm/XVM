@@ -19,7 +19,9 @@ package net.wg.gui.components.controls
                 this.pos.height = this.tempBg.height * this.scaleY;
             }
             if (this.tempBg) 
+            {
                 this.tempBg.visible = false;
+            }
             return;
         }
 
@@ -35,7 +37,9 @@ package net.wg.gui.components.controls
         internal function createPos():void
         {
             if (!this.pos) 
+            {
                 this.pos = new flash.geom.Rectangle(0, 0, 0, 0);
+            }
             return;
         }
 
@@ -50,7 +54,9 @@ package net.wg.gui.components.controls
             super.draw();
             this.graphics.clear();
             if (!this.myBitmapData) 
+            {
                 return;
+            }
             this.graphics.beginFill(13762560);
             this.graphics.beginBitmapFill(this.myBitmapData);
             var loc1:*=this.pos.x;
@@ -61,61 +67,87 @@ package net.wg.gui.components.controls
             switch (loc5) 
             {
                 case "none":
+                {
                     loc3 = this.myBitmapData.width;
                     loc4 = this.myBitmapData.height;
                     break;
+                }
                 case "horizontal":
+                {
                     loc3 = this.pos.width;
                     loc4 = this.myBitmapData.height;
                     break;
+                }
                 case "vertical":
+                {
                     loc3 = this.myBitmapData.width;
                     loc4 = this.pos.height;
                     break;
+                }
                 case "all":
+                {
                     loc3 = this.pos.width;
                     loc4 = this.pos.height;
                     break;
+                }
             }
             loc5 = this.startPos;
             switch (loc5) 
             {
                 case "TL":
+                {
                     loc1 = 0;
                     loc2 = 0;
                     break;
+                }
                 case "TR":
+                {
                     loc1 = -loc3;
                     loc2 = 0;
                     break;
+                }
                 case "TC":
+                {
                     loc1 = -Math.round(loc3 / 2);
                     loc2 = 0;
                     break;
+                }
                 case "BL":
+                {
                     loc1 = 0;
                     loc2 = -loc4;
                     break;
+                }
                 case "BR":
+                {
                     loc1 = -loc3;
                     loc2 = -loc4;
                     break;
+                }
                 case "BC":
+                {
                     loc1 = -Math.round(loc3 / 2);
                     loc2 = -loc4;
                     break;
+                }
                 case "CL":
+                {
                     loc1 = 0;
                     loc2 = -Math.round(loc4 / 2);
                     break;
+                }
                 case "CR":
+                {
                     loc1 = -loc3;
                     loc2 = -Math.round(loc4 / 2);
                     break;
+                }
                 case "CC":
+                {
                     loc1 = -Math.round(loc3 / 2);
                     loc2 = -Math.round(loc4 / 2);
                     break;
+                }
             }
             this.graphics.lineTo(loc1, loc2);
             this.graphics.lineTo(loc1 + loc3, loc2);

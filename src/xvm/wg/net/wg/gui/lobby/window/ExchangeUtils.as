@@ -25,32 +25,46 @@ package net.wg.gui.lobby.window
             switch (loc3) 
             {
                 case net.wg.gui.components.controls.IconText.GOLD:
+                {
                     loc1 = 16736256;
                     arg2 = isNaN(arg2) ? 0.8 : arg2;
                     break;
+                }
                 case net.wg.gui.components.controls.IconText.CREDITS:
+                {
                     loc1 = 13556185;
                     arg2 = isNaN(arg2) ? 0.3 : arg2;
                     break;
+                }
                 case net.wg.gui.components.controls.IconText.FREE_XP:
                 case net.wg.gui.components.controls.IconText.ELITE_XP:
+                {
                     loc1 = 14570496;
                     arg2 = isNaN(arg2) ? 0.6 : arg2;
                     break;
+                }
                 case net.wg.gui.components.controls.IconText.VCOIN:
+                {
                     loc1 = 16736256;
                     arg2 = isNaN(arg2) ? 0.6 : arg2;
                     break;
+                }
                 case ICON_TYPE_BLACK:
+                {
                     loc1 = 0;
                     arg2 = isNaN(arg2) ? 0.3 : arg2;
                     break;
+                }
                 case STATE_SMALL_MONEY:
+                {
                     loc1 = 16718080;
                     arg2 = isNaN(arg2) ? 0.6 : arg2;
                     break;
+                }
                 default:
+                {
                     break;
+                }
             }
             loc2.color = loc1;
             loc2.strength = arg2;

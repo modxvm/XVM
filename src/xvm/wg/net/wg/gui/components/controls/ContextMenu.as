@@ -78,7 +78,9 @@ package net.wg.gui.components.controls
                         loc10.y = loc5;
                         loc5 = loc5 + (loc10.height + this.padding.bottom + this.padding.top);
                         if (loc10.items.length > 0) 
+                        {
                             this.createSubItems(loc10);
+                        }
                         this.items.push(loc10);
                     }
                     this.addChild(loc9 == null ? loc10 : loc9);
@@ -96,13 +98,21 @@ package net.wg.gui.components.controls
                 x = arg2;
                 y = arg3;
                 if (y + this.bgMc.height > App.instance.appHeight) 
+                {
                     y = y - this.bgMc.height ^ 0;
+                }
                 if (y < 0) 
+                {
                     y = this.bgShadowBorder.top;
+                }
                 if (x + this.bgMc.width > App.instance.appWidth) 
+                {
                     x = x - this.bgMc.width ^ 0;
+                }
                 if (x < 0) 
+                {
                     x = this.bgShadowBorder.left;
+                }
                 this.startX = this.x;
                 this.startY = this.y;
             }
@@ -113,7 +123,9 @@ package net.wg.gui.components.controls
         internal function mouseDownHandler(arg1:flash.events.MouseEvent):void
         {
             if (!this.hitTestPoint(App.stage.mouseX, App.stage.mouseY)) 
+            {
                 dispatchEvent(new net.wg.gui.events.ContextMenuEvent(net.wg.gui.events.ContextMenuEvent.ON_MENU_RELEASE_OUTSIDE));
+            }
             return;
         }
 
@@ -153,7 +165,9 @@ package net.wg.gui.components.controls
             var loc1:*=net.wg.gui.components.controls.ContextMenuItem(arg1.target);
             this.beginAnimExpand(loc1);
             if (loc1.type != loc1.CONTEXT_MENU_ITEM_GROUP) 
+            {
                 dispatchEvent(new net.wg.gui.events.ContextMenuEvent(net.wg.gui.events.ContextMenuEvent.ON_ITEM_SELECT, loc1.id, this._data, this._memberItemData));
+            }
             return;
         }
 
@@ -161,14 +175,22 @@ package net.wg.gui.components.controls
         {
             this.tweenManager.unregisterAll();
             if (this.groupItemSelected && this.groupItemSelected == arg1) 
+            {
                 if (this.groupItemSelected.isOpened) 
+                {
                     this.hideSub(this.groupItemSelected);
+                }
                 else 
+                {
                     this.showSub(this.groupItemSelected);
+                }
+            }
             else 
             {
                 if (this.groupItemSelected && this.groupItemSelected.isOpened) 
+                {
                     this.hideSub(this.groupItemSelected);
+                }
                 this.groupItemSelected = arg1;
                 this.showSub(this.groupItemSelected);
             }
@@ -202,12 +224,16 @@ package net.wg.gui.components.controls
                 ++loc2;
             }
             if (this.startY + loc6 + this.MARGIN + this.bgShadowBorder.top + this.bgShadowBorder.bottom > App.appHeight) 
+            {
                 loc7 = App.appHeight - (this.startY + loc6 + this.MARGIN + this.bgShadowBorder.top + this.bgShadowBorder.bottom);
+            }
             loc2 = 0;
             while (loc2 < this.items.length) 
             {
                 if (loc2 == loc1) 
+                {
                     loc5 = loc5 + loc3;
+                }
                 this.tweenManager.registerAndLaunch(300, this.items[loc2], {"y":loc5}, {"paused":false, "onComplete":this.onHideTweenComplete, "ease":loc4});
                 loc5 = loc5 + (this.items[loc2].height + this.padding.top + this.padding.bottom);
                 ++loc2;
@@ -257,7 +283,9 @@ package net.wg.gui.components.controls
         {
             var loc1:*=net.wg.gui.components.controls.ContextMenuItem(arg1.target);
             if (loc1.alpha == 0) 
+            {
                 loc1.visible = false;
+            }
             this.tweenManager.unregister(arg1);
             return;
         }
@@ -279,7 +307,9 @@ package net.wg.gui.components.controls
             var loc4:*=0;
             super.dispose();
             if (App.instance.stage.hasEventListener(flash.events.MouseEvent.MOUSE_DOWN)) 
+            {
                 App.instance.stage.removeEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.mouseDownHandler);
+            }
             this.tweenManager.unregisterAll();
             var loc1:*=0;
             var loc2:*=this.numChildren;
@@ -294,13 +324,17 @@ package net.wg.gui.components.controls
                         while (loc4 < this.items[loc3].subItems.length) 
                         {
                             if (this.items[loc3].subItems[loc4].hasEventListener(scaleform.clik.events.ButtonEvent.CLICK)) 
+                            {
                                 this.items[loc3].subItems[loc4].removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onItemClick);
+                            }
                             this.removeChild(this.items[loc3].subItems[loc4]);
                             ++loc4;
                         }
                     }
                     if (this.items[loc3].hasEventListener(scaleform.clik.events.ButtonEvent.CLICK)) 
+                    {
                         this.items[loc3].removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onItemClick);
+                    }
                     this.removeChild(this.items[loc3]);
                     ++loc3;
                 }

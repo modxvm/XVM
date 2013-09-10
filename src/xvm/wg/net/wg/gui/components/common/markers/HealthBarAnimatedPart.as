@@ -29,20 +29,30 @@ package net.wg.gui.components.common.markers
             switch (loc2) 
             {
                 case INACTIVE_STATE:
+                {
                     visible = true;
                     this.tweenState = SHOW_STATE;
                     break;
+                }
                 case ACTIVE_STATE:
+                {
                     this.onTweenComplete(true);
                     break;
+                }
                 case HIDE_STATE:
+                {
                     this.tweenState = SHOW_STATE;
                     break;
+                }
                 default:
+                {
                     break;
+                }
             }
             if (loc1 != this.tweenState) 
+            {
                 this.setState();
+            }
             return;
         }
 
@@ -85,7 +95,9 @@ package net.wg.gui.components.common.markers
         public function setAnimationType(arg1:String):void
         {
             if (this.animate_mc) 
+            {
                 this.animate_mc.gotoAndStop(arg1);
+            }
             return;
         }
 

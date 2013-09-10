@@ -37,14 +37,22 @@ package net.wg.gui.components.controls
                 loc4.setListData(loc6);
                 loc4.setData(arg1[loc3]);
                 if (loc3 >= loc1)
+                {
                     loc4.enabled = false;
+                }
                 else if (arg1[loc3].hasOwnProperty("enabled"))
+                {
                     loc4.enabled = arg1[loc3].enabled;
+                }
                 else
+                {
                     loc4.enabled = true;
+                }
                 loc4.validateNow();
                 if (!this.showEmptyItems)
+                {
                     scaleform.clik.core.UIComponent(loc4).visible = !(arg1[loc3] == null);
+                }
                 ++loc3;
             }
             return;
@@ -74,7 +82,9 @@ package net.wg.gui.components.controls
                     loc8.x = (loc7 / _totalRows >> 0) * (loc3 + this.paddingRight + padding.right) + margin + padding.left;
                 }
                 if (!loc6)
+                {
                     loc8.validateNow();
+                }
                 ++loc7;
             }
             drawScrollBar();
@@ -100,7 +110,9 @@ package net.wg.gui.components.controls
                 _scrollBar.focusTarget = null;
                 _scrollBar.dispose();
                 if (container.contains(flash.display.DisplayObject(_scrollBar)))
+                {
                     container.removeChild(flash.display.DisplayObject(_scrollBar));
+                }
                 _scrollBar = null;
             }
             if (_dataProvider)
@@ -136,11 +148,15 @@ package net.wg.gui.components.controls
                     this.cleanUpRenderer(loc4);
                     loc5 = loc4 as net.wg.infrastructure.interfaces.entity.IDisposable;
                     if (loc5)
+                    {
                         loc5.dispose();
+                    }
                     loc6 = loc4 as flash.display.DisplayObject;
                     loc1.releaseReferences(loc6);
                     if (container.contains(loc6))
+                    {
                         container.removeChild(loc6);
+                    }
                 }
                 _renderers.splice(loc3, 1);
                 --loc3;
@@ -156,7 +172,9 @@ package net.wg.gui.components.controls
             var loc4:*=null;
             var loc5:*=null;
             if (isInvalid(scaleform.clik.constants.InvalidationType.SCROLL_BAR))
+            {
                 createScrollBar();
+            }
             if (isInvalid(scaleform.clik.constants.InvalidationType.RENDERERS))
             {
                 _autoRowHeight = NaN;
@@ -168,13 +186,17 @@ package net.wg.gui.components.controls
                 }
             }
             if (isInvalid(scaleform.clik.constants.InvalidationType.SELECTED_INDEX))
+            {
                 updateSelectedIndex();
+            }
             if (isInvalid(scaleform.clik.constants.InvalidationType.STATE))
+            {
                 if (_newFrame)
                 {
                     gotoAndPlay(_newFrame);
                     _newFrame = null;
                 }
+            }
             if (!_usingExternalRenderers && isInvalid(scaleform.clik.constants.InvalidationType.RENDERERS))
             {
                 if (_renderers != null)
@@ -187,7 +209,9 @@ package net.wg.gui.components.controls
                         this.cleanUpRenderer(loc3);
                         loc4 = loc3 as flash.display.DisplayObject;
                         if (container.contains(loc4))
+                        {
                             container.removeChild(loc4);
+                        }
                         ++loc1;
                     }
                 }

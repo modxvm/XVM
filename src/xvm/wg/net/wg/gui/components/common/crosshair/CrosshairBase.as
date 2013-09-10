@@ -18,9 +18,13 @@ package net.wg.gui.components.common.crosshair
             this.initCallbacks();
             this.initView();
             if (stage) 
+            {
                 this.initStage();
+            }
             else 
+            {
                 addEventListener(flash.events.Event.ADDED_TO_STAGE, this.initStage);
+            }
             return;
         }
 

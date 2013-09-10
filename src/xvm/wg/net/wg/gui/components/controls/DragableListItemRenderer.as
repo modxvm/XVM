@@ -39,7 +39,9 @@ package net.wg.gui.components.controls
             }
             super.handleMouseRelease(arg1);
             if (Math.abs(this.startDragX - owner.mouseX) > this.DRAGGING_DELTA) 
+            {
                 return;
+            }
             return;
         }
 
@@ -52,14 +54,18 @@ package net.wg.gui.components.controls
             }
             super.handleReleaseOutside(arg1);
             if (Math.abs(this.startDragX - owner.mouseX) > this.DRAGGING_DELTA) 
+            {
                 return;
+            }
             return;
         }
 
         public function set dragEnabled(arg1:Boolean):void
         {
             if (arg1 == this._dragEnabled) 
+            {
                 return;
+            }
             this._dragEnabled = arg1;
             return;
         }
@@ -72,7 +78,9 @@ package net.wg.gui.components.controls
         public override function setData(arg1:Object):void
         {
             if (arg1) 
+            {
                 this.empty = arg1.empty;
+            }
             return;
         }
 
@@ -84,7 +92,9 @@ package net.wg.gui.components.controls
         public function set empty(arg1:Boolean):void
         {
             if (this._empty == arg1) 
+            {
                 return;
+            }
             this._empty = arg1;
             this._dataDirty = true;
             tabEnabled = focusable ? false : !this._empty;

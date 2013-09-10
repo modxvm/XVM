@@ -13,9 +13,13 @@ package net.wg.gui.lobby.techtree.data.vo
             this._xpCost = arg3;
             this._required = arg4 == null ? [] : arg4;
             if (this._xpCost > 0) 
+            {
                 this._xpCostLabel = App.utils.locale.integer(this._xpCost);
+            }
             else 
+            {
                 this._xpCostLabel = "0";
+            }
             return;
         }
 
@@ -55,18 +59,26 @@ package net.wg.gui.lobby.techtree.data.vo
         public function fromObject(arg1:Object, arg2:net.wg.utils.ILocale):void
         {
             if (arg1 == null) 
+            {
                 return;
+            }
             if (!isNaN(arg1.parentID)) 
+            {
                 this._parentID = arg1.parentID;
+            }
             if (!isNaN(arg1.unlockIdx)) 
+            {
                 this._unlockIdx = arg1.unlockIdx;
+            }
             if (!isNaN(arg1.xpCost)) 
             {
                 this._xpCost = arg1.xpCost;
                 this._xpCostLabel = arg2.integer(this._xpCost);
             }
             if (arg1.required != null) 
+            {
                 this._required = arg1.required;
+            }
             return;
         }
 
@@ -82,7 +94,9 @@ package net.wg.gui.lobby.techtree.data.vo
             this._xpCost = 0;
             this._xpCostLabel = "0";
             if (this._required != null) 
+            {
                 this._required.splice(0, this._required.length);
+            }
             return;
         }
 

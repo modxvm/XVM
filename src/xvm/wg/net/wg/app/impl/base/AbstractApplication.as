@@ -27,9 +27,13 @@ package net.wg.app.impl.base
             this.createManagers();
             this.populateContainers();
             if (stage) 
+            {
                 this.initStage();
+            }
             else 
+            {
                 addEventListener(flash.events.Event.ADDED_TO_STAGE, this.initStage);
+            }
             addEventListener(flash.events.Event.ENTER_FRAME, this.onFirstFrame);
             return;
         }
@@ -104,7 +108,9 @@ package net.wg.app.impl.base
                 loc2.x = loc5;
                 addChild(loc2);
                 if (!(loc2 is net.wg.gui.components.common.ManagedContainer)) 
+                {
                     continue;
+                }
                 this.containerMgr.registerContainer(loc2 as net.wg.gui.components.common.ManagedContainer);
             }
             return;
@@ -172,9 +178,13 @@ package net.wg.app.impl.base
         protected function initStage(arg1:flash.events.Event=null):void
         {
             if (scaleform.clik.core.CLIK.initialized) 
+            {
                 this.onPopUpManagerInit();
+            }
             else 
+            {
                 stage.addEventListener(POPUP_MGR_INIT_EVENT, this.onPopUpManagerInitHandler, false, 0, true);
+            }
             removeEventListener(flash.events.Event.ADDED_TO_STAGE, this.initStage);
             stage.scaleMode = flash.display.StageScaleMode.NO_SCALE;
             stage.align = flash.display.StageAlign.TOP_LEFT;
@@ -219,9 +229,13 @@ package net.wg.app.impl.base
                 this.appWidth = w;
                 this.appHeight = h;
                 if (this.containerMgr) 
+                {
                     this.containerMgr.updateStage(w, h);
+                }
                 if (this.waiting) 
+                {
                     net.wg.infrastructure.interfaces.IView(this.waiting).updateStage(w, h);
+                }
             }
             catch (e:Error)
             {
@@ -367,7 +381,9 @@ package net.wg.app.impl.base
             var loc3:*=0;
             var loc4:*=loc1;
             for each (loc2 in loc4) 
+            {
                 removeChild(loc2);
+            }
             return;
         }
 

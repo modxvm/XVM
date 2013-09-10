@@ -25,7 +25,9 @@ package net.wg.gui.messenger
             this._isJoined = isJoinedS();
             invalidate(INVALIDATE_CONTROLS);
             if (this._isJoined) 
+            {
                 invalidate(INVALIDATE_HISTORY);
+            }
             return;
         }
 
@@ -48,7 +50,9 @@ package net.wg.gui.messenger
         public function setFocusToInput():void
         {
             if (initialized && isJoinedS()) 
+            {
                 this.updateFocus();
+            }
             return;
         }
 
@@ -67,7 +71,9 @@ package net.wg.gui.messenger
             this._isJoined = arg1;
             this.enableControls(this._isJoined);
             if (this._isJoined) 
+            {
                 this.setHistory();
+            }
             return;
         }
 
@@ -84,7 +90,9 @@ package net.wg.gui.messenger
             {
                 this.messageArea.appendHtmlResetPosition(arg1 + "\n");
                 if (this.messageArea.textField.scrollV < this.messageArea.textField.maxScrollV) 
+                {
                     this.messageArea.safePosition = true;
+                }
             }
             return;
         }
@@ -97,7 +105,9 @@ package net.wg.gui.messenger
             this.messageInput.removeEventListener(scaleform.clik.events.InputEvent.INPUT, this.handleTextInput);
             this.messageArea.dispose();
             if (this.messageAreaScrollBar) 
+            {
                 this.messageAreaScrollBar.dispose();
+            }
             return;
         }
 
@@ -110,8 +120,12 @@ package net.wg.gui.messenger
         internal function doMessage():void
         {
             if (this.messageInput.text) 
+            {
                 if (sendMessageS(this.messageInput.text)) 
+                {
                     this.messageInput.text = "";
+                }
+            }
             return;
         }
 
@@ -119,18 +133,26 @@ package net.wg.gui.messenger
         {
             super.draw();
             if (isInvalid(INVALIDATE_CONTROLS)) 
+            {
                 this.enableControls(this._isJoined);
+            }
             if (isInvalid(INVALIDATE_HISTORY) && this._isJoined) 
+            {
                 this.setHistory();
+            }
             return;
         }
 
         internal function setHistory():void
         {
             if (getHistoryS()) 
+            {
                 this.messageArea.htmlText = getHistoryS() + "\n";
+            }
             else 
+            {
                 this.messageArea.htmlText = "";
+            }
             this.updateFocus();
             return;
         }

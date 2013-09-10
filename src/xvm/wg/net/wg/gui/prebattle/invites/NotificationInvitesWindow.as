@@ -25,7 +25,9 @@ package net.wg.gui.prebattle.invites
         public function set defaultPosition(arg1:Object):void
         {
             if (arg1 == null) 
+            {
                 return;
+            }
             this._defaultPosition = {"paddingRight":arg1.paddingRight, "paddingBottom":arg1.paddingBottom};
             return;
         }
@@ -65,7 +67,9 @@ package net.wg.gui.prebattle.invites
         {
             super.draw();
             if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE) && constraints) 
+            {
                 this.updateSizes();
+            }
             return;
         }
 
@@ -74,7 +78,9 @@ package net.wg.gui.prebattle.invites
             constraints = new scaleform.clik.utils.Constraints(this, scaleform.clik.constants.ConstrainMode.REFLOW);
             super.configUI();
             if (constraints) 
+            {
                 constraints.addElement("messageArea", this.messageArea, scaleform.clik.utils.Constraints.ALL);
+            }
             this.messageArea.textField.addEventListener(flash.events.TextEvent.LINK, this.onLinkClickHandler);
             this.updateSizes();
             requestInvitesS();

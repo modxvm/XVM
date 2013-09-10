@@ -40,7 +40,9 @@ package net.wg.gui.lobby.store.shop
                 getHelper().updateCountFields(this.count, this.vehCount, loc1);
             }
             else 
+            {
                 getHelper().initModuleIconAsDefault(this.moduleIcon);
+            }
             return;
         }
 
@@ -52,9 +54,13 @@ package net.wg.gui.lobby.store.shop
                 super.updateCreditPriceForAction(arg1, arg2, arg3);
                 loc1 = App.utils.locale;
                 if (arg2 > arg3.tableVO.gold) 
+                {
                     this.actionCredits.gotoAndStop(net.wg.gui.lobby.store.shop.base.ACTION_CREDITS_STATES.GOLD_ERROR);
+                }
                 else 
+                {
                     this.actionCredits.gotoAndStop(net.wg.gui.lobby.store.shop.base.ACTION_CREDITS_STATES.GOLD);
+                }
                 this.actionCredits.price.text = loc1.gold(arg2);
             }
             return;
@@ -79,7 +85,9 @@ package net.wg.gui.lobby.store.shop
                 var loc4:*=0;
                 var loc5:*=loc2;
                 for each (loc3 in loc5) 
+                {
                     loc1.assertNotNull(loc3, loc3.name + net.wg.data.constants.Errors.CANT_NULL);
+                }
             }
             this.moduleIcon.setValuesWithType(arg1.requestType, arg1.type, arg1.level);
             this.moduleIcon.extraIconSource = arg1.extraModuleInfo;

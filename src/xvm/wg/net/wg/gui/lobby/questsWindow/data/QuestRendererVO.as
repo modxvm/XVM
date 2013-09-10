@@ -10,12 +10,6 @@ package net.wg.gui.lobby.questsWindow.data
             return;
         }
 
-        public function set maxProgrVal(arg1:Number):void
-        {
-            this._maxProgrVal = arg1;
-            return;
-        }
-
         public function get currentProgrVal():Number
         {
             return this._currentProgrVal;
@@ -36,6 +30,11 @@ package net.wg.gui.lobby.questsWindow.data
         {
             this._progrBarType = arg1;
             return;
+        }
+
+        public function get description():String
+        {
+            return this._description;
         }
 
         public function get status():String
@@ -60,11 +59,6 @@ package net.wg.gui.lobby.questsWindow.data
             return;
         }
 
-        public function get isLocked():Boolean
-        {
-            return this._isLocked;
-        }
-
         public function set isLocked(arg1:Boolean):void
         {
             this._isLocked = arg1;
@@ -79,6 +73,17 @@ package net.wg.gui.lobby.questsWindow.data
         public function set questID(arg1:String):void
         {
             this._questID = arg1;
+            return;
+        }
+
+        public function get progrTooltip():Object
+        {
+            return this._progrTooltip;
+        }
+
+        public function set progrTooltip(arg1:Object):void
+        {
+            this._progrTooltip = arg1;
             return;
         }
 
@@ -115,9 +120,9 @@ package net.wg.gui.lobby.questsWindow.data
             return;
         }
 
-        public function get description():String
+        public function get isLocked():Boolean
         {
-            return this._description;
+            return this._isLocked;
         }
 
         public function set description(arg1:String):void
@@ -153,6 +158,12 @@ package net.wg.gui.lobby.questsWindow.data
             return this._maxProgrVal;
         }
 
+        public function set maxProgrVal(arg1:Number):void
+        {
+            this._maxProgrVal = arg1;
+            return;
+        }
+
         internal var _isNew:Boolean=false;
 
         internal var _status:String="";
@@ -160,8 +171,6 @@ package net.wg.gui.lobby.questsWindow.data
         internal var _IGR:Boolean=false;
 
         internal var _taskType:String="";
-
-        internal var _description:String="";
 
         internal var _timerDescr:String="";
 
@@ -178,5 +187,9 @@ package net.wg.gui.lobby.questsWindow.data
         internal var _isLocked:Boolean=false;
 
         internal var _questID:String="";
+
+        internal var _progrTooltip:Object=null;
+
+        internal var _description:String="";
     }
 }

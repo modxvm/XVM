@@ -31,7 +31,9 @@ package net.wg.infrastructure.managers.utils.impl
             while (loc2 < arg1.length) 
             {
                 if (loc2 % 2 == 1 && loc2 > 0) 
+                {
                     loc1.put(arg1[(loc2 - 1)], arg1[loc2]);
+                }
                 ++loc2;
             }
             return loc1;
@@ -61,7 +63,9 @@ package net.wg.infrastructure.managers.utils.impl
             var loc2:*=null;
             var loc3:*=null;
             if (arg1 == null) 
+            {
                 arg1 = App.stage;
+            }
             if (s_found.indexOf(arg1) == -1) 
             {
                 s_found.push(arg1);
@@ -71,13 +75,18 @@ package net.wg.infrastructure.managers.utils.impl
                 {
                     loc2 = arg1[loc1];
                     if (!this.canToDestroying(loc2)) 
+                    {
                         continue;
+                    }
                     this.releaseReferences(loc2, false);
                     if (loc2 is net.wg.infrastructure.interfaces.entity.IDisposable) 
+                    {
                         net.wg.infrastructure.interfaces.entity.IDisposable(loc2).dispose();
+                    }
                     delete arg1[loc1];
                 }
                 if (arg1 is flash.display.DisplayObjectContainer) 
+                {
                     while (flash.display.DisplayObjectContainer(arg1).numChildren > 0) 
                     {
                         loc3 = flash.display.DisplayObjectContainer(arg1).getChildAt(0);
@@ -85,15 +94,20 @@ package net.wg.infrastructure.managers.utils.impl
                         {
                             this.releaseReferences(loc3, false);
                             if (loc2 is net.wg.infrastructure.interfaces.entity.IDisposable) 
+                            {
                                 net.wg.infrastructure.interfaces.entity.IDisposable(loc2).dispose();
+                            }
                         }
                         flash.display.DisplayObjectContainer(arg1).removeChild(loc3);
                     }
+                }
             }
             if (arg2) 
             {
                 if (s_found.length > 1) 
+                {
                     DebugUtils.LOG_DEBUG("try to release: " + arg1 + " " + flash.utils.getQualifiedClassName(arg1) + " has been released. Collected: " + s_found.length + " objects.");
+                }
                 s_found.splice(0);
             }
             return;
@@ -105,13 +119,21 @@ package net.wg.infrastructure.managers.utils.impl
             if (net.wg.data.constants.KeysMap.mapping.hasOwnProperty(arg1.toString())) 
             {
                 if (net.wg.data.constants.KeysMap.mapping[arg1].hasOwnProperty("to_show")) 
+                {
                     loc1.keyName = net.wg.data.constants.KeysMap.mapping[arg1].to_show;
+                }
                 else 
+                {
                     loc1.keyName = String.fromCharCode(arg1).toUpperCase();
+                }
                 if (net.wg.data.constants.KeysMap.mapping[arg1].hasOwnProperty("command")) 
+                {
                     loc1.keyCommand = net.wg.data.constants.KeysMap.mapping[arg1].command;
+                }
                 else 
+                {
                     loc1.keyCommand = String.fromCharCode(arg1).toUpperCase();
+                }
             }
             else 
             {
@@ -139,7 +161,9 @@ package net.wg.infrastructure.managers.utils.impl
                 var loc3:*=0;
                 var loc4:*=arg1;
                 for (loc2 in loc4) 
+                {
                     loc1[loc2] = arg1[loc2] is Object && !(arg1[loc2] is Number) && !(arg1[loc2] is Boolean) && !(arg1[loc2] is String) ? this.cloneObject(arg1[loc2]) : arg1[loc2];
+                }
                 return loc1;
             }
             return undefined;
@@ -156,7 +180,9 @@ package net.wg.infrastructure.managers.utils.impl
                 var loc4:*=0;
                 var loc5:*=arg3;
                 for each (loc3 in loc5) 
+                {
                     loc3.htmlText = loc3.htmlText + "\n";
+                }
             }
             arg2.htmlText = loc1;
             return;
@@ -183,7 +209,9 @@ package net.wg.infrastructure.managers.utils.impl
                 var loc1:*;
                 var loc2:*=(loc1 = arg1.length >= arg2.length ? arg1.slice() : arg2.slice()).length;
                 while (loc2--) 
+                {
                     loc1[loc2] = arg1[loc2] + (arg2[loc2] - arg1[loc2]) * arg3;
+                }
                 return loc1;
             }
             amount = amount / 100;
@@ -206,7 +234,9 @@ package net.wg.infrastructure.managers.utils.impl
         internal function canToDestroying(arg1:Object):Boolean
         {
             if (arg1) 
+            {
                 return arg1 is net.wg.infrastructure.interfaces.IDAAPIModule && !net.wg.infrastructure.interfaces.IDAAPIModule(arg1).disposed || !(arg1 is net.wg.infrastructure.interfaces.IDAAPIModule);
+            }
             return false;
         }
 
@@ -223,14 +253,18 @@ package net.wg.infrastructure.managers.utils.impl
         public function isLeftButton(arg1:flash.events.MouseEvent):Boolean
         {
             if (arg1 is scaleform.gfx.MouseEventEx) 
+            {
                 return scaleform.gfx.MouseEventEx(arg1).buttonIdx == scaleform.gfx.MouseEventEx.LEFT_BUTTON;
+            }
             return true;
         }
 
         public function isRightButton(arg1:flash.events.MouseEvent):Boolean
         {
             if (arg1 is scaleform.gfx.MouseEventEx) 
+            {
                 return scaleform.gfx.MouseEventEx(arg1).buttonIdx == scaleform.gfx.MouseEventEx.RIGHT_BUTTON;
+            }
             return false;
         }
 
@@ -253,7 +287,9 @@ package net.wg.infrastructure.managers.utils.impl
                 }
             }
             if (arg6) 
+            {
                 arg1.textColor = arg6.rgb;
+            }
             return arg1.htmlText;
         }
 

@@ -39,7 +39,9 @@ package net.wg.gui.lobby.hangar.crew
             this.list = null;
             this.bg = null;
             if (this._helpLayout) 
+            {
                 this.closeHelpLayout();
+            }
             this._helpLayout = null;
             super.dispose();
             super.onDispose();
@@ -105,13 +107,17 @@ package net.wg.gui.lobby.hangar.crew
                     for each (loc8 in loc10) 
                     {
                         if (loc8.tankmanID != arg1[loc3].tankmanID) 
+                        {
                             continue;
+                        }
                         loc5 = loc8;
                         break;
                     }
                 }
                 else 
+                {
                     loc5 = {"iconFile":arg1[loc3].nationID != 0 ? "germany-empty.png" : "ussr-empty.png", "role":arg1[loc3].role, "roleIconFile":arg1[loc3].roleIcon, "firstname":arg1[loc3].firstname ? arg1[loc3].firstname : "", "lastname":arg1[loc3].lastname ? arg1[loc3].lastname : "", "rank":arg1[loc3].rank ? arg1[loc3].rank : "", "specializationLevel":-1, "vehicleType":arg1[loc3].vehicleType, "tankType":arg1[loc3].tankType, "tankmanID":NaN};
+                }
                 loc5.slot = arg1[loc3].slot;
                 loc5.curVehicleType = arg1[loc3].tankType;
                 loc5.curVehicleName = arg1[loc3].vehicleType;
@@ -126,9 +132,13 @@ package net.wg.gui.lobby.hangar.crew
                     if (arg2[loc7].roleType == arg1[loc3].roleType && arg2[loc7].nationID == arg1[loc3].nationID) 
                     {
                         if (arg2[loc7].tankmanID == arg1[loc3].tankmanID) 
+                        {
                             arg2[loc7].selected = true;
+                        }
                         if (!arg2[loc7].inTank || arg2[loc7].tankmanID == arg1[loc3].tankmanID) 
+                        {
                             loc5.recruitList.push(arg2[loc7]);
+                        }
                     }
                     ++loc7;
                 }
@@ -167,7 +177,9 @@ package net.wg.gui.lobby.hangar.crew
         protected override function draw():void
         {
             if (isInvalid(INVALIDATE_LIST)) 
+            {
                 updateTankmenS();
+            }
             if (isInvalid(INVALIDATE_ENABLE)) 
             {
                 this.list.validateNow();
@@ -180,7 +192,9 @@ package net.wg.gui.lobby.hangar.crew
         public function closeHelpLayout():void
         {
             if (this.getHelpLayout() != null) 
+            {
                 App.utils.helpLayout.destroy(this.getHelpLayout());
+            }
             return;
         }
 
@@ -208,7 +222,9 @@ package net.wg.gui.lobby.hangar.crew
             var loc3:*=0;
             var loc4:*=arg1;
             for each (loc2 in loc4) 
+            {
                 loc1.push(new net.wg.gui.lobby.hangar.crew.RecruitRendererVO(loc2));
+            }
             return loc1;
         }
 

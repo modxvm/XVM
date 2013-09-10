@@ -22,7 +22,9 @@ package net.wg.gui.lobby.settings.vo
         public function set isDependOn(arg1:String):void
         {
             if (this._isDependOn == arg1) 
+            {
                 return;
+            }
             this._isDependOn = arg1;
             return;
         }
@@ -35,7 +37,9 @@ package net.wg.gui.lobby.settings.vo
         public function set readOnly(arg1:Boolean):void
         {
             if (this._readOnly == arg1) 
+            {
                 return;
+            }
             this._readOnly = arg1;
             return;
         }
@@ -48,7 +52,9 @@ package net.wg.gui.lobby.settings.vo
         public function set advanced(arg1:Boolean):void
         {
             if (this._advanced == arg1) 
+            {
                 return;
+            }
             this._advanced = arg1;
             return;
         }
@@ -61,7 +67,9 @@ package net.wg.gui.lobby.settings.vo
         public function set lastVal(arg1:*):void
         {
             if (this._lastVal == arg1) 
+            {
                 return;
+            }
             this._lastVal = arg1;
             return;
         }
@@ -74,7 +82,9 @@ package net.wg.gui.lobby.settings.vo
         public function set isDataAsSelectedIndex(arg1:Boolean):void
         {
             if (this._isDataAsSelectedIndex == arg1) 
+            {
                 return;
+            }
             this._isDataAsSelectedIndex = arg1;
             return;
         }
@@ -92,7 +102,9 @@ package net.wg.gui.lobby.settings.vo
         public function set current(arg1:*):void
         {
             if (this._current === arg1) 
+            {
                 return;
+            }
             this._current = arg1;
             return;
         }
@@ -105,7 +117,9 @@ package net.wg.gui.lobby.settings.vo
         public function set options(arg1:Array):void
         {
             if (this._options == arg1) 
+            {
                 return;
+            }
             this._options = arg1;
             return;
         }
@@ -118,7 +132,9 @@ package net.wg.gui.lobby.settings.vo
         public function set type(arg1:String):void
         {
             if (this._type == arg1) 
+            {
                 return;
+            }
             this._type = arg1;
             return;
         }
@@ -131,7 +147,9 @@ package net.wg.gui.lobby.settings.vo
         public function set hasLabel(arg1:Boolean):void
         {
             if (this._hasLabel == arg1) 
+            {
                 return;
+            }
             this._hasLabel = arg1;
             return;
         }
@@ -144,7 +162,9 @@ package net.wg.gui.lobby.settings.vo
         public function set hasValue(arg1:Boolean):void
         {
             if (this._hasValue == arg1) 
+            {
                 return;
+            }
             this._hasValue = arg1;
             return;
         }

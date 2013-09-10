@@ -32,7 +32,9 @@ package net.wg.gui.lobby.vehicleInfo
         {
             super.dispose();
             while (this.numChildren > 0) 
+            {
                 this.removeChildAt(0);
+            }
             return;
         }
 

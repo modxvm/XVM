@@ -89,15 +89,23 @@ package net.wg.gui.lobby.questsWindow
             while (loc2 < this._elements.length) 
             {
                 if (loc2 != 0) 
+                {
                     this._elements[loc2].y = this._elements[(loc2 - 1)].y + this._elements[(loc2 - 1)].height;
+                }
                 else 
+                {
                     this._elements[loc2].y = loc1;
+                }
                 ++loc2;
             }
             if (this._elements.length > 0) 
+            {
                 this.line.y = Math.round(this._elements[(this._elements.length - 1)].y + this._elements[(this._elements.length - 1)].height);
+            }
             else 
+            {
                 this.line.y = loc1 + PADDING;
+            }
             var loc3:*=Math.round(this.line.y + this.line.height);
             setSize(this.width, loc3);
             return;

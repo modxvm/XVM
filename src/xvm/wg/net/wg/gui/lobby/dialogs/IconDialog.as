@@ -40,7 +40,9 @@ package net.wg.gui.lobby.dialogs
                 this.icon.removeEventListener(net.wg.gui.events.UILoaderEvent.COMPLETE, this.loadingCompleteHandler);
                 this.icon.dispose();
                 if (this.icon.parent) 
+                {
                     this.icon.parent.removeChild(this.icon);
+                }
                 this.icon = null;
             }
             super.onDispose();

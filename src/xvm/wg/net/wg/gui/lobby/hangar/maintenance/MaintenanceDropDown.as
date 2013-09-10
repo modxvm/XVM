@@ -41,7 +41,9 @@ package net.wg.gui.lobby.hangar.maintenance
             if (!arg1.buttonDown) 
             {
                 if (!enabled) 
+                {
                     return;
+                }
                 setState("out");
             }
             return;
@@ -53,7 +55,9 @@ package net.wg.gui.lobby.hangar.maintenance
             if (!arg1.buttonDown) 
             {
                 if (!enabled) 
+                {
                     return;
+                }
                 setState("over");
             }
             return;
@@ -63,7 +67,9 @@ package net.wg.gui.lobby.hangar.maintenance
         {
             super.draw();
             if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+            {
                 enabled = _dataProvider.length > 0;
+            }
             return;
         }
     }

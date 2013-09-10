@@ -98,9 +98,13 @@ package net.wg.gui.lobby.battleloading
             {
                 arg1[loc2].position = loc2 + 1;
                 if (arg1[loc2].playerID == arg2) 
+                {
                     loc1.selected = loc2;
+                }
                 if (arg3 > 0 && arg1[loc2].squad == arg3 && arg4 == 1) 
+                {
                     arg1[loc2].squad = arg1[loc2].squad + 10;
+                }
                 ++loc2;
             }
             loc1.team = arg1;

@@ -22,7 +22,9 @@ package org.idmedia.as3commons.util
             while (loc2.hasNext()) 
             {
                 if (!this.add(loc2.next())) 
+                {
                     continue;
+                }
                 loc1 = true;
             }
             return loc1;
@@ -50,7 +52,9 @@ package org.idmedia.as3commons.util
             while (loc1.hasNext()) 
             {
                 if (this.contains(loc1.next())) 
+                {
                     continue;
+                }
                 return false;
             }
             return true;
@@ -72,7 +76,9 @@ package org.idmedia.as3commons.util
             while (loc1.hasNext()) 
             {
                 if (loc1.next() != arg1) 
+                {
                     continue;
+                }
                 loc1.remove();
                 return true;
             }
@@ -89,7 +95,9 @@ package org.idmedia.as3commons.util
             var loc1:*=new Array();
             var loc2:*=this.iterator();
             while (loc2.hasNext()) 
+            {
                 loc1.push(loc2.next());
+            }
             return loc1;
         }
 

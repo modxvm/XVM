@@ -16,9 +16,13 @@ package net.wg.gui.lobby.profile.components.chart
             invalidate(scaleform.clik.constants.InvalidationType.DATA);
             var loc1:*="percentValue";
             if (_data.hasOwnProperty(loc1)) 
+            {
                 this.value = _data[loc1];
+            }
             else if (!isNaN(uint(_data))) 
+            {
                 this.value = uint(_data);
+            }
             return;
         }
 
@@ -31,7 +35,9 @@ package net.wg.gui.lobby.profile.components.chart
                 invalidate(VALUE_INV);
             }
             if (isInvalid(VALUE_INV)) 
+            {
                 this.applyValueChange();
+            }
             return;
         }
 

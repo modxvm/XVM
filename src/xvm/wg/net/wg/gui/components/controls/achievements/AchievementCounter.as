@@ -41,19 +41,37 @@ package net.wg.gui.components.controls.achievements
             if (isInvalid(COUNTER_TYPE_INVALID)) 
             {
                 if (this._counterType != GREY) 
+                {
                     if (this._counterType != YELLOW) 
+                    {
                         if (this._counterType != RED) 
+                        {
                             if (this._counterType != BEIGE) 
+                            {
                                 if (this._counterType == SMALL) 
+                                {
                                     loc1 = "SmallCounter_UI";
+                                }
+                            }
                             else 
+                            {
                                 loc1 = "BeigeCounter_UI";
+                            }
+                        }
                         else 
+                        {
                             loc1 = "RedCounter_UI";
+                        }
+                    }
                     else 
+                    {
                         loc1 = "YellowCounter_UI";
+                    }
+                }
                 else 
+                {
                     loc1 = "GreyCounter_UI";
+                }
                 if (this.currentCounterClassName != loc1) 
                 {
                     this.currentCounterClassName = loc1;
@@ -65,9 +83,13 @@ package net.wg.gui.components.controls.achievements
                     if (loc1 && !(loc1 == "")) 
                     {
                         if (App.utils) 
+                        {
                             this.counter = App.utils.classFactory.getComponent(loc1, net.wg.gui.components.controls.achievements.CounterComponent);
+                        }
                         else 
+                        {
                             this.counter = flash.utils.getDefinitionByName(loc1) as net.wg.gui.components.controls.achievements.CounterComponent;
+                        }
                         invalidate(LAYOUT_INVALID);
                     }
                 }
@@ -79,7 +101,9 @@ package net.wg.gui.components.controls.achievements
                 invalidate(LAYOUT_INVALID);
             }
             if (isInvalid(LAYOUT_INVALID)) 
+            {
                 this.applyLayoutChanges();
+            }
             return;
         }
 
@@ -110,8 +134,12 @@ package net.wg.gui.components.controls.achievements
         protected function applyData():void
         {
             if (data) 
+            {
                 if (data.hasOwnProperty("counterType")) 
+                {
                     this.counterType = data["counterType"];
+                }
+            }
             return;
         }
 
@@ -147,7 +175,9 @@ package net.wg.gui.components.controls.achievements
                 addEventListener(flash.events.Event.RENDER, validateNow, false, 0, true);
                 addEventListener(flash.events.Event.ENTER_FRAME, handleEnterFrameValidation, false, 0, true);
                 if (stage != null) 
+                {
                     stage.invalidate();
+                }
             }
             return;
         }
@@ -157,10 +187,16 @@ package net.wg.gui.components.controls.achievements
             super.handleMouseRollOver(arg1);
             var loc1:*=data as net.wg.gui.lobby.profile.data.ProfileAchievementVO;
             if (loc1) 
+            {
                 if (loc1.name != "markOfMastery") 
+                {
                     App.toolTipMgr.showSpecial(net.wg.data.constants.Tooltips.ACHIEVMENT, null, loc1.dossierType, loc1.dossierCompDescr, loc1.name, loc1.isRare, loc1.isDossierForCurrentUser);
+                }
                 else 
+                {
                     App.toolTipMgr.showSpecial(net.wg.data.constants.Tooltips.TANK_CLASS, null, loc1.name, loc1.value);
+                }
+            }
             return;
         }
 
@@ -179,7 +215,9 @@ package net.wg.gui.components.controls.achievements
                 loader.removeEventListener(flash.events.MouseEvent.ROLL_OUT, this.loaderMouseRollOut);
             }
             if (this.counter && contains(this.counter)) 
+            {
                 removeChild(this.counter);
+            }
             super.dispose();
             return;
         }

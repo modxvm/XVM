@@ -36,7 +36,9 @@ package net.wg.gui.lobby.store.views.base
                 this.setCurrentVehicle(getFilterData().current);
             }
             if (!(getFilterData().nation == arg1) || arg2) 
+            {
                 this.updateSubFilter(arg1);
+            }
             return;
         }
 
@@ -52,7 +54,9 @@ package net.wg.gui.lobby.store.views.base
                 {
                     loc4 = net.wg.data.VO.ShopVehicleFilterElementData(getFilterData().dataProvider[loc3]);
                     if (this.getCurrentVehicle() == loc4.id) 
+                    {
                         loc1 = loc2.length;
+                    }
                     loc2.push({"label":loc4.name, "data":loc4.id});
                 }
                 ++loc3;
@@ -76,7 +80,9 @@ package net.wg.gui.lobby.store.views.base
                 this._programUpdating = false;
             }
             else 
+            {
                 this.myVehicleRadioBtn.enabled = false;
+            }
             return;
         }
 
@@ -97,9 +103,13 @@ package net.wg.gui.lobby.store.views.base
             {
                 getFilterData().current = arg1.itemData.data;
                 if (this.myVehicleRadioBtn.selected) 
+                {
                     dispatchViewChange();
+                }
                 else 
+                {
                     this.myVehicleRadioBtn.selected = true;
+                }
             }
             return;
         }

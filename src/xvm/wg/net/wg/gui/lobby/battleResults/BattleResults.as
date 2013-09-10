@@ -88,7 +88,9 @@ package net.wg.gui.lobby.battleResults
                     this.noResult.visible = false;
                 }
                 else 
+                {
                     this.noResult.visible = true;
+                }
                 this._wasPopulated = false;
             }
             return;

@@ -102,11 +102,15 @@ package net.wg.gui.tutorial.controls
             switch (loc3) 
             {
                 case net.wg.gui.tutorial.constants.HintItemType.TEXT:
+                {
                     loc2 = this.textItemRenderer;
                     break;
+                }
                 case net.wg.gui.tutorial.constants.HintItemType.VIDEO_LINK:
+                {
                     loc2 = this.videoItemRenderer;
                     break;
+                }
             }
             loc1 = App.utils.classFactory.getComponent(loc2, net.wg.gui.tutorial.controls.HintBaseItemRenderer);
             loc1.data = arg1;

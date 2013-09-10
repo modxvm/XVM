@@ -10,7 +10,9 @@ package com.adobe.serialization.json
             this.nextToken();
             this.value = this.parseValue();
             if (arg2 && !(this.nextToken() == null)) 
+            {
                 this.tokenizer.parseError("Unexpected characters left in input stream");
+            }
             return;
         }
 
@@ -36,7 +38,9 @@ package com.adobe.serialization.json
         internal final function checkValidToken():void
         {
             if (this.token == null) 
+            {
                 this.tokenizer.parseError("Unexpected end of input");
+            }
             return;
         }
 
@@ -45,12 +49,16 @@ package com.adobe.serialization.json
             var loc1:*=new Array();
             this.nextValidToken();
             if (this.token.type == com.adobe.serialization.json.JSONTokenType.RIGHT_BRACKET) 
+            {
                 return loc1;
+            }
             if (!this.strict && this.token.type == com.adobe.serialization.json.JSONTokenType.COMMA) 
             {
                 this.nextValidToken();
                 if (this.token.type == com.adobe.serialization.json.JSONTokenType.RIGHT_BRACKET) 
+                {
                     return loc1;
+                }
                 this.tokenizer.parseError("Leading commas are not supported.  Expecting \']\' but found " + this.token.value);
             }
             for (;;) 
@@ -58,7 +66,9 @@ package com.adobe.serialization.json
                 loc1.push(this.parseValue());
                 this.nextValidToken();
                 if (this.token.type == com.adobe.serialization.json.JSONTokenType.RIGHT_BRACKET) 
+                {
                     return loc1;
+                }
                 if (this.token.type == com.adobe.serialization.json.JSONTokenType.COMMA) 
                 {
                     this.nextToken();
@@ -66,7 +76,9 @@ package com.adobe.serialization.json
                     {
                         this.checkValidToken();
                         if (this.token.type == com.adobe.serialization.json.JSONTokenType.RIGHT_BRACKET) 
+                        {
                             return loc1;
+                        }
                     }
                     continue;
                 }
@@ -81,12 +93,16 @@ package com.adobe.serialization.json
             var loc1:*=new Object();
             this.nextValidToken();
             if (this.token.type == com.adobe.serialization.json.JSONTokenType.RIGHT_BRACE) 
+            {
                 return loc1;
+            }
             if (!this.strict && this.token.type == com.adobe.serialization.json.JSONTokenType.COMMA) 
             {
                 this.nextValidToken();
                 if (this.token.type == com.adobe.serialization.json.JSONTokenType.RIGHT_BRACE) 
+                {
                     return loc1;
+                }
                 this.tokenizer.parseError("Leading commas are not supported.  Expecting \'}\' but found " + this.token.value);
             }
             for (;;) 
@@ -96,16 +112,22 @@ package com.adobe.serialization.json
                     loc2 = String(this.token.value);
                     this.nextValidToken();
                     if (this.token.type != com.adobe.serialization.json.JSONTokenType.COLON) 
+                    {
                         this.tokenizer.parseError("Expecting : but found " + this.token.value);
+                    }
                     else 
                     {
                         this.nextToken();
                         loc1[loc2] = this.parseValue();
                         this.nextValidToken();
                         if (this.token.type == com.adobe.serialization.json.JSONTokenType.RIGHT_BRACE) 
+                        {
                             return loc1;
+                        }
                         if (this.token.type != com.adobe.serialization.json.JSONTokenType.COMMA) 
+                        {
                             this.tokenizer.parseError("Expecting } or , but found " + this.token.value);
+                        }
                         else 
                         {
                             this.nextToken();
@@ -113,7 +135,9 @@ package com.adobe.serialization.json
                             {
                                 this.checkValidToken();
                                 if (this.token.type == com.adobe.serialization.json.JSONTokenType.RIGHT_BRACE) 
+                                {
                                     return loc1;
+                                }
                             }
                         }
                     }
@@ -131,21 +155,33 @@ package com.adobe.serialization.json
             switch (loc1) 
             {
                 case com.adobe.serialization.json.JSONTokenType.LEFT_BRACE:
+                {
                     return this.parseObject();
+                }
                 case com.adobe.serialization.json.JSONTokenType.LEFT_BRACKET:
+                {
                     return this.parseArray();
+                }
                 case com.adobe.serialization.json.JSONTokenType.STRING:
                 case com.adobe.serialization.json.JSONTokenType.NUMBER:
                 case com.adobe.serialization.json.JSONTokenType.TRUE:
                 case com.adobe.serialization.json.JSONTokenType.FALSE:
                 case com.adobe.serialization.json.JSONTokenType.NULL:
+                {
                     return this.token.value;
+                }
                 case com.adobe.serialization.json.JSONTokenType.NAN:
+                {
                     if (!this.strict) 
+                    {
                         return this.token.value;
+                    }
                     this.tokenizer.parseError("Unexpected " + this.token.value);
+                }
                 default:
+                {
                     this.tokenizer.parseError("Unexpected " + this.token.value);
+                }
             }
             return null;
         }

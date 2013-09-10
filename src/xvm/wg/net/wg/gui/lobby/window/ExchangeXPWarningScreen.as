@@ -29,7 +29,9 @@ package net.wg.gui.lobby.window
         {
             super.draw();
             if (isInvalid(TEXT_INVALID)) 
+            {
                 this.textField.text = this._text;
+            }
             return;
         }
 

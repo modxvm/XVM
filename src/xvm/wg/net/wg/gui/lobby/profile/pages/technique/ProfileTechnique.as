@@ -62,7 +62,9 @@ package net.wg.gui.lobby.profile.pages.technique
         protected override function applyResizing():void
         {
             if (layoutManager) 
+            {
                 layoutManager.setDimension(currentDimension.x, currentDimension.y);
+            }
             this.x = Math.round(currentDimension.x / 2 - centerOffset);
             this.listComponent.setViewSize(currentDimension.x, currentDimension.y - this.listComponent.y);
             this.stackComponent.setViewSize(Math.min(currentDimension.x, net.wg.gui.lobby.profile.ProfileConstants.MIN_APP_WIDTH) - this.stackComponent.x, currentDimension.y - this.stackComponent.y);
@@ -73,7 +75,9 @@ package net.wg.gui.lobby.profile.pages.technique
         {
             super.draw();
             if (isInvalid(CURRENT_DIMENSION_INVALID) && currentDimension) 
+            {
                 this.applyResizing();
+            }
             return;
         }
 

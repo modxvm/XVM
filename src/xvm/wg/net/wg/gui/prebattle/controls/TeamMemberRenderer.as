@@ -35,7 +35,9 @@ package net.wg.gui.prebattle.controls
         public override function setData(arg1:Object):void
         {
             if (arg1 != null) 
+            {
                 arg1 = new net.wg.gui.prebattle.data.PlayerPrbInfoVO(arg1);
+            }
             super.setData(arg1);
             return;
         }
@@ -44,7 +46,9 @@ package net.wg.gui.prebattle.controls
         {
             var loc1:*=model.accID != -1 ? this.isVehicleValid ? getToolTipData() : model.himself ? TOOLTIPS.MEMBERS_VEHICLELEVELLIMITS_BODY : getToolTipData() : MESSENGER.DIALOGS_TEAMCHANNEL_BUTTONS_INVITE;
             if (loc1 && loc1.length > 0) 
+            {
                 App.toolTipMgr.show(loc1);
+            }
             return;
         }
 
@@ -57,7 +61,9 @@ package net.wg.gui.prebattle.controls
             this.status_icon.visible = loc4 = loc4;
             this.commander_icon.visible = loc4;
             if (!model) 
+            {
                 return;
+            }
             loc1 = model.getStateString();
             if (loc1 == net.wg.gui.prebattle.constants.PrebattleStateString.UNKNOWN) 
             {
@@ -72,14 +78,20 @@ package net.wg.gui.prebattle.controls
                 status.visible = true;
                 status.gotoAndPlay(loc1);
                 if (this.status_icon.currentLabels.indexOf(loc1, 0)) 
+                {
                     this.status_icon.gotoAndPlay(loc1);
+                }
                 if (loc1 == net.wg.gui.prebattle.constants.PrebattleStateString.OFFLINE) 
+                {
                     this.status_icon.gotoAndPlay(net.wg.gui.prebattle.constants.PrebattleStateString.NOT_READY);
+                }
                 if (this.hitTestPoint(mouseX, mouseY, true)) 
                 {
                     loc3 = getToolTipData();
                     if (loc3.length > 0) 
+                    {
                         App.toolTipMgr.showSpecial(loc3, null);
+                    }
                 }
                 if (model.vType) 
                 {
@@ -87,7 +99,9 @@ package net.wg.gui.prebattle.controls
                     this.vehicle_type_icon.gotoAndPlay(model.vType);
                 }
                 else 
+                {
                     this.vehicle_type_icon.visible = false;
+                }
                 if (model.isCreator) 
                 {
                     this.commander_icon.visible = true;
@@ -106,9 +120,13 @@ package net.wg.gui.prebattle.controls
             vehicleNameField.text = model.vShortName;
             this.updateValidVehicleState(this.isVehicleValid);
             if (isNaN(model.orderNumber)) 
+            {
                 this.numberField.visible = false;
+            }
             else 
+            {
                 this.numberField.text = String(model.orderNumber);
+            }
             label = model.fullName;
             this.updateAfterStateChange();
             return;
@@ -118,7 +136,9 @@ package net.wg.gui.prebattle.controls
         {
             super.updateAfterStateChange();
             if (!initialized || model == null) 
+            {
                 return;
+            }
             if (model.isCreator) 
             {
                 this.commander_icon.visible = true;
@@ -130,7 +150,9 @@ package net.wg.gui.prebattle.controls
                 this.vehicle_type_icon.gotoAndPlay(model.vType);
             }
             else 
+            {
                 this.vehicle_type_icon.visible = false;
+            }
             scaleform.gfx.TextFieldEx.setVerticalAlign(textField, scaleform.gfx.TextFieldEx.VALIGN_TOP);
             scaleform.gfx.TextFieldEx.setVerticalAlign(vehicleNameField, scaleform.gfx.TextFieldEx.VALIGN_TOP);
             scaleform.gfx.TextFieldEx.setVerticalAlign(this.numberField, scaleform.gfx.TextFieldEx.VALIGN_TOP);
@@ -165,7 +187,9 @@ package net.wg.gui.prebattle.controls
         internal function updateValidVehicleState(arg1:Boolean):void
         {
             if (isNaN(model.accID)) 
+            {
                 return;
+            }
             this.wrong_limits.visible = !arg1;
             if (arg1) 
             {
