@@ -55,6 +55,7 @@ class _Stat(object):
         self.req = None
         self.resp = None
         self.arenaId = None
+        self.team = None
         self.players = None
         self.playersSkip = None
         self.cache = {}
@@ -119,6 +120,7 @@ class _Stat(object):
         player = BigWorld.player()
         if player.arenaUniqueID != self.arenaId:
             self.arenaId = player.arenaUniqueID
+            self.team = player.team
             self.players = {}
             self.playersSkip = {}
 
@@ -305,7 +307,7 @@ class _Stat(object):
             if pl.playerId == stat['_id']:
                 stat['clan'] = pl.clan
                 stat['name'] = pl.name
-                stat['team'] = pl.team
+                stat['team'] = TEAM_ALLY if self.team == pl.team else TEAM_ENEMY
                 stat['alive'] = pl.alive
                 stat['ready'] = pl.ready
                 if pl.vn == stat['vn'].upper():
@@ -316,20 +318,6 @@ class _Stat(object):
                     stat['level'] = pl.vLevel
                     pass
                 break;
-
-
-    def update(self, vData):
-        self.vName = vData['vehicleType'].type.shortUserString
-        vId = vData['vehicleType'].type.id
-        self.vId = (vId[0] << 4) | (vId[1] << 8)
-        self.vLevel = vData['vehicleType'].type.level
-        self.maxHealth = vData['vehicleType'].maxHealth
-        self.vIcon = vData['vehicleType'].type.name.replace(':', '-')
-        self.vn = vData['vehicleType'].type.name
-        self.vn = self.vn[self.vn.find(':')+1:].upper()
-        self.vType = set(VEHICLE_CLASS_TAGS.intersection(vData['vehicleType'].type.tags)).pop()
-        self.team = vData['team']
-
 
         return stat
 
