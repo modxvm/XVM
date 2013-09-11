@@ -55,9 +55,9 @@ package xvm.hangar.components.BattleLoading
                 return;
 
             if (playerName == null)
-                playerName = data.label;
+                playerName = data.label + (data.clanAbbrev == null || data.clanAbbrev == "" ? "" : "[" + data.clanAbbrev + "]");
 
-            Macros.RegisterMinimalMacrosData(playerName, data.clanAbbrev, Utils.clearIcon(data.icon), data.vehicle);
+            Macros.RegisterMinimalMacrosData(playerName, Utils.clearIcon(data.icon), data.vehicle);
             data.label = Macros.Format(playerName, "{{nick}}");
 
 
@@ -129,7 +129,7 @@ package xvm.hangar.components.BattleLoading
             if (!cfg.show)
                 return;
             var icon:ClanIcon = new ClanIcon(cfg, proxy.iconLoader.x, proxy.iconLoader.y, team,
-                WGUtils.GetPlayerName(playerName), WGUtils.GetClanName(playerName));
+                WGUtils.GetPlayerName(playerName), WGUtils.GetClanNameWithoutBrackets(playerName));
             if (icon != null)
                 proxy.addChild(icon);
         }

@@ -27,7 +27,7 @@ package com.xvm.utils
             return (pos < 0) ? fullplayername : StringUtils.trim(fullplayername.slice(0, pos));
         }
 
-        public static function GetClanName(fullplayername:String):String
+        public static function GetClanNameWithoutBrackets(fullplayername:String):String
         {
             var pos:Number = fullplayername.indexOf("[");
             if (pos < 0)
@@ -38,7 +38,7 @@ package com.xvm.utils
 
         public static function GetClanNameWithBrackets(fullplayername:String):String
         {
-            var clan:String = GetClanName(fullplayername);
+            var clan:String = GetClanNameWithoutBrackets(fullplayername);
             return clan ? "[" + clan + "]" : "";
         }
     }

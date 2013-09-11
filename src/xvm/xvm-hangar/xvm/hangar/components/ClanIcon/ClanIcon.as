@@ -39,7 +39,7 @@ package xvm.hangar.components.ClanIcon
             setSource(nick, clan);
         }
 
-        public function setSource(nick: String, clan: String):void
+        public function setSource(nick:String, clan:String):void
         {
             // Load order: nick -> clan -> default clan -> default nick
             var paths:Vector.<String> = new Vector.<String>();
@@ -57,7 +57,7 @@ package xvm.hangar.components.ClanIcon
             {
                 var prefix:String = Defines.XVMRES_ROOT + Config.config.battle.clanIconsFolder + Config.gameRegion + "/";
                 paths.push(prefix + "nick/" + nick + ".png");
-                if (clan)
+                if (clan != null)
                 {
                     paths.push(prefix + "clan/" + clan + ".png");
                     paths.push(prefix + "clan/default.png");

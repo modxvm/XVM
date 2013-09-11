@@ -32,7 +32,8 @@ package com.xvm.utils
                 var len:int = formatArr.length;
                 if (len > 1)
                 {
-                    var pdata:Object = dict[WGUtils.GetPlayerName(playerName)];
+                    var name:String = WGUtils.GetPlayerName(playerName);
+                    var pdata:Object = dict[name];
                     for (var i:int = 1; i < len; ++i)
                     {
                         var arr2:Array = formatArr[i].split("}}", 2);
@@ -65,8 +66,13 @@ package com.xvm.utils
             return res;
         }
 
-        public static function RegisterMinimalMacrosData(name:String, clanWithoutBrackets:String, vicon:String, vname:String):void
+        public static function RegisterMinimalMacrosData(playerName:String, vicon:String, vname:String):void
         {
+            if (playerName == null)
+                throw new Error("empty name");
+
+            var name:String = WGUtils.GetPlayerName(playerName);
+
             // check if already registered
             if (dict.hasOwnProperty(name))
                 return;
@@ -75,7 +81,8 @@ package com.xvm.utils
             var pdata:Dictionary = dict[name];
 
             var nick:String = modXvmDevLabel(name);
-            var clanWithBrackets:String = (clanWithoutBrackets == null || clanWithoutBrackets == "") ? "" : "[" + clanWithoutBrackets + "]";
+            var clanWithoutBrackets:String = WGUtils.GetClanNameWithoutBrackets(playerName);
+            var clanWithBrackets:String = WGUtils.GetClanNameWithBrackets(playerName);
 
             // {{nick}}
             pdata["nick"] = nick + clanWithBrackets;
@@ -101,7 +108,7 @@ package com.xvm.utils
             if (data == null)
                 return;
 
-            RegisterMinimalMacrosData(data.name, data.clan, data.icon, data.vname);
+            RegisterMinimalMacrosData(data.name + (data.clan == null || data.clan == "" ? "" : "[" + data.clan + "]"), data.icon, data.vname);
 
             // TODO: Load stat in FogOfWar
             /*if (Stat.loaded && Config.s_config.rating.loadEnemyStatsInFogOfWar)
