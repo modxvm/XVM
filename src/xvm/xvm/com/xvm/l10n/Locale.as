@@ -103,12 +103,10 @@ package com.xvm.l10n
             "hpLeftTitle": "Осталось HP:",
 
             // Capture
-            "enemyBaseCapture": "Захват вражеской базы!",
-            "enemyBaseCaptured": "Вражеская база захвачена!",
-            "allyBaseCapture": "Захват нашей базы!",
-            "allyBaseCaptured": "Наша база захвачена!",
-            "Timeleft": "Осталось",
-            "Capturers": "Захватчиков",
+            "enemyBaseCapture": "Захват базы союзниками!",
+            "enemyBaseCaptured": "База захвачена союзниками!",
+            "allyBaseCapture": "Захват базы врагами!",
+            "allyBaseCaptured": "База захвачена врагами!",
 
             // FinalStatistics
             "Hit percent": "Процент попаданий",
@@ -194,11 +192,11 @@ package com.xvm.l10n
             // Hp Left
             "hpLeftTitle": "Hitpoints left:",
 
-                // Capture
-            "enemyBaseCapture": "Enemy base capture!",
-            "enemyBaseCaptured": "Enemy base captured!",
-            "allyBaseCapture": "Ally base capture!",
-            "allyBaseCaptured": "Ally base captured!",
+            // Capture
+            "enemyBaseCapture": "Base capture by allies!",
+            "enemyBaseCaptured": "Base captured by allies!",
+            "allyBaseCapture": "Base capture by enemies!",
+            "allyBaseCaptured": "Base captured by enemies!",
 
             // UserInfo
             "UserInfoEHint":

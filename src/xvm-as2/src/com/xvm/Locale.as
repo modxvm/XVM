@@ -137,10 +137,10 @@ class com.xvm.Locale
             tr["hpLeftTitle"] = "Осталось HP:";
 
             // Capture
-            tr["enemyBaseCapture"] = "Захват вражеской базы!";
-            tr["enemyBaseCaptured"] = "Вражеская база захвачена!";
-            tr["allyBaseCapture"] = "Захват нашей базы!";
-            tr["allyBaseCaptured"] = "Наша база захвачена!";
+            tr["enemyBaseCapture"] = "Захват базы союзниками!";
+            tr["enemyBaseCaptured"] = "База захвачена союзниками!";
+            tr["allyBaseCapture"] = "Захват базы врагами!";
+            tr["allyBaseCaptured"] = "База захвачена врагами!";
             tr["Timeleft"] = "Осталось";
             tr["Capturers"] = "Захватчиков";
 
@@ -227,11 +227,11 @@ class com.xvm.Locale
             // Hp Left
             tr["hpLeftTitle"] = "Hitpoints left:";
 
-                // Capture
-            tr["enemyBaseCapture"] = "Enemy base capture!";
-            tr["enemyBaseCaptured"] = "Enemy base captured!";
-            tr["allyBaseCapture"] = "Ally base capture!";
-            tr["allyBaseCaptured"] = "Ally base captured!";
+            // Capture
+            tr["enemyBaseCapture"] = "Base capture by allies!";
+            tr["enemyBaseCaptured"] = "Base captured by allies!";
+            tr["allyBaseCapture"] = "Base capture by enemies!";
+            tr["allyBaseCaptured"] = "Base captured by enemies!";
 
             // UserInfo
             tr["UserInfoEHint"] =
