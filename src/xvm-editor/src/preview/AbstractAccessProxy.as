@@ -12,9 +12,9 @@ public class AbstractAccessProxy
     * to wot.VehicleMarkersManager.XVM data
     */
 
-    public var xvm:Xvm;
+    public var xvm:preview.Xvm;
 
-    public function AbstractAccessProxy(xvm:Xvm)
+    public function AbstractAccessProxy(xvm:preview.Xvm)
     {
         this.xvm = xvm;
     }

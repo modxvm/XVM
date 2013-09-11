@@ -26,9 +26,9 @@ package utils
             var hpMax:Number = 2000;
             var hpRatio:Number = 25;
             var alphaHp:String = "#" +
-                Utils.padLeft((GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, hp) / 100 * 255).toString(16), 2, '0');
+                Utils.padLeft((Utils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, hp) / 100 * 255).toString(16), 2, '0');
             var alphaHpRatio:String = "#" +
-                Utils.padLeft((GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, hp) / 100 * 255).toString(16), 2, '0');
+                Utils.padLeft((Utils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, hp) / 100 * 255).toString(16), 2, '0');
 
             // Fix font (ugly hack)
             format = format.split("$TextFont").join("Tahoma")
@@ -72,10 +72,10 @@ package utils
             format = format.split("{{dmg-player}}").join("1500");
 
             // Colors
-            format = format.split("{{c:hp}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, hp));
-            format = format.split("{{c:hp-ratio}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio));
-            format = format.split("{{c:dmg-kind}}").join(GraphicsUtil.GetDmgKindValue("attack"));
-            format = format.split("{{c:vtype}}").join(GraphicsUtil.GetVTypeColorValue("MT"));
+            format = format.split("{{c:hp}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, hp));
+            format = format.split("{{c:hp-ratio}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio));
+            format = format.split("{{c:dmg-kind}}").join(Utils.GetDmgKindValue("attack"));
+            format = format.split("{{c:vtype}}").join(Utils.GetVTypeColorValue("MT"));
             format = format.split("{{c:system}}").join("#FBFBFB");
 
             // Transparency
@@ -112,19 +112,19 @@ package utils
             format = format.split("{{t-kb:4}}").join(" .5k");
             format = format.split("{{t-hb:3}}").join(" 5h");
             format = format.split("{{t-battles:4}}").join("5500");
-            format = format.split("{{c:xeff}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, 100));
-            format = format.split("{{c:xwn}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, 77));
-            format = format.split("{{c:eff}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, 1800));
-            format = format.split("{{c:wn}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN, 1600));
-            format = format.split("{{c:rating}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, 66));
-            format = format.split("{{c:kb}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, 11));
-            format = format.split("{{c:e}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, 5));
-            format = format.split("{{c:tdb}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, 1010));
-            format = format.split("{{c:tdv}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, 0.9));
-            format = format.split("{{c:tfb}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, 1.0));
-            format = format.split("{{c:tsb}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, 1.1));
-            format = format.split("{{c:t-rating}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, 55));
-            format = format.split("{{c:t-battles}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, 5500));
+            format = format.split("{{c:xeff}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, 100));
+            format = format.split("{{c:xwn}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, 77));
+            format = format.split("{{c:eff}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, 1800));
+            format = format.split("{{c:wn}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN, 1600));
+            format = format.split("{{c:rating}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, 66));
+            format = format.split("{{c:kb}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, 11));
+            format = format.split("{{c:e}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, 5));
+            format = format.split("{{c:tdb}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, 1010));
+            format = format.split("{{c:tdv}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, 0.9));
+            format = format.split("{{c:tfb}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, 1.0));
+            format = format.split("{{c:tsb}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, 1.1));
+            format = format.split("{{c:t-rating}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, 55));
+            format = format.split("{{c:t-battles}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, 5500));
 
             return Utils.trim(format);
         }

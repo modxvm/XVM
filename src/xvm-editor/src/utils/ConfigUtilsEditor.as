@@ -6,7 +6,7 @@ package utils
 {
     import com.xvm.JSONx;
     
-    import utils.DefaultConfig;
+    import com.xvm.misc.DefaultConfig;
     import utils.Defines;
     import utils.Utils;
 	

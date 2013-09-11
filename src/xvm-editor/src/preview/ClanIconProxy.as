@@ -9,7 +9,7 @@ public class ClanIconProxy extends AbstractAccessProxy
     * This proxy class is only for access restriction to wot.VehicleMarkersManager.Xvm
     */
 
-    public function ClanIconProxy(xvm:Xvm)
+    public function ClanIconProxy(xvm:preview.Xvm)
     {
         super(xvm);
     }

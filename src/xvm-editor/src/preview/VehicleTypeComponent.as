@@ -58,7 +58,7 @@ public class VehicleTypeComponent
 		proxy.marker.marker.icon.x = cfg.scaleX * cfg.maxScale / 100;
 		proxy.marker.marker.icon.y = cfg.scaleY * cfg.maxScale / 100;
 		proxy.marker.marker.icon.scaleX = proxy.marker.marker.icon.scaleY = cfg.maxScale / 100;
-		GraphicsUtil.colorize(proxy.marker, proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.color)),
+		Utils.colorize(proxy.marker, proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.color)),
 			proxy.isDead ? Config.s_config.consts.VM_COEFF_VMM / 10 : Config.s_config.consts.VM_COEFF_VMM);
     }
 }

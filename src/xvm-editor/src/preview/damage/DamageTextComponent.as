@@ -11,6 +11,8 @@ import preview.*;
 
 import utils.*;
 
+import com.xvm.utils.*;
+
 public class DamageTextComponent
 {
     private var proxy:DamageTextProxy;
@@ -103,7 +105,7 @@ public class DamageTextComponent
         style.parseCSS(XvmHelper.createCSS(cfg.font, color, "xvm_damageText"));
         tf.styleSheet = style;
 
-        tf.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow.distance, cfg.shadow.angle, shadowColor,
+        tf.filters = [ utils.Utils.createShadowFilter(cfg.shadow.distance, cfg.shadow.angle, shadowColor,
             cfg.shadow.alpha, cfg.shadow.size, cfg.shadow.strength) ];
 
         tf.x = -(tf.width / 2.0);

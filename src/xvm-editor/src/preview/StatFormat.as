@@ -5,6 +5,8 @@ import preview.*;
 
 import utils.*;
 
+import com.xvm.utils.MacrosUtil;
+
 public class StatFormat
 {
     public static function FormatText(format: String, isDead: Boolean):String
@@ -49,23 +51,23 @@ public class StatFormat
         format = format.split("{{t_rating:3}}").join("55%");
 
         // Dynamic colors
-        format = format.split("{{c:xeff}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, 32, "#", isDead));
-        format = format.split("{{c:xwn}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, 23, "#", isDead));
-        format = format.split("{{c:eff}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, 1234, "#", isDead));
-        format = format.split("{{c:wn}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN, 1001, "#", isDead));
-        format = format.split("{{c:rating}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, 48, "#", isDead));
-        format = format.split("{{c:kb}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, 10, "#", isDead));
+        format = format.split("{{c:xeff}}").join(MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, 32, "#", isDead));
+        format = format.split("{{c:xwn}}").join(MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, 23, "#", isDead));
+        format = format.split("{{c:eff}}").join(MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, 1234, "#", isDead));
+        format = format.split("{{c:wn}}").join(MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN, 1001, "#", isDead));
+        format = format.split("{{c:rating}}").join(MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, 48, "#", isDead));
+        format = format.split("{{c:kb}}").join(MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, 10, "#", isDead));
 
-        format = format.split("{{c:e}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, 5, "#", isDead));
-        format = format.split("{{c:tdb}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, 1010, "#", isDead));
-        format = format.split("{{c:tdv}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, 0.9, "#", isDead));
-        format = format.split("{{c:tfb}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, 1.0, "#", isDead));
-        format = format.split("{{c:tsb}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, 1.1, "#", isDead));
+        format = format.split("{{c:e}}").join(MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, 5, "#", isDead));
+        format = format.split("{{c:tdb}}").join(MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, 1010, "#", isDead));
+        format = format.split("{{c:tdv}}").join(MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, 0.9, "#", isDead));
+        format = format.split("{{c:tfb}}").join(MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, 1.0, "#", isDead));
+        format = format.split("{{c:tsb}}").join(MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, 1.1, "#", isDead));
 
-        format = format.split("{{c:t-rating}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, 55, "#", isDead));
-        format = format.split("{{c:t_rating}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, 55, "#", isDead));
-        format = format.split("{{c:t-battles}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, 2345, "#", isDead));
-        format = format.split("{{c:t_battles}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, 2345, "#", isDead));
+        format = format.split("{{c:t-rating}}").join(MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, 55, "#", isDead));
+        format = format.split("{{c:t_rating}}").join(MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, 55, "#", isDead));
+        format = format.split("{{c:t-battles}}").join(MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, 2345, "#", isDead));
+        format = format.split("{{c:t_battles}}").join(MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, 2345, "#", isDead));
 
         //format = Utils.trim(format);
 

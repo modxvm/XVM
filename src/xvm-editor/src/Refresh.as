@@ -2,7 +2,7 @@
 
 import utils.Config;
 import utils.ConfigUtilsEditor;
-import utils.DefaultConfig;
+import com.xvm.misc.DefaultConfig;
 import utils.Utils;
 
 protected function RefreshCurrentPage():void

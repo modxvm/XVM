@@ -91,7 +91,7 @@ public class HealthBarComponent
 		var fullColor:Number = proxy.formatDynamicColor(ct);
 		var lowColor:Number = proxy.formatDynamicColor(lct || ct);
 		var percent:Number = proxy.curHealth / proxy.maxHealth;
-		var currColor:Number = GraphicsUtil.colorByRatio(percent, lowColor, fullColor);
+		var currColor:Number = Utils.colorByRatio(percent, lowColor, fullColor);
 				
         border.graphics.beginFill(proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.border.color)),
 			proxy.formatDynamicAlpha(cfg.border.alpha) / 100.0);

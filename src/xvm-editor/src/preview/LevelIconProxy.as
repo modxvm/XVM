@@ -10,7 +10,7 @@ public class LevelIconProxy extends AbstractAccessProxy
     * This proxy class is only for access restriction to wot.VehicleMarkersManager.Xvm
     */
 
-    public function LevelIconProxy(xvm:Xvm)
+    public function LevelIconProxy(xvm:preview.Xvm)
     {
         super(xvm);
     }

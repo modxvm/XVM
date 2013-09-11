@@ -14,7 +14,7 @@ public class DamageTextProxy extends AbstractAccessProxy
     * This proxy class is only for access restriction to wot.VehicleMarkersManager.Xvm
     */
 
-    public function DamageTextProxy(xvm:Xvm)
+    public function DamageTextProxy(xvm:preview.Xvm)
     {
         super(xvm);
     }

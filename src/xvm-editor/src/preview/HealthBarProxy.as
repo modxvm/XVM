@@ -13,7 +13,7 @@ public class HealthBarProxy extends AbstractAccessProxy
     * This proxy class is only for access restriction to wot.VehicleMarkersManager.Xvm
     */
 
-    public function HealthBarProxy(xvm:Xvm)
+    public function HealthBarProxy(xvm:preview.Xvm)
     {
         super(xvm);
     }

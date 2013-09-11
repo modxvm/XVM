@@ -141,19 +141,19 @@ public class XvmBase
         // Colors
         formatArr = format.split("{{c:hp}}");
         if (formatArr.length > 1)
-            format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, curHealth));
+            format = formatArr.join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, curHealth));
         formatArr = format.split("{{c:hp-ratio}}");
         if (formatArr.length > 1)
-            format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio));
+            format = formatArr.join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio));
         formatArr = format.split("{{c:hp_ratio}}");
         if (formatArr.length > 1)
-            format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio));
+            format = formatArr.join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio));
         formatArr = format.split("{{c:dmg-kind}}");
         if (formatArr.length > 1)
-            format = formatArr.join(delta ? GraphicsUtil.GetDmgKindValue(damageType) : "")
+            format = formatArr.join(delta ? Utils.GetDmgKindValue(damageType) : "")
         formatArr = format.split("{{c:dmg_kind}}");
         if (formatArr.length > 1)
-            format = formatArr.join(delta ? GraphicsUtil.GetDmgKindValue(damageType) : "")
+            format = formatArr.join(delta ? Utils.GetDmgKindValue(damageType) : "")
         formatArr = format.split("{{c:system}}");
         if (formatArr.length > 1)
             format = formatArr.join(ColorsManager.getSystemColor(m_entityName, m_isDead, isBlowedUp));
@@ -162,7 +162,7 @@ public class XvmBase
         {
             if (vehicleTypeComponent != null)
             {
-                format = formatArr.join(GraphicsUtil.GetVTypeColorValue(
+                format = formatArr.join(Utils.GetVTypeColorValue(
                     Utils.vehicleClassToVehicleType(m_vclass)));
             }
         }
@@ -195,19 +195,19 @@ public class XvmBase
         var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
         var formatArr:Array = format.split("{{c:hp}}");
         if (formatArr.length > 1)
-            format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, curHealth, "0x"));
+            format = formatArr.join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, curHealth, "0x"));
         formatArr = format.split("{{c:hp-ratio}}");
         if (formatArr.length > 1)
-            format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio, "0x"));
+            format = formatArr.join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio, "0x"));
         formatArr = format.split("{{c:hp_ratio}}");
         if (formatArr.length > 1)
-            format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio, "0x"));
+            format = formatArr.join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio, "0x"));
         formatArr = format.split("{{c:dmg-kind}}");
         if (formatArr.length > 1)
-            format = formatArr.join(damageType ? GraphicsUtil.GetDmgKindValue(damageType, "0x") : "");
+            format = formatArr.join(damageType ? Utils.GetDmgKindValue(damageType, "0x") : "");
         formatArr = format.split("{{c:dmg_kind}}");
         if (formatArr.length > 1)
-            format = formatArr.join(damageType ? GraphicsUtil.GetDmgKindValue(damageType, "0x") : "");
+            format = formatArr.join(damageType ? Utils.GetDmgKindValue(damageType, "0x") : "");
         formatArr = format.split("{{c:system}}");
         if (formatArr.length > 1)
             format = formatArr.join(systemColor);
@@ -216,7 +216,7 @@ public class XvmBase
         {
             if (vehicleTypeComponent != null)
             {
-                format = formatArr.join(GraphicsUtil.GetVTypeColorValue(
+                format = formatArr.join(Utils.GetVTypeColorValue(
                     Utils.vehicleClassToVehicleType(m_vclass)));
             }
         }
@@ -236,13 +236,13 @@ public class XvmBase
         var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
         var formatArr:Array = format.split("{{a:hp}}");
         if (formatArr.length > 1)
-            format = formatArr.join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, curHealth).toString());
+            format = formatArr.join(Utils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, curHealth).toString());
         formatArr = format.split("{{a:hp-ratio}}");
         if (formatArr.length > 1)
-            format = formatArr.join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, hpRatio).toString());
+            format = formatArr.join(Utils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, hpRatio).toString());
         formatArr = format.split("{{a:hp_ratio}}");
         if (formatArr.length > 1)
-            format = formatArr.join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, hpRatio).toString());
+            format = formatArr.join(Utils.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, hpRatio).toString());
 
         var n:Number = !isNaN(parseInt(format)) ? Number(format) : 100;
         return (n <= 0) ? 1 : (n > 100) ? 100 : n;
@@ -290,7 +290,7 @@ public class XvmBase
         {
             var sh_color:Number = formatDynamicColor(formatStaticColorText(cfg.shadow.color), m_curHealth);
             var sh_alpha:Number = formatDynamicAlpha(cfg.shadow.alpha, m_curHealth);
-            textField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow.distance,
+            textField.filters = [ Utils.createShadowFilter(cfg.shadow.distance,
                 cfg.shadow.angle, sh_color, sh_alpha, cfg.shadow.size, cfg.shadow.strength) ];
         }
 

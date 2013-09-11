@@ -50,7 +50,7 @@ public class ContourIconComponent
 			contourIcon.y = cfg.y - contourIcon.height / 2.0;
 			var tintColor: Number = proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.color));
 			var tintAmount: Number = Math.min(100, Math.max(0, cfg.amount)) * 0.01;
-			GraphicsUtil.setColor(contourIcon, tintColor, tintAmount);
+			utils.Utils.setColor(contourIcon, tintColor, tintAmount);
 			contourIcon.alpha = proxy.formatDynamicAlpha(cfg.alpha) / 100.0;
 		}
     }

@@ -14,9 +14,9 @@
             import mx.events.ListEvent;
 
             import mx.utils.ObjectUtil;
-            
-            import utils.GraphicsUtil;
 
+			import utils.*;
+			
             [Embed(source="images/bg/hills-1.jpg")]
             private const IMG1 : Class;
             [Embed(source="images/bg/hills-2.jpg")]
@@ -118,7 +118,7 @@
             private function onTestHtmlCreationComplete(event:Event):void
             {
                 s_taTestHtml = taTestHtml;
-                taTestHtml.filters = [ utils.GraphicsUtil.createShadowFilter(0,0,0,100,3,200) ];
+                taTestHtml.filters = [ utils.Utils.createShadowFilter(0,0,0,100,3,200) ];
             }
         ]]>
     </fx:Script>

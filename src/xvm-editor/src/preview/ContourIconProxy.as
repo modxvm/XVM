@@ -10,7 +10,7 @@ public class ContourIconProxy extends AbstractAccessProxy
     * This proxy class is only for access restriction to wot.VehicleMarkersManager.Xvm
     */
 
-    public function ContourIconProxy(xvm:Xvm)
+    public function ContourIconProxy(xvm:preview.Xvm)
     {
         super(xvm);
     }

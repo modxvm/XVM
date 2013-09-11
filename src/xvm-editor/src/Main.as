@@ -6,7 +6,7 @@ import mx.events.MenuEvent;
 
 import utils.Config;
 import utils.ConfigUtils;
-import utils.DefaultConfig;
+import com.xvm.misc.DefaultConfig;
 import utils.Defines;
 
 public function error(str:String, title:String = ""):void

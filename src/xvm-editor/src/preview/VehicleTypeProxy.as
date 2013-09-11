@@ -13,7 +13,7 @@ public class VehicleTypeProxy extends AbstractAccessProxy
     * This proxy class is only for access restriction to wot.VehicleMarkersManager.Xvm
     */
 
-    public function VehicleTypeProxy(xvm:Xvm)
+    public function VehicleTypeProxy(xvm:preview.Xvm)
     {
         super(xvm);
     }

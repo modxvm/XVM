@@ -14,7 +14,7 @@ import mx.managers.PopUpManager;
 import utils.Config;
 import utils.ConfigUtils;
 import utils.ConfigUtilsEditor;
-import utils.DefaultConfig;
+import com.xvm.misc.DefaultConfig;
 import utils.Defines;
 import utils.OTMConfigConverter;
 import utils.PatchedXMLDecoder;

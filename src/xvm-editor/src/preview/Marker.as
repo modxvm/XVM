@@ -11,7 +11,7 @@
 
     public class Marker extends UIComponent
     {
-        public var xvm:Xvm;
+        public var xvm:preview.Xvm;
         private var isInitialized:Boolean = false;
 
         public var vehicleIconAlly:MovieClip;
@@ -28,7 +28,7 @@
         public function Marker()
         {
             // Create marker
-            xvm = new Xvm(this);
+            xvm = new preview.Xvm(this);
         }
 
         public function init(vtype:String, vclass:String, vlevel:Number, vname:String, vsource:String):void
