@@ -257,7 +257,8 @@
       { "value": 5,  "color": ${"def.colorRating.normal"   } },
       { "value": 7,  "color": ${"def.colorRating.good"     } },
       { "value": 9,  "color": ${"def.colorRating.very_good"} },
-      { "value": 11, "color": ${"def.colorRating.unique"   } },
+      { "value": 11, "color": ${"def.colorRating.unique"   } }
+    ],
     // Dynamic color by battles on current tank (only with xvm-stat).
     // Динамический цвет по количеству боев на текущем танке (только с xvm-stat).
     "t_battles": [
