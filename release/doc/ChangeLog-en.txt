@@ -1,6 +1,6 @@
 ﻿XVM-5.0.0-test1:
   * adaptation to WoT 0.8.8
-  * new platform - AS3+Python.
+  * new platform - AS3+Python. Please, delete xvm-stat.exe. It is not needed anymore.
   * xvm-stat, Dokan and .NET Framework is not required now
   * statistic is disabled in the config by default
   * removed option login/showPingOnGameLoading
