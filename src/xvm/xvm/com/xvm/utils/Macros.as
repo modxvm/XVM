@@ -1,4 +1,4 @@
-/**
+﻿/**
  * XVM Macro substitutions
  * @author Maxim Schedriviy <m.schedriviy@gmail.com>
  */
@@ -403,6 +403,8 @@ package com.xvm.utils
                         return "как ник зделал поруски!!!";
                     if (name == "sirmax2" || name == "0x01" || name == "_SirMax_")
                         return "«сэр Макс» (XVM)";
+					if (name == "STL1te")
+                        return "О, СТЛайт!";
                     break;
 
                 case "CT":
