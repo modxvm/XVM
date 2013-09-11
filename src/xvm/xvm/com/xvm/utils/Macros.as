@@ -220,7 +220,8 @@ package com.xvm.utils
             var tbK:Number = tb / 1000.0;
 
             // {{avglvl}}
-            pdata["avglvl"] = printf.format("%.1f", data.lvl);
+            var avglvl:int = data.lvl ? Math.round(data.lvl) : 0;
+            pdata["avglvl"] = avglvl <= 0 ? "-" : avglvl >= 10 ? "X" : avglvl.toString();
             // {{xeff}}
             pdata["xeff"] = data.xeff < 0 ? "--" : data.xeff == 100 ? "XX" : (data.xeff < 10 ? "0" : "") + data.xeff;
             // {{xwn}}
