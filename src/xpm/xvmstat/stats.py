@@ -245,11 +245,12 @@ class _Stat(object):
 
 
     def _get_battle_stub(self, pl):
-        return {
+        s = {
             '_id': pl.playerId,
             'nm': pl.name,
             'vn': pl.vn,
         }
+        return self._fix(s)
 
     def loadUrl(self, url, members, test=False):
         if not test:
@@ -316,9 +317,9 @@ class _Stat(object):
                     stat['maxHealth'] = pl.maxHealth
                     stat['vtype'] = pl.vType
                     stat['level'] = pl.vLevel
-                    pass
                 break;
 
+        #log(json.dumps(stat))
         return stat
 
     def _r(self, r, a, b):

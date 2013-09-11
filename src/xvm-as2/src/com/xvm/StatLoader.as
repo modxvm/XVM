@@ -62,6 +62,7 @@ class com.xvm.StatLoader
                 for (var nm in response.players)
                 {
                     var stat:Stat = response.players[nm];
+                    //Logger.addObject(stat);
                     stat = CalculateStatValues(stat);
                     if (!StatData.s_data[nm])
                     {
