@@ -21,7 +21,7 @@ FILES_SCALEFORM="
   VehicleMarkersManager.swf
   xvm.swf"
 
-XVM_FILES="xvm.xc xvm.swf res/VehicleInfo.json"
+XVM_FILES="xvm.xc xvm.swf"
 XVM_DIRS="configs l10n mods"
 
 cd $(dirname $(realpath $(cygpath --unix $0)))
