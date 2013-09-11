@@ -50,7 +50,7 @@ package xvm.hangar
         private function hideTutorial():void
         {
             if (Config.config.hangar.hideTutorial == true)
-                App.utils.scheduler.envokeInNextFrame(function():void { page.header.tutorialControl.visible = false; } );
+                page.header.tutorialControl.y = -10000;
         }
     }
 
