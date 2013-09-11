@@ -38,7 +38,6 @@ class Program
             exporter.genVehicleInfoData2();
             exporter.genVehicleInfoData2AS3();
             exporter.genVehicleNames();
-            exporter.genVehicleInfo();
             //exporter.genVehicleInfoData(); need resolve sortNames & special matchmaking definition
         }
         catch (Exception ex)

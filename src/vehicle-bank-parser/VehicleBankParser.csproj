@@ -43,7 +43,6 @@
     <Compile Include="Utils\Export.cs" />
     <Compile Include="Renderers\VehicleInfoData.cs" />
     <Compile Include="Renderers\VehicleNames.cs" />
-    <Compile Include="Renderers\VehicleInfo.cs" />
     <Compile Include="Renderers\VehicleInfoData2.cs" />
     <Compile Include="Logic\Vehicle.cs" />
     <Compile Include="Properties\Settings.Designer.cs">

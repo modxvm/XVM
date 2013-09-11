@@ -3,10 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="GAME_PATH" Type="System.String" Scope="User">
-      <Value Profile="(Default)">E:\Program Files (x86)\World_of_Tanks</Value>
+      <Value Profile="(Default)">G:\WoT</Value>
     </Setting>
     <Setting Name="XVM_PATH" Type="System.String" Scope="User">
-      <Value Profile="(Default)">F:\git repos\wot-xvm\svn</Value>
+      <Value Profile="(Default)">G:\xvm</Value>
     </Setting>
   </Settings>
 </SettingsFile>

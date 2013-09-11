@@ -27,13 +27,6 @@ class Export
         renderer.buildFile(vehicles);
     }
 
-    public void genVehicleInfo()
-    {
-        sortByLevelTypeNationName();
-        renderer = new VehicleInfo();
-        renderer.buildFile(vehicles);
-    }
-
     public void genVehicleNames()
     {
         sortByNationName();
