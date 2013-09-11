@@ -316,7 +316,7 @@ class com.xvm.Macros
                     return "как ник зделал поруски!!!";
                 if (label == "sirmax2" || label == "0x01" || label == "_SirMax_")
                     return "«сэр Макс» (XVM)";
-                if (name == "Mixailos")
+                if (label == "Mixailos")
                     return "Михаил";
                 break;
 
