@@ -405,6 +405,8 @@ package com.xvm.utils
                         return "«сэр Макс» (XVM)";
                     if (name == "STL1te")
                         return "О, СТЛайт!";
+                    if (name == "Mixailos")
+                        return "Михаил";
                     break;
 
                 case "CT":
