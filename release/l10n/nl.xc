@@ -11,7 +11,7 @@
     "Chance to win": "Win kans",
     "global": "globaal",
     "per-vehicle": "Per-Voertuig",
-	
+
     // Hitlog
     "attack": "Aanval",
     "fire": "Vuren",
@@ -64,7 +64,6 @@
     "All tanks": "Alle tanks",
     "Show all tanks in the game": "Laat alle tanks in het spel zien",
     "Player tanks": "Spelers tank",
-
     "Show all tanks played": "laat alle spelende tanks zien",
     "In hangar": "hangar",
     "Show only tanks in own hangar": "laat alleen tanks in hangar zien",

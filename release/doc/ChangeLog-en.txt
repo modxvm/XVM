@@ -4,6 +4,8 @@
   [NEW FUNCTIONS]
   * possibility of editing nickname field in battleloading, Tab:
     formatLeftNick, formatRightNick
+  * localization: added Danish, Italian and Turkish languages
+  * localization: added Polish readme
 
   [MACROS]
   * added macros {{c:avglvl}}, {{a:avglvl}}
