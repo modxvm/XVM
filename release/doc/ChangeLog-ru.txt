@@ -1,4 +1,9 @@
-﻿  * удалена опция login/showPingOnGameLoading
+﻿XVM-5.0.0-test1:
+  * адаптация к WoT 0.8.8
+  * новая платформа - AS3+Python.
+  * xvm-stat, Dokan и .NET Framework больше не требуются
+  * статистика выключена в конфиге по умолчанию
+  * удалена опция login/showPingOnGameLoading
   * удален рейтинг TWR
   * добавлены макросы {{c:avglvl}}, {{a:avglvl}}
 
