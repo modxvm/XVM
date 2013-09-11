@@ -19,7 +19,8 @@ FILES_SCALEFORM="
   StatisticForm.swf
   TeamBasesPanel.swf
   VehicleMarkersManager.swf
-  xvm.swf"
+  xvm.swf
+  XVM.xvmconf"
 
 XVM_FILES="xvm.xc xvm.swf"
 XVM_DIRS="configs l10n mods"
