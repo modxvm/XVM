@@ -1,11 +1,24 @@
 ﻿XVM-5.0.0-test1:
   * adaptation to WoT 0.8.8
-  * new platform - AS3+Python. Please, delete xvm-stat.exe. It is not needed anymore.
-  * xvm-stat, Dokan and .NET Framework is not required now
-  * statistic is disabled in the config by default
-  * removed option login/showPingOnGameLoading
-  * removed TWR rating
+
+  [NEW FUNCTIONS]
+  * possibility of editing nickname field in battleloading, Tab:
+    formatLeftNick, formatRightNick
+
+  [MACROS]
   * added macros {{c:avglvl}}, {{a:avglvl}}
+
+  [FIXES]
+  * fixed "sixth sense" icon wrong positioning
+
+  [OTHER]
+  * new platform - AS3+Python
+  * xvm-stat, Dokan and .NET Framework is not required now. Please, delete xvm-stat.exe.
+  * config version increased to 5.0.0
+  * statistic is disabled in the config by default
+  * removed TWR rating
+  * removed option login/showPingOnGameLoading
+  * changed clock format in battleloading (http://php.net/date)
 
 XVM-4.1.1:
   [NEW FUNCTIONS]
