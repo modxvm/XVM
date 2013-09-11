@@ -55,7 +55,6 @@ class _Stat(object):
         self.req = None
         self.resp = None
         self.arenaId = None
-        self.team = None
         self.players = None
         self.playersSkip = None
         self.cache = {}
@@ -120,7 +119,6 @@ class _Stat(object):
         player = BigWorld.player()
         if player.arenaUniqueID != self.arenaId:
             self.arenaId = player.arenaUniqueID
-            self.team = player.team
             self.players = {}
             self.playersSkip = {}
 
@@ -302,13 +300,15 @@ class _Stat(object):
         self._r(stat, 'vname', 'vn')
         self._d(stat, 'lvl', '0')
 
+        player = BigWorld.player()
+
         # TODO: optimize
         for vehId in self.players:
             pl = self.players[vehId]
             if pl.playerId == stat['_id']:
                 stat['clan'] = pl.clan
                 stat['name'] = pl.name
-                stat['team'] = TEAM_ALLY if self.team == pl.team else TEAM_ENEMY
+                stat['team'] = TEAM_ALLY if player.team == pl.team else TEAM_ENEMY
                 stat['alive'] = pl.alive
                 stat['ready'] = pl.ready
                 if pl.vn == stat['vn'].upper():
