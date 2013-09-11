@@ -1,4 +1,4 @@
-import com.natecook.Sprintf;
+﻿import com.natecook.Sprintf;
 import com.xvm.Cache;
 import com.xvm.Config;
 import com.xvm.Defines;
@@ -318,6 +318,8 @@ class com.xvm.Macros
                     return "«сэр Макс» (XVM)";
                 if (label == "Mixailos")
                     return "Михаил";
+				if (label == "STL1te")
+                    return "О, СТЛайт!";
                 break;
 
             case "CT":
