@@ -1,7 +1,7 @@
-package org.idmedia.as3commons.util 
+package org.idmedia.as3commons.util
 {
     import org.idmedia.as3commons.lang.*;
-    
+
     public class StringUtils extends Object
     {
         public function StringUtils()
@@ -17,7 +17,7 @@ package org.idmedia.as3commons.util
 
         public static function compareToIgnoreCase(arg1:String, arg2:String):int
         {
-            if (arg1 == null || arg2 == null) 
+            if (arg1 == null || arg2 == null)
             {
                 throw new org.idmedia.as3commons.lang.NullPointerException();
             }
@@ -26,7 +26,7 @@ package org.idmedia.as3commons.util
 
         public static function compareTo(arg1:String, arg2:String):int
         {
-            if (arg1 == null || arg2 == null) 
+            if (arg1 == null || arg2 == null)
             {
                 throw new org.idmedia.as3commons.lang.NullPointerException();
             }
@@ -35,7 +35,7 @@ package org.idmedia.as3commons.util
 
         public static function toInitials(arg1:String):String
         {
-            if (isEmpty(arg1)) 
+            if (isEmpty(arg1))
             {
                 return arg1;
             }
@@ -49,7 +49,7 @@ package org.idmedia.as3commons.util
 
         public static function chompString(arg1:String, arg2:String):String
         {
-            if (isEmpty(arg1) || arg2 == null) 
+            if (isEmpty(arg1) || arg2 == null)
             {
                 return arg1;
             }
@@ -58,7 +58,7 @@ package org.idmedia.as3commons.util
 
         public static function trim(arg1:String):String
         {
-            if (arg1 == null) 
+            if (arg1 == null)
             {
                 return null;
             }
@@ -77,7 +77,7 @@ package org.idmedia.as3commons.util
 
         internal static function deleteFromString(arg1:String, arg2:RegExp):String
         {
-            if (isEmpty(arg1)) 
+            if (isEmpty(arg1))
             {
                 return arg1;
             }
@@ -103,17 +103,17 @@ package org.idmedia.as3commons.util
 
         public static function center(arg1:String, arg2:int, arg3:String):String
         {
-            if (arg1 == null || arg2 <= 0) 
+            if (arg1 == null || arg2 <= 0)
             {
                 return arg1;
             }
-            if (isEmpty(arg3)) 
+            if (isEmpty(arg3))
             {
                 arg3 = " ";
             }
             var loc1:*=arg1.length;
             var loc2:*;
-            if ((loc2 = arg2 - loc1) <= 0) 
+            if ((loc2 = arg2 - loc1) <= 0)
             {
                 return arg1;
             }
@@ -122,42 +122,49 @@ package org.idmedia.as3commons.util
             return arg1;
         }
 
+        /**
+         *
+         * @param arg1 string
+         * @param arg2 count
+         * @param arg3 char
+         * @return
+         */
         public static function leftPad(arg1:String, arg2:int, arg3:String):String
         {
             var loc4:*=null;
             var loc5:*=null;
             var loc6:*=0;
-            if (arg1 == null) 
+            if (arg1 == null)
             {
                 return null;
             }
-            if (isEmpty(arg3)) 
+            if (isEmpty(arg3))
             {
                 arg3 = " ";
             }
             var loc1:*=arg3.length;
             var loc2:*=arg1.length;
             var loc3:*;
-            if ((loc3 = arg2 - loc2) <= 0) 
+            if ((loc3 = arg2 - loc2) <= 0)
             {
                 return arg1;
             }
-            if (loc1 == 1 && loc3 <= PAD_LIMIT) 
+            if (loc1 == 1 && loc3 <= PAD_LIMIT)
             {
                 return leftPadChar(arg1, arg2, arg3.charAt(0));
             }
-            if (loc3 == loc1) 
+            if (loc3 == loc1)
             {
                 return arg3.concat(arg1);
             }
-            if (loc3 < loc1) 
+            if (loc3 < loc1)
             {
                 return arg3.substring(0, loc3).concat(arg1);
             }
             loc4 = new Array();
             loc5 = arg3.split("");
             loc6 = 0;
-            while (loc6 < loc3) 
+            while (loc6 < loc3)
             {
                 loc4[loc6] = loc5[loc6 % loc1];
                 ++loc6;
@@ -167,16 +174,16 @@ package org.idmedia.as3commons.util
 
         public static function leftPadChar(arg1:String, arg2:int, arg3:String):String
         {
-            if (arg1 == null) 
+            if (arg1 == null)
             {
                 return null;
             }
             var loc1:*;
-            if ((loc1 = arg2 - arg1.length) <= 0) 
+            if ((loc1 = arg2 - arg1.length) <= 0)
             {
                 return arg1;
             }
-            if (loc1 > PAD_LIMIT) 
+            if (loc1 > PAD_LIMIT)
             {
                 return leftPad(arg1, arg2, arg3);
             }
@@ -188,37 +195,37 @@ package org.idmedia.as3commons.util
             var loc4:*=null;
             var loc5:*=null;
             var loc6:*=0;
-            if (arg1 == null) 
+            if (arg1 == null)
             {
                 return null;
             }
-            if (isEmpty(arg3)) 
+            if (isEmpty(arg3))
             {
                 arg3 = " ";
             }
             var loc1:*=arg3.length;
             var loc2:*=arg1.length;
             var loc3:*;
-            if ((loc3 = arg2 - loc2) <= 0) 
+            if ((loc3 = arg2 - loc2) <= 0)
             {
                 return arg1;
             }
-            if (loc1 == 1 && loc3 <= PAD_LIMIT) 
+            if (loc1 == 1 && loc3 <= PAD_LIMIT)
             {
                 return rightPadChar(arg1, arg2, arg3.charAt(0));
             }
-            if (loc3 == loc1) 
+            if (loc3 == loc1)
             {
                 return arg1.concat(arg3);
             }
-            if (loc3 < loc1) 
+            if (loc3 < loc1)
             {
                 return arg1.concat(arg3.substring(0, loc3));
             }
             loc4 = new Array();
             loc5 = arg3.split("");
             loc6 = 0;
-            while (loc6 < loc3) 
+            while (loc6 < loc3)
             {
                 loc4[loc6] = loc5[loc6 % loc1];
                 ++loc6;
@@ -228,16 +235,16 @@ package org.idmedia.as3commons.util
 
         public static function rightPadChar(arg1:String, arg2:int, arg3:String):String
         {
-            if (arg1 == null) 
+            if (arg1 == null)
             {
                 return null;
             }
             var loc1:*;
-            if ((loc1 = arg2 - arg1.length) <= 0) 
+            if ((loc1 = arg2 - arg1.length) <= 0)
             {
                 return arg1;
             }
-            if (loc1 > PAD_LIMIT) 
+            if (loc1 > PAD_LIMIT)
             {
                 return rightPad(arg1, arg2, arg3);
             }
@@ -248,7 +255,7 @@ package org.idmedia.as3commons.util
         {
             var loc1:*=EMPTY;
             var loc2:*=0;
-            while (loc2 < arg1) 
+            while (loc2 < arg1)
             {
                 loc1 = loc1 + arg2;
                 ++loc2;
@@ -258,7 +265,7 @@ package org.idmedia.as3commons.util
 
         public static function replace(arg1:String, arg2:String, arg3:String):String
         {
-            if (arg1 == null || isEmpty(arg2) || arg3 == null) 
+            if (arg1 == null || isEmpty(arg2) || arg3 == null)
             {
                 return arg1;
             }
@@ -267,24 +274,24 @@ package org.idmedia.as3commons.util
 
         public static function replaceTo(arg1:String, arg2:String, arg3:String, arg4:int):String
         {
-            if (arg1 == null || isEmpty(arg2) || arg3 == null || arg4 == 0) 
+            if (arg1 == null || isEmpty(arg2) || arg3 == null || arg4 == 0)
             {
                 return arg1;
             }
             var loc1:*="";
             var loc2:*=0;
             var loc3:*=0;
-            for (;;) 
+            for (;;)
             {
                 var loc4:*;
                 loc3 = loc4 = arg1.indexOf(arg2, loc2);
-                if (loc4 == -1) 
+                if (loc4 == -1)
                 {
                     break;
                 }
                 loc1 = loc1 + (arg1.substring(loc2, loc3) + arg3);
                 loc2 = loc3 + arg2.length;
-                if (--arg4 != 0) 
+                if (--arg4 != 0)
                 {
                     continue;
                 }
@@ -296,7 +303,7 @@ package org.idmedia.as3commons.util
 
         public static function replaceOnce(arg1:String, arg2:String, arg3:String):String
         {
-            if (arg1 == null || isEmpty(arg2) || arg3 == null) 
+            if (arg1 == null || isEmpty(arg2) || arg3 == null)
             {
                 return arg1;
             }
@@ -310,7 +317,7 @@ package org.idmedia.as3commons.util
 
         public static function isEmpty(arg1:String):Boolean
         {
-            if (arg1 == null) 
+            if (arg1 == null)
             {
                 return true;
             }
@@ -345,7 +352,7 @@ package org.idmedia.as3commons.util
 
         public static function capitalize(arg1:String):String
         {
-            if (isEmpty(arg1)) 
+            if (isEmpty(arg1))
             {
                 return arg1;
             }
@@ -354,7 +361,7 @@ package org.idmedia.as3commons.util
 
         public static function uncapitalize(arg1:String):String
         {
-            if (isEmpty(arg1)) 
+            if (isEmpty(arg1))
             {
                 return arg1;
             }
@@ -363,13 +370,13 @@ package org.idmedia.as3commons.util
 
         public static function titleize(arg1:String):String
         {
-            if (isEmpty(arg1)) 
+            if (isEmpty(arg1))
             {
                 return arg1;
             }
             var loc1:*=arg1.toLowerCase().split(" ");
             var loc2:*=0;
-            while (loc2 < loc1.length) 
+            while (loc2 < loc1.length)
             {
                 loc1[loc2] = capitalize(loc1[loc2]);
                 ++loc2;
@@ -379,16 +386,16 @@ package org.idmedia.as3commons.util
 
         public static function substringAfter(arg1:String, arg2:String):String
         {
-            if (isEmpty(arg1)) 
+            if (isEmpty(arg1))
             {
                 return arg1;
             }
-            if (arg2 == null) 
+            if (arg2 == null)
             {
                 return EMPTY;
             }
             var loc1:*=arg1.indexOf(arg2);
-            if (loc1 == INDEX_NOT_FOUND) 
+            if (loc1 == INDEX_NOT_FOUND)
             {
                 return EMPTY;
             }
@@ -397,16 +404,16 @@ package org.idmedia.as3commons.util
 
         public static function substringAfterLast(arg1:String, arg2:String):String
         {
-            if (isEmpty(arg1)) 
+            if (isEmpty(arg1))
             {
                 return arg1;
             }
-            if (isEmpty(arg2)) 
+            if (isEmpty(arg2))
             {
                 return EMPTY;
             }
             var loc1:*=arg1.lastIndexOf(arg2);
-            if (loc1 == INDEX_NOT_FOUND || loc1 == arg1.length - arg2.length) 
+            if (loc1 == INDEX_NOT_FOUND || loc1 == arg1.length - arg2.length)
             {
                 return EMPTY;
             }
@@ -415,16 +422,16 @@ package org.idmedia.as3commons.util
 
         public static function substringBefore(arg1:String, arg2:String):String
         {
-            if (isEmpty(arg1) || arg2 == null) 
+            if (isEmpty(arg1) || arg2 == null)
             {
                 return arg1;
             }
-            if (arg2.length == 0) 
+            if (arg2.length == 0)
             {
                 return EMPTY;
             }
             var loc1:*=arg1.indexOf(arg2);
-            if (loc1 == INDEX_NOT_FOUND) 
+            if (loc1 == INDEX_NOT_FOUND)
             {
                 return arg1;
             }
@@ -433,12 +440,12 @@ package org.idmedia.as3commons.util
 
         public static function substringBeforeLast(arg1:String, arg2:String):String
         {
-            if (isEmpty(arg1) || isEmpty(arg2)) 
+            if (isEmpty(arg1) || isEmpty(arg2))
             {
                 return arg1;
             }
             var loc1:*=arg1.lastIndexOf(arg2);
-            if (loc1 == INDEX_NOT_FOUND) 
+            if (loc1 == INDEX_NOT_FOUND)
             {
                 return arg1;
             }
@@ -448,14 +455,14 @@ package org.idmedia.as3commons.util
         public static function substringBetween(arg1:String, arg2:String, arg3:String):String
         {
             var loc2:*=0;
-            if (arg1 == null || arg2 == null || arg3 == null) 
+            if (arg1 == null || arg2 == null || arg3 == null)
             {
                 return null;
             }
             var loc1:*;
-            if ((loc1 = arg1.indexOf(arg2)) != INDEX_NOT_FOUND) 
+            if ((loc1 = arg1.indexOf(arg2)) != INDEX_NOT_FOUND)
             {
-                if ((loc2 = arg1.indexOf(arg3, loc1 + arg2.length)) != INDEX_NOT_FOUND) 
+                if ((loc2 = arg1.indexOf(arg3, loc1 + arg2.length)) != INDEX_NOT_FOUND)
                 {
                     return arg1.substring(loc1 + arg2.length, loc2);
                 }
@@ -465,7 +472,7 @@ package org.idmedia.as3commons.util
 
         public static function strip(arg1:String, arg2:String):String
         {
-            if (isEmpty(arg1)) 
+            if (isEmpty(arg1))
             {
                 return arg1;
             }
@@ -474,7 +481,7 @@ package org.idmedia.as3commons.util
 
         public static function stripStart(arg1:String, arg2:String):String
         {
-            if (isEmpty(arg1)) 
+            if (isEmpty(arg1))
             {
                 return arg1;
             }
@@ -484,7 +491,7 @@ package org.idmedia.as3commons.util
 
         public static function stripEnd(arg1:String, arg2:String):String
         {
-            if (isEmpty(arg1)) 
+            if (isEmpty(arg1))
             {
                 return arg1;
             }
@@ -494,35 +501,35 @@ package org.idmedia.as3commons.util
 
         public static function abbreviate(arg1:String, arg2:int, arg3:int):String
         {
-            if (arg1 == null) 
+            if (arg1 == null)
             {
                 return arg1;
             }
-            if (arg3 < 4) 
+            if (arg3 < 4)
             {
                 throw new org.idmedia.as3commons.lang.IllegalArgumentException("Minimum abbreviation width is 4");
             }
-            if (arg1.length <= arg3) 
+            if (arg1.length <= arg3)
             {
                 return arg1;
             }
-            if (arg2 > arg1.length) 
+            if (arg2 > arg1.length)
             {
                 arg2 = arg1.length;
             }
-            if (arg1.length - arg2 < arg3 - 3) 
+            if (arg1.length - arg2 < arg3 - 3)
             {
                 arg2 = arg1.length - (arg3 - 3);
             }
-            if (arg2 <= 4) 
+            if (arg2 <= 4)
             {
                 return arg1.substring(0, arg3 - 3) + "...";
             }
-            if (arg3 < 7) 
+            if (arg3 < 7)
             {
                 throw new org.idmedia.as3commons.lang.IllegalArgumentException("Minimum abbreviation width with offset is 7");
             }
-            if (arg2 + (arg3 - 3) < arg1.length) 
+            if (arg2 + (arg3 - 3) < arg1.length)
             {
                 return "..." + abbreviate(arg1.substring(arg2), 0, arg3 - 3);
             }
@@ -531,19 +538,19 @@ package org.idmedia.as3commons.util
 
         public static function ordinalIndexOf(arg1:String, arg2:String, arg3:int):int
         {
-            if (arg1 == null || arg2 == null || arg3 <= 0) 
+            if (arg1 == null || arg2 == null || arg3 <= 0)
             {
                 return INDEX_NOT_FOUND;
             }
-            if (arg2.length == 0) 
+            if (arg2.length == 0)
             {
                 return 0;
             }
             var loc1:*=0;
             var loc2:*=INDEX_NOT_FOUND;
-            do 
+            do
             {
-                if ((loc2 = arg1.indexOf(arg2, loc2 + 1)) < 0) 
+                if ((loc2 = arg1.indexOf(arg2, loc2 + 1)) < 0)
                 {
                     return loc2;
                 }
@@ -555,7 +562,7 @@ package org.idmedia.as3commons.util
 
         public static function countMatches(arg1:String, arg2:String):int
         {
-            if (isEmpty(arg1) || isEmpty(arg2)) 
+            if (isEmpty(arg1) || isEmpty(arg2))
             {
                 return 0;
             }
@@ -564,7 +571,7 @@ package org.idmedia.as3commons.util
 
         public static function contains(arg1:String, arg2:String):Boolean
         {
-            if (arg1 == null || arg2 == null) 
+            if (arg1 == null || arg2 == null)
             {
                 return false;
             }
@@ -573,7 +580,7 @@ package org.idmedia.as3commons.util
 
         public static function containsNone(arg1:String, arg2:String):Boolean
         {
-            if (isEmpty(arg1) || arg2 == null) 
+            if (isEmpty(arg1) || arg2 == null)
             {
                 return true;
             }
@@ -582,11 +589,11 @@ package org.idmedia.as3commons.util
 
         public static function containsOnly(arg1:String, arg2:String):Boolean
         {
-            if (arg1 == null || isEmpty(arg2)) 
+            if (arg1 == null || isEmpty(arg2))
             {
                 return false;
             }
-            if (arg1.length == 0) 
+            if (arg1.length == 0)
             {
                 return true;
             }
@@ -595,7 +602,7 @@ package org.idmedia.as3commons.util
 
         public static function indexOfAny(arg1:String, arg2:String):int
         {
-            if (isEmpty(arg1) || isEmpty(arg2)) 
+            if (isEmpty(arg1) || isEmpty(arg2))
             {
                 return INDEX_NOT_FOUND;
             }
@@ -604,7 +611,7 @@ package org.idmedia.as3commons.util
 
         public static function indexOfAnyBut(arg1:String, arg2:String):int
         {
-            if (isEmpty(arg1) || isEmpty(arg2)) 
+            if (isEmpty(arg1) || isEmpty(arg2))
             {
                 return INDEX_NOT_FOUND;
             }
@@ -613,16 +620,16 @@ package org.idmedia.as3commons.util
 
         public static function difference(arg1:String, arg2:String):String
         {
-            if (arg1 == null) 
+            if (arg1 == null)
             {
                 return arg2;
             }
-            if (arg2 == null) 
+            if (arg2 == null)
             {
                 return arg1;
             }
             var loc1:*=indexOfDifference(arg1, arg2);
-            if (loc1 == -1) 
+            if (loc1 == -1)
             {
                 return EMPTY;
             }
@@ -632,24 +639,24 @@ package org.idmedia.as3commons.util
         public static function indexOfDifference(arg1:String, arg2:String):int
         {
             var loc1:*=0;
-            if (arg1 == arg2) 
+            if (arg1 == arg2)
             {
                 return INDEX_NOT_FOUND;
             }
-            if (isEmpty(arg1) || isEmpty(arg2)) 
+            if (isEmpty(arg1) || isEmpty(arg2))
             {
                 return 0;
             }
             loc1 = 0;
-            while (loc1 < arg1.length && loc1 < arg2.length) 
+            while (loc1 < arg1.length && loc1 < arg2.length)
             {
-                if (arg1.charAt(loc1) != arg2.charAt(loc1)) 
+                if (arg1.charAt(loc1) != arg2.charAt(loc1))
                 {
                     break;
                 }
                 ++loc1;
             }
-            if (loc1 < arg2.length || loc1 < arg1.length) 
+            if (loc1 < arg2.length || loc1 < arg1.length)
             {
                 return loc1;
             }
@@ -714,32 +721,32 @@ package org.idmedia.as3commons.util
         public static function overlay(arg1:String, arg2:String, arg3:int, arg4:int):String
         {
             var loc2:*=0;
-            if (arg1 == null) 
+            if (arg1 == null)
             {
                 return null;
             }
-            if (arg2 == null) 
+            if (arg2 == null)
             {
                 arg2 = EMPTY;
             }
             var loc1:*=arg1.length;
-            if (arg3 < 0) 
+            if (arg3 < 0)
             {
                 arg3 = 0;
             }
-            if (arg3 > loc1) 
+            if (arg3 > loc1)
             {
                 arg3 = loc1;
             }
-            if (arg4 < 0) 
+            if (arg4 < 0)
             {
                 arg4 = 0;
             }
-            if (arg4 > loc1) 
+            if (arg4 > loc1)
             {
                 arg4 = loc1;
             }
-            if (arg3 > arg4) 
+            if (arg3 > arg4)
             {
                 loc2 = arg3;
                 arg3 = arg4;
@@ -765,7 +772,7 @@ package org.idmedia.as3commons.util
 
         internal static function safeRemove(arg1:String, arg2:RegExp):String
         {
-            if (isEmpty(arg1)) 
+            if (isEmpty(arg1))
             {
                 return arg1;
             }

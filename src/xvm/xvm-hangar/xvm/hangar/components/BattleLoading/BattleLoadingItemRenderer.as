@@ -77,6 +77,7 @@ package xvm.hangar.components.BattleLoading
             }
         }
 
+        private var _savedTextFieldColor:String = null;
         internal function draw():void
         {
             try
@@ -90,15 +91,16 @@ package xvm.hangar.components.BattleLoading
                 }
 
                 // Set Text Fields
-                var c:String = proxy.textField.htmlText.match(/ COLOR="(#[0-9A-F]{6})"/)[1];
+                if (_savedTextFieldColor == null)
+                    _savedTextFieldColor = proxy.textField.htmlText.match(/ COLOR="(#[0-9A-F]{6})"/)[1];
                 var a:String = Macros.Format(playerName, team == Defines.TEAM_ALLY
                     ? Config.config.battleLoading.formatLeftNick
                     : Config.config.battleLoading.formatRightNick);
                 var b:String = Macros.Format(playerName, team == Defines.TEAM_ALLY
                     ? Config.config.battleLoading.formatLeftVehicle
                     : Config.config.battleLoading.formatRightVehicle);
-                proxy.textField.htmlText = "<font color='" + c + "'>" + a + "</font>";
-                proxy.vehicleField.htmlText = "<font color='" + c + "'>" + b + "</font>";
+                proxy.textField.htmlText = "<font color='" + _savedTextFieldColor + "'>" + a + "</font>";
+                proxy.vehicleField.htmlText = "<font color='" + _savedTextFieldColor + "'>" + b + "</font>";
 
                 //Logger.add(b);
                 //Logger.add(proxy.vehicleField.htmlText);
