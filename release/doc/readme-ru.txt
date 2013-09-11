@@ -181,10 +181,10 @@
       {{time}}        - оставшееся время захвата; минуты и секунды;      может быть помещён только в дополнительную текстовую секцию
       {{time-sec}}    - оставшееся время захвата; только секунды;        может быть помещён только в дополнительную текстовую секцию
       {{speed}}       - скорость захвата; очков в секунду;               может быть помещён только в дополнительную текстовую секцию
-      {{l10n:enemyBaseCapture}}     - перевод текста "Enemy base capture!"
-      {{l10n:enemyBaseCaptured}}    - перевод текста "Enemy base captured!"
-      {{l10n:allyBaseCapture}}      - перевод текста "Ally base capture!"
-      {{l10n:allyBaseCaptured}}     - перевод текста "Ally base captured!"
+      {{l10n:enemyBaseCapture}}     - перевод текста "Base capture by allies!"
+      {{l10n:enemyBaseCaptured}}    - перевод текста "Base captured by allies!"
+      {{l10n:allyBaseCapture}}      - перевод текста "Base capture by enemies!"
+      {{l10n:allyBaseCaptured}}     - перевод текста "Base captured by enemies!"
       {{l10n:Timeleft}}             - перевод текста "Timeleft"
       {{l10n:Capturers}}            - перевод текста "Capturers"
 
@@ -235,6 +235,7 @@
       {{c:xwn}}       - цвет в зависимости от рейтинга WN6 по шкале XVM
       {{c:rating}}    - цвет в зависимости от процента побед
       {{c:kb}}        - цвет в зависимости от количества кило-боев
+      {{c:avglvl}}    - цвет в зависимости от среднего уровня танков
       {{c:t-rating}}  - цвет в зависимости от процента побед на текущем танке
       {{c:t-battles}} - цвет в зависимости от количества боев на текущем танке
       Любой макрос цвета можно изменить в макрос прозрачности ({{a:tdb}}).
@@ -245,11 +246,11 @@
 
       Пример с полосой захвата, используется язык en:
         /l10n/en.xc
-          "enemyBaseCaptured": "Enemy base captured!"
+          "enemyBaseCaptured": "Base captured by allies!"
         captureBar.xc
           "captureDoneFormat":    "<font size='17' color='#FFCC66'>{{l10n:enemyBaseCaptured}}</font>"
 
-        Как будет отображаться: "<font size='17' color='#FFCC66'>Enemy base captured!</font>"
+        Как будет отображаться: "<font size='17' color='#FFCC66'>Base captured by allies!</font>"
 
       Узнать больше о переводах: https://code.google.com/p/wot-xvm/wiki/LocalizingXVM
 

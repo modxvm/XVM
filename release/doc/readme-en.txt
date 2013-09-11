@@ -181,10 +181,10 @@
       {{time}}        - time left to full capture; minutes and seconds;  can be placed only inside extra section
       {{time-sec}}    - time left to full capture; seconds only;         can be placed only inside extra section
       {{speed}}       - capture speed in points per second;              can be placed only inside extra section
-      {{l10n:enemyBaseCapture}}     - localizated text "Enemy base capture!"
-      {{l10n:enemyBaseCaptured}}    - localizated text "Enemy base captured!"
-      {{l10n:allyBaseCapture}}      - localizated text "Ally base capture!"
-      {{l10n:allyBaseCaptured}}     - localizated text "Ally base captured!"
+      {{l10n:enemyBaseCapture}}     - localizated text "Base capture by allies!"
+      {{l10n:enemyBaseCaptured}}    - localizated text "Base captured by allies!"
+      {{l10n:allyBaseCapture}}      - localizated text "Base capture by enemies!"
+      {{l10n:allyBaseCaptured}}     - localizated text "Base captured by enemies!"
       {{l10n:Timeleft}}             - localizated text "Timeleft"
       {{l10n:Capturers}}            - localizated text "Capturers"
 
@@ -235,6 +235,7 @@
       {{c:xwn}}       - color depended from XVM Scale for WN6
       {{c:rating}}    - color depended from GWR
       {{c:kb}}        - color depended from kilo-battles
+      {{c:avglvl}}    - color depended from average level of tanks
       {{c:t-rating}}  - color depended from current vehicle win ratio
       {{c:t-battles}} - color depended from current vehicle battles
       Any color macro you can change to transparency macro ({{a: tdb}}).
@@ -245,11 +246,11 @@
 
       Capture bar example
         /l10n/en.xc
-          "enemyBaseCaptured": "Enemy base captured!"
+          "enemyBaseCaptured": "Base captured by allies!"
         captureBar.xc
           "captureDoneFormat":    "<font size='17' color='#FFCC66'>{{l10n:enemyBaseCaptured}}</font>"
 
-        formated: "<font size='17' color='#FFCC66'>Enemy base captured!</font>"
+        formated: "<font size='17' color='#FFCC66'>Base captured by allies!</font>"
 
       More about localization at wiki: https://code.google.com/p/wot-xvm/wiki/LocalizingXVM
 
