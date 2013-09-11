@@ -98,6 +98,16 @@
       { "value": 20,  "alpha": ${"alphaRating.very_good"} },
       { "value": 999, "alpha": ${"alphaRating.unique"   } }
     ],
+    // Dynamic transparency by average level of player tanks (only with xvm-stat).
+    // Динамическая прозрачность по среднему уровню танков игрока (только с xvm-stat).
+    "avglvl": [
+      { "value": 2,   "alpha": ${"alphaRating.very_bad" } },
+      { "value": 3,   "alpha": ${"alphaRating.bad"      } },
+      { "value": 5,   "alpha": ${"alphaRating.normal"   } },
+      { "value": 7,   "alpha": ${"alphaRating.good"     } },
+      { "value": 9,   "alpha": ${"alphaRating.very_good"} },
+      { "value": 11,  "alpha": ${"alphaRating.unique"   } }
+    ],
     // Dynamic transparency by battles on current tank (only with xvm-stat).
     // Динамическая прозрачность по количеству боев на текущем танке (только с xvm-stat).
     "t_battles": [

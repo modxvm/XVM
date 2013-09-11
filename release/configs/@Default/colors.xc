@@ -249,6 +249,15 @@
       { "value": 20,  "color": ${"def.colorRating.very_good"} },   // 14 - 19
       { "value": 999, "color": ${"def.colorRating.unique"   } }    // 20 - *
     ],
+    // Dynamic color by average level of player tanks (only with xvm-stat).
+    // Динамический цвет по среднему уровню танков игрока (только с xvm-stat).
+    "avglvl": [
+      { "value": 2,  "color": ${"def.colorRating.very_bad" } },
+      { "value": 3,  "color": ${"def.colorRating.bad"      } },
+      { "value": 5,  "color": ${"def.colorRating.normal"   } },
+      { "value": 7,  "color": ${"def.colorRating.good"     } },
+      { "value": 9,  "color": ${"def.colorRating.very_good"} },
+      { "value": 11, "color": ${"def.colorRating.unique"   } },
     // Dynamic color by battles on current tank (only with xvm-stat).
     // Динамический цвет по количеству боев на текущем танке (только с xvm-stat).
     "t_battles": [
@@ -286,7 +295,7 @@
       { "value": 2.0,  "color": ${"def.colorRating.very_good"} },
       { "value": 15,   "color": ${"def.colorRating.unique"   } }
     ],
-    // Dynamic color by number of spotted enemies per battle on current tank (only with xvm-stat).
+    // Dynamic color by average number of spotted enemies per battle on current tank (only with xvm-stat).
     // Динамический цвет по среднему количеству засвеченных врагов за бой на текущем танке (только с xvm-stat).
     "tsb": [
       { "value": 0.6,  "color": ${"def.colorRating.very_bad" } },

@@ -25,10 +25,10 @@
     "hpLeftTitle": "Осталось HP:",
 
     // Capture
-    "enemyBaseCapture": "Захват вражеской базы!",
-    "enemyBaseCaptured": "Вражеская база захвачена!",
-    "allyBaseCapture": "Захват нашей базы!",
-    "allyBaseCaptured": "Наша база захвачена!",
+    "enemyBaseCapture": "Захват базы союзниками!",
+    "enemyBaseCaptured": "База захвачена союзниками!",
+    "allyBaseCapture": "Захват базы врагами!",
+    "allyBaseCaptured": "База захвачена врагами!",
     "Timeleft": "Осталось",
     "Capturers": "Захватчиков",
 

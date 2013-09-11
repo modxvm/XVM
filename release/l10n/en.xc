@@ -25,10 +25,10 @@
     "hpLeftTitle": "Hitpoints left:",
 
     // Capture
-    "enemyBaseCapture": "Enemy base capture!",
-    "enemyBaseCaptured": "Enemy base captured!",
-    "allyBaseCapture": "Ally base capture!",
-    "allyBaseCaptured": "Ally base captured!",
+    "enemyBaseCapture": "Base capture by allies!",
+    "enemyBaseCaptured": "Base captured by allies!",
+    "allyBaseCapture": "Base capture by enemies!",
+    "allyBaseCaptured": "Base captured by enemies!",
     "Timeleft": "Timeleft",
     "Capturers": "Capturers",
 
