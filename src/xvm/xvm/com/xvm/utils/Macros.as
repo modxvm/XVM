@@ -207,15 +207,8 @@ package com.xvm.utils
 
             // STAT
 
-            // vars
-            //var r:Number = Utils.toInt(data.r, 0);
-            //var eff:Number = Utils.toInt(data.e, 0);
-            //var b:Number = Utils.toInt(data.b, 0);
-            //var w:Number = Utils.toInt(data.w, 0);
-            //var tr:Number = Utils.toInt(data.v.r, 0);
-            //var tb:Number = Utils.toInt(data.v.b, 0);
-            //var tw:Number = Utils.toInt(data.v.w, 0);
-            //var tbK:Number = Math.round(tb / 100) / 10.0;
+            if (Config.config.rating.showPlayersStatistics == false)
+                return;
 
             var r:int = data.r;
             var eff:int = data.e;
