@@ -148,6 +148,7 @@
     "germany_VK4502P": {"name": null, "short": null},
     "germany_VK7201": {"name": null, "short": null},
     "germany_Wespe": {"name": null, "short": null},
+    "japan_Chi_Nu_Kai": {"name": null, "short": null},
     "uk_GB01_Medium_Mark_I": {"name": null, "short": null},
     "uk_GB03_Cruiser_Mk_I": {"name": null, "short": null},
     "uk_GB04_Valentine": {"name": null, "short": null},

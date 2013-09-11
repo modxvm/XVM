@@ -170,6 +170,7 @@ package com.xvm.vehinfo
             d["ram_ii"] =                     { id: 202, level: 5,  type: "MT",  hpstock: 610,  hptop: 610,  turret: 0, premium: 1, nation: "usa",     name: "Ram-II",                      translationKey: "#usa_vehicles:Ram-II" };
             d["ch21_t34"] =                   { id: 18,  level: 5,  type: "MT",  hpstock: 410,  hptop: 450,  turret: 2, premium: 0, nation: "china",   name: "Ch21_T34",                    translationKey: "#china_vehicles:Ch21_T34" };
             d["gb68_matilda_black_prince"] =  { id: 209, level: 5,  type: "MT",  hpstock: 610,  hptop: 610,  turret: 0, premium: 1, nation: "uk",      name: "GB68_Matilda_Black_Prince",   translationKey: "#gb_vehicles:GB68_Matilda_Black_Prince_short" };
+            d["chi_nu_kai"] =                 { id: 201, level: 5,  type: "MT",  hpstock: 530,  hptop: 530,  turret: 0, premium: 1, nation: "japan",   name: "Chi_Nu_Kai",                  translationKey: "#japan_vehicles:Chi_Nu_Kai_short" };
             d["churchill_ll"] =               { id: 202, level: 5,  type: "HT",  hpstock: 700,  hptop: 700,  turret: 0, premium: 1, nation: "ussr",    name: "Churchill_LL",                translationKey: "#ussr_vehicles:Churchill_LL" };
             d["kv"] =                         { id: 5,   level: 5,  type: "HT",  hpstock: 560,  hptop: 660,  turret: 1, premium: 0, nation: "ussr",    name: "KV",                          translationKey: "#ussr_vehicles:KV" };
             d["kv1"] =                        { id: 46,  level: 5,  type: "HT",  hpstock: 590,  hptop: 640,  turret: 2, premium: 0, nation: "ussr",    name: "KV1",                         translationKey: "#ussr_vehicles:KV1" };
@@ -527,6 +528,7 @@ package com.xvm.vehinfo
             a[51744] = "ram_ii";
             a[4656] = "ch21_t34";
             a[53584] = "gb68_matilda_black_prince";
+            a[51552] = "chi_nu_kai";
             a[51712] = "churchill_ll";
             a[1280] = "kv";
             a[11776] = "kv1";
