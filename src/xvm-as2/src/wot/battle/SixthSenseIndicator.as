@@ -35,10 +35,15 @@ class wot.battle.SixthSenseIndicator
     {
         //Logger.add("completeLoadSixthSenseIcon");
 
-        icon._x = _root.sixthSenseIndicator._width / 2 - icon.width / 2;
-        icon._y = _root.sixthSenseIndicator._height / 2 - icon.height / 2;
-        icon.visible = true;
-        icon.content._alpha = 0;
+        var icon = this.icon;
+        icon.visible = false;
+        _global.setTimeout(function()
+        {
+            icon._x = 97 - icon.content._width / 2;
+            icon._y = 30;
+            icon.content._alpha = 0;
+            icon.visible = true;
+        }, 1);
 
         // DEBUG
         //var a = "fade";
