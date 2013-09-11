@@ -55,6 +55,7 @@ package com.xvm.types.cfg
             //{ value: 20,  alpha: 60 },
             //{ value: 999, alpha: 40 }
         //],
+        //avglvl
         //t_battles: [
             //{ value: 250,  alpha: 100 },
             //{ value: 500, alpha: 80 },

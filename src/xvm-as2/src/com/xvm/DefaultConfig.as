@@ -808,6 +808,14 @@ class com.xvm.DefaultConfig
                     { value: 20,  color: ColorPalette.blue },
                     { value: 999, color: ColorPalette.purple }
                 ],
+                avglvl: [
+                    { value: 2,  color: ColorPalette.red },
+                    { value: 3,  color: ColorPalette.orange },
+                    { value: 5,  color: ColorPalette.yellow },
+                    { value: 7,  color: ColorPalette.green },
+                    { value: 9,  color: ColorPalette.blue },
+                    { value: 11, color: ColorPalette.purple }
+                ],
                 t_battles: [
                     { value: 100,   color: ColorPalette.red },
                     { value: 250,   color: ColorPalette.orange },
@@ -895,6 +903,9 @@ class com.xvm.DefaultConfig
                     { value: 10,  alpha: 80 },
                     { value: 20,  alpha: 60 },
                     { value: 999, alpha: 40 }
+                ],
+                avglvl: [
+                    { value: 11,  alpha: 100 }
                 ],
                 t_battles: [
                     { value: 250,  alpha: 100 },

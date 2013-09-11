@@ -25,7 +25,7 @@ class com.xvm.Defines
 
     // res_mods/xvm/res/SixthSense.png
     public static var SIXTH_SENSE_IMG:String = XVMRES_ROOT + "SixthSense.png";
-    
+
     // res_mods/xvm/xvm.xc
     public static var CONFIG_FILE_NAME:String = "xvm.xc";
     // res_mods/x.x.x/gui/flash/XVM.xvmconf
@@ -38,10 +38,10 @@ class com.xvm.Defines
     // Default settings
     public static  var DEFAULT_SETTINGS_WIDGETS = [];
     public static  var DEFAULT_SETTINGS_WIDGETSSETTINGSDIALOG = { x: 400, y: 150 };
-    
+
     // Default path to vehicle icons (relative)
     public static var WG_CONTOUR_ICON_PATH:String = "../maps/icons/vehicle/contour/";
-    
+
     // Team
     public static var TEAM_ALLY:Number = 1;
     public static var TEAM_ENEMY:Number = 2;
@@ -68,8 +68,9 @@ class com.xvm.Defines
     public static var DYNAMIC_COLOR_TFB:Number = 9;
     public static var DYNAMIC_COLOR_TSB:Number = 10;
     public static var DYNAMIC_COLOR_E:Number = 11;
-    public static var DYNAMIC_COLOR_WN:Number = 13;
-    public static var DYNAMIC_COLOR_X:Number = 14;
+    public static var DYNAMIC_COLOR_WN:Number = 12;
+    public static var DYNAMIC_COLOR_X:Number = 13;
+    public static var DYNAMIC_COLOR_AVGLVL:Number = 14;
 
     // Dynamic alpha types
     public static var DYNAMIC_ALPHA_EFF:Number = 1;
@@ -83,8 +84,9 @@ class com.xvm.Defines
     public static var DYNAMIC_ALPHA_TFB:Number = 9;
     public static var DYNAMIC_ALPHA_TSB:Number = 10;
     public static var DYNAMIC_ALPHA_E:Number = 11;
-    public static var DYNAMIC_ALPHA_WN:Number = 13;
-    public static var DYNAMIC_ALPHA_X:Number = 14;
+    public static var DYNAMIC_ALPHA_WN:Number = 12;
+    public static var DYNAMIC_ALPHA_X:Number = 13;
+    public static var DYNAMIC_ALPHA_AVGLVL:Number = 14;
 
     // Damage flag at Xvm.as: updateHealth
     public static var FROM_UNKNOWN:Number = 0;
@@ -109,13 +111,13 @@ class com.xvm.Defines
 
     // Level in roman numerals
     public static var ROMAN_LEVEL:Array = [ "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X" ];
-    
+
     // UI Colors
     public static var UICOLOR_DEFAULT = 0xC9C9B6;
     public static var UICOLOR_DEFAULT2 = 0x969687;
     public static var UICOLOR_GOLD = 0xFFC133;
     public static var UICOLOR_BLUE = 0x408CCF;
-    
+
     // Widgets
     public static var WIDGET_MODE_HIDE =     0x01;
     public static var WIDGET_MODE_1 =        0x02;

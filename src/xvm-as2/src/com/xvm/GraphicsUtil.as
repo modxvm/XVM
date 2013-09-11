@@ -218,6 +218,7 @@ class com.xvm.GraphicsUtil
             case Defines.DYNAMIC_COLOR_X:               cfg = cfg_root.x; break;
             case Defines.DYNAMIC_COLOR_RATING:          cfg = cfg_root.rating; break;
             case Defines.DYNAMIC_COLOR_KB:              cfg = cfg_root.kb; break;
+            case Defines.DYNAMIC_COLOR_AVGLVL:          cfg = cfg_root.avglvl; break;
             case Defines.DYNAMIC_COLOR_TBATTLES:        cfg = cfg_root.t_battles; break;
             case Defines.DYNAMIC_COLOR_TDB:             cfg = cfg_root.tdb; break;
             case Defines.DYNAMIC_COLOR_TDV:             cfg = cfg_root.tdv; break;
@@ -259,6 +260,7 @@ class com.xvm.GraphicsUtil
             case Defines.DYNAMIC_ALPHA_X:               cfg = cfg_root.x; break;
             case Defines.DYNAMIC_ALPHA_RATING:          cfg = cfg_root.rating; break;
             case Defines.DYNAMIC_ALPHA_KB:              cfg = cfg_root.kb; break;
+            case Defines.DYNAMIC_ALPHA_AVGLVL:          cfg = cfg_root.avglvl; break;
             case Defines.DYNAMIC_ALPHA_TBATTLES:        cfg = cfg_root.t_battles; break;
             case Defines.DYNAMIC_ALPHA_TDB:             cfg = cfg_root.tdb; break;
             case Defines.DYNAMIC_ALPHA_TDV:             cfg = cfg_root.tdv; break;

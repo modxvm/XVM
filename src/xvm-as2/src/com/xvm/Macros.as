@@ -252,6 +252,9 @@ class com.xvm.Macros
         // {{c:kb}}
         pdata["c:kb"] = b <= 0 ? ""
             : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, b / 1000, "#", o.darken); }
+        // {{c:avglvl}}
+        pdata["c:avglvl"] = stat.lvl <= 0 ? ""
+            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, stat.lvl, "#", o.darken); }
         // {{c:t-rating}}, {{c:t_rating}}
         pdata["c:t-rating"] = tr <= 0 ? ""
             : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, tr, "#", o.darken); }
@@ -288,6 +291,8 @@ class com.xvm.Macros
         pdata["a:rating"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_RATING, r); }
         // {{a:kb}}
         pdata["a:kb"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_KB, b / 1000); }
+        // {{a:avglvl}}
+        pdata["a:avglvl"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_AVGLVL, stat.lvl); }
         // {{a:t-rating}}
         pdata["a:t-rating"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_RATING, tr); }
         // {{a:t-battles}}
