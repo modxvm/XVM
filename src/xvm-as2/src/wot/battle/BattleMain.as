@@ -63,7 +63,7 @@ class wot.battle.BattleMain
         Elements.SetupElements();
 
         FragCorrelation.modify();
-        
+
         ExpertPanel.modify();
     }
 
@@ -76,6 +76,7 @@ class wot.battle.BattleMain
         var fps = debugPanel.fps;
         var clock: TextField = debugPanel.createTextField("clock", debugPanel.getNextHighestDepth(),
             lag._x + lag._width, fps._y, 300, fps._height);
+        clock.selectable = false;
         clock.antiAliasType = "advanced";
         clock.html = true;
         var tf: TextFormat = fps.getNewTextFormat();

@@ -170,6 +170,7 @@ class wot.VehicleMarkersManager.log.HitLog
         //textField.borderColor = 0xFFFFFF;
         textField.verticalAlign = (direction == Defines.DIRECTION_DOWN) ? "top" : "bottom";
         textField.antiAliasType = "advanced";
+        textField.selectable = false;
         textField.multiline = true;
         textField.wordWrap = false;
         if (shadow)
