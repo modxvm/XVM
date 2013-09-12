@@ -350,6 +350,7 @@ class com.xvm.VehicleInfoData
         ussr_KV_220_action:                { tiers: [ 5, 6 ], name: null, short: "KV220A" },
         usa_T14:                           { tiers: [ 5, 6 ], name: null, short: "T14" },
         uk_GB51_Excelsior:                 { tiers: [ 5, 6 ], name: null, short: "Excel" },
+        japan_Chi_Nu_Kai:                  { tiers: [ 5, 6 ], name: null, short: "ChiNu" },
         germany_PzV_PzIV:                  { tiers: [ 6, 7 ], name: null, short: "Pz5/4" },
         germany_PzV_PzIV_ausf_Alfa:        { tiers: [ 6, 7 ], name: null, short: "Pz5/4A" },
         uk_GB63_TOG_II:                    { tiers: [ 6, 7 ], name: null, short: "TOG" },

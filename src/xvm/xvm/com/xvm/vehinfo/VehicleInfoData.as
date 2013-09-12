@@ -356,6 +356,7 @@ package com.xvm.vehinfo
             d["ussr_KV_220_action"] =                { tiers: [ 5, 6 ], name: null, short: "KV220A" };
             d["usa_T14"] =                           { tiers: [ 5, 6 ], name: null, short: "T14" };
             d["uk_GB51_Excelsior"] =                 { tiers: [ 5, 6 ], name: null, short: "Excel" };
+            d["japan_Chi_Nu_Kai"] =                  { tiers: [ 5, 6 ], name: null, short: "ChiNu" };
             d["germany_PzV_PzIV"] =                  { tiers: [ 6, 7 ], name: null, short: "Pz5/4" };
             d["germany_PzV_PzIV_ausf_Alfa"] =        { tiers: [ 6, 7 ], name: null, short: "Pz5/4A" };
             d["uk_GB63_TOG_II"] =                    { tiers: [ 6, 7 ], name: null, short: "TOG" };
