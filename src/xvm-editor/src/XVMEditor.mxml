@@ -67,14 +67,14 @@
                     return;
                 }
 
-                var pm:PopUpMenuButton = obj as PopUpMenuButton;
+                /*var pm:PopUpMenuButton = obj as PopUpMenuButton;
                 if (pm != null)
                 {
                     // Flex bug workaround
                     var a:Object = pm.dataProvider;
                     pm.dataProvider = null;
                     pm.dataProvider = a;
-                }
+                }*/
             }
 
             protected function setupXvmSiteUrl():void
@@ -106,15 +106,15 @@
         <s:BorderContainer width="1001" height="32">
             <s:HGroup top="0" left="0" bottom="0" gap="4" verticalAlign="middle" paddingLeft="4" paddingRight="4" width="361">
                 <s:Button label="{_('openButton')}" icon="@Embed(source='images/fileopen.png')" click="onLoadConfigClick()"/>
-                <!--<s:Button label="{_('saveButton')}" icon="@Embed(source='images/filesave.png')" click="onSaveConfigClick()"/>-->
-                <mx:PopUpMenuButton itemClick="onSaveButtonClick(event)" id="saveMenu">
+                <s:Button label="{_('saveButton')}" icon="@Embed(source='images/filesave.png')" click="onSaveConfigClick(false)"/>
+                <!--<mx:PopUpMenuButton itemClick="onSaveButtonClick(event)" id="saveMenu">
                     <mx:dataProvider>
                         <fx:Array>
                             <fx:Object value="save" label="{_('saveButton')}" icon="@Embed(source='images/filesave.png')"/>
                             <fx:Object value="savefull" label="{_('saveFullButton')}" icon="@Embed(source='images/filesave.png')" />
                         </fx:Array>
                     </mx:dataProvider>
-                </mx:PopUpMenuButton>
+                </mx:PopUpMenuButton>-->
                 <s:Button label="{_('newConfig')}" icon="@Embed(source='images/filenew.png')" click="createNewConfig()"/>
                 <s:Button label="{_('mergeConfigs')}" icon="@Embed(source='images/merge.png')" click="LoadConfig(true)"/>
             </s:HGroup>
