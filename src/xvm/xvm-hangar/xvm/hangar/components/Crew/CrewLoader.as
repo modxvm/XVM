@@ -59,13 +59,11 @@ package xvm.hangar.components.Crew
 				if (!renderer.tankmanID && item.enabled)
 				{
 					App.contextMenuMgr.show(Vector.<IContextItem>([
-                        new ContextItem("PutOwnCrew", Locale.get("PutOwnCrew"))
-                        /** TODO: getPenality()
+                        new ContextItem("PutOwnCrew", Locale.get("PutOwnCrew")),
                         new SeparateItem(),
                         new ContextItem("PutBestCrew", Locale.get("PutBestCrew")),
                         new SeparateItem(),
                         new ContextItem("PutClassCrew", Locale.get("PutClassCrew"))
-                        */
                     ]), this, this.onContextMenuAction);
 				}
 			}
@@ -115,7 +113,7 @@ package xvm.hangar.components.Crew
 					if (tankman.inTank == true || selectedTankmans.hasOwnProperty(tankman.tankmanID))
 						continue;
 					
-					if (checkFunc(tankman, best, renderer.recruitList[0]))
+					if (checkFunc(tankman, best, renderer.recruitList[0], renderer.vehicleElite))
 					{
 						//Logger.addObject(best, "crew: old best");
 						//Logger.addObject(tankman, "crew: new best");
@@ -132,28 +130,28 @@ package xvm.hangar.components.Crew
 				page.crew.equipTankman(obj.tankman.tankmanID, obj.slot);
 		}
 		
-		private function CheckOwn(tankman:Object, best:Object, slot:Object):Boolean
+		private function CheckOwn(tankman:Object, best:Object, slot:Object, isPremVehicle:Boolean):Boolean
 		{
 			if (tankman.vehicleType != slot.vehicleType)
 				return false;
-			return CheckBest(tankman, best, slot);
+			return CheckBest(tankman, best, slot, isPremVehicle);
 		}
 		
-		private function CheckClass(tankman:Object, best:Object, slot:Object):Boolean
+		private function CheckClass(tankman:Object, best:Object, slot:Object, isPremVehicle:Boolean):Boolean
 		{
 			if (tankman.tankType != slot.tankType)
 				return false;
-			return CheckBest(tankman, best, slot);
+			return CheckBest(tankman, best, slot, isPremVehicle);
 		}
 		
-		private function CheckBest(tankman:Object, best:Object, slot:Object):Boolean
+		private function CheckBest(tankman:Object, best:Object, slot:Object, isPremVehicle:Boolean):Boolean
 		{
 			// No bestTankman : select first tankman met
 			if (best == null)
 				return true;
 			
-			var tankmanPenality:Number = getPenality(tankman, slot);
-			var bestPenality:Number = getPenality(best, slot);
+			var tankmanPenality:Number = getPenality(tankman, slot, isPremVehicle);
+			var bestPenality:Number = getPenality(best, slot, isPremVehicle);
 			
 			// CASE 1 : bestTankman is better than actual
 			// conserve the bestTankman
@@ -193,7 +191,7 @@ package xvm.hangar.components.Crew
 		 * @param dummyTankman current tank's
 		 * @return Tankman's efficiencyLevel - penality
 		 */
-		private function getPenality(tankman:Object, slot:Object):Number
+		private function getPenality(tankman:Object, slot:Object, isPremVehicle:Boolean):Number
 		{
 			var coeff:Number;
 			
@@ -204,15 +202,11 @@ package xvm.hangar.components.Crew
 			}
 			else
 			{
-                /** TODO: get vehicle info, to get premium status
-				var vname:String = VehicleInfoDataL10n.getVehicleName(slot.vehicleType);
-				var vi2:Object = VehicleInfoData2.data[vname];
-				
 				if (tankman.tankType == slot.tankType)
 				{
 					// CASE 2 : same vehicle type
 					// CASE 2.1 : same vehicle type & premium vehicle = 100%
-					if (vi2.premium)
+					if (isPremVehicle)
 						coeff = 1;
 					// CASE 2.2 : same vehicle type & non-premium vehicle = 75%
 					else
@@ -222,13 +216,12 @@ package xvm.hangar.components.Crew
 				{
 					// CASE 3 : different vehicle type
 					// CASE 3.1 : different vehicle type & premium vehicle = 75%
-					if (vi2.premium)
-                        // TODO: write changelog about this (old version dosn't count with prem here)
-						coeff = 0, 75;
+					if (isPremVehicle)
+						coeff = 0.75;
 					// CASE 3.2 : different vehicle type & non-premium vehicle = 50%
 					else
 						coeff = 0.50;
-				}*/
+				}
 			}
 			return tankman.efficiencyLevel * coeff;
 		}
