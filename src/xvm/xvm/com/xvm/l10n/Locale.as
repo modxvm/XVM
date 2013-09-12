@@ -38,7 +38,10 @@ package com.xvm.l10n
         public static function get(format:String):String
         {
             //Logger.add("Locale[get]: string: " + text + " | string: " + s_lang.locale[text] + " | fallback string: " + s_lang_fallback[text] + " | language: " + _language );
-            format = s_lang.locale[format] || s_lang_fallback[format] || format;
+            if (s_lang.hasOwnProperty(format))
+                format = s_lang.locale[format];
+            else if (s_lang_fallback.hasOwnProperty(format))
+                format = s_lang_fallback[format];
 
             /** each item in array begin with macro */
             var formatParts:Vector.<String> = Vector.<String>(format.split("{{" + MACRO_PREFIX + ":"));
