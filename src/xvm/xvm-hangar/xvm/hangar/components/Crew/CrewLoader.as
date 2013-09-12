@@ -150,8 +150,8 @@ package xvm.hangar.components.Crew
 			if (best == null)
 				return true;
 			
-			var tankmanPenality:Number = getPenality(tankman, slot, isPremVehicle);
-			var bestPenality:Number = getPenality(best, slot, isPremVehicle);
+			var tankmanPenality:Number = getPenalty(tankman, slot, isPremVehicle);
+			var bestPenality:Number = getPenalty(best, slot, isPremVehicle);
 			
 			// CASE 1 : bestTankman is better than actual
 			// conserve the bestTankman
@@ -186,18 +186,18 @@ package xvm.hangar.components.Crew
 		}
 		
 		/**
-		 * skill tankman penality
-		 * @param aTankman
-		 * @param dummyTankman current tank's
-		 * @return Tankman's efficiencyLevel - penality
+		 * Skill tankman penalty
+		 * @param tankman data
+		 * @param dummy tankman current tank
+		 * @return tankman's efficiencyLevel - penality (real value)
 		 */
-		private function getPenality(tankman:Object, slot:Object, isPremVehicle:Boolean):Number
+		private function getPenalty(tankman:Object, slot:Object, isPremVehicle:Boolean):Number
 		{
 			var coeff:Number;
 			
 			if (tankman.vehicleType == slot.vehicleType)
 			{
-				// CASE 1 : same vehicle = 100%
+				// CASE 1 : exactly same vehicle = 100%
 				coeff = 1;
 			}
 			else
@@ -205,24 +205,25 @@ package xvm.hangar.components.Crew
 				if (tankman.tankType == slot.tankType)
 				{
 					// CASE 2 : same vehicle type
-					// CASE 2.1 : same vehicle type & premium vehicle = 100%
+					// CASE 2.1 : premium vehicle = 100%
 					if (isPremVehicle)
 						coeff = 1;
-					// CASE 2.2 : same vehicle type & non-premium vehicle = 75%
+					// CASE 2.2 : non-premium vehicle = 75%
 					else
 						coeff = 0.75;
 				}
 				else
 				{
 					// CASE 3 : different vehicle type
-					// CASE 3.1 : different vehicle type & premium vehicle = 75%
+					// CASE 3.1 : premium vehicle = 75%
 					if (isPremVehicle)
 						coeff = 0.75;
-					// CASE 3.2 : different vehicle type & non-premium vehicle = 50%
+					// CASE 3.2 : non-premium vehicle = 50%
 					else
 						coeff = 0.50;
 				}
 			}
+
 			return tankman.efficiencyLevel * coeff;
 		}
 	}
