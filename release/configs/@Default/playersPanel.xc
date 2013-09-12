@@ -54,7 +54,7 @@
         // Artillery specific values.
         // Специфичные значения для артиллерии.
         "artillery": {
-          "neverSeen": "",
+          "neverSeen": "<font face='$FieldFont' size='24' color='#DEDEDE'>*</font>",
           "lost": "",
           "revealed": "",
           "dead": ""

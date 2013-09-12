@@ -23,11 +23,11 @@
 {
   // Version of the config. Do not remove or change it unnecessarily.
   // Версия конфига. Не удаляйте и не изменяйте её без необходимости.
-  "configVersion": "4.0.0",
+  "configVersion": "5.0.0",
 
   // Version of the editor.
   // Версия редактора.
-  "editorVersion": "0.57",
+  "editorVersion": "0.60",
 
   // Language used in mod
   // "auto" - automatically detect language from game client,
@@ -50,7 +50,7 @@
   "definition": {
     // Config author.
     // Автор конфига.
-    "author": "XVM",
+    "author": "XVM team",
 
     // Config description.
     // Описание конфига.
@@ -62,15 +62,15 @@
 
     // Config last modified.
     // Дата последней модификации конфига.
-    "date": "22.08.2013",
+    "date": "13.09.2013",
 
     // Supported version of the game.
     // Поддерживаемая версия игры.
-    "gameVersion": "0.8.7",
+    "gameVersion": "0.8.8",
 
     // The minimum required version of the XVM mod.
     // Минимально необходимая версия мода XVM.
-    "modMinVersion": "4.1.1"
+    "modMinVersion": "5.0.0"
   },
 
   // Parameters for login screen.

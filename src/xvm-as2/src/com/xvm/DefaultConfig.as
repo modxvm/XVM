@@ -12,7 +12,7 @@ class com.xvm.DefaultConfig
             configVersion: Defines.CONFIG_VERSION,
             editorVersion: Defines.EDITOR_VERSION,
             definition: {
-                author: "XVM",
+                author: "XVM team",
                 description: "Default settings for XVM",
                 url: "http://code.google.com/p/wot-xvm/",
                 date: (d.getDate() < 10 ? "0" : "") + d.getDate() + "." +
@@ -154,8 +154,8 @@ class com.xvm.DefaultConfig
                 // ### Is there a clock:on\off switch variable supposed to be? ###
                 // A: No, it is possible to set clockFormat: "" to disable clock.
 
-                // Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds.
-                clockFormat: "H:N:S",
+                // Format: http://php.net/date
+                clockFormat: "H:i:s",
                 showChances: false,     // Show game round win chances percentage.
                 showChancesExp: false,  // Show experimental "chance to win" formula.
                 removeSquadIcon: false, // Hide squad icon.
@@ -196,7 +196,7 @@ class com.xvm.DefaultConfig
                     revealed: "",
                     dead: "",
                     artillery: {
-                      neverSeen: "",
+                      neverSeen: "<FONT FACE=\"$FieldFont\" SIZE=\"24\" COLOR=\"#DDDDDD\">*</FONT>",
                       lost: "",
                       revealed: "",
                       dead: ""
