@@ -37,7 +37,6 @@ class _Ping(object):
 
         self.hosts = list()
         loginSection = ResMgr.openSection('scripts_config.xml')['login']
-        log(str(loginSection))
         if loginSection is not None:
             for (name, subSec) in loginSection.items():
                 self.hosts.append({
