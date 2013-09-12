@@ -345,6 +345,7 @@ class com.xvm.VehicleInfoData
         germany_PzIV_Hydro:                { tiers: [ 5, 6 ], name: null, short: "Pz4H" },
         usa_M4A2E4:                        { tiers: [ 5, 6 ], name: null, short: "SheE4" },
         uk_GB68_Matilda_Black_Prince:      { tiers: [ 5, 6 ], name: null, short: "MatilBP" },
+        japan_Chi_Nu_Kai:                  { tiers: [ 5, 6 ], name: null, short: "ChiNuKai" },
         ussr_Churchill_LL:                 { tiers: [ 5, 6 ], name: null, short: "Chur" },
         ussr_KV_220:                       { tiers: [ 5, 6 ], name: null, short: "KV220" },
         ussr_KV_220_action:                { tiers: [ 5, 6 ], name: null, short: "KV220A" },

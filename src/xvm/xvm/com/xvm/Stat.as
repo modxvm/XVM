@@ -38,9 +38,14 @@ package com.xvm
             return instance.loaded;
         }
 
+        public static function get stat():Dictionary
+        {
+            return instance.stat;
+        }
+
         public static function getData(name:String):StatData
         {
-            return instance.stat[name];
+            return stat[name];
         }
 
         public static function loadBattleStat(target:Object, callback:Function, force:Boolean = false):void
@@ -248,22 +253,22 @@ package com.xvm
             // XVM Scale: http://www.koreanrandom.com/forum/topic/2625-xvm-scale
 
             // xeff
-            stat.xeff = 0;
+            stat.xeff = NaN;
             if (stat.e > 0)
                 stat.xeff = XvmScale.XEFF(stat.e);
 
             // xwn
-            stat.xwn = 0;
+            stat.xwn = NaN;
             if (stat.wn > 0)
                 stat.xwn = XvmScale.XWN(stat.wn);
 
             // tdb, tfb, tsb, tdv, te, teff (last)
-            stat.v.db = 0;
-            stat.v.fb = 0;
-            stat.v.sb = 0;
-            stat.v.dv = 0;
-            stat.v.te = 0;
-            stat.v.teff = 0;
+            stat.v.db = NaN;
+            stat.v.fb = NaN;
+            stat.v.sb = NaN;
+            stat.v.dv = NaN;
+            stat.v.te = NaN;
+            stat.v.teff = NaN;
             // skip v.b less then 10, because of WG bug:
             // http://www.koreanrandom.com/forum/topic/1643-/page-19#entry26189
             // forceTeff used in UserInfo, there is not this bug there.
@@ -274,7 +279,7 @@ package com.xvm
                 stat.v.sb = (stat.v.s < 0) ? null : Math.round(stat.v.s / stat.v.b * 10) / 10;
                 //Logger.addObject(stat);
 
-                var vi2:Object = VehicleInfo.getInfo2ByVname(stat.vname);
+                var vi2:Object = VehicleInfo.getInfo2ByVn(stat.vn);
                 if (vi2 != null && vi2.type && vi2.level)
                 {
                     stat.v.dv = (stat.v.d < 0) ? null : Math.round(stat.v.d / stat.v.b / vi2.hptop * 10) / 10.0;

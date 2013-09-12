@@ -11,7 +11,7 @@ internal class XvmLinks
  *  from the classes specified in manifest.xml.
  */
 import com.xvm.*; Stat;
-import com.xvm.misc.*;  IconLoader;
+import com.xvm.misc.*; IconLoader; Chance;
 
 }
 

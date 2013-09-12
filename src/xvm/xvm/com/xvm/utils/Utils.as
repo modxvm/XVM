@@ -56,7 +56,7 @@ package com.xvm.utils
         {
             if (path == null)
                 return null;
-            path = path.replace("\\", "/");
+            path = path.replace(/\\/g, "/");
             if (!StringUtils.endsWith(path, "/"))
                 path += "/";
             return path;
@@ -145,8 +145,8 @@ package com.xvm.utils
         /**
          * Create CSS
          */
-        public static function createCSS(className:String, color:Number,
-            fontName:String, fontSize:Number, align:String, bold:Boolean, italic:Boolean):String
+        public static function createCSS(className:String, color:Object,
+            fontName:String, fontSize:Object, align:String, bold:Boolean, italic:Boolean):String
         {
             return "." + className + " {" +
                 "color:#" + StringUtils.leftPad(color.toString(16), 6, '0') + ";" +
@@ -185,23 +185,33 @@ package com.xvm.utils
             return str.split("xvmres://").join("img://" + Defines.XVMRES_IMG_ROOT);
         }
 
-/*
-        // Duplicate text field
-        public static function duplicateTextField(mc:MovieClip, name:String, textField:TextField, yOffset:Number, align:String):TextField
-        {
-            var res:TextField = mc.createTextField("name", mc.getNextHighestDepth(),
-                textField._x, textField._y + yOffset, textField._width, textField._height);
-            res.antiAliasType = "advanced";
-            res.html = true;
-            res.selectable = false;
-            res.autoSize = align; // http://theolagendijk.com/2006/09/07/aligning-htmltext-inside-flash-textfield/
-            var tf: TextFormat = textField.getNewTextFormat();
-            res.styleSheet = Utils.createStyleSheet(Utils.createCSS("xvm_" + name,
-                tf.color, tf.font, tf.size, align, tf.bold, tf.italic));
-
-            return res;
+        public static function cloneTextField(textField:TextField, replace:Boolean = false):TextField {
+            var clone:TextField = new TextField();
+            var description:XML = describeType(textField);
+            for each (var item:XML in description.accessor) {
+                if (item.@access != 'readonly') {
+                    try {
+                        clone[item.@name] = textField[item.@name];
+                    } catch(error:Error) {
+                        // N/A yet.
+                    }
+                }
+            }
+            clone.defaultTextFormat = textField.getTextFormat();
+            if (textField.parent && replace) {
+                textField.parent.addChild(clone);
+                textField.parent.removeChild(textField);
+            }
+            return clone;
         }
 
+        public static function createTextStyleSheet(name:String, textFormat:TextFormat):StyleSheet
+        {
+            return Utils.createStyleSheet(Utils.createCSS(name, textFormat.color,
+                textFormat.font, textFormat.size, textFormat.align, textFormat.bold, textFormat.italic));
+        }
+
+        /*
         public static function createButton(mc:MovieClip, name:String, x:Number, y:Number, txt:String, align:String):MovieClip
         {
             var b:MovieClip = mc.attachMovie("Button", name, mc.getNextHighestDepth());

@@ -2,7 +2,7 @@ package com.xvm.types.stat
 {
     import flash.utils.Dictionary;
 
-    public dynamic class StatData
+    public class StatData
     {
         // received
         public var up:Number;           // updated (int)
@@ -14,7 +14,7 @@ package com.xvm.types.stat
         public var spo:Number;          // spotted (int)
         public var dmg:Number;          // damage (int)
         public var w:Number;            // wins (int)
-        public var lvl:Number;          // level (float)
+        public var lvl:Number;          // average level (float)
         public var dt:String;           // XVM update date ("2013-09-02T01:21:20.080Z"),
         public var frg:Number;          // frags
         public var _id:Number;          // player account id (long int)
@@ -28,6 +28,9 @@ package com.xvm.types.stat
 
         public var clan:String;         // clan name
         public var name:String;         // player name in current game ("sirmax2_RU" for Common Test)
+        public var team:Number;         // team
+        public var alive:Boolean;       // alive
+        public var ready:Boolean;       // avatarReady
         public var vname:String;        // localized vehicle name ("ИС-3")
         public var icon:String;         // icon file name without path: "ussr-IS-3.png")
         public var maxHealth:Number;    // maximum health (int)

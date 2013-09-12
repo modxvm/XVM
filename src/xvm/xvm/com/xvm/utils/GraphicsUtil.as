@@ -88,8 +88,8 @@ package com.xvm.utils
             tr.blueOffset = 0;
             item.transform.colorTransform = tr;
         }
-
-        public static function brightenColor(hexColor: Number, percent: Number): Number
+*/
+        public static function brightenColor(hexColor:Number, percent:Number):Number
         {
             if (isNaN(percent))
                 percent = 0;
@@ -98,8 +98,8 @@ package com.xvm.utils
             if (percent < 0)
                 percent = 0;
 
-            var factor: Number = percent / 100;
-            var rgb: Object = hexToRgb(hexColor);
+            var factor:Number = percent / 100;
+            var rgb:Object = hexToRgb(hexColor);
 
             rgb.r += (255 - rgb.r) * factor;
             rgb.b += (255 - rgb.b) * factor;
@@ -107,7 +107,7 @@ package com.xvm.utils
 
             return rgbToHex(Math.round(rgb.r), Math.round(rgb.g), Math.round(rgb.b));
         }
-
+/*
         public static function brightness(hex:Number): Number
         {
             var max: Number = 0;

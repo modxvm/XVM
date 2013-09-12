@@ -27,7 +27,7 @@ package com.xvm.vehinfo
         {
             if (!icon)
                 return null;
-            icon = icon.replace("-", "_");
+            icon = icon.replace(/-/g, "_");
             icon = StringUtils.trim(icon);
             return icon;
         }
@@ -39,29 +39,29 @@ package com.xvm.vehinfo
             if (!icon)
                 return null;
             icon = getShortVehicleName(icon);
-            icon = icon.replace("-", "_");
+            icon = icon.replace(/-/g, "_");
             icon = icon.toLowerCase();
             return icon;
         }
 
-        // vname = "IS-3"
+        // vn = "IS-3"
         // return: "is_3"
-        public static function getVehicleKey2ByVname(vname:String):String
+        public static function getVehicleKey2ByVn(vn:String):String
         {
-            if (!vname)
+            if (!vn)
                 return null;
-            vname = StringUtils.trim(vname);
-            vname = vname.replace("-", "_");
-            vname = vname.toLowerCase();
-            return vname;
+            vn = StringUtils.trim(vn);
+            vn = vn.replace(/-/g, "_");
+            vn = vn.toLowerCase();
+            return vn;
         }
 
 
         public static function getVehicleNamesData():CVehicleNames
         {
             var result:CVehicleNames = new CVehicleNames();
-            for (var vname:String in VehicleInfoData.data)
-                result[vname] = {name:VehicleInfoData.data[vname].name, short:VehicleInfoData.data[vname].short};
+            for (var vn:String in VehicleInfoData.data)
+                result[vn] = {name:VehicleInfoData.data[vn].name, short:VehicleInfoData.data[vn].short};
             return result;
         }
 
@@ -77,21 +77,21 @@ package com.xvm.vehinfo
             return originalName;
         }
 
-        // icon = "ussr-IS-3.png" or "../maps/icons/vehicle/contour/ussr-IS-3.png"
+        // icon = "ussr-IS-3"
         public static function getInfo1(icon: String): Object
         {
             return VehicleInfoData.data[getVehicleKey1(icon)] || null;
         }
 
-        // icon = "ussr-IS-3.png" or "../maps/icons/vehicle/contour/ussr-IS-3.png"
+        // icon = "ussr-IS-3"
         public static function getInfo2ByIcon(icon:String):Object
         {
             return _getInfo2(getVehicleKey2(icon));
         }
 
-        public static function getInfo2ByVname(vname:String):Object
+        public static function getInfo2ByVn(vn:String):Object
         {
-            return _getInfo2(getVehicleKey2ByVname(vname));
+            return _getInfo2(getVehicleKey2ByVn(vn));
         }
 
         public static function getInfo2ByVid(vid:Number):Object
@@ -102,10 +102,11 @@ package com.xvm.vehinfo
         private static function _getInfo2(vn:String):Object
         {
             var res:Object = VehicleInfoData2.data[vn];
+            Logger.add(vn + " " + String(res));
             if (!res)
                 return null;
-            res.avg = VehicleInfoDataAvg.data[vn] || null;
-            res.top = VehicleInfoDataTop.data[vn] || null;
+            res.avg = VehicleInfoDataAvg.data[vn] || {};
+            res.top = VehicleInfoDataTop.data[vn] || {};
             return res;
         }
 
