@@ -4,6 +4,7 @@ package preview
 import preview.*;
 
 import utils.*;
+import com.xvm.Config;
 
 public class VehicleState
 {
@@ -32,7 +33,7 @@ public class VehicleState
 
     public function getCurrentConfig():Object
     {
-        var result:Object = Config.s_config.markers;
+        var result:Object = Config.config.markers;
         result = proxy.team == "ally" ? result.ally : result.enemy;
         result = proxy.isDead ? result.dead : result.alive;
         result = proxy.showExInfo ? result.extended : result.normal;
@@ -44,7 +45,7 @@ public class VehicleState
         var path: Array = stateString.split("/");
         if (path.length != 3)
             return null;
-        var result:Object = Config.s_config.markers;
+        var result:Object = Config.config.markers;
         result = path[0] == "ally" ? result.ally : result.enemy;
         result = path[1] == "alive" ? result.alive : result.dead;
         result = path[2] == "normal" ? result.normal : result.extended;

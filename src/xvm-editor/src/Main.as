@@ -4,10 +4,10 @@ import mx.controls.Alert;
 import mx.core.UIComponent;
 import mx.events.MenuEvent;
 
-import utils.Config;
+import com.xvm.*;
+
 import utils.ConfigUtils;
 import com.xvm.misc.DefaultConfig;
-import utils.Defines;
 
 public function error(str:String, title:String = ""):void
 {
@@ -25,7 +25,7 @@ public function debug(str:String):void
 
 protected function createNewConfig():void
 {
-    Config.s_config = DefaultConfig.config;
+    Config.config = DefaultConfig.config;
     ConfigUtils.TuneupConfig();
     RefreshCurrentPage();
 }
@@ -37,7 +37,7 @@ protected function onLoadConfigClick():void
 
 protected function onSaveConfigClick(trim:Boolean):void
 {
-	Config.s_config.editorVersion = Defines.EDITOR_VERSION;
+	Config.config.editorVersion = Defines.EDITOR_VERSION;
 	SaveConfig(trim);
 }
 

@@ -1,5 +1,4 @@
-﻿import com.xvm.JSONx;
-import com.xvm.JSONxLoader;
+﻿import com.xvm.*;
 
 import components.MergeDialog;
 
@@ -11,14 +10,8 @@ import flash.net.FileReferenceList;
 
 import mx.managers.PopUpManager;
 
-import utils.Config;
-import utils.ConfigUtils;
-import utils.ConfigUtilsEditor;
 import com.xvm.misc.DefaultConfig;
-import utils.Defines;
-import utils.OTMConfigConverter;
-import utils.PatchedXMLDecoder;
-import utils.Utils;
+import utils.*;
 
 private var loadCounter:int;
 private var loadCache:Object;
@@ -130,8 +123,8 @@ private function onLoadComplete2(e:Event):void
             }
             config = mergeDialog.config;
         }
-        Config.s_config = ConfigUtils.MergeConfigs(config, merge ? Config.s_config : DefaultConfig.config, "def");
-        config = ConfigUtils.MergeConfigs(config, merge ? Config.s_config : DefaultConfig.config, "def");
+        Config.config = ConfigUtils.MergeConfigs(config, merge ? Config.config : DefaultConfig.config, "def");
+        config = ConfigUtils.MergeConfigs(config, merge ? Config.config : DefaultConfig.config, "def");
         ConfigUtils.TuneupConfig();
         debug(_("ConfigurationLoaded"));
         RefreshCurrentPage();
@@ -158,10 +151,10 @@ private function SaveConfig(trim:Boolean):void
 	fr.addEventListener(Event.COMPLETE, onFileSave);
 	fr.addEventListener(IOErrorEvent.IO_ERROR, onSaveError);
 	// Serialize and add UTF-8 BOM
-	var cfg:Object = trim ? ConfigUtilsEditor.SimplifyConfig(Config.s_config) : Config.s_config;
+	var cfg:Object = trim ? ConfigUtilsEditor.SimplifyConfig(Config.config) : Config.config;
 		
 	var str:String = "\uFEFF/**\n" +
-		" * Config was created in XVM Editor v" + utils.Defines.EDITOR_VERSION + "\n" +
+		" * Config was created in XVM Editor v" + Defines.EDITOR_VERSION + "\n" +
 		" * at " + (new Date()).toString() + "\n" +
 		" */\n" +
 		JSONx.stringify(cfg, null, false, sortFunction) + "\n";

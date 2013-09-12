@@ -11,6 +11,7 @@ import preview.*;
 
 import utils.*;
 
+import com.xvm.*;
 import com.xvm.utils.*;
 
 public class DamageTextComponent

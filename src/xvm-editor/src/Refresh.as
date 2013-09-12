@@ -1,6 +1,6 @@
 ﻿import components.DefaultComponent;
 
-import utils.Config;
+import com.xvm.*;
 import utils.ConfigUtilsEditor;
 import com.xvm.misc.DefaultConfig;
 import utils.Utils;
@@ -12,12 +12,12 @@ protected function RefreshCurrentPage():void
     {
         var pg:Object = vsTabs.selectedChild;
 
-        if (!Config.s_config)
-            Config.s_config = DefaultConfig.config;
+        if (!Config.config)
+            Config.config = DefaultConfig.config;
 
         var now: Date = new Date();
 
-        //debug(JSONx.stringify(Config.s_config));
+        //debug(JSONx.stringify(Config.config));
 
         if (pg == pgCommon)
             RefreshCommonPage();
@@ -78,7 +78,7 @@ private function RefreshCommonPage():void
     {
         var section:*;
 
-        section = Config.s_config.definition;
+        section = Config.config.definition;
         this.p_definition.v_author.value = section.author;
         this.p_definition.v_description.value = section.description;
         this.p_definition.v_url.value = section.url;
@@ -86,10 +86,10 @@ private function RefreshCommonPage():void
         this.p_definition.v_gameVersion.value = section.gameVersion;
         this.p_definition.v_modMinVersion.value = section.modMinVersion;
 
-        section = Config.s_config.language;
+        section = Config.config.language;
         this.p_language.v_language.value = section;
 
-        section = Config.s_config.rating;
+        section = Config.config.rating;
         this.p_rating.v_showPlayersStatistics.value = section.showPlayersStatistics;
         this.p_rating.v_enableUserInfoStatistics.value = section.enableUserInfoStatistics;
         this.p_rating.v_enableCompanyStatistics.value = section.enableCompanyStatistics;
@@ -109,7 +109,7 @@ private function RefreshLoginPage():void
     {
         var section:*;
 
-        section = Config.s_config.login.pingServers;
+        section = Config.config.login.pingServers;
         this.p_pingServers_login.v_enabled.value = section.enabled;
         this.p_pingServers_login.v_updateInterval.value = section.updateInterval;
         this.p_pingServers_login.v_x.value = section.x;
@@ -150,26 +150,26 @@ private function RefreshHangarPage():void
     {
         var section:*;
 
-        section = Config.s_config.hangar;
+        section = Config.config.hangar;
         this.p_hangar.v_hideTutorial.value = section.hideTutorial;
         this.p_hangar.v_xwnInCompany.value = section.xwnInCompany;
         this.p_hangar.v_widgetsEnabled.value = section.widgetsEnabled;
 
-        section = Config.s_config.userInfo;
+        section = Config.config.userInfo;
         this.p_hangar.v_showFilters.value = section.showFilters;
         this.p_hangar.v_filterFocused.value = section.filterFocused;
         this.p_hangar.v_inHangarFilterEnabled.value = section.inHangarFilterEnabled;
         this.p_hangar.v_showEColumn.value = section.showEColumn;
         this.p_hangar.v_sortColumn.value = section.sortColumn;
 
-        section = Config.s_config.squad;
+        section = Config.config.squad;
         this.p_hangar.v_enabled.value = section.enabled;
         this.p_hangar.v_romanNumbers.value = section.romanNumbers;
         this.p_hangar.v_showClan.value = section.showClan;
         this.p_hangar.v_leftLvlBorder.value = section.leftLvlBorder;
         this.p_hangar.v_rightLvlBorder.value = section.rightLvlBorder;
 
-        section = Config.s_config.hangar.pingServers;
+        section = Config.config.hangar.pingServers;
         this.p_pingServers_hangar.v_enabled.value = section.enabled;
         this.p_pingServers_hangar.v_updateInterval.value = section.updateInterval;
         this.p_pingServers_hangar.v_x.value = section.x;
@@ -210,7 +210,7 @@ private function RefreshBattlePage():void
     {
         var section:*;
 
-        section = Config.s_config.battle;
+        section = Config.config.battle;
         this.p_battle.v_mirroredVehicleIcons.value = section.mirroredVehicleIcons;
         this.p_battle.v_showPostmortemTips.value = section.showPostmortemTips;
         this.p_battle.v_removePanelsModeSwitcher.value = section.removePanelsModeSwitcher;
@@ -219,10 +219,10 @@ private function RefreshBattlePage():void
         this.p_battle.v_clockFormat.value = section.clockFormat;
         this.p_battle.v_clanIconsFolder.value = section.clanIconsFolder;
 
-        section = Config.s_config.fragCorrelation;
+        section = Config.config.fragCorrelation;
         this.p_fragCorrelation.v_hideTeamTextFields.value = section.hideTeamTextFields;
 
-        section = Config.s_config.expertPanel;
+        section = Config.config.expertPanel;
         this.p_expertPanel.v_delay.value = section.delay;
         this.p_expertPanel.v_scale.value = section.scale;
     }
@@ -239,7 +239,7 @@ private function RefreshHotkeysPage():void
     {
         var section:*;
 
-        section = Config.s_config.hotkeys;
+        section = Config.config.hotkeys;
         this.p_hotkeys.v_minimapZoom_enabled.value = section.minimapZoom.enabled;
         this.p_hotkeys.v_minimapZoom_keyCode.value = section.minimapZoom.keyCode;
         this.p_hotkeys.v_minimapZoom_onHold.value = section.minimapZoom.onHold;
@@ -257,7 +257,7 @@ private function RefreshHitLogPage():void
     {
         var section:*;
 
-        section = Config.s_config.hitLog;
+        section = Config.config.hitLog;
         this.p_hitLog.v_visible.value = section.visible;
         this.p_hitLog.v_x.value = section.x;
         this.p_hitLog.v_y.value = section.y;
@@ -293,7 +293,7 @@ private function RefreshCaptureBarPage():void
     {
         var section:*;
 
-        section = Config.s_config.captureBar;
+        section = Config.config.captureBar;
         this.p_captureBar.v_enabled.value = section.enabled;
         this.p_captureBar.v_primaryTitleOffset.value = section.primaryTitleOffset;
         this.p_captureBar.v_appendPlus.value = section.appendPlus;
@@ -327,7 +327,7 @@ private function RefreshMinimapPage():void
     {
         var section:*;
 
-        section = Config.s_config.minimap;
+        section = Config.config.minimap;
         this.p_minimap.v_enabled.value = section.enabled;
         this.p_minimap.v_mapBackgroundImageAlpha.value = section.mapBackgroundImageAlpha;
         this.p_minimap.v_selfIconAlpha.value = section.selfIconAlpha;
@@ -356,7 +356,7 @@ private function RefreshBattleLoadingPage():void
     {
         var section:*;
 
-        section = Config.s_config.battleLoading;
+        section = Config.config.battleLoading;
         this.p_battleLoading.v_clockFormat.value = section.clockFormat;
         this.p_battleLoading.v_showChances.value = section.showChances;
         this.p_battleLoading.v_showChancesExp.value = section.showChancesExp;
@@ -364,7 +364,7 @@ private function RefreshBattleLoadingPage():void
         this.p_battleLoading_text.v_formatLeft.value = section.formatLeft;
         this.p_battleLoading_text.v_formatRight.value = section.formatRight;
 
-        section = Config.s_config.battleLoading.clanIcon;
+        section = Config.config.battleLoading.clanIcon;
         this.p_battleLoading_icons.v_show.value = section.show;
         this.p_battleLoading_icons.v_x.value = section.x;
         this.p_battleLoading_icons.v_y.value = section.y;
@@ -387,14 +387,14 @@ private function RefreshStatisticFormPage():void
     {
         var section:*;
 
-        section = Config.s_config.statisticForm;
+        section = Config.config.statisticForm;
         this.p_statisticForm.v_showChances.value = section.showChances;
         this.p_statisticForm.v_showChancesExp.value = section.showChancesExp;
         this.p_statisticForm.v_removeSquadIcon.value = section.removeSquadIcon;
         this.p_statisticForm_text.v_formatLeft.value = section.formatLeft;
         this.p_statisticForm_text.v_formatRight.value = section.formatRight;
 
-        section = Config.s_config.statisticForm.clanIcon;
+        section = Config.config.statisticForm.clanIcon;
         this.p_statisticForm_icons.v_show.value = section.show;
         this.p_statisticForm_icons.v_x.value = section.x;
         this.p_statisticForm_icons.v_y.value = section.y;
@@ -417,12 +417,12 @@ private function RefreshPlayersPanel1Page():void
     {
         var section:*;
 
-        section = Config.s_config.playersPanel;
+        section = Config.config.playersPanel;
         this.p_playersPanel.v_alpha.value = section.alpha;
         this.p_playersPanel.v_iconAlpha.value = section.iconAlpha;
         this.p_playersPanel.v_removeSquadIcon.value = section.removeSquadIcon;
 
-        section = Config.s_config.playersPanel.clanIcon;
+        section = Config.config.playersPanel.clanIcon;
         this.p_playersPanel_icons.v_show.value = section.show;
         this.p_playersPanel_icons.v_x.value = section.x;
         this.p_playersPanel_icons.v_y.value = section.y;
@@ -432,7 +432,7 @@ private function RefreshPlayersPanel1Page():void
         this.p_playersPanel_icons.v_h.value = section.h;
         this.p_playersPanel_icons.v_alpha.value = section.alpha;
 
-        section = Config.s_config.playersPanel.enemySpottedMarker;
+        section = Config.config.playersPanel.enemySpottedMarker;
         this.p_playersPanel_enemySpotted.v_enabled.value = section.enabled;
         this.p_playersPanel_enemySpotted.v_Xoffset.value = section.Xoffset;
         this.p_playersPanel_enemySpotted.v_Yoffset.value = section.Yoffset;
@@ -458,17 +458,17 @@ private function RefreshPlayersPanel2Page():void
     {
         var section:*;
 
-        section = Config.s_config.playersPanel.medium;
+        section = Config.config.playersPanel.medium;
         this.p_playersPanel_medium.v_width.value = section.width;
         this.p_playersPanel_medium.v_formatLeft.value = section.formatLeft;
         this.p_playersPanel_medium.v_formatRight.value = section.formatRight;
 
-        section = Config.s_config.playersPanel.medium2;
+        section = Config.config.playersPanel.medium2;
         this.p_playersPanel_medium2.v_width.value = section.width;
         this.p_playersPanel_medium2.v_formatLeft.value = section.formatLeft;
         this.p_playersPanel_medium2.v_formatRight.value = section.formatRight;
 
-        section = Config.s_config.playersPanel.large;
+        section = Config.config.playersPanel.large;
         this.p_playersPanel_large.v_width.value = section.width;
         this.p_playersPanel_large.v_nickFormatLeft.value = section.nickFormatLeft;
         this.p_playersPanel_large.v_nickFormatRight.value = section.nickFormatRight;
@@ -488,7 +488,7 @@ private function RefreshFinalStatisticPage():void
     {
         var section:*;
 
-        section = Config.s_config.finalStatistic;
+        section = Config.config.finalStatistic;
         this.p_finalStatistic.v_startPage.value = section.startPage;
         this.p_finalStatistic.v_sortColumn.value = section.sortColumn;
         this.p_finalStatistic.v_showChances.value = section.showChances;
@@ -508,7 +508,7 @@ private function RefreshColorsPage1():void
         var section:Object;
         if (accColors1.selectedChild == nc_systemColors && p_systemColors != null)
         {
-            section = Config.s_config.colors.system;
+            section = Config.config.colors.system;
             if (p_systemColors.v_ally_alive != null)
                 p_systemColors.v_ally_alive.value = section.ally_alive;
             if (p_systemColors.v_ally_dead != null)
@@ -536,7 +536,7 @@ private function RefreshColorsPage1():void
         }
         else if (accColors1.selectedChild == nc_damageColors && p_damageColors != null)
         {
-            section = Config.s_config.colors.damage;
+            section = Config.config.colors.damage;
             if (p_damageColors.v_ally_ally_hit != null)
                 p_damageColors.v_ally_ally_hit.value = section.ally_ally_hit;
             if (p_damageColors.v_ally_ally_kill != null)
@@ -690,7 +690,7 @@ private function RefreshColorsPage1():void
         }
         else if (accColors1.selectedChild == nc_damageKindColors && p_damageKindColors != null)
         {
-            section = Config.s_config.colors.dmg_kind;
+            section = Config.config.colors.dmg_kind;
             if (p_damageKindColors.v_attack != null)
             	p_damageKindColors.v_attack.value = section.attack;
             if (p_damageKindColors.v_fire != null)
@@ -704,7 +704,7 @@ private function RefreshColorsPage1():void
         }
         else if (accColors1.selectedChild == nc_vtypeColors && p_vtypeColors != null)
         {
-            section = Config.s_config.colors.vtype;
+            section = Config.config.colors.vtype;
             if (p_vtypeColors.v_LT != null)
                 p_vtypeColors.v_LT.value = section.LT;
             if (p_vtypeColors.v_MT != null)
@@ -811,11 +811,11 @@ private function RefreshTextsPage():void
     {
         var section:*;
 
-        section = Config.s_config.turretMarkers;
+        section = Config.config.turretMarkers;
         this.p_turretMarkers.v_highVulnerability.value = section.highVulnerability;
         this.p_turretMarkers.v_lowVulnerability.value = section.lowVulnerability;
 
-        section = Config.s_config.texts.vtype;
+        section = Config.config.texts.vtype;
         this.p_vtypeTexts.v_LT.value = section.LT;
         this.p_vtypeTexts.v_MT.value = section.MT;
         this.p_vtypeTexts.v_HT.value = section.HT;
@@ -835,7 +835,7 @@ private function RefreshMiscPage():void
     {
         var section:*;
 
-        section = Config.s_config.iconset;
+        section = Config.config.iconset;
         this.p_iconSet.v_battleLoading.value = section.battleLoading;
         this.p_iconSet.v_statisticForm.value = section.statisticForm;
         this.p_iconSet.v_playersPanel.value = section.playersPanel;

@@ -6,9 +6,9 @@ import com.greensock.plugins.*;
 
 import flash.text.TextField;
 
+import com.xvm.*;
 import preview.*;
 import preview.damage.*;
-
 import utils.*;
 
 /*
@@ -176,7 +176,7 @@ public class Xvm extends XvmBase
 	private var textFields:Array = [];
     private function UpdateTextFields(state_cfg:Object):void
     {
-		if (!Config.s_config || !Config.s_config.markers)
+		if (!Config.config || !Config.config.markers)
 			return;
 
 		while (textFields.length > 0)
@@ -205,7 +205,7 @@ public class Xvm extends XvmBase
 
     private function XVMUpdateStyle():void
     {
-		if (!Config.s_config || !Config.s_config.markers)
+		if (!Config.config || !Config.config.markers)
 			return;
         //trace("XVMUpdateStyle: " + m_playerFullName + m_vname + " " + " scale=" + proxy.marker._xscale);
 

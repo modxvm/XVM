@@ -7,6 +7,7 @@ package utils
 	import mx.messaging.channels.StreamingAMFChannel;
 	import flash.filters.*;
 	import flash.geom.*;
+	import com.xvm.*;
 
 public class Utils
 {
@@ -275,7 +276,7 @@ public class Utils
 	{
 		try
 		{
-			return prefix + Utils.toInt(Config.s_config.colors.vtype[vtype], 0xFFFFFE).toString(16);
+			return prefix + Utils.toInt(Config.config.colors.vtype[vtype], 0xFFFFFE).toString(16);
 		}
 		catch (ex:Error)
 		{
@@ -294,7 +295,7 @@ public class Utils
 		if (isNaN(value))
 			return prefix + "FFFBFB";
 		
-		var cfg_root: Object = Config.s_config.colors;
+		var cfg_root: Object = Config.config.colors;
 		var cfg: Array;
 		switch (type)
 		{
@@ -349,7 +350,7 @@ public class Utils
 		if (!value)
 			return 0;
 		
-		var cfg_root:Object = Config.s_config.alpha;
+		var cfg_root:Object = Config.config.alpha;
 		var cfg: Array;
 		switch (type)
 		{
@@ -386,9 +387,9 @@ public class Utils
 	{
 		try
 		{
-			if (!dmg_kind || !Config.s_config.colors.dmg_kind[dmg_kind])
+			if (!dmg_kind || !Config.config.colors.dmg_kind[dmg_kind])
 				return "";
-			return prefix + Utils.toInt(Config.s_config.colors.dmg_kind[dmg_kind], 0xFFFFFE).toString(16);
+			return prefix + Utils.toInt(Config.config.colors.dmg_kind[dmg_kind], 0xFFFFFE).toString(16);
 		}
 		catch (ex:Error)
 		{

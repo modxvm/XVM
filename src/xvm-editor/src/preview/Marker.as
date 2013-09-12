@@ -4,11 +4,11 @@
     import flash.events.Event;
     
     import mx.core.UIComponent;
-    
-    import preview.*;
-    
-    import utils.*;
 
+	import com.xvm.*;
+    import preview.*;
+    import utils.*;
+	
     public class Marker extends UIComponent
     {
         public var xvm:preview.Xvm;
@@ -131,10 +131,10 @@
         {
             if (!isInitialized)
                 return;
-            if (!Config.s_config || !Config.s_config.markers)
+            if (!Config.config || !Config.config.markers)
                 return;
 
-            var cfg:Object = Config.s_config.markers;
+            var cfg:Object = Config.config.markers;
             cfg = xvm.m_entityType == "ally" ? cfg.ally : cfg.enemy;
             cfg = xvm.m_isDead == false ? cfg.alive : cfg.dead;
             cfg = _extmode ? cfg.extended : cfg.normal;

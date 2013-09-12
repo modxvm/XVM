@@ -1,11 +1,10 @@
 package preview
 {
 
+import com.xvm.*;
+import com.xvm.utils.*;
 import preview.*;
-
 import utils.*;
-
-import com.xvm.utils.MacrosUtil;
 
 public class StatFormat
 {

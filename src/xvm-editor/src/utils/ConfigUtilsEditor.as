@@ -4,11 +4,9 @@
  */
 package utils
 {
-    import com.xvm.JSONx;
-    
-    import com.xvm.misc.DefaultConfig;
-    import utils.Defines;
-    import utils.Utils;
+	import com.xvm.*;
+    import com.xvm.misc.*;
+    import utils.*;
 	
     public class ConfigUtilsEditor
     {
@@ -18,7 +16,7 @@ package utils
     	public static function GetValue(path:String, root:Object = null):*
     	{
     		if (root == null)
-    			root = Config.s_config;
+    			root = Config.config;
     		if (!root)
     			return null;
 
@@ -43,7 +41,7 @@ package utils
     	public static function SetValue(path:String, value:*, root:Object = null):void
     	{
     		if (root == null)
-    			root = Config.s_config;
+    			root = Config.config;
     		if (!root)
     			return;
 
@@ -65,7 +63,7 @@ package utils
             if (value === null || value === undefined) // FIXIT: why undefined presents?
     			root[valueElement] = null;
     		else if (typeof value == "object")
-                root[valueElement] = com.xvm.JSONx.parse(com.xvm.JSONx.stringify(value)); // dereference
+                root[valueElement] = JSONx.parse(JSONx.stringify(value)); // dereference
             else
                 root[valueElement] = value;
     	}

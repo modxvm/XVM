@@ -2,6 +2,8 @@ package utils
 {
     public final class Macros
     {
+		import com.xvm.*;
+		
         import utils.Embed;
 
         public static function get(m:String):Array
@@ -34,11 +36,11 @@ package utils
             format = format.split("$TextFont").join("Tahoma")
 
             // Text
-            format = format.split("{{dead}}").join(Config.s_config.hitLog.deadMarker);
+            format = format.split("{{dead}}").join(Config.config.hitLog.deadMarker);
 
-            format = format.split("{{extra}}").join(Config.s_config.captureBar.ally.extra);
+            format = format.split("{{extra}}").join(Config.config.captureBar.ally.extra);
             format = format.split("{{points}}").join("5");
-            format = format.split("{{tanks}}").join("3" + (Config.s_config.captureBar.appendPlus ? "+" : ""));
+            format = format.split("{{tanks}}").join("3" + (Config.config.captureBar.appendPlus ? "+" : ""));
             format = format.split("{{time}}").join("1:15");
             format = format.split("{{time-sec}}").join("75");
             format = format.split("{{speed}}").join("3");
@@ -48,16 +50,16 @@ package utils
             var vnames:String = "t34";
             format = format.split("{{nick}}").join(name + "[CLAN]");
             format = format.split("{{name}}").join(name);
-            format = format.split("{{short-nick}}").join(name.slice(0, Config.s_config.minimap.nickShrink));
+            format = format.split("{{short-nick}}").join(name.slice(0, Config.config.minimap.nickShrink));
             format = format.split("{{clan}}").join("[CLAN]");
             format = format.split("{{clannb}}").join("CLAN");
             format = format.split("{{vehicle}}").join(vname);
             format = format.split("{{vehiclename}}").join("ussr-T-34");
             format = format.split("{{short-vehicle}}").join(vnames);
-            format = format.split("{{vtype}}").join(Config.s_config.texts.vtype.MT);
+            format = format.split("{{vtype}}").join(Config.config.texts.vtype.MT);
             format = format.split("{{level}}").join("5");
             format = format.split("{{rlevel}}").join("V");
-            format = format.split("{{turret}}").join(Config.s_config.turretMarkers.highVulnerability);
+            format = format.split("{{turret}}").join(Config.config.turretMarkers.highVulnerability);
             format = format.split("{{hp}}").join(hp.toString());
             format = format.split("{{hp-ratio}}").join(hpRatio.toString());
             format = format.split("{{hp-max}}").join(hpMax.toString());

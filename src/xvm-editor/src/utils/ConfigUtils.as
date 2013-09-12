@@ -1,6 +1,8 @@
 ﻿package utils
 {
 
+import com.xvm.*;
+	
 public class ConfigUtils
 {
     /**
@@ -65,25 +67,25 @@ public class ConfigUtils
      */
     public static function TuneupConfig():void
     {
-        Config.s_config.battle.clanIconsFolder = Utils.fixPath(Config.s_config.battle.clanIconsFolder);
+        Config.config.battle.clanIconsFolder = Utils.fixPath(Config.config.battle.clanIconsFolder);
 
-        Config.s_config.iconset.battleLoading = Utils.fixPath(Config.s_config.iconset.battleLoading);
-        Config.s_config.iconset.playersPanel = Utils.fixPath(Config.s_config.iconset.playersPanel);
-        Config.s_config.iconset.statisticForm = Utils.fixPath(Config.s_config.iconset.statisticForm);
-        Config.s_config.iconset.vehicleMarker = Utils.fixPath(Config.s_config.iconset.vehicleMarker);
+        Config.config.iconset.battleLoading = Utils.fixPath(Config.config.iconset.battleLoading);
+        Config.config.iconset.playersPanel = Utils.fixPath(Config.config.iconset.playersPanel);
+        Config.config.iconset.statisticForm = Utils.fixPath(Config.config.iconset.statisticForm);
+        Config.config.iconset.vehicleMarker = Utils.fixPath(Config.config.iconset.vehicleMarker);
 
-        if (isNaN(Config.s_config.battleLoading.clanIcon.xr))
-            Config.s_config.battleLoading.clanIcon.xr = Config.s_config.battleLoading.clanIcon.x;
-        if (isNaN(Config.s_config.battleLoading.clanIcon.yr))
-            Config.s_config.battleLoading.clanIcon.yr = Config.s_config.battleLoading.clanIcon.y;
-        if (isNaN(Config.s_config.statisticForm.clanIcon.xr))
-            Config.s_config.statisticForm.clanIcon.xr = Config.s_config.statisticForm.clanIcon.x;
-        if (isNaN(Config.s_config.statisticForm.clanIcon.yr))
-            Config.s_config.statisticForm.clanIcon.yr = Config.s_config.statisticForm.clanIcon.y;
-        if (isNaN(Config.s_config.playersPanel.clanIcon.xr))
-            Config.s_config.playersPanel.clanIcon.xr = Config.s_config.playersPanel.clanIcon.x;
-        if (isNaN(Config.s_config.playersPanel.clanIcon.yr))
-            Config.s_config.playersPanel.clanIcon.yr = Config.s_config.playersPanel.clanIcon.y;
+        if (isNaN(Config.config.battleLoading.clanIcon.xr))
+            Config.config.battleLoading.clanIcon.xr = Config.config.battleLoading.clanIcon.x;
+        if (isNaN(Config.config.battleLoading.clanIcon.yr))
+            Config.config.battleLoading.clanIcon.yr = Config.config.battleLoading.clanIcon.y;
+        if (isNaN(Config.config.statisticForm.clanIcon.xr))
+            Config.config.statisticForm.clanIcon.xr = Config.config.statisticForm.clanIcon.x;
+        if (isNaN(Config.config.statisticForm.clanIcon.yr))
+            Config.config.statisticForm.clanIcon.yr = Config.config.statisticForm.clanIcon.y;
+        if (isNaN(Config.config.playersPanel.clanIcon.xr))
+            Config.config.playersPanel.clanIcon.xr = Config.config.playersPanel.clanIcon.x;
+        if (isNaN(Config.config.playersPanel.clanIcon.yr))
+            Config.config.playersPanel.clanIcon.yr = Config.config.playersPanel.clanIcon.y;
     }
 
     /**

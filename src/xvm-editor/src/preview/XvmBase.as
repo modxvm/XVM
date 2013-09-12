@@ -4,9 +4,9 @@ package preview
 import flash.text.StyleSheet;
 import flash.text.TextField;
 
+import com.xvm.*;
 import preview.*;
 import preview.damage.*;
-
 import utils.*;
 
 public class XvmBase
@@ -77,7 +77,7 @@ public class XvmBase
             format = formatArr.join(m_source);
         formatArr = format.split("{{vtype}}");
         if (formatArr.length > 1)
-            format = formatArr.join(Config.s_config.texts.vtype[Utils.vehicleClassToVehicleType(m_vclass)]);
+            format = formatArr.join(Config.config.texts.vtype[Utils.vehicleClassToVehicleType(m_vclass)]);
         formatArr = format.split("{{level}}");
         if (formatArr.length > 1)
             format = formatArr.join(String(m_level));
@@ -86,7 +86,7 @@ public class XvmBase
             format = formatArr.join(XvmHelper.rlevel[m_level - 1]);
         formatArr = format.split("{{turret}}");
         if (formatArr.length > 1)
-            format = formatArr.join(Config.s_config.turretMarkers.highVulnerability);
+            format = formatArr.join(Config.config.turretMarkers.highVulnerability);
 
         format = StatFormat.FormatText(format, m_isDead);
         format = Utils.trim(format);

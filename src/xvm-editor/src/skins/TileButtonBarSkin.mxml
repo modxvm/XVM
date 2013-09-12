@@ -15,9 +15,9 @@
 
     <fx:Declarations>
         <fx:Component id="middleButton">
-            <s:ButtonBarButton skinClass="spark.skins.spark.ButtonBarMiddleButtonSkin" >
+            <s:ButtonBarButton skinClass="skins.CustomButtonBarButtonSkin" >
                 <fx:Script>
-                    import spark.skins.spark.ButtonBarMiddleButtonSkin;
+                    //import spark.skins.spark.ButtonBarMiddleButtonSkin;
                 </fx:Script>
             </s:ButtonBarButton>
         </fx:Component>
