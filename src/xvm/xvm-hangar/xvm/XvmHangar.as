@@ -14,7 +14,6 @@ package xvm
     import net.wg.infrastructure.interfaces.IView;
     import net.wg.infrastructure.managers.impl.ContainerManager;
     import xvm.hangar.*;
-    import xvm.hangar.components.PingServers.PingServers;
 
     public class XvmHangar extends Sprite
     {
@@ -48,9 +47,6 @@ package xvm
             try
             {
                 Logger.add("[XVM] hangar, current view: " + (App.containerMgr.lastFocusedView ? App.containerMgr.lastFocusedView.as_alias : "None"));
-
-                // init pinger as earlier as possible
-                PingServers.initFeature(Config.config.login.pingServers.enabled || Config.config.hangar.pingServers.enabled);
 
                 // view can be already loaded
                 var mgr:ContainerManager = App.containerMgr as ContainerManager;

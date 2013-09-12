@@ -44,9 +44,18 @@ class _Ping(object):
         with self.lock:
             if self.thread is not None:
                 return
+        self._ping()
+
+    def _ping(self):
+        # wait for hosts initialization
+        if not g_preDefinedHosts._hosts:
+            BigWorld.callback(0.05, self._ping)
+            return
+        # create thread
         self.thread = threading.Thread(target=self._pingAsync)
         self.thread.daemon = True
         self.thread.start()
+        # timer for result check
         BigWorld.callback(0.05, self._checkResult)
 
     def _checkResult(self):
@@ -63,7 +72,7 @@ class _Ping(object):
                 self.thread = None
 
     def _respond(self):
-        #debug("respond: " + data)
+        #debug("respond: " + json.dumps(self.resp))
         try:
             strdata = json.dumps(self.resp)
             for proxy in self.listeners:
@@ -89,8 +98,8 @@ class _Ping(object):
                 pattern = '[\d.]+/([\d.]+)(?:/[\d.]+){2}'
                 env = dict(LANG='C')
                 si = None
-            res = {}
-            processes = {}
+            res = dict()
+            processes = dict()
 
             # Ping all servers in parallel
             for x in g_preDefinedHosts._hosts:
