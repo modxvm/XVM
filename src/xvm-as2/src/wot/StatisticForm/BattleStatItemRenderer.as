@@ -131,17 +131,18 @@ class wot.StatisticForm.BattleStatItemRenderer
         wrapper.col3.condenseWhite = StatData.s_empty;
 
         var pname = Utils.GetNormalizedPlayerName(wrapper.data.label);
+        var name = Utils.GetPlayerName(wrapper.data.label);
         Macros.RegisterPlayerData(pname, wrapper.data, team);
 
-        var key = "SF/" + pname + "/" + (StatData.s_data[pname] ? StatData.s_data[pname].loadstate : "0");
+        var key = "SF/" + pname + "/" + (StatData.s_data[name] ? StatData.s_data[name].loadstate : "0");
         var saved_icon = wrapper.data.icon;
         var saved_label = wrapper.data.label;
 
         // Add data for Win Chance calculation
         //Logger.addObject(data);
         if (Config.s_config.rating.showPlayersStatistics) {
-            if (StatData.s_data[pname])
-                StatData.s_data[pname].stat.alive = (wrapper.data.vehicleState & 1) != 0;
+            if (StatData.s_data[name] && StatData.s_data[name].stat)
+                StatData.s_data[name].stat.alive = (wrapper.data.vehicleState & 1) != 0;
         }
         // Chance
         if (!StatData.s_empty && Config.s_config.statisticForm.showChances && wrapper.selected == true)
