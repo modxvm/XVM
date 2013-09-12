@@ -38,7 +38,7 @@ package com.xvm.l10n
         public static function get(format:String):String
         {
             //Logger.add("Locale[get]: string: " + text + " | string: " + s_lang.locale[text] + " | fallback string: " + s_lang_fallback[text] + " | language: " + _language );
-            if (s_lang.hasOwnProperty(format))
+            if (s_lang.locale && s_lang.locale.hasOwnProperty(format))
                 format = s_lang.locale[format];
             else if (s_lang_fallback.hasOwnProperty(format))
                 format = s_lang_fallback[format];
@@ -230,7 +230,7 @@ package com.xvm.l10n
             "blownUp": "Blown-up!"
         };
 
-        private static var s_lang:Object;
+        private static var s_lang:Object = { };
         private static var s_lang_fallback:Object;
 
         //private var _initialized:Boolean = false;
