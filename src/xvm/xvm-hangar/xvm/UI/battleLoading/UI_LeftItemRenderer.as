@@ -1,12 +1,13 @@
-package xvm.hangar.components.BattleLoading
+package xvm.UI.battleLoading
 {
     import com.xvm.*;
+    import xvm.hangar.components.BattleLoading.*;
 
-    public class RightItemRendererWrapper extends RightItemRendererUI
+    public class UI_LeftItemRenderer extends LeftItemRendererUI
     {
         private var worker:BattleLoadingItemRenderer;
 
-        public function RightItemRendererWrapper()
+        public function UI_LeftItemRenderer()
         {
             super();
             worker = new BattleLoadingItemRenderer(this);

@@ -21,8 +21,16 @@ import net.wg.gui.lobby.header.*; TutorialControl;
 import net.wg.gui.lobby.hangar.*; Hangar;
 import net.wg.gui.lobby.hangar.crew.*; Crew; RecruitRendererVO; CrewItemRenderer;
 import net.wg.gui.lobby.battleloading.*; BattleLoading; PlayerItemRenderer;
+import net.wg.gui.messenger.controls.*; MemberItemRenderer;
+import net.wg.gui.prebattle.company.*; CompaniesListWindow; CompanyWindow;
 
+// UIs
+
+// battleLoading.swf
 LeftItemRendererUI; RightItemRendererUI;
+
+// companiesWindow.swf
+CompanyListItemRendererUI;
 
 }
 

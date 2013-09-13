@@ -12,6 +12,7 @@ package xvm.hangar
     import net.wg.infrastructure.events.LifeCycleEvent;
     import com.xvm.*;
     import xvm.hangar.components.BattleLoading.*;
+    import xvm.UI.battleLoading.*;
     import xvm.hangar.components.WinChances.WinChances;
 
     public class BattleLoading extends XvmModBase
@@ -34,17 +35,17 @@ package xvm.hangar
 
                 logBriefConfigurationInfo();
 
-                page.form.team1List.itemRenderer = LeftItemRendererWrapper;
-                page.form.team2List.itemRenderer = RightItemRendererWrapper;
+                page.form.team1List.itemRenderer = UI_LeftItemRenderer;
+                page.form.team2List.itemRenderer = UI_RightItemRenderer;
 
                 if (page.initialized)
                 {
-                    initBattleLoadingComponents();
+                    initComponents();
                 }
                 else
                 {
                     // TODO: find event
-                    setTimeout(initBattleLoadingComponents, 1);
+                    setTimeout(initComponents, 1);
                 }
             }
             catch (ex:Error)
@@ -72,7 +73,7 @@ package xvm.hangar
                 "                               useStandardMarkers=" + Config.config.battle.useStandardMarkers);
         }
 
-        private function initBattleLoadingComponents():void
+        private function initComponents():void
         {
             try
             {

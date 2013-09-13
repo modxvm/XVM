@@ -1,10 +1,11 @@
-package net.wg.gui.prebattle.squad 
+package net.wg.gui.prebattle.squad
 {
     import __AS3__.vec.*;
     import net.wg.data.components.*;
     import net.wg.data.daapi.*;
     import org.idmedia.as3commons.util.*;
-    
+    import net.wg.infrastructure.interfaces.IContextItem;
+
     public class SquadWindowCIGenerator extends net.wg.data.components.ContextItemGenerator
     {
         public function SquadWindowCIGenerator(arg1:Boolean, arg2:Boolean, arg3:Boolean=false)

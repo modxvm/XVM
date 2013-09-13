@@ -13,6 +13,7 @@ package xvm.hangar.components.BattleLoading
     import com.xvm.misc.IconLoader;
     import com.xvm.types.cfg.CClanIcon;
     import xvm.hangar.components.ClanIcon.ClanIcon;
+    import xvm.UI.battleLoading.*;
 
     public class BattleLoadingItemRenderer
     {
@@ -48,7 +49,7 @@ package xvm.hangar.components.BattleLoading
             //setInterval(function() { proxy.setData(proxy.data) }, 10); // DEBUG
         }
 
-        internal function setData(data:Object):void
+        public function setData(data:Object):void
         {
             //Logger.add("setData: " + (data == null ? "(null)" : data.label));
             if (data == null)
@@ -78,7 +79,7 @@ package xvm.hangar.components.BattleLoading
         }
 
         private var _savedTextFieldColor:String = null;
-        internal function draw():void
+        public function draw():void
         {
             try
             {
@@ -115,7 +116,7 @@ package xvm.hangar.components.BattleLoading
 
         private function get team():int
         {
-            return (proxy is LeftItemRendererWrapper) ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY;
+            return (proxy is UI_LeftItemRenderer) ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY;
         }
 
         private var _clanIconLoaded:Boolean = false;

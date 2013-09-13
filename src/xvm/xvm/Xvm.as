@@ -56,7 +56,11 @@ package
 
                 var ctx:LoaderContext = new LoaderContext(false, ApplicationDomain.currentDomain);
 
-                var preload:Array = ["battleLoading.swf"]; // TODO make configurable dependencies
+                var preload:Array = [
+                    "companiesListWindow.swf",
+                    "companyWindow.swf",
+                    "battleLoading.swf"
+                ]; // TODO make configurable dependencies
                 for (var x:int = 0; x < preload.length; ++x)
                 {
                     var swf:String = (preload[x] as String).replace(/^.*\//, '');

@@ -1,4 +1,4 @@
-package net.wg.gui.prebattle.company 
+package net.wg.gui.prebattle.company
 {
     import flash.events.*;
     import net.wg.gui.components.controls.*;
@@ -7,7 +7,7 @@ package net.wg.gui.prebattle.company
     import scaleform.clik.events.*;
     import scaleform.clik.interfaces.*;
     import scaleform.clik.ui.*;
-    
+
     public class CompaniesScrollingList extends net.wg.gui.components.controls.ScrollingListEx
     {
         public function CompaniesScrollingList()
@@ -27,10 +27,10 @@ package net.wg.gui.prebattle.company
             var loc3:*=null;
             var loc1:*=_renderers.length;
             var loc2:*=0;
-            while (loc2 < loc1) 
+            while (loc2 < loc1)
             {
                 loc3 = getRendererAt(loc2) as net.wg.gui.prebattle.company.CompanyListItemRenderer;
-                if (loc3.selected) 
+                if (loc3.selected)
                 {
                     return true;
                 }
@@ -59,14 +59,14 @@ package net.wg.gui.prebattle.company
         internal function clickHandler(arg1:flash.events.MouseEvent):void
         {
             var loc1:*=null;
-            if (scrollBar && scrollBar.hitTestPoint(arg1.stageX, arg1.stageY)) 
+            if (scrollBar && scrollBar.hitTestPoint(arg1.stageX, arg1.stageY))
             {
                 loc1 = net.wg.gui.components.controls.ScrollBar(scrollBar);
-                if (loc1.upArrowWg.hitTestPoint(arg1.stageX, arg1.stageY) && !loc1.upArrowWg.enabled) 
+                if (loc1.upArrowWg.hitTestPoint(arg1.stageX, arg1.stageY) && !loc1.upArrowWg.enabled)
                 {
                     this.unselectedRenderers();
                 }
-                if (loc1.downArrowWg.hitTestPoint(arg1.stageX, arg1.stageY) && !loc1.downArrowWg.enabled) 
+                if (loc1.downArrowWg.hitTestPoint(arg1.stageX, arg1.stageY) && !loc1.downArrowWg.enabled)
                 {
                     this.unselectedRenderers();
                 }
@@ -80,7 +80,7 @@ package net.wg.gui.prebattle.company
             this.isItemSelected = false;
             var loc1:*=_renderers.length;
             var loc2:*=0;
-            while (loc2 < loc1) 
+            while (loc2 < loc1)
             {
                 loc3 = getRendererAt(loc2) as net.wg.gui.prebattle.company.CompanyListItemRenderer;
                 loc3.selected = false;
@@ -91,7 +91,7 @@ package net.wg.gui.prebattle.company
 
         internal function buttonClickHandler(arg1:flash.events.MouseEvent):void
         {
-            if (arg1.target is CompaniesScrollingList) 
+            if (arg1.target is CompaniesScrollingList)
             {
                 this.isItemSelected = false;
                 App.utils.scheduler.scheduleTask(this.updateRenderer, 110);
@@ -134,12 +134,13 @@ package net.wg.gui.prebattle.company
             var loc1:*=arg1.length;
             var loc2:*=_renderers.length;
             var loc3:*=0;
-            while (loc3 < loc2) 
+            while (loc3 < loc2)
             {
-                if (loc4 = getRendererAt(loc3) as net.wg.gui.prebattle.company.CompanyListItemRenderer) 
+                loc4 = getRendererAt(loc3) as net.wg.gui.prebattle.company.CompanyListItemRenderer;
+                if (loc4)
                 {
                     loc5 = _scrollPosition + loc3;
-                    if (!(loc6 = this.isItemSelected ? _selectedIndex == loc5 : false) && loc4.dd.isOpen()) 
+                    if (!(loc6 = this.isItemSelected ? _selectedIndex == loc5 : false) && loc4.dd.isOpen())
                     {
                         loc4.dd.close();
                     }
@@ -159,15 +160,15 @@ package net.wg.gui.prebattle.company
 
         public override function handleInput(arg1:scaleform.clik.events.InputEvent):void
         {
-            if (arg1.handled) 
+            if (arg1.handled)
             {
                 return;
             }
             var loc1:*=getRendererAt(_selectedIndex, _scrollPosition);
-            if (loc1 != null) 
+            if (loc1 != null)
             {
                 loc1.handleInput(arg1);
-                if (arg1.handled) 
+                if (arg1.handled)
                 {
                     return;
                 }
@@ -175,32 +176,32 @@ package net.wg.gui.prebattle.company
             var loc2:*=arg1.details;
             var loc3:*=loc2.value == scaleform.clik.constants.InputValue.KEY_DOWN || loc2.value == scaleform.clik.constants.InputValue.KEY_HOLD;
             var loc4:*=loc2.navEquivalent;
-            switch (loc4) 
+            switch (loc4)
             {
                 case scaleform.clik.constants.NavigationCode.UP:
                 {
-                    if (selectedIndex != -1) 
+                    if (selectedIndex != -1)
                     {
-                        if (_selectedIndex > 0) 
+                        if (_selectedIndex > 0)
                         {
-                            if (loc3) 
+                            if (loc3)
                             {
                                 scrollPosition--;
                             }
                         }
-                        else if (wrapping != scaleform.clik.constants.WrappingMode.STICK) 
+                        else if (wrapping != scaleform.clik.constants.WrappingMode.STICK)
                         {
-                            if (wrapping != scaleform.clik.constants.WrappingMode.WRAP) 
+                            if (wrapping != scaleform.clik.constants.WrappingMode.WRAP)
                             {
                                 return;
                             }
-                            else if (loc3) 
+                            else if (loc3)
                             {
                                 scrollPosition = (_dataProvider.length - 1);
                             }
                         }
                     }
-                    else if (loc3) 
+                    else if (loc3)
                     {
                         scrollPosition = (scrollPosition + _totalRenderers - 1);
                     }
@@ -208,28 +209,28 @@ package net.wg.gui.prebattle.company
                 }
                 case scaleform.clik.constants.NavigationCode.DOWN:
                 {
-                    if (_selectedIndex != -1) 
+                    if (_selectedIndex != -1)
                     {
-                        if (_selectedIndex < (_dataProvider.length - 1)) 
+                        if (_selectedIndex < (_dataProvider.length - 1))
                         {
-                            if (loc3) 
+                            if (loc3)
                             {
                                 scrollPosition++;
                             }
                         }
-                        else if (wrapping != scaleform.clik.constants.WrappingMode.STICK) 
+                        else if (wrapping != scaleform.clik.constants.WrappingMode.STICK)
                         {
-                            if (wrapping != scaleform.clik.constants.WrappingMode.WRAP) 
+                            if (wrapping != scaleform.clik.constants.WrappingMode.WRAP)
                             {
                                 return;
                             }
-                            else if (loc3) 
+                            else if (loc3)
                             {
                                 scrollPosition = 0;
                             }
                         }
                     }
-                    else if (loc3) 
+                    else if (loc3)
                     {
                         scrollPosition = _scrollPosition;
                     }
@@ -237,7 +238,7 @@ package net.wg.gui.prebattle.company
                 }
                 case scaleform.clik.constants.NavigationCode.END:
                 {
-                    if (!loc3) 
+                    if (!loc3)
                     {
                         scrollPosition = (_dataProvider.length - 1);
                     }
@@ -245,7 +246,7 @@ package net.wg.gui.prebattle.company
                 }
                 case scaleform.clik.constants.NavigationCode.HOME:
                 {
-                    if (!loc3) 
+                    if (!loc3)
                     {
                         scrollPosition = 0;
                     }
@@ -253,7 +254,7 @@ package net.wg.gui.prebattle.company
                 }
                 case scaleform.clik.constants.NavigationCode.PAGE_UP:
                 {
-                    if (loc3) 
+                    if (loc3)
                     {
                         scrollList(_totalRenderers);
                     }
@@ -261,7 +262,7 @@ package net.wg.gui.prebattle.company
                 }
                 case scaleform.clik.constants.NavigationCode.PAGE_DOWN:
                 {
-                    if (loc3) 
+                    if (loc3)
                     {
                         scrollList(-_totalRenderers);
                     }

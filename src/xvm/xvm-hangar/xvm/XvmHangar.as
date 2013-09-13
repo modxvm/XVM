@@ -80,7 +80,9 @@ package xvm
             "login",
             "lobby",
             "hangar",
-            "battleLoading"
+            "battleLoading",
+            "prb_windows/companiesWindow",
+            "prb_windows/companyWindow"
         ]);
         private function onViewLoaded(e:LoaderEvent):void
         {
@@ -92,7 +94,7 @@ package xvm
 
         private function processView(view:IView, populated:Boolean = false):void
         {
-            //Logger.add("Process view: " + view.as_alias);
+            Logger.add("Process view: " + view.as_alias);
             var mod:IXvmMod = null;
             switch (view.as_alias)
             {
@@ -107,6 +109,14 @@ package xvm
                     break;
                 case "battleLoading":
                     mod = new BattleLoading(view);
+                    break;
+
+                case "prb_windows/companiesWindow":
+                    mod = new CompaniesListWindow(view);
+                    break;
+
+                case "prb_windows/companyWindow":
+                    mod = new CompanyWindow(view);
                     break;
             }
             if (mod != null && populated)

@@ -1,9 +1,10 @@
-package net.wg.data.components 
+package net.wg.data.components
 {
     import __AS3__.vec.*;
     import net.wg.data.daapi.*;
     import org.idmedia.as3commons.util.*;
-    
+    import net.wg.infrastructure.interfaces.IContextItem;
+
     public class BattleSessionCIGenerator extends net.wg.data.components.ContextItemGenerator
     {
         public function BattleSessionCIGenerator(arg1:Boolean, arg2:Boolean)
