@@ -98,6 +98,7 @@ package com.xvm.misc
 
             if (config && config.battleLoading && config.battleLoading.clanIcon)
             {
+                //Logger.addObject(config.battleLoading.clanIcon);
                 if (isNaN(config.battleLoading.clanIcon.xr))
                     config.battleLoading.clanIcon.xr = config.battleLoading.clanIcon.x;
                 if (isNaN(config.battleLoading.clanIcon.yr))

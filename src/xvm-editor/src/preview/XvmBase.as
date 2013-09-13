@@ -1,12 +1,15 @@
 package preview
 {
 
+import com.xvm.*;
+
+import flash.filters.DropShadowFilter;
 import flash.text.StyleSheet;
 import flash.text.TextField;
 
-import com.xvm.*;
 import preview.*;
 import preview.damage.*;
+
 import utils.*;
 
 public class XvmBase
@@ -290,8 +293,10 @@ public class XvmBase
         {
             var sh_color:Number = formatDynamicColor(formatStaticColorText(cfg.shadow.color), m_curHealth);
             var sh_alpha:Number = formatDynamicAlpha(cfg.shadow.alpha, m_curHealth);
-            textField.filters = [ Utils.createShadowFilter(cfg.shadow.distance,
-                cfg.shadow.angle, sh_color, sh_alpha, cfg.shadow.size, cfg.shadow.strength) ];
+            var filter:DropShadowFilter = Utils.createShadowFilter(cfg.shadow.distance,
+                cfg.shadow.angle, sh_color, sh_alpha, cfg.shadow.size, cfg.shadow.strength);
+            if (filter != null)
+                textField.filters = [ filter ];
         }
 
         textField.alpha = formatDynamicAlpha(cfg.alpha, m_curHealth);
