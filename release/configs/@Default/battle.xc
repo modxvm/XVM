@@ -28,7 +28,7 @@
     "clanIconsFolder": "clanicons/",
     // GUI elements settings (experts only)
     // Настройки графических элементов (только для экспертов!)
-    "elements": ${"elements.xc":"."}
+    "elements": ${"elements.xc":"elements"}
   },
   // Frag counter panel at top side of battle windows interface.
   // Панель счёта в бою.
