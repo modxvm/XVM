@@ -94,7 +94,7 @@
   "fragCorrelation": ${"battle.xc":"fragCorrelation"},
 
   // Ingame crits panel by "expert" skill.
-  // Внутриигровая панель критов от навыка "экспет".
+  // Внутриигровая панель критов от навыка "эксперт".
   "expertPanel": ${"battle.xc":"expertPanel"},
 
   // Options for player statistics (only with xvm-stat).

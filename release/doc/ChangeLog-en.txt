@@ -20,6 +20,7 @@
   * statistic is disabled in the config by default
   * removed TWR rating
   * removed option login/showPingOnGameLoading
+  * renamed fields formatLeft/Right in battleloading, Tab
   * changed clock format in battleloading (http://php.net/date)
 
 XVM-4.1.1:
