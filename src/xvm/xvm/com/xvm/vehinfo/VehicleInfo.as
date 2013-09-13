@@ -102,7 +102,7 @@ package com.xvm.vehinfo
         private static function _getInfo2(vn:String):Object
         {
             var res:Object = VehicleInfoData2.data[vn];
-            Logger.add(vn + " " + String(res));
+            //Logger.add(vn + " " + String(res));
             if (!res)
                 return null;
             res.avg = VehicleInfoDataAvg.data[vn] || {};
