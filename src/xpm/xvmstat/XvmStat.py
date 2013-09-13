@@ -79,7 +79,9 @@ class XvmStat(object):
             return None
         mods = []
         for m in glob.iglob(mods_dir + "/*.swf"):
-            mods.append(m.replace('\\', '/'))
+            m = m.replace('\\', '/')
+            if not m.lower().endswith("/xvm.swf"):
+                mods.append(m)
         return json.dumps(mods) if mods else None
 
 

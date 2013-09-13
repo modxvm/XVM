@@ -22,7 +22,7 @@ FILES_SCALEFORM="
   xvm.swf
   XVM.xvmconf"
 
-XVM_FILES="xvm.xc xvm.swf"
+XVM_FILES="xvm.xc"
 XVM_DIRS="configs l10n mods"
 
 cd $(dirname $(realpath $(cygpath --unix $0)))

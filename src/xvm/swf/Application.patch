@@ -6,7 +6,7 @@ diff -Naur Application-0.orig/net/wg/app/impl/Application.class.asasm Applicatio
       pushstring          "windows.swf"
       pushstring          "toolTips.swf"
 -     newarray            2
-+     pushstring          "../../../xvm/xvm.swf"
++     pushstring          "../../../xvm/mods/xvm.swf"
 +     newarray            3
       call                1
       initproperty        QName(PrivateNamespace(null, "net.wg.app.impl:Application/instance#0"), "_librariesList")

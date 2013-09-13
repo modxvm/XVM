@@ -7,7 +7,7 @@ package com.xvm
     public class Defines
     {
         // Global versions
-        public static const XVM_VERSION:String = "5.0.0-xpm-test1";
+        public static const XVM_VERSION:String = "5.0.0-xpm-test2";
         public static const XVM_INTRO:String = "www.modxvm.com";
         public static const WOT_VERSION:String = "0.8.8";
         public static const CONFIG_VERSION:String = "5.0.0";
@@ -29,7 +29,7 @@ package com.xvm
         public static const XVMMODS_ROOT:String = XVM_ROOT + "mods/";
 
         // res_mods/xvm/res/ (for <img> tag)
-        public static const XVMRES_IMG_ROOT:String = "../xvm/res/";
+        public static const XVMRES_IMG_ROOT:String = "../res/";
 
         // res_mods/xvm/res/SixthSense.png
         public static const SIXTH_SENSE_IMG:String = XVMRES_ROOT + "SixthSense.png";

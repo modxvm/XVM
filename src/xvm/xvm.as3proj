@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="..\..\release\xvm.swf" />
+    <movie path="..\..\release\mods\xvm.swf" />
     <movie fps="30" />
     <movie width="800" />
     <movie height="600" />
