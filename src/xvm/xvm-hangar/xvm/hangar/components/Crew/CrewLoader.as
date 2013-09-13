@@ -112,7 +112,8 @@ package xvm.hangar.components.Crew
 					// already in tank or selected for other slot
 					if (tankman.inTank == true || selectedTankmans.hasOwnProperty(tankman.tankmanID))
 						continue;
-					
+
+					// first tankman in RecruitRendererVO.recruitList contain tank info
 					if (checkFunc(tankman, best, renderer.recruitList[0], renderer.vehicleElite))
 					{
 						//Logger.addObject(best, "crew: old best");
@@ -149,7 +150,7 @@ package xvm.hangar.components.Crew
 			// No bestTankman : select first tankman met
 			if (best == null)
 				return true;
-			
+
 			var tankmanPenality:Number = getPenalty(tankman, slot, isPremVehicle);
 			var bestPenality:Number = getPenalty(best, slot, isPremVehicle);
 			
@@ -175,8 +176,14 @@ package xvm.hangar.components.Crew
 			//select the actualTankman
 			if (best.skills.length < tankman.skills.length)
 				return true;
+
+            //CASE 2.3 : actual tankman has last skill unset
+            //conserve the bestTankman
+            var lastSkill:Object = (tankman.skills.length > 0 ? tankman.skills[tankman.skills.length - 1] : null);
+            if (lastSkill != null && !lastSkill.hasOwnProperty("id"))
+                return false;
 			
-			//CASE 2.3 : bestTankman has the same number of skills that the actualTankman
+			//CASE 2.4 : bestTankman has the same number of skills that the actualTankman
 			//if the bestTankman's lastskilllevel is < that actualTankman's
 			//select the actualTankman
 			if (best.lastSkillLevel < tankman.lastSkillLevel)
