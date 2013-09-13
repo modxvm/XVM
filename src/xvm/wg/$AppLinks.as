@@ -14,7 +14,7 @@ import org.idmedia.as3commons.util.*; StringUtils;
 import net.wg.infrastructure.events.*; LoaderEvent; LifeCycleEvent;
 import net.wg.infrastructure.managers.impl.*; ContainerManager;
 import net.wg.gui.components.common.*; MainViewContainer;
-import net.wg.gui.components.controls.*; ReadOnlyScrollingList; LabelControl; CheckBox; IconButton; RadioButton; SoundButton; SoundButtonEx;
+import net.wg.gui.components.controls.ReadOnlyScrollingList; ReadOnlyScrollingList;
 import net.wg.gui.login.impl.*; LoginPage;
 import net.wg.gui.lobby.*; LobbyPage;
 import net.wg.gui.lobby.header.*; TutorialControl;
@@ -27,6 +27,11 @@ import net.wg.gui.prebattle.squad.*; SquadWindow;
 
 // UIs
 
+// controls.swf
+ButtonBlack; ButtonCaps; ButtonCapsRed; ButtonIcon; ButtonIconText; ButtonNormal; ButtonRed;
+CheckBox; CheckBoxFilter; CheckBoxTankers; IconText; LabelControl; NumericStepper;
+RadioButton; RedButton; Slider; TextFieldShort; TextInput; UILoaderAlt; UILoaderCut;
+
 // battleLoading.swf
 LeftItemRendererUI; RightItemRendererUI;
 
@@ -35,6 +40,7 @@ CompanyListItemRendererUI;
 
 // squadWindow.swf
 squadItemRendererUI;
+
 
 }
 

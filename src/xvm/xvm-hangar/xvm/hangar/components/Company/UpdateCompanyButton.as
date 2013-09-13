@@ -4,17 +4,16 @@ package xvm.hangar.components.Company
     import flash.text.*;
     import flash.utils.*;
     import scaleform.clik.controls.*;
-    import net.wg.gui.components.controls.*;
     import net.wg.gui.lobby.battleloading.*;
     import com.xvm.*;
     import com.xvm.utils.*;
 
-    public class UpdateCompanyButton extends LabelControl
+    public class UpdateCompanyButton extends TextFieldShort
     {
         public function UpdateCompanyButton()
         {
             super();
-            this.text = "TEST";
+            this.label = "TEST";
             //if (updateButton == null)
             //{
                 //Logger.add("updateButton");
