@@ -10,11 +10,14 @@ package xvm.hangar
     import net.wg.infrastructure.events.*;
     import net.wg.gui.prebattle.company.*;
     import com.xvm.*;
+    import com.xvm.l10n.Locale;
     import xvm.UI.companiesWindow.*;
     import xvm.hangar.components.Company.*;
 
     public class CompaniesListWindow extends XvmModBase
     {
+        private var updateCheckBox:CheckBox;
+
         public function CompaniesListWindow(view:IView)
         {
             super(view);
@@ -65,42 +68,21 @@ return;
         {
             try
             {
-                // Components
-                //new Clock(page);  // Realworld time at right side of TipField.
-
-        //var $this = this;
-        //wrapper.onRollOver = function()
-        //{
-            //if ($this.stat)
-                //ToolTipManager.instance.show(TeamRendererHelper.GetToolTipData($this.wrapper.data, $this.stat));
-            //else
-            //{
-                //if ($this.wrapper.toolTip)
-                    //ToolTipManager.instance.show($this.wrapper.toolTip);
-            //}
-        //}
-
-        //if (m_effField == null)
-        //{
-            //m_effField = Utils.duplicateTextField(wrapper, "eff", wrapper.textField, 0, "left");
-            //m_effField._x = wrapper.textField._x + wrapper.textField._width - 20;
-        //}
-        //m_effField.htmlText = "";
-
-
-        var updateButton:UpdateCompanyButton = new UpdateCompanyButton();
-        page.addChild(updateButton);
-        updateButton.x = page.filterTextField.x;
-        updateButton.y = page.refreshButton.y;
-        var w:Number = page.refreshButton.width;
-        updateButton.width = w;
-        updateButton.height = page.refreshButton.height;
-        updateButton.visible = true;
-        page.filterTextField.x += w + 5;
-        page.filterTextField.width -= w + 5;
-        Logger.add("updateButton");
-
-        //afterSetDataXVM();
+                updateCheckBox = new CheckBox();
+                updateCheckBox.autoSize = "left";
+                updateCheckBox.label = Locale.get("Load statistics");
+                updateCheckBox.x = page.createButton.x + page.createButton.width + 5;
+                updateCheckBox.y = 7;
+                page.addChild(updateCheckBox);
+                App.utils.scheduler.envokeInNextFrame(function():void
+                {
+                    var dx:Number = updateCheckBox.x + updateCheckBox.width - page.filterTextField.x;
+                    if (dx > 0)
+                    {
+                        page.filterTextField.x += dx;
+                        page.filterTextField.width -= dx;
+                    }
+                });
             }
             catch (ex:Error)
             {

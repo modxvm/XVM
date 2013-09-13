@@ -48,6 +48,11 @@ package com.xvm
             return stat[name];
         }
 
+        public static function getUserData(name:String):StatData
+        {
+            return stat[name];
+        }
+
         public static function loadBattleStat(target:Object, callback:Function, force:Boolean = false):void
         {
             instance.loadBattleStat(target, callback, force);
@@ -182,6 +187,11 @@ package com.xvm
                 if (callback != null)
                 {
                     var key:String = value + (isId ? ";1" : ";0");
+                    if (user.hasOwnProperty(key))
+                    {
+                        callback.call(target, user[key]);
+                        return;
+                    }
                     listenersUser[key] = { target:target, callback:callback };
                 }
 
@@ -201,6 +211,10 @@ package com.xvm
             {
                 var response:Object = JSONx.parse(json_str);
                 //Logger.addObject(response, "response", 2);
+                var key:String = response.nm + ";0";
+                user[key] = response;
+                key = response._id + ";1";
+                user[key] = response;
             }
             catch (e:Error)
             {
@@ -209,10 +223,11 @@ package com.xvm
             }
             finally
             {
-                var l:Object = listenersUser[response.name];
                 try
                 {
-                    l.callback.call(l.target);
+                    var l:Object = listenersUser[response.nm];
+                    l.callback.call(l.target, response);
+                    delete listenersUser[response.nm];
                 }
                 catch (e:Error)
                 {
@@ -222,7 +237,6 @@ package com.xvm
                 {
                     Logger.addObject(e, "exception");
                 }
-                delete listenersUser[response.name];
             }
         }
 
