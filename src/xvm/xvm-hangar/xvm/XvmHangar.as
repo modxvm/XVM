@@ -120,10 +120,7 @@ package xvm
                     mod = new CompanyWindow(view);
                     break;
                 case "prb_windows/squadWindow":
-                   /** TODO: fix
-                    * ReferenceError: Error #1065: Variable SquadItemRendererWrapper is not defined.
-                    * xvm\hangar\SquadWindow.as:29
-                    mod = new SquadWindow(view);*/
+                    //mod = new SquadWindow(view);
                     break;
             }
             if (mod != null && populated)

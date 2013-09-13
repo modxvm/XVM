@@ -59,7 +59,8 @@ package
                 var preload:Array = [
                     "companiesListWindow.swf",
                     "companyWindow.swf",
-                    "battleLoading.swf"
+                    "battleLoading.swf",
+                    "squadWindow.swf"
                 ]; // TODO make configurable dependencies
                 for (var x:int = 0; x < preload.length; ++x)
                 {

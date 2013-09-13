@@ -8,7 +8,7 @@ package xvm.hangar
 	import net.wg.gui.prebattle.squad.SquadWindow;
 	import net.wg.infrastructure.events.*;
 	import net.wg.infrastructure.interfaces.*;
-    import xvm.hangar.components.Squad.SquadItemRendererWrapper;
+    import xvm.UI.squadWindow.UI_SquadItemRenderer;
 	
 	public class SquadWindow extends XvmModBase
 	{
@@ -26,7 +26,7 @@ package xvm.hangar
 		{
 			try
 			{
-				page.memberList.itemRenderer = SquadItemRendererWrapper;
+				page.memberList.itemRenderer = UI_SquadItemRenderer;
 					//Logger.addObject(page.memberList, "squad memberList", 5);
 			}
 			catch (ex:Error)
