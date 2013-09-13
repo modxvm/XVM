@@ -10,6 +10,7 @@ package xvm.hangar
     import net.wg.infrastructure.events.*;
     import net.wg.gui.prebattle.company.*;
     import com.xvm.*;
+    import xvm.hangar.components.Company.*;
 
     public class CompanyWindow extends XvmModBase
     {
@@ -28,6 +29,11 @@ package xvm.hangar
             try
             {
                 //Logger.add("onAfterPopulate: " + view.as_alias);
+
+                if (Config.config.rating.showPlayersStatistics != true)
+                    return;
+                if (Config.config.rating.enableCompanyStatistics != true)
+                    return;
 
                 //page.form.team1List.itemRenderer = LeftItemRendererWrapper;
 

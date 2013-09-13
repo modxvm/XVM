@@ -11,6 +11,7 @@ package xvm.hangar
     import net.wg.gui.prebattle.company.*;
     import com.xvm.*;
     import xvm.UI.companiesWindow.*;
+    import xvm.hangar.components.Company.*;
 
     public class CompaniesListWindow extends XvmModBase
     {
@@ -29,6 +30,11 @@ package xvm.hangar
             try
             {
                 //Logger.add("onAfterPopulate: " + view.as_alias);
+return;
+                if (Config.config.rating.showPlayersStatistics != true)
+                    return;
+                if (Config.config.rating.enableCompanyStatistics != true)
+                    return;
 
                 page.cmpList.itemRenderer = UI_CompanyListItemRenderer;
 
@@ -61,6 +67,40 @@ package xvm.hangar
             {
                 // Components
                 //new Clock(page);  // Realworld time at right side of TipField.
+
+        //var $this = this;
+        //wrapper.onRollOver = function()
+        //{
+            //if ($this.stat)
+                //ToolTipManager.instance.show(TeamRendererHelper.GetToolTipData($this.wrapper.data, $this.stat));
+            //else
+            //{
+                //if ($this.wrapper.toolTip)
+                    //ToolTipManager.instance.show($this.wrapper.toolTip);
+            //}
+        //}
+
+        //if (m_effField == null)
+        //{
+            //m_effField = Utils.duplicateTextField(wrapper, "eff", wrapper.textField, 0, "left");
+            //m_effField._x = wrapper.textField._x + wrapper.textField._width - 20;
+        //}
+        //m_effField.htmlText = "";
+
+
+        var updateButton:UpdateCompanyButton = new UpdateCompanyButton();
+        page.addChild(updateButton);
+        updateButton.x = page.filterTextField.x;
+        updateButton.y = page.refreshButton.y;
+        var w:Number = page.refreshButton.width;
+        updateButton.width = w;
+        updateButton.height = page.refreshButton.height;
+        updateButton.visible = true;
+        page.filterTextField.x += w + 5;
+        page.filterTextField.width -= w + 5;
+        Logger.add("updateButton");
+
+        //afterSetDataXVM();
             }
             catch (ex:Error)
             {
