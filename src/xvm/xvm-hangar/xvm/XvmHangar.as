@@ -82,7 +82,8 @@ package xvm
             "hangar",
             "battleLoading",
             "prb_windows/companiesWindow",
-            "prb_windows/companyWindow"
+            "prb_windows/companyWindow",
+            "prb_windows/squadWindow"
         ]);
         private function onViewLoaded(e:LoaderEvent):void
         {
@@ -117,6 +118,12 @@ package xvm
 
                 case "prb_windows/companyWindow":
                     mod = new CompanyWindow(view);
+                    break;
+                case "prb_windows/squadWindow":
+                   /** TODO: fix
+                    * ReferenceError: Error #1065: Variable SquadItemRendererWrapper is not defined.
+                    * xvm\hangar\SquadWindow.as:29
+                    mod = new SquadWindow(view);*/
                     break;
             }
             if (mod != null && populated)
