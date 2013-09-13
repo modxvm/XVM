@@ -39,7 +39,7 @@ package xvm.hangar.components.WinChances
             chanceField.autoSize = TextFieldAutoSize.CENTER;
             chanceField.width += 300;
             chanceField.x -= 150;
-            chanceField.y += 78;
+            chanceField.y += 20; // 78;
             chanceField.styleSheet = Utils.createTextStyleSheet("chances", chanceField.defaultTextFormat);
             page.form.addChild(chanceField);
 
