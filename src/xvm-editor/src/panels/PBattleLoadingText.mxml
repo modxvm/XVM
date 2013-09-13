@@ -11,6 +11,8 @@
             import utils.Macros;
         ]]>
     </fx:Script>
-    <c:LabeledMacrosTextInput label="{_('FormatVehicleNameLeft')}" labelWidth="100%" wrapTextField="true" height="40" id="v_formatLeft" config="battleLoading.formatLeft" allowedMacros="{Macros.get('panels,stats,colors_panels,colors_stat')}" preview="true" change="onChange(event)"/>
-    <c:LabeledMacrosTextInput label="{_('FormatVehicleNameRight')}" labelWidth="100%" wrapTextField="true" height="40" id="v_formatRight" config="battleLoading.formatRight" allowedMacros="{Macros.get('panels,stats,colors_panels,colors_stat')}" preview="true" change="onChange(event)"/>
+    <c:LabeledMacrosTextInput label="{_('FormatPlayerNameLeft')}" labelWidth="100%" wrapTextField="true" height="40" id="v_formatLeftNick" config="battleLoading.formatLeftNick" allowedMacros="{Macros.get('panels,stats,colors_panels,colors_stat')}" preview="true" change="onChange(event)"/>
+    <c:LabeledMacrosTextInput label="{_('FormatPlayerNameRight')}" labelWidth="100%" wrapTextField="true" height="40" id="v_formatRightNick" config="battleLoading.formatRightNick" allowedMacros="{Macros.get('panels,stats,colors_panels,colors_stat')}" preview="true" change="onChange(event)"/>
+    <c:LabeledMacrosTextInput label="{_('FormatVehicleNameLeft')}" labelWidth="100%" wrapTextField="true" height="40" id="v_formatLeftVehicle" config="battleLoading.formatLeftVehicle" allowedMacros="{Macros.get('panels,stats,colors_panels,colors_stat')}" preview="true" change="onChange(event)"/>
+    <c:LabeledMacrosTextInput label="{_('FormatVehicleNameRight')}" labelWidth="100%" wrapTextField="true" height="40" id="v_formatRightVehicle" config="battleLoading.formatRightVehicle" allowedMacros="{Macros.get('panels,stats,colors_panels,colors_stat')}" preview="true" change="onChange(event)"/>
 </c:PanelComponent>

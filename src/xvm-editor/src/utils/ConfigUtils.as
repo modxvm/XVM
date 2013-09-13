@@ -29,9 +29,16 @@ public class ConfigUtils
                 var result: Object = { };
                 for (var name:String in def)
                 {
-                    result[name] = config.hasOwnProperty(name)
-                        ? MergeConfigs(config[name], def[name], prefix + "." + name)
-                        : def[name];
+                    try
+                    {
+                        result[name] = config.hasOwnProperty(name)
+                            ? MergeConfigs(config[name], def[name], prefix + "." + name)
+                            : def[name];
+                    }
+                    catch (ex:Error)
+                    {
+                        result[name] = def[name];
+                    }
                 }
                 return result;
                 
@@ -328,8 +335,41 @@ public class ConfigUtils
 			catch (ex:Object)
 			{
 			}
-				
+
             v = "4.0.0";
+        }
+
+        if (v == "4.0.0")
+        {
+            var s:Object = config.battleLoading;
+            if (s != null)
+            {
+                if (s.formatLeft != null && s.formatLeftVehicle == null)
+                {
+                    s.formatLeftVehicle = s.formatLeft;
+                    delete s.formatLeft;
+                }
+                if (s.formatRight != null && s.formatRightVehicle == null)
+                {
+                    s.formatRightVehicle = s.formatRight;
+                    delete s.formatRight;
+                }
+            }
+            s = config.statisticForm;
+            if (s != null)
+            {
+                if (s.formatLeft != null && s.formatLeftVehicle == null)
+                {
+                    s.formatLeftVehicle = s.formatLeft;
+                    delete s.formatLeft;
+                }
+                if (s.formatRight != null && s.formatRightVehicle == null)
+                {
+                    s.formatRightVehicle = s.formatRight;
+                    delete s.formatRight;
+                }
+            }
+            v = "5.0.0";
         }
 
 /*

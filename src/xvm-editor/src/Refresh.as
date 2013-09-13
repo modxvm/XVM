@@ -361,8 +361,10 @@ private function RefreshBattleLoadingPage():void
         this.p_battleLoading.v_showChances.value = section.showChances;
         this.p_battleLoading.v_showChancesExp.value = section.showChancesExp;
         this.p_battleLoading.v_removeSquadIcon.value = section.removeSquadIcon;
-        this.p_battleLoading_text.v_formatLeft.value = section.formatLeft;
-        this.p_battleLoading_text.v_formatRight.value = section.formatRight;
+        this.p_battleLoading_text.v_formatLeftNick.value = section.formatLeftNick;
+        this.p_battleLoading_text.v_formatRightNick.value = section.formatRightNick;
+        this.p_battleLoading_text.v_formatLeftVehicle.value = section.formatLeftVehicle;
+        this.p_battleLoading_text.v_formatRightVehicle.value = section.formatRightVehicle;
 
         section = Config.config.battleLoading.clanIcon;
         this.p_battleLoading_icons.v_show.value = section.show;
@@ -391,8 +393,10 @@ private function RefreshStatisticFormPage():void
         this.p_statisticForm.v_showChances.value = section.showChances;
         this.p_statisticForm.v_showChancesExp.value = section.showChancesExp;
         this.p_statisticForm.v_removeSquadIcon.value = section.removeSquadIcon;
-        this.p_statisticForm_text.v_formatLeft.value = section.formatLeft;
-        this.p_statisticForm_text.v_formatRight.value = section.formatRight;
+        this.p_statisticForm_text.v_formatLeftNick.value = section.formatLeftNick;
+        this.p_statisticForm_text.v_formatRightNick.value = section.formatRightNick;
+        this.p_statisticForm_text.v_formatLeftVehicle.value = section.formatLeftVehicle;
+        this.p_statisticForm_text.v_formatRightVehicle.value = section.formatRightVehicle;
 
         section = Config.config.statisticForm.clanIcon;
         this.p_statisticForm_icons.v_show.value = section.show;

@@ -124,14 +124,13 @@ private function onLoadComplete2(e:Event):void
             config = mergeDialog.config;
         }
         Config.config = ConfigUtils.MergeConfigs(config, merge ? Config.config : DefaultConfig.config, "def");
-        config = ConfigUtils.MergeConfigs(config, merge ? Config.config : DefaultConfig.config, "def");
         ConfigUtils.TuneupConfig();
         debug(_("ConfigurationLoaded"));
         RefreshCurrentPage();
     }
-    catch (ex:Object)
+    catch (ex:Error)
     {
-        error(ex.toString(), "onLoadComplete2()");
+        error(ex.getStackTrace(), "onLoadComplete2()");
     }
     finally
     {

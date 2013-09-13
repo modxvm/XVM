@@ -98,8 +98,10 @@ protected function onSetDefaultValue(event:SetDefaultValueEvent):void
                 break;
 
             case "battleLoading.text":
-                ConfigUtilsEditor.SetDefaultValue("battleLoading.formatLeft");
-                ConfigUtilsEditor.SetDefaultValue("battleLoading.formatRight");
+                ConfigUtilsEditor.SetDefaultValue("battleLoading.formatLeftNick");
+                ConfigUtilsEditor.SetDefaultValue("battleLoading.formatRightNick");
+                ConfigUtilsEditor.SetDefaultValue("battleLoading.formatLeftVehicle");
+                ConfigUtilsEditor.SetDefaultValue("battleLoading.formatRightVehicle");
                 break;
 
             case "statisticForm":
@@ -109,8 +111,10 @@ protected function onSetDefaultValue(event:SetDefaultValueEvent):void
                 break;
 
             case "statisticForm.text":
-                ConfigUtilsEditor.SetDefaultValue("statisticForm.formatLeft");
-                ConfigUtilsEditor.SetDefaultValue("statisticForm.formatRight");
+                ConfigUtilsEditor.SetDefaultValue("statisticForm.formatLeftNick");
+                ConfigUtilsEditor.SetDefaultValue("statisticForm.formatRightNick");
+                ConfigUtilsEditor.SetDefaultValue("statisticForm.formatLeftVehicle");
+                ConfigUtilsEditor.SetDefaultValue("statisticForm.formatRightVehicle");
                 break;
 
             case "playersPanel":
