@@ -42,7 +42,7 @@
   // or specify one of: "RU", "EN", "NA", "CN", "SEA", "VN", "KR"
   // Регион (игровой кластер)
   // "auto" - автоматически определять регион из клиента игры,
-  // или укажите один из: "RU", "EU", "NA", "CN", "SEA", "VN", "KR"
+  // или укажите один из: "RU", "EN", "NA", "CN", "SEA", "VN", "KR"
   "region": "auto",
 
   // Common config options. All settings information in the mod not being used.
