@@ -27,7 +27,6 @@ package xvm.hangar
 			try
 			{
 				page.memberList.itemRenderer = UI_SquadItemRenderer;
-					//Logger.addObject(page.memberList, "squad memberList", 5);
 			}
 			catch (ex:Error)
 			{

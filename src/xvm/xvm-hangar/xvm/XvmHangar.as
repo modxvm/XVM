@@ -120,7 +120,7 @@ package xvm
                     mod = new CompanyWindow(view);
                     break;
                 case "prb_windows/squadWindow":
-                    //mod = new SquadWindow(view);
+                    mod = new SquadWindow(view);
                     break;
             }
             if (mod != null && populated)
