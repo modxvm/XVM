@@ -39,7 +39,7 @@
 
   // Game Region
   // "auto" - automatically detect game region from game client,
-  // or specify one of: "RU", "EU", "NA", "CN", "SEA", "VN", "KR"
+  // or specify one of: "RU", "EN", "NA", "CN", "SEA", "VN", "KR"
   // Регион (игровой кластер)
   // "auto" - автоматически определять регион из клиента игры,
   // или укажите один из: "RU", "EU", "NA", "CN", "SEA", "VN", "KR"
