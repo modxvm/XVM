@@ -14,4 +14,6 @@ else:
     region = ResMgr.openSection(VERSION_FILE_PATH).readString('meta/localization')
     region = region[region.find(' ')+1:]
 
-language = "ru" # TODO
+from helpers import getClientLanguage
+language = getClientLanguage()
+print language
