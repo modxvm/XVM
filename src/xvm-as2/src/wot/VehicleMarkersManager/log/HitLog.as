@@ -49,9 +49,9 @@ class wot.VehicleMarkersManager.log.HitLog
         direction = cfg.direction.toLowerCase() == "up" ? Defines.DIRECTION_UP : Defines.DIRECTION_DOWN;
         insertOrder = cfg.insertOrder.toLowerCase() == "begin" ? Defines.INSERTORDER_BEGIN : Defines.INSERTORDER_END;
         groupHitsByPlayer = cfg.groupHitsByPlayer == true;
-        defaultHeader = Locale.formatMacros(cfg.defaultHeader);
-        formatHeader = Locale.formatMacros(cfg.formatHeader);
-        formatHistory = Locale.formatMacros(cfg.formatHistory);
+        defaultHeader = Locale.get(cfg.defaultHeader);
+        formatHeader = Locale.get(cfg.formatHeader);
+        formatHistory = Locale.get(cfg.formatHistory);
         shadow = cfg.shadow;
 
         total = 0;

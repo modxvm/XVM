@@ -10,47 +10,32 @@ import com.xvm.Defines;
 import com.xvm.GlobalEventDispatcher;
 import com.xvm.JSONxLoader;
 import com.xvm.Logger;
-import flash.external.ExternalInterface;
-import net.wargaming.managers.Localization;
 
 class com.xvm.Locale
 {
     public static var EVENT_LOADED:String = "locale_loaded";
 
     private static var MACRO_PREFIX:String = "l10n";
-    private static var _initialized:Boolean = false;
-    private static var _language:String;
-    private static var _loaded:Boolean = false;
     private static var s_lang:Object;
     private static var s_lang_fallback:Object = {};
-    private static var timer:Number;
 
     /////////////////////////////////////////////////////////////////
     // PUBLIC STATIC
 
-    public static function loadLocale():Void
+    public static function loadLocaleFile():Void
     {
-        if (_initialized) return;
-        _initialized = true;
-
-        if (Config.s_config.language == Defines.LOCALE_AUTO_DETECTION) {
-            getLanguageFromGettext();
-
-        }else {
-            _language = Config.s_config.language.toLowerCase();
-            Logger.add("Locale: '" + _language + "' (config)");
-            loadLocaleFile();
-        }
+        LoadLanguageFallback();
+        JSONxLoader.LoadAndParse(Defines.XVM_ROOT + "l10n/" + Config.s_config.language + ".xc", null, languageFileCallback);
     }
 
-    public static function get(text:String):String
-    {
-        //Logger.add("Locale[get]: string: " + text + " | string: " + s_lang.locale[text] + " | fallback string: " + s_lang_fallback[text] + " | language: " + _language );
-        return s_lang.locale[text] || s_lang_fallback[text] || text;
-    }
 
-    public static function formatMacros(format:String):String
+    public static function get(format:String):String
     {
+        if (s_lang.locale && s_lang.locale.hasOwnProperty(format))
+            format =  s_lang.locale[format];
+        else if (s_lang_fallback.hasOwnProperty(format))
+            format = s_lang_fallback[format];
+
         /** each item in array begin with macro */
         var formatParts:Array = format.split("{{" + MACRO_PREFIX + ":");
 
@@ -79,41 +64,14 @@ class com.xvm.Locale
         return res;
     }
 
-    public static function isLoaded():Boolean
-    {
-        return _loaded;
-    }
-
     /////////////////////////////////////////////////////////////////
     // PRIVATE
-
-    private static function getLanguageFromGettext():Void
-    {
-        //Logger.add("Locale: timer tick");
-        if (ExternalInterface.available)
-        {
-            clearInterval(timer);
-            timer = null;
-
-            _language = Localization.makeString("#settings:LANGUAGE_CODE", { } ).toLowerCase();
-            Logger.add("Locale: '" + _language + "' (detected)");
-            loadLocaleFile();
-        }else if(!timer){
-            timer = setInterval(getLanguageFromGettext, 100);
-        }
-    }
-
-    private static function loadLocaleFile():Void
-    {
-        LoadLanguageFallback();
-        JSONxLoader.LoadAndParse(Defines.XVM_ROOT + "l10n/" + _language + ".xc", null, languageFileCallback);
-    }
 
     //This strings will be used if .xc not found
     private static function LoadLanguageFallback():Void
     {
         var tr = s_lang_fallback;
-        if (_language == "ru")
+        if (Config.s_config.gameRegion == "RU")
         {
             /** Hardcoded RU language */
             tr["XVM_translator"] = "Maxim Schedriviy";
@@ -266,7 +224,7 @@ class com.xvm.Locale
     {
         if (event.error == null) {
             s_lang = event.data;
-            Logger.add("Locale: Loaded '" + _language + "' language by " + get("XVM_translator"));
+            Logger.add("Locale: Loaded '" + Config.s_config.language + "' language by " + get("XVM_translator"));
         }
         else {
             if (event.error.type != "NO_FILE")
@@ -283,8 +241,6 @@ class com.xvm.Locale
                 Logger.add("Locale: Can not find language file. Filename: " + event.filename );
             }
         }
-
-        _loaded = true;
         GlobalEventDispatcher.dispatchEvent( { type: EVENT_LOADED } );
     }
 }

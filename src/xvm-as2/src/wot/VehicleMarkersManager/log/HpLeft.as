@@ -18,8 +18,8 @@ class wot.VehicleMarkersManager.log.HpLeft
 
     public function HpLeft(cfg:Object)
     {
-        format = Locale.formatMacros(cfg.hpLeft.format);
-        header = Locale.formatMacros(cfg.hpLeft.header);
+        format = Locale.get(cfg.hpLeft.format);
+        header = Locale.get(cfg.hpLeft.header);
         direction = cfg.direction.toLowerCase() == "up" ? Defines.DIRECTION_UP : Defines.DIRECTION_DOWN;
     }
 

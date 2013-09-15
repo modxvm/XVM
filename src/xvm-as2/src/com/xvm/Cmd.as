@@ -8,6 +8,7 @@ class com.xvm.Cmd
     private static var COMMAND_PING:String = "ping";
     private static var COMMAND_GETSCREENSIZE:String = "getScreenSize";
     private static var COMMAND_GETGAMEREGION:String = "getGameRegion";
+    private static var COMMAND_GETLANGUAGE:String = "getLanguage";
     private static var COMMAND_LOADBATTLESTAT:String = "loadBattleStat";
     private static var COMMAND_LOADUSERDATA:String = "loadUserData";
     private static var COMMAND_LOGSTAT:String = "logstat";
@@ -37,6 +38,11 @@ class com.xvm.Cmd
         _call(target, callback, [COMMAND_GETGAMEREGION]);
     }
 
+    public static function getLanguage(target:Object, callback:Function)
+    {
+        _call(target, callback, [COMMAND_GETLANGUAGE]);
+    }
+
     public static function loadBattleStat(players:Array)
     {
         _call(null, null, [COMMAND_LOADBATTLESTAT, Config.s_config.rating.showPlayersStatistics, players]);
@@ -61,6 +67,7 @@ class com.xvm.Cmd
     {
         _call(null, null, [COMMAND_SAVE_SETTINGS, settingsStr]);
     }
+
 
     /////////////////////////////////////////////////////////////////
 

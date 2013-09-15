@@ -79,7 +79,7 @@ class com.xvm.ConfigLoader
                 return;
             finallyBugWorkaround = true;
             Cmd.getGameRegion(this, OnGameRegionReceived);
-            Locale.loadLocale();
+
             //Logger.add("TRACE: ReloadConfigCallback(): finally::end");
         }
         //Logger.add("TRACE: ReloadConfigCallback(): end");
@@ -114,17 +114,41 @@ class com.xvm.ConfigLoader
         GlobalEventDispatcher.dispatchEvent(info_event); // Just show version
     }
 
-    private function OnGameRegionReceived(region)
+    private function OnGameRegionReceived(region:String)
     {
-        Config.s_game_region = region;
-        SetConfigLoaded();
+        Config.s_game_region = region.toUpperCase();
+        loadLanguage();  // run Stage 3
+
     }
+
+    // STAGE 3
+
+    private function loadLanguage()
+    {
+        //Logger.add("TRACE: STAGE 3: loadLanguage()");
+
+        var autoDetection:Boolean = Config.s_config.language.toLowerCase() == Defines.LOCALE_AUTO_DETECTION;
+        if (autoDetection)
+            Cmd.getLanguage(this, loadLanguageCallback);
+        else
+            loadLanguageCallback(Config.s_config.language);
+    }
+
+    private function loadLanguageCallback(language:String)
+    {
+        Config.s_config.language = language.toLowerCase();
+        GlobalEventDispatcher.addEventListener(Locale.EVENT_LOADED, this, SetConfigLoaded);
+        Locale.loadLocaleFile();
+    }
+
+    // All done
 
     private function SetConfigLoaded()
     {
         //Logger.add("Config: Loaded");
+        GlobalEventDispatcher.removeEventListener(Locale.EVENT_LOADED);
         Config.s_loaded = true;
         ConfigLoader.s_loading = false;
-        GlobalEventDispatcher.dispatchEvent({type: Config.E_CONFIG_LOADED});
+        GlobalEventDispatcher.dispatchEvent( { type: Config.E_CONFIG_LOADED } );
     }
 }
