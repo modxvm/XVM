@@ -21,7 +21,7 @@ FILES_SCALEFORM="
   VehicleMarkersManager.swf
   xvm.swf"
 
-XVM_FILES="xvm.xc"
+CUSTOM_TESTER_FILES="xvm.xc XVM.xvmconf"
 XVM_DIRS="configs l10n mods"
 
 cd $(dirname $(realpath $(cygpath --unix $0)))
@@ -51,12 +51,12 @@ copy_file_scaleform()
   }
 }
 
-copy_xvm_file()
+copy_custom_tester_files()
 {
   [ -f "$RES_MODS_DIR/xvm/$1" ] && rm -f "$RES_MODS_DIR/xvm/$1"
-  [ -f "../release/$1" ] && {
+  [ -f "../bin/$1" ] && {
     echo "=> $1"
-    cp -p "../release/$1" "$RES_MODS_DIR/xvm/$1"
+    cp -p "../bin/$1" "$RES_MODS_DIR/xvm/$1"
   }
 }
 
@@ -77,8 +77,8 @@ for n in $FILES_SCALEFORM; do
   copy_file_scaleform $n
 done
 
-for n in $XVM_FILES; do
-  copy_xvm_file $n
+for n in $CUSTOM_TESTER_FILES; do
+  copy_custom_tester_files $n
 done
 
 for n in $XVM_DIRS; do

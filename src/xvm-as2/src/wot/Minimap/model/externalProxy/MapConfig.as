@@ -174,19 +174,21 @@ class wot.Minimap.model.externalProxy.MapConfig
 		else
 			xvmPostfix = wgEntryName;
 			
-		if (status <= Player.TEAM_KILLER_FLAG &&
-		    wgEntryName == "ally") /** <- Skip enemy and squad TK */
-		{
+		if (status <= Player.TEAM_KILLER_FLAG && wgEntryName == "ally") /** <- Skip enemy and squad TK */
             xvmPostfix = "teamkiller";
-		}
 
 		/** Result */
-        var property:String = xvmPrefix + xvmPostfix;
+		var xvmFullEntry:String;
+		
+		if (wgEntryName == "")
+			xvmFullEntry = "oneself";
+		else
+			xvmFullEntry = xvmPrefix + xvmPostfix;
         
-        if (property == "lostenemy")
-            property = "lost"; /** Backwards config compatibility */
+        if (xvmFullEntry == "lostenemy")
+            xvmFullEntry = "lost"; /** Backwards config compatibility */
         
-        return property;
+        return xvmFullEntry;
     }
 
     private static function get labels():Object
