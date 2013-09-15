@@ -45,12 +45,6 @@ class wot.Minimap.staticUtils.MinimapMacro
             format = formatArr.join(VehicleInfo.mapVehicleShortName(type, player.vehicle));
         }
 
-
-
-
-        //var info:MovieClip = PlayersPanelProxy.getPlayerInfo(player.uid);
-        //Logger.addObject(info._parent, "info", 2);
-
         /** Vehicle system name - usa-M24_Chaffee */
         var systemVehName:String = VehicleInfo.getName1(player.icon);
         formatArr = format.split(VEH_NAME);
