@@ -1,4 +1,3 @@
-import com.xvm.Logger;
 import com.xvm.Defines;
 import com.xvm.GlobalEventDispatcher;
 import wot.VehicleMarkersManager.log.HitLog;
@@ -32,7 +31,6 @@ class wot.VehicleMarkersManager.log.LogLists
         {
             hitLog = new HitLog(cfg);
         }
-		Logger.add("cfg.hpLeft.enabled " + cfg.hpLeft.enabled);
         if (cfg.hpLeft.enabled)
         {
             hpLeft = new HpLeft(cfg);	/** hpleft also has to respect direction, so cannot simply pass in cfg.hpleft */
