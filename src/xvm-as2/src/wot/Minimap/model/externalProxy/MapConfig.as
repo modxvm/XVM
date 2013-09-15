@@ -153,24 +153,35 @@ class wot.Minimap.model.externalProxy.MapConfig
 
     // -- Private
 
-    /** Translate internal WG entryName to minimap config file marker type*/
-    private static function defineCfgProperty(entryName:String, status:Number):String
+    /** Translate internal WG entryName and unit status(dead\tk) to minimap config file entry */
+    private static function defineCfgProperty(wgEntryName:String, status:Number):String
     {
-        var statusStr:String;
+		/** Prefix: lost dead or alive */
+		var xvmPrefix:String;
+		
         if (Math.abs(status) == Player.PLAYER_LOST)
-            statusStr = "lost";
+            xvmPrefix = "lost";
         else if (Math.abs(status) == Player.PLAYER_DEAD)
-            statusStr = "dead";
+            xvmPrefix = "dead";
         else
-            statusStr = "";
+            xvmPrefix = "";
         
-        if (entryName == "squadman")
-            entryName = "squad";
-            
-        if (status <= Player.TEAM_KILLER_FLAG)
-            entryName = "teamkiller";
-        
-        var property:String = statusStr + entryName;
+		/** Postfix: ally, enemy, tk or squad */
+		var xvmPostfix:String;
+		
+        if (wgEntryName == "squadman")
+            xvmPostfix = "squad"; /** Translate squad WG entry name to squad XVM entry name */
+		else
+			xvmPostfix = wgEntryName;
+			
+		if (status <= Player.TEAM_KILLER_FLAG &&
+		    wgEntryName == "ally") /** <- Skip enemy and squad TK */
+		{
+            xvmPostfix = "teamkiller";
+		}
+
+		/** Result */
+        var property:String = xvmPrefix + xvmPostfix;
         
         if (property == "lostenemy")
             property = "lost"; /** Backwards config compatibility */

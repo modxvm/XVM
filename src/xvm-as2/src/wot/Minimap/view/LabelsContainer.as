@@ -47,18 +47,12 @@ class wot.Minimap.view.LabelsContainer
         GlobalEventDispatcher.addEventListener(AutoUpdate.UPDATE_BY_TIMER_EVENT, this, onTimerTick);
     }
     
+	/** MinimapEntry requests a label */
     public function getLabel(uid:Number, entryName:String, vehicleClass:String):MovieClip
     {
         if (!holderMc[uid])
         {
             createLabel(uid, entryName, vehicleClass);
-        }
-        else
-        {
-            // getLabel()
-            // changeLabelViewToNormal()
-            // TODO: check if 300ms delay is bad
-            //       Attached label could be some time with Lost style
         }
         
         return holderMc[uid];
