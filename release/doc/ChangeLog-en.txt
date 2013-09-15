@@ -1,4 +1,7 @@
-﻿XVM-5.0.0-test2:
+﻿  [FIXES]
+  * minimap: fixed enemy teamkiller color
+
+XVM-5.0.0-test2:
   * adaptation to WoT 0.8.8
 
   [NEW FUNCTIONS]
