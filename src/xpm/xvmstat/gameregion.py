@@ -16,4 +16,3 @@ else:
 
 from helpers import getClientLanguage
 language = getClientLanguage()
-print language
