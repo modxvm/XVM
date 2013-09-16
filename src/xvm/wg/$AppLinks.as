@@ -24,6 +24,7 @@ import net.wg.gui.lobby.battleloading.*; BattleLoading; PlayerItemRenderer;
 import net.wg.gui.messenger.controls.*; MemberItemRenderer;
 import net.wg.gui.prebattle.company.*; CompaniesListWindow; CompanyWindow;
 import net.wg.gui.prebattle.squad.*; SquadWindow; MessengerUtils;
+import net.wg.gui.intro.*; IntroPage;
 
 /**
  * UIs
