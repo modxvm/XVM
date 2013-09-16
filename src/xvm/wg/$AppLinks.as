@@ -23,9 +23,11 @@ import net.wg.gui.lobby.hangar.crew.*; Crew; RecruitRendererVO; CrewItemRenderer
 import net.wg.gui.lobby.battleloading.*; BattleLoading; PlayerItemRenderer;
 import net.wg.gui.messenger.controls.*; MemberItemRenderer;
 import net.wg.gui.prebattle.company.*; CompaniesListWindow; CompanyWindow;
-import net.wg.gui.prebattle.squad.*; SquadWindow;
+import net.wg.gui.prebattle.squad.*; SquadWindow; MessengerUtils;
 
-// UIs
+/**
+ * UIs
+ */
 
 // controls.swf
 ButtonBlack; ButtonCaps; ButtonCapsRed; ButtonIcon; ButtonIconText; ButtonNormal; ButtonRed;

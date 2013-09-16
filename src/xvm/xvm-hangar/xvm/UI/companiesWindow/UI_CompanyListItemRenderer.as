@@ -1,6 +1,7 @@
 package xvm.UI.companiesWindow
 {
     import com.xvm.*;
+    import flash.events.Event;
     import xvm.hangar.components.BattleLoading.*;
     import xvm.hangar.components.Company.CompanyOwnerItemRenderer;
 
@@ -13,6 +14,12 @@ package xvm.UI.companiesWindow
             //Logger.add("UI_CompanyListItemRenderer::ctor()");
             super();
             worker = new CompanyOwnerItemRenderer(this);
+        }
+
+        override protected function configUI():void
+        {
+            super.configUI();
+            worker.configUI();
         }
 
         override public function setData(data:Object):void

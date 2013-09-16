@@ -1,29 +1,22 @@
 package xvm.hangar.components.Company
 {
-    import flash.text.*;
-    import flash.utils.*;
-    import flash.geom.Transform;
-    import net.wg.gui.prebattle.company.CompanyListItemRenderer;
-    import scaleform.gfx.TextFieldEx;
-    import net.wg.gui.components.controls.UILoaderAlt;
-    import net.wg.gui.events.UILoaderEvent;
-    import net.wg.gui.lobby.battleloading.PlayerItemRenderer;
-    import org.idmedia.as3commons.util.StringUtils;
     import com.xvm.*;
     import com.xvm.utils.*;
-    import com.xvm.misc.IconLoader;
-    import com.xvm.types.cfg.CClanIcon;
-    import xvm.hangar.components.ClanIcon.ClanIcon;
-    import xvm.UI.battleLoading.*;
+    import com.xvm.types.stat.*;
+    import flash.events.*;
+    import flash.text.*;
+    import flash.utils.*;
+    import net.wg.data.daapi.PlayerInfo;
+    import net.wg.gui.prebattle.company.CompaniesListWindow;
+    import net.wg.gui.prebattle.company.CompanyListItemRenderer;
+    import xvm.hangar.components.Company.*;
 
     public class CompanyOwnerItemRenderer
     {
         private var proxy:CompanyListItemRenderer;
 
-        private var stat:Object;
         private var effField:TextField;
         private var playerName:String;
-        private var cache:Dictionary;
 
         public function CompanyOwnerItemRenderer(proxy:CompanyListItemRenderer)
         {
@@ -38,9 +31,9 @@ package xvm.hangar.components.Company
                 effField.htmlText = "";
                 proxy.addChild(effField);
 
-                stat = null;
                 playerName = null;
-                cache = new Dictionary();
+
+                proxy.addEventListener(MouseEvent.ROLL_OVER, onRollOver);
             }
             catch (ex:Error)
             {
@@ -49,40 +42,48 @@ package xvm.hangar.components.Company
 
         }
 
+        public function configUI():void
+        {
+            //Logger.add('configUI()');
+            var updateCheckBox:CheckBox = proxy.owner.parent.getChildByName("updateStatCheckBox") as CheckBox;
+            //Logger.addObject(updateCheckBox);
+            updateCheckBox.addEventListener(Event.SELECT, onUpdateClick);
+        }
+
         public function setData(data:Object):void
         {
-return;
-            //Logger.add("setData: " + (data == null ? "(null)" : data.label));
+            Logger.add("setData: " + (data == null ? "(null)" : data.label));
             if (data == null || !data.uid)
                 return;
 
-            stat = null;
             effField.htmlText = "";
-            var updateCheckBox:CheckBox = proxy.owner.parent["updateCheckBox"];
-            if (updateCheckBox != null && updateCheckBox.selected)
+            var updateCheckBox:CheckBox = proxy.owner.parent.getChildByName("updateStatCheckBox") as CheckBox;
+            if (updateCheckBox.selected)
                 onUpdateClick();
         }
 
         // PRIVATE
 
-        private function onUpdateClick():void
+        private function onUpdateClick(e:Event = null):void
         {
             playerName = WGUtils.GetPlayerName(proxy.data.owner);
+            Logger.addObject("onUpdateClick() " + playerName);
             if (playerName != null)
                 Stat.loadUserData(this, onStatLoaded, playerName, false);
         }
 
-        private function onStatLoaded(stat:Object):void
+        private function onStatLoaded(stat:StatData):void
         {
-            this.stat = stat;
-            Logger.addObject(stat);
-            //stat = TeamRendererHelper.setXVMStat(key, m_effField);<span class='eff'></span>
+            //Logger.addObject(stat);
+            effField.htmlText = "<span class='eff'>" + TeamRendererHelper.formatXVMStatText(playerName) + "</span>";
         }
 
         private function onRollOver():void
         {
-            //if (this.stat != null)
-            //    App.toolTipMgr.show(TeamRendererHelper.GetToolTipData($this.wrapper.data, $this.stat));
+            //if (stat != null)
+            var tip:String = TeamRendererHelper.getToolTipData(proxy.data as PlayerInfo, playerName);
+            if (tip != null)
+                App.toolTipMgr.show(tip);
             //else
             {
                 //if (proxy.toolTip != null)

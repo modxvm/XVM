@@ -54,9 +54,9 @@ copy_file_scaleform()
 copy_custom_tester_files()
 {
   [ -f "$RES_MODS_DIR/xvm/$1" ] && rm -f "$RES_MODS_DIR/xvm/$1"
-  [ -f "../bin/$1" ] && {
+  [ -f "../release/$1" ] && {
     echo "=> $1"
-    cp -p "../bin/$1" "$RES_MODS_DIR/xvm/$1"
+    cp -p "../release/$1" "$RES_MODS_DIR/xvm/$1"
   }
 }
 

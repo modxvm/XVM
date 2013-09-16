@@ -111,11 +111,9 @@ package xvm
                 case "battleLoading":
                     mod = new BattleLoading(view);
                     break;
-
                 case "prb_windows/companiesWindow":
                     mod = new CompaniesListWindow(view);
                     break;
-
                 case "prb_windows/companyWindow":
                     mod = new CompanyWindow(view);
                     break;

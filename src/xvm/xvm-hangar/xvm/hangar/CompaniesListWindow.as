@@ -41,34 +41,8 @@ return;
 
                 page.cmpList.itemRenderer = UI_CompanyListItemRenderer;
 
-                if (page.initialized)
-                {
-                    initComponents();
-                }
-                else
-                {
-                    // TODO: find event
-                    setTimeout(initComponents, 1);
-                }
-            }
-            catch (ex:Error)
-            {
-                Logger.add(ex.getStackTrace());
-            }
-        }
-
-        public override function onBeforeDispose(e:LifeCycleEvent):void
-        {
-            //Logger.add("onBeforeDispose: " + view.as_alias);
-        }
-
-        // PRIVATE
-
-        private function initComponents():void
-        {
-            try
-            {
                 updateCheckBox = new CheckBox();
+                updateCheckBox.name = "updateStatCheckBox";
                 updateCheckBox.autoSize = "left";
                 updateCheckBox.label = Locale.get("Load statistics");
                 updateCheckBox.x = page.createButton.x + page.createButton.width + 5;
@@ -89,5 +63,12 @@ return;
                 Logger.add(ex.getStackTrace());
             }
         }
+
+        public override function onBeforeDispose(e:LifeCycleEvent):void
+        {
+            //Logger.add("onBeforeDispose: " + view.as_alias);
+        }
+
+        // PRIVATE
     }
 }
