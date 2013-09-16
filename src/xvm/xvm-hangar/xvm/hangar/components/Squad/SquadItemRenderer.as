@@ -9,6 +9,8 @@ package xvm.hangar.components.Squad
     import com.xvm.utils.Utils;
     import com.xvm.vehinfo.*;
     import flash.text.TextField;
+    import flash.text.TextFormat;
+    import flash.text.TextFormatAlign;
     import net.wg.gui.prebattle.squad.SquadItemRenderer;
 
     public class SquadItemRenderer
@@ -69,7 +71,11 @@ package xvm.hangar.components.Squad
                 if (vehicleTierField == null)
                     createVehicleTierField();
 
-                vehicleTierField.htmlText = "<p class='xvm_vehicleTier' align='right'>" + Utils.fixImgTag(Config.config.squad.leftLvlBorder) + ti.level + Utils.fixImgTag(Config.config.squad.rightLvlBorder) + "</p>";
+                vehicleTierField.htmlText = "<span class='xvm_vehicleTier'>" +
+                    Utils.fixImgTag(Config.config.squad.leftLvlBorder) +
+                    ti.level +
+                    Utils.fixImgTag(Config.config.squad.rightLvlBorder) +
+                    "</span>";
             }
         }
 
@@ -95,16 +101,30 @@ package xvm.hangar.components.Squad
             var vi1Key:String = VehicleInfo.getVehicleKey1(vi2.nation + "-" + vi2.name);
             var vi1:Object = VehicleInfoData.data[vi1Key];
 
-            return (vi1 == null || vi2 == null) ? null : {level: Config.config.squad.romanNumbers ? Defines.ROMAN_LEVEL[vi2.level - 1] : String(vi2.level), nation: vi2.nation, type: vi2.type, battleTiers: vi1.tiers.join("-")};
+            return (vi1 == null || vi2 == null) ? null : {
+                level: Config.config.squad.romanNumbers ? Defines.ROMAN_LEVEL[vi2.level - 1] : String(vi2.level),
+                nation: vi2.nation,
+                type: vi2.type,
+                battleTiers: vi1.tiers.join("-")};
         }
 
         private function createVehicleTierField():void
         {
             vehicleTierField = Utils.cloneTextField(proxy.vehicleNameField);
-            vehicleTierField.styleSheet = Utils.createTextStyleSheet("xvm_vehicleTier", proxy.vehicleNameField.defaultTextFormat);
-            vehicleTierField.width = 20;
+
+            // copy filters
+            vehicleTierField.filters = proxy.vehicleNameField.filters;
+
+            // customize TextFormat
+            var tf:TextFormat = proxy.vehicleNameField.getTextFormat();
+            tf.align = TextFormatAlign.RIGHT;
+            vehicleTierField.styleSheet = Utils.createTextStyleSheet("xvm_vehicleTier", tf);
+
+            // size & position
+            vehicleTierField.width = 35;
             vehicleTierField.x = proxy.width - vehicleTierField.width;
             vehicleTierField.y = proxy.vehicleNameField.y;
+
             vehicleTierField.htmlText = "";
             proxy.addChild(vehicleTierField);
         }
