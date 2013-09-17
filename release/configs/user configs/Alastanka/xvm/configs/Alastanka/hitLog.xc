@@ -19,13 +19,24 @@
     // Маркеры видимы только в квадрате со стороной в 1000м.
     // Квадрат в 1000 метров это ограничение игрового движка. Максимальная дистанция отрисовки маркеров.
     // Данные по конкретному врагу не могут быть обновлены пока не видно его маркер или обломки.
-    "hpLeft": true,
+    "hpLeft": {
+        // false - Disable.
+        // false - отключить.
+        "enabled": true,
+        // Header, macros ARE NOT allowed.
+        // Заголовок, макросы НЕ разрешены.
+        "header": "{{l10n:hpLeftTitle}}",
+        // Row in HP list (macros allowed, see readme-en.txt).
+        // Строка в списке попаданий (допускаются макроподстановки, см. readme-ru.txt)
+        "format": "<textformat leading='-6' tabstops='[0,40,75,115,210]'> <font face='Consolas' size='13'>\t <font color='{{c:hp}}'><b>{{hp}}</b></font>\t/ <font color='{{c:hp}}'><b>{{hp-max}}</b></font>\t <font color='{{c:hp-ratio}}'><b>{{hp-ratio}}\u0025</b></font>\t <img src='xvmres://icons/type/{{vtype}}.png' width='15' height='15'><font color='{{c:vtype}}'><b>{{vehicle}}</b></font>\t <font color=''><b>{{nick}}</b></font></font></textformat>"
+    },
+    
     // X position (negative values - bind to right side of screen).
     // Позиция X (отрицательные значения - привязать к правой стороне экрана).
-    "x": 500,
+    "x": 0, //420
     // Y position (negative values - bind to bottom side of screen).
     // Позиция Y (отрицательные значения - привязать к нижней стороне экрана).
-    "y": 40,
+    "y": 375, //40
     // Width.
     // Ширина.
     "w": 1000,
@@ -48,15 +59,15 @@
     // Подстановка для макроса {{dead}}, когда танк умирает.
     "deadMarker": "<img src='xvmres://icons/kill.png' width='34' height='12'>",
     "blowupMarker": "<font face='Wingdings' size='22'>&#77;</font>",
-    // Default header format (before first hit). Macros IS NOT allowed.
-    // Формат заголовка по умолчанию (до первого попадания). Макросы НЕ допускаются.
-    "defaultHeader": ${"@xvm.xc":"definition.description"},
+    // Default header format (before first hit). Only localization macros are allowed, see readme-en.txt.
+    // Формат заголовка по умолчанию (до первого попадания). Допускаются только макросы перевода, см. readme-ru.txt.
+    "defaultHeader": "<font size='15' color='#FFFF00'><b>{{l10n:Hits}}: #0</b></font>",
     // Hits header format, including last hit (macros allowed, see readme-en.txt).
     // Формат заголовка (допускаются макроподстановки, см. readme-ru.txt).
-    "formatHeader":  "<textformat leading='-2'><font color='#96FF00'>Дамаг противникам:</font> № <font size='13' color='#FFFF00'>{{n}}</font> всего: <font color='{{c:t-battles}}'>{{dmg-total}}</font> последний: <font color='{{c:dmg-kind}}'><b>{{dmg}}</b></font> <font color='{{c:vtype}}'>{{vehicle}}</font> <font color=''>({{nick}})</font></textformat>",
+    "formatHeader":  "<textformat leading='-2'>{{l10n:Hits}}: <font size='13' color='#FFFF00'>{{n}}</font> {{l10n:Total}}: <font color='#96FF00'>{{dmg-total}}</font> {{l10n:Last}}: <font color='{{c:dmg-kind}}'><b>{{dmg}}</b></font> <font color='{{c:vtype}}'>{{vehicle}}</font> <font color=''>({{nick}})</font></textformat>",
     // List of hits format (macros allowed, see readme-en.txt).
     // Формат лога попаданий (допускаются макроподстановки, см. readme-ru.txt)
-    "formatHistory": "<textformat leading='-6' tabstops='[0,30,65,85,120,155]'> <font face='Consolas' size='13' color=''>\t <font color='#FFFF00'>\u00D7{{n}}</font>\t <font color='#FF0000'><b>{{dmg-player}}</b></font>\t <font color='#FFFF00'>{{n-player}}</font>\t <font color='{{c:dmg-kind}}'><b>{{dmg}}</b></font>\t <img src='xvmres://icons/{{dmg-kind}}_м.png' width='42' height='12'>\t <img src='xvmres://icons/type/{{vtype}}.png' width='15' height='15'><font color='{{c:vtype}}'>{{vehicle}}</font> <font color=''>({{nick}})</font> <font color='{{c:dmg-kind}}'><b>{{dead}}</b></font></font></textformat>",
+    "formatHistory": "<textformat leading='-6' tabstops='[0,30,65,85,120,155]'> <font face='Consolas' size='13' color=''>\t <font color='#FFFF00'>\u00D7{{n}}</font>\t <font color='#FF0000'><b>{{dmg-player}}</b></font>\t <font color='#FFFF00'>{{n-player}}</font>\t <font color='{{c:dmg-kind}}'><b>{{dmg}}</b></font>\t <img src='xvmres://icons/{{c:dmg-kind}}_m.png' width='42' height='12'>\t <img src='xvmres://icons/type/{{vtype}}.png' width='15' height='15'><font color='{{c:vtype}}'>{{vehicle}}</font> <font color=''>({{nick}})</font> <font color='{{c:dmg-kind}}'><b>{{dead}}</b></font></font></textformat>",
     // Shadow options.
     // Параметры тени.
     "shadow": {

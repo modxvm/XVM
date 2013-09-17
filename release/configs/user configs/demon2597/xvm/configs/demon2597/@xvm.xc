@@ -3,6 +3,7 @@
  *
  * Attention! You must NOT use the percent symbol in configuration files.
  * Instead, the percent symbol should be written: \u0025
+ * Use \n as linefeed character instead of <br> tag
  *
  * --------------------------------------------------------------------------
  * Esli vy vidite nizhe bessmyslennyj nabor simvolov - smenite kodirovku
@@ -12,6 +13,7 @@
  *
  * Внимание! Использование символа процента в файлах конфига не допустимо.
  * Вместо символа процента следует писать: \u0025
+ * Для перехода на новую строку используйте \n вместо тэга <br>
  *
  * Внимание! Кодировка файлов должна оставаться UTF8+BOM. В противном случае
  * вместо кириллицы в игре будут пустые глифы.
@@ -21,11 +23,27 @@
 {
   // Version of the config. Do not remove or change it unnecessarily.
   // Версия конфига. Не удаляйте и не изменяйте её без необходимости.
-  "configVersion": "4.0.0",
+  "configVersion": "5.0.0",
 
   // Version of the editor.
   // Версия редактора.
-  "editorVersion": "0.50",
+  "editorVersion": "0.57",
+
+  // Language used in mod
+  // "auto" - automatically detect language from game client,
+  // or specify file name located in res_mods/xvm/l10n/ (ex: "en")
+  // Используемый язык в моде
+  // "auto" - автоматически определять язык клиента игры,
+  // или укажите имя файла в папке res_mods/xvm/l10n/ (например, "en")
+  "language": "auto",
+
+  // Game Region
+  // "auto" - automatically detect game region from game client,
+  // or specify one of: "RU", "EU", "NA", "CN", "SEA", "VN", "KR"
+  // Регион (игровой кластер)
+  // "auto" - автоматически определять регион из клиента игры,
+  // или укажите один из: "RU", "EU", "NA", "CN", "SEA", "VN", "KR"
+  "region": "auto",
 
   // Common config options. All settings information in the mod not being used.
   // Общие параметры конфига. Все параметры информационные, в моде не используются.
@@ -44,15 +62,15 @@
 
     // Config last modified.
     // Дата последней модификации конфига.
-    "date": "21.06.2013",
+    "date": "12.09.2013",
 
     // Supported version of the game.
     // Поддерживаемая версия игры.
-    "gameVersion": "0.8.6",
+    "gameVersion": "0.8.8",
 
     // The minimum required version of the XVM mod.
     // Минимально необходимая версия мода XVM.
-    "modMinVersion": "4.0.0"
+    "modMinVersion": "5.0.0"
   },
 
   // Parameters for login screen.

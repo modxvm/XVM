@@ -8,7 +8,7 @@
     // Пинг серверов; работает только с xvm-stat.exe
     "pingServers": {
       "$ref": { "file": "hangar.xc", "path": "hangar.pingServers" },
-      // true - Enable display of ping to the servers
+      // true - Show ping to the servers
       // true - показывать пинг до серверов
       "enabled": true,
       // Axis field coordinates

@@ -3,31 +3,50 @@
  * Настройки маркеров для живых с Alt.
  */
 {
-  "damageText": {                     // всплывающий урон
-      "visible": true,                  //   false - не отображать
-      "x": 0,                           //   положение по оси X
-      "y": -67,                         //   положение по оси Y
-      "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-      "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
-      "font": {                         //   параметры шрифта
-        "name": "$FieldFont",           //     название
-        "size": 18,                     //     размер
-        "align": "center",              //     выравнивание текста (left, center, right)
-        "bold": true,                  //     обычный (false) или жирный (true)
-        "italic": false                 //     обычный (false) или курсив (true)
-      },
-      "shadow": {                       //   параметры тени
-        "alpha": 100,                   //     прозрачность
-        "color": "0x000000",            //     цвет
-        "angle": 45,                    //     угол смещения
-        "distance": 0,                  //     дистанция смещение
-        "size": 6,                      //     размер
-        "strength": 200                 //     интенсивность
-      },
-      "speed": 6,                       //   время отображения отлетающего урона
-      "maxRange": 140,                   //   расстояние, на которое отлетает урон
-      "damageMessage": "<font color='{{c:dmg-kind}}'>-{{dmg}} ({{hp-ratio}}\u0025)</font> <img src='xvmres://icons/{{dmg-kind}}.png' width='52' height='45'>",       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
-      "blowupMessage": "<img src='xvmres://icons/боеукладка.png' width='52' height='45'> <font color='{{c:dmg-kind}}'>-{{dmg}} ({{hp-ratio}}\u0025)</font>"      //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
+  // Floating damage values.
+  // Всплывающий урон.
+  "damageText": {
+    // false - disable / не отображать.
+    "visible": true,
+    // Axis field coordinates
+    // Положение поля по осям
+    "x": 0,
+    "y": -67,
+    // Opacity (dynamic transparency allowed, see readme-en.txt).
+    // Прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
+    "alpha": 100,
+    // Color (dynamic colors allowed, see readme-en.txt).
+    // Цвет (допускается использование динамического цвета, см. readme-ru.txt)
+    "color": null,
+    // Параметры шрифта.
+    "font": {
+      "name": "$FieldFont",           // Font name      / Название
+      "size": 18,                     // Font size      / Размер
+      "align": "center",              // Text alignment (left, center, right) /   Выравнивание текста (left, center, right)
+      "bold": false,                  // True - bold    / Жирный.
+      "italic": false                 // True - italic  / Курсив.
+    },
+    // Параметры тени.
+    "shadow": {
+      "alpha": 100,                   // Opacity          / Прозрачность.
+      "color": "0x000000",            //                    Цвет.
+      "angle": 45,                    // Offset angle     / Угол смещения.
+      "distance": 0,                  // Offset distance  / Дистанция смещения.
+      "size": 6,                      //                    Размер.
+      "strength": 200                 // Intensity        / Интенсивность.
+    },
+    // Rising speed of displayed damage (float up speed).
+    // Время отображения отлетающего урона.
+    "speed": 6,
+    // Maximimum distance of target for which damage rises.
+    // Расстояние, на которое отлетает урон.
+    "maxRange": 140,
+    // Text for normal damage (see description of macros in the readme-en.txt).
+    // Текст при обычном уроне (см. описание макросов в readme-ru.txt).
+    "damageMessage": "<font color='{{c:dmg-kind}}'>-{{dmg}} ({{hp-ratio}}\u0025)</font> <img src='xvmres://icons/{{c:dmg-kind}}.png' width='52' height='45'>",
+    // Text for ammo rack explosion (see description of macros in the readme-en.txt).
+    // Текст при взрыве боеукладки (см. описание макросов в readme-ru.txt).
+    "blowupMessage": "<img src='xvmres://icons/blowup.png' width='52' height='45'> <font color='{{c:dmg-kind}}'>-{{dmg}} ({{hp-ratio}}\u0025)</font>"
   },
 // союзник
 // союзник/живой/расширенный режим (c Alt)
@@ -76,15 +95,15 @@
           },
           "damageText": {
             "$ref": { "path":"damageText" },
-            "damageMessage": "<font color='{{c:dmg-kind}}'>-{{dmg}} ({{hp-ratio}}\u0025)</font> <img src='xvmres://icons/{{dmg-kind}}.png' width='52' height='45'>"
+            "damageMessage": "<font color='{{c:dmg-kind}}'>-{{dmg}} ({{hp-ratio}}\u0025)</font> <img src='xvmres://icons/{{c:dmg-kind}}.png' width='52' height='45'>"
           },
           "damageTextPlayer": {
             "$ref": { "path":"damageText" },
-            "damageMessage": "<font color='{{c:dmg-kind}}'>-{{dmg}} ({{hp-ratio}}\u0025)</font> <img src='xvmres://icons/{{dmg-kind}}.png' width='52' height='45'>"
+            "damageMessage": "<font color='{{c:dmg-kind}}'>-{{dmg}} ({{hp-ratio}}\u0025)</font> <img src='xvmres://icons/{{c:dmg-kind}}.png' width='52' height='45'>"
           },
           "damageTextSquadman": {
             "$ref": { "path":"damageText" },
-            "damageMessage": "<font color='{{c:dmg-kind}}'>-{{dmg}} ({{hp-ratio}}\u0025)</font> <img src='xvmres://icons/{{dmg-kind}}.png' width='52' height='45'>"
+            "damageMessage": "<font color='{{c:dmg-kind}}'>-{{dmg}} ({{hp-ratio}}\u0025)</font> <img src='xvmres://icons/{{c:dmg-kind}}.png' width='52' height='45'>"
           },
           "contourIcon": {                    // иконки танка
             "visible": false,                 //   false - не отображать
@@ -438,15 +457,15 @@
           },
           "damageText": {
             "$ref": { "path":"damageText" },
-            "damageMessage": "<font color='{{c:dmg-kind}}'>-{{dmg}} ({{hp-ratio}}\u0025)</font> <img src='xvmres://icons/{{dmg-kind}}.png' width='52' height='45'>"
+            "damageMessage": "<font color='{{c:dmg-kind}}'>-{{dmg}} ({{hp-ratio}}\u0025)</font> <img src='xvmres://icons/{{c:dmg-kind}}.png' width='52' height='45'>"
           },
           "damageTextPlayer": {
             "$ref": { "path":"damageText" },
-            "damageMessage": "<font color='{{c:dmg-kind}}'>-{{dmg}} ({{hp-ratio}}\u0025)</font> <img src='xvmres://icons/{{dmg-kind}}.png' width='52' height='45'>"
+            "damageMessage": "<font color='{{c:dmg-kind}}'>-{{dmg}} ({{hp-ratio}}\u0025)</font> <img src='xvmres://icons/{{c:dmg-kind}}.png' width='52' height='45'>"
           },
           "damageTextSquadman": {
             "$ref": { "path":"damageText" },
-            "damageMessage": "<font color='{{c:dmg-kind}}'>-{{dmg}} ({{hp-ratio}}\u0025)</font> <img src='xvmres://icons/{{dmg-kind}}.png' width='52' height='45'>"
+            "damageMessage": "<font color='{{c:dmg-kind}}'>-{{dmg}} ({{hp-ratio}}\u0025)</font> <img src='xvmres://icons/{{c:dmg-kind}}.png' width='52' height='45'>"
           },
           "contourIcon": {                    // иконки танка
             "visible": false,                 //   false - не отображать
@@ -674,6 +693,82 @@
                 "strength": 200               //   интенсивность
               },
               "format": "<font size='0{{c:e}}'>р-<font color='{{c:e}}'>{{e}}</font>|д-<font color='{{c:tdb}}'>{{tdb}}</font>|ф-<font color='{{c:tfb}}'>{{tfb}}</font>|з-<font color='{{c:tsb}}'>{{tsb}}</font></font>"            // формат текста. См. описание макросов в readme-ru.txt
+            },
+     // Текстовое поле с черепом здоровья
+            {
+              "name": "череп здоровья",           // название текстового поля, ни на что не влияет
+              "visible": true,                // false - не отображать
+              "x": 0,                         // положение по оси X
+              "y": -110,                       // положение по оси Y (-95)
+              "alpha": "{{a:hp-ratio}}",                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
+              "color": "{{c:hp-ratio}}",                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
+              "font": {                       // параметры шрифта
+                "name": "$FieldFont",         //   название (Wingdings)
+                "size": 13,                   //   размер
+                "align": "center",            //   выравнивание текста (left, center, right)
+                "bold": true,                //   обычный (false) или жирный (true)
+                "italic": false               //   обычный (false) или курсив (true)
+              },
+              "shadow": {                     // параметры тени
+                "alpha": 100,                 //   прозрачность
+                "color": "0x000000",          //   цвет
+                "angle": 45,                  //   угол смещения
+                "distance": 0,                //   дистанция смещение
+                "size": 6,                    //   размер
+                "strength": 200               //   интенсивность
+              },
+
+              "format": "<img src='xvmres://icons/{{c:hp-ratio}}-.png' width='30' height='30'>"            // формат текста. См. описание макросов в readme-ru.txt (&#78;)
+            },
+     // Текстовое поле картинка взвода "squad"
+            {
+              "name": "картинка взвода",      // название текстового поля, ни на что не влияет
+              "visible": true,                // false - не отображать
+              "x": 0,                         // положение по оси X
+              "y": -135,                      // положение по оси Y
+              "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
+              "color": null,                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
+              "font": {                       // параметры шрифта
+                "name": "$FieldFont",         //   название
+                "size": 13,                   //   размер
+                "align": "center",            //   выравнивание текста (left, center, right)
+                "bold": false,                //   обычный (false) или жирный (true)
+                "italic": false               //   обычный (false) или курсив (true)
+              },
+              "shadow": {                     // параметры тени
+                "alpha": 100,                 //   прозрачность
+                "color": "0x000000",          //   цвет
+                "angle": 90,                  //   угол смещения
+                "distance": 0,                //   дистанция смещение
+                "size": 6,                    //   размер
+                "strength": 200               //   интенсивность
+              },
+              "format": "<img src='xvmres://icons/squad{{squad}}.png' width='41' height='24'>"            // формат текста. См. описание макросов в readme-ru.txt
+            },
+     // Текстовое поле картинка "олень-рога"
+            {
+              "name": "картинка олень-рога",      // название текстового поля, ни на что не влияет
+              "visible": true,                // false - не отображать
+              "x": 3,                         // положение по оси X
+              "y": -150,                      // положение по оси Y
+              "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
+              "color": null,                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
+              "font": {                       // параметры шрифта
+                "name": "$FieldFont",         //   название
+                "size": 13,                   //   размер
+                "align": "center",            //   выравнивание текста (left, center, right)
+                "bold": false,                //   обычный (false) или жирный (true)
+                "italic": false               //   обычный (false) или курсив (true)
+              },
+              "shadow": {                     // параметры тени
+                "alpha": 100,                 //   прозрачность
+                "color": "0x000000",          //   цвет
+                "angle": 90,                  //   угол смещения
+                "distance": 0,                //   дистанция смещение
+                "size": 6,                    //   размер
+                "strength": 200               //   интенсивность
+              },
+              "format": "<img src='xvmres://icons/{{c:rating}}.png' width='100' height='100'>"            // формат текста. См. описание макросов в readme-ru.txt
             }
           ]
         }

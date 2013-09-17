@@ -27,9 +27,15 @@
     },
     // Display format for the left panel (macros allowed, see readme-en.txt).
     // Формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt).
-    "formatLeft": "<font face='Comic Sans MS' size='10'><font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font></font> | <font face='Comic Sans MS' size='10'><font color='{{c:t-battles}}'>{{t-battles:4}}</font> <font color='{{c:e}}'>{{teff}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font>",
+    "formatLeftNick": "<font color='{{c:eff}}'>{{nick}}</font>",
     // Display format for the right panel (macros allowed, see readme-en.txt).
     // Формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt).
-    "formatRight": "<font face='Comic Sans MS' size='10'><font color='{{c:t-rating}}'>{{t-rating:3}}</font> <font color='{{c:e}}'>{{teff}}</font> <font color='{{c:t-battles}}'>{{t-battles:4}}</font></font> | <font face='Comic Sans MS' size='10'><font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font></font>"
+    "formatRightNick": "<font color='{{c:eff}}'>{{nick}}</font>",
+    // Display format for the left panel (macros allowed, see readme-en.txt).
+    // Формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt).
+    "formatLeftVehicle": "<font face='Comic Sans MS' size='10'><font color='{{c:kb}}'>{{kb:3}}</font><tab><font color='{{c:eff}}'>{{eff:4}}</font><tab><font color='{{c:rating}}'>{{rating:3}}</font></font><tab>||<font face='Comic Sans MS' size='10'><font color='{{c:t-battles}}'>{{t-hb:3}}</font><tab><font color='{{c:t-rating}}'>{{t-rating:3}}</font></font><tab>",
+    // Display format for the right panel (macros allowed, see readme-en.txt).
+    // Формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt).
+    "formatRightVehicle": "<font face='Comic Sans MS' size='10'><font color='{{c:kb}}'>{{kb:3}}</font><tab><font color='{{c:eff}}'>{{eff:4}}</font><tab><font color='{{c:rating}}'>{{rating:3}}</font></font><tab>||<font face='Comic Sans MS' size='10'><font color='{{c:t-battles}}'>{{t-hb:3}}</font><tab><font color='{{c:t-rating}}'>{{t-rating:3}}</font></font>"
   }
 }

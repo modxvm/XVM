@@ -18,7 +18,7 @@
     "enemy": { // Вражеской.
       // Upper textfield.
       // Верхнее текстовое поле.
-      "primaryTitleFormat":   "<font size='16' color='#96FF00'><b>Захват вражеской базы</b> {{extra}}</font>",
+      "primaryTitleFormat":   "<font size='16' color='#96FF00'><b>{{l10n:enemyBaseCapture}}</b> {{extra}}</font>",
       // Lower textfield.
       // Нижнее текстовое поле.
       "secondaryTitleFormat": "<font size='20' color='#FFFF00'><b>{{points}}\u0025</b></font>",
@@ -27,7 +27,7 @@
       "captureDoneFormat":    "<img src='xvmres://icons/ura.png' width='439' height='55'>",
       // Extra text available after necessary calculations.
       // Дополнительный текст после необходимого расчета.
-      "extra": "<font size='16' color='#FFFFFF'><b>Захватчиков:</b></font> <font size='20' color='#FFFF00'><b>{{tanks}}({{speed}})</b></font> <font size='16' color='#FFFFFF'><b>Осталось времени:</b></font> <font size='20' color='#FFFF00'><b>{{time}}<b></font>",
+      "extra": "<font size='16' color='#FFFFFF'><b>{{l10n:Capturers}}:</b></font> <font size='20' color='#FFFF00'><b>{{tanks}}({{speed}})</b></font> <font size='16' color='#FFFFFF'><b>{{l10n:Timeleft}}:</b></font> <font size='20' color='#FFFF00'><b>{{time}}<b></font>",
       // Fields shadow
       // Тень полей.
       "shadow": {
@@ -45,10 +45,10 @@
       }
     },
     "ally": { // Союзников.
-      "primaryTitleFormat":   "<font size='16' color='#96FF00'><b>Захват нашей базы</b> {{extra}}</font>",
+      "primaryTitleFormat":   "<font size='16' color='#96FF00'><b>{{l10n:allyBaseCapture}}</b> {{extra}}</font>",
       "secondaryTitleFormat": "<font size='20' color='#FFFF00'><b>{{points}}\u0025</b></font>",
       "captureDoneFormat":    "<img src='xvmres://icons/ura.png' width='439' height='55'>",
-      "extra": "<font size='16' color='#FFFFFF'><b>Захватчиков:</b></font> <font size='20' color='#FFFF00'><b>{{tanks}}({{speed}})</b></font> <font size='16' color='#FFFFFF'><b>Осталось времени:</b></font> <font size='20' color='#FFFF00'><b>{{time}}<b></font>",
+      "extra": "<font size='16' color='#FFFFFF'><b>{{l10n:Capturers}}:</b></font> <font size='20' color='#FFFF00'><b>{{tanks}}({{speed}})</b></font> <font size='16' color='#FFFFFF'><b>{{l10n:Timeleft}}:</b></font> <font size='20' color='#FFFF00'><b>{{time}}<b></font>",
       "shadow": {
         "color": "0x000000",
         "alpha": 50,

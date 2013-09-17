@@ -16,15 +16,19 @@
     // false - disable highlighting of own vehicle icon and squad.
     // false - отключить подсветку иконки своего танка и взвода.
     "highlightVehicleIcon": true,
-    // Format of clock on the Debug Panel (near FPS). Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds. "" - remove clock.
-    // Формат часов на экране панели отладки (возле FPS). Формат: Y:год, M:месяц, D:день, H:часы, N:минуты, S:секунды. "" - убрать часы.
-    "clockFormat": "H:N",
+    // Format of clock on the Debug Panel (near FPS).
+    // Формат часов на экране панели отладки (возле FPS).
+    // http://php.net/date
+    "clockFormat": "H:N", // TODO: "H:i"
     // true - use standard client vehicle markers.
     // true - использовать стандартные маркеры клиента.
     "useStandardMarkers": false,
     // Path to clan icons folder relative to res_mods/xvm/res.
     // Путь к папке иконок кланов относительно res_mods/xvm/res.
-    "clanIconsFolder": "clanicons"
+    "clanIconsFolder": "clanicons/",
+    // GUI elements settings (experts only)
+    // Настройки графических элементов (только для экспертов!)
+    "elements": ${"elements.xc":"."}
   },
   // Frag counter panel at top side of battle windows interface.
   // Панель счёта в бою.

@@ -26,7 +26,9 @@
       "alpha": 90
     },
     // Enemy spotted status marker at right side panel.
+    // This feature depends on enabled XVM minimap mod
     // Маркер статуса засвета в правой боковой панели списка игроков.
+    // Фича зависит от включенного XVM мода миникарты
     "enemySpottedMarker": {
       // false - Disable.
       // false - отключить.
@@ -70,7 +72,7 @@
       "formatLeft": "  <font color='{{c:xeff}}'>{{name}}</font> <font size='13' >{{clannb}}</font>",
       // Display format for the right panel (macros allowed, see readme-en.txt).
       // Формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt).
-      "formatRight": "<font size='13' >{{clannb}}</font> <font color='{{c:xeff}}'>{{name}}</font>  <font size='0'>."
+      "formatRight": "<font size='13' >{{clannb}}</font> <font color='{{c:xeff}}'>{{name}}</font>  <font size='0'>.</font>"
     },
     // Options for the "medium2" panels - the second of the medium panels.
     // Режим ушей "medium2" - вторые средние уши в игре.
@@ -80,10 +82,10 @@
       "width": 20,
       // Display format for the left panel (macros allowed, see readme-en.txt).
       // Формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt).
-      "formatLeft": "<font face='PartnerCondensed Mono'  color='{{c:xeff}}'>{{xeff}}</font>",
+      "formatLeft": "<font face='PartnerCondensedMono' size='13' color='{{c:xeff}}'>{{xeff}}</font>",
       // Display format for the right panel (macros allowed, see readme-en.txt).
       // Формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt).
-      "formatRight": "<font face='PartnerCondensed Mono'  color='{{c:xeff}}'>{{xeff}}</font>"
+      "formatRight": "<font face='PartnerCondensedMono' size='13' color='{{c:xeff}}'>{{xeff}}</font>"
     },
     // Options for the "large" panels - the widest panels.
     // Режим ушей "large" - широкие уши в игре.
@@ -93,12 +95,12 @@
       "width": 140,
       // Display format for player nickname (macros allowed, see readme-en.txt).
       // Формат отображения имени игрока (допускаются макроподстановки, см. readme-ru.txt).
-      "nickFormatLeft": "<font face='PartnerCondensed Mono' size='13' color='{{c:kb}}'>{{kb:3}}</font> {{name}} <font size='13' color='#FFCC66'>{{clannb}}</font>",
-      "nickFormatRight": "<font size='13' color='#FFCC66'>{{clannb}}</font> {{name}} <font face='PartnerCondensed Mono' size='13' color='{{c:kb}}'>{{kb:3}}</font>",
+      "nickFormatLeft": "<font face='PartnerCondensedMono' size='13' color='{{c:kb}}'>{{kb:3}}</font> {{name}} <font size='13' color='#FFCC66'>{{clannb}}</font>",
+      "nickFormatRight": "<font size='13' color='#FFCC66'>{{clannb}}</font> {{name}} <font face='PartnerCondensedMono' size='13' color='{{c:kb}}'>{{kb:3}}</font>",
       // Display format for vehicle name (macros allowed, see readme-en.txt).
       // Формат отображения названия танка (допускаются макроподстановки, см. readme-ru.txt).
-      "vehicleFormatLeft": "<font face='PartnerCondensed Mono'  color='{{c:xeff}}'>{{xeff}}</font>",
-      "vehicleFormatRight": "<font face='PartnerCondensed Mono'  color='{{c:xeff}}'>{{xeff}}</font>"
+      "vehicleFormatLeft": " <font face='PartnerCondensedMono' size='13' color='{{c:xeff}}'>{{xeff}}</font>",
+      "vehicleFormatRight": "<font face='PartnerCondensedMono' size='13' color='{{c:xeff}}'>{{xeff}}</font> "
     }
   }
 }

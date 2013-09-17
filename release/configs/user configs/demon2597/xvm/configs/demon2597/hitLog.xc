@@ -18,7 +18,17 @@
     // Маркеры видимы только в квадрате со стороной в 1000м.
     // Квадрат в 1000 метров это ограничение игрового движка. Максимальная дистанция отрисовки маркеров.
     // Данные по конкретному врагу не могут быть обновлены пока не видно его маркер или обломки.
-    "hpLeft": true,
+    "hpLeft": {
+        // false - Disable.
+        // false - отключить.
+        "enabled": true,
+        // Header - Only localization macros are allowed, see readme-en.txt.
+        // Заголовок - допускаются только макросы перевода, см. readme-ru.txt.
+        "header": "<u><font color='#E5E5E5'>{{l10n:hpLeftTitle}}</font></u>",
+        // Row in HP list (macros allowed, see readme-en.txt).
+        // Строка в списке HP (допускаются макроподстановки, см. readme-ru.txt)
+        "format": "<textformat leading='-2' tabstops='[30,64,105]'><font color='#E5E5E5' size='13'><font color='{{c:hp-ratio}}'>{{hp}}<tab>({{hp-ratio}}\u0025<tab>/ {{hp-max}})<tab><font face='XVMSymbol' size='21'>{{vtype}}</font>  {{vehicle}}</font></font></textformat>"
+    },
     // X position (negative values - bind to right side of screen).
     // Позиция X (отрицательные значения - привязать к правой стороне экрана).
     "x": 305,
@@ -42,20 +52,20 @@
     "groupHitsByPlayer": false,
     // Insert order: begin - insert new values to begin, end - add to end.
     // Сортировка попаданий: begin - новые значения добавляются сверху, end - снизу.
-	"insertOrder": "begin",
+    "insertOrder": "begin",
     // Substitution for {{dead}} macro when tank is dead.
     // Подстановка для макроса {{dead}}, когда танк умирает.
     "deadMarker": "\u0029",
     "blowupMarker": "\u0028",
-    // Default header format (before first hit). Macros IS NOT allowed.
-    // Формат заголовка по умолчанию (до первого попадания). Макросы НЕ допускаются.
+    // Default header format (before first hit). Only localization macros are allowed, see readme-en.txt.
+    // Формат заголовка по умолчанию (до первого попадания). Допускаются только макросы перевода, см. readme-ru.txt.
     "defaultHeader":  "",
     // Hits header format, including last hit (macros allowed, see readme-en.txt).
     // Формат заголовка (допускаются макроподстановки, см. readme-ru.txt).
-    "formatHeader": "<u><font color='#E5E5E5'>Атак: <b><font color='#FCFCFC'>{{n}}</font></b>  Урона: <b><font color='#FFCC66'>{{dmg-total}}</font></b>  Последний: <b><font color='#FCFCFC'>{{dmg}}</font></b></font></u>",
+    "formatHeader": "<u><font color='#E5E5E5'>{{l10n:Hits}}: <b><font color='#FCFCFC'>{{n}}</font></b>  {{l10n:Total}}: <b><font color='#FFCC66'>{{dmg-total}}</font></b>  {{l10n:Last}}: <b><font color='#FCFCFC'>{{dmg}}</font></b></font></u>",
     // List of hits format (macros allowed, see readme-en.txt).
-    // Формат лога попаданий (допускаются макроподстановки, см. readme-ru.txt)
-    "formatHistory": "<textformat leading='-1' tabstops='[20,55,90,130,175]'><font color='#FFE1A6' size='13'><font color='#E5E5E5{{dead}}'><b></b{{dead}}>\u00D7{{n-player}}<tab>{{dmg-kind}}<tab>-{{dmg}}<tab>({{dmg-player}})</b></b><tab><font face='XVMSymbol'><font size='19'><font size='0{{dead}}'>{{dead}}</font></font><font size='0'><font size='19{{dead}}'>\u002A</font></font></font><tab><font face='XVMSymbol' size='20'>{{vtype}}</font>  <b></b{{dead}}>{{vehicle}}</b></b></font></font></textformat>",
+    // Формат лога попаданий (допускаются макроподстановки, см. readme-ru.txt).
+    "formatHistory": "<textformat leading='-2' tabstops='[20,55,88,125,170]'><font color='#FFE1A6' size='13'><font color='#E5E5E5{{dead}}'><b></b{{dead}}>\u00D7{{n-player}}<tab>{{dmg-kind}}<tab>-{{dmg}}<tab>({{dmg-player}})</b></b><tab><font face='XVMSymbol'><font size='19'><font size='0{{dead}}'>{{dead}}</font></font><font size='0'><font size='19{{dead}}'>\u002A</font></font></font><tab><font face='XVMSymbol' size='21'>{{vtype}}</font>  <b></b{{dead}}>{{vehicle}}</b></b></font></font></textformat>",
     // Shadow options.
     // Параметры тени.
     "shadow": {

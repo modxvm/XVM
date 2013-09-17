@@ -14,7 +14,6 @@
     // Dynamic color by various statistical parameters.
     // Динамический цвет по различным статистическим показателям.
     "colorRating": {
-      "undefined":    "0xFCFCFC",   // undefined  / неопределенно
       "very_bad":     "0xFE0E00",   // very bad   / очень плохо
       "bad":          "0xFE7903",   // bad        / плохо
       "normal":       "0xF8F400",   // normal     / средне
@@ -185,9 +184,9 @@
     // Dynamic color by remaining health percent.
     // Динамический цвет по проценту оставшегося здоровья.
     "hp_ratio": [
-      { "value": 10,  "color": ${"def.colorHP.very_low"     } },       // Цвет для значений менее 10 проц
-      { "value": 25,  "color": ${"def.colorHP.low"          } },       // Цвет для значений менее 25 проц
-      { "value": 50,  "color": ${"def.colorHP.average"      } },       // Цвет для значений менее 50 проц
+      { "value": 15,  "color": ${"def.colorHP.very_low"     } },       // Цвет для значений менее 10 проц
+      { "value": 35,  "color": ${"def.colorHP.low"          } },       // Цвет для значений менее 25 проц
+      { "value": 60,  "color": ${"def.colorHP.average"      } },       // Цвет для значений менее 50 проц
       { "value": 101, "color": ${"def.colorHP.above_average"} }        // Цвет для остальных значений
     ],
     // Dynamic color for XVM Scale (only with xvm-stat).
@@ -204,31 +203,30 @@
     // Dynamic color by efficiency (only with xvm-stat).
     // Динамический цвет по эффективности (только с xvm-stat).
     "eff": [
-      { "value": 645,  "color": ${"def.colorRating.very_bad" } },  //    0 - 644  - very bad
-      { "value": 875,  "color": ${"def.colorRating.bad"      } },  //  645 - 874  - bad
-      { "value": 1155, "color": ${"def.colorRating.normal"   } },  //  875 - 1154 - normal
-      { "value": 1470, "color": ${"def.colorRating.good"     } },  // 1155 - 1469 - good
-      { "value": 1740, "color": ${"def.colorRating.very_good"} },  // 1470 - 1739 - very good
-      { "value": 9999, "color": ${"def.colorRating.unique"   } }   // 1740 - *    - unique
+      { "value": 630,  "color": ${"def.colorRating.very_bad" } },  //    0 - 629  - very bad
+      { "value": 860,  "color": ${"def.colorRating.bad"      } },  //  630 - 859  - bad
+      { "value": 1140, "color": ${"def.colorRating.normal"   } },  //  860 - 1139 - normal
+      { "value": 1460, "color": ${"def.colorRating.good"     } },  // 1140 - 1459 - good
+      { "value": 1735, "color": ${"def.colorRating.very_good"} },  // 1460 - 1734 - very good
+      { "value": 9999, "color": ${"def.colorRating.unique"   } }   // 1735 - *    - unique
     ],
     // Dynamic color by WN6 rating (only with xvm-stat).
     // Динамический цвет по рейтингу WN6 (только с xvm-stat).
     "wn": [
-      { "value": 435,  "color": ${"def.colorRating.very_bad" } },  //    0 - 434  - very bad
-      { "value": 805,  "color": ${"def.colorRating.bad"      } },  //  435 - 804  - bad
-      { "value": 1200, "color": ${"def.colorRating.normal"   } },  //  805 - 1199 - normal
-      { "value": 1595, "color": ${"def.colorRating.good"     } },  // 1200 - 1594 - good
-      { "value": 1900, "color": ${"def.colorRating.very_good"} },  // 1595 - 1899 - very good
-      { "value": 9999, "color": ${"def.colorRating.unique"   } }   // 1900 - *    - unique
+      { "value": 425,  "color": ${"def.colorRating.very_bad" } },  //    0 - 424  - very bad
+      { "value": 795,  "color": ${"def.colorRating.bad"      } },  //  425 - 794  - bad
+      { "value": 1175, "color": ${"def.colorRating.normal"   } },  //  795 - 1174 - normal
+      { "value": 1570, "color": ${"def.colorRating.good"     } },  // 1175 - 1569 - good
+      { "value": 1885, "color": ${"def.colorRating.very_good"} },  // 1570 - 1884 - very good
+      { "value": 9999, "color": ${"def.colorRating.unique"   } }   // 1885 - *    - unique
     ],
     // Dynamic color by TEFF (E) rating (only with xvm-stat).
     // Динамический цвет по рейтингу TEFF (E) (только с xvm-stat).
     "e": [
-      { "value": 0.01, "color": ${"def.colorRating.undefined"} },
-      { "value": 2,    "color": ${"def.colorRating.very_bad" } },
-      { "value": 4,    "color": ${"def.colorRating.bad"      } },
-      { "value": 5,    "color": ${"def.colorRating.normal"   } },
-      { "value": 7,    "color": ${"def.colorRating.good"     } },
+      { "value": 3,    "color": ${"def.colorRating.very_bad" } },
+      { "value": 6,    "color": ${"def.colorRating.bad"      } },
+      { "value": 7,    "color": ${"def.colorRating.normal"   } },
+      { "value": 8,    "color": ${"def.colorRating.good"     } },
       { "value": 9,    "color": ${"def.colorRating.very_good"} },
       { "value": 20,   "color": ${"def.colorRating.unique"   } }
     ],
@@ -242,16 +240,6 @@
       { "value": 64,  "color": ${"def.colorRating.very_good"} },   // 56.5 - 63.5  - very good
       { "value": 101, "color": ${"def.colorRating.unique"   } }    // 63.5 - 100   - unique
     ],
-    // Dynamic color by TWR (T-Calc) (only with xvm-stat).
-    // Динамический цвет по TWR (T-Calc) (только с xvm-stat).
-    "twr": [
-      { "value": 47,  "color": ${"def.colorRating.very_bad" } },   //  0   - 46.5  - very bad
-      { "value": 49,  "color": ${"def.colorRating.bad"      } },   // 46.5 - 48.5  - bad
-      { "value": 52,  "color": ${"def.colorRating.normal"   } },   // 48.5 - 51.5  - normal
-      { "value": 57,  "color": ${"def.colorRating.good"     } },   // 51.5 - 56.5  - good
-      { "value": 62,  "color": ${"def.colorRating.very_good"} },   // 56.5 - 61.5  - very good
-      { "value": 101, "color": ${"def.colorRating.unique"   } }    // 61.5 - 100   - unique
-    ],
     // Dynamic color by kilo-battles (only with xvm-stat).
     // Динамический цвет по количеству кило-боев (только с xvm-stat).
     "kb": [
@@ -261,6 +249,16 @@
       { "value": 14,  "color": ${"def.colorRating.good"     } },   //  9 - 13
       { "value": 20,  "color": ${"def.colorRating.very_good"} },   // 14 - 19
       { "value": 999, "color": ${"def.colorRating.unique"   } }    // 20 - *
+    ],
+    // Dynamic color by average level of player tanks (only with xvm-stat).
+    // Динамический цвет по среднему уровню танков игрока (только с xvm-stat).
+    "avglvl": [
+      { "value": 2,  "color": ${"def.colorRating.very_bad" } },
+      { "value": 3,  "color": ${"def.colorRating.bad"      } },
+      { "value": 5,  "color": ${"def.colorRating.normal"   } },
+      { "value": 7,  "color": ${"def.colorRating.good"     } },
+      { "value": 9,  "color": ${"def.colorRating.very_good"} },
+      { "value": 11, "color": ${"def.colorRating.unique"   } }
     ],
     // Dynamic color by battles on current tank (only with xvm-stat).
     // Динамический цвет по количеству боев на текущем танке (только с xvm-stat).
@@ -275,7 +273,6 @@
     // Dynamic color by average damage on current tank (only with xvm-stat).
     // Динамический цвет по среднему урону за бой на текущем танке (только с xvm-stat).
     "tdb": [
-      { "value": 1,    "color": ${"def.colorRating.undefined"} },
       { "value": 500,  "color": ${"def.colorRating.very_bad" } },
       { "value": 1000, "color": ${"def.colorRating.normal"   } },
       { "value": 2000, "color": ${"def.colorRating.good"     } }
@@ -283,7 +280,6 @@
     // Dynamic color by average damage efficiency on current tank (only with xvm-stat).
     // Динамический цвет по эффективности урона за бой на текущем танке (только с xvm-stat).
     "tdv": [
-      { "value": 0.01, "color": ${"def.colorRating.undefined"} },
       { "value": 0.6,  "color": ${"def.colorRating.very_bad" } },
       { "value": 0.8,  "color": ${"def.colorRating.bad"      } },
       { "value": 1.0,  "color": ${"def.colorRating.normal"   } },
@@ -294,7 +290,6 @@
     // Dynamic color by average frags per battle on current tank (only with xvm-stat).
     // Динамический цвет по среднему количеству фрагов за бой на текущем танке (только с xvm-stat).
     "tfb": [
-      { "value": 0.01, "color": ${"def.colorRating.undefined"} },
       { "value": 0.6,  "color": ${"def.colorRating.very_bad" } },
       { "value": 0.8,  "color": ${"def.colorRating.bad"      } },
       { "value": 1.0,  "color": ${"def.colorRating.normal"   } },
@@ -302,10 +297,9 @@
       { "value": 2.0,  "color": ${"def.colorRating.very_good"} },
       { "value": 15,   "color": ${"def.colorRating.unique"   } }
     ],
-    // Dynamic color by number of spotted enemies per battle on current tank (only with xvm-stat).
+    // Dynamic color by average number of spotted enemies per battle on current tank (only with xvm-stat).
     // Динамический цвет по среднему количеству засвеченных врагов за бой на текущем танке (только с xvm-stat).
     "tsb": [
-      { "value": 0.01, "color": ${"def.colorRating.undefined"} },
       { "value": 0.6,  "color": ${"def.colorRating.very_bad" } },
       { "value": 0.8,  "color": ${"def.colorRating.bad"      } },
       { "value": 1.0,  "color": ${"def.colorRating.normal"   } },

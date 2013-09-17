@@ -43,9 +43,15 @@
     },
     // Display format for the left panel (macros allowed, see readme-en.txt).
     // Формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt).
-    "formatLeft": "<font face='PartnerCondensed Mono' size='13'><font color='{{c:rating}}'>{{rating:3}}</font>  <font color='{{c:kb}}'>{{kb:3}}</font>  <font color='{{c:xeff}}'>{{xeff}}</font> | <font color='{{c:t-battles}}'>{{t-hb:3}}</font></font>  <font face='XVMSymbol' size='20'>{{vtype}}</font>",
+    "formatLeftNick": "{{name}} <font size='13' color='#FFCC66'>{{clannb}}</font>",
     // Display format for the right panel (macros allowed, see readme-en.txt).
     // Формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt).
-    "formatRight": "<font face='XVMSymbol' size='20'>{{vtype}}</font>  <font face='PartnerCondensed Mono' size='13'><font color='{{c:t-battles}}'>{{t-hb:3}}</font> | <font color='{{c:xeff}}'>{{xeff}}</font>  <font color='{{c:kb}}'>{{kb:3}}</font>  <font color='{{c:rating}}'>{{rating:3}}</font></font>"
+    "formatRightNick": "<font size='13' color='#FFCC66'>{{clannb}}</font> {{name}}",
+    // Display format for the left panel (macros allowed, see readme-en.txt).
+    // Формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt).
+    "formatLeftVehicle": "<font face='PartnerCondensedMono' size='13' color='{{c:rating}}'>{{rating:3}}</font>   <font face='PartnerCondensedMono' size='13' color='{{c:kb}}'>{{kb:3}}</font>   <font face='PartnerCondensedMono' size='13' color='{{c:xeff}}'>{{xeff}}</font>  <font face='PartnerCondensedMono' size='13'>|</font>  <font face='PartnerCondensedMono' size='13' color='{{c:avglvl}}'>{{avglvl}}</font>  <font face='PartnerCondensedMono' size='13' color='{{c:t-battles}}'>{{t-hb:3}}</font>  <font face='XVMSymbol' size='20'>{{vtype}}</font>",
+    // Display format for the right panel (macros allowed, see readme-en.txt).
+    // Формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt).
+    "formatRightVehicle": "<font face='XVMSymbol' size='20'>{{vtype}}</font>  <font face='PartnerCondensedMono' size='13' color='{{c:t-battles}}'>{{t-hb:3}}</font>   <font face='PartnerCondensedMono' size='13' color='{{c:avglvl}}'>{{avglvl}}</font>  <font face='PartnerCondensedMono' size='13'>|</font>  <font face='PartnerCondensedMono' size='13' color='{{c:xeff}}'>{{xeff}}</font>   <font face='PartnerCondensedMono' size='13' color='{{c:kb}}'>{{kb:3}}</font>   <font face='PartnerCondensedMono' size='13' color='{{c:rating}}'>{{rating:3}}</font>"
   }
 }

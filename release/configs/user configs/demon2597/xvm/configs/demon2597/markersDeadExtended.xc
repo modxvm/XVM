@@ -30,8 +30,8 @@
             "speed": 3,                       //   время отображения отлетающего урона
             "maxRange": 80,                   //   расстояние, на которое отлетает урон
       "damageMessage": "{{dmg}}",       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
-      "blowupMessage": "Blown-up!"      //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
-  },
+      "blowupMessage": "{{l10n:blownUp}}"      //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
+     },
      // Text fields definition.
      // Шаблон текстовых полей.
           "textFields": [
@@ -86,7 +86,7 @@
               "format": "{{vehicle}}"         // формат текста. См. описание макросов в readme-ru.txt
             }
         ]
- },
+   },
   "ally": {
           "healthBar": {                      // индикатор здоровья
             "visible": false,                  //   false - не отображать
@@ -176,8 +176,8 @@
           // Блок текстовых полей
           "textFields": 
             ${ "def.textFields" }
-        },
+    },
   "enemy": {
             "$ref": { "path": "ally" }
-        }
+    }
 }

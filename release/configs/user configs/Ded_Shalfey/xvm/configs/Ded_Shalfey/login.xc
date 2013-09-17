@@ -8,13 +8,13 @@
     // Пинг серверов; работает только с xvm-stat.exe
     "pingServers": {
       "$ref": { "file": "hangar.xc", "path": "hangar.pingServers" },
-      // true - Enable display of ping to the servers
+      // true - Show ping to the servers
       // true - показывать пинг до серверов
       "enabled": true,
       // Axis field coordinates
       // Положение поля по осям
-      "x": 355,
-      "y": 530
+      "x": 15,
+      "y": 30
     }
   }
 }

@@ -28,7 +28,7 @@
     
     "minimapZoom": { 
       "enabled": true,
-      "onHold": false,
+      "onHold": true,
       "keyCode": 20 
     }
   }

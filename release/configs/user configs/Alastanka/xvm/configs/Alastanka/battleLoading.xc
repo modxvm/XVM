@@ -4,9 +4,9 @@
  */
 {
   "battleLoading": {
-    // Format of clock on the Battle Loading Screen. Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds. "" - remove clock.
-    // Формат часов на экране загрузки боя. Формат: Y:год, M:месяц, D:день, H:часы, N:минуты, S:секунды. "" - убрать часы.
-    "clockFormat": "D/M/Y H:N:S",
+    // Format of clock on the Battle Loading Screen. Format: Y:year, m:month, d:day, H:hour, i:minutes, s:seconds. "" - remove clock.
+    // Формат часов на экране загрузки боя. Формат: Y:год, m:месяц, d:день, H:часы, i:минуты, s:секунды. "" - убрать часы.
+    "clockFormat": "H:i:s",
     // true - Enable display of "chance to win" (only with xvm-stat) Read more: http://www.koreanrandom.com/forum/topic/1663-/
     // true - включить отображение шансов на победу (только с xvm-stat). Прочитать подробней: http://www.koreanrandom.com/forum/topic/1663-/
     "showChances": true,
@@ -46,9 +46,15 @@
     },
     // Display format for the left panel (macros allowed, see readme-en.txt).
     // Формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt).
-    "formatLeft": "<font face='Consolas'><font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:wn}}'>{{wn}}</font> <font color='{{c:rating}}'>{{rating}}</font></font> | <font face='Consolas'><font color='{{c:t-battles}}'>{{t-battles:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font>",
+    "formatLeftNick": "{{name}}{{clan}}",
     // Display format for the right panel (macros allowed, see readme-en.txt).
     // Формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt).
-    "formatRight": "<font face='Consolas'><font color='{{c:t-battles}}'>{{t-battles:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font> | <font face='Consolas'><font face='Consolas'><font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:wn}}'>{{wn}}</font> <font color='{{c:kb}}'>{{kb}}</font></font>"
+    "formatRightNick": "{{name}}{{clan}}",
+    // Display format for the left panel (macros allowed, see readme-en.txt).
+    // Формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt).
+    "formatLeftVehicle": "<font face='Consolas'><font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:wn}}'>{{wn}}</font> <font color='{{c:rating}}'>{{rating}}</font></font> | <font face='Consolas'><font color='{{c:t-battles}}'>{{t-battles:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font>",
+    // Display format for the right panel (macros allowed, see readme-en.txt).
+    // Формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt).
+    "formatRightVehicle": "<font face='Consolas'><font color='{{c:t-battles}}'>{{t-battles:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font> | <font face='Consolas'><font face='Consolas'><font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:wn}}'>{{wn}}</font> <font color='{{c:kb}}'>{{kb}}</font></font>"
   }
 }

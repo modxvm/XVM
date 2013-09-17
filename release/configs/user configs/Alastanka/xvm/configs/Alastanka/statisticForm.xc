@@ -17,7 +17,7 @@
     // Параметры отображения иконки игрока/клана (см. battleLoading.xc).
     "clanIcon": {
       "show": true,
-      "x": -175,
+      "x": -180,
       "y": 0,
       "xr": -175,
       "yr": 0,
@@ -27,9 +27,15 @@
     },
     // Display format for the left panel (macros allowed, see readme-en.txt).
     // Формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt).
-    "formatLeft": "<font face='Consolas'><font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:wn}}'>{{wn}}</font> <font color='{{c:rating}}'>{{rating}}</font></font> | <font face='Consolas'><font color='{{c:t-battles}}'>{{t-battles:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font>",
+    "formatLeftNick": "{{nick}}",
     // Display format for the right panel (macros allowed, see readme-en.txt).
     // Формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt).
-    "formatRight": "<font face='Consolas'><font color='{{c:t-battles}}'>{{t-battles:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font> | <font face='Consolas'><font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:wn}}'>{{wn}}</font> <font color='{{c:kb}}'>{{kb}}</font></font>"
+    "formatRightNick": "{{nick}}",
+    // Display format for the left panel (macros allowed, see readme-en.txt).
+    // Формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt).
+    "formatLeftVehicle": "<font face='Consolas'><font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:wn}}'>{{wn}}</font> <font color='{{c:rating}}'>{{rating}}</font></font><font color='{{c:xwn}}'>[{{xwn}}]</font><font face='Consolas'><font color='{{c:t-battles}}'>{{t-battles:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font>",
+    // Display format for the right panel (macros allowed, see readme-en.txt).
+    // Формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt).
+    "formatRightVehicle": "<font face='Consolas'><font color='{{c:t-rating}}'>{{t-rating:3}}</font> <font color='{{c:t-battles}}'>{{t-battles:4}}</font></font><font color='{{c:xwn}}'>[{{xwn}}]</font><font face='Consolas'><font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:wn}}'>{{wn}}</font> <font color='{{c:kb}}'>{{kb}}</font></font>"
   }
 }

@@ -42,7 +42,7 @@
       "enabled": true,
       // Show square if using artillery\SPG vehicle.
       // Показывать ли квадрат в случае артиллерии.
-      "artilleryEnabled": true,
+      "artilleryEnabled": false,
       // Толщина линии.
       "thickness": 0.75,
       // Прозрачность.

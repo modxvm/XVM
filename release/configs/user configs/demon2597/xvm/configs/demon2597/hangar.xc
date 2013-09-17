@@ -6,7 +6,13 @@
   "hangar": {
     // true - Disable display of tutorial icon
     // true - скрыть иконку обучения
-    "hideTutorial": false,
+    "hideTutorial": true,
+    // true - Show XWN instead of XEFF in company windows
+    // true - показывать XWN вместо XEFF в окнах рот
+    "xwnInCompany": false,
+    // true - Enable widgets
+    // true - включить виджеты
+    "widgetsEnabled": false,
     // Ping servers; works only with xvm-stat.exe
     // Пинг серверов; работает только с xvm-stat.exe
     "pingServers": {
@@ -55,7 +61,7 @@
       "threshold": {
         // Below this value responce is great
         // До этого значения отклик отличный
-        "great": 30,
+        "great": 35,
         // Below this value responce is good
         // До этого значения отклик хороший
         "good": 60,
@@ -80,11 +86,28 @@
   // UserInfo window.
   // Окно достижений.
   "userInfo": {
+    // true - Show filters on tanks.
+    // true - показывать фильтры отображения танков.
+    "showFilters": true,
+    // true: Set the default focus to the filter text input
+    // true: Выбрать поле ввода фильтра по умолчанию
+    "filterFocused": true,
     // true - Enable filter tanks in hangar by default.
     // true - включить фильтр отображения танков в ангаре по умолчанию.
     "inHangarFilterEnabled": true,
     // true - Enable display of E column (values ​​may be incorrect due to the peculiarities of WG statistics servers).
     // true - показывать колонку эффективности по танку (значения могут быть неверными из-за особенностей предоставления статистики серверами WG).
-    "showEColumn": false
+    "showEColumn": false,
+    // number of column for sorting by default. Sort order: >0 - default, <0 - inverse
+    // номер колонки для сортировки по умолчанию. Порядок сортировки: >0 - по умолчанию, <0 - обратный
+    // 1 - Level       / Уровень
+    // 2 - Type        / Тип
+    // 3 - Nation      / Нация
+    // 4 - Name        / Название
+    // 5 - E           / E
+    // 6 - Fights      / Боев
+    // 7 - Wins        / Побед
+    // 8 - Class mark  / Знак классности
+    "sortColumn": 6
   }
 }
