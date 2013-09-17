@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # config
-startclan=1000005800
-lastclan=1000010000
+startclan=1000000000
+lastclan=1000011416
 host=worldoftanks.com
 dir=US
 

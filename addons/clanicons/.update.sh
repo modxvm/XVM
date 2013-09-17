@@ -5,12 +5,11 @@
 # main
 main()
 {
-  i=$startclan
+  id=$startclan
   mkdir -p clanicons/$dir/clan
-  mkdir -p clanicons/$dir/nick
-  while [ $i -le $lastclan ]; do
-    update $i
-    i=$((i+1))
+  while [ $id -le $lastclan ]; do
+    update $id
+    id=$((id+1))
   done
 }
 
@@ -28,14 +27,14 @@ update()
     echo "EMPTY"
     return
   fi
-  if [ "$clan" = "<title>" ]; then
+  if [ "$clan" = "    <title>" ]; then
     echo "REMOVED"
     return
   fi
 
   echo -n "[$clan] => $clan.png"
   #wget -qc http://$host/dcont/clans/emblems/$1/emblem_64x64.png -O clanicons/$dir/clan/$clan.png 2>/dev/null
-  wget -qc http://cw.$host/media/clans/emblems/clans_${id:0:1}/$id/emblem_64x64.png -O clanicons/$dir/clan/$clan.png 2>/dev/null
+  wget -qc http://cw.$host/media/clans/emblems/clans_${1:0:1}/$1/emblem_64x64.png -O clanicons/$dir/clan/$clan.png 2>/dev/null
 
   echo " OK"
 }

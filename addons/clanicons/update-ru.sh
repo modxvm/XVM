@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # config
-startclan=34570
-lastclan=50000
+startclan=1
+lastclan=91647
 host=worldoftanks.ru
 dir=RU
 
