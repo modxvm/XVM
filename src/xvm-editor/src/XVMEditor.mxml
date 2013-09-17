@@ -144,6 +144,7 @@
                 <s:NavigatorContent label="{_('loginPage')}" width="100%" height="100%" id="pgLogin">
                     <s:Scroller x="0" y="0" width="420" height="100%">
                         <s:VGroup x="0" y="0" width="100%" height="100%" gap="-1" creationComplete="{RefreshCurrentPage()}">
+                            <p:PLogin id="p_login" config="login" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
                             <p:PPingServers id="p_pingServers_login" config="login.pingServers" rootElementName="login" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
                         </s:VGroup>
                     </s:Scroller>
