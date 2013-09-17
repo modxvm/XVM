@@ -14,6 +14,7 @@ package
     import net.wg.gui.components.common.*;
     import net.wg.infrastructure.events.*;
     import com.xvm.*;
+    import scaleform.clik.events.ButtonEvent;
 
     public class XVMAutoLogin extends Sprite
     {
@@ -79,22 +80,23 @@ package
 
         private function processView(view:IView, populated:Boolean = false):void
         {
-            Logger.add("Process view: " + view.as_alias);
+            //Logger.add("Process view: " + view.as_alias);
             try
             {
                 switch (view.as_alias)
                 {
                     case "introVideo":
-                        skipIntroVideo(view as IntroPage); // TODO: config
+                        if (Config.config.login.skipIntro == true)
+                            skipIntroVideo(view as IntroPage);
                         break;
 
                     case "login":
-                        if (!sent)
-                        {
-                            // TODO: config
-                            //autoLogin(view as LoginPage);
-                            sent = true;
-                        }
+                        if (Config.config.login.autologin == true)
+                            autoLogin(view as LoginPage);
+                        break;
+
+                    case "lobby":
+                        sent = true;
                         break;
                 }
             }
@@ -111,25 +113,13 @@ package
 
         private function autoLogin(page:LoginPage):void
         {
-            Logger.add("draw: sent=" + sent);
+            //Logger.add("draw: sent=" + sent);
+            if (sent)
+                return;
+            sent = true;
 
-            //if (_root.modalBackground == undefined) // detect and skip replays
-            //    return;
-
-            //if (sent)
-            //    return;
-            //sent = true;
-
-            //Logger.addObject(_root, "_root", 2);
-
-            //var intervalId:uint = setInterval(function() {
-                //if (page. me.visible == true)
-                //{
-                    //clearInterval(intervalId);
-                    //me.form_mc.onSubmit({type:"click"});
-                //}
-            //}, 10);
-            page.form.submit.dispatchEventAndSound(new MouseEvent(MouseEvent.CLICK));
+            App.utils.scheduler.envokeInNextFrame(function():void
+                { page.form.submit.dispatchEvent(new ButtonEvent(ButtonEvent.CLICK)); });
         }
     }
 }

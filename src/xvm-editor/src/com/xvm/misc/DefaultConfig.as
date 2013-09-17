@@ -61,6 +61,8 @@ package com.xvm.misc
         private static function getLoginSection():Object
         {
             var c:Object = new Object();
+            c.skipIntro = true;
+            c.autologin = false;
             // Show ping to the servers
             c.pingServers = new Object();
             c.pingServers.enabled = false;

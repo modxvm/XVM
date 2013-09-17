@@ -63,6 +63,8 @@ package com.xvm.misc
         private static function getLoginSection():CLogin
         {
             var c:CLogin = new CLogin();
+            c.skipIntro = true;
+            c.autologin = false;
             // Show ping to the servers
             c.pingServers = new CPingServers;
             c.pingServers.enabled = false;

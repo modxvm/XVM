@@ -43,10 +43,12 @@
     "modMinVersion": "3.0.4"
   },
   "login": {
+    "skipIntro": true,
+    "autologin": true,
     "pingServers": ${"def.pingServers"}
   },
   "hangar": {
-    "hideTutorial": true,
+    "hideTutorial": false,
     "widgetsEnabled": true,
     "pingServers": {
       "$ref": { "path":"def.pingServers" },

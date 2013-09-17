@@ -1,4 +1,9 @@
-﻿  [FIXES]
+﻿  [NEW FUNCTIONS]
+  * new options (xvm-autologin.swf):
+      login/skipIntro - Skip intro movie
+      login/autologin - Auto enter to the game
+
+  [FIXES]
   * minimap: fixed enemy teamkiller color
 
 XVM-5.0.0-test2:

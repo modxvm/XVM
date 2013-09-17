@@ -4,6 +4,12 @@
  */
 {
   "login": {
+    // Skip intro movie
+    // Пропустить вступительное видео
+    "skipIntro": true,
+    // Auto enter to the game
+    // Автоматический вход в игру
+    "autologin": false,
     // Ping servers; works only with xvm-stat.exe
     // Пинг серверов; работает только с xvm-stat.exe
     "pingServers": {
