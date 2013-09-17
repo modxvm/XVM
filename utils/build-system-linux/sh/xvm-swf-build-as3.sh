@@ -8,6 +8,7 @@ projects=(
           'wg'
           'xvm'
           'xvm-hangar'
+          'xvm-autologin'
          )
 
 pushd ../../../src/xvm/ > /dev/null
