@@ -71,11 +71,11 @@ package xvm.hangar.components.Squad
                 if (vehicleTierField == null)
                     createVehicleTierField();
 
-                vehicleTierField.htmlText = "<span class='xvm_vehicleTier'>" +
+                vehicleTierField.htmlText = "<p class='xvm_vehicleTier' align='right'>" +
                     Utils.fixImgTag(Config.config.squad.leftLvlBorder) +
                     ti.level +
                     Utils.fixImgTag(Config.config.squad.rightLvlBorder) +
-                    "</span>";
+                    "</p>";
             }
         }
 
@@ -117,12 +117,11 @@ package xvm.hangar.components.Squad
 
             // customize TextFormat
             var tf:TextFormat = proxy.vehicleNameField.getTextFormat();
-            tf.align = TextFormatAlign.RIGHT;
             vehicleTierField.styleSheet = Utils.createTextStyleSheet("xvm_vehicleTier", tf);
 
             // size & position
             vehicleTierField.width = 35;
-            vehicleTierField.x = proxy.width - vehicleTierField.width;
+            vehicleTierField.x = proxy.width - vehicleTierField.width - 3;
             vehicleTierField.y = proxy.vehicleNameField.y;
 
             vehicleTierField.htmlText = "";
