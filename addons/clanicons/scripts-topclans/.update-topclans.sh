@@ -78,15 +78,14 @@ sort_topfile()
 update()
 {
   echo "Updating icons..."
-  rm -f ../../release/res/clanicons/$dir/clan/*
+  rm -f ../../../release/res/clanicons/$dir/clan/*
   i=0
   cat $topfile $topfile_persist | while read line; do
     i=$((i+1))
     clan=`echo $line | cut -d' ' -f1`
     id=`echo $line | cut -d' ' -f2`
     echo "$i: $clan $id"
-    #wget -qc http://$host/dcont/clans/emblems/$id/emblem_64x64.png -O ../../release/res/clanicons/$dir/clan/$clan.png 2>/dev/null
-    wget -qc http://cw.$host/media/clans/emblems/clans_${id:0:1}/$id/emblem_64x64.png -O ../../release/res/clanicons/$dir/clan/$clan.png 2>/dev/null
+    wget -qc http://cw.$host/media/clans/emblems/clans_${id:0:1}/$id/emblem_64x64.png -O ../../../release/res/clanicons/$dir/clan/$clan.png 2>/dev/null
   done
 }
 
@@ -94,7 +93,7 @@ optimize()
 {
   echo "Optimizing PNGs..."
   (
-    cd ../../release/res/clanicons/$dir/clan
+    cd ../../../release/res/clanicons/$dir/clan
     pngoptimizer -file:*.png
   )
 }
