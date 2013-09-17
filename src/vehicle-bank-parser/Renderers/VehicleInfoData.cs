@@ -175,8 +175,7 @@ package com.xvm.vehinfo
 
                 // level 7
                 {"germany_Panther_M10", new int[2]{ 7, 8 }},
-                {"ussr_T_34_85", new int[2]{ 7, 8 }},
-                // ussr_T_34_85_training
+                {"ussr_T44_85", new int[2]{ 7, 8 }},
                 {"ussr_T44_122", new int[2]{ 7, 8 }},
                 {"germany_E_25",  new int[2]{ 7, 8 }},
 
