@@ -11,6 +11,7 @@ main()
     update $id
     id=$((id+1))
   done
+  optimize
 }
 
 # update
@@ -36,4 +37,13 @@ update()
   wget -qc http://cw.$host/media/clans/emblems/clans_${1:0:1}/$1/emblem_64x64.png -O ../clanicons/$dir/clan/$clan.png 2>/dev/null
 
   echo " OK"
+}
+
+optimize()
+{
+  echo "Optimizing PNGs..."
+  (
+    cd ../clanicons/$dir/clan
+    pngoptimizer -file:*.png
+  )
 }
