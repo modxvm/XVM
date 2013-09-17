@@ -32,7 +32,7 @@
     "enemySpottedMarker": {
       // false - Disable.
       // false - отключить.
-      "enabled": true,
+      "enabled": false,
       // Offset relative to level icon (by X, Y).
       // Смещение относительно иконки уровня танка (по X, Y).
       "Xoffset": 15,
