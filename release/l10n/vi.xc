@@ -6,6 +6,12 @@
     // Author of translation
     "XVM_translator": "u u cac cac",
 
+    // Ping
+    "Initialization": "Initialization",
+
+    // BattleLoading
+    "New version available": "New version available",
+
     // Win chance
     "Chance error": "Tỉ lệ thất bại",
     "Chance to win": "Tỉ lệ thắng",
@@ -79,6 +85,7 @@
     // Crew
     "PutOwnCrew": "Đặt kíp lái",
     "PutBestCrew": "Đặt kíp lái tốt nhất",
+    "PutClassCrew": "Put same class crew",
 
     // Squad
     "Vehicle": "Xe",

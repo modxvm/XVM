@@ -6,6 +6,12 @@
     // Author of translation
     "XVM_translator": "drhideg",
 
+    // Ping
+    "Initialization": "Initialization",
+
+    // BattleLoading
+    "New version available": "New version available",
+
     // Win chance
     "Chance error": "Esély lekérdezési hiba",
     "Chance to win": "Esély a győzelemre",
@@ -79,6 +85,7 @@
     // Crew
     "PutOwnCrew": "Saját legénység",
     "PutBestCrew": "Legjobb legénység",
+    "PutClassCrew": "Put same class crew",
 
     // Squad
     "Vehicle": "Jármű",

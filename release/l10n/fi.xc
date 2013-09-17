@@ -6,6 +6,12 @@
     // Author of translation
     "XVM_translator": "Mikael Palokangas and Seula",
 
+    // Ping
+    "Initialization": "Initialization",
+
+    // BattleLoading
+    "New version available": "New version available",
+
     // Win chance
     "Chance error": "Virhemahdollisuus",
     "Chance to win": "Voittomahdollisuus",
@@ -79,6 +85,7 @@
     // Crew
     "PutOwnCrew": "Aseta tankille koulutettu miehistö",
     "PutBestCrew": "Aseta paras miehistö",
+    "PutClassCrew": "Put same class crew",
 
     // Squad
     "Vehicle": "Vaunu",

@@ -6,6 +6,12 @@
     // Author of translation
     "XVM_translator": "Herman 'surfplank' Gerards",
 
+    // Ping
+    "Initialization": "Initialization",
+
+    // BattleLoading
+    "New version available": "New version available",
+
     // Win chance
     "Chance error": "Fout kans",
     "Chance to win": "Win kans",
@@ -79,6 +85,7 @@
     // Crew
     "PutOwnCrew": "plaats eigen bemanning",
     "PutBestCrew": "plaats beste bemanning",
+    "PutClassCrew": "Put same class crew",
 
     // Squad
     "Vehicle": "tank",

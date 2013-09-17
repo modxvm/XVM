@@ -6,6 +6,12 @@
     // Author of translation
     "XVM_translator": "Edgar 'LaCourgette' Fournival",
 
+    // Ping
+    "Initialization": "Initialization",
+
+    // BattleLoading
+    "New version available": "New version available",
+
     // Win chance
     "Chance error": "Erreur lors du calcul des chances",
     "Chance to win": "Chances de victoire",
@@ -79,6 +85,7 @@
     // Crew
     "PutOwnCrew": "Mettre l'équipage adéquat",
     "PutBestCrew": "Mettre le meilleur équipage",
+    "PutClassCrew": "Put same class crew",
 
     // Squad
     "Vehicle": "Véhicule",

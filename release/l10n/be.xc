@@ -6,6 +6,12 @@
     // Author of translation
     "XVM_translator": "Alexander Shoumsky, <contact@by-reservation.com>",
 
+    // Ping
+    "Initialization": "Initialization",
+
+    // BattleLoading
+    "New version available": "New version available",
+
     // Win chance
     "Chance error": "Не ўдалося разлічыць шанцы",
     "Chance to win": "Шанец перамагчы",
@@ -79,6 +85,7 @@
     // Crew
     "PutOwnCrew": "Родны экіпаж",
     "PutBestCrew": "Найлепшы экіпаж",
+    "PutClassCrew": "Put same class crew",
 
     // Squad
     "Vehicle": "Танк",

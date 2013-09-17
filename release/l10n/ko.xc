@@ -6,6 +6,12 @@
     // Author of translation
     "XVM_translator": "yhpdoit",
 
+    // Ping
+    "Initialization": "Initialization",
+
+    // BattleLoading
+    "New version available": "New version available",
+
     // Win chance
     "Chance error": "승률 에러",
     "Chance to win": "이길 확률",
@@ -79,6 +85,7 @@
     // Crew
     "PutOwnCrew": "이 전차의 승무원을 넣기",
     "PutBestCrew": "이 전차에 가장 적합한 승무원을 넣기",
+    "PutClassCrew": "Put same class crew",
 
     // Squad
     "Vehicle": "전차",

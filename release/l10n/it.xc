@@ -6,6 +6,12 @@
     // Author of translation
     "XVM_translator": "RENZIO",
 
+    // Ping
+    "Initialization": "Initialization",
+
+    // BattleLoading
+    "New version available": "New version available",
+
     // Win chance
     "Chance error": "Non Calcolabile",
     "Chance to win": "Chance di vittoria",
@@ -79,6 +85,7 @@
     // Crew
     "PutOwnCrew": "Prepara l´equipaggio del carro",
     "PutBestCrew": "Prepara l´equipaggio migliore",
+    "PutClassCrew": "Put same class crew",
 
     // Squad
     "Vehicle": "Veicolo",

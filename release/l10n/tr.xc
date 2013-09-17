@@ -6,13 +6,19 @@
     // Author of translation
     "XVM_translator": "Ferhat 'Fornicras' Pınar/EU",
 
+    // Ping
+    "Initialization": "Initialization",
+
+    // BattleLoading
+    "New version available": "New version available",
+
     // Win chance
     "Chance error": "Şans hata",
     "Chance to win": "Kazanma şansı",
     "global": "evrensel",
     "per-vehicle": "araç-araca",
 
-    // Hitlog  
+    // Hitlog
     "attack": "saldır",
     "fire": "ateş",
     "ramming": "çarpma",
@@ -79,6 +85,7 @@
     // Crew
     "PutOwnCrew": "Kendi mürettabatını koy",
     "PutBestCrew": "En iyi mürettabatı koy",
+    "PutClassCrew": "Put same class crew",
 
     // Squad
     "Vehicle": "Araç",

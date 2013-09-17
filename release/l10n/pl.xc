@@ -6,6 +6,12 @@
     // Author of translation
     "XVM_translator": "wRR",
 
+    // Ping
+    "Initialization": "Initialization",
+
+    // BattleLoading
+    "New version available": "New version available",
+
     // Win chance
     "Chance error": "Szansa (błąd)",
     "Chance to win": "Szansa na zwycięstwo",
@@ -79,6 +85,7 @@
     // Crew
     "PutOwnCrew": "Obsadź załogę (własna)",
     "PutBestCrew": "Obsadź załogę (najlepsza)",
+    "PutClassCrew": "Put same class crew",
 
     // Squad
     "Vehicle": "Pojazd",

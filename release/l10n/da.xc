@@ -6,6 +6,12 @@
     // Author of translation
     "XVM_translator": "Silwing",
 
+    // Ping
+    "Initialization": "Initialization",
+
+    // BattleLoading
+    "New version available": "New version available",
+
     // Win chance
     "Chance error": "Chance-fejl",
     "Chance to win": "Chance for at vinde",
@@ -79,6 +85,7 @@
     // Crew
     "PutOwnCrew": "Sæt eget mandskab",
     "PutBestCrew": "Sæt bedste mandskab",
+    "PutClassCrew": "Put same class crew",
 
     // Squad
     "Vehicle": "Vogn",

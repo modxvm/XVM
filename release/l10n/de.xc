@@ -6,6 +6,12 @@
     // Author of translation
     "XVM_translator": "diclovit",
 
+    // Ping
+    "Initialization": "Initialization",
+
+    // BattleLoading
+    "New version available": "New version available",
+
     // Win chance
     "Chance error": "Fehler bei Berechnung der Siegchance",
     "Chance to win": "Siegchance",
@@ -79,6 +85,7 @@
     // Crew
     "PutOwnCrew": "Eingewiesene Besatzung einsetzen",
     "PutBestCrew": "Beste Besatzung einsetzen",
+    "PutClassCrew": "Put same class crew",
 
     // Squad
     "Vehicle": "Fahrzeug",
