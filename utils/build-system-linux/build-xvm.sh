@@ -33,7 +33,7 @@ rm -rf ../../bin/as3/
 cp -rf ../../bin/* ../../temp/"$wot_version"/gui/scaleform/
 
 cp -rf ../../release/ ../../temp/xvm/
-cp -f ../../temp/xvm/release/doc/readme*.txt /../../temp/
+cp -rf ../../temp/xvm/release/doc/* /../../temp/
 rm -rf ../../release/*.swf
 
 rm -rf ../../bin/*
