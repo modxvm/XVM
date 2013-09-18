@@ -33,6 +33,7 @@ rm -rf ../../bin/as3/
 cp -rf ../../bin/* ../../temp/"$wot_version"/gui/scaleform/
 
 cp -rf ../../release/ ../../temp/xvm/
+cp -f ../../temp/xvm/release/docs/readme*.txt /../../temp/
 rm -rf ../../release/*.swf
 
 rm -rf ../../bin/*
@@ -46,6 +47,7 @@ cp -rf ../../bin/xpm/* ../../temp/"$wot_version"/
 rm -rf ../../bin/*
 
 #del testmod
+
 rm -rf ../../temp/xvm/mods/testmod.swf
 
 #6. Build archive
