@@ -1,6 +1,7 @@
 ﻿/**
  * @author sirmax2
  */
+import flash.external.ExternalInterface;
 import com.greensock.OverwriteManager;
 import com.greensock.plugins.TintPlugin;
 import com.greensock.plugins.TweenPlugin;
@@ -40,6 +41,8 @@ class wot.battle.BattleMain
         gfx.io.GameDelegate.addCallBack("Stage.Update", instance, "onUpdateStage");
 
         BattleInputHandler.upgrade();
+
+        ExternalInterface.addCallback("xvm.debugtext", instance, instance.onDebugText);
     }
 
     private static function BattleMainConfigLoaded()
@@ -123,4 +126,21 @@ class wot.battle.BattleMain
         }
     }
 
+    private var debugTextField:TextField = null;
+    function onDebugText(text)
+    {
+        if (debugTextField == null)
+        {
+            debugTextField = _root.createTextField("debugTextField", _root.getNextHighestDepth(), 0, 0, 1024, 768);
+            debugTextField.html = true;
+            debugTextField.selectable = false;
+            debugTextField.multiline = true;
+            debugTextField.antiAliasType = "advanced";
+            debugTextField.styleSheet = Utils.createStyleSheet(Utils.createCSS("debugText",
+                0xDDDDDD, "$FieldFont", 12, "left", false, false));
+            var sh:flash.filters.DropShadowFilter = new flash.filters.DropShadowFilter(0, 0, 0, 100, 5, 5, 5);
+            debugTextField.filters = [ sh ];
+        }
+        debugTextField.htmlText = "<span class='debugText'>" + text + "</span>";
+    }
 }
