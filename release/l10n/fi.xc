@@ -4,19 +4,19 @@
 {
   "locale": {
     // Author of translation
-    "XVM_translator": "Mikael Palokangas and Seula",
+    "XVM_translator": "Mikael Palokangas, Seula and Taifuuni",
 
     // Ping
-    "Initialization": "Initialization",
+    "Initialization": "Alustus",
 
     // BattleLoading
-    "New version available": "New version available",
+    "New version available": "Uusi versio saatavilla",
 
     // Win chance
     "Chance error": "Virhemahdollisuus",
     "Chance to win": "Voittomahdollisuus",
     "global": "yleinen",
-    "per-vehicle": "tankkikohtainen",
+    "per-vehicle": "vaunujen mukaan",
 
     // Hitlog
     "attack": "osuttu",
@@ -24,15 +24,15 @@
     "ramming": "törmätty",
     "world_collision": "putoaminen",
     "Hits": "Osumia",
-    "Total": "Kokonais",
+    "Total": "Summa",
     "Last": "Viimeisin",
 
     // Hp Left
-    "hpLeftTitle": "HP:tä jäljellä:",
+    "hpLeftTitle": "Osumapisteitä jäljellä:",
 
     // Capture
-    "enemyBaseCapture": "Vihollisten tukikohtaa vallataan!",
-    "enemyBaseCaptured": "Vihollisten tukikohta vallattu!",
+    "enemyBaseCapture": "Vihollisen tukikohtaa vallataan!",
+    "enemyBaseCaptured": "Vihollisen tukikohta vallattu!",
     "allyBaseCapture": "Omaa tukikohtaa vallataan!",
     "allyBaseCaptured": "Oma tukikohta vallattu!",
     "Timeleft": "Aikaa jäljellä",
@@ -40,39 +40,39 @@
 
     // FinalStatistics
     "Hit percent": "Osumaprosentti",
-    "Damage upon detecting": "Vauriota havattuihin",
+    "Damage upon detecting": "Vauriota havaittuihin",
     "Damage dealt": "Vauriota aiheutettu",
 
     // TeamRenderers
-    "TeamRenderersHeaderTip": "Xwn (tai xeff) luokitus.\nNähdäksesi tarkemmat tiedot, siirrä kursori pelaajan kohdalle.",
-    "Friend": "Liittolainen",
-    "Ignored": "Estetyt",
+    "TeamRenderersHeaderTip": "Xwn (tai xeff) luokitus.\nNähdäksesi tarkemmat tiedot, siirrä hiiren kursori pelaajan kohdalle.",
+    "Friend": "Kaveri",
+    "Ignored": "Estetty",
     "Load statistics": "Lataa tilastot",
     "enabled": "päällä",
     "disabled": "pois päältä",
 
     // UserInfo
-    "UserInfoEHint": "Tankkikohtainen effienssi.\nArvot on päivitetty viimeksi: \u0025DATE\u0025\nKatso tämänhetkiset arvot yksityiskohtaisista vaunun tiedoista.\nTietojen tarkkuus riippuu lähdetiedoista.",
+    "UserInfoEHint": "Vaunukohtainen tehokkuus.\nArvot on päivitetty viimeksi: \u0025DATE\u0025\nKatso tämänhetkiset arvot vaunun yksityiskohtaisista tiedoista.\nSarakkeen arvojen tarkkuus riippuu lähdetietojen laadusta.",
     "Data was updated at": "Tiedot päivitetty",
     " to ": " ",
     "EFF": "EFF",
     "updated": "päivitetty",
     "unknown": "tuntematon",
-    "Avg level": "Keskitaso",
+    "Avg level": "Keskiarvo",
     "Spotted": "Havaittu",
-    "Defence": "Puollustettu",
+    "Defence": "Puolustettu",
     "Capture": "Vallattu",
-    "player (average / top)": "Pelaaja (Keskiarvo/maksimi)",
-    "Spec dmg": "Vahinko havattuihin",
+    "player (average / top)": "pelaaja (keskiarvo / maksimi)",
+    "Spec dmg": "Vahinkoa havaittuihin",
 
     // UserInfo - filters
     "Filter": "Suodatin",
-    "All tanks": "Kaikki tankit",
-    "Show all tanks in the game": "Näytä kaikki pelin tankit",
-    "Player tanks": "Pelaajan tankit",
-    "Show all tanks played": "Näytä kaikki pelatut tankit",
+    "All tanks": "Kaikki vaunut",
+    "Show all tanks in the game": "Näytä pelin kaikki vaunut",
+    "Player tanks": "Pelaajan vaunut",
+    "Show all tanks played": "Näytä kaikki pelatut vaunut",
     "In hangar": "Tallissa",
-    "Show only tanks in own hangar": "Näytä vain tallissa olevat",
+    "Show only tanks in own hangar": "Näytä vain omassa tallissa olevat vaunut",
 
     // UserInfo - buttons
     "Level": "Taso",
@@ -83,24 +83,24 @@
     "Wins": "Voitot",
 
     // Crew
-    "PutOwnCrew": "Aseta tankille koulutettu miehistö",
+    "PutOwnCrew": "Aseta vaunun oma miehistö",
     "PutBestCrew": "Aseta paras miehistö",
-    "PutClassCrew": "Put same class crew",
+    "PutClassCrew": "Aseta saman vaunuluokan miehistö",
 
     // Squad
     "Vehicle": "Vaunu",
-    "Battle tiers": "Taistelutaso",
-    "ussr": "Venäjä",
+    "Battle tiers": "Taistelutasot",
+    "ussr": "Neuvostoliitto",
     "germany": "Saksa",
     "usa": "USA",
     "france": "Ranska",
-    "uk": "Britti",
+    "uk": "Iso-Britannia",
     "china": "Kiina",
     "HT": "HT",
     "MT": "MT",
     "LT": "LT",
     "TD": "TD",
-    "SPG": "Arty",
+    "SPG": "SPG",
 
     // VehicleMarkersManager
     "blownUp": "Räjähti!"

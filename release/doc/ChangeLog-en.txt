@@ -2,6 +2,7 @@
   * new options (xvm-autologin.swf):
       login/skipIntro - Skip intro movie
       login/autologin - Auto enter to the game
+  * localization: added Romanian language
 
   [FIXES]
   * minimap: fixed enemy teamkiller color
