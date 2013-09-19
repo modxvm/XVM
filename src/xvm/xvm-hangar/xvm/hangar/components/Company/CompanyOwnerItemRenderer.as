@@ -73,10 +73,8 @@ package xvm.hangar.components.Company
                 Stat.loadUserData(this, onStatLoaded, playerName, false);
         }
 
-        private function onStatLoaded(stat:StatData):void
+        private function onStatLoaded():void
         {
-            Logger.add("onStatLoaded");
-            //Logger.addObject(stat);
             effField.htmlText = "<span class='eff'>" + TeamRendererHelper.formatXVMStatText(playerName) + "</span>";
         }
 

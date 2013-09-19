@@ -48,9 +48,14 @@ package com.xvm
             return stat[name];
         }
 
-        public static function getUserData(name:String):StatData
+        public static function getUserDataByName(name:String):StatData
         {
-            return stat[name];
+            return instance.user[name + ";0"];
+        }
+
+        public static function getUserDataById(id:String):StatData
+        {
+            return instance.user[id.toString() + ";1"];
         }
 
         public static function loadBattleStat(target:Object, callback:Function, force:Boolean = false):void
@@ -224,12 +229,13 @@ package com.xvm
             var key2:String = null;
             try
             {
-                var response:StatData = ObjectConverter.convertData(JSONx.parse(json_str), StatData);
+                var sd:StatData = ObjectConverter.convertData(JSONx.parse(json_str), StatData);
+                calculateStatValues(sd);
                 //Logger.addObject(response, "response", 2);
-                key1 = response.nm + ";0";
-                user[key1] = response;
-                key2 = response._id + ";1";
-                user[key2] = response;
+                key1 = sd.nm + ";0";
+                user[key1] = sd;
+                key2 = sd._id + ";1";
+                user[key2] = sd;
                 //Logger.add(key1 + ", " + key2);
             }
             catch (e:Error)
@@ -239,12 +245,12 @@ package com.xvm
             }
             finally
             {
-                processUserListener(key1, response);
-                processUserListener(key2, response);
+                processUserListener(key1);
+                processUserListener(key2);
             }
         }
 
-        private function processUserListener(key:String, response:StatData):void
+        private function processUserListener(key:String):void
         {
             if (key == null)
                 return;
@@ -256,7 +262,7 @@ package com.xvm
                     for (var i:Number = 0; i < l.length; ++i)
                     {
                         var o:Object = l[i];
-                        o.callback.call(o.target, response);
+                        o.callback.call(o.target);
                     }
                     delete listenersUser[key];
                 }

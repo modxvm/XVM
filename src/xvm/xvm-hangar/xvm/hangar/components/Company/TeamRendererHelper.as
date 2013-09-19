@@ -14,7 +14,7 @@ package xvm.hangar.components.Company
     {
         public static function formatXVMStatText(playerName:String):String
         {
-            var stat:StatData = Stat.getUserData(playerName);
+            var stat:StatData = Stat.getUserDataByName(playerName);
             if (Config.config.hangar.xwnInCompany == true)
             {
                 return isNaN(stat.wn) ? "--" :
@@ -31,7 +31,7 @@ package xvm.hangar.components.Company
 
         public static function getToolTipData(data:PlayerInfo, playerName:String):String
         {
-            var stat:StatData = Stat.getUserData(playerName);
+            var stat:StatData = Stat.getUserDataByName(playerName);
             if (stat == null)
                 return null;
 

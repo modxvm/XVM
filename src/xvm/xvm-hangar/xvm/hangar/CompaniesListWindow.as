@@ -33,7 +33,7 @@ package xvm.hangar
             try
             {
                 //Logger.add("onAfterPopulate: " + view.as_alias);
-return;
+
                 if (Config.config.rating.showPlayersStatistics != true)
                     return;
                 if (Config.config.rating.enableCompanyStatistics != true)

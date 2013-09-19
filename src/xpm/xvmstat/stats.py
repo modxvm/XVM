@@ -76,9 +76,10 @@ class _Stat(object):
         self.req = self.queue.get()
         self.resp = None
         self.thread = threading.Thread(target=self.req['func'])
-        self.thread.daemon = True
         self.thread.start()
-        BigWorld.callback(0.05, self._checkResult)
+        if self.req['method'] == RESPOND_USERDATA:
+            self.thread.join() # TODO: main thread blocks execution. find alternative
+        self._checkResult()
 
     def _checkResult(self):
         with self.lock:
@@ -219,7 +220,7 @@ class _Stat(object):
         (value, isId) = self.req['args']
         if isId:
             value = str(int(value))
-        cacheKey = "%s,%d" % (value, isId)
+        cacheKey = "%s;%d" % (value, isId)
         data = None
         if cacheKey not in self.cacheUser:
             try:
@@ -233,8 +234,8 @@ class _Stat(object):
                     data = json.loads(responseFromServer)[0]
                     self._fix(data)
                     if data is not None and 'nm' in data and '_id' in data:
-                        self.cacheUser[data['nm'] + ",0"] = data
-                        self.cacheUser[str(data['_id']) + ",1"] = data
+                        self.cacheUser[data['nm'] + ";0"] = data
+                        self.cacheUser[str(data['_id']) + ";1"] = data
 
             except Exception, ex:
                 err('_get_user() exception: ' + traceback.format_exc(ex))
