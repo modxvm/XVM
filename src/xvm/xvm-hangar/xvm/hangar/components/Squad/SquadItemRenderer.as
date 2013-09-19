@@ -20,7 +20,6 @@ package xvm.hangar.components.Squad
         public function SquadItemRenderer(proxy:net.wg.gui.prebattle.squad.SquadItemRenderer):void
         {
             this.proxy = proxy;
-            Config.load(this, onConfigLoaded);
         }
 
         private var configUI:Boolean = false;
@@ -36,7 +35,7 @@ package xvm.hangar.components.Squad
             if (!proxy.data || proxy.data.dummy)
                 return null;
 
-            if (!Config.loaded || !Config.config.squad.enabled)
+            if (!Config.config.squad.enabled)
                 return null;
 
             var ti:Object = getTankInfo(proxy.model.vShortName);
@@ -53,8 +52,8 @@ package xvm.hangar.components.Squad
             if (!proxy.data || proxy.data.dummy)
                 return;
 
-            // UI and Config ready
-            if (!configUI || !Config.loaded)
+            // UI ready
+            if (!configUI)
                 return;
 
             if (!Config.config.squad.enabled)
@@ -82,11 +81,6 @@ package xvm.hangar.components.Squad
         // -- Private
 
         private var vehicleTierField:TextField = null;
-
-        private function onConfigLoaded():void
-        {
-            displayVehicleTier();
-        }
 
         private function getTankInfo(localizedShortName:String):Object
         {
