@@ -2,6 +2,7 @@ package xvm.UI.companiesWindow
 {
     import com.xvm.*;
     import flash.events.Event;
+    import flash.events.MouseEvent;
     import xvm.hangar.components.BattleLoading.*;
     import xvm.hangar.components.Company.CompanyOwnerItemRenderer;
 
@@ -27,6 +28,12 @@ package xvm.UI.companiesWindow
             //Logger.add("UI_CompanyListItemRenderer::setData()");
             super.setData(data);
             worker.setData(data);
+        }
+
+        override protected function handleMouseRollOver(e:flash.events.MouseEvent):void
+        {
+            super.handleMouseRollOver(e);
+            worker.handleMouseRollOver(e);
         }
     }
 }

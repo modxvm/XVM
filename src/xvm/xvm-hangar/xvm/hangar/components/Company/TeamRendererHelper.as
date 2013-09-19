@@ -29,9 +29,10 @@ package xvm.hangar.components.Company
             }
         }
 
-        public static function getToolTipData(data:PlayerInfo, playerName:String):String
+        public static function getToolTipData(fullPlayerName:String, data:Object):String
         {
-            var stat:StatData = Stat.getUserDataByName(playerName);
+            var pname:String = WGUtils.GetPlayerName(fullPlayerName);
+            var stat:StatData = Stat.getUserDataByName(pname);
             if (stat == null)
                 return null;
 
@@ -44,8 +45,7 @@ package xvm.hangar.components.Company
             var s:String = "";
 
             // line 1
-            var pname:String = data.displayName;
-            s += WGUtils.GetPlayerName(pname) + "<font color='#CCCCCC'>" + WGUtils.GetClanNameWithBrackets(pname) + "</font>";
+            s += pname + "<font color='#CCCCCC'>" + WGUtils.GetClanNameWithBrackets(fullPlayerName) + "</font>";
             s += "<br>";
             // line 2
             s += "WN6: " + (!stat.wn ? "--" :

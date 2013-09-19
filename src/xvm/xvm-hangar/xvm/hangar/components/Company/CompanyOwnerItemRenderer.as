@@ -32,8 +32,6 @@ package xvm.hangar.components.Company
                 proxy.addChild(effField);
 
                 playerName = null;
-
-                proxy.addEventListener(MouseEvent.ROLL_OVER, onRollOver);
             }
             catch (ex:Error)
             {
@@ -44,16 +42,14 @@ package xvm.hangar.components.Company
 
         public function configUI():void
         {
-            //Logger.add('configUI()');
             var updateCheckBox:CheckBox = proxy.owner.parent.getChildByName("updateStatCheckBox") as CheckBox;
-            //Logger.addObject(updateCheckBox);
             updateCheckBox.addEventListener(Event.SELECT, onUpdateClick);
         }
 
         public function setData(data:Object):void
         {
-            //Logger.add("setData: " + (data == null ? "(null)" : data.creatorName));
-            //Logger.addObject(data, "setData");
+            App.toolTipMgr.hide();
+
             if (data == null || !data.creatorName)
                 return;
 
@@ -61,6 +57,26 @@ package xvm.hangar.components.Company
             var updateCheckBox:CheckBox = proxy.owner.parent.getChildByName("updateStatCheckBox") as CheckBox;
             if (updateCheckBox.selected)
                 onUpdateClick();
+        }
+
+        public function handleMouseRollOver(e:MouseEvent):void
+        {
+            try
+            {
+                if (playerName == null)
+                    return;
+                var sd:StatData = Stat.getUserDataByName(playerName);
+                if (sd == null)
+                    return;
+                var tip:String = TeamRendererHelper.getToolTipData(proxy.data.creatorName, proxy.data);
+                if (tip == null)
+                    return;
+                App.toolTipMgr.show(tip);
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
         }
 
         // PRIVATE
@@ -76,20 +92,6 @@ package xvm.hangar.components.Company
         private function onStatLoaded():void
         {
             effField.htmlText = "<span class='eff'>" + TeamRendererHelper.formatXVMStatText(playerName) + "</span>";
-        }
-
-        private function onRollOver():void
-        {
-            Logger.add("onRollOver");
-            //if (stat != null)
-            var tip:String = TeamRendererHelper.getToolTipData(proxy.data as PlayerInfo, playerName);
-            if (tip != null)
-                App.toolTipMgr.show(tip);
-            //else
-            {
-                //if (proxy.toolTip != null)
-                //    App.toolTipMgr.show(proxy.toolTip);
-            }
         }
     }
 

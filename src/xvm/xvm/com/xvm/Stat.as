@@ -45,17 +45,19 @@ package com.xvm
 
         public static function getData(name:String):StatData
         {
-            return stat[name];
+            return stat.hasOwnProperty(name) ? stat[name] : null;
         }
 
         public static function getUserDataByName(name:String):StatData
         {
-            return instance.user[name + ";0"];
+            var key:String = name + ";0";
+            return instance.user.hasOwnProperty(key) ? instance.user[key] : null;
         }
 
         public static function getUserDataById(id:String):StatData
         {
-            return instance.user[id.toString() + ";1"];
+            var key:String = id.toString() + ";1";
+            return instance.user.hasOwnProperty(key) ? instance.user[key] : null;
         }
 
         public static function loadBattleStat(target:Object, callback:Function, force:Boolean = false):void

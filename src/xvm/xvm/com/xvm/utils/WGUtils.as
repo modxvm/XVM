@@ -29,6 +29,8 @@ package com.xvm.utils
 
         public static function GetClanNameWithoutBrackets(fullplayername:String):String
         {
+            if (fullplayername == null)
+                return "";
             var pos:Number = fullplayername.indexOf("[");
             if (pos < 0)
                 return "";
