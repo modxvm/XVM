@@ -7,10 +7,10 @@
     "XVM_translator": "RedMor <contact@by-reservation.com>, Vlad VirusX",
 
     // Ping
-    "Initialization": "Initialization",
+    "Initialization": "Ініціалізація",
 
     // BattleLoading
-    "New version available": "New version available",
+    "New version available": "Доступна нова версія",
 
     // Win chance
     "Chance error": "Помилка розрахунку шансів",
@@ -28,13 +28,13 @@
     "Last": "Останній",
 
     // Hp Left
-    "hpLeftTitle": "Залишилося HP:",
+    "hpLeftTitle": "Залишилось HP:",
 
     // Capture
-    "enemyBaseCapture": "Захоплення ворожої бази!",
-    "enemyBaseCaptured": "Ворожа база захоплена!",
-    "allyBaseCapture": "Захоплення нашої бази!",
-    "allyBaseCaptured": "Наша база захоплена!",
+    "enemyBaseCapture": "Захоплення бази союзниками!",
+    "enemyBaseCaptured": "База захоплена союзниками!",
+    "allyBaseCapture": "Захоплення бази ворогами!",
+    "allyBaseCaptured": "База захоплена ворогами!",
     "Timeleft": "Залишилось",
     "Capturers": "Загарбників",
 
@@ -44,7 +44,7 @@
     "Damage dealt": "Нанесені пошкодження",
 
     // TeamRenderers
-    "TeamRenderersHeaderTip": "Рейтинг xwn.\nЩоб побачити більш детальну інформацію, наведіть курсор миші на значення рейтингу гравця.",
+    "TeamRenderersHeaderTip": "Рейтинг xwn (або xeff).\nЩоб побачити більш детальну інформацію, наведіть курсор миші на значення рейтингу гравця.",
     "Friend": "Друг",
     "Ignored": "Ігнор",
     "Load statistics": "Завантажити статистику",
@@ -71,8 +71,8 @@
     "Show all tanks in the game": "Показати всі танки в грі",
     "Player tanks": "Танки гравця",
     "Show all tanks played": "Показати всі танки, на яких грав",
-    "In hangar": "В Гаражі",
-    "Show only tanks in own hangar": "Показувати тільки танки у своєму Гаражі",
+    "In hangar": "В ангарі",
+    "Show only tanks in own hangar": "Показати тільки танки у своєму ангарі",
 
     // UserInfo - buttons
     "Level": "Рівень",
@@ -85,7 +85,7 @@
     // Crew
     "PutOwnCrew": "Рідний екіпаж",
     "PutBestCrew": "Кращий екіпаж",
-    "PutClassCrew": "Put same class crew",
+    "PutClassCrew": "Екіпаж того ж класу",
 
     // Squad
     "Vehicle": "Танк",
