@@ -85,7 +85,7 @@
     // Crew
     "PutOwnCrew": "Použít vlastní posádku",
     "PutBestCrew": "Použít nejlepší posádku",
-    "PutSameClassCrew": "Použít posádku stejné třídy",
+    "PutClassCrew": "Použít posádku stejné třídy",
 
     // Squad
     "Vehicle": "Vozidlo",
