@@ -52,8 +52,9 @@ package xvm.hangar.components.Company
 
         public function setData(data:Object):void
         {
-            Logger.add("setData: " + (data == null ? "(null)" : data.label));
-            if (data == null || !data.uid)
+            //Logger.add("setData: " + (data == null ? "(null)" : data.creatorName));
+            //Logger.addObject(data, "setData");
+            if (data == null || !data.creatorName)
                 return;
 
             effField.htmlText = "";
@@ -66,20 +67,22 @@ package xvm.hangar.components.Company
 
         private function onUpdateClick(e:Event = null):void
         {
-            playerName = WGUtils.GetPlayerName(proxy.data.owner);
-            Logger.addObject("onUpdateClick() " + playerName);
+            playerName = WGUtils.GetPlayerName(proxy.data.creatorName);
+            //Logger.add("onUpdateClick() " + playerName);
             if (playerName != null)
                 Stat.loadUserData(this, onStatLoaded, playerName, false);
         }
 
         private function onStatLoaded(stat:StatData):void
         {
+            Logger.add("onStatLoaded");
             //Logger.addObject(stat);
             effField.htmlText = "<span class='eff'>" + TeamRendererHelper.formatXVMStatText(playerName) + "</span>";
         }
 
         private function onRollOver():void
         {
+            Logger.add("onRollOver");
             //if (stat != null)
             var tip:String = TeamRendererHelper.getToolTipData(proxy.data as PlayerInfo, playerName);
             if (tip != null)

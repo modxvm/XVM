@@ -13,7 +13,7 @@ def getBattleStat(proxy, args):
 
 def getUserData(proxy, args):
     _stat.queue.put({
-        'func':_stat.getUserStat,
+        'func':_stat.getUserData,
         'proxy':proxy,
         'method':RESPOND_USERDATA,
         'args':args})
@@ -231,6 +231,7 @@ class _Stat(object):
                     err('Empty response or parsing error')
                 else:
                     data = json.loads(responseFromServer)[0]
+                    self._fix(data)
                     if data is not None and 'nm' in data and '_id' in data:
                         self.cacheUser[data['nm'] + ",0"] = data
                         self.cacheUser[str(data['_id']) + ",1"] = data
@@ -302,22 +303,23 @@ class _Stat(object):
 
         player = BigWorld.player()
 
-        # TODO: optimize
-        for vehId in self.players:
-            pl = self.players[vehId]
-            if pl.playerId == stat['_id']:
-                stat['clan'] = pl.clan
-                stat['name'] = pl.name
-                stat['team'] = TEAM_ALLY if player.team == pl.team else TEAM_ENEMY
-                stat['alive'] = pl.alive
-                stat['ready'] = pl.ready
-                if pl.vn == stat['vn'].upper():
-                    stat['vname'] = pl.vName
-                    stat['icon'] = pl.vIcon
-                    stat['maxHealth'] = pl.maxHealth
-                    stat['vtype'] = pl.vType
-                    stat['level'] = pl.vLevel
-                break;
+        if self.players is not None:
+            # TODO: optimize
+            for vehId in self.players:
+                pl = self.players[vehId]
+                if pl.playerId == stat['_id']:
+                    stat['clan'] = pl.clan
+                    stat['name'] = pl.name
+                    stat['team'] = TEAM_ALLY if player.team == pl.team else TEAM_ENEMY
+                    stat['alive'] = pl.alive
+                    stat['ready'] = pl.ready
+                    if pl.vn == stat['vn'].upper():
+                        stat['vname'] = pl.vName
+                        stat['icon'] = pl.vIcon
+                        stat['maxHealth'] = pl.maxHealth
+                        stat['vtype'] = pl.vType
+                        stat['level'] = pl.vLevel
+                    break;
 
         #log(json.dumps(stat))
         return stat

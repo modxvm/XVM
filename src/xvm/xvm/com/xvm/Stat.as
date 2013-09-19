@@ -181,9 +181,10 @@ package com.xvm
 
         private function loadUserData(target:Object, callback:Function, value:String, isId:Boolean):void
         {
-            //Logger.add("TRACE: loadUserStat(): target=" + String(target));
+            //Logger.add("TRACE: loadUserData(): target=" + String(target));
             try
             {
+                var inProgress:Boolean = false;
                 if (callback != null)
                 {
                     var key:String = value + (isId ? ";1" : ";0");
@@ -192,10 +193,22 @@ package com.xvm
                         callback.call(target, user[key]);
                         return;
                     }
-                    listenersUser[key] = { target:target, callback:callback };
+                    if (!listenersUser.hasOwnProperty(key))
+                        listenersUser[key] = new Vector.<Object>();
+                    else
+                    {
+                        for each (var l:Object in listenersUser[key])
+                        {
+                            if (l.target == target && l.callback == callback)
+                                return;
+                        }
+                        inProgress = true;
+                    }
+                    listenersUser[key].push({ target:target, callback:callback });
                 }
 
-                Cmd.loadUserData(value, isId);
+                if (!inProgress)
+                    Cmd.loadUserData(value, isId);
             }
             catch (e:Error)
             {
@@ -206,15 +219,18 @@ package com.xvm
 
         private function userLoaded(json_str:String):void
         {
-            //Logger.add("TRACE: statLoaded()");
+            //Logger.add("TRACE: userLoaded()");
+            var key1:String = null;
+            var key2:String = null;
             try
             {
-                var response:Object = JSONx.parse(json_str);
+                var response:StatData = ObjectConverter.convertData(JSONx.parse(json_str), StatData);
                 //Logger.addObject(response, "response", 2);
-                var key:String = response.nm + ";0";
-                user[key] = response;
-                key = response._id + ";1";
-                user[key] = response;
+                key1 = response.nm + ";0";
+                user[key1] = response;
+                key2 = response._id + ";1";
+                user[key2] = response;
+                //Logger.add(key1 + ", " + key2);
             }
             catch (e:Error)
             {
@@ -223,20 +239,31 @@ package com.xvm
             }
             finally
             {
-                try
+                processUserListener(key1, response);
+                processUserListener(key2, response);
+            }
+        }
+
+        private function processUserListener(key:String, response:StatData):void
+        {
+            if (key == null)
+                return;
+            try
+            {
+                if (listenersUser.hasOwnProperty(key))
                 {
-                    var l:Object = listenersUser[response.nm];
-                    l.callback.call(l.target, response);
-                    delete listenersUser[response.nm];
+                    var l:Vector.<Object> = listenersUser[key];
+                    for (var i:Number = 0; i < l.length; ++i)
+                    {
+                        var o:Object = l[i];
+                        o.callback.call(o.target, response);
+                    }
+                    delete listenersUser[key];
                 }
-                catch (e:Error)
-                {
-                    Logger.add(e.getStackTrace());
-                }
-                catch (e:*)
-                {
-                    Logger.addObject(e, "exception");
-                }
+            }
+            catch (e:Error)
+            {
+                Logger.add(e.getStackTrace());
             }
         }
 
