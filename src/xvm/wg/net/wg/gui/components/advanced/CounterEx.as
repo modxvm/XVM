@@ -1,6 +1,6 @@
 package net.wg.gui.components.advanced 
 {
-    import fl.motion.easing.*;
+    //import fl.motion.easing.*;
     import flash.display.*;
     import flash.text.*;
     import net.wg.utils.*;
@@ -191,7 +191,7 @@ package net.wg.gui.components.advanced
             var loc1:*=0;
             if (this.playAnim) 
             {
-                this.tween = new scaleform.clik.motion.Tween(this.speed, this, {"tweenNum":this.number}, {"paused":false, "ease":fl.motion.easing.Cubic.easeOut, "onComplete":null});
+                this.tween = new scaleform.clik.motion.Tween(this.speed, this, {"tweenNum":this.number}, {"paused":false, "ease":null/*fl.motion.easing.Cubic.easeOut*/, "onComplete":null});
             }
             else 
             {

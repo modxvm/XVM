@@ -25,6 +25,7 @@ import net.wg.gui.messenger.controls.*; MemberItemRenderer;
 import net.wg.gui.prebattle.company.*; CompaniesListWindow; CompanyWindow;
 import net.wg.gui.prebattle.squad.*; SquadWindow; MessengerUtils;
 import net.wg.gui.intro.*; IntroPage;
+import net.wg.gui.lobby.battleResults.*; BattleResults; CommonStats;
 
 /**
  * UIs

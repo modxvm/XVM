@@ -70,7 +70,8 @@ package net.wg.gui.components.advanced
                 loc3 = getButtonAt(loc2);
                 if (loc3 != null) 
                 {
-                    if (loc4 = loc3 as net.wg.infrastructure.interfaces.entity.IDisposable) 
+                    loc4 = loc3 as net.wg.infrastructure.interfaces.entity.IDisposable
+                    if (loc4)
                     {
                         loc4.dispose();
                     }

@@ -67,7 +67,8 @@ package net.wg.gui.lobby.battleResults
                 loc2.index = loc7;
                 if (!(this._stripeRenderer == "") && loc2.data.isEpic) 
                 {
-                    if (loc8 = this.stripes[loc7]) 
+                    loc8 = this.stripes[loc7];
+                    if (loc8)
                     {
                         loc8.x = loc2.x - Math.round((loc8.width - loc2.width) / 2);
                         loc8.y = loc2.y - Math.round((loc8.height - loc2.height) / 2);

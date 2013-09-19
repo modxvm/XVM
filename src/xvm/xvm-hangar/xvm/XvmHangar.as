@@ -83,7 +83,8 @@ package xvm
             "battleLoading",
             "prb_windows/companiesWindow",
             "prb_windows/companyWindow",
-            "prb_windows/squadWindow"
+            "prb_windows/squadWindow",
+            "battleResults"
         ]);
         private function onViewLoaded(e:LoaderEvent):void
         {
@@ -119,6 +120,9 @@ package xvm
                     break;
                 case "prb_windows/squadWindow":
                     mod = new SquadWindow(view);
+                    break;
+                case "battleResults":
+                    //mod = new BattleResults(view);
                     break;
             }
             if (mod != null && populated)

@@ -1,6 +1,6 @@
 /**
- * XVM - lobby
- * @author Maxim Schedriviy <m.schedriviy@gmail.com>
+ * XVM - squad window
+ * @author Pavel Máca
  */
 package xvm.hangar
 {
