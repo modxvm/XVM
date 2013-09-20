@@ -4,6 +4,7 @@
  */
 package com.xvm.utils
 {
+	import flash.display.Sprite;
     import flash.utils.*;
     import flash.text.*;
     import flash.filters.*;
@@ -211,17 +212,31 @@ package com.xvm.utils
                 textFormat.font, textFormat.size, textFormat.align, textFormat.bold, textFormat.italic));
         }
 
-        /*
-        public static function createButton(mc:MovieClip, name:String, x:Number, y:Number, txt:String, align:String):MovieClip
+        
+        public static function createButton(mc:Sprite, name:String, _x:Number, _y:Number, txt:String, align:String):ButtonNormal
         {
-            var b:MovieClip = mc.attachMovie("Button", name, mc.getNextHighestDepth());
-            b._x = x;
-            b._y = y;
-            b.autoSize = true;
+			var b:ButtonNormal = mc.addChild(new ButtonNormal()) as ButtonNormal;
+            b.x = _x;
+            b.y = _y;
+			b.autoSize = align;
             b.label = txt;
-
-            if (align == "right")
-                b._x -= Math.round(b.textField.textWidth + 21);
+			
+			b.addEventListener("rollOver", showTooltip);
+            b.addEventListener("rollOut", hideTooltip);
+            return b;
+        }
+		
+		
+        public static function createRadioButton(mc:Sprite, name:String, _x:Number, _y:Number, _width:Number, txt:String, group:String, align:String):RadioButton
+        {
+			var b:RadioButton = mc.addChild(new RadioButton()) as RadioButton;
+            b.x = _x;
+            b.y = _y;
+            b.autoSize = "none";
+            b.width = _width;
+            b.label = txt;
+			b.groupName = group;
+			b.autoSize = align;
 
             b.addEventListener("rollOver", showTooltip);
             b.addEventListener("rollOut", hideTooltip);
@@ -229,15 +244,14 @@ package com.xvm.utils
             return b;
         }
 
-        public static function createRadioButton(mc:MovieClip, name:String, x:Number, y:Number, width:Number, txt:String, group:String):MovieClip
+        public static function createCheckBox(mc:Sprite, name:String, _x:Number, _y:Number, txt:String, align:String):CheckBox
         {
-            var b:MovieClip = mc.attachMovie("RadioButton", name, mc.getNextHighestDepth());
-            b._x = x;
-            b._y = y;
-            b.autoSize = false;
-            b.width = width;
+			var b:CheckBox = mc.addChild(new CheckBox()) as CheckBox;
+           
+            b.x = _x;
+            b.y = _y;
+            b.autoSize = align;
             b.label = txt;
-            b.group = group;
 
             b.addEventListener("rollOver", showTooltip);
             b.addEventListener("rollOut", hideTooltip);
@@ -245,32 +259,16 @@ package com.xvm.utils
             return b;
         }
 
-        public static function createCheckBox(mc:MovieClip, name:String, x:Number, y:Number, txt:String, align:String):MovieClip
+        public static function createTextInput(mc:Sprite, name:String, _x:Number, _y:Number, _width:Number):TextInput
         {
-            var b:MovieClip = mc.attachMovie("CheckBox", name, mc.getNextHighestDepth());
-            b._x = x;
-            b._y = y;
-            b.autoSize = true;
-            b.label = txt;
-
-            if (align == "right")
-                b._x -= Math.round(b.textField.textWidth + 21);
-
-            b.addEventListener("rollOver", showTooltip);
-            b.addEventListener("rollOut", hideTooltip);
-
-            return b;
-        }
-
-        public static function createTextInput(mc:MovieClip, name:String, x:Number, y:Number, width:Number):gfx.controls.TextInput
-        {
-            var c:gfx.controls.TextInput = gfx.controls.TextInput(mc.attachMovie("TextInput", name, mc.getNextHighestDepth()));
-            c._x = x;
-            c._y = y;
-            c._width = width;
+			var c:TextInput = mc.addChild(new TextInput()) as TextInput;
+            c.x = _x;
+            c.y = _y;
+            c.width = _width;
             return c;
         }
 
+		/*
         public static function duplicateButton(src:Object, name:String, offsetX:Number, offsetY:Number,
             text:String, iconSource:String, toolTip:String):MovieClip
         {
@@ -287,28 +285,29 @@ package com.xvm.utils
             mc.configUI();
 
             return mc;
-        }
+        }*/
 
-        public static function addEventListeners(obj:Object, target:Object, handlers:Object):Void
+        public static function addEventListeners(obj:Object, target:Object, handlers:Object):void
         {
             if (!obj || !target || !handlers)
                 return;
-            for (var name in handlers)
+            for (var name:* in handlers)
                 obj.addEventListener(name, target, handlers[name]);
         }
-
-        private static function showTooltip(e:Object):Void
+		
+        private static function showTooltip(e:Object):void
         {
-            var b = e.target;
+            var b:* = e.target;
             if (b.tooltipText)
-                net.wargaming.managers.ToolTipManager.instance.show(b.tooltipText);
+                App.toolTipMgr.showComplex(b.tooltipText);
         }
 
-        private static function hideTooltip(e:Object):Void
+        private static function hideTooltip(e:Object):void
         {
-            net.wargaming.managers.ToolTipManager.instance.hide();
+			App.toolTipMgr.hide();
+            //net.wargaming.managers.ToolTipManager.instance.hide();
         }
-*/
+		
         /**
          * Create DropShadowFilter from config section
          */
