@@ -190,6 +190,7 @@ package com.xvm.misc
         private static function getUserInfoSection():CUserInfo
         {
             var c:CUserInfo = new CUserInfo();
+            c.startPage = 4;
             c.showFilters = true;              // Show tank filters
             c.filterFocused = true;            // Set the default focus to the filter text input
             c.inHangarFilterEnabled = false;   // Enable In hangar radio button by default

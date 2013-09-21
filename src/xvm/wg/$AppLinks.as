@@ -26,15 +26,11 @@ import net.wg.gui.prebattle.company.*; CompaniesListWindow; CompanyWindow;
 import net.wg.gui.prebattle.squad.*; SquadWindow; MessengerUtils;
 import net.wg.gui.intro.*; IntroPage;
 import net.wg.gui.lobby.battleResults.*; BattleResults; CommonStats;
+import net.wg.gui.lobby.profile.*; Profile;
 
 /**
  * UIs
  */
-
-// controls.swf
-ButtonBlack; ButtonCaps; ButtonCapsRed; ButtonIcon; ButtonIconText; ButtonNormal; ButtonRed;
-CheckBox; CheckBoxFilter; CheckBoxTankers; IconText; LabelControl; NumericStepper;
-RadioButton; RedButton; Slider; TextFieldShort; TextInput; UILoaderAlt; UILoaderCut;
 
 // battleLoading.swf
 LeftItemRendererUI; RightItemRendererUI;

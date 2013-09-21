@@ -7,14 +7,13 @@ package xvm
     import flash.display.*;
     import flash.events.*;
     import flash.utils.*;
-    import net.wg.gui.components.common.MainViewContainer;
+    import net.wg.infrastructure.interfaces.*;
     import net.wg.infrastructure.events.*;
+    import net.wg.gui.components.common.*;
+    import net.wg.infrastructure.managers.impl.*;
     import com.xvm.*;
-    import net.wg.infrastructure.interfaces.IManagedContainer;
-    import net.wg.infrastructure.interfaces.IView;
-    import net.wg.infrastructure.managers.impl.ContainerManager;
     import xvm.hangar.*;
-    import xvm.hangar.components.PingServers.PingServers;
+    import xvm.hangar.components.PingServers.*;
 
     public class XvmHangar extends Sprite
     {
@@ -84,7 +83,8 @@ package xvm
             "prb_windows/companiesWindow",
             "prb_windows/companyWindow",
             "prb_windows/squadWindow",
-            "battleResults"
+            "battleResults",
+            "profile"
         ]);
         private function onViewLoaded(e:LoaderEvent):void
         {
@@ -96,7 +96,7 @@ package xvm
 
         private function processView(view:IView, populated:Boolean = false):void
         {
-            //Logger.add("Process view: " + view.as_alias);
+            //Logger.add("Process view: " + view.as_alias + " class=" + getQualifiedClassName(view));
             var mod:IXvmMod = null;
             switch (view.as_alias)
             {
@@ -124,6 +124,8 @@ package xvm
                 case "battleResults":
                     //mod = new BattleResults(view);
                     break;
+                case "profile":
+                    mod = new Profile(view);
             }
             if (mod != null && populated)
             {

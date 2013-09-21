@@ -86,6 +86,9 @@
   // UserInfo window.
   // Окно достижений.
   "userInfo": {
+    // Initial page (1, 2, 3, 4).
+    // Номер начальной страницы (1, 2, 3, 4).
+    "startPage": 4,
     // true - Show filters on tanks.
     // true - показывать фильтры отображения танков.
     "showFilters": true,

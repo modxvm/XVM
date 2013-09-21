@@ -1,4 +1,4 @@
-package net.wg.gui.lobby.profile.pages.summary 
+package net.wg.gui.lobby.profile.pages.summary
 {
     import flash.display.*;
     import flash.events.*;
@@ -9,7 +9,7 @@ package net.wg.gui.lobby.profile.pages.summary
     import net.wg.infrastructure.base.meta.*;
     import net.wg.infrastructure.base.meta.impl.*;
     import scaleform.clik.core.*;
-    
+
     public class ProfileSummary extends net.wg.infrastructure.base.meta.impl.ProfileSummaryMeta implements net.wg.infrastructure.base.meta.IProfileSummaryMeta
     {
         public function ProfileSummary()
@@ -35,7 +35,7 @@ package net.wg.gui.lobby.profile.pages.summary
 
         protected override function applyResizing():void
         {
-            if (layoutManager) 
+            if (layoutManager)
             {
                 layoutManager.setDimension(currentDimension.x, currentDimension.y);
             }
@@ -114,12 +114,12 @@ package net.wg.gui.lobby.profile.pages.summary
 
         protected override function handleStageChange(arg1:flash.events.Event):void
         {
-            if (arg1.type == flash.events.Event.ADDED_TO_STAGE) 
+            if (arg1.type == flash.events.Event.ADDED_TO_STAGE)
             {
                 removeEventListener(flash.events.Event.ADDED_TO_STAGE, this.handleStageChange, false);
                 addEventListener(flash.events.Event.RENDER, validateNow, false, 0, true);
                 addEventListener(flash.events.Event.ENTER_FRAME, validateNow, false, 0, true);
-                if (stage != null) 
+                if (stage != null)
                 {
                     stage.invalidate();
                 }
@@ -130,7 +130,7 @@ package net.wg.gui.lobby.profile.pages.summary
         protected override function onDispose():void
         {
             super.onDispose();
-            if (this.lineTextFieldsLayout) 
+            if (this.lineTextFieldsLayout)
             {
                 this.lineTextFieldsLayout.dispose();
                 this.lineTextFieldsLayout = null;
@@ -143,14 +143,15 @@ package net.wg.gui.lobby.profile.pages.summary
             var loc2:*=null;
             var loc3:*=null;
             var loc1:*=0;
-            while (loc1 < arg1.numChildren) 
+            while (loc1 < arg1.numChildren)
             {
                 loc2 = arg1.getChildAt(loc1) as flash.display.DisplayObjectContainer;
-                if (loc3 = loc2 as scaleform.clik.core.UIComponent) 
+                loc3 = loc2 as scaleform.clik.core.UIComponent;
+                if (loc3)
                 {
                     loc3.validateNow();
                 }
-                if (loc2) 
+                if (loc2)
                 {
                     validateChildren(loc2);
                 }

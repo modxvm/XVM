@@ -7,6 +7,7 @@ package xvm.hangar.components.Company
     import flash.text.*;
     import flash.utils.*;
     import net.wg.data.daapi.PlayerInfo;
+    import net.wg.gui.components.controls.CheckBox;
     import net.wg.gui.prebattle.company.CompaniesListWindow;
     import net.wg.gui.prebattle.company.CompanyListItemRenderer;
     import xvm.hangar.components.Company.*;

@@ -1,11 +1,12 @@
 /**
- * XVM - login page
+ * XVM - companies list window
  * @author Maxim Schedriviy <m.schedriviy@gmail.com>
  */
 package xvm.hangar
 {
     import flash.events.*;
     import flash.utils.*;
+    import net.wg.gui.components.controls.CheckBox;
     import net.wg.infrastructure.interfaces.*;
     import net.wg.infrastructure.events.*;
     import net.wg.gui.prebattle.company.*;
@@ -41,7 +42,7 @@ package xvm.hangar
 
                 page.cmpList.itemRenderer = UI_CompanyListItemRenderer;
 
-                updateCheckBox = new CheckBox();
+                updateCheckBox = App.utils.classFactory.getComponent("CheckBox", CheckBox);
                 updateCheckBox.name = "updateStatCheckBox";
                 updateCheckBox.autoSize = "left";
                 updateCheckBox.label = Locale.get("Load statistics");
