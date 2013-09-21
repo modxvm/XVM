@@ -27,10 +27,11 @@ from pprint import pprint
 import datetime
 import json
 import traceback
-from random import randint
-from urllib2 import urlopen
-import threading
 import time
+from random import randint
+from urlparse import urlparse
+import httplib
+from threading import Thread, RLock
 from Queue import Queue
 
 import BigWorld
@@ -50,7 +51,7 @@ class _Stat(object):
     def __init__(self):
         player = BigWorld.player()
         self.queue = Queue()
-        self.lock = threading.RLock()
+        self.lock = RLock()
         self.thread = None
         self.req = None
         self.resp = None
@@ -75,7 +76,7 @@ class _Stat(object):
             return
         self.req = self.queue.get()
         self.resp = None
-        self.thread = threading.Thread(target=self.req['func'])
+        self.thread = Thread(target=self.req['func'])
         self.thread.start()
         if self.req['method'] == RESPOND_USERDATA:
             self.thread.join() # TODO: main thread blocks execution. find alternative
@@ -241,7 +242,7 @@ class _Stat(object):
                 err('_get_user() exception: ' + traceback.format_exc(ex))
 
         with self.lock:
-            self.resp = self.cacheUser[cacheKey] if cacheKey in self.cacheUser else None
+            self.resp = self.cacheUser[cacheKey] if cacheKey in self.cacheUser else {}
 
 
     def _get_battle_stub(self, pl):
@@ -256,28 +257,33 @@ class _Stat(object):
         if not test:
             log('  HTTP: ' + str(members), '[INFO]  ')
 
-        url = url.replace('%1', members).replace('%2', _PUBLIC_TOKEN)
+        u = urlparse(url.replace('%1', members).replace('%2', _PUBLIC_TOKEN))
         #debug('loadUrl: ' + url )
         #time.sleep(10)
 
         duration = None
         responseFromServer = ''
         startTime = datetime.datetime.now()
-        response = None
-
+        conn = None
         try:
-            response = urlopen(url=url, timeout=self.timeout / 1000)
-            code = response.getcode()
+            #log(u)
+            conn = httplib.HTTPConnection(u.netloc, timeout=self.timeout/1000)
+            conn.request("GET", u.path)
+            resp = conn.getresponse()
+            #log(resp.status)
 
-            if code in [200, 202]:
+            if resp.status in [200, 202]:
                 # 200 OK, 202 Accepted
-                responseFromServer = response.read()
+                responseFromServer = resp.read()
+            else:
+                raise Exception('HTTP Error: [%i] %s' % (resp.status, resp.reason) )
+            conn.close()
 
         except Exception, ex:
             err('loadUrl failed: ' + str(ex))
         finally:
-            if response is not None:
-                response.close()
+            if conn is not None:
+                conn.close()
 
         elapsed = datetime.datetime.now() - startTime
         msec = elapsed.seconds * 1000 + elapsed.microseconds / 1000
