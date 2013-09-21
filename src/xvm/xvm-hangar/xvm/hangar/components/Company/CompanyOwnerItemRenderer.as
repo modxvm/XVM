@@ -6,11 +6,10 @@ package xvm.hangar.components.Company
     import flash.events.*;
     import flash.text.*;
     import flash.utils.*;
-    import net.wg.data.daapi.PlayerInfo;
-    import net.wg.gui.components.controls.CheckBox;
-    import net.wg.gui.prebattle.company.CompaniesListWindow;
-    import net.wg.gui.prebattle.company.CompanyListItemRenderer;
+    import net.wg.gui.components.controls.*;
+    import net.wg.gui.prebattle.company.*;
     import xvm.hangar.components.Company.*;
+    import xvm.UI.companiesWindow.*;
 
     public class CompanyOwnerItemRenderer
     {
@@ -32,6 +31,8 @@ package xvm.hangar.components.Company
                 effField.htmlText = "";
                 proxy.addChild(effField);
 
+                proxy.dd.itemRenderer = UI_CompanyDropItemRenderer;
+
                 playerName = null;
             }
             catch (ex:Error)
@@ -50,11 +51,11 @@ package xvm.hangar.components.Company
         public function setData(data:Object):void
         {
             App.toolTipMgr.hide();
+            effField.htmlText = "";
 
             if (data == null || !data.creatorName)
                 return;
 
-            effField.htmlText = "";
             var updateCheckBox:CheckBox = proxy.owner.parent.getChildByName("updateStatCheckBox") as CheckBox;
             if (updateCheckBox.selected)
                 onUpdateClick();

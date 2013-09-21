@@ -38,6 +38,7 @@ LeftItemRendererUI; RightItemRendererUI;
 
 // companiesWindow.swf
 CompanyListItemRendererUI;
+CompanyDropItemRendererUI;
 
 // squadWindow.swf
 squadItemRendererUI;

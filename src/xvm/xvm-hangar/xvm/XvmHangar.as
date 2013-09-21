@@ -98,7 +98,7 @@ package xvm
 
         private function processView(view:IView, populated:Boolean = false):void
         {
-            Logger.add("Process view: " + view.as_alias + " class=" + getQualifiedClassName(view));
+            //Logger.add("Process view: " + view.as_alias + " class=" + getQualifiedClassName(view));
             var mod:IXvmMod = null;
             switch (view.as_alias)
             {

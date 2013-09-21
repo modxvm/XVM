@@ -14,7 +14,10 @@ package xvm.hangar.components.Company
     {
         public static function formatXVMStatText(playerName:String):String
         {
-            var stat:StatData = Stat.getUserDataByName(playerName);
+            var pname:String = WGUtils.GetPlayerName(playerName);
+            var stat:StatData = Stat.getUserDataByName(pname);
+            if (stat == null)
+                return "";
             if (Config.config.hangar.xwnInCompany == true)
             {
                 return isNaN(stat.wn) ? "--" :
@@ -36,7 +39,7 @@ package xvm.hangar.components.Company
             if (stat == null)
                 return null;
 
-            var prefix:String =
+            var prefix:String = // TODO
                 MessengerUtils.isFriend(data) ? '<font color="#66FF66">' + Locale.get("Friend") + '</font><br>' :
                 MessengerUtils.isIgnored(data) ? '<font color="#FF6666">' + Locale.get("Ignored") + '</font><br>' : "";
 
