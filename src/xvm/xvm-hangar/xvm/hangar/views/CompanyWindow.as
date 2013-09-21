@@ -1,8 +1,8 @@
 /**
- * XVM - login page
+ * XVM - company window
  * @author Maxim Schedriviy <m.schedriviy@gmail.com>
  */
-package xvm.hangar
+package xvm.hangar.views
 {
     import flash.events.*;
     import flash.utils.*;
@@ -10,6 +10,7 @@ package xvm.hangar
     import net.wg.infrastructure.events.*;
     import net.wg.gui.prebattle.company.*;
     import com.xvm.*;
+    import xvm.hangar.*;
     import xvm.hangar.components.Company.*;
 
     public class CompanyWindow extends XvmModBase

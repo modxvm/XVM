@@ -2,18 +2,19 @@
  * XVM - login page
  * @author Maxim Schedriviy <m.schedriviy@gmail.com>
  */
-package xvm.hangar
+package xvm.hangar.views
 {
     import flash.events.*;
     import flash.utils.*;
-    import net.wg.gui.components.controls.ReadOnlyScrollingList;
+    import net.wg.infrastructure.interfaces.*;
+    import net.wg.infrastructure.events.*;
     import net.wg.gui.lobby.battleloading.*;
-    import net.wg.infrastructure.interfaces.IView;
-    import net.wg.infrastructure.events.LifeCycleEvent;
+    import net.wg.gui.components.controls.*;
     import com.xvm.*;
     import xvm.hangar.components.BattleLoading.*;
     import xvm.UI.battleLoading.*;
-    import xvm.hangar.components.WinChances.WinChances;
+    import xvm.hangar.*;
+    import xvm.hangar.components.WinChances.*;
 
     public class BattleLoading extends XvmModBase
     {

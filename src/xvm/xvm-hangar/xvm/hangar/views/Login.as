@@ -2,7 +2,7 @@
  * XVM - login page
  * @author Maxim Schedriviy <m.schedriviy@gmail.com>
  */
-package xvm.hangar
+package xvm.hangar.views
 {
     import flash.events.*;
     import flash.utils.*;
@@ -11,6 +11,7 @@ package xvm.hangar
     import net.wg.infrastructure.events.LifeCycleEvent;
     import com.xvm.*;
     import com.xvm.types.cfg.*;
+    import xvm.hangar.*;
     import xvm.hangar.components.PingServers.*;
 
     public class Login extends XvmModBase

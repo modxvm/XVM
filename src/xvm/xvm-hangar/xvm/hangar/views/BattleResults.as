@@ -2,7 +2,7 @@
  * XVM - battle resultes
  * @author Pavel Máca
  */
-package xvm.hangar
+package xvm.hangar.views
 {
     import com.xvm.*;
     import net.wg.gui.events.ViewStackEvent;

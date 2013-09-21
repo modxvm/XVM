@@ -13,6 +13,7 @@ package xvm
     import net.wg.infrastructure.managers.impl.*;
     import com.xvm.*;
     import xvm.hangar.*;
+    import xvm.hangar.views.*;
     import xvm.hangar.components.PingServers.*;
 
     public class XvmHangar extends Sprite
@@ -84,7 +85,8 @@ package xvm
             "prb_windows/companyWindow",
             "prb_windows/squadWindow",
             "battleResults",
-            "profile"
+            "profile",
+            "profileWindow"
         ]);
         private function onViewLoaded(e:LoaderEvent):void
         {
@@ -96,7 +98,7 @@ package xvm
 
         private function processView(view:IView, populated:Boolean = false):void
         {
-            //Logger.add("Process view: " + view.as_alias + " class=" + getQualifiedClassName(view));
+            Logger.add("Process view: " + view.as_alias + " class=" + getQualifiedClassName(view));
             var mod:IXvmMod = null;
             switch (view.as_alias)
             {
@@ -125,7 +127,9 @@ package xvm
                     //mod = new BattleResults(view);
                     break;
                 case "profile":
+                case "profileWindow":
                     mod = new Profile(view);
+                    break;
             }
             if (mod != null && populated)
             {

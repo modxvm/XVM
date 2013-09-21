@@ -2,7 +2,7 @@
  * XVM - companies list window
  * @author Maxim Schedriviy <m.schedriviy@gmail.com>
  */
-package xvm.hangar
+package xvm.hangar.views
 {
     import flash.events.*;
     import flash.utils.*;
@@ -13,6 +13,7 @@ package xvm.hangar
     import com.xvm.*;
     import com.xvm.l10n.Locale;
     import xvm.UI.companiesWindow.*;
+    import xvm.hangar.*;
     import xvm.hangar.components.Company.*;
 
     public class CompaniesListWindow extends XvmModBase

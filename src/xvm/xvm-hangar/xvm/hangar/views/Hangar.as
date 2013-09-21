@@ -1,13 +1,14 @@
 /**
- * XVM - lobby
+ * XVM - hangar
  * @author Maxim Schedriviy <m.schedriviy@gmail.com>
  */
-package xvm.hangar
+package xvm.hangar.views
 {
     import net.wg.gui.lobby.hangar.Hangar;
     import net.wg.infrastructure.interfaces.*;
     import net.wg.infrastructure.events.*;
     import com.xvm.*;
+    import xvm.hangar.*;
     import xvm.hangar.components.Crew.*;
 
     public class Hangar extends XvmModBase

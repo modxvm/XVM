@@ -2,7 +2,7 @@
  * XVM - user info
  * @author Maxim Schedriviy <m.schedriviy@gmail.com>
  */
-package xvm.hangar
+package xvm.hangar.views
 {
     import flash.events.*;
     import flash.utils.*;
@@ -10,8 +10,11 @@ package xvm.hangar
     import net.wg.gui.lobby.profile.*;
     import net.wg.infrastructure.interfaces.*;
     import net.wg.infrastructure.events.*;
+    import net.wg.gui.lobby.profile.*;
+    import net.wg.gui.lobby.window.*;
     import com.xvm.*;
     import com.xvm.l10n.Locale;
+    import xvm.hangar.*;
 
     public class Profile extends XvmModBase
     {
@@ -20,9 +23,15 @@ package xvm.hangar
             super(view);
         }
 
-        public function get page():net.wg.gui.lobby.profile.Profile
+        public function get tabNavigator():ProfileTabNavigator
         {
-            return super.view as net.wg.gui.lobby.profile.Profile;
+            var profile:net.wg.gui.lobby.profile.Profile = view as net.wg.gui.lobby.profile.Profile;
+            if (profile != null)
+                return profile.tabNavigator;
+            var profileWindow:net.wg.gui.lobby.window.ProfileWindow = view as net.wg.gui.lobby.window.ProfileWindow;
+            if (profileWindow != null)
+                return profileWindow.tabNavigator;
+            return null;
         }
 
         public override function onAfterPopulate(e:LifeCycleEvent):void
@@ -44,14 +53,14 @@ package xvm.hangar
         {
             //page.tabNavigator.viewStack.
 
-            page.tabNavigator.bar.addEventListener(IndexEvent.INDEX_CHANGE, onTabBarIndexChanged, false, 0, true);
+            tabNavigator.bar.addEventListener(IndexEvent.INDEX_CHANGE, onTabBarIndexChanged, false, 0, true);
         }
 
         private function onTabBarIndexChanged(e:IndexEvent):void
         {
-            page.tabNavigator.bar.removeEventListener(IndexEvent.INDEX_CHANGE, onTabBarIndexChanged);
+            tabNavigator.bar.removeEventListener(IndexEvent.INDEX_CHANGE, onTabBarIndexChanged);
             App.utils.scheduler.envokeInNextFrame(
-                function():void { page.tabNavigator.bar.selectedIndex = Config.config.userInfo.startPage - 1; } );
+                function():void { tabNavigator.bar.selectedIndex = Config.config.userInfo.startPage - 1; } );
         }
     }
 }
