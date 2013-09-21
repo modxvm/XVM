@@ -1,10 +1,11 @@
 <gui_settings.xml>
-  <eulaURL>http://worldoftanks.ru/user_agreement?language={0}</eulaURL>
   <registrationURL>http://worldoftanks.ru/registration/new/</registrationURL>
   <paymentURL>https://worldoftanks.ru/personal/payment/?user=%(userEncoded)s</paymentURL>
   <finPasswordURL>
   </finPasswordURL>
   <migrationURL>http://wot.kongzhong.com/jihuo/jihuo.html?%s</migrationURL>
+  <securitySettingsURL>https://ru.wargaming.net/personal/?utm_source=game-client&amp;utm_medium=notify&amp;utm_campaign=change-password</securitySettingsURL>
+  <recoveryPswdURL>https://ru.wargaming.net/personal/password_reset/new/</recoveryPswdURL>
   <nations_order>
     <_1>	ussr	</_1>
     <_2>germany</_2>
@@ -12,12 +13,12 @@
     <_4>france</_4>
     <_5>uk</_5>
     <_6>china</_6>
+    <_7>japan</_7>
   </nations_order>
   <minimapSize>	True	</minimapSize>
   <goldTransfer>False</goldTransfer>
   <voiceChat>	True	</voiceChat>
   <technicalInfo>	True	</technicalInfo>
-  <nationHangarSpace>False</nationHangarSpace>
   <customizationCamouflages>	True	</customizationCamouflages>
   <customizationHorns>False</customizationHorns>
   <customizationEmblems>	True	</customizationEmblems>
@@ -34,6 +35,7 @@
   <clearLoginValue>False</clearLoginValue>
   <specPrebatlesVisible>	True	</specPrebatlesVisible>
   <battleStatsInHangar>	True	</battleStatsInHangar>
+  <igrCredentialsReset>False</igrCredentialsReset>
   <rssUrl>http://worldoftanks.ru/news/rss/ru/</rssUrl>
   <language_bar>
     <lang>zh_cn</lang>
@@ -41,5 +43,15 @@
     <lang>ko</lang>
     <lang>ja</lang>
   </language_bar>
-  <showMovingText>False</showMovingText>
+  <movingText>
+    <show>False</show>
+    <internalBrowser>False</internalBrowser>
+  </movingText>
+  <freeXpToTankman>False</freeXpToTankman>
+  <eula>
+    <full>
+      <lang>ko</lang>
+    </full>
+    <url>http://worldoftanks.ru/user_agreement?language={0}</url>
+  </eula>
 </gui_settings.xml>

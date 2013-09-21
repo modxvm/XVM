@@ -27,40 +27,26 @@
           <over>/GUI/buttons/highlight</over>
           <press>/GUI/buttons/yes1</press>
         </sounds>
-        <groups>
-          <iconButton>
-          </iconButton>
-          <iconTextButton>
-          </iconTextButton>
-          <okButton>
-          </okButton>
-          <messengerButton>
-          </messengerButton>
-          <radioButton>
-          </radioButton>
-          <checkBox>
-          </checkBox>
-          <dropDownMenu>
-          </dropDownMenu>
-          <dropDownItemRenderer>
-          </dropDownItemRenderer>
-          <maintenanceDDRenderer>
-          </maintenanceDDRenderer>
-          <trainingBtn>
-          </trainingBtn>
-        </groups>
+        <groups>iconButton
+          iconTextButton
+          okButton
+          messengerButton
+          radioButton
+          checkBox
+          dropDownMenu
+          dropDownItemRenderer
+          maintenanceDDRenderer
+          shellItemRenderer
+          artefactRenderer
+          trainingBtn</groups>
       </positiveCtl>
       <closeCtl>
         <sounds>
           <over>/GUI/buttons/highlight</over>
           <press>/GUI/buttons/cancelcloseno</press>
         </sounds>
-        <groups>
-          <closeWindow>
-          </closeWindow>
-          <cancelButton>
-          </cancelButton>
-        </groups>
+        <groups>closeWindow
+          cancelButton</groups>
       </closeCtl>
       <minimizeWindow>
         <sounds>
@@ -100,18 +86,11 @@
           <over>/GUI/buttons/highlight</over>
           <press>/GUI/buttons/tabb</press>
         </sounds>
-        <groups>
-          <tab>
-          </tab>
-          <accordion>
-          </accordion>
-          <arrow>
-          </arrow>
-          <contextmenu>
-          </contextmenu>
-          <scrollBtn>
-          </scrollBtn>
-        </groups>
+        <groups>tab
+          accordion
+          arrow
+          contextmenu
+          scrollBtn</groups>
       </tabCtl>
       <rendererNormal>
         <sounds>
@@ -119,24 +98,15 @@
           <out>/GUI/buttons/highlight</out>
           <press>/GUI/buttons/yes1</press>
         </sounds>
-        <groups>
-          <squad>
-          </squad>
-          <rendererRecruit>
-          </rendererRecruit>
-          <shellRenderer>
-          </shellRenderer>
-          <techTreeRenderer>
-          </techTreeRenderer>
-          <barracksItemRendererBuy>
-          </barracksItemRendererBuy>
-          <barracksItemRenderer>
-          </barracksItemRenderer>
-          <barracksItemRendererEmpty>
-          </barracksItemRendererEmpty>
-          <customizationItemRenderer>
-          </customizationItemRenderer>
-        </groups>
+        <groups>itemRenderer
+          squad
+          rendererRecruit
+          shellRenderer
+          techTreeRenderer
+          barracksItemRendererBuy
+          barracksItemRenderer
+          barracksItemRendererEmpty
+          customizationItemRenderer</groups>
       </rendererNormal>
     </schemas>
     <overrides>
@@ -151,5 +121,8 @@
     <earn_credits>/GUI/buttons/coins</earn_credits>
     <earn_gold>/GUI/buttons/coins</earn_gold>
     <earn_credits_and_gold>/GUI/buttons/coins</earn_credits_and_gold>
+    <sound_mode_preview01>/ingame_voice/notifications_VO/enemy_hp_damaged_by_projectile_by_player</sound_mode_preview01>
+    <sound_mode_preview02>/ingame_voice/notifications_VO/enemy_killed_by_player</sound_mode_preview02>
+    <sound_mode_preview03>/ingame_voice/notifications_VO/enemy_fire_started_by_player</sound_mode_preview03>
   </effects>
 </gui_sounds.xml>
