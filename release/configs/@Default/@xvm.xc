@@ -27,7 +27,7 @@
 
   // Version of the editor.
   // Версия редактора.
-  "editorVersion": "0.60",
+  "editorVersion": "0.64",
 
   // Language used in mod
   // "auto" - automatically detect language from game client,
@@ -62,7 +62,7 @@
 
     // Config last modified.
     // Дата последней модификации конфига.
-    "date": "13.09.2013",
+    "date": "21.09.2013",
 
     // Supported version of the game.
     // Поддерживаемая версия игры.
