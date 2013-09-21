@@ -7,10 +7,10 @@
     "XVM_translator": "drhideg",
 
     // Ping
-    "Initialization": "Initialization",
+    "Initialization": "Inicializálás",
 
     // BattleLoading
-    "New version available": "New version available",
+    "New version available": "Új verzió elérhető",
 
     // Win chance
     "Chance error": "Esély lekérdezési hiba",
@@ -85,7 +85,7 @@
     // Crew
     "PutOwnCrew": "Saját legénység",
     "PutBestCrew": "Legjobb legénység",
-    "PutClassCrew": "Put same class crew",
+	"PutClassCrew": "Azonos típusú legénység",
 
     // Squad
     "Vehicle": "Jármű",
