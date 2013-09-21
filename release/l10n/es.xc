@@ -7,10 +7,10 @@
     "XVM_translator": "RKPhantom",
 
     // Ping
-    "Initialization": "Initialization",
+    "Initialization": "Inicializacion",
 
     // BattleLoading
-    "New version available": "New version available",
+    "New version available": "Nueva version disponible",
 
     // Win chance
     "Chance error": "Probabilidad de error",
@@ -85,7 +85,7 @@
     // Crew
     "PutOwnCrew": "Cargar tripulacion propia",
     "PutBestCrew": "Cargar la mejor tripulacion",
-    "PutClassCrew": "Put same class crew",
+    "PutClassCrew": "Cargar Tripulacion de la misma clase",
 
     // Squad
     "Vehicle": "Vehiculo",

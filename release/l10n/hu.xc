@@ -85,7 +85,7 @@
     // Crew
     "PutOwnCrew": "Saját legénység",
     "PutBestCrew": "Legjobb legénység",
-	"PutClassCrew": "Azonos típusú legénység",
+    "PutClassCrew": "Azonos típusú legénység",
 
     // Squad
     "Vehicle": "Jármű",
