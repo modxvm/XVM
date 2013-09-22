@@ -6,6 +6,8 @@ package xvm.hangar.views
 {
     import com.xvm.*;
     import flash.events.*;
+    import flash.text.TextField;
+    import flash.text.TextFieldAutoSize;
     import net.wg.gui.events.ViewStackEvent;
     import net.wg.gui.lobby.battleResults.BattleResults;
     import net.wg.gui.lobby.battleResults.CommonStats;
@@ -34,7 +36,6 @@ package xvm.hangar.views
             {
                 page.view_mc.addEventListener(ViewStackEvent.VIEW_CHANGED, this.onViewChanged);
                 page.tabs_mc.addEventListener(IndexEvent.INDEX_CHANGE, this.onTabIndexChange);
-                    //showChance();
             }
             catch (ex:Error)
             {
@@ -60,10 +61,10 @@ package xvm.hangar.views
                 }
 
                 // tabs: CommonStats, TeamStats, DetailsStats
+                //Logger.add("View loaded: battleResults." + e.linkage);
                 switch (e.linkage)
                 {
                     case "CommonStats":
-                        //Logger.add("View loaded: battleResults." + e.linkage);
                         CommonView.init(e.view as CommonStats);
                         break;
                 }
@@ -76,40 +77,64 @@ package xvm.hangar.views
             }
         }
 
-        private function showChance():void
-        {
-        /*
-           // Global stats switch
-           if (!Config.config.rating.showPlayersStatistics)
-           return;
-
-           if (Config.config.battleResults.showChances)
-           {
-
-           }
-
-           if (Config.config.battleResults.showChancesExp)
-           {
-
-           }
-           // TODO: show win chance
-           var tf:TextField = new TextField();
-           tf.selectable = false;
-           tf.text = "95145 %";
-           tf.x = 200;
-           tf.y = -20;
-           page.addChild(tf);
-         */
-        }
-
         private function onTabIndexChange(e:IndexEvent):void
         {
             page.tabs_mc.removeEventListener(IndexEvent.INDEX_CHANGE, this.onTabIndexChange);
-            App.utils.scheduler.envokeInNextFrame(function():void
-                {
-                    page.tabs_mc.selectedIndex = Config.config.battleResults.startPage - 1;
-                });
+
+            // set startPage
+            var startPage:Number = Config.config.battleResults.startPage - 1;
+            ;
+            if (page.tabs_mc.dataProvider[startPage] != null)
+                page.tabs_mc.selectedIndex = startPage;
+            else
+                Logger.add("battleResults: startPage \"" + startPage + "\" is out of range.");
+
+            // display win chance
+            if (Config.config.rating.showPlayersStatistics && Config.config.battleResults.showChances)
+                loadStats(page.data.team1, page.data.team2);
         }
+
+        private function loadStats(allyTeam:Array, enemyTeam:Array):void
+        {
+        /** {
+           "playerName": "Assassik [APO]",
+           "name": "Assassik",
+           "accountDBID": 504298250,
+           "userName": "Assassik",
+           "playerId": 504298250,
+           .... and more
+         }*/ /*
+           for each(var ally:Object in allyTeam)
+           {
+           ally.userName;
+           }
+
+           for each(var enemy:Object in enemyTeam)
+           {
+           enemy.userName;
+           }
+
+           onStatsLoaded();
+         */
+        }
+
+        private function onStatsLoaded():void
+        {
+            //var chance:String = Chance.GetChanceText(Config.config.battleResults.showChancesExp);
+            //createWinChanceField(chance);
+        }
+
+        private function createWinChanceField(chanceText:String):void
+        {
+            var tf:TextField = new TextField();
+            tf.selectable = false;
+            tf.autoSize = TextFieldAutoSize.LEFT;
+            tf.htmlText = "<font face='$TitleFont' size='16' color='#E9E7D6'>" + chanceText + "</font>";
+            tf.x = 200;
+            tf.y = -25;
+            page.addChild(tf);
+        }
+
     }
 
 }
