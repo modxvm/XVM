@@ -39,7 +39,7 @@
     "Capturers": "Panzer",
 
     // BattleResults
-    "Hit percent": "Trefferqoute",
+    "Hit percent": "Trefferquote",
     "Damage (assisted / own)": "Schaden (Aufklärung / Verursacht)",
 
     // TeamRenderers

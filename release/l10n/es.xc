@@ -38,10 +38,9 @@
     "Timeleft": "Tiempo restante",
     "Capturers": "Capturando",
 
-    // FinalStatistics
+    // BattleResults
     "Hit percent": "Tasa de impactos",
-    "Damage upon detecting": "Daño sobre detectados",
-    "Damage dealt": "Daño causado",
+    "Damage (assisted / own)": "Daño (asistido / propio)",
 
     // TeamRenderers
     "TeamRenderersHeaderTip": "Indice Xwn (o xeff).\nPara ver informacion detallada, mueva el cursor del raton sobre el nombre del jugador.",
