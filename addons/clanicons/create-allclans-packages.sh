@@ -11,7 +11,7 @@ cd archives
 datenow=`date +%Y%m%d`
 
 echo "Creating VN package"
-7za a -tzip -mm=deflate -mx0 -mmt=on -mtc=off -ssw -r clanicons-full-kr-$datenow.zip  ../icons/VTC/res_mods/ readme.txt
+7za a -tzip -mm=deflate -mx0 -mmt=on -mtc=off -ssw -r clanicons-full-vn-$datenow.zip  ../icons/VTC/res_mods/ readme.txt
 echo "Creating KR package"
 7za a -tzip -mm=deflate -mx0 -mmt=on -mtc=off -ssw -r clanicons-full-kr-$datenow.zip  ../icons/KR/res_mods/ readme.txt
 echo "Creating SEA package"
