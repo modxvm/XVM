@@ -124,7 +124,7 @@ package xvm
                     mod = new SquadWindow(view);
                     break;
                 case "battleResults":
-                    //mod = new BattleResults(view);
+                    mod = new BattleResults(view);
                     break;
                 case "profile":
                 case "profileWindow":

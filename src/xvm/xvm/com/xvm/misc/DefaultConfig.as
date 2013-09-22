@@ -30,7 +30,7 @@ package com.xvm.misc
             c.battleLoading = getBattleLoadingSection();
             c.statisticForm = getStatisticFormSection();
             c.playersPanel = getPlayersPanelSection();
-            c.finalStatistic = getFinalStatisticSection();
+            c.battleResults = getBattleResultsSection();
             c.turretMarkers = getTurretMarkersSection();
             c.expertPanel = getExpertPanelSection();
             c.minimap = getMinimapSection();
@@ -328,11 +328,12 @@ package com.xvm.misc
             return c;
         }
 
-        private static function getFinalStatisticSection():CFinalStatistic
+        private static function getBattleResultsSection():CBattleResults
         {
-            var c:CFinalStatistic = new CFinalStatistic();
+            var c:CBattleResults = new CBattleResults();
             c.startPage = 1;
-            c.sortColumn = 6; // XP
+            c.showNetIncome = true;
+            c.showExtendedInfo = true;
             c.showChances = false;
             c.showChancesExp = false;
             return c;

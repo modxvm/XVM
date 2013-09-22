@@ -4,9 +4,16 @@
       login/autologin - Auto enter to the game
       userInfo/startPage - Initial page (default: 4)
   * localization: added Romanian language
+  * battleResults:
+      display net income of credits in first page
+      display shots precision and damage in first page under credits and XP
 
   [FIXES]
   * minimap: fixed enemy teamkiller color
+
+  [OTHER]
+  * config: "finalStatistic" section renamed to "battleResults"
+  * battleResults: removed "sortColumn" option, build in since 0.8.8
 
 XVM-5.0.0-test2:
   * adaptation to WoT 0.8.8

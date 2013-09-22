@@ -111,10 +111,9 @@ package com.xvm.l10n
             "allyBaseCapture": "Захват базы врагами!",
             "allyBaseCaptured": "База захвачена врагами!",
 
-            // FinalStatistics
+            // BattleResults
             "Hit percent": "Процент попаданий",
-            "Damage upon detecting": "Урон по вашим разведданным",
-            "Damage dealt": "Нанесенный урон",
+            "Damage (assisted / own)": "Урон (по разведданным / нанесенный)",
 
             // TeamRenderers
             "TeamRenderersHeaderTip":

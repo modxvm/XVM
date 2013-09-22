@@ -1,4 +1,4 @@
-package net.wg.gui.lobby.battleResults 
+package net.wg.gui.lobby.battleResults
 {
     import flash.display.*;
     import flash.events.*;
@@ -8,7 +8,7 @@ package net.wg.gui.lobby.battleResults
     import net.wg.infrastructure.base.meta.*;
     import net.wg.infrastructure.base.meta.impl.*;
     import scaleform.clik.data.*;
-    
+
     public class BattleResults extends net.wg.infrastructure.base.meta.impl.BattleResultsMeta implements net.wg.infrastructure.base.meta.IBattleResultsMeta
     {
         public function BattleResults()
@@ -62,7 +62,7 @@ package net.wg.gui.lobby.battleResults
 
         public function as_setData(arg1:Object):void
         {
-            if (arg1) 
+            if (arg1)
             {
                 this._data = arg1;
                 this.tabs_mc.dataProvider = new scaleform.clik.data.DataProvider([{"label":MENU.FINALSTATISTIC_TABS_COMMONSTATS, "linkage":"CommonStats"}, {"label":MENU.FINALSTATISTIC_TABS_TEAMSTATS, "linkage":"TeamStats"}, {"label":MENU.FINALSTATISTIC_TABS_DETAILSSTATS, "linkage":"DetailsStats"}]);
@@ -79,15 +79,15 @@ package net.wg.gui.lobby.battleResults
         protected override function draw():void
         {
             super.draw();
-            if (this._wasPopulated) 
+            if (this._wasPopulated)
             {
-                if (this._data) 
+                if (this._data)
                 {
                     this.tabs_mc.visible = true;
                     this.line.visible = true;
                     this.noResult.visible = false;
                 }
-                else 
+                else
                 {
                     this.noResult.visible = true;
                 }

@@ -30,17 +30,17 @@ package xvm.hangar.components.BattleResultes
         {
             var instance:CommonView = new CommonView();
             instance.view = view;
-            instance.hideDetailBtn();
-            instance.hideQuestLabel();
-            instance.initTextFields();
-            instance.setData(view.detailsMc.data);
 
-            instance.showNetIncome(view.detailsMc.data);
+            if (Config.config.battleResults.showExtendedInfo)
+            {
+                instance.hideDetailBtn();
+                instance.hideQuestLabel();
+                instance.initTextFields();
+                instance.setData(view.detailsMc.data);
+            }
 
-        /*
-           view.detailsMc.y -= 5;
-           view.questList.y += 20;
-         view.questList.setSize(view.questList.width, view.questList.height - 20);*/
+            if (Config.config.battleResults.showNetIncome)
+                instance.showNetIncome(view.detailsMc.data);
         }
 
         private function hideDetailBtn():void
@@ -55,7 +55,6 @@ package xvm.hangar.components.BattleResultes
 
         private function showNetIncome(data:Object):void
         {
-            // TODO: remove extra space
             view.detailsMc.creditsLbl.htmlText = data.creditsNoPremTotalStr;
             view.detailsMc.premCreditsLbl.htmlText = data.creditsPremTotalStr;
         }
@@ -105,7 +104,7 @@ package xvm.hangar.components.BattleResultes
             return newTf;
         }
 
-        private function makeSpaceOnThousand(val:Number):String
+        private function formatThousand(val:Number):String
         {
             var res:String = val.toString();
             if (val >= 1000)
@@ -127,15 +126,15 @@ package xvm.hangar.components.BattleResultes
 
             var hitPercent:Number;
             if (data.shots > 0)
-                hitPercent = Math.round((data.hits / data.shots * 100) * 100) / 100;
+                hitPercent = (data.hits / data.shots) * 100;
             else
                 hitPercent = 0;
 
-            shotsPercent.htmlText = formatText(hitPercent + "%", "#C9C9B6", TextFormatAlign.RIGHT);
+            shotsPercent.htmlText = formatText(hitPercent.toFixed(2) + "%", "#C9C9B6", TextFormatAlign.RIGHT);
 
-            damageAssistedTitle.htmlText = formatText(Locale.get("Damage (assisted /  shots)"), "#C9C9B6");
-            damageAssistedValue.htmlText = formatText(makeSpaceOnThousand(data.damageAssisted), "#408CCF", TextFormatAlign.RIGHT);
-            damageValue.htmlText = formatText(makeSpaceOnThousand(data.damageDealt), "#FFC133", TextFormatAlign.RIGHT);
+            damageAssistedTitle.htmlText = formatText(Locale.get("Damage (assisted / own)"), "#C9C9B6");
+            damageAssistedValue.htmlText = formatText(formatThousand(data.damageAssisted), "#408CCF", TextFormatAlign.RIGHT);
+            damageValue.htmlText = formatText(formatThousand(data.damageDealt), "#FFC133", TextFormatAlign.RIGHT);
         }
 
     }

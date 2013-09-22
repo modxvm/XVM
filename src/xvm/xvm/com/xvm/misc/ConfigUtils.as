@@ -158,6 +158,11 @@ package com.xvm.misc
                         delete s.formatRight;
                     }
                 }
+                if (config.finalStatistic != null && config.battleResults == null)
+                {
+                    config.battleResults = config.finalStatistic;
+                    delete config.finalStatistic;
+                }
                 v = "5.0.0";
             }
 

@@ -16,7 +16,7 @@ package com.xvm.types.cfg
         public var hangar:CHangar;
         public var userInfo:CUserInfo;
         public var squad:CSquad;
-        public var finalStatistic:CFinalStatistic;
+        public var battleResults:CBattleResults;
         public var battle:CBattle;
         public var battleLoading:CBattleLoading;
         public var statisticForm:CStatisticForm;
