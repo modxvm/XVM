@@ -17,7 +17,7 @@ echo "Creating KR package"
 echo "Creating SEA package"
 7za a -tzip -mm=deflate -mx0 -mmt=on -mtc=off -ssw -r clanicons-full-sea-$datenow.zip ../icons/SEA/res_mods/ readme.txt
 echo "Creating NA package"
-7za a -tzip -mm=deflate -mx0 -mmt=on -mtc=off -ssw -r clanicons-full-us-$datenow.zip  ../icons/US/res_mods/ readme.txt
+7za a -tzip -mm=deflate -mx0 -mmt=on -mtc=off -ssw -r clanicons-full-na-$datenow.zip  ../icons/US/res_mods/ readme.txt
 echo "Creating EU package"
 7za a -tzip -mm=deflate -mx0 -mmt=on -mtc=off -ssw -r clanicons-full-eu-$datenow.zip  ../icons/EU/res_mods/ readme.txt
 echo "Creating RU package"
