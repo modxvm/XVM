@@ -104,14 +104,12 @@ package xvm.hangar.components.Squad
 
         private function createVehicleTierField():void
         {
-            vehicleTierField = Utils.cloneTextField(proxy.vehicleNameField);
+            vehicleTierField = new TextField();
 
             // copy filters
             vehicleTierField.filters = proxy.vehicleNameField.filters;
 
-            // customize TextFormat
-            var tf:TextFormat = proxy.vehicleNameField.getTextFormat();
-            vehicleTierField.styleSheet = Utils.createTextStyleSheet("xvm_vehicleTier", tf);
+            vehicleTierField.styleSheet = Utils.createTextStyleSheet("xvm_vehicleTier", proxy.vehicleNameField.defaultTextFormat);
 
             // size & position
             vehicleTierField.width = 35;

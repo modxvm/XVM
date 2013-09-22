@@ -4,6 +4,7 @@ package xvm.hangar.components.BattleResultes
     import com.xvm.l10n.Locale;
     import com.xvm.utils.Utils;
     import flash.text.TextField;
+    import flash.text.TextFieldAutoSize;
     import flash.text.TextFormatAlign;
     import net.wg.gui.lobby.battleResults.CommonStats;
 
@@ -71,12 +72,13 @@ package xvm.hangar.components.BattleResultes
 
         private function createTextField(position:String, line:Number):TextField
         {
-            var newTf:TextField;
+            var newTf:TextField = new TextField();
             var orig:TextField;
             switch (position)
             {
                 case FIELD_POS_TITLE:
                     orig = view.detailsMc.xpTitleLbl;
+                    newTf.autoSize = TextFieldAutoSize.LEFT;
                     break;
                 case FIELD_POS_NON_PREM:
                     orig = view.detailsMc.xpLbl;
@@ -87,12 +89,11 @@ package xvm.hangar.components.BattleResultes
                 default:
                     return null;
             }
-
-            newTf = Utils.cloneTextField(orig, false);
             newTf.x = orig.x;
             newTf.alpha = 1;
 
-            newTf.styleSheet = Utils.createTextStyleSheet(CSS_FIELD_CLASS, view.detailsMc.xpTitleLbl.getTextFormat());
+            newTf.styleSheet = Utils.createTextStyleSheet(CSS_FIELD_CLASS, view.detailsMc.xpTitleLbl.defaultTextFormat);
+            newTf.selectable = false;
 
             var y_space:Number = view.detailsMc.xpTitleLbl.height;
             var y_pos:Number = view.detailsMc.xpTitleLbl.y;
