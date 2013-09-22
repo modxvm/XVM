@@ -7,10 +7,10 @@
     "XVM_translator": "Edgar 'LaCourgette' Fournival",
 
     // Ping
-    "Initialization": "Initialization",
+    "Initialization": "Initialisation",
 
     // BattleLoading
-    "New version available": "New version available",
+    "New version available": "Nouvelle version disponible",
 
     // Win chance
     "Chance error": "Erreur lors du calcul des chances",
@@ -22,7 +22,7 @@
     "attack": "attaque",
     "fire": "incendie",
     "ramming": "collision",
-    "world_collision": "chûte",
+    "world_collision": "chute",
     "Hits": "Tirs",
     "Total": "Total",
     "Last": "Dernier",
@@ -53,7 +53,7 @@
 
     // UserInfo
     "UserInfoEHint": "Efficacité par véhicule.\nLes valeurs affichées sont basées sur la dernière mise à jour des stats : \u0025DATE\u0025\nLes valeurs actuelles sont visibles dans les infos détaillées du char.\nLa précision des valeurs dans les colonnes dépend de la qualité des données.",
-    "Data was updated at": "Data was updated at",
+    "Data was updated at": "Données mises à jour le ",
     " to ": " à ",
     "EFF": "EFF",
     "updated": "mis-à-jour",
@@ -85,7 +85,7 @@
     // Crew
     "PutOwnCrew": "Mettre l'équipage adéquat",
     "PutBestCrew": "Mettre le meilleur équipage",
-    "PutClassCrew": "Put same class crew",
+    "PutClassCrew": "Mettre l'équipage de même classe",
 
     // Squad
     "Vehicle": "Véhicule",
