@@ -113,7 +113,7 @@ package com.xvm.l10n
 
             // BattleResults
             "Hit percent": "Процент попаданий",
-            "Damage (assisted / own)": "Урон (по разведданным / нанесенный)",
+            "Damage (assisted / own)": "Урон (по разведданным / свой)",
 
             // TeamRenderers
             "TeamRenderersHeaderTip":
