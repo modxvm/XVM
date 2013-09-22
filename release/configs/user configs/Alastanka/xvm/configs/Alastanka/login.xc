@@ -29,8 +29,8 @@
   },
 
   "login": {
-    // Ping servers; works only with xvm-stat.exe
-    // Пинг серверов; работает только с xvm-stat.exe
+    // Ping servers
+    // Пинг серверов
     "pingServers": {
       "$ref": { "file": "hangar.xc", "path": "hangar.pingServers" },
       // true - Show ping to the servers

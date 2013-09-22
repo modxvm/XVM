@@ -13,8 +13,8 @@
     // true - Enable widgets
     // true - включить виджеты
     "widgetsEnabled": false,
-    // Ping servers; works only with xvm-stat.exe
-    // Пинг серверов; работает только с xvm-stat.exe
+    // Ping servers
+    // Пинг серверов
     "pingServers": {
       // true - Enable display of ping to the servers
       // true - показывать пинг до серверов
