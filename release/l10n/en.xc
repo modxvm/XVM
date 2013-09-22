@@ -38,10 +38,9 @@
     "Timeleft": "Timeleft",
     "Capturers": "Capturers",
 
-    // FinalStatistics
+    // BattleResults
     "Hit percent": "Hit percent",
-    "Damage upon detecting": "Damage upon detecting",
-    "Damage dealt": "Damage dealt",
+    "Damage (assisted / own)": "Damage (assisted / own)",
 
     // TeamRenderers
     "TeamRenderersHeaderTip": "Xwn (or xeff) rating.\nTo see detailed information, move mouse cursor to the player's name.",

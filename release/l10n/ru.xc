@@ -38,10 +38,9 @@
     "Timeleft": "Осталось",
     "Capturers": "Захватчиков",
 
-    // FinalStatistics
+    // BattleResults
     "Hit percent": "Процент попаданий",
-    "Damage upon detecting": "Урон по вашим разведданным",
-    "Damage dealt": "Нанесенный урон",
+    "Damage (assisted / own)": "Урон (по разведданным / нанесенный)",
 
     // TeamRenderers
     "TeamRenderersHeaderTip": "Рейтинг xwn (или xeff).\nЧтобы увидеть более подробную информацию, наведите курсор мыши на значение рейтинга интересующего игрока.",

@@ -38,10 +38,9 @@
     "Timeleft": "Čas",
     "Capturers": "Vozidel",
 
-    // FinalStatistics
+    // BattleResults
     "Hit percent": "Zásahů / Výstřelů \u0025",
-    "Damage upon detecting": "Pomoc při poškození (pásy/detekce)",
-    "Damage dealt": "Poškození",
+    "Damage (assisted / own)": "Poškození (asistence / vlastní)",
 
     // TeamRenderer
     "TeamRenderersHeaderTip": "XWM hodnocení.\nPro zobrazení detailních informací, přejeďte kurzorem na jméno hráče.",
