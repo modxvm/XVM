@@ -6,12 +6,12 @@ package xvm.hangar.views
 {
     import com.xvm.*;
     import flash.events.*;
-    import flash.text.TextField;
     import net.wg.gui.events.ViewStackEvent;
     import net.wg.gui.lobby.battleResults.BattleResults;
     import net.wg.gui.lobby.battleResults.CommonStats;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
+    import scaleform.clik.events.IndexEvent;
     import xvm.hangar.components.BattleResultes.CommonView;
     import xvm.hangar.XvmModBase;
 
@@ -33,7 +33,8 @@ package xvm.hangar.views
             try
             {
                 page.view_mc.addEventListener(ViewStackEvent.VIEW_CHANGED, this.onViewChanged);
-                //showChance();
+                page.tabs_mc.addEventListener(IndexEvent.INDEX_CHANGE, this.onTabIndexChange);
+                    //showChance();
             }
             catch (ex:Error)
             {
@@ -77,48 +78,37 @@ package xvm.hangar.views
 
         private function showChance():void
         {
-            /*
-            // Global stats switch
-            if (!Config.config.rating.showPlayersStatistics)
-                return;
+        /*
+           // Global stats switch
+           if (!Config.config.rating.showPlayersStatistics)
+           return;
 
-            if (Config.config.battleResults.showChances)
-            {
+           if (Config.config.battleResults.showChances)
+           {
 
-            }
+           }
 
-            if (Config.config.battleResults.showChancesExp)
-            {
+           if (Config.config.battleResults.showChancesExp)
+           {
 
-            }
-            // TODO: show win chance
-            var tf:TextField = new TextField();
-            tf.selectable = false;
-            tf.text = "95145 %";
-            tf.x = 200;
-            tf.y = -20;
-            page.addChild(tf);
-            */
+           }
+           // TODO: show win chance
+           var tf:TextField = new TextField();
+           tf.selectable = false;
+           tf.text = "95145 %";
+           tf.x = 200;
+           tf.y = -20;
+           page.addChild(tf);
+         */
         }
 
-        public function setStartPage(index:Number, currentView:IViewStackContent):void
+        private function onTabIndexChange(e:IndexEvent):void
         {
-            // TODO: startPage
-            /*
-            var data:Object = page.tabs_mc.dataProvider[index - 1];
-            if (data != null)
-            {
-                if (page.view_mc.currentView)
+            page.tabs_mc.removeEventListener(IndexEvent.INDEX_CHANGE, this.onTabIndexChange);
+            App.utils.scheduler.envokeInNextFrame(function():void
                 {
-                    page.view_mc.currentView.visible = false; // not working
-                }
-                page.tabs_mc.selectedIndex = index - 1;
-                page.tabs_mc.invalidate();
-            }
-            else
-            {
-                Logger.add("BattleResults: startPage out of range (" + index + ")");
-            }*/
+                    page.tabs_mc.selectedIndex = Config.config.battleResults.startPage - 1;
+                });
         }
     }
 
