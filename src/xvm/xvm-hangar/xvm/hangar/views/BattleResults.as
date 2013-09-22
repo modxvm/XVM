@@ -49,26 +49,26 @@ package xvm.hangar.views
 
         private var processedViews:Array = [];
 
-        private function onViewChanged(event:ViewStackEvent):void
+        private function onViewChanged(e:ViewStackEvent):void
         {
             try
             {
-                if (processedViews.indexOf(event.linkage) != -1)
+                if (processedViews.indexOf(e.linkage) != -1)
                 {
                     // TODO: better fix for multiple modding one view
                     return;
                 }
 
                 // tabs: CommonStats, TeamStats, DetailsStats
-                switch (event.linkage)
+                switch (e.linkage)
                 {
                     case "CommonStats":
-                        //Logger.add("View loaded: battleResults." + event.linkage);
-                        CommonView.init(event.view as CommonStats);
+                        //Logger.add("View loaded: battleResults." + e.linkage);
+                        CommonView.init(e.view as CommonStats);
                         break;
                 }
 
-                processedViews.push(event.linkage);
+                processedViews.push(e.linkage);
             }
             catch (ex:Error)
             {
