@@ -38,10 +38,9 @@
     "Timeleft": "Verbleibende Zeit",
     "Capturers": "Panzer",
 
-    // FinalStatistics
-    "Hit percent": "Treffergenauigkeit",
-    "Damage upon detecting": "Schaden durch eigene Aufklärung/Kettenabschuss",
-    "Damage dealt": "Schaden verursacht",
+    // BattleResults
+    "Hit percent": "Trefferqoute",
+    "Damage (assisted / own)": "Schaden (Aufklärung / Verursacht)",
 
     // TeamRenderers
     "TeamRenderersHeaderTip": "XWN (oder XEFF) Wertung.\nFür genauere Informationen fahre mit der Maus über den Spielernamen.",

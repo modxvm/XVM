@@ -40,7 +40,7 @@
 
     // BattleResults
     "Hit percent": "Процент попаданий",
-    "Damage (assisted / own)": "Урон (по разведданным / нанесенный)",
+    "Damage (assisted / own)": "Урон (по разведданным / свой)",
 
     // TeamRenderers
     "TeamRenderersHeaderTip": "Рейтинг xwn (или xeff).\nЧтобы увидеть более подробную информацию, наведите курсор мыши на значение рейтинга интересующего игрока.",

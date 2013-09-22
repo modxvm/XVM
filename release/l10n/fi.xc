@@ -38,10 +38,9 @@
     "Timeleft": "Aikaa jäljellä",
     "Capturers": "Valtaajia",
 
-    // FinalStatistics
+    // BattleResults
     "Hit percent": "Osumaprosentti",
-    "Damage upon detecting": "Vauriota havaittuihin",
-    "Damage dealt": "Vauriota aiheutettu",
+    "Damage (assisted / own)": "Vauriota (autettu / itse)",
 
     // TeamRenderers
     "TeamRenderersHeaderTip": "Xwn (tai xeff) luokitus.\nNähdäksesi tarkemmat tiedot, siirrä hiiren kursori pelaajan kohdalle.",

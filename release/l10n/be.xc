@@ -38,10 +38,9 @@
     "Timeleft": "Засталося часу",
     "Capturers": "Захопнікаў"
 
-    // FinalStatistics
+    // BattleResults
     "Hit percent": "Выніковасць стральбы",
-    "Damage upon detecting": "Пашкоджанні па выяўленаму вамі супраціўніку",
-    "Damage dealt": "Прычыненыя пашкоджанні",
+    "Damage (assisted / own)": "Пашкоджанні (выяўленых вамі / свае)",
 
     // TeamRenderers
     "TeamRenderersHeaderTip": "Рэйтынг xwn (або xeff).\nКаб пабачыць падрабязнейшыя звесткі, навядзіце курсор мышы на значэнне рэйтынгу таго гульца.",
