@@ -212,10 +212,10 @@ package com.xvm.utils
                 textFormat.font, textFormat.size, textFormat.align, textFormat.bold, textFormat.italic));
         }
 
-        
-        public static function createButton(mc:Sprite, name:String, _x:Number, _y:Number, txt:String, align:String):ButtonNormal
+
+        /*public static function createButton(mc:Sprite, name:String, _x:Number, _y:Number, txt:String, align:String):ButtonNormal
         {
-			var b:ButtonNormal = mc.addChild(new ButtonNormal()) as ButtonNormal;
+            var b:ButtonNormal = mc.addChild(new ButtonNormal()) as ButtonNormal;
             b.x = _x;
             b.y = _y;
 			b.autoSize = align;
@@ -224,12 +224,11 @@ package com.xvm.utils
 			b.addEventListener("rollOver", showTooltip);
             b.addEventListener("rollOut", hideTooltip);
             return b;
-        }
-		
-		
-        public static function createRadioButton(mc:Sprite, name:String, _x:Number, _y:Number, _width:Number, txt:String, group:String, align:String):RadioButton
+        }*/
+
+        /*public static function createRadioButton(mc:Sprite, name:String, _x:Number, _y:Number, _width:Number, txt:String, group:String, align:String):RadioButton
         {
-			var b:RadioButton = mc.addChild(new RadioButton()) as RadioButton;
+            var b:RadioButton = mc.addChild(new RadioButton()) as RadioButton;
             b.x = _x;
             b.y = _y;
             b.autoSize = "none";
@@ -242,12 +241,12 @@ package com.xvm.utils
             b.addEventListener("rollOut", hideTooltip);
 
             return b;
-        }
+        }*/
 
-        public static function createCheckBox(mc:Sprite, name:String, _x:Number, _y:Number, txt:String, align:String):CheckBox
+        /*public static function createCheckBox(mc:Sprite, name:String, _x:Number, _y:Number, txt:String, align:String):CheckBox
         {
 			var b:CheckBox = mc.addChild(new CheckBox()) as CheckBox;
-           
+
             b.x = _x;
             b.y = _y;
             b.autoSize = align;
@@ -257,18 +256,18 @@ package com.xvm.utils
             b.addEventListener("rollOut", hideTooltip);
 
             return b;
-        }
+        }*/
 
-        public static function createTextInput(mc:Sprite, name:String, _x:Number, _y:Number, _width:Number):TextInput
+        /*public static function createTextInput(mc:Sprite, name:String, _x:Number, _y:Number, _width:Number):TextInput
         {
 			var c:TextInput = mc.addChild(new TextInput()) as TextInput;
             c.x = _x;
             c.y = _y;
             c.width = _width;
             return c;
-        }
+        }*/
 
-		/*
+        /*
         public static function duplicateButton(src:Object, name:String, offsetX:Number, offsetY:Number,
             text:String, iconSource:String, toolTip:String):MovieClip
         {
