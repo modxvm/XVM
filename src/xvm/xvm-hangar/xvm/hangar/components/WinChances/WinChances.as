@@ -10,7 +10,6 @@ package xvm.hangar.components.WinChances
     public class WinChances
     {
         private var page:BattleLoading;
-        private var chanceField:TextField;
 
         public function WinChances(page:BattleLoading)
         {
@@ -19,37 +18,29 @@ package xvm.hangar.components.WinChances
             if (Config.config.battleLoading.showChances == false)
                 return;
             this.page = page;
-            chanceField = null;
 
             // Add stat loading handler
             Stat.loadBattleStat(this, onStatLoaded);
-
-            //winChances.showChances = Config.s_config.battleLoading.showChances;
-            //winChances.showExp = Config.s_config.battleLoading.showChancesExp;
-            //winChances.enableLog = Config.s_config.rating.enableStatisticsLog;
         }
 
+        private var originalBattleText:String = null;
         private function onStatLoaded():void
         {
-            chanceField = Utils.cloneTextField(page.form.battleText);
-            var tf:TextFormat = chanceField.getTextFormat();
-            tf.size = 17;
-            chanceField.defaultTextFormat = tf;
-            chanceField.htmlText = "";
-            chanceField.autoSize = TextFieldAutoSize.CENTER;
-            chanceField.width += 300;
-            chanceField.x -= 150;
-            chanceField.y += 20; // 78;
-            chanceField.styleSheet = Utils.createTextStyleSheet("chances", chanceField.defaultTextFormat);
-            page.form.addChild(chanceField);
+            if (originalBattleText == null)
+            {
+                originalBattleText = page.form.battleText.text;
+                page.form.battleText.width += 100;
+                page.form.battleText.x -= 50;
+                page.form.battleText.height *= 2;
+                page.form.battleText.styleSheet = Utils.createTextStyleSheet("chances", page.form.battleText.defaultTextFormat);
+            }
 
-            //Logger.addObject(chanceField.defaultTextFormat);
             var chanceText:String = Chance.GetChanceText(Config.config.battleLoading.showChancesExp) || "";
-            //com.xvm.Logger.add(chanceText);
+            chanceText = '<span class="chances">' + chanceText + '</span>';
+            page.form.battleText.htmlText = "<textformat leading='-3'>" + originalBattleText + "\n" + chanceText + "</textformat>";
+
             // TODO if (enableLog == true)
             // TODO     StatsLogger.saveStatistics("chance", Chance.lastChances);
-            chanceText = '<span class="chances">' + chanceText + '</span>';
-            chanceField.htmlText = chanceText;
         }
     }
 }
