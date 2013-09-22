@@ -40,8 +40,9 @@ package xvm.hangar.components.BattleLoading
             proxy.vehicleField.condenseWhite = true;
 
             proxy.vehicleField.width += 100;
+            proxy.vehicleField.scaleX = 1;
             if (team == Defines.TEAM_ALLY)
-                proxy.vehicleField.x -= 137;
+                proxy.vehicleField.x -= 103;
 
             // Add stat loading handler
             Stat.loadBattleStat(this, onStatLoaded);
