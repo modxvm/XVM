@@ -9,8 +9,7 @@ package xvm.hangar.components.Squad
     import com.xvm.utils.Utils;
     import com.xvm.vehinfo.*;
     import flash.text.TextField;
-    import flash.text.TextFormat;
-    import flash.text.TextFormatAlign;
+    import flash.text.TextFieldAutoSize;
     import net.wg.gui.prebattle.squad.SquadItemRenderer;
 
     public class SquadItemRenderer
@@ -73,8 +72,7 @@ package xvm.hangar.components.Squad
                 vehicleTierField.htmlText = "<p class='xvm_vehicleTier' align='right'>" +
                     Utils.fixImgTag(Config.config.squad.leftLvlBorder) +
                     ti.level +
-                    Utils.fixImgTag(Config.config.squad.rightLvlBorder) +
-                    "</p>";
+                    Utils.fixImgTag(Config.config.squad.rightLvlBorder) + "</p>";
             }
         }
 
@@ -97,22 +95,19 @@ package xvm.hangar.components.Squad
 
             return (vi1 == null || vi2 == null) ? null : {
                 level: Config.config.squad.romanNumbers ? Defines.ROMAN_LEVEL[vi2.level - 1] : String(vi2.level),
-                nation: vi2.nation,
-                type: vi2.type,
-                battleTiers: vi1.tiers.join("-")};
+                nation: vi2.nation, type: vi2.type,
+                battleTiers: vi1.tiers.join("-")
+            };
         }
 
         private function createVehicleTierField():void
         {
             vehicleTierField = new TextField();
-
-            // copy filters
-            vehicleTierField.filters = proxy.vehicleNameField.filters;
-
+            vehicleTierField.selectable = false;
+            vehicleTierField.autoSize = TextFieldAutoSize.RIGHT;
             vehicleTierField.styleSheet = Utils.createTextStyleSheet("xvm_vehicleTier", proxy.vehicleNameField.defaultTextFormat);
 
-            // size & position
-            vehicleTierField.width = 35;
+            // position
             vehicleTierField.x = proxy.width - vehicleTierField.width - 3;
             vehicleTierField.y = proxy.vehicleNameField.y;
 
