@@ -39,10 +39,10 @@
 
   // Game Region
   // "auto" - automatically detect game region from game client,
-  // or specify one of: "RU", "EU", "US", "CN", "SEA", "VTC", "KR"
+  // or specify one of: "RU", "EU", "US", "SEA", "VTC", "KR"
   // Регион (игровой кластер)
   // "auto" - автоматически определять регион из клиента игры,
-  // или укажите один из: "RU", "EU", "US", "CN", "SEA", "VTC", "KR"
+  // или укажите один из: "RU", "EU", "US", "SEA", "VTC", "KR"
   "region": "auto",
 
   // Common config options. All settings information in the mod not being used.
