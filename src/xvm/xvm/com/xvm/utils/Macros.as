@@ -210,183 +210,174 @@ package com.xvm.utils
             if (Config.config.rating.showPlayersStatistics == false)
                 return;
 
-            var r:int = data.r;
-            var eff:int = data.e;
-            var b:int = data.b;
-            var w:int = data.w;
-            var tr:int = data.v.r;
-            var tb:int = data.v.b;
-            var tw:int = data.v.w;
-            var tbK:Number = tb / 1000.0;
-
             // {{avglvl}}
             var avglvl:int = data.lvl ? Math.round(data.lvl) : 0;
-            pdata["avglvl"] = avglvl <= 0 ? "-" : avglvl >= 10 ? "X" : avglvl.toString();
+            pdata["avglvl"] = isNaN(avglvl) ? "-" : avglvl >= 10 ? "X" : avglvl.toString();
             // {{xeff}}
-            pdata["xeff"] = data.xeff < 0 ? "--" : data.xeff == 100 ? "XX" : (data.xeff < 10 ? "0" : "") + data.xeff;
+            pdata["xeff"] = isNaN(data.xeff) ? "--" : data.xeff == 100 ? "XX" : (data.xeff < 10 ? "0" : "") + data.xeff;
             // {{xwn}}
-            pdata["xwn"] = data.xwn < 0 ? "--" : data.xwn == 100 ? "XX" : (data.xwn < 10 ? "0" : "") + data.xwn;
+            pdata["xwn"] = isNaN(data.xwn) ? "--" : data.xwn == 100 ? "XX" : (data.xwn < 10 ? "0" : "") + data.xwn;
             // {{eff}}, {{eff:4}}
-            pdata["eff"] = eff <= 0 ? "----" : String(eff);
-            pdata["eff:4"] = eff <= 0 ? "----" : StringUtils.leftPad(pdata["eff"], 4, ' ');
+            pdata["eff"] = isNaN(data.e) ? "----" : String(data.e);
+            pdata["eff:4"] = isNaN(data.e) ? "----" : StringUtils.leftPad(pdata["eff"], 4, ' ');
             // {{wn}}
-            pdata["wn"] = data.wn <= 0 ? "----" : StringUtils.leftPad(String(data.wn), 4, ' ');
+            pdata["wn"] = isNaN(data.wn) ? "----" : StringUtils.leftPad(String(data.wn), 4, ' ');
             // {{e}}
-            pdata["e"] = data.v.teff <= 0 ? "-" : data.v.te >= 10 ? "E" : String(data.v.te);
+            pdata["e"] = isNaN(data.v.teff) ? "-" : data.v.te >= 10 ? "E" : String(data.v.te);
             // {{teff}}
-            pdata["teff"] = data.v.teff <= 0 ? "----" : StringUtils.leftPad(String(data.v.teff), 4, ' ');
+            pdata["teff"] = isNaN(data.v.teff) ? "----" : StringUtils.leftPad(String(data.v.teff), 4, ' ');
 
             // {{rating}}, {{rating:3}}
-            pdata["rating"] = r <= 0 ? "--%" : String(r) + "%";
+            pdata["rating"] = isNaN(data.r) ? "--%" : String(data.r) + "%";
             pdata["rating:3"] = StringUtils.leftPad(pdata["rating"], 3, ' ');
             // {{battles}}
-            pdata["battles"] = b <= 0 ? "---" : String(b);
+            pdata["battles"] = isNaN(data.b) ? "---" : String(data.b);
             // {{wins}}
-            pdata["wins"] = b <= 0 ? "---" : String(w);
+            pdata["wins"] = isNaN(data.b) ? "---" : String(data.w);
             // {{kb}}, {{kb:3}}
-            pdata["kb"] = b <= 0 ? "--k" : String(Math.round(b / 1000)) + "k";
+            pdata["kb"] = isNaN(data.b) ? "--k" : String(Math.round(data.b / 1000)) + "k";
             pdata["kb:3"] = StringUtils.leftPad(pdata["kb"], 3, ' ');
 
             // {{t-rating}}, {{t-rating:3}}
-            pdata["t-rating"] = tr <= 0 ? "--%" : String(tr) + "%";
+            pdata["t-rating"] = isNaN(data.v.r) ? "--%" : String(data.v.r) + "%";
             pdata["t-rating:3"] = StringUtils.leftPad(pdata["t-rating"], 3, ' ');
             // {{t-battles}}, {{t-battles:4}}
-            pdata["t-battles"] = tb <= 0 ? "----" : String(tb);
+            pdata["t-battles"] = isNaN(data.v.b) ? "----" : String(data.v.b);
             pdata["t-battles:4"] = StringUtils.leftPad(pdata["t-battles"], 4, ' ');
             // {{t-wins}}
-            pdata["t-wins"] = tb <= 0 ? "----" : String(tw);
+            pdata["t-wins"] = isNaN(data.v.b) ? "----" : String(data.v.w);
             // {{t-kb}}, {{t-kb-0}}, {{t-kb:4}}
-            pdata["t-kb-0"] = tb <= 0 ? "-.-k" : StringUtils.leftPad(printf.format("%.1fk", tbK), 4, ' ');
-            pdata["t-kb:4"] = tbK < 1 ? pdata["t-kb-0"].split("0.", 2).join(" .") : pdata["t-kb-0"]; // remove leading zero before dot
+            pdata["t-kb-0"] = isNaN(data.v.b) ? "-.-k" : StringUtils.leftPad(printf.format("%.1fk", data.v.b / 1000.0), 4, ' ');
+            pdata["t-kb:4"] = isNaN(data.v.b) ? "-.-k" : data.v.b < 950 ? pdata["t-kb-0"].replace("0.", " .") : pdata["t-kb-0"]; // remove leading zero before dot
             pdata["t-kb"] = StringUtils.trim(pdata["t-kb:4"]);
             // {{t-hb}}, {{t-hb:3}}
-            pdata["t-hb"] = tb <= 0 ? "--h" : String(Math.round(tb / 100)) + "h";
+            pdata["t-hb"] = isNaN(data.v.b) ? "--h" : String(Math.round(data.v.b / 100.0)) + "h";
             pdata["t-hb:3"] = StringUtils.leftPad(pdata["t-hb"], 3, ' ');
             // {{tdb}}, {{tdb:4}}
-            pdata["tdb"] = data.v.db <= 0 ? "----" : String(data.v.db);
+            pdata["tdb"] = isNaN(data.v.db) ? "----" : String(data.v.db);
             pdata["tdb:4"] = StringUtils.leftPad(pdata["tdb"], 4, ' ');
             // {{tdv}}
-            pdata["tdv"] = data.v.dv <= 0 ? "-.-" : printf.format("%.1f", data.v.dv);
+            pdata["tdv"] = isNaN(data.v.dv) ? "-.-" : printf.format("%.1f", data.v.dv);
             // {{tfb}}
-            pdata["tfb"] = data.v.fb <= 0 ? "-.-" : printf.format("%.1f", data.v.fb);
+            pdata["tfb"] = isNaN(data.v.fb) ? "-.-" : printf.format("%.1f", data.v.fb);
             // {{tsb}}
-            pdata["tsb"] = data.v.sb <= 0 ? "-.-" : printf.format("%.1f", data.v.sb);
+            pdata["tsb"] = isNaN(data.v.sb) ? "-.-" : printf.format("%.1f", data.v.sb);
 
             // Dynamic colors
             // {{c:xeff}}
-            pdata["c:xeff"] = data.xeff <= 0 ? "" : function(o:MacrosFormatOptions):String {
+            pdata["c:xeff"] = isNaN(data.xeff) ? "" : function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, data.xeff, "#", o.darken);
             }
             // {{c:xwn}}
-            pdata["c:xwn"] = data.xwn <= 0 ? "" : function(o:MacrosFormatOptions):String {
+            pdata["c:xwn"] = isNaN(data.xwn) ? "" : function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, data.xwn, "#", o.darken);
             }
             // {{c:eff}}
-            pdata["c:eff"] = eff <= 0 ? "" : function(o:MacrosFormatOptions):String {
-                return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff, "#", o.darken);
+            pdata["c:eff"] = isNaN(data.e) ? "" : function(o:MacrosFormatOptions):String {
+                return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, data.e, "#", o.darken);
             }
             // {{c:wn}}
-            pdata["c:wn"] = data.wn <= 0 ? "" : function(o:MacrosFormatOptions):String {
+            pdata["c:wn"] = isNaN(data.wn) ? "" : function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN, data.wn, "#", o.darken);
             }
             // {{c:e}}
-            pdata["c:e"] = data.v.teff <= 0 ? "" : function(o:MacrosFormatOptions):String {
+            pdata["c:e"] = isNaN(data.v.teff) ? "" : function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, data.v.te, "#", o.darken);
             }
             // {{c:rating}}
-            pdata["c:rating"] = r <= 0 ? "" : function(o:MacrosFormatOptions):String {
-                return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, r, "#", o.darken);
+            pdata["c:rating"] = isNaN(data.r) ? "" : function(o:MacrosFormatOptions):String {
+                return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, data.r, "#", o.darken);
             }
             // {{c:kb}}
-            pdata["c:kb"] = b <= 0 ? "" : function(o:MacrosFormatOptions):String {
-                return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, b / 1000.0, "#", o.darken);
+            pdata["c:kb"] = isNaN(data.b) ? "" : function(o:MacrosFormatOptions):String {
+                return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, data.b / 1000.0, "#", o.darken);
             }
             // {{c:avglvl}}
-            pdata["c:avglvl"] = data.lvl <= 0 ? "" : function(o:MacrosFormatOptions):String {
+            pdata["c:avglvl"] = isNaN(data.lvl) ? "" : function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, data.lvl, "#", o.darken);
             }
             // {{c:t-rating}}, {{c:t_rating}}
-            pdata["c:t-rating"] = tr <= 0 ? "" : function(o:MacrosFormatOptions):String {
-                return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, tr, "#", o.darken);
+            pdata["c:t-rating"] = isNaN(data.v.r) ? "" : function(o:MacrosFormatOptions):String {
+                return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, data.v.r, "#", o.darken);
             }
             pdata["c:t_rating"] = pdata["c:t-rating"];
             // {{c:t-battles}}, {{c:t_battles}}
-            pdata["c:t-battles"] = tb <= 0 ? "" : function(o:MacrosFormatOptions):String {
-                return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, tb, "#", o.darken);
+            pdata["c:t-battles"] = isNaN(data.v.b) ? "" : function(o:MacrosFormatOptions):String {
+                return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, data.v.b, "#", o.darken);
             }
             pdata["c:t_battles"] = pdata["c:t-battles"];
             // {{c:tdb}}
-            pdata["c:tdb"] = data.v.db <= 0 ? "" : function(o:MacrosFormatOptions):String {
+            pdata["c:tdb"] = isNaN(data.v.db) ? "" : function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, data.v.db, "#", o.darken);
             }
             // {{c:tdv}}
-            pdata["c:tdv"] = data.v.dv <= 0 ? "" : function(o:MacrosFormatOptions):String {
+            pdata["c:tdv"] = isNaN(data.v.dv) ? "" : function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, data.v.dv, "#", o.darken);
             }
             // {{c:tfb}}
-            pdata["c:tfb"] = data.v.fb <= 0 ? "" : function(o:MacrosFormatOptions):String {
+            pdata["c:tfb"] = isNaN(data.v.fb) ? "" : function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, data.v.fb, "#", o.darken);
             }
             // {{c:tsb}}
-            pdata["c:tsb"] = data.v.sb <= 0 ? "" : function(o:MacrosFormatOptions):String {
+            pdata["c:tsb"] = isNaN(data.v.sb) ? "" : function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, data.v.sb, "#", o.darken);
             }
-
+Logger.addObject(data,"data",2)
             // Alpha
             // {{a:xeff}}
-            pdata["a:xeff"] = function(o:MacrosFormatOptions):Number {
+            pdata["a:xeff"] = isNaN(data.xeff) ? "" : function(o:MacrosFormatOptions):Number {
                 return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, data.xeff);
             }
             // {{a:xwn}}
-            pdata["a:xwn"] = function(o:MacrosFormatOptions):Number {
+            pdata["a:xwn"] = isNaN(data.xwn) ? "" : function(o:MacrosFormatOptions):Number {
                 return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, data.xwn);
             }
             // {{a:eff}}
-            pdata["a:eff"] = function(o:MacrosFormatOptions):Number {
-                return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_EFF, eff);
+            pdata["a:eff"] = isNaN(data.e) ? "" : function(o:MacrosFormatOptions):Number {
+                return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_EFF, data.e);
             }
             // {{a:wn}}
-            pdata["a:wn"] = function(o:MacrosFormatOptions):Number {
+            pdata["a:wn"] = isNaN(data.wn) ? "" : function(o:MacrosFormatOptions):Number {
                 return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WN, data.wn);
             }
             // {{a:e}}
-            pdata["a:e"] = function(o:MacrosFormatOptions):Number {
+            pdata["a:e"] = isNaN(data.v.teff) ? "" : function(o:MacrosFormatOptions):Number {
                 return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_E, data.v.te);
             }
             // {{a:rating}}
-            pdata["a:rating"] = function(o:MacrosFormatOptions):Number {
-                return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_RATING, r);
+            pdata["a:rating"] = isNaN(data.r) ? "" : function(o:MacrosFormatOptions):Number {
+                return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_RATING, data.r);
             }
             // {{a:kb}}
-            pdata["a:kb"] = function(o:MacrosFormatOptions):Number {
-                return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_KB, b / 1000);
+            pdata["a:kb"] = isNaN(data.b) ? "" : function(o:MacrosFormatOptions):Number {
+                return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_KB, data.b / 1000);
             }
             // {{a:avglvl}}
-            pdata["a:avglvl"] = function(o:MacrosFormatOptions):Number {
+            pdata["a:avglvl"] = isNaN(data.lvl) ? "" : function(o:MacrosFormatOptions):Number {
                 return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_AVGLVL, data.lvl);
             }
             // {{a:t-rating}}
-            pdata["a:t-rating"] = function(o:MacrosFormatOptions):Number {
-                return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_RATING, tr);
+            pdata["a:t-rating"] = isNaN(data.v.r) ? "" : function(o:MacrosFormatOptions):Number {
+                return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_RATING, data.v.r);
             }
             // {{a:t-battles}}
-            pdata["a:t-battles"] = function(o:MacrosFormatOptions):Number {
-                return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TBATTLES, tb);
+            pdata["a:t-battles"] = isNaN(data.v.b) ? "" : function(o:MacrosFormatOptions):Number {
+                return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TBATTLES, data.v.b);
             }
             // {{a:tdb}}
-            pdata["a:tdb"] = function(o:MacrosFormatOptions):Number {
+            pdata["a:tdb"] = isNaN(data.v.db) ? "" : function(o:MacrosFormatOptions):Number {
                 return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TDB, data.v.db);
             }
             // {{a:tdv}}
-            pdata["a:tdv"] = function(o:MacrosFormatOptions):Number {
+            pdata["a:tdv"] = isNaN(data.v.dv) ? "" : function(o:MacrosFormatOptions):Number {
                 return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TDV, data.v.dv);
             }
             // {{a:tfb}}
-            pdata["a:tfb"] = function(o:MacrosFormatOptions):Number {
+            pdata["a:tfb"] = isNaN(data.v.fb) ? "" : function(o:MacrosFormatOptions):Number {
                 return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TFB, data.v.fb);
             }
             // {{a:tsb}}
-            pdata["a:tsb"] = function(o:MacrosFormatOptions):Number {
+            pdata["a:tsb"] = isNaN(data.v.sb) ? "" : function(o:MacrosFormatOptions):Number {
                 return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TSB, data.v.sb);
             }
         }

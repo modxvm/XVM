@@ -284,111 +284,125 @@ package com.xvm
         public function calculateStatValues(stat:StatData, forceTeff:Boolean = false):void
         {
             // rating (GWR)
-            stat.r = stat.b > 0 ? Math.round(stat.w / stat.b * 100) : 0;
+            if (!isNaN(stat.b) && !isNaN(stat.w) && stat.b > 0)
+                stat.r = Math.round(stat.w / stat.b * 100);
+
+            // XVM Scale: http://www.koreanrandom.com/forum/topic/2625-xvm-scale
+
+            // xeff
+            if (!isNaN(stat.e))
+                stat.xeff = XvmScale.XEFF(stat.e);
+
+            // xwn
+            if (!isNaN(stat.wn))
+                stat.xwn = XvmScale.XWN(stat.wn);
+
+            // vehicle stat
+            calculateVehicleStatValues(stat, forceTeff);
+        }
+
+        // tdb, tfb, tsb, tdv, te, teff
+        public function calculateVehicleStatValues(stat:StatData, forceTeff:Boolean):void
+        {
+            if (stat.v == null)
+            {
+                stat.v = new VData();
+                return;
+            }
 
             // tank rating
-            if (stat.v == null)
-                stat.v = new VData();
-            if (stat.v.b <= 0 || stat.v.l <= 0)
+            if (isNaN(stat.v.b) || isNaN(stat.v.w) || isNaN(stat.v.l) || stat.v.b <= 0 || stat.v.l <= 0)
                 stat.v.r = stat.r;
             else
             {
-                var Tr:int = Math.round(stat.v.w / stat.v.b * 100);
+                var Tr:Number = Math.round(stat.v.w / stat.v.b * 100);
                 if (stat.v.b > 100)
                     stat.v.r = Tr;
                 else
                 {
-                    var Or:int = stat.r;
+                    var Or:Number = stat.r;
                     var Tb:Number = stat.v.b / 100.0;
                     var Tl:Number = Math.min(stat.v.l, 4) / 4.0;
                     stat.v.r = Math.round(Or - (Or - Tr) * Tb * Tl);
                 }
             }
 
-            // XVM Scale: http://www.koreanrandom.com/forum/topic/2625-xvm-scale
+            if (isNaN(stat.v.b) || isNaN(stat.v.l))
+                return;
 
-            // xeff
-            stat.xeff = NaN;
-            if (stat.e > 0)
-                stat.xeff = XvmScale.XEFF(stat.e);
+            if (stat.v.b <= 0)
+                return;
 
-            // xwn
-            stat.xwn = NaN;
-            if (stat.wn > 0)
-                stat.xwn = XvmScale.XWN(stat.wn);
-
-            // tdb, tfb, tsb, tdv, te, teff (last)
-            stat.v.db = NaN;
-            stat.v.fb = NaN;
-            stat.v.sb = NaN;
-            stat.v.dv = NaN;
-            stat.v.te = NaN;
-            stat.v.teff = NaN;
             // skip v.b less then 10, because of WG bug:
             // http://www.koreanrandom.com/forum/topic/1643-/page-19#entry26189
             // forceTeff used in UserInfo, there is not this bug there.
-            if (stat.v != null && stat.v.b > 0 && (forceTeff == true || stat.v.b >= 10 + stat.v.l * 2))
-            {
-                stat.v.db = (stat.v.d < 0) ? null : Math.round(stat.v.d / stat.v.b);
-                stat.v.fb = (stat.v.f < 0) ? null : Math.round(stat.v.f / stat.v.b * 10) / 10;
-                stat.v.sb = (stat.v.s < 0) ? null : Math.round(stat.v.s / stat.v.b * 10) / 10;
-                //Logger.addObject(stat);
+            if (!forceTeff && stat.v.b < 10 + stat.v.l * 2)
+                return;
 
-                var vi2:Object = VehicleInfo.getInfo2ByVn(stat.vn);
-                if (vi2 != null && vi2.type && vi2.level)
-                {
-                    stat.v.dv = (stat.v.d < 0) ? null : Math.round(stat.v.d / stat.v.b / vi2.hptop * 10) / 10.0;
+            if (!isNaN(stat.v.d) && stat.v.d > 0)
+                stat.v.db = Math.round(stat.v.d / stat.v.b);
+            if (!isNaN(stat.v.f) && stat.v.f > 0)
+                stat.v.fb = Math.round(stat.v.f / stat.v.b * 10) / 10;
+            if (!isNaN(stat.v.s) && stat.v.s > 0)
+                stat.v.sb = Math.round(stat.v.s / stat.v.b * 10) / 10;
+            //Logger.addObject(stat);
 
-                    var EC:Object = { CD: 3, CF: 1 };
-            //        Logger.addObject(stat);
-            //        Logger.addObject(EC);
-                    if (EC.CD != null && EC.CD > 0 && (stat.v.db <= 0))
-                        return;
-                    if (EC.CF != null && EC.CF > 0 && (stat.v.fb <= 0))
-                        return;
+            if (stat.vn == null)
+                return;
+            var vi2:Object = VehicleInfo.getInfo2ByVn(stat.vn);
+            if (vi2 == null || !vi2.type || !vi2.level)
+                return;
 
-                    if (vi2.top.D == vi2.avg.D || vi2.top.F == vi2.avg.F)
-                        return;
+            if (!isNaN(stat.v.d) && stat.v.d > 0)
+                stat.v.dv = Math.round(stat.v.d / stat.v.b / vi2.hptop * 10) / 10.0;
 
-                    var dD:Number = stat.v.db - vi2.avg.D;
-                    var dF:Number = stat.v.fb - vi2.avg.F;
-                    var minD:Number = vi2.avg.D * 0.4;
-                    var minF:Number = vi2.avg.F * 0.4;
-                    var d:Number = 1 + dD / (vi2.top.D - vi2.avg.D);
-                    var f:Number = 1 + dF / (vi2.top.F - vi2.avg.F);
-                    var d2:Number = (stat.v.db < vi2.avg.D) ? stat.v.db / vi2.avg.D : d;
-                    var f2:Number = (stat.v.fb < vi2.avg.F) ? stat.v.fb / vi2.avg.F : f;
-                    d = (stat.v.db < vi2.avg.D) ? 1 + dD / (vi2.avg.D - minD) : d;
-                    f = (stat.v.fb < vi2.avg.F) ? 1 + dF / (vi2.avg.F - minF) : f;
+            if (isNaN(stat.v.db) || isNaN(stat.v.fb) || isNaN(stat.v.sb))
+                return;
 
-                    d = Math.max(0, d);
-                    f = Math.max(0, f);
-                    d2 = Math.max(0, d2);
-                    f2 = Math.max(0, f2);
+            var EC:Object = { CD: 3, CF: 1 };
+            if (EC.CD != null && EC.CD > 0 && (stat.v.db <= 0))
+                return;
+            if (EC.CF != null && EC.CF > 0 && (stat.v.fb <= 0))
+                return;
 
-                    stat.v.te = (d * EC.CD + f * EC.CF) / (EC.CD + EC.CF);
-                    //stat.teff2 = (d2 * EC.CD + f2 * EC.CF) / (EC.CD + EC.CF);
-            //        Logger.add(stat.vn + " D:" + d + " F:" + f + " S:" + s);
+            if (vi2.top.D == vi2.avg.D || vi2.top.F == vi2.avg.F)
+                return;
 
-                    stat.v.teff = Math.max(1, Math.round(stat.v.te * 1000));
-                    //stat.teff2 = Math.max(1, Math.round(stat.teff2 * 1000));
-                    stat.v.te = (stat.v.teff == 0) ? 0 //can not be used
-                        : (stat.v.teff < 300) ? 1
-                        : (stat.v.teff < 500) ? 2
-                        : (stat.v.teff < 700) ? 3
-                        : (stat.v.teff < 900) ? 4
-                        : (stat.v.teff < 1100) ? 5
-                        : (stat.v.teff < 1300) ? 6
-                        : (stat.v.teff < 1550) ? 7
-                        : (stat.v.teff < 1800) ? 8
-                        : (stat.v.teff < 2000) ? 9 : 10;
+            var dD:Number = stat.v.db - vi2.avg.D;
+            var dF:Number = stat.v.fb - vi2.avg.F;
+            var minD:Number = vi2.avg.D * 0.4;
+            var minF:Number = vi2.avg.F * 0.4;
+            var d:Number = 1 + dD / (vi2.top.D - vi2.avg.D);
+            var f:Number = 1 + dF / (vi2.top.F - vi2.avg.F);
+            var d2:Number = (stat.v.db < vi2.avg.D) ? stat.v.db / vi2.avg.D : d;
+            var f2:Number = (stat.v.fb < vi2.avg.F) ? stat.v.fb / vi2.avg.F : f;
+            d = (stat.v.db < vi2.avg.D) ? 1 + dD / (vi2.avg.D - minD) : d;
+            f = (stat.v.fb < vi2.avg.F) ? 1 + dF / (vi2.avg.F - minF) : f;
 
-            //        Logger.add(stat.vn + " teff=" + stat.teff + " e:" + stat.te);
-            //        Logger.addObject(stat);
-                }
-            }
+            d = Math.max(0, d);
+            f = Math.max(0, f);
+            d2 = Math.max(0, d2);
+            f2 = Math.max(0, f2);
 
-            return;
+            stat.v.te = (d * EC.CD + f * EC.CF) / (EC.CD + EC.CF);
+            //stat.teff2 = (d2 * EC.CD + f2 * EC.CF) / (EC.CD + EC.CF);
+    //        Logger.add(stat.vn + " D:" + d + " F:" + f + " S:" + s);
+
+            stat.v.teff = Math.max(1, Math.round(stat.v.te * 1000));
+            //stat.teff2 = Math.max(1, Math.round(stat.teff2 * 1000));
+            stat.v.te = (stat.v.teff == 0) ? 0 //can not be used
+                : (stat.v.teff < 300) ? 1
+                : (stat.v.teff < 500) ? 2
+                : (stat.v.teff < 700) ? 3
+                : (stat.v.teff < 900) ? 4
+                : (stat.v.teff < 1100) ? 5
+                : (stat.v.teff < 1300) ? 6
+                : (stat.v.teff < 1550) ? 7
+                : (stat.v.teff < 1800) ? 8
+                : (stat.v.teff < 2000) ? 9 : 10;
+
+            //Logger.add(stat.vn + " teff=" + stat.teff + " e:" + stat.te);
+            //Logger.addObject(stat);
         }
     }
 
