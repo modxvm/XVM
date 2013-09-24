@@ -1,18 +1,33 @@
 """ xvm-stat (c) sirmax 2013 """
 
 import ResMgr
-from gui import VERSION_FILE_PATH
 
 #############################
 # Public
 
-_ver = ResMgr.openSection(VERSION_FILE_PATH).readString('version')
+_updateurl = ResMgr.openSection('scripts_config.xml').readString('csisUrl')
 
-if 'Common Test' in _ver:
-    region = 'CT'
+if _updateurl is not None:
+    if 'worldoftanks.ru' in _updateurl:
+        region = 'RU'
+    elif 'worldoftanks.eu' in _updateurl:
+        region = 'EU'
+    elif 'worldoftanks.com' in _updateurl:
+        region = 'US'
+    elif 'worldoftanks.cn' in _updateurl:
+        region = 'CN'
+    elif 'worldoftanks.asia' in _updateurl:
+        region = 'SEA'
+    elif 'worldoftanks.vn' in _updateurl:
+        region = 'VTC'
+    elif 'worldoftanks.kr' in _updateurl:
+        region = 'KR'
+    elif 'csis-ct.worldoftanks.' in _updateurl:
+        region = 'CT'
+    else:
+        region = 'null'
 else:
-    region = ResMgr.openSection(VERSION_FILE_PATH).readString('meta/localization')
-    region = region[region.find(' ')+1:]
+    region = 'null'
 
 from helpers import getClientLanguage
 language = getClientLanguage()
