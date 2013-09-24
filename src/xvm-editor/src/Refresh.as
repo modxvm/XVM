@@ -272,7 +272,6 @@ private function RefreshHitLogPage():void
         this.p_hitLog.v_direction.value = section.direction;
         this.p_hitLog.v_insertOrder.value = section.insertOrder;
         this.p_hitLog.v_groupHitsByPlayer.value = section.groupHitsByPlayer;
-        this.p_hitLog.v_hpLeft.value = section.hpLeft;
         this.p_hitLog.v_deadMarker.value = section.deadMarker;
         this.p_hitLog.v_blowupMarker.value = section.blowupMarker;
         this.p_hitLog.v_defaultHeader.value = section.defaultHeader;
@@ -284,6 +283,9 @@ private function RefreshHitLogPage():void
         this.p_hitLog.v_shadow_distance.value = section.shadow.distance;
         this.p_hitLog.v_shadow_color.value = section.shadow.color;
         this.p_hitLog.v_shadow_alpha.value = section.shadow.alpha;
+		this.p_hitLog.v_hpLeft_enabled.value = section.hpLeft.enabled;
+		this.p_hitLog.v_hpLeft_header.value = section.hpLeft.header;
+		this.p_hitLog.v_hpLeft_format.value = section.hpLeft.format;
     }
     catch (ex:Error)
     {

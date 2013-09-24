@@ -35,9 +35,12 @@ package xvm.hangar.components.WinChances
                 page.form.battleText.styleSheet = Utils.createTextStyleSheet("chances", page.form.battleText.defaultTextFormat);
             }
 
-            var chanceText:String = Chance.GetChanceText(Config.config.battleLoading.showChancesExp) || "";
-            chanceText = '<span class="chances">' + chanceText + '</span>';
-            page.form.battleText.htmlText = "<textformat leading='-3'>" + originalBattleText + "\n" + chanceText + "</textformat>";
+            var chanceText:String = Chance.GetChanceText(Config.config.battleLoading.showChancesExp);
+            if (chanceText)
+            {
+                chanceText = '<span class="chances">' + chanceText + '</span>';
+                page.form.battleText.htmlText = "<textformat leading='-3'>" + originalBattleText + "\n" + chanceText + "</textformat>";
+            }
 
             // TODO if (enableLog == true)
             // TODO     StatsLogger.saveStatistics("chance", Chance.lastChances);
