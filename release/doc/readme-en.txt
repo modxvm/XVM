@@ -284,8 +284,8 @@
   TOP 150 clans are added to mod archive by default.
   Full archive with all clans can be downloaded separately:
     http://code.google.com/p/wot-xvm/downloads/list
-    Files: clanicons-full-ru-XXX.zip (RU), clanicons-full-eu-XXX.zip (EU),
-    clanicons-full-us-XXX.zip (US), clanicons-full-sea-XXX.zip (SEA)
+    Files: clanicons-full-ru-XXX.zip (RU), clanicons-full-eu-XXX.zip (EU), clanicons-full-na-XXX.zip (NA),
+    clanicons-full-sea-XXX.zip (SEA), clanicons-full-kr-XXX.zip (KR), clanicons-full-vn-XXX.zip (VN)
 
   6-th sence image.
   To change sixth sense indicator place alternative PNG image to

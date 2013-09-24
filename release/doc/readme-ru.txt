@@ -284,8 +284,8 @@
   По умолчанию в архив мода добавлены топ 150 кланов.
   Полный архив со всеми кланами можно скачать отдельно:
     http://code.google.com/p/wot-xvm/downloads/list
-    Файлы: clanicons-full-ru-XXX.zip (RU), clanicons-full-eu-XXX.zip (EU),
-    clanicons-full-us-XXX.zip (US), clanicons-full-sea-XXX.zip (SEA)
+    Файлы: clanicons-full-ru-XXX.zip (RU), clanicons-full-eu-XXX.zip (EU), clanicons-full-na-XXX.zip (NA),
+    clanicons-full-sea-XXX.zip (SEA), clanicons-full-kr-XXX.zip (KR), clanicons-full-vn-XXX.zip (VN)
 
   Изображение 6-ого чувства.
   Для замены изображения индикатора 6-ого чувства поместите альтернативное изображение PNG формата в

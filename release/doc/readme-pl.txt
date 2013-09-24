@@ -293,8 +293,8 @@ Zawartość:
   150 najlepszych klanów jest dodane standardowo.
   Pełne archiwum ze wszystkimi klanami może być pobrane oddzielnie:
     http://code.google.com/p/wot-xvm/downloads/list
-    Files: clanicons-full-ru-XXX.zip (RU), clanicons-full-eu-XXX.zip (EU),
-    clanicons-full-us-XXX.zip (US), clanicons-full-sea-XXX.zip (SEA)
+    Files: clanicons-full-ru-XXX.zip (RU), clanicons-full-eu-XXX.zip (EU), clanicons-full-na-XXX.zip (NA),
+    clanicons-full-sea-XXX.zip (SEA), clanicons-full-kr-XXX.zip (KR), clanicons-full-vn-XXX.zip (VN)
 
   Ikona szóstego zmysłu.
   Aby zmienić ikonę szóstego zmysłu przekopiuj obrazek do:
