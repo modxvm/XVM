@@ -38,10 +38,9 @@
     "Timeleft": "Temps restant",
     "Capturers": "Nb. de tanks capturant la base",
 
-    // FinalStatistics
+    // BattleResults
     "Hit percent": "Tirs au but",
-    "Damage upon detecting": "Dégâts par détection",
-    "Damage dealt": "Dégâts",
+    "Damage (assisted / own)": "Dégâts (par détection / effectués)",
 
     // TeamRenderers
     "TeamRenderersHeaderTip": "Classement xWN (ou xEff).\nPour plus d'informations, déplacez votre curseur sur le nom du joueur.",
