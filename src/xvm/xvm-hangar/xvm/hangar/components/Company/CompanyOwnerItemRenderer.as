@@ -44,7 +44,6 @@ package xvm.hangar.components.Company
 
         public function configUI():void
         {
-            var updateCheckBox:CheckBox = proxy.owner.parent.getChildByName("updateStatCheckBox") as CheckBox;
             updateCheckBox.addEventListener(Event.SELECT, onUpdateClick);
         }
 
@@ -56,9 +55,7 @@ package xvm.hangar.components.Company
             if (data == null || !data.creatorName)
                 return;
 
-            var updateCheckBox:CheckBox = proxy.owner.parent.getChildByName("updateStatCheckBox") as CheckBox;
-            if (updateCheckBox.selected)
-                onUpdateClick();
+            onUpdateClick();
         }
 
         public function handleMouseRollOver(e:MouseEvent):void
@@ -83,11 +80,15 @@ package xvm.hangar.components.Company
 
         // PRIVATE
 
+        private function get updateCheckBox():CheckBox
+        {
+            return proxy.owner.parent.getChildByName("updateStatCheckBox") as CheckBox;
+        }
+
         private function onUpdateClick(e:Event = null):void
         {
             playerName = WGUtils.GetPlayerName(proxy.data.creatorName);
-            //Logger.add("onUpdateClick() " + playerName);
-            if (playerName != null)
+            if (updateCheckBox.selected || Stat.isUserDataCachedByName(playerName)) // second expression for loading from cache
                 Stat.loadUserData(this, onStatLoaded, playerName, false);
         }
 

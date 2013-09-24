@@ -6,12 +6,13 @@ package xvm.hangar.views
 {
     import flash.events.*;
     import flash.utils.*;
-    import net.wg.gui.components.controls.CheckBox;
+    import net.wg.gui.components.controls.*;
     import net.wg.infrastructure.interfaces.*;
     import net.wg.infrastructure.events.*;
     import net.wg.gui.prebattle.company.*;
     import com.xvm.*;
     import com.xvm.l10n.Locale;
+    import scaleform.clik.controls.Button;
     import xvm.UI.companiesWindow.*;
     import xvm.hangar.*;
     import xvm.hangar.components.Company.*;
@@ -50,7 +51,7 @@ package xvm.hangar.views
                 updateCheckBox.x = page.createButton.x + page.createButton.width + 5;
                 updateCheckBox.y = 7;
                 page.addChild(updateCheckBox);
-                App.utils.scheduler.envokeInNextFrame(function():void
+                App.utils.scheduler.scheduleTask(function():void
                 {
                     var dx:Number = updateCheckBox.x + updateCheckBox.width - page.filterTextField.x;
                     if (dx > 0)
@@ -58,7 +59,7 @@ package xvm.hangar.views
                         page.filterTextField.x += dx;
                         page.filterTextField.width -= dx;
                     }
-                });
+                }, 100);
             }
             catch (ex:Error)
             {

@@ -51,12 +51,12 @@ package xvm.hangar.components.Company
             if (data == null || !data.label)
                 return;
 
-            var updateCheckBox:CheckBox = (proxy.dropTarget as UI_CompanyListItemRenderer).owner.parent.getChildByName("updateStatCheckBox") as CheckBox;
-            if (updateCheckBox.selected)
+            var pname:String = WGUtils.GetPlayerName(data.label);
+            if (updateCheckBox.selected || Stat.isUserDataCachedByName(pname))
             {
                 App.utils.scheduler.scheduleTask(function():void
                 {
-                    Stat.loadUserData(this, onStatLoaded, WGUtils.GetPlayerName(proxy.data.label), false);
+                    Stat.loadUserData(this, onStatLoaded, pname, false);
                 }, 10);
             }
         }
@@ -88,6 +88,11 @@ package xvm.hangar.components.Company
         }
 
         // PRIVATE
+
+        private function get updateCheckBox():CheckBox
+        {
+            return (proxy.dropTarget as UI_CompanyListItemRenderer).owner.parent.getChildByName("updateStatCheckBox") as CheckBox;
+        }
 
         private function onStatLoaded():void
         {

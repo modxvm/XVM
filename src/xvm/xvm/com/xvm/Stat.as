@@ -48,6 +48,12 @@ package com.xvm
             return stat.hasOwnProperty(name) ? stat[name] : null;
         }
 
+        public static function isUserDataCachedByName(name:String):Boolean
+        {
+            var key:String = name + ";0";
+            return instance.user.hasOwnProperty(key);
+        }
+
         public static function getUserDataByName(name:String):StatData
         {
             var key:String = name + ";0";
