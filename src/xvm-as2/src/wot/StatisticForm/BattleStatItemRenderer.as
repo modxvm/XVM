@@ -209,9 +209,12 @@ class wot.StatisticForm.BattleStatItemRenderer
         {
             var x = (!m_iconLoaded || Config.s_config.battle.mirroredVehicleIcons || (team == Defines.TEAM_ALLY))
                 ? wrapper.iconLoader._x : wrapper.iconLoader._x + 80 - 5;
-            m_clanIcon = PlayerInfo.createIcon(wrapper, cfg, x, wrapper.iconLoader._y, team);
+            m_clanIcon = PlayerInfo.createIcon(wrapper._parent._parent._parent, "clanicon_" + data.uid,
+                cfg, x + wrapper._parent._parent._x + wrapper._parent._x + wrapper._x,
+                wrapper.iconLoader._y + wrapper._parent._parent._y + wrapper._parent._y + wrapper._y,
+                team);
         }
-        PlayerInfo.setSource(m_clanIcon, data.label, data.clanAbbrev);
+        PlayerInfo.setSource(m_clanIcon, data.userName, data.clanAbbrev);
         m_clanIcon["holder"]._alpha = ((data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) != 0) ? 100 : 50;
     }
 }

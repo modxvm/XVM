@@ -124,9 +124,9 @@ class wot.PlayersPanel.PlayerListItemRenderer
         {
             var x = (!m_iconLoaded || Config.s_config.battle.mirroredVehicleIcons || (team == Defines.TEAM_ALLY))
                 ? wrapper.iconLoader._x : wrapper.iconLoader._x + 80;
-            m_clanIcon = PlayerInfo.createIcon(wrapper, cfg, x, wrapper.iconLoader._y, team);
+            m_clanIcon = PlayerInfo.createIcon(wrapper, "clanicon", cfg, x, wrapper.iconLoader._y, team);
         }
-        PlayerInfo.setSource(m_clanIcon, data.label, data.clanAbbrev);
+        PlayerInfo.setSource(m_clanIcon, data.userName, data.clanAbbrev);
         m_clanIcon["holder"]._alpha = ((data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) != 0) ? 100 : 50;
     }
 

@@ -48,13 +48,6 @@ package com.xvm.misc
                     m_altIcons.push(ic);
             }
 
-            if (sourceAlt != "")
-            {
-                if (s_failIcons.indexOf(sourceAlt) < 0)
-                    m_altIcons.push(sourceAlt);
-                sourceAlt = "";
-            }
-
             m_currentIndex = 0;
 
             source = currentIcon;

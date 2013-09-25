@@ -11,14 +11,14 @@ class com.xvm.PlayerInfo extends MovieClip
 {
     private static var s_playersIconSources: Object = { };
 
-    public static function createIcon(owner: MovieClip, cfg: Object, dx: Number, dy: Number, team: Number): UILoaderAlt
+    public static function createIcon(owner: MovieClip, name:String, cfg: Object, dx: Number, dy: Number, team: Number): UILoaderAlt
     {
-        var holder:MovieClip = owner["xvm_icon_holder"];
+        var holder:MovieClip = owner[name];
         if (holder == undefined)
         {
             if (team == undefined)
                 team = Defines.TEAM_ALLY;
-            holder = owner.createEmptyMovieClip("xvm_icon_holder", owner.getNextHighestDepth());
+            holder = owner.createEmptyMovieClip(name, owner.getNextHighestDepth());
             holder._x = dx + (team == Defines.TEAM_ALLY ? cfg.x : -cfg.xr);
             if (team == Defines.TEAM_ENEMY)
                 holder._x -= cfg.w;

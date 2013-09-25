@@ -57,7 +57,7 @@ package xvm.hangar.components.ClanIcon
             {
                 var prefix:String = Defines.XVMRES_ROOT + Config.config.battle.clanIconsFolder + Config.gameRegion + "/";
                 paths.push(prefix + "nick/" + nick + ".png");
-                if (clan != null)
+                if (clan != null && clan != "")
                 {
                     paths.push(prefix + "clan/" + clan + ".png");
                     paths.push(prefix + "clan/default.png");
