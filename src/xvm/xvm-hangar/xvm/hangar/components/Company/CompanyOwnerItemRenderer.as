@@ -1,6 +1,7 @@
 package xvm.hangar.components.Company
 {
     import com.xvm.*;
+    import com.xvm.events.ObjectEvent;
     import com.xvm.utils.*;
     import com.xvm.types.stat.*;
     import flash.events.*;
@@ -32,6 +33,8 @@ package xvm.hangar.components.Company
                 proxy.addChild(effField);
 
                 proxy.dd.itemRenderer = UI_CompanyDropItemRenderer;
+
+                Stat.instance.addEventListener(Stat.COMPLETE_USERDATA, onStatLoaded);
 
                 playerName = null;
             }
@@ -88,11 +91,25 @@ package xvm.hangar.components.Company
         private function onUpdateClick(e:Event = null):void
         {
             playerName = WGUtils.GetPlayerName(proxy.data.creatorName);
-            if (updateCheckBox.selected || Stat.isUserDataCachedByName(playerName)) // second expression for loading from cache
-                Stat.loadUserData(this, onStatLoaded, playerName, false);
+            if (Stat.isUserDataCachedByName(playerName))
+                setEffFieldText();
+            else
+            {
+                if (updateCheckBox.selected)
+                    Stat.loadUserData(null, null, playerName, false);
+            }
         }
 
-        private function onStatLoaded():void
+        private function onStatLoaded(e:ObjectEvent):void
+        {
+            if (e == null)
+                return;
+            var s:String = e.result as String;
+            if (s != null && s == playerName)
+                setEffFieldText();
+        }
+
+        private function setEffFieldText():void
         {
             effField.htmlText = "<span class='eff'>" + TeamRendererHelper.formatXVMStatText(playerName) + "</span>";
         }

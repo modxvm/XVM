@@ -57,7 +57,19 @@ package xvm.hangar.views
                     if (dx > 0)
                     {
                         page.filterTextField.x += dx;
-                        page.filterTextField.width -= dx;
+                        page.filterTextField.width += 50 - dx;
+
+                        page.filterButton.x += 50;
+                        page.filterButton.y += 1;
+
+                        page.refreshButton.x += 50;
+                        page.refreshButton.y += 1;
+
+                        page.filterInBattleCheckbox.x += 50;
+                        page.filterInBattleCheckbox.width -= 50;
+
+                        page.division.x += 30;
+                        page.division.width -= 30;
                     }
                 }, 100);
             }

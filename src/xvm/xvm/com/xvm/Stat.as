@@ -4,7 +4,10 @@
  */
 package com.xvm
 {
+    import com.xvm.events.ObjectEvent;
     import flash.accessibility.AccessibilityProperties;
+    import flash.events.Event;
+    import flash.events.EventDispatcher;
     import flash.external.ExternalInterface;
     import flash.utils.Dictionary;
     import com.xvm.io.*;
@@ -12,11 +15,14 @@ package com.xvm
     import com.xvm.types.stat.*;
     import com.xvm.vehinfo.VehicleInfo;
 
-    public class Stat
+    public class Stat extends EventDispatcher
     {
+        public static const COMPLETE_BATTLE:String = "complete_battle";
+        public static const COMPLETE_USERDATA:String = "complete_userdata";
+
         // instance
         private static var _instance:Stat = null;
-        private static function get instance():Stat
+        public static function get instance():Stat
         {
             if (_instance == null)
                 _instance = new Stat();
@@ -187,6 +193,8 @@ package com.xvm
                     }
                 }
                 listenersBattle = new Vector.<Object>();
+
+                dispatchEvent(new Event(COMPLETE_BATTLE));
             }
 
             //Logger.add("TRACE: battleLoaded(): end");
@@ -255,6 +263,7 @@ package com.xvm
             {
                 processUserListener(key1);
                 processUserListener(key2);
+                dispatchEvent(new ObjectEvent(COMPLETE_USERDATA, sd.name));
             }
         }
 

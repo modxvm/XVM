@@ -52,13 +52,10 @@ package xvm.hangar.components.Company
                 return;
 
             var pname:String = WGUtils.GetPlayerName(data.label);
-            if (updateCheckBox.selected || Stat.isUserDataCachedByName(pname))
+            App.utils.scheduler.scheduleTask(function():void
             {
-                App.utils.scheduler.scheduleTask(function():void
-                {
-                    Stat.loadUserData(this, onStatLoaded, pname, false);
-                }, 10);
-            }
+                Stat.loadUserData(this, onStatLoaded, pname, false);
+            }, 10);
         }
 
         public function handleMouseRollOver(e:MouseEvent):void
@@ -88,11 +85,6 @@ package xvm.hangar.components.Company
         }
 
         // PRIVATE
-
-        private function get updateCheckBox():CheckBox
-        {
-            return (proxy.dropTarget as UI_CompanyListItemRenderer).owner.parent.getChildByName("updateStatCheckBox") as CheckBox;
-        }
 
         private function onStatLoaded():void
         {
