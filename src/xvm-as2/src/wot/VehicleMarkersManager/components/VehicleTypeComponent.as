@@ -45,7 +45,7 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
     {
         return (proxy.isSpeaking && !proxy.isDead) ? "dynamic" : m_vehicleClass;
     }
-    
+
     public function setVehicleClass()
     {
         //Logger.add("setVehicleClass: " + m_vehicleClass);
@@ -70,9 +70,9 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
 
     public function setMarkerState(value)
     {
-        //Logger.add("setMarkerState: " + value);
+        //Logger.add("setMarkerState: " + value + " " + proxy['xvm'].m_playerFullName);
         m_markerState = value;
-        var state = m_markerState == "immediate_dead" ? "normal" : m_markerState;
+        var state = /*m_markerState == "immediate_dead" ? "dead" :*/ m_markerState;
         proxy.marker.gotoAndPlay(state);
         if (state != "normal")
         {
@@ -91,7 +91,7 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
                     //this.gotoAndPlay("dead");
             }
         }
-        
+
         if (proxy.isDead && proxy.isSpeaking) // change dynamic to vehicle type marker for dead while speaking
             this.setVehicleClass();
     }
@@ -139,13 +139,13 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
         var y = (cfg.scaleY + MARKER_CENTER_OFFSET_Y["$" + getFrameName().split("-").join("_")]) * cfg.maxScale / 100;
 
         // WARNING: do not touch proxy.marker.marker - marker animation will be broken
-        
+
         for (var childName in proxy.marker.marker)
         {
             var obj = proxy.marker.marker[childName];
             if (typeof obj != "movieclip")
                 continue;
-            
+
             var icon:MovieClip = obj;
             icon._x = x;
             icon._y = y;
