@@ -241,12 +241,14 @@ package com.xvm
         private function userLoaded(json_str:String):void
         {
             //Logger.add("TRACE: userLoaded()");
+            var name:String = null;
             var key1:String = null;
             var key2:String = null;
             try
             {
                 var sd:StatData = ObjectConverter.convertData(JSONx.parse(json_str), StatData);
                 calculateStatValues(sd);
+                name = sd.name || sd.nm; // TODO: Company Window in CT?
                 //Logger.addObject(response, "response", 2);
                 key1 = sd.nm + ";0";
                 user[key1] = sd;
@@ -263,7 +265,7 @@ package com.xvm
             {
                 processUserListener(key1);
                 processUserListener(key2);
-                dispatchEvent(new ObjectEvent(COMPLETE_USERDATA, sd.name));
+                dispatchEvent(new ObjectEvent(COMPLETE_USERDATA, name));
             }
         }
 
