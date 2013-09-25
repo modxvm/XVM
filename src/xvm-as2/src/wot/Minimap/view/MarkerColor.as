@@ -47,6 +47,8 @@ class wot.Minimap.view.MarkerColor
             }
             var entryName = (wrapper.entryName != MinimapEntry.STATIC_ICON_BASE && wrapper.entryName != "spawn") ? wrapper.entryName
                 : (wrapper.vehicleClass == "red") ? "enemy" : (wrapper.vehicleClass == "blue") ? "ally" : null;
+            if (entryName == "teamKiller" && wrapper.m_type == "enemy")
+                entryName = "enemy";
             if (entryName != null)
                 color = ColorsManager.getSystemColor(entryName, wrapper.isDead);
             if (wrapper.entryName == MinimapEntry.STATIC_ICON_BASE)

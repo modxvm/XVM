@@ -26,7 +26,7 @@ class wot.Minimap.MinimapEntry
 {
     /////////////////////////////////////////////////////////////////
     // wrapped methods
-    
+
     public static var STATIC_ICON_BASE:String = "base"; /** Team colored capture base */
     public static var STATIC_ICON_CONTROL:String = "control"; /** Shared grey capture base */
     public static var STATIC_ICON_SPAWN:String = "spawn"; /** Spawn point. Diamond shaped with number at center. */
@@ -65,7 +65,7 @@ class wot.Minimap.MinimapEntry
     public static var MINIMAP_ENTRY_NAME_ALLY:String = "ally";
     public static var MINIMAP_ENTRY_NAME_SQUAD:String = "squadman";
     public static var MINIMAP_ENTRY_NAME_SELF:String = ""; /** Type of player himself and ? */
-    
+
     public static var MINIMAP_ENTRY_VEH_CLASS_LIGHT:String = "lightTank";
     public static var MINIMAP_ENTRY_VEH_CLASS_MEDIUM:String = "mediumTank";
     public static var MINIMAP_ENTRY_VEH_CLASS_HEAVY:String = "heavyTank";
@@ -90,7 +90,7 @@ class wot.Minimap.MinimapEntry
     {
         Utils.TraceXvmModule("Minimap");
     }
-    
+
     /**
      * All attachments container: TextFiels(Labels), Shapes.
      */
@@ -179,7 +179,7 @@ class wot.Minimap.MinimapEntry
             {
                 return;
             }
-            
+
             var entry:wot.Minimap.MinimapEntry = this.xvm_worker;
             entry.labelMc._x = this._x;
             entry.labelMc._y = this._y;
