@@ -39,20 +39,23 @@ package xvm.hangar.views
                 page.form.team1List.itemRenderer = UI_LeftItemRenderer;
                 page.form.team2List.itemRenderer = UI_RightItemRenderer;
 
-                if (page.initialized)
-                {
-                    initComponents();
-                }
-                else
-                {
-                    // TODO: find event
-                    setTimeout(initComponents, 1);
-                }
+                waitInit();
             }
             catch (ex:Error)
             {
                 Logger.add(ex.getStackTrace());
             }
+        }
+
+        private function waitInit():void
+        {
+            if (!page.initialized)
+            {
+                App.utils.scheduler.envokeInNextFrame(waitInit);
+                return;
+            }
+
+            init();
         }
 
         public override function onBeforeDispose(e:LifeCycleEvent):void
@@ -74,7 +77,7 @@ package xvm.hangar.views
                 "                               useStandardMarkers=" + Config.config.battle.useStandardMarkers);
         }
 
-        private function initComponents():void
+        private function init():void
         {
             try
             {

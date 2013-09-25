@@ -7,6 +7,7 @@ package com.xvm.misc
     import flash.display.*;
     import flash.events.*;
     import net.wg.gui.components.controls.UILoaderAlt;
+    import net.wg.gui.events.*;
     import com.xvm.*;
 
     public class IconLoader extends UILoaderAlt
@@ -20,7 +21,7 @@ package com.xvm.misc
         {
             this.background = new Sprite();
             super();
-            loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onLoadComplete);
+            addEventListener(UILoaderEvent.COMPLETE, onLoadComplete);
             loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, onIOError);
         }
 
@@ -69,8 +70,9 @@ package com.xvm.misc
             m_currentIndex++;
             var next:String = currentIcon;
             s_failIcons.push(source);
-            source = next;
-            if (next == "")
+            if (next != null)
+                source = next;
+            else
             {
                 source = "";
                 dispatchEvent(new Event(Event.COMPLETE));

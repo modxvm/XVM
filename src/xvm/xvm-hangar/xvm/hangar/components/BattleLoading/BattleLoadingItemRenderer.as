@@ -1,5 +1,6 @@
 package xvm.hangar.components.BattleLoading
 {
+    import flash.events.Event;
     import flash.text.*;
     import flash.utils.*;
     import flash.geom.Transform;
@@ -61,7 +62,6 @@ package xvm.hangar.components.BattleLoading
 
             Macros.RegisterMinimalMacrosData(playerName, Utils.clearIcon(data.icon), data.vehicle);
             data.label = Macros.Format(playerName, "{{nick}}");
-
 
             // ClanIcon
             attachClanIconToPlayer(data);
@@ -132,8 +132,18 @@ package xvm.hangar.components.BattleLoading
                 return;
             var icon:ClanIcon = new ClanIcon(cfg, proxy.iconLoader.x, proxy.iconLoader.y, team,
                 WGUtils.GetPlayerName(playerName), WGUtils.GetClanNameWithoutBrackets(playerName));
-            if (icon != null)
-                proxy.addChild(icon);
+            icon.addEventListener(Event.COMPLETE, function():void
+            {
+                // don't add empty icons to the form
+                if (icon.source == "")
+                    return;
+
+                // unpredictable effects appear when added to the renderer item because of scaleXY.
+                // add to the main form, that is not scaled, and adjust XY values.
+                proxy.parent.parent.parent.addChild(icon);
+                icon.x += proxy.parent.parent.x + proxy.parent.x + proxy.x;
+                icon.y += proxy.parent.parent.y + proxy.parent.y + proxy.y;
+            });
         }
 
         private function onVehicleIconLoadComplete(e:UILoaderEvent):void

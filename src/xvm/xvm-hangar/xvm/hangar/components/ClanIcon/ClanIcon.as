@@ -75,17 +75,8 @@ package xvm.hangar.components.ClanIcon
                 if (!s_playersIconSources.hasOwnProperty(nick))
                     s_playersIconSources[nick] = source;
 
-                if (maintainAspectRatio)
-                {
-                    var c:Number = Math.min(cfg.w / loader.width, cfg.h / loader.height);
-                    loader.width *= c;
-                    loader.height *= c;
-                }
-                else
-                {
-                    loader.width = cfg.w;
-                    loader.height = cfg.h;
-                }
+                width = cfg.w;
+                height = cfg.h;
 
                 visible = true;
             }
@@ -93,6 +84,8 @@ package xvm.hangar.components.ClanIcon
             {
                 Logger.addObject(ex.getStackTrace());
             }
+
+            super.onLoadComplete(e);
         }
     }
 }
