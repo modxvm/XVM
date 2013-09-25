@@ -211,7 +211,7 @@ package com.xvm.utils
                 return;
 
             // {{avglvl}}
-            var avglvl:int = data.lvl ? Math.round(data.lvl) : 0;
+            var avglvl:Number = isNaN(data.lvl) ? NaN : Math.round(data.lvl);
             pdata["avglvl"] = isNaN(avglvl) ? "-" : avglvl >= 10 ? "X" : avglvl.toString();
             // {{xeff}}
             pdata["xeff"] = isNaN(data.xeff) ? "--" : data.xeff == 100 ? "XX" : (data.xeff < 10 ? "0" : "") + data.xeff;
@@ -322,7 +322,7 @@ package com.xvm.utils
             pdata["c:tsb"] = isNaN(data.v.sb) ? "" : function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, data.v.sb, "#", o.darken);
             }
-Logger.addObject(data,"data",2)
+
             // Alpha
             // {{a:xeff}}
             pdata["a:xeff"] = isNaN(data.xeff) ? "" : function(o:MacrosFormatOptions):Number {

@@ -210,6 +210,8 @@ class _Stat(object):
                 #pprint(stat)
                 if 'nm' not in stat or not stat['nm']:
                     continue
+                if 'b' not in stat or stat['b'] <= 0:
+                    continue
                 cacheKey = "%d%s" % (stat['_id'], "=" + stat['vn'] if stat['vn'] else '')
                 self.cache[cacheKey] = stat
 
@@ -306,7 +308,6 @@ class _Stat(object):
         self._r(stat, 'wins', 'w')
         self._r(stat, 'eff', 'e')
         self._r(stat, 'vname', 'vn')
-        self._d(stat, 'lvl', '0')
 
         player = BigWorld.player()
 
@@ -315,7 +316,8 @@ class _Stat(object):
             for vehId in self.players:
                 pl = self.players[vehId]
                 if pl.playerId == stat['_id']:
-                    stat['clan'] = pl.clan
+                    if pl.clan:
+                        stat['clan'] = pl.clan
                     stat['name'] = pl.name
                     stat['team'] = TEAM_ALLY if player.team == pl.team else TEAM_ENEMY
                     stat['alive'] = pl.alive
