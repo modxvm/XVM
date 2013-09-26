@@ -6,6 +6,7 @@ import com.xvm.GraphicsUtil;
 import com.xvm.Locale;
 import com.xvm.Utils;
 import com.xvm.VehicleInfo;
+import com.xvm.VehicleInfoDataL10n;
 import wot.VehicleMarkersManager.log.HitLog;
 
 
@@ -101,7 +102,7 @@ class wot.VehicleMarkersManager.log.HpLeft
 
             formatArr = format.split("{{vehicle}}");
             if (formatArr.length > 1)
-                format = formatArr.join(player.vType);
+                format = formatArr.join(VehicleInfo.mapVehicleName2(VehicleInfoDataL10n.getVehicleNationName(player.vType), player.vType));
             formatArr = format.split("{{vehiclename}}");
             if (formatArr.length > 1)
                 format = formatArr.join(VehicleInfo.getVehicleName(player.vIconSource));

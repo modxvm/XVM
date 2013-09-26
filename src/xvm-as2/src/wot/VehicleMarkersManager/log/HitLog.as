@@ -12,6 +12,7 @@ import com.xvm.Logger;
 import com.xvm.Strings;
 import com.xvm.Utils;
 import com.xvm.VehicleInfo;
+import com.xvm.VehicleInfoDataL10n;
 
 class wot.VehicleMarkersManager.log.HitLog
 {
@@ -264,7 +265,7 @@ class wot.VehicleMarkersManager.log.HitLog
                 format = formatArr.join(Utils.GetClanName(playerName));
             formatArr = format.split("{{vehicle}}");
             if (formatArr.length > 1)
-                format = formatArr.join(data.vehicleName);
+                format = formatArr.join(VehicleInfo.mapVehicleName2(VehicleInfoDataL10n.getVehicleNationName(data.vehicleName), data.vehicleName));
             formatArr = format.split("{{vehiclename}}");
             if (formatArr.length > 1)
                 format = formatArr.join(VehicleInfo.getVehicleName(data.icon));
