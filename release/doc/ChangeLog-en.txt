@@ -1,15 +1,16 @@
-﻿  [NEW FUNCTIONS]
-  * new options (xvm-autologin.swf):
+﻿XVM-5.0.0-test3:
+  [NEW FUNCTIONS]
+  * new options:
       login/skipIntro - Skip intro movie
       login/autologin - Auto enter to the game
       userInfo/startPage - Initial page (default: 4)
+      battleResults/showNetIncome - Display net income of credits in After Battle Screen
+      battleResults/showExtendedInfo - Display shots precision and damage in After Battle Screen
   * localization: added Romanian language
-  * battleResults:
-      display net income of credits in first page
-      display shots precision and damage in first page under credits and XP
 
   [FIXES]
   * minimap: fixed enemy teamkiller color
+  * markers: fixed drowned vehicle type icon color
 
   [OTHER]
   * config: "finalStatistic" section renamed to "battleResults"
