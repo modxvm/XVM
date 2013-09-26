@@ -6,7 +6,7 @@
       userInfo/startPage - Initial page userinfo window (default: 4)
       battleResults/showNetIncome - Display net income of credits in After Battle Screen
       battleResults/showExtendedInfo - Display shots precision and damage in After Battle Screen
-  * localization: added Romanian language
+  * localization: added Bulgarian and Romanian languages
 
   [FIXES]
   * minimap: fixed enemy teamkiller color
