@@ -1,4 +1,8 @@
-﻿XVM-5.0.0-test3:
+﻿XVM-dev:
+  [NEW FUNCTIONS]
+  * localization: added Bulgarian language
+  
+XVM-5.0.0-test3:
   [NEW FUNCTIONS]
   * new options:
       login/skipIntro - Skip intro movie
@@ -6,7 +10,7 @@
       userInfo/startPage - Initial page userinfo window (default: 4)
       battleResults/showNetIncome - Display net income of credits in After Battle Screen
       battleResults/showExtendedInfo - Display shots precision and damage in After Battle Screen
-  * localization: added Bulgarian and Romanian languages
+  * localization: added Romanian language
 
   [FIXES]
   * minimap: fixed enemy teamkiller color
