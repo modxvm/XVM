@@ -145,7 +145,7 @@ class _Ping(object):
             processes[x['name']] = Popen(args + x['url'].split(':')[0], stdout=PIPE, env=env, shell=True)
 
         # rtt min/avg/max/mdev = 20.457/20.457/20.457/0.000 ms
-        pattern = '([\d]+)\.'
+        pattern = '(\d+)[\d\.]*/[\d\.]+/'
 
         return (pattern, processes)
 
