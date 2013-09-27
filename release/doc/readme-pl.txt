@@ -1,5 +1,4 @@
-﻿// Plik readme dla XVM/STAT, tłumaczenie dla wersji 4.1.1/1.6.1
-// Tłumaczenie na język polski - Nikodemsky
+﻿// Plik readme dla XVM, tłumaczenie na język polski - Nikodemsky
 
 
 Zawartość:
@@ -28,15 +27,15 @@ Zawartość:
     * Informacje o odkrytych wrogach(jako rozszerzenie do hitloga)
     * Autoładowanie załogi
     * Wyświetlanie pinga w garażu i przy logowaniu
+    * Własna ikona szóstego zmysłu(+ opcjonalnie dźwięk)
 
   Strona projektu:  http://www.modxvm.com/
 
-  Wsparcie:      http://www.koreanrandom.com/forum/topic/1383-xvm
-  Wsparcie na polskim oficjalnym polskim forum WoT:   http://forum.worldoftanks.eu/index.php?/topic/114684-pomoc-xvm-mod-temat-zbiorczy/
-
-  FAQ:           http://www.modxvm.com/en/faq/
-  Konfiguracje:  http://www.koreanrandom.com/forum/forum/50-custom-configurations
-  Edytor wizualny: http://www.koreanrandom.com/forum/topic/1422-/#entry11316
+  Wsparcie(EN):      http://www.koreanrandom.com/forum/forum/57-xvm-english-support-and-discussions/
+  Wsparcie(PL):      http://forum.worldoftanks.eu/index.php?/topic/114684-pomoc-xvm-mod-temat-zbiorczy/
+  FAQ:               http://www.modxvm.com/en/faq/
+  Konfiguracje:      http://www.koreanrandom.com/forum/forum/50-custom-configurations
+  Edytor wizualny:   http://www.koreanrandom.com/forum/topic/1422-/#entry11316
 
 
 
@@ -44,17 +43,15 @@ Zawartość:
 2. INSTALACJA
 -----------------------------------------------------------
 
- * Przed instalacją są wymagane dwie rzeczy:
- - Biblioteki Dokan(http://dokan-dev.net/wp-content/uploads/DokanInstall_0.6.0.exe)
- - NET Framework w wersji 3.5 lub wyższe
-
+  // Od wersji 5.0.0 XVM nie wymaga xvm-stat.exe do wyświetlania statystyk, grę należy uruchamiać normalnie z launchera
+  // Ponadto od wersji 5.0.0 nie są potrzebne biblioteki Dokana, ani .NET Framework
 
   1. Wypakuj paczkę do głównego katalogu gry:
      Prawy klik na paczkę -> "Wypakuj wszystko..." -> wybierz folder gry -> "Wypakuj"
 
   2. Standardowo nie musisz niczego zmieniać.
 
-    Jeśli chcesz zmienić konfiguracje, to musisz zmienić nazwę w pliku startowym:
+    Jeśli chcesz używać innej konfiguracji, to musisz zmienić nazwę w pliku startowym:
       \res_mods\xvm\xvm.xc.sample do xvm.xc
     Instrukcje znajdują sie w środku pliku.
 
@@ -68,7 +65,7 @@ Zawartość:
    to w pliku konfiguracji (standardowo\res_mods\xvm\configs\@default\@xvm.xc)
     zmień wartość "language" z "auto" na kod języka(np. pl).
 
-  4. Jest też możliwość instalacji tzw. "Nightly builds".
+  4. Jest też możliwość instalacji tzw. "Nightly builds"(wersje testowe).
     Możesz je pobrać na http://wargaming.by-reservation.com/xvm/
 
 -----------------------------------------------------------
@@ -86,8 +83,8 @@ Zawartość:
 
   Pliki konfiguracyjne modyfikacji:
     \res_mods\xvm\configs\@Default\
-  Możesz wybrać gotowy plik konfiguracji z katalogu \res_mods\xvm\configs\user configs\ 
-  Możesz utworzyć nową konfigurację lub edytować istniejącą w:
+  * Możesz wybrać gotowy plik konfiguracji z katalogu \res_mods\xvm\configs\user configs\ 
+  * Możesz utworzyć nową konfigurację lub edytować istniejącą w:
     http://www.koreanrandom.com/forum/topic/1422-/#entry11316
 
   Wszystkie możliwe opcje konfiguracji znajdziesz tutaj:
@@ -118,11 +115,11 @@ Zawartość:
       {{vehicle}}     - Nazwa pojazdu
       {{vehiclename}} - Wewnętrzna nazwa pojazdu (usa-M24_Chaffee)
       {{vtype}}       - Typ pojazdu
-      {{level}}       - Tier pojazdu (Cyfry arabskie)
-      {{rlevel}}      - vehicle level (Cyfry rzymskie)
-      {{turret}}      - wskaźnik stockowej kopułki:
-                         symbol "*"  - stockowa kopułka, nie można zamontować najlepszego działa
-                         symbol "'"  - stockowa kopułka, można zamontować najlepsze działo
+      {{level}}       - Poziom(tier) pojazdu (Cyfry arabskie)
+      {{rlevel}}      - Poziom(tier) pojazdu (Cyfry rzymskie)
+      {{turret}}      - wskaźnik seryjnej(stockowej) kopułki:
+                         symbol "*"  - seryjna kopułka, nie można zamontować najlepszego działa
+                         symbol "'"  - seryjna kopułka, można zamontować najlepsze działo
                          puste       - najlepsza kopułka
       {{hp}}          - Aktualne punkty wytrzymałości
       {{hp-ratio}}    - Aktualny współczynnik punktów wytrzymałości (bez '%')
@@ -146,7 +143,7 @@ Zawartość:
       {{n-player}}    - Liczba trafień dla każdego gracza
       {{dmg}}         - Wartość obrażeń dla ostatniego trafienia
       {{dmg-total}}   - Całkowita wartość zadanych obrażeń
-      {{dmg-avg}}     - Średnie obrażenia w bitwie
+      {{dmg-avg}}     - Średnie obrażenia
       {{dmg-player}}  - Suma trafień dla gracza
       {{dead}}        - Wskaźnik dla zniszczonego pojazdu
       {{nick}}        - Nick gracza z nazwą klanu
@@ -156,8 +153,8 @@ Zawartość:
       {{vehicle}}     - Nazwa pojazdu
       {{vehiclename}} - Wewnętrzna nazwa pojazdu (usa-M24_Chaffee)
       {{vtype}}       - Typ pojazdu
-      {{level}}       - Tier pojazdu (Cyfry arabskie)
-      {{rlevel}}      - Tier level (Cyfry rzymskie)
+      {{level}}       - Poziom(tier) pojazdu (Cyfry arabskie)
+      {{rlevel}}      - Poziom(tier) pojazdu (Cyfry rzymskie)
       {{dmg-kind}}    - Typ obrażeń (zwykły atak, podpalenie, taranowanie, ...)
       {{c:dmg-kind}}  - Kolor zależny od typu obrażeń
       {{c:vtype}}     - Kolor zależny od typu pojazdu
@@ -173,8 +170,8 @@ Zawartość:
       {{vehicle}}     - Nazwa pojazdu
       {{vehiclename}} - Wewnętrzna nazwa pojazdu (usa-M24_Chaffee)
       {{vtype}}       - Typ pojazdu
-      {{level}}       - Tier pojazdu (Cyfry arabskie)
-      {{rlevel}}      - Tier pojazdu (Cyfry rzymskie)
+      {{level}}       - Poziom(tier) pojazdu (Cyfry arabskie)
+      {{rlevel}}      - Poziom(tier) pojazdu (Cyfry rzymskie)
       {{hp}}          - Aktualne punkty wytrzymałości
       {{hp-ratio}}    - Aktualny współczynnik punktów wytrzymałości (bez '%')
       {{hp-max}}      - Maksymalne punkty wytrzymałości
@@ -198,9 +195,9 @@ Zawartość:
       {{l10n:Capturers}}            - Przetłumaczony tekst "Capturers"
 
     W minimapie:
-      {{level}}          - Tier
+      {{level}}          - Poziom(tier)
       {{short-nick}}     - Skrócony nick
-      {{vehicle}}        - Pełna nazwa typu pojazdu
+      {{vehicle}}        - Pełna nazwa pojazdu
       {{vehicle-type}}   - Pełna nazwa typu pojazdu
       {{vehicle-class}}  - Specjalny symbol zależny od typu pojazdu
       {{cellsize}}       - Wielkość kwadratu na minimapie
@@ -208,31 +205,30 @@ Zawartość:
       {{vehiclename}}    - Nazwa wewnętrzna pojazdu - usa-M24_Chaffee
       {{vehicle-short}}  - Skrócona nazwa pojazdu
 
-    Makra dla statystyk ('klasyfikacja/showPlayersStatistics' muszą być włączone):
-      {{avglvl}}      - Przeciętny tier pojazdów
+    Makra dla statystyk ('showPlayersStatistics' musi być włączone):
+      {{avglvl}}      - Przeciętny poziom(tier) pojazdów
       {{eff}}         - Wartość "efficiency" gracza: http://wot-news.com/index.php/stat/calc/en/
       {{eff:4}}       - Zaokrąglona wartość "efficiency" gracza
       {{teff}}, {{e}} - Wartość "efficiency" gracza dla danego pojazdu: http://www.koreanrandom.com/forum/topic/1643-
-      {{twr}}         - TWR (T-Calc): http://www.koreanrandom.com/forum/topic/2389-
       {{wn}}          - WN6 : http://www.koreanrandom.com/forum/topic/2575-
       {{xeff}}        - Skala XVM dla "efficiency" (wartości 00-99)
       {{xwn}}         - Skala XVM dla WN6 (wartości 00-99)
       {{rating}}      - GWR (Global Win Ratio)
-      {{rating:3}}    - GWR zaokrąglone do 3 liczb
+      {{rating:3}}    - GWR zaokrąglone do 3 liczb z lewej
       {{battles}}     - Całkowita liczba bitw
       {{wins}}        - Całkowita liczba wygranych bitw
       {{kb}}          - Kilo-bitwy (Ogólna liczba bitw podzielona przez 1000).
-      {{kb:3}}        - Liczba kilo-bitw zaokrąglona do 3 liczb
+      {{kb:3}}        - Kilo-bitwy zaokrąglone do trzech liczb z lewej
       {{t-rating}}    - Wartość wygranych dla danego pojazdu
-      {{t-rating:3}}  - Wartość wygranych dla danego pojazdu zaokrąglona do 3 liczb
+      {{t-rating:3}}  - Wartość wygranych dla danego pojazdu zaokrąglona do 3 liczb z lewej
       {{t-battles}}   - Ogólna liczba bitw dla danego pojazdu
-      {{t-battles:4}} - Zaokrąglona całkowita liczba bitw dla danego pojazdu
+      {{t-battles:4}} - Zaokrąglona całkowita liczba bitw dla danego pojazdu(do 4 liczb z lewej)
       {{t-wins}}      - Całkowita liczba bitw dla danego pojazdu
       {{t-kb}}        - Liczba kilo-bitw dla danego pojazdu
       {{t-kb-0}}      - Liczba kilo-bitw dla danego pojazdu poprzedzona zerem
-      {{t-kb:4}}      - Zaokrąglona liczba kilo-bitw dla danego pojazdu
+      {{t-kb:4}}      - Zaokrąglona liczba kilo-bitw dla danego pojazdu(do 4 liczb z lewej)
       {{t-hb}}        - Liczba hekto-bitw dla danego pojazdu (hekto = 100)
-      {{t-hb:3}}      - Liczba hekto-bitw dla danego pojazdu zaokrąglona do 3 liczb
+      {{t-hb:3}}      - Liczba hekto-bitw dla danego pojazdu zaokrąglona do 3 liczb z lewej
       {{tdb}}, {{tdb:4}} - Przeciętne obrażenia dla danego pojazdu - obrażenia/bitwy
       {{tdv}} - Średnia wydajność obrażeń dla danego pojazdu - obrażenia/(bitwy*maxHP)
       {{tfb}} - Średnia ilość fragów dla danego pojazdu
@@ -240,7 +236,6 @@ Zawartość:
       {{c:tdb}}, {{c:tdv}}, {{c:tfb}}, {{c:tsb}} - dynamiczne kolory dla podanych makr
       {{c:eff}}       - Kolor zależny od wartości "efficiency" gracza
       {{c:e}}         - Kolor zależny od wartości "efficiency" dla danego pojazdu gracza
-      {{c:twr}}       - Kolor zależny od TWR (T-Calc)
       {{c:wn}}        - Kolor zależny od WN6 
       {{c:xeff}}      - Kolor zależny od skali XVM dla "efficiency"
       {{c:xwn}}       - Kolor zależny od skali XVM dla WN6
@@ -252,7 +247,7 @@ Zawartość:
 
     Używanie makr tłumaczenia języka - {{l10n:localizationKey}}
       Makra to po prostu odnośniki do wartości w plikach językowych res_mods/xvm/l10n/XX.xc file (XX oznacza kod języka).
-      Jeśli nie znaleziono języka, to zostaje wyświetlona wiadomość: "localizationKey".
+      Jeśli nie znaleziono języka, to zostaje wyświetlony komunikat: "localizationKey".
 
       Przykład na panelu przejmowania bazy
         /l10n/en.xc
@@ -293,8 +288,8 @@ Zawartość:
   150 najlepszych klanów jest dodane standardowo.
   Pełne archiwum ze wszystkimi klanami może być pobrane oddzielnie:
     http://code.google.com/p/wot-xvm/downloads/list
-    Files: clanicons-full-ru-XXX.zip (RU), clanicons-full-eu-XXX.zip (EU), clanicons-full-na-XXX.zip (NA),
-    clanicons-full-sea-XXX.zip (SEA), clanicons-full-kr-XXX.zip (KR), clanicons-full-vn-XXX.zip (VN)
+    Files: clanicons-full-ru-XXX.zip (RU), clanicons-full-eu-XXX.zip (EU),
+    clanicons-full-us-XXX.zip (US), clanicons-full-sea-XXX.zip (SEA)
 
   Ikona szóstego zmysłu.
   Aby zmienić ikonę szóstego zmysłu przekopiuj obrazek do:
@@ -323,3 +318,4 @@ Zawartość:
     1550..1799 8 - doskonały
     1800..1999 9 - mistrz
     2000+      E - Expert (top-100 graczy na danym pojeździe)
+	

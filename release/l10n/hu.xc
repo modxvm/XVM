@@ -38,10 +38,9 @@
     "Timeleft": "Hátralévő idő",
     "Capturers": "Foglalók",
 
-    // FinalStatistics
+    // BattleResults
     "Hit percent": "Találati arány",
-    "Damage upon detecting": "Sebzés felderítésnek köszönhetően",
-    "Damage dealt": "Sebzés",
+    "Damage (assisted / own)": "Sebzés (hozzájárulás / saját)",
 
     // TeamRenderers
     "TeamRenderersHeaderTip": "Xwn (vagy XEff) értékelés.\nRészletes információkért, helyezze a kurzort a játékos minősítésének értéke fölé.",
