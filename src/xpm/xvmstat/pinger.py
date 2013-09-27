@@ -9,6 +9,8 @@ def ping(proxy):
 #############################
 # Private
 
+LINUX_PING_PATH_IN_WINE = "C:\\ping.exe"
+
 import traceback
 import threading
 import os
@@ -85,31 +87,17 @@ class _Ping(object):
 
     def _pingAsync(self):
         try:
-            if os.name == 'nt':
-                args = 'ping -n 1 -w 1000 '
-                # Ответ от 178.20.235.151: число байт=32 время=23мс TTL=58
-                pattern = '.*=.*=(\d+)[^\s].*=.*'
-                env = None
-                si = STARTUPINFO()
-                si.dwFlags = STARTF_USESHOWWINDOW
-                si.wShowWindow = SW_HIDE
+            if os.path.exists(LINUX_PING_PATH_IN_WINE):
+                (pattern, processes) = self._pingAsyncLinux()
             else:
-                args = 'ping -c 1 -n -q '
-                pattern = '[\d.]+/([\d.]+)(?:/[\d.]+){2}'
-                env = dict(LANG='C')
-                si = None
-            res = dict()
-            processes = dict()
-
-            # Ping all servers in parallel
-            for x in self.hosts:
-                processes[x['name']] = Popen(args + x['url'].split(':')[0], stdout=PIPE, env=env, startupinfo=si)
+                (pattern, processes) = self._pingAsyncWindows()
 
             # Parse ping output
+            res = dict()
             for x in self.hosts:
                 proc = processes[x['name']]
 
-                out, err = proc.communicate()
+                out, er = proc.communicate()
                 errCode = proc.wait()
                 if errCode != 0:
                     res[x['name']] = 'Error'
@@ -125,8 +113,40 @@ class _Ping(object):
 
             with self.lock:
                 self.resp = res
-        except Exception, e:
+
+        except Exception, ex:
+            err('_pingAsync() exception: ' + traceback.format_exc(ex))
             with self.lock:
-                self.resp = {"Error":e.message}
+                self.resp = {"Error":ex.message}
+
+    def _pingAsyncWindows(self):
+        args = 'ping -n 1 -w 1000 '
+        si = STARTUPINFO()
+        si.dwFlags = STARTF_USESHOWWINDOW
+        si.wShowWindow = SW_HIDE
+
+        # Ping all servers in parallel
+        processes = dict()
+        for x in self.hosts:
+            processes[x['name']] = Popen(args + x['url'].split(':')[0], stdout=PIPE, startupinfo=si)
+
+        # Ответ от 178.20.235.151: число байт=32 время=23мс TTL=58
+        pattern = '.*=.*=(\d+)[^\s].*=.*'
+
+        return (pattern, processes)
+
+    def _pingAsyncLinux(self):
+        args = LINUX_PING_PATH_IN_WINE + ' -c 1 -n -q -W 1 '
+        env = dict(LANG='C')
+
+        # Ping all servers in parallel
+        processes = dict()
+        for x in self.hosts:
+            processes[x['name']] = Popen(args + x['url'].split(':')[0], stdout=PIPE, env=env, shell=True)
+
+        # rtt min/avg/max/mdev = 20.457/20.457/20.457/0.000 ms
+        pattern = '([\d]+)\.'
+
+        return (pattern, processes)
 
 _ping = _Ping()
