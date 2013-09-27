@@ -1,6 +1,8 @@
 ﻿XVM-dev:
   [NEW FUNCTIONS]
   * localization: added Bulgarian language
+  [FIXES]
+  * pinger: add wine support. For activation execute ln -s `which ping` ~/.wine/drive_c/ping.exe
   
 XVM-5.0.0-test3:
   [NEW FUNCTIONS]
