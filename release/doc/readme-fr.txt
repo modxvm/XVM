@@ -9,7 +9,7 @@ Contenu :
 -----------------------------------------------------------
 
   Ce mod propose de nombreuses fonctionnalités, comme :
-    * Des marqueurs au dessus des tanks personnalisables
+    * Des marqueurs au-dessus des tanks personnalisables
     * La possibilité de désactiver les panneaux postmortem
     * Le contrôle de l'orientation des icônes des tanks
     * La personnalisation complète des panneaux des joueurs (largeur, 
@@ -17,13 +17,13 @@ Contenu :
     * Une horloge sur l'écran de chargement
     * Les icônes des clans en bataille
     * Des packs d'icônes différents en bataille, sur l'écran de chargement, etc.
-    * Les statistiques des joueur en partie
+    * Les statistiques des joueurs en partie
     * Des informations additionnelles sur la barre de capture
     * La possibilité de personnaliser la minimap
     * L'affichage de statistiques supplémentaires en compagnie de chars ou dans 
       les rapports de service
     * Des infos sur les tanks dans la fenêtre de peloton
-    * L'affichage des enemis détectés ou non dans le panneau sur le côté droit
+    * L'affichage des ennemis détectés ou non dans le panneau sur le côté droit
     * La possibilité de charger directement l'équipage dans un char
     * L'affichage du ping avant de se connecter au serveur ou avant de lancer 
       une partie
@@ -100,155 +100,156 @@ Contenu :
 
   Macros disponibles :
     Dans les panneaux des joueurs, l'écran de chargement quand vous faites TAB :
-      {{nick}}        - player nickname with clan name
-      {{name}}        - player nickname without clan name
-      {{clan}}        - clan name with brackets (empty if no clan)
-      {{clannb}}      - clan name without brackets
-      {{vehicle}}     - vehicle name
-      {{vehiclename}} - internal vehicle name (usa-M24_Chaffee)
-      {{vtype}}       - vehicle type
-      {{c:vtype}}     - color depended from vehicle type
-      + statistics macros (see below)
+      {{nick}}        - pseudo du joueur avec tag du clan
+      {{name}}        - pseudo du joueur sans tag du clan
+      {{clan}}        - tag du clan avec crochets (vide si pas de clan)
+      {{clannb}}      - tag du clan sans crochets
+      {{vehicle}}     - nom du tank
+      {{vehiclename}} - nom du tank interne (usa-M24_Chaffee)
+      {{vtype}}       - type de tank
+      {{c:vtype}}     - couleur en fonction du type de tank
+      + macros statistiques (cf. ci-dessous)
 
-    Dans les marqueurs au dessus des tanks :
-      {{nick}}        - player nickname with clan name
-      {{name}}        - player nickname without clan name
-      {{clan}}        - clan name with brackets (empty if no clan)
-      {{clannb}}      - clan name without brackets
-      {{squad}}       - value '1' for own squad, empty for others
-      {{vehicle}}     - vehicle name
-      {{vehiclename}} - internal vehicle name (usa-M24_Chaffee)
-      {{vtype}}       - vehicle type
-      {{level}}       - vehicle level (Arabic numerals)
-      {{rlevel}}      - vehicle level (Roman numerals)
-      {{turret}}      - stock turret marker:
-                          "*" symbol - stock turret, cannot mount top gun
-                          "'" symbol - stock turret, top gun is possible
-                          empty - top turret
-      {{hp}}          - current health points
-      {{hp-ratio}}    - current health ratio (without '%' sign)
-      {{hp-max}}      - maximum health points
-      {{dmg}}         - damage health points
-      {{dmg-ratio}}   - damage health ratio (without '%' sign)
-      {{dmg-kind}}    - damage kind (attack, fire, ramming, ...)
-      {{c:hp}}        - color depended from current health points (only in vehicle markers)
-      {{c:hp-ratio}}  - color depended from current health ratio (only in vehicle markers)
-      {{c:dmg}}       - color depended from damage source
-      {{c:dmg-kind}}  - color depended from damage kind
-      {{c:vtype}}     - color depended from vehicle type
-      {{c:system}}    - system color (disable override color)
-      {{a:hp}}        - transparency depended from current health points (only in vehicle markers)
-      {{a:hp-ratio}}  - transparency depended from current health ratio (only in vehicle markers)
-      {{l10n:blownUp}}  - localizated text "Blown-up!", only in "blowupMessage"
-      + statistics macros (see below)
+    Dans les marqueurs au-dessus des tanks :
+      {{nick}}        - pseudo du joueur avec tag du clan
+      {{name}}        - pseudo du joueur sans tag du clan
+      {{clan}}        - tag du clan avec crochets (vide si pas de clan)
+      {{clannb}}      - tag du clan sans crochets
+      {{squad}}       - valeur '1' pour son propre peloton, vide pour les autres
+      {{vehicle}}     - nom du tank
+      {{vehiclename}} - nom du tank interne (usa-M24_Chaffee)
+      {{vtype}}       - type de tank
+      {{level}}       - tier du tank
+      {{rlevel}}      - tier du tank (numérotation romaine)
+      {{turret}}      - marqueur de tourelle stock :
+                          symbole "*" - tourelle stock, ne peut pas monter le meilleur canon
+                          symbole "'" - tourelle stock, peut monter le meilleur canon
+                          vide - meilleure tourelle
+      {{hp}}          - points de vie actuels
+      {{hp-ratio}}    - % de vie actuel (sans le signe '%')
+      {{hp-max}}      - points de vie maximum
+      {{dmg}}         - points de dégâts
+      {{dmg-ratio}}   - % de dégâts (sans le signe '%')
+      {{dmg-kind}}    - type de dégât (attaque normale, feu, collision, ...)
+      {{c:hp}}        - couleur en fonction des points de vie actuels
+      {{c:hp-ratio}}  - couleur en fonction du % de vie actuel
+      {{c:dmg}}       - couleur en fonction de la source de dégât
+      {{c:dmg-kind}}  - couleur en fonction du type de dégât
+      {{c:vtype}}     - couleur en fonction du type de tank
+      {{c:system}}    - couleur du système (désactive la couleur de remplacement)
+      {{a:hp}}        - transparence en fonction des points de vie actuels
+      {{a:hp-ratio}}  - transparence en fonction du % de points de vie actuel
+      {{l10n:blownUp}} - texte traduit pour "Blown-up!" (ammorack), uniquement dans "blowupMessage"
+      + macro statistiques (cf. ci-dessous)
 
     Dans le journal des coups reçus :
-      {{n}}           - total number of hits
-      {{n-player}}    - number of hits for each player
-      {{dmg}}         - last hit value
-      {{dmg-total}}   - total sum of hits
-      {{dmg-avg}}     - average damage during the battle
-      {{dmg-player}}  - sum of hits for each player
-      {{dead}}        - tank's death marker
-      {{nick}}        - player nickname with clan name
-      {{name}}        - player nickname without clan name
-      {{clan}}        - clan name with brackets (empty if no clan)
-      {{clannb}}      - clan name without brackets
-      {{vehicle}}     - vehicle name
-      {{vehiclename}} - internal vehicle name (usa-M24_Chaffee)
-      {{vtype}}       - vehicle type
-      {{level}}       - vehicle level (Arabic numerals)
-      {{rlevel}}      - vehicle level (Roman numerals)
-      {{dmg-kind}}    - damage kind (attack, fire, ramming, ...)
-      {{c:dmg-kind}}  - color depended from damage kind
-      {{c:vtype}}     - color depended from vehicle type
-      {{l10n:Hits}}   - localizated text "Hits"
-      {{l10n:Total}}  - localizated text "Total"
-      {{l10n:Last}}   - localizated text "Last"
+      {{n}}           - nombre total de tirs
+      {{n-player}}    - nom de tirs pour chaque joueur
+      {{dmg}}         - dégâts du dernier tir
+      {{dmg-total}}   - somme totale des tirs
+      {{dmg-avg}}     - moyenne de dégâts durant la bataille
+      {{dmg-player}}  - somme des tirs pour chaque joueur
+      {{dead}}        - marqueur de destruction du tank
+      {{nick}}        - pseudo du joueur avec tag du clan
+      {{name}}        - pseudo du joueur sans tag du clan
+      {{clan}}        - tag du clan avec crochets (vide si pas de clan)
+      {{clannb}}      - tag du clan sans crochets
+      {{vehicle}}     - nom du tank
+      {{vehiclename}} - nom du tank interne (usa-M24_Chaffee)
+      {{vtype}}       - type de tank
+      {{level}}       - tier du tank
+      {{rlevel}}      - tier du tank (numérotation romaine)
+      {{dmg-kind}}    - type de dégât (attaque normale, feu, collision, ...)
+      {{c:dmg-kind}}  - couleur en fonction du type de dégât
+      {{c:vtype}}     - couleur en fonction du type de tank
+      {{l10n:Hits}}   - traduction pour "Hits" (tirs)
+      {{l10n:Total}}  - traduction pour "Total" 
+      {{l10n:Last}}   - traduction pour "Last" (dernier)
 
     Dans 'PV restants' :
-      {{nick}}        - player nickname with clan name
-      {{name}}        - player nickname without clan name
-      {{clan}}        - clan name with brackets (empty if no clan)
-      {{clannb}}      - clan name without brackets
-      {{vehicle}}     - vehicle name
-      {{vehiclename}} - internal vehicle name (usa-M24_Chaffee)
-      {{vtype}}       - vehicle type
-      {{level}}       - vehicle level (Arabic numerals)
-      {{rlevel}}      - vehicle level (Roman numerals)
-      {{hp}}          - current health points
-      {{hp-ratio}}    - current health ratio (without '%' sign)
-      {{hp-max}}      - maximum health points
-      {{c:vtype}}     - color depended from vehicle type
-      {{c:hp}}        - color depended from current health points
-      {{c:hp-ratio}}  - color depended from current health ratio
-      {{l10n:hpLeftTitle}}  - localizated text "Hitpoints left:", only in "header"
-
+      {{nick}}        - pseudo du joueur avec tag du clan
+      {{name}}        - pseudo du joueur sans tag du clan
+      {{clan}}        - tag du clan avec crochets (vide si pas de clan)
+      {{clannb}}      - tag du clan sans crochets
+      {{vehicle}}     - nom du tank
+      {{vehiclename}} - nom du tank interne (usa-M24_Chaffee)
+      {{vtype}}       - type de tank
+      {{level}}       - tier du tank
+      {{rlevel}}      - tier du tank (numérotation romaine)
+      {{hp}}          - points de vie actuels
+      {{hp-ratio}}    - % de vie actuel (sans le signe '%')
+      {{hp-max}}      - points de vie maximum
+      {{c:vtype}}     - couleur en fonction du type de tank
+      {{c:hp}}        - couleur en fonction des points de vie actuels
+      {{c:hp-ratio}}  - couleur en fonction du % de vie actuel
+      {{l10n:hpLeftTitle}} - traduction pour "Hitpoints left:" (PV restants), seulement dans "header"
+      
     Dans la barre de capture :
-      {{points}}      - points already capture
-      {{extra}}       - extra text section; is shows only when timeleft and number of capturers was calculated successfully
-      {{tanks}}       - number of capturers; cant define if more than 3; can be placed only inside extra section
-      {{time}}        - time left to full capture; minutes and seconds;  can be placed only inside extra section
-      {{time-sec}}    - time left to full capture; seconds only;         can be placed only inside extra section
-      {{speed}}       - capture speed in points per second;              can be placed only inside extra section
-      {{l10n:enemyBaseCapture}}     - localizated text "Base capture by allies!"
-      {{l10n:enemyBaseCaptured}}    - localizated text "Base captured by allies!"
-      {{l10n:allyBaseCapture}}      - localizated text "Base capture by enemies!"
-      {{l10n:allyBaseCaptured}}     - localizated text "Base captured by enemies!"
-      {{l10n:Timeleft}}             - localizated text "Timeleft"
-      {{l10n:Capturers}}            - localizated text "Capturers"
+      {{points}}      - points de capture actuels
+      {{extra}}       - texte supplémentaire; s'affiche uniquement quand le temps restantet le nombre de capeurs a bien été calculé
+      {{tanks}}       - nombre de capeurs; ne peut pas être défini si plus de 3;      ne peut être placé dans {{extra}} uniquement
+      {{time}}        - temps restant avant la capture complète; minutes et secondes; ne peut être placé dans {{extra}} uniquement
+      {{time-sec}}    - temps restant avant la capture complète; secondes seulement;  ne peut être placé dans {{extra}} uniquement
+      {{speed}}       - vitesse de capture en points/seconde;                         ne peut être placé dans {{extra}} uniquement
+      {{l10n:enemyBaseCapture}}     - traduction pour "Base capture by allies!" (base en cours de capture par les alliés)
+      {{l10n:enemyBaseCaptured}}    - traduction pour "Base captured by allies!" (base capturée par les alliés)
+      {{l10n:allyBaseCapture}}      - traduction pour "Base capture by enemies!" (base en cours de capture par les ennemis)
+      {{l10n:allyBaseCaptured}}     - traduction pour "Base captured by enemies!" (base capturée par les ennemis)
+      {{l10n:Timeleft}}             - traduction pour "Timeleft" (temps restant)
+      {{l10n:Capturers}}            - traduction pour "Capturers" (capeurs/nb. de tanks dans le rond de capture)
 
     Dans la minimap :
-      {{level}}        - subject level
-      {{short-nick}}   - subject shortened nickname
-      {{vehicle}}      - subject full vehicle type
-      {{vehicle-type}}  - subject full vehicle type
-      {{vehicle-class}} - places special symbol depending on subject vehicle class
-      {{cellsize}}     - minimap cell side size
-      {{vehicle-name}} - returns vehicle system name - usa-M24_Chaffee
-      {{vehiclename}}  - returns vehicle system name - usa-M24_Chaffee
-      {{vehicle-short}}  - shortened vehicle name
+      {{level}}        - tier du tank
+      {{short-nick}}   - pseudo raccourci du joueur
+      {{vehicle}}      - nom complet du tank
+      {{vehicle-type}}  - nom complet du type de tank
+      {{vehicle-class}} - symbole spécial en fonction du type de tank
+      {{cellsize}}     - taille d'une cellule de la minimap
+      {{vehicle-name}} - retourne le nom interne du tank - usa-M24_Chaffee
+      {{vehiclename}}  - retourne le nom interne du tank - usa-M24_Chaffee
+      {{vehicle-short}}  - nom du tank raccourci
 
     Macros statistiques ('rating/showPlayersStatistics' doit être activé) :
-      {{avglvl}}      - average level (tier) of tanks
-      {{eff}}         - player efficiency: http://wot-news.com/index.php/stat/calc/en/
-      {{eff:4}}       - player efficiency aligned from left to 4 chars
-      {{teff}}, {{e}} - player per-vehicle efficiency: http://www.koreanrandom.com/forum/topic/1643-
-      {{wn}}          - WN6 rating: http://www.koreanrandom.com/forum/topic/2575-
-      {{xeff}}        - XVM Scale for efficiency (values 00-99, XX for Tops)
-      {{xwn}}         - XVM Scale for WN6 (values 00-99, XX for Tops)
-      {{rating}}      - GWR (Global Win Ratio)
-      {{rating:3}}    - GWR aligned from left to 3 chars
-      {{battles}}     - total battles count
-      {{wins}}        - total wins count
-      {{kb}}          - number of kilo-battles (total battles count divided by 1000).
-      {{kb:3}}        - number of kilo-battles aligned from left to 3 chars
-      {{t-rating}}    - vehicle win ratio
-      {{t-rating:3}}  - vehicle win ratio aligned from left to 3 chars
-      {{t-battles}}   - total battles count for current vehicle
-      {{t-battles:4}} - number of battles for current vehicle aligned from left to 4 chars
-      {{t-wins}}      - total wins count for current vehicle
-      {{t-kb}}        - number of kilo-battles for current vehicle
-      {{t-kb-0}}      - number of kilo-battles for current vehicle with leading zero
-      {{t-kb:4}}      - number of kilo-battles for current vehicle aligned from left to 4 chars
-      {{t-hb}}        - number of hecto-battles for current vehicle (hecto = 100)
-      {{t-hb:3}}      - number of hecto-battles for current vehicle aligned from left to 3 chars
-      {{tdb}}, {{tdb:4}} - average damage for current tank - damage/battles
-      {{tdv}} - average damage efficiency for tank - damage/(battles*maxHP)
-      {{tfb}} - average frags per battle for current tank
-      {{tsb}} - average number of spotted enemies per battle for current tank
-      {{c:tdb}}, {{c:tdv}}, {{c:tfb}}, {{c:tsb}} - dynamic colors for this macros
-      {{c:eff}}       - color depended from player efficiency
-      {{c:e}}         - color depended from player per-vehicle efficiency
-      {{c:wn}}        - color depended from WN6 rating
-      {{c:xeff}}      - color depended from XVM Scale for efficiency
-      {{c:xwn}}       - color depended from XVM Scale for WN6
-      {{c:rating}}    - color depended from GWR
-      {{c:kb}}        - color depended from kilo-battles
-      {{c:avglvl}}    - color depended from average level of tanks
-      {{c:t-rating}}  - color depended from current vehicle win ratio
-      {{c:t-battles}} - color depended from current vehicle battles
-      Any color macro you can change to transparency macro ({{a: tdb}}).
+      {{avglvl}}      - tier moyen des tanks joués
+      {{eff}}         - ER du joueur : http://wot-news.com/index.php/stat/calc/en/ 
+      {{eff:4}}       - ER du joueur aligné à gauche sur 4 caractères
+      {{teff}}, {{e}} - ER du véhicule : http://www.koreanrandom.com/forum/topic/1643-
+      {{wn}}          - classement WN6 : http://www.koreanrandom.com/forum/topic/2575-
+      {{xeff}}        - XVM Scale pour l'ER (de 00 à 99, XX pour les tops serveur)
+      {{xwn}}         - XVM Scale pour le WN6 (de 00 à 99, XX pour les tops serveur)
+      {{rating}}      - GWR (Global Win Ratio) = % de victoire global du joueur
+      {{rating:3}}    - GWR aligné à gauche sur 3 caractères
+      {{battles}}     - nombre total de batailles
+      {{wins}}        - nombre total de victoires
+      {{kb}}          - nombre de kilo-batailles (nb. total de batailles divisé par 1000)
+      {{kb:3}}        - nombre de kilo-batailles aligné à gauche sur 3 caractères
+      {{t-rating}}    - % de victoire du tank
+      {{t-rating:3}}  - % de victoire du tank aligné à gauche sur 3 caractères
+      {{t-battles}}   - nombre total de batailles pour le tank actuel
+      {{t-battles:4}} - nombre de batailles pour le tank actuel aligné à gauche sur 4 caractères
+      {{t-wins}}      - nombre total de victoires pour le tank actuel
+      {{t-kb}}        - nombre de kilo-batailles pour le tank actuel
+      {{t-kb-0}}      - nombre de kilo-batailles pour le tank actuel avec zéro initial
+      {{t-kb:4}}      - nombre de kilo-batailles pour le tank actuel aligné à gauche sur 4 caractères
+      {{t-hb}}        - nombre de hecto-batailles pour le tank actuel (hecto = 100)
+      {{t-hb:3}}      - nombre de hecto-batailles pour le tank actuel aligné à gauche sur 3 caractères
+      {{tdb}}, {{tdb:4}} - dégâts moyens pour le tank actuel (dégâts/parties)
+      {{tdv}} - efficacité des dégâts moyens du tank - dégâts/(batailles*maxPV)
+      {{tfb}} - nombre de détruits moyen par bataille pour le tank actuel
+      {{tsb}} - nombre de détectés moyens par bataille pour le tank actuel
+      {{c:tdb}}, {{c:tdv}}, {{c:tfb}}, {{c:tsb}} - couleurs dynamiques pour ces macros
+      {{c:eff}}       - couleur en fonction de l'ER du joueur
+      {{c:e}}         - couleur en fonction de l'ER du tank
+      {{c:wn}}        - couleur en fonction du classement WN6
+      {{c:xeff}}      - couleur en fonction de l'XVM Scale pour l'ER
+      {{c:xwn}}       - couleur en fonction de l'XVM Scale pour le WN6
+      {{c:rating}}    - couleur en fonction du GWR
+      {{c:kb}}        - couleur en fonction du nombre de kilo-batailles
+      {{c:avglvl}}    - couleur en fonction du tier moyen des tanks joués
+      {{c:t-rating}}  - couleur en fonction du % de victoire du tank actuel
+      {{c:t-battles}} - couleur en fonction du nombre de batailles du tank actuel
+      Vous pouvez changer n'importe quelle macro de couleur en macro de transparence.
+      Exemple : {{a:tdb}}
 
     Utilisation des macros traduites : {{l10n:localizationKey}}
       Les macros sont juste des liens vers des traductions présentes dans le 
@@ -322,7 +323,7 @@ Contenu :
     500..699   3 - joueur médiocre
     700..899   4 - joueur en dessous de la moyenne
     900..1099  5 - joueur moyen
-    1100..1299 6 - joueur au dessus de la moyenne
+    1100..1299 6 - joueur au-dessus de la moyenne
     1300..1549 7 - bon joueur
     1550..1799 8 - excellent joueur
     1800..1999 9 - maître
