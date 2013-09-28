@@ -51,11 +51,11 @@
       \res_mods\xvm\configs\@Default\
     Or use online editor: http://www.koreanrandom.com/forum/topic/1422-/#entry11316
 
-    Note: If you changing config manually, use Notepad, DO NOT use MS Word,
+    Note: If you want to change the config manually, use Notepad, DO NOT use MS Word,
     WordPad and such editors.
 
   3. If XVM incorrectly detects the language of the game client,
-    then in the configuration file (by default\res_mods\xvm\configs\@default\@xvm.xc)
+    then in the configuration file (by default \res_mods\xvm\configs\@default\@xvm.xc)
     change the value of the variable "language" from "auto" to the language code.
     The language code must match the name of the file in the \res_mods\xvm\l10n\ (for example, "en").
 
@@ -199,7 +199,7 @@
       {{vehiclename}}  - returns vehicle system name - usa-M24_Chaffee
       {{vehicle-short}}  - shortened vehicle name
 
-    Statistics macros ('rating/showPlayersStatistics' must be anabled):
+    Statistics macros ('rating/showPlayersStatistics' must be enabled):
       {{avglvl}}      - average level (tier) of tanks
       {{eff}}         - player efficiency: http://wot-news.com/index.php/stat/calc/en/
       {{eff:4}}       - player efficiency aligned from left to 4 chars
@@ -242,7 +242,7 @@
 
     Localization macros usage - {{l10n:localizationKey}}
       Macros are just links to translations in file res_mods/xvm/l10n/XX.xc file (XX means language code).
-      If translate is not found, "localizationKey" is displayed.
+      If the translation is not found, "localizationKey" is displayed.
 
       Capture bar example
         /l10n/en.xc
@@ -265,8 +265,8 @@
       "<font color='{{c:xwn}}'>{{rating}}</font>"
 
   Dynamic color and transparency usage examples:
-    "color": "{{c:xwn}}" - color depended from xwn
-    "alpha": "{{a:hp}}" - transparency depended from current health
+    "color": "{{c:xwn}}" - color depending from xwn
+    "alpha": "{{a:hp}}" - transparency depending from current health
 
   Clan and players icons.
   Config parameter battle/clanIconsFolder set path to clan icons root folder.
@@ -287,17 +287,16 @@
     Files: clanicons-full-ru-XXX.zip (RU), clanicons-full-eu-XXX.zip (EU), clanicons-full-na-XXX.zip (NA),
     clanicons-full-sea-XXX.zip (SEA), clanicons-full-kr-XXX.zip (KR), clanicons-full-vn-XXX.zip (VN)
 
-  6-th sence image.
+  6-th sense image.
   To change sixth sense indicator place alternative PNG image to
    \res_mods\xvm\res\SixthSense.png.
 
   Hit Log.
   Negative x, y values allow to bind the text to the right and bottom edges for
   the same behavior with different screen resolutions.
-  Will work only with running xvm-stat!
 
   Clock in battle and in battle loading screen.
-  Formát: PHP Date: http://php.net/date
+  Format: PHP Date: http://php.net/date
   For example:
       "clockFormat": "H:i"          => 01:23
       "clockFormat": "Y.m.d H:i:s"  => 2013.05.20 01:23:45
