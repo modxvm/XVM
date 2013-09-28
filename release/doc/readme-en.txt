@@ -16,7 +16,7 @@
     * Clock at battle loading screen
     * Player, clan icon
     * Different vehicle icon sets for ears, battle loading screen, etc.
-    * Players statistics (only with xvm-stat package)
+    * Players statistics
     * Capture bar additional information
     * Customizable minimap
     * Display extended statistics in the company and user info windows
