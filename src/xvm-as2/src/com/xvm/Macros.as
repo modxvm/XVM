@@ -254,7 +254,7 @@ class com.xvm.Macros
             : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, b / 1000, "#", o.darken); }
         // {{c:avglvl}}
         pdata["c:avglvl"] = stat.lvl <= 0 ? ""
-            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, stat.lvl, "#", o.darken); }
+            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, Math.round(Utils.toFloat(stat.lvl, 0)), "#", o.darken); }
         // {{c:t-rating}}, {{c:t_rating}}
         pdata["c:t-rating"] = tr <= 0 ? ""
             : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, tr, "#", o.darken); }
