@@ -22,6 +22,8 @@ App
 "
 
 "$compc" \
-	-source-path wg \
+	-source-path wg/app \
+	-source-path wg/links \
+	-source-path wg/ui \
 	-output lib/wg.swc \
 	-include-classes $classes

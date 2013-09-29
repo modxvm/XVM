@@ -1,4 +1,4 @@
-package xvm.hangar.components.UserInfo
+package xvm.hangar.components.Profile
 {
     import flash.display.*;
     import flash.events.*;

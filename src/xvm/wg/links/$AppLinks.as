@@ -45,6 +45,12 @@ CompanyDropItemRendererUI;
 // squadWindow.swf
 squadItemRendererUI;
 
+// profileSections.swf
+//ProfileSummaryPage_UI;
+//ProfileSummaryWindow_UI;
+//ProfileTechniquePage_UI;
+//ProfileTechniqueWindow_UI;
+//TechniqueRenderer_UI;
 
 }
 

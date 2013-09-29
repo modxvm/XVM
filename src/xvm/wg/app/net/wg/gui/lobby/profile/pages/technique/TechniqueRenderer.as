@@ -1,11 +1,11 @@
-package net.wg.gui.lobby.profile.pages.technique 
+package net.wg.gui.lobby.profile.pages.technique
 {
     import flash.display.*;
     import flash.text.*;
     import net.wg.gui.components.controls.*;
     import net.wg.gui.lobby.profile.components.*;
     import scaleform.clik.constants.*;
-    
+
     public class TechniqueRenderer extends net.wg.gui.components.controls.SoundListItemRenderer
     {
         public function TechniqueRenderer()
@@ -48,10 +48,10 @@ package net.wg.gui.lobby.profile.pages.technique
             var loc6:*=0;
             var loc7:*=null;
             super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA))
             {
                 loc1 = false;
-                if (data) 
+                if (data)
                 {
                     loc1 = true;
                     loc5 = net.wg.gui.lobby.profile.pages.technique.TechniqueListVehicleVO(data);
@@ -63,28 +63,29 @@ package net.wg.gui.lobby.profile.pages.technique
                     this.nationIcon.source = loc5.nationIconPath;
                     this.typeIcon.source = loc5.typeIconPath;
                     this.tankSmallIcon.source = loc5.tankIconPath;
-                    if (loc7 = getSmallMasteryIconPath(loc5.markOfMastery)) 
+                    loc7 = getSmallMasteryIconPath(loc5.markOfMastery);
+                    if (loc7)
                     {
                         this.masteryIcon.source = loc7;
                     }
-                    else 
+                    else
                     {
                         this.masteryIcon.unload();
                     }
                     this.masteryIcon.data = loc5;
                     this.levelMC.gotoAndStop(loc5.level);
                 }
-                else 
+                else
                 {
                     this.masteryIcon.unload();
                     this.masteryIcon.data = null;
                 }
                 loc3 = numChildren;
                 loc4 = 0;
-                while (loc4 < loc3) 
+                while (loc4 < loc3)
                 {
                     loc2 = getChildAt(loc4);
-                    if (loc2 != this.background) 
+                    if (loc2 != this.background)
                     {
                         loc2.visible = loc1;
                     }
@@ -96,7 +97,7 @@ package net.wg.gui.lobby.profile.pages.technique
 
         internal static function getSmallMasteryIconPath(arg1:int):String
         {
-            if (arg1 > 0) 
+            if (arg1 > 0)
             {
                 return "../maps/icons/library/proficiency/class_icons_" + arg1 + ".png";
             }
@@ -105,7 +106,7 @@ package net.wg.gui.lobby.profile.pages.technique
 
         internal static function getString(arg1:Number):String
         {
-            if (App.utils) 
+            if (App.utils)
             {
                 return App.utils.locale.integer(arg1);
             }

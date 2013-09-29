@@ -18,7 +18,7 @@ package xvm.hangar.views
     import com.xvm.*;
     import com.xvm.l10n.Locale;
     import xvm.hangar.*;
-    import xvm.hangar.components.UserInfo.*;
+    import xvm.hangar.components.Profile.*;
 
     public class Profile extends XvmModBase
     {
@@ -71,7 +71,7 @@ package xvm.hangar.views
 
         private function onSectionViewShowed(e:ViewStackEvent):void
         {
-            Logger.addObject(e);
+            //Logger.addObject(e);
             if (e.view is ProfileSummaryPage)
             {
                 summaryPage = e.view as ProfileSummaryPage;

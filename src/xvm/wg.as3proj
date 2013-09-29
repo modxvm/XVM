@@ -15,7 +15,9 @@
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
-    <class path="wg" />
+    <class path="wg\app" />
+    <class path="wg\ui" />
+    <class path="wg\links" />
   </classpaths>
   <!-- Build options -->
   <build>
@@ -71,7 +73,7 @@
   </library>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
-    <compile path="wg\App.as" />
+    <compile path="wg\app\App.as" />
   </compileTargets>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
