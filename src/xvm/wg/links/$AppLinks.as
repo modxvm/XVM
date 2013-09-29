@@ -28,8 +28,8 @@ import net.wg.gui.intro.*; IntroPage;
 import net.wg.gui.lobby.battleResults.*; BattleResults; CommonStats;
 import net.wg.gui.lobby.profile.*; Profile;
 import net.wg.gui.lobby.window.*; ProfileWindow;
-import net.wg.gui.lobby.profile.pages.summary.*; ProfileSummaryPage;
-import net.wg.gui.lobby.profile.pages.technique.*; ProfileTechniquePage;
+import net.wg.gui.lobby.profile.pages.summary.*; ProfileSummaryPage; ProfileSummaryWindow;
+import net.wg.gui.lobby.profile.pages.technique.*; ProfileTechniquePage; ProfileTechniqueWindow;
 
 /**
  * UIs
@@ -46,11 +46,7 @@ CompanyDropItemRendererUI;
 squadItemRendererUI;
 
 // profileSections.swf
-//ProfileSummaryPage_UI;
-//ProfileSummaryWindow_UI;
-//ProfileTechniquePage_UI;
-//ProfileTechniqueWindow_UI;
-//TechniqueRenderer_UI;
+TechniqueRenderer_UI;
 
 }
 

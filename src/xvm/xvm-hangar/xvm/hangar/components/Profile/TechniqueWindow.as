@@ -11,13 +11,11 @@ package xvm.hangar.components.Profile
     import com.xvm.types.cfg.*;
     import xvm.UI.profileSections.UI_TechniqueRenderer;
 
-    public class TechniquePage extends Technique
+    public class TechniqueWindow extends Technique
     {
-        public function TechniquePage(page:ProfileTechniquePage, summary:ProfileSummary):void
+        public function TechniqueWindow(window:ProfileTechniqueWindow, summary:ProfileSummary):void
         {
-            super(page, summary);
-
-            page.checkBoxExistence.selected = Config.config.userInfo.inHangarFilterEnabled;
+            super(window, summary);
         }
 
         // PRIVATE

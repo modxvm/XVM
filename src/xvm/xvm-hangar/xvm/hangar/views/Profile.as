@@ -22,12 +22,12 @@ package xvm.hangar.views
 
     public class Profile extends XvmModBase
     {
-        private var summaryPage:ProfileSummaryPage;
+        private var summary:ProfileSummary;
 
         public function Profile(view:IView)
         {
             super(view);
-            summaryPage = null;
+            summary = null;
         }
 
         public function get tabNavigator():ProfileTabNavigator
@@ -45,7 +45,6 @@ package xvm.hangar.views
         {
             try
             {
-                //Logger.add("onAfterPopulate: " + view.as_alias);
                 init();
             }
             catch (ex:Error)
@@ -71,19 +70,28 @@ package xvm.hangar.views
 
         private function onSectionViewShowed(e:ViewStackEvent):void
         {
-            //Logger.addObject(e);
-            if (e.view is ProfileSummaryPage)
+            if (e.view is ProfileSummary)
             {
-                summaryPage = e.view as ProfileSummaryPage;
+                summary = e.view as ProfileSummary;
             }
             else if (e.view is ProfileTechniquePage)
             {
                 var page:ProfileTechniquePage = e.view as ProfileTechniquePage;
                 if (page.getChildByName("xvm_extension") == null)
                 {
-                    var x:TechniquePage = new TechniquePage(page, summaryPage);
-                    x.name = "xvm_extension";
-                    page.addChild(x);
+                    var tp:TechniquePage = new TechniquePage(page, summary);
+                    tp.name = "xvm_extension";
+                    page.addChild(tp);
+                }
+            }
+            else if (e.view is ProfileTechniqueWindow)
+            {
+                var window:ProfileTechniqueWindow = e.view as ProfileTechniqueWindow;
+                if (window.getChildByName("xvm_extension") == null)
+                {
+                    var tw:TechniqueWindow = new TechniqueWindow(window, summary);
+                    tw.name = "xvm_extension";
+                    window.addChild(tw);
                 }
             }
         }
