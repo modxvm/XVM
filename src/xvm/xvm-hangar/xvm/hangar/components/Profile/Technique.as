@@ -21,9 +21,16 @@ package xvm.hangar.components.Profile
             this.page = page;
             this.summary = summary;
 
+            page.listComponent.lowerShadow.visible = false;
             page.listComponent.techniqueList.itemRenderer = UI_TechniqueRenderer;
+            page.listComponent.techniqueList.addEventListener(TechniqueList.SELECTED_DATA_CHANGED, selectedDataChangeHandler, false, 0, true);
         }
 
         // PRIVATE
+
+        private function selectedDataChangeHandler(e:Event):void
+        {
+            //Logger.add("selectedDataChangeHandler");
+        }
     }
 }
