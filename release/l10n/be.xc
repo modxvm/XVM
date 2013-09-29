@@ -36,7 +36,7 @@
     "allyBaseCapture": "Захоп нашай базы!",
     "allyBaseCaptured": "Нашую базу захапілі!",
     "Timeleft": "Засталося часу",
-    "Capturers": "Захопнікаў"
+    "Capturers": "Захопнікаў",
 
     // BattleResults
     "Hit percent": "Выніковасць стральбы",
