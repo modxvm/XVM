@@ -4,36 +4,22 @@ package xvm.UI.profileSections
     import flash.events.Event;
     import flash.events.MouseEvent;
     import xvm.hangar.components.BattleLoading.*;
-    import xvm.hangar.components.Company.CompanyOwnerItemRenderer;
+    import xvm.hangar.components.Profile.ProfileTechniqueRenderer;
 
     public class UI_TechniqueRenderer extends TechniqueRenderer_UI
     {
-        //private var worker:CompanyOwnerItemRenderer;
+        private var worker:ProfileTechniqueRenderer;
 
         public function UI_TechniqueRenderer()
         {
-            //Logger.add("UI_TechniqueRenderer::ctor()");
             super();
-            //worker = new CompanyOwnerItemRenderer(this);
+            worker = new ProfileTechniqueRenderer(this);
         }
 
-        override protected function configUI():void
+        override protected function draw():void
         {
-            super.configUI();
-            //worker.configUI();
+            super.draw();
+            worker.draw();
         }
-
-        override public function setData(data:Object):void
-        {
-            //Logger.add("UI_TechniqueRenderer::setData()");
-            super.setData(data);
-            //worker.setData(data);
-        }
-
-        /*override protected function handleMouseRollOver(e:flash.events.MouseEvent):void
-        {
-            super.handleMouseRollOver(e);
-            worker.handleMouseRollOver(e);
-        }*/
     }
 }

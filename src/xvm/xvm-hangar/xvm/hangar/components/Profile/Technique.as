@@ -53,7 +53,16 @@ package xvm.hangar.components.Profile
                 if (!dp || dp.length <= 0)
                     return;
 
-                var idx:int = dp.indexOf(summaryItem);
+                var idx:int = -1;
+                for (var i:int = 0; i < dp.length; ++i)
+                {
+                    if (dp[i].id == -1)
+                    {
+                        idx = i;
+                        break;
+                    }
+                }
+
                 if (idx != 0)
                 {
                     var d:Array = dp as Array;
@@ -72,23 +81,45 @@ package xvm.hangar.components.Profile
             }
         }
 
-        private static const summaryItem:TechniqueListVehicleVO = new TechniqueListVehicleVO(
+        private function get summaryItem():TechniqueListVehicleVO
         {
-            "id": -1,
-            "level": 0,
-            "markOfMastery": 0,
-            "typeIndex": 0,
-            "typeIconPath": "../maps/icons/filters/tanks/all.png",
-            "tankIconPath": "../maps/icons/filters/empty.png",
-            "nationIndex": -1,
-            "avgExperience": 0,
-            "winsEfficiency": 0,
-            "battlesCount": 0,
-            "userName": "",
-            "shortUserName": Locale.get("Summary"),
-            "isInHangar": true,
-            "nationID": -1,
-            "inventoryID": -1
-        });
+            return new TechniqueListVehicleVO(
+            {
+                "id": -1,
+                "level": 0,
+                "markOfMastery": 0,
+                "typeIndex": 0,
+                "typeIconPath": "../maps/icons/filters/tanks/all.png",
+                "tankIconPath": "../maps/icons/filters/empty.png",
+                "nationIndex": -1,
+                "userName": "",
+                "shortUserName": Locale.get("Summary"),
+                "isInHangar": true,
+                "nationID": -1,
+                "inventoryID": -1,
+                "battlesCount": extractNumber(summary.tfTotalBattles.text),
+                "winsEfficiency": extractNumber(summary.tfWins.text),
+                "avgExperience": summary.tfAvgExperience.text
+            });
+        }
+
+        private function extractNumber(str:String):Number
+        {
+            if (!str)
+                return NaN;
+
+            str = str.replace(",", ".");
+
+            // String.replace have problems with unicode.
+            var res:String = "";
+            for (var i:int = 0; i < str.length; ++i)
+            {
+                var c:String = str.charAt(i);
+                if ((c >= "0" && c <= "9") || c == ".")
+                    res += c;
+            }
+            return parseFloat(res);
+        }
+
     }
 }
