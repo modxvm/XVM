@@ -7,6 +7,7 @@ package xvm.hangar.components.BattleResultes
     import flash.text.TextFieldAutoSize;
     import flash.text.TextFormatAlign;
     import net.wg.gui.lobby.battleResults.CommonStats;
+    import xvm.UI.battleResults.UI_BR_SubtaskComponent_UI;
 
     /**
      * @author Pavel Máca
@@ -32,6 +33,8 @@ package xvm.hangar.components.BattleResultes
             var instance:CommonView = new CommonView();
             instance.view = view;
 
+            instance.compactQuests();
+
             if (Config.config.battleResults.showExtendedInfo)
             {
                 instance.hideDetailBtn();
@@ -42,6 +45,17 @@ package xvm.hangar.components.BattleResultes
 
             if (Config.config.battleResults.showNetIncome)
                 instance.showNetIncome(view.detailsMc.data);
+        }
+
+        private function compactQuests():void
+        {
+            // replace quest item renderer class
+            UI_BR_SubtaskComponent_UI; // this make sure it's compiled
+            view.questList.linkage = "xvm.UI.battleResults.UI_BR_SubtaskComponent_UI";
+
+            // hide shadows
+            view.upperShadow.visible = false;
+            view.lowerShadow.visible = false;
         }
 
         private function hideDetailBtn():void
@@ -107,12 +121,7 @@ package xvm.hangar.components.BattleResultes
 
         private function formatThousand(val:Number):String
         {
-            var res:String = val.toString();
-            if (val >= 1000)
-            {
-                res = res.slice(0, -3) + " " + res.slice(-3);
-            }
-            return res;
+            return App.utils.locale.integer(val);
         }
 
         private function formatText(text:String, color:String, align:String = TextFormatAlign.LEFT):String
@@ -130,8 +139,7 @@ package xvm.hangar.components.BattleResultes
                 hitPercent = (data.hits / data.shots) * 100;
             else
                 hitPercent = 0;
-
-            shotsPercent.htmlText = formatText(hitPercent.toFixed(2) + "%", "#C9C9B6", TextFormatAlign.RIGHT);
+            shotsPercent.htmlText = formatText(App.utils.locale.float(hitPercent) + "%", "#C9C9B6", TextFormatAlign.RIGHT);
 
             damageAssistedTitle.htmlText = formatText(Locale.get("Damage (assisted / own)"), "#C9C9B6");
             damageAssistedValue.htmlText = formatText(formatThousand(data.damageAssisted), "#408CCF", TextFormatAlign.RIGHT);

@@ -83,7 +83,7 @@ package xvm.hangar.views
 
             // set startPage
             var startPage:Number = Config.config.battleResults.startPage - 1;
-            ;
+
             if (page.tabs_mc.dataProvider[startPage] != null)
                 page.tabs_mc.selectedIndex = startPage;
             else

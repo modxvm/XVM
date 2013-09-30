@@ -48,6 +48,10 @@ squadItemRendererUI;
 // profileSections.swf
 TechniqueRenderer_UI;
 
+// battleResults.swf
+BR_SubtaskComponent_UI;
+
+
 }
 
 }

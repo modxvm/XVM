@@ -61,7 +61,8 @@ package
                     "companyWindow.swf",
                     "battleLoading.swf",
                     "squadWindow.swf",
-                    "profileSections.swf"
+                    "profileSections.swf",
+                    "battleResults.swf"
                 ]; // TODO make configurable dependencies
                 for (var x:int = 0; x < preload.length; ++x)
                 {
