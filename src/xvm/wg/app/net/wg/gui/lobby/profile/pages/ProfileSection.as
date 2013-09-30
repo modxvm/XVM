@@ -1,4 +1,4 @@
-package net.wg.gui.lobby.profile.pages 
+package net.wg.gui.lobby.profile.pages
 {
     import flash.geom.*;
     import net.wg.data.gui_items.dossier.*;
@@ -6,7 +6,7 @@ package net.wg.gui.lobby.profile.pages
     import net.wg.gui.lobby.profile.data.*;
     import net.wg.infrastructure.base.meta.*;
     import net.wg.infrastructure.base.meta.impl.*;
-    
+
     public class ProfileSection extends net.wg.infrastructure.base.meta.impl.ProfileSectionMeta implements net.wg.infrastructure.base.meta.IProfileSectionMeta, net.wg.gui.lobby.profile.components.IResizableContent
     {
         public function ProfileSection()
@@ -18,7 +18,7 @@ package net.wg.gui.lobby.profile.pages
         protected override function draw():void
         {
             super.draw();
-            if (isInvalid(net.wg.gui.lobby.profile.components.ResizableInvalidationTypes.CURRENT_DIMENSION_INVALID) && this.currentDimension) 
+            if (isInvalid(net.wg.gui.lobby.profile.components.ResizableInvalidationTypes.CURRENT_DIMENSION_INVALID) && this.currentDimension)
             {
                 this.applyResizing();
             }
@@ -27,7 +27,7 @@ package net.wg.gui.lobby.profile.pages
 
         protected function applyResizing():void
         {
-            if (this.layoutManager) 
+            if (this.layoutManager)
             {
                 this.layoutManager.setDimension(this.currentDimension.x, this.currentDimension.y);
             }
@@ -37,7 +37,7 @@ package net.wg.gui.lobby.profile.pages
 
         public function setViewSize(arg1:Number, arg2:Number):void
         {
-            if (!this.currentDimension) 
+            if (!this.currentDimension)
             {
                 this.currentDimension = new flash.geom.Point();
             }
@@ -64,7 +64,7 @@ package net.wg.gui.lobby.profile.pages
 
         protected function disposeLayoutManager():void
         {
-            if (this.layoutManager) 
+            if (this.layoutManager)
             {
                 this.layoutManager.dispose();
                 this.layoutManager = null;
@@ -82,7 +82,7 @@ package net.wg.gui.lobby.profile.pages
         public function update(arg1:Object):void
         {
             var loc1:*=net.wg.data.gui_items.dossier.AccountDossier(arg1);
-            if (this.currentDossier != loc1) 
+            if (this.currentDossier != loc1)
             {
                 this.currentDossier = loc1;
                 this.updateByDossier(loc1);

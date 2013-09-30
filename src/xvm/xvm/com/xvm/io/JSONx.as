@@ -159,40 +159,43 @@ package com.xvm.io
                 case 'string':
                     s = '"';
                     // charAt is much slower in Scaleform then array
-                    var ca:Vector.<String> = Vector.<String>((arg as String).split(''));
-                    len = ca.length;
-                    for (i = 0; i < len; i += 1)
+                    if (arg as String != "")
                     {
-                        c = ca[i];
-                        if (c >= ' ') {
-                            if (c == '\\' || c == '"')
-                                s += '\\';
-                            if (c == '%')
-                                s += '\\u0025';
-                            else
-                                s += c;
-                        }
-                        else
+                        var ca:Vector.<String> = Vector.<String>((arg as String).split(''));
+                        len = ca.length;
+                        for (i = 0; i < len; i += 1)
                         {
-                            switch (c) {
-                                case '\b':
-                                    s += '\\b';
-                                    break;
-                                case '\f':
-                                    s += '\\f';
-                                    break;
-                                case '\n':
-                                    s += '\\n';
-                                    break;
-                                case '\r':
-                                    s += '\\r';
-                                    break;
-                                case '\t':
-                                    s += '\\t';
-                                    break;
-                                default:
-                                    cc = c.charCodeAt();
-                                    s += '\\u00' + Math.floor(cc / 16).toString(16) + (cc % 16).toString(16);
+                            c = ca[i];
+                            if (c >= ' ') {
+                                if (c == '\\' || c == '"')
+                                    s += '\\';
+                                if (c == '%')
+                                    s += '\\u0025';
+                                else
+                                    s += c;
+                            }
+                            else
+                            {
+                                switch (c) {
+                                    case '\b':
+                                        s += '\\b';
+                                        break;
+                                    case '\f':
+                                        s += '\\f';
+                                        break;
+                                    case '\n':
+                                        s += '\\n';
+                                        break;
+                                    case '\r':
+                                        s += '\\r';
+                                        break;
+                                    case '\t':
+                                        s += '\\t';
+                                        break;
+                                    default:
+                                        cc = c.charCodeAt();
+                                        s += '\\u00' + Math.floor(cc / 16).toString(16) + (cc % 16).toString(16);
+                                }
                             }
                         }
                     }

@@ -3,8 +3,10 @@ package xvm.hangar.components.Profile
     import flash.display.*;
     import flash.events.*;
     import flash.utils.*;
+    import net.wg.gui.components.windows.Window;
     import net.wg.gui.lobby.profile.pages.summary.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
+    import net.wg.gui.lobby.window.*;
     import com.xvm.*;
     import com.xvm.events.*;
     import com.xvm.io.*;
@@ -16,6 +18,17 @@ package xvm.hangar.components.Profile
         public function TechniqueWindow(window:ProfileTechniqueWindow, summary:ProfileSummary):void
         {
             super(window, summary);
+        }
+
+        override protected function getPlayerName():String
+        {
+            // TODO
+            return "";
+        }
+
+        override protected function createControls():void
+        {
+            super.createControls();
         }
 
         // PRIVATE

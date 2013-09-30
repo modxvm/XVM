@@ -20,6 +20,17 @@ package xvm.hangar.components.Profile
             page.checkBoxExistence.selected = Config.config.userInfo.inHangarFilterEnabled;
         }
 
+        override protected function getPlayerName():String
+        {
+            // TODO
+            return "";
+        }
+
+        override protected function createControls():void
+        {
+            super.createControls();
+        }
+
         // PRIVATE
     }
 }

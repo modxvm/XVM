@@ -205,6 +205,11 @@ package com.xvm
             //Logger.add("TRACE: loadUserData(): target=" + String(target));
             try
             {
+                if (value == null || value == "")
+                {
+                    callback.call(target, null);
+                    return;
+                }
                 var inProgress:Boolean = false;
                 if (callback != null)
                 {
