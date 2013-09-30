@@ -43,8 +43,8 @@ protected function RefreshCurrentPage():void
             RefreshPlayersPanel1Page();
         else if (pg == pgPlayersPanel2)
             RefreshPlayersPanel2Page();
-        else if (pg == pgFinalStatistic)
-            RefreshFinalStatisticPage();
+        else if (pg == pgBattleResults)
+            RefreshBattleResultsPage();
         else if (pg == pgColors1)
             RefreshColorsPage1();
         else if (pg == pgColors2)
@@ -491,22 +491,23 @@ private function RefreshPlayersPanel2Page():void
     }
 }
 
-private function RefreshFinalStatisticPage():void
+private function RefreshBattleResultsPage():void
 {
-    debug("RefreshFinalStatisticPage()");
+    debug("RefreshBattleResultsPage()");
     try
     {
         var section:*;
 
-        section = Config.config.finalStatistic;
-        this.p_finalStatistic.v_startPage.value = section.startPage;
-        this.p_finalStatistic.v_sortColumn.value = section.sortColumn;
-        this.p_finalStatistic.v_showChances.value = section.showChances;
-        this.p_finalStatistic.v_showChancesExp.value = section.showChancesExp;
+        section = Config.config.battleResults;
+        this.p_battleResults.v_startPage.value = section.startPage;
+        this.p_battleResults.v_showNetIncome.value = section.showNetIncome;
+        this.p_battleResults.v_showExtendedInfo.value = section.showExtendedInfo;
+        this.p_battleResults.v_showChances.value = section.showChances;
+        this.p_battleResults.v_showChancesExp.value = section.showChancesExp;
     }
     catch (ex:Error)
     {
-        error(ex.toString(), "RefreshFinalStatisticPage()");
+        error(ex.toString(), "RefreshBattleResultsPage()");
     }
 }
 

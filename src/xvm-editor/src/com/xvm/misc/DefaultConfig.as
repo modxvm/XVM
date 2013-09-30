@@ -28,7 +28,7 @@ package com.xvm.misc
             c.battleLoading = getBattleLoadingSection();
             c.statisticForm = getStatisticFormSection();
             c.playersPanel = getPlayersPanelSection();
-            c.finalStatistic = getFinalStatisticSection();
+            c.battleResults = getBattleResultsSection();
             c.turretMarkers = getTurretMarkersSection();
             c.expertPanel = getExpertPanelSection();
             c.minimap = getMinimapSection();
@@ -192,7 +192,7 @@ package com.xvm.misc
             c.showFilters = true;              // Show tank filters
             c.filterFocused = true;            // Set the default focus to the filter text input
             c.inHangarFilterEnabled = false;   // Enable In hangar radio button by default
-            c.sortColumn = 6;                  // Number of column for sorting
+            c.sortColumn = 5;                  // Number of column for sorting
             return c;
         }
 
@@ -325,11 +325,12 @@ package com.xvm.misc
             return c;
         }
 
-        private static function getFinalStatisticSection():Object
+        private static function getBattleResultsSection():Object
         {
             var c:Object = new Object();
             c.startPage = 1;
-            c.sortColumn = 6; // XP
+            c.showNetIncome = true;
+            c.showExtendedInfo = true;
             c.showChances = false;
             c.showChancesExp = false;
             return c;

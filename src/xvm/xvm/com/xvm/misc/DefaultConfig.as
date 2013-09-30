@@ -194,7 +194,7 @@ package com.xvm.misc
             c.showFilters = true;              // Show tank filters
             c.filterFocused = true;            // Set the default focus to the filter text input
             c.inHangarFilterEnabled = false;   // Enable In hangar radio button by default
-            c.sortColumn = 6;                  // Number of column for sorting
+            c.sortColumn = 5;                  // Number of column for sorting
             return c;
         }
 

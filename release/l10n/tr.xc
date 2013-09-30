@@ -38,7 +38,7 @@
     "Timeleft": "Kalan Süre",
     "Capturers": "İşgalciler",
 
-    // FinalStatistics
+    // BattleResults
     "Hit percent": "Vuruş yüzdesi",
     "Damage upon detecting": "Tespit üzerine hasar",
     "Damage dealt": "Yapılan hasar",

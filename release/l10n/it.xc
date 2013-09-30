@@ -38,7 +38,7 @@
     "Timeleft": "Tempo Rimasto",
     "Capturers": "Invasori",
 
-    // FinalStatistics
+    // BattleResults
     "Hit percent": "Hit percent",
     "Damage upon detecting": "Danno da spot",
     "Damage dealt": "Danno totale",

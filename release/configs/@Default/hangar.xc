@@ -98,16 +98,16 @@
     // true - Enable filter tanks in hangar by default.
     // true - включить фильтр отображения танков в ангаре по умолчанию.
     "inHangarFilterEnabled": false,
-    // number of column for sorting by default. Sort order: >0 - default, <0 - inverse
+    // number of column for sorting by default. Sort order: >0 - default, <0 - reverse
     // номер колонки для сортировки по умолчанию. Порядок сортировки: >0 - по умолчанию, <0 - обратный
-    // 1 - Level       / Уровень
+    // 1 - Nation      / Нация
     // 2 - Type        / Тип
-    // 3 - Nation      / Нация
+    // 3 - Level       / Уровень
     // 4 - Name        / Название
-    // 5 - E           / E
-    // 6 - Fights      / Боев
-    // 7 - Wins        / Побед
-    // 8 - Class mark  / Знак классности
-    "sortColumn": 6
+    // 5 - Fights      / Бои
+    // 6 - Wins        / Победы
+    // 7 - Average XP  / Средний опыт
+    // 8 - Class mark  / Классность
+    "sortColumn": 5
   }
 }

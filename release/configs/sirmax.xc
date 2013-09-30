@@ -57,7 +57,7 @@
   },
   "userInfo": {
      "inHangarFilterEnabled": true,
-     "sortColumn": -1
+     "sortColumn": -3
   },
   "squad": {
     "enabled": true,
@@ -147,9 +147,8 @@
       }
     }
   },
-  "finalStatistic": {
+  "battleResults": {
     "startPage": 1,
-    "sortColumn": 6,
     "showChances": true,
     "showChancesExp": true
   },

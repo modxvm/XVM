@@ -38,7 +38,7 @@
     "Timeleft": "Còn lại",
     "Capturers": "Xe đang chiếm",
 
-    // FinalStatistics
+    // BattleResults
     "Hit percent": "Tỉ lệ trúng",
     "Damage upon detecting": "Thiệt hại khi phát hiện",
     "Damage dealt": "Sát thương",

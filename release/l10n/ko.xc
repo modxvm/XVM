@@ -38,7 +38,7 @@
     "Timeleft": "남은 시간",
     "Capturers": "점령자 수",
 
-    // FinalStatistics
+    // BattleResults
     "Hit percent": "명중률",
     "Damage upon detecting": "발견한 적이 입은 데미지",
     "Damage dealt": "입힌 데미지",

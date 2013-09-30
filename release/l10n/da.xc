@@ -38,7 +38,7 @@
     "Timeleft": "Tid tilbage",
     "Capturers": "Erobrere",
 
-    // FinalStatistics
+    // BattleResults
     "Hit percent": "Træfprocent",
     "Damage upon detecting": "Skade ved sporing",
     "Damage dealt": "Skade tildelt",

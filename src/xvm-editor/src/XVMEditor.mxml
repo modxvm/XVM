@@ -338,10 +338,10 @@
                         </s:VGroup>
                     </s:Scroller>
                 </s:NavigatorContent>
-                <s:NavigatorContent label="{_('FinalStatistic')}" width="100%" height="100%" id="pgFinalStatistic">
+                <s:NavigatorContent label="{_('BattleResults')}" width="100%" height="100%" id="pgBattleResults">
                     <s:Scroller x="0" y="0" width="420" height="100%">
                         <s:VGroup x="0" y="0" width="100%" height="100%" gap="-1" creationComplete="{RefreshCurrentPage()}">
-                            <p:PFinalStatistic id="p_finalStatistic" config="finalStatistic" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
+                            <p:PBattleResults id="p_battleResults" config="battleResults" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
                         </s:VGroup>
                     </s:Scroller>
                 </s:NavigatorContent>

@@ -29,6 +29,11 @@ package xvm.hangar.components.Profile
             // remove lower shadow (last item is looks bad with it)
             page.listComponent.lowerShadow.visible = false;
 
+            // default sort
+            //sortColumn
+    //"filterFocused": true,
+    //"showFilters": true,
+
             // handle dataProvider change
             page.listComponent.addEventListener(ListEvent.INDEX_CHANGE, adjustSummaryItem, false, 0, true);
             page.listComponent.sortableButtonBar.addEventListener(SortingButton.SORT_DIRECTION_CHANGED, adjustSummaryItem, false, 0, true);

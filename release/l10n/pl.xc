@@ -38,7 +38,7 @@
     "Timeleft": "Pozostało",
     "Capturers": "Okupantów",
 
-    // FinalStatistics
+    // BattleResults
     "Hit percent": "Procent trafień",
     "Damage upon detecting": "Uszkodzenia z wykrycia",
     "Damage dealt": "Uszkodzenia zadane",

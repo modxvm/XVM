@@ -16,7 +16,7 @@
     "hitLog",
     "expertPanel",
     "captureBar",
-    "finalStatistic",
+    "battleResults",
     "turretMarkers",
     "texts",
     "iconset",

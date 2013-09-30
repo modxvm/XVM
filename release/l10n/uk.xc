@@ -38,7 +38,7 @@
     "Timeleft": "Залишилось",
     "Capturers": "Загарбників",
 
-    // FinalStatistics
+    // BattleResults
     "Hit percent": "Відсоток влучень",
     "Damage upon detecting": "Пошкодження за вашими розвідданними",
     "Damage dealt": "Нанесені пошкодження",

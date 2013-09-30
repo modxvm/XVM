@@ -123,11 +123,12 @@ protected function onSetDefaultValue(event:SetDefaultValueEvent):void
                 ConfigUtilsEditor.SetDefaultValue("playersPanel.removeSquadIcon");
                 break;
 
-            case "finalStatistic":
-                ConfigUtilsEditor.SetDefaultValue("finalStatistic.startPage");
-                ConfigUtilsEditor.SetDefaultValue("finalStatistic.sortColumn");
-                ConfigUtilsEditor.SetDefaultValue("finalStatistic.showChances");
-                ConfigUtilsEditor.SetDefaultValue("finalStatistic.showChancesExp");
+            case "battleResults":
+                ConfigUtilsEditor.SetDefaultValue("battleResults.startPage");
+                ConfigUtilsEditor.SetDefaultValue("battleResults.showNetIncome");
+                ConfigUtilsEditor.SetDefaultValue("battleResults.showExtendedInfo");
+                ConfigUtilsEditor.SetDefaultValue("battleResults.showChances");
+                ConfigUtilsEditor.SetDefaultValue("battleResults.showChancesExp");
                 break;
 
             default:

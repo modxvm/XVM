@@ -38,7 +38,7 @@
     "Timeleft": "Tijd over",
     "Capturers": "Veroveraars",
 
-    // FinalStatistics
+    // BattleResults
     "Hit percent": "Treffer percentage",
     "Damage upon detecting": "Schade door onderkenning",
     "Damage dealt": "Schade toe gebracht",
