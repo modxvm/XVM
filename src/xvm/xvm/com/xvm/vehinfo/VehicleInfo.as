@@ -2,6 +2,7 @@
  * XVM Config
  * @author Maxim Schedriviy <m.schedriviy@gmail.com>
  */
+// TODO: complete refactoring. Use python to get values online.
 package com.xvm.vehinfo
 {
     import org.idmedia.as3commons.util.StringUtils;
@@ -96,6 +97,10 @@ package com.xvm.vehinfo
 
         public static function getInfo2ByVid(vid:Number):Object
         {
+            if (isNaN(vid))
+                return null;
+            // TODO: what is in the 1st bit?
+            vid = vid & ~1;
             return _getInfo2(VehicleInfoData2.vidToVname[vid]);
         }
 
