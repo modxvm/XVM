@@ -29,17 +29,30 @@ package xvm.hangar.components.Profile
             // remove lower shadow (last item is looks bad with it)
             page.listComponent.lowerShadow.visible = false;
 
-            // default sort
-            //sortColumn
-    //"filterFocused": true,
-    //"showFilters": true,
+            //"showFilters": true,
+            //"filterFocused": true,
 
             // handle dataProvider change
+            page.listComponent.addEventListener(ListEvent.INDEX_CHANGE, afterConfigUI, false, 0, true);
             page.listComponent.addEventListener(ListEvent.INDEX_CHANGE, adjustSummaryItem, false, 0, true);
             page.listComponent.sortableButtonBar.addEventListener(SortingButton.SORT_DIRECTION_CHANGED, adjustSummaryItem, false, 0, true);
 
             // override renderer
             list.itemRenderer = UI_TechniqueRenderer;
+        }
+
+        private function afterConfigUI():void
+        {
+            page.listComponent.removeEventListener(ListEvent.INDEX_CHANGE, afterConfigUI);
+
+            // userInfo.sortColumn
+            App.utils.scheduler.envokeInNextFrame(function():void
+            {
+                var bb:SortableHeaderButtonBar = page.listComponent.sortableButtonBar;
+                bb.selectedIndex = Math.abs(Config.config.userInfo.sortColumn) - 1;
+                var b:SortingButton = bb.getButtonAt(bb.selectedIndex) as SortingButton;
+                b.sortDirection = Config.config.userInfo.sortColumn < 0 ? SortingButton.DESCENDING_SORT : SortingButton.ASCENDING_SORT;
+            });
         }
 
         // PRIVATE
