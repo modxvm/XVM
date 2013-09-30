@@ -164,7 +164,6 @@ private function RefreshHangarPage():void
         this.p_hangar.v_showFilters.value = section.showFilters;
         this.p_hangar.v_filterFocused.value = section.filterFocused;
         this.p_hangar.v_inHangarFilterEnabled.value = section.inHangarFilterEnabled;
-        this.p_hangar.v_showEColumn.value = section.showEColumn;
         this.p_hangar.v_sortColumn.value = section.sortColumn;
 
         section = Config.config.squad;

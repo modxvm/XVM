@@ -14,7 +14,6 @@
     <c:LabeledCheckBox label="{_('showFilters')}" id="v_showFilters" config="userInfo.showFilters" change="onChange(event)"/>
     <c:LabeledCheckBox label="{_('filterFocused')}" id="v_filterFocused" config="userInfo.filterFocused" change="onChange(event)"/>
     <c:LabeledCheckBox label="{_('inHangarFilterEnabled')}" id="v_inHangarFilterEnabled" config="userInfo.inHangarFilterEnabled" change="onChange(event)"/>
-    <c:LabeledCheckBox label="{_('showEColumn')}" id="v_showEColumn" config="userInfo.showEColumn" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{_('sortColumn')}" toolTip="{_('sortColumnTip')}" labelWidth="180" id="v_sortColumn" config="userInfo.sortColumn" minimum="-8" maximum="8" change="onChange(event)"/>
 
     <s:Label text="{_('Squad')}:" width="100%" height="20" fontWeight="bold" paddingLeft="5" verticalAlign="middle" backgroundColor="0xCCCCCC"/>
