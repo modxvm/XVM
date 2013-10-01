@@ -1,27 +1,19 @@
 package xvm.hangar.components.Profile
 {
-    //import flash.events.*;
-    //import scaleform.clik.data.DataProvider;
-    //import scaleform.clik.events.*;
-    //import scaleform.clik.interfaces.*;
     import net.wg.gui.components.advanced.*;
-    //import net.wg.gui.lobby.profile.pages.summary.*;
-    //import net.wg.gui.lobby.profile.pages.technique.*;
     import com.xvm.*;
-    //import com.xvm.events.*;
-    //import com.xvm.l10n.Locale;
 
     // Add summary item to the first line of technique list
     public final class TechniqueListSorting
     {
-        private static const B_NATION:String = "nation";
-        private static const B_TYPE:String = "type";
-        private static const B_LEVEL:String = "level";
-        private static const B_VEHICLE_NAME:String = "vName";
-        private static const B_TOTAL_BATTLES:String = "totalBattles";
-        private static const B_TOTAL_WINS:String = "totalWins";
-        private static const B_AVG_EXP:String = "avgExperience";
-        private static const B_MASTERY:String = "mastery";
+        private static const F_NATION:String = "nation";
+        private static const F_TYPE:String = "type";
+        private static const F_LEVEL:String = "level";
+        private static const F_VEHICLE_NAME:String = "vName";
+        private static const F_TOTAL_BATTLES:String = "totalBattles";
+        private static const F_TOTAL_WINS:String = "totalWins";
+        private static const F_AVG_EXP:String = "avgExperience";
+        private static const F_MASTERY:String = "mastery";
 
         private static const NATION_INDEX:String = "nationIndex";
         private static const TYPE_INDEX:String = "typeIndex";
@@ -34,47 +26,52 @@ package xvm.hangar.components.Profile
 
         //private static var sortFunctions:Object = null;
 
-        private static var SORT_OPTIONS:Object = [
-            [ { name: B_NATION, field: NATION_INDEX, options: Array.NUMERIC } ],
-            [ { name: B_TYPE, field: TYPE_INDEX, options: Array.CASEINSENSITIVE } ],
-            [ { name: B_LEVEL, field: LEVEL, options: Array.NUMERIC } ],
-            [ { name: B_VEHICLE_NAME, field: SHORT_USER_NAME, options: Array.CASEINSENSITIVE } ],
-            [ { name: B_TOTAL_BATTLES, field: BATTLES_COUNT, options: Array.NUMERIC } ],
-            [ { name: B_TOTAL_WINS, field: WINS_EFFICIENCY, options: Array.NUMERIC } ],
-            [ { name: B_AVG_EXP, field: AVG_EXPERIENCE, options: Array.NUMERIC } ],
-            [ { name: B_MASTERY, field: MARK_OF_MASTERY, options: Array.NUMERIC } ]
-        ];
+        private static var SORT_FIELDS:Object = {
+            "nation":           { field: NATION_INDEX, options: Array.NUMERIC },
+            "type":             { field: TYPE_INDEX, options: Array.CASEINSENSITIVE },
+            "level":            { field: LEVEL, options: Array.NUMERIC | Array.DESCENDING },
+            "vName":            { field: SHORT_USER_NAME, options: Array.CASEINSENSITIVE },
+            "totalBattles":     { field: BATTLES_COUNT, options: Array.NUMERIC | Array.DESCENDING },
+            "totalWins":        { field: WINS_EFFICIENCY, options: Array.NUMERIC | Array.DESCENDING },
+            "avgExperience":    { field: AVG_EXPERIENCE, options: Array.NUMERIC | Array.DESCENDING },
+            "mastery":          { field: MARK_OF_MASTERY, options: Array.NUMERIC | Array.DESCENDING }
+        };
+
+        private static var SORT_OPTIONS:Object = {
+            "nation":           [ F_NATION, F_LEVEL, F_TYPE, F_VEHICLE_NAME ],              // 1 - nation
+            "type":             [ F_TYPE, F_LEVEL, F_NATION, F_VEHICLE_NAME ],              // 2 - type
+            "level":            [ F_LEVEL, F_NATION, F_TYPE, F_VEHICLE_NAME ],              // 3 - level
+            "vName":            [ F_VEHICLE_NAME ],                                         // 4 - vName
+            "totalBattles":     [ F_TOTAL_BATTLES ],                                        // 5 - totalBattles
+            "totalWins":        [ F_TOTAL_WINS ],                                           // 6 - totalWins
+            "avgExperience":    [ F_AVG_EXP ],                                              // 7 - evgExperience
+            "mastery":          [ F_MASTERY, F_LEVEL, F_NATION, F_TYPE, F_VEHICLE_NAME ]    // 8 - mastery
+        };
 
         public static function sort(data:Array, btn:SortingButton):void
         {
             if (btn.sortDirection == SortingButton.WITHOUT_SORT)
                 return;
-            var opt:Object = SORT_OPTIONS[btn.id];
-            var options:Number = opt.options;
-            if (btn.sortDirection != SortingButton.ASCENDING_SORT)
-                options |= Array.DESCENDING;
-            data.sortOn(opt.field, options);
 
-            // Original handler have calls stopImmediatePropagation() on the event, so duplicate it here,
-            // because we need to add our code after that.
-            /*if (btn.sortDirection != SortingButton.WITHOUT_SORT)
+            var opt:Array = SORT_OPTIONS[btn.id];
+            var fields:Array = [];
+            var options:Array = [];
+            for (var i:int = 0; i < opt.length; ++i)
             {
-                if (sortFunctions == null)
+                var sortFields:Object = SORT_FIELDS[opt[i]];
+                fields.push(sortFields.field);
+                var o:uint = sortFields.options;
+                if (btn.sortDirection != SortingButton.ASCENDING_SORT)
                 {
-                    sortFunctions = {};
-                    sortFunctions[NATION] = list.sortByNation;
-                    sortFunctions[LEVEL] = list.sortByLevel;
-                    sortFunctions[TYPE] = list.sortByType;
-                    sortFunctions[VEHICLE_NAME] = list.sortByVehicleName;
-                    sortFunctions[TOTAL_BATTLES] = list.sortByBattlesCount;
-                    sortFunctions[TOTAL_WINS] = list.sortByWins;
-                    sortFunctions[AVG_EXP] = list.sortByAvgExp;
-                    sortFunctions[MASTERY] = list.sortByMarkOfMastery;
+                    if ((o & Array.DESCENDING) == 0)
+                        o |= Array.DESCENDING;
+                    else
+                        o &= ~Array.DESCENDING;
                 }
-                var func:Function = sortFunctions[btn.id];
-                func.apply(page.listComponent, [btn.sortDirection == SortingButton.ASCENDING_SORT]);
-                list.validateNow();
-            }*/
+                options.push(o);
+            }
+
+            data.sortOn(fields, options);
         }
     }
 }

@@ -34,7 +34,7 @@ package xvm.hangar.components.Profile
 
         private function listComponentIndexChange(e:Event):void
         {
-            Logger.add("listComponentIndexChange");
+            //Logger.add("listComponentIndexChange");
             //adjustSummaryItem();
 
             //page.stackComponent.buttonBar.getButtonAt(1).visible = list.selectedItem.id != -1;
@@ -48,7 +48,7 @@ package xvm.hangar.components.Profile
 
         private function listSelectedDataChanged(e:Event):void
         {
-            Logger.add("listSelectedDataChanged");
+            //Logger.add("listSelectedDataChanged");
             addSummaryItem();
             //if (getSummaryItemIndex() != 0)
             //    sortDirectionChanged(e);
@@ -56,13 +56,9 @@ package xvm.hangar.components.Profile
 
         private function sortDirectionChanged(e:Event):void
         {
-            Logger.add("sortDirectionChanged");
-            //page.listComponent.invalidateData();
-            //page.listComponent.validateNow();
-            //App.utils.scheduler.envokeInNextFrame(
+            //Logger.add("sortDirectionChanged");
             e.stopImmediatePropagation(); // do not call original sorting
             sortList(e.target as SortingButton);
-            //);
         }
 
         private function addSummaryItem():void
@@ -138,37 +134,10 @@ package xvm.hangar.components.Profile
                 "isInHangar": true,
                 "nationID": -1,
                 "inventoryID": -1,
-                "battlesCount": extractNumber(summary.tfTotalBattles.text),
-                "winsEfficiency": extractNumber(summary.tfWins.text),
+                "battlesCount": ProfileUtils.extractNumber(summary.tfTotalBattles.text),
+                "winsEfficiency": ProfileUtils.extractNumber(summary.tfWins.text),
                 "avgExperience": summary.tfAvgExperience.text
             });
         }
-
-        private function extractNumber(str:String):Number
-        {
-            if (!str)
-                return NaN;
-
-            str = str.replace(",", ".");
-
-            // String.replace have problems with unicode.
-            var res:String = "";
-            for (var i:int = 0; i < str.length; ++i)
-            {
-                var c:String = str.charAt(i);
-                if ((c >= "0" && c <= "9") || c == ".")
-                    res += c;
-            }
-            return parseFloat(res);
-        }
-
-        // STAT
-
-        private function onStatLoaded(e:ObjectEvent):void
-        {
-            if (e == null)
-                return;
-        }
-
     }
 }
