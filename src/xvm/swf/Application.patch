@@ -11,3 +11,102 @@ diff -Naur Application-0.orig/net/wg/app/impl/Application.class.asasm Applicatio
       call                1
       initproperty        QName(PrivateNamespace(null, "net.wg.app.impl:Application/instance#0"), "_librariesList")
  
+diff -Naur Application-0.orig/net/wg/gui/components/tooltips/ToolTipTankmen.class.asasm Application-0/net/wg/gui/components/tooltips/ToolTipTankmen.class.asasm
+--- Application-0.orig/net/wg/gui/components/tooltips/ToolTipTankmen.class.asasm	2013-10-01 19:26:43.193602900 +0300
++++ Application-0/net/wg/gui/components/tooltips/ToolTipTankmen.class.asasm	2013-10-01 10:49:47.798531200 +0300
+@@ -427,20 +427,24 @@
+ 
+       getlocal0
+       getproperty         QName(PackageNamespace(""), "vehicleIco")
+-      getlex              QName(ProtectedNamespace("net.wg.gui.components.tooltips:ToolTipBase"), "topPosition")
+-      pushbyte            35
+-      add
+-      setproperty         QName(PackageNamespace(""), "y")
+-
+-      getlocal0
+-      getproperty         QName(PackageNamespace(""), "vehicleIco")
++      getlex              QName(PackageNamespace(""), "Math")
+       getlex              QName(ProtectedNamespace("net.wg.gui.components.tooltips:ToolTipBase"), "contentMargin")
+       getproperty         QName(PackageNamespace(""), "left")
+       getlex              QName(ProtectedNamespace("net.wg.gui.components.tooltips:ToolTipBase"), "bgShadowMargin")
+       getproperty         QName(PackageNamespace(""), "left")
+       add
++      callproperty        QName(PackageNamespace(""), "round"), 1
+       setproperty         QName(PackageNamespace(""), "x")
+ 
++      getlocal0
++      getproperty         QName(PackageNamespace(""), "vehicleIco")
++      getlex              QName(PackageNamespace(""), "Math")
++      getlex              QName(ProtectedNamespace("net.wg.gui.components.tooltips:ToolTipBase"), "topPosition")
++      pushdouble          41
++      add
++      callproperty        QName(PackageNamespace(""), "round"), 1
++      setproperty         QName(PackageNamespace(""), "y")
++
+       getlocal            5
+       getlex              QName(PackageNamespace(""), "MENU")
+       getlocal0
+@@ -519,19 +523,19 @@
+       getproperty         QName(PackageNamespace(""), "tankInfoTF")
+       getlocal0
+       getproperty         QName(PackageNamespace(""), "vehicleIco")
+-      getproperty         QName(PackageNamespace(""), "y")
+-      pushbyte            1
+-      add
+-      setproperty         QName(PackageNamespace(""), "y")
+-
+-      getlocal0
+-      getproperty         QName(PackageNamespace(""), "tankInfoTF")
+-      getlocal0
+-      getproperty         QName(PackageNamespace(""), "vehicleIco")
+       getproperty         QName(PackageNamespace(""), "x")
+       setproperty         QName(PackageNamespace(""), "x")
+ 
+       getlocal0
++      getproperty         QName(PackageNamespace(""), "tankInfoTF")
++      getlex              QName(PackageNamespace(""), "Math")
++      getlex              QName(ProtectedNamespace("net.wg.gui.components.tooltips:ToolTipBase"), "topPosition")
++      pushdouble          37
++      add
++      callproperty        QName(PackageNamespace(""), "round"), 1
++      setproperty         QName(PackageNamespace(""), "y")
++
++      getlocal0
+       getproperty         QName(PackageNamespace(""), "vehicleIco")
+       getlex              QName(PackageNamespace("net.wg.gui.events"), "UILoaderEvent")
+       getproperty         QName(PackageNamespace(""), "COMPLETE")
+@@ -1335,30 +1339,18 @@
+ 
+ L15:
+       getlocal0
+-      getproperty         QName(PackageNamespace(""), "vehicleIco")
+-      pushbyte            255
+-      setproperty         QName(PackageNamespace(""), "scaleX")
+-
++      getproperty         QName(PackageNamespace(""), "tankInfoTF")
++      getlex              QName(PackageNamespace(""), "Math")
+       getlocal0
+       getproperty         QName(PackageNamespace(""), "vehicleIco")
+-      getlex              QName(ProtectedNamespace("net.wg.gui.components.tooltips:ToolTipBase"), "contentMargin")
+-      getproperty         QName(PackageNamespace(""), "left")
+-      getlex              QName(ProtectedNamespace("net.wg.gui.components.tooltips:ToolTipBase"), "bgShadowMargin")
+-      getproperty         QName(PackageNamespace(""), "left")
+-      add
++      getproperty         QName(PackageNamespace(""), "x")
+       getlocal0
+       getproperty         QName(PackageNamespace(""), "vehicleIco")
+       getproperty         QName(PackageNamespace(""), "width")
+       add
+-      setproperty         QName(PackageNamespace(""), "x")
+-
+-      getlocal0
+-      getproperty         QName(PackageNamespace(""), "tankInfoTF")
+-      getlocal0
+-      getproperty         QName(PackageNamespace(""), "vehicleIco")
+-      getproperty         QName(PackageNamespace(""), "x")
+       pushbyte            5
+       add
++      callproperty        QName(PackageNamespace(""), "round"), 1
+       setproperty         QName(PackageNamespace(""), "x")
+ 
+       returnvoid
