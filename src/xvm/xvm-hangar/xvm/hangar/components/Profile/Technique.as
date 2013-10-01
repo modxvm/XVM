@@ -32,20 +32,6 @@ package xvm.hangar.components.Profile
             this.page = page;
             this.summary = summary;
 
-            /*var origSummaryGetGlobalRating:Function = summary.getGlobalRating;
-            summary.getGlobalRating = function():Number
-            {
-                Logger.add("id: " + arguments[0]);
-                return origSummaryGetGlobalRating.apply(summary, arguments);
-            }
-
-            var origRequestData:Function = page.requestData;
-            page.requestData = function():void
-            {
-                Logger.addObject(arguments, "arguments", 2);
-                origRequestData.apply(page, arguments);
-            }*/
-
             // override renderer
             list.itemRenderer = UI_TechniqueRenderer;
 
@@ -64,22 +50,21 @@ package xvm.hangar.components.Profile
                 Stat.loadUserData(this, onStatLoaded, getPlayerName(), false);
 
             // post init
-            list.addEventListener(TechniqueList.SELECTED_DATA_CHANGED, delayedInit);
+            techniqueListAdjuster.addEventListener(Event.INIT, delayedInit);
         }
 
         private function delayedInit():void
         {
-            list.removeEventListener(TechniqueList.SELECTED_DATA_CHANGED, delayedInit);
-
+            Logger.add("delayedInit");
             // userInfo.sortColumn
-            App.utils.scheduler.envokeInNextFrame(function():void
+            //App.utils.scheduler.envokeInNextFrame(function():void
             {
                 var bb:SortableHeaderButtonBar = page.listComponent.sortableButtonBar;
                 bb.selectedIndex = Math.abs(Config.config.userInfo.sortColumn) - 1;
                 var b:SortingButton = bb.getButtonAt(bb.selectedIndex) as SortingButton;
                 b.sortDirection = Config.config.userInfo.sortColumn < 0 ? SortingButton.DESCENDING_SORT : SortingButton.ASCENDING_SORT;
                 list.selectedIndex = 0;
-            });
+            }//);
         }
 
         protected function get list():TechniqueList

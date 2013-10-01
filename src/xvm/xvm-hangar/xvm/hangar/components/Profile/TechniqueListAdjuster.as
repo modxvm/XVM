@@ -12,54 +12,63 @@ package xvm.hangar.components.Profile
     import com.xvm.l10n.Locale;
 
     // Add summary item to the first line of technique list
-    public final class TechniqueListAdjuster
+    public final class TechniqueListAdjuster extends EventDispatcher
     {
         private var page:ProfileTechnique;
         private var summary:ProfileSummary;
+
+        private var initialized:Boolean;
 
         public function TechniqueListAdjuster(page:ProfileTechnique, summary:ProfileSummary):void
         {
             this.page = page;
             this.summary = summary;
 
-            list.addEventListener(TechniqueList.SELECTED_DATA_CHANGED, listSelectedDataChanged);
-            page.listComponent.addEventListener(ListEvent.INDEX_CHANGE, listComponentIndexChange);
-            page.listComponent.sortableButtonBar.addEventListener(SortingButton.SORT_DIRECTION_CHANGED, sortDirectionChanged);
+            initialized = false;
+
+            //list.addEventListener(TechniqueList.SELECTED_DATA_CHANGED, listSelectedDataChanged);
+            //page.listComponent.addEventListener(ListEvent.INDEX_CHANGE, listComponentIndexChange);
+            //page.listComponent.sortableButtonBar.addEventListener(SortingButton.SORT_DIRECTION_CHANGED, sortDirectionChanged);
         }
+
+        // PROPERTIES
 
         private function get list():TechniqueList
         {
             return page.listComponent.techniqueList;
         }
 
+        // EVENT HANDLERS
+
         private function listComponentIndexChange(e:Event):void
         {
-            //Logger.add("listComponentIndexChange");
-            //adjustSummaryItem();
+            Logger.add("listComponentIndexChange");
 
-            //page.stackComponent.buttonBar.getButtonAt(1).visible = list.selectedItem.id != -1;
-            //if (list.selectedItem.id == -1)
-            //    page.stackComponent.buttonBar.selectedIndex = 0;
-                /*if (list.selectedIndex == idx)
-                    list.selectedIndex = 0;
-                else if (list.selectedIndex < idx)
-                    list.selectedIndex++;*/
+            if (!initialized)
+            {
+                initialized = true;
+                dispatchEvent(new Event(Event.INIT));
+            }
+
+            page.stackComponent.buttonBar.getButtonAt(1).visible = list.selectedItem.id != -1;
+            if (list.selectedItem.id == -1)
+                page.stackComponent.buttonBar.selectedIndex = 0;
         }
 
         private function listSelectedDataChanged(e:Event):void
         {
-            //Logger.add("listSelectedDataChanged");
+            Logger.add("listSelectedDataChanged");
             addSummaryItem();
-            //if (getSummaryItemIndex() != 0)
-            //    sortDirectionChanged(e);
         }
 
         private function sortDirectionChanged(e:Event):void
         {
-            //Logger.add("sortDirectionChanged");
+            Logger.add("sortDirectionChanged");
             e.stopImmediatePropagation(); // do not call original sorting
             sortList(e.target as SortingButton);
         }
+
+        // PRIVATE
 
         private function addSummaryItem():void
         {
@@ -68,13 +77,23 @@ package xvm.hangar.components.Profile
                 return;
             if (getSummaryItemIndex() == -1)
             {
-                data.unshift(summaryItem);
+                Logger.add("add");
                 list.validateNow();
+                data.unshift(summaryItem);
+                sortList();
+                list.selectedIndex = 0;
             }
         }
 
-        private function sortList(btn:SortingButton):void
+        private function sortList(btn:SortingButton = null):void
         {
+            if (btn == null)
+                btn = page.listComponent.sortableButtonBar.getButtonAt(page.listComponent.sortableButtonBar.selectedIndex) as SortingButton;
+            if (btn.sortDirection == SortingButton.WITHOUT_SORT)
+                return;
+
+            Logger.add("sort in" + btn.id + " " + btn.sortDirection)
+
             var data:Array = list.dataProvider as Array;
             if (data == null || data.length <= 0)
                 return;
@@ -83,6 +102,8 @@ package xvm.hangar.components.Profile
             var renderer:IListItemRenderer = list.getRendererAt(list.selectedIndex);
             if (renderer != null)
                 selectedId = TechniqueListVehicleVO(data[list.selectedIndex]).id;
+
+            Logger.add(list.selectedIndex + " " + data[list.selectedIndex].shortUserName);
 
             var summaryItemIndex:int = getSummaryItemIndex();
             if (summaryItemIndex >= 0)
@@ -93,7 +114,9 @@ package xvm.hangar.components.Profile
             data.unshift(summaryItem);
 
             list.invalidateData();
+            list.validateNow();
 
+            list.selectedIndex = 0;
             for (var i:int = 0; i < data.length; ++i)
             {
                 if (TechniqueListVehicleVO(data[i]).id == selectedId)
@@ -102,6 +125,10 @@ package xvm.hangar.components.Profile
                     break;
                 }
             }
+            Logger.add("idx: " + list.selectedIndex)
+
+            list.dispatchEvent(new Event(TechniqueList.SELECTED_DATA_CHANGED));
+            Logger.add("sort out")
         }
 
         private function getSummaryItemIndex():int
