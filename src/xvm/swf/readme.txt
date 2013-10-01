@@ -5,4 +5,7 @@ Install patch.exe from http://sourceforge.net/projects/gnuwin32/files/patch/2.5.
 Add to PATH environment c:\Program Files (x86)\GnuWin32\bin (for 64bit systems) or c:\Program Files\GnuWin32\bin (for 2bit systems).
 Use included bat file to build patced SWF.
 
-No more need to cygwin or other unix-style big sets of tools.
+OR
+
+Use cygwin
+

@@ -1,5 +1,5 @@
-diff -Naur Application-0.orig/net/wg/app/impl/Application.class.asasm Application-0/net/wg/app/impl/Application.class.asasm
---- Application-0.orig/net/wg/app/impl/Application.class.asasm	2013-08-25 21:14:28.706086100 +0300
+diff -Naur Application.orig-0/net/wg/app/impl/Application.class.asasm Application-0/net/wg/app/impl/Application.class.asasm
+--- Application.orig-0/net/wg/app/impl/Application.class.asasm	2013-08-25 21:14:28.706086100 +0300
 +++ Application-0/net/wg/app/impl/Application.class.asasm	2013-08-27 22:06:36.712378900 +0300
 @@ -28,7 +28,8 @@
       getglobalscope
@@ -11,8 +11,8 @@ diff -Naur Application-0.orig/net/wg/app/impl/Application.class.asasm Applicatio
       call                1
       initproperty        QName(PrivateNamespace(null, "net.wg.app.impl:Application/instance#0"), "_librariesList")
  
-diff -Naur Application-0.orig/net/wg/gui/components/tooltips/ToolTipTankmen.class.asasm Application-0/net/wg/gui/components/tooltips/ToolTipTankmen.class.asasm
---- Application-0.orig/net/wg/gui/components/tooltips/ToolTipTankmen.class.asasm	2013-10-01 19:26:43.193602900 +0300
+diff -Naur Application.orig-0/net/wg/gui/components/tooltips/ToolTipTankmen.class.asasm Application-0/net/wg/gui/components/tooltips/ToolTipTankmen.class.asasm
+--- Application.orig-0/net/wg/gui/components/tooltips/ToolTipTankmen.class.asasm	2013-10-01 19:26:43.193602900 +0300
 +++ Application-0/net/wg/gui/components/tooltips/ToolTipTankmen.class.asasm	2013-10-01 10:49:47.798531200 +0300
 @@ -427,20 +427,24 @@
  

@@ -11,16 +11,28 @@ goto :EOF
 :do_patch_as3
 set n=%1
 echo %1.swf
-copy /Y flash\%n%.swf %n%.swf > nul
-abcexport.exe %n%.swf
-rabcdasm %n%-0.abc
+copy /Y flash\%n%.swf %n%.orig.swf > nul
+abcexport.exe %n%.orig.swf
+rabcdasm %n%.orig-0.abc
 set ok=failed
-patch -p0 < %n%.patch && set ok=ok
+
+patch --binary -p0 < %n%.patch && set ok=ok
 echo patch result: %ok% (%n%.swf)
 if "%ok%" == "ok" (
-  rabcasm %n%-0/%n%-0.main.asasm
-  abcreplace %n%.swf 0 %n%-0/%n%-0.main.abc
-  del %n%-0.abc
-  rmdir /S /Q %n%-0
+  rabcasm %n%.orig-0/%n%.orig-0.main.asasm
+  abcreplace %n%.orig.swf 0 %n%.orig-0/%n%.orig-0.main.abc
+  del %n%.orig-0.abc
+  move /Y %n%.orig.swf %n%.swf
+  rmdir /S /Q %n%.orig-0
+) else (
+  echo.
+  echo Operation failed.
+  echo Temporary files will be removed. If you want keep them - please manually close this window.
+  pause
+  del %n%.orig-0.abc
+  del %n%.orig.swf
+  rmdir /S /Q %n%.orig-0
 )
+
 goto :EOF
+
