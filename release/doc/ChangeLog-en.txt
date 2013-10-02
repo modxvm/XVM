@@ -1,6 +1,8 @@
 ﻿XVM-dev:
   [NEW FUNCTIONS]
   * localization: added Bulgarian language
+  * localization: added French readme
+
   [FIXES]
   * pinger: add wine support. For activation execute ln -s `which ping` ~/.wine/drive_c/ping.exe
   * removed option userInfo/showEColumn
