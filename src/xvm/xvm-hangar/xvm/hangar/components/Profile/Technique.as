@@ -57,14 +57,12 @@ package xvm.hangar.components.Profile
         {
             Logger.add("delayedInit");
             // userInfo.sortColumn
-            //App.utils.scheduler.envokeInNextFrame(function():void
-            {
-                var bb:SortableHeaderButtonBar = page.listComponent.sortableButtonBar;
-                bb.selectedIndex = Math.abs(Config.config.userInfo.sortColumn) - 1;
-                var b:SortingButton = bb.getButtonAt(bb.selectedIndex) as SortingButton;
-                b.sortDirection = Config.config.userInfo.sortColumn < 0 ? SortingButton.DESCENDING_SORT : SortingButton.ASCENDING_SORT;
-                list.selectedIndex = 0;
-            }//);
+            var bb:SortableHeaderButtonBar = page.listComponent.sortableButtonBar;
+            var btnIndex:int = Math.abs(Config.config.userInfo.sortColumn) - 1;
+            bb.selectedIndex = btnIndex;
+            var b:SortingButton = bb.getButtonAt(btnIndex) as SortingButton;
+            b.sortDirection = Config.config.userInfo.sortColumn < 0 ? SortingButton.DESCENDING_SORT : SortingButton.ASCENDING_SORT;
+            list.selectedIndex = 0;
         }
 
         protected function get list():TechniqueList
