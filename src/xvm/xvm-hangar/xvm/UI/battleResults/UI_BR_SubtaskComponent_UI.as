@@ -3,7 +3,7 @@ package xvm.UI.battleResults
     import flash.events.Event;
     import scaleform.clik.constants.InvalidationType;
 
-    public class UI_BR_SubtaskComponent_UI extends BR_SubtaskComponent_UI
+    public dynamic class UI_BR_SubtaskComponent_UI extends BR_SubtaskComponent_UI
     {
         override protected function draw():void
         {

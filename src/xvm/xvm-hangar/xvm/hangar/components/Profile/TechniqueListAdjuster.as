@@ -30,7 +30,7 @@ package xvm.hangar.components.Profile
             initialized = false;
             updatingActive = false;
             sortingActive = false;
-            selectedId = -1;
+            selectedId = 0;
 
             list.addEventListener(TechniqueList.SELECTED_DATA_CHANGED, listSelectedDataChanged);
             page.listComponent.sortableButtonBar.addEventListener(SortingButton.SORT_DIRECTION_CHANGED, sortDirectionChanged);
@@ -64,7 +64,7 @@ package xvm.hangar.components.Profile
                 if (!initialized)
                 {
                     initialized = true;
-                    selectedId = -1;
+                    selectedId = 0;
                     dispatchEvent(new Event(Event.INIT));
                 }
             }
@@ -91,8 +91,8 @@ package xvm.hangar.components.Profile
             selectedId = list.selectedItem.id;
             //Logger.add("selectedId: " + selectedId);
 
-            page.stackComponent.buttonBar.getButtonAt(1).visible = selectedId != -1;
-            if (selectedId == -1)
+            page.stackComponent.buttonBar.getButtonAt(1).visible = selectedId != 0;
+            if (selectedId == 0)
                 page.stackComponent.buttonBar.selectedIndex = 0;
         }
 
@@ -170,7 +170,7 @@ package xvm.hangar.components.Profile
             {
                 for (var i:int = 0; i < dp.length; ++i)
                 {
-                    if (dp[i].id == -1)
+                    if (dp[i].id == 0)
                         return i;
                 }
             }
@@ -181,7 +181,7 @@ package xvm.hangar.components.Profile
         {
             return new TechniqueListVehicleVO(
             {
-                "id": -1,
+                "id": 0,
                 "level": 0,
                 "markOfMastery": 0,
                 "typeIndex": 0,

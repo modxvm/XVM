@@ -1,18 +1,14 @@
 package xvm.UI.companiesWindow
 {
-    import com.xvm.*;
-    import flash.events.Event;
-    import flash.events.MouseEvent;
-    import xvm.hangar.components.BattleLoading.*;
+    import flash.events.*;
     import xvm.hangar.components.Company.CompanyOwnerItemRenderer;
 
-    public class UI_CompanyListItemRenderer extends CompanyListItemRendererUI
+    public dynamic class UI_CompanyListItemRenderer extends CompanyListItemRendererUI
     {
         private var worker:CompanyOwnerItemRenderer;
 
         public function UI_CompanyListItemRenderer()
         {
-            //Logger.add("UI_CompanyListItemRenderer::ctor()");
             super();
             worker = new CompanyOwnerItemRenderer(this);
         }
@@ -25,7 +21,6 @@ package xvm.UI.companiesWindow
 
         override public function setData(data:Object):void
         {
-            //Logger.add("UI_CompanyListItemRenderer::setData()");
             super.setData(data);
             worker.setData(data);
         }

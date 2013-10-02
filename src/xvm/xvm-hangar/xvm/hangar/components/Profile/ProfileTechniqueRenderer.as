@@ -20,14 +20,7 @@ package xvm.hangar.components.Profile
 
         public function ProfileTechniqueRenderer(proxy:TechniqueRenderer)
         {
-            try
-            {
-                this.proxy = proxy;
-            }
-            catch (ex:Error)
-            {
-                Logger.add(ex.getStackTrace());
-            }
+            this.proxy = proxy;
         }
 
         public function draw():void

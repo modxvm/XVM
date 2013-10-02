@@ -1,12 +1,9 @@
 package xvm.UI.companiesWindow
 {
-    import com.xvm.*;
-    import flash.events.Event;
-    import flash.events.MouseEvent;
-    import xvm.hangar.components.BattleLoading.*;
+    import flash.events.*;
     import xvm.hangar.components.Company.CompanyDropItemRenderer;
 
-    public class UI_CompanyDropItemRenderer extends CompanyDropItemRendererUI
+    public dynamic class UI_CompanyDropItemRenderer extends CompanyDropItemRendererUI
     {
         private var worker:CompanyDropItemRenderer;
 

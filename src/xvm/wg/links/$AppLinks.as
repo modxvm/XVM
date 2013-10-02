@@ -36,7 +36,8 @@ import net.wg.gui.lobby.profile.pages.technique.*; ProfileTechniquePage; Profile
  */
 
 // battleLoading.swf
-LeftItemRendererUI; RightItemRendererUI;
+LeftItemRendererUI;
+RightItemRendererUI;
 
 // companiesWindow.swf
 CompanyListItemRendererUI;
@@ -47,6 +48,7 @@ squadItemRendererUI;
 
 // profileSections.swf
 TechniqueRenderer_UI;
+TechniqueStatisticTab_UI;
 
 // battleResults.swf
 BR_SubtaskComponent_UI;

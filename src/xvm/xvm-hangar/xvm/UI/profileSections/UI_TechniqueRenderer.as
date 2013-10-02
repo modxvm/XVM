@@ -1,12 +1,8 @@
 package xvm.UI.profileSections
 {
-    import com.xvm.*;
-    import flash.events.Event;
-    import flash.events.MouseEvent;
-    import xvm.hangar.components.BattleLoading.*;
     import xvm.hangar.components.Profile.ProfileTechniqueRenderer;
 
-    public class UI_TechniqueRenderer extends TechniqueRenderer_UI
+    public dynamic class UI_TechniqueRenderer extends TechniqueRenderer_UI
     {
         private var worker:ProfileTechniqueRenderer;
 

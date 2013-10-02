@@ -3,11 +3,12 @@ package xvm.hangar.components.Profile
     import flash.display.*;
     import flash.events.*;
     import flash.utils.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.infrastructure.exceptions.*;
     import scaleform.clik.data.*;
     import scaleform.clik.events.*;
     import scaleform.clik.interfaces.*;
+    import net.wg.infrastructure.exceptions.*;
+    import net.wg.gui.events.*;
+    import net.wg.gui.components.controls.*;
     import net.wg.gui.lobby.profile.pages.summary.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
     import net.wg.gui.components.advanced.*;
@@ -16,7 +17,9 @@ package xvm.hangar.components.Profile
     import com.xvm.io.*;
     import com.xvm.types.cfg.*;
     import com.xvm.l10n.Locale;
-    import xvm.UI.profileSections.UI_TechniqueRenderer;
+    import xvm.UI.profileSections.*;
+
+    UI_TechniqueStatisticTab;
 
     public class Technique extends Sprite
     {
@@ -38,6 +41,8 @@ package xvm.hangar.components.Profile
             // Add summary item to the first line of technique list
             techniqueListAdjuster = new TechniqueListAdjuster(page, summary);
 
+            page.addEventListener(TechniquePageEvent.DATA_STATUS_CHANGED, viewChanged);
+
             // remove lower shadow (last item is looks bad with it)
             page.listComponent.lowerShadow.visible = false;
 
@@ -55,7 +60,7 @@ package xvm.hangar.components.Profile
 
         private function delayedInit():void
         {
-            Logger.add("delayedInit");
+            //Logger.add("delayedInit");
             // userInfo.sortColumn
             var bb:SortableHeaderButtonBar = page.listComponent.sortableButtonBar;
             var btnIndex:int = Math.abs(Config.config.userInfo.sortColumn) - 1;
@@ -78,6 +83,25 @@ package xvm.hangar.components.Profile
         protected function createControls():void
         {
             //"filterFocused": true,
+        }
+
+        protected function viewChanged(e:TechniquePageEvent):void
+        {
+            //if (page.stackComponent.viewStack.currentView == null)
+            //    return;
+            page.removeEventListener(TechniquePageEvent.DATA_STATUS_CHANGED, viewChanged);
+
+            try
+            {
+                var data:Array = page.stackComponent.buttonBar.dataProvider as Array;
+                data[0].linkage = "xvm.UI.profileSections.UI_TechniqueStatisticTab";
+                page.stackComponent.buttonBar.selectedIndex = -1;
+                page.stackComponent.buttonBar.selectedIndex = 0;
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
         }
 
         // PRIVATE

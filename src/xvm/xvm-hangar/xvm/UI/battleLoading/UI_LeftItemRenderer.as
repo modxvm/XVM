@@ -1,9 +1,8 @@
 package xvm.UI.battleLoading
 {
-    import com.xvm.*;
     import xvm.hangar.components.BattleLoading.*;
 
-    public class UI_LeftItemRenderer extends LeftItemRendererUI
+    public dynamic class UI_LeftItemRenderer extends LeftItemRendererUI
     {
         private var worker:BattleLoadingItemRenderer;
 
