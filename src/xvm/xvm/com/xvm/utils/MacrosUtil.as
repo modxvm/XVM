@@ -44,7 +44,7 @@ package com.xvm.utils
             var cfg_len:int = cfg.length;
             for (var i:int = 0; i < cfg_len; ++i)
             {
-                var cvalue:int = cfg[i].value;
+                var cvalue:Number = cfg[i].value;
                 var color:int = Utils.toInt(cfg[i].color, 0xFFFFFF);
                 if (value < cvalue)
                 {
