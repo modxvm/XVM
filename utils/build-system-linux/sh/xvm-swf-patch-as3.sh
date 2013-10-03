@@ -11,19 +11,20 @@ files=(
 pushd ../../../src/xvm/swf/ > /dev/null
 export PATH=$PATH:../../../utils/build-system-linux/bin/rabcdasm/
 
-cp flash/* ./
+cp flash/*.swf ./*.orig.swf
 
 for (( i=0; i<${#files[@]}; i++ ));
   do
-    abcexport ${files[$i]}.swf
-    rabcdasm ${files[$i]}-0.abc
-    patch -p0 -s < ${files[$i]}.patch
-    rabcasm ${files[$i]}-0/${files[$i]}-0.main.asasm
-    abcreplace ${files[$i]}.swf 0 ${files[$i]}-0/${files[$i]}-0.main.abc
-    rm ${files[$i]}-0.abc
-    rm -rf ${files[$i]}-0
+    abcexport ${files[$i]}.orig.swf
+    rabcdasm ${files[$i]}.orig-0.abc
+    patch --binary -p0 -s < ${files[$i]}.patch
+    rabcasm ${files[$i]}.orig-0/${files[$i]}.orig-0.main.asasm
+    abcreplace ${files[$i]}.orig.swf 0 ${files[$i]}.orig-0/${files[$i]}.orig-0.main.abc
+    rm ${files[$i]}.orig-0.abc
+    rm -rf ${files[$i]}.orig-0
   done
 
+mv -f ./*.orig.swf ./*.swf
 mkdir -p ../../../bin/as3
 cp -f *.swf ../../../bin/as3
 
