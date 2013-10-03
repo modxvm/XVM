@@ -22,7 +22,7 @@ package xvm.hangar.components.Profile
 
         override protected function getPlayerName():String
         {
-            return page.currentDossier.id;
+            return page && page.currentDossier ? page.currentDossier.id : null;
         }
 
         override protected function createControls():void

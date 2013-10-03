@@ -48,10 +48,6 @@ package xvm.hangar.components.Profile
             if (Config.config.userInfo.showFilters)
                 createControls();
 
-            // stat
-            if (Config.config.rating.showPlayersStatistics  && Config.config.rating.enableUserInfoStatistics)
-                Stat.loadUserData(this, onStatLoaded, getPlayerName(), false);
-
             // post init
             techniqueListAdjuster.addEventListener(Event.INIT, delayedInit);
         }
@@ -66,6 +62,10 @@ package xvm.hangar.components.Profile
             var b:SortingButton = bb.getButtonAt(btnIndex) as SortingButton;
             b.sortDirection = Config.config.userInfo.sortColumn < 0 ? SortingButton.DESCENDING_SORT : SortingButton.ASCENDING_SORT;
             list.selectedIndex = 0;
+
+            // stat
+            if (Config.config.rating.showPlayersStatistics  && Config.config.rating.enableUserInfoStatistics)
+                Stat.loadUserData(this, onStatLoaded, getPlayerName(), false);
         }
 
         protected function get list():TechniqueList
@@ -75,7 +75,8 @@ package xvm.hangar.components.Profile
 
         protected function getPlayerName():String
         {
-            throw new AbstractException("Technique::getUserInfo() is abstract)");
+            Logger.add("ERROR: Technique::getUserInfo() is abstract)");
+            return null;
         }
 
         protected function createControls():void
@@ -85,8 +86,6 @@ package xvm.hangar.components.Profile
 
         protected function viewChanged(e:TechniquePageEvent):void
         {
-            //if (page.stackComponent.viewStack.currentView == null)
-            //    return;
             page.removeEventListener(TechniquePageEvent.DATA_STATUS_CHANGED, viewChanged);
 
             try
@@ -107,10 +106,9 @@ package xvm.hangar.components.Profile
 
         // STAT
 
-        private function onStatLoaded(e:ObjectEvent):void
+        private function onStatLoaded():void
         {
-            if (e == null)
-                return;
+            Logger.add("onStatLoaded: " + getPlayerName());
         }
 
     }

@@ -21,7 +21,7 @@ package xvm.UI.profileSections
 
         override public function update(arg1:Object):void
         {
-            super.update(arg1);
+            //super.update(arg1);
             worker.update(arg1 as VehicleDossier);
         }
     }

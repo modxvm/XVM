@@ -28,7 +28,7 @@ package xvm.hangar.components.Profile
             if (!proxy || !proxy.data)
                 return;
 
-            var isSummary:Boolean = proxy.data.id == -1;
+            var isSummary:Boolean = proxy.data.id == 0;
 
             proxy.levelMC.visible = !isSummary;
             proxy.vehicleTF.x = isSummary ? 121 : 166;
