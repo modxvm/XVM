@@ -56,10 +56,10 @@ package com.xvm
 
 
         // UI Colors
-        public static const UICOLOR_DEFAULT:int = 0xC9C9B6;
-        public static const UICOLOR_DEFAULT2:int = 0x969687;
-        public static const UICOLOR_GOLD:int = 0xFFC133;
-        public static const UICOLOR_BLUE:int = 0x408CCF;
+        public static const UICOLOR_DEFAULT:uint = 0xC9C9B6;
+        public static const UICOLOR_DEFAULT2:uint = 0x969687;
+        public static const UICOLOR_GOLD:uint = 0xFFC133;
+        public static const UICOLOR_BLUE:uint = 0x408CCF;
 
         // ColorPalette
         public static const C_WHITE:String = "0xFCFCFC";
