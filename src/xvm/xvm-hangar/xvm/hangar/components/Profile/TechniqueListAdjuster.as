@@ -15,17 +15,15 @@ package xvm.hangar.components.Profile
     public final class TechniqueListAdjuster extends EventDispatcher
     {
         private var page:ProfileTechnique;
-        private var summary:ProfileSummary;
 
         private var initialized:Boolean;
         private var updatingActive:Boolean;
         private var sortingActive:Boolean;
         private var selectedId:int;
 
-        public function TechniqueListAdjuster(page:ProfileTechnique, summary:ProfileSummary):void
+        public function TechniqueListAdjuster(page:ProfileTechnique):void
         {
             this.page = page;
-            this.summary = summary;
 
             initialized = false;
             updatingActive = false;
@@ -193,9 +191,9 @@ package xvm.hangar.components.Profile
                 "isInHangar": true,
                 "nationID": -1,
                 "inventoryID": -1,
-                "battlesCount": ProfileUtils.extractNumber(summary.tfTotalBattles.text),
-                "winsEfficiency": ProfileUtils.extractNumber(summary.tfWins.text),
-                "avgExperience": summary.tfAvgExperience.text
+                "battlesCount": page.currentDossier.getBattlesCount(),
+                "winsEfficiency": page.currentDossier.getWinsEfficiency() * 100,
+                "avgExperience": page.currentDossier.getAvgXPStr()
             });
         }
     }

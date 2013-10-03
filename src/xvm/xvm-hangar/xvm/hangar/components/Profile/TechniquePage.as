@@ -13,17 +13,17 @@ package xvm.hangar.components.Profile
 
     public class TechniquePage extends Technique
     {
-        public function TechniquePage(page:ProfileTechniquePage, summary:ProfileSummary):void
+        public function TechniquePage(page:ProfileTechniquePage):void
         {
-            super(page, summary);
+            super(page);
 
             page.checkBoxExistence.selected = Config.config.userInfo.inHangarFilterEnabled;
         }
 
         override protected function getPlayerName():String
         {
-            // TODO
-            return "";
+            //return page.currentDossier.id; // id is null for own account
+            return ""; // TODO
         }
 
         override protected function createControls():void

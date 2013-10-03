@@ -22,12 +22,9 @@ package xvm.hangar.views
 
     public class Profile extends XvmModBase
     {
-        private var summary:ProfileSummary;
-
         public function Profile(view:IView)
         {
             super(view);
-            summary = null;
         }
 
         public function get tabNavigator():ProfileTabNavigator
@@ -70,16 +67,12 @@ package xvm.hangar.views
 
         private function onSectionViewShowed(e:ViewStackEvent):void
         {
-            if (e.view is ProfileSummary)
-            {
-                summary = e.view as ProfileSummary;
-            }
-            else if (e.view is ProfileTechniquePage)
+            if (e.view is ProfileTechniquePage)
             {
                 var page:ProfileTechniquePage = e.view as ProfileTechniquePage;
                 if (page.getChildByName("xvm_extension") == null)
                 {
-                    var tp:TechniquePage = new TechniquePage(page, summary);
+                    var tp:TechniquePage = new TechniquePage(page);
                     tp.name = "xvm_extension";
                     page.addChild(tp);
                 }
@@ -89,7 +82,7 @@ package xvm.hangar.views
                 var window:ProfileTechniqueWindow = e.view as ProfileTechniqueWindow;
                 if (window.getChildByName("xvm_extension") == null)
                 {
-                    var tw:TechniqueWindow = new TechniqueWindow(window, summary);
+                    var tw:TechniqueWindow = new TechniqueWindow(window);
                     tw.name = "xvm_extension";
                     window.addChild(tw);
                 }

@@ -24,22 +24,20 @@ package xvm.hangar.components.Profile
     public class Technique extends Sprite
     {
         protected var page:ProfileTechnique;
-        protected var summary:ProfileSummary;
 
         protected var tiFilter:TextInput;
 
         private var techniqueListAdjuster:TechniqueListAdjuster;
 
-        public function Technique(page:ProfileTechnique, summary:ProfileSummary):void
+        public function Technique(page:ProfileTechnique):void
         {
             this.page = page;
-            this.summary = summary;
 
             // override renderer
             list.itemRenderer = UI_TechniqueRenderer;
 
             // Add summary item to the first line of technique list
-            techniqueListAdjuster = new TechniqueListAdjuster(page, summary);
+            techniqueListAdjuster = new TechniqueListAdjuster(page);
 
             page.addEventListener(TechniquePageEvent.DATA_STATUS_CHANGED, viewChanged);
 

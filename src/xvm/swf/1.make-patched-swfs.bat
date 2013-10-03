@@ -15,7 +15,7 @@ copy /Y flash\%n%.swf %n%.orig.swf > nul
 abcexport.exe %n%.orig.swf
 rabcdasm %n%.orig-0.abc
 set ok=failed
-
+rem exit
 patch --binary -p0 < %n%.patch && set ok=ok
 echo patch result: %ok% (%n%.swf)
 if "%ok%" == "ok" (
@@ -23,6 +23,7 @@ if "%ok%" == "ok" (
   abcreplace %n%.orig.swf 0 %n%.orig-0/%n%.orig-0.main.abc
   del %n%.orig-0.abc
   move /Y %n%.orig.swf %n%.swf
+  del %n%.orig-0\%n%.orig-0.main.abc 
   rmdir /S /Q %n%.orig-0
 ) else (
   echo.

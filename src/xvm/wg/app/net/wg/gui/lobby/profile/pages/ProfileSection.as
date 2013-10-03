@@ -130,6 +130,6 @@ package net.wg.gui.lobby.profile.pages
 
         protected var _centerOffset:int=0;
 
-        protected var currentDossier:net.wg.data.gui_items.dossier.AccountDossier;
+        public var currentDossier:net.wg.data.gui_items.dossier.AccountDossier;
     }
 }

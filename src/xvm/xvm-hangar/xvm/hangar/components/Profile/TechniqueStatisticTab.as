@@ -75,6 +75,7 @@ package xvm.hangar.components.Profile
         private function updateSummaryData():void
         {
             // TODO
+            //Logger.addObject(proxy.parent, "", 2);
             proxy.battlesDL.value = "";
         }
 

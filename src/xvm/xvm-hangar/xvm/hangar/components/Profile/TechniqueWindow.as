@@ -15,15 +15,14 @@ package xvm.hangar.components.Profile
 
     public class TechniqueWindow extends Technique
     {
-        public function TechniqueWindow(window:ProfileTechniqueWindow, summary:ProfileSummary):void
+        public function TechniqueWindow(window:ProfileTechniqueWindow):void
         {
-            super(window, summary);
+            super(window);
         }
 
         override protected function getPlayerName():String
         {
-            // TODO
-            return "";
+            return page.currentDossier.id;
         }
 
         override protected function createControls():void
