@@ -1,4 +1,4 @@
-Contenu :
+﻿Contenu :
   1. Présentation
   2. Installation
   3. Mise à jour
@@ -262,10 +262,10 @@ Contenu :
         captureBar.xc
           "captureDoneFormat":    "<font size='17' color='#FFCC66'>{{l10n:enemyBaseCaptured}}</font>"
 
-        formated: "<font size='17' color='#FFCC66'>Base capturée par les alliés !</font>"
+        formaté : "<font size='17' color='#FFCC66'>Base capturée par les alliés !</font>"
 
       Plus d'infos sur les traductions dans le wiki : 
-        https://code.google.com/p/wot-xvm/wiki/LocalizingXVM
+        https://code.google.com/p/wot-xvm/wiki/LocalizingXVM (en anglais)
 
   Exemple du champ "format" :
     1. Affiche le nombre de kilo-batailles, l'échelle WN6/7 et le % de victoires sans couleurs :
@@ -297,7 +297,7 @@ Contenu :
   L'ordre de recherche est le suivant :
     nick/<player>.png -> clan/<clan>.png -> clan/default.png -> nick/default.png
   Les 150 meilleurs clans sont inclus dans l'archive du mod par défaut.
-  Une archive avec TOUS les clans peut être téléchargée séparemment :
+  Une archive avec TOUS les clans peut être téléchargée séparément :
     http://code.google.com/p/wot-xvm/downloads/list
     Fichiers : clanicons-full-ru-XXX.zip (RU), clanicons-full-eu-XXX.zip (EU), clanicons-full-na-XXX.zip (NA),
     clanicons-full-sea-XXX.zip (SEA), clanicons-full-kr-XXX.zip (KR), clanicons-full-vn-XXX.zip (VN)

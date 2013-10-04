@@ -1,7 +1,7 @@
 ﻿XVM-dev:
   [NOUVEAUTÉS]
   * traduction : ajout du Bulgare
-  * ttraduction : ajout du Français et du fichier 'lisez-moi' (readme) français
+  * traduction : ajout du fichier 'lisez-moi' (readme) français
 
   [CORRECTIONS]
   * pinger : ajout du support de Wine. Pour l'activer :  ln -s `which ping` ~/.wine/drive_c/ping.exe
