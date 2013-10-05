@@ -4,7 +4,7 @@
 {
   "locale": {
     // Author of translation
-    "XVM_translator": "drhideg, NomaxXx",
+    "XVM_translator": "drhideg",
 
     // Ping
     "Initialization": "Inicializálás",
@@ -19,13 +19,13 @@
     "per-vehicle": "Járművenként",
 
     // Hitlog
-    "attack": "átütés",
+    "attack": "támadás",
     "fire": "tűz",
     "ramming": "ütközés",
     "world_collision": "zuhanás",
     "Hits": "Találatok",
     "Total": "Összesen",
-    "Last": "Utolsó",
+    "Last": "Utoljára",
 
     // Hp Left
     "hpLeftTitle": "Maradék életerő:",
@@ -40,7 +40,7 @@
 
     // BattleResults
     "Hit percent": "Találati arány",
-    "Damage (assisted / own)": "Okozott sebzés (felderítés / saját)",
+    "Damage (assisted / own)": "Sebzés (hozzájárulás / saját)",
 
     // TeamRenderers
     "TeamRenderersHeaderTip": "Xwn (vagy XEff) értékelés.\nRészletes információkért, helyezze a kurzort a játékos minősítésének értéke fölé.",
