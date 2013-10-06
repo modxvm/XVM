@@ -10,7 +10,9 @@ package xvm.hangar.views
     import net.wg.infrastructure.events.LifeCycleEvent;
     import net.wg.infrastructure.interfaces.IView;
     import com.xvm.*;
+    import com.xvm.utils.*;
     import com.xvm.types.cfg.*;
+    import xvm.*;
     import xvm.hangar.*;
     import xvm.hangar.components.PingServers.*;
 
@@ -30,9 +32,10 @@ package xvm.hangar.views
         {
             try
             {
-                //Logger.addObject("onAfterPopulate: " + view.as_alias);
+                //Logger.add("onAfterPopulate: " + view.as_alias);
                 initPing();
                 hideTutorial();
+                XvmHangar.Globals[XvmHangar.G_NAME] = WGUtils.GetPlayerName(page.header.tankPanel.account_name.text);
             }
             catch (ex:Error)
             {

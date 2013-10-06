@@ -8,6 +8,7 @@ package com.xvm.utils
     import flash.utils.*;
     import flash.text.*;
     import flash.filters.*;
+    import net.wg.gui.lobby.profile.components.DashLineTextItem;
     import org.idmedia.as3commons.util.StringUtils;
     import com.xvm.*;
 
@@ -186,18 +187,25 @@ package com.xvm.utils
             return str.split("xvmres://").join("img://" + Defines.XVMRES_IMG_ROOT);
         }
 
-        public static function cloneTextField(textField:TextField, replace:Boolean = false):TextField {
-            var clone:TextField = new TextField();
-            var description:XML = describeType(textField);
+        public static function cloneObject(obj:Object, clazz:Class):*
+        {
+            var clone:* = new clazz();
+            var description:XML = describeType(obj);
             for each (var item:XML in description.accessor) {
                 if (item.@access != 'readonly') {
                     try {
-                        clone[item.@name] = textField[item.@name];
+                        clone[item.@name] = obj[item.@name];
                     } catch(error:Error) {
                         // N/A yet.
                     }
                 }
             }
+            return clone;
+        }
+
+        public static function cloneTextField(textField:TextField, replace:Boolean = false):TextField
+        {
+            var clone:TextField = cloneObject(textField, TextField);
             clone.defaultTextFormat = textField.getTextFormat();
             if (textField.parent && replace) {
                 textField.parent.addChild(clone);
@@ -206,12 +214,25 @@ package com.xvm.utils
             return clone;
         }
 
+        public static function cloneDashLineTextItem(dl:DashLineTextItem):DashLineTextItem
+        {
+            var clone:DashLineTextItem = App.utils.classFactory.getComponent("DashLineTextItem_UI", DashLineTextItem);
+            clone.x = dl.x;
+            clone.y = dl.y;
+            clone.width = dl.width;
+            clone.height = dl.height;
+            clone.labelTextField.defaultTextFormat = dl.labelTextField.defaultTextFormat;
+            clone.valueTextField.defaultTextFormat = dl.valueTextField.defaultTextFormat;
+            clone.label = dl.label;
+            clone.value = dl.value;
+            return clone;
+        }
+
         public static function createTextStyleSheet(name:String, textFormat:TextFormat):StyleSheet
         {
             return Utils.createStyleSheet(Utils.createCSS(name, textFormat.color,
                 textFormat.font, textFormat.size, textFormat.align, textFormat.bold, textFormat.italic));
         }
-
 
         /*public static function createButton(mc:Sprite, name:String, _x:Number, _y:Number, txt:String, align:String):ButtonNormal
         {

@@ -955,7 +955,9 @@ package com.xvm.misc
             c.tdb = [
                 { value: 500,  color: Defines.C_RED },
                 { value: 1000, color: Defines.C_YELLOW },
-                { value: 2000, color: Defines.C_GREEN }
+                { value: 1800, color: Defines.C_GREEN },
+                { value: 2500, color: Defines.C_BLUE },
+                { value: 3000, color: Defines.C_PURPLE }
             ];
             c.tdv = [
                 { value: 0.6,  color: Defines.C_RED },

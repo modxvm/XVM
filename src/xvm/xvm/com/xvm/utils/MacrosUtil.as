@@ -41,20 +41,19 @@ package com.xvm.utils
                 default: return "";
             }
 
+            var color:int;
             var cfg_len:int = cfg.length;
             for (var i:int = 0; i < cfg_len; ++i)
             {
                 var cvalue:Number = cfg[i].value;
-                var color:int = Utils.toInt(cfg[i].color, 0xFFFFFF);
+                color = Utils.toInt(cfg[i].color, 0xFFFFFF);
                 if (value < cvalue)
-                {
-                    if (darker)
-                        color = GraphicsUtil.darkenColor(color, 50);
-                    return prefix + StringUtils.leftPad(color.toString(16), 6, "0");
-                }
+                    break;
             }
 
-            return "";
+            if (darker)
+                color = GraphicsUtil.darkenColor(color, 50);
+            return prefix + StringUtils.leftPad(color.toString(16), 6, "0");
         }
 
         public static function GetDynamicAlphaValue(type:Number, value:Number):Number

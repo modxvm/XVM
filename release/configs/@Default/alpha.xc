@@ -123,9 +123,9 @@
     "tdb": [
       { "value": 500,  "alpha": ${"alphaRating.very_bad" } },
       { "value": 1000, "alpha": ${"alphaRating.normal"   } },
-      { "value": 2000, "alpha": ${"alphaRating.good"     } },
-      { "value": 3000, "alpha": ${"alphaRating.very_good"} },
-      { "value": 4000, "alpha": ${"alphaRating.unique"   } }
+      { "value": 1800, "alpha": ${"alphaRating.good"     } },
+      { "value": 2500, "alpha": ${"alphaRating.very_good"} },
+      { "value": 3000, "alpha": ${"alphaRating.unique"   } }
     ],
     // Dynamic transparency by average damage efficiency on current tank
     // Динамическая прозрачность по эффективности урона за бой на текущем танке

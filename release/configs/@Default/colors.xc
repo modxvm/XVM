@@ -274,9 +274,9 @@
     "tdb": [
       { "value": 500,  "color": ${"def.colorRating.very_bad" } },
       { "value": 1000, "color": ${"def.colorRating.normal"   } },
-      { "value": 2000, "color": ${"def.colorRating.good"     } },
-      { "value": 3000, "color": ${"def.colorRating.very_good"} },
-      { "value": 4000, "color": ${"def.colorRating.unique"   } }
+      { "value": 1800, "color": ${"def.colorRating.good"     } },
+      { "value": 2500, "color": ${"def.colorRating.very_good"} },
+      { "value": 3000, "color": ${"def.colorRating.unique"   } }
     ],
     // Dynamic color by average damage efficiency on current tank 
     // Динамический цвет по эффективности урона за бой на текущем танке 

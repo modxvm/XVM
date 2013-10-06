@@ -108,8 +108,8 @@ package xvm.hangar.components.Profile
 
         private function onStatLoaded():void
         {
-            Logger.add("onStatLoaded: " + getPlayerName());
+            //Logger.add("onStatLoaded: " + getPlayerName());
+            page.listComponent.dispatchEvent(new Event(TechniqueListComponent.DATA_CHANGED));
         }
-
     }
 }

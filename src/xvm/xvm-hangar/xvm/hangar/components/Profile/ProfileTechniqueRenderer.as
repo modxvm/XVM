@@ -44,5 +44,4 @@ package xvm.hangar.components.Profile
 
         // PRIVATE
     }
-
 }

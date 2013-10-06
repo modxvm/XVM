@@ -18,6 +18,9 @@ package xvm
 
     public class XvmHangar extends Sprite
     {
+        public static const G_NAME:String = "name";
+        public static var Globals:Object = { };
+
         public function XvmHangar():void
         {
             //Logger.add("XvmHangar: .ctor()");

@@ -9,6 +9,7 @@ package xvm.hangar.components.Profile
     import com.xvm.events.*;
     import com.xvm.io.*;
     import com.xvm.types.cfg.*;
+    import xvm.*;
     import xvm.UI.profileSections.UI_TechniqueRenderer;
 
     public class TechniquePage extends Technique
@@ -22,8 +23,7 @@ package xvm.hangar.components.Profile
 
         override protected function getPlayerName():String
         {
-            //return page.currentDossier.id; // id is null for own account
-            return null; // TODO
+            return XvmHangar.Globals[XvmHangar.G_NAME];
         }
 
         override protected function createControls():void
