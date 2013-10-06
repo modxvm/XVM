@@ -25,11 +25,6 @@ package xvm.hangar.components.Profile
             return page && page.currentDossier ? page.currentDossier.id : null;
         }
 
-        override protected function createControls():void
-        {
-            super.createControls();
-        }
-
         // PRIVATE
     }
 }

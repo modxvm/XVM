@@ -46,7 +46,7 @@ package xvm.hangar.components.Profile
 
             // create filter controls
             if (Config.config.userInfo.showFilters)
-                createControls();
+                createFilters();
 
             // post init
             techniqueListAdjuster.addEventListener(Event.INIT, delayedInit);
@@ -79,9 +79,9 @@ package xvm.hangar.components.Profile
             return null;
         }
 
-        protected function createControls():void
+        protected function createFilters():void
         {
-            //"filterFocused": true,
+            // virtual
         }
 
         protected function viewChanged(e:TechniquePageEvent):void

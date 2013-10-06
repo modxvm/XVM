@@ -105,9 +105,15 @@ package xvm.hangar.components.Profile
             if (getSummaryItemIndex() == -1)
             {
                 list.validateNow();
+                setList();
                 data.unshift(summaryItem);
                 sortList();
             }
+        }
+
+        private function setList():void
+        {
+            // TODO
         }
 
         private function sortList(btn:SortingButton = null):void

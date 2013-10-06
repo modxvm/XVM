@@ -26,16 +26,16 @@ package xvm.hangar.components.Profile
             return XvmHangar.Globals[XvmHangar.G_NAME];
         }
 
-        override protected function createControls():void
+        override protected function createFilters():void
         {
-            super.createControls();
+            super.createFilters();
 
-			// TODO
             // [*] selected
             // [*] in hangar
             // [*] all tanks
             // [         ] Filter
-            //chec
+
+            //"filterFocused": true,
         }
 
         // PRIVATE
