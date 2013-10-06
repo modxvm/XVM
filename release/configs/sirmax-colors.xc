@@ -180,8 +180,8 @@
       { "value": 50,  "color": ${"colorHP.average"      } },       // Цвет для значений менее 50 проц
       { "value": 101, "color": ${"colorHP.above_average"} }        // Цвет для остальных значений
     ],
-    // Dynamic color for XVM Scale (only with xvm-stat).
-    // Динамический цвет по шкале XVM (только с xvm-stat).
+    // Dynamic color for XVM Scale
+    // Динамический цвет по шкале XVM
     // http://www.koreanrandom.com/forum/topic/2625-/
     "x": [
       { "value": 17,  "color": ${"colorRating.very_bad" } },   // 00   - 16.5 - very bad   (20% of players)
@@ -191,8 +191,8 @@
       { "value": 93,  "color": ${"colorRating.very_good"} },   // 75.5 - 92.5 - very good  (better then 99% of players)
       { "value": 999, "color": ${"colorRating.unique"   } }    // 92.5 - XX   - unique     (better then 99.9% of players)
     ],
-    // Dynamic color by efficiency (only with xvm-stat).
-    // Динамический цвет по эффективности (только с xvm-stat).
+    // Dynamic color by efficiency
+    // Динамический цвет по эффективности
     "eff": [
       { "value": 645,  "color": ${"colorRating.very_bad" } },  //    0 - 644  - very bad
       { "value": 875,  "color": ${"colorRating.bad"      } },  //  645 - 874  - bad
@@ -201,8 +201,8 @@
       { "value": 1740, "color": ${"colorRating.very_good"} },  // 1470 - 1739 - very good
       { "value": 9999, "color": ${"colorRating.unique"   } }   // 1740 - *    - unique
     ],
-    // Dynamic color by WN6 rating (only with xvm-stat).
-    // Динамический цвет по рейтингу WN6 (только с xvm-stat).
+    // Dynamic color by WN6 rating
+    // Динамический цвет по рейтингу WN6
     "wn": [
       { "value": 435,  "color": ${"colorRating.very_bad" } },  //    0 - 434  - very bad
       { "value": 805,  "color": ${"colorRating.bad"      } },  //  435 - 804  - bad
@@ -211,8 +211,8 @@
       { "value": 1900, "color": ${"colorRating.very_good"} },  // 1595 - 1899 - very good
       { "value": 9999, "color": ${"colorRating.unique"   } }   // 1900 - *    - unique
     ],
-    // Dynamic color by TEFF (E) rating (only with xvm-stat).
-    // Динамический цвет по рейтингу TEFF (E) (только с xvm-stat).
+    // Dynamic color by TEFF (E) rating
+    // Динамический цвет по рейтингу TEFF (E)
     "e": [
       { "value": 0.01, "color": ${"colorRating.undefined"} },
       { "value": 2,    "color": ${"colorRating.very_bad" } },
@@ -222,8 +222,8 @@
       { "value": 9,    "color": ${"colorRating.very_good"} },
       { "value": 20,   "color": ${"colorRating.unique"   } }
     ],
-    // Dynamic color by win percent (only with xvm-stat).
-    // Динамический цвет по проценту побед (только с xvm-stat).
+    // Dynamic color by win percent
+    // Динамический цвет по проценту побед
     "rating": [
       { "value": 47,  "color": ${"colorRating.very_bad" } },   //  0   - 46.5  - very bad
       { "value": 49,  "color": ${"colorRating.bad"      } },   // 46.5 - 48.5  - bad
@@ -232,8 +232,8 @@
       { "value": 64,  "color": ${"colorRating.very_good"} },   // 56.5 - 63.5  - very good
       { "value": 101, "color": ${"colorRating.unique"   } }    // 63.5 - 100   - unique
     ],
-    // Dynamic color by kilo-battles (only with xvm-stat).
-    // Динамический цвет по количеству кило-боев (только с xvm-stat).
+    // Dynamic color by kilo-battles
+    // Динамический цвет по количеству кило-боев
     "kb": [
       { "value": 2,   "color": ${"colorRating.very_bad" } },   //  0 - 1
       { "value": 5,   "color": ${"colorRating.bad"      } },   //  2 - 4
@@ -242,8 +242,8 @@
       { "value": 20,  "color": ${"colorRating.very_good"} },   // 14 - 19
       { "value": 999, "color": ${"colorRating.unique"   } }    // 20 - *
     ],
-    // Dynamic color by battles on current tank (only with xvm-stat).
-    // Динамический цвет по количеству боев на текущем танке (только с xvm-stat).
+    // Dynamic color by battles on current tank
+    // Динамический цвет по количеству боев на текущем танке
     "t_battles": [
       { "value": 100,   "color": ${"colorRating.very_bad" } }, //    0 - 99
       { "value": 250,   "color": ${"colorRating.bad"      } }, //  100 - 249
@@ -252,16 +252,16 @@
       { "value": 1800,  "color": ${"colorRating.very_good"} }, // 1000 - 1799
       { "value": 99999, "color": ${"colorRating.unique"   } }  // 1800 - *
     ],
-    // Dynamic color by average damage on current tank (only with xvm-stat).
-    // Динамический цвет по среднему урону за бой на текущем танке (только с xvm-stat).
+    // Dynamic color by average damage on current tank
+    // Динамический цвет по среднему урону за бой на текущем танке
     "tdb": [
       { "value": 1,    "color": ${"colorRating.undefined"} },
       { "value": 500,  "color": ${"colorRating.very_bad" } },
       { "value": 1000, "color": ${"colorRating.normal"   } },
       { "value": 2000, "color": ${"colorRating.good"     } }
     ],
-    // Dynamic color by average damage efficiency on current tank (only with xvm-stat).
-    // Динамический цвет по эффективности урона за бой на текущем танке (только с xvm-stat).
+    // Dynamic color by average damage efficiency on current tank
+    // Динамический цвет по эффективности урона за бой на текущем танке
     "tdv": [
       { "value": 0.01, "color": ${"colorRating.undefined"} },
       { "value": 0.6,  "color": ${"colorRating.very_bad" } },
@@ -271,8 +271,8 @@
       { "value": 2.0,  "color": ${"colorRating.very_good"} },
       { "value": 15,   "color": ${"colorRating.unique"   } }
     ],
-    // Dynamic color by average frags per battle on current tank (only with xvm-stat).
-    // Динамический цвет по среднему количеству фрагов за бой на текущем танке (только с xvm-stat).
+    // Dynamic color by average frags per battle on current tank
+    // Динамический цвет по среднему количеству фрагов за бой на текущем танке
     "tfb": [
       { "value": 0.01, "color": ${"colorRating.undefined"} },
       { "value": 0.6,  "color": ${"colorRating.very_bad" } },
@@ -282,8 +282,8 @@
       { "value": 2.0,  "color": ${"colorRating.very_good"} },
       { "value": 15,   "color": ${"colorRating.unique"   } }
     ],
-    // Dynamic color by number of spotted enemies per battle on current tank (only with xvm-stat).
-    // Динамический цвет по среднему количеству засвеченных врагов за бой на текущем танке (только с xvm-stat).
+    // Dynamic color by number of spotted enemies per battle on current tank
+    // Динамический цвет по среднему количеству засвеченных врагов за бой на текущем танке
     "tsb": [
       { "value": 0.01, "color": ${"colorRating.undefined"} },
       { "value": 0.6,  "color": ${"colorRating.very_bad" } },

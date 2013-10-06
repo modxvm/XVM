@@ -8,8 +8,8 @@
     // Формат часов на экране загрузки боя.
     // http://php.net/date
     "clockFormat": "H:i:s",
-    // true - Enable display of "chance to win" (only with xvm-stat) Read more: http://www.koreanrandom.com/forum/topic/1663-/
-    // true - включить отображение шансов на победу (только с xvm-stat). Прочитать подробней: http://www.koreanrandom.com/forum/topic/1663-/
+    // true - Enable display of "chance to win". Read more: http://www.koreanrandom.com/forum/topic/1663-/
+    // true - включить отображение шансов на победу. Прочитать подробней: http://www.koreanrandom.com/forum/topic/1663-/
     "showChances": false,
     // Show experimental "chance to win" formula.
     // Показывать экспериментальную формулу расчета шансов.

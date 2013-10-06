@@ -4,8 +4,8 @@
  */
 {
   "statisticForm": {
-    // true - Enable display of "chance to win" (only with xvm-stat).
-    // true - включить отображение шансов на победу (только с xvm-stat).
+    // true - Enable display of "chance to win"
+    // true - включить отображение шансов на победу
     "showChances": false,
     // true - Show experimental "chance to win" formula
     // true - показывать экспериментальную формулу расчета шансов.

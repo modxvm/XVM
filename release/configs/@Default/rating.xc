@@ -1,6 +1,6 @@
 ﻿/**
- * Options for player statistics (only with xvm-stat).
- * Блок управлением статистикой (только с xvm-stat).
+ * Options for player statistics
+ * Блок управлением статистикой
  */
 {
   "rating": {
