@@ -38,7 +38,6 @@ package xvm.hangar.components.Profile
                 this.proxy = proxy;
                 cache = new Dictionary();
                 controlsMap = new Dictionary(true);
-                createFilters();
                 createControls();
                 controls = [
                     { y: 65, width: DL_WIDTH, control: proxy.battlesDL },
@@ -143,11 +142,6 @@ package xvm.hangar.components.Profile
         private function TF(dl:DashLineTextItem):TextField
         {
             return controlsMap[dl];
-        }
-
-        private function createFilters():void
-        {
-            // TODO
         }
 
         private function setupControls():void
@@ -255,6 +249,12 @@ package xvm.hangar.components.Profile
 
             // stat
 
+            TF(proxy.avgDmgDealtDL).htmlText = "";
+            TF(proxy.avgKillsDL).htmlText = "";
+            TF(proxy.avgDetectedDL).htmlText = "";
+            specificDamage.value = "";
+            TF(specificDamage).htmlText = "";
+
             avgCaptureDL.visible = data.stat != null;
             avgDefenceDL.visible = data.stat != null;
             if (data.stat != null)
@@ -276,6 +276,8 @@ package xvm.hangar.components.Profile
             proxy.avgDetectedDL.value = color(App.utils.locale.numberWithoutZeros(data.avgEnemiesSpotted));
             proxy.avgDmgDealtDL.value = color(App.utils.locale.numberWithoutZeros(data.avgDamageDealt));
 
+            specificDamage.visible = false;
+
             // stat
             var s:String = "";
             if (data.stat == null)
@@ -293,9 +295,6 @@ package xvm.hangar.components.Profile
                 s += "<tab><tab><tab><tab><tab>" + size(Locale.get("updated") + ":", 11) + " " + size(color(data.stat.dt.substr(0, 10), 0xCCCCCC), 12);
                 ratingTF.htmlText = "<textformat leading='-2'>" + formatHtmlText(s) + "</textformat>";
             }
-
-            specificDamage.visible = false;
-            TF(specificDamage).visible = false;
         }
 
         private function updateVehicleData():void
@@ -377,13 +376,13 @@ package xvm.hangar.components.Profile
             }
 
             // specific damage
-            specificDamage.visible = vi.avg.E;
-            TF(specificDamage).visible = specificDamage.visible;
+            var specDmg:Number = data.avgDamageDealt / vi.hptop;
+            specificDamage.visible = true;
+            specificDamage.value = color(size(App.utils.locale.numberWithoutZeros(specDmg), 12),
+                MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_TDV, specDmg));
+
             if (vi.avg.E)
             {
-                var specDmg:Number = data.avgDamageDealt / vi.hptop;
-                specificDamage.value = color(size(App.utils.locale.numberWithoutZeros(specDmg), 12),
-                    MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_TDV, specDmg));
                 colorAvg = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_TDV, vi.avg.E);
                 colorTop = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_TDV, vi.top.E);
                 TF(specificDamage).htmlText = formatHtmlText(size(

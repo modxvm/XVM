@@ -29,6 +29,13 @@ package xvm.hangar.components.Profile
         override protected function createControls():void
         {
             super.createControls();
+
+			// TODO
+            // [*] selected
+            // [*] in hangar
+            // [*] all tanks
+            // [         ] Filter
+            //chec
         }
 
         // PRIVATE
