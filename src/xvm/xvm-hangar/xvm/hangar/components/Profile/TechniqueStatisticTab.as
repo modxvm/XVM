@@ -226,7 +226,7 @@ package xvm.hangar.components.Profile
 
             proxy.accuracyDL.value = convertPercentValue(data.hitsEfficiency);
 
-            proxy.maxExpDL.value = color(App.utils.locale.integer(data.avgXP));
+            proxy.maxExpDL.value = color(App.utils.locale.integer(data.maxXP));
             TF(proxy.maxExpDL).htmlText = formatHtmlText(data.maxXPVehicleName, Defines.UICOLOR_GOLD);
 
             proxy.maxKillDL.value = color(App.utils.locale.integer(data.maxFrags));
@@ -254,14 +254,6 @@ package xvm.hangar.components.Profile
             TF(proxy.avgDetectedDL).htmlText = "";
             specificDamage.value = "";
             TF(specificDamage).htmlText = "";
-
-            avgCaptureDL.visible = data.stat != null;
-            avgDefenceDL.visible = data.stat != null;
-            if (data.stat != null)
-            {
-                avgCaptureDL.value = color(size(App.utils.locale.numberWithoutZeros(data.stat.spo / data.stat.b), 12));
-                avgDefenceDL.value = color(size(App.utils.locale.numberWithoutZeros(data.stat.def / data.stat.b), 12));
-            }
         }
 
         private function updateSummaryData():void
@@ -294,6 +286,14 @@ package xvm.hangar.components.Profile
                     color(App.utils.locale.integer(data.stat.e), MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_EFF, data.stat.e)) + ")") + "<br>";
                 s += "<tab><tab><tab><tab><tab>" + size(Locale.get("updated") + ":", 11) + " " + size(color(data.stat.dt.substr(0, 10), 0xCCCCCC), 12);
                 ratingTF.htmlText = "<textformat leading='-2'>" + formatHtmlText(s) + "</textformat>";
+            }
+
+            avgCaptureDL.visible = data.stat != null;
+            avgDefenceDL.visible = data.stat != null;
+            if (data.stat != null)
+            {
+                avgCaptureDL.value = color(size(App.utils.locale.numberWithoutZeros(data.stat.cap / data.stat.b), 12));
+                avgDefenceDL.value = color(size(App.utils.locale.numberWithoutZeros(data.stat.def / data.stat.b), 12));
             }
         }
 

@@ -358,9 +358,9 @@ package com.xvm
             if (!isNaN(stat.v.d) && stat.v.d > 0)
                 stat.v.db = Math.round(stat.v.d / stat.v.b);
             if (!isNaN(stat.v.f) && stat.v.f > 0)
-                stat.v.fb = Math.round(stat.v.f / stat.v.b * 10) / 10;
+                stat.v.fb = Math.round(stat.v.f / stat.v.b * 10) / 10.0;
             if (!isNaN(stat.v.s) && stat.v.s > 0)
-                stat.v.sb = Math.round(stat.v.s / stat.v.b * 10) / 10;
+                stat.v.sb = Math.round(stat.v.s / stat.v.b * 10) / 10.0;
             //Logger.addObject(stat);
 
             if (stat.vn == null)
