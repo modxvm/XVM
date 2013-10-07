@@ -2,6 +2,7 @@ package xvm.hangar.components.Profile
 {
     import flash.display.*;
     import flash.events.*;
+    import flash.text.*;
     import flash.utils.*;
     import scaleform.clik.data.*;
     import scaleform.clik.events.*;
@@ -25,31 +26,38 @@ package xvm.hangar.components.Profile
     {
         protected var page:ProfileTechnique;
 
-        protected var tiFilter:TextInput;
+        protected var filter:FilterControl;
 
         private var techniqueListAdjuster:TechniqueListAdjuster;
 
         public function Technique(page:ProfileTechnique):void
         {
-            this.page = page;
+            try
+            {
+                this.page = page;
 
-            // override renderer
-            list.itemRenderer = UI_TechniqueRenderer;
+                // override renderer
+                list.itemRenderer = UI_TechniqueRenderer;
 
-            // Add summary item to the first line of technique list
-            techniqueListAdjuster = new TechniqueListAdjuster(page);
+                // Add summary item to the first line of technique list
+                techniqueListAdjuster = new TechniqueListAdjuster(page);
 
-            page.addEventListener(TechniquePageEvent.DATA_STATUS_CHANGED, viewChanged);
+                page.addEventListener(TechniquePageEvent.DATA_STATUS_CHANGED, viewChanged);
 
-            // remove lower shadow (last item is looks bad with it)
-            page.listComponent.lowerShadow.visible = false;
+                // remove lower shadow (last item is looks bad with it)
+                page.listComponent.lowerShadow.visible = false;
 
-            // create filter controls
-            if (Config.config.userInfo.showFilters)
-                createFilters();
+                // create filter controls
+                if (Config.config.userInfo.showFilters)
+                    createFilters();
 
-            // post init
-            techniqueListAdjuster.addEventListener(Event.INIT, delayedInit);
+                // post init
+                techniqueListAdjuster.addEventListener(Event.INIT, delayedInit);
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
         }
 
         private function delayedInit():void
@@ -63,6 +71,10 @@ package xvm.hangar.components.Profile
             var b:SortingButton = bb.getButtonAt(btnIndex) as SortingButton;
             b.sortDirection = Config.config.userInfo.sortColumn < 0 ? SortingButton.DESCENDING_SORT : SortingButton.ASCENDING_SORT;
             list.selectedIndex = 0;
+
+            // Focus filter
+            if (filter.visible && Config.config.userInfo.filterFocused == true)
+                page.stage.focus = filter.filterTextInput;
 
             // stat
             if (Config.config.rating.showPlayersStatistics  && Config.config.rating.enableUserInfoStatistics)
@@ -80,9 +92,17 @@ package xvm.hangar.components.Profile
             return null;
         }
 
+        // virtual
         protected function createFilters():void
         {
-            // virtual
+            filter = new FilterControl();
+            filter.addEventListener(Event.CHANGE, applyFilterAndSort);
+            page.addChild(filter);
+        }
+
+        protected function applyFilterAndSort(e:Event):void
+        {
+            Logger.add("TODO: applyFilterAndSort");
         }
 
         protected function viewChanged(e:TechniquePageEvent):void

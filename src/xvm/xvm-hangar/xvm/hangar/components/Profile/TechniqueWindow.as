@@ -25,6 +25,11 @@ package xvm.hangar.components.Profile
             return page && page.currentDossier ? page.currentDossier.id : null;
         }
 
-        // PRIVATE
+        override protected function createFilters():void
+        {
+            super.createFilters();
+
+            filter.visible = false;
+        }
     }
 }
