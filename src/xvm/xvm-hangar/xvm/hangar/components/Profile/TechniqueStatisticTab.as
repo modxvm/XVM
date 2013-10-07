@@ -60,9 +60,9 @@ package xvm.hangar.components.Profile
                     { y: 378, width: DL_WIDTH, control: proxy.avgDmgReceivedDL },
                     { y: 395, width: DL_WIDTH, control: proxy.avgKillsDL },
                     { y: 412, width: DL_WIDTH, control: proxy.avgDetectedDL },
-                    { y: 429, width: DL_WIDTH, control: specificDamage },
-                    { y: 446, width: DL_WIDTH, control: avgCaptureDL },
-                    { y: 463, width: DL_WIDTH, control: avgDefenceDL }
+                    { y: 429, width: DL_WIDTH, control: specificDamage }, // summary only
+                    { y: 429, width: DL_WIDTH, control: avgCaptureDL }, // vehicle only
+                    { y: 446, width: DL_WIDTH, control: avgDefenceDL } // vehicle only
                     //{ y: 463, width: DL_WIDTH, control: proxy.avgScoutingDmgDL }
                 ];
 
@@ -157,23 +157,20 @@ package xvm.hangar.components.Profile
 
         private function createControls():void
         {
-            ratingTF = Utils.cloneTextField(proxy.efficiencyTF);
+            ratingTF = Utils.cloneTextField(proxy.battlesDL.labelTextField);
             ratingTF.antiAliasType = AntiAliasType.ADVANCED;
             ratingTF.multiline = true;
             ratingTF.wordWrap = false;
             ratingTF.x = proxy.efficiencyTF.x + 18;
-            ratingTF.y = proxy.battlesDL.y - 50;
+            ratingTF.y = proxy.battlesDL.y - 52;
             ratingTF.width = 400;
             ratingTF.height = 80;
-            var tf:TextFormat = proxy.efficiencyTF.defaultTextFormat;
-            tf.size = 14;
-            tf.bold = false;
-            tf.color = Defines.UICOLOR_DEFAULT2;
+            var tf:TextFormat = new TextFormat("$FieldFont", 16, Defines.UICOLOR_DEFAULT2);
             ratingTF.styleSheet = Utils.createTextStyleSheet("txt", tf);
             proxy.addChild(ratingTF);
 
             specificDamage = Utils.cloneDashLineTextItem(proxy.avgDmgReceivedDL);
-            specificDamage.label = Locale.get("Damage / HP");
+            specificDamage.label = Locale.get("Specific damage (Avg dmg / HP)");
             specificDamage.y += 17;
             specificDamage.visible = false;
             proxy.addChild(specificDamage);
@@ -245,6 +242,9 @@ package xvm.hangar.components.Profile
             proxy.dmgRatioDL.value = color(App.utils.locale.numberWithoutZeros(data.damageEfficiency), 13348216);
 
             proxy.avgExpDL.value = color(App.utils.locale.numberWithoutZeros(data.avgXP));
+            proxy.avgKillsDL.value = color(App.utils.locale.numberWithoutZeros(data.avgFrags));
+            proxy.avgDetectedDL.value = color(App.utils.locale.numberWithoutZeros(data.avgEnemiesSpotted));
+            proxy.avgDmgDealtDL.value = color(App.utils.locale.numberWithoutZeros(data.avgDamageDealt));
             proxy.avgDmgReceivedDL.value = color(App.utils.locale.numberWithoutZeros(data.avgDamageReceived));
 
             // stat
@@ -254,6 +254,7 @@ package xvm.hangar.components.Profile
             TF(proxy.avgDetectedDL).htmlText = "";
             specificDamage.value = "";
             TF(specificDamage).htmlText = "";
+            proxy.avgScoutingDmgDL.value = "Will be implemented...";
         }
 
         private function updateSummaryData():void
@@ -263,12 +264,6 @@ package xvm.hangar.components.Profile
 
             var battlesColor:int = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_KB, data.battlesCount / 1000);
             proxy.battlesDL.value = color(App.utils.locale.integer(data.battlesCount), battlesColor);
-
-            proxy.avgKillsDL.value = color(App.utils.locale.numberWithoutZeros(data.avgFrags));
-            proxy.avgDetectedDL.value = color(App.utils.locale.numberWithoutZeros(data.avgEnemiesSpotted));
-            proxy.avgDmgDealtDL.value = color(App.utils.locale.numberWithoutZeros(data.avgDamageDealt));
-
-            specificDamage.visible = false;
 
             // stat
             var s:String = "";
@@ -283,10 +278,12 @@ package xvm.hangar.components.Profile
                     color(App.utils.locale.integer(data.stat.wn), MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_WN, data.stat.wn)) + ")") + " ";
                 s += Locale.get("EFF") + ": " + (!data.stat.e ? "-- (-)" :
                     color((data.stat.xeff == 100 ? "XX" : (data.stat.xeff < 10 ? "0" : "") + data.stat.xeff), MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_X, data.stat.xeff)) + " (" +
-                    color(App.utils.locale.integer(data.stat.e), MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_EFF, data.stat.e)) + ")") + "<br>";
-                s += "<tab><tab><tab><tab><tab>" + size(Locale.get("updated") + ":", 11) + " " + size(color(data.stat.dt.substr(0, 10), 0xCCCCCC), 12);
-                ratingTF.htmlText = "<textformat leading='-2'>" + formatHtmlText(s) + "</textformat>";
+                    color(App.utils.locale.integer(data.stat.e), MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_EFF, data.stat.e)) + ")") + "\n";
+                s += "\t" + size(Locale.get("updated") + ":", 13) + " " + size(color(data.stat.dt.substr(0, 10), 0xCCCCCC), 14);
+                ratingTF.htmlText = "<textformat leading='-2' tabstops='[190]'>" + formatHtmlText(s) + "</textformat>";
             }
+
+            specificDamage.visible = false;
 
             avgCaptureDL.visible = data.stat != null;
             avgDefenceDL.visible = data.stat != null;
@@ -304,13 +301,6 @@ package xvm.hangar.components.Profile
 
             var battlesColor:int = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_TBATTLES, data.battlesCount);
             proxy.battlesDL.value = color(App.utils.locale.integer(data.battlesCount), battlesColor);
-
-            proxy.avgKillsDL.value = color(App.utils.locale.numberWithoutZeros(data.avgFrags),
-                MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_TFB, data.avgFrags));
-            proxy.avgDetectedDL.value = color(App.utils.locale.numberWithoutZeros(data.avgEnemiesSpotted),
-                MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_TSB, data.avgEnemiesSpotted));
-            proxy.avgDmgDealtDL.value = color(App.utils.locale.numberWithoutZeros(data.avgDamageDealt),
-                MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_TDB, data.avgDamageDealt));
 
             ratingTF.htmlText = "";
 
@@ -345,51 +335,45 @@ package xvm.hangar.components.Profile
             // dmg
             if (vi.avg.D)
             {
-                colorAvg = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_TDB, vi.avg.D);
-                colorTop = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_TDB, vi.top.D);
                 TF(proxy.avgDmgDealtDL).htmlText = formatHtmlText(
-                    Locale.get("avg") + ": " + color(App.utils.locale.numberWithoutZeros(vi.avg.D), colorAvg) +
-                    " " + Locale.get("top") + ": " + color(App.utils.locale.numberWithoutZeros(vi.top.D), colorTop),
+                    Locale.get("avg") + ": " + App.utils.locale.numberWithoutZeros(vi.avg.D) +
+                    " " + Locale.get("top") + ": " + App.utils.locale.numberWithoutZeros(vi.top.D),
                     Defines.UICOLOR_GOLD);
             }
 
             // frags
             if (vi.avg.F)
             {
-                colorAvg = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_TFB, vi.avg.F);
-                colorTop = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_TFB, vi.top.F);
                 TF(proxy.avgKillsDL).htmlText = formatHtmlText(
-                    Locale.get("avg") + ": " + color(App.utils.locale.numberWithoutZeros(vi.avg.F), colorAvg) +
-                    " " + Locale.get("top") + ": " + color(App.utils.locale.numberWithoutZeros(vi.top.F), colorTop),
+                    Locale.get("avg") + ": " + App.utils.locale.numberWithoutZeros(vi.avg.F) +
+                    " " + Locale.get("top") + ": " + App.utils.locale.numberWithoutZeros(vi.top.F),
                     Defines.UICOLOR_GOLD);
             }
 
             // spotted
             if (vi.avg.S)
             {
-                colorAvg = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_TSB, vi.avg.S);
-                colorTop = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_TSB, vi.top.S);
                 TF(proxy.avgDetectedDL).htmlText = formatHtmlText(
-                    Locale.get("avg") + ": " + color(App.utils.locale.numberWithoutZeros(vi.avg.S), colorAvg) +
-                    " " + Locale.get("top") + ": " + color(App.utils.locale.numberWithoutZeros(vi.top.S), colorTop),
+                    Locale.get("avg") + ": " + App.utils.locale.numberWithoutZeros(vi.avg.S) +
+                    " " + Locale.get("top") + ": " + App.utils.locale.numberWithoutZeros(vi.top.S),
                     Defines.UICOLOR_GOLD);
             }
 
             // specific damage
             var specDmg:Number = data.avgDamageDealt / vi.hptop;
             specificDamage.visible = true;
-            specificDamage.value = color(size(App.utils.locale.numberWithoutZeros(specDmg), 12),
-                MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_TDV, specDmg));
+            specificDamage.value = color(size(App.utils.locale.numberWithoutZeros(specDmg), 12));
 
             if (vi.avg.E)
             {
-                colorAvg = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_TDV, vi.avg.E);
-                colorTop = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_TDV, vi.top.E);
                 TF(specificDamage).htmlText = formatHtmlText(size(
-                    Locale.get("avg") + ": " + color(App.utils.locale.numberWithoutZeros(vi.avg.E), colorAvg) +
-                    " " + Locale.get("top") + ": " + color(App.utils.locale.numberWithoutZeros(vi.top.E), colorTop),
+                    Locale.get("avg") + ": " + App.utils.locale.numberWithoutZeros(vi.avg.E) +
+                    " " + Locale.get("top") + ": " + App.utils.locale.numberWithoutZeros(vi.top.E),
                     12), Defines.UICOLOR_GOLD);
             }
+
+            avgCaptureDL.visible = false;
+            avgDefenceDL.visible = false;
         }
 
         private function prepareData(dossier:Dossier):Data

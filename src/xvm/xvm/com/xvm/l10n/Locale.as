@@ -126,13 +126,14 @@ package com.xvm.l10n
             "disabled": "выключено",
 
             // UserInfo
+            "Summary": "Общие результаты",
             "Avg level": "Ср. уровень",
             "EFF": "РЭ",
             "updated": "обновлено",
             " to ": " до ",
             "avg": "ср.",
             "top": "топ",
-            "Damage / HP": "Урон / прочность",
+            "Specific damage (Avg dmg / HP)": "Уд. урон (ср. урон / прочность)",
             "Capture points": "Очки захвата",
             "Defence points": "Очки защиты",
 
