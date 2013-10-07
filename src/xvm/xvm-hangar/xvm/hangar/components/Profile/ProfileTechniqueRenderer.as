@@ -32,6 +32,7 @@ package xvm.hangar.components.Profile
 
             proxy.levelMC.visible = !isSummary;
             proxy.vehicleTF.x = isSummary ? 121 : 166;
+            proxy.vehicleTF.width = 200;
 
             proxy.vehicleTF.textColor = Defines.UICOLOR_DEFAULT;
             if (!isSummary)
