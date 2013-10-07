@@ -169,6 +169,7 @@ package com.xvm.l10n
             "france": "Франция",
             "uk": "Великобритания",
             "china": "Китай",
+            "japan": "Япония",
             "HT": "ТТ",
             "MT": "СТ",
             "LT": "ЛТ",
@@ -219,6 +220,7 @@ package com.xvm.l10n
             "france": "France",
             "uk": "UK",
             "china": "China",
+            "japan": "Japan",
 
             // VehicleMarkersManager
             "blownUp": "Blown-up!"

@@ -95,6 +95,7 @@
     "france": "France",
     "uk": "UK",
     "china": "China",
+    "japan": "Japan",
     "HT": "HT",
     "MT": "MT",
     "LT": "LT",

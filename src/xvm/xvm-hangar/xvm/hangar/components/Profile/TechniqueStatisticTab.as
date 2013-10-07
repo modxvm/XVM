@@ -60,9 +60,9 @@ package xvm.hangar.components.Profile
                     { y: 378, width: DL_WIDTH, control: proxy.avgDmgReceivedDL },
                     { y: 395, width: DL_WIDTH, control: proxy.avgKillsDL },
                     { y: 412, width: DL_WIDTH, control: proxy.avgDetectedDL },
-                    { y: 429, width: DL_WIDTH, control: specificDamage }, // summary only
-                    { y: 429, width: DL_WIDTH, control: avgCaptureDL }, // vehicle only
-                    { y: 446, width: DL_WIDTH, control: avgDefenceDL } // vehicle only
+                    { y: 429, width: DL_WIDTH, control: specificDamage },       // vehicle only
+                    { y: 429, width: DL_WIDTH, control: avgCaptureDL },         // summary only
+                    { y: 446, width: DL_WIDTH, control: avgDefenceDL }          // summary only
                     //{ y: 463, width: DL_WIDTH, control: proxy.avgScoutingDmgDL }
                 ];
 
