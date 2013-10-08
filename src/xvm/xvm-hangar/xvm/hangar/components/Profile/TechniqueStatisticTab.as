@@ -209,7 +209,7 @@ package xvm.hangar.components.Profile
 
         private function updateCommonData(data:Data):void
         {
-            TF(proxy.battlesDL).htmlText = formatHtmlText(data.winsToNextPercentStr, Defines.UICOLOR_GOLD);
+            TF(proxy.battlesDL).htmlText = formatHtmlText(data.winsToNextPercentStr, Defines.UICOLOR_DEFAULT2);
 
             var ratingColor:int = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, data.winsEfficiency * 100);
             proxy.winsDL.value = color(App.utils.locale.integer(data.winsCount));
@@ -224,22 +224,22 @@ package xvm.hangar.components.Profile
             proxy.accuracyDL.value = convertPercentValue(data.hitsEfficiency);
 
             proxy.maxExpDL.value = color(App.utils.locale.integer(data.maxXP));
-            TF(proxy.maxExpDL).htmlText = formatHtmlText(data.maxXPVehicleName, Defines.UICOLOR_GOLD);
+            TF(proxy.maxExpDL).htmlText = formatHtmlText(data.maxXPVehicleName, Defines.UICOLOR_GOLD2);
 
             proxy.maxKillDL.value = color(App.utils.locale.integer(data.maxFrags));
-            TF(proxy.maxKillDL).htmlText = formatHtmlText(data.maxFragsVehicleName, Defines.UICOLOR_GOLD);
+            TF(proxy.maxKillDL).htmlText = formatHtmlText(data.maxFragsVehicleName, Defines.UICOLOR_GOLD2);
 
             proxy.totalKillDL.value = color(App.utils.locale.integer(data.fragsCount));
 
             proxy.totalDeadDL.value = color(App.utils.locale.integer(data.deathsCount));
 
-            proxy.killRatioDL.value = color(App.utils.locale.numberWithoutZeros(data.fragsEfficiency), 13348216);
+            proxy.killRatioDL.value = color(App.utils.locale.numberWithoutZeros(data.fragsEfficiency), 0xCBAD78);
 
             proxy.dealtDmgDL.value = color(App.utils.locale.integer(data.damageDealt));
 
             proxy.receivedDmgDL.value = color(App.utils.locale.integer(data.damageReceived));
 
-            proxy.dmgRatioDL.value = color(App.utils.locale.numberWithoutZeros(data.damageEfficiency), 13348216);
+            proxy.dmgRatioDL.value = color(App.utils.locale.numberWithoutZeros(data.damageEfficiency), 0xCBAD78);
 
             proxy.avgExpDL.value = color(App.utils.locale.numberWithoutZeros(data.avgXP));
             proxy.avgKillsDL.value = color(App.utils.locale.numberWithoutZeros(data.avgFrags));
@@ -320,43 +320,43 @@ package xvm.hangar.components.Profile
                 TF(proxy.winsDL).htmlText += formatHtmlText(
                     " " + Locale.get("avg") + ": " + color(App.utils.locale.numberWithoutZeros(vi.avg.R * 100), colorAvg) +
                     " " + Locale.get("top") + ": " + color(App.utils.locale.numberWithoutZeros(vi.top.R * 100), colorTop),
-                    Defines.UICOLOR_GOLD);
+                    Defines.UICOLOR_DEFAULT2);
             }
 
             // survival
             if (vi.avg.U)
             {
                 TF(proxy.surviveDL).htmlText += formatHtmlText(
-                    " " + Locale.get("avg") + ": " + App.utils.locale.numberWithoutZeros(vi.avg.U * 100) +
-                    " " + Locale.get("top") + ": " + App.utils.locale.numberWithoutZeros(vi.top.U * 100),
-                    Defines.UICOLOR_GOLD);
+                    " " + Locale.get("avg") + ": " + color(App.utils.locale.numberWithoutZeros(vi.avg.U * 100), Defines.UICOLOR_GOLD) +
+                    " " + Locale.get("top") + ": " + color(App.utils.locale.numberWithoutZeros(vi.top.U * 100), Defines.UICOLOR_GOLD),
+                    Defines.UICOLOR_DEFAULT2);
             }
 
             // dmg
             if (vi.avg.D)
             {
                 TF(proxy.avgDmgDealtDL).htmlText = formatHtmlText(
-                    Locale.get("avg") + ": " + App.utils.locale.numberWithoutZeros(vi.avg.D) +
-                    " " + Locale.get("top") + ": " + App.utils.locale.numberWithoutZeros(vi.top.D),
-                    Defines.UICOLOR_GOLD);
+                    Locale.get("avg") + ": " + color(App.utils.locale.numberWithoutZeros(vi.avg.D), Defines.UICOLOR_GOLD) +
+                    " " + Locale.get("top") + ": " + color(App.utils.locale.numberWithoutZeros(vi.top.D), Defines.UICOLOR_GOLD),
+                    Defines.UICOLOR_DEFAULT2);
             }
 
             // frags
             if (vi.avg.F)
             {
                 TF(proxy.avgKillsDL).htmlText = formatHtmlText(
-                    Locale.get("avg") + ": " + App.utils.locale.numberWithoutZeros(vi.avg.F) +
-                    " " + Locale.get("top") + ": " + App.utils.locale.numberWithoutZeros(vi.top.F),
-                    Defines.UICOLOR_GOLD);
+                    Locale.get("avg") + ": " + color(App.utils.locale.numberWithoutZeros(vi.avg.F), Defines.UICOLOR_GOLD) +
+                    " " + Locale.get("top") + ": " + color(App.utils.locale.numberWithoutZeros(vi.top.F), Defines.UICOLOR_GOLD),
+                    Defines.UICOLOR_DEFAULT2);
             }
 
             // spotted
             if (vi.avg.S)
             {
                 TF(proxy.avgDetectedDL).htmlText = formatHtmlText(
-                    Locale.get("avg") + ": " + App.utils.locale.numberWithoutZeros(vi.avg.S) +
-                    " " + Locale.get("top") + ": " + App.utils.locale.numberWithoutZeros(vi.top.S),
-                    Defines.UICOLOR_GOLD);
+                    Locale.get("avg") + ": " + color(App.utils.locale.numberWithoutZeros(vi.avg.S), Defines.UICOLOR_GOLD) +
+                    " " + Locale.get("top") + ": " + color(App.utils.locale.numberWithoutZeros(vi.top.S), Defines.UICOLOR_GOLD),
+                    Defines.UICOLOR_DEFAULT2);
             }
 
             // specific damage
@@ -367,9 +367,9 @@ package xvm.hangar.components.Profile
             if (vi.avg.E)
             {
                 TF(specificDamage).htmlText = formatHtmlText(size(
-                    Locale.get("avg") + ": " + App.utils.locale.numberWithoutZeros(vi.avg.E) +
-                    " " + Locale.get("top") + ": " + App.utils.locale.numberWithoutZeros(vi.top.E),
-                    12), Defines.UICOLOR_GOLD);
+                    Locale.get("avg") + ": " + color(App.utils.locale.numberWithoutZeros(vi.avg.E), Defines.UICOLOR_GOLD) +
+                    " " + Locale.get("top") + ": " + color(App.utils.locale.numberWithoutZeros(vi.top.E), Defines.UICOLOR_GOLD),
+                    12), Defines.UICOLOR_DEFAULT2);
             }
 
             avgCaptureDL.visible = false;
@@ -446,10 +446,14 @@ package xvm.hangar.components.Profile
                 b1 = Math.max(0, b1 % 1 == 0 ? b1 : (int(b1) + 1));
                 b2 = Math.max(0, b2 % 1 == 0 ? b2 : (int(b2) + 1));
                 data.winsToNextPercentStr = (b2 > b1)
-                    ? App.utils.locale.integer(b1) + Locale.get(" to ") + App.utils.locale.numberWithoutZeros((r2 * 100 - 0.5).toFixed(1)) + "% / " +
-                        App.utils.locale.integer(b2) + Locale.get(" to ") + App.utils.locale.numberWithoutZeros((r2 * 100).toFixed(1)) + "%"
-                    : App.utils.locale.integer(b2) + Locale.get(" to ") + App.utils.locale.numberWithoutZeros((r2 * 100).toFixed(1)) + "% / " +
-                        App.utils.locale.integer(b1) + Locale.get(" to ") + App.utils.locale.numberWithoutZeros((r2 * 100 + 0.5).toFixed(1)) + "%";
+                    ? color(App.utils.locale.integer(b1), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
+                        color(App.utils.locale.numberWithoutZeros((r2 * 100 - 0.5).toFixed(1)) + "%", Defines.UICOLOR_GOLD) + " / " +
+                        color(App.utils.locale.integer(b2), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
+                        color(App.utils.locale.numberWithoutZeros((r2 * 100).toFixed(1)) + "%", Defines.UICOLOR_GOLD)
+                    : color(App.utils.locale.integer(b2), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
+                        color(App.utils.locale.numberWithoutZeros((r2 * 100).toFixed(1)) + "%", Defines.UICOLOR_GOLD) + " / " +
+                        color(App.utils.locale.integer(b1), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
+                        color(App.utils.locale.numberWithoutZeros((r2 * 100 + 0.5).toFixed(1)) + "%", Defines.UICOLOR_GOLD);
             }
         }
 
