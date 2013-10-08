@@ -9,7 +9,26 @@ from gui import VERSION_FILE_PATH
 
 ver = ResMgr.openSection(VERSION_FILE_PATH).readString('version')
 ver = ver[2:-5] # 'v.0.8.7 #512' or 'v.0.8.7 Common Test #499'
-wd = 'res_mods/%s/%s' % (ver, os.path.dirname(__file__))
+
+try:
+    wd = None
+    sec = ResMgr.openSection('../paths.xml')
+    subsec = sec['Paths']
+    vals = subsec.values()[0:2]
+    for val in vals:
+        path = val.asString + '/scripts/client/gui/mods'
+        if os.path.isdir(path) and os.path.isfile(path + '/xpm.pyc'):
+            wd = path
+            break
+    if not wd:
+        raise Exception("xpm.pyc is not found in the paths")
+except Exception, err:
+    print ("[XPM] Error locating working directory: ", err)
+    wd = 'res_mods/%s/%s' % (ver, os.path.dirname(__file__))
+    print ("[XPM]   fallback to the default path: %s" % wd)
+
+print wd
+
 for m in glob.iglob(wd + "/*"):
     if os.path.isdir(m) and os.path.exists(m + "/__init__.pyc"):
         try:
