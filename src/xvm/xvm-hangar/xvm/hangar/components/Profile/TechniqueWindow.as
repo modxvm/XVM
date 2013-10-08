@@ -30,6 +30,8 @@ package xvm.hangar.components.Profile
             super.createFilters();
 
             filter.visible = false;
+            filter.x = 680;
+            filter.y = -47;
         }
     }
 }

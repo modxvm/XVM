@@ -23,7 +23,6 @@ package xvm.hangar.components.Profile
             super.createFilters();
 
             var pg:ProfileTechniquePage = page as ProfileTechniquePage;
-            filter.visible = true;
             filter.x = pg.checkBoxExistence.x - 260;
             filter.y = pg.checkBoxExistence.y - 20;
         }

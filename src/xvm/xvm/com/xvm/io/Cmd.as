@@ -17,6 +17,7 @@ package com.xvm.io
         private static const COMMAND_GETGAMEREGION:String = "getGameRegion";
         private static const COMMAND_GETLANGUAGE:String = "getLanguage";
         private static const COMMAND_GETMODS:String = "getMods";
+        private static const COMMAND_GETVEHICLEINFODATA:String = "getVehicleInfoData";
         private static const COMMAND_LOADBATTLESTAT:String = "loadBattleStat";
         private static const COMMAND_LOADUSERDATA:String = "loadUserData";
         private static const COMMAND_LOGSTAT:String = "logstat";
@@ -55,6 +56,11 @@ package com.xvm.io
         public static function getMods(target:Object, callback:Function):void
         {
             _call(target, callback, [COMMAND_GETMODS]);
+        }
+
+        public static function getVehicleInfoData(target:Object, callback:Function):void
+        {
+            _call(target, callback, [COMMAND_GETVEHICLEINFODATA]);
         }
 
         public static function loadBattleStat(players:Array = null):void

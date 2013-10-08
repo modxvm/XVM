@@ -13,8 +13,8 @@ package xvm.hangar.components.Profile
     import scaleform.clik.events.*;
     import xvm.hangar.components.Profile.*;
 
-    // Filter     [level|v] [nation|v] [x] selection
-    // [       ]  [class|v] [master|v] [x] premium     [SAVE]
+    // Filter
+    // [           ] [nation|v] [class|v] [level|v] [master|v] [prefs|v] [SAVE]
     public class FilterControl extends Sprite
     {
         private var filterTextInput:TextInput;
@@ -27,9 +27,6 @@ package xvm.hangar.components.Profile
 
         public function FilterControl()
         {
-            //width = 400;
-            //height = 40;
-
             addChild(createLabel("Filter", 0, 0));
             filterTextInput = App.utils.classFactory.getComponent("TextInput", TextInput);
             filterTextInput.x = 0;
@@ -38,7 +35,6 @@ package xvm.hangar.components.Profile
             filterTextInput.text = Config.config.userInfo.defaultFilterValue;
             filterTextInput.addEventListener(Event.CHANGE, onChange);
             filterTextInput.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
-            onChange(null);
             addChild(filterTextInput);
 
             /*addChild(createLabel("Nation", 65, 0));
@@ -85,6 +81,11 @@ package xvm.hangar.components.Profile
         public function get filter():String
         {
             return filterTextInput.text;
+        }
+
+        public function set filter(value:String):void
+        {
+            filterTextInput.text = value;
         }
 
         public function setFocus():void

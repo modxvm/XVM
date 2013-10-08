@@ -15,11 +15,13 @@ from logger import *
 from gameregion import *
 from pinger import *
 from stats import getBattleStat, getUserData
+from vehinfo import vehicleInfoData
 
 NO_LOG_COMMANDS = (
   COMMAND_LOG,
   COMMAND_PING,
   COMMAND_GETMODS,
+  COMMAND_GETVEHICLEINFODATA,
   COMMAND_GETSCREENSIZE,
   COMMAND_GETGAMEREGION,
   COMMAND_GETLANGUAGE,
@@ -48,6 +50,8 @@ class XvmStat(object):
                 res = region
             elif cmd == COMMAND_GETLANGUAGE:
                 res = language
+            elif cmd == COMMAND_GETVEHICLEINFODATA:
+                res = vehicleInfoData
             elif cmd == COMMAND_LOADBATTLESTAT:
                 getBattleStat(proxy, args)
             elif cmd == COMMAND_LOADUSERDATA:

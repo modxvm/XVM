@@ -16,6 +16,8 @@ package xvm.hangar.components.Profile
     {
         private var page:ProfileTechnique;
 
+        private var currentFilter:String = "";
+
         private var initialized:Boolean;
         private var updatingActive:Boolean;
         private var sortingActive:Boolean;
@@ -37,8 +39,16 @@ package xvm.hangar.components.Profile
 
         // PUBLIC
 
-        public function apply(filter:String):void
+        public function applyFilter(e:Event):void
         {
+            currentFilter = (e.currentTarget as FilterControl).filter;
+            App.utils.scheduler.cancelTask(applyFilterTimer);
+            App.utils.scheduler.scheduleTask(applyFilterTimer, 500);
+        }
+
+        private function applyFilterTimer():void
+        {
+            Logger.add("applyFilter: " + currentFilter);
         }
 
         // PROPERTIES

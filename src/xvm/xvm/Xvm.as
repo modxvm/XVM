@@ -13,6 +13,7 @@ package
     import flash.system.*;
     import com.xvm.*;
     import com.xvm.io.*;
+    import com.xvm.vehinfo.*;
 
     [SWF(width="1", height="1", backgroundColor="#000000")]
 
@@ -25,6 +26,7 @@ package
         {
             //_libraries = null;
             Config.load(this, init);
+
         }
 
         private function init(e:Event = null):void
@@ -38,6 +40,7 @@ package
 
             // entry point
 
+            VehicleInfo.populateData();
             Cmd.getMods(this, onGetModsComplete);
         }
 

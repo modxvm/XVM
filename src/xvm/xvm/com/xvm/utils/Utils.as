@@ -4,7 +4,7 @@
  */
 package com.xvm.utils
 {
-	import flash.display.Sprite;
+    import flash.display.Sprite;
     import flash.utils.*;
     import flash.text.*;
     import flash.filters.*;

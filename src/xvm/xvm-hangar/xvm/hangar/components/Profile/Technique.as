@@ -48,6 +48,7 @@ package xvm.hangar.components.Profile
                 page.listComponent.lowerShadow.visible = false;
 
                 // create filter controls
+                filter = null;
                 if (Config.config.userInfo.showFilters)
                     createFilters();
 
@@ -73,7 +74,7 @@ package xvm.hangar.components.Profile
             list.selectedIndex = 0;
 
             // Focus filter
-            if (filter.visible && Config.config.userInfo.filterFocused == true)
+            if (filter != null && filter.visible && Config.config.userInfo.filterFocused == true)
                 filter.setFocus();
 
             // stat
@@ -96,13 +97,8 @@ package xvm.hangar.components.Profile
         protected function createFilters():void
         {
             filter = new FilterControl();
-            filter.addEventListener(Event.CHANGE, applyFilterAndSort);
+            filter.addEventListener(Event.CHANGE, techniqueListAdjuster.applyFilter);
             page.addChild(filter);
-        }
-
-        protected function applyFilterAndSort(e:Event):void
-        {
-            techniqueListAdjuster.apply(filter.filter);
         }
 
         protected function viewChanged(e:TechniquePageEvent):void

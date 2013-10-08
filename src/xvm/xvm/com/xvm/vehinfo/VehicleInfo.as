@@ -2,15 +2,51 @@
  * XVM Config
  * @author Maxim Schedriviy <m.schedriviy@gmail.com>
  */
-// TODO: complete refactoring. Use python to get values online.
 package com.xvm.vehinfo
 {
     import org.idmedia.as3commons.util.StringUtils;
     import com.xvm.*;
+    import com.xvm.io.*;
+    import com.xvm.utils.*;
     import com.xvm.types.cfg.CVehicleNames;
+    import com.xvm.types.veh.*;
 
     public class VehicleInfo
     {
+        // PUBLIC
+
+        public static function populateData():void
+        {
+            Cmd.getVehicleInfoData(instance, instance.onVehicleInfoData);
+        }
+
+        // PRIVATE
+
+        // instance
+        private static var _instance:VehicleInfo = null;
+        private static function get instance():VehicleInfo
+        {
+            if (_instance == null)
+                _instance = new VehicleInfo();
+            return _instance;
+        }
+
+        private function onVehicleInfoData(json_str:String):void
+        {
+            //Logger.add("onVehicleInfoData(): " + str_data);
+            try
+            {
+                //var data:VehicleData = ObjectConverter.convertData(JSONx.parse(json_str), VehicleData);
+                //Logger.addObject(data);
+            }
+            catch (e:Error)
+            {
+                Logger.add(e.getStackTrace());
+            }
+        }
+
+        // TODO: complete refactoring. Use python to get values online.
+
         // icon = "ussr-IS-3"
         // return: "IS-3"
         public static function getShortVehicleName(icon: String): String
