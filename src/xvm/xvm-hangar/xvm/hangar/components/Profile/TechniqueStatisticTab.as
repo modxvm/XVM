@@ -246,11 +246,11 @@ package xvm.hangar.components.Profile
 
             proxy.dmgRatioDL.value = color(App.utils.locale.numberWithoutZeros(data.damageEfficiency), 0xCBAD78);
 
-            proxy.avgExpDL.value = color(App.utils.locale.numberWithoutZeros(data.avgXP));
+            proxy.avgExpDL.value = color(App.utils.locale.integer(data.avgXP));
+            proxy.avgDmgDealtDL.value = color(App.utils.locale.integer(data.avgDamageDealt));
+            proxy.avgDmgReceivedDL.value = color(App.utils.locale.integer(data.avgDamageReceived));
             proxy.avgKillsDL.value = color(App.utils.locale.numberWithoutZeros(data.avgFrags));
             proxy.avgDetectedDL.value = color(App.utils.locale.numberWithoutZeros(data.avgEnemiesSpotted));
-            proxy.avgDmgDealtDL.value = color(App.utils.locale.numberWithoutZeros(data.avgDamageDealt));
-            proxy.avgDmgReceivedDL.value = color(App.utils.locale.numberWithoutZeros(data.avgDamageReceived));
 
             // stat
 
