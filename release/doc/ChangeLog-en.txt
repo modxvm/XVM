@@ -1,13 +1,19 @@
 ﻿XVM-dev:
   [NEW FUNCTIONS]
-  * new option:
-      squad/formatInfoField - format of vehicle info field
+  * possibility of editing format of vehicle info field in squad window:
+      squad/formatInfoField
+  * ability to configure different sets of icons to the left and right panels, markers of allies and enemies:
+      iconset/battleLoadingLeft, iconset/battleLoadingRight - for battle loading
+      iconset/playersPanelLeft, iconset/playersPanelRight   - for players panel
+      iconset/statisticFormLeft, iconset/statisticFormRight - for Tab window
+      iconset/vehicleMarkerAlly, iconset/vehicleMarkerEnemy - for vehicle markers
 
   [MACROS]
   * squad: added macros {{level}}, {{rlevel}}, {{vehicle-class}}, {{battletier-min}}, {{battletier-max}}
 
   [OTHER]
   * squad: removed options "romanNumbers", "leftLvlBorder", "rightLvlBorder"
+  * renamed fields in iconset: "battleLoading", "playersPanel", "statisticForm", "vehicleMarker"
 
 XVM-5.0.0-test4:
   [NEW FUNCTIONS]
@@ -61,7 +67,7 @@ XVM-5.0.0-test2:
   * statistic is disabled in the config by default
   * removed TWR rating
   * removed option login/showPingOnGameLoading
-  * renamed fields formatLeft/Right in battleloading, Tab
+  * renamed fields "formatLeft", "formatRight" in battleloading, Tab
   * changed clock format in battleloading (http://php.net/date)
 
 XVM-4.1.1:

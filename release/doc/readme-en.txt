@@ -15,7 +15,7 @@ Content:
     * Players Panel Controlling (width, transparency, content)
     * Clock at battle loading screen
     * Player, clan icon
-    * Different vehicle icon sets for ears, battle loading screen, etc.
+    * Different vehicle icon sets as for the team, well as for ears, battle loading screen, etc.
     * Players statistics
     * Capture bar additional information
     * Customizable minimap

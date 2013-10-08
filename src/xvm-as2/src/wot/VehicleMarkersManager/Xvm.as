@@ -120,7 +120,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         m_curHealth = curHealth >= 0 ? curHealth : 0;
 
         healthBarComponent.init();
-        contourIconComponent.init();
+        contourIconComponent.init(m_entityType);
         levelIconComponent.init();
         turretStatusComponent.init();
         vehicleTypeComponent.init(vClass /*mediumTank*/, hunt);

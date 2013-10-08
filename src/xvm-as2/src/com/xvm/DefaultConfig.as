@@ -958,10 +958,14 @@ class com.xvm.DefaultConfig
               }
             },*/
             iconset: {
-                battleLoading: "contour/",
-                statisticForm: "contour/",
-                playersPanel:  "contour/",
-                vehicleMarker: "contour/"
+                battleLoadingLeft:  "contour/",
+                battleLoadingRight: "contour/",
+                playersPanelLeft:   "contour/",
+                playersPanelRight:  "contour/",
+                statisticFormLeft:  "contour/",
+                statisticFormRight: "contour/",
+                vehicleMarkerAlly:  "contour/",
+                vehicleMarkerEnemy: "contour/"
             },
             consts: consts,
             vehicleNames: VehicleInfo.getVehicleNamesData()

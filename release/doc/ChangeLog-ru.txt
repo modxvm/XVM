@@ -1,13 +1,19 @@
 ﻿XVM-dev:
   [НОВЫЕ ФУНКЦИИ]
-  * новые опции:
-      squad/formatInfoField - формат поля информации о танке
+  * возможность форматирования с помощью макросов поля информации о танке в окне взвода:
+      squad/formatInfoField
+  * возможность настройки разных наборов иконок для левой и правой панелей, маркеров союзников и противников:
+      iconset/battleLoadingLeft, iconset/battleLoadingRight - для экрана загрузки
+      iconset/playersPanelLeft, iconset/playersPanelRight   - для боковых панелей
+      iconset/statisticFormLeft, iconset/statisticFormRight - для экрана Tab
+      iconset/vehicleMarkerAlly, iconset/vehicleMarkerEnemy - для маркеров над танками
 
   [МАКРОСЫ]
   * взвод: добавлены макросы {{level}}, {{rlevel}}, {{vehicle-class}}, {{battletier-min}}, {{battletier-max}}
 
   [ДРУГОЕ]
   * взвод: удалены опции "romanNumbers", "leftLvlBorder", "rightLvlBorder"
+  * переименованы поля в iconset: "battleLoading", "playersPanel", "statisticForm", "vehicleMarker"
 
 XVM-5.0.0-test4:
   [НОВЫЕ ФУНКЦИИ]
@@ -61,7 +67,7 @@ XVM-5.0.0-test2:
   * статистика выключена в конфиге по умолчанию
   * удален рейтинг TWR
   * удалена опция login/showPingOnGameLoading
-  * переименованы поля formatLeft/Right в окне загрузки боя, Tab
+  * переименованы поля formatLeft, formatRight в окне загрузки боя, Tab
   * изменен формат часов в окне загрузки боя (http://php.net/date)
 
 XVM-4.1.1:

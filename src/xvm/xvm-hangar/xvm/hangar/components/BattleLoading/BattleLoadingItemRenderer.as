@@ -71,7 +71,9 @@ package xvm.hangar.components.BattleLoading
             {
                 proxy.iconLoader.sourceAlt = data.icon;
                 data.icon = data.icon.replace(Defines.WG_CONTOUR_ICON_PATH,
-                    Defines.XVMRES_ROOT + Config.config.iconset.battleLoading);
+                    Defines.XVMRES_ROOT + ((team == Defines.TEAM_ALLY) 
+                    ? Config.config.iconset.battleLoadingLeft
+                    : Config.config.iconset.battleLoadingRight));
             }
             else
             {
