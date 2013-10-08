@@ -161,10 +161,11 @@ private function RefreshHangarPage():void
 
         section = Config.config.userInfo;
         this.p_hangar.v_startPage.value = section.startPage;
+        this.p_hangar.v_sortColumn.value = section.sortColumn;
+        this.p_hangar.v_inHangarFilterEnabled.value = section.inHangarFilterEnabled;
         this.p_hangar.v_showFilters.value = section.showFilters;
         this.p_hangar.v_filterFocused.value = section.filterFocused;
-        this.p_hangar.v_inHangarFilterEnabled.value = section.inHangarFilterEnabled;
-        this.p_hangar.v_sortColumn.value = section.sortColumn;
+        this.p_hangar.v_defaultFilterValue.value = section.defaultFilterValue;
 
         section = Config.config.squad;
         this.p_hangar.v_enabled.value = section.enabled;

@@ -1,8 +1,12 @@
 ﻿XVM-dev:
   [НОВЫЕ ФУНКЦИИ]
   * локализация: добавлен болгарский язык
+  * new option:
+      userInfo/defaultFilterValue - default value for the filter text input
+
   [ИСПРАВЛЕНИЯ]
-  * пингер: добавлена поддержка wine. Для ее активации нужно выполнить команду ln -s `which ping` ~/.wine/drive_c/ping.exe
+  * пингер: добавлена поддержка wine. Для ее активации нужно выполнить команду
+      ln -s `which ping` ~/.wine/drive_c/ping.exe
   * удалена опция userInfo/showEColumn
   
 XVM-5.0.0-test3:

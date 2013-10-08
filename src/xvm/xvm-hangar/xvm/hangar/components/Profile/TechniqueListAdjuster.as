@@ -35,6 +35,12 @@ package xvm.hangar.components.Profile
             page.listComponent.addEventListener(ListEvent.INDEX_CHANGE, listComponentIndexChange);
         }
 
+        // PUBLIC
+
+        public function apply(filter:String):void
+        {
+        }
+
         // PROPERTIES
 
         private function get list():TechniqueList

@@ -9,21 +9,21 @@ package xvm.hangar.components.Profile
     import flash.text.*;
     import net.wg.gui.components.controls.*;
     import scaleform.clik.controls.Button;
-    import scaleform.clik.data.DataProvider;
-    import scaleform.clik.events.ListEvent;
+    import scaleform.clik.data.*;
+    import scaleform.clik.events.*;
     import xvm.hangar.components.Profile.*;
 
     // Filter     [level|v] [nation|v] [x] selection
     // [       ]  [class|v] [master|v] [x] premium     [SAVE]
     public class FilterControl extends Sprite
     {
-        public var filterTextInput:TextInput;
-        public var nationFilter:DropDown;
-        public var classFilter:DropDown;
-        public var levelFilter:DropDown;
-        public var masteryFilter:DropDown;
-        public var prefFilter:DropDown;
-        public var saveButton:Button;
+        private var filterTextInput:TextInput;
+        //private var nationFilter:DropDown;
+        //private var classFilter:DropDown;
+        //private var levelFilter:DropDown;
+        //private var masteryFilter:DropDown;
+        //private var prefFilter:DropDown;
+        //private var saveButton:Button;
 
         public function FilterControl()
         {
@@ -34,11 +34,14 @@ package xvm.hangar.components.Profile
             filterTextInput = App.utils.classFactory.getComponent("TextInput", TextInput);
             filterTextInput.x = 0;
             filterTextInput.y = 17;
-            filterTextInput.width = 65;
+            filterTextInput.width = 250; //65;
+            filterTextInput.text = Config.config.userInfo.defaultFilterValue;
             filterTextInput.addEventListener(Event.CHANGE, onChange);
+            filterTextInput.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+            onChange(null);
             addChild(filterTextInput);
 
-            addChild(createLabel("Nation", 65, 0));
+            /*addChild(createLabel("Nation", 65, 0));
             nationFilter = new NationMultiSelectionDropDown();
             nationFilter.x = 65;
             nationFilter.y = 17;
@@ -76,8 +79,20 @@ package xvm.hangar.components.Profile
             saveButton = App.utils.classFactory.getComponent("ButtonNormal", Button);
             saveButton.x = 340;
             saveButton.y = 17;
-            saveButton.label = Locale.get("Save");
+            saveButton.label = Locale.get("Save");*/
         }
+
+        public function get filter():String
+        {
+            return filterTextInput.text;
+        }
+
+        public function setFocus():void
+        {
+            stage.focus = filterTextInput;
+        }
+
+        // PRIVATE
 
         private function createLabel(label:String, x:Number, y:Number):TextField
         {
@@ -91,6 +106,12 @@ package xvm.hangar.components.Profile
             l.defaultTextFormat = new TextFormat("$FieldFont", 12, Defines.UICOLOR_DEFAULT2);
             l.text = Locale.get(label);
             return l;
+        }
+
+        private function onKeyDown(e:KeyboardEvent):void
+        {
+            //if (e.keyCode == 27) // ESC
+            //    dispatchEvent(e);
         }
 
         private function onChange(e:Event):void

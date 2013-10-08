@@ -191,10 +191,11 @@ package com.xvm.misc
         {
             var c:CUserInfo = new CUserInfo();
             c.startPage = 4;
+            c.sortColumn = 5;                  // Number of column for sorting
+            c.inHangarFilterEnabled = false;   // Enable In hangar radio button by default
             c.showFilters = true;              // Show tank filters
             c.filterFocused = true;            // Set the default focus to the filter text input
-            c.inHangarFilterEnabled = false;   // Enable In hangar radio button by default
-            c.sortColumn = 5;                  // Number of column for sorting
+            c.defaultFilterValue = "";         // Default filter value
             return c;
         }
 

@@ -74,7 +74,7 @@ package xvm.hangar.components.Profile
 
             // Focus filter
             if (filter.visible && Config.config.userInfo.filterFocused == true)
-                page.stage.focus = filter.filterTextInput;
+                filter.setFocus();
 
             // stat
             if (Config.config.rating.showPlayersStatistics  && Config.config.rating.enableUserInfoStatistics)
@@ -102,7 +102,7 @@ package xvm.hangar.components.Profile
 
         protected function applyFilterAndSort(e:Event):void
         {
-            Logger.add("TODO: applyFilterAndSort");
+            techniqueListAdjuster.apply(filter.filter);
         }
 
         protected function viewChanged(e:TechniquePageEvent):void

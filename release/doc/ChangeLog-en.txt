@@ -2,11 +2,14 @@
   [NEW FUNCTIONS]
   * localization: added Bulgarian language
   * localization: added French readme
+  * new option:
+      userInfo/defaultFilterValue - default value for the filter text input
 
   [FIXES]
-  * pinger: add wine support. For activation execute ln -s `which ping` ~/.wine/drive_c/ping.exe
+  * pinger: add wine support. For activation execute
+      ln -s `which ping` ~/.wine/drive_c/ping.exe
   * removed option userInfo/showEColumn
-  
+
 XVM-5.0.0-test3:
   [NEW FUNCTIONS]
   * new options:
