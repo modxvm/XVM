@@ -212,17 +212,21 @@ package xvm.hangar.components.Profile
             proxy.battlesDL.value = color(App.utils.locale.integer(data.battlesCount));
             TF(proxy.battlesDL).htmlText = formatHtmlText(data.winsToNextPercentStr, Defines.UICOLOR_DEFAULT2);
 
-            var ratingColor:int = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, data.winsEfficiency * 100);
+            var ratingColor:int = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, data.winPercent);
             proxy.winsDL.value = color(App.utils.locale.integer(data.winsCount));
-            TF(proxy.winsDL).htmlText = formatHtmlText(App.utils.locale.numberWithoutZeros(data.winsEfficiency * 100) + "%", ratingColor);
+            TF(proxy.winsDL).htmlText = formatHtmlText(App.utils.locale.numberWithoutZeros(data.winPercent) + "%", ratingColor);
 
             proxy.defeatsDL.value = color(App.utils.locale.integer(data.lossesCount));
-            TF(proxy.defeatsDL).htmlText = formatHtmlText(App.utils.locale.numberWithoutZeros(data.lossesEfficiency * 100) + "%", Defines.UICOLOR_GOLD);
+            TF(proxy.defeatsDL).htmlText = formatHtmlText(
+                color(App.utils.locale.numberWithoutZeros(data.lossPercent) + "%", Defines.UICOLOR_GOLD) +
+                " " + Locale.get("draws") + ": " + color(App.utils.locale.integer(data.drawsCount), Defines.UICOLOR_GOLD) +
+                " (" + color(App.utils.locale.numberWithoutZeros(data.drawsPercent) + "%", Defines.UICOLOR_GOLD) + ")",
+                Defines.UICOLOR_DEFAULT2);
 
             proxy.surviveDL.value = color(App.utils.locale.integer(data.survivalCount));
-            TF(proxy.surviveDL).htmlText = formatHtmlText(App.utils.locale.numberWithoutZeros(data.survivalEfficiency * 100) + "%", Defines.UICOLOR_GOLD);
+            TF(proxy.surviveDL).htmlText = formatHtmlText(App.utils.locale.numberWithoutZeros(data.survivePercent) + "%", Defines.UICOLOR_GOLD);
 
-            proxy.accuracyDL.value = convertPercentValue(data.hitsEfficiency);
+            proxy.accuracyDL.value = convertPercentValue(data.hitsRatio);
 
             proxy.maxExpDL.value = color(App.utils.locale.integer(data.maxXP));
             TF(proxy.maxExpDL).htmlText = formatHtmlText(data.maxXPVehicleName, Defines.UICOLOR_GOLD2);
@@ -398,23 +402,28 @@ package xvm.hangar.components.Profile
             return new Data();
         }
 
+        private function getRecord(dossier:Dossier, recordName:String):*
+        {
+            return uint(App.itemsMgr._callItemMethodS(dossier.itemTypeIdx, dossier.id, 'getRecord', [ recordName ]));
+        }
+
         private function extractData(dossier:Dossier):Data
         {
             var data:Data = new Data();
             data.battlesCount = dossier.getBattlesCount();
             data.winsCount = dossier.getWinsCount();
-            data.winsEfficiency = dossier.getWinsEfficiency();
-            data.lossesCount = data.battlesCount - data.winsCount;
-            data.lossesEfficiency = dossier.getLossesEfficiency();
-            data.survivalCount = data.battlesCount - dossier.getDeathsCount();
-            data.survivalEfficiency = dossier.getSurvivalEfficiency();
-            data.hitsEfficiency = dossier.getHitsEfficiency();
+            data.lossesCount = getRecord(dossier, 'losses');
+
+            data.survivalCount = getRecord(dossier, 'survivedBattles');
+            data.winAndSurvived = getRecord(dossier, 'winAndSurvived');
+            data.shotsCount = getRecord(dossier, 'shots');
+            data.hitsCount = getRecord(dossier, 'hits');
 
             data.maxXP = (dossier is VehicleDossier) ? dossier.getMaxVehicleXP() : dossier.getMaxVehicleXP();
             data.maxFrags = (dossier is VehicleDossier) ? dossier.getMaxVehicleFrags() : dossier.getMaxVehicleFrags();
             data.fragsCount = dossier.getFragsCount();
-            data.deathsCount = dossier.getDeathsCount();
             data.fragsEfficiency = dossier.getFragsEfficiency();
+            data.deathsCount = dossier.getDeathsCount();
             data.damageDealt = dossier.getDamageDealt();
             data.damageReceived = dossier.getDamageReceived();
             data.damageEfficiency = dossier.getDamageEfficiency();
@@ -423,19 +432,25 @@ package xvm.hangar.components.Profile
             data.avgEnemiesSpotted = dossier.getAvgEnemiesSpotted();
             data.avgDamageDealt = dossier.getAvgDamageDealt();
             data.avgDamageReceived = dossier.getAvgDamageReceived();
+
             return data;
         }
 
         private function calculateData(data:Data):void
         {
-            // GWR
-            data.globalWinRatio = pb(data.winsCount, data.battlesCount) * 100;
+            // Ratios
+            data.drawsCount = data.battlesCount - data.winsCount - data.lossesCount;
+            data.winPercent = pb(data.winsCount, data.battlesCount) * 100;
+            data.lossPercent = pb(data.lossesCount, data.battlesCount) * 100;
+            data.drawsPercent = pb(data.drawsCount, data.battlesCount) * 100;
+            data.survivePercent = pb(data.survivalCount, data.battlesCount) * 100;
+            data.hitsRatio = pb(data.hitsCount, data.shotsCount);
 
             // Wins to next percent
-            if (data.globalWinRatio > 0 && data.globalWinRatio < 100)
+            if (data.winPercent > 0 && data.winPercent < 100)
             {
-                var r1:Number = Math.round(data.globalWinRatio) / 100 + 0.005;
-                var r2:Number = int(data.globalWinRatio) / 100 + 0.01;
+                var r1:Number = Math.round(data.winPercent) / 100 + 0.005;
+                var r2:Number = int(data.winPercent) / 100 + 0.01;
                 var b1:Number = (data.battlesCount * r1 - data.winsCount) / (1 - r1);
                 var b2:Number = (data.battlesCount * r2 - data.winsCount) / (1 - r2);
                 b1 = Math.max(0, b1 % 1 == 0 ? b1 : (int(b1) + 1));
@@ -496,19 +511,18 @@ class Data
 {
     public var battlesCount:Number = 0;
     public var winsCount:Number = 0;
-    public var winsEfficiency:Number = 0;
     public var lossesCount:Number = 0;
-    public var lossesEfficiency:Number = 0;
     public var survivalCount:Number = 0;
-    public var survivalEfficiency:Number = 0;
-    public var hitsEfficiency:Number = 0;
+    public var winAndSurvived:Number = 0;
+    public var shotsCount:Number = 0;
+    public var hitsCount:Number = 0;
     public var maxXP:Number = 0;
     public var maxXPVehicleName:String = "";
     public var maxFrags:Number = 0;
     public var maxFragsVehicleName:String = "";
     public var fragsCount:Number = 0;
-    public var deathsCount:Number = 0;
     public var fragsEfficiency:Number = 0;
+    public var deathsCount:Number = 0;
     public var damageDealt:Number = 0;
     public var damageReceived:Number = 0;
     public var damageEfficiency:Number = 0;
@@ -519,7 +533,12 @@ class Data
     public var avgDamageReceived:Number = 0;
 
     // calculated
-    public var globalWinRatio:Number = 0;
+    public var drawsCount:Number = 0;
+    public var winPercent:Number = 0;
+    public var lossPercent:Number = 0;
+    public var drawsPercent:Number = 0;
+    public var survivePercent:Number = 0;
+    public var hitsRatio:Number = 0;
     public var winsToNextPercentStr:String = "";
 
     // stat
