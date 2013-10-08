@@ -4,16 +4,16 @@ echo "Updating icons of all clans..."
 cd scripts-allclans
 
 echo "Updating VN"
-update-vn.sh
+. update-vn.sh
 echo "Updating KR"
-update-kr.sh
+. update-kr.sh
 echo "Updating SEA"
-update-sea.sh
+. update-sea.sh
 echo "Updating NA"
-update-na.sh
+. update-na.sh
 echo "Updating EU"
-update-eu.sh
+. update-eu.sh
 echo "Updating RU"
-update-ru.sh
+. update-ru.sh
 
 echo "Icons of all clans updated"
