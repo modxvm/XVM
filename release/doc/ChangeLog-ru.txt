@@ -1,4 +1,15 @@
-﻿XVM-5.0.0-test4:
+﻿XVM-dev:
+  [НОВЫЕ ФУНКЦИИ]
+  * новые опции:
+      squad/formatInfoField - формат поля информации о танке
+
+  [МАКРОСЫ]
+  * взвод: добавлены макросы {{level}}, {{rlevel}}, {{vehicle-class}}, {{battletier-min}}, {{battletier-max}}
+
+  [ДРУГОЕ]
+  * взвод: удалены опции "romanNumbers", "leftLvlBorder", "rightLvlBorder"
+
+XVM-5.0.0-test4:
   [НОВЫЕ ФУНКЦИИ]
   * локализация: добавлен болгарский язык
   * локализация: добавлен французский readme

@@ -179,11 +179,9 @@ package com.xvm.misc
         private static function getSquadSection():CSquad
         {
             var c:CSquad = new CSquad();
-            c.enabled = true;       // Global switch
-            c.romanNumbers = true;  // Roman level numbers
-            c.showClan = true;      // Show player clan
-            c.leftLvlBorder = "";   // Grille [4
-            c.rightLvlBorder = "";  // Grille 4]
+            c.enabled = true;                  // Global switch
+            c.showClan = true;                 // Show player clan
+            c.formatInfoField = "{{rlevel}}";  // Format of vehicle info field
             return c;
         }
 

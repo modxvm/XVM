@@ -1,4 +1,15 @@
-﻿XVM-5.0.0-test4:
+﻿XVM-dev:
+  [NEW FUNCTIONS]
+  * new option:
+      squad/formatInfoField - format of vehicle info field
+
+  [MACROS]
+  * squad: added macros {{level}}, {{rlevel}}, {{vehicle-class}}, {{battletier-min}}, {{battletier-max}}
+
+  [OTHER]
+  * squad: removed options "romanNumbers", "leftLvlBorder", "rightLvlBorder"
+
+XVM-5.0.0-test4:
   [NEW FUNCTIONS]
   * localization: added Bulgarian language
   * localization: added French readme

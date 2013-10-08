@@ -382,6 +382,42 @@ package com.xvm.utils
             }
         }
 
+        private static var LEVEL_MACRO:String = "{{level}}";
+        private static var ROMAN_LEVEL_MACRO:String = "{{rlevel}}";
+        private static var VEHCLASS_MACRO:String = "{{vehicle-class}}";
+        private static var BATTLETIERMIN_MACRO:String = "{{battletier-min}}";
+        private static var BATTLETIERMAX_MACRO:String = "{{battletier-max}}";
+
+        public static function FormatSquad(format:String, tankInfo:Object):String
+        {
+            if (format.indexOf("{{") == -1)
+                return Utils.fixImgTag(format);
+
+            var formatArr:Array;
+
+            formatArr = format.split(LEVEL_MACRO);
+            if (formatArr.length > 1)
+                format = formatArr.join(tankInfo.level);
+
+            formatArr = format.split(ROMAN_LEVEL_MACRO);
+            if (formatArr.length > 1)
+                format = formatArr.join(Defines.ROMAN_LEVEL[tankInfo.level - 1]);
+                
+            formatArr = format.split(VEHCLASS_MACRO);
+            if (formatArr.length > 1)
+                format = formatArr.join(Locale.get(tankInfo.type));
+                
+                formatArr = format.split(BATTLETIERMIN_MACRO);
+            if (formatArr.length > 1)
+                format = formatArr.join(tankInfo.battleTierMin);
+                
+                formatArr = format.split(BATTLETIERMAX_MACRO);
+            if (formatArr.length > 1)
+                format = formatArr.join(tankInfo.battleTierMax);
+
+            return Utils.fixImgTag(format);
+        }
+
         // PRIVATE
 
         private static function modXvmDevLabel(name:String):String

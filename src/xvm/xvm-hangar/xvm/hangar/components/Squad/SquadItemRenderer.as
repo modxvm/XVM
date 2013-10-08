@@ -6,6 +6,7 @@ package xvm.hangar.components.Squad
 {
     import com.xvm.*;
     import com.xvm.l10n.Locale;
+    import com.xvm.utils.Macros;
     import com.xvm.utils.Utils;
     import com.xvm.vehinfo.*;
     import flash.text.TextField;
@@ -30,24 +31,29 @@ package xvm.hangar.components.Squad
 
         public function getToolTipData():String
         {
+            if (!Config.config.squad.enabled)
+                return null;
+
             // Prevent editing empty or "invite" fields
             if (!proxy.data || proxy.data.dummy)
                 return null;
 
-            if (!Config.config.squad.enabled)
-                return null;
-
             var ti:Object = getTankInfo(proxy.model.vShortName);
-            return (ti == null) ? null : Locale.get("Type") + ": " + Locale.get(ti.type) + "\n" + Locale.get("Battle tiers") + ": " + ti.battleTiers + "\n" + Locale.get("Nation") + ": " + Locale.get(ti.nation);
+            return (ti == null) ? null : Locale.get("Type") + ": " + Locale.get(ti.type) + "\n" +
+                Locale.get("Battle tiers") + ": " + ti.battleTierMin + "-" + ti.battleTierMax + "\n" +
+                Locale.get("Nation") + ": " + Locale.get(ti.nation);
         }
 
         public function displayVehicleTier():void
         {
+            if (!Config.config.squad.enabled)
+                return;
+
             // Erase field
             if (vehicleTierField != null)
                 vehicleTierField.htmlText = "";
 
-            // Prevent editing empty or "invite" fileds
+            // Prevent editing empty or "invite" fields
             if (!proxy.data || proxy.data.dummy)
                 return;
 
@@ -55,14 +61,11 @@ package xvm.hangar.components.Squad
             if (!configUI)
                 return;
 
-            if (!Config.config.squad.enabled)
-                return;
-
             // Remove clan tag from player name
             if (Config.config.squad.showClan == false)
                 proxy.data.fullName = proxy.data.userName;
 
-            // Display vehicle tier
+            // Display vehicle info
             var ti:Object = getTankInfo(proxy.data.vShortName);
             if (ti != null)
             {
@@ -70,9 +73,7 @@ package xvm.hangar.components.Squad
                     createVehicleTierField();
 
                 vehicleTierField.htmlText = "<p class='xvm_vehicleTier' align='right'>" +
-                    Utils.fixImgTag(Config.config.squad.leftLvlBorder) +
-                    ti.level +
-                    Utils.fixImgTag(Config.config.squad.rightLvlBorder) + "</p>";
+                    Macros.FormatSquad(Config.config.squad.formatInfoField, ti) + "</p>";
             }
         }
 
@@ -94,9 +95,11 @@ package xvm.hangar.components.Squad
             var vi1:Object = VehicleInfoData.data[vi1Key];
 
             return (vi1 == null || vi2 == null) ? null : {
-                level: Config.config.squad.romanNumbers ? Defines.ROMAN_LEVEL[vi2.level - 1] : String(vi2.level),
-                nation: vi2.nation, type: vi2.type,
-                battleTiers: vi1.tiers.join("-")
+                level: vi2.level,
+                nation: vi2.nation,
+                type: vi2.type,
+                battleTierMin: vi1.tiers[0],
+                battleTierMax: vi1.tiers[1]
             };
         }
 

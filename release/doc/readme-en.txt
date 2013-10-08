@@ -189,15 +189,22 @@ Content:
       {{l10n:Capturers}}            - localizated text "Capturers"
 
     In Minimap:
-      {{level}}        - subject level
-      {{short-nick}}   - subject shortened nickname
-      {{vehicle}}      - subject full vehicle type
+      {{level}}         - subject level
+      {{short-nick}}    - subject shortened nickname
+      {{vehicle}}       - subject full vehicle type
       {{vehicle-type}}  - subject full vehicle type
       {{vehicle-class}} - places special symbol depending on subject vehicle class
-      {{cellsize}}     - minimap cell side size
-      {{vehicle-name}} - returns vehicle system name - usa-M24_Chaffee
-      {{vehiclename}}  - returns vehicle system name - usa-M24_Chaffee
-      {{vehicle-short}}  - shortened vehicle name
+      {{cellsize}}      - minimap cell side size
+      {{vehicle-name}}  - returns vehicle system name - usa-M24_Chaffee
+      {{vehiclename}}   - returns vehicle system name - usa-M24_Chaffee
+      {{vehicle-short}} - shortened vehicle name
+
+    In Squad:
+      {{level}}          - vehicle level (Arabic numerals)
+      {{rlevel}}         - vehicle level (Roman numerals)
+      {{vehicle-class}}  - vehicle class
+      {{battletier-min}} - minimal vehicle battle tier
+      {{battletier-max}} - maximal vehicle battle tier
 
     Statistics macros ('rating/showPlayersStatistics' must be enabled):
       {{avglvl}}      - average level (tier) of tanks
