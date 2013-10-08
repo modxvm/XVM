@@ -209,6 +209,7 @@ package xvm.hangar.components.Profile
 
         private function updateCommonData(data:Data):void
         {
+            proxy.battlesDL.value = color(App.utils.locale.integer(data.battlesCount));
             TF(proxy.battlesDL).htmlText = formatHtmlText(data.winsToNextPercentStr, Defines.UICOLOR_DEFAULT2);
 
             var ratingColor:int = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, data.winsEfficiency * 100);
@@ -262,9 +263,6 @@ package xvm.hangar.components.Profile
             var data:Data = prepareData(page.currentDossier);
             updateCommonData(data);
 
-            var battlesColor:int = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_KB, data.battlesCount / 1000);
-            proxy.battlesDL.value = color(App.utils.locale.integer(data.battlesCount), battlesColor);
-
             // stat
             var s:String = "";
             if (data.stat == null)
@@ -298,9 +296,6 @@ package xvm.hangar.components.Profile
         {
             var data:Data = prepareData(_data);
             updateCommonData(data);
-
-            var battlesColor:int = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_TBATTLES, data.battlesCount);
-            proxy.battlesDL.value = color(App.utils.locale.integer(data.battlesCount), battlesColor);
 
             ratingTF.htmlText = "";
 
