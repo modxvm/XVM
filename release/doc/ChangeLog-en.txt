@@ -1,4 +1,4 @@
-﻿XVM-dev:
+﻿XVM-5.0.0-test4:
   [NEW FUNCTIONS]
   * localization: added Bulgarian language
   * localization: added French readme
