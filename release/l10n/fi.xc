@@ -17,6 +17,8 @@
     "Chance to win": "Voittomahdollisuus",
     "global": "yleinen",
     "per-vehicle": "vaunujen mukaan",
+    "chanceExperimental": "exp",
+    "chanceBattleTier": "T",
 
     // Hitlog
     "attack": "osuttu",
@@ -40,51 +42,36 @@
 
     // BattleResults
     "Hit percent": "Osumaprosentti",
-    "Damage (assisted / own)": "Vauriota (autettu / itse)",
+    "Damage (assisted / own)": "Vahinkoa (autettu / itse)",
 
     // TeamRenderers
-    "TeamRenderersHeaderTip": "Xwn (tai xeff) luokitus.\nNähdäksesi tarkemmat tiedot, siirrä hiiren kursori pelaajan kohdalle.",
     "Friend": "Kaveri",
     "Ignored": "Estetty",
+    "unknown": "tuntematon",
+    "Fights": "Taisteluita",
+    "Wins": "Voittoja",
+    "Data was updated at": "Tiedot päivitetty",
     "Load statistics": "Lataa tilastot",
-    "enabled": "päällä",
-    "disabled": "pois päältä",
 
     // UserInfo
-    "UserInfoEHint": "Vaunukohtainen tehokkuus.\nArvot on päivitetty viimeksi: \u0025DATE\u0025\nKatso tämänhetkiset arvot vaunun yksityiskohtaisista tiedoista.\nSarakkeen arvojen tarkkuus riippuu lähdetietojen laadusta.",
-    "Data was updated at": "Tiedot päivitetty",
-    " to ": " ",
+    "Summary": "Yhteenveto",
+    "Avg level": "Keskim. taso",
+    "WN6": "WN6",
     "EFF": "EFF",
     "updated": "päivitetty",
-    "unknown": "tuntematon",
-    "Avg level": "Keskiarvo",
-    "Spotted": "Havaittu",
-    "Defence": "Puolustettu",
-    "Capture": "Vallattu",
-    "player (average / top)": "pelaaja (keskiarvo / maksimi)",
-    "Spec dmg": "Vahinkoa havaittuihin",
-
-    // UserInfo - filters
+    " to ": " ",
+    "avg": "keskiarvo",
+    "top": "korkein",
+    "draws": "tasapelejä",
+    "Specific damage (Avg dmg / HP)": "Erityistä vahinkoa (Keskim. vah. / HP)",
+    "Capture points": "Valtauspisteitä",
+    "Defence points": "Puolustuspisteitä",
     "Filter": "Suodatin",
-    "All tanks": "Kaikki vaunut",
-    "Show all tanks in the game": "Näytä pelin kaikki vaunut",
-    "Player tanks": "Pelaajan vaunut",
-    "Show all tanks played": "Näytä kaikki pelatut vaunut",
-    "In hangar": "Tallissa",
-    "Show only tanks in own hangar": "Näytä vain omassa tallissa olevat vaunut",
-
-    // UserInfo - buttons
-    "Level": "Taso",
-    "Type": "Tyyppi",
-    "Nation": "Kansallisuus",
-    "Name": "Nimi",
-    "Fights": "Taistelut",
-    "Wins": "Voitot",
 
     // Crew
     "PutOwnCrew": "Aseta vaunun oma miehistö",
     "PutBestCrew": "Aseta paras miehistö",
-    "PutClassCrew": "Aseta saman vaunuluokan miehistö",
+    "PutClassCrew": "Aseta saman vaunutyypin miehistö",
 
     // Squad
     "Vehicle": "Vaunu",
@@ -95,6 +82,7 @@
     "france": "Ranska",
     "uk": "Iso-Britannia",
     "china": "Kiina",
+    "japan": "Japani",
     "HT": "HT",
     "MT": "MT",
     "LT": "LT",
