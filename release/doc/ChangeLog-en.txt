@@ -7,6 +7,7 @@
       iconset/playersPanelLeft, iconset/playersPanelRight   - for players panel
       iconset/statisticFormLeft, iconset/statisticFormRight - for Tab window
       iconset/vehicleMarkerAlly, iconset/vehicleMarkerEnemy - for vehicle markers
+  * localization: added Serbian language
 
   [MACROS]
   * squad: added macros {{level}}, {{rlevel}}, {{vehicle-class}}, {{battletier-min}}, {{battletier-max}}
