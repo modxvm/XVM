@@ -54,18 +54,18 @@
     "Load statistics": "Загрузіць статыстыку",
 
     // UserInfo
-    "Summary": "Общие результаты",
+    "Summary": "Падсумаванне",
     "Avg level": "Сярэдні ўзровень",
     "WN6": "WN6",
     "EFF": "EFF",
     "updated": "абноўлена",
     " to ": " да ",
     "avg": "ср.",
-    "top": "топ",
-    "draws": "ничьих",
-    "Specific damage (Avg dmg / HP)": "Уд. урон (ср. урон / прочность)",
-    "Capture points": "Очки захвата",
-    "Defence points": "Очки защиты",
+    "top": "найвыш.",
+    "draws": "нічыіх",
+    "Specific damage (Avg dmg / HP)": "Сярэднія пашкоджанні / моцнасць",
+    "Capture points": "Пункты захопу",
+    "Defence points": "Пункты абароны",
     "Filter": "Фільтр",
 
     // Crew
