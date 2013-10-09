@@ -17,6 +17,8 @@
     "Chance to win": "Esély a győzelemre",
     "global": "Globálisan",
     "per-vehicle": "Járművenként",
+    "chanceExperimental": "kísérleti",
+    "chanceBattleTier": "T",
 
     // Hitlog
     "attack": "támadás",
@@ -43,43 +45,28 @@
     "Damage (assisted / own)": "Sebzés (hozzájárulás / saját)",
 
     // TeamRenderers
-    "TeamRenderersHeaderTip": "Xwn (vagy XEff) értékelés.\nRészletes információkért, helyezze a kurzort a játékos minősítésének értéke fölé.",
     "Friend": "Barát",
     "Ignored": "Tiltott",
-    "Load statistics": "Statisztika betöltése",
-    "enabled": "bekapcsolva",
-    "disabled": "letiltva",
-
-    // UserInfo
-    "UserInfoEHint": "Járművenkénti hatékonyság.\nA megadott értékek legutóbbi frissítése: \u0025DATE\u0025\nAktuáis adatokért nézd meg a jármű részletes adatait.\nAz oszlopértékek pontossága a legutóbbi adatok frissítésétől függ.",
-    "Data was updated at": "Adatok frissítve",
-    " to ": " -> ",
-    "EFF": "EFF",
-    "updated": "frissítve",
     "unknown": "ismeretlen",
-    "Avg level": "Átlag szint",
-    "Spotted": "Felfedezve",
-    "Defence": "Védés",
-    "Capture": "Foglalás",
-    "player (average / top)": "játékos (átlag / legjobb)",
-    "Spec dmg": "Sebzés/Élet",
-
-    // UserInfo - filters
-    "Filter": "Szűrő",
-    "All tanks": "Összes tank",
-    "Show all tanks in the game": "Játékban lévő összes tank mutatása",
-    "Player tanks": "Játékos tankjai",
-    "Show all tanks played": "Játszott tankok mutatása",
-    "In hangar": "Garázsban",
-    "Show only tanks in own hangar": "Garázsban lévő tankok mutatása",
-
-    // UserInfo - buttons
-    "Level": "Szint",
-    "Type": "Típus",
-    "Nation": "Nemzet",
-    "Name": "Név",
     "Fights": "Csaták",
     "Wins": "Győzelmek",
+    "Data was updated at": "Adatok frissítve",
+    "Load statistics": "Statisztika betöltése",
+
+    // UserInfo
+    "Summary": "Összefoglaló",
+    "Avg level": "Átlag szint",
+    "WN6": "WN6",
+    "EFF": "EFF",
+    "updated": "frissítve",
+    " to ": " -> ",
+    "avg": "átl.",
+    "top": "csúcs",
+    "draws": "döntetlen",
+    "Specific damage (Avg dmg / HP)": "Fajlagos sebzés (Átlag sebzés / Élet)",
+    "Capture points": "Foglalási pontok",
+    "Defence points": "Védelmi pontok",
+    "Filter": "Szűrő",
 
     // Crew
     "PutOwnCrew": "Saját legénység",
@@ -95,6 +82,7 @@
     "france": "Francia",
     "uk": "Brit",
     "china": "Kína",
+    "japan": "Japán",
     "HT": "HT",
     "MT": "MT",
     "LT": "LT",
