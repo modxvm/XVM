@@ -17,59 +17,42 @@
   * renamed fields in iconset: "battleLoading", "playersPanel", "statisticForm", "vehicleMarker"
 
 XVM-5.0.0-test4:
-  [NEW FUNCTIONS]
-  * localization: added Bulgarian language
-  * localization: added French readme
-  * new option:
-      userInfo/defaultFilterValue - default value for the filter text input
-
-  [FIXES]
-  * pinger: add wine support. For activation execute
-      ln -s `which ping` ~/.wine/drive_c/ping.exe
-  * removed option userInfo/showEColumn
-
-XVM-5.0.0-test3:
-  [NEW FUNCTIONS]
-  * new options:
-      login/skipIntro - Skip intro movie
-      login/autologin - Auto enter to the game
-      userInfo/startPage - Initial page userinfo window (default: 4)
-      battleResults/showNetIncome - Display net income of credits in After Battle Screen
-      battleResults/showExtendedInfo - Display shots precision and damage in After Battle Screen
-  * localization: added Romanian language
-
-  [FIXES]
-  * minimap: fixed enemy teamkiller color
-  * markers: fixed drowned vehicle type icon color
-
-  [OTHER]
-  * config: "finalStatistic" section renamed to "battleResults"
-  * battleResults: removed "sortColumn" option, build in since 0.8.8
-
-XVM-5.0.0-test2:
   * adaptation to WoT 0.8.8
 
   [NEW FUNCTIONS]
   * possibility of editing nickname field in battleloading, Tab:
     formatLeftNick, formatRightNick
-  * localization: added Danish, Italian and Turkish languages
-  * localization: added Polish readme
+  * new options:
+    login/skipIntro - Skip intro movie
+    login/autologin - Auto enter to the game
+    userInfo/startPage - Initial page userinfo window (default: 4)
+    battleResults/showNetIncome - Display net income of credits in After Battle Screen
+    battleResults/showExtendedInfo - Display shots precision and damage in After Battle Screen
+    userInfo/defaultFilterValue - default value for the filter text input
+  * pinger: add wine support. For activation execute
+    ln -s `which ping` ~/.wine/drive_c/ping.exe
+  * localization: added Romanian, Bulgarian, Danish, Italian and Turkish languages
+  * localization: added Polish, French readme
 
   [MACROS]
   * added macros {{c:avglvl}}, {{a:avglvl}}
 
   [FIXES]
   * fixed "sixth sense" icon wrong positioning
+  * minimap: fixed enemy teamkiller color
+  * markers: fixed drowned vehicle type icon color
 
   [OTHER]
   * new platform - AS3+Python
   * xvm-stat, Dokan and .NET Framework is not required now. Please, delete xvm-stat.exe.
+  * removed TWR rating
   * config version increased to 5.0.0
   * statistic is disabled in the config by default
-  * removed TWR rating
-  * removed option login/showPingOnGameLoading
-  * renamed fields "formatLeft", "formatRight" in battleloading, Tab
   * changed clock format in battleloading (http://php.net/date)
+  * config: "finalStatistic" section renamed to "battleResults"
+  * removed battleResults/sortColumn option, build in since 0.8.8
+  * removed option login/showPingOnGameLoading, userInfo/showEColumn
+  * renamed fields "formatLeft", "formatRight" in battleloading, Tab
 
 XVM-4.1.1:
   [NEW FUNCTIONS]
