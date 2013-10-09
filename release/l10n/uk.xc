@@ -42,7 +42,7 @@
 
     // BattleResults
     "Hit percent": "Відсоток влучень",
-    "Damage (assisted / own)": "Пошкодження (за розвідданими / свій)",
+    "Damage (assisted / own)": "Пошкодження (за розвідданими / свої)",
 
     // TeamRenderers
     "Friend": "Друг",
@@ -54,18 +54,18 @@
     "Load statistics": "Завантажити статистику",
 
     // UserInfo
-    "Summary": "Общие результаты",
+    "Summary": "Загальні результати",
     "Avg level": "Сер. рівень",
     "WN6": "WN6",
     "EFF": "РЕ",
     "updated": "оновлено",
     " to ": " до ",
-    "avg": "ср.",
+    "avg": "сер.",
     "top": "топ",
-    "draws": "ничьих",
-    "Specific damage (Avg dmg / HP)": "Уд. урон (ср. урон / прочность)",
-    "Capture points": "Очки захвата",
-    "Defence points": "Очки защиты",
+    "draws": "нічиїх",
+    "Specific damage (Avg dmg / HP)": "Пит. пошкодж. (сер. пошкодж. / міцність)",
+    "Capture points": "Балів захоплення",
+    "Defence points": "Балів захисту",
     "Filter": "Фільтр",
 
     // Crew
