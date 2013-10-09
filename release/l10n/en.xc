@@ -54,7 +54,7 @@
     "Load statistics": "Load statistics",
 
     // UserInfo
-    "Summary": Summary",
+    "Summary": "Summary",
     "Avg level": "Avg level",
     "WN6": "WN6",
     "EFF": "EFF",
