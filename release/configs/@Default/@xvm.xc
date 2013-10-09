@@ -83,7 +83,7 @@
 
   // Parameters for userinfo window.
   // Параметры окна достижений.
-  "userInfo": ${"hangar.xc":"userInfo"},
+  "userInfo": ${"userInfo.xc":"userInfo"},
 
   // General parameters for the battle interface.
   // Общие параметры боевого интерфейса.
