@@ -92,7 +92,10 @@ package com.xvm.l10n
             "Chance to win": "Шанс на победу",
             "global": "общий",
             "per-vehicle": "по технике",
+            "chanceExperimental": "exp",
+            "chanceBattleTier": "T",
 
+            /** xvm-as2
             // Hitlog
             "attack": "атака",
             "fire": "пожар",
@@ -110,24 +113,25 @@ package com.xvm.l10n
             "enemyBaseCaptured": "База захвачена союзниками!",
             "allyBaseCapture": "Захват базы врагами!",
             "allyBaseCaptured": "База захвачена врагами!",
+            */
 
             // BattleResults
             "Hit percent": "Процент попаданий",
             "Damage (assisted / own)": "Урон (по разведданным / свой)",
 
             // TeamRenderers
-            "TeamRenderersHeaderTip":
-                "Рейтинг xwn (или xeff).\n" +
-                "Чтобы увидеть более подробную информацию, наведите курсор мыши на значение рейтинга интересующего игрока.",
             "Friend": "Друг",
             "Ignored": "Игнор",
+            "unknown": "неизвестно",
+            "Fights": "Боёв",
+            "Wins": "Побед",
+            "Data was updated at": "Данные были обновлены",
             "Load statistics": "Загрузить статистику",
-            "enabled": "включено",
-            "disabled": "выключено",
 
             // UserInfo
             "Summary": "Общие результаты",
             "Avg level": "Ср. уровень",
+            //"WN6": "WN6",
             "EFF": "РЭ",
             "updated": "обновлено",
             " to ": " до ",
@@ -149,8 +153,6 @@ package com.xvm.l10n
             //"Type": "Тип",
             //"Nation": "Нация",
             //"Name": "Имя",
-            //"Fights": "Боёв",
-            //"Wins": "Побед",
 
             // Crew
             "PutOwnCrew": "Родной экипаж",
@@ -181,6 +183,11 @@ package com.xvm.l10n
         private static const FALLBACK_EN:Object = {
             "XVM_translator": "XVM Team",
 
+            // Win chance
+            "chanceExperimental": "exp",
+            "chanceBattleTier": "T",
+
+            /* xvm-as2
             // Hitlog
             "world_collision": "falling",
 
@@ -192,18 +199,7 @@ package com.xvm.l10n
             "enemyBaseCaptured": "Base captured by allies!",
             "allyBaseCapture": "Base capture by enemies!",
             "allyBaseCaptured": "Base captured by enemies!",
-
-            // UserInfo
-            "UserInfoEHint":
-                "Per-vehicle efficiency.\n" +
-                "The values shown are as of the last statistics update: %DATE%\n" +
-                "See actual current values in the detailed vehicle info.\n" +
-                "Accuracy of the column values depends on the quality of the feed data.",
-
-            // TeamRenderers
-            "TeamRenderersHeaderTip":
-                "Xwn (or xeff) rating.\n" +
-                "To see detailed information, move mouse cursor to the player's name.",
+            */
 
             // Crew
             "PutOwnCrew": "Put own crew",

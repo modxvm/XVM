@@ -63,7 +63,7 @@ class com.xvm.Chance
         {
             var chX1 = GetChance(ChanceFuncX1);
             var chX2 = GetChance(ChanceFuncX2);
-            text += " | exp: " + FormatChangeText("", chX1) + ", " + FormatChangeText("", chX2) + ". T=" + battleTier;
+            text += " | " + Locale.get("chanceExperimental") + ": " + FormatChangeText("", chX1) + ", " + FormatChangeText("", chX2) + ". " + Locale.get("chanceBattleTier") + "=" + battleTier;
             lastChances.X1 = chX1.percentF;
             lastChances.X2 = chX2.percentF;
         }
