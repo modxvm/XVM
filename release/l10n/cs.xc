@@ -17,6 +17,8 @@
     "Chance to win": "Šance na výhru",
     "global": "Celková",
     "per-vehicle": "Dle vozidel",
+    "chanceExperimental": "Aktuální",
+    "chanceBattleTier": "T",
 
     // Hitlog
     "attack": "střelba",
@@ -43,43 +45,28 @@
     "Damage (assisted / own)": "Poškození (asistence / vlastní)",
 
     // TeamRenderer
-    "TeamRenderersHeaderTip": "XWM hodnocení.\nPro zobrazení detailních informací, přejeďte kurzorem na jméno hráče.",
     "Friend": "Přítel",
     "Ignored": "Ignorovaný",
-    "Load statistics": "Načítat statistiky",
-    "enabled": "zapnuto",
-    "disabled": "vypnuto",
-
-    // UserInfo
-    "UserInfoEHint": "E - Efektivita hráče s vozidlem.\nHodnota je aktuální k datu: \u0025DATE\u0025\nAktuální hodnotu  najdete v podrobných informacích o vozidle.",
-    "Data was updated at": "Data byla aktualizována v",
-    " to ": " do ", // 45 wins to 51,5
-    "EFF": "EFF",
-    "updated": "aktualizováno",
     "unknown": "-",
-    "Avg level": "Prům. Tier",
-    "Spotted": "Detekce",
-    "Defence": "Obrana",
-    "Capture": "Obsazení",
-    "player (average / top)": "hráč (průměr / nejlepší)",
-    "Spec dmg": "Škody/HP",
-
-    // UserInfo - filters
-    "Filter": "Filtr",
-    "All tanks": "Vše",
-    "Show all tanks in the game": "Zobrazit všechna vozidla ve hře",
-    "Player tanks": "Hráčovy tanky",
-    "Show all tanks played": "Zobrazit pouze vozidla s odehranou alespoň jednou bitvou",
-    "In hangar": "V hangáru",
-    "Show only tanks in own hangar": "Zobrazit pouze vozidla, která máte zakoupena v hangáru",
-
-    // UserInfo - buttons
-    "Level": "Tier",
-    "Type": "Typ",
-    "Nation": "Národ",
-    "Name": "Název",
     "Fights": "Bitev",
     "Wins": "Výher",
+    "Data was updated at": "Data byla aktualizována v",
+    "Load statistics": "Načítat statistiky",
+
+    // UserInfo
+    "Summary": "Celkový přehled",
+    "Avg level": "Prům. Tier",
+    "WN6": "WN6",
+    "EFF": "EFF",
+    "updated": "aktualizováno",
+    " to ": " do ",
+    "avg": "prům",
+    "top": "nej",
+    "draws": "remízy",
+    "Specific damage (Avg dmg / HP)": "Škody / HP",
+    "Capture points": "Obsazení základny",
+    "Defence points": "Obrana základny",
+    "Filter": "Filtr",
 
     // Crew
     "PutOwnCrew": "Použít vlastní posádku",
