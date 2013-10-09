@@ -91,10 +91,14 @@ package com.xvm.misc
         {
             config.battle.clanIconsFolder = Utils.fixPath(config.battle.clanIconsFolder);
 
-            config.iconset.battleLoading = Utils.fixPath(config.iconset.battleLoading);
-            config.iconset.playersPanel = Utils.fixPath(config.iconset.playersPanel);
-            config.iconset.statisticForm = Utils.fixPath(config.iconset.statisticForm);
-            config.iconset.vehicleMarker = Utils.fixPath(config.iconset.vehicleMarker);
+            config.iconset.battleLoadingAlly = Utils.fixPath(config.iconset.battleLoadingAlly);
+            config.iconset.battleLoadingEnemy = Utils.fixPath(config.iconset.battleLoadingEnemy);
+            config.iconset.playersPanelAlly = Utils.fixPath(config.iconset.playersPanelAlly);
+            config.iconset.playersPanelEnemy = Utils.fixPath(config.iconset.playersPanelEnemy);
+            config.iconset.statisticFormAlly = Utils.fixPath(config.iconset.statisticFormAlly);
+            config.iconset.statisticFormEnemy = Utils.fixPath(config.iconset.statisticFormEnemy);
+            config.iconset.vehicleMarkerAlly = Utils.fixPath(config.iconset.vehicleMarkerAlly);
+            config.iconset.vehicleMarkerEnemy = Utils.fixPath(config.iconset.vehicleMarkerEnemy);
 
             if (config && config.battleLoading && config.battleLoading.clanIcon)
             {
@@ -162,6 +166,30 @@ package com.xvm.misc
                 {
                     config.battleResults = config.finalStatistic;
                     delete config.finalStatistic;
+                }
+                s = config.iconset;
+                if (s != null)
+                {
+                    if (s.battleLoading != null && s.battleLoadingAlly == null && s.battleLoadingEnemy == null)
+                    {
+                        s.battleLoadingAlly = s.battleLoadingEnemy = s.battleLoading;
+                        delete s.battleLoading;
+                    }
+                    if (s.playersPanel != null && s.playersPanelAlly == null && s.playersPanelEnemy == null)
+                    {
+                        s.playersPanelAlly = s.playersPanelEnemy = s.playersPanel;
+                        delete s.playersPanel;
+                    }
+                    if (s.statisticForm != null && s.statisticFormAlly == null && s.statisticFormEnemy == null)
+                    {
+                        s.statisticFormAlly = s.statisticFormEnemy = s.statisticForm;
+                        delete s.statisticForm;
+                    }
+                    if (s.vehicleMarker != null && s.vehicleMarkerAlly == null && s.vehicleMarkerEnemy == null)
+                    {
+                        s.vehicleMarkerAlly = s.vehicleMarkerEnemy = s.vehicleMarker;
+                        delete s.vehicleMarker;
+                    }
                 }
                 v = "5.0.0";
             }
