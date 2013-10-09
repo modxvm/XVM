@@ -68,10 +68,14 @@ class com.xvm.ConfigUtils
     {
         Config.s_config.battle.clanIconsFolder = Utils.fixPath(Config.s_config.battle.clanIconsFolder);
 
-        Config.s_config.iconset.battleLoading = Utils.fixPath(Config.s_config.iconset.battleLoading);
-        Config.s_config.iconset.playersPanel = Utils.fixPath(Config.s_config.iconset.playersPanel);
-        Config.s_config.iconset.statisticForm = Utils.fixPath(Config.s_config.iconset.statisticForm);
-        Config.s_config.iconset.vehicleMarker = Utils.fixPath(Config.s_config.iconset.vehicleMarker);
+        Config.s_config.iconset.battleLoadingAlly = Utils.fixPath(Config.s_config.iconset.battleLoadingAlly);
+        Config.s_config.iconset.battleLoadingEnemy = Utils.fixPath(Config.s_config.iconset.battleLoadingEnemy);
+        Config.s_config.iconset.playersPanelAlly = Utils.fixPath(Config.s_config.iconset.playersPanelAlly);
+        Config.s_config.iconset.playersPanelEnemy = Utils.fixPath(Config.s_config.iconset.playersPanelEnemy);
+        Config.s_config.iconset.statisticFormAlly = Utils.fixPath(Config.s_config.iconset.statisticFormAlly);
+        Config.s_config.iconset.statisticFormEnemy = Utils.fixPath(Config.s_config.iconset.statisticFormEnemy);
+        Config.s_config.iconset.vehicleMarkerAlly = Utils.fixPath(Config.s_config.iconset.vehicleMarkerAlly);
+        Config.s_config.iconset.vehicleMarkerEnemy = Utils.fixPath(Config.s_config.iconset.vehicleMarkerEnemy);
 
         if (isNaN(Config.s_config.battleLoading.clanIcon.xr))
             Config.s_config.battleLoading.clanIcon.xr = Config.s_config.battleLoading.clanIcon.x;
@@ -318,7 +322,6 @@ class com.xvm.ConfigUtils
 
         if (v == "4.0.0")
         {
-            v = "5.0.0";
             if (config.statisticForm != null)
             {
                 if (config.statisticForm.formatLeft != null && config.statisticForm.formatLeftVehicle == null)
@@ -332,6 +335,30 @@ class com.xvm.ConfigUtils
                     delete config.statisticForm.formatRight;
                 }
             }
+            if (config.iconset != null)
+            {
+                if (config.iconset.battleLoading != null && config.iconset.battleLoadingAlly == null && config.iconset.battleLoadingEnemy == null)
+                {
+                    config.iconset.battleLoadingAlly = config.iconset.battleLoadingEnemy = config.iconset.battleLoading;
+                    delete config.iconset.battleLoading;
+                }
+                if (config.iconset.playersPanel != null && config.iconset.playersPanelAlly == null && config.iconset.playersPanelEnemy == null)
+                {
+                    config.iconset.playersPanelAlly = config.iconset.playersPanelEnemy = config.iconset.playersPanel;
+                    delete config.iconset.playersPanel;
+                }
+                if (config.iconset.statisticForm != null && config.iconset.statisticFormAlly == null && config.iconset.statisticFormEnemy == null)
+                {
+                    config.iconset.statisticFormAlly = config.iconset.statisticFormEnemy = config.iconset.statisticForm;
+                    delete config.iconset.statisticForm;
+                }
+                if (config.iconset.vehicleMarker != null && config.iconset.vehicleMarkerAlly == null && config.iconset.vehicleMarkerEnemy == null)
+                {
+                    config.iconset.vehicleMarkerAlly = config.iconset.vehicleMarkerEnemy = config.iconset.vehicleMarker;
+                    delete config.iconset.vehicleMarker;
+                }
+            }
+            v = "5.0.0";
         }
 
 
