@@ -82,6 +82,7 @@
     "france": "Francie",
     "uk": "Británie",
     "china": "Čína",
+	"japan": "Japonsko",
     "HT": "Těžký tank",
     "MT": "Střední tank",
     "LT": "Lehký tank",
