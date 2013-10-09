@@ -11,7 +11,9 @@
         public var premium:Boolean;
         public var nation:String;
         public var name:String;
-        public var translationKey:String;
+
+        public var longTranslationKey:String;
+        public var shortTranslationKey:String;
 
         public var localizedName:String;
 

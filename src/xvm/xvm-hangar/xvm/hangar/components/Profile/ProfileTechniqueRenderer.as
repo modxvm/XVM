@@ -41,6 +41,11 @@ package xvm.hangar.components.Profile
                 if (vi != null && vi.premium == 1)
                     proxy.vehicleTF.textColor = Defines.UICOLOR_GOLD;
             }
+
+            proxy.winsTF.htmlText = "<font color='" +
+                MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, proxy.data.winsEfficiency) + "'>" +
+                proxy.data.winsEfficiencyStr +
+                "</font>";
         }
 
         // PRIVATE
