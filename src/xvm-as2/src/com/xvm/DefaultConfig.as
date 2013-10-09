@@ -958,12 +958,12 @@ class com.xvm.DefaultConfig
               }
             },*/
             iconset: {
-                battleLoadingLeft:  "contour/",
-                battleLoadingRight: "contour/",
-                playersPanelLeft:   "contour/",
-                playersPanelRight:  "contour/",
-                statisticFormLeft:  "contour/",
-                statisticFormRight: "contour/",
+                battleLoadingAlly:  "contour/",
+                battleLoadingEnemy: "contour/",
+                playersPanelAlly:   "contour/",
+                playersPanelEnemy:  "contour/",
+                statisticFormAlly:  "contour/",
+                statisticFormEnemy: "contour/",
                 vehicleMarkerAlly:  "contour/",
                 vehicleMarkerEnemy: "contour/"
             },
