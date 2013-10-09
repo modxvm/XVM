@@ -17,6 +17,8 @@
     "Chance to win": "Шанец перамагчы",
     "global": "агульны",
     "per-vehicle": "паводле тэхнікі",
+    "chanceExperimental": "exp",
+    "chanceBattleTier": "T",
 
     // Hitlog
     "attack": "стральба",
@@ -43,43 +45,28 @@
     "Damage (assisted / own)": "Пашкоджанні (выяўленых вамі / свае)",
 
     // TeamRenderers
-    "TeamRenderersHeaderTip": "Рэйтынг xwn (або xeff).\nКаб пабачыць падрабязнейшыя звесткі, навядзіце курсор мышы на значэнне рэйтынгу таго гульца.",
     "Friend": "Сябар",
     "Ignored": "Ігнар",
-    "Load statistics": "Загрузіць статыстыку",
-    "enabled": "укл.",
-    "disabled": "адкл.",
-
-    // UserInfo
-    "UserInfoEHint": "Эфектыўнасць паводле танка.\nЗначэнне паказваецца згодна з апошнім абнаўленнем звестак: \u0025DATE\u0025\nДзейнае значэнне на бягучы час - ў падрабязных звестак паводле тэхнікі.\nСлушнасць значэнняў у слупку залежыць ад колькасці атрыманых зыходных звестак.",
-    "Data was updated at": "Звесткі былі абноўленыя",
-    " to ": " да ",
-    "EFF": "РЭ",
-    "updated": "абноўлена",
     "unknown": "невядома",
-    "Avg level": "Сярэдні ўзровень",
-    "Spotted": "Выяўленне супраціўніка",
-    "Defence": "Абарона",
-    "Capture": "Захоп",
-    "player (average / top)": "гулец (сярэдні / топ)",
-    "Spec dmg": "Эф. шкода",
-
-    // UserInfo - filters
-    "Filter": "Фільтр",
-    "All tanks": "Усе танкі",
-    "Show all tanks in the game": "Паказаць усе танкі ў гульні",
-    "Player tanks": "Танкі гульца",
-    "Show all tanks played": "Паказаць усе танкі, на якіх граў",
-    "In hangar": "У ангары",
-    "Show only tanks in own hangar": "Паказаць толькі танкі ў сваім ангары",
-
-    // UserInfo - buttons
-    "Level": "Узровень",
-    "Type": "Тып",
-    "Nation": "Нацыя",
-    "Name": "Імя",
     "Fights": "Баёў",
     "Wins": "Перамог",
+    "Data was updated at": "Звесткі былі абноўленыя",
+    "Load statistics": "Загрузіць статыстыку",
+
+    // UserInfo
+    "Summary": "Общие результаты",
+    "Avg level": "Сярэдні ўзровень",
+    "WN6": "WN6",
+    "EFF": "EFF",
+    "updated": "абноўлена",
+    " to ": " да ",
+    "avg": "ср.",
+    "top": "топ",
+    "draws": "ничьих",
+    "Specific damage (Avg dmg / HP)": "Уд. урон (ср. урон / прочность)",
+    "Capture points": "Очки захвата",
+    "Defence points": "Очки защиты",
+    "Filter": "Фільтр",
 
     // Crew
     "PutOwnCrew": "Родны экіпаж",
@@ -95,6 +82,7 @@
     "france": "Францыя",
     "uk": "Вялікабрытанія",
     "china": "Кітай",
+    "japan": "Японія",
     "HT": "ЦТ",
     "MT": "СТ",
     "LT": "ЛТ",
