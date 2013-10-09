@@ -1089,12 +1089,12 @@ package com.xvm.misc
         private static function getIconsetSection():CIconset
         {
             var c:CIconset = new CIconset();
-            c.battleLoadingLeft =  "contour/";
-            c.battleLoadingRight = "contour/";
-            c.statisticFormLeft =  "contour/";
-            c.statisticFormRight = "contour/";
-            c.playersPanelLeft =   "contour/";
-            c.playersPanelRight =  "contour/";
+            c.battleLoadingAlly =  "contour/";
+            c.battleLoadingEnemy = "contour/";
+            c.statisticFormAlly =  "contour/";
+            c.statisticFormEnemy = "contour/";
+            c.playersPanelAlly =   "contour/";
+            c.playersPanelEnemy =  "contour/";
             c.vehicleMarkerAlly =  "contour/";
             c.vehicleMarkerEnemy = "contour/";
             return c;

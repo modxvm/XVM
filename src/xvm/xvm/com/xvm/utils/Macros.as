@@ -384,7 +384,7 @@ package com.xvm.utils
 
         private static var LEVEL_MACRO:String = "{{level}}";
         private static var ROMAN_LEVEL_MACRO:String = "{{rlevel}}";
-        private static var VEHCLASS_MACRO:String = "{{vehicle-class}}";
+        private static var VEHCLASS_MACRO:String = "{{vtype}}";
         private static var BATTLETIERMIN_MACRO:String = "{{battletier-min}}";
         private static var BATTLETIERMAX_MACRO:String = "{{battletier-max}}";
 

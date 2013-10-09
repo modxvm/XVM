@@ -6,12 +6,12 @@ package com.xvm.types.cfg
 {
     public dynamic class CIconset extends Object
     {
-        public var battleLoadingLeft:String;
-        public var battleLoadingRight:String;
-        public var statisticFormLeft:String;
-        public var statisticFormRight:String;
-        public var playersPanelLeft:String;
-        public var playersPanelRight:String;
+        public var battleLoadingAlly:String;
+        public var battleLoadingEnemy:String;
+        public var statisticFormAlly:String;
+        public var statisticFormEnemy:String;
+        public var playersPanelAlly:String;
+        public var playersPanelEnemy:String;
         public var vehicleMarkerAlly:String;
         public var vehicleMarkerEnemy:String;
     }

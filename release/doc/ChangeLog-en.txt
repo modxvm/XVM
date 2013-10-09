@@ -3,14 +3,14 @@
   * possibility of editing format of vehicle info field in squad window:
       squad/formatInfoField
   * ability to configure different sets of icons to the left and right panels, markers of allies and enemies:
-      iconset/battleLoadingLeft, iconset/battleLoadingRight - for battle loading
-      iconset/playersPanelLeft, iconset/playersPanelRight   - for players panel
-      iconset/statisticFormLeft, iconset/statisticFormRight - for Tab window
+      iconset/battleLoadingAlly, iconset/battleLoadingEnemy - for battle loading
+      iconset/playersPanelAlly, iconset/playersPanelEnemy   - for players panel
+      iconset/statisticFormAlly, iconset/statisticFormEnemy - for Tab window
       iconset/vehicleMarkerAlly, iconset/vehicleMarkerEnemy - for vehicle markers
   * localization: added Serbian language
 
   [MACROS]
-  * squad: added macros {{level}}, {{rlevel}}, {{vehicle-class}}, {{battletier-min}}, {{battletier-max}}
+  * squad: added macros {{level}}, {{rlevel}}, {{vtype}}, {{battletier-min}}, {{battletier-max}}
 
   [OTHER]
   * squad: removed options "romanNumbers", "leftLvlBorder", "rightLvlBorder"

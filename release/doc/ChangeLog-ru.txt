@@ -3,14 +3,14 @@
   * возможность форматирования с помощью макросов поля информации о танке в окне взвода:
       squad/formatInfoField
   * возможность настройки разных наборов иконок для левой и правой панелей, маркеров союзников и противников:
-      iconset/battleLoadingLeft, iconset/battleLoadingRight - для экрана загрузки
-      iconset/playersPanelLeft, iconset/playersPanelRight   - для боковых панелей
-      iconset/statisticFormLeft, iconset/statisticFormRight - для экрана Tab
+      iconset/battleLoadingAlly, iconset/battleLoadingEnemy - для экрана загрузки
+      iconset/playersPanelAlly, iconset/playersPanelEnemy   - для боковых панелей
+      iconset/statisticFormAlly, iconset/statisticFormEnemy - для экрана Tab
       iconset/vehicleMarkerAlly, iconset/vehicleMarkerEnemy - для маркеров над танками
   * локализация: добавлен сербский язык
 
   [МАКРОСЫ]
-  * взвод: добавлены макросы {{level}}, {{rlevel}}, {{vehicle-class}}, {{battletier-min}}, {{battletier-max}}
+  * взвод: добавлены макросы {{level}}, {{rlevel}}, {{vtype}}, {{battletier-min}}, {{battletier-max}}
 
   [ДРУГОЕ]
   * взвод: удалены опции "romanNumbers", "leftLvlBorder", "rightLvlBorder"
