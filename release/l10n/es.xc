@@ -17,6 +17,8 @@
     "Chance to win": "Probabilidad de ganar",
     "global": "global",
     "per-vehicle": "por vehiculo",
+    "chanceExperimental": "exp",
+    "chanceBattleTier": "T", 
 
     // Hitlog
     "attack": "ataque",
@@ -43,43 +45,28 @@
     "Damage (assisted / own)": "Daño (asistido / propio)",
 
     // TeamRenderers
-    "TeamRenderersHeaderTip": "Indice Xwn (o xeff).\nPara ver informacion detallada, mueva el cursor del raton sobre el nombre del jugador.",
     "Friend": "Amigo",
     "Ignored": "Ignorado",
-    "Load statistics": "Carga de estadisticas",
-    "enabled": "activado",
-    "disabled": "desactivado",
-
-    // UserInfo
-    "UserInfoEHint": "Eficiencia por vehiculo.\nLos valores mostrados son los de la última actualización estadística: \u0025DATE\u0025\nVea los valores actuales reales en la información detallada del vehículo.\nLa precisión de los valores de la columna dependen de la calidad de la fuente de los datos.",
-    "Data was updated at": "Ultima actualizacion de datos",
-    " to ": " a ",
-    "EFF": "EFF",
-    "updated": "actualizado",
     "unknown": "desconocido",
-    "Avg level": "Nivel promedio",
-    "Spotted": "Descubiertos",
-    "Defence": "Defensa",
-    "Capture": "Captura",
-    "player (average / top)": "Jugador (promedio / max.)",
-    "Spec dmg": "Daño espec.",
-
-    // UserInfo - filters
-    "Filter": "Filtro",
-    "All tanks": "Todos",
-    "Show all tanks in the game": "Mostrar todos los tanques del juego",
-    "Player tanks": "Jugados",
-    "Show all tanks played": "Mostrar todos los tanques con lo que se ha jugado",
-    "In hangar": "En Hangar",
-    "Show only tanks in own hangar": "Muestra solo los tanques del hangar",
-
-    // UserInfo - buttons
-    "Level": "Nivel",
-    "Type": "Tipo",
-    "Nation": "Nacion",
-    "Name": "Nombre",
     "Fights": "Batallas",
     "Wins": "Victorias",
+    "Data was updated at": "Ultima actualizacion de datos",
+    "Load statistics": "Carga de estadisticas",
+ 
+    // UserInfo
+    "Summary": "Resumen",
+    "Avg level": "Nivel promedio",
+    "WN6": "WN6",
+    "EFF": "EFI",
+    "updated": "actualizado",
+    " to ": " a ",
+    "avg": "pro",
+    "top": "sup",
+    "draws": "empates",
+    "Specific damage (Avg dmg / HP)": "Daño especifico (Promedio / Im)",
+    "Capture points": "Captura", 
+    "Defence points": "Defensa", 
+    "Filter": "Filtro",
 
     // Crew
     "PutOwnCrew": "Cargar tripulacion propia",
@@ -95,6 +82,7 @@
     "france": "Francia",
     "uk": "Reino Unido",
     "china": "China",
+    "japan": "Japon",
     "HT": "TP",
     "MT": "TM",
     "LT": "TL",
