@@ -14,7 +14,7 @@ try:
     wd = None
     sec = ResMgr.openSection('../paths.xml')
     subsec = sec['Paths']
-    vals = subsec.values()[0:2]
+    vals = subsec.values()
     for val in vals:
         path = val.asString + '/scripts/client/gui/mods'
         if os.path.isdir(path) and os.path.isfile(path + '/xpm.pyc'):
