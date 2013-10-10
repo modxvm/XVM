@@ -17,6 +17,8 @@
     "Chance to win": "Siegchance",
     "global": "Global",
     "per-vehicle": "pro Fahrzeug",
+    "chanceExperimental": "exp.",
+    "chanceBattleTier": "Stufe",    
 
     // Hitlog
     "attack": "Angriff",
@@ -43,48 +45,33 @@
     "Damage (assisted / own)": "Schaden (Aufklärung / Verursacht)",
 
     // TeamRenderers
-    "TeamRenderersHeaderTip": "XWN (oder XEFF) Wertung.\nFür genauere Informationen fahre mit der Maus über den Spielernamen.",
     "Friend": "Freund",
     "Ignored": "Ignoriert",
-    "Load statistics": "Lade Statistiken",
-    "enabled": "aktiviert",
-    "disabled": "deaktiviert",
-
-    // UserInfo
-    "UserInfoEHint": "Wertung pro Fahrzeug.\nDie Werte entsprechen der letzten Aktualisierung am: \u0025DATE\u0025\nAktuelle Werte werden bei den einzelnen Fahrzeugen angezeigt.\nGenauigkeit abhängig von der Qualität der zur Verfügung stehenden Daten.",
-    "Data was updated at": "Daten aktualisiert am",
-    " to ": " zu ",
-    "EFF": "EFF",
-    "updated": "aktualisiert",
     "unknown": "unbekannt",
-    "Avg level": "Ø Stufe",
-    "Spotted": "Aufgedeckt",
-    "Defence": "Verteidigung",
-    "Capture": "Eroberung",
-    "player (average / top)": "Spieler (Ø / Bestwert)",
-    "Spec dmg": "Spez. Schaden",
-
-    // UserInfo - filters
-    "Filter": "Filter",
-    "All tanks": "Alle Fahrzeuge",
-    "Show all tanks in the game": "Zeige alle Fahrzeuge",
-    "Player tanks": "Gefahrene",
-    "Show all tanks played": "Zeige alle gefahrenen Farzeuge",
-    "In hangar": "Garage",
-    "Show only tanks in own hangar": "Zeige nur die Fahrzeuge in der Garage",
-
-    // UserInfo - buttons
-    "Level": "Stufe",
-    "Type": "Art",
-    "Nation": "Nation",
-    "Name": "Name",
     "Fights": "Gefechte",
     "Wins": "Siege",
+    "Data was updated at": "Daten aktualisiert am",
+    "Load statistics": "Lade Statistiken",
+
+    // UserInfo
+    "Summary": "Zusammenfassung",
+    "Avg level": "Ø-Stufe",
+    "WN6": "WN6",
+    "EFF": "EFF",
+    "updated": "aktualisiert",
+    " to ": " zu ",
+    "avg": "Ø",
+    "top": "Max.",
+    "draws": "Unents.",
+    "Specific damage (Avg dmg / HP)": "Verhältnis Ø-Schaden/Lebenspunkte",
+    "Capture points": "Eroberungs Punkte",
+    "Defence points": "Verteidigungs Punkte",
+    "Filter": "Filter",
 
     // Crew
     "PutOwnCrew": "Eingewiesene Besatzung einsetzen",
     "PutBestCrew": "Beste Besatzung einsetzen",
-    "PutClassCrew": "Besatzung der selben Fahrzeugklasse einsetzen",
+    "PutClassCrew": "Besatzung selber Fahrzeugklasse einsetzen",
 
     // Squad
     "Vehicle": "Fahrzeug",
@@ -95,6 +82,7 @@
     "france": "Frankreich",
     "uk": "Großbritannien",
     "china": "China",
+    "japan": "Japan",
     "HT": "SP",
     "MT": "MP",
     "LT": "LP",
