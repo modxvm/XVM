@@ -42,10 +42,13 @@ package xvm.hangar.components.Profile
                     proxy.vehicleTF.textColor = Defines.UICOLOR_GOLD;
             }
 
-            proxy.winsTF.htmlText = "<font color='" +
-                MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, proxy.data.winsEfficiency) + "'>" +
-                proxy.data.winsEfficiencyStr +
-                "</font>";
+            if (Config.config.rating.showPlayersStatistics && Config.config.rating.enableUserInfoStatistics)
+            {
+                proxy.winsTF.htmlText = "<font color='" +
+                    MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, proxy.data.winsEfficiency) + "'>" +
+                    proxy.data.winsEfficiencyStr +
+                    "</font>";
+            }
         }
 
         // PRIVATE
