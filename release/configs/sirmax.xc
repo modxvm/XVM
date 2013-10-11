@@ -530,9 +530,12 @@
     ]
   },
   "iconset": {
-    "battleLoading": "contour/HARDicons",
-    "statisticForm": "contour/HARDicons",
-    "playersPanel":  "contour/HARDicons",
+    "battleLoadingAlly": "contour/HARDicons",
+    "battleLoadingEnemy": "contour/HARDicons",
+    "statisticFormAlly": "contour/HARDicons",
+    "statisticFormEnemy": "contour/HARDicons",
+    "playersPanelAlly":  "contour/HARDicons",
+    "playersPanelEnemy":  "contour/HARDicons",
     "vehicleMarker": "contour/Aslain/iconset2"
   },
 //  "colors": ${"sirmax-colors.xc":"colors"},

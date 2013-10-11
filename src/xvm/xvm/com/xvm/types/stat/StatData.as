@@ -2,7 +2,7 @@ package com.xvm.types.stat
 {
     import flash.utils.Dictionary;
 
-    public class StatData
+    public dynamic class StatData
     {
         // received
         public var up:Number = NaN;            // updated (int)
