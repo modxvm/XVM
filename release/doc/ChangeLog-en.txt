@@ -1,4 +1,4 @@
-﻿XVM-dev:
+﻿XVM-5.0.0-test5:
   [NEW FUNCTIONS]
   * possibility of editing format of vehicle info field in squad window:
       squad/formatInfoField
