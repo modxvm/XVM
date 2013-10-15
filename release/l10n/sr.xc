@@ -1,95 +1,95 @@
-/**
+﻿/**
  * Serbian translation file.
  */
 {
   "locale": {
     // Author of translation
-    "XVM_translator": "Tixar (EU)",
+    "XVM_translator": "Tixar, Tekija (EU)",
 
     // Ping
     "Initialization": "Pokretanje",
 
     // BattleLoading
-    "New version available": "Spremna nova verzija",
+    "New version available": "Nova verzija je raspoloživa",
 
     // Win chance
-    "Chance error": "ChaChance error",
-    "Chance to win": "ChaSansa za pobedu",
+    "Chance error": "Šansa greške",
+    "Chance to win": "Šansa za pobedu",
     "global": "global",
-    "per-vehicle": "perpo-vozilima",
+    "per-vehicle": "po vozilu",
     "chanceExperimental": "exp",
     "chanceBattleTier": "T",
 
     // Hitlog
     "attack": "Napad",
-    "fire": "Vatra",
+    "fire": "Požar",
     "ramming": "Sudar",
-    "world_collision": "Padamo",
-    "Hits": "Pogodak",
+    "world_collision": "Pad",
+    "Hits": "Pogodaka",
     "Total": "Total",
-    "Last": "Zadnji",
+    "Last": "Poslednji",
 
     // Hp Left
-    "hpLeftTitle": "Ostatak Hp-a neprijatelja:",
+    "hpLeftTitle": "Hp neprijatelja preostalo:",
 
-    // Capture
-    "enemyBaseCapture": "Osvojili smo im Bazu!",
-    "enemyBaseCaptured": "Zauzimamo im Bazu!",
-    "allyBaseCapture": "Neprijatelj nam zauzima Bazu!",
-    "allyBaseCaptured": "Neprijatelj nam je osvojio Bazu!",
-    "Timeleft": "Vremena ostalo",
-    "Capturers": "Zauzimaca",
+    // Capture 
+    "enemyBaseCapture": "Zauzimanje Baze:",
+    "enemyBaseCaptured": "Baza osvojena",
+    "allyBaseCapture": "Neprijatelj zauzima Bazu",
+    "allyBaseCaptured": "Neprijatelj je osvojio Bazu",
+    "Timeleft": "Vremena preostalo",
+    "Capturers": "Tenkova u bazi",
 
     // BattleResults
     "Hit percent": "Procenat pogodaka",
-    "Damage (assisted / own)": "Steta (Asistencija / licna)",
+    "Damage (assisted / own)": "Šteta (Asistencija / lična)",
 
     // TeamRenderers
     "Friend": "Prijatelj",
     "Ignored": "Ignorisan",
-    "unknown": "nepoznato",
-    "Fights": "Fights",
-    "Wins": "Wins",
-    "Data was updated at": "Podaci su azurirani",
-    "Load statistics": "Statistika punjenja",
+    "unknown": "Nepoznato",
+    "Fights": "Borbi",
+    "Wins": "Pobede",
+    "Data was updated at": "Podaci su ažurirani",
+    "Load statistics": "Učitavanje statistike",
 
     // UserInfo
-    "Summary": "Summary",
-    "Avg level": "Prosecan level",
+    "Summary": "Pregled",
+    "Avg level": "Prosečan nivo",
     "WN6": "WN6",
     "EFF": "EFF",
-    "updated": "azurirano",
-    " to ": " ka ",
-    "avg": "avg",
+    "updated": "ažurirano",
+    " to ": " do ",
+    "avg": "srednje",
     "top": "top",
-    "draws": "draws",
-    "Specific damage (Avg dmg / HP)": "Specific damage (Avg dmg / HP)",
-    "Capture points": "Capture points",
-    "Defence points": "Defence points",
+    "draws": "nerešenih",
+    "Specific damage (Avg dmg / HP)": "Specifična šteta (Avg dmg / HP)",
+    "Capture points": "Poena zauzimanja",
+    "Defence points": "Poena za odbranu",
     "Filter": "Filter",
 
     // Crew
-    "PutOwnCrew": "Stavi njegovu posadu",
-    "PutBestCrew": "Stavi najbolju posadu",
-    "PutClassCrew": "PutStavi posadu iste klase",
+    "PutOwnCrew": "Ubaci odgovarajuću posadu",
+    "PutBestCrew": "Ubaci najbolju posadu",
+    "PutClassCrew": "Ubaci posadu iste klase",
 
     // Squad
     "Vehicle": "Vozilo",
     "Battle tiers": "Borbeni nivoi",
-    "ussr": "Rusija",
-    "germany": "Nemacka",
+    "ussr": "SSSR",
+    "germany": "Nemačka",
     "usa": "Amerika",
     "france": "Francuska",
     "uk": "Britanija",
     "china": "Kina",
     "japan": "Japan",
-    "HT": "Teski",
+    "HT": "Teški",
     "MT": "Srednji",
     "LT": "Laki",
-    "TD": "Distrojeri",
+    "TD": "Destrojeri",
     "SPG": "Artiljerija",
 
     // VehicleMarkersManager
-    "blownUp": "Usr'o si ga!"
+    "blownUp": "Eksplodirao"
   }
 }

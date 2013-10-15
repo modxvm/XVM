@@ -1,4 +1,4 @@
- /**
+﻿/**
  * Norwegian translation file.
  */
 {
@@ -30,7 +30,7 @@
     "Last": "Siste",
 
     // Hp Left
-    "hpLeftTitle": "Hitpoints igjenn:",
+    "hpLeftTitle": "Helsepoeng igjen:",
 
     // Capture
     "enemyBaseCapture": "Base overtakelse av allierte!",
@@ -71,16 +71,18 @@
     // Crew
     "PutOwnCrew": "Sett egen besetning",
     "PutBestCrew": "Sett beste besetning",
-    "PutClassCrew": "Sett same klasse",
+    "PutClassCrew": "Sett besetning av same klasse",
 
     // Squad
     "Vehicle": "Fartøy",
     "Battle tiers": "Kampnivå",
-    "ussr": "USSR",
+    "Type": "Type",
+    "Nation": "Nasjon",
+    "ussr": "Sovjet",
     "germany": "Tyskland",
     "usa": "USA",
     "france": "Frankrike",
-    "uk": "UK",
+    "uk": "Storbritannia",
     "china": "Kina",
     "japan": "Japan",
     "HT": "HT",

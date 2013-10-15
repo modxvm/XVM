@@ -10,7 +10,7 @@
     "Initialization": "Načítanie",
 
     // BattleLoading
-    "New version available": "Existuje nová verzia na stiahnutie",
+    "New version available": "Nová verzia je k dispozícii",
 
     // Win chance
     "Chance error": "Chyba",
@@ -26,7 +26,7 @@
     "ramming": "náraz",
     "world_collision": "pádom",
     "Hits": "Zásahov",
-    "Total": "Celkovo",
+    "Total": "Celkom",
     "Last": "Posledný",
 
     // Hp Left
@@ -42,7 +42,7 @@
 
     // BattleResults
     "Hit percent": "Zásahov / Výstrelov \u0025",
-    "Damage (assisted / own)": "Poškodenie (s pomocou / vlastné)",
+    "Damage (assisted / own)": "Poškodenie (asistencia / vlastné)",
 
     // TeamRenderer
     "Friend": "Priateľ",
@@ -76,6 +76,8 @@
     // Squad
     "Vehicle": "Vozidlo",
     "Battle tiers": "MM",
+    "Type": "Typ",
+    "Nation": "Národ",
     "ussr": "ZSSR",
     "germany": "Nemecko",
     "usa": "USA",

@@ -4,7 +4,7 @@
 {
   "locale": {
     // Author of translation
-    "XVM_translator": "PFN",
+    "XVM_translator": "yhpdoit, PFN",
 
     // Ping
     "Initialization": "시작 중",
