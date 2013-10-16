@@ -67,15 +67,17 @@
     "Capture points": "Eroberungs Punkte",
     "Defence points": "Verteidigungs Punkte",
     "Filter": "Filter",
-
+ 
     // Crew
     "PutOwnCrew": "Eingewiesene Besatzung einsetzen",
     "PutBestCrew": "Beste Besatzung einsetzen",
-    "PutClassCrew": "Besatzung selber Fahrzeugklasse einsetzen",
+    "PutClassCrew": "Besatzung der selben Klasse einsetzen",
 
     // Squad
     "Vehicle": "Fahrzeug",
     "Battle tiers": "Gefechtsstufen",
+    "Type": "Typ",
+    "Nation": "Nation",    
     "ussr": "UdSSR",
     "germany": "Deutschland",
     "usa": "USA",
