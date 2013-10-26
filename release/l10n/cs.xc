@@ -10,7 +10,7 @@
     "Initialization": "Načítání",
 
     // BattleLoading
-    "New version available": "Ke stažení je nová verze",
+    "New version available": "Nová verze k dispozici",
 
     // Win chance
     "Chance error": "Chyba",
@@ -42,7 +42,7 @@
 
     // BattleResults
     "Hit percent": "Zásahů / Výstřelů \u0025",
-    "Damage (assisted / own)": "Poškození (asistence / vlastní)",
+    "Damage (assisted / own)": "Poškození (s pomocí / vlastní)",
 
     // TeamRenderer
     "Friend": "Přítel",
@@ -63,7 +63,7 @@
     "avg": "prům",
     "top": "nej",
     "draws": "remízy",
-    "Specific damage (Avg dmg / HP)": "Škody / HP",
+    "Specific damage (Avg dmg / HP)": "Potenciál škod (prům. škody / HP)",
     "Capture points": "Obsazení základny",
     "Defence points": "Obrana základny",
     "Filter": "Filtr",

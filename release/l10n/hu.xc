@@ -76,6 +76,8 @@
     // Squad
     "Vehicle": "Jármű",
     "Battle tiers": "Csata szintek",
+    "Type": "Típus",
+    "Nation": "Nemzet",
     "ussr": "Szovjet",
     "germany": "Német",
     "usa": "Amerika",

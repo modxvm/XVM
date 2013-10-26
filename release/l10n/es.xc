@@ -76,6 +76,8 @@
     // Squad
     "Vehicle": "Vehiculo",
     "Battle tiers": "Tiers de batalla",
+    "Type": "Tipo",
+    "Nation": "Nacion",
     "ussr": "U.S.S.R.",
     "germany": "Alemania",
     "usa": "EE.UU",
