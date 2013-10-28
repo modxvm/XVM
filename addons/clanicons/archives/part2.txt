@@ -1,0 +1,16 @@
+../icons/RU/K*.png
+../icons/RU/L*.png
+../icons/RU/M*.png
+../icons/RU/N*.png
+../icons/RU/O*.png
+../icons/RU/P*.png
+../icons/RU/Q*.png
+../icons/RU/R*.png
+../icons/RU/S*.png
+../icons/RU/T*.png
+../icons/RU/U*.png
+../icons/RU/V*.png
+../icons/RU/W*.png
+../icons/RU/X*.png
+../icons/RU/Y*.png
+../icons/RU/Z*.png

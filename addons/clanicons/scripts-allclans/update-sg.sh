@@ -2,7 +2,7 @@
 
 # config
 startclan=2000000000
-lastclan=2000001605
+lastclan=2000001815
 host=worldoftanks.asia
 dir=SG
 

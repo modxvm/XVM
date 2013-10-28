@@ -21,7 +21,8 @@ echo "Creating NA package"
 echo "Creating EU package"
 7za a -tzip -mm=deflate -mx0 -mmt=on -mtc=off -ssw -r clanicons-full-eu-$datenow.zip  ../icons/EU/res_mods/ readme.txt
 echo "Creating RU package"
-7za a -tzip -mm=deflate -mx0 -mmt=on -mtc=off -ssw -r clanicons-full-ru-$datenow.zip  ../icons/RU/res_mods/ readme.txt
+7za a -tzip -mm=deflate -mx0 -mmt=on -mtc=off -ssw -r clanicons-full-ru-$datenow-part1.zip  @part1.txt readme.txt
+7za a -tzip -mm=deflate -mx0 -mmt=on -mtc=off -ssw -r clanicons-full-ru-$datenow-part2.zip  @part2.txt readme.txt
 
 cd ..
 echo "Packages are created"
