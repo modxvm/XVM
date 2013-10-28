@@ -61,7 +61,7 @@
     traitement de texte comme MS Word ou WordPad.
 
   3. Si XVM n'arrive pas à détecter la langue du client de jeu, alors allez dans
-    le fichier de configuration (par défaut \res_mods\xvm\configs\@default\@xvm.xc),
+    le fichier de configuration (par défaut \res_mods\xvm\configs\@Default\@xvm.xc),
     changez la valeur de la variable "language" de "auto" à votre code de langue,
     par exemple "fr" pour le français. Le code de langue doit correspondre au
     nom du fichier dans \res_mods\xvm\l10n\.
@@ -99,7 +99,7 @@
     http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextField.html#htmlText (en anglais)
 
   Macros disponibles :
-    Dans les panneaux des joueurs, l'écran de chargement quand vous faites TAB :
+    Dans les panneaux des joueurs, l'écran de chargement et quand vous faites TAB :
       {{nick}}        - pseudo du joueur avec tag du clan
       {{name}}        - pseudo du joueur sans tag du clan
       {{clan}}        - tag du clan avec crochets (vide si pas de clan)
@@ -248,6 +248,7 @@
       {{c:avglvl}}    - couleur en fonction du tier moyen des tanks joués
       {{c:t-rating}}  - couleur en fonction du % de victoire du tank actuel
       {{c:t-battles}} - couleur en fonction du nombre de batailles du tank actuel
+
       Vous pouvez changer n'importe quelle macro de couleur en macro de transparence.
       Exemple : {{a:tdb}}
 

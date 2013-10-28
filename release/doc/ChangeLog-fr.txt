@@ -1,52 +1,57 @@
-﻿XVM-dev:
+﻿XVM-5.0.0-test5:
   [NOUVEAUTÉS]
-  * traduction : ajout du Bulgare
-  * traduction : ajout du fichier 'lisez-moi' (readme) français
+  * ajout de la possibilité de modifier le format du type de véhicule dans les panels d'équipes :
+      squad/formatInfoField
+  * ajout de la possibilité de configurer différents sets d'icônes pour les panneaux à droite et à gauche et
+    les marqueurs alliés et ennemis :
+      iconset/battleLoadingAlly, iconset/battleLoadingEnemy - pour l'écran de chargement
+      iconset/playersPanelAlly, iconset/playersPanelEnemy   - pour le panneau des joueurs
+      iconset/statisticFormAlly, iconset/statisticFormEnemy - pour la fenêtre TAB
+      iconset/vehicleMarkerAlly, iconset/vehicleMarkerEnemy - pour les marqueurs des tanks
+  * traduction : ajout du Serbe
 
-  [CORRECTIONS]
-  * pinger : ajout du support de Wine. Pour l'activer :  ln -s `which ping` ~/.wine/drive_c/ping.exe
-
-
-XVM-5.0.0-test3:
-  [NOUVEAUTÉS]
-  * nouvelles options :
-      login/skipIntro - passer l'animation au démarrage
-      login/autologin - entrer automatiquement dans le jeu
-      userInfo/startPage - onglet initial dans la fenêtre de rapport de service (par défaut : 4)
-      battleResults/showNetIncome - affiche le bénéfice net en crédits dans le rapport après la bataille
-      battleResults/showExtendedInfo - affiche la précision des tirs et les dégâts dans le rapport après la bataille
-  * traduction : ajout du Roumain
-
-  [CORRECTIONS]
-  * minimap : correction de la couleur des teamkillers ennemis
-  * marqueurs : correction de la couleur du type de véhicule coulé
+  [MACROS]
+  * équipes : ajout des macros {{level}}, {{rlevel}}, {{vtype}}, {{battletier-min}} et {{battletier-max}}
 
   [AUTRES]
-  * configuration : section "finalStatistic" renommé en "battleResults"
-  * battleResults: suppression de l'option "sortColumn", inclût dans le jeu depuis la 0.8.8
+  * équipes : suppressions des options "romanNumbers", "leftLvlBorder" et "rightLvlBorder"
+  * renommage des champs dans iconset: "battleLoading", "playersPanel", "statisticForm" et "vehicleMarker"
 
 
-XVM-5.0.0-test2:
+XVM-5.0.0-test4:
   * adaptations pour WoT 0.8.8
 
   [NOUVEAUTÉS]
-  * ajout de la possibilité d'éditer le champ pseudo dans l'écran de chargement de la partie :
+  * ajout de la possibilité de modifier le champ 'pseudpo' dans 'battleLoading' (écran de chargement) :
     formatLeftNick, formatRightNick
-  * traduction : ajout du Danois, de l'Italien et du Turc
-  * traduction : ajout du fichier 'lisez-moi' (readme) polonais
+  * nouvelles options :
+    login/skipIntro - passe la vidéo d'introduction du jeu au démarrage
+    login/autologin - se connecte automatiquement
+    userInfo/startPage - page initiale de la fenêtre userinfo (état de service), par défaut : 4
+    battleResults/showNetIncome - affiche le bénéfice net en crédits dans l'écran après la bataille
+    battleResults/showExtendedInfo - affiche la précision des tirs et les dégâts dans l'écran après la bataille
+    userInfo/defaultFilterValue - default value for the filter text input
+  * pinger : ajout du support de Wine. Pour l'activer, lancez :
+    ln -s `which ping` ~/.wine/drive_c/ping.exe
+  * traduction : ajout du Roumain, du Bulgare, du Dannois, de l'Italien et du Turc.
+  * traduction : ajout des fichiers 'readme' (lisez-moi) polonais et français
 
   [MACROS]
-  * ajout des macros {{c:avglvl}}, {{a:avglvl}}
+  * ajout des macros {{c:avglvl}} et {{a:avglvl}}
 
   [CORRECTIONS]
-  * résolu le mauvais positionnement de l'icône "sixième sens"
+  * correction du mauvais positionnement de l'icône 'sixième sens'
+  * minimap : correction de la mauvaise couleur des ennemis teamkillers
+  * marqueurs : correction de la couleur des types de véhicules coulés
 
   [AUTRES]
   * nouvelle plateforme : AS3 + Python
   * xvm-stat, Dokan and .NET Framework ne sont désormais plus requis. Merci de supprimer xvm-stat.exe.
-  * version de la configuration augmentée en 5.0.0
-  * les statistiques sont désormais désactivées par défaut
   * suppression du classement TWR
-  * suppression de l'option login/showPingOnGameLoading
-  * renommage des champs formatLeft/Right dans battleloading
+  * version de la configuration passée en 5.0.0
+  * les statistiques sont désormais désactivées par défaut
   * changement du format d'affichage de l'heure dans battleloading (http://php.net/date)
+  * configuration : section "finalStatistic" renomée en "battleResults"
+  * suppression de l'option battleResults/sortColumn, inclut directement depuis la 0.8.8
+  * suppression des options login/showPingOnGameLoading et userInfo/showEColumn
+  * renommage des champs formatLeft/Right dans battleloading
