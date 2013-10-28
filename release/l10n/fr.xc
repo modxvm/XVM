@@ -17,6 +17,8 @@
     "Chance to win": "Chances de victoire",
     "global": "globales",
     "per-vehicle": "par véhicule",
+    "chanceExperimental": "exp",
+    "chanceBattleTier": "T",
 
     // Hitlog
     "attack": "attaque",
@@ -43,43 +45,28 @@
     "Damage (assisted / own)": "Dégâts (par détection / effectués)",
 
     // TeamRenderers
-    "TeamRenderersHeaderTip": "Classement xWN (ou xEff).\nPour plus d'informations, déplacez votre curseur sur le nom du joueur.",
     "Friend": "Ami",
     "Ignored": "Ignoré",
-    "Load statistics": "Charger les statistiques",
-    "enabled": "activé",
-    "disabled": "désactivé",
-
-    // UserInfo
-    "UserInfoEHint": "Efficacité par véhicule.\nLes valeurs affichées sont basées sur la dernière mise à jour des stats : \u0025DATE\u0025\nLes valeurs actuelles sont visibles dans les infos détaillées du char.\nLa précision des valeurs dans les colonnes dépend de la qualité des données.",
-    "Data was updated at": "Données mises à jour le ",
-    " to ": " à ",
-    "EFF": "EFF",
-    "updated": "mis-à-jour",
     "unknown": "inconnu",
-    "Avg level": "Tier moyen",
-    "Spotted": "Détecté",
-    "Defence": "Defense",
-    "Capture": "Capture",
-    "player (average / top)": "joueur (moyenne / top)",
-    "Spec dmg": "Ratio dmg. effectué/reçu",
-
-    // UserInfo - filters
-    "Filter": "Filtre",
-    "All tanks": "Tous les tanks",
-    "Show all tanks in the game": "Montrer tous les tanks du jeu",
-    "Player tanks": "Tanks du joueur",
-    "Show all tanks played": "Montrer tous les tanks joués",
-    "In hangar": "Dans le hangar",
-    "Show only tanks in own hangar": "Montrer seulement les tanks du garage",
-
-    // UserInfo - buttons
-    "Level": "Tier",
-    "Type": "Type",
-    "Nation": "Nation",
-    "Name": "Nom",
     "Fights": "Batailles",
     "Wins": "Victoires",
+    "Data was updated at": "Données mises à jour le ",
+    "Load statistics": "Charger les statistiques",
+
+    // UserInfo
+    "Summary": "Résumé",
+    "Avg level": "Tier moyen",
+    "WN6": "WN6",
+    "EFF": "EFF",
+    "updated": "mis-à-jour",
+    " to ": " à ",
+    "avg": "moyenne",
+    "top": "top",
+    "draws": "égalités",
+    "Specific damage (Avg dmg / HP)": "Dégâts spec. (dégâts moyens / PV)",
+    "Capture points": "Points de cap",
+    "Defence points": "Points de def",
+    "Filter": "Filtre",
 
     // Crew
     "PutOwnCrew": "Mettre l'équipage adéquat",
@@ -87,14 +74,17 @@
     "PutClassCrew": "Mettre l'équipage de même classe",
 
     // Squad
-    "Vehicle": "Véhicule",
-    "Battle tiers": "Tier de combat",
+    "Vehicle": "Char",
+    "Battle tiers": "Tier de bataille",
+    "Type": "Type",
+    "Nation": "Nation",
     "ussr": "URSS",
     "germany": "Allemagne",
     "usa": "USA",
     "france": "France",
     "uk": "GB",
     "china": "Chine",
+    "japan": "Japon",
     "HT": "HT",
     "MT": "MT",
     "LT": "LT",
