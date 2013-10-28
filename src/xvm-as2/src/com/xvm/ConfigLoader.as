@@ -11,6 +11,7 @@ import com.xvm.GlobalEventDispatcher;
 import com.xvm.JSONxLoader;
 import com.xvm.Locale;
 import com.xvm.Logger;
+import com.xvm.VehicleInfo;
 
 class com.xvm.ConfigLoader
 {
@@ -48,6 +49,9 @@ class com.xvm.ConfigLoader
         //Logger.add("TRACE: ReloadConfig()");
         if (ConfigLoader.s_loading)
             return;
+
+        VehicleInfo.populateData();
+
         ConfigLoader.s_loading = true;
         Config.s_config = DefaultConfig.config;
         JSONxLoader.LoadAndParse(Defines.XVM_ROOT + Defines.CONFIG_FILE_NAME, this, ReloadConfigCallback);

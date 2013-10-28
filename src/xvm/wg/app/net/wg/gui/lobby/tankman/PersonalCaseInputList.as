@@ -1,146 +1,128 @@
-package net.wg.gui.lobby.tankman 
+package net.wg.gui.lobby.tankman
 {
-    import flash.events.*;
-    import net.wg.gui.components.controls.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.core.*;
-    import scaleform.clik.data.*;
-    import scaleform.clik.events.*;
-    
-    public class PersonalCaseInputList extends scaleform.clik.core.UIComponent
-    {
-        public function PersonalCaseInputList()
-        {
-            this._selectedItem = {};
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import net.wg.gui.components.controls.TextInput;
+   import net.wg.gui.components.controls.ScrollingListEx;
+   import scaleform.clik.data.DataProvider;
+   import scaleform.clik.events.ListEvent;
+   import flash.events.MouseEvent;
+   import scaleform.clik.events.InputEvent;
+   import flash.events.FocusEvent;
+   import scaleform.clik.constants.InvalidationType;
+   import flash.events.Event;
 
-        public override function dispose():void
-        {
-            super.dispose();
-            this.list.removeEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.list_listIndexChangeHandler);
-            this.list.removeEventListener(scaleform.clik.events.ListEvent.ITEM_PRESS, this.list_itemPressHandler);
-            this.list.disposeRenderers();
-            this.searchText.removeEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.searchText_mouseDownHandler);
-            this.searchText.removeEventListener(scaleform.clik.events.InputEvent.INPUT, this.searchText_inputHandler);
-            this.searchText.removeEventListener(flash.events.FocusEvent.FOCUS_IN, this.searchText_focusInHandler);
-            this.searchText = null;
-            this.dataProvider.cleanUp();
-            this.dataProvider = null;
-            return;
-        }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.list.labelField = "value";
-            this.list.addEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.list_listIndexChangeHandler);
-            this.list.addEventListener(scaleform.clik.events.ListEvent.ITEM_PRESS, this.list_itemPressHandler);
-            this.list.invalidate(scaleform.clik.constants.InvalidationType.SCROLL_BAR);
-            this.searchText.addEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.searchText_mouseDownHandler);
-            this.searchText.addEventListener(scaleform.clik.events.InputEvent.INPUT, this.searchText_inputHandler);
-            this.searchText.addEventListener(flash.events.FocusEvent.FOCUS_IN, this.searchText_focusInHandler);
-            return;
-        }
+   public class PersonalCaseInputList extends UIComponent
+   {
+          
+      public function PersonalCaseInputList() {
+         this._selectedItem = {};
+         super();
+      }
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(this.UPDATE_DATA) && this.dataProvider && this.currentName) 
+      public static const NAME_SELECTED:String = "nameSelected";
+
+      public var searchText:TextInput;
+
+      public var list:ScrollingListEx;
+
+      private var dataProvider:DataProvider;
+
+      private var currentName:String = null;
+
+      private var _selectedItem:Object;
+
+      private var isTextInput:Boolean = false;
+
+      private const UPDATE_DATA:String = "updateData";
+
+      override public function dispose() : void {
+         super.dispose();
+         this.list.removeEventListener(ListEvent.INDEX_CHANGE,this.list_listIndexChangeHandler);
+         this.list.removeEventListener(ListEvent.ITEM_PRESS,this.list_itemPressHandler);
+         this.list.disposeRenderers();
+         this.searchText.removeEventListener(MouseEvent.MOUSE_DOWN,this.searchText_mouseDownHandler);
+         this.searchText.removeEventListener(InputEvent.INPUT,this.searchText_inputHandler);
+         this.searchText.removeEventListener(FocusEvent.FOCUS_IN,this.searchText_focusInHandler);
+         this.searchText = null;
+         this.dataProvider.cleanUp();
+         this.dataProvider = null;
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.list.labelField = "value";
+         this.list.addEventListener(ListEvent.INDEX_CHANGE,this.list_listIndexChangeHandler);
+         this.list.addEventListener(ListEvent.ITEM_PRESS,this.list_itemPressHandler);
+         this.list.invalidate(InvalidationType.SCROLL_BAR);
+         this.searchText.addEventListener(MouseEvent.MOUSE_DOWN,this.searchText_mouseDownHandler);
+         this.searchText.addEventListener(InputEvent.INPUT,this.searchText_inputHandler);
+         this.searchText.addEventListener(FocusEvent.FOCUS_IN,this.searchText_focusInHandler);
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         if((isInvalid(this.UPDATE_DATA)) && (this.dataProvider) && (this.currentName))
+         {
+            this.searchText.text = this.currentName;
+            this.list.dataProvider = this.dataProvider;
+            this.list.selectedIndex = this.searchIndex(this.currentName);
+            this.list.validateNow();
+         }
+      }
+
+      private function searchIndex(param1:String) : int {
+         var _loc2_:* = 0;
+         while(_loc2_ < this.list.dataProvider.length)
+         {
+            if(param1.toLowerCase() == String(this.list.dataProvider[_loc2_].value).toLowerCase().slice(0,param1.length))
             {
-                this.searchText.text = this.currentName;
-                this.list.dataProvider = this.dataProvider;
-                this.list.selectedIndex = this.searchIndex(this.currentName);
-                this.list.validateNow();
+               this.selectedItem = this.list.dataProvider[_loc2_];
+               return _loc2_;
             }
-            return;
-        }
+            _loc2_++;
+         }
+         return this.list.selectedIndex;
+      }
 
-        internal function searchIndex(arg1:String):int
-        {
-            var loc1:*=0;
-            while (loc1 < this.list.dataProvider.length) 
-            {
-                if (arg1.toLowerCase() == String(this.list.dataProvider[loc1].value).toLowerCase().slice(0, arg1.length)) 
-                {
-                    this.selectedItem = this.list.dataProvider[loc1];
-                    return loc1;
-                }
-                ++loc1;
-            }
-            return this.list.selectedIndex;
-        }
+      public function updateData(param1:Array, param2:String) : void {
+         this.dataProvider = new DataProvider(param1);
+         this.currentName = param2;
+         invalidate(this.UPDATE_DATA);
+      }
 
-        public function updateData(arg1:Array, arg2:String):void
-        {
-            this.dataProvider = new scaleform.clik.data.DataProvider(arg1);
-            this.currentName = arg2;
-            invalidate(this.UPDATE_DATA);
-            return;
-        }
+      private function searchText_inputHandler(param1:InputEvent) : void {
+         this.list.selectedIndex = this.searchIndex(this.searchText.text);
+      }
 
-        internal function searchText_inputHandler(arg1:scaleform.clik.events.InputEvent):void
-        {
-            this.list.selectedIndex = this.searchIndex(this.searchText.text);
-            return;
-        }
+      private function list_listIndexChangeHandler(param1:ListEvent) : void {
+         if((param1.itemData) && !this.isTextInput)
+         {
+            this.searchText.text = param1.itemData.value;
+            this.selectedItem = param1.itemData;
+         }
+      }
 
-        internal function list_listIndexChangeHandler(arg1:scaleform.clik.events.ListEvent):void
-        {
-            if (arg1.itemData && !this.isTextInput) 
-            {
-                this.searchText.text = arg1.itemData.value;
-                this.selectedItem = arg1.itemData;
-            }
-            return;
-        }
+      private function searchText_mouseDownHandler(param1:MouseEvent) : void {
+         this.isTextInput = true;
+      }
 
-        internal function searchText_mouseDownHandler(arg1:flash.events.MouseEvent):void
-        {
-            this.isTextInput = true;
-            return;
-        }
+      private function list_itemPressHandler(param1:ListEvent) : void {
+         this.isTextInput = false;
+      }
 
-        internal function list_itemPressHandler(arg1:scaleform.clik.events.ListEvent):void
-        {
-            this.isTextInput = false;
-            return;
-        }
+      private function searchText_focusInHandler(param1:FocusEvent) : void {
+         this.searchText.textField.setSelection(0,this.searchText.text.length);
+      }
 
-        internal function searchText_focusInHandler(arg1:flash.events.FocusEvent):void
-        {
-            this.searchText.textField.selectable;
-            this.searchText.textField.setSelection(0, this.searchText.text.length);
-            return;
-        }
+      public function get selectedItem() : Object {
+         return this._selectedItem;
+      }
 
-        public function get selectedItem():Object
-        {
-            return this._selectedItem;
-        }
+      public function set selectedItem(param1:Object) : void {
+         this._selectedItem = param1;
+         dispatchEvent(new Event(NAME_SELECTED,true));
+      }
+   }
 
-        public function set selectedItem(arg1:Object):void
-        {
-            this._selectedItem = arg1;
-            dispatchEvent(new flash.events.Event(NAME_SELECTED, true));
-            return;
-        }
-
-        internal const UPDATE_DATA:String="updateData";
-
-        public static const NAME_SELECTED:String="nameSelected";
-
-        public var searchText:net.wg.gui.components.controls.TextInput;
-
-        public var list:net.wg.gui.components.controls.ScrollingListEx;
-
-        internal var dataProvider:scaleform.clik.data.DataProvider;
-
-        internal var currentName:String=null;
-
-        internal var _selectedItem:Object;
-
-        internal var isTextInput:Boolean=false;
-    }
 }

@@ -1,46 +1,39 @@
-package net.wg.gui.lobby.techtree.data.state 
+package net.wg.gui.lobby.techtree.data.state
 {
-    import flash.display.*;
-    
-    public class AnimationProperties extends Object
-    {
-        public function AnimationProperties(arg1:Number, arg2:Object, arg3:Object)
-        {
-            super();
-            this.duration = arg1;
-            this.from = arg2;
-            this.to = arg3;
-            return;
-        }
+   import flash.display.MovieClip;
 
-        public function setTo(arg1:flash.display.MovieClip):void
-        {
-            var loc1:*=null;
-            var loc2:*=0;
-            var loc3:*=this.to;
-            for (loc1 in loc3) 
-            {
-                arg1[loc1] = this.to[loc1];
-            }
-            return;
-        }
 
-        public function setFrom(arg1:flash.display.MovieClip):void
-        {
-            var loc1:*=null;
-            var loc2:*=0;
-            var loc3:*=this.from;
-            for (loc1 in loc3) 
-            {
-                arg1[loc1] = this.from[loc1];
-            }
-            return;
-        }
+   public class AnimationProperties extends Object
+   {
+          
+      public function AnimationProperties(param1:Number, param2:Object, param3:Object) {
+         super();
+         this.duration = param1;
+         this.from = param2;
+         this.to = param3;
+      }
 
-        public var duration:Number;
+      public var duration:Number;
 
-        public var from:Object;
+      public var from:Object;
 
-        public var to:Object;
-    }
+      public var to:Object;
+
+      public function setTo(param1:MovieClip) : void {
+         var _loc2_:String = null;
+         for (_loc2_ in this.to)
+         {
+            param1[_loc2_] = this.to[_loc2_];
+         }
+      }
+
+      public function setFrom(param1:MovieClip) : void {
+         var _loc2_:String = null;
+         for (_loc2_ in this.from)
+         {
+            param1[_loc2_] = this.from[_loc2_];
+         }
+      }
+   }
+
 }

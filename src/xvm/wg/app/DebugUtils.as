@@ -1,101 +1,86 @@
 package 
 {
-    import flash.display.*;
-    
-    public class DebugUtils extends Object
-    {
-        public function DebugUtils()
-        {
-            super();
-            return;
-        }
+   import flash.display.DisplayObject;
+   import flash.display.DisplayObjectContainer;
 
-        public static function LOG_DEBUG(... rest):void
-        {
-            rest.unshift("DEBUG");
-            __doLog.apply(null, rest);
-            return;
-        }
 
-        public static function traceDisplayList(arg1:Object, arg2:String=""):void
-        {
-            var loc2:*=null;
-            if (arg1 == null) 
+   public class DebugUtils extends Object
+   {
+          
+      public function DebugUtils() {
+         super();
+      }
+
+      public static const LOG_FMT:String = "debug.LOG_GUI_FORMAT";
+
+      public static const LOG:String = "debug.LOG_GUI";
+
+      public static function LOG_DEBUG(... rest) : void {
+         rest.unshift("DEBUG");
+         __doLog.apply(null,rest);
+      }
+
+      public static function traceDisplayList(param1:Object, param2:String="") : void {
+         var _loc4_:DisplayObject = null;
+         if(param1 == null)
+         {
+            param1 = App.stage;
+         }
+         var _loc3_:Number = 0;
+         while(_loc3_ < param1.numChildren)
+         {
+            _loc4_ = param1.getChildAt(_loc3_);
+            if(_loc4_  is  DisplayObjectContainer)
             {
-                arg1 = App.stage;
+               traceDisplayList(DisplayObjectContainer(_loc4_));
             }
-            var loc1:*=0;
-            while (loc1 < arg1.numChildren) 
-            {
-                if ((loc2 = arg1.getChildAt(loc1)) is flash.display.DisplayObjectContainer) 
-                {
-                    traceDisplayList(flash.display.DisplayObjectContainer(loc2));
-                }
-                ++loc1;
-            }
-            return;
-        }
+            _loc3_++;
+         }
+      }
 
-        public static function LOG_ERROR(... rest):void
-        {
-            rest.unshift("ERROR");
-            __doLog.apply(null, rest);
-            return;
-        }
+      public static function LOG_ERROR(... rest) : void {
+         rest.unshift("ERROR");
+         __doLog.apply(null,rest);
+      }
 
-        public static function LOG_WARNING(... rest):void
-        {
-            rest.unshift("WARNING");
-            __doLog.apply(null, rest);
-            return;
-        }
+      public static function LOG_WARNING(... rest) : void {
+         rest.unshift("WARNING");
+         __doLog.apply(null,rest);
+      }
 
-        public static function LOG_DEBUG_FORMAT(... rest):void
-        {
-            rest.unshift("DEBUG");
-            __doLogFormat.apply(null, rest);
-            return;
-        }
+      public static function LOG_DEBUG_FORMAT(... rest) : void {
+         rest.unshift("DEBUG");
+         __doLogFormat.apply(null,rest);
+      }
 
-        public static function LOG_ERROR_FORMAT(... rest):void
-        {
-            rest.unshift("ERROR");
-            __doLogFormat.apply(null, rest);
-            return;
-        }
+      public static function LOG_ERROR_FORMAT(... rest) : void {
+         rest.unshift("ERROR");
+         __doLogFormat.apply(null,rest);
+      }
 
-        public static function LOG_WARNING_FORMAT(... rest):void
-        {
-            rest.unshift("WARNING");
-            __doLogFormat.apply(null, rest);
-            return;
-        }
+      public static function LOG_WARNING_FORMAT(... rest) : void {
+         rest.unshift("WARNING");
+         __doLogFormat.apply(null,rest);
+      }
 
-        internal static function __doLog():void
-        {
-            trace("[" + arguments[0] + "] " + String(arguments.slice(1)));
-            var loc1:*=[LOG];
-            while (arguments.length) 
-            {
-                loc1.push(String(arguments.shift()));
-            }
-            App.environment.call.apply(null, loc1);
-            return;
-        }
+      private static function __doLog() : void {
+         trace("[" + arguments[0] + "] " + String(arguments.slice(1)));
+         var _loc2_:Array = [LOG];
+         while(arguments.length)
+         {
+            _loc2_.push(String(arguments.shift()));
+         }
+         App.environment.call.apply(null,_loc2_);
+      }
 
-        internal static function __doLogFormat():void
-        {
-            var loc1:*=[LOG_FMT];
-            while (arguments.length) 
-            {
-                loc1.push(String(arguments.shift()));
-            }
-            App.environment.call.apply(null, loc1);
-            return;
-        }
+      private static function __doLogFormat() : void {
+         var _loc2_:Array = [LOG_FMT];
+         while(arguments.length)
+         {
+            _loc2_.push(String(arguments.shift()));
+         }
+         App.environment.call.apply(null,_loc2_);
+      }
+   }
 
-        public static const LOG_FMT:String="debug.LOG_GUI_FORMAT";
-
-        public static const LOG:String="debug.LOG_GUI";
-    }
 }

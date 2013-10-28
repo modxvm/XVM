@@ -14,10 +14,10 @@ echo "Creating VN package"
 7za a -tzip -mm=deflate -mx0 -mmt=on -mtc=off -ssw -r clanicons-full-vn-$datenow.zip  ../icons/VTC/res_mods/ readme.txt
 echo "Creating KR package"
 7za a -tzip -mm=deflate -mx0 -mmt=on -mtc=off -ssw -r clanicons-full-kr-$datenow.zip  ../icons/KR/res_mods/ readme.txt
-echo "Creating SEA package"
-7za a -tzip -mm=deflate -mx0 -mmt=on -mtc=off -ssw -r clanicons-full-sea-$datenow.zip ../icons/SEA/res_mods/ readme.txt
+echo "Creating SG package"
+7za a -tzip -mm=deflate -mx0 -mmt=on -mtc=off -ssw -r clanicons-full-sg-$datenow.zip ../icons/SG/res_mods/ readme.txt
 echo "Creating NA package"
-7za a -tzip -mm=deflate -mx0 -mmt=on -mtc=off -ssw -r clanicons-full-na-$datenow.zip  ../icons/US/res_mods/ readme.txt
+7za a -tzip -mm=deflate -mx0 -mmt=on -mtc=off -ssw -r clanicons-full-na-$datenow.zip  ../icons/NA/res_mods/ readme.txt
 echo "Creating EU package"
 7za a -tzip -mm=deflate -mx0 -mmt=on -mtc=off -ssw -r clanicons-full-eu-$datenow.zip  ../icons/EU/res_mods/ readme.txt
 echo "Creating RU package"

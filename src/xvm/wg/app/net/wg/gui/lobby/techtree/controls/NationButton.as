@@ -1,100 +1,85 @@
-package net.wg.gui.lobby.techtree.controls 
+package net.wg.gui.lobby.techtree.controls
 {
-    import flash.display.*;
-    import flash.events.*;
-    import net.wg.data.constants.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.utils.*;
-    import scaleform.clik.constants.*;
-    
-    public class NationButton extends net.wg.gui.components.controls.SoundButton
-    {
-        public function NationButton()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.components.controls.SoundButton;
+   import flash.events.MouseEvent;
+   import flash.display.MovieClip;
+   import net.wg.data.constants.SoundTypes;
+   import scaleform.clik.constants.InvalidationType;
+   import net.wg.gui.utils.ComplexTooltipHelper;
 
-        public override function dispose():void
-        {
-            removeEventListener(flash.events.MouseEvent.ROLL_OVER, this.showTooltip, false);
-            removeEventListener(flash.events.MouseEvent.ROLL_OUT, hideTooltip, false);
-            removeEventListener(flash.events.MouseEvent.CLICK, hideTooltip, false);
-            super.dispose();
-            return;
-        }
 
-        protected function defineSoundProps():void
-        {
-            soundId = net.wg.data.constants.SoundTypes.TAB;
-            return;
-        }
+   public class NationButton extends SoundButton
+   {
+          
+      public function NationButton() {
+         super();
+      }
 
-        protected override function preInitialize():void
-        {
-            super.preInitialize();
-            this.defineSoundProps();
-            return;
-        }
+      private static function hideTooltip(param1:MouseEvent) : void {
+         if(App.toolTipMgr != null)
+         {
+            App.toolTipMgr.hide();
+         }
+      }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            addEventListener(flash.events.MouseEvent.ROLL_OVER, this.showTooltip, false, 0, true);
-            addEventListener(flash.events.MouseEvent.ROLL_OUT, hideTooltip, false, 0, true);
-            addEventListener(flash.events.MouseEvent.CLICK, hideTooltip, false, 0, true);
-            return;
-        }
+      public var ico:MovieClip;
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (!(_label == null) && isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+      public var icoAdd:MovieClip;
+
+      override public function dispose() : void {
+         removeEventListener(MouseEvent.ROLL_OVER,this.showTooltip,false);
+         removeEventListener(MouseEvent.ROLL_OUT,hideTooltip,false);
+         removeEventListener(MouseEvent.CLICK,hideTooltip,false);
+         super.dispose();
+      }
+
+      protected function defineSoundProps() : void {
+         soundType = SoundTypes.TAB;
+      }
+
+      override protected function preInitialize() : void {
+         super.preInitialize();
+         this.defineSoundProps();
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         addEventListener(MouseEvent.ROLL_OVER,this.showTooltip,false,0,true);
+         addEventListener(MouseEvent.ROLL_OUT,hideTooltip,false,0,true);
+         addEventListener(MouseEvent.CLICK,hideTooltip,false,0,true);
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         if(!(_label == null) && (isInvalid(InvalidationType.DATA)))
+         {
+            if(this.ico != null)
             {
-                if (this.ico != null) 
-                {
-                    this.ico.gotoAndStop(_label);
-                }
-                if (this.icoAdd != null) 
-                {
-                    this.icoAdd.gotoAndStop(_label);
-                }
+               this.ico.gotoAndStop(_label);
             }
-            return;
-        }
-
-        protected override function handleMouseRelease(arg1:flash.events.MouseEvent):void
-        {
-            if (!_selected) 
+            if(this.icoAdd != null)
             {
-                super.handleMouseRelease(arg1);
+               this.icoAdd.gotoAndStop(_label);
             }
-            return;
-        }
+         }
+      }
 
-        internal function showTooltip(arg1:flash.events.MouseEvent):void
-        {
-            if (!(_label == null) && !_selected) 
+      override protected function handleMouseRelease(param1:MouseEvent) : void {
+         if(!_selected)
+         {
+            super.handleMouseRelease(param1);
+         }
+      }
+
+      private function showTooltip(param1:MouseEvent) : void {
+         if(!(_label == null) && !_selected)
+         {
+            if(App.toolTipMgr != null)
             {
-                if (App.toolTipMgr != null) 
-                {
-                    App.toolTipMgr.showComplex(new net.wg.gui.utils.ComplexTooltipHelper().addHeader(TOOLTIPS.techtreepage_nations(_label), true).make());
-                }
+               App.toolTipMgr.showComplex(new ComplexTooltipHelper().addHeader(TOOLTIPS.techtreepage_nations(_label),true).make());
             }
-            return;
-        }
+         }
+      }
+   }
 
-        internal static function hideTooltip(arg1:flash.events.MouseEvent):void
-        {
-            if (App.toolTipMgr != null) 
-            {
-                App.toolTipMgr.hide();
-            }
-            return;
-        }
-
-        public var ico:flash.display.MovieClip;
-
-        public var icoAdd:flash.display.MovieClip;
-    }
 }

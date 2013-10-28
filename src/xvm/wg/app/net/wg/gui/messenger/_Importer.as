@@ -1,11 +1,13 @@
-package net.wg.gui.messenger 
+package net.wg.gui.messenger
 {
-    public class _Importer extends Object
-    {
-        public function _Importer()
-        {
-            super();
-            return;
-        }
-    }
+
+
+   public class _Importer extends Object
+   {
+          
+      public function _Importer() {
+         super();
+      }
+   }
+
 }

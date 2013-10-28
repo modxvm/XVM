@@ -1,23 +1,22 @@
-package net.wg.infrastructure.base.meta.impl 
+package net.wg.infrastructure.base.meta.impl
 {
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.base.*;
-    
-    public class TickerMeta extends net.wg.infrastructure.base.BaseDAAPIComponent
-    {
-        public function TickerMeta()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.BaseDAAPIComponent;
+   import net.wg.data.constants.Errors;
 
-        public function showBrowserS(arg1:String):void
-        {
-            App.utils.asserter.assertNotNull(this.showBrowser, "showBrowser" + net.wg.data.constants.Errors.CANT_NULL);
-            this.showBrowser(arg1);
-            return;
-        }
 
-        public var showBrowser:Function=null;
-    }
+   public class TickerMeta extends BaseDAAPIComponent
+   {
+          
+      public function TickerMeta() {
+         super();
+      }
+
+      public var showBrowser:Function = null;
+
+      public function showBrowserS(param1:String) : void {
+         App.utils.asserter.assertNotNull(this.showBrowser,"showBrowser" + Errors.CANT_NULL);
+         this.showBrowser(param1);
+      }
+   }
+
 }

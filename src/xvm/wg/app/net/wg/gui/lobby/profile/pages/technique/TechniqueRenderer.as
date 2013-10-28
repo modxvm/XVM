@@ -1,138 +1,140 @@
 package net.wg.gui.lobby.profile.pages.technique
 {
-    import flash.display.*;
-    import flash.text.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.lobby.profile.components.*;
-    import scaleform.clik.constants.*;
+   import net.wg.gui.components.controls.SoundListItemRenderer;
+   import flash.text.TextField;
+   import net.wg.gui.components.controls.UILoaderAlt;
+   import net.wg.gui.lobby.profile.components.TechMasteryIcon;
+   import flash.display.MovieClip;
+   import flash.display.DisplayObject;
+   import net.wg.gui.lobby.profile.pages.technique.data.TechniqueListVehicleVO;
+   import scaleform.clik.constants.InvalidationType;
 
-    public class TechniqueRenderer extends net.wg.gui.components.controls.SoundListItemRenderer
-    {
-        public function TechniqueRenderer()
-        {
-            super();
+
+   public class TechniqueRenderer extends SoundListItemRenderer
+   {
+          
+      public function TechniqueRenderer() {
+         super();
+      }
+
+      private static function getSmallMasteryIconPath(param1:int) : String {
+         if(param1 > 0)
+         {
+            return "../maps/icons/library/proficiency/class_icons_" + param1 + ".png";
+         }
+         return null;
+      }
+
+      private static function getString(param1:Number) : String {
+         if(App.utils)
+         {
+            return App.utils.locale.integer(param1);
+         }
+         return param1.toString();
+      }
+
+      public var vehicleTF:TextField;
+
+      public var battlesTF:TextField;
+
+      public var winsTF:TextField;
+
+      public var avgExpTF:TextField;
+
+      public var nationIcon:UILoaderAlt;
+
+      public var typeIcon:UILoaderAlt;
+
+      public var tankSmallIcon:UILoaderAlt;
+
+      public var masteryIcon:TechMasteryIcon;
+
+      public var levelMC:MovieClip;
+
+      public var background:MovieClip;
+
+      public var hit:MovieClip;
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.mouseChildren = true;
+         this.masteryIcon.mouseChildren = false;
+         this.masteryIcon.buttonMode = true;
+         buttonMode = true;
+         hitArea = this.hit;
+      }
+
+      override public function set mouseChildren(param1:Boolean) : void {
+         super.mouseChildren = true;
+      }
+
+      override public function setData(param1:Object) : void {
+         if(_baseDisposed)
+         {
             return;
-        }
+         }
+         this.data = param1;
+         invalidateData();
+      }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.mouseChildren = true;
-            this.masteryIcon.mouseChildren = false;
-            this.masteryIcon.buttonMode = true;
-            buttonMode = true;
-            hitArea = this.hit;
+      override protected function draw() : void {
+         var _loc1_:* = false;
+         var _loc2_:DisplayObject = null;
+         var _loc3_:* = 0;
+         var _loc4_:* = 0;
+         var _loc5_:TechniqueListVehicleVO = null;
+         var _loc6_:* = 0;
+         var _loc7_:String = null;
+         if(_baseDisposed)
+         {
             return;
-        }
-
-        public override function set mouseChildren(arg1:Boolean):void
-        {
-            super.mouseChildren = true;
-            return;
-        }
-
-        public override function setData(arg1:Object):void
-        {
-            this.data = arg1;
-            invalidateData();
-            return;
-        }
-
-        protected override function draw():void
-        {
-            var loc1:*=false;
-            var loc2:*=null;
-            var loc3:*=0;
-            var loc4:*=0;
-            var loc5:*=null;
-            var loc6:*=0;
-            var loc7:*=null;
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA))
+         }
+         super.draw();
+         if(isInvalid(InvalidationType.DATA))
+         {
+            _loc1_ = false;
+            if(data)
             {
-                loc1 = false;
-                if (data)
-                {
-                    loc1 = true;
-                    loc5 = net.wg.gui.lobby.profile.pages.technique.TechniqueListVehicleVO(data);
-                    this.vehicleTF.text = loc5.shortUserName;
-                    this.battlesTF.text = getString(loc5.battlesCount);
-                    this.winsTF.text = loc5.winsEfficiencyStr;
-                    loc6 = loc5.avgExperience;
-                    this.avgExpTF.text = loc6 != 0 ? getString(loc6) : "";
-                    this.nationIcon.source = loc5.nationIconPath;
-                    this.typeIcon.source = loc5.typeIconPath;
-                    this.tankSmallIcon.source = loc5.tankIconPath;
-                    loc7 = getSmallMasteryIconPath(loc5.markOfMastery);
-                    if (loc7)
-                    {
-                        this.masteryIcon.source = loc7;
-                    }
-                    else
-                    {
-                        this.masteryIcon.unload();
-                    }
-                    this.masteryIcon.data = loc5;
-                    this.levelMC.gotoAndStop(loc5.level);
-                }
-                else
-                {
-                    this.masteryIcon.unload();
-                    this.masteryIcon.data = null;
-                }
-                loc3 = numChildren;
-                loc4 = 0;
-                while (loc4 < loc3)
-                {
-                    loc2 = getChildAt(loc4);
-                    if (loc2 != this.background)
-                    {
-                        loc2.visible = loc1;
-                    }
-                    ++loc4;
-                }
+               _loc1_ = true;
+               _loc5_ = TechniqueListVehicleVO(data);
+               this.vehicleTF.text = _loc5_.shortUserName;
+               this.battlesTF.text = getString(_loc5_.battlesCount);
+               this.winsTF.text = _loc5_.winsEfficiencyStr;
+               _loc6_ = _loc5_.avgExperience;
+               this.avgExpTF.text = _loc6_ == 0?"":getString(_loc6_);
+               this.nationIcon.source = _loc5_.nationIconPath;
+               this.typeIcon.source = _loc5_.typeIconPath;
+               this.tankSmallIcon.source = _loc5_.tankIconPath;
+               _loc7_ = getSmallMasteryIconPath(_loc5_.markOfMastery);
+               if(_loc7_)
+               {
+                  this.masteryIcon.source = _loc7_;
+               }
+               else
+               {
+                  this.masteryIcon.unload();
+               }
+               this.masteryIcon.data = _loc5_;
+               this.levelMC.gotoAndStop(_loc5_.level);
             }
-            return;
-        }
-
-        internal static function getSmallMasteryIconPath(arg1:int):String
-        {
-            if (arg1 > 0)
+            else
             {
-                return "../maps/icons/library/proficiency/class_icons_" + arg1 + ".png";
+               this.masteryIcon.unload();
+               this.masteryIcon.data = null;
             }
-            return null;
-        }
-
-        internal static function getString(arg1:Number):String
-        {
-            if (App.utils)
+            _loc3_ = numChildren;
+            _loc4_ = 0;
+            while(_loc4_ < _loc3_)
             {
-                return App.utils.locale.integer(arg1);
+               _loc2_ = getChildAt(_loc4_);
+               if(_loc2_ != this.background)
+               {
+                  _loc2_.visible = _loc1_;
+               }
+               _loc4_++;
             }
-            return arg1.toString();
-        }
+         }
+      }
+   }
 
-        public var vehicleTF:flash.text.TextField;
-
-        public var battlesTF:flash.text.TextField;
-
-        public var winsTF:flash.text.TextField;
-
-        public var avgExpTF:flash.text.TextField;
-
-        public var nationIcon:net.wg.gui.components.controls.UILoaderAlt;
-
-        public var typeIcon:net.wg.gui.components.controls.UILoaderAlt;
-
-        public var tankSmallIcon:net.wg.gui.components.controls.UILoaderAlt;
-
-        public var masteryIcon:net.wg.gui.lobby.profile.components.TechMasteryIcon;
-
-        public var levelMC:flash.display.MovieClip;
-
-        public var background:flash.display.MovieClip;
-
-        public var hit:flash.display.MovieClip;
-    }
 }

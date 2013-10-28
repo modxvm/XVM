@@ -1,34 +1,41 @@
-package net.wg.gui.components.controls 
+package net.wg.gui.components.controls
 {
-    import scaleform.clik.data.*;
-    
-    public class NationDropDownMenu extends net.wg.gui.components.controls.DropdownMenu
-    {
-        public function NationDropDownMenu()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.data.DataProvider;
 
-        public function createNationFilter(arg1:Array):void
-        {
-            var loc2:*=null;
-            var loc1:*=[{"label":MENU.NATIONS_ALL, "data":-1}];
-            while (arg1.length > 0) 
+
+   public class NationDropDownMenu extends DropdownMenu
+   {
+          
+      public function NationDropDownMenu() {
+         super();
+      }
+
+      public function createNationFilter(param1:Array) : void {
+         var _loc3_:Object = null;
+         var _loc2_:Array = [
             {
-                loc2 = {"label":MENU.nations(arg1.shift()), "data":arg1.shift()};
-                loc1.push(loc2);
+               "label":MENU.NATIONS_ALL,
+               "data":-1
             }
-            this.setStaticData(loc1);
-            return;
-        }
+         ];
+         while(param1.length > 0)
+         {
+            _loc3_ =
+               {
+                  "label":MENU.nations(param1.shift()),
+                  "data":param1.shift()
+               }
+            ;
+            _loc2_.push(_loc3_);
+         }
+         this.setStaticData(_loc2_);
+      }
 
-        internal function setStaticData(arg1:Array):void
-        {
-            dataProvider.cleanUp();
-            dataProvider = new scaleform.clik.data.DataProvider(arg1);
-            invalidateData();
-            return;
-        }
-    }
+      private function setStaticData(param1:Array) : void {
+         dataProvider.cleanUp();
+         dataProvider = new DataProvider(param1);
+         invalidateData();
+      }
+   }
+
 }

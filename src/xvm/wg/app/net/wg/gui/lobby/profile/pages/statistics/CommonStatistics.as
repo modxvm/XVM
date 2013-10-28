@@ -1,120 +1,95 @@
-package net.wg.gui.lobby.profile.pages.statistics 
+package net.wg.gui.lobby.profile.pages.statistics
 {
-    import net.wg.data.gui_items.dossier.*;
-    import net.wg.gui.lobby.profile.components.*;
-    import scaleform.clik.core.*;
-    
-    public class CommonStatistics extends scaleform.clik.core.UIComponent
-    {
-        public function CommonStatistics()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import net.wg.gui.lobby.profile.components.ProfileDashLineTextItem;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            var loc1:*;
-            this.ltDamageCoefficient.width = loc1 = TF_BLOCK1_WIDTH;
-            this.ltReceivedDamage.width = loc1 = loc1;
-            this.ltDealOutDamage.width = loc1 = loc1;
-            this.ltDestructionCoefficient.width = loc1 = loc1;
-            this.ltDestroyed.width = loc1 = loc1;
-            this.ltKilled.width = loc1;
-            this.ltAvgDetectedEnemies.width = loc1 = TF_BLOCK2_WIDTH;
-            this.ltAvgReceivedDamage.width = loc1 = loc1;
-            this.ltAvgDamage.width = loc1 = loc1;
-            this.ltMaxDestroyedVehicles.width = loc1 = loc1;
-            this.ltAvgDestroyedVehicles.width = loc1;
-            this.ltDestructionCoefficient.tooltip = PROFILE.PROFILE_PARAMS_TOOLTIP_DESTROYCOEFF;
-            this.ltDamageCoefficient.tooltip = PROFILE.PROFILE_PARAMS_TOOLTIP_DAMAGECOEFF;
-            return;
-        }
 
-        public function setLabels(arg1:Object):void
-        {
-            applyLabelsText("killed", arg1, this.ltKilled);
-            applyLabelsText("destroyed", arg1, this.ltDestroyed);
-            applyLabelsText("destructionCoefficient", arg1, this.ltDestructionCoefficient);
-            applyLabelsText("dealOutDamage", arg1, this.ltDealOutDamage);
-            applyLabelsText("receivedDamage", arg1, this.ltReceivedDamage);
-            applyLabelsText("damageCoefficient", arg1, this.ltDamageCoefficient);
-            applyLabelsText("avgDestroyedVehicles", arg1, this.ltAvgDestroyedVehicles);
-            applyLabelsText("maxDestroyedVehicles", arg1, this.ltMaxDestroyedVehicles);
-            applyLabelsText("avgDamage", arg1, this.ltAvgDamage);
-            applyLabelsText("avgReceivedDamage", arg1, this.ltAvgReceivedDamage);
-            applyLabelsText("avgDetectedEnemies", arg1, this.ltAvgDetectedEnemies);
-            return;
-        }
+   public class CommonStatistics extends UIComponent
+   {
+          
+      public function CommonStatistics() {
+         super();
+      }
 
-        public function setDossierData(arg1:net.wg.data.gui_items.dossier.Dossier):void
-        {
-            this.ltKilled.value = arg1.getFragsCountStr();
-            this.ltDestroyed.value = arg1.getDeathsCountStr();
-            this.ltDestructionCoefficient.value = "<font color=\'#cbad78\'>" + arg1.getFragsEfficiencyStr() + "</font>";
-            this.ltDealOutDamage.value = arg1.getDamageDealtStr();
-            this.ltReceivedDamage.value = arg1.getDamageReceivedStr();
-            this.ltDamageCoefficient.value = "<font color=\'#cbad78\'>" + arg1.getDamageEfficiencyStr() + "</font>";
-            this.ltAvgDestroyedVehicles.value = arg1.getAvgFragsStr();
-            this.ltMaxDestroyedVehicles.value = arg1.getMaxFragsStr();
-            this.ltAvgDamage.value = arg1.getAvgDamageDealtStr();
-            this.ltAvgReceivedDamage.value = arg1.getAvgDamageReceivedStr();
-            this.ltAvgDetectedEnemies.value = arg1.getAvgEnemiesSpottedStr();
-            return;
-        }
+      private static const TF_BLOCK2_WIDTH:int = 544;
 
-        public function setViewSize(arg1:Number, arg2:Number):void
-        {
-            var loc1:*;
-            this.ltDamageCoefficient.x = loc1 = SIDES_PADDING;
-            this.ltReceivedDamage.x = loc1 = loc1;
-            this.ltDealOutDamage.x = loc1 = loc1;
-            this.ltDestructionCoefficient.x = loc1 = loc1;
-            this.ltDestroyed.x = loc1 = loc1;
-            this.ltKilled.x = loc1;
-            this.ltAvgDetectedEnemies.x = loc1 = arg1 - TF_BLOCK2_WIDTH - SIDES_PADDING;
-            this.ltAvgReceivedDamage.x = loc1 = loc1;
-            this.ltAvgDamage.x = loc1 = loc1;
-            this.ltMaxDestroyedVehicles.x = loc1 = loc1;
-            this.ltAvgDestroyedVehicles.x = loc1;
-            return;
-        }
+      private static const TF_BLOCK1_WIDTH:int = 338;
 
-        internal static function applyLabelsText(arg1:String, arg2:Object, arg3:net.wg.gui.lobby.profile.components.DashLineTextItem):void
-        {
-            arg3.label = arg2[arg1];
-            return;
-        }
+      private static const DEFAULT_COLOR:uint = 16777215;
 
-        internal static const TF_BLOCK2_WIDTH:int=544;
+      private static const SIDES_PADDING:int = 30;
 
-        internal static const TF_BLOCK1_WIDTH:int=338;
+      private static const CENTER_PADDING:int = 50;
 
-        internal static const SIDES_PADDING:int=30;
+      private static function applyLabelsText(param1:String, param2:Object, param3:ProfileDashLineTextItem) : void {
+         param3.label = param2[param1];
+      }
 
-        internal static const CENTER_PADDING:int=50;
+      public var ltKilled:ProfileDashLineTextItem;
 
-        public var ltKilled:net.wg.gui.lobby.profile.components.DashLineTextItem;
+      public var ltDestroyed:ProfileDashLineTextItem;
 
-        public var ltDestroyed:net.wg.gui.lobby.profile.components.DashLineTextItem;
+      public var ltDestructionCoefficient:ProfileDashLineTextItem;
 
-        public var ltDestructionCoefficient:net.wg.gui.lobby.profile.components.DashLineTextItem;
+      public var ltDealOutDamage:ProfileDashLineTextItem;
 
-        public var ltDealOutDamage:net.wg.gui.lobby.profile.components.DashLineTextItem;
+      public var ltReceivedDamage:ProfileDashLineTextItem;
 
-        public var ltReceivedDamage:net.wg.gui.lobby.profile.components.DashLineTextItem;
+      public var ltDamageCoefficient:ProfileDashLineTextItem;
 
-        public var ltDamageCoefficient:net.wg.gui.lobby.profile.components.DashLineTextItem;
+      public var ltAvgDestroyedVehicles:ProfileDashLineTextItem;
 
-        public var ltAvgDestroyedVehicles:net.wg.gui.lobby.profile.components.DashLineTextItem;
+      public var ltMaxDestroyedVehicles:ProfileDashLineTextItem;
 
-        public var ltMaxDestroyedVehicles:net.wg.gui.lobby.profile.components.DashLineTextItem;
+      public var ltAvgDamage:ProfileDashLineTextItem;
 
-        public var ltAvgDamage:net.wg.gui.lobby.profile.components.DashLineTextItem;
+      public var ltAvgReceivedDamage:ProfileDashLineTextItem;
 
-        public var ltAvgReceivedDamage:net.wg.gui.lobby.profile.components.DashLineTextItem;
+      public var ltAvgDetectedEnemies:ProfileDashLineTextItem;
 
-        public var ltAvgDetectedEnemies:net.wg.gui.lobby.profile.components.DashLineTextItem;
-    }
+      override protected function configUI() : void {
+         super.configUI();
+         this.ltKilled.width = this.ltDestroyed.width = this.ltDestructionCoefficient.width = this.ltDealOutDamage.width = this.ltReceivedDamage.width = this.ltDamageCoefficient.width = TF_BLOCK1_WIDTH;
+         this.ltAvgDestroyedVehicles.width = this.ltMaxDestroyedVehicles.width = this.ltAvgDamage.width = this.ltAvgReceivedDamage.width = this.ltAvgDetectedEnemies.width = TF_BLOCK2_WIDTH;
+         this.ltDestructionCoefficient.tooltip = PROFILE.PROFILE_PARAMS_TOOLTIP_DESTROYCOEFF;
+         this.ltDamageCoefficient.tooltip = PROFILE.PROFILE_PARAMS_TOOLTIP_DAMAGECOEFF;
+      }
+
+      public function setLabels(param1:Object) : void {
+         applyLabelsText("killed",param1,this.ltKilled);
+         applyLabelsText("destroyed",param1,this.ltDestroyed);
+         applyLabelsText("destructionCoefficient",param1,this.ltDestructionCoefficient);
+         applyLabelsText("dealOutDamage",param1,this.ltDealOutDamage);
+         applyLabelsText("receivedDamage",param1,this.ltReceivedDamage);
+         applyLabelsText("damageCoefficient",param1,this.ltDamageCoefficient);
+         applyLabelsText("avgDestroyedVehicles",param1,this.ltAvgDestroyedVehicles);
+         applyLabelsText("maxDestroyedVehicles",param1,this.ltMaxDestroyedVehicles);
+         applyLabelsText("avgDamage",param1,this.ltAvgDamage);
+         applyLabelsText("avgReceivedDamage",param1,this.ltAvgReceivedDamage);
+         applyLabelsText("avgDetectedEnemies",param1,this.ltAvgDetectedEnemies);
+      }
+
+      public function setDossierData(param1:Object) : void {
+         var _loc2_:ProfileStatisticsDetailVO = new ProfileStatisticsDetailVO(param1);
+         this.ltKilled.receiveAndSetValue(_loc2_.fragsCount,DEFAULT_COLOR,_loc2_.getFragsCountStr);
+         this.ltDestroyed.receiveAndSetValue(_loc2_.deathsCount,DEFAULT_COLOR,_loc2_.getDeathsCountStr);
+         var _loc3_:Number = _loc2_.fragsEfficiency > 0?_loc2_.fragsEfficiency:-1;
+         this.ltDestructionCoefficient.receiveAndSetValue(_loc3_,13348216,_loc2_.getFragsEfficiencyStr);
+         this.ltDealOutDamage.receiveAndSetValue(_loc2_.damageDealt,DEFAULT_COLOR,_loc2_.getDamageDealtStr);
+         this.ltReceivedDamage.receiveAndSetValue(_loc2_.damageReceived,DEFAULT_COLOR,_loc2_.getDamageReceivedStr);
+         _loc3_ = _loc2_.damageEfficiency > 0?_loc2_.damageEfficiency:-1;
+         this.ltDamageCoefficient.receiveAndSetValue(_loc3_,13348216,_loc2_.getDamageEfficiencyStr);
+         this.ltAvgDestroyedVehicles.receiveAndSetValue(_loc2_.avgFrags,DEFAULT_COLOR,_loc2_.getAvgFragsStr);
+         this.ltMaxDestroyedVehicles.receiveAndSetValue(_loc2_.maxFrags,DEFAULT_COLOR,_loc2_.getMaxFragsStr);
+         this.ltAvgDamage.receiveAndSetValue(_loc2_.avgDamageDealt,DEFAULT_COLOR,_loc2_.getAvgDamageDealtStr);
+         this.ltAvgReceivedDamage.receiveAndSetValue(_loc2_.avgDamageReceived,DEFAULT_COLOR,_loc2_.getAvgDamageReceivedStr);
+         this.ltAvgDetectedEnemies.receiveAndSetValue(_loc2_.avgEnemiesSpotted,DEFAULT_COLOR,_loc2_.getAvgEnemiesSpottedStr);
+      }
+
+      public function setViewSize(param1:Number, param2:Number) : void {
+         this.ltKilled.x = this.ltDestroyed.x = this.ltDestructionCoefficient.x = this.ltDealOutDamage.x = this.ltReceivedDamage.x = this.ltDamageCoefficient.x = SIDES_PADDING;
+         this.ltAvgDestroyedVehicles.x = this.ltMaxDestroyedVehicles.x = this.ltAvgDamage.x = this.ltAvgReceivedDamage.x = this.ltAvgDetectedEnemies.x = param1 - TF_BLOCK2_WIDTH - SIDES_PADDING;
+      }
+   }
+
 }

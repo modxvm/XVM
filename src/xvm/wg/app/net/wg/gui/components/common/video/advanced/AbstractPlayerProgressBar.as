@@ -1,73 +1,61 @@
-package net.wg.gui.components.common.video.advanced 
+package net.wg.gui.components.common.video.advanced
 {
-    import flash.events.*;
-    import scaleform.clik.core.*;
-    
-    public class AbstractPlayerProgressBar extends scaleform.clik.core.UIComponent
-    {
-        public function AbstractPlayerProgressBar()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.events.Event;
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(POSITION_INVALID)) 
-            {
-                this.applyTimeUpdating();
-            }
-            return;
-        }
 
-        protected function setUnderUsingState(arg1:Boolean):void
-        {
-            this._underUsing = arg1;
-            dispatchEvent(new flash.events.Event(UNDER_USING_STATE));
-            return;
-        }
+   public class AbstractPlayerProgressBar extends UIComponent
+   {
+          
+      public function AbstractPlayerProgressBar() {
+         super();
+      }
 
-        protected function positionUpdated(arg1:Number):void
-        {
-            dispatchEvent(new net.wg.gui.components.common.video.advanced.ProgressBarEvent(net.wg.gui.components.common.video.advanced.ProgressBarEvent.POSITION_UPDATED, arg1));
-            return;
-        }
+      public static const UNDER_USING_STATE:String = "controlUnderUsing";
 
-        protected function applyTimeUpdating():void
-        {
-            return;
-        }
+      private static const POSITION_INVALID:String = "timeInvalid";
 
-        public function get position():Number
-        {
-            return this._position;
-        }
+      protected var _position:Number = 0;
 
-        public function set position(arg1:Number):void
-        {
-            this._position = arg1;
-            invalidate(POSITION_INVALID);
-            return;
-        }
+      protected var _underUsing:Boolean;
 
-        public function get underUsing():Boolean
-        {
-            return this._underUsing;
-        }
+      override protected function draw() : void {
+         super.draw();
+         if(isInvalid(POSITION_INVALID))
+         {
+            this.applyTimeUpdating();
+         }
+      }
 
-        public override function dispose():void
-        {
-            super.dispose();
-            return;
-        }
+      protected function setUnderUsingState(param1:Boolean) : void {
+         this._underUsing = param1;
+         dispatchEvent(new Event(UNDER_USING_STATE));
+      }
 
-        public static const UNDER_USING_STATE:String="controlUnderUsing";
+      protected function positionUpdated(param1:Number) : void {
+         dispatchEvent(new ProgressBarEvent(ProgressBarEvent.POSITION_UPDATED,param1));
+      }
 
-        internal static const POSITION_INVALID:String="timeInvalid";
+      protected function applyTimeUpdating() : void {
+          
+      }
 
-        protected var _position:Number=0;
+      public function get position() : Number {
+         return this._position;
+      }
 
-        protected var _underUsing:Boolean;
-    }
+      public function set position(param1:Number) : void {
+         this._position = param1;
+         invalidate(POSITION_INVALID);
+      }
+
+      public function get underUsing() : Boolean {
+         return this._underUsing;
+      }
+
+      override public function dispose() : void {
+         super.dispose();
+      }
+   }
+
 }

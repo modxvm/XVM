@@ -1,16 +1,23 @@
-package net.wg.gui.components.advanced 
+package net.wg.gui.components.advanced
 {
-    import net.wg.gui.components.controls.*;
-    import scaleform.clik.core.*;
-    
-    public class ScalableIconWrapper extends scaleform.clik.core.UIComponent
-    {
-        public function ScalableIconWrapper()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import net.wg.gui.components.controls.UILoaderAlt;
 
-        public var loader:net.wg.gui.components.controls.UILoaderAlt;
-    }
+
+   public class ScalableIconWrapper extends UIComponent
+   {
+          
+      public function ScalableIconWrapper() {
+         super();
+      }
+
+      public var loader:UILoaderAlt;
+
+      override public function dispose() : void {
+         this.loader.dispose();
+         this.loader = null;
+         super.dispose();
+      }
+   }
+
 }

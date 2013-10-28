@@ -1,11 +1,15 @@
-package net.wg.utils 
+package net.wg.utils
 {
-    public interface IAssertable
-    {
-        function assert(arg1:Boolean, arg2:String, arg3:Class=null):void;
 
-        function assertNotNull(arg1:Object, arg2:String, arg3:Class=null):void;
 
-        function assertNull(arg1:Object, arg2:String, arg3:Class=null):void;
-    }
+   public interface IAssertable
+   {
+          
+      function assert(param1:Boolean, param2:String, param3:Class=null) : void;
+
+      function assertNotNull(param1:Object, param2:String, param3:Class=null) : void;
+
+      function assertNull(param1:Object, param2:String, param3:Class=null) : void;
+   }
+
 }

@@ -1,72 +1,72 @@
-package net.wg.gui.components.common.cursor.base 
+package net.wg.gui.components.common.cursor.base
 {
-    import flash.display.*;
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    import net.wg.utils.*;
-    
-    public class BaseInfo extends Object implements net.wg.infrastructure.interfaces.entity.IDisposable
-    {
-        public function BaseInfo(arg1:net.wg.infrastructure.interfaces.entity.IDragDropHitArea, arg2:String, arg3:String)
-        {
-            super();
-            var loc1:*="drag or drop object must be InteractiveObject";
-            var loc2:*;
-            (loc2 = App.utils.asserter).assertNotNull(arg1, "dragDropObject" + net.wg.data.constants.Errors.CANT_NULL);
-            loc2.assert(arg1 is flash.display.InteractiveObject, loc1);
-            this._container = arg1;
-            this._cursor = arg2 ? arg2 : arg3;
-            return;
-        }
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import flash.display.InteractiveObject;
+   import net.wg.infrastructure.interfaces.entity.IDragDropHitArea;
+   import net.wg.utils.IAssertable;
+   import net.wg.data.constants.Errors;
 
-        public function get hit():flash.display.InteractiveObject
-        {
-            return net.wg.gui.components.common.cursor.base.BaseInfo.getHitFromContainer(this._container);
-        }
 
-        public function get cursor():String
-        {
-            return this._cursor;
-        }
+   public class BaseInfo extends Object implements IDisposable
+   {
+          
+      public function BaseInfo(param1:IDragDropHitArea, param2:String, param3:String) {
+         super();
+         var _loc4_:* = "drag or drop object must be InteractiveObject";
+         var _loc5_:IAssertable = App.utils.asserter;
+         _loc5_.assertNotNull(param1,"dragDropObject" + Errors.CANT_NULL);
+         _loc5_.assert(param1  is  InteractiveObject,_loc4_);
+         this._container = param1;
+         this._cursor = param2?param2:param3;
+      }
 
-        protected final function getContainer():net.wg.infrastructure.interfaces.entity.IDragDropHitArea
-        {
-            return this._container;
-        }
+      public static const STATE_NONE:String = "none";
 
-        public function dispose():void
-        {
-            this._cursor = null;
-            this._container = null;
-            return;
-        }
+      public static const STATE_INITIALIZED:String = "initialized";
 
-        protected final function getCursor():String
-        {
-            return this._cursor;
-        }
+      public static const STATE_STARTED:String = "started";
 
-        public function get processStarted():Boolean
-        {
-            return this._processStarted;
-        }
+      public static function getHitFromContainer(param1:IDragDropHitArea) : InteractiveObject {
+         var _loc2_:InteractiveObject = param1.getHitArea();
+         return _loc2_?_loc2_:InteractiveObject(param1);
+      }
 
-        public function set processStarted(arg1:Boolean):void
-        {
-            this._processStarted = arg1;
-            return;
-        }
+      private var _cursor:String = null;
 
-        public static function getHitFromContainer(arg1:net.wg.infrastructure.interfaces.entity.IDragDropHitArea):flash.display.InteractiveObject
-        {
-            var loc1:*=arg1.getHitArea();
-            return loc1 ? loc1 : flash.display.InteractiveObject(arg1);
-        }
+      private var _container:IDragDropHitArea = null;
 
-        internal var _cursor:String=null;
+      private var _processState:String = "none";
 
-        internal var _container:net.wg.infrastructure.interfaces.entity.IDragDropHitArea=null;
+      public function dispose() : void {
+         this._cursor = null;
+         this._container = null;
+         this._processState = null;
+      }
 
-        internal var _processStarted:Boolean=false;
-    }
+      public function get hit() : InteractiveObject {
+         return BaseInfo.getHitFromContainer(this._container);
+      }
+
+      public function get cursor() : String {
+         return this._cursor;
+      }
+
+      public function set state(param1:String) : void {
+         App.utils.asserter.assert(!([STATE_NONE,STATE_INITIALIZED,STATE_STARTED].indexOf(param1) == -1),"unknown drag state:" + param1);
+         this._processState = param1;
+      }
+
+      public function get state() : String {
+         return this._processState;
+      }
+
+      protected final function getContainer() : IDragDropHitArea {
+         return this._container;
+      }
+
+      protected final function getCursor() : String {
+         return this._cursor;
+      }
+   }
+
 }

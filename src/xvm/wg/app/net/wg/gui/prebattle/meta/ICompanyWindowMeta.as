@@ -1,47 +1,50 @@
-package net.wg.gui.prebattle.meta 
+package net.wg.gui.prebattle.meta
 {
-    import flash.events.*;
-    
-    public interface ICompanyWindowMeta extends flash.events.IEventDispatcher
-    {
-        function requestToAssignS(arg1:Number):void;
+   import flash.events.IEventDispatcher;
 
-        function requestToUnassignS(arg1:Number):void;
 
-        function requestToChangeOpenedS(arg1:Boolean):void;
+   public interface ICompanyWindowMeta extends IEventDispatcher
+   {
+          
+      function requestToAssignS(param1:Number) : void;
 
-        function requestToChangeCommentS(arg1:String):void;
+      function requestToUnassignS(param1:Number) : void;
 
-        function requestToChangeDivisionS(arg1:uint):void;
+      function requestToChangeOpenedS(param1:Boolean) : void;
 
-        function getCompanyNameS():String;
+      function requestToChangeCommentS(param1:String) : void;
 
-        function canMoveToAssignedS():Boolean;
+      function requestToChangeDivisionS(param1:uint) : void;
 
-        function canMoveToUnassignedS():Boolean;
+      function getCompanyNameS() : String;
 
-        function canMakeOpenedClosedS():Boolean;
+      function canMoveToAssignedS() : Boolean;
 
-        function canChangeCommentS():Boolean;
+      function canMoveToUnassignedS() : Boolean;
 
-        function canChangeDivisionS():Boolean;
+      function canMakeOpenedClosedS() : Boolean;
 
-        function as_setDivisionsList(arg1:Array, arg2:uint):void;
+      function canChangeCommentS() : Boolean;
 
-        function as_setOpened(arg1:Boolean):void;
+      function canChangeDivisionS() : Boolean;
 
-        function as_setComment(arg1:String):void;
+      function as_setDivisionsList(param1:Array, param2:uint) : void;
 
-        function as_setDivision(arg1:uint):void;
+      function as_setOpened(param1:Boolean) : void;
 
-        function as_setTotalLimitLabels(arg1:String, arg2:String):void;
+      function as_setComment(param1:String) : void;
 
-        function as_setMaxCountLimitLabel(arg1:String):void;
+      function as_setDivision(param1:uint) : void;
 
-        function as_setClassesLimits(arg1:Array):void;
+      function as_setTotalLimitLabels(param1:String, param2:String) : void;
 
-        function as_setInvalidVehicles(arg1:Array):void;
+      function as_setMaxCountLimitLabel(param1:String) : void;
 
-        function as_setChangeSettingCoolDown(arg1:uint):void;
-    }
+      function as_setClassesLimits(param1:Array) : void;
+
+      function as_setInvalidVehicles(param1:Array) : void;
+
+      function as_setChangeSettingCoolDown(param1:uint) : void;
+   }
+
 }

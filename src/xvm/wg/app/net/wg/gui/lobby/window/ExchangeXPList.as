@@ -1,72 +1,63 @@
-package net.wg.gui.lobby.window 
+package net.wg.gui.lobby.window
 {
-    import net.wg.gui.components.controls.*;
-    
-    public class ExchangeXPList extends net.wg.gui.components.controls.SortableScrollingList
-    {
-        public function ExchangeXPList()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.components.controls.SortableScrollingList;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            return;
-        }
 
-        public function sortSelection(arg1:Boolean):void
-        {
-            if (dataProvider) 
+   public class ExchangeXPList extends SortableScrollingList
+   {
+          
+      public function ExchangeXPList() {
+         super();
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+      }
+
+      public function sortSelection(param1:Boolean) : void {
+         if(dataProvider)
+         {
+            sortMask = Array.NUMERIC;
+            setSortMask(param1);
+            sortPropName = "isSelectCandidate";
+            invalidate(SORTING_INVALID);
+         }
+      }
+
+      public function sortByVehicleName(param1:Boolean) : void {
+         if(dataProvider)
+         {
+            sortMask = Array.CASEINSENSITIVE;
+            if(!param1)
             {
-                sortMask = Array.NUMERIC;
-                setSortMask(arg1);
-                sortPropName = "isSelectCandidate";
-                invalidate(SORTING_INVALID);
+               sortMask = sortMask | Array.DESCENDING;
             }
-            return;
-        }
+            sortPropName = "vehicleName";
+            invalidate(SORTING_INVALID);
+         }
+      }
 
-        public function sortByVehicleName(arg1:Boolean):void
-        {
-            if (dataProvider) 
-            {
-                sortMask = Array.CASEINSENSITIVE;
-                if (!arg1) 
-                {
-                    sortMask = sortMask | Array.DESCENDING;
-                }
-                sortPropName = "vehicleName";
-                invalidate(SORTING_INVALID);
-            }
-            return;
-        }
+      public function sortByExperience(param1:Boolean) : void {
+         if(dataProvider)
+         {
+            sortMask = Array.NUMERIC;
+            setSortMask(param1);
+            sortPropName = "xp";
+            invalidate(SORTING_INVALID);
+         }
+      }
 
-        public function sortByExperience(arg1:Boolean):void
-        {
-            if (dataProvider) 
-            {
-                sortMask = Array.NUMERIC;
-                setSortMask(arg1);
-                sortPropName = "xp";
-                invalidate(SORTING_INVALID);
-            }
-            return;
-        }
+      public function applySelection(param1:Boolean) : void {
+         var _loc2_:ExchangeXPVehicleVO = null;
+         var _loc3_:* = 0;
+         while(_loc3_ < dataProvider.length)
+         {
+            _loc2_ = dataProvider[_loc3_];
+            _loc2_.isSelectCandidate = param1;
+            _loc3_++;
+         }
+         invalidateData();
+      }
+   }
 
-        public function applySelection(arg1:Boolean):void
-        {
-            var loc1:*=null;
-            var loc2:*=0;
-            while (loc2 < dataProvider.length) 
-            {
-                loc1 = dataProvider[loc2];
-                loc1.isSelectCandidate = arg1;
-                ++loc2;
-            }
-            invalidateData();
-            return;
-        }
-    }
 }

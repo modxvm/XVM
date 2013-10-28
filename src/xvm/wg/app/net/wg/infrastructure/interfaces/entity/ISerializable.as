@@ -1,9 +1,13 @@
-package net.wg.infrastructure.interfaces.entity 
+package net.wg.infrastructure.interfaces.entity
 {
-    public interface ISerializable
-    {
-        function encode(arg1:*):String;
 
-        function decode(arg1:String):Object;
-    }
+
+   public interface ISerializable
+   {
+          
+      function encode(param1:*) : String;
+
+      function decode(param1:String) : Object;
+   }
+
 }

@@ -1,199 +1,181 @@
-package net.wg.gui.lobby.settings.vo 
+package net.wg.gui.lobby.settings.vo
 {
-    public class SettingsControlProp extends Object
-    {
-        public function SettingsControlProp(arg1:*=null, arg2:Array=null, arg3:String=null, arg4:Boolean=false, arg5:Boolean=false, arg6:String=null, arg7:Boolean=false, arg8:Boolean=false, arg9:*=null, arg10:Boolean=false, arg11:*=null)
-        {
-            super();
-            this.current = arg1;
-            this.options = arg2 ? arg2 : [];
-            this.type = arg3;
-            this.hasLabel = arg4;
-            this.hasValue = arg5;
-            this.isDependOn = arg6;
-            this.readOnly = arg7;
-            this.advanced = arg8;
-            this.lastVal = arg9;
-            this.isDataAsSelectedIndex = arg10;
-            this._default = arg11;
-            return;
-        }
 
-        public function set isDependOn(arg1:String):void
-        {
-            if (this._isDependOn == arg1) 
+
+   public class SettingsControlProp extends Object
+   {
+          
+      public function SettingsControlProp(param1:*=null, param2:Array=null, param3:String=null, param4:Boolean=false, param5:Boolean=false, param6:String=null, param7:Boolean=false, param8:Boolean=false, param9:*=null, param10:Boolean=false, param11:*=null) {
+         super();
+         this.current = param1;
+         this.options = param2?param2:[];
+         this.type = param3;
+         this.hasLabel = param4;
+         this.hasValue = param5;
+         this.isDependOn = param6;
+         this.readOnly = param7;
+         this.advanced = param8;
+         this.lastVal = param9;
+         this.isDataAsSelectedIndex = param10;
+         this._default = param11;
+      }
+
+      private var _current = null;
+
+      private var _options:Array = null;
+
+      private var _type:String = null;
+
+      private var _hasLabel:Boolean = false;
+
+      private var _hasValue:Boolean = false;
+
+      private var _isDependOn:String = null;
+
+      private var _readOnly:Boolean = false;
+
+      private var _advanced:Boolean = false;
+
+      public var _default = null;
+
+      private var _lastVal = null;
+
+      private var _isDataAsSelectedIndex:Boolean = false;
+
+      public function set current(param1:*) : void {
+         if(this._current === param1)
+         {
+            return;
+         }
+         this._current = param1;
+      }
+
+      public function get current() : * {
+         return this._current;
+      }
+
+      public function set options(param1:Array) : void {
+         if(this._options == param1)
+         {
+            return;
+         }
+         this._options = param1;
+      }
+
+      public function get options() : Array {
+         return this._options;
+      }
+
+      public function set type(param1:String) : void {
+         if(this._type == param1)
+         {
+            return;
+         }
+         this._type = param1;
+      }
+
+      public function get type() : String {
+         return this._type;
+      }
+
+      public function set hasLabel(param1:Boolean) : void {
+         if(this._hasLabel == param1)
+         {
+            return;
+         }
+         this._hasLabel = param1;
+      }
+
+      public function get hasLabel() : Boolean {
+         return this._hasLabel;
+      }
+
+      public function set hasValue(param1:Boolean) : void {
+         if(this._hasValue == param1)
+         {
+            return;
+         }
+         this._hasValue = param1;
+      }
+
+      public function get hasValue() : Boolean {
+         return this._hasValue;
+      }
+
+      public function set isDependOn(param1:String) : void {
+         if(this._isDependOn == param1)
+         {
+            return;
+         }
+         this._isDependOn = param1;
+      }
+
+      public function get isDependOn() : String {
+         return this._isDependOn;
+      }
+
+      public function set readOnly(param1:Boolean) : void {
+         if(this._readOnly == param1)
+         {
+            return;
+         }
+         this._readOnly = param1;
+      }
+
+      public function get readOnly() : Boolean {
+         return this._readOnly;
+      }
+
+      public function set advanced(param1:Boolean) : void {
+         if(this._advanced == param1)
+         {
+            return;
+         }
+         this._advanced = param1;
+      }
+
+      public function get advanced() : Boolean {
+         return this._advanced;
+      }
+
+      public function set lastVal(param1:*) : void {
+         if(this._lastVal == param1)
+         {
+            return;
+         }
+         this._lastVal = param1;
+      }
+
+      public function get lastVal() : * {
+         return this._lastVal;
+      }
+
+      public function set isDataAsSelectedIndex(param1:Boolean) : void {
+         if(this._isDataAsSelectedIndex == param1)
+         {
+            return;
+         }
+         this._isDataAsSelectedIndex = param1;
+      }
+
+      public function get isDataAsSelectedIndex() : Boolean {
+         return this._isDataAsSelectedIndex;
+      }
+
+      public function clone() : SettingsControlProp {
+         return new SettingsControlProp(this.current,this.options,this.type,this.hasLabel,this.hasValue,this.isDependOn,this.readOnly,this.advanced,this.lastVal,this.isDataAsSelectedIndex,this._default);
+      }
+
+      public function clear() : void {
+         if(this._options)
+         {
+            while(this._options.length > 0)
             {
-                return;
+               this._options.pop();
             }
-            this._isDependOn = arg1;
-            return;
-        }
+            this._options = null;
+         }
+      }
+   }
 
-        public function get isDependOn():String
-        {
-            return this._isDependOn;
-        }
-
-        public function set readOnly(arg1:Boolean):void
-        {
-            if (this._readOnly == arg1) 
-            {
-                return;
-            }
-            this._readOnly = arg1;
-            return;
-        }
-
-        public function get readOnly():Boolean
-        {
-            return this._readOnly;
-        }
-
-        public function set advanced(arg1:Boolean):void
-        {
-            if (this._advanced == arg1) 
-            {
-                return;
-            }
-            this._advanced = arg1;
-            return;
-        }
-
-        public function get advanced():Boolean
-        {
-            return this._advanced;
-        }
-
-        public function set lastVal(arg1:*):void
-        {
-            if (this._lastVal == arg1) 
-            {
-                return;
-            }
-            this._lastVal = arg1;
-            return;
-        }
-
-        public function get lastVal():*
-        {
-            return this._lastVal;
-        }
-
-        public function set isDataAsSelectedIndex(arg1:Boolean):void
-        {
-            if (this._isDataAsSelectedIndex == arg1) 
-            {
-                return;
-            }
-            this._isDataAsSelectedIndex = arg1;
-            return;
-        }
-
-        public function get isDataAsSelectedIndex():Boolean
-        {
-            return this._isDataAsSelectedIndex;
-        }
-
-        public function clone():net.wg.gui.lobby.settings.vo.SettingsControlProp
-        {
-            return new net.wg.gui.lobby.settings.vo.SettingsControlProp(this.current, this.options, this.type, this.hasLabel, this.hasValue, this.isDependOn, this.readOnly, this.advanced, this.lastVal, this.isDataAsSelectedIndex, this._default);
-        }
-
-        public function set current(arg1:*):void
-        {
-            if (this._current === arg1) 
-            {
-                return;
-            }
-            this._current = arg1;
-            return;
-        }
-
-        public function get current():*
-        {
-            return this._current;
-        }
-
-        public function set options(arg1:Array):void
-        {
-            if (this._options == arg1) 
-            {
-                return;
-            }
-            this._options = arg1;
-            return;
-        }
-
-        public function get options():Array
-        {
-            return this._options;
-        }
-
-        public function set type(arg1:String):void
-        {
-            if (this._type == arg1) 
-            {
-                return;
-            }
-            this._type = arg1;
-            return;
-        }
-
-        public function get type():String
-        {
-            return this._type;
-        }
-
-        public function set hasLabel(arg1:Boolean):void
-        {
-            if (this._hasLabel == arg1) 
-            {
-                return;
-            }
-            this._hasLabel = arg1;
-            return;
-        }
-
-        public function get hasLabel():Boolean
-        {
-            return this._hasLabel;
-        }
-
-        public function set hasValue(arg1:Boolean):void
-        {
-            if (this._hasValue == arg1) 
-            {
-                return;
-            }
-            this._hasValue = arg1;
-            return;
-        }
-
-        public function get hasValue():Boolean
-        {
-            return this._hasValue;
-        }
-
-        internal var _current:*=null;
-
-        internal var _options:Array=null;
-
-        internal var _type:String=null;
-
-        internal var _hasLabel:Boolean=false;
-
-        internal var _hasValue:Boolean=false;
-
-        internal var _isDependOn:String=null;
-
-        internal var _readOnly:Boolean=false;
-
-        internal var _advanced:Boolean=false;
-
-        public var _default:*=null;
-
-        internal var _lastVal:*=null;
-
-        internal var _isDataAsSelectedIndex:Boolean=false;
-    }
 }

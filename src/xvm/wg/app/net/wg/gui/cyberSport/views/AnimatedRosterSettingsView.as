@@ -1,0 +1,191 @@
+package net.wg.gui.cyberSport.views
+{
+   import scaleform.clik.core.UIComponent;
+   import net.wg.gui.cyberSport.controls.CSVehicleButton;
+   import flash.display.MovieClip;
+   import __AS3__.vec.Vector;
+   import scaleform.clik.motion.Tween;
+   import scaleform.clik.events.ButtonEvent;
+   import net.wg.gui.cyberSport.controls.events.CSComponentEvent;
+   import scaleform.clik.constants.InvalidationType;
+   import net.wg.gui.cyberSport.controls.SettingRosterVO;
+   import fl.transitions.easing.Strong;
+
+
+   public class AnimatedRosterSettingsView extends UIComponent
+   {
+          
+      public function AnimatedRosterSettingsView() {
+         this.tweens = new Vector.<Tween>();
+         super();
+      }
+
+      public var leftBtn:CSVehicleButton;
+
+      public var rightBtn:CSVehicleButton;
+
+      public var anmSeparator:MovieClip;
+
+      private var _animationDuration:Number = 0;
+
+      private var tweens:Vector.<Tween>;
+
+      private var leftHash;
+
+      private var rightHash;
+
+      public function set animationDuration(param1:Number) : void {
+         this._animationDuration = param1;
+      }
+
+      public function get animationDuration() : Number {
+         return this._animationDuration;
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.leftBtn.addEventListener(ButtonEvent.CLICK,this.leftBtn_buttonClickHandler);
+         this.rightBtn.addEventListener(ButtonEvent.CLICK,this.rightBtn_buttonClickHandler);
+      }
+
+      public function getModels() : Array {
+         return [this.leftBtn.getModel(),this.rightBtn.getModel()];
+      }
+
+      override public function dispose() : void {
+         super.dispose();
+         this.leftBtn.addEventListener(ButtonEvent.CLICK,this.leftBtn_buttonClickHandler);
+         this.rightBtn.addEventListener(ButtonEvent.CLICK,this.rightBtn_buttonClickHandler);
+         this.leftBtn.dispose();
+         this.rightBtn.dispose();
+         this.stopPrevioseAnimation();
+         this.tweens.splice(0,this.tweens.length);
+      }
+
+      private function leftBtn_buttonClickHandler(param1:ButtonEvent) : void {
+         dispatchEvent(new CSComponentEvent(CSComponentEvent.CLICK_SLOT_SETTINGS_BTN,[0,this.leftBtn.getModel()]));
+      }
+
+      private function rightBtn_buttonClickHandler(param1:ButtonEvent) : void {
+         dispatchEvent(new CSComponentEvent(CSComponentEvent.CLICK_SLOT_SETTINGS_BTN,[1,this.rightBtn.getModel()]));
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         this.leftBtn.x = Math.round(this.leftBtn.x);
+         this.leftBtn.y = Math.round(this.leftBtn.y);
+         if(isInvalid(InvalidationType.DATA))
+         {
+            this.afterSetData();
+         }
+      }
+
+      private function afterSetData() : void {
+         this.defType(this.leftBtn,this.leftHash);
+         this.defType(this.rightBtn,this.rightHash);
+      }
+
+      private function defType(param1:CSVehicleButton, param2:*) : void {
+         if(param2  is  int)
+         {
+            this.setCompactDscr(param1,parseInt(param2));
+         }
+         else
+         {
+            if(param2)
+            {
+               if(param2  is  SettingRosterVO)
+               {
+                  this.setRangeData(param1,param2);
+               }
+               else
+               {
+                  this.setRangeData(param1,new SettingRosterVO(param2));
+               }
+            }
+            else
+            {
+               this.setDefaultState(param1);
+            }
+         }
+      }
+
+      private function setCompactDscr(param1:CSVehicleButton, param2:int) : void {
+         param1.setCompDescriptor(param2);
+      }
+
+      private function setRangeData(param1:CSVehicleButton, param2:*) : void {
+         param1.setRangeData(param2);
+      }
+
+      private function setDefaultState(param1:CSVehicleButton) : void {
+         param1.reset();
+         param1.selectState(true,CYBERSPORT.BUTTON_MEDALLION_ADDSLOTSETTINGS);
+      }
+
+      public function setSelectedSettings(param1:int, param2:*) : void {
+         if(param1 == 0)
+         {
+            this.defType(this.leftBtn,param2);
+         }
+         else
+         {
+            this.defType(this.rightBtn,param2);
+         }
+      }
+
+      public function setData(param1:*, param2:*) : void {
+         this.leftHash = param1;
+         this.rightHash = param2;
+         invalidateData();
+      }
+
+      public function animationIn() : void {
+         this.setAnimationRules({"x":0},{"x":110});
+      }
+
+      public function animationOut() : void {
+         this.setAnimationRules({"x":this.rightBtn.x},{"x":this._width - this.anmSeparator.width + 3});
+      }
+
+      private function setAnimationRules(param1:Object, param2:Object) : void {
+         if(param1 == null)
+         {
+            return;
+         }
+         this.stopPrevioseAnimation();
+         this.tweens = Vector.<Tween>([new Tween(this.animationDuration,this.leftBtn,param1,
+            {
+               "paused":false,
+               "ease":Strong.easeOut,
+               "onComplete":this.callBack
+            }
+         ),new Tween(this.animationDuration,this.anmSeparator,param2,
+            {
+               "paused":false,
+               "ease":Strong.easeOut,
+               "onComplete":null
+            }
+         )]);
+      }
+
+      private function callBack(param1:Object) : void {
+         this.leftBtn.x = Math.round(this.leftBtn.x);
+         this.leftBtn.y = Math.round(this.leftBtn.y);
+         this.leftBtn.validateNow();
+      }
+
+      private function stopPrevioseAnimation() : void {
+         var _loc1_:Tween = null;
+         if(this.tweens)
+         {
+            for each (_loc1_ in this.tweens)
+            {
+               _loc1_.paused = true;
+               _loc1_ = null;
+            }
+         }
+      }
+   }
+
+}

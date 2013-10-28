@@ -1,15 +1,18 @@
-package net.wg.gui.lobby.techtree.interfaces 
+package net.wg.gui.lobby.techtree.interfaces
 {
-    import scaleform.clik.interfaces.*;
-    
-    public interface INodesContainer extends scaleform.clik.interfaces.IUIComponent
-    {
-        function getNodeByID(arg1:Number):net.wg.gui.lobby.techtree.interfaces.IRenderer;
+   import scaleform.clik.interfaces.IUIComponent;
 
-        function getRootNode():net.wg.gui.lobby.techtree.interfaces.IRenderer;
 
-        function isParentUnlocked(arg1:Number, arg2:Number):Boolean;
+   public interface INodesContainer extends IUIComponent
+   {
+          
+      function getNodeByID(param1:Number) : IRenderer;
 
-        function getNation():String;
-    }
+      function getRootNode() : IRenderer;
+
+      function isParentUnlocked(param1:Number, param2:Number) : Boolean;
+
+      function getNation() : String;
+   }
+
 }

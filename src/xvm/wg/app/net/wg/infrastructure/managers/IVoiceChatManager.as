@@ -1,8 +1,12 @@
-package net.wg.infrastructure.managers 
+package net.wg.infrastructure.managers
 {
-    import net.wg.infrastructure.base.meta.*;
-    
-    public interface IVoiceChatManager extends net.wg.infrastructure.base.meta.IVoiceChatManagerMeta
-    {
-    }
+   import net.wg.infrastructure.base.meta.IVoiceChatManagerMeta;
+
+
+   public interface IVoiceChatManager extends IVoiceChatManagerMeta
+   {
+          
+
+   }
+
 }

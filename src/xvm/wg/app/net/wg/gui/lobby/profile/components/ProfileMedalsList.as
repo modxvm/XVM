@@ -1,28 +1,26 @@
-package net.wg.gui.lobby.profile.components 
+package net.wg.gui.lobby.profile.components
 {
-    import net.wg.gui.lobby.battleResults.*;
-    
-    public class ProfileMedalsList extends net.wg.gui.lobby.battleResults.MedalsList
-    {
-        public function ProfileMedalsList()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.lobby.battleResults.MedalsList;
 
-        protected override function showToolTip(arg1:String, arg2:Object):void
-        {
-            return;
-        }
 
-        public override function updateFilters():void
-        {
-            return;
-        }
+   public class ProfileMedalsList extends MedalsList
+   {
+          
+      public function ProfileMedalsList() {
+         super();
+      }
 
-        protected override function hideTooltip():void
-        {
-            return;
-        }
-    }
+      override protected function showToolTip(param1:String, param2:Object) : void {
+          
+      }
+
+      override public function updateFilters() : void {
+          
+      }
+
+      override protected function hideTooltip() : void {
+          
+      }
+   }
+
 }

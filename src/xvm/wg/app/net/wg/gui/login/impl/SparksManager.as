@@ -1,96 +1,82 @@
-package net.wg.gui.login.impl 
+package net.wg.gui.login.impl
 {
-    import flash.display.*;
-    import flash.geom.*;
-    import net.wg.gui.login.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    
-    public final class SparksManager extends Object implements net.wg.gui.login.ISparksManager
-    {
-        public function SparksManager()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.login.ISparksManager;
+   import flash.display.MovieClip;
+   import flash.geom.Rectangle;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
 
-        public function set scope(arg1:flash.display.MovieClip):void
-        {
-            this._scope = arg1;
-            return;
-        }
 
-        public function get scope():flash.display.MovieClip
-        {
-            return this._scope;
-        }
+   public final class SparksManager extends Object implements ISparksManager
+   {
+          
+      public function SparksManager() {
+         super();
+      }
 
-        public function set sparkQuantity(arg1:Number):void
-        {
-            this._sparkQuantity = arg1;
-            return;
-        }
+      private var _sparkQuantity:Number = 0;
 
-        public function get sparkQuantity():Number
-        {
-            return this._sparkQuantity;
-        }
+      private var _scope:MovieClip = null;
 
-        public function set zone(arg1:flash.geom.Rectangle):void
-        {
-            this._zone = arg1;
-            return;
-        }
+      private var _zone:Rectangle = null;
 
-        public function get zone():flash.geom.Rectangle
-        {
-            return this._zone;
-        }
+      public function set scope(param1:MovieClip) : void {
+         this._scope = param1;
+      }
 
-        public function resetZone(arg1:flash.geom.Rectangle):void
-        {
-            var loc2:*=null;
-            this._zone = arg1;
-            var loc1:*=0;
-            while (loc1 < this._scope.numChildren) 
-            {
-                loc2 = this._scope.getChildAt(loc1) as net.wg.gui.login.impl.Spark;
-                loc2.zone = this._zone;
-                ++loc1;
-            }
-            return;
-        }
+      public function get scope() : MovieClip {
+         return this._scope;
+      }
 
-        public function dispose():void
-        {
-            var loc1:*=null;
-            while (this._scope.numChildren) 
-            {
-                loc1 = net.wg.infrastructure.interfaces.entity.IDisposable(this._scope.getChildAt(0));
-                loc1.dispose();
-                this._scope.removeChildAt(0);
-            }
-            this._scope = null;
-            return;
-        }
+      public function set sparkQuantity(param1:Number) : void {
+         this._sparkQuantity = param1;
+      }
 
-        public function createSparks():void
-        {
-            var loc2:*=null;
-            var loc1:*=0;
-            while (loc1 < this._sparkQuantity) 
-            {
-                loc2 = new net.wg.gui.login.impl.Spark(this._zone, "spark_" + loc1);
-                this._scope.addChild(loc2);
-                loc2.startAnimation();
-                ++loc1;
-            }
-            return;
-        }
+      public function get sparkQuantity() : Number {
+         return this._sparkQuantity;
+      }
 
-        internal var _sparkQuantity:Number=0;
+      public function set zone(param1:Rectangle) : void {
+         this._zone = param1;
+      }
 
-        internal var _scope:flash.display.MovieClip=null;
+      public function get zone() : Rectangle {
+         return this._zone;
+      }
 
-        internal var _zone:flash.geom.Rectangle=null;
-    }
+      public function resetZone(param1:Rectangle) : void {
+         var _loc3_:Spark = null;
+         this._zone = param1;
+         var _loc2_:Number = 0;
+         while(_loc2_ < this._scope.numChildren)
+         {
+            _loc3_ = this._scope.getChildAt(_loc2_) as Spark;
+            _loc3_.zone = this._zone;
+            _loc2_++;
+         }
+      }
+
+      public function dispose() : void {
+         var _loc1_:IDisposable = null;
+         while(this._scope.numChildren)
+         {
+            _loc1_ = IDisposable(this._scope.getChildAt(0));
+            _loc1_.dispose();
+            this._scope.removeChildAt(0);
+         }
+         this._scope = null;
+      }
+
+      public function createSparks() : void {
+         var _loc2_:Spark = null;
+         var _loc1_:uint = 0;
+         while(_loc1_ < this._sparkQuantity)
+         {
+            _loc2_ = new Spark(this._zone,"spark_" + _loc1_);
+            this._scope.addChild(_loc2_);
+            _loc2_.startAnimation();
+            _loc1_++;
+         }
+      }
+   }
+
 }

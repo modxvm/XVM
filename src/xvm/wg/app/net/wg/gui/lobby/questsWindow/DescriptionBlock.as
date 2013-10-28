@@ -1,61 +1,56 @@
-package net.wg.gui.lobby.questsWindow 
+package net.wg.gui.lobby.questsWindow
 {
-    import flash.display.*;
-    import flash.text.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.core.*;
-    
-    public class DescriptionBlock extends scaleform.clik.core.UIComponent
-    {
-        public function DescriptionBlock()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.text.TextField;
+   import flash.display.MovieClip;
+   import scaleform.clik.constants.InvalidationType;
 
-        public function setLabels(arg1:String, arg2:String):void
-        {
-            this._title = arg1;
-            this._descr = arg2;
-            invalidateData();
-            return;
-        }
 
-        protected override function draw():void
-        {
-            var loc1:*=NaN;
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
-            {
-                this.lableTF.text = this._title;
-                this.descrTF.text = this._descr;
-                this.descrTF.y = Math.round(this.lableTF.y + this.lableTF.textHeight + 3);
-                this.lineMC.y = Math.round(this._descr ? this.descrTF.y + this.descrTF.textHeight : this.lableTF.y + this.lableTF.textHeight) + BOTTOM_PADDING;
-                loc1 = Math.round(this.lineMC.y + this.lineMC.height);
-                setSize(this.width, loc1);
-            }
-            return;
-        }
+   public class DescriptionBlock extends UIComponent
+   {
+          
+      public function DescriptionBlock() {
+         super();
+      }
 
-        public override function dispose():void
-        {
-            this.lableTF = null;
-            this.descrTF = null;
-            this.lineMC = null;
-            super.dispose();
-            return;
-        }
+      private static const BOTTOM_PADDING:int = 20;
 
-        internal static const BOTTOM_PADDING:int=20;
+      public var lableTF:TextField;
 
-        public var lableTF:flash.text.TextField;
+      public var descrTF:TextField;
 
-        public var descrTF:flash.text.TextField;
+      public var lineMC:MovieClip;
 
-        public var lineMC:flash.display.MovieClip;
+      private var _title:String = "";
 
-        internal var _title:String="";
+      private var _descr:String = "";
 
-        internal var _descr:String="";
-    }
+      public function setLabels(param1:String, param2:String) : void {
+         this._title = param1;
+         this._descr = param2;
+         invalidateData();
+      }
+
+      override protected function draw() : void {
+         var _loc1_:* = NaN;
+         super.draw();
+         if(isInvalid(InvalidationType.DATA))
+         {
+            this.lableTF.text = this._title;
+            this.descrTF.text = this._descr;
+            this.descrTF.y = Math.round(this.lableTF.y + this.lableTF.textHeight + 3);
+            this.lineMC.y = Math.round(this._descr?this.descrTF.y + this.descrTF.textHeight:this.lableTF.y + this.lableTF.textHeight) + BOTTOM_PADDING;
+            _loc1_ = Math.round(this.lineMC.y + this.lineMC.height);
+            setSize(this.width,_loc1_);
+         }
+      }
+
+      override public function dispose() : void {
+         this.lableTF = null;
+         this.descrTF = null;
+         this.lineMC = null;
+         super.dispose();
+      }
+   }
+
 }

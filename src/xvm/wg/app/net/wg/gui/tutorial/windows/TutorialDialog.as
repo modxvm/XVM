@@ -1,111 +1,97 @@
-package net.wg.gui.tutorial.windows 
+package net.wg.gui.tutorial.windows
 {
-    import flash.events.*;
-    import flash.text.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.tutorial.meta.*;
-    import net.wg.gui.tutorial.meta.impl.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.events.*;
-    
-    public class TutorialDialog extends net.wg.gui.tutorial.meta.impl.TutorialDialogMeta implements net.wg.gui.tutorial.meta.ITutorialDialogMeta
-    {
-        public function TutorialDialog()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.tutorial.meta.impl.TutorialDialogMeta;
+   import net.wg.gui.tutorial.meta.ITutorialDialogMeta;
+   import flash.text.TextField;
+   import net.wg.gui.components.controls.SoundButtonEx;
+   import scaleform.clik.constants.InvalidationType;
+   import scaleform.clik.events.ButtonEvent;
+   import flash.events.Event;
 
-        public function as_setContent(arg1:Object):void
-        {
-            this._data = arg1;
-            invalidate(scaleform.clik.constants.InvalidationType.DATA);
-            return;
-        }
 
-        public function as_updateContent(arg1:Object):void
-        {
-            this._data = arg1;
-            invalidate(scaleform.clik.constants.InvalidationType.DATA);
-            return;
-        }
+   public class TutorialDialog extends TutorialDialogMeta implements ITutorialDialogMeta
+   {
+          
+      public function TutorialDialog() {
+         super();
+      }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            if (this.cancelBtn) 
+      public var message:String;
+
+      public var messageField:TextField;
+
+      public var cancelBtn:SoundButtonEx;
+
+      public var submitBtn:SoundButtonEx;
+
+      protected var _data:Object;
+
+      public function as_setContent(param1:Object) : void {
+         this._data = param1;
+         invalidate(InvalidationType.DATA);
+      }
+
+      public function as_updateContent(param1:Object) : void {
+         this._data = param1;
+         invalidate(InvalidationType.DATA);
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         if(this.cancelBtn)
+         {
+            this.cancelBtn.addEventListener(ButtonEvent.CLICK,this.onCancelClick);
+         }
+         if(this.submitBtn)
+         {
+            this.submitBtn.addEventListener(ButtonEvent.CLICK,this.onSubmitClick);
+         }
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         if((isInvalid(InvalidationType.DATA)) && (this._data))
+         {
+            this.drawData();
+         }
+      }
+
+      override protected function onDispose() : void {
+         super.onDispose();
+         this._data = null;
+         if(this.cancelBtn)
+         {
+            this.cancelBtn.removeEventListener(ButtonEvent.CLICK,this.onCancelClick);
+            this.cancelBtn.dispose();
+            if(this.cancelBtn.parent)
             {
-                this.cancelBtn.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onCancelClick);
+               this.cancelBtn.parent.removeChild(this.cancelBtn);
             }
-            if (this.submitBtn) 
+            this.cancelBtn = null;
+         }
+         if(this.submitBtn)
+         {
+            this.submitBtn.removeEventListener(ButtonEvent.CLICK,this.onSubmitClick);
+            this.submitBtn.dispose();
+            if(this.submitBtn.parent)
             {
-                this.submitBtn.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onSubmitClick);
+               this.submitBtn.parent.removeChild(this.submitBtn);
             }
-            return;
-        }
+            this.submitBtn = null;
+         }
+      }
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA) && this._data) 
-            {
-                this.drawData();
-            }
-            return;
-        }
+      protected function drawData() : void {
+          
+      }
 
-        protected override function onDispose():void
-        {
-            super.onDispose();
-            this._data = null;
-            if (this.cancelBtn) 
-            {
-                this.cancelBtn.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onCancelClick);
-                this.cancelBtn.dispose();
-                if (this.cancelBtn.parent) 
-                {
-                    this.cancelBtn.parent.removeChild(this.cancelBtn);
-                }
-                this.cancelBtn = null;
-            }
-            if (this.submitBtn) 
-            {
-                this.submitBtn.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onSubmitClick);
-                this.submitBtn.dispose();
-                if (this.submitBtn.parent) 
-                {
-                    this.submitBtn.parent.removeChild(this.submitBtn);
-                }
-                this.submitBtn = null;
-            }
-            return;
-        }
+      protected function onSubmitClick(param1:Event) : void {
+         submitS();
+      }
 
-        protected function drawData():void
-        {
-            return;
-        }
+      protected function onCancelClick(param1:Event) : void {
+         cancelS();
+      }
+   }
 
-        protected function onSubmitClick(arg1:flash.events.Event):void
-        {
-            submitS();
-            return;
-        }
-
-        protected function onCancelClick(arg1:flash.events.Event):void
-        {
-            cancelS();
-            return;
-        }
-
-        public var message:String;
-
-        public var messageField:flash.text.TextField;
-
-        public var cancelBtn:net.wg.gui.components.controls.SoundButtonEx;
-
-        public var submitBtn:net.wg.gui.components.controls.SoundButtonEx;
-
-        protected var _data:Object;
-    }
 }

@@ -1,78 +1,64 @@
-package net.wg.data.VO 
+package net.wg.data.VO
 {
-    import net.wg.data.daapi.base.*;
-    
-    public class PointVO extends net.wg.data.daapi.base.DAAPIDataClass
-    {
-        public function PointVO(arg1:Object)
-        {
-            super(arg1);
-            return;
-        }
+   import net.wg.data.daapi.base.DAAPIDataClass;
 
-        public function get id():String
-        {
-            return this._id;
-        }
 
-        public function set id(arg1:String):void
-        {
-            this._id = arg1;
-            return;
-        }
+   public class PointVO extends DAAPIDataClass
+   {
+          
+      public function PointVO(param1:Object) {
+         super(param1);
+      }
 
-        public function get color():String
-        {
-            return this._color;
-        }
+      private var _x:Number = 0;
 
-        public function set color(arg1:String):void
-        {
-            this._color = arg1;
-            return;
-        }
+      private var _y:Number = 0;
 
-        public function get type():String
-        {
-            return this._type;
-        }
+      private var _type:String = "";
 
-        public function set type(arg1:String):void
-        {
-            this._type = arg1;
-            return;
-        }
+      private var _color:String = "";
 
-        public function get y():Number
-        {
-            return this._y;
-        }
+      private var _id:String = "";
 
-        public function set y(arg1:Number):void
-        {
-            this._y = arg1;
-            return;
-        }
+      public function get id() : String {
+         return this._id;
+      }
 
-        public function get x():Number
-        {
-            return this._x;
-        }
+      public function set id(param1:String) : void {
+         this._id = param1;
+      }
 
-        public function set x(arg1:Number):void
-        {
-            this._x = arg1;
-            return;
-        }
+      public function get color() : String {
+         return this._color;
+      }
 
-        internal var _x:Number=0;
+      public function set color(param1:String) : void {
+         this._color = param1;
+      }
 
-        internal var _y:Number=0;
+      public function get type() : String {
+         return this._type;
+      }
 
-        internal var _type:String="";
+      public function set type(param1:String) : void {
+         this._type = param1;
+      }
 
-        internal var _color:String="";
+      public function get y() : Number {
+         return this._y;
+      }
 
-        internal var _id:String="";
-    }
+      public function set y(param1:Number) : void {
+         this._y = param1;
+      }
+
+      public function get x() : Number {
+         return this._x;
+      }
+
+      public function set x(param1:Number) : void {
+         this._x = param1;
+      }
+   }
+
 }

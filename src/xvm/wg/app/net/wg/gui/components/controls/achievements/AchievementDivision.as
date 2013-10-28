@@ -1,65 +1,45 @@
-package net.wg.gui.components.controls.achievements 
+package net.wg.gui.components.controls.achievements
 {
-    import flash.display.*;
-    import flash.events.*;
-    import net.wg.data.VO.*;
-    import net.wg.data.constants.*;
-    
-    public class AchievementDivision extends net.wg.gui.components.controls.achievements.AchievementCommon
-    {
-        public function AchievementDivision()
-        {
-            super();
-            return;
-        }
+   import flash.display.MovieClip;
+   import net.wg.data.constants.SoundTypes;
+   import net.wg.data.constants.SoundManagerStates;
 
-        protected override function configUI():void
-        {
-            soundType = net.wg.data.constants.SoundTypes.CAROUSEL_BTN;
-            soundId = net.wg.data.constants.SoundManagerStates.CAROUSEL_CELL_BTN;
-            super.configUI();
-            return;
-        }
 
-        protected override function handleMouseRollOver(arg1:flash.events.MouseEvent):void
-        {
-            super.handleMouseRollOver(arg1);
-            App.toolTipMgr.showSpecial(net.wg.data.constants.Tooltips.ACHIEVMENT, null, data.type, data.description, data.name, false, true);
-            return;
-        }
+   public class AchievementDivision extends AchievementCommon
+   {
+          
+      public function AchievementDivision() {
+         super();
+      }
 
-        protected override function handleMouseRollOut(arg1:flash.events.MouseEvent):void
-        {
-            super.handleMouseRollOut(arg1);
-            App.toolTipMgr.hide();
-            return;
-        }
+      public var divisionLine:MovieClip = null;
 
-        public override function setData(arg1:Object):void
-        {
-            if (arg1 == null) 
-            {
-                return;
-            }
-            super.setData(net.wg.data.VO.AchievementItemVO(arg1));
-            return;
-        }
+      override protected function configUI() : void {
+         soundType = SoundTypes.CAROUSEL_BTN;
+         soundId = SoundManagerStates.CAROUSEL_CELL_BTN;
+         super.configUI();
+      }
 
-        protected override function applyData():void
-        {
-            if (data == null) 
-            {
-                return;
-            }
-            this.divisionLine.visible = data.hasOwnProperty("showSeparator") ? data.showSeparator : false;
-            super.applyData();
-            if (data.value <= 1 && counter) 
-            {
-                counter.visible = false;
-            }
+      override public function setData(param1:Object) : void {
+         if(param1 == null)
+         {
             return;
-        }
+         }
+         super.setData(param1);
+      }
 
-        public var divisionLine:flash.display.MovieClip=null;
-    }
+      override protected function applyData() : void {
+         if(data == null)
+         {
+            return;
+         }
+         this.divisionLine.visible = data.hasOwnProperty("showSeparator")?data.showSeparator:false;
+         super.applyData();
+         if(data.value <= 1 && (counter))
+         {
+            counter.visible = false;
+         }
+      }
+   }
+
 }

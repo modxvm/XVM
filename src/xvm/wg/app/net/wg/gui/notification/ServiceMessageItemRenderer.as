@@ -1,108 +1,87 @@
-package net.wg.gui.notification 
+package net.wg.gui.notification
 {
-    import flash.display.*;
-    import scaleform.clik.core.*;
-    import scaleform.clik.data.*;
-    import scaleform.clik.interfaces.*;
-    
-    public class ServiceMessageItemRenderer extends net.wg.gui.notification.ServiceMessage implements scaleform.clik.interfaces.IListItemRenderer
-    {
-        public function ServiceMessageItemRenderer()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.interfaces.IListItemRenderer;
+   import scaleform.clik.core.UIComponent;
+   import scaleform.clik.data.ListData;
+   import flash.display.InteractiveObject;
 
-        public function get index():uint
-        {
-            return this._index;
-        }
 
-        public function set index(arg1:uint):void
-        {
-            this._index = arg1;
-            return;
-        }
+   public class ServiceMessageItemRenderer extends ServiceMessage implements IListItemRenderer
+   {
+          
+      public function ServiceMessageItemRenderer() {
+         super();
+      }
 
-        public function get selectable():Boolean
-        {
-            return this._selectable;
-        }
+      private var _index:uint;
 
-        public function set selectable(arg1:Boolean):void
-        {
-            this._selectable = arg1;
-            return;
-        }
+      private var _selectable:Boolean;
 
-        public function setListData(arg1:scaleform.clik.data.ListData):void
-        {
-            this.index = arg1.index;
-            return;
-        }
+      private var _selected:Boolean;
 
-        public function setData(arg1:Object):void
-        {
-            this.data = arg1;
-            return;
-        }
+      private var _owner:UIComponent;
 
-        public override function toString():String
-        {
-            return "[Service message ListItemRenderer " + this.index + ", " + name + "]";
-        }
+      public function get index() : uint {
+         return this._index;
+      }
 
-        protected override function configUI():void
-        {
-            var loc2:*=null;
-            super.configUI();
-            focusTarget = this._owner;
-            var loc3:*;
-            tabChildren = loc3 = false;
-            tabEnabled = loc3 = loc3;
-            _focusable = loc3;
-            var loc1:*=0;
-            while (loc1 < numChildren) 
+      public function set index(param1:uint) : void {
+         this._index = param1;
+      }
+
+      public function get selectable() : Boolean {
+         return this._selectable;
+      }
+
+      public function set selectable(param1:Boolean) : void {
+         this._selectable = param1;
+      }
+
+      public function setListData(param1:ListData) : void {
+         this.index = param1.index;
+      }
+
+      public function setData(param1:Object) : void {
+         this.data = param1;
+      }
+
+      override public function toString() : String {
+         return "[Service message ListItemRenderer " + this.index + ", " + name + "]";
+      }
+
+      override protected function configUI() : void {
+         var _loc2_:InteractiveObject = null;
+         super.configUI();
+         focusTarget = this._owner;
+         _focusable = tabEnabled = tabChildren = false;
+         var _loc1_:* = 0;
+         while(_loc1_ < numChildren)
+         {
+            _loc2_ = getChildAt(_loc1_) as InteractiveObject;
+            if((_loc2_) && (!(_loc2_ == textField)) && !(_loc2_ == btnMoreInfo))
             {
-                loc2 = getChildAt(loc1) as flash.display.InteractiveObject;
-                if (loc2 && !(loc2 == textField) && !(loc2 == btnMoreInfo)) 
-                {
-                    loc2.mouseEnabled = false;
-                }
-                ++loc1;
+               _loc2_.mouseEnabled = false;
             }
-            return;
-        }
+            _loc1_++;
+         }
+      }
 
-        public function get owner():scaleform.clik.core.UIComponent
-        {
-            return this._owner;
-        }
+      public function get owner() : UIComponent {
+         return this._owner;
+      }
 
-        public function set owner(arg1:scaleform.clik.core.UIComponent):void
-        {
-            this._owner = arg1;
-            this.focusTarget = this._owner;
-            return;
-        }
+      public function set owner(param1:UIComponent) : void {
+         this._owner = param1;
+         this.focusTarget = this._owner;
+      }
 
-        public function get selected():Boolean
-        {
-            return this._selected;
-        }
+      public function get selected() : Boolean {
+         return this._selected;
+      }
 
-        public function set selected(arg1:Boolean):void
-        {
-            this._selected = arg1;
-            return;
-        }
+      public function set selected(param1:Boolean) : void {
+         this._selected = param1;
+      }
+   }
 
-        internal var _index:uint;
-
-        internal var _selectable:Boolean;
-
-        internal var _selected:Boolean;
-
-        internal var _owner:scaleform.clik.core.UIComponent;
-    }
 }

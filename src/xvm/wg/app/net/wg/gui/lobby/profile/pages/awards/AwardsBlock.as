@@ -1,73 +1,61 @@
-package net.wg.gui.lobby.profile.pages.awards 
+package net.wg.gui.lobby.profile.pages.awards
 {
-    import flash.display.*;
-    import net.wg.gui.lobby.profile.components.*;
-    import scaleform.clik.constants.*;
-    
-    public class AwardsBlock extends net.wg.gui.lobby.profile.components.AwardsTileListBlock
-    {
-        public function AwardsBlock()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.lobby.profile.components.AwardsTileListBlock;
+   import flash.display.MovieClip;
+   import scaleform.clik.constants.DirectionMode;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            tileList.direction = scaleform.clik.constants.DirectionMode.VERTICAL;
-            tileList.columnCount = 12;
-            return;
-        }
 
-        protected override function applyLabel():void
-        {
-            textField.htmlText = this._showProgress ? labelText + "<font color=\'#7b7969\' size=\'14\'> (" + this._currentCount + "/" + this._totalCount + ")</font>" : labelText;
-            return;
-        }
+   public class AwardsBlock extends AwardsTileListBlock
+   {
+          
+      public function AwardsBlock() {
+         super();
+      }
 
-        public function get showProgress():Boolean
-        {
-            return this._showProgress;
-        }
+      private static const BG_PADDING:uint = 28;
 
-        public function set showProgress(arg1:Boolean):void
-        {
-            this._showProgress = arg1;
-            invalidate(LABEL_INV);
-            return;
-        }
+      public var background:MovieClip;
 
-        protected override function applySizeChanges():void
-        {
-            var loc1:*=Math.round(tileList.y + tileList.height + BG_PADDING);
-            this.background.y = Math.round(loc1 - this.background.height);
-            _height = loc1;
-            return;
-        }
+      private var _showProgress:Boolean = true;
 
-        public function set totalCount(arg1:uint):void
-        {
-            this._totalCount = arg1;
-            invalidate(LABEL_INV);
-            return;
-        }
+      private var _currentCount:uint;
 
-        public function set currentCount(arg1:uint):void
-        {
-            this._currentCount = arg1;
-            invalidate(LABEL_INV);
-            return;
-        }
+      protected var _totalCount:uint;
 
-        internal static const BG_PADDING:uint=28;
+      override protected function configUI() : void {
+         super.configUI();
+         tileList.direction = DirectionMode.VERTICAL;
+         tileList.columnCount = 12;
+      }
 
-        public var background:flash.display.MovieClip;
+      override protected function applyLabel() : void {
+         textField.htmlText = this._showProgress?labelText + "<font color=\'#7b7969\' size=\'14\'> (" + this._currentCount + "/" + this._totalCount + ")</font>":labelText;
+      }
 
-        internal var _showProgress:Boolean=true;
+      public function get showProgress() : Boolean {
+         return this._showProgress;
+      }
 
-        internal var _currentCount:uint;
+      public function set showProgress(param1:Boolean) : void {
+         this._showProgress = param1;
+         invalidate(LABEL_INV);
+      }
 
-        protected var _totalCount:uint;
-    }
+      override protected function applySizeChanges() : void {
+         var _loc1_:Number = Math.round(tileList.y + tileList.height + BG_PADDING);
+         this.background.y = Math.round(_loc1_ - this.background.height);
+         _height = _loc1_;
+      }
+
+      public function set totalCount(param1:uint) : void {
+         this._totalCount = param1;
+         invalidate(LABEL_INV);
+      }
+
+      public function set currentCount(param1:uint) : void {
+         this._currentCount = param1;
+         invalidate(LABEL_INV);
+      }
+   }
+
 }

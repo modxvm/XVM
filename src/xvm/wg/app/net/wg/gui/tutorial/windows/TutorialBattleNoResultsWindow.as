@@ -1,58 +1,49 @@
-package net.wg.gui.tutorial.windows 
+package net.wg.gui.tutorial.windows
 {
-    import flash.text.*;
-    import net.wg.gui.tutorial.meta.*;
-    import net.wg.gui.tutorial.meta.impl.*;
-    import scaleform.clik.constants.*;
-    
-    public class TutorialBattleNoResultsWindow extends net.wg.gui.tutorial.meta.impl.TutorialBattleNoResultsMeta implements net.wg.gui.tutorial.meta.ITutorialBattleNoResultsMeta
-    {
-        public function TutorialBattleNoResultsWindow()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.tutorial.meta.impl.TutorialBattleNoResultsMeta;
+   import net.wg.gui.tutorial.meta.ITutorialBattleNoResultsMeta;
+   import flash.text.TextField;
+   import scaleform.clik.constants.InvalidationType;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            return;
-        }
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA) && this.data) 
-            {
-                this.textField.text = this.data.text;
-            }
-            return;
-        }
+   public class TutorialBattleNoResultsWindow extends TutorialBattleNoResultsMeta implements ITutorialBattleNoResultsMeta
+   {
+          
+      public function TutorialBattleNoResultsWindow() {
+         super();
+      }
 
-        protected override function onDispose():void
-        {
-            super.onDispose();
-            this.data = null;
-            return;
-        }
+      public var textField:TextField;
 
-        public function as_setData(arg1:Object):void
-        {
-            this.data = arg1;
-            invalidate(scaleform.clik.constants.InvalidationType.DATA);
-            return;
-        }
+      protected var data:Object;
 
-        protected override function onPopulate():void
-        {
-            super.onPopulate();
-            window.useBottomBtns = false;
-            window.title = BATTLE_TUTORIAL.WINDOWS_RESULT_TITLE;
-            return;
-        }
+      override protected function configUI() : void {
+         super.configUI();
+      }
 
-        public var textField:flash.text.TextField;
+      override protected function draw() : void {
+         super.draw();
+         if((isInvalid(InvalidationType.DATA)) && (this.data))
+         {
+            this.textField.text = this.data.text;
+         }
+      }
 
-        protected var data:Object;
-    }
+      override protected function onDispose() : void {
+         super.onDispose();
+         this.data = null;
+      }
+
+      public function as_setData(param1:Object) : void {
+         this.data = param1;
+         invalidate(InvalidationType.DATA);
+      }
+
+      override protected function onPopulate() : void {
+         super.onPopulate();
+         window.useBottomBtns = false;
+         window.title = BATTLE_TUTORIAL.WINDOWS_RESULT_TITLE;
+      }
+   }
+
 }

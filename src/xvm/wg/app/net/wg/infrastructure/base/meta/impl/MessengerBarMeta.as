@@ -1,32 +1,29 @@
-package net.wg.infrastructure.base.meta.impl 
+package net.wg.infrastructure.base.meta.impl
 {
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.base.*;
-    
-    public class MessengerBarMeta extends net.wg.infrastructure.base.BaseDAAPIComponent
-    {
-        public function MessengerBarMeta()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.BaseDAAPIComponent;
+   import net.wg.data.constants.Errors;
 
-        public function channelButtonClickS():void
-        {
-            App.utils.asserter.assertNotNull(this.channelButtonClick, "channelButtonClick" + net.wg.data.constants.Errors.CANT_NULL);
-            this.channelButtonClick();
-            return;
-        }
 
-        public function contactsButtonClickS():void
-        {
-            App.utils.asserter.assertNotNull(this.contactsButtonClick, "contactsButtonClick" + net.wg.data.constants.Errors.CANT_NULL);
-            this.contactsButtonClick();
-            return;
-        }
+   public class MessengerBarMeta extends BaseDAAPIComponent
+   {
+          
+      public function MessengerBarMeta() {
+         super();
+      }
 
-        public var channelButtonClick:Function=null;
+      public var channelButtonClick:Function = null;
 
-        public var contactsButtonClick:Function=null;
-    }
+      public var contactsButtonClick:Function = null;
+
+      public function channelButtonClickS() : void {
+         App.utils.asserter.assertNotNull(this.channelButtonClick,"channelButtonClick" + Errors.CANT_NULL);
+         this.channelButtonClick();
+      }
+
+      public function contactsButtonClickS() : void {
+         App.utils.asserter.assertNotNull(this.contactsButtonClick,"contactsButtonClick" + Errors.CANT_NULL);
+         this.contactsButtonClick();
+      }
+   }
+
 }

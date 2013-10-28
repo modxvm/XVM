@@ -1,48 +1,50 @@
-package net.wg.gui.lobby.tankman 
+package net.wg.gui.lobby.tankman
 {
-    public class PersonalCaseRetrainingModel extends Object
-    {
-        public function PersonalCaseRetrainingModel()
-        {
-            this.lightTanks = [];
-            this.mediumTanks = [];
-            this.heavyTanks = [];
-            this.AT_SPG = [];
-            this.SPG = [];
-            super();
-            return;
-        }
 
-        public var credits:Number;
 
-        public var gold:Number;
+   public class PersonalCaseRetrainingModel extends Object
+   {
+          
+      public function PersonalCaseRetrainingModel() {
+         this.lightTanks = [];
+         this.mediumTanks = [];
+         this.heavyTanks = [];
+         this.AT_SPG = [];
+         this.SPG = [];
+         super();
+      }
 
-        public var tankmanCost:Array;
+      public var credits:Number;
 
-        public var vehicles:Array;
+      public var gold:Number;
 
-        public var lightTanks:Array;
+      public var tankmanCost:Array;
 
-        public var mediumTanks:Array;
+      public var vehicles:Array;
 
-        public var heavyTanks:Array;
+      public var lightTanks:Array;
 
-        public var AT_SPG:Array;
+      public var mediumTanks:Array;
 
-        public var SPG:Array;
+      public var heavyTanks:Array;
 
-        public var testData:net.wg.gui.lobby.tankman.PersonalCaseModel=null;
+      public var AT_SPG:Array;
 
-        public var testStats:Object=null;
+      public var SPG:Array;
 
-        public var currentVehicle:net.wg.gui.lobby.tankman.PersonalCaseCurrentVehicle=null;
+      public var testData:PersonalCaseModel = null;
 
-        public var nativeVehicle:Object=null;
+      public var testStats:Object = null;
 
-        public var tankmanID:int;
+      public var currentVehicle:PersonalCaseCurrentVehicle = null;
 
-        public var nationID:int;
+      public var nativeVehicle:Object = null;
 
-        public var specializationLevel:Number;
-    }
+      public var tankmanID:int;
+
+      public var nationID:int;
+
+      public var specializationLevel:Number;
+   }
+
 }

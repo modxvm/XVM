@@ -1,25 +1,24 @@
-package net.wg.gui.lobby.vehicleInfo 
+package net.wg.gui.lobby.vehicleInfo
 {
-    import flash.display.*;
-    import flash.text.*;
-    
-    public class PropBlock extends flash.display.Sprite
-    {
-        public function PropBlock()
-        {
-            super();
-            return;
-        }
+   import flash.display.Sprite;
+   import flash.text.TextField;
 
-        public function setData(arg1:Object):void
-        {
-            this.propValue.text = arg1.value;
-            this.propName.text = MENU.vehicleinfo_params(arg1.name);
-            return;
-        }
 
-        public var propValue:flash.text.TextField;
+   public class PropBlock extends Sprite
+   {
+          
+      public function PropBlock() {
+         super();
+      }
 
-        public var propName:flash.text.TextField;
-    }
+      public var propValue:TextField;
+
+      public var propName:TextField;
+
+      public function setData(param1:Object) : void {
+         this.propValue.text = param1.value;
+         this.propName.text = MENU.vehicleinfo_params(param1.name);
+      }
+   }
+
 }

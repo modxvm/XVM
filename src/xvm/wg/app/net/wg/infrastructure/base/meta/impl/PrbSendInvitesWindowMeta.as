@@ -1,50 +1,43 @@
-package net.wg.infrastructure.base.meta.impl 
+package net.wg.infrastructure.base.meta.impl
 {
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.base.*;
-    
-    public class PrbSendInvitesWindowMeta extends net.wg.infrastructure.base.AbstractWindowView
-    {
-        public function PrbSendInvitesWindowMeta()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.AbstractWindowView;
+   import net.wg.data.constants.Errors;
 
-        public function showErrorS(arg1:String):void
-        {
-            App.utils.asserter.assertNotNull(this.showError, "showError" + net.wg.data.constants.Errors.CANT_NULL);
-            this.showError(arg1);
-            return;
-        }
 
-        public function searchTokenS(arg1:String):void
-        {
-            App.utils.asserter.assertNotNull(this.searchToken, "searchToken" + net.wg.data.constants.Errors.CANT_NULL);
-            this.searchToken(arg1);
-            return;
-        }
+   public class PrbSendInvitesWindowMeta extends AbstractWindowView
+   {
+          
+      public function PrbSendInvitesWindowMeta() {
+         super();
+      }
 
-        public function setOnlineFlagS(arg1:Boolean):void
-        {
-            App.utils.asserter.assertNotNull(this.setOnlineFlag, "setOnlineFlag" + net.wg.data.constants.Errors.CANT_NULL);
-            this.setOnlineFlag(arg1);
-            return;
-        }
+      public var showError:Function = null;
 
-        public function sendInvitesS(arg1:Array, arg2:String):void
-        {
-            App.utils.asserter.assertNotNull(this.sendInvites, "sendInvites" + net.wg.data.constants.Errors.CANT_NULL);
-            this.sendInvites(arg1, arg2);
-            return;
-        }
+      public var searchToken:Function = null;
 
-        public var showError:Function=null;
+      public var setOnlineFlag:Function = null;
 
-        public var searchToken:Function=null;
+      public var sendInvites:Function = null;
 
-        public var setOnlineFlag:Function=null;
+      public function showErrorS(param1:String) : void {
+         App.utils.asserter.assertNotNull(this.showError,"showError" + Errors.CANT_NULL);
+         this.showError(param1);
+      }
 
-        public var sendInvites:Function=null;
-    }
+      public function searchTokenS(param1:String) : void {
+         App.utils.asserter.assertNotNull(this.searchToken,"searchToken" + Errors.CANT_NULL);
+         this.searchToken(param1);
+      }
+
+      public function setOnlineFlagS(param1:Boolean) : void {
+         App.utils.asserter.assertNotNull(this.setOnlineFlag,"setOnlineFlag" + Errors.CANT_NULL);
+         this.setOnlineFlag(param1);
+      }
+
+      public function sendInvitesS(param1:Array, param2:String) : void {
+         App.utils.asserter.assertNotNull(this.sendInvites,"sendInvites" + Errors.CANT_NULL);
+         this.sendInvites(param1,param2);
+      }
+   }
+
 }

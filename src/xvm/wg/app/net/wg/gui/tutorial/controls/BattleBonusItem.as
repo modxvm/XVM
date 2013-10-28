@@ -1,133 +1,116 @@
-package net.wg.gui.tutorial.controls 
+package net.wg.gui.tutorial.controls
 {
-    import flash.text.*;
-    import net.wg.utils.*;
-    import scaleform.clik.core.*;
-    import scaleform.gfx.*;
-    
-    public class BattleBonusItem extends scaleform.clik.core.UIComponent
-    {
-        public function BattleBonusItem()
-        {
-            super();
+   import scaleform.clik.core.UIComponent;
+   import flash.text.TextField;
+   import flash.text.TextFieldAutoSize;
+   import net.wg.utils.ILocale;
+   import scaleform.gfx.TextFieldEx;
+
+
+   public class BattleBonusItem extends UIComponent
+   {
+          
+      public function BattleBonusItem() {
+         super();
+      }
+
+      private static const STATE_HAS_BONUSES:String = "has_bonuses";
+
+      private static const STATE_NO_BONUSES:String = "no_bonuses";
+
+      private var _hasBonusesTitle:String = "";
+
+      private var _noBonusesTitle:String = "";
+
+      private var _noBonusesDescription:String = "";
+
+      private var _credits:Number;
+
+      private var _freeXP:Number;
+
+      public var titleField:TextField;
+
+      public var descriptionField:TextField;
+
+      public var valueField:TextField;
+
+      public function get hasBonusesTitle() : String {
+         return this._hasBonusesTitle;
+      }
+
+      public function set hasBonusesTitle(param1:String) : void {
+         this._hasBonusesTitle = param1;
+         invalidate();
+      }
+
+      public function get noBonusesTitle() : String {
+         return this._noBonusesTitle;
+      }
+
+      public function set noBonusesTitle(param1:String) : void {
+         this._noBonusesTitle = param1;
+         invalidate();
+      }
+
+      public function get noBonusesDescription() : String {
+         return this._noBonusesDescription;
+      }
+
+      public function set noBonusesDescription(param1:String) : void {
+         this._noBonusesDescription = param1;
+         invalidate();
+      }
+
+      public function setBonuses(param1:Number, param2:Number) : void {
+         if(this._credits == param1 && this._freeXP == param2)
+         {
             return;
-        }
+         }
+         this._credits = isNaN(param1)?0:param1;
+         this._freeXP = isNaN(param2)?0:param2;
+         invalidate();
+      }
 
-        public function get hasBonusesTitle():String
-        {
-            return this._hasBonusesTitle;
-        }
+      override protected function configUI() : void {
+         super.configUI();
+         this.titleField.wordWrap = true;
+         this.descriptionField.wordWrap = true;
+         this.valueField.wordWrap = true;
+         this.valueField.autoSize = TextFieldAutoSize.RIGHT;
+      }
 
-        public function set hasBonusesTitle(arg1:String):void
-        {
-            this._hasBonusesTitle = arg1;
-            invalidate();
-            return;
-        }
+      override protected function draw() : void {
+         super.draw();
+         var _loc1_:Boolean = this._credits > 0 || this._freeXP > 0;
+         if(_loc1_)
+         {
+            gotoAndStop(STATE_HAS_BONUSES);
+            this.setBonusesTextFields();
+         }
+         else
+         {
+            gotoAndStop(STATE_NO_BONUSES);
+            this.setNoBonusesTextFields();
+         }
+      }
 
-        public function get noBonusesTitle():String
-        {
-            return this._noBonusesTitle;
-        }
+      private function setBonusesTextFields() : void {
+         this.titleField.autoSize = TextFieldAutoSize.RIGHT;
+         this.titleField.text = this._hasBonusesTitle;
+         var _loc1_:ILocale = App.utils.locale;
+         this.valueField.htmlText = _loc1_.integer(this._credits) + "<br/>" + _loc1_.integer(this._freeXP);
+         this.descriptionField.autoSize = TextFieldAutoSize.RIGHT;
+         this.descriptionField.htmlText = _loc1_.makeString(BATTLE_TUTORIAL.LABELS_CREDITS) + "<br/>" + _loc1_.makeString(BATTLE_TUTORIAL.LABELS_FREE_XP);
+         TextFieldEx.setVerticalAlign(this.titleField,TextFieldEx.VALIGN_CENTER);
+         TextFieldEx.setVerticalAlign(this.valueField,TextFieldEx.VALIGN_CENTER);
+         TextFieldEx.setVerticalAlign(this.descriptionField,TextFieldEx.VALIGN_CENTER);
+      }
 
-        public function set noBonusesTitle(arg1:String):void
-        {
-            this._noBonusesTitle = arg1;
-            invalidate();
-            return;
-        }
+      private function setNoBonusesTextFields() : void {
+         this.titleField.autoSize = TextFieldAutoSize.CENTER;
+         this.titleField.text = this._noBonusesTitle;
+         TextFieldEx.setVerticalAlign(this.titleField,TextFieldEx.VALIGN_CENTER);
+      }
+   }
 
-        public function get noBonusesDescription():String
-        {
-            return this._noBonusesDescription;
-        }
-
-        public function set noBonusesDescription(arg1:String):void
-        {
-            this._noBonusesDescription = arg1;
-            invalidate();
-            return;
-        }
-
-        public function setBonuses(arg1:Number, arg2:Number):void
-        {
-            if (this._credits == arg1 && this._freeXP == arg2) 
-            {
-                return;
-            }
-            this._credits = isNaN(arg1) ? 0 : arg1;
-            this._freeXP = isNaN(arg2) ? 0 : arg2;
-            invalidate();
-            return;
-        }
-
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.titleField.wordWrap = true;
-            this.descriptionField.wordWrap = true;
-            this.valueField.wordWrap = true;
-            this.valueField.autoSize = flash.text.TextFieldAutoSize.RIGHT;
-            return;
-        }
-
-        protected override function draw():void
-        {
-            super.draw();
-            var loc1:*=this._credits > 0 || this._freeXP > 0;
-            if (loc1) 
-            {
-                gotoAndStop(STATE_HAS_BONUSES);
-                this.setBonusesTextFields();
-            }
-            else 
-            {
-                gotoAndStop(STATE_NO_BONUSES);
-                this.setNoBonusesTextFields();
-            }
-            return;
-        }
-
-        internal function setBonusesTextFields():void
-        {
-            this.titleField.autoSize = flash.text.TextFieldAutoSize.RIGHT;
-            this.titleField.text = this._hasBonusesTitle;
-            var loc1:*=App.utils.locale;
-            this.valueField.htmlText = loc1.integer(this._credits) + "<br/>" + loc1.integer(this._freeXP);
-            this.descriptionField.autoSize = flash.text.TextFieldAutoSize.RIGHT;
-            this.descriptionField.htmlText = loc1.makeString(BATTLE_TUTORIAL.LABELS_CREDITS) + "<br/>" + loc1.makeString(BATTLE_TUTORIAL.LABELS_FREE_XP);
-            scaleform.gfx.TextFieldEx.setVerticalAlign(this.titleField, scaleform.gfx.TextFieldEx.VALIGN_CENTER);
-            scaleform.gfx.TextFieldEx.setVerticalAlign(this.valueField, scaleform.gfx.TextFieldEx.VALIGN_CENTER);
-            scaleform.gfx.TextFieldEx.setVerticalAlign(this.descriptionField, scaleform.gfx.TextFieldEx.VALIGN_CENTER);
-            return;
-        }
-
-        internal function setNoBonusesTextFields():void
-        {
-            this.titleField.autoSize = flash.text.TextFieldAutoSize.CENTER;
-            this.titleField.text = this._noBonusesTitle;
-            scaleform.gfx.TextFieldEx.setVerticalAlign(this.titleField, scaleform.gfx.TextFieldEx.VALIGN_CENTER);
-            return;
-        }
-
-        internal static const STATE_HAS_BONUSES:String="has_bonuses";
-
-        internal static const STATE_NO_BONUSES:String="no_bonuses";
-
-        internal var _hasBonusesTitle:String="";
-
-        internal var _noBonusesTitle:String="";
-
-        internal var _noBonusesDescription:String="";
-
-        internal var _credits:Number;
-
-        internal var _freeXP:Number;
-
-        public var titleField:flash.text.TextField;
-
-        public var descriptionField:flash.text.TextField;
-
-        public var valueField:flash.text.TextField;
-    }
 }

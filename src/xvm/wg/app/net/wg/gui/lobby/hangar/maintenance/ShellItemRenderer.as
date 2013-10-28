@@ -1,277 +1,291 @@
-package net.wg.gui.lobby.hangar.maintenance 
+package net.wg.gui.lobby.hangar.maintenance
 {
-    import flash.display.*;
-    import flash.events.*;
-    import flash.text.*;
-    import net.wg.data.constants.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.events.*;
-    import net.wg.gui.lobby.hangar.maintenance.data.*;
-    import net.wg.utils.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.data.*;
-    import scaleform.clik.events.*;
-    import scaleform.gfx.*;
-    
-    public class ShellItemRenderer extends net.wg.gui.components.controls.SoundListItemRenderer
-    {
-        public function ShellItemRenderer()
-        {
-            super();
-            this.select.handleScroll = false;
-            soundType = "shellItemRenderer";
-            this.initCounterBgWidth = this.countSliderBg.width;
-            return;
-        }
+   import net.wg.gui.components.controls.SoundListItemRenderer;
+   import net.wg.gui.components.controls.DropdownMenu;
+   import flash.text.TextField;
+   import net.wg.gui.components.controls.IconText;
+   import flash.display.MovieClip;
+   import net.wg.gui.components.controls.Slider;
+   import net.wg.gui.components.controls.NumericStepper;
+   import net.wg.gui.components.controls.UILoaderAlt;
+   import net.wg.utils.IEventCollector;
+   import scaleform.clik.events.SliderEvent;
+   import flash.events.MouseEvent;
+   import scaleform.clik.events.IndexEvent;
+   import scaleform.clik.events.ListEvent;
+   import net.wg.gui.events.ShellRendererEvent;
+   import scaleform.clik.constants.InvalidationType;
+   import net.wg.utils.ILocale;
+   import scaleform.clik.data.DataProvider;
+   import net.wg.data.constants.Currencies;
+   import net.wg.gui.lobby.hangar.maintenance.data.ShellVO;
+   import net.wg.data.constants.Tooltips;
+   import scaleform.gfx.MouseEventEx;
+   import net.wg.gui.events.ModuleInfoEvent;
 
-        public override function setData(arg1:Object):void
-        {
-            var loc1:*=App.utils.events;
-            if (this.shell) 
+
+   public class ShellItemRenderer extends SoundListItemRenderer
+   {
+          
+      public function ShellItemRenderer() {
+         super();
+         this.select.handleScroll = false;
+         soundType = "shellItemRenderer";
+         this.initCounterBgWidth = this.countSliderBg.width;
+         this.select.focusIndicator = this.emptyFocusIndicator;
+      }
+
+      private static const RENDERER_HEIGHT:Number = 45;
+
+      private static const MULTY_CHARS:String = " x ";
+
+      private static const TO_BUY_POS:int = 775;
+
+      public var initCounterBgWidth:int = 0;
+
+      public var select:DropdownMenu;
+
+      public var countLabel:TextField;
+
+      public var toBuy:IconText;
+
+      public var price:IconText;
+
+      public var toBuyTf:TextField;
+
+      public var toBuyDropdown:DropdownMenu;
+
+      public var countSliderBg:MovieClip;
+
+      public var countSlider:Slider;
+
+      public var countStepper:NumericStepper;
+
+      public var nameLbl:TextField;
+
+      public var descrLbl:TextField;
+
+      public var icon:UILoaderAlt;
+
+      public var emptyFocusIndicator:MovieClip;
+
+      override public function dispose() : void {
+         var _loc1_:IEventCollector = App.utils.events;
+         _loc1_.removeEvent(this.countSlider,SliderEvent.VALUE_CHANGE,this.onSliderValueChange);
+         _loc1_.removeEvent(this.countSlider,MouseEvent.ROLL_OVER,this.onRollOut);
+         _loc1_.removeEvent(this.countStepper,IndexEvent.INDEX_CHANGE,this.onStepperValueChange);
+         _loc1_.removeEvent(this.toBuyDropdown,ListEvent.INDEX_CHANGE,this.onShellCurrencyChanged);
+         _loc1_.removeEvent(this.select,ListEvent.INDEX_CHANGE,this.onShellOrderChange);
+         _loc1_.removeEvent(this,MouseEvent.ROLL_OVER,this.onRollOver);
+         _loc1_.removeEvent(this,MouseEvent.ROLL_OUT,this.onRollOut);
+         _loc1_.removeEvent(this,MouseEvent.CLICK,this.onClick);
+         this.select.dispose();
+         this.select = null;
+         this.countLabel = null;
+         this.toBuy.dispose();
+         this.toBuy = null;
+         this.price.dispose();
+         this.price = null;
+         this.toBuyTf = null;
+         this.toBuyDropdown.dispose();
+         this.toBuyDropdown = null;
+         this.countSliderBg = null;
+         this.countSlider.dispose();
+         this.countSlider = null;
+         this.countStepper.dispose();
+         this.countStepper = null;
+         this.nameLbl = null;
+         this.descrLbl = null;
+         this.icon.dispose();
+         this.icon = null;
+         super.dispose();
+      }
+
+      override public function setData(param1:Object) : void {
+         var _loc2_:IEventCollector = App.utils.events;
+         if(this.shell)
+         {
+            _loc2_.removeEvent(this.shell,ShellRendererEvent.USER_COUNT_CHANGED,this.onUserCountChange,false);
+         }
+         super.setData(param1);
+         if(this.shell)
+         {
+            _loc2_.addEvent(this.shell,ShellRendererEvent.USER_COUNT_CHANGED,this.onUserCountChange,false,0,true);
+         }
+         invalidate(InvalidationType.DATA);
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         focusTarget = this.select;
+         _focusable = tabEnabled = tabChildren = mouseChildren = true;
+         this.countSliderBg.mouseEnabled = this.countSliderBg.mouseChildren = false;
+         this.icon.mouseEnabled = this.icon.mouseChildren = false;
+         this.nameLbl.mouseEnabled = false;
+         this.descrLbl.mouseEnabled = false;
+         this.countLabel.mouseEnabled = false;
+         this.toBuy.mouseEnabled = this.toBuy.mouseChildren = false;
+         this.toBuyTf.mouseEnabled = false;
+         this.price.mouseEnabled = this.price.mouseChildren = false;
+         var _loc1_:IEventCollector = App.utils.events;
+         _loc1_.addEvent(this.countSlider,SliderEvent.VALUE_CHANGE,this.onSliderValueChange);
+         _loc1_.addEvent(this.countSlider,MouseEvent.ROLL_OVER,this.onRollOut);
+         _loc1_.addEvent(this.countStepper,IndexEvent.INDEX_CHANGE,this.onStepperValueChange);
+         _loc1_.addEvent(this.toBuyDropdown,ListEvent.INDEX_CHANGE,this.onShellCurrencyChanged);
+         _loc1_.addEvent(this.select,ListEvent.INDEX_CHANGE,this.onShellOrderChange);
+         _loc1_.addEvent(this,MouseEvent.ROLL_OVER,this.onRollOver);
+         _loc1_.addEvent(this,MouseEvent.ROLL_OUT,this.onRollOut);
+         _loc1_.addEvent(this,MouseEvent.CLICK,this.onClick);
+      }
+
+      override protected function draw() : void {
+         var _loc1_:ILocale = null;
+         super.draw();
+         if(isInvalid(InvalidationType.DATA))
+         {
+            this.toBuyDropdown.visible = false;
+            this.toBuyTf.visible = false;
+            mouseChildren = true;
+            this.icon.mouseEnabled = false;
+            this.nameLbl.mouseEnabled = false;
+            this.descrLbl.mouseEnabled = false;
+            focusable = true;
+            if(this.shell)
             {
-                loc1.removeEvent(this.shell, net.wg.gui.events.ShellRendererEvent.USER_COUNT_CHANGED, this.onUserCountChange, false);
+               this.icon.source = this.shell.icon;
+               if(this.shell.prices[1] > 0 && this.shell.prices[0] > 0 && (this.shell.goldShellsForCredits))
+               {
+                  this.toBuyDropdown.visible = this.shell.goldShellsForCredits;
+                  this.toBuyTf.visible = this.shell.goldShellsForCredits;
+                  this.toBuy.visible = !this.shell.goldShellsForCredits;
+                  _loc1_ = App.utils.locale;
+                  this.toBuyDropdown.dataProvider = new DataProvider([_loc1_.htmlTextWithIcon(_loc1_.integer(this.shell.prices[0]),Currencies.CREDITS),_loc1_.htmlTextWithIcon(_loc1_.gold(this.shell.prices[1]),Currencies.GOLD)]);
+                  this.toBuyDropdown.selectedIndex = this.shell.currency == Currencies.CREDITS?0:1;
+                  this.price.icon = this.shell.currency;
+               }
+               else
+               {
+                  this.toBuyDropdown.visible = false;
+                  this.toBuyTf.visible = false;
+                  this.toBuy.visible = true;
+               }
+               this.nameLbl.text = this.shell.ammoName;
+               this.descrLbl.text = this.shell.tableName;
+               this.onUserCountChange();
+               this.select.menuRowCount = data.list.length;
+               this.select.dataProvider = new DataProvider(data.list);
+               this.select.menuOffset.top = -RENDERER_HEIGHT - Math.round((data.list.length-1) * RENDERER_HEIGHT / 2);
+               this.select.selectedIndex = -1;
+               visible = true;
+               if(this.select.isOpen())
+               {
+                  this.select.close();
+                  this.select.open();
+               }
+               if(this.select.hitTestPoint(App.stage.mouseX,App.stage.mouseY))
+               {
+                  this.onRollOver();
+               }
             }
-            super.setData(arg1);
-            if (this.shell) 
+            else
             {
-                loc1.addEvent(this.shell, net.wg.gui.events.ShellRendererEvent.USER_COUNT_CHANGED, this.onUserCountChange, false, 0, true);
+               visible = false;
             }
-            invalidate(scaleform.clik.constants.InvalidationType.DATA);
-            return;
-        }
+         }
+      }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            var loc1:*=App.utils.events;
-            loc1.addEvent(this.countSlider, scaleform.clik.events.SliderEvent.VALUE_CHANGE, this.onSliderValueChange);
-            loc1.addEvent(this.countStepper, scaleform.clik.events.IndexEvent.INDEX_CHANGE, this.onStepperValueChange);
-            loc1.addEvent(this.toBuyDropdown, scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onShellCurrencyChanged);
-            loc1.addEvent(this.select, scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onShellOrderChange);
-            loc1.addEvent(this, flash.events.MouseEvent.ROLL_OVER, this.onRollOver);
-            loc1.addEvent(this, flash.events.MouseEvent.ROLL_OUT, this.onRollOut);
-            loc1.addEvent(this, flash.events.MouseEvent.CLICK, this.onClick);
-            return;
-        }
+      private function get shell() : ShellVO {
+         return data as ShellVO;
+      }
 
-        public override function dispose():void
-        {
-            var loc1:*=App.utils.events;
-            loc1.removeEvent(this.countSlider, scaleform.clik.events.SliderEvent.VALUE_CHANGE, this.onSliderValueChange);
-            loc1.removeEvent(this.countStepper, scaleform.clik.events.IndexEvent.INDEX_CHANGE, this.onStepperValueChange);
-            loc1.removeEvent(this.toBuyDropdown, scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onShellCurrencyChanged);
-            loc1.removeEvent(this.select, scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onShellOrderChange);
-            loc1.removeEvent(this, flash.events.MouseEvent.ROLL_OVER, this.onRollOver);
-            loc1.removeEvent(this, flash.events.MouseEvent.ROLL_OUT, this.onRollOut);
-            loc1.removeEvent(this, flash.events.MouseEvent.CLICK, this.onClick);
-            super.dispose();
-            return;
-        }
+      private function onSliderValueChange(param1:SliderEvent) : void {
+         App.toolTipMgr.hide();
+         if(this.countStepper.value != this.countSlider.value)
+         {
+            this.shell.userCount = this.countStepper.value = this.countSlider.value;
+         }
+      }
 
-        protected override function draw():void
-        {
-            var loc1:*=null;
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+      private function onStepperValueChange(param1:IndexEvent) : void {
+         if(this.countStepper.value != this.countSlider.value)
+         {
+            this.shell.userCount = this.countSlider.value = this.countStepper.value;
+         }
+      }
+
+      private function onShellCurrencyChanged(param1:ListEvent) : void {
+         this.price.icon = this.toBuyDropdown.selectedIndex == 0?Currencies.CREDITS:Currencies.GOLD;
+         this.shell.currency = this.toBuyDropdown.selectedIndex == 0?Currencies.CREDITS:Currencies.GOLD;
+         this.onUserCountChange();
+      }
+
+      private function onShellOrderChange(param1:ListEvent) : void {
+         if(this.select.selectedIndex == -1 || this.shell.id == this.shell.list[this.select.selectedIndex].id)
+         {
+            return;
+         }
+         dispatchEvent(new ShellRendererEvent(ShellRendererEvent.CHANGE_ORDER,this.shell,this.shell.list[this.select.selectedIndex]));
+      }
+
+      private function updateShellsPrice() : void {
+         var _loc1_:int = this.shell.buyShellsCount;
+         var _loc2_:* = 0;
+         var _loc3_:* = "";
+         var _loc4_:ILocale = App.utils.locale;
+         if(this.toBuyDropdown.visible)
+         {
+            _loc2_ = this.shell.prices[this.toBuyDropdown.selectedIndex];
+         }
+         else
+         {
+            _loc2_ = this.shell.prices[this.shell.currency == Currencies.CREDITS?0:1];
+            _loc3_ = this.shell.currency == Currencies.CREDITS?_loc4_.integer(_loc2_):_loc4_.gold(_loc2_);
+         }
+         this.toBuy.icon = this.shell.currency;
+         this.price.icon = this.shell.currency;
+         this.toBuy.textColor = this.price.textColor = Currencies.TEXT_COLORS[this.shell.currency];
+         this.toBuyTf.text = _loc1_ + MULTY_CHARS;
+         this.toBuy.text = _loc1_ + MULTY_CHARS + _loc3_;
+         this.price.text = this.shell.currency == Currencies.CREDITS?_loc4_.integer(_loc2_ * _loc1_):_loc4_.gold(_loc2_ * _loc1_);
+         this.toBuy.enabled = this.price.enabled = !(_loc1_ == 0);
+         this.toBuy.mouseEnabled = this.price.mouseEnabled = false;
+         this.toBuyTf.alpha = _loc1_ == 0?0.3:1;
+         this.toBuy.validateNow();
+         this.toBuy.x = Math.round(TO_BUY_POS - this.toBuy.width + this.toBuy.textField.textWidth / 2 + 10);
+         dispatchEvent(new ShellRendererEvent(ShellRendererEvent.TOTAL_PRICE_CHANGED));
+      }
+
+      private function onUserCountChange(param1:ShellRendererEvent=null) : void {
+         this.countSlider.maximum = this.countStepper.maximum = this.shell.maxAmmo;
+         this.countSlider.snapInterval = this.countStepper.stepSize = this.shell.step;
+         this.countSlider.value = this.shell.userCount;
+         this.countSliderBg.width = this.initCounterBgWidth * this.shell.possibleMax / this.shell.maxAmmo;
+         var _loc2_:Number = data.count - this.countSlider.value + data.inventoryCount;
+         this.countLabel.text = App.utils.locale.integer(_loc2_ > 0?_loc2_:0);
+         this.countLabel.alpha = _loc2_ > 0?1:0.3;
+         this.updateShellsPrice();
+      }
+
+      private function onRollOver(param1:MouseEvent=null) : void {
+         App.toolTipMgr.showSpecial(Tooltips.TECH_MAIN_SHELL,null,data.id,data.prices,data.inventoryCount,data.count);
+      }
+
+      private function onRollOut(param1:MouseEvent) : void {
+         App.toolTipMgr.hide();
+      }
+
+      private function onClick(param1:MouseEvent) : void {
+         var _loc2_:MouseEventEx = null;
+         App.toolTipMgr.hide();
+         if(param1  is  MouseEventEx)
+         {
+            _loc2_ = param1 as MouseEventEx;
+            if(_loc2_.buttonIdx == MouseEventEx.RIGHT_BUTTON)
             {
-                this.toBuyDropdown.visible = false;
-                this.toBuyTf.visible = false;
-                mouseChildren = true;
-                this.icon.mouseEnabled = false;
-                this.nameLbl.mouseEnabled = false;
-                this.descrLbl.mouseEnabled = false;
-                focusable = true;
-                if (this.shell) 
-                {
-                    this.icon.source = this.shell.icon;
-                    if (this.shell.prices[1] > 0 && this.shell.prices[0] > 0 && this.shell.goldShellsForCredits) 
-                    {
-                        this.toBuyDropdown.visible = this.shell.goldShellsForCredits;
-                        this.toBuyTf.visible = this.shell.goldShellsForCredits;
-                        this.toBuy.visible = !this.shell.goldShellsForCredits;
-                        loc1 = App.utils.locale;
-                        this.toBuyDropdown.dataProvider = new scaleform.clik.data.DataProvider([loc1.htmlTextWithIcon(loc1.integer(this.shell.prices[0]), net.wg.data.constants.Currencies.CREDITS), loc1.htmlTextWithIcon(loc1.gold(this.shell.prices[1]), net.wg.data.constants.Currencies.GOLD)]);
-                        this.toBuyDropdown.selectedIndex = this.shell.currency != net.wg.data.constants.Currencies.CREDITS ? 1 : 0;
-                        this.price.icon = this.shell.currency;
-                    }
-                    else 
-                    {
-                        this.toBuyDropdown.visible = false;
-                        this.toBuyTf.visible = false;
-                        this.toBuy.visible = true;
-                    }
-                    this.nameLbl.text = this.shell.ammoName;
-                    this.descrLbl.text = this.shell.tableName;
-                    this.onUserCountChange();
-                    this.select.menuRowCount = data.list.length;
-                    this.select.dataProvider = new scaleform.clik.data.DataProvider(data.list);
-                    this.select.menuOffset.top = -RENDERER_HEIGHT - Math.round((data.list.length - 1) * RENDERER_HEIGHT / 2);
-                    this.select.selectedIndex = -1;
-                    visible = true;
-                    if (this.select.isOpen()) 
-                    {
-                        this.select.close();
-                        this.select.open();
-                    }
-                    if (this.select.hitTestPoint(App.stage.mouseX, App.stage.mouseY)) 
-                    {
-                        this.onRollOver();
-                    }
-                }
-                else 
-                {
-                    visible = false;
-                }
+               dispatchEvent(new ModuleInfoEvent(ModuleInfoEvent.SHOW_INFO,ShellVO(data).id));
             }
-            return;
-        }
+         }
+      }
+   }
 
-        internal function get shell():net.wg.gui.lobby.hangar.maintenance.data.ShellVO
-        {
-            return data as net.wg.gui.lobby.hangar.maintenance.data.ShellVO;
-        }
-
-        internal function onSliderValueChange(arg1:scaleform.clik.events.SliderEvent):void
-        {
-            if (this.countStepper.value != this.countSlider.value) 
-            {
-                var loc1:*;
-                this.countStepper.value = loc1 = this.countSlider.value;
-                this.shell.userCount = loc1;
-            }
-            return;
-        }
-
-        internal function onStepperValueChange(arg1:scaleform.clik.events.IndexEvent):void
-        {
-            if (this.countStepper.value != this.countSlider.value) 
-            {
-                var loc1:*;
-                this.countSlider.value = loc1 = this.countStepper.value;
-                this.shell.userCount = loc1;
-            }
-            return;
-        }
-
-        internal function onShellCurrencyChanged(arg1:scaleform.clik.events.ListEvent):void
-        {
-            this.price.icon = this.toBuyDropdown.selectedIndex != 0 ? net.wg.data.constants.Currencies.GOLD : net.wg.data.constants.Currencies.CREDITS;
-            this.shell.currency = this.toBuyDropdown.selectedIndex != 0 ? net.wg.data.constants.Currencies.GOLD : net.wg.data.constants.Currencies.CREDITS;
-            this.onUserCountChange();
-            return;
-        }
-
-        internal function onShellOrderChange(arg1:scaleform.clik.events.ListEvent):void
-        {
-            if (this.select.selectedIndex == -1 || this.shell.id == this.shell.list[this.select.selectedIndex].id) 
-            {
-                return;
-            }
-            dispatchEvent(new net.wg.gui.events.ShellRendererEvent(net.wg.gui.events.ShellRendererEvent.CHANGE_ORDER, this.shell, this.shell.list[this.select.selectedIndex]));
-            return;
-        }
-
-        internal function updateShellsPrice():void
-        {
-            var loc1:*=this.shell.buyShellsCount;
-            var loc2:*=0;
-            var loc3:*="";
-            var loc4:*=App.utils.locale;
-            if (this.toBuyDropdown.visible) 
-            {
-                loc2 = this.shell.prices[this.toBuyDropdown.selectedIndex];
-            }
-            else 
-            {
-                loc2 = this.shell.prices[this.shell.currency != net.wg.data.constants.Currencies.CREDITS ? 1 : 0];
-                loc3 = this.shell.currency != net.wg.data.constants.Currencies.CREDITS ? loc4.gold(loc2) : loc4.integer(loc2);
-            }
-            this.toBuy.icon = this.shell.currency;
-            this.price.icon = this.shell.currency;
-            this.toBuy.textColor = net.wg.data.constants.Currencies.TEXT_COLORS[this.shell.currency];
-            this.toBuyTf.text = loc1 + MULTY_CHARS;
-            this.toBuy.text = loc1 + MULTY_CHARS + loc3;
-            this.price.textColor = net.wg.data.constants.Currencies.TEXT_COLORS[this.shell.currency];
-            this.price.text = this.shell.currency != net.wg.data.constants.Currencies.CREDITS ? loc4.gold(loc2 * loc1) : loc4.integer(loc2 * loc1);
-            var loc5:*;
-            this.price.enabled = loc5 = !(loc1 == 0);
-            this.toBuy.enabled = loc5;
-            this.toBuyTf.alpha = loc1 != 0 ? 1 : 0.3;
-            dispatchEvent(new net.wg.gui.events.ShellRendererEvent(net.wg.gui.events.ShellRendererEvent.TOTAL_PRICE_CHANGED));
-            return;
-        }
-
-        internal function onUserCountChange(arg1:net.wg.gui.events.ShellRendererEvent=null):void
-        {
-            var loc2:*;
-            this.countStepper.maximum = loc2 = this.shell.maxAmmo;
-            this.countSlider.maximum = loc2;
-            this.countStepper.stepSize = loc2 = this.shell.step;
-            this.countSlider.snapInterval = loc2;
-            this.countSlider.value = this.shell.userCount;
-            this.countSliderBg.width = this.initCounterBgWidth * this.shell.possibleMax / this.shell.maxAmmo;
-            var loc1:*=data.count - this.countSlider.value + data.inventoryCount;
-            this.countLabel.text = App.utils.locale.integer(loc1 > 0 ? loc1 : 0);
-            this.countLabel.alpha = loc1 > 0 ? 1 : 0.3;
-            this.updateShellsPrice();
-            return;
-        }
-
-        internal function onRollOver(arg1:flash.events.MouseEvent=null):void
-        {
-            App.toolTipMgr.showSpecial(net.wg.data.constants.Tooltips.TECH_MAIN_SHELL, null, data.id, data.prices, data.inventoryCount, data.count);
-            return;
-        }
-
-        internal function onRollOut(arg1:flash.events.MouseEvent):void
-        {
-            App.toolTipMgr.hide();
-            return;
-        }
-
-        internal function onClick(arg1:flash.events.MouseEvent):void
-        {
-            var loc1:*=null;
-            App.toolTipMgr.hide();
-            if (arg1 is scaleform.gfx.MouseEventEx) 
-            {
-                loc1 = arg1 as scaleform.gfx.MouseEventEx;
-                if (loc1.buttonIdx == scaleform.gfx.MouseEventEx.RIGHT_BUTTON) 
-                {
-                    dispatchEvent(new net.wg.gui.events.ModuleInfoEvent(net.wg.gui.events.ModuleInfoEvent.SHOW_INFO, net.wg.gui.lobby.hangar.maintenance.data.ShellVO(data).id));
-                }
-            }
-            return;
-        }
-
-        internal static const RENDERER_HEIGHT:Number=45;
-
-        internal static const MULTY_CHARS:String=" x ";
-
-        public var initCounterBgWidth:int=0;
-
-        public var select:net.wg.gui.components.controls.DropdownMenu;
-
-        public var countLabel:flash.text.TextField;
-
-        public var toBuy:net.wg.gui.components.controls.IconText;
-
-        public var price:net.wg.gui.components.controls.IconText;
-
-        public var toBuyTf:flash.text.TextField;
-
-        public var toBuyDropdown:net.wg.gui.components.controls.DropdownMenu;
-
-        public var countSliderBg:flash.display.MovieClip;
-
-        public var countSlider:net.wg.gui.components.controls.Slider;
-
-        public var countStepper:net.wg.gui.components.controls.NumericStepper;
-
-        public var nameLbl:flash.text.TextField;
-
-        public var descrLbl:flash.text.TextField;
-
-        public var icon:net.wg.gui.components.controls.UILoaderAlt;
-    }
 }

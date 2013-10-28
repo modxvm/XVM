@@ -1,29 +1,28 @@
-package net.wg.gui.lobby.hangar.crew 
+package net.wg.gui.lobby.hangar.crew
 {
-    import net.wg.gui.components.controls.*;
-    import scaleform.clik.events.*;
-    import scaleform.clik.interfaces.*;
-    
-    public class CrewScrollingList extends net.wg.gui.components.controls.ScrollingListEx
-    {
-        public function CrewScrollingList()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.components.controls.ScrollingListEx;
+   import scaleform.clik.events.InputEvent;
+   import scaleform.clik.interfaces.IListItemRenderer;
 
-        public override function handleInput(arg1:scaleform.clik.events.InputEvent):void
-        {
-            var loc1:*=getRendererAt(_selectedIndex, _scrollPosition);
-            if (loc1 != null) 
+
+   public class CrewScrollingList extends ScrollingListEx
+   {
+          
+      public function CrewScrollingList() {
+         super();
+      }
+
+      override public function handleInput(param1:InputEvent) : void {
+         var _loc2_:IListItemRenderer = getRendererAt(_selectedIndex,_scrollPosition);
+         if(_loc2_ != null)
+         {
+            _loc2_.handleInput(param1);
+            if(param1.handled)
             {
-                loc1.handleInput(arg1);
-                if (arg1.handled) 
-                {
-                    return;
-                }
+               return;
             }
-            return;
-        }
-    }
+         }
+      }
+   }
+
 }

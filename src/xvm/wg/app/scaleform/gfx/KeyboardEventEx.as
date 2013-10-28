@@ -1,15 +1,16 @@
-package scaleform.gfx 
+package scaleform.gfx
 {
-    import flash.events.*;
-    
-    public final class KeyboardEventEx extends flash.events.KeyboardEvent
-    {
-        public function KeyboardEventEx(arg1:String)
-        {
-            super(arg1);
-            return;
-        }
+   import flash.events.KeyboardEvent;
 
-        public var controllerIdx:uint=0;
-    }
+
+   public final class KeyboardEventEx extends KeyboardEvent
+   {
+          
+      public function KeyboardEventEx(param1:String) {
+         super(param1);
+      }
+
+      public var controllerIdx:uint = 0;
+   }
+
 }

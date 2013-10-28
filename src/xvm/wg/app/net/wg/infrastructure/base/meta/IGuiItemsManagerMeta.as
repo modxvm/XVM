@@ -1,11 +1,14 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IGuiItemsManagerMeta extends flash.events.IEventDispatcher
-    {
-        function _getItemAttributeS(arg1:int, arg2:Object, arg3:String):Object;
+   import flash.events.IEventDispatcher;
 
-        function _callItemMethodS(arg1:int, arg2:Object, arg3:String, arg4:Array):Object;
-    }
+
+   public interface IGuiItemsManagerMeta extends IEventDispatcher
+   {
+          
+      function _getItemAttributeS(param1:int, param2:Object, param3:String) : Object;
+
+      function _callItemMethodS(param1:int, param2:Object, param3:String, param4:Array) : Object;
+   }
+
 }

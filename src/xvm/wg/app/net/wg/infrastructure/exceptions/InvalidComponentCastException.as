@@ -1,11 +1,13 @@
-package net.wg.infrastructure.exceptions 
+package net.wg.infrastructure.exceptions
 {
-    public class InvalidComponentCastException extends net.wg.infrastructure.exceptions.TypeCastException
-    {
-        public function InvalidComponentCastException(arg1:*="", arg2:*=0)
-        {
-            super(arg1, arg2);
-            return;
-        }
-    }
+
+
+   public class InvalidComponentCastException extends TypeCastException
+   {
+          
+      public function InvalidComponentCastException(param1:*=undefined, param2:*=undefined) {
+         super(param1,param2);
+      }
+   }
+
 }

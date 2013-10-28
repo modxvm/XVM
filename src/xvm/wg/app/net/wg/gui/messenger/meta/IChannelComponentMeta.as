@@ -1,19 +1,22 @@
-package net.wg.gui.messenger.meta 
+package net.wg.gui.messenger.meta
 {
-    import flash.events.*;
-    
-    public interface IChannelComponentMeta extends flash.events.IEventDispatcher
-    {
-        function isJoinedS():Boolean;
+   import flash.events.IEventDispatcher;
 
-        function sendMessageS(arg1:String):Boolean;
 
-        function getHistoryS():String;
+   public interface IChannelComponentMeta extends IEventDispatcher
+   {
+          
+      function isJoinedS() : Boolean;
 
-        function getMessageMaxLengthS():int;
+      function sendMessageS(param1:String) : Boolean;
 
-        function as_setJoined(arg1:Boolean):void;
+      function getHistoryS() : String;
 
-        function as_addMessage(arg1:String):void;
-    }
+      function getMessageMaxLengthS() : int;
+
+      function as_setJoined(param1:Boolean) : void;
+
+      function as_addMessage(param1:String) : void;
+   }
+
 }

@@ -1,24 +1,25 @@
-package net.wg.gui.prebattle.battleSession 
+package net.wg.gui.prebattle.battleSession
 {
-    import flash.text.*;
-    import scaleform.clik.core.*;
-    
-    public class TopInfo extends scaleform.clik.core.UIComponent
-    {
-        public function TopInfo()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.text.TextField;
 
-        public var firstTeamText:flash.text.TextField;
 
-        public var winTeamsText:flash.text.TextField;
+   public class TopInfo extends UIComponent
+   {
+          
+      public function TopInfo() {
+         super();
+      }
 
-        public var secondTeamText:flash.text.TextField;
+      public var firstTeamText:TextField;
 
-        public var startTimeText:flash.text.TextField;
+      public var winTeamsText:TextField;
 
-        public var startTimeValue:flash.text.TextField;
-    }
+      public var secondTeamText:TextField;
+
+      public var startTimeText:TextField;
+
+      public var startTimeValue:TextField;
+   }
+
 }

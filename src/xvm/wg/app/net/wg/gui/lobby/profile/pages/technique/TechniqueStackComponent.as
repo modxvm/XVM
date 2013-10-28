@@ -1,82 +1,100 @@
-package net.wg.gui.lobby.profile.pages.technique 
+package net.wg.gui.lobby.profile.pages.technique
 {
-    import flash.display.*;
-    import flash.geom.*;
-    import flash.text.*;
-    import net.wg.gui.components.advanced.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.lobby.profile.components.*;
-    import scaleform.clik.core.*;
-    import scaleform.clik.data.*;
-    
-    public class TechniqueStackComponent extends scaleform.clik.core.UIComponent
-    {
-        public function TechniqueStackComponent()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.text.TextField;
+   import net.wg.gui.components.controls.UILoaderAlt;
+   import flash.display.MovieClip;
+   import net.wg.gui.components.advanced.ButtonBarEx;
+   import net.wg.gui.lobby.profile.components.ResizableViewStack;
+   import scaleform.clik.data.DataProvider;
+   import flash.geom.Rectangle;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.viewStack.cache = true;
-            this.buttonBar.dataProvider = new scaleform.clik.data.DataProvider([{"label":PROFILE.SECTION_TECHNIQUE_TABBTN_STATISTIC, "linkage":"TechniqueStatisticTab_UI", "tooltip":PROFILE.SECTION_TECHNIQUE_TABBTN_STATISTIC_TOOLTIP}, {"label":PROFILE.SECTION_TECHNIQUE_TABBTN_ACHIEVEMENTS, "linkage":"TechniqueAchievementTab_UI", "tooltip":PROFILE.SECTION_TECHNIQUE_TABBTN_AWARDS_TOOLTIP}]);
+
+   public class TechniqueStackComponent extends UIComponent
+   {
+          
+      public function TechniqueStackComponent() {
+         super();
+      }
+
+      public var vNameTF:TextField;
+
+      public var typeIcon:UILoaderAlt;
+
+      public var tabsBg:MovieClip;
+
+      public var buttonBar:ButtonBarEx;
+
+      public var viewStack:ResizableViewStack;
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.viewStack.cache = true;
+         this.buttonBar.dataProvider = new DataProvider([
+            {
+               "label":PROFILE.SECTION_TECHNIQUE_TABBTN_STATISTIC,
+               "linkage":"TechniqueStatisticTab_UI",
+               "tooltip":PROFILE.SECTION_TECHNIQUE_TABBTN_STATISTIC_TOOLTIP
+            }
+         ,
+            {
+               "label":PROFILE.SECTION_TECHNIQUE_TABBTN_ACHIEVEMENTS,
+               "linkage":"TechniqueAchievementTab_UI",
+               "tooltip":PROFILE.SECTION_TECHNIQUE_TABBTN_AWARDS_TOOLTIP
+            }
+         ]);
+         this.buttonBar.selectedIndex = 0;
+         this.buttonBar.validateNow();
+      }
+
+      override public function dispose() : void {
+         if(this.buttonBar)
+         {
+            this.buttonBar.dispose();
+            this.buttonBar = null;
+         }
+         if(this.viewStack)
+         {
+            this.viewStack.dispose();
+            this.viewStack = null;
+         }
+         if(this.typeIcon)
+         {
+            this.typeIcon.dispose();
+            this.typeIcon = null;
+         }
+         this.tabsBg = null;
+         super.dispose();
+      }
+
+      public function setViewSize(param1:Number, param2:Number) : void {
+         this.tabsBg.scrollRect = new Rectangle(0,0,this.tabsBg.width,param2);
+         this.viewStack.setAvailableSize(param1 - this.viewStack.x,param2 - this.viewStack.y);
+      }
+
+      public function updateLabel(param1:String, param2:String) : void {
+         this.vNameTF.text = param1;
+         if(param2 != null)
+         {
+            this.typeIcon.source = param2;
+         }
+         else
+         {
+            this.typeIcon.unload();
+         }
+      }
+
+      public function updateTankData(param1:Object) : void {
+         this.viewStack.updateData(param1);
+      }
+
+      public function enableAwardsButton(param1:Boolean) : void {
+         if(!param1)
+         {
             this.buttonBar.selectedIndex = 0;
-            this.buttonBar.validateNow();
-            return;
-        }
+         }
+         this.buttonBar.getButtonAt(1).enabled = param1;
+      }
+   }
 
-        public override function dispose():void
-        {
-            if (this.buttonBar) 
-            {
-                this.buttonBar.dispose();
-                this.buttonBar = null;
-            }
-            if (this.viewStack) 
-            {
-                this.viewStack.dispose();
-                this.viewStack = null;
-            }
-            if (this.typeIcon) 
-            {
-                this.typeIcon.dispose();
-                this.typeIcon = null;
-            }
-            this.tabsBg = null;
-            super.dispose();
-            return;
-        }
-
-        public function setViewSize(arg1:Number, arg2:Number):void
-        {
-            this.tabsBg.scrollRect = new flash.geom.Rectangle(0, 0, this.tabsBg.width, arg2);
-            this.viewStack.setAvailableSize(arg1 - this.viewStack.x, arg2 - this.viewStack.y);
-            return;
-        }
-
-        public function setData(arg1:net.wg.gui.lobby.profile.pages.technique.TechniqueListVehicleVO):void
-        {
-            this.vNameTF.text = arg1.userName;
-            this.typeIcon.source = arg1.typeIconPath;
-            return;
-        }
-
-        public function updateTankData(arg1:Object):void
-        {
-            this.viewStack.updateData(arg1);
-            return;
-        }
-
-        public var vNameTF:flash.text.TextField;
-
-        public var typeIcon:net.wg.gui.components.controls.UILoaderAlt;
-
-        public var tabsBg:flash.display.MovieClip;
-
-        public var buttonBar:net.wg.gui.components.advanced.ButtonBarEx;
-
-        public var viewStack:net.wg.gui.lobby.profile.components.ResizableViewStack;
-    }
 }

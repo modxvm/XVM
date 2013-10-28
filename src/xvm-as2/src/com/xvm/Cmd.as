@@ -14,6 +14,7 @@ class com.xvm.Cmd
     private static var COMMAND_LOGSTAT:String = "logstat";
     private static var COMMAND_SAVE_SETTINGS:String = "save_settings";
     private static var COMMAND_LOAD_SETTINGS:String = "load_settings";
+    private static var COMMAND_GETVEHICLEINFODATA:String = "getVehicleInfoData";
 
     public static var RESPOND_STATDATA = "xvm.statdata";
     public static var RESPOND_USERDATA = "xvm.userdata";
@@ -66,6 +67,11 @@ class com.xvm.Cmd
     public static function saveSettings(settingsStr)
     {
         _call(null, null, [COMMAND_SAVE_SETTINGS, settingsStr]);
+    }
+
+    public static function getVehicleInfoData(target:Object, callback:Function)
+    {
+        _call(target, callback, [COMMAND_GETVEHICLEINFODATA]);
     }
 
 

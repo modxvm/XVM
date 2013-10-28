@@ -1,54 +1,48 @@
-package net.wg.gui.lobby.customization 
+package net.wg.gui.lobby.customization
 {
-    import net.wg.data.daapi.base.*;
-    import net.wg.gui.lobby.customization.data.*;
-    
-    public class InscriptionLeftSectionView extends net.wg.gui.lobby.customization.BaseTimedCustomizationSectionView
-    {
-        public function InscriptionLeftSectionView()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.lobby.customization.data.DAAPIItemsDataProvider;
+   import net.wg.data.daapi.base.DAAPIDataProvider;
+   import net.wg.gui.lobby.customization.data.RentalPackageDAAPIDataProvider;
 
-        public override function getEmptyDataItem():Object
-        {
-            return net.wg.gui.lobby.customization.data.DAAPIItemsDataProvider.getEmptyItem();
-        }
 
-        public override function getItemsDP():net.wg.gui.lobby.customization.data.DAAPIItemsDataProvider
-        {
-            return form.inscriptionLeftDP;
-        }
+   public class InscriptionLeftSectionView extends BaseTimedCustomizationSectionView
+   {
+          
+      public function InscriptionLeftSectionView() {
+         super();
+      }
 
-        public override function getGroupsDP():net.wg.data.daapi.base.DAAPIDataProvider
-        {
-            return form.inscriptionLeftGroupsDataProvider;
-        }
+      override public function getEmptyDataItem() : Object {
+         return DAAPIItemsDataProvider.getEmptyItem();
+      }
 
-        public override function getRentalPackagesDP():net.wg.gui.lobby.customization.data.RentalPackageDAAPIDataProvider
-        {
-            return form.inscriptionLeftRentalPackageDP;
-        }
+      override public function getItemsDP() : DAAPIItemsDataProvider {
+         return form.inscriptionLeftDP;
+      }
 
-        public override function getViewLinkage():String
-        {
-            return net.wg.gui.lobby.customization.BaseTimedCustomizationSectionView.INSCRIPTION_GROUP_VIEW;
-        }
+      override public function getGroupsDP() : DAAPIDataProvider {
+         return form.inscriptionLeftGroupsDataProvider;
+      }
 
-        public override function getTimeSectionLabel():String
-        {
-            return MENU.CUSTOMIZATION_LABELS_INSCRIPTION_PERIOD;
-        }
+      override public function getRentalPackagesDP() : RentalPackageDAAPIDataProvider {
+         return form.inscriptionLeftRentalPackageDP;
+      }
 
-        public override function getDropButtonTooltip():String
-        {
-            return TOOLTIPS.CUSTOMIZATION_INSCRIPTIONLEFT_CURRENT_DROP;
-        }
+      override public function getViewLinkage() : String {
+         return BaseTimedCustomizationSectionView.INSCRIPTION_GROUP_VIEW;
+      }
 
-        public override function getSectionName():String
-        {
-            return net.wg.gui.lobby.customization.BaseTimedCustomizationSectionView.INSCRIPTION_LEFT;
-        }
-    }
+      override public function getTimeSectionLabel() : String {
+         return MENU.CUSTOMIZATION_LABELS_INSCRIPTION_PERIOD;
+      }
+
+      override public function getDropButtonTooltip() : String {
+         return TOOLTIPS.CUSTOMIZATION_INSCRIPTIONLEFT_CURRENT_DROP;
+      }
+
+      override public function getSectionName() : String {
+         return BaseTimedCustomizationSectionView.INSCRIPTION_LEFT;
+      }
+   }
+
 }

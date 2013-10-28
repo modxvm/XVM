@@ -1,135 +1,147 @@
 package net.wg.gui.lobby.profile.pages
 {
-    import flash.geom.*;
-    import net.wg.data.gui_items.dossier.*;
-    import net.wg.gui.lobby.profile.components.*;
-    import net.wg.gui.lobby.profile.data.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
+   import net.wg.infrastructure.base.meta.impl.ProfileSectionMeta;
+   import net.wg.infrastructure.base.meta.IProfileSectionMeta;
+   import net.wg.gui.lobby.profile.components.IResizableContent;
+   import net.wg.gui.lobby.profile.components.LineDescrIconText;
+   import flash.geom.Point;
+   import net.wg.gui.lobby.profile.data.SectionLayoutManager;
+   import net.wg.gui.lobby.profile.components.BattlesTypeDropdown;
+   import net.wg.gui.lobby.profile.components.ResizableInvalidationTypes;
+   import flash.events.Event;
 
-    public class ProfileSection extends net.wg.infrastructure.base.meta.impl.ProfileSectionMeta implements net.wg.infrastructure.base.meta.IProfileSectionMeta, net.wg.gui.lobby.profile.components.IResizableContent
-    {
-        public function ProfileSection()
-        {
-            super();
-            return;
-        }
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(net.wg.gui.lobby.profile.components.ResizableInvalidationTypes.CURRENT_DIMENSION_INVALID) && this.currentDimension)
-            {
-                this.applyResizing();
-            }
-            return;
-        }
+   public class ProfileSection extends ProfileSectionMeta implements IProfileSectionMeta, IResizableContent
+   {
+          
+      public function ProfileSection() {
+         super();
+      }
 
-        protected function applyResizing():void
-        {
-            if (this.layoutManager)
-            {
-                this.layoutManager.setDimension(this.currentDimension.x, this.currentDimension.y);
-            }
-            this.x = Math.round(this.currentDimension.x / 2 - this._centerOffset);
-            return;
-        }
+      private static const DOSSIER_DATA_INVALID:String = "ddInvalid";
 
-        public function setViewSize(arg1:Number, arg2:Number):void
-        {
-            if (!this.currentDimension)
-            {
-                this.currentDimension = new flash.geom.Point();
-            }
-            this.currentDimension.x = arg1;
-            this.currentDimension.y = arg2;
-            invalidate(net.wg.gui.lobby.profile.components.ResizableInvalidationTypes.CURRENT_DIMENSION_INVALID);
-            return;
-        }
+      public static function applyInitDataToTextField(param1:String, param2:Object, param3:LineDescrIconText) : void {
+         var _loc4_:Object = param2[param1];
+         param3.description = _loc4_["description"];
+         param3.iconSource = _loc4_["icon"];
+      }
 
-        public function as_update(arg1:Object):void
-        {
-            return;
-        }
+      protected var currentDimension:Point;
 
-        protected function updateByDossier(arg1:net.wg.data.gui_items.dossier.AccountDossier):void
-        {
-            return;
-        }
+      public var layoutManager:SectionLayoutManager;
 
-        public function as_setInitData(arg1:Object):void
-        {
-            return;
-        }
+      private var isActive:Boolean;
 
-        protected function disposeLayoutManager():void
-        {
-            if (this.layoutManager)
-            {
-                this.layoutManager.dispose();
-                this.layoutManager = null;
-            }
-            return;
-        }
+      protected var _centerOffset:int = 0;
 
-        protected override function onDispose():void
-        {
-            super.onDispose();
-            this.disposeLayoutManager();
-            return;
-        }
+      public var battlesDropdown:BattlesTypeDropdown;
 
-        public function update(arg1:Object):void
-        {
-            var loc1:*=net.wg.data.gui_items.dossier.AccountDossier(arg1);
-            if (this.currentDossier != loc1)
-            {
-                this.currentDossier = loc1;
-                this.updateByDossier(loc1);
-            }
-            return;
-        }
+      protected var currentData:Object;
 
-        public function set active(arg1:Boolean):void
-        {
-            this.isActive = arg1;
-            setActiveS(arg1);
-            return;
-        }
+      protected var battlesType:String;
 
-        public function get active():Boolean
-        {
-            return this.isActive;
-        }
+      override protected function draw() : void {
+         super.draw();
+         if((isInvalid(ResizableInvalidationTypes.CURRENT_DIMENSION_INVALID)) && (this.currentDimension))
+         {
+            this.applyResizing();
+         }
+         if((isInvalid(DOSSIER_DATA_INVALID)) && (this.currentData))
+         {
+            this.applyData(this.currentData);
+         }
+      }
 
-        public function set centerOffset(arg1:int):void
-        {
-            this._centerOffset = arg1;
-            invalidate(net.wg.gui.lobby.profile.components.ResizableInvalidationTypes.CURRENT_DIMENSION_INVALID);
-            return;
-        }
+      override protected function configUI() : void {
+         super.configUI();
+         if(this.battlesDropdown)
+         {
+            this.battlesDropdown.addEventListener(Event.CHANGE,this.dropDownChangeHandler,false,0,true);
+         }
+      }
 
-        public function get centerOffset():int
-        {
-            return this._centerOffset;
-        }
+      private function dropDownChangeHandler(param1:Event) : void {
+         requestDossierS(this.battlesDropdown.selectedItem);
+      }
 
-        public static function applyInitDataToTextField(arg1:String, arg2:Object, arg3:net.wg.gui.lobby.profile.components.LineDescrIconText):void
-        {
-            var loc1:*=arg2[arg1];
-            arg3.description = loc1["description"];
-            arg3.iconSource = loc1["icon"];
-            return;
-        }
+      protected function applyResizing() : void {
+         if(this.layoutManager)
+         {
+            this.layoutManager.setDimension(this.currentDimension.x,this.currentDimension.y);
+         }
+         this.x = Math.round(this.currentDimension.x / 2 - this._centerOffset);
+      }
 
-        protected var currentDimension:flash.geom.Point;
+      public function setViewSize(param1:Number, param2:Number) : void {
+         if(!this.currentDimension)
+         {
+            this.currentDimension = new Point();
+         }
+         this.currentDimension.x = param1;
+         this.currentDimension.y = param2;
+         invalidate(ResizableInvalidationTypes.CURRENT_DIMENSION_INVALID);
+      }
 
-        public var layoutManager:net.wg.gui.lobby.profile.data.SectionLayoutManager;
+      public function as_update(param1:Object) : void {
+          
+      }
 
-        internal var isActive:Boolean;
+      protected function applyData(param1:Object) : Object {
+         return null;
+      }
 
-        protected var _centerOffset:int=0;
+      public function as_setInitData(param1:Object) : void {
+          
+      }
 
-        public var currentDossier:net.wg.data.gui_items.dossier.AccountDossier;
-    }
+      protected function disposeLayoutManager() : void {
+         if(this.layoutManager)
+         {
+            this.layoutManager.dispose();
+            this.layoutManager = null;
+         }
+      }
+
+      override protected function onDispose() : void {
+         if(this.battlesDropdown)
+         {
+            this.battlesDropdown.removeEventListener(Event.CHANGE,this.dropDownChangeHandler);
+         }
+         super.onDispose();
+         this.disposeLayoutManager();
+      }
+
+      public function update(param1:Object) : void {
+          
+      }
+
+      public function set active(param1:Boolean) : void {
+         this.isActive = param1;
+         setActiveS(param1);
+      }
+
+      public function get active() : Boolean {
+         return this.isActive;
+      }
+
+      public function set centerOffset(param1:int) : void {
+         this._centerOffset = param1;
+         invalidate(ResizableInvalidationTypes.CURRENT_DIMENSION_INVALID);
+      }
+
+      public function get centerOffset() : int {
+         return this._centerOffset;
+      }
+
+      public function as_responseDossier(param1:String, param2:Object) : void {
+         this.currentData = param2;
+         this.battlesType = param1;
+         if(this.battlesDropdown)
+         {
+            this.battlesDropdown.selectedItem = param1;
+         }
+         invalidate(DOSSIER_DATA_INVALID);
+      }
+   }
+
 }

@@ -1,13 +1,16 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IToolTipMgrMeta extends flash.events.IEventDispatcher
-    {
-        function onCreateComplexTooltipS(arg1:String, arg2:String):void;
+   import flash.events.IEventDispatcher;
 
-        function onCreateTypedTooltipS(arg1:String, arg2:Array, arg3:String):void;
 
-        function as_show(arg1:Object, arg2:String):void;
-    }
+   public interface IToolTipMgrMeta extends IEventDispatcher
+   {
+          
+      function onCreateComplexTooltipS(param1:String, param2:String) : void;
+
+      function onCreateTypedTooltipS(param1:String, param2:Array, param3:String) : void;
+
+      function as_show(param1:Object, param2:String) : void;
+   }
+
 }

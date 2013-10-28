@@ -1,19 +1,22 @@
-package net.wg.infrastructure.interfaces 
+package net.wg.infrastructure.interfaces
 {
-    import flash.filters.*;
-    import flash.geom.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    
-    public interface IColorScheme extends net.wg.infrastructure.interfaces.entity.IDisposable
-    {
-        function get schemeName():String;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import flash.geom.ColorTransform;
+   import flash.filters.BitmapFilter;
 
-        function get aliasColor():String;
 
-        function get rgb():Number;
+   public interface IColorScheme extends IDisposable
+   {
+          
+      function get schemeName() : String;
 
-        function get colorTransform():flash.geom.ColorTransform;
+      function get aliasColor() : String;
 
-        function get adjustOffset():flash.filters.BitmapFilter;
-    }
+      function get rgb() : Number;
+
+      function get colorTransform() : ColorTransform;
+
+      function get adjustOffset() : BitmapFilter;
+   }
+
 }

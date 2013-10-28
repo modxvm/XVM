@@ -1,587 +1,566 @@
-package net.wg.gui.lobby.techtree.helpers 
+package net.wg.gui.lobby.techtree.helpers
 {
-    import __AS3__.vec.*;
-    import fl.transitions.easing.*;
-    import flash.display.*;
-    import flash.geom.*;
-    import net.wg.gui.lobby.techtree.*;
-    import net.wg.gui.lobby.techtree.constants.*;
-    import net.wg.gui.lobby.techtree.controls.*;
-    import net.wg.gui.lobby.techtree.data.state.*;
-    import net.wg.gui.lobby.techtree.interfaces.*;
-    import scaleform.clik.motion.*;
-    
-    public class NTGraphics extends net.wg.gui.lobby.techtree.helpers.LinesGraphics
-    {
-        public function NTGraphics()
-        {
-            this.parentIDs = {};
-            super();
-            return;
-        }
+   import scaleform.clik.motion.Tween;
+   import net.wg.gui.lobby.techtree.controls.LevelsContainer;
+   import fl.transitions.easing.Strong;
+   import net.wg.gui.lobby.techtree.interfaces.IRenderer;
+   import flash.geom.Point;
+   import net.wg.gui.lobby.techtree.constants.ColorIndex;
+   import net.wg.gui.lobby.techtree.TechTreeEvent;
+   import net.wg.gui.lobby.techtree.constants.OutLiteral;
+   import __AS3__.vec.Vector;
+   import flash.display.DisplayObject;
+   import net.wg.gui.lobby.techtree.data.state.NodeStateCollection;
 
-        public function hide():void
-        {
-            if (this.tween != null) 
-            {
-                this.tween.reset();
-                this.tween = null;
-            }
-            alpha = 0;
-            return;
-        }
 
-        public function show():void
-        {
-            this.tween = new scaleform.clik.motion.Tween(150, this, {"alpha":1}, {"paused":false, "ease":fl.transitions.easing.Strong.easeIn});
-            return;
-        }
+   public class NTGraphics extends LinesGraphics
+   {
+          
+      public function NTGraphics() {
+         this.parentIDs = {};
+         super();
+      }
 
-        public function drawTopLines(arg1:net.wg.gui.lobby.techtree.interfaces.IRenderer, arg2:Boolean):void
-        {
-            var loc7:*=null;
-            var loc9:*=NaN;
-            var loc11:*=NaN;
-            var loc12:*=null;
-            var loc13:*=null;
-            var loc1:*=arg1.getDisplayInfo();
-            if (loc1 == null || loc1.lines == null) 
-            {
-                return;
-            }
-            var loc2:*=loc1.lines[0];
-            var loc3:*=arg1.getID();
-            clearLinesAndArrows(arg1);
-            if (loc2 == null) 
-            {
-                return;
-            }
-            var loc4:*=loc2.outPin;
-            var loc5:*=loc2.inPins;
-            var loc6:*=new flash.geom.Point(loc4[0], loc4[1]);
-            var loc8:*=loc5.length;
-            var loc10:*=Number.MAX_VALUE;
-            var loc14:*=[];
-            var loc15:*=[];
-            loc11 = 0;
-            while (loc11 < loc8) 
-            {
-                loc12 = loc5[loc11];
-                loc7 = new flash.geom.Point(loc12.inPin[0], loc12.inPin[1]);
-                if (!isNaN(loc12.childID)) 
-                {
-                    if (loc6.y > loc7.y) 
-                    {
-                        loc14.push(new TopLineInfo(loc12.childID, loc7));
-                    }
-                    else if (loc6.y < loc7.y) 
-                    {
-                        loc15.push(new TopLineInfo(loc12.childID, loc7));
-                    }
-                    else if (loc6.y == loc7.y) 
-                    {
-                        loc13 = _container.getNodeByID(loc12.childID);
-                        loc9 = colorIdxs[loc13.getColorIdx(loc3)];
-                        drawLine(arg1, loc9, loc6, loc7);
-                        drawArrowEx(arg1, loc9, loc6, loc7);
-                    }
-                    loc10 = Math.min(loc10, loc7.x);
-                }
-                ++loc11;
-            }
-            var loc16:*;
-            loc7 = (loc16 = new flash.geom.Point(loc6.x + (loc10 - loc6.x >> 1), 0)).clone();
-            loc14.sortOn("y", Array.NUMERIC);
-            loc15.sortOn("y", Array.NUMERIC | Array.DESCENDING);
-            var loc17:*=net.wg.gui.lobby.techtree.constants.ColorIndex.DEFAULT;
-            var loc18:*=net.wg.gui.lobby.techtree.constants.ColorIndex.DEFAULT;
-            var loc19:*=net.wg.gui.lobby.techtree.constants.ColorIndex.DEFAULT;
-            loc8 = loc14.length;
-            loc11 = 0;
-            while (loc11 < loc8) 
-            {
-                loc12 = loc14[loc11];
-                loc19 = (loc13 = _container.getNodeByID(loc12.id)).getColorIdx(loc3);
-                loc17 = Math.min(loc17, loc19);
-                loc9 = colorIdxs[loc19];
-                loc7.y = loc11 != (loc8 - 1) ? loc14[loc11 + 1].point.y : loc6.y;
-                loc16.y = loc12.point.y;
-                drawLine(arg1, loc9, loc16, loc12.point);
-                drawArrow(arg1, loc9, loc12.point);
-                drawLine(arg1, colorIdxs[loc17], loc16, loc7);
-                if (!arg2) 
-                {
-                    loc13.addEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.STATE_CHANGED, this.handleRootChildStateChanged, false, 0, true);
-                }
-                ++loc11;
-            }
-            loc8 = loc15.length;
-            loc11 = 0;
-            while (loc11 < loc8) 
-            {
-                loc12 = loc15[loc11];
-                loc19 = (loc13 = _container.getNodeByID(loc12.id)).getColorIdx(loc3);
-                loc18 = Math.min(loc18, loc19);
-                loc9 = colorIdxs[loc19];
-                loc7.y = loc11 != (loc8 - 1) ? loc15[loc11 + 1].point.y : loc6.y;
-                loc16.y = loc12.point.y;
-                drawLine(arg1, loc9, loc16, loc12.point);
-                drawArrow(arg1, loc9, loc12.point);
-                drawLine(arg1, colorIdxs[loc18], loc16, loc7);
-                if (!arg2) 
-                {
-                    loc13.addEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.STATE_CHANGED, this.handleRootChildStateChanged, false, 0, true);
-                }
-                ++loc11;
-            }
-            loc16.y = loc6.y;
-            drawLine(arg1, colorIdxs[Math.min(loc17, loc18)], loc6, loc16);
-            return;
-        }
+      private var tween:Tween = null;
 
-        public function drawLineSet(arg1:net.wg.gui.lobby.techtree.interfaces.IRenderer, arg2:Object, arg3:Boolean):void
-        {
-            if (arg1 == null || arg2 == null) 
-            {
-                return;
-            }
-            var loc1:*=arg2.outLiteral;
-            clearLinesAndArrows(arg1, loc1);
-            var loc2:*=loc1;
-            switch (loc2) 
-            {
-                case net.wg.gui.lobby.techtree.constants.OutLiteral.RIGHT_MIDDLE:
-                {
-                    this.drawLineRSet(arg1, arg2, arg3);
-                    break;
-                }
-                case net.wg.gui.lobby.techtree.constants.OutLiteral.TOP_MIDDLE:
-                {
-                    this.drawLineTMSet(arg1, arg2, arg3);
-                    break;
-                }
-                case net.wg.gui.lobby.techtree.constants.OutLiteral.BOTTOM_MIDDLE:
-                {
-                    this.drawLineBMSet(arg1, arg2, arg3);
-                    break;
-                }
-                case net.wg.gui.lobby.techtree.constants.OutLiteral.TOP_RIGHT:
-                {
-                    this.drawLineTRSet(arg1, arg2, arg3);
-                    break;
-                }
-                case net.wg.gui.lobby.techtree.constants.OutLiteral.BOTTOM_RIGHT:
-                {
-                    this.drawLineBRSet(arg1, arg2, arg3);
-                    break;
-                }
-            }
-            return;
-        }
+      private var parentIDs:Object;
 
-        public function drawNodeLines(arg1:net.wg.gui.lobby.techtree.interfaces.IRenderer, arg2:Boolean):void
-        {
-            var loc3:*=null;
-            var loc1:*=arg1.getDisplayInfo();
-            if (loc1 == null) 
-            {
-                return;
-            }
-            if (!arg2) 
-            {
-                arg1.addEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.STATE_CHANGED, this.handleNodeStateChanged, false, 0, true);
-            }
-            var loc2:*;
-            var loc4:*=(loc2 = loc1.lines).length;
-            var loc5:*=0;
-            while (loc5 < loc4) 
-            {
-                if ((loc3 = loc2[loc5]) == null) 
-                {
-                    return;
-                }
-                this.drawLineSet(arg1, loc3, arg2);
-                ++loc5;
-            }
-            return;
-        }
+      public var levels:LevelsContainer;
 
-        public function drawLevelsDelimiters(arg1:__AS3__.vec.Vector.<net.wg.gui.lobby.techtree.helpers.Distance>, arg2:Number, arg3:Number):Number
-        {
-            if (this.levels == null) 
-            {
-                return 0;
-            }
-            return this.levels.updateLevels(arg1, arg2, arg3);
-        }
+      public var inButtonOffset:Number = 0;
 
-        public override function dispose():void
-        {
+      public var outButtonOffset:Number = 0;
+
+      public function hide() : void {
+         if(this.tween != null)
+         {
+            this.tween.reset();
             this.tween = null;
-            this.clearUp();
-            super.dispose();
-            return;
-        }
+         }
+         alpha = 0;
+      }
 
-        public override function clearUp():void
-        {
-            var loc3:*=null;
-            super.clearUp();
-            var loc1:*=0;
-            var loc2:*=0;
-            if (this.levels != null) 
+      public function show() : void {
+         this.tween = new Tween(150,this,{"alpha":1},
             {
-                ++loc2;
+               "paused":false,
+               "ease":Strong.easeIn
             }
-            while (numChildren > loc2) 
-            {
-                loc3 = getChildAt(loc1);
-                if (loc3 != this.levels) 
-                {
-                    if (loc3 is net.wg.gui.lobby.techtree.interfaces.IRenderer) 
-                    {
-                        this.clearUpRenderer(net.wg.gui.lobby.techtree.interfaces.IRenderer(loc3));
-                    }
-                    removeChildAt(loc1);
-                    continue;
-                }
-                ++loc1;
-            }
-            this.levels.dispose();
-            this.parentIDs = {};
-            return;
-        }
+         );
+      }
 
-        public override function clearUpRenderer(arg1:net.wg.gui.lobby.techtree.interfaces.IRenderer):void
-        {
-            arg1.removeEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.STATE_CHANGED, this.handleRootChildStateChanged);
-            arg1.removeEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.STATE_CHANGED, this.handleNodeStateChanged);
+      public function drawTopLines(param1:IRenderer, param2:Boolean) : void {
+         var _loc9_:Point = null;
+         var _loc11_:* = NaN;
+         var _loc13_:* = NaN;
+         var _loc14_:Object = null;
+         var _loc15_:IRenderer = null;
+         var _loc3_:Object = param1.getDisplayInfo();
+         if(_loc3_ == null || _loc3_.lines == null)
+         {
             return;
-        }
-
-        public function clearCache():void
-        {
-            this.parentIDs = {};
+         }
+         var _loc4_:Object = _loc3_.lines[0];
+         var _loc5_:Number = param1.getID();
+         clearLinesAndArrows(param1);
+         if(_loc4_ == null)
+         {
             return;
-        }
+         }
+         var _loc6_:Array = _loc4_.outPin;
+         var _loc7_:Array = _loc4_.inPins;
+         var _loc8_:Point = new Point(_loc6_[0],_loc6_[1]);
+         var _loc10_:Number = _loc7_.length;
+         var _loc12_:Number = Number.MAX_VALUE;
+         var _loc16_:Array = [];
+         var _loc17_:Array = [];
+         _loc13_ = 0;
+         while(_loc13_ < _loc10_)
+         {
+            _loc14_ = _loc7_[_loc13_];
+            _loc9_ = new Point(_loc14_.inPin[0],_loc14_.inPin[1]);
+            if(!isNaN(_loc14_.childID))
+            {
+               if(_loc8_.y > _loc9_.y)
+               {
+                  _loc16_.push(new TopLineInfo(_loc14_.childID,_loc9_));
+               }
+               else
+               {
+                  if(_loc8_.y < _loc9_.y)
+                  {
+                     _loc17_.push(new TopLineInfo(_loc14_.childID,_loc9_));
+                  }
+                  else
+                  {
+                     if(_loc8_.y == _loc9_.y)
+                     {
+                        _loc15_ = _container.getNodeByID(_loc14_.childID);
+                        _loc11_ = colorIdxs[_loc15_.getColorIdx(_loc5_)];
+                        drawLine(param1,_loc11_,_loc8_,_loc9_);
+                        drawArrowEx(param1,_loc11_,_loc8_,_loc9_);
+                     }
+                  }
+               }
+               _loc12_ = Math.min(_loc12_,_loc9_.x);
+            }
+            _loc13_++;
+         }
+         var _loc18_:Point = new Point(_loc8_.x + (_loc12_ - _loc8_.x >> 1),0);
+         _loc9_ = _loc18_.clone();
+         _loc16_.sortOn("y",Array.NUMERIC);
+         _loc17_.sortOn("y",Array.NUMERIC | Array.DESCENDING);
+         var _loc19_:Number = ColorIndex.DEFAULT;
+         var _loc20_:Number = ColorIndex.DEFAULT;
+         var _loc21_:Number = ColorIndex.DEFAULT;
+         _loc10_ = _loc16_.length;
+         _loc13_ = 0;
+         while(_loc13_ < _loc10_)
+         {
+            _loc14_ = _loc16_[_loc13_];
+            _loc15_ = _container.getNodeByID(_loc14_.id);
+            _loc21_ = _loc15_.getColorIdx(_loc5_);
+            _loc19_ = Math.min(_loc19_,_loc21_);
+            _loc11_ = colorIdxs[_loc21_];
+            _loc9_.y = _loc13_ == _loc10_-1?_loc8_.y:_loc16_[_loc13_ + 1].point.y;
+            _loc18_.y = _loc14_.point.y;
+            drawLine(param1,_loc11_,_loc18_,_loc14_.point);
+            drawArrow(param1,_loc11_,_loc14_.point);
+            drawLine(param1,colorIdxs[_loc19_],_loc18_,_loc9_);
+            if(!param2)
+            {
+               _loc15_.addEventListener(TechTreeEvent.STATE_CHANGED,this.handleRootChildStateChanged,false,0,true);
+            }
+            _loc13_++;
+         }
+         _loc10_ = _loc17_.length;
+         _loc13_ = 0;
+         while(_loc13_ < _loc10_)
+         {
+            _loc14_ = _loc17_[_loc13_];
+            _loc15_ = _container.getNodeByID(_loc14_.id);
+            _loc21_ = _loc15_.getColorIdx(_loc5_);
+            _loc20_ = Math.min(_loc20_,_loc21_);
+            _loc11_ = colorIdxs[_loc21_];
+            _loc9_.y = _loc13_ == _loc10_-1?_loc8_.y:_loc17_[_loc13_ + 1].point.y;
+            _loc18_.y = _loc14_.point.y;
+            drawLine(param1,_loc11_,_loc18_,_loc14_.point);
+            drawArrow(param1,_loc11_,_loc14_.point);
+            drawLine(param1,colorIdxs[_loc20_],_loc18_,_loc9_);
+            if(!param2)
+            {
+               _loc15_.addEventListener(TechTreeEvent.STATE_CHANGED,this.handleRootChildStateChanged,false,0,true);
+            }
+            _loc13_++;
+         }
+         _loc18_.y = _loc8_.y;
+         drawLine(param1,colorIdxs[Math.min(_loc19_,_loc20_)],_loc8_,_loc18_);
+      }
 
-        internal function addParentID(arg1:net.wg.gui.lobby.techtree.interfaces.IRenderer, arg2:net.wg.gui.lobby.techtree.interfaces.IRenderer):void
-        {
-            var loc1:*=arg2.getID();
-            if (this.parentIDs[loc1] == undefined) 
-            {
-                this.parentIDs[loc1] = [];
-            }
-            var loc2:*=this.parentIDs[loc1];
-            loc1 = arg1.getID();
-            if (loc2.indexOf(loc1) == -1) 
-            {
-                loc2.push(loc1);
-            }
+      public function drawLineSet(param1:IRenderer, param2:Object, param3:Boolean) : void {
+         if(param1 == null || param2 == null)
+         {
             return;
-        }
+         }
+         var _loc4_:String = param2.outLiteral;
+         clearLinesAndArrows(param1,_loc4_);
+         switch(_loc4_)
+         {
+            case OutLiteral.RIGHT_MIDDLE:
+               this.drawLineRSet(param1,param2,param3);
+               break;
+            case OutLiteral.TOP_MIDDLE:
+               this.drawLineTMSet(param1,param2,param3);
+               break;
+            case OutLiteral.BOTTOM_MIDDLE:
+               this.drawLineBMSet(param1,param2,param3);
+               break;
+            case OutLiteral.TOP_RIGHT:
+               this.drawLineTRSet(param1,param2,param3);
+               break;
+            case OutLiteral.BOTTOM_RIGHT:
+               this.drawLineBRSet(param1,param2,param3);
+               break;
+         }
+      }
 
-        internal function drawSingleLine(arg1:net.wg.gui.lobby.techtree.interfaces.IRenderer, arg2:Array, arg3:Object, arg4:Boolean):void
-        {
-            var loc6:*=null;
-            var loc7:*=null;
-            var loc8:*=NaN;
-            var loc1:*;
-            if (!(loc1 = container.getNodeByID(arg3.childID))) 
-            {
-                return;
-            }
-            var loc2:*=arg3.inPin;
-            var loc3:*=arg3.viaPins;
-            var loc4:*=colorIdxs[Math.max(arg1.getColorIdx(), loc1.getColorIdx(arg1.getID()))];
-            var loc5:*=new flash.geom.Point(arg2[0], arg2[1]);
-            if (loc3.length > 0) 
-            {
-                loc8 = 0;
-                while (loc8 < loc3.length) 
-                {
-                    loc7 = loc3[loc8];
-                    loc6 = new flash.geom.Point(loc7[0], loc7[1]);
-                    drawLine(arg1, loc4, loc5, loc6);
-                    loc5 = loc6;
-                    ++loc8;
-                }
-                loc6 = new flash.geom.Point(loc2[0], loc2[1]);
-                drawLine(arg1, loc4, loc5, loc6);
-                drawArrowEx(arg1, loc4, loc5, loc6);
-            }
-            else 
-            {
-                loc6 = new flash.geom.Point(loc2[0], loc2[1]);
-                drawLine(arg1, loc4, loc5, loc6);
-                drawArrowEx(arg1, loc4, loc5, loc6);
-            }
-            if (!arg4) 
-            {
-                this.addParentID(arg1, loc1);
-            }
+      public function drawNodeLines(param1:IRenderer, param2:Boolean) : void {
+         var _loc5_:Object = null;
+         var _loc3_:Object = param1.getDisplayInfo();
+         if(_loc3_ == null)
+         {
             return;
-        }
+         }
+         if(!param2)
+         {
+            param1.addEventListener(TechTreeEvent.STATE_CHANGED,this.handleNodeStateChanged,false,0,true);
+         }
+         var _loc4_:Array = _loc3_.lines;
+         var _loc6_:Number = _loc4_.length;
+         var _loc7_:Number = 0;
+         while(_loc7_ < _loc6_)
+         {
+            _loc5_ = _loc4_[_loc7_];
+            if(_loc5_ == null)
+            {
+               return;
+            }
+            this.drawLineSet(param1,_loc5_,param2);
+            _loc7_++;
+         }
+      }
 
-        internal function drawLineRSet(arg1:net.wg.gui.lobby.techtree.interfaces.IRenderer, arg2:Object, arg3:Boolean):void
-        {
-            var loc5:*=null;
-            var loc6:*=null;
-            var loc7:*=null;
-            var loc8:*=null;
-            var loc9:*=null;
-            var loc10:*=null;
-            var loc11:*=null;
-            var loc15:*=NaN;
-            var loc16:*=null;
-            var loc18:*=NaN;
-            var loc1:*=arg2.outPin;
-            var loc2:*;
-            var loc3:*;
-            if ((loc3 = (loc2 = arg2.inPins).length) < 2) 
+      public function drawLevelsDelimiters(param1:Vector.<Distance>, param2:Number, param3:Number) : Number {
+         if(this.levels == null)
+         {
+            return 0;
+         }
+         return this.levels.updateLevels(param1,param2,param3);
+      }
+
+      override public function dispose() : void {
+         this.tween = null;
+         this.clearUp();
+         super.dispose();
+      }
+
+      override public function clearUp() : void {
+         var _loc3_:DisplayObject = null;
+         super.clearUp();
+         var _loc1_:Number = 0;
+         var _loc2_:Number = 0;
+         if(this.levels != null)
+         {
+            _loc2_++;
+         }
+         while(numChildren > _loc2_)
+         {
+            _loc3_ = getChildAt(_loc1_);
+            if(_loc3_ != this.levels)
             {
-                if (loc3 == 1) 
-                {
-                    this.drawSingleLine(arg1, loc1, loc2[0], arg3);
-                }
-                return;
+               if(_loc3_  is  IRenderer)
+               {
+                  this.clearUpRenderer(IRenderer(_loc3_));
+               }
+               removeChildAt(_loc1_);
             }
-            var loc4:*=new flash.geom.Point(loc1[0], loc1[1]);
-            var loc12:*=[];
-            var loc13:*=[];
-            var loc14:*=net.wg.gui.lobby.techtree.constants.ColorIndex.DEFAULT;
-            var loc17:*=arg1.getID();
-            loc15 = 0;
-            while (loc15 < loc3) 
+            else
             {
-                loc8 = (loc10 = loc2[loc15]).inPin;
-                loc7 = loc10.viaPins;
-                if (loc16 = container.getNodeByID(loc10.childID)) 
-                {
-                    loc14 = Math.max(arg1.getColorIdx(), loc16.getColorIdx(loc17));
-                    if (loc7.length > 0) 
-                    {
-                        loc5 = new flash.geom.Point(loc7[0][0], loc7[0][1]);
-                        if (loc4.y != loc5.y) 
-                        {
-                            loc13.push(loc15);
-                        }
-                        else 
-                        {
-                            loc12.push(new RSetLineInfo(loc15, loc5.x, false, loc14));
-                        }
-                    }
-                    else if (loc4.y != loc8[1]) 
-                    {
-                        loc13.push(loc15);
-                    }
-                    else 
-                    {
-                        loc12.push(new RSetLineInfo(loc15, loc8[0], true, loc14));
-                    }
-                }
-                ++loc15;
+               _loc1_++;
             }
-            loc12.sortOn("childIdx", Array.NUMERIC | Array.DESCENDING);
-            loc3 = loc12.length;
-            loc15 = 0;
-            while (loc15 < loc3) 
-            {
-                loc14 = (loc11 = loc12[loc15]).childIdx;
-                loc10 = loc2[loc11.idx];
-                loc5 = new flash.geom.Point(loc10.inPin[0], loc10.inPin[1]);
-                loc7 = loc10.viaPins;
-                loc18 = 0;
-                while (loc18 < (loc7.length - 1)) 
-                {
-                    loc8 = loc7[loc18];
-                    loc9 = loc7[loc18 + 1];
-                    drawLine(arg1, colorIdxs[loc14], new flash.geom.Point(loc8[0], loc8[1]), new flash.geom.Point(loc9[0], loc9[1]));
-                    ++loc18;
-                }
-                if (loc7.length > 0) 
-                {
-                    loc8 = loc7[(loc7.length - 1)];
-                    loc6 = new flash.geom.Point(loc8[0], loc8[1]);
-                    drawLine(arg1, colorIdxs[loc14], loc6, loc5);
-                    drawArrowEx(arg1, colorIdxs[loc14], loc6, loc5);
-                }
-                loc5 = new flash.geom.Point(loc11.x, loc4.y);
-                drawLine(arg1, colorIdxs[loc14], loc4, loc5);
-                if (loc11.drawArrow) 
-                {
-                    drawArrowEx(arg1, colorIdxs[loc14], loc4, loc5);
-                }
-                if (!arg3) 
-                {
-                    this.addParentID(arg1, loc16);
-                }
-                ++loc15;
-            }
-            loc3 = loc13.length;
-            loc15 = 0;
-            while (loc15 < loc3) 
-            {
-                this.drawSingleLine(arg1, loc1, loc2[loc13[loc15]], arg3);
-                ++loc15;
-            }
+         }
+         this.levels.dispose();
+         this.parentIDs = {};
+      }
+
+      override public function clearUpRenderer(param1:IRenderer) : void {
+         param1.removeEventListener(TechTreeEvent.STATE_CHANGED,this.handleRootChildStateChanged);
+         param1.removeEventListener(TechTreeEvent.STATE_CHANGED,this.handleNodeStateChanged);
+      }
+
+      public function clearCache() : void {
+         this.parentIDs = {};
+      }
+
+      private function addParentID(param1:IRenderer, param2:IRenderer) : void {
+         var _loc3_:Number = param2.getID();
+         if(this.parentIDs[_loc3_] == undefined)
+         {
+            this.parentIDs[_loc3_] = [];
+         }
+         var _loc4_:Array = this.parentIDs[_loc3_];
+         _loc3_ = param1.getID();
+         if(_loc4_.indexOf(_loc3_) == -1)
+         {
+            _loc4_.push(_loc3_);
+         }
+      }
+
+      private function drawSingleLine(param1:IRenderer, param2:Array, param3:Object, param4:Boolean) : void {
+         var _loc10_:Point = null;
+         var _loc11_:Array = null;
+         var _loc12_:* = NaN;
+         var _loc5_:IRenderer = container.getNodeByID(param3.childID);
+         if(!_loc5_)
+         {
             return;
-        }
+         }
+         var _loc6_:Array = param3.inPin;
+         var _loc7_:Array = param3.viaPins;
+         var _loc8_:Number = colorIdxs[Math.max(param1.getColorIdx(),_loc5_.getColorIdx(param1.getID()))];
+         var _loc9_:Point = new Point(param2[0],param2[1]);
+         if(_loc7_.length > 0)
+         {
+            _loc12_ = 0;
+            while(_loc12_ < _loc7_.length)
+            {
+               _loc11_ = _loc7_[_loc12_];
+               _loc10_ = new Point(_loc11_[0],_loc11_[1]);
+               drawLine(param1,_loc8_,_loc9_,_loc10_);
+               _loc9_ = _loc10_;
+               _loc12_++;
+            }
+            _loc10_ = new Point(_loc6_[0],_loc6_[1]);
+            drawLine(param1,_loc8_,_loc9_,_loc10_);
+            drawArrowEx(param1,_loc8_,_loc9_,_loc10_);
+         }
+         else
+         {
+            _loc10_ = new Point(_loc6_[0],_loc6_[1]);
+            drawLine(param1,_loc8_,_loc9_,_loc10_);
+            drawArrowEx(param1,_loc8_,_loc9_,_loc10_);
+         }
+         if(!param4)
+         {
+            this.addParentID(param1,_loc5_);
+         }
+      }
 
-        internal function drawLineTMSet(arg1:net.wg.gui.lobby.techtree.interfaces.IRenderer, arg2:Object, arg3:Boolean):void
-        {
-            var loc1:*=arg2.outPin;
-            var loc2:*;
-            var loc3:*=(loc2 = arg2.inPins)[0];
-            var loc4:*;
-            if (!((loc4 = container.getNodeByID(loc3.childID)) == null) && loc4.isButtonVisible() && this.inButtonOffset > 0) 
+      private function drawLineRSet(param1:IRenderer, param2:Object, param3:Boolean) : void {
+         var _loc8_:Point = null;
+         var _loc9_:Point = null;
+         var _loc10_:Array = null;
+         var _loc11_:Array = null;
+         var _loc12_:Array = null;
+         var _loc13_:Object = null;
+         var _loc14_:Object = null;
+         var _loc18_:* = NaN;
+         var _loc19_:IRenderer = null;
+         var _loc21_:* = NaN;
+         var _loc4_:Array = param2.outPin;
+         var _loc5_:Array = param2.inPins;
+         var _loc6_:Number = _loc5_.length;
+         if(_loc6_ < 2)
+         {
+            if(_loc6_ == 1)
             {
-                loc3 = {"childID":loc3.childID, "inPin":[Number(loc3.inPin[0]), Number(loc3.inPin[1]) + this.inButtonOffset], "viaPins":loc3.viaPins};
-            }
-            this.drawSingleLine(arg1, loc1, loc3, arg3);
-            if (loc2.length > 1) 
-            {
-                trace("Warning! From top part of node can goes only one line.");
-            }
-            return;
-        }
-
-        internal function drawLineTRSet(arg1:net.wg.gui.lobby.techtree.interfaces.IRenderer, arg2:Object, arg3:Boolean):void
-        {
-            var loc1:*=arg2.outPin;
-            var loc2:*;
-            var loc3:*=(loc2 = arg2.inPins)[0];
-            this.drawSingleLine(arg1, loc1, loc3, arg3);
-            if (loc2.length > 1) 
-            {
-                trace("Warning! From top part of node can goes only one line.");
-            }
-            return;
-        }
-
-        internal function drawLineBMSet(arg1:net.wg.gui.lobby.techtree.interfaces.IRenderer, arg2:Object, arg3:Boolean):void
-        {
-            var loc1:*=arg2.outPin;
-            var loc2:*=arg2.inPins;
-            if (arg1.isButtonVisible() && this.outButtonOffset > 0) 
-            {
-                loc1 = [Number(loc1[0]), Number(loc1[1]) + this.outButtonOffset];
-            }
-            this.drawSingleLine(arg1, loc1, loc2[0], arg3);
-            if (loc2.length > 1) 
-            {
-                trace("Warning! From bottom part of node can goes only one line.");
-            }
-            return;
-        }
-
-        internal function drawLineBRSet(arg1:net.wg.gui.lobby.techtree.interfaces.IRenderer, arg2:Object, arg3:Boolean):void
-        {
-            var loc1:*=arg2.outPin;
-            var loc2:*;
-            var loc3:*=(loc2 = arg2.inPins)[0];
-            this.drawSingleLine(arg1, loc1, loc3, arg3);
-            if (loc2.length > 1) 
-            {
-                trace("Warning! From bottom part of node can goes only one line.");
-            }
-            return;
-        }
-
-        internal function handleRootChildStateChanged(arg1:net.wg.gui.lobby.techtree.TechTreeEvent):void
-        {
-            var loc1:*=container.getRootNode();
-            if (!(loc1 == null) && net.wg.gui.lobby.techtree.data.state.NodeStateCollection.isRedrawNTLines(arg1.primary)) 
-            {
-                this.drawTopLines(loc1, true);
-            }
-            return;
-        }
-
-        internal function handleNodeStateChanged(arg1:net.wg.gui.lobby.techtree.TechTreeEvent):void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            var loc3:*=NaN;
-            var loc4:*=null;
-            var loc5:*=NaN;
-            if (net.wg.gui.lobby.techtree.data.state.NodeStateCollection.isRedrawNTLines(arg1.primary)) 
-            {
-                loc1 = arg1.target as net.wg.gui.lobby.techtree.interfaces.IRenderer;
-                if (loc1 != null) 
-                {
-                    this.drawNodeLines(loc1, true);
-                    loc2 = this.parentIDs[loc1.getID()];
-                    if (loc2 != null) 
-                    {
-                        loc3 = loc2.length;
-                        loc5 = 0;
-                        while (loc5 < loc3) 
-                        {
-                            if ((loc4 = container.getNodeByID(loc2[loc5])) != null) 
-                            {
-                                this.drawNodeLines(loc4, true);
-                            }
-                            ++loc5;
-                        }
-                    }
-                }
+               this.drawSingleLine(param1,_loc4_,_loc5_[0],param3);
             }
             return;
-        }
+         }
+         var _loc7_:Point = new Point(_loc4_[0],_loc4_[1]);
+         var _loc15_:Array = [];
+         var _loc16_:Array = [];
+         var _loc17_:Number = ColorIndex.DEFAULT;
+         var _loc20_:Number = param1.getID();
+         _loc18_ = 0;
+         while(_loc18_ < _loc6_)
+         {
+            _loc13_ = _loc5_[_loc18_];
+            _loc11_ = _loc13_.inPin;
+            _loc10_ = _loc13_.viaPins;
+            _loc19_ = container.getNodeByID(_loc13_.childID);
+            if(_loc19_)
+            {
+               _loc17_ = Math.max(param1.getColorIdx(),_loc19_.getColorIdx(_loc20_));
+               if(_loc10_.length > 0)
+               {
+                  _loc8_ = new Point(_loc10_[0][0],_loc10_[0][1]);
+                  if(_loc7_.y == _loc8_.y)
+                  {
+                     _loc15_.push(new RSetLineInfo(_loc18_,_loc8_.x,false,_loc17_));
+                  }
+                  else
+                  {
+                     _loc16_.push(_loc18_);
+                  }
+               }
+               else
+               {
+                  if(_loc7_.y == _loc11_[1])
+                  {
+                     _loc15_.push(new RSetLineInfo(_loc18_,_loc11_[0],true,_loc17_));
+                  }
+                  else
+                  {
+                     _loc16_.push(_loc18_);
+                  }
+               }
+            }
+            _loc18_++;
+         }
+         _loc15_.sortOn("childIdx",Array.NUMERIC | Array.DESCENDING);
+         _loc6_ = _loc15_.length;
+         _loc18_ = 0;
+         while(_loc18_ < _loc6_)
+         {
+            _loc14_ = _loc15_[_loc18_];
+            _loc17_ = _loc14_.childIdx;
+            _loc13_ = _loc5_[_loc14_.idx];
+            _loc8_ = new Point(_loc13_.inPin[0],_loc13_.inPin[1]);
+            _loc10_ = _loc13_.viaPins;
+            _loc21_ = 0;
+            while(_loc21_ < _loc10_.length-1)
+            {
+               _loc11_ = _loc10_[_loc21_];
+               _loc12_ = _loc10_[_loc21_ + 1];
+               drawLine(param1,colorIdxs[_loc17_],new Point(_loc11_[0],_loc11_[1]),new Point(_loc12_[0],_loc12_[1]));
+               _loc21_++;
+            }
+            if(_loc10_.length > 0)
+            {
+               _loc11_ = _loc10_[_loc10_.length-1];
+               _loc9_ = new Point(_loc11_[0],_loc11_[1]);
+               drawLine(param1,colorIdxs[_loc17_],_loc9_,_loc8_);
+               drawArrowEx(param1,colorIdxs[_loc17_],_loc9_,_loc8_);
+            }
+            _loc8_ = new Point(_loc14_.x,_loc7_.y);
+            drawLine(param1,colorIdxs[_loc17_],_loc7_,_loc8_);
+            if(_loc14_.drawArrow)
+            {
+               drawArrowEx(param1,colorIdxs[_loc17_],_loc7_,_loc8_);
+            }
+            if(!param3)
+            {
+               this.addParentID(param1,_loc19_);
+            }
+            _loc18_++;
+         }
+         _loc6_ = _loc16_.length;
+         _loc18_ = 0;
+         while(_loc18_ < _loc6_)
+         {
+            this.drawSingleLine(param1,_loc4_,_loc5_[_loc16_[_loc18_]],param3);
+            _loc18_++;
+         }
+      }
 
-        internal var tween:scaleform.clik.motion.Tween=null;
+      private function drawLineTMSet(param1:IRenderer, param2:Object, param3:Boolean) : void {
+         var _loc4_:Array = param2.outPin;
+         var _loc5_:Array = param2.inPins;
+         var _loc6_:Object = _loc5_[0];
+         var _loc7_:IRenderer = container.getNodeByID(_loc6_.childID);
+         if(!(_loc7_ == null) && (_loc7_.isButtonVisible()) && this.inButtonOffset > 0)
+         {
+            _loc6_ =
+               {
+                  "childID":_loc6_.childID,
+                  "inPin":[Number(_loc6_.inPin[0]),Number(_loc6_.inPin[1]) + this.inButtonOffset],
+                  "viaPins":_loc6_.viaPins
+               }
+            ;
+         }
+         this.drawSingleLine(param1,_loc4_,_loc6_,param3);
+         if(_loc5_.length > 1)
+         {
+            trace("Warning! From top part of node can goes only one line.");
+         }
+      }
 
-        internal var parentIDs:Object;
+      private function drawLineTRSet(param1:IRenderer, param2:Object, param3:Boolean) : void {
+         var _loc4_:Array = param2.outPin;
+         var _loc5_:Array = param2.inPins;
+         var _loc6_:Object = _loc5_[0];
+         this.drawSingleLine(param1,_loc4_,_loc6_,param3);
+         if(_loc5_.length > 1)
+         {
+            trace("Warning! From top part of node can goes only one line.");
+         }
+      }
 
-        public var levels:net.wg.gui.lobby.techtree.controls.LevelsContainer;
+      private function drawLineBMSet(param1:IRenderer, param2:Object, param3:Boolean) : void {
+         var _loc4_:Array = param2.outPin;
+         var _loc5_:Array = param2.inPins;
+         if((param1.isButtonVisible()) && this.outButtonOffset > 0)
+         {
+            _loc4_ = [Number(_loc4_[0]),Number(_loc4_[1]) + this.outButtonOffset];
+         }
+         this.drawSingleLine(param1,_loc4_,_loc5_[0],param3);
+         if(_loc5_.length > 1)
+         {
+            trace("Warning! From bottom part of node can goes only one line.");
+         }
+      }
 
-        public var inButtonOffset:Number=0;
+      private function drawLineBRSet(param1:IRenderer, param2:Object, param3:Boolean) : void {
+         var _loc4_:Array = param2.outPin;
+         var _loc5_:Array = param2.inPins;
+         var _loc6_:Object = _loc5_[0];
+         this.drawSingleLine(param1,_loc4_,_loc6_,param3);
+         if(_loc5_.length > 1)
+         {
+            trace("Warning! From bottom part of node can goes only one line.");
+         }
+      }
 
-        public var outButtonOffset:Number=0;
-    }
-}
+      private function handleRootChildStateChanged(param1:TechTreeEvent) : void {
+         var _loc2_:IRenderer = container.getRootNode();
+         if(!(_loc2_ == null) && (NodeStateCollection.isRedrawNTLines(param1.primary)))
+         {
+            this.drawTopLines(_loc2_,true);
+         }
+      }
 
-import flash.geom.*;
+      private function handleNodeStateChanged(param1:TechTreeEvent) : void {
+         var _loc2_:IRenderer = null;
+         var _loc3_:Array = null;
+         var _loc4_:* = NaN;
+         var _loc5_:IRenderer = null;
+         var _loc6_:* = NaN;
+         if(NodeStateCollection.isRedrawNTLines(param1.primary))
+         {
+            _loc2_ = param1.target as IRenderer;
+            if(_loc2_ != null)
+            {
+               this.drawNodeLines(_loc2_,true);
+               _loc3_ = this.parentIDs[_loc2_.getID()];
+               if(_loc3_ != null)
+               {
+                  _loc4_ = _loc3_.length;
+                  _loc6_ = 0;
+                  while(_loc6_ < _loc4_)
+                  {
+                     _loc5_ = container.getNodeByID(_loc3_[_loc6_]);
+                     if(_loc5_ != null)
+                     {
+                        this.drawNodeLines(_loc5_,true);
+                     }
+                     _loc6_++;
+                  }
+               }
+            }
+         }
+      }
+   }
+
+}   import flash.geom.Point;
 
 
-class TopLineInfo extends Object
-{
-    public function TopLineInfo(arg1:Number, arg2:flash.geom.Point=null)
-    {
-        super();
-        this.id = arg1;
-        this.point = arg2;
-        return;
-    }
+   class TopLineInfo extends Object
+   {
+          
+      function TopLineInfo(param1:Number, param2:Point=null) {
+         super();
+         this.id = param1;
+         this.point = param2;
+      }
 
-    public function get y():Number
-    {
-        return this.point.y;
-    }
+      public var id:Number;
 
-    public var id:Number;
+      public var point:Point;
 
-    public var point:flash.geom.Point;
-}
+      public function get y() : Number {
+         return this.point.y;
+      }
+   }
 
-class RSetLineInfo extends Object
-{
-    public function RSetLineInfo(arg1:Number, arg2:Number, arg3:Boolean, arg4:Number)
-    {
-        super();
-        this.idx = arg1;
-        this.x = arg2;
-        this.drawArrow = arg3;
-        this.childIdx = arg4;
-        return;
-    }
 
-    public var idx:Number;
+   class RSetLineInfo extends Object
+   {
+          
+      function RSetLineInfo(param1:Number, param2:Number, param3:Boolean, param4:Number) {
+         super();
+         this.idx = param1;
+         this.x = param2;
+         this.drawArrow = param3;
+         this.childIdx = param4;
+      }
 
-    public var x:Number;
+      public var idx:Number;
 
-    public var drawArrow:Boolean;
+      public var x:Number;
 
-    public var childIdx:Number;
-}
+      public var drawArrow:Boolean;
+
+      public var childIdx:Number;
+   }

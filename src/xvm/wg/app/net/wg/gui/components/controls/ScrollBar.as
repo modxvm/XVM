@@ -1,71 +1,63 @@
-package net.wg.gui.components.controls 
+package net.wg.gui.components.controls
 {
-    import flash.events.*;
-    import scaleform.clik.controls.*;
-    import scaleform.clik.events.*;
-    import scaleform.gfx.*;
-    
-    public class ScrollBar extends scaleform.clik.controls.ScrollBar
-    {
-        public function ScrollBar()
-        {
-            super();
+   import scaleform.clik.controls.ScrollBar;
+   import flash.events.Event;
+   import scaleform.gfx.MouseEventEx;
+   import flash.events.MouseEvent;
+   import scaleform.clik.events.ButtonEvent;
+
+
+   public class ScrollBar extends scaleform.clik.controls.ScrollBar
+   {
+          
+      public function ScrollBar() {
+         super();
+      }
+
+      public var upArrowWg:SoundButton;
+
+      public var downArrowWg:SoundButton;
+
+      public var thumbWg:SoundButton;
+
+      override protected function initialize() : void {
+         upArrow = this.upArrowWg;
+         downArrow = this.downArrowWg;
+         thumb = this.thumbWg;
+         super.initialize();
+      }
+
+      override public function dispose() : void {
+         super.dispose();
+      }
+
+      override protected function handleThumbPress(param1:Event) : void {
+         var _loc2_:MouseEventEx = param1 as MouseEventEx;
+         var _loc3_:uint = _loc2_ == null?0:_loc2_.buttonIdx;
+         if(_loc3_ != 0)
+         {
             return;
-        }
+         }
+         super.handleThumbPress(param1);
+      }
 
-        protected override function initialize():void
-        {
-            upArrow = this.upArrowWg;
-            downArrow = this.downArrowWg;
-            thumb = this.thumbWg;
-            super.initialize();
+      override protected function handleTrackPress(param1:MouseEvent) : void {
+         var _loc2_:MouseEventEx = param1 as MouseEventEx;
+         var _loc3_:uint = _loc2_ == null?0:_loc2_.buttonIdx;
+         if(_loc3_ != 0)
+         {
             return;
-        }
+         }
+         super.handleTrackPress(param1);
+      }
 
-        public override function dispose():void
-        {
-            super.dispose();
+      override protected function handleTrackClick(param1:ButtonEvent) : void {
+         if(param1.buttonIdx != 0)
+         {
             return;
-        }
+         }
+         super.handleTrackClick(param1);
+      }
+   }
 
-        protected override function handleThumbPress(arg1:flash.events.Event):void
-        {
-            var loc1:*=arg1 as scaleform.gfx.MouseEventEx;
-            var loc2:*=loc1 != null ? loc1.buttonIdx : 0;
-            if (loc2 != 0) 
-            {
-                return;
-            }
-            super.handleThumbPress(arg1);
-            return;
-        }
-
-        protected override function handleTrackPress(arg1:flash.events.MouseEvent):void
-        {
-            var loc1:*=arg1 as scaleform.gfx.MouseEventEx;
-            var loc2:*=loc1 != null ? loc1.buttonIdx : 0;
-            if (loc2 != 0) 
-            {
-                return;
-            }
-            super.handleTrackPress(arg1);
-            return;
-        }
-
-        protected override function handleTrackClick(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            if (arg1.buttonIdx != 0) 
-            {
-                return;
-            }
-            super.handleTrackClick(arg1);
-            return;
-        }
-
-        public var upArrowWg:net.wg.gui.components.controls.SoundButton;
-
-        public var downArrowWg:net.wg.gui.components.controls.SoundButton;
-
-        public var thumbWg:net.wg.gui.components.controls.SoundButton;
-    }
 }

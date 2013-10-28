@@ -1,62 +1,56 @@
-package net.wg.gui.lobby.techtree.data.vo 
+package net.wg.gui.lobby.techtree.data.vo
 {
-    import net.wg.gui.lobby.techtree.interfaces.*;
-    import net.wg.utils.*;
-    
-    public class PrimaryClass extends Object implements net.wg.gui.lobby.techtree.interfaces.IValueObject
-    {
-        public function PrimaryClass(arg1:String="", arg2:String="")
-        {
-            super();
-            this._name = arg1;
-            this._userString = arg2;
+   import net.wg.gui.lobby.techtree.interfaces.IValueObject;
+   import net.wg.utils.ILocale;
+
+
+   public class PrimaryClass extends Object implements IValueObject
+   {
+          
+      public function PrimaryClass(param1:String=undefined, param2:String=undefined) {
+         super();
+         this._name = param1;
+         this._userString = param2;
+      }
+
+      private var _name:String;
+
+      private var _userString:String;
+
+      public function get name() : String {
+         return this._name;
+      }
+
+      public function get userString() : String {
+         return this._userString;
+      }
+
+      public function fromArray(param1:Array, param2:ILocale) : void {
+         if(param1.length > 1)
+         {
+            this._name = param1[0];
+            this._userString = param1[1];
+         }
+      }
+
+      public function fromObject(param1:Object, param2:ILocale) : void {
+         if(param1 == null)
+         {
             return;
-        }
+         }
+         if(param1.name != null)
+         {
+            this._name = param1.name;
+         }
+         if(param1.userString != null)
+         {
+            this._userString = param1.userString;
+         }
+      }
 
-        public function get name():String
-        {
-            return this._name;
-        }
+      public function toString() : String {
+         return "[PrimaryClass: name = " + this._name + ", userString = " + this._userString + " ]";
+      }
+   }
 
-        public function get userString():String
-        {
-            return this._userString;
-        }
-
-        public function fromArray(arg1:Array, arg2:net.wg.utils.ILocale):void
-        {
-            if (arg1.length > 1) 
-            {
-                this._name = arg1[0];
-                this._userString = arg1[1];
-            }
-            return;
-        }
-
-        public function fromObject(arg1:Object, arg2:net.wg.utils.ILocale):void
-        {
-            if (arg1 == null) 
-            {
-                return;
-            }
-            if (arg1.name != null) 
-            {
-                this._name = arg1.name;
-            }
-            if (arg1.userString != null) 
-            {
-                this._userString = arg1.userString;
-            }
-            return;
-        }
-
-        public function toString():String
-        {
-            return "[PrimaryClass: name = " + this._name + ", userString = " + this._userString + " ]";
-        }
-
-        internal var _name:String;
-
-        internal var _userString:String;
-    }
 }

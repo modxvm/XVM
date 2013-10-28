@@ -1,42 +1,39 @@
-package net.wg.data.gui_items 
+package net.wg.data.gui_items
 {
-    public class GUIItem extends Object
-    {
-        public function GUIItem(arg1:uint, arg2:*)
-        {
-            super();
-            this._itemTypeIdx = arg1;
-            this._id = arg2;
-            return;
-        }
 
-        protected function _getAttr(arg1:String):Object
-        {
-            return App.itemsMgr._getItemAttributeS(this._itemTypeIdx, this._id, arg1);
-        }
 
-        protected function _callMethod(arg1:String, ... rest):Object
-        {
-            return App.itemsMgr._callItemMethodS(this._itemTypeIdx, this._id, arg1, rest);
-        }
+   public class GUIItem extends Object
+   {
+          
+      public function GUIItem(param1:uint, param2:*) {
+         super();
+         this._itemTypeIdx = param1;
+         this._id = param2;
+      }
 
-        public function get itemTypeIdx():uint
-        {
-            return this._itemTypeIdx;
-        }
+      protected var _itemTypeIdx:uint;
 
-        public function get id():*
-        {
-            return this._id;
-        }
+      protected var _id:*;
 
-        public function toString():String
-        {
-            return String(this._callMethod("toString"));
-        }
+      public function toString() : String {
+         return String(this._callMethod("toString"));
+      }
 
-        protected var _itemTypeIdx:uint;
+      public function get itemTypeIdx() : uint {
+         return this._itemTypeIdx;
+      }
 
-        protected var _id:*;
-    }
+      public function get id() : * {
+         return this._id;
+      }
+
+      protected function _getAttr(param1:String) : Object {
+         return App.itemsMgr._getItemAttributeS(this._itemTypeIdx,this._id,param1);
+      }
+
+      protected function _callMethod(param1:String, ... rest) : Object {
+         return App.itemsMgr._callItemMethodS(this._itemTypeIdx,this._id,param1,rest);
+      }
+   }
+
 }

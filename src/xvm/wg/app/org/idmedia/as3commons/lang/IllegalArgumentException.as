@@ -1,11 +1,13 @@
-package org.idmedia.as3commons.lang 
+package org.idmedia.as3commons.lang
 {
-    public class IllegalArgumentException extends org.idmedia.as3commons.lang.Exception
-    {
-        public function IllegalArgumentException(arg1:String="")
-        {
-            super(arg1);
-            return;
-        }
-    }
+
+
+   public class IllegalArgumentException extends Exception
+   {
+          
+      public function IllegalArgumentException(param1:String=undefined) {
+         super(param1);
+      }
+   }
+
 }

@@ -1,63 +1,53 @@
-package net.wg.gui.lobby.hangar.crew 
+package net.wg.gui.lobby.hangar.crew
 {
-    public class IconsProps extends Object
-    {
-        public function IconsProps()
-        {
-            super();
-            return;
-        }
 
-        public function get alpha():Number
-        {
-            return this._alpha;
-        }
 
-        public function set alpha(arg1:Number):void
-        {
-            this._alpha = arg1;
-            return;
-        }
+   public class IconsProps extends Object
+   {
+          
+      public function IconsProps() {
+         super();
+      }
 
-        public function get visible():Boolean
-        {
-            return this._visible;
-        }
+      private var _alpha:Number;
 
-        public function set visible(arg1:Boolean):void
-        {
-            this._visible = arg1;
-            return;
-        }
+      private var _visible:Boolean;
 
-        public function get autoSize():String
-        {
-            return this._autoSize;
-        }
+      private var _autoSize:String;
 
-        public function set autoSize(arg1:String):void
-        {
-            this._autoSize = arg1;
-            return;
-        }
+      private var _text:String;
 
-        public function get text():String
-        {
-            return this._text;
-        }
+      public function get alpha() : Number {
+         return this._alpha;
+      }
 
-        public function set text(arg1:String):void
-        {
-            this._text = arg1;
-            return;
-        }
+      public function set alpha(param1:Number) : void {
+         this._alpha = param1;
+      }
 
-        internal var _alpha:Number;
+      public function get visible() : Boolean {
+         return this._visible;
+      }
 
-        internal var _visible:Boolean;
+      public function set visible(param1:Boolean) : void {
+         this._visible = param1;
+      }
 
-        internal var _autoSize:String;
+      public function get autoSize() : String {
+         return this._autoSize;
+      }
 
-        internal var _text:String;
-    }
+      public function set autoSize(param1:String) : void {
+         this._autoSize = param1;
+      }
+
+      public function get text() : String {
+         return this._text;
+      }
+
+      public function set text(param1:String) : void {
+         this._text = param1;
+      }
+   }
+
 }

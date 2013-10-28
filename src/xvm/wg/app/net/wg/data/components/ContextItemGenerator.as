@@ -1,24 +1,23 @@
-package net.wg.data.components 
+package net.wg.data.components
 {
-    import net.wg.data.daapi.*;
-    import org.idmedia.as3commons.util.*;
-    
-    public class ContextItemGenerator extends net.wg.data.components.AbstractContextItemGenerator
-    {
-        public function ContextItemGenerator()
-        {
-            super();
-            return;
-        }
+   import org.idmedia.as3commons.util.Map;
+   import net.wg.data.daapi.PlayerInfo;
 
-        protected override function getDenunciationsIDs(arg1:net.wg.data.daapi.PlayerInfo):org.idmedia.as3commons.util.Map
-        {
-            return App.utils.commons.createMap(["offend", {}, "flood", {}, "openingOfAllyPos", {}, "allyEjection", {}, "notFairPlay", {}, "teamKill", {}, "bot", {}]);
-        }
 
-        protected override function createSimpleDataIDs(arg1:String, arg2:String, arg3:String, arg4:String):org.idmedia.as3commons.util.Map
-        {
-            return App.utils.commons.createMap(["userInfo", {}, arg1, {}, arg2, {}, arg3, {}, "copyToClipBoard", {}, arg4, {}]);
-        }
-    }
+   public class ContextItemGenerator extends AbstractContextItemGenerator
+   {
+          
+      public function ContextItemGenerator() {
+         super();
+      }
+
+      override protected function getDenunciationsIDs(param1:PlayerInfo) : Map {
+         return App.utils.commons.createMap(["offend",{},"flood",{},"openingOfAllyPos",{},"allyEjection",{},"notFairPlay",{},"teamKill",{},"bot",{}]);
+      }
+
+      override protected function createSimpleDataIDs(param1:String, param2:String, param3:String, param4:String) : Map {
+         return App.utils.commons.createMap(["userInfo",{},param1,{"enabled":isEnabledInRoaming},param2,{"enabled":isEnabledInRoaming},param3,{},"copyToClipBoard",{},param4,{}]);
+      }
+   }
+
 }

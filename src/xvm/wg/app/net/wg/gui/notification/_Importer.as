@@ -1,18 +1,13 @@
-package net.wg.gui.notification 
+package net.wg.gui.notification
 {
-    public class _Importer extends Object
-    {
-        public function _Importer()
-        {
-            super();
-            return;
-        }
-    }
-}
 
 
+   public class _Importer extends Object
+   {
+          
+      public function _Importer() {
+         super();
+      }
+   }
 
-{
-    var loc1:*=net.wg.gui.notification.CAPTCHA;
-    loc1;
 }

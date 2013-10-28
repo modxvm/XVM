@@ -1,109 +1,95 @@
-package org.idmedia.as3commons.util 
+package org.idmedia.as3commons.util
 {
-    import org.idmedia.as3commons.lang.*;
-    
-    public class AbstractCollection extends Object implements org.idmedia.as3commons.util.Collection
-    {
-        public function AbstractCollection()
-        {
-            super();
-            return;
-        }
+   import org.idmedia.as3commons.lang.UnsupportedOperationException;
 
-        public function add(arg1:*):Boolean
-        {
-            throw new org.idmedia.as3commons.lang.UnsupportedOperationException();
-        }
 
-        public function addAll(arg1:org.idmedia.as3commons.util.Collection):Boolean
-        {
-            var loc1:*=false;
-            var loc2:*=arg1.iterator();
-            while (loc2.hasNext()) 
+   public class AbstractCollection extends Object implements Collection
+   {
+          
+      public function AbstractCollection() {
+         super();
+      }
+
+      public function add(param1:*) : Boolean {
+         throw new UnsupportedOperationException();
+      }
+
+      public function addAll(param1:Collection) : Boolean {
+         var _loc2_:* = false;
+         var _loc3_:Iterator = param1.iterator();
+         while(_loc3_.hasNext())
+         {
+            if(this.add(_loc3_.next()))
             {
-                if (!this.add(loc2.next())) 
-                {
-                    continue;
-                }
-                loc1 = true;
+               _loc2_ = true;
             }
-            return loc1;
-        }
+         }
+         return _loc2_;
+      }
 
-        public function clear():void
-        {
-            var loc1:*=this.iterator();
-            while (loc1.hasNext()) 
+      public function clear() : void {
+         var _loc1_:Iterator = this.iterator();
+         while(_loc1_.hasNext())
+         {
+            _loc1_.next();
+            _loc1_.remove();
+         }
+      }
+
+      public function contains(param1:*) : Boolean {
+         return this.toArray().indexOf(param1) > -1;
+      }
+
+      public function containsAll(param1:Collection) : Boolean {
+         var _loc2_:Iterator = param1.iterator();
+         while(_loc2_.hasNext())
+         {
+            if(!this.contains(_loc2_.next()))
             {
-                loc1.next();
-                loc1.remove();
+               return false;
             }
-            return;
-        }
+         }
+         return true;
+      }
 
-        public function contains(arg1:*):Boolean
-        {
-            return this.toArray().indexOf(arg1) > -1;
-        }
+      public function isEmpty() : Boolean {
+         return this.size() == 0;
+      }
 
-        public function containsAll(arg1:org.idmedia.as3commons.util.Collection):Boolean
-        {
-            var loc1:*=arg1.iterator();
-            while (loc1.hasNext()) 
+      public function iterator() : Iterator {
+         return null;
+      }
+
+      public function remove(param1:*=null) : Boolean {
+         var _loc2_:Iterator = this.iterator();
+         while(_loc2_.hasNext())
+         {
+            if(_loc2_.next() == param1)
             {
-                if (this.contains(loc1.next())) 
-                {
-                    continue;
-                }
-                return false;
+               _loc2_.remove();
+               return true;
             }
-            return true;
-        }
+         }
+         return false;
+      }
 
-        public function isEmpty():Boolean
-        {
-            return this.size() == 0;
-        }
+      public function size() : int {
+         return 0;
+      }
 
-        public function iterator():org.idmedia.as3commons.util.Iterator
-        {
-            return null;
-        }
+      public function toArray() : Array {
+         var _loc1_:Array = new Array();
+         var _loc2_:Iterator = this.iterator();
+         while(_loc2_.hasNext())
+         {
+            _loc1_.push(_loc2_.next());
+         }
+         return _loc1_;
+      }
 
-        public function remove(arg1:*=null):Boolean
-        {
-            var loc1:*=this.iterator();
-            while (loc1.hasNext()) 
-            {
-                if (loc1.next() != arg1) 
-                {
-                    continue;
-                }
-                loc1.remove();
-                return true;
-            }
-            return false;
-        }
+      public function equals(param1:*) : Boolean {
+         return param1 === this;
+      }
+   }
 
-        public function size():int
-        {
-            return 0;
-        }
-
-        public function toArray():Array
-        {
-            var loc1:*=new Array();
-            var loc2:*=this.iterator();
-            while (loc2.hasNext()) 
-            {
-                loc1.push(loc2.next());
-            }
-            return loc1;
-        }
-
-        public function equals(arg1:*):Boolean
-        {
-            return arg1 === this;
-        }
-    }
 }

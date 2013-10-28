@@ -1,41 +1,43 @@
-package net.wg.gui.messenger.meta.impl 
+package net.wg.gui.messenger.meta.impl
 {
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.base.*;
-    
-    public class ContactsWindowMeta extends net.wg.infrastructure.base.AbstractWindowView
-    {
-        public function ContactsWindowMeta()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.AbstractWindowView;
+   import net.wg.data.constants.Errors;
 
-        public function searchContactS(arg1:String):void
-        {
-            App.utils.asserter.assertNotNull(this.searchContact, "searchContact" + net.wg.data.constants.Errors.CANT_NULL);
-            this.searchContact(arg1);
-            return;
-        }
 
-        public function addToFriendsS(arg1:Number, arg2:String):void
-        {
-            App.utils.asserter.assertNotNull(this.addToFriends, "addToFriends" + net.wg.data.constants.Errors.CANT_NULL);
-            this.addToFriends(arg1, arg2);
-            return;
-        }
+   public class ContactsWindowMeta extends AbstractWindowView
+   {
+          
+      public function ContactsWindowMeta() {
+         super();
+      }
 
-        public function addToIgnoredS(arg1:Number, arg2:String):void
-        {
-            App.utils.asserter.assertNotNull(this.addToIgnored, "addToIgnored" + net.wg.data.constants.Errors.CANT_NULL);
-            this.addToIgnored(arg1, arg2);
-            return;
-        }
+      public var searchContact:Function = null;
 
-        public var searchContact:Function=null;
+      public var addToFriends:Function = null;
 
-        public var addToFriends:Function=null;
+      public var addToIgnored:Function = null;
 
-        public var addToIgnored:Function=null;
-    }
+      public var isEnabledInRoaming:Function = null;
+
+      public function searchContactS(param1:String) : void {
+         App.utils.asserter.assertNotNull(this.searchContact,"searchContact" + Errors.CANT_NULL);
+         this.searchContact(param1);
+      }
+
+      public function addToFriendsS(param1:Number, param2:String) : void {
+         App.utils.asserter.assertNotNull(this.addToFriends,"addToFriends" + Errors.CANT_NULL);
+         this.addToFriends(param1,param2);
+      }
+
+      public function addToIgnoredS(param1:Number, param2:String) : void {
+         App.utils.asserter.assertNotNull(this.addToIgnored,"addToIgnored" + Errors.CANT_NULL);
+         this.addToIgnored(param1,param2);
+      }
+
+      public function isEnabledInRoamingS(param1:Number) : Boolean {
+         App.utils.asserter.assertNotNull(this.isEnabledInRoaming,"isEnabledInRoaming" + Errors.CANT_NULL);
+         return this.isEnabledInRoaming(param1);
+      }
+   }
+
 }

@@ -1,19 +1,20 @@
-package net.wg.gui.notification 
+package net.wg.gui.notification
 {
-    import net.wg.data.daapi.base.*;
-    
-    public class MoreInfoVO extends net.wg.data.daapi.base.DAAPIDataClass
-    {
-        public function MoreInfoVO(arg1:Object)
-        {
-            super(arg1);
-            return;
-        }
+   import net.wg.data.daapi.base.DAAPIDataClass;
 
-        public var command:String="";
 
-        public var enabled:Boolean;
+   public class MoreInfoVO extends DAAPIDataClass
+   {
+          
+      public function MoreInfoVO(param1:Object) {
+         super(param1);
+      }
 
-        public var param:Object;
-    }
+      public var command:String = "";
+
+      public var enabled:Boolean;
+
+      public var param:Object;
+   }
+
 }

@@ -1,71 +1,57 @@
-package net.wg.gui.lobby.questsWindow.data 
+package net.wg.gui.lobby.questsWindow.data
 {
-    import net.wg.data.daapi.base.*;
-    
-    public class InfoDataVO extends net.wg.data.daapi.base.DAAPIDataClass
-    {
-        public function InfoDataVO(arg1:Object)
-        {
-            this._subtasks = [];
-            this._conditions = [];
-            super(arg1);
-            return;
-        }
+   import net.wg.data.daapi.base.DAAPIDataClass;
 
-        protected override function onDataWrite(arg1:String, arg2:Object):Boolean
-        {
-            var loc1:*=arg1;
-            switch (loc1) 
-            {
-                case "descr":
-                {
-                    this._descr = arg2 ? new net.wg.gui.lobby.questsWindow.data.DescriptionVO(arg2) : null;
-                    return false;
-                }
-                default:
-                {
-                    return true;
-                }
-            }
-        }
 
-        public function get descr():net.wg.gui.lobby.questsWindow.data.DescriptionVO
-        {
-            return this._descr;
-        }
+   public class InfoDataVO extends DAAPIDataClass
+   {
+          
+      public function InfoDataVO(param1:Object) {
+         this._subtasks = [];
+         this._conditions = [];
+         super(param1);
+      }
 
-        public function set descr(arg1:net.wg.gui.lobby.questsWindow.data.DescriptionVO):void
-        {
-            this._descr = arg1;
-            return;
-        }
+      private var _descr:DescriptionVO = null;
 
-        public function get subtasks():Array
-        {
-            return this._subtasks;
-        }
+      private var _subtasks:Array;
 
-        public function set subtasks(arg1:Array):void
-        {
-            this._subtasks = arg1;
-            return;
-        }
+      private var _conditions:Array;
 
-        public function get conditions():Array
-        {
-            return this._conditions;
-        }
+      override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+         switch(param1)
+         {
+            case "descr":
+               this._descr = param2?new DescriptionVO(param2):null;
+               return false;
+            default:
+               return true;
+         }
+      }
 
-        public function set conditions(arg1:Array):void
-        {
-            this._conditions = arg1;
-            return;
-        }
+      public function get descr() : DescriptionVO {
+         return this._descr;
+      }
 
-        internal var _descr:net.wg.gui.lobby.questsWindow.data.DescriptionVO=null;
+      public function set descr(param1:DescriptionVO) : void {
+         this._descr = param1;
+      }
 
-        internal var _subtasks:Array;
+      public function get subtasks() : Array {
+         return this._subtasks;
+      }
 
-        internal var _conditions:Array;
-    }
+      public function set subtasks(param1:Array) : void {
+         this._subtasks = param1;
+      }
+
+      public function get conditions() : Array {
+         return this._conditions;
+      }
+
+      public function set conditions(param1:Array) : void {
+         this._conditions = param1;
+      }
+   }
+
 }

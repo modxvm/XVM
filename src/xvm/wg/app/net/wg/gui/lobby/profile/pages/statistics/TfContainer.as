@@ -1,117 +1,131 @@
-package net.wg.gui.lobby.profile.pages.statistics 
+package net.wg.gui.lobby.profile.pages.statistics
 {
-    import __AS3__.vec.*;
-    import flash.events.*;
-    import net.wg.data.constants.*;
-    import net.wg.data.gui_items.dossier.*;
-    import net.wg.gui.lobby.profile.components.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.core.*;
-    
-    public class TfContainer extends scaleform.clik.core.UIComponent implements net.wg.infrastructure.interfaces.entity.IDisposable
-    {
-        public function TfContainer()
-        {
-            super();
-            addEventListener(flash.events.Event.RESIZE, this.resizeComponentsHandler, false, 0, true);
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import net.wg.gui.lobby.profile.components.LditBattles;
+   import net.wg.gui.lobby.profile.components.LineDescrIconText;
+   import net.wg.gui.lobby.profile.components.LditValued;
+   import net.wg.gui.lobby.profile.components.LditMarksOfMastery;
+   import flash.events.Event;
+   import __AS3__.vec.Vector;
+   import scaleform.clik.constants.InvalidationType;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            return;
-        }
 
-        internal function resizeComponentsHandler(arg1:flash.events.Event):void
-        {
-            arg1.stopImmediatePropagation();
-            invalidate(LAYOUT_INVALID);
-            return;
-        }
+   public class TfContainer extends UIComponent implements IDisposable
+   {
+          
+      public function TfContainer() {
+         super();
+         addEventListener(Event.RESIZE,this.resizeComponentsHandler,false,0,true);
+      }
 
-        protected override function draw():void
-        {
-            var loc1:*=null;
-            var loc2:*=NaN;
-            var loc3:*=0;
-            var loc4:*=0;
-            var loc5:*=null;
-            var loc6:*=0;
-            var loc7:*=0;
-            super.draw();
-            if (isInvalid(LAYOUT_INVALID, scaleform.clik.constants.InvalidationType.SIZE)) 
+      public static const LAYOUT_INVALID:String = "layoutInv";
+
+      public var tfTotalBattles:LditBattles;
+
+      public var tfWins:LineDescrIconText;
+
+      public var tfSurvival:LineDescrIconText;
+
+      public var tfHits:LineDescrIconText;
+
+      public var tfAvgExperience:LineDescrIconText;
+
+      public var tfMaxExperience:LditValued;
+
+      public var tfMarksOfMastery:LditMarksOfMastery;
+
+      private function resizeComponentsHandler(param1:Event) : void {
+         param1.stopImmediatePropagation();
+         invalidate(LAYOUT_INVALID);
+      }
+
+      override protected function draw() : void {
+         var _loc1_:Vector.<UIComponent> = null;
+         var _loc2_:* = NaN;
+         var _loc3_:* = 0;
+         var _loc4_:* = 0;
+         var _loc5_:UIComponent = null;
+         var _loc6_:* = 0;
+         var _loc7_:* = 0;
+         super.draw();
+         if(isInvalid(LAYOUT_INVALID,InvalidationType.SIZE))
+         {
+            _loc1_ = new Vector.<UIComponent>();
+            _loc1_.push(this.tfTotalBattles);
+            _loc1_.push(this.tfWins);
+            _loc1_.push(this.tfHits);
+            _loc1_.push(this.tfAvgExperience);
+            _loc1_.push(this.tfMaxExperience);
+            _loc1_.push(this.tfSurvival);
+            _loc1_.push(this.tfMarksOfMastery);
+            _loc2_ = 0;
+            _loc3_ = _loc1_.length;
+            _loc4_ = 0;
+            while(_loc4_ < _loc3_)
             {
-                loc1 = new Vector.<scaleform.clik.core.UIComponent>();
-                loc1.push(this.tfTotalBattles);
-                loc1.push(this.tfWins);
-                loc1.push(this.tfHits);
-                loc1.push(this.tfAvgExperience);
-                loc1.push(this.tfMaxExperience);
-                loc1.push(this.tfSurvival);
-                loc1.push(this.tfMarksOfMastery);
-                loc2 = 0;
-                loc3 = loc1.length;
-                loc4 = 0;
-                while (loc4 < loc3) 
-                {
-                    if (loc5 = loc1[loc4]) 
-                    {
-                        loc2 = loc2 + loc5.width;
-                    }
-                    ++loc4;
-                }
-                loc7 = loc6 = (_width - loc2) / (loc3 + 1);
-                loc4 = 0;
-                while (loc4 < loc3) 
-                {
-                    if (loc5 = loc1[loc4]) 
-                    {
-                        loc5.x = loc7;
-                        loc7 = loc7 + (loc5.width + loc6);
-                    }
-                    ++loc4;
-                }
+               _loc5_ = _loc1_[_loc4_];
+               if(_loc5_)
+               {
+                  _loc2_ = _loc2_ + _loc5_.width;
+               }
+               _loc4_++;
             }
-            return;
-        }
+            _loc6_ = (_width - _loc2_) / (_loc3_ + 1);
+            _loc7_ = _loc6_;
+            _loc4_ = 0;
+            while(_loc4_ < _loc3_)
+            {
+               _loc5_ = _loc1_[_loc4_];
+               if(_loc5_)
+               {
+                  _loc5_.x = _loc7_;
+                  _loc7_ = _loc7_ + (_loc5_.width + _loc6_);
+               }
+               _loc4_++;
+            }
+         }
+      }
 
-        public function setDossierData(arg1:net.wg.data.gui_items.dossier.AccountDossier):void
-        {
-            this.tfTotalBattles.text = arg1.getBattlesCountStr();
-            this.tfWins.text = arg1.getWinsEfficiencyStr();
-            this.tfSurvival.text = arg1.getSurvivalEfficiencyStr();
-            this.tfHits.text = arg1.getHitsEfficiencyStr();
-            this.tfMaxExperience.text = arg1.getMaxXPStr();
-            this.tfMaxExperience.value = arg1.getMaxXPVehicleDescr();
-            this.tfAvgExperience.text = arg1.getAvgXPStr();
-            this.tfMarksOfMastery.text = arg1.getSpecifiedMarksOfMastery(net.wg.data.constants.MarksOfMastery.MASTER).toString();
-            this.tfMarksOfMastery.totalCount = arg1.getVehiclesCount();
-            return;
-        }
+      public function setDossierData(param1:Object) : void {
+         var _loc2_:ProfileStatisticsVO = new ProfileStatisticsVO(param1);
+         this.tfTotalBattles.text = _loc2_.getBattlesCountStr();
+         this.tfTotalBattles.setValues(_loc2_.getWinsCountStr(),_loc2_.getLossesCountStr(),_loc2_.getDrawsCountStr());
+         this.tfWins.text = _loc2_.getWinsEfficiencyStr() + "%";
+         this.tfSurvival.text = _loc2_.getSurvivalEfficiencyStr() + "%";
+         this.tfHits.text = _loc2_.getHitsEfficiencyStr() + "%";
+         if(_loc2_.maxXP != -1)
+         {
+            this.tfMaxExperience.tooltip = PROFILE.PROFILE_PARAMS_TOOLTIP_MAXEXP;
+            this.tfMaxExperience.enabled = true;
+            this.tfMaxExperience.text = _loc2_.getMaxExperienceStr();
+            this.tfMaxExperience.value = _loc2_.maxXP > 0?_loc2_.maxXPByVehicle:null;
+         }
+         else
+         {
+            this.tfMaxExperience.tooltip = PROFILE.PROFILE_PARAMS_TOOLTIP_MAXEXPDISABLED;
+            this.tfMaxExperience.value = null;
+            this.tfMaxExperience.enabled = false;
+         }
+         this.tfAvgExperience.text = _loc2_.getAvgExperienceStr();
+         if(_loc2_.marksOfMastery != -1)
+         {
+            this.tfMarksOfMastery.tooltip = PROFILE.PROFILE_PARAMS_TOOLTIP_MARKOFMASTERY;
+            this.tfMarksOfMastery.enabled = true;
+            this.tfMarksOfMastery.text = _loc2_.getMarksOfMasteryCountStr();
+            this.tfMarksOfMastery.totalCount = _loc2_.totalUserVehiclesCount;
+         }
+         else
+         {
+            this.tfMarksOfMastery.tooltip = PROFILE.PROFILE_PARAMS_TOOLTIP_MARKOFMASTERYDISABLED;
+            this.tfMarksOfMastery.enabled = false;
+         }
+      }
 
-        public override function dispose():void
-        {
-            super.dispose();
-            removeEventListener(flash.events.Event.RESIZE, this.resizeComponentsHandler);
-            return;
-        }
+      override public function dispose() : void {
+         removeEventListener(Event.RESIZE,this.resizeComponentsHandler);
+         super.dispose();
+      }
+   }
 
-        public static const LAYOUT_INVALID:String="layoutInv";
-
-        public var tfTotalBattles:net.wg.gui.lobby.profile.components.LineDescrIconText;
-
-        public var tfWins:net.wg.gui.lobby.profile.components.LineDescrIconText;
-
-        public var tfSurvival:net.wg.gui.lobby.profile.components.LineDescrIconText;
-
-        public var tfHits:net.wg.gui.lobby.profile.components.LineDescrIconText;
-
-        public var tfAvgExperience:net.wg.gui.lobby.profile.components.LineDescrIconText;
-
-        public var tfMaxExperience:net.wg.gui.lobby.profile.components.LditValued;
-
-        public var tfMarksOfMastery:net.wg.gui.lobby.profile.components.LditMarksOfMastery;
-    }
 }

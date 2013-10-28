@@ -1,37 +1,36 @@
-package net.wg.gui.lobby.battleResults 
+package net.wg.gui.lobby.battleResults
 {
-    import flash.text.*;
-    import net.wg.gui.components.controls.*;
-    import scaleform.clik.core.*;
-    
-    public class TankStatsView extends scaleform.clik.core.UIComponent
-    {
-        public function TankStatsView()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.text.TextField;
+   import net.wg.gui.components.controls.UILoaderAlt;
 
-        public override function dispose():void
-        {
-            this.tankIcon.dispose();
-            this.bgOverlay.dispose();
-            this.areaIcon.dispose();
-            return;
-        }
 
-        public var playerNameLbl:flash.text.TextField;
+   public class TankStatsView extends UIComponent
+   {
+          
+      public function TankStatsView() {
+         super();
+      }
 
-        public var arenaCreateDateLbl:flash.text.TextField;
+      public var playerNameLbl:TextField;
 
-        public var vehicleStateLbl:flash.text.TextField;
+      public var arenaCreateDateLbl:TextField;
 
-        public var tankNameLbl:flash.text.TextField;
+      public var vehicleStateLbl:TextField;
 
-        public var tankIcon:net.wg.gui.components.controls.UILoaderAlt;
+      public var tankNameLbl:TextField;
 
-        public var bgOverlay:net.wg.gui.components.controls.UILoaderAlt;
+      public var tankIcon:UILoaderAlt;
 
-        public var areaIcon:net.wg.gui.components.controls.UILoaderAlt;
-    }
+      public var bgOverlay:UILoaderAlt;
+
+      public var areaIcon:UILoaderAlt;
+
+      override public function dispose() : void {
+         this.tankIcon.dispose();
+         this.bgOverlay.dispose();
+         this.areaIcon.dispose();
+      }
+   }
+
 }

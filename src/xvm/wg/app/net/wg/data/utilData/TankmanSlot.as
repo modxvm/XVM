@@ -1,33 +1,32 @@
-package net.wg.data.utilData 
+package net.wg.data.utilData
 {
-    import net.wg.data.gui_items.*;
-    
-    public class TankmanSlot extends Object
-    {
-        public function TankmanSlot(arg1:uint, arg2:uint=1)
-        {
-            super();
-            this._roleName = arg1;
-            this._tankmanInvID = arg2;
-            return;
-        }
+   import net.wg.data.gui_items.Tankman;
 
-        public function get roleName():uint
-        {
-            return this._roleName;
-        }
 
-        public function get tankman():net.wg.data.gui_items.Tankman
-        {
-            if (this._tankmanInvID != -1) 
-            {
-                return new net.wg.data.gui_items.Tankman(this._tankmanInvID);
-            }
-            return null;
-        }
+   public class TankmanSlot extends Object
+   {
+          
+      public function TankmanSlot(param1:uint, param2:uint=undefined) {
+         super();
+         this._roleName = param1;
+         this._tankmanInvID = param2;
+      }
 
-        internal var _roleName:uint;
+      private var _roleName:uint;
 
-        internal var _tankmanInvID:uint;
-    }
+      private var _tankmanInvID:uint;
+
+      public function get roleName() : uint {
+         return this._roleName;
+      }
+
+      public function get tankman() : Tankman {
+         if(this._tankmanInvID != -1)
+         {
+            return new Tankman(this._tankmanInvID);
+         }
+         return null;
+      }
+   }
+
 }

@@ -1,17 +1,21 @@
-package net.wg.gui.components.controls 
+package net.wg.gui.components.controls
 {
-    public interface IProgressBar
-    {
-        function set minimum(arg1:Number):void;
 
-        function get minimum():Number;
 
-        function set maximum(arg1:Number):void;
+   public interface IProgressBar
+   {
+          
+      function set minimum(param1:Number) : void;
 
-        function get maximum():Number;
+      function get minimum() : Number;
 
-        function set value(arg1:Number):void;
+      function set maximum(param1:Number) : void;
 
-        function get value():Number;
-    }
+      function get maximum() : Number;
+
+      function set value(param1:Number) : void;
+
+      function get value() : Number;
+   }
+
 }

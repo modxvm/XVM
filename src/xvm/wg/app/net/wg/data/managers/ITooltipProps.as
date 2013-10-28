@@ -1,19 +1,23 @@
-package net.wg.data.managers 
+package net.wg.data.managers
 {
-    public interface ITooltipProps
-    {
-        function get type():String;
 
-        function get x():Number;
 
-        function get y():Number;
+   public interface ITooltipProps
+   {
+          
+      function get type() : String;
 
-        function get minWidth():Number;
+      function get x() : Number;
 
-        function get drawDelay():Number;
+      function get y() : Number;
 
-        function get showDelay():Number;
+      function get minWidth() : Number;
 
-        function get maxWidth():Number;
-    }
+      function get drawDelay() : Number;
+
+      function get showDelay() : Number;
+
+      function get maxWidth() : Number;
+   }
+
 }

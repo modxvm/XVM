@@ -1,25 +1,24 @@
-package net.wg.gui.components.controls.achievements 
+package net.wg.gui.components.controls.achievements
 {
-    import flash.text.*;
-    import scaleform.clik.core.*;
-    
-    public class AchievementProgressComponent extends scaleform.clik.core.UIComponent
-    {
-        public function AchievementProgressComponent()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.text.TextField;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.progressBar.setActualSize(_originalWidth, this.progressBar.height);
-            return;
-        }
 
-        public var progressBar:net.wg.gui.components.controls.achievements.AchievementProgressBar;
+   public class AchievementProgressComponent extends UIComponent
+   {
+          
+      public function AchievementProgressComponent() {
+         super();
+      }
 
-        public var progressTextField:flash.text.TextField;
-    }
+      public var progressBar:AchievementProgressBar;
+
+      public var progressTextField:TextField;
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.progressBar.setActualSize(_originalWidth,this.progressBar.height);
+      }
+   }
+
 }

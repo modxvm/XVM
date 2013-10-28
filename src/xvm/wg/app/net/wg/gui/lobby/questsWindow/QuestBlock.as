@@ -1,95 +1,94 @@
-package net.wg.gui.lobby.questsWindow 
+package net.wg.gui.lobby.questsWindow
 {
-    import flash.display.*;
-    import flash.events.*;
-    import net.wg.gui.lobby.questsWindow.data.*;
-    import scaleform.clik.core.*;
-    
-    public class QuestBlock extends scaleform.clik.core.UIComponent
-    {
-        public function QuestBlock()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.display.MovieClip;
+   import flash.events.Event;
+   import net.wg.gui.lobby.questsWindow.data.QuestDataVO;
+   import __AS3__.vec.Vector;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.header.addEventListener(flash.events.Event.RESIZE, this.layoutBlocks);
-            this.infoBlock.addEventListener(flash.events.Event.RESIZE, this.layoutBlocks);
-            this.awards.addEventListener(flash.events.Event.RESIZE, this.layoutBlocks);
-            return;
-        }
 
-        public function setData(arg1:Object):void
-        {
-            var loc1:*=null;
-            loc1 = new net.wg.gui.lobby.questsWindow.data.QuestDataVO(arg1);
-            this._showAwards = Boolean(loc1.award);
-            this._showNextTasks = Boolean(loc1.nextTasks.length);
-            this.header.setData(loc1.header);
-            this.infoBlock.setData(loc1.info);
-            this.awards.setAwards(loc1.award);
-            this.awards.visible = this._showAwards;
-            this.nextTasksList.setData(loc1.nextTasks);
-            this.nextTasksList.validateNow();
-            return;
-        }
+   public class QuestBlock extends UIComponent
+   {
+          
+      public function QuestBlock() {
+         super();
+      }
 
-        internal function layoutBlocks(arg1:flash.events.Event):void
-        {
-            var loc1:*=NaN;
-            var loc2:*=NaN;
-            var loc5:*=NaN;
-            loc1 = this.header.height;
-            loc2 = this.infoBlock.height;
-            var loc3:*=this._showAwards ? this.awards.height - AWARDS_TOP_PADDING : 0;
-            var loc4:*=this._showNextTasks ? this.nextTasksList.height : 0;
-            loc5 = loc2 + loc3 + loc4;
-            this.bg.y = loc1;
-            this.infoBlock.y = Math.round(loc1);
-            this.awards.y = loc1 + loc2 - AWARDS_TOP_PADDING;
-            this.nextTasksList.y = loc1 + loc2 + loc3;
-            this.bg.height = loc5;
-            this.bottomBg.y = this.bg.y + loc5 - 2;
-            this.awards.visible = this._showAwards;
-            this.nextTasksList.visible = this._showNextTasks;
-            var loc6:*=loc1 + loc5 + this.bottomBg.height;
-            setSize(this.width, loc6);
-            dispatchEvent(new flash.events.Event(flash.events.Event.RESIZE));
-            return;
-        }
+      private static const AWARDS_TOP_PADDING:int = 13;
 
-        public override function dispose():void
-        {
-            this.header.removeEventListener(flash.events.Event.RESIZE, this.layoutBlocks);
-            this.infoBlock.removeEventListener(flash.events.Event.RESIZE, this.layoutBlocks);
-            this.awards.removeEventListener(flash.events.Event.RESIZE, this.layoutBlocks);
-            this.header.dispose();
-            this.infoBlock.dispose();
-            this.awards.dispose();
-            this.nextTasksList.dispose();
-            super.dispose();
-            return;
-        }
+      public var header:HeaderBlock;
 
-        internal static const AWARDS_TOP_PADDING:int=13;
+      public var infoBlock:MiddleInfoBlock;
 
-        public var header:net.wg.gui.lobby.questsWindow.HeaderBlock;
+      public var awards:QuestAwardsBlock;
 
-        public var infoBlock:net.wg.gui.lobby.questsWindow.MiddleInfoBlock;
+      public var bg:MovieClip;
 
-        public var awards:net.wg.gui.lobby.questsWindow.QuestAwardsBlock;
+      public var bottomBg:MovieClip;
 
-        public var bg:flash.display.MovieClip;
+      private var _showAwards:Boolean = false;
 
-        public var bottomBg:flash.display.MovieClip;
+      private var _showNextTasks:Boolean = false;
 
-        internal var _showAwards:Boolean=false;
+      public var nextTasksList:SubtasksList;
 
-        internal var _showNextTasks:Boolean=false;
+      override protected function configUI() : void {
+         super.configUI();
+         this.header.addEventListener(Event.RESIZE,this.layoutBlocks);
+         this.infoBlock.addEventListener(Event.RESIZE,this.layoutBlocks);
+         this.awards.addEventListener(Event.RESIZE,this.layoutBlocks);
+      }
 
-        public var nextTasksList:net.wg.gui.lobby.questsWindow.SubtasksList;
-    }
+      public function setData(param1:Object) : void {
+         var _loc2_:QuestDataVO = null;
+         _loc2_ = new QuestDataVO(param1);
+         this._showAwards = Boolean(_loc2_.award);
+         this._showNextTasks = Boolean(_loc2_.nextTasks.length);
+         this.header.setData(_loc2_.header);
+         this.infoBlock.setData(_loc2_.info);
+         this.awards.setAwards(_loc2_.award);
+         this.awards.visible = this._showAwards;
+         this.nextTasksList.setData(_loc2_.nextTasks);
+         this.nextTasksList.validateNow();
+      }
+
+      public function setAvailableQuests(param1:Vector.<String>) : void {
+         this.nextTasksList.checkDisabledQuests(param1);
+         this.infoBlock.subtasksList.checkDisabledQuests(param1);
+      }
+
+      private function layoutBlocks(param1:Event) : void {
+         var _loc2_:* = NaN;
+         var _loc3_:* = NaN;
+         var _loc6_:* = NaN;
+         _loc2_ = this.header.height;
+         _loc3_ = this.infoBlock.height;
+         var _loc4_:Number = this._showAwards?this.awards.height - AWARDS_TOP_PADDING:0;
+         var _loc5_:Number = this._showNextTasks?this.nextTasksList.height:0;
+         _loc6_ = _loc3_ + _loc4_ + _loc5_;
+         this.bg.y = _loc2_;
+         this.infoBlock.y = Math.round(_loc2_);
+         this.awards.y = _loc2_ + _loc3_ - AWARDS_TOP_PADDING;
+         this.nextTasksList.y = _loc2_ + _loc3_ + _loc4_;
+         this.bg.height = _loc6_;
+         this.bottomBg.y = this.bg.y + _loc6_ - 2;
+         this.awards.visible = this._showAwards;
+         this.nextTasksList.visible = this._showNextTasks;
+         var _loc7_:Number = _loc2_ + _loc6_ + this.bottomBg.height;
+         setSize(this.width,_loc7_);
+         dispatchEvent(new Event(Event.RESIZE));
+      }
+
+      override public function dispose() : void {
+         this.header.removeEventListener(Event.RESIZE,this.layoutBlocks);
+         this.infoBlock.removeEventListener(Event.RESIZE,this.layoutBlocks);
+         this.awards.removeEventListener(Event.RESIZE,this.layoutBlocks);
+         this.header.dispose();
+         this.infoBlock.dispose();
+         this.awards.dispose();
+         this.nextTasksList.dispose();
+         super.dispose();
+      }
+   }
+
 }

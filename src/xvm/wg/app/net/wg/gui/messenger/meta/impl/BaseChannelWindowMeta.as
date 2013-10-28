@@ -1,31 +1,29 @@
-package net.wg.gui.messenger.meta.impl 
+package net.wg.gui.messenger.meta.impl
 {
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.base.*;
-    
-    public class BaseChannelWindowMeta extends net.wg.infrastructure.base.AbstractWindowView
-    {
-        public function BaseChannelWindowMeta()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.AbstractWindowView;
+   import net.wg.data.constants.Errors;
 
-        public function showFAQWindowS():void
-        {
-            App.utils.asserter.assertNotNull(this.showFAQWindow, "showFAQWindow" + net.wg.data.constants.Errors.CANT_NULL);
-            this.showFAQWindow();
-            return;
-        }
 
-        public function getClientIDS():Number
-        {
-            App.utils.asserter.assertNotNull(this.getClientID, "getClientID" + net.wg.data.constants.Errors.CANT_NULL);
-            return this.getClientID();
-        }
+   public class BaseChannelWindowMeta extends AbstractWindowView
+   {
+          
+      public function BaseChannelWindowMeta() {
+         super();
+      }
 
-        public var showFAQWindow:Function=null;
+      public var showFAQWindow:Function = null;
 
-        public var getClientID:Function=null;
-    }
+      public var getClientID:Function = null;
+
+      public function showFAQWindowS() : void {
+         App.utils.asserter.assertNotNull(this.showFAQWindow,"showFAQWindow" + Errors.CANT_NULL);
+         this.showFAQWindow();
+      }
+
+      public function getClientIDS() : Number {
+         App.utils.asserter.assertNotNull(this.getClientID,"getClientID" + Errors.CANT_NULL);
+         return this.getClientID();
+      }
+   }
+
 }

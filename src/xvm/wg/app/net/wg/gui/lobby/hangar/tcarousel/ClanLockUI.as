@@ -1,71 +1,69 @@
-package net.wg.gui.lobby.hangar.tcarousel 
+package net.wg.gui.lobby.hangar.tcarousel
 {
-    import flash.text.*;
-    import scaleform.clik.core.*;
-    
-    public class ClanLockUI extends scaleform.clik.core.UIComponent
-    {
-        public function ClanLockUI()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.text.TextField;
 
-        protected override function draw():void
-        {
-            super.draw();
-            this.textField.text = this.updateClanLock();
-            return;
-        }
 
-        public function set timer(arg1:Number):void
-        {
-            this._timer = arg1;
-            invalidate();
-            return;
-        }
+   public class ClanLockUI extends UIComponent
+   {
+          
+      public function ClanLockUI() {
+         super();
+      }
 
-        public function get timer():Number
-        {
-            return this._timer;
-        }
+      public var textField:TextField;
 
-        internal function updateClanLock():String
-        {
-            var loc1:*="";
-            var loc2:*=new Date();
-            var loc3:*=Math.round(this._timer - loc2.valueOf() / 1000);
-            if (loc3 > 0) 
-            {
-                loc1 = this.calcLockTime(loc3);
-                this.visible = true;
-            }
-            else 
-            {
-                this.visible = false;
-            }
-            return loc1;
-        }
+      private var _timer:Number;
 
-        internal function calcLockTime(arg1:Number):String
-        {
-            var loc1:*="";
-            arg1 = Math.ceil(arg1 / 60);
-            var loc2:*=Math.floor(arg1 / 60);
-            var loc3:*=Math.floor(arg1 - loc2 * 60);
-            var loc4:*=loc2 < 10 ? "0" + loc2 : loc2.toString();
-            var loc5:*=loc3 < 10 ? "0" + loc3 : loc3.toString();
-            loc1 = loc4 + ":" + loc5;
-            return loc1;
-        }
+      override public function dispose() : void {
+         this.textField = null;
+         super.dispose();
+      }
 
-        public override function toString():String
-        {
-            return "[WG ClanLockUi " + name + "]";
-        }
+      override protected function draw() : void {
+         super.draw();
+         this.textField.text = this.updateClanLock();
+      }
 
-        public var textField:flash.text.TextField;
+      public function set timer(param1:Number) : void {
+         this._timer = param1;
+         invalidate();
+      }
 
-        internal var _timer:Number;
-    }
+      public function get timer() : Number {
+         return this._timer;
+      }
+
+      private function updateClanLock() : String {
+         var _loc1_:* = "";
+         var _loc2_:Date = new Date();
+         var _loc3_:Number = Math.round(this._timer - _loc2_.valueOf() / 1000);
+         if(_loc3_ > 0)
+         {
+            _loc1_ = this.calcLockTime(_loc3_);
+            this.visible = true;
+         }
+         else
+         {
+            this.visible = false;
+         }
+         return _loc1_;
+      }
+
+      private function calcLockTime(param1:Number) : String {
+         var _loc2_:* = "";
+         var param1:Number = Math.ceil(param1 / 60);
+         var _loc3_:Number = Math.floor(param1 / 60);
+         var _loc4_:Number = Math.floor(param1 - _loc3_ * 60);
+         var _loc5_:String = _loc3_ < 10?"0" + _loc3_:_loc3_.toString();
+         var _loc6_:String = _loc4_ < 10?"0" + _loc4_:_loc4_.toString();
+         _loc2_ = _loc5_ + ":" + _loc6_;
+         return _loc2_;
+      }
+
+      override public function toString() : String {
+         return "[WG ClanLockUi " + name + "]";
+      }
+   }
+
 }

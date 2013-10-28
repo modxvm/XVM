@@ -1,12 +1,15 @@
-package net.wg.gui.login 
+package net.wg.gui.login
 {
-    import flash.geom.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    
-    public interface ISparksManager extends net.wg.infrastructure.interfaces.entity.IDisposable
-    {
-        function resetZone(arg1:flash.geom.Rectangle):void;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import flash.geom.Rectangle;
 
-        function createSparks():void;
-    }
+
+   public interface ISparksManager extends IDisposable
+   {
+          
+      function resetZone(param1:Rectangle) : void;
+
+      function createSparks() : void;
+   }
+
 }

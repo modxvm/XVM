@@ -1,178 +1,151 @@
-package net.wg.gui.components.controls 
+package net.wg.gui.components.controls
 {
-    import flash.events.*;
-    import flash.ui.*;
-    import scaleform.clik.controls.*;
-    import scaleform.clik.core.*;
-    import scaleform.clik.events.*;
-    import scaleform.gfx.*;
-    
-    public class TextInput extends scaleform.clik.controls.TextInput
-    {
-        public function TextInput()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.controls.TextInput;
+   import scaleform.clik.core.UIComponent;
+   import flash.events.FocusEvent;
+   import scaleform.clik.events.InputEvent;
+   import flash.ui.Keyboard;
+   import flash.events.Event;
+   import scaleform.gfx.TextFieldEx;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            return;
-        }
 
-        protected override function updateTextField():void
-        {
-            super.updateTextField();
-            if (textField != null) 
+   public class TextInput extends scaleform.clik.controls.TextInput
+   {
+          
+      public function TextInput() {
+         super();
+      }
+
+      protected var _extractEscapes:Boolean = true;
+
+      public var highlightMc:UIComponent = null;
+
+      private var _selectionTextColor:uint = 1973787;
+
+      private var _selectionBgColor:uint = 9868935;
+
+      override protected function configUI() : void {
+         super.configUI();
+      }
+
+      override protected function updateTextField() : void {
+         super.updateTextField();
+         if(textField != null)
+         {
+            this.selectionTextColor = this._selectionTextColor;
+            this.selectionBgColor = this._selectionBgColor;
+            if(textField.hasEventListener(FocusEvent.FOCUS_OUT))
             {
-                this.selectionTextColor = this._selectionTextColor;
-                this.selectionBgColor = this._selectionBgColor;
-                if (textField.hasEventListener(flash.events.FocusEvent.FOCUS_OUT)) 
-                {
-                    textField.removeEventListener(flash.events.FocusEvent.FOCUS_OUT, this.handleTextFieldFocusOut, false);
-                }
-                textField.addEventListener(flash.events.FocusEvent.FOCUS_OUT, this.handleTextFieldFocusOut, false, 0, true);
-                if (textField.hasEventListener(flash.events.FocusEvent.FOCUS_IN)) 
-                {
-                    textField.removeEventListener(flash.events.FocusEvent.FOCUS_IN, this.handleTextFieldFocusIn, false);
-                }
-                textField.addEventListener(flash.events.FocusEvent.FOCUS_IN, this.handleTextFieldFocusIn, false, 0, true);
+               textField.removeEventListener(FocusEvent.FOCUS_OUT,this.handleTextFieldFocusOut,false);
             }
-            return;
-        }
-
-        protected override function handleTextFieldFocusIn(arg1:flash.events.FocusEvent):void
-        {
-            super.handleTextFieldFocusIn(arg1);
-            this.autoSelectionText();
-            this.highlight = false;
-            App.utils.IME.setVisible(true);
-            return;
-        }
-
-        protected function autoSelectionText():void
-        {
-            textField.setSelection(0, textField.text.length);
-            return;
-        }
-
-        protected function handleTextFieldFocusOut(arg1:flash.events.FocusEvent):void
-        {
-            App.utils.IME.setVisible(false);
-            return;
-        }
-
-        public override function handleInput(arg1:scaleform.clik.events.InputEvent):void
-        {
-            var loc1:*=arg1.details.code;
-            switch (loc1) 
+            textField.addEventListener(FocusEvent.FOCUS_OUT,this.handleTextFieldFocusOut,false,0,true);
+            if(textField.hasEventListener(FocusEvent.FOCUS_IN))
             {
-                case flash.ui.Keyboard.LEFT:
-                case flash.ui.Keyboard.RIGHT:
-                case flash.ui.Keyboard.UP:
-                case flash.ui.Keyboard.DOWN:
-                {
-                    arg1.handled = true;
-                    return;
-                }
+               textField.removeEventListener(FocusEvent.FOCUS_IN,this.handleTextFieldFocusIn,false);
             }
-            super.handleInput(arg1);
-            return;
-        }
+            textField.addEventListener(FocusEvent.FOCUS_IN,this.handleTextFieldFocusIn,false,0,true);
+         }
+      }
 
-        protected override function handleTextChange(arg1:flash.events.Event):void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            var loc3:*=NaN;
-            super.handleTextChange(arg1);
-            this.highlight = false;
-            if (this._extractEscapes) 
+      override protected function handleTextFieldFocusIn(param1:FocusEvent) : void {
+         super.handleTextFieldFocusIn(param1);
+         this.autoSelectionText();
+         App.utils.IME.setVisible(true);
+      }
+
+      protected function autoSelectionText() : void {
+         textField.setSelection(0,textField.text.length);
+      }
+
+      protected function handleTextFieldFocusOut(param1:FocusEvent) : void {
+         App.utils.IME.setVisible(false);
+      }
+
+      override public function handleInput(param1:InputEvent) : void {
+         switch(param1.details.code)
+         {
+            case Keyboard.LEFT:
+            case Keyboard.RIGHT:
+            case Keyboard.UP:
+            case Keyboard.DOWN:
+               param1.handled = true;
+               return;
+            default:
+               super.handleInput(param1);
+               return;
+         }
+      }
+
+      override protected function handleTextChange(param1:Event) : void {
+         var _loc2_:String = null;
+         var _loc3_:String = null;
+         var _loc4_:* = NaN;
+         super.handleTextChange(param1);
+         this.highlight = false;
+         if(this._extractEscapes)
+         {
+            _loc2_ = textField.text;
+            _loc3_ = "";
+            _loc4_ = 0;
+            while(_loc4_ < _loc2_.length)
             {
-                loc1 = textField.text;
-                loc2 = "";
-                loc3 = 0;
-                while (loc3 < loc1.length) 
-                {
-                    var loc4:*=loc1.charAt(loc3);
-                    switch (loc4) 
-                    {
-                        case "\n":
-                        case "\r":
-                        {
-                            break;
-                        }
-                        default:
-                        {
-                            loc2 = loc2 + loc1.charAt(loc3);
-                        }
-                    }
-                    ++loc3;
-                }
-                textField.text = loc2;
+               switch(_loc2_.charAt(_loc4_))
+               {
+                  case "\n":
+                  case "\r":
+                     break;
+                  default:
+                     _loc3_ = _loc3_ + _loc2_.charAt(_loc4_);
+               }
+               _loc4_++;
             }
+            textField.text = _loc3_;
+         }
+      }
+
+      public function get selectionTextColor() : uint {
+         return this._selectionTextColor;
+      }
+
+      public function set selectionTextColor(param1:uint) : void {
+         this._selectionTextColor = this.rgbToArgb(param1);
+         TextFieldEx.setSelectionTextColor(textField,this._selectionTextColor);
+         TextFieldEx.setInactiveSelectionTextColor(textField,this.rgbToArgb(textField.textColor));
+      }
+
+      public function get selectionBgColor() : uint {
+         return this._selectionBgColor;
+      }
+
+      public function set selectionBgColor(param1:uint) : void {
+         this._selectionBgColor = this.rgbToArgb(param1);
+         TextFieldEx.setSelectionBkgColor(textField,this._selectionBgColor);
+         TextFieldEx.setInactiveSelectionBkgColor(textField,0);
+      }
+
+      private function rgbToArgb(param1:uint) : uint {
+         return 4.27819008E9 + param1;
+      }
+
+      public function get extractEscapes() : Boolean {
+         return this._extractEscapes;
+      }
+
+      public function set extractEscapes(param1:Boolean) : void {
+         if(this._extractEscapes == param1)
+         {
             return;
-        }
+         }
+         this._extractEscapes = param1;
+      }
 
-        public function get selectionTextColor():uint
-        {
-            return this._selectionTextColor;
-        }
+      public function set highlight(param1:Boolean) : void {
+         this.highlightMc.visible = param1;
+      }
 
-        public function set selectionTextColor(arg1:uint):void
-        {
-            this._selectionTextColor = this.rgbToArgb(arg1);
-            scaleform.gfx.TextFieldEx.setSelectionTextColor(textField, this._selectionTextColor);
-            scaleform.gfx.TextFieldEx.setInactiveSelectionTextColor(textField, this.rgbToArgb(textField.textColor));
-            return;
-        }
+      public function get highlight() : Boolean {
+         return this.highlightMc.visible;
+      }
+   }
 
-        public function get selectionBgColor():uint
-        {
-            return this._selectionBgColor;
-        }
-
-        public function set selectionBgColor(arg1:uint):void
-        {
-            this._selectionBgColor = this.rgbToArgb(arg1);
-            scaleform.gfx.TextFieldEx.setSelectionBkgColor(textField, this._selectionBgColor);
-            scaleform.gfx.TextFieldEx.setInactiveSelectionBkgColor(textField, 0);
-            return;
-        }
-
-        internal function rgbToArgb(arg1:uint):uint
-        {
-            return 4278190080 + arg1;
-        }
-
-        public function get extractEscapes():Boolean
-        {
-            return this._extractEscapes;
-        }
-
-        public function set extractEscapes(arg1:Boolean):void
-        {
-            if (this._extractEscapes == arg1) 
-            {
-                return;
-            }
-            this._extractEscapes = arg1;
-            return;
-        }
-
-        public function set highlight(arg1:Boolean):void
-        {
-            this.highlightMc.visible = arg1;
-            return;
-        }
-
-        protected var _extractEscapes:Boolean=true;
-
-        public var highlightMc:scaleform.clik.core.UIComponent=null;
-
-        internal var _selectionTextColor:uint=1973787;
-
-        internal var _selectionBgColor:uint=9868935;
-    }
 }

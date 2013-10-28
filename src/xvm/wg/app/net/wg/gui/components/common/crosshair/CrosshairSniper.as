@@ -1,160 +1,142 @@
-package net.wg.gui.components.common.crosshair 
+package net.wg.gui.components.common.crosshair
 {
-    import flash.display.*;
-    import flash.events.*;
-    import net.wg.gui.utils.*;
-    
-    public class CrosshairSniper extends net.wg.gui.components.common.crosshair.CrosshairBase
-    {
-        public function CrosshairSniper()
-        {
-            super();
-            this.init();
-            return;
-        }
+   import flash.display.MovieClip;
+   import net.wg.gui.utils.FrameWalker;
+   import flash.events.Event;
+   import flash.display.StageScaleMode;
+   import flash.display.StageAlign;
 
-        public override function dispose():void
-        {
-            super.dispose();
-            if (this.radiusFW) 
+
+   public class CrosshairSniper extends CrosshairBase
+   {
+          
+      public function CrosshairSniper() {
+         super();
+         this.init();
+      }
+
+      private static const MARKER_STATE_RELOADED:String = "reloaded";
+
+      private static const MARKER_STATE_RELOADING:String = "reloading";
+
+      private static const MARKER_STATE_NORMAL:String = "normal";
+
+      public var crosshairMC:MovieClip;
+
+      private var radiusFW:FrameWalker;
+
+      private var isReloaded:Boolean = false;
+
+      override public function dispose() : void {
+         super.dispose();
+         if(this.radiusFW)
+         {
+            this.radiusFW.dispose();
+            this.radiusFW = null;
+         }
+      }
+
+      private function init() : void {
+         this.initCallbacks();
+         this.initView();
+         if(stage)
+         {
+            this.initStage();
+         }
+         else
+         {
+            addEventListener(Event.ADDED_TO_STAGE,this.initStage);
+         }
+      }
+
+      private function initStage(param1:Event=null) : void {
+         removeEventListener(Event.ADDED_TO_STAGE,this.initStage);
+         stage.scaleMode = StageScaleMode.NO_SCALE;
+         stage.align = StageAlign.TOP_LEFT;
+      }
+
+      override protected function initView() : void {
+         this.radiusFW = new FrameWalker(this.crosshairMC.radiusMC.mixingMC,37,false);
+      }
+
+      override protected function initCallbacks() : void {
+          
+      }
+
+      override protected function onSetReloading(param1:Number, param2:Number, param3:Boolean, param4:Number=0) : void {
+         this.radiusFW.stop();
+         this.isReloaded = false;
+         this.onSetMarkerType(MARKER_STATE_RELOADING);
+         if(param1 == 0)
+         {
+            this.radiusFW.setPosAsPercent(100);
+            this.isReloaded = true;
+            this.onSetMarkerType(MARKER_STATE_RELOADED);
+         }
+         else
+         {
+            if(param1 == -1)
             {
-                this.radiusFW.dispose();
-                this.radiusFW = null;
+               this.radiusFW.setPosAsPercent(0);
             }
-            return;
-        }
-
-        internal function init():void
-        {
-            this.initCallbacks();
-            this.initView();
-            if (stage) 
+            else
             {
-                this.initStage();
+               if(param4 > 0)
+               {
+                  this.radiusFW.setPosAsPercent(param4);
+                  this.radiusFW.restartFromCurrentFrame(param1);
+               }
+               else
+               {
+                  this.radiusFW.start(param1,param2);
+               }
             }
-            else 
-            {
-                addEventListener(flash.events.Event.ADDED_TO_STAGE, this.initStage);
-            }
-            return;
-        }
+         }
+      }
 
-        internal function initStage(arg1:flash.events.Event=null):void
-        {
-            removeEventListener(flash.events.Event.ADDED_TO_STAGE, this.initStage);
-            stage.scaleMode = flash.display.StageScaleMode.NO_SCALE;
-            stage.align = flash.display.StageAlign.TOP_LEFT;
-            return;
-        }
+      override protected function onSetReloadingAsPercent(param1:Number) : void {
+         if(param1 >= 100)
+         {
+            this.radiusFW.setPosAsPercent(100);
+            this.onSetMarkerType(MARKER_STATE_RELOADED);
+         }
+         else
+         {
+            this.radiusFW.setPosAsPercent(param1);
+         }
+      }
 
-        protected override function initView():void
-        {
-            this.radiusFW = new net.wg.gui.utils.FrameWalker(this.crosshairMC.radiusMC.mixingMC, 37, false);
-            return;
-        }
-
-        protected override function initCallbacks():void
-        {
-            return;
-        }
-
-        protected override function onSetReloading(arg1:Number, arg2:Number, arg3:Boolean, arg4:Number=0):void
-        {
+      protected function onCorrectReloadingTime(param1:Number) : void {
+         if(!this.isReloaded)
+         {
             this.radiusFW.stop();
-            this.isReloaded = false;
-            this.onSetMarkerType(MARKER_STATE_RELOADING);
-            if (arg1 != 0) 
-            {
-                if (arg1 != -1) 
-                {
-                    if (arg4 > 0) 
-                    {
-                        this.radiusFW.setPosAsPercent(arg4);
-                        this.radiusFW.restartFromCurrentFrame(arg1);
-                    }
-                    else 
-                    {
-                        this.radiusFW.start(arg1, arg2);
-                    }
-                }
-                else 
-                {
-                    this.radiusFW.setPosAsPercent(0);
-                }
-            }
-            else 
-            {
-                this.radiusFW.setPosAsPercent(100);
-                this.isReloaded = true;
-                this.onSetMarkerType(MARKER_STATE_RELOADED);
-            }
-            return;
-        }
+            this.radiusFW.restartFromCurrentFrame(param1);
+         }
+      }
 
-        protected override function onSetReloadingAsPercent(arg1:Number):void
-        {
-            if (arg1 >= 100) 
-            {
-                this.radiusFW.setPosAsPercent(100);
-                this.onSetMarkerType(MARKER_STATE_RELOADED);
-            }
-            else 
-            {
-                this.radiusFW.setPosAsPercent(arg1);
-            }
-            return;
-        }
+      protected function onSetMarkerType(param1:String) : void {
+         this.crosshairMC.markerMC.tag.gotoAndStop(param1);
+      }
 
-        protected function onCorrectReloadingTime(arg1:Number):void
-        {
-            if (!this.isReloaded) 
-            {
-                this.radiusFW.stop();
-                this.radiusFW.restartFromCurrentFrame(arg1);
-            }
-            return;
-        }
+      protected function onSetTagType(param1:Number, param2:Number) : void {
+         this.crosshairMC.markerMC.gotoAndStop("type" + param2);
+         this.crosshairMC.markerMC.alpha = param1;
+         this.onSetMarkerType(MARKER_STATE_NORMAL);
+         if(this.isReloaded)
+         {
+            this.onSetReloading(0,0,false);
+         }
+      }
 
-        protected function onSetMarkerType(arg1:String):void
-        {
-            this.crosshairMC.markerMC.tag.gotoAndStop(arg1);
-            return;
-        }
+      protected function onSetReloadingType(param1:Number, param2:Number) : void {
+         this.crosshairMC.radiusMC.gotoAndStop("type" + param2);
+         this.crosshairMC.radiusMC.mixingMC.alpha = param1;
+         if(this.isReloaded)
+         {
+            this.onSetReloading(0,0,false);
+         }
+         this.radiusFW.setTarget(this.crosshairMC.radiusMC.mixingMC);
+      }
+   }
 
-        protected function onSetTagType(arg1:Number, arg2:Number):void
-        {
-            this.crosshairMC.markerMC.gotoAndStop("type" + arg2);
-            this.crosshairMC.markerMC.alpha = arg1;
-            this.onSetMarkerType(MARKER_STATE_NORMAL);
-            if (this.isReloaded) 
-            {
-                this.onSetReloading(0, 0, false);
-            }
-            return;
-        }
-
-        protected function onSetReloadingType(arg1:Number, arg2:Number):void
-        {
-            this.crosshairMC.radiusMC.gotoAndStop("type" + arg2);
-            this.crosshairMC.radiusMC.mixingMC.alpha = arg1;
-            if (this.isReloaded) 
-            {
-                this.onSetReloading(0, 0, false);
-            }
-            this.radiusFW.setTarget(this.crosshairMC.radiusMC.mixingMC);
-            return;
-        }
-
-        internal static const MARKER_STATE_RELOADED:String="reloaded";
-
-        internal static const MARKER_STATE_RELOADING:String="reloading";
-
-        internal static const MARKER_STATE_NORMAL:String="normal";
-
-        public var crosshairMC:flash.display.MovieClip;
-
-        internal var radiusFW:net.wg.gui.utils.FrameWalker;
-
-        internal var isReloaded:Boolean=false;
-    }
 }

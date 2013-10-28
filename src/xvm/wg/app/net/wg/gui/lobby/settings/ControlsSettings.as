@@ -1,338 +1,317 @@
-package net.wg.gui.lobby.settings 
+package net.wg.gui.lobby.settings
 {
-    import flash.events.*;
-    import flash.text.*;
-    import net.wg.gui.components.advanced.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.events.*;
-    import net.wg.gui.lobby.settings.components.*;
-    import net.wg.gui.lobby.settings.evnts.*;
-    import net.wg.gui.lobby.settings.vo.*;
-    import scaleform.clik.data.*;
-    import scaleform.clik.events.*;
-    import scaleform.clik.interfaces.*;
-    
-    public class ControlsSettings extends net.wg.gui.lobby.settings.SettingsBaseView
-    {
-        public function ControlsSettings()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.components.advanced.FieldSet;
+   import net.wg.gui.components.controls.ScrollBar;
+   import net.wg.gui.lobby.settings.components.KeysScrollingList;
+   import flash.text.TextField;
+   import net.wg.gui.components.controls.Slider;
+   import net.wg.gui.components.controls.CheckBox;
+   import net.wg.gui.components.controls.SoundButtonEx;
+   import net.wg.gui.lobby.settings.vo.SettingsControlProp;
+   import scaleform.clik.events.ButtonEvent;
+   import net.wg.gui.events.ListEventEx;
+   import flash.events.Event;
+   import scaleform.clik.events.SliderEvent;
+   import scaleform.clik.interfaces.IDataProvider;
+   import scaleform.clik.data.DataProvider;
+   import net.wg.gui.lobby.settings.vo.SettingsKeyProp;
+   import net.wg.gui.lobby.settings.evnts.SettingViewEvent;
 
-        public override function update(arg1:Object):void
-        {
-            super.update(arg1);
-            return;
-        }
 
-        public override function dispose():void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            var loc3:*=null;
-            var loc4:*=null;
-            super.dispose();
-            if (this.defaultBtn.hasEventListener(scaleform.clik.events.ButtonEvent.CLICK)) 
+   public class ControlsSettings extends SettingsBaseView
+   {
+          
+      public function ControlsSettings() {
+         super();
+      }
+
+      public var keyboardFieldSet:FieldSet = null;
+
+      public var scrollBar:ScrollBar = null;
+
+      public var keys:KeysScrollingList = null;
+
+      public var mouseFieldSet:FieldSet = null;
+
+      public var mouseSensitivityLabel:TextField = null;
+
+      public var mouseArcadeSensLabel:TextField = null;
+
+      public var mouseArcadeSensSlider:Slider = null;
+
+      public var mouseSniperSensLabel:TextField = null;
+
+      public var mouseSniperSensSlider:Slider = null;
+
+      public var mouseStrategicSensLabel:TextField = null;
+
+      public var mouseStrategicSensSlider:Slider = null;
+
+      public var mouseHorzInvertCheckbox:CheckBox = null;
+
+      public var mouseVertInvertCheckbox:CheckBox = null;
+
+      public var backDraftInvertCheckbox:CheckBox = null;
+
+      public var defaultBtn:SoundButtonEx = null;
+
+      override public function update(param1:Object) : void {
+         super.update(param1);
+      }
+
+      override public function dispose() : void {
+         var _loc1_:String = null;
+         var _loc2_:SettingsControlProp = null;
+         var _loc3_:CheckBox = null;
+         var _loc4_:Slider = null;
+         super.dispose();
+         if(this.defaultBtn.hasEventListener(ButtonEvent.CLICK))
+         {
+            this.defaultBtn.removeEventListener(ButtonEvent.CLICK,this.onSetDefaultClick);
+         }
+         if(this.keys)
+         {
+            this.keys.dispose();
+            if(this.keys.hasEventListener(ListEventEx.ITEM_TEXT_CHANGE))
             {
-                this.defaultBtn.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onSetDefaultClick);
+               this.keys.removeEventListener(ListEventEx.ITEM_TEXT_CHANGE,this.onKeyChange);
             }
-            if (this.keys) 
+         }
+         if(_data)
+         {
+            for (_loc1_ in _data)
             {
-                this.keys.dispose();
-                if (this.keys.hasEventListener(net.wg.gui.events.ListEventEx.ITEM_TEXT_CHANGE)) 
-                {
-                    this.keys.removeEventListener(net.wg.gui.events.ListEventEx.ITEM_TEXT_CHANGE, this.onKeyChange);
-                }
+               if(_data[_loc1_]  is  SettingsControlProp)
+               {
+                  _loc2_ = SettingsControlProp(_data[_loc1_]);
+                  if(this[_loc1_ + _loc2_.type])
+                  {
+                     switch(_loc2_.type)
+                     {
+                        case SettingsConfig.TYPE_CHECKBOX:
+                           _loc3_ = CheckBox(this[_loc1_ + _loc2_.type]);
+                           if(_loc3_.hasEventListener(Event.SELECT))
+                           {
+                              _loc3_.removeEventListener(Event.SELECT,this.onCheckBoxSelected);
+                           }
+                           continue;
+                        case SettingsConfig.TYPE_SLIDER:
+                           _loc4_ = Slider(this[_loc1_ + _loc2_.type]);
+                           if(_loc4_.hasEventListener(SliderEvent.VALUE_CHANGE))
+                           {
+                              _loc4_.removeEventListener(SliderEvent.VALUE_CHANGE,this.onSliderValueChanged);
+                           }
+                           continue;
+                        default:
+                           continue;
+                     }
+                  }
+                  else
+                  {
+                     continue;
+                  }
+               }
+               else
+               {
+                  continue;
+               }
             }
-            if (_data) 
+         }
+      }
+
+      override public function toString() : String {
+         return "[WG ControlsSettings " + name + "]";
+      }
+
+      public function getKeyasDataProvider() : IDataProvider {
+         return this.keys.dataProvider;
+      }
+
+      override protected function configUI() : void {
+         this.keyboardFieldSet.label = SETTINGS.KEYBOARD_KEYBOARD;
+         this.mouseFieldSet.label = SETTINGS.KEYBOARD_MOUSE;
+         this.mouseSensitivityLabel.text = SETTINGS.MOUSE_SENSITIVITY_HEADER;
+         this.mouseArcadeSensLabel.text = SETTINGS.MOUSE_SENSITIVITY_MAIN;
+         this.mouseSniperSensLabel.text = SETTINGS.MOUSE_SENSITIVITY_SNIPER;
+         this.mouseStrategicSensLabel.text = SETTINGS.MOUSE_SENSITIVITY_ART;
+         this.mouseHorzInvertCheckbox.label = SETTINGS.MOUSE_SENSITIVITY_INVERTATIONHOR;
+         this.mouseVertInvertCheckbox.label = SETTINGS.MOUSE_SENSITIVITY_INVERTATIONVERT;
+         this.backDraftInvertCheckbox.label = SETTINGS.KEYBOARD_BACKDRAFTINVERT;
+         this.defaultBtn.label = SETTINGS.DEFAULTBTN;
+         this.defaultBtn.enabled = false;
+         super.configUI();
+      }
+
+      override protected function setData(param1:Object) : void {
+         var _loc2_:String = null;
+         var _loc3_:SettingsControlProp = null;
+         var _loc4_:CheckBox = null;
+         var _loc5_:Slider = null;
+         var _loc6_:Array = null;
+         super.setData(param1);
+         for (_loc2_ in _data)
+         {
+            if(_data[_loc2_]  is  SettingsControlProp)
             {
-                var loc5:*=0;
-                var loc6:*=_data;
-                label388: for (loc1 in loc6) 
-                {
-                    if (!(_data[loc1] is net.wg.gui.lobby.settings.vo.SettingsControlProp)) 
-                    {
-                        continue;
-                    }
-                    loc2 = net.wg.gui.lobby.settings.vo.SettingsControlProp(_data[loc1]);
-                    if (!this[loc1 + loc2.type]) 
-                    {
-                        continue;
-                    }
-                    var loc7:*=loc2.type;
-                    switch (loc7) 
-                    {
-                        case net.wg.gui.lobby.settings.SettingsConfig.TYPE_CHECKBOX:
-                        {
-                            loc3 = net.wg.gui.components.controls.CheckBox(this[loc1 + loc2.type]);
-                            if (loc3.hasEventListener(flash.events.Event.SELECT)) 
-                            {
-                                loc3.removeEventListener(flash.events.Event.SELECT, this.onCheckBoxSelected);
-                            }
-                            continue label388;
-                        }
-                        case net.wg.gui.lobby.settings.SettingsConfig.TYPE_SLIDER:
-                        {
-                            if ((loc4 = net.wg.gui.components.controls.Slider(this[loc1 + loc2.type])).hasEventListener(scaleform.clik.events.SliderEvent.VALUE_CHANGE)) 
-                            {
-                                loc4.removeEventListener(scaleform.clik.events.SliderEvent.VALUE_CHANGE, this.onSliderValueChanged);
-                            }
-                            continue label388;
-                        }
-                    }
-                }
+               _loc3_ = SettingsControlProp(_data[_loc2_]);
+               if(this[_loc2_ + _loc3_.type])
+               {
+                  switch(_loc3_.type)
+                  {
+                     case SettingsConfig.TYPE_CHECKBOX:
+                        _loc4_ = CheckBox(this[_loc2_ + _loc3_.type]);
+                        _loc4_.selected = _loc3_.current;
+                        _loc4_.addEventListener(Event.SELECT,this.onCheckBoxSelected);
+                        _loc4_.enabled = !(_loc3_.current == null);
+                        break;
+                     case SettingsConfig.TYPE_SLIDER:
+                        _loc5_ = Slider(this[_loc2_ + _loc3_.type]);
+                        _loc5_.value = _loc3_.current;
+                        _loc5_.addEventListener(SliderEvent.VALUE_CHANGE,this.onSliderValueChanged);
+                        _loc5_.enabled = !(_loc3_.current == null);
+                        break;
+                  }
+               }
             }
-            return;
-        }
-
-        public override function toString():String
-        {
-            return "[WG ControlsSettings " + name + "]";
-        }
-
-        public function getKeyasDataProvider():scaleform.clik.interfaces.IDataProvider
-        {
-            return this.keys.dataProvider;
-        }
-
-        protected override function configUI():void
-        {
-            this.keyboardFieldSet.label = SETTINGS.KEYBOARD_KEYBOARD;
-            this.mouseFieldSet.label = SETTINGS.KEYBOARD_MOUSE;
-            this.mouseSensitivityLabel.text = SETTINGS.MOUSE_SENSITIVITY_HEADER;
-            this.mouseArcadeSensLabel.text = SETTINGS.MOUSE_SENSITIVITY_MAIN;
-            this.mouseSniperSensLabel.text = SETTINGS.MOUSE_SENSITIVITY_SNIPER;
-            this.mouseStrategicSensLabel.text = SETTINGS.MOUSE_SENSITIVITY_ART;
-            this.mouseHorzInvertCheckbox.label = SETTINGS.MOUSE_SENSITIVITY_INVERTATIONHOR;
-            this.mouseVertInvertCheckbox.label = SETTINGS.MOUSE_SENSITIVITY_INVERTATIONVERT;
-            this.backDraftInvertCheckbox.label = SETTINGS.KEYBOARD_BACKDRAFTINVERT;
-            this.defaultBtn.label = SETTINGS.DEFAULTBTN;
-            this.defaultBtn.enabled = false;
-            super.configUI();
-            return;
-        }
-
-        protected override function setData(arg1:Object):void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            var loc3:*=null;
-            var loc4:*=null;
-            var loc5:*=null;
-            super.setData(arg1);
-            var loc6:*=0;
-            var loc7:*=_data;
-            for (loc1 in loc7) 
+            else
             {
-                if (_data[loc1] is net.wg.gui.lobby.settings.vo.SettingsControlProp) 
-                {
-                    loc2 = net.wg.gui.lobby.settings.vo.SettingsControlProp(_data[loc1]);
-                    if (this[loc1 + loc2.type]) 
-                    {
-                        var loc8:*=loc2.type;
-                        switch (loc8) 
-                        {
-                            case net.wg.gui.lobby.settings.SettingsConfig.TYPE_CHECKBOX:
-                            {
-                                (loc3 = net.wg.gui.components.controls.CheckBox(this[loc1 + loc2.type])).selected = loc2.current;
-                                loc3.addEventListener(flash.events.Event.SELECT, this.onCheckBoxSelected);
-                                loc3.enabled = !(loc2.current == null);
-                                break;
-                            }
-                            case net.wg.gui.lobby.settings.SettingsConfig.TYPE_SLIDER:
-                            {
-                                (loc4 = net.wg.gui.components.controls.Slider(this[loc1 + loc2.type])).value = loc2.current;
-                                loc4.addEventListener(scaleform.clik.events.SliderEvent.VALUE_CHANGE, this.onSliderValueChanged);
-                                loc4.enabled = !(loc2.current == null);
-                                break;
-                            }
-                        }
-                    }
-                    continue;
-                }
-                if (!(loc1 == net.wg.gui.lobby.settings.SettingsConfig.KEYBOARD && _data[loc1] is Object && _data[net.wg.gui.lobby.settings.SettingsConfig.KEYS_LAYOUT_ORDER] is Array)) 
-                {
-                    continue;
-                }
-                loc5 = this.createDataProviderForKeys(_data[loc1], _data[net.wg.gui.lobby.settings.SettingsConfig.KEYS_LAYOUT_ORDER]);
-                this.keys.dataProvider = new scaleform.clik.data.DataProvider(loc5);
-                this.keys.addEventListener(net.wg.gui.events.ListEventEx.ITEM_TEXT_CHANGE, this.onKeyChange);
-                this.keys.validateNow();
+               if(_loc2_ == SettingsConfig.KEYBOARD && _data[_loc2_]  is  Object && _data[SettingsConfig.KEYS_LAYOUT_ORDER]  is  Array)
+               {
+                  _loc6_ = this.createDataProviderForKeys(_data[_loc2_],_data[SettingsConfig.KEYS_LAYOUT_ORDER]);
+                  this.keys.dataProvider = new DataProvider(_loc6_);
+                  this.keys.addEventListener(ListEventEx.ITEM_TEXT_CHANGE,this.onKeyChange);
+                  this.keys.validateNow();
+               }
             }
-            this.defaultBtn.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onSetDefaultClick);
-            this.checkEnabledSetDefBtn();
-            return;
-        }
+         }
+         this.defaultBtn.addEventListener(ButtonEvent.CLICK,this.onSetDefaultClick);
+         this.checkEnabledSetDefBtn();
+      }
 
-        internal function createDataProviderForKeys(arg1:Object, arg2:Array):Array
-        {
-            var loc4:*=null;
-            var loc1:*=[];
-            var loc2:*=arg2.length;
-            var loc3:*=0;
-            while (loc3 < loc2) 
+      private function createDataProviderForKeys(param1:Object, param2:Array) : Array {
+         var _loc6_:String = null;
+         var _loc3_:Array = [];
+         var _loc4_:uint = param2.length;
+         var _loc5_:uint = 0;
+         while(_loc5_ < _loc4_)
+         {
+            _loc6_ = param2[_loc5_];
+            _loc3_.push(SettingsKeyProp(param1[_loc6_]).getObject());
+            _loc5_++;
+         }
+         return _loc3_;
+      }
+
+      private function checkEnabledSetDefBtn() : void {
+         this.defaultBtn.enabled = (this.keys.keysWasChanged()) || (this.controlsChanged());
+      }
+
+      private function controlsChanged() : Boolean {
+         var _loc2_:String = null;
+         var _loc3_:SettingsControlProp = null;
+         var _loc4_:CheckBox = null;
+         var _loc5_:Slider = null;
+         var _loc1_:* = false;
+         if(_data)
+         {
+            for (_loc2_ in _data)
             {
-                loc4 = arg2[loc3];
-                loc1.push(net.wg.gui.lobby.settings.vo.SettingsKeyProp(arg1[loc4]).getObject());
-                ++loc3;
+               if(_data[_loc2_]  is  SettingsControlProp)
+               {
+                  _loc3_ = SettingsControlProp(_data[_loc2_]);
+                  if(this[_loc2_ + _loc3_.type])
+                  {
+                     switch(_loc3_.type)
+                     {
+                        case SettingsConfig.TYPE_CHECKBOX:
+                           _loc4_ = CheckBox(this[_loc2_ + _loc3_.type]);
+                           _loc1_ = !(_loc4_.selected == _loc3_._default);
+                           break;
+                        case SettingsConfig.TYPE_SLIDER:
+                           _loc5_ = Slider(this[_loc2_ + _loc3_.type]);
+                           _loc1_ = !(_loc5_.value == _loc3_._default);
+                           break;
+                     }
+                  }
+               }
+               if(_loc1_)
+               {
+                  break;
+               }
             }
-            return loc1;
-        }
+         }
+         return _loc1_;
+      }
 
-        internal function checkEnabledSetDefBtn():void
-        {
-            this.defaultBtn.enabled = this.keys.keysWasChanged() || this.controlsChanged();
-            return;
-        }
-
-        internal function controlsChanged():Boolean
-        {
-            var loc2:*=null;
-            var loc3:*=null;
-            var loc4:*=null;
-            var loc5:*=null;
-            var loc1:*=false;
-            if (_data) 
+      private function onSetDefaultClick(param1:ButtonEvent) : void {
+         var _loc2_:String = null;
+         var _loc3_:SettingsControlProp = null;
+         var _loc4_:CheckBox = null;
+         var _loc5_:Slider = null;
+         this.keys.restoreDefault();
+         if(_data)
+         {
+            for (_loc2_ in _data)
             {
-                var loc6:*=0;
-                var loc7:*=_data;
-                for (loc2 in loc7) 
-                {
-                    if (_data[loc2] is net.wg.gui.lobby.settings.vo.SettingsControlProp) 
-                    {
-                        loc3 = net.wg.gui.lobby.settings.vo.SettingsControlProp(_data[loc2]);
-                        if (this[loc2 + loc3.type]) 
-                        {
-                            var loc8:*=loc3.type;
-                            switch (loc8) 
-                            {
-                                case net.wg.gui.lobby.settings.SettingsConfig.TYPE_CHECKBOX:
-                                {
-                                    loc1 = !((loc4 = net.wg.gui.components.controls.CheckBox(this[loc2 + loc3.type])).selected == loc3._default);
-                                    break;
-                                }
-                                case net.wg.gui.lobby.settings.SettingsConfig.TYPE_SLIDER:
-                                {
-                                    loc1 = !((loc5 = net.wg.gui.components.controls.Slider(this[loc2 + loc3.type])).value == loc3._default);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    if (!loc1) 
-                    {
-                        continue;
-                    }
-                    break;
-                }
+               if(_data[_loc2_]  is  SettingsControlProp)
+               {
+                  _loc3_ = SettingsControlProp(_data[_loc2_]);
+                  if(this[_loc2_ + _loc3_.type])
+                  {
+                     switch(_loc3_.type)
+                     {
+                        case SettingsConfig.TYPE_CHECKBOX:
+                           _loc4_ = CheckBox(this[_loc2_ + _loc3_.type]);
+                           _loc4_.selected = _loc3_._default;
+                           continue;
+                        case SettingsConfig.TYPE_SLIDER:
+                           _loc5_ = Slider(this[_loc2_ + _loc3_.type]);
+                           _loc5_.value = _loc3_._default;
+                           continue;
+                        default:
+                           continue;
+                     }
+                  }
+                  else
+                  {
+                     continue;
+                  }
+               }
+               else
+               {
+                  continue;
+               }
             }
-            return loc1;
-        }
+         }
+      }
 
-        internal function onSetDefaultClick(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            var loc3:*=null;
-            var loc4:*=null;
-            this.keys.restoreDefault();
-            if (_data) 
-            {
-                var loc5:*=0;
-                var loc6:*=_data;
-                label260: for (loc1 in loc6) 
-                {
-                    if (!(_data[loc1] is net.wg.gui.lobby.settings.vo.SettingsControlProp)) 
-                    {
-                        continue;
-                    }
-                    loc2 = net.wg.gui.lobby.settings.vo.SettingsControlProp(_data[loc1]);
-                    if (!this[loc1 + loc2.type]) 
-                    {
-                        continue;
-                    }
-                    var loc7:*=loc2.type;
-                    switch (loc7) 
-                    {
-                        case net.wg.gui.lobby.settings.SettingsConfig.TYPE_CHECKBOX:
-                        {
-                            (loc3 = net.wg.gui.components.controls.CheckBox(this[loc1 + loc2.type])).selected = loc2._default;
-                            continue label260;
-                        }
-                        case net.wg.gui.lobby.settings.SettingsConfig.TYPE_SLIDER:
-                        {
-                            (loc4 = net.wg.gui.components.controls.Slider(this[loc1 + loc2.type])).value = loc2._default;
-                            continue label260;
-                        }
-                    }
-                }
-            }
-            return;
-        }
+      private function onSliderValueChanged(param1:SliderEvent) : void {
+         var _loc2_:Slider = Slider(param1.target);
+         var _loc3_:String = SettingsConfig.getControlId(_loc2_.name,SettingsConfig.TYPE_SLIDER);
+         dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,_loc3_,_loc2_.value));
+         this.checkEnabledSetDefBtn();
+      }
 
-        internal function onSliderValueChanged(arg1:scaleform.clik.events.SliderEvent):void
-        {
-            var loc1:*=net.wg.gui.components.controls.Slider(arg1.target);
-            var loc2:*=net.wg.gui.lobby.settings.SettingsConfig.getControlId(loc1.name, net.wg.gui.lobby.settings.SettingsConfig.TYPE_SLIDER);
-            dispatchEvent(new net.wg.gui.lobby.settings.evnts.SettingViewEvent(net.wg.gui.lobby.settings.evnts.SettingViewEvent.ON_CONTROL_CHANGED, _viewId, loc2, loc1.value));
-            this.checkEnabledSetDefBtn();
-            return;
-        }
+      private function onCheckBoxSelected(param1:Event) : void {
+         var _loc2_:CheckBox = CheckBox(param1.target);
+         var _loc3_:String = SettingsConfig.getControlId(_loc2_.name,SettingsConfig.TYPE_CHECKBOX);
+         dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,_loc3_,_loc2_.selected));
+         this.checkEnabledSetDefBtn();
+      }
 
-        internal function onCheckBoxSelected(arg1:flash.events.Event):void
-        {
-            var loc1:*=net.wg.gui.components.controls.CheckBox(arg1.target);
-            var loc2:*=net.wg.gui.lobby.settings.SettingsConfig.getControlId(loc1.name, net.wg.gui.lobby.settings.SettingsConfig.TYPE_CHECKBOX);
-            dispatchEvent(new net.wg.gui.lobby.settings.evnts.SettingViewEvent(net.wg.gui.lobby.settings.evnts.SettingViewEvent.ON_CONTROL_CHANGED, _viewId, loc2, loc1.selected));
-            this.checkEnabledSetDefBtn();
-            return;
-        }
+      private function onKeyChange(param1:ListEventEx) : void {
+         this.keys.updateDataProvider();
+         var _loc2_:String = param1.itemData.id;
+         var _loc3_:Object = {};
+         _loc3_[_loc2_] = param1.controllerIdx;
+         var _loc4_:String = SettingsConfig.KEYBOARD;
+         dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,_loc4_,_loc3_));
+         this.checkEnabledSetDefBtn();
+         if(_loc2_ == SettingsConfig.PUSH_TO_TALK)
+         {
+            dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_PTT_CONTROL_CHANGED,_viewId,_loc2_,param1.controllerIdx));
+         }
+      }
+   }
 
-        internal function onKeyChange(arg1:net.wg.gui.events.ListEventEx):void
-        {
-            this.keys.updateDataProvider();
-            var loc1:*=arg1.itemData.id;
-            var loc2:*={};
-            loc2[loc1] = arg1.controllerIdx;
-            var loc3:*=net.wg.gui.lobby.settings.SettingsConfig.KEYBOARD;
-            dispatchEvent(new net.wg.gui.lobby.settings.evnts.SettingViewEvent(net.wg.gui.lobby.settings.evnts.SettingViewEvent.ON_CONTROL_CHANGED, _viewId, loc3, loc2));
-            this.checkEnabledSetDefBtn();
-            if (loc1 == net.wg.gui.lobby.settings.SettingsConfig.PUSH_TO_TALK) 
-            {
-                dispatchEvent(new net.wg.gui.lobby.settings.evnts.SettingViewEvent(net.wg.gui.lobby.settings.evnts.SettingViewEvent.ON_PTT_CONTROL_CHANGED, _viewId, loc1, arg1.controllerIdx));
-            }
-            return;
-        }
-
-        public var keyboardFieldSet:net.wg.gui.components.advanced.FieldSet=null;
-
-        public var scrollBar:net.wg.gui.components.controls.ScrollBar=null;
-
-        public var keys:net.wg.gui.lobby.settings.components.KeysScrollingList=null;
-
-        public var mouseFieldSet:net.wg.gui.components.advanced.FieldSet=null;
-
-        public var mouseSensitivityLabel:flash.text.TextField=null;
-
-        public var mouseArcadeSensLabel:flash.text.TextField=null;
-
-        public var mouseArcadeSensSlider:net.wg.gui.components.controls.Slider=null;
-
-        public var mouseSniperSensLabel:flash.text.TextField=null;
-
-        public var mouseSniperSensSlider:net.wg.gui.components.controls.Slider=null;
-
-        public var mouseStrategicSensLabel:flash.text.TextField=null;
-
-        public var mouseStrategicSensSlider:net.wg.gui.components.controls.Slider=null;
-
-        public var mouseHorzInvertCheckbox:net.wg.gui.components.controls.CheckBox=null;
-
-        public var mouseVertInvertCheckbox:net.wg.gui.components.controls.CheckBox=null;
-
-        public var backDraftInvertCheckbox:net.wg.gui.components.controls.CheckBox=null;
-
-        public var defaultBtn:net.wg.gui.components.controls.SoundButtonEx=null;
-    }
 }

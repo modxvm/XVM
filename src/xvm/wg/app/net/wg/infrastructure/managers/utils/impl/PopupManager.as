@@ -1,61 +1,55 @@
-package net.wg.infrastructure.managers.utils.impl 
+package net.wg.infrastructure.managers.utils.impl
 {
-    import flash.display.*;
-    import net.wg.utils.*;
-    import scaleform.clik.managers.*;
-    
-    public class PopupManager extends Object implements net.wg.utils.IPopUpManager
-    {
-        public function PopupManager()
-        {
-            super();
-            return;
-        }
+   import net.wg.utils.IPopUpManager;
+   import flash.display.DisplayObject;
+   import flash.display.DisplayObjectContainer;
+   import scaleform.clik.managers.PopUpManager;
+   import net.wg.utils.IUtils;
 
-        public function show(arg1:flash.display.DisplayObject, arg2:Number=0, arg3:Number=0, arg4:flash.display.DisplayObjectContainer=null):void
-        {
-            scaleform.clik.managers.PopUpManager.show(arg1, arg2, arg3, arg4);
-            return;
-        }
 
-        public function create(arg1:String, arg2:Object, arg3:flash.display.DisplayObjectContainer=null):flash.display.DisplayObject
-        {
-            var loc1:*=App.utils.classFactory.getObject(arg1, arg2) as flash.display.DisplayObject;
-            App.utils.asserter.assertNotNull(loc1, "object for \'" + arg1 + "\' was not found.");
-            this.show(loc1, arg2.x, arg2.y, arg3);
-            return loc1;
-        }
+   public class PopupManager extends Object implements IPopUpManager
+   {
+          
+      public function PopupManager() {
+         super();
+      }
 
-        public function get popupCanvas():flash.display.DisplayObjectContainer
-        {
-            return scaleform.clik.managers.PopUpManager.popupCanvas;
-        }
+      public function show(param1:DisplayObject, param2:Number=0, param3:Number=0, param4:DisplayObjectContainer=null) : void {
+         PopUpManager.show(param1,param2,param3,param4);
+      }
 
-        public function remove(arg1:flash.display.DisplayObject):void
-        {
-            App.utils.asserter.assert(this.contains(arg1), "can\'t remove popup \'" + arg1 + "\' because it\'s not a child of popupCanvas");
-            App.utils.commons.releaseReferences(arg1);
-            this.popupCanvas.removeChild(arg1);
-            return;
-        }
+      public function create(param1:String, param2:Object, param3:DisplayObjectContainer=null) : DisplayObject {
+         var _loc4_:DisplayObject = App.utils.classFactory.getObject(param1,param2) as DisplayObject;
+         App.utils.asserter.assertNotNull(_loc4_,"object for \'" + param1 + "\' was not found.");
+         this.show(_loc4_,param2.x,param2.y,param3);
+         return _loc4_;
+      }
 
-        public function removeAll():void
-        {
-            var loc3:*=null;
-            var loc1:*=this.popupCanvas;
-            var loc2:*=App.utils;
-            while (loc1.numChildren) 
-            {
-                loc3 = loc1.getChildAt((loc1.numChildren - 1));
-                loc2.commons.releaseReferences(loc3);
-                loc1.removeChild(loc3);
-            }
-            return;
-        }
+      public function get popupCanvas() : DisplayObjectContainer {
+         return PopUpManager.popupCanvas;
+      }
 
-        public function contains(arg1:flash.display.DisplayObject):Boolean
-        {
-            return this.popupCanvas.contains(arg1);
-        }
-    }
+      public function remove(param1:DisplayObject) : void {
+         App.utils.asserter.assert(this.contains(param1),"can\'t remove popup \'" + param1 + "\' because it\'s not a child of popupCanvas");
+         App.utils.commons.releaseReferences(param1);
+         this.popupCanvas.removeChild(param1);
+      }
+
+      public function removeAll() : void {
+         var _loc3_:DisplayObject = null;
+         var _loc1_:DisplayObjectContainer = this.popupCanvas;
+         var _loc2_:IUtils = App.utils;
+         while(_loc1_.numChildren)
+         {
+            _loc3_ = _loc1_.getChildAt(_loc1_.numChildren-1);
+            _loc2_.commons.releaseReferences(_loc3_);
+            _loc1_.removeChild(_loc3_);
+         }
+      }
+
+      public function contains(param1:DisplayObject) : Boolean {
+         return this.popupCanvas.contains(param1);
+      }
+   }
+
 }

@@ -1,238 +1,223 @@
-package net.wg.gui.lobby.techtree.data 
+package net.wg.gui.lobby.techtree.data
 {
-    import __AS3__.vec.*;
-    import net.wg.gui.lobby.techtree.constants.*;
-    import net.wg.gui.lobby.techtree.data.vo.*;
-    import net.wg.gui.lobby.techtree.interfaces.*;
-    import net.wg.gui.lobby.techtree.math.*;
-    import net.wg.utils.*;
-    
-    public class ResearchVODataProvider extends net.wg.gui.lobby.techtree.data.AbstractDataProvider implements net.wg.gui.lobby.techtree.interfaces.IResearchDataProvider
-    {
-        public function ResearchVODataProvider()
-        {
-            super();
-            this.topData = new Vector.<net.wg.gui.lobby.techtree.data.vo.NodeData>();
-            return;
-        }
+   import net.wg.gui.lobby.techtree.interfaces.IResearchDataProvider;
+   import __AS3__.vec.Vector;
+   import net.wg.gui.lobby.techtree.data.vo.NodeData;
+   import net.wg.gui.lobby.techtree.data.vo.VehGlobalStats;
+   import net.wg.gui.lobby.techtree.data.vo.ResearchDisplayInfo;
+   import net.wg.utils.ILocale;
+   import net.wg.gui.lobby.techtree.math.ADG_ItemLevelsBuilder;
+   import net.wg.gui.lobby.techtree.data.vo.UnlockProps;
+   import net.wg.gui.lobby.techtree.constants.NodeEntityType;
 
-        public function get topLength():Number
-        {
-            return this.topData.length;
-        }
 
-        public function getDepthOfPath(arg1:Number):Number
-        {
-            var loc1:*=this.depthOfPaths[arg1];
-            return isNaN(loc1) ? 0 : loc1;
-        }
+   public class ResearchVODataProvider extends AbstractDataProvider implements IResearchDataProvider
+   {
+          
+      public function ResearchVODataProvider() {
+         super();
+         this.topData = new Vector.<NodeData>();
+      }
 
-        public function getMaxDepthOfPath():Number
-        {
-            var loc2:*=NaN;
-            var loc1:*=0;
-            var loc3:*=0;
-            var loc4:*=this.depthOfPaths;
-            for each (loc2 in loc4) 
+      protected var topData:Vector.<NodeData>;
+
+      protected var topLevelIdxCache:Object;
+
+      protected var depthOfPaths:Array;
+
+      protected var global:VehGlobalStats;
+
+      public function get topLength() : Number {
+         return this.topData.length;
+      }
+
+      public function getDepthOfPath(param1:Number) : Number {
+         var _loc2_:Number = this.depthOfPaths[param1];
+         return isNaN(_loc2_)?0:_loc2_;
+      }
+
+      public function getMaxDepthOfPath() : Number {
+         var _loc2_:* = NaN;
+         var _loc1_:Number = 0;
+         for each (_loc2_ in this.depthOfPaths)
+         {
+            _loc1_ = Math.max(_loc1_,_loc2_);
+         }
+         return _loc1_;
+      }
+
+      public function getGlobalStats() : VehGlobalStats {
+         return this.global;
+      }
+
+      public function getTopLevelAt(param1:Number) : NodeData {
+         return this.topData[param1];
+      }
+
+      public function getTopLevelIndexByID(param1:Number) : Number {
+         return this.topLevelIdxCache[param1] != undefined?this.topLevelIdxCache[param1]:-1;
+      }
+
+      override public function clearUp() : void {
+         super.clearUp();
+         this.topData.splice(0,this.topData.length);
+         this.topLevelIdxCache = {};
+         this.depthOfPaths = [];
+      }
+
+      override public function parse(param1:Object) : void {
+         var _loc5_:* = NaN;
+         var _loc6_:NodeData = null;
+         var _loc7_:ResearchDisplayInfo = null;
+         this.clearUp();
+         NodeData.setDisplayInfoClass(ResearchDisplayInfo);
+         var _loc2_:ILocale = App.utils.locale;
+         this.global = new VehGlobalStats();
+         this.global.fromObject(param1.global,_loc2_);
+         var _loc3_:Array = param1.nodes;
+         var _loc4_:Number = _loc3_.length;
+         _loc5_ = 0;
+         while(_loc5_ < _loc4_)
+         {
+            _loc6_ = new NodeData();
+            _loc6_.fromObject(_loc3_[_loc5_],_loc2_);
+            nodeIdxCache[_loc6_.id] = nodeData.length;
+            nodeData.push(_loc6_);
+            _loc7_ = _loc6_.displayInfo as ResearchDisplayInfo;
+            this.depthOfPaths.push(_loc7_ != null?_loc7_.getDepthOfPath():0);
+            _loc5_++;
+         }
+         _loc3_ = param1.top;
+         _loc4_ = _loc3_.length;
+         _loc5_ = 0;
+         while(_loc5_ < _loc4_)
+         {
+            _loc6_ = new NodeData();
+            _loc6_.fromObject(_loc3_[_loc5_],_loc2_);
+            this.topLevelIdxCache[_loc6_.id] = this.topData.length;
+            this.topData.push(_loc6_);
+            _loc5_++;
+         }
+      }
+
+      public function populate(param1:ADG_ItemLevelsBuilder) : void {
+         var _loc4_:* = NaN;
+         var _loc5_:* = NaN;
+         var _loc6_:* = NaN;
+         var _loc7_:Object = null;
+         var _loc8_:Array = null;
+         var _loc9_:ResearchDisplayInfo = null;
+         var _loc11_:* = NaN;
+         var _loc2_:Array = param1.matrix;
+         var _loc3_:Number = nodeData.length;
+         var _loc10_:Number = 0;
+         while(_loc10_ < _loc3_)
+         {
+            _loc7_ = nodeData[_loc10_];
+            _loc9_ = _loc7_.displayInfo as ResearchDisplayInfo;
+            if(_loc9_.level > -1)
             {
-                loc1 = Math.max(loc1, loc2);
+               param1.addFixedPath(_loc10_,_loc9_.level);
             }
-            return loc1;
-        }
-
-        public function getGlobalStats():net.wg.gui.lobby.techtree.data.vo.VehGlobalStats
-        {
-            return this.global;
-        }
-
-        public function getTopLevelAt(arg1:Number):net.wg.gui.lobby.techtree.data.vo.NodeData
-        {
-            return this.topData[arg1];
-        }
-
-        public function getTopLevelIndexByID(arg1:Number):Number
-        {
-            return this.topLevelIdxCache[arg1] == undefined ? -1 : this.topLevelIdxCache[arg1];
-        }
-
-        public override function clearUp():void
-        {
-            super.clearUp();
-            this.topData.splice(0, this.topData.length);
-            this.topLevelIdxCache = {};
-            this.depthOfPaths = [];
-            return;
-        }
-
-        public override function parse(arg1:Object):void
-        {
-            var loc4:*=NaN;
-            var loc5:*=null;
-            var loc6:*=null;
-            this.clearUp();
-            net.wg.gui.lobby.techtree.data.vo.NodeData.setDisplayInfoClass(net.wg.gui.lobby.techtree.data.vo.ResearchDisplayInfo);
-            var loc1:*=App.utils.locale;
-            this.global = new net.wg.gui.lobby.techtree.data.vo.VehGlobalStats();
-            this.global.fromObject(arg1.global, loc1);
-            var loc2:*=arg1.nodes;
-            var loc3:*=loc2.length;
-            loc4 = 0;
-            while (loc4 < loc3) 
+            _loc6_ = 0;
+            _loc8_ = _loc9_.path;
+            _loc11_ = 0;
+            while(_loc11_ < _loc8_.length)
             {
-                (loc5 = new net.wg.gui.lobby.techtree.data.vo.NodeData()).fromObject(loc2[loc4], loc1);
-                nodeIdxCache[loc5.id] = nodeData.length;
-                nodeData.push(loc5);
-                loc6 = loc5.displayInfo as net.wg.gui.lobby.techtree.data.vo.ResearchDisplayInfo;
-                this.depthOfPaths.push(loc6 == null ? 0 : loc6.getDepthOfPath());
-                ++loc4;
+               _loc5_ = getIndexByID(_loc8_[_loc11_]);
+               _loc6_ = Math.max(_loc6_,this.getDepthOfPath(_loc5_));
+               _loc11_++;
             }
-            loc2 = arg1.top;
-            loc3 = loc2.length;
-            loc4 = 0;
-            while (loc4 < loc3) 
+            _loc11_ = 0;
+            while(_loc11_ < _loc8_.length)
             {
-                (loc5 = new net.wg.gui.lobby.techtree.data.vo.NodeData()).fromObject(loc2[loc4], loc1);
-                this.topLevelIdxCache[loc5.id] = this.topData.length;
-                this.topData.push(loc5);
-                ++loc4;
+               _loc4_ = _loc8_[_loc11_];
+               if(!((isNaN(_loc4_)) || _loc4_ == 0))
+               {
+                  _loc5_ = getIndexByID(_loc4_);
+                  if(!isNaN(_loc5_) && this.getDepthOfPath(_loc5_) == _loc6_)
+                  {
+                     _loc2_[_loc5_][_loc10_] = 1;
+                     _loc2_[_loc10_][_loc5_] = -1;
+                  }
+               }
+               _loc11_++;
             }
-            return;
-        }
+            _loc10_++;
+         }
+      }
 
-        public function populate(arg1:net.wg.gui.lobby.techtree.math.ADG_ItemLevelsBuilder):void
-        {
-            var loc3:*=NaN;
-            var loc4:*=NaN;
-            var loc5:*=NaN;
-            var loc6:*=null;
-            var loc7:*=null;
-            var loc8:*=null;
-            var loc10:*=NaN;
-            var loc1:*=arg1.matrix;
-            var loc2:*=nodeData.length;
-            var loc9:*=0;
-            while (loc9 < loc2) 
+      public function setTopLevelDump(param1:Number, param2:String) : Boolean {
+         var _loc3_:* = false;
+         if(param1 < this.topData.length && !(this.topData[param1] == null))
+         {
+            this.topData[param1].pickleDump = param2;
+            _loc3_ = true;
+         }
+         return _loc3_;
+      }
+
+      public function setTopLevelState(param1:Number, param2:Number, param3:Number) : Boolean {
+         return findAndSetState(this.topData,param1,param2,param3);
+      }
+
+      public function setTopLevelUnlockProps(param1:Number, param2:UnlockProps) : Boolean {
+         var _loc3_:* = false;
+         if(param1 < this.topData.length && !(this.topData[param1] == null))
+         {
+            this.topData[param1].unlockProps = param2;
+            _loc3_ = true;
+         }
+         return _loc3_;
+      }
+
+      public function setTopLevelXP(param1:Number, param2:Number) : Boolean {
+         var _loc3_:* = false;
+         if(param1 < this.topData.length && !(this.topData[param1] == null))
+         {
+            this.topData[param1].earnedXP = param2;
+            _loc3_ = true;
+         }
+         return _loc3_;
+      }
+
+      public function setTopLevelField(param1:String, param2:Number, param3:Object) : Boolean {
+         var _loc5_:UnlockProps = null;
+         var _loc4_:* = false;
+         switch(param1)
+         {
+            case NodeData.NODE_DUMP_FIELD:
+               _loc4_ = this.setTopLevelDump(param2,String(param3));
+               break;
+            case NodeData.UNLOCK_PROPS_FIELD:
+               _loc5_ = new UnlockProps();
+               _loc5_.fromArray(param3 as Array,App.utils.locale);
+               _loc4_ = this.setTopLevelUnlockProps(param2,_loc5_);
+               break;
+         }
+         return _loc4_;
+      }
+
+      public function resolveEntityType(param1:NodeData, param2:Boolean=false) : uint {
+         var _loc4_:ResearchDisplayInfo = null;
+         var _loc3_:uint = 0;
+         if(param1 != null)
+         {
+            _loc4_ = param1.displayInfo as ResearchDisplayInfo;
+            if(_loc4_ != null)
             {
-                if ((loc8 = (loc6 = nodeData[loc9]).displayInfo as net.wg.gui.lobby.techtree.data.vo.ResearchDisplayInfo).level > -1) 
-                {
-                    arg1.addFixedPath(loc9, loc8.level);
-                }
-                loc5 = 0;
-                loc7 = loc8.path;
-                loc10 = 0;
-                while (loc10 < loc7.length) 
-                {
-                    loc4 = getIndexByID(loc7[loc10]);
-                    loc5 = Math.max(loc5, this.getDepthOfPath(loc4));
-                    ++loc10;
-                }
-                loc10 = 0;
-                while (loc10 < loc7.length) 
-                {
-                    loc3 = loc7[loc10];
-                    if (!(isNaN(loc3) || loc3 == 0)) 
-                    {
-                        loc4 = getIndexByID(loc3);
-                        if (!isNaN(loc4) && this.getDepthOfPath(loc4) == loc5) 
-                        {
-                            loc1[loc4][loc9] = 1;
-                            loc1[loc9][loc4] = -1;
-                        }
-                    }
-                    ++loc10;
-                }
-                ++loc9;
+               if(_loc4_.isDrawVehicle())
+               {
+                  _loc3_ = param2?NodeEntityType.TOP_VEHICLE:NodeEntityType.NEXT_VEHICLE;
+               }
+               else
+               {
+                  _loc3_ = NodeEntityType.RESEARCH_ITEM;
+               }
             }
-            return;
-        }
+         }
+         return _loc3_;
+      }
+   }
 
-        public function setTopLevelDump(arg1:Number, arg2:String):Boolean
-        {
-            var loc1:*=false;
-            if (arg1 < this.topData.length && !(this.topData[arg1] == null)) 
-            {
-                this.topData[arg1].pickleDump = arg2;
-                loc1 = true;
-            }
-            return loc1;
-        }
-
-        public function setTopLevelState(arg1:Number, arg2:Number, arg3:Number):Boolean
-        {
-            return findAndSetState(this.topData, arg1, arg2, arg3);
-        }
-
-        public function setTopLevelUnlockProps(arg1:Number, arg2:net.wg.gui.lobby.techtree.data.vo.UnlockProps):Boolean
-        {
-            var loc1:*=false;
-            if (arg1 < this.topData.length && !(this.topData[arg1] == null)) 
-            {
-                this.topData[arg1].unlockProps = arg2;
-                loc1 = true;
-            }
-            return loc1;
-        }
-
-        public function setTopLevelXP(arg1:Number, arg2:Number):Boolean
-        {
-            var loc1:*=false;
-            if (arg1 < this.topData.length && !(this.topData[arg1] == null)) 
-            {
-                this.topData[arg1].earnedXP = arg2;
-                loc1 = true;
-            }
-            return loc1;
-        }
-
-        public function setTopLevelField(arg1:String, arg2:Number, arg3:Object):Boolean
-        {
-            var loc2:*=null;
-            var loc1:*=false;
-            var loc3:*=arg1;
-            switch (loc3) 
-            {
-                case net.wg.gui.lobby.techtree.data.vo.NodeData.NODE_DUMP_FIELD:
-                {
-                    loc1 = this.setTopLevelDump(arg2, String(arg3));
-                    break;
-                }
-                case net.wg.gui.lobby.techtree.data.vo.NodeData.UNLOCK_PROPS_FIELD:
-                {
-                    (loc2 = new net.wg.gui.lobby.techtree.data.vo.UnlockProps()).fromArray(arg3 as Array, App.utils.locale);
-                    loc1 = this.setTopLevelUnlockProps(arg2, loc2);
-                    break;
-                }
-            }
-            return loc1;
-        }
-
-        public function resolveEntityType(arg1:net.wg.gui.lobby.techtree.data.vo.NodeData, arg2:Boolean=false):uint
-        {
-            var loc2:*=null;
-            var loc1:*=0;
-            if (arg1 != null) 
-            {
-                if ((loc2 = arg1.displayInfo as net.wg.gui.lobby.techtree.data.vo.ResearchDisplayInfo) != null) 
-                {
-                    if (loc2.isDrawVehicle()) 
-                    {
-                        loc1 = arg2 ? net.wg.gui.lobby.techtree.constants.NodeEntityType.TOP_VEHICLE : net.wg.gui.lobby.techtree.constants.NodeEntityType.NEXT_VEHICLE;
-                    }
-                    else 
-                    {
-                        loc1 = net.wg.gui.lobby.techtree.constants.NodeEntityType.RESEARCH_ITEM;
-                    }
-                }
-            }
-            return loc1;
-        }
-
-        protected var topData:__AS3__.vec.Vector.<net.wg.gui.lobby.techtree.data.vo.NodeData>;
-
-        protected var topLevelIdxCache:Object;
-
-        protected var depthOfPaths:Array;
-
-        protected var global:net.wg.gui.lobby.techtree.data.vo.VehGlobalStats;
-    }
 }

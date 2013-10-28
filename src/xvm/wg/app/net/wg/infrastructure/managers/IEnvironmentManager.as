@@ -1,21 +1,25 @@
-package net.wg.infrastructure.managers 
+package net.wg.infrastructure.managers
 {
-    public interface IEnvironmentManager
-    {
-        function quit():void;
 
-        function logoff():void;
 
-        function useEventSystem():void;
+   public interface IEnvironmentManager
+   {
+          
+      function quit() : void;
 
-        function useExternallInterface():void;
+      function logoff() : void;
 
-        function addCallback(arg1:String, arg2:Function):void;
+      function useEventSystem() : void;
 
-        function call(... rest):*;
+      function useExternallInterface() : void;
 
-        function envoke(arg1:String):*;
+      function addCallback(param1:String, param2:Function) : void;
 
-        function setLastResult(arg1:Object):void;
-    }
+      function call(... rest) : *;
+
+      function envoke(param1:String) : *;
+
+      function setLastResult(param1:Object) : void;
+   }
+
 }

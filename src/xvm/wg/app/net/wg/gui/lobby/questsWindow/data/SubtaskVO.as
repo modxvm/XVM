@@ -1,56 +1,45 @@
-package net.wg.gui.lobby.questsWindow.data 
+package net.wg.gui.lobby.questsWindow.data
 {
-    import net.wg.data.daapi.base.*;
-    
-    public class SubtaskVO extends net.wg.data.daapi.base.DAAPIDataClass
-    {
-        public function SubtaskVO(arg1:Object)
-        {
-            super(arg1);
-            return;
-        }
+   import net.wg.data.daapi.base.DAAPIDataClass;
 
-        protected override function onDataWrite(arg1:String, arg2:Object):Boolean
-        {
-            var loc1:*=arg1;
-            switch (loc1) 
-            {
-                case "questInfo":
-                {
-                    this._questInfo = new net.wg.gui.lobby.questsWindow.data.QuestRendererVO(arg2 ? arg2 : {});
-                    return false;
-                }
-                default:
-                {
-                    return true;
-                }
-            }
-        }
 
-        public function get title():String
-        {
-            return this._title;
-        }
+   public class SubtaskVO extends DAAPIDataClass
+   {
+          
+      public function SubtaskVO(param1:Object) {
+         super(param1);
+      }
 
-        public function set title(arg1:String):void
-        {
-            this._title = arg1;
-            return;
-        }
+      private var _title:String = "";
 
-        public function get questInfo():net.wg.gui.lobby.questsWindow.data.QuestRendererVO
-        {
-            return this._questInfo;
-        }
+      private var _questInfo:QuestRendererVO = null;
 
-        public function set questInfo(arg1:net.wg.gui.lobby.questsWindow.data.QuestRendererVO):void
-        {
-            this._questInfo = arg1;
-            return;
-        }
+      override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+         switch(param1)
+         {
+            case "questInfo":
+               this._questInfo = new QuestRendererVO(param2?param2:{});
+               return false;
+            default:
+               return true;
+         }
+      }
 
-        internal var _title:String="";
+      public function get title() : String {
+         return this._title;
+      }
 
-        internal var _questInfo:net.wg.gui.lobby.questsWindow.data.QuestRendererVO=null;
-    }
+      public function set title(param1:String) : void {
+         this._title = param1;
+      }
+
+      public function get questInfo() : QuestRendererVO {
+         return this._questInfo;
+      }
+
+      public function set questInfo(param1:QuestRendererVO) : void {
+         this._questInfo = param1;
+      }
+   }
+
 }

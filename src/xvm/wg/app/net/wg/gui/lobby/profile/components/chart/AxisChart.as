@@ -1,96 +1,85 @@
-package net.wg.gui.lobby.profile.components.chart 
+package net.wg.gui.lobby.profile.components.chart
 {
-    import flash.display.*;
-    import flash.utils.*;
-    import net.wg.gui.lobby.profile.components.chart.axis.*;
-    import scaleform.clik.constants.*;
-    
-    public class AxisChart extends net.wg.gui.lobby.profile.components.chart.ChartBase
-    {
-        public function AxisChart()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.lobby.profile.components.chart.axis.IChartAxis;
+   import scaleform.clik.constants.InvalidationType;
+   import flash.display.DisplayObject;
+   import flash.utils.getDefinitionByName;
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA, LAYOUT_INV)) 
-            {
-                this.applyAxisUpdate();
-            }
-            return;
-        }
 
-        internal function applyAxisUpdate():void
-        {
-            if (this._horizontalAxis) 
-            {
-                this._horizontalAxis.setData(dataProvider, _renderers, currentLayout);
-            }
-            return;
-        }
+   public class AxisChart extends ChartBase
+   {
+          
+      public function AxisChart() {
+         super();
+      }
 
-        public function get horizontalAxis():net.wg.gui.lobby.profile.components.chart.axis.IChartAxis
-        {
-            return this._horizontalAxis;
-        }
+      private var _horizontalAxis:IChartAxis;
 
-        public function set horizontalAxis(arg1:net.wg.gui.lobby.profile.components.chart.axis.IChartAxis):void
-        {
-            var loc1:*=null;
-            if (this._horizontalAxis) 
-            {
-                loc1 = flash.display.DisplayObject(this._horizontalAxis);
-                loc1.parent.removeChild(loc1);
-            }
-            this._horizontalAxis = arg1;
-            addChild(flash.display.DisplayObject(this._horizontalAxis));
+      private var _horizontalAxisName:String;
+
+      override protected function draw() : void {
+         super.draw();
+         if(isInvalid(InvalidationType.DATA,LAYOUT_INV))
+         {
             this.applyAxisUpdate();
-            return;
-        }
+         }
+      }
 
-        public function get horizontalAxisName():String
-        {
-            return this._horizontalAxisName;
-        }
+      private function applyAxisUpdate() : void {
+         if(this._horizontalAxis)
+         {
+            this._horizontalAxis.setData(dataProvider,_renderers,currentLayout);
+         }
+      }
 
-        public function set horizontalAxisName(arg1:String):void
-        {
-            var loc1:*=null;
-            if (this._horizontalAxisName != arg1) 
+      public function get horizontalAxis() : IChartAxis {
+         return this._horizontalAxis;
+      }
+
+      public function set horizontalAxis(param1:IChartAxis) : void {
+         var _loc2_:DisplayObject = null;
+         if(this._horizontalAxis)
+         {
+            _loc2_ = DisplayObject(this._horizontalAxis);
+            _loc2_.parent.removeChild(_loc2_);
+         }
+         this._horizontalAxis = param1;
+         addChild(DisplayObject(this._horizontalAxis));
+         this.applyAxisUpdate();
+      }
+
+      public function get horizontalAxisName() : String {
+         return this._horizontalAxisName;
+      }
+
+      public function set horizontalAxisName(param1:String) : void {
+         var _loc2_:IChartAxis = null;
+         if(this._horizontalAxisName != param1)
+         {
+            this._horizontalAxisName = param1;
+            if(!(this._horizontalAxisName == null) || !(this._horizontalAxisName == ""))
             {
-                this._horizontalAxisName = arg1;
-                if (!(this._horizontalAxisName == null) || !(this._horizontalAxisName == "")) 
-                {
-                    if (App.utils) 
-                    {
-                        loc1 = net.wg.gui.lobby.profile.components.chart.axis.IChartAxis(App.utils.classFactory.getObject(this._horizontalAxisName));
-                    }
-                    else 
-                    {
-                        loc1 = net.wg.gui.lobby.profile.components.chart.axis.IChartAxis(flash.utils.getDefinitionByName(this._horizontalAxisName));
-                    }
-                    this.horizontalAxis = loc1;
-                }
+               if(App.utils)
+               {
+                  _loc2_ = IChartAxis(App.utils.classFactory.getObject(this._horizontalAxisName));
+               }
+               else
+               {
+                  _loc2_ = IChartAxis(getDefinitionByName(this._horizontalAxisName));
+               }
+               this.horizontalAxis = _loc2_;
             }
-            return;
-        }
+         }
+      }
 
-        public override function dispose():void
-        {
-            if (this._horizontalAxis) 
-            {
-                this._horizontalAxis.dispose();
-                this._horizontalAxis = null;
-            }
-            super.dispose();
-            return;
-        }
+      override public function dispose() : void {
+         if(this._horizontalAxis)
+         {
+            this._horizontalAxis.dispose();
+            this._horizontalAxis = null;
+         }
+         super.dispose();
+      }
+   }
 
-        internal var _horizontalAxis:net.wg.gui.lobby.profile.components.chart.axis.IChartAxis;
-
-        internal var _horizontalAxisName:String;
-    }
 }

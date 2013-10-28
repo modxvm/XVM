@@ -1,33 +1,32 @@
-package scaleform.clik.events 
+package scaleform.clik.events
 {
-    import flash.events.*;
-    
-    public class ResizeEvent extends flash.events.Event
-    {
-        public function ResizeEvent(arg1:String, arg2:Number, arg3:Number)
-        {
-            super(arg1, false, false);
-            this.scaleX = arg2;
-            this.scaleY = arg3;
-            return;
-        }
+   import flash.events.Event;
 
-        public override function toString():String
-        {
-            return formatToString("ResizeEvent", "type", "scaleX", "scaleY");
-        }
 
-        public override function clone():flash.events.Event
-        {
-            return new scaleform.clik.events.ResizeEvent(type, this.scaleX, this.scaleY);
-        }
+   public class ResizeEvent extends Event
+   {
+          
+      public function ResizeEvent(param1:String, param2:Number, param3:Number) {
+         super(param1,false,false);
+         this.scaleX = param2;
+         this.scaleY = param3;
+      }
 
-        public static const RESIZE:String="resize";
+      public static const RESIZE:String = "resize";
 
-        public static const SCOPE_ORIGINALS_UPDATE:String="scopeOriginalsUpdate";
+      public static const SCOPE_ORIGINALS_UPDATE:String = "scopeOriginalsUpdate";
 
-        public var scaleX:Number=1;
+      public var scaleX:Number = 1;
 
-        public var scaleY:Number=1;
-    }
+      public var scaleY:Number = 1;
+
+      override public function toString() : String {
+         return formatToString("ResizeEvent","type","scaleX","scaleY");
+      }
+
+      override public function clone() : Event {
+         return new ResizeEvent(type,this.scaleX,this.scaleY);
+      }
+   }
+
 }

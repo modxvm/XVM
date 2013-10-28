@@ -1,30 +1,33 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    import net.wg.data.VO.*;
-    
-    public interface IStoreMeta extends flash.events.IEventDispatcher
-    {
-        function requestTableDataS(arg1:Number, arg2:String, arg3:Array):void;
+   import flash.events.IEventDispatcher;
+   import net.wg.data.VO.StoreTableData;
 
-        function requestFilterDataS(arg1:String):void;
 
-        function onCloseButtonClickS():void;
+   public interface IStoreMeta extends IEventDispatcher
+   {
+          
+      function requestTableDataS(param1:Number, param2:String, param3:Array) : void;
 
-        function onShowInfoS(arg1:net.wg.data.VO.StoreTableData):void;
+      function requestFilterDataS(param1:String) : void;
 
-        function getNameS():String;
+      function onCloseButtonClickS() : void;
 
-        function as_setNations(arg1:Array):void;
+      function onShowInfoS(param1:StoreTableData) : void;
 
-        function as_completeInit():void;
+      function getNameS() : String;
 
-        function as_update():void;
+      function as_setNations(param1:Array) : void;
 
-        function as_setFilterType(arg1:Object):void;
+      function as_completeInit() : void;
 
-        function as_setSubFilter(arg1:Object):void;
+      function as_update() : void;
 
-        function as_setFilterOptions(arg1:Array):void;
-    }
+      function as_setFilterType(param1:Object) : void;
+
+      function as_setSubFilter(param1:Object) : void;
+
+      function as_setFilterOptions(param1:Array) : void;
+   }
+
 }

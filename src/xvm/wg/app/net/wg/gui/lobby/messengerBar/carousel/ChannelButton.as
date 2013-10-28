@@ -1,117 +1,101 @@
-package net.wg.gui.lobby.messengerBar.carousel 
+package net.wg.gui.lobby.messengerBar.carousel
 {
-    import __AS3__.vec.*;
-    import flash.events.*;
-    import net.wg.gui.components.advanced.*;
-    import net.wg.infrastructure.interfaces.*;
-    
-    public class ChannelButton extends net.wg.gui.components.advanced.BlinkingButton implements net.wg.infrastructure.interfaces.IDynamicContent
-    {
-        public function ChannelButton()
-        {
-            super();
-            constraintsDisabled = true;
-            _iconOffsetLeft = 1;
-            _iconOffsetTop = 1;
-            return;
-        }
+   import net.wg.gui.components.advanced.BlinkingButton;
+   import net.wg.infrastructure.interfaces.IDynamicContent;
+   import __AS3__.vec.Vector;
+   import flash.events.MouseEvent;
 
-        public override function set label(arg1:String):void
-        {
-            super.label = arg1;
-            tooltip = "";
-            return;
-        }
 
-        public override function set iconSource(arg1:String):void
-        {
-            if (iconSource != arg1) 
+   public class ChannelButton extends BlinkingButton implements IDynamicContent
+   {
+          
+      public function ChannelButton() {
+         super();
+         constraintsDisabled = true;
+         _iconOffsetLeft = 1;
+         _iconOffsetTop = 1;
+      }
+
+      override public function set label(param1:String) : void {
+         super.label = param1;
+         tooltip = "";
+      }
+
+      override public function set iconSource(param1:String) : void {
+         if(iconSource != param1)
+         {
+            super.iconSource = param1;
+            setState(state);
+         }
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+      }
+
+      override protected function draw() : void {
+         super.draw();
+      }
+
+      override protected function getStatePrefixes() : Vector.<String> {
+         var _loc1_:String = iconSource?"icon_":"";
+         if(blinking)
+         {
+            return Vector.<String>(_selected?["selected_",_loc1_ + "blinking_"]:[_loc1_ + "blinking_"]);
+         }
+         return Vector.<String>(_selected?["selected_",_loc1_]:[_loc1_]);
+      }
+
+      override protected function updateAfterStateChange() : void {
+         super.updateAfterStateChange();
+      }
+
+      override protected function handleMouseRollOver(param1:MouseEvent) : void {
+         super.handleMouseRollOver(param1);
+         if(tooltip)
+         {
+            App.toolTipMgr.show(tooltip);
+         }
+      }
+
+      override protected function handleMouseRollOut(param1:MouseEvent) : void {
+         super.handleMouseRollOut(param1);
+         App.toolTipMgr.hide();
+      }
+
+      override protected function updateText() : void {
+         if(!(_label == null) && !(textField == null))
+         {
+            textField.text = _label;
+            this.truncateText();
+         }
+      }
+
+      private function truncateText() : void {
+         var _loc1_:String = null;
+         var _loc2_:String = null;
+         var _loc3_:uint = 0;
+         if(textField.textWidth > textField.width)
+         {
+            tooltip = _label;
+            _loc1_ = textField.text.length > 0?textField.text:_label;
+            _loc2_ = _loc1_;
+            _loc3_ = 1;
+            while(_loc2_.length > 0 && _loc3_ > 0)
             {
-                super.iconSource = arg1;
-                setState(state);
+               _loc2_ = _loc1_.substring(0,_loc1_.length - _loc3_) + "..";
+               textField.text = _loc2_;
+               if(textField.textWidth > textField.width)
+               {
+                  _loc3_++;
+               }
+               else
+               {
+                  _loc3_ = 0;
+               }
             }
-            return;
-        }
+         }
+      }
+   }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            return;
-        }
-
-        protected override function draw():void
-        {
-            super.draw();
-            return;
-        }
-
-        protected override function getStatePrefixes():__AS3__.vec.Vector.<String>
-        {
-            var loc1:*=iconSource ? "icon_" : "";
-            if (blinking) 
-            {
-                return Vector.<String>(_selected ? ["selected_", loc1 + "blinking_"] : [loc1 + "blinking_"]);
-            }
-            return Vector.<String>(_selected ? ["selected_", loc1] : [loc1]);
-        }
-
-        protected override function updateAfterStateChange():void
-        {
-            super.updateAfterStateChange();
-            return;
-        }
-
-        protected override function handleMouseRollOver(arg1:flash.events.MouseEvent):void
-        {
-            super.handleMouseRollOver(arg1);
-            if (tooltip) 
-            {
-                App.toolTipMgr.show(tooltip);
-            }
-            return;
-        }
-
-        protected override function handleMouseRollOut(arg1:flash.events.MouseEvent):void
-        {
-            super.handleMouseRollOut(arg1);
-            App.toolTipMgr.hide();
-            return;
-        }
-
-        protected override function updateText():void
-        {
-            if (!(_label == null) && !(textField == null)) 
-            {
-                textField.text = _label;
-                this.truncateText();
-            }
-            return;
-        }
-
-        internal function truncateText():void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            var loc3:*=0;
-            if (textField.textWidth > textField.width) 
-            {
-                tooltip = _label;
-                loc1 = textField.text.length > 0 ? textField.text : _label;
-                loc2 = loc1;
-                loc3 = 1;
-                while (loc2.length > 0 && loc3 > 0) 
-                {
-                    loc2 = loc1.substring(0, loc1.length - loc3) + "..";
-                    textField.text = loc2;
-                    if (textField.textWidth > textField.width) 
-                    {
-                        ++loc3;
-                        continue;
-                    }
-                    loc3 = 0;
-                }
-            }
-            return;
-        }
-    }
 }

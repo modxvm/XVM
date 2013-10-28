@@ -1,25 +1,25 @@
-package net.wg.gui.events 
+package net.wg.gui.events
 {
-    import flash.events.*;
-    
-    public class VehicleSellDialogEvent extends flash.events.Event
-    {
-        public function VehicleSellDialogEvent(arg1:String, arg2:Number=0)
-        {
-            super(arg1, true, true);
-            this.listVisibleHight = arg2;
-            return;
-        }
+   import flash.events.Event;
 
-        public override function clone():flash.events.Event
-        {
-            return new net.wg.gui.events.VehicleSellDialogEvent(type, this.listVisibleHight);
-        }
 
-        public static const LIST_WAS_DRAWN:String="listWasDrawn";
+   public class VehicleSellDialogEvent extends Event
+   {
+          
+      public function VehicleSellDialogEvent(param1:String, param2:Number=undefined) {
+         super(param1,true,true);
+         this.listVisibleHight = param2;
+      }
 
-        public static const UPDATE_RESULT:String="updateResult";
+      public static const LIST_WAS_DRAWN:String = "listWasDrawn";
 
-        public var listVisibleHight:Number;
-    }
+      public static const UPDATE_RESULT:String = "updateResult";
+
+      public var listVisibleHight:Number;
+
+      override public function clone() : Event {
+         return new VehicleSellDialogEvent(type,this.listVisibleHight);
+      }
+   }
+
 }

@@ -1,40 +1,41 @@
-package scaleform.clik.ui 
+package scaleform.clik.ui
 {
-    public class InputDetails extends Object
-    {
-        public function InputDetails(arg1:String, arg2:Number, arg3:*, arg4:String=null, arg5:uint=0, arg6:Boolean=false, arg7:Boolean=false, arg8:Boolean=false)
-        {
-            super();
-            this.type = arg1;
-            this.code = arg2;
-            this.value = arg3;
-            this.navEquivalent = arg4;
-            this.controllerIndex = arg5;
-            this.ctrlKey = arg6;
-            this.altKey = arg7;
-            this.shiftKey = arg8;
-            return;
-        }
 
-        public function toString():String
-        {
-            return "[InputDetails code=" + this.code + ", type=" + this.type + " value=" + this.value + ", navEquivalent=" + this.navEquivalent + ", controllerIndex=" + this.controllerIndex + ", ctrlKey=" + this.ctrlKey + ", altKey=" + this.altKey + ", shiftKey=" + this.shiftKey + "]";
-        }
 
-        public var type:String;
+   public class InputDetails extends Object
+   {
+          
+      public function InputDetails(param1:String, param2:Number, param3:*, param4:String=null, param5:uint=undefined, param6:Boolean=false, param7:Boolean=false, param8:Boolean=false) {
+         super();
+         this.type = param1;
+         this.code = param2;
+         this.value = param3;
+         this.navEquivalent = param4;
+         this.controllerIndex = param5;
+         this.ctrlKey = param6;
+         this.altKey = param7;
+         this.shiftKey = param8;
+      }
 
-        public var code:Number;
+      public var type:String;
 
-        public var value:*;
+      public var code:Number;
 
-        public var navEquivalent:String;
+      public var value:*;
 
-        public var controllerIndex:uint;
+      public var navEquivalent:String;
 
-        public var ctrlKey:Boolean;
+      public var controllerIndex:uint;
 
-        public var altKey:Boolean;
+      public var ctrlKey:Boolean;
 
-        public var shiftKey:Boolean;
-    }
+      public var altKey:Boolean;
+
+      public var shiftKey:Boolean;
+
+      public function toString() : String {
+         return "[InputDetails code=" + this.code + ", type=" + this.type + " value=" + this.value + ", navEquivalent=" + this.navEquivalent + ", controllerIndex=" + this.controllerIndex + ", ctrlKey=" + this.ctrlKey + ", altKey=" + this.altKey + ", shiftKey=" + this.shiftKey + "]";
+      }
+   }
+
 }

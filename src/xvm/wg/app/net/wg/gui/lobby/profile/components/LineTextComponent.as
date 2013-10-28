@@ -1,66 +1,59 @@
-package net.wg.gui.lobby.profile.components 
+package net.wg.gui.lobby.profile.components
 {
-    import flash.display.*;
-    import flash.text.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.core.*;
-    
-    public class LineTextComponent extends scaleform.clik.core.UIComponent
-    {
-        public function LineTextComponent()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.display.MovieClip;
+   import flash.text.TextField;
+   import flash.text.TextFieldAutoSize;
+   import scaleform.clik.constants.InvalidationType;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            return;
-        }
 
-        protected override function draw():void
-        {
-            var loc1:*=NaN;
-            super.draw();
-            if (isInvalid(TEXT_INV)) 
-            {
-                this.textField.autoSize = flash.text.TextFieldAutoSize.LEFT;
-                this.textField.text = this._text;
-                invalidate(scaleform.clik.constants.InvalidationType.SIZE);
-            }
-            if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
-            {
-                loc1 = _width - this.textField.width >> 1;
-                var loc2:*;
-                this.rightLine.width = loc2 = Math.round(loc1);
-                this.leftLine.width = loc2;
-                this.textField.x = loc1;
-                this.rightLine.x = _width - loc1;
-            }
-            return;
-        }
+   public class LineTextComponent extends UIComponent
+   {
+          
+      public function LineTextComponent() {
+         super();
+      }
 
-        public function get text():String
-        {
-            return this._text;
-        }
+      private static const TEXT_INV:String = "textInv";
 
-        public function set text(arg1:String):void
-        {
-            this._text = arg1;
-            invalidate(TEXT_INV);
-            return;
-        }
+      public var leftLine:MovieClip;
 
-        internal static const TEXT_INV:String="textInv";
+      public var rightLine:MovieClip;
 
-        public var leftLine:flash.display.MovieClip;
+      public var textField:TextField;
 
-        public var rightLine:flash.display.MovieClip;
+      private var _text:String = "";
 
-        public var textField:flash.text.TextField;
+      override protected function configUI() : void {
+         super.configUI();
+      }
 
-        internal var _text:String="";
-    }
+      override protected function draw() : void {
+         var _loc1_:* = NaN;
+         super.draw();
+         if(isInvalid(TEXT_INV))
+         {
+            this.textField.autoSize = TextFieldAutoSize.LEFT;
+            this.textField.text = this._text;
+            invalidate(InvalidationType.SIZE);
+         }
+         if(isInvalid(InvalidationType.SIZE))
+         {
+            _loc1_ = _width - this.textField.width >> 1;
+            this.leftLine.width = this.rightLine.width = Math.round(_loc1_);
+            this.textField.x = _loc1_;
+            this.rightLine.x = _width - _loc1_;
+         }
+      }
+
+      public function get text() : String {
+         return this._text;
+      }
+
+      public function set text(param1:String) : void {
+         this._text = param1;
+         invalidate(TEXT_INV);
+      }
+   }
+
 }

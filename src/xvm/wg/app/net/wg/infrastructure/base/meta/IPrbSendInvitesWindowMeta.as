@@ -1,31 +1,34 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IPrbSendInvitesWindowMeta extends flash.events.IEventDispatcher
-    {
-        function showErrorS(arg1:String):void;
+   import flash.events.IEventDispatcher;
 
-        function searchTokenS(arg1:String):void;
 
-        function setOnlineFlagS(arg1:Boolean):void;
+   public interface IPrbSendInvitesWindowMeta extends IEventDispatcher
+   {
+          
+      function showErrorS(param1:String) : void;
 
-        function sendInvitesS(arg1:Array, arg2:String):void;
+      function searchTokenS(param1:String) : void;
 
-        function as_onReceiveSendInvitesCooldown(arg1:uint):void;
+      function setOnlineFlagS(param1:Boolean) : void;
 
-        function as_setDefaultOnlineFlag(arg1:Boolean):void;
+      function sendInvitesS(param1:Array, param2:String) : void;
 
-        function as_getFriendsDP():Object;
+      function as_onReceiveSendInvitesCooldown(param1:uint) : void;
 
-        function as_getClanDP():Object;
+      function as_setDefaultOnlineFlag(param1:Boolean) : void;
 
-        function as_getSearchDP():Object;
+      function as_getFriendsDP() : Object;
 
-        function as_getReceiverDP():Object;
+      function as_getClanDP() : Object;
 
-        function as_onSearchResultReceived(arg1:Boolean):void;
+      function as_getSearchDP() : Object;
 
-        function as_setWindowTitle(arg1:String):void;
-    }
+      function as_getReceiverDP() : Object;
+
+      function as_onSearchResultReceived(param1:Boolean) : void;
+
+      function as_setWindowTitle(param1:String) : void;
+   }
+
 }

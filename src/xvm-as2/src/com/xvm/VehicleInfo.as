@@ -1,154 +1,120 @@
 /**
- * @author sirmax2
+ * XVM Config
+ * @author Maxim Schedriviy <m.schedriviy@gmail.com>
  */
+import com.xvm.Cmd;
 import com.xvm.Config;
 import com.xvm.Strings;
-import com.xvm.VehicleInfoData;
-import com.xvm.VehicleInfoData2;
-import com.xvm.VehicleInfoDataAvg;
-import com.xvm.VehicleInfoDataTop;
+import com.xvm.JSONx;
+import com.xvm.DataTypes.VehicleData;
+import com.xvm.Logger;
 
 class com.xvm.VehicleInfo
 {
-    // icon = "../maps/icons/vehicle/contour/ussr-IS-3.png"
-    // return: "ussr-IS-3"
-    public static function getVehicleName(icon: String): String
-    {
-        var i = icon.lastIndexOf("/");
-        if (i >= 0)
-            icon = icon.slice(icon.lastIndexOf("/") + 1);
-        i = icon.lastIndexOf(".");
-        if (i >= 0)
-            icon = icon.slice(0, icon.lastIndexOf("."));
-        icon = Strings.trim(icon);
-        return icon;
-    }
+    // PUBLIC
 
-    // icon = "../maps/icons/vehicle/contour/ussr-IS-3.png"
-    // return: "IS-3"
-    public static function getVName(icon: String): String
-    {
-        icon = getVehicleName(icon);
-        icon = icon.slice(icon.indexOf("-") + 1);
-        icon = Strings.trim(icon);
-        return icon;
-    }
-
-    // icon = "../maps/icons/vehicle/contour/ussr-IS-3.png"
-    public static function getInfo1(icon: String): Object
-    {
-        return VehicleInfoData.data[getName1(icon)] || null;
-    }
-
-    // icon = "../maps/icons/vehicle/contour/ussr-IS-3.png"
-    public static function getInfo2(icon: String): Object
-    {
-        return _getInfo2(getName2(icon));
-    }
-
-    public static function getInfo2ByVid(vid:Number):Object
-    {
-        return _getInfo2(VehicleInfoData2.vidToVname["_" + vid]);
-    }
-
-    private static function _getInfo2(vn:String):Object
-    {
-        var res = VehicleInfoData2.data[vn];
-        if (!res)
-            return null;
-        res.avg = VehicleInfoDataAvg.data[vn] || null;
-        res.top = VehicleInfoDataTop.data[vn] || null;
-        return res;
-    }
-
-    public static function getVehicleNamesData():Object
-    {
-        var result:Object = {};
-        for (var vname:String in VehicleInfoData.data)
-            result[vname] = {name:VehicleInfoData.data[vname].name, short:VehicleInfoData.data[vname].short};
-        return result;
-    }
-
-    public static function mapVehicleName(iconSource:String, originalName:String):String
-    {
-        try
+        public static function populateData()
         {
-            return Config.s_config.vehicleNames[getName1(iconSource)].name || originalName;
+            Cmd.getVehicleInfoData(instance, instance.onVehicleInfoData);
         }
-        catch (ex:Error)
+
+        public static function get(vId:Number):VehicleData
         {
-            return originalName;
+            return instance._get(vId);
         }
-    }
 
-    public static function mapVehicleName2(tankName:String, originalName:String):String
-    {
-            return Config.s_config.vehicleNames[tankName].name || originalName;
-    }
-
-    public static function mapVehicleShortName(vehicleShortName:String,originalName:String):String
-    {
-        try
+        public static function getByIcon(icon:String):VehicleData
         {
-            return Config.s_config.vehicleNames[vehicleShortName].short || VehicleInfoData.data[vehicleShortName].short || originalName;
+            return instance._getByIcon(icon);
         }
-        catch (ex:Error)
+
+        public static function getByLocalizedShortName(localizedShortName:String):VehicleData
         {
-            return originalName;
+            return instance._getByLocalizedShortName(localizedShortName);
         }
-    }
 
-    public static function GetVTypeValue(iconSource:String): String
-    {
-        var vi2 = com.xvm.VehicleInfo.getInfo2(iconSource);
-        if (vi2 == null)
-            return "";
-        var vtype = vi2.type;
-        if (!vtype || !Config.s_config.texts.vtype[vtype])
-            return "";
-        return Config.s_config.texts.vtype[vtype];
-    }
+        // PRIVATE
 
-    public static function GetVTypeValue2(iconSource:String): String
-    {
-        var vi2 = com.xvm.VehicleInfo.getInfo2(iconSource);
-        if (vi2 == null)
-            return "";
-        var vtype = vi2.type;
-        if (!vtype)
-            return "";
-        return vtype;
-    }
+        private var vehicles:Object;
+        private var vehiclesMapKey:Object;
+        private var vehiclesMapName:Object;
 
-    // icon = "../maps/icons/vehicle/contour/ussr-IS-3.png"
-    // return: "is_3"
-    public static function getName2(icon: String): String
-    {
-        var i = icon.lastIndexOf("/");
-        if (i >= 0)
-            icon = icon.slice(icon.lastIndexOf("/") + 1);
-        i = icon.lastIndexOf(".");
-        if (i >= 0)
-            icon = icon.slice(0, icon.lastIndexOf("."));
-        icon = icon.slice(icon.indexOf("-") + 1);
-        icon = Strings.trim(icon);
-        icon = icon.split("-").join("_").toLowerCase();
-        return icon;
-    }
+        // instance
+        private static var _instance:VehicleInfo = null;
+        private static function get instance():VehicleInfo
+        {
+            if (_instance == null)
+                _instance = new VehicleInfo();
+            return _instance;
+        }
 
-    // icon = "../maps/icons/vehicle/contour/ussr-IS-3.png"
-    // return: "ussr_IS_3"
-    public static function getName1(icon: String): String
-    {
-        var i = icon.lastIndexOf("/");
-        if (i >= 0)
-            icon = icon.slice(icon.lastIndexOf("/") + 1);
-        i = icon.lastIndexOf(".");
-        if (i >= 0)
-            icon = icon.slice(0, icon.lastIndexOf("."));
-        icon = icon.split("-").join("_");
-        icon = Strings.trim(icon);
-        return icon;
-    }
+        public function VehicleInfo()
+        {
+            //Logger.add("VehicleInfo::ctor()")
+            this.vehicles = {};
+            this.vehiclesMapKey = {};
+            this.vehiclesMapName = {};
+        }
+
+        private function onVehicleInfoData(json_str:String)
+        {
+            //Logger.add("onVehicleInfoData(): " + json_str);
+            try
+            {
+                var data_array:Object = JSONx.parse(json_str);
+                for (var n in data_array)
+                {
+                    var obj:Object = data_array[n];
+                    var data:VehicleData = new VehicleData(obj);
+
+                    var preferredNames:Object = Config.s_config.vehicleNames[data.key];
+                    if (preferredNames != null)
+                    {
+                        if (preferredNames['name'] != null && preferredNames['name'] != '')
+                            data.localizedName = preferredNames['name'];
+                        if (preferredNames['short'] != null && preferredNames['short'] != '')
+                            data.shortName = preferredNames['short'];
+                    }
+
+                    //Logger.addObject(data);
+
+                    vehicles[data.vid] = data;
+                    vehiclesMapKey[data.key] = data.vid; // for getByIcon
+                    vehiclesMapName[data.localizedShortName] = data.vid; // for getByLocalizedShortName
+                }
+            }
+            catch (e:Error)
+            {
+                Logger.add(e.message);
+            }
+        }
+
+        private function _get(vId:Number):VehicleData
+        {
+            return vehicles[vId];
+        }
+
+        private function _getByIcon(icon:String):VehicleData
+        {
+            // icon: "ussr-IS-3"
+            //   or  "../maps/icons/vehicle/contour/ussr-IS-3.png"
+            // key: "ussr:IS-3"
+            var n:Number = icon.lastIndexOf("/");
+            if (n > 0)
+                icon = icon.substring(n + 1);
+            n = icon.indexOf(".");
+            if (n > 0)
+                icon = icon.substring(0, n);
+            n = icon.indexOf("-");
+            if (n > 0)
+                icon = icon.substring(0, n) + ":" + icon.substring(n + 1);
+            return vehicles[vehiclesMapKey[icon]];
+        }
+
+        private function _getByLocalizedShortName(localizedShortName:String):VehicleData
+        {
+            // localizedShortName: "ИС-3"
+            return vehicles[vehiclesMapName[localizedShortName]];
+        }
+
 }
-

@@ -1,101 +1,96 @@
-package net.wg.gui.components.controls.achievements 
+package net.wg.gui.components.controls.achievements
 {
-    import flash.display.*;
-    import flash.events.*;
-    import flash.text.*;
-    import net.wg.gui.components.controls.*;
-    
-    public class CounterComponent extends net.wg.gui.components.controls.SoundButtonEx
-    {
-        public function CounterComponent()
-        {
-            super();
-            this.originalBgWidth = this.background.width;
-            return;
-        }
+   import net.wg.gui.components.controls.SoundButtonEx;
+   import net.wg.infrastructure.interfaces.ICounterComponent;
+   import flash.display.MovieClip;
+   import flash.text.TextFieldAutoSize;
+   import flash.events.Event;
 
-        protected override function draw():void
-        {
-            var loc1:*=NaN;
-            var loc2:*=NaN;
-            super.draw();
-            if (isInvalid(COUNT_INV)) 
-            {
-                textField.autoSize = flash.text.TextFieldAutoSize.LEFT;
-                textField.text = this._text.toString();
-                invalidate(LAYOUT_INV);
-            }
-            if (isInvalid(LAYOUT_INV)) 
-            {
-                loc1 = textField.width - this._minBgWindowWidth;
-                if (loc1 > 0) 
-                {
-                    loc2 = this.originalBgWidth + loc1;
-                }
-                else 
-                {
-                    loc2 = this.originalBgWidth;
-                }
-                this.background.width = loc2;
-                textField.x = loc2 - textField.width >> 1;
-            }
-            return;
-        }
 
-        protected override function handleStageChange(arg1:flash.events.Event):void
-        {
-            if (arg1.type == flash.events.Event.ADDED_TO_STAGE) 
-            {
-                removeEventListener(flash.events.Event.ADDED_TO_STAGE, this.handleStageChange, false);
-                addEventListener(flash.events.Event.RENDER, validateNow, false, 0, true);
-                addEventListener(flash.events.Event.ENTER_FRAME, validateNow, false, 0, true);
-                if (stage != null) 
-                {
-                    stage.invalidate();
-                }
-            }
-            return;
-        }
+   public class CounterComponent extends SoundButtonEx implements ICounterComponent
+   {
+          
+      public function CounterComponent() {
+         super();
+         this.originalBgWidth = this.background.width;
+      }
 
-        public function get minBgWindowWidth():uint
-        {
-            return this._minBgWindowWidth;
-        }
+      private static const LAYOUT_INV:String = "layoutInvalid";
 
-        public function set minBgWindowWidth(arg1:uint):void
-        {
-            this._minBgWindowWidth = arg1;
+      private static const COUNT_INV:String = "countInvalid";
+
+      public var background:MovieClip;
+
+      private var _minBgWindowWidth:uint = 20;
+
+      private var _text:String = "0";
+
+      private var originalBgWidth:uint = 0;
+
+      override protected function draw() : void {
+         var _loc1_:* = NaN;
+         var _loc2_:* = NaN;
+         super.draw();
+         if(isInvalid(COUNT_INV))
+         {
+            textField.autoSize = TextFieldAutoSize.LEFT;
+            textField.text = this._text.toString();
             invalidate(LAYOUT_INV);
-            return;
-        }
+         }
+         if(isInvalid(LAYOUT_INV))
+         {
+            _loc1_ = textField.width - this._minBgWindowWidth;
+            if(_loc1_ > 0)
+            {
+               _loc2_ = this.originalBgWidth + _loc1_;
+            }
+            else
+            {
+               _loc2_ = this.originalBgWidth;
+            }
+            this.background.width = _loc2_;
+            textField.x = _loc2_ - textField.width >> 1;
+         }
+      }
 
-        public function get text():String
-        {
-            return this._text;
-        }
+      override public function get width() : Number {
+         return actualWidth;
+      }
 
-        public function set text(arg1:String):void
-        {
-            this._text = arg1;
-            invalidate(COUNT_INV);
-            return;
-        }
+      override protected function handleStageChange(param1:Event) : void {
+         if(param1.type == Event.ADDED_TO_STAGE)
+         {
+            removeEventListener(Event.ADDED_TO_STAGE,this.handleStageChange,false);
+            addEventListener(Event.RENDER,validateNow,false,0,true);
+            addEventListener(Event.ENTER_FRAME,validateNow,false,0,true);
+            if(stage != null)
+            {
+               stage.invalidate();
+            }
+         }
+      }
 
-        public function receiveBottomPadding():Number
-        {
-            return 0;
-        }
+      public function get minBgWindowWidth() : uint {
+         return this._minBgWindowWidth;
+      }
 
-        internal static const LAYOUT_INV:String="layoutInvalid";
+      public function set minBgWindowWidth(param1:uint) : void {
+         this._minBgWindowWidth = param1;
+         invalidate(LAYOUT_INV);
+      }
 
-        internal static const COUNT_INV:String="countInvalid";
+      public function get text() : String {
+         return this._text;
+      }
 
-        public var background:flash.display.MovieClip;
+      public function set text(param1:String) : void {
+         this._text = param1;
+         invalidate(COUNT_INV);
+      }
 
-        internal var _minBgWindowWidth:uint=20;
+      public function receiveBottomPadding() : Number {
+         return 0;
+      }
+   }
 
-        internal var _text:String="0";
-
-        internal var originalBgWidth:uint=0;
-    }
 }

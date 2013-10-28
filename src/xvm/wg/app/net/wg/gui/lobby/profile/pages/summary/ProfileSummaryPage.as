@@ -1,44 +1,39 @@
-package net.wg.gui.lobby.profile.pages.summary 
+package net.wg.gui.lobby.profile.pages.summary
 {
-    import net.wg.data.gui_items.dossier.*;
-    
-    public class ProfileSummaryPage extends net.wg.gui.lobby.profile.pages.summary.ProfileSummary
-    {
-        public function ProfileSummaryPage()
-        {
-            super();
-            return;
-        }
+   import net.wg.data.gui_items.dossier.Dossier;
 
-        protected override function initialize():void
-        {
-            super.initialize();
-            layoutManager.registerComponents(this.nearestAwards);
-            return;
-        }
 
-        public override function as_setInitData(arg1:Object):void
-        {
-            this.applyInitData(new net.wg.gui.lobby.profile.pages.summary.SummaryPageInitVO(arg1));
-            return;
-        }
+   public class ProfileSummaryPage extends ProfileSummary
+   {
+          
+      public function ProfileSummaryPage() {
+         super();
+      }
 
-        protected override function applyInitData(arg1:net.wg.gui.lobby.profile.pages.summary.SummaryInitVO):void
-        {
-            super.applyInitData(arg1);
-            var loc1:*=net.wg.gui.lobby.profile.pages.summary.SummaryPageInitVO(arg1);
-            this.nearestAwards.label = loc1.nextAwardsLabel;
-            this.nearestAwards.errorText = loc1.nextAwardsErrorText;
-            return;
-        }
+      public var nearestAwards:AwardsListComponent;
 
-        protected override function updateByDossier(arg1:net.wg.data.gui_items.dossier.AccountDossier):void
-        {
-            super.updateByDossier(arg1);
-            this.nearestAwards.dataProvider = arg1.getNearestAchievements();
-            return;
-        }
+      override protected function initialize() : void {
+         super.initialize();
+         layoutManager.registerComponents(this.nearestAwards);
+         layoutManager.registerComponents(footer);
+      }
 
-        public var nearestAwards:net.wg.gui.lobby.profile.pages.summary.AwardsListComponent;
-    }
+      override public function as_setInitData(param1:Object) : void {
+         this.applyInitData(new SummaryPageInitVO(param1));
+      }
+
+      override protected function applyInitData(param1:SummaryInitVO) : void {
+         super.applyInitData(param1);
+         var _loc2_:SummaryPageInitVO = SummaryPageInitVO(param1);
+         this.nearestAwards.label = _loc2_.nextAwardsLabel;
+         this.nearestAwards.errorText = _loc2_.nextAwardsErrorText;
+      }
+
+      override protected function applyData(param1:Object) : Object {
+         var _loc2_:ProfileSummaryVO = ProfileSummaryVO(super.applyData(param1));
+         this.nearestAwards.dataProvider = Dossier.getAchievementVector(_loc2_.nearestAchievements);
+         return param1;
+      }
+   }
+
 }

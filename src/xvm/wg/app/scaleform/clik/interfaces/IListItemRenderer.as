@@ -1,32 +1,35 @@
-package scaleform.clik.interfaces 
+package scaleform.clik.interfaces
 {
-    import scaleform.clik.core.*;
-    import scaleform.clik.data.*;
-    
-    public interface IListItemRenderer extends scaleform.clik.interfaces.IUIComponent
-    {
-        function get index():uint;
+   import scaleform.clik.core.UIComponent;
+   import scaleform.clik.data.ListData;
 
-        function set index(arg1:uint):void;
 
-        function get owner():scaleform.clik.core.UIComponent;
+   public interface IListItemRenderer extends IUIComponent
+   {
+          
+      function get index() : uint;
 
-        function set owner(arg1:scaleform.clik.core.UIComponent):void;
+      function set index(param1:uint) : void;
 
-        function get selectable():Boolean;
+      function get owner() : UIComponent;
 
-        function set selectable(arg1:Boolean):void;
+      function set owner(param1:UIComponent) : void;
 
-        function get selected():Boolean;
+      function get selectable() : Boolean;
 
-        function set selected(arg1:Boolean):void;
+      function set selectable(param1:Boolean) : void;
 
-        function get displayFocus():Boolean;
+      function get selected() : Boolean;
 
-        function set displayFocus(arg1:Boolean):void;
+      function set selected(param1:Boolean) : void;
 
-        function setListData(arg1:scaleform.clik.data.ListData):void;
+      function get displayFocus() : Boolean;
 
-        function setData(arg1:Object):void;
-    }
+      function set displayFocus(param1:Boolean) : void;
+
+      function setListData(param1:ListData) : void;
+
+      function setData(param1:Object) : void;
+   }
+
 }

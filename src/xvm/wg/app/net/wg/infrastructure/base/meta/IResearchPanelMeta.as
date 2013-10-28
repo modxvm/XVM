@@ -1,13 +1,16 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IResearchPanelMeta extends flash.events.IEventDispatcher
-    {
-        function goToResearchS():void;
+   import flash.events.IEventDispatcher;
 
-        function as_setEarnedXP(arg1:Number):void;
 
-        function as_setElite(arg1:Boolean):void;
-    }
+   public interface IResearchPanelMeta extends IEventDispatcher
+   {
+          
+      function goToResearchS() : void;
+
+      function as_setEarnedXP(param1:Number) : void;
+
+      function as_setElite(param1:Boolean) : void;
+   }
+
 }

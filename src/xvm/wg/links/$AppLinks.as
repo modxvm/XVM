@@ -11,6 +11,7 @@ internal class $AppLinks
  *  from the classes specified in manifest.xml.
  */
 import org.idmedia.as3commons.util.*; StringUtils;
+import net.wg.data.daapi.base.*; DAAPIDataClass;
 import net.wg.infrastructure.events.*; LoaderEvent; LifeCycleEvent;
 import net.wg.infrastructure.managers.impl.*; ContainerManager;
 import net.wg.gui.components.common.*; MainViewContainer;

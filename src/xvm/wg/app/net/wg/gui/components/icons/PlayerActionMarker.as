@@ -1,82 +1,92 @@
-package net.wg.gui.components.icons 
+package net.wg.gui.components.icons
 {
-    import scaleform.clik.core.*;
-    
-    public class PlayerActionMarker extends scaleform.clik.core.UIComponent
-    {
-        public function PlayerActionMarker()
-        {
-            super();
+   import scaleform.clik.core.UIComponent;
+
+
+   public class PlayerActionMarker extends UIComponent
+   {
+          
+      public function PlayerActionMarker() {
+         super();
+      }
+
+      private var _actionBitMask:Number = 0;
+
+      private var _team:String = "common";
+
+      private const ACTIONS_LABEL:String = "actions";
+
+      public function get action() : Number {
+         return this._actionBitMask;
+      }
+
+      public function set action(param1:Number) : void {
+         if(this._actionBitMask == param1)
+         {
             return;
-        }
+         }
+         this._actionBitMask = param1;
+         invalidate();
+      }
 
-        public function get action():Number
-        {
-            return this._actionBitMask;
-        }
+      public function get team() : String {
+         return this._team;
+      }
 
-        public function set action(arg1:Number):void
-        {
-            if (this._actionBitMask == arg1) 
-            {
-                return;
-            }
-            this._actionBitMask = arg1;
-            invalidate();
+      public function set team(param1:String) : void {
+         if(this._team == param1)
+         {
             return;
-        }
+         }
+         this._team = param1;
+         invalidate();
+      }
 
-        public function get team():String
-        {
-            return this._team;
-        }
-
-        public function set team(arg1:String):void
-        {
-            if (this._team == arg1) 
+      override protected function draw() : void {
+         var allActions:Array = null;
+         var elName:String = null;
+         var i:uint = 0;
+         super.draw();
+         var actions:Array = PlayerActionMarkerController.instance.getActions(this._team,this._actionBitMask);
+         if(actions.length)
+         {
+            allActions = PlayerActionMarkerController.instance.allActions;
+            gotoAndStop(this.ACTIONS_LABEL);
+            i = 0;
+            i = 0;
+            while(i < allActions.length)
             {
-                return;
+               elName = allActions[i];
+               try
+               {
+                  getChildByName(elName).visible = false;
+               }
+               catch(err:Error)
+               {
+                  DebugUtils.LOG_ERROR("ERROR! PlayerActionMarker. Don\'t find Display Object by name " + elName + " for set visible false");
+               }
+               i++;
             }
-            this._team = arg1;
-            invalidate();
-            return;
-        }
-
-        protected override function draw():void
-        {
-            var actions:Array;
-            var allActions:Array;
-            var elName:String;
-
-            var loc1:*;
-            allActions = null;
-            elName = null;
-            super.draw();
-            actions = net.wg.gui.components.icons.PlayerActionMarkerController.instance.getActions(this._team, this._actionBitMask);
-            if (actions.length) 
+            i = 0;
+            while(i < actions.length)
             {
-                allActions = net.wg.gui.components.icons.PlayerActionMarkerController.instance.allActions;
-                gotoAndStop("actions");
-                var loc2:*=0;
-                var loc3:*=allActions;
-                for (elName in loc3) 
-                {
-                };
-                loc2 = 0;
-                loc3 = actions;
-                for (elName in loc3) 
-                {
-                };
+               elName = actions[i];
+               try
+               {
+                  getChildByName(elName).visible = true;
+               }
+               catch(err:Error)
+               {
+                  DebugUtils.LOG_ERROR("ERROR! PlayerActionMarker. Don\'t find Display Object by name " + elName + " for set visible true");
+               }
+               i++;
             }
-            else 
-            {
-                gotoAndStop(1);
-            }
-            return;
-        }
+         }
+         else
+         {
+            gotoAndStop(1);
+         }
+      }
+   }
 
-        internal var _actionBitMask:Number=0;
-
-        internal var _team:String="common";
-    }
 }

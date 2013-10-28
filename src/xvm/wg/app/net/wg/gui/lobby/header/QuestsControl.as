@@ -1,163 +1,138 @@
-package net.wg.gui.lobby.header 
+package net.wg.gui.lobby.header
 {
-    import __AS3__.vec.*;
-    import flash.display.*;
-    import flash.events.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import net.wg.infrastructure.events.*;
-    import net.wg.infrastructure.exceptions.base.*;
-    import net.wg.infrastructure.interfaces.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.events.*;
-    
-    public class QuestsControl extends net.wg.infrastructure.base.meta.impl.QuestsControlMeta implements net.wg.infrastructure.base.meta.IQuestsControlMeta, net.wg.infrastructure.interfaces.IDAAPIModule
-    {
-        public function QuestsControl()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.QuestsControlMeta;
+   import net.wg.infrastructure.base.meta.IQuestsControlMeta;
+   import net.wg.infrastructure.interfaces.IDAAPIModule;
+   import flash.display.MovieClip;
+   import flash.events.MouseEvent;
+   import scaleform.clik.constants.InvalidationType;
+   import scaleform.clik.events.ComponentEvent;
+   import __AS3__.vec.Vector;
+   import net.wg.infrastructure.exceptions.base.WGGUIException;
+   import net.wg.infrastructure.events.LifeCycleEvent;
 
-        public function get disposed():Boolean
-        {
-            return this._disposed;
-        }
 
-        public function as_highlightControl():void
-        {
-            this._hasNew = true;
-            invalidate(NEW);
-            return;
-        }
+   public class QuestsControl extends QuestsControlMeta implements IQuestsControlMeta, IDAAPIModule
+   {
+          
+      public function QuestsControl() {
+         super();
+      }
 
-        public function as_resetControl():void
-        {
-            this._hasNew = false;
-            invalidate(NEW);
-            return;
-        }
+      private static const ANIMATE:String = "animate";
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.label = QUESTS.QUESTSCONTROL_TITLE;
-            addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onPress);
-            addEventListener(flash.events.MouseEvent.ROLL_OVER, this.showTooltip);
-            addEventListener(flash.events.MouseEvent.ROLL_OUT, this.hideTooltip);
-            addEventListener(flash.events.MouseEvent.CLICK, this.hideTooltip);
-            return;
-        }
+      private static const PAUSE:String = "pause";
 
-        public override function dispose():void
-        {
-            removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onPress);
-            removeEventListener(flash.events.MouseEvent.ROLL_OVER, this.showTooltip);
-            removeEventListener(flash.events.MouseEvent.ROLL_OUT, this.hideTooltip);
-            removeEventListener(flash.events.MouseEvent.CLICK, this.hideTooltip);
-            super.dispose();
-            return;
-        }
+      private static const NEW:String = "New";
 
-        protected override function draw():void
-        {
-            if (isInvalid(NEW)) 
+      public var anim:MovieClip = null;
+
+      private var _disposed:Boolean = false;
+
+      private var _hasNew:Boolean = false;
+
+      public function get disposed() : Boolean {
+         return this._disposed;
+      }
+
+      public function as_highlightControl() : void {
+         this._hasNew = true;
+         invalidate(NEW);
+      }
+
+      public function as_resetControl() : void {
+         this._hasNew = false;
+         invalidate(NEW);
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.label = QUESTS.QUESTSCONTROL_TITLE;
+         addEventListener(MouseEvent.MOUSE_DOWN,this.onPress);
+         addEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
+         addEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
+         this.visible = !App.globalVarsMgr.isInRoamingS();
+      }
+
+      override public function dispose() : void {
+         removeEventListener(MouseEvent.MOUSE_DOWN,this.onPress);
+         removeEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
+         removeEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
+         this.anim = null;
+         super.dispose();
+      }
+
+      override protected function draw() : void {
+         if(isInvalid(NEW))
+         {
+            if(this._hasNew)
             {
-                if (this._hasNew) 
-                {
-                    this.anim.gotoAndPlay(ANIMATE);
-                }
-                else 
-                {
-                    this.anim.gotoAndStop(PAUSE);
-                }
-                setState("up");
+               this.anim.gotoAndPlay(ANIMATE);
             }
-            if (isInvalid(scaleform.clik.constants.InvalidationType.STATE)) 
+            else
             {
-                if (_newFrame) 
-                {
-                    gotoAndPlay(_newFrame);
-                    _newFrame = null;
-                }
-                if (focusIndicator && _newFocusIndicatorFrame) 
-                {
-                    focusIndicator.gotoAndPlay(_newFocusIndicatorFrame);
-                    _newFocusIndicatorFrame = null;
-                }
-                updateAfterStateChange();
-                dispatchEvent(new scaleform.clik.events.ComponentEvent(scaleform.clik.events.ComponentEvent.STATE_CHANGE));
-                invalidate(scaleform.clik.constants.InvalidationType.DATA, scaleform.clik.constants.InvalidationType.SIZE);
+               this.anim.gotoAndStop(PAUSE);
             }
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+            setState("up");
+         }
+         if(isInvalid(InvalidationType.STATE))
+         {
+            if(_newFrame)
             {
-                updateText();
+               gotoAndPlay(_newFrame);
+               _newFrame = null;
             }
-            return;
-        }
-
-        internal function onPress(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            App.toolTipMgr.hide();
-            this.anim.gotoAndStop(PAUSE);
-            showQuestsWindowS();
-            return;
-        }
-
-        protected override function getStatePrefixes():__AS3__.vec.Vector.<String>
-        {
-            var loc1:*="new_";
-            return this._hasNew ? Vector.<String>([loc1]) : statesDefault;
-        }
-
-        public function as_populate():void
-        {
-            return;
-        }
-
-        public function as_dispose():void
-        {
-            var loc1:*;
-            try 
+            if((focusIndicator) && (_newFocusIndicatorFrame))
             {
-                dispatchEvent(new net.wg.infrastructure.events.LifeCycleEvent(net.wg.infrastructure.events.LifeCycleEvent.ON_BEFORE_DISPOSE));
-                this.dispose();
-                this._disposed = true;
-                dispatchEvent(new net.wg.infrastructure.events.LifeCycleEvent(net.wg.infrastructure.events.LifeCycleEvent.ON_AFTER_DISPOSE));
+               focusIndicator.gotoAndPlay(_newFocusIndicatorFrame);
+               _newFocusIndicatorFrame = null;
             }
-            catch (error:net.wg.infrastructure.exceptions.base.WGGUIException)
-            {
-                DebugUtils.LOG_WARNING(error.getStackTrace());
-            }
-            catch (error:Error)
-            {
-                DebugUtils.LOG_ERROR(error.getStackTrace());
-            }
-            return;
-        }
+            updateAfterStateChange();
+            dispatchEvent(new ComponentEvent(ComponentEvent.STATE_CHANGE));
+            invalidate(InvalidationType.DATA,InvalidationType.SIZE);
+         }
+         if(isInvalid(InvalidationType.DATA))
+         {
+            updateText();
+         }
+      }
 
-        internal function hideTooltip(arg1:flash.events.MouseEvent):void
-        {
-            App.toolTipMgr.hide();
-            return;
-        }
+      private function onPress(param1:MouseEvent) : void {
+         App.toolTipMgr.hide();
+         this.anim.gotoAndStop(PAUSE);
+         showQuestsWindowS();
+      }
 
-        internal function showTooltip(arg1:flash.events.MouseEvent):void
-        {
-            App.toolTipMgr.showComplex(TOOLTIPS.QUESTS_NOTIFIER);
-            return;
-        }
+      override protected function getStatePrefixes() : Vector.<String> {
+         var _loc1_:* = "new_";
+         return this._hasNew?Vector.<String>([_loc1_]):statesDefault;
+      }
 
-        internal static const ANIMATE:String="animate";
+      public function as_populate() : void {
+          
+      }
 
-        internal static const PAUSE:String="pause";
+      public function as_dispose() : void {
+         try
+         {
+            dispatchEvent(new LifeCycleEvent(LifeCycleEvent.ON_BEFORE_DISPOSE));
+            this.dispose();
+            this._disposed = true;
+            dispatchEvent(new LifeCycleEvent(LifeCycleEvent.ON_AFTER_DISPOSE));
+         }
+         catch(error:WGGUIException)
+         {
+            DebugUtils.LOG_WARNING(error.getStackTrace());
+         }
+      }
 
-        internal static const NEW:String="New";
+      private function hideTooltip(param1:MouseEvent) : void {
+         App.toolTipMgr.hide();
+      }
 
-        public var anim:flash.display.MovieClip=null;
+      private function showTooltip(param1:MouseEvent) : void {
+         App.toolTipMgr.showComplex(TOOLTIPS.QUESTS_NOTIFIER);
+      }
+   }
 
-        internal var _disposed:Boolean=false;
-
-        internal var _hasNew:Boolean=false;
-    }
 }

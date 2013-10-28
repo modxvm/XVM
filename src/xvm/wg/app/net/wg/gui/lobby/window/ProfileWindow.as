@@ -1,135 +1,159 @@
-package net.wg.gui.lobby.window 
+package net.wg.gui.lobby.window
 {
-    import flash.display.*;
-    import net.wg.data.*;
-    import net.wg.data.constants.*;
-    import net.wg.data.gui_items.dossier.*;
-    import net.wg.gui.components.windows.*;
-    import net.wg.gui.events.*;
-    import net.wg.gui.lobby.profile.*;
-    import net.wg.gui.lobby.profile.components.*;
-    import net.wg.gui.lobby.profile.pages.summary.*;
-    import net.wg.gui.lobby.profile.pages.technique.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import net.wg.infrastructure.interfaces.*;
-    import scaleform.clik.constants.*;
-    
-    public class ProfileWindow extends net.wg.infrastructure.base.meta.impl.ProfileWindowMeta implements net.wg.infrastructure.base.meta.IProfileWindowMeta
-    {
-        public function ProfileWindow()
-        {
-            this.maskObj = new flash.display.MovieClip();
-            super();
-            isModal = false;
-            canResize = false;
-            canMinimize = false;
-            isCentered = true;
-            showWindowBg = false;
-            addChild(this.maskObj);
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.ProfileWindowMeta;
+   import net.wg.infrastructure.base.meta.IProfileWindowMeta;
+   import net.wg.gui.lobby.profile.ProfileTabNavigator;
+   import flash.display.MovieClip;
+   import net.wg.gui.components.controls.SoundButtonEx;
+   import flash.display.Sprite;
+   import net.wg.utils.ILocale;
+   import net.wg.data.Aliases;
+   import net.wg.gui.lobby.profile.ProfileConstants;
+   import flash.events.MouseEvent;
+   import net.wg.data.gui_items.dossier.AccountDossier;
+   import net.wg.infrastructure.interfaces.IWindow;
+   import flash.display.Graphics;
+   import net.wg.gui.components.windows.Window;
+   import scaleform.clik.constants.InvalidationType;
 
-        protected override function configUI():void
-        {
-            var loc1:*;
-            super.configUI();
-            try 
-            {
-                registerComponent(this.tabNavigator, net.wg.data.Aliases.PROFILE_TAB_NAVIGATOR);
-            }
-            catch (e:Error)
-            {
-                trace(e);
-            }
-            this.tabNavigator.viewStack.addEventListener(net.wg.gui.events.ViewStackEvent.VIEW_CHANGED, this.onSectionViewShowed, false, 0, true);
-            this.tabNavigator.centerOffset = net.wg.gui.lobby.profile.ProfileConstants.WINDOW_CENTER_OFFSET;
-            addEventListener(net.wg.gui.lobby.profile.pages.technique.TechniquePageEvent.DATA_STATUS_CHANGED, this.techniqueVehicleDataChangeHandler, false, 0, true);
-            return;
-        }
 
-        internal function onSectionViewShowed(arg1:net.wg.gui.events.ViewStackEvent):void
-        {
-            this.footer.visible = arg1.view is net.wg.gui.lobby.profile.pages.summary.ProfileSummary;
-            return;
-        }
+   public class ProfileWindow extends ProfileWindowMeta implements IProfileWindowMeta
+   {
+          
+      public function ProfileWindow() {
+         this.maskObj = new MovieClip();
+         super();
+         isModal = false;
+         canResize = false;
+         canMinimize = false;
+         isCentered = true;
+         showWindowBg = false;
+         addChild(this.maskObj);
+      }
 
-        internal function techniqueVehicleDataChangeHandler(arg1:net.wg.gui.lobby.profile.pages.technique.TechniquePageEvent):void
-        {
-            showWaiting = arg1.dataUnderUpdating;
-            return;
-        }
+      public static const INIT_DATA_INV:String = "initDataInv";
 
-        public function as_setInitData(arg1:Object):void
-        {
-            this.initData = new net.wg.gui.lobby.window.ProfileInitVO(arg1);
+      public static const ADDFRIENDAVAILABLE:String = "addAvailableChanged";
+
+      public static const SETIGNOREDAVAILABLE:String = "setIgnoreChanged";
+
+      public var tabNavigator:ProfileTabNavigator;
+
+      public var maskObj:MovieClip;
+
+      private var initData:ProfileWindowInitVO;
+
+      private var isAddFriendAvailable:Boolean;
+
+      private var isSetIgnoreAvailable:Boolean;
+
+      public var btnAddToFriends:SoundButtonEx;
+
+      public var btnAddToIgnore:SoundButtonEx;
+
+      public var btnCreatePrivateChannel:SoundButtonEx;
+
+      public var background:Sprite;
+
+      override protected function configUI() : void {
+         super.configUI();
+         try
+         {
+            registerComponent(this.tabNavigator,Aliases.PROFILE_TAB_NAVIGATOR);
+         }
+         catch(e:Error)
+         {
+            trace(e);
+         }
+         this.tabNavigator.centerOffset = ProfileConstants.WINDOW_CENTER_OFFSET;
+         var locale:ILocale = App.utils.locale;
+         this.btnAddToFriends.label = locale.makeString(MESSENGER.DIALOGS_CONTACTS_CONTACT_ADDTOFRIENDS);
+         this.btnAddToIgnore.label = locale.makeString(MESSENGER.DIALOGS_CONTACTS_CONTACT_ADDTOIGNORED);
+         this.btnCreatePrivateChannel.label = locale.makeString(MESSENGER.DIALOGS_CONTACTS_CONTACT_CREATEPRIVATECHANNEL);
+         this.btnAddToFriends.addEventListener(MouseEvent.CLICK,this.addToFriendBtnHandler,false,0,true);
+         this.btnAddToIgnore.addEventListener(MouseEvent.CLICK,this.addToIgnoreBtnHandler,false,0,true);
+         this.btnCreatePrivateChannel.addEventListener(MouseEvent.CLICK,this.createPrivateChannelBtnHandler,false,0,true);
+      }
+
+      private function createPrivateChannelBtnHandler(param1:MouseEvent) : void {
+         this.userCreatePrivateChannelS();
+      }
+
+      private function addToIgnoreBtnHandler(param1:MouseEvent) : void {
+         this.userSetIgnoredS();
+      }
+
+      private function addToFriendBtnHandler(param1:MouseEvent) : void {
+         this.userAddFriendS();
+      }
+
+      public function as_setInitData(param1:Object) : void {
+         this.initData = new ProfileWindowInitVO(param1);
+         invalidate(INIT_DATA_INV);
+      }
+
+      public function as_update(param1:Object) : void {
+         var _loc2_:String = param1?param1.toString():null;
+         var _loc3_:AccountDossier = new AccountDossier(_loc2_);
+         this.tabNavigator.viewStack.updateData(_loc3_);
+      }
+
+      override public function set window(param1:IWindow) : void {
+         super.window = param1;
+         if(param1)
+         {
             invalidate(INIT_DATA_INV);
-            return;
-        }
+         }
+      }
 
-        public function as_update(arg1:Object):void
-        {
-            var loc1:*=arg1 ? arg1.toString() : null;
-            var loc2:*=new net.wg.data.gui_items.dossier.AccountDossier(loc1);
-            this.tabNavigator.viewStack.updateData(loc2);
-            return;
-        }
-
-        public override function set window(arg1:net.wg.infrastructure.interfaces.IWindow):void
-        {
-            super.window = arg1;
-            if (arg1) 
+      override protected function draw() : void {
+         var _loc1_:Graphics = null;
+         var _loc2_:* = NaN;
+         super.draw();
+         if((isInvalid(INIT_DATA_INV)) && (window) && (this.initData))
+         {
+            Window(window).title = this.initData.fullName;
+         }
+         if(isInvalid(InvalidationType.SIZE))
+         {
+            _loc1_ = this.maskObj.graphics;
+            _loc1_.clear();
+            _loc1_.beginFill(0);
+            _loc2_ = this.background.y + this.background.height;
+            _loc1_.drawRect(0,0,this.background.width,_loc2_);
+            _loc1_.endFill();
+            if(!this.mask)
             {
-                invalidate(INIT_DATA_INV);
+               this.tabNavigator.mask = this.maskObj;
             }
-            return;
-        }
+            this.tabNavigator.setAvailableSize(this.background.width,_loc2_);
+         }
+         if(isInvalid(ADDFRIENDAVAILABLE))
+         {
+            this.btnAddToFriends.enabled = this.isAddFriendAvailable;
+         }
+         if(isInvalid(SETIGNOREDAVAILABLE))
+         {
+            this.btnAddToIgnore.enabled = this.isSetIgnoreAvailable;
+         }
+      }
 
-        protected override function draw():void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            var loc3:*=null;
-            super.draw();
-            if (isInvalid(INIT_DATA_INV) && window && this.initData) 
-            {
-                loc1 = this.initData.clanName == net.wg.data.constants.Values.EMPTY_STR ? this.initData.clanName : " [" + this.initData.clanName + "] ";
-                net.wg.gui.components.windows.Window(window).title = this.initData.name + loc1;
-                loc2 = this.initData.clanName == net.wg.data.constants.Values.EMPTY_STR ? "" : this.initData.clanLabel + " " + "<b>" + loc1 + "</b>" + this.initData.clanNameDescr + ". " + this.initData.clanPosition + ".";
-                this.footer.setTexts(loc2, this.initData.registrationDate + ". " + this.initData.lastBattleDate + ".");
-            }
-            if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
-            {
-                loc3 = this.maskObj.graphics;
-                loc3.clear();
-                loc3.beginFill(6710886);
-                loc3.drawRect(0, 0, _width, _height);
-                loc3.endFill();
-                if (!this.mask) 
-                {
-                    this.mask = this.maskObj;
-                }
-                this.tabNavigator.setAvailableSize(_width, _height);
-            }
-            return;
-        }
+      override protected function onDispose() : void {
+         this.btnAddToFriends.removeEventListener(MouseEvent.CLICK,this.addToFriendBtnHandler);
+         this.btnAddToIgnore.removeEventListener(MouseEvent.CLICK,this.addToIgnoreBtnHandler);
+         this.btnCreatePrivateChannel.removeEventListener(MouseEvent.CLICK,this.createPrivateChannelBtnHandler);
+         super.onDispose();
+      }
 
-        protected override function onDispose():void
-        {
-            this.tabNavigator.viewStack.removeEventListener(net.wg.gui.events.ViewStackEvent.VIEW_CHANGED, this.onSectionViewShowed);
-            removeEventListener(net.wg.gui.lobby.profile.pages.technique.TechniquePageEvent.DATA_STATUS_CHANGED, this.techniqueVehicleDataChangeHandler);
-            super.onDispose();
-            return;
-        }
+      public function as_addFriendAvailable(param1:Boolean) : void {
+         this.isAddFriendAvailable = param1;
+         invalidate(ADDFRIENDAVAILABLE);
+      }
 
-        public static const INIT_DATA_INV:String="initDataInv";
+      public function as_setIgnoredAvailable(param1:Boolean) : void {
+         this.isSetIgnoreAvailable = param1;
+         invalidate(SETIGNOREDAVAILABLE);
+      }
+   }
 
-        public var tabNavigator:net.wg.gui.lobby.profile.ProfileTabNavigator;
-
-        public var maskObj:flash.display.MovieClip;
-
-        public var footer:net.wg.gui.lobby.profile.components.ProfileWindowFooter;
-
-        internal var initData:net.wg.gui.lobby.window.ProfileInitVO;
-    }
 }

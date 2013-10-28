@@ -1,39 +1,41 @@
-package net.wg.gui.components.common.markers.data 
+package net.wg.gui.components.common.markers.data
 {
-    public class VehicleMarkerSettings extends Object
-    {
-        public function VehicleMarkerSettings()
-        {
-            super();
-            return;
-        }
 
-        public var markerBaseHp:int=0;
 
-        public var markerBaseIcon:Boolean=true;
+   public class VehicleMarkerSettings extends Object
+   {
+          
+      public function VehicleMarkerSettings() {
+         super();
+      }
 
-        public var markerBaseLevel:Boolean=true;
+      public var markerBaseHp:int = 0;
 
-        public var markerBaseHpIndicator:Boolean=true;
+      public var markerBaseIcon:Boolean = true;
 
-        public var markerBaseDamage:Boolean=true;
+      public var markerBaseLevel:Boolean = true;
 
-        public var markerBaseVehicleName:Boolean=true;
+      public var markerBaseHpIndicator:Boolean = true;
 
-        public var markerBasePlayerName:Boolean=true;
+      public var markerBaseDamage:Boolean = true;
 
-        public var markerAltHp:int=0;
+      public var markerBaseVehicleName:Boolean = true;
 
-        public var markerAltIcon:Boolean=true;
+      public var markerBasePlayerName:Boolean = true;
 
-        public var markerAltLevel:Boolean=true;
+      public var markerAltHp:int = 0;
 
-        public var markerAltHpIndicator:Boolean=true;
+      public var markerAltIcon:Boolean = true;
 
-        public var markerAltDamage:Boolean=true;
+      public var markerAltLevel:Boolean = true;
 
-        public var markerAltVehicleName:Boolean=true;
+      public var markerAltHpIndicator:Boolean = true;
 
-        public var markerAltPlayerName:Boolean=true;
-    }
+      public var markerAltDamage:Boolean = true;
+
+      public var markerAltVehicleName:Boolean = true;
+
+      public var markerAltPlayerName:Boolean = true;
+   }
+
 }

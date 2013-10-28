@@ -1,15 +1,18 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface ITrainingFormMeta extends flash.events.IEventDispatcher
-    {
-        function joinTrainingRequestS(arg1:String):void;
+   import flash.events.IEventDispatcher;
 
-        function createTrainingRequestS():void;
 
-        function onEscapeS():void;
+   public interface ITrainingFormMeta extends IEventDispatcher
+   {
+          
+      function joinTrainingRequestS(param1:String) : void;
 
-        function as_setList(arg1:Array, arg2:Number):void;
-    }
+      function createTrainingRequestS() : void;
+
+      function onEscapeS() : void;
+
+      function as_setList(param1:Array, param2:Number) : void;
+   }
+
 }

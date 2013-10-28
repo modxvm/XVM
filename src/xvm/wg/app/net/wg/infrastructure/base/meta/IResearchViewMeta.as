@@ -1,27 +1,30 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IResearchViewMeta extends flash.events.IEventDispatcher
-    {
-        function request4UnlockS(arg1:Number, arg2:Number, arg3:Number, arg4:Number):void;
+   import flash.events.IEventDispatcher;
 
-        function request4BuyS(arg1:Number):void;
 
-        function request4SellS(arg1:Number):void;
+   public interface IResearchViewMeta extends IEventDispatcher
+   {
+          
+      function request4UnlockS(param1:Number, param2:Number, param3:Number, param4:Number) : void;
 
-        function requestVehicleInfoS(arg1:String):void;
+      function request4BuyS(param1:Number) : void;
 
-        function showSystemMessageS(arg1:String, arg2:String):void;
+      function request4SellS(param1:Number) : void;
 
-        function as_setNodesStates(arg1:Number, arg2:Array):void;
+      function requestVehicleInfoS(param1:String) : void;
 
-        function as_setNext2Unlock(arg1:Array):void;
+      function showSystemMessageS(param1:String, param2:String) : void;
 
-        function as_setVehicleTypeXP(arg1:Array):void;
+      function as_setNodesStates(param1:Number, param2:Array) : void;
 
-        function as_setInventoryItems(arg1:Array):void;
+      function as_setNext2Unlock(param1:Array) : void;
 
-        function as_useXMLDumping():void;
-    }
+      function as_setVehicleTypeXP(param1:Array) : void;
+
+      function as_setInventoryItems(param1:Array) : void;
+
+      function as_useXMLDumping() : void;
+   }
+
 }

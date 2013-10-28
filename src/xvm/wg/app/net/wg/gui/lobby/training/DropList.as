@@ -1,87 +1,74 @@
-package net.wg.gui.lobby.training 
+package net.wg.gui.lobby.training
 {
-    import flash.display.*;
-    import flash.events.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.infrastructure.interfaces.*;
-    import scaleform.clik.interfaces.*;
-    
-    public class DropList extends net.wg.gui.components.controls.ScrollingListEx implements net.wg.infrastructure.interfaces.IDropList
-    {
-        public function DropList()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.components.controls.ScrollingListEx;
+   import net.wg.infrastructure.interfaces.IDropList;
+   import flash.display.MovieClip;
+   import flash.events.MouseEvent;
+   import scaleform.clik.interfaces.IListItemRenderer;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.focusIndicator.visible = false;
-            addEventListener(flash.events.MouseEvent.ROLL_OVER, this.onMouseOver, false, 0, true);
-            addEventListener(flash.events.MouseEvent.ROLL_OUT, this.onMouseOut, false, 0, true);
-            return;
-        }
 
-        public override function dispose():void
-        {
-            removeEventListener(flash.events.MouseEvent.ROLL_OVER, this.onMouseOver, false);
-            removeEventListener(flash.events.MouseEvent.ROLL_OUT, this.onMouseOut, false);
-            this.focusIndicator = null;
-            super.dispose();
-            return;
-        }
+   public class DropList extends ScrollingListEx implements IDropList
+   {
+          
+      public function DropList() {
+         super();
+      }
 
-        public function get selectable():Boolean
-        {
-            return this._selectable;
-        }
+      public var focusIndicator:MovieClip;
 
-        public function set selectable(arg1:Boolean):void
-        {
-            var loc1:*=0;
-            var loc2:*=0;
-            var loc3:*=null;
-            this._selectable = arg1;
-            if (_renderers != null) 
+      private var _selectable:Boolean = false;
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.focusIndicator.visible = false;
+         addEventListener(MouseEvent.ROLL_OVER,this.onMouseOver,false,0,true);
+         addEventListener(MouseEvent.ROLL_OUT,this.onMouseOut,false,0,true);
+      }
+
+      override public function dispose() : void {
+         removeEventListener(MouseEvent.ROLL_OVER,this.onMouseOver,false);
+         removeEventListener(MouseEvent.ROLL_OUT,this.onMouseOut,false);
+         this.focusIndicator = null;
+         super.dispose();
+      }
+
+      public function get selectable() : Boolean {
+         return this._selectable;
+      }
+
+      public function set selectable(param1:Boolean) : void {
+         var _loc2_:uint = 0;
+         var _loc3_:uint = 0;
+         var _loc4_:IListItemRenderer = null;
+         this._selectable = param1;
+         if(_renderers != null)
+         {
+            _loc2_ = _renderers.length;
+            _loc3_ = 0;
+            while(_loc3_ < _loc2_)
             {
-                loc1 = _renderers.length;
-                loc2 = 0;
-                while (loc2 < loc1) 
-                {
-                    (loc3 = getRendererAt(loc2)).selectable = this._selectable;
-                    ++loc2;
-                }
+               _loc4_ = getRendererAt(_loc3_);
+               _loc4_.selectable = this._selectable;
+               _loc3_++;
             }
-            return;
-        }
+         }
+      }
 
-        public function highlightList():void
-        {
-            this.focusIndicator.visible = true;
-            return;
-        }
+      public function highlightList() : void {
+         this.focusIndicator.visible = true;
+      }
 
-        public function hideHighLight():void
-        {
-            this.focusIndicator.visible = false;
-            return;
-        }
+      public function hideHighLight() : void {
+         this.focusIndicator.visible = false;
+      }
 
-        internal function onMouseOver(arg1:flash.events.MouseEvent):void
-        {
-            this.focusIndicator.gotoAndPlay("dragOver");
-            return;
-        }
+      private function onMouseOver(param1:MouseEvent) : void {
+         this.focusIndicator.gotoAndPlay("dragOver");
+      }
 
-        internal function onMouseOut(arg1:flash.events.MouseEvent):void
-        {
-            this.focusIndicator.gotoAndPlay("dragOut");
-            return;
-        }
+      private function onMouseOut(param1:MouseEvent) : void {
+         this.focusIndicator.gotoAndPlay("dragOut");
+      }
+   }
 
-        public var focusIndicator:flash.display.MovieClip;
-
-        internal var _selectable:Boolean=false;
-    }
 }

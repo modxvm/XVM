@@ -1,78 +1,64 @@
-package net.wg.gui.components.tooltips.VO 
+package net.wg.gui.components.tooltips.VO
 {
-    import net.wg.data.daapi.base.*;
-    
-    public class ToolTipSkillVO extends net.wg.data.daapi.base.DAAPIDataClass
-    {
-        public function ToolTipSkillVO(arg1:Object)
-        {
-            super(arg1);
-            return;
-        }
+   import net.wg.data.daapi.base.DAAPIDataClass;
 
-        public function get level():Number
-        {
-            return this._level;
-        }
 
-        public function set level(arg1:Number):void
-        {
-            this._level = arg1;
-            return;
-        }
+   public class ToolTipSkillVO extends DAAPIDataClass
+   {
+          
+      public function ToolTipSkillVO(param1:Object) {
+         super(param1);
+      }
 
-        public function get shortDescr():String
-        {
-            return this._shortDescr;
-        }
+      private var _name:String = "";
 
-        public function set shortDescr(arg1:String):void
-        {
-            this._shortDescr = arg1;
-            return;
-        }
+      private var _descr:String = "";
 
-        public function get type():String
-        {
-            return this._type;
-        }
+      private var _type:String = "";
 
-        public function set type(arg1:String):void
-        {
-            this._type = arg1;
-            return;
-        }
+      private var _shortDescr:String = "";
 
-        public function get descr():String
-        {
-            return this._descr;
-        }
+      private var _level:Number = 0;
 
-        public function set descr(arg1:String):void
-        {
-            this._descr = arg1;
-            return;
-        }
+      public function get level() : Number {
+         return this._level;
+      }
 
-        public function get name():String
-        {
-            return this._name;
-        }
+      public function set level(param1:Number) : void {
+         this._level = param1;
+      }
 
-        public function set name(arg1:String):void
-        {
-            this._name = arg1;
-            return;
-        }
+      public function get shortDescr() : String {
+         return this._shortDescr;
+      }
 
-        internal var _name:String="";
+      public function set shortDescr(param1:String) : void {
+         this._shortDescr = param1;
+      }
 
-        internal var _descr:String="";
+      public function get type() : String {
+         return this._type;
+      }
 
-        internal var _type:String="";
+      public function set type(param1:String) : void {
+         this._type = param1;
+      }
 
-        internal var _shortDescr:String="";
+      public function get descr() : String {
+         return this._descr;
+      }
 
-        internal var _level:Number=0;
-    }
+      public function set descr(param1:String) : void {
+         this._descr = param1;
+      }
+
+      public function get name() : String {
+         return this._name;
+      }
+
+      public function set name(param1:String) : void {
+         this._name = param1;
+      }
+   }
+
 }

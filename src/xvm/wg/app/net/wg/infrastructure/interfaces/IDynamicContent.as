@@ -1,6 +1,11 @@
-package net.wg.infrastructure.interfaces 
+package net.wg.infrastructure.interfaces
 {
-    public interface IDynamicContent
-    {
-    }
+
+
+   public interface IDynamicContent
+   {
+          
+
+   }
+
 }

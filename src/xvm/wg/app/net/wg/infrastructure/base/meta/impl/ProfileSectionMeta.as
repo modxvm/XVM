@@ -1,32 +1,36 @@
-package net.wg.infrastructure.base.meta.impl 
+package net.wg.infrastructure.base.meta.impl
 {
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.base.*;
-    
-    public class ProfileSectionMeta extends net.wg.infrastructure.base.BaseDAAPIComponent
-    {
-        public function ProfileSectionMeta()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.BaseDAAPIComponent;
+   import net.wg.data.constants.Errors;
 
-        public function setActiveS(arg1:Boolean):void
-        {
-            App.utils.asserter.assertNotNull(this.setActive, "setActive" + net.wg.data.constants.Errors.CANT_NULL);
-            this.setActive(arg1);
-            return;
-        }
 
-        public function requestDataS(arg1:Object):void
-        {
-            App.utils.asserter.assertNotNull(this.requestData, "requestData" + net.wg.data.constants.Errors.CANT_NULL);
-            this.requestData(arg1);
-            return;
-        }
+   public class ProfileSectionMeta extends BaseDAAPIComponent
+   {
+          
+      public function ProfileSectionMeta() {
+         super();
+      }
 
-        public var setActive:Function=null;
+      public var setActive:Function = null;
 
-        public var requestData:Function=null;
-    }
+      public var requestData:Function = null;
+
+      public var requestDossier:Function = null;
+
+      public function setActiveS(param1:Boolean) : void {
+         App.utils.asserter.assertNotNull(this.setActive,"setActive" + Errors.CANT_NULL);
+         this.setActive(param1);
+      }
+
+      public function requestDataS(param1:Object) : void {
+         App.utils.asserter.assertNotNull(this.requestData,"requestData" + Errors.CANT_NULL);
+         this.requestData(param1);
+      }
+
+      public function requestDossierS(param1:String) : void {
+         App.utils.asserter.assertNotNull(this.requestDossier,"requestDossier" + Errors.CANT_NULL);
+         this.requestDossier(param1);
+      }
+   }
+
 }

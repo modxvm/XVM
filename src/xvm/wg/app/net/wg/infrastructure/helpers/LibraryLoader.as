@@ -1,118 +1,105 @@
-package net.wg.infrastructure.helpers 
+package net.wg.infrastructure.helpers
 {
-    import __AS3__.vec.*;
-    import flash.display.*;
-    import flash.events.*;
-    import flash.net.*;
-    import flash.system.*;
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.events.*;
-    
-    public class LibraryLoader extends flash.events.EventDispatcher
-    {
-        public function LibraryLoader(arg1:flash.display.DisplayObjectContainer)
-        {
-            super();
-            this.container = arg1;
-            this.loaders = new Vector.<flash.display.Loader>();
-            return;
-        }
+   import flash.events.EventDispatcher;
+   import flash.display.DisplayObjectContainer;
+   import __AS3__.vec.Vector;
+   import flash.display.Loader;
+   import flash.net.URLRequest;
+   import flash.system.LoaderContext;
+   import net.wg.data.constants.Errors;
+   import flash.system.ApplicationDomain;
+   import flash.events.Event;
+   import flash.display.LoaderInfo;
+   import net.wg.infrastructure.events.LibraryLoaderEvent;
+   import flash.events.IOErrorEvent;
 
-        public function dispose():void
-        {
-            var loc1:*=null;
-            var loc2:*=0;
-            var loc3:*=this.loaders;
-            for each (loc1 in loc3) 
+
+   public class LibraryLoader extends EventDispatcher
+   {
+          
+      public function LibraryLoader(param1:DisplayObjectContainer) {
+         super();
+         this.container = param1;
+         this.loaders = new Vector.<Loader>();
+      }
+
+      private var container:DisplayObjectContainer;
+
+      private var librariesList:Vector.<String> = null;
+
+      private var processedCounter:int = 0;
+
+      private var loaders:Vector.<Loader> = null;
+
+      public function dispose() : void {
+         var _loc1_:Loader = null;
+         for each (_loc1_ in this.loaders)
+         {
+            this.removeListeners(_loc1_.contentLoaderInfo);
+            _loc1_.unloadAndStop(true);
+         }
+         this.loaders.splice(0,this.loaders.length);
+         this.loaders = null;
+         this.container = null;
+         DebugUtils.LOG_DEBUG("LibraryLoader disposed");
+      }
+
+      public function load(param1:Vector.<String>) : void {
+         var _loc2_:String = null;
+         var _loc3_:URLRequest = null;
+         var _loc4_:Loader = null;
+         var _loc5_:LoaderContext = null;
+         this.librariesList = param1;
+         App.utils.asserter.assertNotNull(param1,"librariesList" + Errors.CANT_NULL);
+         if(param1.length)
+         {
+            _loc5_ = new LoaderContext(false,ApplicationDomain.currentDomain);
+            for each (_loc2_ in param1)
             {
-                this.removeListeners(loc1.contentLoaderInfo);
-                loc1.unloadAndStop(true);
+               DebugUtils.LOG_DEBUG("LibraryLoader load",_loc2_);
+               _loc3_ = new URLRequest(_loc2_);
+               _loc4_ = new Loader();
+               _loc4_.load(_loc3_,_loc5_);
+               this.addListeners(_loc4_.contentLoaderInfo);
+               this.loaders.push(_loc4_);
             }
-            this.loaders.splice(0, this.loaders.length);
-            this.loaders = null;
-            this.container = null;
-            DebugUtils.LOG_DEBUG("LibraryLoader disposed");
-            return;
-        }
+         }
+      }
 
-        public function load(arg1:__AS3__.vec.Vector.<String>):void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            var loc3:*=null;
-            var loc4:*=null;
-            this.librariesList = arg1;
-            App.utils.asserter.assertNotNull(arg1, "librariesList" + net.wg.data.constants.Errors.CANT_NULL);
-            if (arg1.length) 
-            {
-                loc4 = new flash.system.LoaderContext(false, flash.system.ApplicationDomain.currentDomain);
-                var loc5:*=0;
-                var loc6:*=arg1;
-                for each (loc1 in loc6) 
-                {
-                    DebugUtils.LOG_DEBUG("LibraryLoader load", loc1);
-                    loc2 = new flash.net.URLRequest(loc1);
-                    (loc3 = new flash.display.Loader()).load(loc2, loc4);
-                    this.addListeners(loc3.contentLoaderInfo);
-                    this.loaders.push(loc3);
-                }
-            }
-            return;
-        }
+      private function onLibLoaded(param1:Event) : void {
+         var _loc2_:LoaderInfo = LoaderInfo(param1.currentTarget);
+         this.removeListeners(_loc2_);
+         DebugUtils.LOG_DEBUG("Library loaded",_loc2_.url);
+         _loc2_.loader.visible = false;
+         this.container.addChild(_loc2_.loader);
+         dispatchEvent(new LibraryLoaderEvent(LibraryLoaderEvent.LOADED,_loc2_.loader,_loc2_.url));
+         this.checkLoadComplete();
+      }
 
-        internal function onLibLoaded(arg1:flash.events.Event):void
-        {
-            var loc1:*=flash.display.LoaderInfo(arg1.currentTarget);
-            this.removeListeners(loc1);
-            DebugUtils.LOG_DEBUG("Library loaded", loc1.url);
-            loc1.loader.visible = false;
-            this.container.addChild(loc1.loader);
-            dispatchEvent(new net.wg.infrastructure.events.LibraryLoaderEvent(net.wg.infrastructure.events.LibraryLoaderEvent.LOADED, loc1.loader, loc1.url));
-            this.checkLoadComplete();
-            return;
-        }
+      private function onLibLoadError(param1:IOErrorEvent) : void {
+         var _loc2_:LoaderInfo = LoaderInfo(param1.currentTarget);
+         this.removeListeners(_loc2_);
+         DebugUtils.LOG_DEBUG("Library load error",_loc2_.url);
+         this.checkLoadComplete();
+      }
 
-        internal function onLibLoadError(arg1:flash.events.IOErrorEvent):void
-        {
-            var loc1:*=flash.display.LoaderInfo(arg1.currentTarget);
-            this.removeListeners(loc1);
-            DebugUtils.LOG_DEBUG("Library load error", loc1.url);
-            this.checkLoadComplete();
-            return;
-        }
+      private function checkLoadComplete() : void {
+         _loc1_.processedCounter = this.processedCounter+1;
+         if(this.processedCounter == this.librariesList.length)
+         {
+            DebugUtils.LOG_DEBUG("Libraries loading has been completed.");
+         }
+      }
 
-        internal function checkLoadComplete():void
-        {
-            var loc1:*;
-            var loc2:*=((loc1 = this).processedCounter + 1);
-            loc1.processedCounter = loc2;
-            if (this.processedCounter == this.librariesList.length) 
-            {
-                DebugUtils.LOG_DEBUG("Libraries loading has been completed.");
-            }
-            return;
-        }
+      private function addListeners(param1:LoaderInfo) : void {
+         param1.addEventListener(Event.INIT,this.onLibLoaded);
+         param1.addEventListener(IOErrorEvent.IO_ERROR,this.onLibLoadError);
+      }
 
-        internal function addListeners(arg1:flash.display.LoaderInfo):void
-        {
-            arg1.addEventListener(flash.events.Event.INIT, this.onLibLoaded);
-            arg1.addEventListener(flash.events.IOErrorEvent.IO_ERROR, this.onLibLoadError);
-            return;
-        }
+      private function removeListeners(param1:LoaderInfo) : void {
+         param1.removeEventListener(Event.INIT,this.onLibLoaded);
+         param1.removeEventListener(IOErrorEvent.IO_ERROR,this.onLibLoadError);
+      }
+   }
 
-        internal function removeListeners(arg1:flash.display.LoaderInfo):void
-        {
-            arg1.removeEventListener(flash.events.Event.INIT, this.onLibLoaded);
-            arg1.removeEventListener(flash.events.IOErrorEvent.IO_ERROR, this.onLibLoadError);
-            return;
-        }
-
-        internal var container:flash.display.DisplayObjectContainer;
-
-        internal var librariesList:__AS3__.vec.Vector.<String>=null;
-
-        internal var processedCounter:int=0;
-
-        internal var loaders:__AS3__.vec.Vector.<flash.display.Loader>=null;
-    }
 }

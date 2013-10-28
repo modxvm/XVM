@@ -1,20 +1,20 @@
-package net.wg.gui.login.impl 
+package net.wg.gui.login.impl
 {
-    import flash.events.*;
-    
-    public final class LoginEvent extends flash.events.Event
-    {
-        public function LoginEvent(arg1:String, arg2:Boolean=false, arg3:Boolean=false)
-        {
-            super(arg1, arg2, arg3);
-            return;
-        }
+   import flash.events.Event;
 
-        public override function clone():flash.events.Event
-        {
-            return new net.wg.gui.login.impl.LoginEvent(type, bubbles, cancelable);
-        }
 
-        public static const TOKEN_RESET:String="eventResetToken";
-    }
+   public final class LoginEvent extends Event
+   {
+          
+      public function LoginEvent(param1:String, param2:Boolean=false, param3:Boolean=false) {
+         super(param1,param2,param3);
+      }
+
+      public static const TOKEN_RESET:String = "eventResetToken";
+
+      override public function clone() : Event {
+         return new LoginEvent(type,bubbles,cancelable);
+      }
+   }
+
 }

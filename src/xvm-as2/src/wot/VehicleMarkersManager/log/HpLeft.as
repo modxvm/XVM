@@ -6,9 +6,8 @@ import com.xvm.GraphicsUtil;
 import com.xvm.Locale;
 import com.xvm.Utils;
 import com.xvm.VehicleInfo;
-import com.xvm.VehicleInfoDataL10n;
+import com.xvm.DataTypes.VehicleData;
 import wot.VehicleMarkersManager.log.HitLog;
-
 
 class wot.VehicleMarkersManager.log.HpLeft
 {
@@ -86,6 +85,8 @@ class wot.VehicleMarkersManager.log.HpLeft
         {
             // available fields on "player": vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth
 
+            var vdata:VehicleData = VehicleInfo.getByIcon(player.vIconSource);
+
             var formatArr:Array;
             formatArr = format.split("{{nick}}");
             if (formatArr.length > 1)
@@ -102,16 +103,16 @@ class wot.VehicleMarkersManager.log.HpLeft
 
             formatArr = format.split("{{vehicle}}");
             if (formatArr.length > 1)
-                format = formatArr.join(VehicleInfo.mapVehicleName2(VehicleInfoDataL10n.getVehicleNationName(player.vType), player.vType));
+                format = formatArr.join(vdata.localizedName);
             formatArr = format.split("{{vehiclename}}");
             if (formatArr.length > 1)
-                format = formatArr.join(VehicleInfo.getVehicleName(player.vIconSource));
+                format = formatArr.join(vdata.key);
             formatArr = format.split("{{vtype}}");
             if (formatArr.length > 1)
-                format = formatArr.join(VehicleInfo.GetVTypeValue(player.vIconSource));
+                format = formatArr.join(vdata.vtype);
             formatArr = format.split("{{c:vtype}}");
             if (formatArr.length > 1)
-                format = formatArr.join(GraphicsUtil.GetVTypeColorValue(player.vIconSource, VehicleInfo.GetVTypeValue2(player.vIconSource)));
+                format = formatArr.join(GraphicsUtil.GetVTypeColorValue(player.vIconSource));
             formatArr = format.split("{{level}}");
             if (formatArr.length > 1)
                 format = formatArr.join(player.vLevel);

@@ -1,15 +1,18 @@
-package net.wg.utils 
+package net.wg.utils
 {
-    import net.wg.infrastructure.interfaces.entity.*;
-    
-    public interface IScheduler extends net.wg.infrastructure.interfaces.entity.IDisposable
-    {
-        function scheduleTask(arg1:Function, arg2:Number, ... rest):void;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
 
-        function envokeInNextFrame(arg1:Function, ... rest):void;
 
-        function cancelTask(arg1:Function):void;
+   public interface IScheduler extends IDisposable
+   {
+          
+      function scheduleTask(param1:Function, param2:Number, ... rest) : void;
 
-        function cancelAll():void;
-    }
+      function envokeInNextFrame(param1:Function, ... rest) : void;
+
+      function cancelTask(param1:Function) : void;
+
+      function cancelAll() : void;
+   }
+
 }

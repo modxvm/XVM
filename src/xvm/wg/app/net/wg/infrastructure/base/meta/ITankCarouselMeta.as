@@ -1,31 +1,34 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface ITankCarouselMeta extends flash.events.IEventDispatcher
-    {
-        function showVehicleInfoS(arg1:String):void;
+   import flash.events.IEventDispatcher;
 
-        function toResearchS(arg1:String):void;
 
-        function vehicleSellS(arg1:String):void;
+   public interface ITankCarouselMeta extends IEventDispatcher
+   {
+          
+      function showVehicleInfoS(param1:String) : void;
 
-        function vehicleChangeS(arg1:String):void;
+      function toResearchS(param1:String) : void;
 
-        function buySlotS():void;
+      function vehicleSellS(param1:String) : void;
 
-        function buyTankClickS():void;
+      function vehicleChangeS(param1:String) : void;
 
-        function setVehiclesFilterS(arg1:Number, arg2:String, arg3:Boolean):void;
+      function buySlotS() : void;
 
-        function favoriteVehicleS(arg1:String, arg2:Boolean):void;
+      function buyTankClickS() : void;
 
-        function getVehicleTypeProviderS():Array;
+      function setVehiclesFilterS(param1:Number, param2:String, param3:Boolean) : void;
 
-        function as_vehiclesResponse(arg1:Object):void;
+      function favoriteVehicleS(param1:String, param2:Boolean) : void;
 
-        function as_setCarouselFilter(arg1:Object):void;
+      function getVehicleTypeProviderS() : Array;
 
-        function as_changeVehicleByCompDescr(arg1:Number):void;
-    }
+      function as_vehiclesResponse(param1:Object) : void;
+
+      function as_setCarouselFilter(param1:Object) : void;
+
+      function as_changeVehicleByCompDescr(param1:Number) : void;
+   }
+
 }

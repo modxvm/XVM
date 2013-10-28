@@ -1,527 +1,501 @@
-package net.wg.gui.lobby.techtree.math 
+package net.wg.gui.lobby.techtree.math
 {
-    public final class HungarianAlgorithm extends Object
-    {
-        public function HungarianAlgorithm()
-        {
-            super();
-            return;
-        }
 
-        public function makeCostMatrix(arg1:Array, arg2:Function):Array
-        {
-            var loc3:*=null;
-            var loc4:*=null;
-            var loc5:*=NaN;
-            var loc1:*=[];
-            var loc2:*=0;
-            while (loc2 < arg1.length) 
+
+   public final class HungarianAlgorithm extends Object
+   {
+          
+      public function HungarianAlgorithm() {
+         super();
+      }
+
+      private var C:Array;
+
+      private var rowCovered:Array;
+
+      private var columnCovered:Array;
+
+      private var n:Number;
+
+      private var Z0Row:Number;
+
+      private var Z0Column:Number;
+
+      private var marked:Array;
+
+      private var path:Array;
+
+      public function makeCostMatrix(param1:Array, param2:Function) : Array {
+         var _loc5_:Array = null;
+         var _loc6_:Array = null;
+         var _loc7_:* = NaN;
+         var _loc3_:Array = [];
+         var _loc4_:Number = 0;
+         while(_loc4_ < param1.length)
+         {
+            _loc5_ = param1[_loc4_];
+            _loc6_ = [];
+            _loc7_ = 0;
+            while(_loc7_ < _loc5_.length)
             {
-                loc3 = arg1[loc2];
-                loc4 = [];
-                loc5 = 0;
-                while (loc5 < loc3.length) 
-                {
-                    loc4.push(arg2(loc3[loc5]));
-                    ++loc5;
-                }
-                loc1.push(loc4);
-                ++loc2;
+               _loc6_.push(param2(_loc5_[_loc7_]));
+               _loc7_++;
             }
-            return loc1;
-        }
+            _loc3_.push(_loc6_);
+            _loc4_++;
+         }
+         return _loc3_;
+      }
 
-        public function compute(arg1:Array):Array
-        {
-            var loc3:*=NaN;
-            var loc7:*=NaN;
-            this.C = this.padMatrix(arg1);
-            this.n = this.C.length;
-            var loc1:*=arg1.length;
-            var loc2:*=arg1[0].length;
-            this.rowCovered = [];
-            loc3 = 0;
-            while (loc3 < this.n) 
+      public function compute(param1:Array) : Array {
+         var _loc4_:* = NaN;
+         var _loc8_:* = NaN;
+         this.C = this.padMatrix(param1);
+         this.n = this.C.length;
+         var _loc2_:Number = param1.length;
+         var _loc3_:Number = param1[0].length;
+         this.rowCovered = [];
+         _loc4_ = 0;
+         while(_loc4_ < this.n)
+         {
+            this.rowCovered.push(false);
+            _loc4_++;
+         }
+         this.columnCovered = [];
+         _loc4_ = 0;
+         while(_loc4_ < this.n)
+         {
+            this.columnCovered.push(false);
+            _loc4_++;
+         }
+         this.Z0Row = 0;
+         this.Z0Column = 0;
+         this.path = this.makeMatrix(this.n * 2,0);
+         this.marked = this.makeMatrix(this.n,0);
+         var _loc5_:Number = 1;
+         var _loc6_:* = false;
+         while(!_loc6_)
+         {
+            switch(_loc5_)
             {
-                this.rowCovered.push(false);
-                ++loc3;
+               case 1:
+                  _loc5_ = this.step1();
+                  continue;
+               case 2:
+                  _loc5_ = this.step2();
+                  continue;
+               case 3:
+                  _loc5_ = this.step3();
+                  continue;
+               case 4:
+                  _loc5_ = this.step4();
+                  continue;
+               case 5:
+                  _loc5_ = this.step5();
+                  continue;
+               case 6:
+                  _loc5_ = this.step6();
+                  continue;
+               case 7:
+                  _loc6_ = true;
+                  continue;
+               default:
+                  continue;
             }
-            this.columnCovered = [];
-            loc3 = 0;
-            while (loc3 < this.n) 
+         }
+         var _loc7_:Array = [];
+         _loc4_ = 0;
+         while(_loc4_ < _loc2_)
+         {
+            _loc8_ = 0;
+            while(_loc8_ < _loc3_)
             {
-                this.columnCovered.push(false);
-                ++loc3;
+               if(this.marked[_loc4_][_loc8_] == 1)
+               {
+                  _loc7_.push(new MatrixPosition(_loc4_,_loc8_));
+               }
+               _loc8_++;
             }
-            this.Z0Row = 0;
-            this.Z0Column = 0;
-            this.path = this.makeMatrix(this.n * 2, 0);
-            this.marked = this.makeMatrix(this.n, 0);
-            var loc4:*=1;
-            var loc5:*=false;
-            label430: while (!loc5) 
+            _loc4_++;
+         }
+         return _loc7_;
+      }
+
+      private function padMatrix(param1:Array, param2:Number=0) : Array {
+         var _loc5_:* = NaN;
+         var _loc6_:* = NaN;
+         var _loc7_:Array = null;
+         var _loc3_:Number = 0;
+         var _loc4_:Number = param1.length;
+         _loc5_ = 0;
+         while(_loc5_ < _loc4_)
+         {
+            _loc7_ = param1[_loc5_];
+            _loc3_ = Math.max(_loc3_,_loc7_.length);
+            _loc5_++;
+         }
+         _loc4_ = Math.max(_loc3_,_loc4_);
+         var _loc8_:Array = [];
+         _loc5_ = 0;
+         while(_loc5_ < param1.length)
+         {
+            _loc7_ = param1[_loc5_];
+            _loc6_ = _loc7_.length;
+            while(_loc6_ < _loc4_)
             {
-                var loc8:*=loc4;
-                switch (loc8) 
-                {
-                    case 1:
-                    {
-                        loc4 = this.step1();
-                        continue label430;
-                    }
-                    case 2:
-                    {
-                        loc4 = this.step2();
-                        continue label430;
-                    }
-                    case 3:
-                    {
-                        loc4 = this.step3();
-                        continue label430;
-                    }
-                    case 4:
-                    {
-                        loc4 = this.step4();
-                        continue label430;
-                    }
-                    case 5:
-                    {
-                        loc4 = this.step5();
-                        continue label430;
-                    }
-                    case 6:
-                    {
-                        loc4 = this.step6();
-                        continue label430;
-                    }
-                    case 7:
-                    {
-                        loc5 = true;
-                        continue label430;
-                    }
-                }
+               _loc7_.push(param2);
+               _loc6_++;
             }
-            var loc6:*=[];
-            loc3 = 0;
-            while (loc3 < loc1) 
+            _loc8_.push(_loc7_);
+            _loc5_++;
+         }
+         while(_loc5_ < _loc4_)
+         {
+            _loc7_ = [];
+            _loc6_ = 0;
+            while(_loc6_ < _loc4_)
             {
-                loc7 = 0;
-                while (loc7 < loc2) 
-                {
-                    if (this.marked[loc3][loc7] == 1) 
-                    {
-                        loc6.push(new net.wg.gui.lobby.techtree.math.MatrixPosition(loc3, loc7));
-                    }
-                    ++loc7;
-                }
-                ++loc3;
+               _loc7_.push(param2);
+               _loc6_++;
             }
-            return loc6;
-        }
+            _loc8_.push(_loc7_);
+            _loc5_++;
+         }
+         return _loc8_;
+      }
 
-        internal function padMatrix(arg1:Array, arg2:Number=0):Array
-        {
-            var loc3:*=NaN;
-            var loc4:*=NaN;
-            var loc5:*=null;
-            var loc1:*=0;
-            var loc2:*=arg1.length;
-            loc3 = 0;
-            while (loc3 < loc2) 
+      private function makeMatrix(param1:Number, param2:Number) : Array {
+         var _loc4_:Array = null;
+         var _loc6_:* = NaN;
+         var _loc3_:Array = [];
+         var _loc5_:Number = 0;
+         while(_loc5_ < param1)
+         {
+            _loc4_ = [];
+            _loc6_ = 0;
+            while(_loc6_ < param1)
             {
-                loc5 = arg1[loc3];
-                loc1 = Math.max(loc1, loc5.length);
-                ++loc3;
+               _loc4_.push(param2);
+               _loc6_++;
             }
-            loc2 = Math.max(loc1, loc2);
-            var loc6:*=[];
-            loc3 = 0;
-            while (loc3 < arg1.length) 
+            _loc3_.push(_loc4_);
+            _loc5_++;
+         }
+         return _loc3_;
+      }
+
+      private function clearCovers() : void {
+         var _loc1_:Number = 0;
+         while(_loc1_ < this.n)
+         {
+            this.rowCovered[_loc1_] = false;
+            this.columnCovered[_loc1_] = false;
+            _loc1_++;
+         }
+      }
+
+      private function findZero() : Object {
+         var _loc5_:* = NaN;
+         var _loc1_:Number = -1;
+         var _loc2_:Number = -1;
+         var _loc3_:Number = 0;
+         var _loc4_:* = false;
+         while(!_loc4_)
+         {
+            _loc5_ = 0;
+            do
             {
-                loc4 = (loc5 = arg1[loc3]).length;
-                while (loc4 < loc2) 
-                {
-                    loc5.push(arg2);
-                    ++loc4;
-                }
-                loc6.push(loc5);
-                ++loc3;
+               if(this.C[_loc3_][_loc5_] == 0 && !this.rowCovered[_loc3_] && !this.columnCovered[_loc5_])
+               {
+                  _loc1_ = _loc3_;
+                  _loc2_ = _loc5_;
+                  _loc4_ = true;
+               }
+               _loc5_ = _loc5_ + 1;
             }
-            while (loc3 < loc2) 
+            while(_loc5_ < this.n);
+            _loc3_ = _loc3_ + 1;
+            if(_loc3_ >= this.n)
             {
-                loc5 = [];
-                loc4 = 0;
-                while (loc4 < loc2) 
-                {
-                    loc5.push(arg2);
-                    ++loc4;
-                }
-                loc6.push(loc5);
-                ++loc3;
+               _loc4_ = true;
             }
-            return loc6;
-        }
+         }
+         return {
+            "row":_loc1_,
+            "col":_loc2_
+         }
+         ;
+      }
 
-        internal function makeMatrix(arg1:Number, arg2:Number):Array
-        {
-            var loc2:*=null;
-            var loc4:*=NaN;
-            var loc1:*=[];
-            var loc3:*=0;
-            while (loc3 < arg1) 
+      private function findSmallest() : Number {
+         var _loc3_:* = NaN;
+         var _loc1_:Number = Number.MAX_VALUE;
+         var _loc2_:Number = 0;
+         while(_loc2_ < this.n)
+         {
+            _loc3_ = 0;
+            while(_loc3_ < this.n)
             {
-                loc2 = [];
-                loc4 = 0;
-                while (loc4 < arg1) 
-                {
-                    loc2.push(arg2);
-                    ++loc4;
-                }
-                loc1.push(loc2);
-                ++loc3;
+               if(!this.rowCovered[_loc2_] && !this.columnCovered[_loc3_])
+               {
+                  if(_loc1_ > this.C[_loc2_][_loc3_])
+                  {
+                     _loc1_ = this.C[_loc2_][_loc3_];
+                  }
+               }
+               _loc3_++;
             }
-            return loc1;
-        }
+            _loc2_++;
+         }
+         return _loc1_;
+      }
 
-        internal function clearCovers():void
-        {
-            var loc1:*=0;
-            while (loc1 < this.n) 
+      private function findStarInRow(param1:Number) : Number {
+         var _loc2_:Number = -1;
+         var _loc3_:Number = 0;
+         while(_loc3_ < this.n)
+         {
+            if(this.marked[param1][_loc3_] == 1)
             {
-                this.rowCovered[loc1] = false;
-                this.columnCovered[loc1] = false;
-                ++loc1;
+               _loc2_ = _loc3_;
+               break;
             }
-            return;
-        }
+            _loc3_++;
+         }
+         return _loc2_;
+      }
 
-        internal function findZero():Object
-        {
-            var loc5:*=NaN;
-            var loc1:*=-1;
-            var loc2:*=-1;
-            var loc3:*=0;
-            var loc4:*=false;
-            while (!loc4) 
+      private function findStarInCol(param1:Number) : Number {
+         var _loc2_:Number = -1;
+         var _loc3_:Number = 0;
+         while(_loc3_ < this.n)
+         {
+            if(this.marked[_loc3_][param1] == 1)
             {
-                loc5 = 0;
-                for (;;) 
-                {
-                    if (this.C[loc3][loc5] == 0 && !this.rowCovered[loc3] && !this.columnCovered[loc5]) 
-                    {
-                        loc1 = loc3;
-                        loc2 = loc5;
-                        loc4 = true;
-                    }
-                    if (!((loc5 = loc5 + 1) >= this.n)) 
-                    {
-                        continue;
-                    }
-                    break;
-                }
-                loc3 = loc3 + 1;
-                if (!(loc3 >= this.n)) 
-                {
-                    continue;
-                }
-                loc4 = true;
+               _loc2_ = _loc3_;
+               break;
             }
-            return {"row":loc1, "col":loc2};
-        }
+            _loc3_++;
+         }
+         return _loc2_;
+      }
 
-        internal function findSmallest():Number
-        {
-            var loc3:*=NaN;
-            var loc1:*=Number.MAX_VALUE;
-            var loc2:*=0;
-            while (loc2 < this.n) 
+      private function findPrimeInRow(param1:Number) : Number {
+         var _loc2_:Number = -1;
+         var _loc3_:Number = 0;
+         while(_loc3_ < this.n)
+         {
+            if(this.marked[param1][_loc3_] == 2)
             {
-                loc3 = 0;
-                while (loc3 < this.n) 
-                {
-                    if (!this.rowCovered[loc2] && !this.columnCovered[loc3]) 
-                    {
-                        if (loc1 > this.C[loc2][loc3]) 
-                        {
-                            loc1 = this.C[loc2][loc3];
-                        }
-                    }
-                    ++loc3;
-                }
-                ++loc2;
+               _loc2_ = _loc3_;
+               break;
             }
-            return loc1;
-        }
+            _loc3_++;
+         }
+         return _loc2_;
+      }
 
-        internal function findStarInRow(arg1:Number):Number
-        {
-            var loc1:*=-1;
-            var loc2:*=0;
-            while (loc2 < this.n) 
+      private function convertPath(param1:Array, param2:Number) : void {
+         var _loc3_:Number = 0;
+         while(_loc3_ < param2 + 1)
+         {
+            if(this.marked[param1[_loc3_][0]][param1[_loc3_][1]] == 1)
             {
-                if (this.marked[arg1][loc2] == 1) 
-                {
-                    loc1 = loc2;
-                    break;
-                }
-                ++loc2;
+               this.marked[param1[_loc3_][0]][param1[_loc3_][1]] = 0;
             }
-            return loc1;
-        }
-
-        internal function findStarInCol(arg1:Number):Number
-        {
-            var loc1:*=-1;
-            var loc2:*=0;
-            while (loc2 < this.n) 
+            else
             {
-                if (this.marked[loc2][arg1] == 1) 
-                {
-                    loc1 = loc2;
-                    break;
-                }
-                ++loc2;
+               this.marked[param1[_loc3_][0]][param1[_loc3_][1]] = 1;
             }
-            return loc1;
-        }
+            _loc3_++;
+         }
+      }
 
-        internal function findPrimeInRow(arg1:Number):Number
-        {
-            var loc1:*=-1;
-            var loc2:*=0;
-            while (loc2 < this.n) 
+      private function erasePrimes() : void {
+         var _loc2_:* = NaN;
+         var _loc1_:Number = 0;
+         while(_loc1_ < this.n)
+         {
+            _loc2_ = 0;
+            while(_loc2_ < this.n)
             {
-                if (this.marked[arg1][loc2] == 2) 
-                {
-                    loc1 = loc2;
-                    break;
-                }
-                ++loc2;
+               if(this.marked[_loc1_][_loc2_] == 2)
+               {
+                  this.marked[_loc1_][_loc2_] = 0;
+               }
+               _loc2_++;
             }
-            return loc1;
-        }
+            _loc1_++;
+         }
+      }
 
-        internal function convertPath(arg1:Array, arg2:Number):void
-        {
-            var loc1:*=0;
-            while (loc1 < arg2 + 1) 
+      private function step1() : Number {
+         var _loc2_:Array = null;
+         var _loc3_:* = NaN;
+         var _loc4_:* = NaN;
+         var _loc1_:Number = 0;
+         while(_loc1_ < this.n)
+         {
+            _loc2_ = this.C[_loc1_];
+            _loc3_ = Number.MAX_VALUE;
+            _loc4_ = 0;
+            while(_loc4_ < this.n)
             {
-                if (this.marked[arg1[loc1][0]][arg1[loc1][1]] != 1) 
-                {
-                    this.marked[arg1[loc1][0]][arg1[loc1][1]] = 1;
-                }
-                else 
-                {
-                    this.marked[arg1[loc1][0]][arg1[loc1][1]] = 0;
-                }
-                ++loc1;
+               _loc3_ = Math.min(_loc2_[_loc4_],_loc3_);
+               _loc4_++;
             }
-            return;
-        }
-
-        internal function erasePrimes():void
-        {
-            var loc2:*=NaN;
-            var loc1:*=0;
-            while (loc1 < this.n) 
+            _loc4_ = 0;
+            while(_loc4_ < this.n)
             {
-                loc2 = 0;
-                while (loc2 < this.n) 
-                {
-                    if (this.marked[loc1][loc2] == 2) 
-                    {
-                        this.marked[loc1][loc2] = 0;
-                    }
-                    ++loc2;
-                }
-                ++loc1;
+               _loc2_[_loc4_] = _loc2_[_loc4_] - _loc3_;
+               _loc4_++;
             }
-            return;
-        }
+            _loc1_++;
+         }
+         return 2;
+      }
 
-        internal function step1():Number
-        {
-            var loc2:*=null;
-            var loc3:*=NaN;
-            var loc4:*=NaN;
-            var loc1:*=0;
-            while (loc1 < this.n) 
+      private function step2() : Number {
+         var _loc2_:Array = null;
+         var _loc3_:* = NaN;
+         var _loc1_:Number = 0;
+         while(_loc1_ < this.n)
+         {
+            _loc2_ = this.C[_loc1_];
+            _loc3_ = 0;
+            while(_loc3_ < this.n)
             {
-                loc2 = this.C[loc1];
-                loc3 = Number.MAX_VALUE;
-                loc4 = 0;
-                while (loc4 < this.n) 
-                {
-                    loc3 = Math.min(loc2[loc4], loc3);
-                    ++loc4;
-                }
-                loc4 = 0;
-                while (loc4 < this.n) 
-                {
-                    loc2[loc4] = loc2[loc4] - loc3;
-                    ++loc4;
-                }
-                ++loc1;
+               if(_loc2_[_loc3_] == 0 && !this.columnCovered[_loc3_] && !this.rowCovered[_loc1_])
+               {
+                  this.marked[_loc1_][_loc3_] = 1;
+                  this.columnCovered[_loc3_] = true;
+                  this.rowCovered[_loc1_] = true;
+               }
+               _loc3_++;
             }
-            return 2;
-        }
+            _loc1_++;
+         }
+         this.clearCovers();
+         return 3;
+      }
 
-        internal function step2():Number
-        {
-            var loc2:*=null;
-            var loc3:*=NaN;
-            var loc1:*=0;
-            while (loc1 < this.n) 
+      private function step3() : Number {
+         var _loc3_:* = NaN;
+         var _loc1_:Number = 0;
+         var _loc2_:Number = 0;
+         while(_loc2_ < this.n)
+         {
+            _loc3_ = 0;
+            while(_loc3_ < this.n)
             {
-                loc2 = this.C[loc1];
-                loc3 = 0;
-                while (loc3 < this.n) 
-                {
-                    if (loc2[loc3] == 0 && !this.columnCovered[loc3] && !this.rowCovered[loc1]) 
-                    {
-                        this.marked[loc1][loc3] = 1;
-                        this.columnCovered[loc3] = true;
-                        this.rowCovered[loc1] = true;
-                    }
-                    ++loc3;
-                }
-                ++loc1;
+               if(this.marked[_loc2_][_loc3_] == 1)
+               {
+                  this.columnCovered[_loc3_] = true;
+                  _loc1_ = _loc1_ + 1;
+               }
+               _loc3_++;
             }
-            this.clearCovers();
-            return 3;
-        }
+            _loc2_++;
+         }
+         return _loc1_ >= this.n?7:4;
+      }
 
-        internal function step3():Number
-        {
-            var loc3:*=NaN;
-            var loc1:*=0;
-            var loc2:*=0;
-            while (loc2 < this.n) 
+      private function step4() : Number {
+         var _loc6_:Object = null;
+         var _loc1_:Number = 0;
+         var _loc2_:* = false;
+         var _loc3_:Number = -1;
+         var _loc4_:Number = -1;
+         var _loc5_:Number = -1;
+         while(!_loc2_)
+         {
+            _loc6_ = this.findZero();
+            _loc3_ = _loc6_.row;
+            _loc4_ = _loc6_.col;
+            if(_loc3_ < 0)
             {
-                loc3 = 0;
-                while (loc3 < this.n) 
-                {
-                    if (this.marked[loc2][loc3] == 1) 
-                    {
-                        this.columnCovered[loc3] = true;
-                        loc1 = loc1 + 1;
-                    }
-                    ++loc3;
-                }
-                ++loc2;
+               _loc2_ = true;
+               _loc1_ = 6;
             }
-            return loc1 >= this.n ? 7 : 4;
-        }
-
-        internal function step4():Number
-        {
-            var loc6:*=null;
-            var loc1:*=0;
-            var loc2:*=false;
-            var loc3:*=-1;
-            var loc4:*=-1;
-            var loc5:*=-1;
-            while (!loc2) 
+            else
             {
-                loc3 = (loc6 = this.findZero()).row;
-                loc4 = loc6.col;
-                if (loc3 < 0) 
-                {
-                    loc2 = true;
-                    loc1 = 6;
-                    continue;
-                }
-                this.marked[loc3][loc4] = 2;
-                if ((loc5 = this.findStarInRow(loc3)) >= 0) 
-                {
-                    loc4 = loc5;
-                    this.rowCovered[loc3] = true;
-                    this.columnCovered[loc4] = false;
-                    continue;
-                }
-                loc2 = true;
-                this.Z0Row = loc3;
-                this.Z0Column = loc4;
-                loc1 = 5;
+               this.marked[_loc3_][_loc4_] = 2;
+               _loc5_ = this.findStarInRow(_loc3_);
+               if(_loc5_ >= 0)
+               {
+                  _loc4_ = _loc5_;
+                  this.rowCovered[_loc3_] = true;
+                  this.columnCovered[_loc4_] = false;
+               }
+               else
+               {
+                  _loc2_ = true;
+                  this.Z0Row = _loc3_;
+                  this.Z0Column = _loc4_;
+                  _loc1_ = 5;
+               }
             }
-            return loc1;
-        }
+         }
+         return _loc1_;
+      }
 
-        internal function step5():Number
-        {
-            var loc3:*=NaN;
-            var loc4:*=NaN;
-            var loc1:*=0;
-            this.path[loc1][0] = this.Z0Row;
-            this.path[loc1][1] = this.Z0Column;
-            var loc2:*=false;
-            while (!loc2) 
+      private function step5() : Number {
+         var _loc3_:* = NaN;
+         var _loc4_:* = NaN;
+         var _loc1_:Number = 0;
+         this.path[_loc1_][0] = this.Z0Row;
+         this.path[_loc1_][1] = this.Z0Column;
+         var _loc2_:* = false;
+         while(!_loc2_)
+         {
+            _loc3_ = this.findStarInCol(this.path[_loc1_][1]);
+            if(_loc3_ >= 0)
             {
-                loc3 = this.findStarInCol(this.path[loc1][1]);
-                if (loc3 >= 0) 
-                {
-                    loc1 = loc1 + 1;
-                    this.path[loc1][0] = loc3;
-                    this.path[loc1][1] = this.path[(loc1 - 1)][1];
-                }
-                else 
-                {
-                    loc2 = true;
-                }
-                if (loc2) 
-                {
-                    continue;
-                }
-                loc4 = this.findPrimeInRow(this.path[loc1][0]);
-                loc1 = loc1 + 1;
-                this.path[loc1][0] = this.path[(loc1 - 1)][0];
-                this.path[loc1][1] = loc4;
+               _loc1_ = _loc1_ + 1;
+               this.path[_loc1_][0] = _loc3_;
+               this.path[_loc1_][1] = this.path[_loc1_-1][1];
             }
-            this.convertPath(this.path, loc1);
-            this.clearCovers();
-            this.erasePrimes();
-            return 3;
-        }
-
-        internal function step6():Number
-        {
-            var loc3:*=NaN;
-            var loc1:*=this.findSmallest();
-            var loc2:*=0;
-            while (loc2 < this.n) 
+            else
             {
-                loc3 = 0;
-                while (loc3 < this.n) 
-                {
-                    if (this.rowCovered[loc2]) 
-                    {
-                        this.C[loc2][loc3] = this.C[loc2][loc3] + loc1;
-                    }
-                    if (!this.columnCovered[loc3]) 
-                    {
-                        this.C[loc2][loc3] = this.C[loc2][loc3] - loc1;
-                    }
-                    ++loc3;
-                }
-                ++loc2;
+               _loc2_ = true;
             }
-            return 4;
-        }
+            if(!_loc2_)
+            {
+               _loc4_ = this.findPrimeInRow(this.path[_loc1_][0]);
+               _loc1_ = _loc1_ + 1;
+               this.path[_loc1_][0] = this.path[_loc1_-1][0];
+               this.path[_loc1_][1] = _loc4_;
+            }
+         }
+         this.convertPath(this.path,_loc1_);
+         this.clearCovers();
+         this.erasePrimes();
+         return 3;
+      }
 
-        internal var C:Array;
+      private function step6() : Number {
+         var _loc3_:* = NaN;
+         var _loc1_:Number = this.findSmallest();
+         var _loc2_:Number = 0;
+         while(_loc2_ < this.n)
+         {
+            _loc3_ = 0;
+            while(_loc3_ < this.n)
+            {
+               if(this.rowCovered[_loc2_])
+               {
+                  this.C[_loc2_][_loc3_] = this.C[_loc2_][_loc3_] + _loc1_;
+               }
+               if(!this.columnCovered[_loc3_])
+               {
+                  this.C[_loc2_][_loc3_] = this.C[_loc2_][_loc3_] - _loc1_;
+               }
+               _loc3_++;
+            }
+            _loc2_++;
+         }
+         return 4;
+      }
+   }
 
-        internal var rowCovered:Array;
-
-        internal var columnCovered:Array;
-
-        internal var n:Number;
-
-        internal var Z0Row:Number;
-
-        internal var Z0Column:Number;
-
-        internal var marked:Array;
-
-        internal var path:Array;
-    }
 }

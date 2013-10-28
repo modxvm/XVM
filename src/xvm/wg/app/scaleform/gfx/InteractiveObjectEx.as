@@ -1,33 +1,30 @@
-package scaleform.gfx 
+package scaleform.gfx
 {
-    import flash.display.*;
-    
-    public class InteractiveObjectEx extends scaleform.gfx.DisplayObjectEx
-    {
-        public function InteractiveObjectEx()
-        {
-            super();
-            return;
-        }
+   import flash.display.InteractiveObject;
 
-        public static function setHitTestDisable(arg1:flash.display.InteractiveObject, arg2:Boolean):void
-        {
-            return;
-        }
 
-        public static function getHitTestDisable(arg1:flash.display.InteractiveObject):Boolean
-        {
-            return false;
-        }
+   public class InteractiveObjectEx extends DisplayObjectEx
+   {
+          
+      public function InteractiveObjectEx() {
+         super();
+      }
 
-        public static function setTopmostLevel(arg1:flash.display.InteractiveObject, arg2:Boolean):void
-        {
-            return;
-        }
+      public static function setHitTestDisable(param1:InteractiveObject, param2:Boolean) : void {
+          
+      }
 
-        public static function getTopmostLevel(arg1:flash.display.InteractiveObject):Boolean
-        {
-            return false;
-        }
-    }
+      public static function getHitTestDisable(param1:InteractiveObject) : Boolean {
+         return false;
+      }
+
+      public static function setTopmostLevel(param1:InteractiveObject, param2:Boolean) : void {
+          
+      }
+
+      public static function getTopmostLevel(param1:InteractiveObject) : Boolean {
+         return false;
+      }
+   }
+
 }

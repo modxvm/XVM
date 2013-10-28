@@ -1,129 +1,121 @@
-package net.wg.gui.lobby.sellDialog 
+package net.wg.gui.lobby.sellDialog
 {
-    import __AS3__.vec.*;
-    import flash.display.*;
-    import net.wg.data.VO.*;
-    import scaleform.clik.core.*;
-    
-    public class SellDevicesComponent extends scaleform.clik.core.UIComponent
-    {
-        public function SellDevicesComponent()
-        {
-            this._sellData = [];
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.display.MovieClip;
+   import net.wg.data.VO.SellDialogItem;
+   import net.wg.data.VO.SellDialogElement;
+   import __AS3__.vec.Vector;
+   import net.wg.infrastructure.interfaces.ISaleItemBlockRenderer;
 
-        public override function dispose():void
-        {
-            super.dispose();
-            this.complexDevice.dispose();
-            this.complexDevicesArr.dispose();
-            return;
-        }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.complexDevice.scrollingRenderrBg.visible = false;
-            return;
-        }
+   public class SellDevicesComponent extends UIComponent
+   {
+          
+      public function SellDevicesComponent() {
+         this._sellData = [];
+         super();
+      }
 
-        public function get removePrice():Number
-        {
-            return this._removePrice;
-        }
+      private static const PADDING_FOR_NEXT_ELEMENT:uint = 5;
 
-        public function set removePrice(arg1:Number):void
-        {
-            this._removePrice = arg1;
-            return;
-        }
+      public var complexDevice:SellDialogListItemRenderer;
 
-        public function get sellData():Array
-        {
-            return this._sellData;
-        }
+      public var complDevBg:MovieClip;
 
-        public function setData(arg1:Object):void
-        {
-            var loc3:*=null;
-            var loc4:*=NaN;
-            this.complexDevicesArr = new net.wg.data.VO.SellDialogItem();
-            var loc1:*=new net.wg.data.VO.SellDialogItem();
-            var loc2:*=0;
-            while (loc2 < arg1.optDevices.length) 
+      private var devHeight:Number = 0;
+
+      private var complexDevicesArr:SellDialogItem;
+
+      private var _removePrice:Number = 0;
+
+      private var _sellData:Array;
+
+      override public function dispose() : void {
+         super.dispose();
+         this.complexDevice.dispose();
+         this.complexDevicesArr.dispose();
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.complexDevice.scrollingRenderrBg.visible = false;
+      }
+
+      public function get removePrice() : Number {
+         return this._removePrice;
+      }
+
+      public function set removePrice(param1:Number) : void {
+         this._removePrice = param1;
+      }
+
+      public function get sellData() : Array {
+         return this._sellData;
+      }
+
+      public function setData(param1:Object) : void {
+         var _loc4_:SellDialogElement = null;
+         var _loc5_:* = NaN;
+         this.complexDevicesArr = new SellDialogItem();
+         var _loc2_:SellDialogItem = new SellDialogItem();
+         var _loc3_:Number = 0;
+         while(_loc3_ < param1.optDevices.length)
+         {
+            if(param1.optDevices[_loc3_] != undefined)
             {
-                if (arg1.optDevices[loc2] != undefined) 
-                {
-                    (loc3 = new net.wg.data.VO.SellDialogElement()).id = arg1.optDevices[loc2].userName;
-                    loc3.type = "optDevices";
-                    loc3.data = arg1.optDevices[loc2];
-                    loc3.moneyValue = arg1.optDevices[loc2].sellPrice[0];
-                    if (arg1.optDevices[loc2].isRemovable) 
-                    {
-                        loc3.isRemovable = true;
-                        loc3.inInventory = true;
-                        loc1.elements.push(loc3);
-                    }
-                    else 
-                    {
-                        loc3.removePrice = this._removePrice;
-                        loc3.isRemovable = false;
-                        loc3.inInventory = true;
-                        this.complexDevicesArr.elements.push(loc3);
-                    }
-                }
-                ++loc2;
+               _loc4_ = new SellDialogElement();
+               _loc4_.id = param1.optDevices[_loc3_].userName;
+               _loc4_.type = "optDevices";
+               _loc4_.data = param1.optDevices[_loc3_];
+               _loc4_.moneyValue = param1.optDevices[_loc3_].sellPrice[0];
+               if(param1.optDevices[_loc3_].isRemovable)
+               {
+                  _loc4_.isRemovable = true;
+                  _loc4_.inInventory = true;
+                  _loc2_.elements.push(_loc4_);
+               }
+               else
+               {
+                  _loc4_.removePrice = this._removePrice;
+                  _loc4_.isRemovable = false;
+                  _loc4_.inInventory = true;
+                  this.complexDevicesArr.elements.push(_loc4_);
+               }
             }
-            if (loc1.elements.length != 0) 
-            {
-                loc1.header = DIALOGS.VEHICLESELLDIALOG_OPTIONALDEVICE;
-                this._sellData.push(loc1);
-            }
-            if (this.complexDevicesArr.elements.length == 0) 
-            {
-                this.complexDevice.visible = false;
-                this.complDevBg.visible = false;
-                visible = false;
-            }
-            else 
-            {
-                this.complexDevicesArr.header = DIALOGS.VEHICLESELLDIALOG_COMPLEXOPTIONALDEVICE;
-                this.complexDevice.setData(this.complexDevicesArr);
-                this.complexDevice.visible = true;
-                this.complDevBg.visible = true;
-                this.complexDevice.validateNow();
-                this.complexDevicesArr.header = DIALOGS.VEHICLESELLDIALOG_COMPLEXOPTIONALDEVICE;
-                loc4 = 14;
-                this.devHeight = this.complexDevice.height + loc4;
-                this.complexDevice.setSize(477, this.complexDevice.height);
-            }
-            return;
-        }
+            _loc3_++;
+         }
+         if(_loc2_.elements.length != 0)
+         {
+            _loc2_.header = DIALOGS.VEHICLESELLDIALOG_OPTIONALDEVICE;
+            this._sellData.push(_loc2_);
+         }
+         if(this.complexDevicesArr.elements.length != 0)
+         {
+            this.complexDevicesArr.header = DIALOGS.VEHICLESELLDIALOG_COMPLEXOPTIONALDEVICE;
+            this.complexDevice.setData(this.complexDevicesArr);
+            this.complexDevice.visible = true;
+            this.complDevBg.visible = true;
+            this.complexDevice.validateNow();
+            this.complexDevicesArr.header = DIALOGS.VEHICLESELLDIALOG_COMPLEXOPTIONALDEVICE;
+            _loc5_ = 14;
+            this.devHeight = this.complexDevice.height + _loc5_;
+            this.complexDevice.setSize(477,this.complexDevice.height);
+         }
+         else
+         {
+            this.complexDevice.visible = false;
+            this.complDevBg.visible = false;
+            visible = false;
+         }
+      }
 
-        public function get deviceItemRenderer():__AS3__.vec.Vector.<net.wg.infrastructure.interfaces.ISaleItemBlockRenderer>
-        {
-            return this.complexDevice.getRenderers();
-        }
+      public function get deviceItemRenderer() : Vector.<ISaleItemBlockRenderer> {
+         return this.complexDevice.getRenderers();
+      }
 
-        public function getNextPosition():int
-        {
-            return this.complexDevice.y + this.complexDevice.height + PADDING_FOR_NEXT_ELEMENT;
-        }
+      public function getNextPosition() : int {
+         return this.complexDevice.y + this.complexDevice.height + PADDING_FOR_NEXT_ELEMENT;
+      }
+   }
 
-        internal static const PADDING_FOR_NEXT_ELEMENT:uint=5;
-
-        public var complexDevice:net.wg.gui.lobby.sellDialog.SellDialogListItemRenderer;
-
-        public var complDevBg:flash.display.MovieClip;
-
-        internal var devHeight:Number=0;
-
-        internal var complexDevicesArr:net.wg.data.VO.SellDialogItem;
-
-        internal var _removePrice:Number=0;
-
-        internal var _sellData:Array;
-    }
 }

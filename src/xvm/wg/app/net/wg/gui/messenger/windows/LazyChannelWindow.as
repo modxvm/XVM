@@ -1,23 +1,22 @@
-package net.wg.gui.messenger.windows 
+package net.wg.gui.messenger.windows
 {
-    import flash.display.*;
-    import scaleform.clik.utils.*;
-    
-    public class LazyChannelWindow extends net.wg.gui.messenger.windows.BaseChannelWindow
-    {
-        public function LazyChannelWindow()
-        {
-            super();
-            return;
-        }
+   import flash.display.Sprite;
+   import scaleform.clik.utils.Constraints;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            constraints.addElement("background", this.background, scaleform.clik.utils.Constraints.ALL);
-            return;
-        }
 
-        public var background:flash.display.Sprite;
-    }
+   public class LazyChannelWindow extends BaseChannelWindow
+   {
+          
+      public function LazyChannelWindow() {
+         super();
+      }
+
+      public var background:Sprite;
+
+      override protected function configUI() : void {
+         super.configUI();
+         constraints.addElement("background",this.background,Constraints.ALL);
+      }
+   }
+
 }

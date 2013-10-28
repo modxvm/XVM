@@ -1,29 +1,33 @@
-package org.idmedia.as3commons.util 
+package org.idmedia.as3commons.util
 {
-    public interface Map
-    {
-        function put(arg1:*, arg2:*):*;
 
-        function get(arg1:*):*;
 
-        function containsKey(arg1:*):Boolean;
+   public interface Map
+   {
+          
+      function put(param1:*, param2:*) : *;
 
-        function containsValue(arg1:*):Boolean;
+      function get(param1:*) : *;
 
-        function remove(arg1:*):*;
+      function containsKey(param1:*) : Boolean;
 
-        function clear():void;
+      function containsValue(param1:*) : Boolean;
 
-        function size():int;
+      function remove(param1:*) : *;
 
-        function values():org.idmedia.as3commons.util.Collection;
+      function clear() : void;
 
-        function keySet():org.idmedia.as3commons.util.Set;
+      function size() : int;
 
-        function entrySet():org.idmedia.as3commons.util.Set;
+      function values() : Collection;
 
-        function isEmpty():Boolean;
+      function keySet() : Set;
 
-        function putAll(arg1:org.idmedia.as3commons.util.Map):void;
-    }
+      function entrySet() : Set;
+
+      function isEmpty() : Boolean;
+
+      function putAll(param1:Map) : void;
+   }
+
 }

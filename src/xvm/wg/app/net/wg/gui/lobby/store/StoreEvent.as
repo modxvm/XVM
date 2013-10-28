@@ -1,28 +1,28 @@
-package net.wg.gui.lobby.store 
+package net.wg.gui.lobby.store
 {
-    import flash.events.*;
-    import net.wg.data.VO.*;
-    
-    public class StoreEvent extends flash.events.Event
-    {
-        public function StoreEvent(arg1:String, arg2:net.wg.data.VO.StoreTableData)
-        {
-            super(arg1, true, true);
-            this._data = arg2;
-            return;
-        }
+   import flash.events.Event;
+   import net.wg.data.VO.StoreTableData;
 
-        public function get data():net.wg.data.VO.StoreTableData
-        {
-            return this._data;
-        }
 
-        public static const BUY:String="storeBuy";
+   public class StoreEvent extends Event
+   {
+          
+      public function StoreEvent(param1:String, param2:StoreTableData) {
+         super(param1,true,true);
+         this._data = param2;
+      }
 
-        public static const SELL:String="storeSell";
+      public static const BUY:String = "storeBuy";
 
-        public static const INFO:String="storeInfo";
+      public static const SELL:String = "storeSell";
 
-        internal var _data:net.wg.data.VO.StoreTableData=null;
-    }
+      public static const INFO:String = "storeInfo";
+
+      private var _data:StoreTableData = null;
+
+      public function get data() : StoreTableData {
+         return this._data;
+      }
+   }
+
 }

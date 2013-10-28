@@ -1,104 +1,86 @@
-package scaleform.gfx 
+package scaleform.gfx
 {
-    import flash.display.*;
-    import flash.geom.*;
-    import flash.text.*;
-    
-    public final class Extensions extends Object
-    {
-        public function Extensions()
-        {
-            super();
-            return;
-        }
+   import flash.display.DisplayObject;
+   import flash.geom.Rectangle;
+   import flash.text.TextField;
 
-        public static function set enabled(arg1:Boolean):void
-        {
-            return;
-        }
 
-        public static function get enabled():Boolean
-        {
-            return false;
-        }
+   public final class Extensions extends Object
+   {
+          
+      public function Extensions() {
+         super();
+      }
 
-        public static function set noInvisibleAdvance(arg1:Boolean):void
-        {
-            return;
-        }
+      public static function set enabled(param1:Boolean) : void {
+          
+      }
 
-        public static function get noInvisibleAdvance():Boolean
-        {
-            return false;
-        }
+      public static function get enabled() : Boolean {
+         return false;
+      }
 
-        public static function getTopMostEntity(arg1:Number, arg2:Number, arg3:Boolean=true):flash.display.DisplayObject
-        {
-            return null;
-        }
+      public static function set noInvisibleAdvance(param1:Boolean) : void {
+          
+      }
 
-        public static function getMouseTopMostEntity(arg1:Boolean=true, arg2:uint=0):flash.display.DisplayObject
-        {
-            return null;
-        }
+      public static function get noInvisibleAdvance() : Boolean {
+         return false;
+      }
 
-        public static function setMouseCursorType(arg1:String, arg2:uint=0):void
-        {
-            return;
-        }
+      public static function getTopMostEntity(param1:Number, param2:Number, param3:Boolean=true) : DisplayObject {
+         return null;
+      }
 
-        public static function getMouseCursorType(arg1:uint=0):String
-        {
-            return "";
-        }
+      public static function getMouseTopMostEntity(param1:Boolean=true, param2:uint=0) : DisplayObject {
+         return null;
+      }
 
-        public static function get numControllers():uint
-        {
-            return 1;
-        }
+      public static function setMouseCursorType(param1:String, param2:uint=0) : void {
+          
+      }
 
-        public static function get visibleRect():flash.geom.Rectangle
-        {
-            return new flash.geom.Rectangle(0, 0, 0, 0);
-        }
+      public static function getMouseCursorType(param1:uint=0) : String {
+         return "";
+      }
 
-        public static function getEdgeAAMode(arg1:flash.display.DisplayObject):uint
-        {
-            return EDGEAA_INHERIT;
-        }
+      public static function get numControllers() : uint {
+         return 1;
+      }
 
-        public static function setEdgeAAMode(arg1:flash.display.DisplayObject, arg2:uint):void
-        {
-            return;
-        }
+      public static function get visibleRect() : Rectangle {
+         return new Rectangle(0,0,0,0);
+      }
 
-        public static function setIMEEnabled(arg1:flash.text.TextField, arg2:Boolean):void
-        {
-            return;
-        }
+      public static const EDGEAA_INHERIT:uint = 0;
 
-        public static function get isScaleform():Boolean
-        {
-            return false;
-        }
+      public static const EDGEAA_ON:uint = 1;
 
-        
-        {
-            isGFxPlayer = false;
-        }
+      public static const EDGEAA_OFF:uint = 2;
 
-        public static const EDGEAA_INHERIT:uint=0;
+      public static const EDGEAA_DISABLE:uint = 3;
 
-        public static const EDGEAA_ON:uint=1;
+      public static function getEdgeAAMode(param1:DisplayObject) : uint {
+         return EDGEAA_INHERIT;
+      }
 
-        public static const EDGEAA_OFF:uint=2;
+      public static function setEdgeAAMode(param1:DisplayObject, param2:uint) : void {
+          
+      }
 
-        public static const EDGEAA_DISABLE:uint=3;
+      public static function setIMEEnabled(param1:TextField, param2:Boolean) : void {
+          
+      }
 
-        public static var isGFxPlayer:Boolean=false;
+      public static function get isScaleform() : Boolean {
+         return false;
+      }
 
-        public static var CLIK_addedToStageCallback:Function;
+      public static var isGFxPlayer:Boolean = false;
 
-        public static var gfxProcessSound:Function;
-    }
+      public static var CLIK_addedToStageCallback:Function;
+
+      public static var gfxProcessSound:Function;
+   }
+
 }

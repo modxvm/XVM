@@ -1,28 +1,31 @@
-package net.wg.gui.lobby.vehicleBuyWindow 
+package net.wg.gui.lobby.vehicleBuyWindow
 {
-    import flash.text.*;
-    import net.wg.gui.components.advanced.*;
-    import net.wg.gui.components.controls.*;
-    import scaleform.clik.core.*;
-    
-    public class HeaderMc extends scaleform.clik.core.UIComponent
-    {
-        public function HeaderMc()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.text.TextField;
+   import net.wg.gui.components.advanced.TankIcon;
+   import net.wg.gui.components.advanced.TextAreaSimple;
+   import net.wg.gui.components.controls.IconText;
+   import net.wg.gui.components.controls.ScrollBar;
 
-        public var tankName:flash.text.TextField;
 
-        public var icon:net.wg.gui.components.advanced.TankIcon;
+   public class HeaderMc extends UIComponent
+   {
+          
+      public function HeaderMc() {
+         super();
+      }
 
-        public var tankDescr:net.wg.gui.components.advanced.TextAreaSimple;
+      public var tankName:TextField;
 
-        public var tankPriceLabel:flash.text.TextField;
+      public var icon:TankIcon;
 
-        public var tankPrice:net.wg.gui.components.controls.IconText;
+      public var tankDescr:TextAreaSimple;
 
-        public var descriptionScrollBar:net.wg.gui.components.controls.ScrollBar;
-    }
+      public var tankPriceLabel:TextField;
+
+      public var tankPrice:IconText;
+
+      public var descriptionScrollBar:ScrollBar;
+   }
+
 }

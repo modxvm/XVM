@@ -1,35 +1,30 @@
-package net.wg.gui.components.common.crosshair 
+package net.wg.gui.components.common.crosshair
 {
-    public class CrosshairPanelStrategic extends net.wg.gui.components.common.crosshair.CrosshairPanelBase
-    {
-        public function CrosshairPanelStrategic()
-        {
-            super();
-            return;
-        }
 
-        protected override function initCallbacks():void
-        {
-            return;
-        }
 
-        protected override function initView():void
-        {
-            this.setDefaultDistanceState();
-            onSetAmmoStock(0, 0, true, "critical");
-            return;
-        }
+   public class CrosshairPanelStrategic extends CrosshairPanelBase
+   {
+          
+      public function CrosshairPanelStrategic() {
+         super();
+      }
 
-        protected function onUpdateDistance(arg1:Number):void
-        {
-            g_modeMC.distanceLbl.text = arg1 + "m";
-            return;
-        }
+      override protected function initCallbacks() : void {
+          
+      }
 
-        internal function setDefaultDistanceState():void
-        {
-            g_modeMC.distanceLbl.text = "";
-            return;
-        }
-    }
+      override protected function initView() : void {
+         this.setDefaultDistanceState();
+         onSetAmmoStock(0,0,true,"critical");
+      }
+
+      protected function onUpdateDistance(param1:Number) : void {
+         g_modeMC.distanceLbl.text = param1 + "m";
+      }
+
+      private function setDefaultDistanceState() : void {
+         g_modeMC.distanceLbl.text = "";
+      }
+   }
+
 }

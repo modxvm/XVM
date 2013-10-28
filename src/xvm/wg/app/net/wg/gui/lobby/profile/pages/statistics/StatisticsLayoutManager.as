@@ -1,41 +1,38 @@
-package net.wg.gui.lobby.profile.pages.statistics 
+package net.wg.gui.lobby.profile.pages.statistics
 {
-    import flash.display.*;
-    import net.wg.gui.lobby.profile.*;
-    import net.wg.gui.lobby.profile.components.*;
-    import net.wg.gui.lobby.profile.data.*;
-    
-    public class StatisticsLayoutManager extends net.wg.gui.lobby.profile.data.SectionLayoutManager
-    {
-        public function StatisticsLayoutManager(arg1:Number, arg2:Number)
-        {
-            super(arg1, arg2);
-            return;
-        }
+   import net.wg.gui.lobby.profile.data.SectionLayoutManager;
+   import net.wg.gui.lobby.profile.ProfileConstants;
+   import flash.display.DisplayObject;
+   import net.wg.gui.lobby.profile.components.LineDescrIconText;
 
-        public override function setDimension(arg1:Number, arg2:Number):void
-        {
-            super.setDimension(arg1, arg2);
-            var loc1:*=store.length;
-            this.stepW = net.wg.gui.lobby.profile.ProfileConstants.WINDOW_CENTER_OFFSET / loc1 / (loc1 + 1);
-            return;
-        }
 
-        protected override function applyDimensionToItem(arg1:int):void
-        {
-            var loc1:*=null;
-            super.applyDimensionToItem(arg1);
-            if (!isInitialized) 
+   public class StatisticsLayoutManager extends SectionLayoutManager
+   {
+          
+      public function StatisticsLayoutManager(param1:Number, param2:Number) {
+         super(param1,param2);
+      }
+
+      private var stepW:int;
+
+      override public function setDimension(param1:Number, param2:Number) : void {
+         super.setDimension(param1,param2);
+         var _loc3_:uint = store.length;
+         this.stepW = ProfileConstants.WINDOW_CENTER_OFFSET / _loc3_ / (_loc3_ + 1);
+      }
+
+      override protected function applyDimensionToItem(param1:int) : void {
+         var _loc2_:DisplayObject = null;
+         super.applyDimensionToItem(param1);
+         if(!isInitialized)
+         {
+            _loc2_ = store[param1].item;
+            if(_loc2_  is  LineDescrIconText)
             {
-                loc1 = store[arg1].item;
-                if (loc1 is net.wg.gui.lobby.profile.components.LineDescrIconText) 
-                {
-                    loc1.x = this.stepW + arg1 * (loc1.width + this.stepW);
-                }
+               _loc2_.x = this.stepW + param1 * (_loc2_.width + this.stepW);
             }
-            return;
-        }
+         }
+      }
+   }
 
-        internal var stepW:int;
-    }
 }

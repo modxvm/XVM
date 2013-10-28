@@ -1,32 +1,31 @@
-package net.wg.infrastructure.events 
+package net.wg.infrastructure.events
 {
-    import flash.display.*;
-    import flash.events.*;
-    
-    public class LibraryLoaderEvent extends flash.events.Event
-    {
-        public function LibraryLoaderEvent(arg1:String, arg2:flash.display.Loader, arg3:String, arg4:Boolean=false, arg5:Boolean=false)
-        {
-            super(arg1, arg4, arg5);
-            this.loader = arg2;
-            this.url = arg3;
-            return;
-        }
+   import flash.events.Event;
+   import flash.display.Loader;
 
-        public override function clone():flash.events.Event
-        {
-            return new net.wg.infrastructure.events.LibraryLoaderEvent(type, this.loader, this.url, bubbles, cancelable);
-        }
 
-        public override function toString():String
-        {
-            return formatToString("LibraryLoaderEvent", "type", "bubbles", "cancelable", "eventPhase");
-        }
+   public class LibraryLoaderEvent extends Event
+   {
+          
+      public function LibraryLoaderEvent(param1:String, param2:Loader, param3:String, param4:Boolean=false, param5:Boolean=false) {
+         super(param1,param4,param5);
+         this.loader = param2;
+         this.url = param3;
+      }
 
-        public static const LOADED:String="libLoaded";
+      public static const LOADED:String = "libLoaded";
 
-        public var loader:flash.display.Loader;
+      public var loader:Loader;
 
-        public var url:String;
-    }
+      public var url:String;
+
+      override public function clone() : Event {
+         return new LibraryLoaderEvent(type,this.loader,this.url,bubbles,cancelable);
+      }
+
+      override public function toString() : String {
+         return formatToString("LibraryLoaderEvent","type","bubbles","cancelable","eventPhase");
+      }
+   }
+
 }

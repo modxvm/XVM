@@ -1,74 +1,79 @@
-package net.wg.data.components 
+package net.wg.data.components
 {
-    import __AS3__.vec.*;
-    import net.wg.data.constants.*;
-    import net.wg.data.daapi.*;
-    import net.wg.infrastructure.exceptions.*;
-    import net.wg.infrastructure.interfaces.*;
-    import org.idmedia.as3commons.util.*;
-    
-    public class AbstractContextItemGenerator extends Object implements net.wg.infrastructure.interfaces.IUserContextMenuGenerator
-    {
-        public function AbstractContextItemGenerator()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.interfaces.IUserContextMenuGenerator;
+   import __AS3__.vec.Vector;
+   import net.wg.infrastructure.interfaces.IContextItem;
+   import net.wg.data.daapi.PlayerInfo;
+   import org.idmedia.as3commons.util.Map;
+   import net.wg.data.constants.Values;
+   import net.wg.infrastructure.exceptions.AbstractException;
+   import net.wg.data.constants.Errors;
 
-        public function generateData(arg1:net.wg.data.daapi.PlayerInfo, arg2:Number=NaN):__AS3__.vec.Vector.<net.wg.infrastructure.interfaces.IContextItem>
-        {
-            return this.getContextItems(arg1, this.getSimpleDataIDs);
-        }
 
-        protected function getDenunciationsSubmenu(arg1:Number, arg2:net.wg.data.daapi.PlayerInfo, arg3:Boolean=false):net.wg.infrastructure.interfaces.IContextItem
-        {
-            var loc1:*="appeal";
-            var loc2:*=App.utils.locale.makeString(MENU.CONTEXTMENU_APPEAL) + " (" + arg1 + ")";
-            var loc3:*=!(arg1 == 0 || arg3);
-            var loc4:*=this.getContextItems(arg2, this.getDenunciationsIDs);
-            var loc5:*;
-            return loc5 = new net.wg.data.components.ContextItem(loc1, loc2, {"enabled":loc3}, loc4);
-        }
+   public class AbstractContextItemGenerator extends Object implements IUserContextMenuGenerator
+   {
+          
+      public function AbstractContextItemGenerator() {
+         super();
+      }
 
-        protected function getContextItems(arg1:net.wg.data.daapi.PlayerInfo, arg2:Function):__AS3__.vec.Vector.<net.wg.infrastructure.interfaces.IContextItem>
-        {
-            var loc3:*=null;
-            var loc1:*=new Vector.<net.wg.infrastructure.interfaces.IContextItem>();
-            var loc2:*=arg2(arg1);
-            var loc4:*=0;
-            var loc5:*=loc2.keySet().toArray();
-            for each (loc3 in loc5) 
+      private var _isEnabledInRoaming:Boolean = true;
+
+      public function generateData(param1:PlayerInfo, param2:Number=NaN) : Vector.<IContextItem> {
+         this.isEnabledInRoaming = param1.isEnabledInRoaming;
+         return this.getContextItems(param1,this.getSimpleDataIDs);
+      }
+
+      protected function getDenunciationsSubmenu(param1:Number, param2:PlayerInfo, param3:Boolean=false) : IContextItem {
+         var _loc4_:* = "appeal";
+         var _loc5_:* = App.utils.locale.makeString(MENU.CONTEXTMENU_APPEAL) + " (" + param1 + ")";
+         var _loc6_:* = !(param1 == 0 || (param3));
+         var _loc7_:Vector.<IContextItem> = this.getContextItems(param2,this.getDenunciationsIDs);
+         var _loc8_:IContextItem = new ContextItem(_loc4_,_loc5_,{"enabled":_loc6_},_loc7_);
+         return _loc8_;
+      }
+
+      protected function getContextItems(param1:PlayerInfo, param2:Function) : Vector.<IContextItem> {
+         var _loc5_:String = null;
+         var _loc3_:Vector.<IContextItem> = new Vector.<IContextItem>();
+         var _loc4_:Map = param2(param1);
+         for each (_loc5_ in _loc4_.keySet().toArray())
+         {
+            if(_loc5_ != Values.EMPTY_STR)
             {
-                if (loc3 == net.wg.data.constants.Values.EMPTY_STR) 
-                {
-                    continue;
-                }
-                loc1.push(new net.wg.data.components.UserContextItem(loc3, loc2.get(loc3)));
+               _loc3_.push(new UserContextItem(_loc5_,_loc4_.get(_loc5_)));
             }
-            return loc1;
-        }
+         }
+         return _loc3_;
+      }
 
-        protected function getDenunciationsIDs(arg1:net.wg.data.daapi.PlayerInfo):org.idmedia.as3commons.util.Map
-        {
-            throw new net.wg.infrastructure.exceptions.AbstractException("getDenunciationsIDs" + net.wg.data.constants.Errors.ABSTRACT_INVOKE);
-        }
+      protected function getDenunciationsIDs(param1:PlayerInfo) : Map {
+         throw new AbstractException("getDenunciationsIDs" + Errors.ABSTRACT_INVOKE);
+      }
 
-        protected function getSimpleDataIDs(arg1:net.wg.data.daapi.PlayerInfo):org.idmedia.as3commons.util.Map
-        {
-            var loc1:*=arg1.isFriend ? "removeFromFriends" : "addToFriends";
-            var loc2:*=arg1.isIgnored ? "removeFromIgnored" : "addToIgnored";
-            var loc3:*=arg1.isFriend ? "createPrivateChannel" : net.wg.data.constants.Values.EMPTY_STR;
-            var loc4:*=net.wg.data.constants.Values.EMPTY_STR;
-            if (App.voiceChatMgr.isVOIPEnabledS()) 
-            {
-                loc4 = arg1.isMuted ? "unsetMuted" : "setMuted";
-            }
-            return this.createSimpleDataIDs(loc3, loc1, loc2, loc4);
-        }
+      protected function getSimpleDataIDs(param1:PlayerInfo) : Map {
+         var _loc2_:String = param1.isFriend?"removeFromFriends":"addToFriends";
+         var _loc3_:String = param1.isIgnored?"removeFromIgnored":"addToIgnored";
+         var _loc4_:String = param1.isFriend?"createPrivateChannel":Values.EMPTY_STR;
+         var _loc5_:String = Values.EMPTY_STR;
+         if(App.voiceChatMgr.isVOIPEnabledS())
+         {
+            _loc5_ = param1.isMuted?"unsetMuted":"setMuted";
+         }
+         return this.createSimpleDataIDs(_loc4_,_loc2_,_loc3_,_loc5_);
+      }
 
-        protected function createSimpleDataIDs(arg1:String, arg2:String, arg3:String, arg4:String):org.idmedia.as3commons.util.Map
-        {
-            throw new net.wg.infrastructure.exceptions.AbstractException("createSimpleDataIDs" + net.wg.data.constants.Errors.ABSTRACT_INVOKE);
-        }
-    }
+      protected function createSimpleDataIDs(param1:String, param2:String, param3:String, param4:String) : Map {
+         throw new AbstractException("createSimpleDataIDs" + Errors.ABSTRACT_INVOKE);
+      }
+
+      public function get isEnabledInRoaming() : Boolean {
+         return this._isEnabledInRoaming;
+      }
+
+      public function set isEnabledInRoaming(param1:Boolean) : void {
+         this._isEnabledInRoaming = param1;
+      }
+   }
+
 }

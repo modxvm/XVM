@@ -1,158 +1,137 @@
-package net.wg.infrastructure.managers 
+package net.wg.infrastructure.managers
 {
-    import flash.display.*;
-    import flash.events.*;
-    import flash.net.*;
-    import flash.system.*;
-    import flash.utils.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import net.wg.infrastructure.events.*;
-    import net.wg.infrastructure.interfaces.*;
-    
-    public class LoaderManager extends net.wg.infrastructure.base.meta.impl.LoaderManagerMeta implements net.wg.infrastructure.base.meta.ILoaderManagerMeta
-    {
-        public function LoaderManager()
-        {
-            super();
-            this.loaderToToken = new flash.utils.Dictionary(true);
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.LoaderManagerMeta;
+   import net.wg.infrastructure.base.meta.ILoaderManagerMeta;
+   import flash.utils.Dictionary;
+   import flash.net.URLRequest;
+   import flash.display.Loader;
+   import flash.system.LoaderContext;
+   import flash.system.ApplicationDomain;
+   import flash.events.Event;
+   import flash.events.IOErrorEvent;
+   import flash.display.LoaderInfo;
+   import net.wg.infrastructure.interfaces.IView;
+   import net.wg.infrastructure.events.LoaderEvent;
 
-        public function as_loadView(arg1:Object, arg2:String, arg3:String, arg4:String):void
-        {
-            var loc1:*=new flash.net.URLRequest(arg1.url);
-            var loc2:*=new flash.display.Loader();
-            var loc3:*=new flash.system.LoaderContext(false, flash.system.ApplicationDomain.currentDomain);
-            loc2.load(loc1, loc3);
-            loc2.contentLoaderInfo.addEventListener(flash.events.Event.INIT, this.onSWFLoaded, false, 0, true);
-            loc2.contentLoaderInfo.addEventListener(flash.events.IOErrorEvent.IO_ERROR, this.onSWFLoadError, false, 0, true);
-            this.loaderToToken[loc2] = new LoadInfo(arg2, arg3, arg4, arg1);
-            return;
-        }
 
-        protected override function onDispose():void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            var loc3:*=null;
-            var loc4:*=0;
-            var loc5:*=this.loaderToToken;
-            for (loc1 in loc5) 
+   public class LoaderManager extends LoaderManagerMeta implements ILoaderManagerMeta
+   {
+          
+      public function LoaderManager() {
+         super();
+         this.loaderToToken = new Dictionary(true);
+      }
+
+      private var loaderToToken:Dictionary;
+
+      public function as_loadView(param1:Object, param2:String, param3:String, param4:String) : void {
+         var _loc5_:URLRequest = new URLRequest(param1.url);
+         var _loc6_:Loader = new Loader();
+         var _loc7_:LoaderContext = new LoaderContext(false,ApplicationDomain.currentDomain);
+         _loc6_.load(_loc5_,_loc7_);
+         _loc6_.contentLoaderInfo.addEventListener(Event.INIT,this.onSWFLoaded,false,0,true);
+         _loc6_.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,this.onSWFLoadError,false,0,true);
+         this.loaderToToken[_loc6_] = new LoadInfo(param2,param3,param4,param1);
+      }
+
+      override protected function onDispose() : void {
+         var _loc1_:Object = null;
+         var _loc2_:Loader = null;
+         var _loc3_:LoadInfo = null;
+         for (_loc1_ in this.loaderToToken)
+         {
+            _loc3_ = this.loaderToToken[_loc1_];
+            _loc3_.dispose();
+            _loc2_ = _loc1_ as Loader;
+            _loc2_.close();
+            _loc2_.contentLoaderInfo.removeEventListener(Event.INIT,this.onSWFLoaded);
+            _loc2_.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR,this.onSWFLoadError);
+            delete this.loaderToToken[[_loc2_]];
+         }
+      }
+
+      private function onSWFLoaded(param1:Event) : void {
+         var event:Event = param1;
+         var info:LoaderInfo = LoaderInfo(event.currentTarget);
+         var loader:Loader = info.loader;
+         info.removeEventListener(Event.INIT,this.onSWFLoaded);
+         info.removeEventListener(IOErrorEvent.IO_ERROR,this.onSWFLoadError);
+         var data:LoadInfo = this.loaderToToken[loader];
+         var config:Object = data.config;
+         var token:String = data.token;
+         var alias:String = data.alias;
+         var name:String = data.name;
+         var view:IView = loader.content as IView;
+         if(!view)
+         {
+            try
             {
-                loc3 = this.loaderToToken[loc1];
-                loc3.dispose();
-                loc2 = loc1 as flash.display.Loader;
-                loc2.close();
-                loc2.contentLoaderInfo.removeEventListener(flash.events.Event.INIT, this.onSWFLoaded);
-                loc2.contentLoaderInfo.removeEventListener(flash.events.IOErrorEvent.IO_ERROR, this.onSWFLoadError);
-                delete this.loaderToToken[loc2];
+               view = IView(loader.content["main"]);
             }
-            return;
-        }
-
-        internal function onSWFLoaded(arg1:flash.events.Event):void
-        {
-            var event:flash.events.Event;
-            var info:flash.display.LoaderInfo;
-            var loader:flash.display.Loader;
-            var data:LoadInfo;
-            var config:Object;
-            var token:String;
-            var alias:String;
-            var name:String;
-            var view:net.wg.infrastructure.interfaces.IView;
-
-            var loc1:*;
-            event = arg1;
-            info = flash.display.LoaderInfo(event.currentTarget);
-            loader = info.loader;
-            info.removeEventListener(flash.events.Event.INIT, this.onSWFLoaded);
-            info.removeEventListener(flash.events.IOErrorEvent.IO_ERROR, this.onSWFLoadError);
-            data = this.loaderToToken[loader];
-            config = data.config;
-            token = data.token;
-            alias = data.alias;
-            name = data.name;
-            view = loader.content as net.wg.infrastructure.interfaces.IView;
-            if (!view) 
+            catch(e:*)
             {
-                try 
-                {
-                    view = net.wg.infrastructure.interfaces.IView(loader.content["main"]);
-                }
-                catch (e:*)
-                {
-                };
             }
-            if (view) 
-            {
-                view.as_token = token;
-                view.as_config = config;
-                view.as_alias = alias;
-                view.as_name = name;
-                view.loader = loader;
-                dispatchEvent(new net.wg.infrastructure.events.LoaderEvent(net.wg.infrastructure.events.LoaderEvent.VIEW_LOADED, config, token, view));
-                viewLoadedS(token, view);
-            }
-            else 
-            {
-                viewInitializationErrorS(token, config, alias);
-            }
-            data.dispose();
-            delete this.loaderToToken[loader];
-            return;
-        }
+         }
+         if(view)
+         {
+            view.as_token = token;
+            view.as_config = config;
+            view.as_alias = alias;
+            view.as_name = name;
+            view.loader = loader;
+            dispatchEvent(new LoaderEvent(LoaderEvent.VIEW_LOADED,config,token,view));
+            viewLoadedS(token,view);
+         }
+         else
+         {
+            viewInitializationErrorS(token,config,alias);
+         }
+         data.dispose();
+         delete this.loaderToToken[[loader]];
+      }
 
-        internal function onSWFLoadError(arg1:flash.events.IOErrorEvent):void
-        {
-            var loc1:*=flash.display.LoaderInfo(arg1.currentTarget);
-            var loc2:*=loc1.loader;
-            loc1.removeEventListener(flash.events.Event.INIT, this.onSWFLoaded);
-            loc1.removeEventListener(flash.events.IOErrorEvent.IO_ERROR, this.onSWFLoadError);
-            var loc3:*;
-            var loc4:*=(loc3 = this.loaderToToken[loc2]).token;
-            var loc5:*=loc3.alias;
-            var loc6:*=loc3.config;
-            viewLoadErrorS(loc4, loc5, arg1.text);
-            loc3.dispose();
-            delete this.loaderToToken[loc2];
-            dispatchEvent(new net.wg.infrastructure.events.LoaderEvent(net.wg.infrastructure.events.LoaderEvent.VIEW_LOAD_ERROR, loc6));
-            loc2.unloadAndStop();
-            return;
-        }
+      private function onSWFLoadError(param1:IOErrorEvent) : void {
+         var _loc2_:LoaderInfo = LoaderInfo(param1.currentTarget);
+         var _loc3_:Loader = _loc2_.loader;
+         _loc2_.removeEventListener(Event.INIT,this.onSWFLoaded);
+         _loc2_.removeEventListener(IOErrorEvent.IO_ERROR,this.onSWFLoadError);
+         var _loc4_:LoadInfo = this.loaderToToken[_loc3_];
+         var _loc5_:String = _loc4_.token;
+         var _loc6_:String = _loc4_.alias;
+         var _loc7_:Object = _loc4_.config;
+         viewLoadErrorS(_loc5_,_loc6_,param1.text);
+         _loc4_.dispose();
+         delete this.loaderToToken[[_loc3_]];
+         dispatchEvent(new LoaderEvent(LoaderEvent.VIEW_LOAD_ERROR,_loc7_));
+         _loc3_.unloadAndStop();
+      }
+   }
 
-        internal var loaderToToken:flash.utils.Dictionary;
-    }
 }
 
+   class LoadInfo extends Object
+   {
+          
+      function LoadInfo(param1:String, param2:String, param3:String, param4:Object) {
+         super();
+         this.token = param1;
+         this.alias = param2;
+         this.name = param3;
+         this.config = param4;
+      }
 
-class LoadInfo extends Object
-{
-    public function LoadInfo(arg1:String, arg2:String, arg3:String, arg4:Object)
-    {
-        super();
-        this.token = arg1;
-        this.alias = arg2;
-        this.name = arg3;
-        this.config = arg4;
-        return;
-    }
+      public var token:String;
 
-    public function dispose():void
-    {
-        this.token = null;
-        this.alias = null;
-        this.name = null;
-        this.config = null;
-        return;
-    }
+      public var alias:String;
 
-    public var token:String;
+      public var name:String;
 
-    public var alias:String;
+      public var config:Object;
 
-    public var name:String;
-
-    public var config:Object;
-}
+      public function dispose() : void {
+         this.token = null;
+         this.alias = null;
+         this.name = null;
+         this.config = null;
+      }
+   }

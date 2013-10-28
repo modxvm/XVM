@@ -1,303 +1,335 @@
-package net.wg.gui.lobby.battleResults 
+package net.wg.gui.lobby.battleResults
 {
-    import flash.display.*;
-    import flash.text.*;
-    import net.wg.gui.components.advanced.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.events.*;
-    import net.wg.infrastructure.interfaces.*;
-    import scaleform.clik.core.*;
-    import scaleform.clik.data.*;
-    import scaleform.clik.events.*;
-    
-    public class TeamStats extends scaleform.clik.core.UIComponent implements net.wg.infrastructure.interfaces.IViewStackContent
-    {
-        public function TeamStats()
-        {
-            this.iconTypeToKey = {"squad":{"key":"prebattleID", "isNumeric":true, "index":0}, "player":{"key":"playerName", "isNumeric":false, "index":1}, "tank":{"key":"vehicleSort", "isNumeric":true, "index":2}, "damage":{"key":"damageDealt", "isNumeric":true, "index":3}, "frag":{"key":"realKills", "isNumeric":true, "index":4}, "xp":{"key":"xp", "isNumeric":true, "index":5}, "medal":{"key":"medalsCount", "isNumeric":true, "index":6}};
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import net.wg.infrastructure.interfaces.IViewStackContent;
+   import flash.text.TextField;
+   import net.wg.gui.components.advanced.SortableHeaderButtonBar;
+   import scaleform.clik.events.ButtonEvent;
+   import net.wg.gui.events.FinalStatisticEvent;
+   import scaleform.clik.events.ListEvent;
+   import net.wg.gui.events.ListEventEx;
+   import scaleform.clik.data.DataProvider;
+   import net.wg.gui.components.advanced.InteractiveSortingButton;
+   import net.wg.gui.components.controls.ScrollingListEx;
+   import flash.display.InteractiveObject;
+   import net.wg.gui.components.advanced.SortingButton;
+   import net.wg.gui.components.advanced.SortingButtonInfo;
 
-        protected override function configUI():void
-        {
-            var loc1:*=null;
-            super.configUI();
-            var loc6:*;
-            this.header2.dataProvider = loc6 = this.getHeadersProvider();
-            this.header1.dataProvider = loc6;
-            this.header1.tabEnabled = false;
-            this.header1.focusable = false;
-            this.header1.validateNow();
-            this.header2.validateNow();
-            this.ownTitle.text = BATTLE_RESULTS.TEAM_STATS_OWNTEAM;
-            this.enemyTitle.text = BATTLE_RESULTS.TEAM_STATS_ENEMYTEAM;
-            this.header2.tabEnabled = false;
-            this.header2.focusable = false;
-            loc1 = this.myParent.data;
-            this.team1Stats.list = this.team1List;
-            this.team2Stats.list = this.team2List;
-            this.team1Stats.visible = loc6 = false;
-            this.team2Stats.visible = loc6;
-            this.team2List.mouseEnabled = loc6 = false;
-            this.team1List.mouseEnabled = loc6;
-            this.header1.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onHeaderClick);
-            this.header2.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onHeaderClick);
-            this.myParent.addEventListener(net.wg.gui.events.FinalStatisticEvent.HIDE_STATS_VIEW, this.hideStatsView);
-            this.team1List.addEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onItemSelect);
-            this.team2List.addEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onItemSelect);
-            this.team1List.addEventListener(net.wg.gui.events.ListEventEx.ITEM_CLICK, this.onItemSelect);
-            this.team2List.addEventListener(net.wg.gui.events.ListEventEx.ITEM_CLICK, this.onItemSelect);
-            this.team1List.dataProvider = new scaleform.clik.data.DataProvider(loc1.team1);
-            this.team2List.dataProvider = new scaleform.clik.data.DataProvider(loc1.team2);
-            var loc2:*=loc1.common.iconType;
-            var loc3:*=loc1.common.sortDirection;
-            this.header2.selectedIndex = loc6 = this.iconTypeToKey[loc2].index;
-            this.header1.selectedIndex = loc6;
-            var loc4:*=net.wg.gui.components.advanced.InteractiveSortingButton(this.header1.getButtonAt(this.iconTypeToKey[loc2].index));
-            var loc5:*=net.wg.gui.components.advanced.InteractiveSortingButton(this.header2.getButtonAt(this.iconTypeToKey[loc2].index));
-            loc5.sortDirection = loc6 = loc3;
-            loc4.sortDirection = loc6;
-            this.applySort(loc2, loc3);
-            return;
-        }
 
-        internal function hideStatsView(arg1:net.wg.gui.events.FinalStatisticEvent):void
-        {
-            this.team1List.selectedIndex = -1;
-            this.team2List.selectedIndex = -1;
-            return;
-        }
-
-        internal function onItemSelect(arg1:scaleform.clik.events.ListEvent):void
-        {
-            var loc1:*=null;
-            if (arg1.type == net.wg.gui.events.ListEventEx.ITEM_CLICK) 
+   public class TeamStats extends UIComponent implements IViewStackContent
+   {
+          
+      public function TeamStats() {
+         this.iconTypeToKey =
             {
-                if (arg1.target.selectedIndex != -1) 
-                {
-                    arg1.target.selectedIndex = -1;
-                }
-                if (App.stage.focus != arg1.target) 
-                {
-                    App.utils.focusHandler.setFocus(flash.display.InteractiveObject(arg1.target));
-                }
+               "squad":
+                  {
+                     "key":"prebattleID",
+                     "isNumeric":true,
+                     "index":0
+                  }
+               ,
+               "player":
+                  {
+                     "key":"playerName",
+                     "isNumeric":false,
+                     "index":1
+                  }
+               ,
+               "tank":
+                  {
+                     "key":"vehicleSort",
+                     "isNumeric":true,
+                     "index":2
+                  }
+               ,
+               "damage":
+                  {
+                     "key":"damageDealt",
+                     "isNumeric":true,
+                     "index":3
+                  }
+               ,
+               "frag":
+                  {
+                     "key":"realKills",
+                     "isNumeric":true,
+                     "index":4
+                  }
+               ,
+               "xp":
+                  {
+                     "key":"xp",
+                     "isNumeric":true,
+                     "index":5
+                  }
+               ,
+               "medal":
+                  {
+                     "key":"medalsCount",
+                     "isNumeric":true,
+                     "index":6
+                  }
+               
             }
-            if (arg1.target.selectedIndex != -1) 
+         ;
+         super();
+      }
+
+      private static const SQUAD:String = "squad";
+
+      private static const PLAYER:String = "player";
+
+      private static const TANK:String = "tank";
+
+      private static const DAMAGE:String = "damage";
+
+      private static const FRAG:String = "frag";
+
+      private static const XP:String = "xp";
+
+      private static const MEDAL:String = "medal";
+
+      private static const MAX_TEAM_LEN:Number = 15;
+
+      public var team1List:TeamStatsList;
+
+      public var team2List:TeamStatsList;
+
+      public var team1Stats:TeamMemberStatsView;
+
+      public var team2Stats:TeamMemberStatsView;
+
+      public var ownTitle:TextField;
+
+      public var enemyTitle:TextField;
+
+      private var _changeIndexOnFocus:Boolean = true;
+
+      public var header1:SortableHeaderButtonBar;
+
+      public var header2:SortableHeaderButtonBar;
+
+      private var iconTypeToKey:Object;
+
+      override protected function configUI() : void {
+         var _loc1_:Object = null;
+         super.configUI();
+         this.header1.dataProvider = this.header2.dataProvider = this.getHeadersProvider();
+         this.header1.tabEnabled = false;
+         this.header1.focusable = false;
+         this.header1.validateNow();
+         this.header2.validateNow();
+         this.ownTitle.text = BATTLE_RESULTS.TEAM_STATS_OWNTEAM;
+         this.enemyTitle.text = BATTLE_RESULTS.TEAM_STATS_ENEMYTEAM;
+         this.header2.tabEnabled = false;
+         this.header2.focusable = false;
+         _loc1_ = this.myParent.data;
+         this.team1Stats.list = this.team1List;
+         this.team2Stats.list = this.team2List;
+         this.team2Stats.visible = this.team1Stats.visible = false;
+         this.team1List.mouseEnabled = this.team2List.mouseEnabled = false;
+         this.header1.addEventListener(ButtonEvent.CLICK,this.onHeaderClick);
+         this.header2.addEventListener(ButtonEvent.CLICK,this.onHeaderClick);
+         this.myParent.addEventListener(FinalStatisticEvent.HIDE_STATS_VIEW,this.hideStatsView);
+         this.team1List.addEventListener(ListEvent.INDEX_CHANGE,this.onItemSelect);
+         this.team2List.addEventListener(ListEvent.INDEX_CHANGE,this.onItemSelect);
+         this.team1List.addEventListener(ListEventEx.ITEM_CLICK,this.onItemSelect);
+         this.team2List.addEventListener(ListEventEx.ITEM_CLICK,this.onItemSelect);
+         this.team1List.dataProvider = new DataProvider(_loc1_.team1);
+         this.team2List.dataProvider = new DataProvider(_loc1_.team2);
+         var _loc2_:String = _loc1_.common.iconType;
+         var _loc3_:String = _loc1_.common.sortDirection;
+         this.header1.selectedIndex = this.header2.selectedIndex = this.iconTypeToKey[_loc2_].index;
+         var _loc4_:InteractiveSortingButton = InteractiveSortingButton(this.header1.getButtonAt(this.iconTypeToKey[_loc2_].index));
+         var _loc5_:InteractiveSortingButton = InteractiveSortingButton(this.header2.getButtonAt(this.iconTypeToKey[_loc2_].index));
+         _loc4_.sortDirection = _loc5_.sortDirection = _loc3_;
+         this.applySort(_loc2_,_loc3_);
+      }
+
+      private function hideStatsView(param1:FinalStatisticEvent) : void {
+         this.team1List.selectedIndex = -1;
+         this.team2List.selectedIndex = -1;
+      }
+
+      private function onItemSelect(param1:ListEvent) : void {
+         var _loc2_:ScrollingListEx = null;
+         if(param1.type == ListEventEx.ITEM_CLICK)
+         {
+            if(param1.target.selectedIndex != -1)
             {
-                loc1 = arg1.target != this.team1List ? this.team1List : this.team2List;
-                loc1.selectedIndex = -1;
-                loc1.validateNow();
+               param1.target.selectedIndex = -1;
             }
-            if (arg1.itemData || arg1.target.selectedIndex == -1) 
+            if(App.stage.focus != param1.target)
             {
-                this.header1.visible = this.team2List.selectedIndex == -1;
-                var loc2:*;
-                this.team1List.visible = loc2 = this.team2List.selectedIndex == -1;
-                this.team1List.tabEnabled = loc2;
-                this.team1Stats.data = this.team1List.selectedIndex > -1 ? this.team1List.dataProvider[this.team1List.selectedIndex] : null;
-                this.team1Stats.visible = this.team1List.selectedIndex > -1 && this.team1Stats.data;
-                this.header2.visible = this.team1List.selectedIndex == -1;
-                this.team2List.visible = loc2 = this.team1List.selectedIndex == -1;
-                this.team2List.tabEnabled = loc2;
-                this.team2Stats.data = this.team2List.selectedIndex > -1 ? this.team2List.dataProvider[this.team2List.selectedIndex] : null;
-                this.team2Stats.visible = this.team2List.selectedIndex > -1 && this.team2Stats.data;
+               App.utils.focusHandler.setFocus(InteractiveObject(param1.target));
             }
-            return;
-        }
+         }
+         if(param1.target.selectedIndex != -1)
+         {
+            _loc2_ = param1.target == this.team1List?this.team2List:this.team1List;
+            _loc2_.selectedIndex = -1;
+            _loc2_.validateNow();
+         }
+         if((param1.itemData) || param1.target.selectedIndex == -1)
+         {
+            this.header1.visible = this.team2List.selectedIndex == -1;
+            this.team1List.tabEnabled = this.team1List.visible = this.team2List.selectedIndex == -1;
+            this.team1Stats.data = this.team1List.selectedIndex > -1?this.team1List.dataProvider[this.team1List.selectedIndex]:null;
+            this.team1Stats.visible = this.team1List.selectedIndex > -1 && (this.team1Stats.data);
+            this.header2.visible = this.team1List.selectedIndex == -1;
+            this.team2List.tabEnabled = this.team2List.visible = this.team1List.selectedIndex == -1;
+            this.team2Stats.data = this.team2List.selectedIndex > -1?this.team2List.dataProvider[this.team2List.selectedIndex]:null;
+            this.team2Stats.visible = this.team2List.selectedIndex > -1 && (this.team2Stats.data);
+         }
+      }
 
-        public function get myParent():net.wg.gui.lobby.battleResults.BattleResults
-        {
-            return net.wg.gui.lobby.battleResults.BattleResults(parent.parent.parent);
-        }
+      public function get myParent() : BattleResults {
+         return BattleResults(parent.parent.parent);
+      }
 
-        internal function onHeaderClick(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            var loc1:*=null;
-            if (arg1.target is net.wg.gui.components.advanced.InteractiveSortingButton) 
+      private function onHeaderClick(param1:ButtonEvent) : void {
+         var _loc2_:InteractiveSortingButton = null;
+         if(param1.target  is  InteractiveSortingButton)
+         {
+            if(param1.currentTarget == this.header1)
             {
-                if (arg1.currentTarget != this.header1) 
-                {
-                    this.header1.selectedIndex = this.header2.selectedIndex;
-                    loc1 = net.wg.gui.components.advanced.InteractiveSortingButton(this.header1.getButtonAt(this.header2.selectedIndex));
-                }
-                else 
-                {
-                    this.header2.selectedIndex = this.header1.selectedIndex;
-                    loc1 = net.wg.gui.components.advanced.InteractiveSortingButton(this.header2.getButtonAt(this.header1.selectedIndex));
-                }
-                loc1.sortDirection = net.wg.gui.components.advanced.InteractiveSortingButton(arg1.target).sortDirection;
-                this.applySort(loc1.id, loc1.sortDirection);
+               this.header2.selectedIndex = this.header1.selectedIndex;
+               _loc2_ = InteractiveSortingButton(this.header2.getButtonAt(this.header1.selectedIndex));
             }
-            return;
-        }
-
-        internal function applySort(arg1:String, arg2:String):void
-        {
-            var loc1:*=0;
-            if (this.iconTypeToKey[arg1].isNumeric) 
+            else
             {
-                loc1 = loc1 | Array.NUMERIC;
+               this.header1.selectedIndex = this.header2.selectedIndex;
+               _loc2_ = InteractiveSortingButton(this.header1.getButtonAt(this.header2.selectedIndex));
             }
-            else 
-            {
-                loc1 = loc1 | Array.CASEINSENSITIVE;
-            }
-            if (arg2 == net.wg.gui.components.advanced.SortingButton.DESCENDING_SORT) 
-            {
-                loc1 = loc1 | Array.DESCENDING;
-            }
-            var loc2:*;
-            (loc2 = scaleform.clik.data.DataProvider(this.team1List.dataProvider).slice()).sortOn(this.iconTypeToKey[arg1].key, loc1);
-            this.team1List.selectedIndex = -1;
-            this.team1List.dataProvider = new scaleform.clik.data.DataProvider(loc2);
-            (loc2 = scaleform.clik.data.DataProvider(this.team2List.dataProvider).slice()).sortOn(this.iconTypeToKey[arg1].key, loc1);
-            this.team2List.selectedIndex = -1;
-            this.team2List.dataProvider = new scaleform.clik.data.DataProvider(loc2);
-            this.myParent.saveSortingS(arg1, arg2);
-            return;
-        }
+            _loc2_.sortDirection = InteractiveSortingButton(param1.target).sortDirection;
+            this.applySort(_loc2_.id,_loc2_.sortDirection);
+         }
+      }
 
-        public override function dispose():void
-        {
-            super.dispose();
-            this.header1.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onHeaderClick);
-            this.header2.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onHeaderClick);
-            this.team1List.removeEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onItemSelect);
-            this.team2List.removeEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onItemSelect);
-            this.team1List.removeEventListener(net.wg.gui.events.ListEventEx.ITEM_CLICK, this.onItemSelect);
-            this.team2List.removeEventListener(net.wg.gui.events.ListEventEx.ITEM_CLICK, this.onItemSelect);
-            this.myParent.removeEventListener(net.wg.gui.events.FinalStatisticEvent.HIDE_STATS_VIEW, this.hideStatsView);
-            return;
-        }
+      private function applySort(param1:String, param2:String) : void {
+         var _loc3_:Number = 0;
+         if(this.iconTypeToKey[param1].isNumeric)
+         {
+            _loc3_ = _loc3_ | Array.NUMERIC;
+         }
+         else
+         {
+            _loc3_ = _loc3_ | Array.CASEINSENSITIVE;
+         }
+         if(param2 == SortingButton.DESCENDING_SORT)
+         {
+            _loc3_ = _loc3_ | Array.DESCENDING;
+         }
+         var _loc4_:Array = DataProvider(this.team1List.dataProvider).slice();
+         _loc4_.sortOn(this.iconTypeToKey[param1].key,_loc3_);
+         this.team1List.selectedIndex = -1;
+         this.team1List.dataProvider = new DataProvider(_loc4_);
+         _loc4_ = DataProvider(this.team2List.dataProvider).slice();
+         _loc4_.sortOn(this.iconTypeToKey[param1].key,_loc3_);
+         this.team2List.selectedIndex = -1;
+         this.team2List.dataProvider = new DataProvider(_loc4_);
+         this.myParent.saveSortingS(param1,param2);
+      }
 
-        internal function getHeadersProvider():scaleform.clik.data.DataProvider
-        {
-            var loc1:*="../maps/icons/buttons/tab_sort_button/ascendingSortArrow.png";
-            var loc2:*="../maps/icons/buttons/tab_sort_button/descendingSortArrow.png";
-            var loc3:*=new net.wg.gui.components.advanced.SortingButtonInfo();
-            loc3.iconId = SQUAD;
-            loc3.iconSource = "../maps/icons/buttons/tab_sort_button/squad.png";
-            loc3.ascendingIconSource = loc1;
-            loc3.descendingIconSource = loc2;
-            loc3.toolTip = BATTLE_RESULTS.TEAM_SQUADHEADER;
-            loc3.buttonWidth = 30;
-            loc3.buttonHeight = 30;
-            loc3.enabled = true;
-            loc3.defaultSortDirection = net.wg.gui.components.advanced.SortingButton.ASCENDING_SORT;
-            var loc4:*;
-            (loc4 = new net.wg.gui.components.advanced.SortingButtonInfo()).iconId = PLAYER;
-            loc4.iconSource = "../maps/icons/buttons/tab_sort_button/player.png";
-            loc4.ascendingIconSource = loc1;
-            loc4.descendingIconSource = loc2;
-            loc4.toolTip = BATTLE_RESULTS.TEAM_PLAYERHEADER;
-            loc4.buttonWidth = 135;
-            loc4.buttonHeight = 30;
-            loc4.enabled = true;
-            loc4.defaultSortDirection = net.wg.gui.components.advanced.SortingButton.ASCENDING_SORT;
-            var loc5:*;
-            (loc5 = new net.wg.gui.components.advanced.SortingButtonInfo()).iconId = TANK;
-            loc5.iconSource = "../maps/icons/buttons/tab_sort_button/tank.png";
-            loc5.ascendingIconSource = loc1;
-            loc5.descendingIconSource = loc2;
-            loc5.toolTip = BATTLE_RESULTS.TEAM_TANKHEADER;
-            loc5.buttonWidth = 128;
-            loc5.buttonHeight = 30;
-            loc5.enabled = true;
-            loc5.defaultSortDirection = net.wg.gui.components.advanced.SortingButton.DESCENDING_SORT;
-            var loc6:*;
-            (loc6 = new net.wg.gui.components.advanced.SortingButtonInfo()).iconId = DAMAGE;
-            loc6.iconSource = "../maps/icons/buttons/tab_sort_button/damage.png";
-            loc6.ascendingIconSource = loc1;
-            loc6.descendingIconSource = loc2;
-            loc6.toolTip = BATTLE_RESULTS.TEAM_DAMAGEHEADER;
-            loc6.buttonWidth = 47;
-            loc6.buttonHeight = 30;
-            loc6.enabled = true;
-            loc6.defaultSortDirection = net.wg.gui.components.advanced.SortingButton.DESCENDING_SORT;
-            var loc7:*;
-            (loc7 = new net.wg.gui.components.advanced.SortingButtonInfo()).iconId = FRAG;
-            loc7.iconSource = "../maps/icons/buttons/tab_sort_button/frag.png";
-            loc7.ascendingIconSource = loc1;
-            loc7.descendingIconSource = loc2;
-            loc7.toolTip = BATTLE_RESULTS.TEAM_FRAGHEADER;
-            loc7.buttonWidth = 47;
-            loc7.buttonHeight = 30;
-            loc7.enabled = true;
-            loc7.defaultSortDirection = net.wg.gui.components.advanced.SortingButton.DESCENDING_SORT;
-            var loc8:*;
-            (loc8 = new net.wg.gui.components.advanced.SortingButtonInfo()).iconId = XP;
-            loc8.iconSource = "../maps/icons/buttons/tab_sort_button/star.png";
-            loc8.ascendingIconSource = loc1;
-            loc8.descendingIconSource = loc2;
-            loc8.toolTip = BATTLE_RESULTS.TEAM_XPHEADER;
-            loc8.buttonWidth = 61;
-            loc8.buttonHeight = 30;
-            loc8.enabled = true;
-            loc8.defaultSortDirection = net.wg.gui.components.advanced.SortingButton.DESCENDING_SORT;
-            var loc9:*;
-            (loc9 = new net.wg.gui.components.advanced.SortingButtonInfo()).iconId = MEDAL;
-            loc9.iconSource = "../maps/icons/buttons/tab_sort_button/medal.png";
-            loc9.ascendingIconSource = loc1;
-            loc9.descendingIconSource = loc2;
-            loc9.toolTip = BATTLE_RESULTS.TEAM_MEDALHEADER;
-            loc9.buttonWidth = 47;
-            loc9.buttonHeight = 30;
-            loc9.enabled = true;
-            loc9.defaultSortDirection = net.wg.gui.components.advanced.SortingButton.DESCENDING_SORT;
-            return new scaleform.clik.data.DataProvider([loc3, loc4, loc5, loc6, loc7, loc8, loc9]);
-        }
+      override public function dispose() : void {
+         super.dispose();
+         this.header1.removeEventListener(ButtonEvent.CLICK,this.onHeaderClick);
+         this.header2.removeEventListener(ButtonEvent.CLICK,this.onHeaderClick);
+         this.team1List.removeEventListener(ListEvent.INDEX_CHANGE,this.onItemSelect);
+         this.team2List.removeEventListener(ListEvent.INDEX_CHANGE,this.onItemSelect);
+         this.team1List.removeEventListener(ListEventEx.ITEM_CLICK,this.onItemSelect);
+         this.team2List.removeEventListener(ListEventEx.ITEM_CLICK,this.onItemSelect);
+         this.myParent.removeEventListener(FinalStatisticEvent.HIDE_STATS_VIEW,this.hideStatsView);
+      }
 
-        public function update(arg1:Object):void
-        {
-            return;
-        }
+      private function getHeadersProvider() : DataProvider {
+         var _loc1_:* = "../maps/icons/buttons/tab_sort_button/ascendingSortArrow.png";
+         var _loc2_:* = "../maps/icons/buttons/tab_sort_button/descendingSortArrow.png";
+         var _loc3_:SortingButtonInfo = new SortingButtonInfo();
+         _loc3_.iconId = SQUAD;
+         _loc3_.iconSource = "../maps/icons/buttons/tab_sort_button/squad.png";
+         _loc3_.ascendingIconSource = _loc1_;
+         _loc3_.descendingIconSource = _loc2_;
+         _loc3_.toolTip = BATTLE_RESULTS.TEAM_SQUADHEADER;
+         _loc3_.buttonWidth = 30;
+         _loc3_.buttonHeight = 30;
+         _loc3_.enabled = true;
+         _loc3_.defaultSortDirection = SortingButton.ASCENDING_SORT;
+         var _loc4_:SortingButtonInfo = new SortingButtonInfo();
+         _loc4_.iconId = PLAYER;
+         _loc4_.iconSource = "../maps/icons/buttons/tab_sort_button/player.png";
+         _loc4_.ascendingIconSource = _loc1_;
+         _loc4_.descendingIconSource = _loc2_;
+         _loc4_.toolTip = BATTLE_RESULTS.TEAM_PLAYERHEADER;
+         _loc4_.buttonWidth = 135;
+         _loc4_.buttonHeight = 30;
+         _loc4_.enabled = true;
+         _loc4_.defaultSortDirection = SortingButton.ASCENDING_SORT;
+         var _loc5_:SortingButtonInfo = new SortingButtonInfo();
+         _loc5_.iconId = TANK;
+         _loc5_.iconSource = "../maps/icons/buttons/tab_sort_button/tank.png";
+         _loc5_.ascendingIconSource = _loc1_;
+         _loc5_.descendingIconSource = _loc2_;
+         _loc5_.toolTip = BATTLE_RESULTS.TEAM_TANKHEADER;
+         _loc5_.buttonWidth = 128;
+         _loc5_.buttonHeight = 30;
+         _loc5_.enabled = true;
+         _loc5_.defaultSortDirection = SortingButton.DESCENDING_SORT;
+         var _loc6_:SortingButtonInfo = new SortingButtonInfo();
+         _loc6_.iconId = DAMAGE;
+         _loc6_.iconSource = "../maps/icons/buttons/tab_sort_button/damage.png";
+         _loc6_.ascendingIconSource = _loc1_;
+         _loc6_.descendingIconSource = _loc2_;
+         _loc6_.toolTip = BATTLE_RESULTS.TEAM_DAMAGEHEADER;
+         _loc6_.buttonWidth = 47;
+         _loc6_.buttonHeight = 30;
+         _loc6_.enabled = true;
+         _loc6_.defaultSortDirection = SortingButton.DESCENDING_SORT;
+         var _loc7_:SortingButtonInfo = new SortingButtonInfo();
+         _loc7_.iconId = FRAG;
+         _loc7_.iconSource = "../maps/icons/buttons/tab_sort_button/frag.png";
+         _loc7_.ascendingIconSource = _loc1_;
+         _loc7_.descendingIconSource = _loc2_;
+         _loc7_.toolTip = BATTLE_RESULTS.TEAM_FRAGHEADER;
+         _loc7_.buttonWidth = 47;
+         _loc7_.buttonHeight = 30;
+         _loc7_.enabled = true;
+         _loc7_.defaultSortDirection = SortingButton.DESCENDING_SORT;
+         var _loc8_:SortingButtonInfo = new SortingButtonInfo();
+         _loc8_.iconId = XP;
+         _loc8_.iconSource = "../maps/icons/buttons/tab_sort_button/star.png";
+         _loc8_.ascendingIconSource = _loc1_;
+         _loc8_.descendingIconSource = _loc2_;
+         _loc8_.toolTip = BATTLE_RESULTS.TEAM_XPHEADER;
+         _loc8_.buttonWidth = 61;
+         _loc8_.buttonHeight = 30;
+         _loc8_.enabled = true;
+         _loc8_.defaultSortDirection = SortingButton.DESCENDING_SORT;
+         var _loc9_:SortingButtonInfo = new SortingButtonInfo();
+         _loc9_.iconId = MEDAL;
+         _loc9_.iconSource = "../maps/icons/buttons/tab_sort_button/medal.png";
+         _loc9_.ascendingIconSource = _loc1_;
+         _loc9_.descendingIconSource = _loc2_;
+         _loc9_.toolTip = BATTLE_RESULTS.TEAM_MEDALHEADER;
+         _loc9_.buttonWidth = 47;
+         _loc9_.buttonHeight = 30;
+         _loc9_.enabled = true;
+         _loc9_.defaultSortDirection = SortingButton.DESCENDING_SORT;
+         return new DataProvider([_loc3_,_loc4_,_loc5_,_loc6_,_loc7_,_loc8_,_loc9_]);
+      }
 
-        public function get changeIndexOnFocus():Boolean
-        {
-            return this._changeIndexOnFocus;
-        }
+      public function update(param1:Object) : void {
+          
+      }
 
-        public function set changeIndexOnFocus(arg1:Boolean):void
-        {
-            this._changeIndexOnFocus = arg1;
-            return;
-        }
+      public function get changeIndexOnFocus() : Boolean {
+         return this._changeIndexOnFocus;
+      }
 
-        internal static const SQUAD:String="squad";
+      public function set changeIndexOnFocus(param1:Boolean) : void {
+         this._changeIndexOnFocus = param1;
+      }
+   }
 
-        internal static const PLAYER:String="player";
-
-        internal static const TANK:String="tank";
-
-        internal static const DAMAGE:String="damage";
-
-        internal static const FRAG:String="frag";
-
-        internal static const XP:String="xp";
-
-        internal static const MEDAL:String="medal";
-
-        internal static const MAX_TEAM_LEN:Number=15;
-
-        public var team1List:net.wg.gui.lobby.battleResults.TeamStatsList;
-
-        public var team2List:net.wg.gui.lobby.battleResults.TeamStatsList;
-
-        public var team1Stats:net.wg.gui.lobby.battleResults.TeamMemberStatsView;
-
-        public var team2Stats:net.wg.gui.lobby.battleResults.TeamMemberStatsView;
-
-        public var ownTitle:flash.text.TextField;
-
-        public var enemyTitle:flash.text.TextField;
-
-        internal var _changeIndexOnFocus:Boolean=true;
-
-        public var header1:net.wg.gui.components.advanced.SortableHeaderButtonBar;
-
-        public var header2:net.wg.gui.components.advanced.SortableHeaderButtonBar;
-
-        internal var iconTypeToKey:Object;
-    }
 }

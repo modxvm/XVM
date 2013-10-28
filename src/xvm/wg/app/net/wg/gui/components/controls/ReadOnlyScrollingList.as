@@ -1,23 +1,22 @@
-package net.wg.gui.components.controls 
+package net.wg.gui.components.controls
 {
-    import scaleform.clik.events.*;
-    
-    public class ReadOnlyScrollingList extends net.wg.gui.components.controls.ScrollingListEx
-    {
-        public function ReadOnlyScrollingList()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.events.InputEvent;
 
-        public override function handleInput(arg1:scaleform.clik.events.InputEvent):void
-        {
-            return;
-        }
 
-        public override function toString():String
-        {
-            return "[WG ReadOnlyScrollingList " + name + "]";
-        }
-    }
+   public class ReadOnlyScrollingList extends ScrollingListEx
+   {
+          
+      public function ReadOnlyScrollingList() {
+         super();
+      }
+
+      override public function handleInput(param1:InputEvent) : void {
+          
+      }
+
+      override public function toString() : String {
+         return "[WG ReadOnlyScrollingList " + name + "]";
+      }
+   }
+
 }

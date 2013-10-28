@@ -1,70 +1,65 @@
-package net.wg.gui.lobby.window 
+package net.wg.gui.lobby.window
 {
-    import net.wg.data.daapi.base.*;
-    import net.wg.gui.lobby.tankman.*;
-    
-    public class ExchangeFreeToTankmanInitVO extends net.wg.data.daapi.base.DAAPIDataClass
-    {
-        public function ExchangeFreeToTankmanInitVO(arg1:Object)
-        {
-            super(arg1);
-            return;
-        }
+   import net.wg.data.daapi.base.DAAPIDataClass;
+   import net.wg.gui.lobby.tankman.CarouselTankmanSkillsModel;
 
-        public function get currentSkill():Object
-        {
-            return this._currentSkill;
-        }
 
-        public function set currentSkill(arg1:Object):void
-        {
-            this._currentSkill = arg1;
-            this._beforeSkill = this.getNewCurrentSkillInstance(this._currentSkill);
-            this._afterSkill = this.getNewCurrentSkillInstance(this._currentSkill);
-            return;
-        }
+   public class ExchangeFreeToTankmanInitVO extends DAAPIDataClass
+   {
+          
+      public function ExchangeFreeToTankmanInitVO(param1:Object) {
+         super(param1);
+      }
 
-        public function getNewCurrentSkillInstance(arg1:Object):net.wg.gui.lobby.tankman.CarouselTankmanSkillsModel
-        {
-            var loc1:*=null;
-            if (arg1) 
-            {
-                loc1 = new net.wg.gui.lobby.tankman.CarouselTankmanSkillsModel();
-                loc1.description = arg1.description;
-                loc1.icon = arg1.icon.big;
-                loc1.roleIcon = arg1.icon.role;
-                loc1.isActive = arg1.isActive;
-                loc1.isCommon = arg1.roleType == net.wg.gui.lobby.tankman.CarouselTankmanSkillsModel.ROLE_TYPE_COMMON;
-                loc1.roleType = arg1.roleType;
-                loc1.isPerk = arg1.isPerk;
-                loc1.level = arg1.level;
-                loc1.userName = arg1.userName;
-                loc1.name = arg1.name;
-                loc1.tankmanID = this.tankmanID;
-            }
-            return loc1;
-        }
+      public var tankmanID:int = -1;
 
-        public function get beforeSkill():net.wg.gui.lobby.tankman.CarouselTankmanSkillsModel
-        {
-            return this._beforeSkill;
-        }
+      private var _currentSkill:Object;
 
-        public function get afterSkill():net.wg.gui.lobby.tankman.CarouselTankmanSkillsModel
-        {
-            return this._afterSkill;
-        }
+      public var lastSkillLevel:Number;
 
-        public var tankmanID:int=-1;
+      public var nextSkillLevel:Number;
 
-        internal var _currentSkill:Object;
+      private var _beforeSkill:CarouselTankmanSkillsModel;
 
-        public var lastSkillLevel:Number;
+      private var _afterSkill:CarouselTankmanSkillsModel;
 
-        public var nextSkillLevel:Number;
+      public function get currentSkill() : Object {
+         return this._currentSkill;
+      }
 
-        internal var _beforeSkill:net.wg.gui.lobby.tankman.CarouselTankmanSkillsModel;
+      public function set currentSkill(param1:Object) : void {
+         this._currentSkill = param1;
+         this._beforeSkill = this.getNewCurrentSkillInstance(this._currentSkill);
+         this._afterSkill = this.getNewCurrentSkillInstance(this._currentSkill);
+      }
 
-        internal var _afterSkill:net.wg.gui.lobby.tankman.CarouselTankmanSkillsModel;
-    }
+      public function getNewCurrentSkillInstance(param1:Object) : CarouselTankmanSkillsModel {
+         var _loc2_:CarouselTankmanSkillsModel = null;
+         if(param1)
+         {
+            _loc2_ = new CarouselTankmanSkillsModel();
+            _loc2_.description = param1.description;
+            _loc2_.icon = param1.icon.big;
+            _loc2_.roleIcon = param1.icon.role;
+            _loc2_.isActive = param1.isActive;
+            _loc2_.isCommon = param1.roleType == CarouselTankmanSkillsModel.ROLE_TYPE_COMMON;
+            _loc2_.roleType = param1.roleType;
+            _loc2_.isPerk = param1.isPerk;
+            _loc2_.level = param1.level;
+            _loc2_.userName = param1.userName;
+            _loc2_.name = param1.name;
+            _loc2_.tankmanID = this.tankmanID;
+         }
+         return _loc2_;
+      }
+
+      public function get beforeSkill() : CarouselTankmanSkillsModel {
+         return this._beforeSkill;
+      }
+
+      public function get afterSkill() : CarouselTankmanSkillsModel {
+         return this._afterSkill;
+      }
+   }
+
 }

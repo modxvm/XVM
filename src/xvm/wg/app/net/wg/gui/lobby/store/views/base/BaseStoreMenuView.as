@@ -1,394 +1,329 @@
-package net.wg.gui.lobby.store.views.base 
+package net.wg.gui.lobby.store.views.base
 {
-    import flash.events.*;
-    import net.wg.data.VO.*;
-    import net.wg.data.components.*;
-    import net.wg.data.constants.*;
-    import net.wg.data.constants.generated.*;
-    import net.wg.gui.lobby.store.*;
-    import net.wg.infrastructure.exceptions.*;
-    import net.wg.infrastructure.interfaces.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    import net.wg.utils.*;
-    import scaleform.clik.controls.*;
-    import scaleform.clik.core.*;
-    
-    public class BaseStoreMenuView extends scaleform.clik.core.UIComponent implements net.wg.infrastructure.interfaces.IStoreMenuView
-    {
-        public function BaseStoreMenuView()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import net.wg.infrastructure.interfaces.IStoreMenuView;
+   import scaleform.clik.controls.ButtonGroup;
+   import net.wg.utils.IAssertable;
+   import net.wg.data.constants.Errors;
+   import net.wg.infrastructure.exceptions.NullPointerException;
+   import scaleform.clik.controls.Button;
+   import net.wg.data.VO.ShopSubFilterData;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import net.wg.data.components.StoreMenuViewData;
+   import net.wg.data.constants.generated.STORE_TYPES;
+   import flash.events.Event;
+   import net.wg.gui.lobby.store.StoreViewsEvent;
+   import net.wg.infrastructure.exceptions.AbstractException;
 
-        protected function initializeControlsByHash(arg1:String, arg2:Array, arg3:String, arg4:String):void
-        {
-            App.utils.asserter.assertNotNull(this._localizator, "_localizator" + net.wg.data.constants.Errors.CANT_NULL);
-            initializeControlsByHashLocalized(arg1, arg2, arg3, arg4, this._localizator);
-            return;
-        }
 
-        internal function getStoreViewEvent(arg1:String):net.wg.gui.lobby.store.StoreViewsEvent
-        {
-            return new net.wg.gui.lobby.store.StoreViewsEvent(arg1, this.fittingType);
-        }
+   public class BaseStoreMenuView extends UIComponent implements IStoreMenuView
+   {
+          
+      public function BaseStoreMenuView() {
+         super();
+      }
 
-        internal function abstractInvoke(arg1:String, ... rest):Error
-        {
-            return new net.wg.infrastructure.exceptions.AbstractException(this.toString() + "\'::" + arg1 + "(" + rest.join(",") + ")\'" + net.wg.data.constants.Errors.ABSTRACT_INVOKE);
-        }
-
-        internal function onFilterChangeHandler(arg1:flash.events.Event):void
-        {
-            this.dispatchViewChange();
-            return;
-        }
-
-        protected static function assertGroupSelection(arg1:scaleform.clik.controls.ButtonGroup, arg2:String, arg3:Boolean=false):void
-        {
-            var loc1:*=null;
-            if (App.instance) 
+      protected static function assertGroupSelection(param1:ButtonGroup, param2:String, param3:Boolean=false) : void {
+         var _loc4_:IAssertable = null;
+         if(App.instance)
+         {
+            _loc4_ = App.utils.asserter;
+            _loc4_.assertNotNull(param1,param2 + ".group" + Errors.CANT_NULL,NullPointerException);
+            if(param3)
             {
-                (loc1 = App.utils.asserter).assertNotNull(arg1, arg2 + ".group" + net.wg.data.constants.Errors.CANT_NULL, net.wg.infrastructure.exceptions.NullPointerException);
-                if (arg3) 
-                {
-                    loc1.assertNotNull(arg1.selectedButton, arg2 + ".group.selectedButton" + net.wg.data.constants.Errors.CANT_NULL);
-                }
+               _loc4_.assertNotNull(param1.selectedButton,param2 + ".group.selectedButton" + Errors.CANT_NULL);
             }
-            return;
-        }
+         }
+      }
 
-        protected static function getSelectedFilters(arg1:Array, arg2:Boolean, arg3:scaleform.clik.controls.Button):Array
-        {
-            var loc2:*=null;
-            var loc1:*=[];
-            var loc3:*=0;
-            var loc4:*=arg1;
-            for each (loc2 in loc4) 
+      protected static function getSelectedFilters(param1:Array, param2:Boolean, param3:Button) : Array {
+         var _loc5_:ViewUIElementVO = null;
+         var _loc4_:Array = [];
+         for each (_loc5_ in param1)
+         {
+            if((_loc5_.instance.selected) || (param3) && (param3.selected))
             {
-                if (!(loc2.instance.selected || arg3 && arg3.selected)) 
-                {
-                    continue;
-                }
-                App.utils.asserter.assertNotNull(loc2.instance.data, loc2.instance.name + ".data" + net.wg.data.constants.Errors.CANT_NULL);
-                loc1.push(loc2.instance.data);
+               App.utils.asserter.assertNotNull(_loc5_.instance.data,_loc5_.instance.name + ".data" + Errors.CANT_NULL);
+               _loc4_.push(_loc5_.instance.data);
             }
-            if (arg2) 
+         }
+         if(param2)
+         {
+            _loc4_.unshift(_loc4_.length);
+         }
+         return _loc4_;
+      }
+
+      private static function initializeControlsByHashLocalized(param1:String, param2:Array, param3:String, param4:String, param5:Function) : void {
+         var _loc6_:ViewUIElementVO = null;
+         if(App.instance)
+         {
+            for each (_loc6_ in param2)
             {
-                loc1.unshift(loc1.length);
+               if(_loc6_.instance.visible)
+               {
+                  _loc6_.instance.data = _loc6_.name;
+                  _loc6_.instance.label = param5(param1 + "/" + param4 + "/" + _loc6_.name + "/name");
+               }
             }
-            return loc1;
-        }
+         }
+      }
 
-        internal static function initializeControlsByHashLocalized(arg1:String, arg2:Array, arg3:String, arg4:String, arg5:Function):void
-        {
-            var loc1:*=null;
-            if (App.instance) 
+      private var _fittingType:String = null;
+
+      private var _filterData:ShopSubFilterData = null;
+
+      private var _nation:int = -1;
+
+      private var _tagsArr:Array = null;
+
+      private var _fitsArr:Array = null;
+
+      private var _uiName:String = null;
+
+      private var _localizator:Function = null;
+
+      override public function dispose() : void {
+         var _loc1_:IDisposable = null;
+         var _loc2_:IDisposable = null;
+         super.dispose();
+         if(this._tagsArr != null)
+         {
+            for each (_loc1_ in this._tagsArr)
             {
-                var loc2:*=0;
-                var loc3:*=arg2;
-                for each (loc1 in loc3) 
-                {
-                    if (!loc1.instance.visible) 
-                    {
-                        continue;
-                    }
-                    loc1.instance.data = loc1.name;
-                    loc1.instance.label = arg5(arg1 + "/" + arg4 + "/" + loc1.name + "/name");
-                }
+               _loc1_.dispose();
             }
-            return;
-        }
-
-        public override function dispose():void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            super.dispose();
-            if (this._tagsArr != null) 
+            this._tagsArr.splice(0);
+            this._tagsArr = null;
+         }
+         if(this._fitsArr != null)
+         {
+            for each (_loc2_ in this._fitsArr)
             {
-                var loc3:*=0;
-                var loc4:*=this._tagsArr;
-                for each (loc1 in loc4) 
-                {
-                    loc1.dispose();
-                }
-                this._tagsArr.splice(0);
-                this._tagsArr = null;
+               _loc2_.dispose();
             }
-            if (this._fitsArr != null) 
+            this._fitsArr.splice(0);
+            this._fitsArr = null;
+         }
+         this._filterData = null;
+      }
+
+      public final function update(param1:Object) : void {
+         var _loc2_:String = null;
+         var _loc3_:StoreMenuViewData = null;
+         if(App.instance)
+         {
+            _loc2_ = "updateData must be StoreMenuViewData";
+            App.utils.asserter.assert(param1  is  StoreMenuViewData,_loc2_);
+            _loc3_ = StoreMenuViewData(param1);
+            if(this._fittingType != _loc3_.fittingType)
             {
-                loc3 = 0;
-                loc4 = this._fitsArr;
-                for each (loc2 in loc4) 
-                {
-                    loc2.dispose();
-                }
-                this._fitsArr.splice(0);
-                this._fitsArr = null;
+               this._fittingType = _loc3_.fittingType;
+               this.onKindChanged();
             }
-            this._filterData = null;
-            return;
-        }
+         }
+      }
 
-        public final function update(arg1:Object):void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            if (App.instance) 
+      public function resetTemporaryHandlers() : void {
+          
+      }
+
+      public function setUIName(param1:String, param2:Function) : void {
+         App.utils.asserter.assert(param1 == STORE_TYPES.SHOP || param1 == STORE_TYPES.INVENTORY,"incorrect uiName: \'" + param1 + "\'");
+         this._uiName = param1;
+         gotoAndStop(this._uiName);
+         this._localizator = param2;
+         if(this._fitsArr != null)
+         {
+            this._fitsArr.splice();
+            this._fitsArr = null;
+         }
+      }
+
+      protected function getUIName() : String {
+         return this._uiName;
+      }
+
+      public function setSubFilterData(param1:int, param2:ShopSubFilterData) : void {
+         throw this.abstractInvoke("setSubFilterData",param1,param2);
+      }
+
+      public function updateSubFilter(param1:int) : void {
+         throw this.abstractInvoke("updateSubFilter",param1);
+      }
+
+      public function getFilter() : Array {
+         throw this.abstractInvoke("getFilter");
+      }
+
+      public function setViewData(param1:Array) : void {
+         throw this.abstractInvoke("setViewData",param1);
+      }
+
+      public function get fittingType() : String {
+         if(this._fittingType == null)
+         {
+            DebugUtils.LOG_WARNING("fitting type accessor invoked before field has been initialized.");
+         }
+         return this._fittingType;
+      }
+
+      protected final function selectFilter(param1:Array, param2:Array, param3:Boolean, param4:Boolean) : void {
+         var _loc5_:ViewUIElementVO = null;
+         var _loc6_:Button = null;
+         var _loc7_:String = null;
+         for each (_loc5_ in param1)
+         {
+            _loc6_ = _loc5_.instance;
+            App.utils.asserter.assertNotNull(_loc6_.data,"data of filter control" + Errors.CANT_NULL);
+            for each (_loc7_ in param2)
             {
-                loc1 = "updateData must be StoreMenuViewData";
-                App.utils.asserter.assert(arg1 is net.wg.data.components.StoreMenuViewData, loc1);
-                loc2 = net.wg.data.components.StoreMenuViewData(arg1);
-                if (this._fittingType != loc2.fittingType) 
-                {
-                    this._fittingType = loc2.fittingType;
-                    this.onKindChanged();
-                }
+               if(_loc7_ == _loc6_.data)
+               {
+                  _loc6_.selected = true;
+                  break;
+               }
             }
-            return;
-        }
-
-        public function resetTemporaryHandlers():void
-        {
-            return;
-        }
-
-        public function setUIName(arg1:String, arg2:Function):void
-        {
-            App.utils.asserter.assert(arg1 == net.wg.data.constants.generated.STORE_TYPES.SHOP || arg1 == net.wg.data.constants.generated.STORE_TYPES.INVENTORY, "incorrect uiName: \'" + arg1 + "\'");
-            this._uiName = arg1;
-            gotoAndStop(this._uiName);
-            this._localizator = arg2;
-            if (this._fitsArr != null) 
+            if(param3)
             {
-                this._fitsArr.splice();
-                this._fitsArr = null;
+               if(!_loc6_.hasEventListener(Event.SELECT))
+               {
+                  _loc6_.addEventListener(Event.SELECT,this.onFilterChangeHandler);
+               }
             }
-            return;
-        }
+         }
+         if(param4)
+         {
+            this.addHandlerToGroup(_loc6_);
+         }
+      }
 
-        protected function getUIName():String
-        {
-            return this._uiName;
-        }
+      protected final function addHandlerToGroup(param1:Button) : void {
+         var _loc2_:ButtonGroup = param1.group;
+         if(App.instance)
+         {
+            App.utils.asserter.assertNotNull(param1,"instance" + Errors.CANT_NULL,NullPointerException);
+         }
+         assertGroupSelection(_loc2_,param1.name);
+         _loc2_.addEventListener(Event.CHANGE,this.onFilterChangeHandler);
+      }
 
-        public function setSubFilterData(arg1:int, arg2:net.wg.data.VO.ShopSubFilterData):void
-        {
-            throw this.abstractInvoke("setSubFilterData", arg1, arg2);
-        }
-
-        public function updateSubFilter(arg1:int):void
-        {
-            throw this.abstractInvoke("updateSubFilter", arg1);
-        }
-
-        public function getFilter():Array
-        {
-            throw this.abstractInvoke("getFilter");
-        }
-
-        public function setViewData(arg1:Array):void
-        {
-            throw this.abstractInvoke("setViewData", arg1);
-        }
-
-        public function get fittingType():String
-        {
-            if (this._fittingType == null) 
+      protected final function selectFilterSimple(param1:Array, param2:Object, param3:Boolean) : void {
+         var _loc4_:ViewUIElementVO = null;
+         var _loc5_:Button = null;
+         var _loc6_:ButtonGroup = null;
+         for each (_loc4_ in param1)
+         {
+            _loc5_ = _loc4_.instance;
+            if(param2 == _loc5_.data)
             {
-                DebugUtils.LOG_WARNING("fitting type accessor invoked before field has been initialized.");
+               _loc5_.selected = true;
+               break;
             }
-            return this._fittingType;
-        }
+         }
+         if(param3)
+         {
+            _loc6_ = _loc5_.group;
+            assertGroupSelection(_loc6_,_loc5_.name);
+            _loc6_.addEventListener(Event.CHANGE,this.onFilterChangeHandler);
+         }
+      }
 
-        protected final function selectFilter(arg1:Array, arg2:Array, arg3:Boolean, arg4:Boolean):void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            var loc3:*=null;
-            var loc4:*=0;
-            var loc5:*=arg1;
-            for each (loc1 in loc5) 
-            {
-                loc2 = loc1.instance;
-                App.utils.asserter.assertNotNull(loc2.data, "data of filter control" + net.wg.data.constants.Errors.CANT_NULL);
-                var loc6:*=0;
-                var loc7:*=arg2;
-                for each (loc3 in loc7) 
-                {
-                    if (loc3 != loc2.data) 
-                    {
-                        continue;
-                    }
-                    loc2.selected = true;
-                    break;
-                }
-                if (!arg3) 
-                {
-                    continue;
-                }
-                if (loc2.hasEventListener(flash.events.Event.SELECT)) 
-                {
-                    continue;
-                }
-                loc2.addEventListener(flash.events.Event.SELECT, this.onFilterChangeHandler);
-            }
-            if (arg4) 
-            {
-                this.addHandlerToGroup(loc2);
-            }
-            return;
-        }
+      protected final function resetHandlers(param1:Array, param2:Button) : void {
+         var _loc3_:ViewUIElementVO = null;
+         for each (_loc3_ in param1)
+         {
+            _loc3_.instance.removeEventListener(Event.SELECT,this.onFilterChangeHandler);
+         }
+         if(param2)
+         {
+            param2.group.removeEventListener(Event.CHANGE,this.onFilterChangeHandler);
+         }
+      }
 
-        protected final function addHandlerToGroup(arg1:scaleform.clik.controls.Button):void
-        {
-            var loc1:*=arg1.group;
-            if (App.instance) 
-            {
-                App.utils.asserter.assertNotNull(arg1, "instance" + net.wg.data.constants.Errors.CANT_NULL, net.wg.infrastructure.exceptions.NullPointerException);
-            }
-            assertGroupSelection(loc1, arg1.name);
-            loc1.addEventListener(flash.events.Event.CHANGE, this.onFilterChangeHandler);
-            return;
-        }
+      protected function getNation() : int {
+         return this._nation;
+      }
 
-        protected final function selectFilterSimple(arg1:Array, arg2:Object, arg3:Boolean):void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            var loc3:*=null;
-            var loc4:*=0;
-            var loc5:*=arg1;
-            for each (loc1 in loc5) 
-            {
-                loc2 = loc1.instance;
-                if (arg2 != loc2.data) 
-                {
-                    continue;
-                }
-                loc2.selected = true;
-                break;
-            }
-            if (arg3) 
-            {
-                loc3 = loc2.group;
-                assertGroupSelection(loc3, loc2.name);
-                loc3.addEventListener(flash.events.Event.CHANGE, this.onFilterChangeHandler);
-            }
-            return;
-        }
+      protected function getFilterData() : ShopSubFilterData {
+         return this._filterData;
+      }
 
-        protected final function resetHandlers(arg1:Array, arg2:scaleform.clik.controls.Button):void
-        {
-            var loc1:*=null;
-            var loc2:*=0;
-            var loc3:*=arg1;
-            for each (loc1 in loc3) 
-            {
-                loc1.instance.removeEventListener(flash.events.Event.SELECT, this.onFilterChangeHandler);
-            }
-            if (arg2) 
-            {
-                arg2.group.removeEventListener(flash.events.Event.CHANGE, this.onFilterChangeHandler);
-            }
-            return;
-        }
+      protected function setFilterData(param1:ShopSubFilterData) : void {
+         var _loc2_:IAssertable = null;
+         if(App.instance)
+         {
+            _loc2_ = App.utils.asserter;
+            _loc2_.assertNotNull(param1,"shopVehicleFilterData" + Errors.CANT_NULL);
+            _loc2_.assert(!(param1.current == "0"),"incorrect current id from python!");
+            _loc2_.assertNotNull(param1.dataProvider,"shopVehicleFilterData.dataProvider" + Errors.CANT_NULL);
+         }
+         this._filterData = param1;
+      }
 
-        protected function getNation():int
-        {
-            return this._nation;
-        }
+      protected final function dispatchViewChange() : void {
+         dispatchEvent(this.getStoreViewEvent(StoreViewsEvent.VIEW_CHANGE));
+      }
 
-        protected function getFilterData():net.wg.data.VO.ShopSubFilterData
-        {
-            return this._filterData;
-        }
+      protected function onKindChanged() : void {
+         var _loc1_:* = " method result";
+         this.initializeControlsByHash(this.specialKindForTags(),this.getTagsArray(),"getTagsArray" + _loc1_,this.getTagsName());
+         this.initializeControlsByHash(this._fittingType,this.getFitsArray(),"getFitsArray" + _loc1_,this.getFitsName());
+         dispatchEvent(this.getStoreViewEvent(StoreViewsEvent.POPULATE_MENU_FILTER));
+      }
 
-        protected function setFilterData(arg1:net.wg.data.VO.ShopSubFilterData):void
-        {
-            var loc1:*=null;
-            if (App.instance) 
-            {
-                loc1 = App.utils.asserter;
-                loc1.assertNotNull(arg1, "shopVehicleFilterData" + net.wg.data.constants.Errors.CANT_NULL);
-                loc1.assert(!(arg1.current == "0"), "incorrect current id from python!");
-                loc1.assertNotNull(arg1.dataProvider, "shopVehicleFilterData.dataProvider" + net.wg.data.constants.Errors.CANT_NULL);
-            }
-            this._filterData = arg1;
-            return;
-        }
+      protected final function getTagsArray() : Array {
+         if(this._tagsArr == null)
+         {
+            this._tagsArr = this.onTagsArrayRequest();
+         }
+         return this._tagsArr;
+      }
 
-        protected final function dispatchViewChange():void
-        {
-            dispatchEvent(this.getStoreViewEvent(net.wg.gui.lobby.store.StoreViewsEvent.VIEW_CHANGE));
-            return;
-        }
+      protected function onTagsArrayRequest() : Array {
+         throw this.abstractInvoke("onTagsArrayRequest");
+      }
 
-        protected function onKindChanged():void
-        {
-            var loc1:*=" method result";
-            this.initializeControlsByHash(this.specialKindForTags(), this.getTagsArray(), "getTagsArray" + loc1, this.getTagsName());
-            this.initializeControlsByHash(this._fittingType, this.getFitsArray(), "getFitsArray" + loc1, this.getFitsName());
-            dispatchEvent(this.getStoreViewEvent(net.wg.gui.lobby.store.StoreViewsEvent.POPULATE_MENU_FILTER));
-            return;
-        }
+      protected final function getFitsArray() : Array {
+         if(this._fitsArr == null)
+         {
+            this._fitsArr = this.onFitsArrayRequest();
+         }
+         return this._fitsArr;
+      }
 
-        protected final function getTagsArray():Array
-        {
-            if (this._tagsArr == null) 
-            {
-                this._tagsArr = this.onTagsArrayRequest();
-            }
-            return this._tagsArr;
-        }
+      protected function onFitsArrayRequest() : Array {
+         throw this.abstractInvoke("onFitsArrayRequest");
+      }
 
-        protected function onTagsArrayRequest():Array
-        {
-            throw this.abstractInvoke("onTagsArrayRequest");
-        }
+      protected function getFitsName() : String {
+         return "fits";
+      }
 
-        protected final function getFitsArray():Array
-        {
-            if (this._fitsArr == null) 
-            {
-                this._fitsArr = this.onFitsArrayRequest();
-            }
-            return this._fitsArr;
-        }
+      protected function getTagsName() : String {
+         return "tags";
+      }
 
-        protected function onFitsArrayRequest():Array
-        {
-            throw this.abstractInvoke("onFitsArrayRequest");
-        }
+      protected function specialKindForTags() : String {
+         return this.fittingType;
+      }
 
-        protected function getFitsName():String
-        {
-            return "fits";
-        }
+      protected function initializeControlsByHash(param1:String, param2:Array, param3:String, param4:String) : void {
+         App.utils.asserter.assertNotNull(this._localizator,"_localizator" + Errors.CANT_NULL);
+         initializeControlsByHashLocalized(param1,param2,param3,param4,this._localizator);
+      }
 
-        protected function getTagsName():String
-        {
-            return "tags";
-        }
+      private function getStoreViewEvent(param1:String) : StoreViewsEvent {
+         return new StoreViewsEvent(param1,this.fittingType);
+      }
 
-        protected function specialKindForTags():String
-        {
-            return this.fittingType;
-        }
+      private function abstractInvoke(param1:String, ... rest) : Error {
+         return new AbstractException(this.toString() + "\'::" + param1 + "(" + rest.join(",") + ")\'" + Errors.ABSTRACT_INVOKE);
+      }
 
-        internal var _fittingType:String=null;
+      private function onFilterChangeHandler(param1:Event) : void {
+         this.dispatchViewChange();
+      }
+   }
 
-        internal var _filterData:net.wg.data.VO.ShopSubFilterData=null;
-
-        internal var _nation:int=-1;
-
-        internal var _tagsArr:Array=null;
-
-        internal var _fitsArr:Array=null;
-
-        internal var _uiName:String=null;
-
-        internal var _localizator:Function=null;
-    }
 }

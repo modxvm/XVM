@@ -1,37 +1,33 @@
-package net.wg.gui.tutorial.controls 
+package net.wg.gui.tutorial.controls
 {
-    import flash.display.*;
-    
-    public class ProgressItem extends flash.display.MovieClip
-    {
-        public function ProgressItem()
-        {
-            super();
-            return;
-        }
+   import flash.display.MovieClip;
 
-        public function get phaseFrame():int
-        {
-            return this.lineMC.currentFrame;
-        }
 
-        public function setPhase(arg1:String):void
-        {
-            var loc1:*=this.phaseFrame;
-            this.lineMC.gotoAndStop(arg1);
-            if (loc1 != this.phaseFrame) 
-            {
-                this.highlight();
-            }
-            return;
-        }
+   public class ProgressItem extends MovieClip
+   {
+          
+      public function ProgressItem() {
+         super();
+      }
 
-        public function highlight():void
-        {
-            gotoAndPlay(1);
-            return;
-        }
+      public var lineMC:MovieClip;
 
-        public var lineMC:flash.display.MovieClip;
-    }
+      public function get phaseFrame() : int {
+         return this.lineMC.currentFrame;
+      }
+
+      public function setPhase(param1:String) : void {
+         var _loc2_:int = this.phaseFrame;
+         this.lineMC.gotoAndStop(param1);
+         if(_loc2_ != this.phaseFrame)
+         {
+            this.highlight();
+         }
+      }
+
+      public function highlight() : void {
+         gotoAndPlay(1);
+      }
+   }
+
 }

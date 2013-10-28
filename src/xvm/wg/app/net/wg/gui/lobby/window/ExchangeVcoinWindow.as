@@ -1,268 +1,240 @@
-package net.wg.gui.lobby.window 
+package net.wg.gui.lobby.window
 {
-    import fl.transitions.easing.*;
-    import flash.display.*;
-    import flash.events.*;
-    import net.wg.data.constants.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.utils.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.interfaces.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.events.*;
-    import scaleform.clik.motion.*;
-    import scaleform.clik.utils.*;
-    
-    public class ExchangeVcoinWindow extends net.wg.gui.lobby.window.ExchangeCurrencyWindow implements net.wg.infrastructure.base.meta.IExchangeVcoinWindowMeta
-    {
-        public function ExchangeVcoinWindow()
-        {
-            this.animationManager = new net.wg.gui.utils.ExcludeTweenManager();
-            super();
-            this.tweenSet = {};
-            this.tweenSet.ease = fl.transitions.easing.Strong.easeOut;
-            this.tweenSet.onComplete = this.onTweenComplete;
-            return;
-        }
+   import net.wg.infrastructure.base.meta.IExchangeVcoinWindowMeta;
+   import flash.display.MovieClip;
+   import net.wg.gui.components.controls.SoundButtonEx;
+   import net.wg.gui.utils.ExcludeTweenManager;
+   import net.wg.data.constants.Errors;
+   import net.wg.infrastructure.interfaces.IWindow;
+   import scaleform.clik.utils.Constraints;
+   import scaleform.clik.constants.ConstrainMode;
+   import flash.display.Sprite;
+   import net.wg.gui.components.controls.IconText;
+   import net.wg.data.constants.ColorSchemeNames;
+   import scaleform.clik.events.ButtonEvent;
+   import flash.display.DisplayObject;
+   import flash.events.Event;
+   import scaleform.clik.motion.Tween;
+   import fl.transitions.easing.Strong;
 
-        public function buyVcoinS():void
-        {
-            App.utils.asserter.assertNotNull(this.buyVcoin, "exchange" + net.wg.data.constants.Errors.CANT_NULL);
-            this.buyVcoin();
-            return;
-        }
 
-        public function as_setTargetCurrencyData(arg1:Object):void
-        {
-            this.exchangeData = new net.wg.gui.lobby.window.VcoinExchangeDataVO(arg1);
-            exchangeStep = this.exchangeData.countStep;
-            return;
-        }
+   public class ExchangeVcoinWindow extends ExchangeCurrencyWindow implements IExchangeVcoinWindowMeta
+   {
+          
+      public function ExchangeVcoinWindow() {
+         this.animationManager = new ExcludeTweenManager();
+         super();
+         this.tweenSet = {};
+         this.tweenSet.ease = Strong.easeOut;
+         this.tweenSet.onComplete = this.onTweenComplete;
+      }
 
-        public override function set window(arg1:net.wg.infrastructure.interfaces.IWindow):void
-        {
-            super.window = arg1;
-            if (arg1) 
+      private static var tweenObj:Object;
+
+      private static const tweenDuration:uint = 350;
+
+      private static function rateLabelFunction(param1:Number) : String {
+         return App.utils.locale.float(param1);
+      }
+
+      public var warningMc:ExchangeVcoinWarningMC;
+
+      public var mainBackgroundMc:MovieClip;
+
+      public var buyVcoinBtn:SoundButtonEx;
+
+      public var buyVcoin:Function = null;
+
+      private var animationManager:ExcludeTweenManager;
+
+      private var windowOriginalHeight:Number = NaN;
+
+      private var tweenSet:Object;
+
+      private var exchangeData:VcoinExchangeDataVO;
+
+      public function buyVcoinS() : void {
+         App.utils.asserter.assertNotNull(this.buyVcoin,"exchange" + Errors.CANT_NULL);
+         this.buyVcoin();
+      }
+
+      public function as_setTargetCurrencyData(param1:Object) : void {
+         this.exchangeData = new VcoinExchangeDataVO(param1);
+         selectedPrimaryCurrency = this.exchangeData.minTransactVal;
+         exchangeStep = this.exchangeData.countStep;
+      }
+
+      override public function set window(param1:IWindow) : void {
+         super.window = param1;
+         if(param1)
+         {
+            window.title = MENU.EXCHANGEVCOIN_TITLE;
+            this.windowOriginalHeight = window.sourceView.height + window.contentPadding.vertical;
+            invalidate(TOTAL_PRIMARY_CURRENCY_INVALID);
+         }
+      }
+
+      override protected function preInitialize() : void {
+         super.preInitialize();
+         constraints = new Constraints(this,ConstrainMode.REFLOW);
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.buyVcoinBtn.label = App.utils.locale.makeString(MENU.EXCHANGEVCOIN_BUYVCOINBTNNAME);
+         this.warningMc.visible = false;
+         var _loc1_:int = this.warningMc.parent.getChildIndex(this.warningMc)-1;
+         var _loc2_:Sprite = new Sprite();
+         addChildAt(_loc2_,_loc1_);
+         _loc2_.addChild(lblToExchange);
+         _loc2_.addChild(lblExchangeResult);
+         _loc2_.addChild(resultPrimaryCurrencyText);
+         _loc2_.addChild(resultSecondaryCurrencyText);
+         _loc2_.addChild(toExchangePrimaryCurrencyIco);
+         _loc2_.addChild(toExchangeSecondaryCurrencyIco);
+         _loc2_.addChild(submitBtn);
+         _loc2_.addChild(cancelBtn);
+         _loc2_.addChild(this.buyVcoinBtn);
+         _loc2_.name = "movingContainer";
+         _loc2_.addChild(nsPrimaryCurrency);
+         _loc2_.addChild(nsSecondaryCurrency);
+         constraints.addElement(this.mainBackgroundMc.name,this.mainBackgroundMc,Constraints.ALL);
+         constraints.addElement(_loc2_.name,_loc2_,Constraints.BOTTOM);
+         onHandPrimaryCurrencyText.filters = ExchangeUtils.getGlow(IconText.VCOIN);
+         onHandSecondaryCurrencyText.filters = ExchangeUtils.getGlow(IconText.GOLD);
+         resultPrimaryCurrencyText.filters = ExchangeUtils.getGlow(IconText.VCOIN);
+         resultSecondaryCurrencyText.filters = ExchangeUtils.getGlow(IconText.GOLD);
+         toExchangePrimaryCurrencyIco.filters = ExchangeUtils.getGlow(IconText.VCOIN);
+         toExchangeSecondaryCurrencyIco.filters = ExchangeUtils.getGlow(IconText.GOLD);
+         resultPrimaryCurrencyText.icon = IconText.VCOIN;
+         resultSecondaryCurrencyText.icon = IconText.GOLD;
+         toExchangePrimaryCurrencyIco.icon = IconText.VCOIN;
+         toExchangeSecondaryCurrencyIco.icon = IconText.GOLD;
+         onHandPrimaryCurrencyText.icon = IconText.VCOIN;
+         onHandSecondaryCurrencyText.icon = IconText.GOLD;
+         var _loc3_:uint = App.colorSchemeMgr.getRGB(ColorSchemeNames.TEXT_COLOR_VCOIN);
+         var _loc4_:uint = App.colorSchemeMgr.getRGB(ColorSchemeNames.TEXT_COLOR_GOLD);
+         onHandPrimaryCurrencyText.textColor = _loc3_;
+         onHandSecondaryCurrencyText.textColor = _loc4_;
+         resultPrimaryCurrencyText.icon = IconText.VCOIN;
+         resultSecondaryCurrencyText.icon = IconText.GOLD;
+         resultPrimaryCurrencyText.textColor = _loc3_;
+         resultSecondaryCurrencyText.textColor = _loc4_;
+         nsPrimaryCurrency.textColor = _loc3_;
+         nsSecondaryCurrency.textColor = _loc4_;
+         headerMC.rate_part_1.icon = IconText.VCOIN;
+         headerMC.rate_part_1.textColor = _loc3_;
+         headerMC.rate_part_1.filters = ExchangeUtils.getGlow(IconText.VCOIN);
+         headerMC.rate_part_2.icon = IconText.GOLD;
+         headerMC.rate_part_2.textColor = _loc4_;
+         headerMC.rate_part_2.filters = ExchangeUtils.getGlow(IconText.GOLD);
+         this.buyVcoinBtn.addEventListener(ButtonEvent.CLICK,this.buyVcoinBtnHandler,false,0,true);
+         this.warningMc.buyVcoinBtn.addEventListener(ButtonEvent.CLICK,this.buyVcoinBtnHandler,false,0,true);
+         headerMC.rateLabelFunction = rateLabelFunction;
+      }
+
+      override protected function draw() : void {
+         var _loc1_:* = NaN;
+         super.draw();
+         if(!isNaN(this.windowOriginalHeight) && (isInvalid(TOTAL_PRIMARY_CURRENCY_INVALID)))
+         {
+            if(this.isSubmitOperationAllowed())
             {
-                window.title = MENU.EXCHANGEVCOIN_TITLE;
-                this.windowOriginalHeight = window.sourceView.height + window.contentPadding.vertical;
-                invalidate(TOTAL_PRIMARY_CURRENCY_INVALID);
+               this.warningMc.visible = false;
+               _loc1_ = this.windowOriginalHeight;
+               onHandPrimaryCurrencyText.textColor = App.colorSchemeMgr.getRGB(ColorSchemeNames.TEXT_COLOR_VCOIN);
             }
-            return;
-        }
-
-        protected override function preInitialize():void
-        {
-            super.preInitialize();
-            constraints = new scaleform.clik.utils.Constraints(this, scaleform.clik.constants.ConstrainMode.REFLOW);
-            return;
-        }
-
-        protected override function configUI():void
-        {
-            var loc4:*=0;
-            super.configUI();
-            this.buyVcoinBtn.label = App.utils.locale.makeString(MENU.EXCHANGEVCOIN_BUYVCOINBTNNAME);
-            this.warningMc.visible = false;
-            var loc1:*=(this.warningMc.parent.getChildIndex(this.warningMc) - 1);
-            var loc2:*=new flash.display.Sprite();
-            addChildAt(loc2, loc1);
-            loc2.addChild(lblToExchange);
-            loc2.addChild(lblExchangeResult);
-            loc2.addChild(resultPrimaryCurrencyText);
-            loc2.addChild(resultSecondaryCurrencyText);
-            loc2.addChild(toExchangePrimaryCurrencyIco);
-            loc2.addChild(toExchangeSecondaryCurrencyIco);
-            loc2.addChild(submitBtn);
-            loc2.addChild(cancelBtn);
-            loc2.addChild(this.buyVcoinBtn);
-            loc2.name = "movingContainer";
-            loc2.addChild(nsPrimaryCurrency);
-            loc2.addChild(nsSecondaryCurrency);
-            constraints.addElement(this.mainBackgroundMc.name, this.mainBackgroundMc, scaleform.clik.utils.Constraints.ALL);
-            constraints.addElement(loc2.name, loc2, scaleform.clik.utils.Constraints.BOTTOM);
-            onHandPrimaryCurrencyText.filters = net.wg.gui.lobby.window.ExchangeUtils.getGlow(net.wg.gui.components.controls.IconText.VCOIN);
-            onHandSecondaryCurrencyText.filters = net.wg.gui.lobby.window.ExchangeUtils.getGlow(net.wg.gui.components.controls.IconText.GOLD);
-            resultPrimaryCurrencyText.filters = net.wg.gui.lobby.window.ExchangeUtils.getGlow(net.wg.gui.components.controls.IconText.VCOIN);
-            resultSecondaryCurrencyText.filters = net.wg.gui.lobby.window.ExchangeUtils.getGlow(net.wg.gui.components.controls.IconText.GOLD);
-            toExchangePrimaryCurrencyIco.filters = net.wg.gui.lobby.window.ExchangeUtils.getGlow(net.wg.gui.components.controls.IconText.VCOIN);
-            toExchangeSecondaryCurrencyIco.filters = net.wg.gui.lobby.window.ExchangeUtils.getGlow(net.wg.gui.components.controls.IconText.GOLD);
-            resultPrimaryCurrencyText.icon = net.wg.gui.components.controls.IconText.VCOIN;
-            resultSecondaryCurrencyText.icon = net.wg.gui.components.controls.IconText.GOLD;
-            toExchangePrimaryCurrencyIco.icon = net.wg.gui.components.controls.IconText.VCOIN;
-            toExchangeSecondaryCurrencyIco.icon = net.wg.gui.components.controls.IconText.GOLD;
-            onHandPrimaryCurrencyText.icon = net.wg.gui.components.controls.IconText.VCOIN;
-            onHandSecondaryCurrencyText.icon = net.wg.gui.components.controls.IconText.GOLD;
-            var loc3:*=App.colorSchemeMgr.getRGB(net.wg.data.constants.ColorSchemeNames.TEXT_COLOR_VCOIN);
-            loc4 = App.colorSchemeMgr.getRGB(net.wg.data.constants.ColorSchemeNames.TEXT_COLOR_GOLD);
-            onHandPrimaryCurrencyText.textColor = loc3;
-            onHandSecondaryCurrencyText.textColor = loc4;
-            resultPrimaryCurrencyText.icon = net.wg.gui.components.controls.IconText.VCOIN;
-            resultSecondaryCurrencyText.icon = net.wg.gui.components.controls.IconText.GOLD;
-            resultPrimaryCurrencyText.textColor = loc3;
-            resultSecondaryCurrencyText.textColor = loc4;
-            nsPrimaryCurrency.textColor = loc3;
-            nsSecondaryCurrency.textColor = loc4;
-            headerMC.rate_part_1.icon = net.wg.gui.components.controls.IconText.VCOIN;
-            headerMC.rate_part_1.textColor = loc3;
-            headerMC.rate_part_1.filters = net.wg.gui.lobby.window.ExchangeUtils.getGlow(net.wg.gui.components.controls.IconText.VCOIN);
-            headerMC.rate_part_2.icon = net.wg.gui.components.controls.IconText.GOLD;
-            headerMC.rate_part_2.textColor = loc4;
-            headerMC.rate_part_2.filters = net.wg.gui.lobby.window.ExchangeUtils.getGlow(net.wg.gui.components.controls.IconText.GOLD);
-            this.buyVcoinBtn.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.buyVcoinBtnHandler, false, 0, true);
-            this.warningMc.buyVcoinBtn.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.buyVcoinBtnHandler, false, 0, true);
-            headerMC.rateLabelFunction = rateLabelFunction;
-            return;
-        }
-
-        protected override function draw():void
-        {
-            var loc1:*=NaN;
-            super.draw();
-            if (!isNaN(this.windowOriginalHeight) && isInvalid(TOTAL_PRIMARY_CURRENCY_INVALID)) 
+            else
             {
-                if (this.isSubmitOperationAllowed()) 
-                {
-                    this.warningMc.visible = false;
-                    loc1 = this.windowOriginalHeight;
-                    onHandPrimaryCurrencyText.textColor = App.colorSchemeMgr.getRGB(net.wg.data.constants.ColorSchemeNames.TEXT_COLOR_VCOIN);
-                }
-                else 
-                {
-                    this.warningMc.visible = true;
-                    loc1 = this.warningMc.bg.height + this.windowOriginalHeight - this.warningMc.contentPadding;
-                    onHandPrimaryCurrencyText.textColor = App.colorSchemeMgr.getRGB(net.wg.data.constants.ColorSchemeNames.TEXT_COLOR_ERROR);
-                }
-                if (window.height != loc1) 
-                {
-                    tweenObj.height = loc1;
-                    this.animationManager.registerAndLaunch(tweenDuration, window, tweenObj, this.tweenSet);
-                }
+               this.warningMc.visible = true;
+               _loc1_ = this.warningMc.bg.height + this.windowOriginalHeight - this.warningMc.contentPadding;
+               onHandPrimaryCurrencyText.textColor = App.colorSchemeMgr.getRGB(ColorSchemeNames.TEXT_COLOR_ERROR);
             }
-            return;
-        }
-
-        protected override function applyWaitingChanges():void
-        {
-            var loc1:*=null;
-            super.applyWaitingChanges();
-            var loc2:*=numChildren;
-            var loc3:*=0;
-            while (loc3 < loc2) 
+            if(window.height != _loc1_)
             {
-                loc1 = this.getChildAt(loc3);
-                if (loc1 != waiting) 
-                {
-                    loc1.visible = !showWaiting;
-                }
-                ++loc3;
+               tweenObj.height = _loc1_;
+               this.animationManager.registerAndLaunch(tweenDuration,window,tweenObj,this.tweenSet);
             }
-            return;
-        }
+         }
+      }
 
-        protected override function isSubmitOperationAllowed():Boolean
-        {
-            var loc1:*=-1;
-            if (this.exchangeData) 
+      override protected function applyWaitingChanges() : void {
+         var _loc1_:DisplayObject = null;
+         super.applyWaitingChanges();
+         var _loc2_:int = numChildren;
+         var _loc3_:* = 0;
+         while(_loc3_ < _loc2_)
+         {
+            _loc1_ = this.getChildAt(_loc3_);
+            if(_loc1_ != waiting)
             {
-                loc1 = this.exchangeData.minTransactVal;
+               _loc1_.visible = !showWaiting;
             }
-            return totalPrimaryCurrency >= loc1;
-        }
+            _loc3_++;
+         }
+      }
 
-        protected override function applyResultUpdating():void
-        {
-            var loc1:*=0;
-            var loc2:*=0;
-            super.applyResultUpdating();
-            if (this.exchangeData) 
-            {
-                loc1 = Math.min(this.exchangeData.maxTransactVal, totalPrimaryCurrency);
-                loc2 = Math.min(this.exchangeData.minTransactVal, totalPrimaryCurrency);
-                nsPrimaryCurrency.minimum = loc2;
-                nsPrimaryCurrency.maximum = loc1;
-                nsSecondaryCurrency.minimum = loc2 * actualRate;
-                nsSecondaryCurrency.maximum = loc1 * actualRate;
-                this.warningMc.minTransactValue = this.exchangeData.minTransactVal;
-                invalidate(TOTAL_PRIMARY_CURRENCY_INVALID);
-            }
-            return;
-        }
+      override protected function isSubmitOperationAllowed() : Boolean {
+         var _loc1_:Number = -1;
+         if(this.exchangeData)
+         {
+            _loc1_ = this.exchangeData.minTransactVal;
+         }
+         return totalPrimaryCurrency >= _loc1_;
+      }
 
-        protected override function onDispose():void
-        {
-            super.onDispose();
-            if (this.animationManager) 
-            {
-                this.animationManager.dispose();
-                this.animationManager = null;
-            }
-            this.buyVcoinBtn.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.buyVcoinBtnHandler);
-            this.warningMc.buyVcoinBtn.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.buyVcoinBtnHandler);
-            return;
-        }
+      override protected function applyResultUpdating() : void {
+         var _loc1_:uint = 0;
+         var _loc2_:uint = 0;
+         super.applyResultUpdating();
+         if(this.exchangeData)
+         {
+            _loc1_ = Math.min(this.exchangeData.maxTransactVal,totalPrimaryCurrency);
+            _loc2_ = Math.min(this.exchangeData.minTransactVal,totalPrimaryCurrency);
+            nsPrimaryCurrency.minimum = _loc2_;
+            nsPrimaryCurrency.maximum = _loc1_;
+            nsSecondaryCurrency.minimum = _loc2_ * actualRate;
+            nsSecondaryCurrency.maximum = _loc1_ * actualRate;
+            this.warningMc.minTransactValue = this.exchangeData.minTransactVal;
+            invalidate(TOTAL_PRIMARY_CURRENCY_INVALID);
+         }
+      }
 
-        protected override function submitBtnClickHandler(arg1:flash.events.Event):void
-        {
-            if (!showWaiting) 
-            {
-                super.submitBtnClickHandler(arg1);
-            }
-            return;
-        }
+      override protected function onDispose() : void {
+         super.onDispose();
+         if(this.animationManager)
+         {
+            this.animationManager.dispose();
+            this.animationManager = null;
+         }
+         this.buyVcoinBtn.removeEventListener(ButtonEvent.CLICK,this.buyVcoinBtnHandler);
+         this.warningMc.buyVcoinBtn.removeEventListener(ButtonEvent.CLICK,this.buyVcoinBtnHandler);
+      }
 
-        protected override function cancelBtnClickHandler(arg1:flash.events.Event):void
-        {
-            if (!showWaiting) 
-            {
-                super.cancelBtnClickHandler(arg1);
-            }
-            return;
-        }
+      override protected function submitBtnClickHandler(param1:Event) : void {
+         if(!showWaiting)
+         {
+            super.submitBtnClickHandler(param1);
+         }
+      }
 
-        internal function onTweenComplete(arg1:scaleform.clik.motion.Tween):void
-        {
-            this.animationManager.unregister(arg1);
-            return;
-        }
+      override protected function cancelBtnClickHandler(param1:Event) : void {
+         if(!showWaiting)
+         {
+            super.cancelBtnClickHandler(param1);
+         }
+      }
 
-        internal function buyVcoinBtnHandler(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            if (!showWaiting) 
-            {
-                this.buyVcoinS();
-            }
-            return;
-        }
+      private function onTweenComplete(param1:Tween) : void {
+         this.animationManager.unregister(param1);
+      }
 
-        internal static function rateLabelFunction(arg1:Number):String
-        {
-            return App.utils.locale.float(arg1);
-        }
+      private function buyVcoinBtnHandler(param1:ButtonEvent) : void {
+         if(!showWaiting)
+         {
+            this.buyVcoinS();
+         }
+      }
+   }
 
-        
-        {
-            tweenObj = {"height":0};
-        }
-
-        internal static const tweenDuration:uint=350;
-
-        public var warningMc:net.wg.gui.lobby.window.ExchangeVcoinWarningMC;
-
-        public var mainBackgroundMc:flash.display.MovieClip;
-
-        public var buyVcoinBtn:net.wg.gui.components.controls.SoundButtonEx;
-
-        public var buyVcoin:Function=null;
-
-        internal var animationManager:net.wg.gui.utils.ExcludeTweenManager;
-
-        internal var windowOriginalHeight:Number=NaN;
-
-        internal var tweenSet:Object;
-
-        internal var exchangeData:net.wg.gui.lobby.window.VcoinExchangeDataVO;
-
-        internal static var tweenObj:Object;
-    }
 }

@@ -1,111 +1,148 @@
-package net.wg.data.daapi.base 
+package net.wg.data.daapi.base
 {
-    import avmplus.*;
-    import flash.events.*;
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.exceptions.*;
-    import net.wg.infrastructure.interfaces.*;
-    import net.wg.utils.*;
-    
-    public class DAAPIDataClass extends flash.events.EventDispatcher implements net.wg.infrastructure.interfaces.IDAAPIDataClass
-    {
-        public function DAAPIDataClass(arg1:Object)
-        {
-            super();
-            this.fromHash(arg1);
-            return;
-        }
+   import flash.events.EventDispatcher;
+   import net.wg.infrastructure.interfaces.IDAAPIDataClass;
+   import net.wg.utils.IAssertable;
+   import net.wg.data.constants.Errors;
+   import net.wg.infrastructure.exceptions.DAAPIBindException;
+   import avmplus.getQualifiedClassName;
 
-        public function fromHash(arg1:Object):void
-        {
-            var loc3:*=null;
-            var loc4:*=undefined;
-            var loc5:*=null;
-            var loc6:*=null;
-            var loc7:*=null;
-            var loc8:*=null;
-            var loc1:*=App.utils.asserter;
-            loc1.assertNotNull(arg1, "Hash" + net.wg.data.constants.Errors.CANT_NULL);
-            this._hash = arg1;
-            var loc2:*="can\'t find property for DAAPI data binding: ";
-            var loc9:*=0;
-            var loc10:*=arg1;
-            for (loc3 in loc10) 
+
+   public class DAAPIDataClass extends EventDispatcher implements IDAAPIDataClass
+   {
+          
+      public function DAAPIDataClass(param1:Object) {
+         super();
+         this.fromHash(param1);
+      }
+
+      public static function compare(param1:Object, param2:Object) : Boolean {
+         var _loc4_:Array = null;
+         var _loc5_:uint = 0;
+         var _loc6_:* = 0;
+         var _loc7_:Object = null;
+         var _loc3_:* = typeof param1;
+         if(_loc3_ == "object")
+         {
+            if(param1 as Array)
             {
-                loc4 = arg1[loc3];
-                loc5 = loc3;
-                if (!this.onDataWrite(loc5, loc4)) 
-                {
-                    continue;
-                }
-                loc1.assert(hasOwnProperty(loc5), loc2 + loc5, net.wg.infrastructure.exceptions.DAAPIBindException);
-                if (loc4 != undefined) 
-                {
-                    loc6 = typeof this[loc3];
-                    loc7 = typeof loc4;
-                    if (loc6 == "object") 
-                    {
-                        loc1.assert(loc7 == "object", "incorrect cast value \'" + loc4 + "\' to field with type Object." + " Please, change type of \'" + avmplus.getQualifiedClassName(this) + "." + loc3 + "\' field  to \'" + loc7 + "\' type or initialize it as Values.EMPTY_STR", net.wg.infrastructure.exceptions.DAAPIBindException);
-                    }
-                    else 
-                    {
-                        loc8 = "invalid type on property \'" + avmplus.getQualifiedClassName(this) + "." + loc3 + "\': can`t cast value \'" + loc4 + "\' with type \'" + loc7 + "\'to \'" + loc6 + "\'";
-                        loc1.assert(loc6 == loc7, loc8, net.wg.infrastructure.exceptions.DAAPIBindException);
-                    }
-                }
-                this[loc3] = loc4;
+               _loc4_ = param1 as Array;
+               _loc5_ = _loc4_.length;
+               _loc6_ = 0;
+               while(_loc6_ < _loc5_)
+               {
+                  if(!compare(_loc4_[_loc6_],param2[_loc6_]))
+                  {
+                     return false;
+                  }
+                  _loc6_++;
+               }
             }
-            return;
-        }
-
-        public function dispose():void
-        {
-            var loc1:*=null;
-            var loc2:*=undefined;
-            var loc3:*=null;
-            var loc4:*=0;
-            var loc5:*=this._hash;
-            for (loc1 in loc5) 
+            else
             {
-                loc2 = this._hash[loc1];
-                loc3 = loc1;
-                delete this[loc1];
+               for (_loc7_ in param1)
+               {
+                  if(!compare(param1[_loc7_],param2[_loc7_]))
+                  {
+                     return false;
+                  }
+               }
             }
-            this._hash = null;
-            return;
-        }
-
-        public function toHash():Object
-        {
-            var loc2:*=null;
-            var loc3:*=null;
-            var loc4:*=null;
-            var loc1:*={};
-            var loc5:*=0;
-            var loc6:*=this;
-            for (loc2 in loc6) 
+         }
+         else
+         {
+            if(param1 != param2)
             {
-                loc3 = loc1[loc2];
-                loc4 = loc2.substr(1);
-                if (!this.onDataRead(loc2, loc1)) 
-                {
-                    continue;
-                }
-                loc1[loc4] = loc3;
+               return false;
             }
-            return loc1;
-        }
+         }
+         return true;
+      }
 
-        protected function onDataWrite(arg1:String, arg2:Object):Boolean
-        {
-            return true;
-        }
+      private var _hash:Object = null;
 
-        protected function onDataRead(arg1:String, arg2:Object):Boolean
-        {
-            return true;
-        }
+      public function fromHash(param1:Object) : void {
+         var _loc4_:String = null;
+         var _loc5_:* = undefined;
+         var _loc6_:String = null;
+         var _loc7_:String = null;
+         var _loc8_:String = null;
+         var _loc9_:String = null;
+         var _loc2_:IAssertable = App.utils.asserter;
+         _loc2_.assertNotNull(param1,"Hash" + Errors.CANT_NULL);
+         this._hash = param1;
+         var _loc3_:* = "can\'t find property for DAAPI data binding: ";
+         for (_loc4_ in param1)
+         {
+            _loc5_ = param1[_loc4_];
+            _loc6_ = _loc4_;
+            if(this.onDataWrite(_loc6_,_loc5_))
+            {
+               _loc2_.assert(hasOwnProperty(_loc6_),_loc3_ + _loc6_,DAAPIBindException);
+               if(_loc5_ != undefined)
+               {
+                  _loc7_ = typeof this[_loc4_];
+                  _loc8_ = typeof _loc5_;
+                  if(_loc7_ != "object")
+                  {
+                     _loc9_ = "invalid type on property \'" + getQualifiedClassName(this) + "." + _loc4_ + "\': can`t cast value \'" + _loc5_ + "\' with type \'" + _loc8_ + "\'to \'" + _loc7_ + "\'";
+                     _loc2_.assert(_loc7_ == _loc8_,_loc9_,DAAPIBindException);
+                  }
+                  else
+                  {
+                     _loc2_.assert(_loc8_ == "object","incorrect cast value \'" + _loc5_ + "\' to field with type Object." + " Please, change type of \'" + getQualifiedClassName(this) + "." + _loc4_ + "\' field  to \'" + _loc8_ + "\' type or initialize it as Values.EMPTY_STR",DAAPIBindException);
+                  }
+               }
+               this[_loc4_] = _loc5_;
+            }
+         }
+      }
 
-        internal var _hash:Object=null;
-    }
+      public function dispose() : void {
+         var _loc1_:String = null;
+         var _loc2_:* = undefined;
+         var _loc3_:String = null;
+         for (_loc1_ in this._hash)
+         {
+            _loc2_ = this._hash[_loc1_];
+            _loc3_ = _loc1_;
+            delete this[[_loc1_]];
+         }
+         this._hash = null;
+      }
+
+      public function toHash() : Object {
+         var _loc2_:String = null;
+         var _loc3_:Object = null;
+         var _loc4_:String = null;
+         var _loc1_:Object = {};
+         for (_loc2_ in this)
+         {
+            _loc3_ = _loc1_[_loc2_];
+            _loc4_ = _loc2_.substr(1);
+            if(this.onDataRead(_loc2_,_loc1_))
+            {
+               _loc1_[_loc4_] = _loc3_;
+            }
+         }
+         return _loc1_;
+      }
+
+      protected function onDataWrite(param1:String, param2:Object) : Boolean {
+         return true;
+      }
+
+      protected function onDataRead(param1:String, param2:Object) : Boolean {
+         return true;
+      }
+
+      private function getHash() : Object {
+         return this._hash;
+      }
+
+      public function isEquals(param1:DAAPIDataClass) : Boolean {
+         return compare(this._hash,param1.getHash());
+      }
+   }
+
 }

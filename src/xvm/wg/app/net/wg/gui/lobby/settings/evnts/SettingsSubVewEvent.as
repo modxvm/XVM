@@ -1,42 +1,36 @@
-package net.wg.gui.lobby.settings.evnts 
+package net.wg.gui.lobby.settings.evnts
 {
-    import flash.events.*;
-    
-    public class SettingsSubVewEvent extends flash.events.Event
-    {
-        public function SettingsSubVewEvent(arg1:String, arg2:String, arg3:String="", arg4:*=null, arg5:String="", arg6:Boolean=false, arg7:Boolean=false)
-        {
-            super(arg1, arg6, arg7);
-            this.subViewId = arg2;
-            this.controlId = arg3;
-            this.alternative = arg5;
-            this.controlValue = arg4;
-            return;
-        }
+   import flash.events.Event;
 
-        public override function clone():flash.events.Event
-        {
-            return new net.wg.gui.lobby.settings.evnts.SettingsSubVewEvent(type, this.subViewId, this.controlId, this.controlValue, this.alternative, bubbles, cancelable);
-        }
 
-        public override function toString():String
-        {
-            return formatToString("SettingsSubVewEvent", "type", "subViewId", "controlId", "controlValue", "alternative", "bubbles", "cancelable", "eventPhase");
-        }
+   public class SettingsSubVewEvent extends Event
+   {
+          
+      public function SettingsSubVewEvent(param1:String, param2:String, param3:String=undefined, param4:*=null, param5:String=undefined, param6:Boolean=false, param7:Boolean=false) {
+         super(param1,param6,param7);
+         this.subViewId = param2;
+         this.controlId = param3;
+         this.alternative = param5;
+         this.controlValue = param4;
+      }
 
-        
-        {
-            ON_CONTROL_CHANGE = "on_control_changed";
-        }
+      public static var ON_CONTROL_CHANGE:String = "on_control_changed";
 
-        public var subViewId:String;
+      public var subViewId:String;
 
-        public var controlId:String;
+      public var controlId:String;
 
-        public var alternative:String;
+      public var alternative:String;
 
-        public var controlValue:*;
+      public var controlValue;
 
-        public static var ON_CONTROL_CHANGE:String="on_control_changed";
-    }
+      override public function clone() : Event {
+         return new SettingsSubVewEvent(type,this.subViewId,this.controlId,this.controlValue,this.alternative,bubbles,cancelable);
+      }
+
+      override public function toString() : String {
+         return formatToString("SettingsSubVewEvent","type","subViewId","controlId","controlValue","alternative","bubbles","cancelable","eventPhase");
+      }
+   }
+
 }

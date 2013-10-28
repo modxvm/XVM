@@ -1,303 +1,278 @@
-package net.wg.infrastructure.managers.utils.impl 
+package net.wg.infrastructure.managers.utils.impl
 {
-    import __AS3__.vec.*;
-    import flash.display.*;
-    import flash.events.*;
-    import flash.filters.*;
-    import flash.geom.*;
-    import flash.text.*;
-    import flash.utils.*;
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.exceptions.*;
-    import net.wg.infrastructure.interfaces.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    import net.wg.utils.*;
-    import org.idmedia.as3commons.util.*;
-    import scaleform.gfx.*;
-    
-    public class Commons extends Object implements net.wg.utils.ICommons
-    {
-        public function Commons()
-        {
-            super();
-            return;
-        }
+   import net.wg.utils.ICommons;
+   import org.idmedia.as3commons.util.Map;
+   import org.idmedia.as3commons.util.HashMap;
+   import flash.display.DisplayObject;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import flash.display.DisplayObjectContainer;
+   import flash.utils.getQualifiedClassName;
+   import net.wg.data.constants.KeyProps;
+   import net.wg.data.constants.KeysMap;
+   import flash.display.Bitmap;
+   import flash.display.BitmapData;
+   import flash.geom.Rectangle;
+   import flash.geom.Point;
+   import flash.text.TextField;
+   import __AS3__.vec.Vector;
+   import flash.display.Sprite;
+   import flash.filters.ColorMatrixFilter;
+   import net.wg.infrastructure.interfaces.IDAAPIModule;
+   import net.wg.utils.IAssertable;
+   import net.wg.data.constants.Errors;
+   import net.wg.infrastructure.exceptions.NullPointerException;
+   import net.wg.infrastructure.exceptions.ArgumentException;
+   import flash.events.MouseEvent;
+   import scaleform.gfx.MouseEventEx;
+   import net.wg.infrastructure.interfaces.IColorScheme;
 
-        public function createMap(arg1:Array):org.idmedia.as3commons.util.Map
-        {
-            this.assertEvenArray(arg1);
-            var loc1:*=new org.idmedia.as3commons.util.HashMap();
-            var loc2:*=0;
-            while (loc2 < arg1.length) 
+
+   public class Commons extends Object implements ICommons
+   {
+          
+      public function Commons() {
+         super();
+      }
+
+      private static var s_found:Array;
+
+      public function createMap(param1:Array) : Map {
+         this.assertEvenArray(param1);
+         var _loc2_:Map = new HashMap();
+         var _loc3_:Number = 0;
+         while(_loc3_ < param1.length)
+         {
+            if(_loc3_ % 2 == 1 && _loc3_ > 0)
             {
-                if (loc2 % 2 == 1 && loc2 > 0) 
-                {
-                    loc1.put(arg1[(loc2 - 1)], arg1[loc2]);
-                }
-                ++loc2;
+               _loc2_.put(param1[_loc3_-1],param1[_loc3_]);
             }
-            return loc1;
-        }
+            _loc3_++;
+         }
+         return _loc2_;
+      }
 
-        public function createMappedArray(arg1:Array):Array
-        {
-            var loc3:*=null;
-            this.assertEvenArray(arg1);
-            var loc1:*=[];
-            var loc2:*=0;
-            while (loc2 < arg1.length) 
+      public function createMappedArray(param1:Array) : Array {
+         var _loc4_:Object = null;
+         this.assertEvenArray(param1);
+         var _loc2_:Array = [];
+         var _loc3_:Number = 0;
+         while(_loc3_ < param1.length)
+         {
+            if(_loc3_ % 2 == 1 && _loc3_ > 0)
             {
-                if (loc2 % 2 == 1 && loc2 > 0) 
-                {
-                    (loc3 = {})[arg1[(loc2 - 1)]] = arg1[loc2];
-                    loc1.push(loc3);
-                }
-                ++loc2;
+               _loc4_ = {};
+               _loc4_[param1[_loc3_-1]] = param1[_loc3_];
+               _loc2_.push(_loc4_);
             }
-            return loc1;
-        }
+            _loc3_++;
+         }
+         return _loc2_;
+      }
 
-        public function releaseReferences(arg1:Object, arg2:Boolean=true):void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            var loc3:*=null;
-            if (arg1 == null) 
+      public function releaseReferences(param1:Object, param2:Boolean=true) : void {
+         var _loc3_:String = null;
+         var _loc4_:Object = null;
+         var _loc5_:DisplayObject = null;
+         if(param1 == null)
+         {
+            param1 = App.stage;
+         }
+         if(s_found.indexOf(param1) == -1)
+         {
+            s_found.push(param1);
+            for (_loc3_ in param1)
             {
-                arg1 = App.stage;
+               _loc4_ = param1[_loc3_];
+               if(this.canToDestroying(_loc4_))
+               {
+                  this.releaseReferences(_loc4_,false);
+                  if(_loc4_  is  IDisposable)
+                  {
+                     IDisposable(_loc4_).dispose();
+                  }
+                  delete param1[[_loc3_]];
+               }
             }
-            if (s_found.indexOf(arg1) == -1) 
+            if(param1  is  DisplayObjectContainer)
             {
-                s_found.push(arg1);
-                var loc4:*=0;
-                var loc5:*=arg1;
-                for (loc1 in loc5) 
-                {
-                    loc2 = arg1[loc1];
-                    if (!this.canToDestroying(loc2)) 
-                    {
-                        continue;
-                    }
-                    this.releaseReferences(loc2, false);
-                    if (loc2 is net.wg.infrastructure.interfaces.entity.IDisposable) 
-                    {
-                        net.wg.infrastructure.interfaces.entity.IDisposable(loc2).dispose();
-                    }
-                    delete arg1[loc1];
-                }
-                if (arg1 is flash.display.DisplayObjectContainer) 
-                {
-                    while (flash.display.DisplayObjectContainer(arg1).numChildren > 0) 
-                    {
-                        loc3 = flash.display.DisplayObjectContainer(arg1).getChildAt(0);
-                        if (this.canToDestroying(loc3)) 
-                        {
-                            this.releaseReferences(loc3, false);
-                            if (loc2 is net.wg.infrastructure.interfaces.entity.IDisposable) 
-                            {
-                                net.wg.infrastructure.interfaces.entity.IDisposable(loc2).dispose();
-                            }
-                        }
-                        flash.display.DisplayObjectContainer(arg1).removeChild(loc3);
-                    }
-                }
+               while(DisplayObjectContainer(param1).numChildren > 0)
+               {
+                  _loc5_ = DisplayObjectContainer(param1).getChildAt(0);
+                  if(this.canToDestroying(_loc5_))
+                  {
+                     this.releaseReferences(_loc5_,false);
+                     if(_loc4_  is  IDisposable)
+                     {
+                        IDisposable(_loc4_).dispose();
+                     }
+                  }
+                  DisplayObjectContainer(param1).removeChild(_loc5_);
+               }
             }
-            if (arg2) 
+         }
+         if(param2)
+         {
+            if(s_found.length > 1)
             {
-                if (s_found.length > 1) 
-                {
-                    DebugUtils.LOG_DEBUG("try to release: " + arg1 + " " + flash.utils.getQualifiedClassName(arg1) + " has been released. Collected: " + s_found.length + " objects.");
-                }
-                s_found.splice(0);
+               DebugUtils.LOG_DEBUG("try to release: " + param1 + " " + getQualifiedClassName(param1) + " has been released. Collected: " + s_found.length + " objects.");
             }
-            return;
-        }
+            s_found.splice(0);
+         }
+      }
 
-        public function keyToString(arg1:Number):net.wg.data.constants.KeyProps
-        {
-            var loc1:*=new net.wg.data.constants.KeyProps();
-            if (net.wg.data.constants.KeysMap.mapping.hasOwnProperty(arg1.toString())) 
+      public function keyToString(param1:Number) : KeyProps {
+         var _loc2_:KeyProps = new KeyProps();
+         if(KeysMap.mapping.hasOwnProperty(param1.toString()))
+         {
+            if(KeysMap.mapping[param1].hasOwnProperty("to_show"))
             {
-                if (net.wg.data.constants.KeysMap.mapping[arg1].hasOwnProperty("to_show")) 
-                {
-                    loc1.keyName = net.wg.data.constants.KeysMap.mapping[arg1].to_show;
-                }
-                else 
-                {
-                    loc1.keyName = String.fromCharCode(arg1).toUpperCase();
-                }
-                if (net.wg.data.constants.KeysMap.mapping[arg1].hasOwnProperty("command")) 
-                {
-                    loc1.keyCommand = net.wg.data.constants.KeysMap.mapping[arg1].command;
-                }
-                else 
-                {
-                    loc1.keyCommand = String.fromCharCode(arg1).toUpperCase();
-                }
+               _loc2_.keyName = KeysMap.mapping[param1].to_show;
             }
-            else 
+            else
             {
-                loc1.keyName = String.fromCharCode(arg1).toUpperCase();
-                loc1.keyCommand = String.fromCharCode(arg1).toUpperCase();
+               _loc2_.keyName = String.fromCharCode(param1).toUpperCase();
             }
-            return loc1;
-        }
-
-        public function cutBitmapFromBitmapData(arg1:flash.display.BitmapData, arg2:flash.geom.Rectangle):flash.display.Bitmap
-        {
-            var loc1:*=new flash.display.BitmapData(arg2.width, arg2.height, true, 13421772);
-            loc1.copyPixels(arg1, new flash.geom.Rectangle(arg2.x, arg2.y, arg2.width, arg2.height), new flash.geom.Point(0, 0));
-            var loc2:*;
-            return loc2 = new flash.display.Bitmap(loc1, "auto", true);
-        }
-
-        public function cloneObject(arg1:Object):*
-        {
-            var loc1:*=undefined;
-            var loc2:*=null;
-            if (arg1 is Object) 
+            if(KeysMap.mapping[param1].hasOwnProperty("command"))
             {
-                loc1 = arg1 is Array ? [] : {};
-                var loc3:*=0;
-                var loc4:*=arg1;
-                for (loc2 in loc4) 
-                {
-                    loc1[loc2] = arg1[loc2] is Object && !(arg1[loc2] is Number) && !(arg1[loc2] is Boolean) && !(arg1[loc2] is String) ? this.cloneObject(arg1[loc2]) : arg1[loc2];
-                }
-                return loc1;
+               _loc2_.keyCommand = KeysMap.mapping[param1].command;
             }
-            return undefined;
-        }
-
-        public function addBlankLines(arg1:String, arg2:flash.text.TextField, arg3:__AS3__.vec.Vector.<flash.text.TextField>):void
-        {
-            var loc3:*=null;
-            var loc1:*=arg2.htmlText;
-            arg2.htmlText = arg1;
-            var loc2:*;
-            if ((loc2 = arg2.numLines) > 2) 
+            else
             {
-                var loc4:*=0;
-                var loc5:*=arg3;
-                for each (loc3 in loc5) 
-                {
-                    loc3.htmlText = loc3.htmlText + "\n";
-                }
+               _loc2_.keyCommand = String.fromCharCode(param1).toUpperCase();
             }
-            arg2.htmlText = loc1;
-            return;
-        }
+         }
+         else
+         {
+            _loc2_.keyName = String.fromCharCode(param1).toUpperCase();
+            _loc2_.keyCommand = String.fromCharCode(param1).toUpperCase();
+         }
+         return _loc2_;
+      }
 
-        public function setSaturation(arg1:flash.display.Sprite, arg2:Number):void
-        {
-            var object:flash.display.Sprite;
-            var amount:Number;
-            var colorFilter:flash.filters.ColorMatrixFilter;
-            var redIdentity:Array;
-            var greenIdentity:Array;
-            var blueIdentity:Array;
-            var alphaIdentity:Array;
-            var grayluma:Array;
-            var colmatrix:Array;
-            var interpolateArrays:Function;
+      public function cutBitmapFromBitmapData(param1:BitmapData, param2:Rectangle) : Bitmap {
+         var _loc3_:BitmapData = new BitmapData(param2.width,param2.height,true,13421772);
+         _loc3_.copyPixels(param1,new Rectangle(param2.x,param2.y,param2.width,param2.height),new Point(0,0));
+         var _loc4_:Bitmap = new Bitmap(_loc3_,"auto",true);
+         return _loc4_;
+      }
 
-            var loc1:*;
-            object = arg1;
-            amount = arg2;
-            interpolateArrays = function (arg1:Array, arg2:Array, arg3:Number):Object
+      public function cloneObject(param1:Object) : * {
+         var _loc2_:* = undefined;
+         var _loc3_:String = null;
+         if(param1  is  Object)
+         {
+            _loc2_ = param1  is  Array?[]:{};
+            for (_loc3_ in param1)
             {
-                var loc1:*;
-                var loc2:*=(loc1 = arg1.length >= arg2.length ? arg1.slice() : arg2.slice()).length;
-                while (loc2--) 
-                {
-                    loc1[loc2] = arg1[loc2] + (arg2[loc2] - arg1[loc2]) * arg3;
-                }
-                return loc1;
+               _loc2_[_loc3_] = param1[_loc3_]  is  Object && !(param1[_loc3_]  is  Number) && !(param1[_loc3_]  is  Boolean) && !(param1[_loc3_]  is  String)?this.cloneObject(param1[_loc3_]):param1[_loc3_];
             }
-            amount = amount / 100;
-            colorFilter = new flash.filters.ColorMatrixFilter();
-            redIdentity = [1, 0, 0, 0, 0];
-            greenIdentity = [0, 1, 0, 0, 0];
-            blueIdentity = [0, 0, 1, 0, 0];
-            alphaIdentity = [0, 0, 0, 1, 0];
-            grayluma = [0.3, 0.59, 0.11, 0, 0];
-            colmatrix = new Array();
-            colmatrix = colmatrix.concat(interpolateArrays(grayluma, redIdentity, amount));
-            colmatrix = colmatrix.concat(interpolateArrays(grayluma, greenIdentity, amount));
-            colmatrix = colmatrix.concat(interpolateArrays(grayluma, blueIdentity, amount));
-            colmatrix = colmatrix.concat(alphaIdentity);
-            colorFilter.matrix = colmatrix;
-            object.filters = [colorFilter];
-            return;
-        }
+            return _loc2_;
+         }
+         return undefined;
+      }
 
-        internal function canToDestroying(arg1:Object):Boolean
-        {
-            if (arg1) 
+      public function addBlankLines(param1:String, param2:TextField, param3:Vector.<TextField>) : void {
+         var _loc6_:TextField = null;
+         var _loc7_:* = 0;
+         var _loc4_:String = param2.htmlText;
+         param2.htmlText = param1;
+         var _loc5_:int = Math.round(param2.textHeight / param2.getLineMetrics(0).height);
+         for each (_loc6_ in param3)
+         {
+            _loc7_ = 1;
+            while(_loc7_ < _loc5_)
             {
-                return arg1 is net.wg.infrastructure.interfaces.IDAAPIModule && !net.wg.infrastructure.interfaces.IDAAPIModule(arg1).disposed || !(arg1 is net.wg.infrastructure.interfaces.IDAAPIModule);
+               _loc6_.htmlText = _loc6_.htmlText + "\n";
+               _loc7_++;
             }
-            return false;
-        }
+         }
+         param2.htmlText = _loc4_;
+      }
 
-        internal function assertEvenArray(arg1:Array):void
-        {
-            var loc1:*="pureHash must be have even quantity of elements";
-            var loc2:*=App.utils.asserter;
-            loc2.assertNotNull(arg1, "pureHash" + net.wg.data.constants.Errors.CANT_NULL, net.wg.infrastructure.exceptions.NullPointerException);
-            loc2.assert(arg1.length % 2 == 0, loc1, net.wg.infrastructure.exceptions.ArgumentException);
-            loc2.assert(arg1.length > 0, "pureHash can`t be empty", net.wg.infrastructure.exceptions.ArgumentException);
-            return;
-        }
-
-        public function isLeftButton(arg1:flash.events.MouseEvent):Boolean
-        {
-            if (arg1 is scaleform.gfx.MouseEventEx) 
+      public function setSaturation(param1:Sprite, param2:Number) : void {
+         var object:Sprite = param1;
+         var amount:Number = param2;
+         var interpolateArrays:Function = function(param1:Array, param2:Array, param3:Number):Object
+         {
+            var _loc4_:Array = param1.length >= param2.length?param1.slice():param2.slice();
+            var _loc5_:uint = _loc4_.length;
+            while(_loc5_--)
             {
-                return scaleform.gfx.MouseEventEx(arg1).buttonIdx == scaleform.gfx.MouseEventEx.LEFT_BUTTON;
+               _loc4_[_loc5_] = param1[_loc5_] + (param2[_loc5_] - param1[_loc5_]) * param3;
             }
-            return true;
-        }
+            return _loc4_;
+         };
+         amount = amount / 100;
+         var colorFilter:ColorMatrixFilter = new ColorMatrixFilter();
+         var redIdentity:Array = [1,0,0,0,0];
+         var greenIdentity:Array = [0,1,0,0,0];
+         var blueIdentity:Array = [0,0,1,0,0];
+         var alphaIdentity:Array = [0,0,0,1,0];
+         var grayluma:Array = [0.3,0.59,0.11,0,0];
+         var colmatrix:Array = new Array();
+         colmatrix = colmatrix.concat(interpolateArrays(grayluma,redIdentity,amount));
+         colmatrix = colmatrix.concat(interpolateArrays(grayluma,greenIdentity,amount));
+         colmatrix = colmatrix.concat(interpolateArrays(grayluma,blueIdentity,amount));
+         colmatrix = colmatrix.concat(alphaIdentity);
+         colorFilter.matrix = colmatrix;
+         object.filters = [colorFilter];
+      }
 
-        public function isRightButton(arg1:flash.events.MouseEvent):Boolean
-        {
-            if (arg1 is scaleform.gfx.MouseEventEx) 
+      private function canToDestroying(param1:Object) : Boolean {
+         if(param1)
+         {
+            return param1  is  IDAAPIModule && !IDAAPIModule(param1).disposed || !(param1  is  IDAAPIModule);
+         }
+         return false;
+      }
+
+      private function assertEvenArray(param1:Array) : void {
+         var _loc2_:* = "pureHash must be have even quantity of elements";
+         var _loc3_:IAssertable = App.utils.asserter;
+         _loc3_.assertNotNull(param1,"pureHash" + Errors.CANT_NULL,NullPointerException);
+         _loc3_.assert(param1.length % 2 == 0,_loc2_,ArgumentException);
+         _loc3_.assert(param1.length > 0,"pureHash can`t be empty",ArgumentException);
+      }
+
+      public function isLeftButton(param1:MouseEvent) : Boolean {
+         if(param1  is  MouseEventEx)
+         {
+            return MouseEventEx(param1).buttonIdx == MouseEventEx.LEFT_BUTTON;
+         }
+         return true;
+      }
+
+      public function isRightButton(param1:MouseEvent) : Boolean {
+         if(param1  is  MouseEventEx)
+         {
+            return MouseEventEx(param1).buttonIdx == MouseEventEx.RIGHT_BUTTON;
+         }
+         return false;
+      }
+
+      public function formatPlayerName(param1:TextField, param2:String, param3:String=null, param4:String=null, param5:Boolean=false, param6:IColorScheme=null, param7:int=-4) : String {
+         var _loc10_:* = 0;
+         var _loc8_:* = "<IMG SRC=\"img://gui/maps/icons/library/igr_32x13.png\" width=\"32\" height=\"13\" vspace=\"" + param7 + "\"/>";
+         var _loc9_:String = param2 + (param3?"[" + param3 + "]":"") + (param4?" " + param4:"") + (param5?" " + _loc8_:"");
+         param1.htmlText = _loc9_;
+         if(param1.width < param1.textWidth)
+         {
+            _loc9_ = param2 + (param3?"..":"") + (param4?" " + param4:"") + (param5?" " + _loc8_:"");
+            param1.htmlText = _loc9_;
+            _loc10_ = param2.length-1;
+            while(param1.width < param1.textWidth && _loc10_ > 0)
             {
-                return scaleform.gfx.MouseEventEx(arg1).buttonIdx == scaleform.gfx.MouseEventEx.RIGHT_BUTTON;
+               _loc9_ = param2.substr(0,_loc10_) + ".." + (param4?" " + param4:"") + (param5?" " + _loc8_:"");
+               param1.htmlText = _loc9_;
+               _loc10_--;
             }
-            return false;
-        }
+         }
+         if(param6)
+         {
+            param1.textColor = param6.rgb;
+         }
+         return param1.htmlText;
+      }
+   }
 
-        public function formatPlayerName(arg1:flash.text.TextField, arg2:String, arg3:String=null, arg4:String=null, arg5:Boolean=false, arg6:net.wg.infrastructure.interfaces.IColorScheme=null, arg7:int=-4):String
-        {
-            var loc3:*=0;
-            var loc1:*="<IMG SRC=\"img://gui/maps/icons/library/igr_32x13.png\" width=\"32\" height=\"13\" vspace=\"" + arg7 + "\"/>";
-            var loc2:*=arg2 + (arg3 ? "[" + arg3 + "]" : "") + (arg4 ? " " + arg4 : "") + (arg5 ? " " + loc1 : "");
-            arg1.htmlText = loc2;
-            if (arg1.width < arg1.textWidth) 
-            {
-                loc2 = arg2 + (arg3 ? ".." : "") + (arg4 ? " " + arg4 : "") + (arg5 ? " " + loc1 : "");
-                arg1.htmlText = loc2;
-                loc3 = (arg2.length - 1);
-                while (arg1.width < arg1.textWidth && loc3 > 0) 
-                {
-                    loc2 = arg2.substr(0, loc3) + ".." + (arg4 ? " " + arg4 : "") + (arg5 ? " " + loc1 : "");
-                    arg1.htmlText = loc2;
-                    --loc3;
-                }
-            }
-            if (arg6) 
-            {
-                arg1.textColor = arg6.rgb;
-            }
-            return arg1.htmlText;
-        }
-
-        
-        {
-            s_found = [];
-        }
-
-        internal static var s_found:Array;
-    }
 }

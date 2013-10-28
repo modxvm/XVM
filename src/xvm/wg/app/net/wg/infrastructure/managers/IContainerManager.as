@@ -1,21 +1,23 @@
 package net.wg.infrastructure.managers
 {
-    import flash.events.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.interfaces.*;
+   import flash.events.IEventDispatcher;
+   import net.wg.infrastructure.base.meta.ILoaderManagerMeta;
+   import net.wg.infrastructure.interfaces.IManagedContainer;
+   import net.wg.infrastructure.interfaces.IView;
 
-    public interface IContainerManager extends flash.events.IEventDispatcher
-    {
-        function get loader():net.wg.infrastructure.base.meta.ILoaderManagerMeta;
 
-        function set loader(arg1:net.wg.infrastructure.base.meta.ILoaderManagerMeta):void;
+   public interface IContainerManager extends IEventDispatcher
+   {
+      function get loader():ILoaderManagerMeta;
+      function set loader(param1:ILoaderManagerMeta) : void;
 
-        function registerContainer(arg1:net.wg.infrastructure.interfaces.IManagedContainer):void;
+      function registerContainer(param1:IManagedContainer) : void;
 
-        function updateStage(arg1:Number, arg2:Number):void;
+      function updateStage(param1:Number, param2:Number) : void;
 
-        function get lastFocusedView():net.wg.infrastructure.interfaces.IView;
+      function get lastFocusedView() : IView;
 
-        function set lastFocusedView(arg1:net.wg.infrastructure.interfaces.IView):void;
-    }
+      function set lastFocusedView(param1:IView) : void;
+   }
+
 }

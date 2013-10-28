@@ -1,13 +1,16 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IBattleResultsMeta extends flash.events.IEventDispatcher
-    {
-        function saveSortingS(arg1:String, arg2:String):void;
+   import flash.events.IEventDispatcher;
 
-        function showQuestsWindowS(arg1:String):void;
 
-        function as_setData(arg1:Object):void;
-    }
+   public interface IBattleResultsMeta extends IEventDispatcher
+   {
+          
+      function saveSortingS(param1:String, param2:String) : void;
+
+      function showQuestsWindowS(param1:String) : void;
+
+      function as_setData(param1:Object) : void;
+   }
+
 }

@@ -1,8 +1,12 @@
-package net.wg.gui.prebattle.meta 
+package net.wg.gui.prebattle.meta
 {
-    import flash.events.*;
-    
-    public interface IChannelWindowMeta extends flash.events.IEventDispatcher
-    {
-    }
+   import flash.events.IEventDispatcher;
+
+
+   public interface IChannelWindowMeta extends IEventDispatcher
+   {
+          
+
+   }
+
 }

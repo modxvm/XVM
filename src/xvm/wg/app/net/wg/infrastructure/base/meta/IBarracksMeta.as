@@ -1,31 +1,34 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IBarracksMeta extends flash.events.IEventDispatcher
-    {
-        function invalidateTanksListS():void;
+   import flash.events.IEventDispatcher;
 
-        function setFilterS(arg1:Number, arg2:String, arg3:String, arg4:String, arg5:String):void;
 
-        function onShowRecruitWindowClickS(arg1:Object, arg2:Boolean):void;
+   public interface IBarracksMeta extends IEventDispatcher
+   {
+          
+      function invalidateTanksListS() : void;
 
-        function unloadTankmanS(arg1:String):void;
+      function setFilterS(param1:Number, param2:String, param3:String, param4:String, param5:String) : void;
 
-        function dismissTankmanS(arg1:String):void;
+      function onShowRecruitWindowClickS(param1:Object, param2:Boolean) : void;
 
-        function buyBerthsS():void;
+      function unloadTankmanS(param1:String) : void;
 
-        function closeBarracksS():void;
+      function dismissTankmanS(param1:String) : void;
 
-        function setTankmenFilterS():void;
+      function buyBerthsS() : void;
 
-        function openPersonalCaseS(arg1:String, arg2:uint):void;
+      function closeBarracksS() : void;
 
-        function as_setTankmen(arg1:Number, arg2:Number, arg3:Number, arg4:String, arg5:Number, arg6:Array):void;
+      function setTankmenFilterS() : void;
 
-        function as_updateTanksList(arg1:Array):void;
+      function openPersonalCaseS(param1:String, param2:uint) : void;
 
-        function as_setTankmenFilter(arg1:Number, arg2:String, arg3:String, arg4:String, arg5:String):void;
-    }
+      function as_setTankmen(param1:Number, param2:Number, param3:Number, param4:String, param5:Number, param6:Array) : void;
+
+      function as_updateTanksList(param1:Array) : void;
+
+      function as_setTankmenFilter(param1:Number, param2:String, param3:String, param4:String, param5:String) : void;
+   }
+
 }

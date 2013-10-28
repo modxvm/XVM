@@ -1,11 +1,13 @@
-package net.wg.gui.prebattle.invites 
+package net.wg.gui.prebattle.invites
 {
-    public class UserRosterView extends net.wg.gui.prebattle.invites.InviteStackContainerBase
-    {
-        public function UserRosterView()
-        {
-            super();
-            return;
-        }
-    }
+
+
+   public class UserRosterView extends InviteStackContainerBase
+   {
+          
+      public function UserRosterView() {
+         super();
+      }
+   }
+
 }

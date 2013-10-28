@@ -3,6 +3,7 @@ import com.xvm.VehicleInfo;
 import com.xvm.VehicleInfoDataL10n;
 import wot.Minimap.dataTypes.Player;
 import wot.Minimap.model.externalProxy.MapConfig;
+import com.xvm.DataTypes.VehicleData;
 
 class wot.Minimap.staticUtils.MinimapMacro
 {
@@ -22,6 +23,7 @@ class wot.Minimap.staticUtils.MinimapMacro
 
         // TODO: StatFormat
 
+        var vdata:VehicleData = VehicleInfo.getByIcon(player.icon);
         var formatArr:Array;
 
         /**
@@ -32,35 +34,28 @@ class wot.Minimap.staticUtils.MinimapMacro
          */
         formatArr = format.split(LEVEL_MACRO);
         if (formatArr.length > 1)
-        {
-            var vi2 = VehicleInfo.getInfo2(player.icon);
-            format = formatArr.join(vi2.level);
-        }
+            format = formatArr.join(vdata.level.toString());
 
         /** Vehicle short type */
         formatArr = format.split(VEH_SHORT_MACRO);
         if (formatArr.length > 1)
-        {
-            var type:String = VehicleInfo.getVehicleName(player.icon).split("-").join("_");
-            format = formatArr.join(VehicleInfo.mapVehicleShortName(type, player.vehicle));
-        }
+            format = formatArr.join(vdata.shortName);
 
         /** Vehicle system name - usa-M24_Chaffee */
-        var systemVehName:String = VehicleInfo.getName1(player.icon);
         formatArr = format.split(VEH_NAME);
         if (formatArr.length > 1)
-            format = formatArr.join(systemVehName);
+            format = formatArr.join(vdata.key);
         formatArr = format.split(VEH_NAME_ALT);
         if (formatArr.length > 1)
-            format = formatArr.join(systemVehName);
+            format = formatArr.join(vdata.key);
 
         /** Vehicle type readable - Chaffee */
         formatArr = format.split(VEH_MACRO);
         if (formatArr.length > 1)
-            format = formatArr.join(VehicleInfo.mapVehicleName2(VehicleInfoDataL10n.getVehicleNationName(player.vehicle), player.vehicle));
+            format = formatArr.join(vdata.localizedName);
         formatArr = format.split(VEH_MACRO_ALT);
         if (formatArr.length > 1)
-            format = formatArr.join(VehicleInfo.mapVehicleName2(VehicleInfoDataL10n.getVehicleNationName(player.vehicle), player.vehicle));
+            format = formatArr.join(vdata.localizedName);
 
 
 

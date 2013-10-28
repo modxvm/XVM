@@ -1,21 +1,24 @@
-package net.wg.gui.lobby.techtree.interfaces 
+package net.wg.gui.lobby.techtree.interfaces
 {
-    import __AS3__.vec.*;
-    
-    public interface IResearchContainer extends net.wg.gui.lobby.techtree.interfaces.INodesContainer
-    {
-        function getRootState():Number;
+   import __AS3__.vec.Vector;
 
-        function hasUnlockedParent(arg1:Number, arg2:Number):Boolean;
 
-        function canInstallItems():Boolean;
+   public interface IResearchContainer extends INodesContainer
+   {
+          
+      function getRootState() : Number;
 
-        function isRootUnlocked():Boolean;
+      function hasUnlockedParent(param1:Number, param2:Number) : Boolean;
 
-        function getTopLevel():__AS3__.vec.Vector.<net.wg.gui.lobby.techtree.interfaces.IRenderer>;
+      function canInstallItems() : Boolean;
 
-        function getChildren(arg1:net.wg.gui.lobby.techtree.interfaces.IRenderer):__AS3__.vec.Vector.<net.wg.gui.lobby.techtree.interfaces.IRenderer>;
+      function isRootUnlocked() : Boolean;
 
-        function getParents(arg1:net.wg.gui.lobby.techtree.interfaces.IRenderer):__AS3__.vec.Vector.<net.wg.gui.lobby.techtree.interfaces.IRenderer>;
-    }
+      function getTopLevel() : Vector.<IRenderer>;
+
+      function getChildren(param1:IRenderer) : Vector.<IRenderer>;
+
+      function getParents(param1:IRenderer) : Vector.<IRenderer>;
+   }
+
 }

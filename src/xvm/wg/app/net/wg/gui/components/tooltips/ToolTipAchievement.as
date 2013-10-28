@@ -1,359 +1,548 @@
-package net.wg.gui.components.tooltips 
+package net.wg.gui.components.tooltips
 {
-    import __AS3__.vec.*;
-    import flash.display.*;
-    import flash.text.*;
-    import net.wg.data.managers.*;
-    import net.wg.gui.components.tooltips.VO.*;
-    import net.wg.gui.components.tooltips.helpers.*;
-    import net.wg.utils.*;
-    
-    public class ToolTipAchievement extends net.wg.gui.components.tooltips.ToolTipSpecial
-    {
-        public function ToolTipAchievement()
-        {
-            super();
-            this.headerTF = content.headerTF;
-            this.discrTF = content.discrTF;
-            this.notEnoughTF = content.notEnoughTF;
-            this.infoTF = content.infoTF;
-            this.heroTF = content.heroTF;
-            this.whiteBg = content.whiteBg;
-            return;
-        }
+   import flash.text.TextField;
+   import flash.display.Sprite;
+   import net.wg.gui.components.controls.UILoaderAlt;
+   import net.wg.infrastructure.interfaces.ICounterComponent;
+   import __AS3__.vec.Vector;
+   import net.wg.data.managers.ITooltipProps;
+   import flash.display.DisplayObject;
+   import net.wg.utils.ILocale;
+   import net.wg.gui.components.tooltips.VO.AchievementVO;
+   import net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO;
+   import net.wg.gui.components.tooltips.VO.ToolTipBlockVO;
+   import flash.text.TextFieldAutoSize;
+   import net.wg.gui.components.tooltips.helpers.Utils;
+   import net.wg.gui.components.tooltips.VO.ToolTipBlockRightListItemVO;
+   import flash.display.MovieClip;
+   import net.wg.gui.components.controls.achievements.GreyRibbonCounter;
+   import net.wg.gui.components.controls.achievements.YellowRibbonCounter;
+   import net.wg.gui.components.controls.achievements.BeigeCounter;
+   import net.wg.gui.components.controls.achievements.RedCounter;
 
-        public override function build(arg1:Object, arg2:net.wg.data.managers.ITooltipProps):void
-        {
-            super.build(arg1, arg2);
-            return;
-        }
 
-        public override function dispose():void
-        {
-            var loc1:*=null;
-            super.dispose();
-            if (this.flagsBlocks) 
+   public class ToolTipAchievement extends ToolTipSpecial
+   {
+          
+      public function ToolTipAchievement() {
+         super();
+         this.headerTF = content.headerTF;
+         this.descrTF = content.descrTF;
+         this.historyTF = content.historyTF;
+         this.addInfoTF = content.addInfoTF;
+         this.vLeftTF = content.vLeftTF;
+         this.notEnoughTF = content.notEnoughTF;
+         this.isInDossierTF = content.isInDossierTF;
+         this.whiteBg = content.whiteBg;
+         this.whiteBg1 = content.whiteBg1;
+         this.icon = content.icon;
+         this.icon.autoSize = false;
+         this.whiteBg.width = 10;
+         this.whiteBg.visible = false;
+         this.whiteBg1.width = 10;
+         this.whiteBg1.visible = false;
+         this.defaultBottomPadding = contentMargin.bottom;
+      }
+
+      private var headerTF:TextField = null;
+
+      private var descrTF:TextField = null;
+
+      private var historyTF:TextField = null;
+
+      private var historyHeaderTF:TextField = null;
+
+      private var vLeftTF:TextField = null;
+
+      private var notEnoughTF:TextField = null;
+
+      private var isInDossierTF:TextField = null;
+
+      private var addInfoTF:TextField = null;
+
+      private var whiteBg:Sprite = null;
+
+      private var whiteBg1:Sprite = null;
+
+      private var icon:UILoaderAlt = null;
+
+      private var counter:ICounterComponent = null;
+
+      private var flagsBlocks:Vector.<AchievementsCustomBlockItem> = null;
+
+      private const TYPE_CLASS:String = "class";
+
+      private const TYPE_SERIES:String = "series";
+
+      private const TYPE_CUSTOM:String = "custom";
+
+      private const TYPE_REPEATABLE:String = "repeatable";
+
+      private var defaultBottomPadding:Number = 0;
+
+      private const ICO_DIMENSION:Number = 180;
+
+      private const ICO_SHADOW:Number = 16;
+
+      private var isSeparateLast:Boolean = false;
+
+      override public function build(param1:Object, param2:ITooltipProps) : void {
+         super.build(param1,param2);
+      }
+
+      override public function dispose() : void {
+         var _loc1_:AchievementsCustomBlockItem = null;
+         if(content)
+         {
+            if(this.counter)
             {
-                while (this.flagsBlocks.length > 0) 
-                {
-                    loc1 = this.flagsBlocks.pop();
-                    loc1.dispose();
-                    content.removeChild(loc1);
-                    loc1 = null;
-                }
+               content.removeChild(DisplayObject(this.counter));
+               this.counter = null;
             }
-            return;
-        }
-
-        public override function toString():String
-        {
-            return "[WG ToolTipAchievement " + name + "]";
-        }
-
-        protected override function configUI():void
-        {
-            super.configUI();
-            return;
-        }
-
-        protected override function redraw():void
-        {
-            var loc3:*=0;
-            var loc4:*=NaN;
-            var loc5:*=null;
-            var loc9:*=null;
-            var loc10:*=null;
-            var loc11:*=null;
-            var loc12:*=null;
-            var loc13:*=null;
-            var loc14:*=NaN;
-            var loc15:*=null;
-            var loc16:*=null;
-            var loc17:*=NaN;
-            var loc18:*=false;
-            var loc19:*=null;
-            var loc20:*=0;
-            var loc21:*=0;
-            var loc22:*=NaN;
-            var loc1:*=App.utils.locale;
-            var loc2:*=0;
-            loc3 = 0;
-            loc4 = 300;
-            loc5 = new net.wg.gui.components.tooltips.VO.AchievementVO(_data);
-            var loc6:*=null;
-            seaprators = new Vector.<net.wg.gui.components.tooltips.Separator>();
-            this.flagsBlocks = new Vector.<net.wg.gui.components.tooltips.AchievmentsCustomBlock>();
-            contentMargin.bottom = 2;
-            var loc7:*=null;
-            blockResults = new Vector.<net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO>();
-            this.whiteBg.width = 10;
-            topPosition = bgShadowMargin.top + contentMargin.top;
-            this.headerTF.autoSize = flash.text.TextFieldAutoSize.LEFT;
-            this.headerTF.htmlText = net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(loc5.aName, net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_HEADER, 18, "$TitleFont");
-            this.headerTF.width = this.headerTF.textWidth + 5;
-            this.headerTF.x = bgShadowMargin.left + contentMargin.left;
-            this.headerTF.y = topPosition;
-            topPosition = topPosition + (this.headerTF.textHeight + net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_BLOCK);
-            loc4 = Math.max(loc4, this.headerTF.width + bgShadowMargin.horizontal + contentMargin.horizontal);
-            (loc6 = net.wg.gui.components.tooltips.helpers.Utils.instance.createSeparate(content)).y = topPosition | 0;
-            seaprators.push(loc6);
-            topPosition = topPosition + net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_SEPARATE;
-            if (loc5.discription) 
+            if(this.historyHeaderTF)
             {
-                this.whiteBg.y = topPosition - net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_SEPARATE;
-                this.discrTF.autoSize = flash.text.TextFieldAutoSize.LEFT;
-                this.discrTF.htmlText = net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(loc5.discription, net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NORMAL, 11, "$TextFont");
-                this.discrTF.width = loc4 == 0 ? this.discrTF.textWidth + 5 : loc4 - bgShadowMargin.left - contentMargin.left;
-                this.discrTF.x = bgShadowMargin.left + contentMargin.left;
-                this.discrTF.y = topPosition;
-                topPosition = topPosition + (this.discrTF.textHeight + net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_BLOCK | 0);
-                this.whiteBg.height = topPosition - this.whiteBg.y;
+               content.removeChild(this.historyHeaderTF);
+               this.historyHeaderTF = null;
             }
-            else 
+         }
+         super.dispose();
+         if(this.flagsBlocks)
+         {
+            while(this.flagsBlocks.length > 0)
             {
-                this.discrTF.x = 0;
-                this.discrTF.y = 0;
-                this.discrTF.width = 10;
-                this.discrTF.visible = false;
+               _loc1_ = this.flagsBlocks.pop();
+               _loc1_.dispose();
+               content.removeChild(_loc1_);
+               _loc1_ = null;
             }
-            if (loc5.classParams) 
+         }
+      }
+
+      override public function toString() : String {
+         return "[WG ToolTipAchievement " + name + "]";
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+      }
+
+      override protected function redraw() : void {
+         var _loc1_:ILocale = null;
+         var _loc4_:* = NaN;
+         var _loc5_:AchievementVO = null;
+         var _loc6_:ToolTipBlockResultVO = null;
+         var _loc7_:* = NaN;
+         var _loc10_:ToolTipBlockVO = null;
+         var _loc11_:String = null;
+         var _loc12_:String = null;
+         var _loc13_:String = null;
+         _loc1_ = App.utils.locale;
+         var _loc2_:uint = 0;
+         var _loc3_:uint = 0;
+         _loc4_ = 300;
+         _loc5_ = new AchievementVO(_data);
+         _loc6_ = null;
+         blockResults = new Vector.<ToolTipBlockResultVO>();
+         this.flagsBlocks = new Vector.<AchievementsCustomBlockItem>();
+         topPosition = bgShadowMargin.top + contentMargin.top;
+         _loc7_ = bgShadowMargin.left + contentMargin.left;
+         var _loc8_:Separator = null;
+         separators = new Vector.<Separator>();
+         this.headerTF.autoSize = TextFieldAutoSize.LEFT;
+         this.headerTF.htmlText = Utils.instance.htmlWrapper(_loc5_.aName,Utils.instance.COLOR_HEADER,18,"$TitleFont");
+         this.headerTF.width = this.headerTF.textWidth + 5;
+         this.headerTF.x = _loc7_;
+         this.headerTF.y = topPosition;
+         topPosition = topPosition + (this.headerTF.textHeight + Utils.instance.MARGIN_AFTER_BLOCK | 0);
+         _loc4_ = Math.max(_loc4_,this.headerTF.width + bgShadowMargin.horizontal + contentMargin.horizontal);
+         if(_loc5_.icon)
+         {
+            this.icon.source = _loc5_.icon;
+            this.icon.sourceAlt = "../maps/icons/achievement/big/noImage.png";
+            this.icon.y = topPosition - this.ICO_SHADOW;
+            topPosition = topPosition + (this.ICO_DIMENSION + Utils.instance.MARGIN_AFTER_BLOCK - this.ICO_SHADOW * 2);
+            _loc8_ = Utils.instance.createSeparate(content);
+            _loc8_.y = topPosition;
+            separators.push(_loc8_);
+            topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
+         }
+         else
+         {
+            this.icon.width = this.icon.height = 10;
+            this.icon.visible = false;
+         }
+         if(_loc5_.description)
+         {
+            this.descrTF.autoSize = TextFieldAutoSize.LEFT;
+            this.descrTF.htmlText = _loc5_.description;
+            this.descrTF.width = _loc4_ != 0?_loc4_ - _loc7_:this.descrTF.textWidth + 5;
+            this.descrTF.x = _loc7_;
+            this.descrTF.y = topPosition;
+            topPosition = topPosition + (this.descrTF.textHeight + Utils.instance.MARGIN_AFTER_BLOCK | 0);
+         }
+         else
+         {
+            this.descrTF.x = 0;
+            this.descrTF.y = 0;
+            this.descrTF.width = 10;
+            this.descrTF.visible = false;
+         }
+         if(_loc5_.classParams)
+         {
+            _loc10_ = new ToolTipBlockVO();
+            _loc10_.leftText = "";
+            _loc10_.leftTextColor = Utils.instance.convertStringColorToNumber(Utils.instance.COLOR_NUMBER);
+            _loc10_.rightTextColor = Utils.instance.convertStringColorToNumber(Utils.instance.COLOR_NORMAL);
+            _loc10_.contener = content;
+            _loc10_.startYPos = topPosition;
+            _loc10_.childrenNamePrefix = "classParams";
+            _loc10_.rightTextList = new Vector.<ToolTipBlockRightListItemVO>();
+            _loc3_ = _loc5_.classParams.length;
+            _loc2_ = 0;
+            while(_loc2_ < _loc3_)
             {
-                (loc9 = new net.wg.gui.components.tooltips.VO.ToolTipBlockVO()).leftText = "";
-                loc9.leftTextColor = net.wg.gui.components.tooltips.helpers.Utils.instance.convertStringColorToNumber(net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NUMBER);
-                loc9.rightTextColor = net.wg.gui.components.tooltips.helpers.Utils.instance.convertStringColorToNumber(net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NORMAL);
-                loc9.contener = content;
-                loc9.startYPos = topPosition;
-                loc9.childrenNamePrefix = "classParams";
-                loc9.rightTextList = new Vector.<net.wg.gui.components.tooltips.VO.ToolTipBlockRightListItemVO>();
-                loc3 = loc5.classParams.length;
-                loc2 = 0;
-                while (loc2 < loc3) 
-                {
-                    loc9.leftText = loc9.leftText + (net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(loc1.integer(loc5.classParams[loc2]), net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NUMBER, 12, "$TextFont") + "<br/>");
-                    loc10 = ACHIEVEMENTS.achievement("rank" + (loc3 - loc2).toString());
-                    loc9.rightTextList.push(new net.wg.gui.components.tooltips.VO.ToolTipBlockRightListItemVO(loc10));
-                    ++loc2;
-                }
-                loc7 = net.wg.gui.components.tooltips.helpers.Utils.instance.createBlock(loc9, contentMargin.left + bgShadowMargin.left);
-                blockResults.push(loc7);
-                topPosition = loc7.startYPos | 0;
-                hasIcon = loc7.hasIcons ? true : hasIcon;
-                leftPartMaxW = loc7.leftPartMaxW > leftPartMaxW ? loc7.leftPartMaxW : leftPartMaxW;
-                this.whiteBg.height = topPosition - this.whiteBg.y;
+               _loc10_.leftText = _loc10_.leftText + (Utils.instance.htmlWrapper(_loc1_.integer(_loc5_.classParams[_loc2_]),Utils.instance.COLOR_NUMBER,12,"$TextFont") + "<br/>");
+               _loc11_ = ACHIEVEMENTS.achievement("rank" + (_loc3_ - _loc2_).toString());
+               _loc10_.rightTextList.push(new ToolTipBlockRightListItemVO(_loc11_));
+               _loc2_++;
             }
-            if (loc5.heroInfo) 
+            _loc6_ = Utils.instance.createBlock(_loc10_,_loc7_);
+            blockResults.push(_loc6_);
+            topPosition = _loc6_.startYPos;
+            hasIcon = _loc6_.hasIcons?true:hasIcon;
+            leftPartMaxW = _loc6_.leftPartMaxW > leftPartMaxW?_loc6_.leftPartMaxW:leftPartMaxW;
+         }
+         if((_loc5_.type == this.TYPE_CUSTOM) && (_loc5_.vehicleToKill) && _loc5_.vehicleToKill.length > 0)
+         {
+            _loc8_ = Utils.instance.createSeparate(content);
+            _loc8_.y = topPosition;
+            separators.push(_loc8_);
+            this.whiteBg.y = topPosition;
+            topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
+            _loc3_ = _loc5_.params.length;
+            _loc12_ = "";
+            _loc2_ = 0;
+            while(_loc2_ < _loc3_)
             {
-                this.heroTF.autoSize = flash.text.TextFieldAutoSize.LEFT;
-                this.heroTF.htmlText = net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(loc5.heroInfo, net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NORMAL, 11, "$TextFont");
-                this.heroTF.width = loc4 == 0 ? this.heroTF.textWidth + 5 : loc4 - bgShadowMargin.left - contentMargin.left;
-                this.heroTF.x = bgShadowMargin.left + contentMargin.left;
-                this.heroTF.y = topPosition;
-                topPosition = topPosition + (this.heroTF.textHeight + net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_BLOCK | 0);
-                this.whiteBg.height = topPosition - this.whiteBg.y;
+               _loc12_ = _loc12_ + Utils.instance.htmlWrapper(_loc1_.makeString(TOOLTIPS.achievement_params(_loc5_.params[_loc2_].id)),Utils.instance.COLOR_ADD_INFO,14,"$TitleFont");
+               _loc2_++;
             }
-            else 
+            this.vLeftTF.htmlText = _loc12_;
+            this.vLeftTF.width = this.vLeftTF.textWidth + 5;
+            this.vLeftTF.x = _loc7_;
+            this.vLeftTF.y = topPosition;
+            topPosition = topPosition + (this.vLeftTF.textHeight + Utils.instance.MARGIN_AFTER_BLOCK | 0);
+            _loc3_ = _loc5_.vehicleToKill?_loc5_.vehicleToKill.length:0;
+            _loc2_ = 0;
+            while(_loc2_ < _loc3_)
             {
-                this.heroTF.x = 0;
-                this.heroTF.y = 0;
-                this.heroTF.width = 10;
-                this.heroTF.visible = false;
+               topPosition = this.addCustomBlock(content,_loc5_.vehicleToKill[_loc2_],topPosition);
+               _loc2_++;
             }
-            var loc8:*;
-            if ((loc8 = this.getInfoText(loc5.type, loc5.params, loc5.value)) == "") 
+            topPosition = topPosition + Utils.instance.MARGIN_AFTER_BLOCK;
+            if(_loc5_.vehicleToKillLeft)
             {
-                this.infoTF.x = 0;
-                this.infoTF.y = 0;
-                this.infoTF.width = 10;
-                this.infoTF.visible = false;
+               _loc12_ = Utils.instance.htmlWrapper(_loc1_.makeString(TOOLTIPS.SUITABLEVEHICLE_MORE),Utils.instance.COLOR_ADD_INFO,14,"$TitleFont") + " " + Utils.instance.htmlWrapper(_loc5_.vehicleToKillLeft.toString(),Utils.instance.COLOR_NUMBER,14,"$TitleFont");
+               this.notEnoughTF.htmlText = _loc12_;
+               this.notEnoughTF.width = this.notEnoughTF.textWidth + 5;
+               this.notEnoughTF.x = _loc7_;
+               this.notEnoughTF.y = topPosition;
+               topPosition = topPosition + (this.notEnoughTF.textHeight + Utils.instance.MARGIN_AFTER_BLOCK | 0);
             }
-            else 
+            else
             {
-                this.whiteBg.height = topPosition - this.whiteBg.y;
-                (loc6 = net.wg.gui.components.tooltips.helpers.Utils.instance.createSeparate(content)).y = topPosition;
-                seaprators.push(loc6);
-                topPosition = topPosition + net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_SEPARATE;
-                loc11 = new flash.text.TextFormat();
-                this.infoTF.autoSize = flash.text.TextFieldAutoSize.LEFT;
-                this.infoTF.htmlText = loc8;
-                loc11.bold = true;
-                this.infoTF.setTextFormat(loc11);
-                this.infoTF.x = bgShadowMargin.left + contentMargin.left;
-                this.infoTF.y = topPosition;
-                this.infoTF.width = this.infoTF.textWidth + 5;
-                topPosition = topPosition + (this.infoTF.textHeight + net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_BLOCK);
-                contentMargin.bottom = 12;
+               this.notEnoughTF.x = 0;
+               this.notEnoughTF.y = 0;
+               this.notEnoughTF.width = 10;
+               this.notEnoughTF.visible = false;
             }
-            if (loc5.type != this.TYPE_CUSTOM) 
+            this.whiteBg.height = topPosition - this.whiteBg.y;
+            this.whiteBg.visible = true;
+            contentMargin.bottom = 0;
+         }
+         else
+         {
+            this.vLeftTF.x = 0;
+            this.vLeftTF.y = 0;
+            this.vLeftTF.width = 10;
+            this.vLeftTF.visible = false;
+            this.notEnoughTF.x = 0;
+            this.notEnoughTF.y = 0;
+            this.notEnoughTF.width = 10;
+            this.notEnoughTF.visible = false;
+         }
+         var _loc9_:String = this.getInfoText(_loc5_.type,_loc5_.params,_loc5_.value,_loc5_.achievedOn,_loc5_.closeToRecord);
+         if(_loc9_ != "")
+         {
+            this.counter = this.getInfoCounter(_loc5_.type,_loc5_.value,_component);
+            _loc8_ = Utils.instance.createSeparate(content);
+            _loc8_.y = topPosition;
+            separators.push(_loc8_);
+            this.whiteBg.y = topPosition;
+            topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
+            if(this.counter)
             {
-                this.notEnoughTF.x = 0;
-                this.notEnoughTF.y = 0;
-                this.notEnoughTF.width = 10;
-                this.notEnoughTF.visible = false;
+               this.counter.x = _loc7_;
+               this.counter.y = topPosition + 10 - (this.counter.height >> 1);
+               content.addChild(DisplayObject(this.counter));
+               this.addInfoTF.x = this.counter.x + this.counter.width + 10 | 0;
             }
-            else 
+            else
             {
-                loc12 = [];
-                loc3 = loc5.vehicleToKill ? loc5.vehicleToKill.length : 0;
-                loc2 = 0;
-                while (loc2 < loc3) 
-                {
-                    loc14 = (loc13 = loc5.vehicleToKill[loc2]).level;
-                    loc15 = loc13.name;
-                    loc16 = loc13.type;
-                    loc17 = loc13.nation;
-                    loc18 = false;
-                    loc19 = {"name":loc15, "nation":loc17, "type":loc16};
-                    loc20 = loc12.length;
-                    loc21 = 0;
-                    while (loc21 < loc20) 
-                    {
-                        if (loc12[loc21].level == loc14) 
-                        {
-                            loc12[loc21].data.push(loc19);
-                            loc18 = true;
-                            break;
-                        }
-                        ++loc21;
-                    }
-                    if (!loc18) 
-                    {
-                        loc12.push({"level":loc14, "data":[loc19]});
-                    }
-                    ++loc2;
-                }
-                if (loc12.length > 0) 
-                {
-                    (loc6 = net.wg.gui.components.tooltips.helpers.Utils.instance.createSeparate(content)).y = topPosition;
-                    seaprators.push(loc6);
-                    topPosition = topPosition + net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_SEPARATE;
-                    loc12.sortOn("level", [Array.NUMERIC]);
-                    loc3 = loc12.length;
-                    loc22 = 0;
-                    while (loc22 < loc3) 
-                    {
-                        topPosition = this.addCustomBlock(content, loc12[loc22], topPosition);
-                        loc6 = net.wg.gui.components.tooltips.helpers.Utils.instance.createSeparate(content);
-                        if (loc22 == (loc3 - 1)) 
-                        {
-                            topPosition = topPosition + 5;
-                        }
-                        loc6.y = topPosition;
-                        seaprators.push(loc6);
-                        topPosition = topPosition + net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_SEPARATE;
-                        ++loc22;
-                    }
-                }
-                if (loc5.vehicleToKillLeft > 0) 
-                {
-                    this.notEnoughTF.htmlText = net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(loc1.makeString(TOOLTIPS.ACHIEVEMENT_CUSTOM_NOTENOUGH), net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_ADD_INFO, 13, "$TitleFont") + " " + net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(loc5.vehicleToKillLeft.toString(), net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NUMBER, 13, "$TitleFont");
-                    this.notEnoughTF.width = this.discrTF.width;
-                    this.notEnoughTF.height = this.notEnoughTF.textHeight + 5;
-                    this.notEnoughTF.y = topPosition;
-                    this.notEnoughTF.x = bgShadowMargin.left + contentMargin.left;
-                    this.notEnoughTF.visible = true;
-                }
-                else 
-                {
-                    this.notEnoughTF.x = 0;
-                    this.notEnoughTF.y = 0;
-                    this.notEnoughTF.width = 10;
-                    this.notEnoughTF.visible = false;
-                    loc6 = seaprators.pop();
-                    content.removeChild(loc6);
-                    loc6 = null;
-                }
+               this.addInfoTF.x = _loc7_;
             }
-            loc5 = null;
-            updatePositions();
-            super.redraw();
-            return;
-        }
-
-        protected override function updateSize():void
-        {
-            super.updateSize();
-            this.whiteBg.width = content.width + bgShadowMargin.horizontal;
-            return;
-        }
-
-        internal function addCustomBlock(arg1:flash.display.MovieClip, arg2:Object, arg3:Number):Number
-        {
-            var loc1:*=net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(App.utils.locale.makeString(TOOLTIPS.level(arg2.level)), net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NORMAL, 12, "$FieldFont") + " " + net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(App.utils.locale.makeString(TOOLTIPS.VEHICLE_LEVEL).toLowerCase(), net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_SUB_NORMAL, 12, "$FieldFont");
-            var loc2:*=App.utils.classFactory.getComponent("AchievmentsCustomBlock", net.wg.gui.components.tooltips.AchievmentsCustomBlock);
-            arg1.addChild(loc2);
-            loc2.setData(loc1, arg2.data);
-            loc2.x = bgShadowMargin.left + contentMargin.left + 10;
-            loc2.y = arg3;
-            this.flagsBlocks.push(loc2);
-            arg3 = arg3 + (arg2.data.length * 23 + 5);
-            return arg3;
-        }
-
-        internal function getInfoText(arg1:String, arg2:Array, arg3:Number):String
-        {
-            var loc2:*=0;
-            var loc3:*=0;
-            var loc1:*="";
-            if (arg2) 
+            this.addInfoTF.y = topPosition;
+            this.addInfoTF.multiline = true;
+            this.addInfoTF.wordWrap = true;
+            this.addInfoTF.htmlText = _loc9_;
+            this.addInfoTF.width = this.addInfoTF.textWidth + 5;
+            this.addInfoTF.height = this.addInfoTF.textHeight + 5;
+            if(this.counter)
             {
-                loc2 = 0;
-                loc3 = arg2.length;
-                var loc4:*=arg1;
-                switch (loc4) 
-                {
-                    case this.TYPE_SERIES:
-                    {
-                        loc2 = 0;
-                        while (loc2 < loc3) 
-                        {
-                            loc1 = loc1 + (net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(App.utils.locale.makeString(TOOLTIPS.achievement_params(arg2[loc2].id)), net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_ADD_INFO, 14, "$TitleFont") + " " + net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(arg2[loc2].val, net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NUMBER, 14, "$TitleFont"));
-                            ++loc2;
-                        }
-                        break;
-                    }
-                    case this.TYPE_CLASS:
-                    {
-                        loc2 = 0;
-                        while (loc2 < loc3) 
-                        {
-                            loc1 = loc1 + (net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(App.utils.locale.makeString(TOOLTIPS.achievement_params("left" + (arg3 - 1))), net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_ADD_INFO, 14, "$TitleFont") + " " + net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(App.utils.locale.niceNumber(arg2[loc2].val) + " " + App.utils.locale.makeString(TOOLTIPS.achievement_params(arg2[loc2].id)), net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NUMBER, 14, "$TitleFont"));
-                            ++loc2;
-                        }
-                        break;
-                    }
-                    case this.TYPE_CUSTOM:
-                    {
-                        loc2 = 0;
-                        while (loc2 < loc3) 
-                        {
-                            loc1 = loc1 + net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(App.utils.locale.makeString(TOOLTIPS.achievement_params(arg2[loc2].id)), net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_ADD_INFO, 14, "$TitleFont");
-                            ++loc2;
-                        }
-                        break;
-                    }
-                }
+               topPosition = Math.max(this.addInfoTF.y + this.addInfoTF.textHeight,this.counter.y + this.counter.height - 5) + Utils.instance.MARGIN_AFTER_BLOCK | 0;
             }
-            return loc1;
-        }
+            else
+            {
+               topPosition = this.addInfoTF.y + this.addInfoTF.textHeight + Utils.instance.MARGIN_AFTER_BLOCK | 0;
+            }
+            this.whiteBg.height = topPosition - this.whiteBg.y;
+            _loc8_ = Utils.instance.createSeparate(content);
+            _loc8_.y = topPosition;
+            separators.push(_loc8_);
+            topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
+            this.whiteBg.visible = true;
+            contentMargin.bottom = 0;
+            this.isSeparateLast = true;
+         }
+         else
+         {
+            this.addInfoTF.x = 0;
+            this.addInfoTF.y = 0;
+            this.addInfoTF.width = 10;
+            this.addInfoTF.visible = false;
+         }
+         if(_loc5_.historyDescr)
+         {
+            this.isSeparateLast = false;
+            _loc13_ = _loc1_.makeString(TOOLTIPS.ACHIEVEMENT_HISTORYDESCRIPTIONHEADER);
+            this.historyHeaderTF = Utils.instance.addHeader("historyHeader",_loc7_,topPosition,_loc13_);
+            content.addChild(this.historyHeaderTF);
+            topPosition = this.historyHeaderTF.y + this.historyHeaderTF.textHeight + Utils.instance.MARGIN_AFTER_SUBHEADER | 0;
+            this.historyTF.autoSize = TextFieldAutoSize.LEFT;
+            this.historyTF.htmlText = Utils.instance.htmlWrapper(_loc5_.historyDescr,Utils.instance.COLOR_SUB_NORMAL,12,"$TextFont");
+            this.historyTF.width = _loc4_ != 0?_loc4_ - _loc7_:this.historyTF.textWidth + 5;
+            this.historyTF.x = _loc7_;
+            this.historyTF.y = topPosition;
+            topPosition = topPosition + (this.historyTF.textHeight + Utils.instance.MARGIN_AFTER_BLOCK | 0);
+            contentMargin.bottom = this.defaultBottomPadding;
+         }
+         else
+         {
+            this.historyTF.x = 0;
+            this.historyTF.y = 0;
+            this.historyTF.width = 10;
+            this.historyTF.visible = false;
+         }
+         if(!_loc5_.isInDossier)
+         {
+            if(this.isSeparateLast)
+            {
+               _loc8_ = separators.pop();
+               content.removeChild(_loc8_);
+               _loc8_ = null;
+            }
+            else
+            {
+               this.whiteBg1.y = topPosition;
+               this.whiteBg1.visible = true;
+            }
+            _loc8_ = Utils.instance.createSeparate(content);
+            _loc8_.y = topPosition;
+            separators.push(_loc8_);
+            topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
+            this.isInDossierTF.y = topPosition;
+            this.isInDossierTF.x = _loc7_;
+            this.isInDossierTF.text = TOOLTIPS.ACHIEVEMENT_ISNOTINDOSSIER;
+            this.isInDossierTF.width = this.isInDossierTF.textWidth + 5 | 0;
+            topPosition = topPosition + (this.isInDossierTF.textHeight + Utils.instance.MARGIN_AFTER_BLOCK | 0);
+            if(this.whiteBg1.visible)
+            {
+               this.whiteBg1.height = topPosition - _loc8_.y;
+            }
+            else
+            {
+               this.whiteBg.height = topPosition - this.whiteBg.y;
+            }
+            contentMargin.bottom = 0;
+            this.isSeparateLast = false;
+         }
+         else
+         {
+            this.isInDossierTF.x = 0;
+            this.isInDossierTF.y = 0;
+            this.isInDossierTF.width = 10;
+            this.isInDossierTF.visible = false;
+         }
+         if(this.isSeparateLast)
+         {
+            _loc8_ = separators.pop();
+            content.removeChild(_loc8_);
+            _loc8_ = null;
+         }
+         _loc5_ = null;
+         updatePositions();
+         super.redraw();
+      }
 
-        internal const TYPE_CLASS:String="class";
+      override protected function updateSize() : void {
+         super.updateSize();
+         if(this.icon.visible)
+         {
+            this.icon.x = content.width + contentMargin.right + bgShadowMargin.right - this.ICO_DIMENSION >> 1;
+         }
+         var _loc1_:Number = content.width + contentMargin.right - bgShadowMargin.left;
+         if(this.whiteBg.visible)
+         {
+            this.whiteBg.x = bgShadowMargin.left;
+            this.whiteBg.width = _loc1_;
+         }
+         if(this.whiteBg1.visible)
+         {
+            this.whiteBg1.x = bgShadowMargin.left;
+            this.whiteBg1.width = _loc1_;
+         }
+      }
 
-        internal const TYPE_SERIES:String="series";
+      private function addCustomBlock(param1:MovieClip, param2:Object, param3:Number) : Number {
+         var _loc4_:AchievementsCustomBlockItem = App.utils.classFactory.getComponent("AchievementsCustomBlockItem",AchievementsCustomBlockItem);
+         _loc4_.setData(param2);
+         _loc4_.x = bgShadowMargin.left + contentMargin.left;
+         _loc4_.y = param3;
+         param1.addChild(_loc4_);
+         this.flagsBlocks.push(_loc4_);
+         var param3:Number = param3 + 34;
+         return param3;
+      }
 
-        internal const TYPE_CUSTOM:String="custom";
+      private function getInfoText(param1:String, param2:Array, param3:Number, param4:String=null, param5:Array=null) : String {
+         var _loc10_:String = null;
+         var _loc11_:String = null;
+         var _loc12_:String = null;
+         var _loc6_:* = "";
+         var _loc7_:ILocale = App.utils.locale;
+         var _loc8_:uint = 0;
+         var _loc9_:uint = 0;
+         if(param2)
+         {
+            _loc8_ = param2.length;
+            _loc10_ = "";
+            switch(param1)
+            {
+               case this.TYPE_SERIES:
+                  _loc9_ = 0;
+                  while(_loc9_ < _loc8_)
+                  {
+                     _loc10_ = _loc7_.makeString(TOOLTIPS.achievement_params(param2[_loc9_].id)) + " " + param2[_loc9_].val;
+                     _loc6_ = _loc6_ + Utils.instance.htmlWrapper(_loc10_,Utils.instance.COLOR_NORMAL,12,"$TextFont");
+                     _loc9_++;
+                  }
+                  break;
+               case this.TYPE_CLASS:
+                  if(param3 < 5)
+                  {
+                     _loc6_ = Utils.instance.htmlWrapper(_loc7_.makeString(TOOLTIPS.ACHIEVEMENT_CURRENTDEGREE) + " " + this.getDEGREE(param3),Utils.instance.COLOR_NORMAL,12,"$TextFont");
+                  }
+                  _loc9_ = 0;
+                  while(_loc9_ < _loc8_)
+                  {
+                     if(_loc6_ != "")
+                     {
+                        _loc6_ = _loc6_ + "<br/><font size=\"7\"></font><br/>";
+                     }
+                     _loc6_ = _loc6_ + (Utils.instance.htmlWrapper(_loc7_.makeString(TOOLTIPS.achievement_params("left" + (param3-1))) + " " + _loc7_.makeString(TOOLTIPS.achievement_params(param2[_loc9_].id)),Utils.instance.COLOR_ADD_INFO,12,"$TextFont") + ": " + Utils.instance.htmlWrapper(_loc7_.numberWithoutZeros(param2[_loc9_].val),Utils.instance.COLOR_NUMBER,12,"$TextFont"));
+                     _loc9_++;
+                  }
+                  break;
+               case this.TYPE_REPEATABLE:
+                  if(param3 > 0)
+                  {
+                     _loc6_ = Utils.instance.htmlWrapper(_loc7_.makeString(TOOLTIPS.ACHIEVEMENT_ALLACHIEVEMENTS),Utils.instance.COLOR_NORMAL,12,"$TextFont") + " " + Utils.instance.htmlWrapper(param3.toString(),Utils.instance.COLOR_NUMBER,12,"$TextFont");
+                  }
+                  break;
+            }
+         }
+         if(param4)
+         {
+            _loc6_ = _loc6_ + ("<br/>" + Utils.instance.htmlWrapper(_loc7_.makeString(TOOLTIPS.ACHIEVEMENT_ACHIEVEDON) + param4,Utils.instance.COLOR_SUB_NORMAL,12,"$TextFont"));
+         }
+         if(param5)
+         {
+            _loc6_ = _loc6_ + ("<br/><font size=\"7\"></font><br/>" + Utils.instance.htmlWrapper(_loc7_.makeString(TOOLTIPS.ACHIEVEMENT_CLOSETORECORD),Utils.instance.COLOR_ADD_INFO,12,"$TextFont"));
+            _loc8_ = param5.length;
+            _loc9_ = 0;
+            while(_loc9_ < _loc8_)
+            {
+               _loc11_ = param5[_loc9_][0] + ": ";
+               _loc12_ = param5[_loc9_][1].toString();
+               _loc6_ = _loc6_ + ("<br/>" + Utils.instance.htmlWrapper(_loc11_,Utils.instance.COLOR_SUB_NORMAL,12,"$TextFont"));
+               _loc6_ = _loc6_ + Utils.instance.htmlWrapper(_loc12_,Utils.instance.COLOR_NUMBER,12,"$TextFont");
+               _loc9_++;
+            }
+         }
+         return _loc6_;
+      }
 
-        internal var headerTF:flash.text.TextField=null;
+      private function getDEGREE(param1:Number) : String {
+         var _loc2_:* = "";
+         switch(param1)
+         {
+            case 4:
+               _loc2_ = "IV";
+               break;
+            case 3:
+               _loc2_ = "III";
+               break;
+            case 2:
+               _loc2_ = "II";
+               break;
+            case 1:
+               _loc2_ = "I";
+               break;
+         }
+         return _loc2_;
+      }
 
-        internal var discrTF:flash.text.TextField=null;
+      private function getInfoCounter(param1:String, param2:Number, param3:String) : ICounterComponent {
+         var _loc4_:ICounterComponent = null;
+         switch(param1)
+         {
+            case this.TYPE_SERIES:
+               if(param3 == COMPONENT_PROFILE_VEHICLE)
+               {
+                  _loc4_ = App.utils.classFactory.getComponent("GreyCounter_UI",GreyRibbonCounter);
+               }
+               else
+               {
+                  _loc4_ = App.utils.classFactory.getComponent("YellowCounter_UI",YellowRibbonCounter);
+               }
+               break;
+            case this.TYPE_CLASS:
+               if(param2 < 5)
+               {
+                  _loc4_ = App.utils.classFactory.getComponent("BeigeCounter_UI",BeigeCounter);
+               }
+               break;
+            case this.TYPE_REPEATABLE:
+               _loc4_ = App.utils.classFactory.getComponent("RedCounter_UI",RedCounter);
+               break;
+         }
+         if(_loc4_)
+         {
+            _loc4_.text = param2.toString();
+            _loc4_.validateNow();
+         }
+         return _loc4_;
+      }
+   }
 
-        internal var notEnoughTF:flash.text.TextField=null;
-
-        internal var infoTF:flash.text.TextField=null;
-
-        internal var heroTF:flash.text.TextField=null;
-
-        internal var whiteBg:flash.display.Sprite=null;
-
-        internal var flagsBlocks:__AS3__.vec.Vector.<net.wg.gui.components.tooltips.AchievmentsCustomBlock>=null;
-    }
 }

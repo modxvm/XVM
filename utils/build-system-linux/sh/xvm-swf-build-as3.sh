@@ -7,8 +7,13 @@
 projects=(
           'wg'
           'xvm'
-          'xvm-hangar'
           'xvm-autologin'
+          'xvm-company'
+          'xvm-crew'
+          'xvm-hangar'
+          'xvm-ping'
+          'xvm-profile'
+          'xvm-squad'
          )
 
 pushd ../../../src/xvm/ > /dev/null

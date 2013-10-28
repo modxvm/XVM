@@ -1,37 +1,36 @@
-package net.wg.gui.messenger.evnts 
+package net.wg.gui.messenger.evnts
 {
-    import flash.events.*;
-    
-    public class ContactsFormEvent extends flash.events.Event
-    {
-        public function ContactsFormEvent(arg1:String, arg2:Boolean=false, arg3:Boolean=false, arg4:String=null, arg5:Number=-1, arg6:String=null)
-        {
-            super(arg1, arg2, arg3);
-            this.searchValue = arg4;
-            this.name = arg6;
-            return;
-        }
+   import flash.events.Event;
 
-        public override function clone():flash.events.Event
-        {
-            return new net.wg.gui.messenger.evnts.ContactsFormEvent(type, bubbles, cancelable, this.searchValue, this.uid, this.name);
-        }
 
-        public override function toString():String
-        {
-            return formatToString("ContactsFormEvent", "type", "cancelable", "eventPhase", "searchValue", "uid", "name");
-        }
+   public class ContactsFormEvent extends Event
+   {
+          
+      public function ContactsFormEvent(param1:String, param2:Boolean=false, param3:Boolean=false, param4:String=null, param5:Number=undefined, param6:String=null) {
+         super(param1,param2,param3);
+         this.searchValue = param4;
+         this.name = param6;
+      }
 
-        public static const SEARCH:String="search";
+      public static const SEARCH:String = "search";
 
-        public static const ADD_TO_FRIENDS:String="addToFriends";
+      public static const ADD_TO_FRIENDS:String = "addToFriends";
 
-        public static const ADD_TO_IGNORED:String="addToIgnored";
+      public static const ADD_TO_IGNORED:String = "addToIgnored";
 
-        public var searchValue:String;
+      public var searchValue:String;
 
-        public var uid:Number=-1;
+      public var uid:Number = -1;
 
-        public var name:String;
-    }
+      public var name:String;
+
+      override public function clone() : Event {
+         return new ContactsFormEvent(type,bubbles,cancelable,this.searchValue,this.uid,this.name);
+      }
+
+      override public function toString() : String {
+         return formatToString("ContactsFormEvent","type","cancelable","eventPhase","searchValue","uid","name");
+      }
+   }
+
 }

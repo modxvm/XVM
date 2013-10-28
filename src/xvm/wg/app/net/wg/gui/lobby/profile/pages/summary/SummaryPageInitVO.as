@@ -1,15 +1,17 @@
-package net.wg.gui.lobby.profile.pages.summary 
+package net.wg.gui.lobby.profile.pages.summary
 {
-    public class SummaryPageInitVO extends net.wg.gui.lobby.profile.pages.summary.SummaryInitVO
-    {
-        public function SummaryPageInitVO(arg1:Object)
-        {
-            super(arg1);
-            return;
-        }
 
-        public var nextAwardsLabel:String="";
 
-        public var nextAwardsErrorText:String="";
-    }
+   public class SummaryPageInitVO extends SummaryInitVO
+   {
+          
+      public function SummaryPageInitVO(param1:Object) {
+         super(param1);
+      }
+
+      public var nextAwardsLabel:String = "";
+
+      public var nextAwardsErrorText:String = "";
+   }
+
 }

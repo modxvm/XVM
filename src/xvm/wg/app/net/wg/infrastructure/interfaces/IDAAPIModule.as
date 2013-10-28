@@ -1,9 +1,12 @@
-package net.wg.infrastructure.interfaces 
+package net.wg.infrastructure.interfaces
 {
-    import net.wg.infrastructure.base.meta.*;
-    
-    public interface IDAAPIModule extends net.wg.infrastructure.base.meta.IBaseDAAPIModuleMeta
-    {
-        function get disposed():Boolean;
-    }
+   import net.wg.infrastructure.base.meta.IBaseDAAPIModuleMeta;
+
+
+   public interface IDAAPIModule extends IBaseDAAPIModuleMeta
+   {
+          
+      function get disposed() : Boolean;
+   }
+
 }

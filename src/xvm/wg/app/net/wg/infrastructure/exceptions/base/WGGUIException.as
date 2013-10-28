@@ -1,11 +1,13 @@
-package net.wg.infrastructure.exceptions.base 
+package net.wg.infrastructure.exceptions.base
 {
-    public class WGGUIException extends Error
-    {
-        public function WGGUIException(arg1:*="", arg2:*=0)
-        {
-            super(arg1, arg2);
-            return;
-        }
-    }
+
+
+   public class WGGUIException extends Error
+   {
+          
+      public function WGGUIException(param1:*=undefined, param2:*=undefined) {
+         super(param1,param2);
+      }
+   }
+
 }

@@ -1,9 +1,12 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface ISoundManagerMeta extends flash.events.IEventDispatcher
-    {
-        function soundEventHandlerS(arg1:String, arg2:String, arg3:String, arg4:String):void;
-    }
+   import flash.events.IEventDispatcher;
+
+
+   public interface ISoundManagerMeta extends IEventDispatcher
+   {
+          
+      function soundEventHandlerS(param1:String, param2:String, param3:String, param4:String) : void;
+   }
+
 }

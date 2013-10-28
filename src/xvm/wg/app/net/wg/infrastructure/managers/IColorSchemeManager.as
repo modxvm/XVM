@@ -1,18 +1,21 @@
-package net.wg.infrastructure.managers 
+package net.wg.infrastructure.managers
 {
-    import flash.events.*;
-    import flash.geom.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.interfaces.*;
-    
-    public interface IColorSchemeManager extends net.wg.infrastructure.base.meta.IColorSchemeManagerMeta, flash.events.IEventDispatcher
-    {
-        function getScheme(arg1:String):net.wg.infrastructure.interfaces.IColorScheme;
+   import net.wg.infrastructure.base.meta.IColorSchemeManagerMeta;
+   import flash.events.IEventDispatcher;
+   import net.wg.infrastructure.interfaces.IColorScheme;
+   import flash.geom.ColorTransform;
 
-        function getAliasColor(arg1:String):String;
 
-        function getRGB(arg1:String):Number;
+   public interface IColorSchemeManager extends IColorSchemeManagerMeta, IEventDispatcher
+   {
+          
+      function getScheme(param1:String) : IColorScheme;
 
-        function getTransform(arg1:String):flash.geom.ColorTransform;
-    }
+      function getAliasColor(param1:String) : String;
+
+      function getRGB(param1:String) : Number;
+
+      function getTransform(param1:String) : ColorTransform;
+   }
+
 }

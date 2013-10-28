@@ -1,31 +1,30 @@
-package net.wg.gui.components.common.video 
+package net.wg.gui.components.common.video
 {
-    import flash.events.*;
-    
-    public class VideoPlayerStatusEvent extends flash.events.Event
-    {
-        public function VideoPlayerStatusEvent(arg1:String, arg2:Boolean=false, arg3:Boolean=false)
-        {
-            super(arg1, arg2, arg3);
-            return;
-        }
+   import flash.events.Event;
 
-        public override function clone():flash.events.Event
-        {
-            var loc1:*=new net.wg.gui.components.common.video.VideoPlayerStatusEvent(type, bubbles, cancelable);
-            loc1.errorCode = this.errorCode;
-            return loc1;
-        }
 
-        public override function toString():String
-        {
-            return formatToString("VideoPlayerEvent", "type", "bubbles", "cancelable", "eventPhase");
-        }
+   public class VideoPlayerStatusEvent extends Event
+   {
+          
+      public function VideoPlayerStatusEvent(param1:String, param2:Boolean=false, param3:Boolean=false) {
+         super(param1,param2,param3);
+      }
 
-        public static const STATUS_CHANGED:String="videoPlayerStatusChanged";
+      public static const STATUS_CHANGED:String = "videoPlayerStatusChanged";
 
-        public static const ERROR:String="videoPlayerError";
+      public static const ERROR:String = "videoPlayerError";
 
-        public var errorCode:String="";
-    }
+      public var errorCode:String = "";
+
+      override public function clone() : Event {
+         var _loc1_:VideoPlayerStatusEvent = new VideoPlayerStatusEvent(type,bubbles,cancelable);
+         _loc1_.errorCode = this.errorCode;
+         return _loc1_;
+      }
+
+      override public function toString() : String {
+         return formatToString("VideoPlayerEvent","type","bubbles","cancelable","eventPhase");
+      }
+   }
+
 }

@@ -1,27 +1,31 @@
-package net.wg.infrastructure.interfaces 
+package net.wg.infrastructure.interfaces
 {
-    import flash.display.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    
-    public interface ICursor extends net.wg.infrastructure.base.meta.ICursorMeta, net.wg.infrastructure.interfaces.IView
-    {
-        function useResizeCursor(arg1:flash.display.InteractiveObject):void;
+   import net.wg.infrastructure.base.meta.ICursorMeta;
+   import flash.display.InteractiveObject;
+   import net.wg.infrastructure.interfaces.entity.IDragDropHitArea;
+   import flash.display.Sprite;
 
-        function unUseResizeCursor(arg1:flash.display.InteractiveObject):void;
 
-        function registerDragging(arg1:net.wg.infrastructure.interfaces.entity.IDragDropHitArea, arg2:String=null):void;
+   public interface ICursor extends ICursorMeta, IView
+   {
+          
+      function useResizeCursor(param1:InteractiveObject) : void;
 
-        function unRegisterDragging(arg1:net.wg.infrastructure.interfaces.entity.IDragDropHitArea):void;
+      function unUseResizeCursor(param1:InteractiveObject) : void;
 
-        function attachToCursor(arg1:flash.display.Sprite, arg2:Number, arg3:Number):void;
+      function registerDragging(param1:IDragDropHitArea, param2:String=null) : void;
 
-        function getAttachedSprite():flash.display.Sprite;
+      function unRegisterDragging(param1:IDragDropHitArea) : void;
 
-        function detachFromCursor():void;
+      function attachToCursor(param1:Sprite, param2:Number, param3:Number) : void;
 
-        function resetCursor():void;
+      function getAttachedSprite() : Sprite;
 
-        function setCursor(arg1:String):void;
-    }
+      function detachFromCursor() : void;
+
+      function resetCursor() : void;
+
+      function setCursor(param1:String) : void;
+   }
+
 }

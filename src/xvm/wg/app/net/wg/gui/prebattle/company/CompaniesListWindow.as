@@ -1,318 +1,292 @@
-package net.wg.gui.prebattle.company 
+package net.wg.gui.prebattle.company
 {
-    import flash.display.*;
-    import flash.events.*;
-    import flash.ui.*;
-    import net.wg.data.*;
-    import net.wg.data.daapi.base.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.events.*;
-    import net.wg.gui.lobby.messengerBar.*;
-    import net.wg.gui.messenger.*;
-    import net.wg.gui.prebattle.meta.*;
-    import net.wg.gui.prebattle.meta.impl.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.data.*;
-    import scaleform.clik.events.*;
-    import scaleform.clik.utils.*;
-    
-    public class CompaniesListWindow extends net.wg.gui.prebattle.meta.impl.CompaniesWindowMeta implements net.wg.gui.prebattle.meta.ICompaniesWindowMeta
-    {
-        public function CompaniesListWindow()
-        {
-            super();
-            isCentered = false;
-            this.companiesDP = new net.wg.data.daapi.base.DAAPIDataProvider();
-            return;
-        }
+   import net.wg.gui.prebattle.meta.impl.CompaniesWindowMeta;
+   import net.wg.gui.prebattle.meta.ICompaniesWindowMeta;
+   import net.wg.data.daapi.base.DAAPIDataProvider;
+   import net.wg.gui.messenger.ChannelComponent;
+   import flash.display.MovieClip;
+   import net.wg.gui.components.controls.ScrollBar;
+   import net.wg.gui.components.controls.SoundButtonEx;
+   import net.wg.gui.components.controls.IconButton;
+   import net.wg.gui.components.controls.TextInput;
+   import net.wg.gui.components.controls.CheckBox;
+   import net.wg.gui.components.controls.DropdownMenu;
+   import scaleform.clik.events.InputEvent;
+   import flash.ui.Keyboard;
+   import scaleform.clik.constants.InputValue;
+   import scaleform.clik.utils.Padding;
+   import net.wg.gui.lobby.messengerBar.WindowGeometryInBar;
+   import net.wg.gui.events.MessengerBarEvent;
+   import scaleform.clik.constants.InvalidationType;
+   import net.wg.data.Aliases;
+   import scaleform.clik.utils.Constraints;
+   import scaleform.clik.constants.ConstrainMode;
+   import flash.display.DisplayObject;
+   import scaleform.clik.events.ButtonEvent;
+   import scaleform.clik.data.DataProvider;
+   import scaleform.clik.events.ListEvent;
+   import flash.events.FocusEvent;
+   import flash.events.Event;
 
-        protected override function draw():void
-        {
-            var loc1:*=0;
-            var loc2:*=0;
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
+
+   public class CompaniesListWindow extends CompaniesWindowMeta implements ICompaniesWindowMeta
+   {
+          
+      public function CompaniesListWindow() {
+         super();
+         isCentered = false;
+         this.companiesDP = new DAAPIDataProvider();
+      }
+
+      private var companiesDP:DAAPIDataProvider;
+
+      public var channelComponent:ChannelComponent;
+
+      public var topPanel:MovieClip;
+
+      public var groupsScrollBar:ScrollBar;
+
+      public var createButton:SoundButtonEx;
+
+      public var cmpList:CompaniesScrollingList;
+
+      public var refreshButton:IconButton;
+
+      public var filterButton:IconButton;
+
+      public var filterTextField:TextInput;
+
+      public var filterInBattleCheckbox:CheckBox;
+
+      public var division:DropdownMenu;
+
+      private var defaultFilterText:String = "";
+
+      private var selectedFilterInBattleCheckbox:Boolean = false;
+
+      private var defaultSelectedIndex:int = 0;
+
+      private var isFirstDraw:Boolean = true;
+
+      public function as_getCompaniesListDP() : Object {
+         return this.companiesDP;
+      }
+
+      public function as_showPlayersList(param1:uint) : void {
+         if(this.cmpList)
+         {
+            this.cmpList.setIndexCompany = param1;
+         }
+      }
+
+      public function as_setRefreshCoolDown(param1:Number) : void {
+         this.coolDownProcess(param1 * 1000);
+      }
+
+      public function as_disableCreateButton(param1:Boolean) : void {
+         if(this.createButton != null)
+         {
+            this.createButton.enabled = !param1;
+         }
+      }
+
+      override public function setFocus() : void {
+         super.setFocus();
+         if(this.channelComponent)
+         {
+            this.channelComponent.setFocusToInput();
+         }
+      }
+
+      override public function handleInput(param1:InputEvent) : void {
+         if(param1.details.code == Keyboard.ESCAPE && param1.details.value == InputValue.KEY_DOWN)
+         {
+            if(this.cmpList.isOpenedState)
             {
-                loc1 = window.width - window.contentPadding.left - window.contentPadding.right;
-                loc2 = window.height - window.contentPadding.top - window.contentPadding.bottom;
-                _width = loc1;
-                _height = loc2;
-                constraints.update(loc1, loc2);
-                this.channelComponent.invalidate(scaleform.clik.constants.InvalidationType.SIZE);
+               this.cmpList.unselectedRenderers();
+               param1.preventDefault();
+               param1.stopImmediatePropagation();
+               return;
             }
+         }
+         super.handleInput(param1);
+         if(param1.handled)
+         {
             return;
-        }
+         }
+         if(param1.details.code == Keyboard.F1 && param1.details.value == InputValue.KEY_UP)
+         {
+            showFAQWindowS();
+            param1.handled = true;
+         }
+      }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            registerComponent(this.channelComponent, net.wg.data.Aliases.CHANNEL_COMPONENT);
-            this.createButton.label = PREBATTLE.BUTTONS_COMPANY_CREATE;
-            constraints = new scaleform.clik.utils.Constraints(this, scaleform.clik.constants.ConstrainMode.REFLOW);
-            var loc1:*=this.channelComponent.messageArea;
-            constraints.addElement(loc1.name, loc1, scaleform.clik.utils.Constraints.ALL);
-            loc1 = this.channelComponent.messageInput;
-            constraints.addElement(loc1.name, loc1, scaleform.clik.utils.Constraints.BOTTOM | scaleform.clik.utils.Constraints.LEFT | scaleform.clik.utils.Constraints.RIGHT);
-            loc1 = this.channelComponent.sendButton;
-            constraints.addElement(loc1.name, loc1, scaleform.clik.utils.Constraints.BOTTOM | scaleform.clik.utils.Constraints.RIGHT);
-            constraints.addElement(this.cmpList.name, this.cmpList, scaleform.clik.utils.Constraints.TOP | scaleform.clik.utils.Constraints.BOTTOM | scaleform.clik.utils.Constraints.RIGHT);
-            constraints.addElement(this.topPanel.name, this.topPanel, scaleform.clik.utils.Constraints.TOP | scaleform.clik.utils.Constraints.LEFT | scaleform.clik.utils.Constraints.RIGHT);
-            constraints.addElement(this.refreshButton.name, this.refreshButton, scaleform.clik.utils.Constraints.TOP | scaleform.clik.utils.Constraints.RIGHT);
-            constraints.addElement(this.filterButton.name, this.filterButton, scaleform.clik.utils.Constraints.TOP | scaleform.clik.utils.Constraints.RIGHT);
-            constraints.addElement(this.filterTextField.name, this.filterTextField, scaleform.clik.utils.Constraints.TOP | scaleform.clik.utils.Constraints.RIGHT | scaleform.clik.utils.Constraints.LEFT);
-            constraints.addElement(this.filterInBattleCheckbox.name, this.filterInBattleCheckbox, scaleform.clik.utils.Constraints.TOP | scaleform.clik.utils.Constraints.RIGHT);
-            constraints.addElement(this.groupsScrollBar.name, this.groupsScrollBar, scaleform.clik.utils.Constraints.TOP | scaleform.clik.utils.Constraints.BOTTOM | scaleform.clik.utils.Constraints.RIGHT);
-            constraints.addElement(this.division.name, this.division, scaleform.clik.utils.Constraints.TOP | scaleform.clik.utils.Constraints.RIGHT);
-            this.refreshButton.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.refreshButton_buttonClickHandler);
-            this.cmpList.addEventListener(net.wg.gui.prebattle.company.CompanyEvent.SELECTED_ITEM, this.selectedItemHandler);
-            this.cmpList.dataProvider = this.companiesDP;
-            this.cmpList.addEventListener(net.wg.gui.prebattle.company.CompanyEvent.DROP_LIST_CLICK, this.groupsList_listClickHandler);
-            this.division.dataProvider = new scaleform.clik.data.DataProvider(getDivisionsListS());
-            this.division.selectedIndex = this.defaultSelectedIndex;
-            this.division.enabled = false;
-            this.division.addEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.handleDivisionsChange);
-            this.createButton.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.handleCreateButtonClick);
-            this.filterTextField.addEventListener(flash.events.FocusEvent.FOCUS_IN, this.filterTextField_focusInHandler);
-            this.filterTextField.addEventListener(flash.events.Event.CHANGE, this.filterTextField_changeHandler);
-            this.filterTextField.addEventListener(scaleform.clik.events.InputEvent.INPUT, this.filterTextField_inputHandler);
-            this.filterButton.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onFilterButtonPress);
-            this.filterInBattleCheckbox.selected = this.selectedFilterInBattleCheckbox;
-            this.filterTextField.text = this.defaultFilterText;
-            this.setFocus();
-            return;
-        }
+      override protected function onPopulate() : void {
+         canClose = true;
+         enabledCloseBtn = false;
+         canDrag = true;
+         canResize = true;
+         canMinimize = true;
+         showWindowBg = false;
+         var _loc1_:Padding = window.contentPadding as Padding;
+         _loc1_.top = 40;
+         _loc1_.left = 10;
+         _loc1_.right = 10;
+         _loc1_.bottom = 15;
+         window.setMaxWidth(1024);
+         window.setMaxHeight(768);
+         window.setTitleIcon("teamList");
+         window.title = CHAT.CHANNELS_COMPANY;
+         geometry = new WindowGeometryInBar(MessengerBarEvent.PIN_CAROUSEL_WINDOW,getClientIDS());
+      }
 
-        protected override function onDispose():void
-        {
-            this.refreshButton.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.refreshButton_buttonClickHandler);
-            this.refreshButton.dispose();
-            this.cmpList.removeEventListener(net.wg.gui.prebattle.company.CompanyEvent.DROP_LIST_CLICK, this.groupsList_listClickHandler);
-            this.cmpList.removeEventListener(net.wg.gui.prebattle.company.CompanyEvent.SELECTED_ITEM, this.selectedItemHandler);
-            this.cmpList.dispose();
-            this.division.dataProvider.cleanUp();
-            this.division.dataProvider = null;
-            this.division.removeEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.handleDivisionsChange);
-            this.createButton.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.handleCreateButtonClick);
-            this.createButton.dispose();
-            this.filterTextField.removeEventListener(flash.events.FocusEvent.FOCUS_IN, this.filterTextField_focusInHandler);
-            this.filterTextField.removeEventListener(flash.events.Event.CHANGE, this.filterTextField_changeHandler);
-            this.filterTextField.removeEventListener(scaleform.clik.events.InputEvent.INPUT, this.filterTextField_inputHandler);
-            this.filterTextField.dispose();
-            this.filterButton.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onFilterButtonPress);
-            this.filterButton.dispose();
-            this.groupsScrollBar.dispose();
-            App.utils.scheduler.cancelTask(this.enableFilterButtons);
-            super.onDispose();
-            return;
-        }
+      override protected function draw() : void {
+         var _loc1_:* = 0;
+         var _loc2_:* = 0;
+         super.draw();
+         if(isInvalid(InvalidationType.SIZE))
+         {
+            _loc1_ = window.width - window.contentPadding.left - window.contentPadding.right;
+            _loc2_ = window.height - window.contentPadding.top - window.contentPadding.bottom;
+            _width = _loc1_;
+            _height = _loc2_;
+            constraints.update(_loc1_,_loc2_);
+            this.channelComponent.invalidate(InvalidationType.SIZE);
+         }
+      }
 
-        public function as_setDefaultFilter(arg1:String, arg2:Boolean, arg3:uint):void
-        {
-            this.defaultFilterText = arg1;
-            this.selectedFilterInBattleCheckbox = arg2;
-            this.defaultSelectedIndex = arg3;
-            return;
-        }
+      override protected function configUI() : void {
+         super.configUI();
+         registerComponent(this.channelComponent,Aliases.CHANNEL_COMPONENT);
+         this.createButton.label = PREBATTLE.BUTTONS_COMPANY_CREATE;
+         constraints = new Constraints(this,ConstrainMode.REFLOW);
+         var _loc1_:DisplayObject = this.channelComponent.messageArea;
+         constraints.addElement(_loc1_.name,_loc1_,Constraints.ALL);
+         _loc1_ = this.channelComponent.messageInput;
+         constraints.addElement(_loc1_.name,_loc1_,Constraints.BOTTOM | Constraints.LEFT | Constraints.RIGHT);
+         _loc1_ = this.channelComponent.sendButton;
+         constraints.addElement(_loc1_.name,_loc1_,Constraints.BOTTOM | Constraints.RIGHT);
+         constraints.addElement(this.cmpList.name,this.cmpList,Constraints.TOP | Constraints.BOTTOM | Constraints.RIGHT);
+         constraints.addElement(this.topPanel.name,this.topPanel,Constraints.TOP | Constraints.LEFT | Constraints.RIGHT);
+         constraints.addElement(this.refreshButton.name,this.refreshButton,Constraints.TOP | Constraints.RIGHT);
+         constraints.addElement(this.filterButton.name,this.filterButton,Constraints.TOP | Constraints.RIGHT);
+         constraints.addElement(this.filterTextField.name,this.filterTextField,Constraints.TOP | Constraints.RIGHT | Constraints.LEFT);
+         constraints.addElement(this.filterInBattleCheckbox.name,this.filterInBattleCheckbox,Constraints.TOP | Constraints.RIGHT);
+         constraints.addElement(this.groupsScrollBar.name,this.groupsScrollBar,Constraints.TOP | Constraints.BOTTOM | Constraints.RIGHT);
+         constraints.addElement(this.division.name,this.division,Constraints.TOP | Constraints.RIGHT);
+         this.refreshButton.addEventListener(ButtonEvent.CLICK,this.refreshButton_buttonClickHandler);
+         this.cmpList.addEventListener(CompanyEvent.SELECTED_ITEM,this.selectedItemHandler);
+         this.cmpList.dataProvider = this.companiesDP;
+         this.cmpList.addEventListener(CompanyEvent.DROP_LIST_CLICK,this.groupsList_listClickHandler);
+         this.division.dataProvider = new DataProvider(getDivisionsListS());
+         this.division.selectedIndex = this.defaultSelectedIndex;
+         this.division.enabled = false;
+         this.division.addEventListener(ListEvent.INDEX_CHANGE,this.handleDivisionsChange);
+         this.createButton.addEventListener(ButtonEvent.CLICK,this.handleCreateButtonClick);
+         this.filterTextField.addEventListener(FocusEvent.FOCUS_IN,this.filterTextField_focusInHandler);
+         this.filterTextField.addEventListener(Event.CHANGE,this.filterTextField_changeHandler);
+         this.filterTextField.addEventListener(InputEvent.INPUT,this.filterTextField_inputHandler);
+         this.filterButton.addEventListener(ButtonEvent.CLICK,this.onFilterButtonPress);
+         this.filterInBattleCheckbox.selected = this.selectedFilterInBattleCheckbox;
+         this.filterTextField.text = this.defaultFilterText;
+         this.setFocus();
+      }
 
-        internal function handleDivisionsChange(arg1:scaleform.clik.events.ListEvent):void
-        {
-            refreshCompaniesListS(this.filterTextField.text, this.filterInBattleCheckbox.selected, this.division.selectedIndex);
-            return;
-        }
+      override protected function onDispose() : void {
+         this.refreshButton.removeEventListener(ButtonEvent.CLICK,this.refreshButton_buttonClickHandler);
+         this.refreshButton.dispose();
+         this.cmpList.removeEventListener(CompanyEvent.DROP_LIST_CLICK,this.groupsList_listClickHandler);
+         this.cmpList.removeEventListener(CompanyEvent.SELECTED_ITEM,this.selectedItemHandler);
+         this.cmpList.dispose();
+         this.division.dataProvider.cleanUp();
+         this.division.dataProvider = null;
+         this.division.removeEventListener(ListEvent.INDEX_CHANGE,this.handleDivisionsChange);
+         this.createButton.removeEventListener(ButtonEvent.CLICK,this.handleCreateButtonClick);
+         this.createButton.dispose();
+         this.filterTextField.removeEventListener(FocusEvent.FOCUS_IN,this.filterTextField_focusInHandler);
+         this.filterTextField.removeEventListener(Event.CHANGE,this.filterTextField_changeHandler);
+         this.filterTextField.removeEventListener(InputEvent.INPUT,this.filterTextField_inputHandler);
+         this.filterTextField.dispose();
+         this.filterButton.removeEventListener(ButtonEvent.CLICK,this.onFilterButtonPress);
+         this.filterButton.dispose();
+         this.groupsScrollBar.dispose();
+         App.utils.scheduler.cancelTask(this.enableFilterButtons);
+         super.onDispose();
+      }
 
-        internal function refreshButton_buttonClickHandler(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            refreshCompaniesListS(this.filterTextField.text, this.filterInBattleCheckbox.selected, this.division.selectedIndex);
-            return;
-        }
+      public function as_setDefaultFilter(param1:String, param2:Boolean, param3:uint) : void {
+         this.defaultFilterText = param1;
+         this.selectedFilterInBattleCheckbox = param2;
+         this.defaultSelectedIndex = param3;
+      }
 
-        internal function groupsList_listClickHandler(arg1:net.wg.gui.prebattle.company.CompanyEvent):void
-        {
-            joinCompanyS(arg1.prbID);
-            this.cmpList.updateRenderer();
-            return;
-        }
+      private function handleDivisionsChange(param1:ListEvent) : void {
+         refreshCompaniesListS(this.filterTextField.text,this.filterInBattleCheckbox.selected,this.division.selectedIndex);
+      }
 
-        internal function coolDownProcess(arg1:Number):void
-        {
-            this.enableFilterButtons(false);
-            App.utils.scheduler.scheduleTask(this.enableFilterButtons, arg1, true);
-            return;
-        }
+      private function refreshButton_buttonClickHandler(param1:ButtonEvent) : void {
+         refreshCompaniesListS(this.filterTextField.text,this.filterInBattleCheckbox.selected,this.division.selectedIndex);
+      }
 
-        internal function enableFilterButtons(arg1:Boolean):void
-        {
-            if (arg1) 
+      private function groupsList_listClickHandler(param1:CompanyEvent) : void {
+         joinCompanyS(param1.prbID);
+         this.cmpList.updateRenderer();
+      }
+
+      private function coolDownProcess(param1:Number) : void {
+         this.enableFilterButtons(false);
+         App.utils.scheduler.scheduleTask(this.enableFilterButtons,param1,true);
+      }
+
+      private function enableFilterButtons(param1:Boolean) : void {
+         if(!param1)
+         {
+            if(this.filterTextField.hasEventListener(InputEvent.INPUT))
             {
-                this.filterTextField.addEventListener(scaleform.clik.events.InputEvent.INPUT, this.filterTextField_inputHandler);
+               this.filterTextField.removeEventListener(InputEvent.INPUT,this.filterTextField_inputHandler);
             }
-            else if (this.filterTextField.hasEventListener(scaleform.clik.events.InputEvent.INPUT)) 
-            {
-                this.filterTextField.removeEventListener(scaleform.clik.events.InputEvent.INPUT, this.filterTextField_inputHandler);
-            }
-            this.refreshButton.enabled = arg1;
-            this.filterButton.enabled = arg1 != false ? !(this.filterTextField.text == "") : false;
-            this.division.enabled = arg1;
-            return;
-        }
+         }
+         else
+         {
+            this.filterTextField.addEventListener(InputEvent.INPUT,this.filterTextField_inputHandler);
+         }
+         this.refreshButton.enabled = param1;
+         this.filterButton.enabled = param1 == false?false:!(this.filterTextField.text == "");
+         this.division.enabled = param1;
+      }
 
-        internal function handleCreateButtonClick(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            createCompanyS();
-            return;
-        }
+      private function handleCreateButtonClick(param1:ButtonEvent) : void {
+         createCompanyS();
+      }
 
-        internal function filterTextField_changeHandler(arg1:flash.events.Event):void
-        {
-            this.filterButton.enabled = this.filterTextField.text != "" ? this.refreshButton.enabled : true;
-            return;
-        }
+      private function filterTextField_changeHandler(param1:Event) : void {
+         this.filterButton.enabled = this.filterTextField.text == ""?true:this.refreshButton.enabled;
+      }
 
-        internal function onFilterButtonPress(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            refreshCompaniesListS(this.filterTextField.text, this.filterInBattleCheckbox.selected, this.division.selectedIndex);
-            return;
-        }
+      private function onFilterButtonPress(param1:ButtonEvent) : void {
+         refreshCompaniesListS(this.filterTextField.text,this.filterInBattleCheckbox.selected,this.division.selectedIndex);
+      }
 
-        internal function selectedItemHandler(arg1:net.wg.gui.prebattle.company.CompanyEvent):void
-        {
-            if (arg1.prbID > -1) 
-            {
-                requestPlayersListS(arg1.prbID);
-            }
-            return;
-        }
+      private function selectedItemHandler(param1:CompanyEvent) : void {
+         if(param1.prbID > -1)
+         {
+            requestPlayersListS(param1.prbID);
+         }
+      }
 
-        internal function filterTextField_focusInHandler(arg1:flash.events.FocusEvent):void
-        {
-            return;
-        }
+      private function filterTextField_focusInHandler(param1:FocusEvent) : void {
+          
+      }
 
-        internal function filterTextField_inputHandler(arg1:scaleform.clik.events.InputEvent):void
-        {
-            if (arg1.details.code == flash.ui.Keyboard.ENTER) 
-            {
-                arg1.handled = true;
-                this.filterButton.selected = true;
-                refreshCompaniesListS(this.filterTextField.text, this.filterInBattleCheckbox.selected, this.division.selectedIndex);
-                this.filterTextField.removeEventListener(scaleform.clik.events.InputEvent.INPUT, this.filterTextField_inputHandler);
-            }
-            return;
-        }
+      private function filterTextField_inputHandler(param1:InputEvent) : void {
+         if(param1.details.code == Keyboard.ENTER)
+         {
+            param1.handled = true;
+            this.filterButton.selected = true;
+            refreshCompaniesListS(this.filterTextField.text,this.filterInBattleCheckbox.selected,this.division.selectedIndex);
+            this.filterTextField.removeEventListener(InputEvent.INPUT,this.filterTextField_inputHandler);
+         }
+      }
+   }
 
-        public function as_getCompaniesListDP():Object
-        {
-            return this.companiesDP;
-        }
-
-        public function as_showPlayersList(arg1:uint):void
-        {
-            if (this.cmpList) 
-            {
-                this.cmpList.setIndexCompany = arg1;
-            }
-            return;
-        }
-
-        public function as_setRefreshCoolDown(arg1:Number):void
-        {
-            this.coolDownProcess(arg1 * 1000);
-            return;
-        }
-
-        public function as_disableCreateButton(arg1:Boolean):void
-        {
-            if (this.createButton != null) 
-            {
-                this.createButton.enabled = !arg1;
-            }
-            return;
-        }
-
-        public override function setFocus():void
-        {
-            super.setFocus();
-            if (this.channelComponent) 
-            {
-                this.channelComponent.setFocusToInput();
-            }
-            return;
-        }
-
-        public override function handleInput(arg1:scaleform.clik.events.InputEvent):void
-        {
-            if (arg1.details.code == flash.ui.Keyboard.ESCAPE && arg1.details.value == scaleform.clik.constants.InputValue.KEY_DOWN) 
-            {
-                if (this.cmpList.isOpenedState) 
-                {
-                    this.cmpList.unselectedRenderers();
-                    arg1.preventDefault();
-                    arg1.stopImmediatePropagation();
-                    return;
-                }
-            }
-            super.handleInput(arg1);
-            if (arg1.handled) 
-            {
-                return;
-            }
-            if (arg1.details.code == flash.ui.Keyboard.F1 && arg1.details.value == scaleform.clik.constants.InputValue.KEY_UP) 
-            {
-                showFAQWindowS();
-                arg1.handled = true;
-            }
-            return;
-        }
-
-        protected override function onPopulate():void
-        {
-            canClose = true;
-            enabledCloseBtn = false;
-            canDrag = true;
-            canResize = true;
-            canMinimize = true;
-            showWindowBg = false;
-            var loc1:*=window.contentPadding as scaleform.clik.utils.Padding;
-            loc1.top = 40;
-            loc1.left = 10;
-            loc1.right = 10;
-            loc1.bottom = 15;
-            window.setMaxWidth(1024);
-            window.setMaxHeight(768);
-            window.setTitleIcon("teamList");
-            window.title = CHAT.CHANNELS_COMPANY;
-            geometry = new net.wg.gui.lobby.messengerBar.WindowGeometryInBar(net.wg.gui.events.MessengerBarEvent.PIN_CAROUSEL_WINDOW, getClientIDS());
-            return;
-        }
-
-        internal var companiesDP:net.wg.data.daapi.base.DAAPIDataProvider;
-
-        public var channelComponent:net.wg.gui.messenger.ChannelComponent;
-
-        public var topPanel:flash.display.MovieClip;
-
-        public var groupsScrollBar:net.wg.gui.components.controls.ScrollBar;
-
-        public var createButton:net.wg.gui.components.controls.SoundButtonEx;
-
-        public var cmpList:net.wg.gui.prebattle.company.CompaniesScrollingList;
-
-        public var refreshButton:net.wg.gui.components.controls.IconButton;
-
-        public var filterButton:net.wg.gui.components.controls.IconButton;
-
-        public var filterTextField:net.wg.gui.components.controls.TextInput;
-
-        public var filterInBattleCheckbox:net.wg.gui.components.controls.CheckBox;
-
-        public var division:net.wg.gui.components.controls.DropdownMenu;
-
-        internal var defaultFilterText:String="";
-
-        internal var selectedFilterInBattleCheckbox:Boolean=false;
-
-        internal var defaultSelectedIndex:int=0;
-
-        internal var isFirstDraw:Boolean=true;
-    }
 }

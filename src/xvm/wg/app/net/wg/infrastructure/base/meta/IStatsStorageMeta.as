@@ -1,27 +1,30 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IStatsStorageMeta extends flash.events.IEventDispatcher
-    {
-        function as_setExperience(arg1:Number):void;
+   import flash.events.IEventDispatcher;
 
-        function as_setTankmanId(arg1:Number):void;
 
-        function as_setCredits(arg1:Number):void;
+   public interface IStatsStorageMeta extends IEventDispatcher
+   {
+          
+      function as_setExperience(param1:Number) : void;
 
-        function as_setGold(arg1:Number):void;
+      function as_setTankmanId(param1:Number) : void;
 
-        function as_setPremium(arg1:Boolean):void;
+      function as_setCredits(param1:Number) : void;
 
-        function as_setVehicle(arg1:Number):void;
+      function as_setGold(param1:Number) : void;
 
-        function as_setPlayerSpeaking(arg1:Number, arg2:Boolean, arg3:Boolean):void;
+      function as_setPremium(param1:Boolean) : void;
 
-        function as_setAccountAttrs(arg1:Number):void;
+      function as_setVehicle(param1:Number) : void;
 
-        function as_setDenunciationsCount(arg1:Number):void;
+      function as_setPlayerSpeaking(param1:Number, param2:Boolean, param3:Boolean) : void;
 
-        function as_setNations(arg1:Array):void;
-    }
+      function as_setAccountAttrs(param1:Number) : void;
+
+      function as_setDenunciationsCount(param1:Number) : void;
+
+      function as_setNations(param1:Array) : void;
+   }
+
 }

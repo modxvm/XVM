@@ -1,81 +1,74 @@
-package net.wg.gui.lobby.questsWindow 
+package net.wg.gui.lobby.questsWindow
 {
-    import flash.text.*;
-    import net.wg.gui.components.controls.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.interfaces.*;
-    
-    public class QuestsList extends net.wg.gui.components.controls.ScrollingListEx
-    {
-        public function QuestsList()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.components.controls.ScrollingListEx;
+   import flash.text.TextField;
+   import scaleform.clik.interfaces.IListItemRenderer;
+   import scaleform.clik.constants.InvalidationType;
+   import scaleform.clik.interfaces.IDataProvider;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.allQuestsDoneTF.text = QUESTS.QUESTS_LIST_COMPLETE;
-            this.clickCheckboxTF.text = QUESTS.QUESTS_LIST_CLICKCHECKBOX;
-            return;
-        }
 
-        protected override function drawLayout():void
-        {
-            var loc8:*=null;
-            var loc1:*=_renderers.length;
-            var loc2:*=rowHeight;
-            var loc3:*=availableWidth - padding.horizontal;
-            var loc4:*=margin + padding.left;
-            var loc5:*=margin + padding.top;
-            var loc6:*=isInvalid(scaleform.clik.constants.InvalidationType.DATA);
-            var loc7:*=0;
-            while (loc7 < loc1) 
+   public class QuestsList extends ScrollingListEx
+   {
+          
+      public function QuestsList() {
+         super();
+      }
+
+      public var allQuestsDoneTF:TextField;
+
+      public var clickCheckboxTF:TextField;
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.allQuestsDoneTF.text = QUESTS.QUESTS_LIST_COMPLETE;
+         this.clickCheckboxTF.text = QUESTS.QUESTS_LIST_CLICKCHECKBOX;
+      }
+
+      override protected function drawLayout() : void {
+         var _loc8_:IListItemRenderer = null;
+         var _loc1_:uint = _renderers.length;
+         var _loc2_:Number = rowHeight;
+         var _loc3_:Number = availableWidth - padding.horizontal;
+         var _loc4_:Number = margin + padding.left;
+         var _loc5_:Number = margin + padding.top;
+         var _loc6_:Boolean = isInvalid(InvalidationType.DATA);
+         var _loc7_:uint = 0;
+         while(_loc7_ < _loc1_)
+         {
+            _loc8_ = getRendererAt(_loc7_);
+            _loc8_.x = Math.round(_loc4_);
+            _loc8_.y = Math.round(_loc5_ + _loc7_ * _loc2_);
+            if(!_loc6_)
             {
-                (loc8 = getRendererAt(loc7)).x = Math.round(loc4);
-                loc8.y = Math.round(loc5 + loc7 * loc2);
-                if (!loc6) 
-                {
-                    loc8.validateNow();
-                }
-                ++loc7;
+               _loc8_.validateNow();
             }
-            drawScrollBar();
-            return;
-        }
+            _loc7_++;
+         }
+         drawScrollBar();
+      }
 
-        public override function set dataProvider(arg1:scaleform.clik.interfaces.IDataProvider):void
-        {
-            super.dataProvider = arg1;
-            if (dataProvider && dataProvider.length > 0) 
-            {
-                this.allQuestsDoneTF.visible = false;
-                this.clickCheckboxTF.visible = false;
-            }
-            else 
-            {
-                this.allQuestsDoneTF.visible = true;
-                this.clickCheckboxTF.visible = true;
-            }
-            return;
-        }
+      override public function set dataProvider(param1:IDataProvider) : void {
+         super.dataProvider = param1;
+         if((dataProvider) && dataProvider.length > 0)
+         {
+            this.allQuestsDoneTF.visible = false;
+            this.clickCheckboxTF.visible = false;
+         }
+         else
+         {
+            this.allQuestsDoneTF.visible = true;
+            this.clickCheckboxTF.visible = true;
+         }
+      }
 
-        public override function dispose():void
-        {
-            super.dispose();
-            return;
-        }
+      override public function dispose() : void {
+         super.dispose();
+      }
 
-        protected override function updateSelectedIndex():void
-        {
-            super.updateSelectedIndex();
-            App.utils.focusHandler.setFocus(this);
-            return;
-        }
+      override protected function updateSelectedIndex() : void {
+         super.updateSelectedIndex();
+         App.utils.focusHandler.setFocus(this);
+      }
+   }
 
-        public var allQuestsDoneTF:flash.text.TextField;
-
-        public var clickCheckboxTF:flash.text.TextField;
-    }
 }

@@ -1,44 +1,44 @@
-package net.wg.gui.lobby.customization 
+package net.wg.gui.lobby.customization
 {
-    import flash.events.*;
-    
-    public class CustomizationEvent extends flash.events.Event
-    {
-        public function CustomizationEvent(arg1:String)
-        {
-            super(arg1, true, true);
-            return;
-        }
+   import flash.events.Event;
 
-        public override function clone():flash.events.Event
-        {
-            return new net.wg.gui.lobby.customization.CustomizationEvent(type);
-        }
 
-        public static const PRICE_ITEM_CLICK:String="priceItemClick";
+   public class CustomizationEvent extends Event
+   {
+          
+      public function CustomizationEvent(param1:String) {
+         super(param1,true,true);
+      }
 
-        public static const CHANGE_ACTIONS_LOCK:String="changeActionsLock";
+      public static const PRICE_ITEM_CLICK:String = "priceItemClick";
 
-        public static const RESET_NEW_ITEM:String="resetNewItem";
+      public static const CHANGE_ACTIONS_LOCK:String = "changeActionsLock";
 
-        public static const SELECT_NEW:String="selectNew";
+      public static const RESET_NEW_ITEM:String = "resetNewItem";
 
-        public static const DROP_ITEM:String="dropItem";
+      public static const SELECT_NEW:String = "selectNew";
 
-        public static const COLLECTION_CHANGE:String="collectionChange";
+      public static const DROP_ITEM:String = "dropItem";
 
-        public static const ITEM_SELECT:String="itemSelect";
+      public static const COLLECTION_CHANGE:String = "collectionChange";
 
-        public var locked:Boolean=false;
+      public static const ITEM_SELECT:String = "itemSelect";
 
-        public var persistent:Boolean=false;
+      public var locked:Boolean = false;
 
-        public var kind:int=0;
+      public var persistent:Boolean = false;
 
-        public var index:int=0;
+      public var kind:int = 0;
 
-        public var lastIndex:int=0;
+      public var index:int = 0;
 
-        public var data:Object;
-    }
+      public var lastIndex:int = 0;
+
+      public var data:Object;
+
+      override public function clone() : Event {
+         return new CustomizationEvent(type);
+      }
+   }
+
 }

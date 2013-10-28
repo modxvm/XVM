@@ -1,3 +1,4 @@
+import com.xvm.DataTypes.VehicleData;
 import com.xvm.Logger;
 import com.xvm.VehicleInfo;
 import wot.Minimap.Minimap;
@@ -15,7 +16,7 @@ class wot.Minimap.shapes.Square extends ShapeAttach
      */
 
     private static var SQUARE_SIDE_IN_METERS:Number = 1000;
-    
+
     private var squareClip:MovieClip;
 
     public function Square()
@@ -81,10 +82,10 @@ class wot.Minimap.shapes.Square extends ShapeAttach
 
     private function isArtillery():Boolean
     {
-        var vi2 = VehicleInfo.getInfo2(PlayersPanelProxy.self.icon);
-        return vi2 == null ? false : vi2.type == "SPG";
+        var vdata:VehicleData = VehicleInfo.getByIcon(PlayersPanelProxy.self.icon);
+        return vdata == null ? false : vdata.vclass == "SPG";
     }
-    
+
     /** overwrite */
     private function postmortemMod(event) {
 		squareClip._visible = false;

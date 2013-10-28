@@ -1,153 +1,127 @@
-package net.wg.data.VO 
+package net.wg.data.VO
 {
-    import net.wg.data.daapi.base.*;
-    
-    public class AchievementItemVO extends net.wg.data.daapi.base.DAAPIDataClass
-    {
-        public function AchievementItemVO(arg1:Object)
-        {
-            super(arg1);
-            return;
-        }
+   import net.wg.data.daapi.base.DAAPIDataClass;
 
-        protected override function onDataWrite(arg1:String, arg2:Object):Boolean
-        {
-            if (arg1 == "icon") 
-            {
-                this._icon = new net.wg.data.VO.IconVO(arg2);
-                return false;
-            }
-            return this.hasOwnProperty(arg1);
-        }
 
-        public function get showSeparator():Boolean
-        {
-            return this._showSeparator;
-        }
+   public class AchievementItemVO extends DAAPIDataClass
+   {
+          
+      public function AchievementItemVO(param1:Object) {
+         super(param1);
+      }
 
-        public function set showSeparator(arg1:Boolean):void
-        {
-            this._showSeparator = arg1;
-            return;
-        }
+      private var _description:String = "";
 
-        public function get icon():Object
-        {
-            return this._icon;
-        }
+      private var _isActive:Boolean = false;
 
-        public function set icon(arg1:Object):void
-        {
-            this._icon = arg1;
-            return;
-        }
+      private var _levelUpValue:String = "";
 
-        public function get description():String
-        {
-            return this._description;
-        }
+      private var _name:String = "";
 
-        public function set description(arg1:String):void
-        {
-            this._description = arg1;
-            return;
-        }
+      private var _section:String = "";
 
-        public function get isActive():Boolean
-        {
-            return this._isActive;
-        }
+      private var _type:String = "";
 
-        public function set isActive(arg1:Boolean):void
-        {
-            this._isActive = arg1;
-            return;
-        }
+      private var _userName:String = "";
 
-        public function get levelUpValue():String
-        {
-            return this._levelUpValue;
-        }
+      private var _value:Number = -1;
 
-        public function set levelUpValue(arg1:String):void
-        {
-            this._levelUpValue = arg1;
-            return;
-        }
+      private var _icon:Object;
 
-        public function get name():String
-        {
-            return this._name;
-        }
+      public var dossierCompDescr:String = "";
 
-        public function set name(arg1:String):void
-        {
-            this._name = arg1;
-            return;
-        }
+      public var dossierType:int;
 
-        public function get section():String
-        {
-            return this._section;
-        }
+      private var _showSeparator:Boolean = false;
 
-        public function set section(arg1:String):void
-        {
-            this._section = arg1;
-            return;
-        }
+      override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+         if(param1 == "icon")
+         {
+            this._icon = new IconVO(param2);
+            return false;
+         }
+         return this.hasOwnProperty(param1);
+      }
 
-        public function get type():String
-        {
-            return this._type;
-        }
+      public function get showSeparator() : Boolean {
+         return this._showSeparator;
+      }
 
-        public function set type(arg1:String):void
-        {
-            this._type = arg1;
-            return;
-        }
+      public function set showSeparator(param1:Boolean) : void {
+         this._showSeparator = param1;
+      }
 
-        public function get userName():String
-        {
-            return this._userName;
-        }
+      public function get icon() : Object {
+         return this._icon;
+      }
 
-        public function set userName(arg1:String):void
-        {
-            this._userName = arg1;
-            return;
-        }
+      public function set icon(param1:Object) : void {
+         this._icon = param1;
+      }
 
-        public function get value():int
-        {
-            return this._value;
-        }
+      public function get description() : String {
+         return this._description;
+      }
 
-        public function set value(arg1:int):void
-        {
-            this._value = arg1;
-            return;
-        }
+      public function set description(param1:String) : void {
+         this._description = param1;
+      }
 
-        internal var _description:String="";
+      public function get isActive() : Boolean {
+         return this._isActive;
+      }
 
-        internal var _isActive:Boolean=false;
+      public function set isActive(param1:Boolean) : void {
+         this._isActive = param1;
+      }
 
-        internal var _levelUpValue:String="";
+      public function get levelUpValue() : String {
+         return this._levelUpValue;
+      }
 
-        internal var _name:String="";
+      public function set levelUpValue(param1:String) : void {
+         this._levelUpValue = param1;
+      }
 
-        internal var _section:String="";
+      public function get name() : String {
+         return this._name;
+      }
 
-        internal var _type:String="";
+      public function set name(param1:String) : void {
+         this._name = param1;
+      }
 
-        internal var _userName:String="";
+      public function get section() : String {
+         return this._section;
+      }
 
-        internal var _value:Number=-1;
+      public function set section(param1:String) : void {
+         this._section = param1;
+      }
 
-        internal var _icon:Object;
+      public function get type() : String {
+         return this._type;
+      }
 
-        internal var _showSeparator:Boolean=false;
-    }
+      public function set type(param1:String) : void {
+         this._type = param1;
+      }
+
+      public function get userName() : String {
+         return this._userName;
+      }
+
+      public function set userName(param1:String) : void {
+         this._userName = param1;
+      }
+
+      public function get value() : int {
+         return this._value;
+      }
+
+      public function set value(param1:int) : void {
+         this._value = param1;
+      }
+   }
+
 }

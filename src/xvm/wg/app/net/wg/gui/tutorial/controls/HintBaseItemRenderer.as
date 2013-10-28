@@ -1,56 +1,47 @@
-package net.wg.gui.tutorial.controls 
+package net.wg.gui.tutorial.controls
 {
-    import scaleform.clik.constants.*;
-    import scaleform.clik.core.*;
-    
-    public class HintBaseItemRenderer extends scaleform.clik.core.UIComponent
-    {
-        public function HintBaseItemRenderer()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import scaleform.clik.constants.InvalidationType;
 
-        public function get data():Object
-        {
-            return this._data;
-        }
 
-        public function set data(arg1:Object):void
-        {
-            this._data = arg1;
-            invalidate(scaleform.clik.constants.InvalidationType.DATA);
-            return;
-        }
+   public class HintBaseItemRenderer extends UIComponent
+   {
+          
+      public function HintBaseItemRenderer() {
+         super();
+      }
 
-        public override function dispose():void
-        {
-            super.dispose();
-            this._data = null;
-            return;
-        }
+      protected var _data:Object;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            return;
-        }
+      public function get data() : Object {
+         return this._data;
+      }
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA) && this._data) 
-            {
-                this.drawData();
-            }
-            return;
-        }
+      public function set data(param1:Object) : void {
+         this._data = param1;
+         invalidate(InvalidationType.DATA);
+      }
 
-        protected function drawData():void
-        {
-            return;
-        }
+      override public function dispose() : void {
+         super.dispose();
+         this._data = null;
+      }
 
-        protected var _data:Object;
-    }
+      override protected function configUI() : void {
+         super.configUI();
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         if((isInvalid(InvalidationType.DATA)) && (this._data))
+         {
+            this.drawData();
+         }
+      }
+
+      protected function drawData() : void {
+          
+      }
+   }
+
 }

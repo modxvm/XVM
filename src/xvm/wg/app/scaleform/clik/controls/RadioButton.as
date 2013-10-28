@@ -1,61 +1,53 @@
-package scaleform.clik.controls 
+package scaleform.clik.controls
 {
-    public class RadioButton extends scaleform.clik.controls.Button
-    {
-        public function RadioButton()
-        {
-            super();
-            return;
-        }
 
-        protected override function initialize():void
-        {
-            super.initialize();
-            this.toggle = true;
-            allowDeselect = false;
-            if (_group == null) 
-            {
-                this.groupName = DEFAULT_GROUPNAME;
-            }
-            return;
-        }
 
-        public override function get autoRepeat():Boolean
-        {
-            return false;
-        }
+   public class RadioButton extends Button
+   {
+          
+      public function RadioButton() {
+         super();
+      }
 
-        public override function set autoRepeat(arg1:Boolean):void
-        {
-            return;
-        }
+      public static const DEFAULT_GROUPNAME:String = "default";
 
-        public override function get toggle():Boolean
-        {
-            return true;
-        }
+      override protected function initialize() : void {
+         super.initialize();
+         this.toggle = true;
+         allowDeselect = false;
+         if(_group == null)
+         {
+            this.groupName = DEFAULT_GROUPNAME;
+         }
+      }
 
-        public override function set toggle(arg1:Boolean):void
-        {
-            return;
-        }
+      override public function get autoRepeat() : Boolean {
+         return false;
+      }
 
-        public override function get groupName():String
-        {
-            return super.groupName;
-        }
+      override public function set autoRepeat(param1:Boolean) : void {
+          
+      }
 
-        public override function set groupName(arg1:String):void
-        {
-            super.groupName = arg1;
-            return;
-        }
+      override public function get toggle() : Boolean {
+         return true;
+      }
 
-        public override function toString():String
-        {
-            return "[CLIK RadioButton " + name + "]";
-        }
+      override public function set toggle(param1:Boolean) : void {
+          
+      }
 
-        public static const DEFAULT_GROUPNAME:String="default";
-    }
+      override public function get groupName() : String {
+         return super.groupName;
+      }
+
+      override public function set groupName(param1:String) : void {
+         super.groupName = param1;
+      }
+
+      override public function toString() : String {
+         return "[CLIK RadioButton " + name + "]";
+      }
+   }
+
 }

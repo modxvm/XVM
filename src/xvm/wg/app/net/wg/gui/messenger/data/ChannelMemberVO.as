@@ -1,104 +1,84 @@
-package net.wg.gui.messenger.data 
+package net.wg.gui.messenger.data
 {
-    import net.wg.data.daapi.base.*;
-    
-    public class ChannelMemberVO extends net.wg.data.daapi.base.DAAPIDataClass
-    {
-        public function ChannelMemberVO(arg1:Object)
-        {
-            super(arg1);
-            return;
-        }
+   import net.wg.data.daapi.base.DAAPIDataClass;
 
-        public function get uid():Number
-        {
-            return this._uid;
-        }
 
-        public function set uid(arg1:Number):void
-        {
-            this._uid = arg1;
-            return;
-        }
+   public class ChannelMemberVO extends DAAPIDataClass
+   {
+          
+      public function ChannelMemberVO(param1:Object) {
+         super(param1);
+      }
 
-        public function get userName():String
-        {
-            return this._userName;
-        }
+      private var _uid:Number;
 
-        public function set userName(arg1:String):void
-        {
-            this._userName = arg1;
-            return;
-        }
+      private var _userName:String = "";
 
-        public function get himself():Boolean
-        {
-            return this._himself;
-        }
+      private var _himself:Boolean = false;
 
-        public function set himself(arg1:Boolean):void
-        {
-            this._himself = arg1;
-            return;
-        }
+      private var _state:Number;
 
-        public function get state():Number
-        {
-            return this._state;
-        }
+      private var _isPlayerSpeaking:Boolean = false;
 
-        public function set state(arg1:Number):void
-        {
-            this._state = arg1;
-            return;
-        }
+      private var _chatRoster:Number;
 
-        public function get isPlayerSpeaking():Boolean
-        {
-            return this._isPlayerSpeaking;
-        }
+      private var _color:uint;
 
-        public function set isPlayerSpeaking(arg1:Boolean):void
-        {
-            this._isPlayerSpeaking = arg1;
-            return;
-        }
+      public function get uid() : Number {
+         return this._uid;
+      }
 
-        public function get chatRoster():Number
-        {
-            return this._chatRoster;
-        }
+      public function set uid(param1:Number) : void {
+         this._uid = param1;
+      }
 
-        public function set chatRoster(arg1:Number):void
-        {
-            this._chatRoster = arg1;
-            return;
-        }
+      public function get userName() : String {
+         return this._userName;
+      }
 
-        public function get color():uint
-        {
-            return this._color;
-        }
+      public function set userName(param1:String) : void {
+         this._userName = param1;
+      }
 
-        public function set color(arg1:uint):void
-        {
-            this._color = arg1;
-            return;
-        }
+      public function get himself() : Boolean {
+         return this._himself;
+      }
 
-        internal var _uid:Number;
+      public function set himself(param1:Boolean) : void {
+         this._himself = param1;
+      }
 
-        internal var _userName:String="";
+      public function get state() : Number {
+         return this._state;
+      }
 
-        internal var _himself:Boolean=false;
+      public function set state(param1:Number) : void {
+         this._state = param1;
+      }
 
-        internal var _state:Number;
+      public function get isPlayerSpeaking() : Boolean {
+         return this._isPlayerSpeaking;
+      }
 
-        internal var _isPlayerSpeaking:Boolean=false;
+      public function set isPlayerSpeaking(param1:Boolean) : void {
+         this._isPlayerSpeaking = param1;
+      }
 
-        internal var _chatRoster:Number;
+      public function get chatRoster() : Number {
+         return this._chatRoster;
+      }
 
-        internal var _color:uint;
-    }
+      public function set chatRoster(param1:Number) : void {
+         this._chatRoster = param1;
+      }
+
+      public function get color() : uint {
+         return this._color;
+      }
+
+      public function set color(param1:uint) : void {
+         this._color = param1;
+      }
+   }
+
 }

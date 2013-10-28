@@ -1,286 +1,273 @@
 package net.wg.gui.prebattle.company
 {
-    import flash.events.*;
-    import net.wg.gui.components.controls.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.data.*;
-    import scaleform.clik.events.*;
-    import scaleform.clik.interfaces.*;
-    import scaleform.clik.ui.*;
+   import net.wg.gui.components.controls.ScrollingListEx;
+   import flash.events.FocusEvent;
+   import flash.events.MouseEvent;
+   import net.wg.gui.components.controls.ScrollBar;
+   import scaleform.clik.data.ListData;
+   import scaleform.clik.events.InputEvent;
+   import scaleform.clik.interfaces.IListItemRenderer;
+   import scaleform.clik.ui.InputDetails;
+   import scaleform.clik.constants.InputValue;
+   import scaleform.clik.constants.WrappingMode;
+   import scaleform.clik.constants.NavigationCode;
 
-    public class CompaniesScrollingList extends net.wg.gui.components.controls.ScrollingListEx
-    {
-        public function CompaniesScrollingList()
-        {
-            super();
-            tabEnabled = true;
-            focusable = true;
-            this.addEventListener(flash.events.FocusEvent.FOCUS_OUT, this.focusOutHandler);
-            this.addEventListener(net.wg.gui.prebattle.company.CompanyEvent.SELECTED_ITEM, this.selectedItemHandler);
-            this.addEventListener(flash.events.MouseEvent.CLICK, this.buttonClickHandler);
-            App.stage.addEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.clickHandler);
-            return;
-        }
 
-        public function get isOpenedState():Boolean
-        {
-            var loc3:*=null;
-            var loc1:*=_renderers.length;
-            var loc2:*=0;
-            while (loc2 < loc1)
+   public class CompaniesScrollingList extends ScrollingListEx
+   {
+          
+      public function CompaniesScrollingList() {
+         super();
+         tabEnabled = true;
+         focusable = true;
+         this.addEventListener(FocusEvent.FOCUS_OUT,this.focusOutHandler);
+         this.addEventListener(CompanyEvent.SELECTED_ITEM,this.selectedItemHandler);
+         this.addEventListener(MouseEvent.CLICK,this.buttonClickHandler);
+         App.stage.addEventListener(MouseEvent.MOUSE_DOWN,this.clickHandler);
+      }
+
+      private var _setIndexCompany:int = -1;
+
+      private var showPlayersList:Boolean = false;
+
+      private var isItemSelected:Boolean = false;
+
+      public function get isOpenedState() : Boolean {
+         var _loc3_:CompanyListItemRenderer = null;
+         var _loc1_:int = _renderers.length;
+         var _loc2_:* = 0;
+         while(_loc2_ < _loc1_)
+         {
+            _loc3_ = getRendererAt(_loc2_) as CompanyListItemRenderer;
+            if(_loc3_.selected)
             {
-                loc3 = getRendererAt(loc2) as net.wg.gui.prebattle.company.CompanyListItemRenderer;
-                if (loc3.selected)
-                {
-                    return true;
-                }
-                ++loc2;
+               return true;
             }
-            return false;
-        }
+            _loc2_++;
+         }
+         return false;
+      }
 
-        public function updateRenderer():void
-        {
-            refreshData();
-            return;
-        }
+      public function updateRenderer() : void {
+         refreshData();
+      }
 
-        public override function dispose():void
-        {
-            super.dispose();
-            App.utils.scheduler.cancelTask(this.updateRenderer);
-            this.removeEventListener(flash.events.FocusEvent.FOCUS_OUT, this.focusOutHandler);
-            this.removeEventListener(net.wg.gui.prebattle.company.CompanyEvent.SELECTED_ITEM, this.selectedItemHandler);
-            this.removeEventListener(flash.events.MouseEvent.CLICK, this.buttonClickHandler);
-            App.stage.removeEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.clickHandler);
-            return;
-        }
+      override public function dispose() : void {
+         super.dispose();
+         App.utils.scheduler.cancelTask(this.updateRenderer);
+         this.removeEventListener(FocusEvent.FOCUS_OUT,this.focusOutHandler);
+         this.removeEventListener(CompanyEvent.SELECTED_ITEM,this.selectedItemHandler);
+         this.removeEventListener(MouseEvent.CLICK,this.buttonClickHandler);
+         App.stage.removeEventListener(MouseEvent.MOUSE_DOWN,this.clickHandler);
+      }
 
-        internal function clickHandler(arg1:flash.events.MouseEvent):void
-        {
-            var loc1:*=null;
-            if (scrollBar && scrollBar.hitTestPoint(arg1.stageX, arg1.stageY))
+      private function clickHandler(param1:MouseEvent) : void {
+         var _loc2_:ScrollBar = null;
+         if((scrollBar) && (scrollBar.hitTestPoint(param1.stageX,param1.stageY)))
+         {
+            _loc2_ = ScrollBar(scrollBar);
+            if((_loc2_.upArrowWg.hitTestPoint(param1.stageX,param1.stageY)) && !_loc2_.upArrowWg.enabled)
             {
-                loc1 = net.wg.gui.components.controls.ScrollBar(scrollBar);
-                if (loc1.upArrowWg.hitTestPoint(arg1.stageX, arg1.stageY) && !loc1.upArrowWg.enabled)
-                {
-                    this.unselectedRenderers();
-                }
-                if (loc1.downArrowWg.hitTestPoint(arg1.stageX, arg1.stageY) && !loc1.downArrowWg.enabled)
-                {
-                    this.unselectedRenderers();
-                }
+               this.unselectedRenderers();
             }
-            return;
-        }
+            if((_loc2_.downArrowWg.hitTestPoint(param1.stageX,param1.stageY)) && !_loc2_.downArrowWg.enabled)
+            {
+               this.unselectedRenderers();
+            }
+         }
+      }
 
-        public function unselectedRenderers():void
-        {
-            var loc3:*=null;
+      public function unselectedRenderers() : void {
+         var _loc3_:CompanyListItemRenderer = null;
+         this.isItemSelected = false;
+         var _loc1_:int = _renderers.length;
+         var _loc2_:* = 0;
+         while(_loc2_ < _loc1_)
+         {
+            _loc3_ = getRendererAt(_loc2_) as CompanyListItemRenderer;
+            _loc3_.selected = false;
+            _loc2_++;
+         }
+      }
+
+      private function buttonClickHandler(param1:MouseEvent) : void {
+         if(param1.target  is  CompaniesScrollingList)
+         {
             this.isItemSelected = false;
-            var loc1:*=_renderers.length;
-            var loc2:*=0;
-            while (loc2 < loc1)
+            App.utils.scheduler.scheduleTask(this.updateRenderer,110);
+         }
+      }
+
+      private function selectedItemHandler(param1:CompanyEvent) : void {
+         this.isItemSelected = param1.isSelected;
+      }
+
+      public function set setIndexCompany(param1:uint) : void {
+         this._setIndexCompany = int(param1);
+      }
+
+      private function isShowPlayersList() : Boolean {
+         return !(this._setIndexCompany == -1) && this._setIndexCompany >= _scrollPosition && this._setIndexCompany <= _scrollPosition + _totalRenderers;
+      }
+
+      private function focusOutHandler(param1:FocusEvent) : void {
+         this.isItemSelected = false;
+         App.utils.scheduler.scheduleTask(this.updateRenderer,110);
+      }
+
+      override protected function populateData(param1:Array) : void {
+         var _loc5_:CompanyListItemRenderer = null;
+         var _loc6_:* = 0;
+         var _loc7_:* = false;
+         var _loc8_:ListData = null;
+         var _loc9_:* = false;
+         this.showPlayersList = this.isShowPlayersList();
+         var _loc2_:int = param1.length;
+         var _loc3_:int = _renderers.length;
+         var _loc4_:* = 0;
+         while(_loc4_ < _loc3_)
+         {
+            _loc5_ = getRendererAt(_loc4_) as CompanyListItemRenderer;
+            if(_loc5_)
             {
-                loc3 = getRendererAt(loc2) as net.wg.gui.prebattle.company.CompanyListItemRenderer;
-                loc3.selected = false;
-                ++loc2;
+               _loc6_ = _scrollPosition + _loc4_;
+               _loc7_ = this.isItemSelected?_selectedIndex == _loc6_:false;
+               if(!_loc7_ && (_loc5_.dd.isOpen()))
+               {
+                  _loc5_.dd.close();
+               }
+               _loc8_ = new ListData(_loc6_,itemToLabel(param1[_loc4_]),_loc7_);
+               _loc5_.enabled = _loc4_ >= _loc2_?false:true;
+               _loc5_.setListData(_loc8_);
+               _loc9_ = (this.showPlayersList) && _loc6_ == this._setIndexCompany && (this.isItemSelected);
+               CompanyListItemRenderer(_loc5_).showPlayersList(_loc9_);
+               _loc5_.setData(param1[_loc4_]);
+               _loc5_.refreshPopulateData(this.updateRenderer);
+               _loc5_.validateNow();
             }
-            return;
-        }
+            _loc4_++;
+         }
+      }
 
-        internal function buttonClickHandler(arg1:flash.events.MouseEvent):void
-        {
-            if (arg1.target is CompaniesScrollingList)
+      override public function handleInput(param1:InputEvent) : void {
+         if(param1.handled)
+         {
+            return;
+         }
+         var _loc2_:IListItemRenderer = getRendererAt(_selectedIndex,_scrollPosition);
+         if(_loc2_ != null)
+         {
+            _loc2_.handleInput(param1);
+            if(param1.handled)
             {
-                this.isItemSelected = false;
-                App.utils.scheduler.scheduleTask(this.updateRenderer, 110);
+               return;
             }
-            return;
-        }
-
-        internal function selectedItemHandler(arg1:net.wg.gui.prebattle.company.CompanyEvent):void
-        {
-            this.isItemSelected = arg1.isSelected;
-            return;
-        }
-
-        public function set setIndexCompany(arg1:uint):void
-        {
-            this._setIndexCompany = int(arg1);
-            return;
-        }
-
-        internal function isShowPlayersList():Boolean
-        {
-            return !(this._setIndexCompany == -1) && this._setIndexCompany >= _scrollPosition && this._setIndexCompany <= _scrollPosition + _totalRenderers;
-        }
-
-        internal function focusOutHandler(arg1:flash.events.FocusEvent):void
-        {
-            this.isItemSelected = false;
-            App.utils.scheduler.scheduleTask(this.updateRenderer, 110);
-            return;
-        }
-
-        protected override function populateData(arg1:Array):void
-        {
-            var loc4:*=null;
-            var loc5:*=0;
-            var loc6:*=false;
-            var loc7:*=null;
-            var loc8:*=false;
-            this.showPlayersList = this.isShowPlayersList();
-            var loc1:*=arg1.length;
-            var loc2:*=_renderers.length;
-            var loc3:*=0;
-            while (loc3 < loc2)
-            {
-                loc4 = getRendererAt(loc3) as net.wg.gui.prebattle.company.CompanyListItemRenderer;
-                if (loc4)
-                {
-                    loc5 = _scrollPosition + loc3;
-                    if (!(loc6 = this.isItemSelected ? _selectedIndex == loc5 : false) && loc4.dd.isOpen())
-                    {
-                        loc4.dd.close();
-                    }
-                    loc7 = new scaleform.clik.data.ListData(loc5, itemToLabel(arg1[loc3]), loc6);
-                    loc4.enabled = loc3 >= loc1 ? false : true;
-                    loc4.setListData(loc7);
-                    loc8 = this.showPlayersList && loc5 == this._setIndexCompany && this.isItemSelected;
-                    net.wg.gui.prebattle.company.CompanyListItemRenderer(loc4).showPlayersList(loc8);
-                    loc4.setData(arg1[loc3]);
-                    loc4.refreshPopulateData(this.updateRenderer);
-                    loc4.validateNow();
-                }
-                ++loc3;
-            }
-            return;
-        }
-
-        public override function handleInput(arg1:scaleform.clik.events.InputEvent):void
-        {
-            if (arg1.handled)
-            {
-                return;
-            }
-            var loc1:*=getRendererAt(_selectedIndex, _scrollPosition);
-            if (loc1 != null)
-            {
-                loc1.handleInput(arg1);
-                if (arg1.handled)
-                {
-                    return;
-                }
-            }
-            var loc2:*=arg1.details;
-            var loc3:*=loc2.value == scaleform.clik.constants.InputValue.KEY_DOWN || loc2.value == scaleform.clik.constants.InputValue.KEY_HOLD;
-            var loc4:*=loc2.navEquivalent;
-            switch (loc4)
-            {
-                case scaleform.clik.constants.NavigationCode.UP:
-                {
-                    if (selectedIndex != -1)
-                    {
-                        if (_selectedIndex > 0)
+         }
+         var _loc3_:InputDetails = param1.details;
+         var _loc4_:Boolean = _loc3_.value == InputValue.KEY_DOWN || _loc3_.value == InputValue.KEY_HOLD;
+         switch(_loc3_.navEquivalent)
+         {
+            case NavigationCode.UP:
+               if(selectedIndex == -1)
+               {
+                  if(_loc4_)
+                  {
+                     scrollPosition = scrollPosition + _totalRenderers-1;
+                  }
+               }
+               else
+               {
+                  if(_selectedIndex > 0)
+                  {
+                     if(_loc4_)
+                     {
+                        scrollPosition--;
+                     }
+                  }
+                  else
+                  {
+                     if(wrapping != WrappingMode.STICK)
+                     {
+                        if(wrapping == WrappingMode.WRAP)
                         {
-                            if (loc3)
-                            {
-                                scrollPosition--;
-                            }
+                           if(_loc4_)
+                           {
+                              scrollPosition = _dataProvider.length-1;
+                           }
                         }
-                        else if (wrapping != scaleform.clik.constants.WrappingMode.STICK)
+                        else
                         {
-                            if (wrapping != scaleform.clik.constants.WrappingMode.WRAP)
-                            {
-                                return;
-                            }
-                            else if (loc3)
-                            {
-                                scrollPosition = (_dataProvider.length - 1);
-                            }
+                           return;
                         }
-                    }
-                    else if (loc3)
-                    {
-                        scrollPosition = (scrollPosition + _totalRenderers - 1);
-                    }
-                    break;
-                }
-                case scaleform.clik.constants.NavigationCode.DOWN:
-                {
-                    if (_selectedIndex != -1)
-                    {
-                        if (_selectedIndex < (_dataProvider.length - 1))
+                     }
+                  }
+               }
+               break;
+            case NavigationCode.DOWN:
+               if(_selectedIndex == -1)
+               {
+                  if(_loc4_)
+                  {
+                     scrollPosition = _scrollPosition;
+                  }
+               }
+               else
+               {
+                  if(_selectedIndex < _dataProvider.length-1)
+                  {
+                     if(_loc4_)
+                     {
+                        scrollPosition++;
+                     }
+                  }
+                  else
+                  {
+                     if(wrapping != WrappingMode.STICK)
+                     {
+                        if(wrapping == WrappingMode.WRAP)
                         {
-                            if (loc3)
-                            {
-                                scrollPosition++;
-                            }
+                           if(_loc4_)
+                           {
+                              scrollPosition = 0;
+                           }
                         }
-                        else if (wrapping != scaleform.clik.constants.WrappingMode.STICK)
+                        else
                         {
-                            if (wrapping != scaleform.clik.constants.WrappingMode.WRAP)
-                            {
-                                return;
-                            }
-                            else if (loc3)
-                            {
-                                scrollPosition = 0;
-                            }
+                           return;
                         }
-                    }
-                    else if (loc3)
-                    {
-                        scrollPosition = _scrollPosition;
-                    }
-                    break;
-                }
-                case scaleform.clik.constants.NavigationCode.END:
-                {
-                    if (!loc3)
-                    {
-                        scrollPosition = (_dataProvider.length - 1);
-                    }
-                    break;
-                }
-                case scaleform.clik.constants.NavigationCode.HOME:
-                {
-                    if (!loc3)
-                    {
-                        scrollPosition = 0;
-                    }
-                    break;
-                }
-                case scaleform.clik.constants.NavigationCode.PAGE_UP:
-                {
-                    if (loc3)
-                    {
-                        scrollList(_totalRenderers);
-                    }
-                    break;
-                }
-                case scaleform.clik.constants.NavigationCode.PAGE_DOWN:
-                {
-                    if (loc3)
-                    {
-                        scrollList(-_totalRenderers);
-                    }
-                    break;
-                }
-                default:
-                {
-                    return;
-                }
-            }
-            arg1.handled = true;
-            return;
-        }
+                     }
+                  }
+               }
+               break;
+            case NavigationCode.END:
+               if(!_loc4_)
+               {
+                  scrollPosition = _dataProvider.length-1;
+               }
+               break;
+            case NavigationCode.HOME:
+               if(!_loc4_)
+               {
+                  scrollPosition = 0;
+               }
+               break;
+            case NavigationCode.PAGE_UP:
+               if(_loc4_)
+               {
+                  scrollList(_totalRenderers);
+               }
+               break;
+            case NavigationCode.PAGE_DOWN:
+               if(_loc4_)
+               {
+                  scrollList(-_totalRenderers);
+               }
+               break;
+            default:
+               return;
+         }
+         param1.handled = true;
+      }
+   }
 
-        internal var _setIndexCompany:int=-1;
-
-        internal var showPlayersList:Boolean=false;
-
-        internal var isItemSelected:Boolean=false;
-    }
 }

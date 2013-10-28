@@ -1,23 +1,23 @@
-package net.wg.gui.events 
+package net.wg.gui.events
 {
-    import flash.events.*;
-    
-    public class QuestEvent extends flash.events.Event
-    {
-        public function QuestEvent(arg1:String, arg2:String)
-        {
-            super(arg1, true, true);
-            this.questID = arg2;
-            return;
-        }
+   import flash.events.Event;
 
-        public override function clone():flash.events.Event
-        {
-            return new net.wg.gui.events.QuestEvent(type, this.questID);
-        }
 
-        public static const SELECT_QUEST:String="selectQuest";
+   public class QuestEvent extends Event
+   {
+          
+      public function QuestEvent(param1:String, param2:String) {
+         super(param1,true,true);
+         this.questID = param2;
+      }
 
-        public var questID:String="";
-    }
+      public static const SELECT_QUEST:String = "selectQuest";
+
+      public var questID:String = "";
+
+      override public function clone() : Event {
+         return new QuestEvent(type,this.questID);
+      }
+   }
+
 }

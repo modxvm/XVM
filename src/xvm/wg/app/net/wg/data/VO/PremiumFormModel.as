@@ -1,91 +1,74 @@
-package net.wg.data.VO 
+package net.wg.data.VO
 {
-    import net.wg.data.daapi.base.*;
-    
-    public class PremiumFormModel extends net.wg.data.daapi.base.DAAPIDataClass
-    {
-        public function PremiumFormModel(arg1:Object)
-        {
-            super(arg1);
-            return;
-        }
+   import net.wg.data.daapi.base.DAAPIDataClass;
 
-        public function get days():int
-        {
-            return this._days;
-        }
 
-        public function set days(arg1:int):void
-        {
-            this._days = arg1;
-            return;
-        }
+   public class PremiumFormModel extends DAAPIDataClass
+   {
+          
+      public function PremiumFormModel(param1:Object) {
+         super(param1);
+      }
 
-        public function get price():int
-        {
-            return this._price;
-        }
+      private var _days:int = -1;
 
-        public function set price(arg1:int):void
-        {
-            this._price = arg1;
-            return;
-        }
+      private var _price:int = 0;
 
-        public function get discountPrice():int
-        {
-            return this._discountPrice;
-        }
+      private var _discountPrice:int = 0;
 
-        public function set discountPrice(arg1:int):void
-        {
-            this._discountPrice = arg1;
-            return;
-        }
+      private var _isDiscountPackage:Boolean = false;
 
-        public function get isDiscountPackage():Boolean
-        {
-            return this._isDiscountPackage;
-        }
+      private var _userGold:Number = 0;
 
-        public function set isDiscountPackage(arg1:Boolean):void
-        {
-            this._isDiscountPackage = arg1;
-            return;
-        }
+      private var _isUserSelected:Boolean = false;
 
-        public function get userGold():Number
-        {
-            return this._userGold;
-        }
+      public function get days() : int {
+         return this._days;
+      }
 
-        public function set userGold(arg1:Number):void
-        {
-            this._userGold = arg1;
-            return;
-        }
+      public function set days(param1:int) : void {
+         this._days = param1;
+      }
 
-        public function get isUserSelected():Boolean
-        {
-            return this._isUserSelected;
-        }
+      public function get price() : int {
+         return this._price;
+      }
 
-        public function set isUserSelected(arg1:Boolean):void
-        {
-            this._isUserSelected = arg1;
-            return;
-        }
+      public function set price(param1:int) : void {
+         this._price = param1;
+      }
 
-        internal var _days:int=-1;
+      public function get discountPrice() : int {
+         return this._discountPrice;
+      }
 
-        internal var _price:int=0;
+      public function set discountPrice(param1:int) : void {
+         this._discountPrice = param1;
+      }
 
-        internal var _discountPrice:int=0;
+      public function get isDiscountPackage() : Boolean {
+         return this._isDiscountPackage;
+      }
 
-        internal var _isDiscountPackage:Boolean=false;
+      public function set isDiscountPackage(param1:Boolean) : void {
+         this._isDiscountPackage = param1;
+      }
 
-        internal var _userGold:Number=0;
+      public function get userGold() : Number {
+         return this._userGold;
+      }
 
-        internal var _isUserSelected:Boolean=false;
-    }
+      public function set userGold(param1:Number) : void {
+         this._userGold = param1;
+      }
+
+      public function get isUserSelected() : Boolean {
+         return this._isUserSelected;
+      }
+
+      public function set isUserSelected(param1:Boolean) : void {
+         this._isUserSelected = param1;
+      }
+   }
+
 }

@@ -1,16 +1,6 @@
-import flash.external.ExternalInterface;
-import gfx.io.GameDelegate;
-import com.xvm.Cmd;
-import com.xvm.Config;
-import com.xvm.Defines;
-import com.xvm.GlobalEventDispatcher;
-import com.xvm.JSONx;
-import com.xvm.Logger;
-import com.xvm.Macros;
-import com.xvm.StatData;
-import com.xvm.Utils;
-import com.xvm.VehicleInfo;
-import com.xvm.DataTypes.Stat;
+import flash.external.*;
+import com.xvm.*;
+import com.xvm.DataTypes.*;
 
 class com.xvm.StatLoader
 {
@@ -26,7 +16,7 @@ class com.xvm.StatLoader
     {
         if (!Config.s_config.rating.showPlayersStatistics)
             return;
-        if (StatData.s_loaded == true)
+        if (Stat.s_loaded == true)
             return;
         if (instance._loading)
             return;
@@ -61,18 +51,18 @@ class com.xvm.StatLoader
             {
                 for (var nm in response.players)
                 {
-                    var stat:Stat = response.players[nm];
+                    var stat:StatData = response.players[nm];
                     //Logger.addObject(stat);
-                    stat = CalculateStatValues(stat);
-                    if (!StatData.s_data[nm])
+                    CalculateStatValues(stat);
+                    if (!Stat.s_data[nm])
                     {
                         //players_count++;
-                        StatData.s_data[nm] = { };
+                        Stat.s_data[nm] = { };
                     }
-                    StatData.s_data[nm].stat = stat;
-                    StatData.s_data[nm].loadstate = (StatData.s_data[nm].vehicleKey == "UNKNOWN")
+                    Stat.s_data[nm].stat = stat;
+                    Stat.s_data[nm].loadstate = (Stat.s_data[nm].vehicleKey == "UNKNOWN")
                         ? Defines.LOADSTATE_UNKNOWN : Defines.LOADSTATE_DONE;
-                    StatData.s_empty = false;
+                    Stat.s_empty = false;
                     Macros.RegisterStatMacros(nm, stat);
                     //Logger.addObject(StatData.s_data[nm], "s_data[" + nm + "]", 3);
                 }
@@ -91,30 +81,45 @@ class com.xvm.StatLoader
                 return;
             finallyBugWorkaround = true;
 
-            StatData.s_loaded = true;
+            Stat.s_loaded = true;
             _loading = false;
             //Logger.add("Stat Loaded");
-            GlobalEventDispatcher.dispatchEvent({type: StatData.E_STAT_LOADED});
+            GlobalEventDispatcher.dispatchEvent({type: Stat.E_STAT_LOADED});
         }
     }
 
-    public function CalculateStatValues(stat:Stat, forceTeff:Boolean):Stat
+    public function CalculateStatValues(stat:StatData, forceTeff:Boolean):Void
     {
         // rating (GWR)
         stat.r = stat.b > 0 ? Math.round(stat.w / stat.b * 100) : 0;
 
-        if (!stat.v.b || stat.v.b <= 0 || !stat.v.l || stat.v.l <= 0)
-            stat.tr = stat.r;
+        if (stat.v == null)
+        {
+            stat.v = new VData();
+            return;
+        }
+
+        stat.v.data = VehicleInfo.get(stat.v.id);
+        if (stat.v.data == null)
+        {
+            //Logger.add("WARNING: vehicle info (3) missed: " + stat.vn);
+            return;
+        }
+
+        var vdata:VehicleData = stat.v.data;
+
+        if (!stat.v.b || stat.v.b <= 0)
+            stat.v.r = stat.r;
         else
         {
             var Or = stat.r;
             var Tr = Math.round(stat.v.w / stat.v.b * 100);
             var Tb = stat.v.b / 100;
-            var Tl = Math.min(stat.v.l, 4) / 4;
+            var Tl = Math.min(vdata.level, 4) / 4;
             if (stat.v.b < 100)
-                stat.tr = Math.round(Or - (Or - Tr) * Tb * Tl);
+                stat.v.r = Math.round(Or - (Or - Tr) * Tb * Tl);
             else
-                stat.tr = Tr;
+                stat.v.r = Tr;
         }
 
         // XVM Scale: http://www.koreanrandom.com/forum/topic/2625-xvm-scale
@@ -130,80 +135,71 @@ class com.xvm.StatLoader
             stat.xwn = Utils.XWN(stat.wn);
 
         // tdb, tfb, tsb, tdv, te, teff (last)
-        stat.tdb = null;
-        stat.tfb = null;
-        stat.tsb = null;
-        stat.tdv = null;
-        stat.te = null;
-        stat.teff = null;
+        stat.v.db = null;
+        stat.v.fb = null;
+        stat.v.sb = null;
+        stat.v.dv = null;
+        stat.v.te = null;
+        stat.v.teff = null;
         // skip v.b less then 10, because of WG bug:
         // http://www.koreanrandom.com/forum/topic/1643-/page-19#entry26189
         // forceTeff used in UserInfo, there is not this bug there.
-        if (stat.v == null || stat.v.b == null || stat.v.l == null || (forceTeff != true && stat.v.b < 10 + stat.v.l * 2))
-            return stat;
+        if (stat.v == null || stat.v.b == null || (forceTeff != true && stat.v.b < 10 + vdata.level * 2))
+            return;
 
-        stat.tdb = (stat.v.d == null || stat.v.d < 0) ? null : Math.round(stat.v.d / stat.v.b);
-        stat.tfb = (stat.v.f == null || stat.v.f < 0) ? null : Math.round(stat.v.f / stat.v.b * 10) / 10;
-        stat.tsb = (stat.v.s == null || stat.v.s < 0) ? null : Math.round(stat.v.s / stat.v.b * 10) / 10;
+        stat.v.db = (stat.v.d == null || stat.v.d < 0) ? null : Math.round(stat.v.d / stat.v.b);
+        stat.v.fb = (stat.v.f == null || stat.v.f < 0) ? null : Math.round(stat.v.f / stat.v.b * 10) / 10;
+        stat.v.sb = (stat.v.s == null || stat.v.s < 0) ? null : Math.round(stat.v.s / stat.v.b * 10) / 10;
         //Logger.addObject(stat);
 
-        var vi2 = VehicleInfo.getInfo2("/-" + stat.vn + ".");
-        if (!vi2 || !vi2.type || !vi2.level)
-        {
-            //Logger.add("WARNING: vehicle info (3) missed: " + stat.vn);
-            return stat;
-        }
-
-        stat.tdv = (stat.v.d == null || stat.v.d < 0) ? null : Math.round(stat.v.d / stat.v.b / vi2.hptop * 10) / 10;
+        stat.v.dv = (stat.v.d == null || stat.v.d < 0) ? null : Math.round(stat.v.d / stat.v.b / vdata.hpTop * 10) / 10;
 
         var EC = { CD: 3, CF: 1 };
 //        Logger.addObject(stat);
 //        Logger.addObject(EC);
-        if (EC.CD != null && EC.CD > 0 && (stat.tdb == null || stat.tdb <= 0))
-            return stat;
-        if (EC.CF != null && EC.CF > 0 && (stat.tfb == null || stat.tfb <= 0))
-            return stat;
+        if (EC.CD != null && EC.CD > 0 && (stat.v.db == null || stat.v.db <= 0))
+            return;
+        if (EC.CF != null && EC.CF > 0 && (stat.v.fb == null || stat.v.fb <= 0))
+            return;
 
-        if (vi2.top.D == vi2.avg.D || vi2.top.F == vi2.avg.F)
-            return stat;
+        if (vdata.top.D == vdata.avg.D || vdata.top.F == vdata.avg.F)
+            return;
 
-        var dD = stat.tdb - vi2.avg.D;
-        var dF = stat.tfb - vi2.avg.F;
-        var minD = vi2.avg.D * 0.4;
-        var minF = vi2.avg.F * 0.4;
-        var d = 1 + dD / (vi2.top.D - vi2.avg.D);
-        var f = 1 + dF / (vi2.top.F - vi2.avg.F);
-        var d2 = (stat.tdb < vi2.avg.D) ? stat.tdb / vi2.avg.D : d;
-        var f2 = (stat.tfb < vi2.avg.F) ? stat.tfb / vi2.avg.F : f;
-        d = (stat.tdb < vi2.avg.D) ? 1 + dD / (vi2.avg.D - minD) : d;
-        f = (stat.tfb < vi2.avg.F) ? 1 + dF / (vi2.avg.F - minF) : f;
+        var dD = stat.v.db - vdata.avg.D;
+        var dF = stat.v.fb - vdata.avg.F;
+        var minD = vdata.avg.D * 0.4;
+        var minF = vdata.avg.F * 0.4;
+        var d = 1 + dD / (vdata.top.D - vdata.avg.D);
+        var f = 1 + dF / (vdata.top.F - vdata.avg.F);
+        var d2 = (stat.v.db < vdata.avg.D) ? stat.v.db / vdata.avg.D : d;
+        var f2 = (stat.v.fb < vdata.avg.F) ? stat.v.fb / vdata.avg.F : f;
+        d = (stat.v.db < vdata.avg.D) ? 1 + dD / (vdata.avg.D - minD) : d;
+        f = (stat.v.fb < vdata.avg.F) ? 1 + dF / (vdata.avg.F - minF) : f;
 
         d = Math.max(0, d);
         f = Math.max(0, f);
         d2 = Math.max(0, d2);
         f2 = Math.max(0, f2);
 
-        stat.te = (d * EC.CD + f * EC.CF) / (EC.CD + EC.CF);
+        stat.v.te = (d * EC.CD + f * EC.CF) / (EC.CD + EC.CF);
         //stat.teff2 = (d2 * EC.CD + f2 * EC.CF) / (EC.CD + EC.CF);
 //        Logger.add(stat.vn + " D:" + d + " F:" + f + " S:" + s);
 
-        stat.teff = Math.max(1, Math.round(stat.te * 1000));
+        stat.v.teff = Math.max(1, Math.round(stat.v.te * 1000));
         //stat.teff2 = Math.max(1, Math.round(stat.teff2 * 1000));
-        stat.te = (stat.teff == 0) ? 0 //can not be used
-            : (stat.teff < 300) ? 1
-            : (stat.teff < 500) ? 2
-            : (stat.teff < 700) ? 3
-            : (stat.teff < 900) ? 4
-            : (stat.teff < 1100) ? 5
-            : (stat.teff < 1300) ? 6
-            : (stat.teff < 1550) ? 7
-            : (stat.teff < 1800) ? 8
-            : (stat.teff < 2000) ? 9 : 10;
+        stat.v.te = (stat.v.teff == 0) ? 0 //can not be used
+            : (stat.v.teff < 300) ? 1
+            : (stat.v.teff < 500) ? 2
+            : (stat.v.teff < 700) ? 3
+            : (stat.v.teff < 900) ? 4
+            : (stat.v.teff < 1100) ? 5
+            : (stat.v.teff < 1300) ? 6
+            : (stat.v.teff < 1550) ? 7
+            : (stat.v.teff < 1800) ? 8
+            : (stat.v.teff < 2000) ? 9 : 10;
 
 //        Logger.add(stat.vn + " teff=" + stat.teff + " e:" + stat.te);
 //        Logger.addObject(stat);
-
-        return stat;
     }
 
     private function LoadUserDataCallback(str)
@@ -225,8 +221,8 @@ class com.xvm.StatLoader
             }
         }
         if (error == null)
-            GlobalEventDispatcher.dispatchEvent({ type: StatData.E_USERDATA_LOADED, data: data });
+            GlobalEventDispatcher.dispatchEvent({ type: Stat.E_USERDATA_LOADED, data: data });
         else
-            GlobalEventDispatcher.dispatchEvent({ type: StatData.E_USERDATA_LOADED, error: error });
+            GlobalEventDispatcher.dispatchEvent({ type: Stat.E_USERDATA_LOADED, error: error });
     }
 }

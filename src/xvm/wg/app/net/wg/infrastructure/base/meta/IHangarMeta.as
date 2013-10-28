@@ -1,23 +1,26 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IHangarMeta extends flash.events.IEventDispatcher
-    {
-        function onEscapeS():void;
+   import flash.events.IEventDispatcher;
 
-        function checkMoneyS():void;
 
-        function showHelpLayoutS():void;
+   public interface IHangarMeta extends IEventDispatcher
+   {
+          
+      function onEscapeS() : void;
 
-        function closeHelpLayoutS():void;
+      function checkMoneyS() : void;
 
-        function as_readyToFight(arg1:Boolean, arg2:String, arg3:String, arg4:Boolean, arg5:Boolean, arg6:Boolean, arg7:Boolean, arg8:Boolean):void;
+      function showHelpLayoutS() : void;
 
-        function as_showHelpLayout():void;
+      function closeHelpLayoutS() : void;
 
-        function as_closeHelpLayout():void;
+      function as_readyToFight(param1:Boolean, param2:String, param3:String, param4:Boolean, param5:Boolean, param6:Boolean, param7:Boolean, param8:Boolean, param9:Boolean) : void;
 
-        function as_setIsIGR(arg1:Boolean):void;
-    }
+      function as_showHelpLayout() : void;
+
+      function as_closeHelpLayout() : void;
+
+      function as_setIsIGR(param1:Boolean, param2:String) : void;
+   }
+
 }

@@ -1,61 +1,66 @@
-package net.wg.infrastructure.interfaces 
+package net.wg.infrastructure.interfaces
 {
-    import flash.display.*;
-    import flash.events.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    import scaleform.clik.controls.*;
-    import scaleform.clik.interfaces.*;
-    import scaleform.clik.utils.*;
-    
-    public interface IWindow extends net.wg.infrastructure.interfaces.entity.IDraggable, flash.events.IEventDispatcher, net.wg.infrastructure.interfaces.entity.IDisposable, scaleform.clik.interfaces.IUIComponent
-    {
-        function getTitleBtnEx():net.wg.gui.components.controls.TextFieldShort;
+   import net.wg.infrastructure.interfaces.entity.IDraggable;
+   import flash.events.IEventDispatcher;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import scaleform.clik.interfaces.IUIComponent;
+   import net.wg.gui.components.controls.TextFieldShort;
+   import scaleform.clik.controls.Button;
+   import scaleform.clik.utils.Constraints;
+   import flash.display.MovieClip;
+   import scaleform.clik.utils.Padding;
 
-        function getTitleBtn():scaleform.clik.controls.Button;
 
-        function getCloseBtn():scaleform.clik.controls.Button;
+   public interface IWindow extends IDraggable, IEventDispatcher, IDisposable, IUIComponent
+   {
+          
+      function getTitleBtnEx() : TextFieldShort;
 
-        function setMaxWidth(arg1:Number):void;
+      function getTitleBtn() : Button;
 
-        function setMaxHeight(arg1:Number):void;
+      function getCloseBtn() : Button;
 
-        function getMinWidth():Number;
+      function setMaxWidth(param1:Number) : void;
 
-        function setMinWidth(arg1:Number):void;
+      function setMaxHeight(param1:Number) : void;
 
-        function getMinHeight():Number;
+      function getMinWidth() : Number;
 
-        function setMinHeight(arg1:Number):void;
+      function setMinWidth(param1:Number) : void;
 
-        function setTitleIcon(arg1:String):void;
+      function getMinHeight() : Number;
 
-        function getConstraints():scaleform.clik.utils.Constraints;
+      function setMinHeight(param1:Number) : void;
 
-        function updateSize(arg1:Number, arg2:Number, arg3:Boolean=false):void;
+      function setTitleIcon(param1:String) : void;
 
-        function getBackground():flash.display.MovieClip;
+      function getConstraints() : Constraints;
 
-        function getIconMovie():flash.display.MovieClip;
+      function updateSize(param1:Number, param2:Number, param3:Boolean=false) : void;
 
-        function setSize(arg1:Number, arg2:Number):void;
+      function getBackground() : MovieClip;
 
-        function get sourceView():net.wg.infrastructure.interfaces.IAbstractWindowView;
+      function getIconMovie() : MovieClip;
 
-        function set sourceView(arg1:net.wg.infrastructure.interfaces.IAbstractWindowView):void;
+      function setSize(param1:Number, param2:Number) : void;
 
-        function get useBottomBtns():Boolean;
+      function get sourceView() : IAbstractWindowView;
 
-        function set useBottomBtns(arg1:Boolean):void;
+      function set sourceView(param1:IAbstractWindowView) : void;
 
-        function set title(arg1:String):void;
+      function get useBottomBtns() : Boolean;
 
-        function get contentPadding():Object;
+      function set useBottomBtns(param1:Boolean) : void;
 
-        function set contentPadding(arg1:Object):void;
+      function set title(param1:String) : void;
 
-        function get formBgPadding():scaleform.clik.utils.Padding;
+      function get contentPadding() : Object;
 
-        function set formBgPadding(arg1:scaleform.clik.utils.Padding):void;
-    }
+      function set contentPadding(param1:Object) : void;
+
+      function get formBgPadding() : Padding;
+
+      function set formBgPadding(param1:Padding) : void;
+   }
+
 }

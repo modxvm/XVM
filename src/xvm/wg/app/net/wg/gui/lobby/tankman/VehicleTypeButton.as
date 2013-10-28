@@ -1,45 +1,46 @@
-package net.wg.gui.lobby.tankman 
+package net.wg.gui.lobby.tankman
 {
-    import flash.display.*;
-    import net.wg.data.constants.*;
-    import net.wg.gui.components.controls.*;
-    
-    public class VehicleTypeButton extends net.wg.gui.components.controls.SoundButtonEx
-    {
-        public function VehicleTypeButton()
-        {
-            super();
-            soundType = net.wg.data.constants.SoundTypes.RNDR_NORMAL;
+   import net.wg.gui.components.controls.SoundButtonEx;
+   import flash.display.MovieClip;
+   import net.wg.data.constants.SoundTypes;
+
+
+   public class VehicleTypeButton extends SoundButtonEx
+   {
+          
+      public function VehicleTypeButton() {
+         super();
+         soundType = SoundTypes.RNDR_NORMAL;
+      }
+
+      public var typeSwitcher:MovieClip;
+
+      public var _type:String = "free";
+
+      public var inspectableGroupName:String;
+
+      override public function dispose() : void {
+         this.typeSwitcher = null;
+         super.dispose();
+      }
+
+      public function get type() : String {
+         return this._type;
+      }
+
+      public function set type(param1:String) : void {
+         if(this._type == param1)
+         {
             return;
-        }
+         }
+         this._type = param1;
+         this.typeSwitcher.gotoAndStop(param1);
+      }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.typeSwitcher.mouseEnabled = false;
-            return;
-        }
+      override protected function configUI() : void {
+         super.configUI();
+         this.typeSwitcher.mouseEnabled = false;
+      }
+   }
 
-        public function get type():String
-        {
-            return this._type;
-        }
-
-        public function set type(arg1:String):void
-        {
-            if (this._type == arg1) 
-            {
-                return;
-            }
-            this._type = arg1;
-            this.typeSwitcher.gotoAndStop(arg1);
-            return;
-        }
-
-        public var typeSwitcher:flash.display.MovieClip;
-
-        public var _type:String="free";
-
-        public var inspectableGroupName:String;
-    }
 }

@@ -1,17 +1,20 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface ILobbyMenuMeta extends flash.events.IEventDispatcher
-    {
-        function settingsClickS():void;
+   import flash.events.IEventDispatcher;
 
-        function cancelClickS():void;
 
-        function refuseTrainingS():void;
+   public interface ILobbyMenuMeta extends IEventDispatcher
+   {
+          
+      function settingsClickS() : void;
 
-        function logoffClickS():void;
+      function cancelClickS() : void;
 
-        function quitClickS():void;
-    }
+      function refuseTrainingS() : void;
+
+      function logoffClickS() : void;
+
+      function quitClickS() : void;
+   }
+
 }

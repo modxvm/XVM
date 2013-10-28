@@ -1,46 +1,39 @@
-package net.wg.gui.components.tooltips.helpers 
+package net.wg.gui.components.tooltips.helpers
 {
-    import scaleform.clik.core.*;
-    
-    public class TankTypeIco extends scaleform.clik.core.UIComponent
-    {
-        public function TankTypeIco()
-        {
-            super();
-            stop();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            gotoAndStop(1);
-            this._labelHash;
-            return;
-        }
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (_labelHash[this.type]) 
-            {
-                gotoAndStop(this.type);
-            }
-            return;
-        }
+   public class TankTypeIco extends UIComponent
+   {
+          
+      public function TankTypeIco() {
+         super();
+         stop();
+      }
 
-        public function get type():String
-        {
-            return this._type;
-        }
+      private var _type:String = null;
 
-        public function set type(arg1:String):void
-        {
-            this._type = arg1;
-            invalidate();
-            return;
-        }
+      override protected function configUI() : void {
+         super.configUI();
+         gotoAndStop(1);
+      }
 
-        internal var _type:String=null;
-    }
+      override protected function draw() : void {
+         super.draw();
+         if(_labelHash[this.type])
+         {
+            gotoAndStop(this.type);
+         }
+      }
+
+      public function get type() : String {
+         return this._type;
+      }
+
+      public function set type(param1:String) : void {
+         this._type = param1;
+         invalidate();
+      }
+   }
+
 }

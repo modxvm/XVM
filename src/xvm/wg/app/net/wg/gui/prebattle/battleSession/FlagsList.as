@@ -1,92 +1,87 @@
-package net.wg.gui.prebattle.battleSession 
+package net.wg.gui.prebattle.battleSession
 {
-    import flash.events.*;
-    import net.wg.gui.lobby.battleResults.*;
-    import scaleform.clik.events.*;
-    import scaleform.clik.interfaces.*;
-    import scaleform.gfx.*;
-    
-    public class FlagsList extends net.wg.gui.lobby.battleResults.MedalsList
-    {
-        public function FlagsList()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.lobby.battleResults.MedalsList;
+   import flash.events.Event;
+   import scaleform.clik.events.ListEvent;
+   import scaleform.clik.events.ButtonEvent;
+   import flash.events.MouseEvent;
+   import scaleform.clik.interfaces.IListItemRenderer;
+   import scaleform.gfx.MouseEventEx;
 
-        protected override function dispatchItemEvent(arg1:flash.events.Event):Boolean
-        {
-            var loc1:*=null;
-            var loc7:*=arg1.type;
-            switch (loc7) 
+
+   public class FlagsList extends MedalsList
+   {
+          
+      public function FlagsList() {
+         super();
+      }
+
+      override protected function dispatchItemEvent(param1:Event) : Boolean {
+         var _loc2_:String = null;
+         switch(param1.type)
+         {
+            case ButtonEvent.PRESS:
+               _loc2_ = ListEvent.ITEM_PRESS;
+               break;
+            case ButtonEvent.CLICK:
+               _loc2_ = ListEvent.ITEM_CLICK;
+               break;
+            case MouseEvent.ROLL_OVER:
+               _loc2_ = ListEvent.ITEM_ROLL_OVER;
+               break;
+            case MouseEvent.ROLL_OUT:
+               _loc2_ = ListEvent.ITEM_ROLL_OUT;
+               break;
+            case MouseEvent.DOUBLE_CLICK:
+               _loc2_ = ListEvent.ITEM_DOUBLE_CLICK;
+               break;
+            default:
+               return true;
+         }
+         var _loc3_:IListItemRenderer = param1.currentTarget as IListItemRenderer;
+         var _loc4_:uint = 0;
+         if(param1  is  ButtonEvent)
+         {
+            _loc4_ = (param1 as ButtonEvent).controllerIdx;
+         }
+         else
+         {
+            if(param1  is  MouseEventEx)
             {
-                case scaleform.clik.events.ButtonEvent.PRESS:
-                {
-                    loc1 = scaleform.clik.events.ListEvent.ITEM_PRESS;
-                    break;
-                }
-                case scaleform.clik.events.ButtonEvent.CLICK:
-                {
-                    loc1 = scaleform.clik.events.ListEvent.ITEM_CLICK;
-                    break;
-                }
-                case flash.events.MouseEvent.ROLL_OVER:
-                {
-                    loc1 = scaleform.clik.events.ListEvent.ITEM_ROLL_OVER;
-                    break;
-                }
-                case flash.events.MouseEvent.ROLL_OUT:
-                {
-                    loc1 = scaleform.clik.events.ListEvent.ITEM_ROLL_OUT;
-                    break;
-                }
-                case flash.events.MouseEvent.DOUBLE_CLICK:
-                {
-                    loc1 = scaleform.clik.events.ListEvent.ITEM_DOUBLE_CLICK;
-                    break;
-                }
-                default:
-                {
-                    return true;
-                }
+               _loc4_ = (param1 as MouseEventEx).mouseIdx;
             }
-            var loc2:*=arg1.currentTarget as scaleform.clik.interfaces.IListItemRenderer;
-            var loc3:*=0;
-            if (arg1 is scaleform.clik.events.ButtonEvent) 
+         }
+         var _loc5_:uint = 0;
+         if(param1  is  ButtonEvent)
+         {
+            _loc5_ = (param1 as ButtonEvent).buttonIdx;
+         }
+         else
+         {
+            if(param1  is  MouseEventEx)
             {
-                loc3 = (arg1 as scaleform.clik.events.ButtonEvent).controllerIdx;
+               _loc5_ = (param1 as MouseEventEx).buttonIdx;
             }
-            else if (arg1 is scaleform.gfx.MouseEventEx) 
+         }
+         var _loc6_:* = false;
+         if(param1  is  ButtonEvent)
+         {
+            _loc6_ = (param1 as ButtonEvent).isKeyboard;
+         }
+         var _loc7_:ListEvent = new ListEvent(_loc2_,false,true,_loc3_.index,0,_loc3_.index,_loc3_,dataProvider[_loc3_.index],_loc4_,_loc5_,_loc6_);
+         if(_loc2_ == ListEvent.ITEM_ROLL_OVER)
+         {
+            App.toolTipMgr.show(dataProvider[_loc3_.index].tooltip);
+         }
+         else
+         {
+            if(_loc2_ == ListEvent.ITEM_ROLL_OUT)
             {
-                loc3 = (arg1 as scaleform.gfx.MouseEventEx).mouseIdx;
+               App.toolTipMgr.hide();
             }
-            var loc4:*=0;
-            if (arg1 is scaleform.clik.events.ButtonEvent) 
-            {
-                loc4 = (arg1 as scaleform.clik.events.ButtonEvent).buttonIdx;
-            }
-            else if (arg1 is scaleform.gfx.MouseEventEx) 
-            {
-                loc4 = (arg1 as scaleform.gfx.MouseEventEx).buttonIdx;
-            }
-            var loc5:*=false;
-            if (arg1 is scaleform.clik.events.ButtonEvent) 
-            {
-                loc5 = (arg1 as scaleform.clik.events.ButtonEvent).isKeyboard;
-            }
-            var loc6:*=new scaleform.clik.events.ListEvent(loc1, false, true, loc2.index, 0, loc2.index, loc2, dataProvider[loc2.index], loc3, loc4, loc5);
-            if (loc1 != scaleform.clik.events.ListEvent.ITEM_ROLL_OVER) 
-            {
-                if (loc1 == scaleform.clik.events.ListEvent.ITEM_ROLL_OUT) 
-                {
-                    App.toolTipMgr.hide();
-                }
-            }
-            else 
-            {
-                App.toolTipMgr.show(dataProvider[loc2.index].tooltip);
-            }
-            return dispatchEvent(loc6);
-        }
-    }
+         }
+         return dispatchEvent(_loc7_);
+      }
+   }
+
 }

@@ -1,70 +1,64 @@
-package net.wg.gui.utils 
+package net.wg.gui.utils
 {
-    import flash.display.*;
-    import flash.utils.*;
-    
-    public class ImageSubstitution extends Object
-    {
-        public function ImageSubstitution(arg1:String, arg2:String, arg3:Number=0, arg4:Number=16, arg5:Number=16, arg6:Boolean=false)
-        {
-            super();
-            this.subString = arg1;
-            this.source = arg2;
-            this.baseLineY = arg3;
-            this.width = arg4;
-            this.height = arg5;
-            if (arg6) 
+   import flash.display.BitmapData;
+   import flash.utils.getDefinitionByName;
+
+
+   public class ImageSubstitution extends Object
+   {
+          
+      public function ImageSubstitution(param1:String, param2:String, param3:Number=undefined, param4:Number=undefined, param5:Number=undefined, param6:Boolean=false) {
+         super();
+         this.subString = param1;
+         this.source = param2;
+         this.baseLineY = param3;
+         this.width = param4;
+         this.height = param5;
+         if(param6)
+         {
+            this.loadImage();
+         }
+      }
+
+      public var subString:String = "";
+
+      public var source:String = "";
+
+      public var image:BitmapData = null;
+
+      public var baseLineY:Number = 0;
+
+      public var width:Number = 16;
+
+      public var height:Number = 16;
+
+      public function get valid() : Boolean {
+         return !(this.image == null);
+      }
+
+      public function loadImage() : Boolean {
+         var BitmapDataClass:Class = null;
+         var result:Boolean = true;
+         if(!(this.source == null) && this.source.length > 0)
+         {
+            try
             {
-                this.loadImage();
+               BitmapDataClass = getDefinitionByName(this.source) as Class;
+               this.image = new BitmapDataClass() as BitmapData;
             }
-            return;
-        }
-
-        public function get valid():Boolean
-        {
-            return !(this.image == null);
-        }
-
-        public function loadImage():Boolean
-        {
-            var result:Boolean;
-            var BitmapDataClass:Class;
-
-            var loc1:*;
-            BitmapDataClass = null;
-            result = true;
-            if (!(this.source == null) && this.source.length > 0) 
+            catch(error:ReferenceError)
             {
-                try 
-                {
-                    BitmapDataClass = flash.utils.getDefinitionByName(this.source) as Class;
-                    this.image = new BitmapDataClass() as flash.display.BitmapData;
-                }
-                catch (error:ReferenceError)
-                {
-                    trace("<ReferenceError> " + error.message);
-                    image = null;
-                    result = false;
-                }
+               trace("<ReferenceError> " + error.message);
+               image = null;
+               result = false;
             }
-            return result;
-        }
+         }
+         return result;
+      }
 
-        public function toString():String
-        {
-            return "[ImageSubstitution subString=" + this.subString + " source=" + this.source + " image=" + this.image + " baseLineY=" + this.baseLineY + " width=" + this.width + " height=" + this.height + "]";
-        }
+      public function toString() : String {
+         return "[ImageSubstitution subString=" + this.subString + " source=" + this.source + " image=" + this.image + " baseLineY=" + this.baseLineY + " width=" + this.width + " height=" + this.height + "]";
+      }
+   }
 
-        public var subString:String="";
-
-        public var source:String="";
-
-        public var image:flash.display.BitmapData=null;
-
-        public var baseLineY:Number=0;
-
-        public var width:Number=16;
-
-        public var height:Number=16;
-    }
 }

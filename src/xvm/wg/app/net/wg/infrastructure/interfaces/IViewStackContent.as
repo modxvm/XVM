@@ -1,8 +1,12 @@
-package net.wg.infrastructure.interfaces 
+package net.wg.infrastructure.interfaces
 {
-    import net.wg.infrastructure.interfaces.entity.*;
-    
-    public interface IViewStackContent extends net.wg.infrastructure.interfaces.entity.IUpdatable
-    {
-    }
+   import net.wg.infrastructure.interfaces.entity.IUpdatable;
+
+
+   public interface IViewStackContent extends IUpdatable
+   {
+          
+
+   }
+
 }

@@ -1,49 +1,45 @@
-package net.wg.gui.lobby.training 
+package net.wg.gui.lobby.training
 {
-    import __AS3__.vec.*;
-    import flash.display.*;
-    import net.wg.infrastructure.helpers.*;
-    import net.wg.infrastructure.interfaces.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    
-    public class TrainingDragController extends net.wg.infrastructure.helpers.DragDropListDelegateCtrlr
-    {
-        public function TrainingDragController(arg1:__AS3__.vec.Vector.<flash.display.InteractiveObject>, arg2:Class, arg3:String)
-        {
-            super(arg1, arg2, arg3);
-            return;
-        }
+   import net.wg.infrastructure.helpers.DragDropListDelegateCtrlr;
+   import flash.display.InteractiveObject;
+   import net.wg.infrastructure.interfaces.entity.IDroppable;
+   import net.wg.infrastructure.interfaces.entity.IDropItem;
+   import net.wg.infrastructure.interfaces.IDropList;
+   import __AS3__.vec.Vector;
 
-        protected override function onHighlightHitAreas(arg1:Boolean, arg2:flash.display.InteractiveObject):void
-        {
-            var loc1:*=null;
-            if (arg2 is net.wg.infrastructure.interfaces.entity.IDropItem) 
+
+   public class TrainingDragController extends DragDropListDelegateCtrlr
+   {
+          
+      public function TrainingDragController(param1:Vector.<InteractiveObject>, param2:Class, param3:String) {
+         super(param1,param2,param3);
+      }
+
+      override protected function onHighlightHitAreas(param1:Boolean, param2:InteractiveObject) : void {
+         var _loc3_:IDroppable = null;
+         if(param2  is  IDropItem)
+         {
+            if(param1)
             {
-                if (arg1) 
-                {
-                    arg2.alpha = 0.3;
-                    var loc2:*=0;
-                    var loc3:*=getDelegates();
-                    for each (loc1 in loc3) 
-                    {
-                        net.wg.infrastructure.interfaces.IDropList(loc1.getHitArea()).highlightList();
-                    }
-                }
-                else 
-                {
-                    if (arg2) 
-                    {
-                        arg2.alpha = 1;
-                    }
-                    loc2 = 0;
-                    loc3 = getDelegates();
-                    for each (loc1 in loc3) 
-                    {
-                        net.wg.infrastructure.interfaces.IDropList(loc1.getHitArea()).hideHighLight();
-                    }
-                }
+               param2.alpha = 0.3;
+               for each (_loc3_ in getDelegates())
+               {
+                  IDropList(_loc3_.getHitArea()).highlightList();
+               }
             }
-            return;
-        }
-    }
+            else
+            {
+               if(param2)
+               {
+                  param2.alpha = 1;
+               }
+               for each (_loc3_ in getDelegates())
+               {
+                  IDropList(_loc3_.getHitArea()).hideHighLight();
+               }
+            }
+         }
+      }
+   }
+
 }

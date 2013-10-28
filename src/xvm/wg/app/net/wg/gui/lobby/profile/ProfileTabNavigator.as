@@ -1,159 +1,151 @@
-package net.wg.gui.lobby.profile 
+package net.wg.gui.lobby.profile
 {
-    import flash.display.*;
-    import net.wg.data.*;
-    import net.wg.gui.components.advanced.*;
-    import net.wg.gui.events.*;
-    import net.wg.gui.lobby.profile.components.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import net.wg.infrastructure.interfaces.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.controls.*;
-    import scaleform.clik.data.*;
-    import scaleform.clik.events.*;
-    
-    public class ProfileTabNavigator extends net.wg.infrastructure.base.meta.impl.ProfileTabNavigatorMeta implements net.wg.infrastructure.base.meta.IProfileTabNavigatorMeta
-    {
-        public function ProfileTabNavigator()
-        {
-            this._sectionsDataUtil = new net.wg.gui.lobby.profile.SectionsDataUtil();
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.ProfileTabNavigatorMeta;
+   import net.wg.infrastructure.base.meta.IProfileTabNavigatorMeta;
+   import scaleform.clik.controls.Button;
+   import flash.display.MovieClip;
+   import net.wg.gui.components.advanced.ButtonBarEx;
+   import net.wg.gui.lobby.profile.components.ResizableViewStack;
+   import scaleform.clik.events.IndexEvent;
+   import net.wg.gui.events.ViewStackEvent;
+   import net.wg.infrastructure.interfaces.IDAAPIModule;
+   import net.wg.data.Aliases;
+   import scaleform.clik.data.DataProvider;
+   import scaleform.clik.constants.InvalidationType;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            if (this.btnTemplate) 
+
+   public class ProfileTabNavigator extends ProfileTabNavigatorMeta implements IProfileTabNavigatorMeta
+   {
+          
+      public function ProfileTabNavigator() {
+         this._sectionsDataUtil = new SectionsDataUtil();
+         super();
+      }
+
+      private static const OFFSET_INVALID:String = "layoutInv";
+
+      private static const INIT_DATA_INV:String = "initDataInv";
+
+      public var btnTemplate:Button;
+
+      public var templatesHolder:MovieClip;
+
+      public var bar:ButtonBarEx;
+
+      public var viewStack:ResizableViewStack;
+
+      private var initData:ProfileMenuInfoVO;
+
+      private var _sectionsDataUtil:SectionsDataUtil;
+
+      private var _centerOffset:int = 0;
+
+      override protected function configUI() : void {
+         super.configUI();
+         if(this.btnTemplate)
+         {
+            if(this.btnTemplate.parent)
             {
-                if (this.btnTemplate.parent) 
-                {
-                    this.btnTemplate.parent.removeChild(this.btnTemplate);
-                }
-                this.btnTemplate = null;
+               this.btnTemplate.parent.removeChild(this.btnTemplate);
             }
-            if (this.templatesHolder) 
+            this.btnTemplate = null;
+         }
+         if(this.templatesHolder)
+         {
+            if(this.templatesHolder.parent)
             {
-                if (this.templatesHolder.parent) 
-                {
-                    this.templatesHolder.parent.removeChild(this.templatesHolder);
-                }
-                this.templatesHolder = null;
+               this.templatesHolder.parent.removeChild(this.templatesHolder);
             }
-            this.viewStack.cache = true;
-            this.bar.addEventListener(scaleform.clik.events.IndexEvent.INDEX_CHANGE, this.onTabBarIndexChanged, false, 0, true);
-            this.viewStack.addEventListener(net.wg.gui.events.ViewStackEvent.VIEW_CHANGED, this.onSectionViewShowed, false, 0, true);
-            return;
-        }
+            this.templatesHolder = null;
+         }
+         this.viewStack.cache = true;
+         this.bar.addEventListener(IndexEvent.INDEX_CHANGE,this.onTabBarIndexChanged,false,0,true);
+         this.viewStack.addEventListener(ViewStackEvent.VIEW_CHANGED,this.onSectionViewShowed,false,0,true);
+      }
 
-        internal function onSectionViewShowed(arg1:net.wg.gui.events.ViewStackEvent):void
-        {
-            var loc1:*=this._sectionsDataUtil.getAliasByLinkage(arg1.linkage);
-            if (!isFlashComponentRegisteredS(loc1)) 
+      private function onSectionViewShowed(param1:ViewStackEvent) : void {
+         var _loc2_:String = this._sectionsDataUtil.getAliasByLinkage(param1.linkage);
+         if(!isFlashComponentRegisteredS(_loc2_))
+         {
+            registerFlashComponentS(IDAAPIModule(param1.view),_loc2_);
+         }
+      }
+
+      override protected function draw() : void {
+         var _loc1_:Array = null;
+         var _loc2_:uint = 0;
+         var _loc3_:Array = null;
+         var _loc4_:Object = null;
+         var _loc5_:* = 0;
+         var _loc6_:* = 0;
+         super.draw();
+         if((isInvalid(INIT_DATA_INV)) && (this.initData))
+         {
+            _loc1_ = this.initData.sectionsData;
+            _loc2_ = _loc1_.length;
+            _loc3_ = [];
+            _loc5_ = -1;
+            _loc6_ = 0;
+            while(_loc6_ < _loc2_)
             {
-                registerFlashComponentS(net.wg.infrastructure.interfaces.IDAAPIModule(arg1.view), loc1);
+               _loc4_ = _loc1_[_loc6_];
+               _loc3_.push(
+                  {
+                     "label":_loc4_.label,
+                     "alias":_loc4_.alias,
+                     "linkage":this._sectionsDataUtil.register(_loc4_.alias),
+                     "tooltip":_loc4_.tooltip
+                  }
+               );
+               if(_loc4_.alias == Aliases.PROFILE_AWARDS)
+               {
+                  _loc5_ = _loc6_;
+               }
+               _loc6_++;
             }
-            return;
-        }
-
-        protected override function draw():void
-        {
-            var loc1:*=null;
-            var loc2:*=0;
-            var loc3:*=null;
-            var loc4:*=null;
-            var loc5:*=0;
-            var loc6:*=0;
-            super.draw();
-            if (isInvalid(INIT_DATA_INV) && this.initData) 
-            {
-                loc1 = this.initData.sectionsData;
-                loc2 = loc1.length;
-                loc3 = [];
-                loc5 = -1;
-                loc6 = 0;
-                while (loc6 < loc2) 
-                {
-                    loc4 = loc1[loc6];
-                    loc3.push({"label":loc4.label, "alias":loc4.alias, "linkage":this._sectionsDataUtil.register(loc4.alias), "tooltip":loc4.tooltip});
-                    if (loc4.alias == net.wg.data.Aliases.PROFILE_AWARDS) 
-                    {
-                        loc5 = loc6;
-                    }
-                    ++loc6;
-                }
-                this.bar.dataProvider = new scaleform.clik.data.DataProvider(loc3);
-                this.bar.selectedIndex = loc5;
-                this.bar.selectedIndex = 0;
-            }
-            if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
-            {
-                invalidate(OFFSET_INVALID);
-            }
-            if (isInvalid(OFFSET_INVALID)) 
-            {
-                this.bar.x = Math.round(_width / 2 - this._centerOffset);
-                this.viewStack.centerOffset = this._centerOffset;
-            }
-            return;
-        }
-
-        internal function onTabBarIndexChanged(arg1:scaleform.clik.events.IndexEvent):void
-        {
-            this.viewStack.show(this._sectionsDataUtil.getLinkageByAlias(arg1.data.alias));
-            return;
-        }
-
-        public function as_setInitData(arg1:Object):void
-        {
-            this.initData = new net.wg.gui.lobby.profile.ProfileMenuInfoVO(arg1);
-            invalidate(INIT_DATA_INV);
-            return;
-        }
-
-        protected override function onDispose():void
-        {
-            if (this.initData) 
-            {
-                this.initData.dispose();
-                this.initData = null;
-            }
-            super.onDispose();
-            this.viewStack.dispose();
-            return;
-        }
-
-        public function setAvailableSize(arg1:Number, arg2:Number):void
-        {
-            this.viewStack.setAvailableSize(arg1, arg2 - this.viewStack.y);
-            setSize(arg1, arg2);
-            return;
-        }
-
-        public function set centerOffset(arg1:int):void
-        {
-            this._centerOffset = arg1;
+            this.bar.dataProvider = new DataProvider(_loc3_);
+            this.bar.selectedIndex = _loc5_;
+            this.bar.selectedIndex = 0;
+         }
+         if(isInvalid(InvalidationType.SIZE))
+         {
             invalidate(OFFSET_INVALID);
-            return;
-        }
+         }
+         if(isInvalid(OFFSET_INVALID))
+         {
+            this.bar.x = Math.round(_width / 2 - this._centerOffset);
+            this.viewStack.centerOffset = this._centerOffset;
+         }
+      }
 
-        internal static const OFFSET_INVALID:String="layoutInv";
+      private function onTabBarIndexChanged(param1:IndexEvent) : void {
+         this.viewStack.show(this._sectionsDataUtil.getLinkageByAlias(param1.data.alias));
+      }
 
-        internal static const INIT_DATA_INV:String="initDataInv";
+      public function as_setInitData(param1:Object) : void {
+         this.initData = new ProfileMenuInfoVO(param1);
+         invalidate(INIT_DATA_INV);
+      }
 
-        public var btnTemplate:scaleform.clik.controls.Button;
+      override protected function onDispose() : void {
+         if(this.initData)
+         {
+            this.initData.dispose();
+            this.initData = null;
+         }
+         super.onDispose();
+         this.viewStack.dispose();
+      }
 
-        public var templatesHolder:flash.display.MovieClip;
+      public function setAvailableSize(param1:Number, param2:Number) : void {
+         this.viewStack.setAvailableSize(param1,param2 - this.viewStack.y);
+         setSize(param1,param2);
+      }
 
-        public var bar:net.wg.gui.components.advanced.ButtonBarEx;
+      public function set centerOffset(param1:int) : void {
+         this._centerOffset = param1;
+         invalidate(OFFSET_INVALID);
+      }
+   }
 
-        public var viewStack:net.wg.gui.lobby.profile.components.ResizableViewStack;
-
-        internal var initData:net.wg.gui.lobby.profile.ProfileMenuInfoVO;
-
-        internal var _sectionsDataUtil:net.wg.gui.lobby.profile.SectionsDataUtil;
-
-        internal var _centerOffset:int=0;
-    }
 }

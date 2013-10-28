@@ -1,13 +1,16 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IExchangeVcoinWindowMeta extends flash.events.IEventDispatcher
-    {
-        function buyVcoinS():void;
+   import flash.events.IEventDispatcher;
 
-        function as_setTargetCurrencyData(arg1:Object):void;
 
-        function as_setSecondaryCurrency(arg1:Number):void;
-    }
+   public interface IExchangeVcoinWindowMeta extends IEventDispatcher
+   {
+          
+      function buyVcoinS() : void;
+
+      function as_setTargetCurrencyData(param1:Object) : void;
+
+      function as_setSecondaryCurrency(param1:Number) : void;
+   }
+
 }

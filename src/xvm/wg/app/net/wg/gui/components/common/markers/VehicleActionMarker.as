@@ -1,91 +1,78 @@
-package net.wg.gui.components.common.markers 
+package net.wg.gui.components.common.markers
 {
-    import flash.display.*;
-    import scaleform.clik.core.*;
-    import scaleform.clik.motion.*;
-    
-    public class VehicleActionMarker extends scaleform.clik.core.UIComponent
-    {
-        public function VehicleActionMarker()
-        {
-            super();
+   import scaleform.clik.core.UIComponent;
+   import flash.display.MovieClip;
+   import scaleform.clik.motion.Tween;
+
+
+   public class VehicleActionMarker extends UIComponent
+   {
+          
+      public function VehicleActionMarker() {
+         super();
+      }
+
+      private static const HIDE_DURATION:Number = 1000;
+
+      private var _actionRendererMap:Object;
+
+      private var currentRenderer:MovieClip;
+
+      private var hideTween:Tween;
+
+      public function showAction(param1:String) : void {
+         var _loc2_:String = this._actionRendererMap[param1];
+         if(_loc2_)
+         {
+            this.currentRenderer = this.createActionRenderer(_loc2_);
+         }
+      }
+
+      public function stopAction() : void {
+         if(this.currentRenderer)
+         {
+            this.hideTween = new Tween(HIDE_DURATION,this.currentRenderer,{"alpha":0.0});
+         }
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+      }
+
+      private function removeActionRenderer() : void {
+         if(!this.currentRenderer)
+         {
             return;
-        }
+         }
+         removeChild(this.currentRenderer);
+         this.currentRenderer = null;
+      }
 
-        public function showAction(arg1:String):void
-        {
-            var loc1:*=this._actionRendererMap[arg1];
-            if (loc1) 
-            {
-                this.currentRenderer = this.createActionRenderer(loc1);
-            }
-            return;
-        }
+      private function createActionRenderer(param1:String) : MovieClip {
+         var _loc2_:MovieClip = null;
+         this.removeActionRenderer();
+         _loc2_ = App.utils.classFactory.getObject(param1) as MovieClip;
+         if(_loc2_)
+         {
+            addChild(_loc2_);
+         }
+         return _loc2_;
+      }
 
-        public function stopAction():void
-        {
-            if (this.currentRenderer) 
-            {
-                this.hideTween = new scaleform.clik.motion.Tween(HIDE_DURATION, this.currentRenderer, {"alpha":0});
-            }
-            return;
-        }
+      public function get actionRenderers() : Object {
+         return this._actionRendererMap;
+      }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            return;
-        }
+      public function set actionRenderers(param1:Object) : void {
+         this._actionRendererMap = param1;
+      }
 
-        internal function removeActionRenderer():void
-        {
-            if (!this.currentRenderer) 
-            {
-                return;
-            }
-            removeChild(this.currentRenderer);
-            this.currentRenderer = null;
-            return;
-        }
+      override public function dispose() : void {
+         this.removeActionRenderer();
+         this._actionRendererMap = null;
+         this.hideTween = null;
+         super.dispose();
+      }
+   }
 
-        internal function createActionRenderer(arg1:String):flash.display.MovieClip
-        {
-            var loc1:*=null;
-            this.removeActionRenderer();
-            loc1 = App.utils.classFactory.getObject(arg1) as flash.display.MovieClip;
-            if (loc1) 
-            {
-                addChild(loc1);
-            }
-            return loc1;
-        }
-
-        public function get actionRenderers():Object
-        {
-            return this._actionRendererMap;
-        }
-
-        public function set actionRenderers(arg1:Object):void
-        {
-            this._actionRendererMap = arg1;
-            return;
-        }
-
-        public override function dispose():void
-        {
-            this.removeActionRenderer();
-            this._actionRendererMap = null;
-            this.hideTween = null;
-            super.dispose();
-            return;
-        }
-
-        internal static const HIDE_DURATION:Number=1000;
-
-        internal var _actionRendererMap:Object;
-
-        internal var currentRenderer:flash.display.MovieClip;
-
-        internal var hideTween:scaleform.clik.motion.Tween;
-    }
 }

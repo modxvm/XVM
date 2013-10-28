@@ -1,18 +1,27 @@
-package net.wg.gui.lobby.customization 
+package net.wg.gui.lobby.customization
 {
-    import __AS3__.vec.*;
-    import net.wg.data.daapi.base.*;
-    import net.wg.gui.lobby.customization.data.*;
-    import net.wg.gui.lobby.customization.renderers.*;
-    import net.wg.infrastructure.*;
-    
-    public class _Importer extends net.wg.infrastructure.BaseImporter
-    {
-        public function _Importer()
-        {
-            super();
-            importClasses(Vector.<Class>([net.wg.gui.lobby.customization.data.CamouflagesDataProvider, net.wg.data.daapi.base.DAAPIDataProvider, net.wg.gui.lobby.customization.data.DAAPIItemsDataProvider, net.wg.gui.lobby.customization.data.RentalPackageDAAPIDataProvider, net.wg.gui.lobby.customization.renderers.CamoDemoRenderer, net.wg.gui.lobby.customization.renderers.CamouflageItemRenderer, net.wg.gui.lobby.customization.renderers.CustomizationItemRenderer, net.wg.gui.lobby.customization.renderers.PriceItemRenderer, net.wg.gui.lobby.customization.renderers.RendererBorder, net.wg.gui.lobby.customization.renderers.RentalPackageItemRenderer, net.wg.gui.lobby.customization.renderers.SectionItemRenderer, net.wg.gui.lobby.customization.renderers.TextureItemRenderer, net.wg.gui.lobby.customization.BaseTimedCustomizationGroupView, net.wg.gui.lobby.customization.BaseTimedCustomizationSectionView, net.wg.gui.lobby.customization.CamoDropButton, net.wg.gui.lobby.customization.CamouflageGroupView, net.wg.gui.lobby.customization.CamouflageSectionView, net.wg.gui.lobby.customization.CustomizationEvent, net.wg.gui.lobby.customization.EmblemLeftSectionView, net.wg.gui.lobby.customization.EmblemRightSectionView, net.wg.gui.lobby.customization.InscriptionLeftSectionView, net.wg.gui.lobby.customization.InscriptionRightSectionView, net.wg.gui.lobby.customization.VehicleCustomization]));
-            return;
-        }
-    }
+   import net.wg.infrastructure.BaseImporter;
+   import net.wg.gui.lobby.customization.data.CamouflagesDataProvider;
+   import net.wg.data.daapi.base.DAAPIDataProvider;
+   import net.wg.gui.lobby.customization.data.DAAPIItemsDataProvider;
+   import net.wg.gui.lobby.customization.data.RentalPackageDAAPIDataProvider;
+   import net.wg.gui.lobby.customization.renderers.CamoDemoRenderer;
+   import net.wg.gui.lobby.customization.renderers.CamouflageItemRenderer;
+   import net.wg.gui.lobby.customization.renderers.CustomizationItemRenderer;
+   import net.wg.gui.lobby.customization.renderers.PriceItemRenderer;
+   import net.wg.gui.lobby.customization.renderers.RendererBorder;
+   import net.wg.gui.lobby.customization.renderers.RentalPackageItemRenderer;
+   import net.wg.gui.lobby.customization.renderers.SectionItemRenderer;
+   import net.wg.gui.lobby.customization.renderers.TextureItemRenderer;
+
+
+   public class _Importer extends BaseImporter
+   {
+          
+      public function _Importer() {
+         super();
+         importClasses(Vector.<Class>([CamouflagesDataProvider,DAAPIDataProvider,DAAPIItemsDataProvider,RentalPackageDAAPIDataProvider,CamoDemoRenderer,CamouflageItemRenderer,CustomizationItemRenderer,PriceItemRenderer,RendererBorder,RentalPackageItemRenderer,SectionItemRenderer,TextureItemRenderer,BaseTimedCustomizationGroupView,BaseTimedCustomizationSectionView,CamoDropButton,CamouflageGroupView,CamouflageSectionView,CustomizationEvent,EmblemLeftSectionView,EmblemRightSectionView,InscriptionLeftSectionView,InscriptionRightSectionView,VehicleCustomization]));
+      }
+   }
+
 }

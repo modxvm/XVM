@@ -1,22 +1,21 @@
-package net.wg.gui.lobby.vehicleInfo 
+package net.wg.gui.lobby.vehicleInfo
 {
-    import flash.display.*;
-    import flash.text.*;
-    
-    public class BaseBlock extends flash.display.Sprite
-    {
-        public function BaseBlock()
-        {
-            super();
-            return;
-        }
+   import flash.display.Sprite;
+   import flash.text.TextField;
 
-        public function setData(arg1:String):void
-        {
-            this.baseName.text = arg1;
-            return;
-        }
 
-        public var baseName:flash.text.TextField;
-    }
+   public class BaseBlock extends Sprite
+   {
+          
+      public function BaseBlock() {
+         super();
+      }
+
+      public var baseName:TextField;
+
+      public function setData(param1:String) : void {
+         this.baseName.text = param1;
+      }
+   }
+
 }

@@ -1,25 +1,28 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IBrowserMeta extends flash.events.IEventDispatcher
-    {
-        function browserActionS(arg1:String):void;
+   import flash.events.IEventDispatcher;
 
-        function browserMoveS(arg1:int, arg2:int, arg3:int):void;
 
-        function browserDownS(arg1:int, arg2:int, arg3:int):void;
+   public interface IBrowserMeta extends IEventDispatcher
+   {
+          
+      function browserActionS(param1:String) : void;
 
-        function browserUpS(arg1:int, arg2:int, arg3:int):void;
+      function browserMoveS(param1:int, param2:int, param3:int) : void;
 
-        function browserFocusOutS():void;
+      function browserDownS(param1:int, param2:int, param3:int) : void;
 
-        function onBrowserShowS(arg1:Boolean):void;
+      function browserUpS(param1:int, param2:int, param3:int) : void;
 
-        function onBrowserHideS():void;
+      function browserFocusOutS() : void;
 
-        function as_loadingStart():void;
+      function onBrowserShowS(param1:Boolean) : void;
 
-        function as_loadingStop():void;
-    }
+      function onBrowserHideS() : void;
+
+      function as_loadingStart() : void;
+
+      function as_loadingStop() : void;
+   }
+
 }

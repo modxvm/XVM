@@ -1,9 +1,12 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IEliteWindowMeta extends flash.events.IEventDispatcher
-    {
-        function as_setVehTypeCompDescr(arg1:int):void;
-    }
+   import flash.events.IEventDispatcher;
+
+
+   public interface IEliteWindowMeta extends IEventDispatcher
+   {
+          
+      function as_setVehTypeCompDescr(param1:int) : void;
+   }
+
 }

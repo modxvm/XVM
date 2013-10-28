@@ -1,109 +1,90 @@
-package net.wg.gui.components.carousels 
+package net.wg.gui.components.carousels
 {
-    import flash.display.*;
-    import scaleform.clik.controls.*;
-    import scaleform.clik.interfaces.*;
-    
-    public class AchievementCarousel extends net.wg.gui.components.carousels.CarouselBase
-    {
-        public function AchievementCarousel()
-        {
-            super();
-            var loc1:*;
-            rightArrow.enabled = loc1 = false;
-            leftArrow.enabled = loc1;
-            rightArrow.visible = loc1 = false;
-            leftArrow.visible = loc1;
-            this.achievementBG.visible = false;
-            return;
-        }
+   import flash.display.MovieClip;
+   import scaleform.clik.interfaces.IListItemRenderer;
+   import scaleform.clik.controls.Button;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            return;
-        }
 
-        protected override function draw():void
-        {
-            super.draw();
-            return;
-        }
+   public class AchievementCarousel extends CarouselBase
+   {
+          
+      public function AchievementCarousel() {
+         super();
+         leftArrow.enabled = rightArrow.enabled = false;
+         leftArrow.visible = rightArrow.visible = false;
+         this.achievementBG.visible = false;
+      }
 
-        protected override function initPosition():void
-        {
-            super.initPosition();
-            if (this.achievementBG) 
+      public var achievementBG:MovieClip;
+
+      override protected function configUI() : void {
+         super.configUI();
+      }
+
+      override protected function draw() : void {
+         super.draw();
+      }
+
+      override protected function initPosition() : void {
+         super.initPosition();
+         if(this.achievementBG)
+         {
+            this.achievementBG.x = renderersMask.x;
+            this.achievementBG.y = renderersMask.y;
+            this.achievementBG.width = renderersMask.width;
+            this.achievementBG.height = renderersMask.height;
+         }
+      }
+
+      override protected function updateContainerPosition() : void {
+         super.updateContainerPosition();
+         if(_renderers.length <= countVisibleSlots)
+         {
+            leftArrow.visible = rightArrow.visible = false;
+            container.x = leftArrow.x + leftArrow.width + padding.left;
+         }
+         else
+         {
+            leftArrow.visible = rightArrow.visible = true;
+         }
+         this.achievementBG.visible = leftArrow.visible;
+         updateArrowsState();
+      }
+
+      private var isSetListeners:Boolean = false;
+
+      override protected function updateRenderPosition(param1:IListItemRenderer, param2:uint, param3:int, param4:Number) : void {
+         super.updateRenderPosition(param1,param2,param3,param4);
+         if(_renderers.length <= countVisibleSlots)
+         {
+            Button(param1).buttonMode = true;
+            if(this.isSetListeners)
             {
-                this.achievementBG.x = renderersMask.x;
-                this.achievementBG.y = renderersMask.y;
-                this.achievementBG.width = renderersMask.width;
-                this.achievementBG.height = renderersMask.height;
+               removeCursorListeners();
+               this.isSetListeners = false;
             }
-            return;
-        }
+         }
+         else
+         {
+            this.setCursorListeners();
+         }
+      }
 
-        protected override function updateContainerPosition():void
-        {
-            super.updateContainerPosition();
-            if (_renderers.length <= countVisibleSlots) 
-            {
-                var loc1:*;
-                rightArrow.visible = loc1 = false;
-                leftArrow.visible = loc1;
-                container.x = leftArrow.x + leftArrow.width + padding.left;
-            }
-            else 
-            {
-                rightArrow.visible = loc1 = true;
-                leftArrow.visible = loc1;
-            }
-            this.achievementBG.visible = leftArrow.visible;
-            updateArrowsState();
-            return;
-        }
+      override protected function setCursorListeners() : void {
+         if(!this.isSetListeners)
+         {
+            super.setCursorListeners();
+            this.isSetListeners = true;
+         }
+      }
 
-        protected override function updateRenderPosition(arg1:scaleform.clik.interfaces.IListItemRenderer, arg2:uint, arg3:int, arg4:Number):void
-        {
-            super.updateRenderPosition(arg1, arg2, arg3, arg4);
-            if (_renderers.length <= countVisibleSlots) 
-            {
-                scaleform.clik.controls.Button(arg1).buttonMode = true;
-                if (this.isSetListeners) 
-                {
-                    removeCursorListeners();
-                    this.isSetListeners = false;
-                }
-            }
-            else 
-            {
-                this.setCursorListeners();
-            }
-            return;
-        }
+      override protected function populateData(param1:Array) : void {
+         super.populateData(param1);
+         if(_renderers.length > countVisibleSlots)
+         {
+            this.initPosition();
+         }
+      }
+   }
 
-        protected override function setCursorListeners():void
-        {
-            if (!this.isSetListeners) 
-            {
-                super.setCursorListeners();
-                this.isSetListeners = true;
-            }
-            return;
-        }
-
-        protected override function populateData(arg1:Array):void
-        {
-            super.populateData(arg1);
-            if (_renderers.length > countVisibleSlots) 
-            {
-                this.initPosition();
-            }
-            return;
-        }
-
-        public var achievementBG:flash.display.MovieClip;
-
-        internal var isSetListeners:Boolean=false;
-    }
 }

@@ -1,105 +1,123 @@
-package net.wg.gui.lobby.profile.pages.statistics 
+package net.wg.gui.lobby.profile.pages.statistics
 {
-    import flash.display.*;
-    import flash.events.*;
-    import flash.geom.*;
-    import net.wg.gui.lobby.profile.components.*;
-    import net.wg.gui.lobby.profile.components.chart.*;
-    import net.wg.gui.lobby.profile.components.chart.axis.*;
-    import net.wg.gui.lobby.profile.components.chart.layout.*;
-    import scaleform.clik.interfaces.*;
-    
-    public class StatisticsBarChartAxis extends net.wg.gui.lobby.profile.components.chart.axis.AxisBase
-    {
-        public function StatisticsBarChartAxis()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.lobby.profile.components.chart.axis.AxisBase;
+   import flash.display.MovieClip;
+   import net.wg.gui.lobby.profile.components.LineTextComponent;
+   import scaleform.clik.interfaces.IListItemRenderer;
+   import net.wg.gui.lobby.profile.components.SimpleLoader;
+   import flash.events.Event;
+   import net.wg.gui.lobby.profile.components.chart.IChartItem;
+   import flash.geom.Point;
+   import net.wg.gui.lobby.profile.components.chart.layout.IChartLayout;
 
-        protected override function createPoint(arg1:Object):scaleform.clik.interfaces.IListItemRenderer
-        {
-            var loc1:*=new _pointClass();
-            loc1.addEventListener(net.wg.gui.lobby.profile.components.SimpleLoader.LOADED, this.iconLoadingCompleteHandler, false, 0, true);
-            addChild(loc1);
-            return loc1;
-        }
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(LAYOUT_INV)) 
+   public class StatisticsBarChartAxis extends AxisBase
+   {
+          
+      public function StatisticsBarChartAxis() {
+         super();
+      }
+
+      private static const paddingTop:int = 112;
+
+      private static const LAYOUT_INV:String = "layoutInv";
+
+      public static const INITIALIZED:String = "inited";
+
+      public var background:MovieClip;
+
+      public var lineText:LineTextComponent;
+
+      override protected function configUI() : void {
+         super.configUI();
+      }
+
+      override protected function createPoint(param1:Object) : IListItemRenderer {
+         var _loc2_:StatisticBarChartAxisPoint = new _pointClass();
+         _loc2_.addEventListener(SimpleLoader.LOADED,this.iconLoadingCompleteHandler,false,0,true);
+         addChild(_loc2_);
+         return _loc2_;
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         if(isInvalid(LAYOUT_INV))
+         {
+            this.layoutAll(currentLayout);
+         }
+      }
+
+      private function iconLoadingCompleteHandler(param1:Event) : void {
+         var _loc6_:StatisticBarChartAxisPoint = null;
+         var _loc2_:uint = getData().length;
+         var _loc3_:* = true;
+         var _loc4_:uint = 0;
+         var _loc5_:* = 0;
+         while(_loc5_ < numChildren)
+         {
+            _loc6_ = getChildAt(_loc5_) as StatisticBarChartAxisPoint;
+            if(_loc6_)
             {
-                this.layoutAll(currentLayout);
+               _loc4_++;
+               if(!_loc6_.initialized)
+               {
+                  _loc3_ = false;
+                  break;
+               }
             }
-            return;
-        }
+            _loc5_++;
+         }
+         if((_loc3_) && _loc2_ == _loc4_)
+         {
+            dispatchEvent(new Event(INITIALIZED));
+         }
+         invalidate(LAYOUT_INV);
+      }
 
-        internal function iconLoadingCompleteHandler(arg1:flash.events.Event):void
-        {
-            invalidate(LAYOUT_INV);
-            return;
-        }
+      override protected function layoutPoint(param1:IListItemRenderer, param2:IChartItem) : void {
+         var _loc3_:StatisticBarChartItem = StatisticBarChartItem(param2);
+         var _loc4_:Point = _loc3_.getThumbDimensions();
+         param1.y = paddingTop;
+         param1.x = Math.round(_loc3_.x + (_loc4_.x - param1.width >> 1));
+      }
 
-        protected override function layoutPoint(arg1:scaleform.clik.interfaces.IListItemRenderer, arg2:net.wg.gui.lobby.profile.components.chart.IChartItem):void
-        {
-            var loc1:*=net.wg.gui.lobby.profile.pages.statistics.StatisticBarChartItem(arg2);
-            var loc2:*=loc1.getThumbDimensions();
-            arg1.y = paddingTop;
-            arg1.x = Math.round(loc1.x + (loc2.x - arg1.width >> 1));
+      override protected function layoutAll(param1:IChartLayout) : void {
+         var _loc2_:StatisticBarChartItem = null;
+         super.layoutAll(param1);
+         if(!renderers)
+         {
             return;
-        }
+         }
+         var _loc3_:* = 0;
+         while(_loc3_ < renderers.length)
+         {
+            _loc2_ = StatisticBarChartItem(renderers[_loc3_]);
+            this.layoutPoint(_points[_loc3_],_loc2_);
+            _loc3_++;
+         }
+         if(_loc2_)
+         {
+            this.lineText.width = this.background.width = _loc2_.x + _loc2_.getThumbDimensions().x + param1.paddingRight;
+            dispatchEvent(new Event(Event.RESIZE,true));
+         }
+      }
 
-        protected override function layoutAll(arg1:net.wg.gui.lobby.profile.components.chart.layout.IChartLayout):void
-        {
-            var loc1:*=null;
-            super.layoutAll(arg1);
-            if (!renderers) 
+      override public function dispose() : void {
+         var _loc1_:Object = null;
+         while(_points.length > 0)
+         {
+            _loc1_ = _points.splice(_points.length-1,1)[0];
+            try
             {
-                return;
+               _loc1_.dispose();
+               _loc1_.removeEventListener(SimpleLoader.LOADED,this.iconLoadingCompleteHandler);
             }
-            var loc2:*=0;
-            while (loc2 < renderers.length) 
+            catch(e:Error)
             {
-                loc1 = net.wg.gui.lobby.profile.pages.statistics.StatisticBarChartItem(renderers[loc2]);
-                this.layoutPoint(_points[loc2], loc1);
-                ++loc2;
             }
-            if (loc1) 
-            {
-                var loc3:*;
-                this.background.width = loc3 = loc1.x + loc1.getThumbDimensions().x + arg1.paddingRight;
-                this.lineText.width = loc3;
-                dispatchEvent(new flash.events.Event(flash.events.Event.RESIZE, true));
-            }
-            return;
-        }
+            _loc1_ = null;
+         }
+      }
+   }
 
-        public override function dispose():void
-        {
-            var loc1:*=null;
-            while (_points.length > 0) 
-            {
-                loc1 = _points.splice((_points.length - 1), 1)[0];
-                try 
-                {
-                    loc1.dispose();
-                    loc1.removeEventListener(net.wg.gui.lobby.profile.components.SimpleLoader.LOADED, this.iconLoadingCompleteHandler);
-                }
-                catch (e:Error)
-                {
-                };
-                loc1 = null;
-            }
-            return;
-        }
-
-        internal static const paddingTop:int=112;
-
-        internal static const LAYOUT_INV:String="layoutInv";
-
-        public var background:flash.display.MovieClip;
-
-        public var lineText:net.wg.gui.lobby.profile.components.LineTextComponent;
-    }
 }

@@ -1,86 +1,71 @@
-package net.wg.infrastructure.base.meta.impl 
+package net.wg.infrastructure.base.meta.impl
 {
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.base.*;
-    
-    public class TrainingRoomMeta extends net.wg.infrastructure.base.AbstractView
-    {
-        public function TrainingRoomMeta()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.AbstractView;
+   import net.wg.data.constants.Errors;
 
-        public function showTrainingSettingsS():void
-        {
-            App.utils.asserter.assertNotNull(this.showTrainingSettings, "showTrainingSettings" + net.wg.data.constants.Errors.CANT_NULL);
-            this.showTrainingSettings();
-            return;
-        }
 
-        public function selectCommonVoiceChatS(arg1:Number):void
-        {
-            App.utils.asserter.assertNotNull(this.selectCommonVoiceChat, "selectCommonVoiceChat" + net.wg.data.constants.Errors.CANT_NULL);
-            this.selectCommonVoiceChat(arg1);
-            return;
-        }
+   public class TrainingRoomMeta extends AbstractView
+   {
+          
+      public function TrainingRoomMeta() {
+         super();
+      }
 
-        public function startTrainingS():void
-        {
-            App.utils.asserter.assertNotNull(this.startTraining, "startTraining" + net.wg.data.constants.Errors.CANT_NULL);
-            this.startTraining();
-            return;
-        }
+      public var showTrainingSettings:Function = null;
 
-        public function swapTeamsS():void
-        {
-            App.utils.asserter.assertNotNull(this.swapTeams, "swapTeams" + net.wg.data.constants.Errors.CANT_NULL);
-            this.swapTeams();
-            return;
-        }
+      public var selectCommonVoiceChat:Function = null;
 
-        public function changeTeamS(arg1:Number, arg2:Number):void
-        {
-            App.utils.asserter.assertNotNull(this.changeTeam, "changeTeam" + net.wg.data.constants.Errors.CANT_NULL);
-            this.changeTeam(arg1, arg2);
-            return;
-        }
+      public var startTraining:Function = null;
 
-        public function closeTrainingRoomS():void
-        {
-            App.utils.asserter.assertNotNull(this.closeTrainingRoom, "closeTrainingRoom" + net.wg.data.constants.Errors.CANT_NULL);
-            this.closeTrainingRoom();
-            return;
-        }
+      public var swapTeams:Function = null;
 
-        public function showPrebattleInvitationsFormS():void
-        {
-            App.utils.asserter.assertNotNull(this.showPrebattleInvitationsForm, "showPrebattleInvitationsForm" + net.wg.data.constants.Errors.CANT_NULL);
-            this.showPrebattleInvitationsForm();
-            return;
-        }
+      public var changeTeam:Function = null;
 
-        public function onEscapeS():void
-        {
-            App.utils.asserter.assertNotNull(this.onEscape, "onEscape" + net.wg.data.constants.Errors.CANT_NULL);
-            this.onEscape();
-            return;
-        }
+      public var closeTrainingRoom:Function = null;
 
-        public var showTrainingSettings:Function=null;
+      public var showPrebattleInvitationsForm:Function = null;
 
-        public var selectCommonVoiceChat:Function=null;
+      public var onEscape:Function = null;
 
-        public var startTraining:Function=null;
+      public function showTrainingSettingsS() : void {
+         App.utils.asserter.assertNotNull(this.showTrainingSettings,"showTrainingSettings" + Errors.CANT_NULL);
+         this.showTrainingSettings();
+      }
 
-        public var swapTeams:Function=null;
+      public function selectCommonVoiceChatS(param1:Number) : void {
+         App.utils.asserter.assertNotNull(this.selectCommonVoiceChat,"selectCommonVoiceChat" + Errors.CANT_NULL);
+         this.selectCommonVoiceChat(param1);
+      }
 
-        public var changeTeam:Function=null;
+      public function startTrainingS() : void {
+         App.utils.asserter.assertNotNull(this.startTraining,"startTraining" + Errors.CANT_NULL);
+         this.startTraining();
+      }
 
-        public var closeTrainingRoom:Function=null;
+      public function swapTeamsS() : void {
+         App.utils.asserter.assertNotNull(this.swapTeams,"swapTeams" + Errors.CANT_NULL);
+         this.swapTeams();
+      }
 
-        public var showPrebattleInvitationsForm:Function=null;
+      public function changeTeamS(param1:Number, param2:Number) : void {
+         App.utils.asserter.assertNotNull(this.changeTeam,"changeTeam" + Errors.CANT_NULL);
+         this.changeTeam(param1,param2);
+      }
 
-        public var onEscape:Function=null;
-    }
+      public function closeTrainingRoomS() : void {
+         App.utils.asserter.assertNotNull(this.closeTrainingRoom,"closeTrainingRoom" + Errors.CANT_NULL);
+         this.closeTrainingRoom();
+      }
+
+      public function showPrebattleInvitationsFormS() : void {
+         App.utils.asserter.assertNotNull(this.showPrebattleInvitationsForm,"showPrebattleInvitationsForm" + Errors.CANT_NULL);
+         this.showPrebattleInvitationsForm();
+      }
+
+      public function onEscapeS() : void {
+         App.utils.asserter.assertNotNull(this.onEscape,"onEscape" + Errors.CANT_NULL);
+         this.onEscape();
+      }
+   }
+
 }

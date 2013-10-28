@@ -1,172 +1,148 @@
-package net.wg.gui.lobby.techtree 
+package net.wg.gui.lobby.techtree
 {
-    import flash.display.*;
-    import flash.events.*;
-    import flash.ui.*;
-    import net.wg.data.constants.*;
-    import net.wg.gui.lobby.techtree.constants.*;
-    import net.wg.gui.lobby.techtree.data.*;
-    import net.wg.gui.lobby.techtree.data.vo.*;
-    import net.wg.gui.lobby.techtree.interfaces.*;
-    import net.wg.gui.lobby.techtree.sub.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.events.*;
-    
-    public class ResearchPage extends net.wg.infrastructure.base.meta.impl.ResearchMeta implements net.wg.gui.lobby.techtree.interfaces.IResearchPage
-    {
-        public function ResearchPage()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.ResearchMeta;
+   import net.wg.gui.lobby.techtree.interfaces.IResearchPage;
+   import net.wg.gui.lobby.techtree.sub.ResearchItems;
+   import flash.display.Sprite;
+   import scaleform.clik.events.InputEvent;
+   import net.wg.gui.lobby.techtree.constants.NodeState;
+   import net.wg.gui.lobby.techtree.data.vo.NodeData;
+   import net.wg.gui.lobby.techtree.data.ResearchXMLDataProvider;
+   import flash.ui.Keyboard;
+   import flash.events.KeyboardEvent;
+   import scaleform.clik.constants.InvalidationType;
+   import net.wg.data.constants.LobbyMetrics;
 
-        internal function handleEscape(arg1:scaleform.clik.events.InputEvent):void
-        {
-            exitFromResearchS();
-            return;
-        }
 
-        public override function updateStage(arg1:Number, arg2:Number):void
-        {
-            setViewSize(arg1, arg2);
-            return;
-        }
+   public class ResearchPage extends ResearchMeta implements IResearchPage
+   {
+          
+      public function ResearchPage() {
+         super();
+      }
 
-        public function as_drawResearchItems(arg1:String, arg2:Number):void
-        {
-            var loc1:*=getResearchItemsDataS(arg2, false);
-            if (this.researchItems != null) 
-            {
-                this.researchItems.invalidateNodesData(arg1, loc1);
-            }
-            return;
-        }
+      public var researchItems:ResearchItems;
 
-        public function as_setNodesStates(arg1:Number, arg2:Array):void
-        {
-            if (this.researchItems != null) 
-            {
-                this.researchItems.setNodesStates(arg1, arg2);
-            }
-            return;
-        }
+      public var background:Sprite;
 
-        public function as_setNext2Unlock(arg1:Array):void
-        {
-            if (this.researchItems != null) 
-            {
-                this.researchItems.setNodesStates(net.wg.gui.lobby.techtree.constants.NodeState.NEXT_2_UNLOCK, arg1, net.wg.gui.lobby.techtree.data.vo.NodeData.UNLOCK_PROPS_FIELD);
-            }
-            return;
-        }
+      private function handleEscape(param1:InputEvent) : void {
+         exitFromResearchS();
+      }
 
-        public function as_setFreeXP(arg1:Number):void
-        {
-            if (this.researchItems != null) 
-            {
-                this.researchItems.setFreeXP(arg1);
-            }
-            return;
-        }
+      override public function updateStage(param1:Number, param2:Number) : void {
+         setViewSize(param1,param2);
+      }
 
-        public function as_setVehicleTypeXP(arg1:Array):void
-        {
-            if (this.researchItems != null) 
-            {
-                this.researchItems.setVehicleTypeXP(arg1);
-            }
-            return;
-        }
+      public function as_drawResearchItems(param1:String, param2:Number) : void {
+         var _loc3_:Object = getResearchItemsDataS(param2,false);
+         if(this.researchItems != null)
+         {
+            this.researchItems.invalidateNodesData(param1,_loc3_);
+         }
+      }
 
-        public function as_setInventoryItems(arg1:Array):void
-        {
-            if (this.researchItems != null) 
-            {
-                this.researchItems.setNodesStates(net.wg.gui.lobby.techtree.constants.NodeState.IN_INVENTORY, arg1, net.wg.gui.lobby.techtree.data.vo.NodeData.NODE_DUMP_FIELD);
-            }
-            return;
-        }
+      public function as_setNodesStates(param1:Number, param2:Array) : void {
+         if(this.researchItems != null)
+         {
+            this.researchItems.setNodesStates(param1,param2);
+         }
+      }
 
-        public function as_setInstalledItems(arg1:Array):void
-        {
-            if (this.researchItems != null) 
-            {
-                this.researchItems.setNodesStates(net.wg.gui.lobby.techtree.constants.NodeState.INSTALLED, arg1, net.wg.gui.lobby.techtree.data.vo.NodeData.NODE_DUMP_FIELD);
-            }
-            return;
-        }
+      public function as_setNext2Unlock(param1:Array) : void {
+         if(this.researchItems != null)
+         {
+            this.researchItems.setNodesStates(NodeState.NEXT_2_UNLOCK,param1,NodeData.UNLOCK_PROPS_FIELD);
+         }
+      }
 
-        public function as_useXMLDumping():void
-        {
-            if (this.researchItems != null) 
-            {
-                this.researchItems.dataProvider = new net.wg.gui.lobby.techtree.data.ResearchXMLDataProvider();
-            }
-            return;
-        }
+      public function as_setWalletStatus(param1:Object) : void {
+         App.utils.voMgr.walletStatusVO.update(param1);
+         this.researchItems.setWalletStatus();
+      }
 
-        protected override function onPopulate():void
-        {
-            super.onPopulate();
-            if (!initialized) 
-            {
-                validateNow();
-            }
-            requestNationDataS();
-            return;
-        }
+      public function as_setFreeXP(param1:Number) : void {
+         if(this.researchItems != null)
+         {
+            this.researchItems.setFreeXP(param1);
+         }
+      }
 
-        protected override function onDispose():void
-        {
-            App.gameInputMgr.clearKeyHandler(flash.ui.Keyboard.ESCAPE, flash.events.KeyboardEvent.KEY_DOWN);
-            super.onDispose();
-            if (this.researchItems != null) 
-            {
-                this.researchItems.dispose();
-            }
-            return;
-        }
+      public function as_setVehicleTypeXP(param1:Array) : void {
+         if(this.researchItems != null)
+         {
+            this.researchItems.setVehicleTypeXP(param1);
+         }
+      }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            if (this.researchItems != null) 
-            {
-                this.researchItems.view = this;
-            }
-            App.gameInputMgr.setKeyHandler(flash.ui.Keyboard.ESCAPE, flash.events.KeyboardEvent.KEY_DOWN, this.handleEscape, true);
-            return;
-        }
+      public function as_setInventoryItems(param1:Array) : void {
+         if(this.researchItems != null)
+         {
+            this.researchItems.setNodesStates(NodeState.IN_INVENTORY,param1,NodeData.NODE_DUMP_FIELD);
+         }
+      }
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
-            {
-                this.updateLayouts();
-            }
-            return;
-        }
+      public function as_setInstalledItems(param1:Array) : void {
+         if(this.researchItems != null)
+         {
+            this.researchItems.setNodesStates(NodeState.INSTALLED,param1,NodeData.NODE_DUMP_FIELD);
+         }
+      }
 
-        protected function updateLayouts():void
-        {
-            if (this.background != null) 
-            {
-                this.background.width = _width;
-                this.background.height = _height + net.wg.data.constants.LobbyMetrics.LOBBY_MESSENGER_HEIGHT;
-            }
-            if (this.researchItems != null) 
-            {
-                this.researchItems.y = 0;
-                this.researchItems.x = _width - net.wg.data.constants.LobbyMetrics.MIN_STAGE_WIDTH >> 1;
-                this.researchItems.height = _height;
-            }
-            return;
-        }
+      public function as_useXMLDumping() : void {
+         if(this.researchItems != null)
+         {
+            this.researchItems.dataProvider = new ResearchXMLDataProvider();
+         }
+      }
 
-        public var researchItems:net.wg.gui.lobby.techtree.sub.ResearchItems;
+      override protected function onPopulate() : void {
+         super.onPopulate();
+         if(!initialized)
+         {
+            validateNow();
+         }
+         requestNationDataS();
+      }
 
-        public var background:flash.display.Sprite;
-    }
+      override protected function onDispose() : void {
+         App.gameInputMgr.clearKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN);
+         super.onDispose();
+         if(this.researchItems != null)
+         {
+            this.researchItems.dispose();
+         }
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         if(this.researchItems != null)
+         {
+            this.researchItems.view = this;
+         }
+         App.gameInputMgr.setKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN,this.handleEscape,true);
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         if(isInvalid(InvalidationType.SIZE))
+         {
+            this.updateLayouts();
+         }
+      }
+
+      protected function updateLayouts() : void {
+         if(this.background != null)
+         {
+            this.background.width = _width;
+            this.background.height = _height + LobbyMetrics.LOBBY_MESSENGER_HEIGHT;
+         }
+         if(this.researchItems != null)
+         {
+            this.researchItems.y = 0;
+            this.researchItems.x = _width - LobbyMetrics.MIN_STAGE_WIDTH >> 1;
+            this.researchItems.height = _height;
+         }
+      }
+   }
+
 }

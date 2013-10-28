@@ -1,34 +1,36 @@
-package net.wg.gui.lobby.store.views.base 
+package net.wg.gui.lobby.store.views.base
 {
-    import net.wg.gui.components.controls.*;
-    
-    public class SimpleStoreMenuView extends net.wg.gui.lobby.store.views.base.FitsSelectableStoreMenuView
-    {
-        public function SimpleStoreMenuView()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.components.controls.RadioButton;
+   import net.wg.gui.components.controls.CheckBox;
+   import flash.text.TextField;
 
-        protected override function onTagsArrayRequest():Array
-        {
-            return [new net.wg.gui.lobby.store.views.base.ViewUIElementVO("onVehicle", this.onVehicleChkBx)];
-        }
 
-        protected override function onFitsArrayRequest():Array
-        {
-            return [new net.wg.gui.lobby.store.views.base.ViewUIElementVO("myVehicle", myVehicleRadioBtn), new net.wg.gui.lobby.store.views.base.ViewUIElementVO("myVehicles", this.myVehiclesRadioBtn), new net.wg.gui.lobby.store.views.base.ViewUIElementVO("otherVehicles", this.otherVehiclesRadioBtn)];
-        }
+   public class SimpleStoreMenuView extends FitsSelectableStoreMenuView
+   {
+          
+      public function SimpleStoreMenuView() {
+         super();
+      }
 
-        protected override function getTagsName():String
-        {
-            return "extra";
-        }
+      public var myVehiclesRadioBtn:RadioButton = null;
 
-        public var myVehiclesRadioBtn:net.wg.gui.components.controls.RadioButton=null;
+      public var otherVehiclesRadioBtn:RadioButton = null;
 
-        public var otherVehiclesRadioBtn:net.wg.gui.components.controls.RadioButton=null;
+      public var onVehicleChkBx:CheckBox = null;
 
-        public var onVehicleChkBx:net.wg.gui.components.controls.CheckBox=null;
-    }
+      public var vehChBxHeader:TextField;
+
+      override protected function onTagsArrayRequest() : Array {
+         return [new ViewUIElementVO("onVehicle",this.onVehicleChkBx)];
+      }
+
+      override protected function onFitsArrayRequest() : Array {
+         return [new ViewUIElementVO("myVehicle",myVehicleRadioBtn),new ViewUIElementVO("myVehicles",this.myVehiclesRadioBtn),new ViewUIElementVO("otherVehicles",this.otherVehiclesRadioBtn)];
+      }
+
+      override protected function getTagsName() : String {
+         return "extra";
+      }
+   }
+
 }

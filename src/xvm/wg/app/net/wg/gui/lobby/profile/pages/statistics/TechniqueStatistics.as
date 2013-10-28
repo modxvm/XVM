@@ -1,175 +1,153 @@
-package net.wg.gui.lobby.profile.pages.statistics 
+package net.wg.gui.lobby.profile.pages.statistics
 {
-    import __AS3__.vec.*;
-    import flash.events.*;
-    import flash.geom.*;
-    import net.wg.data.constants.*;
-    import net.wg.data.gui_items.dossier.*;
-    import net.wg.utils.*;
-    import scaleform.clik.core.*;
-    import scaleform.clik.data.*;
-    
-    public class TechniqueStatistics extends scaleform.clik.core.UIComponent
-    {
-        public function TechniqueStatistics()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import scaleform.clik.data.DataProvider;
+   import flash.geom.Point;
+   import flash.events.Event;
+   import __AS3__.vec.*;
+   import net.wg.utils.INations;
+   import net.wg.data.constants.VehicleTypes;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.typeChart.mainHorizontalAxis.pointClass = net.wg.gui.lobby.profile.pages.statistics.AxisPointTypes;
-            this.nationChart.mainHorizontalAxis.pointClass = net.wg.gui.lobby.profile.pages.statistics.AxisPointNations;
-            this.levelChart.mainHorizontalAxis.pointClass = net.wg.gui.lobby.profile.pages.statistics.AxisPointLevels;
-            addEventListener(flash.events.Event.RESIZE, this.resizeMainHandler, false, 0, true);
-            return;
-        }
 
-        protected override function draw():void
-        {
-            var loc1:*=null;
-            var loc2:*=0;
-            var loc3:*=0;
-            var loc4:*=null;
-            var loc5:*=0;
-            var loc6:*=0;
-            var loc7:*=0;
-            super.draw();
-            if (isInvalid(LAYOUT_INV) && this.currentDimension) 
+   public class TechniqueStatistics extends UIComponent
+   {
+          
+      public function TechniqueStatistics() {
+         super();
+      }
+
+      private static const LAYOUT_INV:String = "layoutInv";
+
+      private static function formTypeChartItem(param1:Object, param2:String) : StatisticChartInfo {
+         var _loc3_:StatisticChartInfo = new StatisticChartInfo();
+         _loc3_.xField = param2;
+         _loc3_.yField = param1[param2];
+         return _loc3_;
+      }
+
+      private static function formChartItemProvider(param1:Object) : DataProvider {
+         var _loc3_:StatisticChartInfo = null;
+         var _loc4_:String = null;
+         var _loc2_:Array = [];
+         for (_loc4_ in param1)
+         {
+            _loc3_ = new StatisticChartInfo();
+            _loc3_.xField = uint(_loc4_);
+            _loc3_.yField = param1[_loc4_];
+            _loc2_.push(_loc3_);
+         }
+         if(_loc3_.hasOwnProperty("xField"))
+         {
+            _loc2_.sortOn("xField",[Array.NUMERIC]);
+            return new DataProvider(_loc2_);
+         }
+         throw new Error("There is no property: \'xField\' in the target Array. Couldn\'t perform sort operation!");
+      }
+
+      public var typeChart:TypesStatisticsChart;
+
+      public var nationChart:NationsStatisticsChart;
+
+      public var levelChart:LevelsStatisticChart;
+
+      private var currentDimension:Point;
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.typeChart.mainHorizontalAxis.pointClass = AxisPointTypes;
+         this.nationChart.mainHorizontalAxis.pointClass = AxisPointNations;
+         this.levelChart.mainHorizontalAxis.pointClass = AxisPointLevels;
+         addEventListener(Event.RESIZE,this.resizeMainHandler,false,0,true);
+      }
+
+      override protected function draw() : void {
+         var _loc1_:Vector.<UIComponent> = null;
+         var _loc2_:uint = 0;
+         var _loc3_:uint = 0;
+         var _loc4_:UIComponent = null;
+         var _loc5_:uint = 0;
+         var _loc6_:* = 0;
+         var _loc7_:* = 0;
+         super.draw();
+         if((isInvalid(LAYOUT_INV)) && (this.currentDimension))
+         {
+            _loc1_ = new Vector.<UIComponent>(0);
+            _loc1_.push(this.typeChart);
+            _loc1_.push(this.nationChart);
+            _loc1_.push(this.levelChart);
+            _loc2_ = _loc1_.length;
+            _loc3_ = 0;
+            for each (_loc4_ in _loc1_)
             {
-                loc1 = new Vector.<scaleform.clik.core.UIComponent>(0);
-                loc1.push(this.typeChart);
-                loc1.push(this.nationChart);
-                loc1.push(this.levelChart);
-                loc2 = loc1.length;
-                loc3 = 0;
-                var loc8:*=0;
-                var loc9:*=loc1;
-                for each (loc4 in loc9) 
-                {
-                    loc3 = loc3 + Math.round(loc4.actualWidth);
-                }
-                loc6 = loc5 = Math.round((this.currentDimension.x - loc3) / (loc2 + 1));
-                loc7 = 0;
-                while (loc7 < loc2) 
-                {
-                    (loc4 = loc1[loc7]).x = loc6;
-                    loc6 = loc6 + Math.round(loc4.actualWidth + loc5);
-                    ++loc7;
-                }
+               _loc3_ = _loc3_ + Math.round(_loc4_.actualWidth);
             }
-            return;
-        }
-
-        internal function resizeMainHandler(arg1:flash.events.Event):void
-        {
-            arg1.stopImmediatePropagation();
-            invalidate(LAYOUT_INV);
-            return;
-        }
-
-        public override function dispose():void
-        {
-            super.dispose();
-            removeEventListener(flash.events.Event.RESIZE, this.resizeMainHandler);
-            this.typeChart.dispose();
-            this.nationChart.dispose();
-            this.levelChart.dispose();
-            return;
-        }
-
-        public function setChartsTitles(arg1:Array):void
-        {
-            this.typeChart.mainHorizontalAxis.lineText.text = arg1[0];
-            this.nationChart.mainHorizontalAxis.lineText.text = arg1[1];
-            this.levelChart.mainHorizontalAxis.lineText.text = arg1[2];
-            return;
-        }
-
-        public function setDossierData(arg1:net.wg.data.gui_items.dossier.AccountDossier):void
-        {
-            var loc10:*=null;
-            var loc1:*=arg1.getBattlesStats();
-            var loc2:*=loc1[1];
-            var loc3:*;
-            var loc4:*=(loc3 = App.utils.nations).getNations();
-            var loc5:*=[];
-            var loc6:*=loc4.length;
-            var loc7:*=0;
-            while (loc7 < loc6) 
+            _loc5_ = Math.round((this.currentDimension.x - _loc3_) / (_loc2_ + 1));
+            _loc6_ = _loc5_;
+            _loc7_ = 0;
+            while(_loc7_ < _loc2_)
             {
-                loc10 = loc3.getNationID(loc4[loc7]).toString();
-                loc5.push(formTypeChartItem(loc2, loc10));
-                ++loc7;
+               _loc4_ = _loc1_[_loc7_];
+               _loc4_.x = _loc6_;
+               _loc6_ = _loc6_ + Math.round(_loc4_.actualWidth + _loc5_);
+               _loc7_++;
             }
-            this.nationChart.dataProvider = new scaleform.clik.data.DataProvider(loc5);
-            this.levelChart.dataProvider = formChartItemProvider(loc1[2]);
-            var loc8:*=[];
-            var loc9:*=loc1[0];
-            loc8.push(formTypeChartItem(loc9, net.wg.data.constants.VehicleTypes.LIGHT_TANK));
-            loc8.push(formTypeChartItem(loc9, net.wg.data.constants.VehicleTypes.MEDIUM_TANK));
-            loc8.push(formTypeChartItem(loc9, net.wg.data.constants.VehicleTypes.HEAVY_TANK));
-            loc8.push(formTypeChartItem(loc9, net.wg.data.constants.VehicleTypes.AT_SPG));
-            loc8.push(formTypeChartItem(loc9, net.wg.data.constants.VehicleTypes.SPG));
-            this.typeChart.dataProvider = new scaleform.clik.data.DataProvider(loc8);
-            return;
-        }
+         }
+      }
 
-        public function setViewSize(arg1:Number, arg2:Number):void
-        {
-            if (!this.currentDimension) 
-            {
-                this.currentDimension = new flash.geom.Point();
-            }
-            this.currentDimension.x = arg1;
-            this.currentDimension.y = arg2;
-            invalidate(LAYOUT_INV);
-            return;
-        }
+      private function resizeMainHandler(param1:Event) : void {
+         param1.stopImmediatePropagation();
+         invalidate(LAYOUT_INV);
+      }
 
-        internal static function formTypeChartItem(arg1:Object, arg2:String):net.wg.gui.lobby.profile.pages.statistics.StatisticChartInfo
-        {
-            var loc1:*=new net.wg.gui.lobby.profile.pages.statistics.StatisticChartInfo();
-            loc1.xField = arg2;
-            loc1.yField = arg1[arg2];
-            return loc1;
-        }
+      override public function dispose() : void {
+         super.dispose();
+         removeEventListener(Event.RESIZE,this.resizeMainHandler);
+         this.typeChart.dispose();
+         this.nationChart.dispose();
+         this.levelChart.dispose();
+      }
 
-        internal static function formChartItemProvider(arg1:Object):scaleform.clik.data.DataProvider
-        {
-            var loc2:*=null;
-            var loc3:*=null;
-            var loc1:*=[];
-            var loc4:*=0;
-            var loc5:*=arg1;
-            for (loc3 in loc5) 
-            {
-                loc2 = new net.wg.gui.lobby.profile.pages.statistics.StatisticChartInfo();
-                loc2.xField = uint(loc3);
-                loc2.yField = arg1[loc3];
-                loc1.push(loc2);
-            }
-            if (loc2.hasOwnProperty("xField")) 
-            {
-                loc1.sortOn("xField", [Array.NUMERIC]);
-            }
-            else 
-            {
-                throw new Error("There is no property: \'xField\' in the target Array. Couldn\'t perform sort operation!");
-            }
-            return new scaleform.clik.data.DataProvider(loc1);
-        }
+      public function setChartsTitles(param1:Array) : void {
+         this.typeChart.mainHorizontalAxis.lineText.text = param1[0];
+         this.nationChart.mainHorizontalAxis.lineText.text = param1[1];
+         this.levelChart.mainHorizontalAxis.lineText.text = param1[2];
+      }
 
-        internal static const LAYOUT_INV:String="layoutInv";
+      public function setDossierData(param1:Array) : void {
+         var _loc10_:String = null;
+         var _loc2_:Object = param1[1];
+         var _loc3_:INations = App.utils.nations;
+         var _loc4_:Array = _loc3_.getNations();
+         var _loc5_:Array = [];
+         var _loc6_:uint = _loc4_.length;
+         var _loc7_:* = 0;
+         while(_loc7_ < _loc6_)
+         {
+            _loc10_ = _loc3_.getNationID(_loc4_[_loc7_]).toString();
+            _loc5_.push(formTypeChartItem(_loc2_,_loc10_));
+            _loc7_++;
+         }
+         this.nationChart.dataProvider = new DataProvider(_loc5_);
+         this.levelChart.dataProvider = formChartItemProvider(param1[2]);
+         var _loc8_:Array = [];
+         var _loc9_:Object = param1[0];
+         _loc8_.push(formTypeChartItem(_loc9_,VehicleTypes.LIGHT_TANK));
+         _loc8_.push(formTypeChartItem(_loc9_,VehicleTypes.MEDIUM_TANK));
+         _loc8_.push(formTypeChartItem(_loc9_,VehicleTypes.HEAVY_TANK));
+         _loc8_.push(formTypeChartItem(_loc9_,VehicleTypes.AT_SPG));
+         _loc8_.push(formTypeChartItem(_loc9_,VehicleTypes.SPG));
+         this.typeChart.dataProvider = new DataProvider(_loc8_);
+      }
 
-        public var typeChart:net.wg.gui.lobby.profile.pages.statistics.TypesStatisticsChart;
+      public function setViewSize(param1:Number, param2:Number) : void {
+         if(!this.currentDimension)
+         {
+            this.currentDimension = new Point();
+         }
+         this.currentDimension.x = param1;
+         this.currentDimension.y = param2;
+         invalidate(LAYOUT_INV);
+      }
+   }
 
-        public var nationChart:net.wg.gui.lobby.profile.pages.statistics.NationsStatisticsChart;
-
-        public var levelChart:net.wg.gui.lobby.profile.pages.statistics.LevelsStatisticChart;
-
-        internal var currentDimension:flash.geom.Point;
-    }
 }

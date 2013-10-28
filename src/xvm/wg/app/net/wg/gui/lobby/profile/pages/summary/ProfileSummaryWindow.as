@@ -1,11 +1,18 @@
-package net.wg.gui.lobby.profile.pages.summary 
+package net.wg.gui.lobby.profile.pages.summary
 {
-    public class ProfileSummaryWindow extends net.wg.gui.lobby.profile.pages.summary.ProfileSummary
-    {
-        public function ProfileSummaryWindow()
-        {
-            super();
-            return;
-        }
-    }
+
+
+   public class ProfileSummaryWindow extends ProfileSummary
+   {
+          
+      public function ProfileSummaryWindow() {
+         super();
+      }
+
+      override protected function applyResizing() : void {
+         super.applyResizing();
+         footer.y = Math.round(currentDimension.y - footer.height);
+      }
+   }
+
 }

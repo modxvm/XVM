@@ -1,20 +1,9 @@
 ﻿/**
  * @author sirmax2, ilitvinov87
  */
-import com.xvm.Cache;
-import com.xvm.Config;
-import com.xvm.Defines;
-import com.xvm.GlobalEventDispatcher;
-import com.xvm.Logger;
-import com.xvm.Macros;
-import com.xvm.StatData;
-import com.xvm.StatLoader;
-import com.xvm.Strings;
-import com.xvm.Utils;
-import com.xvm.AutoUpdate;
-import wot.Minimap.MinimapEvent;
-import wot.PlayersPanel.PlayerListItemRenderer;
-import wot.PlayersPanel.SpotStatusModel;
+import com.xvm.*;
+import wot.Minimap.*;
+import wot.PlayersPanel.*;
 
 class wot.PlayersPanel.PlayersPanel
 {
@@ -88,7 +77,7 @@ class wot.PlayersPanel.PlayersPanel
 
         GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, StatLoader.LoadData);
         GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
-        GlobalEventDispatcher.addEventListener(StatData.E_STAT_LOADED, this, onStatLoaded);
+        GlobalEventDispatcher.addEventListener(Stat.E_STAT_LOADED, this, onStatLoaded);
 
         GlobalEventDispatcher.addEventListener(AutoUpdate.UPDATE_BY_TIMER_EVENT, this, updateSpotStatusMarkers);
 
@@ -175,8 +164,8 @@ class wot.PlayersPanel.PlayersPanel
 
         m_data = data;
 
-        wrapper.m_names.condenseWhite = !StatData.s_loaded;
-        wrapper.m_vehicles.condenseWhite = !StatData.s_loaded;
+        wrapper.m_names.condenseWhite = !Stat.s_loaded;
+        wrapper.m_vehicles.condenseWhite = !Stat.s_loaded;
 
         if (!_init)
         {
@@ -318,7 +307,7 @@ class wot.PlayersPanel.PlayersPanel
             var field = state == "medium2" ? wrapper.m_vehicles : wrapper.m_names;
             var nm = Utils.GetPlayerName(data.label);
             var key = "PP/" + deadState + "/" + nm + "/" + state + "/" + m_fieldType + "/" +
-                (StatData.s_data[nm] ? StatData.s_data[nm].loadstate : "0");
+                (Stat.s_data[nm] ? Stat.s_data[nm].loadstate : "0");
             //Logger.add(key);
             text = Cache.Get(key, function()
             {
@@ -374,7 +363,7 @@ class wot.PlayersPanel.PlayersPanel
             {
                 if (s_widthTester == null)
                     createWidthTester();
-                s_widthTester.condenseWhite = !StatData.s_loaded;
+                s_widthTester.condenseWhite = !Stat.s_loaded;
                 while (pname + cname != "")
                 {
                     s_widthTester.htmlText = format

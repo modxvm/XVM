@@ -1,124 +1,113 @@
-package net.wg.gui.lobby.questsWindow 
+package net.wg.gui.lobby.questsWindow
 {
-    import __AS3__.vec.*;
-    import flash.text.*;
-    import net.wg.gui.lobby.questsWindow.data.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.core.*;
-    
-    public class ConditionElement extends scaleform.clik.core.UIComponent
-    {
-        public function ConditionElement()
-        {
-            super();
-            this._tanks = new Vector.<net.wg.gui.lobby.questsWindow.VehicleBlock>();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.text.TextField;
+   import __AS3__.vec.Vector;
+   import net.wg.gui.lobby.questsWindow.data.ConditionElementVO;
+   import scaleform.clik.constants.InvalidationType;
 
-        public override function dispose():void
-        {
-            if (this._tanks) 
-            {
-                this.clearTanks();
-                this._tanks = null;
-            }
-            if (this._data) 
-            {
-                this._data.dispose();
-                this._data = null;
-            }
-            super.dispose();
-            return;
-        }
 
-        public function setData(arg1:Object):void
-        {
-            this._data = new net.wg.gui.lobby.questsWindow.data.ConditionElementVO(arg1);
-            invalidateData();
-            return;
-        }
+   public class ConditionElement extends UIComponent
+   {
+          
+      public function ConditionElement() {
+         super();
+         this._tanks = new Vector.<VehicleBlock>();
+      }
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA) && this._data) 
-            {
-                this.descrTF.htmlText = this._data.descr;
-                this.descrTF.height = this.descrTF.textHeight + 10;
-                this.clearTanks();
-                this.createTanks();
-                this.layoutTanks();
-            }
-            return;
-        }
+      private static const PADDING:int = 20;
 
-        internal function clearTanks():void
-        {
-            var loc1:*=0;
-            while (loc1 < this._tanks.length) 
-            {
-                this._tanks[loc1].dispose();
-                removeChild(this._tanks[loc1]);
-                ++loc1;
-            }
-            this._tanks.splice(0, this._tanks.length);
-            return;
-        }
+      private static const TEXT_PADDING:int = 5;
 
-        internal function createTanks():void
-        {
-            var loc3:*=null;
-            var loc1:*=this._data.vehicles.length;
-            var loc2:*=0;
-            while (loc2 < loc1) 
-            {
-                loc3 = App.utils.classFactory.getComponent("VehicleBlock_UI", net.wg.gui.lobby.questsWindow.VehicleBlock);
-                this._tanks.push(loc3);
-                addChild(loc3);
-                loc3.setData(this._data.vehicles[loc2]);
-                loc3.validateNow();
-                ++loc2;
-            }
-            return;
-        }
+      private static const ONLY_TEXT_PADDING:int = 8;
 
-        internal function layoutTanks():void
-        {
-            var loc1:*=this._tanks.length ? this._tanks[0].height : 0;
-            var loc2:*=Math.round(this.descrTF.y + this.descrTF.textHeight + TEXT_PADDING);
-            var loc3:*=0;
-            while (loc3 < this._tanks.length) 
-            {
-                this._tanks[loc3].y = loc2 + loc3 * loc1;
-                this._tanks[loc3].x = PADDING;
-                ++loc3;
-            }
-            var loc4:*=this._tanks.length * loc1;
-            var loc5:*=0;
-            if (loc4 > 0) 
-            {
-                loc5 = loc2 + loc4 + AFTER_TANKS_PADDING;
-            }
-            else 
-            {
-                loc5 = loc2 + ONLY_TEXT_PADDING;
-            }
-            setSize(this.width, loc5);
-            return;
-        }
+      private static const AFTER_TANKS_PADDING:int = 17;
 
-        internal static const PADDING:int=20;
+      public var descrTF:TextField;
 
-        internal static const TEXT_PADDING:int=5;
+      private var _tanks:Vector.<VehicleBlock> = null;
 
-        internal static const ONLY_TEXT_PADDING:int=8;
+      private var _data:ConditionElementVO = null;
 
-        internal static const AFTER_TANKS_PADDING:int=17;
+      override public function dispose() : void {
+         if(this._tanks)
+         {
+            this.clearTanks();
+            this._tanks = null;
+         }
+         if(this._data)
+         {
+            this._data.dispose();
+            this._data = null;
+         }
+         super.dispose();
+      }
 
-        public var descrTF:flash.text.TextField;
+      public function setData(param1:Object) : void {
+         this._data = new ConditionElementVO(param1);
+         invalidateData();
+      }
 
-        internal var _tanks:__AS3__.vec.Vector.<net.wg.gui.lobby.questsWindow.VehicleBlock>=null;
+      override protected function draw() : void {
+         super.draw();
+         if((isInvalid(InvalidationType.DATA)) && (this._data))
+         {
+            this.descrTF.htmlText = this._data.descr;
+            this.descrTF.height = this.descrTF.textHeight + 10;
+            this.clearTanks();
+            this.createTanks();
+            this.layoutTanks();
+         }
+      }
 
-        internal var _data:net.wg.gui.lobby.questsWindow.data.ConditionElementVO=null;
-    }
+      private function clearTanks() : void {
+         var _loc1_:* = 0;
+         while(_loc1_ < this._tanks.length)
+         {
+            this._tanks[_loc1_].dispose();
+            removeChild(this._tanks[_loc1_]);
+            _loc1_++;
+         }
+         this._tanks.splice(0,this._tanks.length);
+      }
+
+      private function createTanks() : void {
+         var _loc3_:VehicleBlock = null;
+         var _loc1_:int = this._data.vehicles.length;
+         var _loc2_:* = 0;
+         while(_loc2_ < _loc1_)
+         {
+            _loc3_ = App.utils.classFactory.getComponent("VehicleBlock_UI",VehicleBlock);
+            this._tanks.push(_loc3_);
+            addChild(_loc3_);
+            _loc3_.setData(this._data.vehicles[_loc2_]);
+            _loc3_.validateNow();
+            _loc2_++;
+         }
+      }
+
+      private function layoutTanks() : void {
+         var _loc1_:Number = this._tanks.length?this._tanks[0].height:0;
+         var _loc2_:Number = Math.round(this.descrTF.y + this.descrTF.textHeight + TEXT_PADDING);
+         var _loc3_:* = 0;
+         while(_loc3_ < this._tanks.length)
+         {
+            this._tanks[_loc3_].y = _loc2_ + _loc3_ * _loc1_;
+            this._tanks[_loc3_].x = PADDING;
+            _loc3_++;
+         }
+         var _loc4_:Number = this._tanks.length * _loc1_;
+         var _loc5_:Number = 0;
+         if(_loc4_ > 0)
+         {
+            _loc5_ = _loc2_ + _loc4_ + AFTER_TANKS_PADDING;
+         }
+         else
+         {
+            _loc5_ = _loc2_ + ONLY_TEXT_PADDING;
+         }
+         setSize(this.width,_loc5_);
+      }
+   }
+
 }

@@ -1,9 +1,12 @@
-package net.wg.infrastructure.managers 
+package net.wg.infrastructure.managers
 {
-    import net.wg.infrastructure.base.meta.*;
-    
-    public interface IWaitingView extends net.wg.infrastructure.base.meta.IWaitingViewMeta
-    {
-        function get isVisible():Boolean;
-    }
+   import net.wg.infrastructure.base.meta.IWaitingViewMeta;
+
+
+   public interface IWaitingView extends IWaitingViewMeta
+   {
+          
+      function get isVisible() : Boolean;
+   }
+
 }

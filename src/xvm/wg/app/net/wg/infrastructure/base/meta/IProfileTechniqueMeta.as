@@ -1,8 +1,12 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IProfileTechniqueMeta extends flash.events.IEventDispatcher
-    {
-    }
+   import flash.events.IEventDispatcher;
+
+
+   public interface IProfileTechniqueMeta extends IEventDispatcher
+   {
+          
+      function as_responseVehicleDossier(param1:Object) : void;
+   }
+
 }

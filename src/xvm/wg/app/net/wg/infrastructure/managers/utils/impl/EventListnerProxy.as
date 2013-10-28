@@ -1,57 +1,51 @@
-package net.wg.infrastructure.managers.utils.impl 
+package net.wg.infrastructure.managers.utils.impl
 {
-    public class EventListnerProxy extends Object
-    {
-        public function EventListnerProxy(arg1:Object, arg2:String, arg3:Function, arg4:Boolean)
-        {
-            super();
-            this.objRef = arg1;
-            this.eventRef = arg2;
-            this.funcRef = arg3;
-            this._useCapture = arg4;
-            return;
-        }
 
-        public function finalize():void
-        {
-            this.objRef = null;
-            this.eventRef = null;
-            this.funcRef = null;
-            return;
-        }
 
-        public function get obj():Object
-        {
-            return this.objRef;
-        }
+   public class EventListnerProxy extends Object
+   {
+          
+      public function EventListnerProxy(param1:Object, param2:String, param3:Function, param4:Boolean) {
+         super();
+         this.objRef = param1;
+         this.eventRef = param2;
+         this.funcRef = param3;
+         this._useCapture = param4;
+      }
 
-        public function get event():String
-        {
-            return this.eventRef;
-        }
+      private var objRef:Object;
 
-        public function get func():Function
-        {
-            return this.funcRef;
-        }
+      private var eventRef:String;
 
-        public function get useCapture():Boolean
-        {
-            return this._useCapture;
-        }
+      private var funcRef:Function;
 
-        public function set useCapture(arg1:Boolean):void
-        {
-            this._useCapture = arg1;
-            return;
-        }
+      private var _useCapture:Boolean;
 
-        internal var objRef:Object;
+      public function finalize() : void {
+         this.objRef = null;
+         this.eventRef = null;
+         this.funcRef = null;
+      }
 
-        internal var eventRef:String;
+      public function get obj() : Object {
+         return this.objRef;
+      }
 
-        internal var funcRef:Function;
+      public function get event() : String {
+         return this.eventRef;
+      }
 
-        internal var _useCapture:Boolean;
-    }
+      public function get func() : Function {
+         return this.funcRef;
+      }
+
+      public function get useCapture() : Boolean {
+         return this._useCapture;
+      }
+
+      public function set useCapture(param1:Boolean) : void {
+         this._useCapture = param1;
+      }
+   }
+
 }

@@ -1,23 +1,22 @@
-package net.wg.infrastructure.base.meta.impl 
+package net.wg.infrastructure.base.meta.impl
 {
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.base.*;
-    
-    public class GameInputManagerMeta extends net.wg.infrastructure.base.BaseDAAPIModule
-    {
-        public function GameInputManagerMeta()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.BaseDAAPIModule;
+   import net.wg.data.constants.Errors;
 
-        public function handleGlobalKeyEventS(arg1:Number, arg2:String):void
-        {
-            App.utils.asserter.assertNotNull(this.handleGlobalKeyEvent, "handleGlobalKeyEvent" + net.wg.data.constants.Errors.CANT_NULL);
-            this.handleGlobalKeyEvent(arg1, arg2);
-            return;
-        }
 
-        public var handleGlobalKeyEvent:Function=null;
-    }
+   public class GameInputManagerMeta extends BaseDAAPIModule
+   {
+          
+      public function GameInputManagerMeta() {
+         super();
+      }
+
+      public var handleGlobalKeyEvent:Function = null;
+
+      public function handleGlobalKeyEventS(param1:Number, param2:String) : void {
+         App.utils.asserter.assertNotNull(this.handleGlobalKeyEvent,"handleGlobalKeyEvent" + Errors.CANT_NULL);
+         this.handleGlobalKeyEvent(param1,param2);
+      }
+   }
+
 }

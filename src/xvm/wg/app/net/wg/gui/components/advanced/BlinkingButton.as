@@ -1,50 +1,43 @@
-package net.wg.gui.components.advanced 
+package net.wg.gui.components.advanced
 {
-    import __AS3__.vec.*;
-    import net.wg.gui.components.controls.*;
-    
-    public class BlinkingButton extends net.wg.gui.components.controls.IconButton
-    {
-        public function BlinkingButton()
-        {
-            super();
+   import net.wg.gui.components.controls.IconButton;
+   import __AS3__.vec.Vector;
+
+
+   public class BlinkingButton extends IconButton
+   {
+          
+      public function BlinkingButton() {
+         super();
+      }
+
+      private var _blinking:Boolean;
+
+      public function get blinking() : Boolean {
+         return this._blinking;
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         setState("up");
+      }
+
+      override protected function draw() : void {
+         super.draw();
+      }
+
+      public function set blinking(param1:Boolean) : void {
+         if(this._blinking == param1)
+         {
             return;
-        }
+         }
+         this._blinking = param1;
+         setState(state);
+      }
 
-        public function get blinking():Boolean
-        {
-            return this._blinking;
-        }
+      override protected function getStatePrefixes() : Vector.<String> {
+         return this._blinking?Vector.<String>(["blinking_",""]):Vector.<String>([""]);
+      }
+   }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            setState("up");
-            return;
-        }
-
-        protected override function draw():void
-        {
-            super.draw();
-            return;
-        }
-
-        public function set blinking(arg1:Boolean):void
-        {
-            if (this._blinking == arg1) 
-            {
-                return;
-            }
-            this._blinking = arg1;
-            setState(state);
-            return;
-        }
-
-        protected override function getStatePrefixes():__AS3__.vec.Vector.<String>
-        {
-            return this._blinking ? Vector.<String>(["blinking_", ""]) : Vector.<String>([""]);
-        }
-
-        internal var _blinking:Boolean;
-    }
 }

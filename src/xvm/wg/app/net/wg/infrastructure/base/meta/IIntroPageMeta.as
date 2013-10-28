@@ -1,13 +1,16 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IIntroPageMeta extends flash.events.IEventDispatcher
-    {
-        function stopVideoS():void;
+   import flash.events.IEventDispatcher;
 
-        function handleErrorS(arg1:Object):void;
 
-        function as_playVideo(arg1:Object):void;
-    }
+   public interface IIntroPageMeta extends IEventDispatcher
+   {
+          
+      function stopVideoS() : void;
+
+      function handleErrorS(param1:Object) : void;
+
+      function as_playVideo(param1:Object) : void;
+   }
+
 }

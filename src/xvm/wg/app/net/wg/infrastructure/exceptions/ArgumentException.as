@@ -1,13 +1,14 @@
-package net.wg.infrastructure.exceptions 
+package net.wg.infrastructure.exceptions
 {
-    import net.wg.infrastructure.exceptions.base.*;
-    
-    public class ArgumentException extends net.wg.infrastructure.exceptions.base.WGGUIException
-    {
-        public function ArgumentException(arg1:*="", arg2:*=0)
-        {
-            super(arg1, arg2);
-            return;
-        }
-    }
+   import net.wg.infrastructure.exceptions.base.WGGUIException;
+
+
+   public class ArgumentException extends WGGUIException
+   {
+          
+      public function ArgumentException(param1:*=undefined, param2:*=undefined) {
+         super(param1,param2);
+      }
+   }
+
 }

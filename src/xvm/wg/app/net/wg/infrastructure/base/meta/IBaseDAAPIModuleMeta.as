@@ -1,11 +1,14 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IBaseDAAPIModuleMeta extends flash.events.IEventDispatcher
-    {
-        function as_populate():void;
+   import flash.events.IEventDispatcher;
 
-        function as_dispose():void;
-    }
+
+   public interface IBaseDAAPIModuleMeta extends IEventDispatcher
+   {
+          
+      function as_populate() : void;
+
+      function as_dispose() : void;
+   }
+
 }

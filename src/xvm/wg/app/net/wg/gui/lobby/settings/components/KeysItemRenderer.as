@@ -1,235 +1,209 @@
-package net.wg.gui.lobby.settings.components 
+package net.wg.gui.lobby.settings.components
 {
-    import __AS3__.vec.*;
-    import flash.display.*;
-    import net.wg.data.constants.*;
-    import net.wg.gui.lobby.settings.components.evnts.*;
-    import scaleform.clik.controls.*;
-    import scaleform.clik.interfaces.*;
-    
-    public class KeysItemRenderer extends scaleform.clik.controls.ListItemRenderer
-    {
-        public function KeysItemRenderer()
-        {
-            super();
+   import scaleform.clik.controls.ListItemRenderer;
+   import flash.display.Sprite;
+   import net.wg.gui.lobby.settings.components.evnts.KeyInputEvents;
+   import __AS3__.vec.Vector;
+   import net.wg.data.constants.KeysMap;
+   import scaleform.clik.interfaces.IDataProvider;
+
+
+   public class KeysItemRenderer extends ListItemRenderer
+   {
+          
+      public function KeysItemRenderer() {
+         super();
+      }
+
+      public var keyInput:KeyInput;
+
+      public var bg:Sprite;
+
+      public var underline:Sprite;
+
+      private var _header:Boolean;
+
+      private const INVALID_DATA:String = "invalid_data";
+
+      private const INVALID_TEXT:String = "invalid_text";
+
+      override public function setData(param1:Object) : void {
+         super.setData(param1);
+         invalidate(this.INVALID_DATA);
+      }
+
+      override public function dispose() : void {
+         if(data)
+         {
+            data = null;
+         }
+         if((this.keyInput) && (this.keyInput.hasEventListener(KeyInputEvents.CHANGE)))
+         {
+            this.keyInput.removeEventListener(KeyInputEvents.CHANGE,this.onKeyChange);
+            this.keyInput.dispose();
+         }
+         super.dispose();
+      }
+
+      override public function toString() : String {
+         return "[WG KeysItemRenderer " + name + "]";
+      }
+
+      public function isSelected() : Boolean {
+         return this.keyInput.selected;
+      }
+
+      override public function get enabled() : Boolean {
+         return super.enabled;
+      }
+
+      override public function set enabled(param1:Boolean) : void {
+         var _loc2_:String = null;
+         super.enabled = param1;
+         mouseChildren = true;
+         if(super.enabled)
+         {
+            _loc2_ = _focusIndicator == null && ((_displayFocus) || (_focused))?"over":"up";
+         }
+         else
+         {
+            _loc2_ = "disabled";
+         }
+         setState(_loc2_);
+      }
+
+      override public function get label() : String {
+         return _label;
+      }
+
+      override public function set label(param1:String) : void {
+         if(_label == param1)
+         {
             return;
-        }
+         }
+         _label = param1;
+         invalidate(this.INVALID_TEXT);
+      }
 
-        public override function setData(arg1:Object):void
-        {
-            super.setData(arg1);
-            invalidate(this.INVALID_DATA);
+      public function get header() : Boolean {
+         return this._header;
+      }
+
+      public function set header(param1:Boolean) : void {
+         if(param1 == this._header)
+         {
             return;
-        }
+         }
+         this._header = param1;
+         setState("up");
+      }
 
-        public override function dispose():void
-        {
-            if (data) 
+      override protected function configUI() : void {
+         constraintsDisabled = true;
+         super.configUI();
+         mouseChildren = true;
+         if(this.keyInput)
+         {
+            this.keyInput.addEventListener(KeyInputEvents.CHANGE,this.onKeyChange);
+            this.keyInput.mouseEnabled = true;
+            this.keyInput.mouseChildren = true;
+            this.keyInput.buttonMode = true;
+         }
+      }
+
+      override protected function draw() : void {
+         if(data)
+         {
+            if(isInvalid(this.INVALID_DATA))
             {
-                data = null;
+               this.header = data.header;
+               this.keyInput.visible = !data.header;
+               this.underline.visible = data.showUnderline;
+               this.label = data.label;
+               if(!this.header)
+               {
+                  this.keyInput.keys = data.keysRang;
+                  this.keyInput.keyDefault = data.keyDefault;
+                  this.keyInput.key = data.key;
+               }
             }
-            if (this.keyInput && this.keyInput.hasEventListener(net.wg.gui.lobby.settings.components.evnts.KeyInputEvents.CHANGE)) 
+            if(isInvalid(this.INVALID_TEXT))
             {
-                this.keyInput.removeEventListener(net.wg.gui.lobby.settings.components.evnts.KeyInputEvents.CHANGE, this.onKeyChange);
-                this.keyInput.dispose();
+               this.setText();
             }
-            super.dispose();
-            return;
-        }
+         }
+         super.draw();
+      }
 
-        public override function toString():String
-        {
-            return "[WG KeysItemRenderer " + name + "]";
-        }
+      override protected function updateText() : void {
+         if(this._header)
+         {
+            super.updateText();
+         }
+      }
 
-        public function isSelected():Boolean
-        {
-            return this.keyInput.selected;
-        }
+      override protected function getStatePrefixes() : Vector.<String> {
+         if(this._header)
+         {
+            return Vector.<String>(["header_",""]);
+         }
+         return _selected?statesSelected:statesDefault;
+      }
 
-        public override function get enabled():Boolean
-        {
-            return super.enabled;
-        }
-
-        public override function set enabled(arg1:Boolean):void
-        {
-            var loc1:*=null;
-            super.enabled = arg1;
-            mouseChildren = true;
-            if (super.enabled) 
-            {
-                loc1 = _focusIndicator == null && (_displayFocus || _focused) ? "over" : "up";
-            }
-            else 
-            {
-                loc1 = "disabled";
-            }
-            setState(loc1);
-            return;
-        }
-
-        public override function get label():String
-        {
-            return _label;
-        }
-
-        public override function set label(arg1:String):void
-        {
-            if (_label == arg1) 
-            {
-                return;
-            }
-            _label = arg1;
-            invalidate(this.INVALID_TEXT);
-            return;
-        }
-
-        public function get header():Boolean
-        {
-            return this._header;
-        }
-
-        public function set header(arg1:Boolean):void
-        {
-            if (arg1 == this._header) 
-            {
-                return;
-            }
-            this._header = arg1;
-            setState("up");
-            return;
-        }
-
-        protected override function configUI():void
-        {
-            constraintsDisabled = true;
-            super.configUI();
-            mouseChildren = true;
-            if (this.keyInput) 
-            {
-                this.keyInput.addEventListener(net.wg.gui.lobby.settings.components.evnts.KeyInputEvents.CHANGE, this.onKeyChange);
-                this.keyInput.mouseEnabled = true;
-                this.keyInput.mouseChildren = true;
-                this.keyInput.buttonMode = true;
-            }
-            return;
-        }
-
-        protected override function draw():void
-        {
-            if (data) 
-            {
-                if (isInvalid(this.INVALID_DATA)) 
-                {
-                    this.header = data.header;
-                    this.keyInput.visible = !data.header;
-                    this.underline.visible = data.showUnderline;
-                    this.label = data.label;
-                    if (!this.header) 
-                    {
-                        this.keyInput.keys = data.keysRang;
-                        this.keyInput.keyDefault = data.keyDefault;
-                        this.keyInput.key = data.key;
-                    }
-                }
-                if (isInvalid(this.INVALID_TEXT)) 
-                {
-                    this.setText();
-                }
-            }
-            super.draw();
-            return;
-        }
-
-        protected override function updateText():void
-        {
-            if (this._header) 
-            {
-                super.updateText();
-            }
-            return;
-        }
-
-        protected override function getStatePrefixes():__AS3__.vec.Vector.<String>
-        {
-            if (this._header) 
-            {
-                return Vector.<String>(["header_", ""]);
-            }
-            return _selected ? statesSelected : statesDefault;
-        }
-
-        internal function keyCodeWasUsed(arg1:Number):Object
-        {
-            if (arg1 == net.wg.data.constants.KeysMap.KEY_NONE) 
-            {
-                return null;
-            }
-            var loc1:*=net.wg.gui.lobby.settings.components.KeysScrollingList(owner).dataProvider;
-            var loc2:*=loc1.length;
-            var loc3:*=0;
-            while (loc3 < loc2) 
-            {
-                if (!loc1[loc3].header && !(loc3 == this.index)) 
-                {
-                    if (this.keyInput.keyCode == loc1[loc3].key) 
-                    {
-                        return loc1[loc3];
-                    }
-                }
-                ++loc3;
-            }
+      private function keyCodeWasUsed(param1:Number) : Object {
+         if(param1 == KeysMap.KEY_NONE)
+         {
             return null;
-        }
-
-        internal function setText():void
-        {
-            var loc1:*=NaN;
-            var loc2:*=NaN;
-            var loc3:*=NaN;
-            if (!(_label == null) && !(textField == null)) 
+         }
+         var _loc2_:IDataProvider = KeysScrollingList(owner).dataProvider;
+         var _loc3_:uint = _loc2_.length;
+         var _loc4_:uint = 0;
+         while(_loc4_ < _loc3_)
+         {
+            if(!_loc2_[_loc4_].header && !(_loc4_ == this.index))
             {
-                loc1 = data.additionalDiscr ? 10 : 0;
-                loc2 = this.bg.height - textField.height;
-                loc3 = textField.height;
-                textField.multiline = true;
-                textField.wordWrap = true;
-                textField.htmlText = _label;
-                textField.height = Math.max(textField.textHeight + 5, loc3);
-                this.bg.height = textField.height + loc2 + loc1;
-                this.height = this.actualHeight | 0;
-                this.keyInput.y = this.height - this.keyInput.height >> 1;
-                this.underline.y = this.actualHeight - this.underline.height | 0;
+               if(this.keyInput.keyCode == _loc2_[_loc4_].key)
+               {
+                  return _loc2_[_loc4_];
+               }
             }
-            return;
-        }
+            _loc4_++;
+         }
+         return null;
+      }
 
-        internal function onKeyChange(arg1:net.wg.gui.lobby.settings.components.evnts.KeyInputEvents):void
-        {
-            var loc1:*=this.keyCodeWasUsed(arg1.keyCode);
-            if (loc1) 
-            {
-                loc1.key = net.wg.data.constants.KeysMap.KEY_NONE;
-            }
-            if (data && data.hasOwnProperty("key")) 
-            {
-                data.key = arg1.keyCode;
-            }
-            dispatchEvent(new net.wg.gui.lobby.settings.components.evnts.KeyInputEvents(net.wg.gui.lobby.settings.components.evnts.KeyInputEvents.CHANGE, arg1.keyCode));
-            return;
-        }
+      private function setText() : void {
+         var _loc1_:* = NaN;
+         var _loc2_:* = NaN;
+         var _loc3_:* = NaN;
+         if(!(_label == null) && !(textField == null))
+         {
+            _loc1_ = data.additionalDiscr?10:0;
+            _loc2_ = this.bg.height - textField.height;
+            _loc3_ = textField.height;
+            textField.multiline = true;
+            textField.wordWrap = true;
+            textField.htmlText = _label;
+            textField.height = Math.max(textField.textHeight + 5,_loc3_);
+            this.bg.height = textField.height + _loc2_ + _loc1_;
+            this.height = this.actualHeight | 0;
+            this.keyInput.y = this.height - this.keyInput.height >> 1;
+            this.underline.y = this.actualHeight - this.underline.height | 0;
+         }
+      }
 
-        internal const INVALID_DATA:String="invalid_data";
+      private function onKeyChange(param1:KeyInputEvents) : void {
+         var _loc2_:Object = this.keyCodeWasUsed(param1.keyCode);
+         if(_loc2_)
+         {
+            _loc2_.key = KeysMap.KEY_NONE;
+         }
+         if((data) && (data.hasOwnProperty("key")))
+         {
+            data.key = param1.keyCode;
+         }
+         dispatchEvent(new KeyInputEvents(KeyInputEvents.CHANGE,param1.keyCode));
+      }
+   }
 
-        internal const INVALID_TEXT:String="invalid_text";
-
-        public var keyInput:net.wg.gui.lobby.settings.components.KeyInput;
-
-        public var bg:flash.display.Sprite;
-
-        public var underline:flash.display.Sprite;
-
-        internal var _header:Boolean;
-    }
 }

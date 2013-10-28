@@ -968,7 +968,7 @@ class com.xvm.DefaultConfig
                 vehicleMarkerEnemy: "contour/"
             },
             consts: consts,
-            vehicleNames: VehicleInfo.getVehicleNamesData()
+            vehicleNames: {}
         };
 
         return a;

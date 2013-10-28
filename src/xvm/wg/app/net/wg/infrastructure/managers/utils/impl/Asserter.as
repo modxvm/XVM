@@ -1,107 +1,91 @@
-package net.wg.infrastructure.managers.utils.impl 
+package net.wg.infrastructure.managers.utils.impl
 {
-    import net.wg.infrastructure.exceptions.*;
-    import net.wg.utils.*;
-    import scaleform.gfx.*;
-    
-    public final class Asserter extends Object implements net.wg.utils.IAssertable
-    {
-        public function Asserter()
-        {
-            super();
-            ms_instance = this;
-            this.assertProcessing = this.startingAssertProcessing;
-            return;
-        }
+   import net.wg.utils.IAssertable;
+   import net.wg.infrastructure.exceptions.AssertionException;
+   import scaleform.gfx.Extensions;
 
-        public final function assert(arg1:Boolean, arg2:String, arg3:Class=null):void
-        {
-            this.assertProcessing(arg1, arg2, arg3);
-            return;
-        }
 
-        public final function assertNotNull(arg1:Object, arg2:String, arg3:Class=null):void
-        {
-            this.assert(!(arg1 == null), arg2);
-            return;
-        }
+   public final class Asserter extends Object implements IAssertable
+   {
+          
+      public function Asserter() {
+         super();
+         ms_instance = this;
+         this.assertProcessing = this.startingAssertProcessing;
+      }
 
-        public final function assertNull(arg1:Object, arg2:String, arg3:Class=null):void
-        {
-            this.assert(arg1 == null, arg2);
-            return;
-        }
+      private static var ms_instance:Asserter = null;
 
-        internal function throwException(arg1:String, arg2:Class=null):void
-        {
-            var loc1:*=null;
-            if (arg2 != null) 
+      private var isDebug:Boolean = true;
+
+      private var assertProcessing:Function = null;
+
+      public final function assert(param1:Boolean, param2:String, param3:Class=null) : void {
+         this.assertProcessing(param1,param2,param3);
+      }
+
+      public final function assertNotNull(param1:Object, param2:String, param3:Class=null) : void {
+         this.assert(!(param1 == null),param2);
+      }
+
+      public final function assertNull(param1:Object, param2:String, param3:Class=null) : void {
+         this.assert(param1 == null,param2);
+      }
+
+      private function throwException(param1:String, param2:Class=null) : void {
+         var _loc3_:Error = null;
+         if(param2 == null)
+         {
+            _loc3_ = new AssertionException(param1);
+         }
+         else
+         {
+            _loc3_ = new param2() as Error;
+            this.assertNotNull(_loc3_,"ex argument must be Error object class");
+         }
+         _loc3_.message = param1;
+         DebugUtils.LOG_DEBUG((!Extensions.isGFxPlayer) && (Extensions.isScaleform));
+         if(!Extensions.isGFxPlayer && (Extensions.isScaleform))
+         {
+            DebugUtils.LOG_ERROR(param1);
+            DebugUtils.LOG_ERROR(_loc3_.getStackTrace());
+         }
+         throw _loc3_;
+      }
+
+      private function startingAssertProcessing(param1:Boolean, param2:String, param3:Class) : void {
+         var _loc4_:Function = Object(App.globalVarsMgr).isDevelopment;
+         if(_loc4_ != null)
+         {
+            if(_loc4_())
             {
-                loc1 = new arg2() as Error;
-                this.assertNotNull(loc1, "ex argument must be Error object class");
+               this.assertProcessing = this.debugAssertProcessing;
             }
-            else 
+            else
             {
-                loc1 = new net.wg.infrastructure.exceptions.AssertionException(arg1);
+               this.assertProcessing = this.releaseAssertProcessing;
             }
-            loc1.message = arg1;
-            DebugUtils.LOG_DEBUG(!scaleform.gfx.Extensions.isGFxPlayer && scaleform.gfx.Extensions.isScaleform);
-            if (!scaleform.gfx.Extensions.isGFxPlayer && scaleform.gfx.Extensions.isScaleform) 
+            this.assertProcessing(param1,param2,param3);
+         }
+         else
+         {
+            if(!param1)
             {
-                DebugUtils.LOG_ERROR(arg1);
-                DebugUtils.LOG_ERROR(loc1.getStackTrace());
+               this.throwException(param2,param3);
             }
-            throw loc1;
-        }
+         }
+      }
 
-        internal function startingAssertProcessing(arg1:Boolean, arg2:String, arg3:Class):void
-        {
-            var loc1:*;
-            if ((loc1 = Object(App.globalVarsMgr).isDevelopment) == null) 
-            {
-                if (!arg1) 
-                {
-                    this.throwException(arg2, arg3);
-                }
-            }
-            else 
-            {
-                if (loc1()) 
-                {
-                    this.assertProcessing = this.debugAssertProcessing;
-                }
-                else 
-                {
-                    this.assertProcessing = this.releaseAssertProcessing;
-                }
-                this.assertProcessing(arg1, arg2, arg3);
-            }
-            return;
-        }
+      private function debugAssertProcessing(param1:Boolean, param2:String, param3:Class) : void {
+         if(!param1)
+         {
+            this.throwException(param2,param3);
+         }
+      }
 
-        internal function debugAssertProcessing(arg1:Boolean, arg2:String, arg3:Class):void
-        {
-            if (!arg1) 
-            {
-                this.throwException(arg2, arg3);
-            }
-            return;
-        }
+      private function releaseAssertProcessing(param1:Boolean, param2:String, param3:Class) : void {
+          
+      }
+   }
 
-        internal function releaseAssertProcessing(arg1:Boolean, arg2:String, arg3:Class):void
-        {
-            return;
-        }
-
-        
-        {
-            ms_instance = null;
-        }
-
-        internal var isDebug:Boolean=true;
-
-        internal var assertProcessing:Function=null;
-
-        internal static var ms_instance:net.wg.infrastructure.managers.utils.impl.Asserter=null;
-    }
 }

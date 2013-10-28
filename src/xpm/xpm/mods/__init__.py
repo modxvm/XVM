@@ -27,7 +27,7 @@ except Exception, err:
     wd = 'res_mods/%s/%s' % (ver, os.path.dirname(__file__))
     print ("[XPM]   fallback to the default path: %s" % wd)
 
-print wd
+print "[XPM] Working dir: " + wd
 
 for m in glob.iglob(wd + "/*"):
     if os.path.isdir(m) and os.path.exists(m + "/__init__.pyc"):

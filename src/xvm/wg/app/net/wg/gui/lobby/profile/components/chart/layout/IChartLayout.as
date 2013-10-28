@@ -1,27 +1,31 @@
-package net.wg.gui.lobby.profile.components.chart.layout 
+package net.wg.gui.lobby.profile.components.chart.layout
 {
-    public interface IChartLayout
-    {
-        function set gap(arg1:Number):void;
 
-        function get gap():Number;
 
-        function set paddingRight(arg1:Number):void;
+   public interface IChartLayout
+   {
+          
+      function set gap(param1:Number) : void;
 
-        function get paddingRight():Number;
+      function get gap() : Number;
 
-        function set paddingLeft(arg1:Number):void;
+      function set paddingRight(param1:Number) : void;
 
-        function get paddingLeft():Number;
+      function get paddingRight() : Number;
 
-        function set paddingTop(arg1:Number):void;
+      function set paddingLeft(param1:Number) : void;
 
-        function get paddingTop():Number;
+      function get paddingLeft() : Number;
 
-        function set paddingBottom(arg1:Number):void;
+      function set paddingTop(param1:Number) : void;
 
-        function get paddingBottom():Number;
+      function get paddingTop() : Number;
 
-        function layout(arg1:uint, arg2:Object):void;
-    }
+      function set paddingBottom(param1:Number) : void;
+
+      function get paddingBottom() : Number;
+
+      function layout(param1:uint, param2:Object) : void;
+   }
+
 }

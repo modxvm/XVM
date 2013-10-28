@@ -1,95 +1,96 @@
-package net.wg.gui.lobby.profile.components 
+package net.wg.gui.lobby.profile.components
 {
-    import flash.display.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.core.*;
-    
-    public class DashLine extends scaleform.clik.core.UIComponent
-    {
-        public function DashLine()
-        {
-            this.maskObj = new flash.display.Sprite();
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.display.MovieClip;
+   import flash.display.Sprite;
+   import flash.display.Graphics;
+   import scaleform.clik.constants.InvalidationType;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            addChild(this.maskObj);
-            this.background.mask = this.maskObj;
-            return;
-        }
 
-        protected override function draw():void
-        {
-            var loc1:*=null;
-            var loc2:*=0;
-            var loc3:*=0;
-            var loc4:*=0;
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
-            {
-                this.background.width = width;
-                invalidate(REDRAW_INV);
-            }
-            if (isInvalid(REDRAW_INV)) 
-            {
-                loc1 = this.maskObj.graphics;
-                loc1.clear();
-                loc1.beginFill(0);
-                loc2 = 0;
-                loc3 = 0;
-                loc4 = 0;
-                while (loc2 < _width) 
-                {
-                    if ((loc4 = loc2 + this._dashLength) <= _width) 
-                    {
-                        loc3 = this._dashLength;
-                    }
-                    else 
-                    {
-                        loc3 = _width - loc4;
-                    }
-                    loc1.drawRect(loc2, 0, loc3, _height);
-                    loc2 = loc2 + (loc3 + this._gap);
-                }
-            }
-            return;
-        }
+   public class DashLine extends UIComponent
+   {
+          
+      public function DashLine() {
+         this.maskObj = new Sprite();
+         super();
+      }
 
-        public function get gap():uint
-        {
-            return this._gap;
-        }
+      private static const REDRAW_INV:String = "redrawInv";
 
-        public function set gap(arg1:uint):void
-        {
-            this._gap = arg1;
+      public var background:MovieClip;
+
+      private var maskObj:Sprite;
+
+      private var _gap:uint = 2;
+
+      private var _dashLength:uint = 1;
+
+      override public function dispose() : void {
+         this.background.mask = null;
+         this.background = null;
+         this.maskObj = null;
+         super.dispose();
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         addChild(this.maskObj);
+         this.background.mask = this.maskObj;
+      }
+
+      override protected function draw() : void {
+         var _loc1_:Graphics = null;
+         var _loc2_:uint = 0;
+         var _loc3_:uint = 0;
+         var _loc4_:uint = 0;
+         super.draw();
+         if(isInvalid(InvalidationType.SIZE))
+         {
+            this.background.width = width;
             invalidate(REDRAW_INV);
-            return;
-        }
+         }
+         if(isInvalid(REDRAW_INV))
+         {
+            _loc1_ = this.maskObj.graphics;
+            _loc1_.clear();
+            _loc1_.beginFill(0);
+            _loc2_ = 0;
+            _loc3_ = 0;
+            _loc4_ = 0;
+            while(_loc2_ < _width)
+            {
+               _loc4_ = _loc2_ + this._dashLength;
+               if(_loc4_ <= _width)
+               {
+                  _loc3_ = this._dashLength;
+               }
+               else
+               {
+                  _loc3_ = _width - _loc4_;
+               }
+               _loc1_.drawRect(_loc2_,0,_loc3_,_height);
+               _loc2_ = _loc2_ + (_loc3_ + this._gap);
+            }
+         }
+      }
 
-        public function get dashLength():uint
-        {
-            return this._dashLength;
-        }
+      public function get gap() : uint {
+         return this._gap;
+      }
 
-        public function set dashLength(arg1:uint):void
-        {
-            this._dashLength = arg1;
-            invalidate(REDRAW_INV);
-            return;
-        }
+      public function set gap(param1:uint) : void {
+         this._gap = param1;
+         invalidate(REDRAW_INV);
+      }
 
-        internal static const REDRAW_INV:String="redrawInv";
+      public function get dashLength() : uint {
+         return this._dashLength;
+      }
 
-        public var background:flash.display.MovieClip;
+      public function set dashLength(param1:uint) : void {
+         this._dashLength = param1;
+         invalidate(REDRAW_INV);
+      }
+   }
 
-        internal var maskObj:flash.display.Sprite;
-
-        internal var _gap:uint=2;
-
-        internal var _dashLength:uint=1;
-    }
 }

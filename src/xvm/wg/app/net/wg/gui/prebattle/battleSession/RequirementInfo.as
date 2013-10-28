@@ -1,41 +1,49 @@
-package net.wg.gui.prebattle.battleSession 
+package net.wg.gui.prebattle.battleSession
 {
-    import flash.display.*;
-    import flash.text.*;
-    import scaleform.clik.core.*;
-    
-    public class RequirementInfo extends scaleform.clik.core.UIComponent
-    {
-        public function RequirementInfo()
-        {
-            super();
-            this._textFields = {"lightTank":this.lightLevelField, "mediumTank":this.mediumLevelField, "heavyTank":this.heavyLevelField, "SPG":this.spgLevelField, "AT-SPG":this.atspgLevelField};
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.text.TextField;
+   import flash.display.MovieClip;
 
-        public function get textFields():Object
-        {
-            return this._textFields;
-        }
 
-        public var flagList:net.wg.gui.prebattle.battleSession.FlagsList;
+   public class RequirementInfo extends UIComponent
+   {
+          
+      public function RequirementInfo() {
+         super();
+         this._textFields =
+            {
+               "lightTank":this.lightLevelField,
+               "mediumTank":this.mediumLevelField,
+               "heavyTank":this.heavyLevelField,
+               "SPG":this.spgLevelField,
+               "AT-SPG":this.atspgLevelField
+            }
+         ;
+      }
 
-        public var requiredNationText:flash.text.TextField;
+      public var flagList:FlagsList;
 
-        public var heavyLevelField:flash.text.TextField;
+      public var requiredNationText:TextField;
 
-        public var mediumLevelField:flash.text.TextField;
+      public var heavyLevelField:TextField;
 
-        public var lightLevelField:flash.text.TextField;
+      public var mediumLevelField:TextField;
 
-        public var atspgLevelField:flash.text.TextField;
+      public var lightLevelField:TextField;
 
-        public var spgLevelField:flash.text.TextField;
+      public var atspgLevelField:TextField;
 
-        public var requiredTypeText:flash.text.TextField;
+      public var spgLevelField:TextField;
 
-        public var icons:flash.display.MovieClip;
+      public var requiredTypeText:TextField;
 
-        internal var _textFields:Object;
-    }
+      public var icons:MovieClip;
+
+      private var _textFields:Object;
+
+      public function get textFields() : Object {
+         return this._textFields;
+      }
+   }
+
 }

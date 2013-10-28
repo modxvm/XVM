@@ -1,104 +1,108 @@
-package net.wg.gui.lobby.techtree.data 
+package net.wg.gui.lobby.techtree.data
 {
-    import flash.geom.*;
-    import net.wg.gui.lobby.techtree.data.vo.*;
-    
-    public class NationXMLDataProvider extends net.wg.gui.lobby.techtree.data.NationVODataProvider
-    {
-        public function NationXMLDataProvider()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.lobby.techtree.data.vo.NodeData;
+   import net.wg.gui.lobby.techtree.data.vo.NationDisplaySettings;
+   import net.wg.gui.lobby.techtree.data.vo.NTDisplayInfo;
+   import flash.geom.Point;
+   import net.wg.gui.lobby.techtree.data.vo.PrimaryClass;
+   import net.wg.gui.lobby.techtree.data.vo.UnlockProps;
+   import net.wg.gui.lobby.techtree.data.vo.ShopPrice;
 
-        public override function parse(arg1:Object):void
-        {
-            var loc4:*=NaN;
-            var loc5:*=null;
-            var loc7:*=null;
-            clearUp();
-            var loc1:*=String(arg1);
-            var loc2:*=new XML(loc1);
-            loc2.ignoreWhite = true;
-            var loc3:*=loc2.children()[0];
-            var loc8:*=0;
-            var loc9:*=loc3.children();
-            for each (loc5 in loc9) 
-            {
-                loc7 = this.getNodeData(loc5);
-                loc4 = nodeData.length;
-                if (isNaN(loc7.id)) 
-                {
-                    continue;
-                }
-                nodeIdxCache[loc7.id] = loc4;
-                nodeData.push(loc7);
-            }
-            if ((loc4 = loc2.children()[1].text()) > -1) 
-            {
-                _scrollIndex = loc4;
-            }
-            var loc6:*=loc2.children()[2];
-            _displaySettings = new net.wg.gui.lobby.techtree.data.vo.NationDisplaySettings(loc6.child("nodeRendererName").text(), loc6.child("isLevelDisplayed").text());
-            return;
-        }
 
-        internal function getNodeDisplayInfo(arg1:XML):net.wg.gui.lobby.techtree.data.vo.NTDisplayInfo
-        {
-            var loc2:*=null;
-            var loc3:*=null;
-            var loc4:*=null;
-            var loc5:*=null;
-            var loc6:*=null;
-            var loc1:*=[];
-            var loc7:*=0;
-            var loc8:*=arg1.child("lines").children();
-            for each (loc4 in loc8) 
-            {
-                loc3 = {"outLiteral":loc4.child("outLiteral").text(), "outPin":[loc4.child("outPin").child("x").text(), loc4.child("outPin").child("y").text()], "inPins":[]};
-                var loc9:*=0;
-                var loc10:*=loc4.child("inPins").children();
-                for each (loc5 in loc10) 
-                {
-                    loc2 = {"childID":loc5.child("childID").text(), "inPin":[loc5.child("inPin").child("x").text(), loc5.child("inPin").child("y").text()], "viaPins":[]};
-                    var loc11:*=0;
-                    var loc12:*=loc5.child("viaPins").children();
-                    for each (loc6 in loc12) 
-                    {
-                        loc2.viaPins.push([loc6.child("x").text(), loc6.child("y").text()]);
-                    }
-                    loc3.inPins.push(loc2);
-                }
-                loc1.push(loc3);
-            }
-            return new net.wg.gui.lobby.techtree.data.vo.NTDisplayInfo(arg1.child("row").text(), arg1.child("column").text(), new flash.geom.Point(arg1.child("position").child("x").text(), arg1.child("position").child("y").text()), loc1);
-        }
+   public class NationXMLDataProvider extends NationVODataProvider
+   {
+          
+      public function NationXMLDataProvider() {
+         super();
+      }
 
-        internal function getNodeData(arg1:XML):net.wg.gui.lobby.techtree.data.vo.NodeData
-        {
-            var loc3:*=null;
-            var loc1:*=new net.wg.gui.lobby.techtree.data.vo.NodeData();
-            var loc2:*=[];
-            var loc4:*=0;
-            var loc5:*=arg1.child("unlockProps").child("topIDs").children();
-            for each (loc3 in loc5) 
+      override public function parse(param1:Object) : void {
+         var _loc5_:* = NaN;
+         var _loc6_:XML = null;
+         var _loc8_:NodeData = null;
+         clearUp();
+         var _loc2_:String = String(param1);
+         var _loc3_:XML = new XML(_loc2_);
+         _loc3_.ignoreWhite = true;
+         var _loc4_:XML = _loc3_.children()[0];
+         for each (_loc6_ in _loc4_.children())
+         {
+            _loc8_ = this.getNodeData(_loc6_);
+            _loc5_ = nodeData.length;
+            if(!isNaN(_loc8_.id))
             {
-                loc2.push(Number(loc3.toString()));
+               nodeIdxCache[_loc8_.id] = _loc5_;
+               nodeData.push(_loc8_);
             }
-            loc1.id = arg1.child("id").text();
-            loc1.nameString = arg1.child("nameString").text();
-            loc1.primaryClass = new net.wg.gui.lobby.techtree.data.vo.PrimaryClass(arg1.child("class").child("name").text(), arg1.child("class").child("userString").text());
-            loc1.level = int(arg1.child("level").text());
-            loc1.earnedXP = arg1.child("earnedXP").text();
-            loc1.state = arg1.child("state").text();
-            loc1.unlockProps = new net.wg.gui.lobby.techtree.data.vo.UnlockProps(arg1.child("unlockProps").child("parentID").text(), arg1.child("unlockProps").child("unlockIdx").text(), arg1.child("unlockProps").child("xpCost").text(), loc2);
-            loc1.iconPath = arg1.child("iconPath").text();
-            loc1.smallIconPath = arg1.child("smallIconPath").text();
-            loc1.longName = arg1.child("longName").text();
-            loc1.pickleDump = arg1.child("dump").text();
-            loc1.shopPrice = new net.wg.gui.lobby.techtree.data.vo.ShopPrice(arg1.child("shopPrice").child("credits").text(), arg1.child("shopPrice").child("gold").text());
-            loc1.displayInfo = this.getNodeDisplayInfo(arg1.child("display")[0]);
-            return loc1;
-        }
-    }
+         }
+         _loc5_ = _loc3_.children()[1].text();
+         if(_loc5_ > -1)
+         {
+            _scrollIndex = _loc5_;
+         }
+         var _loc7_:XML = _loc3_.children()[2];
+         _displaySettings = new NationDisplaySettings(_loc7_.child("nodeRendererName").text(),_loc7_.child("isLevelDisplayed").text());
+      }
+
+      private function getNodeDisplayInfo(param1:XML) : NTDisplayInfo {
+         var _loc3_:Object = null;
+         var _loc4_:Object = null;
+         var _loc5_:XML = null;
+         var _loc6_:XML = null;
+         var _loc7_:XML = null;
+         var _loc2_:Array = [];
+         for each (_loc5_ in param1.child("lines").children())
+         {
+            _loc4_ =
+               {
+                  "outLiteral":_loc5_.child("outLiteral").text(),
+                  "outPin":[_loc5_.child("outPin").child("x").text(),_loc5_.child("outPin").child("y").text()],
+                  "inPins":[]
+               }
+            ;
+            for each (_loc6_ in _loc5_.child("inPins").children())
+            {
+               _loc3_ =
+                  {
+                     "childID":_loc6_.child("childID").text(),
+                     "inPin":[_loc6_.child("inPin").child("x").text(),_loc6_.child("inPin").child("y").text()],
+                     "viaPins":[]
+                  }
+               ;
+               for each (_loc7_ in _loc6_.child("viaPins").children())
+               {
+                  _loc3_.viaPins.push([_loc7_.child("x").text(),_loc7_.child("y").text()]);
+               }
+               _loc4_.inPins.push(_loc3_);
+            }
+            _loc2_.push(_loc4_);
+         }
+         return new NTDisplayInfo(param1.child("row").text(),param1.child("column").text(),new Point(param1.child("position").child("x").text(),param1.child("position").child("y").text()),_loc2_);
+      }
+
+      private function getNodeData(param1:XML) : NodeData {
+         var _loc4_:XML = null;
+         var _loc2_:NodeData = new NodeData();
+         var _loc3_:Array = [];
+         for each (_loc4_ in param1.child("unlockProps").child("topIDs").children())
+         {
+            _loc3_.push(Number(_loc4_.toString()));
+         }
+         _loc2_.id = param1.child("id").text();
+         _loc2_.nameString = param1.child("nameString").text();
+         _loc2_.primaryClass = new PrimaryClass(param1.child("class").child("name").text(),param1.child("class").child("userString").text());
+         _loc2_.level = int(param1.child("level").text());
+         _loc2_.earnedXP = param1.child("earnedXP").text();
+         _loc2_.state = param1.child("state").text();
+         _loc2_.unlockProps = new UnlockProps(param1.child("unlockProps").child("parentID").text(),param1.child("unlockProps").child("unlockIdx").text(),param1.child("unlockProps").child("xpCost").text(),_loc3_);
+         _loc2_.iconPath = param1.child("iconPath").text();
+         _loc2_.smallIconPath = param1.child("smallIconPath").text();
+         _loc2_.longName = param1.child("longName").text();
+         _loc2_.pickleDump = param1.child("dump").text();
+         _loc2_.shopPrice = new ShopPrice(param1.child("shopPrice").child("credits").text(),param1.child("shopPrice").child("gold").text());
+         _loc2_.displayInfo = this.getNodeDisplayInfo(param1.child("display")[0]);
+         return _loc2_;
+      }
+   }
+
 }

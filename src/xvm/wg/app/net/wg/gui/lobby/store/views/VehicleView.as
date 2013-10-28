@@ -1,101 +1,92 @@
-package net.wg.gui.lobby.store.views 
+package net.wg.gui.lobby.store.views
 {
-    import net.wg.data.VO.*;
-    import net.wg.data.constants.generated.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.lobby.store.views.base.*;
-    
-    public class VehicleView extends net.wg.gui.lobby.store.views.base.BaseStoreMenuView
-    {
-        public function VehicleView()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.lobby.store.views.base.BaseStoreMenuView;
+   import net.wg.gui.components.controls.RadioButton;
+   import net.wg.gui.components.controls.CheckBox;
+   import net.wg.gui.lobby.store.views.base.ViewUIElementVO;
+   import net.wg.data.constants.generated.STORE_TYPES;
+   import net.wg.data.VO.ShopSubFilterData;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.inHangarChkBx.enableDynamicFrameUpdating();
-            this.brockenChckBx.enableDynamicFrameUpdating();
-            return;
-        }
 
-        public override function resetTemporaryHandlers():void
-        {
-            resetHandlers(getFitsArray(), this.allRadioBtn);
-            return;
-        }
+   public class VehicleView extends BaseStoreMenuView
+   {
+          
+      public function VehicleView() {
+         super();
+      }
 
-        protected override function onTagsArrayRequest():Array
-        {
-            return [new net.wg.gui.lobby.store.views.base.ViewUIElementVO("lightTank", this.lightTankRadioBtn), new net.wg.gui.lobby.store.views.base.ViewUIElementVO("mediumTank", this.mediumTankRadioBtn), new net.wg.gui.lobby.store.views.base.ViewUIElementVO("heavyTank", this.heavyTankRadioBtn), new net.wg.gui.lobby.store.views.base.ViewUIElementVO("at-spg", this.at_spgRadioBtn), new net.wg.gui.lobby.store.views.base.ViewUIElementVO("spg", this.spgRadioBtn), new net.wg.gui.lobby.store.views.base.ViewUIElementVO("all", this.allRadioBtn)];
-        }
+      public var allRadioBtn:RadioButton = null;
 
-        protected override function onFitsArrayRequest():Array
-        {
-            if (getUIName() == net.wg.data.constants.generated.STORE_TYPES.SHOP) 
-            {
-                return [new net.wg.gui.lobby.store.views.base.ViewUIElementVO("locked", this.lockedChkBx), new net.wg.gui.lobby.store.views.base.ViewUIElementVO("inHangar", this.inHangarChkBx)];
-            }
-            return [new net.wg.gui.lobby.store.views.base.ViewUIElementVO("locked", this.lockedChkBx), new net.wg.gui.lobby.store.views.base.ViewUIElementVO("brocken", this.brockenChckBx)];
-        }
+      public var lightTankRadioBtn:RadioButton = null;
 
-        protected override function getFitsName():String
-        {
-            return "extra";
-        }
+      public var mediumTankRadioBtn:RadioButton = null;
 
-        public override function setViewData(arg1:Array):void
-        {
-            var loc1:*=Number(arg1.shift());
-            var loc2:*=arg1.splice(0, loc1);
-            if (loc2.length > 4) 
-            {
-                this.allRadioBtn.selected = true;
-                addHandlerToGroup(this.allRadioBtn);
-            }
-            else 
-            {
-                selectFilter(getTagsArray(), loc2, false, true);
-            }
-            selectFilter(getFitsArray(), arg1, true, false);
-            return;
-        }
+      public var heavyTankRadioBtn:RadioButton = null;
 
-        public override function getFilter():Array
-        {
-            var loc1:*=getSelectedFilters(getTagsArray(), true, this.allRadioBtn);
-            loc1 = loc1.concat(getSelectedFilters(getFitsArray(), false, null));
-            return loc1;
-        }
+      public var at_spgRadioBtn:RadioButton = null;
 
-        public override function setSubFilterData(arg1:int, arg2:net.wg.data.VO.ShopSubFilterData):void
-        {
-            return;
-        }
+      public var spgRadioBtn:RadioButton = null;
 
-        public override function updateSubFilter(arg1:int):void
-        {
-            return;
-        }
+      public var lockedChkBx:CheckBox = null;
 
-        public var allRadioBtn:net.wg.gui.components.controls.RadioButton=null;
+      public var inHangarChkBx:CheckBox = null;
 
-        public var lightTankRadioBtn:net.wg.gui.components.controls.RadioButton=null;
+      public var brockenChckBx:CheckBox = null;
 
-        public var mediumTankRadioBtn:net.wg.gui.components.controls.RadioButton=null;
+      override protected function configUI() : void {
+         super.configUI();
+         this.inHangarChkBx.enableDynamicFrameUpdating();
+         this.brockenChckBx.enableDynamicFrameUpdating();
+      }
 
-        public var heavyTankRadioBtn:net.wg.gui.components.controls.RadioButton=null;
+      override public function resetTemporaryHandlers() : void {
+         resetHandlers(getFitsArray(),this.allRadioBtn);
+      }
 
-        public var at_spgRadioBtn:net.wg.gui.components.controls.RadioButton=null;
+      override protected function onTagsArrayRequest() : Array {
+         return [new ViewUIElementVO("lightTank",this.lightTankRadioBtn),new ViewUIElementVO("mediumTank",this.mediumTankRadioBtn),new ViewUIElementVO("heavyTank",this.heavyTankRadioBtn),new ViewUIElementVO("at-spg",this.at_spgRadioBtn),new ViewUIElementVO("spg",this.spgRadioBtn),new ViewUIElementVO("all",this.allRadioBtn)];
+      }
 
-        public var spgRadioBtn:net.wg.gui.components.controls.RadioButton=null;
+      override protected function onFitsArrayRequest() : Array {
+         if(getUIName() == STORE_TYPES.SHOP)
+         {
+            return [new ViewUIElementVO("locked",this.lockedChkBx),new ViewUIElementVO("inHangar",this.inHangarChkBx)];
+         }
+         return [new ViewUIElementVO("locked",this.lockedChkBx),new ViewUIElementVO("brocken",this.brockenChckBx)];
+      }
 
-        public var lockedChkBx:net.wg.gui.components.controls.CheckBox=null;
+      override protected function getFitsName() : String {
+         return "extra";
+      }
 
-        public var inHangarChkBx:net.wg.gui.components.controls.CheckBox=null;
+      override public function setViewData(param1:Array) : void {
+         var _loc2_:Number = Number(param1.shift());
+         var _loc3_:Array = param1.splice(0,_loc2_);
+         if(_loc3_.length > 4)
+         {
+            this.allRadioBtn.selected = true;
+            addHandlerToGroup(this.allRadioBtn);
+         }
+         else
+         {
+            selectFilter(getTagsArray(),_loc3_,false,true);
+         }
+         selectFilter(getFitsArray(),param1,true,false);
+      }
 
-        public var brockenChckBx:net.wg.gui.components.controls.CheckBox=null;
-    }
+      override public function getFilter() : Array {
+         var _loc1_:Array = getSelectedFilters(getTagsArray(),true,this.allRadioBtn);
+         _loc1_ = _loc1_.concat(getSelectedFilters(getFitsArray(),false,null));
+         return _loc1_;
+      }
+
+      override public function setSubFilterData(param1:int, param2:ShopSubFilterData) : void {
+          
+      }
+
+      override public function updateSubFilter(param1:int) : void {
+          
+      }
+   }
+
 }

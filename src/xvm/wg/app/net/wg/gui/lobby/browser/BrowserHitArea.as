@@ -1,95 +1,80 @@
-package net.wg.gui.lobby.browser 
+package net.wg.gui.lobby.browser
 {
-    import flash.display.*;
-    import flash.events.*;
-    import net.wg.utils.*;
-    import scaleform.clik.core.*;
-    
-    public class BrowserHitArea extends scaleform.clik.core.UIComponent
-    {
-        public function BrowserHitArea()
-        {
-            this.events = App.utils.events;
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import net.wg.utils.IEventCollector;
+   import flash.display.Bitmap;
+   import flash.events.MouseEvent;
 
-        public override function dispose():void
-        {
-            super.dispose();
-            removeEventListener(flash.events.MouseEvent.MOUSE_MOVE, this.onMouseMoveHandler);
-            removeEventListener(flash.events.MouseEvent.MOUSE_WHEEL, this.onMouseWheelHandler);
-            removeEventListener(flash.events.MouseEvent.ROLL_OVER, this.onMouseRollOverHandler);
-            removeEventListener(flash.events.MouseEvent.ROLL_OUT, this.onMouseRollOutHandler);
-            this.events.removeEvent(App.stage, flash.events.MouseEvent.MOUSE_DOWN, this.onMouseDownHandler);
-            this.events.removeEvent(App.stage, flash.events.MouseEvent.MOUSE_UP, this.onMouseUpHandler);
-            removeChild(this.bgImg);
-            this.events = null;
-            return;
-        }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            var loc1:*=App.browserBgClass;
-            this.bgImg = new loc1();
-            addChild(this.bgImg);
-            addEventListener(flash.events.MouseEvent.ROLL_OVER, this.onMouseRollOverHandler, false, 0, true);
-            addEventListener(flash.events.MouseEvent.ROLL_OUT, this.onMouseRollOutHandler, false, 0, true);
-            this.events.addEvent(App.stage, flash.events.MouseEvent.MOUSE_DOWN, this.onMouseDownHandler, false, 0, true);
-            this.events.addEvent(App.stage, flash.events.MouseEvent.MOUSE_UP, this.onMouseUpHandler, false, 0, true);
-            return;
-        }
+   public class BrowserHitArea extends UIComponent
+   {
+          
+      public function BrowserHitArea() {
+         this.events = App.utils.events;
+         super();
+      }
 
-        internal function onMouseRollOverHandler(arg1:flash.events.MouseEvent):void
-        {
-            addEventListener(flash.events.MouseEvent.MOUSE_MOVE, this.onMouseMoveHandler, false, 0, true);
-            addEventListener(flash.events.MouseEvent.MOUSE_WHEEL, this.onMouseWheelHandler, false, 0, true);
-            dispatchEvent(new net.wg.gui.lobby.browser.BrowserEvent(net.wg.gui.lobby.browser.BrowserEvent.BROWSER_FOCUS_IN));
-            return;
-        }
+      private var events:IEventCollector;
 
-        internal function onMouseRollOutHandler(arg1:flash.events.MouseEvent):void
-        {
-            removeEventListener(flash.events.MouseEvent.MOUSE_MOVE, this.onMouseMoveHandler);
-            removeEventListener(flash.events.MouseEvent.MOUSE_WHEEL, this.onMouseWheelHandler);
-            dispatchEvent(new net.wg.gui.lobby.browser.BrowserEvent(net.wg.gui.lobby.browser.BrowserEvent.BROWSER_FOCUS_OUT));
-            return;
-        }
+      private var bgImg:Bitmap;
 
-        internal function onMouseWheelHandler(arg1:flash.events.MouseEvent):void
-        {
-            dispatchEvent(new net.wg.gui.lobby.browser.BrowserEvent(net.wg.gui.lobby.browser.BrowserEvent.BROWSER_MOVE, 0, 0, arg1.delta));
-            return;
-        }
+      override public function dispose() : void {
+         super.dispose();
+         removeEventListener(MouseEvent.MOUSE_MOVE,this.onMouseMoveHandler);
+         removeEventListener(MouseEvent.MOUSE_WHEEL,this.onMouseWheelHandler);
+         removeEventListener(MouseEvent.ROLL_OVER,this.onMouseRollOverHandler);
+         removeEventListener(MouseEvent.ROLL_OUT,this.onMouseRollOutHandler);
+         this.events.removeEvent(App.stage,MouseEvent.MOUSE_DOWN,this.onMouseDownHandler);
+         this.events.removeEvent(App.stage,MouseEvent.MOUSE_UP,this.onMouseUpHandler);
+         removeChild(this.bgImg);
+         this.events = null;
+      }
 
-        internal function onMouseDownHandler(arg1:flash.events.MouseEvent):void
-        {
-            if (arg1.target != this) 
-            {
-                dispatchEvent(new net.wg.gui.lobby.browser.BrowserEvent(net.wg.gui.lobby.browser.BrowserEvent.BROWSER_FOCUS_OUT));
-            }
-            else 
-            {
-                dispatchEvent(new net.wg.gui.lobby.browser.BrowserEvent(net.wg.gui.lobby.browser.BrowserEvent.BROWSER_DOWN, this.mouseX, this.mouseY));
-            }
-            return;
-        }
+      override protected function configUI() : void {
+         super.configUI();
+         var _loc1_:Class = App.browserBgClass;
+         this.bgImg = new _loc1_();
+         addChild(this.bgImg);
+         addEventListener(MouseEvent.ROLL_OVER,this.onMouseRollOverHandler,false,0,true);
+         addEventListener(MouseEvent.ROLL_OUT,this.onMouseRollOutHandler,false,0,true);
+         this.events.addEvent(App.stage,MouseEvent.MOUSE_DOWN,this.onMouseDownHandler,false,0,true);
+         this.events.addEvent(App.stage,MouseEvent.MOUSE_UP,this.onMouseUpHandler,false,0,true);
+      }
 
-        internal function onMouseUpHandler(arg1:flash.events.MouseEvent):void
-        {
-            dispatchEvent(new net.wg.gui.lobby.browser.BrowserEvent(net.wg.gui.lobby.browser.BrowserEvent.BROWSER_UP, this.mouseX, this.mouseY));
-            return;
-        }
+      private function onMouseRollOverHandler(param1:MouseEvent) : void {
+         addEventListener(MouseEvent.MOUSE_MOVE,this.onMouseMoveHandler,false,0,true);
+         addEventListener(MouseEvent.MOUSE_WHEEL,this.onMouseWheelHandler,false,0,true);
+         dispatchEvent(new BrowserEvent(BrowserEvent.BROWSER_FOCUS_IN));
+      }
 
-        internal function onMouseMoveHandler(arg1:flash.events.MouseEvent):void
-        {
-            dispatchEvent(new net.wg.gui.lobby.browser.BrowserEvent(net.wg.gui.lobby.browser.BrowserEvent.BROWSER_MOVE, this.mouseX, this.mouseY));
-            return;
-        }
+      private function onMouseRollOutHandler(param1:MouseEvent) : void {
+         removeEventListener(MouseEvent.MOUSE_MOVE,this.onMouseMoveHandler);
+         removeEventListener(MouseEvent.MOUSE_WHEEL,this.onMouseWheelHandler);
+         dispatchEvent(new BrowserEvent(BrowserEvent.BROWSER_FOCUS_OUT));
+      }
 
-        internal var events:net.wg.utils.IEventCollector;
+      private function onMouseWheelHandler(param1:MouseEvent) : void {
+         dispatchEvent(new BrowserEvent(BrowserEvent.BROWSER_MOVE,0,0,param1.delta));
+      }
 
-        internal var bgImg:flash.display.Bitmap;
-    }
+      private function onMouseDownHandler(param1:MouseEvent) : void {
+         if(param1.target == this)
+         {
+            dispatchEvent(new BrowserEvent(BrowserEvent.BROWSER_DOWN,this.mouseX,this.mouseY));
+         }
+         else
+         {
+            dispatchEvent(new BrowserEvent(BrowserEvent.BROWSER_FOCUS_OUT));
+         }
+      }
+
+      private function onMouseUpHandler(param1:MouseEvent) : void {
+         dispatchEvent(new BrowserEvent(BrowserEvent.BROWSER_UP,this.mouseX,this.mouseY));
+      }
+
+      private function onMouseMoveHandler(param1:MouseEvent) : void {
+         dispatchEvent(new BrowserEvent(BrowserEvent.BROWSER_MOVE,this.mouseX,this.mouseY));
+      }
+   }
+
 }

@@ -1,342 +1,370 @@
-package net.wg.gui.lobby.settings 
+package net.wg.gui.lobby.settings
 {
-    import flash.display.*;
-    import flash.events.*;
-    import flash.text.*;
-    import net.wg.gui.components.advanced.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.lobby.settings.evnts.*;
-    import net.wg.gui.lobby.settings.vo.*;
-    import scaleform.clik.events.*;
-    
-    public class GameSettings extends net.wg.gui.lobby.settings.SettingsBaseView
-    {
-        public function GameSettings()
-        {
-            super();
-            return;
-        }
+   import flash.display.Sprite;
+   import net.wg.gui.components.advanced.FieldSet;
+   import net.wg.gui.components.controls.CheckBox;
+   import flash.text.TextField;
+   import net.wg.gui.components.controls.Slider;
+   import net.wg.gui.components.controls.LabelControl;
+   import net.wg.gui.lobby.settings.vo.SettingsControlProp;
+   import flash.events.Event;
+   import scaleform.clik.events.SliderEvent;
+   import net.wg.gui.lobby.settings.evnts.SettingViewEvent;
 
-        public override function toString():String
-        {
-            return "[WG GameSettings " + name + "]";
-        }
 
-        protected override function setData(arg1:Object):void
-        {
-            var loc1:*=null;
-            var loc2:*=false;
-            var loc4:*=null;
-            var loc5:*=false;
-            var loc6:*=null;
-            var loc7:*=null;
-            var loc8:*=null;
-            var loc9:*=false;
-            this.vibroContolsList = [];
-            var loc10:*=0;
-            var loc11:*=_data;
-            for (loc1 in loc11) 
+   public class GameSettings extends SettingsBaseView
+   {
+          
+      public function GameSettings() {
+         super();
+      }
+
+      public var bgFrom:Sprite = null;
+
+      public var fieldSetChat:FieldSet = null;
+
+      public var fieldSetInstructionPanel:FieldSet = null;
+
+      public var fieldSetBattleTypes:FieldSet = null;
+
+      public var fieldSetVibro:FieldSet = null;
+
+      public var enableOlFilterCheckbox:CheckBox = null;
+
+      public var enableSpamFilterCheckbox:CheckBox = null;
+
+      public var showDateMessageCheckbox:CheckBox = null;
+
+      public var showTimeMessageCheckbox:CheckBox = null;
+
+      public var invitesFromFriendsOnlyCheckbox:CheckBox = null;
+
+      public var enableStoreCwsCheckbox:CheckBox = null;
+
+      public var enableStoreMwsCheckbox:CheckBox = null;
+
+      public var storeReceiverInBattleCheckbox:CheckBox = null;
+
+      public var ppShowLevelsCheckbox:CheckBox = null;
+
+      public var gameplay_ctfCheckbox:CheckBox = null;
+
+      public var gameplay_dominationCheckbox:CheckBox = null;
+
+      public var gameplay_assaultCheckbox:CheckBox = null;
+
+      public var vibroDeviceConnectionStateField:TextField = null;
+
+      public var vibroGainLabel:TextField = null;
+
+      public var vibroGainSlider:Slider = null;
+
+      public var vibroGainValue:LabelControl = null;
+
+      public var vibroEngineLabel:TextField = null;
+
+      public var vibroEngineSlider:Slider = null;
+
+      public var vibroEngineValue:LabelControl = null;
+
+      public var vibroAccelerationLabel:TextField = null;
+
+      public var vibroAccelerationSlider:Slider = null;
+
+      public var vibroAccelerationValue:LabelControl = null;
+
+      public var vibroShotsLabel:TextField = null;
+
+      public var vibroShotsSlider:Slider = null;
+
+      public var vibroShotsValue:LabelControl = null;
+
+      public var vibroHitsLabel:TextField = null;
+
+      public var vibroHitsSlider:Slider = null;
+
+      public var vibroHitsValue:LabelControl = null;
+
+      public var vibroCollisionsLabel:TextField = null;
+
+      public var vibroCollisionsSlider:Slider = null;
+
+      public var vibroCollisionsValue:LabelControl = null;
+
+      public var vibroDamageLabel:TextField = null;
+
+      public var vibroDamageSlider:Slider = null;
+
+      public var vibroDamageValue:LabelControl = null;
+
+      public var vibroGUILabel:TextField = null;
+
+      public var vibroGUISlider:Slider = null;
+
+      public var vibroGUIValue:LabelControl = null;
+
+      public var minimapAlphaSliderLabel:TextField = null;
+
+      public var minimapAlphaSlider:Slider = null;
+
+      public var enablePostMortemEffectCheckbox:CheckBox = null;
+
+      public var dynamicCameraCheckbox:CheckBox = null;
+
+      public var horStabilizationSnpCheckbox:CheckBox = null;
+
+      public var replayEnabledCheckbox:CheckBox = null;
+
+      public var useServerAimCheckbox:CheckBox = null;
+
+      public var showVehiclesCounterCheckbox:CheckBox = null;
+
+      private var vibroControlsList:Array = null;
+
+      private var missChangeEvent:Boolean = false;
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.fieldSetChat.label = SETTINGS.GAME_FIELDSET_HEADERCHAT;
+         this.fieldSetInstructionPanel.label = SETTINGS.GAME_PLAYERPANELSETTINGS;
+         this.fieldSetBattleTypes.label = SETTINGS.GAME_FIELDSET_HEADERGAMEPLAY;
+         this.fieldSetVibro.label = SETTINGS.VIBRO_FIELDSET_HEADER;
+         this.enableOlFilterCheckbox.label = SETTINGS.CHAT_CENSORSHIPMESSAGES;
+         this.enableSpamFilterCheckbox.label = SETTINGS.CHAT_REMOVESPAM;
+         this.showDateMessageCheckbox.label = SETTINGS.CHAT_SHOWDATEMESSAGE;
+         this.showTimeMessageCheckbox.label = SETTINGS.CHAT_SHOWTIMEMESSAGE;
+         this.invitesFromFriendsOnlyCheckbox.label = SETTINGS.CHAT_INVITESFROMFRIENDSONLY;
+         this.enableStoreCwsCheckbox.label = SETTINGS.CHAT_ENABLESTORECHANNELSWINDOWS;
+         this.enableStoreMwsCheckbox.label = SETTINGS.CHAT_ENABLESTOREMANAGEMENTWINDOWS;
+         this.storeReceiverInBattleCheckbox.label = SETTINGS.CHAT_STORERECEIVERINBATTLE;
+         this.ppShowLevelsCheckbox.label = SETTINGS.GAME_PPSHOWLEVELS;
+         this.gameplay_ctfCheckbox.label = SETTINGS.GAMEPLAY_CTF;
+         this.gameplay_dominationCheckbox.label = SETTINGS.GAMEPLAY_DOMINATION;
+         this.gameplay_assaultCheckbox.label = SETTINGS.GAMEPLAY_ASSAULT;
+         this.vibroDeviceConnectionStateField.text = SETTINGS.VIBRO_DEVICE_STATE_NOTCONNECTED;
+         this.vibroGainLabel.text = SETTINGS.VIBRO_LABELS_GAIN;
+         this.vibroEngineLabel.text = SETTINGS.VIBRO_LABELS_ENGINE;
+         this.vibroAccelerationLabel.text = SETTINGS.VIBRO_LABELS_ACCELERATION;
+         this.vibroShotsLabel.text = SETTINGS.VIBRO_LABELS_SHOTS;
+         this.vibroHitsLabel.text = SETTINGS.VIBRO_LABELS_HITS;
+         this.vibroCollisionsLabel.text = SETTINGS.VIBRO_LABELS_COLLISIONS;
+         this.vibroDamageLabel.text = SETTINGS.VIBRO_LABELS_DAMAGE;
+         this.vibroGUILabel.text = SETTINGS.VIBRO_LABELS_GUI;
+         this.minimapAlphaSliderLabel.text = SETTINGS.MINIMAP_LABELS_ALPHA;
+         this.enablePostMortemEffectCheckbox.label = SETTINGS.GAME_ENABLEMORTALPOSTEFFECT;
+         this.dynamicCameraCheckbox.label = SETTINGS.GAME_DYNAMICCAMERA;
+         this.horStabilizationSnpCheckbox.label = SETTINGS.GAME_HORSTABILIZATIONSNP;
+         this.replayEnabledCheckbox.label = SETTINGS.GAME_REPLAYENABLED;
+         this.useServerAimCheckbox.label = SETTINGS.CURSOR_SERVERAIM;
+         this.showVehiclesCounterCheckbox.label = SETTINGS.GAME_SHOWVEHICLESCOUNTER;
+         super.configUI();
+      }
+
+      override public function update(param1:Object) : void {
+         super.update(param1);
+      }
+
+      override protected function setData(param1:Object) : void {
+         var _loc2_:String = null;
+         var _loc3_:* = false;
+         var _loc5_:SettingsControlProp = null;
+         var _loc6_:* = false;
+         var _loc7_:CheckBox = null;
+         var _loc8_:Slider = null;
+         var _loc9_:LabelControl = null;
+         var _loc10_:* = false;
+         this.vibroControlsList = [];
+         for (_loc2_ in _data)
+         {
+            _loc5_ = SettingsControlProp(_data[_loc2_]);
+            if(this[_loc2_ + _loc5_.type])
             {
-                loc4 = net.wg.gui.lobby.settings.vo.SettingsControlProp(_data[loc1]);
-                if (this[loc1 + loc4.type]) 
-                {
-                    loc5 = !(loc4.current == null || loc4.readOnly);
-                    var loc12:*=loc4.type;
-                    switch (loc12) 
-                    {
-                        case net.wg.gui.lobby.settings.SettingsConfig.TYPE_CHECKBOX:
-                        {
-                            (loc6 = net.wg.gui.components.controls.CheckBox(this[loc1 + loc4.type])).selected = loc4.current;
-                            loc6.enabled = loc5;
-                            loc6.addEventListener(flash.events.Event.SELECT, this.onCheckBoxSelected);
-                            break;
-                        }
-                        case net.wg.gui.lobby.settings.SettingsConfig.TYPE_SLIDER:
-                        {
-                            (loc7 = net.wg.gui.components.controls.Slider(this[loc1 + loc4.type])).value = loc4.current;
-                            loc7.enabled = loc5;
-                            loc7.addEventListener(scaleform.clik.events.SliderEvent.VALUE_CHANGE, this.onSliderValueChanged);
-                            if (loc4.hasValue && this[loc1 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_VALUE]) 
-                            {
-                                (loc8 = this[loc1 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_VALUE]).text = loc4.current;
-                            }
-                            break;
-                        }
-                    }
-                    if (loc4.isDependOn) 
-                    {
-                        if (loc4.isDependOn == net.wg.gui.lobby.settings.SettingsConfig.VIBRO_IS_CONNECTED) 
-                        {
-                            this.vibroContolsList.push(loc1);
-                        }
-                        loc9 = net.wg.gui.lobby.settings.vo.SettingsControlProp(_data[loc4.isDependOn]).current;
-                        this.showHideControl(loc1, loc4, loc9);
-                    }
-                    continue;
-                }
-                if (loc4.readOnly) 
-                {
-                    continue;
-                }
-                DebugUtils.LOG_WARNING("ERROR in" + this + " control " + (loc1 + loc4.type) + " can not find");
+               _loc6_ = !(_loc5_.current == null || (_loc5_.readOnly));
+               switch(_loc5_.type)
+               {
+                  case SettingsConfig.TYPE_CHECKBOX:
+                     _loc7_ = CheckBox(this[_loc2_ + _loc5_.type]);
+                     _loc7_.selected = _loc5_.current;
+                     _loc7_.enabled = _loc6_;
+                     _loc7_.addEventListener(Event.SELECT,this.onCheckBoxSelected);
+                     break;
+                  case SettingsConfig.TYPE_SLIDER:
+                     _loc8_ = Slider(this[_loc2_ + _loc5_.type]);
+                     _loc8_.value = _loc5_.current;
+                     _loc8_.enabled = _loc6_;
+                     _loc8_.addEventListener(SliderEvent.VALUE_CHANGE,this.onSliderValueChanged);
+                     if((_loc5_.hasValue) && (this[_loc2_ + SettingsConfig.TYPE_VALUE]))
+                     {
+                        _loc9_ = this[_loc2_ + SettingsConfig.TYPE_VALUE];
+                        _loc9_.text = _loc5_.current;
+                     }
+                     break;
+               }
+               if(_loc5_.isDependOn)
+               {
+                  if(_loc5_.isDependOn == SettingsConfig.VIBRO_IS_CONNECTED)
+                  {
+                     this.vibroControlsList.push(_loc2_);
+                  }
+                  _loc10_ = SettingsControlProp(_data[_loc5_.isDependOn]).current;
+                  this.showHideControl(_loc2_,_loc5_,_loc10_);
+               }
             }
-            loc2 = net.wg.gui.lobby.settings.vo.SettingsControlProp(_data.vibroIsConnected).current;
-            this.vibroDeviceConnectionStateField.text = loc2 ? SETTINGS.VIBRO_DEVICE_STATE_CONNECTED : SETTINGS.VIBRO_DEVICE_STATE_NOTCONNECTED;
-            this.vibroDeviceConnectionStateField.visible = loc2;
-            this.fieldSetVibro.visible = loc2;
-            var loc3:*=net.wg.gui.lobby.settings.vo.SettingsControlProp(net.wg.gui.lobby.settings.SettingsConfig.settingsData[net.wg.gui.lobby.settings.SettingsConfig.GRAPHIC_SETTINGS].POST_PROCESSING_QUALITY).current;
-            this.enablePostMortemEffectCheckbox.enabled = !(loc3 == 4);
-            return;
-        }
-
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.fieldSetChat.label = SETTINGS.GAME_FIELDSET_HEADERCHAT;
-            this.fieldSetInstructionPanel.label = SETTINGS.GAME_PLAYERPANELSETTINGS;
-            this.fieldSetBattleTypes.label = SETTINGS.GAME_FIELDSET_HEADERGAMEPLAY;
-            this.fieldSetVibro.label = SETTINGS.VIBRO_FIELDSET_HEADER;
-            this.enableOlFilterCheckbox.label = SETTINGS.CHAT_CENSORSHIPMESSAGES;
-            this.enableSpamFilterCheckbox.label = SETTINGS.CHAT_REMOVESPAM;
-            this.showDateMessageCheckbox.label = SETTINGS.CHAT_SHOWDATEMESSAGE;
-            this.showTimeMessageCheckbox.label = SETTINGS.CHAT_SHOWTIMEMESSAGE;
-            this.invitesFromFriendsOnlyCheckbox.label = SETTINGS.CHAT_INVITESFROMFRIENDSONLY;
-            this.enableStoreCwsCheckbox.label = SETTINGS.CHAT_ENABLESTORECHANNELSWINDOWS;
-            this.enableStoreMwsCheckbox.label = SETTINGS.CHAT_ENABLESTOREMANAGEMENTWINDOWS;
-            this.storeReceiverInBattleCheckbox.label = SETTINGS.CHAT_STORERECEIVERINBATTLE;
-            this.ppShowLevelsCheckbox.label = SETTINGS.GAME_PPSHOWLEVELS;
-            this.gameplay_ctfCheckbox.label = SETTINGS.GAMEPLAY_CTF;
-            this.gameplay_dominationCheckbox.label = SETTINGS.GAMEPLAY_DOMINATION;
-            this.gameplay_assaultCheckbox.label = SETTINGS.GAMEPLAY_ASSAULT;
-            this.vibroDeviceConnectionStateField.text = SETTINGS.VIBRO_DEVICE_STATE_NOTCONNECTED;
-            this.vibroGainLabel.text = SETTINGS.VIBRO_LABELS_GAIN;
-            this.vibroEngineLabel.text = SETTINGS.VIBRO_LABELS_ENGINE;
-            this.vibroAccelerationLabel.text = SETTINGS.VIBRO_LABELS_ACCELERATION;
-            this.vibroShotsLabel.text = SETTINGS.VIBRO_LABELS_SHOTS;
-            this.vibroHitsLabel.text = SETTINGS.VIBRO_LABELS_HITS;
-            this.vibroCollisionsLabel.text = SETTINGS.VIBRO_LABELS_COLLISIONS;
-            this.vibroDamageLabel.text = SETTINGS.VIBRO_LABELS_DAMAGE;
-            this.vibroGUILabel.text = SETTINGS.VIBRO_LABELS_GUI;
-            this.minimapAlphaSliderLabel.text = SETTINGS.MINIMAP_LABELS_ALPHA;
-            this.enablePostMortemEffectCheckbox.label = SETTINGS.GAME_ENABLEMORTALPOSTEFFECT;
-            this.dynamicCameraCheckbox.label = SETTINGS.GAME_DYNAMICCAMERA;
-            this.replayEnabledCheckbox.label = SETTINGS.GAME_REPLAYENABLED;
-            this.useServerAimCheckbox.label = SETTINGS.CURSOR_SERVERAIM;
-            this.showVehiclesCounterCheckbox.label = SETTINGS.GAME_SHOWVEHICLESCOUNTER;
-            super.configUI();
-            return;
-        }
-
-        public override function update(arg1:Object):void
-        {
-            super.update(arg1);
-            return;
-        }
-
-        internal function showHideControl(arg1:String, arg2:net.wg.gui.lobby.settings.vo.SettingsControlProp, arg3:Boolean):void
-        {
-            if (this[arg1 + arg2.type]) 
+            else
             {
-                this[arg1 + arg2.type].visible = arg3;
+               if(!_loc5_.readOnly)
+               {
+                  DebugUtils.LOG_WARNING("ERROR in" + this + " control " + (_loc2_ + _loc5_.type) + " can not find");
+               }
             }
-            if (arg2.hasLabel && this[arg1 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_LABEL]) 
-            {
-                this[arg1 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_LABEL].visible = arg3;
-            }
-            if (arg2.hasValue && this[arg1 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_VALUE]) 
-            {
-                this[arg1 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_VALUE].visible = arg3;
-            }
-            return;
-        }
+         }
+         _loc3_ = SettingsControlProp(_data.vibroIsConnected).current;
+         this.vibroDeviceConnectionStateField.text = _loc3_?SETTINGS.VIBRO_DEVICE_STATE_CONNECTED:SETTINGS.VIBRO_DEVICE_STATE_NOTCONNECTED;
+         this.vibroDeviceConnectionStateField.visible = _loc3_;
+         this.fieldSetVibro.visible = _loc3_;
+         if((this.horStabilizationSnpCheckbox) && (this.dynamicCameraCheckbox))
+         {
+            this.enableHorStabilizationSnp(this.dynamicCameraCheckbox.selected);
+         }
+         var _loc4_:int = SettingsControlProp(SettingsConfig.settingsData[SettingsConfig.GRAPHIC_SETTINGS].POST_PROCESSING_QUALITY).current;
+         this.enablePostMortemEffectCheckbox.enabled = !(_loc4_ == 4);
+      }
 
-        internal function onSliderValueChanged(arg1:scaleform.clik.events.SliderEvent):void
-        {
-            var loc4:*=null;
-            var loc1:*=net.wg.gui.components.controls.Slider(arg1.target);
-            var loc2:*=net.wg.gui.lobby.settings.SettingsConfig.getControlId(loc1.name, net.wg.gui.lobby.settings.SettingsConfig.TYPE_SLIDER);
-            var loc3:*;
-            if ((loc3 = net.wg.gui.lobby.settings.vo.SettingsControlProp(_data[loc2])).hasValue && this[loc2 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_VALUE]) 
+      private function showHideControl(param1:String, param2:SettingsControlProp, param3:Boolean) : void {
+         if(this[param1 + param2.type])
+         {
+            this[param1 + param2.type].visible = param3;
+         }
+         if((param2.hasLabel) && (this[param1 + SettingsConfig.TYPE_LABEL]))
+         {
+            this[param1 + SettingsConfig.TYPE_LABEL].visible = param3;
+         }
+         if((param2.hasValue) && (this[param1 + SettingsConfig.TYPE_VALUE]))
+         {
+            this[param1 + SettingsConfig.TYPE_VALUE].visible = param3;
+         }
+      }
+
+      private function onSliderValueChanged(param1:SliderEvent) : void {
+         var _loc5_:LabelControl = null;
+         var _loc2_:Slider = Slider(param1.target);
+         var _loc3_:String = SettingsConfig.getControlId(_loc2_.name,SettingsConfig.TYPE_SLIDER);
+         var _loc4_:SettingsControlProp = SettingsControlProp(_data[_loc3_]);
+         if((_loc4_.hasValue) && (this[_loc3_ + SettingsConfig.TYPE_VALUE]))
+         {
+            _loc5_ = LabelControl(this[_loc3_ + SettingsConfig.TYPE_VALUE]);
+            _loc5_.text = _loc2_.value.toString();
+         }
+         if(!this.missChangeEvent)
+         {
+            dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,_loc3_,_loc2_.value));
+         }
+      }
+
+      private function onCheckBoxSelected(param1:Event) : void {
+         var _loc2_:String = SettingsConfig.getControlId(CheckBox(param1.target).name,SettingsConfig.TYPE_CHECKBOX);
+         var _loc3_:Boolean = CheckBox(param1.target).selected;
+         if(_loc2_ == SettingsConfig.DYNAMIC_CAMERA)
+         {
+            this.enableHorStabilizationSnp(_loc3_);
+         }
+         if(!this.missChangeEvent)
+         {
+            dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,_loc2_,_loc3_));
+         }
+      }
+
+      private function enableHorStabilizationSnp(param1:Boolean) : void {
+         var _loc2_:String = null;
+         var _loc3_:SettingsControlProp = null;
+         if(SettingsControlProp(SettingsConfig.settingsData[SettingsConfig.GAME_SETTINGS][SettingsConfig.HOR_STABILIZATION_SNP]).current != null)
+         {
+            _loc2_ = SettingsConfig.HOR_STABILIZATION_SNP;
+            _loc3_ = SettingsControlProp(SettingsConfig.settingsData[SettingsConfig.GAME_SETTINGS][_loc2_]);
+            this.missChangeEvent = true;
+            if(param1)
             {
-                (loc4 = net.wg.gui.components.controls.LabelControl(this[loc2 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_VALUE])).text = loc1.value.toString();
+               this.horStabilizationSnpCheckbox.selected = _loc3_.lastVal;
             }
-            dispatchEvent(new net.wg.gui.lobby.settings.evnts.SettingViewEvent(net.wg.gui.lobby.settings.evnts.SettingViewEvent.ON_CONTROL_CHANGED, _viewId, loc2, loc1.value));
-            return;
-        }
-
-        internal function onCheckBoxSelected(arg1:flash.events.Event):void
-        {
-            var loc1:*=net.wg.gui.lobby.settings.SettingsConfig.getControlId(net.wg.gui.components.controls.CheckBox(arg1.target).name, net.wg.gui.lobby.settings.SettingsConfig.TYPE_CHECKBOX);
-            dispatchEvent(new net.wg.gui.lobby.settings.evnts.SettingViewEvent(net.wg.gui.lobby.settings.evnts.SettingViewEvent.ON_CONTROL_CHANGED, _viewId, loc1, net.wg.gui.components.controls.CheckBox(arg1.target).selected));
-            return;
-        }
-
-        public function onVibroManagerConnect():void
-        {
-            var loc2:*=0;
-            var loc3:*=0;
-            var loc4:*=null;
-            var loc5:*=null;
-            var loc1:*=net.wg.gui.lobby.settings.vo.SettingsControlProp(net.wg.gui.lobby.settings.SettingsConfig.settingsData[net.wg.gui.lobby.settings.SettingsConfig.GAME_SETTINGS].vibroIsConnected).current;
-            if (this.vibroContolsList) 
+            else
             {
-                loc2 = this.vibroContolsList.length;
-                loc3 = 0;
-                while (loc3 < loc2) 
-                {
-                    loc4 = this.vibroContolsList[loc3];
-                    loc5 = net.wg.gui.lobby.settings.vo.SettingsControlProp(_data[loc4]);
-                    this.showHideControl(loc4, loc5, loc1);
-                    ++loc3;
-                }
+               _loc3_.lastVal = this.horStabilizationSnpCheckbox.selected;
+               this.horStabilizationSnpCheckbox.selected = false;
             }
-            this.vibroDeviceConnectionStateField.text = loc1 ? SETTINGS.VIBRO_DEVICE_STATE_CONNECTED : SETTINGS.VIBRO_DEVICE_STATE_NOTCONNECTED;
-            this.vibroDeviceConnectionStateField.visible = loc1;
-            this.fieldSetVibro.visible = loc1;
-            return;
-        }
+            this.missChangeEvent = false;
+            this.horStabilizationSnpCheckbox.enabled = param1;
+         }
+      }
 
-        public override function dispose():void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            var loc3:*=null;
-            var loc4:*=null;
-            if (_data) 
+      public function onVibroManagerConnect() : void {
+         var _loc2_:uint = 0;
+         var _loc3_:uint = 0;
+         var _loc4_:String = null;
+         var _loc5_:SettingsControlProp = null;
+         var _loc1_:Boolean = SettingsControlProp(SettingsConfig.settingsData[SettingsConfig.GAME_SETTINGS].vibroIsConnected).current;
+         if(this.vibroControlsList)
+         {
+            _loc2_ = this.vibroControlsList.length;
+            _loc3_ = 0;
+            while(_loc3_ < _loc2_)
             {
-                var loc5:*=0;
-                var loc6:*=_data;
-                label236: for (loc1 in loc6) 
-                {
-                    if (!this[loc1 + _data[loc1].type]) 
-                    {
+               _loc4_ = this.vibroControlsList[_loc3_];
+               _loc5_ = SettingsControlProp(_data[_loc4_]);
+               this.showHideControl(_loc4_,_loc5_,_loc1_);
+               _loc3_++;
+            }
+         }
+         this.vibroDeviceConnectionStateField.text = _loc1_?SETTINGS.VIBRO_DEVICE_STATE_CONNECTED:SETTINGS.VIBRO_DEVICE_STATE_NOTCONNECTED;
+         this.vibroDeviceConnectionStateField.visible = _loc1_;
+         this.fieldSetVibro.visible = _loc1_;
+      }
+
+      override public function dispose() : void {
+         var _loc1_:String = null;
+         var _loc2_:SettingsControlProp = null;
+         var _loc3_:CheckBox = null;
+         var _loc4_:Slider = null;
+         if(_data)
+         {
+            for (_loc1_ in _data)
+            {
+               if(this[_loc1_ + _data[_loc1_].type])
+               {
+                  _loc2_ = _data[_loc1_];
+                  switch(_loc2_.type)
+                  {
+                     case SettingsConfig.TYPE_CHECKBOX:
+                        _loc3_ = this[_loc1_ + _loc2_.type];
+                        _loc3_.removeEventListener(Event.SELECT,this.onCheckBoxSelected);
                         continue;
-                    }
-                    loc2 = _data[loc1];
-                    var loc7:*=loc2.type;
-                    switch (loc7) 
-                    {
-                        case net.wg.gui.lobby.settings.SettingsConfig.TYPE_CHECKBOX:
-                        {
-                            loc3 = this[loc1 + loc2.type];
-                            loc3.removeEventListener(flash.events.Event.SELECT, this.onCheckBoxSelected);
-                            continue label236;
-                        }
-                        case net.wg.gui.lobby.settings.SettingsConfig.TYPE_SLIDER:
-                        {
-                            (loc4 = this[loc1 + loc2.type]).removeEventListener(scaleform.clik.events.SliderEvent.VALUE_CHANGE, this.onSliderValueChanged);
-                            continue label236;
-                        }
-                    }
-                }
+                     case SettingsConfig.TYPE_SLIDER:
+                        _loc4_ = this[_loc1_ + _loc2_.type];
+                        _loc4_.removeEventListener(SliderEvent.VALUE_CHANGE,this.onSliderValueChanged);
+                        continue;
+                     default:
+                        continue;
+                  }
+               }
+               else
+               {
+                  continue;
+               }
             }
-            super.dispose();
-            return;
-        }
+         }
+         while((this.vibroControlsList) && this.vibroControlsList.length > 0)
+         {
+            this.vibroControlsList.pop();
+         }
+         super.dispose();
+      }
 
-        protected override function draw():void
-        {
-            return;
-        }
+      override protected function draw() : void {
+          
+      }
 
-        public var enableStoreCwsCheckbox:net.wg.gui.components.controls.CheckBox=null;
+      override public function toString() : String {
+         return "[WG GameSettings " + name + "]";
+      }
+   }
 
-        public var enableStoreMwsCheckbox:net.wg.gui.components.controls.CheckBox=null;
-
-        public var storeReceiverInBattleCheckbox:net.wg.gui.components.controls.CheckBox=null;
-
-        public var ppShowLevelsCheckbox:net.wg.gui.components.controls.CheckBox=null;
-
-        public var gameplay_ctfCheckbox:net.wg.gui.components.controls.CheckBox=null;
-
-        public var gameplay_dominationCheckbox:net.wg.gui.components.controls.CheckBox=null;
-
-        public var gameplay_assaultCheckbox:net.wg.gui.components.controls.CheckBox=null;
-
-        public var vibroDeviceConnectionStateField:flash.text.TextField=null;
-
-        public var vibroGainLabel:flash.text.TextField=null;
-
-        public var vibroGainSlider:net.wg.gui.components.controls.Slider=null;
-
-        public var vibroGainValue:net.wg.gui.components.controls.LabelControl=null;
-
-        public var vibroEngineLabel:flash.text.TextField=null;
-
-        public var vibroEngineSlider:net.wg.gui.components.controls.Slider=null;
-
-        public var vibroEngineValue:net.wg.gui.components.controls.LabelControl=null;
-
-        public var vibroAccelerationLabel:flash.text.TextField=null;
-
-        public var vibroAccelerationSlider:net.wg.gui.components.controls.Slider=null;
-
-        public var vibroAccelerationValue:net.wg.gui.components.controls.LabelControl=null;
-
-        public var vibroShotsLabel:flash.text.TextField=null;
-
-        public var vibroShotsSlider:net.wg.gui.components.controls.Slider=null;
-
-        public var enableSpamFilterCheckbox:net.wg.gui.components.controls.CheckBox=null;
-
-        public var vibroHitsLabel:flash.text.TextField=null;
-
-        public var vibroHitsSlider:net.wg.gui.components.controls.Slider=null;
-
-        public var vibroHitsValue:net.wg.gui.components.controls.LabelControl=null;
-
-        public var vibroCollisionsLabel:flash.text.TextField=null;
-
-        public var vibroCollisionsSlider:net.wg.gui.components.controls.Slider=null;
-
-        public var vibroCollisionsValue:net.wg.gui.components.controls.LabelControl=null;
-
-        public var vibroDamageLabel:flash.text.TextField=null;
-
-        public var vibroDamageSlider:net.wg.gui.components.controls.Slider=null;
-
-        public var vibroDamageValue:net.wg.gui.components.controls.LabelControl=null;
-
-        public var vibroGUILabel:flash.text.TextField=null;
-
-        public var vibroGUISlider:net.wg.gui.components.controls.Slider=null;
-
-        public var vibroGUIValue:net.wg.gui.components.controls.LabelControl=null;
-
-        public var minimapAlphaSliderLabel:flash.text.TextField=null;
-
-        public var minimapAlphaSlider:net.wg.gui.components.controls.Slider=null;
-
-        public var enablePostMortemEffectCheckbox:net.wg.gui.components.controls.CheckBox=null;
-
-        public var bgFrom:flash.display.Sprite=null;
-
-        public var replayEnabledCheckbox:net.wg.gui.components.controls.CheckBox=null;
-
-        public var useServerAimCheckbox:net.wg.gui.components.controls.CheckBox=null;
-
-        public var showVehiclesCounterCheckbox:net.wg.gui.components.controls.CheckBox=null;
-
-        internal var vibroContolsList:Array=null;
-
-        public var fieldSetChat:net.wg.gui.components.advanced.FieldSet=null;
-
-        public var fieldSetInstructionPanel:net.wg.gui.components.advanced.FieldSet=null;
-
-        public var vibroShotsValue:net.wg.gui.components.controls.LabelControl=null;
-
-        public var fieldSetBattleTypes:net.wg.gui.components.advanced.FieldSet=null;
-
-        public var fieldSetVibro:net.wg.gui.components.advanced.FieldSet=null;
-
-        public var enableOlFilterCheckbox:net.wg.gui.components.controls.CheckBox=null;
-
-        public var showDateMessageCheckbox:net.wg.gui.components.controls.CheckBox=null;
-
-        public var showTimeMessageCheckbox:net.wg.gui.components.controls.CheckBox=null;
-
-        public var invitesFromFriendsOnlyCheckbox:net.wg.gui.components.controls.CheckBox=null;
-
-        public var dynamicCameraCheckbox:net.wg.gui.components.controls.CheckBox=null;
-    }
 }

@@ -1,34 +1,40 @@
-package net.wg.utils 
+package net.wg.utils
 {
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    
-    public interface IUtils extends net.wg.infrastructure.base.meta.IUtilsManagerMeta, net.wg.infrastructure.interfaces.entity.IDisposable
-    {
-        function get asserter():net.wg.utils.IAssertable;
+   import net.wg.infrastructure.base.meta.IUtilsManagerMeta;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import net.wg.infrastructure.interfaces.entity.ISerializable;
 
-        function get scheduler():net.wg.utils.IScheduler;
 
-        function get locale():net.wg.utils.ILocale;
+   public interface IUtils extends IUtilsManagerMeta, IDisposable
+   {
+          
+      function get asserter() : IAssertable;
 
-        function get JSON():net.wg.infrastructure.interfaces.entity.ISerializable;
+      function get scheduler() : IScheduler;
 
-        function get helpLayout():net.wg.utils.IHelpLayout;
+      function get locale() : ILocale;
 
-        function get classFactory():net.wg.utils.IClassFactory;
+      function get JSON() : ISerializable;
 
-        function get popupMgr():net.wg.utils.IPopUpManager;
+      function get helpLayout() : IHelpLayout;
 
-        function get commons():net.wg.utils.ICommons;
+      function get classFactory() : IClassFactory;
 
-        function get nations():net.wg.utils.INations;
+      function get popupMgr() : IPopUpManager;
 
-        function get focusHandler():net.wg.utils.IFocusHandler;
+      function get commons() : ICommons;
 
-        function get events():net.wg.utils.IEventCollector;
+      function get nations() : INations;
 
-        function get IME():net.wg.utils.IIME;
+      function get focusHandler() : IFocusHandler;
 
-        function setNations(arg1:net.wg.utils.INations):void;
-    }
+      function get events() : IEventCollector;
+
+      function get IME() : IIME;
+
+      function setNations(param1:INations) : void;
+
+      function get voMgr() : IVOManager;
+   }
+
 }

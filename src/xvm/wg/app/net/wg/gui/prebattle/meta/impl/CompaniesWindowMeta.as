@@ -1,75 +1,64 @@
-package net.wg.gui.prebattle.meta.impl 
+package net.wg.gui.prebattle.meta.impl
 {
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.base.*;
-    
-    public class CompaniesWindowMeta extends net.wg.infrastructure.base.AbstractWindowView
-    {
-        public function CompaniesWindowMeta()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.AbstractWindowView;
+   import net.wg.data.constants.Errors;
 
-        public function createCompanyS():void
-        {
-            App.utils.asserter.assertNotNull(this.createCompany, "createCompany" + net.wg.data.constants.Errors.CANT_NULL);
-            this.createCompany();
-            return;
-        }
 
-        public function joinCompanyS(arg1:uint):void
-        {
-            App.utils.asserter.assertNotNull(this.joinCompany, "joinCompany" + net.wg.data.constants.Errors.CANT_NULL);
-            this.joinCompany(arg1);
-            return;
-        }
+   public class CompaniesWindowMeta extends AbstractWindowView
+   {
+          
+      public function CompaniesWindowMeta() {
+         super();
+      }
 
-        public function getDivisionsListS():Array
-        {
-            App.utils.asserter.assertNotNull(this.getDivisionsList, "getDivisionsList" + net.wg.data.constants.Errors.CANT_NULL);
-            return this.getDivisionsList();
-        }
+      public var createCompany:Function = null;
 
-        public function refreshCompaniesListS(arg1:String, arg2:Boolean, arg3:uint):void
-        {
-            App.utils.asserter.assertNotNull(this.refreshCompaniesList, "refreshCompaniesList" + net.wg.data.constants.Errors.CANT_NULL);
-            this.refreshCompaniesList(arg1, arg2, arg3);
-            return;
-        }
+      public var joinCompany:Function = null;
 
-        public function requestPlayersListS(arg1:uint):void
-        {
-            App.utils.asserter.assertNotNull(this.requestPlayersList, "requestPlayersList" + net.wg.data.constants.Errors.CANT_NULL);
-            this.requestPlayersList(arg1);
-            return;
-        }
+      public var getDivisionsList:Function = null;
 
-        public function showFAQWindowS():void
-        {
-            App.utils.asserter.assertNotNull(this.showFAQWindow, "showFAQWindow" + net.wg.data.constants.Errors.CANT_NULL);
-            this.showFAQWindow();
-            return;
-        }
+      public var refreshCompaniesList:Function = null;
 
-        public function getClientIDS():Number
-        {
-            App.utils.asserter.assertNotNull(this.getClientID, "getClientID" + net.wg.data.constants.Errors.CANT_NULL);
-            return this.getClientID();
-        }
+      public var requestPlayersList:Function = null;
 
-        public var createCompany:Function=null;
+      public var showFAQWindow:Function = null;
 
-        public var joinCompany:Function=null;
+      public var getClientID:Function = null;
 
-        public var getDivisionsList:Function=null;
+      public function createCompanyS() : void {
+         App.utils.asserter.assertNotNull(this.createCompany,"createCompany" + Errors.CANT_NULL);
+         this.createCompany();
+      }
 
-        public var refreshCompaniesList:Function=null;
+      public function joinCompanyS(param1:uint) : void {
+         App.utils.asserter.assertNotNull(this.joinCompany,"joinCompany" + Errors.CANT_NULL);
+         this.joinCompany(param1);
+      }
 
-        public var requestPlayersList:Function=null;
+      public function getDivisionsListS() : Array {
+         App.utils.asserter.assertNotNull(this.getDivisionsList,"getDivisionsList" + Errors.CANT_NULL);
+         return this.getDivisionsList();
+      }
 
-        public var showFAQWindow:Function=null;
+      public function refreshCompaniesListS(param1:String, param2:Boolean, param3:uint) : void {
+         App.utils.asserter.assertNotNull(this.refreshCompaniesList,"refreshCompaniesList" + Errors.CANT_NULL);
+         this.refreshCompaniesList(param1,param2,param3);
+      }
 
-        public var getClientID:Function=null;
-    }
+      public function requestPlayersListS(param1:uint) : void {
+         App.utils.asserter.assertNotNull(this.requestPlayersList,"requestPlayersList" + Errors.CANT_NULL);
+         this.requestPlayersList(param1);
+      }
+
+      public function showFAQWindowS() : void {
+         App.utils.asserter.assertNotNull(this.showFAQWindow,"showFAQWindow" + Errors.CANT_NULL);
+         this.showFAQWindow();
+      }
+
+      public function getClientIDS() : Number {
+         App.utils.asserter.assertNotNull(this.getClientID,"getClientID" + Errors.CANT_NULL);
+         return this.getClientID();
+      }
+   }
+
 }

@@ -1,49 +1,51 @@
-package net.wg.infrastructure.managers.utils.impl 
+package net.wg.infrastructure.managers.utils.impl
 {
-    import net.wg.utils.*;
-    
-    public class Nations extends Object implements net.wg.utils.INations
-    {
-        public function Nations(arg1:net.wg.utils.IUtils)
-        {
-            super();
-            this._utilsProxy = arg1;
-            return;
-        }
+   import net.wg.utils.INations;
+   import net.wg.utils.IUtils;
 
-        public function getNationName(arg1:uint):String
-        {
-            return this._utilsProxy.getNationNamesS()[arg1];
-        }
 
-        public function getNationID(arg1:String):uint
-        {
-            return this._utilsProxy.getNationIndicesS()[arg1];
-        }
+   public class Nations extends Object implements INations
+   {
+          
+      public function Nations(param1:IUtils) {
+         super();
+         this._utilsProxy = param1;
+      }
 
-        public function getNations():Array
-        {
-            return this._utilsProxy.getGUINationsS();
-        }
+      protected var _utilsProxy:IUtils = null;
 
-        public function getNationsData():Array
-        {
-            var loc1:*=[];
-            var loc2:*=this.getNations();
-            var loc3:*=0;
-            while (loc3 < loc2.length) 
-            {
-                loc1.push({"label":MENU.nations(loc2[loc3]), "data":this.getNationID(loc2[loc3])});
-                ++loc3;
-            }
-            return loc1;
-        }
+      public function getNationName(param1:uint) : String {
+         return this._utilsProxy.getNationNamesS()[param1];
+      }
 
-        public function getNationIcon(arg1:int):String
-        {
-            return "../maps/icons/filters/nations/" + this.getNationName(arg1) + ".png";
-        }
+      public function getNationID(param1:String) : uint {
+         return this._utilsProxy.getNationIndicesS()[param1];
+      }
 
-        protected var _utilsProxy:net.wg.utils.IUtils=null;
-    }
+      public function getNations() : Array {
+         return this._utilsProxy.getGUINationsS();
+      }
+
+      public function getNationsData() : Array {
+         var _loc1_:Array = [];
+         var _loc2_:Array = this.getNations();
+         var _loc3_:Number = 0;
+         while(_loc3_ < _loc2_.length)
+         {
+            _loc1_.push(
+               {
+                  "label":MENU.nations(_loc2_[_loc3_]),
+                  "data":this.getNationID(_loc2_[_loc3_])
+               }
+            );
+            _loc3_++;
+         }
+         return _loc1_;
+      }
+
+      public function getNationIcon(param1:int) : String {
+         return "../maps/icons/filters/nations/" + this.getNationName(param1) + ".png";
+      }
+   }
+
 }

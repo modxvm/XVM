@@ -1,41 +1,36 @@
-package net.wg.infrastructure.base.meta.impl 
+package net.wg.infrastructure.base.meta.impl
 {
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.base.*;
-    
-    public class EULAMeta extends net.wg.infrastructure.base.AbstractWindowView
-    {
-        public function EULAMeta()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.AbstractWindowView;
+   import net.wg.data.constants.Errors;
 
-        public function requestEULATextS():void
-        {
-            App.utils.asserter.assertNotNull(this.requestEULAText, "requestEULAText" + net.wg.data.constants.Errors.CANT_NULL);
-            this.requestEULAText();
-            return;
-        }
 
-        public function onLinkClickS(arg1:String):void
-        {
-            App.utils.asserter.assertNotNull(this.onLinkClick, "onLinkClick" + net.wg.data.constants.Errors.CANT_NULL);
-            this.onLinkClick(arg1);
-            return;
-        }
+   public class EULAMeta extends AbstractWindowView
+   {
+          
+      public function EULAMeta() {
+         super();
+      }
 
-        public function onApplyS():void
-        {
-            App.utils.asserter.assertNotNull(this.onApply, "onApply" + net.wg.data.constants.Errors.CANT_NULL);
-            this.onApply();
-            return;
-        }
+      public var requestEULAText:Function = null;
 
-        public var requestEULAText:Function=null;
+      public var onLinkClick:Function = null;
 
-        public var onLinkClick:Function=null;
+      public var onApply:Function = null;
 
-        public var onApply:Function=null;
-    }
+      public function requestEULATextS() : void {
+         App.utils.asserter.assertNotNull(this.requestEULAText,"requestEULAText" + Errors.CANT_NULL);
+         this.requestEULAText();
+      }
+
+      public function onLinkClickS(param1:String) : void {
+         App.utils.asserter.assertNotNull(this.onLinkClick,"onLinkClick" + Errors.CANT_NULL);
+         this.onLinkClick(param1);
+      }
+
+      public function onApplyS() : void {
+         App.utils.asserter.assertNotNull(this.onApply,"onApply" + Errors.CANT_NULL);
+         this.onApply();
+      }
+   }
+
 }

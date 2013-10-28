@@ -1,22 +1,22 @@
-package net.wg.gui.lobby.techtree.helpers 
+package net.wg.gui.lobby.techtree.helpers
 {
-    import __AS3__.vec.*;
-    import net.wg.gui.lobby.techtree.interfaces.*;
-    
-    public class NodeIndexFilter extends Object
-    {
-        public function NodeIndexFilter(arg1:Array)
-        {
-            super();
-            this.indexes = arg1;
-            return;
-        }
+   import net.wg.gui.lobby.techtree.interfaces.IRenderer;
+   import __AS3__.vec.Vector;
 
-        public function doFilter(arg1:net.wg.gui.lobby.techtree.interfaces.IRenderer, arg2:int, arg3:__AS3__.vec.Vector.<net.wg.gui.lobby.techtree.interfaces.IRenderer>):Boolean
-        {
-            return !(arg1 == null) && this.indexes.indexOf(arg2) > -1;
-        }
 
-        internal var indexes:Array;
-    }
+   public class NodeIndexFilter extends Object
+   {
+          
+      public function NodeIndexFilter(param1:Array) {
+         super();
+         this.indexes = param1;
+      }
+
+      private var indexes:Array;
+
+      public function doFilter(param1:IRenderer, param2:int, param3:Vector.<IRenderer>) : Boolean {
+         return !(param1 == null) && this.indexes.indexOf(param2) > -1;
+      }
+   }
+
 }

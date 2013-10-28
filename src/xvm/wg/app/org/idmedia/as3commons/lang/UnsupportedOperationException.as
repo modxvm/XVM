@@ -1,11 +1,13 @@
-package org.idmedia.as3commons.lang 
+package org.idmedia.as3commons.lang
 {
-    public class UnsupportedOperationException extends org.idmedia.as3commons.lang.Exception
-    {
-        public function UnsupportedOperationException(arg1:String="")
-        {
-            super(arg1);
-            return;
-        }
-    }
+
+
+   public class UnsupportedOperationException extends Exception
+   {
+          
+      public function UnsupportedOperationException(param1:String=undefined) {
+         super(param1);
+      }
+   }
+
 }

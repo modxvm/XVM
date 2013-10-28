@@ -1,110 +1,98 @@
-package net.wg.gui.lobby.eliteWindow 
+package net.wg.gui.lobby.eliteWindow
 {
-    import flash.text.*;
-    import net.wg.data.constants.*;
-    import net.wg.data.gui_items.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import scaleform.clik.events.*;
-    import scaleform.clik.utils.*;
-    
-    public class EliteWindow extends net.wg.infrastructure.base.meta.impl.EliteWindowMeta implements net.wg.infrastructure.base.meta.IEliteWindowMeta
-    {
-        public function EliteWindow()
-        {
-            super();
-            isCentered = true;
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.EliteWindowMeta;
+   import net.wg.infrastructure.base.meta.IEliteWindowMeta;
+   import net.wg.gui.components.controls.UILoaderAlt;
+   import flash.text.TextField;
+   import net.wg.gui.components.controls.SoundButtonEx;
+   import scaleform.clik.events.ButtonEvent;
+   import scaleform.clik.utils.Constraints;
+   import net.wg.data.constants.SoundTypes;
+   import net.wg.data.gui_items.Vehicle;
 
-        protected override function onPopulate():void
-        {
-            super.onPopulate();
-            window.useBottomBtns = true;
-            window.title = DIALOGS.ELITE_TITLE;
-            return;
-        }
 
-        protected override function onDispose():void
-        {
-            this.icon.dispose();
-            this.closeBtn.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onClose);
-            this.closeBtn.dispose();
-            this.closeBtn = null;
-            if (constraints) 
+   public class EliteWindow extends EliteWindowMeta implements IEliteWindowMeta
+   {
+          
+      public function EliteWindow() {
+         super();
+         isCentered = true;
+      }
+
+      public var icon:UILoaderAlt;
+
+      public var titleTF:TextField;
+
+      public var infoTF:TextField;
+
+      public var closeBtn:SoundButtonEx;
+
+      private var vName:String = "";
+
+      private var vType:String = "";
+
+      private const INVALIDATE_TANK_DATA:String = "invTankData";
+
+      override protected function onPopulate() : void {
+         super.onPopulate();
+         window.useBottomBtns = true;
+         window.title = DIALOGS.ELITE_TITLE;
+      }
+
+      override protected function onDispose() : void {
+         this.icon.dispose();
+         this.closeBtn.removeEventListener(ButtonEvent.CLICK,this.onClose);
+         this.closeBtn.dispose();
+         this.closeBtn = null;
+         if(constraints)
+         {
+            constraints.removeAllElements();
+            constraints = null;
+         }
+         super.onDispose();
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         constraints = new Constraints(this);
+         this.infoTF.text = DIALOGS.ELITE_MESSAGE;
+         this.closeBtn.label = DIALOGS.ELITE_CANCEL;
+         this.closeBtn.soundType = SoundTypes.CANCEL_BTN;
+         this.closeBtn.addEventListener(ButtonEvent.CLICK,this.onClose);
+         constraints.addElement("closeBtn",this.closeBtn,Constraints.CENTER_H);
+      }
+
+      public function as_setVehTypeCompDescr(param1:int) : void {
+         var _loc2_:Vehicle = new Vehicle(param1);
+         this.vName = _loc2_.userName;
+         this.vType = _loc2_.type;
+         this.closeBtn.soundType = SoundTypes.CANCEL_BTN;
+         invalidate(this.INVALIDATE_TANK_DATA);
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         if(isInvalid(this.INVALIDATE_TANK_DATA))
+         {
+            if((this.vType) && this.vType.length > 0)
             {
-                constraints.removeAllElements();
-                constraints = null;
+               this.icon.source = "../maps/icons/elitewindow/" + this.vType + ".png";
             }
-            super.onDispose();
-            return;
-        }
-
-        protected override function configUI():void
-        {
-            super.configUI();
-            constraints = new scaleform.clik.utils.Constraints(this);
-            this.infoTF.text = DIALOGS.ELITE_MESSAGE;
-            this.closeBtn.label = DIALOGS.ELITE_CANCEL;
-            this.closeBtn.soundType = net.wg.data.constants.SoundTypes.CANCEL_BTN;
-            this.closeBtn.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onClose);
-            constraints.addElement("closeBtn", this.closeBtn, scaleform.clik.utils.Constraints.CENTER_H);
-            return;
-        }
-
-        public function as_setVehTypeCompDescr(arg1:int):void
-        {
-            var loc1:*=new net.wg.data.gui_items.Vehicle(arg1);
-            this.vName = loc1.userName;
-            this.vType = loc1.type;
-            this.closeBtn.soundType = net.wg.data.constants.SoundTypes.CANCEL_BTN;
-            invalidate(this.INVALIDATE_TANK_DATA);
-            return;
-        }
-
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(this.INVALIDATE_TANK_DATA)) 
+            if((this.vName) && this.vName.length > 0)
             {
-                if (this.vType && this.vType.length > 0) 
-                {
-                    this.icon.source = "../maps/icons/elitewindow/" + this.vType + ".png";
-                }
-                if (this.vName && this.vName.length > 0) 
-                {
-                    this.titleTF.text = App.utils.locale.makeString(DIALOGS.ELITE_HEADER, {"name":this.vName});
-                }
+               this.titleTF.text = App.utils.locale.makeString(DIALOGS.ELITE_HEADER,{"name":this.vName});
             }
-            return;
-        }
+         }
+      }
 
-        public override function setFocus():void
-        {
-            super.setFocus();
-            App.utils.focusHandler.setFocus(this.closeBtn);
-            return;
-        }
+      override public function setFocus() : void {
+         super.setFocus();
+         App.utils.focusHandler.setFocus(this.closeBtn);
+      }
 
-        internal function onClose(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            onWindowCloseS();
-            return;
-        }
+      private function onClose(param1:ButtonEvent) : void {
+         onWindowCloseS();
+      }
+   }
 
-        internal const INVALIDATE_TANK_DATA:String="invTankData";
-
-        public var icon:net.wg.gui.components.controls.UILoaderAlt;
-
-        public var titleTF:flash.text.TextField;
-
-        public var infoTF:flash.text.TextField;
-
-        public var closeBtn:net.wg.gui.components.controls.SoundButtonEx;
-
-        internal var vName:String="";
-
-        internal var vType:String="";
-    }
 }

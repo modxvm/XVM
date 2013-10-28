@@ -1,44 +1,39 @@
-package net.wg.gui.lobby.window 
+package net.wg.gui.lobby.window
 {
-    import flash.text.*;
-    import scaleform.clik.core.*;
-    
-    public class ExchangeXPWarningScreen extends scaleform.clik.core.UIComponent
-    {
-        public function ExchangeXPWarningScreen()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.text.TextField;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.textField.multiline = true;
-            return;
-        }
 
-        public function set text(arg1:String):void
-        {
-            this._text = arg1;
-            invalidate(TEXT_INVALID);
-            return;
-        }
+   public class ExchangeXPWarningScreen extends UIComponent
+   {
+          
+      public function ExchangeXPWarningScreen() {
+         super();
+      }
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(TEXT_INVALID)) 
-            {
-                this.textField.text = this._text;
-            }
-            return;
-        }
+      public static const TEXT_INVALID:String = "textInvalid";
 
-        public static const TEXT_INVALID:String="textInvalid";
+      public var textField:TextField;
 
-        public var textField:flash.text.TextField;
+      private var _text:String = "";
 
-        internal var _text:String="";
-    }
+      override protected function configUI() : void {
+         super.configUI();
+         this.textField.multiline = true;
+      }
+
+      public function set text(param1:String) : void {
+         this._text = param1;
+         invalidate(TEXT_INVALID);
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         if(isInvalid(TEXT_INVALID))
+         {
+            this.textField.text = this._text;
+         }
+      }
+   }
+
 }

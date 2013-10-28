@@ -1,15 +1,18 @@
-package net.wg.gui.messenger.meta 
+package net.wg.gui.messenger.meta
 {
-    import flash.events.*;
-    
-    public interface IBaseChannelWindowMeta extends flash.events.IEventDispatcher
-    {
-        function showFAQWindowS():void;
+   import flash.events.IEventDispatcher;
 
-        function getClientIDS():Number;
 
-        function as_setTitle(arg1:String):void;
+   public interface IBaseChannelWindowMeta extends IEventDispatcher
+   {
+          
+      function showFAQWindowS() : void;
 
-        function as_setCloseEnabled(arg1:Boolean):void;
-    }
+      function getClientIDS() : Number;
+
+      function as_setTitle(param1:String) : void;
+
+      function as_setCloseEnabled(param1:Boolean) : void;
+   }
+
 }

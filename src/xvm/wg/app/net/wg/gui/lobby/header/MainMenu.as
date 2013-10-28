@@ -1,81 +1,129 @@
-package net.wg.gui.lobby.header 
+package net.wg.gui.lobby.header
 {
-    import net.wg.gui.events.*;
-    import scaleform.clik.core.*;
-    import scaleform.clik.data.*;
-    import scaleform.clik.events.*;
-    
-    public class MainMenu extends scaleform.clik.core.UIComponent
-    {
-        public function MainMenu()
-        {
-            this.buttonsArr = new scaleform.clik.data.DataProvider([{"label":MENU.HEADERBUTTONS_HANGAR, "value":"hangar", "textColor":16563563, "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_HANGAR}, {"label":MENU.HEADERBUTTONS_INVENTORY, "value":"inventory", "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_INVENTORY, "helpText":LOBBY_HELP.HEADER_MENU_INVENTORY, "helpDirection":"B", "helpConnectorLength":12}, {"label":MENU.HEADERBUTTONS_SHOP, "value":"shop", "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_SHOP, "helpText":LOBBY_HELP.HEADER_MENU_SHOP, "helpDirection":"B", "helpConnectorLength":62}, {"label":MENU.HEADERBUTTONS_PROFILE, "value":"profile", "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_PROFILE, "helpText":LOBBY_HELP.HEADER_MENU_PROFILE, "helpDirection":"B", "helpConnectorLength":12}, {"label":MENU.HEADERBUTTONS_TECHTREE, "value":"techtree", "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_TECHTREE, "helpText":LOBBY_HELP.HEADER_MENU_TECHTREE, "helpDirection":"B", "helpConnectorLength":12}, {"label":MENU.HEADERBUTTONS_BARRACKS, "value":"barracks", "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_BARRACKS}]);
-            super();
-            this.originalWidth = this.width;
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import scaleform.clik.data.DataProvider;
+   import scaleform.clik.events.IndexEvent;
+   import scaleform.clik.events.ButtonEvent;
+   import net.wg.gui.events.HeaderEvent;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.bar.selectedIndex = -1;
-            if (App.globalVarsMgr.isChinaS()) 
+
+   public class MainMenu extends UIComponent
+   {
+          
+      public function MainMenu() {
+         this.buttonsArr = new DataProvider([
             {
-                this.buttonsArr.push({"label":MENU.HEADERBUTTONS_BROWSER, "value":"browser", "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_BROWSER});
+               "label":MENU.HEADERBUTTONS_HANGAR,
+               "value":"hangar",
+               "textColor":16563563,
+               "textColorOver":16765319,
+               "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_HANGAR
             }
-            this.bar.validateNow();
-            this.bar.dataProvider = this.buttonsArr;
-            this.bar.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.buttonClickHandler, false, 0, true);
-            App.utils.focusHandler.setFocus(this.bar);
-            return;
-        }
-
-        protected override function draw():void
-        {
-            super.draw();
-            return;
-        }
-
-        public function setCurrent(arg1:String):void
-        {
-            this.current = arg1;
-            this.bar.selectedIndex = -1;
-            this.bar.enabled = !(this.current == "prebattle");
-            var loc1:*=0;
-            while (loc1 < this.buttonsArr.length) 
+         ,
             {
-                if (this.current == this.buttonsArr[loc1].value) 
-                {
-                    this.bar.selectedIndex = loc1;
-                }
-                ++loc1;
+               "label":MENU.HEADERBUTTONS_INVENTORY,
+               "value":"inventory",
+               "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_INVENTORY,
+               "helpText":LOBBY_HELP.HEADER_MENU_INVENTORY,
+               "helpDirection":"B",
+               "helpConnectorLength":12
             }
-            return;
-        }
-
-        public override function dispose():void
-        {
-            super.dispose();
-            this.bar.removeEventListener(scaleform.clik.events.IndexEvent.INDEX_CHANGE, this.buttonClickHandler);
-            this.buttonsArr = null;
-            return;
-        }
-
-        protected function buttonClickHandler(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            if (arg1.target.data != null) 
+         ,
             {
-                dispatchEvent(new net.wg.gui.events.HeaderEvent(net.wg.gui.events.HeaderEvent.LOAD_VIEW, arg1.target.data.value));
+               "label":MENU.HEADERBUTTONS_SHOP,
+               "value":"shop",
+               "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_SHOP,
+               "helpText":LOBBY_HELP.HEADER_MENU_SHOP,
+               "helpDirection":"B",
+               "helpConnectorLength":62
             }
-            return;
-        }
+         ,
+            {
+               "label":MENU.HEADERBUTTONS_PROFILE,
+               "value":"profile",
+               "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_PROFILE,
+               "helpText":LOBBY_HELP.HEADER_MENU_PROFILE,
+               "helpDirection":"B",
+               "helpConnectorLength":12
+            }
+         ,
+            {
+               "label":MENU.HEADERBUTTONS_TECHTREE,
+               "value":"techtree",
+               "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_TECHTREE,
+               "helpText":LOBBY_HELP.HEADER_MENU_TECHTREE,
+               "helpDirection":"B",
+               "helpConnectorLength":12
+            }
+         ,
+            {
+               "label":MENU.HEADERBUTTONS_BARRACKS,
+               "value":"barracks",
+               "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_BARRACKS
+            }
+         ]);
+         super();
+         this.originalWidth = this.width;
+      }
 
-        internal var originalWidth:Number;
+      private var originalWidth:Number;
 
-        public var bar:net.wg.gui.lobby.header.HeaderButtonBar;
+      public var bar:HeaderButtonBar;
 
-        protected var current:String="hangar";
+      protected var current:String = "hangar";
 
-        protected var buttonsArr:scaleform.clik.data.DataProvider;
-    }
+      protected var buttonsArr:DataProvider;
+
+      override public function dispose() : void {
+         super.dispose();
+         this.bar.removeEventListener(IndexEvent.INDEX_CHANGE,this.buttonClickHandler);
+         this.buttonsArr = null;
+      }
+
+      public function setCurrent(param1:String) : void {
+         this.current = param1;
+         this.bar.selectedIndex = -1;
+         this.bar.enabled = !(this.current == "prebattle");
+         var _loc2_:Number = 0;
+         while(_loc2_ < this.buttonsArr.length)
+         {
+            if(this.current == this.buttonsArr[_loc2_].value)
+            {
+               this.bar.selectedIndex = _loc2_;
+            }
+            _loc2_++;
+         }
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.bar.selectedIndex = -1;
+         if(App.globalVarsMgr.isChinaS())
+         {
+            this.buttonsArr.push(
+               {
+                  "label":MENU.HEADERBUTTONS_BROWSER,
+                  "value":"browser",
+                  "tooltip":TOOLTIPS.HEADER_HEADER_BUTTONS_BROWSER
+               }
+            );
+         }
+         this.bar.validateNow();
+         this.bar.dataProvider = this.buttonsArr;
+         this.bar.addEventListener(ButtonEvent.CLICK,this.buttonClickHandler,false,0,true);
+         App.utils.focusHandler.setFocus(this.bar);
+      }
+
+      override protected function draw() : void {
+         super.draw();
+      }
+
+      protected function buttonClickHandler(param1:ButtonEvent) : void {
+         if(param1.target.data != null)
+         {
+            dispatchEvent(new HeaderEvent(HeaderEvent.LOAD_VIEW,param1.target.data.value));
+         }
+      }
+   }
+
 }

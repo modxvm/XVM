@@ -1,32 +1,29 @@
-package net.wg.gui.tutorial.meta.impl 
+package net.wg.gui.tutorial.meta.impl
 {
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.base.*;
-    
-    public class TutorialDialogMeta extends net.wg.infrastructure.base.AbstractWindowView
-    {
-        public function TutorialDialogMeta()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.AbstractWindowView;
+   import net.wg.data.constants.Errors;
 
-        public function submitS():void
-        {
-            App.utils.asserter.assertNotNull(this.submit, "submit" + net.wg.data.constants.Errors.CANT_NULL);
-            this.submit();
-            return;
-        }
 
-        public function cancelS():void
-        {
-            App.utils.asserter.assertNotNull(this.cancel, "cancel" + net.wg.data.constants.Errors.CANT_NULL);
-            this.cancel();
-            return;
-        }
+   public class TutorialDialogMeta extends AbstractWindowView
+   {
+          
+      public function TutorialDialogMeta() {
+         super();
+      }
 
-        public var submit:Function=null;
+      public var submit:Function = null;
 
-        public var cancel:Function=null;
-    }
+      public var cancel:Function = null;
+
+      public function submitS() : void {
+         App.utils.asserter.assertNotNull(this.submit,"submit" + Errors.CANT_NULL);
+         this.submit();
+      }
+
+      public function cancelS() : void {
+         App.utils.asserter.assertNotNull(this.cancel,"cancel" + Errors.CANT_NULL);
+         this.cancel();
+      }
+   }
+
 }

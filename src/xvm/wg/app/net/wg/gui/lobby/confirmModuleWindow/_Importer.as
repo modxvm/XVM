@@ -1,18 +1,13 @@
-package net.wg.gui.lobby.confirmModuleWindow 
+package net.wg.gui.lobby.confirmModuleWindow
 {
-    public class _Importer extends Object
-    {
-        public function _Importer()
-        {
-            super();
-            return;
-        }
-    }
-}
 
 
+   public class _Importer extends Object
+   {
+          
+      public function _Importer() {
+         super();
+      }
+   }
 
-{
-    var loc1:*=net.wg.gui.lobby.confirmModuleWindow.ConfirmModuleWindow;
-    loc1;
 }

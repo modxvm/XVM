@@ -1,15 +1,16 @@
-package scaleform.gfx 
+package scaleform.gfx
 {
-    import flash.events.*;
-    
-    public final class FocusEventEx extends flash.events.FocusEvent
-    {
-        public function FocusEventEx(arg1:String)
-        {
-            super(arg1);
-            return;
-        }
+   import flash.events.FocusEvent;
 
-        public var controllerIdx:uint=0;
-    }
+
+   public final class FocusEventEx extends FocusEvent
+   {
+          
+      public function FocusEventEx(param1:String) {
+         super(param1);
+      }
+
+      public var controllerIdx:uint = 0;
+   }
+
 }

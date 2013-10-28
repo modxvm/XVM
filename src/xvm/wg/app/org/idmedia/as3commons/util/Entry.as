@@ -1,13 +1,17 @@
-package org.idmedia.as3commons.util 
+package org.idmedia.as3commons.util
 {
-    public interface Entry
-    {
-        function getKey():*;
 
-        function getValue():*;
 
-        function setValue(arg1:*):*;
+   public interface Entry
+   {
+          
+      function getKey() : *;
 
-        function equals(arg1:*):Boolean;
-    }
+      function getValue() : *;
+
+      function setValue(param1:*) : *;
+
+      function equals(param1:*) : Boolean;
+   }
+
 }

@@ -1,36 +1,40 @@
-package net.wg.gui.lobby.techtree.interfaces 
+package net.wg.gui.lobby.techtree.interfaces
 {
-    import flash.events.*;
-    import net.wg.gui.lobby.techtree.data.vo.*;
-    
-    public interface INodesDataProvider extends flash.events.IEventDispatcher
-    {
-        function get nation():String;
+   import flash.events.IEventDispatcher;
+   import net.wg.gui.lobby.techtree.data.vo.NodeData;
+   import net.wg.gui.lobby.techtree.data.vo.UnlockProps;
 
-        function get length():Number;
 
-        function clearUp():void;
+   public interface INodesDataProvider extends IEventDispatcher
+   {
+          
+      function get nation() : String;
 
-        function invalidate(arg1:String, arg2:Object):void;
+      function get length() : Number;
 
-        function parse(arg1:Object):void;
+      function clearUp() : void;
 
-        function getRootItem():net.wg.gui.lobby.techtree.data.vo.NodeData;
+      function invalidate(param1:String, param2:Object) : void;
 
-        function getItemAt(arg1:Number):net.wg.gui.lobby.techtree.data.vo.NodeData;
+      function parse(param1:Object) : void;
 
-        function getIndexByID(arg1:Number):Number;
+      function getRootItem() : NodeData;
 
-        function getItemByID(arg1:Number):net.wg.gui.lobby.techtree.data.vo.NodeData;
+      function getItemAt(param1:Number) : NodeData;
 
-        function setEarnedXP(arg1:Number, arg2:Number):Boolean;
+      function getIndexByID(param1:Number) : Number;
 
-        function setState(arg1:Number, arg2:Number, arg3:Number):Boolean;
+      function getItemByID(param1:Number) : NodeData;
 
-        function setUnlockProps(arg1:Number, arg2:net.wg.gui.lobby.techtree.data.vo.UnlockProps):Boolean;
+      function setEarnedXP(param1:Number, param2:Number) : Boolean;
 
-        function setDump(arg1:Number, arg2:String):Boolean;
+      function setState(param1:Number, param2:Number, param3:Number) : Boolean;
 
-        function setItemField(arg1:String, arg2:Number, arg3:Object):Boolean;
-    }
+      function setUnlockProps(param1:Number, param2:UnlockProps) : Boolean;
+
+      function setDump(param1:Number, param2:String) : Boolean;
+
+      function setItemField(param1:String, param2:Number, param3:Object) : Boolean;
+   }
+
 }

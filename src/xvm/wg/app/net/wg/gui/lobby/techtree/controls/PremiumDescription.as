@@ -1,84 +1,82 @@
-package net.wg.gui.lobby.techtree.controls 
+package net.wg.gui.lobby.techtree.controls
 {
-    import flash.display.*;
-    import flash.text.*;
-    import net.wg.gui.lobby.techtree.data.vo.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.core.*;
-    
-    public class PremiumDescription extends scaleform.clik.core.UIComponent
-    {
-        public function PremiumDescription()
-        {
-            super();
-            this.textFormat = new flash.text.TextFormat();
-            this.textFormat.align = flash.text.TextFormatAlign.LEFT;
-            this.textFormat.leading = -3;
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import net.wg.gui.lobby.techtree.data.vo.ExtraInformation;
+   import flash.text.TextFormat;
+   import flash.text.TextField;
+   import flash.display.MovieClip;
+   import scaleform.clik.constants.InvalidationType;
+   import flash.text.TextFieldAutoSize;
+   import flash.text.TextFormatAlign;
 
-        public function setData(arg1:net.wg.gui.lobby.techtree.data.vo.ExtraInformation):void
-        {
-            if (arg1 == null) 
+
+   public class PremiumDescription extends UIComponent
+   {
+          
+      public function PremiumDescription() {
+         super();
+         this.textFormat = new TextFormat();
+         this.textFormat.align = TextFormatAlign.LEFT;
+         this.textFormat.leading = -3;
+      }
+
+      public static const ELITE_SUFFIX:String = "_elite";
+
+      public static const TITLE_PADDING:Number = 5;
+
+      private var _data:ExtraInformation;
+
+      private var textFormat:TextFormat;
+
+      public var titleField:TextField;
+
+      public var benefitField:TextField;
+
+      public var contentField:TextField;
+
+      public var typeIcon:MovieClip;
+
+      public function setData(param1:ExtraInformation) : void {
+         if(param1 == null)
+         {
+            return;
+         }
+         this._data = param1;
+         invalidateData();
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+      }
+
+      override protected function draw() : void {
+         if(!(this._data == null) && (isInvalid(InvalidationType.DATA)))
+         {
+            if(this.titleField != null)
             {
-                return;
+               this.titleField.autoSize = TextFieldAutoSize.LEFT;
+               this.titleField.htmlText = this._data.title != null?this._data.title:"";
+               this.titleField.setTextFormat(this.textFormat);
+               this.titleField.width = this.titleField.textWidth + TITLE_PADDING;
             }
-            this._data = arg1;
-            invalidateData();
-            return;
-        }
-
-        protected override function configUI():void
-        {
-            super.configUI();
-            return;
-        }
-
-        protected override function draw():void
-        {
-            if (!(this._data == null) && isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+            if(this.benefitField != null)
             {
-                if (this.titleField != null) 
-                {
-                    this.titleField.autoSize = flash.text.TextFieldAutoSize.LEFT;
-                    this.titleField.htmlText = this._data.title == null ? "" : this._data.title;
-                    this.titleField.setTextFormat(this.textFormat);
-                    this.titleField.width = this.titleField.textWidth + TITLE_PADDING;
-                }
-                if (this.benefitField != null) 
-                {
-                    this.benefitField.text = this._data.benefitsHead == null ? "" : this._data.benefitsHead;
-                }
-                if (this.contentField != null) 
-                {
-                    this.contentField.multiline = true;
-                    this.contentField.wordWrap = true;
-                    this.contentField.autoSize = flash.text.TextFieldAutoSize.LEFT;
-                    this.contentField.htmlText = this._data.benefitsList == null ? "" : this._data.benefitsList;
-                }
-                if (this.typeIcon != null) 
-                {
-                    this.typeIcon.gotoAndStop(this._data.type + ELITE_SUFFIX);
-                }
+               this.benefitField.text = this._data.benefitsHead != null?this._data.benefitsHead:"";
             }
-            super.draw();
-            return;
-        }
+            if(this.contentField != null)
+            {
+               this.contentField.multiline = true;
+               this.contentField.wordWrap = true;
+               this.contentField.autoSize = TextFieldAutoSize.LEFT;
+               this.contentField.htmlText = this._data.benefitsList != null?this._data.benefitsList:"";
+            }
+            if(this.typeIcon != null)
+            {
+               this.typeIcon.gotoAndStop(this._data.type + ELITE_SUFFIX);
+            }
+         }
+         super.draw();
+      }
+   }
 
-        public static const ELITE_SUFFIX:String="_elite";
-
-        public static const TITLE_PADDING:Number=5;
-
-        internal var _data:net.wg.gui.lobby.techtree.data.vo.ExtraInformation;
-
-        internal var textFormat:flash.text.TextFormat;
-
-        public var titleField:flash.text.TextField;
-
-        public var benefitField:flash.text.TextField;
-
-        public var contentField:flash.text.TextField;
-
-        public var typeIcon:flash.display.MovieClip;
-    }
 }

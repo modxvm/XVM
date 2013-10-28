@@ -1,52 +1,49 @@
-package net.wg.gui.lobby.window 
+package net.wg.gui.lobby.window
 {
-    import flash.display.*;
-    import flash.text.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.utils.*;
-    import scaleform.clik.core.*;
-    
-    public class ExchangeVcoinWarningMC extends scaleform.clik.core.UIComponent
-    {
-        public function ExchangeVcoinWarningMC()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import net.wg.gui.components.controls.SoundButtonEx;
+   import flash.text.TextField;
+   import flash.display.MovieClip;
+   import flash.text.TextFieldAutoSize;
+   import net.wg.utils.ILocale;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.textField.autoSize = flash.text.TextFieldAutoSize.LEFT;
-            this.textField.wordWrap = true;
-            this.textField.multiline = true;
-            var loc1:*=App.utils.locale;
-            this.buyVcoinBtn.label = loc1.makeString(MENU.EXCHANGEVCOIN_BUYVCOINBTNNAME);
-            return;
-        }
 
-        public function set minTransactValue(arg1:Number):void
-        {
-            var loc1:*=App.utils.locale;
-            this.textField.text = loc1.makeString(MENU.EXCHANGEVCOIN_VCOINISTIGHT, {"minval":arg1.toString()});
-            this.buyVcoinBtn.y = Math.round(this.textField.y + this.textField.textHeight + BTN_OFFSET);
-            this.bg.height = Math.round(this.buyVcoinBtn.y + this._contentPadding * 2);
-            return;
-        }
+   public class ExchangeVcoinWarningMC extends UIComponent
+   {
+          
+      public function ExchangeVcoinWarningMC() {
+         super();
+      }
 
-        public function get contentPadding():int
-        {
-            return this._contentPadding;
-        }
+      private static const BTN_OFFSET:int = 13;
 
-        internal static const BTN_OFFSET:int=13;
+      public var buyVcoinBtn:SoundButtonEx;
 
-        public var buyVcoinBtn:net.wg.gui.components.controls.SoundButtonEx;
+      public var textField:TextField;
 
-        public var textField:flash.text.TextField;
+      public var bg:MovieClip;
 
-        public var bg:flash.display.MovieClip;
+      private var _contentPadding:int = 20;
 
-        internal var _contentPadding:int=20;
-    }
+      override protected function configUI() : void {
+         super.configUI();
+         this.textField.autoSize = TextFieldAutoSize.LEFT;
+         this.textField.wordWrap = true;
+         this.textField.multiline = true;
+         var _loc1_:ILocale = App.utils.locale;
+         this.buyVcoinBtn.label = _loc1_.makeString(MENU.EXCHANGEVCOIN_BUYVCOINBTNNAME);
+      }
+
+      public function set minTransactValue(param1:Number) : void {
+         var _loc2_:ILocale = App.utils.locale;
+         this.textField.text = _loc2_.makeString(MENU.EXCHANGEVCOIN_VCOINISTIGHT,{"minval":param1.toString()});
+         this.buyVcoinBtn.y = Math.round(this.textField.y + this.textField.textHeight + BTN_OFFSET);
+         this.bg.height = Math.round(this.buyVcoinBtn.y + this._contentPadding * 2);
+      }
+
+      public function get contentPadding() : int {
+         return this._contentPadding;
+      }
+   }
+
 }

@@ -1,116 +1,108 @@
-package net.wg.gui.lobby.techtree.controls 
+package net.wg.gui.lobby.techtree.controls
 {
-    import flash.display.*;
-    import net.wg.gui.lobby.techtree.constants.*;
-    import net.wg.gui.lobby.techtree.sub.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.core.*;
-    
-    public class PremiumLayout extends scaleform.clik.core.UIComponent
-    {
-        public function PremiumLayout()
-        {
-            super();
+   import scaleform.clik.core.UIComponent;
+   import net.wg.gui.lobby.techtree.sub.ResearchItems;
+   import flash.display.MovieClip;
+   import flash.display.Sprite;
+   import net.wg.gui.lobby.techtree.constants.TTInvalidationType;
+   import scaleform.clik.constants.InvalidationType;
+
+
+   public class PremiumLayout extends UIComponent
+   {
+          
+      public function PremiumLayout() {
+         super();
+      }
+
+      public static const PREMIUM_LAYOUT_SOURCE:String = "PremiumLayoutSkinned";
+
+      public static function show(param1:ResearchItems) : PremiumLayout {
+         var _loc2_:PremiumLayout = App.utils.classFactory.getComponent(PREMIUM_LAYOUT_SOURCE,PremiumLayout);
+         if(_loc2_ != null)
+         {
+            param1.addChild(_loc2_);
+            param1.swapChildren(param1.background,_loc2_);
+            param1.removeChild(param1.background);
+            _loc2_.context = param1;
+            _loc2_.height = param1.height;
+            _loc2_.validateNow();
+         }
+         return _loc2_;
+      }
+
+      private var _context:ResearchItems = null;
+
+      public var flags:MovieClip;
+
+      public var description:PremiumDescription;
+
+      public var background:Sprite;
+
+      public function get context() : ResearchItems {
+         return this._context;
+      }
+
+      public function set context(param1:ResearchItems) : void {
+         if(this._context == param1)
+         {
             return;
-        }
+         }
+         this._context = param1;
+         invalidate(TTInvalidationType.NATION,TTInvalidationType.DESCRIPTION);
+      }
 
-        public function get context():net.wg.gui.lobby.techtree.sub.ResearchItems
-        {
-            return this._context;
-        }
+      override public function dispose() : void {
+         this._context = null;
+         super.dispose();
+      }
 
-        public function set context(arg1:net.wg.gui.lobby.techtree.sub.ResearchItems):void
-        {
-            if (this._context == arg1) 
-            {
-                return;
-            }
-            this._context = arg1;
-            invalidate(net.wg.gui.lobby.techtree.constants.TTInvalidationType.NATION, net.wg.gui.lobby.techtree.constants.TTInvalidationType.DESCRIPTION);
+      override protected function configUI() : void {
+         super.configUI();
+      }
+
+      override protected function draw() : void {
+         var _loc1_:* = NaN;
+         var _loc2_:* = NaN;
+         super.draw();
+         if(this._context == null)
+         {
             return;
-        }
-
-        public override function dispose():void
-        {
-            this._context = null;
-            super.dispose();
-            return;
-        }
-
-        protected override function configUI():void
-        {
-            super.configUI();
-            return;
-        }
-
-        protected override function draw():void
-        {
-            var loc1:*=NaN;
-            var loc2:*=NaN;
-            super.draw();
-            if (this._context == null) 
+         }
+         if(isInvalid(TTInvalidationType.NATION))
+         {
+            if(this.flags != null)
             {
-                return;
+               this.flags.gotoAndStop(this._context.dataProvider.nation);
             }
-            if (isInvalid(net.wg.gui.lobby.techtree.constants.TTInvalidationType.NATION)) 
+         }
+         if(isInvalid(TTInvalidationType.DESCRIPTION))
+         {
+            if(this.description != null)
             {
-                if (this.flags != null) 
-                {
-                    this.flags.gotoAndStop(this._context.dataProvider.nation);
-                }
+               this.description.setData(this._context.dataProvider.getGlobalStats().extraInfo);
+               this.description.validateNow();
+               invalidateSize();
             }
-            if (isInvalid(net.wg.gui.lobby.techtree.constants.TTInvalidationType.DESCRIPTION)) 
+         }
+         if(isInvalid(InvalidationType.SIZE))
+         {
+            _loc1_ = this._context.rGraphics != null?this._context.rGraphics.y:0;
+            _loc2_ = this._context.rootRenderer != null?this._context.rootRenderer.getY():_height >> 1;
+            if(this.background != null)
             {
-                if (this.description != null) 
-                {
-                    this.description.setData(this._context.dataProvider.getGlobalStats().extraInfo);
-                    this.description.validateNow();
-                    invalidateSize();
-                }
+               this.background.height = _height;
             }
-            if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
+            if(this.flags != null)
             {
-                loc1 = this._context.rGraphics == null ? 0 : this._context.rGraphics.y;
-                loc2 = this._context.rootRenderer == null ? _height >> 1 : this._context.rootRenderer.getY();
-                if (this.background != null) 
-                {
-                    this.background.height = _height;
-                }
-                if (this.flags != null) 
-                {
-                    this.flags.y = loc1 - (this.flags.height >> 1);
-                }
-                if (this.description != null) 
-                {
-                    this.description.y = loc1 + loc2 - (this.description.actualHeight >> 1);
-                }
+               this.flags.y = _loc1_ - (this.flags.height >> 1);
             }
-            return;
-        }
-
-        public static function show(arg1:net.wg.gui.lobby.techtree.sub.ResearchItems):net.wg.gui.lobby.techtree.controls.PremiumLayout
-        {
-            var loc1:*=App.utils.classFactory.getComponent(PREMIUM_LAYOUT_SOURCE, net.wg.gui.lobby.techtree.controls.PremiumLayout);
-            if (loc1 != null) 
+            if(this.description != null)
             {
-                arg1.addChild(loc1);
-                arg1.swapChildren(arg1.background, loc1);
-                arg1.removeChild(arg1.background);
-                loc1.context = arg1;
-                loc1.height = arg1.height;
-                loc1.validateNow();
+               this.description.y = _loc1_ + _loc2_ - (this.description.actualHeight >> 1);
             }
-            return loc1;
-        }
+         }
+      }
+   }
 
-        public static const PREMIUM_LAYOUT_SOURCE:String="PremiumLayoutSkinned";
-
-        internal var _context:net.wg.gui.lobby.techtree.sub.ResearchItems=null;
-
-        public var flags:flash.display.MovieClip;
-
-        public var description:net.wg.gui.lobby.techtree.controls.PremiumDescription;
-
-        public var background:flash.display.Sprite;
-    }
 }

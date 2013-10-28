@@ -1,106 +1,85 @@
-package net.wg.gui.lobby.browser 
+package net.wg.gui.lobby.browser
 {
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import scaleform.clik.utils.*;
-    
-    public class BrowserWindow extends net.wg.infrastructure.base.meta.impl.BrowserMeta implements net.wg.infrastructure.base.meta.IBrowserMeta
-    {
-        public function BrowserWindow()
-        {
-            super();
-            showWindowBg = false;
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.BrowserMeta;
+   import net.wg.infrastructure.base.meta.IBrowserMeta;
+   import scaleform.clik.utils.Padding;
 
-        public function as_loadingStart():void
-        {
-            this.actionBtn.action = net.wg.gui.lobby.browser.BrowserActionBtn.ACTION_LOADING;
-            return;
-        }
 
-        public function as_loadingStop():void
-        {
-            this.actionBtn.action = net.wg.gui.lobby.browser.BrowserActionBtn.ACTION_RELOAD;
-            return;
-        }
+   public class BrowserWindow extends BrowserMeta implements IBrowserMeta
+   {
+          
+      public function BrowserWindow() {
+         super();
+         showWindowBg = false;
+      }
 
-        protected override function onPopulate():void
-        {
-            super.onPopulate();
-            window.title = MENU.BROWSER_WINDOW_TITLE;
-            var loc1:*=window.contentPadding as scaleform.clik.utils.Padding;
-            loc1.bottom = -8;
-            window.contentPadding = loc1;
-            return;
-        }
+      public var actionBtn:BrowserActionBtn;
 
-        protected override function onDispose():void
-        {
-            super.onDispose();
-            this.actionBtn.dispose();
-            this.actionBtn.removeEventListener(net.wg.gui.lobby.browser.BrowserEvent.ACTION_LOADING, this.onBtnAction);
-            this.actionBtn.removeEventListener(net.wg.gui.lobby.browser.BrowserEvent.ACTION_RELOAD, this.onBtnAction);
-            this.browserHitArea.dispose();
-            this.browserHitArea.removeEventListener(net.wg.gui.lobby.browser.BrowserEvent.BROWSER_DOWN, this.onBrowserDown);
-            this.browserHitArea.removeEventListener(net.wg.gui.lobby.browser.BrowserEvent.BROWSER_UP, this.onBrowserUp);
-            this.browserHitArea.removeEventListener(net.wg.gui.lobby.browser.BrowserEvent.BROWSER_MOVE, this.onBrowserMove);
-            this.browserHitArea.removeEventListener(net.wg.gui.lobby.browser.BrowserEvent.BROWSER_FOCUS_IN, this.onBrowserFocusIn);
-            this.browserHitArea.removeEventListener(net.wg.gui.lobby.browser.BrowserEvent.BROWSER_FOCUS_OUT, this.onBrowserFocusOut);
-            return;
-        }
+      public var browserHitArea:BrowserHitArea;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.actionBtn.addEventListener(net.wg.gui.lobby.browser.BrowserEvent.ACTION_LOADING, this.onBtnAction);
-            this.actionBtn.addEventListener(net.wg.gui.lobby.browser.BrowserEvent.ACTION_RELOAD, this.onBtnAction);
-            this.browserHitArea.addEventListener(net.wg.gui.lobby.browser.BrowserEvent.BROWSER_DOWN, this.onBrowserDown);
-            this.browserHitArea.addEventListener(net.wg.gui.lobby.browser.BrowserEvent.BROWSER_UP, this.onBrowserUp);
-            this.browserHitArea.addEventListener(net.wg.gui.lobby.browser.BrowserEvent.BROWSER_MOVE, this.onBrowserMove);
-            this.browserHitArea.addEventListener(net.wg.gui.lobby.browser.BrowserEvent.BROWSER_FOCUS_IN, this.onBrowserFocusIn);
-            this.browserHitArea.addEventListener(net.wg.gui.lobby.browser.BrowserEvent.BROWSER_FOCUS_OUT, this.onBrowserFocusOut);
-            return;
-        }
+      public function as_loadingStart() : void {
+         this.actionBtn.action = BrowserActionBtn.ACTION_LOADING;
+      }
 
-        internal function onBtnAction(arg1:net.wg.gui.lobby.browser.BrowserEvent):void
-        {
-            browserActionS(arg1.type);
-            return;
-        }
+      public function as_loadingStop() : void {
+         this.actionBtn.action = BrowserActionBtn.ACTION_RELOAD;
+      }
 
-        internal function onBrowserDown(arg1:net.wg.gui.lobby.browser.BrowserEvent):void
-        {
-            browserDownS(arg1.mouseX, arg1.mouseY, arg1.delta);
-            return;
-        }
+      override protected function onPopulate() : void {
+         super.onPopulate();
+         window.title = MENU.BROWSER_WINDOW_TITLE;
+         var _loc1_:Padding = window.contentPadding as Padding;
+         _loc1_.bottom = -8;
+         window.contentPadding = _loc1_;
+      }
 
-        internal function onBrowserUp(arg1:net.wg.gui.lobby.browser.BrowserEvent):void
-        {
-            browserUpS(arg1.mouseX, arg1.mouseY, arg1.delta);
-            return;
-        }
+      override protected function onDispose() : void {
+         super.onDispose();
+         this.actionBtn.dispose();
+         this.actionBtn.removeEventListener(BrowserEvent.ACTION_LOADING,this.onBtnAction);
+         this.actionBtn.removeEventListener(BrowserEvent.ACTION_RELOAD,this.onBtnAction);
+         this.browserHitArea.dispose();
+         this.browserHitArea.removeEventListener(BrowserEvent.BROWSER_DOWN,this.onBrowserDown);
+         this.browserHitArea.removeEventListener(BrowserEvent.BROWSER_UP,this.onBrowserUp);
+         this.browserHitArea.removeEventListener(BrowserEvent.BROWSER_MOVE,this.onBrowserMove);
+         this.browserHitArea.removeEventListener(BrowserEvent.BROWSER_FOCUS_IN,this.onBrowserFocusIn);
+         this.browserHitArea.removeEventListener(BrowserEvent.BROWSER_FOCUS_OUT,this.onBrowserFocusOut);
+      }
 
-        internal function onBrowserMove(arg1:net.wg.gui.lobby.browser.BrowserEvent):void
-        {
-            browserMoveS(arg1.mouseX, arg1.mouseY, arg1.delta);
-            return;
-        }
+      override protected function configUI() : void {
+         super.configUI();
+         this.actionBtn.addEventListener(BrowserEvent.ACTION_LOADING,this.onBtnAction);
+         this.actionBtn.addEventListener(BrowserEvent.ACTION_RELOAD,this.onBtnAction);
+         this.browserHitArea.addEventListener(BrowserEvent.BROWSER_DOWN,this.onBrowserDown);
+         this.browserHitArea.addEventListener(BrowserEvent.BROWSER_UP,this.onBrowserUp);
+         this.browserHitArea.addEventListener(BrowserEvent.BROWSER_MOVE,this.onBrowserMove);
+         this.browserHitArea.addEventListener(BrowserEvent.BROWSER_FOCUS_IN,this.onBrowserFocusIn);
+         this.browserHitArea.addEventListener(BrowserEvent.BROWSER_FOCUS_OUT,this.onBrowserFocusOut);
+      }
 
-        internal function onBrowserFocusIn(arg1:net.wg.gui.lobby.browser.BrowserEvent):void
-        {
-            onBrowserShowS(false);
-            return;
-        }
+      private function onBtnAction(param1:BrowserEvent) : void {
+         browserActionS(param1.type);
+      }
 
-        internal function onBrowserFocusOut(arg1:net.wg.gui.lobby.browser.BrowserEvent):void
-        {
-            browserFocusOut();
-            return;
-        }
+      private function onBrowserDown(param1:BrowserEvent) : void {
+         browserDownS(param1.mouseX,param1.mouseY,param1.delta);
+      }
 
-        public var actionBtn:net.wg.gui.lobby.browser.BrowserActionBtn;
+      private function onBrowserUp(param1:BrowserEvent) : void {
+         browserUpS(param1.mouseX,param1.mouseY,param1.delta);
+      }
 
-        public var browserHitArea:net.wg.gui.lobby.browser.BrowserHitArea;
-    }
+      private function onBrowserMove(param1:BrowserEvent) : void {
+         browserMoveS(param1.mouseX,param1.mouseY,param1.delta);
+      }
+
+      private function onBrowserFocusIn(param1:BrowserEvent) : void {
+         onBrowserShowS(false);
+      }
+
+      private function onBrowserFocusOut(param1:BrowserEvent) : void {
+         browserFocusOut();
+      }
+   }
+
 }

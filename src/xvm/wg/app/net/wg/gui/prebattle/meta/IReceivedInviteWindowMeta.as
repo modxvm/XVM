@@ -1,17 +1,20 @@
-package net.wg.gui.prebattle.meta 
+package net.wg.gui.prebattle.meta
 {
-    import flash.events.*;
-    
-    public interface IReceivedInviteWindowMeta extends flash.events.IEventDispatcher
-    {
-        function acceptInviteS():void;
+   import flash.events.IEventDispatcher;
 
-        function declineInviteS():void;
 
-        function cancelInviteS():void;
+   public interface IReceivedInviteWindowMeta extends IEventDispatcher
+   {
+          
+      function acceptInviteS() : void;
 
-        function as_setTitle(arg1:String):void;
+      function declineInviteS() : void;
 
-        function as_setReceivedInviteInfo(arg1:Object):void;
-    }
+      function cancelInviteS() : void;
+
+      function as_setTitle(param1:String) : void;
+
+      function as_setReceivedInviteInfo(param1:Object) : void;
+   }
+
 }

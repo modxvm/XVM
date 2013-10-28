@@ -1,52 +1,53 @@
-package net.wg.gui.lobby.messengerBar 
+package net.wg.gui.lobby.messengerBar
 {
-    import flash.events.*;
-    import net.wg.gui.components.advanced.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import scaleform.clik.events.*;
-    
-    public class NotificationInvitesButton extends net.wg.infrastructure.base.meta.impl.NotificationInvitesButtonMeta implements net.wg.infrastructure.base.meta.INotificationInvitesButtonMeta
-    {
-        public function NotificationInvitesButton()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.NotificationInvitesButtonMeta;
+   import net.wg.infrastructure.base.meta.INotificationInvitesButtonMeta;
+   import net.wg.gui.components.advanced.BlinkingButton;
+   import flash.events.MouseEvent;
+   import scaleform.clik.events.ButtonEvent;
+   import net.wg.data.constants.SoundTypes;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.notificationButton.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onButtonClickHandler);
-            this.addEventListener(flash.events.MouseEvent.MOUSE_OVER, this.mouseOverHandler);
-            this.addEventListener(flash.events.MouseEvent.MOUSE_OUT, this.mouseOutHandler);
-            return;
-        }
 
-        public function as_setState(arg1:Boolean):void
-        {
-            this.notificationButton.blinking = arg1;
-            return;
-        }
+   public class NotificationInvitesButton extends NotificationInvitesButtonMeta implements INotificationInvitesButtonMeta
+   {
+          
+      public function NotificationInvitesButton() {
+         super();
+      }
 
-        internal function onButtonClickHandler(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            handleClickS();
-            return;
-        }
+      public var notificationButton:BlinkingButton;
 
-        internal function mouseOverHandler(arg1:flash.events.MouseEvent):void
-        {
-            App.toolTipMgr.showComplex(TOOLTIPS.LOBY_MESSENGER_INVITES_BUTTON);
-            return;
-        }
+      override protected function onDispose() : void {
+         super.onDispose();
+         this.notificationButton.dispose();
+         this.notificationButton = null;
+         removeEventListener(MouseEvent.MOUSE_OVER,this.mouseOverHandler);
+         removeEventListener(MouseEvent.MOUSE_OUT,this.mouseOutHandler);
+      }
 
-        internal function mouseOutHandler(arg1:flash.events.MouseEvent):void
-        {
-            App.toolTipMgr.hide();
-            return;
-        }
+      override protected function configUI() : void {
+         super.configUI();
+         this.notificationButton.addEventListener(ButtonEvent.CLICK,this.onButtonClickHandler);
+         addEventListener(MouseEvent.MOUSE_OVER,this.mouseOverHandler);
+         addEventListener(MouseEvent.MOUSE_OUT,this.mouseOutHandler);
+         this.notificationButton.soundType = SoundTypes.MESSANGER_BTN;
+      }
 
-        public var notificationButton:net.wg.gui.components.advanced.BlinkingButton;
-    }
+      public function as_setState(param1:Boolean) : void {
+         this.notificationButton.blinking = param1;
+      }
+
+      private function onButtonClickHandler(param1:ButtonEvent) : void {
+         handleClickS();
+      }
+
+      private function mouseOverHandler(param1:MouseEvent) : void {
+         App.toolTipMgr.showComplex(TOOLTIPS.LOBY_MESSENGER_INVITES_BUTTON);
+      }
+
+      private function mouseOutHandler(param1:MouseEvent) : void {
+         App.toolTipMgr.hide();
+      }
+   }
+
 }

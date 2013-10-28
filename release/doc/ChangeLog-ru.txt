@@ -1,22 +1,11 @@
 ﻿XVM-5.0.0-test5:
+  * адаптация к WoT 0.8.9
   [НОВЫЕ ФУНКЦИИ]
-  * возможность форматирования с помощью макросов поля информации о танке в окне взвода:
-      squad/formatInfoField
-  * возможность настройки разных наборов иконок для левой и правой панелей, маркеров союзников и противников:
-      iconset/battleLoadingAlly, iconset/battleLoadingEnemy - для экрана загрузки
-      iconset/playersPanelAlly, iconset/playersPanelEnemy   - для боковых панелей
-      iconset/statisticFormAlly, iconset/statisticFormEnemy - для экрана Tab
-      iconset/vehicleMarkerAlly, iconset/vehicleMarkerEnemy - для маркеров над танками
-  * локализация: добавлен сербский язык
-
+  * локализация: добавлен бразильский вариант португальского языка
   [МАКРОСЫ]
-  * взвод: добавлены макросы {{level}}, {{rlevel}}, {{vtype}}, {{battletier-min}}, {{battletier-max}}
+  * взвод: добавлен макрос {{vtype-l}}
 
-  [ДРУГОЕ]
-  * взвод: удалены опции "romanNumbers", "leftLvlBorder", "rightLvlBorder"
-  * переименованы поля в iconset: "battleLoading", "playersPanel", "statisticForm", "vehicleMarker"
-
-XVM-5.0.0-test4:
+XVM-5.0.0-test5:
   * адаптация к WoT 0.8.8
 
   [НОВЫЕ ФУНКЦИИ]
@@ -29,13 +18,21 @@ XVM-5.0.0-test4:
     battleResults/showNetIncome - отображать чистый доход в послебоевой статистике
     battleResults/showExtendedInfo - отображать процент попаданий и урон в послебоевой статистике
     userInfo/defaultFilterValue - значение для фильтра по умолчанию
+  * возможность форматирования с помощью макросов поля информации о танке в окне взвода:
+      squad/formatInfoField
+  * возможность настройки разных наборов иконок для левой и правой панелей, маркеров союзников и противников:
+      iconset/battleLoadingAlly, iconset/battleLoadingEnemy - для экрана загрузки
+      iconset/playersPanelAlly, iconset/playersPanelEnemy   - для боковых панелей
+      iconset/statisticFormAlly, iconset/statisticFormEnemy - для экрана Tab
+      iconset/vehicleMarkerAlly, iconset/vehicleMarkerEnemy - для маркеров над танками
   * пингер: добавлена поддержка wine. Для ее активации нужно выполнить команду
     ln -s `which ping` ~/.wine/drive_c/ping.exe
-  * локализация: добавлены румынский, болгарский, датский, итальянский и турецкий языки
+  * локализация: добавлены румынский, болгарский, датский, итальянский, норвежский, сербский, словацкий и турецкий языки
   * локализация: добавлен readme на польском, французском языке
 
   [МАКРОСЫ]
   * добавлены макросы {{c:avglvl}}, {{a:avglvl}}
+  * взвод: добавлены макросы {{level}}, {{rlevel}}, {{vtype}}, {{battletier-min}}, {{battletier-max}}
 
   [ИСПРАВЛЕНИЯ]
   * исправлено неверное позиционирование иконки "шестого чувства"
@@ -51,8 +48,10 @@ XVM-5.0.0-test4:
   * изменен формат часов в окне загрузки боя (http://php.net/date)
   * конфиг: секция "finalStatistic" переименована в "battleResults"
   * удалена опция battleResults/sortColumn, т.к. встроена в клиент с 0.8.8
-  * удалены опции login/showPingOnGameLoading, userInfo/showEColumn
-  * переименованы поля formatLeft, formatRight в окне загрузки боя, Tab
+  * удалены опции login/showPingOnGameLoading, userInfo/showEColumn, squad/romanNumbers,
+    squad/leftLvlBorder, squad/rightLvlBorder
+  * переименованы поля iconset/battleLoading, iconset/playersPanel, iconset/statisticForm, iconset/vehicleMarker
+  * переименованы поля "formatLeft", "formatRight" в окне загрузки боя, Tab
 
 XVM-4.1.1:
   [НОВЫЕ ФУНКЦИИ]

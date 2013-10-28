@@ -1,547 +1,586 @@
-package net.wg.gui.components.tooltips 
+package net.wg.gui.components.tooltips
 {
-    import __AS3__.vec.*;
-    import flash.display.*;
-    import flash.text.*;
-    import net.wg.data.managers.*;
-    import net.wg.gui.components.tooltips.VO.*;
-    import net.wg.gui.components.tooltips.helpers.*;
-    import net.wg.utils.*;
-    
-    public class ToolTipEquipment extends net.wg.gui.components.tooltips.ToolTipSpecial
-    {
-        public function ToolTipEquipment()
-        {
-            super();
-            this.headerTF = content.headerTF;
-            this.discrTF = content.discrTF;
-            this.whiteBg = content.whiteBg;
-            this.tooltipStatus = content.tooltipStatus;
-            this.complexStatus = content.complexStatus;
-            this.complexHeader = content.complexStatus.complexHeader;
-            this.complexNote = content.complexStatus.complexNote;
-            return;
-        }
+   import flash.text.TextField;
+   import flash.display.Sprite;
+   import net.wg.data.managers.ITooltipProps;
+   import net.wg.gui.components.tooltips.VO.EquipmentVO;
+   import net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO;
+   import net.wg.utils.ILocale;
+   import flash.text.TextFormat;
+   import flash.text.StyleSheet;
+   import net.wg.gui.components.tooltips.VO.ToolTipStatusColorsVO;
+   import net.wg.gui.components.tooltips.helpers.Utils;
+   import flash.text.TextFormatAlign;
+   import flash.text.TextFieldAutoSize;
+   import net.wg.gui.components.tooltips.VO.ToolTipBlockVO;
+   import net.wg.gui.components.tooltips.VO.ToolTipBlockRightListItemVO;
 
-        public override function build(arg1:Object, arg2:net.wg.data.managers.ITooltipProps):void
-        {
-            super.build(arg1, arg2);
-            return;
-        }
 
-        public override function dispose():void
-        {
-            super.dispose();
-            return;
-        }
+   public class ToolTipEquipment extends ToolTipSpecial
+   {
+          
+      public function ToolTipEquipment() {
+         super();
+         this.headerTF = content.headerTF;
+         this.discrTF = content.discrTF;
+         this.whiteBg = content.whiteBg;
+         this.tooltipStatus = content.tooltipStatus;
+         this.complexStatus = content.complexStatus;
+         this.complexHeader = content.complexStatus.complexHeader;
+         this.complexNote = content.complexStatus.complexNote;
+      }
 
-        public override function toString():String
-        {
-            return "[WG ToolTipEquipment " + name + "]";
-        }
+      public var headerTF:TextField = null;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            return;
-        }
+      public var discrTF:TextField = null;
 
-        protected override function redraw():void
-        {
-            var loc3:*=null;
-            var loc5:*=null;
-            var loc7:*=null;
-            var loc10:*=NaN;
-            var loc17:*=null;
-            var loc18:*=null;
-            var loc19:*=null;
-            var loc20:*=null;
-            var loc21:*=null;
-            var loc22:*=null;
-            var loc23:*=null;
-            var loc24:*=null;
-            var loc25:*=null;
-            var loc26:*=null;
-            var loc27:*=null;
-            var loc28:*=null;
-            var loc29:*=NaN;
-            var loc30:*=false;
-            var loc31:*=null;
-            var loc32:*=null;
-            var loc33:*=null;
-            var loc34:*=null;
-            var loc35:*=NaN;
-            var loc36:*=null;
-            var loc37:*=null;
-            var loc1:*=0;
-            var loc2:*=0;
-            loc3 = new net.wg.gui.components.tooltips.VO.EquipmentVO(_data);
-            var loc4:*=null;
-            seaprators = new Vector.<net.wg.gui.components.tooltips.Separator>();
-            loc5 = null;
-            blockResults = new Vector.<net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO>();
-            this._defContentMarginBottom = contentMargin.bottom;
-            this._defBGShadowMarginBottom = bgShadowMargin.bottom;
-            topPosition = bgShadowMargin.top + contentMargin.top;
-            var loc6:*="";
-            loc7 = App.utils.locale;
-            var loc38:*=_type;
-            switch (loc38) 
+      public var whiteBg:Sprite = null;
+
+      public var tooltipStatus:Status = null;
+
+      public var complexStatus:Sprite = null;
+
+      public var complexHeader:TextField = null;
+
+      public var complexNote:TextField = null;
+
+      private var _defContentMarginBottom:Number = 0;
+
+      private var _defBGShadowMarginBottom:Number = 0;
+
+      private var maxWidth:Number = 250;
+
+      private const TYPE_SHELL:String = "shell";
+
+      private const TYPE_MODULE:String = "module";
+
+      override public function build(param1:Object, param2:ITooltipProps) : void {
+         super.build(param1,param2);
+      }
+
+      override public function dispose() : void {
+         super.dispose();
+      }
+
+      override public function toString() : String {
+         return "[WG ToolTipEquipment " + name + "]";
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+      }
+
+      override protected function redraw() : void {
+         var _loc3_:EquipmentVO = null;
+         var _loc5_:ToolTipBlockResultVO = null;
+         var _loc7_:ILocale = null;
+         var _loc10_:* = NaN;
+         var _loc17_:String = null;
+         var _loc18_:TextFormat = null;
+         var _loc19_:StyleSheet = null;
+         var _loc20_:ExtraModuleInfo = null;
+         var _loc21_:String = null;
+         var _loc22_:String = null;
+         var _loc23_:String = null;
+         var _loc24_:String = null;
+         var _loc25_:String = null;
+         var _loc26_:String = null;
+         var _loc27_:String = null;
+         var _loc28_:String = null;
+         var _loc29_:* = NaN;
+         var _loc30_:* = false;
+         var _loc31_:String = null;
+         var _loc32_:String = null;
+         var _loc33_:String = null;
+         var _loc34_:String = null;
+         var _loc35_:* = NaN;
+         var _loc36_:TextFormat = null;
+         var _loc37_:ToolTipStatusColorsVO = null;
+         var _loc1_:uint = 0;
+         var _loc2_:uint = 0;
+         _loc3_ = new EquipmentVO(_data);
+         var _loc4_:Separator = null;
+         separators = new Vector.<Separator>();
+         _loc5_ = null;
+         blockResults = new Vector.<ToolTipBlockResultVO>();
+         this._defContentMarginBottom = contentMargin.bottom;
+         this._defBGShadowMarginBottom = bgShadowMargin.bottom;
+         topPosition = bgShadowMargin.top + contentMargin.top;
+         var _loc6_:* = "";
+         _loc7_ = App.utils.locale;
+         switch(_type)
+         {
+            case this.TYPE_SHELL:
+               _loc17_ = _loc7_.makeString(ITEM_TYPES.shell_kinds(_loc3_.type));
+               _loc17_ = _loc17_.slice(0,1).toUpperCase() + _loc17_.slice(1);
+               _loc6_ = _loc6_ + (Utils.instance.htmlWrapper(_loc17_,Utils.instance.COLOR_NORMAL,12,"$TextFont") + "<br/>");
+               break;
+            case this.TYPE_MODULE:
+               if(_loc3_.level > 0)
+               {
+                  _loc6_ = Utils.instance.htmlWrapper(_loc7_.makeString(TOOLTIPS.level(_loc3_.level.toString())) + " " + _loc7_.makeString(TOOLTIPS.VEHICLE_LEVEL),Utils.instance.COLOR_NORMAL,12,"$TextFont") + "<br/>";
+               }
+               break;
+         }
+         var _loc8_:String = Utils.instance.htmlWrapper(_loc3_.eName,Utils.instance.COLOR_HEADER,18,"$TitleFont");
+         var _loc9_:TextFormat = new TextFormat();
+         _loc9_.leading = 0;
+         _loc9_.align = TextFormatAlign.LEFT;
+         this.headerTF.autoSize = TextFieldAutoSize.LEFT;
+         this.headerTF.multiline = true;
+         this.headerTF.wordWrap = true;
+         this.headerTF.htmlText = _loc6_ == ""?_loc8_:_loc8_ + "<br/>" + _loc6_;
+         this.headerTF.setTextFormat(_loc9_);
+         this.headerTF.width = this.headerTF.textWidth + 5;
+         _loc10_ = bgShadowMargin.left + contentMargin.left;
+         this.headerTF.x = _loc10_;
+         this.headerTF.y = topPosition | 0;
+         topPosition = topPosition + (this.headerTF.textHeight + Utils.instance.MARGIN_AFTER_SEPARATE);
+         this.maxWidth = Math.max(this.maxWidth,this.headerTF.width);
+         if(_loc3_.extraModuleInfo)
+         {
+            _loc18_ = new TextFormat();
+            _loc18_.leading = 2;
+            _loc18_.align = TextFormatAlign.RIGHT;
+            _loc18_.size = 11;
+            _loc18_.font = "$TextFont";
+            _loc19_ = new StyleSheet();
+            _loc19_.setStyle("h",
+               {
+                  "color":Utils.instance.COLOR_NORMAL,
+                  "fontSize":"11px",
+                  "fontFamily":"$TextFont",
+                  "leading":"2px"
+               }
+            );
+            _loc19_.setStyle("p",
+               {
+                  "color":Utils.instance.COLOR_SUB_NORMAL,
+                  "fontSize":"11px",
+                  "fontFamily":"$TextFont",
+                  "leading":"2px"
+               }
+            );
+            _loc20_ = new ExtraModuleInfo(_loc18_,_loc19_);
+            _loc20_.y = topPosition;
+            _loc20_.x = _loc10_;
+            _loc20_.setData(_loc3_.extraModuleInfo.source,Utils.instance.htmlWrapper(_loc3_.extraModuleInfo.text,Utils.instance.COLOR_NUMBER,13,"$TitleFont"));
+            addChild(_loc20_);
+            this.maxWidth = Math.max(this.maxWidth,_loc20_.width);
+            topPosition = topPosition + (Math.round(_loc20_.height) + Utils.instance.MARGIN_AFTER_SEPARATE);
+         }
+         _loc4_ = Utils.instance.createSeparate(content);
+         _loc4_.y = topPosition | 0;
+         separators.push(_loc4_);
+         topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
+         var _loc11_:String = " " + _loc7_.makeString(TOOLTIPS.MODULE_COUNT);
+         var _loc12_:ToolTipBlockVO = new ToolTipBlockVO();
+         _loc12_.contener = content;
+         _loc12_.childrenNamePrefix = "stats";
+         _loc12_.leftText = "";
+         _loc12_.leftTextColor = Utils.instance.convertStringColorToNumber(Utils.instance.COLOR_NUMBER);
+         _loc12_.rightTextList = new Vector.<ToolTipBlockRightListItemVO>();
+         _loc12_.rightTextColor = Utils.instance.convertStringColorToNumber(Utils.instance.COLOR_NORMAL);
+         var _loc13_:ToolTipBlockVO = new ToolTipBlockVO();
+         _loc13_.contener = content;
+         _loc13_.childrenNamePrefix = "price";
+         _loc13_.leftText = "";
+         _loc13_.leftTextColor = Utils.instance.convertStringColorToNumber(Utils.instance.COLOR_NUMBER);
+         _loc13_.rightTextList = new Vector.<ToolTipBlockRightListItemVO>();
+         _loc13_.rightTextColor = Utils.instance.convertStringColorToNumber(Utils.instance.COLOR_NORMAL);
+         if(_loc3_.stats)
+         {
+            _loc21_ = _loc7_.makeString(TOOLTIPS.ITEMSTATUS_NOTENOUGH);
+            _loc2_ = _loc3_.stats.length;
+            _loc1_ = 0;
+            while(_loc1_ < _loc2_)
             {
-                case this.TYPE_SHELL:
-                {
-                    loc17 = (loc17 = loc7.makeString(ITEM_TYPES.shell_kinds(loc3.type))).slice(0, 1).toUpperCase() + loc17.slice(1);
-                    loc6 = loc6 + (net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(loc17, net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NORMAL, 12, "$TextFont") + "<br/>");
-                    break;
-                }
-                case this.TYPE_MODULE:
-                {
-                    if (loc3.level > 0) 
-                    {
-                        loc6 = net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(loc7.makeString(TOOLTIPS.level(loc3.level.toString())) + " " + loc7.makeString(TOOLTIPS.VEHICLE_LEVEL), net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NORMAL, 12, "$TextFont") + "<br/>";
-                    }
-                    break;
-                }
+               _loc22_ = _loc3_.stats[_loc1_][0];
+               _loc23_ = isNaN(_loc3_.stats[_loc1_][1])?_loc3_.stats[_loc1_][1]:_loc7_.integer(_loc3_.stats[_loc1_][1]);
+               _loc24_ = _loc3_.stats[_loc1_][2]?String(_loc3_.stats[_loc1_][2]):null;
+               _loc25_ = Utils.instance.getIcont(_loc22_,_component,_loc3_.gold);
+               _loc26_ = Utils.instance.COLOR_NUMBER;
+               _loc27_ = "";
+               _loc28_ = "";
+               _loc29_ = 0;
+               if(_component == "shop" || _component == "hangar" || _component == "inventory")
+               {
+                  if(_loc24_)
+                  {
+                     switch(_loc22_)
+                     {
+                        case "buy_price_action":
+                        case "buy_price":
+                           if(_loc25_ == "gold")
+                           {
+                              _loc28_ = " <img vspace=\"-4\" src=\"img://gui/maps/icons/library/GoldIcon-2.png\" />";
+                           }
+                           else
+                           {
+                              _loc28_ = " <img vspace=\"-4\" src=\"img://gui/maps/icons/library/CreditsIcon-2.png\" />";
+                           }
+                           break;
+                        case "unlock_price":
+                           _loc28_ = " <img vspace=\"-4\" src=\"img://gui/maps/icons/library/UnlockPrice.png\" />";
+                           break;
+                     }
+                     _loc26_ = Utils.instance.COLOR_ALERT;
+                     _loc27_ = " ( <font color=\"" + Utils.instance.COLOR_ALERT + "\">" + _loc21_ + "</font> " + _loc7_.integer(_loc24_) + _loc28_ + ")";
+                     _loc29_ = -1;
+                  }
+                  else
+                  {
+                     _loc27_ = "";
+                  }
+                  _loc30_ = _loc22_ == "textDelimiter/or";
+                  if(_loc30_)
+                  {
+                     _loc13_.leftText = _loc13_.leftText + (Utils.instance.htmlWrapper(_loc7_.makeString(TOOLTIPS.vehicle(_loc22_)),Utils.instance.COLOR_NORMAL,10,"$TextFont") + "<br/>");
+                     _loc13_.rightTextList.push(new ToolTipBlockRightListItemVO());
+                  }
+                  else
+                  {
+                     _loc13_.leftText = _loc13_.leftText + (Utils.instance.htmlWrapper(_loc23_,_loc26_,12,"$TitleFont") + "<br/>");
+                     _loc31_ = "<h1>" + _loc7_.makeString(TOOLTIPS.vehicle(_loc22_)) + _loc27_ + "</h1>";
+                     _loc13_.rightTextList.push(new ToolTipBlockRightListItemVO(_loc31_,_loc25_,_loc29_));
+                  }
+               }
+               else
+               {
+                  _loc12_.leftText = _loc12_.leftText + (Utils.instance.htmlWrapper(_loc23_ + _loc11_,Utils.instance.COLOR_NUMBER,12,"$TextFont") + "<br/>");
+                  _loc12_.rightTextList.push(new ToolTipBlockRightListItemVO(TOOLTIPS.vehicle(_loc22_)));
+               }
+               _loc1_++;
             }
-            var loc8:*=net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(loc3.eName, net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_HEADER, 18, "$TitleFont");
-            var loc9:*;
-            (loc9 = new flash.text.TextFormat()).leading = 0;
-            loc9.align = flash.text.TextFormatAlign.LEFT;
-            this.headerTF.autoSize = flash.text.TextFieldAutoSize.LEFT;
-            this.headerTF.multiline = true;
-            this.headerTF.wordWrap = true;
-            this.headerTF.htmlText = loc6 != "" ? loc8 + "<br/>" + loc6 : loc8;
-            this.headerTF.setTextFormat(loc9);
-            this.headerTF.width = this.headerTF.textWidth + 5;
-            loc10 = bgShadowMargin.left + contentMargin.left;
-            this.headerTF.x = loc10;
-            this.headerTF.y = topPosition | 0;
-            topPosition = topPosition + (this.headerTF.textHeight + net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_SEPARATE);
-            this.maxWidth = Math.max(this.maxWidth, this.headerTF.width);
-            if (loc3.extraModuleInfo) 
+         }
+         if((_loc3_.paramsAdd) && _type == "shell")
+         {
+            _loc2_ = _loc3_.paramsAdd.length;
+            _loc1_ = 0;
+            while(_loc1_ < _loc2_)
             {
-                (loc18 = new flash.text.TextFormat()).leading = 2;
-                loc18.align = flash.text.TextFormatAlign.RIGHT;
-                loc18.size = 11;
-                loc18.font = "$TextFont";
-                (loc19 = new flash.text.StyleSheet()).setStyle("h", {"color":net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NORMAL, "fontSize":"11px", "fontFamily":"$TextFont", "leading":"2px"});
-                loc19.setStyle("p", {"color":net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_SUB_NORMAL, "fontSize":"11px", "fontFamily":"$TextFont", "leading":"2px"});
-                (loc20 = new net.wg.gui.components.tooltips.ExtraModuleInfo(loc18, loc19)).y = topPosition;
-                loc20.x = loc10;
-                loc20.setData(loc3.extraModuleInfo.source, net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(loc3.extraModuleInfo.text, net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NUMBER, 13, "$TitleFont"));
-                addChild(loc20);
-                this.maxWidth = Math.max(this.maxWidth, loc20.width);
-                topPosition = topPosition + (Math.round(loc20.height) + net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_SEPARATE);
+               _loc32_ = _loc3_.paramsAdd[_loc1_].label;
+               _loc33_ = _loc3_.paramsAdd[_loc1_].current;
+               _loc34_ = _loc3_.paramsAdd[_loc1_].total;
+               _loc12_.leftText = _loc12_.leftText + (Utils.instance.htmlWrapper(_loc33_ + "/" + _loc34_,Utils.instance.COLOR_NUMBER,12,"$TitleFont") + "<br/>");
+               _loc12_.rightTextList.push(new ToolTipBlockRightListItemVO(TOOLTIPS.vehicle(_loc32_)));
+               _loc1_++;
             }
-            (loc4 = net.wg.gui.components.tooltips.helpers.Utils.instance.createSeparate(content)).y = topPosition | 0;
-            seaprators.push(loc4);
-            topPosition = topPosition + net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_SEPARATE;
-            var loc11:*=" " + loc7.makeString(TOOLTIPS.MODULE_COUNT);
-            var loc12:*;
-            (loc12 = new net.wg.gui.components.tooltips.VO.ToolTipBlockVO()).contener = content;
-            loc12.childrenNamePrefix = "stats";
-            loc12.leftText = "";
-            loc12.leftTextColor = net.wg.gui.components.tooltips.helpers.Utils.instance.convertStringColorToNumber(net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NUMBER);
-            loc12.rightTextList = new Vector.<net.wg.gui.components.tooltips.VO.ToolTipBlockRightListItemVO>();
-            loc12.rightTextColor = net.wg.gui.components.tooltips.helpers.Utils.instance.convertStringColorToNumber(net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NORMAL);
-            var loc13:*;
-            (loc13 = new net.wg.gui.components.tooltips.VO.ToolTipBlockVO()).contener = content;
-            loc13.childrenNamePrefix = "price";
-            loc13.leftText = "";
-            loc13.leftTextColor = net.wg.gui.components.tooltips.helpers.Utils.instance.convertStringColorToNumber(net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NUMBER);
-            loc13.rightTextList = new Vector.<net.wg.gui.components.tooltips.VO.ToolTipBlockRightListItemVO>();
-            loc13.rightTextColor = net.wg.gui.components.tooltips.helpers.Utils.instance.convertStringColorToNumber(net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NORMAL);
-            if (loc3.stats) 
+         }
+         if(_loc13_.rightTextList.length > 0)
+         {
+            _loc13_.startYPos = topPosition;
+            _loc13_.rightTextCSS = new StyleSheet();
+            _loc13_.rightTextCSS.setStyle("h1",
+               {
+                  "color":Utils.instance.COLOR_NORMAL,
+                  "fontSize":"11px",
+                  "fontFamily":"$TextFont",
+                  "leading":"2px"
+               }
+            );
+            _loc13_.rightTextCSS.setStyle("p",
+               {
+                  "color":Utils.instance.COLOR_ALERT,
+                  "fontSize":"11px",
+                  "fontFamily":"$TextFont",
+                  "leading":"2px"
+               }
+            );
+            _loc5_ = Utils.instance.createBlock(_loc13_,contentMargin.left + bgShadowMargin.left);
+            this.maxWidth = Math.max(this.maxWidth,_loc5_.blockWidth);
+            blockResults.push(_loc5_);
+            topPosition = _loc5_.startYPos;
+            hasIcon = _loc5_.hasIcons?true:hasIcon;
+            _loc4_ = Utils.instance.createSeparate(content);
+            _loc4_.y = topPosition | 0;
+            separators.push(_loc4_);
+            topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
+            leftPartMaxW = _loc5_.leftPartMaxW > leftPartMaxW?_loc5_.leftPartMaxW:leftPartMaxW;
+         }
+         var _loc14_:* = false;
+         var _loc15_:* = "";
+         var _loc16_:Number = 0;
+         if(!(_loc3_.effectOnUse == "") || !(_loc3_.effectAlways == ""))
+         {
+            _loc14_ = true;
+            _loc15_ = Utils.instance.htmlWrapper(_loc7_.makeString(TOOLTIPS.EQUIPMENT_EFFECT),Utils.instance.COLOR_BLOCK_HEADER,14,"$TitleFont",true);
+            _loc35_ = 23;
+            _loc16_ = -1;
+            if(_loc3_.effectOnUse != "")
             {
-                loc21 = loc7.makeString(TOOLTIPS.ITEMSTATUS_NOTENOUGH);
-                loc2 = loc3.stats.length;
-                loc1 = 0;
-                while (loc1 < loc2) 
-                {
-                    loc22 = loc3.stats[loc1][0];
-                    loc23 = isNaN(loc3.stats[loc1][1]) ? loc3.stats[loc1][1] : loc7.integer(loc3.stats[loc1][1]);
-                    loc24 = loc3.stats[loc1][2] ? String(loc3.stats[loc1][2]) : null;
-                    loc25 = net.wg.gui.components.tooltips.helpers.Utils.instance.getIcont(loc22, _component, loc3.gold);
-                    loc26 = net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NUMBER;
-                    loc27 = "";
-                    loc28 = "";
-                    loc29 = 0;
-                    if (_component == "shop" || _component == "hangar" || _component == "inventory") 
-                    {
-                        if (loc24) 
-                        {
-                            loc38 = loc22;
-                            switch (loc38) 
-                            {
-                                case "buy_price_action":
-                                case "buy_price":
-                                {
-                                    if (loc25 != "gold") 
-                                    {
-                                        loc28 = " <img vspace=\"-4\" src=\"img://gui/maps/icons/library/CreditsIcon-2.png\" />";
-                                    }
-                                    else 
-                                    {
-                                        loc28 = " <img vspace=\"-4\" src=\"img://gui/maps/icons/library/GoldIcon-2.png\" />";
-                                    }
-                                    break;
-                                }
-                                case "unlock_price":
-                                {
-                                    loc28 = " <img vspace=\"-4\" src=\"img://gui/maps/icons/library/UnlockPrice.png\" />";
-                                    break;
-                                }
-                            }
-                            loc26 = net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_ALERT;
-                            loc27 = " ( <font color=\"" + net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_ALERT + "\">" + loc21 + "</font> " + loc7.integer(loc24) + loc28 + ")";
-                            loc29 = -1;
-                        }
-                        else 
-                        {
-                            loc27 = "";
-                        }
-                        if (loc30 = loc22 == "textDelimiter/or") 
-                        {
-                            loc13.leftText = loc13.leftText + (net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(loc7.makeString(TOOLTIPS.vehicle(loc22)), net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NORMAL, 10, "$TextFont") + "<br/>");
-                            loc13.rightTextList.push(new net.wg.gui.components.tooltips.VO.ToolTipBlockRightListItemVO());
-                        }
-                        else 
-                        {
-                            loc13.leftText = loc13.leftText + (net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(loc23, loc26, 12, "$TitleFont") + "<br/>");
-                            loc31 = "<h1>" + loc7.makeString(TOOLTIPS.vehicle(loc22)) + loc27 + "</h1>";
-                            loc13.rightTextList.push(new net.wg.gui.components.tooltips.VO.ToolTipBlockRightListItemVO(loc31, loc25, loc29));
-                        }
-                    }
-                    else 
-                    {
-                        loc12.leftText = loc12.leftText + (net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(loc23 + loc11, net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NUMBER, 12, "$TextFont") + "<br/>");
-                        loc12.rightTextList.push(new net.wg.gui.components.tooltips.VO.ToolTipBlockRightListItemVO(TOOLTIPS.vehicle(loc22)));
-                    }
-                    ++loc1;
-                }
+               _loc15_ = _loc15_ + this.getEquipmentUsageBlock(_loc7_.makeString(TOOLTIPS.EQUIPMENT_ONUSE),_loc7_.makeString(_loc3_.effectOnUse),_loc35_);
             }
-            if (loc3.paramsAdd && _type == "shell") 
+            if(_loc3_.effectAlways != "")
             {
-                loc2 = loc3.paramsAdd.length;
-                loc1 = 0;
-                while (loc1 < loc2) 
-                {
-                    loc32 = loc3.paramsAdd[loc1].label;
-                    loc33 = loc3.paramsAdd[loc1].current;
-                    loc34 = loc3.paramsAdd[loc1].total;
-                    loc12.leftText = loc12.leftText + (net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(loc33 + "/" + loc34, net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NUMBER, 12, "$TitleFont") + "<br/>");
-                    loc12.rightTextList.push(new net.wg.gui.components.tooltips.VO.ToolTipBlockRightListItemVO(TOOLTIPS.vehicle(loc32)));
-                    ++loc1;
-                }
+               _loc15_ = _loc15_ + this.getEquipmentUsageBlock(_loc7_.makeString(TOOLTIPS.EQUIPMENT_ALWAYS),_loc7_.makeString(_loc3_.effectAlways),_loc35_);
             }
-            if (loc13.rightTextList.length > 0) 
+            if(_loc3_.effectRestriction != "")
             {
-                loc13.startYPos = topPosition;
-                loc13.rightTextCSS = new flash.text.StyleSheet();
-                loc13.rightTextCSS.setStyle("h1", {"color":net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NORMAL, "fontSize":"11px", "fontFamily":"$TextFont", "leading":"2px"});
-                loc13.rightTextCSS.setStyle("p", {"color":net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_ALERT, "fontSize":"11px", "fontFamily":"$TextFont", "leading":"2px"});
-                loc5 = net.wg.gui.components.tooltips.helpers.Utils.instance.createBlock(loc13, contentMargin.left + bgShadowMargin.left);
-                this.maxWidth = Math.max(this.maxWidth, loc5.blockWidth);
-                blockResults.push(loc5);
-                topPosition = loc5.startYPos;
-                hasIcon = loc5.hasIcons ? true : hasIcon;
-                (loc4 = net.wg.gui.components.tooltips.helpers.Utils.instance.createSeparate(content)).y = topPosition | 0;
-                seaprators.push(loc4);
-                topPosition = topPosition + net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_SEPARATE;
-                leftPartMaxW = loc5.leftPartMaxW > leftPartMaxW ? loc5.leftPartMaxW : leftPartMaxW;
+               _loc15_ = _loc15_ + ("<br/>" + Utils.instance.htmlWrapper(_loc7_.makeString(TOOLTIPS.EQUIPMENT_RESTRICTION),Utils.instance.COLOR_BLOCK_HEADER,14,"$TitleFont",true) + Utils.instance.htmlWrapper(" ",Utils.instance.COLOR_ADD_INFO,24,"$TextFont"));
+               _loc15_ = _loc15_ + this.getEquipmentUsageBlock("",_loc7_.makeString(_loc3_.effectRestriction),_loc35_);
             }
-            var loc14:*=false;
-            var loc15:*="";
-            var loc16:*=0;
-            if (!(loc3.effectOnUse == "") || !(loc3.effectAlways == "")) 
+         }
+         else
+         {
+            if(_loc3_.descr)
             {
-                loc14 = true;
-                loc15 = net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(loc7.makeString(TOOLTIPS.EQUIPMENT_EFFECT), net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_BLOCK_HEADER, 14, "$TitleFont", true);
-                loc35 = 23;
-                loc16 = -1;
-                if (loc3.effectOnUse != "") 
-                {
-                    loc15 = loc15 + this.getEquipmentUsageBlock(loc7.makeString(TOOLTIPS.EQUIPMENT_ONUSE), loc7.makeString(loc3.effectOnUse), loc35);
-                    loc35 + 18;
-                }
-                if (loc3.effectAlways != "") 
-                {
-                    loc15 = loc15 + this.getEquipmentUsageBlock(loc7.makeString(TOOLTIPS.EQUIPMENT_ALWAYS), loc7.makeString(loc3.effectAlways), loc35);
-                    loc35 + 18;
-                }
-                if (loc3.effectRestriction != "") 
-                {
-                    loc15 = (loc15 = loc15 + ("<br/>" + net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(loc7.makeString(TOOLTIPS.EQUIPMENT_RESTRICTION), net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_BLOCK_HEADER, 14, "$TitleFont", true) + net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(" ", net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_ADD_INFO, 24, "$TextFont"))) + this.getEquipmentUsageBlock("", loc7.makeString(loc3.effectRestriction), loc35);
-                    loc35 + 18;
-                }
+               _loc14_ = true;
+               _loc15_ = Utils.instance.htmlWrapper(_loc3_.descr,Utils.instance.COLOR_NORMAL,11,"$TextFont");
             }
-            else if (loc3.descr) 
+         }
+         if(_loc14_)
+         {
+            _loc36_ = new TextFormat();
+            _loc36_.leading = _loc16_;
+            topPosition = topPosition - Utils.instance.MARGIN_AFTER_SEPARATE;
+            this.whiteBg.y = topPosition | 0;
+            this.whiteBg.x = bgShadowMargin.left + 1;
+            this.whiteBg.width = 10;
+            topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
+            this.discrTF.wordWrap = true;
+            this.discrTF.autoSize = TextFieldAutoSize.LEFT;
+            this.discrTF.htmlText = _loc15_;
+            this.discrTF.setTextFormat(_loc36_);
+            this.discrTF.width = this.discrTF.textWidth + 5;
+            this.discrTF.y = topPosition | 0;
+            this.discrTF.x = _loc10_;
+            topPosition = topPosition + (this.discrTF.textHeight + Utils.instance.MARGIN_AFTER_BLOCK);
+            this.whiteBg.height = topPosition - this.whiteBg.y-1 | 0;
+            _loc4_ = Utils.instance.createSeparate(content);
+            _loc4_.y = this.whiteBg.y + this.whiteBg.height;
+            separators.push(_loc4_);
+            topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
+            contentMargin.bottom = 2;
+         }
+         else
+         {
+            this.whiteBg.visible = false;
+            this.discrTF.width = 10;
+            this.discrTF.visible = false;
+         }
+         if(_loc3_.params)
+         {
+            _loc5_ = Utils.instance.createBlock(this.formParamsBlockData(_loc3_.params,_loc7_.makeString(TOOLTIPS.TANKCARUSEL_MAINPROPERTY),_loc3_.tooHeavy),contentMargin.left + bgShadowMargin.left);
+            this.maxWidth = Math.max(this.maxWidth,_loc5_.blockWidth);
+            blockResults.push(_loc5_);
+            topPosition = _loc5_.startYPos;
+            hasIcon = _loc5_.hasIcons?true:hasIcon;
+            _loc4_ = Utils.instance.createSeparate(content);
+            _loc4_.y = topPosition | 0;
+            separators.push(_loc4_);
+            topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
+            leftPartMaxW = _loc5_.leftPartMaxW > leftPartMaxW?_loc5_.leftPartMaxW:leftPartMaxW;
+            contentMargin.bottom = this._defContentMarginBottom;
+         }
+         if(_loc3_.paramsEx)
+         {
+            _loc5_ = Utils.instance.createBlock(this.formParamsBlockData(_loc3_.paramsEx.params,_loc3_.paramsEx.headerText,_loc3_.tooHeavy),contentMargin.left + bgShadowMargin.left);
+            this.maxWidth = Math.max(this.maxWidth,_loc5_.blockWidth);
+            blockResults.push(_loc5_);
+            topPosition = _loc5_.startYPos;
+            hasIcon = _loc5_.hasIcons?true:hasIcon;
+            topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
+            leftPartMaxW = _loc5_.leftPartMaxW > leftPartMaxW?_loc5_.leftPartMaxW:leftPartMaxW;
+            contentMargin.bottom = this._defContentMarginBottom;
+         }
+         if(_loc12_.rightTextList.length > 0)
+         {
+            _loc12_.startYPos = topPosition;
+            _loc5_ = Utils.instance.createBlock(_loc12_,contentMargin.left + bgShadowMargin.left);
+            this.maxWidth = Math.max(this.maxWidth,_loc5_.blockWidth);
+            blockResults.push(_loc5_);
+            topPosition = _loc5_.startYPos;
+            hasIcon = _loc5_.hasIcons?true:hasIcon;
+            _loc4_ = Utils.instance.createSeparate(content);
+            _loc4_.y = topPosition | 0;
+            separators.push(_loc4_);
+            topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
+            leftPartMaxW = _loc5_.leftPartMaxW > leftPartMaxW?_loc5_.leftPartMaxW:leftPartMaxW;
+            contentMargin.bottom = this._defContentMarginBottom;
+         }
+         if(_loc3_.complex)
+         {
+            _loc4_ = separators.pop();
+            content.removeChild(_loc4_);
+            _loc4_ = null;
+            topPosition = topPosition - Utils.instance.MARGIN_AFTER_SEPARATE;
+            this.complexStatus.x = bgShadowMargin.left + 1;
+            this.complexStatus.y = topPosition | 0;
+            this.complexHeader.htmlText = _loc3_.complexHeader;
+            this.complexNote.htmlText = _loc3_.complexNote;
+            topPosition = topPosition + (this.complexStatus.height + Utils.instance.MARGIN_AFTER_BLOCK);
+            contentMargin.bottom = 2;
+            this.maxWidth = Math.max(this.maxWidth,this.complexStatus.width - contentMargin.horizontal);
+         }
+         else
+         {
+            this.complexStatus.y = 0;
+            this.complexStatus.width = 10;
+            this.complexStatus.visible = false;
+         }
+         if(separators.length > 1 && !_loc3_.status || separators.length > 0 && (_loc3_.status))
+         {
+            _loc4_ = separators[0];
+            this.maxWidth = Math.max(this.maxWidth,_loc4_.width);
+         }
+         this.updateContentWidth();
+         if(_loc3_.status)
+         {
+            _loc37_ = Utils.instance.getStatusColor(_loc3_.statusLevel);
+            this.tooltipStatus.y = topPosition | 0;
+            this.tooltipStatus.x = contentMargin.left + bgShadowMargin.left;
+            this.tooltipStatus.updateWidth(content.width - contentMargin.right - bgShadowMargin.right);
+            this.tooltipStatus.setData(_loc3_.statusHeader,_loc3_.statusText,_loc37_);
+            topPosition = topPosition + this.tooltipStatus.height;
+            contentMargin.bottom = this._defContentMarginBottom;
+         }
+         else
+         {
+            this.tooltipStatus.y = 0;
+            this.tooltipStatus.width = 10;
+            this.tooltipStatus.visible = false;
+            if(!_loc3_.complex)
             {
-                loc14 = true;
-                loc15 = net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(loc3.descr, net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NORMAL, 11, "$TextFont");
+               _loc4_ = separators.pop();
+               content.removeChild(_loc4_);
+               _loc4_ = null;
+               topPosition = topPosition - Utils.instance.MARGIN_AFTER_SEPARATE;
             }
-            if (loc14) 
-            {
-                (loc36 = new flash.text.TextFormat()).leading = loc16;
-                topPosition = topPosition - net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_SEPARATE;
-                this.whiteBg.y = topPosition | 0;
-                this.whiteBg.x = bgShadowMargin.left + 1;
-                this.whiteBg.width = 10;
-                topPosition = topPosition + net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_SEPARATE;
-                this.discrTF.wordWrap = true;
-                this.discrTF.autoSize = flash.text.TextFieldAutoSize.LEFT;
-                this.discrTF.htmlText = loc15;
-                this.discrTF.setTextFormat(loc36);
-                this.discrTF.width = this.discrTF.textWidth + 5;
-                this.discrTF.y = topPosition | 0;
-                this.discrTF.x = loc10;
-                topPosition = topPosition + (this.discrTF.textHeight + net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_BLOCK);
-                this.whiteBg.height = (topPosition - this.whiteBg.y - 1) | 0;
-                (loc4 = net.wg.gui.components.tooltips.helpers.Utils.instance.createSeparate(content)).y = this.whiteBg.y + this.whiteBg.height;
-                seaprators.push(loc4);
-                topPosition = topPosition + net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_SEPARATE;
-                contentMargin.bottom = 2;
-            }
-            else 
-            {
-                this.whiteBg.visible = false;
-                this.discrTF.width = 10;
-                this.discrTF.visible = false;
-            }
-            if (loc3.params) 
-            {
-                loc5 = net.wg.gui.components.tooltips.helpers.Utils.instance.createBlock(this.formParamsBlockData(loc3.params, loc7.makeString(TOOLTIPS.TANKCARUSEL_MAINPROPERTY), loc3.tooHeavy), contentMargin.left + bgShadowMargin.left);
-                this.maxWidth = Math.max(this.maxWidth, loc5.blockWidth);
-                blockResults.push(loc5);
-                topPosition = loc5.startYPos;
-                hasIcon = loc5.hasIcons ? true : hasIcon;
-                (loc4 = net.wg.gui.components.tooltips.helpers.Utils.instance.createSeparate(content)).y = topPosition | 0;
-                seaprators.push(loc4);
-                topPosition = topPosition + net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_SEPARATE;
-                leftPartMaxW = loc5.leftPartMaxW > leftPartMaxW ? loc5.leftPartMaxW : leftPartMaxW;
-                contentMargin.bottom = this._defContentMarginBottom;
-            }
-            if (loc3.paramsEx) 
-            {
-                loc5 = net.wg.gui.components.tooltips.helpers.Utils.instance.createBlock(this.formParamsBlockData(loc3.paramsEx.params, loc3.paramsEx.headerText, loc3.tooHeavy), contentMargin.left + bgShadowMargin.left);
-                this.maxWidth = Math.max(this.maxWidth, loc5.blockWidth);
-                blockResults.push(loc5);
-                topPosition = loc5.startYPos;
-                hasIcon = loc5.hasIcons ? true : hasIcon;
-                topPosition = topPosition + net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_SEPARATE;
-                leftPartMaxW = loc5.leftPartMaxW > leftPartMaxW ? loc5.leftPartMaxW : leftPartMaxW;
-                contentMargin.bottom = this._defContentMarginBottom;
-            }
-            if (loc12.rightTextList.length > 0) 
-            {
-                loc12.startYPos = topPosition;
-                loc5 = net.wg.gui.components.tooltips.helpers.Utils.instance.createBlock(loc12, contentMargin.left + bgShadowMargin.left);
-                this.maxWidth = Math.max(this.maxWidth, loc5.blockWidth);
-                blockResults.push(loc5);
-                topPosition = loc5.startYPos;
-                hasIcon = loc5.hasIcons ? true : hasIcon;
-                (loc4 = net.wg.gui.components.tooltips.helpers.Utils.instance.createSeparate(content)).y = topPosition | 0;
-                seaprators.push(loc4);
-                topPosition = topPosition + net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_SEPARATE;
-                leftPartMaxW = loc5.leftPartMaxW > leftPartMaxW ? loc5.leftPartMaxW : leftPartMaxW;
-                contentMargin.bottom = this._defContentMarginBottom;
-            }
-            if (loc3.complex) 
-            {
-                loc4 = seaprators.pop();
-                content.removeChild(loc4);
-                loc4 = null;
-                topPosition = topPosition - net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_SEPARATE;
-                this.complexStatus.x = bgShadowMargin.left + 1;
-                this.complexStatus.y = topPosition | 0;
-                this.complexHeader.htmlText = loc3.complexHeader;
-                this.complexNote.htmlText = loc3.complexNote;
-                topPosition = topPosition + (this.complexStatus.height + net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_BLOCK);
-                contentMargin.bottom = 2;
-                this.maxWidth = Math.max(this.maxWidth, this.complexStatus.width - contentMargin.horizontal);
-            }
-            else 
-            {
-                this.complexStatus.y = 0;
-                this.complexStatus.width = 10;
-                this.complexStatus.visible = false;
-            }
-            if (seaprators.length > 1 && !loc3.status || seaprators.length > 0 && loc3.status) 
-            {
-                loc4 = seaprators[0];
-                this.maxWidth = Math.max(this.maxWidth, loc4.width);
-            }
-            this.updateContentWidth();
-            if (loc3.status) 
-            {
-                loc37 = net.wg.gui.components.tooltips.helpers.Utils.instance.getStatusColor(loc3.statusLevel);
-                this.tooltipStatus.y = topPosition | 0;
-                this.tooltipStatus.x = contentMargin.left + bgShadowMargin.left;
-                this.tooltipStatus.updateWidth(content.width - contentMargin.right - bgShadowMargin.right);
-                this.tooltipStatus.setData(loc3.statusHeader, loc3.statusText, loc37);
-                topPosition = topPosition + this.tooltipStatus.height;
-                contentMargin.bottom = this._defContentMarginBottom;
-            }
-            else 
-            {
-                this.tooltipStatus.y = 0;
-                this.tooltipStatus.width = 10;
-                this.tooltipStatus.visible = false;
-                if (!loc3.complex) 
-                {
-                    loc4 = seaprators.pop();
-                    content.removeChild(loc4);
-                    loc4 = null;
-                    topPosition = topPosition - net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_SEPARATE;
-                }
-            }
-            loc3 = null;
-            updatePositions();
-            super.redraw();
-            return;
-        }
+         }
+         _loc3_ = null;
+         updatePositions();
+         super.redraw();
+      }
 
-        protected override function updateSize():void
-        {
-            background.width = content.width + contentMargin.right + bgShadowMargin.right | 0;
-            background.height = content.height + contentMargin.bottom + bgShadowMargin.bottom | 0;
-            this.whiteBg.width = content.width + bgShadowMargin.horizontal;
-            return;
-        }
+      override protected function updateSize() : void {
+         background.width = content.width + contentMargin.right + bgShadowMargin.right | 0;
+         background.height = content.height + contentMargin.bottom + bgShadowMargin.bottom | 0;
+         this.whiteBg.width = content.width + bgShadowMargin.horizontal;
+      }
 
-        internal function formParamsBlockData(arg1:Array, arg2:String, arg3:Boolean):net.wg.gui.components.tooltips.VO.ToolTipBlockVO
-        {
-            var loc5:*=null;
-            var loc6:*=null;
-            var loc1:*;
-            (loc1 = new net.wg.gui.components.tooltips.VO.ToolTipBlockVO()).header = arg2;
-            loc1.startYPos = topPosition;
-            loc1.contener = content;
-            loc1.childrenNamePrefix = "params";
-            loc1.leftText = "";
-            loc1.leftTextColor = net.wg.gui.components.tooltips.helpers.Utils.instance.convertStringColorToNumber(net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NUMBER);
-            loc1.rightTextList = new Vector.<net.wg.gui.components.tooltips.VO.ToolTipBlockRightListItemVO>();
-            loc1.rightTextColor = net.wg.gui.components.tooltips.helpers.Utils.instance.convertStringColorToNumber(net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NORMAL);
-            loc1.rightTextCSS = new flash.text.StyleSheet();
-            loc1.rightTextCSS.setStyle("h", {"color":net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NORMAL, "fontSize":"11px", "fontFamily":"$TextFont", "leading":"2px"});
-            loc1.rightTextCSS.setStyle("p", {"color":net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_SUB_NORMAL, "fontSize":"11px", "fontFamily":"$TextFont", "leading":"2px"});
-            var loc2:*="";
-            var loc3:*=arg1.length;
-            var loc4:*=0;
-            while (loc4 < loc3) 
+      private function formParamsBlockData(param1:Array, param2:String, param3:Boolean) : ToolTipBlockVO {
+         var _loc8_:String = null;
+         var _loc9_:String = null;
+         var _loc4_:ToolTipBlockVO = new ToolTipBlockVO();
+         _loc4_.header = param2;
+         _loc4_.startYPos = topPosition;
+         _loc4_.contener = content;
+         _loc4_.childrenNamePrefix = "params";
+         _loc4_.leftText = "";
+         _loc4_.leftTextColor = Utils.instance.convertStringColorToNumber(Utils.instance.COLOR_NUMBER);
+         _loc4_.rightTextList = new Vector.<ToolTipBlockRightListItemVO>();
+         _loc4_.rightTextColor = Utils.instance.convertStringColorToNumber(Utils.instance.COLOR_NORMAL);
+         _loc4_.rightTextCSS = new StyleSheet();
+         _loc4_.rightTextCSS.setStyle("h",
             {
-                loc5 = arg1[loc4][0];
-                loc6 = arg1[loc4][1];
-                if (loc5 == "weight" && arg3) 
-                {
-                    loc2 = net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_ALERT;
-                }
-                else 
-                {
-                    loc2 = net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NUMBER;
-                }
-                loc1.leftText = loc1.leftText + (net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(loc6, loc2, 12, "$TextFont") + "<br/>");
-                loc1.rightTextList[loc4] = new net.wg.gui.components.tooltips.VO.ToolTipBlockRightListItemVO(App.utils.locale.makeString(MENU.moduleinfo_params(loc5)));
-                ++loc4;
+               "color":Utils.instance.COLOR_NORMAL,
+               "fontSize":"11px",
+               "fontFamily":"$TextFont",
+               "leading":"2px"
             }
-            return loc1;
-        }
-
-        internal function getEquipmentUsageBlock(arg1:String, arg2:String, arg3:int=18):String
-        {
-            arg1 = arg1 != "" ? net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(arg1, net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_ADD_INFO, 13, "$TitleFont", true) + net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(" ", net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_ADD_INFO, arg3, "$TextFont") : "";
-            arg2 = arg2 != "" ? net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(arg2, net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NORMAL, 12, "$FieldFont") : "";
-            var loc1:*;
-            return loc1 = "<br/>" + arg1 + arg2;
-        }
-
-        internal function updateContentWidth():void
-        {
-            var loc1:*=NaN;
-            var loc2:*=NaN;
-            var loc3:*=0;
-            var loc4:*=0;
-            var loc5:*=null;
-            var loc6:*=null;
-            var loc7:*=0;
-            var loc8:*=0;
-            if (this.discrTF.visible) 
+         );
+         _loc4_.rightTextCSS.setStyle("p",
             {
-                loc1 = this.discrTF.height;
-                loc2 = this.discrTF.y;
-                this.discrTF.width = this.maxWidth;
-                loc1 = this.discrTF.textHeight + 5 - loc1 | 0;
-                this.whiteBg.height = this.whiteBg.height + loc1;
-                loc3 = 0;
-                loc4 = 0;
-                if (seaprators) 
-                {
-                    loc4 = seaprators.length;
-                    loc3 = 0;
-                    while (loc3 < loc4) 
-                    {
-                        if ((loc5 = seaprators[loc3]).y > loc2) 
-                        {
-                            loc5.y = loc5.y + loc1;
-                        }
-                        ++loc3;
-                    }
-                }
-                if (blockResults) 
-                {
-                    loc4 = blockResults.length;
-                    loc3 = 0;
-                    while (loc3 < loc4) 
-                    {
-                        if ((loc6 = net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO(blockResults[loc3])).leftTextField.y > loc2) 
-                        {
-                            if (loc6.headerTextField) 
-                            {
-                                loc6.headerTextField.y = loc6.headerTextField.y + loc1;
-                            }
-                            loc6.leftTextField.y = loc6.leftTextField.y + loc1;
-                            loc7 = loc6.elRightList.length;
-                            loc8 = 0;
-                            while (loc8 < loc7) 
-                            {
-                                loc6.elRightList[loc8].y = loc6.elRightList[loc8].y + loc1;
-                                ++loc8;
-                            }
-                        }
-                        ++loc3;
-                    }
-                }
-                if (this.complexStatus.visible) 
-                {
-                    this.complexStatus.y = this.complexStatus.y + loc1;
-                }
-                topPosition = topPosition + loc1;
+               "color":Utils.instance.COLOR_SUB_NORMAL,
+               "fontSize":"11px",
+               "fontFamily":"$TextFont",
+               "leading":"2px"
             }
-            return;
-        }
+         );
+         var _loc5_:* = "";
+         var _loc6_:int = param1.length;
+         var _loc7_:uint = 0;
+         while(_loc7_ < _loc6_)
+         {
+            _loc8_ = param1[_loc7_][0];
+            _loc9_ = param1[_loc7_][1];
+            if(_loc8_ == "weight" && (param3))
+            {
+               _loc5_ = Utils.instance.COLOR_ALERT;
+            }
+            else
+            {
+               _loc5_ = Utils.instance.COLOR_NUMBER;
+            }
+            _loc4_.leftText = _loc4_.leftText + (Utils.instance.htmlWrapper(_loc9_,_loc5_,12,"$TextFont") + "<br/>");
+            _loc4_.rightTextList[_loc7_] = new ToolTipBlockRightListItemVO(App.utils.locale.makeString(MENU.moduleinfo_params(_loc8_)));
+            _loc7_++;
+         }
+         return _loc4_;
+      }
 
-        internal const TYPE_SHELL:String="shell";
+      private function getEquipmentUsageBlock(param1:String, param2:String, param3:int=18) : String {
+         var param1:String = param1 == ""?"":Utils.instance.htmlWrapper(param1,Utils.instance.COLOR_ADD_INFO,13,"$TitleFont",true) + Utils.instance.htmlWrapper(" ",Utils.instance.COLOR_ADD_INFO,param3,"$TextFont");
+         var param2:String = param2 == ""?"":Utils.instance.htmlWrapper(param2,Utils.instance.COLOR_NORMAL,12,"$FieldFont");
+         var _loc4_:String = "<br/>" + param1 + param2;
+         return _loc4_;
+      }
 
-        internal const TYPE_MODULE:String="module";
+      private function updateContentWidth() : void {
+         var _loc1_:* = NaN;
+         var _loc2_:* = NaN;
+         var _loc3_:uint = 0;
+         var _loc4_:uint = 0;
+         var _loc5_:Separator = null;
+         var _loc6_:ToolTipBlockResultVO = null;
+         var _loc7_:uint = 0;
+         var _loc8_:uint = 0;
+         if(this.discrTF.visible)
+         {
+            _loc1_ = this.discrTF.height;
+            _loc2_ = this.discrTF.y;
+            this.discrTF.width = this.maxWidth;
+            _loc1_ = this.discrTF.textHeight + 5 - _loc1_ | 0;
+            this.whiteBg.height = this.whiteBg.height + _loc1_;
+            _loc3_ = 0;
+            _loc4_ = 0;
+            if(separators)
+            {
+               _loc4_ = separators.length;
+               _loc3_ = 0;
+               while(_loc3_ < _loc4_)
+               {
+                  _loc5_ = separators[_loc3_];
+                  if(_loc5_.y > _loc2_)
+                  {
+                     _loc5_.y = _loc5_.y + _loc1_;
+                  }
+                  _loc3_++;
+               }
+            }
+            if(blockResults)
+            {
+               _loc4_ = blockResults.length;
+               _loc3_ = 0;
+               while(_loc3_ < _loc4_)
+               {
+                  _loc6_ = ToolTipBlockResultVO(blockResults[_loc3_]);
+                  if(_loc6_.leftTextField.y > _loc2_)
+                  {
+                     if(_loc6_.headerTextField)
+                     {
+                        _loc6_.headerTextField.y = _loc6_.headerTextField.y + _loc1_;
+                     }
+                     _loc6_.leftTextField.y = _loc6_.leftTextField.y + _loc1_;
+                     _loc7_ = _loc6_.elRightList.length;
+                     _loc8_ = 0;
+                     while(_loc8_ < _loc7_)
+                     {
+                        _loc6_.elRightList[_loc8_].y = _loc6_.elRightList[_loc8_].y + _loc1_;
+                        _loc8_++;
+                     }
+                  }
+                  _loc3_++;
+               }
+            }
+            if(this.complexStatus.visible)
+            {
+               this.complexStatus.y = this.complexStatus.y + _loc1_;
+            }
+            topPosition = topPosition + _loc1_;
+         }
+      }
+   }
 
-        public var headerTF:flash.text.TextField=null;
-
-        public var discrTF:flash.text.TextField=null;
-
-        public var whiteBg:flash.display.Sprite=null;
-
-        public var tooltipStatus:net.wg.gui.components.tooltips.Status=null;
-
-        public var complexStatus:flash.display.Sprite=null;
-
-        public var complexHeader:flash.text.TextField=null;
-
-        public var complexNote:flash.text.TextField=null;
-
-        internal var _defContentMarginBottom:Number=0;
-
-        internal var _defBGShadowMarginBottom:Number=0;
-
-        internal var maxWidth:Number=250;
-    }
 }

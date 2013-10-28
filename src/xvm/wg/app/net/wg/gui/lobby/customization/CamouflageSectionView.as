@@ -1,576 +1,561 @@
-package net.wg.gui.lobby.customization 
+package net.wg.gui.lobby.customization
 {
-    import flash.events.*;
-    import net.wg.data.daapi.base.*;
-    import net.wg.gui.lobby.customization.data.*;
-    import net.wg.gui.lobby.customization.renderers.*;
-    import scaleform.clik.controls.*;
-    import scaleform.clik.events.*;
-    
-    public class CamouflageSectionView extends net.wg.gui.lobby.customization.BaseTimedCustomizationSectionView
-    {
-        public function CamouflageSectionView()
-        {
-            this.currentData = [null, null, null];
-            this.newData = [null, null, null];
-            super();
-            return;
-        }
+   import net.wg.gui.lobby.customization.renderers.CamoDemoRenderer;
+   import net.wg.gui.lobby.customization.data.CamouflagesDataProvider;
+   import net.wg.data.daapi.base.DAAPIDataProvider;
+   import net.wg.gui.lobby.customization.data.DAAPIItemsDataProvider;
+   import net.wg.gui.lobby.customization.data.RentalPackageDAAPIDataProvider;
+   import scaleform.clik.controls.Button;
+   import scaleform.clik.events.ListEvent;
+   import scaleform.clik.events.ButtonEvent;
+   import flash.events.MouseEvent;
+   import net.wg.gui.lobby.customization.renderers.CustomizationItemRenderer;
 
-        internal function getCurrRenderer(arg1:Number):net.wg.gui.lobby.customization.renderers.CamoDemoRenderer
-        {
-            var loc1:*=[this.currentItemRenderer0, this.currentItemRenderer1, this.currentItemRenderer2];
-            return loc1[arg1];
-        }
 
-        internal function getDropButton(arg1:Number):net.wg.gui.lobby.customization.CamoDropButton
-        {
-            var loc1:*=[this.dropButton0, this.dropButton1, this.dropButton2];
-            return loc1[arg1];
-        }
+   public class CamouflageSectionView extends BaseTimedCustomizationSectionView
+   {
+          
+      public function CamouflageSectionView() {
+         this.currentData = [null,null,null];
+         this.newData = [null,null,null];
+         super();
+      }
 
-        internal function hadleRollOverDropButton(arg1:flash.events.MouseEvent):void
-        {
-            App.toolTipMgr.showComplex(this.getDropButtonTooltip());
-            return;
-        }
+      public var currentItemRenderer0:CamoDemoRenderer = null;
 
-        internal function hadleRollOutDropButton(arg1:flash.events.MouseEvent):void
-        {
-            App.toolTipMgr.hide();
-            return;
-        }
+      public var currentItemRenderer1:CamoDemoRenderer = null;
 
-        public override function set currentItemData(arg1:Object):void
-        {
-            this.currentData[this._selectedKind] = arg1;
-            return;
-        }
+      public var currentItemRenderer2:CamoDemoRenderer = null;
 
-        internal function handleSelectNewItem(arg1:net.wg.gui.lobby.customization.CustomizationEvent):void
-        {
-            this.setNewItemView(arg1.index, arg1.data, this._selectedKind);
-            return;
-        }
+      public var dropButton0:CamoDropButton = null;
 
-        internal function handleChangeActionLock(arg1:net.wg.gui.lobby.customization.CustomizationEvent):void
-        {
-            var loc2:*=null;
-            var loc1:*=3;
-            var loc3:*=0;
-            loc3 = 0;
-            while (loc3 < loc1) 
+      public var dropButton1:CamoDropButton = null;
+
+      public var dropButton2:CamoDropButton = null;
+
+      private var _selectedKind:int = -1;
+
+      private var _droppingKind:int = -1;
+
+      public var currentData:Array;
+
+      public var newData:Array;
+
+      private var currentDataDirty:Boolean = false;
+
+      override public function getEmptyDataItem() : Object {
+         return CamouflagesDataProvider.getEmptyItem();
+      }
+
+      override public function getGroupsDP() : DAAPIDataProvider {
+         return form.camouflageGroupsDataProvider;
+      }
+
+      override public function getItemsDP() : DAAPIItemsDataProvider {
+         return form.camouflageDP;
+      }
+
+      override public function getRentalPackagesDP() : RentalPackageDAAPIDataProvider {
+         return form.camouflageRentalPackageDP;
+      }
+
+      override public function getViewLinkage() : String {
+         return BaseTimedCustomizationSectionView.CAMOUFLAGE_GROUP_VIEW;
+      }
+
+      override public function getTimeSectionLabel() : String {
+         return MENU.CUSTOMIZATION_LABELS_CAMOUFLAGE_PERIOD;
+      }
+
+      override public function getDropButtonTooltip() : String {
+         return TOOLTIPS.CUSTOMIZATION_CAMOUFLAGE_CURRENT_DROP;
+      }
+
+      override public function getSectionName() : String {
+         return BaseTimedCustomizationSectionView.CAMOUFLAGE;
+      }
+
+      override public function get currentItemData() : Object {
+         return this.currentData[this._selectedKind];
+      }
+
+      override public function set currentItemData(param1:Object) : void {
+         this.currentData[this._selectedKind] = param1;
+      }
+
+      override public function get newItemData() : Object {
+         return this.newData[this._selectedKind];
+      }
+
+      override public function set newItemData(param1:Object) : void {
+         this.newData[this._selectedKind] = param1;
+      }
+
+      override public function onChangeSuccess() : void {
+         var _loc3_:CamoDemoRenderer = null;
+         var _loc4_:Button = null;
+         var _loc1_:Number = this.currentData.length;
+         var _loc2_:Number = 0;
+         _loc2_ = 0;
+         while(_loc2_ < _loc1_)
+         {
+            this.currentData[_loc2_] = this.newData[_loc2_];
+            _loc3_ = this.getCurrRenderer(_loc2_);
+            _loc3_.setData(this.currentData[_loc2_]);
+            _loc4_ = this.getDropButton(_loc2_);
+            if(_loc4_ != null)
             {
-                loc2 = this.getDropButton(loc3);
-                if (loc2 != null) 
-                {
-                    loc2.enabled = !arg1.locked;
-                }
-                ++loc3;
+               _loc4_.visible = true;
             }
-            return;
-        }
+            this.newData[_loc2_] = this.getEmptyDataItem();
+            _loc2_++;
+         }
+         this.updateTimeLeftVisibility();
+         if(view != null)
+         {
+            view.invalidateListData(true);
+         }
+      }
 
-        internal function handleClickDropButton(arg1:net.wg.gui.lobby.customization.CustomizationEvent):void
-        {
-            App.toolTipMgr.hide();
-            this._droppingKind = arg1.kind;
-            if (form) 
+      override public function onDropSuccess() : void {
+         var _loc1_:Object = this.getEmptyDataItem();
+         var _loc2_:String = CamouflagesDataProvider(this.getItemsDP()).getDefaultDescription(this._droppingKind);
+         if(_loc2_.length > 0)
+         {
+            _loc1_.description = _loc2_;
+         }
+         this.currentData[this._droppingKind] = _loc1_;
+         var _loc3_:CamoDemoRenderer = this.getCurrRenderer(this._droppingKind);
+         _loc3_.setData(this.currentData[this._droppingKind]);
+         var _loc4_:Button = this.getDropButton(this._droppingKind);
+         if(_loc4_ != null)
+         {
+            _loc4_.visible = false;
+         }
+         this._droppingKind = -1;
+         this.updateTimeLeftVisibility();
+         if(view != null)
+         {
+            view.invalidateListData(true);
+         }
+      }
+
+      override public function requestCurrentItem() : void {
+         var _loc4_:Object = null;
+         var _loc1_:Array = form.getCurrentItemS(this.getSectionName()) as Array;
+         var _loc2_:Number = _loc1_.length;
+         var _loc3_:Number = 0;
+         _loc3_ = 0;
+         while(_loc3_ < _loc2_)
+         {
+            _loc4_ = _loc1_[_loc3_];
+            this.currentData[_loc3_] = _loc4_;
+            _loc3_++;
+         }
+         this.currentDataDirty = true;
+         invalidate();
+      }
+
+      override public function requestItemAt(param1:int) : void {
+         var _loc3_:CamouflagesDataProvider = null;
+         var _loc4_:Object = null;
+         var _loc5_:Object = null;
+         var _loc6_:Object = null;
+         var _loc7_:* = NaN;
+         var _loc2_:Object = _groupsDataProvider.requestItemAt(param1);
+         if((view) && (_loc2_))
+         {
+            view.selectedGroupName = _loc2_.name;
+            _loc3_ = CamouflagesDataProvider(this.getItemsDP());
+            _loc4_ = this.currentData[this._selectedKind];
+            _loc3_.setGroupCurrentItemId(_loc4_?this.currentData[this._selectedKind].id:null);
+            CamouflageGroupView(view).setDefaultLabel(_loc3_.getDefaultHintText(param1));
+            _loc5_ = form.getSectionData(this.getSectionName());
+            _loc6_ = null;
+            if((_loc5_) && (_loc5_.selectedItems))
             {
-                form.dropCurrentItemInSection(this.getSectionName(), this._droppingKind);
+               _loc6_ = _loc5_.selectedItems[this._selectedKind];
+               view.setListSelectedIndex(_loc2_.name,_loc6_);
             }
-            return;
-        }
-
-        internal function hadleClickRenderer(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            var loc1:*=0;
-            loc1 = 0;
-            while (loc1 < 3) 
+            else
             {
-                if (net.wg.gui.lobby.customization.renderers.CamoDemoRenderer.KINDS[loc1] == arg1.target.kind) 
-                {
-                    list.selectedIndex = loc1;
-                    break;
-                }
-                ++loc1;
+               view.setListSelectedIndex(_loc2_.name,null);
             }
-            return;
-        }
-
-        internal function updateTimeLeftVisibility():void
-        {
-            var loc1:*=false;
-            var loc2:*=0;
-            loc2 = 0;
-            while (loc2 < 3) 
+            view.invalidateListData(false);
+            if((_loc6_ == null || _loc6_.id == null) && (this.currentData[this._selectedKind].id))
             {
-                if (this.currentData[loc2] && this.currentData[loc2].timeLeft && this.currentData[loc2].timeLeft.length > 0) 
-                {
-                    loc1 = true;
-                    break;
-                }
-                ++loc2;
+               form.setNewItemIdS(this.getSectionName(),this.currentData[this._selectedKind].id,this._selectedKind,view.selectedPriceIdx);
             }
-            if (timeLeftField) 
+            _loc7_ = 0;
+            _loc7_ = 0;
+            while(_loc7_ < 3)
             {
-                timeLeftField.visible = loc1;
+               this.getCurrRenderer(_loc7_).selected = _loc7_ == param1;
+               _loc7_++;
             }
-            return;
-        }
+         }
+      }
 
-        internal function setNewItemView(arg1:int, arg2:Object, arg3:int):void
-        {
-            var loc3:*=null;
-            var loc6:*=null;
-            var loc1:*=arg2.id;
-            if (this.currentItemData.id != loc1) 
+      override public function dispose() : void {
+         var _loc2_:CamoDemoRenderer = null;
+         var _loc3_:CamoDropButton = null;
+         if(form != null)
+         {
+            form.removeEventListener(CustomizationEvent.CHANGE_ACTIONS_LOCK,this.handleChangeActionLock);
+            form.removeEventListener(CustomizationEvent.RESET_NEW_ITEM,this.handleResetNewItem);
+         }
+         if(view != null)
+         {
+            view.removeEventListener(CustomizationEvent.SELECT_NEW,this.handleSelectNewItem);
+         }
+         if(list != null)
+         {
+            list.removeEventListener(ListEvent.INDEX_CHANGE,this.handleChangeGroupSelectedIndex);
+            list.dataProvider = null;
+         }
+         var _loc1_:Number = 3;
+         var _loc4_:Number = 0;
+         _loc4_ = 0;
+         while(_loc4_ < _loc1_)
+         {
+            _loc2_ = this.getCurrRenderer(_loc4_);
+            if(_loc2_)
             {
-                this.newItemData = arg2;
+               _loc2_.removeEventListener(ButtonEvent.CLICK,this.hadleClickRenderer);
+               _loc2_.setData(null);
             }
-            else 
+            _loc3_ = this.getDropButton(_loc4_);
+            if(_loc3_ != null)
             {
-                this.newItemData = this.getEmptyDataItem();
-                arg1 = -1;
+               _loc3_.removeEventListener(MouseEvent.ROLL_OVER,this.hadleRollOverDropButton);
+               _loc3_.removeEventListener(MouseEvent.ROLL_OUT,this.hadleRollOutDropButton);
+               _loc3_.removeEventListener(CustomizationEvent.DROP_ITEM,this.handleClickDropButton);
             }
-            this.newItemData.index = arg1;
-            this.newItemData.priceIndex = view.selectedPriceIdx;
-            var loc2:*;
-            if ((loc2 = form.getSectionData(this.getSectionName())) != null) 
+            _loc4_++;
+         }
+         this.currentData.splice(0);
+         this.currentData = null;
+         this.newData.splice(0);
+         this.newData = null;
+      }
+
+      override protected function handleChangeGroupSelectedIndex(param1:ListEvent) : void {
+         this._selectedKind = param1.index;
+         super.handleChangeGroupSelectedIndex(param1);
+      }
+
+      override protected function configUI() : void {
+         var _loc3_:CamoDemoRenderer = null;
+         var _loc4_:CamoDropButton = null;
+         var _loc5_:* = NaN;
+         var _loc6_:Object = null;
+         var _loc7_:String = null;
+         mouseChildren = true;
+         mouseEnabled = true;
+         var _loc1_:Number = 0;
+         if(form != null)
+         {
+            _loc6_ = form.getSectionData(this.getSectionName());
+            if(_loc6_ != null)
             {
-                loc3 = loc2.selectedItems;
+               if(_loc6_._new.id != null)
+               {
+                  this.newItemData = _loc6_._new;
+               }
+               if(_loc6_.selectedGroupIdx != null)
+               {
+                  _loc1_ = _loc6_.selectedGroupIdx;
+               }
             }
-            else 
+            form.addEventListener(CustomizationEvent.CHANGE_ACTIONS_LOCK,this.handleChangeActionLock);
+            form.addEventListener(CustomizationEvent.RESET_NEW_ITEM,this.handleResetNewItem);
+            _loc7_ = this.getViewLinkage();
+            view = BaseTimedCustomizationGroupView(form.showView(_loc7_));
+            view.timeLabel = this.getTimeSectionLabel();
+            view.itemsDP = this.getItemsDP();
+            view.rentalPackageDP = this.getRentalPackagesDP();
+            view.rentalPackageDP.triggerInvalidation();
+            view.addEventListener(CustomizationEvent.SELECT_NEW,this.handleSelectNewItem);
+            view.initData();
+         }
+         if(list != null)
+         {
+            list.labelField = getListLabelFieldName();
+            list.selectedIndex = _loc1_;
+            list.dataProvider = _groupsDataProvider;
+            list.addEventListener(ListEvent.INDEX_CHANGE,this.handleChangeGroupSelectedIndex);
+         }
+         var _loc2_:Number = 3;
+         _loc5_ = 0;
+         _loc5_ = 0;
+         while(_loc5_ < _loc2_)
+         {
+            _loc3_ = this.getCurrRenderer(_loc5_);
+            if(_loc3_)
             {
-                loc3 = [null, null, null];
+               _loc3_.addEventListener(ButtonEvent.CLICK,this.hadleClickRenderer);
+               _loc3_.setData(this.currentData[_loc5_]);
+               _loc3_.mouseEnabled = true;
+               _loc3_.validateNow();
             }
-            loc3[arg3] = this.newItemData;
-            var loc4:*=false;
-            var loc5:*=[];
-            var loc7:*=loc3.length;
-            var loc8:*=null;
-            var loc9:*=0;
-            loc9 = 0;
-            while (loc9 < loc7) 
+            _loc4_ = this.getDropButton(_loc5_);
+            if(_loc4_ != null)
             {
-                if (loc8 = loc3[loc9]) 
-                {
-                    if (!loc4) 
-                    {
-                        loc4 = !(loc8.index == -1);
-                    }
-                    if (loc8.id) 
-                    {
-                        loc5.push(form.getItemCost(this.getSectionName(), loc8.id, loc8.priceIndex));
-                    }
-                }
-                ++loc9;
+               _loc4_.visible = false;
+               _loc4_.addEventListener(MouseEvent.ROLL_OVER,this.hadleRollOverDropButton);
+               _loc4_.addEventListener(MouseEvent.ROLL_OUT,this.hadleRollOutDropButton);
+               _loc4_.addEventListener(CustomizationEvent.DROP_ITEM,this.handleClickDropButton);
+               _loc4_.kind = _loc5_;
             }
-            var loc10:*=this.getCurrRenderer(arg3);
-            var loc11:*=this.getDropButton(arg3);
-            if (this.newItemData.id == null) 
+            _loc5_++;
+         }
+         this._selectedKind = list.selectedIndex;
+         this.requestCurrentItem();
+      }
+
+      override protected function draw() : void {
+         var _loc1_:* = false;
+         var _loc2_:CamoDemoRenderer = null;
+         var _loc3_:* = 0;
+         var _loc4_:* = 0;
+         var _loc5_:Object = null;
+         var _loc6_:Object = null;
+         var _loc7_:Object = null;
+         var _loc8_:Button = null;
+         super.draw();
+         if(this.currentDataDirty)
+         {
+            _loc1_ = true;
+            _loc3_ = 3;
+            _loc4_ = 0;
+            _loc7_ = form.getSectionData(this.getSectionName());
+            _loc4_ = 0;
+            while(_loc4_ < _loc3_)
             {
-                loc10.demoMode = net.wg.gui.lobby.customization.renderers.CustomizationItemRenderer.DEMO_CURRENT;
-                loc10.setData(this.currentData[arg3]);
-                loc11.visible = !(this.currentData[arg3].id == -1);
+               _loc2_ = this.getCurrRenderer(_loc4_);
+               _loc5_ = this.currentData[_loc4_];
+               if(_loc7_ != null)
+               {
+                  _loc6_ = _loc7_.selectedItems[_loc4_];
+               }
+               else
+               {
+                  _loc6_ = null;
+               }
+               this.newData[_loc4_] = _loc6_;
+               _loc1_ = !(_loc2_ == null);
+               if(!_loc1_)
+               {
+                  break;
+               }
+               _loc8_ = this.getDropButton(_loc4_);
+               if((_loc6_) && !(_loc6_.id == null))
+               {
+                  _loc2_.demoMode = CustomizationItemRenderer.DEMO_NEW;
+                  _loc2_.setData(_loc6_);
+                  _loc8_.visible = false;
+               }
+               else
+               {
+                  _loc2_.demoMode = CustomizationItemRenderer.DEMO_CURRENT;
+                  _loc2_.setData(_loc5_);
+                  _loc8_.visible = !(_loc2_.data.id == null);
+               }
+               _loc8_.enabled = !(form == null) && !form.isActionsLocked();
+               _loc4_++;
             }
-            else 
+            if(_loc1_)
             {
-                loc10.demoMode = net.wg.gui.lobby.customization.renderers.CustomizationItemRenderer.DEMO_NEW;
-                loc10.setData(this.newItemData);
-                loc11.visible = false;
+               this.currentDataDirty = false;
             }
-            form.setNewItemId(this.getSectionName(), loc1, arg3, view.selectedPriceIdx);
-            form.setSectionData(this.getSectionName(), loc4, {"selectedIdx":arg1, "selectedItems":loc3, "selectedGroupIdx":list.selectedIndex, "groupName":view.selectedGroupName, "price":loc5, "_new":this.newItemData});
-            return;
-        }
+            else
+            {
+               invalidate();
+            }
+            this.updateTimeLeftVisibility();
+         }
+      }
 
-        public override function getEmptyDataItem():Object
-        {
-            return net.wg.gui.lobby.customization.data.CamouflagesDataProvider.getEmptyItem();
-        }
+      private function getCurrRenderer(param1:Number) : CamoDemoRenderer {
+         var _loc2_:Array = [this.currentItemRenderer0,this.currentItemRenderer1,this.currentItemRenderer2];
+         return _loc2_[param1];
+      }
 
-        public override function getGroupsDP():net.wg.data.daapi.base.DAAPIDataProvider
-        {
-            return form.camouflageGroupsDataProvider;
-        }
+      private function getDropButton(param1:Number) : CamoDropButton {
+         var _loc2_:Array = [this.dropButton0,this.dropButton1,this.dropButton2];
+         return _loc2_[param1];
+      }
 
-        public override function getItemsDP():net.wg.gui.lobby.customization.data.DAAPIItemsDataProvider
-        {
-            return form.camouflageDP;
-        }
+      private function hadleRollOverDropButton(param1:MouseEvent) : void {
+         App.toolTipMgr.showComplex(this.getDropButtonTooltip());
+      }
 
-        public override function getRentalPackagesDP():net.wg.gui.lobby.customization.data.RentalPackageDAAPIDataProvider
-        {
-            return form.camouflageRentalPackageDP;
-        }
+      private function hadleRollOutDropButton(param1:MouseEvent) : void {
+         App.toolTipMgr.hide();
+      }
 
-        public override function getViewLinkage():String
-        {
-            return net.wg.gui.lobby.customization.BaseTimedCustomizationSectionView.CAMOUFLAGE_GROUP_VIEW;
-        }
+      private function handleSelectNewItem(param1:CustomizationEvent) : void {
+         var _loc3_:* = 0;
+         var _loc4_:Object = null;
+         var _loc2_:Object = form.getSectionData(this.getSectionName());
+         if(_loc2_)
+         {
+            _loc3_ = 0;
+            while(_loc3_ < _loc2_.selectedItems.length)
+            {
+               _loc4_ = _loc2_.selectedItems[_loc3_];
+               if((_loc4_) && !(_loc3_ == this._selectedKind))
+               {
+                  if(_loc4_.id)
+                  {
+                     form.setNewItemIdS(this.getSectionName(),_loc4_.id,_loc3_,_loc4_.priceIndex);
+                  }
+               }
+               _loc3_++;
+            }
+         }
+         this.setNewItemView(param1.index,param1.data,this._selectedKind);
+      }
 
-        public override function getTimeSectionLabel():String
-        {
-            return MENU.CUSTOMIZATION_LABELS_CAMOUFLAGE_PERIOD;
-        }
+      private function handleResetNewItem(param1:CustomizationEvent) : void {
+         this.newItemData = this.getEmptyDataItem();
+         if(view != null)
+         {
+            view.list.selectedIndex = -1;
+         }
+      }
 
-        public override function getDropButtonTooltip():String
-        {
-            return TOOLTIPS.CUSTOMIZATION_CAMOUFLAGE_CURRENT_DROP;
-        }
+      private function handleChangeActionLock(param1:CustomizationEvent) : void {
+         var _loc3_:Button = null;
+         var _loc2_:* = 3;
+         var _loc4_:* = 0;
+         _loc4_ = 0;
+         while(true)
+         {
+            _loc3_ = this.getDropButton(_loc4_);
+            if(_loc3_ != null)
+            {
+               _loc3_.enabled = !param1.locked;
+            }
+            _loc4_++;
+         }
+      }
 
-        public override function getSectionName():String
-        {
-            return net.wg.gui.lobby.customization.BaseTimedCustomizationSectionView.CAMOUFLAGE;
-        }
+      private function handleClickDropButton(param1:CustomizationEvent) : void {
+         App.toolTipMgr.hide();
+         this._droppingKind = param1.kind;
+         if(form)
+         {
+            form.dropCurrentItemInSection(this.getSectionName(),this._droppingKind);
+         }
+      }
 
-        public override function get currentItemData():Object
-        {
-            return this.currentData[this._selectedKind];
-        }
+      private function hadleClickRenderer(param1:ButtonEvent) : void {
+         var _loc2_:Number = 0;
+         _loc2_ = 0;
+         while(_loc2_ < 3)
+         {
+            if(CamoDemoRenderer.KINDS[_loc2_] == param1.target.kind)
+            {
+               list.selectedIndex = _loc2_;
+               break;
+            }
+            _loc2_++;
+         }
+      }
 
-        internal function handleResetNewItem(arg1:net.wg.gui.lobby.customization.CustomizationEvent):void
-        {
+      private function updateTimeLeftVisibility() : void {
+         var _loc1_:* = false;
+         var _loc2_:Number = 0;
+         _loc2_ = 0;
+         while(_loc2_ < 3)
+         {
+            if((this.currentData[_loc2_]) && (this.currentData[_loc2_].timeLeft) && this.currentData[_loc2_].timeLeft.length > 0)
+            {
+               _loc1_ = true;
+               break;
+            }
+            _loc2_++;
+         }
+         if(timeLeftField)
+         {
+            timeLeftField.visible = _loc1_;
+         }
+      }
+
+      private function setNewItemView(param1:int, param2:Object, param3:int) : void {
+         var _loc6_:Array = null;
+         var _loc9_:Object = null;
+         var _loc4_:int = param2.id;
+         if(this.currentItemData.id == _loc4_)
+         {
             this.newItemData = this.getEmptyDataItem();
-            if (view != null) 
+            param1 = -1;
+         }
+         else
+         {
+            this.newItemData = param2;
+         }
+         this.newItemData.index = param1;
+         this.newItemData.priceIndex = view.selectedPriceIdx;
+         var _loc5_:Object = form.getSectionData(this.getSectionName());
+         if(_loc5_ == null)
+         {
+            _loc6_ = [null,null,null];
+         }
+         else
+         {
+            _loc6_ = _loc5_.selectedItems;
+         }
+         _loc6_[param3] = this.newItemData;
+         var _loc7_:* = false;
+         var _loc8_:Array = [];
+         var _loc10_:Number = _loc6_.length;
+         var _loc11_:Object = null;
+         var _loc12_:Number = 0;
+         _loc12_ = 0;
+         while(_loc12_ < _loc10_)
+         {
+            _loc11_ = _loc6_[_loc12_];
+            if(_loc11_)
             {
-                view.list.selectedIndex = -1;
+               if(!_loc7_)
+               {
+                  _loc7_ = !(_loc11_.index == -1);
+               }
+               if(_loc11_.id)
+               {
+                  _loc8_.push(form.getItemCost(this.getSectionName(),_loc11_.id,_loc11_.priceIndex));
+               }
             }
-            return;
-        }
-
-        public override function get newItemData():Object
-        {
-            return this.newData[this._selectedKind];
-        }
-
-        public override function set newItemData(arg1:Object):void
-        {
-            this.newData[this._selectedKind] = arg1;
-            return;
-        }
-
-        public override function onChangeSuccess():void
-        {
-            var loc3:*=null;
-            var loc4:*=null;
-            var loc1:*=this.currentData.length;
-            var loc2:*=0;
-            loc2 = 0;
-            while (loc2 < loc1) 
+            _loc12_++;
+         }
+         var _loc13_:CamoDemoRenderer = this.getCurrRenderer(param3);
+         var _loc14_:Button = this.getDropButton(param3);
+         if(this.newItemData.id != null)
+         {
+            _loc13_.demoMode = CustomizationItemRenderer.DEMO_NEW;
+            _loc13_.setData(this.newItemData);
+            _loc14_.visible = false;
+         }
+         else
+         {
+            _loc13_.demoMode = CustomizationItemRenderer.DEMO_CURRENT;
+            _loc13_.setData(this.currentData[param3]);
+            _loc14_.visible = !(this.currentData[param3].id == -1);
+         }
+         form.setNewItemIdS(this.getSectionName(),_loc4_,param3,view.selectedPriceIdx);
+         form.setSectionData(this.getSectionName(),_loc7_,
             {
-                this.currentData[loc2] = this.newData[loc2];
-                loc3 = this.getCurrRenderer(loc2);
-                loc3.setData(this.currentData[loc2]);
-                if ((loc4 = this.getDropButton(loc2)) != null) 
-                {
-                    loc4.visible = true;
-                }
-                this.newData[loc2] = this.getEmptyDataItem();
-                ++loc2;
+               "selectedIdx":param1,
+               "selectedItems":_loc6_,
+               "selectedGroupIdx":list.selectedIndex,
+               "groupName":view.selectedGroupName,
+               "price":_loc8_,
+               "_new":this.newItemData
             }
-            this.updateTimeLeftVisibility();
-            if (view != null) 
-            {
-                view.invalidateListData(true);
-            }
-            return;
-        }
+         );
+      }
+   }
 
-        public override function onDropSuccess():void
-        {
-            var loc1:*=this.getEmptyDataItem();
-            var loc2:*=net.wg.gui.lobby.customization.data.CamouflagesDataProvider(this.getItemsDP()).getDefaultDescription(this._droppingKind);
-            if (loc2.length > 0) 
-            {
-                loc1.description = loc2;
-            }
-            this.currentData[this._droppingKind] = loc1;
-            var loc3:*=this.getCurrRenderer(this._droppingKind);
-            loc3.setData(this.currentData[this._droppingKind]);
-            var loc4:*;
-            if ((loc4 = this.getDropButton(this._droppingKind)) != null) 
-            {
-                loc4.visible = false;
-            }
-            this._droppingKind = -1;
-            this.updateTimeLeftVisibility();
-            if (view != null) 
-            {
-                view.invalidateListData(true);
-            }
-            return;
-        }
-
-        public override function requestCurrentItem():void
-        {
-            var loc4:*=null;
-            var loc1:*=form.getCurrentItemS(this.getSectionName()) as Array;
-            var loc2:*=loc1.length;
-            var loc3:*=0;
-            loc3 = 0;
-            while (loc3 < loc2) 
-            {
-                loc4 = loc1[loc3];
-                this.currentData[loc3] = loc4;
-                ++loc3;
-            }
-            this.currentDataDirty = true;
-            invalidate();
-            return;
-        }
-
-        public override function requestItemAt(arg1:int):void
-        {
-            var loc2:*=null;
-            var loc3:*=null;
-            var loc4:*=null;
-            var loc5:*=null;
-            var loc6:*=NaN;
-            var loc1:*=_groupsDataProvider.requestItemAt(arg1);
-            if (view && loc1) 
-            {
-                view.selectedGroupName = loc1.name;
-                loc2 = net.wg.gui.lobby.customization.data.CamouflagesDataProvider(this.getItemsDP());
-                loc3 = this.currentData[this._selectedKind];
-                loc2.setGroupCurrentItemId(loc3 ? this.currentData[this._selectedKind].id : null);
-                net.wg.gui.lobby.customization.CamouflageGroupView(view).setDefaultLabel(loc2.getDefaultHintText(arg1));
-                loc4 = form.getSectionData(this.getSectionName());
-                loc5 = null;
-                if (loc4 && loc4.selectedItems) 
-                {
-                    loc5 = loc4.selectedItems[this._selectedKind];
-                    view.setListSelectedIndex(loc1.name, loc5);
-                }
-                else 
-                {
-                    view.setListSelectedIndex(loc1.name, null);
-                }
-                view.invalidateListData(false);
-                if ((loc5 == null || loc5.id == null) && this.currentData[this._selectedKind].id) 
-                {
-                    form.setNewItemId(this.getSectionName(), this.currentData[this._selectedKind].id, this._selectedKind, view.selectedPriceIdx);
-                }
-                loc6 = 0;
-                loc6 = 0;
-                while (loc6 < 3) 
-                {
-                    this.getCurrRenderer(loc6).selected = loc6 == arg1;
-                    ++loc6;
-                }
-            }
-            return;
-        }
-
-        public override function dispose():void
-        {
-            var loc2:*=null;
-            var loc3:*=null;
-            if (form != null) 
-            {
-                form.removeEventListener(net.wg.gui.lobby.customization.CustomizationEvent.CHANGE_ACTIONS_LOCK, this.handleChangeActionLock);
-                form.removeEventListener(net.wg.gui.lobby.customization.CustomizationEvent.RESET_NEW_ITEM, this.handleResetNewItem);
-            }
-            if (view != null) 
-            {
-                view.removeEventListener(net.wg.gui.lobby.customization.CustomizationEvent.SELECT_NEW, this.handleSelectNewItem);
-            }
-            if (list != null) 
-            {
-                list.removeEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.handleChangeGroupSelectedIndex);
-                list.dataProvider = null;
-            }
-            var loc1:*=3;
-            var loc4:*=0;
-            loc4 = 0;
-            while (loc4 < loc1) 
-            {
-                loc2 = this.getCurrRenderer(loc4);
-                if (loc2) 
-                {
-                    loc2.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.hadleClickRenderer);
-                    loc2.setData(null);
-                }
-                loc3 = this.getDropButton(loc4);
-                if (loc3 != null) 
-                {
-                    loc3.removeEventListener(flash.events.MouseEvent.ROLL_OVER, this.hadleRollOverDropButton);
-                    loc3.removeEventListener(flash.events.MouseEvent.ROLL_OUT, this.hadleRollOutDropButton);
-                    loc3.removeEventListener(net.wg.gui.lobby.customization.CustomizationEvent.DROP_ITEM, this.handleClickDropButton);
-                }
-                ++loc4;
-            }
-            this.currentData.splice(0);
-            this.currentData = null;
-            this.newData.splice(0);
-            this.newData = null;
-            return;
-        }
-
-        protected override function handleChangeGroupSelectedIndex(arg1:scaleform.clik.events.ListEvent):void
-        {
-            this._selectedKind = arg1.index;
-            super.handleChangeGroupSelectedIndex(arg1);
-            return;
-        }
-
-        protected override function configUI():void
-        {
-            var loc3:*=null;
-            var loc4:*=null;
-            var loc6:*=null;
-            var loc7:*=null;
-            mouseChildren = true;
-            mouseEnabled = true;
-            var loc1:*=0;
-            if (form != null) 
-            {
-                if ((loc6 = form.getSectionData(this.getSectionName())) != null) 
-                {
-                    if (loc6._new.id != null) 
-                    {
-                        this.newItemData = loc6._new;
-                    }
-                    if (loc6.selectedGroupIdx != null) 
-                    {
-                        loc1 = loc6.selectedGroupIdx;
-                    }
-                }
-                form.addEventListener(net.wg.gui.lobby.customization.CustomizationEvent.CHANGE_ACTIONS_LOCK, this.handleChangeActionLock);
-                form.addEventListener(net.wg.gui.lobby.customization.CustomizationEvent.RESET_NEW_ITEM, this.handleResetNewItem);
-                loc7 = this.getViewLinkage();
-                view = net.wg.gui.lobby.customization.BaseTimedCustomizationGroupView(form.showView(loc7));
-                view.timeLabel = this.getTimeSectionLabel();
-                view.itemsDP = this.getItemsDP();
-                view.rentalPackageDP = this.getRentalPackagesDP();
-                view.rentalPackageDP.triggerInvalidation();
-                view.addEventListener(net.wg.gui.lobby.customization.CustomizationEvent.SELECT_NEW, this.handleSelectNewItem);
-                view.initData();
-            }
-            if (list != null) 
-            {
-                list.labelField = getListLabelFieldName();
-                list.selectedIndex = loc1;
-                list.dataProvider = _groupsDataProvider;
-                list.addEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.handleChangeGroupSelectedIndex);
-            }
-            var loc2:*=3;
-            var loc5:*=0;
-            loc5 = 0;
-            while (loc5 < loc2) 
-            {
-                loc3 = this.getCurrRenderer(loc5);
-                if (loc3) 
-                {
-                    loc3.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.hadleClickRenderer);
-                    loc3.setData(this.currentData[loc5]);
-                    loc3.mouseEnabled = true;
-                    loc3.validateNow();
-                }
-                if ((loc4 = this.getDropButton(loc5)) != null) 
-                {
-                    loc4.visible = false;
-                    loc4.addEventListener(flash.events.MouseEvent.ROLL_OVER, this.hadleRollOverDropButton);
-                    loc4.addEventListener(flash.events.MouseEvent.ROLL_OUT, this.hadleRollOutDropButton);
-                    loc4.addEventListener(net.wg.gui.lobby.customization.CustomizationEvent.DROP_ITEM, this.handleClickDropButton);
-                    loc4.kind = loc5;
-                }
-                ++loc5;
-            }
-            this._selectedKind = list.selectedIndex;
-            this.requestCurrentItem();
-            return;
-        }
-
-        protected override function draw():void
-        {
-            var loc1:*=false;
-            var loc2:*=null;
-            var loc3:*=0;
-            var loc4:*=0;
-            var loc5:*=null;
-            var loc6:*=null;
-            var loc7:*=null;
-            var loc8:*=null;
-            super.draw();
-            if (this.currentDataDirty) 
-            {
-                loc1 = true;
-                loc3 = 3;
-                loc4 = 0;
-                loc7 = form.getSectionData(this.getSectionName());
-                loc4 = 0;
-                while (loc4 < loc3) 
-                {
-                    loc2 = this.getCurrRenderer(loc4);
-                    loc5 = this.currentData[loc4];
-                    if (loc7 == null) 
-                    {
-                        loc6 = null;
-                    }
-                    else 
-                    {
-                        loc6 = loc7.selectedItems[loc4];
-                    }
-                    this.newData[loc4] = loc6;
-                    loc1 = !(loc2 == null);
-                    if (loc1) 
-                    {
-                        loc8 = this.getDropButton(loc4);
-                        if (loc6 && !(loc6.id == null)) 
-                        {
-                            loc2.demoMode = net.wg.gui.lobby.customization.renderers.CustomizationItemRenderer.DEMO_NEW;
-                            loc2.setData(loc6);
-                            loc8.visible = false;
-                        }
-                        else 
-                        {
-                            loc2.demoMode = net.wg.gui.lobby.customization.renderers.CustomizationItemRenderer.DEMO_CURRENT;
-                            loc2.setData(loc5);
-                            loc8.visible = !(loc2.data.id == null);
-                        }
-                        loc8.enabled = !(form == null) && !form.isActionsLocked();
-                    }
-                    else 
-                    {
-                        break;
-                    }
-                    ++loc4;
-                }
-                if (loc1) 
-                {
-                    this.currentDataDirty = false;
-                }
-                else 
-                {
-                    invalidate();
-                }
-                this.updateTimeLeftVisibility();
-            }
-            return;
-        }
-
-        public var currentItemRenderer0:net.wg.gui.lobby.customization.renderers.CamoDemoRenderer=null;
-
-        public var currentItemRenderer1:net.wg.gui.lobby.customization.renderers.CamoDemoRenderer=null;
-
-        public var currentItemRenderer2:net.wg.gui.lobby.customization.renderers.CamoDemoRenderer=null;
-
-        public var dropButton0:net.wg.gui.lobby.customization.CamoDropButton=null;
-
-        public var dropButton2:net.wg.gui.lobby.customization.CamoDropButton=null;
-
-        internal var _selectedKind:int=-1;
-
-        internal var _droppingKind:int=-1;
-
-        internal var currentData:Array;
-
-        internal var newData:Array;
-
-        internal var currentDataDirty:Boolean=false;
-
-        public var dropButton1:net.wg.gui.lobby.customization.CamoDropButton=null;
-    }
 }

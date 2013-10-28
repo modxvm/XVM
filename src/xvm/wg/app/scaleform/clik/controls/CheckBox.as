@@ -1,43 +1,38 @@
-package scaleform.clik.controls 
+package scaleform.clik.controls
 {
-    public class CheckBox extends scaleform.clik.controls.Button
-    {
-        public function CheckBox()
-        {
-            super();
-            return;
-        }
 
-        protected override function initialize():void
-        {
-            super.initialize();
-            _toggle = true;
-            return;
-        }
 
-        public override function get autoRepeat():Boolean
-        {
-            return false;
-        }
+   public class CheckBox extends Button
+   {
+          
+      public function CheckBox() {
+         super();
+      }
 
-        public override function set autoRepeat(arg1:Boolean):void
-        {
-            return;
-        }
+      override protected function initialize() : void {
+         super.initialize();
+         _toggle = true;
+      }
 
-        public override function get toggle():Boolean
-        {
-            return true;
-        }
+      override public function get autoRepeat() : Boolean {
+         return false;
+      }
 
-        public override function set toggle(arg1:Boolean):void
-        {
-            return;
-        }
+      override public function set autoRepeat(param1:Boolean) : void {
+          
+      }
 
-        public override function toString():String
-        {
-            return "[CLIK CheckBox " + name + "]";
-        }
-    }
+      override public function get toggle() : Boolean {
+         return true;
+      }
+
+      override public function set toggle(param1:Boolean) : void {
+          
+      }
+
+      override public function toString() : String {
+         return "[CLIK CheckBox " + name + "]";
+      }
+   }
+
 }

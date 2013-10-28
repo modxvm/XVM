@@ -1,34 +1,35 @@
-package net.wg.gui.lobby.messengerBar 
+package net.wg.gui.lobby.messengerBar
 {
-    import net.wg.gui.events.*;
-    import net.wg.infrastructure.base.*;
-    import net.wg.infrastructure.interfaces.*;
-    
-    public class WindowGeometryInBar extends net.wg.infrastructure.base.DefaultWindowGeometry
-    {
-        public function WindowGeometryInBar(arg1:String, arg2:Number=0)
-        {
-            super();
-            this.eventType = arg1;
-            this.clientID = arg2;
-            return;
-        }
+   import net.wg.infrastructure.base.DefaultWindowGeometry;
+   import net.wg.infrastructure.interfaces.IWindow;
+   import net.wg.infrastructure.interfaces.IAbstractWindowView;
+   import net.wg.gui.events.MessengerBarEvent;
 
-        public override function setPosition(arg1:net.wg.infrastructure.interfaces.IWindow):Boolean
-        {
-            var loc1:*=arg1.sourceView;
-            if (loc1 && this.doPositionOnce) 
-            {
-                loc1.dispatchEvent(new net.wg.gui.events.MessengerBarEvent(this.eventType, this.clientID));
-                this.doPositionOnce = false;
-            }
-            return false;
-        }
 
-        internal var eventType:String;
+   public class WindowGeometryInBar extends DefaultWindowGeometry
+   {
+          
+      public function WindowGeometryInBar(param1:String, param2:Number=undefined) {
+         super();
+         this.eventType = param1;
+         this.clientID = param2;
+      }
 
-        internal var clientID:Number;
+      private var eventType:String;
 
-        internal var doPositionOnce:Boolean=true;
-    }
+      private var clientID:Number;
+
+      private var doPositionOnce:Boolean = true;
+
+      override public function setPosition(param1:IWindow) : Boolean {
+         var _loc2_:IAbstractWindowView = param1.sourceView;
+         if((_loc2_) && (this.doPositionOnce))
+         {
+            _loc2_.dispatchEvent(new MessengerBarEvent(this.eventType,this.clientID));
+            this.doPositionOnce = false;
+         }
+         return false;
+      }
+   }
+
 }

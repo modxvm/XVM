@@ -1,115 +1,103 @@
-package net.wg.gui.components.common.video.advanced 
+package net.wg.gui.components.common.video.advanced
 {
-    import flash.events.*;
-    import flash.utils.*;
-    import net.wg.gui.components.common.video.*;
-    import scaleform.clik.events.*;
-    
-    public class ControlBarController extends net.wg.gui.components.common.video.advanced.AbstractPlayerController
-    {
-        public function ControlBarController(arg1:net.wg.gui.components.common.video.SimpleVideoPlayer, arg2:net.wg.gui.components.common.video.advanced.VideoPlayerControlBar)
-        {
-            super(arg1);
-            this.controlBar = arg2;
-            videoPlayer.addEventListener(net.wg.gui.components.common.video.VideoPlayerStatusEvent.STATUS_CHANGED, this.videoPlayerStatusHandler, false, 0, true);
-            videoPlayer.addEventListener(net.wg.gui.components.common.video.VideoPlayerEvent.VOLUME_CHANGED, this.volumeChangeHandler, false, 0, true);
-            videoPlayer.addEventListener(net.wg.gui.components.common.video.VideoPlayerEvent.META_DATA_CHANGED, this.videoMetaDataChangeHandler, false, 0, true);
-            this.controlBar.playButton.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.playButtonClickHandler, false, 0, true);
-            this.controlBar.repeatButton.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.repeatButtonClickHandler, false, 0, true);
-            this.controlBar.soundSlider.addEventListener(scaleform.clik.events.SliderEvent.VALUE_CHANGE, this.soundSliderChangeHandler, false, 0, true);
-            this.volumeChangeHandler(null);
-            return;
-        }
+   import flash.utils.Timer;
+   import scaleform.clik.events.SliderEvent;
+   import flash.events.Event;
+   import net.wg.gui.components.common.video.VideoPlayerStatusEvent;
+   import net.wg.gui.components.common.video.PlayerStatus;
+   import flash.events.TimerEvent;
+   import scaleform.clik.events.ButtonEvent;
+   import net.wg.gui.components.common.video.VideoPlayerEvent;
+   import net.wg.gui.components.common.video.SimpleVideoPlayer;
 
-        internal function soundSliderChangeHandler(arg1:scaleform.clik.events.SliderEvent):void
-        {
-            videoPlayer.volume = this.controlBar.volume;
-            return;
-        }
 
-        internal function videoMetaDataChangeHandler(arg1:flash.events.Event):void
-        {
-            this.controlBar.totalTime = videoPlayer.metaData.duration;
-            return;
-        }
+   public class ControlBarController extends AbstractPlayerController
+   {
+          
+      public function ControlBarController(param1:SimpleVideoPlayer, param2:VideoPlayerControlBar) {
+         super(param1);
+         this.controlBar = param2;
+         videoPlayer.addEventListener(VideoPlayerStatusEvent.STATUS_CHANGED,this.videoPlayerStatusHandler,false,0,true);
+         videoPlayer.addEventListener(VideoPlayerEvent.VOLUME_CHANGED,this.volumeChangeHandler,false,0,true);
+         videoPlayer.addEventListener(VideoPlayerEvent.META_DATA_CHANGED,this.videoMetaDataChangeHandler,false,0,true);
+         this.controlBar.playButton.addEventListener(ButtonEvent.CLICK,this.playButtonClickHandler,false,0,true);
+         this.controlBar.repeatButton.addEventListener(ButtonEvent.CLICK,this.repeatButtonClickHandler,false,0,true);
+         this.controlBar.soundSlider.addEventListener(SliderEvent.VALUE_CHANGE,this.soundSliderChangeHandler,false,0,true);
+         this.volumeChangeHandler(null);
+      }
 
-        internal function videoPlayerStatusHandler(arg1:net.wg.gui.components.common.video.VideoPlayerStatusEvent):void
-        {
-            var loc1:*=0;
-            loc1 = videoPlayer.status;
-            if (loc1 != net.wg.gui.components.common.video.PlayerStatus.PLAYING) 
+      private static const DISPLAY_TIMER_UPDATE_DELAY:int = 200;
+
+      private var controlBar:VideoPlayerControlBar;
+
+      private var timer:Timer;
+
+      private function soundSliderChangeHandler(param1:SliderEvent) : void {
+         videoPlayer.volume = this.controlBar.volume;
+      }
+
+      private function videoMetaDataChangeHandler(param1:Event) : void {
+         this.controlBar.totalTime = videoPlayer.metaData.duration;
+      }
+
+      private function videoPlayerStatusHandler(param1:VideoPlayerStatusEvent) : void {
+         var _loc2_:uint = 0;
+         _loc2_ = videoPlayer.status;
+         if(_loc2_ == PlayerStatus.PLAYING)
+         {
+            if(!this.timer)
             {
-                this.stopTimer();
+               this.timer = new Timer(DISPLAY_TIMER_UPDATE_DELAY);
             }
-            else 
-            {
-                if (!this.timer) 
-                {
-                    this.timer = new flash.utils.Timer(DISPLAY_TIMER_UPDATE_DELAY);
-                }
-                this.timer.addEventListener(flash.events.TimerEvent.TIMER, this.updateTime, false, 0, true);
-                this.timer.reset();
-                this.timer.start();
-            }
-            this.controlBar.playButton.enabled = !(loc1 == net.wg.gui.components.common.video.PlayerStatus.STOP && videoPlayer.currentTime == 0);
-            this.controlBar.showPlayBtn = !(loc1 == net.wg.gui.components.common.video.PlayerStatus.PLAYING);
-            this.controlBar.enabled = !(loc1 == net.wg.gui.components.common.video.PlayerStatus.LOADING);
-            return;
-        }
-
-        internal function stopTimer():void
-        {
-            if (this.timer) 
-            {
-                this.timer.removeEventListener(flash.events.TimerEvent.TIMER, this.updateTime);
-                this.timer.stop();
-            }
-            return;
-        }
-
-        internal function updateTime(arg1:flash.events.TimerEvent):void
-        {
-            this.controlBar.currentTime = videoPlayer.currentTime;
-            return;
-        }
-
-        internal function volumeChangeHandler(arg1:flash.events.Event):void
-        {
-            this.controlBar.volume = videoPlayer.volume;
-            return;
-        }
-
-        internal function playButtonClickHandler(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            videoPlayer.togglePlayback();
-            return;
-        }
-
-        internal function repeatButtonClickHandler(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            videoPlayer.runPlayback();
-            this.controlBar.currentTime = 0;
-            return;
-        }
-
-        public override function dispose():void
-        {
+            this.timer.addEventListener(TimerEvent.TIMER,this.updateTime,false,0,true);
+            this.timer.reset();
+            this.timer.start();
+         }
+         else
+         {
             this.stopTimer();
-            this.timer = null;
-            this.controlBar.playButton.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.playButtonClickHandler);
-            this.controlBar.repeatButton.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.repeatButtonClickHandler);
-            this.controlBar.soundSlider.removeEventListener(scaleform.clik.events.SliderEvent.VALUE_CHANGE, this.soundSliderChangeHandler);
-            videoPlayer.removeEventListener(net.wg.gui.components.common.video.VideoPlayerStatusEvent.STATUS_CHANGED, this.videoPlayerStatusHandler);
-            videoPlayer.removeEventListener(net.wg.gui.components.common.video.VideoPlayerEvent.VOLUME_CHANGED, this.volumeChangeHandler);
-            videoPlayer.removeEventListener(net.wg.gui.components.common.video.VideoPlayerEvent.META_DATA_CHANGED, this.videoMetaDataChangeHandler);
-            super.dispose();
-            return;
-        }
+         }
+         this.controlBar.playButton.enabled = !(_loc2_ == PlayerStatus.STOP && videoPlayer.currentTime == 0);
+         this.controlBar.showPlayBtn = !(_loc2_ == PlayerStatus.PLAYING);
+         this.controlBar.enabled = !(_loc2_ == PlayerStatus.LOADING);
+      }
 
-        internal static const DISPLAY_TIMER_UPDATE_DELAY:int=200;
+      private function stopTimer() : void {
+         if(this.timer)
+         {
+            this.timer.removeEventListener(TimerEvent.TIMER,this.updateTime);
+            this.timer.stop();
+         }
+      }
 
-        internal var controlBar:net.wg.gui.components.common.video.advanced.VideoPlayerControlBar;
+      private function updateTime(param1:TimerEvent) : void {
+         this.controlBar.currentTime = videoPlayer.currentTime;
+      }
 
-        internal var timer:flash.utils.Timer;
-    }
+      private function volumeChangeHandler(param1:Event) : void {
+         this.controlBar.volume = videoPlayer.volume;
+      }
+
+      private function playButtonClickHandler(param1:ButtonEvent) : void {
+         videoPlayer.togglePlayback();
+      }
+
+      private function repeatButtonClickHandler(param1:ButtonEvent) : void {
+         videoPlayer.runPlayback();
+         this.controlBar.currentTime = 0;
+      }
+
+      override public function dispose() : void {
+         this.stopTimer();
+         this.timer = null;
+         this.controlBar.playButton.removeEventListener(ButtonEvent.CLICK,this.playButtonClickHandler);
+         this.controlBar.repeatButton.removeEventListener(ButtonEvent.CLICK,this.repeatButtonClickHandler);
+         this.controlBar.soundSlider.removeEventListener(SliderEvent.VALUE_CHANGE,this.soundSliderChangeHandler);
+         videoPlayer.removeEventListener(VideoPlayerStatusEvent.STATUS_CHANGED,this.videoPlayerStatusHandler);
+         videoPlayer.removeEventListener(VideoPlayerEvent.VOLUME_CHANGED,this.volumeChangeHandler);
+         videoPlayer.removeEventListener(VideoPlayerEvent.META_DATA_CHANGED,this.videoMetaDataChangeHandler);
+         super.dispose();
+      }
+   }
+
 }

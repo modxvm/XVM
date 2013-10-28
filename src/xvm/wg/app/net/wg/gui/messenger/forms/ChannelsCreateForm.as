@@ -1,192 +1,173 @@
-package net.wg.gui.messenger.forms 
+package net.wg.gui.messenger.forms
 {
-    import flash.display.*;
-    import flash.events.*;
-    import flash.ui.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.messenger.evnts.*;
-    import net.wg.infrastructure.interfaces.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.core.*;
-    import scaleform.clik.events.*;
-    import scaleform.clik.managers.*;
-    import scaleform.clik.ui.*;
-    import scaleform.clik.utils.*;
-    
-    public class ChannelsCreateForm extends scaleform.clik.core.UIComponent implements net.wg.infrastructure.interfaces.IViewStackContent
-    {
-        public function ChannelsCreateForm()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import net.wg.infrastructure.interfaces.IViewStackContent;
+   import net.wg.gui.components.controls.LabelControl;
+   import net.wg.gui.components.controls.TextInput;
+   import net.wg.gui.components.controls.CheckBox;
+   import net.wg.gui.components.controls.SoundButtonEx;
+   import flash.display.Sprite;
+   import flash.events.Event;
+   import scaleform.clik.events.ButtonEvent;
+   import scaleform.clik.events.InputEvent;
+   import scaleform.clik.utils.Constraints;
+   import scaleform.clik.constants.ConstrainMode;
+   import scaleform.clik.ui.InputDetails;
+   import flash.ui.Keyboard;
+   import scaleform.clik.constants.InputValue;
+   import scaleform.clik.constants.NavigationCode;
+   import net.wg.gui.messenger.evnts.ChannelsFormEvent;
+   import scaleform.clik.managers.FocusHandler;
+   import scaleform.clik.constants.InvalidationType;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.channelPasswordCheckBox.addEventListener(flash.events.Event.SELECT, this.onChannelPasswordCheckBox);
-            this.channelCreateButton.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onCreateChannelClick);
-            this.onChannelPasswordCheckBox(null);
-            this.channelNameInput.addEventListener(scaleform.clik.events.InputEvent.INPUT, this.handleInput, false, 0, true);
-            this.channelPasswordInput.addEventListener(scaleform.clik.events.InputEvent.INPUT, this.handleInput, false, 0, true);
-            this.channelRetypePasswordInput.addEventListener(scaleform.clik.events.InputEvent.INPUT, this.handleInput, false, 0, true);
-            constraints = new scaleform.clik.utils.Constraints(this, scaleform.clik.constants.ConstrainMode.REFLOW);
-            constraints.addElement("channelNameLabel", this.channelNameLabel, scaleform.clik.utils.Constraints.LEFT | scaleform.clik.utils.Constraints.RIGHT | scaleform.clik.utils.Constraints.TOP);
-            constraints.addElement("channelNameInput", this.channelNameInput, scaleform.clik.utils.Constraints.LEFT | scaleform.clik.utils.Constraints.RIGHT | scaleform.clik.utils.Constraints.TOP);
-            constraints.addElement("channelPasswordLabel", this.channelPasswordLabel, scaleform.clik.utils.Constraints.LEFT | scaleform.clik.utils.Constraints.RIGHT | scaleform.clik.utils.Constraints.TOP);
-            constraints.addElement("channelPasswordCheckBox", this.channelPasswordCheckBox, scaleform.clik.utils.Constraints.LEFT | scaleform.clik.utils.Constraints.RIGHT | scaleform.clik.utils.Constraints.TOP);
-            constraints.addElement("channelFillPasswordLabel", this.channelFillPasswordLabel, scaleform.clik.utils.Constraints.LEFT | scaleform.clik.utils.Constraints.RIGHT | scaleform.clik.utils.Constraints.TOP);
-            constraints.addElement("channelPasswordInput", this.channelPasswordInput, scaleform.clik.utils.Constraints.LEFT | scaleform.clik.utils.Constraints.RIGHT | scaleform.clik.utils.Constraints.TOP);
-            constraints.addElement("channelRetypePasswordLabel", this.channelRetypePasswordLabel, scaleform.clik.utils.Constraints.LEFT | scaleform.clik.utils.Constraints.RIGHT | scaleform.clik.utils.Constraints.TOP);
-            constraints.addElement("channelRetypePasswordInput", this.channelRetypePasswordInput, scaleform.clik.utils.Constraints.LEFT | scaleform.clik.utils.Constraints.RIGHT | scaleform.clik.utils.Constraints.TOP);
-            constraints.addElement("channelCreateButton", this.channelCreateButton, scaleform.clik.utils.Constraints.LEFT | scaleform.clik.utils.Constraints.BOTTOM);
-            constraints.addElement("bg", this.bg, scaleform.clik.utils.Constraints.ALL);
-            App.utils.scheduler.envokeInNextFrame(this.setFocusToInput);
-            return;
-        }
 
-        public override function handleInput(arg1:scaleform.clik.events.InputEvent):void
-        {
-            if (arg1.isDefaultPrevented()) 
+   public class ChannelsCreateForm extends UIComponent implements IViewStackContent
+   {
+          
+      public function ChannelsCreateForm() {
+         super();
+      }
+
+      private static const UPDATE_PASSWORD_TEXT:String = "updatePasswordField";
+
+      public var channelNameLabel:LabelControl = null;
+
+      public var channelPasswordLabel:LabelControl = null;
+
+      public var channelFillPasswordLabel:LabelControl = null;
+
+      public var channelRetypePasswordLabel:LabelControl = null;
+
+      public var channelNameInput:TextInput = null;
+
+      public var channelPasswordInput:TextInput = null;
+
+      public var channelRetypePasswordInput:TextInput = null;
+
+      public var channelPasswordCheckBox:CheckBox = null;
+
+      public var channelCreateButton:SoundButtonEx = null;
+
+      public var bg:Sprite = null;
+
+      private var _data:Object = null;
+
+      private var usePassword:Boolean = false;
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.channelPasswordCheckBox.addEventListener(Event.SELECT,this.onChannelPasswordCheckBox);
+         this.channelCreateButton.addEventListener(ButtonEvent.CLICK,this.onCreateChannelClick);
+         this.onChannelPasswordCheckBox(null);
+         this.channelNameInput.addEventListener(InputEvent.INPUT,this.handleInput,false,0,true);
+         this.channelPasswordInput.addEventListener(InputEvent.INPUT,this.handleInput,false,0,true);
+         this.channelRetypePasswordInput.addEventListener(InputEvent.INPUT,this.handleInput,false,0,true);
+         constraints = new Constraints(this,ConstrainMode.REFLOW);
+         constraints.addElement("channelNameLabel",this.channelNameLabel,Constraints.LEFT | Constraints.RIGHT | Constraints.TOP);
+         constraints.addElement("channelNameInput",this.channelNameInput,Constraints.LEFT | Constraints.RIGHT | Constraints.TOP);
+         constraints.addElement("channelPasswordLabel",this.channelPasswordLabel,Constraints.LEFT | Constraints.RIGHT | Constraints.TOP);
+         constraints.addElement("channelPasswordCheckBox",this.channelPasswordCheckBox,Constraints.LEFT | Constraints.RIGHT | Constraints.TOP);
+         constraints.addElement("channelFillPasswordLabel",this.channelFillPasswordLabel,Constraints.LEFT | Constraints.RIGHT | Constraints.TOP);
+         constraints.addElement("channelPasswordInput",this.channelPasswordInput,Constraints.LEFT | Constraints.RIGHT | Constraints.TOP);
+         constraints.addElement("channelRetypePasswordLabel",this.channelRetypePasswordLabel,Constraints.LEFT | Constraints.RIGHT | Constraints.TOP);
+         constraints.addElement("channelRetypePasswordInput",this.channelRetypePasswordInput,Constraints.LEFT | Constraints.RIGHT | Constraints.TOP);
+         constraints.addElement("channelCreateButton",this.channelCreateButton,Constraints.LEFT | Constraints.BOTTOM);
+         constraints.addElement("bg",this.bg,Constraints.ALL);
+         App.utils.scheduler.envokeInNextFrame(this.setFocusToInput);
+      }
+
+      override public function handleInput(param1:InputEvent) : void {
+         if(param1.isDefaultPrevented())
+         {
+            return;
+         }
+         var _loc2_:InputDetails = param1.details;
+         var _loc3_:uint = _loc2_.controllerIndex;
+         if(_loc2_.navEquivalent == null)
+         {
+            if(_loc2_.code == Keyboard.ENTER)
             {
-                return;
+               this.handlePress(_loc3_);
+               param1.handled = true;
             }
-            var loc1:*=arg1.details;
-            var loc2:*=loc1.controllerIndex;
-            if (loc1.navEquivalent != null) 
+         }
+         else
+         {
+            if(_loc2_.code != Keyboard.SPACE)
             {
-                if (loc1.code != flash.ui.Keyboard.SPACE) 
-                {
-                    var loc3:*=loc1.navEquivalent;
-                    switch (loc3) 
-                    {
-                        case scaleform.clik.constants.NavigationCode.ENTER:
-                        {
-                            if (loc1.value == scaleform.clik.constants.InputValue.KEY_DOWN) 
-                            {
-                                this.handlePress(loc2);
-                                arg1.handled = true;
-                            }
-                            break;
-                        }
-                    }
-                }
+               switch(_loc2_.navEquivalent)
+               {
+                  case NavigationCode.ENTER:
+                     if(_loc2_.value == InputValue.KEY_DOWN)
+                     {
+                        this.handlePress(_loc3_);
+                        param1.handled = true;
+                     }
+                     break;
+               }
             }
-            else if (loc1.code == flash.ui.Keyboard.ENTER) 
-            {
-                this.handlePress(loc2);
-                arg1.handled = true;
-            }
-            return;
-        }
+         }
+      }
 
-        internal function handlePress(arg1:uint):void
-        {
-            this.onCreateChannelClick(null);
-            return;
-        }
+      private function handlePress(param1:uint) : void {
+         this.onCreateChannelClick(null);
+      }
 
-        internal function onCreateChannelClick(arg1:scaleform.clik.events.ButtonEvent=null):void
-        {
-            var loc1:*=this.channelNameInput.text;
-            var loc2:*=this.channelPasswordCheckBox.selected;
-            var loc3:*=loc2 ? this.channelPasswordInput.text : null;
-            var loc4:*=loc2 ? this.channelRetypePasswordInput.text : null;
-            dispatchEvent(new net.wg.gui.messenger.evnts.ChannelsFormEvent(net.wg.gui.messenger.evnts.ChannelsFormEvent.ON_CREATE_CHANNEL, true, false, loc1, loc3, loc4));
-            return;
-        }
+      private function onCreateChannelClick(param1:ButtonEvent=null) : void {
+         var _loc2_:String = this.channelNameInput.text;
+         var _loc3_:Boolean = this.channelPasswordCheckBox.selected;
+         var _loc4_:String = _loc3_?this.channelPasswordInput.text:null;
+         var _loc5_:String = _loc3_?this.channelRetypePasswordInput.text:null;
+         dispatchEvent(new ChannelsFormEvent(ChannelsFormEvent.ON_CREATE_CHANNEL,true,false,_loc2_,_loc4_,_loc5_));
+      }
 
-        internal function setFocusToInput():void
-        {
-            if (this.channelNameInput.enabled) 
-            {
-                this.channelNameInput.validateNow();
-                scaleform.clik.managers.FocusHandler.getInstance().setFocus(this.channelNameInput);
-            }
-            return;
-        }
+      private function setFocusToInput() : void {
+         if(this.channelNameInput.enabled)
+         {
+            this.channelNameInput.validateNow();
+            FocusHandler.getInstance().setFocus(this.channelNameInput);
+         }
+      }
 
-        internal function onChannelPasswordCheckBox(arg1:flash.events.Event=null):void
-        {
-            this.usePassword = this.channelPasswordCheckBox.selected;
-            var loc1:*;
-            this.channelRetypePasswordInput.enabled = loc1 = this.usePassword;
-            this.channelPasswordInput.enabled = loc1 = loc1;
-            this.channelRetypePasswordLabel.enabled = loc1 = loc1;
-            this.channelFillPasswordLabel.enabled = loc1;
-            invalidate(UPDATE_PASSWORD_TEXT);
-            return;
-        }
+      private function onChannelPasswordCheckBox(param1:Event=null) : void {
+         this.usePassword = this.channelPasswordCheckBox.selected;
+         this.channelFillPasswordLabel.enabled = this.channelRetypePasswordLabel.enabled = this.channelPasswordInput.enabled = this.channelRetypePasswordInput.enabled = this.usePassword;
+         invalidate(UPDATE_PASSWORD_TEXT);
+      }
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (constraints && isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
-            {
-                constraints.update(_width, _height);
-            }
-            if (this.channelPasswordInput && isInvalid(UPDATE_PASSWORD_TEXT)) 
-            {
-                var loc1:*;
-                this.channelRetypePasswordInput.displayAsPassword = loc1 = true;
-                this.channelPasswordInput.displayAsPassword = loc1;
-            }
-            return;
-        }
+      override protected function draw() : void {
+         super.draw();
+         if((constraints) && (isInvalid(InvalidationType.SIZE)))
+         {
+            constraints.update(_width,_height);
+         }
+         if((this.channelPasswordInput) && (isInvalid(UPDATE_PASSWORD_TEXT)))
+         {
+            this.channelPasswordInput.displayAsPassword = this.channelRetypePasswordInput.displayAsPassword = true;
+         }
+      }
 
-        public override function dispose():void
-        {
-            super.dispose();
-            this.channelPasswordCheckBox.removeEventListener(flash.events.Event.SELECT, this.onChannelPasswordCheckBox);
-            this.channelNameInput.removeEventListener(scaleform.clik.events.InputEvent.INPUT, this.handleInput, false);
-            this.channelPasswordInput.removeEventListener(scaleform.clik.events.InputEvent.INPUT, this.handleInput, false);
-            this.channelRetypePasswordInput.removeEventListener(scaleform.clik.events.InputEvent.INPUT, this.handleInput, false);
-            return;
-        }
+      override public function dispose() : void {
+         super.dispose();
+         this.channelPasswordCheckBox.removeEventListener(Event.SELECT,this.onChannelPasswordCheckBox);
+         this.channelNameInput.removeEventListener(InputEvent.INPUT,this.handleInput,false);
+         this.channelPasswordInput.removeEventListener(InputEvent.INPUT,this.handleInput,false);
+         this.channelRetypePasswordInput.removeEventListener(InputEvent.INPUT,this.handleInput,false);
+      }
 
-        public function update(arg1:Object):void
-        {
-            this._data = arg1;
-            this.setFocusToInput();
-            invalidate(scaleform.clik.constants.InvalidationType.DATA);
-            return;
-        }
+      public function update(param1:Object) : void {
+         this._data = param1;
+         this.setFocusToInput();
+         invalidate(InvalidationType.DATA);
+      }
 
-        public override function setSize(arg1:Number, arg2:Number):void
-        {
-            super.setSize(arg1, arg2);
-            return;
-        }
+      override public function setSize(param1:Number, param2:Number) : void {
+         super.setSize(param1,param2);
+      }
 
-        public override function toString():String
-        {
-            return "[WG ChannelsCreateForm " + name + "]";
-        }
+      override public function toString() : String {
+         return "[WG ChannelsCreateForm " + name + "]";
+      }
+   }
 
-        internal static const UPDATE_PASSWORD_TEXT:String="updatePasswordField";
-
-        public var channelNameLabel:net.wg.gui.components.controls.LabelControl=null;
-
-        public var channelPasswordLabel:net.wg.gui.components.controls.LabelControl=null;
-
-        public var channelFillPasswordLabel:net.wg.gui.components.controls.LabelControl=null;
-
-        public var channelRetypePasswordLabel:net.wg.gui.components.controls.LabelControl=null;
-
-        public var channelNameInput:net.wg.gui.components.controls.TextInput=null;
-
-        public var channelPasswordInput:net.wg.gui.components.controls.TextInput=null;
-
-        public var channelRetypePasswordInput:net.wg.gui.components.controls.TextInput=null;
-
-        public var channelPasswordCheckBox:net.wg.gui.components.controls.CheckBox=null;
-
-        public var channelCreateButton:net.wg.gui.components.controls.SoundButtonEx=null;
-
-        public var bg:flash.display.Sprite=null;
-
-        internal var _data:Object=null;
-
-        internal var usePassword:Boolean=false;
-    }
 }

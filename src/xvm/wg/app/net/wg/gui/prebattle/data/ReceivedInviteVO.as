@@ -1,96 +1,78 @@
-package net.wg.gui.prebattle.data 
+package net.wg.gui.prebattle.data
 {
-    import net.wg.data.daapi.base.*;
-    
-    public class ReceivedInviteVO extends net.wg.data.daapi.base.DAAPIDataClass
-    {
-        public function ReceivedInviteVO(arg1:Object)
-        {
-            super(arg1);
-            return;
-        }
+   import net.wg.data.daapi.base.DAAPIDataClass;
 
-        public function get id():int
-        {
-            return this._id;
-        }
 
-        public function set id(arg1:int):void
-        {
-            this._id = arg1;
-            return;
-        }
+   public class ReceivedInviteVO extends DAAPIDataClass
+   {
+          
+      public function ReceivedInviteVO(param1:Object) {
+         super(param1);
+      }
 
-        public function get text():String
-        {
-            return this._text;
-        }
+      private var _id:int = 0;
 
-        public function set text(arg1:String):void
-        {
-            this._text = arg1;
-            return;
-        }
+      private var _text:String = "";
 
-        public function get comment():String
-        {
-            return this._comment;
-        }
+      private var _comment:String = "";
 
-        public function set comment(arg1:String):void
-        {
-            this._comment = arg1;
-            return;
-        }
+      private var _note:String = "";
 
-        public function get note():String
-        {
-            return this._note;
-        }
+      private var _canAccept:Boolean = false;
 
-        public function set note(arg1:String):void
-        {
-            this._note = arg1;
-            return;
-        }
+      private var _canDecline:Boolean = false;
 
-        public function get canAccept():Boolean
-        {
-            return this._canAccept;
-        }
+      public function get id() : int {
+         return this._id;
+      }
 
-        public function set canAccept(arg1:Boolean):void
-        {
-            this._canAccept = arg1;
-            return;
-        }
+      public function set id(param1:int) : void {
+         this._id = param1;
+      }
 
-        public function get canDecline():Boolean
-        {
-            return this._canDecline;
-        }
+      public function get text() : String {
+         return this._text;
+      }
 
-        public function set canDecline(arg1:Boolean):void
-        {
-            this._canDecline = arg1;
-            return;
-        }
+      public function set text(param1:String) : void {
+         this._text = param1;
+      }
 
-        public function hasNote():Boolean
-        {
-            return this._note && this._note.length > 0;
-        }
+      public function get comment() : String {
+         return this._comment;
+      }
 
-        internal var _id:int=0;
+      public function set comment(param1:String) : void {
+         this._comment = param1;
+      }
 
-        internal var _text:String="";
+      public function get note() : String {
+         return this._note;
+      }
 
-        internal var _comment:String="";
+      public function set note(param1:String) : void {
+         this._note = param1;
+      }
 
-        internal var _note:String="";
+      public function get canAccept() : Boolean {
+         return this._canAccept;
+      }
 
-        internal var _canAccept:Boolean=false;
+      public function set canAccept(param1:Boolean) : void {
+         this._canAccept = param1;
+      }
 
-        internal var _canDecline:Boolean=false;
-    }
+      public function get canDecline() : Boolean {
+         return this._canDecline;
+      }
+
+      public function set canDecline(param1:Boolean) : void {
+         this._canDecline = param1;
+      }
+
+      public function hasNote() : Boolean {
+         return (this._note) && this._note.length > 0;
+      }
+   }
+
 }

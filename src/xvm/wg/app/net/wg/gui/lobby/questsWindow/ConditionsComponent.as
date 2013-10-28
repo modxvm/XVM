@@ -1,110 +1,99 @@
-package net.wg.gui.lobby.questsWindow 
+package net.wg.gui.lobby.questsWindow
 {
-    import __AS3__.vec.*;
-    import flash.display.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.core.*;
-    
-    public class ConditionsComponent extends scaleform.clik.core.UIComponent
-    {
-        public function ConditionsComponent()
-        {
-            this._data = [];
-            super();
-            this._blocks = new Vector.<net.wg.gui.lobby.questsWindow.ConditionsBlock>();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import __AS3__.vec.Vector;
+   import flash.display.MovieClip;
+   import scaleform.clik.constants.InvalidationType;
 
-        public override function dispose():void
-        {
-            if (this._blocks) 
+
+   public class ConditionsComponent extends UIComponent
+   {
+          
+      public function ConditionsComponent() {
+         this._data = [];
+         super();
+         this._blocks = new Vector.<ConditionsBlock>();
+      }
+
+      private static const BOTTOM_PADDING:int = 5;
+
+      private var _data:Array;
+
+      private var _blocks:Vector.<ConditionsBlock> = null;
+
+      public var line:MovieClip;
+
+      override public function dispose() : void {
+         if(this._blocks)
+         {
+            this.clearBlocks();
+            this._blocks = null;
+         }
+         if(this._data)
+         {
+            this._data.splice(0,this._data.length);
+            this._data = null;
+         }
+         super.dispose();
+      }
+
+      public function setData(param1:Array) : void {
+         this._data = param1;
+         invalidateData();
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         if((isInvalid(InvalidationType.DATA)) && (this._data))
+         {
+            this.clearBlocks();
+            this.createBlocks();
+            this.layoutBlocks();
+         }
+      }
+
+      private function clearBlocks() : void {
+         var _loc1_:* = 0;
+         while(_loc1_ < this._blocks.length)
+         {
+            this._blocks[_loc1_].dispose();
+            removeChild(this._blocks[_loc1_]);
+            _loc1_++;
+         }
+         this._blocks.splice(0,this._blocks.length);
+      }
+
+      private function createBlocks() : void {
+         var _loc3_:ConditionsBlock = null;
+         var _loc1_:int = this._data.length;
+         var _loc2_:* = 0;
+         while(_loc2_ < _loc1_)
+         {
+            _loc3_ = App.utils.classFactory.getComponent("ConditionsBlock_UI",ConditionsBlock);
+            this._blocks.push(_loc3_);
+            addChild(_loc3_);
+            _loc3_.setData(this._data[_loc2_]);
+            if(_loc2_ == _loc1_-1)
             {
-                this.clearBlocks();
-                this._blocks = null;
+               _loc3_.line.visible = false;
             }
-            if (this._data) 
-            {
-                this._data.splice(0, this._data.length);
-                this._data = null;
-            }
-            super.dispose();
-            return;
-        }
+            _loc3_.validateNow();
+            _loc2_++;
+         }
+      }
 
-        public function setData(arg1:Array):void
-        {
-            this._data = arg1;
-            invalidateData();
-            return;
-        }
+      private function layoutBlocks() : void {
+         var _loc1_:* = 1;
+         while(_loc1_ < this._blocks.length)
+         {
+            this._blocks[_loc1_].y = this._blocks[_loc1_-1].y + this._blocks[_loc1_-1].height;
+            _loc1_++;
+         }
+         var _loc2_:Number = this._blocks.length > 0?this._blocks[this._blocks.length-1].height + this._blocks[this._blocks.length-1].y + BOTTOM_PADDING:0;
+         this.line.y = _loc2_-1;
+         this.line.visible = this._blocks.length > 0;
+         setSize(this.width,_loc2_);
+      }
+   }
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA) && this._data) 
-            {
-                this.clearBlocks();
-                this.createBlocks();
-                this.layoutBlocks();
-            }
-            return;
-        }
-
-        internal function clearBlocks():void
-        {
-            var loc1:*=0;
-            while (loc1 < this._blocks.length) 
-            {
-                this._blocks[loc1].dispose();
-                removeChild(this._blocks[loc1]);
-                ++loc1;
-            }
-            this._blocks.splice(0, this._blocks.length);
-            return;
-        }
-
-        internal function createBlocks():void
-        {
-            var loc3:*=null;
-            var loc1:*=this._data.length;
-            var loc2:*=0;
-            while (loc2 < loc1) 
-            {
-                loc3 = App.utils.classFactory.getComponent("ConditionsBlock_UI", net.wg.gui.lobby.questsWindow.ConditionsBlock);
-                this._blocks.push(loc3);
-                addChild(loc3);
-                loc3.setData(this._data[loc2]);
-                if (loc2 == (loc1 - 1)) 
-                {
-                    loc3.line.visible = false;
-                }
-                loc3.validateNow();
-                ++loc2;
-            }
-            return;
-        }
-
-        internal function layoutBlocks():void
-        {
-            var loc1:*=1;
-            while (loc1 < this._blocks.length) 
-            {
-                this._blocks[loc1].y = this._blocks[(loc1 - 1)].y + this._blocks[(loc1 - 1)].height;
-                ++loc1;
-            }
-            var loc2:*=this._blocks.length > 0 ? this._blocks[(this._blocks.length - 1)].height + this._blocks[(this._blocks.length - 1)].y + BOTTOM_PADDING : 0;
-            this.line.y = (loc2 - 1);
-            this.line.visible = this._blocks.length > 0;
-            setSize(this.width, loc2);
-            return;
-        }
-
-        internal static const BOTTOM_PADDING:int=5;
-
-        internal var _data:Array;
-
-        internal var _blocks:__AS3__.vec.Vector.<net.wg.gui.lobby.questsWindow.ConditionsBlock>=null;
-
-        public var line:flash.display.MovieClip;
-    }
 }

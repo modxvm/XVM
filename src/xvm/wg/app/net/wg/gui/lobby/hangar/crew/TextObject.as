@@ -1,63 +1,53 @@
-package net.wg.gui.lobby.hangar.crew 
+package net.wg.gui.lobby.hangar.crew
 {
-    public class TextObject extends Object
-    {
-        public function TextObject()
-        {
-            super();
-            return;
-        }
 
-        public function get roleHtml():String
-        {
-            return this._roleHtml;
-        }
 
-        public function set roleHtml(arg1:String):void
-        {
-            this._roleHtml = arg1;
-            return;
-        }
+   public class TextObject extends Object
+   {
+          
+      public function TextObject() {
+         super();
+      }
 
-        public function get rank():String
-        {
-            return this._rank;
-        }
+      private var _levelSpecializationMainHtml:String = null;
 
-        public function set rank(arg1:String):void
-        {
-            this._rank = arg1;
-            return;
-        }
+      private var _nameTF:String = null;
 
-        public function get nameTF():String
-        {
-            return this._nameTF;
-        }
+      private var _rank:String = null;
 
-        public function set nameTF(arg1:String):void
-        {
-            this._nameTF = arg1;
-            return;
-        }
+      private var _roleHtml:String = null;
 
-        public function get levelSpecializationMainHtml():String
-        {
-            return this._levelSpecializationMainHtml;
-        }
+      public function get roleHtml() : String {
+         return this._roleHtml;
+      }
 
-        public function set levelSpecializationMainHtml(arg1:String):void
-        {
-            this._levelSpecializationMainHtml = arg1;
-            return;
-        }
+      public function set roleHtml(param1:String) : void {
+         this._roleHtml = param1;
+      }
 
-        internal var _levelSpecializationMainHtml:String=null;
+      public function get rank() : String {
+         return this._rank;
+      }
 
-        internal var _nameTF:String=null;
+      public function set rank(param1:String) : void {
+         this._rank = param1;
+      }
 
-        internal var _rank:String=null;
+      public function get nameTF() : String {
+         return this._nameTF;
+      }
 
-        internal var _roleHtml:String=null;
-    }
+      public function set nameTF(param1:String) : void {
+         this._nameTF = param1;
+      }
+
+      public function get levelSpecializationMainHtml() : String {
+         return this._levelSpecializationMainHtml;
+      }
+
+      public function set levelSpecializationMainHtml(param1:String) : void {
+         this._levelSpecializationMainHtml = param1;
+      }
+   }
+
 }

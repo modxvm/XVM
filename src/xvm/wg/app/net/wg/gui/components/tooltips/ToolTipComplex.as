@@ -1,165 +1,159 @@
-package net.wg.gui.components.tooltips 
+package net.wg.gui.components.tooltips
 {
-    import __AS3__.vec.*;
-    import flash.text.*;
-    import net.wg.data.managers.*;
-    import net.wg.gui.components.tooltips.helpers.*;
-    
-    public class ToolTipComplex extends net.wg.gui.components.tooltips.ToolTipBase
-    {
-        public function ToolTipComplex()
-        {
-            super();
-            this.contentList = new Vector.<flash.text.TextField>();
-            return;
-        }
+   import flash.text.TextField;
+   import flash.text.TextFormat;
+   import net.wg.gui.components.tooltips.helpers.Utils;
+   import __AS3__.vec.Vector;
+   import net.wg.data.managers.ITooltipProps;
 
-        public override function build(arg1:Object, arg2:net.wg.data.managers.ITooltipProps):void
-        {
-            this.setProp(arg2);
-            this.setContent(arg1);
-            redraw();
-            return;
-        }
 
-        internal function setProp(arg1:net.wg.data.managers.ITooltipProps):void
-        {
-            _props = arg1;
-            this._minWidth = arg1.minWidth;
-            this._maxWidth = arg1.maxWidth;
-            return;
-        }
+   public class ToolTipComplex extends ToolTipBase
+   {
+          
+      public function ToolTipComplex() {
+         super();
+         this.contentList = new Vector.<TextField>();
+      }
 
-        protected override function updateSize():void
-        {
-            var loc1:*=null;
-            loc1 = this.calcDimension();
-            var loc2:*;
-            background.y = loc2 = 0;
-            background.x = loc2;
-            background.width = Math.round(loc1.w) + this._leftMargin + this._rightMargin;
-            background.height = Math.round(loc1.h) + this._topMargin + this._bottomMargin;
-            return;
-        }
+      private static const COLOR_HEADER:String = "#fdf4ce";
 
-        internal function calcDimension():Object
-        {
-            var loc7:*=null;
-            var loc8:*=NaN;
-            var loc1:*=this._maxWidth;
-            var loc2:*=0;
-            var loc3:*=0;
-            var loc4:*=this.contentList.length;
-            var loc5:*=0;
-            while (loc5 < loc4) 
+      private static function setTextProp(param1:TextField, param2:String, param3:TextFormat, param4:String) : void {
+         param3.align = param4;
+         param3.leading = 2;
+         param1.wordWrap = true;
+         param1.multiline = true;
+         param1.autoSize = param4;
+         param1.embedFonts = true;
+         var _loc5_:Number = param2.toLowerCase().indexOf("face=\"",0);
+         if(_loc5_ > 0)
+         {
+            param3.font = param2.slice(_loc5_ + 6,param2.indexOf("\"",_loc5_ + 6));
+         }
+         else
+         {
+            param3.font = "$TextFont";
+         }
+         if(param2.slice(0,1) == "#")
+         {
+            param1.htmlText = param2;
+            param1.textColor = Utils.instance.convertStringColorToNumber(COLOR_HEADER);
+         }
+         else
+         {
+            param1.htmlText = "<font color=\"" + COLOR_HEADER + "\" size=\"12\">" + param2 + "</font>";
+         }
+         param1.setTextFormat(param3);
+      }
+
+      private var _minWidth:Number;
+
+      private var _maxWidth:Number;
+
+      private var _leftMargin:Number = 10;
+
+      private var _rightMargin:Number = 10;
+
+      private var _topMargin:Number = 6;
+
+      private var _bottomMargin:Number = 11;
+
+      private var contTopMargin:Number = 10;
+
+      private var contLeftMargin:Number = 13;
+
+      private var contentList:Vector.<TextField>;
+
+      override public function build(param1:Object, param2:ITooltipProps) : void {
+         this.setProp(param2);
+         this.setContent(param1);
+         redraw();
+      }
+
+      private function setProp(param1:ITooltipProps) : void {
+         _props = param1;
+         this._minWidth = param1.minWidth;
+         this._maxWidth = param1.maxWidth;
+      }
+
+      override protected function updateSize() : void {
+         var _loc1_:Object = this.calcDimension();
+         background.x = background.y = 0;
+         background.width = Math.round(_loc1_.w) + this._leftMargin + this._rightMargin;
+         background.height = Math.round(_loc1_.h) + this._topMargin + this._bottomMargin;
+      }
+
+      private function calcDimension() : Object {
+         var _loc7_:TextField = null;
+         var _loc8_:* = NaN;
+         var _loc1_:Number = this._maxWidth;
+         var _loc2_:Number = 0;
+         var _loc3_:Number = 0;
+         var _loc4_:int = this.contentList.length;
+         var _loc5_:* = 0;
+         while(_loc5_ < _loc4_)
+         {
+            _loc7_ = this.contentList[_loc5_];
+            if(this._maxWidth)
             {
-                loc7 = this.contentList[loc5];
-                if (this._maxWidth) 
-                {
-                    loc7.y = loc7.y + loc3;
-                    if (loc1 < loc7.width) 
-                    {
-                        loc8 = loc7.textHeight;
-                        loc7.width = loc1;
-                        loc7.height = loc7.textHeight + 4;
-                        loc3 = loc3 + (loc7.textHeight - loc8);
-                    }
-                }
-                else if (loc1 < loc7.width) 
-                {
-                    loc1 = this.contentList[loc5].width;
-                }
-                if (loc2 < loc7.y + loc7.textHeight) 
-                {
-                    loc2 = loc7.y + loc7.textHeight;
-                }
-                ++loc5;
+               _loc7_.y = _loc7_.y + _loc3_;
+               if(_loc1_ < _loc7_.width)
+               {
+                  _loc8_ = _loc7_.textHeight;
+                  _loc7_.width = _loc1_;
+                  _loc7_.height = _loc7_.textHeight + 4;
+                  _loc3_ = _loc3_ + (_loc7_.textHeight - _loc8_);
+               }
             }
-            loc1 = loc1 + 5;
-            var loc6:*;
-            return loc6 = {"w":loc1, "h":loc2};
-        }
-
-        internal function setContent(arg1:Object):void
-        {
-            var loc6:*=null;
-            this._leftMargin = 10;
-            this._rightMargin = 10;
-            this._topMargin = 6;
-            this._bottomMargin = 11;
-            var loc1:*=this.contTopMargin;
-            var loc2:*=0;
-            var loc3:*=new flash.text.TextFormat();
-            var loc4:*=10;
-            var loc5:*=this._minWidth != 0 ? this._minWidth : 500;
-            var loc7:*=typeof arg1;
-            switch (loc7) 
+            else
             {
-                case "string":
-                {
-                    (loc6 = new flash.text.TextField()).x = this.contLeftMargin;
-                    loc6.y = loc1;
-                    loc6.width = loc5;
-                    loc6.height = loc4;
-                    setTextProp(loc6, String(arg1), loc3, "left");
-                    loc6.width = loc6.textWidth + 4;
-                    loc2 = loc6.textHeight;
-                    this.contentList.push(loc6);
-                    addChild(loc6);
-                    break;
-                }
+               if(_loc1_ < _loc7_.width)
+               {
+                  _loc1_ = this.contentList[_loc5_].width;
+               }
             }
-            return;
-        }
-
-        internal static function setTextProp(arg1:flash.text.TextField, arg2:String, arg3:flash.text.TextFormat, arg4:String):void
-        {
-            arg3.align = arg4;
-            arg3.leading = 2;
-            arg1.wordWrap = true;
-            arg1.multiline = true;
-            arg1.autoSize = arg4;
-            arg1.embedFonts = true;
-            var loc1:*;
-            if ((loc1 = arg2.toLowerCase().indexOf("face=\"", 0)) > 0) 
+            if(_loc2_ < _loc7_.y + _loc7_.textHeight)
             {
-                arg3.font = arg2.slice(loc1 + 6, arg2.indexOf("\"", loc1 + 6));
+               _loc2_ = _loc7_.y + _loc7_.textHeight;
             }
-            else 
+            _loc5_++;
+         }
+         _loc1_ = _loc1_ + 5;
+         var _loc6_:Object =
             {
-                arg3.font = "$TextFont";
+               "w":_loc1_,
+               "h":_loc2_
             }
-            if (arg2.slice(0, 1) != "#") 
-            {
-                arg1.htmlText = "<font color=\"" + COLOR_HEADER + "\" size=\"12\">" + arg2 + "</font>";
-            }
-            else 
-            {
-                arg1.htmlText = arg2;
-                arg1.textColor = net.wg.gui.components.tooltips.helpers.Utils.instance.convertStringColorToNumber(COLOR_HEADER);
-            }
-            arg1.setTextFormat(arg3);
-            return;
-        }
+         ;
+         return _loc6_;
+      }
 
-        internal static const COLOR_HEADER:String="#fdf4ce";
+      private function setContent(param1:Object) : void {
+         var _loc7_:TextField = null;
+         this._leftMargin = 10;
+         this._rightMargin = 10;
+         this._topMargin = 6;
+         this._bottomMargin = 11;
+         var _loc2_:Number = this.contTopMargin;
+         var _loc3_:Number = 0;
+         var _loc4_:TextFormat = new TextFormat();
+         var _loc5_:Number = 10;
+         var _loc6_:Number = this._minWidth == 0?500:this._minWidth;
+         switch(typeof param1)
+         {
+            case "string":
+               _loc7_ = new TextField();
+               _loc7_.x = this.contLeftMargin;
+               _loc7_.y = _loc2_;
+               _loc7_.width = _loc6_;
+               _loc7_.height = _loc5_;
+               setTextProp(_loc7_,String(param1),_loc4_,"left");
+               _loc7_.width = _loc7_.textWidth + 4;
+               _loc3_ = _loc7_.textHeight;
+               this.contentList.push(_loc7_);
+               addChild(_loc7_);
+               break;
+         }
+      }
+   }
 
-        internal var _minWidth:Number;
-
-        internal var _maxWidth:Number;
-
-        internal var _leftMargin:Number=10;
-
-        internal var _rightMargin:Number=10;
-
-        internal var _topMargin:Number=6;
-
-        internal var _bottomMargin:Number=11;
-
-        internal var contTopMargin:Number=10;
-
-        internal var contLeftMargin:Number=13;
-
-        internal var contentList:__AS3__.vec.Vector.<flash.text.TextField>;
-    }
 }

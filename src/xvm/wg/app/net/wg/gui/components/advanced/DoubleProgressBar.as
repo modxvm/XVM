@@ -1,70 +1,65 @@
-package net.wg.gui.components.advanced 
+package net.wg.gui.components.advanced
 {
-    import scaleform.clik.controls.*;
-    import scaleform.clik.core.*;
-    
-    public class DoubleProgressBar extends scaleform.clik.core.UIComponent
-    {
-        public function DoubleProgressBar()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import scaleform.clik.controls.StatusIndicator;
 
-        public function get frontPosition():Number
-        {
-            return this.frontBar.position;
-        }
 
-        public function set frontPosition(arg1:Number):void
-        {
-            this.frontBar.position = arg1;
-            return;
-        }
+   public class DoubleProgressBar extends UIComponent
+   {
+          
+      public function DoubleProgressBar() {
+         super();
+      }
 
-        public function get backPosition():Number
-        {
-            return this.backBar.position;
-        }
+      public var frontBar:StatusIndicator;
 
-        public function set backPosition(arg1:Number):void
-        {
-            this.backBar.position = arg1;
-            return;
-        }
+      public var backBar:StatusIndicator;
 
-        public function get minimum():Number
-        {
-            return this.frontBar.minimum;
-        }
+      override public function dispose() : void {
+         super.dispose();
+         this.frontBar.dispose();
+         this.frontBar = null;
+         this.backBar.dispose();
+         this.backBar = null;
+      }
 
-        public function set minimum(arg1:Number):void
-        {
-            this.frontBar.minimum = arg1;
-            this.backBar.minimum = arg1;
-            return;
-        }
+      public function get frontPosition() : Number {
+         return this.frontBar.position;
+      }
 
-        public function get maximum():Number
-        {
-            return this.frontBar.maximum;
-        }
+      public function set frontPosition(param1:Number) : void {
+         this.frontBar.position = param1;
+      }
 
-        public function set maximum(arg1:Number):void
-        {
-            this.frontBar.maximum = arg1;
-            this.backBar.maximum = arg1;
-            return;
-        }
+      public function get backPosition() : Number {
+         return this.backBar.position;
+      }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            return;
-        }
+      public function set backPosition(param1:Number) : void {
+         this.backBar.position = param1;
+      }
 
-        public var frontBar:scaleform.clik.controls.StatusIndicator;
+      public function get minimum() : Number {
+         return this.frontBar.minimum;
+      }
 
-        public var backBar:scaleform.clik.controls.StatusIndicator;
-    }
+      public function set minimum(param1:Number) : void {
+         this.frontBar.minimum = param1;
+         this.backBar.minimum = param1;
+      }
+
+      public function get maximum() : Number {
+         return this.frontBar.maximum;
+      }
+
+      public function set maximum(param1:Number) : void {
+         this.frontBar.maximum = param1;
+         this.backBar.maximum = param1;
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+      }
+   }
+
 }

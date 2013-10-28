@@ -1,13 +1,14 @@
-package net.wg.infrastructure.exceptions 
+package net.wg.infrastructure.exceptions
 {
-    import net.wg.infrastructure.exceptions.base.*;
-    
-    public class TypeCastException extends net.wg.infrastructure.exceptions.base.WGGUIException
-    {
-        public function TypeCastException(arg1:*="", arg2:*=0)
-        {
-            super(arg1, arg2);
-            return;
-        }
-    }
+   import net.wg.infrastructure.exceptions.base.WGGUIException;
+
+
+   public class TypeCastException extends WGGUIException
+   {
+          
+      public function TypeCastException(param1:*=undefined, param2:*=undefined) {
+         super(param1,param2);
+      }
+   }
+
 }

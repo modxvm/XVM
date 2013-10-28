@@ -1,619 +1,542 @@
-package net.wg.gui.lobby.training 
+package net.wg.gui.lobby.training
 {
-    import __AS3__.vec.*;
-    import flash.display.*;
-    import flash.events.*;
-    import flash.text.*;
-    import flash.ui.*;
-    import net.wg.data.*;
-    import net.wg.data.VO.*;
-    import net.wg.data.constants.*;
-    import net.wg.gui.components.advanced.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.components.icons.*;
-    import net.wg.gui.events.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import net.wg.infrastructure.events.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    import net.wg.utils.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.controls.*;
-    import scaleform.clik.data.*;
-    import scaleform.clik.events.*;
-    import scaleform.clik.interfaces.*;
-    
-    public class TrainingRoom extends net.wg.infrastructure.base.meta.impl.TrainingRoomMeta implements net.wg.infrastructure.base.meta.ITrainingRoomMeta
-    {
-        public function TrainingRoom()
-        {
-            super();
-            this._slots = Vector.<flash.display.InteractiveObject>([this.other, this.team1, this.team2]);
-            this.locale = App.utils.locale;
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.TrainingRoomMeta;
+   import net.wg.infrastructure.base.meta.ITrainingRoomMeta;
+   import scaleform.clik.controls.CoreList;
+   import net.wg.data.VO.TrainingRoomRendererVO;
+   import scaleform.clik.interfaces.IDataProvider;
+   import scaleform.clik.data.DataProvider;
+   import flash.text.TextField;
+   import net.wg.gui.components.controls.SoundButton;
+   import net.wg.gui.components.controls.SoundButtonEx;
+   import net.wg.gui.components.controls.TextFieldShort;
+   import net.wg.gui.components.advanced.TextAreaSimple;
+   import net.wg.gui.components.icons.BattleTypeIcon;
+   import __AS3__.vec.Vector;
+   import flash.display.InteractiveObject;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import net.wg.utils.ILocale;
+   import net.wg.utils.IScheduler;
+   import net.wg.data.VO.TrainingRoomInfoVO;
+   import scaleform.clik.constants.InvalidationType;
+   import net.wg.data.constants.Linkages;
+   import flash.ui.Keyboard;
+   import flash.events.KeyboardEvent;
+   import scaleform.clik.events.InputEvent;
+   import scaleform.clik.events.ButtonEvent;
+   import net.wg.infrastructure.events.DragDropEvent;
+   import net.wg.gui.events.ArenaVoipSettingsEvent;
+   import net.wg.infrastructure.events.VoiceChatEvent;
+   import net.wg.data.Aliases;
+   import scaleform.clik.controls.ListItemRenderer;
 
-        public function as_setArenaVoipChannels(arg1:Number):void
-        {
-            this.arenaVoipSettings.setUseArenaVoip(arg1);
-            return;
-        }
 
-        public function as_setInfo(arg1:Object):void
-        {
-            var loc2:*=null;
-            var loc1:*=new net.wg.data.VO.TrainingRoomInfoVO(arg1);
-            if (this.isCreator != loc1.isCreator) 
+   public class TrainingRoom extends TrainingRoomMeta implements ITrainingRoomMeta
+   {
+          
+      public function TrainingRoom() {
+         super();
+         this._slots = Vector.<InteractiveObject>([this.other,this.team1,this.team2]);
+         this.locale = App.utils.locale;
+      }
+
+      public static const TRAINING:String = "training";
+
+      private static const SUB_VIEW_MARGIN:Number = 120;
+
+      private static function checkStatus(param1:CoreList, param2:Number, param3:String, param4:String, param5:String, param6:String) : void {
+         var _loc8_:TrainingRoomRendererVO = null;
+         var _loc7_:IDataProvider = param1.dataProvider;
+         for each (_loc8_ in _loc7_)
+         {
+            if(_loc8_.uid == param2)
             {
-                this.isCreator = loc1.isCreator;
-                loc2 = App.utils.classFactory.getClass(net.wg.data.constants.Linkages.TRAINING_DRAG_DELEGATE);
-                if (this.isCreator) 
-                {
-                    assertNull(this._dragDropListDelegateCtrlr, "_dragDropListDelegateCtrlr");
-                    this._dragDropListDelegateCtrlr = new net.wg.gui.lobby.training.TrainingDragController(this._slots, loc2, net.wg.data.constants.Linkages.PLAYER_ELEMENT_UI);
-                }
-                else 
-                {
-                    this._dragDropListDelegateCtrlr.dispose();
-                    this._dragDropListDelegateCtrlr = null;
-                }
+               _loc8_.stateString = param3;
+               _loc8_.icon = param4;
+               _loc8_.vShortName = param5;
+               _loc8_.vLevel = param6;
+               param1.invalidateData();
+               break;
             }
-            this.comment.text = loc1.comment;
-            this.timeout.label = loc1.roundLenString;
-            this.maxPlayersCount = loc1.maxPlayersCount;
-            this.maxPlayers.label = this.curPlayersCount + "/" + this.maxPlayersCount;
-            this.map.htmlText = loc1.arenaName;
-            this.titleField.htmlText = loc1.title;
-            this.typeField.htmlText = loc1.arenaSubType;
-            this.owner.label = loc1.creator;
-            this.minimap.setMapS(loc1.arenaTypeID);
-            this.description.position = 0;
-            this.description.htmlText = loc1.description;
-            this.arenaVoipSettings.setCanChangeArenaVOIP(loc1.canChangeArenaVOIP);
-            this.arenaVoipSettings.setUseArenaVoip(loc1.arenaVoipChannels);
-            invalidate(scaleform.clik.constants.InvalidationType.STATE);
-            return;
-        }
+         }
+      }
 
-        public function as_updateComment(arg1:String):void
-        {
-            this.comment.text = arg1;
-            return;
-        }
-
-        public function as_updateMap(arg1:Number, arg2:Number, arg3:String, arg4:String, arg5:String, arg6:String):void
-        {
-            this.minimap.setMapS(arg1);
-            this.maxPlayers.label = this.curPlayersCount + "/" + arg2;
-            this.map.htmlText = arg3;
-            this.titleField.htmlText = arg4;
-            this.typeField.htmlText = arg5;
-            this.description.position = 0;
-            this.description.htmlText = arg6;
-            return;
-        }
-
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.updateStage(App.appWidth, App.appHeight);
-            this.addListeners();
-            this.battleIcon.gotoAndStop(net.wg.gui.lobby.training.TrainingRoom.TRAINING);
-            this.battleIconBig.gotoAndStop(net.wg.gui.lobby.training.TrainingRoom.TRAINING);
-            this.description.autoScroll = false;
-            App.gameInputMgr.setKeyHandler(flash.ui.Keyboard.ESCAPE, flash.events.KeyboardEvent.KEY_DOWN, this.handleEscape, true);
-            return;
-        }
-
-        internal function handleEscape(arg1:scaleform.clik.events.InputEvent):void
-        {
-            onEscapeS();
-            return;
-        }
-
-        internal function addListeners():void
-        {
-            this.settingsButton.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onSettingsButtonClick);
-            this.startButton.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onStartButtonClick);
-            this.closeButton.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.closeTraining);
-            this.inviteButton.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.showTrainingInvitations);
-            this.swapButton.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onSwapBtnClick);
-            this.other.addEventListener(net.wg.infrastructure.events.DragDropEvent.END_DROP, this.onDrop);
-            this.team1.addEventListener(net.wg.infrastructure.events.DragDropEvent.END_DROP, this.onDrop);
-            this.team2.addEventListener(net.wg.infrastructure.events.DragDropEvent.END_DROP, this.onDrop);
-            this.arenaVoipSettings.addEventListener(net.wg.gui.events.ArenaVoipSettingsEvent.SELECT_USE_COMMON_VOICE_CHAT, this.selectCommonVoiceChatHandler);
-            App.voiceChatMgr.addEventListener(net.wg.infrastructure.events.VoiceChatEvent.START_SPEAKING, this.startSpeak);
-            App.voiceChatMgr.addEventListener(net.wg.infrastructure.events.VoiceChatEvent.STOP_SPEAKING, this.stoptSpeak);
-            return;
-        }
-
-        protected override function onPopulate():void
-        {
-            super.onPopulate();
-            registerComponent(this.minimap, net.wg.data.Aliases.LOBBY_MINIMAP);
-            this.setTeamsInfo();
-            var loc1:*=App.voiceChatMgr.isYYS();
-            this.arenaVoipSettings.visible = App.voiceChatMgr.isVOIPEnabledS() || loc1;
-            this.arenaVOIPLabel.text = App.voiceChatMgr.isVOIPEnabledS() || loc1 ? MENU.TRAINING_INFO_VOICECHAT : "";
-            return;
-        }
-
-        protected override function onDispose():void
-        {
-            App.gameInputMgr.clearKeyHandler(flash.ui.Keyboard.ESCAPE, flash.events.KeyboardEvent.KEY_DOWN);
-            this.removeListeners();
-            this.disposeComponents();
-            this.locale = null;
-            if (this._dragDropListDelegateCtrlr) 
+      private static function checkRoster(param1:CoreList, param2:Number, param3:Number) : void {
+         var _loc5_:TrainingRoomRendererVO = null;
+         var _loc4_:IDataProvider = param1.dataProvider;
+         for each (_loc5_ in _loc4_)
+         {
+            if(_loc5_.uid == param2)
             {
-                this._dragDropListDelegateCtrlr.dispose();
-                this._dragDropListDelegateCtrlr = null;
+               _loc5_.chatRoster = param3;
+               param1.invalidateData();
+               break;
             }
-            if (this._slots) 
+         }
+      }
+
+      private static function setupDataProvider(param1:Array) : IDataProvider {
+         var _loc3_:Object = null;
+         var _loc2_:DataProvider = new DataProvider();
+         for each (_loc3_ in param1)
+         {
+            _loc2_.push(new TrainingRoomRendererVO(_loc3_));
+         }
+         return _loc2_;
+      }
+
+      public var team1Label:TextField;
+
+      public var team2Label:TextField;
+
+      public var otherLabel:TextField;
+
+      public var titleField:TextField;
+
+      public var typeField:TextField;
+
+      public var comment:TextField;
+
+      public var map:TextField;
+
+      public var arenaVOIPLabel:TextField;
+
+      public var swapButton:SoundButton;
+
+      public var closeButton:SoundButtonEx;
+
+      public var settingsButton:SoundButtonEx;
+
+      public var startButton:SoundButtonEx;
+
+      public var inviteButton:SoundButtonEx;
+
+      public var minimap:MinimapLobby;
+
+      public var owner:TextFieldShort;
+
+      public var timeout:TextFieldShort;
+
+      public var maxPlayers:TextFieldShort;
+
+      public var description:TextAreaSimple;
+
+      public var battleIconBig:BattleTypeIcon;
+
+      public var battleIcon:BattleTypeIcon;
+
+      public var team1:DropList;
+
+      public var team2:DropList;
+
+      public var other:DropTileList;
+
+      public var arenaVoipSettings:ArenaVoipSettings;
+
+      private var isCreator:Boolean;
+
+      private var _slots:Vector.<InteractiveObject> = null;
+
+      private var maxPlayersCount:Number = 0;
+
+      private var curPlayersCount:Number = 0;
+
+      private var _dragDropListDelegateCtrlr:IDisposable = null;
+
+      private var _myWidth:Number = 0;
+
+      private var locale:ILocale = null;
+
+      override public function updateStage(param1:Number, param2:Number) : void {
+         this.setViewSize(param1,param2);
+      }
+
+      override public final function setViewSize(param1:Number, param2:Number) : void {
+         this._myWidth = param1;
+         invalidateSize();
+      }
+
+      public function as_setPlayerStateInTeam1(param1:Number, param2:String, param3:String, param4:String, param5:String) : void {
+         checkStatus(this.team1,param1,param2,param3,param4,param5);
+      }
+
+      public function as_setPlayerStateInTeam2(param1:Number, param2:String, param3:String, param4:String, param5:String) : void {
+         checkStatus(this.team2,param1,param2,param3,param4,param5);
+      }
+
+      public function as_setPlayerStateInOther(param1:Number, param2:String, param3:String, param4:String, param5:String) : void {
+         checkStatus(this.other,param1,param2,param3,param4,param5);
+      }
+
+      public function as_setPlayerChatRosterInTeam1(param1:Number, param2:Number) : void {
+         checkRoster(this.team1,param1,param2);
+      }
+
+      public function as_setPlayerChatRosterInTeam2(param1:Number, param2:Number) : void {
+         checkRoster(this.team2,param1,param2);
+      }
+
+      public function as_setPlayerChatRosterInOther(param1:Number, param2:Number) : void {
+         checkRoster(this.other,param1,param2);
+      }
+
+      public function as_startCoolDownVoiceChat(param1:Number) : void {
+         this.arenaVoipSettings.startCoolDownUseCommonVoiceChat(param1);
+      }
+
+      public function as_disableControls(param1:Boolean) : void {
+         this.disableControls(param1);
+      }
+
+      public function as_startCoolDownSetting(param1:Number) : void {
+         var _loc2_:IScheduler = App.utils.scheduler;
+         _loc2_.cancelTask(this.stopCoolDownSetting);
+         this.settingsButton.enabled = false;
+         _loc2_.scheduleTask(this.stopCoolDownSetting,param1 * 1000);
+      }
+
+      public function as_startCoolDownSwapButton(param1:Number) : void {
+         var _loc2_:IScheduler = null;
+         _loc2_ = App.utils.scheduler;
+         _loc2_.cancelTask(this.stopCoolDownSwapButton);
+         this.swapButton.enabled = false;
+         _loc2_.scheduleTask(this.stopCoolDownSwapButton,param1 * 1000);
+      }
+
+      public function as_disableStartButton(param1:Boolean) : void {
+         this.startButton.enabled = !param1;
+      }
+
+      public function as_enabledCloseButton(param1:Boolean) : void {
+         this.closeButton.enabled = param1;
+      }
+
+      public function as_setTeam1(param1:Array) : void {
+         this.team1.dataProvider = setupDataProvider(param1);
+         this.team1Label.htmlText = this.locale.makeString(MENU.TRAINING_INFO_TEAM1LABEL);
+         this.team1Label.htmlText = this.team1Label.htmlText + (" [<font color=\"#FFFFFF\">" + param1.length + "</font>]");
+         this.countPlayers();
+      }
+
+      public function as_setTeam2(param1:Array) : void {
+         this.team2.dataProvider = setupDataProvider(param1);
+         this.team2Label.htmlText = this.locale.makeString(MENU.TRAINING_INFO_TEAM2LABEL);
+         this.team2Label.htmlText = this.team2Label.htmlText + (" [<font color=\"#FFFFFF\">" + param1.length + "</font>]");
+         this.countPlayers();
+      }
+
+      public function as_setOther(param1:Array) : void {
+         this.other.dataProvider = setupDataProvider(param1);
+         this.otherLabel.htmlText = this.locale.makeString(MENU.TRAINING_INFO_OTHERLABEL);
+         this.otherLabel.htmlText = this.otherLabel.htmlText + (" [<font color=\"#FFFFFF\">" + param1.length + "</font>]");
+         this.countPlayers();
+      }
+
+      public function as_setArenaVoipChannels(param1:Number) : void {
+         this.arenaVoipSettings.setUseArenaVoip(param1);
+      }
+
+      public function as_setInfo(param1:Object) : void {
+         var _loc2_:TrainingRoomInfoVO = new TrainingRoomInfoVO(param1);
+         if(this.isCreator != _loc2_.isCreator)
+         {
+            this.isCreator = _loc2_.isCreator;
+            if(this.isCreator)
             {
-                this._slots.splice(0, this._slots.length);
-                this._slots = null;
+               this.createDragController();
             }
-            App.utils.scheduler.cancelTask(this.stopCoolDownSwapButton);
-            App.utils.scheduler.cancelTask(this.stopCoolDownSetting);
-            super.onDispose();
-            return;
-        }
-
-        public function as_updateTimeout(arg1:String):void
-        {
-            this.timeout.label = arg1;
-            return;
-        }
-
-        internal function disposeComponents():void
-        {
-            this.team1Label = null;
-            this.team2Label = null;
-            this.otherLabel = null;
-            this.titleField = null;
-            this.typeField = null;
-            this.comment = null;
-            this.map = null;
-            this.arenaVOIPLabel = null;
-            this.swapButton.dispose();
-            this.swapButton = null;
-            this.closeButton.dispose();
-            this.closeButton = null;
-            this.settingsButton.dispose();
-            this.settingsButton = null;
-            this.startButton.dispose();
-            this.startButton = null;
-            this.inviteButton.dispose();
-            this.inviteButton = null;
-            this.owner.dispose();
-            this.owner = null;
-            this.timeout.dispose();
-            this.timeout = null;
-            this.maxPlayers.dispose();
-            this.maxPlayers = null;
-            this.description.dispose();
-            this.description = null;
-            this.battleIconBig.dispose();
-            this.battleIconBig = null;
-            this.battleIcon.dispose();
-            this.battleIcon = null;
-            this.team1.dispose();
-            this.team1 = null;
-            this.team2.dispose();
-            this.team2 = null;
-            this.other.dispose();
-            this.other = null;
-            this.arenaVoipSettings.dispose();
-            this.arenaVoipSettings = null;
-            return;
-        }
-
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
+            else
             {
-                x = this._myWidth - _originalWidth >> 1;
-                y = -SUB_VIEW_MARGIN;
+               this._dragDropListDelegateCtrlr.dispose();
+               this._dragDropListDelegateCtrlr = null;
             }
-            if (isInvalid(scaleform.clik.constants.InvalidationType.STATE)) 
+         }
+         this.comment.text = _loc2_.comment;
+         this.timeout.label = _loc2_.roundLenString;
+         this.maxPlayersCount = _loc2_.maxPlayersCount;
+         this.maxPlayers.label = this.curPlayersCount + "/" + this.maxPlayersCount;
+         this.map.htmlText = _loc2_.arenaName;
+         this.titleField.htmlText = _loc2_.title;
+         this.typeField.htmlText = _loc2_.arenaSubType;
+         this.owner.label = _loc2_.creator;
+         this.minimap.setMapS(_loc2_.arenaTypeID);
+         this.description.position = 0;
+         this.description.htmlText = _loc2_.description;
+         this.arenaVoipSettings.setCanChangeArenaVOIP(_loc2_.canChangeArenaVOIP);
+         this.arenaVoipSettings.setUseArenaVoip(_loc2_.arenaVoipChannels);
+         invalidate(InvalidationType.STATE);
+      }
+
+      private function createDragController() : void {
+         var _loc1_:Class = App.utils.classFactory.getClass(Linkages.TRAINING_DRAG_DELEGATE);
+         assertNull(this._dragDropListDelegateCtrlr,"_dragDropListDelegateCtrlr");
+         this._dragDropListDelegateCtrlr = new TrainingDragController(this._slots,_loc1_,Linkages.PLAYER_ELEMENT_UI);
+      }
+
+      public function as_updateComment(param1:String) : void {
+         this.comment.text = param1;
+      }
+
+      public function as_updateTimeout(param1:String) : void {
+         this.timeout.label = param1;
+      }
+
+      public function as_updateMap(param1:Number, param2:Number, param3:String, param4:String, param5:String, param6:String) : void {
+         this.minimap.setMapS(param1);
+         this.maxPlayers.label = this.curPlayersCount + "/" + param2;
+         this.map.htmlText = param3;
+         this.titleField.htmlText = param4;
+         this.typeField.htmlText = param5;
+         this.description.position = 0;
+         this.description.htmlText = param6;
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.updateStage(App.appWidth,App.appHeight);
+         this.addListeners();
+         this.battleIcon.gotoAndStop(TrainingRoom.TRAINING);
+         this.battleIconBig.gotoAndStop(TrainingRoom.TRAINING);
+         this.description.autoScroll = false;
+         App.gameInputMgr.setKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN,this.handleEscape,true);
+      }
+
+      private function handleEscape(param1:InputEvent) : void {
+         onEscapeS();
+      }
+
+      private function addListeners() : void {
+         this.settingsButton.addEventListener(ButtonEvent.CLICK,this.onSettingsButtonClick);
+         this.startButton.addEventListener(ButtonEvent.CLICK,this.onStartButtonClick);
+         this.closeButton.addEventListener(ButtonEvent.CLICK,this.closeTraining);
+         this.inviteButton.addEventListener(ButtonEvent.CLICK,this.showTrainingInvitations);
+         this.swapButton.addEventListener(ButtonEvent.CLICK,this.onSwapBtnClick);
+         this.other.addEventListener(DragDropEvent.END_DROP,this.onDrop);
+         this.team1.addEventListener(DragDropEvent.END_DROP,this.onDrop);
+         this.team2.addEventListener(DragDropEvent.END_DROP,this.onDrop);
+         this.arenaVoipSettings.addEventListener(ArenaVoipSettingsEvent.SELECT_USE_COMMON_VOICE_CHAT,this.selectCommonVoiceChatHandler);
+         App.voiceChatMgr.addEventListener(VoiceChatEvent.START_SPEAKING,this.startSpeak);
+         App.voiceChatMgr.addEventListener(VoiceChatEvent.STOP_SPEAKING,this.stoptSpeak);
+      }
+
+      override protected function onPopulate() : void {
+         var _loc1_:* = false;
+         super.onPopulate();
+         registerComponent(this.minimap,Aliases.LOBBY_MINIMAP);
+         this.setTeamsInfo();
+         _loc1_ = App.voiceChatMgr.isYYS();
+         this.arenaVoipSettings.visible = (App.voiceChatMgr.isVOIPEnabledS()) || (_loc1_);
+         this.arenaVOIPLabel.text = (App.voiceChatMgr.isVOIPEnabledS()) || (_loc1_)?MENU.TRAINING_INFO_VOICECHAT:"";
+      }
+
+      override protected function onDispose() : void {
+         App.gameInputMgr.clearKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN);
+         this.removeListeners();
+         this.disposeComponents();
+         this.locale = null;
+         if(this._dragDropListDelegateCtrlr)
+         {
+            this._dragDropListDelegateCtrlr.dispose();
+            this._dragDropListDelegateCtrlr = null;
+         }
+         if(this._slots)
+         {
+            this._slots.splice(0,this._slots.length);
+            this._slots = null;
+         }
+         App.utils.scheduler.cancelTask(this.stopCoolDownSwapButton);
+         App.utils.scheduler.cancelTask(this.stopCoolDownSetting);
+         super.onDispose();
+      }
+
+      private function disposeComponents() : void {
+         this.team1Label = null;
+         this.team2Label = null;
+         this.otherLabel = null;
+         this.titleField = null;
+         this.typeField = null;
+         this.comment = null;
+         this.map = null;
+         this.arenaVOIPLabel = null;
+         this.swapButton.dispose();
+         this.swapButton = null;
+         this.closeButton.dispose();
+         this.closeButton = null;
+         this.settingsButton.dispose();
+         this.settingsButton = null;
+         this.startButton.dispose();
+         this.startButton = null;
+         this.inviteButton.dispose();
+         this.inviteButton = null;
+         this.owner.dispose();
+         this.owner = null;
+         this.timeout.dispose();
+         this.timeout = null;
+         this.maxPlayers.dispose();
+         this.maxPlayers = null;
+         this.description.dispose();
+         this.description = null;
+         this.battleIconBig.dispose();
+         this.battleIconBig = null;
+         this.battleIcon.dispose();
+         this.battleIcon = null;
+         this.team1.dispose();
+         this.team1 = null;
+         this.team2.dispose();
+         this.team2 = null;
+         this.other.dispose();
+         this.other = null;
+         this.arenaVoipSettings.dispose();
+         this.arenaVoipSettings = null;
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         if(isInvalid(InvalidationType.SIZE))
+         {
+            x = this._myWidth - _originalWidth >> 1;
+            y = -SUB_VIEW_MARGIN;
+         }
+         if(isInvalid(InvalidationType.STATE))
+         {
+            if(!this.isCreator)
             {
-                if (!this.isCreator) 
-                {
-                    this.settingsButton.visible = false;
-                    this.startButton.visible = false;
-                    this.closeButton.label = MENU.TRAINING_INFO_EXITBUTTON;
-                    this.inviteButton.visible = false;
-                    this.swapButton.visible = false;
-                }
+               this.settingsButton.visible = false;
+               this.startButton.visible = false;
+               this.closeButton.label = MENU.TRAINING_INFO_EXITBUTTON;
+               this.inviteButton.visible = false;
+               this.swapButton.visible = false;
             }
-            return;
-        }
+         }
+      }
 
-        internal function removeListeners():void
-        {
-            this.other.removeEventListener(net.wg.infrastructure.events.DragDropEvent.END_DROP, this.onDrop);
-            this.team1.removeEventListener(net.wg.infrastructure.events.DragDropEvent.END_DROP, this.onDrop);
-            this.team2.removeEventListener(net.wg.infrastructure.events.DragDropEvent.END_DROP, this.onDrop);
-            this.settingsButton.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onSettingsButtonClick);
-            this.startButton.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onStartButtonClick);
-            this.closeButton.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.closeTraining);
-            this.inviteButton.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.showTrainingInvitations);
-            this.swapButton.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onSwapBtnClick);
-            this.arenaVoipSettings.removeEventListener(net.wg.gui.events.ArenaVoipSettingsEvent.SELECT_USE_COMMON_VOICE_CHAT, this.selectCommonVoiceChatHandler);
-            App.voiceChatMgr.removeEventListener(net.wg.infrastructure.events.VoiceChatEvent.START_SPEAKING, this.startSpeak);
-            App.voiceChatMgr.removeEventListener(net.wg.infrastructure.events.VoiceChatEvent.STOP_SPEAKING, this.stoptSpeak);
-            return;
-        }
+      private function removeListeners() : void {
+         this.other.removeEventListener(DragDropEvent.END_DROP,this.onDrop);
+         this.team1.removeEventListener(DragDropEvent.END_DROP,this.onDrop);
+         this.team2.removeEventListener(DragDropEvent.END_DROP,this.onDrop);
+         this.settingsButton.removeEventListener(ButtonEvent.CLICK,this.onSettingsButtonClick);
+         this.startButton.removeEventListener(ButtonEvent.CLICK,this.onStartButtonClick);
+         this.closeButton.removeEventListener(ButtonEvent.CLICK,this.closeTraining);
+         this.inviteButton.removeEventListener(ButtonEvent.CLICK,this.showTrainingInvitations);
+         this.swapButton.removeEventListener(ButtonEvent.CLICK,this.onSwapBtnClick);
+         this.arenaVoipSettings.removeEventListener(ArenaVoipSettingsEvent.SELECT_USE_COMMON_VOICE_CHAT,this.selectCommonVoiceChatHandler);
+         App.voiceChatMgr.removeEventListener(VoiceChatEvent.START_SPEAKING,this.startSpeak);
+         App.voiceChatMgr.removeEventListener(VoiceChatEvent.STOP_SPEAKING,this.stoptSpeak);
+      }
 
-        internal function setSpeaking(arg1:Boolean, arg2:Number):void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            var loc3:*=null;
-            var loc4:*=0;
-            var loc5:*=this._slots;
-            for each (loc1 in loc5) 
+      private function setSpeaking(param1:Boolean, param2:Number) : void {
+         var _loc3_:CoreList = null;
+         var _loc4_:IDataProvider = null;
+         var _loc5_:TrainingRoomRendererVO = null;
+         for each (_loc3_ in this._slots)
+         {
+            _loc4_ = _loc3_.dataProvider;
+            for each (_loc5_ in _loc4_)
             {
-                loc2 = loc1.dataProvider;
-                var loc6:*=0;
-                var loc7:*=loc2;
-                for each (loc3 in loc7) 
-                {
-                    if (loc3.uid != arg2) 
-                    {
-                        continue;
-                    }
-                    loc3.isPlayerSpeaking = arg1;
-                    loc1.invalidateData();
-                }
+               if(_loc5_.uid == param2)
+               {
+                  _loc5_.isPlayerSpeaking = param1;
+                  _loc3_.invalidateData();
+               }
             }
-            return;
-        }
+         }
+      }
 
-        internal function disableControls():void
-        {
-            this.swapButton.enabled = false;
-            this.closeButton.enabled = false;
-            this.settingsButton.enabled = false;
-            this.startButton.enabled = false;
-            this.inviteButton.enabled = false;
-            this.arenaVoipSettings.enabled = false;
-            if (this._dragDropListDelegateCtrlr) 
+      private function disableControls(param1:Boolean) : void {
+         this.swapButton.enabled = !param1;
+         this.closeButton.enabled = !param1;
+         this.settingsButton.enabled = !param1;
+         this.startButton.enabled = !param1;
+         this.inviteButton.enabled = !param1;
+         this.arenaVoipSettings.enabled = !param1;
+         if(param1)
+         {
+            if(this._dragDropListDelegateCtrlr)
             {
-                this._dragDropListDelegateCtrlr.dispose();
-                this._dragDropListDelegateCtrlr = null;
+               this._dragDropListDelegateCtrlr.dispose();
+               this._dragDropListDelegateCtrlr = null;
             }
-            return;
-        }
-
-        internal function stopCoolDownSwapButton():void
-        {
-            this.swapButton.enabled = true;
-            return;
-        }
-
-        internal function stopCoolDownSetting():void
-        {
-            this.settingsButton.enabled = true;
-            return;
-        }
-
-        internal function setTeamsInfo():void
-        {
-            this.team1Label.htmlText = this.locale.makeString(MENU.TRAINING_INFO_TEAM1LABEL);
-            this.team1Label.htmlText = this.team1Label.htmlText + (" [<font color=\"#FFFFFF\">" + 0 + "</font>]");
-            this.team2Label.htmlText = this.locale.makeString(MENU.TRAINING_INFO_TEAM2LABEL);
-            this.team2Label.htmlText = this.team2Label.htmlText + (" [<font color=\"#FFFFFF\">" + 0 + "</font>]");
-            this.otherLabel.htmlText = this.locale.makeString(MENU.TRAINING_INFO_OTHERLABEL);
-            this.otherLabel.htmlText = this.otherLabel.htmlText + (" [<font color=\"#FFFFFF\">" + 0 + "</font>]");
-            return;
-        }
-
-        internal function countPlayers():void
-        {
-            var loc1:*=null;
-            this.curPlayersCount = 0;
-            var loc2:*=0;
-            var loc3:*=this._slots;
-            for each (loc1 in loc3) 
+         }
+         else
+         {
+            if(!this._dragDropListDelegateCtrlr)
             {
-                this.curPlayersCount = this.curPlayersCount + loc1.dataProvider.length;
+               this.createDragController();
             }
-            this.maxPlayers.label = this.curPlayersCount + "/" + this.maxPlayersCount;
-            App.toolTipMgr.hide();
-            App.contextMenuMgr.hide();
-            return;
-        }
+         }
+      }
 
-        internal function startSpeak(arg1:net.wg.infrastructure.events.VoiceChatEvent):void
-        {
-            this.setSpeaking(true, arg1.getAccountDBID());
-            return;
-        }
+      private function stopCoolDownSwapButton() : void {
+         this.swapButton.enabled = true;
+      }
 
-        internal function stoptSpeak(arg1:net.wg.infrastructure.events.VoiceChatEvent):void
-        {
-            this.setSpeaking(false, arg1.getAccountDBID());
-            return;
-        }
+      private function stopCoolDownSetting() : void {
+         this.settingsButton.enabled = true;
+      }
 
-        internal function onDrop(arg1:net.wg.infrastructure.events.DragDropEvent):void
-        {
-            var loc1:*=NaN;
-            var loc2:*=NaN;
-            if (arg1.sender != arg1.receiver) 
-            {
-                loc1 = scaleform.clik.controls.ListItemRenderer(arg1.draggedItem).data.accID;
-                loc2 = this._slots.indexOf(arg1.receiver);
-                changeTeamS(loc1, loc2);
-            }
-            return;
-        }
+      private function setTeamsInfo() : void {
+         this.team1Label.htmlText = this.locale.makeString(MENU.TRAINING_INFO_TEAM1LABEL);
+         this.team1Label.htmlText = this.team1Label.htmlText + (" [<font color=\"#FFFFFF\">" + 0 + "</font>]");
+         this.team2Label.htmlText = this.locale.makeString(MENU.TRAINING_INFO_TEAM2LABEL);
+         this.team2Label.htmlText = this.team2Label.htmlText + (" [<font color=\"#FFFFFF\">" + 0 + "</font>]");
+         this.otherLabel.htmlText = this.locale.makeString(MENU.TRAINING_INFO_OTHERLABEL);
+         this.otherLabel.htmlText = this.otherLabel.htmlText + (" [<font color=\"#FFFFFF\">" + 0 + "</font>]");
+      }
 
-        internal function onSettingsButtonClick(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            showTrainingSettingsS();
-            return;
-        }
+      private function countPlayers() : void {
+         var _loc1_:CoreList = null;
+         this.curPlayersCount = 0;
+         for each (_loc1_ in this._slots)
+         {
+            this.curPlayersCount = this.curPlayersCount + _loc1_.dataProvider.length;
+         }
+         this.maxPlayers.label = this.curPlayersCount + "/" + this.maxPlayersCount;
+         App.toolTipMgr.hide();
+         App.contextMenuMgr.hide();
+      }
 
-        internal function onStartButtonClick(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            startTrainingS();
-            this.disableControls();
-            return;
-        }
+      private function startSpeak(param1:VoiceChatEvent) : void {
+         this.setSpeaking(true,param1.getAccountDBID());
+      }
 
-        internal function closeTraining(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            closeTrainingRoomS();
-            return;
-        }
+      private function stoptSpeak(param1:VoiceChatEvent) : void {
+         this.setSpeaking(false,param1.getAccountDBID());
+      }
 
-        internal function showTrainingInvitations(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            showPrebattleInvitationsFormS();
-            return;
-        }
+      private function onDrop(param1:DragDropEvent) : void {
+         var _loc2_:* = NaN;
+         var _loc3_:* = NaN;
+         if(param1.sender != param1.receiver)
+         {
+            _loc2_ = ListItemRenderer(param1.draggedItem).data.accID;
+            _loc3_ = this._slots.indexOf(param1.receiver);
+            changeTeamS(_loc2_,_loc3_);
+         }
+      }
 
-        internal function onSwapBtnClick(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            swapTeamsS();
-            return;
-        }
+      private function selectCommonVoiceChatHandler(param1:ArenaVoipSettingsEvent) : void {
+         selectCommonVoiceChatS(param1.index);
+      }
 
-        internal static function checkStatus(arg1:scaleform.clik.controls.CoreList, arg2:Number, arg3:String, arg4:String, arg5:String, arg6:String):void
-        {
-            var loc2:*=null;
-            var loc1:*=arg1.dataProvider;
-            var loc3:*=0;
-            var loc4:*=loc1;
-            for each (loc2 in loc4) 
-            {
-                if (loc2.uid != arg2) 
-                {
-                    continue;
-                }
-                loc2.stateString = arg3;
-                loc2.icon = arg4;
-                loc2.vShortName = arg5;
-                loc2.vLevel = arg6;
-                arg1.invalidateData();
-                break;
-            }
-            return;
-        }
+      private function onSettingsButtonClick(param1:ButtonEvent) : void {
+         showTrainingSettingsS();
+      }
 
-        internal static function checkRoster(arg1:scaleform.clik.controls.CoreList, arg2:Number, arg3:Number):void
-        {
-            var loc2:*=null;
-            var loc1:*=arg1.dataProvider;
-            var loc3:*=0;
-            var loc4:*=loc1;
-            for each (loc2 in loc4) 
-            {
-                if (loc2.uid != arg2) 
-                {
-                    continue;
-                }
-                loc2.chatRoster = arg3;
-                arg1.invalidateData();
-                break;
-            }
-            return;
-        }
+      private function onStartButtonClick(param1:ButtonEvent) : void {
+         startTrainingS();
+      }
 
-        public function as_startCoolDownVoiceChat(arg1:Number):void
-        {
-            this.arenaVoipSettings.startCoolDownUseCommonVoiceChat(arg1);
-            return;
-        }
+      private function closeTraining(param1:ButtonEvent) : void {
+         closeTrainingRoomS();
+      }
 
-        internal static function setupDataProvider(arg1:Array):scaleform.clik.interfaces.IDataProvider
-        {
-            var loc2:*=null;
-            var loc1:*=new scaleform.clik.data.DataProvider();
-            var loc3:*=0;
-            var loc4:*=arg1;
-            for each (loc2 in loc4) 
-            {
-                loc1.push(new net.wg.data.VO.TrainingRoomRendererVO(loc2));
-            }
-            return loc1;
-        }
+      private function showTrainingInvitations(param1:ButtonEvent) : void {
+         showPrebattleInvitationsFormS();
+      }
 
-        public override function updateStage(arg1:Number, arg2:Number):void
-        {
-            this.setViewSize(arg1, arg2);
-            return;
-        }
+      private function onSwapBtnClick(param1:ButtonEvent) : void {
+         swapTeamsS();
+      }
+   }
 
-        public final override function setViewSize(arg1:Number, arg2:Number):void
-        {
-            this._myWidth = arg1;
-            invalidateSize();
-            return;
-        }
-
-        public function as_setPlayerStateInTeam1(arg1:Number, arg2:String, arg3:String, arg4:String, arg5:String):void
-        {
-            checkStatus(this.team1, arg1, arg2, arg3, arg4, arg5);
-            return;
-        }
-
-        public function as_setPlayerStateInTeam2(arg1:Number, arg2:String, arg3:String, arg4:String, arg5:String):void
-        {
-            checkStatus(this.team2, arg1, arg2, arg3, arg4, arg5);
-            return;
-        }
-
-        public function as_setPlayerStateInOther(arg1:Number, arg2:String, arg3:String, arg4:String, arg5:String):void
-        {
-            checkStatus(this.other, arg1, arg2, arg3, arg4, arg5);
-            return;
-        }
-
-        public function as_setPlayerChatRosterInTeam1(arg1:Number, arg2:Number):void
-        {
-            checkRoster(this.team1, arg1, arg2);
-            return;
-        }
-
-        public function as_setPlayerChatRosterInTeam2(arg1:Number, arg2:Number):void
-        {
-            checkRoster(this.team2, arg1, arg2);
-            return;
-        }
-
-        public function as_setPlayerChatRosterInOther(arg1:Number, arg2:Number):void
-        {
-            checkRoster(this.other, arg1, arg2);
-            return;
-        }
-
-        internal function selectCommonVoiceChatHandler(arg1:net.wg.gui.events.ArenaVoipSettingsEvent):void
-        {
-            selectCommonVoiceChatS(arg1.index);
-            return;
-        }
-
-        public function as_startCoolDownSetting(arg1:Number):void
-        {
-            var loc1:*=App.utils.scheduler;
-            loc1.cancelTask(this.stopCoolDownSetting);
-            this.settingsButton.enabled = false;
-            loc1.scheduleTask(this.stopCoolDownSetting, arg1 * 1000);
-            return;
-        }
-
-        public function as_startCoolDownSwapButton(arg1:Number):void
-        {
-            var loc1:*=null;
-            loc1 = App.utils.scheduler;
-            loc1.cancelTask(this.stopCoolDownSwapButton);
-            this.swapButton.enabled = false;
-            loc1.scheduleTask(this.stopCoolDownSwapButton, arg1 * 1000);
-            return;
-        }
-
-        public function as_disableStartButton(arg1:Boolean):void
-        {
-            this.startButton.enabled = !arg1;
-            return;
-        }
-
-        public function as_setTeam1(arg1:Array):void
-        {
-            this.team1.dataProvider = setupDataProvider(arg1);
-            this.team1Label.htmlText = this.locale.makeString(MENU.TRAINING_INFO_TEAM1LABEL);
-            this.team1Label.htmlText = this.team1Label.htmlText + (" [<font color=\"#FFFFFF\">" + arg1.length + "</font>]");
-            this.countPlayers();
-            return;
-        }
-
-        public function as_setTeam2(arg1:Array):void
-        {
-            this.team2.dataProvider = setupDataProvider(arg1);
-            this.team2Label.htmlText = this.locale.makeString(MENU.TRAINING_INFO_TEAM2LABEL);
-            this.team2Label.htmlText = this.team2Label.htmlText + (" [<font color=\"#FFFFFF\">" + arg1.length + "</font>]");
-            this.countPlayers();
-            return;
-        }
-
-        public function as_setOther(arg1:Array):void
-        {
-            this.other.dataProvider = setupDataProvider(arg1);
-            this.otherLabel.htmlText = this.locale.makeString(MENU.TRAINING_INFO_OTHERLABEL);
-            this.otherLabel.htmlText = this.otherLabel.htmlText + (" [<font color=\"#FFFFFF\">" + arg1.length + "</font>]");
-            this.countPlayers();
-            return;
-        }
-
-        public static const TRAINING:String="training";
-
-        internal static const SUB_VIEW_MARGIN:Number=120;
-
-        public var otherLabel:flash.text.TextField;
-
-        public var titleField:flash.text.TextField;
-
-        public var typeField:flash.text.TextField;
-
-        public var comment:flash.text.TextField;
-
-        public var map:flash.text.TextField;
-
-        public var arenaVOIPLabel:flash.text.TextField;
-
-        public var swapButton:net.wg.gui.components.controls.SoundButton;
-
-        public var settingsButton:net.wg.gui.components.controls.SoundButtonEx;
-
-        public var startButton:net.wg.gui.components.controls.SoundButtonEx;
-
-        public var inviteButton:net.wg.gui.components.controls.SoundButtonEx;
-
-        public var minimap:net.wg.gui.lobby.training.MinimapLobby;
-
-        public var owner:net.wg.gui.components.controls.TextFieldShort;
-
-        public var timeout:net.wg.gui.components.controls.TextFieldShort;
-
-        public var maxPlayers:net.wg.gui.components.controls.TextFieldShort;
-
-        public var team1Label:flash.text.TextField;
-
-        public var battleIconBig:net.wg.gui.components.icons.BattleTypeIcon;
-
-        public var battleIcon:net.wg.gui.components.icons.BattleTypeIcon;
-
-        public var team1:net.wg.gui.lobby.training.DropList;
-
-        public var team2:net.wg.gui.lobby.training.DropList;
-
-        public var other:net.wg.gui.lobby.training.DropTileList;
-
-        public var arenaVoipSettings:net.wg.gui.lobby.training.ArenaVoipSettings;
-
-        internal var isCreator:Boolean;
-
-        internal var _slots:__AS3__.vec.Vector.<flash.display.InteractiveObject>=null;
-
-        internal var maxPlayersCount:Number=0;
-
-        internal var curPlayersCount:Number=0;
-
-        internal var _dragDropListDelegateCtrlr:net.wg.infrastructure.interfaces.entity.IDisposable=null;
-
-        internal var locale:net.wg.utils.ILocale=null;
-
-        public var team2Label:flash.text.TextField;
-
-        public var closeButton:net.wg.gui.components.controls.SoundButtonEx;
-
-        internal var _myWidth:Number=0;
-
-        public var description:net.wg.gui.components.advanced.TextAreaSimple;
-    }
 }

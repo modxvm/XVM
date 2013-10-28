@@ -1,17 +1,17 @@
-package net.wg.gui.lobby.profile.pages.statistics 
+package net.wg.gui.lobby.profile.pages.statistics
 {
-    public class TypesStatisticsChart extends net.wg.gui.lobby.profile.pages.statistics.StatisticsBarChart
-    {
-        public function TypesStatisticsChart()
-        {
-            super();
-            return;
-        }
 
-        protected override function adjustProviderItem(arg1:net.wg.gui.lobby.profile.pages.statistics.StatisticChartInfo, arg2:int):void
-        {
-            arg1.icon = "../maps/icons/filters/tanks/" + arg1.xField + ".png";
-            return;
-        }
-    }
+
+   public class TypesStatisticsChart extends StatisticsBarChart
+   {
+          
+      public function TypesStatisticsChart() {
+         super();
+      }
+
+      override protected function adjustProviderItem(param1:StatisticChartInfo, param2:int) : void {
+         param1.icon = "../maps/icons/filters/tanks/" + param1.xField + ".png";
+      }
+   }
+
 }

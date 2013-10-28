@@ -1,18 +1,21 @@
-package net.wg.infrastructure.interfaces.entity 
+package net.wg.infrastructure.interfaces.entity
 {
-    import __AS3__.vec.*;
-    import flash.display.*;
-    
-    public interface IDroppable extends net.wg.infrastructure.interfaces.entity.IDragDropHitArea
-    {
-        function onBeforeDrop(arg1:flash.display.InteractiveObject, arg2:flash.display.InteractiveObject):void;
+   import flash.display.InteractiveObject;
+   import __AS3__.vec.Vector;
 
-        function onStartDrop(arg1:flash.display.InteractiveObject, arg2:flash.display.InteractiveObject, arg3:Number, arg4:Number):void;
 
-        function onEndDrop(arg1:flash.display.InteractiveObject, arg2:flash.display.InteractiveObject, arg3:flash.display.InteractiveObject):void;
+   public interface IDroppable extends IDragDropHitArea
+   {
+          
+      function onBeforeDrop(param1:InteractiveObject, param2:InteractiveObject) : Boolean;
 
-        function onAfterDrop(arg1:flash.display.InteractiveObject, arg2:flash.display.InteractiveObject):void;
+      function onStartDrop(param1:InteractiveObject, param2:InteractiveObject, param3:Number, param4:Number) : Boolean;
 
-        function getDropGroup():__AS3__.vec.Vector.<flash.display.InteractiveObject>;
-    }
+      function onEndDrop(param1:InteractiveObject, param2:InteractiveObject, param3:InteractiveObject, param4:InteractiveObject) : void;
+
+      function onAfterDrop(param1:InteractiveObject, param2:InteractiveObject) : void;
+
+      function getDropGroup() : Vector.<InteractiveObject>;
+   }
+
 }

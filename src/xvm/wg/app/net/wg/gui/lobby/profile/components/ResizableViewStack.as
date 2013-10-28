@@ -1,112 +1,100 @@
-package net.wg.gui.lobby.profile.components 
+package net.wg.gui.lobby.profile.components
 {
-    import flash.display.*;
-    import flash.geom.*;
-    import net.wg.gui.components.advanced.*;
-    
-    public class ResizableViewStack extends net.wg.gui.components.advanced.ViewStack
-    {
-        public function ResizableViewStack()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.components.advanced.ViewStack;
+   import flash.geom.Point;
+   import flash.display.MovieClip;
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(AVAILABLE_SIZE_INV)) 
+
+   public class ResizableViewStack extends ViewStack
+   {
+          
+      public function ResizableViewStack() {
+         super();
+      }
+
+      private static const OFFSET_INVALID:String = "layoutInv";
+
+      private static const AVAILABLE_SIZE_INV:String = "availSizeInv";
+
+      private static const DATA_INV:String = "dataForUpdInv";
+
+      private var availableSize:Point;
+
+      private var _centerOffset:int = 0;
+
+      private var _dataForUpdate:Object;
+
+      override protected function draw() : void {
+         super.draw();
+         if(isInvalid(AVAILABLE_SIZE_INV))
+         {
+            if((this.availableSize) && (currentView))
             {
-                if (this.availableSize && currentView) 
-                {
-                    net.wg.gui.lobby.profile.components.IResizableContent(currentView).setViewSize(this.availableSize.x, this.availableSize.y);
-                }
+               IResizableContent(currentView).setViewSize(this.availableSize.x,this.availableSize.y);
             }
-            if (isInvalid(AVAILABLE_SIZE_INV)) 
+         }
+         if(isInvalid(AVAILABLE_SIZE_INV))
+         {
+            if(currentView)
             {
-                if (currentView) 
-                {
-                    net.wg.gui.lobby.profile.components.IResizableContent(currentView).centerOffset = this._centerOffset;
-                }
+               IResizableContent(currentView).centerOffset = this._centerOffset;
             }
-            if (isInvalid(DATA_INV) && this._dataForUpdate) 
-            {
-                this.applyData();
-            }
-            return;
-        }
+         }
+         if((isInvalid(DATA_INV)) && (this._dataForUpdate))
+         {
+            this.applyData();
+         }
+      }
 
-        protected function applyData():void
-        {
-            if (currentView) 
-            {
-                currentView.update(this._dataForUpdate);
-            }
-            return;
-        }
+      protected function applyData() : void {
+         if(currentView)
+         {
+            currentView.update(this._dataForUpdate);
+         }
+      }
 
-        public function updateData(arg1:Object):void
-        {
-            this._dataForUpdate = arg1;
-            invalidate(DATA_INV);
-            return;
-        }
+      public function updateData(param1:Object) : void {
+         this._dataForUpdate = param1;
+         invalidate(DATA_INV);
+      }
 
-        public override function show(arg1:String):flash.display.MovieClip
-        {
-            var loc1:*=super.show(arg1);
-            var loc2:*=currentView as net.wg.gui.lobby.profile.components.IResizableContent;
-            if (loc2) 
-            {
-                loc2.active = false;
-            }
-            loc2 = net.wg.gui.lobby.profile.components.IResizableContent(loc1);
-            loc2.active = true;
-            if (this.availableSize) 
-            {
-                loc2.setViewSize(this.availableSize.x, this.availableSize.y);
-            }
-            loc2.centerOffset = this._centerOffset;
-            loc2.update(this._dataForUpdate);
-            return loc1;
-        }
+      override public function show(param1:String) : MovieClip {
+         var _loc2_:IResizableContent = currentView as IResizableContent;
+         var _loc3_:MovieClip = super.show(param1);
+         if(_loc2_)
+         {
+            _loc2_.active = false;
+         }
+         _loc2_ = IResizableContent(_loc3_);
+         _loc2_.active = true;
+         if(this.availableSize)
+         {
+            _loc2_.setViewSize(this.availableSize.x,this.availableSize.y);
+         }
+         _loc2_.centerOffset = this._centerOffset;
+         _loc2_.update(this._dataForUpdate);
+         return _loc3_;
+      }
 
-        public override function dispose():void
-        {
-            this._dataForUpdate = null;
-            super.dispose();
-            return;
-        }
+      override public function dispose() : void {
+         this._dataForUpdate = null;
+         super.dispose();
+      }
 
-        public function setAvailableSize(arg1:Number, arg2:Number):void
-        {
-            if (!this.availableSize) 
-            {
-                this.availableSize = new flash.geom.Point();
-            }
-            this.availableSize.x = arg1;
-            this.availableSize.y = arg2;
-            invalidate(AVAILABLE_SIZE_INV);
-            return;
-        }
+      public function setAvailableSize(param1:Number, param2:Number) : void {
+         if(!this.availableSize)
+         {
+            this.availableSize = new Point();
+         }
+         this.availableSize.x = param1;
+         this.availableSize.y = param2;
+         invalidate(AVAILABLE_SIZE_INV);
+      }
 
-        public function set centerOffset(arg1:int):void
-        {
-            this._centerOffset = arg1;
-            invalidate(OFFSET_INVALID);
-            return;
-        }
+      public function set centerOffset(param1:int) : void {
+         this._centerOffset = param1;
+         invalidate(OFFSET_INVALID);
+      }
+   }
 
-        internal static const OFFSET_INVALID:String="layoutInv";
-
-        internal static const AVAILABLE_SIZE_INV:String="availSizeInv";
-
-        internal static const DATA_INV:String="dataForUpdInv";
-
-        internal var availableSize:flash.geom.Point;
-
-        internal var _centerOffset:int=0;
-
-        internal var _dataForUpdate:Object;
-    }
 }

@@ -1,23 +1,22 @@
-package net.wg.infrastructure.base.meta.impl 
+package net.wg.infrastructure.base.meta.impl
 {
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.base.*;
-    
-    public class ConfirmModuleWindowMeta extends net.wg.infrastructure.base.AbstractWindowView
-    {
-        public function ConfirmModuleWindowMeta()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.AbstractWindowView;
+   import net.wg.data.constants.Errors;
 
-        public function submitS(arg1:Number, arg2:String):void
-        {
-            App.utils.asserter.assertNotNull(this.submit, "submit" + net.wg.data.constants.Errors.CANT_NULL);
-            this.submit(arg1, arg2);
-            return;
-        }
 
-        public var submit:Function=null;
-    }
+   public class ConfirmModuleWindowMeta extends AbstractWindowView
+   {
+          
+      public function ConfirmModuleWindowMeta() {
+         super();
+      }
+
+      public var submit:Function = null;
+
+      public function submitS(param1:Number, param2:String) : void {
+         App.utils.asserter.assertNotNull(this.submit,"submit" + Errors.CANT_NULL);
+         this.submit(param1,param2);
+      }
+   }
+
 }

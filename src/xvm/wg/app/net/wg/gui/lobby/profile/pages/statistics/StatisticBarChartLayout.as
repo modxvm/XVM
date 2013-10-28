@@ -1,23 +1,22 @@
-package net.wg.gui.lobby.profile.pages.statistics 
+package net.wg.gui.lobby.profile.pages.statistics
 {
-    import flash.geom.*;
-    import net.wg.gui.lobby.profile.components.chart.layout.*;
-    
-    public class StatisticBarChartLayout extends net.wg.gui.lobby.profile.components.chart.layout.LayoutBase
-    {
-        public function StatisticBarChartLayout()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.lobby.profile.components.chart.layout.LayoutBase;
+   import flash.geom.Point;
 
-        public override function layout(arg1:uint, arg2:Object):void
-        {
-            var loc1:*=net.wg.gui.lobby.profile.pages.statistics.StatisticBarChartItem(arg2);
-            var loc2:*=loc1.getThumbDimensions();
-            loc1.x = Math.round(paddingLeft + arg1 * (gap + loc2.x));
-            loc1.y = loc1.y - loc2.y;
-            return;
-        }
-    }
+
+   public class StatisticBarChartLayout extends LayoutBase
+   {
+          
+      public function StatisticBarChartLayout() {
+         super();
+      }
+
+      override public function layout(param1:uint, param2:Object) : void {
+         var _loc3_:StatisticBarChartItem = StatisticBarChartItem(param2);
+         var _loc4_:Point = _loc3_.getThumbDimensions();
+         _loc3_.x = Math.round(paddingLeft + param1 * (gap + _loc4_.x));
+         _loc3_.y = _loc3_.y - _loc4_.y;
+      }
+   }
+
 }

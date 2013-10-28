@@ -1,15 +1,22 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IProfileSectionMeta extends flash.events.IEventDispatcher
-    {
-        function setActiveS(arg1:Boolean):void;
+   import flash.events.IEventDispatcher;
 
-        function requestDataS(arg1:Object):void;
 
-        function as_update(arg1:Object):void;
+   public interface IProfileSectionMeta extends IEventDispatcher
+   {
+          
+      function setActiveS(param1:Boolean) : void;
 
-        function as_setInitData(arg1:Object):void;
-    }
+      function requestDataS(param1:Object) : void;
+
+      function requestDossierS(param1:String) : void;
+
+      function as_update(param1:Object) : void;
+
+      function as_setInitData(param1:Object) : void;
+
+      function as_responseDossier(param1:String, param2:Object) : void;
+   }
+
 }

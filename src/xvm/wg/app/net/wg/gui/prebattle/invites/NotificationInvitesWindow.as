@@ -1,117 +1,108 @@
-package net.wg.gui.prebattle.invites 
+package net.wg.gui.prebattle.invites
 {
-    import flash.events.*;
-    import net.wg.gui.components.advanced.*;
-    import net.wg.gui.events.*;
-    import net.wg.gui.lobby.messengerBar.*;
-    import net.wg.gui.prebattle.meta.*;
-    import net.wg.gui.prebattle.meta.impl.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.utils.*;
-    
-    public class NotificationInvitesWindow extends net.wg.gui.prebattle.meta.impl.NotificationInvitesWindowMeta implements net.wg.gui.prebattle.meta.INotificationInvitesWindowMeta
-    {
-        public function NotificationInvitesWindow()
-        {
-            super();
+   import net.wg.gui.prebattle.meta.impl.NotificationInvitesWindowMeta;
+   import net.wg.gui.prebattle.meta.INotificationInvitesWindowMeta;
+   import net.wg.gui.components.advanced.TextAreaSimple;
+   import scaleform.clik.utils.Padding;
+   import net.wg.gui.lobby.messengerBar.WindowGeometryInBar;
+   import net.wg.gui.events.MessengerBarEvent;
+   import scaleform.clik.constants.InvalidationType;
+   import scaleform.clik.utils.Constraints;
+   import scaleform.clik.constants.ConstrainMode;
+   import flash.events.TextEvent;
+
+
+   public class NotificationInvitesWindow extends NotificationInvitesWindowMeta implements INotificationInvitesWindowMeta
+   {
+          
+      public function NotificationInvitesWindow() {
+         super();
+      }
+
+      private static const MAX_MIN_WINDOW_SIZE:Object;
+
+      public var messageArea:TextAreaSimple;
+
+      private var _defaultPosition:Object = null;
+
+      public function get defaultPosition() : Object {
+         return this._defaultPosition;
+      }
+
+      public function set defaultPosition(param1:Object) : void {
+         if(param1 == null)
+         {
             return;
-        }
-
-        public function get defaultPosition():Object
-        {
-            return this._defaultPosition;
-        }
-
-        public function set defaultPosition(arg1:Object):void
-        {
-            if (arg1 == null) 
+         }
+         this._defaultPosition =
             {
-                return;
+               "paddingRight":param1.paddingRight,
+               "paddingBottom":param1.paddingBottom
             }
-            this._defaultPosition = {"paddingRight":arg1.paddingRight, "paddingBottom":arg1.paddingBottom};
-            return;
-        }
+         ;
+      }
 
-        protected override function preInitialize():void
-        {
-            super.preInitialize();
-            return;
-        }
+      override protected function preInitialize() : void {
+         super.preInitialize();
+      }
 
-        public function as_setInvites(arg1:Object):void
-        {
-            this.messageArea.htmlText = arg1.toString();
-            return;
-        }
+      public function as_setInvites(param1:Object) : void {
+         this.messageArea.htmlText = param1.toString();
+      }
 
-        protected override function onPopulate():void
-        {
-            super.onPopulate();
-            canResize = true;
-            canClose = true;
-            canDrag = true;
-            showWindowBg = false;
-            isCentered = false;
-            window.title = INVITES.GUI_TITLES_RECEIVEDINVITES;
-            var loc1:*=window.contentPadding as scaleform.clik.utils.Padding;
-            loc1.right = 15;
-            loc1.left = 16;
-            loc1.top = 40;
-            loc1.bottom = 20;
-            window.contentPadding = loc1;
-            geometry = new net.wg.gui.lobby.messengerBar.WindowGeometryInBar(net.wg.gui.events.MessengerBarEvent.PIN_RECEIVED_INVITES_WINDOW);
-            return;
-        }
+      override protected function onPopulate() : void {
+         super.onPopulate();
+         canResize = true;
+         canClose = true;
+         canDrag = true;
+         showWindowBg = false;
+         isCentered = false;
+         window.title = INVITES.GUI_TITLES_RECEIVEDINVITES;
+         var _loc1_:Padding = window.contentPadding as Padding;
+         _loc1_.right = 15;
+         _loc1_.left = 16;
+         _loc1_.top = 40;
+         _loc1_.bottom = 20;
+         window.contentPadding = _loc1_;
+         geometry = new WindowGeometryInBar(MessengerBarEvent.PIN_RECEIVED_INVITES_WINDOW);
+      }
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE) && constraints) 
-            {
-                this.updateSizes();
-            }
-            return;
-        }
-
-        protected override function configUI():void
-        {
-            constraints = new scaleform.clik.utils.Constraints(this, scaleform.clik.constants.ConstrainMode.REFLOW);
-            super.configUI();
-            if (constraints) 
-            {
-                constraints.addElement("messageArea", this.messageArea, scaleform.clik.utils.Constraints.ALL);
-            }
-            this.messageArea.textField.addEventListener(flash.events.TextEvent.LINK, this.onLinkClickHandler);
+      override protected function draw() : void {
+         super.draw();
+         if((isInvalid(InvalidationType.SIZE)) && (constraints))
+         {
             this.updateSizes();
-            requestInvitesS();
-            window.setMaxWidth(MAX_MIN_WINDOW_SIZE.maxWidth);
-            window.setMaxHeight(MAX_MIN_WINDOW_SIZE.maxHeight);
-            return;
-        }
+         }
+      }
 
-        internal function updateSizes():void
-        {
-            var loc1:*=0;
-            var loc2:*=0;
-            if (constraints) 
-            {
-                loc1 = window.width - window.contentPadding.left - window.contentPadding.right;
-                loc2 = window.height - window.contentPadding.top - window.contentPadding.bottom;
-                constraints.update(loc1, loc2);
-            }
-            return;
-        }
+      override protected function configUI() : void {
+         constraints = new Constraints(this,ConstrainMode.REFLOW);
+         super.configUI();
+         if(constraints)
+         {
+            constraints.addElement("messageArea",this.messageArea,Constraints.ALL);
+         }
+         this.messageArea.textField.addEventListener(TextEvent.LINK,this.onLinkClickHandler);
+         this.updateSizes();
+         requestInvitesS();
+         window.setMaxWidth(MAX_MIN_WINDOW_SIZE.maxWidth);
+         window.setMaxHeight(MAX_MIN_WINDOW_SIZE.maxHeight);
+      }
 
-        internal function onLinkClickHandler(arg1:flash.events.TextEvent):void
-        {
-            selectedInviteS(arg1.text);
-            return;
-        }
+      private function updateSizes() : void {
+         var _loc1_:* = 0;
+         var _loc2_:* = 0;
+         if(constraints)
+         {
+            _loc1_ = window.width - window.contentPadding.left - window.contentPadding.right;
+            _loc2_ = window.height - window.contentPadding.top - window.contentPadding.bottom;
+            constraints.update(_loc1_,_loc2_);
+         }
+      }
 
-        internal static const MAX_MIN_WINDOW_SIZE:Object={"minWidth":332, "minHeight":330, "maxWidth":1023, "maxHeight":768};
+      private function onLinkClickHandler(param1:TextEvent) : void {
+         selectedInviteS(param1.text);
+      }
+   }
 
-        public var messageArea:net.wg.gui.components.advanced.TextAreaSimple;
-
-        internal var _defaultPosition:Object=null;
-    }
 }

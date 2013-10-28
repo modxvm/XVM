@@ -1,83 +1,78 @@
-package net.wg.gui.messenger.controls 
+package net.wg.gui.messenger.controls
 {
-    import flash.text.*;
-    import net.wg.gui.components.controls.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.events.*;
-    
-    public class ChannelItemRenderer extends net.wg.gui.components.controls.TextFieldShort
-    {
-        public function ChannelItemRenderer()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.components.controls.TextFieldShort;
+   import scaleform.clik.constants.InvalidationType;
+   import scaleform.clik.events.ComponentEvent;
+   import flash.text.TextFieldAutoSize;
 
-        public override function setData(arg1:Object):void
-        {
-            visible = !(arg1 == null);
-            super.setData(arg1);
-            return;
-        }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            return;
-        }
+   public class ChannelItemRenderer extends TextFieldShort
+   {
+          
+      public function ChannelItemRenderer() {
+         super();
+      }
 
-        protected override function draw():void
-        {
-            var loc1:*=NaN;
-            visible = !(data == null);
-            if (isInvalid(scaleform.clik.constants.InvalidationType.STATE)) 
+      override public function setData(param1:Object) : void {
+         visible = !(param1 == null);
+         super.setData(param1);
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+      }
+
+      override protected function draw() : void {
+         var _loc1_:* = NaN;
+         visible = !(data == null);
+         if(isInvalid(InvalidationType.STATE))
+         {
+            if(_newFrame)
             {
-                if (_newFrame) 
-                {
-                    gotoAndPlay(_newFrame);
-                    _newFrame = null;
-                }
-                if (focusIndicator && _newFocusIndicatorFrame) 
-                {
-                    focusIndicator.gotoAndPlay(_newFocusIndicatorFrame);
-                    _newFocusIndicatorFrame = null;
-                }
-                updateAfterStateChange();
-                dispatchEvent(new scaleform.clik.events.ComponentEvent(scaleform.clik.events.ComponentEvent.STATE_CHANGE));
-                invalidate(scaleform.clik.constants.InvalidationType.DATA, scaleform.clik.constants.InvalidationType.SIZE);
+               gotoAndPlay(_newFrame);
+               _newFrame = null;
             }
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+            if((focusIndicator) && (_newFocusIndicatorFrame))
             {
-                updateText();
-                if (autoSize != flash.text.TextFieldAutoSize.NONE) 
-                {
-                    invalidateSize();
-                }
+               focusIndicator.gotoAndPlay(_newFocusIndicatorFrame);
+               _newFocusIndicatorFrame = null;
             }
-            if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
+            updateAfterStateChange();
+            dispatchEvent(new ComponentEvent(ComponentEvent.STATE_CHANGE));
+            invalidate(InvalidationType.DATA,InvalidationType.SIZE);
+         }
+         if(isInvalid(InvalidationType.DATA))
+         {
+            updateText();
+            if(autoSize != TextFieldAutoSize.NONE)
             {
-                if (!preventAutosizing) 
-                {
-                    alignForAutoSize();
-                    setActualSize(_width, _height);
-                }
-                if (!constraintsDisabled) 
-                {
-                    constraints.update(_width, _height);
-                }
+               invalidateSize();
             }
-            textField.text = _label;
-            if (textField.getLineLength(0) < textField.text.length) 
+         }
+         if(isInvalid(InvalidationType.SIZE))
+         {
+            if(!preventAutosizing)
             {
-                loc1 = textField.getLineLength(0);
-                if (loc1 < 3) 
-                {
-                    loc1 = textField.getLineLength(1);
-                }
-                textField.text = textField.text.substring(0, loc1 - 2) + "..";
+               alignForAutoSize();
+               setActualSize(_width,_height);
             }
-            _toolTip = _label;
-            return;
-        }
-    }
+            if(!constraintsDisabled)
+            {
+               constraints.update(_width,_height);
+            }
+         }
+         textField.text = _label;
+         if(textField.getLineLength(0) < textField.text.length)
+         {
+            _loc1_ = textField.getLineLength(0);
+            if(_loc1_ < 3)
+            {
+               _loc1_ = textField.getLineLength(1);
+            }
+            textField.text = textField.text.substring(0,_loc1_ - 2) + "..";
+         }
+         _toolTip = _label;
+      }
+   }
+
 }

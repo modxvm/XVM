@@ -1,65 +1,59 @@
-package net.wg.gui.components.controls 
+package net.wg.gui.components.controls
 {
-    import flash.display.*;
-    import flash.events.*;
-    import flash.geom.*;
-    import net.wg.data.constants.*;
-    import scaleform.clik.constants.*;
-    
-    public class DropDownListItemRendererSound extends net.wg.gui.components.controls.SoundListItemRenderer
-    {
-        public function DropDownListItemRendererSound()
-        {
-            super();
-            soundType = net.wg.data.constants.SoundTypes.DROPDN_ITEM_RNDR;
-            return;
-        }
+   import flash.display.MovieClip;
+   import flash.geom.Point;
+   import scaleform.clik.constants.InvalidationType;
+   import flash.events.MouseEvent;
+   import net.wg.data.constants.SoundTypes;
 
-        public override function toString():String
-        {
-            return "[WG DropDownListItemRendererSound " + name + "]";
-        }
 
-        protected override function updateText():void
-        {
-            if (!(_label == null) && !(textField == null)) 
+   public class DropDownListItemRendererSound extends SoundListItemRenderer
+   {
+          
+      public function DropDownListItemRendererSound() {
+         super();
+         soundType = SoundTypes.DROPDN_ITEM_RNDR;
+      }
+
+      public var focusElement:MovieClip;
+
+      override public function toString() : String {
+         return "[WG DropDownListItemRendererSound " + name + "]";
+      }
+
+      override protected function updateText() : void {
+         if(!(_label == null) && !(textField == null))
+         {
+            textField.htmlText = _label;
+         }
+      }
+
+      override protected function draw() : void {
+         var _loc1_:Point = null;
+         if(isInvalid(InvalidationType.DATA))
+         {
+            if(enabled)
             {
-                textField.htmlText = _label;
+               _loc1_ = new Point(mouseX,mouseY);
+               _loc1_ = this.localToGlobal(_loc1_);
+               if(this.hitTestPoint(_loc1_.x,_loc1_.y,true))
+               {
+                  setState("over");
+                  dispatchEvent(new MouseEvent(MouseEvent.ROLL_OVER));
+               }
             }
-            return;
-        }
+         }
+         super.draw();
+      }
 
-        protected override function draw():void
-        {
-            var loc1:*=null;
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
-            {
-                if (enabled) 
-                {
-                    loc1 = new flash.geom.Point(mouseX, mouseY);
-                    loc1 = this.localToGlobal(loc1);
-                    if (this.hitTestPoint(loc1.x, loc1.y, true)) 
-                    {
-                        setState("over");
-                        dispatchEvent(new flash.events.MouseEvent(flash.events.MouseEvent.ROLL_OVER));
-                    }
-                }
-            }
-            super.draw();
-            return;
-        }
+      override protected function configUI() : void {
+         if(this.focusElement)
+         {
+            focusIndicator = this.focusElement;
+         }
+         buttonMode = true;
+         super.configUI();
+      }
+   }
 
-        protected override function configUI():void
-        {
-            if (this.focusElement) 
-            {
-                focusIndicator = this.focusElement;
-            }
-            buttonMode = true;
-            super.configUI();
-            return;
-        }
-
-        public var focusElement:flash.display.MovieClip;
-    }
 }

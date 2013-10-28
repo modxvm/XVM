@@ -1,246 +1,206 @@
-package net.wg.gui.lobby.header 
+package net.wg.gui.lobby.header
 {
-    import __AS3__.vec.*;
-    import flash.events.*;
-    import flash.text.*;
-    import net.wg.gui.events.*;
-    import net.wg.gui.tutorial.constants.*;
-    import net.wg.gui.utils.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import net.wg.infrastructure.events.*;
-    import net.wg.infrastructure.exceptions.base.*;
-    import net.wg.infrastructure.interfaces.*;
-    
-    public class TutorialControl extends net.wg.infrastructure.base.meta.impl.TutorialControlMeta implements net.wg.infrastructure.base.meta.ITutorialControlMeta, net.wg.infrastructure.interfaces.IDAAPIModule
-    {
-        public function TutorialControl()
-        {
-            this._level = net.wg.gui.tutorial.constants.PlayerXPLevel.NEWBIE;
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.TutorialControlMeta;
+   import net.wg.infrastructure.base.meta.ITutorialControlMeta;
+   import net.wg.infrastructure.interfaces.IDAAPIModule;
+   import flash.text.TextField;
+   import net.wg.infrastructure.exceptions.base.WGGUIException;
+   import net.wg.infrastructure.events.LifeCycleEvent;
+   import flash.events.MouseEvent;
+   import __AS3__.vec.Vector;
+   import net.wg.gui.tutorial.constants.PlayerXPLevel;
+   import net.wg.gui.events.HeaderEvent;
+   import net.wg.gui.utils.ComplexTooltipHelper;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            preventAutosizing = true;
-            addEventListener(flash.events.MouseEvent.ROLL_OVER, this.onRollOver);
-            addEventListener(flash.events.MouseEvent.ROLL_OUT, this.onRollOut);
-            addEventListener(flash.events.MouseEvent.MOUSE_UP, this.onRelease);
-            addEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.onPress);
-            setState("out");
-            return;
-        }
 
-        protected override function draw():void
-        {
-            super.draw();
-            visible = this._visibleTD;
-            if (this.titleField && this._title) 
-            {
-                this.titleField.text = this._title;
-            }
-            if (this.stateField) 
-            {
-                this.stateField.text = this._isRunning ? this._refuseStatus : this._restartStatus;
-            }
-            return;
-        }
+   public class TutorialControl extends TutorialControlMeta implements ITutorialControlMeta, IDAAPIModule
+   {
+          
+      public function TutorialControl() {
+         this._level = PlayerXPLevel.NEWBIE;
+         super();
+      }
 
-        protected override function getStatePrefixes():__AS3__.vec.Vector.<String>
-        {
-            if (!enabled) 
-            {
-                return Vector.<String>([this.getLevelPrefix()]);
-            }
-            var loc1:*=this._isRunning ? PREFIX_RUN : PREFIX_PAUSE + this.getLevelPrefix();
-            return Vector.<String>([loc1]);
-        }
+      private static const PREFIX_NORMAL:String = "normal_";
 
-        internal function getLevelPrefix():String
-        {
-            return this._level != net.wg.gui.tutorial.constants.PlayerXPLevel.NORMAL ? PREFIX_NEWBIE : PREFIX_NORMAL;
-        }
+      private static const PREFIX_NEWBIE:String = "newbie_";
 
-        public override function dispose():void
-        {
-            super.dispose();
-            removeEventListener(flash.events.MouseEvent.ROLL_OVER, this.onRollOver);
-            removeEventListener(flash.events.MouseEvent.ROLL_OUT, this.onRollOut);
-            removeEventListener(flash.events.MouseEvent.MOUSE_UP, this.onRelease);
-            removeEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.onPress);
-            return;
-        }
+      private static const PREFIX_RUN:String = "run_";
 
-        internal function onRollOver(arg1:flash.events.MouseEvent):void
-        {
-            this.showToolTip();
-            return;
-        }
+      private static const PREFIX_PAUSE:String = "pause_";
 
-        internal function onRollOut(arg1:flash.events.MouseEvent):void
-        {
+      private var _title:String = "";
+
+      private var _description:String = "";
+
+      private var _level:Number;
+
+      private var _isRunning:Boolean = false;
+
+      private var _visibleTD:Boolean;
+
+      private var _visibleIfRun:Boolean = false;
+
+      private var _restartStatus:String = "";
+
+      private var _refuseStatus:String = "";
+
+      public var titleField:TextField;
+
+      public var stateField:TextField;
+
+      private var _disposed:Boolean = false;
+
+      public function get disposed() : Boolean {
+         return this._disposed;
+      }
+
+      public function as_setup(param1:Object) : void {
+         this._visibleIfRun = param1.visibleIfRun;
+         this._restartStatus = param1.restartStatus;
+         this._refuseStatus = param1.refuseStatus;
+      }
+
+      public function as_setPlayerXPLevel(param1:int) : void {
+         this._level = param1;
+         invalidate();
+      }
+
+      public function as_setChapterInfo(param1:String, param2:String) : void {
+         this._visibleTD = this._isRunning?this._visibleIfRun:true;
+         this._title = param1;
+         this._description = param2;
+         invalidate();
+      }
+
+      public function as_clearChapterInfo() : void {
+         this._visibleTD = false;
+         this._title = "";
+         this._description = "";
+         invalidate();
+      }
+
+      public function as_setRunMode() : void {
+         this._isRunning = true;
+         this._visibleTD = this._visibleIfRun;
+         setState(state);
+      }
+
+      public function as_setRestartMode() : void {
+         this._isRunning = false;
+         this._visibleTD = true;
+         setState(state);
+      }
+
+      public function as_setDisabled(param1:Boolean) : void {
+         App.globalVarsMgr.setTutorialDisabledS(param1);
+         enabled = !param1;
+         this.hideToolTip();
+         setState(state);
+      }
+
+      public function as_populate() : void {
+          
+      }
+
+      public function as_dispose() : void {
+         try
+         {
+            dispatchEvent(new LifeCycleEvent(LifeCycleEvent.ON_BEFORE_DISPOSE));
+            this.dispose();
+            this._disposed = true;
+            dispatchEvent(new LifeCycleEvent(LifeCycleEvent.ON_AFTER_DISPOSE));
+         }
+         catch(error:WGGUIException)
+         {
+            DebugUtils.LOG_WARNING(error.getStackTrace());
+         }
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         preventAutosizing = true;
+         addEventListener(MouseEvent.ROLL_OVER,this.onRollOver);
+         addEventListener(MouseEvent.ROLL_OUT,this.onRollOut);
+         addEventListener(MouseEvent.MOUSE_UP,this.onRelease);
+         addEventListener(MouseEvent.MOUSE_DOWN,this.onPress);
+         setState("out");
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         visible = this._visibleTD;
+         if((this.titleField) && (this._title))
+         {
+            this.titleField.text = this._title;
+         }
+         if(this.stateField)
+         {
+            this.stateField.text = this._isRunning?this._refuseStatus:this._restartStatus;
+         }
+      }
+
+      override protected function getStatePrefixes() : Vector.<String> {
+         if(!enabled)
+         {
+            return Vector.<String>([this.getLevelPrefix()]);
+         }
+         var _loc1_:String = this._isRunning?PREFIX_RUN:PREFIX_PAUSE + this.getLevelPrefix();
+         return Vector.<String>([_loc1_]);
+      }
+
+      private function getLevelPrefix() : String {
+         return this._level == PlayerXPLevel.NORMAL?PREFIX_NORMAL:PREFIX_NEWBIE;
+      }
+
+      override public function dispose() : void {
+         removeEventListener(MouseEvent.ROLL_OVER,this.onRollOver);
+         removeEventListener(MouseEvent.ROLL_OUT,this.onRollOut);
+         removeEventListener(MouseEvent.MOUSE_UP,this.onRelease);
+         removeEventListener(MouseEvent.MOUSE_DOWN,this.onPress);
+         this.titleField = null;
+         this.stateField = null;
+         super.dispose();
+      }
+
+      private function onRollOver(param1:MouseEvent) : void {
+         this.showToolTip();
+      }
+
+      private function onRollOut(param1:MouseEvent) : void {
+         this.hideToolTip();
+      }
+
+      private function onRelease(param1:MouseEvent) : void {
+         if(App.utils.commons.isLeftButton(param1))
+         {
             this.hideToolTip();
-            return;
-        }
-
-        internal function onRelease(arg1:flash.events.MouseEvent):void
-        {
-            if (App.utils.commons.isLeftButton(arg1)) 
+            if(this._isRunning)
             {
-                this.hideToolTip();
-                if (this._isRunning) 
-                {
-                    dispatchEvent(new net.wg.gui.events.HeaderEvent(net.wg.gui.events.HeaderEvent.SHOW_MESSAGE_DIALOG, "refuseTraining"));
-                }
-                else 
-                {
-                    restartS();
-                }
+               dispatchEvent(new HeaderEvent(HeaderEvent.SHOW_MESSAGE_DIALOG,"refuseTraining"));
             }
-            return;
-        }
-
-        internal function onPress(arg1:flash.events.MouseEvent):void
-        {
-            this.hideToolTip();
-            return;
-        }
-
-        internal function showToolTip():void
-        {
-            var loc1:*=new net.wg.gui.utils.ComplexTooltipHelper().addHeader(this._title).addBody(this._description).addNote(this._isRunning ? null : TUTORIAL.TOOLTIP_NOTES_RESTART, true).make();
-            if (loc1.length > 0) 
+            else
             {
-                App.toolTipMgr.showComplex(loc1);
+               restartS();
             }
-            return;
-        }
+         }
+      }
 
-        internal function hideToolTip():void
-        {
-            App.toolTipMgr.hide();
-            return;
-        }
+      private function onPress(param1:MouseEvent) : void {
+         this.hideToolTip();
+      }
 
-        public function get disposed():Boolean
-        {
-            return this._disposed;
-        }
+      private function showToolTip() : void {
+         var _loc1_:String = new ComplexTooltipHelper().addHeader(this._title).addBody(this._description).addNote(!this._isRunning?TUTORIAL.TOOLTIP_NOTES_RESTART:null,true).make();
+         if(_loc1_.length > 0)
+         {
+            App.toolTipMgr.showComplex(_loc1_);
+         }
+      }
 
-        public function as_setup(arg1:Object):void
-        {
-            this._visibleIfRun = arg1.visibleIfRun;
-            this._restartStatus = arg1.restartStatus;
-            this._refuseStatus = arg1.refuseStatus;
-            return;
-        }
+      private function hideToolTip() : void {
+         App.toolTipMgr.hide();
+      }
+   }
 
-        public function as_setPlayerXPLevel(arg1:int):void
-        {
-            this._level = arg1;
-            invalidate();
-            return;
-        }
-
-        public function as_setChapterInfo(arg1:String, arg2:String):void
-        {
-            this._visibleTD = this._isRunning ? this._visibleIfRun : true;
-            this._title = arg1;
-            this._description = arg2;
-            invalidate();
-            return;
-        }
-
-        public function as_clearChapterInfo():void
-        {
-            this._visibleTD = false;
-            this._title = "";
-            this._description = "";
-            invalidate();
-            return;
-        }
-
-        public function as_setRunMode():void
-        {
-            this._isRunning = true;
-            this._visibleTD = this._visibleIfRun;
-            setState(state);
-            return;
-        }
-
-        public function as_setRestartMode():void
-        {
-            this._isRunning = false;
-            this._visibleTD = true;
-            setState(state);
-            return;
-        }
-
-        public function as_setDisabled(arg1:Boolean):void
-        {
-            App.globalVarsMgr.setTutorialDisabledS(arg1);
-            enabled = !arg1;
-            this.hideToolTip();
-            setState(state);
-            return;
-        }
-
-        public function as_populate():void
-        {
-            return;
-        }
-
-        public function as_dispose():void
-        {
-            var loc1:*;
-            try 
-            {
-                dispatchEvent(new net.wg.infrastructure.events.LifeCycleEvent(net.wg.infrastructure.events.LifeCycleEvent.ON_BEFORE_DISPOSE));
-                this.dispose();
-                this._disposed = true;
-                dispatchEvent(new net.wg.infrastructure.events.LifeCycleEvent(net.wg.infrastructure.events.LifeCycleEvent.ON_AFTER_DISPOSE));
-            }
-            catch (error:net.wg.infrastructure.exceptions.base.WGGUIException)
-            {
-                DebugUtils.LOG_WARNING(error.getStackTrace());
-            }
-            catch (error:Error)
-            {
-                DebugUtils.LOG_ERROR(error.getStackTrace());
-            }
-            return;
-        }
-
-        internal static const PREFIX_NORMAL:String="normal_";
-
-        internal static const PREFIX_NEWBIE:String="newbie_";
-
-        internal static const PREFIX_RUN:String="run_";
-
-        internal static const PREFIX_PAUSE:String="pause_";
-
-        internal var _title:String="";
-
-        internal var _description:String="";
-
-        internal var _level:Number;
-
-        internal var _isRunning:Boolean=false;
-
-        internal var _visibleTD:Boolean;
-
-        internal var _visibleIfRun:Boolean=false;
-
-        internal var _restartStatus:String="";
-
-        internal var _refuseStatus:String="";
-
-        public var titleField:flash.text.TextField;
-
-        public var stateField:flash.text.TextField;
-
-        internal var _disposed:Boolean=false;
-    }
 }

@@ -1,145 +1,116 @@
-package net.wg.gui.lobby.confirmModuleWindow 
+package net.wg.gui.lobby.confirmModuleWindow
 {
-    import net.wg.data.daapi.base.*;
-    
-    public class ModuleInfoVo extends net.wg.data.daapi.base.DAAPIDataClass
-    {
-        public function ModuleInfoVo(arg1:Object)
-        {
-            super(arg1);
-            return;
-        }
+   import net.wg.data.daapi.base.DAAPIDataClass;
 
-        public function get isActionNow():Boolean
-        {
-            return this._isActionNow;
-        }
 
-        public function set isActionNow(arg1:Boolean):void
-        {
-            this._isActionNow = arg1;
-            return;
-        }
+   public class ModuleInfoVo extends DAAPIDataClass
+   {
+          
+      public function ModuleInfoVo(param1:Object) {
+         super(param1);
+      }
 
-        public function get maxAvailableCount():Array
-        {
-            return this._maxAvailableCount;
-        }
+      private var _id:int;
 
-        public function set maxAvailableCount(arg1:Array):void
-        {
-            this._maxAvailableCount = arg1;
-            return;
-        }
+      private var _type:String = "";
 
-        public function get id():int
-        {
-            return this._id;
-        }
+      private var _icon:String = "";
 
-        public function set id(arg1:int):void
-        {
-            this._id = arg1;
-            return;
-        }
+      private var _name:String = "";
 
-        public function get type():String
-        {
-            return this._type;
-        }
+      private var _descr:String = "";
 
-        public function set type(arg1:String):void
-        {
-            this._type = arg1;
-            return;
-        }
+      private var _currency:String = "";
 
-        public function get icon():String
-        {
-            return this._icon;
-        }
+      private var _price:Array;
 
-        public function set icon(arg1:String):void
-        {
-            this._icon = arg1;
-            return;
-        }
+      private var _maxAvailableCount:Array;
 
-        public function get name():String
-        {
-            return this._name;
-        }
+      private var _isActionNow:Boolean;
 
-        public function set name(arg1:String):void
-        {
-            this._name = arg1;
-            return;
-        }
+      private var _defaultValue:Number = -1;
 
-        public function get descr():String
-        {
-            return this._descr;
-        }
+      public var extraModuleInfo:String = "";
 
-        public function set descr(arg1:String):void
-        {
-            this._descr = arg1;
-            return;
-        }
+      public function get isActionNow() : Boolean {
+         return this._isActionNow;
+      }
 
-        public function get currency():String
-        {
-            return this._currency;
-        }
+      public function set isActionNow(param1:Boolean) : void {
+         this._isActionNow = param1;
+      }
 
-        public function set currency(arg1:String):void
-        {
-            this._currency = arg1;
-            return;
-        }
+      public function get maxAvailableCount() : Array {
+         return this._maxAvailableCount;
+      }
 
-        public function get price():Array
-        {
-            return this._price;
-        }
+      public function set maxAvailableCount(param1:Array) : void {
+         this._maxAvailableCount = param1;
+      }
 
-        public function set price(arg1:Array):void
-        {
-            this._price = arg1;
-            return;
-        }
+      public function get id() : int {
+         return this._id;
+      }
 
-        public function get defaultValue():Number
-        {
-            return this._defaultValue;
-        }
+      public function set id(param1:int) : void {
+         this._id = param1;
+      }
 
-        public function set defaultValue(arg1:Number):void
-        {
-            this._defaultValue = arg1;
-            return;
-        }
+      public function get type() : String {
+         return this._type;
+      }
 
-        internal var _id:int;
+      public function set type(param1:String) : void {
+         this._type = param1;
+      }
 
-        internal var _type:String="";
+      public function get icon() : String {
+         return this._icon;
+      }
 
-        internal var _icon:String="";
+      public function set icon(param1:String) : void {
+         this._icon = param1;
+      }
 
-        internal var _name:String="";
+      public function get name() : String {
+         return this._name;
+      }
 
-        internal var _descr:String="";
+      public function set name(param1:String) : void {
+         this._name = param1;
+      }
 
-        internal var _currency:String="";
+      public function get descr() : String {
+         return this._descr;
+      }
 
-        internal var _price:Array;
+      public function set descr(param1:String) : void {
+         this._descr = param1;
+      }
 
-        internal var _maxAvailableCount:Array;
+      public function get currency() : String {
+         return this._currency;
+      }
 
-        internal var _isActionNow:Boolean;
+      public function set currency(param1:String) : void {
+         this._currency = param1;
+      }
 
-        internal var _defaultValue:Number=-1;
+      public function get price() : Array {
+         return this._price;
+      }
 
-        public var extraModuleInfo:String="";
-    }
+      public function set price(param1:Array) : void {
+         this._price = param1;
+      }
+
+      public function get defaultValue() : Number {
+         return this._defaultValue;
+      }
+
+      public function set defaultValue(param1:Number) : void {
+         this._defaultValue = param1;
+      }
+   }
+
 }

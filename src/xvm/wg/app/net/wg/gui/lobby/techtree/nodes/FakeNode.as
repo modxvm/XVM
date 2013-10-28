@@ -1,248 +1,239 @@
-package net.wg.gui.lobby.techtree.nodes 
+package net.wg.gui.lobby.techtree.nodes
 {
-    import __AS3__.vec.*;
-    import net.wg.gui.lobby.techtree.*;
-    import net.wg.gui.lobby.techtree.constants.*;
-    import net.wg.gui.lobby.techtree.interfaces.*;
-    
-    public class FakeNode extends net.wg.gui.lobby.techtree.nodes.Renderer
-    {
-        public function FakeNode()
-        {
-            super();
-            return;
-        }
+   import __AS3__.vec.Vector;
+   import net.wg.gui.lobby.techtree.interfaces.IRenderer;
+   import net.wg.gui.lobby.techtree.data.vo.NodeData;
+   import net.wg.gui.lobby.techtree.math.MatrixPosition;
+   import net.wg.gui.lobby.techtree.constants.ColorIndex;
+   import net.wg.gui.lobby.techtree.TechTreeEvent;
 
-        public override function isFake():Boolean
-        {
-            return true;
-        }
 
-        public override function isUnlocked():Boolean
-        {
-            return this.hasUnlockedParent();
-        }
+   public class FakeNode extends Renderer
+   {
+          
+      public function FakeNode() {
+         super();
+      }
 
-        public override function getInX():Number
-        {
-            return x + Math.round(_width);
-        }
+      private var children:Vector.<IRenderer>;
 
-        public override function getOutX():Number
-        {
-            return x + Math.round(_width);
-        }
+      private var parents:Vector.<IRenderer>;
 
-        public override function getColorIdx(arg1:Number=-1):Number
-        {
-            var loc1:*=net.wg.gui.lobby.techtree.constants.ColorIndex.LOCKED;
-            if (this.hasUnlockedChild()) 
+      private var lastPrimary:Number = NaN;
+
+      override public function setup(param1:uint, param2:NodeData, param3:uint=0, param4:MatrixPosition=null) : void {
+         this.lastPrimary = NaN;
+         super.setup(param1,param2,param3,param4);
+      }
+
+      override public function isFake() : Boolean {
+         return true;
+      }
+
+      override public function isUnlocked() : Boolean {
+         return this.hasUnlockedParent();
+      }
+
+      override public function getInX() : Number {
+         return x + Math.round(_width);
+      }
+
+      override public function getOutX() : Number {
+         return x + Math.round(_width);
+      }
+
+      override public function getColorIdx(param1:Number=-1) : Number {
+         var _loc2_:Number = ColorIndex.LOCKED;
+         if(this.hasUnlockedChild())
+         {
+            if(param1 == -1 || param1 > 0 && (isParentUnlocked(param1)))
             {
-                if (arg1 == -1 || arg1 > 0 && isParentUnlocked(arg1)) 
-                {
-                    loc1 = net.wg.gui.lobby.techtree.constants.ColorIndex.UNLOCKED;
-                }
+               _loc2_ = ColorIndex.UNLOCKED;
             }
-            else if (this.hasNext2UnlockChild()) 
+         }
+         else
+         {
+            if(this.hasNext2UnlockChild())
             {
-                if (arg1 == -1 || arg1 > 0 && isParentUnlocked(arg1)) 
-                {
-                    loc1 = net.wg.gui.lobby.techtree.constants.ColorIndex.NEXT2UNLOCK;
-                }
+               if(param1 == -1 || param1 > 0 && (isParentUnlocked(param1)))
+               {
+                  _loc2_ = ColorIndex.NEXT2UNLOCK;
+               }
             }
-            return loc1;
-        }
+         }
+         return _loc2_;
+      }
 
-        public override function getColorIdxEx(arg1:net.wg.gui.lobby.techtree.interfaces.IRenderer):Number
-        {
-            var loc1:*=net.wg.gui.lobby.techtree.constants.ColorIndex.LOCKED;
-            if (this.hasUnlockedChild()) 
+      override public function getColorIdxEx(param1:IRenderer) : Number {
+         var _loc2_:Number = ColorIndex.LOCKED;
+         if(this.hasUnlockedChild())
+         {
+            if(param1 == null || (param1.isUnlocked()))
             {
-                if (arg1 == null || arg1.isUnlocked()) 
-                {
-                    loc1 = net.wg.gui.lobby.techtree.constants.ColorIndex.UNLOCKED;
-                }
+               _loc2_ = ColorIndex.UNLOCKED;
             }
-            else if (this.hasNext2UnlockChild()) 
+         }
+         else
+         {
+            if(this.hasNext2UnlockChild())
             {
-                if (arg1 == null || arg1.isUnlocked()) 
-                {
-                    loc1 = net.wg.gui.lobby.techtree.constants.ColorIndex.NEXT2UNLOCK;
-                }
+               if(param1 == null || (param1.isUnlocked()))
+               {
+                  _loc2_ = ColorIndex.NEXT2UNLOCK;
+               }
             }
-            return loc1;
-        }
+         }
+         return _loc2_;
+      }
 
-        public override function invalidateNodeState(arg1:Number):void
-        {
-            if (arg1 > -1 && !(this.lastPrimary == arg1)) 
+      override public function invalidateNodeState(param1:Number) : void {
+         if(param1 > -1 && !(this.lastPrimary == param1))
+         {
+            this.lastPrimary = param1;
+            dispatchEvent(new TechTreeEvent(TechTreeEvent.STATE_CHANGED,param1,index));
+         }
+      }
+
+      override public function cleanUp() : void {
+         this.clearChildren();
+         this.clearParents();
+         this.lastPrimary = NaN;
+         super.cleanUp();
+      }
+
+      public function setChildren(param1:Vector.<IRenderer>) : void {
+         this.clearChildren();
+         this.children = param1;
+         var _loc2_:Number = this.children.length;
+         var _loc3_:Number = 0;
+         while(_loc3_ < _loc2_)
+         {
+            this.children[_loc3_].addEventListener(TechTreeEvent.STATE_CHANGED,this.handleChildStateChanged,false,0,true);
+            _loc3_++;
+         }
+      }
+
+      public function setParents(param1:Vector.<IRenderer>) : void {
+         this.clearParents();
+         this.parents = param1;
+         var _loc2_:Number = this.parents.length;
+         var _loc3_:Number = 0;
+         while(_loc3_ < _loc2_)
+         {
+            this.parents[_loc3_].addEventListener(TechTreeEvent.STATE_CHANGED,this.handleParentStateChanged,false,0,true);
+            _loc3_++;
+         }
+      }
+
+      override public function toString() : String {
+         return "[FakeNode " + index + ", " + name + "]";
+      }
+
+      override protected function preInitialize() : void {
+         super.preInitialize();
+         this.parents = new Vector.<IRenderer>();
+         this.children = new Vector.<IRenderer>();
+      }
+
+      private function clearParents() : void {
+         var _loc1_:IRenderer = null;
+         while(this.parents.length > 0)
+         {
+            _loc1_ = this.parents.pop();
+            if(_loc1_ != null)
             {
-                this.lastPrimary = arg1;
-                dispatchEvent(new net.wg.gui.lobby.techtree.TechTreeEvent(net.wg.gui.lobby.techtree.TechTreeEvent.STATE_CHANGED, arg1, index));
+               _loc1_.removeEventListener(TechTreeEvent.STATE_CHANGED,this.handleParentStateChanged);
             }
-            return;
-        }
+         }
+      }
 
-        public override function cleanUp():void
-        {
-            this.clearChildren();
-            this.clearParents();
-            super.cleanUp();
-            return;
-        }
-
-        public function setChildren(arg1:__AS3__.vec.Vector.<net.wg.gui.lobby.techtree.interfaces.IRenderer>):void
-        {
-            this.clearChildren();
-            this.children = arg1;
-            var loc1:*=this.children.length;
-            var loc2:*=0;
-            while (loc2 < loc1) 
+      private function clearChildren() : void {
+         var _loc1_:IRenderer = null;
+         while(this.children.length > 0)
+         {
+            _loc1_ = this.children.pop();
+            if(_loc1_ != null)
             {
-                this.children[loc2].addEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.STATE_CHANGED, this.handleChildStateChanged, false, 0, true);
-                ++loc2;
+               _loc1_.removeEventListener(TechTreeEvent.STATE_CHANGED,this.handleChildStateChanged);
             }
-            return;
-        }
+         }
+      }
 
-        public function setParents(arg1:__AS3__.vec.Vector.<net.wg.gui.lobby.techtree.interfaces.IRenderer>):void
-        {
-            this.clearParents();
-            this.parents = arg1;
-            var loc1:*=this.parents.length;
-            var loc2:*=0;
-            while (loc2 < loc1) 
+      private function hasUnlockedParent() : Boolean {
+         var _loc1_:IRenderer = null;
+         var _loc2_:Number = this.parents.length;
+         var _loc3_:Number = 0;
+         while(_loc3_ < _loc2_)
+         {
+            _loc1_ = this.parents[_loc3_];
+            if(_loc1_.isUnlocked())
             {
-                this.parents[loc2].addEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.STATE_CHANGED, this.handleParentStateChanged, false, 0, true);
-                ++loc2;
+               return true;
             }
-            return;
-        }
+            _loc3_++;
+         }
+         return false;
+      }
 
-        public override function toString():String
-        {
-            return "[FakeNode " + index + ", " + name + "]";
-        }
-
-        protected override function preInitialize():void
-        {
-            super.preInitialize();
-            this.parents = new Vector.<net.wg.gui.lobby.techtree.interfaces.IRenderer>();
-            this.children = new Vector.<net.wg.gui.lobby.techtree.interfaces.IRenderer>();
-            return;
-        }
-
-        internal function clearParents():void
-        {
-            var loc1:*=null;
-            while (this.parents.length > 0) 
+      private function hasUnlockedChild() : Boolean {
+         var _loc1_:IRenderer = null;
+         var _loc2_:Number = this.children.length;
+         var _loc3_:Number = 0;
+         while(_loc3_ < _loc2_)
+         {
+            _loc1_ = this.children[_loc3_];
+            if(_loc1_.isFake())
             {
-                loc1 = this.parents.pop();
-                if (loc1 == null) 
-                {
-                    continue;
-                }
-                loc1.removeEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.STATE_CHANGED, this.handleParentStateChanged);
+               if((_loc1_ as FakeNode).hasUnlockedChild())
+               {
+                  return true;
+               }
             }
-            return;
-        }
-
-        internal function clearChildren():void
-        {
-            var loc1:*=null;
-            while (this.children.length > 0) 
+            else
             {
-                loc1 = this.children.pop();
-                if (loc1 == null) 
-                {
-                    continue;
-                }
-                loc1.removeEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.STATE_CHANGED, this.handleChildStateChanged);
+               if(_loc1_.isUnlocked())
+               {
+                  return true;
+               }
             }
-            return;
-        }
+            _loc3_++;
+         }
+         return false;
+      }
 
-        internal function hasUnlockedParent():Boolean
-        {
-            var loc1:*=null;
-            var loc2:*=this.parents.length;
-            var loc3:*=0;
-            while (loc3 < loc2) 
+      private function hasNext2UnlockChild() : Boolean {
+         var _loc1_:IRenderer = null;
+         var _loc2_:Number = this.children.length;
+         var _loc3_:Number = 0;
+         while(_loc3_ < _loc2_)
+         {
+            _loc1_ = this.children[_loc3_];
+            if(_loc1_.isFake())
             {
-                loc1 = this.parents[loc3];
-                if (loc1.isUnlocked()) 
-                {
-                    return true;
-                }
-                ++loc3;
+               if((_loc1_ as FakeNode).hasNext2UnlockChild())
+               {
+                  return true;
+               }
             }
-            return false;
-        }
-
-        internal function hasUnlockedChild():Boolean
-        {
-            var loc1:*=null;
-            var loc2:*=this.children.length;
-            var loc3:*=0;
-            while (loc3 < loc2) 
+            else
             {
-                loc1 = this.children[loc3];
-                if (loc1.isFake()) 
-                {
-                    if ((loc1 as net.wg.gui.lobby.techtree.nodes.FakeNode).hasUnlockedChild()) 
-                    {
-                        return true;
-                    }
-                }
-                else if (loc1.isUnlocked()) 
-                {
-                    return true;
-                }
-                ++loc3;
+               if(_loc1_.isNext2Unlock())
+               {
+                  return true;
+               }
             }
-            return false;
-        }
+            _loc3_++;
+         }
+         return false;
+      }
 
-        internal function hasNext2UnlockChild():Boolean
-        {
-            var loc1:*=null;
-            var loc2:*=this.children.length;
-            var loc3:*=0;
-            while (loc3 < loc2) 
-            {
-                loc1 = this.children[loc3];
-                if (loc1.isFake()) 
-                {
-                    if ((loc1 as net.wg.gui.lobby.techtree.nodes.FakeNode).hasNext2UnlockChild()) 
-                    {
-                        return true;
-                    }
-                }
-                else if (loc1.isNext2Unlock()) 
-                {
-                    return true;
-                }
-                ++loc3;
-            }
-            return false;
-        }
+      private function handleParentStateChanged(param1:TechTreeEvent) : void {
+         this.invalidateNodeState(param1.primary);
+      }
 
-        internal function handleParentStateChanged(arg1:net.wg.gui.lobby.techtree.TechTreeEvent):void
-        {
-            this.invalidateNodeState(arg1.primary);
-            return;
-        }
+      private function handleChildStateChanged(param1:TechTreeEvent) : void {
+         this.invalidateNodeState(param1.primary);
+      }
+   }
 
-        internal function handleChildStateChanged(arg1:net.wg.gui.lobby.techtree.TechTreeEvent):void
-        {
-            this.invalidateNodeState(arg1.primary);
-            return;
-        }
-
-        internal var children:__AS3__.vec.Vector.<net.wg.gui.lobby.techtree.interfaces.IRenderer>;
-
-        internal var parents:__AS3__.vec.Vector.<net.wg.gui.lobby.techtree.interfaces.IRenderer>;
-
-        internal var lastPrimary:Number=NaN;
-    }
 }

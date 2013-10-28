@@ -1,54 +1,49 @@
-package net.wg.gui.lobby.tankman 
+package net.wg.gui.lobby.tankman
 {
-    import net.wg.gui.components.controls.*;
-    import scaleform.clik.core.*;
-    
-    public class SkillsItemsRendererRankIcon extends scaleform.clik.core.UIComponent
-    {
-        public function SkillsItemsRendererRankIcon()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import net.wg.gui.components.controls.UILoaderAlt;
 
-        public override function dispose():void
-        {
-            super.dispose();
-            this.iconRank.dispose();
-            return;
-        }
 
-        public function setData(arg1:String, arg2:*):void
-        {
-            this.imageUrl = arg1;
-            this.isEnabled = arg2;
-            invalidate(this.UPDATE_DATA);
-            return;
-        }
+   public class SkillsItemsRendererRankIcon extends UIComponent
+   {
+          
+      public function SkillsItemsRendererRankIcon() {
+         super();
+      }
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(this.UPDATE_DATA)) 
+      public var iconRank:UILoaderAlt;
+
+      private var imageUrl:String;
+
+      private var isEnabled:Boolean = true;
+
+      private const UPDATE_DATA:String = "updateData";
+
+      override public function dispose() : void {
+         super.dispose();
+         this.iconRank.dispose();
+      }
+
+      public function setData(param1:String, param2:*) : void {
+         this.imageUrl = param1;
+         this.isEnabled = param2;
+         invalidate(this.UPDATE_DATA);
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         if(isInvalid(this.UPDATE_DATA))
+         {
+            if(this.imageUrl)
             {
-                if (this.imageUrl) 
-                {
-                    this.iconRank.source = this.imageUrl;
-                }
-                if (enabled != this.isEnabled) 
-                {
-                    enabled = this.isEnabled;
-                }
+               this.iconRank.source = this.imageUrl;
             }
-            return;
-        }
+            if(enabled != this.isEnabled)
+            {
+               enabled = this.isEnabled;
+            }
+         }
+      }
+   }
 
-        internal const UPDATE_DATA:String="updateData";
-
-        public var iconRank:net.wg.gui.components.controls.UILoaderAlt;
-
-        internal var imageUrl:String;
-
-        internal var isEnabled:Boolean=true;
-    }
 }

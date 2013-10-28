@@ -1,19 +1,20 @@
-package scaleform.clik.events 
+package scaleform.clik.events
 {
-    import flash.events.*;
-    
-    public class ComponentEvent extends flash.events.Event
-    {
-        public function ComponentEvent(arg1:String, arg2:Boolean=false, arg3:Boolean=true)
-        {
-            super(arg1, arg2, arg3);
-            return;
-        }
+   import flash.events.Event;
 
-        public static const STATE_CHANGE:String="stateChange";
 
-        public static const SHOW:String="show";
+   public class ComponentEvent extends Event
+   {
+          
+      public function ComponentEvent(param1:String, param2:Boolean=false, param3:Boolean=true) {
+         super(param1,param2,param3);
+      }
 
-        public static const HIDE:String="hide";
-    }
+      public static const STATE_CHANGE:String = "stateChange";
+
+      public static const SHOW:String = "show";
+
+      public static const HIDE:String = "hide";
+   }
+
 }

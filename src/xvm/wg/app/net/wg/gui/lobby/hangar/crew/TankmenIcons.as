@@ -1,16 +1,17 @@
-package net.wg.gui.lobby.hangar.crew 
+package net.wg.gui.lobby.hangar.crew
 {
-    import net.wg.gui.components.controls.*;
-    import scaleform.clik.core.*;
-    
-    public class TankmenIcons extends scaleform.clik.core.UIComponent
-    {
-        public function TankmenIcons()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import net.wg.gui.components.controls.UILoaderAlt;
 
-        public var imageLoader:net.wg.gui.components.controls.UILoaderAlt;
-    }
+
+   public class TankmenIcons extends UIComponent
+   {
+          
+      public function TankmenIcons() {
+         super();
+      }
+
+      public var imageLoader:UILoaderAlt;
+   }
+
 }

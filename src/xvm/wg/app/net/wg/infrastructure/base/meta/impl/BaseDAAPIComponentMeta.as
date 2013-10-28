@@ -1,41 +1,37 @@
-package net.wg.infrastructure.base.meta.impl 
+package net.wg.infrastructure.base.meta.impl
 {
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.interfaces.*;
-    import scaleform.clik.core.*;
-    
-    public class BaseDAAPIComponentMeta extends scaleform.clik.core.UIComponent
-    {
-        public function BaseDAAPIComponentMeta()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import net.wg.infrastructure.interfaces.IDAAPIModule;
+   import net.wg.data.constants.Errors;
 
-        public function registerFlashComponentS(arg1:net.wg.infrastructure.interfaces.IDAAPIModule, arg2:String):void
-        {
-            App.utils.asserter.assertNotNull(this.registerFlashComponent, "registerFlashComponent" + net.wg.data.constants.Errors.CANT_NULL);
-            this.registerFlashComponent(arg1, arg2);
-            return;
-        }
 
-        public function isFlashComponentRegisteredS(arg1:String):Boolean
-        {
-            App.utils.asserter.assertNotNull(this.isFlashComponentRegistered, "isFlashComponentRegistered" + net.wg.data.constants.Errors.CANT_NULL);
-            return this.isFlashComponentRegistered(arg1);
-        }
+   public class BaseDAAPIComponentMeta extends UIComponent
+   {
+          
+      public function BaseDAAPIComponentMeta() {
+         super();
+      }
 
-        public function unregisterFlashComponentS(arg1:String):void
-        {
-            App.utils.asserter.assertNotNull(this.unregisterFlashComponent, "unregisterFlashComponent" + net.wg.data.constants.Errors.CANT_NULL);
-            this.unregisterFlashComponent(arg1);
-            return;
-        }
+      public var registerFlashComponent:Function = null;
 
-        public var registerFlashComponent:Function=null;
+      public var isFlashComponentRegistered:Function = null;
 
-        public var isFlashComponentRegistered:Function=null;
+      public var unregisterFlashComponent:Function = null;
 
-        public var unregisterFlashComponent:Function=null;
-    }
+      public function registerFlashComponentS(param1:IDAAPIModule, param2:String) : void {
+         App.utils.asserter.assertNotNull(this.registerFlashComponent,"registerFlashComponent" + Errors.CANT_NULL);
+         this.registerFlashComponent(param1,param2);
+      }
+
+      public function isFlashComponentRegisteredS(param1:String) : Boolean {
+         App.utils.asserter.assertNotNull(this.isFlashComponentRegistered,"isFlashComponentRegistered" + Errors.CANT_NULL);
+         return this.isFlashComponentRegistered(param1);
+      }
+
+      public function unregisterFlashComponentS(param1:String) : void {
+         App.utils.asserter.assertNotNull(this.unregisterFlashComponent,"unregisterFlashComponent" + Errors.CANT_NULL);
+         this.unregisterFlashComponent(param1);
+      }
+   }
+
 }

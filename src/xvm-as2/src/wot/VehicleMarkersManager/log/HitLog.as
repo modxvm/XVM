@@ -12,7 +12,7 @@ import com.xvm.Logger;
 import com.xvm.Strings;
 import com.xvm.Utils;
 import com.xvm.VehicleInfo;
-import com.xvm.VehicleInfoDataL10n;
+import com.xvm.DataTypes.VehicleData;
 
 class wot.VehicleMarkersManager.log.HitLog
 {
@@ -224,6 +224,8 @@ class wot.VehicleMarkersManager.log.HitLog
                 }
             }
 
+            var vdata:VehicleData = VehicleInfo.getByIcon(data.icon);
+
             var formatArr:Array;
             formatArr = format.split("{{dead}}");
             if (formatArr.length > 1)
@@ -265,10 +267,10 @@ class wot.VehicleMarkersManager.log.HitLog
                 format = formatArr.join(Utils.GetClanName(playerName));
             formatArr = format.split("{{vehicle}}");
             if (formatArr.length > 1)
-                format = formatArr.join(VehicleInfo.mapVehicleName2(VehicleInfoDataL10n.getVehicleNationName(data.vehicleName), data.vehicleName));
+                format = formatArr.join(vdata.localizedName);
             formatArr = format.split("{{vehiclename}}");
             if (formatArr.length > 1)
-                format = formatArr.join(VehicleInfo.getVehicleName(data.icon));
+                format = formatArr.join(vdata.key);
             formatArr = format.split("{{vtype}}");
             if (formatArr.length > 1)
                 format = formatArr.join(data.vtype);

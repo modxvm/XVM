@@ -1,167 +1,155 @@
-package net.wg.gui.lobby.tankman 
+package net.wg.gui.lobby.tankman
 {
-    import flash.events.*;
-    import flash.text.*;
-    import net.wg.data.constants.*;
-    import net.wg.data.managers.impl.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.events.*;
-    import scaleform.clik.core.*;
-    import scaleform.clik.events.*;
-    import scaleform.gfx.*;
-    
-    public class PersonalCaseBlockItem extends scaleform.clik.core.UIComponent
-    {
-        public function PersonalCaseBlockItem()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import net.wg.gui.components.controls.UILoaderAlt;
+   import flash.text.TextField;
+   import flash.events.MouseEvent;
+   import scaleform.clik.events.ButtonEvent;
+   import net.wg.gui.events.PersonalCaseEvent;
+   import scaleform.gfx.Extensions;
+   import net.wg.data.constants.Cursors;
+   import net.wg.data.constants.Tooltips;
+   import net.wg.data.managers.impl.TooltipProps;
 
-        public override function dispose():void
-        {
-            super.dispose();
-            this.skills.removeEventListener(flash.events.MouseEvent.MOUSE_OUT, this.onMouseOut);
-            this.skills.removeEventListener(flash.events.MouseEvent.MOUSE_MOVE, this.onMouseOver);
-            this.skills.removeEventListener(flash.events.MouseEvent.CLICK, this.skills_mouseClickHandler);
-            this.skills.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.skills_buttonClickHandler);
-            this.skills.dispose();
-            this.skills = null;
-            this.extra = null;
-            this.value = null;
-            this.label = null;
-            this.model = null;
-            this._skillName = null;
-            return;
-        }
 
-        protected override function configUI():void
-        {
-            this.skills.buttonMode = true;
-            super.configUI();
-            var loc1:*=new net.wg.gui.events.PersonalCaseEvent(net.wg.gui.events.PersonalCaseEvent.GET_TANKMAN_ID, true);
-            loc1.tankmanIdDelegate = this.getTankmanID;
-            dispatchEvent(loc1);
-            return;
-        }
+   public class PersonalCaseBlockItem extends UIComponent
+   {
+          
+      public function PersonalCaseBlockItem() {
+         super();
+      }
 
-        public function set setData(arg1:Object):void
-        {
-            var loc2:*=null;
-            this.model = arg1;
-            var loc1:*=scaleform.gfx.Extensions.isScaleform ? MENU.profile_stats_items(this.model.name) : this.model.name;
-            if (this.model.hasOwnProperty("imageType") && this.model.imageType == "new_skill") 
+      private static const NEW_SKILLS_PADDING:int = 11;
+
+      public var skills:UILoaderAlt;
+
+      public var extra:TextField;
+
+      public var value:TextField;
+
+      public var label:TextField;
+
+      private var model:Object;
+
+      private var _tankmanID:int = -1;
+
+      private var _skillName:String = null;
+
+      override public function dispose() : void {
+         super.dispose();
+         this.skills.removeEventListener(MouseEvent.MOUSE_OUT,this.onMouseOut);
+         this.skills.removeEventListener(MouseEvent.MOUSE_MOVE,this.onMouseOver);
+         this.skills.removeEventListener(MouseEvent.CLICK,this.skills_mouseClickHandler);
+         this.skills.removeEventListener(ButtonEvent.CLICK,this.skills_buttonClickHandler);
+         this.skills.dispose();
+         this.skills = null;
+         this.extra = null;
+         this.value = null;
+         this.label = null;
+         this.model = null;
+         this._skillName = null;
+      }
+
+      override protected function configUI() : void {
+         this.skills.buttonMode = true;
+         super.configUI();
+         var _loc1_:PersonalCaseEvent = new PersonalCaseEvent(PersonalCaseEvent.GET_TANKMAN_ID,true);
+         _loc1_.tankmanIdDelegate = this.getTankmanID;
+         dispatchEvent(_loc1_);
+      }
+
+      public function set setData(param1:Object) : void {
+         var _loc3_:String = null;
+         this.model = param1;
+         var _loc2_:String = Extensions.isScaleform?MENU.profile_stats_items(this.model.name):this.model.name;
+         if((this.model.hasOwnProperty("imageType")) && this.model.imageType == "new_skill")
+         {
+            _loc2_ = MENU.PROFILE_STATS_ITEMS_READYTOLEARN;
+            _loc3_ = "../maps/icons/tankmen/skills/small/" + this.model.image;
+            this.addListenersToIcon();
+            this.skills.x = this.value.x + this.value.width - this.skills.width + NEW_SKILLS_PADDING;
+            this.value.visible = false;
+         }
+         else
+         {
+            if((this.model.hasOwnProperty("imageType")) && this.model.imageType == "role")
             {
-                loc1 = MENU.PROFILE_STATS_ITEMS_READYTOLEARN;
-                loc2 = "../maps/icons/tankmen/skills/small/" + this.model.image;
-                this.addListenersToIcon();
-                this.skills.x = this.value.x + this.value.width - this.skills.width + NEW_SKILLS_PADDING;
-                this.value.visible = false;
+               _loc3_ = "../maps/icons/tankmen/roles/small/" + this.model.image;
+               this.skills.y = this.skills.y + 2;
             }
-            else if (this.model.hasOwnProperty("imageType") && this.model.imageType == "role") 
+            else
             {
-                loc2 = "../maps/icons/tankmen/roles/small/" + this.model.image;
-                this.skills.y = this.skills.y + 2;
+               if((this.model.hasOwnProperty("imageType")) && this.model.imageType == "skill")
+               {
+                  _loc3_ = "../maps/icons/tankmen/skills/small/" + this.model.image;
+                  this.addListenersToIcon();
+               }
             }
-            else if (this.model.hasOwnProperty("imageType") && this.model.imageType == "skill") 
-            {
-                loc2 = "../maps/icons/tankmen/skills/small/" + this.model.image;
-                this.addListenersToIcon();
-            }
-            if (loc2) 
-            {
-                this.skills.source = loc2;
-            }
-            this.label.text = loc1;
-            if (!(this.model.value == null) && !(this.model.value == undefined)) 
-            {
-                this.value.text = this.model.value.toString();
-            }
-            if (this.model.hasOwnProperty("extra") && !(this.model.extra == null) && !(this.model.extra == "")) 
-            {
-                this.extra.text = this.model.extra.toString();
-            }
-            else 
-            {
-                this.extra.visible = false;
-            }
+         }
+         if(_loc3_)
+         {
+            this.skills.source = _loc3_;
+         }
+         this.label.text = _loc2_;
+         if(!(this.model.value == null) && !(this.model.value == undefined))
+         {
+            this.value.text = this.model.value.toString();
+         }
+         if((this.model.hasOwnProperty("extra")) && !(this.model.extra == null) && !(this.model.extra == ""))
+         {
+            this.extra.text = this.model.extra.toString();
+         }
+         else
+         {
+            this.extra.visible = false;
+         }
+      }
+
+      private function addListenersToIcon() : void {
+         this.skills.buttonMode = true;
+         this.skills.addEventListener(MouseEvent.MOUSE_OUT,this.onMouseOut);
+         this.skills.addEventListener(MouseEvent.MOUSE_MOVE,this.onMouseOver);
+         this.skills.addEventListener(MouseEvent.CLICK,this.skills_mouseClickHandler);
+         this.skills.addEventListener(ButtonEvent.CLICK,this.skills_buttonClickHandler);
+      }
+
+      private function onMouseOver(param1:MouseEvent) : void {
+         App.cursor.setCursor(Cursors.BUTTON);
+         if(!this.model.hasOwnProperty("name") && !this.model.hasOwnProperty("tankmanID") && !(this.model.name == null))
+         {
             return;
-        }
+         }
+         if((this.model.hasOwnProperty("imageType")) && this.model.imageType == "new_skill")
+         {
+            App.toolTipMgr.showSpecial(Tooltips.TANKMAN_NEW_SKILL,TooltipProps.DEFAULT,this._tankmanID);
+         }
+         else
+         {
+            App.toolTipMgr.showSpecial(Tooltips.TANKMAN_SKILL,null,this._skillName,this._tankmanID);
+         }
+      }
 
-        internal function addListenersToIcon():void
-        {
-            this.skills.buttonMode = true;
-            this.skills.addEventListener(flash.events.MouseEvent.MOUSE_OUT, this.onMouseOut);
-            this.skills.addEventListener(flash.events.MouseEvent.MOUSE_MOVE, this.onMouseOver);
-            this.skills.addEventListener(flash.events.MouseEvent.CLICK, this.skills_mouseClickHandler);
-            this.skills.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.skills_buttonClickHandler);
-            return;
-        }
+      public function getTankmanID(param1:int, param2:String) : void {
+         this._tankmanID = param1;
+         this._skillName = param2;
+      }
 
-        internal function onMouseOver(arg1:flash.events.MouseEvent):void
-        {
-            App.cursor.setCursor(net.wg.data.constants.Cursors.BUTTON);
-            if (!this.model.hasOwnProperty("name") && !this.model.hasOwnProperty("tankmanID") && !(this.model.name == null)) 
-            {
-                return;
-            }
-            if (this.model.hasOwnProperty("imageType") && this.model.imageType == "new_skill") 
-            {
-                App.toolTipMgr.showSpecial(net.wg.data.constants.Tooltips.TANKMAN_NEW_SKILL, net.wg.data.managers.impl.TooltipProps.DEFAULT, this._tankmanID);
-            }
-            else 
-            {
-                App.toolTipMgr.showSpecial(net.wg.data.constants.Tooltips.TANKMAN_SKILL, null, this._skillName, this._tankmanID);
-            }
-            return;
-        }
+      private function onMouseOut(param1:MouseEvent) : void {
+         App.cursor.setCursor(Cursors.ARROW);
+         App.toolTipMgr.hide();
+      }
 
-        public function getTankmanID(arg1:int, arg2:String):void
-        {
-            this._tankmanID = arg1;
-            this._skillName = arg2;
-            return;
-        }
+      private function skills_buttonClickHandler(param1:ButtonEvent) : void {
+         this.dispatchPersonalCaseEvent();
+      }
 
-        internal function onMouseOut(arg1:flash.events.MouseEvent):void
-        {
-            App.cursor.setCursor(net.wg.data.constants.Cursors.ARROW);
-            App.toolTipMgr.hide();
-            return;
-        }
+      private function skills_mouseClickHandler(param1:MouseEvent) : void {
+         this.dispatchPersonalCaseEvent();
+      }
 
-        internal function skills_buttonClickHandler(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            this.dispatchPersonalCaseEvent();
-            return;
-        }
+      private function dispatchPersonalCaseEvent() : void {
+         dispatchEvent(new PersonalCaseEvent(PersonalCaseEvent.CHANGE_TAB_ON_TWO,true));
+      }
+   }
 
-        internal function skills_mouseClickHandler(arg1:flash.events.MouseEvent):void
-        {
-            this.dispatchPersonalCaseEvent();
-            return;
-        }
-
-        internal function dispatchPersonalCaseEvent():void
-        {
-            dispatchEvent(new net.wg.gui.events.PersonalCaseEvent(net.wg.gui.events.PersonalCaseEvent.CHANGE_TAB_ON_TWO, true));
-            return;
-        }
-
-        internal static const NEW_SKILLS_PADDING:int=11;
-
-        public var skills:net.wg.gui.components.controls.UILoaderAlt;
-
-        public var extra:flash.text.TextField;
-
-        public var value:flash.text.TextField;
-
-        public var label:flash.text.TextField;
-
-        internal var model:Object;
-
-        internal var _tankmanID:int=-1;
-
-        internal var _skillName:String=null;
-    }
 }

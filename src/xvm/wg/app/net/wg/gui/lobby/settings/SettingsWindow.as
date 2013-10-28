@@ -1,759 +1,724 @@
-package net.wg.gui.lobby.settings 
+package net.wg.gui.lobby.settings
 {
-    import flash.display.*;
-    import flash.geom.*;
-    import flash.ui.*;
-    import net.wg.data.constants.*;
-    import net.wg.data.managers.*;
-    import net.wg.data.managers.impl.*;
-    import net.wg.gui.components.advanced.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.components.tooltips.helpers.*;
-    import net.wg.gui.events.*;
-    import net.wg.gui.lobby.settings.evnts.*;
-    import net.wg.gui.lobby.settings.vo.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import net.wg.infrastructure.interfaces.*;
-    import net.wg.utils.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.controls.*;
-    import scaleform.clik.data.*;
-    import scaleform.clik.events.*;
-    import scaleform.clik.interfaces.*;
-    import scaleform.clik.ui.*;
-    
-    public class SettingsWindow extends net.wg.infrastructure.base.meta.impl.SettingsWindowMeta implements net.wg.infrastructure.base.meta.ISettingsWindowMeta
-    {
-        public function SettingsWindow()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.SettingsWindowMeta;
+   import net.wg.infrastructure.base.meta.ISettingsWindowMeta;
+   import flash.display.MovieClip;
+   import net.wg.gui.components.controls.TextFieldShort;
+   import net.wg.gui.components.advanced.ButtonBarEx;
+   import flash.display.Sprite;
+   import net.wg.gui.components.advanced.ViewStack;
+   import net.wg.gui.components.controls.SoundButtonEx;
+   import scaleform.clik.controls.ScrollingList;
+   import net.wg.gui.components.controls.DropDownListItemRendererSound;
+   import net.wg.gui.lobby.settings.vo.SettingsControlProp;
+   import net.wg.utils.ICommons;
+   import scaleform.clik.events.ButtonEvent;
+   import scaleform.clik.data.DataProvider;
+   import scaleform.clik.events.IndexEvent;
+   import net.wg.gui.events.ViewStackEvent;
+   import net.wg.gui.lobby.settings.evnts.SettingViewEvent;
+   import net.wg.gui.lobby.settings.evnts.AlternativeVoiceEvent;
+   import net.wg.gui.lobby.settings.vo.SettingsKeyProp;
+   import scaleform.clik.interfaces.IDataProvider;
+   import net.wg.data.constants.KeysMap;
+   import net.wg.infrastructure.interfaces.IViewStackContent;
+   import flash.geom.Point;
+   import net.wg.data.managers.ITooltipProps;
+   import net.wg.data.managers.impl.TooltipProps;
+   import net.wg.data.constants.Tooltips;
+   import net.wg.gui.components.tooltips.helpers.Utils;
+   import scaleform.clik.events.InputEvent;
+   import scaleform.clik.ui.InputDetails;
+   import flash.ui.Keyboard;
+   import scaleform.clik.constants.InputValue;
 
-        internal function onTabChange(arg1:scaleform.clik.events.IndexEvent):void
-        {
-            __currentTab = arg1.index;
-            App.toolTipMgr.hide();
-            var loc1:*=net.wg.gui.lobby.settings.SoundSettings(this.tryGetView(net.wg.gui.lobby.settings.SettingsConfig.SOUND_SETTINGS));
-            if (loc1) 
+
+   public class SettingsWindow extends SettingsWindowMeta implements ISettingsWindowMeta
+   {
+          
+      public function SettingsWindow() {
+         super();
+      }
+
+      private static var __currentTab:Number = 0;
+
+      public var wndBg:MovieClip = null;
+
+      public var title:TextFieldShort = null;
+
+      public var tabs:ButtonBarEx = null;
+
+      public var tabLine:Sprite = null;
+
+      public var view:ViewStack = null;
+
+      public var submitBtn:SoundButtonEx = null;
+
+      public var cancelBtn:SoundButtonEx = null;
+
+      public var applyBtn:SoundButtonEx = null;
+
+      public var ddMenu_ScrollingList:ScrollingList = null;
+
+      public var ddListItemRendererSound:DropDownListItemRendererSound = null;
+
+      private var _settingsData:Object = null;
+
+      private var changesData:SettingsChangesMap = null;
+
+      private const CONTROLS_WARNING:String = "controlsWrongNotification";
+
+      private const SOUND_MODE_WARNING:String = "soundModeInvalid";
+
+      override public function updateStage(param1:Number, param2:Number) : void {
+         this.x = param1 - this.width >> 1;
+         this.y = Math.max(param2 - this.height >> 1,10);
+      }
+
+      public function as_setCaptureDevices(param1:Number, param2:Array) : void {
+         var _loc3_:SoundSettings = SoundSettings(this.tryGetView(SettingsConfig.SOUND_SETTINGS));
+         if(_loc3_ != null)
+         {
+            _loc3_.setCaptureDevices(param1,param2);
+         }
+      }
+
+      public function as_onVibroManagerConnect(param1:Boolean) : void {
+         SettingsControlProp(SettingsConfig.settingsData[SettingsConfig.GAME_SETTINGS].vibroIsConnected).current = param1;
+         var _loc2_:GameSettings = GameSettings(this.tryGetView(SettingsConfig.GAME_SETTINGS));
+         if(_loc2_ != null)
+         {
+            _loc2_.onVibroManagerConnect();
+         }
+      }
+
+      public function as_updateVideoSettings(param1:Object) : void {
+         var _loc3_:uint = 0;
+         var _loc4_:ICommons = null;
+         var _loc5_:uint = 0;
+         var _loc6_:String = null;
+         var _loc7_:SettingsControlProp = null;
+         if(param1)
+         {
+            _loc3_ = SettingsConfig.liveUpdateVideoSettingsOrderData.length;
+            _loc4_ = App.utils.commons;
+            _loc5_ = 0;
+            while(_loc5_ < _loc3_)
             {
-                loc1.onViewChanged();
-            }
-            return;
-        }
-
-        internal function onViewNeedUpdateHandler(arg1:net.wg.gui.events.ViewStackEvent):void
-        {
-            var loc1:*=arg1.view;
-            loc1.update({"id":arg1.linkage, "data":this._settingsData[arg1.linkage]});
-            if (arg1.linkage == net.wg.gui.lobby.settings.SettingsConfig.GRAPHIC_SETTINGS && net.wg.gui.lobby.settings.SettingsConfig.liveUpdateVideoSettingsData) 
-            {
-                net.wg.gui.lobby.settings.GraphicSettings(loc1).updateLiveVideoData();
-            }
-            return;
-        }
-
-        internal function onViewChangeHandler(arg1:net.wg.gui.events.ViewStackEvent):void
-        {
-            var loc1:*=arg1.view;
-            if (arg1.linkage == net.wg.gui.lobby.settings.SettingsConfig.MARKER_SETTINGS) 
-            {
-                net.wg.gui.lobby.settings.MarkerSettings(loc1).updateShowContent();
-                net.wg.gui.lobby.settings.MarkerSettings(loc1).updateShowContent();
-            }
-            return;
-        }
-
-        internal function onPTTControlChanged(arg1:net.wg.gui.lobby.settings.evnts.SettingViewEvent):void
-        {
-            var loc1:*=net.wg.gui.lobby.settings.vo.SettingsControlProp(net.wg.gui.lobby.settings.SettingsConfig.settingsData[net.wg.gui.lobby.settings.SettingsConfig.SOUND_SETTINGS][net.wg.gui.lobby.settings.SettingsConfig.PTT]);
-            loc1.current = arg1.controlValue;
-            var loc2:*=net.wg.gui.lobby.settings.SoundSettings(this.tryGetView(net.wg.gui.lobby.settings.SettingsConfig.SOUND_SETTINGS));
-            if (loc2) 
-            {
-                loc2.updatePTTControl(loc1.current);
-            }
-            return;
-        }
-
-        internal function onControlChanged(arg1:net.wg.gui.lobby.settings.evnts.SettingViewEvent):void
-        {
-            var loc1:*=arg1.viewId;
-            var loc2:*=arg1.controlId;
-            var loc3:*=arg1.controlValue;
-            onSettingsChangeS(loc2, loc3);
-            var loc4:*=this.controlDefValEqNewVal(this._settingsData[loc1][loc2], loc3);
-            this.checkChanges(loc4, loc2, loc3);
-            return;
-        }
-
-        internal function checkChanges(arg1:Boolean, arg2:String, arg3:*):void
-        {
-            if (arg1) 
-            {
-                this.changesData.tryCutChanges(arg2, arg3);
-            }
-            else 
-            {
-                this.changesData.tryAddChanges(arg2, arg3);
-            }
-            this.updateApplayBtnState();
-            return;
-        }
-
-        internal function onVivoxTest(arg1:net.wg.gui.lobby.settings.evnts.SettingViewEvent):void
-        {
-            var loc1:*=Boolean(arg1.controlValue);
-            var loc2:*=startVOIPTestS(loc1);
-            var loc3:*;
-            if ((loc3 = net.wg.gui.lobby.settings.SoundSettings(this.tryGetView(net.wg.gui.lobby.settings.SettingsConfig.SOUND_SETTINGS))) != null) 
-            {
-                loc3.setVoiceTestState(!(loc2 || !loc1));
-            }
-            return;
-        }
-
-        internal function onAutodetectQuality(arg1:net.wg.gui.lobby.settings.evnts.SettingViewEvent):void
-        {
-            var loc1:*=autodetectQualityS();
-            var loc2:*=net.wg.gui.lobby.settings.GraphicSettings(this.tryGetView(net.wg.gui.lobby.settings.SettingsConfig.GRAPHIC_SETTINGS));
-            if (loc2 != null) 
-            {
-                loc2.setPresetAfterAutoDetect(loc1);
-            }
-            return;
-        }
-
-        internal function onUpdateCaptureDevices(arg1:net.wg.gui.lobby.settings.evnts.SettingViewEvent):void
-        {
-            updateCaptureDevicesS();
-            return;
-        }
-
-        internal function cancelBtnClickHandler(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            var loc1:*=net.wg.gui.lobby.settings.SoundSettings(this.tryGetView(net.wg.gui.lobby.settings.SettingsConfig.SOUND_SETTINGS));
-            if (loc1) 
-            {
-                loc1.breakSoundCheck();
-            }
-            closeWindowS();
-            return;
-        }
-
-        internal function applayBtnClickHandler(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            this.sendData(false);
-            return;
-        }
-
-        internal function submitBtnClickHandler(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            this.sendData(true);
-            return;
-        }
-
-        public override function handleInput(arg1:scaleform.clik.events.InputEvent):void
-        {
-            super.handleInput(arg1);
-            if (arg1.handled) 
-            {
-                return;
-            }
-            var loc1:*=arg1.details;
-            if (arg1.details.code == flash.ui.Keyboard.ESCAPE && loc1.value == scaleform.clik.constants.InputValue.KEY_DOWN) 
-            {
-                arg1.handled = true;
-                closeWindowS();
-            }
-            return;
-        }
-
-        
-        {
-            __currentTab = 0;
-        }
-
-        public override function updateStage(arg1:Number, arg2:Number):void
-        {
-            this.x = arg1 - this.width >> 1;
-            this.y = Math.max(arg2 - this.height >> 1, 10);
-            return;
-        }
-
-        public function as_setCaptureDevices(arg1:Number, arg2:Array):void
-        {
-            var loc1:*=net.wg.gui.lobby.settings.SoundSettings(this.tryGetView(net.wg.gui.lobby.settings.SettingsConfig.SOUND_SETTINGS));
-            if (loc1 != null) 
-            {
-                loc1.setCaptureDevices(arg1, arg2);
-            }
-            return;
-        }
-
-        public function as_onVibroManagerConnect(arg1:Boolean):void
-        {
-            net.wg.gui.lobby.settings.vo.SettingsControlProp(net.wg.gui.lobby.settings.SettingsConfig.settingsData[net.wg.gui.lobby.settings.SettingsConfig.GAME_SETTINGS].vibroIsConnected).current = arg1;
-            var loc1:*=net.wg.gui.lobby.settings.GameSettings(this.tryGetView(net.wg.gui.lobby.settings.SettingsConfig.GAME_SETTINGS));
-            if (loc1 != null) 
-            {
-                loc1.onVibroManagerConnect();
-            }
-            return;
-        }
-
-        public function as_updateVideoSettings(arg1:Object):void
-        {
-            var loc2:*=0;
-            var loc3:*=null;
-            var loc4:*=0;
-            var loc5:*=null;
-            var loc6:*=null;
-            if (arg1) 
-            {
-                loc2 = net.wg.gui.lobby.settings.SettingsConfig.liveUpdateVideoSettingsOrderData.length;
-                loc3 = App.utils.commons;
-                loc4 = 0;
-                while (loc4 < loc2) 
-                {
-                    loc5 = net.wg.gui.lobby.settings.SettingsConfig.liveUpdateVideoSettingsOrderData[loc4];
-                    if (arg1[loc5] != null) 
-                    {
-                        loc6 = new net.wg.gui.lobby.settings.vo.SettingsControlProp();
-                        if (arg1[loc5] is Boolean || arg1[loc5] is String || arg1[loc5] is Number) 
+               _loc6_ = SettingsConfig.liveUpdateVideoSettingsOrderData[_loc5_];
+               if(param1[_loc6_] != null)
+               {
+                  _loc7_ = new SettingsControlProp();
+                  if(param1[_loc6_]  is  Boolean || param1[_loc6_]  is  String || param1[_loc6_]  is  Number)
+                  {
+                     _loc7_.current = param1[_loc6_];
+                  }
+                  else
+                  {
+                     if(param1[_loc6_].current  is  Object && !(param1[_loc6_].current == undefined))
+                     {
+                        _loc7_.current = param1[_loc6_].real != null?param1[_loc6_].real:param1[_loc6_].current;
+                        if(param1[_loc6_].options != undefined)
                         {
-                            loc6.current = arg1[loc5];
+                           _loc7_.options = _loc4_.cloneObject(param1[_loc6_].options);
                         }
-                        else if (arg1[loc5].current is Object && !(arg1[loc5].current == undefined)) 
+                        else
                         {
-                            loc6.current = arg1[loc5].real == null ? arg1[loc5].current : arg1[loc5].real;
-                            if (arg1[loc5].options == undefined) 
-                            {
-                                loc6.options = [];
-                            }
-                            else 
-                            {
-                                loc6.options = loc3.cloneObject(arg1[loc5].options);
-                            }
+                           _loc7_.options = [];
                         }
-                    }
-                    net.wg.gui.lobby.settings.SettingsConfig.liveUpdateVideoSettingsData[loc5] = loc6;
-                    ++loc4;
-                }
+                     }
+                  }
+               }
+               SettingsConfig.liveUpdateVideoSettingsData[_loc6_] = _loc7_;
+               _loc5_++;
             }
-            var loc1:*=net.wg.gui.lobby.settings.GraphicSettings(this.tryGetView(net.wg.gui.lobby.settings.SettingsConfig.GRAPHIC_SETTINGS));
-            if (loc1) 
-            {
-                loc1.updateLiveVideoData();
-            }
-            return;
-        }
+         }
+         var _loc2_:GraphicSettings = GraphicSettings(this.tryGetView(SettingsConfig.GRAPHIC_SETTINGS));
+         if(_loc2_)
+         {
+            _loc2_.updateLiveVideoData();
+         }
+      }
 
-        public function as_confirmWarningDialog(arg1:Boolean, arg2:String):void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            var loc3:*=NaN;
-            if (arg1) 
+      public function as_confirmWarningDialog(param1:Boolean, param2:String) : void {
+         var _loc3_:SettingsControlProp = null;
+         var _loc4_:SoundSettings = null;
+         var _loc5_:* = NaN;
+         if(param1)
+         {
+            this.updateSettingsConfig();
+            if(param2.indexOf(this.SOUND_MODE_WARNING,0) >= 0)
             {
-                this.updateSettingsConfig();
-                if (arg2.indexOf(this.SOUND_MODE_WARNING, 0) >= 0) 
-                {
-                    loc1 = net.wg.gui.lobby.settings.vo.SettingsControlProp(net.wg.gui.lobby.settings.SettingsConfig.settingsData[net.wg.gui.lobby.settings.SettingsConfig.SOUND_SETTINGS]["alternativeVoices"]);
-                    loc1.current = 0;
-                    if (!((loc2 = net.wg.gui.lobby.settings.SoundSettings(this.tryGetView(net.wg.gui.lobby.settings.SettingsConfig.SOUND_SETTINGS))) == null) && !(loc2.alternativeVoicesDropDown == null)) 
-                    {
-                        loc2.alternativeVoicesDropDown.selectedIndex = 0;
-                    }
-                }
+               _loc3_ = SettingsControlProp(SettingsConfig.settingsData[SettingsConfig.SOUND_SETTINGS]["alternativeVoices"]);
+               _loc3_.current = 0;
+               _loc4_ = SoundSettings(this.tryGetView(SettingsConfig.SOUND_SETTINGS));
+               if(!(_loc4_ == null) && !(_loc4_.alternativeVoicesDropDown == null))
+               {
+                  _loc4_.alternativeVoicesDropDown.selectedIndex = 0;
+               }
             }
-            else 
+         }
+         else
+         {
+            _loc5_ = 2;
+            if(param2.indexOf(this.CONTROLS_WARNING,0) >= 0)
             {
-                loc3 = 2;
-                if (arg2.indexOf(this.CONTROLS_WARNING, 0) >= 0) 
-                {
-                    loc3 = 3;
-                }
-                this.tabs.selectedIndex = loc3;
+               _loc5_ = 3;
             }
-            return;
-        }
+            this.tabs.selectedIndex = _loc5_;
+         }
+      }
 
-        public function as_setData(arg1:Object):void
-        {
-            this._settingsData = this.normalize(arg1);
-            this.updateApplayBtnState();
-            _invalid = true;
-            validateNow();
-            return;
-        }
+      public function as_setData(param1:Object) : void {
+         this._settingsData = this.normalize(param1);
+         this.updateApplayBtnState();
+         _invalid = true;
+         validateNow();
+      }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.updateStage(App.appWidth, App.appHeight);
-            this.onPopulate();
-            return;
-        }
+      override protected function configUI() : void {
+         super.configUI();
+         this.updateStage(App.appWidth,App.appHeight);
+         this.onPopulate();
+      }
 
-        protected override function onPopulate():void
-        {
-            this.title.label = SETTINGS.TITLE;
-            this.submitBtn.label = SETTINGS.OK_BUTTON;
-            this.cancelBtn.label = SETTINGS.CANCEL_BUTTON;
-            this.applyBtn.label = SETTINGS.APPLY_BUTTON;
-            this.cancelBtn.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.cancelBtnClickHandler, false, 0, true);
-            this.applyBtn.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.applayBtnClickHandler, false, 0, true);
-            this.submitBtn.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.submitBtnClickHandler, false, 0, true);
-            if (this.tabs != null) 
-            {
-                this.tabs.dataProvider = new scaleform.clik.data.DataProvider(net.wg.gui.lobby.settings.SettingsConfig.tabsDataProvider);
-                this.tabs.addEventListener(scaleform.clik.events.IndexEvent.INDEX_CHANGE, this.onTabChange);
-                this.view.addEventListener(net.wg.gui.events.ViewStackEvent.NEED_UPDATE, this.onViewNeedUpdateHandler);
-                this.view.addEventListener(net.wg.gui.events.ViewStackEvent.VIEW_CHANGED, this.onViewChangeHandler);
-            }
-            this.changesData = new net.wg.gui.lobby.settings.SettingsChangesMap();
-            this.addEventListener(net.wg.gui.lobby.settings.evnts.SettingViewEvent.ON_CONTROL_CHANGED, this.onControlChanged);
-            this.addEventListener(net.wg.gui.lobby.settings.evnts.SettingViewEvent.ON_PTT_CONTROL_CHANGED, this.onPTTControlChanged);
-            this.addEventListener(net.wg.gui.lobby.settings.evnts.SettingViewEvent.ON_AUTO_DETECT_QUALITY, this.onAutodetectQuality);
-            this.addEventListener(net.wg.gui.lobby.settings.evnts.SettingViewEvent.ON_VIVOX_TEST, this.onVivoxTest);
-            this.addEventListener(net.wg.gui.lobby.settings.evnts.SettingViewEvent.ON_UPDATE_CAPTURE_DEVICE, this.onUpdateCaptureDevices);
-            this.addEventListener(net.wg.gui.lobby.settings.evnts.AlternativeVoiceEvent.ON_TEST_ALTERNATIVE_VOICES, this.onAlternativeVoice);
-            return;
-        }
+      override protected function onPopulate() : void {
+         this.title.label = SETTINGS.TITLE;
+         this.submitBtn.label = SETTINGS.OK_BUTTON;
+         this.cancelBtn.label = SETTINGS.CANCEL_BUTTON;
+         this.applyBtn.label = SETTINGS.APPLY_BUTTON;
+         this.cancelBtn.addEventListener(ButtonEvent.CLICK,this.cancelBtnClickHandler,false,0,true);
+         this.applyBtn.addEventListener(ButtonEvent.CLICK,this.applayBtnClickHandler,false,0,true);
+         this.submitBtn.addEventListener(ButtonEvent.CLICK,this.submitBtnClickHandler,false,0,true);
+         if(this.tabs != null)
+         {
+            this.tabs.dataProvider = new DataProvider(SettingsConfig.tabsDataProvider);
+            this.tabs.addEventListener(IndexEvent.INDEX_CHANGE,this.onTabChange);
+            this.view.addEventListener(ViewStackEvent.NEED_UPDATE,this.onViewNeedUpdateHandler);
+            this.view.addEventListener(ViewStackEvent.VIEW_CHANGED,this.onViewChangeHandler);
+         }
+         this.changesData = new SettingsChangesMap();
+         this.addEventListener(SettingViewEvent.ON_CONTROL_CHANGED,this.onControlChanged);
+         this.addEventListener(SettingViewEvent.ON_PTT_CONTROL_CHANGED,this.onPTTControlChanged);
+         this.addEventListener(SettingViewEvent.ON_AUTO_DETECT_QUALITY,this.onAutodetectQuality);
+         this.addEventListener(SettingViewEvent.ON_VIVOX_TEST,this.onVivoxTest);
+         this.addEventListener(SettingViewEvent.ON_UPDATE_CAPTURE_DEVICE,this.onUpdateCaptureDevices);
+         this.addEventListener(AlternativeVoiceEvent.ON_TEST_ALTERNATIVE_VOICES,this.onAlternativeVoice);
+      }
 
-        protected override function draw():void
-        {
-            if (this.tabs.selectedIndex == -1) 
-            {
-                this.tabs.selectedIndex = __currentTab;
-            }
-            return;
-        }
+      override protected function draw() : void {
+         if(this.tabs.selectedIndex == -1)
+         {
+            this.tabs.selectedIndex = __currentTab;
+         }
+      }
 
-        protected override function onDispose():void
-        {
-            super.onDispose();
-            this.cancelBtn.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.cancelBtnClickHandler);
-            this.applyBtn.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.applayBtnClickHandler);
-            this.submitBtn.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.submitBtnClickHandler);
-            if (this.view) 
-            {
-                this.view.removeEventListener(net.wg.gui.events.ViewStackEvent.NEED_UPDATE, this.onViewNeedUpdateHandler);
-                this.view.removeEventListener(net.wg.gui.events.ViewStackEvent.VIEW_CHANGED, this.onViewChangeHandler);
-            }
-            if (this.tabs) 
-            {
-                this.tabs.removeEventListener(scaleform.clik.events.IndexEvent.INDEX_CHANGE, this.onTabChange);
-            }
-            this.removeEventListener(net.wg.gui.lobby.settings.evnts.SettingViewEvent.ON_PTT_CONTROL_CHANGED, this.onPTTControlChanged);
-            this.removeEventListener(net.wg.gui.lobby.settings.evnts.SettingViewEvent.ON_CONTROL_CHANGED, this.onControlChanged);
-            this.removeEventListener(net.wg.gui.lobby.settings.evnts.SettingViewEvent.ON_AUTO_DETECT_QUALITY, this.onAutodetectQuality);
-            this.removeEventListener(net.wg.gui.lobby.settings.evnts.SettingViewEvent.ON_VIVOX_TEST, this.onVivoxTest);
-            this.removeEventListener(net.wg.gui.lobby.settings.evnts.SettingViewEvent.ON_UPDATE_CAPTURE_DEVICE, this.onUpdateCaptureDevices);
-            this.removeEventListener(net.wg.gui.lobby.settings.evnts.AlternativeVoiceEvent.ON_TEST_ALTERNATIVE_VOICES, this.onAlternativeVoice);
-            this.changesData.clear();
-            this.changesData = null;
-            this._settingsData = null;
-            return;
-        }
+      override protected function onDispose() : void {
+         super.onDispose();
+         this.cancelBtn.removeEventListener(ButtonEvent.CLICK,this.cancelBtnClickHandler);
+         this.applyBtn.removeEventListener(ButtonEvent.CLICK,this.applayBtnClickHandler);
+         this.submitBtn.removeEventListener(ButtonEvent.CLICK,this.submitBtnClickHandler);
+         if(this.view)
+         {
+            this.view.dispose();
+            this.view.removeEventListener(ViewStackEvent.NEED_UPDATE,this.onViewNeedUpdateHandler);
+            this.view.removeEventListener(ViewStackEvent.VIEW_CHANGED,this.onViewChangeHandler);
+         }
+         if(this.tabs)
+         {
+            this.tabs.dispose();
+            this.tabs.removeEventListener(IndexEvent.INDEX_CHANGE,this.onTabChange);
+         }
+         this.removeEventListener(SettingViewEvent.ON_PTT_CONTROL_CHANGED,this.onPTTControlChanged);
+         this.removeEventListener(SettingViewEvent.ON_CONTROL_CHANGED,this.onControlChanged);
+         this.removeEventListener(SettingViewEvent.ON_AUTO_DETECT_QUALITY,this.onAutodetectQuality);
+         this.removeEventListener(SettingViewEvent.ON_VIVOX_TEST,this.onVivoxTest);
+         this.removeEventListener(SettingViewEvent.ON_UPDATE_CAPTURE_DEVICE,this.onUpdateCaptureDevices);
+         this.removeEventListener(AlternativeVoiceEvent.ON_TEST_ALTERNATIVE_VOICES,this.onAlternativeVoice);
+         this.changesData.clear();
+         this.changesData = null;
+         this._settingsData = null;
+      }
 
-        internal function controlDefValEqNewVal(arg1:*, arg2:*):Boolean
-        {
-            var loc1:*=null;
-            if (arg1 is net.wg.gui.lobby.settings.vo.SettingsControlProp) 
+      private function controlDefValEqNewVal(param1:*, param2:*) : Boolean {
+         var _loc3_:String = null;
+         if(param1  is  SettingsControlProp)
+         {
+            return SettingsControlProp(param1).current == param2;
+         }
+         if(param1  is  SettingsKeyProp)
+         {
+            return SettingsKeyProp(param1).key == param2;
+         }
+         if(!(param2  is  String) && !(param2  is  Number) && !(param2  is  Boolean))
+         {
+            for (_loc3_ in param2)
             {
-                return net.wg.gui.lobby.settings.vo.SettingsControlProp(arg1).current == arg2;
+               if(param1[_loc3_] != null)
+               {
+                  if(param1[_loc3_]  is  SettingsControlProp)
+                  {
+                     return SettingsControlProp(param1[_loc3_]).current == param2[_loc3_];
+                  }
+                  if(param1[_loc3_]  is  SettingsKeyProp)
+                  {
+                     return SettingsKeyProp(param1[_loc3_]).key == param2[_loc3_];
+                  }
+                  return this.controlDefValEqNewVal(param1[_loc3_],param2[_loc3_]);
+               }
             }
-            if (arg1 is net.wg.gui.lobby.settings.vo.SettingsKeyProp) 
-            {
-                return net.wg.gui.lobby.settings.vo.SettingsKeyProp(arg1).key == arg2;
-            }
-            if (!(arg2 is String) && !(arg2 is Number) && !(arg2 is Boolean)) 
-            {
-                var loc2:*=0;
-                var loc3:*=arg2;
-                for (loc1 in loc3) 
-                {
-                    if (arg1[loc1] == null) 
-                    {
-                        continue;
-                    }
-                    if (arg1[loc1] is net.wg.gui.lobby.settings.vo.SettingsControlProp) 
-                    {
-                        return net.wg.gui.lobby.settings.vo.SettingsControlProp(arg1[loc1]).current == arg2[loc1];
-                    }
-                    if (arg1[loc1] is net.wg.gui.lobby.settings.vo.SettingsKeyProp) 
-                    {
-                        return net.wg.gui.lobby.settings.vo.SettingsKeyProp(arg1[loc1]).key == arg2[loc1];
-                    }
-                    return this.controlDefValEqNewVal(arg1[loc1], arg2[loc1]);
-                }
-            }
-            return false;
-        }
+         }
+         return false;
+      }
 
-        internal function onAlternativeVoice(arg1:net.wg.gui.lobby.settings.evnts.AlternativeVoiceEvent):void
-        {
-            var loc1:*=null;
-            var loc2:*=NaN;
-            var loc3:*=NaN;
-            var loc4:*=null;
-            var loc5:*=null;
-            var loc6:*=null;
-            if (isSoundModeValidS()) 
-            {
-                altVoicesPreviewS();
-            }
-            else 
-            {
-                loc1 = net.wg.gui.lobby.settings.SoundSettings(this.tryGetView(net.wg.gui.lobby.settings.SettingsConfig.SOUND_SETTINGS));
-                loc2 = loc1.testAlternativeVoicesButton.x;
-                loc3 = loc1.testAlternativeVoicesButton.y;
-                loc4 = this.localToGlobal(new flash.geom.Point(loc2, loc3));
-                loc5 = new net.wg.data.managers.impl.TooltipProps(net.wg.data.constants.Tooltips.TYPE_WARNING, loc4.x, loc4.y, 0, 0, 3000);
-                loc6 = "<font color=\"" + net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_ALERT + "\">" + App.utils.locale.makeString(TOOLTIPS.SETTINGS_DIALOG_SOUND_SOUNDMODEINVALID) + "</font>";
-                App.toolTipMgr.show(loc6, loc5);
-            }
-            return;
-        }
+      private function checkChanges(param1:Boolean, param2:String, param3:*) : void {
+         if(param1)
+         {
+            this.changesData.tryCutChanges(param2,param3);
+         }
+         else
+         {
+            this.changesData.tryAddChanges(param2,param3);
+         }
+         this.updateApplayBtnState();
+      }
 
-        internal function updateApplayBtnState():void
-        {
-            this.applyBtn.enabled = this.changesData.length > 0;
-            return;
-        }
+      private function updateApplayBtnState() : void {
+         this.applyBtn.enabled = this.changesData.length > 0;
+      }
 
-        internal function tryGetView(arg1:String):flash.display.MovieClip
-        {
-            var loc1:*=null;
-            if (!this.view) 
-            {
-                return null;
-            }
-            if (this.view.cachedViews[arg1] != null) 
-            {
-                loc1 = this.view.cachedViews[arg1];
-            }
-            return loc1;
-        }
-
-        internal function normalize(arg1:Object):Object
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            var loc3:*=null;
-            var loc4:*=0;
-            var loc5:*=net.wg.gui.lobby.settings.SettingsConfig.settingsData;
-            for (loc1 in loc5) 
-            {
-                if (arg1[loc1] == undefined) 
-                {
-                    continue;
-                }
-                this.normalizeInside(arg1, net.wg.gui.lobby.settings.SettingsConfig.settingsData[loc1], loc1);
-            }
-            if (net.wg.gui.lobby.settings.SettingsConfig.settingsData[net.wg.gui.lobby.settings.SettingsConfig.SOUND_SETTINGS][net.wg.gui.lobby.settings.SettingsConfig.PTT] && net.wg.gui.lobby.settings.SettingsConfig.settingsData[net.wg.gui.lobby.settings.SettingsConfig.CONTROLS_SETTINGS][net.wg.gui.lobby.settings.SettingsConfig.KEYBOARD][net.wg.gui.lobby.settings.SettingsConfig.PUSH_TO_TALK]) 
-            {
-                loc2 = net.wg.gui.lobby.settings.vo.SettingsControlProp(net.wg.gui.lobby.settings.SettingsConfig.settingsData[net.wg.gui.lobby.settings.SettingsConfig.SOUND_SETTINGS][net.wg.gui.lobby.settings.SettingsConfig.PTT]);
-                loc3 = net.wg.gui.lobby.settings.vo.SettingsKeyProp(net.wg.gui.lobby.settings.SettingsConfig.settingsData[net.wg.gui.lobby.settings.SettingsConfig.CONTROLS_SETTINGS][net.wg.gui.lobby.settings.SettingsConfig.KEYBOARD][net.wg.gui.lobby.settings.SettingsConfig.PUSH_TO_TALK]);
-                loc2.current = loc3.key;
-            }
-            net.wg.gui.lobby.settings.vo.SettingsControlProp(net.wg.gui.lobby.settings.SettingsConfig.settingsData[net.wg.gui.lobby.settings.SettingsConfig.GAME_SETTINGS][net.wg.gui.lobby.settings.SettingsConfig.ENABLE_OL_FILTER]).readOnly = App.globalVarsMgr.isChinaS();
-            return net.wg.gui.lobby.settings.SettingsConfig.settingsData;
-        }
-
-        internal function normalizeInside(arg1:Object, arg2:Object, arg3:String):void
-        {
-            var loc2:*=null;
-            var loc3:*=null;
-            var loc1:*=App.utils.commons;
-            var loc4:*=0;
-            var loc5:*=arg2;
-            for (loc2 in loc5) 
-            {
-                if (arg1[arg3][loc2] == undefined) 
-                {
-                    continue;
-                }
-                if (loc2 == net.wg.gui.lobby.settings.SettingsConfig.PRESETS || loc2 == net.wg.gui.lobby.settings.SettingsConfig.QUALITY_ORDER) 
-                {
-                    arg2[loc2] = loc1.cloneObject(arg1[arg3][loc2]);
-                    continue;
-                }
-                if (loc2 == net.wg.gui.lobby.settings.SettingsConfig.KEYBOARD) 
-                {
-                    arg2[loc2] = {};
-                    arg2[net.wg.gui.lobby.settings.SettingsConfig.KEYS_LAYOUT_ORDER] = [];
-                    this.normalizeKays(arg1[arg3][loc2], arg1[arg3][loc2][net.wg.gui.lobby.settings.SettingsConfig.KEYS_LAYOUT], arg2[loc2], arg2[net.wg.gui.lobby.settings.SettingsConfig.KEYS_LAYOUT_ORDER]);
-                    continue;
-                }
-                if (arg2[loc2] is net.wg.gui.lobby.settings.vo.SettingsControlProp) 
-                {
-                    loc3 = net.wg.gui.lobby.settings.vo.SettingsControlProp(arg2[loc2]);
-                    if (arg1[arg3][loc2] is Boolean || arg1[arg3][loc2] is String || arg1[arg3][loc2] is Number) 
-                    {
-                        loc3.current = arg1[arg3][loc2];
-                    }
-                    else if (arg1[arg3][loc2].current is Object && !(arg1[arg3][loc2].current == undefined)) 
-                    {
-                        if (loc3.type != net.wg.gui.lobby.settings.SettingsConfig.TYPE_CHECKBOX) 
-                        {
-                            loc3.current = Math.max(arg1[arg3][loc2].current, 0);
-                            if (arg3 == net.wg.gui.lobby.settings.SettingsConfig.CONTROLS_SETTINGS) 
-                            {
-                                if (arg1[arg3][loc2].hasOwnProperty("default")) 
-                                {
-                                    loc3._default = Math.max(arg1[arg3][loc2].default, 0);
-                                }
-                                else 
-                                {
-                                    loc3._default = 0;
-                                }
-                            }
-                            if (arg1[arg3][loc2].options == undefined) 
-                            {
-                                loc3.options = [];
-                            }
-                            else 
-                            {
-                                loc3.options = loc1.cloneObject(arg1[arg3][loc2].options);
-                            }
-                        }
-                        else 
-                        {
-                            loc3.current = Boolean(arg1[arg3][loc2].current);
-                            if (arg3 == net.wg.gui.lobby.settings.SettingsConfig.CONTROLS_SETTINGS) 
-                            {
-                                if (arg1[arg3][loc2].hasOwnProperty("default")) 
-                                {
-                                    loc3._default = arg1[arg3][loc2].default != undefined ? Boolean(arg1[arg3][loc2].default) : false;
-                                }
-                                else 
-                                {
-                                    loc3._default = false;
-                                }
-                            }
-                        }
-                    }
-                    continue;
-                }
-                this.normalizeInside(arg1[arg3], arg2[loc2], loc2);
-            }
-            return;
-        }
-
-        internal function normalizeKays(arg1:Object, arg2:Array, arg3:Object, arg4:Array):void
-        {
-            var loc2:*=0;
-            var loc3:*=null;
-            var loc4:*=null;
-            var loc5:*=0;
-            var loc6:*=0;
-            var loc7:*=null;
-            var loc8:*=null;
-            var loc9:*=null;
-            var loc10:*=NaN;
-            var loc11:*=NaN;
-            var loc12:*=false;
-            var loc1:*=arg2.length;
-            while (loc2 < loc1) 
-            {
-                loc3 = arg2[loc2].key;
-                loc5 = (loc4 = arg2[loc2].values).length;
-                arg4.push(loc3);
-                arg3[loc3] = new net.wg.gui.lobby.settings.vo.SettingsKeyProp(loc3, true, loc3, null, NaN, NaN, null, false, loc2 != 0 ? 18 : 0);
-                loc6 = 0;
-                while (loc6 < loc5) 
-                {
-                    loc7 = loc4[loc6].key;
-                    loc8 = loc4[loc6].cmd;
-                    loc9 = loc4[loc6].hasOwnProperty("descr") ? loc4[loc6]["descr"] : null;
-                    if (arg1[loc7].current != null) 
-                    {
-                        loc10 = arg1[loc7].current;
-                        loc11 = arg1[loc7].default;
-                        loc12 = true;
-                        arg3[loc7] = new net.wg.gui.lobby.settings.vo.SettingsKeyProp(loc7, false, loc7, loc8, loc10, loc11, loc9, loc12);
-                        arg4.push(loc7);
-                    }
-                    ++loc6;
-                }
-                ++loc2;
-            }
-            return;
-        }
-
-        internal function sendData(arg1:Boolean):void
-        {
-            var loc4:*=null;
-            var loc1:*=net.wg.gui.lobby.settings.SoundSettings(this.tryGetView(net.wg.gui.lobby.settings.SettingsConfig.SOUND_SETTINGS));
-            if (loc1) 
-            {
-                loc1.breakSoundCheck();
-            }
-            var loc2:*=this.checkControlsWrong();
-            var loc3:*=!isSoundModeValidS();
-            if (loc2 || loc3) 
-            {
-                loc4 = (loc4 = loc2 ? this.CONTROLS_WARNING : "") + (loc3 ? this.SOUND_MODE_WARNING : "");
-                showWarningDialogS(loc4, this.changesData.getChanges(), arg1);
-            }
-            else 
-            {
-                applySettingsS(this.changesData.getChanges(), arg1);
-                this.updateSettingsConfig();
-            }
-            return;
-        }
-
-        internal function checkControlsWrong():Boolean
-        {
-            var loc3:*=null;
-            var loc4:*=0;
-            var loc5:*=0;
-            var loc6:*=null;
-            var loc7:*=null;
-            var loc8:*=null;
-            var loc1:*=false;
-            var loc2:*=net.wg.gui.lobby.settings.ControlsSettings(this.tryGetView(net.wg.gui.lobby.settings.SettingsConfig.CONTROLS_SETTINGS));
-            if (loc2) 
-            {
-                loc3 = loc2.getKeyasDataProvider();
-                loc4 = loc3.length;
-                loc5 = 0;
-                while (loc5 < loc4) 
-                {
-                    if (net.wg.data.constants.KeysMap.KEY_NONE == loc3[loc5].key) 
-                    {
-                        loc1 = true;
-                        break;
-                    }
-                    ++loc5;
-                }
-            }
-            else 
-            {
-                loc6 = net.wg.gui.lobby.settings.SettingsConfig.settingsData[net.wg.gui.lobby.settings.SettingsConfig.CONTROLS_SETTINGS][net.wg.gui.lobby.settings.SettingsConfig.KEYBOARD];
-                var loc9:*=0;
-                var loc10:*=loc6;
-                for (loc7 in loc10) 
-                {
-                    if ((loc8 = net.wg.gui.lobby.settings.vo.SettingsKeyProp(loc6[loc7])).key != net.wg.data.constants.KeysMap.KEY_NONE) 
-                    {
-                        continue;
-                    }
-                    loc1 = true;
-                    break;
-                }
-            }
-            return loc1;
-        }
-
-        internal function updateSettingsConfig():void
-        {
-            var loc1:*=null;
-            if (this.changesData) 
-            {
-                loc1 = this.changesData.getChanges();
-                this.searchAndOverride(0, net.wg.gui.lobby.settings.SettingsConfig.settingsData, loc1);
-                this.changesData.clear();
-                this.updateApplayBtnState();
-            }
-            return;
-        }
-
-        internal function searchAndOverride(arg1:uint, arg2:Object, arg3:Object):void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            var loc3:*=null;
-            var loc4:*=0;
-            var loc5:*=arg3;
-            for (loc1 in loc5) 
-            {
-                if (!(arg3[loc1] is Boolean || arg3[loc1] is Number || arg3[loc1] is String)) 
-                {
-                    loc2 = null;
-                    if (arg1 != 0) 
-                    {
-                        loc2 = arg2[loc1];
-                    }
-                    else 
-                    {
-                        loc2 = this.getPropObj(arg2, loc1);
-                    }
-                    this.searchAndOverride(arg1 + 1, loc2, arg3[loc1]);
-                    continue;
-                }
-                loc3 = null;
-                if (arg1 != 0) 
-                {
-                    loc3 = arg2[loc1];
-                }
-                else 
-                {
-                    loc3 = this.getPropObj(arg2, loc1);
-                }
-                if (!(loc3 == null) && loc3 is net.wg.gui.lobby.settings.vo.SettingsControlProp) 
-                {
-                    net.wg.gui.lobby.settings.vo.SettingsControlProp(loc3).current = arg3[loc1];
-                    continue;
-                }
-                if (!(!(loc3 == null) && loc3 is net.wg.gui.lobby.settings.vo.SettingsKeyProp)) 
-                {
-                    continue;
-                }
-                net.wg.gui.lobby.settings.vo.SettingsKeyProp(loc3).key = arg3[loc1];
-            }
-            return;
-        }
-
-        internal function getPropObj(arg1:Object, arg2:String):Object
-        {
-            var loc1:*=null;
-            var loc2:*=0;
-            var loc3:*=arg1;
-            for (loc1 in loc3) 
-            {
-                if (!arg1[loc1].hasOwnProperty(arg2)) 
-                {
-                    continue;
-                }
-                return arg1[loc1][arg2];
-            }
+      private function tryGetView(param1:String) : MovieClip {
+         var _loc2_:MovieClip = null;
+         if(!this.view)
+         {
             return null;
-        }
+         }
+         if(this.view.cachedViews[param1] != null)
+         {
+            _loc2_ = this.view.cachedViews[param1];
+         }
+         return _loc2_;
+      }
 
-        internal const CONTROLS_WARNING:String="controlsWrongNotification";
+      private function normalize(param1:Object) : Object {
+         var _loc2_:String = null;
+         var _loc3_:SettingsControlProp = null;
+         var _loc4_:SettingsKeyProp = null;
+         for (_loc2_ in SettingsConfig.settingsData)
+         {
+            if(param1[_loc2_] != undefined)
+            {
+               this.normalizeInside(param1,SettingsConfig.settingsData[_loc2_],_loc2_);
+            }
+         }
+         if((SettingsConfig.settingsData[SettingsConfig.SOUND_SETTINGS][SettingsConfig.PTT]) && (SettingsConfig.settingsData[SettingsConfig.CONTROLS_SETTINGS][SettingsConfig.KEYBOARD][SettingsConfig.PUSH_TO_TALK]))
+         {
+            _loc3_ = SettingsControlProp(SettingsConfig.settingsData[SettingsConfig.SOUND_SETTINGS][SettingsConfig.PTT]);
+            _loc4_ = SettingsKeyProp(SettingsConfig.settingsData[SettingsConfig.CONTROLS_SETTINGS][SettingsConfig.KEYBOARD][SettingsConfig.PUSH_TO_TALK]);
+            _loc3_.current = _loc4_.key;
+         }
+         SettingsControlProp(SettingsConfig.settingsData[SettingsConfig.GAME_SETTINGS][SettingsConfig.ENABLE_OL_FILTER]).readOnly = App.globalVarsMgr.isChinaS();
+         return SettingsConfig.settingsData;
+      }
 
-        internal const SOUND_MODE_WARNING:String="soundModeInvalid";
+      private function normalizeInside(param1:Object, param2:Object, param3:String) : void {
+         var _loc5_:String = null;
+         var _loc6_:SettingsControlProp = null;
+         var _loc7_:String = null;
+         var _loc4_:ICommons = App.utils.commons;
+         for (_loc5_ in param2)
+         {
+            if(param1[param3][_loc5_] != undefined)
+            {
+               if(_loc5_ == SettingsConfig.PRESETS || _loc5_ == SettingsConfig.QUALITY_ORDER)
+               {
+                  param2[_loc5_] = _loc4_.cloneObject(param1[param3][_loc5_]);
+               }
+               else
+               {
+                  if(_loc5_ == SettingsConfig.KEYBOARD)
+                  {
+                     param2[_loc5_] = {};
+                     param2[SettingsConfig.KEYS_LAYOUT_ORDER] = [];
+                     this.normalizeKeys(param1[param3][_loc5_],param1[param3][_loc5_][SettingsConfig.KEYS_LAYOUT],param2[_loc5_],param2[SettingsConfig.KEYS_LAYOUT_ORDER]);
+                  }
+                  else
+                  {
+                     if(param2[_loc5_]  is  SettingsControlProp)
+                     {
+                        _loc6_ = SettingsControlProp(param2[_loc5_]);
+                        if(param1[param3][_loc5_]  is  Boolean || param1[param3][_loc5_]  is  String || param1[param3][_loc5_]  is  Number)
+                        {
+                           _loc6_.current = _loc6_.type == SettingsConfig.TYPE_CHECKBOX?Boolean(param1[param3][_loc5_]):param1[param3][_loc5_];
+                           _loc6_.lastVal = _loc6_.current;
+                        }
+                        else
+                        {
+                           if(param1[param3][_loc5_].current  is  Object && !(param1[param3][_loc5_].current == undefined))
+                           {
+                              if(_loc6_.type == SettingsConfig.TYPE_CHECKBOX)
+                              {
+                                 _loc6_.current = Boolean(param1[param3][_loc5_].current);
+                                 _loc6_.lastVal = _loc6_.current;
+                                 if(param1[param3][_loc5_].hasOwnProperty("options"))
+                                 {
+                                    _loc6_.options = _loc4_.cloneObject(param1[param3][_loc5_].options);
+                                    for (_loc7_ in param1[param3][_loc5_].options)
+                                    {
+                                       if((param1[param3][_loc5_].options[_loc7_].hasOwnProperty("advanced")) && param1[param3][_loc5_].options[_loc7_].advanced == true)
+                                       {
+                                          _loc6_.advanced = true;
+                                          break;
+                                       }
+                                    }
+                                 }
+                                 if(param3 == SettingsConfig.CONTROLS_SETTINGS)
+                                 {
+                                    if(param1[param3][_loc5_].hasOwnProperty("default"))
+                                    {
+                                       _loc6_._default = param1[param3][_loc5_].default == undefined?false:Boolean(param1[param3][_loc5_].default);
+                                    }
+                                    else
+                                    {
+                                       _loc6_._default = false;
+                                    }
+                                 }
+                              }
+                              else
+                              {
+                                 _loc6_.current = Math.max(param1[param3][_loc5_].current,0);
+                                 _loc6_.lastVal = _loc6_.current;
+                                 if(param3 == SettingsConfig.CONTROLS_SETTINGS)
+                                 {
+                                    if(param1[param3][_loc5_].hasOwnProperty("default"))
+                                    {
+                                       _loc6_._default = Math.max(param1[param3][_loc5_].default,0);
+                                    }
+                                    else
+                                    {
+                                       _loc6_._default = 0;
+                                    }
+                                 }
+                                 if(param1[param3][_loc5_].options != undefined)
+                                 {
+                                    _loc6_.options = _loc4_.cloneObject(param1[param3][_loc5_].options);
+                                 }
+                                 else
+                                 {
+                                    _loc6_.options = [];
+                                 }
+                              }
+                           }
+                        }
+                     }
+                     else
+                     {
+                        this.normalizeInside(param1[param3],param2[_loc5_],_loc5_);
+                     }
+                  }
+               }
+            }
+         }
+      }
 
-        public var wndBg:flash.display.MovieClip=null;
+      private function normalizeKeys(param1:Object, param2:Array, param3:Object, param4:Array) : void {
+         var _loc6_:uint = 0;
+         var _loc7_:String = null;
+         var _loc8_:Array = null;
+         var _loc9_:uint = 0;
+         var _loc10_:uint = 0;
+         var _loc11_:String = null;
+         var _loc12_:String = null;
+         var _loc13_:Array = null;
+         var _loc14_:* = NaN;
+         var _loc15_:* = NaN;
+         var _loc16_:* = false;
+         var _loc5_:uint = param2.length;
+         while(_loc6_ < _loc5_)
+         {
+            _loc7_ = param2[_loc6_].key;
+            _loc8_ = param2[_loc6_].values;
+            _loc9_ = _loc8_.length;
+            param4.push(_loc7_);
+            param3[_loc7_] = new SettingsKeyProp(_loc7_,true,_loc7_,null,NaN,NaN,null,false,_loc6_ == 0?0:18);
+            _loc10_ = 0;
+            while(_loc10_ < _loc9_)
+            {
+               _loc11_ = _loc8_[_loc10_].key;
+               _loc12_ = _loc8_[_loc10_].cmd;
+               _loc13_ = _loc8_[_loc10_].hasOwnProperty("descr")?_loc8_[_loc10_]["descr"]:null;
+               if(param1[_loc11_].current != null)
+               {
+                  _loc14_ = param1[_loc11_].current;
+                  _loc15_ = param1[_loc11_].default;
+                  _loc16_ = true;
+                  param3[_loc11_] = new SettingsKeyProp(_loc11_,false,_loc11_,_loc12_,_loc14_,_loc15_,_loc13_,_loc16_);
+                  param4.push(_loc11_);
+               }
+               _loc10_++;
+            }
+            _loc6_++;
+         }
+      }
 
-        public var title:net.wg.gui.components.controls.TextFieldShort=null;
+      private function sendData(param1:Boolean) : void {
+         var _loc5_:String = null;
+         var _loc2_:SoundSettings = SoundSettings(this.tryGetView(SettingsConfig.SOUND_SETTINGS));
+         if(_loc2_)
+         {
+            _loc2_.breakSoundCheck();
+         }
+         var _loc3_:Boolean = this.checkControlsWrong();
+         var _loc4_:* = !isSoundModeValidS();
+         if((_loc3_) || (_loc4_))
+         {
+            _loc5_ = _loc3_?this.CONTROLS_WARNING:"";
+            _loc5_ = _loc5_ + (_loc4_?this.SOUND_MODE_WARNING:"");
+            showWarningDialogS(_loc5_,this.changesData.getChanges(),param1);
+         }
+         else
+         {
+            applySettingsS(this.changesData.getChanges(),param1);
+            this.updateSettingsConfig();
+         }
+      }
 
-        public var tabs:net.wg.gui.components.advanced.ButtonBarEx=null;
+      private function checkControlsWrong() : Boolean {
+         var _loc3_:IDataProvider = null;
+         var _loc4_:uint = 0;
+         var _loc5_:uint = 0;
+         var _loc6_:Object = null;
+         var _loc7_:String = null;
+         var _loc8_:SettingsKeyProp = null;
+         var _loc1_:* = false;
+         var _loc2_:ControlsSettings = ControlsSettings(this.tryGetView(SettingsConfig.CONTROLS_SETTINGS));
+         if(_loc2_)
+         {
+            _loc3_ = _loc2_.getKeyasDataProvider();
+            _loc4_ = _loc3_.length;
+            _loc5_ = 0;
+            while(_loc5_ < _loc4_)
+            {
+               if(KeysMap.KEY_NONE == _loc3_[_loc5_].key)
+               {
+                  _loc1_ = true;
+                  break;
+               }
+               _loc5_++;
+            }
+         }
+         else
+         {
+            _loc6_ = SettingsConfig.settingsData[SettingsConfig.CONTROLS_SETTINGS][SettingsConfig.KEYBOARD];
+            for (_loc7_ in _loc6_)
+            {
+               _loc8_ = SettingsKeyProp(_loc6_[_loc7_]);
+               if(_loc8_.key == KeysMap.KEY_NONE)
+               {
+                  _loc1_ = true;
+                  break;
+               }
+            }
+         }
+         return _loc1_;
+      }
 
-        public var tabLine:flash.display.Sprite=null;
+      private function updateSettingsConfig() : void {
+         var _loc1_:Object = null;
+         if(this.changesData)
+         {
+            _loc1_ = this.changesData.getChanges();
+            this.searchAndOverride(0,SettingsConfig.settingsData,_loc1_);
+            this.changesData.clear();
+            this.updateApplayBtnState();
+         }
+      }
 
-        public var view:net.wg.gui.components.advanced.ViewStack=null;
+      private function searchAndOverride(param1:uint, param2:Object, param3:Object) : void {
+         var _loc4_:String = null;
+         var _loc5_:Object = null;
+         var _loc6_:Object = null;
+         for (_loc4_ in param3)
+         {
+            if(!(param3[_loc4_]  is  Boolean || param3[_loc4_]  is  Number || param3[_loc4_]  is  String))
+            {
+               _loc5_ = null;
+               if(param1 == 0)
+               {
+                  _loc5_ = this.getPropObj(param2,_loc4_);
+               }
+               else
+               {
+                  _loc5_ = param2[_loc4_];
+               }
+               this.searchAndOverride(param1 + 1,_loc5_,param3[_loc4_]);
+            }
+            else
+            {
+               _loc6_ = null;
+               if(param1 == 0)
+               {
+                  _loc6_ = this.getPropObj(param2,_loc4_);
+               }
+               else
+               {
+                  _loc6_ = param2[_loc4_];
+               }
+               if(!(_loc6_ == null) && _loc6_  is  SettingsControlProp)
+               {
+                  SettingsControlProp(_loc6_).current = param3[_loc4_];
+               }
+               else
+               {
+                  if(!(_loc6_ == null) && _loc6_  is  SettingsKeyProp)
+                  {
+                     SettingsKeyProp(_loc6_).key = param3[_loc4_];
+                  }
+               }
+            }
+         }
+      }
 
-        public var cancelBtn:net.wg.gui.components.controls.SoundButtonEx=null;
+      private function getPropObj(param1:Object, param2:String) : Object {
+         var _loc3_:String = null;
+         for (_loc3_ in param1)
+         {
+            if(param1[_loc3_].hasOwnProperty(param2))
+            {
+               return param1[_loc3_][param2];
+            }
+         }
+         return null;
+      }
 
-        public var applyBtn:net.wg.gui.components.controls.SoundButtonEx=null;
+      private function onTabChange(param1:IndexEvent) : void {
+         __currentTab = param1.index;
+         App.toolTipMgr.hide();
+         var _loc2_:SoundSettings = SoundSettings(this.tryGetView(SettingsConfig.SOUND_SETTINGS));
+         if(_loc2_)
+         {
+            _loc2_.onViewChanged();
+         }
+      }
 
-        public var ddMenu_ScrollingList:scaleform.clik.controls.ScrollingList=null;
+      private function onViewNeedUpdateHandler(param1:ViewStackEvent) : void {
+         var _loc2_:IViewStackContent = param1.view;
+         _loc2_.update(
+            {
+               "id":param1.linkage,
+               "data":this._settingsData[param1.linkage]
+            }
+         );
+         if(param1.linkage == SettingsConfig.GRAPHIC_SETTINGS && (SettingsConfig.liveUpdateVideoSettingsData))
+         {
+            GraphicSettings(_loc2_).updateLiveVideoData();
+         }
+      }
 
-        public var ddListItemRendererSound:net.wg.gui.components.controls.DropDownListItemRendererSound=null;
+      private function onViewChangeHandler(param1:ViewStackEvent) : void {
+         var _loc2_:IViewStackContent = param1.view;
+         if(param1.linkage == SettingsConfig.MARKER_SETTINGS)
+         {
+            MarkerSettings(_loc2_).updateShowContent();
+            MarkerSettings(_loc2_).updateShowContent();
+         }
+      }
 
-        internal var _settingsData:Object=null;
+      private function onPTTControlChanged(param1:SettingViewEvent) : void {
+         var _loc2_:SettingsControlProp = SettingsControlProp(SettingsConfig.settingsData[SettingsConfig.SOUND_SETTINGS][SettingsConfig.PTT]);
+         _loc2_.current = param1.controlValue;
+         var _loc3_:SoundSettings = SoundSettings(this.tryGetView(SettingsConfig.SOUND_SETTINGS));
+         if(_loc3_)
+         {
+            _loc3_.updatePTTControl(_loc2_.current);
+         }
+      }
 
-        internal var changesData:net.wg.gui.lobby.settings.SettingsChangesMap=null;
+      private function onControlChanged(param1:SettingViewEvent) : void {
+         var _loc2_:String = param1.viewId;
+         var _loc3_:String = param1.controlId;
+         var _loc4_:* = param1.controlValue;
+         onSettingsChangeS(_loc3_,_loc4_);
+         var _loc5_:Boolean = this.controlDefValEqNewVal(this._settingsData[_loc2_][_loc3_],_loc4_);
+         this.checkChanges(_loc5_,_loc3_,_loc4_);
+      }
 
-        internal static var __currentTab:Number=0;
+      private function onVivoxTest(param1:SettingViewEvent) : void {
+         var _loc2_:Boolean = Boolean(param1.controlValue);
+         var _loc3_:Boolean = startVOIPTestS(_loc2_);
+         var _loc4_:SoundSettings = SoundSettings(this.tryGetView(SettingsConfig.SOUND_SETTINGS));
+         if(_loc4_ != null)
+         {
+            _loc4_.setVoiceTestState(!((_loc3_) || !_loc2_));
+         }
+      }
 
-        public var submitBtn:net.wg.gui.components.controls.SoundButtonEx=null;
-    }
+      private function onAutodetectQuality(param1:SettingViewEvent) : void {
+         var _loc2_:Number = autodetectQualityS();
+         var _loc3_:GraphicSettings = GraphicSettings(this.tryGetView(SettingsConfig.GRAPHIC_SETTINGS));
+         if(_loc3_ != null)
+         {
+            _loc3_.setPresetAfterAutoDetect(_loc2_);
+         }
+      }
+
+      private function onUpdateCaptureDevices(param1:SettingViewEvent) : void {
+         updateCaptureDevicesS();
+      }
+
+      private function onAlternativeVoice(param1:AlternativeVoiceEvent) : void {
+         var _loc2_:SoundSettings = null;
+         var _loc3_:* = NaN;
+         var _loc4_:* = NaN;
+         var _loc5_:Point = null;
+         var _loc6_:ITooltipProps = null;
+         var _loc7_:String = null;
+         if(isSoundModeValidS())
+         {
+            altVoicesPreviewS();
+         }
+         else
+         {
+            _loc2_ = SoundSettings(this.tryGetView(SettingsConfig.SOUND_SETTINGS));
+            _loc3_ = _loc2_.testAlternativeVoicesButton.x;
+            _loc4_ = _loc2_.testAlternativeVoicesButton.y;
+            _loc5_ = this.localToGlobal(new Point(_loc3_,_loc4_));
+            _loc6_ = new TooltipProps(Tooltips.TYPE_WARNING,_loc5_.x,_loc5_.y,0,0,3000);
+            _loc7_ = "<font color=\"" + Utils.instance.COLOR_ALERT + "\">" + App.utils.locale.makeString(TOOLTIPS.SETTINGS_DIALOG_SOUND_SOUNDMODEINVALID) + "</font>";
+            App.toolTipMgr.show(_loc7_,_loc6_);
+         }
+      }
+
+      private function cancelBtnClickHandler(param1:ButtonEvent) : void {
+         var _loc2_:SoundSettings = SoundSettings(this.tryGetView(SettingsConfig.SOUND_SETTINGS));
+         if(_loc2_)
+         {
+            _loc2_.breakSoundCheck();
+         }
+         closeWindowS();
+      }
+
+      private function applayBtnClickHandler(param1:ButtonEvent) : void {
+         this.sendData(false);
+      }
+
+      private function submitBtnClickHandler(param1:ButtonEvent) : void {
+         this.sendData(true);
+      }
+
+      override public function handleInput(param1:InputEvent) : void {
+         super.handleInput(param1);
+         if(param1.handled)
+         {
+            return;
+         }
+         var _loc2_:InputDetails = param1.details;
+         if(param1.details.code == Keyboard.ESCAPE && _loc2_.value == InputValue.KEY_DOWN)
+         {
+            param1.handled = true;
+            closeWindowS();
+         }
+      }
+   }
+
 }

@@ -1,316 +1,303 @@
-package net.wg.gui.components.tooltips.helpers 
+package net.wg.gui.components.tooltips.helpers
 {
-    import __AS3__.vec.*;
-    import flash.display.*;
-    import flash.filters.*;
-    import flash.text.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.components.tooltips.*;
-    import net.wg.gui.components.tooltips.VO.*;
-    
-    public class Utils extends Object
-    {
-        public function Utils()
-        {
-            super();
-            if (__allowInstantiation) 
-            {
-            };
-            return;
-        }
+   import net.wg.gui.components.controls.IconText;
+   import net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO;
+   import net.wg.gui.components.tooltips.VO.ToolTipBlockVO;
+   import flash.text.TextFormat;
+   import flash.text.TextField;
+   import net.wg.gui.components.tooltips.VO.ToolTipBlockRightListItemVO;
+   import __AS3__.vec.Vector;
+   import flash.text.TextFormatAlign;
+   import net.wg.gui.components.tooltips.VO.ToolTipStatusColorsVO;
+   import flash.filters.DropShadowFilter;
+   import net.wg.gui.components.tooltips.Separator;
+   import flash.display.MovieClip;
 
-        public function getIcont(arg1:String, arg2:String="", arg3:Boolean=false, arg4:Boolean=false):String
-        {
-            var loc1:*=net.wg.gui.components.controls.IconText.EMPTY;
-            var loc2:*=arg1;
-            switch (loc2) 
-            {
-                case "xp":
-                {
-                    loc1 = arg4 ? net.wg.gui.components.controls.IconText.ELITE_XP : net.wg.gui.components.controls.IconText.XP;
-                    break;
-                }
-                case "doubleXPFactor":
-                {
-                    loc1 = net.wg.gui.components.controls.IconText.DOUBLE_XP_FACTOR;
-                    break;
-                }
-                case "actionXPFactor":
-                {
-                    loc1 = net.wg.gui.components.controls.IconText.ACTION_XP_FACTOR;
-                    break;
-                }
-                case "unlock_price":
-                {
-                    loc1 = net.wg.gui.components.controls.IconText.XP_PRICE;
-                    break;
-                }
-                case "buy_price_action":
-                {
-                    loc1 = arg3 ? net.wg.gui.components.controls.IconText.CREDITS : net.wg.gui.components.controls.IconText.GOLD;
-                    break;
-                }
-                case "buy_price":
-                case "sell_price":
-                {
-                    if (arg3 && arg2 == "shop" || arg2 == "hangar" && arg3) 
-                    {
-                        loc1 = net.wg.gui.components.controls.IconText.GOLD;
-                    }
-                    else 
-                    {
-                        loc1 = net.wg.gui.components.controls.IconText.CREDITS;
-                    }
-                    break;
-                }
-                default:
-                {
-                    loc1 = net.wg.gui.components.controls.IconText.EMPTY;
-                }
-            }
-            return loc1;
-        }
 
-        public function htmlWrapper(arg1:String, arg2:String="#ffffff", arg3:Number=12, arg4:String="$TextFont", arg5:Boolean=false, arg6:String=""):String
-        {
-            var loc1:*=(loc1 = (loc1 = (loc1 = "") + (arg4 != "" ? " face=\"" + arg4 + "\"" : "")) + (arg2 != "" ? " color=\"" + arg2 + "\"" : "")) + (arg3 ? " size=\"" + arg3 + "\"" : "");
-            arg1 = "<font" + loc1 + ">" + arg1 + "</font>";
-            if (arg5) 
-            {
-                arg1 = "<b>" + arg1 + "</b>";
-            }
-            return arg1 + arg6;
-        }
+   public class Utils extends Object
+   {
+          
+      public function Utils() {
+         super();
+         if(__allowInstantiation)
+         {
+         }
+      }
 
-        public function convertStringColorToNumber(arg1:String):Number
-        {
-            return Number("0x" + arg1.slice(1));
-        }
+      private static var __instance:Utils;
 
-        public function createBlock(arg1:net.wg.gui.components.tooltips.VO.ToolTipBlockVO, arg2:Number):net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO
-        {
-            var loc6:*=NaN;
-            var loc14:*=null;
-            var loc15:*=null;
-            var loc16:*=null;
-            var loc1:*=0;
-            var loc2:*=new flash.text.TextFormat();
-            var loc3:*=0;
-            var loc4:*="$TextFont";
-            var loc5:*=false;
-            loc6 = 0;
-            var loc7:*=new Vector.<net.wg.gui.components.controls.IconText>();
-            var loc8:*=[];
-            var loc9:*=null;
-            var loc10:*=null;
-            if (arg1.header) 
-            {
-                loc10 = new flash.text.TextField();
-                loc2.leading = -3;
-                loc2.align = flash.text.TextFormatAlign.LEFT;
-                (loc10 = new flash.text.TextField()).name = arg1.childrenNamePrefix + "_header";
-                loc10.x = arg2;
-                loc10.y = arg1.startYPos;
-                loc10.width = 800;
-                loc10.height = 10;
-                loc10.autoSize = flash.text.TextFormatAlign.LEFT;
-                loc10.multiline = true;
-                loc10.htmlText = this.htmlWrapper(arg1.header, this.COLOR_BLOCK_HEADER, 14, "$TitleFont", true);
-                loc10.setTextFormat(loc2);
-                loc10.width = loc10.textWidth;
-                loc6 = Math.max(loc6, loc10.width);
-                arg1.contener.addChild(loc10);
-                arg1.startYPos = arg1.startYPos + (loc10.textHeight + 12 ^ 0);
-            }
-            loc2.leading = 2;
-            loc2.align = flash.text.TextFormatAlign.RIGHT;
-            loc2.size = 11;
-            loc2.font = loc4;
-            var loc11:*=0;
-            var loc12:*=arg1.startYPos;
-            (loc9 = new flash.text.TextField()).name = arg1.childrenNamePrefix + "_left";
-            loc9.x = arg2;
-            loc9.y = loc12;
-            loc9.width = 300;
-            loc9.height = 10;
-            loc9.autoSize = flash.text.TextFormatAlign.RIGHT;
-            loc9.multiline = true;
-            loc9.wordWrap = true;
-            loc9.htmlText = arg1.leftText;
-            loc9.setTextFormat(loc2);
-            loc9.height = loc9.textHeight + 6;
-            loc9.width = loc9.textWidth + 5 > this.LEFT_TEXTFIELD_MIN_WIDTH ? loc9.textWidth + 5 : this.LEFT_TEXTFIELD_MIN_WIDTH;
-            loc1 = Math.max(loc9.width, loc1);
-            loc6 = Math.max(loc6, loc1);
-            loc11 = loc9.getLineMetrics(0).height + loc2.leading + 0.3;
-            arg1.contener.addChild(loc9);
-            var loc13:*=arg1.rightTextList.length;
-            loc3 = 0;
-            while (loc3 < loc13) 
-            {
-                (loc14 = App.utils.classFactory.getComponent("IconText", net.wg.gui.components.controls.IconText)).name = arg1.childrenNamePrefix + "_iconText_" + loc3;
-                loc14.x = arg2 + this.LEFT_TEXTFIELD_MIN_WIDTH + this.MARGIN_BEETWEEN_LEFT_AND_RIGHT_BLOCKS;
-                loc14.y = Math.round(loc12);
-                loc14.textAlign = flash.text.TextFormatAlign.LEFT;
-                loc14.textColor = arg1.rightTextColor;
-                loc14.iconPosition = flash.text.TextFormatAlign.LEFT;
-                loc14.textFont = loc4;
-                loc14.textSize = 11;
-                loc14.textFieldYOffset = 0;
-                if (arg1.rightTextCSS) 
-                {
-                    loc14.css = arg1.rightTextCSS;
-                }
-                loc15 = net.wg.gui.components.tooltips.VO.ToolTipBlockRightListItemVO(arg1.rightTextList[loc3]);
-                loc14.xCorrect = loc15.textXOffset;
-                loc14.icon = loc15.icon;
-                loc14.text = loc15.text;
-                loc14.textField.htmlText = loc15.text;
-                loc14.textField.width = loc14.textField.textWidth + 4;
-                loc14.iconClip.y = loc15.textYOffset;
-                loc14.validateNow();
-                if (!(loc14.iconClip.currentFrame == 1) && !loc5) 
-                {
-                    loc5 = true;
-                }
-                loc12 = loc12 + loc11;
-                arg1.contener.addChild(loc14);
-                loc7.push(loc14);
-                ++loc3;
-            }
-            if (!loc5) 
-            {
-                loc13 = loc7.length;
-                loc3 = 0;
-                while (loc3 < loc13) 
-                {
-                    (loc16 = loc7[loc3]).xCorrect = -17;
-                    loc16.validateNow();
-                    loc6 = Math.max(loc6, loc16.x + loc16.textField.x + loc16.textField.width);
-                    ++loc3;
-                }
-            }
-            arg1.startYPos = Math.round(loc12) + this.MARGIN_AFTER_BLOCK;
-            return new net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO(arg1.startYPos, loc9, loc7, loc8, loc10, loc5, loc1, loc6);
-        }
+      private static var __allowInstantiation:Boolean = false;
 
-        public function getStatusColor(arg1:String):net.wg.gui.components.tooltips.VO.ToolTipStatusColorsVO
-        {
-            var loc1:*=new net.wg.gui.components.tooltips.VO.ToolTipStatusColorsVO();
-            var loc2:*=0;
-            var loc3:*=0;
-            var loc4:*=0;
-            var loc5:*=0;
-            var loc7:*=arg1;
-            switch (loc7) 
-            {
-                case this.STATUS_ADDITIONAL:
-                {
-                    loc1.textColor = 16761699;
-                    loc1.filters = [];
-                    return loc1;
-                }
-                case this.STATUS_CRITICAL:
-                {
-                    loc1.textColor = 16721687;
-                    loc2 = 16711680;
-                    loc3 = 0.5;
-                    loc4 = 0.27;
-                    loc5 = 11;
-                    break;
-                }
-                case this.STATUS_WARNING:
-                {
-                    loc1.textColor = 16117989;
-                    loc2 = 15521204;
-                    loc3 = 0.3;
-                    loc4 = 0.11;
-                    loc5 = 11;
-                    break;
-                }
-                case this.STATUS_INFO:
-                default:
-                {
-                    loc1.textColor = 8041216;
-                    loc2 = 3997440;
-                    loc3 = 0.5;
-                    loc4 = 0.24;
-                    loc5 = 11;
-                    break;
-                }
-            }
-            loc1.filters = [];
-            var loc6:*;
-            (loc6 = new flash.filters.DropShadowFilter()).distance = 0;
-            loc6.angle = 0;
-            loc6.color = loc2;
-            loc6.alpha = loc4;
-            loc6.blurX = loc5;
-            loc6.blurY = loc5;
-            loc6.strength = loc3;
-            loc6.quality = 3;
-            loc6.inner = false;
-            loc6.knockout = false;
-            loc6.hideObject = false;
-            loc1.filters.push(loc6);
-            return loc1;
-        }
-
-        public function createSeparate(arg1:flash.display.MovieClip):net.wg.gui.components.tooltips.Separator
-        {
-            var loc1:*=App.utils.classFactory.getComponent("SeparatorUI", net.wg.gui.components.tooltips.Separator);
-            arg1.addChild(loc1);
-            return loc1;
-        }
-
-        public static function get instance():net.wg.gui.components.tooltips.helpers.Utils
-        {
-            if (!__instance) 
-            {
-                __allowInstantiation = true;
-                __instance = new Utils();
-                __allowInstantiation = false;
-            }
-            return __instance;
-        }
-
-        
-        {
+      public static function get instance() : Utils {
+         if(!__instance)
+         {
+            __allowInstantiation = true;
+            __instance = new Utils();
             __allowInstantiation = false;
-        }
+         }
+         return __instance;
+      }
 
-        public const COLOR_HEADER:String="#fdf4ce";
+      public const COLOR_HEADER:String = "#fdf4ce";
 
-        public const COLOR_BLOCK_HEADER:String="#4c4b41";
+      public const COLOR_BLOCK_HEADER:String = "#4c4b41";
 
-        public const COLOR_NUMBER:String="#d3d3ca";
+      public const COLOR_NUMBER:String = "#d3d3ca";
 
-        public const COLOR_ALERT:String="#ff0000";
+      public const COLOR_ALERT:String = "#ff0000";
 
-        public const COLOR_NORMAL:String="#7b7969";
+      public const COLOR_NORMAL:String = "#8c8c7c";
 
-        public const COLOR_SUB_NORMAL:String="#4c4b41";
+      public const COLOR_SUB_NORMAL:String = "#4a4a3f";
 
-        public const COLOR_ADD_INFO:String="#ccad77";
+      public const COLOR_ADD_INFO:String = "#ccad77";
 
-        public const STATUS_ADDITIONAL:String="additional";
+      public const STATUS_ADDITIONAL:String = "additional";
 
-        public const STATUS_CRITICAL:String="critical";
+      public const STATUS_CRITICAL:String = "critical";
 
-        public const STATUS_WARNING:String="warning";
+      public const STATUS_WARNING:String = "warning";
 
-        public const STATUS_INFO:String="info";
+      public const STATUS_INFO:String = "info";
 
-        internal const LEFT_TEXTFIELD_MIN_WIDTH:Number=54;
+      private const LEFT_TEXTFIELD_MIN_WIDTH:Number = 54;
 
-        public const MARGIN_AFTER_BLOCK:Number=15;
+      public const MARGIN_AFTER_BLOCK:Number = 15;
 
-        public const MARGIN_BEETWEEN_LEFT_AND_RIGHT_BLOCKS:Number=3;
+      public const MARGIN_BEETWEEN_LEFT_AND_RIGHT_BLOCKS:Number = 3;
 
-        public const MARGIN_AFTER_SEPARATE:Number=11;
+      public const MARGIN_AFTER_SEPARATE:Number = 11;
 
-        internal static var __instance:net.wg.gui.components.tooltips.helpers.Utils;
+      public const MARGIN_AFTER_SUBHEADER:Number = 12;
 
-        internal static var __allowInstantiation:Boolean=false;
-    }
+      public function getIcont(param1:String, param2:String="", param3:Boolean=false, param4:Boolean=false) : String {
+         var _loc5_:String = IconText.EMPTY;
+         switch(param1)
+         {
+            case "xp":
+               _loc5_ = param4?IconText.ELITE_XP:IconText.XP;
+               break;
+            case "doubleXPFactor":
+               _loc5_ = IconText.DOUBLE_XP_FACTOR;
+               break;
+            case "actionXPFactor":
+               _loc5_ = IconText.ACTION_XP_FACTOR;
+               break;
+            case "unlock_price":
+               _loc5_ = IconText.XP_PRICE;
+               break;
+            case "buy_price_action":
+               _loc5_ = param3?IconText.CREDITS:IconText.GOLD;
+               break;
+            case "buy_price":
+            case "sell_price":
+               if((param3) && param2 == "shop" || param2 == "hangar" && (param3))
+               {
+                  _loc5_ = IconText.GOLD;
+               }
+               else
+               {
+                  _loc5_ = IconText.CREDITS;
+               }
+               break;
+            default:
+               _loc5_ = IconText.EMPTY;
+         }
+         return _loc5_;
+      }
+
+      public function htmlWrapper(param1:String, param2:String="#ffffff", param3:Number=12, param4:String="$TextFont", param5:Boolean=false, param6:String="") : String {
+         var _loc7_:* = "";
+         _loc7_ = _loc7_ + (param4 == ""?"":" face=\"" + param4 + "\"");
+         _loc7_ = _loc7_ + (param2 == ""?"":" color=\"" + param2 + "\"");
+         _loc7_ = _loc7_ + (!param3?"":" size=\"" + param3 + "\"");
+         var param1:* = "<font" + _loc7_ + ">" + param1 + "</font>";
+         if(param5)
+         {
+            param1 = "<b>" + param1 + "</b>";
+         }
+         return param1 + param6;
+      }
+
+      public function convertStringColorToNumber(param1:String) : Number {
+         return Number("0x" + param1.slice(1));
+      }
+
+      public function createBlock(param1:ToolTipBlockVO, param2:Number) : ToolTipBlockResultVO {
+         var _loc4_:TextFormat = null;
+         var _loc6_:String = null;
+         var _loc11_:TextField = null;
+         var _loc16_:IconText = null;
+         var _loc17_:ToolTipBlockRightListItemVO = null;
+         var _loc18_:IconText = null;
+         var _loc3_:Number = 0;
+         _loc4_ = new TextFormat();
+         var _loc5_:uint = 0;
+         _loc6_ = "$TextFont";
+         var _loc7_:* = false;
+         var _loc8_:Number = 0;
+         var _loc9_:Vector.<IconText> = new Vector.<IconText>();
+         var _loc10_:Array = [];
+         _loc11_ = null;
+         var _loc12_:TextField = null;
+         if(param1.header)
+         {
+            _loc12_ = this.addHeader(param1.childrenNamePrefix + "_header",param2,param1.startYPos,param1.header);
+            _loc12_.width = _loc12_.textWidth;
+            _loc8_ = Math.max(_loc8_,_loc12_.width);
+            param1.contener.addChild(_loc12_);
+            param1.startYPos = param1.startYPos + (_loc12_.textHeight + this.MARGIN_AFTER_SUBHEADER ^ 0);
+         }
+         _loc4_.leading = 2;
+         _loc4_.align = TextFormatAlign.RIGHT;
+         _loc4_.size = 11;
+         _loc4_.font = _loc6_;
+         var _loc13_:Number = 0;
+         var _loc14_:Number = param1.startYPos;
+         _loc11_ = new TextField();
+         _loc11_.name = param1.childrenNamePrefix + "_left";
+         _loc11_.x = param2;
+         _loc11_.y = _loc14_;
+         _loc11_.width = 300;
+         _loc11_.height = 10;
+         _loc11_.autoSize = TextFormatAlign.RIGHT;
+         _loc11_.multiline = true;
+         _loc11_.wordWrap = true;
+         _loc11_.htmlText = param1.leftText;
+         _loc11_.setTextFormat(_loc4_);
+         _loc11_.height = _loc11_.textHeight + 6;
+         _loc11_.width = _loc11_.textWidth + 5 > this.LEFT_TEXTFIELD_MIN_WIDTH?_loc11_.textWidth + 5:this.LEFT_TEXTFIELD_MIN_WIDTH;
+         _loc3_ = Math.max(_loc11_.width,_loc3_);
+         _loc8_ = Math.max(_loc8_,_loc3_);
+         _loc13_ = _loc11_.getLineMetrics(0).height + _loc4_.leading + 0.3;
+         param1.contener.addChild(_loc11_);
+         var _loc15_:uint = param1.rightTextList.length;
+         _loc5_ = 0;
+         while(_loc5_ < _loc15_)
+         {
+            _loc16_ = App.utils.classFactory.getComponent("IconText",IconText);
+            _loc16_.name = param1.childrenNamePrefix + "_iconText_" + _loc5_;
+            _loc16_.x = param2 + this.LEFT_TEXTFIELD_MIN_WIDTH + this.MARGIN_BEETWEEN_LEFT_AND_RIGHT_BLOCKS;
+            _loc16_.y = Math.round(_loc14_);
+            _loc16_.textAlign = TextFormatAlign.LEFT;
+            _loc16_.textColor = param1.rightTextColor;
+            _loc16_.iconPosition = TextFormatAlign.LEFT;
+            _loc16_.textFont = _loc6_;
+            _loc16_.textSize = 11;
+            _loc16_.textFieldYOffset = 0;
+            if(param1.rightTextCSS)
+            {
+               _loc16_.css = param1.rightTextCSS;
+            }
+            _loc17_ = ToolTipBlockRightListItemVO(param1.rightTextList[_loc5_]);
+            _loc16_.xCorrect = _loc17_.textXOffset;
+            _loc16_.icon = _loc17_.icon;
+            _loc16_.text = _loc17_.text;
+            _loc16_.textField.htmlText = _loc17_.text;
+            _loc16_.textField.width = _loc16_.textField.textWidth + 4;
+            _loc16_.iconClip.y = _loc17_.textYOffset;
+            _loc16_.validateNow();
+            if(!(_loc16_.iconClip.currentFrame == 1) && !_loc7_)
+            {
+               _loc7_ = true;
+            }
+            _loc14_ = _loc14_ + _loc13_;
+            param1.contener.addChild(_loc16_);
+            _loc9_.push(_loc16_);
+            _loc5_++;
+         }
+         if(!_loc7_)
+         {
+            _loc15_ = _loc9_.length;
+            _loc5_ = 0;
+            while(_loc5_ < _loc15_)
+            {
+               _loc18_ = _loc9_[_loc5_];
+               _loc18_.xCorrect = -17;
+               _loc18_.validateNow();
+               _loc8_ = Math.max(_loc8_,_loc18_.x + _loc18_.textField.x + _loc18_.textField.width);
+               _loc5_++;
+            }
+         }
+         param1.startYPos = Math.round(_loc14_) + this.MARGIN_AFTER_BLOCK;
+         return new ToolTipBlockResultVO(param1.startYPos,_loc11_,_loc9_,_loc10_,_loc12_,_loc7_,_loc3_,_loc8_);
+      }
+
+      public function addHeader(param1:String, param2:Number, param3:Number, param4:String) : TextField {
+         var _loc5_:TextField = null;
+         var _loc6_:TextFormat = new TextFormat();
+         _loc5_ = new TextField();
+         _loc6_.leading = -3;
+         _loc6_.align = TextFormatAlign.LEFT;
+         _loc5_ = new TextField();
+         _loc5_.name = param1;
+         _loc5_.x = param2;
+         _loc5_.y = param3;
+         _loc5_.width = 800;
+         _loc5_.height = 10;
+         _loc5_.autoSize = TextFormatAlign.LEFT;
+         _loc5_.multiline = true;
+         _loc5_.htmlText = this.htmlWrapper(param4,this.COLOR_BLOCK_HEADER,14,"$TitleFont",true);
+         _loc5_.setTextFormat(_loc6_);
+         return _loc5_;
+      }
+
+      public function getStatusColor(param1:String) : ToolTipStatusColorsVO {
+         var _loc2_:ToolTipStatusColorsVO = new ToolTipStatusColorsVO();
+         var _loc3_:uint = 0;
+         var _loc4_:Number = 0;
+         var _loc5_:Number = 0;
+         var _loc6_:Number = 0;
+         switch(param1)
+         {
+            case this.STATUS_ADDITIONAL:
+               _loc2_.textColor = 16761699;
+               _loc2_.filters = [];
+               return _loc2_;
+            case this.STATUS_CRITICAL:
+               _loc2_.textColor = 16721687;
+               _loc3_ = 16711680;
+               _loc4_ = 0.5;
+               _loc5_ = 0.27;
+               _loc6_ = 11;
+               break;
+            case this.STATUS_WARNING:
+               _loc2_.textColor = 16117989;
+               _loc3_ = 15521204;
+               _loc4_ = 0.3;
+               _loc5_ = 0.11;
+               _loc6_ = 11;
+               break;
+            case this.STATUS_INFO:
+            default:
+               _loc2_.textColor = 8041216;
+               _loc3_ = 3997440;
+               _loc4_ = 0.5;
+               _loc5_ = 0.24;
+               _loc6_ = 11;
+         }
+         _loc2_.filters = [];
+         var _loc7_:DropShadowFilter = new DropShadowFilter();
+         _loc7_.distance = 0;
+         _loc7_.angle = 0;
+         _loc7_.color = _loc3_;
+         _loc7_.alpha = _loc5_;
+         _loc7_.blurX = _loc6_;
+         _loc7_.blurY = _loc6_;
+         _loc7_.strength = _loc4_;
+         _loc7_.quality = 3;
+         _loc7_.inner = false;
+         _loc7_.knockout = false;
+         _loc7_.hideObject = false;
+         _loc2_.filters.push(_loc7_);
+         return _loc2_;
+      }
+
+      public function createSeparate(param1:MovieClip) : Separator {
+         var _loc2_:Separator = App.utils.classFactory.getComponent("SeparatorUI",Separator);
+         param1.addChild(_loc2_);
+         return _loc2_;
+      }
+   }
+
 }

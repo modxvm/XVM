@@ -1,64 +1,56 @@
-package net.wg.gui.lobby.hangar.maintenance 
+package net.wg.gui.lobby.hangar.maintenance
 {
-    import flash.display.*;
-    import flash.text.*;
-    import scaleform.clik.controls.*;
-    
-    public class MaintenanceStatusIndicator extends scaleform.clik.controls.StatusIndicator
-    {
-        public function MaintenanceStatusIndicator()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.controls.StatusIndicator;
+   import flash.display.MovieClip;
+   import flash.text.TextField;
 
-        public function setDivisor(arg1:Number, arg2:Number):void
-        {
-            this.divisor_mc.visible = arg1 && arg2;
-            var loc1:*=(width - 8) * arg1 / arg2;
-            this.divisor_mc.x = Math.round(loc1 / scaleX);
-            return;
-        }
 
-        public function get flashing():Boolean
-        {
-            return this._flashing;
-        }
+   public class MaintenanceStatusIndicator extends StatusIndicator
+   {
+          
+      public function MaintenanceStatusIndicator() {
+         super();
+      }
 
-        public function set flashing(arg1:Boolean):void
-        {
-            this._flashing = arg1;
-            this.alert_mc.visible = this._flashing;
-            return;
-        }
+      private var _flashing:Boolean = true;
 
-        public function get label():String
-        {
-            return this._label;
-        }
+      private var _divisor:Number = -1;
 
-        public function set label(arg1:String):void
-        {
-            this._label = arg1;
-            this.textField.text = this._label;
-            return;
-        }
+      private var _label:String = "";
 
-        public override function toString():String
-        {
-            return "[Wargaming ProgressBar " + name + "]";
-        }
+      public var alert_mc:MovieClip;
 
-        internal var _flashing:Boolean=true;
+      public var divisor_mc:MovieClip;
 
-        internal var _divisor:Number=-1;
+      public var textField:TextField;
 
-        internal var _label:String="";
+      public function setDivisor(param1:Number, param2:Number) : void {
+         this.divisor_mc.visible = (param1) && (param2);
+         var _loc3_:Number = (width - 8) * param1 / param2;
+         this.divisor_mc.x = Math.round(_loc3_ / scaleX);
+      }
 
-        public var alert_mc:flash.display.MovieClip;
+      public function get flashing() : Boolean {
+         return this._flashing;
+      }
 
-        public var divisor_mc:flash.display.MovieClip;
+      public function set flashing(param1:Boolean) : void {
+         this._flashing = param1;
+         this.alert_mc.visible = this._flashing;
+      }
 
-        public var textField:flash.text.TextField;
-    }
+      public function get label() : String {
+         return this._label;
+      }
+
+      public function set label(param1:String) : void {
+         this._label = param1;
+         this.textField.text = this._label;
+      }
+
+      override public function toString() : String {
+         return "[Wargaming ProgressBar " + name + "]";
+      }
+   }
+
 }

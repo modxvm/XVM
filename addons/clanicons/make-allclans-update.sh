@@ -7,8 +7,8 @@ echo "Updating VN"
 . update-vn.sh
 echo "Updating KR"
 . update-kr.sh
-echo "Updating SEA"
-. update-sea.sh
+echo "Updating SG"
+. update-sg.sh
 echo "Updating NA"
 . update-na.sh
 echo "Updating EU"
@@ -16,4 +16,5 @@ echo "Updating EU"
 echo "Updating RU"
 . update-ru.sh
 
+cd ..
 echo "Icons of all clans updated"

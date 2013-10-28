@@ -1,51 +1,50 @@
-package net.wg.infrastructure.base 
+package net.wg.infrastructure.base
 {
-    import net.wg.infrastructure.interfaces.*;
-    
-    public class StoredWindowGeometry extends Object implements net.wg.infrastructure.interfaces.IWindowGeometry
-    {
-        public function StoredWindowGeometry(arg1:Number, arg2:Number, arg3:Number, arg4:Number)
-        {
-            super();
-            this._x = arg1;
-            this._y = arg2;
-            this._width = arg3;
-            this._height = arg4;
-            this.doPositionOnce = false;
-            return;
-        }
+   import net.wg.infrastructure.interfaces.IWindowGeometry;
+   import net.wg.infrastructure.interfaces.IWindow;
 
-        public function canOverwrite():Boolean
-        {
-            return false;
-        }
 
-        public function setSize(arg1:net.wg.infrastructure.interfaces.IWindow):Boolean
-        {
-            arg1.updateSize(this._width, this._height);
-            return true;
-        }
+   public class StoredWindowGeometry extends Object implements IWindowGeometry
+   {
+          
+      public function StoredWindowGeometry(param1:Number, param2:Number, param3:Number, param4:Number) {
+         super();
+         this._x = param1;
+         this._y = param2;
+         this._width = param3;
+         this._height = param4;
+         this.doPositionOnce = false;
+      }
 
-        public function setPosition(arg1:net.wg.infrastructure.interfaces.IWindow):Boolean
-        {
-            var loc1:*=false;
-            if (!this.doPositionOnce && arg1) 
-            {
-                arg1.x = this._x;
-                arg1.y = this._y;
-                loc1 = true;
-            }
-            return loc1;
-        }
+      private var _x:Number;
 
-        internal var _x:Number;
+      private var _y:Number;
 
-        internal var _y:Number;
+      private var _width:Number;
 
-        internal var _width:Number;
+      private var _height:Number;
 
-        internal var _height:Number;
+      private var doPositionOnce:Boolean;
 
-        internal var doPositionOnce:Boolean;
-    }
+      public function canOverwrite() : Boolean {
+         return false;
+      }
+
+      public function setSize(param1:IWindow) : Boolean {
+         param1.updateSize(this._width,this._height);
+         return true;
+      }
+
+      public function setPosition(param1:IWindow) : Boolean {
+         var _loc2_:* = false;
+         if(!this.doPositionOnce && (param1))
+         {
+            param1.x = this._x;
+            param1.y = this._y;
+            _loc2_ = true;
+         }
+         return _loc2_;
+      }
+   }
+
 }

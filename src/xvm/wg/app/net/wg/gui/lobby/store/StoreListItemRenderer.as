@@ -1,224 +1,192 @@
-package net.wg.gui.lobby.store 
+package net.wg.gui.lobby.store
 {
-    import flash.events.*;
-    import flash.geom.*;
-    import flash.text.*;
-    import net.wg.data.VO.*;
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.exceptions.*;
-    import net.wg.infrastructure.managers.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.utils.*;
-    
-    public class StoreListItemRenderer extends net.wg.gui.lobby.store.ComplexListItemRenderer
-    {
-        public function StoreListItemRenderer()
-        {
-            super();
-            return;
-        }
+   import flash.text.TextField;
+   import scaleform.clik.utils.Constraints;
+   import flash.events.MouseEvent;
+   import flash.geom.Point;
+   import scaleform.clik.constants.InvalidationType;
+   import net.wg.data.VO.StoreTableData;
+   import net.wg.infrastructure.exceptions.AbstractException;
+   import net.wg.data.constants.Errors;
+   import net.wg.infrastructure.managers.ITooltipMgr;
+   import net.wg.data.constants.Tooltips;
+   import net.wg.data.constants.Currencies;
+   import net.wg.data.constants.FittingTypes;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            constraints.addElement(textField.name, textField, scaleform.clik.utils.Constraints.ALL);
-            constraints.addElement(descField.name, descField, scaleform.clik.utils.Constraints.ALL);
-            constraints.addElement(this.credits.name, this.credits, scaleform.clik.utils.Constraints.RIGHT);
-            addEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.onMouseClickHandler);
-            return;
-        }
 
-        protected override function draw():void
-        {
-            var loc1:*=null;
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+   public class StoreListItemRenderer extends ComplexListItemRenderer
+   {
+          
+      public function StoreListItemRenderer() {
+         super();
+      }
+
+      public var credits:ModuleRendererCredits = null;
+
+      public var errorField:TextField = null;
+
+      override protected function configUI() : void {
+         super.configUI();
+         constraints.addElement(textField.name,textField,Constraints.ALL);
+         constraints.addElement(descField.name,descField,Constraints.ALL);
+         constraints.addElement(this.credits.name,this.credits,Constraints.RIGHT);
+         addEventListener(MouseEvent.MOUSE_DOWN,this.onMouseClickHandler);
+      }
+
+      override protected function draw() : void {
+         var _loc1_:Point = null;
+         if(isInvalid(InvalidationType.DATA))
+         {
+            this.update();
+            if(enabled)
             {
-                this.update();
-                if (enabled) 
-                {
-                    loc1 = new flash.geom.Point(mouseX, mouseY);
-                    loc1 = this.localToGlobal(loc1);
-                    if (this.hitTestPoint(loc1.x, loc1.y, true)) 
-                    {
-                        setState("over");
-                        dispatchEvent(new flash.events.MouseEvent(flash.events.MouseEvent.ROLL_OVER));
-                    }
-                }
+               _loc1_ = new Point(mouseX,mouseY);
+               _loc1_ = this.localToGlobal(_loc1_);
+               if(this.hitTestPoint(_loc1_.x,_loc1_.y,true))
+               {
+                  setState("over");
+                  dispatchEvent(new MouseEvent(MouseEvent.ROLL_OVER));
+               }
             }
-            super.draw();
-            return;
-        }
+         }
+         super.draw();
+      }
 
-        protected function update():void
-        {
-            var loc1:*=null;
-            var loc2:*=0;
-            var loc3:*=0;
-            var loc4:*=NaN;
-            var loc5:*=NaN;
-            var loc6:*=null;
-            if (data) 
+      protected function update() : void {
+         var _loc1_:StoreTableData = null;
+         var _loc2_:* = 0;
+         var _loc3_:* = 0;
+         var _loc4_:* = NaN;
+         var _loc5_:* = NaN;
+         var _loc6_:String = null;
+         if(data)
+         {
+            if(App.instance)
             {
-                if (App.instance) 
-                {
-                    loc6 = "data in shopTableItemRenderer must extends StoreTableData class!";
-                    App.utils.asserter.assert(data is net.wg.data.VO.StoreTableData, loc6);
-                }
-                loc1 = net.wg.data.VO.StoreTableData(data);
-                loc2 = 0;
-                loc3 = 1;
-                loc4 = loc1.price[loc2];
-                loc5 = loc1.price[loc3];
-                visible = true;
-                this.onPricesCalculated(loc5, loc4, loc1);
-                textField.text = loc1.name;
-                descField.text = loc1.desc;
-                this.updateTexts(loc1, loc5, loc4);
-                if (hitTestPoint(App.stage.mouseX, App.stage.mouseY, true)) 
-                {
-                    this.shopTooltip();
-                }
+               _loc6_ = "data in shopTableItemRenderer must extends StoreTableData class!";
+               App.utils.asserter.assert(data  is  StoreTableData,_loc6_);
             }
-            else 
+            _loc1_ = StoreTableData(data);
+            _loc2_ = 0;
+            _loc3_ = 1;
+            _loc4_ = _loc1_.price[_loc2_];
+            _loc5_ = _loc1_.price[_loc3_];
+            visible = true;
+            this.onPricesCalculated(_loc5_,_loc4_,_loc1_);
+            textField.text = _loc1_.name;
+            descField.text = _loc1_.desc;
+            this.updateTexts(_loc1_,_loc5_,_loc4_);
+            if(hitTestPoint(App.stage.mouseX,App.stage.mouseY,true))
             {
-                visible = false;
+               this.shopTooltip();
             }
-            return;
-        }
+         }
+         else
+         {
+            visible = false;
+         }
+      }
 
-        protected function onPricesCalculated(arg1:Number, arg2:Number, arg3:net.wg.data.VO.StoreTableData):void
-        {
-            return;
-        }
+      protected function onPricesCalculated(param1:Number, param2:Number, param3:StoreTableData) : void {
+          
+      }
 
-        protected function updateTexts(arg1:net.wg.data.VO.StoreTableData, arg2:Number, arg3:Number):void
-        {
-            return;
-        }
+      protected function updateTexts(param1:StoreTableData, param2:Number, param3:Number) : void {
+          
+      }
 
-        protected function getTooltipMapping():net.wg.gui.lobby.store.StoreTooltipMapVO
-        {
-            throw new net.wg.infrastructure.exceptions.AbstractException("InventoryListItemRenderer::getTooltipMapping" + net.wg.data.constants.Errors.ABSTRACT_INVOKE);
-        }
+      protected function getTooltipMapping() : StoreTooltipMapVO {
+         throw new AbstractException("InventoryListItemRenderer::getTooltipMapping" + Errors.ABSTRACT_INVOKE);
+      }
 
-        protected final function infoItem():void
-        {
-            dispatchEvent(new net.wg.gui.lobby.store.StoreEvent(net.wg.gui.lobby.store.StoreEvent.INFO, net.wg.data.VO.StoreTableData(data)));
-            return;
-        }
+      protected final function infoItem() : void {
+         dispatchEvent(new StoreEvent(StoreEvent.INFO,StoreTableData(data)));
+      }
 
-        protected final function getHelper():net.wg.gui.lobby.store.StoreHelper
-        {
-            return net.wg.gui.lobby.store.StoreHelper.getInstance();
-        }
+      protected final function getHelper() : StoreHelper {
+         return StoreHelper.getInstance();
+      }
 
-        protected function onLeftButtonClick():void
-        {
-            return;
-        }
+      protected function onLeftButtonClick() : void {
+          
+      }
 
-        protected function onRightButtonClick():void
-        {
-            this.infoItem();
-            return;
-        }
+      protected function onRightButtonClick() : void {
+         this.infoItem();
+      }
 
-        protected override function handleMouseRollOut(arg1:flash.events.MouseEvent):void
-        {
-            if (App.instance) 
+      override protected function handleMouseRollOut(param1:MouseEvent) : void {
+         if(App.instance)
+         {
+            App.toolTipMgr.hide();
+         }
+         if(enabled)
+         {
+            if(!_focused && !_displayFocus || !(focusIndicator == null))
             {
-                App.toolTipMgr.hide();
+               setState("out");
             }
-            if (enabled) 
-            {
-                if (!_focused && !_displayFocus || !(focusIndicator == null)) 
-                {
-                    setState("out");
-                }
-            }
-            return;
-        }
+         }
+      }
 
-        protected override function handleMousePress(arg1:flash.events.MouseEvent):void
-        {
-            if (App.instance) 
-            {
-                App.toolTipMgr.hide();
-            }
-            if (enabled) 
-            {
-                setState("down");
-                if (!autoRepeat) 
-                {
-                };
-            }
-            return;
-        }
+      override protected function handleMousePress(param1:MouseEvent) : void {
+         if(App.instance)
+         {
+            App.toolTipMgr.hide();
+         }
+         super.handleMousePress(param1);
+      }
 
-        protected override function handleMouseRollOver(arg1:flash.events.MouseEvent):void
-        {
-            super.handleMouseRollOver(arg1);
-            this.shopTooltip();
-            return;
-        }
+      override protected function handleMouseRollOver(param1:MouseEvent) : void {
+         super.handleMouseRollOver(param1);
+         this.shopTooltip();
+      }
 
-        internal function shopTooltip():void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            var loc3:*=null;
-            var loc4:*=NaN;
-            if (App.instance) 
+      private function shopTooltip() : void {
+         var _loc1_:ITooltipMgr = null;
+         var _loc2_:StoreTableData = null;
+         var _loc3_:String = null;
+         var _loc4_:* = NaN;
+         if(App.instance)
+         {
+            _loc1_ = App.toolTipMgr;
+            _loc2_ = StoreTableData(data);
+            switch(_loc2_.itemTypeName)
             {
-                loc1 = App.toolTipMgr;
-                loc2 = net.wg.data.VO.StoreTableData(data);
-                var loc5:*=loc2.itemTypeName;
-                switch (loc5) 
-                {
-                    case net.wg.data.constants.FittingTypes.VEHICLE:
-                    {
-                        loc1.showSpecial(this.getTooltipMapping().vehId, null, loc2.id);
-                        break;
-                    }
-                    case net.wg.data.constants.FittingTypes.SHELL:
-                    {
-                        loc1.showSpecial(this.getTooltipMapping().shellId, null, loc2.id, loc2.inventoryCount);
-                        break;
-                    }
-                    default:
-                    {
-                        loc3 = this.getTooltipMapping().defaultId;
-                        if (loc3 != net.wg.data.constants.Tooltips.INVENTORY_MODULE) 
-                        {
-                            loc1.showSpecial(loc3, null, loc2.id, loc2.inventoryCount, loc2.vehicleCount);
-                        }
-                        else 
-                        {
-                            loc4 = loc2.currency != net.wg.data.constants.Currencies.GOLD ? loc2.credits : loc2.gold;
-                            loc1.showSpecial(loc3, null, loc2.id, loc4, loc2.currency, loc2.inventoryCount, loc2.vehicleCount);
-                        }
-                        break;
-                    }
-                }
+               case FittingTypes.VEHICLE:
+                  _loc1_.showSpecial(this.getTooltipMapping().vehId,null,_loc2_.id);
+                  break;
+               case FittingTypes.SHELL:
+                  _loc1_.showSpecial(this.getTooltipMapping().shellId,null,_loc2_.id,_loc2_.inventoryCount);
+                  break;
+               default:
+                  _loc3_ = this.getTooltipMapping().defaultId;
+                  if(_loc3_ == Tooltips.INVENTORY_MODULE)
+                  {
+                     _loc4_ = _loc2_.currency == Currencies.GOLD?_loc2_.gold:_loc2_.credits;
+                     _loc1_.showSpecial(_loc3_,null,_loc2_.id,_loc4_,_loc2_.currency,_loc2_.inventoryCount,_loc2_.vehicleCount);
+                  }
+                  else
+                  {
+                     _loc1_.showSpecial(_loc3_,null,_loc2_.id,_loc2_.inventoryCount,_loc2_.vehicleCount);
+                  }
             }
-            return;
-        }
+         }
+      }
 
-        internal function onMouseClickHandler(arg1:flash.events.MouseEvent):void
-        {
-            if (App.utils.commons.isRightButton(arg1)) 
+      private function onMouseClickHandler(param1:MouseEvent) : void {
+         if(App.utils.commons.isRightButton(param1))
+         {
+            this.onRightButtonClick();
+         }
+         else
+         {
+            if((App.utils.commons.isLeftButton(param1)) && (enabled))
             {
-                this.onRightButtonClick();
+               this.onLeftButtonClick();
             }
-            else if (App.utils.commons.isLeftButton(arg1) && enabled) 
-            {
-                this.onLeftButtonClick();
-            }
-            return;
-        }
+         }
+      }
+   }
 
-        public var credits:net.wg.gui.lobby.store.ModuleRendererCredits=null;
-
-        public var errorField:flash.text.TextField=null;
-    }
 }

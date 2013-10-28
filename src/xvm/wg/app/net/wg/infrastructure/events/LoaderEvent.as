@@ -1,38 +1,38 @@
-package net.wg.infrastructure.events 
+package net.wg.infrastructure.events
 {
-    import flash.events.*;
-    import net.wg.infrastructure.interfaces.*;
-    
-    public class LoaderEvent extends flash.events.Event
-    {
-        public function LoaderEvent(arg1:String, arg2:Object, arg3:String=null, arg4:net.wg.infrastructure.interfaces.IView=null)
-        {
-            super(arg1, true, true);
-            this.config = arg2;
-            this.token = arg3;
-            this.view = arg4;
-            return;
-        }
+   import flash.events.Event;
+   import net.wg.infrastructure.interfaces.IView;
 
-        public override function clone():flash.events.Event
-        {
-            return new net.wg.infrastructure.events.LoaderEvent(type, this.config, this.token, this.view);
-        }
 
-        public static const VIEW_LOADED:String="viewLoaded";
+   public class LoaderEvent extends Event
+   {
+          
+      public function LoaderEvent(param1:String, param2:Object, param3:String=null, param4:IView=null) {
+         super(param1,true,true);
+         this.config = param2;
+         this.token = param3;
+         this.view = param4;
+      }
 
-        public static const CURSOR_LOADED:String="cursorLoaded";
+      public static const VIEW_LOADED:String = "viewLoaded";
 
-        public static const WAITING_LOADED:String="waitingLoaded";
+      public static const CURSOR_LOADED:String = "cursorLoaded";
 
-        public static const VIEW_LOAD_ERROR:String="viewLoadError";
+      public static const WAITING_LOADED:String = "waitingLoaded";
 
-        public static const VIEW_INIT_ERROR:String="viewInitError";
+      public static const VIEW_LOAD_ERROR:String = "viewLoadError";
 
-        public var view:net.wg.infrastructure.interfaces.IView;
+      public static const VIEW_INIT_ERROR:String = "viewInitError";
 
-        public var config:Object;
+      public var view:IView;
 
-        public var token:String;
-    }
+      public var config:Object;
+
+      public var token:String;
+
+      override public function clone() : Event {
+         return new LoaderEvent(type,this.config,this.token,this.view);
+      }
+   }
+
 }

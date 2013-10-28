@@ -1,25 +1,26 @@
-package net.wg.gui.lobby.profile.pages.statistics 
+package net.wg.gui.lobby.profile.pages.statistics
 {
-    import net.wg.data.daapi.base.*;
-    
-    public class StatisticsInitVO extends net.wg.data.daapi.base.DAAPIDataClass
-    {
-        public function StatisticsInitVO(arg1:Object)
-        {
-            super(arg1);
-            return;
-        }
+   import net.wg.data.daapi.base.DAAPIDataClass;
 
-        public var mainDropDownMenu:Array;
 
-        public var commonScores:Object;
+   public class StatisticsInitVO extends DAAPIDataClass
+   {
+          
+      public function StatisticsInitVO(param1:Object) {
+         super(param1);
+      }
 
-        public var detailedScores:Object;
+      public var mainDropDownMenu:Array;
 
-        public var charts:Array;
+      public var commonScores:Object;
 
-        public var battlesOnTech:String="";
+      public var detailedScores:Object;
 
-        public var chartsTitles:Array;
-    }
+      public var charts:Array;
+
+      public var battlesOnTech:String = "";
+
+      public var chartsTitles:Array;
+   }
+
 }

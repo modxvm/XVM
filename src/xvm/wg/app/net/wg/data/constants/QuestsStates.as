@@ -1,19 +1,21 @@
-package net.wg.data.constants 
+package net.wg.data.constants
 {
-    public class QuestsStates extends Object
-    {
-        public function QuestsStates()
-        {
-            super();
-            return;
-        }
 
-        public static const DONE:String="done";
 
-        public static const NOT_AVAILABLE:String="notAvailable";
+   public class QuestsStates extends Object
+   {
+          
+      public function QuestsStates() {
+         super();
+      }
 
-        public static const CURRENT:String="current";
+      public static const DONE:String = "done";
 
-        public static const STRATEGIC:String="strategic";
-    }
+      public static const NOT_AVAILABLE:String = "notAvailable";
+
+      public static const CURRENT:String = "current";
+
+      public static const STRATEGIC:String = "strategic";
+   }
+
 }

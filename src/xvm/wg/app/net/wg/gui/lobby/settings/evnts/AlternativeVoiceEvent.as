@@ -1,33 +1,27 @@
-package net.wg.gui.lobby.settings.evnts 
+package net.wg.gui.lobby.settings.evnts
 {
-    import flash.events.*;
-    
-    public class AlternativeVoiceEvent extends flash.events.Event
-    {
-        public function AlternativeVoiceEvent(arg1:String, arg2:String="", arg3:Boolean=true, arg4:Boolean=false)
-        {
-            super(arg1, arg3, arg4);
-            this.modeName = arg2;
-            return;
-        }
+   import flash.events.Event;
 
-        public override function clone():flash.events.Event
-        {
-            return new net.wg.gui.lobby.settings.evnts.AlternativeVoiceEvent(type, this.modeName, bubbles, cancelable);
-        }
 
-        public override function toString():String
-        {
-            return formatToString("AlternativeVoiceEvent", "type", "modeName", "bubbles", "cancelable", "eventPhase");
-        }
+   public class AlternativeVoiceEvent extends Event
+   {
+          
+      public function AlternativeVoiceEvent(param1:String, param2:String=undefined, param3:Boolean=true, param4:Boolean=false) {
+         super(param1,param3,param4);
+         this.modeName = param2;
+      }
 
-        
-        {
-            ON_TEST_ALTERNATIVE_VOICES = "on_alternative_voices";
-        }
+      public static var ON_TEST_ALTERNATIVE_VOICES:String = "on_alternative_voices";
 
-        public var modeName:String="";
+      public var modeName:String = "";
 
-        public static var ON_TEST_ALTERNATIVE_VOICES:String="on_alternative_voices";
-    }
+      override public function clone() : Event {
+         return new AlternativeVoiceEvent(type,this.modeName,bubbles,cancelable);
+      }
+
+      override public function toString() : String {
+         return formatToString("AlternativeVoiceEvent","type","modeName","bubbles","cancelable","eventPhase");
+      }
+   }
+
 }

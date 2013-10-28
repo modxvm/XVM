@@ -1,20 +1,21 @@
-package net.wg.gui.components.advanced 
+package net.wg.gui.components.advanced
 {
-    import flash.display.*;
-    import scaleform.clik.core.*;
-    
-    public class UnClickableShadowBG extends scaleform.clik.core.UIComponent
-    {
-        public function UnClickableShadowBG()
-        {
-            super();
-            this.shadow.buttonMode = true;
-            this.shadow.hitArea = this.hit;
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.display.MovieClip;
 
-        public var shadow:flash.display.MovieClip;
 
-        public var hit:flash.display.MovieClip;
-    }
+   public class UnClickableShadowBG extends UIComponent
+   {
+          
+      public function UnClickableShadowBG() {
+         super();
+         this.shadow.buttonMode = true;
+         this.shadow.hitArea = this.hit;
+      }
+
+      public var shadow:MovieClip;
+
+      public var hit:MovieClip;
+   }
+
 }

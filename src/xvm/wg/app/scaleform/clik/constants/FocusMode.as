@@ -1,19 +1,21 @@
-package scaleform.clik.constants 
+package scaleform.clik.constants
 {
-    public class FocusMode extends Object
-    {
-        public function FocusMode()
-        {
-            super();
-            return;
-        }
 
-        public static const LOOP:String="loop";
 
-        public static const DEFAULT:String="default";
+   public class FocusMode extends Object
+   {
+          
+      public function FocusMode() {
+         super();
+      }
 
-        public static const VERTICAL:String="focusModeVertical";
+      public static const LOOP:String = "loop";
 
-        public static const HORIZONTAL:String="focusModeHorizontal";
-    }
+      public static const DEFAULT:String = "default";
+
+      public static const VERTICAL:String = "focusModeVertical";
+
+      public static const HORIZONTAL:String = "focusModeHorizontal";
+   }
+
 }

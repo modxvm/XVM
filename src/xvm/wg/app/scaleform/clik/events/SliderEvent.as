@@ -1,28 +1,29 @@
-package scaleform.clik.events 
+package scaleform.clik.events
 {
-    import flash.events.*;
-    
-    public class SliderEvent extends flash.events.Event
-    {
-        public function SliderEvent(arg1:String, arg2:Boolean=false, arg3:Boolean=true, arg4:Number=-1)
-        {
-            super(arg1, arg2, arg3);
-            this.value = arg4;
-            return;
-        }
+   import flash.events.Event;
 
-        public override function clone():flash.events.Event
-        {
-            return new scaleform.clik.events.SliderEvent(type, bubbles, cancelable, this.value);
-        }
 
-        public override function toString():String
-        {
-            return formatToString("SliderEvent", "type", "bubbles", "cancelable", "value");
-        }
+   public class SliderEvent extends Event
+   {
+          
+      public function SliderEvent(param1:String, param2:Boolean=false, param3:Boolean=true, param4:Number=undefined) {
+         super(param1,param2,param3);
+         this.value = param4;
+      }
 
-        public static const VALUE_CHANGE:String="valueChange";
+      public static const FIRST_VALUE_CHANGE:String = "firstValueChange";
 
-        public var value:Number=-1;
-    }
+      public static const VALUE_CHANGE:String = "valueChange";
+
+      public var value:Number = -1;
+
+      override public function clone() : Event {
+         return new SliderEvent(type,bubbles,cancelable,this.value);
+      }
+
+      override public function toString() : String {
+         return formatToString("SliderEvent","type","bubbles","cancelable","value");
+      }
+   }
+
 }

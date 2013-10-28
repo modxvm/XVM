@@ -1,19 +1,20 @@
-package scaleform.gfx 
+package scaleform.gfx
 {
-    import flash.events.*;
-    
-    public final class MouseCursorEvent extends flash.events.Event
-    {
-        public function MouseCursorEvent()
-        {
-            super("MouseCursorEvent", false, true);
-            return;
-        }
+   import flash.events.Event;
 
-        public static const CURSOR_CHANGE:String="mouseCursorChange";
 
-        public var cursor:String="auto";
+   public final class MouseCursorEvent extends Event
+   {
+          
+      public function MouseCursorEvent() {
+         super("MouseCursorEvent",false,true);
+      }
 
-        public var mouseIdx:uint=0;
-    }
+      public static const CURSOR_CHANGE:String = "mouseCursorChange";
+
+      public var cursor:String = "auto";
+
+      public var mouseIdx:uint = 0;
+   }
+
 }

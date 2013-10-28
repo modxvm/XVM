@@ -1,93 +1,85 @@
-package net.wg.infrastructure.managers.impl 
+package net.wg.infrastructure.managers.impl
 {
-    import flash.events.*;
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    import net.wg.infrastructure.managers.*;
-    import scaleform.clik.events.*;
-    import scaleform.clik.interfaces.*;
-    
-    public class SoundManager extends net.wg.infrastructure.base.meta.impl.SoundManagerMeta implements net.wg.infrastructure.managers.ISoundManager
-    {
-        public function SoundManager()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.SoundManagerMeta;
+   import net.wg.infrastructure.managers.ISoundManager;
+   import net.wg.infrastructure.interfaces.entity.ISoundable;
+   import flash.events.MouseEvent;
+   import net.wg.data.constants.SoundManagerStates;
+   import scaleform.clik.events.ButtonEvent;
+   import scaleform.clik.interfaces.IUIComponent;
+   import flash.events.Event;
 
-        public function playControlsSnd(arg1:String, arg2:String, arg3:String):void
-        {
-            soundEventHandlerS("controls", arg1, arg2, arg3);
-            return;
-        }
 
-        public function addSoundsHdlrs(arg1:net.wg.infrastructure.interfaces.entity.ISoundable):void
-        {
-            assertNotNull(arg1, "container");
-            this.subscribeObject(arg1);
-            return;
-        }
+   public class SoundManager extends SoundManagerMeta implements ISoundManager
+   {
+          
+      public function SoundManager() {
+         super();
+      }
 
-        public function removeSoundHdlrs(arg1:net.wg.infrastructure.interfaces.entity.ISoundable):void
-        {
-            assertNotNull(arg1, "container");
-            this.unsubscribeObject(arg1);
-            return;
-        }
+      private var _mouseToSoundEvents:Object;
 
-        protected override function onPopulate():void
-        {
-            super.onPopulate();
-            this._mouseToSoundEvents = {};
-            this._mouseToSoundEvents[flash.events.MouseEvent.MOUSE_OVER] = net.wg.data.constants.SoundManagerStates.SND_OVER;
-            this._mouseToSoundEvents[flash.events.MouseEvent.MOUSE_OUT] = net.wg.data.constants.SoundManagerStates.SND_OUT;
-            this._mouseToSoundEvents[scaleform.clik.events.ButtonEvent.PRESS] = net.wg.data.constants.SoundManagerStates.SND_PRESS;
-            return;
-        }
+      public function playControlsSnd(param1:String, param2:String, param3:String) : void {
+         soundEventHandlerS("controls",param1,param2,param3);
+      }
 
-        protected override function onDispose():void
-        {
-            super.onDispose();
-            this._mouseToSoundEvents = null;
-            return;
-        }
+      public function addSoundsHdlrs(param1:ISoundable) : void {
+         assertNotNull(param1,"container");
+         this.subscribeObject(param1);
+      }
 
-        internal function canPlaySound(arg1:net.wg.infrastructure.interfaces.entity.ISoundable):Boolean
-        {
-            if (arg1 is scaleform.clik.interfaces.IUIComponent) 
+      public function removeSoundHdlrs(param1:ISoundable) : void {
+         assertNotNull(param1,"container");
+         this.unsubscribeObject(param1);
+      }
+
+      override protected function onPopulate() : void {
+         super.onPopulate();
+         this._mouseToSoundEvents = {};
+         this._mouseToSoundEvents[MouseEvent.MOUSE_OVER] = SoundManagerStates.SND_OVER;
+         this._mouseToSoundEvents[MouseEvent.MOUSE_OUT] = SoundManagerStates.SND_OUT;
+         this._mouseToSoundEvents[ButtonEvent.PRESS] = SoundManagerStates.SND_PRESS;
+      }
+
+      override protected function onDispose() : void {
+         super.onDispose();
+         this._mouseToSoundEvents = null;
+      }
+
+      private function canPlaySound(param1:ISoundable) : Boolean {
+         if(param1  is  IUIComponent)
+         {
+            return IUIComponent(param1).enabled;
+         }
+         return true;
+      }
+
+      private function subscribeObject(param1:ISoundable) : void {
+         param1.addEventListener(MouseEvent.MOUSE_OVER,this.onMouseHandler);
+         param1.addEventListener(MouseEvent.MOUSE_OUT,this.onMouseHandler);
+         param1.addEventListener(ButtonEvent.PRESS,this.onMouseHandler);
+      }
+
+      private function unsubscribeObject(param1:ISoundable) : void {
+         param1.removeEventListener(MouseEvent.MOUSE_OVER,this.onMouseHandler);
+         param1.removeEventListener(MouseEvent.MOUSE_OUT,this.onMouseHandler);
+         param1.removeEventListener(ButtonEvent.PRESS,this.onMouseHandler);
+      }
+
+      private function onMouseHandler(param1:Event) : void {
+         if(param1  is  ButtonEvent)
+         {
+            if(ButtonEvent(param1).buttonIdx > 0)
             {
-                return scaleform.clik.interfaces.IUIComponent(arg1).enabled;
+               return;
             }
-            return true;
-        }
+         }
+         var _loc2_:ISoundable = ISoundable(param1.currentTarget);
+         if(this.canPlaySound(_loc2_))
+         {
+            this.playControlsSnd(this._mouseToSoundEvents[param1.type],_loc2_.getSoundType(),_loc2_.getSoundId());
+         }
+      }
+   }
 
-        internal function subscribeObject(arg1:net.wg.infrastructure.interfaces.entity.ISoundable):void
-        {
-            arg1.addEventListener(flash.events.MouseEvent.MOUSE_OVER, this.onMouseHandler);
-            arg1.addEventListener(flash.events.MouseEvent.MOUSE_OUT, this.onMouseHandler);
-            arg1.addEventListener(scaleform.clik.events.ButtonEvent.PRESS, this.onMouseHandler);
-            return;
-        }
-
-        internal function unsubscribeObject(arg1:net.wg.infrastructure.interfaces.entity.ISoundable):void
-        {
-            arg1.removeEventListener(flash.events.MouseEvent.MOUSE_OVER, this.onMouseHandler);
-            arg1.removeEventListener(flash.events.MouseEvent.MOUSE_OUT, this.onMouseHandler);
-            arg1.removeEventListener(scaleform.clik.events.ButtonEvent.PRESS, this.onMouseHandler);
-            return;
-        }
-
-        internal function onMouseHandler(arg1:flash.events.Event):void
-        {
-            var loc1:*=net.wg.infrastructure.interfaces.entity.ISoundable(arg1.currentTarget);
-            if (this.canPlaySound(loc1)) 
-            {
-                this.playControlsSnd(this._mouseToSoundEvents[arg1.type], loc1.getSoundType(), loc1.getSoundId());
-            }
-            return;
-        }
-
-        internal var _mouseToSoundEvents:Object;
-    }
 }

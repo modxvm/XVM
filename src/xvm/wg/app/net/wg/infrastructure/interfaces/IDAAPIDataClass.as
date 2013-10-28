@@ -1,11 +1,14 @@
-package net.wg.infrastructure.interfaces 
+package net.wg.infrastructure.interfaces
 {
-    import net.wg.infrastructure.interfaces.entity.*;
-    
-    public interface IDAAPIDataClass extends net.wg.infrastructure.interfaces.entity.IDisposable
-    {
-        function fromHash(arg1:Object):void;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
 
-        function toHash():Object;
-    }
+
+   public interface IDAAPIDataClass extends IDisposable
+   {
+          
+      function fromHash(param1:Object) : void;
+
+      function toHash() : Object;
+   }
+
 }

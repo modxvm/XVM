@@ -1,15 +1,17 @@
-package net.wg.gui.lobby.profile.headerBar 
+package net.wg.gui.lobby.profile.headerBar
 {
-    import flash.display.*;
-    
-    public class ProfileTabButtonBg extends flash.display.MovieClip
-    {
-        public function ProfileTabButtonBg()
-        {
-            super();
-            return;
-        }
+   import flash.display.MovieClip;
+   import flash.display.Sprite;
 
-        public var lastLine:flash.display.Sprite;
-    }
+
+   public class ProfileTabButtonBg extends MovieClip
+   {
+          
+      public function ProfileTabButtonBg() {
+         super();
+      }
+
+      public var lastLine:Sprite;
+   }
+
 }

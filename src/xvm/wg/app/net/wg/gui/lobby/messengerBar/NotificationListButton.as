@@ -1,54 +1,49 @@
-package net.wg.gui.lobby.messengerBar 
+package net.wg.gui.lobby.messengerBar
 {
-    import net.wg.gui.components.advanced.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import scaleform.clik.events.*;
-    
-    public class NotificationListButton extends net.wg.infrastructure.base.meta.impl.NotificationListButtonMeta implements net.wg.infrastructure.base.meta.INotificationListButtonMeta
-    {
-        public function NotificationListButton()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.NotificationListButtonMeta;
+   import net.wg.infrastructure.base.meta.INotificationListButtonMeta;
+   import net.wg.gui.components.advanced.BlinkingButton;
+   import scaleform.clik.events.ButtonEvent;
+   import net.wg.data.constants.SoundTypes;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.btnClickHandler, false, 0, true);
-            this.button.tooltip = TOOLTIPS.LOBY_MESSENGER_SERVICE_BUTTON;
-            return;
-        }
 
-        protected override function draw():void
-        {
-            super.draw();
-            return;
-        }
+   public class NotificationListButton extends NotificationListButtonMeta implements INotificationListButtonMeta
+   {
+          
+      public function NotificationListButton() {
+         super();
+      }
 
-        internal function btnClickHandler(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            handleClickS();
-            return;
-        }
+      public var button:BlinkingButton;
 
-        public function as_setState(arg1:Boolean):void
-        {
-            if (this.button.blinking != arg1) 
-            {
-                this.button.blinking = arg1;
-            }
-            return;
-        }
+      override protected function configUI() : void {
+         super.configUI();
+         addEventListener(ButtonEvent.CLICK,this.btnClickHandler,false,0,true);
+         this.button.tooltip = TOOLTIPS.LOBY_MESSENGER_SERVICE_BUTTON;
+         this.button.soundType = SoundTypes.MESSANGER_BTN;
+      }
 
-        protected override function onDispose():void
-        {
-            super.onDispose();
-            removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.btnClickHandler);
-            return;
-        }
+      override protected function draw() : void {
+         super.draw();
+      }
 
-        public var button:net.wg.gui.components.advanced.BlinkingButton;
-    }
+      private function btnClickHandler(param1:ButtonEvent) : void {
+         handleClickS();
+      }
+
+      public function as_setState(param1:Boolean) : void {
+         if(this.button.blinking != param1)
+         {
+            this.button.blinking = param1;
+         }
+      }
+
+      override protected function onDispose() : void {
+         super.onDispose();
+         removeEventListener(ButtonEvent.CLICK,this.btnClickHandler);
+         this.button.dispose();
+         this.button = null;
+      }
+   }
+
 }

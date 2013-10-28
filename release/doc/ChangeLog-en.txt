@@ -1,22 +1,11 @@
 ﻿XVM-5.0.0-test5:
+  * adaptation to WoT 0.8.9
   [NEW FUNCTIONS]
-  * possibility of editing format of vehicle info field in squad window:
-      squad/formatInfoField
-  * ability to configure different sets of icons to the left and right panels, markers of allies and enemies:
-      iconset/battleLoadingAlly, iconset/battleLoadingEnemy - for battle loading
-      iconset/playersPanelAlly, iconset/playersPanelEnemy   - for players panel
-      iconset/statisticFormAlly, iconset/statisticFormEnemy - for Tab window
-      iconset/vehicleMarkerAlly, iconset/vehicleMarkerEnemy - for vehicle markers
-  * localization: added Serbian language
-
+  * localization: added Brazilian Portuguese language
   [MACROS]
-  * squad: added macros {{level}}, {{rlevel}}, {{vtype}}, {{battletier-min}}, {{battletier-max}}
+  * squad: added macros {{vtype-l}}
 
-  [OTHER]
-  * squad: removed options "romanNumbers", "leftLvlBorder", "rightLvlBorder"
-  * renamed fields in iconset: "battleLoading", "playersPanel", "statisticForm", "vehicleMarker"
-
-XVM-5.0.0-test4:
+XVM-5.0.0-test5:
   * adaptation to WoT 0.8.8
 
   [NEW FUNCTIONS]
@@ -29,13 +18,21 @@ XVM-5.0.0-test4:
     battleResults/showNetIncome - Display net income of credits in After Battle Screen
     battleResults/showExtendedInfo - Display shots precision and damage in After Battle Screen
     userInfo/defaultFilterValue - default value for the filter text input
+  * possibility of editing format of vehicle info field in squad window:
+      squad/formatInfoField
+  * ability to configure different sets of icons to the left and right panels, markers of allies and enemies:
+      iconset/battleLoadingAlly, iconset/battleLoadingEnemy - for battle loading
+      iconset/playersPanelAlly, iconset/playersPanelEnemy   - for players panel
+      iconset/statisticFormAlly, iconset/statisticFormEnemy - for Tab window
+      iconset/vehicleMarkerAlly, iconset/vehicleMarkerEnemy - for vehicle markers
   * pinger: add wine support. For activation execute
     ln -s `which ping` ~/.wine/drive_c/ping.exe
-  * localization: added Romanian, Bulgarian, Danish, Italian and Turkish languages
+  * localization: added Romanian, Bulgarian, Danish, Italian, Norwegian, Serbian, Slovak and Turkish languages
   * localization: added Polish, French readme
 
   [MACROS]
   * added macros {{c:avglvl}}, {{a:avglvl}}
+  * squad: added macros {{level}}, {{rlevel}}, {{vtype}}, {{battletier-min}}, {{battletier-max}}
 
   [FIXES]
   * fixed "sixth sense" icon wrong positioning
@@ -51,7 +48,9 @@ XVM-5.0.0-test4:
   * changed clock format in battleloading (http://php.net/date)
   * config: "finalStatistic" section renamed to "battleResults"
   * removed battleResults/sortColumn option, build in since 0.8.8
-  * removed option login/showPingOnGameLoading, userInfo/showEColumn
+  * removed option login/showPingOnGameLoading, userInfo/showEColumn, squad/romanNumbers,
+    squad/leftLvlBorder, squad/rightLvlBorder
+  * renamed fields in iconset: iconset/battleLoading, iconset/playersPanel, iconset/statisticForm, iconset/vehicleMarker
   * renamed fields "formatLeft", "formatRight" in battleloading, Tab
 
 XVM-4.1.1:

@@ -1,17 +1,20 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface ISkillDropMeta extends flash.events.IEventDispatcher
-    {
-        function calcDropSkillsParamsS(arg1:String, arg2:Number):Array;
+   import flash.events.IEventDispatcher;
 
-        function dropSkillsS(arg1:Number):void;
 
-        function as_setData(arg1:Object):void;
+   public interface ISkillDropMeta extends IEventDispatcher
+   {
+          
+      function calcDropSkillsParamsS(param1:String, param2:Number) : Array;
 
-        function as_setGold(arg1:Number):void;
+      function dropSkillsS(param1:Number) : void;
 
-        function as_setCredits(arg1:Number):void;
-    }
+      function as_setData(param1:Object) : void;
+
+      function as_setGold(param1:Number) : void;
+
+      function as_setCredits(param1:Number) : void;
+   }
+
 }

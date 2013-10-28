@@ -1,9 +1,12 @@
-package net.wg.gui.messenger.meta 
+package net.wg.gui.messenger.meta
 {
-    import flash.events.*;
-    
-    public interface IFAQWindowMeta extends flash.events.IEventDispatcher
-    {
-        function as_appendText(arg1:String):void;
-    }
+   import flash.events.IEventDispatcher;
+
+
+   public interface IFAQWindowMeta extends IEventDispatcher
+   {
+          
+      function as_appendText(param1:String) : void;
+   }
+
 }

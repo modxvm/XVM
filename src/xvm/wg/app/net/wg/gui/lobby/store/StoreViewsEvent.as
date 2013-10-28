@@ -1,20 +1,21 @@
-package net.wg.gui.lobby.store 
+package net.wg.gui.lobby.store
 {
-    import flash.events.*;
-    
-    public class StoreViewsEvent extends flash.events.Event
-    {
-        public function StoreViewsEvent(arg1:String, arg2:String)
-        {
-            super(arg1, false, false);
-            this.viewType = arg2;
-            return;
-        }
+   import flash.events.Event;
 
-        public static const POPULATE_MENU_FILTER:String="populateMenuFilter";
 
-        public static const VIEW_CHANGE:String="onStoreViewChange";
+   public class StoreViewsEvent extends Event
+   {
+          
+      public function StoreViewsEvent(param1:String, param2:String) {
+         super(param1,false,false);
+         this.viewType = param2;
+      }
 
-        public var viewType:String=null;
-    }
+      public static const POPULATE_MENU_FILTER:String = "populateMenuFilter";
+
+      public static const VIEW_CHANGE:String = "onStoreViewChange";
+
+      public var viewType:String = null;
+   }
+
 }

@@ -1,144 +1,129 @@
-package net.wg.gui.lobby.store.views 
+package net.wg.gui.lobby.store.views
 {
-    import net.wg.data.constants.generated.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.lobby.store.views.base.*;
-    import net.wg.utils.*;
-    import scaleform.clik.data.*;
-    
-    public class ModuleView extends net.wg.gui.lobby.store.views.base.SimpleStoreMenuView
-    {
-        public function ModuleView()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.lobby.store.views.base.SimpleStoreMenuView;
+   import net.wg.gui.components.controls.CheckBox;
+   import net.wg.gui.lobby.store.views.base.ViewUIElementVO;
+   import net.wg.utils.IAssertable;
+   import net.wg.data.constants.generated.STORE_TYPES;
+   import scaleform.clik.data.DataProvider;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.inHangarChkBx.enableDynamicFrameUpdating();
-            this.lockedChkBx.enableDynamicFrameUpdating();
-            return;
-        }
 
-        public override function dispose():void
-        {
-            var loc1:*=null;
-            super.dispose();
-            if (this._kindsArr != null) 
+   public class ModuleView extends SimpleStoreMenuView
+   {
+          
+      public function ModuleView() {
+         super();
+      }
+
+      public var vehicleGunChkBx:CheckBox = null;
+
+      public var vehicleTurretChkBx:CheckBox = null;
+
+      public var vehicleEngineChkBx:CheckBox = null;
+
+      public var vehicleChassisChkBx:CheckBox = null;
+
+      public var vehicleRadioChkBx:CheckBox = null;
+
+      public var lockedChkBx:CheckBox = null;
+
+      public var inHangarChkBx:CheckBox = null;
+
+      private var _kindsArr:Array = null;
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.inHangarChkBx.enableDynamicFrameUpdating();
+         this.lockedChkBx.enableDynamicFrameUpdating();
+      }
+
+      override public function dispose() : void {
+         var _loc1_:ViewUIElementVO = null;
+         super.dispose();
+         if(this._kindsArr != null)
+         {
+            for each (_loc1_ in this._kindsArr)
             {
-                var loc2:*=0;
-                var loc3:*=this._kindsArr;
-                for each (loc1 in loc3) 
-                {
-                    loc1.dispose();
-                }
-                this._kindsArr.splice(0, this._kindsArr.length);
-                this._kindsArr = null;
+               _loc1_.dispose();
             }
-            return;
-        }
+            this._kindsArr.splice(0,this._kindsArr.length);
+            this._kindsArr = null;
+         }
+      }
 
-        public override function resetTemporaryHandlers():void
-        {
-            resetHandlers(this.getKindsArray(), null);
-            resetHandlers(getTagsArray(), null);
-            return;
-        }
+      override public function resetTemporaryHandlers() : void {
+         resetHandlers(this.getKindsArray(),null);
+         resetHandlers(getTagsArray(),null);
+      }
 
-        public override function setViewData(arg1:Array):void
-        {
-            var loc1:*=NaN;
-            var loc2:*=null;
-            var loc3:*=null;
-            super.setViewData(arg1);
-            if (App.instance) 
-            {
-                loc1 = Number(arg1.shift());
-                loc2 = arg1.splice(0, loc1);
-                selectFilter(this.getKindsArray(), loc2, true, false);
-                loc3 = String(arg1.shift());
-                selectFilterSimple(getFitsArray(), loc3, true);
-                setCurrentVehicle(arg1.shift());
-                updateSubFilter(getNation());
-                selectFilter(getTagsArray(), arg1, true, false);
-                this.dispatchViewChange();
-            }
-            return;
-        }
+      override public function setViewData(param1:Array) : void {
+         var _loc2_:* = NaN;
+         var _loc3_:Array = null;
+         var _loc4_:String = null;
+         super.setViewData(param1);
+         if(App.instance)
+         {
+            _loc2_ = Number(param1.shift());
+            _loc3_ = param1.splice(0,_loc2_);
+            selectFilter(this.getKindsArray(),_loc3_,true,false);
+            _loc4_ = String(param1.shift());
+            selectFilterSimple(getFitsArray(),_loc4_,true);
+            setCurrentVehicle(param1.shift());
+            updateSubFilter(getNation());
+            selectFilter(getTagsArray(),param1,true,false);
+            this.dispatchViewChange();
+         }
+      }
 
-        public override function getFilter():Array
-        {
-            var loc2:*=null;
-            var loc1:*=getSelectedFilters(this.getKindsArray(), true, null);
-            loc1.push(myVehicleRadioBtn.group.data);
-            if (App.instance) 
-            {
-                loc2 = App.utils.asserter;
-                loc2.assertNotNull(getFilterData(), "filter data in \'" + fittingType + "\' view must be initialized before getting!");
-                loc2.assert(!(getFilterData().current == "0"), "invalid value in filter data!");
-            }
-            loc1.push(getFilterData().current);
-            loc1 = loc1.concat(getSelectedFilters(getTagsArray(), true, null));
-            return loc1;
-        }
+      override public function getFilter() : Array {
+         var _loc2_:IAssertable = null;
+         var _loc1_:Array = getSelectedFilters(this.getKindsArray(),true,null);
+         _loc1_.push(myVehicleRadioBtn.group.data);
+         if(App.instance)
+         {
+            _loc2_ = App.utils.asserter;
+            _loc2_.assertNotNull(getFilterData(),"filter data in \'" + fittingType + "\' view must be initialized before getting!");
+            _loc2_.assert(!(getFilterData().current == "0"),"invalid value in filter data!");
+         }
+         _loc1_.push(getFilterData().current);
+         _loc1_ = _loc1_.concat(getSelectedFilters(getTagsArray(),true,null));
+         return _loc1_;
+      }
 
-        protected override function onKindChanged():void
-        {
-            initializeControlsByHash(fittingType, this.getKindsArray(), "kindsMap", "types");
-            super.onKindChanged();
-            return;
-        }
+      override protected function onKindChanged() : void {
+         initializeControlsByHash(fittingType,this.getKindsArray(),"kindsMap","types");
+         super.onKindChanged();
+      }
 
-        protected override function onTagsArrayRequest():Array
-        {
-            if (getUIName() == net.wg.data.constants.generated.STORE_TYPES.SHOP) 
-            {
-                return [new net.wg.gui.lobby.store.views.base.ViewUIElementVO("locked", this.lockedChkBx), new net.wg.gui.lobby.store.views.base.ViewUIElementVO("onVehicle", onVehicleChkBx), new net.wg.gui.lobby.store.views.base.ViewUIElementVO("inHangar", this.inHangarChkBx)];
-            }
-            return [new net.wg.gui.lobby.store.views.base.ViewUIElementVO("onVehicle", onVehicleChkBx)];
-        }
+      override protected function onTagsArrayRequest() : Array {
+         if(getUIName() == STORE_TYPES.SHOP)
+         {
+            return [new ViewUIElementVO("locked",this.lockedChkBx),new ViewUIElementVO("onVehicle",onVehicleChkBx),new ViewUIElementVO("inHangar",this.inHangarChkBx)];
+         }
+         return [new ViewUIElementVO("onVehicle",onVehicleChkBx)];
+      }
 
-        protected override function onVehicleFilterUpdated(arg1:scaleform.clik.data.DataProvider, arg2:Number, arg3:int):void
-        {
-            super.onVehicleFilterUpdated(arg1, arg2, arg3);
-            if (arg1.length != 0) 
-            {
-                getFilterData().current = arg1[arg2].data;
-                myVehiclesRadioBtn.enabled = true;
-            }
-            else 
-            {
-                otherVehiclesRadioBtn.selected = true;
-                myVehiclesRadioBtn.enabled = false;
-            }
-            return;
-        }
+      override protected function onVehicleFilterUpdated(param1:DataProvider, param2:Number, param3:int) : void {
+         super.onVehicleFilterUpdated(param1,param2,param3);
+         if(param1.length == 0)
+         {
+            otherVehiclesRadioBtn.selected = true;
+            myVehiclesRadioBtn.enabled = false;
+         }
+         else
+         {
+            getFilterData().current = param1[param2].data;
+            myVehiclesRadioBtn.enabled = true;
+         }
+      }
 
-        internal function getKindsArray():Array
-        {
-            if (this._kindsArr == null) 
-            {
-                this._kindsArr = [new net.wg.gui.lobby.store.views.base.ViewUIElementVO("vehicleGun", this.vehicleGunChkBx), new net.wg.gui.lobby.store.views.base.ViewUIElementVO("vehicleTurret", this.vehicleTurretChkBx), new net.wg.gui.lobby.store.views.base.ViewUIElementVO("vehicleEngine", this.vehicleEngineChkBx), new net.wg.gui.lobby.store.views.base.ViewUIElementVO("vehicleChassis", this.vehicleChassisChkBx), new net.wg.gui.lobby.store.views.base.ViewUIElementVO("vehicleRadio", this.vehicleRadioChkBx)];
-            }
-            return this._kindsArr;
-        }
+      private function getKindsArray() : Array {
+         if(this._kindsArr == null)
+         {
+            this._kindsArr = [new ViewUIElementVO("vehicleGun",this.vehicleGunChkBx),new ViewUIElementVO("vehicleTurret",this.vehicleTurretChkBx),new ViewUIElementVO("vehicleEngine",this.vehicleEngineChkBx),new ViewUIElementVO("vehicleChassis",this.vehicleChassisChkBx),new ViewUIElementVO("vehicleRadio",this.vehicleRadioChkBx)];
+         }
+         return this._kindsArr;
+      }
+   }
 
-        public var vehicleGunChkBx:net.wg.gui.components.controls.CheckBox=null;
-
-        public var vehicleTurretChkBx:net.wg.gui.components.controls.CheckBox=null;
-
-        public var vehicleEngineChkBx:net.wg.gui.components.controls.CheckBox=null;
-
-        public var vehicleChassisChkBx:net.wg.gui.components.controls.CheckBox=null;
-
-        public var vehicleRadioChkBx:net.wg.gui.components.controls.CheckBox=null;
-
-        public var lockedChkBx:net.wg.gui.components.controls.CheckBox=null;
-
-        public var inHangarChkBx:net.wg.gui.components.controls.CheckBox=null;
-
-        internal var _kindsArr:Array=null;
-    }
 }

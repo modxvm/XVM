@@ -1,793 +1,732 @@
 package org.idmedia.as3commons.util
 {
-    import org.idmedia.as3commons.lang.*;
+   import org.idmedia.as3commons.lang.IllegalArgumentException;
+   import org.idmedia.as3commons.lang.NullPointerException;
 
-    public class StringUtils extends Object
-    {
-        public function StringUtils()
-        {
-            super();
-            return;
-        }
 
-        public static function startsWith(arg1:String, arg2:String):Boolean
-        {
-            return testString(arg1, new RegExp("^" + arg2, EMPTY));
-        }
+   public class StringUtils extends Object
+   {
+          
+      public function StringUtils() {
+         super();
+      }
 
-        public static function compareToIgnoreCase(arg1:String, arg2:String):int
-        {
-            if (arg1 == null || arg2 == null)
-            {
-                throw new org.idmedia.as3commons.lang.NullPointerException();
-            }
-            return compareTo(arg1.toLowerCase(), arg2.toLowerCase());
-        }
+      private static const EMPTY:String = "";
 
-        public static function compareTo(arg1:String, arg2:String):int
-        {
-            if (arg1 == null || arg2 == null)
-            {
-                throw new org.idmedia.as3commons.lang.NullPointerException();
-            }
-            return arg1.localeCompare(arg2);
-        }
+      private static const INDEX_NOT_FOUND:int = -1;
 
-        public static function toInitials(arg1:String):String
-        {
-            if (isEmpty(arg1))
-            {
-                return arg1;
-            }
-            return arg1.match(new RegExp("[A-Z]", "g")).join(EMPTY).toLowerCase();
-        }
+      private static const PAD_LIMIT:uint = 8192;
 
-        public static function chomp(arg1:String):String
-        {
-            return chompString(arg1, "(\r\n|\r|\n)");
-        }
+      public static function toInitials(param1:String) : String {
+         if(isEmpty(param1))
+         {
+            return param1;
+         }
+         return param1.match(new RegExp("[A-Z]","g")).join(EMPTY).toLowerCase();
+      }
 
-        public static function chompString(arg1:String, arg2:String):String
-        {
-            if (isEmpty(arg1) || arg2 == null)
-            {
-                return arg1;
-            }
-            return arg1.replace(new RegExp(arg2 + "$", EMPTY), EMPTY);
-        }
+      public static function chomp(param1:String) : String {
+         return chompString(param1,"(\r\n|\r|\n)");
+      }
 
-        public static function trim(arg1:String):String
-        {
-            if (arg1 == null)
-            {
-                return null;
-            }
-            return arg1.replace(new RegExp("^\\s*"), EMPTY).replace(new RegExp("\\s*$"), EMPTY);
-        }
+      public static function chompString(param1:String, param2:String) : String {
+         if((isEmpty(param1)) || param2 == null)
+         {
+            return param1;
+         }
+         return param1.replace(new RegExp(param2 + "$",EMPTY),EMPTY);
+      }
 
-        public static function deleteSpaces(arg1:String):String
-        {
-            return deleteFromString(arg1, new RegExp("\\t|\\r|\\n|\\b", "g"));
-        }
-
-        public static function deleteWhitespace(arg1:String):String
-        {
-            return deleteFromString(arg1, new RegExp("\\s", "g"));
-        }
-
-        internal static function deleteFromString(arg1:String, arg2:RegExp):String
-        {
-            if (isEmpty(arg1))
-            {
-                return arg1;
-            }
-            return arg1.replace(arg2, EMPTY);
-        }
-
-        public static function left(str:String, len:int):String
-        {
-            if (str == null)
-            {
-                return null;
-            }
-            if (len < 0)
-            {
-                return EMPTY;
-            }
-            if (str.length <= len)
-            {
-                return str;
-            }
-            return str.substring(0, len);
-        }
-
-        public static function center(arg1:String, arg2:int, arg3:String):String
-        {
-            if (arg1 == null || arg2 <= 0)
-            {
-                return arg1;
-            }
-            if (isEmpty(arg3))
-            {
-                arg3 = " ";
-            }
-            var loc1:*=arg1.length;
-            var loc2:*;
-            if ((loc2 = arg2 - loc1) <= 0)
-            {
-                return arg1;
-            }
-            arg1 = leftPad(arg1, loc1 + loc2 / 2, arg3);
-            arg1 = rightPad(arg1, arg2, arg3);
-            return arg1;
-        }
-
-        /**
-         *
-         * @param arg1 string
-         * @param arg2 count
-         * @param arg3 char
-         * @return
-         */
-        public static function leftPad(arg1:String, arg2:int, arg3:String):String
-        {
-            var loc4:*=null;
-            var loc5:*=null;
-            var loc6:*=0;
-            if (arg1 == null)
-            {
-                return null;
-            }
-            if (isEmpty(arg3))
-            {
-                arg3 = " ";
-            }
-            var loc1:*=arg3.length;
-            var loc2:*=arg1.length;
-            var loc3:*;
-            if ((loc3 = arg2 - loc2) <= 0)
-            {
-                return arg1;
-            }
-            if (loc1 == 1 && loc3 <= PAD_LIMIT)
-            {
-                return leftPadChar(arg1, arg2, arg3.charAt(0));
-            }
-            if (loc3 == loc1)
-            {
-                return arg3.concat(arg1);
-            }
-            if (loc3 < loc1)
-            {
-                return arg3.substring(0, loc3).concat(arg1);
-            }
-            loc4 = new Array();
-            loc5 = arg3.split("");
-            loc6 = 0;
-            while (loc6 < loc3)
-            {
-                loc4[loc6] = loc5[loc6 % loc1];
-                ++loc6;
-            }
-            return loc4.join("").concat(arg1);
-        }
-
-        public static function leftPadChar(arg1:String, arg2:int, arg3:String):String
-        {
-            if (arg1 == null)
-            {
-                return null;
-            }
-            var loc1:*;
-            if ((loc1 = arg2 - arg1.length) <= 0)
-            {
-                return arg1;
-            }
-            if (loc1 > PAD_LIMIT)
-            {
-                return leftPad(arg1, arg2, arg3);
-            }
-            return padding(loc1, arg3).concat(arg1);
-        }
-
-        public static function rightPad(arg1:String, arg2:int, arg3:String):String
-        {
-            var loc4:*=null;
-            var loc5:*=null;
-            var loc6:*=0;
-            if (arg1 == null)
-            {
-                return null;
-            }
-            if (isEmpty(arg3))
-            {
-                arg3 = " ";
-            }
-            var loc1:*=arg3.length;
-            var loc2:*=arg1.length;
-            var loc3:*;
-            if ((loc3 = arg2 - loc2) <= 0)
-            {
-                return arg1;
-            }
-            if (loc1 == 1 && loc3 <= PAD_LIMIT)
-            {
-                return rightPadChar(arg1, arg2, arg3.charAt(0));
-            }
-            if (loc3 == loc1)
-            {
-                return arg1.concat(arg3);
-            }
-            if (loc3 < loc1)
-            {
-                return arg1.concat(arg3.substring(0, loc3));
-            }
-            loc4 = new Array();
-            loc5 = arg3.split("");
-            loc6 = 0;
-            while (loc6 < loc3)
-            {
-                loc4[loc6] = loc5[loc6 % loc1];
-                ++loc6;
-            }
-            return arg1.concat(loc4.join(""));
-        }
-
-        public static function rightPadChar(arg1:String, arg2:int, arg3:String):String
-        {
-            if (arg1 == null)
-            {
-                return null;
-            }
-            var loc1:*;
-            if ((loc1 = arg2 - arg1.length) <= 0)
-            {
-                return arg1;
-            }
-            if (loc1 > PAD_LIMIT)
-            {
-                return rightPad(arg1, arg2, arg3);
-            }
-            return arg1.concat(padding(loc1, arg3));
-        }
-
-        internal static function padding(arg1:int, arg2:String):String
-        {
-            var loc1:*=EMPTY;
-            var loc2:*=0;
-            while (loc2 < arg1)
-            {
-                loc1 = loc1 + arg2;
-                ++loc2;
-            }
-            return loc1;
-        }
-
-        public static function replace(arg1:String, arg2:String, arg3:String):String
-        {
-            if (arg1 == null || isEmpty(arg2) || arg3 == null)
-            {
-                return arg1;
-            }
-            return arg1.replace(new RegExp(arg2, "g"), arg3);
-        }
-
-        public static function replaceTo(arg1:String, arg2:String, arg3:String, arg4:int):String
-        {
-            if (arg1 == null || isEmpty(arg2) || arg3 == null || arg4 == 0)
-            {
-                return arg1;
-            }
-            var loc1:*="";
-            var loc2:*=0;
-            var loc3:*=0;
-            for (;;)
-            {
-                var loc4:*;
-                loc3 = loc4 = arg1.indexOf(arg2, loc2);
-                if (loc4 == -1)
-                {
-                    break;
-                }
-                loc1 = loc1 + (arg1.substring(loc2, loc3) + arg3);
-                loc2 = loc3 + arg2.length;
-                if (--arg4 != 0)
-                {
-                    continue;
-                }
-                break;
-            }
-            loc1 = loc4 = loc1 + arg1.substring(loc2);
-            return loc4;
-        }
-
-        public static function replaceOnce(arg1:String, arg2:String, arg3:String):String
-        {
-            if (arg1 == null || isEmpty(arg2) || arg3 == null)
-            {
-                return arg1;
-            }
-            return arg1.replace(new RegExp(arg2, EMPTY), arg3);
-        }
-
-        public static function defaultIfEmpty(arg1:String, arg2:String):String
-        {
-            return isEmpty(arg1) ? arg2 : arg1;
-        }
-
-        public static function isEmpty(arg1:String):Boolean
-        {
-            if (arg1 == null)
-            {
-                return true;
-            }
-            return arg1.length == 0;
-        }
-
-        public static function isNotEmpty(arg1:String):Boolean
-        {
-            return !isEmpty(arg1);
-        }
-
-        public static function isBlank(arg1:String):Boolean
-        {
-            return isEmpty(trimToEmpty(arg1));
-        }
-
-        public static function isNotBlank(arg1:String):Boolean
-        {
-            return !isBlank(arg1);
-        }
-
-        public static function trimToNull(arg1:String):String
-        {
-            var loc1:*=trim(arg1);
-            return isEmpty(loc1) ? null : loc1;
-        }
-
-        public static function trimToEmpty(arg1:String):String
-        {
-            return arg1 != null ? trim(arg1) : EMPTY;
-        }
-
-        public static function capitalize(arg1:String):String
-        {
-            if (isEmpty(arg1))
-            {
-                return arg1;
-            }
-            return arg1.charAt(0).toUpperCase() + arg1.substring(1);
-        }
-
-        public static function uncapitalize(arg1:String):String
-        {
-            if (isEmpty(arg1))
-            {
-                return arg1;
-            }
-            return arg1.charAt(0).toLowerCase() + arg1.substring(1);
-        }
-
-        public static function titleize(arg1:String):String
-        {
-            if (isEmpty(arg1))
-            {
-                return arg1;
-            }
-            var loc1:*=arg1.toLowerCase().split(" ");
-            var loc2:*=0;
-            while (loc2 < loc1.length)
-            {
-                loc1[loc2] = capitalize(loc1[loc2]);
-                ++loc2;
-            }
-            return loc1.join(" ");
-        }
-
-        public static function substringAfter(arg1:String, arg2:String):String
-        {
-            if (isEmpty(arg1))
-            {
-                return arg1;
-            }
-            if (arg2 == null)
-            {
-                return EMPTY;
-            }
-            var loc1:*=arg1.indexOf(arg2);
-            if (loc1 == INDEX_NOT_FOUND)
-            {
-                return EMPTY;
-            }
-            return arg1.substring(loc1 + arg2.length);
-        }
-
-        public static function substringAfterLast(arg1:String, arg2:String):String
-        {
-            if (isEmpty(arg1))
-            {
-                return arg1;
-            }
-            if (isEmpty(arg2))
-            {
-                return EMPTY;
-            }
-            var loc1:*=arg1.lastIndexOf(arg2);
-            if (loc1 == INDEX_NOT_FOUND || loc1 == arg1.length - arg2.length)
-            {
-                return EMPTY;
-            }
-            return arg1.substring(loc1 + arg2.length);
-        }
-
-        public static function substringBefore(arg1:String, arg2:String):String
-        {
-            if (isEmpty(arg1) || arg2 == null)
-            {
-                return arg1;
-            }
-            if (arg2.length == 0)
-            {
-                return EMPTY;
-            }
-            var loc1:*=arg1.indexOf(arg2);
-            if (loc1 == INDEX_NOT_FOUND)
-            {
-                return arg1;
-            }
-            return arg1.substring(0, loc1);
-        }
-
-        public static function substringBeforeLast(arg1:String, arg2:String):String
-        {
-            if (isEmpty(arg1) || isEmpty(arg2))
-            {
-                return arg1;
-            }
-            var loc1:*=arg1.lastIndexOf(arg2);
-            if (loc1 == INDEX_NOT_FOUND)
-            {
-                return arg1;
-            }
-            return arg1.substring(0, loc1);
-        }
-
-        public static function substringBetween(arg1:String, arg2:String, arg3:String):String
-        {
-            var loc2:*=0;
-            if (arg1 == null || arg2 == null || arg3 == null)
-            {
-                return null;
-            }
-            var loc1:*;
-            if ((loc1 = arg1.indexOf(arg2)) != INDEX_NOT_FOUND)
-            {
-                if ((loc2 = arg1.indexOf(arg3, loc1 + arg2.length)) != INDEX_NOT_FOUND)
-                {
-                    return arg1.substring(loc1 + arg2.length, loc2);
-                }
-            }
+      public static function trim(param1:String) : String {
+         if(param1 == null)
+         {
             return null;
-        }
+         }
+         return param1.replace(new RegExp("^\\s*"),EMPTY).replace(new RegExp("\\s*$"),EMPTY);
+      }
 
-        public static function strip(arg1:String, arg2:String):String
-        {
-            if (isEmpty(arg1))
-            {
-                return arg1;
-            }
-            return stripEnd(stripStart(arg1, arg2), arg2);
-        }
+      public static function deleteSpaces(param1:String) : String {
+         return deleteFromString(param1,new RegExp("\\t|\\r|\\n|\\b","g"));
+      }
 
-        public static function stripStart(arg1:String, arg2:String):String
-        {
-            if (isEmpty(arg1))
-            {
-                return arg1;
-            }
-            var loc1:*=new RegExp("^[" + (arg2 || " ") + "]*", EMPTY);
-            return arg1.replace(loc1, EMPTY);
-        }
+      public static function deleteWhitespace(param1:String) : String {
+         return deleteFromString(param1,new RegExp("\\s","g"));
+      }
 
-        public static function stripEnd(arg1:String, arg2:String):String
-        {
-            if (isEmpty(arg1))
-            {
-                return arg1;
-            }
-            var loc1:*=new RegExp("[" + (arg2 || " ") + "]*$", EMPTY);
-            return arg1.replace(loc1, EMPTY);
-        }
+      private static function deleteFromString(param1:String, param2:RegExp) : String {
+         if(isEmpty(param1))
+         {
+            return param1;
+         }
+         return param1.replace(param2,EMPTY);
+      }
 
-        public static function abbreviate(arg1:String, arg2:int, arg3:int):String
-        {
-            if (arg1 == null)
-            {
-                return arg1;
-            }
-            if (arg3 < 4)
-            {
-                throw new org.idmedia.as3commons.lang.IllegalArgumentException("Minimum abbreviation width is 4");
-            }
-            if (arg1.length <= arg3)
-            {
-                return arg1;
-            }
-            if (arg2 > arg1.length)
-            {
-                arg2 = arg1.length;
-            }
-            if (arg1.length - arg2 < arg3 - 3)
-            {
-                arg2 = arg1.length - (arg3 - 3);
-            }
-            if (arg2 <= 4)
-            {
-                return arg1.substring(0, arg3 - 3) + "...";
-            }
-            if (arg3 < 7)
-            {
-                throw new org.idmedia.as3commons.lang.IllegalArgumentException("Minimum abbreviation width with offset is 7");
-            }
-            if (arg2 + (arg3 - 3) < arg1.length)
-            {
-                return "..." + abbreviate(arg1.substring(arg2), 0, arg3 - 3);
-            }
-            return "..." + arg1.substring(arg1.length - (arg3 - 3));
-        }
+      public static function left(param1:String, param2:int) : String {
+         if(param1 == null)
+         {
+            return null;
+         }
+         if(param2 < 0)
+         {
+            return EMPTY;
+         }
+         if(param1.length <= param2)
+         {
+            return param1;
+         }
+         return param1.substring(0,param2);
+      }
 
-        public static function ordinalIndexOf(arg1:String, arg2:String, arg3:int):int
-        {
-            if (arg1 == null || arg2 == null || arg3 <= 0)
-            {
-                return INDEX_NOT_FOUND;
-            }
-            if (arg2.length == 0)
-            {
-                return 0;
-            }
-            var loc1:*=0;
-            var loc2:*=INDEX_NOT_FOUND;
-            do
-            {
-                if ((loc2 = arg1.indexOf(arg2, loc2 + 1)) < 0)
-                {
-                    return loc2;
-                }
-                ++loc1;
-            }
-            while (loc1 < arg3);
-            return loc2;
-        }
+      public static function center(param1:String, param2:int, param3:String) : String {
+         if(param1 == null || param2 <= 0)
+         {
+            return param1;
+         }
+         if(isEmpty(param3))
+         {
+            param3 = " ";
+         }
+         var _loc4_:int = param1.length;
+         var _loc5_:int = param2 - _loc4_;
+         if(_loc5_ <= 0)
+         {
+            return param1;
+         }
+         var param1:String = leftPad(param1,_loc4_ + _loc5_ / 2,param3);
+         param1 = rightPad(param1,param2,param3);
+         return param1;
+      }
 
-        public static function countMatches(arg1:String, arg2:String):int
-        {
-            if (isEmpty(arg1) || isEmpty(arg2))
-            {
-                return 0;
-            }
-            return arg1.match(new RegExp("(" + arg2 + ")", "g")).length;
-        }
+      public static function leftPad(param1:String, param2:int, param3:String) : String {
+         var _loc7_:Array = null;
+         var _loc8_:Array = null;
+         var _loc9_:* = 0;
+         if(param1 == null)
+         {
+            return null;
+         }
+         if(isEmpty(param3))
+         {
+            param3 = " ";
+         }
+         var _loc4_:int = param3.length;
+         var _loc5_:int = param1.length;
+         var _loc6_:int = param2 - _loc5_;
+         if(_loc6_ <= 0)
+         {
+            return param1;
+         }
+         if(_loc4_ == 1 && _loc6_ <= PAD_LIMIT)
+         {
+            return leftPadChar(param1,param2,param3.charAt(0));
+         }
+         if(_loc6_ == _loc4_)
+         {
+            return param3.concat(param1);
+         }
+         if(_loc6_ < _loc4_)
+         {
+            return param3.substring(0,_loc6_).concat(param1);
+         }
+         _loc7_ = new Array();
+         _loc8_ = param3.split("");
+         _loc9_ = 0;
+         while(_loc9_ < _loc6_)
+         {
+            _loc7_[_loc9_] = _loc8_[_loc9_ % _loc4_];
+            _loc9_++;
+         }
+         return _loc7_.join("").concat(param1);
+      }
 
-        public static function contains(arg1:String, arg2:String):Boolean
-        {
-            if (arg1 == null || arg2 == null)
-            {
-                return false;
-            }
-            return new RegExp("(" + arg2 + ")", "g").test(arg1);
-        }
+      public static function leftPadChar(param1:String, param2:int, param3:String) : String {
+         if(param1 == null)
+         {
+            return null;
+         }
+         var _loc4_:int = param2 - param1.length;
+         if(_loc4_ <= 0)
+         {
+            return param1;
+         }
+         if(_loc4_ > PAD_LIMIT)
+         {
+            return leftPad(param1,param2,param3);
+         }
+         return padding(_loc4_,param3).concat(param1);
+      }
 
-        public static function containsNone(arg1:String, arg2:String):Boolean
-        {
-            if (isEmpty(arg1) || arg2 == null)
-            {
-                return true;
-            }
-            return new RegExp("^[^" + arg2 + "]*$", EMPTY).test(arg1);
-        }
+      public static function rightPad(param1:String, param2:int, param3:String) : String {
+         var _loc7_:Array = null;
+         var _loc8_:Array = null;
+         var _loc9_:* = 0;
+         if(param1 == null)
+         {
+            return null;
+         }
+         if(isEmpty(param3))
+         {
+            param3 = " ";
+         }
+         var _loc4_:int = param3.length;
+         var _loc5_:int = param1.length;
+         var _loc6_:int = param2 - _loc5_;
+         if(_loc6_ <= 0)
+         {
+            return param1;
+         }
+         if(_loc4_ == 1 && _loc6_ <= PAD_LIMIT)
+         {
+            return rightPadChar(param1,param2,param3.charAt(0));
+         }
+         if(_loc6_ == _loc4_)
+         {
+            return param1.concat(param3);
+         }
+         if(_loc6_ < _loc4_)
+         {
+            return param1.concat(param3.substring(0,_loc6_));
+         }
+         _loc7_ = new Array();
+         _loc8_ = param3.split("");
+         _loc9_ = 0;
+         while(_loc9_ < _loc6_)
+         {
+            _loc7_[_loc9_] = _loc8_[_loc9_ % _loc4_];
+            _loc9_++;
+         }
+         return param1.concat(_loc7_.join(""));
+      }
 
-        public static function containsOnly(arg1:String, arg2:String):Boolean
-        {
-            if (arg1 == null || isEmpty(arg2))
-            {
-                return false;
-            }
-            if (arg1.length == 0)
-            {
-                return true;
-            }
-            return new RegExp("^[" + arg2 + "]*$", "g").test(arg1);
-        }
+      public static function rightPadChar(param1:String, param2:int, param3:String) : String {
+         if(param1 == null)
+         {
+            return null;
+         }
+         var _loc4_:int = param2 - param1.length;
+         if(_loc4_ <= 0)
+         {
+            return param1;
+         }
+         if(_loc4_ > PAD_LIMIT)
+         {
+            return rightPad(param1,param2,param3);
+         }
+         return param1.concat(padding(_loc4_,param3));
+      }
 
-        public static function indexOfAny(arg1:String, arg2:String):int
-        {
-            if (isEmpty(arg1) || isEmpty(arg2))
-            {
-                return INDEX_NOT_FOUND;
-            }
-            return arg1.search(new RegExp("[" + arg2 + "]", EMPTY));
-        }
+      private static function padding(param1:int, param2:String) : String {
+         var _loc3_:String = EMPTY;
+         var _loc4_:* = 0;
+         while(_loc4_ < param1)
+         {
+            _loc3_ = _loc3_ + param2;
+            _loc4_++;
+         }
+         return _loc3_;
+      }
 
-        public static function indexOfAnyBut(arg1:String, arg2:String):int
-        {
-            if (isEmpty(arg1) || isEmpty(arg2))
-            {
-                return INDEX_NOT_FOUND;
-            }
-            return arg1.search(new RegExp("[^" + arg2 + "]", EMPTY));
-        }
+      public static function replace(param1:String, param2:String, param3:String) : String {
+         if(param1 == null || (isEmpty(param2)) || param3 == null)
+         {
+            return param1;
+         }
+         return param1.replace(new RegExp(param2,"g"),param3);
+      }
 
-        public static function difference(arg1:String, arg2:String):String
-        {
-            if (arg1 == null)
+      public static function replaceTo(param1:String, param2:String, param3:String, param4:int) : String {
+         if(param1 == null || (isEmpty(param2)) || param3 == null || param4 == 0)
+         {
+            return param1;
+         }
+         var _loc5_:* = "";
+         var _loc6_:* = 0;
+         var _loc7_:* = 0;
+         while((_loc7_ = param1.indexOf(param2,_loc6_)) != -1)
+         {
+            _loc5_ = _loc5_ + (param1.substring(_loc6_,_loc7_) + param3);
+            _loc6_ = _loc7_ + param2.length;
+            if(--param4 == 0)
             {
-                return arg2;
+               break;
             }
-            if (arg2 == null)
-            {
-                return arg1;
-            }
-            var loc1:*=indexOfDifference(arg1, arg2);
-            if (loc1 == -1)
-            {
-                return EMPTY;
-            }
-            return arg2.substring(loc1);
-        }
+         }
+         return _loc5_ = _loc5_ + param1.substring(_loc6_);
+      }
 
-        public static function indexOfDifference(arg1:String, arg2:String):int
-        {
-            var loc1:*=0;
-            if (arg1 == arg2)
+      public static function replaceOnce(param1:String, param2:String, param3:String) : String {
+         if(param1 == null || (isEmpty(param2)) || param3 == null)
+         {
+            return param1;
+         }
+         return param1.replace(new RegExp(param2,EMPTY),param3);
+      }
+
+      public static function defaultIfEmpty(param1:String, param2:String) : String {
+         return isEmpty(param1)?param2:param1;
+      }
+
+      public static function isEmpty(param1:String) : Boolean {
+         if(param1 == null)
+         {
+            return true;
+         }
+         return param1.length == 0;
+      }
+
+      public static function isNotEmpty(param1:String) : Boolean {
+         return !isEmpty(param1);
+      }
+
+      public static function isBlank(param1:String) : Boolean {
+         return isEmpty(trimToEmpty(param1));
+      }
+
+      public static function isNotBlank(param1:String) : Boolean {
+         return !isBlank(param1);
+      }
+
+      public static function trimToNull(param1:String) : String {
+         var _loc2_:String = trim(param1);
+         return isEmpty(_loc2_)?null:_loc2_;
+      }
+
+      public static function trimToEmpty(param1:String) : String {
+         return param1 == null?EMPTY:trim(param1);
+      }
+
+      public static function capitalize(param1:String) : String {
+         if(isEmpty(param1))
+         {
+            return param1;
+         }
+         return param1.charAt(0).toUpperCase() + param1.substring(1);
+      }
+
+      public static function uncapitalize(param1:String) : String {
+         if(isEmpty(param1))
+         {
+            return param1;
+         }
+         return param1.charAt(0).toLowerCase() + param1.substring(1);
+      }
+
+      public static function titleize(param1:String) : String {
+         if(isEmpty(param1))
+         {
+            return param1;
+         }
+         var _loc2_:Array = param1.toLowerCase().split(" ");
+         var _loc3_:* = 0;
+         while(_loc3_ < _loc2_.length)
+         {
+            _loc2_[_loc3_] = capitalize(_loc2_[_loc3_]);
+            _loc3_++;
+         }
+         return _loc2_.join(" ");
+      }
+
+      public static function substringAfter(param1:String, param2:String) : String {
+         if(isEmpty(param1))
+         {
+            return param1;
+         }
+         if(param2 == null)
+         {
+            return EMPTY;
+         }
+         var _loc3_:int = param1.indexOf(param2);
+         if(_loc3_ == INDEX_NOT_FOUND)
+         {
+            return EMPTY;
+         }
+         return param1.substring(_loc3_ + param2.length);
+      }
+
+      public static function substringAfterLast(param1:String, param2:String) : String {
+         if(isEmpty(param1))
+         {
+            return param1;
+         }
+         if(isEmpty(param2))
+         {
+            return EMPTY;
+         }
+         var _loc3_:int = param1.lastIndexOf(param2);
+         if(_loc3_ == INDEX_NOT_FOUND || _loc3_ == param1.length - param2.length)
+         {
+            return EMPTY;
+         }
+         return param1.substring(_loc3_ + param2.length);
+      }
+
+      public static function substringBefore(param1:String, param2:String) : String {
+         if((isEmpty(param1)) || param2 == null)
+         {
+            return param1;
+         }
+         if(param2.length == 0)
+         {
+            return EMPTY;
+         }
+         var _loc3_:int = param1.indexOf(param2);
+         if(_loc3_ == INDEX_NOT_FOUND)
+         {
+            return param1;
+         }
+         return param1.substring(0,_loc3_);
+      }
+
+      public static function substringBeforeLast(param1:String, param2:String) : String {
+         if((isEmpty(param1)) || (isEmpty(param2)))
+         {
+            return param1;
+         }
+         var _loc3_:int = param1.lastIndexOf(param2);
+         if(_loc3_ == INDEX_NOT_FOUND)
+         {
+            return param1;
+         }
+         return param1.substring(0,_loc3_);
+      }
+
+      public static function substringBetween(param1:String, param2:String, param3:String) : String {
+         var _loc5_:* = 0;
+         if(param1 == null || param2 == null || param3 == null)
+         {
+            return null;
+         }
+         var _loc4_:int = param1.indexOf(param2);
+         if(_loc4_ != INDEX_NOT_FOUND)
+         {
+            _loc5_ = param1.indexOf(param3,_loc4_ + param2.length);
+            if(_loc5_ != INDEX_NOT_FOUND)
             {
-                return INDEX_NOT_FOUND;
+               return param1.substring(_loc4_ + param2.length,_loc5_);
             }
-            if (isEmpty(arg1) || isEmpty(arg2))
+         }
+         return null;
+      }
+
+      public static function strip(param1:String, param2:String) : String {
+         if(isEmpty(param1))
+         {
+            return param1;
+         }
+         return stripEnd(stripStart(param1,param2),param2);
+      }
+
+      public static function stripStart(param1:String, param2:String) : String {
+         if(isEmpty(param1))
+         {
+            return param1;
+         }
+         var _loc3_:RegExp = new RegExp("^[" + ((param2) || (" ")) + "]*",EMPTY);
+         return param1.replace(_loc3_,EMPTY);
+      }
+
+      public static function stripEnd(param1:String, param2:String) : String {
+         if(isEmpty(param1))
+         {
+            return param1;
+         }
+         var _loc3_:RegExp = new RegExp("[" + ((param2) || (" ")) + "]*$",EMPTY);
+         return param1.replace(_loc3_,EMPTY);
+      }
+
+      public static function abbreviate(param1:String, param2:int, param3:int) : String {
+         if(param1 == null)
+         {
+            return param1;
+         }
+         if(param3 < 4)
+         {
+            throw new IllegalArgumentException("Minimum abbreviation width is 4");
+         }
+         else
+         {
+            if(param1.length <= param3)
             {
-                return 0;
+               return param1;
             }
-            loc1 = 0;
-            while (loc1 < arg1.length && loc1 < arg2.length)
+            if(param2 > param1.length)
             {
-                if (arg1.charAt(loc1) != arg2.charAt(loc1))
-                {
-                    break;
-                }
-                ++loc1;
+               param2 = param1.length;
             }
-            if (loc1 < arg2.length || loc1 < arg1.length)
+            if(param1.length - param2 < param3 - 3)
             {
-                return loc1;
+               param2 = param1.length - (param3 - 3);
             }
+            if(param2 <= 4)
+            {
+               return param1.substring(0,param3 - 3) + "...";
+            }
+            if(param3 < 7)
+            {
+               throw new IllegalArgumentException("Minimum abbreviation width with offset is 7");
+            }
+            else
+            {
+               if(param2 + (param3 - 3) < param1.length)
+               {
+                  return "..." + abbreviate(param1.substring(param2),0,param3 - 3);
+               }
+               return "..." + param1.substring(param1.length - (param3 - 3));
+            }
+         }
+      }
+
+      public static function ordinalIndexOf(param1:String, param2:String, param3:int) : int {
+         if(param1 == null || param2 == null || param3 <= 0)
+         {
             return INDEX_NOT_FOUND;
-        }
-
-        public static function equals(arg1:String, arg2:String):Boolean
-        {
-            return new RegExp(arg1, EMPTY).test(arg2);
-        }
-
-        public static function equalsIgnoreCase(arg1:String, arg2:String):Boolean
-        {
-            return new RegExp(arg1, "i").test(arg2);
-        }
-
-        public static function isAlpha(arg1:String):Boolean
-        {
-            return testString(arg1, new RegExp("^[a-zA-Z]*$"));
-        }
-
-        public static function isAlphaSpace(arg1:String):Boolean
-        {
-            return testString(arg1, new RegExp("^[a-zA-Z\\s]*$"));
-        }
-
-        public static function isAlphanumeric(arg1:String):Boolean
-        {
-            return testString(arg1, new RegExp("^[a-zA-Z0-9]*$"));
-        }
-
-        public static function isAlphanumericSpace(arg1:String):Boolean
-        {
-            return testString(arg1, new RegExp("^[a-zA-Z0-9\\s]*$"));
-        }
-
-        public static function isNumeric(arg1:String):Boolean
-        {
-            return testString(arg1, new RegExp("^[0-9]*$"));
-        }
-
-        public static function isDigit(arg1:String):Boolean
-        {
-            return testString(arg1, new RegExp("\\d+"));
-        }
-
-        public static function isNumericSpace(arg1:String):Boolean
-        {
-            return testString(arg1, new RegExp("^[0-9\\s]*$"));
-        }
-
-        public static function isWhitespace(arg1:String):Boolean
-        {
-            return testString(arg1, new RegExp("^[\\s]*$"));
-        }
-
-        internal static function testString(arg1:String, arg2:RegExp):Boolean
-        {
-            return !(arg1 == null) && arg2.test(arg1);
-        }
-
-        public static function overlay(arg1:String, arg2:String, arg3:int, arg4:int):String
-        {
-            var loc2:*=0;
-            if (arg1 == null)
+         }
+         if(param2.length == 0)
+         {
+            return 0;
+         }
+         var _loc4_:* = 0;
+         var _loc5_:int = INDEX_NOT_FOUND;
+         while(true)
+         {
+            _loc5_ = param1.indexOf(param2,_loc5_ + 1);
+            if(_loc5_ < 0)
             {
-                return null;
+               break;
             }
-            if (arg2 == null)
+            _loc4_++;
+            if(_loc4_ >= param3)
             {
-                arg2 = EMPTY;
+               return _loc5_;
             }
-            var loc1:*=arg1.length;
-            if (arg3 < 0)
+         }
+         return _loc5_;
+      }
+
+      public static function countMatches(param1:String, param2:String) : int {
+         if((isEmpty(param1)) || (isEmpty(param2)))
+         {
+            return 0;
+         }
+         return param1.match(new RegExp("(" + param2 + ")","g")).length;
+      }
+
+      public static function contains(param1:String, param2:String) : Boolean {
+         if(param1 == null || param2 == null)
+         {
+            return false;
+         }
+         return new RegExp("(" + param2 + ")","g").test(param1);
+      }
+
+      public static function containsNone(param1:String, param2:String) : Boolean {
+         if((isEmpty(param1)) || param2 == null)
+         {
+            return true;
+         }
+         return new RegExp("^[^" + param2 + "]*$",EMPTY).test(param1);
+      }
+
+      public static function containsOnly(param1:String, param2:String) : Boolean {
+         if(param1 == null || (isEmpty(param2)))
+         {
+            return false;
+         }
+         if(param1.length == 0)
+         {
+            return true;
+         }
+         return new RegExp("^[" + param2 + "]*$","g").test(param1);
+      }
+
+      public static function indexOfAny(param1:String, param2:String) : int {
+         if((isEmpty(param1)) || (isEmpty(param2)))
+         {
+            return INDEX_NOT_FOUND;
+         }
+         return param1.search(new RegExp("[" + param2 + "]",EMPTY));
+      }
+
+      public static function indexOfAnyBut(param1:String, param2:String) : int {
+         if((isEmpty(param1)) || (isEmpty(param2)))
+         {
+            return INDEX_NOT_FOUND;
+         }
+         return param1.search(new RegExp("[^" + param2 + "]",EMPTY));
+      }
+
+      public static function difference(param1:String, param2:String) : String {
+         if(param1 == null)
+         {
+            return param2;
+         }
+         if(param2 == null)
+         {
+            return param1;
+         }
+         var _loc3_:int = indexOfDifference(param1,param2);
+         if(_loc3_ == -1)
+         {
+            return EMPTY;
+         }
+         return param2.substring(_loc3_);
+      }
+
+      public static function indexOfDifference(param1:String, param2:String) : int {
+         var _loc3_:* = 0;
+         if(param1 == param2)
+         {
+            return INDEX_NOT_FOUND;
+         }
+         if((isEmpty(param1)) || (isEmpty(param2)))
+         {
+            return 0;
+         }
+         _loc3_ = 0;
+         while(_loc3_ < param1.length && _loc3_ < param2.length)
+         {
+            if(param1.charAt(_loc3_) != param2.charAt(_loc3_))
             {
-                arg3 = 0;
+               break;
             }
-            if (arg3 > loc1)
-            {
-                arg3 = loc1;
-            }
-            if (arg4 < 0)
-            {
-                arg4 = 0;
-            }
-            if (arg4 > loc1)
-            {
-                arg4 = loc1;
-            }
-            if (arg3 > arg4)
-            {
-                loc2 = arg3;
-                arg3 = arg4;
-                arg4 = loc2;
-            }
-            return arg1.substring(0, arg3).concat(arg2).concat(arg1.substring(arg4));
-        }
+            _loc3_++;
+         }
+         if(_loc3_ < param2.length || _loc3_ < param1.length)
+         {
+            return _loc3_;
+         }
+         return INDEX_NOT_FOUND;
+      }
 
-        public static function remove(arg1:String, arg2:String):String
-        {
-            return safeRemove(arg1, new RegExp(arg2, "g"));
-        }
+      public static function equals(param1:String, param2:String) : Boolean {
+         return new RegExp(param1,EMPTY).test(param2);
+      }
 
-        public static function removeEnd(arg1:String, arg2:String):String
-        {
-            return safeRemove(arg1, new RegExp(arg2 + "$", EMPTY));
-        }
+      public static function equalsIgnoreCase(param1:String, param2:String) : Boolean {
+         return new RegExp(param1,"i").test(param2);
+      }
 
-        public static function removeStart(arg1:String, arg2:String):String
-        {
-            return safeRemove(arg1, new RegExp("^" + arg2, EMPTY));
-        }
+      public static function isAlpha(param1:String) : Boolean {
+         return testString(param1,new RegExp("^[a-zA-Z]*$"));
+      }
 
-        internal static function safeRemove(arg1:String, arg2:RegExp):String
-        {
-            if (isEmpty(arg1))
-            {
-                return arg1;
-            }
-            return arg1.replace(arg2, EMPTY);
-        }
+      public static function isAlphaSpace(param1:String) : Boolean {
+         return testString(param1,new RegExp("^[a-zA-Z\\s]*$"));
+      }
 
-        public static function endsWith(str:String, substr:String):Boolean
-        {
-            return testString(str, new RegExp(substr + "$", EMPTY));
-        }
+      public static function isAlphanumeric(param1:String) : Boolean {
+         return testString(param1,new RegExp("^[a-zA-Z0-9]*$"));
+      }
 
-        internal static const EMPTY:String="";
+      public static function isAlphanumericSpace(param1:String) : Boolean {
+         return testString(param1,new RegExp("^[a-zA-Z0-9\\s]*$"));
+      }
 
-        internal static const INDEX_NOT_FOUND:int=-1;
+      public static function isNumeric(param1:String) : Boolean {
+         return testString(param1,new RegExp("^[0-9]*$"));
+      }
 
-        internal static const PAD_LIMIT:uint=8192;
-    }
+      public static function isDigit(param1:String) : Boolean {
+         return testString(param1,new RegExp("\\d+"));
+      }
+
+      public static function isNumericSpace(param1:String) : Boolean {
+         return testString(param1,new RegExp("^[0-9\\s]*$"));
+      }
+
+      public static function isWhitespace(param1:String) : Boolean {
+         return testString(param1,new RegExp("^[\\s]*$"));
+      }
+
+      private static function testString(param1:String, param2:RegExp) : Boolean {
+         return !(param1 == null) && (param2.test(param1));
+      }
+
+      public static function overlay(param1:String, param2:String, param3:int, param4:int) : String {
+         var _loc6_:* = 0;
+         if(param1 == null)
+         {
+            return null;
+         }
+         if(param2 == null)
+         {
+            param2 = EMPTY;
+         }
+         var _loc5_:int = param1.length;
+         if(param3 < 0)
+         {
+            param3 = 0;
+         }
+         if(param3 > _loc5_)
+         {
+            param3 = _loc5_;
+         }
+         if(param4 < 0)
+         {
+            param4 = 0;
+         }
+         if(param4 > _loc5_)
+         {
+            param4 = _loc5_;
+         }
+         if(param3 > param4)
+         {
+            _loc6_ = param3;
+            param3 = param4;
+            param4 = _loc6_;
+         }
+         return param1.substring(0,param3).concat(param2).concat(param1.substring(param4));
+      }
+
+      public static function remove(param1:String, param2:String) : String {
+         return safeRemove(param1,new RegExp(param2,"g"));
+      }
+
+      public static function removeEnd(param1:String, param2:String) : String {
+         return safeRemove(param1,new RegExp(param2 + "$",EMPTY));
+      }
+
+      public static function removeStart(param1:String, param2:String) : String {
+         return safeRemove(param1,new RegExp("^" + param2,EMPTY));
+      }
+
+      private static function safeRemove(param1:String, param2:RegExp) : String {
+         if(isEmpty(param1))
+         {
+            return param1;
+         }
+         return param1.replace(param2,EMPTY);
+      }
+
+      public static function endsWith(param1:String, param2:String) : Boolean {
+         return testString(param1,new RegExp(param2 + "$",EMPTY));
+      }
+
+      public static function startsWith(param1:String, param2:String) : Boolean {
+         return testString(param1,new RegExp("^" + param2,EMPTY));
+      }
+
+      public static function compareToIgnoreCase(param1:String, param2:String) : int {
+         if(param1 == null || param2 == null)
+         {
+            throw new NullPointerException();
+         }
+         else
+         {
+            return compareTo(param1.toLowerCase(),param2.toLowerCase());
+         }
+      }
+
+      public static function compareTo(param1:String, param2:String) : int {
+         if(param1 == null || param2 == null)
+         {
+            throw new NullPointerException();
+         }
+         else
+         {
+            return param1.localeCompare(param2);
+         }
+      }
+   }
+
 }

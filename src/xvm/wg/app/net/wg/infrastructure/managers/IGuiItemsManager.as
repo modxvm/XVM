@@ -1,8 +1,12 @@
-package net.wg.infrastructure.managers 
+package net.wg.infrastructure.managers
 {
-    import net.wg.infrastructure.base.meta.*;
-    
-    public interface IGuiItemsManager extends net.wg.infrastructure.base.meta.IGuiItemsManagerMeta
-    {
-    }
+   import net.wg.infrastructure.base.meta.IGuiItemsManagerMeta;
+
+
+   public interface IGuiItemsManager extends IGuiItemsManagerMeta
+   {
+          
+
+   }
+
 }

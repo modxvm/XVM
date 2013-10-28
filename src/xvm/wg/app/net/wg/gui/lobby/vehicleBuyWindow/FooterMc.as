@@ -1,43 +1,51 @@
-package net.wg.gui.lobby.vehicleBuyWindow 
+package net.wg.gui.lobby.vehicleBuyWindow
 {
-    import net.wg.gui.components.controls.*;
-    import scaleform.clik.controls.*;
-    import scaleform.clik.core.*;
-    
-    public class FooterMc extends scaleform.clik.core.UIComponent
-    {
-        public function FooterMc()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import scaleform.clik.controls.Button;
+   import net.wg.gui.components.controls.IconText;
+   import flash.text.TextField;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.expandBtn.buttonMode = true;
-            return;
-        }
 
-        public override function dispose():void
-        {
-            super.dispose();
-            this.submitBtn.dispose();
-            this.cancelBtn.dispose();
-            this.expandBtn.dispose();
-            this.totalCreditsPrice.dispose();
-            this.totalGoldPrice.dispose();
-            return;
-        }
+   public class FooterMc extends UIComponent
+   {
+          
+      public function FooterMc() {
+         super();
+      }
 
-        public var submitBtn:scaleform.clik.controls.Button;
+      public var submitBtn:Button;
 
-        public var cancelBtn:scaleform.clik.controls.Button;
+      public var cancelBtn:Button;
 
-        public var expandBtn:net.wg.gui.lobby.vehicleBuyWindow.ExpandButton;
+      public var expandBtn:ExpandButton;
 
-        public var totalCreditsPrice:net.wg.gui.components.controls.IconText;
+      public var totalCreditsPrice:IconText;
 
-        public var totalGoldPrice:net.wg.gui.components.controls.IconText;
-    }
+      public var totalGoldPrice:IconText;
+
+      public var warningMsg:TextField;
+
+      public function showWarning() : void {
+         gotoAndStop("warning");
+         this.warningMsg.text = DIALOGS.BUYVEHICLEDIALOG_WARNING;
+         _originalHeight = _originalHeight + VehicleBuyWindow.WARNING_HEIGHT;
+         setActualSize(width,height + VehicleBuyWindow.WARNING_HEIGHT);
+         setActualScale(1,1);
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.expandBtn.buttonMode = true;
+      }
+
+      override public function dispose() : void {
+         super.dispose();
+         this.submitBtn.dispose();
+         this.cancelBtn.dispose();
+         this.expandBtn.dispose();
+         this.totalCreditsPrice.dispose();
+         this.totalGoldPrice.dispose();
+      }
+   }
+
 }

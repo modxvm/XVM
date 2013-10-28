@@ -1,21 +1,22 @@
-package net.wg.gui.prebattle.company 
+package net.wg.gui.prebattle.company
 {
-    import flash.events.*;
-    
-    public class CompanyEvent extends flash.events.Event
-    {
-        public function CompanyEvent(arg1:String, arg2:Boolean=true, arg3:Boolean=false)
-        {
-            super(arg1, arg2, arg3);
-            return;
-        }
+   import flash.events.Event;
 
-        public static const SELECTED_ITEM:String="selectedItem";
 
-        public static const DROP_LIST_CLICK:String="listClick";
+   public class CompanyEvent extends Event
+   {
+          
+      public function CompanyEvent(param1:String, param2:Boolean=true, param3:Boolean=false) {
+         super(param1,param2,param3);
+      }
 
-        public var prbID:int;
+      public static const SELECTED_ITEM:String = "selectedItem";
 
-        public var isSelected:Boolean;
-    }
+      public static const DROP_LIST_CLICK:String = "listClick";
+
+      public var prbID:int;
+
+      public var isSelected:Boolean;
+   }
+
 }

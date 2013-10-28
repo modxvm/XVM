@@ -1,11 +1,14 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IModuleInfoMeta extends flash.events.IEventDispatcher
-    {
-        function onCancelClickS():void;
+   import flash.events.IEventDispatcher;
 
-        function as_setModuleInfo(arg1:Object):void;
-    }
+
+   public interface IModuleInfoMeta extends IEventDispatcher
+   {
+          
+      function onCancelClickS() : void;
+
+      function as_setModuleInfo(param1:Object) : void;
+   }
+
 }

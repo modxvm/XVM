@@ -1,78 +1,64 @@
-package net.wg.gui.prebattle.battleSession 
+package net.wg.gui.prebattle.battleSession
 {
-    import net.wg.data.daapi.base.*;
-    
-    public class BSListRendererVO extends net.wg.data.daapi.base.DAAPIDataClass
-    {
-        public function BSListRendererVO(arg1:Object)
-        {
-            super(arg1);
-            return;
-        }
+   import net.wg.data.daapi.base.DAAPIDataClass;
 
-        public function get prbID():Number
-        {
-            return this._prbID;
-        }
 
-        public function set prbID(arg1:Number):void
-        {
-            this._prbID = arg1;
-            return;
-        }
+   public class BSListRendererVO extends DAAPIDataClass
+   {
+          
+      public function BSListRendererVO(param1:Object) {
+         super(param1);
+      }
 
-        public function get prbType():Number
-        {
-            return this._prbType;
-        }
+      private var _prbID:Number;
 
-        public function set prbType(arg1:Number):void
-        {
-            this._prbType = arg1;
-            return;
-        }
+      private var _prbType:Number;
 
-        public function get descr():String
-        {
-            return this._descr;
-        }
+      private var _descr:String = "";
 
-        public function set descr(arg1:String):void
-        {
-            this._descr = arg1;
-            return;
-        }
+      private var _opponents:String = "";
 
-        public function get opponents():String
-        {
-            return this._opponents;
-        }
+      private var _startTime:String = "";
 
-        public function set opponents(arg1:String):void
-        {
-            this._opponents = arg1;
-            return;
-        }
+      public function get prbID() : Number {
+         return this._prbID;
+      }
 
-        public function get startTime():String
-        {
-            return this._startTime;
-        }
+      public function set prbID(param1:Number) : void {
+         this._prbID = param1;
+      }
 
-        public function set startTime(arg1:String):void
-        {
-            this._startTime = arg1;
-            return;
-        }
+      public function get prbType() : Number {
+         return this._prbType;
+      }
 
-        internal var _prbID:Number;
+      public function set prbType(param1:Number) : void {
+         this._prbType = param1;
+      }
 
-        internal var _prbType:Number;
+      public function get descr() : String {
+         return this._descr;
+      }
 
-        internal var _descr:String="";
+      public function set descr(param1:String) : void {
+         this._descr = param1;
+      }
 
-        internal var _opponents:String="";
+      public function get opponents() : String {
+         return this._opponents;
+      }
 
-        internal var _startTime:String="";
-    }
+      public function set opponents(param1:String) : void {
+         this._opponents = param1;
+      }
+
+      public function get startTime() : String {
+         return this._startTime;
+      }
+
+      public function set startTime(param1:String) : void {
+         this._startTime = param1;
+      }
+   }
+
 }

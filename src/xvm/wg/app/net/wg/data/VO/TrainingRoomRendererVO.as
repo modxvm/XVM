@@ -1,35 +1,36 @@
-package net.wg.data.VO 
+package net.wg.data.VO
 {
-    import net.wg.data.daapi.base.*;
-    
-    public class TrainingRoomRendererVO extends net.wg.data.daapi.base.DAAPIDataClass
-    {
-        public function TrainingRoomRendererVO(arg1:Object)
-        {
-            super(arg1);
-            return;
-        }
+   import net.wg.data.daapi.base.DAAPIDataClass;
 
-        public var accID:Number;
 
-        public var uid:Number;
+   public class TrainingRoomRendererVO extends DAAPIDataClass
+   {
+          
+      public function TrainingRoomRendererVO(param1:Object) {
+         super(param1);
+      }
 
-        public var himself:Boolean;
+      public var accID:Number;
 
-        public var userName:String="";
+      public var uid:Number;
 
-        public var fullName:String="";
+      public var himself:Boolean;
 
-        public var icon:String="";
+      public var userName:String = "";
 
-        public var vShortName:String="";
+      public var fullName:String = "";
 
-        public var vLevel:String="";
+      public var icon:String = "";
 
-        public var chatRoster:Number=0;
+      public var vShortName:String = "";
 
-        public var stateString:String="";
+      public var vLevel:String = "";
 
-        public var isPlayerSpeaking:Boolean;
-    }
+      public var chatRoster:Number = 0;
+
+      public var stateString:String = "";
+
+      public var isPlayerSpeaking:Boolean;
+   }
+
 }

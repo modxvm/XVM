@@ -1,13 +1,16 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IQuestsControlMeta extends flash.events.IEventDispatcher
-    {
-        function showQuestsWindowS():void;
+   import flash.events.IEventDispatcher;
 
-        function as_highlightControl():void;
 
-        function as_resetControl():void;
-    }
+   public interface IQuestsControlMeta extends IEventDispatcher
+   {
+          
+      function showQuestsWindowS() : void;
+
+      function as_highlightControl() : void;
+
+      function as_resetControl() : void;
+   }
+
 }

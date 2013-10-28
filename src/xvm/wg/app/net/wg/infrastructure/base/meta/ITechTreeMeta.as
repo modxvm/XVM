@@ -1,23 +1,26 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface ITechTreeMeta extends flash.events.IEventDispatcher
-    {
-        function requestNationTreeDataS():void;
+   import flash.events.IEventDispatcher;
 
-        function getNationTreeDataS(arg1:String):Object;
 
-        function goToNextVehicleS(arg1:Number):void;
+   public interface ITechTreeMeta extends IEventDispatcher
+   {
+          
+      function requestNationTreeDataS() : void;
 
-        function onCloseTechTreeS():void;
+      function getNationTreeDataS(param1:String) : Object;
 
-        function as_setAvailableNations(arg1:Array):void;
+      function goToNextVehicleS(param1:Number) : void;
 
-        function as_setSelectedNation(arg1:String):void;
+      function onCloseTechTreeS() : void;
 
-        function as_refreshNationTreeData(arg1:String):void;
+      function as_setAvailableNations(param1:Array) : void;
 
-        function as_setUnlockProps(arg1:Array):void;
-    }
+      function as_setSelectedNation(param1:String) : void;
+
+      function as_refreshNationTreeData(param1:String) : void;
+
+      function as_setUnlockProps(param1:Array) : void;
+   }
+
 }

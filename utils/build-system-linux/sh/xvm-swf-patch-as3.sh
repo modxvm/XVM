@@ -22,7 +22,12 @@ for (( i=0; i<${#files[@]}; i++ ));
   do
     abcexport ${files[$i]}.orig.swf
     rabcdasm ${files[$i]}.orig-0.abc
-    patch --binary -p0 -s < ${files[$i]}.patch
+
+    for j in ${files[$i]}.*.patch;
+      do
+        patch --binary -p0 -s < $j
+      done
+
     rabcasm ${files[$i]}.orig-0/${files[$i]}.orig-0.main.asasm
     abcreplace ${files[$i]}.orig.swf 0 ${files[$i]}.orig-0/${files[$i]}.orig-0.main.abc
     rm ${files[$i]}.orig-0.abc

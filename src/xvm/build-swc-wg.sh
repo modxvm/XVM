@@ -17,13 +17,11 @@ else
     compc="compc"
 fi
 
-classes="
-App
-"
+class="App"
 
 "$compc" \
 	-source-path wg/app \
 	-source-path wg/links \
 	-source-path wg/ui \
 	-output lib/wg.swc \
-	-include-classes $classes
+	-include-classes $class

@@ -1,55 +1,47 @@
-package net.wg.data.managers.impl 
+package net.wg.data.managers.impl
 {
-    import net.wg.data.managers.*;
-    
-    public class ToolTipParams extends Object implements net.wg.data.managers.IToolTipParams
-    {
-        public function ToolTipParams(arg1:Object=null, arg2:Object=null, arg3:Object=null)
-        {
-            super();
-            this._header = arg1;
-            this._body = arg2;
-            this._note = arg3;
-            return;
-        }
+   import net.wg.data.managers.IToolTipParams;
 
-        public function get header():Object
-        {
-            return this._header;
-        }
 
-        public function set header(arg1:Object):void
-        {
-            this._header = arg1;
-            return;
-        }
+   public class ToolTipParams extends Object implements IToolTipParams
+   {
+          
+      public function ToolTipParams(param1:Object=null, param2:Object=null, param3:Object=null) {
+         super();
+         this._header = param1;
+         this._body = param2;
+         this._note = param3;
+      }
 
-        public function get body():Object
-        {
-            return this._body;
-        }
+      private var _header:Object;
 
-        public function set body(arg1:Object):void
-        {
-            this._body = arg1;
-            return;
-        }
+      private var _body:Object;
 
-        public function get note():Object
-        {
-            return this._note;
-        }
+      private var _note:Object;
 
-        public function set note(arg1:Object):void
-        {
-            this._note = this.note;
-            return;
-        }
+      public function get header() : Object {
+         return this._header;
+      }
 
-        internal var _header:Object;
+      public function set header(param1:Object) : void {
+         this._header = param1;
+      }
 
-        internal var _body:Object;
+      public function get body() : Object {
+         return this._body;
+      }
 
-        internal var _note:Object;
-    }
+      public function set body(param1:Object) : void {
+         this._body = param1;
+      }
+
+      public function get note() : Object {
+         return this._note;
+      }
+
+      public function set note(param1:Object) : void {
+         this._note = this.note;
+      }
+   }
+
 }

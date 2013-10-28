@@ -1,10 +1,15 @@
-package net.wg.infrastructure.interfaces 
+package net.wg.infrastructure.interfaces
 {
-    import __AS3__.vec.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    
-    public interface IDragDropListDelegate extends net.wg.infrastructure.interfaces.entity.IDroppable, net.wg.infrastructure.interfaces.entity.IDisposable
-    {
-        function setPairedDropLists(arg1:__AS3__.vec.Vector.<flash.display.InteractiveObject>):void;
-    }
+   import net.wg.infrastructure.interfaces.entity.IDroppable;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import __AS3__.vec.Vector;
+   import flash.display.InteractiveObject;
+
+
+   public interface IDragDropListDelegate extends IDroppable, IDisposable
+   {
+          
+      function setPairedDropLists(param1:Vector.<InteractiveObject>) : void;
+   }
+
 }

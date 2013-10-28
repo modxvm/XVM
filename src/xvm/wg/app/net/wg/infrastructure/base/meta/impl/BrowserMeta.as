@@ -1,77 +1,64 @@
-package net.wg.infrastructure.base.meta.impl 
+package net.wg.infrastructure.base.meta.impl
 {
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.base.*;
-    
-    public class BrowserMeta extends net.wg.infrastructure.base.AbstractWindowView
-    {
-        public function BrowserMeta()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.AbstractWindowView;
+   import net.wg.data.constants.Errors;
 
-        public function browserActionS(arg1:String):void
-        {
-            App.utils.asserter.assertNotNull(this.browserAction, "browserAction" + net.wg.data.constants.Errors.CANT_NULL);
-            this.browserAction(arg1);
-            return;
-        }
 
-        public function browserMoveS(arg1:int, arg2:int, arg3:int):void
-        {
-            App.utils.asserter.assertNotNull(this.browserMove, "browserMove" + net.wg.data.constants.Errors.CANT_NULL);
-            this.browserMove(arg1, arg2, arg3);
-            return;
-        }
+   public class BrowserMeta extends AbstractWindowView
+   {
+          
+      public function BrowserMeta() {
+         super();
+      }
 
-        public function browserDownS(arg1:int, arg2:int, arg3:int):void
-        {
-            App.utils.asserter.assertNotNull(this.browserDown, "browserDown" + net.wg.data.constants.Errors.CANT_NULL);
-            this.browserDown(arg1, arg2, arg3);
-            return;
-        }
+      public var browserAction:Function = null;
 
-        public function browserUpS(arg1:int, arg2:int, arg3:int):void
-        {
-            App.utils.asserter.assertNotNull(this.browserUp, "browserUp" + net.wg.data.constants.Errors.CANT_NULL);
-            this.browserUp(arg1, arg2, arg3);
-            return;
-        }
+      public var browserMove:Function = null;
 
-        public function browserFocusOutS():void
-        {
-            App.utils.asserter.assertNotNull(this.browserFocusOut, "browserFocusOut" + net.wg.data.constants.Errors.CANT_NULL);
-            this.browserFocusOut();
-            return;
-        }
+      public var browserDown:Function = null;
 
-        public function onBrowserShowS(arg1:Boolean):void
-        {
-            App.utils.asserter.assertNotNull(this.onBrowserShow, "onBrowserShow" + net.wg.data.constants.Errors.CANT_NULL);
-            this.onBrowserShow(arg1);
-            return;
-        }
+      public var browserUp:Function = null;
 
-        public function onBrowserHideS():void
-        {
-            App.utils.asserter.assertNotNull(this.onBrowserHide, "onBrowserHide" + net.wg.data.constants.Errors.CANT_NULL);
-            this.onBrowserHide();
-            return;
-        }
+      public var browserFocusOut:Function = null;
 
-        public var browserAction:Function=null;
+      public var onBrowserShow:Function = null;
 
-        public var browserMove:Function=null;
+      public var onBrowserHide:Function = null;
 
-        public var browserDown:Function=null;
+      public function browserActionS(param1:String) : void {
+         App.utils.asserter.assertNotNull(this.browserAction,"browserAction" + Errors.CANT_NULL);
+         this.browserAction(param1);
+      }
 
-        public var browserUp:Function=null;
+      public function browserMoveS(param1:int, param2:int, param3:int) : void {
+         App.utils.asserter.assertNotNull(this.browserMove,"browserMove" + Errors.CANT_NULL);
+         this.browserMove(param1,param2,param3);
+      }
 
-        public var browserFocusOut:Function=null;
+      public function browserDownS(param1:int, param2:int, param3:int) : void {
+         App.utils.asserter.assertNotNull(this.browserDown,"browserDown" + Errors.CANT_NULL);
+         this.browserDown(param1,param2,param3);
+      }
 
-        public var onBrowserShow:Function=null;
+      public function browserUpS(param1:int, param2:int, param3:int) : void {
+         App.utils.asserter.assertNotNull(this.browserUp,"browserUp" + Errors.CANT_NULL);
+         this.browserUp(param1,param2,param3);
+      }
 
-        public var onBrowserHide:Function=null;
-    }
+      public function browserFocusOutS() : void {
+         App.utils.asserter.assertNotNull(this.browserFocusOut,"browserFocusOut" + Errors.CANT_NULL);
+         this.browserFocusOut();
+      }
+
+      public function onBrowserShowS(param1:Boolean) : void {
+         App.utils.asserter.assertNotNull(this.onBrowserShow,"onBrowserShow" + Errors.CANT_NULL);
+         this.onBrowserShow(param1);
+      }
+
+      public function onBrowserHideS() : void {
+         App.utils.asserter.assertNotNull(this.onBrowserHide,"onBrowserHide" + Errors.CANT_NULL);
+         this.onBrowserHide();
+      }
+   }
+
 }

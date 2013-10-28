@@ -1,57 +1,55 @@
-package net.wg.gui.lobby.vehicleBuyWindow 
+package net.wg.gui.lobby.vehicleBuyWindow
 {
-    import __AS3__.vec.*;
-    import scaleform.clik.controls.*;
-    
-    public class ExpandButton extends scaleform.clik.controls.Button
-    {
-        public function ExpandButton()
-        {
-            super();
+   import net.wg.gui.components.controls.SoundButton;
+   import __AS3__.vec.Vector;
+
+
+   public class ExpandButton extends SoundButton
+   {
+          
+      public function ExpandButton() {
+         super();
+      }
+
+      private var _expanded:Boolean = false;
+
+      public function get expanded() : Boolean {
+         return this._expanded;
+      }
+
+      public function set expanded(param1:Boolean) : void {
+         this._expanded = param1;
+         setState("up");
+      }
+
+      override public function set label(param1:String) : void {
+         if(_label == param1)
+         {
             return;
-        }
+         }
+         _label = param1;
+      }
 
-        public function get expanded():Boolean
-        {
-            return this._expanded;
-        }
-
-        public function set expanded(arg1:Boolean):void
-        {
-            this._expanded = arg1;
-            setState("up");
-            return;
-        }
-
-        public override function set label(arg1:String):void
-        {
-            if (_label == arg1) 
+      override protected function getStatePrefixes() : Vector.<String> {
+         var _loc1_:Vector.<String> = new Vector.<String>();
+         if(this._expanded)
+         {
+            _loc1_.push("expanded_");
+         }
+         else
+         {
+            if(_selected)
             {
-                return;
+               _loc1_.push("selected_");
+               _loc1_.push("");
             }
-            _label = arg1;
-            return;
-        }
+            else
+            {
+               _loc1_.push("");
+            }
+         }
+         return _loc1_;
+      }
+   }
 
-        protected override function getStatePrefixes():__AS3__.vec.Vector.<String>
-        {
-            var loc1:*=new Vector.<String>();
-            if (this._expanded) 
-            {
-                loc1.push("expanded_");
-            }
-            else if (_selected) 
-            {
-                loc1.push("selected_");
-                loc1.push("");
-            }
-            else 
-            {
-                loc1.push("");
-            }
-            return loc1;
-        }
-
-        internal var _expanded:Boolean=false;
-    }
 }

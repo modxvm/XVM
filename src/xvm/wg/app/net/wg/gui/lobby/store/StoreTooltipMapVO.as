@@ -1,35 +1,34 @@
-package net.wg.gui.lobby.store 
+package net.wg.gui.lobby.store
 {
-    public class StoreTooltipMapVO extends Object
-    {
-        public function StoreTooltipMapVO(arg1:String, arg2:String, arg3:String)
-        {
-            super();
-            this._vehId = arg1;
-            this._shellId = arg2;
-            this._defaultId = arg3;
-            return;
-        }
 
-        public function get vehId():String
-        {
-            return this._vehId;
-        }
 
-        public function get shellId():String
-        {
-            return this._shellId;
-        }
+   public class StoreTooltipMapVO extends Object
+   {
+          
+      public function StoreTooltipMapVO(param1:String, param2:String, param3:String) {
+         super();
+         this._vehId = param1;
+         this._shellId = param2;
+         this._defaultId = param3;
+      }
 
-        public function get defaultId():String
-        {
-            return this._defaultId;
-        }
+      private var _vehId:String = null;
 
-        internal var _vehId:String=null;
+      private var _shellId:String = null;
 
-        internal var _shellId:String=null;
+      private var _defaultId:String = null;
 
-        internal var _defaultId:String=null;
-    }
+      public function get vehId() : String {
+         return this._vehId;
+      }
+
+      public function get shellId() : String {
+         return this._shellId;
+      }
+
+      public function get defaultId() : String {
+         return this._defaultId;
+      }
+   }
+
 }

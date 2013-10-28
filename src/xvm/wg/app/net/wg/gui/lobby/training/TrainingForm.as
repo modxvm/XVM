@@ -1,160 +1,146 @@
-package net.wg.gui.lobby.training 
+package net.wg.gui.lobby.training
 {
-    import flash.events.*;
-    import flash.text.*;
-    import flash.ui.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.components.icons.*;
-    import net.wg.gui.events.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.data.*;
-    import scaleform.clik.events.*;
-    import scaleform.clik.utils.*;
-    
-    public class TrainingForm extends net.wg.infrastructure.base.meta.impl.TrainingFormMeta implements net.wg.infrastructure.base.meta.ITrainingFormMeta
-    {
-        public function TrainingForm()
-        {
-            this.provider = [];
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.TrainingFormMeta;
+   import net.wg.infrastructure.base.meta.ITrainingFormMeta;
+   import net.wg.gui.components.controls.WgScrollingList;
+   import net.wg.gui.components.icons.BattleTypeIcon;
+   import net.wg.gui.components.controls.SoundButtonEx;
+   import flash.text.TextField;
+   import scaleform.clik.utils.Constraints;
+   import scaleform.clik.constants.ConstrainMode;
+   import scaleform.clik.events.ButtonEvent;
+   import net.wg.gui.events.TrainingEvent;
+   import flash.ui.Keyboard;
+   import flash.events.KeyboardEvent;
+   import scaleform.clik.constants.InvalidationType;
+   import scaleform.clik.data.DataProvider;
+   import scaleform.clik.events.InputEvent;
 
-        public override function updateStage(arg1:Number, arg2:Number):void
-        {
-            this.setViewSize(arg1, arg2);
-            return;
-        }
 
-        public final override function setViewSize(arg1:Number, arg2:Number):void
-        {
-            this._myWidth = arg1;
-            invalidateSize();
-            return;
-        }
+   public class TrainingForm extends TrainingFormMeta implements ITrainingFormMeta
+   {
+          
+      public function TrainingForm() {
+         this.provider = [];
+         super();
+      }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.updateStage(App.appWidth, App.appHeight);
-            this.ownerTitle.text = MENU.TRAINING_OWNERTITLE;
-            this.playersTitle.text = MENU.TRAINING_PLAYERSTITLE;
-            this.titleField.text = MENU.TRAINING_TITLE;
-            this.descriptionLabel.text = MENU.TRAINING_DESCRIPTION;
-            constraints = new scaleform.clik.utils.Constraints(this, scaleform.clik.constants.ConstrainMode.COUNTER_SCALE);
-            this.createButon.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.showCreateTraining);
-            App.utils.focusHandler.setFocus(this.createButon);
-            addEventListener(net.wg.gui.events.TrainingEvent.OPEN_TRAINING_ROOM, this.onOpenRoom);
-            App.gameInputMgr.setKeyHandler(flash.ui.Keyboard.ESCAPE, flash.events.KeyboardEvent.KEY_DOWN, this.handleEscape, true);
-            return;
-        }
+      private static const SUB_VIEW_MARGIN:Number = 120;
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
-            {
-                x = this._myWidth - _originalWidth >> 1;
-                y = -SUB_VIEW_MARGIN;
-            }
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA) && this.provider) 
-            {
-                this.listTitle.htmlText = MENU.TRAINING_LISTTITLE;
-                this.listTitle.htmlText = this.listTitle.htmlText + (" [<font color=\"#FFFFFF\">" + this.provider.length + "</font>]");
-                this.roomsLabel.htmlText = MENU.TRAINING_ROOMSLABEL;
-                this.roomsLabel.htmlText = this.roomsLabel.htmlText + (" <font color=\"#FFFFFF\">" + this.provider.length + "</font>");
-                this.playersLabel.htmlText = MENU.TRAINING_PLAYERSLABEL;
-                this.playersLabel.htmlText = this.playersLabel.htmlText + (" <font color=\"#FFFFFF\">" + this.totalPlayers + "</font>");
-            }
-            return;
-        }
+      public var list:WgScrollingList;
 
-        protected override function onDispose():void
-        {
-            App.gameInputMgr.clearKeyHandler(flash.ui.Keyboard.ESCAPE, flash.events.KeyboardEvent.KEY_DOWN);
-            this.createButon.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.showCreateTraining);
-            removeEventListener(net.wg.gui.events.TrainingEvent.OPEN_TRAINING_ROOM, this.onOpenRoom);
-            this.list.dispose();
-            this.list = null;
-            this.battleIcon.dispose();
-            this.battleIcon = null;
-            this.battleIconBig.dispose();
-            this.battleIconBig = null;
-            this.createButon.dispose();
-            this.createButon = null;
-            this.titleField = null;
-            this.descriptionLabel = null;
-            this.listTitle = null;
-            this.ownerTitle = null;
-            this.playersTitle = null;
-            this.roomsLabel = null;
-            this.playersLabel = null;
-            if (this.provider) 
-            {
-                this.provider.splice(0, this.provider.length);
-                this.provider = null;
-            }
-            super.onDispose();
-            return;
-        }
+      public var battleIcon:BattleTypeIcon;
 
-        public function as_setList(arg1:Array, arg2:Number):void
-        {
-            this.provider = arg1;
-            this.totalPlayers = arg2;
-            this.list.dataProvider = new scaleform.clik.data.DataProvider(arg1);
-            invalidate(scaleform.clik.constants.InvalidationType.DATA);
-            return;
-        }
+      public var battleIconBig:BattleTypeIcon;
 
-        internal function onOpenRoom(arg1:net.wg.gui.events.TrainingEvent):void
-        {
-            joinTrainingRequestS(arg1.initObj.id);
-            return;
-        }
+      public var createButon:SoundButtonEx;
 
-        internal function showCreateTraining(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            createTrainingRequestS();
-            return;
-        }
+      public var titleField:TextField;
 
-        internal function handleEscape(arg1:scaleform.clik.events.InputEvent):void
-        {
-            onEscapeS();
-            return;
-        }
+      public var descriptionLabel:TextField;
 
-        internal static const SUB_VIEW_MARGIN:Number=120;
+      public var listTitle:TextField;
 
-        public var list:net.wg.gui.components.controls.WgScrollingList;
+      public var ownerTitle:TextField;
 
-        public var battleIcon:net.wg.gui.components.icons.BattleTypeIcon;
+      public var playersTitle:TextField;
 
-        public var battleIconBig:net.wg.gui.components.icons.BattleTypeIcon;
+      public var roomsLabel:TextField;
 
-        public var createButon:net.wg.gui.components.controls.SoundButtonEx;
+      public var playersLabel:TextField;
 
-        public var titleField:flash.text.TextField;
+      private var provider:Array;
 
-        public var descriptionLabel:flash.text.TextField;
+      private var totalPlayers:Number = 0;
 
-        public var listTitle:flash.text.TextField;
+      private var _myWidth:Number = 0;
 
-        public var ownerTitle:flash.text.TextField;
+      override public function updateStage(param1:Number, param2:Number) : void {
+         this.setViewSize(param1,param2);
+      }
 
-        public var playersTitle:flash.text.TextField;
+      override public final function setViewSize(param1:Number, param2:Number) : void {
+         this._myWidth = param1;
+         invalidateSize();
+      }
 
-        public var roomsLabel:flash.text.TextField;
+      override protected function configUI() : void {
+         super.configUI();
+         this.updateStage(App.appWidth,App.appHeight);
+         this.ownerTitle.text = MENU.TRAINING_OWNERTITLE;
+         this.playersTitle.text = MENU.TRAINING_PLAYERSTITLE;
+         this.titleField.text = MENU.TRAINING_TITLE;
+         this.descriptionLabel.text = MENU.TRAINING_DESCRIPTION;
+         constraints = new Constraints(this,ConstrainMode.COUNTER_SCALE);
+         this.createButon.addEventListener(ButtonEvent.CLICK,this.showCreateTraining);
+         App.utils.focusHandler.setFocus(this.createButon);
+         addEventListener(TrainingEvent.OPEN_TRAINING_ROOM,this.onOpenRoom);
+         App.gameInputMgr.setKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN,this.handleEscape,true);
+      }
 
-        public var playersLabel:flash.text.TextField;
+      override protected function draw() : void {
+         super.draw();
+         if(isInvalid(InvalidationType.SIZE))
+         {
+            x = this._myWidth - _originalWidth >> 1;
+            y = -SUB_VIEW_MARGIN;
+         }
+         if((isInvalid(InvalidationType.DATA)) && (this.provider))
+         {
+            this.listTitle.htmlText = MENU.TRAINING_LISTTITLE;
+            this.listTitle.htmlText = this.listTitle.htmlText + (" [<font color=\"#FFFFFF\">" + this.provider.length + "</font>]");
+            this.roomsLabel.htmlText = MENU.TRAINING_ROOMSLABEL;
+            this.roomsLabel.htmlText = this.roomsLabel.htmlText + (" <font color=\"#FFFFFF\">" + this.provider.length + "</font>");
+            this.playersLabel.htmlText = MENU.TRAINING_PLAYERSLABEL;
+            this.playersLabel.htmlText = this.playersLabel.htmlText + (" <font color=\"#FFFFFF\">" + this.totalPlayers + "</font>");
+         }
+      }
 
-        internal var provider:Array;
+      override protected function onDispose() : void {
+         App.gameInputMgr.clearKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN);
+         this.createButon.removeEventListener(ButtonEvent.CLICK,this.showCreateTraining);
+         removeEventListener(TrainingEvent.OPEN_TRAINING_ROOM,this.onOpenRoom);
+         this.list.dispose();
+         this.list = null;
+         this.battleIcon.dispose();
+         this.battleIcon = null;
+         this.battleIconBig.dispose();
+         this.battleIconBig = null;
+         this.createButon.dispose();
+         this.createButon = null;
+         this.titleField = null;
+         this.descriptionLabel = null;
+         this.listTitle = null;
+         this.ownerTitle = null;
+         this.playersTitle = null;
+         this.roomsLabel = null;
+         this.playersLabel = null;
+         if(this.provider)
+         {
+            this.provider.splice(0,this.provider.length);
+            this.provider = null;
+         }
+         super.onDispose();
+      }
 
-        internal var totalPlayers:Number=0;
+      public function as_setList(param1:Array, param2:Number) : void {
+         this.provider = param1;
+         this.totalPlayers = param2;
+         this.list.dataProvider = new DataProvider(param1);
+         invalidate(InvalidationType.DATA);
+      }
 
-        internal var _myWidth:Number=0;
-    }
+      private function onOpenRoom(param1:TrainingEvent) : void {
+         joinTrainingRequestS(param1.initObj.id);
+      }
+
+      private function showCreateTraining(param1:ButtonEvent) : void {
+         createTrainingRequestS();
+      }
+
+      private function handleEscape(param1:InputEvent) : void {
+         onEscapeS();
+      }
+   }
+
 }

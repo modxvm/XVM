@@ -1,122 +1,119 @@
-package net.wg.gui.components.tooltips 
+package net.wg.gui.components.tooltips
 {
-    import __AS3__.vec.*;
-    import flash.display.*;
-    import flash.text.*;
-    import net.wg.gui.components.tooltips.VO.*;
-    import net.wg.gui.components.tooltips.helpers.*;
-    
-    public class ToolTipSkill extends net.wg.gui.components.tooltips.ToolTipSpecial
-    {
-        public function ToolTipSkill()
-        {
-            super();
-            this.headerTF = content.headerTF;
-            this.discrTF = content.discrTF;
-            this.infoTF = content.infoTF;
-            this.whiteBg = content.whiteBg;
-            seaprators = new Vector.<net.wg.gui.components.tooltips.Separator>();
-            return;
-        }
+   import net.wg.gui.components.tooltips.helpers.Utils;
+   import flash.text.TextField;
+   import flash.display.Sprite;
+   import flash.text.TextFormat;
+   import net.wg.gui.components.tooltips.VO.ToolTipSkillVO;
+   import net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO;
+   import flash.text.TextFieldAutoSize;
 
-        protected override function redraw():void
-        {
-            var loc2:*=null;
-            var loc4:*=null;
-            var loc1:*=new net.wg.gui.components.tooltips.VO.ToolTipSkillVO(_data);
-            contentMargin.bottom = 2;
-            blockResults = new Vector.<net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO>();
-            this.whiteBg.width = 10;
-            topPosition = bgShadowMargin.top + contentMargin.top;
-            this.headerTF.autoSize = flash.text.TextFieldAutoSize.LEFT;
-            this.headerTF.htmlText = net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(loc1.name, net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_HEADER, 18, "$TitleFont");
-            this.headerTF.width = this.headerTF.textWidth + 5;
-            this.headerTF.x = bgShadowMargin.left + contentMargin.left;
-            this.headerTF.y = topPosition;
-            topPosition = topPosition + (this.headerTF.textHeight + net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_BLOCK);
-            this.maxWidth = Math.max(this.maxWidth, this.headerTF.width + bgShadowMargin.horizontal + contentMargin.horizontal);
-            loc2 = net.wg.gui.components.tooltips.helpers.Utils.instance.createSeparate(content);
-            loc2.y = topPosition | 0;
-            seaprators.push(loc2);
-            topPosition = topPosition + net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_SEPARATE;
-            if (loc1.descr) 
-            {
-                this.whiteBg.y = topPosition - net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_SEPARATE;
-                this.discrTF.autoSize = flash.text.TextFieldAutoSize.LEFT;
-                this.discrTF.htmlText = net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(loc1.descr, net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NORMAL, 11, "$TextFont");
-                this.discrTF.width = this.maxWidth == 0 ? this.discrTF.textWidth + 5 : this.maxWidth - bgShadowMargin.left - contentMargin.left;
-                this.discrTF.x = bgShadowMargin.left + contentMargin.left;
-                this.discrTF.y = topPosition;
-                topPosition = topPosition + (this.discrTF.textHeight + net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_BLOCK | 0);
-                this.whiteBg.height = topPosition - this.whiteBg.y;
-            }
-            else 
-            {
-                this.discrTF.x = 0;
-                this.discrTF.y = 0;
-                this.discrTF.width = 10;
-                this.discrTF.visible = false;
-            }
-            var loc3:*=getInfoText(loc1.type);
-            if (loc3 == "") 
-            {
-                this.infoTF.x = 0;
-                this.infoTF.y = 0;
-                this.infoTF.width = 10;
-                this.infoTF.visible = false;
-            }
-            else 
-            {
-                this.whiteBg.height = topPosition - this.whiteBg.y;
-                loc2 = net.wg.gui.components.tooltips.helpers.Utils.instance.createSeparate(content);
-                loc2.y = topPosition;
-                seaprators.push(loc2);
-                topPosition = topPosition + net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_SEPARATE;
-                loc4 = new flash.text.TextFormat();
-                this.infoTF.autoSize = flash.text.TextFieldAutoSize.LEFT;
-                this.infoTF.htmlText = loc3;
-                loc4.bold = true;
-                this.infoTF.setTextFormat(loc4);
-                this.infoTF.x = bgShadowMargin.left + contentMargin.left;
-                this.infoTF.y = topPosition;
-                this.infoTF.width = this.infoTF.textWidth + 5;
-                topPosition = topPosition + (this.infoTF.textHeight + net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_BLOCK);
-                contentMargin.bottom = 12;
-            }
-            loc1 = null;
-            updatePositions();
-            super.redraw();
-            return;
-        }
 
-        protected override function updateSize():void
-        {
-            background.width = content.width + contentMargin.right + bgShadowMargin.right | 0;
-            background.height = content.height + contentMargin.bottom + bgShadowMargin.bottom | 0;
-            this.whiteBg.width = content.width + contentMargin.bottom + bgShadowMargin.bottom | 0;
-            return;
-        }
+   public class ToolTipSkill extends ToolTipSpecial
+   {
+          
+      public function ToolTipSkill() {
+         super();
+         this.headerTF = content.headerTF;
+         this.discrTF = content.discrTF;
+         this.infoTF = content.infoTF;
+         this.whiteBg = content.whiteBg;
+         separators = new Vector.<Separator>();
+      }
 
-        public override function toString():String
-        {
-            return "[SkillToolTip]";
-        }
+      private static function getInfoText(param1:String) : String {
+         var _loc2_:* = "";
+         _loc2_ = Utils.instance.htmlWrapper(App.utils.locale.makeString(ITEM_TYPES.tankman_skills_type(param1),{}),Utils.instance.COLOR_NORMAL,14,"$FieldFont",true);
+         return _loc2_;
+      }
 
-        internal static function getInfoText(arg1:String):String
-        {
-            var loc1:*="";
-            loc1 = net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(App.utils.locale.makeString(ITEM_TYPES.tankman_skills_type(arg1), {}), net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NORMAL, 14, "$FieldFont", true);
-            return loc1;
-        }
+      private var headerTF:TextField = null;
 
-        internal var headerTF:flash.text.TextField=null;
+      private var discrTF:TextField = null;
 
-        internal var discrTF:flash.text.TextField=null;
+      private var infoTF:TextField = null;
 
-        internal var infoTF:flash.text.TextField=null;
+      private var whiteBg:Sprite = null;
 
-        internal var whiteBg:flash.display.Sprite=null;
+      private var maxWidth:Number = 270;
 
-        internal var maxWidth:Number=270;
-    }
+      override protected function redraw() : void {
+         var _loc2_:Separator = null;
+         var _loc4_:TextFormat = null;
+         var _loc1_:ToolTipSkillVO = new ToolTipSkillVO(_data);
+         contentMargin.bottom = 2;
+         blockResults = new Vector.<ToolTipBlockResultVO>();
+         this.whiteBg.width = 10;
+         topPosition = bgShadowMargin.top + contentMargin.top;
+         this.headerTF.autoSize = TextFieldAutoSize.LEFT;
+         this.headerTF.htmlText = Utils.instance.htmlWrapper(_loc1_.name,Utils.instance.COLOR_HEADER,18,"$TitleFont");
+         this.headerTF.width = this.headerTF.textWidth + 5;
+         this.headerTF.x = bgShadowMargin.left + contentMargin.left;
+         this.headerTF.y = topPosition;
+         topPosition = topPosition + (this.headerTF.textHeight + Utils.instance.MARGIN_AFTER_BLOCK);
+         this.maxWidth = Math.max(this.maxWidth,this.headerTF.width + bgShadowMargin.horizontal + contentMargin.horizontal);
+         _loc2_ = Utils.instance.createSeparate(content);
+         _loc2_.y = topPosition | 0;
+         separators.push(_loc2_);
+         topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
+         if(_loc1_.descr)
+         {
+            this.whiteBg.y = topPosition - Utils.instance.MARGIN_AFTER_SEPARATE;
+            this.discrTF.autoSize = TextFieldAutoSize.LEFT;
+            this.discrTF.htmlText = Utils.instance.htmlWrapper(_loc1_.descr,Utils.instance.COLOR_NORMAL,11,"$TextFont");
+            this.discrTF.width = this.maxWidth != 0?this.maxWidth - bgShadowMargin.left - contentMargin.left:this.discrTF.textWidth + 5;
+            this.discrTF.x = bgShadowMargin.left + contentMargin.left;
+            this.discrTF.y = topPosition;
+            topPosition = topPosition + (this.discrTF.textHeight + Utils.instance.MARGIN_AFTER_BLOCK | 0);
+            this.whiteBg.height = topPosition - this.whiteBg.y;
+         }
+         else
+         {
+            this.discrTF.x = 0;
+            this.discrTF.y = 0;
+            this.discrTF.width = 10;
+            this.discrTF.visible = false;
+         }
+         var _loc3_:String = getInfoText(_loc1_.type);
+         if(_loc3_ != "")
+         {
+            this.whiteBg.height = topPosition - this.whiteBg.y;
+            _loc2_ = Utils.instance.createSeparate(content);
+            _loc2_.y = topPosition;
+            separators.push(_loc2_);
+            topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
+            _loc4_ = new TextFormat();
+            this.infoTF.autoSize = TextFieldAutoSize.LEFT;
+            this.infoTF.htmlText = _loc3_;
+            _loc4_.bold = true;
+            this.infoTF.setTextFormat(_loc4_);
+            this.infoTF.x = bgShadowMargin.left + contentMargin.left;
+            this.infoTF.y = topPosition;
+            this.infoTF.width = this.infoTF.textWidth + 5;
+            topPosition = topPosition + (this.infoTF.textHeight + Utils.instance.MARGIN_AFTER_BLOCK);
+            contentMargin.bottom = 12;
+         }
+         else
+         {
+            this.infoTF.x = 0;
+            this.infoTF.y = 0;
+            this.infoTF.width = 10;
+            this.infoTF.visible = false;
+         }
+         _loc1_ = null;
+         updatePositions();
+         super.redraw();
+      }
+
+      override protected function updateSize() : void {
+         background.width = content.width + contentMargin.right + bgShadowMargin.right | 0;
+         background.height = content.height + contentMargin.bottom + bgShadowMargin.bottom | 0;
+         this.whiteBg.width = content.width + contentMargin.bottom + bgShadowMargin.bottom | 0;
+      }
+
+      override public function toString() : String {
+         return "[SkillToolTip]";
+      }
+   }
+
 }

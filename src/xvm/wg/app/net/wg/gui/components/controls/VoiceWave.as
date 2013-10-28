@@ -1,127 +1,109 @@
-package net.wg.gui.components.controls 
+package net.wg.gui.components.controls
 {
-    import flash.display.*;
-    import flash.events.*;
-    import scaleform.clik.core.*;
-    
-    public class VoiceWave extends scaleform.clik.core.UIComponent
-    {
-        public function VoiceWave()
-        {
-            super();
+   import scaleform.clik.core.UIComponent;
+   import flash.display.MovieClip;
+   import flash.events.Event;
+
+
+   public class VoiceWave extends UIComponent
+   {
+          
+      public function VoiceWave() {
+         super();
+      }
+
+      private static const INVALIDATE_SPEAKING:String = "invSpeaking";
+
+      public var cross_x:int;
+
+      public var cross_y:int;
+
+      public var mutedClip:MovieClip;
+
+      private var _speak:Boolean = false;
+
+      private var _muted:Boolean = false;
+
+      private var _farcedStop:Boolean;
+
+      private var _speakVisible:Boolean;
+
+      override public function dispose() : void {
+         this.mutedClip = null;
+         removeEventListener(Event.ENTER_FRAME,this.frameHandler);
+         super.dispose();
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.mutedClip.cross.x = this.cross_x;
+         this.mutedClip.cross.y = this.cross_y;
+      }
+
+      public function isSpeak() : Boolean {
+         return this._speak;
+      }
+
+      public function setSpeaking(param1:Boolean, param2:Boolean=false) : void {
+         this._speakVisible = App.voiceChatMgr.isVOIPEnabledS();
+         if(param1 == this._speak || (this._muted))
+         {
             return;
-        }
+         }
+         this._farcedStop = param2;
+         this._speak = param1;
+         addEventListener(Event.ENTER_FRAME,this.frameHandler);
+         invalidate(INVALIDATE_SPEAKING);
+      }
 
-        public override function dispose():void
-        {
-            this.mutedClip = null;
-            this.removeEventListener(flash.events.Event.ENTER_FRAME, this.frameHandler);
-            super.dispose();
+      protected function frameHandler(param1:Event) : void {
+         if(this._speak)
+         {
+            this.nextFrame();
+            if(this.currentFrame == this.totalFrames)
+            {
+               this.stop();
+               this.removeEventListener(Event.ENTER_FRAME,this.frameHandler);
+            }
+         }
+         else
+         {
+            this.prevFrame();
+            if(this.currentFrame == 1)
+            {
+               this.stop();
+               this.removeEventListener(Event.ENTER_FRAME,this.frameHandler);
+            }
+         }
+         if(this._farcedStop)
+         {
+            this.gotoAndStop(1);
+            this.removeEventListener(Event.ENTER_FRAME,this.frameHandler);
+         }
+      }
+
+      public function isMuted() : Boolean {
+         return this._muted;
+      }
+
+      public function setMuted(param1:Boolean) : void {
+         if(this._muted == param1)
+         {
             return;
-        }
+         }
+         if((param1) && (this._speak))
+         {
+            this.setSpeaking(false,true);
+         }
+         this.mutedClip.visible = this._muted = param1;
+      }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.mutedClip.cross.x = this.cross_x;
-            this.mutedClip.cross.y = this.cross_y;
-            return;
-        }
+      override protected function draw() : void {
+         if(isInvalid(INVALIDATE_SPEAKING))
+         {
+            this.visible = this._speakVisible;
+         }
+      }
+   }
 
-        public function isSpeak():Boolean
-        {
-            return this._speak;
-        }
-
-        public function setSpeaking(arg1:Boolean, arg2:Boolean=false):void
-        {
-            this._speakVisible = App.voiceChatMgr.isVOIPEnabledS();
-            if (arg1 == this._speak || this._muted) 
-            {
-                return;
-            }
-            this._farcedStop = arg2;
-            this._speak = arg1;
-            if (!this.hasEventListener(flash.events.Event.ENTER_FRAME)) 
-            {
-                this.addEventListener(flash.events.Event.ENTER_FRAME, this.frameHandler);
-            }
-            invalidate(INVALIDATE_SPEAKING);
-            return;
-        }
-
-        protected function frameHandler(arg1:flash.events.Event):void
-        {
-            if (this._speak) 
-            {
-                this.nextFrame();
-                if (this.currentFrame == this.totalFrames) 
-                {
-                    this.stop();
-                    this.removeEventListener(flash.events.Event.ENTER_FRAME, this.frameHandler);
-                }
-            }
-            else 
-            {
-                this.prevFrame();
-                if (this.currentFrame == 1) 
-                {
-                    this.stop();
-                    this.removeEventListener(flash.events.Event.ENTER_FRAME, this.frameHandler);
-                }
-            }
-            if (this._farcedStop) 
-            {
-                this.gotoAndStop(1);
-                this.removeEventListener(flash.events.Event.ENTER_FRAME, this.frameHandler);
-            }
-            return;
-        }
-
-        public function isMuted():Boolean
-        {
-            return this._muted;
-        }
-
-        public function setMuted(arg1:Boolean):void
-        {
-            if (this._muted == arg1) 
-            {
-                return;
-            }
-            if (arg1 && this._speak) 
-            {
-                this.setSpeaking(false, true);
-            }
-            var loc1:*;
-            this._muted = loc1 = arg1;
-            this.mutedClip.visible = loc1;
-            return;
-        }
-
-        protected override function draw():void
-        {
-            if (isInvalid(INVALIDATE_SPEAKING)) 
-            {
-                this.visible = this._speakVisible;
-            }
-            return;
-        }
-
-        internal static const INVALIDATE_SPEAKING:String="invSpeaking";
-
-        public var cross_x:int;
-
-        public var cross_y:int;
-
-        public var mutedClip:flash.display.MovieClip;
-
-        internal var _speak:Boolean=false;
-
-        internal var _muted:Boolean=false;
-
-        internal var _farcedStop:Boolean;
-
-        internal var _speakVisible:Boolean;
-    }
 }

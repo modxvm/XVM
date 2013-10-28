@@ -1,28 +1,30 @@
-package net.wg.gui.events 
+package net.wg.gui.events
 {
-    import flash.events.*;
-    
-    public class FightButtonEvent extends flash.events.Event
-    {
-        public function FightButtonEvent(arg1:String, arg2:String=null, arg3:int=0)
-        {
-            super(arg1, true, true);
-            this.option = arg2;
-            this.mapID = arg3;
-            return;
-        }
+   import flash.events.Event;
 
-        public override function clone():flash.events.Event
-        {
-            return new net.wg.gui.events.FightButtonEvent(type, this.option);
-        }
 
-        public static const FIGHT_CLICK:String="fightClick";
+   public class FightButtonEvent extends Event
+   {
+          
+      public function FightButtonEvent(param1:String, param2:String=null, param3:int=undefined) {
+         super(param1,true,true);
+         this.option = param2;
+         this.mapID = param3;
+      }
 
-        public static const SELECT_CLICK:String="selectClick";
+      public static const FIGHT_CLICK:String = "fightClick";
 
-        public var option:String;
+      public static const SELECT_CLICK:String = "selectClick";
 
-        public var mapID:Number;
-    }
+      public static const SELECT_TOGGLE:String = "selectToggle";
+
+      public var option:String;
+
+      public var mapID:Number;
+
+      override public function clone() : Event {
+         return new FightButtonEvent(type,this.option);
+      }
+   }
+
 }

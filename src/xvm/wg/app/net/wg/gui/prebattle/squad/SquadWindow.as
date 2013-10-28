@@ -1,390 +1,363 @@
-package net.wg.gui.prebattle.squad 
+package net.wg.gui.prebattle.squad
 {
-    import flash.utils.*;
-    import net.wg.data.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.events.*;
-    import net.wg.gui.lobby.messengerBar.*;
-    import net.wg.gui.messenger.*;
-    import net.wg.gui.prebattle.data.*;
-    import net.wg.gui.prebattle.meta.*;
-    import net.wg.gui.prebattle.meta.abstract.*;
-    import net.wg.infrastructure.interfaces.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.data.*;
-    import scaleform.clik.events.*;
-    import scaleform.clik.utils.*;
-    import scaleform.gfx.*;
-    
-    public class SquadWindow extends net.wg.gui.prebattle.meta.abstract.PrebattleWindowAbstract implements net.wg.gui.prebattle.meta.IPrebattleWindowMeta
-    {
-        public function SquadWindow()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.prebattle.meta.abstract.PrebattleWindowAbstract;
+   import net.wg.gui.prebattle.meta.IPrebattleWindowMeta;
+   import net.wg.gui.messenger.ChannelComponent;
+   import net.wg.gui.components.controls.SoundButtonEx;
+   import net.wg.gui.components.controls.ScrollingListEx;
+   import scaleform.clik.data.DataProvider;
+   import net.wg.gui.prebattle.data.PlayerPrbInfoVO;
+   import scaleform.clik.constants.InvalidationType;
+   import scaleform.clik.utils.Constraints;
+   import scaleform.clik.constants.ConstrainMode;
+   import net.wg.gui.events.ListEventEx;
+   import scaleform.clik.events.ButtonEvent;
+   import net.wg.gui.components.windows.Window;
+   import net.wg.data.Aliases;
+   import scaleform.clik.utils.Padding;
+   import net.wg.gui.lobby.messengerBar.WindowGeometryInBar;
+   import net.wg.gui.events.MessengerBarEvent;
+   import net.wg.infrastructure.interfaces.IUserContextMenuGenerator;
+   import scaleform.gfx.MouseEventEx;
+   import flash.utils.setTimeout;
+   import flash.utils.clearTimeout;
 
-        internal function handleReadyClick(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            requestToReadyS(this.readyButton.label == MESSENGER.DIALOGS_SQUADCHANNEL_BUTTONS_READY);
-            return;
-        }
 
-        internal function onMemberItemClickHandler(arg1:net.wg.gui.events.ListEventEx):void
-        {
-            var loc1:*=null;
-            var loc2:*=false;
-            var loc3:*=null;
-            var loc4:*=null;
-            if (arg1.buttonIdx != scaleform.gfx.MouseEventEx.RIGHT_BUTTON) 
-            {
-                if ((loc4 = net.wg.gui.prebattle.squad.SquadItemRenderer(arg1.itemRenderer).data) && loc4.hasOwnProperty("dummy") && loc4.dummy) 
-                {
-                    showPrebattleSendInvitesWindowS();
-                }
-            }
-            else 
-            {
-                loc1 = net.wg.gui.prebattle.data.PlayerPrbInfoVO(arg1.itemData);
-                if (loc1.accID > -1) 
-                {
-                    loc2 = loc1.uid > -1;
-                    loc3 = new net.wg.gui.prebattle.squad.SquadWindowCIGenerator(loc2, canKickPlayerS());
-                    App.contextMenuMgr.showUserContextMenu(this, loc1, loc3);
-                }
-                else 
-                {
-                    App.contextMenuMgr.hide();
-                }
-            }
-            return;
-        }
+   public class SquadWindow extends PrebattleWindowAbstract implements IPrebattleWindowMeta
+   {
+          
+      public function SquadWindow() {
+         super();
+      }
 
-        internal function onRefreshMemberList(arg1:Array):void
-        {
-            var loc4:*=null;
-            var loc5:*=null;
-            if (canSendInviteS()) 
-            {
-                arg1.push(this.getInviteRoster());
-            }
-            var loc1:*=[];
-            var loc2:*=arg1.length;
-            var loc3:*=0;
-            while (loc3 < loc2) 
-            {
-                loc4 = new net.wg.gui.prebattle.data.PlayerPrbInfoVO(arg1[loc3]);
-                loc1.push(loc4);
-                if (loc4.colors != null) 
-                {
-                    loc5 = "";
-                    if (loc4.colors[0] != null) 
-                    {
-                        loc5 = loc5 + (" [0] " + loc4.colors[0]);
-                    }
-                    if (loc4.colors[1] != null) 
-                    {
-                        loc5 = loc5 + (" [1] " + loc4.colors[1]);
-                    }
-                }
-                ++loc3;
-            }
-            this.memberDataProvider = new scaleform.clik.data.DataProvider(loc1);
-            this.updateMemberList();
-            return;
-        }
+      public var squadChannelComponent:ChannelComponent;
 
-        internal function checkRosters():Boolean
-        {
-            var loc3:*=null;
-            var loc1:*=this.memberList.dataProvider.length;
-            var loc2:*=0;
-            while (loc2 < loc1) 
-            {
-                loc3 = this.memberList.getRendererAt(loc2) as net.wg.gui.prebattle.squad.SquadItemRenderer;
-                if (loc3 != null) 
-                {
-                    if (loc3 && loc3.data && loc3.data.dummy == true) 
-                    {
-                        return true;
-                    }
-                }
-                ++loc2;
-            }
-            return false;
-        }
+      public var leaveButton:SoundButtonEx;
 
-        internal function updateMemberList():void
-        {
-            this.memberList.labelField = "fullName";
-            this.memberList.dataProvider = this.memberDataProvider;
-            return;
-        }
+      public var readyButton:SoundButtonEx;
 
-        internal function coolDownReadyButton(arg1:uint):void
-        {
-            if (this.readyButton.enabled) 
+      public var memberList:ScrollingListEx;
+
+      private var readyBtnCoolDownID:uint = 0;
+
+      private var memberDataProvider:DataProvider;
+
+      private var _isReadyBtnEnabled:Boolean = false;
+
+      private var _isLeaveBtnEnabled:Boolean = false;
+
+      private var _canSendInvites:Boolean = false;
+
+      private var chatFocusCounter:int = 0;
+
+      override public function as_enableLeaveBtn(param1:Boolean) : void {
+         this.leaveButton.enabled = param1;
+      }
+
+      override public function as_enableReadyBtn(param1:Boolean) : void {
+         this.readyButton.enabled = param1;
+      }
+
+      override public function as_toggleReadyBtn(param1:Boolean) : void {
+         this.readyButton.label = param1?MESSENGER.DIALOGS_SQUADCHANNEL_BUTTONS_READY:MESSENGER.DIALOGS_SQUADCHANNEL_BUTTONS_NOTREADY;
+      }
+
+      override public function setFocus() : void {
+         super.setFocus();
+         if((this.squadChannelComponent) && this.chatFocusCounter < 2)
+         {
+            this.squadChannelComponent.setFocusToInput();
+            this.chatFocusCounter++;
+         }
+      }
+
+      override public function as_setPlayerState(param1:int, param2:Boolean, param3:Object) : void {
+         var _loc4_:PlayerPrbInfoVO = null;
+         var _loc6_:PlayerPrbInfoVO = null;
+         var _loc7_:SquadItemRenderer = null;
+         if(param3)
+         {
+            _loc4_ = new PlayerPrbInfoVO(param3);
+            var _loc5_:* = 0;
+            while(_loc5_ < this.memberList.dataProvider.length)
             {
-                this.readyButton.enabled = false;
-                this.readyBtnCoolDownID = flash.utils.setTimeout(this.enabledReadyButton, arg1 * 1000, true);
+               _loc6_ = this.memberList.dataProvider.requestItemAt(_loc5_) as PlayerPrbInfoVO;
+               if(_loc6_.uid == _loc4_.uid)
+               {
+                  _loc7_ = this.memberList.getRendererAt(_loc5_) as SquadItemRenderer;
+                  _loc7_.model.state = _loc4_.state;
+                  _loc7_.model.vShortName = _loc4_.vShortName;
+                  _loc7_.model.vLevel = _loc4_.vLevel;
+                  this.memberList.dataProvider.invalidate();
+               }
+               _loc5_++;
             }
             return;
-        }
+         }
+      }
 
-        internal function enabledReadyButton(arg1:Boolean):void
-        {
-            this.readyButton.enabled = arg1 && this._isReadyBtnEnabled;
-            flash.utils.clearTimeout(this.readyBtnCoolDownID);
-            return;
-        }
+      override public function as_setCoolDownForReadyButton(param1:uint) : void {
+         this.coolDownReadyButton(param1);
+      }
 
-        internal function updateInviteButton(arg1:Boolean):void
-        {
-            var loc4:*=null;
-            var loc5:*=null;
-            var loc1:*=this.memberList.dataProvider.length;
-            var loc2:*=false;
-            var loc3:*=0;
-            while (loc3 < loc1) 
+      override public function as_setRosterList(param1:int, param2:Boolean, param3:Array) : void {
+         this.onRefreshMemberList(param3);
+      }
+
+      override public function as_refreshPermissions() : void {
+         this.updatePermissions();
+      }
+
+      private function updatePermissions() : void {
+         this._isReadyBtnEnabled = isReadyBtnEnabledS();
+         this._isLeaveBtnEnabled = isLeaveBtnEnabledS();
+         this._canSendInvites = canSendInviteS();
+         this.leaveButton.enabled = this._isLeaveBtnEnabled;
+         this.readyButton.enabled = this._isReadyBtnEnabled;
+         this.updateInviteButton(this._canSendInvites);
+         this.updateMainButtons();
+      }
+
+      override protected function draw() : void {
+         var _loc1_:* = 0;
+         var _loc2_:* = 0;
+         super.draw();
+         if(isInvalid(InvalidationType.SIZE))
+         {
+            _loc1_ = window.width - window.contentPadding.left - window.contentPadding.right;
+            _loc2_ = window.height - window.contentPadding.top - window.contentPadding.bottom;
+            _width = _loc1_;
+            _height = _loc2_;
+            constraints.update(_loc1_,_loc2_);
+            if(this.memberList)
             {
-                if ((loc4 = this.memberList.getRendererAt(loc3) as net.wg.gui.prebattle.squad.SquadItemRenderer) != null) 
-                {
-                    if (loc4 && loc4.data && loc4.data.dummy == true) 
-                    {
-                        net.wg.gui.prebattle.squad.SquadItemRenderer(this.memberList.getRendererAt(loc3)).visible = arg1;
-                        loc2 = true;
-                    }
-                }
-                else 
-                {
-                    loc2 = true;
-                }
-                ++loc3;
+               this.memberList.x = _loc1_ - this.memberList.width;
             }
-            if (!loc2 && arg1) 
+            this.squadChannelComponent.invalidate(InvalidationType.SIZE);
+         }
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         constraints = new Constraints(this,ConstrainMode.REFLOW);
+         constraints.addElement("readyButton",this.readyButton,Constraints.TOP | Constraints.RIGHT);
+         constraints.addElement("leaveButton",this.leaveButton,Constraints.TOP | Constraints.LEFT | Constraints.RIGHT);
+         constraints.addElement("messageArea",this.squadChannelComponent.messageArea,Constraints.ALL);
+         constraints.addElement("messageAreaScrollBar",this.squadChannelComponent.messageAreaScrollBar,Constraints.RIGHT | Constraints.TOP | Constraints.BOTTOM);
+         constraints.addElement("memberList",this.memberList,Constraints.TOP | Constraints.BOTTOM);
+         constraints.addElement("messageInput",this.squadChannelComponent.messageInput,Constraints.LEFT | Constraints.RIGHT | Constraints.BOTTOM);
+         constraints.addElement("sendButton",this.squadChannelComponent.sendButton,Constraints.RIGHT | Constraints.BOTTOM);
+         if(this.memberList)
+         {
+            this.memberList.addEventListener(ListEventEx.ITEM_CLICK,this.onMemberItemClickHandler);
+         }
+         if(this.readyButton)
+         {
+            this.readyButton.addEventListener(ButtonEvent.CLICK,this.handleReadyClick);
+         }
+         if(this.leaveButton)
+         {
+            this.leaveButton.addEventListener(ButtonEvent.CLICK,this.handleLeaveClick);
+         }
+         this.squadChannelComponent.invalidate(InvalidationType.SIZE);
+         this.updateMemberList();
+         this.updatePermissions();
+      }
+
+      private function updateWindowProperties() : void {
+         Window(window).visible = true;
+      }
+
+      override protected function onDispose() : void {
+         super.onDispose();
+         App.utils.scheduler.cancelTask(this.updateWindowProperties);
+         this.memberList.removeEventListener(ListEventEx.ITEM_CLICK,this.onMemberItemClickHandler);
+         this.memberList.dispose();
+         this.readyButton.removeEventListener(ButtonEvent.CLICK,this.handleReadyClick);
+         this.readyButton.dispose();
+         this.leaveButton.removeEventListener(ButtonEvent.CLICK,this.handleLeaveClick);
+         this.leaveButton.dispose();
+      }
+
+      override protected function onPopulate() : void {
+         Window(window).visible = false;
+         super.onPopulate();
+         registerComponent(this.squadChannelComponent,Aliases.CHANNEL_COMPONENT);
+         window.useBottomBtns = true;
+         canClose = true;
+         enabledCloseBtn = false;
+         canDrag = true;
+         canResize = true;
+         canMinimize = true;
+         isCentered = false;
+         showWindowBg = false;
+         var _loc1_:Padding = window.contentPadding as Padding;
+         _loc1_.bottom = 22;
+         _loc1_.right = 12;
+         window.contentPadding = _loc1_;
+         window.title = MENU.HEADERBUTTONS_BATTLE_TYPES_SQUAD;
+         this.updateMainButtons();
+         geometry = new WindowGeometryInBar(MessengerBarEvent.PIN_CAROUSEL_WINDOW,getClientIDS());
+      }
+
+      private function updateMainButtons() : void {
+         if(this.leaveButton != null)
+         {
+            this.leaveButton.label = isPlayerCreatorS()?MESSENGER.DIALOGS_SQUADCHANNEL_BUTTONS_DISMISS:MESSENGER.DIALOGS_SQUADCHANNEL_BUTTONS_LEAVE;
+         }
+         if(this.readyButton != null)
+         {
+            this.readyButton.label = isPlayerReadyS()?MESSENGER.DIALOGS_SQUADCHANNEL_BUTTONS_NOTREADY:MESSENGER.DIALOGS_SQUADCHANNEL_BUTTONS_READY;
+         }
+      }
+
+      private function handleLeaveClick(param1:ButtonEvent) : void {
+         requestToLeaveS();
+      }
+
+      private function handleReadyClick(param1:ButtonEvent) : void {
+         requestToReadyS(this.readyButton.label == MESSENGER.DIALOGS_SQUADCHANNEL_BUTTONS_READY);
+      }
+
+      private function onMemberItemClickHandler(param1:ListEventEx) : void {
+         var _loc2_:PlayerPrbInfoVO = null;
+         var _loc3_:* = false;
+         var _loc4_:IUserContextMenuGenerator = null;
+         var _loc5_:Object = null;
+         if(param1.buttonIdx == MouseEventEx.RIGHT_BUTTON)
+         {
+            _loc2_ = PlayerPrbInfoVO(param1.itemData);
+            if(_loc2_.accID > -1)
             {
-                loc5 = new net.wg.gui.prebattle.data.PlayerPrbInfoVO(this.getInviteRoster());
-                this.memberDataProvider.push(loc5);
-                this.memberDataProvider.invalidate();
+               _loc3_ = _loc2_.uid > -1;
+               _loc4_ = new SquadWindowCIGenerator(_loc3_,canKickPlayerS());
+               App.contextMenuMgr.showUserContextMenu(this,_loc2_,_loc4_);
             }
-            return;
-        }
-
-        internal function getInviteRoster():Object
-        {
-            var loc1:*={};
-            loc1.uid = -1;
-            loc1.accID = -1;
-            loc1.fullName = MESSENGER.DIALOGS_SQUADCHANNEL_BUTTONS_INVITE;
-            loc1.userName = "";
-            loc1.dummy = true;
-            return loc1;
-        }
-
-        public override function as_enableLeaveBtn(arg1:Boolean):void
-        {
-            this.leaveButton.enabled = arg1;
-            return;
-        }
-
-        public override function as_enableReadyBtn(arg1:Boolean):void
-        {
-            this.readyButton.enabled = arg1;
-            return;
-        }
-
-        public override function as_toggleReadyBtn(arg1:Boolean):void
-        {
-            this.readyButton.label = arg1 ? MESSENGER.DIALOGS_SQUADCHANNEL_BUTTONS_READY : MESSENGER.DIALOGS_SQUADCHANNEL_BUTTONS_NOTREADY;
-            return;
-        }
-
-        public override function setFocus():void
-        {
-            super.setFocus();
-            if (this.squadChannelComponent) 
+            else
             {
-                this.squadChannelComponent.setFocusToInput();
+               App.contextMenuMgr.hide();
             }
-            return;
-        }
-
-        public override function as_setPlayerState(arg1:int, arg2:Boolean, arg3:Object):void
-        {
-            var loc1:*=null;
-            var loc3:*=null;
-            var loc4:*=null;
-            if (arg3) 
+         }
+         else
+         {
+            _loc5_ = SquadItemRenderer(param1.itemRenderer).data;
+            if((_loc5_) && (_loc5_.hasOwnProperty("dummy")) && (_loc5_.dummy))
             {
-                loc1 = new net.wg.gui.prebattle.data.PlayerPrbInfoVO(arg3);
+               showPrebattleSendInvitesWindowS();
             }
-            else 
+         }
+      }
+
+      private function onRefreshMemberList(param1:Array) : void {
+         var _loc5_:PlayerPrbInfoVO = null;
+         var _loc6_:String = null;
+         if(canSendInviteS())
+         {
+            param1.push(this.getInviteRoster());
+         }
+         var _loc2_:Array = [];
+         var _loc3_:int = param1.length;
+         var _loc4_:* = 0;
+         while(_loc4_ < _loc3_)
+         {
+            _loc5_ = new PlayerPrbInfoVO(param1[_loc4_]);
+            _loc2_.push(_loc5_);
+            if(_loc5_.colors != null)
             {
-                return;
+               _loc6_ = "";
+               if(_loc5_.colors[0] != null)
+               {
+                  _loc6_ = _loc6_ + (" [0] " + _loc5_.colors[0]);
+               }
+               if(_loc5_.colors[1] != null)
+               {
+                  _loc6_ = _loc6_ + (" [1] " + _loc5_.colors[1]);
+               }
             }
-            var loc2:*=0;
-            while (loc2 < this.memberList.dataProvider.length) 
+            _loc4_++;
+         }
+         this.memberDataProvider = new DataProvider(_loc2_);
+         this.updateMemberList();
+      }
+
+      private function checkRosters() : Boolean {
+         var _loc3_:SquadItemRenderer = null;
+         var _loc1_:uint = this.memberList.dataProvider.length;
+         var _loc2_:* = 0;
+         while(_loc2_ < _loc1_)
+         {
+            _loc3_ = this.memberList.getRendererAt(_loc2_) as SquadItemRenderer;
+            if(_loc3_ != null)
             {
-                if ((loc3 = this.memberList.dataProvider.requestItemAt(loc2) as net.wg.gui.prebattle.data.PlayerPrbInfoVO).uid == loc1.uid) 
-                {
-                    (loc4 = this.memberList.getRendererAt(loc2) as net.wg.gui.prebattle.squad.SquadItemRenderer).model.state = loc1.state;
-                    loc4.model.vShortName = loc1.vShortName;
-                    this.memberList.dataProvider.invalidate();
-                }
-                ++loc2;
+               if((_loc3_) && (_loc3_.data) && _loc3_.data.dummy == true)
+               {
+                  return true;
+               }
             }
-            return;
-        }
+            _loc2_++;
+         }
+         return false;
+      }
 
-        public override function as_setCoolDownForReadyButton(arg1:uint):void
-        {
-            this.coolDownReadyButton(arg1);
-            return;
-        }
+      private function updateMemberList() : void {
+         this.memberList.labelField = "fullName";
+         this.memberList.dataProvider = this.memberDataProvider;
+         App.utils.scheduler.envokeInNextFrame(this.updateWindowProperties);
+      }
 
-        public override function as_setRosterList(arg1:int, arg2:Boolean, arg3:Array):void
-        {
-            this.onRefreshMemberList(arg3);
-            return;
-        }
+      private function coolDownReadyButton(param1:uint) : void {
+         if(this.readyButton.enabled)
+         {
+            this.readyButton.enabled = false;
+            this.readyBtnCoolDownID = setTimeout(this.enabledReadyButton,param1 * 1000,true);
+         }
+      }
 
-        public override function as_refreshPermissions():void
-        {
-            this.updatePermissions();
-            return;
-        }
+      private function enabledReadyButton(param1:Boolean) : void {
+         this.readyButton.enabled = (param1) && (this._isReadyBtnEnabled);
+         clearTimeout(this.readyBtnCoolDownID);
+      }
 
-        internal function updatePermissions():void
-        {
-            this._isReadyBtnEnabled = isReadyBtnEnabledS();
-            this._isLeaveBtnEnabled = isLeaveBtnEnabledS();
-            this._canSendInvites = canSendInviteS();
-            this.leaveButton.enabled = this._isLeaveBtnEnabled;
-            this.readyButton.enabled = this._isReadyBtnEnabled;
-            this.updateInviteButton(this._canSendInvites);
-            this.updateMainButtons();
-            return;
-        }
-
-        protected override function draw():void
-        {
-            var loc1:*=0;
-            var loc2:*=0;
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
+      private function updateInviteButton(param1:Boolean) : void {
+         var _loc5_:SquadItemRenderer = null;
+         var _loc6_:PlayerPrbInfoVO = null;
+         var _loc2_:uint = this.memberList.dataProvider.length;
+         var _loc3_:* = false;
+         var _loc4_:* = 0;
+         while(_loc4_ < _loc2_)
+         {
+            _loc5_ = this.memberList.getRendererAt(_loc4_) as SquadItemRenderer;
+            if(_loc5_ == null)
             {
-                loc1 = window.width - window.contentPadding.left - window.contentPadding.right;
-                loc2 = window.height - window.contentPadding.top - window.contentPadding.bottom;
-                _width = loc1;
-                _height = loc2;
-                constraints.update(loc1, loc2);
-                if (this.memberList) 
-                {
-                    this.memberList.x = loc1 - this.memberList.width;
-                }
-                this.squadChannelComponent.invalidate(scaleform.clik.constants.InvalidationType.SIZE);
+               _loc3_ = true;
             }
-            return;
-        }
-
-        protected override function configUI():void
-        {
-            super.configUI();
-            constraints = new scaleform.clik.utils.Constraints(this, scaleform.clik.constants.ConstrainMode.REFLOW);
-            constraints.addElement("readyButton", this.readyButton, scaleform.clik.utils.Constraints.TOP | scaleform.clik.utils.Constraints.RIGHT);
-            constraints.addElement("leaveButton", this.leaveButton, scaleform.clik.utils.Constraints.TOP | scaleform.clik.utils.Constraints.LEFT | scaleform.clik.utils.Constraints.RIGHT);
-            constraints.addElement("messageArea", this.squadChannelComponent.messageArea, scaleform.clik.utils.Constraints.ALL);
-            constraints.addElement("messageAreaScrollBar", this.squadChannelComponent.messageAreaScrollBar, scaleform.clik.utils.Constraints.RIGHT | scaleform.clik.utils.Constraints.TOP | scaleform.clik.utils.Constraints.BOTTOM);
-            constraints.addElement("memberList", this.memberList, scaleform.clik.utils.Constraints.TOP | scaleform.clik.utils.Constraints.BOTTOM);
-            constraints.addElement("messageInput", this.squadChannelComponent.messageInput, scaleform.clik.utils.Constraints.LEFT | scaleform.clik.utils.Constraints.RIGHT | scaleform.clik.utils.Constraints.BOTTOM);
-            constraints.addElement("sendButton", this.squadChannelComponent.sendButton, scaleform.clik.utils.Constraints.RIGHT | scaleform.clik.utils.Constraints.BOTTOM);
-            if (this.memberList) 
+            else
             {
-                this.memberList.addEventListener(net.wg.gui.events.ListEventEx.ITEM_CLICK, this.onMemberItemClickHandler);
+               if((_loc5_) && (_loc5_.data) && _loc5_.data.dummy == true)
+               {
+                  SquadItemRenderer(this.memberList.getRendererAt(_loc4_)).visible = param1;
+                  _loc3_ = true;
+               }
             }
-            if (this.readyButton) 
-            {
-                this.readyButton.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.handleReadyClick);
-            }
-            if (this.leaveButton) 
-            {
-                this.leaveButton.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.handleLeaveClick);
-            }
-            this.squadChannelComponent.invalidate(scaleform.clik.constants.InvalidationType.SIZE);
-            this.updateMemberList();
-            this.updatePermissions();
-            return;
-        }
+            _loc4_++;
+         }
+         if(!_loc3_ && (param1))
+         {
+            _loc6_ = new PlayerPrbInfoVO(this.getInviteRoster());
+            this.memberDataProvider.push(_loc6_);
+            this.memberDataProvider.invalidate();
+         }
+      }
 
-        protected override function onDispose():void
-        {
-            super.onDispose();
-            this.memberList.removeEventListener(net.wg.gui.events.ListEventEx.ITEM_CLICK, this.onMemberItemClickHandler);
-            this.memberList.dispose();
-            this.readyButton.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.handleReadyClick);
-            this.readyButton.dispose();
-            this.leaveButton.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.handleLeaveClick);
-            this.leaveButton.dispose();
-            return;
-        }
+      private function getInviteRoster() : Object {
+         var _loc1_:Object = {};
+         _loc1_.uid = -1;
+         _loc1_.accID = -1;
+         _loc1_.fullName = MESSENGER.DIALOGS_SQUADCHANNEL_BUTTONS_INVITE;
+         _loc1_.userName = "";
+         _loc1_.dummy = true;
+         return _loc1_;
+      }
+   }
 
-        protected override function onPopulate():void
-        {
-            super.onPopulate();
-            registerComponent(this.squadChannelComponent, net.wg.data.Aliases.CHANNEL_COMPONENT);
-            window.useBottomBtns = true;
-            canClose = true;
-            enabledCloseBtn = false;
-            canDrag = true;
-            canResize = true;
-            canMinimize = true;
-            isCentered = false;
-            showWindowBg = false;
-            var loc1:*=window.contentPadding as scaleform.clik.utils.Padding;
-            loc1.bottom = 22;
-            loc1.right = 12;
-            window.contentPadding = loc1;
-            window.title = MENU.HEADERBUTTONS_BATTLE_TYPES_SQUAD;
-            this.updateMainButtons();
-            geometry = new net.wg.gui.lobby.messengerBar.WindowGeometryInBar(net.wg.gui.events.MessengerBarEvent.PIN_CAROUSEL_WINDOW, getClientIDS());
-            return;
-        }
-
-        internal function updateMainButtons():void
-        {
-            if (this.leaveButton != null) 
-            {
-                this.leaveButton.label = isPlayerCreatorS() ? MESSENGER.DIALOGS_SQUADCHANNEL_BUTTONS_DISMISS : MESSENGER.DIALOGS_SQUADCHANNEL_BUTTONS_LEAVE;
-            }
-            if (this.readyButton != null) 
-            {
-                this.readyButton.label = isPlayerReadyS() ? MESSENGER.DIALOGS_SQUADCHANNEL_BUTTONS_NOTREADY : MESSENGER.DIALOGS_SQUADCHANNEL_BUTTONS_READY;
-            }
-            return;
-        }
-
-        internal function handleLeaveClick(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            requestToLeaveS();
-            return;
-        }
-
-        public var squadChannelComponent:net.wg.gui.messenger.ChannelComponent;
-
-        public var leaveButton:net.wg.gui.components.controls.SoundButtonEx;
-
-        public var readyButton:net.wg.gui.components.controls.SoundButtonEx;
-
-        public var memberList:net.wg.gui.components.controls.ScrollingListEx;
-
-        internal var readyBtnCoolDownID:uint=0;
-
-        internal var memberDataProvider:scaleform.clik.data.DataProvider;
-
-        internal var _isReadyBtnEnabled:Boolean=false;
-
-        internal var _isLeaveBtnEnabled:Boolean=false;
-
-        internal var _canSendInvites:Boolean=false;
-    }
 }

@@ -117,7 +117,7 @@ class _Ping(object):
         except Exception, ex:
             err('_pingAsync() exception: ' + traceback.format_exc(ex))
             with self.lock:
-                self.resp = {"Error":ex.message}
+                self.resp = {"Error":ex}
 
     def _pingAsyncWindows(self):
         args = 'ping -n 1 -w 1000 '

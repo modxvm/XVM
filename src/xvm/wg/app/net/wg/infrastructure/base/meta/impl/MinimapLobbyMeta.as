@@ -1,23 +1,22 @@
-package net.wg.infrastructure.base.meta.impl 
+package net.wg.infrastructure.base.meta.impl
 {
-    import net.wg.data.constants.*;
-    import net.wg.gui.lobby.training.*;
-    
-    public class MinimapLobbyMeta extends net.wg.gui.lobby.training.MinimapEntity
-    {
-        public function MinimapLobbyMeta()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.lobby.training.MinimapEntity;
+   import net.wg.data.constants.Errors;
 
-        public function setMapS(arg1:Number):void
-        {
-            App.utils.asserter.assertNotNull(this.setMap, "setMap" + net.wg.data.constants.Errors.CANT_NULL);
-            this.setMap(arg1);
-            return;
-        }
 
-        public var setMap:Function=null;
-    }
+   public class MinimapLobbyMeta extends MinimapEntity
+   {
+          
+      public function MinimapLobbyMeta() {
+         super();
+      }
+
+      public var setMap:Function = null;
+
+      public function setMapS(param1:Number) : void {
+         App.utils.asserter.assertNotNull(this.setMap,"setMap" + Errors.CANT_NULL);
+         this.setMap(param1);
+      }
+   }
+
 }

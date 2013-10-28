@@ -1,29 +1,28 @@
-package net.wg.gui.components.controls 
+package net.wg.gui.components.controls
 {
-    import scaleform.clik.controls.*;
-    
-    public class HyperLink extends scaleform.clik.controls.Button
-    {
-        public function HyperLink()
-        {
-            super();
-            buttonMode = true;
-            return;
-        }
+   import scaleform.clik.controls.Button;
 
-        protected override function updateText():void
-        {
-            if (!(_label == null) && !(textField == null)) 
+
+   public class HyperLink extends Button
+   {
+          
+      public function HyperLink() {
+         super();
+         buttonMode = true;
+      }
+
+      public var isUnderline:Boolean = true;
+
+      override protected function updateText() : void {
+         if(!(_label == null) && !(textField == null))
+         {
+            textField.text = _label;
+            if(this.isUnderline)
             {
-                textField.text = _label;
-                if (this.isUnderline) 
-                {
-                    textField.htmlText = "<u>" + textField.text + "</u>";
-                }
+               textField.htmlText = "<u>" + textField.text + "</u>";
             }
-            return;
-        }
+         }
+      }
+   }
 
-        public var isUnderline:Boolean=true;
-    }
 }

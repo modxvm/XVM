@@ -1,81 +1,67 @@
-package net.wg.gui.lobby.profile.components.chart.layout 
+package net.wg.gui.lobby.profile.components.chart.layout
 {
-    public class LayoutBase extends Object implements net.wg.gui.lobby.profile.components.chart.layout.IChartLayout
-    {
-        public function LayoutBase()
-        {
-            super();
-            return;
-        }
 
-        public function set gap(arg1:Number):void
-        {
-            this._gap = arg1;
-            return;
-        }
 
-        public function get gap():Number
-        {
-            return this._gap;
-        }
+   public class LayoutBase extends Object implements IChartLayout
+   {
+          
+      public function LayoutBase() {
+         super();
+      }
 
-        public function set paddingRight(arg1:Number):void
-        {
-            this._paddingRight = arg1;
-            return;
-        }
+      private var _gap:Number;
 
-        public function get paddingRight():Number
-        {
-            return this._paddingRight;
-        }
+      private var _paddingRight:Number = 0;
 
-        public function set paddingLeft(arg1:Number):void
-        {
-            this._paddingLeft = arg1;
-            return;
-        }
+      private var _paddingLeft:Number = 0;
 
-        public function get paddingLeft():Number
-        {
-            return this._paddingLeft;
-        }
+      private var _paddingTop:Number = 0;
 
-        public function set paddingTop(arg1:Number):void
-        {
-            this._paddingTop = arg1;
-            return;
-        }
+      private var _paddingBottom:Number = 0;
 
-        public function get paddingTop():Number
-        {
-            return this._paddingTop;
-        }
+      public function set gap(param1:Number) : void {
+         this._gap = param1;
+      }
 
-        public function set paddingBottom(arg1:Number):void
-        {
-            this._paddingBottom = arg1;
-            return;
-        }
+      public function get gap() : Number {
+         return this._gap;
+      }
 
-        public function get paddingBottom():Number
-        {
-            return this._paddingBottom;
-        }
+      public function set paddingRight(param1:Number) : void {
+         this._paddingRight = param1;
+      }
 
-        public function layout(arg1:uint, arg2:Object):void
-        {
-            return;
-        }
+      public function get paddingRight() : Number {
+         return this._paddingRight;
+      }
 
-        internal var _gap:Number;
+      public function set paddingLeft(param1:Number) : void {
+         this._paddingLeft = param1;
+      }
 
-        internal var _paddingRight:Number=0;
+      public function get paddingLeft() : Number {
+         return this._paddingLeft;
+      }
 
-        internal var _paddingLeft:Number=0;
+      public function set paddingTop(param1:Number) : void {
+         this._paddingTop = param1;
+      }
 
-        internal var _paddingTop:Number=0;
+      public function get paddingTop() : Number {
+         return this._paddingTop;
+      }
 
-        internal var _paddingBottom:Number=0;
-    }
+      public function set paddingBottom(param1:Number) : void {
+         this._paddingBottom = param1;
+      }
+
+      public function get paddingBottom() : Number {
+         return this._paddingBottom;
+      }
+
+      public function layout(param1:uint, param2:Object) : void {
+          
+      }
+   }
+
 }

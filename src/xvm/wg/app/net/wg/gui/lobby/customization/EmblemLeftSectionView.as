@@ -1,67 +1,59 @@
-package net.wg.gui.lobby.customization 
+package net.wg.gui.lobby.customization
 {
-    import flash.text.*;
-    import net.wg.data.daapi.base.*;
-    import net.wg.gui.lobby.customization.data.*;
-    
-    public class EmblemLeftSectionView extends net.wg.gui.lobby.customization.BaseTimedCustomizationSectionView
-    {
-        public function EmblemLeftSectionView()
-        {
-            super();
-            return;
-        }
+   import flash.text.TextField;
+   import net.wg.gui.lobby.customization.data.DAAPIItemsDataProvider;
+   import net.wg.data.daapi.base.DAAPIDataProvider;
+   import net.wg.gui.lobby.customization.data.RentalPackageDAAPIDataProvider;
 
-        public override function getEmptyDataItem():Object
-        {
-            return net.wg.gui.lobby.customization.data.DAAPIItemsDataProvider.getEmptyItem();
-        }
 
-        public override function getItemsDP():net.wg.gui.lobby.customization.data.DAAPIItemsDataProvider
-        {
-            return form.emblemLeftDP;
-        }
+   public class EmblemLeftSectionView extends BaseTimedCustomizationSectionView
+   {
+          
+      public function EmblemLeftSectionView() {
+         super();
+      }
 
-        public override function getGroupsDP():net.wg.data.daapi.base.DAAPIDataProvider
-        {
-            return form.emblemLeftGroupsDataProvider;
-        }
+      public var curLabel:TextField;
 
-        public override function getRentalPackagesDP():net.wg.gui.lobby.customization.data.RentalPackageDAAPIDataProvider
-        {
-            return form.emblemLeftRentalPackageDP;
-        }
+      public var newLabel:TextField;
 
-        public override function getViewLinkage():String
-        {
-            return net.wg.gui.lobby.customization.BaseTimedCustomizationSectionView.EMBLEM_GROUP_VIEW;
-        }
+      override public function getEmptyDataItem() : Object {
+         return DAAPIItemsDataProvider.getEmptyItem();
+      }
 
-        public override function getTimeSectionLabel():String
-        {
-            return MENU.CUSTOMIZATION_LABELS_EMBLEM_PERIOD;
-        }
+      override public function getItemsDP() : DAAPIItemsDataProvider {
+         return form.emblemLeftDP;
+      }
 
-        public override function getDropButtonTooltip():String
-        {
-            return TOOLTIPS.CUSTOMIZATION_EMBLEMLEFT_CURRENT_DROP;
-        }
+      override public function getGroupsDP() : DAAPIDataProvider {
+         return form.emblemLeftGroupsDataProvider;
+      }
 
-        public override function getSectionName():String
-        {
-            return net.wg.gui.lobby.customization.BaseTimedCustomizationSectionView.EMBLEM_LEFT;
-        }
+      override public function getRentalPackagesDP() : RentalPackageDAAPIDataProvider {
+         return form.emblemLeftRentalPackageDP;
+      }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.curLabel.text = MENU.CUSTOMIZATION_LABELS_EMBLEM_CURRENT;
-            this.newLabel.text = MENU.CUSTOMIZATION_LABELS_EMBLEM_NEW;
-            return;
-        }
+      override public function getViewLinkage() : String {
+         return BaseTimedCustomizationSectionView.EMBLEM_GROUP_VIEW;
+      }
 
-        public var curLabel:flash.text.TextField;
+      override public function getTimeSectionLabel() : String {
+         return MENU.CUSTOMIZATION_LABELS_EMBLEM_PERIOD;
+      }
 
-        public var newLabel:flash.text.TextField;
-    }
+      override public function getDropButtonTooltip() : String {
+         return TOOLTIPS.CUSTOMIZATION_EMBLEMLEFT_CURRENT_DROP;
+      }
+
+      override public function getSectionName() : String {
+         return BaseTimedCustomizationSectionView.EMBLEM_LEFT;
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.curLabel.text = MENU.CUSTOMIZATION_LABELS_EMBLEM_CURRENT;
+         this.newLabel.text = MENU.CUSTOMIZATION_LABELS_EMBLEM_NEW;
+      }
+   }
+
 }

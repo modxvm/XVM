@@ -1,13 +1,14 @@
-package net.wg.gui.messenger.meta.impl 
+package net.wg.gui.messenger.meta.impl
 {
-    import net.wg.infrastructure.base.*;
-    
-    public class FAQWindowMeta extends net.wg.infrastructure.base.AbstractWindowView
-    {
-        public function FAQWindowMeta()
-        {
-            super();
-            return;
-        }
-    }
+   import net.wg.infrastructure.base.AbstractWindowView;
+
+
+   public class FAQWindowMeta extends AbstractWindowView
+   {
+          
+      public function FAQWindowMeta() {
+         super();
+      }
+   }
+
 }

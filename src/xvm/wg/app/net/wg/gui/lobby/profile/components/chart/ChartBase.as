@@ -1,238 +1,218 @@
-package net.wg.gui.lobby.profile.components.chart 
+package net.wg.gui.lobby.profile.components.chart
 {
-    import __AS3__.vec.*;
-    import flash.display.*;
-    import flash.events.*;
-    import flash.utils.*;
-    import net.wg.gui.lobby.profile.components.chart.layout.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.core.*;
-    import scaleform.clik.interfaces.*;
-    
-    public class ChartBase extends scaleform.clik.core.UIComponent
-    {
-        public function ChartBase()
-        {
-            this._renderers = new Vector.<net.wg.gui.lobby.profile.components.chart.IChartItem>();
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import scaleform.clik.interfaces.IDataProvider;
+   import __AS3__.vec.Vector;
+   import net.wg.gui.lobby.profile.components.chart.layout.IChartLayout;
+   import scaleform.clik.constants.InvalidationType;
+   import flash.events.Event;
+   import flash.display.DisplayObject;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import flash.utils.getDefinitionByName;
 
-        protected override function draw():void
-        {
-            var loc1:*=0;
-            super.draw();
-            if (isInvalid(RENDERER_CLASS_INV)) 
-            {
-                while (this._renderers.length > 0) 
-                {
-                    this.removeRendererAt((this._renderers.length - 1));
-                }
-                invalidateData();
-            }
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
-            {
-                this.updateRenderers();
-            }
-            if (isInvalid(LAYOUT_INV) && this._currentLayout) 
-            {
-                loc1 = 0;
-                while (loc1 < this._renderers.length) 
-                {
-                    this._currentLayout.layout(loc1, this._renderers[loc1]);
-                    ++loc1;
-                }
-                dispatchEvent(new flash.events.Event(flash.events.Event.RESIZE, true));
-            }
-            return;
-        }
 
-        protected function updateRenderers():void
-        {
-            var loc1:*=null;
-            var loc3:*=null;
-            while (this._renderers.length > this.getDataProviderLength()) 
-            {
-                this.removeRendererAt((this._renderers.length - 1));
-            }
-            var loc2:*=this.getDataProviderLength();
-            var loc4:*=0;
-            while (loc4 < loc2) 
-            {
-                loc3 = this._dataProvider[loc4];
-                if (loc4 != this._renderers.length) 
-                {
-                    loc1 = this._renderers[loc4];
-                }
-                else if (this._itemRenderer) 
-                {
-                    loc1 = this.createRenderer();
-                    invalidate(LAYOUT_INV);
-                }
-                else 
-                {
-                    trace("Class of item renderer in Chart has not been defined! Please Define it!");
-                    return;
-                }
-                loc1.setData(loc3);
-                ++loc4;
-            }
-            return;
-        }
+   public class ChartBase extends UIComponent
+   {
+          
+      public function ChartBase() {
+         this._renderers = new Vector.<IChartItem>();
+         super();
+      }
 
-        internal function removeRendererAt(arg1:uint):void
-        {
-            var loc1:*=this._renderers.splice(arg1, 1)[0];
-            var loc2:*=flash.display.DisplayObject(loc1);
-            loc2.parent.removeChild(loc2);
-            if (loc1 is net.wg.infrastructure.interfaces.entity.IDisposable) 
-            {
-                net.wg.infrastructure.interfaces.entity.IDisposable(loc1).dispose();
-            }
-            loc1 = null;
-            return;
-        }
+      private static const RENDERER_CLASS_INV:String = "rendererClassInvalid";
 
-        internal function createRenderer():net.wg.gui.lobby.profile.components.chart.IChartItem
-        {
-            var loc1:*=new this._itemRenderer();
-            this._renderers.push(loc1);
-            addChild(flash.display.DisplayObject(loc1));
-            return loc1;
-        }
+      protected static const LAYOUT_INV:String = "layoutInvalid";
 
-        internal function getDataProviderLength():int
-        {
-            if (this._dataProvider) 
-            {
-                return this._dataProvider.length;
-            }
-            return 0;
-        }
+      private var _itemRenderer:Class;
 
-        public function get itemRenderer():Class
-        {
-            return this._itemRenderer;
-        }
+      protected var _itemRendererName:String = "";
 
-        public function set itemRenderer(arg1:Class):void
-        {
-            this._itemRenderer = arg1;
-            invalidate(RENDERER_CLASS_INV);
-            return;
-        }
+      private var _dataProvider:IDataProvider;
 
-        public function get itemRendererName():String
-        {
-            return this._itemRendererName;
-        }
+      protected var _renderers:Vector.<IChartItem>;
 
-        public function set itemRendererName(arg1:String):void
-        {
-            var loc1:*=null;
-            if (_inspector && arg1 == "" || arg1 == "") 
-            {
-                return;
-            }
-            this._itemRendererName = arg1;
-            if (App.utils) 
-            {
-                loc1 = App.utils.classFactory.getClass(arg1);
-            }
-            else 
-            {
-                loc1 = flash.utils.getDefinitionByName(arg1) as Class;
-            }
-            if (loc1 == null) 
-            {
-                trace("Error: " + this + ", The class " + arg1 + " cannot be found in your library. Please ensure it is there.");
-            }
-            else 
-            {
-                this.itemRenderer = loc1;
-            }
-            return;
-        }
+      private var _currentLayout:IChartLayout;
 
-        public function get dataProvider():scaleform.clik.interfaces.IDataProvider
-        {
-            return this._dataProvider;
-        }
-
-        public function set dataProvider(arg1:scaleform.clik.interfaces.IDataProvider):void
-        {
-            if (this._dataProvider == arg1) 
+      override protected function draw() : void {
+         var _loc1_:* = 0;
+         super.draw();
+         if(isInvalid(RENDERER_CLASS_INV))
+         {
+            while(this._renderers.length > 0)
             {
-                return;
+               this.removeRendererAt(this._renderers.length-1);
             }
-            if (this._dataProvider != null) 
-            {
-                this._dataProvider.removeEventListener(flash.events.Event.CHANGE, this.handleDataChange, false);
-            }
-            this._dataProvider = arg1;
-            if (this._dataProvider == null) 
-            {
-                return;
-            }
-            this._dataProvider.addEventListener(flash.events.Event.CHANGE, this.handleDataChange, false, 0, true);
             invalidateData();
-            return;
-        }
-
-        protected function handleDataChange(arg1:flash.events.Event):void
-        {
-            invalidate(scaleform.clik.constants.InvalidationType.DATA);
-            return;
-        }
-
-        public function get currentLayout():net.wg.gui.lobby.profile.components.chart.layout.IChartLayout
-        {
-            return this._currentLayout;
-        }
-
-        public function set currentLayout(arg1:net.wg.gui.lobby.profile.components.chart.layout.IChartLayout):void
-        {
-            this._currentLayout = arg1;
-            invalidate(LAYOUT_INV);
-            return;
-        }
-
-        public override function dispose():void
-        {
-            var loc1:*=null;
-            super.dispose();
-            while (this._renderers.length > 0) 
+         }
+         if(isInvalid(InvalidationType.DATA))
+         {
+            this.updateRenderers();
+         }
+         if((isInvalid(LAYOUT_INV)) && (this._currentLayout))
+         {
+            _loc1_ = 0;
+            while(_loc1_ < this._renderers.length)
             {
-                loc1 = this._renderers.splice((this._renderers.length - 1), 1)[0];
-                try 
-                {
-                    loc1.dispose();
-                }
-                catch (e:Error)
-                {
-                };
-                loc1 = null;
+               this._currentLayout.layout(_loc1_,this._renderers[_loc1_]);
+               _loc1_++;
             }
-            if (this._dataProvider) 
+            dispatchEvent(new Event(Event.RESIZE,true));
+         }
+      }
+
+      protected function updateRenderers() : void {
+         var _loc1_:IChartItem = null;
+         var _loc3_:Object = null;
+         while(this._renderers.length > this.getDataProviderLength())
+         {
+            this.removeRendererAt(this._renderers.length-1);
+         }
+         var _loc2_:uint = this.getDataProviderLength();
+         var _loc4_:* = 0;
+         while(_loc4_ < _loc2_)
+         {
+            _loc3_ = this._dataProvider[_loc4_];
+            if(_loc4_ == this._renderers.length)
             {
-                this._dataProvider = null;
+               if(this._itemRenderer)
+               {
+                  _loc1_ = this.createRenderer();
+                  invalidate(LAYOUT_INV);
+               }
+               else
+               {
+                  trace("Class of item renderer in Chart has not been defined! Please Define it!");
+                  return;
+               }
             }
+            else
+            {
+               _loc1_ = this._renderers[_loc4_];
+            }
+            _loc1_.setData(_loc3_);
+            _loc4_++;
+         }
+      }
+
+      private function removeRendererAt(param1:uint) : void {
+         var _loc2_:IChartItem = this._renderers.splice(param1,1)[0];
+         var _loc3_:DisplayObject = DisplayObject(_loc2_);
+         _loc3_.parent.removeChild(_loc3_);
+         if(_loc2_  is  IDisposable)
+         {
+            IDisposable(_loc2_).dispose();
+         }
+         _loc2_ = null;
+      }
+
+      private function createRenderer() : IChartItem {
+         var _loc1_:IChartItem = new this._itemRenderer();
+         this._renderers.push(_loc1_);
+         addChild(DisplayObject(_loc1_));
+         return _loc1_;
+      }
+
+      private function getDataProviderLength() : int {
+         if(this._dataProvider)
+         {
+            return this._dataProvider.length;
+         }
+         return 0;
+      }
+
+      public function get itemRenderer() : Class {
+         return this._itemRenderer;
+      }
+
+      public function set itemRenderer(param1:Class) : void {
+         this._itemRenderer = param1;
+         invalidate(RENDERER_CLASS_INV);
+      }
+
+      public function get itemRendererName() : String {
+         return this._itemRendererName;
+      }
+
+      public function set itemRendererName(param1:String) : void {
+         var _loc2_:Class = null;
+         if((_inspector) && param1 == "" || param1 == "")
+         {
             return;
-        }
+         }
+         this._itemRendererName = param1;
+         if(App.utils)
+         {
+            _loc2_ = App.utils.classFactory.getClass(param1);
+         }
+         else
+         {
+            _loc2_ = getDefinitionByName(param1) as Class;
+         }
+         if(_loc2_ != null)
+         {
+            this.itemRenderer = _loc2_;
+         }
+         else
+         {
+            trace("Error: " + this + ", The class " + param1 + " cannot be found in your library. Please ensure it is there.");
+         }
+      }
 
-        internal static const RENDERER_CLASS_INV:String="rendererClassInvalid";
+      public function get dataProvider() : IDataProvider {
+         return this._dataProvider;
+      }
 
-        protected static const LAYOUT_INV:String="layoutInvalid";
+      public function set dataProvider(param1:IDataProvider) : void {
+         if(this._dataProvider == param1)
+         {
+            return;
+         }
+         if(this._dataProvider != null)
+         {
+            this._dataProvider.removeEventListener(Event.CHANGE,this.handleDataChange,false);
+         }
+         this._dataProvider = param1;
+         if(this._dataProvider == null)
+         {
+            return;
+         }
+         this._dataProvider.addEventListener(Event.CHANGE,this.handleDataChange,false,0,true);
+         invalidateData();
+      }
 
-        internal var _itemRenderer:Class;
+      protected function handleDataChange(param1:Event) : void {
+         invalidate(InvalidationType.DATA);
+      }
 
-        protected var _itemRendererName:String="";
+      public function get currentLayout() : IChartLayout {
+         return this._currentLayout;
+      }
 
-        internal var _dataProvider:scaleform.clik.interfaces.IDataProvider;
+      public function set currentLayout(param1:IChartLayout) : void {
+         this._currentLayout = param1;
+         invalidate(LAYOUT_INV);
+      }
 
-        protected var _renderers:__AS3__.vec.Vector.<net.wg.gui.lobby.profile.components.chart.IChartItem>;
+      override public function dispose() : void {
+         var _loc1_:Object = null;
+         super.dispose();
+         while(this._renderers.length > 0)
+         {
+            _loc1_ = this._renderers.splice(this._renderers.length-1,1)[0];
+            try
+            {
+               _loc1_.dispose();
+            }
+            catch(e:Error)
+            {
+            }
+            _loc1_ = null;
+         }
+         if(this._dataProvider)
+         {
+            this._dataProvider = null;
+         }
+      }
+   }
 
-        internal var _currentLayout:net.wg.gui.lobby.profile.components.chart.layout.IChartLayout;
-    }
 }

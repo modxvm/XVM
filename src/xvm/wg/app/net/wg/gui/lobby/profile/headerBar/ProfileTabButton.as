@@ -1,127 +1,110 @@
-package net.wg.gui.lobby.profile.headerBar 
+package net.wg.gui.lobby.profile.headerBar
 {
-    import flash.display.*;
-    import flash.text.*;
-    import net.wg.gui.components.controls.*;
-    import scaleform.clik.constants.*;
-    
-    public class ProfileTabButton extends net.wg.gui.components.controls.SoundButtonEx
-    {
-        public function ProfileTabButton()
-        {
-            super();
-            preventAutosizing = true;
-            constraintsDisabled = true;
-            this.widthOffset = this.highLight.width - this.background.width;
-            return;
-        }
+   import net.wg.gui.components.controls.SoundButtonEx;
+   import flash.display.MovieClip;
+   import scaleform.clik.constants.InvalidationType;
+   import flash.text.TextFieldAutoSize;
 
-        protected override function initialize():void
-        {
-            super.initialize();
-            return;
-        }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            hitArea = this.hit;
-            this.hit.visible = false;
-            return;
-        }
+   public class ProfileTabButton extends SoundButtonEx
+   {
+          
+      public function ProfileTabButton() {
+         super();
+         preventAutosizing = true;
+         constraintsDisabled = true;
+         this.widthOffset = this.highLight.width - this.background.width;
+      }
 
-        protected override function draw():void
-        {
-            var loc1:*=0;
-            var loc2:*=null;
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
+      private static const LAST_LINE_INVALID:String = "lli";
+
+      public var hit:MovieClip;
+
+      public var highLight:MovieClip;
+
+      public var background:MovieClip;
+
+      private var textHOffset:uint = 14;
+
+      private var _showLastLineItem:Boolean;
+
+      private var widthOffset:uint;
+
+      override protected function initialize() : void {
+         super.initialize();
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         hitArea = this.hit;
+         this.hit.visible = false;
+      }
+
+      override protected function draw() : void {
+         var _loc1_:uint = 0;
+         var _loc2_:ProfileTabButtonBg = null;
+         super.draw();
+         if(isInvalid(InvalidationType.SIZE))
+         {
+            textField.autoSize = TextFieldAutoSize.LEFT;
+            textField.x = this.textHOffset;
+            _loc1_ = this.receiveWidth();
+            this.highLight.width = _loc1_ + this.widthOffset;
+            this.background.width = _loc1_;
+            this.hit.width = _loc1_;
+         }
+         if(isInvalid(LAST_LINE_INVALID))
+         {
+            _loc2_ = this.background as ProfileTabButtonBg;
+            if(_loc2_)
             {
-                textField.autoSize = flash.text.TextFieldAutoSize.LEFT;
-                textField.x = this.textHOffset;
-                loc1 = this.receiveWidth();
-                this.highLight.width = loc1 + this.widthOffset;
-                this.background.width = loc1;
-                this.hit.width = loc1;
+               _loc2_.lastLine.visible = this._showLastLineItem;
             }
-            if (isInvalid(LAST_LINE_INVALID)) 
-            {
-                loc2 = this.background as net.wg.gui.lobby.profile.headerBar.ProfileTabButtonBg;
-                if (loc2) 
-                {
-                    loc2.lastLine.visible = this._showLastLineItem;
-                }
-            }
-            return;
-        }
+         }
+      }
 
-        public override function set data(arg1:Object):void
-        {
-            super.data = arg1;
-            if (data is String) 
-            {
-                this.label = arg1.toString();
-            }
-            else 
-            {
-                this.label = data.label;
-            }
-            return;
-        }
+      override public function set data(param1:Object) : void {
+         super.data = param1;
+         if(data  is  String)
+         {
+            this.label = param1.toString();
+         }
+         else
+         {
+            this.label = data.label;
+         }
+      }
 
-        public override function set label(arg1:String):void
-        {
-            super.label = arg1.toUpperCase();
-            return;
-        }
+      override public function set label(param1:String) : void {
+         super.label = param1.toUpperCase();
+      }
 
-        internal function receiveWidth():uint
-        {
-            if (textField) 
-            {
-                return Math.round(textField.width + 2 * this.textHOffset);
-            }
-            return super.width;
-        }
+      private function receiveWidth() : uint {
+         if(textField)
+         {
+            return Math.round(textField.width + 2 * this.textHOffset);
+         }
+         return super.width;
+      }
 
-        protected override function updateAfterStateChange():void
-        {
-            super.updateAfterStateChange();
-            invalidate(LAST_LINE_INVALID);
-            return;
-        }
+      override protected function updateAfterStateChange() : void {
+         super.updateAfterStateChange();
+         invalidate(LAST_LINE_INVALID);
+      }
 
-        protected override function updateText():void
-        {
-            super.updateText();
-            invalidate(scaleform.clik.constants.InvalidationType.SIZE);
-            return;
-        }
+      override protected function updateText() : void {
+         super.updateText();
+         invalidate(InvalidationType.SIZE);
+      }
 
-        public override function get width():Number
-        {
-            return this.receiveWidth();
-        }
+      override public function get width() : Number {
+         return this.receiveWidth();
+      }
 
-        public function set showLastLineItem(arg1:Boolean):void
-        {
-            this._showLastLineItem = arg1;
-            invalidate(LAST_LINE_INVALID);
-            return;
-        }
+      public function set showLastLineItem(param1:Boolean) : void {
+         this._showLastLineItem = param1;
+         invalidate(LAST_LINE_INVALID);
+      }
+   }
 
-        internal static const LAST_LINE_INVALID:String="lli";
-
-        public var hit:flash.display.MovieClip;
-
-        public var highLight:flash.display.MovieClip;
-
-        public var background:flash.display.MovieClip;
-
-        internal var textHOffset:uint=14;
-
-        internal var _showLastLineItem:Boolean;
-
-        internal var widthOffset:uint;
-    }
 }

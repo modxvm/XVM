@@ -1,242 +1,243 @@
-package net.wg.gui.lobby.messengerBar 
+package net.wg.gui.lobby.messengerBar
 {
-    import flash.display.*;
-    import flash.events.*;
-    import flash.geom.*;
-    import net.wg.data.*;
-    import net.wg.data.constants.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.events.*;
-    import net.wg.gui.lobby.messengerBar.carousel.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import net.wg.infrastructure.interfaces.*;
-    import net.wg.utils.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.events.*;
-    import scaleform.clik.utils.*;
-    
-    public class MessengerBar extends net.wg.infrastructure.base.meta.impl.MessengerBarMeta implements net.wg.infrastructure.base.meta.IMessengerBarMeta, net.wg.infrastructure.interfaces.IDAAPIModule, net.wg.infrastructure.interfaces.IHelpLayoutComponent
-    {
-        public function MessengerBar()
-        {
-            this.stageDimensions = new flash.geom.Point();
-            super();
+   import net.wg.infrastructure.base.meta.impl.MessengerBarMeta;
+   import net.wg.infrastructure.base.meta.IMessengerBarMeta;
+   import net.wg.infrastructure.interfaces.IDAAPIModule;
+   import net.wg.infrastructure.interfaces.IHelpLayoutComponent;
+   import net.wg.gui.lobby.messengerBar.carousel.ChannelCarousel;
+   import net.wg.gui.components.controls.SoundButtonEx;
+   import flash.geom.Point;
+   import flash.display.DisplayObject;
+   import flash.display.MovieClip;
+   import net.wg.utils.IHelpLayout;
+   import net.wg.data.constants.Directions;
+   import scaleform.clik.utils.Constraints;
+   import scaleform.clik.constants.ConstrainMode;
+   import net.wg.data.Aliases;
+   import scaleform.clik.events.ButtonEvent;
+   import flash.display.Stage;
+   import net.wg.gui.events.MessengerBarEvent;
+   import flash.events.MouseEvent;
+   import scaleform.clik.constants.InvalidationType;
+   import net.wg.infrastructure.interfaces.IWindow;
+   import flash.events.EventPhase;
+   import net.wg.infrastructure.interfaces.IAbstractWindowView;
+
+
+   public class MessengerBar extends MessengerBarMeta implements IMessengerBarMeta, IDAAPIModule, IHelpLayoutComponent
+   {
+          
+      public function MessengerBar() {
+         this.stageDimensions = new Point();
+         super();
+      }
+
+      private static const LAYOUT_INVALID:String = "layoutInv";
+
+      public var channelCarousel:ChannelCarousel;
+
+      public var notificationListBtn:NotificationListButton;
+
+      public var notificationInvitesBtn:NotificationInvitesButton;
+
+      public var channelButton:SoundButtonEx;
+
+      public var contactButton:SoundButtonEx;
+
+      private var stageDimensions:Point;
+
+      private var _paddingLeft:uint = 0;
+
+      private var _paddingRight:uint = 0;
+
+      private var _paddingBottom:uint = 0;
+
+      private var _notificationListBtnHL:DisplayObject;
+
+      private var _notificationInvitesBtnHL:DisplayObject;
+
+      public var fakeChnlBtn:MovieClip;
+
+      public function showHelpLayout() : void {
+         var _loc1_:IHelpLayout = App.utils.helpLayout;
+         var _loc2_:DisplayObject = this.notificationInvitesBtn.notificationButton;
+         var _loc3_:Object = _loc1_.getProps(_loc2_.width,_loc2_.height,Directions.TOP,LOBBY_HELP.CHAT_INVITES,_loc2_.x,_loc2_.y);
+         this._notificationInvitesBtnHL = _loc1_.create(root,_loc3_,this.notificationInvitesBtn);
+         _loc2_ = this.notificationListBtn.button;
+         _loc3_ = _loc1_.getProps(_loc2_.width,_loc2_.height,Directions.TOP,LOBBY_HELP.CHAT_SERVICE_CHANNEL,_loc2_.x,_loc2_.y);
+         this._notificationListBtnHL = _loc1_.create(root,_loc3_,this.notificationListBtn);
+         this.channelCarousel.showHelpLayout();
+      }
+
+      public function closeHelpLayout() : void {
+         var _loc1_:IHelpLayout = App.utils.helpLayout;
+         _loc1_.destroy(this._notificationInvitesBtnHL);
+         _loc1_.destroy(this._notificationListBtnHL);
+         this.channelCarousel.closeHelpLayout();
+      }
+
+      public function updateStage(param1:Number, param2:Number) : void {
+         this.stageDimensions.x = param1;
+         this.stageDimensions.y = param2;
+         invalidate(LAYOUT_INVALID);
+      }
+
+      public function get paddingLeft() : uint {
+         return this._paddingLeft;
+      }
+
+      public function set paddingLeft(param1:uint) : void {
+         this._paddingLeft = param1;
+         invalidate(LAYOUT_INVALID);
+      }
+
+      public function get paddingRight() : uint {
+         return this._paddingRight;
+      }
+
+      public function set paddingRight(param1:uint) : void {
+         this._paddingRight = param1;
+         invalidate(LAYOUT_INVALID);
+      }
+
+      public function get paddingBottom() : uint {
+         return this._paddingBottom;
+      }
+
+      public function set paddingBottom(param1:uint) : void {
+         this._paddingBottom = param1;
+         invalidate(LAYOUT_INVALID);
+      }
+
+      override protected function preInitialize() : void {
+         super.preInitialize();
+         constraints = new Constraints(this,ConstrainMode.REFLOW);
+      }
+
+      override protected function onPopulate() : void {
+         super.onPopulate();
+         registerFlashComponentS(this.notificationListBtn,Aliases.NOTIFICATION_LIST_BUTTON);
+         registerFlashComponentS(this.notificationInvitesBtn,Aliases.NOTIFICATION_INVITES_BUTTON);
+         registerFlashComponentS(this.channelCarousel,Aliases.CHANNEL_CAROUSEL);
+         this.channelButton.addEventListener(ButtonEvent.CLICK,this.onChannelButtonClick);
+         this.contactButton.addEventListener(ButtonEvent.CLICK,this.onContactsButtonClick);
+         var _loc1_:Stage = App.stage;
+         _loc1_.addEventListener(MessengerBarEvent.PIN_CHANNELS_WINDOW,this.handlePinChannelsWindow);
+         _loc1_.addEventListener(MessengerBarEvent.PIN_CONTACTS_WINDOW,this.handlePinContactsWindow);
+         _loc1_.addEventListener(MessengerBarEvent.PIN_RECEIVED_INVITES_WINDOW,this.handlePinNotificationInviteWindow);
+      }
+
+      override protected function onDispose() : void {
+         this.fakeChnlBtn.removeEventListener(MouseEvent.ROLL_OVER,this.showInRoamingTooltip);
+         this.fakeChnlBtn.removeEventListener(MouseEvent.ROLL_OUT,this.hideInRoamingTooltip);
+         this.fakeChnlBtn.removeEventListener(MouseEvent.CLICK,this.hideInRoamingTooltip);
+         this.channelButton.removeEventListener(ButtonEvent.CLICK,this.onChannelButtonClick);
+         this.contactButton.removeEventListener(ButtonEvent.CLICK,this.onContactsButtonClick);
+         var _loc1_:Stage = App.stage;
+         _loc1_.removeEventListener(MessengerBarEvent.PIN_CHANNELS_WINDOW,this.handlePinChannelsWindow);
+         _loc1_.removeEventListener(MessengerBarEvent.PIN_CONTACTS_WINDOW,this.handlePinContactsWindow);
+         _loc1_.removeEventListener(MessengerBarEvent.PIN_RECEIVED_INVITES_WINDOW,this.handlePinNotificationInviteWindow);
+         this.channelCarousel.dispose();
+         this.channelCarousel = null;
+         this.notificationListBtn.dispose();
+         this.notificationListBtn = null;
+         this.notificationInvitesBtn.dispose();
+         this.notificationInvitesBtn = null;
+         this.channelButton.dispose();
+         this.channelButton = null;
+         this.contactButton.dispose();
+         this.contactButton = null;
+         this.stageDimensions = null;
+         this._notificationListBtnHL = null;
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         constraints.addElement(this.notificationListBtn.name,this.notificationListBtn,Constraints.RIGHT);
+         constraints.addElement(this.notificationInvitesBtn.name,this.notificationInvitesBtn,Constraints.RIGHT);
+         constraints.addElement(this.channelButton.name,this.channelButton,Constraints.LEFT);
+         constraints.addElement(this.fakeChnlBtn.name,this.fakeChnlBtn,Constraints.LEFT);
+         constraints.addElement(this.contactButton.name,this.contactButton,Constraints.LEFT);
+         this.channelButton.enabled = !App.globalVarsMgr.isInRoamingS();
+         this.fakeChnlBtn.visible = App.globalVarsMgr.isInRoamingS();
+         this.fakeChnlBtn.addEventListener(MouseEvent.ROLL_OVER,this.showInRoamingTooltip);
+         this.fakeChnlBtn.addEventListener(MouseEvent.ROLL_OUT,this.hideInRoamingTooltip);
+         this.fakeChnlBtn.addEventListener(MouseEvent.CLICK,this.hideInRoamingTooltip);
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         if(isInvalid(LAYOUT_INVALID))
+         {
+            y = this.stageDimensions.y - this.height - this.paddingBottom;
+            x = this.paddingLeft;
+            width = this.stageDimensions.x - this.paddingLeft - this.paddingRight;
+         }
+         if(isInvalid(InvalidationType.SIZE))
+         {
+            constraints.update(_width,_height);
+            this.channelCarousel.x = this.contactButton?this.contactButton.x + this.contactButton.width:this.channelButton?this.channelButton.x + this.channelButton.width:0;
+            this.channelCarousel.width = this.notificationInvitesBtn.x - this.channelCarousel.x-1;
+         }
+      }
+
+      private function handlePinWindow(param1:MessengerBarEvent, param2:DisplayObject) : void {
+         var _loc4_:IWindow = null;
+         var _loc5_:Point = null;
+         if(param1.eventPhase != EventPhase.BUBBLING_PHASE)
+         {
             return;
-        }
+         }
+         var _loc3_:IAbstractWindowView = param1.target as IAbstractWindowView;
+         if(_loc3_ != null)
+         {
+            _loc4_ = _loc3_.window;
+            _loc5_ = this.getPosition(_loc4_,param2);
+            _loc4_.x = _loc5_.x;
+            _loc4_.y = _loc5_.y;
+         }
+      }
 
-        protected override function onPopulate():void
-        {
-            super.onPopulate();
-            registerFlashComponentS(this.notificationListBtn, net.wg.data.Aliases.NOTIFICATION_LIST_BUTTON);
-            registerFlashComponentS(this.notificationInvitesBtn, net.wg.data.Aliases.NOTIFICATION_INVITES_BUTTON);
-            registerFlashComponentS(this.channelCarousel, net.wg.data.Aliases.CHANNEL_CAROUSEL);
-            this.channelButton.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onChannelButtonClick);
-            this.contactButton.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onContactsButtonClick);
-            var loc1:*=App.stage;
-            loc1.addEventListener(net.wg.gui.events.MessengerBarEvent.PIN_CHANNELS_WINDOW, this.handlePinChannelsWindow);
-            loc1.addEventListener(net.wg.gui.events.MessengerBarEvent.PIN_CONTACTS_WINDOW, this.handlePinContactsWindow);
-            loc1.addEventListener(net.wg.gui.events.MessengerBarEvent.PIN_RECEIVED_INVITES_WINDOW, this.handlePinNotificationInviteWindow);
-            return;
-        }
+      private function getPosition(param1:IWindow, param2:DisplayObject) : Point {
+         var _loc3_:Point = null;
+         if(param2 == this.notificationInvitesBtn)
+         {
+            _loc3_ = new Point(param2.x - param1.width + this.notificationInvitesBtn.width + WindowOffsetsInBar.WINDOW_RIGHT_OFFSET,-param1.height);
+         }
+         else
+         {
+            _loc3_ = new Point(param2.x + WindowOffsetsInBar.WINDOW_LEFT_OFFSET,-param1.height);
+         }
+         return localToGlobal(_loc3_);
+      }
 
-        protected override function onDispose():void
-        {
-            this.channelButton.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onChannelButtonClick);
-            this.contactButton.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onContactsButtonClick);
-            var loc1:*=App.stage;
-            loc1.removeEventListener(net.wg.gui.events.MessengerBarEvent.PIN_CHANNELS_WINDOW, this.handlePinChannelsWindow);
-            loc1.removeEventListener(net.wg.gui.events.MessengerBarEvent.PIN_CONTACTS_WINDOW, this.handlePinContactsWindow);
-            loc1.removeEventListener(net.wg.gui.events.MessengerBarEvent.PIN_RECEIVED_INVITES_WINDOW, this.handlePinNotificationInviteWindow);
-            return;
-        }
+      private function onChannelButtonClick(param1:ButtonEvent) : void {
+         channelButtonClickS();
+      }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            constraints.addElement(this.notificationListBtn.name, this.notificationListBtn, scaleform.clik.utils.Constraints.RIGHT);
-            constraints.addElement(this.notificationInvitesBtn.name, this.notificationInvitesBtn, scaleform.clik.utils.Constraints.RIGHT);
-            constraints.addElement(this.channelButton.name, this.channelButton, scaleform.clik.utils.Constraints.LEFT);
-            constraints.addElement(this.contactButton.name, this.contactButton, scaleform.clik.utils.Constraints.LEFT);
-            return;
-        }
+      private function onContactsButtonClick(param1:ButtonEvent) : void {
+         contactsButtonClickS();
+      }
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(LAYOUT_INVALID)) 
-            {
-                y = this.stageDimensions.y - this.height - this.paddingBottom;
-                x = this.paddingLeft;
-                width = this.stageDimensions.x - this.paddingLeft - this.paddingRight;
-            }
-            if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
-            {
-                constraints.update(_width, _height);
-                this.channelCarousel.x = this.contactButton ? this.contactButton.x + this.contactButton.width : this.channelButton ? this.channelButton.x + this.channelButton.width : 0;
-                this.channelCarousel.width = (this.notificationInvitesBtn.x - this.channelCarousel.x - 1);
-            }
-            return;
-        }
+      private function handlePinChannelsWindow(param1:MessengerBarEvent) : void {
+         this.handlePinWindow(param1,this.channelButton);
+      }
 
-        internal function handlePinWindow(arg1:net.wg.gui.events.MessengerBarEvent, arg2:flash.display.DisplayObject):void
-        {
-            var loc2:*=null;
-            var loc3:*=null;
-            if (arg1.eventPhase != flash.events.EventPhase.BUBBLING_PHASE) 
-            {
-                return;
-            }
-            var loc1:*=arg1.target as net.wg.infrastructure.interfaces.IAbstractWindowView;
-            if (loc1 != null) 
-            {
-                loc2 = loc1.window;
-                loc3 = this.getPosition(loc2, arg2);
-                loc2.x = loc3.x;
-                loc2.y = loc3.y;
-            }
-            return;
-        }
+      private function handlePinContactsWindow(param1:MessengerBarEvent) : void {
+         this.handlePinWindow(param1,this.contactButton);
+      }
 
-        internal function getPosition(arg1:net.wg.infrastructure.interfaces.IWindow, arg2:flash.display.DisplayObject):flash.geom.Point
-        {
-            var loc1:*=null;
-            if (arg2 != this.notificationInvitesBtn) 
-            {
-                loc1 = new flash.geom.Point(arg2.x + net.wg.gui.lobby.messengerBar.WindowOffsetsInBar.WINDOW_LEFT_OFFSET, -arg1.height);
-            }
-            else 
-            {
-                loc1 = new flash.geom.Point(arg2.x - arg1.width + this.notificationInvitesBtn.width + net.wg.gui.lobby.messengerBar.WindowOffsetsInBar.WINDOW_RIGHT_OFFSET, -arg1.height);
-            }
-            return localToGlobal(loc1);
-        }
+      private function handlePinNotificationInviteWindow(param1:MessengerBarEvent) : void {
+         this.handlePinWindow(param1,this.notificationInvitesBtn);
+      }
 
-        internal function onChannelButtonClick(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            channelButtonClickS();
-            return;
-        }
+      private function showInRoamingTooltip(param1:MouseEvent) : void {
+         App.toolTipMgr.show(TOOLTIPS.LOBY_MESSENGER_CHANNEL_BUTTON_INROAMING);
+      }
 
-        internal function onContactsButtonClick(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            contactsButtonClickS();
-            return;
-        }
+      private function hideInRoamingTooltip(param1:MouseEvent) : void {
+         App.toolTipMgr.hide();
+      }
+   }
 
-        internal function handlePinChannelsWindow(arg1:net.wg.gui.events.MessengerBarEvent):void
-        {
-            this.handlePinWindow(arg1, this.channelButton);
-            return;
-        }
-
-        internal function handlePinContactsWindow(arg1:net.wg.gui.events.MessengerBarEvent):void
-        {
-            this.handlePinWindow(arg1, this.contactButton);
-            return;
-        }
-
-        internal function handlePinNotificationInviteWindow(arg1:net.wg.gui.events.MessengerBarEvent):void
-        {
-            this.handlePinWindow(arg1, this.notificationInvitesBtn);
-            return;
-        }
-
-        public function showHelpLayout():void
-        {
-            var loc1:*=App.utils.helpLayout;
-            var loc2:*=this.notificationInvitesBtn.notificationButton;
-            var loc3:*=loc1.getProps(loc2.width, loc2.height, net.wg.data.constants.Directions.TOP, LOBBY_HELP.CHAT_INVITES, loc2.x, loc2.y);
-            this._notificationInvitesBtnHL = loc1.create(root, loc3, this.notificationInvitesBtn);
-            loc2 = this.notificationListBtn.button;
-            loc3 = loc1.getProps(loc2.width, loc2.height, net.wg.data.constants.Directions.TOP, LOBBY_HELP.CHAT_SERVICE_CHANNEL, loc2.x, loc2.y);
-            this._notificationListBtnHL = loc1.create(root, loc3, this.notificationListBtn);
-            this.channelCarousel.showHelpLayout();
-            return;
-        }
-
-        public function closeHelpLayout():void
-        {
-            var loc1:*=App.utils.helpLayout;
-            loc1.destroy(this._notificationInvitesBtnHL);
-            loc1.destroy(this._notificationListBtnHL);
-            this.channelCarousel.closeHelpLayout();
-            return;
-        }
-
-        public function updateStage(arg1:Number, arg2:Number):void
-        {
-            this.stageDimensions.x = arg1;
-            this.stageDimensions.y = arg2;
-            invalidate(LAYOUT_INVALID);
-            return;
-        }
-
-        public function get paddingLeft():uint
-        {
-            return this._paddingLeft;
-        }
-
-        public function set paddingLeft(arg1:uint):void
-        {
-            this._paddingLeft = arg1;
-            invalidate(LAYOUT_INVALID);
-            return;
-        }
-
-        public function get paddingRight():uint
-        {
-            return this._paddingRight;
-        }
-
-        public function set paddingRight(arg1:uint):void
-        {
-            this._paddingRight = arg1;
-            invalidate(LAYOUT_INVALID);
-            return;
-        }
-
-        public function get paddingBottom():uint
-        {
-            return this._paddingBottom;
-        }
-
-        public function set paddingBottom(arg1:uint):void
-        {
-            this._paddingBottom = arg1;
-            invalidate(LAYOUT_INVALID);
-            return;
-        }
-
-        protected override function preInitialize():void
-        {
-            super.preInitialize();
-            constraints = new scaleform.clik.utils.Constraints(this, scaleform.clik.constants.ConstrainMode.REFLOW);
-            return;
-        }
-
-        internal static const LAYOUT_INVALID:String="layoutInv";
-
-        public var channelCarousel:net.wg.gui.lobby.messengerBar.carousel.ChannelCarousel;
-
-        public var notificationListBtn:net.wg.gui.lobby.messengerBar.NotificationListButton;
-
-        public var notificationInvitesBtn:net.wg.gui.lobby.messengerBar.NotificationInvitesButton;
-
-        public var channelButton:net.wg.gui.components.controls.SoundButtonEx;
-
-        public var contactButton:net.wg.gui.components.controls.SoundButtonEx;
-
-        internal var stageDimensions:flash.geom.Point;
-
-        internal var _paddingLeft:uint=0;
-
-        internal var _paddingRight:uint=0;
-
-        internal var _paddingBottom:uint=0;
-
-        internal var _notificationListBtnHL:flash.display.DisplayObject;
-
-        internal var _notificationInvitesBtnHL:flash.display.DisplayObject;
-    }
 }

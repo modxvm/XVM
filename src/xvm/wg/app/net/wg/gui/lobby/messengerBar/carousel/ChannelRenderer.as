@@ -1,118 +1,99 @@
-package net.wg.gui.lobby.messengerBar.carousel 
+package net.wg.gui.lobby.messengerBar.carousel
 {
-    import net.wg.gui.lobby.messengerBar.carousel.data.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.controls.*;
-    import scaleform.clik.core.*;
-    import scaleform.clik.data.*;
-    import scaleform.clik.interfaces.*;
-    
-    public class ChannelRenderer extends scaleform.clik.core.UIComponent implements scaleform.clik.interfaces.IListItemRenderer
-    {
-        public function ChannelRenderer()
-        {
-            super();
-            visible = false;
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import scaleform.clik.interfaces.IListItemRenderer;
+   import scaleform.clik.controls.Button;
+   import net.wg.gui.lobby.messengerBar.carousel.data.ChannelListItemVO;
+   import scaleform.clik.data.ListData;
+   import scaleform.clik.constants.InvalidationType;
 
-        public function get index():uint
-        {
-            return this._index;
-        }
 
-        public function set index(arg1:uint):void
-        {
-            this._index = arg1;
-            return;
-        }
+   public class ChannelRenderer extends UIComponent implements IListItemRenderer
+   {
+          
+      public function ChannelRenderer() {
+         super();
+         visible = false;
+      }
 
-        public function get owner():scaleform.clik.core.UIComponent
-        {
-            return this._owner;
-        }
+      public var openButton:ChannelButton;
 
-        public function set owner(arg1:scaleform.clik.core.UIComponent):void
-        {
-            this._owner = arg1;
-            return;
-        }
+      public var closeButton:Button;
 
-        public function get selectable():Boolean
-        {
-            return this._selectable;
-        }
+      protected var _index:uint = 0;
 
-        public function set selectable(arg1:Boolean):void
-        {
-            this._selectable = arg1;
-            return;
-        }
+      protected var _selectable:Boolean = true;
 
-        public function get selected():Boolean
-        {
-            return this.openButton.selected;
-        }
+      protected var _owner:UIComponent = null;
 
-        public function set selected(arg1:Boolean):void
-        {
-            this.openButton.selected = arg1;
-            return;
-        }
+      protected var model:ChannelListItemVO;
 
-        public function setListData(arg1:scaleform.clik.data.ListData):void
-        {
-            this.index = arg1.index;
-            this.selected = arg1.selected;
-            this.openButton.label = arg1.label || "";
-            return;
-        }
+      public function get index() : uint {
+         return this._index;
+      }
 
-        public function setData(arg1:Object):void
-        {
-            if (arg1) 
-            {
-                this.model = new net.wg.gui.lobby.messengerBar.carousel.data.ChannelListItemVO(arg1);
-                invalidateData();
-            }
-            return;
-        }
+      public function set index(param1:uint) : void {
+         this._index = param1;
+      }
 
-        public override function dispose():void
-        {
-            super.dispose();
-            if (this.model) 
-            {
-                this.model.dispose();
-                this.model = null;
-            }
-            return;
-        }
+      public function get owner() : UIComponent {
+         return this._owner;
+      }
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA) && this.model) 
-            {
-                this.openButton.label = this.model.label;
-                this.openButton.blinking = this.model.isNotified;
-                this.openButton.iconSource = this.model.icon;
-                this.closeButton.visible = this.model.canClose;
-            }
-            visible = Boolean(this.model);
-            return;
-        }
+      public function set owner(param1:UIComponent) : void {
+         this._owner = param1;
+      }
 
-        public var openButton:net.wg.gui.lobby.messengerBar.carousel.ChannelButton;
+      public function get selectable() : Boolean {
+         return this._selectable;
+      }
 
-        public var closeButton:scaleform.clik.controls.Button;
+      public function set selectable(param1:Boolean) : void {
+         this._selectable = param1;
+      }
 
-        protected var _index:uint=0;
+      public function get selected() : Boolean {
+         return this.openButton.selected;
+      }
 
-        protected var _selectable:Boolean=true;
+      public function set selected(param1:Boolean) : void {
+         this.openButton.selected = param1;
+      }
 
-        protected var _owner:scaleform.clik.core.UIComponent=null;
+      public function setListData(param1:ListData) : void {
+         this.index = param1.index;
+         this.selected = param1.selected;
+         this.openButton.label = (param1.label) || "";
+      }
 
-        protected var model:net.wg.gui.lobby.messengerBar.carousel.data.ChannelListItemVO;
-    }
+      public function setData(param1:Object) : void {
+         if(param1)
+         {
+            this.model = new ChannelListItemVO(param1);
+            invalidateData();
+         }
+      }
+
+      override public function dispose() : void {
+         super.dispose();
+         if(this.model)
+         {
+            this.model.dispose();
+            this.model = null;
+         }
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         if((isInvalid(InvalidationType.DATA)) && (this.model))
+         {
+            this.openButton.label = this.model.label;
+            this.openButton.blinking = this.model.isNotified;
+            this.openButton.iconSource = this.model.icon;
+            this.closeButton.visible = this.model.canClose;
+         }
+         visible = Boolean(this.model);
+      }
+   }
+
 }

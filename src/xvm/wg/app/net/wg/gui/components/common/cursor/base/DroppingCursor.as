@@ -1,319 +1,295 @@
-package net.wg.gui.components.common.cursor.base 
+package net.wg.gui.components.common.cursor.base
 {
-    import __AS3__.vec.*;
-    import flash.display.*;
-    import flash.events.*;
-    import flash.utils.*;
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.exceptions.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    
-    public class DroppingCursor extends net.wg.gui.components.common.cursor.base.ResizingCursor
-    {
-        public function DroppingCursor()
-        {
-            this._dropObjects = new flash.utils.Dictionary(true);
-            super();
-            return;
-        }
+   import flash.utils.Dictionary;
+   import flash.display.InteractiveObject;
+   import net.wg.infrastructure.interfaces.entity.IDragDropHitArea;
+   import net.wg.infrastructure.interfaces.entity.IDroppable;
+   import net.wg.data.constants.Errors;
+   import flash.events.MouseEvent;
+   import net.wg.data.constants.Cursors;
+   import __AS3__.vec.Vector;
+   import net.wg.infrastructure.exceptions.ArgumentException;
+   import net.wg.infrastructure.interfaces.entity.IDropItem;
 
-        public function registerDragging(arg1:net.wg.infrastructure.interfaces.entity.IDragDropHitArea, arg2:String=null):void
-        {
-            if (arg1 is net.wg.infrastructure.interfaces.entity.IDroppable) 
+
+   public class DroppingCursor extends ResizingCursor
+   {
+          
+      public function DroppingCursor() {
+         this._dropObjects = new Dictionary(true);
+         super();
+      }
+
+      private static const END_DROP_PRIORITY:uint = 1;
+
+      private static const AFTER_DROP_PRIORITY:uint = 0;
+
+      private var _dropObjects:Dictionary;
+
+      private var _dropSenderInfo:DropInfo = null;
+
+      private var _dropItem:InteractiveObject = null;
+
+      private var _isOnDropping:Boolean = false;
+
+      private var _afterDropHandlersAdded:Boolean = false;
+
+      public function registerDragging(param1:IDragDropHitArea, param2:String=null) : void {
+         if(param1  is  IDroppable)
+         {
+            this.registerDrop(IDroppable(param1),param2);
+         }
+      }
+
+      public function unRegisterDragging(param1:IDragDropHitArea) : void {
+         if(param1)
+         {
+            if(param1  is  IDroppable)
             {
-                this.registerDrop(net.wg.infrastructure.interfaces.entity.IDroppable(arg1), arg2);
+               this.unRegisterDrop(IDroppable(param1));
             }
-            return;
-        }
+         }
+      }
 
-        public function unRegisterDragging(arg1:net.wg.infrastructure.interfaces.entity.IDragDropHitArea):void
-        {
-            if (arg1) 
+      override protected function onDispose() : void {
+         var _loc1_:DropInfo = null;
+         for each (_loc1_ in this._dropObjects)
+         {
+            DebugUtils.LOG_DEBUG(_loc1_.container + Errors.WASNT_UNREGISTERED);
+            this.unRegisterDrop(_loc1_.container);
+         }
+         this._dropObjects = null;
+         this._dropSenderInfo = null;
+         this._dropItem = null;
+         super.onDispose();
+      }
+
+      override protected function cursorIsFree() : Boolean {
+         return (super.cursorIsFree()) && !this._isOnDropping;
+      }
+
+      private function removeAfterDropUpHandlers(param1:Function) : void {
+         assertNotNull(this._dropSenderInfo,"_dropSenderInfo");
+         assert(this._afterDropHandlersAdded,"must be added for removing.");
+         this._afterDropHandlersAdded = false;
+         stage.removeEventListener(MouseEvent.MOUSE_UP,param1);
+         this._dropSenderInfo.hit.removeEventListener(MouseEvent.MOUSE_UP,param1);
+      }
+
+      private function addAfterDropUpHandlers(param1:Function) : void {
+         assertNotNull(this._dropSenderInfo,"_dropSenderInfo");
+         assert(!this._afterDropHandlersAdded,"must be removed for adding.");
+         this._afterDropHandlersAdded = true;
+         this._dropSenderInfo.hit.addEventListener(MouseEvent.MOUSE_UP,param1,false,AFTER_DROP_PRIORITY);
+         stage.addEventListener(MouseEvent.MOUSE_UP,param1,false,AFTER_DROP_PRIORITY);
+      }
+
+      private function onAfterDrop() : void {
+         forceSetCursor(Cursors.DRAG_OPEN);
+         this.setDropping(false);
+         var _loc1_:InteractiveObject = this._dropSenderInfo.container.getHitArea();
+         this._dropSenderInfo.container.onAfterDrop(_loc1_,this._dropItem);
+         this._dropSenderInfo.state = BaseInfo.STATE_NONE;
+         this._dropSenderInfo = null;
+         this._dropItem = null;
+      }
+
+      private function registerDrop(param1:IDroppable, param2:String=null) : void {
+         var _loc3_:DropInfo = new DropInfo(param1,param2);
+         assert(this._dropObjects[_loc3_.hit] == undefined,Errors.ALREADY_REGISTERED);
+         this._dropObjects[_loc3_.hit] = _loc3_;
+         _loc3_.hit.addEventListener(MouseEvent.ROLL_OVER,this.onEnterToDropMode,true);
+         _loc3_.hit.addEventListener(MouseEvent.ROLL_OUT,this.rollOutDropHandler,true);
+         _loc3_.hit.addEventListener(MouseEvent.MOUSE_DOWN,this.mouseDnDropHandler);
+      }
+
+      private function unRegisterDrop(param1:IDroppable) : void {
+         if(this._dropSenderInfo)
+         {
+            if(this._dropSenderInfo.container == param1)
             {
-                if (arg1 is net.wg.infrastructure.interfaces.entity.IDroppable) 
-                {
-                    this.unRegisterDrop(net.wg.infrastructure.interfaces.entity.IDroppable(arg1));
-                }
+               forceSetCursor(Cursors.DRAG_OPEN);
+               this.setDropping(false);
+               this.removeAfterDropUpHandlers(this.mouseUpDropHdlr);
+               this._dropSenderInfo.state = BaseInfo.STATE_NONE;
+               this._dropSenderInfo = null;
+               this._dropItem = null;
             }
-            return;
-        }
+         }
+         var _loc2_:InteractiveObject = BaseInfo.getHitFromContainer(param1);
+         assert(!(this._dropObjects[_loc2_] == undefined),Errors.MUST_REGISTER);
+         var _loc3_:DropInfo = this.getDropInfoByHit(_loc2_);
+         _loc2_.removeEventListener(MouseEvent.ROLL_OVER,this.onEnterToDropMode,true);
+         _loc2_.removeEventListener(MouseEvent.ROLL_OUT,this.rollOutDropHandler,true);
+         _loc2_.removeEventListener(MouseEvent.MOUSE_DOWN,this.mouseDnDropHandler);
+         delete this._dropObjects[[_loc2_]];
+         _loc3_.dispose();
+      }
 
-        protected override function onDispose():void
-        {
-            var loc1:*=null;
-            var loc2:*=0;
-            var loc3:*=this._dropObjects;
-            for each (loc1 in loc3) 
+      private function addDropListeners(param1:DropInfo) : void {
+         var _loc3_:InteractiveObject = null;
+         var _loc2_:Vector.<InteractiveObject> = param1.container.getDropGroup();
+         if(_loc2_ != null)
+         {
+            for each (_loc3_ in _loc2_)
             {
-                DebugUtils.LOG_DEBUG(loc1.container + net.wg.data.constants.Errors.WASNT_UNREGISTERED);
-                this.unRegisterDrop(loc1.container);
+               _loc3_.addEventListener(MouseEvent.MOUSE_UP,this.onDropHandler,true,END_DROP_PRIORITY);
             }
-            this._dropObjects = null;
-            this._dropSenderInfo = null;
-            this._dropItem = null;
-            super.onDispose();
-            return;
-        }
+         }
+      }
 
-        protected override function cursorIsFree():Boolean
-        {
-            return super.cursorIsFree() && !this._isOnDropping;
-        }
-
-        internal function onEnterToDropMode(arg1:flash.events.MouseEvent):void
-        {
-            if (arg1.target is net.wg.infrastructure.interfaces.entity.IDropItem) 
+      private function removeDropListeners(param1:DropInfo) : void {
+         var _loc3_:InteractiveObject = null;
+         var _loc2_:Vector.<InteractiveObject> = param1.container.getDropGroup();
+         if(_loc2_ != null)
+         {
+            for each (_loc3_ in _loc2_)
             {
-                if (this._isOnDropping) 
-                {
-                    setCursor(net.wg.data.constants.Cursors.DRAG_OPEN);
-                }
-                else 
-                {
-                    forceSetCursor(net.wg.data.constants.Cursors.DRAG_OPEN);
-                }
+               _loc3_.removeEventListener(MouseEvent.MOUSE_UP,this.onDropHandler,true);
             }
-            return;
-        }
+         }
+      }
 
-        internal function rollOutDropHandler(arg1:flash.events.MouseEvent):void
-        {
+      private function getDropInfoBySlot(param1:InteractiveObject) : DropInfo {
+         var _loc2_:DropInfo = null;
+         var _loc3_:Vector.<InteractiveObject> = null;
+         for each (_loc2_ in this._dropObjects)
+         {
+            _loc3_ = _loc2_.container.getDropGroup();
+            if(_loc3_.indexOf(param1) != -1)
+            {
+               return _loc2_;
+            }
+         }
+         throw new ArgumentException("Unknown slot: " + param1);
+      }
+
+      private function setDropping(param1:Boolean) : void {
+         if(param1 != this._isOnDropping)
+         {
+            this._isOnDropping = param1;
+            tryToResetCursor();
+         }
+      }
+
+      private function getDropInfoByHit(param1:InteractiveObject) : DropInfo {
+         return this._dropObjects[param1];
+      }
+
+      private function onEnterToDropMode(param1:MouseEvent) : void {
+         if(param1.target  is  IDropItem)
+         {
+            if(!this._isOnDropping)
+            {
+               forceSetCursor(Cursors.DRAG_OPEN);
+            }
+            else
+            {
+               setCursor(Cursors.DRAG_OPEN);
+            }
+         }
+      }
+
+      private function rollOutDropHandler(param1:MouseEvent) : void {
+         assertLifeCycle();
+         if(!this._isOnDropping)
+         {
+            resetCursor();
+         }
+      }
+
+      private function onDropHandler(param1:MouseEvent) : void {
+         assertNotNull(this._dropSenderInfo,"_dropSenderInfo");
+         assertNotNull(this._dropItem,"_dropItem");
+         var _loc2_:InteractiveObject = InteractiveObject(param1.currentTarget);
+         var _loc3_:InteractiveObject = InteractiveObject(param1.target);
+         var _loc4_:DropInfo = this.getDropInfoBySlot(_loc2_);
+         var _loc5_:InteractiveObject = this._dropSenderInfo.container.getHitArea();
+         this.removeDropListeners(_loc4_);
+         _loc4_.container.onEndDrop(_loc5_,_loc2_,this._dropItem,_loc3_);
+      }
+
+      private function mouseDnDropHandler(param1:MouseEvent) : void {
+         var _loc2_:DropInfo = null;
+         var _loc3_:InteractiveObject = null;
+         var _loc4_:InteractiveObject = null;
+         var _loc5_:* = false;
+         if(isLeftButton(param1))
+         {
             assertLifeCycle();
-            if (!this._isOnDropping) 
+            _loc2_ = this.getDropInfoByHit(InteractiveObject(param1.currentTarget));
+            _loc3_ = InteractiveObject(param1.target);
+            _loc4_ = _loc2_.container.getHitArea();
+            _loc5_ = _loc2_.container.onBeforeDrop(_loc4_,_loc3_);
+            if(_loc5_)
             {
-                resetCursor();
+               forceSetCursor(_loc2_.cursor);
+               assertNull(this._dropSenderInfo,"_dropSenderInfo");
+               assertNull(this._dropItem,"_dropItem");
+               this._dropSenderInfo = _loc2_;
+               this._dropItem = _loc3_;
+               _loc2_.hit.addEventListener(MouseEvent.MOUSE_MOVE,this.droppingHandler);
+               this.addAfterDropUpHandlers(this.mouseUpHdlr);
             }
-            return;
-        }
+         }
+      }
 
-        internal function onDropHandler(arg1:flash.events.MouseEvent):void
-        {
-            assertNotNull(this._dropSenderInfo, "_dropSenderInfo");
-            assertNotNull(this._dropItem, "_dropItem");
-            var loc1:*=flash.display.InteractiveObject(arg1.currentTarget);
-            var loc2:*=this.getDropInfoBySlot(loc1);
-            var loc3:*=this._dropSenderInfo.container.getHitArea();
-            loc2.container.onEndDrop(loc3, loc1, this._dropItem);
-            return;
-        }
+      private function mouseUpDropHdlr(param1:MouseEvent) : void {
+         assertLifeCycle();
+         this._dropSenderInfo.hit.removeEventListener(MouseEvent.MOUSE_MOVE,this.droppingHandler);
+         var _loc2_:InteractiveObject = this._dropSenderInfo.container.getHitArea();
+         if(this._dropItem  is  IDropItem)
+         {
+            this.removeDropListeners(this._dropSenderInfo);
+         }
+         assertNotNull(this._dropItem,"_dropItem");
+         this.removeAfterDropUpHandlers(this.mouseUpDropHdlr);
+         this.onAfterDrop();
+      }
 
-        internal function mouseDnDropHandler(arg1:flash.events.MouseEvent):void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            if (isLeftButton(arg1)) 
+      private function mouseUpHdlr(param1:MouseEvent) : void {
+         this._dropSenderInfo.hit.removeEventListener(MouseEvent.MOUSE_MOVE,this.droppingHandler);
+         this.removeAfterDropUpHandlers(this.mouseUpHdlr);
+         this.onAfterDrop();
+      }
+
+      private function droppingHandler(param1:MouseEvent) : void {
+         var _loc3_:InteractiveObject = null;
+         var _loc4_:* = false;
+         assertLifeCycle();
+         assertNotNull(this._dropSenderInfo,"_dropSenderInfo");
+         var _loc2_:DropInfo = this.getDropInfoByHit(InteractiveObject(param1.currentTarget));
+         if(_loc2_.state != BaseInfo.STATE_STARTED)
+         {
+            _loc2_.state = BaseInfo.STATE_STARTED;
+            if(param1.target  is  IDropItem)
             {
-                assertLifeCycle();
-                loc1 = this.getDropInfoByHit(flash.display.InteractiveObject(arg1.currentTarget));
-                this.setDropping(true);
-                forceSetCursor(loc1.cursor);
-                assertNull(this._dropSenderInfo, "_dropSenderInfo");
-                assertNull(this._dropItem, "_dropItem");
-                this._dropSenderInfo = loc1;
-                this._dropItem = flash.display.InteractiveObject(arg1.target);
-                loc2 = this._dropSenderInfo.container.getHitArea();
-                loc1.container.onBeforeDrop(loc2, this._dropItem);
-                loc1.hit.addEventListener(flash.events.MouseEvent.MOUSE_MOVE, this.droppingHandler);
-                this.addAfterDropUpHandlers(this.mouseUpHdlr);
+               _loc3_ = InteractiveObject(this._dropSenderInfo.container.getHitArea());
+               _loc4_ = _loc2_.container.onStartDrop(_loc3_,this._dropItem,param1.localX,param1.localY);
+               if(_loc4_)
+               {
+                  this.addDropListeners(_loc2_);
+                  this.removeAfterDropUpHandlers(this.mouseUpHdlr);
+                  this.addAfterDropUpHandlers(this.mouseUpDropHdlr);
+               }
             }
-            return;
-        }
+         }
+      }
+   }
 
-        internal function mouseUpDropHdlr(arg1:flash.events.MouseEvent):void
-        {
-            assertLifeCycle();
-            this._dropSenderInfo.hit.removeEventListener(flash.events.MouseEvent.MOUSE_MOVE, this.droppingHandler);
-            var loc1:*=this._dropSenderInfo.container.getHitArea();
-            if (this._dropItem is net.wg.infrastructure.interfaces.entity.IDropItem) 
-            {
-                this.removeDropListeners(this._dropSenderInfo);
-            }
-            assertNotNull(this._dropItem, "_dropItem");
-            this.removeAfterDropUpHandlers(this.mouseUpDropHdlr);
-            this.onAfterDrop();
-            return;
-        }
-
-        internal function mouseUpHdlr(arg1:flash.events.MouseEvent):void
-        {
-            this._dropSenderInfo.hit.removeEventListener(flash.events.MouseEvent.MOUSE_MOVE, this.droppingHandler);
-            this.removeAfterDropUpHandlers(this.mouseUpHdlr);
-            this.onAfterDrop();
-            return;
-        }
-
-        internal function removeAfterDropUpHandlers(arg1:Function):void
-        {
-            assertNotNull(this._dropSenderInfo, "_dropSenderInfo");
-            assert(this._afterDropHandlersAdded, "must be added for removing.");
-            this._afterDropHandlersAdded = false;
-            stage.removeEventListener(flash.events.MouseEvent.MOUSE_UP, arg1);
-            this._dropSenderInfo.hit.removeEventListener(flash.events.MouseEvent.MOUSE_UP, arg1);
-            return;
-        }
-
-        internal function addAfterDropUpHandlers(arg1:Function):void
-        {
-            assertNotNull(this._dropSenderInfo, "_dropSenderInfo");
-            assert(!this._afterDropHandlersAdded, "must be removed for adding.");
-            this._afterDropHandlersAdded = true;
-            this._dropSenderInfo.hit.addEventListener(flash.events.MouseEvent.MOUSE_UP, arg1, false, AFTER_DROP_PRIORITY);
-            stage.addEventListener(flash.events.MouseEvent.MOUSE_UP, arg1, false, AFTER_DROP_PRIORITY);
-            return;
-        }
-
-        internal function onAfterDrop():void
-        {
-            forceSetCursor(net.wg.data.constants.Cursors.DRAG_OPEN);
-            this.setDropping(false);
-            var loc1:*=this._dropSenderInfo.container.getHitArea();
-            this._dropSenderInfo.container.onAfterDrop(loc1, this._dropItem);
-            this._dropSenderInfo.processStarted = false;
-            this._dropSenderInfo = null;
-            this._dropItem = null;
-            return;
-        }
-
-        internal function droppingHandler(arg1:flash.events.MouseEvent):void
-        {
-            var loc2:*=null;
-            assertLifeCycle();
-            assertNotNull(this._dropSenderInfo, "_dropSenderInfo");
-            var loc1:*=this.getDropInfoByHit(flash.display.InteractiveObject(arg1.currentTarget));
-            if (!loc1.processStarted) 
-            {
-                loc1.processStarted = true;
-                if (arg1.target is net.wg.infrastructure.interfaces.entity.IDropItem) 
-                {
-                    loc2 = flash.display.InteractiveObject(this._dropSenderInfo.container.getHitArea());
-                    loc1.container.onStartDrop(loc2, this._dropItem, arg1.localX, arg1.localY);
-                    this.addDropListeners(loc1);
-                    this.removeAfterDropUpHandlers(this.mouseUpHdlr);
-                    this.addAfterDropUpHandlers(this.mouseUpDropHdlr);
-                }
-            }
-            return;
-        }
-
-        internal function registerDrop(arg1:net.wg.infrastructure.interfaces.entity.IDroppable, arg2:String=null):void
-        {
-            var loc1:*=new DropInfo(arg1, arg2);
-            assert(this._dropObjects[loc1.hit] == undefined, net.wg.data.constants.Errors.ALREADY_REGISTERED);
-            this._dropObjects[loc1.hit] = loc1;
-            loc1.hit.addEventListener(flash.events.MouseEvent.ROLL_OVER, this.onEnterToDropMode, true);
-            loc1.hit.addEventListener(flash.events.MouseEvent.ROLL_OUT, this.rollOutDropHandler, true);
-            loc1.hit.addEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.mouseDnDropHandler);
-            return;
-        }
-
-        internal function unRegisterDrop(arg1:net.wg.infrastructure.interfaces.entity.IDroppable):void
-        {
-            var loc1:*=net.wg.gui.components.common.cursor.base.BaseInfo.getHitFromContainer(arg1);
-            assert(!(this._dropObjects[loc1] == undefined), net.wg.data.constants.Errors.MUST_REGISTER);
-            var loc2:*=this.getDropInfoByHit(loc1);
-            loc1.removeEventListener(flash.events.MouseEvent.ROLL_OVER, this.onEnterToDropMode, true);
-            loc1.removeEventListener(flash.events.MouseEvent.ROLL_OUT, this.rollOutDropHandler, true);
-            loc1.removeEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.mouseDnDropHandler);
-            delete this._dropObjects[loc1];
-            loc2.dispose();
-            return;
-        }
-
-        internal function addDropListeners(arg1:DropInfo):void
-        {
-            var loc2:*=null;
-            var loc1:*=arg1.container.getDropGroup();
-            if (loc1 != null) 
-            {
-                var loc3:*=0;
-                var loc4:*=loc1;
-                for each (loc2 in loc4) 
-                {
-                    loc2.addEventListener(flash.events.MouseEvent.MOUSE_UP, this.onDropHandler, true, END_DROP_PRIORITY);
-                }
-            }
-            return;
-        }
-
-        internal function removeDropListeners(arg1:DropInfo):void
-        {
-            var loc2:*=null;
-            var loc1:*=arg1.container.getDropGroup();
-            if (loc1 != null) 
-            {
-                var loc3:*=0;
-                var loc4:*=loc1;
-                for each (loc2 in loc4) 
-                {
-                    loc2.removeEventListener(flash.events.MouseEvent.MOUSE_UP, this.onDropHandler, true);
-                }
-            }
-            return;
-        }
-
-        internal function getDropInfoBySlot(arg1:flash.display.InteractiveObject):DropInfo
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            var loc3:*=0;
-            var loc4:*=this._dropObjects;
-            for each (loc1 in loc4) 
-            {
-                loc2 = loc1.container.getDropGroup();
-                if (loc2.indexOf(arg1) == -1) 
-                {
-                    continue;
-                }
-                return loc1;
-            }
-            throw new net.wg.infrastructure.exceptions.ArgumentException("Unknown slot: " + arg1);
-        }
-
-        internal function setDropping(arg1:Boolean):void
-        {
-            if (arg1 != this._isOnDropping) 
-            {
-                this._isOnDropping = arg1;
-                tryToResetCursor();
-            }
-            return;
-        }
-
-        internal function getDropInfoByHit(arg1:flash.display.InteractiveObject):DropInfo
-        {
-            return this._dropObjects[arg1];
-        }
-
-        internal static const END_DROP_PRIORITY:uint=1;
-
-        internal static const AFTER_DROP_PRIORITY:uint=0;
-
-        internal var _dropObjects:flash.utils.Dictionary;
-
-        internal var _dropSenderInfo:DropInfo=null;
-
-        internal var _dropItem:flash.display.InteractiveObject=null;
-
-        internal var _isOnDropping:Boolean=false;
-
-        internal var _afterDropHandlersAdded:Boolean=false;
-    }
-}
-
-import net.wg.data.constants.*;
-import net.wg.infrastructure.interfaces.entity.*;
+}   import net.wg.gui.components.common.cursor.base.BaseInfo;
+   import net.wg.infrastructure.interfaces.entity.IDroppable;
+   import net.wg.data.constants.Cursors;
 
 
-class DropInfo extends net.wg.gui.components.common.cursor.base.BaseInfo
-{
-    public function DropInfo(arg1:net.wg.infrastructure.interfaces.entity.IDroppable, arg2:String)
-    {
-        super(arg1, arg2, net.wg.data.constants.Cursors.DRAG_CLOSE);
-        return;
-    }
+   class DropInfo extends BaseInfo
+   {
+          
+      function DropInfo(param1:IDroppable, param2:String) {
+         super(param1,param2,Cursors.DRAG_CLOSE);
+      }
 
-    public function get container():net.wg.infrastructure.interfaces.entity.IDroppable
-    {
-        return net.wg.infrastructure.interfaces.entity.IDroppable(getContainer());
-    }
-}
+      public function get container() : IDroppable {
+         return IDroppable(getContainer());
+      }
+   }

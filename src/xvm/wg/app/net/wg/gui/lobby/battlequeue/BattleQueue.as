@@ -1,175 +1,161 @@
-package net.wg.gui.lobby.battlequeue 
+package net.wg.gui.lobby.battlequeue
 {
-    import flash.events.*;
-    import flash.text.*;
-    import flash.ui.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.components.icons.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import scaleform.clik.data.*;
-    import scaleform.clik.events.*;
-    
-    public class BattleQueue extends net.wg.infrastructure.base.meta.impl.BattleQueueMeta implements net.wg.infrastructure.base.meta.IBattleQueueMeta
-    {
-        public function BattleQueue()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.BattleQueueMeta;
+   import net.wg.infrastructure.base.meta.IBattleQueueMeta;
+   import net.wg.gui.components.icons.BattleTypeIcon;
+   import flash.text.TextField;
+   import net.wg.gui.components.controls.SoundButtonEx;
+   import net.wg.gui.components.controls.ScrollingListEx;
+   import scaleform.clik.events.ButtonEvent;
+   import flash.ui.Keyboard;
+   import flash.events.KeyboardEvent;
+   import scaleform.clik.data.DataProvider;
+   import scaleform.clik.events.InputEvent;
 
-        protected override function configUI():void
-        {
-            this.titleFieldLevel.visible = false;
-            this.listByLevel.visible = false;
-            this.titleFieldType.visible = false;
-            this.startButton.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onStartClick);
-            this.exitButton.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onExitButton);
-            App.gameInputMgr.setKeyHandler(flash.ui.Keyboard.ESCAPE, flash.events.KeyboardEvent.KEY_DOWN, this.handleEscape, true);
-            super.configUI();
-            return;
-        }
 
-        internal function onExitButton(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            exitClickS();
-            return;
-        }
+   public class BattleQueue extends BattleQueueMeta implements IBattleQueueMeta
+   {
+          
+      public function BattleQueue() {
+         super();
+      }
 
-        internal function onStartClick(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            startClickS();
-            return;
-        }
+      public var battleIconBig:BattleTypeIcon;
 
-        public function as_setTimer(arg1:String, arg2:String):void
-        {
-            if (arg2 != null) 
-            {
-                arg1 = arg1 + (" <font color=\"#FFFFFF\">" + arg2 + "</font>");
-            }
-            this.timerLabel.htmlText = arg1;
-            return;
-        }
+      public var battleIcon:BattleTypeIcon;
 
-        public function as_setType(arg1:Number):void
-        {
-            this.battleIcon.typeByNumber = arg1 + 1;
-            this.battleIconBig.typeByNumber = arg1 + 1;
-            this.titleField.text = MENU.loading_battletypes(arg1.toString());
-            this.descriptionLabel.text = MENU.loading_battletypes_desc(arg1.toString());
-            return;
-        }
+      public var titleField:TextField;
 
-        public function as_setPlayers(arg1:String, arg2:Number):void
-        {
-            this.playersLabel.htmlText = arg1 + " <font color=\"#FFFFFF\">" + arg2.toString() + "</font>";
-            return;
-        }
+      public var descriptionLabel:TextField;
 
-        public function as_setListByLevel(arg1:Object):void
-        {
-            var loc1:*=null;
-            loc1 = new Array();
-            var loc2:*=0;
-            while (loc2 < arg1.data.length) 
-            {
-                loc1.push({"type":arg1.data.length - loc2, "count":arg1.data[loc2]});
-                ++loc2;
-            }
-            this.titleFieldLevel.text = arg1.title;
-            this.titleFieldLevel.visible = true;
-            this.listByLevel.visible = true;
-            this.listByLevel.dataProvider = new scaleform.clik.data.DataProvider(loc1);
-            return;
-        }
+      public var timerLabel:TextField;
 
-        public function as_setListByType(arg1:Object):void
-        {
-            var loc1:*=null;
-            loc1 = new Array();
-            var loc2:*=0;
-            while (loc2 < arg1.data.length) 
-            {
-                loc1.push({"type":arg1.data[loc2][0], "count":arg1.data[loc2][1]});
-                ++loc2;
-            }
-            this.titleFieldType.text = arg1.title;
-            this.titleFieldType.visible = true;
-            this.listByType.visible = true;
-            this.listByType.dataProvider = new scaleform.clik.data.DataProvider(loc1);
-            return;
-        }
+      public var playersLabel:TextField;
 
-        public function as_showStart(arg1:Boolean):void
-        {
-            this.startButton.visible = arg1;
-            return;
-        }
+      public var titleFieldLevel:TextField;
 
-        public function as_showExit(arg1:Boolean):void
-        {
-            this.exitButton.visible = arg1;
-            return;
-        }
+      public var titleFieldType:TextField;
 
-        public override function updateStage(arg1:Number, arg2:Number):void
-        {
-            this.x = arg1 - this.actualWidth >> 1;
-            this.y = Math.min(-parent.y + (arg2 - this.actualHeight >> 1), 80);
-            return;
-        }
+      public var exitButton:SoundButtonEx;
 
-        protected override function onDispose():void
-        {
-            App.gameInputMgr.clearKeyHandler(flash.ui.Keyboard.ESCAPE, flash.events.KeyboardEvent.KEY_DOWN);
-            this.listByLevel.disposeRenderers();
-            this.listByType.disposeRenderers();
-            if (this.startButton.hasEventListener(scaleform.clik.events.ButtonEvent.CLICK)) 
-            {
-                this.startButton.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onStartClick);
-            }
-            if (this.exitButton.hasEventListener(scaleform.clik.events.ButtonEvent.CLICK)) 
-            {
-                this.exitButton.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onExitButton);
-            }
-            super.onDispose();
-            return;
-        }
+      public var startButton:SoundButtonEx;
 
-        public override function toString():String
-        {
-            return "[WG BattleQueue " + name + "]";
-        }
+      public var listByLevel:ScrollingListEx;
 
-        internal function handleEscape(arg1:scaleform.clik.events.InputEvent):void
-        {
-            onEscapeS();
-            return;
-        }
+      public var listByType:ScrollingListEx;
 
-        public var battleIconBig:net.wg.gui.components.icons.BattleTypeIcon;
+      override protected function configUI() : void {
+         this.titleFieldLevel.visible = false;
+         this.listByLevel.visible = false;
+         this.titleFieldType.visible = false;
+         this.startButton.addEventListener(ButtonEvent.CLICK,this.onStartClick);
+         this.exitButton.addEventListener(ButtonEvent.CLICK,this.onExitButton);
+         App.gameInputMgr.setKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN,this.handleEscape,true);
+         super.configUI();
+      }
 
-        public var battleIcon:net.wg.gui.components.icons.BattleTypeIcon;
+      private function onExitButton(param1:ButtonEvent) : void {
+         exitClickS();
+      }
 
-        public var titleField:flash.text.TextField;
+      private function onStartClick(param1:ButtonEvent) : void {
+         startClickS();
+      }
 
-        public var descriptionLabel:flash.text.TextField;
+      public function as_setTimer(param1:String, param2:String) : void {
+         if(param2 != null)
+         {
+            param1 = param1 + (" <font color=\"#FFFFFF\">" + param2 + "</font>");
+         }
+         this.timerLabel.htmlText = param1;
+      }
 
-        public var timerLabel:flash.text.TextField;
+      public function as_setType(param1:Number) : void {
+         this.battleIcon.typeByNumber = param1 + 1;
+         this.battleIconBig.typeByNumber = param1 + 1;
+         this.titleField.text = MENU.loading_battletypes(param1.toString());
+         this.descriptionLabel.text = MENU.loading_battletypes_desc(param1.toString());
+      }
 
-        public var playersLabel:flash.text.TextField;
+      public function as_setPlayers(param1:String, param2:Number) : void {
+         this.playersLabel.htmlText = param1 + " <font color=\"#FFFFFF\">" + param2.toString() + "</font>";
+      }
 
-        public var titleFieldLevel:flash.text.TextField;
+      public function as_setListByLevel(param1:Object) : void {
+         var _loc2_:Array = null;
+         _loc2_ = new Array();
+         var _loc3_:uint = 0;
+         while(_loc3_ < param1.data.length)
+         {
+            _loc2_.push(
+               {
+                  "type":param1.data.length - _loc3_,
+                  "count":param1.data[_loc3_]
+               }
+            );
+            _loc3_++;
+         }
+         this.titleFieldLevel.text = param1.title;
+         this.titleFieldLevel.visible = true;
+         this.listByLevel.visible = true;
+         this.listByLevel.dataProvider = new DataProvider(_loc2_);
+      }
 
-        public var titleFieldType:flash.text.TextField;
+      public function as_setListByType(param1:Object) : void {
+         var _loc2_:Array = null;
+         _loc2_ = new Array();
+         var _loc3_:uint = 0;
+         while(_loc3_ < param1.data.length)
+         {
+            _loc2_.push(
+               {
+                  "type":param1.data[_loc3_][0],
+                  "count":param1.data[_loc3_][1]
+               }
+            );
+            _loc3_++;
+         }
+         this.titleFieldType.text = param1.title;
+         this.titleFieldType.visible = true;
+         this.listByType.visible = true;
+         this.listByType.dataProvider = new DataProvider(_loc2_);
+      }
 
-        public var exitButton:net.wg.gui.components.controls.SoundButtonEx;
+      public function as_showStart(param1:Boolean) : void {
+         this.startButton.visible = param1;
+      }
 
-        public var startButton:net.wg.gui.components.controls.SoundButtonEx;
+      public function as_showExit(param1:Boolean) : void {
+         this.exitButton.visible = param1;
+      }
 
-        public var listByLevel:net.wg.gui.components.controls.ScrollingListEx;
+      override public function updateStage(param1:Number, param2:Number) : void {
+         this.x = param1 - this.actualWidth >> 1;
+         this.y = Math.min(-parent.y + (param2 - this.actualHeight >> 1),80);
+      }
 
-        public var listByType:net.wg.gui.components.controls.ScrollingListEx;
-    }
+      override protected function onDispose() : void {
+         App.gameInputMgr.clearKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN);
+         this.listByLevel.disposeRenderers();
+         this.listByType.disposeRenderers();
+         if(this.startButton.hasEventListener(ButtonEvent.CLICK))
+         {
+            this.startButton.removeEventListener(ButtonEvent.CLICK,this.onStartClick);
+         }
+         if(this.exitButton.hasEventListener(ButtonEvent.CLICK))
+         {
+            this.exitButton.removeEventListener(ButtonEvent.CLICK,this.onExitButton);
+         }
+         super.onDispose();
+      }
+
+      override public function toString() : String {
+         return "[WG BattleQueue " + name + "]";
+      }
+
+      private function handleEscape(param1:InputEvent) : void {
+         onEscapeS();
+      }
+   }
+
 }

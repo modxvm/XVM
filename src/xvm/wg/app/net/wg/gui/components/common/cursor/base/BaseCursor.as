@@ -1,134 +1,108 @@
-package net.wg.gui.components.common.cursor.base 
+package net.wg.gui.components.common.cursor.base
 {
-    import flash.display.*;
-    import flash.events.*;
-    import net.wg.infrastructure.base.*;
-    import scaleform.gfx.*;
-    
-    internal class BaseCursor extends net.wg.infrastructure.base.AbstractView
-    {
-        public function BaseCursor()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.AbstractView;
+   import flash.display.Sprite;
+   import scaleform.gfx.MouseCursorEvent;
+   import flash.events.MouseEvent;
 
-        public function attachToCursor(arg1:flash.display.Sprite, arg2:Number, arg3:Number):void
-        {
-            if (this._attachedSprite != null) 
-            {
-                this.detachFromCursor();
-            }
-            assertNotNull(arg1, "sprite");
-            this._attachedSprite = arg1;
-            addChildAt(this._attachedSprite, 0);
-            this._attachedSprite.x = arg2;
-            this._attachedSprite.y = arg3;
-            return;
-        }
 
-        public function getAttachedSprite():flash.display.Sprite
-        {
-            return this._attachedSprite;
-        }
+   class BaseCursor extends AbstractView
+   {
+          
+      function BaseCursor() {
+         super();
+      }
 
-        public function detachFromCursor():void
-        {
-            assertNotNull(this._attachedSprite, "sprite");
-            removeChild(this._attachedSprite);
-            this._attachedSprite = null;
-            return;
-        }
+      private var _attachedSprite:Sprite = null;
 
-        public function resetCursor():void
-        {
-            this.setCursor(this._lastCursor);
-            return;
-        }
+      private var _lastCursor:String = "arrow";
 
-        public function setCursor(arg1:String):void
-        {
-            this._lastCursor = arg1;
-            if (this.cursorIsFree()) 
-            {
-                this.forceSetCursor(arg1);
-            }
-            return;
-        }
+      public function attachToCursor(param1:Sprite, param2:Number, param3:Number) : void {
+         if(this._attachedSprite != null)
+         {
+            this.detachFromCursor();
+         }
+         assertNotNull(param1,"sprite");
+         this._attachedSprite = param1;
+         addChildAt(this._attachedSprite,0);
+         this._attachedSprite.x = param2;
+         this._attachedSprite.y = param3;
+      }
 
-        protected override function onPopulate():void
-        {
-            super.onPopulate();
-            App.utils.scheduler.envokeInNextFrame(this.addServiceListeners);
-            return;
-        }
+      public function getAttachedSprite() : Sprite {
+         return this._attachedSprite;
+      }
 
-        protected override function onDispose():void
-        {
-            this.removeServiceListeners();
-            if (this._attachedSprite) 
-            {
-                this.detachFromCursor();
-            }
-            super.onDispose();
-            return;
-        }
+      public function detachFromCursor() : void {
+         assertNotNull(this._attachedSprite,"sprite");
+         removeChild(this._attachedSprite);
+         this._attachedSprite = null;
+      }
 
-        public override function setViewSize(arg1:Number, arg2:Number):void
-        {
-            return;
-        }
+      public function resetCursor() : void {
+         this.setCursor(this._lastCursor);
+      }
 
-        protected final function forceSetCursor(arg1:String):void
-        {
-            gotoAndStop(arg1);
-            return;
-        }
+      public function setCursor(param1:String) : void {
+         this._lastCursor = param1;
+         if(this.cursorIsFree())
+         {
+            this.forceSetCursor(param1);
+         }
+      }
 
-        protected final function tryToResetCursor():void
-        {
-            if (this.cursorIsFree()) 
-            {
-                this.resetCursor();
-            }
-            return;
-        }
+      override protected function onPopulate() : void {
+         super.onPopulate();
+         App.utils.scheduler.envokeInNextFrame(this.addServiceListeners);
+      }
 
-        protected function cursorIsFree():Boolean
-        {
-            return true;
-        }
+      override protected function onDispose() : void {
+         this.removeServiceListeners();
+         if(this._attachedSprite)
+         {
+            this.detachFromCursor();
+         }
+         super.onDispose();
+      }
 
-        internal function addServiceListeners():void
-        {
-            App.stage.addEventListener(scaleform.gfx.MouseCursorEvent.CURSOR_CHANGE, this.onChangeCursorHandler);
-            App.stage.addEventListener(flash.events.MouseEvent.MOUSE_MOVE, this.onMouseMoveHandler);
-            return;
-        }
+      override public function setViewSize(param1:Number, param2:Number) : void {
+          
+      }
 
-        internal function removeServiceListeners():void
-        {
-            App.stage.removeEventListener(scaleform.gfx.MouseCursorEvent.CURSOR_CHANGE, this.onChangeCursorHandler);
-            App.stage.removeEventListener(flash.events.MouseEvent.MOUSE_MOVE, this.onMouseMoveHandler);
-            return;
-        }
+      protected final function forceSetCursor(param1:String) : void {
+         gotoAndStop(param1);
+      }
 
-        internal function onChangeCursorHandler(arg1:scaleform.gfx.MouseCursorEvent):void
-        {
-            this.setCursor(arg1.cursor);
-            arg1.preventDefault();
-            return;
-        }
+      protected final function tryToResetCursor() : void {
+         if(this.cursorIsFree())
+         {
+            this.resetCursor();
+         }
+      }
 
-        internal function onMouseMoveHandler(arg1:flash.events.MouseEvent):void
-        {
-            x = stage.mouseX;
-            y = stage.mouseY;
-            return;
-        }
+      protected function cursorIsFree() : Boolean {
+         return true;
+      }
 
-        internal var _attachedSprite:flash.display.Sprite=null;
+      private function addServiceListeners() : void {
+         App.stage.addEventListener(MouseCursorEvent.CURSOR_CHANGE,this.onChangeCursorHandler);
+         App.stage.addEventListener(MouseEvent.MOUSE_MOVE,this.onMouseMoveHandler);
+      }
 
-        internal var _lastCursor:String="arrow";
-    }
+      private function removeServiceListeners() : void {
+         App.stage.removeEventListener(MouseCursorEvent.CURSOR_CHANGE,this.onChangeCursorHandler);
+         App.stage.removeEventListener(MouseEvent.MOUSE_MOVE,this.onMouseMoveHandler);
+      }
+
+      private function onChangeCursorHandler(param1:MouseCursorEvent) : void {
+         this.setCursor(param1.cursor);
+         param1.preventDefault();
+      }
+
+      private function onMouseMoveHandler(param1:MouseEvent) : void {
+         x = stage.mouseX;
+         y = stage.mouseY;
+      }
+   }
+
 }

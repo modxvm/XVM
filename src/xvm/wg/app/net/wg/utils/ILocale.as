@@ -1,31 +1,36 @@
-package net.wg.utils 
+package net.wg.utils
 {
-    import net.wg.infrastructure.interfaces.*;
-    
-    public interface ILocale
-    {
-        function gold(arg1:Object):String;
+   import net.wg.infrastructure.interfaces.IFormattedInt;
 
-        function integer(arg1:Object):String;
 
-        function float(arg1:Object):String;
+   public interface ILocale
+   {
+          
+      function gold(param1:Object) : String;
 
-        function niceNumber(arg1:Object):String;
+      function integer(param1:Object) : String;
 
-        function numberWithoutZeros(arg1:Object):String;
+      function float(param1:Object) : String;
 
-        function parseFormattedInteger(arg1:String):net.wg.infrastructure.interfaces.IFormattedInt;
+      function niceNumber(param1:Object) : String;
 
-        function shortTime(arg1:Object):String;
+      function numberWithoutZeros(param1:Object) : String;
 
-        function longTime(arg1:Object):String;
+      function parseFormattedInteger(param1:String) : IFormattedInt;
 
-        function shortDate(arg1:Object):String;
+      function shortTime(param1:Object) : String;
 
-        function longDate(arg1:Object):String;
+      function longTime(param1:Object) : String;
 
-        function htmlTextWithIcon(arg1:String, arg2:String):String;
+      function shortDate(param1:Object) : String;
 
-        function makeString(arg1:String, arg2:Object=null):String;
-    }
+      function longDate(param1:Object) : String;
+
+      function htmlTextWithIcon(param1:String, param2:String) : String;
+
+      function makeString(param1:String, param2:Object=null) : String;
+
+      function cutCharsBeforeNumber(param1:String) : String;
+   }
+
 }

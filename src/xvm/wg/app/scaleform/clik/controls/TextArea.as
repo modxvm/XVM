@@ -1,488 +1,446 @@
-package scaleform.clik.controls 
+package scaleform.clik.controls
 {
-    import flash.display.*;
-    import flash.events.*;
-    import flash.utils.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.events.*;
-    import scaleform.clik.interfaces.*;
-    import scaleform.clik.utils.*;
-    import scaleform.gfx.*;
-    
-    public class TextArea extends scaleform.clik.controls.TextInput
-    {
-        public function TextArea()
-        {
-            this._thumbOffset = {"top":0, "bottom":0};
-            super();
-            return;
-        }
+   import scaleform.clik.interfaces.IScrollBar;
+   import flash.display.Sprite;
+   import scaleform.clik.utils.Constraints;
+   import scaleform.clik.constants.ConstrainMode;
+   import scaleform.clik.constants.InvalidationType;
+   import flash.display.MovieClip;
+   import scaleform.clik.events.InputEvent;
+   import scaleform.clik.constants.NavigationCode;
+   import flash.events.Event;
+   import scaleform.clik.events.ComponentEvent;
+   import scaleform.gfx.Extensions;
+   import flash.display.DisplayObject;
+   import flash.utils.getDefinitionByName;
+   import flash.events.MouseEvent;
+   import scaleform.clik.utils.ConstrainedElement;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
 
-        protected function createScrollBar():void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            var loc3:*=null;
-            if (this._scrollBar != null) 
-            {
-                this._scrollBar.removeEventListener(flash.events.Event.SCROLL, this.handleScroll, false);
-                this._scrollBar.removeEventListener(flash.events.Event.CHANGE, this.handleScroll, false);
-                this._scrollBar.focusTarget = null;
-                if (this.container.contains(this._scrollBar as flash.display.DisplayObject)) 
-                {
-                    this.container.removeChild(this._scrollBar as flash.display.DisplayObject);
-                }
-                this._scrollBar = null;
-            }
-            if (!this._scrollBarValue || this._scrollBarValue == "") 
-            {
-                return;
-            }
-            this._autoScrollBar = false;
-            if (this._scrollBarValue is String) 
-            {
-                if (parent != null) 
-                {
-                    loc1 = parent.getChildByName(this._scrollBarValue.toString()) as scaleform.clik.interfaces.IScrollBar;
-                }
-                if (loc1 == null) 
-                {
-                    loc2 = flash.utils.getDefinitionByName(this._scrollBarValue.toString()) as Class;
-                    if (loc2) 
-                    {
-                        loc1 = new loc2() as scaleform.clik.interfaces.IScrollBar;
-                    }
-                    if (loc1) 
-                    {
-                        this._autoScrollBar = true;
-                        loc3 = loc1 as Object;
-                        if (loc3 && this._thumbOffset) 
-                        {
-                            loc3.offsetTop = this._thumbOffset.top;
-                            loc3.offsetBottom = this._thumbOffset.bottom;
-                        }
-                        loc1.addEventListener(flash.events.MouseEvent.MOUSE_WHEEL, this.blockMouseWheel, false, 0, true);
-                        (loc1 as Object).minThumbSize = this._minThumbSize;
-                        this.container.addChild(loc1 as flash.display.DisplayObject);
-                    }
-                }
-            }
-            else if (this._scrollBarValue is Class) 
-            {
-                loc1 = new (this._scrollBarValue as Class)() as scaleform.clik.interfaces.IScrollBar;
-                loc1.addEventListener(flash.events.MouseEvent.MOUSE_WHEEL, this.blockMouseWheel, false, 0, true);
-                if (loc1 != null) 
-                {
-                    this._autoScrollBar = true;
-                    (loc1 as Object).offsetTop = this._thumbOffset.top;
-                    (loc1 as Object).offsetBottom = this._thumbOffset.bottom;
-                    (loc1 as Object).minThumbSize = this._minThumbSize;
-                    this.container.addChild(loc1 as flash.display.DisplayObject);
-                }
-            }
-            else 
-            {
-                loc1 = this._scrollBarValue as scaleform.clik.interfaces.IScrollBar;
-            }
-            this._scrollBar = loc1;
-            invalidateSize();
-            if (this._scrollBar != null) 
-            {
-                this._scrollBar.addEventListener(flash.events.Event.SCROLL, this.handleScroll, false, 0, true);
-                this._scrollBar.addEventListener(flash.events.Event.CHANGE, this.handleScroll, false, 0, true);
-                this._scrollBar.focusTarget = this;
-                (this._scrollBar as Object).scrollTarget = textField;
-                this._scrollBar.tabEnabled = false;
-            }
-            return;
-        }
 
-        protected function drawScrollBar():void
-        {
-            if (!this._autoScrollBar) 
+   public class TextArea extends TextInput
+   {
+          
+      public function TextArea() {
+         this._thumbOffset =
             {
-                return;
+               "top":0,
+               "bottom":0
             }
-            this._scrollBar.x = _width - this._scrollBar.width;
-            this._scrollBar.height = this.availableHeight;
-            this._scrollBar.validateNow();
-            return;
-        }
+         ;
+         super();
+      }
 
-        protected function updateScrollBar():void
-        {
-            this._maxScroll = textField.maxScrollV;
-            var loc1:*=this._scrollBar as scaleform.clik.controls.ScrollIndicator;
-            if (loc1 == null) 
-            {
-                return;
-            }
-            var loc2:*=constraints.getElement("textField");
-            if (this._scrollPolicy == "on" || this._scrollPolicy == "auto" && textField.maxScrollV > 1) 
-            {
-                if (this._autoScrollBar && !loc1.visible) 
-                {
-                    if (loc2 != null) 
-                    {
-                        constraints.update(_width, _height);
-                        invalidate();
-                    }
-                    this._maxScroll = textField.maxScrollV;
-                }
-                loc1.visible = true;
-            }
-            if (this._scrollPolicy == "off" || this._scrollPolicy == "auto" && textField.maxScrollV == 1) 
-            {
-                if (this._autoScrollBar && loc1.visible) 
-                {
-                    loc1.visible = false;
-                    if (loc2 != null) 
-                    {
-                        constraints.update(this.availableWidth, _height);
-                        invalidate();
-                    }
-                }
-            }
-            if (loc1.enabled != this.enabled) 
-            {
-                loc1.enabled = this.enabled;
-            }
-            return;
-        }
+      protected var _scrollPolicy:String = "auto";
 
-        protected override function updateText():void
-        {
-            super.updateText();
-            this.updateScrollBar();
-            return;
-        }
+      protected var _position:int = 1;
 
-        protected override function updateTextField():void
-        {
-            this._resetScrollPosition = true;
-            super.updateTextField();
-            return;
-        }
+      protected var _maxScroll:Number = 1;
 
-        protected function handleScroll(arg1:flash.events.Event):void
-        {
-            this.position = this._scrollBar.position;
-            return;
-        }
+      protected var _resetScrollPosition:Boolean = false;
 
-        protected function blockMouseWheel(arg1:flash.events.MouseEvent):void
-        {
-            arg1.stopPropagation();
-            return;
-        }
+      protected var _scrollBarValue:Object;
 
-        protected override function handleTextChange(arg1:flash.events.Event):void
-        {
-            if (this._maxScroll != textField.maxScrollV) 
+      protected var _autoScrollBar:Boolean = false;
+
+      protected var _thumbOffset:Object;
+
+      protected var _minThumbSize:uint = 1;
+
+      protected var _scrollBar:IScrollBar;
+
+      public var container:Sprite;
+
+      override protected function preInitialize() : void {
+         if(!constraintsDisabled)
+         {
+            constraints = new Constraints(this,ConstrainMode.COUNTER_SCALE);
+         }
+      }
+
+      override protected function initialize() : void {
+         super.initialize();
+         if(this.container == null)
+         {
+            this.container = new Sprite();
+            addChild(this.container);
+         }
+      }
+
+      override public function get enabled() : Boolean {
+         return super.enabled;
+      }
+
+      override public function set enabled(param1:Boolean) : void {
+         super.enabled = param1;
+         this.updateScrollBar();
+      }
+
+      public function get position() : int {
+         return this._position;
+      }
+
+      public function set position(param1:int) : void {
+         this._position = param1;
+         textField.scrollV = this._position;
+      }
+
+      public function get scrollBar() : Object {
+         return this._scrollBar;
+      }
+
+      public function set scrollBar(param1:Object) : void {
+         this._scrollBarValue = param1;
+         invalidate(InvalidationType.SCROLL_BAR);
+      }
+
+      public function get minThumbSize() : uint {
+         return this._minThumbSize;
+      }
+
+      public function set minThumbSize(param1:uint) : void {
+         this._minThumbSize = param1;
+         if(!this._autoScrollBar)
+         {
+            return;
+         }
+         var _loc2_:ScrollIndicator = this._scrollBar as ScrollIndicator;
+         _loc2_.minThumbSize = param1;
+      }
+
+      public function get thumbOffset() : Object {
+         return this._thumbOffset;
+      }
+
+      public function set thumbOffset(param1:Object) : void {
+         this._thumbOffset = param1;
+         if(!this._autoScrollBar)
+         {
+            return;
+         }
+         var _loc2_:ScrollIndicator = this._scrollBar as ScrollIndicator;
+         _loc2_.offsetTop = this._thumbOffset.top;
+         _loc2_.offsetBottom = this._thumbOffset.bottom;
+      }
+
+      public function get availableWidth() : Number {
+         return Math.round(_width) - ((this._autoScrollBar) && ((this._scrollBar as MovieClip).visible)?Math.round(this._scrollBar.width):0);
+      }
+
+      public function get availableHeight() : Number {
+         return Math.round(_height);
+      }
+
+      override public function toString() : String {
+         return "[CLIK TextArea " + name + "]";
+      }
+
+      override public function handleInput(param1:InputEvent) : void {
+         var _loc2_:String = null;
+         var _loc3_:* = NaN;
+         var _loc4_:* = NaN;
+         super.handleInput(param1);
+         if(param1.handled)
+         {
+            return;
+         }
+         if(_editable)
+         {
+            return;
+         }
+         _loc2_ = param1.details.navEquivalent;
+         switch(_loc2_)
+         {
+            case NavigationCode.UP:
+               if(this.position == 1)
+               {
+                  return;
+               }
+               this.position = Math.max(1,this.position-1);
+               param1.handled = true;
+               break;
+            case NavigationCode.DOWN:
+               if(this.position == this._maxScroll)
+               {
+                  return;
+               }
+               this.position = Math.min(this._maxScroll,this.position + 1);
+               param1.handled = true;
+               break;
+            case NavigationCode.END:
+               this.position = this._maxScroll;
+               param1.handled = true;
+               break;
+            case NavigationCode.HOME:
+               this.position = 1;
+               param1.handled = true;
+               break;
+            case NavigationCode.PAGE_UP:
+               _loc3_ = textField.bottomScrollV - textField.scrollV;
+               this.position = Math.max(1,this.position - _loc3_);
+               param1.handled = true;
+               break;
+            case NavigationCode.PAGE_DOWN:
+               _loc4_ = textField.bottomScrollV - textField.scrollV;
+               this.position = Math.min(this._maxScroll,this.position + _loc4_);
+               param1.handled = true;
+               break;
+         }
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         if(textField != null)
+         {
+            textField.addEventListener(Event.SCROLL,this.onScroller,false,0,true);
+         }
+      }
+
+      override protected function draw() : void {
+         var _loc1_:uint = 0;
+         if(isInvalid(InvalidationType.SCROLL_BAR))
+         {
+            this.createScrollBar();
+         }
+         if(isInvalid(InvalidationType.STATE))
+         {
+            if(_newFrame)
             {
-                this.updateScrollBar();
+               gotoAndPlay(_newFrame);
+               _newFrame = null;
             }
-            super.handleTextChange(arg1);
-            return;
-        }
+            updateAfterStateChange();
+            this.updateTextField();
+            dispatchEvent(new ComponentEvent(ComponentEvent.STATE_CHANGE));
+            invalidate(InvalidationType.SIZE);
+         }
+         else
+         {
+            if(isInvalid(InvalidationType.DATA))
+            {
+               this.updateText();
+            }
+         }
+         if(isInvalid(InvalidationType.SIZE))
+         {
+            removeChild(this.container);
+            setActualSize(_width,_height);
+            this.container.scaleX = 1 / scaleX;
+            this.container.scaleY = 1 / scaleY;
+            if(!constraintsDisabled)
+            {
+               constraints.update(this.availableWidth,_height);
+               if(!Extensions.enabled)
+               {
+                  _loc1_ = textField.textWidth;
+               }
+            }
+            addChild(this.container);
+            if(this._autoScrollBar)
+            {
+               this.drawScrollBar();
+            }
+         }
+      }
 
-        protected function onScroller(arg1:flash.events.Event):void
-        {
-            if (this._resetScrollPosition) 
+      protected function createScrollBar() : void {
+         var _loc1_:IScrollBar = null;
+         var _loc2_:Class = null;
+         var _loc3_:Object = null;
+         if(this._scrollBar != null)
+         {
+            this._scrollBar.removeEventListener(Event.SCROLL,this.handleScroll,false);
+            this._scrollBar.removeEventListener(Event.CHANGE,this.handleScroll,false);
+            this._scrollBar.focusTarget = null;
+            if(this.container.contains(this._scrollBar as DisplayObject))
             {
-                textField.scrollV = this._position;
-            }
-            else 
-            {
-                this._position = textField.scrollV;
-            }
-            this._resetScrollPosition = false;
-            return;
-        }
-
-        public override function dispose():void
-        {
-            textField.removeEventListener(flash.events.Event.SCROLL, this.onScroller, false);
-            if (this._scrollBar) 
-            {
-                this._scrollBar.removeEventListener(flash.events.Event.SCROLL, this.handleScroll, false);
-                this._scrollBar.removeEventListener(flash.events.Event.CHANGE, this.handleScroll, false);
-                this._scrollBar.removeEventListener(flash.events.MouseEvent.MOUSE_WHEEL, this.blockMouseWheel, false);
-                this._scrollBar.focusTarget = null;
-                (this._scrollBar as Object).scrollTarget = null;
-                if (this._scrollBar is net.wg.infrastructure.interfaces.entity.IDisposable) 
-                {
-                    net.wg.infrastructure.interfaces.entity.IDisposable(this._scrollBar).dispose();
-                }
-                if (this.container) 
-                {
-                    if (this.container.contains(this._scrollBar as flash.display.DisplayObject)) 
-                    {
-                        this.container.removeChild(this._scrollBar as flash.display.DisplayObject);
-                    }
-                }
-            }
-            if (this.container) 
-            {
-                removeChild(this.container);
-                this.container = null;
+               this.container.removeChild(this._scrollBar as DisplayObject);
             }
             this._scrollBar = null;
-            this._scrollBarValue = null;
-            this._thumbOffset = null;
-            super.dispose();
+         }
+         if(!this._scrollBarValue || this._scrollBarValue == "")
+         {
             return;
-        }
-
-        protected override function preInitialize():void
-        {
-            if (!constraintsDisabled) 
+         }
+         this._autoScrollBar = false;
+         if(this._scrollBarValue  is  String)
+         {
+            if(parent != null)
             {
-                constraints = new scaleform.clik.utils.Constraints(this, scaleform.clik.constants.ConstrainMode.COUNTER_SCALE);
+               _loc1_ = parent.getChildByName(this._scrollBarValue.toString()) as IScrollBar;
             }
-            return;
-        }
-
-        protected override function initialize():void
-        {
-            super.initialize();
-            if (this.container == null) 
+            if(_loc1_ == null)
             {
-                this.container = new flash.display.Sprite();
-                addChild(this.container);
+               _loc2_ = getDefinitionByName(this._scrollBarValue.toString()) as Class;
+               if(_loc2_)
+               {
+                  _loc1_ = new _loc2_() as IScrollBar;
+               }
+               if(_loc1_)
+               {
+                  this._autoScrollBar = true;
+                  _loc3_ = _loc1_ as Object;
+                  if((_loc3_) && (this._thumbOffset))
+                  {
+                     _loc3_.offsetTop = this._thumbOffset.top;
+                     _loc3_.offsetBottom = this._thumbOffset.bottom;
+                  }
+                  _loc1_.addEventListener(MouseEvent.MOUSE_WHEEL,this.blockMouseWheel,false,0,true);
+                  (_loc1_ as Object).minThumbSize = this._minThumbSize;
+                  this.container.addChild(_loc1_ as DisplayObject);
+               }
             }
+         }
+         else
+         {
+            if(this._scrollBarValue  is  Class)
+            {
+               _loc1_ = new (this._scrollBarValue as Class)() as IScrollBar;
+               _loc1_.addEventListener(MouseEvent.MOUSE_WHEEL,this.blockMouseWheel,false,0,true);
+               if(_loc1_ != null)
+               {
+                  this._autoScrollBar = true;
+                  (_loc1_ as Object).offsetTop = this._thumbOffset.top;
+                  (_loc1_ as Object).offsetBottom = this._thumbOffset.bottom;
+                  (_loc1_ as Object).minThumbSize = this._minThumbSize;
+                  this.container.addChild(_loc1_ as DisplayObject);
+               }
+            }
+            else
+            {
+               _loc1_ = this._scrollBarValue as IScrollBar;
+            }
+         }
+         this._scrollBar = _loc1_;
+         invalidateSize();
+         if(this._scrollBar != null)
+         {
+            this._scrollBar.addEventListener(Event.SCROLL,this.handleScroll,false,0,true);
+            this._scrollBar.addEventListener(Event.CHANGE,this.handleScroll,false,0,true);
+            this._scrollBar.focusTarget = this;
+            (this._scrollBar as Object).scrollTarget = textField;
+            this._scrollBar.tabEnabled = false;
+         }
+      }
+
+      protected function drawScrollBar() : void {
+         if(!this._autoScrollBar)
+         {
             return;
-        }
+         }
+         this._scrollBar.x = _width - this._scrollBar.width;
+         this._scrollBar.height = this.availableHeight;
+         this._scrollBar.validateNow();
+      }
 
-        public override function get enabled():Boolean
-        {
-            return super.enabled;
-        }
+      protected function updateScrollBar() : void {
+         this._maxScroll = textField.maxScrollV;
+         var _loc1_:ScrollIndicator = this._scrollBar as ScrollIndicator;
+         if(_loc1_ == null)
+         {
+            return;
+         }
+         var _loc2_:ConstrainedElement = constraints.getElement("textField");
+         if(this._scrollPolicy == "on" || this._scrollPolicy == "auto" && textField.maxScrollV > 1)
+         {
+            if((this._autoScrollBar) && !_loc1_.visible)
+            {
+               if(_loc2_ != null)
+               {
+                  constraints.update(_width,_height);
+                  invalidate();
+               }
+               this._maxScroll = textField.maxScrollV;
+            }
+            _loc1_.visible = true;
+         }
+         if(this._scrollPolicy == "off" || this._scrollPolicy == "auto" && textField.maxScrollV == 1)
+         {
+            if((this._autoScrollBar) && (_loc1_.visible))
+            {
+               _loc1_.visible = false;
+               if(_loc2_ != null)
+               {
+                  constraints.update(this.availableWidth,_height);
+                  invalidate();
+               }
+            }
+         }
+         if(_loc1_.enabled != this.enabled)
+         {
+            _loc1_.enabled = this.enabled;
+         }
+      }
 
-        public override function set enabled(arg1:Boolean):void
-        {
-            super.enabled = arg1;
+      override protected function updateText() : void {
+         super.updateText();
+         this.updateScrollBar();
+      }
+
+      override protected function updateTextField() : void {
+         this._resetScrollPosition = true;
+         super.updateTextField();
+      }
+
+      protected function handleScroll(param1:Event) : void {
+         this.position = this._scrollBar.position;
+      }
+
+      protected function blockMouseWheel(param1:MouseEvent) : void {
+         param1.stopPropagation();
+      }
+
+      override protected function handleTextChange(param1:Event) : void {
+         if(this._maxScroll != textField.maxScrollV)
+         {
             this.updateScrollBar();
-            return;
-        }
+         }
+         super.handleTextChange(param1);
+      }
 
-        public function get position():int
-        {
-            return this._position;
-        }
-
-        public function set position(arg1:int):void
-        {
-            this._position = arg1;
+      protected function onScroller(param1:Event) : void {
+         if(this._resetScrollPosition)
+         {
             textField.scrollV = this._position;
-            return;
-        }
+         }
+         else
+         {
+            this._position = textField.scrollV;
+         }
+         this._resetScrollPosition = false;
+      }
 
-        public function get scrollBar():Object
-        {
-            return this._scrollBar;
-        }
-
-        public function set scrollBar(arg1:Object):void
-        {
-            this._scrollBarValue = arg1;
-            invalidate(scaleform.clik.constants.InvalidationType.SCROLL_BAR);
-            return;
-        }
-
-        public function get minThumbSize():uint
-        {
-            return this._minThumbSize;
-        }
-
-        public function set minThumbSize(arg1:uint):void
-        {
-            this._minThumbSize = arg1;
-            if (!this._autoScrollBar) 
+      override public function dispose() : void {
+         textField.removeEventListener(Event.SCROLL,this.onScroller,false);
+         if(this._scrollBar)
+         {
+            this._scrollBar.removeEventListener(Event.SCROLL,this.handleScroll,false);
+            this._scrollBar.removeEventListener(Event.CHANGE,this.handleScroll,false);
+            this._scrollBar.removeEventListener(MouseEvent.MOUSE_WHEEL,this.blockMouseWheel,false);
+            this._scrollBar.focusTarget = null;
+            (this._scrollBar as Object).scrollTarget = null;
+            if(this._scrollBar  is  IDisposable)
             {
-                return;
+               IDisposable(this._scrollBar).dispose();
             }
-            var loc1:*=this._scrollBar as scaleform.clik.controls.ScrollIndicator;
-            loc1.minThumbSize = arg1;
-            return;
-        }
-
-        public function get thumbOffset():Object
-        {
-            return this._thumbOffset;
-        }
-
-        public function set thumbOffset(arg1:Object):void
-        {
-            this._thumbOffset = arg1;
-            if (!this._autoScrollBar) 
+            if(this.container)
             {
-                return;
+               if(this.container.contains(this._scrollBar as DisplayObject))
+               {
+                  this.container.removeChild(this._scrollBar as DisplayObject);
+               }
             }
-            var loc1:*=this._scrollBar as scaleform.clik.controls.ScrollIndicator;
-            loc1.offsetTop = this._thumbOffset.top;
-            loc1.offsetBottom = this._thumbOffset.bottom;
-            return;
-        }
+         }
+         if(this.container)
+         {
+            removeChild(this.container);
+            this.container = null;
+         }
+         this._scrollBar = null;
+         this._scrollBarValue = null;
+         this._thumbOffset = null;
+         super.dispose();
+      }
+   }
 
-        public function get availableWidth():Number
-        {
-            return Math.round(_width) - (this._autoScrollBar && (this._scrollBar as flash.display.MovieClip).visible ? Math.round(this._scrollBar.width) : 0);
-        }
-
-        public function get availableHeight():Number
-        {
-            return Math.round(_height);
-        }
-
-        public override function toString():String
-        {
-            return "[CLIK TextArea " + name + "]";
-        }
-
-        public override function handleInput(arg1:scaleform.clik.events.InputEvent):void
-        {
-            var loc1:*=null;
-            var loc2:*=NaN;
-            var loc3:*=NaN;
-            super.handleInput(arg1);
-            if (arg1.handled) 
-            {
-                return;
-            }
-            if (_editable) 
-            {
-                return;
-            }
-            loc1 = arg1.details.navEquivalent;
-            var loc4:*=loc1;
-            switch (loc4) 
-            {
-                case scaleform.clik.constants.NavigationCode.UP:
-                {
-                    if (this.position == 1) 
-                    {
-                        return;
-                    }
-                    this.position = Math.max(1, (this.position - 1));
-                    arg1.handled = true;
-                    break;
-                }
-                case scaleform.clik.constants.NavigationCode.DOWN:
-                {
-                    if (this.position == this._maxScroll) 
-                    {
-                        return;
-                    }
-                    this.position = Math.min(this._maxScroll, this.position + 1);
-                    arg1.handled = true;
-                    break;
-                }
-                case scaleform.clik.constants.NavigationCode.END:
-                {
-                    this.position = this._maxScroll;
-                    arg1.handled = true;
-                    break;
-                }
-                case scaleform.clik.constants.NavigationCode.HOME:
-                {
-                    this.position = 1;
-                    arg1.handled = true;
-                    break;
-                }
-                case scaleform.clik.constants.NavigationCode.PAGE_UP:
-                {
-                    loc2 = textField.bottomScrollV - textField.scrollV;
-                    this.position = Math.max(1, this.position - loc2);
-                    arg1.handled = true;
-                    break;
-                }
-                case scaleform.clik.constants.NavigationCode.PAGE_DOWN:
-                {
-                    loc3 = textField.bottomScrollV - textField.scrollV;
-                    this.position = Math.min(this._maxScroll, this.position + loc3);
-                    arg1.handled = true;
-                    break;
-                }
-            }
-            return;
-        }
-
-        protected override function configUI():void
-        {
-            super.configUI();
-            if (textField != null) 
-            {
-                textField.addEventListener(flash.events.Event.SCROLL, this.onScroller, false, 0, true);
-            }
-            return;
-        }
-
-        protected override function draw():void
-        {
-            var loc1:*=0;
-            if (isInvalid(scaleform.clik.constants.InvalidationType.SCROLL_BAR)) 
-            {
-                this.createScrollBar();
-            }
-            if (isInvalid(scaleform.clik.constants.InvalidationType.STATE)) 
-            {
-                if (_newFrame) 
-                {
-                    gotoAndPlay(_newFrame);
-                    _newFrame = null;
-                }
-                updateAfterStateChange();
-                this.updateTextField();
-                dispatchEvent(new scaleform.clik.events.ComponentEvent(scaleform.clik.events.ComponentEvent.STATE_CHANGE));
-                invalidate(scaleform.clik.constants.InvalidationType.SIZE);
-            }
-            else if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
-            {
-                this.updateText();
-            }
-            if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
-            {
-                removeChild(this.container);
-                setActualSize(_width, _height);
-                this.container.scaleX = 1 / scaleX;
-                this.container.scaleY = 1 / scaleY;
-                if (!constraintsDisabled) 
-                {
-                    constraints.update(this.availableWidth, _height);
-                    if (!scaleform.gfx.Extensions.enabled) 
-                    {
-                        loc1 = textField.textWidth;
-                    }
-                }
-                addChild(this.container);
-                if (this._autoScrollBar) 
-                {
-                    this.drawScrollBar();
-                }
-            }
-            return;
-        }
-
-        protected var _scrollPolicy:String="auto";
-
-        protected var _position:int=1;
-
-        protected var _maxScroll:Number=1;
-
-        protected var _resetScrollPosition:Boolean=false;
-
-        protected var _scrollBarValue:Object;
-
-        protected var _autoScrollBar:Boolean=false;
-
-        protected var _thumbOffset:Object;
-
-        protected var _minThumbSize:uint=1;
-
-        protected var _scrollBar:scaleform.clik.interfaces.IScrollBar;
-
-        public var container:flash.display.Sprite;
-    }
 }

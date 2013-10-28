@@ -1,50 +1,56 @@
-package net.wg.infrastructure.base 
+package net.wg.infrastructure.base
 {
-    import net.wg.infrastructure.interfaces.*;
-    
-    public class DefaultWindowGeometry extends Object implements net.wg.infrastructure.interfaces.IWindowGeometry
-    {
-        public function DefaultWindowGeometry()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.interfaces.IWindowGeometry;
+   import net.wg.infrastructure.interfaces.IWindow;
+   import net.wg.infrastructure.interfaces.IAbstractWindowView;
 
-        public function canOverwrite():Boolean
-        {
-            return true;
-        }
 
-        public function setSize(arg1:net.wg.infrastructure.interfaces.IWindow):Boolean
-        {
-            arg1.updateSize(arg1.getMinWidth(), arg1.getMinHeight());
-            return true;
-        }
+   public class DefaultWindowGeometry extends Object implements IWindowGeometry
+   {
+          
+      public function DefaultWindowGeometry(param1:int=undefined) {
+         super();
+         this.minY = param1;
+      }
 
-        public function setPosition(arg1:net.wg.infrastructure.interfaces.IWindow):Boolean
-        {
-            var loc2:*=NaN;
-            var loc3:*=NaN;
-            var loc1:*=arg1.sourceView;
-            if (loc1 && loc1.isCentered) 
+      private var doPositionOnce:Boolean = true;
+
+      private var minY:int = 0;
+
+      public function canOverwrite() : Boolean {
+         return true;
+      }
+
+      public function setSize(param1:IWindow) : Boolean {
+         param1.updateSize(param1.getMinWidth(),param1.getMinHeight());
+         return true;
+      }
+
+      public function setPosition(param1:IWindow) : Boolean {
+         var _loc3_:* = NaN;
+         var _loc4_:* = NaN;
+         var _loc2_:IAbstractWindowView = param1.sourceView;
+         if((_loc2_) && (_loc2_.isCentered))
+         {
+            _loc3_ = Math.round(App.appWidth - param1.width >> 1);
+            _loc4_ = Math.max(Math.round(App.appHeight - param1.height >> 1),this.minY);
+            if(_loc2_.isModal)
             {
-                loc2 = App.appWidth - arg1.width >> 1;
-                loc3 = App.appHeight - arg1.height >> 1;
-                if (loc1.isModal) 
-                {
-                    arg1.x = loc2;
-                    arg1.y = loc3;
-                }
-                else if (this.doPositionOnce) 
-                {
-                    arg1.x = arg1.x + loc2;
-                    arg1.y = arg1.y + loc3;
-                    this.doPositionOnce = false;
-                }
+               param1.x = _loc3_;
+               param1.y = _loc4_;
             }
-            return true;
-        }
+            else
+            {
+               if(this.doPositionOnce)
+               {
+                  param1.x = param1.x + _loc3_;
+                  param1.y = param1.y + _loc4_;
+                  this.doPositionOnce = false;
+               }
+            }
+         }
+         return true;
+      }
+   }
 
-        internal var doPositionOnce:Boolean=true;
-    }
 }

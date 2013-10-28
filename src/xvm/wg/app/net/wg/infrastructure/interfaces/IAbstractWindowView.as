@@ -1,31 +1,34 @@
-package net.wg.infrastructure.interfaces 
+package net.wg.infrastructure.interfaces
 {
-    import net.wg.infrastructure.base.meta.*;
-    
-    public interface IAbstractWindowView extends net.wg.infrastructure.base.meta.IWindowViewMeta, net.wg.infrastructure.interfaces.IView
-    {
-        function handleWindowMinimize():void;
+   import net.wg.infrastructure.base.meta.IWindowViewMeta;
 
-        function get canDrag():Boolean;
 
-        function get showWindowBg():Boolean;
+   public interface IAbstractWindowView extends IWindowViewMeta, IView
+   {
+          
+      function handleWindowMinimize() : void;
 
-        function get canMinimize():Boolean;
+      function get canDrag() : Boolean;
 
-        function get canResize():Boolean;
+      function get showWindowBg() : Boolean;
 
-        function get canClose():Boolean;
+      function get canMinimize() : Boolean;
 
-        function get enabledCloseBtn():Boolean;
+      function get canResize() : Boolean;
 
-        function get isCentered():Boolean;
+      function get canClose() : Boolean;
 
-        function get isModal():Boolean;
+      function get enabledCloseBtn() : Boolean;
 
-        function get window():net.wg.infrastructure.interfaces.IWindow;
+      function get isCentered() : Boolean;
 
-        function set window(arg1:net.wg.infrastructure.interfaces.IWindow):void;
+      function get isModal() : Boolean;
 
-        function get geometry():net.wg.infrastructure.interfaces.IWindowGeometry;
-    }
+      function get window() : IWindow;
+
+      function set window(param1:IWindow) : void;
+
+      function get geometry() : IWindowGeometry;
+   }
+
 }

@@ -1,36 +1,41 @@
-package net.wg.utils 
+package net.wg.utils
 {
-    import __AS3__.vec.*;
-    import flash.display.*;
-    import flash.events.*;
-    import flash.geom.*;
-    import flash.text.*;
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.interfaces.*;
-    import org.idmedia.as3commons.util.*;
-    
-    public interface ICommons
-    {
-        function createMap(arg1:Array):org.idmedia.as3commons.util.Map;
+   import org.idmedia.as3commons.util.Map;
+   import net.wg.data.constants.KeyProps;
+   import flash.text.TextField;
+   import __AS3__.vec.Vector;
+   import flash.events.MouseEvent;
+   import flash.display.Sprite;
+   import flash.display.Bitmap;
+   import flash.display.BitmapData;
+   import flash.geom.Rectangle;
+   import net.wg.infrastructure.interfaces.IColorScheme;
 
-        function createMappedArray(arg1:Array):Array;
 
-        function keyToString(arg1:Number):net.wg.data.constants.KeyProps;
+   public interface ICommons
+   {
+          
+      function createMap(param1:Array) : Map;
 
-        function cloneObject(arg1:Object):*;
+      function createMappedArray(param1:Array) : Array;
 
-        function addBlankLines(arg1:String, arg2:flash.text.TextField, arg3:__AS3__.vec.Vector.<flash.text.TextField>):void;
+      function keyToString(param1:Number) : KeyProps;
 
-        function isLeftButton(arg1:flash.events.MouseEvent):Boolean;
+      function cloneObject(param1:Object) : *;
 
-        function isRightButton(arg1:flash.events.MouseEvent):Boolean;
+      function addBlankLines(param1:String, param2:TextField, param3:Vector.<TextField>) : void;
 
-        function setSaturation(arg1:flash.display.Sprite, arg2:Number):void;
+      function isLeftButton(param1:MouseEvent) : Boolean;
 
-        function releaseReferences(arg1:Object, arg2:Boolean=true):void;
+      function isRightButton(param1:MouseEvent) : Boolean;
 
-        function cutBitmapFromBitmapData(arg1:flash.display.BitmapData, arg2:flash.geom.Rectangle):flash.display.Bitmap;
+      function setSaturation(param1:Sprite, param2:Number) : void;
 
-        function formatPlayerName(arg1:flash.text.TextField, arg2:String, arg3:String=null, arg4:String=null, arg5:Boolean=false, arg6:net.wg.infrastructure.interfaces.IColorScheme=null, arg7:int=-4):String;
-    }
+      function releaseReferences(param1:Object, param2:Boolean=true) : void;
+
+      function cutBitmapFromBitmapData(param1:BitmapData, param2:Rectangle) : Bitmap;
+
+      function formatPlayerName(param1:TextField, param2:String, param3:String=null, param4:String=null, param5:Boolean=false, param6:IColorScheme=null, param7:int=-4) : String;
+   }
+
 }

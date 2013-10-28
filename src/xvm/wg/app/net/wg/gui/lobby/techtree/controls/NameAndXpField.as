@@ -1,94 +1,83 @@
-package net.wg.gui.lobby.techtree.controls 
+package net.wg.gui.lobby.techtree.controls
 {
-    import flash.text.*;
-    import net.wg.gui.lobby.techtree.constants.*;
-    import scaleform.clik.constants.*;
-    
-    public class NameAndXpField extends net.wg.gui.lobby.techtree.controls.NodeComponent
-    {
-        public function NameAndXpField()
-        {
-            super();
-            return;
-        }
+   import flash.text.TextField;
+   import scaleform.clik.constants.InvalidationType;
+   import net.wg.gui.lobby.techtree.constants.XpTypeStrings;
 
-        protected override function configUI():void
-        {
-            var loc1:*;
-            mouseChildren = loc1 = false;
-            mouseEnabled = loc1;
-            super.configUI();
-            return;
-        }
 
-        protected override function draw():void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            if (!(_owner == null) && isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+   public class NameAndXpField extends NodeComponent
+   {
+          
+      public function NameAndXpField() {
+         super();
+      }
+
+      private static const statesMap:Object;
+
+      public var xpLabel:String = "earnedXPLabel";
+
+      public var changeXpIconToElite:Boolean = false;
+
+      public var nameField:TextField;
+
+      public var xpField:TextField;
+
+      public var xpIcon:XPIcon;
+
+      override protected function configUI() : void {
+         mouseEnabled = mouseChildren = false;
+         super.configUI();
+      }
+
+      override protected function draw() : void {
+         var _loc1_:String = null;
+         var _loc2_:String = null;
+         if(!(_owner == null) && (isInvalid(InvalidationType.DATA)))
+         {
+            _loc1_ = this.xpLabel.length > 0?_owner.getNamedLabel(this.xpLabel):"";
+            _loc2_ = statesMap[state][_loc1_.length > 0?1:0];
+            if(!(currentFrameLabel == _loc2_) && (_labelHash[_loc2_]))
             {
-                loc1 = this.xpLabel.length > 0 ? _owner.getNamedLabel(this.xpLabel) : "";
-                loc2 = statesMap[state][loc1.length > 0 ? 1 : 0];
-                if (!(currentFrameLabel == loc2) && _labelHash[loc2]) 
-                {
-                    gotoAndStop(loc2);
-                }
-                this.setNameField(_owner.getItemName());
-                this.setXpField(loc1);
-                if (this.changeXpIconToElite) 
-                {
-                    if (_owner.isElite()) 
-                    {
-                        this.setXpIcon(net.wg.gui.lobby.techtree.constants.XpTypeStrings.ELITE_XP_TYPE);
-                    }
-                    else 
-                    {
-                        this.setXpIcon(net.wg.gui.lobby.techtree.constants.XpTypeStrings.EARNED_XP_TYPE);
-                    }
-                }
+               gotoAndStop(_loc2_);
             }
-            super.draw();
-            return;
-        }
-
-        internal function setNameField(arg1:String):void
-        {
-            if (!(this.nameField == null) && !(arg1 == null)) 
+            this.setNameField(_owner.getItemName());
+            this.setXpField(_loc1_);
+            if(this.changeXpIconToElite)
             {
-                this.nameField.text = arg1;
+               if(_owner.isElite())
+               {
+                  this.setXpIcon(XpTypeStrings.ELITE_XP_TYPE);
+               }
+               else
+               {
+                  this.setXpIcon(XpTypeStrings.EARNED_XP_TYPE);
+               }
             }
-            return;
-        }
+         }
+         super.draw();
+      }
 
-        internal function setXpField(arg1:String):void
-        {
-            if (!(this.xpField == null) && !(arg1 == null)) 
-            {
-                this.xpField.text = arg1;
-            }
-            return;
-        }
+      private function setNameField(param1:String) : void {
+         if(!(this.nameField == null) && !(param1 == null))
+         {
+            this.nameField.text = param1;
+         }
+      }
 
-        internal function setXpIcon(arg1:String):void
-        {
-            if (this.xpIcon != null) 
-            {
-                this.xpIcon.type = arg1;
-                this.xpIcon.validateNow();
-            }
-            return;
-        }
+      private function setXpField(param1:String) : void {
+         if(!(this.xpField == null) && !(param1 == null))
+         {
+            this.xpField.text = param1;
+         }
+      }
 
-        internal static const statesMap:Object={"locked":["locked", "locked"], "normal":["normal_name", "normal_name_and_xp"], "premium":["premium_name", "premium_name_and_xp"]};
+      private function setXpIcon(param1:String) : void {
+         if(this.xpIcon != null)
+         {
+            this.xpIcon.type = param1;
+            this.xpIcon.validateNow();
+         }
+      }
+   }
 
-        public var xpLabel:String="earnedXPLabel";
-
-        public var changeXpIconToElite:Boolean=false;
-
-        public var nameField:flash.text.TextField;
-
-        public var xpField:flash.text.TextField;
-
-        public var xpIcon:net.wg.gui.lobby.techtree.controls.XPIcon;
-    }
 }

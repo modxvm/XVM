@@ -1,16 +1,19 @@
-package net.wg.infrastructure.interfaces 
+package net.wg.infrastructure.interfaces
 {
-    import flash.events.*;
-    import scaleform.clik.interfaces.*;
-    
-    public interface IGroupedControl extends flash.events.IEventDispatcher
-    {
-        function get selectedItem():Object;
+   import flash.events.IEventDispatcher;
+   import scaleform.clik.interfaces.IListItemRenderer;
 
-        function get selectedRenderer():scaleform.clik.interfaces.IListItemRenderer;
 
-        function get data():Object;
+   public interface IGroupedControl extends IEventDispatcher
+   {
+          
+      function get selectedItem() : Object;
 
-        function get name():String;
-    }
+      function get selectedRenderer() : IListItemRenderer;
+
+      function get data() : Object;
+
+      function get name() : String;
+   }
+
 }

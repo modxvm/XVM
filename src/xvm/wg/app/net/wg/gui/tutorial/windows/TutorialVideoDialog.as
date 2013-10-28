@@ -1,83 +1,79 @@
-package net.wg.gui.tutorial.windows 
+package net.wg.gui.tutorial.windows
 {
-    import flash.events.*;
-    import net.wg.gui.components.common.video.*;
-    import net.wg.gui.components.common.video.advanced.*;
-    
-    public class TutorialVideoDialog extends net.wg.gui.tutorial.windows.TutorialDialog
-    {
-        public function TutorialVideoDialog()
-        {
-            super();
-            showWindowBg = false;
-            canClose = false;
-            canDrag = false;
-            isModal = true;
-            return;
-        }
+   import net.wg.gui.components.common.video.advanced.AdvancedVideoPlayer;
+   import net.wg.gui.components.common.video.VideoPlayerEvent;
+   import flash.events.Event;
+   import scaleform.clik.utils.Padding;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.videoPlayer.addEventListener(net.wg.gui.components.common.video.advanced.AdvancedVideoPlayer.PLAYER_CLOSED, this.onVideoClosed);
-            this.videoPlayer.addEventListener(net.wg.gui.components.common.video.VideoPlayerEvent.PLAYBACK_STOPPED, this.onVideoStopped);
-            return;
-        }
 
-        internal function onVideoStopped(arg1:net.wg.gui.components.common.video.VideoPlayerEvent):void
-        {
-            if (this._isPopulated) 
-            {
-                onWindowCloseS();
-            }
-            return;
-        }
+   public class TutorialVideoDialog extends TutorialDialog
+   {
+          
+      public function TutorialVideoDialog() {
+         super();
+         showWindowBg = false;
+         canClose = false;
+         canDrag = false;
+         isModal = true;
+         isCentered = true;
+      }
 
-        internal function onVideoClosed(arg1:flash.events.Event):void
-        {
+      public var videoPlayer:AdvancedVideoPlayer;
+
+      private var _isPopulated:Boolean = false;
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.videoPlayer.addEventListener(AdvancedVideoPlayer.PLAYER_CLOSED,this.onVideoClosed);
+         this.videoPlayer.addEventListener(VideoPlayerEvent.PLAYBACK_STOPPED,this.onVideoStopped);
+      }
+
+      private function onVideoStopped(param1:VideoPlayerEvent) : void {
+         if(this._isPopulated)
+         {
             onWindowCloseS();
-            return;
-        }
+         }
+      }
 
-        protected override function drawData():void
-        {
-            super.drawData();
-            this.videoPlayer.source = _data.message;
-            this.videoPlayer.volume = _data.soundValue;
-            this.videoPlayer.subtitleTrack = _data.subtitleTrack;
-            this.videoPlayer.audioTrack = _data.audioTrack;
-            this.videoPlayer.play();
-            this._isPopulated = true;
-            return;
-        }
+      private function onVideoClosed(param1:Event) : void {
+         onWindowCloseS();
+      }
 
-        protected override function onPopulate():void
-        {
-            super.onPopulate();
-            window.getBackground().visible = false;
-            window.getTitleBtn().visible = false;
-            return;
-        }
+      override protected function drawData() : void {
+         super.drawData();
+         this.videoPlayer.source = _data.message;
+         this.videoPlayer.volume = _data.soundValue;
+         this.videoPlayer.subtitleTrack = _data.subtitleTrack;
+         this.videoPlayer.audioTrack = _data.audioTrack;
+         this.videoPlayer.play();
+         this._isPopulated = true;
+      }
 
-        protected override function onDispose():void
-        {
-            if (this.videoPlayer) 
+      override protected function onPopulate() : void {
+         super.onPopulate();
+         window.getBackground().visible = false;
+         window.getTitleBtn().visible = false;
+         var _loc1_:Padding = window.contentPadding as Padding;
+         _loc1_.top = 0;
+         _loc1_.bottom = 0;
+         _loc1_.left = 0;
+         _loc1_.right = 0;
+      }
+
+      override protected function onDispose() : void {
+         if(this.videoPlayer)
+         {
+            this.videoPlayer.dispose();
+            if(this.videoPlayer.parent)
             {
-                this.videoPlayer.dispose();
-                if (this.videoPlayer.parent) 
-                {
-                    this.videoPlayer.removeEventListener(net.wg.gui.components.common.video.advanced.AdvancedVideoPlayer.PLAYER_CLOSED, this.onVideoClosed);
-                    this.videoPlayer.removeEventListener(net.wg.gui.components.common.video.VideoPlayerEvent.PLAYBACK_STOPPED, this.onVideoStopped);
-                    this.videoPlayer.parent.removeChild(parent);
-                }
-                this.videoPlayer = null;
+               this.videoPlayer.removeEventListener(AdvancedVideoPlayer.PLAYER_CLOSED,this.onVideoClosed);
+               this.videoPlayer.removeEventListener(VideoPlayerEvent.PLAYBACK_STOPPED,this.onVideoStopped);
+               this.videoPlayer.parent.removeChild(parent);
             }
-            super.onDispose();
-            return;
-        }
+            this.videoPlayer = null;
+         }
+         super.onDispose();
+      }
+   }
 
-        public var videoPlayer:net.wg.gui.components.common.video.advanced.AdvancedVideoPlayer;
-
-        internal var _isPopulated:Boolean=false;
-    }
 }

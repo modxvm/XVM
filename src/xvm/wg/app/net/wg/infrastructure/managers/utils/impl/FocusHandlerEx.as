@@ -1,49 +1,42 @@
-package net.wg.infrastructure.managers.utils.impl 
+package net.wg.infrastructure.managers.utils.impl
 {
-    import flash.display.*;
-    import net.wg.utils.*;
-    import scaleform.clik.managers.*;
-    import scaleform.clik.ui.*;
-    
-    public class FocusHandlerEx extends Object implements net.wg.utils.IFocusHandler
-    {
-        public function FocusHandlerEx()
-        {
-            super();
-            this._focusHandler = scaleform.clik.managers.FocusHandler.getInstance();
-            return;
-        }
+   import net.wg.utils.IFocusHandler;
+   import scaleform.clik.managers.FocusHandler;
+   import flash.display.Stage;
+   import flash.display.InteractiveObject;
+   import scaleform.clik.ui.InputDetails;
 
-        public function set stage(arg1:flash.display.Stage):void
-        {
-            this._focusHandler.stage = arg1;
-            return;
-        }
 
-        public function getFocus(arg1:uint):flash.display.InteractiveObject
-        {
-            return this._focusHandler.getFocus(arg1);
-        }
+   public class FocusHandlerEx extends Object implements IFocusHandler
+   {
+          
+      public function FocusHandlerEx() {
+         super();
+         this._focusHandler = FocusHandler.getInstance();
+      }
 
-        public function setFocus(arg1:flash.display.InteractiveObject, arg2:uint=0, arg3:Boolean=false):void
-        {
-            this._focusHandler.setFocus(arg1, arg2, arg3);
-            return;
-        }
+      private var _focusHandler:FocusHandler = null;
 
-        public function input(arg1:scaleform.clik.ui.InputDetails):void
-        {
-            this._focusHandler.input(arg1);
-            return;
-        }
+      public function set stage(param1:Stage) : void {
+         this._focusHandler.stage = param1;
+      }
 
-        public function dispose():void
-        {
-            this._focusHandler.setFocus(null);
-            this._focusHandler = null;
-            return;
-        }
+      public function getFocus(param1:uint) : InteractiveObject {
+         return this._focusHandler.getFocus(param1);
+      }
 
-        internal var _focusHandler:scaleform.clik.managers.FocusHandler=null;
-    }
+      public function setFocus(param1:InteractiveObject, param2:uint=0, param3:Boolean=false) : void {
+         this._focusHandler.setFocus(param1,param2,param3);
+      }
+
+      public function input(param1:InputDetails) : void {
+         this._focusHandler.input(param1);
+      }
+
+      public function dispose() : void {
+         this._focusHandler.setFocus(null);
+         this._focusHandler = null;
+      }
+   }
+
 }

@@ -1,49 +1,63 @@
-package net.wg.app 
+package net.wg.app
 {
-    import flash.display.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.interfaces.*;
-    import net.wg.infrastructure.managers.*;
-    import net.wg.utils.*;
-    
-    public interface IApplication extends net.wg.infrastructure.base.meta.IApplicationMeta
-    {
-        function onLangBarResize(arg1:Number, arg2:Number):void;
+   import net.wg.infrastructure.base.meta.IApplicationMeta;
+   import flash.display.Stage;
+   import flash.display.DisplayObjectContainer;
+   import net.wg.infrastructure.base.meta.IGlobalVarsMgrMeta;
+   import net.wg.infrastructure.managers.ISoundManager;
+   import net.wg.infrastructure.managers.ITooltipMgr;
+   import net.wg.infrastructure.managers.IWaitingView;
+   import net.wg.infrastructure.managers.IEnvironmentManager;
+   import net.wg.infrastructure.interfaces.ICursor;
+   import net.wg.infrastructure.managers.IContainerManager;
+   import net.wg.infrastructure.managers.IContextMenuManager;
+   import net.wg.infrastructure.managers.IColorSchemeManager;
+   import net.wg.infrastructure.managers.IGuiItemsManager;
+   import net.wg.infrastructure.managers.IVoiceChatManager;
+   import net.wg.utils.IGameInputManager;
+   import net.wg.utils.IUtils;
 
-        function get appWidth():Number;
 
-        function get appHeight():Number;
+   public interface IApplication extends IApplicationMeta
+   {
+          
+      function onLangBarResize(param1:Number, param2:Number) : void;
 
-        function get stage():flash.display.Stage;
+      function get appWidth() : Number;
 
-        function get systemMessages():flash.display.DisplayObjectContainer;
+      function get appHeight() : Number;
 
-        function get globalVarsMgr():net.wg.infrastructure.base.meta.IGlobalVarsMgrMeta;
+      function get stage() : Stage;
 
-        function get soundMgr():net.wg.infrastructure.managers.ISoundManager;
+      function get systemMessages() : DisplayObjectContainer;
 
-        function get toolTipMgr():net.wg.infrastructure.managers.ITooltipMgr;
+      function get globalVarsMgr() : IGlobalVarsMgrMeta;
 
-        function get waiting():net.wg.infrastructure.managers.IWaitingView;
+      function get soundMgr() : ISoundManager;
 
-        function get environment():net.wg.infrastructure.managers.IEnvironmentManager;
+      function get toolTipMgr() : ITooltipMgr;
 
-        function get cursor():net.wg.infrastructure.interfaces.ICursor;
+      function get waiting() : IWaitingView;
 
-        function get containerMgr():net.wg.infrastructure.managers.IContainerManager;
+      function get environment() : IEnvironmentManager;
 
-        function get contextMenuMgr():net.wg.infrastructure.managers.IContextMenuManager;
+      function get cursor() : ICursor;
 
-        function get colorSchemeMgr():net.wg.infrastructure.managers.IColorSchemeManager;
+      function get containerMgr() : IContainerManager;
 
-        function get itemsMgr():net.wg.infrastructure.managers.IGuiItemsManager;
+      function get contextMenuMgr() : IContextMenuManager;
 
-        function get voiceChatMgr():net.wg.infrastructure.managers.IVoiceChatManager;
+      function get colorSchemeMgr() : IColorSchemeManager;
 
-        function get gameInputMgr():net.wg.utils.IGameInputManager;
+      function get itemsMgr() : IGuiItemsManager;
 
-        function get utils():net.wg.utils.IUtils;
+      function get voiceChatMgr() : IVoiceChatManager;
 
-        function get browserBgClass():Class;
-    }
+      function get gameInputMgr() : IGameInputManager;
+
+      function get utils() : IUtils;
+
+      function get browserBgClass() : Class;
+   }
+
 }

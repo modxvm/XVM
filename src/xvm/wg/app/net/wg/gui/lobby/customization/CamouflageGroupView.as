@@ -1,45 +1,42 @@
-package net.wg.gui.lobby.customization 
+package net.wg.gui.lobby.customization
 {
-    import flash.events.*;
-    import flash.text.*;
-    
-    public class CamouflageGroupView extends net.wg.gui.lobby.customization.BaseTimedCustomizationGroupView
-    {
-        public function CamouflageGroupView()
-        {
-            super();
-            return;
-        }
+   import flash.text.TextField;
+   import flash.events.Event;
 
-        public function setDefaultLabel(arg1:String):void
-        {
-            this.defaultLbl = arg1;
-            this.hintLabel.htmlText = this.defaultLbl;
-            return;
-        }
 
-        protected override function handleItemDataChanged(arg1:flash.events.Event=null):void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            this.hintLabel.htmlText = this.defaultLbl;
-            if (selectedItemIdx > -1) 
+   public class CamouflageGroupView extends BaseTimedCustomizationGroupView
+   {
+          
+      public function CamouflageGroupView() {
+         super();
+      }
+
+      public var hintLabel:TextField;
+
+      private var defaultLbl:String = "";
+
+      public function setDefaultLabel(param1:String) : void {
+         this.defaultLbl = param1;
+         this.hintLabel.htmlText = this.defaultLbl;
+      }
+
+      override protected function handleItemDataChanged(param1:Event=null) : void {
+         var _loc2_:Object = null;
+         var _loc3_:CustomizationEvent = null;
+         this.hintLabel.htmlText = this.defaultLbl;
+         if(selectedItemIdx > -1)
+         {
+            _loc2_ = itemsDP.requestItemAt(selectedItemIdx);
+            if((_loc2_) && (_loc2_.id) && selectedPriceIdx > -1)
             {
-                loc1 = itemsDP.requestItemAt(selectedItemIdx);
-                if (loc1 && loc1.id && selectedPriceIdx > -1) 
-                {
-                    loc2 = new net.wg.gui.lobby.customization.CustomizationEvent(net.wg.gui.lobby.customization.CustomizationEvent.SELECT_NEW);
-                    loc2.data = loc1;
-                    loc2.index = selectedItemIdx;
-                    dispatchEvent(loc2);
-                    this.hintLabel.htmlText = loc1.invisibilityLbl;
-                }
+               _loc3_ = new CustomizationEvent(CustomizationEvent.SELECT_NEW);
+               _loc3_.data = _loc2_;
+               _loc3_.index = selectedItemIdx;
+               dispatchEvent(_loc3_);
+               this.hintLabel.htmlText = _loc2_.invisibilityLbl;
             }
-            return;
-        }
+         }
+      }
+   }
 
-        public var hintLabel:flash.text.TextField;
-
-        internal var defaultLbl:String="";
-    }
 }

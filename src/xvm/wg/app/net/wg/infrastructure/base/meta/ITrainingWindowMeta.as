@@ -1,13 +1,16 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface ITrainingWindowMeta extends flash.events.IEventDispatcher
-    {
-        function getInfoS():Object;
+   import flash.events.IEventDispatcher;
 
-        function getMapsDataS():Array;
 
-        function updateTrainingRoomS(arg1:Number, arg2:Number, arg3:int, arg4:String):void;
-    }
+   public interface ITrainingWindowMeta extends IEventDispatcher
+   {
+          
+      function getInfoS() : Object;
+
+      function getMapsDataS() : Array;
+
+      function updateTrainingRoomS(param1:Number, param2:Number, param3:int, param4:String) : void;
+   }
+
 }

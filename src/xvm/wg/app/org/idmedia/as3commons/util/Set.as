@@ -1,6 +1,11 @@
-package org.idmedia.as3commons.util 
+package org.idmedia.as3commons.util
 {
-    public interface Set extends org.idmedia.as3commons.util.Collection
-    {
-    }
+
+
+   public interface Set extends Collection
+   {
+          
+
+   }
+
 }

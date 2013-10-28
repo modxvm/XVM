@@ -1,92 +1,78 @@
-package net.wg.gui.lobby.hangar 
+package net.wg.gui.lobby.hangar
 {
-    import flash.display.*;
-    import flash.events.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import scaleform.clik.events.*;
-    
-    public class TmenXpPanel extends net.wg.infrastructure.base.meta.impl.TmenXpPanelMeta implements net.wg.infrastructure.base.meta.ITmenXpPanelMeta
-    {
-        public function TmenXpPanel()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.TmenXpPanelMeta;
+   import net.wg.infrastructure.base.meta.ITmenXpPanelMeta;
+   import flash.events.MouseEvent;
+   import flash.display.MovieClip;
+   import net.wg.gui.components.controls.CheckBox;
+   import scaleform.clik.events.ButtonEvent;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            var loc1:*;
-            this.xpToTmenCheckbox.visible = loc1 = false;
-            this.checkboxTankersBg.visible = loc1;
-            this.xpToTmenCheckbox.label = DIALOGS.XPTOTMENCHECKBOX_TITLE;
-            this.xpToTmenCheckbox.addEventListener(flash.events.MouseEvent.ROLL_OVER, showXpTankmenTooltip);
-            this.xpToTmenCheckbox.addEventListener(flash.events.MouseEvent.ROLL_OUT, hideXpTankmenTooltip);
-            this.xpToTmenCheckbox.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onXpToTmenCheckboxClick);
-            return;
-        }
 
-        public function as_setTankmenXpPanel(arg1:Boolean, arg2:Boolean):void
-        {
-            this._panelVisible = arg1;
-            this._panelSelected = arg2;
-            invalidate(INVALIDATE_XP_PANEL);
-            return;
-        }
+   public class TmenXpPanel extends TmenXpPanelMeta implements ITmenXpPanelMeta
+   {
+          
+      public function TmenXpPanel() {
+         super();
+      }
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(INVALIDATE_XP_PANEL)) 
-            {
-                var loc1:*;
-                this.xpToTmenCheckbox.visible = loc1 = this._panelVisible;
-                this.checkboxTankersBg.visible = loc1;
-                this.xpToTmenCheckbox.selected = this._panelSelected;
-            }
-            return;
-        }
+      private static const INVALIDATE_XP_PANEL:String = "invXpPanel";
 
-        protected override function onDispose():void
-        {
-            App.toolTipMgr.hide();
-            super.onDispose();
-            this.xpToTmenCheckbox.removeEventListener(flash.events.MouseEvent.ROLL_OVER, showXpTankmenTooltip);
-            this.xpToTmenCheckbox.removeEventListener(flash.events.MouseEvent.ROLL_OUT, hideXpTankmenTooltip);
-            this.xpToTmenCheckbox.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onXpToTmenCheckboxClick);
-            return;
-        }
+      private static function showXpTankmenTooltip(param1:MouseEvent) : void {
+         App.toolTipMgr.showComplex(TOOLTIPS.HANGAR_XPTOTMENCHECKBOX);
+      }
 
-        internal function onXpToTmenCheckboxClick(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            App.toolTipMgr.hide();
-            DebugUtils.LOG_DEBUG(this.xpToTmenCheckbox.selected);
-            accelerateTmenXpS(this.xpToTmenCheckbox.selected);
-            return;
-        }
+      private static function hideXpTankmenTooltip(param1:MouseEvent) : void {
+         App.toolTipMgr.hide();
+      }
 
-        internal static function showXpTankmenTooltip(arg1:flash.events.MouseEvent):void
-        {
-            App.toolTipMgr.showComplex(TOOLTIPS.HANGAR_XPTOTMENCHECKBOX);
-            return;
-        }
+      public var checkboxTankersBg:MovieClip;
 
-        internal static function hideXpTankmenTooltip(arg1:flash.events.MouseEvent):void
-        {
-            App.toolTipMgr.hide();
-            return;
-        }
+      public var xpToTmenCheckbox:CheckBox;
 
-        internal static const INVALIDATE_XP_PANEL:String="invXpPanel";
+      private var _panelVisible:Boolean = false;
 
-        public var checkboxTankersBg:flash.display.MovieClip;
+      private var _panelSelected:Boolean = false;
 
-        public var xpToTmenCheckbox:net.wg.gui.components.controls.CheckBox;
+      public function as_setTankmenXpPanel(param1:Boolean, param2:Boolean) : void {
+         this._panelVisible = param1;
+         this._panelSelected = param2;
+         invalidate(INVALIDATE_XP_PANEL);
+      }
 
-        internal var _panelVisible:Boolean=false;
+      override protected function configUI() : void {
+         super.configUI();
+         this.checkboxTankersBg.visible = this.xpToTmenCheckbox.visible = false;
+         this.xpToTmenCheckbox.label = DIALOGS.XPTOTMENCHECKBOX_TITLE;
+         this.xpToTmenCheckbox.addEventListener(MouseEvent.ROLL_OVER,showXpTankmenTooltip);
+         this.xpToTmenCheckbox.addEventListener(MouseEvent.ROLL_OUT,hideXpTankmenTooltip);
+         this.xpToTmenCheckbox.addEventListener(ButtonEvent.CLICK,this.onXpToTmenCheckboxClick);
+      }
 
-        internal var _panelSelected:Boolean=false;
-    }
+      override protected function draw() : void {
+         super.draw();
+         if(isInvalid(INVALIDATE_XP_PANEL))
+         {
+            this.checkboxTankersBg.visible = this.xpToTmenCheckbox.visible = this._panelVisible;
+            this.xpToTmenCheckbox.selected = this._panelSelected;
+         }
+      }
+
+      override protected function onDispose() : void {
+         App.toolTipMgr.hide();
+         super.onDispose();
+         this.xpToTmenCheckbox.removeEventListener(MouseEvent.ROLL_OVER,showXpTankmenTooltip);
+         this.xpToTmenCheckbox.removeEventListener(MouseEvent.ROLL_OUT,hideXpTankmenTooltip);
+         this.xpToTmenCheckbox.removeEventListener(ButtonEvent.CLICK,this.onXpToTmenCheckboxClick);
+         this.checkboxTankersBg = null;
+         this.xpToTmenCheckbox.dispose();
+         this.xpToTmenCheckbox = null;
+      }
+
+      private function onXpToTmenCheckboxClick(param1:ButtonEvent) : void {
+         App.toolTipMgr.hide();
+         DebugUtils.LOG_DEBUG(this.xpToTmenCheckbox.selected);
+         accelerateTmenXpS(this.xpToTmenCheckbox.selected);
+      }
+   }
+
 }

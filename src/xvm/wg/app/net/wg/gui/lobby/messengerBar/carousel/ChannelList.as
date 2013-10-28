@@ -1,78 +1,76 @@
-package net.wg.gui.lobby.messengerBar.carousel 
+package net.wg.gui.lobby.messengerBar.carousel
 {
-    import flash.events.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.lobby.messengerBar.carousel.events.*;
-    import scaleform.clik.events.*;
-    import scaleform.clik.interfaces.*;
-    import scaleform.gfx.*;
-    
-    public class ChannelList extends net.wg.gui.components.controls.TileList
-    {
-        public function ChannelList()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.components.controls.TileList;
+   import scaleform.clik.interfaces.IListItemRenderer;
+   import scaleform.clik.events.ButtonEvent;
+   import net.wg.gui.lobby.messengerBar.carousel.events.ChannelListEvent;
+   import flash.events.Event;
+   import scaleform.gfx.MouseEventEx;
 
-        protected override function setupRenderer(arg1:scaleform.clik.interfaces.IListItemRenderer):void
-        {
-            super.setupRenderer(arg1);
-            var loc1:*=arg1 as net.wg.gui.lobby.messengerBar.carousel.ChannelRenderer;
-            loc1.openButton.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onItemOpenClick);
-            loc1.closeButton.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onItemCloseClick);
-            return;
-        }
 
-        protected override function cleanUpRenderer(arg1:scaleform.clik.interfaces.IListItemRenderer):void
-        {
-            super.cleanUpRenderer(arg1);
-            var loc1:*=arg1 as net.wg.gui.lobby.messengerBar.carousel.ChannelRenderer;
-            loc1.openButton.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onItemOpenClick);
-            loc1.closeButton.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onItemCloseClick);
-            return;
-        }
+   public class ChannelList extends TileList
+   {
+          
+      public function ChannelList() {
+         super();
+      }
 
-        internal function onItemOpenClick(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            dispatchEvent(this.generateEvent(net.wg.gui.lobby.messengerBar.carousel.events.ChannelListEvent.OPEN_CHANNEL_CLICK, arg1));
-            return;
-        }
+      override protected function setupRenderer(param1:IListItemRenderer) : void {
+         super.setupRenderer(param1);
+         var _loc2_:ChannelRenderer = param1 as ChannelRenderer;
+         _loc2_.openButton.addEventListener(ButtonEvent.CLICK,this.onItemOpenClick);
+         _loc2_.closeButton.addEventListener(ButtonEvent.CLICK,this.onItemCloseClick);
+      }
 
-        internal function onItemCloseClick(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            dispatchEvent(this.generateEvent(net.wg.gui.lobby.messengerBar.carousel.events.ChannelListEvent.CLOSE_CHANNEL_CLICK, arg1));
-            return;
-        }
+      override protected function cleanUpRenderer(param1:IListItemRenderer) : void {
+         super.cleanUpRenderer(param1);
+         var _loc2_:ChannelRenderer = param1 as ChannelRenderer;
+         _loc2_.openButton.removeEventListener(ButtonEvent.CLICK,this.onItemOpenClick);
+         _loc2_.closeButton.removeEventListener(ButtonEvent.CLICK,this.onItemCloseClick);
+      }
 
-        internal function generateEvent(arg1:String, arg2:flash.events.Event):net.wg.gui.lobby.messengerBar.carousel.events.ChannelListEvent
-        {
-            var loc1:*=arg2.currentTarget.parent as scaleform.clik.interfaces.IListItemRenderer;
-            var loc2:*=0;
-            if (arg2 is scaleform.clik.events.ButtonEvent) 
+      private function onItemOpenClick(param1:ButtonEvent) : void {
+         dispatchEvent(this.generateEvent(ChannelListEvent.OPEN_CHANNEL_CLICK,param1));
+      }
+
+      private function onItemCloseClick(param1:ButtonEvent) : void {
+         dispatchEvent(this.generateEvent(ChannelListEvent.CLOSE_CHANNEL_CLICK,param1));
+      }
+
+      private function generateEvent(param1:String, param2:Event) : ChannelListEvent {
+         var _loc3_:IListItemRenderer = param2.currentTarget.parent as IListItemRenderer;
+         var _loc4_:uint = 0;
+         if(param2  is  ButtonEvent)
+         {
+            _loc4_ = (param2 as ButtonEvent).controllerIdx;
+         }
+         else
+         {
+            if(param2  is  MouseEventEx)
             {
-                loc2 = (arg2 as scaleform.clik.events.ButtonEvent).controllerIdx;
+               _loc4_ = (param2 as MouseEventEx).mouseIdx;
             }
-            else if (arg2 is scaleform.gfx.MouseEventEx) 
+         }
+         var _loc5_:uint = 0;
+         if(param2  is  ButtonEvent)
+         {
+            _loc5_ = (param2 as ButtonEvent).buttonIdx;
+         }
+         else
+         {
+            if(param2  is  MouseEventEx)
             {
-                loc2 = (arg2 as scaleform.gfx.MouseEventEx).mouseIdx;
+               _loc5_ = (param2 as MouseEventEx).buttonIdx;
             }
-            var loc3:*=0;
-            if (arg2 is scaleform.clik.events.ButtonEvent) 
-            {
-                loc3 = (arg2 as scaleform.clik.events.ButtonEvent).buttonIdx;
-            }
-            else if (arg2 is scaleform.gfx.MouseEventEx) 
-            {
-                loc3 = (arg2 as scaleform.gfx.MouseEventEx).buttonIdx;
-            }
-            var loc4:*=false;
-            if (arg2 is scaleform.clik.events.ButtonEvent) 
-            {
-                loc4 = (arg2 as scaleform.clik.events.ButtonEvent).isKeyboard;
-            }
-            var loc5:*;
-            return loc5 = new net.wg.gui.lobby.messengerBar.carousel.events.ChannelListEvent(arg1, false, true, loc1.index, 0, loc1.index, loc1, dataProvider.requestItemAt(loc1.index), loc2, loc3, loc4);
-        }
-    }
+         }
+         var _loc6_:* = false;
+         if(param2  is  ButtonEvent)
+         {
+            _loc6_ = (param2 as ButtonEvent).isKeyboard;
+         }
+         var _loc7_:ChannelListEvent = new ChannelListEvent(param1,false,true,_loc3_.index,0,_loc3_.index,_loc3_,dataProvider.requestItemAt(_loc3_.index),_loc4_,_loc5_,_loc6_);
+         return _loc7_;
+      }
+   }
+
 }

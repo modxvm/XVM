@@ -1,32 +1,29 @@
-package net.wg.infrastructure.base.meta.impl 
+package net.wg.infrastructure.base.meta.impl
 {
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.base.*;
-    
-    public class IntroPageMeta extends net.wg.infrastructure.base.AbstractView
-    {
-        public function IntroPageMeta()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.AbstractView;
+   import net.wg.data.constants.Errors;
 
-        public function stopVideoS():void
-        {
-            App.utils.asserter.assertNotNull(this.stopVideo, "stopVideo" + net.wg.data.constants.Errors.CANT_NULL);
-            this.stopVideo();
-            return;
-        }
 
-        public function handleErrorS(arg1:Object):void
-        {
-            App.utils.asserter.assertNotNull(this.handleError, "handleError" + net.wg.data.constants.Errors.CANT_NULL);
-            this.handleError(arg1);
-            return;
-        }
+   public class IntroPageMeta extends AbstractView
+   {
+          
+      public function IntroPageMeta() {
+         super();
+      }
 
-        public var stopVideo:Function=null;
+      public var stopVideo:Function = null;
 
-        public var handleError:Function=null;
-    }
+      public var handleError:Function = null;
+
+      public function stopVideoS() : void {
+         App.utils.asserter.assertNotNull(this.stopVideo,"stopVideo" + Errors.CANT_NULL);
+         this.stopVideo();
+      }
+
+      public function handleErrorS(param1:Object) : void {
+         App.utils.asserter.assertNotNull(this.handleError,"handleError" + Errors.CANT_NULL);
+         this.handleError(param1);
+      }
+   }
+
 }

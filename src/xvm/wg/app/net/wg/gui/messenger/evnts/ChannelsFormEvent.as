@@ -1,48 +1,40 @@
-package net.wg.gui.messenger.evnts 
+package net.wg.gui.messenger.evnts
 {
-    import flash.events.*;
-    
-    public class ChannelsFormEvent extends flash.events.Event
-    {
-        public function ChannelsFormEvent(arg1:String, arg2:Boolean=true, arg3:Boolean=false, arg4:String="", arg5:String=null, arg6:String=null, arg7:Number=-1)
-        {
-            super(arg1, arg2, arg3);
-            this.channelName = arg4;
-            this.channelPass = arg5;
-            this.channelRetypePass = arg6;
-            this.index = arg7;
-            return;
-        }
+   import flash.events.Event;
 
-        public override function clone():flash.events.Event
-        {
-            return new net.wg.gui.messenger.evnts.ChannelsFormEvent(type, bubbles, cancelable, this.channelName, this.channelPass, this.channelRetypePass, this.index);
-        }
 
-        public override function toString():String
-        {
-            return formatToString("ChannelsFormEvent", "type", "cancelable", "eventPhase", "channelName", "channelPass", "channelRetypePass", "index");
-        }
+   public class ChannelsFormEvent extends Event
+   {
+          
+      public function ChannelsFormEvent(param1:String, param2:Boolean=true, param3:Boolean=false, param4:String=undefined, param5:String=null, param6:String=null, param7:Number=undefined) {
+         super(param1,param2,param3);
+         this.channelName = param4;
+         this.channelPass = param5;
+         this.channelRetypePass = param6;
+         this.index = param7;
+      }
 
-        
-        {
-            ON_SEARCH_CHANNEL_CLICK = "on_search_channel_click";
-            ON_JOIN = "on_join";
-            ON_CREATE_CHANNEL = "on_create_channel";
-        }
+      public static var ON_SEARCH_CHANNEL_CLICK:String = "on_search_channel_click";
 
-        public var channelName:String="";
+      public static var ON_JOIN:String = "on_join";
 
-        public var channelPass:String=null;
+      public static var ON_CREATE_CHANNEL:String = "on_create_channel";
 
-        public var channelRetypePass:String=null;
+      public var channelName:String = "";
 
-        public var index:Number=-1;
+      public var channelPass:String = null;
 
-        public static var ON_SEARCH_CHANNEL_CLICK:String="on_search_channel_click";
+      public var channelRetypePass:String = null;
 
-        public static var ON_JOIN:String="on_join";
+      public var index:Number = -1;
 
-        public static var ON_CREATE_CHANNEL:String="on_create_channel";
-    }
+      override public function clone() : Event {
+         return new ChannelsFormEvent(type,bubbles,cancelable,this.channelName,this.channelPass,this.channelRetypePass,this.index);
+      }
+
+      override public function toString() : String {
+         return formatToString("ChannelsFormEvent","type","cancelable","eventPhase","channelName","channelPass","channelRetypePass","index");
+      }
+   }
+
 }

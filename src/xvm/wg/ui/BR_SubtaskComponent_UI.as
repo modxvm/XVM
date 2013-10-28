@@ -1,16 +1,14 @@
-//class BR_SubtaskComponent_UI
-package
+package 
 {
-    import net.wg.gui.lobby.questsWindow.*;
+   import net.wg.gui.lobby.questsWindow.SubtaskComponent;
 
-    public dynamic class BR_SubtaskComponent_UI extends net.wg.gui.lobby.questsWindow.SubtaskComponent
-    {
-        public function BR_SubtaskComponent_UI()
-        {
-            super();
-            return;
-        }
-    }
+
+   public dynamic class BR_SubtaskComponent_UI extends SubtaskComponent
+   {
+          
+      public function BR_SubtaskComponent_UI() {
+         super();
+      }
+   }
+
 }
-
-

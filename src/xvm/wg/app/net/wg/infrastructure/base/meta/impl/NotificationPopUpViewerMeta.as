@@ -1,50 +1,43 @@
-package net.wg.infrastructure.base.meta.impl 
+package net.wg.infrastructure.base.meta.impl
 {
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.base.*;
-    
-    public class NotificationPopUpViewerMeta extends net.wg.infrastructure.base.BaseDAAPIComponent
-    {
-        public function NotificationPopUpViewerMeta()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.BaseDAAPIComponent;
+   import net.wg.data.constants.Errors;
 
-        public function setListClearS():void
-        {
-            App.utils.asserter.assertNotNull(this.setListClear, "setListClear" + net.wg.data.constants.Errors.CANT_NULL);
-            this.setListClear();
-            return;
-        }
 
-        public function onMessageHidedS(arg1:Boolean, arg2:Boolean):void
-        {
-            App.utils.asserter.assertNotNull(this.onMessageHided, "onMessageHided" + net.wg.data.constants.Errors.CANT_NULL);
-            this.onMessageHided(arg1, arg2);
-            return;
-        }
+   public class NotificationPopUpViewerMeta extends BaseDAAPIComponent
+   {
+          
+      public function NotificationPopUpViewerMeta() {
+         super();
+      }
 
-        public function onMessageShowMoreS(arg1:Object):void
-        {
-            App.utils.asserter.assertNotNull(this.onMessageShowMore, "onMessageShowMore" + net.wg.data.constants.Errors.CANT_NULL);
-            this.onMessageShowMore(arg1);
-            return;
-        }
+      public var setListClear:Function = null;
 
-        public function onSecuritySettingsLinkClickS():void
-        {
-            App.utils.asserter.assertNotNull(this.onSecuritySettingsLinkClick, "onSecuritySettingsLinkClick" + net.wg.data.constants.Errors.CANT_NULL);
-            this.onSecuritySettingsLinkClick();
-            return;
-        }
+      public var onMessageHided:Function = null;
 
-        public var setListClear:Function=null;
+      public var onMessageShowMore:Function = null;
 
-        public var onMessageHided:Function=null;
+      public var onSecuritySettingsLinkClick:Function = null;
 
-        public var onMessageShowMore:Function=null;
+      public function setListClearS() : void {
+         App.utils.asserter.assertNotNull(this.setListClear,"setListClear" + Errors.CANT_NULL);
+         this.setListClear();
+      }
 
-        public var onSecuritySettingsLinkClick:Function=null;
-    }
+      public function onMessageHidedS(param1:Boolean, param2:Boolean) : void {
+         App.utils.asserter.assertNotNull(this.onMessageHided,"onMessageHided" + Errors.CANT_NULL);
+         this.onMessageHided(param1,param2);
+      }
+
+      public function onMessageShowMoreS(param1:Object) : void {
+         App.utils.asserter.assertNotNull(this.onMessageShowMore,"onMessageShowMore" + Errors.CANT_NULL);
+         this.onMessageShowMore(param1);
+      }
+
+      public function onSecuritySettingsLinkClickS() : void {
+         App.utils.asserter.assertNotNull(this.onSecuritySettingsLinkClick,"onSecuritySettingsLinkClick" + Errors.CANT_NULL);
+         this.onSecuritySettingsLinkClick();
+      }
+   }
+
 }

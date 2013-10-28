@@ -1,106 +1,92 @@
-package net.wg.gui.prebattle.meta.impl 
+package net.wg.gui.prebattle.meta.impl
 {
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.base.*;
-    
-    public class PrebattleWindowMeta extends net.wg.infrastructure.base.AbstractWindowView
-    {
-        public function PrebattleWindowMeta()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.AbstractWindowView;
+   import net.wg.data.constants.Errors;
 
-        public function requestToReadyS(arg1:Boolean):void
-        {
-            App.utils.asserter.assertNotNull(this.requestToReady, "requestToReady" + net.wg.data.constants.Errors.CANT_NULL);
-            this.requestToReady(arg1);
-            return;
-        }
 
-        public function requestToLeaveS():void
-        {
-            App.utils.asserter.assertNotNull(this.requestToLeave, "requestToLeave" + net.wg.data.constants.Errors.CANT_NULL);
-            this.requestToLeave();
-            return;
-        }
+   public class PrebattleWindowMeta extends AbstractWindowView
+   {
+          
+      public function PrebattleWindowMeta() {
+         super();
+      }
 
-        public function showPrebattleSendInvitesWindowS():void
-        {
-            App.utils.asserter.assertNotNull(this.showPrebattleSendInvitesWindow, "showPrebattleSendInvitesWindow" + net.wg.data.constants.Errors.CANT_NULL);
-            this.showPrebattleSendInvitesWindow();
-            return;
-        }
+      public var requestToReady:Function = null;
 
-        public function showFAQWindowS():void
-        {
-            App.utils.asserter.assertNotNull(this.showFAQWindow, "showFAQWindow" + net.wg.data.constants.Errors.CANT_NULL);
-            this.showFAQWindow();
-            return;
-        }
+      public var requestToLeave:Function = null;
 
-        public function canSendInviteS():Boolean
-        {
-            App.utils.asserter.assertNotNull(this.canSendInvite, "canSendInvite" + net.wg.data.constants.Errors.CANT_NULL);
-            return this.canSendInvite();
-        }
+      public var showPrebattleSendInvitesWindow:Function = null;
 
-        public function canKickPlayerS():Boolean
-        {
-            App.utils.asserter.assertNotNull(this.canKickPlayer, "canKickPlayer" + net.wg.data.constants.Errors.CANT_NULL);
-            return this.canKickPlayer();
-        }
+      public var showFAQWindow:Function = null;
 
-        public function isPlayerReadyS():Boolean
-        {
-            App.utils.asserter.assertNotNull(this.isPlayerReady, "isPlayerReady" + net.wg.data.constants.Errors.CANT_NULL);
-            return this.isPlayerReady();
-        }
+      public var canSendInvite:Function = null;
 
-        public function isPlayerCreatorS():Boolean
-        {
-            App.utils.asserter.assertNotNull(this.isPlayerCreator, "isPlayerCreator" + net.wg.data.constants.Errors.CANT_NULL);
-            return this.isPlayerCreator();
-        }
+      public var canKickPlayer:Function = null;
 
-        public function isReadyBtnEnabledS():Boolean
-        {
-            App.utils.asserter.assertNotNull(this.isReadyBtnEnabled, "isReadyBtnEnabled" + net.wg.data.constants.Errors.CANT_NULL);
-            return this.isReadyBtnEnabled();
-        }
+      public var isPlayerReady:Function = null;
 
-        public function isLeaveBtnEnabledS():Boolean
-        {
-            App.utils.asserter.assertNotNull(this.isLeaveBtnEnabled, "isLeaveBtnEnabled" + net.wg.data.constants.Errors.CANT_NULL);
-            return this.isLeaveBtnEnabled();
-        }
+      public var isPlayerCreator:Function = null;
 
-        public function getClientIDS():Number
-        {
-            App.utils.asserter.assertNotNull(this.getClientID, "getClientID" + net.wg.data.constants.Errors.CANT_NULL);
-            return this.getClientID();
-        }
+      public var isReadyBtnEnabled:Function = null;
 
-        public var requestToReady:Function=null;
+      public var isLeaveBtnEnabled:Function = null;
 
-        public var requestToLeave:Function=null;
+      public var getClientID:Function = null;
 
-        public var showPrebattleSendInvitesWindow:Function=null;
+      public function requestToReadyS(param1:Boolean) : void {
+         App.utils.asserter.assertNotNull(this.requestToReady,"requestToReady" + Errors.CANT_NULL);
+         this.requestToReady(param1);
+      }
 
-        public var showFAQWindow:Function=null;
+      public function requestToLeaveS() : void {
+         App.utils.asserter.assertNotNull(this.requestToLeave,"requestToLeave" + Errors.CANT_NULL);
+         this.requestToLeave();
+      }
 
-        public var canSendInvite:Function=null;
+      public function showPrebattleSendInvitesWindowS() : void {
+         App.utils.asserter.assertNotNull(this.showPrebattleSendInvitesWindow,"showPrebattleSendInvitesWindow" + Errors.CANT_NULL);
+         this.showPrebattleSendInvitesWindow();
+      }
 
-        public var canKickPlayer:Function=null;
+      public function showFAQWindowS() : void {
+         App.utils.asserter.assertNotNull(this.showFAQWindow,"showFAQWindow" + Errors.CANT_NULL);
+         this.showFAQWindow();
+      }
 
-        public var isPlayerReady:Function=null;
+      public function canSendInviteS() : Boolean {
+         App.utils.asserter.assertNotNull(this.canSendInvite,"canSendInvite" + Errors.CANT_NULL);
+         return this.canSendInvite();
+      }
 
-        public var isPlayerCreator:Function=null;
+      public function canKickPlayerS() : Boolean {
+         App.utils.asserter.assertNotNull(this.canKickPlayer,"canKickPlayer" + Errors.CANT_NULL);
+         return this.canKickPlayer();
+      }
 
-        public var isReadyBtnEnabled:Function=null;
+      public function isPlayerReadyS() : Boolean {
+         App.utils.asserter.assertNotNull(this.isPlayerReady,"isPlayerReady" + Errors.CANT_NULL);
+         return this.isPlayerReady();
+      }
 
-        public var isLeaveBtnEnabled:Function=null;
+      public function isPlayerCreatorS() : Boolean {
+         App.utils.asserter.assertNotNull(this.isPlayerCreator,"isPlayerCreator" + Errors.CANT_NULL);
+         return this.isPlayerCreator();
+      }
 
-        public var getClientID:Function=null;
-    }
+      public function isReadyBtnEnabledS() : Boolean {
+         App.utils.asserter.assertNotNull(this.isReadyBtnEnabled,"isReadyBtnEnabled" + Errors.CANT_NULL);
+         return this.isReadyBtnEnabled();
+      }
+
+      public function isLeaveBtnEnabledS() : Boolean {
+         App.utils.asserter.assertNotNull(this.isLeaveBtnEnabled,"isLeaveBtnEnabled" + Errors.CANT_NULL);
+         return this.isLeaveBtnEnabled();
+      }
+
+      public function getClientIDS() : Number {
+         App.utils.asserter.assertNotNull(this.getClientID,"getClientID" + Errors.CANT_NULL);
+         return this.getClientID();
+      }
+   }
+
 }

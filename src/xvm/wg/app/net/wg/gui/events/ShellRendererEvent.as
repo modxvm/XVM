@@ -1,31 +1,31 @@
-package net.wg.gui.events 
+package net.wg.gui.events
 {
-    import flash.events.*;
-    import net.wg.gui.lobby.hangar.maintenance.data.*;
-    
-    public class ShellRendererEvent extends flash.events.Event
-    {
-        public function ShellRendererEvent(arg1:String, arg2:net.wg.gui.lobby.hangar.maintenance.data.ShellVO=null, arg3:net.wg.gui.lobby.hangar.maintenance.data.ShellVO=null)
-        {
-            super(arg1, true, true);
-            this.shell = arg2;
-            this.shellToReplace = arg3;
-            return;
-        }
+   import flash.events.Event;
+   import net.wg.gui.lobby.hangar.maintenance.data.ShellVO;
 
-        public override function clone():flash.events.Event
-        {
-            return new net.wg.gui.events.ShellRendererEvent(type, this.shell, this.shellToReplace);
-        }
 
-        public static const USER_COUNT_CHANGED:String="userCountChanged";
+   public class ShellRendererEvent extends Event
+   {
+          
+      public function ShellRendererEvent(param1:String, param2:ShellVO=null, param3:ShellVO=null) {
+         super(param1,true,true);
+         this.shell = param2;
+         this.shellToReplace = param3;
+      }
 
-        public static const TOTAL_PRICE_CHANGED:String="totalPriceChanged";
+      public static const USER_COUNT_CHANGED:String = "userCountChanged";
 
-        public static const CHANGE_ORDER:String="changeOrder";
+      public static const TOTAL_PRICE_CHANGED:String = "totalPriceChanged";
 
-        public var shell:net.wg.gui.lobby.hangar.maintenance.data.ShellVO=null;
+      public static const CHANGE_ORDER:String = "changeOrder";
 
-        public var shellToReplace:net.wg.gui.lobby.hangar.maintenance.data.ShellVO=null;
-    }
+      public var shell:ShellVO = null;
+
+      public var shellToReplace:ShellVO = null;
+
+      override public function clone() : Event {
+         return new ShellRendererEvent(type,this.shell,this.shellToReplace);
+      }
+   }
+
 }

@@ -1,14 +1,15 @@
-package net.wg.data.VO 
+package net.wg.data.VO
 {
-    import net.wg.data.components.*;
-    import net.wg.data.constants.*;
-    
-    public class SeparateItem extends net.wg.data.components.ContextItem
-    {
-        public function SeparateItem()
-        {
-            super(net.wg.data.constants.ContextMenuConstants.SEPARATE, null);
-            return;
-        }
-    }
+   import net.wg.data.components.ContextItem;
+   import net.wg.data.constants.ContextMenuConstants;
+
+
+   public class SeparateItem extends ContextItem
+   {
+          
+      public function SeparateItem() {
+         super(ContextMenuConstants.SEPARATE,null);
+      }
+   }
+
 }

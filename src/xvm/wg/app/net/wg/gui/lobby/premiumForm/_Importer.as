@@ -1,11 +1,13 @@
-package net.wg.gui.lobby.premiumForm 
+package net.wg.gui.lobby.premiumForm
 {
-    public class _Importer extends Object
-    {
-        public function _Importer()
-        {
-            super();
-            return;
-        }
-    }
+
+
+   public class _Importer extends Object
+   {
+          
+      public function _Importer() {
+         super();
+      }
+   }
+
 }

@@ -1,25 +1,28 @@
-package net.wg.gui.prebattle.meta 
+package net.wg.gui.prebattle.meta
 {
-    import flash.events.*;
-    
-    public interface IBattleSessionWindowMeta extends flash.events.IEventDispatcher
-    {
-        function requestToAssignMemberS(arg1:Number):void;
+   import flash.events.IEventDispatcher;
 
-        function requestToUnassignMemberS(arg1:Number):void;
 
-        function canMoveToAssignedS():Boolean;
+   public interface IBattleSessionWindowMeta extends IEventDispatcher
+   {
+          
+      function requestToAssignMemberS(param1:Number) : void;
 
-        function canMoveToUnassignedS():Boolean;
+      function requestToUnassignMemberS(param1:Number) : void;
 
-        function as_setStartTime(arg1:Number):void;
+      function canMoveToAssignedS() : Boolean;
 
-        function as_setInfo(arg1:String, arg2:String, arg3:String, arg4:String, arg5:String, arg6:String, arg7:String):void;
+      function canMoveToUnassignedS() : Boolean;
 
-        function as_setNationsLimits(arg1:Array):void;
+      function as_setStartTime(param1:Number) : void;
 
-        function as_setClassesLimits(arg1:Object, arg2:Boolean):void;
+      function as_setInfo(param1:String, param2:String, param3:String, param4:String, param5:String, param6:String, param7:String) : void;
 
-        function as_setCommonLimits(arg1:Number, arg2:Number, arg3:Number, arg4:Number):void;
-    }
+      function as_setNationsLimits(param1:Array) : void;
+
+      function as_setClassesLimits(param1:Object, param2:Boolean) : void;
+
+      function as_setCommonLimits(param1:Number, param2:Number, param3:Number, param4:Number) : void;
+   }
+
 }

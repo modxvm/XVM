@@ -1,130 +1,126 @@
-package net.wg.gui.lobby.customization.renderers 
+package net.wg.gui.lobby.customization.renderers
 {
-    import flash.display.*;
-    import flash.text.*;
-    import net.wg.data.constants.*;
-    import net.wg.gui.components.controls.*;
-    import scaleform.clik.constants.*;
-    
-    public class CamoDemoRenderer extends net.wg.gui.lobby.customization.renderers.CamouflageItemRenderer
-    {
-        public function CamoDemoRenderer()
-        {
-            super();
-            soundId = net.wg.data.constants.SoundTypes.CAMOUFLAGE_DEMO_RENDERER;
-            useHandCursorForse = true;
-            return;
-        }
+   import flash.display.MovieClip;
+   import flash.text.TextField;
+   import net.wg.gui.components.controls.IconText;
+   import scaleform.clik.constants.InvalidationType;
+   import net.wg.data.constants.SoundTypes;
 
-        public override function setData(arg1:Object):void
-        {
-            super.setData(arg1);
-            this.showKind(!data || !data.id);
-            return;
-        }
 
-        public function get kind():String
-        {
-            return this._kind;
-        }
+   public class CamoDemoRenderer extends CamouflageItemRenderer
+   {
+          
+      public function CamoDemoRenderer() {
+         super();
+         soundId = SoundTypes.CAMOUFLAGE_DEMO_RENDERER;
+         useHandCursorForse = true;
+      }
 
-        public function set kind(arg1:String):void
-        {
-            this._kind = arg1;
-            this._kindDirty = true;
-            return;
-        }
+      public static const WINTER:String = "winter";
 
-        protected override function draw():void
-        {
-            var loc1:*=NaN;
-            super.draw();
-            if (this._kindDirty) 
+      public static const SUMMER:String = "summer";
+
+      public static const DESERT:String = "desert";
+
+      public static const OFF:String = "off";
+
+      public static const KIND_DIRTY:String = "kindDirty";
+
+      public static var KINDS:Array = [WINTER,SUMMER,DESERT];
+
+      public var kindMc:MovieClip;
+
+      public var timeLeftFld:TextField;
+
+      public var costFieldNew:IconText;
+
+      private var _kind:String;
+
+      private var _kindDirty:Boolean = false;
+
+      override public function setData(param1:Object) : void {
+         super.setData(param1);
+         this.showKind(!data || !data.id);
+      }
+
+      public function get kind() : String {
+         return this._kind;
+      }
+
+      public function set kind(param1:String) : void {
+         this._kind = param1;
+         this._kindDirty = true;
+      }
+
+      override protected function checkTooltip() : void {
+          
+      }
+
+      override protected function draw() : void {
+         var _loc1_:* = NaN;
+         super.draw();
+         if(this._kindDirty)
+         {
+            if(this.kind == OFF)
             {
-                if (this.kind != OFF) 
-                {
-                    this.showKind(!data || !data.id);
-                    loc1 = 0;
-                    loc1 = 0;
-                    while (loc1 < KINDS.length) 
-                    {
-                        if (KINDS[loc1] == this.kind) 
-                        {
-                            this.kindMc.gotoAndStop(loc1 + 1);
-                        }
-                        ++loc1;
-                    }
-                }
-                else 
-                {
-                    this.showKind(false);
-                }
-                this._kindDirty = false;
+               this.showKind(false);
             }
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+            else
             {
-                if (this.timeLeftFld) 
-                {
-                    if (data && data.timeLeft && data.timeLeft.length > 0) 
-                    {
-                        this.timeLeftFld.visible = true;
-                        this.timeLeftFld.text = data.timeLeft;
-                    }
-                    else 
-                    {
-                        this.timeLeftFld.visible = false;
-                    }
-                }
-                else 
-                {
-                    invalidateData();
-                }
-                costField.text = "";
+               this.showKind(!data || !data.id);
+               _loc1_ = 0;
+               _loc1_ = 0;
+               while(_loc1_ < KINDS.length)
+               {
+                  if(KINDS[_loc1_] == this.kind)
+                  {
+                     this.kindMc.gotoAndStop(_loc1_ + 1);
+                     break;
+                  }
+                  _loc1_++;
+               }
             }
-            return;
-        }
-
-        protected override function setState(arg1:String):void
-        {
-            super.setState(arg1);
-            if (!current && !selected) 
+            this._kindDirty = false;
+         }
+         if(isInvalid(InvalidationType.DATA))
+         {
+            if(this.timeLeftFld)
             {
-                border.state = "up";
+               if((data) && (data.timeLeft) && data.timeLeft.length > 0)
+               {
+                  this.timeLeftFld.visible = true;
+                  this.timeLeftFld.text = data.timeLeft;
+               }
+               else
+               {
+                  this.timeLeftFld.visible = false;
+               }
+               this.timeLeftFld.mouseEnabled = false;
             }
-            return;
-        }
+            else
+            {
+               invalidateData();
+            }
+            costField.text = "";
+         }
+      }
 
-        internal function showKind(arg1:Boolean):void
-        {
-            this.kindMc.visible = !(this.kind == OFF) && arg1;
-            return;
-        }
+      override protected function configUI() : void {
+         super.configUI();
+         this.timeLeftFld.mouseEnabled = false;
+      }
 
-        
-        {
-            KINDS = [WINTER, SUMMER, DESERT];
-        }
+      override protected function setState(param1:String) : void {
+         super.setState(param1);
+         if(!current && !selected)
+         {
+            border.state = "up";
+         }
+      }
 
-        public static const WINTER:String="winter";
+      private function showKind(param1:Boolean) : void {
+         this.kindMc.visible = !(this.kind == OFF) && (param1);
+      }
+   }
 
-        public static const SUMMER:String="summer";
-
-        public static const DESERT:String="desert";
-
-        public static const OFF:String="off";
-
-        public static const KIND_DIRTY:String="kindDirty";
-
-        public var kindMc:flash.display.MovieClip;
-
-        public var timeLeftFld:flash.text.TextField;
-
-        public var costFieldNew:net.wg.gui.components.controls.IconText;
-
-        internal var _kind:String;
-
-        internal var _kindDirty:Boolean=false;
-
-        public static var KINDS:Array;
-    }
 }

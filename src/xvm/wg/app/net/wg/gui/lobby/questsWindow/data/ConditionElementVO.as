@@ -1,40 +1,35 @@
-package net.wg.gui.lobby.questsWindow.data 
+package net.wg.gui.lobby.questsWindow.data
 {
-    import net.wg.data.daapi.base.*;
-    
-    public class ConditionElementVO extends net.wg.data.daapi.base.DAAPIDataClass
-    {
-        public function ConditionElementVO(arg1:Object)
-        {
-            this._vehicles = [];
-            super(arg1);
-            return;
-        }
+   import net.wg.data.daapi.base.DAAPIDataClass;
 
-        public function get descr():String
-        {
-            return this._descr;
-        }
 
-        public function set descr(arg1:String):void
-        {
-            this._descr = arg1;
-            return;
-        }
+   public class ConditionElementVO extends DAAPIDataClass
+   {
+          
+      public function ConditionElementVO(param1:Object) {
+         this._vehicles = [];
+         super(param1);
+      }
 
-        public function get vehicles():Array
-        {
-            return this._vehicles;
-        }
+      private var _descr:String = "";
 
-        public function set vehicles(arg1:Array):void
-        {
-            this._vehicles = arg1;
-            return;
-        }
+      private var _vehicles:Array;
 
-        internal var _descr:String="";
+      public function get descr() : String {
+         return this._descr;
+      }
 
-        internal var _vehicles:Array;
-    }
+      public function set descr(param1:String) : void {
+         this._descr = param1;
+      }
+
+      public function get vehicles() : Array {
+         return this._vehicles;
+      }
+
+      public function set vehicles(param1:Array) : void {
+         this._vehicles = param1;
+      }
+   }
+
 }

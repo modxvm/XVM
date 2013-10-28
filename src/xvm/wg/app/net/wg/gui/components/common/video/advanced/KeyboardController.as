@@ -1,69 +1,60 @@
-package net.wg.gui.components.common.video.advanced 
+package net.wg.gui.components.common.video.advanced
 {
-    import net.wg.gui.components.common.video.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.events.*;
-    import scaleform.clik.ui.*;
-    
-    public class KeyboardController extends net.wg.gui.components.common.video.advanced.AbstractPlayerController
-    {
-        public function KeyboardController(arg1:net.wg.gui.components.common.video.SimpleVideoPlayer)
-        {
-            super(arg1);
-            videoPlayer.addEventListener(scaleform.clik.events.InputEvent.INPUT, this.handleInput, false, 0, true);
-            return;
-        }
+   import scaleform.clik.events.InputEvent;
+   import scaleform.clik.ui.InputDetails;
+   import scaleform.clik.constants.InputValue;
+   import scaleform.clik.constants.NavigationCode;
+   import net.wg.gui.components.common.video.SimpleVideoPlayer;
 
-        internal function handleInput(arg1:scaleform.clik.events.InputEvent):void
-        {
-            var loc1:*=false;
-            var loc2:*=arg1.details;
-            var loc3:*=loc2.navEquivalent;
-            switch (loc3) 
-            {
-                case scaleform.clik.constants.NavigationCode.ENTER:
-                {
-                    if (loc2.value == scaleform.clik.constants.InputValue.KEY_UP) 
-                    {
-                        videoPlayer.togglePlayback();
-                    }
-                    break;
-                }
-                case scaleform.clik.constants.NavigationCode.UP:
-                case scaleform.clik.constants.NavigationCode.RIGHT:
-                {
-                    if (loc2.value == scaleform.clik.constants.InputValue.KEY_HOLD || loc2.value == scaleform.clik.constants.InputValue.KEY_DOWN) 
-                    {
-                        videoPlayer.volume = videoPlayer.volume + VOLUME_STEP;
-                        loc1 = true;
-                    }
-                    break;
-                }
-                case scaleform.clik.constants.NavigationCode.DOWN:
-                case scaleform.clik.constants.NavigationCode.LEFT:
-                {
-                    if (loc2.value == scaleform.clik.constants.InputValue.KEY_HOLD || loc2.value == scaleform.clik.constants.InputValue.KEY_DOWN) 
-                    {
-                        videoPlayer.volume = videoPlayer.volume - VOLUME_STEP;
-                        loc1 = true;
-                    }
-                    break;
-                }
-            }
-            if (!loc1) 
-            {
-                arg1.handled = true;
-            }
-            return;
-        }
 
-        public override function dispose():void
-        {
-            videoPlayer.removeEventListener(scaleform.clik.events.InputEvent.INPUT, this.handleInput);
-            super.dispose();
-            return;
-        }
+   public class KeyboardController extends AbstractPlayerController
+   {
+          
+      public function KeyboardController(param1:SimpleVideoPlayer) {
+         super(param1);
+         videoPlayer.addEventListener(InputEvent.INPUT,this.handleInput,false,0,true);
+      }
 
-        internal static const VOLUME_STEP:Number=0.01;
-    }
+      private static const VOLUME_STEP:Number = 0.01;
+
+      private function handleInput(param1:InputEvent) : void {
+         var _loc2_:* = false;
+         var _loc3_:InputDetails = param1.details;
+         switch(_loc3_.navEquivalent)
+         {
+            case NavigationCode.ENTER:
+               if(_loc3_.value == InputValue.KEY_UP)
+               {
+                  videoPlayer.togglePlayback();
+               }
+               break;
+            case NavigationCode.UP:
+            case NavigationCode.RIGHT:
+               if(_loc3_.value == InputValue.KEY_HOLD || _loc3_.value == InputValue.KEY_DOWN)
+               {
+                  videoPlayer.volume = videoPlayer.volume + VOLUME_STEP;
+                  _loc2_ = true;
+               }
+               break;
+            case NavigationCode.DOWN:
+            case NavigationCode.LEFT:
+               if(_loc3_.value == InputValue.KEY_HOLD || _loc3_.value == InputValue.KEY_DOWN)
+               {
+                  videoPlayer.volume = videoPlayer.volume - VOLUME_STEP;
+                  _loc2_ = true;
+               }
+               break;
+         }
+         if(!_loc2_)
+         {
+            param1.handled = true;
+         }
+      }
+
+      override public function dispose() : void {
+         videoPlayer.removeEventListener(InputEvent.INPUT,this.handleInput);
+         super.dispose();
+      }
+   }
+
 }

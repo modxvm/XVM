@@ -16,7 +16,7 @@ class wot.battle.Elements
     public static var CMD_DELAY:String = "@delay";
     public static var CMD_INTERVAL:String = "@interval";
     public static var CMD_TEXT_FORMAT:String = "@textFormat";
-    
+
     public static function SetupElements()
     {
         if (!Config.s_loaded || !width || !height)
@@ -52,7 +52,7 @@ class wot.battle.Elements
         {
             var value = opt[key];
             if (value == CMD_LOG)
-                Logger.addObject(obj[key], name + "." + key, 1);
+                Logger.addObject(obj[key], 1, name + "." + key);
             else if (key == CMD_TEXT_FORMAT && obj instanceof TextField)
                 applyTextFormat(obj, value, name);
             else if (typeof value == "object" && !value instanceof Array && obj[key] != null)

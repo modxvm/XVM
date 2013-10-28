@@ -7,7 +7,7 @@ class com.xvm.Logger
 {
     public static var counter: Number = 0;
 
-    public static function add(str: String)
+    public static function add(str:String)
     {
         try
         {
@@ -19,7 +19,7 @@ class com.xvm.Logger
         }
     }
 
-    public static function addObject(obj: Object, name: String, depth: Number)
+    public static function addObject(obj:Object, depth:Number, name:String)
     {
         if (isNaN(depth) || depth < 1)
             depth = 1;

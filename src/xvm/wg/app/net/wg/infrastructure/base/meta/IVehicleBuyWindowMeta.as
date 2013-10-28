@@ -1,17 +1,20 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IVehicleBuyWindowMeta extends flash.events.IEventDispatcher
-    {
-        function submitS(arg1:Object):void;
+   import flash.events.IEventDispatcher;
 
-        function storeSettingsS(arg1:Boolean):void;
 
-        function as_setGold(arg1:Number):void;
+   public interface IVehicleBuyWindowMeta extends IEventDispatcher
+   {
+          
+      function submitS(param1:Object) : void;
 
-        function as_setCredits(arg1:Number):void;
+      function storeSettingsS(param1:Boolean) : void;
 
-        function as_setInitData(arg1:Object):void;
-    }
+      function as_setGold(param1:Number) : void;
+
+      function as_setCredits(param1:Number) : void;
+
+      function as_setInitData(param1:Object) : void;
+   }
+
 }

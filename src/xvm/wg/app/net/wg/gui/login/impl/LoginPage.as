@@ -1,499 +1,433 @@
-package net.wg.gui.login.impl 
+package net.wg.gui.login.impl
 {
-    import flash.display.*;
-    import flash.events.*;
-    import flash.geom.*;
-    import flash.text.*;
-    import flash.ui.*;
-    import net.wg.data.constants.*;
-    import net.wg.gui.components.common.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.events.*;
-    import net.wg.gui.login.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import org.idmedia.as3commons.util.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.events.*;
-    
-    public class LoginPage extends net.wg.infrastructure.base.meta.impl.LoginPageMeta implements net.wg.infrastructure.base.meta.ILoginPageMeta
-    {
-        public function LoginPage()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.LoginPageMeta;
+   import net.wg.infrastructure.base.meta.ILoginPageMeta;
+   import flash.geom.Rectangle;
+   import net.wg.gui.components.controls.UILoaderAlt;
+   import flash.display.MovieClip;
+   import net.wg.gui.login.ILoginForm;
+   import flash.text.TextField;
+   import net.wg.gui.components.common.BaseLogoView;
+   import net.wg.gui.login.ISparksManager;
+   import org.idmedia.as3commons.util.Map;
+   import net.wg.gui.events.UILoaderEvent;
+   import flash.ui.Keyboard;
+   import scaleform.clik.events.ButtonEvent;
+   import flash.events.Event;
+   import flash.events.TextEvent;
+   import flash.events.MouseEvent;
+   import net.wg.data.constants.LobbyMetrics;
+   import scaleform.clik.events.InputEvent;
+   import net.wg.data.constants.Linkages;
+   import scaleform.clik.constants.InputValue;
 
-        internal function initFocus():void
-        {
-            if (this.form.login.text.length > 0) 
-            {
-                App.utils.focusHandler.setFocus(this.form.pass);
-            }
-            else 
-            {
-                App.utils.focusHandler.setFocus(this.form.login);
-            }
-            return;
-        }
 
-        internal function onSubmitButtonClick(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            this.submit();
-            return;
-        }
+   public class LoginPage extends LoginPageMeta implements ILoginPageMeta
+   {
+          
+      public function LoginPage() {
+         super();
+      }
 
-        internal function onChange(arg1:flash.events.Event):void
-        {
-            var event:flash.events.Event;
-            var isToken:Boolean;
+      private static const FREE_SPACE_FACTOR:Number = 0.6;
 
-            var loc1:*;
-            event = arg1;
-            isToken = isTokenS();
-            try 
-            {
-                onExitFromAutoLoginS();
-                this.form.update(event.target, isToken);
-            }
-            catch (e:Error)
-            {
-                DebugUtils.LOG_ERROR(e.message);
-            }
-            return;
-        }
+      private static const FREE_SPACE_BORDER_FACTOR:Number = 0.18;
 
-        internal function onRememberPwdCheckboxToggle(arg1:flash.events.Event):void
-        {
-            onSetRememberPasswordS(this.form.rememberPwdCheckbox.selected);
-            return;
-        }
+      private static var SPARK_ZONE:Rectangle;
 
-        internal function onRegisterLinkClick(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            onRegisterS();
-            return;
-        }
+      private static const SPARK_QUANTITY:uint = 150;
 
-        internal function onRecoveryLinkClick(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            onRecoveryS();
-            return;
-        }
+      private static const MIN_PWD_LEN:int = 6;
 
-        public function as_setDefaultValues(arg1:String, arg2:String, arg3:Boolean, arg4:Boolean, arg5:Boolean, arg6:Boolean):void
-        {
-            this.form.setDefaultValues(arg1, arg2, arg3, arg4, arg5, arg6);
-            return;
-        }
+      private static const SPECIAL_SYMBOLS:String = "~`!@#$%^&*()|\\/,.;:\"\'";
 
-        internal function onMessageLinkClick(arg1:flash.events.TextEvent):void
-        {
-            if (this.isTFClickedByMBR) 
-            {
-                return;
-            }
-            var loc1:*=arg1.text;
-            switch (loc1) 
-            {
-                case "passwordRecovery":
-                {
-                    onRecoveryS();
-                    break;
-                }
-                default:
-                {
-                    break;
-                }
-            }
-            return;
-        }
+      public var bg_image:UILoaderAlt = null;
 
-        internal function onMessageTextClick(arg1:flash.events.MouseEvent):void
-        {
-            this.isTFClickedByMBR = App.utils.commons.isRightButton(arg1);
-            return;
-        }
+      public var sparksMc:MovieClip = null;
 
-        internal function onQueueDialogQuitClose(arg1:flash.events.MouseEvent):void
-        {
-            this.form.setErrorMessage("", ErrorStates.NONE);
-            onExitFromAutoLogin();
-            return;
-        }
+      public var form:ILoginForm = null;
 
-        internal function onNeedTokenReset(arg1:net.wg.gui.login.impl.LoginEvent):void
-        {
-            resetTokenS();
-            return;
-        }
+      public var version:TextField = null;
 
-        internal function onLoadingImageCompleteHandler(arg1:net.wg.gui.events.UILoaderEvent):void
-        {
-            this.set_position_wallpaper();
-            visible = true;
+      public var wotLogo:BaseLogoView = null;
+
+      public var shadow:MovieClip = null;
+
+      public var copyright:MovieClip = null;
+
+      public var bottomLogos:BaseLogoView = null;
+
+      private var useWallpaper:Boolean = true;
+
+      private var _sparksManager:ISparksManager = null;
+
+      private var keyMappings:Map = null;
+
+      private var isTFClickedByMBR:Boolean = false;
+
+      override public function updateStage(param1:Number, param2:Number) : void {
+         this.updateContent();
+         if(this._sparksManager)
+         {
+            this._sparksManager.resetZone(this.getSparkZone());
+         }
+      }
+
+      public function as_setDefaultValues(param1:String, param2:String, param3:Boolean, param4:Boolean, param5:Boolean, param6:Boolean) : void {
+         this.form.setDefaultValues(param1,param2,param3,param4,param5,param6);
+      }
+
+      public function as_setErrorMessage(param1:String, param2:int) : void {
+         this.setErrorMessage(param1,param2);
+      }
+
+      private function setErrorMessage(param1:String, param2:int) : void {
+         this.form.setErrorMessage(param1,param2);
+         this.initFocus();
+      }
+
+      public function as_setServersList(param1:Array, param2:int) : void {
+         assertNotNull(param1);
+         assert(param2 >= -1,"selectedIdx must be greater then -2");
+         this.form.setServersList(param1,param2);
+      }
+
+      public function as_setVersion(param1:String) : void {
+         assertNotNull(param1);
+         this.version.text = param1;
+      }
+
+      public function as_showWallpaper(param1:Boolean, param2:String) : void {
+         visible = false;
+         this.bg_image.source = param2;
+         this.useWallpaper = param1;
+         if(this.useWallpaper)
+         {
             invalidate();
-            return;
-        }
+         }
+         else
+         {
+            this.bg_image.autoSize = true;
+            invalidate();
+            this.sparksMc.visible = false;
+         }
+      }
 
-        public override function updateStage(arg1:Number, arg2:Number):void
-        {
-            this.updateContent();
-            if (this._sparksManager) 
+      public function as_setCapsLockState(param1:Boolean) : void {
+         this.form.setCapsLockState(param1);
+      }
+
+      public function as_cancelLoginQueue() : void {
+         DebugUtils.LOG_DEBUG("as_cancelLoginQueue");
+      }
+
+      public function as_doAutoLogin() : void {
+         DebugUtils.LOG_DEBUG("as_doAutoLogin");
+         this.submit();
+      }
+
+      public function as_enable(param1:Boolean) : void {
+         this.enableInputs(param1);
+      }
+
+      override protected function allowHandleInput() : Boolean {
+         return false;
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.bottomLogos = this.copyright.logos;
+         if(this.bg_image != null)
+         {
+            this.bg_image.addEventListener(UILoaderEvent.COMPLETE,this.onLoadingImageCompleteHandler,false,0,true);
+         }
+         var _loc1_:String = App.globalVarsMgr.getLocaleOverrideS();
+         if(_loc1_)
+         {
+            this.wotLogo.setLocale(_loc1_);
+            this.bottomLogos.setLocale(_loc1_);
+         }
+         this.updateContent();
+         this.createSparks();
+      }
+
+      override protected function draw() : void {
+         super.draw();
+      }
+
+      override protected function onPopulate() : void {
+         super.onPopulate();
+         this.initLoginForm();
+         App.utils.scheduler.envokeInNextFrame(this.initFocus);
+         alpha = 1;
+         this.keyMappings = App.utils.commons.createMap([Keyboard.ESCAPE,this.onEscapeKeyPress,Keyboard.ENTER,this.onEnterKeyPress]);
+      }
+
+      override protected function onDispose() : void {
+         super.onDispose();
+         this.bg_image.removeEventListener(UILoaderEvent.COMPLETE,this.onLoadingImageCompleteHandler);
+         this.bg_image.dispose();
+         this.bg_image = null;
+         this.wotLogo.dispose();
+         this.wotLogo = null;
+         this.bottomLogos.dispose();
+         this.bottomLogos = null;
+         this.version = null;
+         this.sparksMc = null;
+         this.shadow = null;
+         this.copyright = null;
+         this.disposeLoginForm();
+         this.enableInputs(false);
+         this.keyMappings.clear();
+         this.keyMappings = null;
+         if(this._sparksManager)
+         {
+            this._sparksManager.dispose();
+            this._sparksManager = null;
+         }
+      }
+
+      private function disposeLoginForm() : void {
+         this.form.submit.removeEventListener(ButtonEvent.CLICK,this.onSubmitButtonClick);
+         this.form.removeChangeHandler(this.onChange);
+         this.form.removeEventListener(LoginEvent.TOKEN_RESET,this.onNeedTokenReset);
+         this.form.rememberPwdCheckbox.removeEventListener(Event.SELECT,this.onRememberPwdCheckboxToggle);
+         this.form.registerLink.removeEventListener(ButtonEvent.CLICK,this.onRegisterLinkClick);
+         this.form.recoveryLink.removeEventListener(ButtonEvent.CLICK,this.onRecoveryLinkClick);
+         this.form.message.removeEventListener(TextEvent.LINK,this.onMessageLinkClick);
+         this.form.message.removeEventListener(MouseEvent.CLICK,this.onMessageTextClick);
+         this.form.dispose();
+         App.utils.commons.releaseReferences(this.form);
+         this.form = null;
+      }
+
+      private function initLoginForm() : void {
+         this.form.submit.addEventListener(ButtonEvent.CLICK,this.onSubmitButtonClick);
+         this.form.addChangeHandler(this.onChange);
+         this.form.addEventListener(LoginEvent.TOKEN_RESET,this.onNeedTokenReset);
+         this.form.rememberPwdCheckbox.addEventListener(Event.SELECT,this.onRememberPwdCheckboxToggle);
+         this.form.registerLink.addEventListener(ButtonEvent.CLICK,this.onRegisterLinkClick);
+         this.form.recoveryLink.addEventListener(ButtonEvent.CLICK,this.onRecoveryLinkClick);
+         this.form.message.addEventListener(TextEvent.LINK,this.onMessageLinkClick);
+         this.form.message.addEventListener(MouseEvent.CLICK,this.onMessageTextClick);
+      }
+
+      private function onEscapeKeyPress() : void {
+         onEscapeS();
+      }
+
+      private function onEnterKeyPress() : void {
+         this.submit();
+      }
+
+      private function updateContent() : void {
+         this.set_position_wallpaper();
+         this.form.x = App.appWidth >> 1;
+         this.form.y = Math.round(App.appHeight * FREE_SPACE_FACTOR + (App.appHeight - LobbyMetrics.MIN_STAGE_HEIGHT) * FREE_SPACE_BORDER_FACTOR);
+         this.wotLogo.x = this.form.x - 3;
+         this.wotLogo.y = this.form.y - 123;
+         this.shadow.x = this.form.x - 288;
+         this.shadow.y = this.form.y - 331;
+         this.copyright.x = this.form.x - 2;
+         this.copyright.y = App.appHeight - 29;
+         invalidateSize();
+      }
+
+      private function set_position_wallpaper() : void {
+         var _loc1_:* = NaN;
+         var _loc2_:* = NaN;
+         var _loc3_:* = NaN;
+         if(this.useWallpaper)
+         {
+            if(this.bg_image)
             {
-                this._sparksManager.resetZone(this.getSparkZone());
+               _loc1_ = App.appWidth / 1920;
+               _loc2_ = App.appHeight / 1200;
+               _loc3_ = 1;
+               if(_loc1_ > _loc2_)
+               {
+                  _loc3_ = _loc2_;
+               }
+               else
+               {
+                  _loc3_ = _loc1_;
+               }
+               this.bg_image.scaleX = this.bg_image.scaleY = _loc3_;
+               this.bg_image.x = App.appWidth - this.bg_image.width >> 1;
+               this.bg_image.y = App.appHeight - this.bg_image.height >> 1;
             }
-            return;
-        }
+         }
+         else
+         {
+            this.bg_image.scaleX = this.bg_image.scaleY = 1;
+            this.bg_image.x = App.appWidth - this.bg_image.width >> 1;
+            this.bg_image.y = App.appHeight - this.bg_image.height >> 1;
+         }
+      }
 
-        public override function handleInput(arg1:scaleform.clik.events.InputEvent):void
-        {
-            var loc1:*=null;
-            super.handleInput(arg1);
-            if (arg1.handled) 
+      private function submit() : void {
+         var _loc1_:String = this.getLogin();
+         var _loc2_:String = this.getPass();
+         var _loc3_:String = this.getSelectedServerName();
+         if(_loc1_ == "")
+         {
+            this.setErrorMessage(MENU.LOGIN_STATUS_EMPTY_LOGIN,ErrorStates.LOGIN_INVALID);
+         }
+         else
+         {
+            if(isPwdInvalidS(_loc2_))
             {
-                return;
+               this.setErrorMessage(MENU.LOGIN_STATUS_INVALID_PASSWORD,ErrorStates.PASSWORD_INVALID);
             }
-            if (arg1.details.value == scaleform.clik.constants.InputValue.KEY_DOWN) 
+            else
             {
-                loc1 = this.keyMappings.get(arg1.details.code);
-                if (loc1 != null) 
-                {
-                    loc1();
-                    arg1.handled = true;
-                }
+               if(_loc3_ == "")
+               {
+                  this.setErrorMessage(MENU.LOGIN_STATUS_EMPTY_SERVER,ErrorStates.NONE);
+               }
+               else
+               {
+                  this.setErrorMessage(MENU.LOGIN_STATUS_CONNECTING,ErrorStates.NONE);
+                  onLoginS(_loc1_,_loc2_,_loc3_);
+               }
             }
-            return;
-        }
+         }
+      }
 
-        public function as_setErrorMessage(arg1:String, arg2:int):void
-        {
-            this.form.setErrorMessage(arg1, arg2);
-            return;
-        }
+      private function enableInputs(param1:Boolean) : void {
+         if(param1)
+         {
+            addEventListener(InputEvent.INPUT,this.handleInput);
+         }
+         else
+         {
+            removeEventListener(InputEvent.INPUT,this.handleInput);
+         }
+      }
 
-        public function as_setServersList(arg1:Array, arg2:int):void
-        {
-            assertNotNull(arg1);
-            assert(arg2 >= -1, "selectedIdx must be greater then -2");
-            this.form.setServersList(arg1, arg2);
-            return;
-        }
+      private function createSparks() : void {
+         var _loc1_:Object = null;
+         if(this._sparksManager == null)
+         {
+            _loc1_ =
+               {
+                  "scope":this.sparksMc,
+                  "sparkQuantity":SPARK_QUANTITY,
+                  "zone":this.getSparkZone()
+               }
+            ;
+            this._sparksManager = ISparksManager(App.utils.classFactory.getObject(Linkages.SPARKS_MGR,_loc1_));
+            this._sparksManager.createSparks();
+            this.sparksMc.visible = true;
+         }
+      }
 
-        public function as_setVersion(arg1:String):void
-        {
-            assertNotNull(arg1);
-            this.version.text = arg1;
-            return;
-        }
+      private function getSparkZone() : Rectangle {
+         return new Rectangle(SPARK_ZONE.x,SPARK_ZONE.y,stage.width + SPARK_ZONE.right,stage.height + SPARK_ZONE.bottom);
+      }
 
-        public function as_showWallpaper(arg1:Boolean, arg2:String):void
-        {
-            visible = false;
-            this.bg_image.source = arg2;
-            this.useWallpaper = arg1;
-            if (this.useWallpaper) 
+      private function getLogin() : String {
+         return this.form.login.text;
+      }
+
+      private function getPass() : String {
+         return this.form.pass.text;
+      }
+
+      private function getSelectedServerName() : String {
+         return this.form.getSelectedServerName();
+      }
+
+      private function initFocus() : void {
+         if(this.form.login.text.length == 0 || (this.form.login.highlight))
+         {
+            App.utils.focusHandler.setFocus(this.form.login);
+         }
+         else
+         {
+            App.utils.focusHandler.setFocus(this.form.pass);
+         }
+      }
+
+      private function onSubmitButtonClick(param1:ButtonEvent) : void {
+         this.submit();
+      }
+
+      private function onChange(param1:Event) : void {
+         var event:Event = param1;
+         var isToken:Boolean = isTokenS();
+         try
+         {
+            onExitFromAutoLoginS();
+            this.form.update(event.target,isToken);
+         }
+         catch(e:Error)
+         {
+            DebugUtils.LOG_ERROR(e.message);
+         }
+      }
+
+      private function onRememberPwdCheckboxToggle(param1:Event) : void {
+         onSetRememberPasswordS(this.form.rememberPwdCheckbox.selected);
+      }
+
+      private function onRegisterLinkClick(param1:ButtonEvent) : void {
+         onRegisterS();
+      }
+
+      private function onRecoveryLinkClick(param1:ButtonEvent) : void {
+         onRecoveryS();
+      }
+
+      private function onMessageLinkClick(param1:TextEvent) : void {
+         if(this.isTFClickedByMBR)
+         {
+            return;
+         }
+         switch(param1.text)
+         {
+            case "passwordRecovery":
+               onRecoveryS();
+               break;
+         }
+      }
+
+      private function onMessageTextClick(param1:MouseEvent) : void {
+         this.isTFClickedByMBR = App.utils.commons.isRightButton(param1);
+      }
+
+      private function onQueueDialogQuitClose(param1:MouseEvent) : void {
+         this.form.setErrorMessage("",ErrorStates.NONE);
+         onExitFromAutoLogin();
+      }
+
+      private function onNeedTokenReset(param1:LoginEvent) : void {
+         resetTokenS();
+      }
+
+      private function onLoadingImageCompleteHandler(param1:UILoaderEvent) : void {
+         this.set_position_wallpaper();
+         visible = true;
+         invalidate();
+      }
+
+      override public function handleInput(param1:InputEvent) : void {
+         var _loc2_:Function = null;
+         super.handleInput(param1);
+         if(param1.handled)
+         {
+            return;
+         }
+         if(param1.details.value == InputValue.KEY_DOWN)
+         {
+            _loc2_ = this.keyMappings.get(param1.details.code);
+            if(_loc2_ != null)
             {
-                invalidate();
+               _loc2_();
+               param1.handled = true;
             }
-            else 
-            {
-                this.bg_image.autoSize = true;
-                invalidate();
-                this.sparksMc.visible = false;
-            }
-            return;
-        }
+         }
+      }
+   }
 
-        public function as_setCapsLockState(arg1:Boolean):void
-        {
-            this.form.setCapsLockState(arg1);
-            return;
-        }
-
-        public function as_cancelLoginQueue():void
-        {
-            DebugUtils.LOG_DEBUG("as_cancelLoginQueue");
-            return;
-        }
-
-        public function as_doAutoLogin():void
-        {
-            DebugUtils.LOG_DEBUG("as_doAutoLogin");
-            this.submit();
-            return;
-        }
-
-        public function as_enable(arg1:Boolean):void
-        {
-            this.enableInputs(arg1);
-            return;
-        }
-
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.bottomLogos = this.copyright.logos;
-            if (this.bg_image != null) 
-            {
-                this.bg_image.addEventListener(net.wg.gui.events.UILoaderEvent.COMPLETE, this.onLoadingImageCompleteHandler, false, 0, true);
-            }
-            var loc1:*=App.globalVarsMgr.getLocaleOverrideS();
-            if (loc1) 
-            {
-                this.wotLogo.setLocale(loc1);
-                this.bottomLogos.setLocale(loc1);
-            }
-            this.updateContent();
-            this.createSparks();
-            return;
-        }
-
-        protected override function draw():void
-        {
-            super.draw();
-            return;
-        }
-
-        protected override function onPopulate():void
-        {
-            super.onPopulate();
-            this.initLoginForm();
-            this.enableInputs(true);
-            App.utils.scheduler.envokeInNextFrame(this.initFocus);
-            alpha = 1;
-            this.keyMappings = App.utils.commons.createMap([flash.ui.Keyboard.ESCAPE, this.onEscapeKeyPress, flash.ui.Keyboard.ENTER, this.onEnterKeyPress]);
-            return;
-        }
-
-        protected override function onDispose():void
-        {
-            super.onDispose();
-            this.bg_image.removeEventListener(net.wg.gui.events.UILoaderEvent.COMPLETE, this.onLoadingImageCompleteHandler);
-            this.bg_image.dispose();
-            this.bg_image = null;
-            this.wotLogo.dispose();
-            this.wotLogo = null;
-            this.bottomLogos.dispose();
-            this.bottomLogos = null;
-            this.version = null;
-            this.sparksMc = null;
-            this.shadow = null;
-            this.copyright = null;
-            this.disposeLoginForm();
-            this.enableInputs(false);
-            this.keyMappings.clear();
-            this.keyMappings = null;
-            if (this._sparksManager) 
-            {
-                this._sparksManager.dispose();
-                this._sparksManager = null;
-            }
-            return;
-        }
-
-        internal function disposeLoginForm():void
-        {
-            this.form.submit.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onSubmitButtonClick);
-            this.form.removeChangeHandler(this.onChange);
-            this.form.removeEventListener(net.wg.gui.login.impl.LoginEvent.TOKEN_RESET, this.onNeedTokenReset);
-            this.form.rememberPwdCheckbox.removeEventListener(flash.events.Event.SELECT, this.onRememberPwdCheckboxToggle);
-            this.form.registerLink.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onRegisterLinkClick);
-            this.form.recoveryLink.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onRecoveryLinkClick);
-            this.form.message.removeEventListener(flash.events.TextEvent.LINK, this.onMessageLinkClick);
-            this.form.message.removeEventListener(flash.events.MouseEvent.CLICK, this.onMessageTextClick);
-            this.form.dispose();
-            App.utils.commons.releaseReferences(this.form);
-            this.form = null;
-            return;
-        }
-
-        internal function initLoginForm():void
-        {
-            this.form.submit.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onSubmitButtonClick);
-            this.form.addChangeHandler(this.onChange);
-            this.form.addEventListener(net.wg.gui.login.impl.LoginEvent.TOKEN_RESET, this.onNeedTokenReset);
-            this.form.rememberPwdCheckbox.addEventListener(flash.events.Event.SELECT, this.onRememberPwdCheckboxToggle);
-            this.form.registerLink.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onRegisterLinkClick);
-            this.form.recoveryLink.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onRecoveryLinkClick);
-            this.form.message.addEventListener(flash.events.TextEvent.LINK, this.onMessageLinkClick);
-            this.form.message.addEventListener(flash.events.MouseEvent.CLICK, this.onMessageTextClick);
-            return;
-        }
-
-        internal function onEscapeKeyPress():void
-        {
-            onEscapeS();
-            return;
-        }
-
-        internal function onEnterKeyPress():void
-        {
-            this.submit();
-            return;
-        }
-
-        internal function updateContent():void
-        {
-            this.set_position_wallpaper();
-            this.form.x = App.appWidth >> 1;
-            this.form.y = Math.round(App.appHeight * FREE_SPACE_FACTOR + (App.appHeight - net.wg.data.constants.LobbyMetrics.MIN_STAGE_HEIGHT) * FREE_SPACE_BORDER_FACTOR);
-            this.wotLogo.x = this.form.x - 3;
-            this.wotLogo.y = this.form.y - 123;
-            this.shadow.x = this.form.x - 288;
-            this.shadow.y = this.form.y - 331;
-            this.copyright.x = this.form.x - 2;
-            this.copyright.y = App.appHeight - 29;
-            invalidateSize();
-            return;
-        }
-
-        internal function set_position_wallpaper():void
-        {
-            var loc1:*=NaN;
-            var loc2:*=NaN;
-            var loc3:*=NaN;
-            if (this.useWallpaper) 
-            {
-                if (this.bg_image) 
-                {
-                    loc1 = App.appWidth / 1920;
-                    loc2 = App.appHeight / 1200;
-                    loc3 = 1;
-                    if (loc1 > loc2) 
-                    {
-                        loc3 = loc2;
-                    }
-                    else 
-                    {
-                        loc3 = loc1;
-                    }
-                    var loc4:*;
-                    this.bg_image.scaleY = loc4 = loc3;
-                    this.bg_image.scaleX = loc4;
-                    this.bg_image.x = App.appWidth - this.bg_image.width >> 1;
-                    this.bg_image.y = App.appHeight - this.bg_image.height >> 1;
-                }
-            }
-            else 
-            {
-                this.bg_image.scaleY = loc4 = 1;
-                this.bg_image.scaleX = loc4;
-                this.bg_image.x = App.appWidth - this.bg_image.width >> 1;
-                this.bg_image.y = App.appHeight - this.bg_image.height >> 1;
-            }
-            return;
-        }
-
-        internal function submit():void
-        {
-            var loc1:*=this.getLogin();
-            var loc2:*=this.getPass();
-            var loc3:*=this.getSelectedServerName();
-            trace(isPwdInvalidS(loc2));
-            if (loc1 != "") 
-            {
-                if (isPwdInvalidS(loc2)) 
-                {
-                    this.form.setErrorMessage(MENU.LOGIN_STATUS_INVALID_PASSWORD, ErrorStates.PASSWORD_INVALID);
-                }
-                else if (loc3 != "") 
-                {
-                    this.form.setErrorMessage(MENU.LOGIN_STATUS_CONNECTING, ErrorStates.NONE);
-                    onLoginS(loc1, loc2, loc3);
-                }
-                else 
-                {
-                    this.form.setErrorMessage(MENU.LOGIN_STATUS_EMPTY_SERVER, ErrorStates.NONE);
-                }
-            }
-            else 
-            {
-                this.form.setErrorMessage(MENU.LOGIN_STATUS_EMPTY_LOGIN, ErrorStates.LOGIN_INVALID);
-            }
-            return;
-        }
-
-        internal function enableInputs(arg1:Boolean):void
-        {
-            if (arg1) 
-            {
-                addEventListener(scaleform.clik.events.InputEvent.INPUT, this.handleInput);
-            }
-            else 
-            {
-                removeEventListener(scaleform.clik.events.InputEvent.INPUT, this.handleInput);
-            }
-            return;
-        }
-
-        internal function createSparks():void
-        {
-            var loc1:*=null;
-            if (this._sparksManager == null) 
-            {
-                loc1 = {"scope":this.sparksMc, "sparkQuantity":SPARK_QUANTITY, "zone":this.getSparkZone()};
-                this._sparksManager = net.wg.gui.login.ISparksManager(App.utils.classFactory.getObject(net.wg.data.constants.Linkages.SPARKS_MGR, loc1));
-                this._sparksManager.createSparks();
-                this.sparksMc.visible = true;
-            }
-            return;
-        }
-
-        internal function getSparkZone():flash.geom.Rectangle
-        {
-            return new flash.geom.Rectangle(SPARK_ZONE.x, SPARK_ZONE.y, stage.width + SPARK_ZONE.right, stage.height + SPARK_ZONE.bottom);
-        }
-
-        internal function getLogin():String
-        {
-            return this.form.login.text;
-        }
-
-        internal function getPass():String
-        {
-            return this.form.pass.text;
-        }
-
-        internal function getSelectedServerName():String
-        {
-            return this.form.getSelectedServerName();
-        }
-
-        internal static const FREE_SPACE_FACTOR:Number=0.6;
-
-        internal static const FREE_SPACE_BORDER_FACTOR:Number=0.18;
-
-        internal static const SPARK_ZONE:flash.geom.Rectangle=new flash.geom.Rectangle(100, 0, -200, -100);
-
-        internal static const SPARK_QUANTITY:uint=150;
-
-        internal static const MIN_PWD_LEN:int=6;
-
-        internal static const SPECIAL_SYMBOLS:String="~`!@#$%^&*()|\\/,.;:\"\'";
-
-        public var bg_image:net.wg.gui.components.controls.UILoaderAlt=null;
-
-        public var sparksMc:flash.display.MovieClip=null;
-
-        public var form:net.wg.gui.login.ILoginForm=null;
-
-        public var version:flash.text.TextField=null;
-
-        public var wotLogo:net.wg.gui.components.common.BaseLogoView=null;
-
-        public var shadow:flash.display.MovieClip=null;
-
-        public var bottomLogos:net.wg.gui.components.common.BaseLogoView=null;
-
-        internal var useWallpaper:Boolean=true;
-
-        internal var _sparksManager:net.wg.gui.login.ISparksManager=null;
-
-        internal var keyMappings:org.idmedia.as3commons.util.Map=null;
-
-        internal var isTFClickedByMBR:Boolean=false;
-
-        public var copyright:flash.display.MovieClip=null;
-    }
 }

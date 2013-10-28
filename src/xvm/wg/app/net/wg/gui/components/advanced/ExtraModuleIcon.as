@@ -1,56 +1,47 @@
-package net.wg.gui.components.advanced 
+package net.wg.gui.components.advanced
 {
-    import flash.events.*;
-    import net.wg.gui.lobby.hangar.ammunitionPanel.*;
-    import net.wg.gui.lobby.profile.components.*;
-    
-    public class ExtraModuleIcon extends net.wg.gui.components.advanced.ModuleIcon
-    {
-        public function ExtraModuleIcon()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.lobby.hangar.ammunitionPanel.ExtraIcon;
+   import net.wg.gui.lobby.profile.components.SimpleLoader;
+   import flash.events.Event;
 
-        public function get extraIconSource():String
-        {
-            return this._extraIconSource;
-        }
 
-        public function set extraIconSource(arg1:String):void
-        {
-            this._extraIconSource = arg1;
-            if (!this.extraIcon) 
-            {
-                this.extraIcon = new net.wg.gui.lobby.hangar.ammunitionPanel.ExtraIcon();
-                this.extraIcon.visible = false;
-                this.extraIcon.addEventListener(net.wg.gui.lobby.profile.components.SimpleLoader.LOADED, this.onExtraIconLoaded, false, 0, true);
-                addChild(this.extraIcon);
-            }
-            this.extraIcon.setSource(this._extraIconSource);
-            return;
-        }
+   public class ExtraModuleIcon extends ModuleIcon
+   {
+          
+      public function ExtraModuleIcon() {
+         super();
+      }
 
-        public override function dispose():void
-        {
-            if (this.extraIcon && contains(this.extraIcon)) 
-            {
-                removeChild(this.extraIcon);
-            }
-            super.dispose();
-            return;
-        }
+      private var extraIcon:ExtraIcon;
 
-        internal function onExtraIconLoaded(arg1:flash.events.Event):void
-        {
-            this.extraIcon.x = Math.round(moduleType.width - this.extraIcon.width - 6);
-            this.extraIcon.y = Math.round(moduleType.height - this.extraIcon.height - 5);
-            this.extraIcon.visible = true;
-            return;
-        }
+      private var _extraIconSource:String;
 
-        internal var extraIcon:net.wg.gui.lobby.hangar.ammunitionPanel.ExtraIcon;
+      public function get extraIconSource() : String {
+         return this._extraIconSource;
+      }
 
-        internal var _extraIconSource:String;
-    }
+      public function set extraIconSource(param1:String) : void {
+         this._extraIconSource = param1;
+         if(!this.extraIcon)
+         {
+            this.extraIcon = new ExtraIcon();
+            this.extraIcon.visible = false;
+            this.extraIcon.addEventListener(SimpleLoader.LOADED,this.onExtraIconLoaded,false,0,true);
+            addChild(this.extraIcon);
+         }
+         this.extraIcon.setSource(this._extraIconSource);
+      }
+
+      override public function dispose() : void {
+         this.extraIcon.dispose();
+         super.dispose();
+      }
+
+      private function onExtraIconLoaded(param1:Event) : void {
+         this.extraIcon.x = Math.round(moduleType.width - this.extraIcon.width - 6);
+         this.extraIcon.y = Math.round(moduleType.height - this.extraIcon.height - 5);
+         this.extraIcon.visible = true;
+      }
+   }
+
 }

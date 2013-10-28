@@ -1,19 +1,23 @@
-package net.wg.utils 
+package net.wg.utils
 {
-    import flash.display.*;
-    
-    public interface IPopUpManager
-    {
-        function show(arg1:flash.display.DisplayObject, arg2:Number=0, arg3:Number=0, arg4:flash.display.DisplayObjectContainer=null):void;
+   import flash.display.DisplayObject;
+   import flash.display.DisplayObjectContainer;
 
-        function create(arg1:String, arg2:Object, arg3:flash.display.DisplayObjectContainer=null):flash.display.DisplayObject;
 
-        function remove(arg1:flash.display.DisplayObject):void;
+   public interface IPopUpManager
+   {
+          
+      function show(param1:DisplayObject, param2:Number=0, param3:Number=0, param4:DisplayObjectContainer=null) : void;
 
-        function removeAll():void;
+      function create(param1:String, param2:Object, param3:DisplayObjectContainer=null) : DisplayObject;
 
-        function contains(arg1:flash.display.DisplayObject):Boolean;
+      function remove(param1:DisplayObject) : void;
 
-        function get popupCanvas():flash.display.DisplayObjectContainer;
-    }
+      function removeAll() : void;
+
+      function contains(param1:DisplayObject) : Boolean;
+
+      function get popupCanvas() : DisplayObjectContainer;
+   }
+
 }

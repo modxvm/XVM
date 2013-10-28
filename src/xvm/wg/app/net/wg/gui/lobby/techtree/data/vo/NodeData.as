@@ -1,201 +1,185 @@
-package net.wg.gui.lobby.techtree.data.vo 
+package net.wg.gui.lobby.techtree.data.vo
 {
-    import net.wg.gui.lobby.techtree.interfaces.*;
-    import net.wg.utils.*;
-    
-    public class NodeData extends Object implements net.wg.gui.lobby.techtree.interfaces.IValueObject
-    {
-        public function NodeData()
-        {
-            super();
+   import net.wg.gui.lobby.techtree.interfaces.IValueObject;
+   import net.wg.utils.ILocale;
+
+
+   public class NodeData extends Object implements IValueObject
+   {
+          
+      public function NodeData() {
+         super();
+      }
+
+      private static var displayInfoClass:Class = null;
+
+      public static const NODE_DUMP_FIELD:String = "nodeDump";
+
+      public static const UNLOCK_PROPS_FIELD:String = "unlockProps";
+
+      public static function setDisplayInfoClass(param1:Class) : void {
+         displayInfoClass = param1;
+      }
+
+      private var _earnedXP:Number = 0;
+
+      private var _earnedXPLabel:String = "";
+
+      public var id:Number = 0;
+
+      public var nameString:String = "";
+
+      public var primaryClass:PrimaryClass = null;
+
+      public var level:int = -1;
+
+      public var state:Number = 0;
+
+      public var unlockProps:UnlockProps = null;
+
+      public var smallIconPath:String = "";
+
+      public var iconPath:String = "";
+
+      public var longName:String = "";
+
+      public var pickleDump:String = "";
+
+      public var shopPrice:ShopPrice = null;
+
+      public var displayInfo:Object = null;
+
+      public var extraInfo:String = null;
+
+      public function get earnedXP() : Number {
+         return this._earnedXP;
+      }
+
+      public function set earnedXP(param1:Number) : void {
+         if(this._earnedXP == param1)
+         {
             return;
-        }
-
-        public function get earnedXP():Number
-        {
-            return this._earnedXP;
-        }
-
-        public function set earnedXP(arg1:Number):void
-        {
-            if (this._earnedXP == arg1) 
-            {
-                return;
-            }
-            this._earnedXP = arg1;
-            if (this._earnedXP > 0) 
-            {
-                this._earnedXPLabel = App.utils.locale.integer(this._earnedXP);
-            }
-            else 
-            {
-                this._earnedXPLabel = "";
-            }
-            return;
-        }
-
-        public function get earnedXPLabel():String
-        {
-            return this._earnedXPLabel;
-        }
-
-        public function fromArray(arg1:Array, arg2:net.wg.utils.ILocale):void
-        {
-            throw new Error("Does not call method NodeData.fromArray.");
-        }
-
-        public function fromObject(arg1:Object, arg2:net.wg.utils.ILocale):void
-        {
-            var loc1:*=null;
-            if (arg1 == null) 
-            {
-                return;
-            }
-            if (!isNaN(arg1.id)) 
-            {
-                this.id = arg1.id;
-            }
-            if (arg1.nameString != null) 
-            {
-                this.nameString = arg1.nameString;
-            }
-            this.primaryClass = new net.wg.gui.lobby.techtree.data.vo.PrimaryClass();
-            if (arg1.primaryClass != null) 
-            {
-                this.primaryClass.fromObject(arg1.primaryClass, arg2);
-            }
-            if (arg1.level != null) 
-            {
-                this.level = arg1.level;
-            }
-            if (!isNaN(arg1.earnedXP)) 
-            {
-                this.earnedXP = arg1.earnedXP;
-            }
-            if (!isNaN(arg1.state)) 
-            {
-                this.state = arg1.state;
-            }
-            this.unlockProps = new net.wg.gui.lobby.techtree.data.vo.UnlockProps();
-            if (arg1.unlockProps != null) 
-            {
-                this.unlockProps.fromArray(arg1.unlockProps, arg2);
-            }
-            if (arg1.hasOwnProperty("extraInfo")) 
-            {
-                loc1 = arg1["extraInfo"];
-                if (loc1) 
-                {
-                    this.extraInfo = loc1;
-                }
-            }
-            if (arg1.smallIconPath != null) 
-            {
-                this.smallIconPath = arg1.smallIconPath;
-            }
-            if (arg1.iconPath != null) 
-            {
-                this.iconPath = arg1.iconPath;
-            }
-            if (arg1.longName != null) 
-            {
-                this.longName = arg1.longName;
-            }
-            if (arg1.pickleDump != null) 
-            {
-                this.pickleDump = arg1.pickleDump;
-            }
-            this.shopPrice = new net.wg.gui.lobby.techtree.data.vo.ShopPrice();
-            if (arg1.shopPrice != null) 
-            {
-                this.shopPrice.fromArray(arg1.shopPrice, arg2);
-            }
-            if (displayInfoClass != null) 
-            {
-                this.displayInfo = new displayInfoClass();
-            }
-            if (!(arg1.displayInfo == null) && !(this.displayInfo == null is net.wg.gui.lobby.techtree.interfaces.IValueObject)) 
-            {
-                (this.displayInfo as net.wg.gui.lobby.techtree.interfaces.IValueObject).fromObject(arg1.displayInfo, arg2);
-            }
-            return;
-        }
-
-        public function clearUp():void
-        {
-            this.id = 0;
-            this.nameString = "";
-            this.primaryClass = null;
-            this.level = -1;
-            this._earnedXP = 0;
+         }
+         this._earnedXP = param1;
+         if(this._earnedXP > 0)
+         {
+            this._earnedXPLabel = App.utils.locale.integer(this._earnedXP);
+         }
+         else
+         {
             this._earnedXPLabel = "";
-            this.state = 0;
-            this.iconPath = "";
-            this.longName = "";
-            this.pickleDump = "";
-            this.shopPrice = null;
-            this.extraInfo = null;
-            if (this.unlockProps != null) 
-            {
-                this.unlockProps.clearUp();
-            }
-            if (this.displayInfo != null) 
-            {
-                this.displayInfo.clearUp();
-            }
+         }
+      }
+
+      public function get earnedXPLabel() : String {
+         return this._earnedXPLabel;
+      }
+
+      public function fromArray(param1:Array, param2:ILocale) : void {
+         throw new Error("Does not call method NodeData.fromArray.");
+      }
+
+      public function fromObject(param1:Object, param2:ILocale) : void {
+         var _loc3_:String = null;
+         if(param1 == null)
+         {
             return;
-        }
+         }
+         if(!isNaN(param1.id))
+         {
+            this.id = param1.id;
+         }
+         if(param1.nameString != null)
+         {
+            this.nameString = param1.nameString;
+         }
+         this.primaryClass = new PrimaryClass();
+         if(param1.primaryClass != null)
+         {
+            this.primaryClass.fromObject(param1.primaryClass,param2);
+         }
+         if(param1.level != null)
+         {
+            this.level = param1.level;
+         }
+         if(!isNaN(param1.earnedXP))
+         {
+            this.earnedXP = param1.earnedXP;
+         }
+         if(!isNaN(param1.state))
+         {
+            this.state = param1.state;
+         }
+         this.unlockProps = new UnlockProps();
+         if(param1.unlockProps != null)
+         {
+            this.unlockProps.fromArray(param1.unlockProps,param2);
+         }
+         if(param1.hasOwnProperty("extraInfo"))
+         {
+            _loc3_ = param1["extraInfo"];
+            if(_loc3_)
+            {
+               this.extraInfo = _loc3_;
+            }
+         }
+         if(param1.smallIconPath != null)
+         {
+            this.smallIconPath = param1.smallIconPath;
+         }
+         if(param1.iconPath != null)
+         {
+            this.iconPath = param1.iconPath;
+         }
+         if(param1.longName != null)
+         {
+            this.longName = param1.longName;
+         }
+         if(param1.pickleDump != null)
+         {
+            this.pickleDump = param1.pickleDump;
+         }
+         this.shopPrice = new ShopPrice();
+         if(param1.shopPrice != null)
+         {
+            this.shopPrice.fromArray(param1.shopPrice,param2);
+         }
+         if(displayInfoClass != null)
+         {
+            this.displayInfo = new displayInfoClass();
+         }
+         if(!(param1.displayInfo == null) && !(this.displayInfo == null  is  IValueObject))
+         {
+            (this.displayInfo as IValueObject).fromObject(param1.displayInfo,param2);
+         }
+      }
 
-        public function toString():String
-        {
-            return "[\nNodeData:\n id = " + this.id + ",\n nameString = " + this.nameString + ",\n primaryClass = " + this.primaryClass + ",\n level = " + this.level + ",\n earnedXP = " + this.earnedXP + ",\n state = " + this.state + ",\n unlockProps = " + this.unlockProps + ",\n iconPath = " + this.iconPath + ",\n longName = " + this.longName + ",\n extraInfo = " + this.extraInfo + ",\n pickleDump = " + this.pickleDump + ",\n shopPrice = " + this.shopPrice + "\n displayInfo = " + this.displayInfo + "\n]";
-        }
+      public function clearUp() : void {
+         this.id = 0;
+         this.nameString = "";
+         this.primaryClass = null;
+         this.level = -1;
+         this._earnedXP = 0;
+         this._earnedXPLabel = "";
+         this.state = 0;
+         this.iconPath = "";
+         this.longName = "";
+         this.pickleDump = "";
+         this.shopPrice = null;
+         this.extraInfo = null;
+         if(this.unlockProps != null)
+         {
+            this.unlockProps.clearUp();
+         }
+         if(this.displayInfo != null)
+         {
+            this.displayInfo.clearUp();
+         }
+      }
 
-        public static function setDisplayInfoClass(arg1:Class):void
-        {
-            displayInfoClass = arg1;
-            return;
-        }
+      public function toString() : String {
+         return "[\nNodeData:\n id = " + this.id + ",\n nameString = " + this.nameString + ",\n primaryClass = " + this.primaryClass + ",\n level = " + this.level + ",\n earnedXP = " + this.earnedXP + ",\n state = " + this.state + ",\n unlockProps = " + this.unlockProps + ",\n iconPath = " + this.iconPath + ",\n longName = " + this.longName + ",\n extraInfo = " + this.extraInfo + ",\n pickleDump = " + this.pickleDump + ",\n shopPrice = " + this.shopPrice + "\n displayInfo = " + this.displayInfo + "\n]";
+      }
+   }
 
-        
-        {
-            displayInfoClass = null;
-        }
-
-        public static const NODE_DUMP_FIELD:String="nodeDump";
-
-        public static const UNLOCK_PROPS_FIELD:String="unlockProps";
-
-        internal var _earnedXP:Number=0;
-
-        internal var _earnedXPLabel:String="";
-
-        public var id:Number=0;
-
-        public var nameString:String="";
-
-        public var primaryClass:net.wg.gui.lobby.techtree.data.vo.PrimaryClass=null;
-
-        public var level:int=-1;
-
-        public var state:Number=0;
-
-        public var unlockProps:net.wg.gui.lobby.techtree.data.vo.UnlockProps=null;
-
-        public var smallIconPath:String="";
-
-        public var iconPath:String="";
-
-        public var longName:String="";
-
-        public var pickleDump:String="";
-
-        public var shopPrice:net.wg.gui.lobby.techtree.data.vo.ShopPrice=null;
-
-        public var displayInfo:Object=null;
-
-        public var extraInfo:String=null;
-
-        internal static var displayInfoClass:Class=null;
-    }
 }

@@ -1,250 +1,234 @@
-package net.wg.gui.components.common.ticker 
+package net.wg.gui.components.common.ticker
 {
-    import flash.display.*;
-    import flash.events.*;
-    import flash.utils.*;
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import scaleform.clik.motion.*;
-    
-    public class Ticker extends net.wg.infrastructure.base.meta.impl.TickerMeta implements net.wg.infrastructure.base.meta.ITickerMeta
-    {
-        public function Ticker()
-        {
-            this._rssItems = [];
-            this._renderers = [];
-            super();
-            alpha = 0;
-            visible = false;
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.TickerMeta;
+   import net.wg.infrastructure.base.meta.ITickerMeta;
+   import flash.display.Sprite;
+   import scaleform.clik.motion.Tween;
+   import flash.events.MouseEvent;
+   import flash.utils.setInterval;
+   import flash.utils.clearInterval;
+   import net.wg.data.constants.Linkages;
+   import net.wg.data.constants.Tooltips;
 
-        public function as_setItems(arg1:Array):void
-        {
-            this._rssItems = arg1;
-            invalidate(INVALID_ITEMS);
-            return;
-        }
 
-        public function get hasItems():Boolean
-        {
-            return this._rssItems && this._rssItems.length > 0;
-        }
+   public class Ticker extends TickerMeta implements ITickerMeta
+   {
+          
+      public function Ticker() {
+         this._rssItems = [];
+         this._renderers = [];
+         super();
+         alpha = 0;
+         visible = false;
+      }
 
-        protected override function onDispose():void
-        {
-            super.onDispose();
-            removeEventListener(flash.events.MouseEvent.MOUSE_OVER, this.onMouseOver);
-            removeEventListener(flash.events.MouseEvent.MOUSE_OUT, this.onMouseOut);
-            while (this._renderers.length) 
-            {
-                this.removeRenderer();
-            }
+      public static const STATE_HANGAR:String = "hangar";
+
+      public static const STATE_BATTLE:String = "battle";
+
+      private static const INVALID_ITEMS:String = "invalidItems";
+
+      private static const ITEMS_GAP:Number = 100;
+
+      private static const HIDE_SHOW_SPEED:Number = 500;
+
+      private static const UPDATE_INTERVAL:Number = 50;
+
+      public var animationXSpeed:Number = 1;
+
+      public var maskView:Sprite;
+
+      public var container:Sprite;
+
+      public var hit:Sprite;
+
+      private var _showHideTween:Tween;
+
+      private var _rssItems:Array;
+
+      private var _renderers:Array;
+
+      private var _itemIndex:int = -1;
+
+      private var _intervalID:int = -1;
+
+      public function as_setItems(param1:Array) : void {
+         this._rssItems = param1;
+         invalidate(INVALID_ITEMS);
+      }
+
+      public function get hasItems() : Boolean {
+         return (this._rssItems) && this._rssItems.length > 0;
+      }
+
+      override protected function onDispose() : void {
+         super.onDispose();
+         removeEventListener(MouseEvent.MOUSE_OVER,this.onMouseOver);
+         removeEventListener(MouseEvent.MOUSE_OUT,this.onMouseOut);
+         while(this._renderers.length)
+         {
+            this.removeRenderer();
+         }
+         if(this._rssItems)
+         {
+            this._rssItems.splice(0,this._rssItems.length);
+         }
+         if(this._renderers)
+         {
+            this._renderers.splice(0,this._renderers.length);
+         }
+         this.hit.mask = null;
+         this.hit = null;
+         this.container.mask = null;
+         this.container = null;
+         this.maskView = null;
+         if(this._showHideTween)
+         {
+            this._showHideTween.paused = true;
             this._showHideTween = null;
-            if (this._rssItems) 
-            {
-                this._rssItems.splice(0, this._rssItems.length);
-            }
-            if (this._renderers) 
-            {
-                this._renderers.splice(0, this._renderers.length);
-            }
-            return;
-        }
+         }
+      }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            hitArea = this.hit;
-            addEventListener(flash.events.MouseEvent.MOUSE_OVER, this.onMouseOver);
-            addEventListener(flash.events.MouseEvent.MOUSE_OUT, this.onMouseOut);
-            return;
-        }
+      override protected function configUI() : void {
+         super.configUI();
+         hitArea = this.hit;
+         addEventListener(MouseEvent.MOUSE_OVER,this.onMouseOver);
+         addEventListener(MouseEvent.MOUSE_OUT,this.onMouseOut);
+      }
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(INVALID_ITEMS) && this.hasItems) 
-            {
-                this.startAnimation();
-            }
-            return;
-        }
-
-        internal function startAnimation():void
-        {
-            this.show();
-            if (this._intervalID == -1) 
-            {
-                this._intervalID = flash.utils.setInterval(this.animate, UPDATE_INTERVAL);
-            }
-            return;
-        }
-
-        internal function pauseAnimation():void
-        {
-            if (this._intervalID != -1) 
-            {
-                flash.utils.clearInterval(this._intervalID);
-                this._intervalID = -1;
-            }
-            return;
-        }
-
-        internal function show():void
-        {
-            visible = true;
-            this._showHideTween = new scaleform.clik.motion.Tween(HIDE_SHOW_SPEED, this, {"alpha":1});
-            return;
-        }
-
-        internal function hide():void
-        {
-            this._showHideTween = new scaleform.clik.motion.Tween(HIDE_SHOW_SPEED, this, {"alpha":0}, {"onComplete":this.onHideTweenComplete});
-            return;
-        }
-
-        internal function onHideTweenComplete():void
-        {
-            visible = false;
-            return;
-        }
-
-        internal function animate():void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            var loc3:*=null;
-            if (this._renderers.length > 0) 
-            {
-                var loc4:*=0;
-                var loc5:*=this._renderers;
-                for each (loc1 in loc5) 
-                {
-                    loc1.x = loc1.x - this.animationXSpeed;
-                }
-                loc2 = this._renderers[0];
-                loc3 = this._renderers[(this._renderers.length - 1)];
-                if (loc2.x + loc2.width < 0) 
-                {
-                    this.removeRenderer();
-                }
-                if (loc3.x + loc3.width + ITEMS_GAP < this.maskView.width && this.hasItems) 
-                {
-                    this.addRenderer();
-                }
-            }
-            else if (this._rssItems.length > 0) 
-            {
-                this.addRenderer();
-            }
-            else 
-            {
-                this.pauseAnimation();
-                this.hide();
-            }
-            return;
-        }
-
-        internal function addRenderer():void
-        {
-            var loc3:*;
-            var loc4:*=((loc3 = this)._itemIndex + 1);
-            loc3._itemIndex = loc4;
-            if (this._itemIndex >= this._rssItems.length) 
-            {
-                this._itemIndex = 0;
-            }
-            var loc1:*=this._rssItems[this._itemIndex];
-            var loc2:*=App.utils.classFactory.getComponent(net.wg.data.constants.Linkages.TICKER_ITEM, net.wg.gui.components.common.ticker.TickerItem);
-            loc2.model = new net.wg.gui.components.common.ticker.RSSEntryVO(loc1);
-            loc2.x = this.maskView.width;
-            loc2.addEventListener(flash.events.MouseEvent.MOUSE_OVER, this.onItemMouseInteraction);
-            loc2.addEventListener(flash.events.MouseEvent.MOUSE_OUT, this.onItemMouseInteraction);
-            loc2.addEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.onItemMouseInteraction);
-            this.container.addChild(loc2);
-            this._renderers.push(loc2);
-            return;
-        }
-
-        internal function removeRenderer():void
-        {
-            var loc1:*=this._renderers.shift();
-            loc1.removeEventListener(flash.events.MouseEvent.MOUSE_OVER, this.onItemMouseInteraction);
-            loc1.removeEventListener(flash.events.MouseEvent.MOUSE_OUT, this.onItemMouseInteraction);
-            loc1.removeEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.onItemMouseInteraction);
-            loc1.dispose();
-            this.container.removeChild(loc1);
-            return;
-        }
-
-        internal function onMouseOut(arg1:flash.events.MouseEvent):void
-        {
+      override protected function draw() : void {
+         super.draw();
+         if((isInvalid(INVALID_ITEMS)) && (this.hasItems))
+         {
             this.startAnimation();
-            return;
-        }
+         }
+      }
 
-        internal function onMouseOver(arg1:flash.events.MouseEvent):void
-        {
-            this.pauseAnimation();
-            return;
-        }
+      private function startAnimation() : void {
+         this.show();
+         if(this._intervalID == -1)
+         {
+            this._intervalID = setInterval(this.animate,UPDATE_INTERVAL);
+         }
+      }
 
-        internal function onItemMouseInteraction(arg1:flash.events.MouseEvent):void
-        {
-            var loc1:*=(arg1.currentTarget as net.wg.gui.components.common.ticker.TickerItem).model;
-            var loc2:*=arg1.type;
-            switch (loc2) 
+      private function pauseAnimation() : void {
+         if(this._intervalID != -1)
+         {
+            clearInterval(this._intervalID);
+            this._intervalID = -1;
+         }
+      }
+
+      private function show() : void {
+         visible = true;
+         if(this._showHideTween)
+         {
+            this._showHideTween.paused = true;
+            this._showHideTween = null;
+         }
+         this._showHideTween = new Tween(HIDE_SHOW_SPEED,this,{"alpha":1});
+      }
+
+      private function hide() : void {
+         if(this._showHideTween)
+         {
+            this._showHideTween.paused = true;
+            this._showHideTween = null;
+         }
+         this._showHideTween = new Tween(HIDE_SHOW_SPEED,this,{"alpha":0.0},{"onComplete":this.onHideTweenComplete});
+      }
+
+      private function onHideTweenComplete() : void {
+         visible = false;
+      }
+
+      private function animate() : void {
+         var _loc1_:TickerItem = null;
+         var _loc2_:TickerItem = null;
+         var _loc3_:TickerItem = null;
+         if(this._renderers.length > 0)
+         {
+            for each (_loc1_ in this._renderers)
             {
-                case flash.events.MouseEvent.MOUSE_OVER:
-                {
-                    App.toolTipMgr.showSpecial(net.wg.data.constants.Tooltips.RSS_NEWS, null, loc1.title, loc1.summary);
-                    break;
-                }
-                case flash.events.MouseEvent.MOUSE_OUT:
-                {
-                    App.toolTipMgr.hide();
-                    break;
-                }
-                case flash.events.MouseEvent.MOUSE_DOWN:
-                {
-                    App.toolTipMgr.hide();
-                    showBrowserS(loc1.id);
-                    break;
-                }
+               _loc1_.x = _loc1_.x - this.animationXSpeed;
             }
-            return;
-        }
+            _loc2_ = this._renderers[0];
+            _loc3_ = this._renderers[this._renderers.length-1];
+            if(_loc2_.x + _loc2_.width < 0)
+            {
+               this.removeRenderer();
+            }
+            if(_loc3_.x + _loc3_.width + ITEMS_GAP < this.maskView.width && (this.hasItems))
+            {
+               this.addRenderer();
+            }
+         }
+         else
+         {
+            if(this._rssItems.length > 0)
+            {
+               this.addRenderer();
+            }
+            else
+            {
+               this.pauseAnimation();
+               this.hide();
+            }
+         }
+      }
 
-        public static const STATE_HANGAR:String="hangar";
+      private function addRenderer() : void {
+         var _loc2_:TickerItem = null;
+         this._itemIndex++;
+         if(this._itemIndex >= this._rssItems.length)
+         {
+            this._itemIndex = 0;
+         }
+         var _loc1_:Object = this._rssItems[this._itemIndex];
+         _loc2_ = App.utils.classFactory.getComponent(Linkages.TICKER_ITEM,TickerItem);
+         _loc2_.model = new RSSEntryVO(_loc1_);
+         _loc2_.x = this.maskView.width;
+         _loc2_.addEventListener(MouseEvent.MOUSE_OVER,this.onItemMouseInteraction);
+         _loc2_.addEventListener(MouseEvent.MOUSE_OUT,this.onItemMouseInteraction);
+         _loc2_.addEventListener(MouseEvent.MOUSE_DOWN,this.onItemMouseInteraction);
+         this.container.addChild(_loc2_);
+         this._renderers.push(_loc2_);
+      }
 
-        public static const STATE_BATTLE:String="battle";
+      private function removeRenderer() : void {
+         var _loc1_:TickerItem = this._renderers.shift();
+         _loc1_.removeEventListener(MouseEvent.MOUSE_OVER,this.onItemMouseInteraction);
+         _loc1_.removeEventListener(MouseEvent.MOUSE_OUT,this.onItemMouseInteraction);
+         _loc1_.removeEventListener(MouseEvent.MOUSE_DOWN,this.onItemMouseInteraction);
+         _loc1_.dispose();
+         this.container.removeChild(_loc1_);
+      }
 
-        internal static const INVALID_ITEMS:String="invalidItems";
+      private function onMouseOut(param1:MouseEvent) : void {
+         this.startAnimation();
+      }
 
-        internal static const ITEMS_GAP:Number=100;
+      private function onMouseOver(param1:MouseEvent) : void {
+         this.pauseAnimation();
+      }
 
-        internal static const HIDE_SHOW_SPEED:Number=500;
+      private function onItemMouseInteraction(param1:MouseEvent) : void {
+         var _loc2_:Object = (param1.currentTarget as TickerItem).model;
+         switch(param1.type)
+         {
+            case MouseEvent.MOUSE_OVER:
+               App.toolTipMgr.showSpecial(Tooltips.RSS_NEWS,null,_loc2_.title,_loc2_.summary);
+               break;
+            case MouseEvent.MOUSE_OUT:
+               App.toolTipMgr.hide();
+               break;
+            case MouseEvent.MOUSE_DOWN:
+               App.toolTipMgr.hide();
+               showBrowserS(_loc2_.id);
+               break;
+         }
+      }
+   }
 
-        internal static const UPDATE_INTERVAL:Number=50;
-
-        public var animationXSpeed:Number=1;
-
-        public var maskView:flash.display.Sprite;
-
-        public var container:flash.display.Sprite;
-
-        public var hit:flash.display.Sprite;
-
-        internal var _showHideTween:scaleform.clik.motion.Tween;
-
-        internal var _rssItems:Array;
-
-        internal var _renderers:Array;
-
-        internal var _itemIndex:int=-1;
-
-        internal var _intervalID:int=-1;
-    }
 }

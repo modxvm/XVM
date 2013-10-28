@@ -1,32 +1,35 @@
-package net.wg.utils 
+package net.wg.utils
 {
-    import flash.display.*;
-    import flash.events.*;
-    import net.wg.infrastructure.interfaces.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    
-    public interface IEventCollector extends net.wg.infrastructure.interfaces.entity.IDisposable
-    {
-        function setEnabled(arg1:Boolean):void;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import flash.events.IEventDispatcher;
+   import net.wg.infrastructure.interfaces.IDAAPIModule;
+   import flash.display.DisplayObject;
 
-        function addEvent(arg1:flash.events.IEventDispatcher, arg2:String, arg3:Function, arg4:Boolean=false, arg5:int=0, arg6:Boolean=false):void;
 
-        function removeEvent(arg1:Object, arg2:String, arg3:Function, arg4:Boolean=false):void;
+   public interface IEventCollector extends IDisposable
+   {
+          
+      function setEnabled(param1:Boolean) : void;
 
-        function removeAllEvents():void;
+      function addEvent(param1:IEventDispatcher, param2:String, param3:Function, param4:Boolean=false, param5:int=0, param6:Boolean=false) : void;
 
-        function removeModuleEvents(arg1:net.wg.infrastructure.interfaces.IDAAPIModule):void;
+      function removeEvent(param1:Object, param2:String, param3:Function, param4:Boolean=false) : void;
 
-        function removeObjectEvents(arg1:Object, arg2:Boolean=true):void;
+      function removeAllEvents() : void;
 
-        function enableDisposingForObj(arg1:flash.display.DisplayObject):void;
+      function removeModuleEvents(param1:IDAAPIModule) : void;
 
-        function disableDisposingForObj(arg1:flash.display.DisplayObject):void;
+      function removeObjectEvents(param1:Object, param2:Boolean=true) : void;
 
-        function hasRegisteredEvent(arg1:Object, arg2:String, arg3:Function, arg4:Boolean):Boolean;
+      function enableDisposingForObj(param1:DisplayObject) : void;
 
-        function objectIsRegistered(arg1:Object):Boolean;
+      function disableDisposingForObj(param1:DisplayObject) : void;
 
-        function logState():void;
-    }
+      function hasRegisteredEvent(param1:Object, param2:String, param3:Function, param4:Boolean) : Boolean;
+
+      function objectIsRegistered(param1:Object) : Boolean;
+
+      function logState() : void;
+   }
+
 }

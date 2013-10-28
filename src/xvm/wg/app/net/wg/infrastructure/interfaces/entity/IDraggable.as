@@ -1,13 +1,17 @@
-package net.wg.infrastructure.interfaces.entity 
+package net.wg.infrastructure.interfaces.entity
 {
-    public interface IDraggable extends net.wg.infrastructure.interfaces.entity.IDragDropHitArea
-    {
-        function onStartDrag():void;
 
-        function onDragging(arg1:Number, arg2:Number):void;
 
-        function onEndDrag():void;
+   public interface IDraggable extends IDragDropHitArea
+   {
+          
+      function onStartDrag() : void;
 
-        function getDragType():String;
-    }
+      function onDragging(param1:Number, param2:Number) : void;
+
+      function onEndDrag() : void;
+
+      function getDragType() : String;
+   }
+
 }

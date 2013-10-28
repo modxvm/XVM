@@ -1,23 +1,22 @@
-package net.wg.infrastructure.base.meta.impl 
+package net.wg.infrastructure.base.meta.impl
 {
-    import net.wg.data.constants.*;
-    import net.wg.gui.lobby.profile.pages.*;
-    
-    public class ProfileStatisticsMeta extends net.wg.gui.lobby.profile.pages.ProfileSection
-    {
-        public function ProfileStatisticsMeta()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.lobby.profile.pages.ProfileSection;
+   import net.wg.data.constants.Errors;
 
-        public function getDataS(arg1:Object):void
-        {
-            App.utils.asserter.assertNotNull(this.getData, "getData" + net.wg.data.constants.Errors.CANT_NULL);
-            this.getData(arg1);
-            return;
-        }
 
-        public var getData:Function=null;
-    }
+   public class ProfileStatisticsMeta extends ProfileSection
+   {
+          
+      public function ProfileStatisticsMeta() {
+         super();
+      }
+
+      public var getData:Function = null;
+
+      public function getDataS(param1:Object) : void {
+         App.utils.asserter.assertNotNull(this.getData,"getData" + Errors.CANT_NULL);
+         this.getData(param1);
+      }
+   }
+
 }

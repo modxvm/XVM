@@ -1,27 +1,36 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IGlobalVarsMgrMeta extends flash.events.IEventDispatcher
-    {
-        function isDevelopmentS():Boolean;
+   import flash.events.IEventDispatcher;
 
-        function isShowLangaugeBarS():Boolean;
 
-        function isShowServerStatsS():Boolean;
+   public interface IGlobalVarsMgrMeta extends IEventDispatcher
+   {
+          
+      function isDevelopmentS() : Boolean;
 
-        function isChinaS():Boolean;
+      function isShowLangaugeBarS() : Boolean;
 
-        function isTutorialDisabledS():Boolean;
+      function isShowServerStatsS() : Boolean;
 
-        function setTutorialDisabledS(arg1:Boolean):void;
+      function isChinaS() : Boolean;
 
-        function isTutorialRunningS():Boolean;
+      function isKoreaS() : Boolean;
 
-        function setTutorialRunningS(arg1:Boolean):void;
+      function isTutorialDisabledS() : Boolean;
 
-        function isFreeXpToTankmanS():Boolean;
+      function setTutorialDisabledS(param1:Boolean) : void;
 
-        function getLocaleOverrideS():String;
-    }
+      function isTutorialRunningS() : Boolean;
+
+      function isRoamingEnabledS() : Boolean;
+
+      function isInRoamingS() : Boolean;
+
+      function setTutorialRunningS(param1:Boolean) : void;
+
+      function isFreeXpToTankmanS() : Boolean;
+
+      function getLocaleOverrideS() : String;
+   }
+
 }

@@ -1,40 +1,33 @@
-package net.wg.gui.events 
+package net.wg.gui.events
 {
-    import flash.events.*;
-    import net.wg.infrastructure.interfaces.*;
-    
-    public class ViewStackEvent extends flash.events.Event
-    {
-        public function ViewStackEvent(arg1:String, arg2:net.wg.infrastructure.interfaces.IViewStackContent, arg3:String, arg4:Boolean=false, arg5:Boolean=false)
-        {
-            super(arg1, arg4, arg5);
-            this.view = arg2;
-            this.linkage = arg3;
-            return;
-        }
+   import flash.events.Event;
+   import net.wg.infrastructure.interfaces.IViewStackContent;
 
-        public override function clone():flash.events.Event
-        {
-            return new net.wg.gui.events.ViewStackEvent(type, this.view, this.linkage, bubbles, cancelable);
-        }
 
-        public override function toString():String
-        {
-            return formatToString("ViewStackEvent", "view", "linkage", "type", "bubbles", "cancelable", "eventPhase");
-        }
+   public class ViewStackEvent extends Event
+   {
+          
+      public function ViewStackEvent(param1:String, param2:IViewStackContent, param3:String, param4:Boolean=false, param5:Boolean=false) {
+         super(param1,param4,param5);
+         this.view = param2;
+         this.linkage = param3;
+      }
 
-        
-        {
-            NEED_UPDATE = "need_update";
-            VIEW_CHANGED = "view_changed";
-        }
+      public static var NEED_UPDATE:String = "need_update";
 
-        public var view:net.wg.infrastructure.interfaces.IViewStackContent;
+      public static var VIEW_CHANGED:String = "view_changed";
 
-        public var linkage:String;
+      public var view:IViewStackContent;
 
-        public static var NEED_UPDATE:String="need_update";
+      public var linkage:String;
 
-        public static var VIEW_CHANGED:String="view_changed";
-    }
+      override public function clone() : Event {
+         return new ViewStackEvent(type,this.view,this.linkage,bubbles,cancelable);
+      }
+
+      override public function toString() : String {
+         return formatToString("ViewStackEvent","view","linkage","type","bubbles","cancelable","eventPhase");
+      }
+   }
+
 }

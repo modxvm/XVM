@@ -1,29 +1,32 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IVehicleSellDialogMeta extends flash.events.IEventDispatcher
-    {
-        function getDialogSettingsS():Object;
+   import flash.events.IEventDispatcher;
 
-        function setDialogSettingsS(arg1:Boolean):void;
 
-        function sellS(arg1:Object, arg2:Array, arg3:Array, arg4:Array, arg5:Array, arg6:Boolean):void;
+   public interface IVehicleSellDialogMeta extends IEventDispatcher
+   {
+          
+      function getDialogSettingsS() : Object;
 
-        function setUserInputS(arg1:String):void;
+      function setDialogSettingsS(param1:Boolean) : void;
 
-        function setResultCreditS(arg1:int):void;
+      function sellS(param1:Object, param2:Array, param3:Array, param4:Array, param5:Array, param6:Boolean) : void;
 
-        function as_setData(arg1:Object, arg2:Object, arg3:Object, arg4:Number, arg5:Number):void;
+      function setUserInputS(param1:String) : void;
 
-        function as_checkGold(arg1:Number):void;
+      function setResultCreditS(param1:int) : void;
 
-        function as_visibleControlBlock(arg1:Boolean):void;
+      function as_setData(param1:Object, param2:Object, param3:Object, param4:Number, param5:Number) : void;
 
-        function as_enableButton(arg1:Boolean):void;
+      function as_checkGold(param1:Number) : void;
 
-        function as_setCtrlQuestion(arg1:String):void;
+      function as_visibleControlBlock(param1:Boolean) : void;
 
-        function as_setControlNumber(arg1:String):void;
-    }
+      function as_enableButton(param1:Boolean) : void;
+
+      function as_setCtrlQuestion(param1:String) : void;
+
+      function as_setControlNumber(param1:String) : void;
+   }
+
 }

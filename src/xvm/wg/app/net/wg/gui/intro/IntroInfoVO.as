@@ -1,17 +1,18 @@
-package net.wg.gui.intro 
+package net.wg.gui.intro
 {
-    import net.wg.data.daapi.base.*;
-    
-    public class IntroInfoVO extends net.wg.data.daapi.base.DAAPIDataClass
-    {
-        public function IntroInfoVO(arg1:Object)
-        {
-            super(arg1);
-            return;
-        }
+   import net.wg.data.daapi.base.DAAPIDataClass;
 
-        public var source:String="";
 
-        public var volume:Number;
-    }
+   public class IntroInfoVO extends DAAPIDataClass
+   {
+          
+      public function IntroInfoVO(param1:Object) {
+         super(param1);
+      }
+
+      public var source:String = "";
+
+      public var volume:Number;
+   }
+
 }

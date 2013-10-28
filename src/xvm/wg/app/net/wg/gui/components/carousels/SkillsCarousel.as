@@ -1,73 +1,65 @@
-package net.wg.gui.components.carousels 
+package net.wg.gui.components.carousels
 {
-    import scaleform.clik.controls.*;
-    import scaleform.clik.interfaces.*;
-    
-    public class SkillsCarousel extends net.wg.gui.components.carousels.CarouselBase
-    {
-        public function SkillsCarousel()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.interfaces.IListItemRenderer;
+   import scaleform.clik.controls.Button;
 
-        protected override function updateContainerPosition():void
-        {
-            super.updateContainerPosition();
-            if (_renderers.length <= 0) 
-            {
-                this.visible = false;
-            }
-            else if (_renderers.length <= countVisibleSlots) 
-            {
-                var loc1:*;
-                rightArrow.visible = loc1 = false;
-                leftArrow.visible = loc1;
-                rightArrow.enabled = loc1 = false;
-                leftArrow.enabled = loc1;
-                rightArrow.mouseEnabled = loc1 = false;
-                leftArrow.mouseEnabled = loc1;
-            }
-            else 
-            {
-                rightArrow.visible = loc1 = true;
-                leftArrow.visible = loc1;
-                rightArrow.mouseEnabled = loc1 = true;
-                leftArrow.mouseEnabled = loc1;
-            }
-            updateArrowsState();
-            return;
-        }
 
-        protected override function updateRenderPosition(arg1:scaleform.clik.interfaces.IListItemRenderer, arg2:uint, arg3:int, arg4:Number):void
-        {
-            super.updateRenderPosition(arg1, arg2, arg3, arg4);
-            if (_renderers.length <= countVisibleSlots) 
-            {
-                scaleform.clik.controls.Button(arg1).buttonMode = true;
-                if (this.isSetListeners) 
-                {
-                    removeCursorListeners();
-                    this.isSetListeners = false;
-                }
-            }
-            else 
-            {
-                this.setCursorListeners();
-            }
-            return;
-        }
+   public class SkillsCarousel extends CarouselBase
+   {
+          
+      public function SkillsCarousel() {
+         super();
+      }
 
-        protected override function setCursorListeners():void
-        {
-            if (!this.isSetListeners) 
+      override protected function updateContainerPosition() : void {
+         super.updateContainerPosition();
+         if(_renderers.length <= 0)
+         {
+            this.visible = false;
+         }
+         else
+         {
+            if(_renderers.length <= countVisibleSlots)
             {
-                super.setCursorListeners();
-                this.isSetListeners = true;
+               leftArrow.visible = rightArrow.visible = false;
+               leftArrow.enabled = rightArrow.enabled = false;
+               leftArrow.mouseEnabled = rightArrow.mouseEnabled = false;
             }
-            return;
-        }
+            else
+            {
+               leftArrow.visible = rightArrow.visible = true;
+               leftArrow.mouseEnabled = rightArrow.mouseEnabled = true;
+            }
+         }
+         updateArrowsState();
+      }
 
-        internal var isSetListeners:Boolean=false;
-    }
+      override protected function updateRenderPosition(param1:IListItemRenderer, param2:uint, param3:int, param4:Number) : void {
+         super.updateRenderPosition(param1,param2,param3,param4);
+         if(_renderers.length <= countVisibleSlots)
+         {
+            Button(param1).buttonMode = true;
+            if(this.isSetListeners)
+            {
+               removeCursorListeners();
+               this.isSetListeners = false;
+            }
+         }
+         else
+         {
+            this.setCursorListeners();
+         }
+      }
+
+      private var isSetListeners:Boolean = false;
+
+      override protected function setCursorListeners() : void {
+         if(!this.isSetListeners)
+         {
+            super.setCursorListeners();
+            this.isSetListeners = true;
+         }
+      }
+   }
+
 }

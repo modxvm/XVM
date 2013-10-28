@@ -1,26 +1,25 @@
-package net.wg.gui.lobby.sellDialog 
+package net.wg.gui.lobby.sellDialog
 {
-    import flash.text.*;
-    import net.wg.gui.components.controls.*;
-    import scaleform.clik.core.*;
-    
-    public class MovingResult extends scaleform.clik.core.UIComponent
-    {
-        public function MovingResult()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import net.wg.gui.components.controls.IconText;
+   import flash.text.TextField;
 
-        protected override function configUI():void
-        {
-            this.text.text = DIALOGS.CONFIRMMODULEDIALOG_TOTALLABEL;
-            this.creditsIT.textFieldYOffset = net.wg.gui.lobby.sellDialog.VehicleSellDialog.ICONS_TEXT_OFFSET;
-            return;
-        }
 
-        public var creditsIT:net.wg.gui.components.controls.IconText;
+   public class MovingResult extends UIComponent
+   {
+          
+      public function MovingResult() {
+         super();
+      }
 
-        public var text:flash.text.TextField;
-    }
+      public var creditsIT:IconText;
+
+      public var text:TextField;
+
+      override protected function configUI() : void {
+         this.text.text = DIALOGS.CONFIRMMODULEDIALOG_TOTALLABEL;
+         this.creditsIT.textFieldYOffset = VehicleSellDialog.ICONS_TEXT_OFFSET;
+      }
+   }
+
 }

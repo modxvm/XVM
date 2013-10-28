@@ -18,6 +18,7 @@ import ResMgr
 import nations
 from items import vehicles
 
+from vehinfo_short import getShortName
 from vehinfo_tiers import getTiers
 
 _vehicleInfoData = None
@@ -34,16 +35,19 @@ def _init():
         for nation in nations.NAMES:
             nationID = nations.INDICES[nation]
             for (id, descr) in vehicles.g_list.getList(nationID).iteritems():
+                if descr['name'].endswith('training'):
+                    continue
+
                 item = vehicles.g_cache.vehicle(nationID, id)
 
                 data = dict()
                 data['vid'] = descr['compactDescr']
                 data['key'] = descr['name']
                 data['nation'] = nation
-                data['id'] = id
                 data['level'] = descr['level']
-                data['class'] = tuple(vehicles.VEHICLE_CLASS_TAGS & descr['tags'])[0]
+                data['vclass'] = tuple(vehicles.VEHICLE_CLASS_TAGS & descr['tags'])[0]
                 data['localizedName'] = descr['shortUserString']
+                data['localizedShortName'] = descr['shortUserString']
                 data['localizedFullName'] = descr['userString']
                 data['premium'] = 'premium' in descr['tags']
 
@@ -53,13 +57,13 @@ def _init():
                 data['hpTop'] = item.hull['maxHealth'] + topTurret['maxHealth']
                 data['turret'] = _getTurretType(item, nation)
 
-                (data['tiersLo'], data['tiersHi']) = getTiers(data['level'], data['class'], data['key'])
+                (data['tierLo'], data['tierHi']) = getTiers(data['level'], data['vclass'], data['key'])
 
-    #            self.preferredName = ''
-    #            self.shortName = ''
+                data['shortName'] = getShortName(data['key'])
 
-    #            self.avg = _StatValues()
-    #            self.top = _StatValues()
+                # TODO: load avg/top data from server
+                data['avg'] = {}
+                data['top'] = {}
 
                 res.append(data)
 

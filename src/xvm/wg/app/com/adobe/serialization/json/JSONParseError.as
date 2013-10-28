@@ -1,28 +1,28 @@
-package com.adobe.serialization.json 
+package com.adobe.serialization.json
 {
-    public class JSONParseError extends Error
-    {
-        public function JSONParseError(arg1:String="", arg2:int=0, arg3:String="")
-        {
-            super(arg1);
-            name = "JSONParseError";
-            this._location = arg2;
-            this._text = arg3;
-            return;
-        }
 
-        public function get location():int
-        {
-            return this._location;
-        }
 
-        public function get text():String
-        {
-            return this._text;
-        }
+   public class JSONParseError extends Error
+   {
+          
+      public function JSONParseError(param1:String=undefined, param2:int=undefined, param3:String=undefined) {
+         super(param1);
+         name = "JSONParseError";
+         this._location = param2;
+         this._text = param3;
+      }
 
-        internal var _location:int;
+      private var _location:int;
 
-        internal var _text:String;
-    }
+      private var _text:String;
+
+      public function get location() : int {
+         return this._location;
+      }
+
+      public function get text() : String {
+         return this._text;
+      }
+   }
+
 }

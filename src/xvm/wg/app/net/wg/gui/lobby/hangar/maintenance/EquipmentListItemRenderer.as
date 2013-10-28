@@ -1,165 +1,160 @@
-package net.wg.gui.lobby.hangar.maintenance 
+package net.wg.gui.lobby.hangar.maintenance
 {
-    import flash.display.*;
-    import flash.events.*;
-    import flash.text.*;
-    import net.wg.data.constants.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.events.*;
-    import net.wg.gui.lobby.hangar.maintenance.data.*;
-    import net.wg.gui.lobby.hangar.maintenance.events.*;
-    import net.wg.utils.*;
-    import scaleform.clik.constants.*;
-    import scaleform.gfx.*;
-    
-    public class EquipmentListItemRenderer extends net.wg.gui.components.controls.SoundListItemRenderer
-    {
-        public function EquipmentListItemRenderer()
-        {
-            super();
-            soundType = "artefactRenderer";
-            return;
-        }
+   import net.wg.gui.components.controls.SoundListItemRenderer;
+   import net.wg.gui.components.controls.UILoaderAlt;
+   import flash.text.TextField;
+   import net.wg.gui.components.controls.IconText;
+   import flash.display.MovieClip;
+   import scaleform.clik.constants.InvalidationType;
+   import net.wg.utils.IEventCollector;
+   import flash.events.MouseEvent;
+   import net.wg.data.constants.SoundTypes;
+   import net.wg.data.constants.Currencies;
+   import net.wg.gui.lobby.hangar.maintenance.events.OnEquipmentRendererOver;
+   import scaleform.gfx.MouseEventEx;
+   import net.wg.gui.events.ModuleInfoEvent;
+   import net.wg.gui.lobby.hangar.maintenance.data.ModuleVO;
 
-        public override function setData(arg1:Object):void
-        {
-            super.setData(arg1);
-            invalidate(scaleform.clik.constants.InvalidationType.DATA);
-            return;
-        }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            var loc1:*=App.utils.events;
-            loc1.addEvent(this, flash.events.MouseEvent.ROLL_OVER, this.onRollOver);
-            loc1.addEvent(this, flash.events.MouseEvent.ROLL_OUT, this.onRollOut);
-            loc1.addEvent(this, flash.events.MouseEvent.CLICK, this.onClick);
-            return;
-        }
+   public class EquipmentListItemRenderer extends SoundListItemRenderer
+   {
+          
+      public function EquipmentListItemRenderer() {
+         super();
+      }
 
-        protected override function draw():void
-        {
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+      public var icon:UILoaderAlt;
+
+      public var titleField:TextField;
+
+      public var descField:TextField;
+
+      public var errorField:TextField;
+
+      public var priceMC:IconText;
+
+      public var targetMC:MovieClip;
+
+      override public function setData(param1:Object) : void {
+         super.setData(param1);
+         invalidate(InvalidationType.DATA);
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         var _loc1_:IEventCollector = App.utils.events;
+         _loc1_.addEvent(this,MouseEvent.ROLL_OVER,this.onRollOver);
+         _loc1_.addEvent(this,MouseEvent.ROLL_OUT,this.onRollOut);
+         _loc1_.addEvent(this,MouseEvent.CLICK,this.onClick);
+         soundType = SoundTypes.NORMAL_BTN;
+      }
+
+      override protected function draw() : void {
+         if(isInvalid(InvalidationType.DATA))
+         {
+            if(data)
             {
-                if (data) 
-                {
-                    visible = true;
-                    if (this.module.target == 1 && !(this.module.status == "")) 
-                    {
-                        var loc1:*;
-                        this.descField.text = loc1 = "";
-                        this.titleField.text = loc1;
-                    }
-                    else 
-                    {
-                        this.titleField.text = this.module.name;
-                        this.descField.text = this.module.desc;
-                    }
-                    this.icon.source = this.module.icon;
-                    this.priceMC.visible = false;
-                    if (this.module.target != 3) 
-                    {
-                        if (this.module.target != 2) 
+               visible = true;
+               if(this.module.target == 1 && !(this.module.status == ""))
+               {
+                  this.titleField.text = this.descField.text = "";
+               }
+               else
+               {
+                  this.titleField.text = this.module.name;
+                  this.descField.text = this.module.desc;
+               }
+               this.icon.source = this.module.icon;
+               this.priceMC.visible = false;
+               if(this.module.target == 3)
+               {
+                  this.priceMC.visible = true;
+                  if(this.module.currency == Currencies.GOLD)
+                  {
+                     this.priceMC.text = App.utils.locale.gold(this.module.price);
+                     this.priceMC.textColor = Currencies.TEXT_COLORS[Currencies.GOLD];
+                  }
+                  else
+                  {
+                     this.priceMC.text = App.utils.locale.integer(this.module.price);
+                     this.priceMC.textColor = Currencies.TEXT_COLORS[Currencies.CREDITS];
+                  }
+                  if(this.module.status == MENU.MODULEFITS_CREDIT_ERROR || this.module.status == MENU.MODULEFITS_GOLD_ERROR)
+                  {
+                     this.priceMC.textColor = Currencies.TEXT_COLORS[Currencies.ERROR];
+                  }
+                  else
+                  {
+                     if(this.module.status != "")
+                     {
+                        this.priceMC.textColor = 6710886;
+                     }
+                  }
+                  this.priceMC.icon = this.module.currency;
+                  this.priceMC.validateNow();
+                  this.targetMC.gotoAndStop("shop");
+               }
+               else
+               {
+                  if(this.module.target == 2)
+                  {
+                     if(this.module.status == "")
+                     {
+                        this.targetMC.gotoAndPlay("hangar");
+                     }
+                     else
+                     {
+                        if(!(this.module.status == MENU.MODULEFITS_CREDIT_ERROR) && this.module.status == MENU.MODULEFITS_GOLD_ERROR)
                         {
-                            if (this.module.target == 1) 
-                            {
-                                this.targetMC.gotoAndPlay("vehicle");
-                                this.targetMC.textField.text = this.module.status != "" ? MENU.FITTINGLISTITEMRENDERER_REPLACE : "";
-                            }
+                           this.targetMC.gotoAndPlay("hangarCantInstall");
                         }
-                        else if (this.module.status != "") 
-                        {
-                            if (!(this.module.status == MENU.MODULEFITS_CREDIT_ERROR) && this.module.status == MENU.MODULEFITS_GOLD_ERROR) 
-                            {
-                                this.targetMC.gotoAndPlay("hangarCantInstall");
-                            }
-                        }
-                        else 
-                        {
-                            this.targetMC.gotoAndPlay("hangar");
-                        }
-                    }
-                    else 
-                    {
-                        this.priceMC.visible = true;
-                        if (this.module.currency != net.wg.data.constants.Currencies.GOLD) 
-                        {
-                            this.priceMC.text = App.utils.locale.integer(this.module.price);
-                            this.priceMC.textColor = net.wg.data.constants.Currencies.TEXT_COLORS[net.wg.data.constants.Currencies.CREDITS];
-                        }
-                        else 
-                        {
-                            this.priceMC.text = App.utils.locale.gold(this.module.price);
-                            this.priceMC.textColor = net.wg.data.constants.Currencies.TEXT_COLORS[net.wg.data.constants.Currencies.GOLD];
-                        }
-                        if (this.module.status == MENU.MODULEFITS_CREDIT_ERROR || this.module.status == MENU.MODULEFITS_GOLD_ERROR) 
-                        {
-                            this.priceMC.textColor = net.wg.data.constants.Currencies.TEXT_COLORS[net.wg.data.constants.Currencies.ERROR];
-                        }
-                        else if (this.module.status != "") 
-                        {
-                            this.priceMC.textColor = 6710886;
-                        }
-                        this.priceMC.icon = this.module.currency;
-                        this.priceMC.validateNow();
-                        this.targetMC.gotoAndStop("shop");
-                    }
-                    this.errorField.text = this.module.status;
-                    enabled = !(this.module.status == MENU.MODULEFITS_UNLOCK_ERROR) && !(this.module.status == MENU.MODULEFITS_NOT_WITH_INSTALLED_EQUIPMENT);
-                    mouseEnabled = true;
-                }
-                else 
-                {
-                    visible = false;
-                }
+                     }
+                  }
+                  else
+                  {
+                     if(this.module.target == 1)
+                     {
+                        this.targetMC.gotoAndPlay("vehicle");
+                        this.targetMC.textField.text = this.module.status == ""?"":MENU.FITTINGLISTITEMRENDERER_REPLACE;
+                     }
+                  }
+               }
+               this.errorField.text = this.module.status;
+               enabled = !(this.module.status == MENU.MODULEFITS_UNLOCK_ERROR) && !(this.module.status == MENU.MODULEFITS_NOT_WITH_INSTALLED_EQUIPMENT);
+               mouseEnabled = true;
             }
-            super.draw();
-            return;
-        }
-
-        internal function onRollOver(arg1:flash.events.MouseEvent):void
-        {
-            owner.dispatchEvent(new net.wg.gui.lobby.hangar.maintenance.events.OnEquipmentRendererOver(net.wg.gui.lobby.hangar.maintenance.events.OnEquipmentRendererOver.ON_EQUIPMENT_RENDERER_OVER, this.module.id, this.module.prices, this.module.inventoryCount, this.module.vehicleCount, this.module.slotIndex));
-            return;
-        }
-
-        internal function onRollOut(arg1:flash.events.MouseEvent):void
-        {
-            App.toolTipMgr.hide();
-            return;
-        }
-
-        internal function onClick(arg1:flash.events.MouseEvent):void
-        {
-            var loc1:*=null;
-            App.toolTipMgr.hide();
-            if (arg1 is scaleform.gfx.MouseEventEx) 
+            else
             {
-                loc1 = arg1 as scaleform.gfx.MouseEventEx;
-                if (loc1.buttonIdx == scaleform.gfx.MouseEventEx.RIGHT_BUTTON) 
-                {
-                    dispatchEvent(new net.wg.gui.events.ModuleInfoEvent(net.wg.gui.events.ModuleInfoEvent.SHOW_INFO, this.module.id));
-                }
+               visible = false;
             }
-            return;
-        }
+         }
+         super.draw();
+      }
 
-        internal function get module():net.wg.gui.lobby.hangar.maintenance.data.ModuleVO
-        {
-            return data as net.wg.gui.lobby.hangar.maintenance.data.ModuleVO;
-        }
+      private function onRollOver(param1:MouseEvent) : void {
+         owner.dispatchEvent(new OnEquipmentRendererOver(OnEquipmentRendererOver.ON_EQUIPMENT_RENDERER_OVER,this.module.id,this.module.prices,this.module.inventoryCount,this.module.vehicleCount,this.module.slotIndex));
+      }
 
-        public var icon:net.wg.gui.components.controls.UILoaderAlt;
+      private function onRollOut(param1:MouseEvent) : void {
+         App.toolTipMgr.hide();
+      }
 
-        public var titleField:flash.text.TextField;
+      private function onClick(param1:MouseEvent) : void {
+         var _loc2_:MouseEventEx = null;
+         App.toolTipMgr.hide();
+         if(param1  is  MouseEventEx)
+         {
+            _loc2_ = param1 as MouseEventEx;
+            if(_loc2_.buttonIdx == MouseEventEx.RIGHT_BUTTON)
+            {
+               dispatchEvent(new ModuleInfoEvent(ModuleInfoEvent.SHOW_INFO,this.module.id));
+            }
+         }
+      }
 
-        public var descField:flash.text.TextField;
+      private function get module() : ModuleVO {
+         return data as ModuleVO;
+      }
+   }
 
-        public var errorField:flash.text.TextField;
-
-        public var priceMC:net.wg.gui.components.controls.IconText;
-
-        public var targetMC:flash.display.MovieClip;
-    }
 }

@@ -1,28 +1,28 @@
-package net.wg.gui.components.controls 
+package net.wg.gui.components.controls
 {
-    import scaleform.clik.core.*;
-    
-    public class ContextMenuItemSeparate extends scaleform.clik.core.UIComponent
-    {
-        public function ContextMenuItemSeparate()
-        {
-            this._items = [];
-            this.subItems = [];
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
 
-        public function get items():Array
-        {
-            return this._items;
-        }
 
-        public var id:String="";
+   public class ContextMenuItemSeparate extends UIComponent
+   {
+          
+      public function ContextMenuItemSeparate() {
+         this._items = [];
+         this.subItems = [];
+         super();
+      }
 
-        public var index:Number=0;
+      public var id:String = "";
 
-        internal var _items:Array;
+      public var index:Number = 0;
 
-        public var subItems:Array;
-    }
+      private var _items:Array;
+
+      public var subItems:Array;
+
+      public function get items() : Array {
+         return this._items;
+      }
+   }
+
 }

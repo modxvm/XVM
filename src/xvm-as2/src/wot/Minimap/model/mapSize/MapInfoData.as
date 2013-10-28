@@ -55,10 +55,12 @@ class wot.Minimap.model.mapSize.MapInfoData
         $38_mannerheim_line:  { size: 100 }, // Arctic Region
         $39_crimea:           { size: 100 }, // South Coast
         $42_north_america:    { size: 83 },  // Port
+        $43_north_america:    { size: 100 }, // Northwest
         $44_north_america:    { size: 100 }, // Live Oaks
         $45_north_america:    { size: 100 }, // Highway
         $47_canada_a:         { size: 100 }, // Serene Coast
         $51_asia:             { size: 100 }, // Dragon Ridge
+        $59_asia_great_wall:  { size: 100 }, // Empire's Border
         $60_asia_miao:        { size: 100 }, // Pearl River
         $63_tundra:           { size: 80 },  // Tundra
         $73_asia_korea:       { size: 100 }, // Sacred Valley

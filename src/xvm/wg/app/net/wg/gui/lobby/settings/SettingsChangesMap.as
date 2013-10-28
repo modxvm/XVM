@@ -1,161 +1,134 @@
-package net.wg.gui.lobby.settings 
+package net.wg.gui.lobby.settings
 {
-    public class SettingsChangesMap extends Object
-    {
-        public function SettingsChangesMap()
-        {
-            super();
-            this.clear();
-            return;
-        }
 
-        public function clear():void
-        {
-            this.clearObject(this._data);
-            this._data = new Object();
-            this._len = 0;
-            return;
-        }
 
-        internal function clearObject(arg1:Object):void
-        {
-            var loc1:*=null;
-            if (arg1) 
+   public class SettingsChangesMap extends Object
+   {
+          
+      public function SettingsChangesMap() {
+         super();
+         this.clear();
+      }
+
+      private var _data:Object;
+
+      private var _len:uint;
+
+      public function clear() : void {
+         this.clearObject(this._data);
+         this._data = new Object();
+         this._len = 0;
+      }
+
+      private function clearObject(param1:Object) : void {
+         var _loc2_:String = null;
+         if(param1)
+         {
+            for (_loc2_ in param1)
             {
-                var loc2:*=0;
-                var loc3:*=arg1;
-                for (loc1 in loc3) 
-                {
-                    if (!(arg1[loc1] is String) && !(arg1[loc1] is Number) && !(arg1[loc1] is Boolean)) 
-                    {
-                        delete this._data[loc1];
-                        continue;
-                    }
-                    this.clearObject(this._data[loc1]);
-                }
+               if(!(param1[_loc2_]  is  String) && !(param1[_loc2_]  is  Number) && !(param1[_loc2_]  is  Boolean))
+               {
+                  delete this._data[[_loc2_]];
+               }
+               else
+               {
+                  this.clearObject(this._data[_loc2_]);
+               }
             }
-            return;
-        }
+         }
+      }
 
-        public function tryAddChanges(arg1:String, arg2:*):void
-        {
-            this.addChanges(this._data, arg1, arg2);
-            return;
-        }
+      public function tryAddChanges(param1:String, param2:*) : void {
+         this.addChanges(this._data,param1,param2);
+      }
 
-        internal function addChanges(arg1:Object, arg2:String, arg3:*):void
-        {
-            var loc1:*=null;
-            if (arg1.hasOwnProperty(arg2)) 
+      private function addChanges(param1:Object, param2:String, param3:*) : void {
+         var _loc4_:String = null;
+         if(!param1.hasOwnProperty(param2))
+         {
+            this._len++;
+            param1[param2] = param3;
+         }
+         else
+         {
+            if(!(param3  is  String) && !(param3  is  Number) && !(param3  is  Boolean))
             {
-                if (!(arg3 is String) && !(arg3 is Number) && !(arg3 is Boolean)) 
-                {
-                    loc2 = 0;
-                    loc3 = arg3;
-                    for (loc1 in loc3) 
-                    {
-                        this.addChanges(arg1[arg2], loc1, arg3[loc1]);
-                    }
-                }
-                else 
-                {
-                    arg1[arg2] = arg3;
-                }
+               for (_loc4_ in param3)
+               {
+                  this.addChanges(param1[param2],_loc4_,param3[_loc4_]);
+               }
             }
-            else 
+            else
             {
-                var loc2:*;
-                var loc3:*=((loc2 = this)._len + 1);
-                loc2._len = loc3;
-                arg1[arg2] = arg3;
+               param1[param2] = param3;
             }
-            return;
-        }
+         }
+      }
 
-        public function tryCutChanges(arg1:String, arg2:*):void
-        {
-            this.cutChanges(this._data, arg1, arg2);
-            return;
-        }
+      public function tryCutChanges(param1:String, param2:*) : void {
+         this.cutChanges(this._data,param1,param2);
+      }
 
-        internal function cutChanges(arg1:Object, arg2:String, arg3:*):Boolean
-        {
-            var loc1:*=null;
-            var loc2:*=false;
-            var loc3:*=0;
-            var loc4:*=null;
-            if (arg1.hasOwnProperty(arg2)) 
+      private function cutChanges(param1:Object, param2:String, param3:*) : Boolean {
+         var _loc4_:String = null;
+         var _loc5_:* = false;
+         var _loc6_:uint = 0;
+         var _loc7_:String = null;
+         if(param1.hasOwnProperty(param2))
+         {
+            if(!(param3  is  String) && !(param3  is  Number) && !(param3  is  Boolean))
             {
-                if (!(arg3 is String) && !(arg3 is Number) && !(arg3 is Boolean)) 
-                {
-                    var loc5:*=0;
-                    var loc6:*=arg3;
-                    for (loc1 in loc6) 
-                    {
-                        if (!(loc2 = this.cutChanges(arg1[arg2], loc1, arg3[loc1]))) 
-                        {
-                            continue;
-                        }
-                        loc3 = 0;
-                        var loc7:*=0;
-                        var loc8:*=arg1[arg2];
-                        for (loc4 in loc8) 
-                        {
-                            ++loc3;
-                        }
-                        if (loc3 != 0) 
-                        {
-                            continue;
-                        }
-                        delete arg1[arg2];
+               for (_loc4_ in param3)
+               {
+                  _loc5_ = this.cutChanges(param1[param2],_loc4_,param3[_loc4_]);
+                  if(_loc5_)
+                  {
+                     _loc6_ = 0;
+                     for (_loc7_ in param1[param2])
+                     {
+                        _loc6_++;
+                     }
+                     if(_loc6_ == 0)
+                     {
+                        delete param1[[param2]];
                         return true;
-                    }
-                    return false;
-                }
-                loc6 = ((loc5 = this)._len - 1);
-                loc5._len = loc6;
-                delete arg1[arg2];
-                return true;
+                     }
+                  }
+               }
+               return false;
             }
-            return false;
-        }
+            this._len--;
+            delete param1[[param2]];
+            return true;
+         }
+         return false;
+      }
 
-        public function get length():uint
-        {
-            return this._len;
-        }
+      public function get length() : uint {
+         return this._len;
+      }
 
-        public function getChanges():Object
-        {
-            return this._data;
-        }
+      public function getChanges() : Object {
+         return this._data;
+      }
 
-        public function debug():void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            trace(" ");
-            trace(" ");
-            trace("//////////////////////////////////////////////////////////////");
-            trace("------------------------------------SettingsChangesMap: ", this.length);
-            var loc3:*=0;
-            var loc4:*=this._data;
-            for (loc1 in loc4) 
+      public function debug() : void {
+         var _loc1_:String = null;
+         var _loc2_:String = null;
+         trace(" ");
+         trace(" ");
+         trace("//////////////////////////////////////////////////////////////");
+         trace("------------------------------------SettingsChangesMap: ",this.length);
+         for (_loc1_ in this._data)
+         {
+            trace("SettingsChangesMap:",_loc1_,this._data[_loc1_]);
+            for (_loc2_ in this._data[_loc1_])
             {
-                trace("SettingsChangesMap:", loc1, this._data[loc1]);
-                var loc5:*=0;
-                var loc6:*=this._data[loc1];
-                for (loc2 in loc6) 
-                {
-                    trace("------", loc2, this._data[loc1][loc2]);
-                }
+               trace("------",_loc2_,this._data[_loc1_][_loc2_]);
             }
-            trace("**************************************************************");
-            return;
-        }
+         }
+         trace("**************************************************************");
+      }
+   }
 
-        internal var _data:Object;
-
-        internal var _len:uint;
-    }
 }

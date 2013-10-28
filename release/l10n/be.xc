@@ -76,6 +76,8 @@
     // Squad
     "Vehicle": "Танк",
     "Battle tiers": "Узровень баёў",
+    "Type": "Тып",
+    "Nation": "Нацыя",
     "ussr": "СССР",
     "germany": "Нямеччына",
     "usa": "США",

@@ -1,37 +1,34 @@
-package net.wg.gui.components.common.waiting 
+package net.wg.gui.components.common.waiting
 {
-    import flash.text.*;
-    import scaleform.clik.core.*;
-    
-    public class WaitingMc extends scaleform.clik.core.UIComponent
-    {
-        public function WaitingMc()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.text.TextField;
 
-        public function setMessage(arg1:String):void
-        {
-            this._text = arg1;
-            invalidate(TEXT_INVALID);
-            return;
-        }
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(TEXT_INVALID)) 
-            {
-                this.textField.text = this._text;
-            }
-            return;
-        }
+   public class WaitingMc extends UIComponent
+   {
+          
+      public function WaitingMc() {
+         super();
+      }
 
-        public static const TEXT_INVALID:String="textInv";
+      public static const TEXT_INVALID:String = "textInv";
 
-        internal var _text:String="";
+      private var _text:String = "";
 
-        public var textField:flash.text.TextField;
-    }
+      public var textField:TextField;
+
+      public function setMessage(param1:String) : void {
+         this._text = param1;
+         invalidate(TEXT_INVALID);
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         if(isInvalid(TEXT_INVALID))
+         {
+            this.textField.text = this._text;
+         }
+      }
+   }
+
 }

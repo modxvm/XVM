@@ -1,156 +1,144 @@
-package net.wg.gui.lobby.window 
+package net.wg.gui.lobby.window
 {
-    import flash.display.*;
-    import flash.text.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.utils.*;
-    import scaleform.clik.core.*;
-    
-    public class ExchangeHeader extends scaleform.clik.core.UIComponent
-    {
-        public function ExchangeHeader()
-        {
-            this.infoContainer = new flash.display.Sprite();
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import net.wg.gui.components.controls.IconText;
+   import flash.display.MovieClip;
+   import flash.text.TextField;
+   import flash.display.Sprite;
+   import flash.text.TextFieldAutoSize;
+   import net.wg.utils.ILocale;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.rateLabel.autoSize = flash.text.TextFieldAutoSize.LEFT;
-            this.rateLabel.text = App.utils.locale.makeString(MENU.EXCHANGE_RATE);
-            var loc1:*;
-            this.rate_part_1.textField.autoSize = loc1 = flash.text.TextFieldAutoSize.LEFT;
-            this.rate_part_2.textField.autoSize = loc1;
-            this.rate_part_1.text = "1";
-            this.rate_part_1.validateNow();
-            this.infoContainer.addChild(this.rateLabel);
-            this.infoContainer.addChild(this.rate_part_1);
-            this.infoContainer.addChild(this.sign_mc);
-            this.infoContainer.addChild(this.rate_part_2);
-            this.isLayoutChanged = true;
-            addChild(this.infoContainer);
-            return;
-        }
 
-        protected override function draw():void
-        {
-            var loc1:*=false;
-            var loc2:*=NaN;
-            var loc3:*=NaN;
-            super.draw();
-            if (this.isRatesDataChanged) 
-            {
-                this.isRatesDataChanged = false;
-                loc1 = !(this.rate == this.actionRate) && !(this.actionRate == 0);
-                var loc4:*;
-                this.rate_part_2.filters = loc4 = null;
-                this.rate_part_1.filters = loc4;
-                this.rate_part_1.filters = net.wg.gui.lobby.window.ExchangeUtils.getGlow(this.rate_part_1.icon);
-                this.rate_part_2.filters = net.wg.gui.lobby.window.ExchangeUtils.getGlow(this.rate_part_2.icon);
-                loc2 = 100 * (this.actionRate - this.rate) / this.rate;
-                DebugUtils.LOG_DEBUG(loc2, this.actionRate, this.rate);
-                this.discountMc.text = (loc2 >= 0 ? "+" : "-") + Math.round(Math.abs(loc2)) + "%";
-                this.actualRate = loc1 ? this.actionRate : this.rate;
-                this.discountMc.visible = loc1;
-                this.action_decor.visible = loc1;
-                this.usual_decor.visible = !loc1;
-                this.sign_mc.gotoAndStop(loc1 ? 2 : 1);
-                this.isApplyRates = true;
-                this.isLayoutChanged = true;
-            }
-            if (this.isApplyRates) 
-            {
-                this.isApplyRates = false;
-                this.applyRateText();
-                this.isLayoutChanged = true;
-            }
-            if (this.isLayoutChanged) 
-            {
-                this.isLayoutChanged = false;
-                this.rate_part_1.x = Math.round(this.rateLabel.width + CENTER_PADDING);
-                this.sign_mc.x = Math.round(this.rate_part_1.x + this.rate_part_1.actualWidth + EQUALS_SIGN_PADDING);
-                this.rate_part_2.x = Math.round(this.sign_mc.x + this.sign_mc.width + EQUALS_SIGN_PADDING);
-                loc3 = this.rate_part_2.x + this.rate_part_2.actualWidth;
-                this.infoContainer.x = width - loc3 >> 1;
-                if (loc1) 
-                {
-                    this.infoContainer.x = this.infoContainer.x + ACTION_CENTER_OFFSET;
-                    this.discountMc.x = this.infoContainer.x + loc3 + DISCOUNT_MC_PADDING;
-                }
-            }
-            return;
-        }
+   public class ExchangeHeader extends UIComponent
+   {
+          
+      public function ExchangeHeader() {
+         this.infoContainer = new Sprite();
+         super();
+      }
 
-        internal function applyRateText():void
-        {
-            var loc1:*=App.utils.locale;
-            if (this._rateLabelFunction == null) 
-            {
-                this.rate_part_2.text = loc1.gold(this.actualRate);
-            }
-            else 
-            {
-                this.rate_part_2.text = this._rateLabelFunction(this.actualRate);
-            }
-            this.rate_part_2.validateNow();
-            return;
-        }
+      private static const CENTER_PADDING:uint = 20;
 
-        public function setRates(arg1:uint, arg2:uint):void
-        {
-            this.actionRate = arg2;
-            this.rate = arg1;
-            this.isRatesDataChanged = true;
-            invalidate();
-            return;
-        }
+      private static const ACTION_CENTER_OFFSET:int = -8;
 
-        public function set rateLabelFunction(arg1:Function):void
-        {
-            this._rateLabelFunction = arg1;
+      private static const EQUALS_SIGN_PADDING:int = -2;
+
+      private static const DISCOUNT_MC_PADDING:int = -5;
+
+      public var rate_part_1:IconText;
+
+      public var rate_part_2:IconText;
+
+      public var sign_mc:MovieClip;
+
+      public var rateLabel:TextField;
+
+      public var action_decor:MovieClip;
+
+      public var usual_decor:MovieClip;
+
+      public var discountMc:DiscountMC;
+
+      private var actionRate:uint;
+
+      private var rate:uint;
+
+      private var isRatesDataChanged:Boolean;
+
+      private var isApplyRates:Boolean;
+
+      private var _rateLabelFunction:Function;
+
+      private var actualRate:uint;
+
+      private var infoContainer:Sprite;
+
+      private var isLayoutChanged:Boolean;
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.rateLabel.autoSize = TextFieldAutoSize.LEFT;
+         this.rateLabel.text = App.utils.locale.makeString(MENU.EXCHANGE_RATE);
+         this.rate_part_2.textField.autoSize = this.rate_part_1.textField.autoSize = TextFieldAutoSize.LEFT;
+         this.rate_part_1.text = "1";
+         this.rate_part_1.validateNow();
+         this.infoContainer.addChild(this.rateLabel);
+         this.infoContainer.addChild(this.rate_part_1);
+         this.infoContainer.addChild(this.sign_mc);
+         this.infoContainer.addChild(this.rate_part_2);
+         this.isLayoutChanged = true;
+         addChild(this.infoContainer);
+      }
+
+      override protected function draw() : void {
+         var _loc1_:* = false;
+         var _loc2_:* = NaN;
+         var _loc3_:* = NaN;
+         super.draw();
+         if(this.isRatesDataChanged)
+         {
+            this.isRatesDataChanged = false;
+            _loc1_ = !(this.rate == this.actionRate) && !(this.actionRate == 0);
+            this.rate_part_1.filters = this.rate_part_2.filters = null;
+            this.rate_part_1.filters = ExchangeUtils.getGlow(this.rate_part_1.icon);
+            this.rate_part_2.filters = ExchangeUtils.getGlow(this.rate_part_2.icon);
+            _loc2_ = 100 * (this.actionRate - this.rate) / this.rate;
+            this.discountMc.text = (_loc2_ >= 0?"+":"-") + Math.round(Math.abs(_loc2_)) + "%";
+            this.actualRate = _loc1_?this.actionRate:this.rate;
+            this.discountMc.visible = _loc1_;
+            this.action_decor.visible = _loc1_;
+            this.usual_decor.visible = !_loc1_;
+            this.sign_mc.gotoAndStop(_loc1_?2:1);
             this.isApplyRates = true;
-            invalidate();
-            return;
-        }
+            this.isLayoutChanged = true;
+         }
+         if(this.isApplyRates)
+         {
+            this.isApplyRates = false;
+            this.applyRateText();
+            this.isLayoutChanged = true;
+         }
+         if(this.isLayoutChanged)
+         {
+            this.isLayoutChanged = false;
+            this.rate_part_1.x = Math.round(this.rateLabel.width + CENTER_PADDING);
+            this.sign_mc.x = Math.round(this.rate_part_1.x + this.rate_part_1.actualWidth + EQUALS_SIGN_PADDING);
+            this.rate_part_2.x = Math.round(this.sign_mc.x + this.sign_mc.width + EQUALS_SIGN_PADDING);
+            _loc3_ = this.rate_part_2.x + this.rate_part_2.actualWidth;
+            this.infoContainer.x = width - _loc3_ >> 1;
+            if(_loc1_)
+            {
+               this.infoContainer.x = this.infoContainer.x + ACTION_CENTER_OFFSET;
+               this.discountMc.x = this.infoContainer.x + _loc3_ + DISCOUNT_MC_PADDING;
+            }
+         }
+      }
 
-        internal static const CENTER_PADDING:uint=20;
+      private function applyRateText() : void {
+         var _loc1_:ILocale = App.utils.locale;
+         if(this._rateLabelFunction != null)
+         {
+            this.rate_part_2.text = this._rateLabelFunction(this.actualRate);
+         }
+         else
+         {
+            this.rate_part_2.text = _loc1_.gold(this.actualRate);
+         }
+         this.rate_part_2.validateNow();
+      }
 
-        internal static const ACTION_CENTER_OFFSET:int=-8;
+      public function setRates(param1:uint, param2:uint) : void {
+         this.actionRate = param2;
+         this.rate = param1;
+         this.isRatesDataChanged = true;
+         invalidate();
+      }
 
-        internal static const EQUALS_SIGN_PADDING:int=-2;
+      public function set rateLabelFunction(param1:Function) : void {
+         this._rateLabelFunction = param1;
+         this.isApplyRates = true;
+         invalidate();
+      }
+   }
 
-        internal static const DISCOUNT_MC_PADDING:int=-5;
-
-        public var rate_part_1:net.wg.gui.components.controls.IconText;
-
-        public var rate_part_2:net.wg.gui.components.controls.IconText;
-
-        public var sign_mc:flash.display.MovieClip;
-
-        public var rateLabel:flash.text.TextField;
-
-        public var action_decor:flash.display.MovieClip;
-
-        public var usual_decor:flash.display.MovieClip;
-
-        public var discountMc:net.wg.gui.lobby.window.DiscountMC;
-
-        internal var actionRate:uint;
-
-        internal var rate:uint;
-
-        internal var isRatesDataChanged:Boolean;
-
-        internal var isApplyRates:Boolean;
-
-        internal var _rateLabelFunction:Function;
-
-        internal var actualRate:uint;
-
-        internal var infoContainer:flash.display.Sprite;
-
-        internal var isLayoutChanged:Boolean;
-    }
 }

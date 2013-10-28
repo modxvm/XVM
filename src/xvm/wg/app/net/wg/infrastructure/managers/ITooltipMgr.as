@@ -1,19 +1,23 @@
-package net.wg.infrastructure.managers 
+package net.wg.infrastructure.managers
 {
-    import net.wg.data.managers.*;
-    
-    public interface ITooltipMgr
-    {
-        function hide():void;
+   import net.wg.data.managers.ITooltipProps;
+   import net.wg.data.managers.IToolTipParams;
 
-        function showSpecial(arg1:String, arg2:net.wg.data.managers.ITooltipProps, ... rest):void;
 
-        function showComplex(arg1:String, arg2:net.wg.data.managers.ITooltipProps=null):void;
+   public interface ITooltipMgr
+   {
+          
+      function hide() : void;
 
-        function showComplexWithParams(arg1:String, arg2:net.wg.data.managers.IToolTipParams, arg3:net.wg.data.managers.ITooltipProps=null):void;
+      function showSpecial(param1:String, param2:ITooltipProps, ... rest) : void;
 
-        function show(arg1:String, arg2:net.wg.data.managers.ITooltipProps=null):void;
+      function showComplex(param1:String, param2:ITooltipProps=null) : void;
 
-        function showLocal(arg1:String, arg2:Object, arg3:net.wg.data.managers.ITooltipProps=null):void;
-    }
+      function showComplexWithParams(param1:String, param2:IToolTipParams, param3:ITooltipProps=null) : void;
+
+      function show(param1:String, param2:ITooltipProps=null) : void;
+
+      function showLocal(param1:String, param2:Object, param3:ITooltipProps=null) : void;
+   }
+
 }

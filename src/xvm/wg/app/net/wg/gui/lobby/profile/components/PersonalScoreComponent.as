@@ -1,90 +1,74 @@
-package net.wg.gui.lobby.profile.components 
+package net.wg.gui.lobby.profile.components
 {
-    import flash.display.*;
-    import flash.events.*;
-    import flash.text.*;
-    import net.wg.data.constants.*;
-    
-    public class PersonalScoreComponent extends flash.display.Sprite
-    {
-        public function PersonalScoreComponent()
-        {
-            super();
-            this.tooltipHitArea.addEventListener(flash.events.MouseEvent.ROLL_OVER, this.mouseRollOverHandler, false, 0, true);
-            this.tooltipHitArea.addEventListener(flash.events.MouseEvent.ROLL_OUT, this.mouseRollOutHandler, false, 0, true);
-            return;
-        }
+   import flash.display.Sprite;
+   import flash.display.MovieClip;
+   import flash.text.TextField;
+   import flash.events.MouseEvent;
+   import net.wg.data.constants.Tooltips;
 
-        public function set description(arg1:String):void
-        {
-            this.tfPersonalScore.description = arg1;
-            this.tfPersonalScore.validateNow();
-            this.layout();
-            return;
-        }
 
-        public function set text(arg1:String):void
-        {
-            this.tfPersonalScore.visible = true;
-            this.tfWarning.visible = false;
-            this.tfPersonalScore.text = arg1;
-            this.tfPersonalScore.validateNow();
-            this.layout();
-            return;
-        }
+   public class PersonalScoreComponent extends Sprite
+   {
+          
+      public function PersonalScoreComponent() {
+         super();
+         this.tooltipHitArea.addEventListener(MouseEvent.ROLL_OVER,this.mouseRollOverHandler,false,0,true);
+         this.tooltipHitArea.addEventListener(MouseEvent.ROLL_OUT,this.mouseRollOutHandler,false,0,true);
+      }
 
-        public function showWarning(arg1:String):void
-        {
-            this.tfPersonalScore.visible = false;
-            this.tfWarning.visible = true;
-            this.tfWarning.visible = true;
-            this.tfWarning.htmlText = arg1;
-            return;
-        }
+      private static function hideToolTip() : void {
+         App.toolTipMgr.hide();
+      }
 
-        internal function layout():void
-        {
-            this.tfPersonalScore.x = -this.tfPersonalScore.actualWidth >> 1;
-            return;
-        }
+      public var tfPersonalScore:CenteredLineIconText;
 
-        internal function disposeHandlers():void
-        {
-            this.tooltipHitArea.removeEventListener(flash.events.MouseEvent.ROLL_OVER, this.mouseRollOverHandler);
-            this.tooltipHitArea.removeEventListener(flash.events.MouseEvent.ROLL_OUT, this.mouseRollOutHandler);
-            return;
-        }
+      public var background:MovieClip;
 
-        protected function mouseRollOutHandler(arg1:flash.events.MouseEvent):void
-        {
-            hideToolTip();
-            return;
-        }
+      public var tooltipHitArea:MovieClip;
 
-        protected function mouseRollOverHandler(arg1:flash.events.MouseEvent):void
-        {
-            this.showToolTip();
-            return;
-        }
+      public var tfWarning:TextField;
 
-        protected function showToolTip():void
-        {
-            App.toolTipMgr.showSpecial(net.wg.data.constants.Tooltips.GLOBAL_RATING, null);
-            return;
-        }
+      public function set description(param1:String) : void {
+         this.tfPersonalScore.description = param1;
+         this.tfPersonalScore.validateNow();
+         this.layout();
+      }
 
-        internal static function hideToolTip():void
-        {
-            App.toolTipMgr.hide();
-            return;
-        }
+      public function set text(param1:String) : void {
+         this.tfPersonalScore.visible = true;
+         this.tfWarning.visible = false;
+         this.tfPersonalScore.text = param1;
+         this.tfPersonalScore.validateNow();
+         this.layout();
+      }
 
-        public var tfPersonalScore:net.wg.gui.lobby.profile.components.CenteredLineIconText;
+      public function showWarning(param1:String) : void {
+         this.tfPersonalScore.visible = false;
+         this.tfWarning.visible = true;
+         this.tfWarning.visible = true;
+         this.tfWarning.htmlText = param1;
+      }
 
-        public var background:flash.display.MovieClip;
+      private function layout() : void {
+         this.tfPersonalScore.x = -this.tfPersonalScore.actualWidth >> 1;
+      }
 
-        public var tooltipHitArea:flash.display.MovieClip;
+      private function disposeHandlers() : void {
+         this.tooltipHitArea.removeEventListener(MouseEvent.ROLL_OVER,this.mouseRollOverHandler);
+         this.tooltipHitArea.removeEventListener(MouseEvent.ROLL_OUT,this.mouseRollOutHandler);
+      }
 
-        public var tfWarning:flash.text.TextField;
-    }
+      protected function mouseRollOutHandler(param1:MouseEvent) : void {
+         hideToolTip();
+      }
+
+      protected function mouseRollOverHandler(param1:MouseEvent) : void {
+         this.showToolTip();
+      }
+
+      protected function showToolTip() : void {
+         App.toolTipMgr.showSpecial(Tooltips.GLOBAL_RATING,null);
+      }
+   }
+
 }

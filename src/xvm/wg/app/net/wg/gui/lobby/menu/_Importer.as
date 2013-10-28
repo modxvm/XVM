@@ -1,15 +1,15 @@
-package net.wg.gui.lobby.menu 
+package net.wg.gui.lobby.menu
 {
-    import __AS3__.vec.*;
-    import net.wg.infrastructure.*;
-    
-    public class _Importer extends net.wg.infrastructure.BaseImporter
-    {
-        public function _Importer()
-        {
-            super();
-            importClasses(Vector.<Class>([net.wg.gui.lobby.menu.LobbyMenuForm, net.wg.gui.lobby.menu.LobbyMenu]));
-            return;
-        }
-    }
+   import net.wg.infrastructure.BaseImporter;
+
+
+   public class _Importer extends BaseImporter
+   {
+          
+      public function _Importer() {
+         super();
+         importClasses(Vector.<Class>([LobbyMenuForm,LobbyMenu]));
+      }
+   }
+
 }

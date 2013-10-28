@@ -1,15 +1,18 @@
-package net.wg.gui.tutorial.meta 
+package net.wg.gui.tutorial.meta
 {
-    import flash.events.*;
-    
-    public interface ITutorialDialogMeta extends flash.events.IEventDispatcher
-    {
-        function submitS():void;
+   import flash.events.IEventDispatcher;
 
-        function cancelS():void;
 
-        function as_setContent(arg1:Object):void;
+   public interface ITutorialDialogMeta extends IEventDispatcher
+   {
+          
+      function submitS() : void;
 
-        function as_updateContent(arg1:Object):void;
-    }
+      function cancelS() : void;
+
+      function as_setContent(param1:Object) : void;
+
+      function as_updateContent(param1:Object) : void;
+   }
+
 }

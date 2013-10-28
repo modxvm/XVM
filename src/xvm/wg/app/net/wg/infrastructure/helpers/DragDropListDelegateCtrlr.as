@@ -1,124 +1,105 @@
-package net.wg.infrastructure.helpers 
+package net.wg.infrastructure.helpers
 {
-    import __AS3__.vec.*;
-    import flash.display.*;
-    import flash.events.*;
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.events.*;
-    import net.wg.infrastructure.exceptions.*;
-    import net.wg.infrastructure.interfaces.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    
-    public class DragDropListDelegateCtrlr extends Object implements net.wg.infrastructure.interfaces.entity.IDisposable
-    {
-        public function DragDropListDelegateCtrlr(arg1:__AS3__.vec.Vector.<flash.display.InteractiveObject>, arg2:Class, arg3:String)
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            super();
-            if (App.instance) 
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import __AS3__.vec.Vector;
+   import net.wg.infrastructure.interfaces.IDragDropListDelegate;
+   import flash.display.InteractiveObject;
+   import flash.events.IEventDispatcher;
+   import net.wg.infrastructure.events.DragDropEvent;
+   import net.wg.data.constants.Values;
+   import net.wg.infrastructure.exceptions.ArgumentException;
+   import net.wg.data.constants.Errors;
+   import net.wg.data.constants.Cursors;
+
+
+   public class DragDropListDelegateCtrlr extends Object implements IDisposable
+   {
+          
+      public function DragDropListDelegateCtrlr(param1:Vector.<InteractiveObject>, param2:Class, param3:String) {
+         var _loc4_:InteractiveObject = null;
+         var _loc5_:IDragDropListDelegate = null;
+         super();
+         if(App.instance)
+         {
+            this.assertLinkage(param3);
+            this._delegates = new Vector.<IDragDropListDelegate>();
+            for each (_loc4_ in param1)
             {
-                this.assertLinkage(arg3);
-                this._delegates = new Vector.<net.wg.infrastructure.interfaces.IDragDropListDelegate>();
-                var loc3:*=0;
-                var loc4:*=arg1;
-                for each (loc1 in loc4) 
-                {
-                    (loc2 = new arg2(loc1, arg3)).setPairedDropLists(this.getPairedElementsFromVector(loc1, arg1));
-                    this._delegates.push(loc2);
-                    App.cursor.registerDragging(loc2, net.wg.data.constants.Cursors.DRAG_CLOSE);
-                    loc1.addEventListener(net.wg.infrastructure.events.DragDropEvent.BEFORE_DROP, this.onControllerBeforeDropHandler);
-                    loc1.addEventListener(net.wg.infrastructure.events.DragDropEvent.START_DROP, this.onControllerStartDropHandler);
-                    loc1.addEventListener(net.wg.infrastructure.events.DragDropEvent.AFTER_DROP, this.onControllerAfterDropHandler);
-                }
+               _loc5_ = new param2(_loc4_,param3);
+               _loc5_.setPairedDropLists(this.getPairedElementsFromVector(_loc4_,param1));
+               this._delegates.push(_loc5_);
+               App.cursor.registerDragging(_loc5_,Cursors.DRAG_CLOSE);
+               _loc4_.addEventListener(DragDropEvent.BEFORE_DROP,this.onControllerBeforeDropHandler);
+               _loc4_.addEventListener(DragDropEvent.START_DROP,this.onControllerStartDropHandler);
+               _loc4_.addEventListener(DragDropEvent.AFTER_DROP,this.onControllerAfterDropHandler);
             }
-            return;
-        }
+         }
+      }
 
-        public function dispose():void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            var loc3:*=0;
-            var loc4:*=this._delegates;
-            for each (loc1 in loc4) 
-            {
-                loc2 = loc1.getHitArea();
-                loc2.removeEventListener(net.wg.infrastructure.events.DragDropEvent.BEFORE_DROP, this.onControllerBeforeDropHandler);
-                loc2.removeEventListener(net.wg.infrastructure.events.DragDropEvent.START_DROP, this.onControllerStartDropHandler);
-                loc2.removeEventListener(net.wg.infrastructure.events.DragDropEvent.AFTER_DROP, this.onControllerAfterDropHandler);
-                App.cursor.unRegisterDragging(loc1);
-                loc1.dispose();
-            }
-            this._currentDroppedItem = null;
-            this._delegates.splice(0, this._delegates.length);
-            this._delegates = null;
-            return;
-        }
+      protected var _delegates:Vector.<IDragDropListDelegate> = null;
 
-        protected function onHighlightHitAreas(arg1:Boolean, arg2:flash.display.InteractiveObject):void
-        {
-            return;
-        }
+      private var _currentDroppedItem:InteractiveObject = null;
 
-        protected final function getDelegates():__AS3__.vec.Vector.<net.wg.infrastructure.interfaces.IDragDropListDelegate>
-        {
-            return this._delegates;
-        }
+      public function dispose() : void {
+         var _loc1_:IDragDropListDelegate = null;
+         var _loc2_:IEventDispatcher = null;
+         for each (_loc1_ in this._delegates)
+         {
+            _loc2_ = _loc1_.getHitArea();
+            _loc2_.removeEventListener(DragDropEvent.BEFORE_DROP,this.onControllerBeforeDropHandler);
+            _loc2_.removeEventListener(DragDropEvent.START_DROP,this.onControllerStartDropHandler);
+            _loc2_.removeEventListener(DragDropEvent.AFTER_DROP,this.onControllerAfterDropHandler);
+            App.cursor.unRegisterDragging(_loc1_);
+            _loc1_.dispose();
+         }
+         this._currentDroppedItem = null;
+         this._delegates.splice(0,this._delegates.length);
+         this._delegates = null;
+      }
 
-        internal function getPairedElementsFromVector(arg1:flash.display.InteractiveObject, arg2:__AS3__.vec.Vector.<flash.display.InteractiveObject>):__AS3__.vec.Vector.<flash.display.InteractiveObject>
-        {
-            var pairsFor:flash.display.InteractiveObject;
-            var vector:__AS3__.vec.Vector.<flash.display.InteractiveObject>;
-            var checker:Function;
+      protected function onHighlightHitAreas(param1:Boolean, param2:InteractiveObject) : void {
+          
+      }
 
-            var loc1:*;
-            checker = null;
-            pairsFor = arg1;
-            vector = arg2;
-            checker = function (arg1:flash.display.InteractiveObject, arg2:int, arg3:__AS3__.vec.Vector.<flash.display.InteractiveObject>):Boolean
-            {
-                return !(arg1 == pairsFor);
-            }
-            return vector.filter(checker, null);
-        }
+      protected final function getDelegates() : Vector.<IDragDropListDelegate> {
+         return this._delegates;
+      }
 
-        internal function onControllerBeforeDropHandler(arg1:net.wg.infrastructure.events.DragDropEvent):void
-        {
-            this._currentDroppedItem = arg1.draggedItem;
-            this.onHighlightHitAreas(true, this._currentDroppedItem);
-            return;
-        }
+      protected function getPairedElementsFromVector(param1:InteractiveObject, param2:Vector.<InteractiveObject>) : Vector.<InteractiveObject> {
+         var checker:Function = null;
+         var pairsFor:InteractiveObject = param1;
+         var vector:Vector.<InteractiveObject> = param2;
+         checker = function(param1:InteractiveObject, param2:int, param3:Vector.<InteractiveObject>):Boolean
+         {
+            return !(param1 == pairsFor);
+         };
+         return vector.filter(checker,null);
+      }
 
-        internal function onControllerAfterDropHandler(arg1:net.wg.infrastructure.events.DragDropEvent):void
-        {
-            this.assertNotNull(this._currentDroppedItem, "_currentDroppedItem");
-            this.onHighlightHitAreas(false, this._currentDroppedItem);
-            this._currentDroppedItem = null;
-            return;
-        }
+      private function onControllerBeforeDropHandler(param1:DragDropEvent) : void {
+         this._currentDroppedItem = param1.draggedItem;
+         this.onHighlightHitAreas(true,this._currentDroppedItem);
+      }
 
-        internal function onControllerStartDropHandler(arg1:net.wg.infrastructure.events.DragDropEvent):void
-        {
-            return;
-        }
+      private function onControllerAfterDropHandler(param1:DragDropEvent) : void {
+         this.assertNotNull(this._currentDroppedItem,"_currentDroppedItem");
+         this.onHighlightHitAreas(false,this._currentDroppedItem);
+         this._currentDroppedItem = null;
+      }
 
-        internal function assertLinkage(arg1:String):void
-        {
-            var loc1:*="dropElementLinkage must has correct linkage value!";
-            App.utils.asserter.assert(!(arg1 == net.wg.data.constants.Values.EMPTY_STR), loc1, net.wg.infrastructure.exceptions.ArgumentException);
-            this.assertNotNull(arg1, "linkage");
-            return;
-        }
+      private function onControllerStartDropHandler(param1:DragDropEvent) : void {
+          
+      }
 
-        internal function assertNotNull(arg1:Object, arg2:String):void
-        {
-            App.utils.asserter.assertNotNull(arg1, arg2 + net.wg.data.constants.Errors.CANT_EMPTY);
-            return;
-        }
+      private function assertLinkage(param1:String) : void {
+         var _loc2_:* = "dropElementLinkage must has correct linkage value!";
+         App.utils.asserter.assert(!(param1 == Values.EMPTY_STR),_loc2_,ArgumentException);
+         this.assertNotNull(param1,"linkage");
+      }
 
-        protected var _delegates:__AS3__.vec.Vector.<net.wg.infrastructure.interfaces.IDragDropListDelegate>=null;
+      private function assertNotNull(param1:Object, param2:String) : void {
+         App.utils.asserter.assertNotNull(param1,param2 + Errors.CANT_EMPTY);
+      }
+   }
 
-        internal var _currentDroppedItem:flash.display.InteractiveObject=null;
-    }
 }

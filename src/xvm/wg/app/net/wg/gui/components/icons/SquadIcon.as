@@ -1,42 +1,43 @@
-package net.wg.gui.components.icons 
+package net.wg.gui.components.icons
 {
-    import flash.display.*;
-    import flash.text.*;
-    
-    public class SquadIcon extends flash.display.MovieClip
-    {
-        public function SquadIcon()
-        {
-            super();
-            stop();
-            return;
-        }
+   import flash.display.MovieClip;
+   import flash.text.TextField;
 
-        public function setSquad(arg1:Number):void
-        {
-            if (arg1 > 10) 
-            {
-                this.numTf.text = String(arg1 - 10);
-                gotoAndStop("gold");
-            }
-            else if (arg1 > 0) 
-            {
-                this.numTf.text = String(arg1);
-                gotoAndStop("silver");
-            }
-            else 
-            {
-                this.numTf.text = "";
-                gotoAndStop("empty");
-            }
-            return;
-        }
 
-        public override function toString():String
-        {
-            return "[WG SquadIcon " + name + "]";
-        }
+   public class SquadIcon extends MovieClip
+   {
+          
+      public function SquadIcon() {
+         super();
+         stop();
+      }
 
-        public var numTf:flash.text.TextField;
-    }
+      public var numTf:TextField;
+
+      public function setSquad(param1:Number) : void {
+         if(param1 > 10)
+         {
+            this.numTf.text = String(param1 - 10);
+            gotoAndStop("gold");
+         }
+         else
+         {
+            if(param1 > 0)
+            {
+               this.numTf.text = String(param1);
+               gotoAndStop("silver");
+            }
+            else
+            {
+               this.numTf.text = "";
+               gotoAndStop("empty");
+            }
+         }
+      }
+
+      override public function toString() : String {
+         return "[WG SquadIcon " + name + "]";
+      }
+   }
+
 }

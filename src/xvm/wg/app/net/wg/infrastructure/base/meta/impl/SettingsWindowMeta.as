@@ -1,92 +1,78 @@
-package net.wg.infrastructure.base.meta.impl 
+package net.wg.infrastructure.base.meta.impl
 {
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.base.*;
-    
-    public class SettingsWindowMeta extends net.wg.infrastructure.base.AbstractView
-    {
-        public function SettingsWindowMeta()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.AbstractView;
+   import net.wg.data.constants.Errors;
 
-        public function closeWindowS():void
-        {
-            App.utils.asserter.assertNotNull(this.closeWindow, "closeWindow" + net.wg.data.constants.Errors.CANT_NULL);
-            this.closeWindow();
-            return;
-        }
 
-        public function applySettingsS(arg1:Object, arg2:Boolean):void
-        {
-            App.utils.asserter.assertNotNull(this.applySettings, "applySettings" + net.wg.data.constants.Errors.CANT_NULL);
-            this.applySettings(arg1, arg2);
-            return;
-        }
+   public class SettingsWindowMeta extends AbstractView
+   {
+          
+      public function SettingsWindowMeta() {
+         super();
+      }
 
-        public function autodetectQualityS():Number
-        {
-            App.utils.asserter.assertNotNull(this.autodetectQuality, "autodetectQuality" + net.wg.data.constants.Errors.CANT_NULL);
-            return this.autodetectQuality();
-        }
+      public var closeWindow:Function = null;
 
-        public function startVOIPTestS(arg1:Boolean):Boolean
-        {
-            App.utils.asserter.assertNotNull(this.startVOIPTest, "startVOIPTest" + net.wg.data.constants.Errors.CANT_NULL);
-            return this.startVOIPTest(arg1);
-        }
+      public var applySettings:Function = null;
 
-        public function updateCaptureDevicesS():void
-        {
-            App.utils.asserter.assertNotNull(this.updateCaptureDevices, "updateCaptureDevices" + net.wg.data.constants.Errors.CANT_NULL);
-            this.updateCaptureDevices();
-            return;
-        }
+      public var autodetectQuality:Function = null;
 
-        public function onSettingsChangeS(arg1:String, arg2:Object):void
-        {
-            App.utils.asserter.assertNotNull(this.onSettingsChange, "onSettingsChange" + net.wg.data.constants.Errors.CANT_NULL);
-            this.onSettingsChange(arg1, arg2);
-            return;
-        }
+      public var startVOIPTest:Function = null;
 
-        public function altVoicesPreviewS():void
-        {
-            App.utils.asserter.assertNotNull(this.altVoicesPreview, "altVoicesPreview" + net.wg.data.constants.Errors.CANT_NULL);
-            this.altVoicesPreview();
-            return;
-        }
+      public var updateCaptureDevices:Function = null;
 
-        public function isSoundModeValidS():Boolean
-        {
-            App.utils.asserter.assertNotNull(this.isSoundModeValid, "isSoundModeValid" + net.wg.data.constants.Errors.CANT_NULL);
-            return this.isSoundModeValid();
-        }
+      public var onSettingsChange:Function = null;
 
-        public function showWarningDialogS(arg1:String, arg2:Object, arg3:Boolean):void
-        {
-            App.utils.asserter.assertNotNull(this.showWarningDialog, "showWarningDialog" + net.wg.data.constants.Errors.CANT_NULL);
-            this.showWarningDialog(arg1, arg2, arg3);
-            return;
-        }
+      public var altVoicesPreview:Function = null;
 
-        public var closeWindow:Function=null;
+      public var isSoundModeValid:Function = null;
 
-        public var applySettings:Function=null;
+      public var showWarningDialog:Function = null;
 
-        public var autodetectQuality:Function=null;
+      public function closeWindowS() : void {
+         App.utils.asserter.assertNotNull(this.closeWindow,"closeWindow" + Errors.CANT_NULL);
+         this.closeWindow();
+      }
 
-        public var startVOIPTest:Function=null;
+      public function applySettingsS(param1:Object, param2:Boolean) : void {
+         App.utils.asserter.assertNotNull(this.applySettings,"applySettings" + Errors.CANT_NULL);
+         this.applySettings(param1,param2);
+      }
 
-        public var updateCaptureDevices:Function=null;
+      public function autodetectQualityS() : Number {
+         App.utils.asserter.assertNotNull(this.autodetectQuality,"autodetectQuality" + Errors.CANT_NULL);
+         return this.autodetectQuality();
+      }
 
-        public var onSettingsChange:Function=null;
+      public function startVOIPTestS(param1:Boolean) : Boolean {
+         App.utils.asserter.assertNotNull(this.startVOIPTest,"startVOIPTest" + Errors.CANT_NULL);
+         return this.startVOIPTest(param1);
+      }
 
-        public var altVoicesPreview:Function=null;
+      public function updateCaptureDevicesS() : void {
+         App.utils.asserter.assertNotNull(this.updateCaptureDevices,"updateCaptureDevices" + Errors.CANT_NULL);
+         this.updateCaptureDevices();
+      }
 
-        public var isSoundModeValid:Function=null;
+      public function onSettingsChangeS(param1:String, param2:Object) : void {
+         App.utils.asserter.assertNotNull(this.onSettingsChange,"onSettingsChange" + Errors.CANT_NULL);
+         this.onSettingsChange(param1,param2);
+      }
 
-        public var showWarningDialog:Function=null;
-    }
+      public function altVoicesPreviewS() : void {
+         App.utils.asserter.assertNotNull(this.altVoicesPreview,"altVoicesPreview" + Errors.CANT_NULL);
+         this.altVoicesPreview();
+      }
+
+      public function isSoundModeValidS() : Boolean {
+         App.utils.asserter.assertNotNull(this.isSoundModeValid,"isSoundModeValid" + Errors.CANT_NULL);
+         return this.isSoundModeValid();
+      }
+
+      public function showWarningDialogS(param1:String, param2:Object, param3:Boolean) : void {
+         App.utils.asserter.assertNotNull(this.showWarningDialog,"showWarningDialog" + Errors.CANT_NULL);
+         this.showWarningDialog(param1,param2,param3);
+      }
+   }
+
 }

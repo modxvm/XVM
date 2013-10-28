@@ -1,27 +1,32 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IResearchMeta extends flash.events.IEventDispatcher
-    {
-        function requestNationDataS():Boolean;
+   import flash.events.IEventDispatcher;
 
-        function getResearchItemsDataS(arg1:Number, arg2:Boolean):Object;
 
-        function onResearchItemsDrawnS():void;
+   public interface IResearchMeta extends IEventDispatcher
+   {
+          
+      function requestNationDataS() : Boolean;
 
-        function request4InstallS(arg1:Number):void;
+      function getResearchItemsDataS(param1:Number, param2:Boolean) : Object;
 
-        function requestModuleInfoS(arg1:String):void;
+      function onResearchItemsDrawnS() : void;
 
-        function goToTechTreeS(arg1:String):void;
+      function request4InstallS(param1:Number) : void;
 
-        function exitFromResearchS():void;
+      function requestModuleInfoS(param1:String) : void;
 
-        function as_drawResearchItems(arg1:String, arg2:Number):void;
+      function goToTechTreeS(param1:String) : void;
 
-        function as_setFreeXP(arg1:Number):void;
+      function exitFromResearchS() : void;
 
-        function as_setInstalledItems(arg1:Array):void;
-    }
+      function as_drawResearchItems(param1:String, param2:Number) : void;
+
+      function as_setFreeXP(param1:Number) : void;
+
+      function as_setInstalledItems(param1:Array) : void;
+
+      function as_setWalletStatus(param1:Object) : void;
+   }
+
 }

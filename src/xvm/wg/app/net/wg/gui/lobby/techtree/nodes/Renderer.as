@@ -1,594 +1,513 @@
-package net.wg.gui.lobby.techtree.nodes 
+package net.wg.gui.lobby.techtree.nodes
 {
-    import __AS3__.vec.*;
-    import flash.display.*;
-    import flash.events.*;
-    import flash.geom.*;
-    import net.wg.data.constants.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.lobby.techtree.*;
-    import net.wg.gui.lobby.techtree.constants.*;
-    import net.wg.gui.lobby.techtree.controls.*;
-    import net.wg.gui.lobby.techtree.data.state.*;
-    import net.wg.gui.lobby.techtree.data.vo.*;
-    import net.wg.gui.lobby.techtree.interfaces.*;
-    import net.wg.gui.lobby.techtree.math.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.events.*;
-    import scaleform.gfx.*;
-    
-    public class Renderer extends net.wg.gui.components.controls.SoundListItemRenderer implements net.wg.gui.lobby.techtree.interfaces.IRenderer
-    {
-        public function Renderer()
-        {
-            scaleform.gfx.Extensions.enabled = true;
-            super();
+   import net.wg.gui.components.controls.SoundListItemRenderer;
+   import net.wg.gui.lobby.techtree.interfaces.IRenderer;
+   import net.wg.gui.lobby.techtree.data.vo.NodeData;
+   import net.wg.gui.lobby.techtree.math.MatrixPosition;
+   import net.wg.gui.lobby.techtree.data.state.StateProperties;
+   import net.wg.gui.lobby.techtree.interfaces.INodesContainer;
+   import flash.display.MovieClip;
+   import net.wg.gui.lobby.techtree.controls.ActionButton;
+   import flash.geom.Point;
+   import net.wg.gui.lobby.techtree.data.vo.NTDisplayInfo;
+   import net.wg.gui.lobby.techtree.constants.NodeState;
+   import net.wg.gui.lobby.techtree.constants.NamedLabels;
+   import net.wg.gui.lobby.techtree.MenuHandler;
+   import net.wg.gui.lobby.techtree.TechTreeEvent;
+   import net.wg.gui.lobby.techtree.constants.ColorIndex;
+   import net.wg.gui.lobby.techtree.constants.TTSoundID;
+   import scaleform.clik.constants.InvalidationType;
+   import __AS3__.vec.Vector;
+   import flash.display.DisplayObjectContainer;
+   import flash.display.DisplayObject;
+   import flash.events.MouseEvent;
+   import scaleform.clik.events.InputEvent;
+   import flash.events.EventPhase;
+   import scaleform.gfx.MouseEventEx;
+   import net.wg.gui.lobby.techtree.data.state.NodeStateCollection;
+   import scaleform.gfx.Extensions;
+
+
+   public class Renderer extends SoundListItemRenderer implements IRenderer
+   {
+          
+      public function Renderer() {
+         Extensions.enabled = true;
+         super();
+      }
+
+      public static const LINES_AND_ARROWS_NAME:String = "linesAndArrows";
+
+      protected var _valueObject:NodeData;
+
+      protected var _matrixPosition:MatrixPosition;
+
+      protected var stateProps:StateProperties;
+
+      protected var dataInited:Boolean;
+
+      protected var isDelegateEvents:Boolean = false;
+
+      protected var _container:INodesContainer = null;
+
+      protected var _entityType:uint = 0;
+
+      protected var _tooltipID:String = null;
+
+      protected var _doValidateNow:Boolean = false;
+
+      public var hit:MovieClip;
+
+      public var button:ActionButton;
+
+      public function get container() : INodesContainer {
+         return this._container;
+      }
+
+      public function set container(param1:INodesContainer) : void {
+         this._container = param1;
+      }
+
+      public function get matrixPosition() : MatrixPosition {
+         return this._matrixPosition;
+      }
+
+      public function setup(param1:uint, param2:NodeData, param3:uint=0, param4:MatrixPosition=null) : void {
+         var _loc6_:Point = null;
+         if(param3 != 0)
+         {
+            this._entityType = param3;
+         }
+         this._index = param1;
+         this._matrixPosition = param4;
+         if(this._valueObject == param2 || param2 == null)
+         {
             return;
-        }
-
-        protected override function draw():void
-        {
-            super.draw();
-            if (!_baseDisposed) 
+         }
+         this._valueObject = param2;
+         this.dataInited = true;
+         this.updateStatesProps();
+         setState(state);
+         var _loc5_:Object = this.getDisplayInfo();
+         if(!(_loc5_ == null) && _loc5_  is  NTDisplayInfo)
+         {
+            _loc6_ = (_loc5_ as NTDisplayInfo).position;
+            if(_loc6_ != null)
             {
-                if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
-                {
-                    if (this._valueObject == null) 
-                    {
-                        visible = false;
-                    }
-                    else 
-                    {
-                        visible = true;
-                        this.populateUI();
-                    }
-                }
+               this.setPosition(_loc6_);
             }
-            return;
-        }
+         }
+      }
 
-        protected function getMouseEnabledChildren():__AS3__.vec.Vector.<flash.display.DisplayObjectContainer>
-        {
-            var loc1:*=new Vector.<flash.display.DisplayObjectContainer>();
-            if (this.hit != null) 
-            {
-                loc1.push(this.hit);
-            }
-            if (this.button != null) 
-            {
-                loc1.push(this.button);
-            }
-            return loc1;
-        }
+      public function cleanUp() : void {
+         this.container = null;
+         if(this.button != null)
+         {
+            this.button.dispose();
+         }
+         if((this.isDelegateEvents) && !(this.hit == null))
+         {
+            this.removeEventsHandlers();
+         }
+         this.dataInited = false;
+         this._valueObject = null;
+         super.dispose();
+      }
 
-        protected function disableMouseChildren():void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            var loc3:*=this.getMouseEnabledChildren();
-            var loc4:*=0;
-            while (loc4 < numChildren) 
-            {
-                loc1 = getChildAt(loc4);
-                if (loc1 is flash.display.DisplayObjectContainer && loc3.indexOf(loc1) == -1) 
-                {
-                    loc2 = flash.display.DisplayObjectContainer(loc1);
-                    var loc5:*;
-                    loc2.mouseChildren = loc5 = false;
-                    loc2.mouseEnabled = loc5;
-                }
-                ++loc4;
-            }
-            return;
-        }
+      public function getEntityType() : uint {
+         return this._entityType;
+      }
 
-        protected function delegateEventsHandlers():void
-        {
-            mouseEnabled = false;
-            this.disableMouseChildren();
-            var loc1:*;
-            this.hit.mouseEnabled = loc1 = true;
-            this.hit.buttonMode = loc1;
-            this.hit.addEventListener(flash.events.MouseEvent.ROLL_OVER, this.handleMouseRollOver, false, 0, true);
-            this.hit.addEventListener(flash.events.MouseEvent.ROLL_OUT, this.handleMouseRollOut, false, 0, true);
-            this.hit.addEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.handleMousePress, false, 0, true);
-            this.hit.addEventListener(flash.events.MouseEvent.CLICK, this.handleMouseRelease, false, 0, true);
-            this.hit.addEventListener(flash.events.MouseEvent.DOUBLE_CLICK, this.handleMouseRelease, false, 0, true);
-            this.hit.addEventListener(scaleform.clik.events.InputEvent.INPUT, handleInput, false, 0, true);
-            return;
-        }
+      public function getID() : Number {
+         return this.dataInited?this._valueObject.id:0;
+      }
 
-        protected function removeEventsHandlers():void
-        {
-            this.hit.removeEventListener(flash.events.MouseEvent.ROLL_OVER, this.handleMouseRollOver, false);
-            this.hit.removeEventListener(flash.events.MouseEvent.ROLL_OUT, this.handleMouseRollOut, false);
-            this.hit.removeEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.handleMousePress, false);
-            this.hit.removeEventListener(flash.events.MouseEvent.CLICK, this.handleMouseRelease, false);
-            this.hit.removeEventListener(flash.events.MouseEvent.DOUBLE_CLICK, this.handleMouseRelease, false);
-            this.hit.removeEventListener(scaleform.clik.events.InputEvent.INPUT, handleInput, false);
-            return;
-        }
+      public function getItemName() : String {
+         return this.dataInited?this._valueObject.nameString:"";
+      }
 
-        protected override function updateAfterStateChange():void
-        {
-            if (this.isDelegateEvents) 
-            {
-                this.disableMouseChildren();
-            }
-            super.updateAfterStateChange();
-            return;
-        }
+      public function getItemType() : String {
+         return this.dataInited?this._valueObject.primaryClass.name:"";
+      }
 
-        protected override function handleMouseRollOver(arg1:flash.events.MouseEvent):void
-        {
-            if (App.soundMgr) 
-            {
-                App.soundMgr.playControlsSnd(net.wg.data.constants.SoundManagerStates.SND_OVER, soundId, soundType);
-            }
-            if (this._tooltipID && !(App.toolTipMgr == null)) 
-            {
-                App.toolTipMgr.showSpecial(this._tooltipID, null, this._valueObject, this._container == null ? null : this._container.getRootNode().getID());
-            }
-            super.handleMouseRollOver(arg1);
-            return;
-        }
+      public function getGraphicsName() : String {
+         return LINES_AND_ARROWS_NAME + this._entityType.toString() + _index.toString();
+      }
 
-        public function cleanUp():void
-        {
-            this.container = null;
-            if (this.button != null) 
-            {
-                this.button.dispose();
-            }
-            if (this.isDelegateEvents && !(this.hit == null)) 
-            {
-                this.removeEventsHandlers();
-            }
-            this.dataInited = false;
-            this._valueObject = null;
-            super.dispose();
-            return;
-        }
+      public function getLevel() : int {
+         return this.dataInited?this._valueObject.level:-1;
+      }
 
-        protected override function handleMouseRollOut(arg1:flash.events.MouseEvent):void
-        {
-            if (App.soundMgr) 
-            {
-                App.soundMgr.playControlsSnd(net.wg.data.constants.SoundManagerStates.SND_OUT, soundId, soundType);
-            }
-            if (App.toolTipMgr != null) 
-            {
-                App.toolTipMgr.hide();
-            }
-            super.handleMouseRollOut(arg1);
-            return;
-        }
+      public function getIconPath() : String {
+         return this.dataInited?this._valueObject.iconPath:"";
+      }
 
-        protected override function handleMouseRelease(arg1:flash.events.MouseEvent):void
-        {
-            super.handleMouseRelease(arg1);
-            if (arg1.eventPhase == flash.events.EventPhase.AT_TARGET && arg1 is scaleform.gfx.MouseEventEx && (arg1 as scaleform.gfx.MouseEventEx).buttonIdx == scaleform.gfx.MouseEventEx.RIGHT_BUTTON) 
-            {
-                this.showContextMenu();
-            }
-            return;
-        }
+      public function getDisplayInfo() : Object {
+         return this.dataInited?this._valueObject.displayInfo:null;
+      }
 
-        protected override function handleMousePress(arg1:flash.events.MouseEvent):void
-        {
-            if (App.soundMgr) 
-            {
-                App.soundMgr.playControlsSnd(net.wg.data.constants.SoundManagerStates.SND_PRESS, soundId, soundType);
-            }
-            if (App.toolTipMgr != null) 
-            {
-                App.toolTipMgr.hide();
-            }
-            super.handleMousePress(arg1);
-            return;
-        }
+      public function isNext2Unlock() : Boolean {
+         return (this.dataInited) && (this._valueObject.state & NodeState.NEXT_2_UNLOCK) > 0;
+      }
 
-        public function get container():net.wg.gui.lobby.techtree.interfaces.INodesContainer
-        {
-            return this._container;
-        }
+      public function isUnlocked() : Boolean {
+         return (this.dataInited) && (this._valueObject.state & NodeState.UNLOCKED) > 0;
+      }
 
-        public function set container(arg1:net.wg.gui.lobby.techtree.interfaces.INodesContainer):void
-        {
-            this._container = arg1;
-            return;
-        }
+      public function isElite() : Boolean {
+         return (this.dataInited) && (this._valueObject.state & NodeState.ELITE) > 0;
+      }
 
-        public function get matrixPosition():net.wg.gui.lobby.techtree.math.MatrixPosition
-        {
-            return this._matrixPosition;
-        }
+      public function isPremium() : Boolean {
+         return (this.dataInited) && (this._valueObject.state & NodeState.PREMIUM) > 0;
+      }
 
-        public function setup(arg1:uint, arg2:net.wg.gui.lobby.techtree.data.vo.NodeData, arg3:uint=0, arg4:net.wg.gui.lobby.techtree.math.MatrixPosition=null):void
-        {
-            var loc2:*=null;
-            if (arg3 != 0) 
-            {
-                this._entityType = arg3;
-            }
-            this._index = arg1;
-            this._matrixPosition = arg4;
-            if (this._valueObject == arg2 || arg2 == null) 
-            {
-                return;
-            }
-            this._valueObject = arg2;
-            this.dataInited = true;
-            this.updateStatesProps();
-            setState(state);
-            var loc1:*;
-            if (!((loc1 = this.getDisplayInfo()) == null) && loc1 is net.wg.gui.lobby.techtree.data.vo.NTDisplayInfo) 
-            {
-                if ((loc2 = (loc1 as net.wg.gui.lobby.techtree.data.vo.NTDisplayInfo).position) != null) 
-                {
-                    this.setPosition(loc2);
-                }
-            }
-            return;
-        }
+      public function inInventory() : Boolean {
+         return (this.dataInited) && (this._valueObject.state & NodeState.IN_INVENTORY) > 0;
+      }
 
-        internal function updateStatesProps():void
-        {
-            this.stateProps = net.wg.gui.lobby.techtree.data.state.NodeStateCollection.getStateProps(this._entityType, this.dataInited ? this._valueObject.state : 0, this.getExtraState());
-            var loc1:*=net.wg.gui.lobby.techtree.data.state.NodeStateCollection.getStatePrefix(this.stateProps.index);
-            statesSelected = Vector.<String>(["selected_", loc1]);
-            statesDefault = Vector.<String>([loc1]);
-            return;
-        }
-
-        public function getEntityType():uint
-        {
-            return this._entityType;
-        }
-
-        public function getID():Number
-        {
-            return this.dataInited ? this._valueObject.id : 0;
-        }
-
-        public function getItemName():String
-        {
-            return this.dataInited ? this._valueObject.nameString : "";
-        }
-
-        public function getItemType():String
-        {
-            return this.dataInited ? this._valueObject.primaryClass.name : "";
-        }
-
-        public function getLevel():int
-        {
-            return this.dataInited ? this._valueObject.level : -1;
-        }
-
-        public function getIconPath():String
-        {
-            return this.dataInited ? this._valueObject.iconPath : "";
-        }
-
-        public function getDisplayInfo():Object
-        {
-            return this.dataInited ? this._valueObject.displayInfo : null;
-        }
-
-        public function isNext2Unlock():Boolean
-        {
-            return this.dataInited && (this._valueObject.state & net.wg.gui.lobby.techtree.constants.NodeState.NEXT_2_UNLOCK) > 0;
-        }
-
-        public function isUnlocked():Boolean
-        {
-            return this.dataInited && (this._valueObject.state & net.wg.gui.lobby.techtree.constants.NodeState.UNLOCKED) > 0;
-        }
-
-        public function isElite():Boolean
-        {
-            return this.dataInited && (this._valueObject.state & net.wg.gui.lobby.techtree.constants.NodeState.ELITE) > 0;
-        }
-
-        public function isPremium():Boolean
-        {
-            return this.dataInited && (this._valueObject.state & net.wg.gui.lobby.techtree.constants.NodeState.PREMIUM) > 0;
-        }
-
-        public function inInventory():Boolean
-        {
-            return this.dataInited && (this._valueObject.state & net.wg.gui.lobby.techtree.constants.NodeState.IN_INVENTORY) > 0;
-        }
-
-        public function isAvailable4Unlock():Boolean
-        {
-            if (!this.dataInited) 
-            {
-                return false;
-            }
-            var loc1:*=this._valueObject.state;
-            return (loc1 & net.wg.gui.lobby.techtree.constants.NodeState.NEXT_2_UNLOCK) > 0 && (loc1 & net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_XP) > 0;
-        }
-
-        public function isAvailable4Buy():Boolean
-        {
-            if (!this.dataInited) 
-            {
-                return false;
-            }
-            var loc1:*=this._valueObject.state;
-            return (loc1 & net.wg.gui.lobby.techtree.constants.NodeState.UNLOCKED) > 0 && (loc1 & net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_MONEY) > 0 && (loc1 & net.wg.gui.lobby.techtree.constants.NodeState.IN_INVENTORY) == 0;
-        }
-
-        public function isAvailable4Sell():Boolean
-        {
-            return this.dataInited && (this._valueObject.state & net.wg.gui.lobby.techtree.constants.NodeState.CAN_SELL) > 0;
-        }
-
-        public function isActionEnabled():Boolean
-        {
-            if (!this.dataInited) 
-            {
-                return false;
-            }
-            return this.stateProps.enough == 0 || (this._valueObject.state & this.stateProps.enough) > 0;
-        }
-
-        public function isButtonVisible():Boolean
-        {
-            return this.stateProps.visible && this.stateProps.animation == null;
-        }
-
-        public function isSelected():Boolean
-        {
-            return this.dataInited && (this._valueObject.state & net.wg.gui.lobby.techtree.constants.NodeState.SELECTED) > 0;
-        }
-
-        public function isFake():Boolean
-        {
+      public function isAvailable4Unlock() : Boolean {
+         if(!this.dataInited)
+         {
             return false;
-        }
+         }
+         var _loc1_:Number = this._valueObject.state;
+         return (_loc1_ & NodeState.NEXT_2_UNLOCK) > 0 && (_loc1_ & NodeState.ENOUGH_XP) > 0;
+      }
 
-        public function getEarnedXP():Number
-        {
-            return this.dataInited ? this._valueObject.earnedXP : 0;
-        }
+      public function isAvailable4Buy() : Boolean {
+         if(!this.dataInited)
+         {
+            return false;
+         }
+         var _loc1_:Number = this._valueObject.state;
+         return (_loc1_ & NodeState.UNLOCKED) > 0 && (_loc1_ & NodeState.ENOUGH_MONEY) > 0 && (_loc1_ & NodeState.IN_INVENTORY) == 0;
+      }
 
-        public function getNamedLabel(arg1:String):String
-        {
-            var loc1:*=null;
-            if (!this.dataInited) 
+      public function isAvailable4Sell() : Boolean {
+         return (this.dataInited) && (this._valueObject.state & NodeState.CAN_SELL) > 0;
+      }
+
+      public function isActionEnabled() : Boolean {
+         if(!this.dataInited)
+         {
+            return false;
+         }
+         return this.stateProps.enough == 0 || (this._valueObject.state & this.stateProps.enough) > 0;
+      }
+
+      public function isButtonVisible() : Boolean {
+         return (this.stateProps.visible) && this.stateProps.animation == null;
+      }
+
+      public function isSelected() : Boolean {
+         return (this.dataInited) && (this._valueObject.state & NodeState.SELECTED) > 0;
+      }
+
+      public function isFake() : Boolean {
+         return false;
+      }
+
+      public function getEarnedXP() : Number {
+         return this.dataInited?this._valueObject.earnedXP:0;
+      }
+
+      public function getNamedLabel(param1:String) : String {
+         var _loc2_:String = null;
+         if(!this.dataInited)
+         {
+            return "";
+         }
+         switch(param1)
+         {
+            case NamedLabels.XP_COST:
+               _loc2_ = this._valueObject.unlockProps.xpCostLabel;
+               break;
+            case NamedLabels.EARNED_XP:
+               _loc2_ = this._valueObject.earnedXPLabel;
+               break;
+            case NamedLabels.CREDITS_PRICE:
+               _loc2_ = this._valueObject.shopPrice.creditsLabel;
+               break;
+            case NamedLabels.GOLD_PRICE:
+               _loc2_ = this._valueObject.shopPrice.goldLabel;
+               break;
+            default:
+               _loc2_ = "";
+         }
+         return _loc2_;
+      }
+
+      public function validateNowEx() : void {
+         this._doValidateNow = true;
+         super.validateNow();
+      }
+
+      public function invalidateNodeState(param1:Number) : void {
+         this.updateStatesProps();
+         setState(state);
+         if(param1 > -1)
+         {
+            MenuHandler.getInstance().hideMenu();
+            dispatchEvent(new TechTreeEvent(TechTreeEvent.STATE_CHANGED,param1,_index,this._entityType));
+         }
+      }
+
+      public function getColorIdx(param1:Number=-1) : Number {
+         var _loc2_:Number = ColorIndex.LOCKED;
+         if(this.isUnlocked())
+         {
+            if(param1 == -1 || param1 > 0 && (this.isParentUnlocked(param1)))
             {
-                return "";
+               _loc2_ = ColorIndex.UNLOCKED;
             }
-            var loc2:*=arg1;
-            switch (loc2) 
+         }
+         else
+         {
+            if(this.isNext2Unlock())
             {
-                case net.wg.gui.lobby.techtree.constants.NamedLabels.XP_COST:
-                {
-                    loc1 = this._valueObject.unlockProps.xpCostLabel;
-                    break;
-                }
-                case net.wg.gui.lobby.techtree.constants.NamedLabels.EARNED_XP:
-                {
-                    loc1 = this._valueObject.earnedXPLabel;
-                    break;
-                }
-                case net.wg.gui.lobby.techtree.constants.NamedLabels.CREDITS_PRICE:
-                {
-                    loc1 = this._valueObject.shopPrice.creditsLabel;
-                    break;
-                }
-                case net.wg.gui.lobby.techtree.constants.NamedLabels.GOLD_PRICE:
-                {
-                    loc1 = this._valueObject.shopPrice.goldLabel;
-                    break;
-                }
-                default:
-                {
-                    loc1 = "";
-                }
+               if(param1 == -1 || param1 > 0 && (this.isParentUnlocked(param1)))
+               {
+                  _loc2_ = ColorIndex.NEXT2UNLOCK;
+               }
             }
-            return loc1;
-        }
+         }
+         return _loc2_;
+      }
 
-        public function validateNowEx():void
-        {
-            this._doValidateNow = true;
-            super.validateNow();
-            return;
-        }
-
-        public function invalidateNodeState(arg1:Number):void
-        {
-            this.updateStatesProps();
-            setState(state);
-            if (arg1 > -1) 
+      public function getColorIdxEx(param1:IRenderer) : Number {
+         var _loc2_:Number = ColorIndex.LOCKED;
+         if(this.isUnlocked())
+         {
+            if(param1 == null || (param1.isUnlocked()))
             {
-                net.wg.gui.lobby.techtree.MenuHandler.getInstance().hideMenu();
-                dispatchEvent(new net.wg.gui.lobby.techtree.TechTreeEvent(net.wg.gui.lobby.techtree.TechTreeEvent.STATE_CHANGED, arg1, _index, this._entityType));
+               _loc2_ = ColorIndex.UNLOCKED;
             }
-            return;
-        }
-
-        public function getColorIdx(arg1:Number=-1):Number
-        {
-            var loc1:*=net.wg.gui.lobby.techtree.constants.ColorIndex.LOCKED;
-            if (this.isUnlocked()) 
+         }
+         else
+         {
+            if(this.isNext2Unlock())
             {
-                if (arg1 == -1 || arg1 > 0 && this.isParentUnlocked(arg1)) 
-                {
-                    loc1 = net.wg.gui.lobby.techtree.constants.ColorIndex.UNLOCKED;
-                }
+               if(param1 == null || (param1.isUnlocked()))
+               {
+                  _loc2_ = ColorIndex.NEXT2UNLOCK;
+               }
             }
-            else if (this.isNext2Unlock()) 
+         }
+         return _loc2_;
+      }
+
+      public function click2Unlock() : void {
+         dispatchEvent(new TechTreeEvent(TechTreeEvent.CLICK_2_UNLOCK,0,_index,this._entityType));
+      }
+
+      public function click2Buy() : void {
+         dispatchEvent(new TechTreeEvent(TechTreeEvent.CLICK_2_BUY,0,_index,this._entityType));
+      }
+
+      public function click2Sell() : void {
+         dispatchEvent(new TechTreeEvent(TechTreeEvent.CLICK_2_SELL,0,_index,this._entityType));
+      }
+
+      public function click2Info() : void {
+         dispatchEvent(new TechTreeEvent(TechTreeEvent.CLICK_2_MODULE_INFO,0,_index,this._entityType));
+      }
+
+      public function getInX() : Number {
+         return Math.round(x + (this.hit != null?this.hit.x:0));
+      }
+
+      public function getOutX() : Number {
+         return x + (this.hit != null?this.hit.x + Math.round(this.hit.width):Math.round(_width));
+      }
+
+      public function getY() : Number {
+         return y + (this.hit != null?this.hit.y + (Math.round(this.hit.height) >> 1):Math.round(_height) >> 1);
+      }
+
+      public function getRatioY() : Number {
+         return this.hit != null?Math.round(this.hit.height) >> 1:Math.round(_height) >> 1;
+      }
+
+      public function getActualWidth() : Number {
+         return this.hit != null?this.hit.width:_width;
+      }
+
+      public function setPosition(param1:Point) : void {
+         if(this.hit != null)
+         {
+            this.x = Math.round(param1.x - this.hit.x);
+            this.y = Math.round(param1.y - this.hit.y);
+         }
+         else
+         {
+            this.x = param1.x;
+            this.y = param1.y;
+         }
+      }
+
+      public function getExtraState() : Object {
+         return null;
+      }
+
+      public function showContextMenu() : void {
+          
+      }
+
+      public function isParentUnlocked(param1:Number) : Boolean {
+         return this._container != null?this._container.isParentUnlocked(param1,this._valueObject.id):true;
+      }
+
+      public function populateUI() : void {
+         this._doValidateNow = false;
+      }
+
+      override protected function preInitialize() : void {
+         preventAutosizing = false;
+         constraintsDisabled = true;
+         super.preInitialize();
+         _state = "up";
+         this.dataInited = false;
+         soundType = TTSoundID.SUPER_TYPE;
+         soundId = TTSoundID.UNDEFINED;
+      }
+
+      override protected function initialize() : void {
+         super.initialize();
+         this.updateStatesProps();
+      }
+
+      override protected function configUI() : void {
+         if((this.isDelegateEvents) && !(this.hit == null))
+         {
+            this.delegateEventsHandlers();
+         }
+         else
+         {
+            super.configUI();
+         }
+         if(App.soundMgr)
+         {
+            App.soundMgr.addSoundsHdlrs(this);
+         }
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         if(!_baseDisposed)
+         {
+            if(isInvalid(InvalidationType.DATA))
             {
-                if (arg1 == -1 || arg1 > 0 && this.isParentUnlocked(arg1)) 
-                {
-                    loc1 = net.wg.gui.lobby.techtree.constants.ColorIndex.NEXT2UNLOCK;
-                }
+               if(this._valueObject != null)
+               {
+                  visible = true;
+                  this.populateUI();
+               }
+               else
+               {
+                  visible = false;
+               }
             }
-            return loc1;
-        }
+         }
+      }
 
-        public function getColorIdxEx(arg1:net.wg.gui.lobby.techtree.interfaces.IRenderer):Number
-        {
-            var loc1:*=net.wg.gui.lobby.techtree.constants.ColorIndex.LOCKED;
-            if (this.isUnlocked()) 
+      protected function getMouseEnabledChildren() : Vector.<DisplayObjectContainer> {
+         var _loc1_:Vector.<DisplayObjectContainer> = new Vector.<DisplayObjectContainer>();
+         if(this.hit != null)
+         {
+            _loc1_.push(this.hit);
+         }
+         if(this.button != null)
+         {
+            _loc1_.push(this.button);
+         }
+         return _loc1_;
+      }
+
+      protected function disableMouseChildren() : void {
+         var _loc1_:DisplayObject = null;
+         var _loc2_:DisplayObjectContainer = null;
+         var _loc3_:Vector.<DisplayObjectContainer> = this.getMouseEnabledChildren();
+         var _loc4_:Number = 0;
+         while(_loc4_ < numChildren)
+         {
+            _loc1_ = getChildAt(_loc4_);
+            if(_loc1_  is  DisplayObjectContainer && _loc3_.indexOf(_loc1_) == -1)
             {
-                if (arg1 == null || arg1.isUnlocked()) 
-                {
-                    loc1 = net.wg.gui.lobby.techtree.constants.ColorIndex.UNLOCKED;
-                }
+               _loc2_ = DisplayObjectContainer(_loc1_);
+               _loc2_.mouseEnabled = _loc2_.mouseChildren = false;
             }
-            else if (this.isNext2Unlock()) 
-            {
-                if (arg1 == null || arg1.isUnlocked()) 
-                {
-                    loc1 = net.wg.gui.lobby.techtree.constants.ColorIndex.NEXT2UNLOCK;
-                }
-            }
-            return loc1;
-        }
+            _loc4_++;
+         }
+      }
 
-        public function click2Unlock():void
-        {
-            dispatchEvent(new net.wg.gui.lobby.techtree.TechTreeEvent(net.wg.gui.lobby.techtree.TechTreeEvent.CLICK_2_UNLOCK, 0, _index, this._entityType));
-            return;
-        }
+      protected function delegateEventsHandlers() : void {
+         mouseEnabled = false;
+         this.disableMouseChildren();
+         this.hit.buttonMode = this.hit.mouseEnabled = true;
+         this.hit.addEventListener(MouseEvent.ROLL_OVER,this.handleMouseRollOver,false,0,true);
+         this.hit.addEventListener(MouseEvent.ROLL_OUT,this.handleMouseRollOut,false,0,true);
+         this.hit.addEventListener(MouseEvent.MOUSE_DOWN,this.handleMousePress,false,0,true);
+         this.hit.addEventListener(MouseEvent.CLICK,this.handleMouseRelease,false,0,true);
+         this.hit.addEventListener(MouseEvent.DOUBLE_CLICK,this.handleMouseRelease,false,0,true);
+         this.hit.addEventListener(InputEvent.INPUT,handleInput,false,0,true);
+      }
 
-        public function click2Buy():void
-        {
-            dispatchEvent(new net.wg.gui.lobby.techtree.TechTreeEvent(net.wg.gui.lobby.techtree.TechTreeEvent.CLICK_2_BUY, 0, _index, this._entityType));
-            return;
-        }
+      protected function removeEventsHandlers() : void {
+         this.hit.removeEventListener(MouseEvent.ROLL_OVER,this.handleMouseRollOver,false);
+         this.hit.removeEventListener(MouseEvent.ROLL_OUT,this.handleMouseRollOut,false);
+         this.hit.removeEventListener(MouseEvent.MOUSE_DOWN,this.handleMousePress,false);
+         this.hit.removeEventListener(MouseEvent.CLICK,this.handleMouseRelease,false);
+         this.hit.removeEventListener(MouseEvent.DOUBLE_CLICK,this.handleMouseRelease,false);
+         this.hit.removeEventListener(InputEvent.INPUT,handleInput,false);
+      }
 
-        public function click2Sell():void
-        {
-            dispatchEvent(new net.wg.gui.lobby.techtree.TechTreeEvent(net.wg.gui.lobby.techtree.TechTreeEvent.CLICK_2_SELL, 0, _index, this._entityType));
-            return;
-        }
+      override protected function updateAfterStateChange() : void {
+         if(this.isDelegateEvents)
+         {
+            this.disableMouseChildren();
+         }
+         super.updateAfterStateChange();
+      }
 
-        public function click2Info():void
-        {
-            dispatchEvent(new net.wg.gui.lobby.techtree.TechTreeEvent(net.wg.gui.lobby.techtree.TechTreeEvent.CLICK_2_MODULE_INFO, 0, _index, this._entityType));
-            return;
-        }
+      override protected function handleMouseRollOver(param1:MouseEvent) : void {
+         if((this._tooltipID) && !(App.toolTipMgr == null))
+         {
+            App.toolTipMgr.showSpecial(this._tooltipID,null,this._valueObject,this._container != null?this._container.getRootNode().getID():null);
+         }
+         super.handleMouseRollOver(param1);
+      }
 
-        public function getInX():Number
-        {
-            return Math.round(x + (this.hit == null ? 0 : this.hit.x));
-        }
+      override protected function handleMouseRollOut(param1:MouseEvent) : void {
+         if(App.toolTipMgr != null)
+         {
+            App.toolTipMgr.hide();
+         }
+         super.handleMouseRollOut(param1);
+      }
 
-        public function getOutX():Number
-        {
-            return x + (this.hit == null ? Math.round(_width) : this.hit.x + Math.round(this.hit.width));
-        }
+      override protected function handleMouseRelease(param1:MouseEvent) : void {
+         super.handleMouseRelease(param1);
+         if(param1.eventPhase == EventPhase.AT_TARGET && param1  is  MouseEventEx && (param1 as MouseEventEx).buttonIdx == MouseEventEx.RIGHT_BUTTON)
+         {
+            this.showContextMenu();
+         }
+      }
 
-        public function getY():Number
-        {
-            return y + (this.hit == null ? Math.round(_height) >> 1 : this.hit.y + (Math.round(this.hit.height) >> 1));
-        }
+      override protected function handleMousePress(param1:MouseEvent) : void {
+         if(App.toolTipMgr != null)
+         {
+            App.toolTipMgr.hide();
+         }
+         super.handleMousePress(param1);
+      }
 
-        public function getRatioY():Number
-        {
-            return this.hit == null ? Math.round(_height) >> 1 : Math.round(this.hit.height) >> 1;
-        }
+      private function updateStatesProps() : void {
+         this.stateProps = NodeStateCollection.getStateProps(this._entityType,this.dataInited?this._valueObject.state:0,this.getExtraState());
+         var _loc1_:String = NodeStateCollection.getStatePrefix(this.stateProps.index);
+         statesSelected = Vector.<String>(["selected_",_loc1_]);
+         statesDefault = Vector.<String>([_loc1_]);
+      }
+   }
 
-        public function getActualWidth():Number
-        {
-            return this.hit == null ? _width : this.hit.width;
-        }
-
-        public function setPosition(arg1:flash.geom.Point):void
-        {
-            if (this.hit == null) 
-            {
-                this.x = arg1.x;
-                this.y = arg1.y;
-            }
-            else 
-            {
-                this.x = Math.round(arg1.x - this.hit.x);
-                this.y = Math.round(arg1.y - this.hit.y);
-            }
-            return;
-        }
-
-        public function getExtraState():Object
-        {
-            return null;
-        }
-
-        public function showContextMenu():void
-        {
-            return;
-        }
-
-        public function isParentUnlocked(arg1:Number):Boolean
-        {
-            return this._container == null ? true : this._container.isParentUnlocked(arg1, this._valueObject.id);
-        }
-
-        public function populateUI():void
-        {
-            this._doValidateNow = false;
-            return;
-        }
-
-        protected override function preInitialize():void
-        {
-            preventAutosizing = false;
-            constraintsDisabled = true;
-            super.preInitialize();
-            _state = "up";
-            this.dataInited = false;
-            soundType = net.wg.gui.lobby.techtree.constants.TTSoundID.SUPER_TYPE;
-            soundId = net.wg.gui.lobby.techtree.constants.TTSoundID.UNDEFINED;
-            return;
-        }
-
-        protected override function initialize():void
-        {
-            super.initialize();
-            this.updateStatesProps();
-            return;
-        }
-
-        protected override function configUI():void
-        {
-            if (this.isDelegateEvents && !(this.hit == null)) 
-            {
-                this.delegateEventsHandlers();
-            }
-            else 
-            {
-                super.configUI();
-            }
-            return;
-        }
-
-        protected var _valueObject:net.wg.gui.lobby.techtree.data.vo.NodeData;
-
-        protected var _matrixPosition:net.wg.gui.lobby.techtree.math.MatrixPosition;
-
-        protected var stateProps:net.wg.gui.lobby.techtree.data.state.StateProperties;
-
-        protected var dataInited:Boolean;
-
-        protected var isDelegateEvents:Boolean=false;
-
-        protected var _container:net.wg.gui.lobby.techtree.interfaces.INodesContainer=null;
-
-        protected var _entityType:uint=0;
-
-        protected var _doValidateNow:Boolean=false;
-
-        public var hit:flash.display.MovieClip;
-
-        public var button:net.wg.gui.lobby.techtree.controls.ActionButton;
-
-        protected var _tooltipID:String=null;
-    }
 }

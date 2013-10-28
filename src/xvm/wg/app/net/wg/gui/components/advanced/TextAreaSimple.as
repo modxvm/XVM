@@ -1,406 +1,349 @@
-package net.wg.gui.components.advanced 
+package net.wg.gui.components.advanced
 {
-    import flash.display.*;
-    import flash.events.*;
-    import flash.geom.*;
-    import flash.text.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.controls.*;
-    import scaleform.clik.events.*;
-    import scaleform.clik.ui.*;
-    import scaleform.clik.utils.*;
-    import scaleform.gfx.*;
-    
-    public class TextAreaSimple extends scaleform.clik.controls.TextArea
-    {
-        public function TextAreaSimple()
-        {
-            this._textPadding = new scaleform.clik.utils.Padding(0, 0, 0, 0);
-            super();
+   import scaleform.clik.controls.TextArea;
+   import flash.display.Sprite;
+   import scaleform.clik.utils.Padding;
+   import scaleform.gfx.TextFieldEx;
+   import flash.events.FocusEvent;
+   import flash.events.MouseEvent;
+   import scaleform.clik.events.InputEvent;
+   import flash.text.TextFieldType;
+   import scaleform.clik.utils.Constraints;
+   import flash.events.Event;
+   import scaleform.clik.constants.InvalidationType;
+   import flash.geom.Point;
+   import scaleform.clik.ui.InputDetails;
+   import scaleform.clik.constants.InputValue;
+   import scaleform.clik.constants.NavigationCode;
+
+
+   public class TextAreaSimple extends scaleform.clik.controls.TextArea
+   {
+          
+      public function TextAreaSimple() {
+         this._textPadding = new Padding(0,0,0,0);
+         super();
+      }
+
+      private static const PADDING_FOR_BG:Number = 7;
+
+      public var bgForm:Sprite;
+
+      private var _safePosition:Boolean = false;
+
+      private var _autoScroll:Boolean = false;
+
+      private var _showBgForm:Boolean = false;
+
+      private var _selectable:Boolean = false;
+
+      private var _textPadding:Padding;
+
+      private var _selectionTextColor:uint = 1973787;
+
+      private var _selectionBgColor:uint = 9868935;
+
+      public function get showBgForm() : Boolean {
+         return this._showBgForm;
+      }
+
+      public function set showBgForm(param1:Boolean) : void {
+         this._showBgForm = param1;
+      }
+
+      public function get textPadding() : Object {
+         return this._textPadding;
+      }
+
+      public function set textPadding(param1:Object) : void {
+         this._textPadding = new Padding(param1.top,param1.right,param1.bottom,param1.left);
+      }
+
+      public function get autoScroll() : Boolean {
+         return this._autoScroll;
+      }
+
+      public function set autoScroll(param1:Boolean) : void {
+         this._autoScroll = param1;
+      }
+
+      public function get selectable() : Boolean {
+         return this._selectable;
+      }
+
+      public function set selectable(param1:Boolean) : void {
+         this._selectable = param1;
+         this.focusable = _editable?_editable:this._selectable;
+      }
+
+      public function get selectionTextColor() : uint {
+         return this._selectionTextColor;
+      }
+
+      public function set selectionTextColor(param1:uint) : void {
+         this._selectionTextColor = this.rgbToArgb(param1);
+         TextFieldEx.setSelectionTextColor(textField,this._selectionTextColor);
+         TextFieldEx.setInactiveSelectionTextColor(textField,this.rgbToArgb(textField.textColor));
+      }
+
+      public function get selectionBgColor() : uint {
+         return this._selectionBgColor;
+      }
+
+      public function set selectionBgColor(param1:uint) : void {
+         this._selectionBgColor = this.rgbToArgb(param1);
+         TextFieldEx.setSelectionBkgColor(textField,this._selectionBgColor);
+         TextFieldEx.setInactiveSelectionBkgColor(textField,0);
+      }
+
+      private function rgbToArgb(param1:uint) : uint {
+         return 4.27819008E9 + param1;
+      }
+
+      override public function dispose() : void {
+         this._textPadding = null;
+         this.bgForm = null;
+         textField.removeEventListener(FocusEvent.FOCUS_IN,handleTextFieldFocusIn,false);
+         textField.removeEventListener(FocusEvent.FOCUS_IN,this.onSetFocusHdlr);
+         textField.removeEventListener(FocusEvent.FOCUS_OUT,this.onKillFocusHdlr);
+         removeEventListener(MouseEvent.MOUSE_DOWN,handleMouseDown,false);
+         removeEventListener(InputEvent.INPUT,this.handleInput,false);
+         removeEventListener(MouseEvent.MOUSE_WHEEL,this.onMouseWheel);
+         super.dispose();
+      }
+
+      override public function get focusable() : Boolean {
+         return _focusable;
+      }
+
+      override public function set focusable(param1:Boolean) : void {
+         _focusable = param1;
+         if(!_focusable && (enabled))
+         {
+            tabChildren = false;
+         }
+         changeFocus();
+         if((_focusable) && (this.selectable))
+         {
+            addEventListener(MouseEvent.MOUSE_DOWN,handleMouseDown,false,0,true);
+         }
+         else
+         {
+            removeEventListener(MouseEvent.MOUSE_DOWN,handleMouseDown,false);
+         }
+      }
+
+      override public function get editable() : Boolean {
+         return _editable;
+      }
+
+      override public function set editable(param1:Boolean) : void {
+         _editable = param1;
+         if(textField != null)
+         {
+            textField.type = (_editable) && (enabled)?TextFieldType.INPUT:TextFieldType.DYNAMIC;
+         }
+         this.focusable = _editable?_editable:this.selectable;
+      }
+
+      override protected function configUI() : void {
+         if(this._showBgForm)
+         {
+            textField.x = PADDING_FOR_BG;
+            textField.y = PADDING_FOR_BG;
+            textField.width = textField.width - PADDING_FOR_BG * 2;
+            textField.height = textField.height - PADDING_FOR_BG * 2;
+         }
+         else
+         {
+            textField.x = this._textPadding.left;
+            textField.y = this._textPadding.top;
+            textField.width = textField.width - (this._textPadding.left + this._textPadding.right);
+            textField.height = textField.height - (this._textPadding.top + this._textPadding.bottom);
+         }
+         if(!constraintsDisabled)
+         {
+            constraints.addElement("textField",textField,Constraints.ALL);
+         }
+         addEventListener(InputEvent.INPUT,this.handleInput,false,0,true);
+         textField.addEventListener(FocusEvent.FOCUS_IN,handleTextFieldFocusIn,false,0,true);
+         if((this.focusable) && (this._selectable))
+         {
+            addEventListener(MouseEvent.MOUSE_DOWN,handleMouseDown,false,0,true);
+         }
+         setState(defaultState,"default");
+         addEventListener(MouseEvent.MOUSE_WHEEL,this.onMouseWheel);
+         textField.selectable = enabled?(this.editable) || (this._selectable):false;
+         this.bgForm.visible = this.showBgForm;
+      }
+
+      override protected function updateTextField() : void {
+         _resetScrollPosition = true;
+         if(textField == null)
+         {
+            trace(">>> Error :: " + this + ", textField is NULL.");
             return;
-        }
+         }
+         this.updateText();
+         textField.maxChars = _maxChars;
+         textField.alwaysShowSelection = _alwaysShowSelection;
+         textField.selectable = enabled?this._selectable:enabled;
+         textField.type = (_editable) && (enabled)?TextFieldType.INPUT:TextFieldType.DYNAMIC;
+         textField.tabEnabled = (this._selectable) && (enabled) && (_focusable);
+         textField.addEventListener(Event.CHANGE,handleTextChange,false,0,true);
+         if(textField.hasEventListener(FocusEvent.FOCUS_IN))
+         {
+            textField.removeEventListener(FocusEvent.FOCUS_IN,handleTextFieldFocusIn,false);
+         }
+         textField.addEventListener(FocusEvent.FOCUS_IN,handleTextFieldFocusIn,false,0,true);
+         if(!textField.hasEventListener(FocusEvent.FOCUS_IN))
+         {
+            textField.addEventListener(FocusEvent.FOCUS_IN,this.onSetFocusHdlr);
+         }
+         if(!textField.hasEventListener(FocusEvent.FOCUS_OUT))
+         {
+            textField.addEventListener(FocusEvent.FOCUS_OUT,this.onKillFocusHdlr);
+         }
+         textField.selectable = enabled?(this.editable) || (this._selectable):enabled;
+      }
 
-        protected override function draw():void
-        {
-            var loc1:*=NaN;
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.STATE)) 
+      private function onSetFocusHdlr(param1:FocusEvent) : void {
+         App.utils.IME.setVisible(true);
+      }
+
+      private function onKillFocusHdlr(param1:FocusEvent) : void {
+         App.utils.IME.setVisible(false);
+      }
+
+      override protected function draw() : void {
+         var _loc1_:* = NaN;
+         super.draw();
+         if(isInvalid(InvalidationType.STATE))
+         {
+            if(textField != null)
             {
-                if (textField != null) 
-                {
-                    this.selectionTextColor = this._selectionTextColor;
-                    this.selectionBgColor = this._selectionBgColor;
-                }
+               this.selectionTextColor = this._selectionTextColor;
+               this.selectionBgColor = this._selectionBgColor;
             }
-            if (_autoScrollBar) 
+         }
+         if(_autoScrollBar)
+         {
+            if(this._showBgForm)
             {
-                if (this._showBgForm) 
-                {
-                    loc1 = 3;
-                    _scrollBar.y = loc1;
-                    _scrollBar.x = width - _scrollBar.width - 2;
-                    _scrollBar.height = height - loc1 * 2;
-                }
-                else 
-                {
-                    _scrollBar.y = 1;
-                    _scrollBar.x = (width - _scrollBar.width - 1);
-                    _scrollBar.height = height - 2;
-                }
+               _loc1_ = 3;
+               _scrollBar.y = _loc1_;
+               _scrollBar.x = width - _scrollBar.width - 2;
+               _scrollBar.height = height - _loc1_ * 2;
             }
-            this.updateText();
+            else
+            {
+               _scrollBar.y = 1;
+               _scrollBar.x = width - _scrollBar.width-1;
+               _scrollBar.height = height - 2;
+            }
+         }
+         this.updateText();
+      }
+
+      override protected function updateText() : void {
+         super.updateText();
+         if(this.autoScroll)
+         {
+            position = this._safePosition?textField.scrollV:textField.maxScrollV;
+         }
+         if(_scrollBar)
+         {
+            constraints.update(availableWidth,_height);
+         }
+      }
+
+      override protected function handleScroll(param1:Event) : void {
+         super.handleScroll(param1);
+         this._safePosition = _scrollBar.position < textField.maxScrollV;
+      }
+
+      public function get safePosition() : Boolean {
+         return this._safePosition;
+      }
+
+      public function set safePosition(param1:Boolean) : void {
+         this._safePosition = param1;
+      }
+
+      public function appendHtmlResetPosition(param1:String) : void {
+         this.safePosition = false;
+         appendHtml(param1);
+      }
+
+      private function onMouseWheel(param1:MouseEvent) : void {
+         var _loc2_:Point = null;
+         var _loc3_:Object = null;
+         if(enabled)
+         {
+            _loc2_ = new Point(stage.mouseX,stage.mouseY);
+            if((visible) && (hitTestPoint(_loc2_.x,_loc2_.y,true)))
+            {
+               _loc3_ = getObjectsUnderPoint(_loc2_);
+            }
+         }
+      }
+
+      override public function handleInput(param1:InputEvent) : void {
+         var _loc3_:String = null;
+         var _loc4_:* = NaN;
+         var _loc5_:* = NaN;
+         if(param1.handled)
+         {
             return;
-        }
-
-        protected override function updateText():void
-        {
-            super.updateText();
-            if (this.autoScroll) 
-            {
-                position = this._safePosition ? textField.scrollV : textField.maxScrollV;
-            }
-            if (_scrollBar) 
-            {
-                constraints.update(availableWidth, _height);
-            }
+         }
+         var _loc2_:InputDetails = param1.details;
+         if(_loc2_.value == InputValue.KEY_DOWN || _loc2_.value == InputValue.KEY_HOLD)
+         {
             return;
-        }
-
-        protected override function handleScroll(arg1:flash.events.Event):void
-        {
-            super.handleScroll(arg1);
-            this._safePosition = _scrollBar.position < textField.maxScrollV;
+         }
+         if(param1.handled)
+         {
             return;
-        }
+         }
+         _loc3_ = param1.details.navEquivalent;
+         switch(_loc3_)
+         {
+            case NavigationCode.UP:
+               if(position == 1)
+               {
+                  return;
+               }
+               position = Math.max(1,position-1);
+               param1.handled = true;
+               break;
+            case NavigationCode.DOWN:
+               if(position == _maxScroll)
+               {
+                  return;
+               }
+               position = Math.min(_maxScroll,position + 1);
+               param1.handled = true;
+               break;
+            case NavigationCode.END:
+               position = _maxScroll;
+               param1.handled = true;
+               break;
+            case NavigationCode.HOME:
+               position = 1;
+               param1.handled = true;
+               break;
+            case NavigationCode.PAGE_UP:
+               _loc4_ = textField.bottomScrollV - textField.scrollV;
+               position = Math.max(1,position - _loc4_);
+               param1.handled = true;
+               break;
+            case NavigationCode.PAGE_DOWN:
+               _loc5_ = textField.bottomScrollV - textField.scrollV;
+               position = Math.min(_maxScroll,position + _loc5_);
+               param1.handled = true;
+               break;
+         }
+      }
+   }
 
-        public function get safePosition():Boolean
-        {
-            return this._safePosition;
-        }
-
-        public function set safePosition(arg1:Boolean):void
-        {
-            this._safePosition = arg1;
-            return;
-        }
-
-        public function appendHtmlResetPosition(arg1:String):void
-        {
-            this.safePosition = false;
-            appendHtml(arg1);
-            return;
-        }
-
-        internal function onMouseWheel(arg1:flash.events.MouseEvent):void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            if (enabled) 
-            {
-                loc1 = new flash.geom.Point(stage.mouseX, stage.mouseY);
-                if (visible && hitTestPoint(loc1.x, loc1.y, true)) 
-                {
-                    loc2 = getObjectsUnderPoint(loc1);
-                }
-            }
-            return;
-        }
-
-        public override function handleInput(arg1:scaleform.clik.events.InputEvent):void
-        {
-            var loc2:*=null;
-            var loc3:*=NaN;
-            var loc4:*=NaN;
-            if (arg1.handled) 
-            {
-                return;
-            }
-            var loc1:*=arg1.details;
-            if (loc1.value == scaleform.clik.constants.InputValue.KEY_DOWN || loc1.value == scaleform.clik.constants.InputValue.KEY_HOLD) 
-            {
-                return;
-            }
-            if (arg1.handled) 
-            {
-                return;
-            }
-            loc2 = arg1.details.navEquivalent;
-            var loc5:*=loc2;
-            switch (loc5) 
-            {
-                case scaleform.clik.constants.NavigationCode.UP:
-                {
-                    if (position == 1) 
-                    {
-                        return;
-                    }
-                    position = Math.max(1, (position - 1));
-                    arg1.handled = true;
-                    break;
-                }
-                case scaleform.clik.constants.NavigationCode.DOWN:
-                {
-                    if (position == _maxScroll) 
-                    {
-                        return;
-                    }
-                    position = Math.min(_maxScroll, position + 1);
-                    arg1.handled = true;
-                    break;
-                }
-                case scaleform.clik.constants.NavigationCode.END:
-                {
-                    position = _maxScroll;
-                    arg1.handled = true;
-                    break;
-                }
-                case scaleform.clik.constants.NavigationCode.HOME:
-                {
-                    position = 1;
-                    arg1.handled = true;
-                    break;
-                }
-                case scaleform.clik.constants.NavigationCode.PAGE_UP:
-                {
-                    loc3 = textField.bottomScrollV - textField.scrollV;
-                    position = Math.max(1, position - loc3);
-                    arg1.handled = true;
-                    break;
-                }
-                case scaleform.clik.constants.NavigationCode.PAGE_DOWN:
-                {
-                    loc4 = textField.bottomScrollV - textField.scrollV;
-                    position = Math.min(_maxScroll, position + loc4);
-                    arg1.handled = true;
-                    break;
-                }
-            }
-            return;
-        }
-
-        public function get showBgForm():Boolean
-        {
-            return this._showBgForm;
-        }
-
-        public function set showBgForm(arg1:Boolean):void
-        {
-            this._showBgForm = arg1;
-            return;
-        }
-
-        public function get textPadding():Object
-        {
-            return this._textPadding;
-        }
-
-        public function set textPadding(arg1:Object):void
-        {
-            this._textPadding = new scaleform.clik.utils.Padding(arg1.top, arg1.right, arg1.bottom, arg1.left);
-            return;
-        }
-
-        public function get autoScroll():Boolean
-        {
-            return this._autoScroll;
-        }
-
-        public function set autoScroll(arg1:Boolean):void
-        {
-            this._autoScroll = arg1;
-            return;
-        }
-
-        public function get selectable():Boolean
-        {
-            return this._selectable;
-        }
-
-        public function set selectable(arg1:Boolean):void
-        {
-            this._selectable = arg1;
-            this.focusable = _editable ? _editable : this._selectable;
-            return;
-        }
-
-        public function get selectionTextColor():uint
-        {
-            return this._selectionTextColor;
-        }
-
-        public function set selectionTextColor(arg1:uint):void
-        {
-            this._selectionTextColor = this.rgbToArgb(arg1);
-            scaleform.gfx.TextFieldEx.setSelectionTextColor(textField, this._selectionTextColor);
-            scaleform.gfx.TextFieldEx.setInactiveSelectionTextColor(textField, this.rgbToArgb(textField.textColor));
-            return;
-        }
-
-        public function get selectionBgColor():uint
-        {
-            return this._selectionBgColor;
-        }
-
-        public function set selectionBgColor(arg1:uint):void
-        {
-            this._selectionBgColor = this.rgbToArgb(arg1);
-            scaleform.gfx.TextFieldEx.setSelectionBkgColor(textField, this._selectionBgColor);
-            scaleform.gfx.TextFieldEx.setInactiveSelectionBkgColor(textField, 0);
-            return;
-        }
-
-        internal function rgbToArgb(arg1:uint):uint
-        {
-            return 4278190080 + arg1;
-        }
-
-        public override function dispose():void
-        {
-            this._textPadding = null;
-            this.bgForm = null;
-            textField.removeEventListener(flash.events.FocusEvent.FOCUS_IN, handleTextFieldFocusIn, false);
-            textField.removeEventListener(flash.events.FocusEvent.FOCUS_IN, this.onSetFocusHdlr);
-            textField.removeEventListener(flash.events.FocusEvent.FOCUS_OUT, this.onKillFocusHdlr);
-            removeEventListener(flash.events.MouseEvent.MOUSE_DOWN, handleMouseDown, false);
-            removeEventListener(scaleform.clik.events.InputEvent.INPUT, this.handleInput, false);
-            removeEventListener(flash.events.MouseEvent.MOUSE_WHEEL, this.onMouseWheel);
-            super.dispose();
-            return;
-        }
-
-        public override function get focusable():Boolean
-        {
-            return _focusable;
-        }
-
-        public override function set focusable(arg1:Boolean):void
-        {
-            _focusable = arg1;
-            if (!_focusable && enabled) 
-            {
-                tabChildren = false;
-            }
-            changeFocus();
-            if (_focusable && this.selectable) 
-            {
-                addEventListener(flash.events.MouseEvent.MOUSE_DOWN, handleMouseDown, false, 0, true);
-            }
-            else 
-            {
-                removeEventListener(flash.events.MouseEvent.MOUSE_DOWN, handleMouseDown, false);
-            }
-            return;
-        }
-
-        public override function get editable():Boolean
-        {
-            return _editable;
-        }
-
-        public override function set editable(arg1:Boolean):void
-        {
-            _editable = arg1;
-            if (textField != null) 
-            {
-                textField.type = _editable && enabled ? flash.text.TextFieldType.INPUT : flash.text.TextFieldType.DYNAMIC;
-            }
-            this.focusable = _editable ? _editable : this.selectable;
-            return;
-        }
-
-        protected override function configUI():void
-        {
-            if (this._showBgForm) 
-            {
-                textField.x = PADDING_FOR_BG;
-                textField.y = PADDING_FOR_BG;
-                textField.width = textField.width - PADDING_FOR_BG * 2;
-                textField.height = textField.height - PADDING_FOR_BG * 2;
-            }
-            else 
-            {
-                textField.x = this._textPadding.left;
-                textField.y = this._textPadding.top;
-                textField.width = textField.width - (this._textPadding.left + this._textPadding.right);
-                textField.height = textField.height - (this._textPadding.top + this._textPadding.bottom);
-            }
-            if (!constraintsDisabled) 
-            {
-                constraints.addElement("textField", textField, scaleform.clik.utils.Constraints.ALL);
-            }
-            addEventListener(scaleform.clik.events.InputEvent.INPUT, this.handleInput, false, 0, true);
-            textField.addEventListener(flash.events.FocusEvent.FOCUS_IN, handleTextFieldFocusIn, false, 0, true);
-            if (this.focusable && this._selectable) 
-            {
-                addEventListener(flash.events.MouseEvent.MOUSE_DOWN, handleMouseDown, false, 0, true);
-            }
-            setState(defaultState, "default");
-            addEventListener(flash.events.MouseEvent.MOUSE_WHEEL, this.onMouseWheel);
-            textField.selectable = enabled ? this.editable || this._selectable : false;
-            this.bgForm.visible = this.showBgForm;
-            return;
-        }
-
-        protected override function updateTextField():void
-        {
-            _resetScrollPosition = true;
-            if (textField == null) 
-            {
-                trace(">>> Error :: " + this + ", textField is NULL.");
-                return;
-            }
-            this.updateText();
-            textField.maxChars = _maxChars;
-            textField.alwaysShowSelection = _alwaysShowSelection;
-            textField.selectable = enabled ? this._selectable : enabled;
-            textField.type = _editable && enabled ? flash.text.TextFieldType.INPUT : flash.text.TextFieldType.DYNAMIC;
-            textField.tabEnabled = this._selectable && enabled && _focusable;
-            textField.addEventListener(flash.events.Event.CHANGE, handleTextChange, false, 0, true);
-            if (textField.hasEventListener(flash.events.FocusEvent.FOCUS_IN)) 
-            {
-                textField.removeEventListener(flash.events.FocusEvent.FOCUS_IN, handleTextFieldFocusIn, false);
-            }
-            textField.addEventListener(flash.events.FocusEvent.FOCUS_IN, handleTextFieldFocusIn, false, 0, true);
-            if (!textField.hasEventListener(flash.events.FocusEvent.FOCUS_IN)) 
-            {
-                textField.addEventListener(flash.events.FocusEvent.FOCUS_IN, this.onSetFocusHdlr);
-            }
-            if (!textField.hasEventListener(flash.events.FocusEvent.FOCUS_OUT)) 
-            {
-                textField.addEventListener(flash.events.FocusEvent.FOCUS_OUT, this.onKillFocusHdlr);
-            }
-            textField.selectable = enabled ? this.editable || this._selectable : enabled;
-            return;
-        }
-
-        internal function onSetFocusHdlr(arg1:flash.events.FocusEvent):void
-        {
-            App.utils.IME.setVisible(true);
-            return;
-        }
-
-        internal function onKillFocusHdlr(arg1:flash.events.FocusEvent):void
-        {
-            App.utils.IME.setVisible(false);
-            return;
-        }
-
-        internal static const PADDING_FOR_BG:Number=7;
-
-        public var bgForm:flash.display.Sprite;
-
-        internal var _safePosition:Boolean=false;
-
-        internal var _autoScroll:Boolean=false;
-
-        internal var _showBgForm:Boolean=false;
-
-        internal var _selectable:Boolean=false;
-
-        internal var _textPadding:scaleform.clik.utils.Padding;
-
-        internal var _selectionTextColor:uint=1973787;
-
-        internal var _selectionBgColor:uint=9868935;
-    }
 }

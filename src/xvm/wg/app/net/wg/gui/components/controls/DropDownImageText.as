@@ -1,35 +1,41 @@
-package net.wg.gui.components.controls 
+package net.wg.gui.components.controls
 {
-    public class DropDownImageText extends net.wg.gui.components.controls.DropdownMenu
-    {
-        public function DropDownImageText()
-        {
-            super();
-            return;
-        }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            return;
-        }
 
-        protected override function populateText(arg1:Object):void
-        {
-            super.populateText(arg1);
-            this.icon.visible = true;
-            if (arg1) 
-            {
-                this.icon.source = arg1.icon;
-            }
-            return;
-        }
+   public class DropDownImageText extends DropdownMenu
+   {
+          
+      public function DropDownImageText() {
+         super();
+      }
 
-        public override function toString():String
-        {
-            return "[WG DropDownImageText " + name + "]";
-        }
+      public var icon:UILoaderAlt;
 
-        public var icon:net.wg.gui.components.controls.UILoaderAlt;
-    }
+      override protected function configUI() : void {
+         super.configUI();
+      }
+
+      override public function dispose() : void {
+         if(this.icon)
+         {
+            this.icon.dispose();
+            this.icon = null;
+         }
+         super.dispose();
+      }
+
+      override protected function populateText(param1:Object) : void {
+         super.populateText(param1);
+         this.icon.visible = true;
+         if(param1)
+         {
+            this.icon.source = param1.icon;
+         }
+      }
+
+      override public function toString() : String {
+         return "[WG DropDownImageText " + name + "]";
+      }
+   }
+
 }

@@ -1,187 +1,160 @@
-package net.wg.gui.notification 
+package net.wg.gui.notification
 {
-    import flash.display.*;
-    import flash.events.*;
-    import flash.geom.*;
-    import flash.ui.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.data.*;
-    import scaleform.clik.events.*;
-    
-    public class NotificationListView extends net.wg.infrastructure.base.meta.impl.NotificationsListMeta implements net.wg.infrastructure.base.meta.INotificationsListMeta
-    {
-        public function NotificationListView()
-        {
-            this.layoutInfo = new net.wg.gui.notification.LayoutInfoVO({"paddingRight":0, "paddingBottom":0});
-            this.stageDimensions = new flash.geom.Point();
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.NotificationsListMeta;
+   import net.wg.infrastructure.base.meta.INotificationsListMeta;
+   import flash.geom.Point;
+   import flash.events.MouseEvent;
+   import scaleform.clik.events.InputEvent;
+   import flash.ui.Keyboard;
+   import scaleform.clik.constants.InputValue;
+   import flash.display.DisplayObject;
+   import scaleform.clik.data.DataProvider;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            stage.addEventListener(flash.events.MouseEvent.CLICK, this.stageClickHandler, false, 0, true);
-            this.stageDimensions.x = stage.stageWidth;
-            this.stageDimensions.y = stage.stageHeight;
-            this.list.addEventListener(net.wg.gui.notification.ServiceMessageEvent.MESSAGE_BUTTON_CLICKED, this.messageButtonClickHandler, false, 0, true);
-            this.list.addEventListener(net.wg.gui.notification.ServiceMessageEvent.MESSAGE_LINK_CLICKED, this.messageLinkClickHandler, false, 0, true);
-            if (this.rendererTemplate) 
-            {
-                if (this.rendererTemplate.parent) 
-                {
-                    this.rendererTemplate.parent.removeChild(this.rendererTemplate);
-                    this.rendererTemplate = null;
-                }
-            }
-            return;
-        }
 
-        internal function messageButtonClickHandler(arg1:net.wg.gui.notification.ServiceMessageEvent):void
-        {
-            arg1.stopImmediatePropagation();
-            onMessageShowMoreS(net.wg.gui.notification.NotificationInfoVO(net.wg.gui.notification.ServiceMessage(arg1.target).data).messageVO.showMore);
-            return;
-        }
+   public class NotificationListView extends NotificationsListMeta implements INotificationsListMeta
+   {
+          
+      public function NotificationListView() {
+         this.layoutInfo = new LayoutInfoVO(
+            {
+               "paddingRight":0,
+               "paddingBottom":0
+            }
+         );
+         this.stageDimensions = new Point();
+         super();
+      }
 
-        internal function messageLinkClickHandler(arg1:net.wg.gui.notification.ServiceMessageEvent):void
-        {
-            arg1.stopImmediatePropagation();
-            var loc1:*=arg1.linkType;
-            switch (loc1) 
-            {
-                case "securityLink":
-                {
-                    onSecuritySettingsLinkClickS();
-                    break;
-                }
-                default:
-                {
-                    break;
-                }
-            }
-            return;
-        }
+      private static const LAYOUT_INV:String = "layoutInv";
 
-        public override function handleInput(arg1:scaleform.clik.events.InputEvent):void
-        {
-            super.handleInput(arg1);
-            if (arg1.details.code == flash.ui.Keyboard.ESCAPE && arg1.details.value == scaleform.clik.constants.InputValue.KEY_DOWN) 
-            {
-                arg1.handled = true;
-                onWindowCloseS();
-            }
-            return;
-        }
+      private var layoutInfo:LayoutInfoVO;
 
-        internal function stageClickHandler(arg1:flash.events.MouseEvent):void
-        {
-            var loc1:*=arg1.target as flash.display.DisplayObject;
-            if (!loc1) 
+      private var stageDimensions:Point;
+
+      public var list:NotificationsList;
+
+      public var rendererTemplate:ServiceMessageItemRenderer;
+
+      override protected function configUI() : void {
+         super.configUI();
+         stage.addEventListener(MouseEvent.CLICK,this.stageClickHandler,false,0,true);
+         this.stageDimensions.x = stage.stageWidth;
+         this.stageDimensions.y = stage.stageHeight;
+         this.list.addEventListener(ServiceMessageEvent.MESSAGE_BUTTON_CLICKED,this.messageButtonClickHandler,false,0,true);
+         this.list.addEventListener(ServiceMessageEvent.MESSAGE_LINK_CLICKED,this.messageLinkClickHandler,false,0,true);
+         if(this.rendererTemplate)
+         {
+            if(this.rendererTemplate.parent)
             {
-                return;
+               this.rendererTemplate.parent.removeChild(this.rendererTemplate);
+               this.rendererTemplate = null;
             }
-            while (loc1) 
-            {
-                if (loc1 == this) 
-                {
-                    return;
-                }
-                loc1 = loc1.parent;
-            }
+         }
+      }
+
+      private function messageButtonClickHandler(param1:ServiceMessageEvent) : void {
+         param1.stopImmediatePropagation();
+         onMessageShowMoreS(NotificationInfoVO(ServiceMessage(param1.target).data).messageVO.showMore);
+      }
+
+      private function messageLinkClickHandler(param1:ServiceMessageEvent) : void {
+         param1.stopImmediatePropagation();
+         switch(param1.linkType)
+         {
+            case "securityLink":
+               onSecuritySettingsLinkClickS();
+               break;
+         }
+      }
+
+      override public function handleInput(param1:InputEvent) : void {
+         super.handleInput(param1);
+         if(param1.details.code == Keyboard.ESCAPE && param1.details.value == InputValue.KEY_DOWN)
+         {
+            param1.handled = true;
             onWindowCloseS();
-            return;
-        }
+         }
+      }
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(LAYOUT_INV)) 
+      private function stageClickHandler(param1:MouseEvent) : void {
+         var _loc2_:DisplayObject = param1.target as DisplayObject;
+         if(!_loc2_)
+         {
+            return;
+         }
+         while(_loc2_)
+         {
+            if(_loc2_ == this)
             {
-                this.x = this.stageDimensions.x - this.width - this.layoutInfo.paddingRight;
-                this.y = this.stageDimensions.y - this.height - this.layoutInfo.paddingBottom;
+               return;
             }
+            _loc2_ = _loc2_.parent;
+         }
+         onWindowCloseS();
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         if(isInvalid(LAYOUT_INV))
+         {
+            this.x = this.stageDimensions.x - this.width - this.layoutInfo.paddingRight;
+            this.y = this.stageDimensions.y - this.height - this.layoutInfo.paddingBottom;
+         }
+      }
+
+      override public function updateStage(param1:Number, param2:Number) : void {
+         super.updateStage(param1,param2);
+         this.stageDimensions.x = param1;
+         this.stageDimensions.y = param2;
+         invalidate(LAYOUT_INV);
+      }
+
+      override protected function onPopulate() : void {
+         super.onPopulate();
+      }
+
+      public function as_setInitData(param1:Object) : void {
+         var _loc2_:* = "scrollStepFactor";
+         if(param1.hasOwnProperty(_loc2_))
+         {
+            this.list.scrollStepFactor = param1[_loc2_];
+         }
+      }
+
+      public function as_setMessagesList(param1:Array) : void {
+         if(param1 == null)
+         {
             return;
-        }
+         }
+         var _loc2_:Array = [];
+         var _loc3_:uint = param1.length;
+         var _loc4_:* = 0;
+         while(_loc4_ < _loc3_)
+         {
+            _loc2_.push(new NotificationInfoVO(param1[_loc4_]));
+            _loc4_++;
+         }
+         this.list.dataProvider = new DataProvider(_loc2_);
+      }
 
-        public override function updateStage(arg1:Number, arg2:Number):void
-        {
-            super.updateStage(arg1, arg2);
-            this.stageDimensions.x = arg1;
-            this.stageDimensions.y = arg2;
-            invalidate(LAYOUT_INV);
-            return;
-        }
+      public function as_appendMessage(param1:Object) : void {
+         this.list.appendData(new NotificationInfoVO(param1));
+      }
 
-        protected override function onPopulate():void
-        {
-            super.onPopulate();
-            return;
-        }
+      public function as_layoutInfo(param1:Object) : void {
+         this.layoutInfo = new LayoutInfoVO(param1);
+         invalidate(LAYOUT_INV);
+      }
 
-        public function as_setInitData(arg1:Object):void
-        {
-            var loc1:*="scrollStepFactor";
-            if (arg1.hasOwnProperty(loc1)) 
-            {
-                this.list.scrollStepFactor = arg1[loc1];
-            }
-            return;
-        }
+      override protected function onDispose() : void {
+         if(stage)
+         {
+            stage.removeEventListener(MouseEvent.CLICK,this.stageClickHandler);
+         }
+         this.list.removeEventListener(ServiceMessageEvent.MESSAGE_BUTTON_CLICKED,this.messageButtonClickHandler);
+         this.list.removeEventListener(ServiceMessageEvent.MESSAGE_LINK_CLICKED,this.messageLinkClickHandler);
+         super.onDispose();
+      }
+   }
 
-        public function as_setMessagesList(arg1:Array):void
-        {
-            if (arg1 == null) 
-            {
-                return;
-            }
-            var loc1:*=[];
-            var loc2:*=arg1.length;
-            var loc3:*=0;
-            while (loc3 < loc2) 
-            {
-                loc1.push(new net.wg.gui.notification.NotificationInfoVO(arg1[loc3]));
-                ++loc3;
-            }
-            this.list.dataProvider = new scaleform.clik.data.DataProvider(loc1);
-            return;
-        }
-
-        public function as_appendMessage(arg1:Object):void
-        {
-            this.list.appendData(new net.wg.gui.notification.NotificationInfoVO(arg1));
-            return;
-        }
-
-        public function as_layoutInfo(arg1:Object):void
-        {
-            this.layoutInfo = new net.wg.gui.notification.LayoutInfoVO(arg1);
-            invalidate(LAYOUT_INV);
-            return;
-        }
-
-        protected override function onDispose():void
-        {
-            if (stage) 
-            {
-                stage.removeEventListener(flash.events.MouseEvent.CLICK, this.stageClickHandler);
-            }
-            this.list.removeEventListener(net.wg.gui.notification.ServiceMessageEvent.MESSAGE_BUTTON_CLICKED, this.messageButtonClickHandler);
-            this.list.removeEventListener(net.wg.gui.notification.ServiceMessageEvent.MESSAGE_LINK_CLICKED, this.messageLinkClickHandler);
-            super.onDispose();
-            return;
-        }
-
-        internal static const LAYOUT_INV:String="layoutInv";
-
-        internal var layoutInfo:net.wg.gui.notification.LayoutInfoVO;
-
-        internal var stageDimensions:flash.geom.Point;
-
-        public var list:net.wg.gui.notification.NotificationsList;
-
-        public var rendererTemplate:net.wg.gui.notification.ServiceMessageItemRenderer;
-    }
 }

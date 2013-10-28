@@ -1,57 +1,53 @@
-package net.wg.gui.lobby.profile.components 
+package net.wg.gui.lobby.profile.components
 {
-    import flash.display.*;
-    import flash.geom.*;
-    
-    public class GradientLineButtonBar extends net.wg.gui.lobby.profile.components.LineButtonBar
-    {
-        public function GradientLineButtonBar()
-        {
-            super();
-            return;
-        }
+   import flash.display.DisplayObject;
+   import flash.display.Graphics;
+   import flash.display.DisplayObjectContainer;
+   import flash.display.GradientType;
+   import flash.geom.Matrix;
+   import flash.display.SpreadMethod;
 
-        protected override function drawLine():void
-        {
-            var loc1:*=1;
-            var loc2:*=_renderers[selectedIndex] as flash.display.DisplayObject;
-            var loc3:*=line.graphics;
-            var loc4:*=loc2.x;
-            loc3.clear();
-            if (loc4 > 0) 
-            {
-                loc3.beginFill(color, 1);
-                loc3.drawRect(0, 0, loc4, loc1);
-                loc3.endFill();
-            }
-            this.drawGradientLine(loc3, loc4 + loc2.width, 0, width, loc1, [1, 0.1], [color, color]);
-            line.y = this.actualHeight - line.height;
-            var loc5:*;
-            if (loc5 = line.parent) 
-            {
-                loc5.setChildIndex(line, (loc5.numChildren - 1));
-            }
-            return;
-        }
 
-        internal function drawGradientLine(arg1:flash.display.Graphics, arg2:Number, arg3:Number, arg4:Number, arg5:Number, arg6:Array, arg7:Array):void
-        {
-            var loc1:*=flash.display.GradientType.LINEAR;
-            var loc2:*=[125, 255];
-            var loc3:*=new flash.geom.Matrix();
-            var loc4:*=0;
-            loc3.createGradientBox(arg4, arg5, loc4, 0, 0);
-            arg1.beginGradientFill(loc1, arg7, arg6, loc2, loc3, flash.display.SpreadMethod.PAD);
-            arg1.drawRect(arg2, arg3, arg4, arg5);
-            arg1.endFill();
-            return;
-        }
+   public class GradientLineButtonBar extends LineButtonBar
+   {
+          
+      public function GradientLineButtonBar() {
+         super();
+      }
 
-        
-        {
-            color = 3749680;
-        }
+      private static var color:uint = 3749680;
 
-        internal static var color:uint=3749680;
-    }
+      override protected function drawLine() : void {
+         var _loc1_:Number = 1;
+         var _loc2_:DisplayObject = _renderers[selectedIndex] as DisplayObject;
+         var _loc3_:Graphics = line.graphics;
+         var _loc4_:uint = _loc2_.x;
+         _loc3_.clear();
+         if(_loc4_ > 0)
+         {
+            _loc3_.beginFill(color,1);
+            _loc3_.drawRect(0,0,_loc4_,_loc1_);
+            _loc3_.endFill();
+         }
+         this.drawGradientLine(_loc3_,_loc4_ + _loc2_.width,0,width,_loc1_,[1,0.1],[color,color]);
+         line.y = this.actualHeight - line.height;
+         var _loc5_:DisplayObjectContainer = line.parent;
+         if(_loc5_)
+         {
+            _loc5_.setChildIndex(line,_loc5_.numChildren-1);
+         }
+      }
+
+      private function drawGradientLine(param1:Graphics, param2:Number, param3:Number, param4:Number, param5:Number, param6:Array, param7:Array) : void {
+         var _loc8_:String = GradientType.LINEAR;
+         var _loc9_:Array = [125,255];
+         var _loc10_:Matrix = new Matrix();
+         var _loc11_:Number = 0;
+         _loc10_.createGradientBox(param4,param5,_loc11_,0,0);
+         param1.beginGradientFill(_loc8_,param7,param6,_loc9_,_loc10_,SpreadMethod.PAD);
+         param1.drawRect(param2,param3,param4,param5);
+         param1.endFill();
+      }
+   }
+
 }

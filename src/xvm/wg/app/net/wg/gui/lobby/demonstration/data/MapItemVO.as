@@ -1,52 +1,44 @@
-package net.wg.gui.lobby.demonstration.data 
+package net.wg.gui.lobby.demonstration.data
 {
-    import net.wg.data.daapi.base.*;
-    
-    public class MapItemVO extends net.wg.data.daapi.base.DAAPIDataClass
-    {
-        public function MapItemVO(arg1:Object)
-        {
-            super(arg1);
-            return;
-        }
+   import net.wg.data.daapi.base.DAAPIDataClass;
 
-        public function get id():Number
-        {
-            return this._id;
-        }
 
-        public function set id(arg1:Number):void
-        {
-            this._id = arg1;
-            return;
-        }
+   public class MapItemVO extends DAAPIDataClass
+   {
+          
+      public function MapItemVO(param1:Object) {
+         super(param1);
+      }
 
-        public function get name():String
-        {
-            return this._name;
-        }
+      private var _id:Number = NaN;
 
-        public function set name(arg1:String):void
-        {
-            this._name = arg1;
-            return;
-        }
+      private var _name:String = "";
 
-        public function get type():String
-        {
-            return this._type;
-        }
+      private var _type:String = "";
 
-        public function set type(arg1:String):void
-        {
-            this._type = arg1;
-            return;
-        }
+      public function get id() : Number {
+         return this._id;
+      }
 
-        internal var _id:Number=NaN;
+      public function set id(param1:Number) : void {
+         this._id = param1;
+      }
 
-        internal var _name:String="";
+      public function get name() : String {
+         return this._name;
+      }
 
-        internal var _type:String="";
-    }
+      public function set name(param1:String) : void {
+         this._name = param1;
+      }
+
+      public function get type() : String {
+         return this._type;
+      }
+
+      public function set type(param1:String) : void {
+         this._type = param1;
+      }
+   }
+
 }

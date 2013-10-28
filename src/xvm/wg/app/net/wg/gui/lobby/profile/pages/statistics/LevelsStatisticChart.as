@@ -1,18 +1,18 @@
-package net.wg.gui.lobby.profile.pages.statistics 
+package net.wg.gui.lobby.profile.pages.statistics
 {
-    public class LevelsStatisticChart extends net.wg.gui.lobby.profile.pages.statistics.StatisticsBarChart
-    {
-        public function LevelsStatisticChart()
-        {
-            super();
-            return;
-        }
 
-        protected override function adjustProviderItem(arg1:net.wg.gui.lobby.profile.pages.statistics.StatisticChartInfo, arg2:int):void
-        {
-            super.adjustProviderItem(arg1, arg2);
-            arg1.icon = "../maps/icons/levels/tank_level_" + arg1.xField + ".png";
-            return;
-        }
-    }
+
+   public class LevelsStatisticChart extends StatisticsBarChart
+   {
+          
+      public function LevelsStatisticChart() {
+         super();
+      }
+
+      override protected function adjustProviderItem(param1:StatisticChartInfo, param2:int) : void {
+         super.adjustProviderItem(param1,param2);
+         param1.icon = "../maps/icons/levels/tank_level_" + param1.xField + ".png";
+      }
+   }
+
 }

@@ -1,8 +1,12 @@
-package net.wg.gui.lobby.profile.components.chart 
+package net.wg.gui.lobby.profile.components.chart
 {
-    import scaleform.clik.interfaces.*;
-    
-    public interface IChartItem extends scaleform.clik.interfaces.IListItemRenderer
-    {
-    }
+   import scaleform.clik.interfaces.IListItemRenderer;
+
+
+   public interface IChartItem extends IListItemRenderer
+   {
+          
+
+   }
+
 }

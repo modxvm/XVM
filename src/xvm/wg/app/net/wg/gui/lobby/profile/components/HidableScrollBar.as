@@ -1,23 +1,22 @@
-package net.wg.gui.lobby.profile.components 
+package net.wg.gui.lobby.profile.components
 {
-    import net.wg.gui.components.controls.*;
-    
-    public class HidableScrollBar extends net.wg.gui.components.controls.ScrollBar
-    {
-        public function HidableScrollBar()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.components.controls.ScrollBar;
 
-        public override function set scaleX(arg1:Number):void
-        {
-            return;
-        }
 
-        public override function set scaleY(arg1:Number):void
-        {
-            return;
-        }
-    }
+   public class HidableScrollBar extends ScrollBar
+   {
+          
+      public function HidableScrollBar() {
+         super();
+      }
+
+      override public function set scaleX(param1:Number) : void {
+          
+      }
+
+      override public function set scaleY(param1:Number) : void {
+          
+      }
+   }
+
 }

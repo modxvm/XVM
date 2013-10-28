@@ -1,11 +1,14 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface ITickerMeta extends flash.events.IEventDispatcher
-    {
-        function showBrowserS(arg1:String):void;
+   import flash.events.IEventDispatcher;
 
-        function as_setItems(arg1:Array):void;
-    }
+
+   public interface ITickerMeta extends IEventDispatcher
+   {
+          
+      function showBrowserS(param1:String) : void;
+
+      function as_setItems(param1:Array) : void;
+   }
+
 }

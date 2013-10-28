@@ -1,106 +1,116 @@
-package net.wg.gui.components.controls 
+package net.wg.gui.components.controls
 {
-    import flash.display.*;
-    import flash.events.*;
-    import flash.utils.*;
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    import scaleform.clik.controls.*;
-    
-    public class SoundButton extends scaleform.clik.controls.Button implements net.wg.infrastructure.interfaces.entity.ISoundable
-    {
-        public function SoundButton()
-        {
-            super();
+   import scaleform.clik.controls.Button;
+   import net.wg.infrastructure.interfaces.entity.ISoundable;
+   import flash.display.MovieClip;
+   import flash.events.TimerEvent;
+   import net.wg.data.constants.SoundManagerStates;
+   import flash.utils.Timer;
+
+
+   public class SoundButton extends Button implements ISoundable
+   {
+          
+      public function SoundButton() {
+         super();
+      }
+
+      private var _soundType:String = "normal";
+
+      public var soundId:String = "";
+
+      public var hitMc:MovieClip;
+
+      public function get soundType() : String {
+         return this._soundType;
+      }
+
+      public function set soundType(param1:String) : void {
+         if((param1) && !(param1 == this._soundType))
+         {
+            this._soundType = param1;
+         }
+      }
+
+      override public function toString() : String {
+         return "[WG SoundButton " + name + "]";
+      }
+
+      override public function dispose() : void {
+         this.hitMc = null;
+         if(_repeatTimer != null)
+         {
+            _repeatTimer.removeEventListener(TimerEvent.TIMER_COMPLETE,beginRepeat,false);
+            _repeatTimer.stop();
+         }
+         if(App.soundMgr)
+         {
+            App.soundMgr.removeSoundHdlrs(this);
+         }
+         super.dispose();
+      }
+
+      public final function getSoundType() : String {
+         return this.soundType;
+      }
+
+      public final function getSoundId() : String {
+         return this.soundId;
+      }
+
+      public final function getStateOverSnd() : String {
+         return SoundManagerStates.SND_OVER;
+      }
+
+      public final function getStateOutSnd() : String {
+         return SoundManagerStates.SND_OUT;
+      }
+
+      public final function getStatePressSnd() : String {
+         return SoundManagerStates.SND_PRESS;
+      }
+
+      public function beginButtonRepeat() : void {
+         if((autoRepeat) && _repeatTimer == null)
+         {
+            _repeatTimer = new Timer(repeatDelay,1);
+            _repeatTimer.addEventListener(TimerEvent.TIMER_COMPLETE,beginRepeat,false,0,true);
+            _repeatTimer.start();
+         }
+      }
+
+      override public function set enabled(param1:Boolean) : void {
+         if(param1 == enabled)
+         {
             return;
-        }
+         }
+         if((this.focusable) && (this.focused) && !param1)
+         {
+            this.focused = 0;
+         }
+         super.enabled = param1;
+      }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            if (this.hitMc != null) 
-            {
-                this.hitArea = this.hitMc;
-            }
-            buttonMode = true;
-            if (App.soundMgr != null) 
-            {
-                App.soundMgr.addSoundsHdlrs(this);
-            }
-            return;
-        }
+      override protected function configUI() : void {
+         super.configUI();
+         if(this.hitMc != null)
+         {
+            this.hitArea = this.hitMc;
+         }
+         buttonMode = true;
+         if(App.soundMgr != null)
+         {
+            App.soundMgr.addSoundsHdlrs(this);
+         }
+         if(textField)
+         {
+            textField.mouseEnabled = false;
+         }
+      }
 
-        protected override function draw():void
-        {
-            super.draw();
-            return;
-        }
+      override protected function draw() : void {
+         super.draw();
+      }
+   }
 
-        public override function toString():String
-        {
-            return "[WG SoundButton " + name + "]";
-        }
-
-        public final function getSoundType():String
-        {
-            return this.soundType;
-        }
-
-        public final function getSoundId():String
-        {
-            return this.soundId;
-        }
-
-        public final function getStateOverSnd():String
-        {
-            return net.wg.data.constants.SoundManagerStates.SND_OVER;
-        }
-
-        public final function getStateOutSnd():String
-        {
-            return net.wg.data.constants.SoundManagerStates.SND_OUT;
-        }
-
-        public final function getStatePressSnd():String
-        {
-            return net.wg.data.constants.SoundManagerStates.SND_PRESS;
-        }
-
-        public function beginButtonRepeat():void
-        {
-            if (autoRepeat && _repeatTimer == null) 
-            {
-                _repeatTimer = new flash.utils.Timer(repeatDelay, 1);
-                _repeatTimer.addEventListener(flash.events.TimerEvent.TIMER_COMPLETE, beginRepeat, false, 0, true);
-                _repeatTimer.start();
-            }
-            return;
-        }
-
-        public override function set enabled(arg1:Boolean):void
-        {
-            if (arg1 == enabled) 
-            {
-                return;
-            }
-            if (this.focusable && this.focused && !arg1) 
-            {
-                this.focused = 0;
-            }
-            super.enabled = arg1;
-            return;
-        }
-
-        public override function dispose():void
-        {
-            super.dispose();
-            return;
-        }
-
-        public var soundType:String="normal";
-
-        public var soundId:String="";
-
-        public var hitMc:flash.display.MovieClip;
-    }
 }

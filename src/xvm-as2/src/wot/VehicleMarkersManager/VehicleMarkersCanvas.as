@@ -28,10 +28,6 @@ class wot.VehicleMarkersManager.VehicleMarkersCanvas
     {
         Utils.TraceXvmModule("VMM");
 
-        // ScaleForm optimization // FIXIT: is required?
-        if (!_global.noInvisibleAdvance)
-            _global.noInvisibleAdvance = true;
-
         // Check config
         if (Config.s_loaded != true)
             Config.LoadConfig();

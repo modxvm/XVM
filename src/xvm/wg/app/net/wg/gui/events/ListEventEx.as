@@ -1,38 +1,39 @@
-package net.wg.gui.events 
+package net.wg.gui.events
 {
-    import scaleform.clik.events.*;
-    import scaleform.clik.interfaces.*;
-    
-    public class ListEventEx extends scaleform.clik.events.ListEvent
-    {
-        public function ListEventEx(arg1:String, arg2:Boolean=false, arg3:Boolean=true, arg4:int=-1, arg5:int=-1, arg6:int=-1, arg7:scaleform.clik.interfaces.IListItemRenderer=null, arg8:Object=null, arg9:uint=0, arg10:uint=0, arg11:Boolean=false)
-        {
-            super(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11);
-            return;
-        }
+   import scaleform.clik.events.ListEvent;
+   import scaleform.clik.interfaces.IListItemRenderer;
 
-        public static const ITEM_CLICK:String="itemClick";
 
-        public static const ITEM_PRESS:String="itemPress";
+   public class ListEventEx extends ListEvent
+   {
+          
+      public function ListEventEx(param1:String, param2:Boolean=false, param3:Boolean=true, param4:int=undefined, param5:int=undefined, param6:int=undefined, param7:IListItemRenderer=null, param8:Object=null, param9:uint=undefined, param10:uint=undefined, param11:Boolean=false) {
+         super(param1,param2,param3,param4,param5,param6,param7,param8,param9,param10,param11);
+      }
 
-        public static const ITEM_ROLL_OVER:String="itemRollOver";
+      public static const ITEM_CLICK:String = "itemClick";
 
-        public static const ITEM_ROLL_OUT:String="itemRollOut";
+      public static const ITEM_PRESS:String = "itemPress";
 
-        public static const ITEM_DOUBLE_CLICK:String="itemDoubleClick";
+      public static const ITEM_ROLL_OVER:String = "itemRollOver";
 
-        public static const INDEX_CHANGE:String="listIndexChange";
+      public static const ITEM_ROLL_OUT:String = "itemRollOut";
 
-        public static const ITEM_TEXT_CHANGE:String="itemTextChange";
+      public static const ITEM_DOUBLE_CLICK:String = "itemDoubleClick";
 
-        public static const ITEM_DRAG_OVER:String="itemDragOver";
+      public static const INDEX_CHANGE:String = "listIndexChange";
 
-        public static const ITEM_DRAG_OUT:String="itemDragOut";
+      public static const ITEM_TEXT_CHANGE:String = "itemTextChange";
 
-        public static const ITEM_RELEASE_OUTSIDE:String="itemReleaseOutside";
+      public static const ITEM_DRAG_OVER:String = "itemDragOver";
 
-        public static const ITEM_DRAG_START:String="dragStart";
+      public static const ITEM_DRAG_OUT:String = "itemDragOut";
 
-        public static const ITEM_DRAG_STOP:String="dragStop";
-    }
+      public static const ITEM_RELEASE_OUTSIDE:String = "itemReleaseOutside";
+
+      public static const ITEM_DRAG_START:String = "dragStart";
+
+      public static const ITEM_DRAG_STOP:String = "dragStop";
+   }
+
 }

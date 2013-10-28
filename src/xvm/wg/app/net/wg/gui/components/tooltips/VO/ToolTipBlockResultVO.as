@@ -1,38 +1,40 @@
-package net.wg.gui.components.tooltips.VO 
+package net.wg.gui.components.tooltips.VO
 {
-    import __AS3__.vec.*;
-    import flash.text.*;
-    
-    public class ToolTipBlockResultVO extends Object
-    {
-        public function ToolTipBlockResultVO(arg1:Number, arg2:flash.text.TextField, arg3:__AS3__.vec.Vector.<net.wg.gui.components.controls.IconText>, arg4:Array, arg5:flash.text.TextField, arg6:Boolean, arg7:Number, arg8:Number)
-        {
-            super();
-            this.startYPos = arg1;
-            this.leftTextField = arg2;
-            this.elRightList = arg3;
-            this.centerList = arg4;
-            this.headerTextField = arg5;
-            this.hasIcons = arg6;
-            this.leftPartMaxW = arg7;
-            this.blockWidth = arg8;
-            return;
-        }
+   import flash.text.TextField;
+   import __AS3__.vec.Vector;
+   import net.wg.gui.components.controls.IconText;
 
-        public var startYPos:Number=NaN;
 
-        public var leftTextField:flash.text.TextField=null;
+   public class ToolTipBlockResultVO extends Object
+   {
+          
+      public function ToolTipBlockResultVO(param1:Number, param2:TextField, param3:Vector.<IconText>, param4:Array, param5:TextField, param6:Boolean, param7:Number, param8:Number) {
+         super();
+         this.startYPos = param1;
+         this.leftTextField = param2;
+         this.elRightList = param3;
+         this.centerList = param4;
+         this.headerTextField = param5;
+         this.hasIcons = param6;
+         this.leftPartMaxW = param7;
+         this.blockWidth = param8;
+      }
 
-        public var elRightList:__AS3__.vec.Vector.<net.wg.gui.components.controls.IconText>=null;
+      public var startYPos:Number = NaN;
 
-        public var centerList:Array=null;
+      public var leftTextField:TextField = null;
 
-        public var headerTextField:flash.text.TextField=null;
+      public var elRightList:Vector.<IconText> = null;
 
-        public var hasIcons:Boolean=false;
+      public var centerList:Array = null;
 
-        public var leftPartMaxW:Number=NaN;
+      public var headerTextField:TextField = null;
 
-        public var blockWidth:Number=NaN;
-    }
+      public var hasIcons:Boolean = false;
+
+      public var leftPartMaxW:Number = NaN;
+
+      public var blockWidth:Number = NaN;
+   }
+
 }

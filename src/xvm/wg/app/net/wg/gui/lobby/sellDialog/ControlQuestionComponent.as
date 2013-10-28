@@ -1,182 +1,162 @@
-package net.wg.gui.lobby.sellDialog 
+package net.wg.gui.lobby.sellDialog
 {
-    import flash.display.*;
-    import flash.events.*;
-    import flash.text.*;
-    import flash.ui.*;
-    import net.wg.gui.components.controls.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.core.*;
-    import scaleform.clik.events.*;
-    
-    public class ControlQuestionComponent extends scaleform.clik.core.UIComponent
-    {
-        public function ControlQuestionComponent()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.display.MovieClip;
+   import flash.text.TextField;
+   import net.wg.gui.components.controls.TextInput;
+   import scaleform.clik.events.InputEvent;
+   import scaleform.clik.constants.InvalidationType;
+   import scaleform.clik.constants.InputValue;
+   import flash.ui.Keyboard;
+   import flash.events.Event;
 
-        public function get controlText():String
-        {
-            return this._controlText;
-        }
 
-        public function set controlText(arg1:String):void
-        {
-            this._controlText = arg1;
-            return;
-        }
+   public class ControlQuestionComponent extends UIComponent
+   {
+          
+      public function ControlQuestionComponent() {
+         super();
+      }
 
-        public function get headerText():String
-        {
-            return this._headerText;
-        }
+      public static const USER_INPUT_HANDLER:String = "userInputHandler";
 
-        public function set headerText(arg1:String):void
-        {
-            this._headerText = arg1;
-            return;
-        }
+      private static const PADDING_FOR_NEXT_ELEMENT:int = 10;
 
-        public function get questionText():String
-        {
-            return this._questionText;
-        }
+      private static const AUTO_UPDATE_TIMER:int = 5000;
 
-        public function set questionText(arg1:String):void
-        {
-            this._questionText = arg1;
-            return;
-        }
+      public var arrowBG:MovieClip;
 
-        public function get errorText():String
-        {
-            return this._errorText;
-        }
+      public var textHeader:TextField;
 
-        public function set errorText(arg1:String):void
-        {
-            this._errorText = arg1;
-            return;
-        }
+      public var controlQuestion:TextField;
 
-        public function getNextPosition():int
-        {
-            return this.errorMessage.y + this.errorMessage.height + PADDING_FOR_NEXT_ELEMENT;
-        }
+      public var userInput:TextInput;
 
-        public function getUserText():String
-        {
-            return this.userInput.text;
-        }
+      public var errorMessage:TextField;
 
-        protected override function configUI():void
-        {
-            super.configUI();
+      private var _headerText:String = "";
+
+      private var _questionText:String = "";
+
+      private var _errorText:String = "";
+
+      private var _controlText:String = "";
+
+      public function get controlText() : String {
+         return this._controlText;
+      }
+
+      public function set controlText(param1:String) : void {
+         this._controlText = param1;
+      }
+
+      public function get headerText() : String {
+         return this._headerText;
+      }
+
+      public function set headerText(param1:String) : void {
+         this._headerText = param1;
+      }
+
+      public function get questionText() : String {
+         return this._questionText;
+      }
+
+      public function set questionText(param1:String) : void {
+         this._questionText = param1;
+      }
+
+      public function get errorText() : String {
+         return this._errorText;
+      }
+
+      public function set errorText(param1:String) : void {
+         this._errorText = param1;
+      }
+
+      public function getNextPosition() : int {
+         return this.errorMessage.y + this.errorMessage.height + PADDING_FOR_NEXT_ELEMENT;
+      }
+
+      public function getUserText() : String {
+         return this.userInput.text;
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.showErrorState(false);
+         this.userInput.addEventListener(InputEvent.INPUT,this.userInputHandler);
+      }
+
+      override public function dispose() : void {
+         super.dispose();
+         this.userInput.removeEventListener(InputEvent.INPUT,this.userInputHandler);
+         this.userInput.dispose();
+         App.utils.scheduler.cancelTask(this.runtimeValidate);
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         if(isInvalid(InvalidationType.DATA))
+         {
+            this.textHeader.htmlText = this._headerText;
+            this.controlQuestion.htmlText = this._questionText;
+            this.errorMessage.htmlText = this._errorText;
+         }
+      }
+
+      private function userInputHandler(param1:InputEvent) : void {
+         if(param1.details.value == InputValue.KEY_UP)
+         {
             this.showErrorState(false);
-            this.userInput.addEventListener(scaleform.clik.events.InputEvent.INPUT, this.userInputHandler);
-            return;
-        }
-
-        public override function dispose():void
-        {
-            super.dispose();
-            this.userInput.removeEventListener(scaleform.clik.events.InputEvent.INPUT, this.userInputHandler);
-            this.userInput.dispose();
             App.utils.scheduler.cancelTask(this.runtimeValidate);
-            return;
-        }
-
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+            if(param1.details.code == Keyboard.ENTER)
             {
-                this.textHeader.htmlText = this._headerText;
-                this.controlQuestion.htmlText = this._questionText;
-                this.errorMessage.htmlText = this._errorText;
+               this.showErrorState(!this.isValidControlInput);
             }
-            return;
-        }
-
-        internal function userInputHandler(arg1:scaleform.clik.events.InputEvent):void
-        {
-            if (arg1.details.value == scaleform.clik.constants.InputValue.KEY_UP) 
+            else
             {
-                this.showErrorState(false);
-                App.utils.scheduler.cancelTask(this.runtimeValidate);
-                if (arg1.details.code != flash.ui.Keyboard.ENTER) 
-                {
-                    if (!this.isEmptyText) 
-                    {
-                        App.utils.scheduler.scheduleTask(this.runtimeValidate, AUTO_UPDATE_TIMER);
-                    }
-                }
-                else 
-                {
-                    this.showErrorState(!this.isValidControlInput);
-                }
-                dispatchEvent(new flash.events.Event(USER_INPUT_HANDLER));
+               if(!this.isEmptyText)
+               {
+                  App.utils.scheduler.scheduleTask(this.runtimeValidate,AUTO_UPDATE_TIMER);
+               }
             }
-            return;
-        }
+            dispatchEvent(new Event(USER_INPUT_HANDLER));
+         }
+      }
 
-        internal function showErrorState(arg1:Boolean):void
-        {
-            this.userInput.highlight = arg1;
-            this.errorMessage.visible = arg1;
-            return;
-        }
+      private function showErrorState(param1:Boolean) : void {
+         if(this.userInput.text == "")
+         {
+            this.userInput.highlight = false;
+            this.errorMessage.visible = false;
+         }
+         else
+         {
+            this.userInput.highlight = param1;
+            this.errorMessage.visible = param1;
+         }
+      }
 
-        internal function runtimeValidate():void
-        {
-            this.showErrorState(!this.isValidControlInput);
-            return;
-        }
+      private function runtimeValidate() : void {
+         this.showErrorState(!this.isValidControlInput);
+      }
 
-        internal function get isEmptyText():Boolean
-        {
-            return this.userInput.text == "";
-        }
+      private function get isEmptyText() : Boolean {
+         return this.userInput.text == "";
+      }
 
-        public function get isValidControlInput():Boolean
-        {
-            return this.userInput.text == this.controlText;
-        }
+      public function get isValidControlInput() : Boolean {
+         return this.userInput.text == this.controlText;
+      }
 
-        public function cleanField():void
-        {
-            if (this.userInput) 
-            {
-                this.userInput.text = "";
-            }
-            this.showErrorState(false);
-            return;
-        }
+      public function cleanField() : void {
+         if(this.userInput)
+         {
+            this.userInput.text = "";
+         }
+         this.showErrorState(false);
+      }
+   }
 
-        public static const USER_INPUT_HANDLER:String="userInputHandler";
-
-        internal static const PADDING_FOR_NEXT_ELEMENT:int=10;
-
-        internal static const AUTO_UPDATE_TIMER:int=5000;
-
-        public var arrowBG:flash.display.MovieClip;
-
-        public var textHeader:flash.text.TextField;
-
-        public var controlQuestion:flash.text.TextField;
-
-        public var userInput:net.wg.gui.components.controls.TextInput;
-
-        public var errorMessage:flash.text.TextField;
-
-        internal var _headerText:String="";
-
-        internal var _questionText:String="";
-
-        internal var _errorText:String="";
-
-        internal var _controlText:String="";
-    }
 }

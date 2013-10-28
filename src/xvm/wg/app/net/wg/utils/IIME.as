@@ -1,16 +1,19 @@
-package net.wg.utils 
+package net.wg.utils
 {
-    import flash.display.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    
-    public interface IIME extends net.wg.infrastructure.interfaces.entity.IDisposable
-    {
-        function init(arg1:Boolean):void;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import flash.display.Sprite;
 
-        function setVisible(arg1:Boolean):void;
 
-        function getContainer():flash.display.Sprite;
+   public interface IIME extends IDisposable
+   {
+          
+      function init(param1:Boolean) : void;
 
-        function onLangBarResize(arg1:Number, arg2:Number):void;
-    }
+      function setVisible(param1:Boolean) : void;
+
+      function getContainer() : Sprite;
+
+      function onLangBarResize(param1:Number, param2:Number) : void;
+   }
+
 }

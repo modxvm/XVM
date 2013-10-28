@@ -1,110 +1,97 @@
-package net.wg.gui.lobby.demonstration 
+package net.wg.gui.lobby.demonstration
 {
-    import flash.events.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.lobby.demonstration.data.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.events.*;
-    
-    public class DemonstratorWindow extends net.wg.infrastructure.base.meta.impl.DemonstratorWindowMeta implements net.wg.infrastructure.base.meta.IDemonstratorWindowMeta
-    {
-        public function DemonstratorWindow()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.DemonstratorWindowMeta;
+   import net.wg.infrastructure.base.meta.IDemonstratorWindowMeta;
+   import net.wg.gui.components.controls.TileList;
+   import net.wg.gui.components.controls.ScrollBar;
+   import net.wg.gui.lobby.demonstration.data.DemonstratorVO;
+   import scaleform.clik.events.ListEvent;
+   import flash.events.MouseEvent;
+   import scaleform.clik.constants.InvalidationType;
+   import net.wg.gui.lobby.demonstration.data.MapItemVO;
 
-        public function as_setData(arg1:Object):void
-        {
-            this.model = new net.wg.gui.lobby.demonstration.data.DemonstratorVO(arg1);
-            invalidateData();
-            return;
-        }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.scrollStandard.visible = false;
-            this.scrollAssault.visible = false;
-            this.scrollEncounter.visible = false;
-            this.listStandard.addEventListener(scaleform.clik.events.ListEvent.ITEM_CLICK, this.onMapItemClick);
-            this.listAssault.addEventListener(scaleform.clik.events.ListEvent.ITEM_CLICK, this.onMapItemClick);
-            this.listEncounter.addEventListener(scaleform.clik.events.ListEvent.ITEM_CLICK, this.onMapItemClick);
-            return;
-        }
+   public class DemonstratorWindow extends DemonstratorWindowMeta implements IDemonstratorWindowMeta
+   {
+          
+      public function DemonstratorWindow() {
+         super();
+      }
 
-        internal function onStageClick(arg1:flash.events.MouseEvent):void
-        {
-            this.updateScrollBars();
-            return;
-        }
+      public var listStandard:TileList;
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA) && this.model) 
-            {
-                this.listStandard.dataProvider = this.model.standard;
-                this.listAssault.dataProvider = this.model.assault;
-                this.listEncounter.dataProvider = this.model.encounter;
-                App.utils.scheduler.envokeInNextFrame(this.updateScrollBars);
-            }
-            return;
-        }
+      public var listAssault:TileList;
 
-        protected override function onPopulate():void
-        {
-            super.onPopulate();
-            window.useBottomBtns = true;
-            window.title = MENU.DEMONSTRATOR_WINDOW_TITLE;
-            return;
-        }
+      public var listEncounter:TileList;
 
-        protected override function onDispose():void
-        {
-            super.onDispose();
-            this.model.dispose();
-            this.model = null;
-            this.listStandard.removeEventListener(scaleform.clik.events.ListEvent.ITEM_CLICK, this.onMapItemClick);
-            this.listAssault.removeEventListener(scaleform.clik.events.ListEvent.ITEM_CLICK, this.onMapItemClick);
-            this.listEncounter.removeEventListener(scaleform.clik.events.ListEvent.ITEM_CLICK, this.onMapItemClick);
-            this.listStandard.dataProvider.cleanUp();
-            this.listStandard.dataProvider = null;
-            this.listAssault.dataProvider.cleanUp();
-            this.listAssault.dataProvider = null;
-            this.listEncounter.dataProvider.cleanUp();
-            this.listEncounter.dataProvider = null;
-            return;
-        }
+      public var scrollStandard:ScrollBar;
 
-        internal function onMapItemClick(arg1:scaleform.clik.events.ListEvent):void
-        {
-            onMapSelectedS(net.wg.gui.lobby.demonstration.data.MapItemVO(arg1.itemData).id);
-            return;
-        }
+      public var scrollAssault:ScrollBar;
 
-        internal function updateScrollBars():void
-        {
-            this.scrollStandard.visible = this.scrollStandard.thumb.visible;
-            this.scrollAssault.visible = this.scrollAssault.thumb.visible;
-            this.scrollEncounter.visible = this.scrollEncounter.thumb.visible;
-            return;
-        }
+      public var scrollEncounter:ScrollBar;
 
-        public var listStandard:net.wg.gui.components.controls.TileList;
+      private var model:DemonstratorVO;
 
-        public var listAssault:net.wg.gui.components.controls.TileList;
+      public function as_setData(param1:Object) : void {
+         this.model = new DemonstratorVO(param1);
+         invalidateData();
+      }
 
-        public var listEncounter:net.wg.gui.components.controls.TileList;
+      override protected function configUI() : void {
+         super.configUI();
+         this.scrollStandard.visible = false;
+         this.scrollAssault.visible = false;
+         this.scrollEncounter.visible = false;
+         this.listStandard.addEventListener(ListEvent.ITEM_CLICK,this.onMapItemClick);
+         this.listAssault.addEventListener(ListEvent.ITEM_CLICK,this.onMapItemClick);
+         this.listEncounter.addEventListener(ListEvent.ITEM_CLICK,this.onMapItemClick);
+      }
 
-        public var scrollStandard:net.wg.gui.components.controls.ScrollBar;
+      private function onStageClick(param1:MouseEvent) : void {
+         this.updateScrollBars();
+      }
 
-        public var scrollAssault:net.wg.gui.components.controls.ScrollBar;
+      override protected function draw() : void {
+         super.draw();
+         if((isInvalid(InvalidationType.DATA)) && (this.model))
+         {
+            this.listStandard.dataProvider = this.model.standard;
+            this.listAssault.dataProvider = this.model.assault;
+            this.listEncounter.dataProvider = this.model.encounter;
+            App.utils.scheduler.envokeInNextFrame(this.updateScrollBars);
+         }
+      }
 
-        public var scrollEncounter:net.wg.gui.components.controls.ScrollBar;
+      override protected function onPopulate() : void {
+         super.onPopulate();
+         window.useBottomBtns = true;
+         window.title = MENU.DEMONSTRATOR_WINDOW_TITLE;
+      }
 
-        internal var model:net.wg.gui.lobby.demonstration.data.DemonstratorVO;
-    }
+      override protected function onDispose() : void {
+         super.onDispose();
+         this.model.dispose();
+         this.model = null;
+         this.listStandard.removeEventListener(ListEvent.ITEM_CLICK,this.onMapItemClick);
+         this.listAssault.removeEventListener(ListEvent.ITEM_CLICK,this.onMapItemClick);
+         this.listEncounter.removeEventListener(ListEvent.ITEM_CLICK,this.onMapItemClick);
+         this.listStandard.dataProvider.cleanUp();
+         this.listStandard.dataProvider = null;
+         this.listAssault.dataProvider.cleanUp();
+         this.listAssault.dataProvider = null;
+         this.listEncounter.dataProvider.cleanUp();
+         this.listEncounter.dataProvider = null;
+      }
+
+      private function onMapItemClick(param1:ListEvent) : void {
+         onMapSelectedS(MapItemVO(param1.itemData).id);
+      }
+
+      private function updateScrollBars() : void {
+         this.scrollStandard.visible = this.scrollStandard.thumb.visible;
+         this.scrollAssault.visible = this.scrollAssault.thumb.visible;
+         this.scrollEncounter.visible = this.scrollEncounter.thumb.visible;
+      }
+   }
+
 }

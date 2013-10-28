@@ -1,11 +1,14 @@
-package net.wg.infrastructure.interfaces 
+package net.wg.infrastructure.interfaces
 {
-    import net.wg.infrastructure.interfaces.entity.*;
-    
-    public interface IMinimapEntry extends net.wg.infrastructure.interfaces.entity.IUpdatable
-    {
-        function isTeamPoint():Boolean;
+   import net.wg.infrastructure.interfaces.entity.IUpdatable;
 
-        function init(arg1:String, arg2:String, arg3:String, arg4:String):void;
-    }
+
+   public interface IMinimapEntry extends IUpdatable
+   {
+          
+      function isTeamPoint() : Boolean;
+
+      function init(param1:String, param2:String, param3:String, param4:String) : void;
+   }
+
 }

@@ -1,29 +1,28 @@
-package net.wg.data.utilData 
+package net.wg.data.utilData
 {
-    import net.wg.infrastructure.interfaces.*;
-    
-    public class FormattedInteger extends Object implements net.wg.infrastructure.interfaces.IFormattedInt
-    {
-        public function FormattedInteger(arg1:Number, arg2:String)
-        {
-            super();
-            this._value = arg1;
-            this._delimitier = arg2;
-            return;
-        }
+   import net.wg.infrastructure.interfaces.IFormattedInt;
 
-        public function get value():Number
-        {
-            return this._value;
-        }
 
-        public function get delimiter():String
-        {
-            return this._delimitier;
-        }
+   public class FormattedInteger extends Object implements IFormattedInt
+   {
+          
+      public function FormattedInteger(param1:Number, param2:String) {
+         super();
+         this._value = param1;
+         this._delimitier = param2;
+      }
 
-        internal var _value:Number=0;
+      private var _value:Number = 0;
 
-        internal var _delimitier:String=null;
-    }
+      private var _delimitier:String = null;
+
+      public function get value() : Number {
+         return this._value;
+      }
+
+      public function get delimiter() : String {
+         return this._delimitier;
+      }
+   }
+
 }

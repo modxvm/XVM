@@ -1,68 +1,61 @@
-package net.wg.gui.components.controls.achievements 
+package net.wg.gui.components.controls.achievements
 {
-    import flash.display.*;
-    
-    public class BeigeCounter extends net.wg.gui.components.controls.achievements.CounterComponent
-    {
-        public function BeigeCounter()
-        {
-            super();
-            return;
-        }
+   import flash.display.FrameLabel;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this._labels = this.currentLabels;
-            tooltip = TOOLTIPS.ACHIEVEMENT_ATTR_DEGREE;
-            return;
-        }
 
-        public override function receiveBottomPadding():Number
-        {
-            return 0;
-        }
+   public class BeigeCounter extends CounterComponent
+   {
+          
+      public function BeigeCounter() {
+         super();
+      }
 
-        protected override function draw():void
-        {
-            var loc1:*=0;
-            var loc2:*=null;
-            if (isInvalid(CLASS_INV)) 
+      private static const CLASS_INV:String = "classInvalid";
+
+      private var _labels:Array = null;
+
+      private var _classValue:String = "";
+
+      override protected function configUI() : void {
+         super.configUI();
+         this._labels = this.currentLabels;
+      }
+
+      override public function receiveBottomPadding() : Number {
+         return 0;
+      }
+
+      override protected function draw() : void {
+         var _loc1_:uint = 0;
+         var _loc2_:FrameLabel = null;
+         if(isInvalid(CLASS_INV))
+         {
+            gotoAndStop("empty");
+            if(this._labels)
             {
-                gotoAndStop("empty");
-                if (this._labels) 
-                {
-                    loc1 = 0;
-                    while (loc1 < this._labels.length) 
-                    {
-                        loc2 = this._labels[loc1];
-                        if (loc2.name == "level" + this._classValue) 
-                        {
-                            gotoAndStop(loc2.name);
-                        }
-                        ++loc1;
-                    }
-                }
+               _loc1_ = 0;
+               while(_loc1_ < this._labels.length)
+               {
+                  _loc2_ = this._labels[_loc1_];
+                  if(_loc2_.name == "level" + this._classValue)
+                  {
+                     gotoAndStop(_loc2_.name);
+                     break;
+                  }
+                  _loc1_++;
+               }
             }
-            return;
-        }
+         }
+      }
 
-        public override function get text():String
-        {
-            return this._classValue;
-        }
+      override public function get text() : String {
+         return this._classValue;
+      }
 
-        public override function set text(arg1:String):void
-        {
-            this._classValue = arg1;
-            invalidate(CLASS_INV);
-            return;
-        }
+      override public function set text(param1:String) : void {
+         this._classValue = param1;
+         invalidate(CLASS_INV);
+      }
+   }
 
-        internal static const CLASS_INV:String="classInvalid";
-
-        internal var _labels:Array=null;
-
-        internal var _classValue:String="";
-    }
 }

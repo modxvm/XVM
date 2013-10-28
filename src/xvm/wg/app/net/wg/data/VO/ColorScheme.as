@@ -1,117 +1,100 @@
-package net.wg.data.VO 
+package net.wg.data.VO
 {
-    import fl.motion.*;
-    import flash.filters.*;
-    import flash.geom.*;
-    import net.wg.data.constants.*;
-    import net.wg.data.daapi.base.*;
-    import net.wg.infrastructure.exceptions.*;
-    import net.wg.infrastructure.interfaces.*;
-    
-    public class ColorScheme extends net.wg.data.daapi.base.DAAPIDataClass implements net.wg.infrastructure.interfaces.IColorScheme
-    {
-        public function ColorScheme(arg1:Object)
-        {
-            super(arg1);
-            return;
-        }
+   import net.wg.data.daapi.base.DAAPIDataClass;
+   import net.wg.infrastructure.interfaces.IColorScheme;
+   import flash.geom.ColorTransform;
+   import flash.filters.BitmapFilter;
+   import fl.motion.AdjustColor;
+   import flash.filters.ColorMatrixFilter;
+   import net.wg.data.constants.Errors;
+   import net.wg.infrastructure.exceptions.NullPointerException;
 
-        public function get aliasColor():String
-        {
-            return this._aliasColor;
-        }
 
-        public function set aliasColor(arg1:String):void
-        {
-            this._aliasColor = arg1;
-            return;
-        }
+   public class ColorScheme extends DAAPIDataClass implements IColorScheme
+   {
+          
+      public function ColorScheme(param1:Object) {
+         super(param1);
+      }
 
-        public function get rgb():Number
-        {
-            return this._rgb;
-        }
+      private var _aliasColor:String = "";
 
-        public function set rgb(arg1:Number):void
-        {
-            this._rgb = arg1;
-            return;
-        }
+      private var _rgb:Number = 0;
 
-        public function get schemeName():String
-        {
-            return this._schemeName;
-        }
+      private var _schemeName:String = "";
 
-        public function set schemeName(arg1:String):void
-        {
-            this._schemeName = arg1;
-            return;
-        }
+      private var _transform:Object = null;
 
-        public function get transform():Object
-        {
-            return this._transform;
-        }
+      private var _colorTransform:ColorTransform = null;
 
-        public function set transform(arg1:Object):void
-        {
-            this._transform = arg1;
-            var loc1:*=arg1["mult"];
-            var loc2:*=arg1["offset"];
-            this.assertNotNull(loc1, "mult");
-            this.assertNotNull(loc2, "offset");
-            this._colorTransform = new flash.geom.ColorTransform(loc1[0], loc1[1], loc1[2], loc1[3], loc2[0], loc2[1], loc2[2], loc2[3]);
-            return;
-        }
+      private var _adjust:Object = null;
 
-        public function get colorTransform():flash.geom.ColorTransform
-        {
-            return this._colorTransform;
-        }
+      private var _adjustOffset:BitmapFilter = null;
 
-        public function get adjust():Object
-        {
-            return this._adjust;
-        }
+      public function get aliasColor() : String {
+         return this._aliasColor;
+      }
 
-        public function set adjust(arg1:Object):void
-        {
-            this._adjust = arg1;
-            var loc1:*=arg1["offset"];
-            this.assertNotNull(loc1, "offset");
-            var loc2:*=new fl.motion.AdjustColor();
-            loc2.brightness = loc1[0];
-            loc2.contrast = loc1[1];
-            loc2.saturation = loc1[2];
-            loc2.hue = loc1[3];
-            this._adjustOffset = new flash.filters.ColorMatrixFilter(loc2.CalculateFinalFlatArray());
-            return;
-        }
+      public function set aliasColor(param1:String) : void {
+         this._aliasColor = param1;
+      }
 
-        public function get adjustOffset():flash.filters.BitmapFilter
-        {
-            return this._adjustOffset;
-        }
+      public function get rgb() : Number {
+         return this._rgb;
+      }
 
-        internal function assertNotNull(arg1:Object, arg2:String):void
-        {
-            App.utils.asserter.assertNotNull(arg1, arg2 + net.wg.data.constants.Errors.CANT_NULL, net.wg.infrastructure.exceptions.NullPointerException);
-            return;
-        }
+      public function set rgb(param1:Number) : void {
+         this._rgb = param1;
+      }
 
-        internal var _aliasColor:String="";
+      public function get schemeName() : String {
+         return this._schemeName;
+      }
 
-        internal var _rgb:Number=0;
+      public function set schemeName(param1:String) : void {
+         this._schemeName = param1;
+      }
 
-        internal var _schemeName:String="";
+      public function get transform() : Object {
+         return this._transform;
+      }
 
-        internal var _transform:Object=null;
+      public function set transform(param1:Object) : void {
+         this._transform = param1;
+         var _loc2_:Object = param1["mult"];
+         var _loc3_:Object = param1["offset"];
+         this.assertNotNull(_loc2_,"mult");
+         this.assertNotNull(_loc3_,"offset");
+         this._colorTransform = new ColorTransform(_loc2_[0],_loc2_[1],_loc2_[2],_loc2_[3],_loc3_[0],_loc3_[1],_loc3_[2],_loc3_[3]);
+      }
 
-        internal var _colorTransform:flash.geom.ColorTransform=null;
+      public function get colorTransform() : ColorTransform {
+         return this._colorTransform;
+      }
 
-        internal var _adjust:Object=null;
+      public function get adjust() : Object {
+         return this._adjust;
+      }
 
-        internal var _adjustOffset:flash.filters.BitmapFilter=null;
-    }
+      public function set adjust(param1:Object) : void {
+         this._adjust = param1;
+         var _loc2_:Array = param1["offset"];
+         this.assertNotNull(_loc2_,"offset");
+         var _loc3_:AdjustColor = new AdjustColor();
+         _loc3_.brightness = _loc2_[0];
+         _loc3_.contrast = _loc2_[1];
+         _loc3_.saturation = _loc2_[2];
+         _loc3_.hue = _loc2_[3];
+         this._adjustOffset = new ColorMatrixFilter(_loc3_.CalculateFinalFlatArray());
+      }
+
+      public function get adjustOffset() : BitmapFilter {
+         return this._adjustOffset;
+      }
+
+      private function assertNotNull(param1:Object, param2:String) : void {
+         App.utils.asserter.assertNotNull(param1,param2 + Errors.CANT_NULL,NullPointerException);
+      }
+   }
+
 }

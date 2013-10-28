@@ -1,70 +1,60 @@
-package net.wg.gui.lobby.dialogs 
+package net.wg.gui.lobby.dialogs
 {
-    import flash.display.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    
-    public class IconPriceDialog extends net.wg.infrastructure.base.meta.impl.IconPriceDialogMeta implements net.wg.infrastructure.base.meta.IIconPriceDialogMeta
-    {
-        public function IconPriceDialog()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.IconPriceDialogMeta;
+   import net.wg.infrastructure.base.meta.IIconPriceDialogMeta;
+   import flash.display.DisplayObjectContainer;
 
-        protected override function applyLayout():void
-        {
-            super.applyLayout();
-            this.priceMc.y = getBackgroundActualHeight() - this.priceMc.height - PRICE_BOTTOM_OFFSET;
-            return;
-        }
 
-        protected override function getTextAreaCurrentHeight():Number
-        {
-            var loc1:*=super.getTextAreaCurrentHeight();
-            return loc1 + PRICE_TEXT_OFFSET + this.priceMc.height + PRICE_BOTTOM_OFFSET;
-        }
+   public class IconPriceDialog extends IconPriceDialogMeta implements IIconPriceDialogMeta
+   {
+          
+      public function IconPriceDialog() {
+         super();
+      }
 
-        public function as_setMessagePrice(arg1:String, arg2:String):void
-        {
-            this.priceMc.priceValue.icon = arg2;
-            this.priceMc.priceValue.text = arg1;
-            return;
-        }
+      private static const PRICE_BOTTOM_OFFSET:int = 14;
 
-        public function as_setPriceLabel(arg1:String):void
-        {
-            this.priceMc.textField.text = arg1;
-            return;
-        }
+      protected static const PRICE_TEXT_OFFSET:int = 13;
 
-        protected override function onDispose():void
-        {
-            var loc1:*=null;
-            if (this.priceMc) 
+      public var priceMc:PriceMc;
+
+      override protected function applyLayout() : void {
+         super.applyLayout();
+         this.priceMc.y = getBackgroundActualHeight() - this.priceMc.height - PRICE_BOTTOM_OFFSET;
+      }
+
+      override protected function getTextAreaCurrentHeight() : Number {
+         var _loc1_:Number = super.getTextAreaCurrentHeight();
+         return _loc1_ + PRICE_TEXT_OFFSET + this.priceMc.height + PRICE_BOTTOM_OFFSET;
+      }
+
+      public function as_setMessagePrice(param1:String, param2:String) : void {
+         this.priceMc.priceValue.icon = param2;
+         this.priceMc.priceValue.text = param1;
+      }
+
+      public function as_setPriceLabel(param1:String) : void {
+         this.priceMc.textField.text = param1;
+      }
+
+      override protected function onDispose() : void {
+         var _loc1_:DisplayObjectContainer = null;
+         if(this.priceMc)
+         {
+            this.priceMc.dispose();
+            _loc1_ = this.priceMc.parent;
+            if(_loc1_)
             {
-                this.priceMc.dispose();
-                loc1 = this.priceMc.parent;
-                if (loc1) 
-                {
-                    loc1.removeChild(this.priceMc);
-                }
-                this.priceMc = null;
+               _loc1_.removeChild(this.priceMc);
             }
-            super.onDispose();
-            return;
-        }
+            this.priceMc = null;
+         }
+         super.onDispose();
+      }
 
-        public function as_setOperationAllowed(arg1:Boolean):void
-        {
-            this.priceMc.allowed = arg1;
-            return;
-        }
+      public function as_setOperationAllowed(param1:Boolean) : void {
+         this.priceMc.allowed = param1;
+      }
+   }
 
-        internal static const PRICE_BOTTOM_OFFSET:int=14;
-
-        protected static const PRICE_TEXT_OFFSET:int=13;
-
-        public var priceMc:net.wg.gui.lobby.dialogs.PriceMc;
-    }
 }

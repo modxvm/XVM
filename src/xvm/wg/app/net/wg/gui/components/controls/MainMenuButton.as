@@ -1,270 +1,285 @@
-package net.wg.gui.components.controls 
+package net.wg.gui.components.controls
 {
-    import flash.events.*;
-    import flash.filters.*;
-    import flash.text.*;
-    import net.wg.data.constants.*;
-    import net.wg.utils.*;
-    import scaleform.clik.utils.*;
-    
-    public class MainMenuButton extends net.wg.gui.components.controls.SoundButtonEx
-    {
-        public function MainMenuButton()
-        {
-            super();
-            soundType = net.wg.data.constants.SoundTypes.MAIN_MENU;
-            return;
-        }
+   import flash.text.TextField;
+   import flash.display.MovieClip;
+   import flash.events.MouseEvent;
+   import flash.text.TextFieldAutoSize;
+   import scaleform.clik.utils.ConstrainedElement;
+   import scaleform.clik.constants.InvalidationType;
+   import net.wg.utils.IHelpLayout;
+   import net.wg.data.constants.SoundTypes;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.paddingHorizontal = 0;
-            if (blurTextField) 
-            {
-                constraints.addElement("blurTextField", blurTextField, scaleform.clik.utils.Constraints.ALL);
-            }
-            if (filtersMC != null) 
-            {
-                constraints.addElement("filtersMC", filtersMC, scaleform.clik.utils.Constraints.ALL);
-                constraints.addElement("filtersMC.textField", filtersMC.textField, scaleform.clik.utils.Constraints.ALL);
-            }
-            addEventListener(flash.events.MouseEvent.ROLL_OVER, this.onBtnOver);
-            addEventListener(flash.events.MouseEvent.ROLL_OUT, this.onBtnOut);
+
+   public class MainMenuButton extends SoundButtonEx
+   {
+          
+      public function MainMenuButton() {
+         super();
+         constraintsDisabled = true;
+         soundType = SoundTypes.MAIN_MENU;
+         this.fxTextField2 = this.fx.fxTextField2;
+      }
+
+      private var _caps:Boolean = true;
+
+      public var fxTextField1:TextField = null;
+
+      public var fxTextField2:TextField = null;
+
+      public var fx:MovieClip = null;
+
+      public var gradient:MovieClip = null;
+
+      private var _textColorOver:Number;
+
+      private var textColorBeforeBlink:Number = NaN;
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.paddingHorizontal = 0;
+         addEventListener(MouseEvent.ROLL_OVER,this.onBtnOver);
+         addEventListener(MouseEvent.ROLL_OUT,this.onBtnOut);
+         this.checkBrowserEffect();
+      }
+
+      override public function get paddingHorizontal() : Number {
+         return _paddingHorizontal;
+      }
+
+      override public function set paddingHorizontal(param1:Number) : void {
+         _paddingHorizontal = param1;
+         invalidate();
+      }
+
+      public function get caps() : Boolean {
+         return this._caps;
+      }
+
+      public function set caps(param1:Boolean) : void {
+         if(this._caps == param1)
+         {
+            return;
+         }
+         this._caps = param1;
+         invalidate();
+      }
+
+      override public function set enabled(param1:Boolean) : void {
+         super.enabled = param1;
+         if(param1)
+         {
             this.checkBrowserEffect();
+         }
+      }
+
+      override protected function updateText() : void {
+         var _loc1_:String = null;
+         if(this.gradient)
+         {
+            this.gradient.width = 1;
+         }
+         if(this.caps)
+         {
+            if(_label != null)
+            {
+               _loc1_ = App.utils.locale.makeString(_label,{});
+               if(_loc1_)
+               {
+                  _loc1_ = _loc1_.toUpperCase();
+               }
+               else
+               {
+                  _loc1_ = "";
+               }
+               if(textField != null)
+               {
+                  textField.text = _loc1_;
+               }
+               if(textField1 != null)
+               {
+                  textField1.text = _loc1_;
+               }
+               if(blurTextField != null)
+               {
+                  blurTextField.text = _loc1_;
+                  blurTextField.width = blurTextField.textWidth + 5;
+               }
+               if(this.fxTextField1 != null)
+               {
+                  this.fxTextField1.text = _loc1_;
+                  this.fxTextField1.width = this.fxTextField1.textWidth + 5;
+               }
+               if(this.fxTextField2 != null)
+               {
+                  this.fxTextField2.text = _loc1_;
+                  this.fxTextField2.width = this.fxTextField2.textWidth + 5;
+               }
+            }
+         }
+         else
+         {
+            super.updateText();
+            if(blurTextField != null)
+            {
+               blurTextField.text = _label;
+            }
+            if(this.fxTextField1 != null)
+            {
+               this.fxTextField1.text = _label;
+            }
+            if(this.fxTextField2 != null)
+            {
+               this.fxTextField2.text = _label;
+            }
+         }
+         if(this.gradient)
+         {
+            this.gradient.width = this.actualWidth;
+         }
+         this.width = this.actualWidth;
+      }
+
+      override protected function alignForAutoSize() : void {
+         var _loc1_:* = NaN;
+         var _loc3_:* = NaN;
+         var _loc4_:* = NaN;
+         if(!initialized || _autoSize == TextFieldAutoSize.NONE || !textField)
+         {
             return;
-        }
+         }
+         _loc1_ = _width;
+         var _loc2_:Number = _width = this.calculateWidth();
+         switch(_autoSize)
+         {
+            case TextFieldAutoSize.RIGHT:
+               _loc3_ = x + _loc1_;
+               x = _loc3_ - _loc2_;
+               break;
+            case TextFieldAutoSize.CENTER:
+               _loc4_ = x + _loc1_ * 0.5;
+               x = _loc4_ - _loc2_ * 0.5;
+               break;
+         }
+      }
 
-        public override function get paddingHorizontal():Number
-        {
-            return _paddingHorizontal;
-        }
+      override protected function calculateWidth() : Number {
+         var _loc2_:ConstrainedElement = null;
+         var _loc3_:TextField = null;
+         var _loc1_:Number = actualWidth;
+         if(!constraintsDisabled && (initialized))
+         {
+            _loc2_ = constraints.getElement(textField?"textField":"blurTextField");
+            _loc3_ = textField?textField:blurTextField;
+            _loc1_ = _loc3_.textWidth + _loc2_.left + _loc2_.right + 5 + (_paddingHorizontal << 1);
+         }
+         return _loc1_;
+      }
 
-        public override function set paddingHorizontal(arg1:Number):void
-        {
-            _paddingHorizontal = arg1;
-            invalidate();
+      public function get textColorOver() : Number {
+         return _textColor;
+      }
+
+      public function set textColorOver(param1:Number) : void {
+         if(this._textColorOver == param1)
+         {
             return;
-        }
+         }
+         this._textColorOver = param1;
+         invalidate();
+      }
 
-        public function get caps():Boolean
-        {
-            return this._caps;
-        }
-
-        public function set caps(arg1:Boolean):void
-        {
-            if (this._caps == arg1) 
+      override protected function draw() : void {
+         super.draw();
+         if(isInvalid(InvalidationType.STATE))
+         {
+            if(((this._textColorOver) && (!selected)) && (state == "over") && !(this.fxTextField1 == null))
             {
-                return;
+               this.fxTextField1.textColor = this._textColorOver;
             }
-            this._caps = arg1;
-            invalidate();
+            else
+            {
+               if((_textColor) && (enabled) && !(this.fxTextField1 == null))
+               {
+                  this.fxTextField1.textColor = _textColor;
+               }
+            }
+            if((selected) && (enabled))
+            {
+               this.gradient.alpha = 0.4;
+            }
+            else
+            {
+               this.gradient.alpha = 1;
+            }
+         }
+      }
+
+      override public function showHelpLayout() : void {
+         var _loc1_:IHelpLayout = App.utils.helpLayout;
+         var _loc2_:Object =
+            {
+               "borderWidth":width,
+               "borderHeight":this.fxTextField1.textHeight + 5,
+               "direction":data["helpDirection"],
+               "text":data["helpText"],
+               "x":0,
+               "y":0,
+               "connectorLength":data["helpConnectorLength"]
+            }
+         ;
+         if(data["helpText"])
+         {
+            setHelpLayout(_loc1_.create(root,_loc2_,this));
+         }
+      }
+
+      private function checkBrowserEffect() : void {
+         if((data) && data.value == "browser")
+         {
+            App.utils.scheduler.scheduleTask(this.changeEffectState,1000);
+            selected = false;
+         }
+      }
+
+      private var _isBlinking:Boolean = false;
+
+      private function changeEffectState() : void {
+         if((selected) || !enabled)
+         {
+            filters = [];
+            this._isBlinking = false;
             return;
-        }
-
-        public override function set enabled(arg1:Boolean):void
-        {
-            super.enabled = arg1;
-            if (arg1) 
+         }
+         if(this.fxTextField1)
+         {
+            if(isNaN(this.textColorBeforeBlink))
             {
-                this.checkBrowserEffect();
-            }
-            return;
-        }
-
-        protected override function updateText():void
-        {
-            var loc1:*=null;
-            if (this.caps) 
-            {
-                if (_label != null) 
-                {
-                    loc1 = App.utils.locale.makeString(_label, {});
-                    if (loc1) 
-                    {
-                        loc1 = loc1.toUpperCase();
-                    }
-                    else 
-                    {
-                        loc1 = "";
-                    }
-                    if (textField != null) 
-                    {
-                        textField.text = loc1;
-                    }
-                    if (textField1 != null) 
-                    {
-                        textField1.text = loc1;
-                    }
-                    if (blurTextField != null) 
-                    {
-                        blurTextField.text = loc1;
-                    }
-                    if (!(filtersMC == null) && !(filtersMC.textField == null)) 
-                    {
-                        filtersMC.textField.text = loc1;
-                    }
-                }
-            }
-            else 
-            {
-                super.updateText();
-                if (blurTextField != null) 
-                {
-                    blurTextField.text = _label;
-                }
-                if (!(filtersMC == null) && !(filtersMC.textField == null)) 
-                {
-                    filtersMC.textField.text = _label;
-                }
-            }
-            return;
-        }
-
-        protected override function alignForAutoSize():void
-        {
-            var loc1:*=NaN;
-            var loc3:*=NaN;
-            var loc4:*=NaN;
-            if (!initialized || _autoSize == flash.text.TextFieldAutoSize.NONE || !textField && !filtersMC) 
-            {
-                return;
-            }
-            loc1 = _width;
-            var loc5:*;
-            _width = loc5 = this.calculateWidth();
-            var loc2:*=loc5;
-            loc5 = _autoSize;
-            switch (loc5) 
-            {
-                case flash.text.TextFieldAutoSize.RIGHT:
-                {
-                    loc3 = x + loc1;
-                    x = loc3 - loc2;
-                    break;
-                }
-                case flash.text.TextFieldAutoSize.CENTER:
-                {
-                    loc4 = x + loc1 * 0.5;
-                    x = loc4 - loc2 * 0.5;
-                    break;
-                }
-            }
-            return;
-        }
-
-        protected override function updateAfterStateChange():void
-        {
-            super.updateAfterStateChange();
-            if (!(constraints == null) && !constraintsDisabled) 
-            {
-                if (filtersMC != null) 
-                {
-                    constraints.updateElement("filtersMC.textField", filtersMC.textField);
-                    constraints.updateElement("filtersMC", filtersMC);
-                }
-                if (blurTextField != null) 
-                {
-                    constraints.updateElement("blurTextField", blurTextField);
-                }
-            }
-            return;
-        }
-
-        protected override function calculateWidth():Number
-        {
-            var loc2:*=null;
-            var loc3:*=null;
-            var loc1:*=actualWidth;
-            if (!constraintsDisabled && initialized) 
-            {
-                loc2 = constraints.getElement(textField ? "textField" : "blurTextField");
-                loc3 = textField ? textField : blurTextField;
-                loc1 = loc3.textWidth + loc2.left + loc2.right + 5 + (_paddingHorizontal << 1);
-            }
-            return loc1;
-        }
-
-        protected override function draw():void
-        {
-            super.draw();
-            if (_textColor && enabled) 
-            {
-                if (!(filtersMC == null) && !(filtersMC.textField == null)) 
-                {
-                    filtersMC.textField.textColor = _textColor;
-                }
-            }
-            return;
-        }
-
-        public override function showHelpLayout():void
-        {
-            var loc1:*=App.utils.helpLayout;
-            var loc2:*={"borderWidth":width, "borderHeight":filtersMC.textField.textHeight - 4, "direction":data["helpDirection"], "text":data["helpText"], "x":0, "y":(filtersMC.height - filtersMC.textField.textHeight) / 2, "connectorLength":data["helpConnectorLength"]};
-            if (data["helpText"]) 
-            {
-                setHelpLayout(loc1.create(root, loc2, this));
-            }
-            return;
-        }
-
-        internal function checkBrowserEffect():void
-        {
-            if (data && data.value == "browser") 
-            {
-                App.utils.scheduler.scheduleTask(this.changeEffectState, 1000);
-                selected = false;
-            }
-            return;
-        }
-
-        internal function changeEffectState():void
-        {
-            var loc1:*=null;
-            if (selected || !enabled) 
-            {
-                filters = [];
-                this._isBlinking = false;
-                return;
+               this.textColorBeforeBlink = this.fxTextField1.textColor;
             }
             this._isBlinking = !this._isBlinking;
-            if (this._isBlinking) 
+            if(this._isBlinking)
             {
-                loc1 = [];
-                loc1 = loc1.concat([1.3, 0, 0, 0, 0]);
-                loc1 = loc1.concat([0, 1.3, 0, 0, 0]);
-                loc1 = loc1.concat([0, 0, 1.3, 0, 0]);
-                loc1 = loc1.concat([0, 0, 0, 1, 0]);
-                filters = [new flash.filters.ColorMatrixFilter(loc1)];
+               this.fxTextField1.textColor = 16563563;
             }
-            else 
+            else
             {
-                filters = [];
+               this.fxTextField1.textColor = this.textColorBeforeBlink;
             }
-            App.utils.scheduler.scheduleTask(this.changeEffectState, 1000);
-            return;
-        }
+            App.utils.scheduler.scheduleTask(this.changeEffectState,1000);
+         }
+      }
 
-        internal function onBtnOver(arg1:flash.events.MouseEvent):void
-        {
-            if (data && data.value == "browser") 
-            {
-                App.utils.scheduler.cancelTask(this.changeEffectState);
-                filters = [];
-            }
-            return;
-        }
+      private function onBtnOver(param1:MouseEvent) : void {
+         if((data) && data.value == "browser")
+         {
+            App.utils.scheduler.cancelTask(this.changeEffectState);
+            filters = [];
+         }
+      }
 
-        internal function onBtnOut(arg1:flash.events.MouseEvent):void
-        {
-            this.checkBrowserEffect();
-            return;
-        }
+      private function onBtnOut(param1:MouseEvent) : void {
+         this.checkBrowserEffect();
+      }
+   }
 
-        internal var _caps:Boolean=true;
-
-        internal var _isBlinking:Boolean=false;
-    }
 }

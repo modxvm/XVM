@@ -1,31 +1,28 @@
-package net.wg.infrastructure 
+package net.wg.infrastructure
 {
-    import __AS3__.vec.*;
-    import flash.display.*;
-    import flash.utils.*;
-    
-    public class BaseImporter extends flash.display.Sprite
-    {
-        public function BaseImporter()
-        {
-            super();
-            return;
-        }
+   import flash.display.Sprite;
+   import __AS3__.vec.Vector;
+   import flash.utils.getQualifiedClassName;
 
-        protected final function importClasses(arg1:__AS3__.vec.Vector.<Class>, arg2:Boolean=false):void
-        {
-            var loc1:*=null;
-            if (arg2 && arg1) 
+
+   public class BaseImporter extends Sprite
+   {
+          
+      public function BaseImporter() {
+         super();
+      }
+
+      protected final function importClasses(param1:Vector.<Class>, param2:Boolean=false) : void {
+         var _loc3_:Class = null;
+         if((param2) && (param1))
+         {
+            trace("Importing " + getQualifiedClassName(this) + ":...");
+            for each (_loc3_ in param1)
             {
-                trace("Importing " + flash.utils.getQualifiedClassName(this) + ":...");
-                var loc2:*=0;
-                var loc3:*=arg1;
-                for each (loc1 in loc3) 
-                {
-                    trace("--" + loc1);
-                }
+               trace("--" + _loc3_);
             }
-            return;
-        }
-    }
+         }
+      }
+   }
+
 }

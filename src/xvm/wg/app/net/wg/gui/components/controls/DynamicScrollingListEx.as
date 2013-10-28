@@ -1,24 +1,23 @@
-package net.wg.gui.components.controls 
+package net.wg.gui.components.controls
 {
-    import flash.events.*;
-    import net.wg.infrastructure.interfaces.*;
-    
-    public class DynamicScrollingListEx extends net.wg.gui.components.controls.ScrollingListEx implements net.wg.infrastructure.interfaces.IDynamicContent
-    {
-        public function DynamicScrollingListEx()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.interfaces.IDynamicContent;
+   import flash.events.Event;
 
-        protected override function cleanData():void
-        {
-            if (_dataProvider) 
-            {
-                _dataProvider.removeEventListener(flash.events.Event.CHANGE, handleDataChange, false);
-                _dataProvider = null;
-            }
-            return;
-        }
-    }
+
+   public class DynamicScrollingListEx extends ScrollingListEx implements IDynamicContent
+   {
+          
+      public function DynamicScrollingListEx() {
+         super();
+      }
+
+      override protected function cleanData() : void {
+         if(_dataProvider)
+         {
+            _dataProvider.removeEventListener(Event.CHANGE,handleDataChange,false);
+            _dataProvider = null;
+         }
+      }
+   }
+
 }

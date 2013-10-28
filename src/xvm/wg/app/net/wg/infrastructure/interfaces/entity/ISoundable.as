@@ -1,17 +1,20 @@
-package net.wg.infrastructure.interfaces.entity 
+package net.wg.infrastructure.interfaces.entity
 {
-    import flash.events.*;
-    
-    public interface ISoundable extends flash.events.IEventDispatcher
-    {
-        function getSoundType():String;
+   import flash.events.IEventDispatcher;
 
-        function getSoundId():String;
 
-        function getStateOverSnd():String;
+   public interface ISoundable extends IEventDispatcher
+   {
+          
+      function getSoundType() : String;
 
-        function getStateOutSnd():String;
+      function getSoundId() : String;
 
-        function getStatePressSnd():String;
-    }
+      function getStateOverSnd() : String;
+
+      function getStateOutSnd() : String;
+
+      function getStatePressSnd() : String;
+   }
+
 }

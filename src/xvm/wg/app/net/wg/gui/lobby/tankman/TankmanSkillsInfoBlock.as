@@ -1,183 +1,182 @@
-package net.wg.gui.lobby.tankman 
+package net.wg.gui.lobby.tankman
 {
-    import flash.text.*;
-    import net.wg.gui.components.advanced.*;
-    import net.wg.gui.components.controls.*;
-    import scaleform.clik.core.*;
-    
-    public class TankmanSkillsInfoBlock extends scaleform.clik.core.UIComponent
-    {
-        public function TankmanSkillsInfoBlock()
-        {
-            super();
+   import scaleform.clik.core.UIComponent;
+   import net.wg.gui.components.controls.UILoaderAlt;
+   import flash.text.TextField;
+   import net.wg.gui.components.advanced.DoubleProgressBar;
+
+
+   public class TankmanSkillsInfoBlock extends UIComponent
+   {
+          
+      public function TankmanSkillsInfoBlock() {
+         super();
+      }
+
+      public var roleIcon:UILoaderAlt;
+
+      public var nameField:TextField;
+
+      public var roleLevelField:TextField;
+
+      public var specLevelBar:DoubleProgressBar;
+
+      public var mainSkillItem:SkillItemViewMini;
+
+      public var additionalSkillItem:SkillItemViewMini;
+
+      public var tankmanPic:UILoaderAlt;
+
+      public var backgroundSwitcher:UIComponent;
+
+      private var _nation:String;
+
+      override public function dispose() : void {
+         this.roleIcon.dispose();
+         this.roleIcon = null;
+         this.nameField = null;
+         this.roleLevelField = null;
+         this.specLevelBar.dispose();
+         this.specLevelBar = null;
+         this.mainSkillItem.dispose();
+         this.mainSkillItem = null;
+         this.additionalSkillItem.dispose();
+         this.additionalSkillItem = null;
+         this.tankmanPic.dispose();
+         this.tankmanPic = null;
+         this.backgroundSwitcher.dispose();
+         this.backgroundSwitcher = null;
+         super.dispose();
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+      }
+
+      private function setTestViewData() : void {
+         this.tankmanPic.source = "../maps/icons/tankmen/icons/big/germany-13.png";
+         this.roleIcon.source = "../maps/icons/tankmen/roles/small/commander.png";
+         this.nameField.text = "Казимир Внуков";
+         this.roleLevelField.text = "100%";
+         this.specLevelBar.maximum = 100;
+         this.specLevelBar.frontPosition = 51;
+         this.specLevelBar.backPosition = 100;
+         this.mainSkillItem.type = SkillItemViewMini.TYPE_SKILLS;
+         this.mainSkillItem.iconSource = "../maps/icons/tankmen/skills/small/camouflage.png";
+         this.mainSkillItem.count = 2;
+         this.additionalSkillItem.type = SkillItemViewMini.TYPE_CURRENT_NEW_SKILL;
+         this.additionalSkillItem.level = 87;
+      }
+
+      public function get portraitSource() : String {
+         return this.tankmanPic.source;
+      }
+
+      public function set portraitSource(param1:String) : void {
+         this.tankmanPic.source = param1;
+      }
+
+      public function get roleSource() : String {
+         return this.roleIcon.source;
+      }
+
+      public function set roleSource(param1:String) : void {
+         this.roleIcon.source = param1;
+      }
+
+      public function get tankmanName() : String {
+         return this.nameField.text;
+      }
+
+      public function set tankmanName(param1:String) : void {
+         this.nameField.text = param1;
+      }
+
+      public function get nation() : String {
+         return this._nation;
+      }
+
+      public function set nation(param1:String) : void {
+         this._nation = param1;
+         this.backgroundSwitcher.gotoAndPlay(this._nation);
+      }
+
+      public function setRoleLevel(param1:Number, param2:Number=NaN) : void {
+         var _loc3_:String = param1.toString();
+         if(!isNaN(param2) && !(param2 - param1 == 0))
+         {
+            _loc3_ = _loc3_ + ("<font color=\'#ffffff\'>+" + (param2 - param1) + "%</font>");
+         }
+         else
+         {
+            _loc3_ = _loc3_ + "%";
+         }
+         this.roleLevelField.htmlText = _loc3_;
+         this.specLevelBar.frontPosition = param1;
+         this.specLevelBar.backPosition = param2;
+      }
+
+      public function setSkills(param1:int, param2:String, param3:String, param4:Number, param5:Boolean) : void {
+         this.mainSkillItem.visible = false;
+         this.additionalSkillItem.visible = false;
+         if(param1 == 0)
+         {
+            this.buildCurrentSkill(this.mainSkillItem,SkillItemViewMini.TYPE_NEW_SKILL,NaN);
             return;
-        }
-
-        protected override function configUI():void
-        {
-            super.configUI();
+         }
+         if(param1 == -1)
+         {
             return;
-        }
-
-        internal function setTestViewData():void
-        {
-            this.tankmanPic.source = "../maps/icons/tankmen/icons/big/germany-13.png";
-            this.roleIcon.source = "../maps/icons/tankmen/roles/small/commander.png";
-            this.nameField.text = "Казимир Внуков";
-            this.roleLevelField.text = "100%";
-            this.specLevelBar.maximum = 100;
-            this.specLevelBar.frontPosition = 51;
-            this.specLevelBar.backPosition = 100;
-            this.mainSkillItem.type = net.wg.gui.lobby.tankman.SkillItemViewMini.TYPE_SKILLS;
-            this.mainSkillItem.iconSource = "../maps/icons/tankmen/skills/small/camouflage.png";
-            this.mainSkillItem.count = 2;
-            this.additionalSkillItem.type = net.wg.gui.lobby.tankman.SkillItemViewMini.TYPE_CURRENT_NEW_SKILL;
-            this.additionalSkillItem.level = 87;
-            return;
-        }
-
-        public function get portraitSource():String
-        {
-            return this.tankmanPic.source;
-        }
-
-        public function set portraitSource(arg1:String):void
-        {
-            this.tankmanPic.source = arg1;
-            return;
-        }
-
-        public function get roleSource():String
-        {
-            return this.roleIcon.source;
-        }
-
-        public function set roleSource(arg1:String):void
-        {
-            this.roleIcon.source = arg1;
-            return;
-        }
-
-        public function get tankmanName():String
-        {
-            return this.nameField.text;
-        }
-
-        public function set tankmanName(arg1:String):void
-        {
-            this.nameField.text = arg1;
-            return;
-        }
-
-        public function get nation():String
-        {
-            return this._nation;
-        }
-
-        public function set nation(arg1:String):void
-        {
-            this._nation = arg1;
-            this.backgroundSwitcher.gotoAndPlay(this._nation);
-            return;
-        }
-
-        public function setRoleLevel(arg1:Number, arg2:Number=NaN):void
-        {
-            var loc1:*=arg1.toString();
-            if (!isNaN(arg2) && !(arg2 - arg1 == 0)) 
+         }
+         if(param4 == 100)
+         {
+            this.buildSkillsPack(this.mainSkillItem,param3,param1 + 1);
+            if(param5)
             {
-                loc1 = loc1 + ("<font color=\'#ffffff\'>+" + (arg2 - arg1) + "%</font>");
+               this.buildCurrentSkill(this.additionalSkillItem,SkillItemViewMini.TYPE_NEW_SKILL,NaN);
             }
-            else 
+         }
+         else
+         {
+            if(param1 == 1)
             {
-                loc1 = loc1 + "%";
+               this.buildCurrentSkill(this.mainSkillItem,param3,param4);
             }
-            this.roleLevelField.htmlText = loc1;
-            this.specLevelBar.frontPosition = arg1;
-            this.specLevelBar.backPosition = arg2;
-            return;
-        }
-
-        public function setSkills(arg1:int, arg2:String, arg3:String, arg4:Number, arg5:Boolean):void
-        {
-            this.mainSkillItem.visible = false;
-            this.additionalSkillItem.visible = false;
-            if (arg1 == 0) 
+            else
             {
-                this.buildCurrentSkill(this.mainSkillItem, net.wg.gui.lobby.tankman.SkillItemViewMini.TYPE_NEW_SKILL, NaN);
-                return;
+               this.buildSkillsPack(this.mainSkillItem,param2,param1);
+               this.buildCurrentSkill(this.additionalSkillItem,param3,param4);
             }
-            if (arg4 != 100) 
-            {
-                if (arg1 != 1) 
-                {
-                    this.buildSkillsPack(this.mainSkillItem, arg2, arg1);
-                    this.buildCurrentSkill(this.additionalSkillItem, arg3, arg4);
-                }
-                else 
-                {
-                    this.buildCurrentSkill(this.mainSkillItem, arg3, arg4);
-                }
-            }
-            else 
-            {
-                this.buildSkillsPack(this.mainSkillItem, arg3, arg1 + 1);
-                if (arg5) 
-                {
-                    this.buildCurrentSkill(this.additionalSkillItem, net.wg.gui.lobby.tankman.SkillItemViewMini.TYPE_NEW_SKILL, NaN);
-                }
-            }
-            return;
-        }
+         }
+      }
 
-        internal function buildCurrentSkill(arg1:net.wg.gui.lobby.tankman.SkillItemViewMini, arg2:String, arg3:Number):void
-        {
-            if (arg2 != net.wg.gui.lobby.tankman.SkillItemViewMini.TYPE_NEW_SKILL) 
-            {
-                arg1.type = net.wg.gui.lobby.tankman.SkillItemViewMini.TYPE_CURRENT_SKILL;
-                arg1.iconSource = arg2;
-            }
-            else 
-            {
-                arg1.type = net.wg.gui.lobby.tankman.SkillItemViewMini.TYPE_CURRENT_NEW_SKILL;
-            }
-            arg1.level = arg3;
-            arg1.visible = true;
-            return;
-        }
+      private function buildCurrentSkill(param1:SkillItemViewMini, param2:String, param3:Number) : void {
+         if(param2 == SkillItemViewMini.TYPE_NEW_SKILL)
+         {
+            param1.type = SkillItemViewMini.TYPE_CURRENT_NEW_SKILL;
+         }
+         else
+         {
+            param1.type = SkillItemViewMini.TYPE_CURRENT_SKILL;
+            param1.iconSource = param2;
+         }
+         param1.level = param3;
+         param1.visible = true;
+      }
 
-        internal function buildSkillsPack(arg1:net.wg.gui.lobby.tankman.SkillItemViewMini, arg2:String, arg3:int):void
-        {
-            if (arg2 != net.wg.gui.lobby.tankman.SkillItemViewMini.TYPE_NEW_SKILL) 
-            {
-                arg1.type = arg3 > 2 ? net.wg.gui.lobby.tankman.SkillItemViewMini.TYPE_SKILLS : net.wg.gui.lobby.tankman.SkillItemViewMini.TYPE_SKILL;
-                arg1.iconSource = arg2;
-            }
-            else 
-            {
-                arg1.type = arg3 > 2 ? net.wg.gui.lobby.tankman.SkillItemViewMini.TYPE_NEW_SKILLS : net.wg.gui.lobby.tankman.SkillItemViewMini.TYPE_NEW_SKILL;
-            }
-            arg1.count = (arg3 - 1);
-            arg1.visible = true;
-            return;
-        }
+      private function buildSkillsPack(param1:SkillItemViewMini, param2:String, param3:int) : void {
+         if(param2 == SkillItemViewMini.TYPE_NEW_SKILL)
+         {
+            param1.type = param3 > 2?SkillItemViewMini.TYPE_NEW_SKILLS:SkillItemViewMini.TYPE_NEW_SKILL;
+         }
+         else
+         {
+            param1.type = param3 > 2?SkillItemViewMini.TYPE_SKILLS:SkillItemViewMini.TYPE_SKILL;
+            param1.iconSource = param2;
+         }
+         param1.count = param3-1;
+         param1.visible = true;
+      }
+   }
 
-        public var roleIcon:net.wg.gui.components.controls.UILoaderAlt;
-
-        public var nameField:flash.text.TextField;
-
-        public var roleLevelField:flash.text.TextField;
-
-        public var specLevelBar:net.wg.gui.components.advanced.DoubleProgressBar;
-
-        public var mainSkillItem:net.wg.gui.lobby.tankman.SkillItemViewMini;
-
-        public var additionalSkillItem:net.wg.gui.lobby.tankman.SkillItemViewMini;
-
-        public var tankmanPic:net.wg.gui.components.controls.UILoaderAlt;
-
-        public var backgroundSwitcher:scaleform.clik.core.UIComponent;
-
-        internal var _nation:String;
-    }
 }

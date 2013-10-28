@@ -1,221 +1,200 @@
-package net.wg.gui.prebattle.controls 
+package net.wg.gui.prebattle.controls
 {
-    import flash.text.*;
-    import net.wg.gui.prebattle.constants.*;
-    import net.wg.gui.prebattle.data.*;
-    import net.wg.gui.prebattle.squad.*;
-    import scaleform.clik.core.*;
-    import scaleform.gfx.*;
-    
-    public class TeamMemberRenderer extends net.wg.gui.prebattle.squad.SquadItemRenderer
-    {
-        public function TeamMemberRenderer()
-        {
-            useRightButton = true;
-            super();
-            return;
-        }
+   import net.wg.gui.prebattle.squad.SquadItemRenderer;
+   import flash.text.TextField;
+   import scaleform.clik.core.UIComponent;
+   import net.wg.gui.prebattle.data.PlayerPrbInfoVO;
+   import net.wg.gui.prebattle.constants.PrebattleStateString;
+   import scaleform.gfx.TextFieldEx;
 
-        public override function dispose():void
-        {
-            super.dispose();
-            this.commander_icon.dispose();
-            this.status_icon.dispose();
-            this.wrong_limits.dispose();
-            this.vehicle_type_icon.dispose();
-            return;
-        }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            return;
-        }
+   public class TeamMemberRenderer extends SquadItemRenderer
+   {
+          
+      public function TeamMemberRenderer() {
+         useRightButton = true;
+         super();
+      }
 
-        public override function setData(arg1:Object):void
-        {
-            if (arg1 != null) 
-            {
-                arg1 = new net.wg.gui.prebattle.data.PlayerPrbInfoVO(arg1);
-            }
-            super.setData(arg1);
-            return;
-        }
+      public var numberField:TextField;
 
-        protected override function showToolTips():void
-        {
-            var loc1:*=model.accID != -1 ? this.isVehicleValid ? getToolTipData() : model.himself ? TOOLTIPS.MEMBERS_VEHICLELEVELLIMITS_BODY : getToolTipData() : MESSENGER.DIALOGS_TEAMCHANNEL_BUTTONS_INVITE;
-            if (loc1 && loc1.length > 0) 
-            {
-                App.toolTipMgr.show(loc1);
-            }
-            return;
-        }
+      public var commander_icon:UIComponent;
 
-        protected override function afterSetData():void
-        {
-            var loc1:*=null;
-            var loc3:*=null;
-            var loc4:*;
-            this.vehicle_type_icon.visible = loc4 = false;
-            this.status_icon.visible = loc4 = loc4;
-            this.commander_icon.visible = loc4;
-            if (!model) 
-            {
-                return;
-            }
-            loc1 = model.getStateString();
-            if (loc1 == net.wg.gui.prebattle.constants.PrebattleStateString.UNKNOWN) 
-            {
-                setSpeakers(false, true);
-                status.gotoAndPlay("invite");
-                loc1 = null;
-            }
-            else 
-            {
-                statusString = loc1;
-                this.status_icon.visible = true;
-                status.visible = true;
-                status.gotoAndPlay(loc1);
-                if (this.status_icon.currentLabels.indexOf(loc1, 0)) 
-                {
-                    this.status_icon.gotoAndPlay(loc1);
-                }
-                if (loc1 == net.wg.gui.prebattle.constants.PrebattleStateString.OFFLINE) 
-                {
-                    this.status_icon.gotoAndPlay(net.wg.gui.prebattle.constants.PrebattleStateString.NOT_READY);
-                }
-                if (this.hitTestPoint(mouseX, mouseY, true)) 
-                {
-                    loc3 = getToolTipData();
-                    if (loc3.length > 0) 
-                    {
-                        App.toolTipMgr.showSpecial(loc3, null);
-                    }
-                }
-                if (model.vType) 
-                {
-                    this.vehicle_type_icon.visible = true;
-                    this.vehicle_type_icon.gotoAndPlay(model.vType);
-                }
-                else 
-                {
-                    this.vehicle_type_icon.visible = false;
-                }
-                if (model.isCreator) 
-                {
-                    this.commander_icon.visible = true;
-                    this.status_icon.visible = false;
-                }
-            }
-            updateVoiceWave();
-            var loc2:*=model.getCurrentColor();
-            if (!isNaN(loc2)) 
-            {
-                textField.textColor = loc2;
-                vehicleNameField.textColor = loc2;
-                this.numberField.textColor = loc2;
-                this.vehicleLevelField.textColor = loc2;
-            }
-            vehicleNameField.text = model.vShortName;
-            this.updateValidVehicleState(this.isVehicleValid);
-            if (isNaN(model.orderNumber)) 
-            {
-                this.numberField.visible = false;
-            }
-            else 
-            {
-                this.numberField.text = String(model.orderNumber);
-            }
-            label = model.fullName;
-            this.updateAfterStateChange();
-            return;
-        }
+      public var status_icon:UIComponent;
 
-        protected override function updateAfterStateChange():void
-        {
-            super.updateAfterStateChange();
-            if (!initialized || model == null) 
+      public var wrong_limits:UIComponent;
+
+      public var vehicle_type_icon:UIComponent;
+
+      private var _isVehicleValid:Boolean = true;
+
+      override public function dispose() : void {
+         super.dispose();
+         this.commander_icon.dispose();
+         this.status_icon.dispose();
+         this.wrong_limits.dispose();
+         this.vehicle_type_icon.dispose();
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+      }
+
+      override public function setData(param1:Object) : void {
+         if(param1 != null)
+         {
+            param1 = new PlayerPrbInfoVO(param1);
+         }
+         super.setData(param1);
+      }
+
+      override protected function showToolTips() : void {
+         var _loc1_:String = model.accID == -1?MESSENGER.DIALOGS_TEAMCHANNEL_BUTTONS_INVITE:this.isVehicleValid?getToolTipData():model.himself?TOOLTIPS.MEMBERS_VEHICLELEVELLIMITS_BODY:getToolTipData();
+         if((_loc1_) && _loc1_.length > 0)
+         {
+            App.toolTipMgr.show(_loc1_);
+         }
+      }
+
+      override protected function afterSetData() : void {
+         var _loc1_:String = null;
+         var _loc3_:String = null;
+         this.commander_icon.visible = this.status_icon.visible = this.vehicle_type_icon.visible = false;
+         if(!model)
+         {
+            return;
+         }
+         _loc1_ = model.getStateString();
+         if(_loc1_ != PrebattleStateString.UNKNOWN)
+         {
+            statusString = _loc1_;
+            this.status_icon.visible = true;
+            status.visible = true;
+            status.gotoAndPlay(_loc1_);
+            if(this.status_icon.currentLabels.indexOf(_loc1_,0))
             {
-                return;
+               this.status_icon.gotoAndPlay(_loc1_);
             }
-            if (model.isCreator) 
+            if(_loc1_ == PrebattleStateString.OFFLINE)
             {
-                this.commander_icon.visible = true;
-                this.status_icon.visible = false;
+               this.status_icon.gotoAndPlay(PrebattleStateString.NOT_READY);
             }
-            if (model.vType) 
+            if(this.hitTestPoint(mouseX,mouseY,true))
             {
-                this.vehicle_type_icon.visible = true;
-                this.vehicle_type_icon.gotoAndPlay(model.vType);
+               _loc3_ = getToolTipData();
+               if(_loc3_.length > 0)
+               {
+                  App.toolTipMgr.showSpecial(_loc3_,null);
+               }
             }
-            else 
+            if(model.vType)
             {
-                this.vehicle_type_icon.visible = false;
+               this.vehicle_type_icon.visible = true;
+               this.vehicle_type_icon.gotoAndPlay(model.vType);
             }
-            scaleform.gfx.TextFieldEx.setVerticalAlign(textField, scaleform.gfx.TextFieldEx.VALIGN_TOP);
-            scaleform.gfx.TextFieldEx.setVerticalAlign(vehicleNameField, scaleform.gfx.TextFieldEx.VALIGN_TOP);
-            scaleform.gfx.TextFieldEx.setVerticalAlign(this.numberField, scaleform.gfx.TextFieldEx.VALIGN_TOP);
-            vehicleNameField.text = model.vShortName;
+            else
+            {
+               this.vehicle_type_icon.visible = false;
+            }
+            if(model.isCreator)
+            {
+               this.commander_icon.visible = true;
+               this.status_icon.visible = false;
+            }
+         }
+         else
+         {
+            setSpeakers(false,true);
+            status.gotoAndPlay("invite");
+            _loc1_ = null;
+         }
+         updateVoiceWave();
+         var _loc2_:Number = model.getCurrentColor();
+         if(!isNaN(_loc2_))
+         {
+            textField.textColor = _loc2_;
+            vehicleNameField.textColor = _loc2_;
+            this.numberField.textColor = _loc2_;
+            vehicleLevelField.textColor = _loc2_;
+         }
+         vehicleNameField.text = model.vShortName;
+         this.updateValidVehicleState(this.isVehicleValid);
+         if(isNaN(model.orderNumber))
+         {
+            this.numberField.visible = false;
+         }
+         else
+         {
             this.numberField.text = String(model.orderNumber);
-            var loc1:*=model.getCurrentColor();
-            if (!isNaN(loc1)) 
-            {
-                textField.textColor = loc1;
-                vehicleNameField.textColor = loc1;
-                this.numberField.textColor = loc1;
-                this.vehicleLevelField.textColor = loc1;
-            }
-            this.updateValidVehicleState(this._isVehicleValid && !(this.vehicleLevelField.text == null) && this.visible);
-            constraints.updateElement("status", status);
-            constraints.updateElement("vehicleNameField", vehicleNameField);
+         }
+         label = model.fullName;
+         this.updateAfterStateChange();
+      }
+
+      override protected function updateAfterStateChange() : void {
+         super.updateAfterStateChange();
+         if(!initialized || model == null)
+         {
             return;
-        }
+         }
+         if(model.isCreator)
+         {
+            this.commander_icon.visible = true;
+            this.status_icon.visible = false;
+         }
+         if(model.vType)
+         {
+            this.vehicle_type_icon.visible = true;
+            this.vehicle_type_icon.gotoAndPlay(model.vType);
+         }
+         else
+         {
+            this.vehicle_type_icon.visible = false;
+         }
+         TextFieldEx.setVerticalAlign(textField,TextFieldEx.VALIGN_TOP);
+         TextFieldEx.setVerticalAlign(vehicleNameField,TextFieldEx.VALIGN_TOP);
+         TextFieldEx.setVerticalAlign(this.numberField,TextFieldEx.VALIGN_TOP);
+         vehicleNameField.text = model.vShortName;
+         this.numberField.text = String(model.orderNumber);
+         var _loc1_:Number = model.getCurrentColor();
+         if(!isNaN(_loc1_))
+         {
+            textField.textColor = _loc1_;
+            vehicleNameField.textColor = _loc1_;
+            this.numberField.textColor = _loc1_;
+            vehicleLevelField.textColor = _loc1_;
+         }
+         this.updateValidVehicleState((this._isVehicleValid) && !(vehicleLevelField.text == null) && (this.visible));
+         constraints.updateElement("status",status);
+         constraints.updateElement("vehicleNameField",vehicleNameField);
+      }
 
-        public function get isVehicleValid():Boolean
-        {
-            return this._isVehicleValid;
-        }
+      public function get isVehicleValid() : Boolean {
+         return this._isVehicleValid;
+      }
 
-        public function set isVehicleValid(arg1:Boolean):void
-        {
-            this._isVehicleValid = arg1;
-            this.updateValidVehicleState(arg1);
+      public function set isVehicleValid(param1:Boolean) : void {
+         this._isVehicleValid = param1;
+         this.updateValidVehicleState(param1);
+      }
+
+      private function updateValidVehicleState(param1:Boolean) : void {
+         if(isNaN(model.accID))
+         {
             return;
-        }
+         }
+         this.wrong_limits.visible = !param1;
+         if(param1)
+         {
+            vehicleLevelField.htmlText = "";
+            vehicleLevelField.text = model.vLevel;
+         }
+         else
+         {
+            vehicleLevelField.text = "";
+            vehicleLevelField.htmlText = "<font color=\"#ff0000\">" + model.vLevel + "</font>";
+         }
+      }
+   }
 
-        internal function updateValidVehicleState(arg1:Boolean):void
-        {
-            if (isNaN(model.accID)) 
-            {
-                return;
-            }
-            this.wrong_limits.visible = !arg1;
-            if (arg1) 
-            {
-                this.vehicleLevelField.htmlText = "";
-                this.vehicleLevelField.text = model.vLevel;
-            }
-            else 
-            {
-                this.vehicleLevelField.text = "";
-                this.vehicleLevelField.htmlText = "<font color=\"#ff0000\">" + model.vLevel + "</font>";
-            }
-            return;
-        }
-
-        public var vehicleLevelField:flash.text.TextField;
-
-        public var numberField:flash.text.TextField;
-
-        public var commander_icon:scaleform.clik.core.UIComponent;
-
-        public var status_icon:scaleform.clik.core.UIComponent;
-
-        public var wrong_limits:scaleform.clik.core.UIComponent;
-
-        public var vehicle_type_icon:scaleform.clik.core.UIComponent;
-
-        internal var _isVehicleValid:Boolean=true;
-    }
 }

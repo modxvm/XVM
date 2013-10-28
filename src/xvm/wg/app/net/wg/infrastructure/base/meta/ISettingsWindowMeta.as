@@ -1,35 +1,38 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface ISettingsWindowMeta extends flash.events.IEventDispatcher
-    {
-        function closeWindowS():void;
+   import flash.events.IEventDispatcher;
 
-        function applySettingsS(arg1:Object, arg2:Boolean):void;
 
-        function autodetectQualityS():Number;
+   public interface ISettingsWindowMeta extends IEventDispatcher
+   {
+          
+      function closeWindowS() : void;
 
-        function startVOIPTestS(arg1:Boolean):Boolean;
+      function applySettingsS(param1:Object, param2:Boolean) : void;
 
-        function updateCaptureDevicesS():void;
+      function autodetectQualityS() : Number;
 
-        function onSettingsChangeS(arg1:String, arg2:Object):void;
+      function startVOIPTestS(param1:Boolean) : Boolean;
 
-        function altVoicesPreviewS():void;
+      function updateCaptureDevicesS() : void;
 
-        function isSoundModeValidS():Boolean;
+      function onSettingsChangeS(param1:String, param2:Object) : void;
 
-        function showWarningDialogS(arg1:String, arg2:Object, arg3:Boolean):void;
+      function altVoicesPreviewS() : void;
 
-        function as_setData(arg1:Object):void;
+      function isSoundModeValidS() : Boolean;
 
-        function as_setCaptureDevices(arg1:Number, arg2:Array):void;
+      function showWarningDialogS(param1:String, param2:Object, param3:Boolean) : void;
 
-        function as_onVibroManagerConnect(arg1:Boolean):void;
+      function as_setData(param1:Object) : void;
 
-        function as_updateVideoSettings(arg1:Object):void;
+      function as_setCaptureDevices(param1:Number, param2:Array) : void;
 
-        function as_confirmWarningDialog(arg1:Boolean, arg2:String):void;
-    }
+      function as_onVibroManagerConnect(param1:Boolean) : void;
+
+      function as_updateVideoSettings(param1:Object) : void;
+
+      function as_confirmWarningDialog(param1:Boolean, param2:String) : void;
+   }
+
 }

@@ -1,17 +1,17 @@
-package net.wg.gui.components.controls.achievements 
+package net.wg.gui.components.controls.achievements
 {
-    public class AchievementCommonVehicle extends net.wg.gui.components.controls.achievements.AchievementCommon
-    {
-        public function AchievementCommonVehicle()
-        {
-            super();
-            return;
-        }
 
-        protected override function setRecordRepeatable(arg1:String):void
-        {
-            super.setRecordRepeatable(net.wg.gui.components.controls.achievements.AchievementCounter.GREY);
-            return;
-        }
-    }
+
+   public class AchievementCommonVehicle extends AchievementCommon
+   {
+          
+      public function AchievementCommonVehicle() {
+         super();
+      }
+
+      override protected function setRecordRepeatable(param1:String) : void {
+         super.setRecordRepeatable(AchievementCounter.GREY);
+      }
+   }
+
 }

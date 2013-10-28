@@ -1,60 +1,62 @@
-package net.wg.gui.lobby.profile 
+package net.wg.gui.lobby.profile
 {
-    import flash.text.*;
-    import net.wg.gui.components.advanced.*;
-    import scaleform.clik.core.*;
-    
-    public class UserInfoForm extends scaleform.clik.core.UIComponent
-    {
-        public function UserInfoForm()
-        {
-            this.USER_INFO_FRAME = {"CLAN":1, "NORMAL":2};
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.text.TextField;
+   import net.wg.gui.components.advanced.ClanEmblem;
 
-        protected override function draw():void
-        {
-            if (this.dataUpdated) 
+
+   public class UserInfoForm extends UIComponent
+   {
+          
+      public function UserInfoForm() {
+         this.USER_INFO_FRAME =
             {
-                this.dataUpdated = false;
+               "CLAN":1,
+               "NORMAL":2
             }
-            return;
-        }
+         ;
+         super();
+      }
 
-        public function setData(arg1:Object):void
-        {
-            if (arg1 && !(arg1 == this._data)) 
-            {
-                this._data = arg1;
-                this.dataUpdated = true;
-                invalidate();
-            }
-            return;
-        }
+      public var nameField:TextField;
 
-        public var nameField:flash.text.TextField;
+      public var clanField:TextField;
 
-        public var clanField:flash.text.TextField;
+      public var clanJoinDataField:TextField;
 
-        public var clanJoinDataField:flash.text.TextField;
+      public var clanPositionField:TextField;
 
-        public var clanPositionField:flash.text.TextField;
+      public var registrationDateLabel:TextField;
 
-        public var registrationDateLabel:flash.text.TextField;
+      public var registrationDateField:TextField;
 
-        public var registrationDateField:flash.text.TextField;
+      public var lastBattleDateLabel:TextField;
 
-        public var lastBattleDateLabel:flash.text.TextField;
+      public var lastBattleDateField:TextField;
 
-        public var lastBattleDateField:flash.text.TextField;
+      public var clanEmblem:ClanEmblem;
 
-        public var clanEmblem:net.wg.gui.components.advanced.ClanEmblem;
+      private var _data:Object;
 
-        internal var _data:Object;
+      private var dataUpdated:Boolean = false;
 
-        internal var dataUpdated:Boolean=false;
+      private var USER_INFO_FRAME:Object;
 
-        internal var USER_INFO_FRAME:Object;
-    }
+      override protected function draw() : void {
+         if(this.dataUpdated)
+         {
+            this.dataUpdated = false;
+         }
+      }
+
+      public function setData(param1:Object) : void {
+         if((param1) && !(param1 == this._data))
+         {
+            this._data = param1;
+            this.dataUpdated = true;
+            invalidate();
+         }
+      }
+   }
+
 }

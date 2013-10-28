@@ -1,9 +1,13 @@
-package net.wg.infrastructure.interfaces 
+package net.wg.infrastructure.interfaces
 {
-    public interface IHelpLayoutComponent
-    {
-        function showHelpLayout():void;
 
-        function closeHelpLayout():void;
-    }
+
+   public interface IHelpLayoutComponent
+   {
+          
+      function showHelpLayout() : void;
+
+      function closeHelpLayout() : void;
+   }
+
 }

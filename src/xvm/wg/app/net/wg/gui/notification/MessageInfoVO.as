@@ -1,43 +1,42 @@
-package net.wg.gui.notification 
+package net.wg.gui.notification
 {
-    import net.wg.data.daapi.base.*;
-    
-    public class MessageInfoVO extends net.wg.data.daapi.base.DAAPIDataClass
-    {
-        public function MessageInfoVO(arg1:Object)
-        {
-            super(arg1);
-            return;
-        }
+   import net.wg.data.daapi.base.DAAPIDataClass;
 
-        protected override function onDataWrite(arg1:String, arg2:Object):Boolean
-        {
-            if (arg1 == "showMore") 
-            {
-                this._showMoreVO = new net.wg.gui.notification.MoreInfoVO(arg2);
-                this.showMore = arg2;
-                return false;
-            }
-            return this.hasOwnProperty(arg1);
-        }
 
-        public function get showMoreVO():net.wg.gui.notification.MoreInfoVO
-        {
-            return this._showMoreVO;
-        }
+   public class MessageInfoVO extends DAAPIDataClass
+   {
+          
+      public function MessageInfoVO(param1:Object) {
+         super(param1);
+      }
 
-        public var type:String="";
+      public var type:String = "";
 
-        public var message:String="";
+      public var message:String = "";
 
-        public var icon:String="";
+      public var icon:String = "";
 
-        public var defaultIcon:String="";
+      public var defaultIcon:String = "";
 
-        public var showMore:Object;
+      public var showMore:Object;
 
-        internal var _showMoreVO:net.wg.gui.notification.MoreInfoVO;
+      private var _showMoreVO:MoreInfoVO;
 
-        public var filters:Array;
-    }
+      public var filters:Array;
+
+      override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+         if(param1 == "showMore")
+         {
+            this._showMoreVO = new MoreInfoVO(param2);
+            this.showMore = param2;
+            return false;
+         }
+         return this.hasOwnProperty(param1);
+      }
+
+      public function get showMoreVO() : MoreInfoVO {
+         return this._showMoreVO;
+      }
+   }
+
 }

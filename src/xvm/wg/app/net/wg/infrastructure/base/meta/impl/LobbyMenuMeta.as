@@ -1,59 +1,50 @@
-package net.wg.infrastructure.base.meta.impl 
+package net.wg.infrastructure.base.meta.impl
 {
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.base.*;
-    
-    public class LobbyMenuMeta extends net.wg.infrastructure.base.AbstractWindowView
-    {
-        public function LobbyMenuMeta()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.AbstractWindowView;
+   import net.wg.data.constants.Errors;
 
-        public function settingsClickS():void
-        {
-            App.utils.asserter.assertNotNull(this.settingsClick, "settingsClick" + net.wg.data.constants.Errors.CANT_NULL);
-            this.settingsClick();
-            return;
-        }
 
-        public function cancelClickS():void
-        {
-            App.utils.asserter.assertNotNull(this.cancelClick, "cancelClick" + net.wg.data.constants.Errors.CANT_NULL);
-            this.cancelClick();
-            return;
-        }
+   public class LobbyMenuMeta extends AbstractWindowView
+   {
+          
+      public function LobbyMenuMeta() {
+         super();
+      }
 
-        public function refuseTrainingS():void
-        {
-            App.utils.asserter.assertNotNull(this.refuseTraining, "refuseTraining" + net.wg.data.constants.Errors.CANT_NULL);
-            this.refuseTraining();
-            return;
-        }
+      public var settingsClick:Function = null;
 
-        public function logoffClickS():void
-        {
-            App.utils.asserter.assertNotNull(this.logoffClick, "logoffClick" + net.wg.data.constants.Errors.CANT_NULL);
-            this.logoffClick();
-            return;
-        }
+      public var cancelClick:Function = null;
 
-        public function quitClickS():void
-        {
-            App.utils.asserter.assertNotNull(this.quitClick, "quitClick" + net.wg.data.constants.Errors.CANT_NULL);
-            this.quitClick();
-            return;
-        }
+      public var refuseTraining:Function = null;
 
-        public var settingsClick:Function=null;
+      public var logoffClick:Function = null;
 
-        public var cancelClick:Function=null;
+      public var quitClick:Function = null;
 
-        public var refuseTraining:Function=null;
+      public function settingsClickS() : void {
+         App.utils.asserter.assertNotNull(this.settingsClick,"settingsClick" + Errors.CANT_NULL);
+         this.settingsClick();
+      }
 
-        public var logoffClick:Function=null;
+      public function cancelClickS() : void {
+         App.utils.asserter.assertNotNull(this.cancelClick,"cancelClick" + Errors.CANT_NULL);
+         this.cancelClick();
+      }
 
-        public var quitClick:Function=null;
-    }
+      public function refuseTrainingS() : void {
+         App.utils.asserter.assertNotNull(this.refuseTraining,"refuseTraining" + Errors.CANT_NULL);
+         this.refuseTraining();
+      }
+
+      public function logoffClickS() : void {
+         App.utils.asserter.assertNotNull(this.logoffClick,"logoffClick" + Errors.CANT_NULL);
+         this.logoffClick();
+      }
+
+      public function quitClickS() : void {
+         App.utils.asserter.assertNotNull(this.quitClick,"quitClick" + Errors.CANT_NULL);
+         this.quitClick();
+      }
+   }
+
 }

@@ -1,80 +1,69 @@
-package net.wg.gui.components.controls 
+package net.wg.gui.components.controls
 {
-    import scaleform.clik.constants.*;
-    import scaleform.clik.core.*;
-    
-    public class ProgressBar extends scaleform.clik.core.UIComponent implements net.wg.gui.components.controls.IProgressBar
-    {
-        public function ProgressBar()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import scaleform.clik.constants.InvalidationType;
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
-            {
-                this.applyDataChanges();
-            }
-            return;
-        }
 
-        protected function applyDataChanges():void
-        {
-            return;
-        }
+   public class ProgressBar extends UIComponent implements IProgressBar
+   {
+          
+      public function ProgressBar() {
+         super();
+      }
 
-        public function set minimum(arg1:Number):void
-        {
-            if (this._minimum != arg1) 
-            {
-                this._minimum = arg1;
-                invalidateData();
-            }
-            return;
-        }
+      private var _minimum:Number = 0;
 
-        public function get minimum():Number
-        {
-            return this._minimum;
-        }
+      private var _maximum:Number = 1;
 
-        public function set maximum(arg1:Number):void
-        {
-            if (this._maximum != arg1) 
-            {
-                this._maximum = arg1;
-                invalidateData();
-            }
-            return;
-        }
+      private var _value:Number = 0;
 
-        public function get maximum():Number
-        {
-            return this._maximum;
-        }
+      override protected function draw() : void {
+         super.draw();
+         if(isInvalid(InvalidationType.DATA))
+         {
+            this.applyDataChanges();
+         }
+      }
 
-        public function set value(arg1:Number):void
-        {
-            if (this._value != arg1) 
-            {
-                this._value = arg1;
-                invalidateData();
-            }
-            return;
-        }
+      protected function applyDataChanges() : void {
+          
+      }
 
-        public function get value():Number
-        {
-            return this._value;
-        }
+      public function set minimum(param1:Number) : void {
+         if(this._minimum != param1)
+         {
+            this._minimum = param1;
+            invalidateData();
+         }
+      }
 
-        internal var _minimum:Number=0;
+      public function get minimum() : Number {
+         return this._minimum;
+      }
 
-        internal var _maximum:Number=1;
+      public function set maximum(param1:Number) : void {
+         if(this._maximum != param1)
+         {
+            this._maximum = param1;
+            invalidateData();
+         }
+      }
 
-        internal var _value:Number=0;
-    }
+      public function get maximum() : Number {
+         return this._maximum;
+      }
+
+      public function set value(param1:Number) : void {
+         if(this._value != param1)
+         {
+            this._value = param1;
+            invalidateData();
+         }
+      }
+
+      public function get value() : Number {
+         return this._value;
+      }
+   }
+
 }

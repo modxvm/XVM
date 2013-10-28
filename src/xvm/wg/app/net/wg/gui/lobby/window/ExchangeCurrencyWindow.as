@@ -1,202 +1,225 @@
-package net.wg.gui.lobby.window 
+package net.wg.gui.lobby.window
 {
-    import flash.events.*;
-    import flash.text.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.utils.*;
-    import scaleform.clik.events.*;
-    
-    public class ExchangeCurrencyWindow extends net.wg.gui.lobby.window.BaseExchangeWindow implements net.wg.infrastructure.base.meta.IExchangeWindowMeta
-    {
-        public function ExchangeCurrencyWindow()
-        {
-            super();
-            isModal = false;
-            canResize = false;
-            canMinimize = false;
-            isCentered = true;
-            showWindowBg = false;
-            return;
-        }
+   import net.wg.infrastructure.base.meta.IExchangeWindowMeta;
+   import net.wg.gui.components.controls.SoundButtonEx;
+   import net.wg.gui.components.controls.NumericStepper;
+   import flash.text.TextField;
+   import net.wg.gui.components.controls.IconText;
+   import net.wg.gui.components.controls.WalletResourcesStatus;
+   import scaleform.clik.events.ButtonEvent;
+   import scaleform.clik.events.IndexEvent;
+   import flash.events.Event;
+   import net.wg.utils.ILocale;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.submitBtn.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.submitBtnClickHandler);
-            this.cancelBtn.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, cancelBtnClickHandler);
-            var loc1:*;
-            this.nsSecondaryCurrency.minimum = loc1 = 0;
-            this.nsPrimaryCurrency.minimum = loc1;
-            this.nsPrimaryCurrency.addEventListener(scaleform.clik.events.IndexEvent.INDEX_CHANGE, this.nsFirstCurrencyChangeHandler);
-            this.nsSecondaryCurrency.addEventListener(scaleform.clik.events.IndexEvent.INDEX_CHANGE, this.nsSecondaryCurrencyChangeHandler);
-            return;
-        }
 
-        public function set exchangeStep(arg1:Number):void
-        {
-            this._exchangeStep = arg1;
-            invalidate(RATES_INVALID);
-            return;
-        }
+   public class ExchangeCurrencyWindow extends BaseExchangeWindow implements IExchangeWindowMeta
+   {
+          
+      public function ExchangeCurrencyWindow() {
+         super();
+         isModal = false;
+         canResize = false;
+         canMinimize = false;
+         isCentered = true;
+         showWindowBg = false;
+      }
 
-        public function get exchangeStep():Number
-        {
-            return this._exchangeStep;
-        }
+      private static const SELECTED_PRIMARY_CURRENCY_INVALID:String = "selectedPrimaryCurrencyInv";
 
-        protected override function onDispose():void
-        {
-            super.onDispose();
-            this.submitBtn.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.submitBtnClickHandler);
-            this.cancelBtn.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, cancelBtnClickHandler);
-            this.nsPrimaryCurrency.removeEventListener(scaleform.clik.events.IndexEvent.INDEX_CHANGE, this.nsFirstCurrencyChangeHandler);
-            this.nsSecondaryCurrency.removeEventListener(scaleform.clik.events.IndexEvent.INDEX_CHANGE, this.nsSecondaryCurrencyChangeHandler);
-            return;
-        }
+      private static const TOTAL_SECONDARY_CURRENCY_CHANGED:String = "totalSecondaryCurrensyChanged";
 
-        protected override function onPopulate():void
-        {
-            super.onPopulate();
-            return;
-        }
+      public var submitBtn:SoundButtonEx;
 
-        protected override function applyPrimaryCurrencyChange():void
-        {
-            var loc1:*=totalPrimaryCurrency >= 0 ? totalPrimaryCurrency : 0;
-            this.onHandPrimaryCurrencyText.text = App.utils.locale.gold(loc1);
+      public var cancelBtn:SoundButtonEx;
+
+      public var headerMC:ExchangeHeader;
+
+      public var nsPrimaryCurrency:NumericStepper;
+
+      public var nsSecondaryCurrency:NumericStepper;
+
+      private var _selectedPrimaryCurrency:uint = 0;
+
+      protected var isUpdateResult:Boolean;
+
+      public var lblToExchange:TextField;
+
+      public var lblExchangeResult:TextField;
+
+      public var onHandPrimaryCurrencyText:IconText;
+
+      public var onHandSecondaryCurrencyText:IconText;
+
+      public var resultPrimaryCurrencyText:IconText;
+
+      public var resultSecondaryCurrencyText:IconText;
+
+      public var toExchangePrimaryCurrencyIco:IconText;
+
+      public var toExchangeSecondaryCurrencyIco:IconText;
+
+      public var onHandHaveNotGold:WalletResourcesStatus = null;
+
+      public var resultHaveNotGold:WalletResourcesStatus = null;
+
+      private var _exchangeStep:Number = 1;
+
+      private var totalSecondaryCurrency:Number = 0;
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.submitBtn.addEventListener(ButtonEvent.CLICK,this.submitBtnClickHandler);
+         this.cancelBtn.addEventListener(ButtonEvent.CLICK,cancelBtnClickHandler);
+         this.nsPrimaryCurrency.minimum = this.nsSecondaryCurrency.minimum = 0;
+         this.nsPrimaryCurrency.addEventListener(IndexEvent.INDEX_CHANGE,this.nsFirstCurrencyChangeHandler);
+         this.nsSecondaryCurrency.addEventListener(IndexEvent.INDEX_CHANGE,this.nsSecondaryCurrencyChangeHandler);
+      }
+
+      override public function as_setPrimaryCurrency(param1:Number) : void {
+         if(totalPrimaryCurrency != param1)
+         {
+            totalPrimaryCurrency = param1;
+            if(totalPrimaryCurrency - this.selectedPrimaryCurrency < 0)
+            {
+               this.selectedPrimaryCurrency = 0;
+               invalidate(SELECTED_PRIMARY_CURRENCY_INVALID);
+            }
+            invalidate(TOTAL_PRIMARY_CURRENCY_INVALID);
+         }
+      }
+
+      private function nsSecondaryCurrencyChangeHandler(param1:IndexEvent) : void {
+         this.selectedPrimaryCurrency = Math.floor(this.nsSecondaryCurrency.value / actualRate);
+         invalidate(SELECTED_PRIMARY_CURRENCY_INVALID);
+      }
+
+      private function nsFirstCurrencyChangeHandler(param1:IndexEvent) : void {
+         this.selectedPrimaryCurrency = this.nsPrimaryCurrency.value;
+         invalidate(SELECTED_PRIMARY_CURRENCY_INVALID);
+      }
+
+      protected function submitBtnClickHandler(param1:Event) : void {
+         exchangeS(this.selectedPrimaryCurrency);
+      }
+
+      public function as_setSecondaryCurrency(param1:Number) : void {
+         if(this.totalSecondaryCurrency != param1)
+         {
+            this.totalSecondaryCurrency = param1;
+            invalidate(TOTAL_SECONDARY_CURRENCY_CHANGED);
+         }
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         if(isInvalid(TOTAL_SECONDARY_CURRENCY_CHANGED))
+         {
+            invalidate(SELECTED_PRIMARY_CURRENCY_INVALID);
+            this.onHandSecondaryCurrencyText.text = App.utils.locale.gold(this.totalSecondaryCurrency);
             this.isUpdateResult = true;
+         }
+         if(isInvalid(SELECTED_PRIMARY_CURRENCY_INVALID))
+         {
+            this.isUpdateResult = true;
+            this.nsPrimaryCurrency.value = this.selectedPrimaryCurrency;
+            this.nsSecondaryCurrency.value = this.selectedPrimaryCurrency * actualRate;
+            this.submitBtn.enabled = this.isSubmitOperationAllowed();
+         }
+         if(this.isUpdateResult)
+         {
+            this.applyResultUpdating();
+         }
+      }
+
+      protected function isSubmitOperationAllowed() : Boolean {
+         return this.selectedPrimaryCurrency > 0;
+      }
+
+      protected function applyResultUpdating() : void {
+         var _loc1_:ILocale = App.utils.locale;
+         var _loc2_:Number = totalPrimaryCurrency - this.selectedPrimaryCurrency;
+         this.resultPrimaryCurrencyText.text = _loc1_.gold(_loc2_);
+         this.resultSecondaryCurrencyText.text = _loc1_.gold(this.totalSecondaryCurrency + this.selectedPrimaryCurrency * actualRate);
+      }
+
+      override protected function applyRatesChanges() : void {
+         this.nsPrimaryCurrency.stepSize = this._exchangeStep;
+         this.nsSecondaryCurrency.stepSize = actualRate * this._exchangeStep;
+         this.headerMC.setRates(rate,actionRate);
+         this.headerMC.validateNow();
+         invalidate(SELECTED_PRIMARY_CURRENCY_INVALID);
+      }
+
+      override protected function applyPrimaryCurrencyChange() : void {
+         this.onHandPrimaryCurrencyText.text = App.utils.locale.gold(totalPrimaryCurrency);
+         this.isUpdateResult = true;
+      }
+
+      override protected function onPopulate() : void {
+         super.onPopulate();
+      }
+
+      override protected function onDispose() : void {
+         super.onDispose();
+         this.submitBtn.removeEventListener(ButtonEvent.CLICK,this.submitBtnClickHandler);
+         this.cancelBtn.removeEventListener(ButtonEvent.CLICK,cancelBtnClickHandler);
+         this.nsPrimaryCurrency.removeEventListener(IndexEvent.INDEX_CHANGE,this.nsFirstCurrencyChangeHandler);
+         this.nsSecondaryCurrency.removeEventListener(IndexEvent.INDEX_CHANGE,this.nsSecondaryCurrencyChangeHandler);
+         this.nsPrimaryCurrency.dispose();
+         this.nsPrimaryCurrency = null;
+         this.nsSecondaryCurrency.dispose();
+         this.nsPrimaryCurrency = null;
+         if(this.onHandHaveNotGold)
+         {
+            this.onHandHaveNotGold.dispose();
+            this.onHandHaveNotGold = null;
+         }
+         if(this.resultHaveNotGold)
+         {
+            this.resultHaveNotGold.dispose();
+            this.resultHaveNotGold = null;
+         }
+      }
+
+      public function get exchangeStep() : Number {
+         return this._exchangeStep;
+      }
+
+      public function set exchangeStep(param1:Number) : void {
+         this._exchangeStep = param1;
+         invalidate(RATES_INVALID);
+      }
+
+      public function get selectedPrimaryCurrency() : Number {
+         return this._selectedPrimaryCurrency;
+      }
+
+      public function set selectedPrimaryCurrency(param1:Number) : void {
+         if(this._selectedPrimaryCurrency == param1)
+         {
             return;
-        }
+         }
+         this._selectedPrimaryCurrency = param1;
+      }
 
-        protected override function applyRatesChanges():void
-        {
-            this.nsPrimaryCurrency.stepSize = this._exchangeStep;
-            this.nsSecondaryCurrency.stepSize = actualRate * this._exchangeStep;
-            this.headerMC.setRates(rate, actionRate);
-            this.headerMC.validateNow();
-            invalidate(SELECTED_PRIMARY_CURRENCY_INVALID);
-            return;
-        }
+      public function as_setWalletStatus(param1:Object) : void {
+         App.utils.voMgr.walletStatusVO.update(param1);
+         var _loc2_:* = false;
+         if((this.onHandHaveNotGold) && (this.resultHaveNotGold))
+         {
+            _loc2_ = !this.onHandHaveNotGold.updateStatus(App.utils.voMgr.walletStatusVO.goldStatus);
+            this.resultHaveNotGold.updateStatus(App.utils.voMgr.walletStatusVO.goldStatus);
+         }
+         if(this.onHandPrimaryCurrencyText)
+         {
+            this.onHandPrimaryCurrencyText.visible = _loc2_;
+         }
+         if(this.resultPrimaryCurrencyText)
+         {
+            this.resultPrimaryCurrencyText.visible = _loc2_;
+         }
+         this.submitBtn.enabled = _loc2_;
+      }
+   }
 
-        protected function applyResultUpdating():void
-        {
-            var loc1:*=App.utils.locale;
-            var loc2:*=totalPrimaryCurrency - this.selectedPrimaryCurrency;
-            this.resultPrimaryCurrencyText.text = loc1.gold(loc2 >= 0 ? loc2 : 0);
-            this.resultSecondaryCurrencyText.text = loc1.gold(this.totalSecondaryCurrency + this.selectedPrimaryCurrency * actualRate);
-            return;
-        }
-
-        protected function isSubmitOperationAllowed():Boolean
-        {
-            return this.selectedPrimaryCurrency > 0;
-        }
-
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(TOTAL_SECONDARY_CURRENCY_CHANGED)) 
-            {
-                invalidate(SELECTED_PRIMARY_CURRENCY_INVALID);
-                this.onHandSecondaryCurrencyText.text = App.utils.locale.gold(this.totalSecondaryCurrency);
-                this.isUpdateResult = true;
-            }
-            if (isInvalid(SELECTED_PRIMARY_CURRENCY_INVALID)) 
-            {
-                this.isUpdateResult = true;
-                this.nsPrimaryCurrency.value = this.selectedPrimaryCurrency;
-                this.nsSecondaryCurrency.value = this.selectedPrimaryCurrency * actualRate;
-                this.submitBtn.enabled = this.isSubmitOperationAllowed();
-            }
-            if (this.isUpdateResult) 
-            {
-                this.applyResultUpdating();
-            }
-            return;
-        }
-
-        public function as_setSecondaryCurrency(arg1:Number):void
-        {
-            if (this.totalSecondaryCurrency != arg1) 
-            {
-                this.totalSecondaryCurrency = arg1;
-                invalidate(TOTAL_SECONDARY_CURRENCY_CHANGED);
-            }
-            return;
-        }
-
-        protected function submitBtnClickHandler(arg1:flash.events.Event):void
-        {
-            exchangeS(this.selectedPrimaryCurrency);
-            return;
-        }
-
-        internal function nsFirstCurrencyChangeHandler(arg1:scaleform.clik.events.IndexEvent):void
-        {
-            this.selectedPrimaryCurrency = this.nsPrimaryCurrency.value;
-            invalidate(SELECTED_PRIMARY_CURRENCY_INVALID);
-            return;
-        }
-
-        internal function nsSecondaryCurrencyChangeHandler(arg1:scaleform.clik.events.IndexEvent):void
-        {
-            this.selectedPrimaryCurrency = Math.floor(this.nsSecondaryCurrency.value / actualRate);
-            invalidate(SELECTED_PRIMARY_CURRENCY_INVALID);
-            return;
-        }
-
-        public override function as_setPrimaryCurrency(arg1:Number):void
-        {
-            if (totalPrimaryCurrency != arg1) 
-            {
-                totalPrimaryCurrency = arg1;
-                if (totalPrimaryCurrency - this.selectedPrimaryCurrency < 0) 
-                {
-                    this.selectedPrimaryCurrency = 0;
-                    invalidate(SELECTED_PRIMARY_CURRENCY_INVALID);
-                }
-                invalidate(TOTAL_PRIMARY_CURRENCY_INVALID);
-            }
-            return;
-        }
-
-        internal static const SELECTED_PRIMARY_CURRENCY_INVALID:String="selectedPrimaryCurrencyInv";
-
-        internal static const TOTAL_SECONDARY_CURRENCY_CHANGED:String="totalSecondaryCurrensyChanged";
-
-        public var submitBtn:net.wg.gui.components.controls.SoundButtonEx;
-
-        public var toExchangeSecondaryCurrencyIco:net.wg.gui.components.controls.IconText;
-
-        public var toExchangePrimaryCurrencyIco:net.wg.gui.components.controls.IconText;
-
-        public var resultSecondaryCurrencyText:net.wg.gui.components.controls.IconText;
-
-        public var resultPrimaryCurrencyText:net.wg.gui.components.controls.IconText;
-
-        public var onHandSecondaryCurrencyText:net.wg.gui.components.controls.IconText;
-
-        public var onHandPrimaryCurrencyText:net.wg.gui.components.controls.IconText;
-
-        public var lblExchangeResult:flash.text.TextField;
-
-        public var lblToExchange:flash.text.TextField;
-
-        protected var isUpdateResult:Boolean;
-
-        internal var selectedPrimaryCurrency:uint=0;
-
-        public var nsSecondaryCurrency:net.wg.gui.components.controls.NumericStepper;
-
-        public var nsPrimaryCurrency:net.wg.gui.components.controls.NumericStepper;
-
-        public var headerMC:net.wg.gui.lobby.window.ExchangeHeader;
-
-        public var cancelBtn:net.wg.gui.components.controls.SoundButtonEx;
-
-        internal var _exchangeStep:Number=1;
-
-        internal var totalSecondaryCurrency:Number=0;
-    }
 }

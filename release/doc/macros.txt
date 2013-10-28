@@ -1,0 +1,128 @@
+﻿Macros available
+
+Legend:
+  BL - battle loading screen
+  PP - players panel
+  SF - statistic form (Tab)
+  VM - vehicle markers
+  HI - hitlog
+  HL - hpLeft
+  CB - capture bar
+  MM - minimap
+  SQ - squad
+
+  'X' - available
+  ' ' - not available (can return wrong value - '', 'NaN', 'undefined', ...)
+  '.' - TODO
+  '-' - Obsoleted (will be raplaced with other macro)
+
+┌────────────────────────────┬───┬───┬───┬───┬───┬───┬───┬───┬───┬─────────────────────────────────
+│ macro                      │ BL│ PP│ SF│ VM│ HI│ HL│ CB│ MM│ SQ│ Description
+├────────────────────────────┼───┼───┼───┼───┼───┼───┼───┼───┼───┼─────────────────────────────────
+│ {{nick}}                   │ X │ X │ X │ X │ X │ X │   │   │   │ player nickname with clan name
+│ {{name}}                   │ X │ X │ X │ X │ X │ X │   │   │   │ player nickname without clan name
+│ {{clan}}                   │ X │ X │ X │ X │ X │ X │   │   │   │ clan name with brackets (empty if no clan)
+│ {{clannb}}                 │ X │ X │ X │ X │ X │ X │   │   │   │ clan name without brackets
+│ {{vehicle}}                │ X │ X │ X │ X │ X │ X │   │ X │   │ vehicle name
+│ {{vehiclename}}            │ X │ X │ X │ X │ X │ X │   │ X │   │ internal vehicle name (usa-M24_Chaffee)
+│ {{vtype}}                  │ X │ X │ X │ X │ X │ X │   │   │ X │ vehicle type (text substitution from config)
+│ {{c:vtype}}                │ X │ X │ X │ X │ X │ X │   │   │   │ color depending on vehicle type
+│ {{level}}                  │ X │   │   │ X │ X │ X │   │ X │ X │ vehicle level (Arabic numerals)
+│ {{rlevel}}                 │ X │   │   │ X │ X │ X │   │   │ X │ vehicle level (Roman numerals)
+│ {{squad}}                  │   │   │   │ X │   │   │   │   │   │ value '1' for own squad, empty for others
+│ {{turret}}                 │   │   │   │ X │   │   │   │   │   │ stock turret marker:
+│ {{hp}}                     │   │   │   │ X │   │ X │   │   │   │ current health points
+│ {{hp-ratio}}               │   │   │   │ X │   │ X │   │   │   │ current health ratio (without '%' sign)
+│ {{hp-max}}                 │   │   │   │ X │   │ X │   │   │   │ maximum health points
+│ {{dmg}}                    │   │   │   │ X │ X │   │   │   │   │ damage health points / last hit value
+│ {{dmg-ratio}}              │   │   │   │ X │   │   │   │   │   │ damage health ratio (without '%' sign)
+│ {{dmg-kind}}               │   │   │   │ X │ X │   │   │   │   │ damage kind (attack, fire, ramming, ...)
+│ {{c:hp}}                   │   │   │   │ X │   │ X │   │   │   │ color depending on current health points (only in vehicle markers)
+│ {{c:hp-ratio}}             │   │   │   │ X │   │ X │   │   │   │ color depending on current health ratio (only in vehicle markers)
+│ {{c:dmg}}                  │   │   │   │ X │   │   │   │   │   │ color depending on damage source
+│ {{c:dmg-kind}}             │   │   │   │ X │ X │   │   │   │   │ color depending on damage kind
+│ {{c:system}}               │   │   │   │ X │   │   │   │   │   │ system color (disable override color)
+│ {{a:hp}}                   │   │   │   │ X │   │   │   │   │   │ transparency depending on current health points (only in vehicle markers)
+│ {{a:hp-ratio}}             │   │   │   │ X │   │   │   │   │   │ transparency depending on current health ratio (only in vehicle markers)
+│ {{n}}                      │   │   │   │   │ X │   │   │   │   │ total number of hits
+│ {{n-player}}               │   │   │   │   │ X │   │   │   │   │ number of hits for each player
+│ {{dmg-total}}              │   │   │   │   │ X │   │   │   │   │ total sum of hits
+│ {{dmg-avg}}                │   │   │   │   │ X │   │   │   │   │ average damage during the battle
+│ {{dmg-player}}             │   │   │   │   │ X │   │   │   │   │ sum of hits for each player
+│ {{dead}}                   │   │   │   │   │ X │   │   │   │   │ tank's death marker
+│ {{points}}                 │   │   │   │   │   │   │ X │   │   │ points already captured
+│ {{extra}}                  │   │   │   │   │   │   │ X │   │   │ extra text section;
+│ {{tanks}}                  │   │   │   │   │   │   │ X │   │   │ number of capturers;
+│ {{time}}                   │   │   │   │   │   │   │ X │   │   │ time left to full capture; minutes and seconds;
+│ {{time-sec}}               │   │   │   │   │   │   │ X │   │   │ time left to full capture; seconds only;
+│ {{speed}}                  │   │   │   │   │   │   │ X │   │   │ capture speed in points per second;
+│ {{short-nick}}             │   │   │   │   │   │   │   │ X │   │ subject shortened nickname
+│ {{vehicle-type}}           │   │   │   │   │   │   │   │ X │   │ subject full vehicle type
+│ {{vehicle-class}}          │   │   │   │   │   │   │   │ X │   │ places special symbol depending on subject vehicle class
+│ {{cellsize}}               │   │   │   │   │   │   │   │ X │   │ minimap cell side size
+│ {{vehicle-name}}           │   │   │   │   │   │   │   │ X │   │ returns vehicle system name - usa-M24_Chaffee
+│ {{vehicle-short}}          │   │   │   │   │   │   │   │ X │   │ shortened vehicle name
+│ {{vtype-l}}                │ X │   │   │   │   │   │   │   │ X │ vehicle class (text substitution from locale)
+│ {{battletier-min}}         │ X │   │   │   │   │   │   │   │ X │ minimal vehicle battle tier
+│ {{battletier-max}}         │ X │   │   │   │   │   │   │   │ X │ maximal vehicle battle tier
+│ {{l10n:blownUp}}           │   │   │   │ X │   │   │   │   │   │ localizated text "Blown-up!", only in "blowupMessage"
+│ {{l10n:Hits}}              │   │   │   │   │ X │   │   │   │   │ localizated text "Hits"
+│ {{l10n:Total}}             │   │   │   │   │ X │   │   │   │   │ localizated text "Total"
+│ {{l10n:Last}}              │   │   │   │   │ X │   │   │   │   │ localizated text "Last"
+│ {{l10n:hpLeftTitle}}       │   │   │   │   │   │ X │   │   │   │ localizated text "Hitpoints left:", only in "header"
+│ {{l10n:enemyBaseCapture}}  │   │   │   │   │   │   │ X │   │   │ localizated text "Base capture by allies!"
+│ {{l10n:enemyBaseCaptured}} │   │   │   │   │   │   │ X │   │   │ localizated text "Base captured by allies!"
+│ {{l10n:allyBaseCapture}}   │   │   │   │   │   │   │ X │   │   │ localizated text "Base capture by enemies!"
+│ {{l10n:allyBaseCaptured}}  │   │   │   │   │   │   │ X │   │   │ localizated text "Base captured by enemies!"
+│ {{l10n:Timeleft}}          │   │   │   │   │   │   │ X │   │   │ localizated text "Timeleft"
+│ {{l10n:Capturers}}         │   │   │   │   │   │   │ X │   │   │ localizated text "Capturers"
+└────────────────────────────┴───┴───┴───┴───┴───┴───┴───┴───┴───┴─────────────────────────────────
+
+  Statistic macros
+┌─────────────────┬───┬───┬───┬───┬────────────────────────────────────────────────────────────────
+│ macro           │ BL│ PP│ SF│ VM│ Description
+├─────────────────┼───┼───┼───┼───┼────────────────────────────────────────────────────────────────
+│ {{avglvl}}      │ X │ X │ X │ X │ average level (tier) of tanks
+│ {{eff}}         │ X │ X │ X │ X │  player efficiency: http://wot-news.com/index.php/stat/calc/en/
+│ {{eff:4}}       │ X │ X │ X │ X │ player efficiency aligned from left to 4 chars
+│ {{teff}}, {{e}} │ X │ X │ X │ X │ player per-vehicle efficiency: http://www.koreanrandom.com/forum/topic/1643-
+│ {{wn}}          │ X │ X │ X │ X │ WN6 rating: http://www.koreanrandom.com/forum/topic/2575-
+│ {{xeff}}        │ X │ X │ X │ X │ XVM Scale for efficiency (values 00-99, XX for Tops)
+│ {{xwn}}         │ X │ X │ X │ X │ XVM Scale for WN6 (values 00-99, XX for Tops)
+│ {{rating}}      │ X │ X │ X │ X │ GWR (Global Win Ratio)
+│ {{rating:3}}    │ X │ X │ X │ X │ GWR aligned from left to 3 chars
+│ {{battles}}     │ X │ X │ X │ X │ total battles count
+│ {{wins}}        │ X │ X │ X │ X │ total wins count
+│ {{kb}}          │ X │ X │ X │ X │ number of kilo-battles (total battles count divided by 1000)
+│ {{kb:3}}        │ X │ X │ X │ X │ number of kilo-battles aligned from left to 3 chars
+│ {{t-rating}}    │ X │ X │ X │ X │ vehicle win ratio
+│ {{t-rating:3}}  │ X │ X │ X │ X │ vehicle win ratio aligned from left to 3 chars
+│ {{t-battles}}   │ X │ X │ X │ X │ total battles count for current vehicle
+│ {{t-battles:4}} │ X │ X │ X │ X │ number of battles for current vehicle aligned from left to 4 chars
+│ {{t-wins}}      │ X │ X │ X │ X │ total wins count for current vehicle
+│ {{t-kb}}        │ X │ X │ X │ X │ number of kilo-battles for current vehicle
+│ {{t-kb-0}}      │ X │ X │ X │ X │ number of kilo-battles for current vehicle with leading zero
+│ {{t-kb:4}}      │ X │ X │ X │ X │ number of kilo-battles for current vehicle aligned from left to 4 chars
+│ {{t-hb}}        │ X │ X │ X │ X │ number of hecto-battles for current vehicle (hecto = 100)
+│ {{t-hb:3}}      │ X │ X │ X │ X │ number of hecto-battles for current vehicle aligned from left to 3 chars
+│ {{tdb}}         │ X │ X │ X │ X │ average damage for current tank - damage/battles
+│ {{tdb:4}}       │ X │ X │ X │ X │ average damage for current tank - damage/battles
+│ {{tdv}}         │ X │ X │ X │ X │ average damage efficiency for tank - damage/(battles*maxHP)
+│ {{tfb}}         │ X │ X │ X │ X │ average frags per battle for current tank
+│ {{tsb}}         │ X │ X │ X │ X │ average number of spotted enemies per battle for current tank
+│ {{c:tdb}}       │ X │ X │ X │ X │ dynamic colors for this macros
+│ {{c:tdv}}       │ X │ X │ X │ X │ dynamic colors for this macros
+│ {{c:tfb}}       │ X │ X │ X │ X │ dynamic colors for this macros
+│ {{c:tsb}}       │ X │ X │ X │ X │ dynamic colors for this macros
+│ {{c:eff}}       │ X │ X │ X │ X │ color depending on player efficiency
+│ {{c:e}}         │ X │ X │ X │ X │ color depending on player per-vehicle efficiency
+│ {{c:wn}}        │ X │ X │ X │ X │ color depending on WN6 rating
+│ {{c:xeff}}      │ X │ X │ X │ X │ color depending on XVM Scale for efficiency
+│ {{c:xwn}}       │ X │ X │ X │ X │ color depending on XVM Scale for WN6
+│ {{c:rating}}    │ X │ X │ X │ X │ color depending on GWR
+│ {{c:kb}}        │ X │ X │ X │ X │ color depending on kilo-battles
+│ {{c:avglvl}}    │ X │ X │ X │ X │ color depending on average level of tanks
+│ {{c:t-rating}}  │ X │ X │ X │ X │ color depending on current vehicle win ratio
+│ {{c:t-battles}} │ X │ X │ X │ X │ color depending on current vehicle battles
+└─────────────────┴───┴───┴───┴───┴────────────────────────────────────────────────────────────────
+  * Any color macro you can change to transparency macro (e.g. {{a:tdb}}).

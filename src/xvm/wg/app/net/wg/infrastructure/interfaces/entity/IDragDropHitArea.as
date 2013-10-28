@@ -1,9 +1,12 @@
-package net.wg.infrastructure.interfaces.entity 
+package net.wg.infrastructure.interfaces.entity
 {
-    import flash.display.*;
-    
-    public interface IDragDropHitArea
-    {
-        function getHitArea():flash.display.InteractiveObject;
-    }
+   import flash.display.InteractiveObject;
+
+
+   public interface IDragDropHitArea
+   {
+          
+      function getHitArea() : InteractiveObject;
+   }
+
 }

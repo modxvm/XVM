@@ -1,660 +1,650 @@
-package net.wg.gui.lobby.sellDialog 
+package net.wg.gui.lobby.sellDialog
 {
-    import __AS3__.vec.*;
-    import fl.transitions.easing.*;
-    import flash.display.*;
-    import flash.events.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.events.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import net.wg.utils.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.events.*;
-    import scaleform.clik.motion.*;
-    
-    public class VehicleSellDialog extends net.wg.infrastructure.base.meta.impl.VehicleSellDialogMeta implements net.wg.infrastructure.base.meta.IVehicleSellDialogMeta
-    {
-        public function VehicleSellDialog()
-        {
-            this.vehicleData = {};
-            this.modulesData = {};
-            this.shellsData = {};
-            this.tweens = new Vector.<scaleform.clik.motion.Tween>();
-            super();
-            isModal = true;
-            isCentered = true;
-            canDrag = false;
-            showWindowBg = false;
-            var loc1:*;
-            scaleY = loc1 = 1;
-            scaleX = loc1;
-            this.controlQuestion.visible = false;
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.VehicleSellDialogMeta;
+   import net.wg.infrastructure.base.meta.IVehicleSellDialogMeta;
+   import flash.display.MovieClip;
+   import net.wg.gui.components.controls.SoundButtonEx;
+   import __AS3__.vec.Vector;
+   import net.wg.infrastructure.interfaces.ISaleItemBlockRenderer;
+   import scaleform.clik.motion.Tween;
+   import net.wg.gui.events.VehicleSellDialogEvent;
+   import scaleform.clik.events.ButtonEvent;
+   import flash.events.Event;
+   import scaleform.clik.constants.InvalidationType;
+   import net.wg.utils.ILocale;
+   import fl.transitions.easing.Strong;
+   import flash.display.InteractiveObject;
 
-        protected override function onPopulate():void
-        {
-            super.onPopulate();
-            return;
-        }
 
-        protected override function draw():void
-        {
-            if (isInvalid("updateStage") && window) 
-            {
-                this.updateWindowPosition();
-            }
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
-            {
-                this.setHeader(this.vehicleData);
-                this.setDevices(this.vehicleData);
-                this.setShells(this.vehicleData);
-                this.setEquipment(this.vehicleData);
-                this.setInventory(this.modulesData, this.shellsData);
-                this.setGoldText(this.headerComponent.creditsCommon, this.goldCommon);
-            }
-            return;
-        }
+   public class VehicleSellDialog extends VehicleSellDialogMeta implements IVehicleSellDialogMeta
+   {
+          
+      public function VehicleSellDialog() {
+         this.vehicleData = {};
+         this.modulesData = {};
+         this.shellsData = {};
+         this.tweens = new Vector.<Tween>();
+         super();
+         isModal = true;
+         isCentered = true;
+         canDrag = false;
+         showWindowBg = false;
+         scaleX = scaleY = 1;
+         this.controlQuestion.visible = false;
+      }
 
-        internal function setGoldText(arg1:Number, arg2:Number):void
-        {
-            var loc1:*=App.utils.locale;
-            var loc2:*=loc1.gold(arg1);
-            var loc3:*=true;
-            var loc4:*;
-            if ((loc4 = this.headerComponent.tankGoldPrice > 0 ? this.headerComponent.tankGoldPrice - arg2 : arg2) >= 0) 
-            {
-                loc3 = this.headerComponent.tankGoldPrice > 0 ? false : true;
-            }
-            else 
-            {
-                loc4 = loc4 * -1;
-            }
-            var loc5:*=loc1.gold(loc4);
-            var loc6:*=arg1 + this.creditsComplDev;
-            if (loc4 == 0) 
-            {
-                this.result_mc.goldIT.text = "0";
-            }
-            else 
-            {
-                this.result_mc.goldIT.visible = true;
-                this.result_mc.goldIT.text = loc3 ? "- " + loc5 : "+ " + loc5;
-            }
-            if (loc6 > 0) 
-            {
-                this.result_mc.creditsIT.text = "+ " + loc1.gold(loc6);
-            }
-            else 
-            {
-                this.result_mc.creditsIT.text = "0";
-            }
-            if (this.controlQuestion && this.controlQuestion.visible) 
-            {
-                this.controlQuestion.cleanField();
-                setResultCreditS(loc6 != 0 ? loc6 : loc4);
-                App.utils.scheduler.envokeInNextFrame(this.updateFocus, this.controlQuestion.userInput);
-            }
-            if (arg1 - this.headerComponent.tankPrice > 0) 
-            {
-                this.slidingComponent.settingsBtn.creditsIT.text = "+ " + loc1.gold(arg1 - this.headerComponent.tankPrice);
-                this.slidingComponent.settingsBtn.creditsIT.validateNow();
-            }
-            else 
-            {
-                this.slidingComponent.settingsBtn.creditsIT.text = "0";
-            }
-            if (this.slidingComponent.settingsBtn.setingsDropBtn.selected) 
-            {
-                this.slidingComponent.settingsBtn.creditsIT.alpha = 0;
-                this.slidingComponent.settingsBtn.creditsIT.visible = false;
-                this.slidingComponent.settingsBtn.creditsIT.validateNow();
-            }
-            else 
-            {
-                this.slidingComponent.settingsBtn.creditsIT.alpha = 1;
-                this.slidingComponent.settingsBtn.creditsIT.visible = true;
-                this.slidingComponent.settingsBtn.creditsIT.validateNow();
-            }
-            return;
-        }
+      public static const ICONS_TEXT_OFFSET:Number = -2;
 
-        internal function setHeader(arg1:Object):void
-        {
-            this.headerComponent.setData(arg1);
-            return;
-        }
+      private static const WINDOW_PADDING:int = 12;
 
-        internal function setDevices(arg1:Object):void
-        {
-            this.devicesComponent.setData(arg1);
-            this.slidingComponent.sellData = this.devicesComponent.sellData;
-            return;
-        }
+      private static const SLIDING_SPEED:Number = 350;
 
-        internal function setShells(arg1:Object):void
-        {
-            this.updateOpenedState();
-            this.slidingComponent.setShells(arg1);
-            return;
-        }
+      public var headerComponent:SellHeaderComponent;
 
-        internal function updateWindowPosition():void
-        {
-            var loc1:*=0;
-            var loc2:*=0;
-            if (isCentered) 
+      public var slidingComponent:SellSlidingComponent;
+
+      public var devicesComponent:SellDevicesComponent;
+
+      public var controlQuestion:ControlQuestionComponent;
+
+      public var windBgForm:MovieClip;
+
+      public var cancelBtn:SoundButtonEx;
+
+      public var submitBtn:SoundButtonEx;
+
+      public var result_mc:TotalResult;
+
+      private var goldCommon:Number = 0;
+
+      private var listVisibleHight:Number = 0;
+
+      private var creditsComplDev:Number = 0;
+
+      private var renderersArr:Vector.<ISaleItemBlockRenderer>;
+
+      private var complexDeviceRenderers:Vector.<ISaleItemBlockRenderer>;
+
+      private var vehicleData:Object;
+
+      private var modulesData:Object;
+
+      private var shellsData:Object;
+
+      private var isOpen:Boolean = false;
+
+      private var accGold:Number = 0;
+
+      private var tweens:Vector.<Tween>;
+
+      private var countTweenObjects:int = 0;
+
+      private var countCallBack:int = 0;
+
+      override public function updateStage(param1:Number, param2:Number) : void {
+         super.updateStage(param1,param2);
+         this.updateWindowPosition();
+      }
+
+      public function as_visibleControlBlock(param1:Boolean) : void {
+         if(this.controlQuestion.visible != param1)
+         {
+            this.controlQuestion.visible = param1;
+            if(!param1)
             {
-                window.x = App.appWidth - window.width >> 1;
-                window.y = App.appHeight - window.getBackground().height >> 1;
+               this.controlQuestion.y = 0;
             }
-            else 
+         }
+      }
+
+      public function as_enableButton(param1:Boolean) : void {
+         var _loc2_:* = false;
+         if(this.submitBtn)
+         {
+            _loc2_ = this.submitBtn.enabled;
+            this.submitBtn.enabled = (this.controlQuestion.isValidControlInput) && (param1) && this.accGold >= this.isHasGold();
+            if((this.submitBtn.enabled) && !_loc2_)
             {
-                loc1 = window.width + window.x;
-                loc2 = window.getBackground().height + window.y;
-                if (loc1 > App.appWidth) 
-                {
-                    window.x = window.x - (loc1 - App.appWidth);
-                }
-                if (loc2 > App.appHeight) 
-                {
-                    window.y = window.y - (loc2 - App.appHeight);
-                }
+               App.utils.scheduler.envokeInNextFrame(this.updateFocus,this.submitBtn);
             }
-            return;
-        }
+         }
+      }
 
-        internal function setEquipment(arg1:Object):void
-        {
-            this.slidingComponent.setEquipment(arg1);
-            return;
-        }
+      public function as_setCtrlQuestion(param1:String) : void {
+         if(this.controlQuestion)
+         {
+            this.controlQuestion.headerText = DIALOGS.VEHICLESELLDIALOG_CTRLQUESTION_HEADER;
+            this.controlQuestion.errorText = DIALOGS.VEHICLESELLDIALOG_CTRLQUESTION_ERRORMESSAGE;
+            this.controlQuestion.questionText = param1;
+            this.controlQuestion.invalidateData();
+         }
+      }
 
-        internal function setInventory(arg1:Object, arg2:Object):void
-        {
-            this.slidingComponent.setInventory(arg1, arg2);
-            return;
-        }
+      public function as_setControlNumber(param1:String) : void {
+         if(this.controlQuestion)
+         {
+            this.controlQuestion.controlText = param1;
+            this.controlQuestion.invalidateData();
+         }
+      }
 
-        internal function handleSubmit(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            var loc8:*=0;
-            this.renderersArr = this.slidingComponent.slidingScrList.getRenderers();
-            this.complexDeviceRenderers = this.devicesComponent.deviceItemRenderer;
-            var loc1:*=[];
-            var loc2:*=[];
-            var loc3:*=[];
-            var loc4:*=[];
-            var loc5:*=[];
-            var loc6:*=false;
-            var loc7:*=0;
-            loc7 = 0;
-            while (loc7 < this.renderersArr.length) 
+      private function enabledSubmitBtn(param1:Boolean) : void {
+         if(this.submitBtn.enabled != param1)
+         {
+            this.submitBtn.enabled = param1;
+         }
+      }
+
+      private function isHasGold() : Number {
+         return this.goldCommon - this.headerComponent.tankGoldPrice;
+      }
+
+      public function as_checkGold(param1:Number) : void {
+         var _loc2_:* = NaN;
+         this.accGold = param1;
+         this.complexDeviceRenderers = this.devicesComponent.deviceItemRenderer;
+         if(this.accGold < this.isHasGold())
+         {
+            _loc2_ = 16711680;
+            this.enabledSubmitBtn(false);
+         }
+         else
+         {
+            _loc2_ = 16763253;
+            this.enabledSubmitBtn(this.controlQuestion.visible?this.controlQuestion.isValidControlInput:true);
+         }
+         var _loc3_:uint = 0;
+         while(_loc3_ < this.complexDeviceRenderers.length)
+         {
+            if(this.complexDeviceRenderers[_loc3_].inInventory)
             {
-                if (!this.renderersArr[loc7].inInventory) 
-                {
-                    var loc9:*=this.renderersArr[loc7].type;
-                    switch (loc9) 
-                    {
-                        case "optDevices":
-                        {
-                            loc1.push(this.renderersArr[loc7].dataInfo);
-                            break;
-                        }
-                        case "shells":
-                        {
-                            loc2.push(this.renderersArr[loc7].dataInfo);
-                            break;
-                        }
-                        case "eqs":
-                        {
-                            loc3.push(this.renderersArr[loc7].dataInfo);
-                            break;
-                        }
-                        case "modules":
-                        {
-                            loc8 = 0;
-                            while (loc8 < this.modulesData.length) 
-                            {
-                                loc5.push(this.modulesData[loc8][0]);
-                                ++loc8;
-                            }
-                            break;
-                        }
-                        case "invShells":
-                        {
-                            loc5.push(this.renderersArr[loc7].dataInfo);
-                            break;
-                        }
-                    }
-                }
-                ++loc7;
+               if(!this.complexDeviceRenderers[_loc3_].isRemovable)
+               {
+                  this.complexDeviceRenderers[_loc3_].setColor(_loc2_);
+                  this.complexDeviceRenderers[_loc3_].validateNow();
+               }
             }
-            loc7 = 0;
-            while (loc7 < this.complexDeviceRenderers.length) 
-            {
-                if (!this.complexDeviceRenderers[loc7].inInventory) 
-                {
-                    loc1.push(this.complexDeviceRenderers[loc7].dataInfo);
-                }
-                ++loc7;
-            }
-            if (this.headerComponent.inBarracsDrop.selectedIndex == 1) 
-            {
-                loc6 = true;
-            }
-            setDialogSettingsS(this.slidingComponent.settingsBtn.setingsDropBtn.selected);
-            sellS(this.vehicleData, loc2, loc3, loc1, loc5, loc6);
-            onWindowCloseS();
-            return;
-        }
+            _loc3_++;
+         }
+         this.result_mc.goldIT.textColor = _loc2_;
+      }
 
-        internal function updateComponentsPosition():void
-        {
-            this.slidingComponent.visible = !(this.listVisibleHight == 0);
-            if (this.listVisibleHight != 0) 
-            {
-                this.slidingComponent.settingsBtn.visible = true;
-                this.slidingComponent.expandBg.visible = true;
-            }
-            var loc1:*=this.headerComponent.y + this.headerComponent.getNextPosition();
-            if (this.devicesComponent.visible) 
-            {
-                this.devicesComponent.y = loc1;
-                loc1 = this.devicesComponent.y + this.devicesComponent.getNextPosition();
-            }
-            if (this.slidingComponent.visible) 
-            {
-                this.slidingComponent.settingsBtn.setingsDropBtn.addEventListener(flash.events.Event.SELECT, this.playSlidingAnimation);
-                this.slidingComponent.y = loc1;
-                loc1 = this.slidingComponent.y + this.slidingComponent.getNextPosition();
-            }
-            this.result_mc.y = loc1;
-            if (this.controlQuestion.visible) 
-            {
-                this.controlQuestion.y = this.result_mc.y + this.result_mc.getSize();
-                loc1 = this.controlQuestion.y + this.controlQuestion.getNextPosition();
-            }
-            else 
-            {
-                loc1 = this.result_mc.y + this.result_mc.getSize();
-            }
-            this.windBgForm.height = loc1;
-            var loc3:*;
-            this.cancelBtn.y = loc3 = this.windBgForm.y + this.windBgForm.height + 3;
-            this.submitBtn.y = loc3;
-            var loc2:*=this.submitBtn.y + this.submitBtn.height;
-            window.updateSize(this.width, loc2, true);
-            window.x = App.appWidth - window.width >> 1;
-            window.y = App.appHeight - window.height >> 1;
-            this.setGoldText(this.headerComponent.creditsCommon, this.goldCommon);
-            return;
-        }
+      public function as_setData(param1:Object, param2:Object, param3:Object, param4:Number, param5:Number) : void {
+         this.slidingComponent.sellData = [];
+         this.accGold = param5;
+         this.goldCommon = 0;
+         this.vehicleData = param1;
+         this.modulesData = param2;
+         this.shellsData = param3;
+         this.devicesComponent.removePrice = param4;
+         this.window.title = App.utils.locale.makeString(DIALOGS.VEHICLESELLDIALOG_TITLE,{"name":param1.userName});
+         invalidateData();
+      }
 
-        internal function wasDrawnHandler(arg1:net.wg.gui.events.VehicleSellDialogEvent):void
-        {
-            this.listVisibleHight = arg1.listVisibleHight;
-            this.updateComponentsPosition();
-            return;
-        }
+      override protected function configUI() : void {
+         super.configUI();
+         this.updateOpenedState();
+         this.controlQuestion.addEventListener(ControlQuestionComponent.USER_INPUT_HANDLER,this.userInputHandler);
+         this.slidingComponent.slidingScrList.addEventListener(VehicleSellDialogEvent.LIST_WAS_DRAWN,this.wasDrawnHandler,false,1);
+         this.cancelBtn.label = DIALOGS.VEHICLESELLDIALOG_CANCEL;
+         this.submitBtn.label = DIALOGS.VEHICLESELLDIALOG_SUBMIT;
+         this.addEventListener(VehicleSellDialogEvent.UPDATE_RESULT,this.updateMoneyResult);
+         this.cancelBtn.addEventListener(ButtonEvent.CLICK,this.handleClose);
+         this.submitBtn.addEventListener(ButtonEvent.CLICK,this.handleSubmit);
+         if(this.controlQuestion.visible)
+         {
+            App.utils.scheduler.envokeInNextFrame(this.updateFocus,this.controlQuestion.userInput);
+         }
+         else
+         {
+            App.utils.scheduler.envokeInNextFrame(this.updateFocus,this.submitBtn);
+         }
+      }
 
-        internal function updateMoneyResult(arg1:net.wg.gui.events.VehicleSellDialogEvent):void
-        {
-            this.headerComponent.creditsCommon = this.headerComponent.tankPrice;
-            this.creditsComplDev = 0;
-            this.goldCommon = 0;
-            this.renderersArr = this.slidingComponent.slidingScrList.getRenderers();
-            var loc1:*=0;
-            while (loc1 < this.renderersArr.length) 
-            {
-                if (!this.renderersArr[loc1].inInventory) 
-                {
-                    this.headerComponent.creditsCommon = this.headerComponent.creditsCommon + this.renderersArr[loc1].moneyValue;
-                }
-                ++loc1;
-            }
-            this.complexDeviceRenderers = this.devicesComponent.deviceItemRenderer;
-            var loc2:*=0;
-            while (loc2 < this.complexDeviceRenderers.length) 
-            {
-                if (this.complexDeviceRenderers[loc2].inInventory) 
-                {
-                    if (!this.complexDeviceRenderers[loc2].isRemovable) 
-                    {
-                        this.goldCommon = this.goldCommon + this.devicesComponent.removePrice;
-                    }
-                }
-                else 
-                {
-                    this.creditsComplDev = this.creditsComplDev + this.complexDeviceRenderers[loc2].moneyValue;
-                }
-                ++loc2;
-            }
-            this.setGoldText(this.headerComponent.creditsCommon, this.goldCommon);
-            this.as_checkGold(this.accGold);
-            return;
-        }
+      override protected function onDispose() : void {
+         var _loc1_:Tween = null;
+         super.onDispose();
+         App.utils.scheduler.cancelTask(this.updateFocus);
+         this.slidingComponent.slidingScrList.removeEventListener(VehicleSellDialogEvent.LIST_WAS_DRAWN,this.wasDrawnHandler);
+         this.removeEventListener(VehicleSellDialogEvent.UPDATE_RESULT,this.updateMoneyResult);
+         this.slidingComponent.settingsBtn.setingsDropBtn.removeEventListener(Event.SELECT,this.playSlidingAnimation);
+         this.controlQuestion.removeEventListener(ControlQuestionComponent.USER_INPUT_HANDLER,this.userInputHandler);
+         this.cancelBtn.removeEventListener(ButtonEvent.CLICK,this.handleClose);
+         for each (_loc1_ in this.tweens)
+         {
+            _loc1_.paused = true;
+            _loc1_ = null;
+         }
+         this.headerComponent.dispose();
+         this.slidingComponent.dispose();
+         this.devicesComponent.dispose();
+         this.controlQuestion.dispose();
+         this.vehicleData = null;
+         this.modulesData = null;
+         this.shellsData = null;
+         App.toolTipMgr.hide();
+      }
 
-        internal function playSlidingAnimation():void
-        {
-            var loc5:*=null;
-            var loc6:*=0;
-            var loc7:*=0;
-            var loc8:*=0;
-            var loc9:*=0;
-            var loc10:*=0;
-            var loc11:*=0;
-            var loc12:*=0;
-            if (!this.compCompletedTween()) 
-            {
-                this.slidingComponent.settingsBtn.setingsDropBtn.removeEventListener(flash.events.Event.SELECT, this.playSlidingAnimation);
-                this.slidingComponent.settingsBtn.setingsDropBtn.selected = !this.slidingComponent.settingsBtn.setingsDropBtn.selected;
-                this.slidingComponent.settingsBtn.setingsDropBtn.addEventListener(flash.events.Event.SELECT, this.playSlidingAnimation);
-                return;
-            }
-            this.countCallBack = 0;
-            var loc1:*=SLIDING_SPEED;
-            var loc2:*=this.slidingComponent.isOpened ? -this.slidingComponent.resultExpand : this.slidingComponent.resultExpand;
-            var loc3:*=this.windBgForm.height + window.contentPadding.top + window.contentPadding.bottom;
-            loc3 = loc3 + loc2;
-            var loc4:*=(loc4 = Math.floor((App.appHeight - loc3) / 2)) - WINDOW_PADDING;
-            var loc18:*=0;
-            var loc19:*=this.tweens;
-            for each (loc5 in loc19) 
-            {
-                loc5.paused = true;
-                loc5 = null;
-            }
-            loc6 = this.slidingComponent.height + loc2;
-            loc7 = this.submitBtn.y + loc2;
-            loc8 = this.cancelBtn.y + loc2;
-            loc9 = this.windBgForm.height + loc2;
-            loc10 = window.getBackground().height + loc2;
-            loc11 = this.result_mc.y + loc2;
-            loc12 = this.slidingComponent.isOpened ? 0 : this.slidingComponent.mask_mc.height + loc2;
-            var loc13:*=this.slidingComponent.expandBg.height + loc2;
-            var loc14:*=this.controlQuestion.visible ? this.controlQuestion.y + loc2 : 0;
-            var loc15:*=this.slidingComponent.isOpened ? 1 : 0;
-            var loc16:*=this.slidingComponent.isOpened ? 0 : 1;
-            this.slidingComponent.isOpened = !this.slidingComponent.isOpened;
-            this.tweens = Vector.<scaleform.clik.motion.Tween>([new scaleform.clik.motion.Tween(loc1, this.slidingComponent, {"height":loc6}, {"paused":false, "ease":fl.transitions.easing.Strong.easeOut, "onComplete":null}), new scaleform.clik.motion.Tween(loc1, this.windBgForm, {"height":loc9}, {"paused":false, "ease":fl.transitions.easing.Strong.easeOut, "onComplete":null}), new scaleform.clik.motion.Tween(loc1, this.submitBtn, {"y":loc7}, {"paused":false, "ease":fl.transitions.easing.Strong.easeOut, "onComplete":null}), new scaleform.clik.motion.Tween(loc1, this.cancelBtn, {"y":loc8}, {"paused":false, "ease":fl.transitions.easing.Strong.easeOut, "onComplete":null}), new scaleform.clik.motion.Tween(loc1, this.result_mc, {"y":loc11}, {"paused":false, "ease":fl.transitions.easing.Strong.easeOut, "onComplete":null}), new scaleform.clik.motion.Tween(loc1, this.slidingComponent.mask_mc, {"height":loc12}, {"paused":false, "ease":fl.transitions.easing.Strong.easeOut, "onComplete":null}), new scaleform.clik.motion.Tween(loc1, this.slidingComponent.expandBg, {"height":loc13}, {"paused":false, "ease":fl.transitions.easing.Strong.easeOut, "onComplete":null}), new scaleform.clik.motion.Tween(loc1, this.slidingComponent.settingsBtn.creditsIT, {"alpha":loc15}, {"paused":false, "ease":fl.transitions.easing.Strong.easeOut, "onComplete":null}), new scaleform.clik.motion.Tween(loc1, this.slidingComponent.settingsBtn.ddLine, {"alpha":loc16}, {"paused":false, "ease":fl.transitions.easing.Strong.easeOut, "onComplete":null}), new scaleform.clik.motion.Tween(loc1, this.controlQuestion, {"y":loc14}, {"paused":false, "ease":fl.transitions.easing.Strong.easeOut, "onComplete":null}), new scaleform.clik.motion.Tween(loc1, window, {"y":loc4}, {"paused":false, "ease":fl.transitions.easing.Strong.easeOut, "onComplete":null}), new scaleform.clik.motion.Tween(loc1, window.getBackground(), {"height":loc10}, {"paused":false, "ease":fl.transitions.easing.Strong.easeOut, "onComplete":null})]);
-            this.countTweenObjects = this.tweens.length;
-            var loc17:*=0;
-            while (loc17 < this.countTweenObjects) 
-            {
-                scaleform.clik.motion.Tween(this.tweens[loc17]).onComplete = this.motionCallBack;
-                ++loc17;
-            }
-            this.updateElements();
-            return;
-        }
+      override protected function onPopulate() : void {
+         super.onPopulate();
+      }
 
-        public function motionCallBack(arg1:scaleform.clik.motion.Tween):void
-        {
-            var loc1:*;
-            var loc2:*=((loc1 = this).countCallBack + 1);
-            loc1.countCallBack = loc2;
-            return;
-        }
-
-        public function compCompletedTween():Boolean
-        {
-            return this.countTweenObjects == this.countCallBack;
-        }
-
-        internal function handleClose(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            onWindowCloseS();
-            return;
-        }
-
-        internal function userInputHandler(arg1:flash.events.Event):void
-        {
-            setUserInputS(this.controlQuestion.getUserText());
-            return;
-        }
-
-        internal function updateFocus(arg1:flash.display.InteractiveObject):void
-        {
-            App.utils.focusHandler.setFocus(arg1);
-            return;
-        }
-
-        internal function updateOpenedState():void
-        {
-            var loc1:*=getDialogSettingsS();
-            var loc2:*;
-            this.isOpen = loc2 = loc1.isOpened;
-            this.slidingComponent.isOpened = loc2;
-            return;
-        }
-
-        internal function isHasGold():Number
-        {
-            return this.goldCommon - this.headerComponent.tankGoldPrice;
-        }
-
-        public override function updateStage(arg1:Number, arg2:Number):void
-        {
-            super.updateStage(arg1, arg2);
+      override protected function draw() : void {
+         if((isInvalid("updateStage")) && (window))
+         {
             this.updateWindowPosition();
-            return;
-        }
+         }
+         if(isInvalid(InvalidationType.DATA))
+         {
+            this.setHeader(this.vehicleData);
+            this.setDevices(this.vehicleData);
+            this.setShells(this.vehicleData);
+            this.setEquipment(this.vehicleData);
+            this.setInventory(this.modulesData,this.shellsData);
+            this.setGoldText(this.headerComponent.creditsCommon,this.goldCommon);
+         }
+      }
 
-        public function as_visibleControlBlock(arg1:Boolean):void
-        {
-            if (this.controlQuestion.visible != arg1) 
+      private function updateWindowPosition() : void {
+         var _loc1_:* = 0;
+         var _loc2_:* = 0;
+         if(isCentered)
+         {
+            window.x = App.appWidth - window.width >> 1;
+            window.y = App.appHeight - window.getBackground().height >> 1;
+         }
+         else
+         {
+            _loc1_ = window.width + window.x;
+            _loc2_ = window.getBackground().height + window.y;
+            if(_loc1_ > App.appWidth)
             {
-                this.controlQuestion.visible = arg1;
-                if (arg1) 
-                {
-                    App.utils.scheduler.envokeInNextFrame(this.updateFocus, this.controlQuestion.userInput);
-                }
-                else 
-                {
-                    this.controlQuestion.y = 0;
-                }
+               window.x = window.x - (_loc1_ - App.appWidth);
             }
-            return;
-        }
-
-        public function as_enableButton(arg1:Boolean):void
-        {
-            var loc1:*=false;
-            if (this.submitBtn) 
+            if(_loc2_ > App.appHeight)
             {
-                loc1 = this.submitBtn.enabled;
-                this.submitBtn.enabled = this.controlQuestion.isValidControlInput && arg1 && this.accGold >= this.isHasGold();
-                if (this.submitBtn.enabled && !loc1) 
-                {
-                    App.utils.scheduler.envokeInNextFrame(this.updateFocus, this.submitBtn);
-                }
+               window.y = window.y - (_loc2_ - App.appHeight);
             }
-            return;
-        }
+         }
+      }
 
-        public function as_setCtrlQuestion(arg1:String):void
-        {
-            if (this.controlQuestion) 
+      private function setGoldText(param1:Number, param2:Number) : void {
+         var _loc3_:ILocale = App.utils.locale;
+         var _loc4_:String = _loc3_.gold(param1);
+         var _loc5_:* = true;
+         var _loc6_:Number = this.headerComponent.tankGoldPrice > 0?this.headerComponent.tankGoldPrice - param2:param2;
+         if(_loc6_ >= 0)
+         {
+            _loc5_ = this.headerComponent.tankGoldPrice > 0?false:true;
+         }
+         else
+         {
+            _loc6_ = _loc6_ * -1;
+         }
+         var _loc7_:String = _loc3_.gold(_loc6_);
+         var _loc8_:Number = param1 + this.creditsComplDev;
+         if(_loc6_ != 0)
+         {
+            this.result_mc.goldIT.visible = true;
+            this.result_mc.goldIT.text = _loc5_?"- " + _loc7_:"+ " + _loc7_;
+         }
+         else
+         {
+            this.result_mc.goldIT.text = "0";
+         }
+         if(_loc8_ > 0)
+         {
+            this.result_mc.creditsIT.text = "+ " + _loc3_.gold(_loc8_);
+         }
+         else
+         {
+            this.result_mc.creditsIT.text = "0";
+         }
+         if((this.controlQuestion) && (this.controlQuestion.visible))
+         {
+            this.controlQuestion.cleanField();
+            setResultCreditS(_loc8_ == 0?_loc6_:_loc8_);
+            if(this.controlQuestion.userInput.focused == false)
             {
-                this.controlQuestion.headerText = DIALOGS.VEHICLESELLDIALOG_CTRLQUESTION_HEADER;
-                this.controlQuestion.errorText = DIALOGS.VEHICLESELLDIALOG_CTRLQUESTION_ERRORMESSAGE;
-                this.controlQuestion.questionText = arg1;
-                this.controlQuestion.invalidateData();
+               App.utils.scheduler.envokeInNextFrame(this.updateFocus,this.controlQuestion.userInput);
             }
-            return;
-        }
-
-        public function as_setControlNumber(arg1:String):void
-        {
-            if (this.controlQuestion) 
-            {
-                this.controlQuestion.controlText = arg1;
-                this.controlQuestion.invalidateData();
-            }
-            return;
-        }
-
-        internal function enabledSubmitBtn(arg1:Boolean):void
-        {
-            if (this.submitBtn.enabled != arg1) 
-            {
-                this.submitBtn.enabled = arg1;
-            }
-            return;
-        }
-
-        internal function updateElements():void
-        {
-            this.slidingComponent.slidingScrList.y = this.slidingComponent.settingsBtn.y + this.slidingComponent.settingsBtn.height;
+         }
+         if(param1 - this.headerComponent.tankPrice > 0)
+         {
+            this.slidingComponent.settingsBtn.creditsIT.text = "+ " + _loc3_.gold(param1 - this.headerComponent.tankPrice);
+            this.slidingComponent.settingsBtn.creditsIT.validateNow();
+         }
+         else
+         {
+            this.slidingComponent.settingsBtn.creditsIT.text = "0";
+         }
+         if(this.slidingComponent.settingsBtn.setingsDropBtn.selected)
+         {
+            this.slidingComponent.settingsBtn.creditsIT.alpha = 0;
+            this.slidingComponent.settingsBtn.creditsIT.visible = false;
+            this.slidingComponent.settingsBtn.creditsIT.validateNow();
+         }
+         else
+         {
+            this.slidingComponent.settingsBtn.creditsIT.alpha = 1;
             this.slidingComponent.settingsBtn.creditsIT.visible = true;
-            this.slidingComponent.slidingScrList.visible = this.slidingComponent.isOpened;
+            this.slidingComponent.settingsBtn.creditsIT.validateNow();
+         }
+      }
+
+      private function setHeader(param1:Object) : void {
+         this.headerComponent.setData(param1);
+      }
+
+      private function setDevices(param1:Object) : void {
+         this.devicesComponent.setData(param1);
+         this.slidingComponent.sellData = this.devicesComponent.sellData;
+      }
+
+      private function setShells(param1:Object) : void {
+         this.updateOpenedState();
+         this.slidingComponent.setShells(param1);
+      }
+
+      private function setEquipment(param1:Object) : void {
+         this.slidingComponent.setEquipment(param1);
+      }
+
+      private function setInventory(param1:Object, param2:Object) : void {
+         this.slidingComponent.setInventory(param1,param2);
+      }
+
+      private function handleSubmit(param1:ButtonEvent) : void {
+         var _loc9_:uint = 0;
+         this.renderersArr = this.slidingComponent.slidingScrList.getRenderers();
+         this.complexDeviceRenderers = this.devicesComponent.deviceItemRenderer;
+         var _loc2_:Array = [];
+         var _loc3_:Array = [];
+         var _loc4_:Array = [];
+         var _loc5_:Array = [];
+         var _loc6_:Array = [];
+         var _loc7_:* = false;
+         var _loc8_:uint = 0;
+         _loc8_ = 0;
+         while(_loc8_ < this.renderersArr.length)
+         {
+            if(!this.renderersArr[_loc8_].inInventory)
+            {
+               switch(this.renderersArr[_loc8_].type)
+               {
+                  case "optDevices":
+                     _loc2_.push(this.renderersArr[_loc8_].dataInfo);
+                     break;
+                  case "shells":
+                     _loc3_.push(this.renderersArr[_loc8_].dataInfo);
+                     break;
+                  case "eqs":
+                     _loc4_.push(this.renderersArr[_loc8_].dataInfo);
+                     break;
+                  case "modules":
+                     _loc9_ = 0;
+                     while(_loc9_ < this.modulesData.length)
+                     {
+                        _loc6_.push(this.modulesData[_loc9_][0]);
+                        _loc9_++;
+                     }
+                     break;
+                  case "invShells":
+                     _loc6_.push(this.renderersArr[_loc8_].dataInfo);
+                     break;
+               }
+            }
+            _loc8_++;
+         }
+         _loc8_ = 0;
+         while(_loc8_ < this.complexDeviceRenderers.length)
+         {
+            if(!this.complexDeviceRenderers[_loc8_].inInventory)
+            {
+               _loc2_.push(this.complexDeviceRenderers[_loc8_].dataInfo);
+            }
+            _loc8_++;
+         }
+         if(this.headerComponent.inBarracsDrop.selectedIndex == 1)
+         {
+            _loc7_ = true;
+         }
+         setDialogSettingsS(this.slidingComponent.settingsBtn.setingsDropBtn.selected);
+         sellS(this.vehicleData,_loc3_,_loc4_,_loc2_,_loc6_,_loc7_);
+         onWindowCloseS();
+      }
+
+      private function updateComponentsPosition() : void {
+         this.slidingComponent.visible = !(this.listVisibleHight == 0);
+         if(this.listVisibleHight != 0)
+         {
+            this.slidingComponent.settingsBtn.visible = true;
+            this.slidingComponent.expandBg.visible = true;
+         }
+         var _loc1_:int = this.headerComponent.y + this.headerComponent.getNextPosition();
+         if(this.devicesComponent.visible)
+         {
+            this.devicesComponent.y = _loc1_;
+            _loc1_ = this.devicesComponent.y + this.devicesComponent.getNextPosition();
+         }
+         if(this.slidingComponent.visible)
+         {
+            this.slidingComponent.settingsBtn.setingsDropBtn.addEventListener(Event.SELECT,this.playSlidingAnimation);
+            this.slidingComponent.y = _loc1_;
+            _loc1_ = this.slidingComponent.y + this.slidingComponent.getNextPosition();
+         }
+         this.result_mc.y = _loc1_;
+         if(this.controlQuestion.visible)
+         {
+            this.controlQuestion.y = this.result_mc.y + this.result_mc.getSize();
+            _loc1_ = this.controlQuestion.y + this.controlQuestion.getNextPosition();
+         }
+         else
+         {
+            _loc1_ = this.result_mc.y + this.result_mc.getSize();
+         }
+         this.windBgForm.height = _loc1_;
+         this.submitBtn.y = this.cancelBtn.y = this.windBgForm.y + this.windBgForm.height + 3;
+         var _loc2_:int = this.submitBtn.y + this.submitBtn.height;
+         window.updateSize(this.width,_loc2_,true);
+         window.x = App.appWidth - window.width >> 1;
+         window.y = App.appHeight - window.height >> 1;
+         this.setGoldText(this.headerComponent.creditsCommon,this.goldCommon);
+      }
+
+      private function wasDrawnHandler(param1:VehicleSellDialogEvent) : void {
+         this.listVisibleHight = param1.listVisibleHight;
+         this.updateComponentsPosition();
+      }
+
+      private function updateMoneyResult(param1:VehicleSellDialogEvent) : void {
+         this.headerComponent.creditsCommon = this.headerComponent.tankPrice;
+         this.creditsComplDev = 0;
+         this.goldCommon = 0;
+         this.renderersArr = this.slidingComponent.slidingScrList.getRenderers();
+         var _loc2_:uint = 0;
+         while(_loc2_ < this.renderersArr.length)
+         {
+            if(!this.renderersArr[_loc2_].inInventory)
+            {
+               this.headerComponent.creditsCommon = this.headerComponent.creditsCommon + this.renderersArr[_loc2_].moneyValue;
+            }
+            _loc2_++;
+         }
+         this.complexDeviceRenderers = this.devicesComponent.deviceItemRenderer;
+         var _loc3_:uint = 0;
+         while(_loc3_ < this.complexDeviceRenderers.length)
+         {
+            if(this.complexDeviceRenderers[_loc3_].inInventory)
+            {
+               if(!this.complexDeviceRenderers[_loc3_].isRemovable)
+               {
+                  this.goldCommon = this.goldCommon + this.devicesComponent.removePrice;
+               }
+            }
+            else
+            {
+               this.creditsComplDev = this.creditsComplDev + this.complexDeviceRenderers[_loc3_].moneyValue;
+            }
+            _loc3_++;
+         }
+         this.setGoldText(this.headerComponent.creditsCommon,this.goldCommon);
+         this.as_checkGold(this.accGold);
+      }
+
+      private function playSlidingAnimation() : void {
+         var _loc5_:Tween = null;
+         var _loc6_:* = 0;
+         var _loc7_:* = 0;
+         var _loc8_:* = 0;
+         var _loc9_:* = 0;
+         var _loc10_:* = 0;
+         var _loc11_:* = 0;
+         var _loc12_:* = 0;
+         if(!this.compCompletedTween())
+         {
+            this.slidingComponent.settingsBtn.setingsDropBtn.removeEventListener(Event.SELECT,this.playSlidingAnimation);
+            this.slidingComponent.settingsBtn.setingsDropBtn.selected = !this.slidingComponent.settingsBtn.setingsDropBtn.selected;
+            this.slidingComponent.settingsBtn.setingsDropBtn.addEventListener(Event.SELECT,this.playSlidingAnimation);
             return;
-        }
-
-        public function as_checkGold(arg1:Number):void
-        {
-            var loc1:*=NaN;
-            this.accGold = arg1;
-            this.complexDeviceRenderers = this.devicesComponent.deviceItemRenderer;
-            if (this.accGold < this.isHasGold()) 
+         }
+         this.countCallBack = 0;
+         var _loc1_:Number = SLIDING_SPEED;
+         var _loc2_:int = this.slidingComponent.isOpened?-this.slidingComponent.resultExpand:this.slidingComponent.resultExpand;
+         var _loc3_:int = this.windBgForm.height + window.contentPadding.top + window.contentPadding.bottom;
+         _loc3_ = _loc3_ + _loc2_;
+         var _loc4_:int = Math.floor((App.appHeight - _loc3_) / 2);
+         _loc4_ = _loc4_ - WINDOW_PADDING;
+         for each (_loc5_ in this.tweens)
+         {
+            _loc5_.paused = true;
+            _loc5_ = null;
+         }
+         _loc6_ = this.slidingComponent.height + _loc2_;
+         _loc7_ = this.submitBtn.y + _loc2_;
+         _loc8_ = this.cancelBtn.y + _loc2_;
+         _loc9_ = this.windBgForm.height + _loc2_;
+         _loc10_ = window.getBackground().height + _loc2_;
+         _loc11_ = this.result_mc.y + _loc2_;
+         _loc12_ = this.slidingComponent.isOpened?0:this.slidingComponent.mask_mc.height + _loc2_;
+         var _loc13_:int = this.slidingComponent.expandBg.height + _loc2_;
+         var _loc14_:int = this.controlQuestion.visible?this.controlQuestion.y + _loc2_:0;
+         var _loc15_:Number = this.slidingComponent.isOpened?1:0;
+         var _loc16_:Number = this.slidingComponent.isOpened?0:1;
+         this.slidingComponent.isOpened = !this.slidingComponent.isOpened;
+         this.tweens = Vector.<Tween>([new Tween(_loc1_,this.slidingComponent,{"height":_loc6_},
             {
-                loc1 = 16711680;
-                this.enabledSubmitBtn(false);
+               "paused":false,
+               "ease":Strong.easeOut,
+               "onComplete":null
             }
-            else 
+         ),new Tween(_loc1_,this.windBgForm,{"height":_loc9_},
             {
-                loc1 = 16763253;
-                this.enabledSubmitBtn(this.controlQuestion.visible ? this.controlQuestion.isValidControlInput : true);
+               "paused":false,
+               "ease":Strong.easeOut,
+               "onComplete":null
             }
-            var loc2:*=0;
-            while (loc2 < this.complexDeviceRenderers.length) 
+         ),new Tween(_loc1_,this.submitBtn,{"y":_loc7_},
             {
-                if (this.complexDeviceRenderers[loc2].inInventory) 
-                {
-                    if (!this.complexDeviceRenderers[loc2].isRemovable) 
-                    {
-                        this.complexDeviceRenderers[loc2].setColor(loc1);
-                        this.complexDeviceRenderers[loc2].validateNow();
-                    }
-                }
-                ++loc2;
+               "paused":false,
+               "ease":Strong.easeOut,
+               "onComplete":null
             }
-            this.result_mc.goldIT.textColor = loc1;
-            return;
-        }
-
-        public function as_setData(arg1:Object, arg2:Object, arg3:Object, arg4:Number, arg5:Number):void
-        {
-            this.slidingComponent.sellData = [];
-            this.accGold = arg5;
-            this.goldCommon = 0;
-            this.vehicleData = arg1;
-            this.modulesData = arg2;
-            this.shellsData = arg3;
-            this.devicesComponent.removePrice = arg4;
-            this.window.title = App.utils.locale.makeString(DIALOGS.VEHICLESELLDIALOG_TITLE, {"name":arg1.userName});
-            invalidateData();
-            return;
-        }
-
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.updateOpenedState();
-            this.controlQuestion.addEventListener(net.wg.gui.lobby.sellDialog.ControlQuestionComponent.USER_INPUT_HANDLER, this.userInputHandler);
-            this.slidingComponent.slidingScrList.addEventListener(net.wg.gui.events.VehicleSellDialogEvent.LIST_WAS_DRAWN, this.wasDrawnHandler, false, 1);
-            this.cancelBtn.label = DIALOGS.VEHICLESELLDIALOG_CANCEL;
-            this.submitBtn.label = DIALOGS.VEHICLESELLDIALOG_SUBMIT;
-            this.addEventListener(net.wg.gui.events.VehicleSellDialogEvent.UPDATE_RESULT, this.updateMoneyResult);
-            this.cancelBtn.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.handleClose);
-            this.submitBtn.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.handleSubmit);
-            if (this.controlQuestion.visible) 
+         ),new Tween(_loc1_,this.cancelBtn,{"y":_loc8_},
             {
-                App.utils.scheduler.envokeInNextFrame(this.updateFocus, this.controlQuestion.userInput);
+               "paused":false,
+               "ease":Strong.easeOut,
+               "onComplete":null
             }
-            else 
+         ),new Tween(_loc1_,this.result_mc,{"y":_loc11_},
             {
-                App.utils.scheduler.envokeInNextFrame(this.updateFocus, this.submitBtn);
+               "paused":false,
+               "ease":Strong.easeOut,
+               "onComplete":null
             }
-            return;
-        }
-
-        protected override function onDispose():void
-        {
-            var loc1:*=null;
-            super.onDispose();
-            App.utils.scheduler.cancelTask(this.updateFocus);
-            this.slidingComponent.slidingScrList.removeEventListener(net.wg.gui.events.VehicleSellDialogEvent.LIST_WAS_DRAWN, this.wasDrawnHandler);
-            this.removeEventListener(net.wg.gui.events.VehicleSellDialogEvent.UPDATE_RESULT, this.updateMoneyResult);
-            this.slidingComponent.settingsBtn.setingsDropBtn.removeEventListener(flash.events.Event.SELECT, this.playSlidingAnimation);
-            this.controlQuestion.removeEventListener(net.wg.gui.lobby.sellDialog.ControlQuestionComponent.USER_INPUT_HANDLER, this.userInputHandler);
-            this.cancelBtn.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.handleClose);
-            var loc2:*=0;
-            var loc3:*=this.tweens;
-            for each (loc1 in loc3) 
+         ),new Tween(_loc1_,this.slidingComponent.mask_mc,{"height":_loc12_},
             {
-                loc1.paused = true;
-                loc1 = null;
+               "paused":false,
+               "ease":Strong.easeOut,
+               "onComplete":null
             }
-            this.headerComponent.dispose();
-            this.slidingComponent.dispose();
-            this.devicesComponent.dispose();
-            this.controlQuestion.dispose();
-            this.vehicleData = null;
-            this.modulesData = null;
-            this.shellsData = null;
-            App.toolTipMgr.hide();
-            return;
-        }
+         ),new Tween(_loc1_,this.slidingComponent.expandBg,{"height":_loc13_},
+            {
+               "paused":false,
+               "ease":Strong.easeOut,
+               "onComplete":null
+            }
+         ),new Tween(_loc1_,this.slidingComponent.settingsBtn.creditsIT,{"alpha":_loc15_},
+            {
+               "paused":false,
+               "ease":Strong.easeOut,
+               "onComplete":null
+            }
+         ),new Tween(_loc1_,this.slidingComponent.settingsBtn.ddLine,{"alpha":_loc16_},
+            {
+               "paused":false,
+               "ease":Strong.easeOut,
+               "onComplete":null
+            }
+         ),new Tween(_loc1_,this.controlQuestion,{"y":_loc14_},
+            {
+               "paused":false,
+               "ease":Strong.easeOut,
+               "onComplete":null
+            }
+         ),new Tween(_loc1_,window,{"y":_loc4_},
+            {
+               "paused":false,
+               "ease":Strong.easeOut,
+               "onComplete":null
+            }
+         ),new Tween(_loc1_,window.getBackground(),{"height":_loc10_},
+            {
+               "paused":false,
+               "ease":Strong.easeOut,
+               "onComplete":null
+            }
+         )]);
+         this.countTweenObjects = this.tweens.length;
+         var _loc17_:* = 0;
+         while(_loc17_ < this.countTweenObjects)
+         {
+            Tween(this.tweens[_loc17_]).onComplete = this.motionCallBack;
+            _loc17_++;
+         }
+         this.updateElements();
+      }
 
-        public static const ICONS_TEXT_OFFSET:Number=-2;
+      public function motionCallBack(param1:Tween) : void {
+         this.countCallBack++;
+      }
 
-        internal static const WINDOW_PADDING:int=12;
+      public function compCompletedTween() : Boolean {
+         return this.countTweenObjects == this.countCallBack;
+      }
 
-        internal static const SLIDING_SPEED:Number=350;
+      private function updateElements() : void {
+         this.slidingComponent.slidingScrList.y = this.slidingComponent.settingsBtn.y + this.slidingComponent.settingsBtn.height;
+         this.slidingComponent.settingsBtn.creditsIT.visible = true;
+         this.slidingComponent.slidingScrList.visible = this.slidingComponent.isOpened;
+      }
 
-        public var headerComponent:net.wg.gui.lobby.sellDialog.SellHeaderComponent;
+      private function handleClose(param1:ButtonEvent) : void {
+         onWindowCloseS();
+      }
 
-        public var slidingComponent:net.wg.gui.lobby.sellDialog.SellSlidingComponent;
+      private function userInputHandler(param1:Event) : void {
+         setUserInputS(this.controlQuestion.getUserText());
+      }
 
-        public var devicesComponent:net.wg.gui.lobby.sellDialog.SellDevicesComponent;
+      private function updateFocus(param1:InteractiveObject) : void {
+         App.utils.focusHandler.setFocus(param1);
+      }
 
-        public var controlQuestion:net.wg.gui.lobby.sellDialog.ControlQuestionComponent;
+      private function updateOpenedState() : void {
+         var _loc1_:Object = getDialogSettingsS();
+         this.slidingComponent.isOpened = this.isOpen = _loc1_.isOpened;
+      }
+   }
 
-        public var windBgForm:flash.display.MovieClip;
-
-        public var cancelBtn:net.wg.gui.components.controls.SoundButtonEx;
-
-        public var result_mc:net.wg.gui.lobby.sellDialog.TotalResult;
-
-        internal var goldCommon:Number=0;
-
-        internal var listVisibleHight:Number=0;
-
-        internal var creditsComplDev:Number=0;
-
-        internal var renderersArr:__AS3__.vec.Vector.<net.wg.infrastructure.interfaces.ISaleItemBlockRenderer>;
-
-        internal var complexDeviceRenderers:__AS3__.vec.Vector.<net.wg.infrastructure.interfaces.ISaleItemBlockRenderer>;
-
-        internal var vehicleData:Object;
-
-        internal var modulesData:Object;
-
-        internal var shellsData:Object;
-
-        internal var isOpen:Boolean=false;
-
-        internal var accGold:Number=0;
-
-        internal var tweens:__AS3__.vec.Vector.<scaleform.clik.motion.Tween>;
-
-        internal var countTweenObjects:int=0;
-
-        internal var countCallBack:int=0;
-
-        public var submitBtn:net.wg.gui.components.controls.SoundButtonEx;
-    }
 }

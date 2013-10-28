@@ -1,25 +1,26 @@
-package scaleform.clik.data 
+package scaleform.clik.data
 {
-    public class ListData extends Object
-    {
-        public function ListData(arg1:uint, arg2:String="Empty", arg3:Boolean=false)
-        {
-            super();
-            this.index = arg1;
-            this.label = arg2;
-            this.selected = arg3;
-            return;
-        }
 
-        public function toString():String
-        {
-            return "[ListData " + this.index + ", " + this.label + ", " + this.selected + "]";
-        }
 
-        public var index:uint=0;
+   public class ListData extends Object
+   {
+          
+      public function ListData(param1:uint, param2:String=undefined, param3:Boolean=false) {
+         super();
+         this.index = param1;
+         this.label = param2;
+         this.selected = param3;
+      }
 
-        public var label:String="Empty";
+      public var index:uint = 0;
 
-        public var selected:Boolean=false;
-    }
+      public var label:String = "Empty";
+
+      public var selected:Boolean = false;
+
+      public function toString() : String {
+         return "[ListData " + this.index + ", " + this.label + ", " + this.selected + "]";
+      }
+   }
+
 }

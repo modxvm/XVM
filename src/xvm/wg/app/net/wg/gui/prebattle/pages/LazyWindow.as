@@ -1,16 +1,17 @@
-package net.wg.gui.prebattle.pages 
+package net.wg.gui.prebattle.pages
 {
-    public class LazyWindow extends net.wg.gui.prebattle.pages.ChannelWindow
-    {
-        public function LazyWindow()
-        {
-            super();
-            return;
-        }
 
-        internal function onIsJoinedToChannel(arg1:Boolean):void
-        {
-            return;
-        }
-    }
+
+   public class LazyWindow extends ChannelWindow
+   {
+          
+      public function LazyWindow() {
+         super();
+      }
+
+      private function onIsJoinedToChannel(param1:Boolean) : void {
+          
+      }
+   }
+
 }

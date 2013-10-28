@@ -1,24 +1,24 @@
-package net.wg.infrastructure.managers.utils.impl 
+package net.wg.infrastructure.managers.utils.impl
 {
-    import com.adobe.serialization.json.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    
-    public class WGJSON extends Object implements net.wg.infrastructure.interfaces.entity.ISerializable
-    {
-        public function WGJSON()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.interfaces.entity.ISerializable;
+   import com.adobe.serialization.json.JSONEncoder;
+   import com.adobe.serialization.json.JSONDecoder;
 
-        public function encode(arg1:*):String
-        {
-            return new com.adobe.serialization.json.JSONEncoder(arg1).getString();
-        }
 
-        public function decode(arg1:String):Object
-        {
-            return new com.adobe.serialization.json.JSONDecoder(arg1, true).getValue();
-        }
-    }
+   public class WGJSON extends Object implements ISerializable
+   {
+          
+      public function WGJSON() {
+         super();
+      }
+
+      public function encode(param1:*) : String {
+         return new JSONEncoder(param1).getString();
+      }
+
+      public function decode(param1:String) : Object {
+         return new JSONDecoder(param1,true).getValue();
+      }
+   }
+
 }

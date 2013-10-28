@@ -1,16 +1,17 @@
-package net.wg.gui.lobby.store 
+package net.wg.gui.lobby.store
 {
-    import flash.text.*;
-    import scaleform.clik.core.*;
-    
-    public class ModuleRendererCredits extends scaleform.clik.core.UIComponent
-    {
-        public function ModuleRendererCredits()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.text.TextField;
 
-        public var price:flash.text.TextField=null;
-    }
+
+   public class ModuleRendererCredits extends UIComponent
+   {
+          
+      public function ModuleRendererCredits() {
+         super();
+      }
+
+      public var price:TextField = null;
+   }
+
 }

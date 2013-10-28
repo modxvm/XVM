@@ -1,89 +1,81 @@
-package org.idmedia.as3commons.util 
+package org.idmedia.as3commons.util
 {
-    import org.idmedia.as3commons.lang.*;
-    
-    internal class EntrySet extends org.idmedia.as3commons.util.AbstractSet
-    {
-        public function EntrySet()
-        {
-            super();
-            this.table = new Array();
-            this.tableSize = 0;
-            return;
-        }
+   import org.idmedia.as3commons.lang.IllegalArgumentException;
 
-        public override function iterator():org.idmedia.as3commons.util.Iterator
-        {
-            return new EntrySetIterator(this);
-        }
 
-        public override function add(arg1:*):Boolean
-        {
-            if (!(arg1 is org.idmedia.as3commons.util.Entry)) 
-            {
-                throw new org.idmedia.as3commons.lang.IllegalArgumentException();
-            }
-            if (!contains(arg1)) 
-            {
-                this.table.push(arg1);
-                var loc1:*;
-                var loc2:*=((loc1 = this).tableSize + 1);
-                loc1.tableSize = loc2;
-                return true;
-            }
-            return false;
-        }
+   class EntrySet extends AbstractSet
+   {
+          
+      function EntrySet() {
+         super();
+         this.table = new Array();
+         this.tableSize = 0;
+      }
 
-        public override function remove(arg1:*=null):Boolean
-        {
-            var loc1:*=0;
-            while (loc1 < this.tableSize) 
+      private var table:Array;
+
+      private var tableSize:int;
+
+      override public function iterator() : Iterator {
+         return new EntrySetIterator(this);
+      }
+
+      override public function add(param1:*) : Boolean {
+         if(!(param1  is  Entry))
+         {
+            throw new IllegalArgumentException();
+         }
+         else
+         {
+            if(!contains(param1))
             {
-                if (org.idmedia.as3commons.util.Entry(arg1).equals(this.table[loc1])) 
-                {
-                    this.table.splice(loc1, 1);
-                    var loc2:*;
-                    var loc3:*=((loc2 = this).tableSize - 1);
-                    loc2.tableSize = loc3;
-                    return true;
-                }
-                ++loc1;
+               this.table.push(param1);
+               this.tableSize++;
+               return true;
             }
             return false;
-        }
+         }
+      }
 
-        public function get(arg1:int):*
-        {
-            return this.table[arg1];
-        }
-
-        public function removeEntryForKey(arg1:*):org.idmedia.as3commons.util.Entry
-        {
-            var loc1:*=null;
-            var loc2:*=0;
-            while (loc2 < this.tableSize) 
+      override public function remove(param1:*=null) : Boolean {
+         var _loc2_:* = 0;
+         while(_loc2_ < this.tableSize)
+         {
+            if(Entry(param1).equals(this.table[_loc2_]))
             {
-                if (org.idmedia.as3commons.util.Entry(this.table[loc2]).getKey() === arg1) 
-                {
-                    loc1 = this.table[loc2];
-                    this.table.splice(loc2, 1);
-                    var loc3:*;
-                    var loc4:*=((loc3 = this).tableSize - 1);
-                    loc3.tableSize = loc4;
-                    return loc1;
-                }
-                ++loc2;
+               this.table.splice(_loc2_,1);
+               this.tableSize--;
+               return true;
             }
-            return loc1;
-        }
+            _loc2_++;
+         }
+         return false;
+      }
 
-        public override function size():int
-        {
-            return this.tableSize;
-        }
+      public function get(param1:int) : * {
+         return this.table[param1];
+      }
 
-        internal var table:Array;
+      public function removeEntryForKey(param1:*) : Entry {
+         var _loc2_:Entry = null;
+         var _loc3_:* = 0;
+         while(_loc3_ < this.tableSize)
+         {
+            if(Entry(this.table[_loc3_]).getKey() === param1)
+            {
+               _loc2_ = this.table[_loc3_];
+               this.table.splice(_loc3_,1);
+               this.tableSize--;
+               return _loc2_;
+            }
+            _loc3_++;
+         }
+         return _loc2_;
+      }
 
-        internal var tableSize:int;
-    }
+      override public function size() : int {
+         return this.tableSize;
+      }
+   }
+
 }

@@ -1,17 +1,18 @@
-package net.wg.gui.lobby.profile.data 
+package net.wg.gui.lobby.profile.data
 {
-    import flash.display.*;
-    
-    public class LayoutItemInfo extends Object
-    {
-        public function LayoutItemInfo()
-        {
-            super();
-            return;
-        }
+   import flash.display.DisplayObject;
 
-        public var item:flash.display.DisplayObject;
 
-        public var position:Number;
-    }
+   public class LayoutItemInfo extends Object
+   {
+          
+      public function LayoutItemInfo() {
+         super();
+      }
+
+      public var item:DisplayObject;
+
+      public var position:Number;
+   }
+
 }

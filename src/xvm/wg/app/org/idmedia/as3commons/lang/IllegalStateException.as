@@ -1,11 +1,13 @@
-package org.idmedia.as3commons.lang 
+package org.idmedia.as3commons.lang
 {
-    public class IllegalStateException extends org.idmedia.as3commons.lang.Exception
-    {
-        public function IllegalStateException(arg1:String="")
-        {
-            super(arg1);
-            return;
-        }
-    }
+
+
+   public class IllegalStateException extends Exception
+   {
+          
+      public function IllegalStateException(param1:String=undefined) {
+         super(param1);
+      }
+   }
+
 }

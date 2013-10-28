@@ -1,84 +1,89 @@
-package net.wg.gui.lobby.techtree.interfaces 
+package net.wg.gui.lobby.techtree.interfaces
 {
-    import flash.geom.*;
-    import net.wg.gui.lobby.techtree.data.vo.*;
-    import net.wg.gui.lobby.techtree.math.*;
-    import scaleform.clik.interfaces.*;
-    
-    public interface IRenderer extends scaleform.clik.interfaces.IUIComponent
-    {
-        function setup(arg1:uint, arg2:net.wg.gui.lobby.techtree.data.vo.NodeData, arg3:uint=0, arg4:net.wg.gui.lobby.techtree.math.MatrixPosition=null):void;
+   import scaleform.clik.interfaces.IUIComponent;
+   import net.wg.gui.lobby.techtree.data.vo.NodeData;
+   import net.wg.gui.lobby.techtree.math.MatrixPosition;
+   import flash.geom.Point;
 
-        function validateNowEx():void;
 
-        function cleanUp():void;
+   public interface IRenderer extends IUIComponent
+   {
+          
+      function setup(param1:uint, param2:NodeData, param3:uint=0, param4:MatrixPosition=null) : void;
 
-        function get index():uint;
+      function validateNowEx() : void;
 
-        function get matrixPosition():net.wg.gui.lobby.techtree.math.MatrixPosition;
+      function cleanUp() : void;
 
-        function get container():net.wg.gui.lobby.techtree.interfaces.INodesContainer;
+      function get index() : uint;
 
-        function set container(arg1:net.wg.gui.lobby.techtree.interfaces.INodesContainer):void;
+      function get matrixPosition() : MatrixPosition;
 
-        function getEntityType():uint;
+      function get container() : INodesContainer;
 
-        function getID():Number;
+      function set container(param1:INodesContainer) : void;
 
-        function getItemName():String;
+      function getEntityType() : uint;
 
-        function getItemType():String;
+      function getID() : Number;
 
-        function getLevel():int;
+      function getItemName() : String;
 
-        function getIconPath():String;
+      function getItemType() : String;
 
-        function isFake():Boolean;
+      function getGraphicsName() : String;
 
-        function getEarnedXP():Number;
+      function getLevel() : int;
 
-        function getNamedLabel(arg1:String):String;
+      function getIconPath() : String;
 
-        function getDisplayInfo():Object;
+      function isFake() : Boolean;
 
-        function getInX():Number;
+      function getEarnedXP() : Number;
 
-        function getOutX():Number;
+      function getNamedLabel(param1:String) : String;
 
-        function getY():Number;
+      function getDisplayInfo() : Object;
 
-        function getRatioY():Number;
+      function getInX() : Number;
 
-        function setPosition(arg1:flash.geom.Point):void;
+      function getOutX() : Number;
 
-        function getActualWidth():Number;
+      function getY() : Number;
 
-        function getColorIdx(arg1:Number=-1):Number;
+      function getRatioY() : Number;
 
-        function getColorIdxEx(arg1:net.wg.gui.lobby.techtree.interfaces.IRenderer):Number;
+      function setPosition(param1:Point) : void;
 
-        function isNext2Unlock():Boolean;
+      function getActualWidth() : Number;
 
-        function isUnlocked():Boolean;
+      function getColorIdx(param1:Number=-1) : Number;
 
-        function isElite():Boolean;
+      function getColorIdxEx(param1:IRenderer) : Number;
 
-        function isPremium():Boolean;
+      function isNext2Unlock() : Boolean;
 
-        function inInventory():Boolean;
+      function isUnlocked() : Boolean;
 
-        function isAvailable4Unlock():Boolean;
+      function isElite() : Boolean;
 
-        function isAvailable4Buy():Boolean;
+      function isPremium() : Boolean;
 
-        function isAvailable4Sell():Boolean;
+      function inInventory() : Boolean;
 
-        function isActionEnabled():Boolean;
+      function isAvailable4Unlock() : Boolean;
 
-        function isButtonVisible():Boolean;
+      function isAvailable4Buy() : Boolean;
 
-        function isSelected():Boolean;
+      function isAvailable4Sell() : Boolean;
 
-        function invalidateNodeState(arg1:Number):void;
-    }
+      function isActionEnabled() : Boolean;
+
+      function isButtonVisible() : Boolean;
+
+      function isSelected() : Boolean;
+
+      function invalidateNodeState(param1:Number) : void;
+   }
+
 }

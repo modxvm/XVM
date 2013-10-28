@@ -1,52 +1,49 @@
-package net.wg.gui.lobby.training 
+package net.wg.gui.lobby.training
 {
-    import flash.display.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import net.wg.infrastructure.interfaces.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.utils.*;
-    
-    public class MinimapEntity extends net.wg.infrastructure.base.meta.impl.MinimapEntityMeta implements net.wg.infrastructure.base.meta.IMinimapEntityMeta
-    {
-        public function MinimapEntity()
-        {
-            super();
-            constraints = new scaleform.clik.utils.Constraints(this, scaleform.clik.constants.ConstrainMode.COUNTER_SCALE);
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.MinimapEntityMeta;
+   import net.wg.infrastructure.base.meta.IMinimapEntityMeta;
+   import flash.display.MovieClip;
+   import net.wg.infrastructure.interfaces.IMinimapEntry;
+   import scaleform.clik.utils.Constraints;
+   import scaleform.clik.constants.ConstrainMode;
 
-        public function as_updatePoints():void
-        {
-            var loc1:*=this.icons.numChildren;
-            var loc2:*=null;
-            var loc3:*=0;
-            while (loc3 < loc1) 
+
+   public class MinimapEntity extends MinimapEntityMeta implements IMinimapEntityMeta
+   {
+          
+      public function MinimapEntity() {
+         super();
+         constraints = new Constraints(this,ConstrainMode.COUNTER_SCALE);
+      }
+
+      public var icons:MovieClip;
+
+      public var iconsMask:MovieClip;
+
+      public function as_updatePoints() : void {
+         var _loc1_:int = this.icons.numChildren;
+         var _loc2_:IMinimapEntry = null;
+         var _loc3_:* = 0;
+         while(_loc3_ < _loc1_)
+         {
+            _loc2_ = this.icons.getChildAt(_loc3_) as IMinimapEntry;
+            if(_loc2_)
             {
-                loc2 = this.icons.getChildAt(loc3) as net.wg.infrastructure.interfaces.IMinimapEntry;
-                if (loc2) 
-                {
-                    if (loc2.isTeamPoint()) 
-                    {
-                        loc2.update(null);
-                    }
-                }
-                ++loc3;
+               if(_loc2_.isTeamPoint())
+               {
+                  _loc2_.update(null);
+               }
             }
-            return;
-        }
+            _loc3_++;
+         }
+      }
 
-        protected override function onDispose():void
-        {
-            App.utils.commons.releaseReferences(this.icons);
-            this.icons = null;
-            this.iconsMask = null;
-            super.onDispose();
-            return;
-        }
+      override protected function onDispose() : void {
+         App.utils.commons.releaseReferences(this.icons);
+         this.icons = null;
+         this.iconsMask = null;
+         super.onDispose();
+      }
+   }
 
-        public var icons:flash.display.MovieClip;
-
-        public var iconsMask:flash.display.MovieClip;
-    }
 }

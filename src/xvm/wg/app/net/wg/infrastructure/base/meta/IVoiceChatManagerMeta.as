@@ -1,17 +1,20 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IVoiceChatManagerMeta extends flash.events.IEventDispatcher
-    {
-        function isPlayerSpeakingS(arg1:uint):Boolean;
+   import flash.events.IEventDispatcher;
 
-        function isVivoxS():Boolean;
 
-        function isYYS():Boolean;
+   public interface IVoiceChatManagerMeta extends IEventDispatcher
+   {
+          
+      function isPlayerSpeakingS(param1:Number) : Boolean;
 
-        function isVOIPEnabledS():Boolean;
+      function isVivoxS() : Boolean;
 
-        function as_onPlayerSpeak(arg1:uint, arg2:Boolean, arg3:Boolean):void;
-    }
+      function isYYS() : Boolean;
+
+      function isVOIPEnabledS() : Boolean;
+
+      function as_onPlayerSpeak(param1:Number, param2:Boolean, param3:Boolean) : void;
+   }
+
 }

@@ -1,73 +1,61 @@
-package net.wg.gui.lobby.profile.components.chart 
+package net.wg.gui.lobby.profile.components.chart
 {
-    import scaleform.clik.core.*;
-    import scaleform.clik.data.*;
-    
-    public class ChartItemBase extends scaleform.clik.core.UIComponent implements net.wg.gui.lobby.profile.components.chart.IChartItem
-    {
-        public function ChartItemBase()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import scaleform.clik.data.ListData;
 
-        public function get index():uint
-        {
-            return 0;
-        }
 
-        public function set index(arg1:uint):void
-        {
-            return;
-        }
+   public class ChartItemBase extends UIComponent implements IChartItem
+   {
+          
+      public function ChartItemBase() {
+         super();
+      }
 
-        public function get owner():scaleform.clik.core.UIComponent
-        {
-            return null;
-        }
+      protected var _data:Object;
 
-        public function set owner(arg1:scaleform.clik.core.UIComponent):void
-        {
-            return;
-        }
+      public function get index() : uint {
+         return 0;
+      }
 
-        public function get selectable():Boolean
-        {
-            return false;
-        }
+      public function set index(param1:uint) : void {
+          
+      }
 
-        public function set selectable(arg1:Boolean):void
-        {
-            return;
-        }
+      public function get owner() : UIComponent {
+         return null;
+      }
 
-        public function get selected():Boolean
-        {
-            return false;
-        }
+      public function set owner(param1:UIComponent) : void {
+          
+      }
 
-        public function set selected(arg1:Boolean):void
-        {
-            return;
-        }
+      public function get selectable() : Boolean {
+         return false;
+      }
 
-        public function setListData(arg1:scaleform.clik.data.ListData):void
-        {
-            return;
-        }
+      public function set selectable(param1:Boolean) : void {
+          
+      }
 
-        public function setData(arg1:Object):void
-        {
-            this._data = arg1;
-            return;
-        }
+      public function get selected() : Boolean {
+         return false;
+      }
 
-        public override function dispose():void
-        {
-            super.dispose();
-            return;
-        }
+      public function set selected(param1:Boolean) : void {
+          
+      }
 
-        protected var _data:Object;
-    }
+      public function setListData(param1:ListData) : void {
+          
+      }
+
+      public function setData(param1:Object) : void {
+         this._data = param1;
+      }
+
+      override public function dispose() : void {
+         super.dispose();
+      }
+   }
+
 }

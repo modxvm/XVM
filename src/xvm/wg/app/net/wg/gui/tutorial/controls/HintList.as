@@ -1,144 +1,117 @@
-package net.wg.gui.tutorial.controls 
+package net.wg.gui.tutorial.controls
 {
-    import flash.events.*;
-    import net.wg.gui.tutorial.constants.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.core.*;
-    import scaleform.clik.events.*;
-    
-    public class HintList extends scaleform.clik.core.UIComponent
-    {
-        public function HintList()
-        {
-            this._dataProvider = [];
-            this.items = [];
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import scaleform.clik.constants.InvalidationType;
+   import flash.events.MouseEvent;
+   import scaleform.clik.events.ListEvent;
+   import net.wg.gui.tutorial.constants.HintItemType;
 
-        public function get dataProvider():Array
-        {
-            return this._dataProvider;
-        }
 
-        public function set dataProvider(arg1:Array):void
-        {
-            this._dataProvider = arg1;
-            invalidateData();
-            return;
-        }
+   public class HintList extends UIComponent
+   {
+          
+      public function HintList() {
+         this._dataProvider = [];
+         this.items = [];
+         super();
+      }
 
-        public override function dispose():void
-        {
-            super.dispose();
-            this.removeItems();
-            this._dataProvider = this._dataProvider.splice(0, this._dataProvider.length);
-            return;
-        }
+      public var textItemRenderer:String;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            return;
-        }
+      public var videoItemRenderer:String;
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
-            {
-                this.repopulate();
-                this.relayout();
-            }
-            return;
-        }
+      public var verticalGap:Number = 0;
 
-        public function relayout():void
-        {
-            var loc2:*=null;
-            var loc1:*=0;
-            var loc3:*=0;
-            var loc4:*=this.items;
-            for each (loc2 in loc4) 
-            {
-                loc2.y = loc1 ^ 0;
-                loc1 = loc1 + (loc2.height + this.verticalGap);
-            }
-            return;
-        }
+      private var _dataProvider:Array;
 
-        internal function repopulate():void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            this.removeItems();
-            var loc3:*=0;
-            var loc4:*=this._dataProvider;
-            for each (loc1 in loc4) 
-            {
-                loc2 = this.createRenderer(loc1);
-                loc2.addEventListener(flash.events.MouseEvent.CLICK, this.onItemClick);
-                addChild(loc2);
-                loc2.validateNow();
-                this.items.push(loc2);
-            }
-            return;
-        }
+      private var items:Array;
 
-        internal function onItemClick(arg1:flash.events.MouseEvent):void
-        {
-            var loc1:*=arg1.currentTarget as net.wg.gui.tutorial.controls.HintBaseItemRenderer;
-            var loc2:*=new scaleform.clik.events.ListEvent(scaleform.clik.events.ListEvent.ITEM_CLICK);
-            loc2.itemData = loc1.data;
-            dispatchEvent(loc2);
-            return;
-        }
+      public function get dataProvider() : Array {
+         return this._dataProvider;
+      }
 
-        internal function createRenderer(arg1:Object):net.wg.gui.tutorial.controls.HintBaseItemRenderer
-        {
-            var loc1:*=null;
-            var loc2:*="";
-            var loc3:*=arg1.type;
-            switch (loc3) 
-            {
-                case net.wg.gui.tutorial.constants.HintItemType.TEXT:
-                {
-                    loc2 = this.textItemRenderer;
-                    break;
-                }
-                case net.wg.gui.tutorial.constants.HintItemType.VIDEO_LINK:
-                {
-                    loc2 = this.videoItemRenderer;
-                    break;
-                }
-            }
-            loc1 = App.utils.classFactory.getComponent(loc2, net.wg.gui.tutorial.controls.HintBaseItemRenderer);
-            loc1.data = arg1;
-            return loc1;
-        }
+      public function set dataProvider(param1:Array) : void {
+         this._dataProvider = param1;
+         invalidateData();
+      }
 
-        internal function removeItems():void
-        {
-            var loc1:*=null;
-            var loc2:*=0;
-            var loc3:*=this.items;
-            for each (loc1 in loc3) 
-            {
-                removeChild(loc1);
-                loc1.dispose();
-            }
-            this.items = this.items.splice(0, this.items.length);
-            return;
-        }
+      override public function dispose() : void {
+         super.dispose();
+         this.removeItems();
+         this._dataProvider = this._dataProvider.splice(0,this._dataProvider.length);
+      }
 
-        public var textItemRenderer:String;
+      override protected function configUI() : void {
+         super.configUI();
+      }
 
-        public var videoItemRenderer:String;
+      override protected function draw() : void {
+         super.draw();
+         if(isInvalid(InvalidationType.DATA))
+         {
+            this.repopulate();
+            this.relayout();
+         }
+      }
 
-        public var verticalGap:Number=0;
+      public function relayout() : void {
+         var _loc1_:* = NaN;
+         var _loc2_:HintBaseItemRenderer = null;
+         _loc1_ = 0;
+         for each (_loc2_ in this.items)
+         {
+            _loc2_.y = _loc1_ ^ 0;
+            _loc1_ = _loc1_ + (_loc2_.height + this.verticalGap);
+         }
+      }
 
-        internal var _dataProvider:Array;
+      private function repopulate() : void {
+         var _loc1_:Object = null;
+         var _loc2_:HintBaseItemRenderer = null;
+         this.removeItems();
+         for each (_loc1_ in this._dataProvider)
+         {
+            _loc2_ = this.createRenderer(_loc1_);
+            _loc2_.addEventListener(MouseEvent.CLICK,this.onItemClick);
+            addChild(_loc2_);
+            _loc2_.validateNow();
+            this.items.push(_loc2_);
+         }
+      }
 
-        internal var items:Array;
-    }
+      private function onItemClick(param1:MouseEvent) : void {
+         var _loc2_:HintBaseItemRenderer = param1.currentTarget as HintBaseItemRenderer;
+         var _loc3_:ListEvent = new ListEvent(ListEvent.ITEM_CLICK);
+         _loc3_.itemData = _loc2_.data;
+         dispatchEvent(_loc3_);
+      }
+
+      private function createRenderer(param1:Object) : HintBaseItemRenderer {
+         var _loc2_:HintBaseItemRenderer = null;
+         var _loc3_:* = "";
+         switch(param1.type)
+         {
+            case HintItemType.TEXT:
+               _loc3_ = this.textItemRenderer;
+               break;
+            case HintItemType.VIDEO_LINK:
+               _loc3_ = this.videoItemRenderer;
+               break;
+         }
+         _loc2_ = App.utils.classFactory.getComponent(_loc3_,HintBaseItemRenderer);
+         _loc2_.data = param1;
+         return _loc2_;
+      }
+
+      private function removeItems() : void {
+         var _loc1_:HintBaseItemRenderer = null;
+         for each (_loc1_ in this.items)
+         {
+            removeChild(_loc1_);
+            _loc1_.dispose();
+         }
+         this.items = this.items.splice(0,this.items.length);
+      }
+   }
+
 }

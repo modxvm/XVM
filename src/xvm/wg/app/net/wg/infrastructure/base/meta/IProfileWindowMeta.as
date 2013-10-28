@@ -1,11 +1,24 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IProfileWindowMeta extends flash.events.IEventDispatcher
-    {
-        function as_setInitData(arg1:Object):void;
+   import flash.events.IEventDispatcher;
 
-        function as_update(arg1:Object):void;
-    }
+
+   public interface IProfileWindowMeta extends IEventDispatcher
+   {
+          
+      function userAddFriendS() : void;
+
+      function userSetIgnoredS() : void;
+
+      function userCreatePrivateChannelS() : void;
+
+      function as_setInitData(param1:Object) : void;
+
+      function as_update(param1:Object) : void;
+
+      function as_addFriendAvailable(param1:Boolean) : void;
+
+      function as_setIgnoredAvailable(param1:Boolean) : void;
+   }
+
 }

@@ -1,99 +1,92 @@
-package net.wg.gui.components.controls 
+package net.wg.gui.components.controls
 {
-    import flash.display.*;
-    import flash.events.*;
-    import flash.geom.*;
-    import flash.net.*;
-    import flash.system.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    
-    public class UILoaderCut extends flash.display.Sprite implements net.wg.infrastructure.interfaces.entity.IDisposable
-    {
-        public function UILoaderCut()
-        {
-            super();
-            var loc1:*;
-            scaleY = loc1 = 1;
-            scaleX = loc1;
-            this.background.visible = false;
+   import flash.display.Sprite;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import flash.display.MovieClip;
+   import flash.display.Loader;
+   import flash.geom.Rectangle;
+   import flash.net.URLRequest;
+   import flash.system.LoaderContext;
+   import flash.system.ApplicationDomain;
+   import flash.events.Event;
+   import flash.events.IOErrorEvent;
+   import flash.geom.Matrix;
+   import flash.display.Bitmap;
+
+
+   public class UILoaderCut extends Sprite implements IDisposable
+   {
+          
+      public function UILoaderCut() {
+         super();
+         scaleX = scaleY = 1;
+         this.background.visible = false;
+      }
+
+      private static const ERROR_URL:String = "../maps/icons/vehicle/noImage.png";
+
+      public var background:MovieClip;
+
+      private var loader:Loader;
+
+      private var _source:String = "";
+
+      private var _cutRect:Rectangle;
+
+      public function get cutRect() : Object {
+         return this._cutRect;
+      }
+
+      public function set cutRect(param1:Object) : void {
+         this._cutRect = new Rectangle(param1.x,param1.y,param1.width,param1.height);
+      }
+
+      public function get source() : String {
+         return this._source;
+      }
+
+      public function set source(param1:String) : void {
+         if(param1 == null || param1 == "" || param1 == this._source)
+         {
             return;
-        }
+         }
+         this._source = param1;
+         var _loc2_:URLRequest = new URLRequest(param1);
+         var _loc3_:LoaderContext = new LoaderContext(false,ApplicationDomain.currentDomain);
+         this.loader = new Loader();
+         this.loader.contentLoaderInfo.addEventListener(Event.COMPLETE,this.completeHandler);
+         this.loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,this.onIOError);
+         this.loader.load(_loc2_,_loc3_);
+      }
 
-        public function get cutRect():Object
-        {
-            return this._cutRect;
-        }
+      private function completeHandler(param1:Event) : void {
+         graphics.clear();
+         var _loc2_:Matrix = new Matrix(1,0,0,1,-this._cutRect.x,-this._cutRect.y);
+         graphics.beginBitmapFill(Bitmap(this.loader.content).bitmapData,_loc2_,false);
+         graphics.moveTo(0,0);
+         graphics.lineTo(this._cutRect.width,0);
+         graphics.lineTo(this._cutRect.width,this._cutRect.height);
+         graphics.lineTo(0,this._cutRect.height);
+         graphics.lineTo(0,0);
+         graphics.endFill();
+         this.loader.contentLoaderInfo.removeEventListener(Event.COMPLETE,this.completeHandler);
+         this.loader.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR,this.onIOError);
+         this.loader = null;
+      }
 
-        public function set cutRect(arg1:Object):void
-        {
-            this._cutRect = new flash.geom.Rectangle(arg1.x, arg1.y, arg1.width, arg1.height);
-            return;
-        }
+      private function onIOError(param1:IOErrorEvent) : void {
+         this.loader.unloadAndStop(true);
+         this.source = ERROR_URL;
+      }
 
-        public function get source():String
-        {
-            return this._source;
-        }
-
-        public function set source(arg1:String):void
-        {
-            if (arg1 == null || arg1 == "" || arg1 == this._source) 
-            {
-                return;
-            }
-            this._source = arg1;
-            var loc1:*=new flash.net.URLRequest(arg1);
-            var loc2:*=new flash.system.LoaderContext(false, flash.system.ApplicationDomain.currentDomain);
-            this.loader = new flash.display.Loader();
-            this.loader.contentLoaderInfo.addEventListener(flash.events.Event.COMPLETE, this.completeHandler);
-            this.loader.contentLoaderInfo.addEventListener(flash.events.IOErrorEvent.IO_ERROR, this.onIOError);
-            this.loader.load(loc1, loc2);
-            return;
-        }
-
-        internal function completeHandler(arg1:flash.events.Event):void
-        {
-            graphics.clear();
-            var loc1:*=new flash.geom.Matrix(1, 0, 0, 1, -this._cutRect.x, -this._cutRect.y);
-            graphics.beginBitmapFill(flash.display.Bitmap(this.loader.content).bitmapData, loc1, false);
-            graphics.moveTo(0, 0);
-            graphics.lineTo(this._cutRect.width, 0);
-            graphics.lineTo(this._cutRect.width, this._cutRect.height);
-            graphics.lineTo(0, this._cutRect.height);
-            graphics.lineTo(0, 0);
-            graphics.endFill();
-            this.loader.contentLoaderInfo.removeEventListener(flash.events.Event.COMPLETE, this.completeHandler);
-            this.loader.contentLoaderInfo.removeEventListener(flash.events.IOErrorEvent.IO_ERROR, this.onIOError);
-            this.loader = null;
-            return;
-        }
-
-        internal function onIOError(arg1:flash.events.IOErrorEvent):void
-        {
+      public function dispose() : void {
+         this._source = null;
+         this._cutRect = null;
+         if(this.loader)
+         {
             this.loader.unloadAndStop(true);
-            this.source = ERROR_URL;
-            return;
-        }
+         }
+      }
+   }
 
-        public function dispose():void
-        {
-            this._source = null;
-            this._cutRect = null;
-            if (this.loader) 
-            {
-                this.loader.unloadAndStop(true);
-            }
-            return;
-        }
-
-        internal static const ERROR_URL:String="../maps/icons/vehicle/noImage.png";
-
-        public var background:flash.display.MovieClip;
-
-        internal var loader:flash.display.Loader;
-
-        internal var _source:String="";
-
-        internal var _cutRect:flash.geom.Rectangle;
-    }
 }

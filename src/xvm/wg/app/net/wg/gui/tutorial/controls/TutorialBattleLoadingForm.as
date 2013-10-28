@@ -1,45 +1,41 @@
-package net.wg.gui.tutorial.controls 
+package net.wg.gui.tutorial.controls
 {
-    import flash.text.*;
-    import scaleform.clik.controls.*;
-    import scaleform.clik.core.*;
-    
-    public class TutorialBattleLoadingForm extends scaleform.clik.core.UIComponent
-    {
-        public function TutorialBattleLoadingForm()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.text.TextField;
+   import scaleform.clik.controls.StatusIndicator;
+   import net.wg.gui.components.icons.BattleTypeIcon;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            return;
-        }
 
-        public function updateProgress(arg1:Number):void
-        {
-            this.loadingBar.position = arg1;
-            return;
-        }
+   public class TutorialBattleLoadingForm extends UIComponent
+   {
+          
+      public function TutorialBattleLoadingForm() {
+         super();
+      }
 
-        public function updateMapName(arg1:String):void
-        {
-            this.mapText.text = arg1 ? arg1.toUpperCase() : "";
-            return;
-        }
+      public var mapText:TextField;
 
-        public function updateBattleType(arg1:String):void
-        {
-            this.battleText.text = arg1;
-            return;
-        }
+      public var battleText:TextField;
 
-        public var mapText:flash.text.TextField;
+      public var loadingBar:StatusIndicator;
 
-        public var battleText:flash.text.TextField;
+      public var battleIcon:BattleTypeIcon = null;
 
-        public var loadingBar:scaleform.clik.controls.StatusIndicator;
-    }
+      override protected function configUI() : void {
+         super.configUI();
+      }
+
+      public function updateProgress(param1:Number) : void {
+         this.loadingBar.position = param1;
+      }
+
+      public function updateMapName(param1:String) : void {
+         this.mapText.text = param1?param1.toUpperCase():"";
+      }
+
+      public function updateBattleType(param1:String) : void {
+         this.battleText.text = param1;
+      }
+   }
+
 }

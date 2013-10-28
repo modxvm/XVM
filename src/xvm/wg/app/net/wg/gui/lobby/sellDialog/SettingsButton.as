@@ -1,31 +1,31 @@
-package net.wg.gui.lobby.sellDialog 
+package net.wg.gui.lobby.sellDialog
 {
-    import flash.display.*;
-    import net.wg.gui.components.controls.*;
-    import scaleform.clik.core.*;
-    
-    public class SettingsButton extends scaleform.clik.core.UIComponent
-    {
-        public function SettingsButton()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import net.wg.gui.components.controls.CheckBox;
+   import net.wg.gui.components.controls.IconText;
+   import flash.display.MovieClip;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            var loc1:*=App.utils.locale.makeString(DIALOGS.BUYVEHICLEDIALOG_EXPANDBTNLABEL);
-            loc1 = loc1.toUpperCase();
-            this.setingsDropBtn.label = loc1;
-            this.creditsIT.textFieldYOffset = net.wg.gui.lobby.sellDialog.VehicleSellDialog.ICONS_TEXT_OFFSET;
-            return;
-        }
 
-        public var setingsDropBtn:net.wg.gui.components.controls.CheckBox;
+   public class SettingsButton extends UIComponent
+   {
+          
+      public function SettingsButton() {
+         super();
+      }
 
-        public var creditsIT:net.wg.gui.components.controls.IconText;
+      public var setingsDropBtn:CheckBox;
 
-        public var ddLine:flash.display.MovieClip;
-    }
+      public var creditsIT:IconText;
+
+      public var ddLine:MovieClip;
+
+      override protected function configUI() : void {
+         super.configUI();
+         var _loc1_:String = App.utils.locale.makeString(DIALOGS.BUYVEHICLEDIALOG_EXPANDBTNLABEL);
+         _loc1_ = _loc1_.toUpperCase();
+         this.setingsDropBtn.label = _loc1_;
+         this.creditsIT.textFieldYOffset = VehicleSellDialog.ICONS_TEXT_OFFSET;
+      }
+   }
+
 }

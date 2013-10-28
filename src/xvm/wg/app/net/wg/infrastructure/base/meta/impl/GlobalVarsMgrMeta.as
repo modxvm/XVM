@@ -1,96 +1,106 @@
-package net.wg.infrastructure.base.meta.impl 
+package net.wg.infrastructure.base.meta.impl
 {
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.base.*;
-    
-    public class GlobalVarsMgrMeta extends net.wg.infrastructure.base.BaseDAAPIModule
-    {
-        public function GlobalVarsMgrMeta()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.BaseDAAPIModule;
+   import net.wg.data.constants.Errors;
 
-        public function isDevelopmentS():Boolean
-        {
-            App.utils.asserter.assertNotNull(this.isDevelopment, "isDevelopment" + net.wg.data.constants.Errors.CANT_NULL);
-            return this.isDevelopment();
-        }
 
-        public function isShowLangaugeBarS():Boolean
-        {
-            App.utils.asserter.assertNotNull(this.isShowLangaugeBar, "isShowLangaugeBar" + net.wg.data.constants.Errors.CANT_NULL);
-            return this.isShowLangaugeBar();
-        }
+   public class GlobalVarsMgrMeta extends BaseDAAPIModule
+   {
+          
+      public function GlobalVarsMgrMeta() {
+         super();
+      }
 
-        public function isShowServerStatsS():Boolean
-        {
-            App.utils.asserter.assertNotNull(this.isShowServerStats, "isShowServerStats" + net.wg.data.constants.Errors.CANT_NULL);
-            return this.isShowServerStats();
-        }
+      public var isDevelopment:Function = null;
 
-        public function isChinaS():Boolean
-        {
-            App.utils.asserter.assertNotNull(this.isChina, "isChina" + net.wg.data.constants.Errors.CANT_NULL);
-            return this.isChina();
-        }
+      public var isShowLangaugeBar:Function = null;
 
-        public function isTutorialDisabledS():Boolean
-        {
-            App.utils.asserter.assertNotNull(this.isTutorialDisabled, "isTutorialDisabled" + net.wg.data.constants.Errors.CANT_NULL);
-            return this.isTutorialDisabled();
-        }
+      public var isShowServerStats:Function = null;
 
-        public function setTutorialDisabledS(arg1:Boolean):void
-        {
-            App.utils.asserter.assertNotNull(this.setTutorialDisabled, "setTutorialDisabled" + net.wg.data.constants.Errors.CANT_NULL);
-            this.setTutorialDisabled(arg1);
-            return;
-        }
+      public var isChina:Function = null;
 
-        public function isTutorialRunningS():Boolean
-        {
-            App.utils.asserter.assertNotNull(this.isTutorialRunning, "isTutorialRunning" + net.wg.data.constants.Errors.CANT_NULL);
-            return this.isTutorialRunning();
-        }
+      public var isKorea:Function = null;
 
-        public function setTutorialRunningS(arg1:Boolean):void
-        {
-            App.utils.asserter.assertNotNull(this.setTutorialRunning, "setTutorialRunning" + net.wg.data.constants.Errors.CANT_NULL);
-            this.setTutorialRunning(arg1);
-            return;
-        }
+      public var isTutorialDisabled:Function = null;
 
-        public function isFreeXpToTankmanS():Boolean
-        {
-            App.utils.asserter.assertNotNull(this.isFreeXpToTankman, "isFreeXpToTankman" + net.wg.data.constants.Errors.CANT_NULL);
-            return this.isFreeXpToTankman();
-        }
+      public var setTutorialDisabled:Function = null;
 
-        public function getLocaleOverrideS():String
-        {
-            App.utils.asserter.assertNotNull(this.getLocaleOverride, "getLocaleOverride" + net.wg.data.constants.Errors.CANT_NULL);
-            return this.getLocaleOverride();
-        }
+      public var isTutorialRunning:Function = null;
 
-        public var isDevelopment:Function=null;
+      public var isRoamingEnabled:Function = null;
 
-        public var isShowLangaugeBar:Function=null;
+      public var isInRoaming:Function = null;
 
-        public var isShowServerStats:Function=null;
+      public var setTutorialRunning:Function = null;
 
-        public var isChina:Function=null;
+      public var isFreeXpToTankman:Function = null;
 
-        public var isTutorialDisabled:Function=null;
+      public var getLocaleOverride:Function = null;
 
-        public var setTutorialDisabled:Function=null;
+      public function isDevelopmentS() : Boolean {
+         App.utils.asserter.assertNotNull(this.isDevelopment,"isDevelopment" + Errors.CANT_NULL);
+         return this.isDevelopment();
+      }
 
-        public var isTutorialRunning:Function=null;
+      public function isShowLangaugeBarS() : Boolean {
+         App.utils.asserter.assertNotNull(this.isShowLangaugeBar,"isShowLangaugeBar" + Errors.CANT_NULL);
+         return this.isShowLangaugeBar();
+      }
 
-        public var setTutorialRunning:Function=null;
+      public function isShowServerStatsS() : Boolean {
+         App.utils.asserter.assertNotNull(this.isShowServerStats,"isShowServerStats" + Errors.CANT_NULL);
+         return this.isShowServerStats();
+      }
 
-        public var isFreeXpToTankman:Function=null;
+      public function isChinaS() : Boolean {
+         App.utils.asserter.assertNotNull(this.isChina,"isChina" + Errors.CANT_NULL);
+         return this.isChina();
+      }
 
-        public var getLocaleOverride:Function=null;
-    }
+      public function isKoreaS() : Boolean {
+         App.utils.asserter.assertNotNull(this.isKorea,"isKorea" + Errors.CANT_NULL);
+         return this.isKorea();
+      }
+
+      public function isTutorialDisabledS() : Boolean {
+         App.utils.asserter.assertNotNull(this.isTutorialDisabled,"isTutorialDisabled" + Errors.CANT_NULL);
+         return this.isTutorialDisabled();
+      }
+
+      public function setTutorialDisabledS(param1:Boolean) : void {
+         App.utils.asserter.assertNotNull(this.setTutorialDisabled,"setTutorialDisabled" + Errors.CANT_NULL);
+         this.setTutorialDisabled(param1);
+      }
+
+      public function isTutorialRunningS() : Boolean {
+         App.utils.asserter.assertNotNull(this.isTutorialRunning,"isTutorialRunning" + Errors.CANT_NULL);
+         return this.isTutorialRunning();
+      }
+
+      public function isRoamingEnabledS() : Boolean {
+         App.utils.asserter.assertNotNull(this.isRoamingEnabled,"isRoamingEnabled" + Errors.CANT_NULL);
+         return this.isRoamingEnabled();
+      }
+
+      public function isInRoamingS() : Boolean {
+         App.utils.asserter.assertNotNull(this.isInRoaming,"isInRoaming" + Errors.CANT_NULL);
+         return this.isInRoaming();
+      }
+
+      public function setTutorialRunningS(param1:Boolean) : void {
+         App.utils.asserter.assertNotNull(this.setTutorialRunning,"setTutorialRunning" + Errors.CANT_NULL);
+         this.setTutorialRunning(param1);
+      }
+
+      public function isFreeXpToTankmanS() : Boolean {
+         App.utils.asserter.assertNotNull(this.isFreeXpToTankman,"isFreeXpToTankman" + Errors.CANT_NULL);
+         return this.isFreeXpToTankman();
+      }
+
+      public function getLocaleOverrideS() : String {
+         App.utils.asserter.assertNotNull(this.getLocaleOverride,"getLocaleOverride" + Errors.CANT_NULL);
+         return this.getLocaleOverride();
+      }
+   }
+
 }

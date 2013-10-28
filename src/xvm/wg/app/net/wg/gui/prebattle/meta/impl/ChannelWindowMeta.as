@@ -1,13 +1,14 @@
-package net.wg.gui.prebattle.meta.impl 
+package net.wg.gui.prebattle.meta.impl
 {
-    import net.wg.infrastructure.base.*;
-    
-    public class ChannelWindowMeta extends net.wg.infrastructure.base.AbstractWindowView
-    {
-        public function ChannelWindowMeta()
-        {
-            super();
-            return;
-        }
-    }
+   import net.wg.infrastructure.base.AbstractWindowView;
+
+
+   public class ChannelWindowMeta extends AbstractWindowView
+   {
+          
+      public function ChannelWindowMeta() {
+         super();
+      }
+   }
+
 }

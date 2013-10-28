@@ -1,23 +1,22 @@
-package net.wg.gui.components.tooltips 
+package net.wg.gui.components.tooltips
 {
-    import flash.display.*;
-    import flash.text.*;
-    
-    public class IgrQuestBlock extends flash.display.MovieClip
-    {
-        public function IgrQuestBlock()
-        {
-            super();
-            return;
-        }
+   import flash.display.MovieClip;
+   import flash.text.TextField;
 
-        public function setText(arg1:String):void
-        {
-            this.questText.htmlText = arg1;
-            this.questText.width = this.questText.textWidth;
-            return;
-        }
 
-        public var questText:flash.text.TextField;
-    }
+   public class IgrQuestBlock extends MovieClip
+   {
+          
+      public function IgrQuestBlock() {
+         super();
+      }
+
+      public var questText:TextField;
+
+      public function setText(param1:String) : void {
+         this.questText.htmlText = param1;
+         this.questText.width = this.questText.textWidth;
+      }
+   }
+
 }

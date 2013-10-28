@@ -1,90 +1,83 @@
-package net.wg.gui.lobby.store.views 
+package net.wg.gui.lobby.store.views
 {
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.lobby.store.views.base.*;
-    import scaleform.clik.data.*;
-    
-    public class ShellView extends net.wg.gui.lobby.store.views.base.FitsSelectableStoreMenuView
-    {
-        public function ShellView()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.lobby.store.views.base.FitsSelectableStoreMenuView;
+   import net.wg.gui.components.controls.CheckBox;
+   import net.wg.gui.components.controls.RadioButton;
+   import net.wg.gui.lobby.store.views.base.ViewUIElementVO;
+   import scaleform.clik.data.DataProvider;
 
-        public override function resetTemporaryHandlers():void
-        {
-            resetHandlers(getTagsArray(), null);
-            return;
-        }
 
-        public override function getFilter():Array
-        {
-            var loc1:*=getSelectedFilters(getTagsArray(), true, null);
-            loc1.push(myVehicleRadioBtn.group.data);
-            loc1.push(getFilterData().current);
-            return loc1;
-        }
+   public class ShellView extends FitsSelectableStoreMenuView
+   {
+          
+      public function ShellView() {
+         super();
+      }
 
-        public override function setViewData(arg1:Array):void
-        {
-            super.setViewData(arg1);
-            var loc1:*=Number(arg1.shift());
-            var loc2:*=arg1.splice(0, loc1);
-            var loc3:*=String(arg1.shift());
-            selectFilterSimple(getFitsArray(), loc3, true);
-            setCurrentVehicle(arg1.shift());
-            updateSubFilter(getNation());
-            selectFilter(getTagsArray(), loc2, true, false);
-            dispatchViewChange();
-            return;
-        }
+      public var armorPiercingChkBox:CheckBox = null;
 
-        protected override function onTagsArrayRequest():Array
-        {
-            return [new net.wg.gui.lobby.store.views.base.ViewUIElementVO("ARMOR_PIERCING", this.armorPiercingChkBox), new net.wg.gui.lobby.store.views.base.ViewUIElementVO("ARMOR_PIERCING_CR", this.armorPiercingCRChkBox), new net.wg.gui.lobby.store.views.base.ViewUIElementVO("HOLLOW_CHARGE", this.hollowChargeChkBox), new net.wg.gui.lobby.store.views.base.ViewUIElementVO("HIGH_EXPLOSIVE", this.highExplosiveChkBox)];
-        }
+      public var armorPiercingCRChkBox:CheckBox = null;
 
-        protected override function onFitsArrayRequest():Array
-        {
-            return [new net.wg.gui.lobby.store.views.base.ViewUIElementVO("myVehicleGun", myVehicleRadioBtn), new net.wg.gui.lobby.store.views.base.ViewUIElementVO("myInventoryGuns", this.myInventoryGunsRadioBtn), new net.wg.gui.lobby.store.views.base.ViewUIElementVO("myVehiclesInventoryGuns", this.myVehiclesInventoryGunsRadioBtn), new net.wg.gui.lobby.store.views.base.ViewUIElementVO("otherGuns", this.otherGunsRadioBtn)];
-        }
+      public var hollowChargeChkBox:CheckBox = null;
 
-        protected override function getTagsName():String
-        {
-            return "kinds";
-        }
+      public var highExplosiveChkBox:CheckBox = null;
 
-        protected override function onVehicleFilterUpdated(arg1:scaleform.clik.data.DataProvider, arg2:Number, arg3:int):void
-        {
-            super.onVehicleFilterUpdated(arg1, arg2, arg3);
-            if (arg1.length != 0) 
-            {
-                getFilterData().current = arg1[arg2].data;
-                this.myInventoryGunsRadioBtn.enabled = true;
-                this.myVehiclesInventoryGunsRadioBtn.enabled = true;
-            }
-            else 
-            {
-                this.otherGunsRadioBtn.selected = true;
-                this.myInventoryGunsRadioBtn.enabled = false;
-                this.myVehiclesInventoryGunsRadioBtn.enabled = false;
-            }
-            return;
-        }
+      public var myVehiclesInventoryGunsRadioBtn:RadioButton = null;
 
-        public var armorPiercingChkBox:net.wg.gui.components.controls.CheckBox=null;
+      public var myInventoryGunsRadioBtn:RadioButton = null;
 
-        public var armorPiercingCRChkBox:net.wg.gui.components.controls.CheckBox=null;
+      public var otherGunsRadioBtn:RadioButton = null;
 
-        public var hollowChargeChkBox:net.wg.gui.components.controls.CheckBox=null;
+      override public function resetTemporaryHandlers() : void {
+         resetHandlers(getTagsArray(),null);
+      }
 
-        public var highExplosiveChkBox:net.wg.gui.components.controls.CheckBox=null;
+      override public function getFilter() : Array {
+         var _loc1_:Array = getSelectedFilters(getTagsArray(),true,null);
+         _loc1_.push(myVehicleRadioBtn.group.data);
+         _loc1_.push(getFilterData().current);
+         return _loc1_;
+      }
 
-        public var myVehiclesInventoryGunsRadioBtn:net.wg.gui.components.controls.RadioButton=null;
+      override public function setViewData(param1:Array) : void {
+         super.setViewData(param1);
+         var _loc2_:Number = Number(param1.shift());
+         var _loc3_:Array = param1.splice(0,_loc2_);
+         var _loc4_:String = String(param1.shift());
+         selectFilterSimple(getFitsArray(),_loc4_,true);
+         setCurrentVehicle(param1.shift());
+         updateSubFilter(getNation());
+         selectFilter(getTagsArray(),_loc3_,true,false);
+         dispatchViewChange();
+      }
 
-        public var myInventoryGunsRadioBtn:net.wg.gui.components.controls.RadioButton=null;
+      override protected function onTagsArrayRequest() : Array {
+         return [new ViewUIElementVO("ARMOR_PIERCING",this.armorPiercingChkBox),new ViewUIElementVO("ARMOR_PIERCING_CR",this.armorPiercingCRChkBox),new ViewUIElementVO("HOLLOW_CHARGE",this.hollowChargeChkBox),new ViewUIElementVO("HIGH_EXPLOSIVE",this.highExplosiveChkBox)];
+      }
 
-        public var otherGunsRadioBtn:net.wg.gui.components.controls.RadioButton=null;
-    }
+      override protected function onFitsArrayRequest() : Array {
+         return [new ViewUIElementVO("myVehicleGun",myVehicleRadioBtn),new ViewUIElementVO("myInventoryGuns",this.myInventoryGunsRadioBtn),new ViewUIElementVO("myVehiclesInventoryGuns",this.myVehiclesInventoryGunsRadioBtn),new ViewUIElementVO("otherGuns",this.otherGunsRadioBtn)];
+      }
+
+      override protected function getTagsName() : String {
+         return "kinds";
+      }
+
+      override protected function onVehicleFilterUpdated(param1:DataProvider, param2:Number, param3:int) : void {
+         super.onVehicleFilterUpdated(param1,param2,param3);
+         if(param1.length == 0)
+         {
+            this.otherGunsRadioBtn.selected = true;
+            this.myInventoryGunsRadioBtn.enabled = false;
+            this.myVehiclesInventoryGunsRadioBtn.enabled = false;
+         }
+         else
+         {
+            getFilterData().current = param1[param2].data;
+            this.myInventoryGunsRadioBtn.enabled = true;
+            this.myVehiclesInventoryGunsRadioBtn.enabled = true;
+         }
+      }
+   }
+
 }

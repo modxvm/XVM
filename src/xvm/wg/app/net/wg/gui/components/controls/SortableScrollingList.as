@@ -1,55 +1,56 @@
-package net.wg.gui.components.controls 
+package net.wg.gui.components.controls
 {
-    import scaleform.clik.interfaces.*;
-    
-    public class SortableScrollingList extends net.wg.gui.components.controls.ScrollingListEx
-    {
-        public function SortableScrollingList()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.interfaces.IDataProvider;
+   import flash.events.Event;
 
-        public override function set dataProvider(arg1:scaleform.clik.interfaces.IDataProvider):void
-        {
-            super.dataProvider = arg1;
-            invalidate(SORTING_INVALID);
-            return;
-        }
 
-        protected function setSortMask(arg1:Boolean):void
-        {
-            if (arg1) 
-            {
-                this.sortMask = this.sortMask | Array.DESCENDING;
-            }
-            return;
-        }
+   public class SortableScrollingList extends ScrollingListEx
+   {
+          
+      public function SortableScrollingList() {
+         super();
+      }
 
-        protected override function draw():void
-        {
-            if (isInvalid(SORTING_INVALID)) 
-            {
-                this.sortWithMask(this.sortPropName, this.sortMask);
-            }
-            super.draw();
-            return;
-        }
+      protected static const SORTING_INVALID:String = "sortingInv";
 
-        protected function sortWithMask(arg1:String, arg2:uint):void
-        {
-            if (dataProvider) 
-            {
-                (dataProvider as Array).sortOn(arg1, arg2);
-                invalidateData();
-            }
-            return;
-        }
+      public static const DATA_INVALIDATED:String = "dataInvalidated";
 
-        protected static const SORTING_INVALID:String="sortingInv";
+      protected var sortMask:uint;
 
-        protected var sortMask:uint;
+      protected var sortPropName:String;
 
-        protected var sortPropName:String;
-    }
+      override public function set dataProvider(param1:IDataProvider) : void {
+         super.dataProvider = param1;
+         invalidate(SORTING_INVALID);
+      }
+
+      protected function setSortMask(param1:Boolean) : void {
+         if(param1)
+         {
+            this.sortMask = this.sortMask | Array.DESCENDING;
+         }
+      }
+
+      override protected function draw() : void {
+         if(isInvalid(SORTING_INVALID))
+         {
+            this.sortWithMask(this.sortPropName,this.sortMask);
+         }
+         super.draw();
+      }
+
+      override public function invalidateData() : void {
+         super.invalidateData();
+         dispatchEvent(new Event(DATA_INVALIDATED,true));
+      }
+
+      protected function sortWithMask(param1:String, param2:uint) : void {
+         if(dataProvider)
+         {
+            (dataProvider as Array).sortOn(param1,param2);
+            this.invalidateData();
+         }
+      }
+   }
+
 }

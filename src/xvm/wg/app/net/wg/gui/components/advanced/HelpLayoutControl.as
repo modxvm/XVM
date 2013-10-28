@@ -1,176 +1,150 @@
-package net.wg.gui.components.advanced 
+package net.wg.gui.components.advanced
 {
-    import flash.display.*;
-    import flash.text.*;
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.interfaces.*;
-    import scaleform.clik.core.*;
-    
-    public class HelpLayoutControl extends scaleform.clik.core.UIComponent implements net.wg.infrastructure.interfaces.IDynamicContent
-    {
-        public function HelpLayoutControl()
-        {
-            super();
+   import scaleform.clik.core.UIComponent;
+   import net.wg.infrastructure.interfaces.IDynamicContent;
+   import flash.text.TextField;
+   import flash.display.MovieClip;
+   import net.wg.data.constants.Directions;
+   import flash.text.TextFormat;
+   import flash.text.TextFieldAutoSize;
+   import flash.text.TextFormatAlign;
+
+
+   public class HelpLayoutControl extends UIComponent implements IDynamicContent
+   {
+          
+      public function HelpLayoutControl() {
+         super();
+      }
+
+      public var textField:TextField;
+
+      public var connector:MovieClip;
+
+      public var border:MovieClip;
+
+      private var _text:String = "";
+
+      private var _direction:String = "T";
+
+      private var _borderWidth:Number = 256;
+
+      private var _borderHeight:Number = 256;
+
+      private var _connectorLength:Number = 12;
+
+      override public function dispose() : void {
+         this.textField = null;
+         this.connector = null;
+         this.border = null;
+         super.dispose();
+      }
+
+      public function get connectorLength() : Number {
+         return this._connectorLength;
+      }
+
+      public function set connectorLength(param1:Number) : void {
+         this._connectorLength = param1;
+      }
+
+      public function set borderWidth(param1:Number) : void {
+         this._borderWidth = param1;
+      }
+
+      public function set borderHeight(param1:Number) : void {
+         this._borderHeight = param1;
+      }
+
+      public function set direction(param1:String) : void {
+         App.utils.asserter.assert(!(Directions.LAYOUT_DIRECTIONS.indexOf(param1) == -1),"invalid direction: " + param1);
+         this._direction = param1;
+      }
+
+      public function set text(param1:String) : void {
+         this._text = param1;
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         scaleX = scaleY = 1;
+         this.border.width = this._borderWidth;
+         this.border.height = this._borderHeight;
+         this.setConnectorPosition();
+         this.setTextFieldPosition();
+         super.draw();
+      }
+
+      private function setConnectorPosition() : void {
+         if(this.connector == null)
+         {
             return;
-        }
+         }
+         this.connector.height = this._connectorLength;
+         switch(this._direction)
+         {
+            case "T":
+               this.connector.rotation = 180;
+               this.connector.x = this._borderWidth >> 1;
+               this.connector.y = 0;
+               break;
+            case "R":
+               this.connector.rotation = -90;
+               this.connector.x = this._borderWidth;
+               this.connector.y = (this._borderHeight >> 1) - (this.connector.height >> 1);
+               break;
+            case "B":
+               this.connector.x = this._borderWidth >> 1;
+               this.connector.y = this._borderHeight;
+               break;
+            case "L":
+               this.connector.rotation = 90;
+               this.connector.x = 0;
+               this.connector.y = (this._borderHeight >> 1) - (this.connector.height >> 1);
+               break;
+         }
+      }
 
-        public function get connectorLength():Number
-        {
-            return this._connectorLength;
-        }
-
-        public function set connectorLength(arg1:Number):void
-        {
-            this._connectorLength = arg1;
+      private function setTextFieldPosition() : void {
+         if(this.textField == null)
+         {
             return;
-        }
+         }
+         this.textField.wordWrap = true;
+         var _loc1_:TextFormat = new TextFormat();
+         switch(this._direction)
+         {
+            case "T":
+               this.textField.autoSize = TextFieldAutoSize.CENTER;
+               _loc1_.align = TextFormatAlign.CENTER;
+               this.textField.text = this._text;
+               this.textField.x = (this._borderWidth >> 1) - (this.textField.width >> 1);
+               this.textField.y = -(this.connector.height + this.textField.textHeight + 2);
+               break;
+            case "R":
+               this.textField.autoSize = TextFieldAutoSize.LEFT;
+               _loc1_.align = TextFormatAlign.LEFT;
+               this.textField.text = this._text;
+               this.textField.x = this._borderWidth + this.connector.width;
+               this.textField.y = (this._borderHeight >> 1) - (this.textField.textHeight >> 1) - 4;
+               break;
+            case "B":
+               this.textField.autoSize = TextFieldAutoSize.CENTER;
+               _loc1_.align = TextFormatAlign.CENTER;
+               this.textField.text = this._text;
+               this.textField.x = (this._borderWidth >> 1) - (this.textField.width >> 1);
+               this.textField.y = this._borderHeight + this.connector.height + 2;
+               break;
+            case "L":
+               this.textField.autoSize = TextFieldAutoSize.RIGHT;
+               _loc1_.align = TextFormatAlign.RIGHT;
+               this.textField.text = this._text;
+               this.textField.x = -(this.connector.width + this.textField.width);
+               this.textField.y = (this._borderHeight >> 1) - (this.textField.textHeight >> 1) - 4;
+               break;
+         }
+         this.textField.setTextFormat(_loc1_);
+      }
+   }
 
-        public function set borderWidth(arg1:Number):void
-        {
-            this._borderWidth = arg1;
-            return;
-        }
-
-        public function set borderHeight(arg1:Number):void
-        {
-            this._borderHeight = arg1;
-            return;
-        }
-
-        public function set direction(arg1:String):void
-        {
-            App.utils.asserter.assert(!(net.wg.data.constants.Directions.LAYOUT_DIRECTIONS.indexOf(arg1) == -1), "invalid direction: " + arg1);
-            this._direction = arg1;
-            return;
-        }
-
-        public function set text(arg1:String):void
-        {
-            this._text = arg1;
-            return;
-        }
-
-        protected override function draw():void
-        {
-            super.draw();
-            var loc1:*;
-            scaleY = loc1 = 1;
-            scaleX = loc1;
-            this.border.width = this._borderWidth;
-            this.border.height = this._borderHeight;
-            this.setConnectorPosition();
-            this.setTextFieldPosition();
-            super.draw();
-            return;
-        }
-
-        internal function setConnectorPosition():void
-        {
-            if (this.connector == null) 
-            {
-                return;
-            }
-            this.connector.height = this._connectorLength;
-            var loc1:*=this._direction;
-            switch (loc1) 
-            {
-                case "T":
-                {
-                    this.connector.rotation = 180;
-                    this.connector.x = this._borderWidth >> 1;
-                    this.connector.y = 0;
-                    break;
-                }
-                case "R":
-                {
-                    this.connector.rotation = -90;
-                    this.connector.x = this._borderWidth;
-                    this.connector.y = (this._borderHeight >> 1) - (this.connector.height >> 1);
-                    break;
-                }
-                case "B":
-                {
-                    this.connector.x = this._borderWidth >> 1;
-                    this.connector.y = this._borderHeight;
-                    break;
-                }
-                case "L":
-                {
-                    this.connector.rotation = 90;
-                    this.connector.x = 0;
-                    this.connector.y = (this._borderHeight >> 1) - (this.connector.height >> 1);
-                    break;
-                }
-            }
-            return;
-        }
-
-        internal function setTextFieldPosition():void
-        {
-            if (this.textField == null) 
-            {
-                return;
-            }
-            this.textField.wordWrap = true;
-            var loc1:*=new flash.text.TextFormat();
-            var loc2:*=this._direction;
-            switch (loc2) 
-            {
-                case "T":
-                {
-                    this.textField.autoSize = flash.text.TextFieldAutoSize.CENTER;
-                    loc1.align = flash.text.TextFormatAlign.CENTER;
-                    this.textField.text = this._text;
-                    this.textField.x = (this._borderWidth >> 1) - (this.textField.width >> 1);
-                    this.textField.y = -(this.connector.height + this.textField.textHeight + 2);
-                    break;
-                }
-                case "R":
-                {
-                    this.textField.autoSize = flash.text.TextFieldAutoSize.LEFT;
-                    loc1.align = flash.text.TextFormatAlign.LEFT;
-                    this.textField.text = this._text;
-                    this.textField.x = this._borderWidth + this.connector.width;
-                    this.textField.y = (this._borderHeight >> 1) - (this.textField.textHeight >> 1) - 4;
-                    break;
-                }
-                case "B":
-                {
-                    this.textField.autoSize = flash.text.TextFieldAutoSize.CENTER;
-                    loc1.align = flash.text.TextFormatAlign.CENTER;
-                    this.textField.text = this._text;
-                    this.textField.x = (this._borderWidth >> 1) - (this.textField.width >> 1);
-                    this.textField.y = this._borderHeight + this.connector.height + 2;
-                    break;
-                }
-                case "L":
-                {
-                    this.textField.autoSize = flash.text.TextFieldAutoSize.RIGHT;
-                    loc1.align = flash.text.TextFormatAlign.RIGHT;
-                    this.textField.text = this._text;
-                    this.textField.x = -(this.connector.width + this.textField.width);
-                    this.textField.y = (this._borderHeight >> 1) - (this.textField.textHeight >> 1) - 4;
-                    break;
-                }
-            }
-            this.textField.setTextFormat(loc1);
-            return;
-        }
-
-        public var textField:flash.text.TextField;
-
-        public var connector:flash.display.MovieClip;
-
-        public var border:flash.display.MovieClip;
-
-        internal var _text:String="";
-
-        internal var _direction:String="T";
-
-        internal var _borderWidth:Number=256;
-
-        internal var _borderHeight:Number=256;
-
-        internal var _connectorLength:Number=12;
-    }
 }

@@ -1,33 +1,32 @@
-package net.wg.infrastructure.events 
+package net.wg.infrastructure.events
 {
-    import flash.events.*;
-    
-    public class VoiceChatEvent extends flash.events.Event
-    {
-        public function VoiceChatEvent(arg1:String, arg2:uint, arg3:Boolean)
-        {
-            super(arg1);
-            this._accountDBID = arg2;
-            this._himself = arg3;
-            return;
-        }
+   import flash.events.Event;
 
-        public function getAccountDBID():uint
-        {
-            return this._accountDBID;
-        }
 
-        public function isHimself():Boolean
-        {
-            return this._himself;
-        }
+   public class VoiceChatEvent extends Event
+   {
+          
+      public function VoiceChatEvent(param1:String, param2:Number, param3:Boolean) {
+         super(param1);
+         this._accountDBID = param2;
+         this._himself = param3;
+      }
 
-        public static const START_SPEAKING:String="startSpeaking";
+      public static const START_SPEAKING:String = "startSpeaking";
 
-        public static const STOP_SPEAKING:String="stopSpeaking";
+      public static const STOP_SPEAKING:String = "stopSpeaking";
 
-        internal var _accountDBID:uint;
+      private var _accountDBID:Number;
 
-        internal var _himself:Boolean;
-    }
+      private var _himself:Boolean;
+
+      public function getAccountDBID() : Number {
+         return this._accountDBID;
+      }
+
+      public function isHimself() : Boolean {
+         return this._himself;
+      }
+   }
+
 }

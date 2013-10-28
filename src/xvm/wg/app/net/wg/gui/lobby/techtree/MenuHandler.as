@@ -1,184 +1,150 @@
-package net.wg.gui.lobby.techtree 
+package net.wg.gui.lobby.techtree
 {
-    import __AS3__.vec.*;
-    import net.wg.data.VO.*;
-    import net.wg.data.components.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.events.*;
-    import net.wg.gui.lobby.techtree.constants.*;
-    import net.wg.gui.lobby.techtree.nodes.*;
-    import net.wg.infrastructure.interfaces.*;
-    
-    public class MenuHandler extends Object
-    {
-        public function MenuHandler()
-        {
-            super();
-            this.currentMenu = null;
-            return;
-        }
+   import net.wg.gui.components.controls.ContextMenu;
+   import net.wg.gui.events.ContextMenuEvent;
+   import net.wg.gui.lobby.techtree.nodes.Renderer;
+   import net.wg.infrastructure.interfaces.IContextItem;
+   import net.wg.data.components.ContextItem;
+   import net.wg.gui.lobby.techtree.constants.ActionName;
+   import net.wg.data.VO.SeparateItem;
+   import __AS3__.vec.Vector;
+   import net.wg.gui.lobby.techtree.nodes.ResearchItem;
 
-        public function hideMenu():void
-        {
-            if (this.currentMenu) 
+
+   public class MenuHandler extends Object
+   {
+          
+      public function MenuHandler() {
+         super();
+         this.currentMenu = null;
+      }
+
+      private static var instance:MenuHandler;
+
+      public static function getInstance() : MenuHandler {
+         if(instance == null)
+         {
+            instance = new MenuHandler();
+         }
+         return instance;
+      }
+
+      private var currentMenu:ContextMenu;
+
+      public function hideMenu() : void {
+         if(this.currentMenu)
+         {
+            this.currentMenu.removeEventListener(ContextMenuEvent.ON_MENU_RELEASE_OUTSIDE,this.handleMenuReleaseOutside);
+            this.currentMenu.removeEventListener(ContextMenuEvent.ON_ITEM_SELECT,this.handleVehicleMenuAction);
+            this.currentMenu.removeEventListener(ContextMenuEvent.ON_ITEM_SELECT,this.handleItemMenuAction);
+         }
+         if(App.contextMenuMgr != null)
+         {
+            App.contextMenuMgr.hide();
+         }
+         this.currentMenu = null;
+      }
+
+      public function showNationTreeMenu(param1:Renderer) : void {
+         var _loc2_:Vector.<IContextItem> = Vector.<IContextItem>([new ContextItem(ActionName.VEHICLE_INFO,MENU.CONTEXTMENU_VEHICLEINFOEX),new SeparateItem(),new ContextItem(ActionName.UNLOCK,MENU.CONTEXTMENU_UNLOCK,{"enabled":(!param1.isPremium()) && (param1.isAvailable4Unlock())}),new ContextItem(ActionName.BUY,MENU.CONTEXTMENU_BUY,{"enabled":param1.isAvailable4Buy()}),new SeparateItem(),new ContextItem(ActionName.SELL,MENU.CONTEXTMENU_SELL,{"enabled":param1.isAvailable4Sell()})]);
+         var _loc3_:ContextMenu = this.showMenu(param1,_loc2_);
+         if(_loc3_ != null)
+         {
+            _loc3_.setMemberItemData(param1);
+            _loc3_.addEventListener(ContextMenuEvent.ON_MENU_RELEASE_OUTSIDE,this.handleMenuReleaseOutside,false,0,true);
+            _loc3_.addEventListener(ContextMenuEvent.ON_ITEM_SELECT,this.handleVehicleMenuAction,false,0,true);
+         }
+      }
+
+      public function showResearchRootMenu(param1:Renderer) : void {
+         this.showNationTreeMenu(param1);
+      }
+
+      public function showResearchItemMenu(param1:ResearchItem) : void {
+         var _loc2_:Vector.<IContextItem> = Vector.<IContextItem>([new ContextItem(ActionName.MODULE_INFO,MENU.CONTEXTMENU_MODULEINFO),new SeparateItem(),new ContextItem(ActionName.UNLOCK,MENU.CONTEXTMENU_UNLOCK,{"enabled":param1.isAvailable4Unlock()})]);
+         if(param1.isUnlocked())
+         {
+            if((param1.inInventory()) || (param1.isInstalled()))
             {
-                this.currentMenu.removeEventListener(net.wg.gui.events.ContextMenuEvent.ON_MENU_RELEASE_OUTSIDE, this.handleMenuReleaseOutside);
-                this.currentMenu.removeEventListener(net.wg.gui.events.ContextMenuEvent.ON_ITEM_SELECT, this.handleVehicleMenuAction);
-                this.currentMenu.removeEventListener(net.wg.gui.events.ContextMenuEvent.ON_ITEM_SELECT, this.handleItemMenuAction);
+               _loc2_.push(new ContextItem(ActionName.EQUIP,MENU.CONTEXTMENU_EQUIP,{"enabled":param1.isAvailable4Install()}),new SeparateItem(),new ContextItem(ActionName.SELL,MENU.CONTEXTMENU_SELLFROMINVENTORY,{"enabled":!param1.isInstalled()}));
             }
-            if (App.contextMenuMgr != null) 
+            else
             {
-                App.contextMenuMgr.hide();
+               _loc2_.push(new ContextItem(ActionName.BUY_AND_EQUIP,MENU.CONTEXTMENU_BUYANDEQUIP,{"enabled":param1.isAvailable4Buy()}),new SeparateItem(),new ContextItem(ActionName.SELL,MENU.CONTEXTMENU_SELLFROMINVENTORY,{"enabled":param1.isAvailable4Sell()}));
             }
-            this.currentMenu = null;
-            return;
-        }
+         }
+         else
+         {
+            _loc2_.push(new ContextItem(ActionName.BUY_AND_EQUIP,MENU.CONTEXTMENU_BUYANDEQUIP,{"enabled":false}),new SeparateItem(),new ContextItem(ActionName.SELL,MENU.CONTEXTMENU_SELLFROMINVENTORY,{"enabled":false}));
+         }
+         var _loc3_:ContextMenu = this.showMenu(param1,_loc2_);
+         if(_loc3_ != null)
+         {
+            _loc3_.setMemberItemData(param1);
+            _loc3_.addEventListener(ContextMenuEvent.ON_MENU_RELEASE_OUTSIDE,this.handleMenuReleaseOutside,false,0,true);
+            _loc3_.addEventListener(ContextMenuEvent.ON_ITEM_SELECT,this.handleItemMenuAction,false,0,true);
+         }
+      }
 
-        public function showNationTreeMenu(arg1:net.wg.gui.lobby.techtree.nodes.Renderer):void
-        {
-            var loc1:*=Vector.<net.wg.infrastructure.interfaces.IContextItem>([new net.wg.data.components.ContextItem(net.wg.gui.lobby.techtree.constants.ActionName.VEHICLE_INFO, MENU.CONTEXTMENU_VEHICLEINFOEX), new net.wg.data.VO.SeparateItem(), new net.wg.data.components.ContextItem(net.wg.gui.lobby.techtree.constants.ActionName.UNLOCK, MENU.CONTEXTMENU_UNLOCK, {"enabled":!arg1.isPremium() && arg1.isAvailable4Unlock()}), new net.wg.data.components.ContextItem(net.wg.gui.lobby.techtree.constants.ActionName.BUY, MENU.CONTEXTMENU_BUY, {"enabled":arg1.isAvailable4Buy()}), new net.wg.data.VO.SeparateItem(), new net.wg.data.components.ContextItem(net.wg.gui.lobby.techtree.constants.ActionName.SELL, MENU.CONTEXTMENU_SELL, {"enabled":arg1.isAvailable4Sell()})]);
-            var loc2:*=this.showMenu(arg1, loc1);
-            if (loc2 != null) 
+      private function showMenu(param1:Renderer, param2:Vector.<IContextItem>) : ContextMenu {
+         this.hideMenu();
+         return App.contextMenuMgr != null?ContextMenu(App.contextMenuMgr.show(param2,param1)):null;
+      }
+
+      private function handleMenuReleaseOutside(param1:ContextMenuEvent) : void {
+         this.hideMenu();
+      }
+
+      private function handleVehicleMenuAction(param1:ContextMenuEvent) : void {
+         var _loc2_:String = param1.id;
+         var _loc3_:Renderer = param1.memberItemData as Renderer;
+         if(_loc3_ != null)
+         {
+            switch(_loc2_)
             {
-                loc2.setMemberItemData(arg1);
-                loc2.addEventListener(net.wg.gui.events.ContextMenuEvent.ON_MENU_RELEASE_OUTSIDE, this.handleMenuReleaseOutside, false, 0, true);
-                loc2.addEventListener(net.wg.gui.events.ContextMenuEvent.ON_ITEM_SELECT, this.handleVehicleMenuAction, false, 0, true);
+               case ActionName.VEHICLE_INFO:
+                  _loc3_.click2Info();
+                  break;
+               case ActionName.UNLOCK:
+                  _loc3_.click2Unlock();
+                  break;
+               case ActionName.BUY:
+                  _loc3_.click2Buy();
+                  break;
+               case ActionName.SELL:
+                  _loc3_.click2Sell();
+                  break;
             }
-            return;
-        }
+         }
+         this.hideMenu();
+      }
 
-        public function showResearchRootMenu(arg1:net.wg.gui.lobby.techtree.nodes.Renderer):void
-        {
-            this.showNationTreeMenu(arg1);
-            return;
-        }
-
-        public function showResearchItemMenu(arg1:net.wg.gui.lobby.techtree.nodes.ResearchItem):void
-        {
-            var loc1:*=Vector.<net.wg.infrastructure.interfaces.IContextItem>([new net.wg.data.components.ContextItem(net.wg.gui.lobby.techtree.constants.ActionName.MODULE_INFO, MENU.CONTEXTMENU_MODULEINFO), new net.wg.data.VO.SeparateItem(), new net.wg.data.components.ContextItem(net.wg.gui.lobby.techtree.constants.ActionName.UNLOCK, MENU.CONTEXTMENU_UNLOCK, {"enabled":arg1.isAvailable4Unlock()})]);
-            if (arg1.isUnlocked()) 
+      private function handleItemMenuAction(param1:ContextMenuEvent) : void {
+         var _loc2_:String = param1.id;
+         var _loc3_:ResearchItem = param1.memberItemData as ResearchItem;
+         if(_loc3_ != null)
+         {
+            switch(_loc2_)
             {
-                if (arg1.inInventory() || arg1.isInstalled()) 
-                {
-                    loc1.push(new net.wg.data.components.ContextItem(net.wg.gui.lobby.techtree.constants.ActionName.EQUIP, MENU.CONTEXTMENU_EQUIP, {"enabled":arg1.isAvailable4Install()}), new net.wg.data.VO.SeparateItem(), new net.wg.data.components.ContextItem(net.wg.gui.lobby.techtree.constants.ActionName.SELL, MENU.CONTEXTMENU_SELLFROMINVENTORY, {"enabled":!arg1.isInstalled()}));
-                }
-                else 
-                {
-                    loc1.push(new net.wg.data.components.ContextItem(net.wg.gui.lobby.techtree.constants.ActionName.BUY_AND_EQUIP, MENU.CONTEXTMENU_BUYANDEQUIP, {"enabled":arg1.isAvailable4Buy()}), new net.wg.data.VO.SeparateItem(), new net.wg.data.components.ContextItem(net.wg.gui.lobby.techtree.constants.ActionName.SELL, MENU.CONTEXTMENU_SELLFROMINVENTORY, {"enabled":arg1.isAvailable4Sell()}));
-                }
+               case ActionName.MODULE_INFO:
+                  _loc3_.click2Info();
+                  break;
+               case ActionName.UNLOCK:
+                  _loc3_.click2Unlock();
+                  break;
+               case ActionName.BUY_AND_EQUIP:
+                  _loc3_.click2Buy();
+                  break;
+               case ActionName.EQUIP:
+                  _loc3_.click2Install();
+                  break;
+               case ActionName.SELL:
+                  _loc3_.click2Sell();
+                  break;
             }
-            else 
-            {
-                loc1.push(new net.wg.data.components.ContextItem(net.wg.gui.lobby.techtree.constants.ActionName.BUY_AND_EQUIP, MENU.CONTEXTMENU_BUYANDEQUIP, {"enabled":false}), new net.wg.data.VO.SeparateItem(), new net.wg.data.components.ContextItem(net.wg.gui.lobby.techtree.constants.ActionName.SELL, MENU.CONTEXTMENU_SELLFROMINVENTORY, {"enabled":false}));
-            }
-            var loc2:*=this.showMenu(arg1, loc1);
-            if (loc2 != null) 
-            {
-                loc2.setMemberItemData(arg1);
-                loc2.addEventListener(net.wg.gui.events.ContextMenuEvent.ON_MENU_RELEASE_OUTSIDE, this.handleMenuReleaseOutside, false, 0, true);
-                loc2.addEventListener(net.wg.gui.events.ContextMenuEvent.ON_ITEM_SELECT, this.handleItemMenuAction, false, 0, true);
-            }
-            return;
-        }
+         }
+         this.hideMenu();
+      }
+   }
 
-        internal function showMenu(arg1:net.wg.gui.lobby.techtree.nodes.Renderer, arg2:__AS3__.vec.Vector.<net.wg.infrastructure.interfaces.IContextItem>):net.wg.gui.components.controls.ContextMenu
-        {
-            this.hideMenu();
-            return App.contextMenuMgr == null ? null : net.wg.gui.components.controls.ContextMenu(App.contextMenuMgr.show(arg2, arg1));
-        }
-
-        internal function handleMenuReleaseOutside(arg1:net.wg.gui.events.ContextMenuEvent):void
-        {
-            this.hideMenu();
-            return;
-        }
-
-        internal function handleVehicleMenuAction(arg1:net.wg.gui.events.ContextMenuEvent):void
-        {
-            var loc1:*=arg1.id;
-            var loc2:*=arg1.memberItemData as net.wg.gui.lobby.techtree.nodes.Renderer;
-            if (loc2 != null) 
-            {
-                var loc3:*=loc1;
-                switch (loc3) 
-                {
-                    case net.wg.gui.lobby.techtree.constants.ActionName.VEHICLE_INFO:
-                    {
-                        loc2.click2Info();
-                        break;
-                    }
-                    case net.wg.gui.lobby.techtree.constants.ActionName.UNLOCK:
-                    {
-                        loc2.click2Unlock();
-                        break;
-                    }
-                    case net.wg.gui.lobby.techtree.constants.ActionName.BUY:
-                    {
-                        loc2.click2Buy();
-                        break;
-                    }
-                    case net.wg.gui.lobby.techtree.constants.ActionName.SELL:
-                    {
-                        loc2.click2Sell();
-                        break;
-                    }
-                }
-            }
-            this.hideMenu();
-            return;
-        }
-
-        internal function handleItemMenuAction(arg1:net.wg.gui.events.ContextMenuEvent):void
-        {
-            var loc1:*=arg1.id;
-            var loc2:*=arg1.memberItemData as net.wg.gui.lobby.techtree.nodes.ResearchItem;
-            if (loc2 != null) 
-            {
-                var loc3:*=loc1;
-                switch (loc3) 
-                {
-                    case net.wg.gui.lobby.techtree.constants.ActionName.MODULE_INFO:
-                    {
-                        loc2.click2Info();
-                        break;
-                    }
-                    case net.wg.gui.lobby.techtree.constants.ActionName.UNLOCK:
-                    {
-                        loc2.click2Unlock();
-                        break;
-                    }
-                    case net.wg.gui.lobby.techtree.constants.ActionName.BUY_AND_EQUIP:
-                    {
-                        loc2.click2Buy();
-                        break;
-                    }
-                    case net.wg.gui.lobby.techtree.constants.ActionName.EQUIP:
-                    {
-                        loc2.click2Install();
-                        break;
-                    }
-                    case net.wg.gui.lobby.techtree.constants.ActionName.SELL:
-                    {
-                        loc2.click2Sell();
-                        break;
-                    }
-                }
-            }
-            this.hideMenu();
-            return;
-        }
-
-        public static function getInstance():net.wg.gui.lobby.techtree.MenuHandler
-        {
-            if (instance == null) 
-            {
-                instance = new MenuHandler();
-            }
-            return instance;
-        }
-
-        internal var currentMenu:net.wg.gui.components.controls.ContextMenu;
-
-        internal static var instance:net.wg.gui.lobby.techtree.MenuHandler;
-    }
 }

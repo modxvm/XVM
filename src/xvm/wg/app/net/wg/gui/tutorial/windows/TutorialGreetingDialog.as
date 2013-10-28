@@ -1,93 +1,85 @@
-package net.wg.gui.tutorial.windows 
+package net.wg.gui.tutorial.windows
 {
-    import flash.text.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.tutorial.controls.*;
-    
-    public class TutorialGreetingDialog extends net.wg.gui.tutorial.windows.TutorialDialog
-    {
-        public function TutorialGreetingDialog()
-        {
-            super();
-            canClose = false;
-            canDrag = false;
-            isModal = true;
-            return;
-        }
+   import net.wg.gui.components.controls.UILoaderAlt;
+   import net.wg.gui.tutorial.controls.BattleBonusItem;
+   import flash.text.TextField;
 
-        protected override function drawData():void
-        {
-            super.drawData();
-            this.imageLoader.source = _data.imageUrl;
-            messageField.htmlText = _data.message;
-            this.timeField.htmlText = _data.timeNoteValue;
-            this.updateBonuses();
-            return;
-        }
 
-        internal function updateBonuses():void
-        {
-            var loc2:*=NaN;
-            var loc3:*=NaN;
-            var loc4:*=0;
-            var loc5:*=null;
-            var loc6:*=null;
-            var loc1:*=_data ? _data.bonuses : null;
-            if (this.bonusItem && loc1) 
+   public class TutorialGreetingDialog extends TutorialDialog
+   {
+          
+      public function TutorialGreetingDialog() {
+         super();
+         canClose = false;
+         canDrag = false;
+         isModal = true;
+      }
+
+      public var imageLoader:UILoaderAlt;
+
+      public var bonusItem:BattleBonusItem;
+
+      public var timeField:TextField;
+
+      public var restartHintField:TextField;
+
+      override protected function drawData() : void {
+         super.drawData();
+         this.imageLoader.source = _data.imageUrl;
+         messageField.htmlText = _data.message;
+         this.timeField.htmlText = _data.timeNoteValue;
+         this.updateBonuses();
+      }
+
+      private function updateBonuses() : void {
+         var _loc2_:* = NaN;
+         var _loc3_:* = NaN;
+         var _loc4_:* = 0;
+         var _loc5_:Object = null;
+         var _loc6_:Object = null;
+         var _loc1_:Array = _data?_data.bonuses:null;
+         if((this.bonusItem) && (_loc1_))
+         {
+            _loc2_ = 0;
+            _loc3_ = 0;
+            _loc4_ = 0;
+            while(_loc4_ < _loc1_.length)
             {
-                loc2 = 0;
-                loc3 = 0;
-                loc4 = 0;
-                while (loc4 < loc1.length) 
-                {
-                    loc5 = loc1[loc4];
-                    if (!Boolean(loc5.received)) 
-                    {
-                        if ((loc6 = loc5.values).credits) 
-                        {
-                            loc2 = loc2 + Number(loc6.credits);
-                        }
-                        if (loc6.freeXP) 
-                        {
-                            loc3 = loc3 + Number(loc6.freeXP);
-                        }
-                    }
-                    ++loc4;
-                }
-                this.bonusItem.setBonuses(loc2, loc3);
+               _loc5_ = _loc1_[_loc4_];
+               if(!Boolean(_loc5_.received))
+               {
+                  _loc6_ = _loc5_.values;
+                  if(_loc6_.credits)
+                  {
+                     _loc2_ = _loc2_ + Number(_loc6_.credits);
+                  }
+                  if(_loc6_.freeXP)
+                  {
+                     _loc3_ = _loc3_ + Number(_loc6_.freeXP);
+                  }
+               }
+               _loc4_++;
             }
-            return;
-        }
+            this.bonusItem.setBonuses(_loc2_,_loc3_);
+         }
+      }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.restartHintField.text = App.utils.locale.makeString(BATTLE_TUTORIAL.DIALOGS_GREETING_RESTART_HINT_TEXT);
-            App.utils.focusHandler.setFocus(submitBtn);
-            return;
-        }
+      override protected function configUI() : void {
+         super.configUI();
+         this.restartHintField.text = App.utils.locale.makeString(BATTLE_TUTORIAL.DIALOGS_GREETING_RESTART_HINT_TEXT);
+         App.utils.focusHandler.setFocus(submitBtn);
+      }
 
-        protected override function onPopulate():void
-        {
-            super.onPopulate();
-            window.useBottomBtns = true;
-            window.title = BATTLE_TUTORIAL.DIALOGS_GREETING_TITLE;
-            return;
-        }
+      override protected function onPopulate() : void {
+         super.onPopulate();
+         window.useBottomBtns = true;
+         window.title = BATTLE_TUTORIAL.DIALOGS_GREETING_TITLE;
+      }
 
-        protected override function onDispose():void
-        {
-            super.onDispose();
-            this.imageLoader.dispose();
-            return;
-        }
+      override protected function onDispose() : void {
+         super.onDispose();
+         this.imageLoader.dispose();
+      }
+   }
 
-        public var imageLoader:net.wg.gui.components.controls.UILoaderAlt;
-
-        public var bonusItem:net.wg.gui.tutorial.controls.BattleBonusItem;
-
-        public var timeField:flash.text.TextField;
-
-        public var restartHintField:flash.text.TextField;
-    }
 }

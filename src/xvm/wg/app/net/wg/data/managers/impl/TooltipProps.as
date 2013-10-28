@@ -1,74 +1,68 @@
-package net.wg.data.managers.impl 
+package net.wg.data.managers.impl
 {
-    import net.wg.data.constants.*;
-    import net.wg.data.managers.*;
-    
-    public class TooltipProps extends Object implements net.wg.data.managers.ITooltipProps
-    {
-        public function TooltipProps(arg1:String, arg2:Number, arg3:Number, arg4:Number=0, arg5:Number=-1, arg6:Number=0, arg7:Number=0)
-        {
-            super();
-            this._type = arg1;
-            this._x = arg2;
-            this._y = arg3;
-            this._minWidth = arg4;
-            this._drawDelay = arg5;
-            this._showDelay = arg6;
-            this._maxWidth = arg7;
-            return;
-        }
+   import net.wg.data.managers.ITooltipProps;
+   import net.wg.data.constants.Tooltips;
 
-        public function get type():String
-        {
-            return this._type;
-        }
 
-        public function get x():Number
-        {
-            return this._x;
-        }
+   public class TooltipProps extends Object implements ITooltipProps
+   {
+          
+      public function TooltipProps(param1:String, param2:Number, param3:Number, param4:Number=undefined, param5:Number=undefined, param6:Number=undefined, param7:Number=undefined) {
+         super();
+         this._type = param1;
+         this._x = param2;
+         this._y = param3;
+         this._minWidth = param4;
+         this._drawDelay = param5;
+         this._showDelay = param6;
+         this._maxWidth = param7;
+      }
 
-        public function get y():Number
-        {
-            return this._y;
-        }
+      public static const WARNING:TooltipProps = new TooltipProps(Tooltips.TYPE_WARNING,0,0,0,-1,0,0);
 
-        public function get minWidth():Number
-        {
-            return this._minWidth;
-        }
+      public static const DEFAULT:TooltipProps = new TooltipProps(Tooltips.TYPE_INFO,0,0,0,-1,0,0);
 
-        public function get drawDelay():Number
-        {
-            return this._drawDelay;
-        }
+      private var _type:String = null;
 
-        public function get showDelay():Number
-        {
-            return this._showDelay;
-        }
+      private var _x:Number = 0;
 
-        public function get maxWidth():Number
-        {
-            return this._maxWidth;
-        }
+      private var _y:Number = 0;
 
-        public static const WARNING:net.wg.data.managers.impl.TooltipProps=new TooltipProps(net.wg.data.constants.Tooltips.TYPE_WARNING, 0, 0, 0, -1, 0, 0);
+      private var _minWidth:Number = 0;
 
-        public static const DEFAULT:net.wg.data.managers.impl.TooltipProps=new TooltipProps(net.wg.data.constants.Tooltips.TYPE_INFO, 0, 0, 0, -1, 0, 0);
+      private var _drawDelay:Number = -1;
 
-        internal var _type:String=null;
+      private var _showDelay:Number = 0;
 
-        internal var _x:Number=0;
+      private var _maxWidth:Number = 0;
 
-        internal var _y:Number=0;
+      public function get type() : String {
+         return this._type;
+      }
 
-        internal var _minWidth:Number=0;
+      public function get x() : Number {
+         return this._x;
+      }
 
-        internal var _drawDelay:Number=-1;
+      public function get y() : Number {
+         return this._y;
+      }
 
-        internal var _showDelay:Number=0;
+      public function get minWidth() : Number {
+         return this._minWidth;
+      }
 
-        internal var _maxWidth:Number=0;
-    }
+      public function get drawDelay() : Number {
+         return this._drawDelay;
+      }
+
+      public function get showDelay() : Number {
+         return this._showDelay;
+      }
+
+      public function get maxWidth() : Number {
+         return this._maxWidth;
+      }
+   }
+
 }

@@ -1,1008 +1,957 @@
-package net.wg.gui.lobby.techtree.math 
+package net.wg.gui.lobby.techtree.math
 {
-    public class ADG_ItemLevelsBuilder extends Object
-    {
-        public function ADG_ItemLevelsBuilder(arg1:Number, arg2:Number)
-        {
-            super();
-            if (arg1 > 0) 
-            {
-                this.matrixDimension = arg1;
-                this.createEmptyAdjacencyMatrix();
-            }
-            this.fixedPaths = {};
-            this.maxLevelWidth = arg2;
-            return;
-        }
 
-        internal function searchMaxPathLegth(arg1:Number, arg2:Number, arg3:Array, arg4:Number):void
-        {
-            if (arg4 > 20) 
-            {
-                this.isCyclicReference = true;
-                this.maxPaths[arg2] = -1;
-                return;
-            }
-            if (arg3[arg1] == -1 && (this.maxPaths[arg2] < arg4 || this.maxPaths[arg2] == undefined)) 
-            {
-                this.maxPaths[arg2] = arg4;
-                if (arg4 > this.widthPartitioning) 
-                {
-                    this.widthPartitioning = arg4;
-                }
-                return;
-            }
-            var loc1:*=arg3.length;
-            var loc2:*=0;
-            while (loc2 < loc1) 
-            {
-                if (loc2 != arg1) 
-                {
-                    if (arg3[loc2] == -1) 
-                    {
-                        this.searchMaxPathLegth(arg1, arg2, this.adjacencyMatrix[loc2], arg4 + 1);
-                    }
-                }
-                ++loc2;
-            }
-            return;
-        }
 
-        internal function distributionOfVerticesOnLevels():void
-        {
-            var loc1:*=NaN;
-            var loc3:*=NaN;
-            var loc6:*=null;
-            var loc7:*=NaN;
-            var loc8:*=null;
-            var loc9:*=NaN;
-            this.maxPaths = new Array(this.matrixDimension);
-            this.widthPartitioning = 0;
-            this.maxPaths[0] = 0;
-            loc1 = 1;
-            while (loc1 < this.matrixDimension) 
+   public class ADG_ItemLevelsBuilder extends Object
+   {
+          
+      public function ADG_ItemLevelsBuilder(param1:Number, param2:Number) {
+         super();
+         if(param1 > 0)
+         {
+            this.matrixDimension = param1;
+            this.createEmptyAdjacencyMatrix();
+         }
+         this.fixedPaths = {};
+         this.maxLevelWidth = param2;
+      }
+
+      private var matrixDimension:Number;
+
+      private var widthPartitioning:Number;
+
+      private var maxLevelWidth:Number;
+
+      private var adjacencyMatrix:Array;
+
+      private var maxPaths:Array;
+
+      private var levels:Array;
+
+      private var fixedPaths:Object;
+
+      private var levelByNode:Array;
+
+      private var parentLevelIdxs:Object;
+
+      private var childrenLevelIdxs:Object;
+
+      private var isCyclicReference:Boolean = false;
+
+      public function get matrix() : Array {
+         return this.adjacencyMatrix;
+      }
+
+      public function get nodesByLevel() : Array {
+         return this.levels;
+      }
+
+      public function get levelDimension() : MatrixPosition {
+         var _loc3_:* = NaN;
+         var _loc4_:Array = null;
+         var _loc1_:Number = this.levels.length;
+         var _loc2_:Number = 0;
+         var _loc5_:Number = 1;
+         while(_loc5_ < _loc1_)
+         {
+            _loc4_ = this.levels[_loc5_];
+            _loc3_ = _loc4_.length;
+            while(_loc3_ >= 0)
             {
-                this.searchMaxPathLegth(0, loc1, this.adjacencyMatrix[loc1], 1);
-                ++loc1;
+               if(_loc4_[_loc3_] != null)
+               {
+                  break;
+               }
+               _loc3_--;
             }
-            var loc2:*=0;
-            this.levels = new Array(this.widthPartitioning);
-            this.addLevelItem(0, 0, false, false);
-            var loc4:*=this.maxPaths.length;
-            var loc5:*={};
-            loc1 = 1;
-            while (loc1 < loc4) 
+            _loc2_ = Math.max(_loc3_ + 1,_loc2_);
+            _loc5_++;
+         }
+         return new MatrixPosition(this.levels.length,_loc2_);
+      }
+
+      public function getParentLevelIdxs(param1:Number) : Array {
+         return this.parentLevelIdxs[param1];
+      }
+
+      public function getChildrenLevelIdxs(param1:Number) : Array {
+         return this.childrenLevelIdxs[param1];
+      }
+
+      public function hasCyclicReference() : Boolean {
+         return this.isCyclicReference;
+      }
+
+      public function addFixedPath(param1:Number, param2:Number) : void {
+         this.fixedPaths[param1] = param2;
+      }
+
+      public function process() : void {
+         this.isCyclicReference = false;
+         this.distributionOfVerticesOnLevels();
+         this.determineNodesPositionsOnLevel();
+      }
+
+      private function createEmptyAdjacencyMatrix() : void {
+         var _loc2_:* = NaN;
+         this.adjacencyMatrix = new Array(this.matrixDimension);
+         var _loc1_:Number = 0;
+         while(_loc1_ < this.matrixDimension)
+         {
+            this.adjacencyMatrix[_loc1_] = [];
+            _loc2_ = 0;
+            while(_loc2_ < this.matrixDimension)
             {
-                loc3 = this.maxPaths[loc1];
-                loc2 = this.fixedPaths[loc1];
-                this.addLevelItem(loc3, loc1, false, false);
-                if (!isNaN(loc2) && loc3 < loc2) 
-                {
-                    loc6 = this.levels[loc3][(this.levels[loc3].length - 1)];
-                    loc7 = loc2 - loc3;
-                    loc8 = this.adjacencyMatrix[loc1];
-                    loc9 = 0;
-                    while (loc9 < loc8.length) 
-                    {
-                        if (loc8[loc9] == -1) 
+               this.adjacencyMatrix[_loc1_][_loc2_] = 0;
+               _loc2_++;
+            }
+            _loc1_++;
+         }
+      }
+
+      private function normalizeLevels() : void {
+         var _loc1_:* = NaN;
+         _loc1_ = 0;
+         while(_loc1_ < this.levels.length)
+         {
+            if(this.levels[_loc1_].length > this.maxLevelWidth)
+            {
+               this.zipLevel(_loc1_);
+            }
+            _loc1_++;
+         }
+         _loc1_ = 0;
+         while(_loc1_ < this.levels.length)
+         {
+            this.alignLevel(_loc1_);
+            _loc1_++;
+         }
+      }
+
+      private function alignLevel(param1:Number) : void {
+         var _loc4_:* = NaN;
+         var _loc2_:Array = this.levels[param1];
+         var _loc3_:Number = this.maxLevelWidth - _loc2_.length;
+         _loc4_ = 0;
+         while(_loc4_ < _loc3_)
+         {
+            _loc2_.push(null);
+            _loc4_++;
+         }
+         _loc4_ = 0;
+         while(_loc4_ < _loc2_.length)
+         {
+            if(_loc2_[_loc4_] != null)
+            {
+               _loc2_[_loc4_].dx = _loc4_;
+            }
+            _loc4_++;
+         }
+      }
+
+      private function mapLevel(param1:Number, param2:Array) : void {
+         var _loc3_:Number = param2.length;
+         var _loc4_:Array = this.levels[param1];
+         if(_loc4_ == null)
+         {
+            return;
+         }
+         var _loc5_:Array = new Array(_loc3_);
+         var _loc6_:Number = 0;
+         var _loc7_:Number = 0;
+         var _loc8_:Number = 0;
+         while(_loc7_ < _loc3_)
+         {
+            if(param2[_loc7_] == 0)
+            {
+               _loc5_[_loc7_] = null;
+               _loc6_++;
+            }
+            else
+            {
+               if(_loc4_[_loc8_] == null && _loc6_ > 0)
+               {
+                  _loc8_++;
+                  _loc6_--;
+               }
+               _loc5_[_loc7_] = _loc4_[_loc8_];
+               if(_loc5_[_loc7_] != null)
+               {
+                  _loc5_[_loc7_].dx = _loc7_;
+               }
+               _loc8_++;
+            }
+            _loc7_++;
+         }
+         this.levels[param1] = _loc5_;
+      }
+
+      private function addLevelItem(param1:Number, param2:Number, param3:Boolean, param4:Boolean) : void {
+         var _loc6_:* = NaN;
+         if(this.levels[param1] == undefined)
+         {
+            this.levels[param1] = [];
+         }
+         this.levels[param1].push(new LevelItem(param2,this.levels[param1].length,param3));
+         if(!param4)
+         {
+            return;
+         }
+         var _loc5_:Array = this.adjacencyMatrix[param2];
+         var _loc7_:Number = 0;
+         while(_loc7_ < _loc5_.length)
+         {
+            _loc6_ = _loc5_[_loc7_];
+            if(_loc6_ == 1 || _loc6_ == 2)
+            {
+               this.removeLevelItem(param1,_loc7_);
+               this.addLevelItem(param1 + 1,_loc7_,_loc6_ == 2,true);
+            }
+            _loc7_++;
+         }
+      }
+
+      private function removeLevelItem(param1:Number, param2:Number) : void {
+         var _loc3_:Array = this.levels[param1];
+         var _loc4_:Array = [];
+         var _loc5_:Number = 0;
+         while(_loc5_ < _loc3_.length)
+         {
+            if(_loc3_[_loc5_].index != param2)
+            {
+               _loc4_.push(_loc3_[_loc5_]);
+            }
+            _loc5_++;
+         }
+         this.levels[param1] = _loc4_;
+      }
+
+      private function zipLevel(param1:Number) : void {
+         var _loc4_:* = NaN;
+         var _loc5_:* = NaN;
+         var _loc6_:LevelItem = null;
+         var _loc7_:LevelItem = null;
+         var _loc8_:Array = null;
+         var _loc9_:Array = null;
+         var _loc10_:* = NaN;
+         var _loc12_:Array = null;
+         var _loc13_:* = NaN;
+         var _loc14_:* = false;
+         var _loc15_:* = NaN;
+         var _loc16_:* = NaN;
+         var _loc17_:* = NaN;
+         if(param1 < 1)
+         {
+            return;
+         }
+         var _loc2_:Array = this.levels[param1-1];
+         var _loc3_:Number = _loc2_.length;
+         var _loc11_:Number = 0;
+         while(_loc11_ < _loc3_)
+         {
+            _loc6_ = _loc2_[_loc11_];
+            if(_loc6_ != null)
+            {
+               _loc8_ = this.adjacencyMatrix[_loc6_.index];
+               _loc4_ = _loc8_.length;
+               _loc5_ = 0;
+               _loc9_ = [];
+               _loc10_ = 0;
+               while(_loc10_ < _loc4_)
+               {
+                  if(_loc8_[_loc10_] == 1)
+                  {
+                     _loc9_.push(_loc10_);
+                     _loc5_++;
+                  }
+                  _loc10_++;
+               }
+               if(_loc5_ > 1)
+               {
+                  _loc12_ = this.levels[param1];
+                  _loc13_ = -1;
+                  _loc14_ = true;
+                  _loc15_ = _loc5_ == 2?0:1;
+                  _loc10_ = 0;
+                  while(_loc10_ < _loc12_.length)
+                  {
+                     _loc7_ = _loc12_[_loc10_];
+                     _loc16_ = 0;
+                     while(_loc16_ < _loc9_.length)
+                     {
+                        _loc17_ = _loc9_[_loc16_];
+                        if(_loc7_.index == _loc17_ && _loc5_ > _loc15_)
                         {
-                            if (loc5[loc9] != null) 
-                            {
-                                this.adjacencyMatrix[loc6.index][loc5[loc9]] = -2;
-                                this.adjacencyMatrix[loc5[loc9]][loc6.index] = 2;
-                                this.adjacencyMatrix[loc6.index][loc9] = 0;
-                                this.adjacencyMatrix[loc9][loc6.index] = 0;
-                                this.addLevelItem(loc2, loc6.index, false, true);
-                                this.removeLevelItem(loc3, loc6.index);
-                            }
-                            else 
-                            {
-                                loc5[loc9] = this.addFakeNodes(loc6, loc3, loc9, loc7);
-                            }
+                           if(_loc14_)
+                           {
+                              _loc13_ = this.addFakeNode(_loc7_,param1,_loc6_.index);
+                           }
+                           else
+                           {
+                              if(_loc13_ > 0)
+                              {
+                                 this.addFakeRelations(_loc6_.index,_loc7_.index,_loc13_);
+                                 this.addLevelItem(param1 + 1,_loc7_.index,false,true);
+                                 this.removeLevelItem(param1,_loc7_.index);
+                              }
+                           }
+                           _loc5_--;
+                           _loc14_ = _loc5_ % 2 > 0 && _loc15_ > 0;
                         }
-                        ++loc9;
-                    }
-                }
-                ++loc1;
+                        _loc16_++;
+                     }
+                     _loc10_++;
+                  }
+               }
             }
-            this.normalizeLevels();
-            return;
-        }
+            _loc11_++;
+         }
+      }
 
-        internal function getLines(arg1:Number, arg2:Boolean):Array
-        {
-            var loc2:*=null;
-            var loc7:*=NaN;
-            var loc8:*=null;
-            var loc9:*=null;
-            var loc10:*=null;
-            var loc14:*=NaN;
-            var loc15:*=NaN;
-            var loc1:*=[];
-            if (arg1 == 0) 
+      private function buildLevelsCache() : void {
+         var _loc2_:* = NaN;
+         var _loc3_:* = NaN;
+         var _loc4_:* = NaN;
+         var _loc5_:Array = null;
+         var _loc6_:LevelItem = null;
+         var _loc7_:Array = null;
+         var _loc8_:* = NaN;
+         var _loc9_:Array = null;
+         var _loc10_:Array = null;
+         var _loc11_:* = NaN;
+         var _loc12_:* = NaN;
+         this.parentLevelIdxs = {};
+         this.childrenLevelIdxs = {};
+         var _loc1_:Number = this.levels.length;
+         this.levelByNode = new Array(_loc1_);
+         _loc3_ = 0;
+         while(_loc3_ < _loc1_)
+         {
+            _loc5_ = this.levels[_loc3_];
+            this.levelByNode[_loc3_] = {};
+            _loc2_ = _loc5_.length;
+            _loc4_ = 0;
+            while(_loc4_ < _loc2_)
             {
-                return loc1;
+               _loc6_ = _loc5_[_loc4_];
+               if(_loc6_ != null)
+               {
+                  this.levelByNode[_loc3_][_loc6_.index] = _loc4_;
+               }
+               _loc4_++;
             }
-            var loc3:*;
-            var loc4:*=(loc3 = this.levels[arg1]).length;
-            var loc5:*;
-            if (!(loc5 = this.levels[arg2 ? arg1 + 1 : (arg1 - 1)])) 
+            _loc3_++;
+         }
+         _loc1_ = this.levels.length;
+         _loc3_ = 0;
+         while(_loc3_ < _loc1_)
+         {
+            _loc5_ = this.levels[_loc3_];
+            _loc2_ = _loc5_.length;
+            _loc4_ = 0;
+            while(_loc4_ < _loc2_)
             {
-                return loc1;
+               _loc6_ = _loc5_[_loc4_];
+               if(_loc6_ != null)
+               {
+                  _loc7_ = this.adjacencyMatrix[_loc6_.index];
+                  _loc8_ = _loc7_.length;
+                  _loc9_ = [];
+                  _loc10_ = [];
+                  _loc11_ = 0;
+                  while(_loc11_ < _loc8_)
+                  {
+                     _loc12_ = _loc7_[_loc11_];
+                     if(_loc12_ == 1 || _loc12_ == 2)
+                     {
+                        _loc9_.push(this.levelByNode[_loc3_ + 1][_loc11_]);
+                     }
+                     if(_loc12_ == -1 || _loc12_ == -2)
+                     {
+                        _loc10_.push(this.levelByNode[_loc3_-1][_loc11_]);
+                     }
+                     _loc11_++;
+                  }
+                  this.parentLevelIdxs[_loc6_.index] = _loc10_;
+                  this.childrenLevelIdxs[_loc6_.index] = _loc9_;
+               }
+               _loc4_++;
             }
-            var loc6:*=loc5.length;
-            var loc11:*=arg2 ? 1 : -1;
-            var loc12:*=arg2 ? 2 : -2;
-            var loc13:*=0;
-            while (loc13 < loc4) 
+            _loc3_++;
+         }
+      }
+
+      private function addFakeRelations(param1:Number, param2:Number, param3:Number) : void {
+         this.adjacencyMatrix[param3][param2] = 2;
+         this.adjacencyMatrix[param2][param3] = -2;
+         this.adjacencyMatrix[param3][param1] = -2;
+         this.adjacencyMatrix[param1][param3] = 2;
+      }
+
+      private function addFakeNode(param1:LevelItem, param2:Number, param3:Number) : Number {
+         var _loc5_:* = NaN;
+         var _loc4_:Number = param1.index;
+         this.adjacencyMatrix[param3][_loc4_] = 0;
+         this.adjacencyMatrix[_loc4_][param3] = 0;
+         _loc5_ = 0;
+         while(_loc5_ < this.matrixDimension)
+         {
+            this.adjacencyMatrix[_loc5_].push(0);
+            _loc5_++;
+         }
+         var _loc6_:Number = this.matrixDimension;
+         this.matrixDimension++;
+         var _loc7_:Array = new Array(this.matrixDimension);
+         _loc5_ = 0;
+         while(_loc5_ < _loc7_.length)
+         {
+            _loc7_[_loc5_] = 0;
+            _loc5_++;
+         }
+         this.adjacencyMatrix.push(_loc7_);
+         this.addFakeRelations(param3,_loc4_,_loc6_);
+         this.addLevelItem(param2 + 1,param1.index,param1.fake,true);
+         param1.index = _loc6_;
+         param1.fake = true;
+         return _loc6_;
+      }
+
+      private function addFakeNodes(param1:LevelItem, param2:Number, param3:Number, param4:Number) : Number {
+         var _loc5_:* = NaN;
+         var _loc6_:* = NaN;
+         var _loc7_:Number = 0;
+         while(_loc7_ < param4)
+         {
+            _loc6_ = this.addFakeNode(param1,param2,param3);
+            if(_loc7_ == 0)
             {
-                if ((loc9 = loc3[loc13]) != null) 
-                {
-                    loc7 = (loc8 = this.adjacencyMatrix[loc9.index]).length;
-                    loc14 = 0;
-                    while (loc14 < loc7) 
-                    {
-                        if (loc8[loc14] == loc11 || loc8[loc14] == loc12) 
+               _loc5_ = _loc6_;
+            }
+            param1 = this.levels[param2][this.levels[param2].length-1];
+            _loc7_++;
+         }
+         return _loc5_;
+      }
+
+      private function hasFakeNode(param1:Number) : Boolean {
+         var _loc2_:Array = this.levels[param1];
+         var _loc3_:Number = 0;
+         while(_loc3_ < _loc2_.length)
+         {
+            if(!(_loc2_[_loc3_] == null) && (_loc2_[_loc3_].fake))
+            {
+               return true;
+            }
+            _loc3_++;
+         }
+         return false;
+      }
+
+      private function searchMaxPathLegth(param1:Number, param2:Number, param3:Array, param4:Number) : void {
+         if(param4 > 20)
+         {
+            this.isCyclicReference = true;
+            this.maxPaths[param2] = -1;
+            return;
+         }
+         if(param3[param1] == -1 && (this.maxPaths[param2] < param4 || this.maxPaths[param2] == undefined))
+         {
+            this.maxPaths[param2] = param4;
+            if(param4 > this.widthPartitioning)
+            {
+               this.widthPartitioning = param4;
+            }
+            return;
+         }
+         var _loc5_:Number = param3.length;
+         var _loc6_:Number = 0;
+         while(_loc6_ < _loc5_)
+         {
+            if(_loc6_ != param1)
+            {
+               if(param3[_loc6_] == -1)
+               {
+                  this.searchMaxPathLegth(param1,param2,this.adjacencyMatrix[_loc6_],param4 + 1);
+               }
+            }
+            _loc6_++;
+         }
+      }
+
+      private function distributionOfVerticesOnLevels() : void {
+         var _loc1_:* = NaN;
+         var _loc3_:* = NaN;
+         var _loc6_:LevelItem = null;
+         var _loc7_:* = NaN;
+         var _loc8_:Array = null;
+         var _loc9_:* = NaN;
+         this.maxPaths = new Array(this.matrixDimension);
+         this.widthPartitioning = 0;
+         this.maxPaths[0] = 0;
+         _loc1_ = 1;
+         while(_loc1_ < this.matrixDimension)
+         {
+            this.searchMaxPathLegth(0,_loc1_,this.adjacencyMatrix[_loc1_],1);
+            _loc1_++;
+         }
+         var _loc2_:Number = 0;
+         this.levels = new Array(this.widthPartitioning);
+         this.addLevelItem(0,0,false,false);
+         var _loc4_:Number = this.maxPaths.length;
+         var _loc5_:Object = {};
+         _loc1_ = 1;
+         while(_loc1_ < _loc4_)
+         {
+            _loc3_ = this.maxPaths[_loc1_];
+            _loc2_ = this.fixedPaths[_loc1_];
+            this.addLevelItem(_loc3_,_loc1_,false,false);
+            if(!isNaN(_loc2_) && _loc3_ < _loc2_)
+            {
+               _loc6_ = this.levels[_loc3_][this.levels[_loc3_].length-1];
+               _loc7_ = _loc2_ - _loc3_;
+               _loc8_ = this.adjacencyMatrix[_loc1_];
+               _loc9_ = 0;
+               while(_loc9_ < _loc8_.length)
+               {
+                  if(_loc8_[_loc9_] == -1)
+                  {
+                     if(_loc5_[_loc9_] == null)
+                     {
+                        _loc5_[_loc9_] = this.addFakeNodes(_loc6_,_loc3_,_loc9_,_loc7_);
+                     }
+                     else
+                     {
+                        this.adjacencyMatrix[_loc6_.index][_loc5_[_loc9_]] = -2;
+                        this.adjacencyMatrix[_loc5_[_loc9_]][_loc6_.index] = 2;
+                        this.adjacencyMatrix[_loc6_.index][_loc9_] = 0;
+                        this.adjacencyMatrix[_loc9_][_loc6_.index] = 0;
+                        this.addLevelItem(_loc2_,_loc6_.index,false,true);
+                        this.removeLevelItem(_loc3_,_loc6_.index);
+                     }
+                  }
+                  _loc9_++;
+               }
+            }
+            _loc1_++;
+         }
+         this.normalizeLevels();
+      }
+
+      private function getLines(param1:Number, param2:Boolean) : Array {
+         var _loc4_:LevelLine = null;
+         var _loc9_:* = NaN;
+         var _loc10_:Array = null;
+         var _loc11_:LevelItem = null;
+         var _loc12_:LevelItem = null;
+         var _loc16_:* = NaN;
+         var _loc17_:* = NaN;
+         var _loc3_:Array = [];
+         if(param1 == 0)
+         {
+            return _loc3_;
+         }
+         var _loc5_:Array = this.levels[param1];
+         var _loc6_:Number = _loc5_.length;
+         var _loc7_:Array = this.levels[param2?param1 + 1:param1-1];
+         if(!_loc7_)
+         {
+            return _loc3_;
+         }
+         var _loc8_:Number = _loc7_.length;
+         var _loc13_:Number = param2?1:-1;
+         var _loc14_:Number = param2?2:-2;
+         var _loc15_:Number = 0;
+         while(_loc15_ < _loc6_)
+         {
+            _loc11_ = _loc5_[_loc15_];
+            if(_loc11_ != null)
+            {
+               _loc10_ = this.adjacencyMatrix[_loc11_.index];
+               _loc9_ = _loc10_.length;
+               _loc16_ = 0;
+               while(_loc16_ < _loc9_)
+               {
+                  if(_loc10_[_loc16_] == _loc13_ || _loc10_[_loc16_] == _loc14_)
+                  {
+                     _loc17_ = 0;
+                     while(_loc17_ < _loc8_)
+                     {
+                        _loc12_ = _loc7_[_loc17_];
+                        if(!(_loc12_ == null) && _loc12_.index == _loc16_)
                         {
-                            loc15 = 0;
-                            while (loc15 < loc6) 
-                            {
-                                if (!((loc10 = loc5[loc15]) == null) && loc10.index == loc14) 
-                                {
-                                    loc2 = arg2 ? LevelLine.makeByNext(loc9, loc10) : LevelLine.makeByTop(loc9, loc10);
-                                    loc1.push(loc2);
-                                }
-                                ++loc15;
-                            }
+                           _loc4_ = param2?LevelLine.makeByNext(_loc11_,_loc12_):LevelLine.makeByTop(_loc11_,_loc12_);
+                           _loc3_.push(_loc4_);
+                           break;
                         }
-                        ++loc14;
-                    }
-                }
-                ++loc13;
+                        _loc17_++;
+                     }
+                  }
+                  _loc16_++;
+               }
             }
-            return loc1;
-        }
+            _loc15_++;
+         }
+         return _loc3_;
+      }
 
-        internal function getCrossingCost(arg1:Array):Number
-        {
-            var loc3:*=null;
-            var loc4:*=null;
-            var loc5:*=NaN;
-            var loc6:*=NaN;
-            var loc8:*=NaN;
-            var loc1:*=0;
-            var loc2:*=arg1.length;
-            var loc7:*=0;
-            while (loc7 < (loc2 - 1)) 
+      private function getCrossingCost(param1:Array) : Number {
+         var _loc4_:LevelLine = null;
+         var _loc5_:LevelLine = null;
+         var _loc6_:* = NaN;
+         var _loc7_:* = NaN;
+         var _loc9_:* = NaN;
+         var _loc2_:Number = 0;
+         var _loc3_:Number = param1.length;
+         var _loc8_:Number = 0;
+         while(_loc8_ < _loc3_-1)
+         {
+            _loc4_ = param1[_loc8_];
+            _loc9_ = _loc8_ + 1;
+            while(_loc9_ < _loc3_)
             {
-                loc3 = arg1[loc7];
-                loc8 = loc7 + 1;
-                while (loc8 < loc2) 
-                {
-                    loc4 = arg1[loc8];
-                    loc5 = loc3.start - loc4.start;
-                    loc6 = loc3.end - loc4.end;
-                    if ((loc4.start - loc3.start) * (loc4.end - loc3.end) < 0 && loc5 * loc6 < 0 || !(loc3.start == loc3.end) && loc5 == loc6 && Math.abs(loc3.start - loc4.start) == 1) 
-                    {
-                        loc1 = loc1 + (this.maxLevelWidth + 1);
-                    }
-                    ++loc8;
-                }
-                ++loc7;
+               _loc5_ = param1[_loc9_];
+               _loc6_ = _loc4_.start - _loc5_.start;
+               _loc7_ = _loc4_.end - _loc5_.end;
+               if((_loc5_.start - _loc4_.start) * (_loc5_.end - _loc4_.end) < 0 && _loc6_ * _loc7_ < 0 || !(_loc4_.start == _loc4_.end) && _loc6_ == _loc7_ && Math.abs(_loc4_.start - _loc5_.start) == 1)
+               {
+                  _loc2_ = _loc2_ + (this.maxLevelWidth + 1);
+               }
+               _loc9_++;
             }
-            return loc1;
-        }
+            _loc8_++;
+         }
+         return _loc2_;
+      }
 
-        internal function normalizeLevels():void
-        {
-            var loc1:*=NaN;
-            loc1 = 0;
-            while (loc1 < this.levels.length) 
+      private function getCrossingCostEx(param1:Array) : Number {
+         var _loc4_:LevelLine = null;
+         var _loc5_:LevelLine = null;
+         var _loc6_:* = NaN;
+         var _loc7_:* = NaN;
+         var _loc9_:* = NaN;
+         var _loc2_:Number = 0;
+         var _loc3_:Number = param1.length;
+         var _loc8_:Number = 0;
+         while(_loc8_ < _loc3_-1)
+         {
+            _loc4_ = param1[_loc8_];
+            _loc9_ = _loc8_ + 1;
+            while(_loc9_ < _loc3_)
             {
-                if (this.levels[loc1].length > this.maxLevelWidth) 
-                {
-                    this.zipLevel(loc1);
-                }
-                ++loc1;
+               _loc5_ = param1[_loc9_];
+               _loc6_ = _loc4_.start - _loc5_.start;
+               _loc7_ = _loc4_.end - _loc5_.end;
+               if((_loc5_.start - _loc4_.start) * (_loc5_.end - _loc4_.end) < 0 && _loc6_ * _loc7_ < 0 || !(_loc4_.start == _loc4_.end) && !(_loc5_.start == _loc5_.end) && (_loc4_.end >= _loc5_.start && _loc4_.start <= _loc5_.end || _loc5_.end <= _loc4_.start && _loc4_.end <= _loc5_.start) && !(_loc4_.start == _loc5_.start))
+               {
+                  _loc2_ = _loc2_ + (this.maxLevelWidth + 1);
+               }
+               _loc9_++;
             }
-            loc1 = 0;
-            while (loc1 < this.levels.length) 
+            _loc8_++;
+         }
+         return _loc2_;
+      }
+
+      private function getTotalCost(param1:Array) : Number {
+         var _loc3_:LevelLine = null;
+         var _loc2_:Number = this.getCrossingCostEx(param1);
+         var _loc4_:Number = 0;
+         while(_loc4_ < param1.length)
+         {
+            _loc3_ = param1[_loc4_];
+            if(_loc3_.start != _loc3_.end)
             {
-                this.alignLevel(loc1);
-                ++loc1;
+               _loc2_ = _loc2_ + Math.abs(_loc3_.start - _loc3_.end);
             }
+            _loc4_++;
+         }
+         return _loc2_;
+      }
+
+      private function findMaxChildCount(param1:Array) : Number {
+         var _loc4_:* = NaN;
+         if((this.isCyclicReference) || param1 == null)
+         {
+            return 0;
+         }
+         var _loc2_:Array = [];
+         var _loc3_:Number = 0;
+         _loc4_ = 0;
+         while(_loc4_ < param1.length)
+         {
+            if(param1[_loc4_] == 1 || param1[_loc4_] == 2)
+            {
+               _loc3_++;
+               _loc2_.push(_loc4_);
+            }
+            _loc4_++;
+         }
+         _loc4_ = 0;
+         while(_loc4_ < _loc2_.length)
+         {
+            _loc3_ = Math.max(this.findMaxChildCount(this.adjacencyMatrix[_loc2_[_loc4_]]),_loc3_);
+            _loc4_++;
+         }
+         return _loc3_;
+      }
+
+      private function breedNodesByNextRelations(param1:Number) : void {
+         var _loc4_:* = NaN;
+         var _loc5_:LevelItem = null;
+         var _loc11_:* = NaN;
+         var _loc2_:Array = this.levels[param1];
+         var _loc3_:Number = _loc2_.length;
+         var _loc6_:Number = 0;
+         var _loc7_:Array = new Array(_loc3_);
+         _loc4_ = 0;
+         while(_loc4_ < _loc3_)
+         {
+            _loc7_[_loc4_] = 1;
+            _loc4_++;
+         }
+         _loc4_ = 0;
+         while(_loc4_ < _loc3_)
+         {
+            _loc5_ = _loc2_[_loc4_];
+            if(_loc5_ == null)
+            {
+               _loc6_++;
+               if((!(_loc2_[_loc4_-1] == null)) && (_loc2_[_loc4_-1].fake) && !(_loc2_[_loc4_ + 1] == null))
+               {
+                  if(_loc4_ == 1)
+                  {
+                     _loc6_ = 0;
+                  }
+                  break;
+               }
+            }
+            else
+            {
+               if(_loc6_ > 0)
+               {
+                  _loc6_ = 0;
+                  break;
+               }
+            }
+            _loc4_++;
+         }
+         if(_loc6_ < 1)
+         {
             return;
-        }
-
-        internal function getCrossingCostEx(arg1:Array):Number
-        {
-            var loc3:*=null;
-            var loc4:*=null;
-            var loc5:*=NaN;
-            var loc6:*=NaN;
-            var loc8:*=NaN;
-            var loc1:*=0;
-            var loc2:*=arg1.length;
-            var loc7:*=0;
-            while (loc7 < (loc2 - 1)) 
+         }
+         var _loc8_:* = false;
+         var _loc9_:Number = 0;
+         var _loc10_:Number = 0;
+         _loc4_ = 0;
+         while(_loc4_ < _loc3_)
+         {
+            _loc5_ = _loc2_[_loc4_];
+            if(_loc5_ != null)
             {
-                loc3 = arg1[loc7];
-                loc8 = loc7 + 1;
-                while (loc8 < loc2) 
-                {
-                    loc4 = arg1[loc8];
-                    loc5 = loc3.start - loc4.start;
-                    loc6 = loc3.end - loc4.end;
-                    if ((loc4.start - loc3.start) * (loc4.end - loc3.end) < 0 && loc5 * loc6 < 0 || !(loc3.start == loc3.end) && !(loc4.start == loc4.end) && (loc3.end >= loc4.start && loc3.start <= loc4.end || loc4.end <= loc3.start && loc3.end <= loc4.start) && !(loc3.start == loc4.start)) 
-                    {
-                        loc1 = loc1 + (this.maxLevelWidth + 1);
-                    }
-                    ++loc8;
-                }
-                ++loc7;
+               _loc9_ = this.findMaxChildCount(this.adjacencyMatrix[_loc5_.index])-1;
+               if(_loc9_ > 0)
+               {
+                  _loc11_ = 0;
+                  while(_loc11_ < _loc9_ && _loc6_ > 0)
+                  {
+                     if(_loc4_ + _loc11_ + 1 < _loc3_)
+                     {
+                        _loc7_[_loc4_ + _loc11_ + _loc10_ + 1] = 0;
+                        _loc8_ = true;
+                     }
+                     _loc11_++;
+                     _loc6_--;
+                  }
+                  _loc10_ = _loc11_;
+               }
             }
-            return loc1;
-        }
-
-        internal function findMaxChildCount(arg1:Array):Number
-        {
-            var loc3:*=NaN;
-            if (this.isCyclicReference || arg1 == null) 
-            {
-                return 0;
-            }
-            var loc1:*=[];
-            var loc2:*=0;
-            loc3 = 0;
-            while (loc3 < arg1.length) 
-            {
-                if (arg1[loc3] == 1 || arg1[loc3] == 2) 
-                {
-                    ++loc2;
-                    loc1.push(loc3);
-                }
-                ++loc3;
-            }
-            loc3 = 0;
-            while (loc3 < loc1.length) 
-            {
-                loc2 = Math.max(this.findMaxChildCount(this.adjacencyMatrix[loc1[loc3]]), loc2);
-                ++loc3;
-            }
-            return loc2;
-        }
-
-        internal function breedNodesByNextRelations(arg1:Number):void
-        {
-            var loc3:*=NaN;
-            var loc4:*=null;
-            var loc10:*=NaN;
-            var loc1:*=this.levels[arg1];
-            var loc2:*=loc1.length;
-            var loc5:*=0;
-            var loc6:*=new Array(loc2);
-            loc3 = 0;
-            while (loc3 < loc2) 
-            {
-                loc6[loc3] = 1;
-                ++loc3;
-            }
-            loc3 = 0;
-            while (loc3 < loc2) 
-            {
-                if ((loc4 = loc1[loc3]) != null) 
-                {
-                    if (loc5 > 0) 
-                    {
-                        loc5 = 0;
-                        break;
-                    }
-                }
-                else 
-                {
-                    ++loc5;
-                    if (!(loc1[(loc3 - 1)] == null) && loc1[(loc3 - 1)].fake && !(loc1[loc3 + 1] == null)) 
-                    {
-                        if (loc3 == 1) 
-                        {
-                            loc5 = 0;
-                        }
-                        break;
-                    }
-                }
-                ++loc3;
-            }
-            if (loc5 < 1) 
-            {
-                return;
-            }
-            var loc7:*=false;
-            var loc8:*=0;
-            var loc9:*=0;
-            loc3 = 0;
-            while (loc3 < loc2) 
-            {
-                if ((loc4 = loc1[loc3]) != null) 
-                {
-                    if ((loc8 = (this.findMaxChildCount(this.adjacencyMatrix[loc4.index]) - 1)) > 0) 
-                    {
-                        loc10 = 0;
-                        while (loc10 < loc8 && loc5 > 0) 
-                        {
-                            if (loc3 + loc10 + 1 < loc2) 
-                            {
-                                loc6[loc3 + loc10 + loc9 + 1] = 0;
-                                loc7 = true;
-                            }
-                            ++loc10;
-                            --loc5;
-                        }
-                        ++loc9;
-                    }
-                }
-                ++loc3;
-            }
-            if (!loc7) 
-            {
-                return;
-            }
-            this.mapLevel(arg1, loc6);
+            _loc4_++;
+         }
+         if(!_loc8_)
+         {
             return;
-        }
+         }
+         this.mapLevel(param1,_loc7_);
+      }
 
-        internal function makeMinCrossing(arg1:Number, arg2:Boolean):Number
-        {
-            var levelIdx:Number;
-            var next:Boolean;
-            var checkLevel:Array;
-            var checkLevelLen:Number;
-            var i:Number;
-            var holdDxs:Array;
-            var matrix:Array;
-            var node:LevelItem;
-            var other:LevelItem;
-            var crossings:Array;
-            var lines:Array;
-            var algo:net.wg.gui.lobby.techtree.math.HungarianAlgorithm;
-            var result:Array;
-            var newLevel:Array;
-            var row:Number;
-            var column:Number;
-            var profit:Number;
-            var position:net.wg.gui.lobby.techtree.math.MatrixPosition;
-            var x:Number;
-
-            var loc1:*;
-            i = NaN;
-            node = null;
-            other = null;
-            crossings = null;
-            lines = null;
-            row = NaN;
-            column = NaN;
-            position = null;
-            x = NaN;
-            levelIdx = arg1;
-            next = arg2;
-            checkLevel = this.levels[levelIdx];
-            checkLevelLen = checkLevel.length;
-            holdDxs = new Array(checkLevelLen);
-            matrix = new Array(checkLevelLen);
-            i = 0;
-            while (i < checkLevelLen) 
+      private function makeMinCrossing(param1:Number, param2:Boolean) : Number {
+         var i:Number = NaN;
+         var node:LevelItem = null;
+         var other:LevelItem = null;
+         var crossings:Array = null;
+         var lines:Array = null;
+         var row:Number = NaN;
+         var column:Number = NaN;
+         var position:MatrixPosition = null;
+         var x:Number = NaN;
+         var levelIdx:Number = param1;
+         var next:Boolean = param2;
+         var checkLevel:Array = this.levels[levelIdx];
+         var checkLevelLen:Number = checkLevel.length;
+         var holdDxs:Array = new Array(checkLevelLen);
+         var matrix:Array = new Array(checkLevelLen);
+         i = 0;
+         while(i < checkLevelLen)
+         {
+            holdDxs[i] = checkLevel[i] != null?checkLevel[i].dx:0;
+            i++;
+         }
+         i = 0;
+         while(i < checkLevelLen)
+         {
+            node = checkLevel[i];
+            crossings = new Array(checkLevelLen);
+            x = 0;
+            while(x < checkLevelLen)
             {
-                holdDxs[i] = checkLevel[i] == null ? 0 : checkLevel[i].dx;
-                ++i;
+               other = null;
+               if(i != x)
+               {
+                  if(node != null)
+                  {
+                     node.dx = x;
+                  }
+                  other = checkLevel[x];
+                  if(other != null)
+                  {
+                     other.dx = i;
+                  }
+               }
+               lines = this.getLines(levelIdx,next);
+               crossings[x] = this.getTotalCost(lines);
+               if(other != null)
+               {
+                  other.dx = x;
+               }
+               x++;
             }
-            i = 0;
-            while (i < checkLevelLen) 
+            if(node != null)
             {
-                node = checkLevel[i];
-                crossings = new Array(checkLevelLen);
-                x = 0;
-                while (x < checkLevelLen) 
-                {
-                    other = null;
-                    if (i != x) 
-                    {
-                        if (node != null) 
-                        {
-                            node.dx = x;
-                        }
-                        other = checkLevel[x];
-                        if (other != null) 
-                        {
-                            other.dx = i;
-                        }
-                    }
-                    lines = this.getLines(levelIdx, next);
-                    crossings[x] = this.getTotalCost(lines);
-                    if (other != null) 
-                    {
-                        other.dx = x;
-                    }
-                    ++x;
-                }
-                if (node != null) 
-                {
-                    node.dx = holdDxs[i];
-                }
-                matrix[i] = crossings;
-                ++i;
+               node.dx = holdDxs[i];
             }
-            algo = new net.wg.gui.lobby.techtree.math.HungarianAlgorithm();
-            result = algo.compute(algo.makeCostMatrix(matrix, function (arg1:Number):Number
+            matrix[i] = crossings;
+            i++;
+         }
+         var algo:HungarianAlgorithm = new HungarianAlgorithm();
+         var result:Array = algo.compute(algo.makeCostMatrix(matrix,function(param1:Number):Number
+         {
+            return param1;
+         }));
+         var newLevel:Array = new Array(checkLevelLen);
+         var profit:Number = 0;
+         i = 0;
+         while(i < result.length)
+         {
+            position = result[i];
+            row = position.row;
+            column = position.column;
+            node = checkLevel[row];
+            if(node != null)
             {
-                return arg1;
-            }))
-            newLevel = new Array(checkLevelLen);
-            profit = 0;
-            i = 0;
-            while (i < result.length) 
-            {
-                position = result[i];
-                row = position.row;
-                column = position.column;
-                node = checkLevel[row];
-                if (node != null) 
-                {
-                    node.dx = column;
-                }
-                newLevel[column] = node;
-                profit = profit + matrix[row][column];
-                ++i;
+               node.dx = column;
             }
-            this.levels[levelIdx] = newLevel;
-            return profit;
-        }
+            newLevel[column] = node;
+            profit = profit + matrix[row][column];
+            i++;
+         }
+         this.levels[levelIdx] = newLevel;
+         return profit;
+      }
 
-        internal function findNodePositionInLevel(arg1:Number, arg2:Boolean):Array
-        {
-            var loc7:*=null;
-            var loc1:*=-1;
-            var loc2:*=0;
-            var loc3:*=Number.MAX_VALUE;
-            var loc4:*=0;
-            var loc5:*=this.maxLevelWidth * this.maxLevelWidth;
-            var loc6:*=0;
-            while (!(loc1 == 0) && !(loc4 == 3) && !(loc2 == loc1) && loc6 < loc5) 
+      private function findNodePositionInLevel(param1:Number, param2:Boolean) : Array {
+         var _loc9_:Array = null;
+         var _loc3_:Number = -1;
+         var _loc4_:Number = 0;
+         var _loc5_:Number = Number.MAX_VALUE;
+         var _loc6_:Number = 0;
+         var _loc7_:Number = this.maxLevelWidth * this.maxLevelWidth;
+         var _loc8_:Number = 0;
+         while(_loc8_ < _loc7_)
+         {
+            _loc4_ = _loc3_;
+            _loc3_ = this.makeMinCrossing(param1,param2);
+            _loc9_ = this.getLines(param1,param2);
+            _loc3_ = _loc3_ * this.getTotalCost(_loc9_);
+            if(_loc3_ <= _loc5_)
             {
-                loc2 = loc1;
-                loc1 = this.makeMinCrossing(arg1, arg2);
-                loc7 = this.getLines(arg1, arg2);
-                loc1 = loc1 * this.getTotalCost(loc7);
-                if (loc1 <= loc3) 
-                {
-                    loc4 = loc1 != loc3 ? 0 : loc4 + 1;
-                    loc3 = loc1;
-                }
-                ++loc6;
+               _loc6_ = _loc3_ == _loc5_?_loc6_ + 1:0;
+               _loc5_ = _loc3_;
             }
-            return loc7;
-        }
+            _loc8_++;
+         }
+         return _loc9_;
+      }
 
-        internal function determineNodesPositionsOnLevel():void
-        {
-            var loc1:*=null;
-            var loc3:*=NaN;
-            this.breedNodesByNextRelations(1);
-            var loc2:*=2;
-            while (loc2 < this.levels.length) 
+      private function determineNodesPositionsOnLevel() : void {
+         var _loc1_:Array = null;
+         var _loc3_:* = NaN;
+         this.breedNodesByNextRelations(1);
+         var _loc2_:Number = 2;
+         while(_loc2_ < this.levels.length)
+         {
+            _loc1_ = this.findNodePositionInLevel(_loc2_,false);
+            if(this.hasFakeNode(_loc2_))
             {
-                loc1 = this.findNodePositionInLevel(loc2, false);
-                if (this.hasFakeNode(loc2)) 
-                {
-                    this.breedNodesByNextRelations(loc2);
-                }
-                if (this.getCrossingCostEx(loc1) > 0) 
-                {
-                    loc3 = this.makeMinCrossing((loc2 - 1), true);
-                    if (!(loc3 == 0) && loc2 == (this.levels.length - 1)) 
-                    {
-                        this.findNodePositionInLevel(loc2, false);
-                    }
-                }
-                ++loc2;
+               this.breedNodesByNextRelations(_loc2_);
             }
-            this.buildLevelsCache();
-            return;
-        }
-
-        public function get matrix():Array
-        {
-            return this.adjacencyMatrix;
-        }
-
-        public function get nodesByLevel():Array
-        {
-            return this.levels;
-        }
-
-        public function get levelDimension():net.wg.gui.lobby.techtree.math.MatrixPosition
-        {
-            var loc3:*=NaN;
-            var loc4:*=null;
-            var loc1:*=this.levels.length;
-            var loc2:*=0;
-            var loc5:*=1;
-            while (loc5 < loc1) 
+            if(this.getCrossingCostEx(_loc1_) > 0)
             {
-                loc3 = (loc4 = this.levels[loc5]).length;
-                while (loc3 >= 0) 
-                {
-                    if (loc4[loc3] != null) 
-                    {
-                        break;
-                    }
-                    --loc3;
-                }
-                loc2 = Math.max(loc3 + 1, loc2);
-                ++loc5;
+               _loc3_ = this.makeMinCrossing(_loc2_-1,true);
+               if(!(_loc3_ == 0) && _loc2_ == this.levels.length-1)
+               {
+                  this.findNodePositionInLevel(_loc2_,false);
+               }
             }
-            return new net.wg.gui.lobby.techtree.math.MatrixPosition(this.levels.length, loc2);
-        }
+            _loc2_++;
+         }
+         this.buildLevelsCache();
+      }
+   }
 
-        public function getParentLevelIdxs(arg1:Number):Array
-        {
-            return this.parentLevelIdxs[arg1];
-        }
-
-        public function getChildrenLevelIdxs(arg1:Number):Array
-        {
-            return this.childrenLevelIdxs[arg1];
-        }
-
-        public function hasCyclicReference():Boolean
-        {
-            return this.isCyclicReference;
-        }
-
-        public function addFixedPath(arg1:Number, arg2:Number):void
-        {
-            this.fixedPaths[arg1] = arg2;
-            return;
-        }
-
-        public function process():void
-        {
-            this.isCyclicReference = false;
-            this.distributionOfVerticesOnLevels();
-            this.determineNodesPositionsOnLevel();
-            return;
-        }
-
-        internal function createEmptyAdjacencyMatrix():void
-        {
-            var loc2:*=NaN;
-            this.adjacencyMatrix = new Array(this.matrixDimension);
-            var loc1:*=0;
-            while (loc1 < this.matrixDimension) 
-            {
-                this.adjacencyMatrix[loc1] = [];
-                loc2 = 0;
-                while (loc2 < this.matrixDimension) 
-                {
-                    this.adjacencyMatrix[loc1][loc2] = 0;
-                    ++loc2;
-                }
-                ++loc1;
-            }
-            return;
-        }
-
-        internal function getTotalCost(arg1:Array):Number
-        {
-            var loc2:*=null;
-            var loc1:*=this.getCrossingCostEx(arg1);
-            var loc3:*=0;
-            while (loc3 < arg1.length) 
-            {
-                loc2 = arg1[loc3];
-                if (loc2.start != loc2.end) 
-                {
-                    loc1 = loc1 + Math.abs(loc2.start - loc2.end);
-                }
-                ++loc3;
-            }
-            return loc1;
-        }
-
-        internal function alignLevel(arg1:Number):void
-        {
-            var loc3:*=NaN;
-            var loc1:*=this.levels[arg1];
-            var loc2:*=this.maxLevelWidth - loc1.length;
-            loc3 = 0;
-            while (loc3 < loc2) 
-            {
-                loc1.push(null);
-                ++loc3;
-            }
-            loc3 = 0;
-            while (loc3 < loc1.length) 
-            {
-                if (loc1[loc3] != null) 
-                {
-                    loc1[loc3].dx = loc3;
-                }
-                ++loc3;
-            }
-            return;
-        }
-
-        internal function mapLevel(arg1:Number, arg2:Array):void
-        {
-            var loc1:*=arg2.length;
-            var loc2:*;
-            if ((loc2 = this.levels[arg1]) == null) 
-            {
-                return;
-            }
-            var loc3:*=new Array(loc1);
-            var loc4:*=0;
-            var loc5:*=0;
-            var loc6:*=0;
-            while (loc5 < loc1) 
-            {
-                if (arg2[loc5] != 0) 
-                {
-                    if (loc2[loc6] == null && loc4 > 0) 
-                    {
-                        ++loc6;
-                        --loc4;
-                    }
-                    loc3[loc5] = loc2[loc6];
-                    if (loc3[loc5] != null) 
-                    {
-                        loc3[loc5].dx = loc5;
-                    }
-                    ++loc6;
-                }
-                else 
-                {
-                    loc3[loc5] = null;
-                    ++loc4;
-                }
-                ++loc5;
-            }
-            this.levels[arg1] = loc3;
-            return;
-        }
-
-        internal function addLevelItem(arg1:Number, arg2:Number, arg3:Boolean, arg4:Boolean):void
-        {
-            var loc2:*=NaN;
-            if (this.levels[arg1] == undefined) 
-            {
-                this.levels[arg1] = [];
-            }
-            this.levels[arg1].push(new LevelItem(arg2, this.levels[arg1].length, arg3));
-            if (!arg4) 
-            {
-                return;
-            }
-            var loc1:*=this.adjacencyMatrix[arg2];
-            var loc3:*=0;
-            while (loc3 < loc1.length) 
-            {
-                if ((loc2 = loc1[loc3]) == 1 || loc2 == 2) 
-                {
-                    this.removeLevelItem(arg1, loc3);
-                    this.addLevelItem(arg1 + 1, loc3, loc2 == 2, true);
-                }
-                ++loc3;
-            }
-            return;
-        }
-
-        internal function removeLevelItem(arg1:Number, arg2:Number):void
-        {
-            var loc1:*=this.levels[arg1];
-            var loc2:*=[];
-            var loc3:*=0;
-            while (loc3 < loc1.length) 
-            {
-                if (loc1[loc3].index != arg2) 
-                {
-                    loc2.push(loc1[loc3]);
-                }
-                ++loc3;
-            }
-            this.levels[arg1] = loc2;
-            return;
-        }
-
-        internal function zipLevel(arg1:Number):void
-        {
-            var loc3:*=NaN;
-            var loc4:*=NaN;
-            var loc5:*=null;
-            var loc6:*=null;
-            var loc7:*=null;
-            var loc8:*=null;
-            var loc9:*=NaN;
-            var loc11:*=null;
-            var loc12:*=NaN;
-            var loc13:*=false;
-            var loc14:*=NaN;
-            var loc15:*=NaN;
-            var loc16:*=NaN;
-            if (arg1 < 1) 
-            {
-                return;
-            }
-            var loc1:*=this.levels[(arg1 - 1)];
-            var loc2:*=loc1.length;
-            var loc10:*=0;
-            while (loc10 < loc2) 
-            {
-                if ((loc5 = loc1[loc10]) != null) 
-                {
-                    loc3 = (loc7 = this.adjacencyMatrix[loc5.index]).length;
-                    loc4 = 0;
-                    loc8 = [];
-                    loc9 = 0;
-                    while (loc9 < loc3) 
-                    {
-                        if (loc7[loc9] == 1) 
-                        {
-                            loc8.push(loc9);
-                            ++loc4;
-                        }
-                        ++loc9;
-                    }
-                    if (loc4 > 1) 
-                    {
-                        loc11 = this.levels[arg1];
-                        loc12 = -1;
-                        loc13 = true;
-                        loc14 = loc4 != 2 ? 1 : 0;
-                        loc9 = 0;
-                        while (loc9 < loc11.length) 
-                        {
-                            loc6 = loc11[loc9];
-                            loc15 = 0;
-                            while (loc15 < loc8.length) 
-                            {
-                                loc16 = loc8[loc15];
-                                if (loc6.index == loc16 && loc4 > loc14) 
-                                {
-                                    if (loc13) 
-                                    {
-                                        loc12 = this.addFakeNode(loc6, arg1, loc5.index);
-                                    }
-                                    else if (loc12 > 0) 
-                                    {
-                                        this.addFakeRelations(loc5.index, loc6.index, loc12);
-                                        this.addLevelItem(arg1 + 1, loc6.index, false, true);
-                                        this.removeLevelItem(arg1, loc6.index);
-                                    }
-                                    loc13 = --loc4 % 2 > 0 && loc14 > 0;
-                                }
-                                ++loc15;
-                            }
-                            ++loc9;
-                        }
-                    }
-                }
-                ++loc10;
-            }
-            return;
-        }
-
-        internal function buildLevelsCache():void
-        {
-            var loc2:*=NaN;
-            var loc3:*=NaN;
-            var loc4:*=NaN;
-            var loc5:*=null;
-            var loc6:*=null;
-            var loc7:*=null;
-            var loc8:*=NaN;
-            var loc9:*=null;
-            var loc10:*=null;
-            var loc11:*=NaN;
-            var loc12:*=NaN;
-            this.parentLevelIdxs = {};
-            this.childrenLevelIdxs = {};
-            var loc1:*=this.levels.length;
-            this.levelByNode = new Array(loc1);
-            loc3 = 0;
-            while (loc3 < loc1) 
-            {
-                loc5 = this.levels[loc3];
-                this.levelByNode[loc3] = {};
-                loc2 = loc5.length;
-                loc4 = 0;
-                while (loc4 < loc2) 
-                {
-                    if ((loc6 = loc5[loc4]) != null) 
-                    {
-                        this.levelByNode[loc3][loc6.index] = loc4;
-                    }
-                    ++loc4;
-                }
-                ++loc3;
-            }
-            loc1 = this.levels.length;
-            loc3 = 0;
-            while (loc3 < loc1) 
-            {
-                loc2 = (loc5 = this.levels[loc3]).length;
-                loc4 = 0;
-                while (loc4 < loc2) 
-                {
-                    if ((loc6 = loc5[loc4]) != null) 
-                    {
-                        loc8 = (loc7 = this.adjacencyMatrix[loc6.index]).length;
-                        loc9 = [];
-                        loc10 = [];
-                        loc11 = 0;
-                        while (loc11 < loc8) 
-                        {
-                            if ((loc12 = loc7[loc11]) == 1 || loc12 == 2) 
-                            {
-                                loc9.push(this.levelByNode[loc3 + 1][loc11]);
-                            }
-                            if (loc12 == -1 || loc12 == -2) 
-                            {
-                                loc10.push(this.levelByNode[(loc3 - 1)][loc11]);
-                            }
-                            ++loc11;
-                        }
-                        this.parentLevelIdxs[loc6.index] = loc10;
-                        this.childrenLevelIdxs[loc6.index] = loc9;
-                    }
-                    ++loc4;
-                }
-                ++loc3;
-            }
-            return;
-        }
-
-        internal function addFakeRelations(arg1:Number, arg2:Number, arg3:Number):void
-        {
-            this.adjacencyMatrix[arg3][arg2] = 2;
-            this.adjacencyMatrix[arg2][arg3] = -2;
-            this.adjacencyMatrix[arg3][arg1] = -2;
-            this.adjacencyMatrix[arg1][arg3] = 2;
-            return;
-        }
-
-        internal function addFakeNode(arg1:LevelItem, arg2:Number, arg3:Number):Number
-        {
-            var loc2:*=NaN;
-            var loc1:*=arg1.index;
-            this.adjacencyMatrix[arg3][loc1] = 0;
-            this.adjacencyMatrix[loc1][arg3] = 0;
-            loc2 = 0;
-            while (loc2 < this.matrixDimension) 
-            {
-                this.adjacencyMatrix[loc2].push(0);
-                ++loc2;
-            }
-            var loc3:*=this.matrixDimension;
-            var loc5:*;
-            var loc6:*=((loc5 = this).matrixDimension + 1);
-            loc5.matrixDimension = loc6;
-            var loc4:*=new Array(this.matrixDimension);
-            loc2 = 0;
-            while (loc2 < loc4.length) 
-            {
-                loc4[loc2] = 0;
-                ++loc2;
-            }
-            this.adjacencyMatrix.push(loc4);
-            this.addFakeRelations(arg3, loc1, loc3);
-            this.addLevelItem(arg2 + 1, arg1.index, arg1.fake, true);
-            arg1.index = loc3;
-            arg1.fake = true;
-            return loc3;
-        }
-
-        internal function addFakeNodes(arg1:LevelItem, arg2:Number, arg3:Number, arg4:Number):Number
-        {
-            var loc1:*=NaN;
-            var loc2:*=NaN;
-            var loc3:*=0;
-            while (loc3 < arg4) 
-            {
-                loc2 = this.addFakeNode(arg1, arg2, arg3);
-                if (loc3 == 0) 
-                {
-                    loc1 = loc2;
-                }
-                arg1 = this.levels[arg2][(this.levels[arg2].length - 1)];
-                ++loc3;
-            }
-            return loc1;
-        }
-
-        internal function hasFakeNode(arg1:Number):Boolean
-        {
-            var loc1:*=this.levels[arg1];
-            var loc2:*=0;
-            while (loc2 < loc1.length) 
-            {
-                if (!(loc1[loc2] == null) && loc1[loc2].fake) 
-                {
-                    return true;
-                }
-                ++loc2;
-            }
-            return false;
-        }
-
-        internal var matrixDimension:Number;
-
-        internal var widthPartitioning:Number;
-
-        internal var maxLevelWidth:Number;
-
-        internal var adjacencyMatrix:Array;
-
-        internal var levels:Array;
-
-        internal var fixedPaths:Object;
-
-        internal var levelByNode:Array;
-
-        internal var parentLevelIdxs:Object;
-
-        internal var childrenLevelIdxs:Object;
-
-        internal var isCyclicReference:Boolean=false;
-
-        internal var maxPaths:Array;
-    }
 }
 
+   class LevelItem extends Object
+   {
+          
+      function LevelItem(param1:uint, param2:uint, param3:Boolean) {
+         super();
+         this.index = param1;
+         this.dx = param2;
+         this.fake = param3;
+      }
 
-class LevelItem extends Object
-{
-    public function LevelItem(arg1:uint, arg2:uint, arg3:Boolean)
-    {
-        super();
-        this.index = arg1;
-        this.dx = arg2;
-        this.fake = arg3;
-        return;
-    }
+      public var index:uint;
 
-    public var index:uint;
+      public var dx:uint;
 
-    public var dx:uint;
+      public var fake:Boolean;
+   }
 
-    public var fake:Boolean;
-}
 
-class LevelLine extends Object
-{
-    public function LevelLine(arg1:uint, arg2:uint, arg3:uint, arg4:uint)
-    {
-        super();
-        this.start = arg1;
-        this.end = arg2;
-        this.parent = arg3;
-        this.child = arg4;
-        return;
-    }
+   class LevelLine extends Object
+   {
+          
+      function LevelLine(param1:uint, param2:uint, param3:uint, param4:uint) {
+         super();
+         this.start = param1;
+         this.end = param2;
+         this.parent = param3;
+         this.child = param4;
+      }
 
-    public static function makeByTop(arg1:LevelItem, arg2:LevelItem):LevelLine
-    {
-        return new LevelLine(arg2.dx, arg1.dx, arg2.index, arg1.index);
-    }
+      public static function makeByTop(param1:LevelItem, param2:LevelItem) : LevelLine {
+         return new LevelLine(param2.dx,param1.dx,param2.index,param1.index);
+      }
 
-    public static function makeByNext(arg1:LevelItem, arg2:LevelItem):LevelLine
-    {
-        return new LevelLine(arg1.dx, arg2.dx, arg1.index, arg2.index);
-    }
+      public static function makeByNext(param1:LevelItem, param2:LevelItem) : LevelLine {
+         return new LevelLine(param1.dx,param2.dx,param1.index,param2.index);
+      }
 
-    public var start:uint;
+      public var start:uint;
 
-    public var end:uint;
+      public var end:uint;
 
-    public var parent:uint;
+      public var parent:uint;
 
-    public var child:uint;
-}
+      public var child:uint;
+   }

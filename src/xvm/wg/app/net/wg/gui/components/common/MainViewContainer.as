@@ -1,80 +1,80 @@
-package net.wg.gui.components.common 
+package net.wg.gui.components.common
 {
-    import flash.display.*;
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.interfaces.*;
-    import scaleform.clik.motion.*;
-    
-    public class MainViewContainer extends net.wg.gui.components.common.ManagedContainer
-    {
-        public function MainViewContainer()
-        {
-            super();
-            return;
-        }
+   import flash.display.DisplayObject;
+   import scaleform.clik.motion.Tween;
+   import net.wg.infrastructure.interfaces.IView;
+   import flash.display.MovieClip;
+   import net.wg.data.constants.Linkages;
 
-        public override function addChild(arg1:flash.display.DisplayObject):flash.display.DisplayObject
-        {
-            var loc1:*=null;
-            arg1 = super.addChild(arg1);
-            if (_modalBg) 
+
+   public class MainViewContainer extends ManagedContainer
+   {
+          
+      public function MainViewContainer() {
+         super();
+      }
+
+      private static const ANIMATION_DURATION:int = 500;
+
+      override public function addChild(param1:DisplayObject) : DisplayObject {
+         var _loc2_:Tween = null;
+         var param1:DisplayObject = super.addChild(param1);
+         if(_modalBg)
+         {
+            setChildIndex(param1,getChildIndex(_modalBg));
+            _loc2_ = new Tween(ANIMATION_DURATION,_modalBg,{"alpha":0},
+               {
+                  "paused":false,
+                  "onComplete":this.onModalTweenEnd
+               }
+            );
+         }
+         return param1;
+      }
+
+      override public function removeChild(param1:DisplayObject) : DisplayObject {
+         var param1:DisplayObject = super.removeChild(param1);
+         this.createModalBg();
+         return param1;
+      }
+
+      override public function getTopmostView() : DisplayObject {
+         var _loc2_:* = 0;
+         var _loc3_:DisplayObject = null;
+         var _loc1_:DisplayObject = null;
+         _loc2_ = numChildren-1;
+         while(_loc2_ >= 0)
+         {
+            _loc3_ = getChildAt(_loc2_);
+            if(_loc3_  is  IView)
             {
-                setChildIndex(arg1, getChildIndex(_modalBg));
-                loc1 = new scaleform.clik.motion.Tween(ANIMATION_DURATION, _modalBg, {"alpha":0}, {"paused":false, "onComplete":this.onModalTweenEnd});
+               _loc1_ = _loc3_;
+               break;
             }
-            return arg1;
-        }
+            _loc2_--;
+         }
+         return _loc1_;
+      }
 
-        public override function removeChild(arg1:flash.display.DisplayObject):flash.display.DisplayObject
-        {
-            arg1 = super.removeChild(arg1);
-            this.createModalBg();
-            return arg1;
-        }
-
-        public override function getTopmostView():flash.display.DisplayObject
-        {
-            var loc2:*=0;
-            var loc3:*=null;
-            var loc1:*=null;
-            loc2 = (numChildren - 1);
-            while (loc2 >= 0) 
+      override protected function createModalBg() : void {
+         if(_modalBg == null)
+         {
+            _modalBg = MovieClip(App.utils.classFactory.getObject(Linkages.VIEW_LOAD_CURTAIN));
+            if(_modalBg == null)
             {
-                loc3 = getChildAt(loc2);
-                if (loc3 is net.wg.infrastructure.interfaces.IView) 
-                {
-                    loc1 = loc3;
-                    break;
-                }
-                --loc2;
+               DebugUtils.LOG_DEBUG("Error until getting ");
+               return;
             }
-            return loc1;
-        }
+         }
+         _modalBg.width = App.appWidth;
+         _modalBg.height = App.appHeight;
+         addChildAt(_modalBg,numChildren > 0?numChildren-1:0);
+      }
 
-        protected override function createModalBg():void
-        {
-            if (_modalBg == null) 
-            {
-                _modalBg = flash.display.MovieClip(App.utils.classFactory.getObject(net.wg.data.constants.Linkages.VIEW_LOAD_CURTAIN));
-                if (_modalBg == null) 
-                {
-                    DebugUtils.LOG_DEBUG("Error until getting ");
-                    return;
-                }
-            }
-            _modalBg.width = App.appWidth;
-            _modalBg.height = App.appHeight;
-            addChildAt(_modalBg, numChildren > 0 ? (numChildren - 1) : 0);
-            return;
-        }
+      private function onModalTweenEnd(param1:Tween=null) : void {
+         super.superRemoveChild(_modalBg);
+         _modalBg = null;
+      }
+   }
 
-        internal function onModalTweenEnd(arg1:scaleform.clik.motion.Tween=null):void
-        {
-            super.superRemoveChild(_modalBg);
-            _modalBg = null;
-            return;
-        }
-
-        internal static const ANIMATION_DURATION:int=500;
-    }
 }

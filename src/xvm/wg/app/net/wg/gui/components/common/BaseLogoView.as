@@ -1,52 +1,45 @@
-package net.wg.gui.components.common 
+package net.wg.gui.components.common
 {
-    import flash.display.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    
-    public class BaseLogoView extends flash.display.MovieClip implements net.wg.infrastructure.interfaces.entity.IDisposable
-    {
-        public function BaseLogoView()
-        {
-            this.overrides = [];
-            super();
-            this.initOverrides();
-            return;
-        }
+   import flash.display.MovieClip;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import flash.display.FrameLabel;
 
-        public function setLocale(arg1:String):void
-        {
-            if (this.hasOverride(arg1)) 
-            {
-                gotoAndStop(arg1);
-            }
-            return;
-        }
 
-        public function hasOverride(arg1:String):Boolean
-        {
-            var loc1:*=!(this.overrides.indexOf(arg1) == -1);
-            return loc1;
-        }
+   public class BaseLogoView extends MovieClip implements IDisposable
+   {
+          
+      public function BaseLogoView() {
+         this.overrides = [];
+         super();
+         this.initOverrides();
+      }
 
-        internal function initOverrides():void
-        {
-            var loc1:*=null;
-            var loc2:*=0;
-            var loc3:*=currentLabels;
-            for each (loc1 in loc3) 
-            {
-                this.overrides.push(loc1.name);
-            }
-            return;
-        }
+      private var overrides:Array;
 
-        public function dispose():void
-        {
-            this.overrides.splice(0, this.overrides.length);
-            this.overrides = null;
-            return;
-        }
+      public function setLocale(param1:String) : void {
+         if(this.hasOverride(param1))
+         {
+            gotoAndStop(param1);
+         }
+      }
 
-        internal var overrides:Array;
-    }
+      public function hasOverride(param1:String) : Boolean {
+         var _loc2_:* = !(this.overrides.indexOf(param1) == -1);
+         return _loc2_;
+      }
+
+      private function initOverrides() : void {
+         var _loc1_:FrameLabel = null;
+         for each (_loc1_ in currentLabels)
+         {
+            this.overrides.push(_loc1_.name);
+         }
+      }
+
+      public function dispose() : void {
+         this.overrides.splice(0,this.overrides.length);
+         this.overrides = null;
+      }
+   }
+
 }

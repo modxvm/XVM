@@ -1,49 +1,41 @@
-package net.wg.gui.components.common.crosshair 
+package net.wg.gui.components.common.crosshair
 {
-    public class CrosshairPanelArcade extends net.wg.gui.components.common.crosshair.CrosshairPanelBase
-    {
-        public function CrosshairPanelArcade()
-        {
-            super();
-            return;
-        }
 
-        protected override function initCallbacks():void
-        {
-            return;
-        }
 
-        protected override function onSetNetType(arg1:Number, arg2:Number):void
-        {
-            super.onSetNetType(arg1, arg2);
-            var loc1:*=0;
-            var loc2:*=g_modeMC.currentframe;
-            switch (loc2) 
-            {
-                case 1:
-                {
-                    loc1 = CASSETE_POSITION_ARCADE;
-                    break;
-                }
-                case 2:
-                {
-                    loc1 = CASSETE_POSITION_SNIPER;
-                    break;
-                }
-                case 3:
-                {
-                    loc1 = CASSETE_POSITION_PANZER;
-                    break;
-                }
-            }
-            g_modeMC.cassette.y = loc1;
-            return;
-        }
+   public class CrosshairPanelArcade extends CrosshairPanelBase
+   {
+          
+      public function CrosshairPanelArcade() {
+         super();
+      }
 
-        internal static const CASSETE_POSITION_ARCADE:Number=-1;
+      private static const CASSETE_POSITION_ARCADE:Number = -1;
 
-        internal static const CASSETE_POSITION_SNIPER:Number=13;
+      private static const CASSETE_POSITION_SNIPER:Number = 13;
 
-        internal static const CASSETE_POSITION_PANZER:Number=-11;
-    }
+      private static const CASSETE_POSITION_PANZER:Number = -11;
+
+      override protected function initCallbacks() : void {
+          
+      }
+
+      override protected function onSetNetType(param1:Number, param2:Number) : void {
+         super.onSetNetType(param1,param2);
+         var _loc3_:Number = 0;
+         switch(g_modeMC.currentframe)
+         {
+            case 1:
+               _loc3_ = CASSETE_POSITION_ARCADE;
+               break;
+            case 2:
+               _loc3_ = CASSETE_POSITION_SNIPER;
+               break;
+            case 3:
+               _loc3_ = CASSETE_POSITION_PANZER;
+               break;
+         }
+         g_modeMC.cassette.y = _loc3_;
+      }
+   }
+
 }

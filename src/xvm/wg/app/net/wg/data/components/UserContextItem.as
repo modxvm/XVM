@@ -1,14 +1,15 @@
 package net.wg.data.components
 {
-    import __AS3__.vec.*;
-    import net.wg.infrastructure.interfaces.IContextItem;
+   import __AS3__.vec.Vector;
+   import net.wg.infrastructure.interfaces.IContextItem;
 
-    public class UserContextItem extends net.wg.data.components.ContextItem
-    {
-        public function UserContextItem(arg1:String, arg2:Object=null, arg3:__AS3__.vec.Vector.<net.wg.infrastructure.interfaces.IContextItem>=null)
-        {
-            super(arg1, MENU.contextmenu(arg1), arg2, arg3);
-            return;
-        }
-    }
+
+   public class UserContextItem extends ContextItem
+   {
+          
+      public function UserContextItem(param1:String, param2:Object=null, param3:Vector.<IContextItem>=null) {
+         super(param1,MENU.contextmenu(param1),param2,param3);
+      }
+   }
+
 }

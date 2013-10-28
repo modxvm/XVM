@@ -1,13 +1,14 @@
-package net.wg.infrastructure.base.meta.impl 
+package net.wg.infrastructure.base.meta.impl
 {
-    import net.wg.gui.lobby.dialogs.*;
-    
-    public class IconDialogMeta extends net.wg.gui.lobby.dialogs.SimpleDialog
-    {
-        public function IconDialogMeta()
-        {
-            super();
-            return;
-        }
-    }
+   import net.wg.gui.lobby.dialogs.SimpleDialog;
+
+
+   public class IconDialogMeta extends SimpleDialog
+   {
+          
+      public function IconDialogMeta() {
+         super();
+      }
+   }
+
 }

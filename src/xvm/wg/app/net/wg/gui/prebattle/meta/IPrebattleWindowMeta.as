@@ -1,43 +1,46 @@
-package net.wg.gui.prebattle.meta 
+package net.wg.gui.prebattle.meta
 {
-    import flash.events.*;
-    
-    public interface IPrebattleWindowMeta extends flash.events.IEventDispatcher
-    {
-        function requestToReadyS(arg1:Boolean):void;
+   import flash.events.IEventDispatcher;
 
-        function requestToLeaveS():void;
 
-        function showPrebattleSendInvitesWindowS():void;
+   public interface IPrebattleWindowMeta extends IEventDispatcher
+   {
+          
+      function requestToReadyS(param1:Boolean) : void;
 
-        function showFAQWindowS():void;
+      function requestToLeaveS() : void;
 
-        function canSendInviteS():Boolean;
+      function showPrebattleSendInvitesWindowS() : void;
 
-        function canKickPlayerS():Boolean;
+      function showFAQWindowS() : void;
 
-        function isPlayerReadyS():Boolean;
+      function canSendInviteS() : Boolean;
 
-        function isPlayerCreatorS():Boolean;
+      function canKickPlayerS() : Boolean;
 
-        function isReadyBtnEnabledS():Boolean;
+      function isPlayerReadyS() : Boolean;
 
-        function isLeaveBtnEnabledS():Boolean;
+      function isPlayerCreatorS() : Boolean;
 
-        function getClientIDS():Number;
+      function isReadyBtnEnabledS() : Boolean;
 
-        function as_setRosterList(arg1:int, arg2:Boolean, arg3:Array):void;
+      function isLeaveBtnEnabledS() : Boolean;
 
-        function as_setPlayerState(arg1:int, arg2:Boolean, arg3:Object):void;
+      function getClientIDS() : Number;
 
-        function as_enableLeaveBtn(arg1:Boolean):void;
+      function as_setRosterList(param1:int, param2:Boolean, param3:Array) : void;
 
-        function as_enableReadyBtn(arg1:Boolean):void;
+      function as_setPlayerState(param1:int, param2:Boolean, param3:Object) : void;
 
-        function as_setCoolDownForReadyButton(arg1:uint):void;
+      function as_enableLeaveBtn(param1:Boolean) : void;
 
-        function as_toggleReadyBtn(arg1:Boolean):void;
+      function as_enableReadyBtn(param1:Boolean) : void;
 
-        function as_refreshPermissions():void;
-    }
+      function as_setCoolDownForReadyButton(param1:uint) : void;
+
+      function as_toggleReadyBtn(param1:Boolean) : void;
+
+      function as_refreshPermissions() : void;
+   }
+
 }

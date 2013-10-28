@@ -1,23 +1,30 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IContainerManagerMeta extends flash.events.IEventDispatcher
-    {
-        function as_getView(arg1:String):Boolean;
+   import flash.events.IEventDispatcher;
 
-        function as_show(arg1:String, arg2:int=0, arg3:int=0):Boolean;
 
-        function as_hide(arg1:String):Boolean;
+   public interface IContainerManagerMeta extends IEventDispatcher
+   {
+          
+      function as_getView(param1:String) : Boolean;
 
-        function as_registerContainer(arg1:String, arg2:String):void;
+      function as_show(param1:String, param2:int=0, param3:int=0) : Boolean;
 
-        function as_unregisterContainer(arg1:String):void;
+      function as_hide(param1:String) : Boolean;
 
-        function as_closePopUps():void;
+      function as_registerContainer(param1:String, param2:String) : void;
 
-        function as_isOnTop(arg1:String, arg2:String):Boolean;
+      function as_unregisterContainer(param1:String) : void;
 
-        function as_bringToFront(arg1:String, arg2:String):void;
-    }
+      function as_closePopUps() : void;
+
+      function as_isOnTop(param1:String, param2:String) : Boolean;
+
+      function as_bringToFront(param1:String, param2:String) : void;
+
+      function as_getNameByToken(param1:String) : String;
+
+      function as_getViewTypeByToken(param1:String) : String;
+   }
+
 }

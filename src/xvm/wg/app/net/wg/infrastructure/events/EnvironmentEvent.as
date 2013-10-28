@@ -1,25 +1,25 @@
-package net.wg.infrastructure.events 
+package net.wg.infrastructure.events
 {
-    import flash.events.*;
-    
-    public class EnvironmentEvent extends flash.events.Event
-    {
-        public function EnvironmentEvent(arg1:String, ... rest)
-        {
-            this._args = rest;
-            super(arg1);
-            return;
-        }
+   import flash.events.Event;
 
-        public function getArgs():Array
-        {
-            return this._args;
-        }
 
-        public static const LOGOFF:String="WoTLogoff";
+   public class EnvironmentEvent extends Event
+   {
+          
+      public function EnvironmentEvent(param1:String, ... rest) {
+         this._args = rest;
+         super(param1);
+      }
 
-        public static const QIUT:String="WoTQuit";
+      public static const LOGOFF:String = "WoTLogoff";
 
-        internal var _args:Array=null;
-    }
+      public static const QIUT:String = "WoTQuit";
+
+      private var _args:Array = null;
+
+      public function getArgs() : Array {
+         return this._args;
+      }
+   }
+
 }

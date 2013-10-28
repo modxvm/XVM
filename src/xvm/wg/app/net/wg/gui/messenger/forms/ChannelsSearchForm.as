@@ -1,205 +1,180 @@
-package net.wg.gui.messenger.forms 
+package net.wg.gui.messenger.forms
 {
-    import flash.display.*;
-    import flash.ui.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.events.*;
-    import net.wg.gui.messenger.evnts.*;
-    import net.wg.infrastructure.interfaces.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.core.*;
-    import scaleform.clik.events.*;
-    import scaleform.clik.ui.*;
-    import scaleform.clik.utils.*;
-    
-    public class ChannelsSearchForm extends scaleform.clik.core.UIComponent implements net.wg.infrastructure.interfaces.IViewStackContent
-    {
-        public function ChannelsSearchForm()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import net.wg.infrastructure.interfaces.IViewStackContent;
+   import net.wg.gui.components.controls.LabelControl;
+   import net.wg.gui.components.controls.TextInput;
+   import net.wg.gui.components.controls.SoundButtonEx;
+   import net.wg.gui.components.controls.ScrollingListEx;
+   import flash.display.Sprite;
+   import scaleform.clik.events.ButtonEvent;
+   import net.wg.gui.events.ListEventEx;
+   import scaleform.clik.events.ListEvent;
+   import scaleform.clik.events.InputEvent;
+   import scaleform.clik.utils.Constraints;
+   import scaleform.clik.constants.ConstrainMode;
+   import scaleform.clik.constants.InvalidationType;
+   import net.wg.gui.messenger.evnts.ChannelsFormEvent;
+   import scaleform.clik.ui.InputDetails;
+   import flash.ui.Keyboard;
+   import scaleform.clik.constants.InputValue;
+   import scaleform.clik.constants.NavigationCode;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.joinButton.enabled = false;
-            this.searchButton.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onSearchClick);
-            this.joinButton.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onJoinButtonClick);
-            this.searchResultList.addEventListener(net.wg.gui.events.ListEventEx.ITEM_DOUBLE_CLICK, this.onItemDoobleClick);
-            this.searchResultList.addEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onIndexChange);
-            this.searchNameInput.addEventListener(scaleform.clik.events.InputEvent.INPUT, this.handleInput, false, 0, true);
-            constraints = new scaleform.clik.utils.Constraints(this, scaleform.clik.constants.ConstrainMode.REFLOW);
-            constraints.addElement("searchLabel", this.searchLabel, scaleform.clik.utils.Constraints.LEFT | scaleform.clik.utils.Constraints.RIGHT | scaleform.clik.utils.Constraints.TOP);
-            constraints.addElement("searchNameInput", this.searchNameInput, scaleform.clik.utils.Constraints.LEFT | scaleform.clik.utils.Constraints.RIGHT | scaleform.clik.utils.Constraints.TOP);
-            constraints.addElement("searchButton", this.searchButton, scaleform.clik.utils.Constraints.RIGHT | scaleform.clik.utils.Constraints.TOP);
-            constraints.addElement("searchResultLabel", this.searchResultLabel, scaleform.clik.utils.Constraints.LEFT | scaleform.clik.utils.Constraints.RIGHT | scaleform.clik.utils.Constraints.TOP);
-            constraints.addElement("searchResultList", this.searchResultList, scaleform.clik.utils.Constraints.ALL);
-            constraints.addElement("bg", this.bg, scaleform.clik.utils.Constraints.ALL);
-            constraints.addElement("joinButton", this.joinButton, scaleform.clik.utils.Constraints.LEFT | scaleform.clik.utils.Constraints.BOTTOM);
-            App.utils.scheduler.envokeInNextFrame(this.setFocusToInput);
-            return;
-        }
 
-        public override function setSize(arg1:Number, arg2:Number):void
-        {
-            super.setSize(arg1, arg2);
-            return;
-        }
+   public class ChannelsSearchForm extends UIComponent implements IViewStackContent
+   {
+          
+      public function ChannelsSearchForm() {
+         super();
+      }
 
-        internal function setFocusToInput():void
-        {
-            if (this.searchNameInput.enabled) 
+      public var searchLabel:LabelControl = null;
+
+      public var searchResultLabel:LabelControl = null;
+
+      public var searchNameInput:TextInput = null;
+
+      public var searchButton:SoundButtonEx = null;
+
+      public var searchResultList:ScrollingListEx = null;
+
+      public var joinButton:SoundButtonEx = null;
+
+      public var bg:Sprite = null;
+
+      private var _data:Object = null;
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.joinButton.enabled = false;
+         this.searchButton.addEventListener(ButtonEvent.CLICK,this.onSearchClick);
+         this.joinButton.addEventListener(ButtonEvent.CLICK,this.onJoinButtonClick);
+         this.searchResultList.addEventListener(ListEventEx.ITEM_DOUBLE_CLICK,this.onItemDoobleClick);
+         this.searchResultList.addEventListener(ListEvent.INDEX_CHANGE,this.onIndexChange);
+         this.searchNameInput.addEventListener(InputEvent.INPUT,this.handleInput,false,0,true);
+         constraints = new Constraints(this,ConstrainMode.REFLOW);
+         constraints.addElement("searchLabel",this.searchLabel,Constraints.LEFT | Constraints.RIGHT | Constraints.TOP);
+         constraints.addElement("searchNameInput",this.searchNameInput,Constraints.LEFT | Constraints.RIGHT | Constraints.TOP);
+         constraints.addElement("searchButton",this.searchButton,Constraints.RIGHT | Constraints.TOP);
+         constraints.addElement("searchResultLabel",this.searchResultLabel,Constraints.LEFT | Constraints.RIGHT | Constraints.TOP);
+         constraints.addElement("searchResultList",this.searchResultList,Constraints.ALL);
+         constraints.addElement("bg",this.bg,Constraints.ALL);
+         constraints.addElement("joinButton",this.joinButton,Constraints.LEFT | Constraints.BOTTOM);
+         App.utils.scheduler.envokeInNextFrame(this.setFocusToInput);
+      }
+
+      override public function setSize(param1:Number, param2:Number) : void {
+         super.setSize(param1,param2);
+      }
+
+      private function setFocusToInput() : void {
+         if(this.searchNameInput.enabled)
+         {
+            this.searchNameInput.validateNow();
+            App.utils.focusHandler.setFocus(this.searchNameInput);
+         }
+      }
+
+      private function onIndexChange(param1:ListEvent=null) : void {
+         this.joinButton.enabled = this.searchResultList.selectedIndex > -1;
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         if((constraints) && (isInvalid(InvalidationType.SIZE)))
+         {
+            constraints.update(_width,_height);
+         }
+      }
+
+      override public function dispose() : void {
+         super.dispose();
+         this.searchButton.removeEventListener(ButtonEvent.CLICK,this.onSearchClick);
+         this.joinButton.removeEventListener(ButtonEvent.CLICK,this.onJoinButtonClick);
+         this.searchResultList.removeEventListener(ListEventEx.ITEM_DOUBLE_CLICK,this.onItemDoobleClick);
+         this.searchResultList.removeEventListener(ListEventEx.INDEX_CHANGE,this.onIndexChange);
+         this.searchNameInput.removeEventListener(InputEvent.INPUT,this.handleInput,false);
+      }
+
+      public function update(param1:Object) : void {
+         this.setFocusToInput();
+      }
+
+      public function set searchResultText(param1:String) : void {
+         this.searchResultLabel.text = param1;
+      }
+
+      private function onItemDoobleClick(param1:ListEventEx) : void {
+         this.tryJoin();
+      }
+
+      private function onJoinButtonClick(param1:ButtonEvent) : void {
+         this.tryJoin();
+      }
+
+      private function tryJoin() : void {
+         if(this.searchResultList.selectedIndex >= 0)
+         {
+            dispatchEvent(new ChannelsFormEvent(ChannelsFormEvent.ON_JOIN,true,false,"","","",this.searchResultList.selectedIndex));
+         }
+      }
+
+      private function onSearchClick(param1:ButtonEvent) : void {
+         this.dispatchSearchEv();
+      }
+
+      private function dispatchSearchEv() : void {
+         var _loc1_:String = null;
+         _loc1_ = this.searchNameInput.text;
+         this.searchResultList.selectedIndex = -1;
+         this.searchButton.enabled = this.joinButton.enabled = false;
+         dispatchEvent(new ChannelsFormEvent(ChannelsFormEvent.ON_SEARCH_CHANNEL_CLICK,true,false,_loc1_));
+      }
+
+      public function lockSearchButton(param1:Boolean) : void {
+         this.searchButton.enabled = param1;
+      }
+
+      override public function handleInput(param1:InputEvent) : void {
+         if(param1.isDefaultPrevented())
+         {
+            return;
+         }
+         var _loc2_:InputDetails = param1.details;
+         var _loc3_:uint = _loc2_.controllerIndex;
+         if(_loc2_.navEquivalent == null)
+         {
+            if(_loc2_.code == Keyboard.ENTER)
             {
-                this.searchNameInput.validateNow();
-                App.utils.focusHandler.setFocus(this.searchNameInput);
+               this.handlePress(_loc3_);
+               param1.handled = true;
             }
-            return;
-        }
-
-        internal function onIndexChange(arg1:scaleform.clik.events.ListEvent=null):void
-        {
-            this.joinButton.enabled = this.searchResultList.selectedIndex > -1;
-            return;
-        }
-
-        protected override function draw():void
-        {
-            super.draw();
-            if (constraints && isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
+         }
+         else
+         {
+            if(_loc2_.code != Keyboard.SPACE)
             {
-                constraints.update(_width, _height);
+               switch(_loc2_.navEquivalent)
+               {
+                  case NavigationCode.ENTER:
+                     if(_loc2_.value == InputValue.KEY_DOWN)
+                     {
+                        this.handlePress(_loc3_);
+                        param1.handled = true;
+                     }
+                     break;
+               }
             }
-            return;
-        }
+         }
+      }
 
-        public override function dispose():void
-        {
-            super.dispose();
-            this.searchButton.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onSearchClick);
-            this.joinButton.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onJoinButtonClick);
-            this.searchResultList.removeEventListener(net.wg.gui.events.ListEventEx.ITEM_DOUBLE_CLICK, this.onItemDoobleClick);
-            this.searchResultList.removeEventListener(net.wg.gui.events.ListEventEx.INDEX_CHANGE, this.onIndexChange);
-            this.searchNameInput.removeEventListener(scaleform.clik.events.InputEvent.INPUT, this.handleInput, false);
-            return;
-        }
+      private function handlePress(param1:uint) : void {
+         this.dispatchSearchEv();
+      }
 
-        public function update(arg1:Object):void
-        {
-            this.setFocusToInput();
-            return;
-        }
+      override public function toString() : String {
+         return "[WG ChannelsSearchForm " + name + "]";
+      }
+   }
 
-        public function set searchResultText(arg1:String):void
-        {
-            this.searchResultLabel.text = arg1;
-            return;
-        }
-
-        internal function onItemDoobleClick(arg1:net.wg.gui.events.ListEventEx):void
-        {
-            this.tryJoin();
-            return;
-        }
-
-        internal function onJoinButtonClick(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            this.tryJoin();
-            return;
-        }
-
-        internal function tryJoin():void
-        {
-            if (this.searchResultList.selectedIndex >= 0) 
-            {
-                dispatchEvent(new net.wg.gui.messenger.evnts.ChannelsFormEvent(net.wg.gui.messenger.evnts.ChannelsFormEvent.ON_JOIN, true, false, "", "", "", this.searchResultList.selectedIndex));
-            }
-            return;
-        }
-
-        internal function onSearchClick(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            this.dispatchSearchEv();
-            return;
-        }
-
-        internal function dispatchSearchEv():void
-        {
-            var loc1:*=this.searchNameInput.text;
-            this.searchResultList.selectedIndex = -1;
-            var loc2:*;
-            this.joinButton.enabled = loc2 = false;
-            this.searchButton.enabled = loc2;
-            dispatchEvent(new net.wg.gui.messenger.evnts.ChannelsFormEvent(net.wg.gui.messenger.evnts.ChannelsFormEvent.ON_SEARCH_CHANNEL_CLICK, true, false, loc1));
-            return;
-        }
-
-        public function lockSearchButton(arg1:Boolean):void
-        {
-            this.searchButton.enabled = arg1;
-            return;
-        }
-
-        public override function handleInput(arg1:scaleform.clik.events.InputEvent):void
-        {
-            if (arg1.isDefaultPrevented()) 
-            {
-                return;
-            }
-            var loc1:*=arg1.details;
-            var loc2:*=loc1.controllerIndex;
-            if (loc1.navEquivalent != null) 
-            {
-                if (loc1.code != flash.ui.Keyboard.SPACE) 
-                {
-                    var loc3:*=loc1.navEquivalent;
-                    switch (loc3) 
-                    {
-                        case scaleform.clik.constants.NavigationCode.ENTER:
-                        {
-                            if (loc1.value == scaleform.clik.constants.InputValue.KEY_DOWN) 
-                            {
-                                this.handlePress(loc2);
-                                arg1.handled = true;
-                            }
-                            break;
-                        }
-                    }
-                }
-            }
-            else if (loc1.code == flash.ui.Keyboard.ENTER) 
-            {
-                this.handlePress(loc2);
-                arg1.handled = true;
-            }
-            return;
-        }
-
-        internal function handlePress(arg1:uint):void
-        {
-            this.dispatchSearchEv();
-            return;
-        }
-
-        public override function toString():String
-        {
-            return "[WG ChannelsSearchForm " + name + "]";
-        }
-
-        public var searchLabel:net.wg.gui.components.controls.LabelControl=null;
-
-        public var searchResultLabel:net.wg.gui.components.controls.LabelControl=null;
-
-        public var searchNameInput:net.wg.gui.components.controls.TextInput=null;
-
-        public var searchButton:net.wg.gui.components.controls.SoundButtonEx=null;
-
-        public var searchResultList:net.wg.gui.components.controls.ScrollingListEx=null;
-
-        public var joinButton:net.wg.gui.components.controls.SoundButtonEx=null;
-
-        public var bg:flash.display.Sprite=null;
-
-        internal var _data:Object=null;
-    }
 }

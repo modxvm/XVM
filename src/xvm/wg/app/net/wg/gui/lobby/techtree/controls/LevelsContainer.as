@@ -1,157 +1,159 @@
-package net.wg.gui.lobby.techtree.controls 
+package net.wg.gui.lobby.techtree.controls
 {
-    import __AS3__.vec.*;
-    import flash.display.*;
-    import flash.geom.*;
-    import net.wg.gui.lobby.techtree.helpers.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    
-    public class LevelsContainer extends flash.display.Sprite implements net.wg.infrastructure.interfaces.entity.IDisposable
-    {
-        public function LevelsContainer()
-        {
-            super();
-            scale9Grid = new flash.geom.Rectangle(0, 0, 1, 1);
-            var loc1:*;
-            mouseEnabled = loc1 = false;
-            mouseChildren = loc1 = loc1;
-            tabEnabled = loc1;
-            this.delimiters = new Vector.<net.wg.gui.lobby.techtree.controls.LevelDelimiter>();
-            return;
-        }
+   import flash.display.Sprite;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import __AS3__.vec.Vector;
+   import net.wg.gui.lobby.techtree.helpers.Distance;
+   import flash.geom.Rectangle;
 
-        public function updateLevels(arg1:__AS3__.vec.Vector.<net.wg.gui.lobby.techtree.helpers.Distance>, arg2:Number, arg3:Number):Number
-        {
-            var loc2:*=null;
-            var loc3:*=null;
-            var loc6:*=NaN;
-            var loc7:*=NaN;
-            var loc1:*=arg1.length;
-            var loc4:*=0;
-            var loc5:*=0;
-            var loc8:*=false;
-            while (this.delimiters.length > loc1) 
+
+   public class LevelsContainer extends Sprite implements IDisposable
+   {
+          
+      public function LevelsContainer() {
+         super();
+         scale9Grid = new Rectangle(0,0,1,1);
+         tabEnabled = mouseChildren = mouseEnabled = false;
+         this.delimiters = new Vector.<LevelDelimiter>();
+      }
+
+      private static function updateLevelDelimiter(param1:LevelDelimiter, param2:Number, param3:Number, param4:Number, param5:Number) : void {
+         param1.x = param2;
+         param1.y = param3;
+         param1.setSize(param4,param5);
+      }
+
+      private var delimiters:Vector.<LevelDelimiter>;
+
+      public var oddLevelRenderer:String = "OddLevelDelimiter";
+
+      public var evenLevelRenderer:String = "EvenLevelDelimiter";
+
+      public function updateLevels(param1:Vector.<Distance>, param2:Number, param3:Number) : Number {
+         var _loc5_:Distance = null;
+         var _loc6_:LevelDelimiter = null;
+         var _loc9_:* = NaN;
+         var _loc10_:* = NaN;
+         var _loc4_:Number = param1.length;
+         var _loc7_:Number = 0;
+         var _loc8_:Number = 0;
+         var _loc11_:* = false;
+         while(this.delimiters.length > _loc4_)
+         {
+            this.removeLevelDelimiter(this.delimiters.pop());
+         }
+         var _loc12_:Number = 0;
+         while(_loc12_ < _loc4_)
+         {
+            _loc5_ = param1[_loc12_];
+            _loc6_ = null;
+            _loc11_ = false;
+            if(_loc12_ >= this.delimiters.length)
             {
-                this.removeLevelDelimiter(this.delimiters.pop());
+               this.delimiters.push(null);
             }
-            var loc9:*=0;
-            while (loc9 < loc1) 
+            if(!_loc5_)
             {
-                loc2 = arg1[loc9];
-                loc3 = null;
-                loc8 = false;
-                if (loc9 >= this.delimiters.length) 
-                {
-                    this.delimiters.push(null);
-                }
-                if (loc2) 
-                {
-                    if (loc9 != 0) 
-                    {
-                        if (arg1[(loc9 - 1)] != null) 
-                        {
-                            loc4 = loc2.start - arg3 - arg1[(loc9 - 1)].end >> 1;
-                        }
-                        if (loc9 < (loc1 - 1) && !(arg1[loc9 + 1] == null)) 
-                        {
-                            loc5 = arg1[loc9 + 1].start - loc2.end - arg3 >> 1;
-                        }
-                        else 
-                        {
-                            loc5 = loc4;
-                        }
-                    }
-                    else if (arg1[loc9 + 1] == null) 
-                    {
-                        loc5 = loc10 = loc2.start;
-                        loc4 = loc10;
-                    }
-                    else 
-                    {
-                        var loc10:*;
-                        loc5 = loc10 = arg1[loc9 + 1].start - loc2.end - arg3 >> 1;
-                        loc4 = loc10;
-                    }
-                    loc7 = loc2.start - loc4;
-                    loc6 = loc2.end - loc2.start + arg3 + loc4 + loc5;
-                    if ((loc3 = this.delimiters[loc9]) == null) 
-                    {
-                        loc3 = this.createLevelDelimiter(loc9 + 1, loc7, 0, loc6, arg2);
-                        loc8 = true;
-                    }
-                    else 
-                    {
-                        updateLevelDelimiter(loc3, loc7, 0, loc6, arg2);
-                    }
-                    if (loc3 != null) 
-                    {
-                        loc3.validateNow();
-                        if (loc8) 
-                        {
-                            addChild(loc3);
-                            this.delimiters[loc9] = loc3;
-                        }
-                    }
-                }
-                else if (this.delimiters[loc9] != null) 
-                {
-                    if (this.removeLevelDelimiter(this.delimiters[loc9])) 
-                    {
-                        this.delimiters[loc9] = null;
-                    }
-                }
-                ++loc9;
+               if(this.delimiters[_loc12_] != null)
+               {
+                  if(this.removeLevelDelimiter(this.delimiters[_loc12_]))
+                  {
+                     this.delimiters[_loc12_] = null;
+                  }
+               }
             }
-            return loc5;
-        }
-
-        public function dispose():void
-        {
-            var loc1:*=null;
-            while (this.delimiters.length) 
+            else
             {
-                loc1 = this.delimiters.pop();
-                if (!loc1) 
-                {
-                    continue;
-                }
-                loc1.dispose();
+               if(_loc12_ == 0)
+               {
+                  if(param1[_loc12_ + 1] != null)
+                  {
+                     _loc7_ = _loc8_ = param1[_loc12_ + 1].start - _loc5_.end - param3 >> 1;
+                  }
+                  else
+                  {
+                     _loc7_ = _loc8_ = _loc5_.start;
+                  }
+               }
+               else
+               {
+                  if(param1[_loc12_-1] != null)
+                  {
+                     _loc7_ = _loc5_.start - param3 - param1[_loc12_-1].end >> 1;
+                  }
+                  if(_loc12_ < _loc4_-1 && !(param1[_loc12_ + 1] == null))
+                  {
+                     _loc8_ = param1[_loc12_ + 1].start - _loc5_.end - param3 >> 1;
+                  }
+                  else
+                  {
+                     _loc8_ = _loc7_;
+                  }
+               }
+               _loc10_ = _loc5_.start - _loc7_;
+               _loc9_ = _loc5_.end - _loc5_.start + param3 + _loc7_ + _loc8_;
+               _loc6_ = this.delimiters[_loc12_];
+               if(_loc6_ != null)
+               {
+                  updateLevelDelimiter(_loc6_,_loc10_,0,_loc9_,param2);
+               }
+               else
+               {
+                  _loc6_ = this.createLevelDelimiter(_loc12_ + 1,_loc10_,0,_loc9_,param2);
+                  _loc11_ = true;
+               }
+               if(_loc6_ != null)
+               {
+                  _loc6_.validateNow();
+                  if(_loc11_)
+                  {
+                     addChild(_loc6_);
+                     this.delimiters[_loc12_] = _loc6_;
+                  }
+               }
             }
-            while (numChildren > 0) 
+            _loc12_++;
+         }
+         return _loc8_;
+      }
+
+      public function dispose() : void {
+         var _loc1_:LevelDelimiter = null;
+         while(this.delimiters.length)
+         {
+            _loc1_ = this.delimiters.pop();
+            if(_loc1_)
             {
-                removeChildAt(0);
+               _loc1_.dispose();
             }
-            return;
-        }
+         }
+         while(numChildren > 0)
+         {
+            removeChildAt(0);
+         }
+      }
 
-        internal function createLevelDelimiter(arg1:Number, arg2:Number, arg3:Number, arg4:Number, arg5:Number):net.wg.gui.lobby.techtree.controls.LevelDelimiter
-        {
-            return App.utils.classFactory.getComponent(arg1 % 2 ? this.oddLevelRenderer : this.evenLevelRenderer, net.wg.gui.lobby.techtree.controls.LevelDelimiter, {"x":arg2, "y":arg3, "width":arg4, "height":arg5, "levelNumber":arg1});
-        }
-
-        internal function removeLevelDelimiter(arg1:net.wg.gui.lobby.techtree.controls.LevelDelimiter):Boolean
-        {
-            var loc1:*=false;
-            if (contains(arg1)) 
+      private function createLevelDelimiter(param1:Number, param2:Number, param3:Number, param4:Number, param5:Number) : LevelDelimiter {
+         return App.utils.classFactory.getComponent(param1 % 2?this.oddLevelRenderer:this.evenLevelRenderer,LevelDelimiter,
             {
-                removeChild(arg1);
-                loc1 = true;
+               "x":param2,
+               "y":param3,
+               "width":param4,
+               "height":param5,
+               "levelNumber":param1
             }
-            return loc1;
-        }
+         );
+      }
 
-        internal static function updateLevelDelimiter(arg1:net.wg.gui.lobby.techtree.controls.LevelDelimiter, arg2:Number, arg3:Number, arg4:Number, arg5:Number):void
-        {
-            arg1.x = arg2;
-            arg1.y = arg3;
-            arg1.setSize(arg4, arg5);
-            return;
-        }
+      private function removeLevelDelimiter(param1:LevelDelimiter) : Boolean {
+         var _loc2_:* = false;
+         if(contains(param1))
+         {
+            removeChild(param1);
+            _loc2_ = true;
+         }
+         return _loc2_;
+      }
+   }
 
-        internal var delimiters:__AS3__.vec.Vector.<net.wg.gui.lobby.techtree.controls.LevelDelimiter>;
-
-        public var oddLevelRenderer:String="OddLevelDelimiter";
-
-        public var evenLevelRenderer:String="EvenLevelDelimiter";
-    }
 }

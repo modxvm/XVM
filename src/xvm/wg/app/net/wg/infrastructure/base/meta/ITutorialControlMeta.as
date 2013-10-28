@@ -1,25 +1,28 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface ITutorialControlMeta extends flash.events.IEventDispatcher
-    {
-        function restartS():void;
+   import flash.events.IEventDispatcher;
 
-        function refuseS():void;
 
-        function as_setup(arg1:Object):void;
+   public interface ITutorialControlMeta extends IEventDispatcher
+   {
+          
+      function restartS() : void;
 
-        function as_setPlayerXPLevel(arg1:int):void;
+      function refuseS() : void;
 
-        function as_setChapterInfo(arg1:String, arg2:String):void;
+      function as_setup(param1:Object) : void;
 
-        function as_clearChapterInfo():void;
+      function as_setPlayerXPLevel(param1:int) : void;
 
-        function as_setRunMode():void;
+      function as_setChapterInfo(param1:String, param2:String) : void;
 
-        function as_setRestartMode():void;
+      function as_clearChapterInfo() : void;
 
-        function as_setDisabled(arg1:Boolean):void;
-    }
+      function as_setRunMode() : void;
+
+      function as_setRestartMode() : void;
+
+      function as_setDisabled(param1:Boolean) : void;
+   }
+
 }

@@ -1,23 +1,25 @@
-package net.wg.data.constants 
+package net.wg.data.constants
 {
-    public class RolesState extends Object
-    {
-        public function RolesState()
-        {
-            super();
-            return;
-        }
 
-        public static const ALL:String="None";
 
-        public static const COMANDER:String="commander";
+   public class RolesState extends Object
+   {
+          
+      public function RolesState() {
+         super();
+      }
 
-        public static const GUNNER:String="gunner";
+      public static const ALL:String = "None";
 
-        public static const LOADER:String="loader";
+      public static const COMANDER:String = "commander";
 
-        public static const DRIVER:String="driver";
+      public static const GUNNER:String = "gunner";
 
-        public static const RADIOMAN:String="radioman";
-    }
+      public static const LOADER:String = "loader";
+
+      public static const DRIVER:String = "driver";
+
+      public static const RADIOMAN:String = "radioman";
+   }
+
 }

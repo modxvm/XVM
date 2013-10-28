@@ -1,79 +1,69 @@
-package net.wg.gui.lobby.profile 
+package net.wg.gui.lobby.profile
 {
-    import flash.display.*;
-    import flash.events.*;
-    import flash.ui.*;
-    import net.wg.data.*;
-    import net.wg.data.gui_items.dossier.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.events.*;
-    
-    public class Profile extends net.wg.infrastructure.base.meta.impl.ProfileMeta implements net.wg.infrastructure.base.meta.IProfileMeta
-    {
-        public function Profile()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.ProfileMeta;
+   import net.wg.infrastructure.base.meta.IProfileMeta;
+   import flash.display.Sprite;
+   import scaleform.clik.events.InputEvent;
+   import net.wg.data.Aliases;
+   import flash.ui.Keyboard;
+   import flash.events.KeyboardEvent;
+   import net.wg.data.gui_items.dossier.AccountDossier;
+   import scaleform.clik.constants.InvalidationType;
+   import net.wg.data.constants.LobbyMetrics;
 
-        internal function handleEscape(arg1:scaleform.clik.events.InputEvent):void
-        {
-            onCloseProfileS();
-            return;
-        }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            registerComponent(this.tabNavigator, net.wg.data.Aliases.PROFILE_TAB_NAVIGATOR);
-            this.tabNavigator.centerOffset = net.wg.gui.lobby.profile.ProfileConstants.MAIN_CENTER_OFFSET;
-            App.gameInputMgr.setKeyHandler(flash.ui.Keyboard.ESCAPE, flash.events.KeyboardEvent.KEY_DOWN, this.handleEscape, true);
-            return;
-        }
+   public class Profile extends ProfileMeta implements IProfileMeta
+   {
+          
+      public function Profile() {
+         super();
+      }
 
-        public function as_update(arg1:Object):void
-        {
-            var loc1:*=arg1 ? arg1.toString() : null;
-            var loc2:*=new net.wg.data.gui_items.dossier.AccountDossier(loc1);
-            this.tabNavigator.viewStack.updateData(loc2);
-            return;
-        }
+      public var background:Sprite;
 
-        public override function updateStage(arg1:Number, arg2:Number):void
-        {
-            setViewSize(arg1, arg2);
-            return;
-        }
+      public var headerBackground:Sprite;
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
-            {
-                this.background.width = _width;
-                this.background.height = _height;
-                this.tabNavigator.setAvailableSize(_width, _height - this.tabNavigator.y);
-                this.headerBackground.x = _width - this.headerBackground.width >> 1;
-                this.mainBackground.x = _width - this.mainBackground.width >> 1;
-            }
-            return;
-        }
+      public var mainBackground:Sprite;
 
-        protected override function onDispose():void
-        {
-            App.gameInputMgr.clearKeyHandler(flash.ui.Keyboard.ESCAPE, flash.events.KeyboardEvent.KEY_DOWN);
-            super.onDispose();
-            return;
-        }
+      public var tabNavigator:ProfileTabNavigator;
 
-        public var background:flash.display.Sprite;
+      private function handleEscape(param1:InputEvent) : void {
+         onCloseProfileS();
+      }
 
-        public var headerBackground:flash.display.Sprite;
+      override protected function configUI() : void {
+         super.configUI();
+         registerComponent(this.tabNavigator,Aliases.PROFILE_TAB_NAVIGATOR);
+         this.tabNavigator.centerOffset = ProfileConstants.MAIN_CENTER_OFFSET;
+         App.gameInputMgr.setKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN,this.handleEscape,true);
+      }
 
-        public var mainBackground:flash.display.Sprite;
+      public function as_update(param1:Object) : void {
+         var _loc2_:String = param1?param1.toString():null;
+         var _loc3_:AccountDossier = new AccountDossier(_loc2_);
+         this.tabNavigator.viewStack.updateData(_loc3_);
+      }
 
-        public var tabNavigator:net.wg.gui.lobby.profile.ProfileTabNavigator;
-    }
+      override public function updateStage(param1:Number, param2:Number) : void {
+         setViewSize(param1,param2);
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         if(isInvalid(InvalidationType.SIZE))
+         {
+            this.background.width = _width;
+            this.background.height = _height + LobbyMetrics.LOBBY_MESSENGER_HEIGHT;
+            this.tabNavigator.setAvailableSize(_width,_height - this.tabNavigator.y);
+            this.headerBackground.x = _width - this.headerBackground.width >> 1;
+            this.mainBackground.x = _width - this.mainBackground.width >> 1;
+         }
+      }
+
+      override protected function onDispose() : void {
+         App.gameInputMgr.clearKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN);
+         super.onDispose();
+      }
+   }
+
 }

@@ -1,76 +1,67 @@
-package net.wg.gui.lobby.hangar.maintenance 
+package net.wg.gui.lobby.hangar.maintenance
 {
-    import flash.events.*;
-    import flash.geom.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.lobby.hangar.maintenance.events.*;
-    import net.wg.utils.*;
-    import scaleform.clik.constants.*;
-    
-    public class MaintenanceDropDown extends net.wg.gui.components.controls.DropdownMenu
-    {
-        public function MaintenanceDropDown()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.components.controls.DropdownMenu;
+   import flash.geom.Point;
+   import net.wg.utils.IEventCollector;
+   import net.wg.gui.lobby.hangar.maintenance.events.OnEquipmentRendererOver;
+   import flash.events.MouseEvent;
+   import scaleform.clik.constants.InvalidationType;
 
-        protected override function showDropdown():void
-        {
-            super.showDropdown();
-            var loc1:*=parent.parent.globalToLocal(new flash.geom.Point(_dropdownRef.x, _dropdownRef.y));
-            var loc2:*=App.utils.events;
-            loc2.disableDisposingForObj(_dropdownRef);
-            parent.parent.addChild(_dropdownRef);
-            _dropdownRef.x = loc1.x;
-            _dropdownRef.y = loc1.y;
-            loc2.enableDisposingForObj(_dropdownRef);
-            loc2.addEvent(_dropdownRef, net.wg.gui.lobby.hangar.maintenance.events.OnEquipmentRendererOver.ON_EQUIPMENT_RENDERER_OVER, this.handleOnEquipmentRendererOver, false, 0, true);
-            return;
-        }
 
-        internal function handleOnEquipmentRendererOver(arg1:net.wg.gui.lobby.hangar.maintenance.events.OnEquipmentRendererOver):void
-        {
-            dispatchEvent(new net.wg.gui.lobby.hangar.maintenance.events.OnEquipmentRendererOver(net.wg.gui.lobby.hangar.maintenance.events.OnEquipmentRendererOver.ON_EQUIPMENT_RENDERER_OVER, arg1.moduleID, arg1.modulePrices, arg1.inventoryCount, arg1.vehicleCount, arg1.moduleIndex));
-            return;
-        }
+   public class MaintenanceDropDown extends DropdownMenu
+   {
+          
+      public function MaintenanceDropDown() {
+         super();
+      }
 
-        protected override function handleMouseRollOut(arg1:flash.events.MouseEvent):void
-        {
-            super.handleMouseRollOut(arg1);
-            if (!arg1.buttonDown) 
+      override protected function showDropdown() : void {
+         super.showDropdown();
+         var _loc1_:Point = parent.parent.globalToLocal(new Point(_dropdownRef.x,_dropdownRef.y));
+         var _loc2_:IEventCollector = App.utils.events;
+         _loc2_.disableDisposingForObj(_dropdownRef);
+         parent.parent.addChild(_dropdownRef);
+         _dropdownRef.x = _loc1_.x;
+         _dropdownRef.y = _loc1_.y;
+         _loc2_.enableDisposingForObj(_dropdownRef);
+         _loc2_.addEvent(_dropdownRef,OnEquipmentRendererOver.ON_EQUIPMENT_RENDERER_OVER,this.handleOnEquipmentRendererOver,false,0,true);
+      }
+
+      private function handleOnEquipmentRendererOver(param1:OnEquipmentRendererOver) : void {
+         dispatchEvent(new OnEquipmentRendererOver(OnEquipmentRendererOver.ON_EQUIPMENT_RENDERER_OVER,param1.moduleID,param1.modulePrices,param1.inventoryCount,param1.vehicleCount,param1.moduleIndex));
+      }
+
+      override protected function handleMouseRollOut(param1:MouseEvent) : void {
+         super.handleMouseRollOut(param1);
+         if(!param1.buttonDown)
+         {
+            if(!enabled)
             {
-                if (!enabled) 
-                {
-                    return;
-                }
-                setState("out");
+               return;
             }
-            return;
-        }
+            setState("out");
+         }
+      }
 
-        protected override function handleMouseRollOver(arg1:flash.events.MouseEvent):void
-        {
-            super.handleMouseRollOver(arg1);
-            if (!arg1.buttonDown) 
+      override protected function handleMouseRollOver(param1:MouseEvent) : void {
+         super.handleMouseRollOver(param1);
+         if(!param1.buttonDown)
+         {
+            if(!enabled)
             {
-                if (!enabled) 
-                {
-                    return;
-                }
-                setState("over");
+               return;
             }
-            return;
-        }
+            setState("over");
+         }
+      }
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
-            {
-                enabled = _dataProvider.length > 0;
-            }
-            return;
-        }
-    }
+      override protected function draw() : void {
+         super.draw();
+         if(isInvalid(InvalidationType.DATA))
+         {
+            enabled = _dataProvider.length > 0;
+         }
+      }
+   }
+
 }

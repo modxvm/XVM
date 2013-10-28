@@ -1,111 +1,101 @@
-package net.wg.gui.lobby.techtree.controls 
+package net.wg.gui.lobby.techtree.controls
 {
-    import flash.text.*;
-    import net.wg.gui.lobby.techtree.*;
-    import net.wg.gui.lobby.techtree.constants.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.core.*;
-    import scaleform.clik.events.*;
-    import scaleform.clik.utils.*;
-    import scaleform.gfx.*;
-    
-    public class ResearchTitleBar extends scaleform.clik.core.UIComponent
-    {
-        public function ResearchTitleBar()
-        {
-            super();
-            scaleform.gfx.Extensions.enabled = true;
+   import scaleform.clik.core.UIComponent;
+   import flash.text.TextField;
+   import net.wg.gui.lobby.techtree.constants.TTInvalidationType;
+   import scaleform.clik.events.ButtonEvent;
+   import scaleform.clik.utils.Constraints;
+   import scaleform.gfx.TextFieldEx;
+   import scaleform.clik.constants.InvalidationType;
+   import net.wg.gui.lobby.techtree.TechTreeEvent;
+   import scaleform.gfx.Extensions;
+
+
+   public class ResearchTitleBar extends UIComponent
+   {
+          
+      public function ResearchTitleBar() {
+         super();
+         Extensions.enabled = true;
+      }
+
+      private var _title:String = "";
+
+      private var _nation:String = "";
+
+      public var titleField:TextField;
+
+      public var returnButton:ReturnToTTButton;
+
+      public function setTitle(param1:String) : void {
+         if(this._title == param1)
+         {
             return;
-        }
+         }
+         this._title = param1;
+         invalidate(TTInvalidationType.TITLE);
+      }
 
-        public function setTitle(arg1:String):void
-        {
-            if (this._title == arg1) 
-            {
-                return;
-            }
-            this._title = arg1;
-            invalidate(net.wg.gui.lobby.techtree.constants.TTInvalidationType.TITLE);
+      public function setNation(param1:String) : void {
+         if(this._nation == param1)
+         {
             return;
-        }
+         }
+         this._nation = param1;
+         invalidate(TTInvalidationType.NATION);
+      }
 
-        public function setNation(arg1:String):void
-        {
-            if (this._nation == arg1) 
+      override public function dispose() : void {
+         if(this.returnButton != null)
+         {
+            this.returnButton.removeEventListener(ButtonEvent.CLICK,this.handleClickReturnButton,false);
+            this.returnButton.dispose();
+         }
+         super.dispose();
+      }
+
+      override protected function configUI() : void {
+         constraints = new Constraints(this);
+         if(this.titleField != null)
+         {
+            constraints.addElement(this.titleField.name,this.titleField,Constraints.LEFT | Constraints.RIGHT);
+         }
+         if(this.returnButton != null)
+         {
+            constraints.addElement(this.returnButton.name,this.returnButton,Constraints.TOP | Constraints.LEFT);
+            this.returnButton.addEventListener(ButtonEvent.CLICK,this.handleClickReturnButton,false,0,true);
+         }
+         super.configUI();
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         if((isInvalid(TTInvalidationType.TITLE)) && !(this.titleField == null))
+         {
+            TextFieldEx.setVerticalAlign(this.titleField,TextFieldEx.VALIGN_CENTER);
+            this.titleField.text = this._title;
+         }
+         if((isInvalid(TTInvalidationType.NATION)) && !(this.returnButton == null))
+         {
+            if(this._nation.length > 0)
             {
-                return;
+               this.returnButton.label = this._nation;
+               this.returnButton.visible = true;
             }
-            this._nation = arg1;
-            invalidate(net.wg.gui.lobby.techtree.constants.TTInvalidationType.NATION);
-            return;
-        }
-
-        public override function dispose():void
-        {
-            if (this.returnButton != null) 
+            else
             {
-                this.returnButton.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.handleClickReturnButton, false);
-                this.returnButton.dispose();
+               this.returnButton.visible = false;
             }
-            super.dispose();
-            return;
-        }
+         }
+         if(isInvalid(InvalidationType.SIZE))
+         {
+            constraints.update(_width,_height);
+         }
+      }
 
-        protected override function configUI():void
-        {
-            constraints = new scaleform.clik.utils.Constraints(this);
-            if (this.titleField != null) 
-            {
-                constraints.addElement(this.titleField.name, this.titleField, scaleform.clik.utils.Constraints.LEFT | scaleform.clik.utils.Constraints.RIGHT);
-            }
-            if (this.returnButton != null) 
-            {
-                constraints.addElement(this.returnButton.name, this.returnButton, scaleform.clik.utils.Constraints.TOP | scaleform.clik.utils.Constraints.LEFT);
-                this.returnButton.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.handleClickReturnButton, false, 0, true);
-            }
-            super.configUI();
-            return;
-        }
+      private function handleClickReturnButton(param1:ButtonEvent) : void {
+         dispatchEvent(new TechTreeEvent(TechTreeEvent.RETURN_2_TECHTREE));
+      }
+   }
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(net.wg.gui.lobby.techtree.constants.TTInvalidationType.TITLE) && !(this.titleField == null)) 
-            {
-                scaleform.gfx.TextFieldEx.setVerticalAlign(this.titleField, scaleform.gfx.TextFieldEx.VALIGN_CENTER);
-                this.titleField.text = this._title;
-            }
-            if (isInvalid(net.wg.gui.lobby.techtree.constants.TTInvalidationType.NATION) && !(this.returnButton == null)) 
-            {
-                if (this._nation.length > 0) 
-                {
-                    this.returnButton.label = this._nation;
-                    this.returnButton.visible = true;
-                }
-                else 
-                {
-                    this.returnButton.visible = false;
-                }
-            }
-            if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
-            {
-                constraints.update(_width, _height);
-            }
-            return;
-        }
-
-        internal function handleClickReturnButton(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            dispatchEvent(new net.wg.gui.lobby.techtree.TechTreeEvent(net.wg.gui.lobby.techtree.TechTreeEvent.RETURN_2_TECHTREE));
-            return;
-        }
-
-        internal var _title:String="";
-
-        internal var _nation:String="";
-
-        public var titleField:flash.text.TextField;
-
-        public var returnButton:net.wg.gui.lobby.techtree.controls.ReturnToTTButton;
-    }
 }

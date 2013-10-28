@@ -1,103 +1,90 @@
-package net.wg.gui.prebattle.battleSession 
+package net.wg.gui.prebattle.battleSession
 {
-    import flash.display.*;
-    import net.wg.data.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.events.*;
-    import net.wg.gui.lobby.messengerBar.*;
-    import net.wg.gui.messenger.*;
-    import net.wg.gui.prebattle.meta.*;
-    import net.wg.gui.prebattle.meta.impl.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.data.*;
-    import scaleform.clik.utils.*;
-    
-    public class BattleSessionList extends net.wg.gui.prebattle.meta.impl.BattleSessionListMeta implements net.wg.gui.prebattle.meta.IBattleSessionListMeta
-    {
-        public function BattleSessionList()
-        {
-            super();
-            showWindowBg = false;
-            canMinimize = true;
-            enabledCloseBtn = false;
-            canResize = true;
-            isCentered = false;
-            return;
-        }
+   import net.wg.gui.prebattle.meta.impl.BattleSessionListMeta;
+   import net.wg.gui.prebattle.meta.IBattleSessionListMeta;
+   import net.wg.gui.messenger.ChannelComponent;
+   import net.wg.gui.components.controls.ScrollBar;
+   import net.wg.gui.components.controls.ScrollingListEx;
+   import flash.display.MovieClip;
+   import scaleform.clik.data.DataProvider;
+   import net.wg.gui.events.ListEventEx;
+   import net.wg.data.Aliases;
+   import net.wg.gui.lobby.messengerBar.WindowGeometryInBar;
+   import net.wg.gui.events.MessengerBarEvent;
+   import scaleform.clik.utils.Constraints;
+   import scaleform.clik.constants.ConstrainMode;
 
-        public override function setFocus():void
-        {
-            super.setFocus();
-            if (this.channelComponent) 
-            {
-                this.channelComponent.setFocusToInput();
-            }
-            return;
-        }
 
-        public function as_refreshList(arg1:Array):void
-        {
-            this.groupsList.dataProvider = new scaleform.clik.data.DataProvider(arg1);
-            return;
-        }
+   public class BattleSessionList extends BattleSessionListMeta implements IBattleSessionListMeta
+   {
+          
+      public function BattleSessionList() {
+         super();
+         showWindowBg = false;
+         canMinimize = true;
+         enabledCloseBtn = false;
+         canResize = true;
+         isCentered = false;
+      }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.groupsList.addEventListener(net.wg.gui.events.ListEventEx.ITEM_CLICK, this.handleTeamItemClick);
-            this.setConstraints();
-            return;
-        }
+      public var channelComponent:ChannelComponent;
 
-        protected override function onDispose():void
-        {
-            super.onDispose();
-            this.groupsList.removeEventListener(net.wg.gui.events.ListEventEx.ITEM_CLICK, this.handleTeamItemClick);
-            return;
-        }
+      public var groupsScrollBar:ScrollBar;
 
-        protected override function onPopulate():void
-        {
-            super.onPopulate();
-            registerComponent(this.channelComponent, net.wg.data.Aliases.CHANNEL_COMPONENT);
-            window.setTitleIcon("teamList");
-            window.title = CHAT.CHANNELS_SPECIAL_BATTLES;
-            geometry = new net.wg.gui.lobby.messengerBar.WindowGeometryInBar(net.wg.gui.events.MessengerBarEvent.PIN_CAROUSEL_WINDOW, getClientIDS());
-            return;
-        }
+      public var groupsList:ScrollingListEx;
 
-        protected override function draw():void
-        {
-            super.draw();
-            return;
-        }
+      public var groupListBG:MovieClip;
 
-        internal function setConstraints():void
-        {
-            constraints = new scaleform.clik.utils.Constraints(this, scaleform.clik.constants.ConstrainMode.REFLOW);
-            constraints.addElement("messageArea", this.channelComponent.messageArea, scaleform.clik.utils.Constraints.ALL);
-            constraints.addElement("messageInput", this.channelComponent.messageInput, scaleform.clik.utils.Constraints.BOTTOM | scaleform.clik.utils.Constraints.LEFT | scaleform.clik.utils.Constraints.RIGHT);
-            constraints.addElement("messageAreaScrollBar", this.channelComponent.messageAreaScrollBar, scaleform.clik.utils.Constraints.TOP | scaleform.clik.utils.Constraints.RIGHT);
-            constraints.addElement("sendButton", this.channelComponent.sendButton, scaleform.clik.utils.Constraints.BOTTOM | scaleform.clik.utils.Constraints.RIGHT);
-            constraints.addElement("groupsList", this.groupsList, scaleform.clik.utils.Constraints.TOP | scaleform.clik.utils.Constraints.BOTTOM | scaleform.clik.utils.Constraints.RIGHT);
-            constraints.addElement("groupListBG", this.groupListBG, scaleform.clik.utils.Constraints.TOP | scaleform.clik.utils.Constraints.BOTTOM | scaleform.clik.utils.Constraints.RIGHT);
-            constraints.addElement("groupsScrollBar", this.groupsScrollBar, scaleform.clik.utils.Constraints.TOP | scaleform.clik.utils.Constraints.BOTTOM | scaleform.clik.utils.Constraints.RIGHT);
-            return;
-        }
+      override public function setFocus() : void {
+         super.setFocus();
+         if(this.channelComponent)
+         {
+            this.channelComponent.setFocusToInput();
+         }
+      }
 
-        internal function handleTeamItemClick(arg1:net.wg.gui.events.ListEventEx):void
-        {
-            var loc1:*=new net.wg.gui.prebattle.battleSession.BSListRendererVO(arg1.itemData);
-            requestToJoinTeamS(loc1.prbID, loc1.prbType);
-            return;
-        }
+      public function as_refreshList(param1:Array) : void {
+         this.groupsList.dataProvider = new DataProvider(param1);
+      }
 
-        public var channelComponent:net.wg.gui.messenger.ChannelComponent;
+      override protected function configUI() : void {
+         super.configUI();
+         this.groupsList.addEventListener(ListEventEx.ITEM_CLICK,this.handleTeamItemClick);
+         this.setConstraints();
+      }
 
-        public var groupsScrollBar:net.wg.gui.components.controls.ScrollBar;
+      override protected function onDispose() : void {
+         super.onDispose();
+         this.groupsList.removeEventListener(ListEventEx.ITEM_CLICK,this.handleTeamItemClick);
+      }
 
-        public var groupsList:net.wg.gui.components.controls.ScrollingListEx;
+      override protected function onPopulate() : void {
+         super.onPopulate();
+         registerComponent(this.channelComponent,Aliases.CHANNEL_COMPONENT);
+         window.setTitleIcon("teamList");
+         window.title = CHAT.CHANNELS_SPECIAL_BATTLES;
+         geometry = new WindowGeometryInBar(MessengerBarEvent.PIN_CAROUSEL_WINDOW,getClientIDS());
+      }
 
-        public var groupListBG:flash.display.MovieClip;
-    }
+      override protected function draw() : void {
+         super.draw();
+      }
+
+      private function setConstraints() : void {
+         constraints = new Constraints(this,ConstrainMode.REFLOW);
+         constraints.addElement("messageArea",this.channelComponent.messageArea,Constraints.ALL);
+         constraints.addElement("messageInput",this.channelComponent.messageInput,Constraints.BOTTOM | Constraints.LEFT | Constraints.RIGHT);
+         constraints.addElement("messageAreaScrollBar",this.channelComponent.messageAreaScrollBar,Constraints.TOP | Constraints.RIGHT);
+         constraints.addElement("sendButton",this.channelComponent.sendButton,Constraints.BOTTOM | Constraints.RIGHT);
+         constraints.addElement("groupsList",this.groupsList,Constraints.TOP | Constraints.BOTTOM | Constraints.RIGHT);
+         constraints.addElement("groupListBG",this.groupListBG,Constraints.TOP | Constraints.BOTTOM | Constraints.RIGHT);
+         constraints.addElement("groupsScrollBar",this.groupsScrollBar,Constraints.TOP | Constraints.BOTTOM | Constraints.RIGHT);
+      }
+
+      private function handleTeamItemClick(param1:ListEventEx) : void {
+         var _loc2_:BSListRendererVO = new BSListRendererVO(param1.itemData);
+         requestToJoinTeamS(_loc2_.prbID,_loc2_.prbType);
+      }
+   }
+
 }

@@ -1,31 +1,29 @@
-package net.wg.infrastructure.base.meta.impl 
+package net.wg.infrastructure.base.meta.impl
 {
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.base.*;
-    
-    public class QuestsCurrentTabMeta extends net.wg.infrastructure.base.BaseDAAPIComponent
-    {
-        public function QuestsCurrentTabMeta()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.BaseDAAPIComponent;
+   import net.wg.data.constants.Errors;
 
-        public function sortS(arg1:int, arg2:Boolean):void
-        {
-            App.utils.asserter.assertNotNull(this.sort, "sort" + net.wg.data.constants.Errors.CANT_NULL);
-            this.sort(arg1, arg2);
-            return;
-        }
 
-        public function getQuestInfoS(arg1:String):Object
-        {
-            App.utils.asserter.assertNotNull(this.getQuestInfo, "getQuestInfo" + net.wg.data.constants.Errors.CANT_NULL);
-            return this.getQuestInfo(arg1);
-        }
+   public class QuestsCurrentTabMeta extends BaseDAAPIComponent
+   {
+          
+      public function QuestsCurrentTabMeta() {
+         super();
+      }
 
-        public var sort:Function=null;
+      public var sort:Function = null;
 
-        public var getQuestInfo:Function=null;
-    }
+      public var getQuestInfo:Function = null;
+
+      public function sortS(param1:int, param2:Boolean) : void {
+         App.utils.asserter.assertNotNull(this.sort,"sort" + Errors.CANT_NULL);
+         this.sort(param1,param2);
+      }
+
+      public function getQuestInfoS(param1:String) : Object {
+         App.utils.asserter.assertNotNull(this.getQuestInfo,"getQuestInfo" + Errors.CANT_NULL);
+         return this.getQuestInfo(param1);
+      }
+   }
+
 }

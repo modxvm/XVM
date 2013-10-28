@@ -1,230 +1,223 @@
-package net.wg.gui.lobby.messengerBar.carousel 
+package net.wg.gui.lobby.messengerBar.carousel
 {
-    import flash.display.*;
-    import flash.events.*;
-    import flash.geom.*;
-    import net.wg.data.constants.*;
-    import net.wg.data.daapi.base.*;
-    import net.wg.gui.components.windows.*;
-    import net.wg.gui.events.*;
-    import net.wg.gui.lobby.messengerBar.*;
-    import net.wg.gui.lobby.messengerBar.carousel.data.*;
-    import net.wg.gui.lobby.messengerBar.carousel.events.*;
-    import net.wg.infrastructure.base.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import net.wg.infrastructure.interfaces.*;
-    import net.wg.utils.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.interfaces.*;
-    
-    public class ChannelCarousel extends net.wg.infrastructure.base.meta.impl.ChannelCarouselMeta implements net.wg.infrastructure.base.meta.IChannelCarouselMeta, net.wg.infrastructure.interfaces.IHelpLayoutComponent
-    {
-        public function ChannelCarousel()
-        {
-            super();
-            this._dataProvider = new net.wg.data.daapi.base.DAAPIDataProvider();
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.ChannelCarouselMeta;
+   import net.wg.infrastructure.base.meta.IChannelCarouselMeta;
+   import net.wg.infrastructure.interfaces.IHelpLayoutComponent;
+   import flash.display.Sprite;
+   import net.wg.data.daapi.base.DAAPIDataProvider;
+   import flash.display.DisplayObject;
+   import net.wg.utils.IHelpLayout;
+   import net.wg.data.constants.Directions;
+   import flash.events.Event;
+   import net.wg.gui.lobby.messengerBar.carousel.events.ChannelListEvent;
+   import net.wg.gui.events.MessengerBarEvent;
+   import scaleform.clik.constants.InvalidationType;
+   import net.wg.gui.lobby.messengerBar.carousel.data.ChannelListItemVO;
+   import scaleform.clik.interfaces.IListItemRenderer;
+   import net.wg.infrastructure.interfaces.IAbstractWindowView;
+   import net.wg.infrastructure.interfaces.IWindow;
+   import flash.geom.Point;
+   import flash.events.EventPhase;
+   import net.wg.infrastructure.base.AbstractWindowView;
+   import net.wg.gui.lobby.messengerBar.WindowOffsetsInBar;
+   import net.wg.gui.components.windows.Window;
 
-        public function as_getDataProvider():Object
-        {
-            return this._dataProvider;
-        }
 
-        public function showHelpLayout():void
-        {
-            var loc1:*=App.utils.helpLayout;
-            var loc2:*=this.list.getRendererAt(0) as flash.display.DisplayObject;
-            var loc3:*=loc1.getProps(loc2.width, loc2.height, net.wg.data.constants.Directions.LEFT, LOBBY_HELP.CHAT_CHANNEL_CAROUSEL, loc2.x, loc2.y);
-            this._commonChannelHL = loc1.create(root, loc3, this.list);
-            return;
-        }
+   public class ChannelCarousel extends ChannelCarouselMeta implements IChannelCarouselMeta, IHelpLayoutComponent
+   {
+          
+      public function ChannelCarousel() {
+         super();
+         this._dataProvider = new DAAPIDataProvider();
+      }
 
-        public function closeHelpLayout():void
-        {
-            var loc1:*=App.utils.helpLayout;
-            loc1.destroy(this._commonChannelHL);
-            return;
-        }
+      private static const HORIZONTAL_OFFSET_NO_SCROLL:Number = 5;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this._dataProvider.addEventListener(flash.events.Event.CHANGE, this.onDataChange);
-            this.scrollBar.upArrow.preventAutosizing = true;
-            this.scrollBar.downArrow.preventAutosizing = true;
-            this.list.addEventListener(net.wg.gui.lobby.messengerBar.carousel.events.ChannelListEvent.OPEN_CHANNEL_CLICK, this.onChannelOpenClick);
-            this.list.addEventListener(net.wg.gui.lobby.messengerBar.carousel.events.ChannelListEvent.CLOSE_CHANNEL_CLICK, this.onChannelCloseClick);
-            this.list.dataProvider = this._dataProvider;
-            App.stage.addEventListener(net.wg.gui.events.MessengerBarEvent.PIN_CAROUSEL_WINDOW, this.handlePinChannelWindow);
-            return;
-        }
+      private static const HORIZONTAL_OFFSET_SCROLL:Number = 24;
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
+      public var list:ChannelList;
+
+      public var scrollBar:ChannelCarouselScrollBar;
+
+      public var background:Sprite;
+
+      protected var _dataProvider:DAAPIDataProvider;
+
+      private var _commonChannelHL:DisplayObject;
+
+      public function as_getDataProvider() : Object {
+         return this._dataProvider;
+      }
+
+      public function showHelpLayout() : void {
+         var _loc1_:IHelpLayout = App.utils.helpLayout;
+         var _loc2_:DisplayObject = this.list.getRendererAt(0) as DisplayObject;
+         var _loc3_:Object = _loc1_.getProps(_loc2_.width,_loc2_.height,Directions.LEFT,LOBBY_HELP.CHAT_CHANNEL_CAROUSEL,_loc2_.x,_loc2_.y);
+         this._commonChannelHL = _loc1_.create(root,_loc3_,this.list);
+      }
+
+      public function closeHelpLayout() : void {
+         var _loc1_:IHelpLayout = App.utils.helpLayout;
+         _loc1_.destroy(this._commonChannelHL);
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         this._dataProvider.addEventListener(Event.CHANGE,this.onDataChange);
+         this.scrollBar.upArrow.preventAutosizing = true;
+         this.scrollBar.downArrow.preventAutosizing = true;
+         this.list.addEventListener(ChannelListEvent.OPEN_CHANNEL_CLICK,this.onChannelOpenClick);
+         this.list.addEventListener(ChannelListEvent.CLOSE_CHANNEL_CLICK,this.onChannelCloseClick);
+         this.list.dataProvider = this._dataProvider;
+         App.stage.addEventListener(MessengerBarEvent.PIN_CAROUSEL_WINDOW,this.handlePinChannelWindow);
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         if(isInvalid(InvalidationType.SIZE))
+         {
+            this.background.width = _width;
+            this.updateScrollBar();
+         }
+      }
+
+      override protected function onDispose() : void {
+         this._dataProvider.removeEventListener(Event.CHANGE,this.onDataChange);
+         this.list.removeEventListener(ChannelListEvent.OPEN_CHANNEL_CLICK,this.onChannelOpenClick);
+         this.list.removeEventListener(ChannelListEvent.CLOSE_CHANNEL_CLICK,this.onChannelCloseClick);
+         App.stage.removeEventListener(MessengerBarEvent.PIN_CAROUSEL_WINDOW,this.handlePinChannelWindow);
+         this._dataProvider.cleanUp();
+         this._dataProvider = null;
+         if(this.list.dataProvider)
+         {
+            this.list.dataProvider.cleanUp();
+            this.list.dataProvider = null;
+         }
+         this.list.dispose();
+         this.list = null;
+         this.scrollBar.dispose();
+         this.scrollBar = null;
+         this.background = null;
+         this._commonChannelHL = null;
+         super.onDispose();
+      }
+
+      private function updateScrollBar() : void {
+         var _loc1_:* = false;
+         this.list.x = HORIZONTAL_OFFSET_NO_SCROLL;
+         this.list.width = _width - HORIZONTAL_OFFSET_NO_SCROLL * 2;
+         this.list.validateNow();
+         _loc1_ = this.list.dataProvider?this.list.columnCount < this.list.dataProvider.length:false;
+         this.scrollBar.width = _width - this.scrollBar.x * 2;
+         this.scrollBar.visible = _loc1_;
+         if(_loc1_)
+         {
+            this.list.x = HORIZONTAL_OFFSET_SCROLL;
+            this.list.width = _width - HORIZONTAL_OFFSET_SCROLL * 2;
+         }
+      }
+
+      private function findIndexByClientID(param1:Number) : Number {
+         var _loc4_:ChannelListItemVO = null;
+         var _loc2_:Number = -1;
+         var _loc3_:Number = this._dataProvider.length;
+         var _loc5_:Number = 0;
+         while(_loc5_ < _loc3_)
+         {
+            _loc4_ = new ChannelListItemVO(this._dataProvider.requestItemAt(_loc5_));
+            if(_loc4_.clientID == param1)
             {
-                this.background.width = _width;
-                this.updateScrollBar();
+               _loc2_ = _loc5_;
+               break;
             }
-            return;
-        }
+            _loc5_++;
+         }
+         return _loc2_;
+      }
 
-        protected override function onDispose():void
-        {
-            super.onDispose();
-            this._dataProvider.removeEventListener(flash.events.Event.CHANGE, this.onDataChange);
-            this.list.removeEventListener(net.wg.gui.lobby.messengerBar.carousel.events.ChannelListEvent.OPEN_CHANNEL_CLICK, this.onChannelOpenClick);
-            this.list.removeEventListener(net.wg.gui.lobby.messengerBar.carousel.events.ChannelListEvent.CLOSE_CHANNEL_CLICK, this.onChannelCloseClick);
-            App.stage.removeEventListener(net.wg.gui.events.MessengerBarEvent.PIN_CAROUSEL_WINDOW, this.handlePinChannelWindow);
-            this._dataProvider.cleanUp();
-            this._dataProvider = null;
-            if (this.list.dataProvider) 
+      private function onDataChange(param1:Event) : void {
+         invalidateSize();
+      }
+
+      private function onChannelOpenClick(param1:ChannelListEvent) : void {
+         channelOpenClickS(param1.itemData.clientID);
+      }
+
+      private function onChannelCloseClick(param1:ChannelListEvent) : void {
+         channelCloseClickS(param1.itemData.clientID);
+      }
+
+      private function handlePinChannelWindow(param1:MessengerBarEvent) : void {
+         var _loc3_:IListItemRenderer = null;
+         var _loc4_:IAbstractWindowView = null;
+         var _loc5_:IWindow = null;
+         var _loc6_:* = NaN;
+         var _loc7_:* = NaN;
+         var _loc8_:uint = 0;
+         var _loc9_:* = NaN;
+         var _loc10_:* = NaN;
+         var _loc11_:Point = null;
+         var _loc12_:* = false;
+         if(param1.eventPhase != EventPhase.BUBBLING_PHASE)
+         {
+            return;
+         }
+         var _loc2_:Number = this.findIndexByClientID(param1.clientID);
+         if(_loc2_ > -1)
+         {
+            _loc3_ = this.list.getRendererAt(_loc2_ - this.list.scrollPosition);
+            _loc4_ = param1.target as AbstractWindowView;
+            if(_loc3_ == null && (_loc4_))
             {
-                this.list.dataProvider.cleanUp();
-                this.list.dataProvider = null;
+               this.updateWindowVisibleProperty(_loc4_,false);
+               this.list.scrollToIndex(_loc2_);
+               App.utils.scheduler.envokeInNextFrame(this.handlePinChannelWindow,param1);
+               return;
             }
-            return;
-        }
-
-        internal function updateScrollBar():void
-        {
-            var loc1:*=false;
-            this.list.x = HORIZONTAL_OFFSET_NO_SCROLL;
-            this.list.width = _width - HORIZONTAL_OFFSET_NO_SCROLL * 2;
-            this.list.validateNow();
-            loc1 = this.list.dataProvider ? this.list.columnCount < this.list.dataProvider.length : false;
-            this.scrollBar.width = _width - this.scrollBar.x * 2;
-            this.scrollBar.visible = loc1;
-            if (loc1) 
+            if(_loc4_)
             {
-                this.list.x = HORIZONTAL_OFFSET_SCROLL;
-                this.list.width = _width - HORIZONTAL_OFFSET_SCROLL * 2;
+               this.updateWindowVisibleProperty(_loc4_,true);
+               _loc5_ = _loc4_.window;
+               _loc6_ = _loc5_.width;
+               _loc7_ = App.appWidth - x;
+               _loc8_ = App.appHeight - height;
+               _loc9_ = _loc3_.x;
+               _loc10_ = _loc9_ + _loc3_.width - _loc6_;
+               _loc11_ = new Point(0,-_loc5_.height);
+               if(_loc8_ < _loc5_.height)
+               {
+                  _loc11_.y = this.height - App.appHeight - WindowOffsetsInBar.WINDOW_TOP_OFFSET;
+               }
+               _loc12_ = this.list.columnCount < this._dataProvider.length;
+               if(_loc9_ + _loc6_ < _loc7_)
+               {
+                  _loc11_.x = _loc12_?Math.round(_loc9_ + this.scrollBar.upArrow.width + WindowOffsetsInBar.WINDOW_LEFT_OFFSET):_loc9_ - WindowOffsetsInBar.CHANNEL_WINDOW_LEFT_OFFSET;
+               }
+               else
+               {
+                  if(_loc10_ > 0)
+                  {
+                     _loc11_.x = _loc12_?Math.round(_loc10_ + this.scrollBar.upArrow.width + WindowOffsetsInBar.WINDOW_RIGHT_OFFSET):_loc10_ + WindowOffsetsInBar.CHANNEL_WINDOW_RIGHT_OFFSET;
+                  }
+                  else
+                  {
+                     _loc11_.x = _loc7_ - _loc6_ - x >> 1;
+                  }
+               }
+               _loc11_ = localToGlobal(_loc11_);
+               _loc5_.x = Math.round(_loc11_.x);
+               _loc5_.y = Math.round(_loc11_.y);
             }
-            return;
-        }
+         }
+      }
 
-        internal function findIndexByClientID(arg1:Number):Number
-        {
-            var loc3:*=null;
-            var loc1:*=-1;
-            var loc2:*=this._dataProvider.length;
-            var loc4:*=0;
-            while (loc4 < loc2) 
-            {
-                if ((loc3 = new net.wg.gui.lobby.messengerBar.carousel.data.ChannelListItemVO(this._dataProvider.requestItemAt(loc4))).clientID == arg1) 
-                {
-                    loc1 = loc4;
-                    break;
-                }
-                ++loc4;
-            }
-            return loc1;
-        }
+      private function updateWindowVisibleProperty(param1:IAbstractWindowView, param2:Boolean=false) : void {
+         var _loc3_:Window = Window(param1.window);
+         if(_loc3_.visible != param2)
+         {
+            _loc3_.visible = param2;
+         }
+      }
+   }
 
-        internal function onDataChange(arg1:flash.events.Event):void
-        {
-            invalidateSize();
-            return;
-        }
-
-        internal function onChannelOpenClick(arg1:net.wg.gui.lobby.messengerBar.carousel.events.ChannelListEvent):void
-        {
-            channelOpenClickS(arg1.itemData.clientID);
-            return;
-        }
-
-        internal function onChannelCloseClick(arg1:net.wg.gui.lobby.messengerBar.carousel.events.ChannelListEvent):void
-        {
-            channelCloseClickS(arg1.itemData.clientID);
-            return;
-        }
-
-        internal function handlePinChannelWindow(arg1:net.wg.gui.events.MessengerBarEvent):void
-        {
-            var loc2:*=null;
-            var loc3:*=null;
-            var loc4:*=null;
-            var loc5:*=NaN;
-            var loc6:*=NaN;
-            var loc7:*=0;
-            var loc8:*=NaN;
-            var loc9:*=NaN;
-            var loc10:*=null;
-            var loc11:*=false;
-            if (arg1.eventPhase != flash.events.EventPhase.BUBBLING_PHASE) 
-            {
-                return;
-            }
-            var loc1:*=this.findIndexByClientID(arg1.clientID);
-            if (loc1 > -1) 
-            {
-                loc2 = this.list.getRendererAt(loc1 - this.list.scrollPosition);
-                loc3 = arg1.target as net.wg.infrastructure.base.AbstractWindowView;
-                if (loc2 == null && loc3) 
-                {
-                    this.updateWindowVisibleProperty(loc3, false);
-                    this.list.scrollToIndex(loc1);
-                    App.utils.scheduler.envokeInNextFrame(this.handlePinChannelWindow, arg1);
-                    return;
-                }
-                if (loc3) 
-                {
-                    this.updateWindowVisibleProperty(loc3, true);
-                    loc5 = (loc4 = loc3.window).width;
-                    loc6 = App.appWidth - x;
-                    loc7 = App.appHeight - height;
-                    loc9 = (loc8 = loc2.x) + loc2.width - loc5;
-                    loc10 = new flash.geom.Point(0, -loc4.height);
-                    if (loc7 < loc4.height) 
-                    {
-                        loc10.y = this.height - App.appHeight - net.wg.gui.lobby.messengerBar.WindowOffsetsInBar.WINDOW_TOP_OFFSET;
-                    }
-                    loc11 = this.list.columnCount < this._dataProvider.length;
-                    if (loc8 + loc5 < loc6) 
-                    {
-                        loc10.x = loc11 ? Math.round(loc8 + this.scrollBar.upArrow.width + net.wg.gui.lobby.messengerBar.WindowOffsetsInBar.WINDOW_LEFT_OFFSET) : loc8 - net.wg.gui.lobby.messengerBar.WindowOffsetsInBar.CHANNEL_WINDOW_LEFT_OFFSET;
-                    }
-                    else if (loc9 > 0) 
-                    {
-                        loc10.x = loc11 ? Math.round(loc9 + this.scrollBar.upArrow.width + net.wg.gui.lobby.messengerBar.WindowOffsetsInBar.WINDOW_RIGHT_OFFSET) : loc9 + net.wg.gui.lobby.messengerBar.WindowOffsetsInBar.CHANNEL_WINDOW_RIGHT_OFFSET;
-                    }
-                    else 
-                    {
-                        loc10.x = loc6 - loc5 - x >> 1;
-                    }
-                    loc10 = localToGlobal(loc10);
-                    loc4.x = Math.round(loc10.x);
-                    loc4.y = Math.round(loc10.y);
-                }
-            }
-            return;
-        }
-
-        internal function updateWindowVisibleProperty(arg1:net.wg.infrastructure.interfaces.IAbstractWindowView, arg2:Boolean=false):void
-        {
-            var loc1:*=net.wg.gui.components.windows.Window(arg1.window);
-            if (loc1.visible != arg2) 
-            {
-                loc1.visible = arg2;
-            }
-            return;
-        }
-
-        internal static const HORIZONTAL_OFFSET_NO_SCROLL:Number=5;
-
-        internal static const HORIZONTAL_OFFSET_SCROLL:Number=24;
-
-        public var list:net.wg.gui.lobby.messengerBar.carousel.ChannelList;
-
-        public var scrollBar:net.wg.gui.lobby.messengerBar.carousel.ChannelCarouselScrollBar;
-
-        public var background:flash.display.Sprite;
-
-        protected var _dataProvider:net.wg.data.daapi.base.DAAPIDataProvider;
-
-        internal var _commonChannelHL:flash.display.DisplayObject;
-    }
 }

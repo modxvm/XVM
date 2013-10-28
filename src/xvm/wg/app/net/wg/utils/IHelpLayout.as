@@ -1,20 +1,24 @@
-package net.wg.utils 
+package net.wg.utils
 {
-    import flash.display.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    
-    public interface IHelpLayout extends net.wg.infrastructure.interfaces.entity.IDisposable
-    {
-        function create(arg1:flash.display.DisplayObject, arg2:Object, arg3:flash.display.DisplayObjectContainer):flash.display.DisplayObject;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import flash.display.DisplayObject;
+   import flash.display.DisplayObjectContainer;
 
-        function createBackground():void;
 
-        function destroyBackground():void;
+   public interface IHelpLayout extends IDisposable
+   {
+          
+      function create(param1:DisplayObject, param2:Object, param3:DisplayObjectContainer) : DisplayObject;
 
-        function isShowed():Boolean;
+      function createBackground() : void;
 
-        function destroy(arg1:flash.display.DisplayObject):void;
+      function destroyBackground() : void;
 
-        function getProps(arg1:Number, arg2:Number, arg3:String, arg4:String, arg5:Number, arg6:Number):Object;
-    }
+      function isShowed() : Boolean;
+
+      function destroy(param1:DisplayObject) : void;
+
+      function getProps(param1:Number, param2:Number, param3:String, param4:String, param5:Number, param6:Number) : Object;
+   }
+
 }

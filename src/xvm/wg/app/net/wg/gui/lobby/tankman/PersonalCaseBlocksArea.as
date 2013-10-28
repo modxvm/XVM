@@ -1,146 +1,132 @@
-package net.wg.gui.lobby.tankman 
+package net.wg.gui.lobby.tankman
 {
-    import flash.display.*;
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    import scaleform.clik.core.*;
-    import scaleform.gfx.*;
-    
-    public class PersonalCaseBlocksArea extends scaleform.clik.core.UIComponent
-    {
-        public function PersonalCaseBlocksArea()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import flash.display.Shape;
+   import net.wg.data.constants.Linkages;
+   import flash.display.MovieClip;
+   import scaleform.gfx.Extensions;
 
-        public override function dispose():void
-        {
-            super.dispose();
-            this.removeElements();
-            return;
-        }
 
-        internal function removeElements():void
-        {
-            var loc1:*=this.numChildren;
-            var loc2:*;
-            --loc2;
-            while (loc2 >= 0) 
-            {
-                if (this.getChildAt(loc2) is net.wg.infrastructure.interfaces.entity.IDisposable) 
-                {
-                    net.wg.infrastructure.interfaces.entity.IDisposable(this.getChildAt(loc2)).dispose();
-                }
-                this.removeChildAt(loc2);
-                --loc2;
-            }
-            return;
-        }
+   public class PersonalCaseBlocksArea extends UIComponent
+   {
+          
+      public function PersonalCaseBlocksArea() {
+         super();
+      }
 
-        public function setData(arg1:Array):void
-        {
-            if (!App.instance || arg1 == null) 
-            {
-                return;
-            }
-            this.data = arg1;
-            if (this.isElementsCreated) 
-            {
-                this.updateBlocks();
-            }
-            else 
-            {
-                this.initializeBlocks();
-            }
-            return;
-        }
+      private static const Y_START_POSITION:uint = 17;
 
-        internal function updateBlocks():void
-        {
-            var loc3:*=null;
-            this.paddingY = Y_START_POSITION;
-            var loc1:*=this.numChildren;
-            var loc2:*;
-            --loc2;
-            while (loc2 >= 0) 
+      private static const PADDING_BETWEEN_BLOCKS:uint = 20;
+
+      private static const PADDING_BETWEEN_BLOCK_TITLE:uint = 11;
+
+      private var data:Array;
+
+      private var isElementsCreated:Boolean = false;
+
+      private var paddingY:int = 17;
+
+      override public function dispose() : void {
+         super.dispose();
+         this.removeElements();
+      }
+
+      private function removeElements() : void {
+         var _loc1_:uint = this.numChildren;
+         var _loc2_:int = _loc1_-1;
+         while(_loc2_ >= 0)
+         {
+            if(this.getChildAt(_loc2_)  is  IDisposable)
             {
-                loc3 = this.getChildAt(loc2);
-                if (this.getChildAt(loc2) is flash.display.Shape == false) 
-                {
-                    this.removeChildAt(loc2);
-                }
-                --loc2;
+               IDisposable(this.getChildAt(_loc2_)).dispose();
             }
+            this.removeChildAt(_loc2_);
+            _loc2_--;
+         }
+      }
+
+      public function setData(param1:Array) : void {
+         if(!App.instance || param1 == null)
+         {
+            return;
+         }
+         this.data = param1;
+         if(this.isElementsCreated)
+         {
+            this.updateBlocks();
+         }
+         else
+         {
             this.initializeBlocks();
-            return;
-        }
+         }
+      }
 
-        internal function initializeBlocks():void
-        {
-            var loc2:*=null;
-            var loc1:*=0;
-            while (loc1 < this.data.length) 
+      private function updateBlocks() : void {
+         var _loc3_:Object = null;
+         this.paddingY = Y_START_POSITION;
+         var _loc1_:int = this.numChildren;
+         var _loc2_:int = _loc1_-1;
+         while(_loc2_ >= 0)
+         {
+            _loc3_ = this.getChildAt(_loc2_);
+            if(this.getChildAt(_loc2_)  is  Shape == false)
             {
-                loc2 = this.data[loc1];
-                this.createTitles(loc2);
-                ++loc1;
+               this.removeChildAt(_loc2_);
             }
-            this.isElementsCreated = true;
-            return;
-        }
+            _loc2_--;
+         }
+         this.initializeBlocks();
+      }
 
-        internal function createTitles(arg1:Object):void
-        {
-            var loc1:*=this.classFactory(net.wg.data.constants.Linkages.PERSONAL_CASE_TITLE_BLOCK);
-            if (scaleform.gfx.Extensions.isScaleform) 
-            {
-                loc1["blockName"].text = MENU.profile_stats_blocks(arg1.label);
-            }
-            else 
-            {
-                loc1["blockName"].text = arg1.label;
-            }
-            loc1.y = this.paddingY;
-            this.addChild(loc1);
+      private function initializeBlocks() : void {
+         var _loc2_:Object = null;
+         var _loc1_:* = 0;
+         while(_loc1_ < this.data.length)
+         {
+            _loc2_ = this.data[_loc1_];
+            this.createTitles(_loc2_);
+            _loc1_++;
+         }
+         this.isElementsCreated = true;
+      }
+
+      private function createTitles(param1:Object) : void {
+         var _loc2_:MovieClip = this.classFactory(Linkages.PERSONAL_CASE_TITLE_BLOCK);
+         if(Extensions.isScaleform)
+         {
+            _loc2_["blockName"].text = MENU.profile_stats_blocks(param1.label);
+         }
+         else
+         {
+            _loc2_["blockName"].text = param1.label;
+         }
+         _loc2_.y = this.paddingY;
+         this.addChild(_loc2_);
+         this.paddingY = this.paddingY + PADDING_BETWEEN_BLOCKS;
+         this.creteRows(param1.stats);
+      }
+
+      private function creteRows(param1:Array) : void {
+         var _loc3_:Object = null;
+         var _loc4_:PersonalCaseBlockItem = null;
+         var _loc2_:* = 0;
+         while(_loc2_ < param1.length)
+         {
+            _loc3_ = param1[_loc2_];
+            _loc4_ = this.classFactory(Linkages.PERSONAL_CASE_BLOCK_ITEM);
+            _loc4_.setData = _loc3_;
+            _loc4_.y = this.paddingY;
+            this.addChild(_loc4_);
             this.paddingY = this.paddingY + PADDING_BETWEEN_BLOCKS;
-            this.creteRows(arg1.stats);
-            return;
-        }
+            _loc2_++;
+         }
+         this.paddingY = this.paddingY + PADDING_BETWEEN_BLOCK_TITLE;
+      }
 
-        internal function creteRows(arg1:Array):void
-        {
-            var loc2:*=null;
-            var loc3:*=null;
-            var loc1:*=0;
-            while (loc1 < arg1.length) 
-            {
-                loc2 = arg1[loc1];
-                (loc3 = this.classFactory(net.wg.data.constants.Linkages.PERSONAL_CASE_BLOCK_ITEM)).setData = loc2;
-                loc3.y = this.paddingY;
-                this.addChild(loc3);
-                this.paddingY = this.paddingY + PADDING_BETWEEN_BLOCKS;
-                ++loc1;
-            }
-            this.paddingY = this.paddingY + PADDING_BETWEEN_BLOCK_TITLE;
-            return;
-        }
+      private function classFactory(param1:String) : * {
+         return App.utils.classFactory.getComponent(param1,MovieClip);
+      }
+   }
 
-        internal function classFactory(arg1:String):*
-        {
-            return App.utils.classFactory.getComponent(arg1, flash.display.MovieClip);
-        }
-
-        internal static const Y_START_POSITION:uint=17;
-
-        internal static const PADDING_BETWEEN_BLOCKS:uint=20;
-
-        internal static const PADDING_BETWEEN_BLOCK_TITLE:uint=11;
-
-        internal var data:Array;
-
-        internal var isElementsCreated:Boolean=false;
-
-        internal var paddingY:int=17;
-    }
 }

@@ -1,206 +1,192 @@
-package net.wg.gui.lobby.settings 
+package net.wg.gui.lobby.settings
 {
-    import flash.events.*;
-    import flash.text.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.lobby.settings.evnts.*;
-    import net.wg.gui.lobby.settings.vo.*;
-    import scaleform.clik.core.*;
-    import scaleform.clik.data.*;
-    import scaleform.clik.events.*;
-    
-    public class SettingsMarkersForm extends scaleform.clik.core.UIComponent
-    {
-        public function SettingsMarkersForm()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.text.TextField;
+   import net.wg.gui.components.controls.CheckBox;
+   import net.wg.gui.components.controls.DropdownMenu;
+   import net.wg.gui.lobby.settings.vo.SettingsControlProp;
+   import flash.events.Event;
+   import scaleform.clik.data.DataProvider;
+   import scaleform.clik.events.ListEvent;
+   import net.wg.gui.lobby.settings.evnts.SettingsSubVewEvent;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            return;
-        }
 
-        protected override function draw():void
-        {
-            super.draw();
-            return;
-        }
+   public class SettingsMarkersForm extends UIComponent
+   {
+          
+      public function SettingsMarkersForm() {
+         super();
+      }
 
-        public function setData(arg1:String, arg2:Object):void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            var loc3:*=null;
-            var loc4:*=null;
-            this._id = arg1;
-            if (arg2 == null) 
+      private var _id:String = null;
+
+      private var _data:Object = null;
+
+      public var markerHeader:TextField = null;
+
+      public var markerHP:TextField = null;
+
+      public var markerHeaderAlt:TextField = null;
+
+      public var markerHPAlt:TextField = null;
+
+      public var markerBaseIconCheckbox:CheckBox = null;
+
+      public var markerBaseLevelCheckbox:CheckBox = null;
+
+      public var markerBaseVehicleNameCheckbox:CheckBox = null;
+
+      public var markerBasePlayerNameCheckbox:CheckBox = null;
+
+      public var markerBaseHpIndicatorCheckbox:CheckBox = null;
+
+      public var markerBaseHpDropDown:DropdownMenu = null;
+
+      public var markerBaseDamageCheckbox:CheckBox = null;
+
+      public var markerAltIconCheckbox:CheckBox = null;
+
+      public var markerAltLevelCheckbox:CheckBox = null;
+
+      public var markerAltVehicleNameCheckbox:CheckBox = null;
+
+      public var markerAltPlayerNameCheckbox:CheckBox = null;
+
+      public var markerAltHpIndicatorCheckbox:CheckBox = null;
+
+      public var markerAltHpDropDown:DropdownMenu = null;
+
+      public var markerAltDamageCheckbox:CheckBox = null;
+
+      override protected function configUI() : void {
+         super.configUI();
+      }
+
+      override protected function draw() : void {
+         super.draw();
+      }
+
+      public function setData(param1:String, param2:Object) : void {
+         var _loc3_:String = null;
+         var _loc4_:SettingsControlProp = null;
+         var _loc5_:CheckBox = null;
+         var _loc6_:DropdownMenu = null;
+         this._id = param1;
+         if(param2 != null)
+         {
+            this._data = param2;
+            for (_loc3_ in this._data)
             {
-                this.disableAllControls();
-            }
-            else 
-            {
-                this._data = arg2;
-                var loc5:*=0;
-                var loc6:*=this._data;
-                label325: for (loc1 in loc6) 
-                {
-                    loc2 = net.wg.gui.lobby.settings.vo.SettingsControlProp(this._data[loc1]);
-                    if (!this[loc1 + loc2.type]) 
-                    {
+               _loc4_ = SettingsControlProp(this._data[_loc3_]);
+               if(this[_loc3_ + _loc4_.type])
+               {
+                  switch(_loc4_.type)
+                  {
+                     case SettingsConfig.TYPE_CHECKBOX:
+                        _loc5_ = this[_loc3_ + _loc4_.type];
+                        _loc5_.selected = _loc4_.current;
+                        _loc5_.addEventListener(Event.SELECT,this.onCheckBoxSelected);
                         continue;
-                    }
-                    var loc7:*=loc2.type;
-                    switch (loc7) 
-                    {
-                        case net.wg.gui.lobby.settings.SettingsConfig.TYPE_CHECKBOX:
-                        {
-                            (loc3 = this[loc1 + loc2.type]).selected = loc2.current;
-                            loc3.addEventListener(flash.events.Event.SELECT, this.onCheckBoxSelected);
-                            continue label325;
-                        }
-                        case net.wg.gui.lobby.settings.SettingsConfig.TYPE_DROPDOWN:
-                        {
-                            (loc4 = this[loc1 + loc2.type]).menuRowCount = loc2.options.length;
-                            loc4.dataProvider = new scaleform.clik.data.DataProvider(loc2.options);
-                            loc4.selectedIndex = loc2.current;
-                            loc4.enabled = loc2.current != null ? true : false;
-                            loc4.addEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onDropDownChange);
-                            continue label325;
-                        }
-                    }
-                }
-            }
-            return;
-        }
-
-        internal function onDropDownChange(arg1:scaleform.clik.events.ListEvent):void
-        {
-            var loc1:*=net.wg.gui.components.controls.DropdownMenu(arg1.target);
-            var loc2:*=net.wg.gui.lobby.settings.SettingsConfig.getControlId(loc1.name, net.wg.gui.lobby.settings.SettingsConfig.TYPE_DROPDOWN);
-            var loc3:*=this.getAltPrefix(loc2);
-            dispatchEvent(new net.wg.gui.lobby.settings.evnts.SettingsSubVewEvent(net.wg.gui.lobby.settings.evnts.SettingsSubVewEvent.ON_CONTROL_CHANGE, this._id, loc2, loc1.selectedIndex, loc3));
-            return;
-        }
-
-        internal function onCheckBoxSelected(arg1:flash.events.Event):void
-        {
-            var loc1:*=net.wg.gui.components.controls.CheckBox(arg1.target);
-            var loc2:*=net.wg.gui.lobby.settings.SettingsConfig.getControlId(loc1.name, net.wg.gui.lobby.settings.SettingsConfig.TYPE_CHECKBOX);
-            var loc3:*=this.getAltPrefix(loc2);
-            dispatchEvent(new net.wg.gui.lobby.settings.evnts.SettingsSubVewEvent(net.wg.gui.lobby.settings.evnts.SettingsSubVewEvent.ON_CONTROL_CHANGE, this._id, loc2, loc1.selected, loc3));
-            return;
-        }
-
-        internal function getAltPrefix(arg1:String):String
-        {
-            return arg1.indexOf("Alt", 0) >= 0 ? "Alt" : "";
-        }
-
-        internal function disableAllControls():void
-        {
-            this.markerBaseIconCheckbox.enabled = false;
-            this.markerBaseLevelCheckbox.enabled = false;
-            this.markerBaseVehicleNameCheckbox.enabled = false;
-            this.markerBasePlayerNameCheckbox.enabled = false;
-            this.markerBaseHpIndicatorCheckbox.enabled = false;
-            this.markerBaseHpDropDown.enabled = false;
-            this.markerBaseDamageCheckbox.enabled = false;
-            this.markerAltIconCheckbox.enabled = false;
-            this.markerAltLevelCheckbox.enabled = false;
-            this.markerAltVehicleNameCheckbox.enabled = false;
-            this.markerAltPlayerNameCheckbox.enabled = false;
-            this.markerAltHpIndicatorCheckbox.enabled = false;
-            this.markerAltHpDropDown.enabled = false;
-            this.markerAltDamageCheckbox.enabled = false;
-            return;
-        }
-
-        public override function dispose():void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            var loc3:*=null;
-            var loc4:*=null;
-            super.dispose();
-            if (this._data != null) 
-            {
-                var loc5:*=0;
-                var loc6:*=this._data;
-                label274: for (loc1 in loc6) 
-                {
-                    loc2 = net.wg.gui.lobby.settings.vo.SettingsControlProp(this._data[loc1]);
-                    if (!this[loc1 + loc2.type]) 
-                    {
+                     case SettingsConfig.TYPE_DROPDOWN:
+                        _loc6_ = this[_loc3_ + _loc4_.type];
+                        _loc6_.menuRowCount = _loc4_.options.length;
+                        _loc6_.dataProvider = new DataProvider(_loc4_.options);
+                        _loc6_.selectedIndex = _loc4_.current;
+                        _loc6_.enabled = _loc4_.current == null?false:true;
+                        _loc6_.addEventListener(ListEvent.INDEX_CHANGE,this.onDropDownChange);
                         continue;
-                    }
-                    var loc7:*=loc2.type;
-                    switch (loc7) 
-                    {
-                        case net.wg.gui.lobby.settings.SettingsConfig.TYPE_CHECKBOX:
-                        {
-                            loc3 = this[loc1 + loc2.type];
-                            if (loc3.hasEventListener(flash.events.Event.SELECT)) 
-                            {
-                                loc3.removeEventListener(flash.events.Event.SELECT, this.onCheckBoxSelected);
-                            }
-                            continue label274;
-                        }
-                        case net.wg.gui.lobby.settings.SettingsConfig.TYPE_DROPDOWN:
-                        {
-                            if ((loc4 = this[loc1 + loc2.type]).hasEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE)) 
-                            {
-                                loc4.removeEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.onDropDownChange);
-                            }
-                            continue label274;
-                        }
-                    }
-                }
-                this._data = null;
+                     default:
+                        continue;
+                  }
+               }
+               else
+               {
+                  continue;
+               }
             }
-            return;
-        }
+         }
+         else
+         {
+            this.disableAllControls();
+         }
+      }
 
-        internal var _id:String=null;
+      private function onDropDownChange(param1:ListEvent) : void {
+         var _loc2_:DropdownMenu = DropdownMenu(param1.target);
+         var _loc3_:String = SettingsConfig.getControlId(_loc2_.name,SettingsConfig.TYPE_DROPDOWN);
+         var _loc4_:String = this.getAltPrefix(_loc3_);
+         dispatchEvent(new SettingsSubVewEvent(SettingsSubVewEvent.ON_CONTROL_CHANGE,this._id,_loc3_,_loc2_.selectedIndex,_loc4_));
+      }
 
-        internal var _data:Object=null;
+      private function onCheckBoxSelected(param1:Event) : void {
+         var _loc2_:CheckBox = CheckBox(param1.target);
+         var _loc3_:String = SettingsConfig.getControlId(_loc2_.name,SettingsConfig.TYPE_CHECKBOX);
+         var _loc4_:String = this.getAltPrefix(_loc3_);
+         dispatchEvent(new SettingsSubVewEvent(SettingsSubVewEvent.ON_CONTROL_CHANGE,this._id,_loc3_,_loc2_.selected,_loc4_));
+      }
 
-        public var markerHeader:flash.text.TextField=null;
+      private function getAltPrefix(param1:String) : String {
+         return param1.indexOf("Alt",0) >= 0?"Alt":"";
+      }
 
-        public var markerHP:flash.text.TextField=null;
+      private function disableAllControls() : void {
+         this.markerBaseIconCheckbox.enabled = false;
+         this.markerBaseLevelCheckbox.enabled = false;
+         this.markerBaseVehicleNameCheckbox.enabled = false;
+         this.markerBasePlayerNameCheckbox.enabled = false;
+         this.markerBaseHpIndicatorCheckbox.enabled = false;
+         this.markerBaseHpDropDown.enabled = false;
+         this.markerBaseDamageCheckbox.enabled = false;
+         this.markerAltIconCheckbox.enabled = false;
+         this.markerAltLevelCheckbox.enabled = false;
+         this.markerAltVehicleNameCheckbox.enabled = false;
+         this.markerAltPlayerNameCheckbox.enabled = false;
+         this.markerAltHpIndicatorCheckbox.enabled = false;
+         this.markerAltHpDropDown.enabled = false;
+         this.markerAltDamageCheckbox.enabled = false;
+      }
 
-        public var markerHeaderAlt:flash.text.TextField=null;
+      override public function dispose() : void {
+         var _loc1_:String = null;
+         var _loc2_:SettingsControlProp = null;
+         var _loc3_:CheckBox = null;
+         var _loc4_:DropdownMenu = null;
+         if(this._data != null)
+         {
+            for (_loc1_ in this._data)
+            {
+               _loc2_ = SettingsControlProp(this._data[_loc1_]);
+               if(this[_loc1_ + _loc2_.type])
+               {
+                  switch(_loc2_.type)
+                  {
+                     case SettingsConfig.TYPE_CHECKBOX:
+                        _loc3_ = this[_loc1_ + _loc2_.type];
+                        if(_loc3_.hasEventListener(Event.SELECT))
+                        {
+                           _loc3_.removeEventListener(Event.SELECT,this.onCheckBoxSelected);
+                        }
+                        continue;
+                     case SettingsConfig.TYPE_DROPDOWN:
+                        _loc4_ = this[_loc1_ + _loc2_.type];
+                        if(_loc4_.hasEventListener(ListEvent.INDEX_CHANGE))
+                        {
+                           _loc4_.removeEventListener(ListEvent.INDEX_CHANGE,this.onDropDownChange);
+                        }
+                        continue;
+                     default:
+                        continue;
+                  }
+               }
+               else
+               {
+                  continue;
+               }
+            }
+            this._data = null;
+         }
+         super.dispose();
+      }
+   }
 
-        public var markerHPAlt:flash.text.TextField=null;
-
-        public var markerBaseIconCheckbox:net.wg.gui.components.controls.CheckBox=null;
-
-        public var markerBaseLevelCheckbox:net.wg.gui.components.controls.CheckBox=null;
-
-        public var markerBaseVehicleNameCheckbox:net.wg.gui.components.controls.CheckBox=null;
-
-        public var markerBasePlayerNameCheckbox:net.wg.gui.components.controls.CheckBox=null;
-
-        public var markerBaseHpIndicatorCheckbox:net.wg.gui.components.controls.CheckBox=null;
-
-        public var markerBaseHpDropDown:net.wg.gui.components.controls.DropdownMenu=null;
-
-        public var markerBaseDamageCheckbox:net.wg.gui.components.controls.CheckBox=null;
-
-        public var markerAltIconCheckbox:net.wg.gui.components.controls.CheckBox=null;
-
-        public var markerAltLevelCheckbox:net.wg.gui.components.controls.CheckBox=null;
-
-        public var markerAltVehicleNameCheckbox:net.wg.gui.components.controls.CheckBox=null;
-
-        public var markerAltPlayerNameCheckbox:net.wg.gui.components.controls.CheckBox=null;
-
-        public var markerAltHpIndicatorCheckbox:net.wg.gui.components.controls.CheckBox=null;
-
-        public var markerAltHpDropDown:net.wg.gui.components.controls.DropdownMenu=null;
-
-        public var markerAltDamageCheckbox:net.wg.gui.components.controls.CheckBox=null;
-    }
 }

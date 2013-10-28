@@ -1,78 +1,64 @@
-package net.wg.data.VO 
+package net.wg.data.VO
 {
-    import net.wg.data.daapi.base.*;
-    
-    public class TrainingWindowVO extends net.wg.data.daapi.base.DAAPIDataClass
-    {
-        public function TrainingWindowVO(arg1:Object)
-        {
-            super(arg1);
-            return;
-        }
+   import net.wg.data.daapi.base.DAAPIDataClass;
 
-        public function get create():Boolean
-        {
-            return this._create;
-        }
 
-        public function set create(arg1:Boolean):void
-        {
-            this._create = arg1;
-            return;
-        }
+   public class TrainingWindowVO extends DAAPIDataClass
+   {
+          
+      public function TrainingWindowVO(param1:Object) {
+         super(param1);
+      }
 
-        public function get privacy():Boolean
-        {
-            return this._privacy;
-        }
+      private var _description:String = "";
 
-        public function set privacy(arg1:Boolean):void
-        {
-            this._privacy = arg1;
-            return;
-        }
+      private var _timeout:Number;
 
-        public function get arena():Number
-        {
-            return this._arena;
-        }
+      private var _arena:Number;
 
-        public function set arena(arg1:Number):void
-        {
-            this._arena = arg1;
-            return;
-        }
+      private var _privacy:Boolean;
 
-        public function get timeout():Number
-        {
-            return this._timeout;
-        }
+      private var _create:Boolean;
 
-        public function set timeout(arg1:Number):void
-        {
-            this._timeout = arg1;
-            return;
-        }
+      public function get create() : Boolean {
+         return this._create;
+      }
 
-        public function get description():String
-        {
-            return this._description;
-        }
+      public function set create(param1:Boolean) : void {
+         this._create = param1;
+      }
 
-        public function set description(arg1:String):void
-        {
-            this._description = arg1;
-            return;
-        }
+      public function get privacy() : Boolean {
+         return this._privacy;
+      }
 
-        internal var _description:String="";
+      public function set privacy(param1:Boolean) : void {
+         this._privacy = param1;
+      }
 
-        internal var _timeout:Number;
+      public function get arena() : Number {
+         return this._arena;
+      }
 
-        internal var _arena:Number;
+      public function set arena(param1:Number) : void {
+         this._arena = param1;
+      }
 
-        internal var _privacy:Boolean;
+      public function get timeout() : Number {
+         return this._timeout;
+      }
 
-        internal var _create:Boolean;
-    }
+      public function set timeout(param1:Number) : void {
+         this._timeout = param1;
+      }
+
+      public function get description() : String {
+         return this._description;
+      }
+
+      public function set description(param1:String) : void {
+         this._description = param1;
+      }
+   }
+
 }

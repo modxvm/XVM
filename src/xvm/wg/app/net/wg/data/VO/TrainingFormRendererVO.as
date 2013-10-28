@@ -1,117 +1,94 @@
-package net.wg.data.VO 
+package net.wg.data.VO
 {
-    import net.wg.data.daapi.base.*;
-    
-    public class TrainingFormRendererVO extends net.wg.data.daapi.base.DAAPIDataClass
-    {
-        public function TrainingFormRendererVO(arg1:Object)
-        {
-            super(arg1);
-            return;
-        }
+   import net.wg.data.daapi.base.DAAPIDataClass;
 
-        public function get id():Number
-        {
-            return this._id;
-        }
 
-        public function set id(arg1:Number):void
-        {
-            this._id = arg1;
-            return;
-        }
+   public class TrainingFormRendererVO extends DAAPIDataClass
+   {
+          
+      public function TrainingFormRendererVO(param1:Object) {
+         super(param1);
+      }
 
-        public function get disabled():Boolean
-        {
-            return this._disabled;
-        }
+      private var _comment:String = "";
 
-        public function set disabled(arg1:Boolean):void
-        {
-            this._disabled = arg1;
-            return;
-        }
+      private var _arena:String = "";
 
-        public function get icon():String
-        {
-            return this._icon;
-        }
+      private var _count:Number = 0;
 
-        public function set icon(arg1:String):void
-        {
-            this._icon = arg1;
-            return;
-        }
+      private var _total:Number = 0;
 
-        public function get owner():String
-        {
-            return this._owner;
-        }
+      private var _owner:String = "";
 
-        public function set owner(arg1:String):void
-        {
-            this._owner = arg1;
-            return;
-        }
+      private var _icon:String = "";
 
-        public function get total():Number
-        {
-            return this._total;
-        }
+      private var _disabled:Boolean;
 
-        public function set total(arg1:Number):void
-        {
-            this._total = arg1;
-            return;
-        }
+      private var _id:Number = 0;
 
-        public function get count():Number
-        {
-            return this._count;
-        }
+      public function get id() : Number {
+         return this._id;
+      }
 
-        public function set count(arg1:Number):void
-        {
-            this._count = arg1;
-            return;
-        }
+      public function set id(param1:Number) : void {
+         this._id = param1;
+      }
 
-        public function get arena():String
-        {
-            return this._arena;
-        }
+      public function get disabled() : Boolean {
+         return this._disabled;
+      }
 
-        public function set arena(arg1:String):void
-        {
-            this._arena = arg1;
-            return;
-        }
+      public function set disabled(param1:Boolean) : void {
+         this._disabled = param1;
+      }
 
-        public function get comment():String
-        {
-            return this._comment;
-        }
+      public function get icon() : String {
+         return this._icon;
+      }
 
-        public function set comment(arg1:String):void
-        {
-            this._comment = arg1;
-            return;
-        }
+      public function set icon(param1:String) : void {
+         this._icon = param1;
+      }
 
-        internal var _comment:String="";
+      public function get owner() : String {
+         return this._owner;
+      }
 
-        internal var _arena:String="";
+      public function set owner(param1:String) : void {
+         this._owner = param1;
+      }
 
-        internal var _count:Number=0;
+      public function get total() : Number {
+         return this._total;
+      }
 
-        internal var _total:Number=0;
+      public function set total(param1:Number) : void {
+         this._total = param1;
+      }
 
-        internal var _owner:String="";
+      public function get count() : Number {
+         return this._count;
+      }
 
-        internal var _icon:String="";
+      public function set count(param1:Number) : void {
+         this._count = param1;
+      }
 
-        internal var _disabled:Boolean;
+      public function get arena() : String {
+         return this._arena;
+      }
 
-        internal var _id:Number=0;
-    }
+      public function set arena(param1:String) : void {
+         this._arena = param1;
+      }
+
+      public function get comment() : String {
+         return this._comment;
+      }
+
+      public function set comment(param1:String) : void {
+         this._comment = param1;
+      }
+   }
+
 }

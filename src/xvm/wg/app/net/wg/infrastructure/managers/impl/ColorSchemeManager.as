@@ -1,45 +1,40 @@
-package net.wg.infrastructure.managers.impl 
+package net.wg.infrastructure.managers.impl
 {
-    import flash.geom.*;
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import net.wg.infrastructure.events.*;
-    import net.wg.infrastructure.interfaces.*;
-    import net.wg.infrastructure.managers.*;
-    
-    public class ColorSchemeManager extends net.wg.infrastructure.base.meta.impl.ColorSchemeManagerMeta implements net.wg.infrastructure.managers.IColorSchemeManager
-    {
-        public function ColorSchemeManager()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.ColorSchemeManagerMeta;
+   import net.wg.infrastructure.managers.IColorSchemeManager;
+   import net.wg.infrastructure.interfaces.IColorScheme;
+   import net.wg.data.constants.Linkages;
+   import flash.geom.ColorTransform;
+   import net.wg.infrastructure.events.ColorSchemeEvent;
 
-        public function getScheme(arg1:String):net.wg.infrastructure.interfaces.IColorScheme
-        {
-            var loc1:*=App.utils.classFactory.getClass(net.wg.data.constants.Linkages.CLR_CSS);
-            return new loc1(getColorSchemeS(arg1));
-        }
 
-        public function getAliasColor(arg1:String):String
-        {
-            return this.getScheme(arg1).aliasColor;
-        }
+   public class ColorSchemeManager extends ColorSchemeManagerMeta implements IColorSchemeManager
+   {
+          
+      public function ColorSchemeManager() {
+         super();
+      }
 
-        public function getRGB(arg1:String):Number
-        {
-            return this.getScheme(arg1).rgb;
-        }
+      public function getScheme(param1:String) : IColorScheme {
+         var _loc2_:Class = App.utils.classFactory.getClass(Linkages.CLR_CSS);
+         return new _loc2_(getColorSchemeS(param1));
+      }
 
-        public function getTransform(arg1:String):flash.geom.ColorTransform
-        {
-            return this.getScheme(arg1).colorTransform;
-        }
+      public function getAliasColor(param1:String) : String {
+         return this.getScheme(param1).aliasColor;
+      }
 
-        public function as_update():void
-        {
-            dispatchEvent(new net.wg.infrastructure.events.ColorSchemeEvent(net.wg.infrastructure.events.ColorSchemeEvent.SCHEMAS_UPDATED));
-            return;
-        }
-    }
+      public function getRGB(param1:String) : Number {
+         return this.getScheme(param1).rgb;
+      }
+
+      public function getTransform(param1:String) : ColorTransform {
+         return this.getScheme(param1).colorTransform;
+      }
+
+      public function as_update() : void {
+         dispatchEvent(new ColorSchemeEvent(ColorSchemeEvent.SCHEMAS_UPDATED));
+      }
+   }
+
 }

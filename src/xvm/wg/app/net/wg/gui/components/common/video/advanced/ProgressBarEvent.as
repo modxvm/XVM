@@ -1,28 +1,27 @@
-package net.wg.gui.components.common.video.advanced 
+package net.wg.gui.components.common.video.advanced
 {
-    import flash.events.*;
-    
-    public class ProgressBarEvent extends flash.events.Event
-    {
-        public function ProgressBarEvent(arg1:String, arg2:Number, arg3:Boolean=false, arg4:Boolean=false)
-        {
-            this.position = arg2;
-            super(arg1, arg3, arg4);
-            return;
-        }
+   import flash.events.Event;
 
-        public override function clone():flash.events.Event
-        {
-            return new net.wg.gui.components.common.video.advanced.ProgressBarEvent(type, this.position, bubbles, cancelable);
-        }
 
-        public override function toString():String
-        {
-            return formatToString("ProgressBarEvent", "type", "bubbles", "cancelable", "eventPhase");
-        }
+   public class ProgressBarEvent extends Event
+   {
+          
+      public function ProgressBarEvent(param1:String, param2:Number, param3:Boolean=false, param4:Boolean=false) {
+         this.position = param2;
+         super(param1,param3,param4);
+      }
 
-        public static const POSITION_UPDATED:String="positionUpdated";
+      public static const POSITION_UPDATED:String = "positionUpdated";
 
-        public var position:Number;
-    }
+      public var position:Number;
+
+      override public function clone() : Event {
+         return new ProgressBarEvent(type,this.position,bubbles,cancelable);
+      }
+
+      override public function toString() : String {
+         return formatToString("ProgressBarEvent","type","bubbles","cancelable","eventPhase");
+      }
+   }
+
 }

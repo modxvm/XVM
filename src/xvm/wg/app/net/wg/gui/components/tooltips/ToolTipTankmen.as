@@ -1,260 +1,276 @@
-package net.wg.gui.components.tooltips 
+package net.wg.gui.components.tooltips
 {
-    import __AS3__.vec.*;
-    import flash.display.*;
-    import flash.text.*;
-    import net.wg.data.managers.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.components.tooltips.VO.*;
-    import net.wg.gui.components.tooltips.helpers.*;
-    import net.wg.gui.events.*;
-    import net.wg.utils.*;
-    
-    public class ToolTipTankmen extends net.wg.gui.components.tooltips.ToolTipSpecial
-    {
-        public function ToolTipTankmen()
-        {
-            super();
-            this.headerTF = content.headerTF;
-            this.tooltipStatus = content.tooltipStatus;
-            this.tooltipStatusNewSkill = content.tooltipStatusNewSkill;
-            this.tankInfoHeaderTF = content.tankInfoHeaderTF;
-            this.tankInfoTF = content.tankInfoTF;
-            this.vehicleIco = content.vehicleIco;
-            this.whiteBg = content.whiteBg;
-            return;
-        }
+   import flash.text.TextField;
+   import net.wg.gui.components.controls.UILoaderAlt;
+   import flash.display.Sprite;
+   import net.wg.gui.components.tooltips.VO.TankmenVO;
+   import net.wg.data.managers.ITooltipProps;
+   import net.wg.gui.events.UILoaderEvent;
+   import flash.text.TextFormat;
+   import net.wg.gui.components.tooltips.VO.ToolTipBlockVO;
+   import net.wg.gui.components.tooltips.VO.ToolTipStatusColorsVO;
+   import net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO;
+   import flash.text.TextFieldAutoSize;
+   import net.wg.gui.components.tooltips.helpers.Utils;
+   import net.wg.utils.ILocale;
+   import net.wg.gui.components.tooltips.VO.ToolTipBlockRightListItemVO;
+   import flash.text.StyleSheet;
 
-        public override function build(arg1:Object, arg2:net.wg.data.managers.ITooltipProps):void
-        {
-            super.build(arg1, arg2);
-            return;
-        }
 
-        public override function dispose():void
-        {
-            if (this.vehicleIco.hasEventListener(net.wg.gui.events.UILoaderEvent.COMPLETE)) 
+   public class ToolTipTankmen extends ToolTipSpecial
+   {
+          
+      public function ToolTipTankmen() {
+         super();
+         this.headerTF = content.headerTF;
+         this.tooltipStatus = content.tooltipStatus;
+         this.tooltipStatusNewSkill = content.tooltipStatusNewSkill;
+         this.tankInfoHeaderTF = content.tankInfoHeaderTF;
+         this.tankInfoTF = content.tankInfoTF;
+         this.vehicleIco = content.vehicleIco;
+         this.whiteBg = content.whiteBg;
+      }
+
+      public var headerTF:TextField = null;
+
+      public var tooltipStatus:Status = null;
+
+      public var tooltipStatusNewSkill:Status = null;
+
+      public var tankInfoHeaderTF:TextField = null;
+
+      public var tankInfoTF:TextField = null;
+
+      public var vehicleIco:UILoaderAlt = null;
+
+      public var whiteBg:Sprite = null;
+
+      private var dataVO:TankmenVO = null;
+
+      override public function build(param1:Object, param2:ITooltipProps) : void {
+         super.build(param1,param2);
+      }
+
+      override public function dispose() : void {
+         if(this.vehicleIco.hasEventListener(UILoaderEvent.COMPLETE))
+         {
+            this.vehicleIco.removeEventListener(UILoaderEvent.COMPLETE,this.onIcoLoaded);
+         }
+         super.dispose();
+      }
+
+      override public function toString() : String {
+         return "[WG ToolTipTankmen " + name + "]";
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+      }
+
+      override protected function redraw() : void {
+         var _loc1_:Separator = null;
+         var _loc6_:String = null;
+         var _loc7_:TextFormat = null;
+         var _loc8_:ToolTipBlockVO = null;
+         var _loc9_:String = null;
+         var _loc10_:String = null;
+         var _loc11_:String = null;
+         var _loc12_:String = null;
+         var _loc13_:ToolTipStatusColorsVO = null;
+         var _loc14_:ToolTipStatusColorsVO = null;
+         _loc1_ = null;
+         separators = new Vector.<Separator>();
+         this.dataVO = new TankmenVO(_data);
+         var _loc2_:ToolTipBlockResultVO = null;
+         blockResults = new Vector.<ToolTipBlockResultVO>();
+         var _loc3_:uint = 0;
+         var _loc4_:uint = 0;
+         this.whiteBg.width = 10;
+         this.headerTF.autoSize = TextFieldAutoSize.LEFT;
+         this.headerTF.htmlText = Utils.instance.htmlWrapper(this.dataVO.vName,Utils.instance.COLOR_HEADER,18,"$TitleFont") + "<br/>" + Utils.instance.htmlWrapper(this.dataVO.rank,Utils.instance.COLOR_NORMAL,12,"$FieldFont");
+         this.headerTF.x = contentMargin.left + bgShadowMargin.left;
+         this.headerTF.y = topPosition;
+         this.headerTF.width = this.headerTF.textWidth + 5;
+         topPosition = topPosition + (this.headerTF.textHeight + Utils.instance.MARGIN_AFTER_BLOCK);
+         _loc1_ = Utils.instance.createSeparate(content);
+         _loc1_.y = topPosition;
+         separators.push(_loc1_);
+         topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
+         var _loc5_:ILocale = App.utils.locale;
+         if(this.dataVO.vehicleContour != "")
+         {
+            topPosition = topPosition - Utils.instance.MARGIN_AFTER_SEPARATE;
+            this.whiteBg.x = bgShadowMargin.left + 1;
+            this.whiteBg.y = topPosition;
+            this.whiteBg.height = 81;
+            this.tankInfoHeaderTF.y = topPosition + 9;
+            this.tankInfoHeaderTF.x = contentMargin.left + bgShadowMargin.left;
+            this.tankInfoHeaderTF.text = TOOLTIPS.HANGAR_CREW_ASSIGNEDTO;
+            this.tankInfoHeaderTF.width = this.tankInfoHeaderTF.textWidth + 5;
+            this.vehicleIco.y = topPosition + 35;
+            this.vehicleIco.x = contentMargin.left + bgShadowMargin.left;
+            _loc6_ = _loc5_.makeString(MENU.tankmen(this.dataVO.currentVehicleType));
+            _loc6_ = _loc6_.slice(0,1).toUpperCase() + _loc6_.slice(1);
+            _loc6_ = this.dataVO.currentVehicleName + "<br/>" + _loc6_;
+            _loc7_ = new TextFormat();
+            _loc7_.leading = -2;
+            this.tankInfoTF.autoSize = TextFieldAutoSize.LEFT;
+            this.tankInfoTF.htmlText = Utils.instance.htmlWrapper(_loc6_,Utils.instance.COLOR_NUMBER,12,"$FieldFont");
+            this.tankInfoTF.setTextFormat(_loc7_);
+            this.tankInfoTF.width = this.tankInfoTF.textWidth + 5;
+            this.tankInfoTF.y = this.vehicleIco.y + 1;
+            this.tankInfoTF.x = this.vehicleIco.x;
+            this.vehicleIco.addEventListener(UILoaderEvent.COMPLETE,this.onIcoLoaded);
+            this.vehicleIco.source = this.dataVO.vehicleContour;
+            topPosition = topPosition + this.whiteBg.height;
+            _loc1_ = Utils.instance.createSeparate(content);
+            _loc1_.y = topPosition;
+            separators.push(_loc1_);
+            topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
+         }
+         else
+         {
+            this.tankInfoHeaderTF.visible = this.whiteBg.visible = this.tankInfoTF.visible = this.vehicleIco.visible = false;
+            this.tankInfoHeaderTF.width = 10;
+            this.tankInfoTF.width = 10;
+         }
+         if(this.dataVO.params)
+         {
+            _loc8_ = new ToolTipBlockVO();
+            _loc8_.startYPos = topPosition;
+            _loc8_.header = _loc5_.makeString(TOOLTIPS.HANGAR_CREW_SPECIALTY_SKILLS);
+            _loc8_.contener = content;
+            _loc8_.childrenNamePrefix = "params";
+            _loc8_.leftText = "";
+            _loc8_.leftTextColor = Utils.instance.convertStringColorToNumber(Utils.instance.COLOR_NUMBER);
+            _loc8_.rightTextList = new Vector.<ToolTipBlockRightListItemVO>();
+            _loc8_.rightTextColor = Utils.instance.convertStringColorToNumber(Utils.instance.COLOR_NORMAL);
+            _loc8_.rightTextCSS = new StyleSheet();
+            _loc8_.rightTextCSS.setStyle("h1",
+               {
+                  "color":Utils.instance.COLOR_NORMAL,
+                  "fontSize":"11px",
+                  "fontFamily":"$TextFont",
+                  "leading":"2px"
+               }
+            );
+            _loc8_.rightTextCSS.setStyle("h2",
+               {
+                  "color":Utils.instance.COLOR_ALERT,
+                  "fontSize":"11px",
+                  "fontFamily":"$TextFont",
+                  "leading":"2px"
+               }
+            );
+            _loc8_.rightTextCSS.setStyle("p",
+               {
+                  "color":Utils.instance.COLOR_ALERT,
+                  "fontSize":"11px",
+                  "fontFamily":"$TextFont",
+                  "leading":"2px"
+               }
+            );
+            _loc3_ = this.dataVO.params.length;
+            _loc4_ = 0;
+            while(_loc4_ < _loc3_)
             {
-                this.vehicleIco.removeEventListener(net.wg.gui.events.UILoaderEvent.COMPLETE, this.onIcoLoaded);
+               _loc9_ = this.dataVO.params[_loc4_][2]?Utils.instance.COLOR_NUMBER:Utils.instance.COLOR_ALERT;
+               _loc8_.leftText = _loc8_.leftText + (Utils.instance.htmlWrapper(this.dataVO.params[_loc4_][1],_loc9_,12,"$TextFont") + "<br/>");
+               _loc10_ = "";
+               if(_loc4_ == 0)
+               {
+                  if(this.dataVO.vehicleName == this.dataVO.currentVehicleName || this.dataVO.currentVehicleName == "")
+                  {
+                     _loc10_ = "<h1>" + _loc5_.makeString(this.dataVO.params[_loc4_][0]) + " " + this.dataVO.vehicleName + "</h1>";
+                  }
+                  else
+                  {
+                     _loc10_ = "<h1>" + _loc5_.makeString(this.dataVO.params[_loc4_][0]) + " <p>" + this.dataVO.vehicleName + "</p></h1>";
+                  }
+               }
+               else
+               {
+                  _loc10_ = "<h1>" + _loc5_.makeString(this.dataVO.params[_loc4_][0]) + "</h1>";
+               }
+               _loc8_.rightTextList[_loc4_] = new ToolTipBlockRightListItemVO(_loc10_);
+               _loc4_++;
             }
-            super.dispose();
-            return;
-        }
+            _loc2_ = Utils.instance.createBlock(_loc8_,contentMargin.left + bgShadowMargin.left);
+            blockResults.push(_loc2_);
+            topPosition = _loc2_.startYPos;
+            hasIcon = _loc2_.hasIcons?true:hasIcon;
+            _loc1_ = Utils.instance.createSeparate(content);
+            _loc1_.y = topPosition;
+            separators.push(_loc1_);
+            topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
+            leftPartMaxW = _loc2_.leftPartMaxW > leftPartMaxW?_loc2_.leftPartMaxW:leftPartMaxW;
+         }
+         if(this.dataVO.newSkillsCount > 0)
+         {
+            _loc11_ = _loc5_.makeString(TOOLTIPS.HANGAR_CREW_NEW_SKILL_AVAILABLE_HEADER);
+            _loc12_ = _loc5_.makeString(TOOLTIPS.HANGAR_CREW_NEW_SKILL_AVAILABLE_TEXT);
+            _loc13_ = Utils.instance.getStatusColor(Utils.instance.STATUS_ADDITIONAL);
+            this.tooltipStatusNewSkill.updateWidth(content.width - contentMargin.right - bgShadowMargin.right);
+            this.tooltipStatusNewSkill.setData(_loc11_,_loc12_,_loc13_,Status.ICO_NEWSKILL);
+            this.tooltipStatusNewSkill.x = contentMargin.left + bgShadowMargin.left;
+            this.tooltipStatusNewSkill.y = topPosition;
+            topPosition = topPosition + (this.tooltipStatusNewSkill.actualHeight + Utils.instance.MARGIN_AFTER_BLOCK);
+            _loc1_ = Utils.instance.createSeparate(content);
+            _loc1_.y = topPosition;
+            separators.push(_loc1_);
+            topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
+         }
+         else
+         {
+            this.tooltipStatusNewSkill.y = 0;
+            this.tooltipStatusNewSkill.width = 10;
+            this.tooltipStatusNewSkill.visible = false;
+         }
+         if(this.dataVO.status)
+         {
+            _loc14_ = Utils.instance.getStatusColor(this.dataVO.statusLevel);
+            this.tooltipStatus.y = topPosition;
+            this.tooltipStatus.x = contentMargin.left + bgShadowMargin.left;
+            this.tooltipStatus.updateWidth(content.width - contentMargin.right - bgShadowMargin.right);
+            this.tooltipStatus.setData(this.dataVO.statusHeader,this.dataVO.statusText,_loc14_);
+            topPosition = topPosition + this.tooltipStatus.height;
+            _loc1_ = Utils.instance.createSeparate(content);
+            _loc1_.y = topPosition;
+            separators.push(_loc1_);
+            topPosition = topPosition + Utils.instance.MARGIN_AFTER_BLOCK;
+         }
+         else
+         {
+            this.tooltipStatus.visible = false;
+            this.tooltipStatus.y = 0;
+         }
+         _loc1_ = separators.pop();
+         content.removeChild(_loc1_);
+         _loc1_ = null;
+         this.dataVO = null;
+         updatePositions();
+         super.redraw();
+      }
 
-        public override function toString():String
-        {
-            return "[WG ToolTipTankmen " + name + "]";
-        }
+      override protected function updateSize() : void {
+         background.width = content.width + contentMargin.right + bgShadowMargin.right | 0;
+         background.height = content.height + contentMargin.bottom + bgShadowMargin.bottom | 0;
+         this.whiteBg.width = content.width + bgShadowMargin.horizontal;
+      }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            return;
-        }
+      private function getSign(param1:Number) : String {
+         return param1 >= 0?"+":"";
+      }
 
-        protected override function redraw():void
-        {
-            var loc1:*=null;
-            var loc6:*=null;
-            var loc7:*=null;
-            var loc8:*=null;
-            var loc9:*=null;
-            var loc10:*=null;
-            var loc11:*=null;
-            var loc12:*=null;
-            var loc13:*=null;
-            var loc14:*=null;
-            loc1 = null;
-            seaprators = new Vector.<net.wg.gui.components.tooltips.Separator>();
-            this.dataVO = new net.wg.gui.components.tooltips.VO.TankmenVO(_data);
-            var loc2:*=null;
-            blockResults = new Vector.<net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO>();
-            var loc3:*=0;
-            var loc4:*=0;
-            this.whiteBg.width = 10;
-            this.headerTF.autoSize = flash.text.TextFieldAutoSize.LEFT;
-            this.headerTF.htmlText = net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(this.dataVO.vName, net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_HEADER, 18, "$TitleFont") + "<br/>" + net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(this.dataVO.rank, net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NORMAL, 12, "$FieldFont");
-            this.headerTF.x = contentMargin.left + bgShadowMargin.left;
-            this.headerTF.y = topPosition;
-            this.headerTF.width = this.headerTF.textWidth + 5;
-            topPosition = topPosition + (this.headerTF.textHeight + net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_BLOCK);
-            loc1 = net.wg.gui.components.tooltips.helpers.Utils.instance.createSeparate(content);
-            loc1.y = topPosition;
-            seaprators.push(loc1);
-            topPosition = topPosition + net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_SEPARATE;
-            var loc5:*=App.utils.locale;
-            if (this.dataVO.vehicleContour == "") 
-            {
-                var loc15:*;
-                this.vehicleIco.visible = loc15 = false;
-                this.tankInfoTF.visible = loc15 = loc15;
-                this.whiteBg.visible = loc15 = loc15;
-                this.tankInfoHeaderTF.visible = loc15;
-                this.tankInfoHeaderTF.width = 10;
-                this.tankInfoTF.width = 10;
-            }
-            else 
-            {
-                topPosition = topPosition - net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_SEPARATE;
-                this.whiteBg.x = bgShadowMargin.left + 1;
-                this.whiteBg.y = topPosition;
-                this.whiteBg.height = 81;
-                this.tankInfoHeaderTF.y = topPosition + 9;
-                this.tankInfoHeaderTF.x = contentMargin.left + bgShadowMargin.left;
-                this.tankInfoHeaderTF.text = TOOLTIPS.HANGAR_CREW_ASSIGNEDTO;
-                this.tankInfoHeaderTF.width = this.tankInfoHeaderTF.textWidth + 5;
-                this.vehicleIco.y = topPosition + 35;
-                this.vehicleIco.x = contentMargin.left + bgShadowMargin.left;
-                loc6 = (loc6 = loc5.makeString(MENU.tankmen(this.dataVO.currentVehicleType))).slice(0, 1).toUpperCase() + loc6.slice(1);
-                loc6 = this.dataVO.currentVehicleName + "<br/>" + loc6;
-                (loc7 = new flash.text.TextFormat()).leading = -2;
-                this.tankInfoTF.autoSize = flash.text.TextFieldAutoSize.LEFT;
-                this.tankInfoTF.htmlText = net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(loc6, net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NUMBER, 12, "$FieldFont");
-                this.tankInfoTF.setTextFormat(loc7);
-                this.tankInfoTF.width = this.tankInfoTF.textWidth + 5;
-                this.tankInfoTF.y = this.vehicleIco.y + 1;
-                this.tankInfoTF.x = this.vehicleIco.x;
-                this.vehicleIco.addEventListener(net.wg.gui.events.UILoaderEvent.COMPLETE, this.onIcoLoaded);
-                this.vehicleIco.source = this.dataVO.vehicleContour;
-                topPosition = topPosition + this.whiteBg.height;
-                loc1 = net.wg.gui.components.tooltips.helpers.Utils.instance.createSeparate(content);
-                loc1.y = topPosition;
-                seaprators.push(loc1);
-                topPosition = topPosition + net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_SEPARATE;
-            }
-            if (this.dataVO.params) 
-            {
-                (loc8 = new net.wg.gui.components.tooltips.VO.ToolTipBlockVO()).startYPos = topPosition;
-                loc8.header = loc5.makeString(TOOLTIPS.HANGAR_CREW_SPECIALTY_SKILLS);
-                loc8.contener = content;
-                loc8.childrenNamePrefix = "params";
-                loc8.leftText = "";
-                loc8.leftTextColor = net.wg.gui.components.tooltips.helpers.Utils.instance.convertStringColorToNumber(net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NUMBER);
-                loc8.rightTextList = new Vector.<net.wg.gui.components.tooltips.VO.ToolTipBlockRightListItemVO>();
-                loc8.rightTextColor = net.wg.gui.components.tooltips.helpers.Utils.instance.convertStringColorToNumber(net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NORMAL);
-                loc8.rightTextCSS = new flash.text.StyleSheet();
-                loc8.rightTextCSS.setStyle("h1", {"color":net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NORMAL, "fontSize":"11px", "fontFamily":"$TextFont", "leading":"2px"});
-                loc8.rightTextCSS.setStyle("h2", {"color":net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_ALERT, "fontSize":"11px", "fontFamily":"$TextFont", "leading":"2px"});
-                loc8.rightTextCSS.setStyle("p", {"color":net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_ALERT, "fontSize":"11px", "fontFamily":"$TextFont", "leading":"2px"});
-                loc3 = this.dataVO.params.length;
-                loc4 = 0;
-                while (loc4 < loc3) 
-                {
-                    loc9 = this.dataVO.params[loc4][2] ? net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_NUMBER : net.wg.gui.components.tooltips.helpers.Utils.instance.COLOR_ALERT;
-                    loc8.leftText = loc8.leftText + (net.wg.gui.components.tooltips.helpers.Utils.instance.htmlWrapper(this.dataVO.params[loc4][1], loc9, 12, "$TextFont") + "<br/>");
-                    loc10 = "";
-                    if (loc4 != 0) 
-                    {
-                        loc10 = "<h1>" + loc5.makeString(this.dataVO.params[loc4][0]) + "</h1>";
-                    }
-                    else if (this.dataVO.vehicleName == this.dataVO.currentVehicleName || this.dataVO.currentVehicleName == "") 
-                    {
-                        loc10 = "<h1>" + loc5.makeString(this.dataVO.params[loc4][0]) + " " + this.dataVO.vehicleName + "</h1>";
-                    }
-                    else 
-                    {
-                        loc10 = "<h1>" + loc5.makeString(this.dataVO.params[loc4][0]) + " <p>" + this.dataVO.vehicleName + "</p></h1>";
-                    }
-                    loc8.rightTextList[loc4] = new net.wg.gui.components.tooltips.VO.ToolTipBlockRightListItemVO(loc10);
-                    ++loc4;
-                }
-                loc2 = net.wg.gui.components.tooltips.helpers.Utils.instance.createBlock(loc8, contentMargin.left + bgShadowMargin.left);
-                blockResults.push(loc2);
-                topPosition = loc2.startYPos;
-                hasIcon = loc2.hasIcons ? true : hasIcon;
-                loc1 = net.wg.gui.components.tooltips.helpers.Utils.instance.createSeparate(content);
-                loc1.y = topPosition;
-                seaprators.push(loc1);
-                topPosition = topPosition + net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_SEPARATE;
-                leftPartMaxW = loc2.leftPartMaxW > leftPartMaxW ? loc2.leftPartMaxW : leftPartMaxW;
-            }
-            if (this.dataVO.newSkillsCount > 0) 
-            {
-                loc11 = loc5.makeString(TOOLTIPS.HANGAR_CREW_NEW_SKILL_AVAILABLE_HEADER);
-                loc12 = loc5.makeString(TOOLTIPS.HANGAR_CREW_NEW_SKILL_AVAILABLE_TEXT);
-                loc13 = net.wg.gui.components.tooltips.helpers.Utils.instance.getStatusColor(net.wg.gui.components.tooltips.helpers.Utils.instance.STATUS_ADDITIONAL);
-                this.tooltipStatusNewSkill.updateWidth(content.width - contentMargin.right - bgShadowMargin.right);
-                this.tooltipStatusNewSkill.setData(loc11, loc12, loc13, net.wg.gui.components.tooltips.Status.ICO_NEWSKILL);
-                this.tooltipStatusNewSkill.x = contentMargin.left + bgShadowMargin.left;
-                this.tooltipStatusNewSkill.y = topPosition;
-                topPosition = topPosition + (this.tooltipStatusNewSkill.actualHeight + net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_BLOCK);
-                loc1 = net.wg.gui.components.tooltips.helpers.Utils.instance.createSeparate(content);
-                loc1.y = topPosition;
-                seaprators.push(loc1);
-                topPosition = topPosition + net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_SEPARATE;
-            }
-            else 
-            {
-                this.tooltipStatusNewSkill.y = 0;
-                this.tooltipStatusNewSkill.width = 10;
-                this.tooltipStatusNewSkill.visible = false;
-            }
-            if (this.dataVO.status) 
-            {
-                loc14 = net.wg.gui.components.tooltips.helpers.Utils.instance.getStatusColor(this.dataVO.statusLevel);
-                this.tooltipStatus.y = topPosition;
-                this.tooltipStatus.x = contentMargin.left + bgShadowMargin.left;
-                this.tooltipStatus.updateWidth(content.width - contentMargin.right - bgShadowMargin.right);
-                this.tooltipStatus.setData(this.dataVO.statusHeader, this.dataVO.statusText, loc14);
-                topPosition = topPosition + this.tooltipStatus.height;
-                loc1 = net.wg.gui.components.tooltips.helpers.Utils.instance.createSeparate(content);
-                loc1.y = topPosition;
-                seaprators.push(loc1);
-                topPosition = topPosition + net.wg.gui.components.tooltips.helpers.Utils.instance.MARGIN_AFTER_BLOCK;
-            }
-            else 
-            {
-                this.tooltipStatus.visible = false;
-                this.tooltipStatus.y = 0;
-            }
-            loc1 = seaprators.pop();
-            content.removeChild(loc1);
-            loc1 = null;
-            this.dataVO = null;
-            updatePositions();
-            super.redraw();
-            return;
-        }
+      private function onIcoLoaded(param1:UILoaderEvent) : void {
+         if(this.vehicleIco.hasEventListener(UILoaderEvent.COMPLETE))
+         {
+            this.vehicleIco.removeEventListener(UILoaderEvent.COMPLETE,this.onIcoLoaded);
+         }
+         this.vehicleIco.scaleX = -1;
+         this.vehicleIco.x = contentMargin.left + bgShadowMargin.left + this.vehicleIco.width;
+         this.tankInfoTF.x = this.vehicleIco.x + 5;
+      }
+   }
 
-        protected override function updateSize():void
-        {
-            background.width = content.width + contentMargin.right + bgShadowMargin.right | 0;
-            background.height = content.height + contentMargin.bottom + bgShadowMargin.bottom | 0;
-            this.whiteBg.width = content.width + bgShadowMargin.horizontal;
-            return;
-        }
-
-        internal function getSign(arg1:Number):String
-        {
-            return arg1 >= 0 ? "+" : "";
-        }
-
-        internal function onIcoLoaded(arg1:net.wg.gui.events.UILoaderEvent):void
-        {
-            if (this.vehicleIco.hasEventListener(net.wg.gui.events.UILoaderEvent.COMPLETE)) 
-            {
-                this.vehicleIco.removeEventListener(net.wg.gui.events.UILoaderEvent.COMPLETE, this.onIcoLoaded);
-            }
-            this.vehicleIco.scaleX = -1;
-            this.vehicleIco.x = contentMargin.left + bgShadowMargin.left + this.vehicleIco.width;
-            this.tankInfoTF.x = this.vehicleIco.x + 5;
-            return;
-        }
-
-        public var headerTF:flash.text.TextField=null;
-
-        public var tooltipStatus:net.wg.gui.components.tooltips.Status=null;
-
-        public var tooltipStatusNewSkill:net.wg.gui.components.tooltips.Status=null;
-
-        public var tankInfoHeaderTF:flash.text.TextField=null;
-
-        public var tankInfoTF:flash.text.TextField=null;
-
-        public var vehicleIco:net.wg.gui.components.controls.UILoaderAlt=null;
-
-        public var whiteBg:flash.display.Sprite=null;
-
-        internal var dataVO:net.wg.gui.components.tooltips.VO.TankmenVO=null;
-    }
 }

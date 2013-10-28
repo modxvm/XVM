@@ -1,22 +1,22 @@
-package net.wg.gui.events 
+package net.wg.gui.events
 {
-    import flash.events.*;
-    
-    public class LobbyEvent extends flash.events.Event
-    {
-        public function LobbyEvent(arg1:String)
-        {
-            super(arg1, true, true);
-            return;
-        }
+   import flash.events.Event;
 
-        public override function clone():flash.events.Event
-        {
-            return new net.wg.gui.events.LobbyEvent(type);
-        }
 
-        public static const REGISTER_DRAGGING:String="registerDragging";
+   public class LobbyEvent extends Event
+   {
+          
+      public function LobbyEvent(param1:String) {
+         super(param1,true,true);
+      }
 
-        public static const UNREGISTER_DRAGGING:String="unregisterDragging";
-    }
+      public static const REGISTER_DRAGGING:String = "registerDragging";
+
+      public static const UNREGISTER_DRAGGING:String = "unregisterDragging";
+
+      override public function clone() : Event {
+         return new LobbyEvent(type);
+      }
+   }
+
 }

@@ -1,372 +1,349 @@
-package net.wg.gui.lobby.tankman 
+package net.wg.gui.lobby.tankman
 {
-    import net.wg.data.VO.*;
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import scaleform.gfx.*;
-    
-    public class PersonalCaseBase extends net.wg.infrastructure.base.meta.impl.PersonalCaseMeta implements net.wg.infrastructure.base.meta.IPersonalCaseMeta
-    {
-        public function PersonalCaseBase()
-        {
+   import net.wg.infrastructure.base.meta.impl.PersonalCaseMeta;
+   import net.wg.infrastructure.base.meta.IPersonalCaseMeta;
+   import net.wg.data.VO.AchievementItemVO;
+   import net.wg.data.constants.VehicleTypes;
+   import scaleform.gfx.Extensions;
+
+
+   public class PersonalCaseBase extends PersonalCaseMeta implements IPersonalCaseMeta
+   {
+          
+      public function PersonalCaseBase() {
+         this.skillsModel = [];
+         super();
+      }
+
+      private static const templateS:Array;
+
+      protected var isFirtsRun:Boolean = true;
+
+      protected var autoSelectTab:int = 0;
+
+      protected var data:PersonalCaseModel;
+
+      protected var stats:Object;
+
+      protected var retrainingData:PersonalCaseRetrainingModel;
+
+      protected var skillsModel:Array;
+
+      protected var documentsData:PersonalCaseDocsModel;
+
+      protected var rentainingTabUpdated:Boolean = true;
+
+      public function as_setCommonData(param1:Object) : void {
+         this.parsePersonalCaseModel(param1);
+         this.updateCommonElements();
+      }
+
+      public function as_setDossierData(param1:Object) : void {
+         var _loc5_:Array = null;
+         var _loc6_:* = 0;
+         var _loc7_:* = 0;
+         var _loc8_:AchievementItemVO = null;
+         var _loc2_:Array = [];
+         var _loc3_:int = param1.achievements.length;
+         var _loc4_:* = 0;
+         while(_loc4_ < _loc3_)
+         {
+            _loc5_ = param1.achievements[_loc4_];
+            _loc6_ = _loc5_.length;
+            _loc7_ = 0;
+            while(_loc7_ < _loc6_)
+            {
+               _loc8_ = new AchievementItemVO(_loc5_[_loc7_]);
+               _loc2_.push(_loc8_);
+               _loc7_++;
+            }
+            if(_loc4_ < _loc3_-1 && _loc2_.length > 0)
+            {
+               _loc2_[_loc2_.length-1].showSeparator = true;
+            }
+            _loc4_++;
+         }
+         if(_loc2_.length > 0)
+         {
+            _loc2_[_loc2_.length-1].showSeparator = false;
+         }
+         this.stats = {};
+         this.stats.achievements = _loc2_;
+         this.stats.stats = param1.stats;
+         this.runtimeUpdateByModel(PersonalCaseStats,this.stats);
+      }
+
+      public function as_setRetrainingData(param1:Object) : void {
+         var _loc4_:Object = null;
+         this.retrainingData = new PersonalCaseRetrainingModel();
+         this.retrainingData.credits = param1.money[0];
+         this.retrainingData.gold = param1.money[1];
+         this.retrainingData.tankmanCost = param1.tankmanCost;
+         this.retrainingData.vehicles = param1.vehicles;
+         this.retrainingData.testData = this.data;
+         this.retrainingData.testStats = this.stats;
+         var _loc2_:Array = param1.vehicles;
+         var _loc3_:* = 0;
+         while(_loc3_ < _loc2_.length)
+         {
+            _loc4_ = _loc2_[_loc3_];
+            switch(_loc4_.vehicleType)
+            {
+               case VehicleTypes.LIGHT_TANK:
+                  this.retrainingData.lightTanks.push(_loc4_);
+                  break;
+               case VehicleTypes.MEDIUM_TANK:
+                  this.retrainingData.mediumTanks.push(_loc4_);
+                  break;
+               case VehicleTypes.HEAVY_TANK:
+                  this.retrainingData.heavyTanks.push(_loc4_);
+                  break;
+               case VehicleTypes.AT_SPG:
+                  this.retrainingData.AT_SPG.push(_loc4_);
+                  break;
+               case VehicleTypes.SPG:
+                  this.retrainingData.SPG.push(_loc4_);
+                  break;
+               default:
+                  DebugUtils.LOG_DEBUG("ERROR unknown tank type");
+            }
+            _loc3_++;
+         }
+         this.retrainingData.nationID = this.data.nationID;
+         this.retrainingData.tankmanID = this.data.inventoryID;
+         this.retrainingData.currentVehicle = this.data.currentVehicle;
+         this.retrainingData.nativeVehicle = this.data.nativeVehicle;
+         this.retrainingData.specializationLevel = parseInt(this.data.specializationLevel);
+         this.runtimeUpdateByModel(CrewTankmanRetraining,this.retrainingData);
+      }
+
+      public function as_setSkillsData(param1:Array) : void {
+         var _loc4_:PersonalCaseSkillsModel = null;
+         var _loc5_:String = null;
+         var _loc6_:* = 0;
+         var _loc7_:Object = null;
+         this.skillsModel = [];
+         var _loc2_:* = false;
+         var _loc3_:* = 0;
+         while(_loc3_ < param1.length)
+         {
+            if(!(!param1[_loc3_].hasOwnProperty("skills") || !param1[_loc3_].skills  is  Array || param1[_loc3_].skills.length <= 0))
+            {
+               _loc4_ = new PersonalCaseSkillsModel();
+               _loc5_ = param1[_loc3_].id;
+               _loc4_.rankId = _loc5_;
+               _loc4_.title = param1[_loc3_].id;
+               _loc4_.isHeader = true;
+               _loc4_.selfSkill = this.data.roleType == _loc5_;
+               this.skillsModel.push(_loc4_);
+               if((param1[_loc3_].hasOwnProperty("skills")) && param1[_loc3_].skills  is  Array)
+               {
+                  _loc6_ = 0;
+                  while(_loc6_ < param1[_loc3_].skills.length)
+                  {
+                     _loc4_ = new PersonalCaseSkillsModel();
+                     _loc7_ = param1[_loc3_].skills[_loc6_];
+                     _loc4_.title = _loc7_.id;
+                     _loc4_.isHeader = false;
+                     _loc4_.desc = _loc7_.desc;
+                     _loc4_.enabled = _loc7_.enabled;
+                     _loc4_.name = _loc7_.name;
+                     _loc4_.tankmanID = _loc7_.tankmanID;
+                     _loc4_.rankId = _loc5_;
+                     _loc4_.selfSkill = this.data.roleType == _loc5_;
+                     _loc4_.hasNewSkills = this.data.skillsCountForLearn > 0;
+                     this.skillsModel.push(_loc4_);
+                     _loc2_ = false;
+                     _loc6_++;
+                  }
+               }
+               else
+               {
+                  DebugUtils.LOG_DEBUG("ERROR :: not found skills in the title : " + _loc4_.title);
+               }
+            }
+            _loc3_++;
+         }
+         if(_loc2_)
+         {
             this.skillsModel = [];
-            super();
-            return;
-        }
+         }
+         this.runtimeUpdateByModel(PersonalCaseSkills,this.skillsModel);
+      }
 
-        public function as_setCommonData(arg1:Object):void
-        {
-            this.parsePersonalCaseModel(arg1);
-            this.updateCommonElements();
-            return;
-        }
-
-        public function as_setDossierData(arg1:Object):void
-        {
-            var loc4:*=null;
-            var loc5:*=0;
-            var loc6:*=0;
-            var loc7:*=null;
-            var loc1:*=[];
-            var loc2:*=arg1.achievements.length;
-            var loc3:*=0;
-            while (loc3 < loc2) 
+      public function as_setDocumentsData(param1:Object) : void {
+         this.documentsData = new PersonalCaseDocsModel();
+         if(!Extensions.isScaleform)
+         {
+            this.createTestNames(param1.firstnames);
+            this.createTestNames(param1.lastnames);
+         }
+         this.documentsData.originalIconFile = this.data.iconFile;
+         this.documentsData.firstNames = param1.firstnames;
+         this.documentsData.lastNames = param1.lastnames;
+         this.calculateMaxChars(this.documentsData.firstNames,this.documentsData,"firstNames");
+         this.calculateMaxChars(this.documentsData.lastNames,this.documentsData,"lastNames");
+         this.documentsData.icons = param1.icons;
+         this.documentsData.userCredits = param1.money[0];
+         this.documentsData.userGold = param1.money[1];
+         if(param1.passportChangeCost  is  Array)
+         {
+            this.documentsData.priceOfGold = param1.passportChangeCost[0];
+            this.documentsData.priveOfCredits = param1.passportChangeCost[1];
+         }
+         else
+         {
+            if(param1.passportChangeCost  is  int)
             {
-                loc5 = (loc4 = arg1.achievements[loc3]).length;
-                loc6 = 0;
-                while (loc6 < loc5) 
-                {
-                    loc7 = new net.wg.data.VO.AchievementItemVO(loc4[loc6]);
-                    loc1.push(loc7);
-                    ++loc6;
-                }
-                if (loc3 < (loc2 - 1) && loc1.length > 0) 
-                {
-                    loc1[(loc1.length - 1)].showSeparator = true;
-                }
-                ++loc3;
+               this.documentsData.priceOfGold = param1.passportChangeCost;
+               this.documentsData.useOnlyGold = true;
             }
-            if (loc1.length > 0) 
+         }
+         this.documentsData.currentTankmanFirstName = this.data.firstname;
+         this.documentsData.currentTankmanLastName = this.data.lastname;
+         this.documentsData.currentTankmanIcon = this.data.iconFile;
+         if(!Extensions.isScaleform)
+         {
+            this.documentsData.currentTankmanFirstName = param1.firstnames[0].value;
+            this.documentsData.currentTankmanLastName = param1.lastnames[0].value;
+         }
+         this.runtimeUpdateByModel(PersonalCaseDocs,this.documentsData);
+         this.rentainingTabUpdated = true;
+      }
+
+      protected function parsePersonalCaseModel(param1:Object) : void {
+         var _loc9_:PersonalCaseCurrentVehicle = null;
+         var _loc2_:PersonalCaseModel = new PersonalCaseModel();
+         var _loc3_:Object = param1.nativeVehicle;
+         _loc2_.nativeVehicle.innationID = _loc3_.innationID;
+         _loc2_.nativeVehicle.type = _loc3_.type;
+         var _loc4_:Object = param1.tankman;
+         _loc2_.inventoryID = _loc4_.inventoryID;
+         _loc2_.inTank = _loc4_.isInTank;
+         _loc2_.nationID = _loc4_.nationID;
+         _loc2_.iconFile = _loc4_.icon.big;
+         _loc2_.rankIconFile = _loc4_.iconRank.big;
+         _loc2_.rank = _loc4_.rankUserName;
+         var _loc5_:Object = _loc4_.nativeVehicle;
+         var _loc6_:Object = _loc4_.currentVehicle;
+         var _loc7_:Object = param1.currentVehicle;
+         var _loc8_:Boolean = param1.isOpsLocked;
+         _loc2_.nativeVehicle.userName = _loc5_.userName;
+         _loc2_.nativeVehicle.contourIconFile = _loc5_.iconContour;
+         _loc2_.nativeVehicle.icon = _loc5_.icon;
+         _loc2_.firstname = _loc4_.firstUserName;
+         _loc2_.lastname = _loc4_.lastUserName;
+         if((param1.hasOwnProperty("currentVehicle")) && !(param1.currentVehicle == null))
+         {
+            _loc9_ = new PersonalCaseCurrentVehicle();
+            _loc2_.currentVehicle = _loc9_;
+            _loc9_.innationID = _loc7_.innationID;
+            _loc9_.type = _loc7_.type;
+            _loc9_.currentVehicleName = _loc6_.userName;
+            _loc9_.inventoryID = _loc6_.inventoryID;
+            _loc9_.iconContour = _loc6_.iconContour;
+            _loc9_.icon = _loc6_.icon;
+            _loc9_.currentVehicleBroken = _loc7_.isBroken;
+            _loc9_.currentVehicleLocked = (_loc7_.isLocked) || (_loc8_);
+            _loc9_.currentVehicleLockMessage = param1.lockMessage;
+         }
+         _loc2_.specializationLevel = _loc4_.roleLevel;
+         _loc2_.skillsCountForLearn = _loc4_.newSkillsCount[0];
+         _loc2_.lastNewSkillExp = _loc4_.newSkillsCount[1];
+         _loc2_.skills = this.parseCarouselTankmanSkills(_loc4_.skills,_loc2_.skillsCountForLearn,_loc2_.lastNewSkillExp,_loc2_.inventoryID);
+         _loc2_.roleType = _loc4_.roleName;
+         _loc2_.role = _loc4_.roleUserName;
+         this.autoSelectTab = parseInt(param1.tabIndex);
+         this.data = _loc2_;
+      }
+
+      protected function updateCommonElements() : void {
+          
+      }
+
+      protected function runtimeUpdateByModel(param1:Class, param2:Object) : void {
+          
+      }
+
+      private function parseCarouselTankmanSkills(param1:Array, param2:int, param3:int, param4:int) : Array {
+         var _loc7_:CarouselTankmanSkillsModel = null;
+         var _loc8_:Object = null;
+         var _loc9_:CarouselTankmanSkillsModel = null;
+         var _loc5_:Array = [];
+         var _loc6_:* = 0;
+         while(_loc6_ < param1.length)
+         {
+            _loc7_ = new CarouselTankmanSkillsModel();
+            _loc8_ = param1[_loc6_];
+            _loc7_.description = _loc8_.description;
+            _loc7_.icon = _loc8_.icon.big;
+            _loc7_.roleIcon = _loc8_.icon.role;
+            _loc7_.isActive = _loc8_.isActive;
+            _loc7_.isCommon = _loc8_.roleType == CarouselTankmanSkillsModel.ROLE_TYPE_COMMON;
+            _loc7_.roleType = _loc8_.roleType;
+            _loc7_.isPerk = _loc8_.isPerk;
+            _loc7_.level = _loc8_.level;
+            _loc7_.userName = _loc8_.userName;
+            _loc7_.name = _loc8_.name;
+            _loc7_.tankmanID = param4;
+            _loc7_.enabled = _loc8_.isEnable;
+            _loc5_.push(_loc7_);
+            _loc6_++;
+         }
+         if(param2 > 0)
+         {
+            _loc9_ = new CarouselTankmanSkillsModel();
+            _loc9_.isNewSkill = true;
+            _loc9_.skillsCountForLearn = param2;
+            _loc9_.tankmanID = param4;
+            _loc5_.push(_loc9_);
+         }
+         return _loc5_;
+      }
+
+      private function calculateMaxChars(param1:Array, param2:PersonalCaseDocsModel, param3:String) : void {
+         var _loc6_:uint = 0;
+         var _loc4_:uint = param1.length;
+         var _loc5_:* = 0;
+         while(_loc5_ < _loc4_)
+         {
+            _loc6_ = param1[_loc5_]["value"].length;
+            if(param3 == "firstNames" && _loc6_ > param2.fistNameMaxChars)
             {
-                loc1[(loc1.length - 1)].showSeparator = false;
+               param2.fistNameMaxChars = _loc6_;
             }
-            this.stats = {};
-            this.stats.achievements = loc1;
-            this.stats.stats = arg1.stats;
-            this.runtimeUpdateByModel(net.wg.gui.lobby.tankman.PersonalCaseStats, this.stats);
-            return;
-        }
-
-        public function as_setRetrainingData(arg1:Object):void
-        {
-            var loc3:*=null;
-            this.retrainingData = new net.wg.gui.lobby.tankman.PersonalCaseRetrainingModel();
-            this.retrainingData.credits = arg1.money[0];
-            this.retrainingData.gold = arg1.money[1];
-            this.retrainingData.tankmanCost = arg1.tankmanCost;
-            this.retrainingData.vehicles = arg1.vehicles;
-            this.retrainingData.testData = this.data;
-            this.retrainingData.testStats = this.stats;
-            var loc1:*=arg1.vehicles;
-            var loc2:*=0;
-            while (loc2 < loc1.length) 
+            else
             {
-                loc3 = loc1[loc2];
-                var loc4:*=loc3.vehicleType;
-                switch (loc4) 
-                {
-                    case net.wg.data.constants.VehicleTypes.LIGHT_TANK:
-                    {
-                        this.retrainingData.lightTanks.push(loc3);
-                        break;
-                    }
-                    case net.wg.data.constants.VehicleTypes.MEDIUM_TANK:
-                    {
-                        this.retrainingData.mediumTanks.push(loc3);
-                        break;
-                    }
-                    case net.wg.data.constants.VehicleTypes.HEAVY_TANK:
-                    {
-                        this.retrainingData.heavyTanks.push(loc3);
-                        break;
-                    }
-                    case net.wg.data.constants.VehicleTypes.AT_SPG:
-                    {
-                        this.retrainingData.AT_SPG.push(loc3);
-                        break;
-                    }
-                    case net.wg.data.constants.VehicleTypes.SPG:
-                    {
-                        this.retrainingData.SPG.push(loc3);
-                        break;
-                    }
-                    default:
-                    {
-                        DebugUtils.LOG_DEBUG("ERROR unknown tank type");
-                        break;
-                    }
-                }
-                ++loc2;
+               if(param3 == "lastNames" && _loc6_ > param2.lastNameMaxChars)
+               {
+                  param2.lastNameMaxChars = _loc6_;
+               }
             }
-            this.retrainingData.nationID = this.data.nationID;
-            this.retrainingData.tankmanID = this.data.inventoryID;
-            this.retrainingData.currentVehicle = this.data.currentVehicle;
-            this.retrainingData.nativeVehicle = this.data.nativeVehicle;
-            this.retrainingData.specializationLevel = parseInt(this.data.specializationLevel);
-            this.runtimeUpdateByModel(net.wg.gui.lobby.tankman.CrewTankmanRetraining, this.retrainingData);
-            return;
-        }
+            _loc5_++;
+         }
+      }
 
-        public function as_setSkillsData(arg1:Array):void
-        {
-            var loc3:*=null;
-            var loc4:*=null;
-            var loc5:*=0;
-            var loc6:*=null;
-            this.skillsModel = [];
-            var loc1:*=false;
-            var loc2:*=0;
-            while (loc2 < arg1.length) 
+      private function createTestNames(param1:Array) : void {
+         var _loc3_:Object = null;
+         var _loc4_:* = 0;
+         var _loc5_:* = 0;
+         var _loc6_:* = 0;
+         var _loc2_:* = 0;
+         while(_loc2_ < param1.length)
+         {
+            _loc3_ = param1[_loc2_];
+            _loc3_.value = "";
+            _loc4_ = Math.random() * 6 + 4;
+            _loc5_ = 0;
+            while(_loc5_ < _loc4_)
             {
-                if (!(!arg1[loc2].hasOwnProperty("skills") || !arg1[loc2].skills is Array || arg1[loc2].skills.length <= 0)) 
-                {
-                    loc3 = new net.wg.gui.lobby.tankman.PersonalCaseSkillsModel();
-                    loc4 = arg1[loc2].id;
-                    loc3.rankId = loc4;
-                    loc3.title = arg1[loc2].id;
-                    loc3.isHeader = true;
-                    loc3.selfSkill = this.data.roleType == loc4;
-                    this.skillsModel.push(loc3);
-                    if (arg1[loc2].hasOwnProperty("skills") && arg1[loc2].skills is Array) 
-                    {
-                        loc5 = 0;
-                        while (loc5 < arg1[loc2].skills.length) 
-                        {
-                            loc3 = new net.wg.gui.lobby.tankman.PersonalCaseSkillsModel();
-                            loc6 = arg1[loc2].skills[loc5];
-                            loc3.title = loc6.id;
-                            loc3.isHeader = false;
-                            loc3.desc = loc6.desc;
-                            loc3.enabled = loc6.enabled;
-                            loc3.name = loc6.name;
-                            loc3.tankmanID = loc6.tankmanID;
-                            loc3.rankId = loc4;
-                            loc3.selfSkill = this.data.roleType == loc4;
-                            loc3.hasNewSkills = this.data.skillsCountForLearn > 0;
-                            this.skillsModel.push(loc3);
-                            loc1 = false;
-                            ++loc5;
-                        }
-                    }
-                    else 
-                    {
-                        DebugUtils.LOG_DEBUG("ERROR :: not found skills in the title : " + loc3.title);
-                    }
-                }
-                ++loc2;
+               _loc6_ = Math.random() * templateS.length;
+               _loc3_.value = _loc3_.value + templateS[_loc6_];
+               _loc5_++;
             }
-            if (loc1) 
-            {
-                this.skillsModel = [];
-            }
-            this.runtimeUpdateByModel(net.wg.gui.lobby.tankman.PersonalCaseSkills, this.skillsModel);
-            return;
-        }
+            _loc2_++;
+         }
+      }
+   }
 
-        public function as_setDocumentsData(arg1:Object):void
-        {
-            this.documentsData = new net.wg.gui.lobby.tankman.PersonalCaseDocsModel();
-            if (!scaleform.gfx.Extensions.isScaleform) 
-            {
-                this.createTestNames(arg1.firstnames);
-                this.createTestNames(arg1.lastnames);
-            }
-            this.documentsData.originalIconFile = this.data.iconFile;
-            this.documentsData.firstNames = arg1.firstnames;
-            this.documentsData.lastNames = arg1.lastnames;
-            this.calculateMaxChars(this.documentsData.firstNames, this.documentsData, "firstNames");
-            this.calculateMaxChars(this.documentsData.lastNames, this.documentsData, "lastNames");
-            this.documentsData.icons = arg1.icons;
-            this.documentsData.userCredits = arg1.money[0];
-            this.documentsData.userGold = arg1.money[1];
-            if (arg1.passportChangeCost is Array) 
-            {
-                this.documentsData.priceOfGold = arg1.passportChangeCost[0];
-                this.documentsData.priveOfCredits = arg1.passportChangeCost[1];
-            }
-            else if (arg1.passportChangeCost is int) 
-            {
-                this.documentsData.priceOfGold = arg1.passportChangeCost;
-                this.documentsData.useOnlyGold = true;
-            }
-            this.documentsData.currentTankmanFirstName = this.data.firstname;
-            this.documentsData.currentTankmanLastName = this.data.lastname;
-            this.documentsData.currentTankmanIcon = this.data.iconFile;
-            if (!scaleform.gfx.Extensions.isScaleform) 
-            {
-                this.documentsData.currentTankmanFirstName = arg1.firstnames[0].value;
-                this.documentsData.currentTankmanLastName = arg1.lastnames[0].value;
-            }
-            this.runtimeUpdateByModel(net.wg.gui.lobby.tankman.PersonalCaseDocs, this.documentsData);
-            this.rentainingTabUpdated = true;
-            return;
-        }
-
-        protected function parsePersonalCaseModel(arg1:Object):void
-        {
-            var loc7:*=null;
-            var loc1:*=new net.wg.gui.lobby.tankman.PersonalCaseModel();
-            var loc2:*=arg1.nativeVehicle;
-            loc1.nativeVehicle.innationID = loc2.innationID;
-            loc1.nativeVehicle.type = loc2.type;
-            var loc3:*=arg1.tankman;
-            loc1.inventoryID = loc3.inventoryID;
-            loc1.inTank = loc3.isInTank;
-            loc1.nationID = loc3.nationID;
-            loc1.iconFile = loc3.icon.big;
-            loc1.rankIconFile = loc3.iconRank.big;
-            loc1.rank = loc3.rankUserName;
-            var loc4:*=loc3.nativeVehicle;
-            var loc5:*=loc3.currentVehicle;
-            var loc6:*=arg1.currentVehicle;
-            loc1.nativeVehicle.userName = loc4.userName;
-            loc1.nativeVehicle.contourIconFile = loc4.iconContour;
-            loc1.nativeVehicle.icon = loc4.icon;
-            loc1.firstname = loc3.firstUserName;
-            loc1.lastname = loc3.lastUserName;
-            if (arg1.hasOwnProperty("currentVehicle") && !(arg1.currentVehicle == null)) 
-            {
-                loc7 = new net.wg.gui.lobby.tankman.PersonalCaseCurrentVehicle();
-                loc1.currentVehicle = loc7;
-                loc7.innationID = loc6.innationID;
-                loc7.type = loc6.type;
-                loc7.currentVehicleName = loc5.userName;
-                loc7.inventoryID = loc5.inventoryID;
-                loc7.iconContour = loc5.iconContour;
-                loc7.icon = loc5.icon;
-                loc7.currentVehicleBroken = loc6.isBroken;
-                loc7.currentVehicleLocked = loc6.isLocked;
-                loc7.currentVehicleLockMessage = arg1.lockMessage;
-            }
-            loc1.specializationLevel = loc3.roleLevel;
-            loc1.skillsCountForLearn = loc3.newSkillsCount[0];
-            loc1.lastNewSkillExp = loc3.newSkillsCount[1];
-            loc1.skills = this.parseCarouselTankmanSkills(loc3.skills, loc1.skillsCountForLearn, loc1.lastNewSkillExp, loc1.inventoryID);
-            loc1.roleType = loc3.roleName;
-            loc1.role = loc3.roleUserName;
-            this.autoSelectTab = parseInt(arg1.tabIndex);
-            this.data = loc1;
-            return;
-        }
-
-        protected function updateCommonElements():void
-        {
-            return;
-        }
-
-        protected function runtimeUpdateByModel(arg1:Class, arg2:Object):void
-        {
-            return;
-        }
-
-        internal function parseCarouselTankmanSkills(arg1:Array, arg2:int, arg3:int, arg4:int):Array
-        {
-            var loc3:*=null;
-            var loc4:*=null;
-            var loc5:*=null;
-            var loc1:*=[];
-            var loc2:*=0;
-            while (loc2 < arg1.length) 
-            {
-                loc3 = new net.wg.gui.lobby.tankman.CarouselTankmanSkillsModel();
-                loc4 = arg1[loc2];
-                loc3.description = loc4.description;
-                loc3.icon = loc4.icon.big;
-                loc3.roleIcon = loc4.icon.role;
-                loc3.isActive = loc4.isActive;
-                loc3.isCommon = loc4.roleType == net.wg.gui.lobby.tankman.CarouselTankmanSkillsModel.ROLE_TYPE_COMMON;
-                loc3.roleType = loc4.roleType;
-                loc3.isPerk = loc4.isPerk;
-                loc3.level = loc4.level;
-                loc3.userName = loc4.userName;
-                loc3.name = loc4.name;
-                loc3.tankmanID = arg4;
-                loc3.enabled = loc4.isEnable;
-                loc1.push(loc3);
-                ++loc2;
-            }
-            if (arg2 > 0) 
-            {
-                (loc5 = new net.wg.gui.lobby.tankman.CarouselTankmanSkillsModel()).isNewSkill = true;
-                loc5.skillsCountForLearn = arg2;
-                loc5.tankmanID = arg4;
-                loc1.push(loc5);
-            }
-            return loc1;
-        }
-
-        internal function calculateMaxChars(arg1:Array, arg2:net.wg.gui.lobby.tankman.PersonalCaseDocsModel, arg3:String):void
-        {
-            var loc3:*=0;
-            var loc1:*=arg1.length;
-            var loc2:*=0;
-            while (loc2 < loc1) 
-            {
-                loc3 = arg1[loc2]["value"].length;
-                if (arg3 == "firstNames" && loc3 > arg2.fistNameMaxChars) 
-                {
-                    arg2.fistNameMaxChars = loc3;
-                }
-                else if (arg3 == "lastNames" && loc3 > arg2.lastNameMaxChars) 
-                {
-                    arg2.lastNameMaxChars = loc3;
-                }
-                ++loc2;
-            }
-            return;
-        }
-
-        internal function createTestNames(arg1:Array):void
-        {
-            var loc2:*=null;
-            var loc3:*=0;
-            var loc4:*=0;
-            var loc5:*=0;
-            var loc1:*=0;
-            while (loc1 < arg1.length) 
-            {
-                loc2 = arg1[loc1];
-                loc2.value = "";
-                loc3 = Math.random() * 6 + 4;
-                loc4 = 0;
-                while (loc4 < loc3) 
-                {
-                    loc5 = Math.random() * templateS.length;
-                    loc2.value = loc2.value + templateS[loc5];
-                    ++loc4;
-                }
-                ++loc1;
-            }
-            return;
-        }
-
-        internal static const templateS:Array=["a", "b", "c", "d", "a", "b", "c", "d", "a1", "b2", "c3", "d4", "a5", "b6", "c7", "d8", "az", "xb", "cc", "fd", "ga", "tb", "jc", "dg"];
-
-        protected var isFirtsRun:Boolean=true;
-
-        protected var autoSelectTab:int=0;
-
-        protected var data:net.wg.gui.lobby.tankman.PersonalCaseModel;
-
-        protected var stats:Object;
-
-        protected var retrainingData:net.wg.gui.lobby.tankman.PersonalCaseRetrainingModel;
-
-        protected var skillsModel:Array;
-
-        protected var documentsData:net.wg.gui.lobby.tankman.PersonalCaseDocsModel;
-
-        protected var rentainingTabUpdated:Boolean=true;
-    }
 }

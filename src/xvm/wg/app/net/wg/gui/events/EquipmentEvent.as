@@ -1,35 +1,35 @@
-package net.wg.gui.events 
+package net.wg.gui.events
 {
-    import flash.events.*;
-    
-    public class EquipmentEvent extends flash.events.Event
-    {
-        public function EquipmentEvent(arg1:String, arg2:int=-1, arg3:int=-1, arg4:String="")
-        {
-            super(arg1, true, true);
-            this.changeIndex = arg2;
-            this.changePos = arg3;
-            this.changeCurrency = arg4;
-            return;
-        }
+   import flash.events.Event;
 
-        public override function clone():flash.events.Event
-        {
-            return new net.wg.gui.events.EquipmentEvent(type, this.changeIndex, this.changePos, this.changeCurrency);
-        }
 
-        public static const NEED_UPDATE:String="needUpdate";
+   public class EquipmentEvent extends Event
+   {
+          
+      public function EquipmentEvent(param1:String, param2:int=undefined, param3:int=undefined, param4:String=undefined) {
+         super(param1,true,true);
+         this.changeIndex = param2;
+         this.changePos = param3;
+         this.changeCurrency = param4;
+      }
 
-        public static const EQUIPMENT_CHANGE:String="equipmentChange";
+      public static const NEED_UPDATE:String = "needUpdate";
 
-        public static const TOTAL_PRICE_CHANGED:String="totalPriceChanged";
+      public static const EQUIPMENT_CHANGE:String = "equipmentChange";
 
-        public static const SHOW_INFO:String="showInfo";
+      public static const TOTAL_PRICE_CHANGED:String = "totalPriceChanged";
 
-        public var changeIndex:int=-1;
+      public static const SHOW_INFO:String = "showInfo";
 
-        public var changePos:int=-1;
+      public var changeIndex:int = -1;
 
-        public var changeCurrency:String="";
-    }
+      public var changePos:int = -1;
+
+      public var changeCurrency:String = "";
+
+      override public function clone() : Event {
+         return new EquipmentEvent(type,this.changeIndex,this.changePos,this.changeCurrency);
+      }
+   }
+
 }

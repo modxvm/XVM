@@ -15,7 +15,7 @@
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
-    <class path="xvm-hangar" />
+    <class path="src" />
   </classpaths>
   <!-- Build options -->
   <build>
@@ -72,16 +72,14 @@
   </library>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
-    <compile path="xvm-hangar\xvm\XvmHangar.as" />
+    <compile path="src\xvm\hangar\HangarXvmMod.as" />
   </compileTargets>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
     <hidden path="swf" />
-    <hidden path="build-swc.sh" />
     <hidden path="wg" />
+    <hidden path="build-swc.sh" />
     <hidden path="build-swc-wg.sh" />
-    <hidden path="xvm-testmod" />
-    <hidden path="xvm-testmod.as3proj" />
   </hiddenPaths>
   <!-- Executed before build -->
   <preBuildCommand />

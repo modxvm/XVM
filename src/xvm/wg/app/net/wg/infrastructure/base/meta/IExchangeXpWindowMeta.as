@@ -1,11 +1,16 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IExchangeXpWindowMeta extends flash.events.IEventDispatcher
-    {
-        function as_vehiclesDataChanged(arg1:Boolean, arg2:Array):void;
+   import flash.events.IEventDispatcher;
 
-        function as_totalExperienceChanged(arg1:Number):void;
-    }
+
+   public interface IExchangeXpWindowMeta extends IEventDispatcher
+   {
+          
+      function as_vehiclesDataChanged(param1:Boolean, param2:Array) : void;
+
+      function as_totalExperienceChanged(param1:Number) : void;
+
+      function as_setWalletStatus(param1:Object) : void;
+   }
+
 }

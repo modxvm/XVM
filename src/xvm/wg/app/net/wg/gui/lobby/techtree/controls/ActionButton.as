@@ -1,264 +1,253 @@
-package net.wg.gui.lobby.techtree.controls 
+package net.wg.gui.lobby.techtree.controls
 {
-    import __AS3__.vec.*;
-    import fl.transitions.easing.*;
-    import flash.display.*;
-    import flash.events.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.lobby.techtree.*;
-    import net.wg.gui.lobby.techtree.constants.*;
-    import net.wg.gui.lobby.techtree.data.state.*;
-    import net.wg.gui.lobby.techtree.interfaces.*;
-    import net.wg.gui.utils.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.core.*;
-    import scaleform.clik.motion.*;
-    import scaleform.gfx.*;
-    
-    public class ActionButton extends net.wg.gui.components.controls.SoundButton
-    {
-        public function ActionButton()
-        {
-            super();
+   import net.wg.gui.components.controls.SoundButton;
+   import net.wg.gui.lobby.techtree.data.state.AnimationProperties;
+   import scaleform.clik.motion.Tween;
+   import net.wg.gui.utils.ImageSubstitution;
+   import flash.display.MovieClip;
+   import net.wg.gui.components.controls.BitmapFill;
+   import scaleform.clik.core.UIComponent;
+   import fl.transitions.easing.Strong;
+   import flash.display.DisplayObject;
+   import scaleform.gfx.Extensions;
+   import scaleform.clik.constants.InvalidationType;
+   import scaleform.gfx.TextFieldEx;
+   import flash.events.MouseEvent;
+   import net.wg.gui.lobby.techtree.interfaces.IRenderer;
+   import net.wg.gui.lobby.techtree.TechTreeEvent;
+   import net.wg.gui.lobby.techtree.constants.ActionName;
+
+
+   public class ActionButton extends SoundButton
+   {
+          
+      public function ActionButton() {
+         super();
+      }
+
+      private var animProps:AnimationProperties = null;
+
+      private var animID:Number = -1;
+
+      private var animTween:Tween = null;
+
+      private var _action:String = "unlock";
+
+      private var _imgSubstitution:ImageSubstitution;
+
+      public var icon:MovieClip;
+
+      public var disableIndicator:BitmapFill;
+
+      public function set imgSubstitution(param1:Object) : void {
+         this._imgSubstitution = new ImageSubstitution(param1.subString,param1.source,param1.baseLineY,param1.width,param1.height,true);
+      }
+
+      public function get action() : String {
+         return this._action;
+      }
+
+      public function set action(param1:String) : void {
+         if(this._action == param1)
+         {
             return;
-        }
+         }
+         this._action = param1;
+         this.makeStatesPrefixes();
+         setState(this.state);
+      }
 
-        public function set imgSubstitution(arg1:Object):void
-        {
-            this._imgSubstitution = new net.wg.gui.utils.ImageSubstitution(arg1.subString, arg1.source, arg1.baseLineY, arg1.width, arg1.height, true);
-            return;
-        }
+      public function setOwner(param1:UIComponent, param2:Boolean=false) : void {
+         if(_owner != param1)
+         {
+            _owner = param1;
+         }
+         if(param2)
+         {
+            validateNow();
+         }
+      }
 
-        public function get action():String
-        {
-            return this._action;
-        }
-
-        public function set action(arg1:String):void
-        {
-            if (this._action == arg1) 
+      public function setAnimation(param1:Number, param2:AnimationProperties) : Boolean {
+         if(this.animID == param1)
+         {
+            return false;
+         }
+         this.animID = param1;
+         if(this.animProps != null)
+         {
+            this.animProps.setTo(this);
+         }
+         this.animProps = param2;
+         if(param2 != null)
+         {
+            this.animProps.setFrom(this);
+            if(alpha == 0)
             {
-                return;
+               enabled = false;
             }
-            this._action = arg1;
-            this.makeStatesPrefixes();
-            setState(this.state);
-            return;
-        }
+         }
+         return true;
+      }
 
-        public function setOwner(arg1:scaleform.clik.core.UIComponent, arg2:Boolean=false):void
-        {
-            if (_owner != arg1) 
+      public function startAnimation() : void {
+         if(this.animProps != null)
+         {
+            this.resetTween();
+            this.animTween = new Tween(this.animProps.duration,this,this.animProps.to,
+               {
+                  "ease":Strong.easeOut,
+                  "onComplete":this.onTweenComplete,
+                  "paused":false
+               }
+            );
+         }
+      }
+
+      public function endAnimation(param1:Boolean) : void {
+         var _loc2_:DisplayObject = null;
+         var _loc3_:* = false;
+         if(this.animProps != null)
+         {
+            _loc2_ = Extensions.getMouseTopMostEntity(true);
+            _loc3_ = false;
+            if(!(_loc2_ == null) && !(owner == null))
             {
-                _owner = arg1;
+               _loc3_ = _loc2_ == owner || (owner.contains(_loc2_));
             }
-            if (arg2) 
+            if(!param1 && (owner.hitTestPoint(stage.mouseX,stage.mouseY,true)) && (_loc3_))
             {
-                validateNow();
+               return;
             }
-            return;
-        }
-
-        public function setAnimation(arg1:Number, arg2:net.wg.gui.lobby.techtree.data.state.AnimationProperties):Boolean
-        {
-            if (this.animID == arg1) 
+            if((this.hitTestPoint(stage.mouseX,stage.mouseY,true)) && (_loc3_))
             {
-                return false;
+               if(this.animTween != null)
+               {
+                  this.animTween.reset();
+               }
+               this.animProps.setTo(this);
             }
-            this.animID = arg1;
-            if (this.animProps != null) 
+            else
             {
-                this.animProps.setTo(this);
+               this.resetTween();
+               this.animTween = new Tween(this.animProps.duration,this,this.animProps.from,
+                  {
+                     "ease":Strong.easeOut,
+                     "onComplete":this.onTweenComplete,
+                     "paused":false
+                  }
+               );
             }
-            this.animProps = arg2;
-            if (arg2 != null) 
+         }
+      }
+
+      private function resetTween() : void {
+         if(this.animTween)
+         {
+            this.animTween.paused = true;
+            this.animTween = null;
+         }
+      }
+
+      override public function hitTestPoint(param1:Number, param2:Number, param3:Boolean=false) : Boolean {
+         return hitArea != null?hitArea.hitTestPoint(param1,param2,param3):super.hitTestPoint(param1,param2,param3);
+      }
+
+      public function onTweenComplete() : void {
+         if(alpha == 0)
+         {
+            mouseEnabled = false;
+         }
+         else
+         {
+            mouseEnabled = enabled;
+         }
+      }
+
+      override public function dispose() : void {
+         owner = null;
+         super.dispose();
+      }
+
+      override protected function preInitialize() : void {
+         super.preInitialize();
+         _state = "up";
+      }
+
+      override protected function initialize() : void {
+         this.makeStatesPrefixes();
+         super.initialize();
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         if(_baseDisposed)
+         {
+            return;
+         }
+         if((isInvalid(InvalidationType.STATE)) && !(this.disableIndicator == null))
+         {
+            this.disableIndicator.visible = state == "disabled";
+         }
+      }
+
+      override protected function updateText() : void {
+         if(!(_label == null) && !(textField == null))
+         {
+            if(!(this._imgSubstitution == null) && (this._imgSubstitution.valid))
             {
-                this.animProps.setFrom(this);
-                if (alpha == 0) 
-                {
-                    enabled = false;
-                }
+               TextFieldEx.setImageSubstitutions(textField,this._imgSubstitution);
+               textField.text = label + this._imgSubstitution.subString;
             }
-            return true;
-        }
-
-        public function startAnimation():void
-        {
-            if (this.animProps != null) 
+            else
             {
-                this.animTween = new scaleform.clik.motion.Tween(this.animProps.duration, this, this.animProps.to, {"ease":fl.transitions.easing.Strong.easeOut, "onComplete":this.onTweenComplete});
+               textField.text = label;
             }
-            return;
-        }
+         }
+      }
 
-        public function endAnimation(arg1:Boolean):void
-        {
-            var loc1:*=null;
-            var loc2:*=false;
-            if (this.animProps != null) 
+      override protected function handleClick(param1:uint=0) : void {
+         super.handleClick(param1);
+         this.doAction();
+      }
+
+      override protected function handleMouseRollOut(param1:MouseEvent) : void {
+         super.handleMouseRollOut(param1);
+         this.endAnimation(false);
+      }
+
+      override protected function handleReleaseOutside(param1:MouseEvent) : void {
+         super.handleReleaseOutside(param1);
+         this.endAnimation(false);
+      }
+
+      private function doAction() : void {
+         var _loc2_:IRenderer = null;
+         var _loc1_:String = null;
+         switch(this._action)
+         {
+            case ActionName.UNLOCK:
+               _loc1_ = TechTreeEvent.CLICK_2_UNLOCK;
+               break;
+            case ActionName.BUY:
+               _loc1_ = TechTreeEvent.CLICK_2_BUY;
+               break;
+         }
+         if(!(_loc1_ == null) && !(owner == null))
+         {
+            _loc2_ = owner as IRenderer;
+            if(_loc2_ != null)
             {
-                loc1 = scaleform.gfx.Extensions.getMouseTopMostEntity(true);
-                loc2 = false;
-                if (!(loc1 == null) && !(owner == null)) 
-                {
-                    loc2 = loc1 == owner || owner.contains(loc1);
-                }
-                if (!arg1 && owner.hitTestPoint(stage.mouseX, stage.mouseY, true) && loc2) 
-                {
-                    return;
-                }
-                if (this.hitTestPoint(stage.mouseX, stage.mouseY, true) && loc2) 
-                {
-                    if (this.animTween != null) 
-                    {
-                        this.animTween.reset();
-                    }
-                    this.animProps.setTo(this);
-                }
-                else 
-                {
-                    this.animTween = new scaleform.clik.motion.Tween(this.animProps.duration, this, this.animProps.from, {"ease":fl.transitions.easing.Strong.easeOut, "onComplete":this.onTweenComplete});
-                }
+               dispatchEvent(new TechTreeEvent(_loc1_,0,_loc2_.index,_loc2_.getEntityType()));
             }
-            return;
-        }
+         }
+      }
 
-        public override function hitTestPoint(arg1:Number, arg2:Number, arg3:Boolean=false):Boolean
-        {
-            return hitArea == null ? super.hitTestPoint(arg1, arg2, arg3) : hitArea.hitTestPoint(arg1, arg2, arg3);
-        }
+      private function makeStatesPrefixes() : void {
+         var _loc1_:* = this._action + "_";
+         statesSelected = Vector.<String>(["selected_",_loc1_]);
+         statesDefault = Vector.<String>([_loc1_]);
+      }
+   }
 
-        public function onTweenComplete():void
-        {
-            if (alpha != 0) 
-            {
-                mouseEnabled = enabled;
-            }
-            else 
-            {
-                mouseEnabled = false;
-            }
-            return;
-        }
-
-        public override function dispose():void
-        {
-            owner = null;
-            super.dispose();
-            return;
-        }
-
-        protected override function preInitialize():void
-        {
-            super.preInitialize();
-            _state = "up";
-            return;
-        }
-
-        protected override function initialize():void
-        {
-            this.makeStatesPrefixes();
-            super.initialize();
-            return;
-        }
-
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.STATE) && !(this.disableIndicator == null)) 
-            {
-                this.disableIndicator.visible = state == "disabled";
-            }
-            return;
-        }
-
-        protected override function updateText():void
-        {
-            if (!(_label == null) && !(textField == null)) 
-            {
-                if (!(this._imgSubstitution == null) && this._imgSubstitution.valid) 
-                {
-                    scaleform.gfx.TextFieldEx.setImageSubstitutions(textField, this._imgSubstitution);
-                    textField.text = label + this._imgSubstitution.subString;
-                }
-                else 
-                {
-                    textField.text = label;
-                }
-            }
-            return;
-        }
-
-        protected override function handleClick(arg1:uint=0):void
-        {
-            super.handleClick(arg1);
-            this.doAction();
-            return;
-        }
-
-        protected override function handleMouseRollOut(arg1:flash.events.MouseEvent):void
-        {
-            super.handleMouseRollOut(arg1);
-            this.endAnimation(false);
-            return;
-        }
-
-        protected override function handleReleaseOutside(arg1:flash.events.MouseEvent):void
-        {
-            super.handleReleaseOutside(arg1);
-            this.endAnimation(false);
-            return;
-        }
-
-        internal function doAction():void
-        {
-            var loc2:*=null;
-            var loc1:*=null;
-            var loc3:*=this._action;
-            switch (loc3) 
-            {
-                case net.wg.gui.lobby.techtree.constants.ActionName.UNLOCK:
-                {
-                    loc1 = net.wg.gui.lobby.techtree.TechTreeEvent.CLICK_2_UNLOCK;
-                    break;
-                }
-                case net.wg.gui.lobby.techtree.constants.ActionName.BUY:
-                {
-                    loc1 = net.wg.gui.lobby.techtree.TechTreeEvent.CLICK_2_BUY;
-                    break;
-                }
-            }
-            if (!(loc1 == null) && !(owner == null)) 
-            {
-                loc2 = owner as net.wg.gui.lobby.techtree.interfaces.IRenderer;
-                if (loc2 != null) 
-                {
-                    dispatchEvent(new net.wg.gui.lobby.techtree.TechTreeEvent(loc1, 0, loc2.index, loc2.getEntityType()));
-                }
-            }
-            return;
-        }
-
-        internal function makeStatesPrefixes():void
-        {
-            var loc1:*=this._action + "_";
-            statesSelected = Vector.<String>(["selected_", loc1]);
-            statesDefault = Vector.<String>([loc1]);
-            return;
-        }
-
-        internal var animProps:net.wg.gui.lobby.techtree.data.state.AnimationProperties=null;
-
-        internal var animID:Number=-1;
-
-        internal var animTween:scaleform.clik.motion.Tween=null;
-
-        internal var _action:String="unlock";
-
-        internal var _imgSubstitution:net.wg.gui.utils.ImageSubstitution;
-
-        public var icon:flash.display.MovieClip;
-
-        public var disableIndicator:net.wg.gui.components.controls.BitmapFill;
-    }
 }

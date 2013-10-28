@@ -14,26 +14,25 @@ echo %1.swf
 copy /Y flash\%n%.swf %n%.orig.swf > nul
 abcexport.exe %n%.orig.swf
 rabcdasm %n%.orig-0.abc
-set ok=failed
 rem exit
-patch --binary -p0 < %n%.patch && set ok=ok
-echo patch result: %ok% (%n%.swf)
-if "%ok%" == "ok" (
-  rabcasm %n%.orig-0/%n%.orig-0.main.asasm
-  abcreplace %n%.orig.swf 0 %n%.orig-0/%n%.orig-0.main.abc
-  del %n%.orig-0.abc
-  move /Y %n%.orig.swf %n%.swf
-  del %n%.orig-0\%n%.orig-0.main.abc 
-  rmdir /S /Q %n%.orig-0
-) else (
+for %%i in (Application.*.patch) do (
+  echo Apply patch: %%i
+  patch --binary -p0 < %%i || (
+    echo Operation failed.
+    del %n%.orig-0.abc
+    del %n%.orig.swf
+    rem rmdir /S /Q %n%.orig-0
+    exit
+  )
   echo.
-  echo Operation failed.
-  echo Temporary files will be removed. If you want keep them - please manually close this window.
-  pause
-  del %n%.orig-0.abc
-  del %n%.orig.swf
-  rmdir /S /Q %n%.orig-0
 )
 
-goto :EOF
+echo patch ok: %n%.swf
+rabcasm %n%.orig-0/%n%.orig-0.main.asasm
+abcreplace %n%.orig.swf 0 %n%.orig-0/%n%.orig-0.main.abc
+del %n%.orig-0.abc
+move /Y %n%.orig.swf %n%.swf
+del %n%.orig-0\%n%.orig-0.main.abc
+rmdir /S /Q %n%.orig-0
 
+goto :EOF

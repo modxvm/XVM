@@ -1,15 +1,16 @@
-package net.wg.gui.lobby.store 
+package net.wg.gui.lobby.store
 {
-    import scaleform.clik.core.*;
-    
-    public class TableHeader extends scaleform.clik.core.UIComponent
-    {
-        public function TableHeader()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
 
-        public var headerInfo:net.wg.gui.lobby.store.TableHeaderInfo=null;
-    }
+
+   public class TableHeader extends UIComponent
+   {
+          
+      public function TableHeader() {
+         super();
+      }
+
+      public var headerInfo:TableHeaderInfo = null;
+   }
+
 }

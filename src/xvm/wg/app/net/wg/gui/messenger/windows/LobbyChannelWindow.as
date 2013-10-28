@@ -1,105 +1,95 @@
-package net.wg.gui.messenger.windows 
+package net.wg.gui.messenger.windows
 {
-    import flash.display.*;
-    import flash.events.*;
-    import net.wg.data.components.*;
-    import net.wg.data.daapi.base.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.events.*;
-    import net.wg.gui.messenger.data.*;
-    import net.wg.gui.messenger.meta.*;
-    import net.wg.gui.messenger.meta.impl.*;
-    import scaleform.clik.utils.*;
-    import scaleform.gfx.*;
-    
-    public class LobbyChannelWindow extends net.wg.gui.messenger.meta.impl.LobbyChannelWindowMeta implements net.wg.gui.messenger.meta.ILobbyChannelWindowMeta
-    {
-        public function LobbyChannelWindow()
-        {
-            super();
-            this._membersDP = new net.wg.data.daapi.base.DAAPIDataProvider();
-            return;
-        }
+   import net.wg.gui.messenger.meta.impl.LobbyChannelWindowMeta;
+   import net.wg.gui.messenger.meta.ILobbyChannelWindowMeta;
+   import net.wg.gui.components.controls.ScrollingListEx;
+   import flash.display.Sprite;
+   import net.wg.data.daapi.base.DAAPIDataProvider;
+   import scaleform.clik.utils.Constraints;
+   import flash.events.Event;
+   import net.wg.gui.events.ListEventEx;
+   import flash.display.DisplayObject;
+   import net.wg.gui.messenger.data.ChannelMemberVO;
+   import scaleform.gfx.MouseEventEx;
+   import net.wg.data.components.ContextItemGenerator;
 
-        public function as_getMembersDP():Object
-        {
-            return this._membersDP;
-        }
 
-        public function as_hideMembersList():void
-        {
-            this._needToHideList = true;
-            invalidate(INVALID_LIST_VISIBILITY);
-            return;
-        }
+   public class LobbyChannelWindow extends LobbyChannelWindowMeta implements ILobbyChannelWindowMeta
+   {
+          
+      public function LobbyChannelWindow() {
+         super();
+         this._membersDP = new DAAPIDataProvider();
+      }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            constraints.addElement("background", this.background, scaleform.clik.utils.Constraints.ALL);
-            constraints.addElement("membersList", this.membersList, scaleform.clik.utils.Constraints.RIGHT | scaleform.clik.utils.Constraints.TOP | scaleform.clik.utils.Constraints.BOTTOM);
-            this._membersDP.addEventListener(flash.events.Event.CHANGE, this.onMembersDPChange);
-            this.membersList.addEventListener(net.wg.gui.events.ListEventEx.ITEM_CLICK, this.onMemberItemClick);
-            this.membersList.dataProvider = this._membersDP;
-            return;
-        }
+      private static const INVALID_LIST_VISIBILITY:String = "invalidListVisibility";
 
-        protected override function draw():void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            if (isInvalid(INVALID_LIST_VISIBILITY) && this._needToHideList) 
-            {
-                this._needToHideList = false;
-                this.membersList.visible = false;
-                loc1 = channelComponent.messageArea;
-                loc2 = channelComponent.sendButton;
-                loc1.width = loc2.x + loc2.width - loc1.x * 2;
-                this.background.width = loc2.x + loc2.width;
-                constraints.removeElement("background");
-                constraints.removeElement("messageArea");
-                constraints.addElement("background", this.background, scaleform.clik.utils.Constraints.ALL);
-                constraints.addElement("messageArea", channelComponent.messageArea, scaleform.clik.utils.Constraints.ALL);
-            }
-            super.draw();
-            return;
-        }
+      public var membersList:ScrollingListEx;
 
-        protected override function onDispose():void
-        {
-            super.onDispose();
-            this._membersDP.removeEventListener(flash.events.Event.CHANGE, this.onMembersDPChange);
-            this.membersList.removeEventListener(net.wg.gui.events.ListEventEx.ITEM_CLICK, this.onMemberItemClick);
-            this.membersList.disposeRenderers();
-            this._membersDP.cleanUp();
-            this._membersDP = null;
-            return;
-        }
+      public var background:Sprite;
 
-        internal function onMembersDPChange(arg1:flash.events.Event):void
-        {
-            return;
-        }
+      protected var _membersDP:DAAPIDataProvider;
 
-        internal function onMemberItemClick(arg1:net.wg.gui.events.ListEventEx):void
-        {
-            var loc1:*=null;
-            if (arg1.buttonIdx == scaleform.gfx.MouseEventEx.RIGHT_BUTTON) 
-            {
-                loc1 = new net.wg.gui.messenger.data.ChannelMemberVO(arg1.itemData);
-                App.contextMenuMgr.showUserContextMenu(this, loc1, new net.wg.data.components.ContextItemGenerator());
-            }
-            return;
-        }
+      private var _needToHideList:Boolean = false;
 
-        internal static const INVALID_LIST_VISIBILITY:String="invalidListVisibility";
+      public function as_getMembersDP() : Object {
+         return this._membersDP;
+      }
 
-        public var membersList:net.wg.gui.components.controls.ScrollingListEx;
+      public function as_hideMembersList() : void {
+         this._needToHideList = true;
+         invalidate(INVALID_LIST_VISIBILITY);
+      }
 
-        public var background:flash.display.Sprite;
+      override protected function configUI() : void {
+         super.configUI();
+         constraints.addElement("background",this.background,Constraints.ALL);
+         constraints.addElement("membersList",this.membersList,Constraints.RIGHT | Constraints.TOP | Constraints.BOTTOM);
+         this._membersDP.addEventListener(Event.CHANGE,this.onMembersDPChange);
+         this.membersList.addEventListener(ListEventEx.ITEM_CLICK,this.onMemberItemClick);
+         this.membersList.dataProvider = this._membersDP;
+      }
 
-        protected var _membersDP:net.wg.data.daapi.base.DAAPIDataProvider;
+      override protected function draw() : void {
+         var _loc1_:DisplayObject = null;
+         var _loc2_:DisplayObject = null;
+         if((isInvalid(INVALID_LIST_VISIBILITY)) && (this._needToHideList))
+         {
+            this._needToHideList = false;
+            this.membersList.visible = false;
+            _loc1_ = channelComponent.messageArea;
+            _loc2_ = channelComponent.sendButton;
+            _loc1_.width = _loc2_.x + _loc2_.width - _loc1_.x * 2;
+            this.background.width = _loc2_.x + _loc2_.width;
+            constraints.removeElement("background");
+            constraints.removeElement("messageArea");
+            constraints.addElement("background",this.background,Constraints.ALL);
+            constraints.addElement("messageArea",channelComponent.messageArea,Constraints.ALL);
+         }
+         super.draw();
+      }
 
-        internal var _needToHideList:Boolean=false;
-    }
+      override protected function onDispose() : void {
+         super.onDispose();
+         this._membersDP.removeEventListener(Event.CHANGE,this.onMembersDPChange);
+         this.membersList.removeEventListener(ListEventEx.ITEM_CLICK,this.onMemberItemClick);
+         this.membersList.disposeRenderers();
+         this._membersDP.cleanUp();
+         this._membersDP = null;
+      }
+
+      private function onMembersDPChange(param1:Event) : void {
+          
+      }
+
+      private function onMemberItemClick(param1:ListEventEx) : void {
+         var _loc2_:ChannelMemberVO = null;
+         if(param1.buttonIdx == MouseEventEx.RIGHT_BUTTON)
+         {
+            _loc2_ = new ChannelMemberVO(param1.itemData);
+            App.contextMenuMgr.showUserContextMenu(this,_loc2_,new ContextItemGenerator());
+         }
+      }
+   }
+
 }

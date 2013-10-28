@@ -1,75 +1,64 @@
-package net.wg.infrastructure.base.meta.impl 
+package net.wg.infrastructure.base.meta.impl
 {
-    import net.wg.data.VO.*;
-    import net.wg.data.VO.generated.*;
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.base.*;
-    import net.wg.infrastructure.exceptions.*;
-    
-    public class StoreMeta extends net.wg.infrastructure.base.AbstractView
-    {
-        public function StoreMeta()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.AbstractView;
+   import net.wg.data.constants.Errors;
+   import net.wg.data.VO.StoreTableData;
+   import net.wg.data.VO.generated.ShopNationFilterData;
+   import net.wg.infrastructure.exceptions.AbstractException;
 
-        public function requestTableDataS(arg1:Number, arg2:String, arg3:Array):void
-        {
-            App.utils.asserter.assertNotNull(this.requestTableData, "requestTableData" + net.wg.data.constants.Errors.CANT_NULL);
-            this.requestTableData(arg1, arg2, arg3);
-            return;
-        }
 
-        public function requestFilterDataS(arg1:String):void
-        {
-            App.utils.asserter.assertNotNull(this.requestFilterData, "requestFilterData" + net.wg.data.constants.Errors.CANT_NULL);
-            this.requestFilterData(arg1);
-            return;
-        }
+   public class StoreMeta extends AbstractView
+   {
+          
+      public function StoreMeta() {
+         super();
+      }
 
-        public function onCloseButtonClickS():void
-        {
-            App.utils.asserter.assertNotNull(this.onCloseButtonClick, "onCloseButtonClick" + net.wg.data.constants.Errors.CANT_NULL);
-            this.onCloseButtonClick();
-            return;
-        }
+      public var requestTableData:Function = null;
 
-        public function onShowInfoS(arg1:net.wg.data.VO.StoreTableData):void
-        {
-            App.utils.asserter.assertNotNull(this.onShowInfo, "onShowInfo" + net.wg.data.constants.Errors.CANT_NULL);
-            this.onShowInfo(arg1);
-            return;
-        }
+      public var requestFilterData:Function = null;
 
-        public function getNameS():String
-        {
-            App.utils.asserter.assertNotNull(this.getName, "getName" + net.wg.data.constants.Errors.CANT_NULL);
-            return this.getName();
-        }
+      public var onCloseButtonClick:Function = null;
 
-        public function as_setFilterType(arg1:Object):void
-        {
-            var loc1:*=new net.wg.data.VO.generated.ShopNationFilterData(arg1);
-            this.setFilterType(loc1);
-            return;
-        }
+      public var onShowInfo:Function = null;
 
-        protected function setFilterType(arg1:net.wg.data.VO.generated.ShopNationFilterData):void
-        {
-            var loc1:*="as_setFilterType" + net.wg.data.constants.Errors.ABSTRACT_INVOKE;
-            DebugUtils.LOG_ERROR(loc1);
-            throw new net.wg.infrastructure.exceptions.AbstractException(loc1);
-        }
+      public var getName:Function = null;
 
-        public var requestTableData:Function=null;
+      public function requestTableDataS(param1:Number, param2:String, param3:Array) : void {
+         App.utils.asserter.assertNotNull(this.requestTableData,"requestTableData" + Errors.CANT_NULL);
+         this.requestTableData(param1,param2,param3);
+      }
 
-        public var requestFilterData:Function=null;
+      public function requestFilterDataS(param1:String) : void {
+         App.utils.asserter.assertNotNull(this.requestFilterData,"requestFilterData" + Errors.CANT_NULL);
+         this.requestFilterData(param1);
+      }
 
-        public var onCloseButtonClick:Function=null;
+      public function onCloseButtonClickS() : void {
+         App.utils.asserter.assertNotNull(this.onCloseButtonClick,"onCloseButtonClick" + Errors.CANT_NULL);
+         this.onCloseButtonClick();
+      }
 
-        public var onShowInfo:Function=null;
+      public function onShowInfoS(param1:StoreTableData) : void {
+         App.utils.asserter.assertNotNull(this.onShowInfo,"onShowInfo" + Errors.CANT_NULL);
+         this.onShowInfo(param1);
+      }
 
-        public var getName:Function=null;
-    }
+      public function getNameS() : String {
+         App.utils.asserter.assertNotNull(this.getName,"getName" + Errors.CANT_NULL);
+         return this.getName();
+      }
+
+      public function as_setFilterType(param1:Object) : void {
+         var _loc2_:ShopNationFilterData = new ShopNationFilterData(param1);
+         this.setFilterType(_loc2_);
+      }
+
+      protected function setFilterType(param1:ShopNationFilterData) : void {
+         var _loc2_:String = "as_setFilterType" + Errors.ABSTRACT_INVOKE;
+         DebugUtils.LOG_ERROR(_loc2_);
+         throw new AbstractException(_loc2_);
+      }
+   }
+
 }

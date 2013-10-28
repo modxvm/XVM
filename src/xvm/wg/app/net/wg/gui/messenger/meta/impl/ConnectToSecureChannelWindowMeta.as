@@ -1,32 +1,29 @@
-package net.wg.gui.messenger.meta.impl 
+package net.wg.gui.messenger.meta.impl
 {
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.base.*;
-    
-    public class ConnectToSecureChannelWindowMeta extends net.wg.infrastructure.base.AbstractWindowView
-    {
-        public function ConnectToSecureChannelWindowMeta()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.AbstractWindowView;
+   import net.wg.data.constants.Errors;
 
-        public function sendPasswordS(arg1:String):void
-        {
-            App.utils.asserter.assertNotNull(this.sendPassword, "sendPassword" + net.wg.data.constants.Errors.CANT_NULL);
-            this.sendPassword(arg1);
-            return;
-        }
 
-        public function cancelPasswordS():void
-        {
-            App.utils.asserter.assertNotNull(this.cancelPassword, "cancelPassword" + net.wg.data.constants.Errors.CANT_NULL);
-            this.cancelPassword();
-            return;
-        }
+   public class ConnectToSecureChannelWindowMeta extends AbstractWindowView
+   {
+          
+      public function ConnectToSecureChannelWindowMeta() {
+         super();
+      }
 
-        public var sendPassword:Function=null;
+      public var sendPassword:Function = null;
 
-        public var cancelPassword:Function=null;
-    }
+      public var cancelPassword:Function = null;
+
+      public function sendPasswordS(param1:String) : void {
+         App.utils.asserter.assertNotNull(this.sendPassword,"sendPassword" + Errors.CANT_NULL);
+         this.sendPassword(param1);
+      }
+
+      public function cancelPasswordS() : void {
+         App.utils.asserter.assertNotNull(this.cancelPassword,"cancelPassword" + Errors.CANT_NULL);
+         this.cancelPassword();
+      }
+   }
+
 }

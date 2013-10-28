@@ -1,67 +1,59 @@
-package net.wg.gui.components.common.markers 
+package net.wg.gui.components.common.markers
 {
-    import flash.text.*;
-    import scaleform.clik.core.*;
-    
-    public class DamageLabel extends scaleform.clik.core.UIComponent
-    {
-        public function DamageLabel()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.text.TextField;
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(INVALIDATE_COLOR)) 
-            {
-                gotoAndStop(this._color);
-            }
-            if (isInvalid(INVALIDATE_TEXT)) 
-            {
-                this.label.text = this._text;
-            }
-            return;
-        }
 
-        public function get color():String
-        {
-            return this._color;
-        }
+   public class DamageLabel extends UIComponent
+   {
+          
+      public function DamageLabel() {
+         super();
+      }
 
-        public function set color(arg1:String):void
-        {
-            this._color = arg1;
-            invalidate(INVALIDATE_COLOR);
-            return;
-        }
+      private static const INVALIDATE_TEXT:String = "invalidateText";
 
-        public function get text():String
-        {
-            return this._text;
-        }
+      private static const INVALIDATE_COLOR:String = "invalidateColor";
 
-        public function set text(arg1:String):void
-        {
-            this._text = arg1;
-            invalidate(INVALIDATE_TEXT);
-            return;
-        }
+      public var label:TextField;
 
-        public function get textWidth():Number
-        {
-            return this.label.textWidth;
-        }
+      private var _color:String;
 
-        internal static const INVALIDATE_TEXT:String="invalidateText";
+      private var _text:String;
 
-        internal static const INVALIDATE_COLOR:String="invalidateColor";
+      override protected function draw() : void {
+         super.draw();
+         if(isInvalid(INVALIDATE_COLOR))
+         {
+            gotoAndStop(this._color);
+         }
+         if(isInvalid(INVALIDATE_TEXT))
+         {
+            this.label.text = this._text;
+         }
+      }
 
-        public var label:flash.text.TextField;
+      public function get color() : String {
+         return this._color;
+      }
 
-        internal var _color:String;
+      public function set color(param1:String) : void {
+         this._color = param1;
+         invalidate(INVALIDATE_COLOR);
+      }
 
-        internal var _text:String;
-    }
+      public function get text() : String {
+         return this._text;
+      }
+
+      public function set text(param1:String) : void {
+         this._text = param1;
+         invalidate(INVALIDATE_TEXT);
+      }
+
+      public function get textWidth() : Number {
+         return this.label.textWidth;
+      }
+   }
+
 }

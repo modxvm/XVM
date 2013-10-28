@@ -1,101 +1,95 @@
-package net.wg.gui.lobby.hangar.maintenance 
+package net.wg.gui.lobby.hangar.maintenance
 {
-    import flash.events.*;
-    import flash.text.*;
-    import net.wg.data.constants.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.events.*;
-    import net.wg.gui.lobby.hangar.maintenance.data.*;
-    import net.wg.utils.*;
-    import scaleform.clik.constants.*;
-    import scaleform.gfx.*;
-    
-    public class ShellListItemRenderer extends net.wg.gui.components.controls.SoundListItemRenderer
-    {
-        public function ShellListItemRenderer()
-        {
-            super();
-            soundType = net.wg.data.constants.SoundTypes.SHELL_ITEM_RENDERER;
-            return;
-        }
+   import net.wg.gui.components.controls.SoundListItemRenderer;
+   import net.wg.gui.components.controls.UILoaderAlt;
+   import flash.text.TextField;
+   import net.wg.gui.components.controls.IconText;
+   import scaleform.clik.constants.InvalidationType;
+   import net.wg.utils.IEventCollector;
+   import flash.events.MouseEvent;
+   import net.wg.data.constants.SoundTypes;
+   import net.wg.utils.ILocale;
+   import net.wg.data.constants.Currencies;
+   import net.wg.data.constants.Tooltips;
+   import scaleform.gfx.MouseEventEx;
+   import net.wg.gui.events.ModuleInfoEvent;
+   import net.wg.gui.lobby.hangar.maintenance.data.ShellVO;
 
-        public override function setData(arg1:Object):void
-        {
-            super.setData(arg1);
-            invalidate(scaleform.clik.constants.InvalidationType.DATA);
-            return;
-        }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.desc.text = MENU.SHELLLISTITEMRENDERER_REPLACE;
-            var loc1:*=App.utils.events;
-            loc1.addEvent(this, flash.events.MouseEvent.ROLL_OVER, this.onRollOver);
-            loc1.addEvent(this, flash.events.MouseEvent.ROLL_OUT, this.onRollOut);
-            loc1.addEvent(this, flash.events.MouseEvent.CLICK, this.onClick);
-            return;
-        }
+   public class ShellListItemRenderer extends SoundListItemRenderer
+   {
+          
+      public function ShellListItemRenderer() {
+         super();
+      }
 
-        protected override function draw():void
-        {
-            var loc1:*=null;
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+      public var icon:UILoaderAlt;
+
+      public var title:TextField;
+
+      public var desc:TextField;
+
+      public var price:IconText;
+
+      override public function setData(param1:Object) : void {
+         super.setData(param1);
+         invalidate(InvalidationType.DATA);
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.desc.text = MENU.SHELLLISTITEMRENDERER_REPLACE;
+         var _loc1_:IEventCollector = App.utils.events;
+         _loc1_.addEvent(this,MouseEvent.ROLL_OVER,this.onRollOver);
+         _loc1_.addEvent(this,MouseEvent.ROLL_OUT,this.onRollOut);
+         _loc1_.addEvent(this,MouseEvent.CLICK,this.onClick);
+         soundType = SoundTypes.NORMAL_BTN;
+      }
+
+      override protected function draw() : void {
+         var _loc1_:ILocale = null;
+         super.draw();
+         if(isInvalid(InvalidationType.DATA))
+         {
+            if(data)
             {
-                if (data) 
-                {
-                    visible = true;
-                    this.icon.visible = true;
-                    this.icon.source = data.icon;
-                    this.title.text = data.ammoName;
-                    this.price.icon = data.currency;
-                    this.price.textColor = net.wg.data.constants.Currencies.TEXT_COLORS[data.currency];
-                    loc1 = App.utils.locale;
-                    this.price.text = data.currency != net.wg.data.constants.Currencies.CREDITS ? loc1.gold(data.prices[1]) : loc1.integer(data.prices[0]);
-                    this.price.validateNow();
-                }
-                else 
-                {
-                    visible = false;
-                }
+               visible = true;
+               this.icon.visible = true;
+               this.icon.source = data.icon;
+               this.title.text = data.ammoName;
+               this.price.icon = data.currency;
+               this.price.textColor = Currencies.TEXT_COLORS[data.currency];
+               _loc1_ = App.utils.locale;
+               this.price.text = data.currency == Currencies.CREDITS?_loc1_.integer(data.prices[0]):_loc1_.gold(data.prices[1]);
+               this.price.validateNow();
             }
-            return;
-        }
-
-        internal function onRollOver(arg1:flash.events.MouseEvent):void
-        {
-            App.toolTipMgr.showSpecial(net.wg.data.constants.Tooltips.TECH_MAIN_SHELL, null, data.id, data.prices, data.inventoryCount, data.count);
-            return;
-        }
-
-        internal function onRollOut(arg1:flash.events.MouseEvent):void
-        {
-            App.toolTipMgr.hide();
-            return;
-        }
-
-        internal function onClick(arg1:flash.events.MouseEvent):void
-        {
-            var loc1:*=null;
-            App.toolTipMgr.hide();
-            if (arg1 is scaleform.gfx.MouseEventEx) 
+            else
             {
-                loc1 = arg1 as scaleform.gfx.MouseEventEx;
-                if (loc1.buttonIdx == scaleform.gfx.MouseEventEx.RIGHT_BUTTON) 
-                {
-                    dispatchEvent(new net.wg.gui.events.ModuleInfoEvent(net.wg.gui.events.ModuleInfoEvent.SHOW_INFO, net.wg.gui.lobby.hangar.maintenance.data.ShellVO(data).id));
-                }
+               visible = false;
             }
-            return;
-        }
+         }
+      }
 
-        public var icon:net.wg.gui.components.controls.UILoaderAlt;
+      private function onRollOver(param1:MouseEvent) : void {
+         App.toolTipMgr.showSpecial(Tooltips.TECH_MAIN_SHELL,null,data.id,data.prices,data.inventoryCount,data.count);
+      }
 
-        public var title:flash.text.TextField;
+      private function onRollOut(param1:MouseEvent) : void {
+         App.toolTipMgr.hide();
+      }
 
-        public var desc:flash.text.TextField;
+      private function onClick(param1:MouseEvent) : void {
+         var _loc2_:MouseEventEx = null;
+         App.toolTipMgr.hide();
+         if(param1  is  MouseEventEx)
+         {
+            _loc2_ = param1 as MouseEventEx;
+            if(_loc2_.buttonIdx == MouseEventEx.RIGHT_BUTTON)
+            {
+               dispatchEvent(new ModuleInfoEvent(ModuleInfoEvent.SHOW_INFO,ShellVO(data).id));
+            }
+         }
+      }
+   }
 
-        public var price:net.wg.gui.components.controls.IconText;
-    }
 }

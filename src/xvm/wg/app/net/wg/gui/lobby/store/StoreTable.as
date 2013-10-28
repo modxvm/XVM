@@ -1,237 +1,201 @@
-package net.wg.gui.lobby.store 
+package net.wg.gui.lobby.store
 {
-    import flash.text.*;
-    import net.wg.data.VO.*;
-    import net.wg.data.constants.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import net.wg.infrastructure.exceptions.*;
-    import net.wg.infrastructure.interfaces.*;
-    import scaleform.clik.data.*;
-    import scaleform.clik.interfaces.*;
-    
-    public class StoreTable extends net.wg.infrastructure.base.meta.impl.StoreTableMeta implements net.wg.infrastructure.interfaces.IStoreTable
-    {
-        public function StoreTable()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.StoreTableMeta;
+   import net.wg.infrastructure.interfaces.IStoreTable;
+   import net.wg.data.constants.Errors;
+   import net.wg.infrastructure.exceptions.NullPointerException;
+   import net.wg.gui.components.controls.ScrollingListEx;
+   import flash.text.TextField;
+   import net.wg.data.VO.StoreTableVO;
+   import net.wg.data.constants.FittingTypes;
+   import net.wg.infrastructure.exceptions.ArgumentException;
+   import net.wg.data.VO.StoreTableData;
+   import scaleform.clik.data.DataProvider;
+   import scaleform.clik.interfaces.IListItemRenderer;
 
-        public function as_setTable(arg1:Array):void
-        {
-            net.wg.gui.lobby.store.StoreTable.assertNotNull(arg1, "tableData");
-            this._data = arg1;
+
+   public class StoreTable extends StoreTableMeta implements IStoreTable
+   {
+          
+      public function StoreTable() {
+         super();
+      }
+
+      private static const DEFAULT_COUNT_POSITION:Number = 0;
+
+      private static const RIGHT_ORIENTED_COUNT_POSITION:Number = 111;
+
+      private static const INVALID_TABLE:String = "invalidTable";
+
+      private static function assertNotNull(param1:Object, param2:String) : void {
+         if(App.instance)
+         {
+            App.utils.asserter.assert(!(param1 == null),param2 + Errors.CANT_NULL,NullPointerException);
+         }
+      }
+
+      public var header:TableHeader = null;
+
+      public var list:ScrollingListEx = null;
+
+      public var headerTitle:TextField = null;
+
+      private var _tableVO:StoreTableVO = null;
+
+      private var _data:Array = null;
+
+      private var _rightOrientedCount:Boolean = false;
+
+      private var vehicleRendererLinkage:String = null;
+
+      private var moduleRendererLinkage:String = null;
+
+      public function as_setTable(param1:Array) : void {
+         StoreTable.assertNotNull(param1,"tableData");
+         this._data = param1;
+         invalidate(INVALID_TABLE);
+      }
+
+      public function as_scrollToFirst(param1:Number, param2:String, param3:String) : void {
+          
+      }
+
+      public function as_setGold(param1:Number) : void {
+         StoreTable.assertNotNull(this._tableVO,"_tableVO");
+         this._tableVO.gold = param1;
+      }
+
+      public function as_setCredits(param1:Number) : void {
+         StoreTable.assertNotNull(this._tableVO,"_tableVO");
+         this._tableVO.credits = param1;
+      }
+
+      public function updateHeaderCountTitle(param1:String) : void {
+         this.header.headerInfo.countField.text = param1;
+      }
+
+      public function setVehicleRendererLinkage(param1:String) : void {
+         StoreTable.assertNotNull(param1,"linkage");
+         this.vehicleRendererLinkage = param1;
+      }
+
+      public function setModuleRendererLinkage(param1:String) : void {
+         StoreTable.assertNotNull(param1,"linkage");
+         this.moduleRendererLinkage = param1;
+      }
+
+      public function get rightOrientedCount() : Boolean {
+         return this._rightOrientedCount;
+      }
+
+      public function set rightOrientedCount(param1:Boolean) : void {
+         if(param1 != this._rightOrientedCount)
+         {
+            this._rightOrientedCount = param1;
+            if(this._rightOrientedCount)
+            {
+               this.header.headerInfo.countField.x = DEFAULT_COUNT_POSITION;
+            }
+            else
+            {
+               this.header.headerInfo.countField.x = DEFAULT_COUNT_POSITION;
+            }
+         }
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         if((isInvalid(INVALID_TABLE)) && (this._tableVO))
+         {
+            this.updateTable();
+         }
+      }
+
+      override protected function onPopulate() : void {
+         super.onPopulate();
+         this._tableVO = new StoreTableVO();
+         if(this._data)
+         {
             invalidate(INVALID_TABLE);
-            return;
-        }
+         }
+      }
 
-        public function as_scrollToFirst(arg1:Number, arg2:String, arg3:String):void
-        {
-            return;
-        }
+      override protected function onDispose() : void {
+         super.onDispose();
+         this._tableVO = null;
+         if(this._data)
+         {
+            this._data.splice(0,this._data.length);
+            this._data = null;
+         }
+         this.vehicleRendererLinkage = null;
+         this.moduleRendererLinkage = null;
+      }
 
-        public function as_setGold(arg1:Number):void
-        {
-            net.wg.gui.lobby.store.StoreTable.assertNotNull(this._tableVO, "_tableVO");
-            this._tableVO.gold = arg1;
-            return;
-        }
+      private function updateTable() : void {
+         StoreTable.assertNotNull(this._data,"_data");
+         StoreTable.assertNotNull(this.moduleRendererLinkage,"moduleRendererLinkage");
+         StoreTable.assertNotNull(this.vehicleRendererLinkage,"vehicleRendererLinkage");
+         var _loc1_:String = this._data.shift();
+         this.list.scrollToIndex(0);
+         this.setupDataProvider(_loc1_);
+         this.setupRendererType(_loc1_);
+      }
 
-        public function as_setCredits(arg1:Number):void
-        {
-            net.wg.gui.lobby.store.StoreTable.assertNotNull(this._tableVO, "_tableVO");
-            this._tableVO.credits = arg1;
-            return;
-        }
-
-        public function updateHeaderCountTitle(arg1:String):void
-        {
-            this.header.headerInfo.countField.text = arg1;
-            return;
-        }
-
-        public function setVehicleRendererLinkage(arg1:String):void
-        {
-            net.wg.gui.lobby.store.StoreTable.assertNotNull(arg1, "linkage");
-            this.vehicleRendererLinkage = arg1;
-            return;
-        }
-
-        public function setModuleRendererLinkage(arg1:String):void
-        {
-            net.wg.gui.lobby.store.StoreTable.assertNotNull(arg1, "linkage");
-            this.moduleRendererLinkage = arg1;
-            visible;
-            return;
-        }
-
-        public function get rightOrientedCount():Boolean
-        {
-            return this._rightOrientedCount;
-        }
-
-        public function set rightOrientedCount(arg1:Boolean):void
-        {
-            if (arg1 != this._rightOrientedCount) 
+      private function setupRendererType(param1:String) : void {
+         var rendererName:String = null;
+         var classRef:Class = null;
+         var type:String = param1;
+         rendererName = this.moduleRendererLinkage;
+         if(type == FittingTypes.VEHICLE)
+         {
+            rendererName = this.vehicleRendererLinkage;
+         }
+         this.detectRendererHeight(rendererName);
+         try
+         {
+            classRef = App.utils.classFactory.getClass(rendererName);
+            if(this.list.itemRenderer != classRef)
             {
-                this._rightOrientedCount = arg1;
-                if (this._rightOrientedCount) 
-                {
-                    this.header.headerInfo.countField.x = RIGHT_ORIENTED_COUNT_POSITION;
-                }
-                else 
-                {
-                    this.header.headerInfo.countField.x = DEFAULT_COUNT_POSITION;
-                }
+               this.list.itemRendererName = rendererName;
             }
-            return;
-        }
+         }
+         catch(error:ReferenceError)
+         {
+            throw new ArgumentException(Errors.BAD_LINKAGE + rendererName,error.errorID);
+         }
+      }
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(INVALID_TABLE) && this._tableVO) 
-            {
-                this.updateTable();
-            }
-            return;
-        }
+      private function setupDataProvider(param1:String) : void {
+         var _loc2_:StoreTableData = null;
+         var _loc4_:Object = null;
+         var _loc3_:DataProvider = DataProvider(this.list.dataProvider);
+         _loc3_.splice(0);
+         for each (_loc4_ in this._data)
+         {
+            _loc2_ = new StoreTableData(_loc4_);
+            _loc2_.requestType = param1;
+            _loc2_.tableVO = this._tableVO;
+            _loc3_.push(_loc2_);
+         }
+         if(App.instance)
+         {
+            this.headerTitle.text = App.utils.locale.makeString(MENU.SHOP_TABLE_FIND) + " " + _loc3_.length.toString();
+         }
+         else
+         {
+            this.headerTitle.text = MENU.SHOP_TABLE_FIND + " " + _loc3_.length.toString();
+         }
+      }
 
-        protected override function onPopulate():void
-        {
-            super.onPopulate();
-            this._tableVO = new net.wg.data.VO.StoreTableVO();
-            if (this._data) 
-            {
-                invalidate(INVALID_TABLE);
-            }
-            return;
-        }
+      private function detectRendererHeight(param1:String) : void {
+         var _loc2_:IListItemRenderer = null;
+         if(App.instance)
+         {
+            _loc2_ = App.utils.classFactory.getComponent(param1,IListItemRenderer);
+            this.list.rowHeight = _loc2_.height;
+         }
+      }
+   }
 
-        protected override function onDispose():void
-        {
-            super.onDispose();
-            this._tableVO = null;
-            if (this._data) 
-            {
-                this._data.splice(0, this._data.length);
-                this._data = null;
-            }
-            this.vehicleRendererLinkage = null;
-            this.moduleRendererLinkage = null;
-            return;
-        }
-
-        internal function updateTable():void
-        {
-            net.wg.gui.lobby.store.StoreTable.assertNotNull(this._data, "_data");
-            net.wg.gui.lobby.store.StoreTable.assertNotNull(this.moduleRendererLinkage, "moduleRendererLinkage");
-            net.wg.gui.lobby.store.StoreTable.assertNotNull(this.vehicleRendererLinkage, "vehicleRendererLinkage");
-            var loc1:*=this._data.shift();
-            this.list.scrollToIndex(0);
-            this.setupDataProvider(loc1);
-            this.setupRendererType(loc1);
-            return;
-        }
-
-        internal function setupRendererType(arg1:String):void
-        {
-            var type:String;
-            var rendererName:String;
-            var classRef:Class;
-
-            var loc1:*;
-            rendererName = null;
-            classRef = null;
-            type = arg1;
-            rendererName = this.moduleRendererLinkage;
-            if (type == net.wg.data.constants.FittingTypes.VEHICLE) 
-            {
-                rendererName = this.vehicleRendererLinkage;
-            }
-            this.detectRendererHeight(rendererName);
-            try 
-            {
-                classRef = App.utils.classFactory.getClass(rendererName);
-                if (this.list.itemRenderer != classRef) 
-                {
-                    this.list.itemRendererName = rendererName;
-                }
-            }
-            catch (error:ReferenceError)
-            {
-                throw new net.wg.infrastructure.exceptions.ArgumentException(net.wg.data.constants.Errors.BAD_LINKAGE + rendererName, error.errorID);
-            }
-            return;
-        }
-
-        internal function setupDataProvider(arg1:String):void
-        {
-            var loc1:*=null;
-            var loc3:*=null;
-            var loc2:*=scaleform.clik.data.DataProvider(this.list.dataProvider);
-            loc2.splice(0);
-            var loc4:*=0;
-            var loc5:*=this._data;
-            for each (loc3 in loc5) 
-            {
-                loc1 = new net.wg.data.VO.StoreTableData(loc3);
-                loc1.requestType = arg1;
-                loc1.tableVO = this._tableVO;
-                loc2.push(loc1);
-            }
-            if (App.instance) 
-            {
-                this.headerTitle.text = App.utils.locale.makeString(MENU.SHOP_TABLE_FIND) + " " + loc2.length.toString();
-            }
-            else 
-            {
-                this.headerTitle.text = MENU.SHOP_TABLE_FIND + " " + loc2.length.toString();
-            }
-            return;
-        }
-
-        internal function detectRendererHeight(arg1:String):void
-        {
-            var loc1:*=null;
-            if (App.instance) 
-            {
-                loc1 = App.utils.classFactory.getComponent(arg1, scaleform.clik.interfaces.IListItemRenderer);
-                this.list.rowHeight = loc1.height;
-            }
-            return;
-        }
-
-        internal static function assertNotNull(arg1:Object, arg2:String):void
-        {
-            if (App.instance) 
-            {
-                App.utils.asserter.assert(!(arg1 == null), arg2 + net.wg.data.constants.Errors.CANT_NULL, net.wg.infrastructure.exceptions.NullPointerException);
-            }
-            return;
-        }
-
-        internal static const DEFAULT_COUNT_POSITION:Number=0;
-
-        internal static const RIGHT_ORIENTED_COUNT_POSITION:Number=111;
-
-        internal static const INVALID_TABLE:String="invalidTable";
-
-        public var header:net.wg.gui.lobby.store.TableHeader=null;
-
-        public var list:net.wg.gui.components.controls.ScrollingListEx=null;
-
-        public var headerTitle:flash.text.TextField=null;
-
-        internal var _tableVO:net.wg.data.VO.StoreTableVO=null;
-
-        internal var _data:Array=null;
-
-        internal var _rightOrientedCount:Boolean=false;
-
-        internal var vehicleRendererLinkage:String=null;
-
-        internal var moduleRendererLinkage:String=null;
-    }
 }

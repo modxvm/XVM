@@ -1,86 +1,85 @@
-package net.wg.gui.lobby.settings 
+package net.wg.gui.lobby.settings
 {
-    import flash.text.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.infrastructure.interfaces.*;
-    import scaleform.clik.core.*;
-    
-    public class SettingsBaseView extends scaleform.clik.core.UIComponent implements net.wg.infrastructure.interfaces.IViewStackContent
-    {
-        public function SettingsBaseView()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import net.wg.infrastructure.interfaces.IViewStackContent;
+   import net.wg.gui.components.controls.LabelControl;
+   import flash.text.TextField;
+   import net.wg.gui.components.controls.CheckBox;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            if (this._data) 
+
+   public class SettingsBaseView extends UIComponent implements IViewStackContent
+   {
+          
+      public function SettingsBaseView() {
+         super();
+      }
+
+      protected var _data:Object = null;
+
+      protected var _viewId:String = "";
+
+      override protected function configUI() : void {
+         super.configUI();
+         if(this._data)
+         {
+            this.setData(this._data);
+         }
+      }
+
+      protected function trySetLabel(param1:String, param2:String="") : void {
+         var _loc3_:String = null;
+         var _loc4_:LabelControl = null;
+         var _loc5_:TextField = null;
+         var _loc6_:CheckBox = null;
+         if(this._data[param1])
+         {
+            _loc3_ = "";
+            if(this._data[param1].current != null)
             {
-                this.setData(this._data);
+               _loc3_ = SettingsConfig.LOCALIZATION + param2 + param1;
             }
-            return;
-        }
-
-        protected function trySetLabel(arg1:String, arg2:String=""):void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            var loc3:*=null;
-            var loc4:*=null;
-            if (this._data[arg1]) 
+            if((this._data[param1].hasLabel) && (this[param1 + SettingsConfig.TYPE_LABEL]))
             {
-                loc1 = "";
-                if (this._data[arg1].current != null) 
-                {
-                    loc1 = net.wg.gui.lobby.settings.SettingsConfig.LOCALIZATION + arg2 + arg1;
-                }
-                if (this._data[arg1].hasLabel && this[arg1 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_LABEL]) 
-                {
-                    if (this[arg1 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_LABEL] is net.wg.gui.components.controls.LabelControl) 
-                    {
-                        (loc2 = this[arg1 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_LABEL]).text = loc1;
-                    }
-                    else 
-                    {
-                        (loc3 = this[arg1 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_LABEL]).text = loc1;
-                    }
-                }
-                else if (this[arg1 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_CHECKBOX] && this[arg1 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_CHECKBOX].label == "") 
-                {
-                    (loc4 = this[arg1 + net.wg.gui.lobby.settings.SettingsConfig.TYPE_CHECKBOX]).label = loc1;
-                }
+               if(this[param1 + SettingsConfig.TYPE_LABEL]  is  LabelControl)
+               {
+                  _loc4_ = this[param1 + SettingsConfig.TYPE_LABEL];
+                  _loc4_.text = _loc3_;
+               }
+               else
+               {
+                  _loc5_ = this[param1 + SettingsConfig.TYPE_LABEL];
+                  _loc5_.text = _loc3_;
+               }
             }
-            return;
-        }
-
-        public function update(arg1:Object):void
-        {
-            this._viewId = arg1.id;
-            this._data = arg1.data;
-            if (this.initialized) 
+            else
             {
-                this.setData(this._data);
+               if((this[param1 + SettingsConfig.TYPE_CHECKBOX]) && this[param1 + SettingsConfig.TYPE_CHECKBOX].label == "")
+               {
+                  _loc6_ = this[param1 + SettingsConfig.TYPE_CHECKBOX];
+                  _loc6_.label = _loc3_;
+               }
             }
-            return;
-        }
+         }
+      }
 
-        protected function setData(arg1:Object):void
-        {
-            return;
-        }
+      public function update(param1:Object) : void {
+         this._viewId = param1.id;
+         this._data = param1.data;
+         if(this.initialized)
+         {
+            this.setData(this._data);
+         }
+      }
 
-        public override function dispose():void
-        {
-            super.dispose();
-            this._data = null;
-            this._viewId = null;
-            return;
-        }
+      protected function setData(param1:Object) : void {
+          
+      }
 
-        protected var _data:Object=null;
+      override public function dispose() : void {
+         super.dispose();
+         this._data = null;
+         this._viewId = null;
+      }
+   }
 
-        protected var _viewId:String="";
-    }
 }

@@ -1,8 +1,12 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IQuestsWindowMeta extends flash.events.IEventDispatcher
-    {
-    }
+   import flash.events.IEventDispatcher;
+
+
+   public interface IQuestsWindowMeta extends IEventDispatcher
+   {
+          
+
+   }
+
 }

@@ -1,149 +1,137 @@
-package net.wg.gui.lobby.techtree.data.state 
+package net.wg.gui.lobby.techtree.data.state
 {
-    import __AS3__.vec.*;
-    import net.wg.gui.lobby.techtree.constants.*;
-    
-    public class NodeStateCollection extends Object
-    {
-        public function NodeStateCollection()
-        {
-            super();
-            return;
-        }
+   import __AS3__.vec.Vector;
+   import net.wg.gui.lobby.techtree.constants.NodeEntityType;
+   import net.wg.gui.lobby.techtree.constants.NodeState;
+   import net.wg.gui.lobby.techtree.constants.NamedLabels;
 
-        public static function getStateProps(arg1:uint, arg2:Number, arg3:Object):net.wg.gui.lobby.techtree.data.state.StateProperties
-        {
-            var loc1:*=null;
-            var loc2:*=arg1;
-            switch (loc2) 
-            {
-                case net.wg.gui.lobby.techtree.constants.NodeEntityType.NATION_TREE:
-                case net.wg.gui.lobby.techtree.constants.NodeEntityType.TOP_VEHICLE:
-                case net.wg.gui.lobby.techtree.constants.NodeEntityType.NEXT_VEHICLE:
-                {
-                    loc1 = getNTNodeStateProps(arg2);
-                    break;
-                }
-                case net.wg.gui.lobby.techtree.constants.NodeEntityType.RESEARCH_ROOT:
-                {
-                    loc1 = getNTNodeStateProps(arg2);
-                    break;
-                }
-                case net.wg.gui.lobby.techtree.constants.NodeEntityType.RESEARCH_ITEM:
-                {
-                    loc1 = getResearchNodeStateProps(arg2, arg3.rootState, arg3.isParentUnlocked);
-                    break;
-                }
-            }
-            if (loc1 == null) 
-            {
-                loc1 = new net.wg.gui.lobby.techtree.data.state.StateProperties(0, 0);
-            }
-            return loc1;
-        }
 
-        public static function getStatePrefix(arg1:Number):String
-        {
-            var loc1:*=statePrefixes[arg1];
-            return loc1 == null ? "locked_" : loc1;
-        }
+   public class NodeStateCollection extends Object
+   {
+          
+      public function NodeStateCollection() {
+         super();
+      }
 
-        public static function isRedrawNTLines(arg1:Number):Boolean
-        {
-            return (arg1 & net.wg.gui.lobby.techtree.constants.NodeState.UNLOCKED) > 0 || (arg1 & net.wg.gui.lobby.techtree.constants.NodeState.NEXT_2_UNLOCK) > 0 || (arg1 & net.wg.gui.lobby.techtree.constants.NodeState.IN_INVENTORY) > 0;
-        }
+      private static const statePrefixes:Array;
 
-        public static function isRedrawResearchLines(arg1:Number):Boolean
-        {
-            return (arg1 & net.wg.gui.lobby.techtree.constants.NodeState.UNLOCKED) > 0 || (arg1 & net.wg.gui.lobby.techtree.constants.NodeState.NEXT_2_UNLOCK) > 0;
-        }
+      private static const animation:AnimationProperties;
 
-        internal static function getNTNodeStateProps(arg1:Number):net.wg.gui.lobby.techtree.data.state.StateProperties
-        {
-            var loc1:*=null;
-            var loc2:*=getNTNodePrimaryState(arg1);
-            var loc3:*=nationNodeStates.length;
-            var loc4:*=0;
-            while (loc4 < loc3) 
-            {
-                loc1 = nationNodeStates[loc4];
-                if (loc2 == loc1.getState()) 
-                {
-                    return loc1.getProps();
-                }
-                ++loc4;
-            }
-            return nationNodeStates[0].getProps();
-        }
+      private static const nationNodeStates:Vector.<NodeStateItem>;
 
-        internal static function getResearchNodeStateProps(arg1:Number, arg2:Number, arg3:Boolean):net.wg.gui.lobby.techtree.data.state.StateProperties
-        {
-            var loc1:*=null;
-            var loc2:*=getResearchNodePrimaryState(arg1);
-            var loc3:*=itemStates.length;
-            var loc4:*=0;
-            while (loc4 < loc3) 
-            {
-                loc1 = itemStates[loc4];
-                if (loc2 == loc1.getState()) 
-                {
-                    return loc1.resolveProps(arg1, arg2, arg3);
-                }
-                ++loc4;
-            }
-            return itemStates[0].getProps();
-        }
+      private static const itemStates:Vector.<ResearchStateItem>;
 
-        internal static function getNTNodePrimaryState(arg1:Number):Number
-        {
-            var loc1:*=arg1;
-            if ((arg1 & net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_XP) > 0) 
-            {
-                loc1 = loc1 ^ net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_XP;
-            }
-            if ((arg1 & net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_MONEY) > 0) 
-            {
-                loc1 = loc1 ^ net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_MONEY;
-            }
-            if ((arg1 & net.wg.gui.lobby.techtree.constants.NodeState.ELITE) > 0) 
-            {
-                loc1 = loc1 ^ net.wg.gui.lobby.techtree.constants.NodeState.ELITE;
-            }
-            if ((arg1 & net.wg.gui.lobby.techtree.constants.NodeState.CAN_SELL) > 0) 
-            {
-                loc1 = loc1 ^ net.wg.gui.lobby.techtree.constants.NodeState.CAN_SELL;
-            }
-            return loc1;
-        }
+      public static function getStateProps(param1:uint, param2:Number, param3:Object) : StateProperties {
+         var _loc4_:StateProperties = null;
+         switch(param1)
+         {
+            case NodeEntityType.NATION_TREE:
+            case NodeEntityType.TOP_VEHICLE:
+            case NodeEntityType.NEXT_VEHICLE:
+               _loc4_ = getNTNodeStateProps(param2);
+               break;
+            case NodeEntityType.RESEARCH_ROOT:
+               _loc4_ = getNTNodeStateProps(param2);
+               break;
+            case NodeEntityType.RESEARCH_ITEM:
+               _loc4_ = getResearchNodeStateProps(param2,param3.rootState,param3.isParentUnlocked);
+               break;
+         }
+         if(_loc4_ == null)
+         {
+            _loc4_ = new StateProperties(0,0);
+         }
+         return _loc4_;
+      }
 
-        internal static function getResearchNodePrimaryState(arg1:Number):Number
-        {
-            var loc1:*=arg1;
-            if ((arg1 & net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_XP) > 0) 
-            {
-                loc1 = loc1 ^ net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_XP;
-            }
-            if ((arg1 & net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_MONEY) > 0) 
-            {
-                loc1 = loc1 ^ net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_MONEY;
-            }
-            if ((arg1 & net.wg.gui.lobby.techtree.constants.NodeState.AUTO_UNLOCKED) > 0) 
-            {
-                loc1 = loc1 ^ net.wg.gui.lobby.techtree.constants.NodeState.AUTO_UNLOCKED;
-            }
-            if ((arg1 & net.wg.gui.lobby.techtree.constants.NodeState.CAN_SELL) > 0) 
-            {
-                loc1 = loc1 ^ net.wg.gui.lobby.techtree.constants.NodeState.CAN_SELL;
-            }
-            return loc1;
-        }
+      public static function getStatePrefix(param1:Number) : String {
+         var _loc2_:String = statePrefixes[param1];
+         return _loc2_ != null?_loc2_:"locked_";
+      }
 
-        internal static const statePrefixes:Array=["locked_", "next2unlock_", "next4buy_", "premium_", "inventory_", "inventory_cur_", "inventory_prem_", "inventory_prem_cur_", "auto_unlocked_", "installed_", "installed_plocked_", "was_in_battle_sell_"];
+      public static function isRedrawNTLines(param1:Number) : Boolean {
+         return (param1 & NodeState.UNLOCKED) > 0 || (param1 & NodeState.NEXT_2_UNLOCK) > 0 || (param1 & NodeState.IN_INVENTORY) > 0;
+      }
 
-        internal static const animation:net.wg.gui.lobby.techtree.data.state.AnimationProperties=new net.wg.gui.lobby.techtree.data.state.AnimationProperties(150, {"alpha":0}, {"alpha":1});
+      public static function isRedrawResearchLines(param1:Number) : Boolean {
+         return (param1 & NodeState.UNLOCKED) > 0 || (param1 & NodeState.NEXT_2_UNLOCK) > 0;
+      }
 
-        internal static const nationNodeStates:__AS3__.vec.Vector.<net.wg.gui.lobby.techtree.data.state.NodeStateItem>=Vector.<net.wg.gui.lobby.techtree.data.state.NodeStateItem>([new net.wg.gui.lobby.techtree.data.state.NodeStateItem(net.wg.gui.lobby.techtree.constants.NodeState.LOCKED, new net.wg.gui.lobby.techtree.data.state.StateProperties(1, 0, null, 0, false, null, 0.4)), new net.wg.gui.lobby.techtree.data.state.NodeStateItem(net.wg.gui.lobby.techtree.constants.NodeState.NEXT_2_UNLOCK, new net.wg.gui.lobby.techtree.data.state.StateProperties(2, 1, net.wg.gui.lobby.techtree.constants.NamedLabels.XP_COST, net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_XP, true)), new net.wg.gui.lobby.techtree.data.state.NodeStateItem(net.wg.gui.lobby.techtree.constants.NodeState.UNLOCKED, new net.wg.gui.lobby.techtree.data.state.StateProperties(3, 2, net.wg.gui.lobby.techtree.constants.NamedLabels.CREDITS_PRICE, net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_MONEY, true)), new net.wg.gui.lobby.techtree.data.state.NodeStateItem(net.wg.gui.lobby.techtree.constants.NodeState.UNLOCKED | net.wg.gui.lobby.techtree.constants.NodeState.WAS_IN_BATTLE, new net.wg.gui.lobby.techtree.data.state.StateProperties(4, 11, net.wg.gui.lobby.techtree.constants.NamedLabels.CREDITS_PRICE, net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_MONEY, true, animation)), new net.wg.gui.lobby.techtree.data.state.NodeStateItem(net.wg.gui.lobby.techtree.constants.NodeState.UNLOCKED | net.wg.gui.lobby.techtree.constants.NodeState.PREMIUM, new net.wg.gui.lobby.techtree.data.state.StateProperties(5, 3, net.wg.gui.lobby.techtree.constants.NamedLabels.GOLD_PRICE, net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_MONEY, true)), new net.wg.gui.lobby.techtree.data.state.NodeStateItem(net.wg.gui.lobby.techtree.constants.NodeState.UNLOCKED | net.wg.gui.lobby.techtree.constants.NodeState.PREMIUM | net.wg.gui.lobby.techtree.constants.NodeState.WAS_IN_BATTLE, new net.wg.gui.lobby.techtree.data.state.StateProperties(6, 3, net.wg.gui.lobby.techtree.constants.NamedLabels.GOLD_PRICE, net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_MONEY, true)), new net.wg.gui.lobby.techtree.data.state.NodeStateItem(net.wg.gui.lobby.techtree.constants.NodeState.UNLOCKED | net.wg.gui.lobby.techtree.constants.NodeState.IN_INVENTORY, new net.wg.gui.lobby.techtree.data.state.StateProperties(7, 4, net.wg.gui.lobby.techtree.constants.NamedLabels.CREDITS_PRICE, net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_MONEY, false)), new net.wg.gui.lobby.techtree.data.state.NodeStateItem(net.wg.gui.lobby.techtree.constants.NodeState.UNLOCKED | net.wg.gui.lobby.techtree.constants.NodeState.IN_INVENTORY | net.wg.gui.lobby.techtree.constants.NodeState.WAS_IN_BATTLE, new net.wg.gui.lobby.techtree.data.state.StateProperties(8, 4, net.wg.gui.lobby.techtree.constants.NamedLabels.CREDITS_PRICE, net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_MONEY, false)), new net.wg.gui.lobby.techtree.data.state.NodeStateItem(net.wg.gui.lobby.techtree.constants.NodeState.UNLOCKED | net.wg.gui.lobby.techtree.constants.NodeState.IN_INVENTORY | net.wg.gui.lobby.techtree.constants.NodeState.SELECTED, new net.wg.gui.lobby.techtree.data.state.StateProperties(9, 5, net.wg.gui.lobby.techtree.constants.NamedLabels.CREDITS_PRICE, net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_MONEY, false)), new net.wg.gui.lobby.techtree.data.state.NodeStateItem(net.wg.gui.lobby.techtree.constants.NodeState.UNLOCKED | net.wg.gui.lobby.techtree.constants.NodeState.IN_INVENTORY | net.wg.gui.lobby.techtree.constants.NodeState.WAS_IN_BATTLE | net.wg.gui.lobby.techtree.constants.NodeState.SELECTED, new net.wg.gui.lobby.techtree.data.state.StateProperties(10, 5, net.wg.gui.lobby.techtree.constants.NamedLabels.CREDITS_PRICE, net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_MONEY, false)), new net.wg.gui.lobby.techtree.data.state.NodeStateItem(net.wg.gui.lobby.techtree.constants.NodeState.UNLOCKED | net.wg.gui.lobby.techtree.constants.NodeState.PREMIUM | net.wg.gui.lobby.techtree.constants.NodeState.IN_INVENTORY, new net.wg.gui.lobby.techtree.data.state.StateProperties(11, 6, net.wg.gui.lobby.techtree.constants.NamedLabels.CREDITS_PRICE, net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_MONEY, false)), new net.wg.gui.lobby.techtree.data.state.NodeStateItem(net.wg.gui.lobby.techtree.constants.NodeState.UNLOCKED | net.wg.gui.lobby.techtree.constants.NodeState.PREMIUM | net.wg.gui.lobby.techtree.constants.NodeState.IN_INVENTORY | net.wg.gui.lobby.techtree.constants.NodeState.WAS_IN_BATTLE, new net.wg.gui.lobby.techtree.data.state.StateProperties(12, 6, net.wg.gui.lobby.techtree.constants.NamedLabels.CREDITS_PRICE, net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_MONEY, false)), new net.wg.gui.lobby.techtree.data.state.NodeStateItem(net.wg.gui.lobby.techtree.constants.NodeState.UNLOCKED | net.wg.gui.lobby.techtree.constants.NodeState.PREMIUM | net.wg.gui.lobby.techtree.constants.NodeState.IN_INVENTORY | net.wg.gui.lobby.techtree.constants.NodeState.SELECTED, new net.wg.gui.lobby.techtree.data.state.StateProperties(13, 7, net.wg.gui.lobby.techtree.constants.NamedLabels.CREDITS_PRICE, net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_MONEY, false)), new net.wg.gui.lobby.techtree.data.state.NodeStateItem(net.wg.gui.lobby.techtree.constants.NodeState.UNLOCKED | net.wg.gui.lobby.techtree.constants.NodeState.PREMIUM | net.wg.gui.lobby.techtree.constants.NodeState.IN_INVENTORY | net.wg.gui.lobby.techtree.constants.NodeState.WAS_IN_BATTLE | net.wg.gui.lobby.techtree.constants.NodeState.SELECTED, new net.wg.gui.lobby.techtree.data.state.StateProperties(14, 7, net.wg.gui.lobby.techtree.constants.NamedLabels.CREDITS_PRICE, net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_MONEY, false))]);
+      private static function getNTNodeStateProps(param1:Number) : StateProperties {
+         var _loc2_:NodeStateItem = null;
+         var _loc3_:Number = getNTNodePrimaryState(param1);
+         var _loc4_:Number = nationNodeStates.length;
+         var _loc5_:Number = 0;
+         while(_loc5_ < _loc4_)
+         {
+            _loc2_ = nationNodeStates[_loc5_];
+            if(_loc3_ == _loc2_.getState())
+            {
+               return _loc2_.getProps();
+            }
+            _loc5_++;
+         }
+         return nationNodeStates[0].getProps();
+      }
 
-        internal static const itemStates:__AS3__.vec.Vector.<net.wg.gui.lobby.techtree.data.state.ResearchStateItem>=Vector.<net.wg.gui.lobby.techtree.data.state.ResearchStateItem>([new net.wg.gui.lobby.techtree.data.state.ResearchStateItem(net.wg.gui.lobby.techtree.constants.NodeState.LOCKED, new net.wg.gui.lobby.techtree.data.state.StateProperties(1, 0, null, 0, true)), new net.wg.gui.lobby.techtree.data.state.ResearchStateItem(net.wg.gui.lobby.techtree.constants.NodeState.NEXT_2_UNLOCK, new net.wg.gui.lobby.techtree.data.state.StateProperties(2, 1, net.wg.gui.lobby.techtree.constants.NamedLabels.XP_COST, net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_XP, true)), new net.wg.gui.lobby.techtree.data.state.UnlockedStateItem(new net.wg.gui.lobby.techtree.data.state.StateProperties(3, 2), new net.wg.gui.lobby.techtree.data.state.StateProperties(4, 8), new net.wg.gui.lobby.techtree.data.state.StateProperties(5, 2), new net.wg.gui.lobby.techtree.data.state.StateProperties(6, 2, net.wg.gui.lobby.techtree.constants.NamedLabels.CREDITS_PRICE, net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_MONEY, true)), new net.wg.gui.lobby.techtree.data.state.InventoryStateItem(new net.wg.gui.lobby.techtree.data.state.StateProperties(7, 2), new net.wg.gui.lobby.techtree.data.state.StateProperties(8, 8), new net.wg.gui.lobby.techtree.data.state.StateProperties(9, 4), new net.wg.gui.lobby.techtree.data.state.StateProperties(10, 4)), new net.wg.gui.lobby.techtree.data.state.ResearchStateItem(net.wg.gui.lobby.techtree.constants.NodeState.UNLOCKED | net.wg.gui.lobby.techtree.constants.NodeState.INSTALLED, new net.wg.gui.lobby.techtree.data.state.StateProperties(11, 9, null, net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_MONEY)), new net.wg.gui.lobby.techtree.data.state.ResearchStateItem(net.wg.gui.lobby.techtree.constants.NodeState.UNLOCKED | net.wg.gui.lobby.techtree.constants.NodeState.IN_INVENTORY | net.wg.gui.lobby.techtree.constants.NodeState.INSTALLED, new net.wg.gui.lobby.techtree.data.state.StateProperties(12, 9, null, net.wg.gui.lobby.techtree.constants.NodeState.ENOUGH_MONEY))]);
-    }
+      private static function getResearchNodeStateProps(param1:Number, param2:Number, param3:Boolean) : StateProperties {
+         var _loc4_:ResearchStateItem = null;
+         var _loc5_:Number = getResearchNodePrimaryState(param1);
+         var _loc6_:Number = itemStates.length;
+         var _loc7_:Number = 0;
+         while(_loc7_ < _loc6_)
+         {
+            _loc4_ = itemStates[_loc7_];
+            if(_loc5_ == _loc4_.getState())
+            {
+               return _loc4_.resolveProps(param1,param2,param3);
+            }
+            _loc7_++;
+         }
+         return itemStates[0].getProps();
+      }
+
+      private static function getNTNodePrimaryState(param1:Number) : Number {
+         var _loc2_:Number = param1;
+         if((param1 & NodeState.ENOUGH_XP) > 0)
+         {
+            _loc2_ = _loc2_ ^ NodeState.ENOUGH_XP;
+         }
+         if((param1 & NodeState.ENOUGH_MONEY) > 0)
+         {
+            _loc2_ = _loc2_ ^ NodeState.ENOUGH_MONEY;
+         }
+         if((param1 & NodeState.ELITE) > 0)
+         {
+            _loc2_ = _loc2_ ^ NodeState.ELITE;
+         }
+         if((param1 & NodeState.CAN_SELL) > 0)
+         {
+            _loc2_ = _loc2_ ^ NodeState.CAN_SELL;
+         }
+         return _loc2_;
+      }
+
+      private static function getResearchNodePrimaryState(param1:Number) : Number {
+         var _loc2_:Number = param1;
+         if((param1 & NodeState.ENOUGH_XP) > 0)
+         {
+            _loc2_ = _loc2_ ^ NodeState.ENOUGH_XP;
+         }
+         if((param1 & NodeState.ENOUGH_MONEY) > 0)
+         {
+            _loc2_ = _loc2_ ^ NodeState.ENOUGH_MONEY;
+         }
+         if((param1 & NodeState.AUTO_UNLOCKED) > 0)
+         {
+            _loc2_ = _loc2_ ^ NodeState.AUTO_UNLOCKED;
+         }
+         if((param1 & NodeState.CAN_SELL) > 0)
+         {
+            _loc2_ = _loc2_ ^ NodeState.CAN_SELL;
+         }
+         return _loc2_;
+      }
+   }
+
 }

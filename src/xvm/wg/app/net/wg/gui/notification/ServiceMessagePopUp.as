@@ -1,91 +1,78 @@
-package net.wg.gui.notification 
+package net.wg.gui.notification
 {
-    import flash.events.*;
-    import net.wg.gui.utils.*;
-    import scaleform.clik.motion.*;
-    
-    public class ServiceMessagePopUp extends net.wg.gui.notification.ServiceMessage
-    {
-        public function ServiceMessagePopUp()
-        {
-            this.tweenManager = new net.wg.gui.utils.ExcludeTweenManager();
-            super();
-            return;
-        }
+   import net.wg.gui.utils.ExcludeTweenManager;
+   import scaleform.clik.motion.Tween;
+   import flash.events.Event;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            textField.selectable = false;
-            if (!isNaN(this._livingTime)) 
-            {
-                App.utils.scheduler.scheduleTask(this.startMessageHiding, this._livingTime);
-            }
-            return;
-        }
 
-        internal function startMessageHiding():void
-        {
-            var loc1:*=null;
-            if (isNaN(this._animationSpeed)) 
-            {
-                dispatchEvent(new flash.events.Event(HIDED));
-            }
-            else 
-            {
-                loc1 = this.tweenManager.registerAndLaunch(this._animationSpeed, this, {"alpha":0}, {"onComplete":this.onHideTweenComplete});
-                loc1.fastTransform = false;
-            }
-            return;
-        }
+   public class ServiceMessagePopUp extends ServiceMessage
+   {
+          
+      public function ServiceMessagePopUp() {
+         this.tweenManager = new ExcludeTweenManager();
+         super();
+      }
 
-        internal function onHideTweenComplete(arg1:scaleform.clik.motion.Tween):void
-        {
-            this.tweenManager.unregister(arg1);
-            dispatchEvent(new flash.events.Event(HIDED));
-            return;
-        }
+      public static const HIDED:String = "hided";
 
-        public function get livingTime():Number
-        {
-            return this._livingTime;
-        }
+      private var _livingTime:Number = NaN;
 
-        public function set livingTime(arg1:Number):void
-        {
-            this._livingTime = arg1;
-            return;
-        }
+      private var _animationSpeed:Number = NaN;
 
-        public function set animationSpeed(arg1:Number):void
-        {
-            this._animationSpeed = arg1;
-            return;
-        }
+      private var tweenManager:ExcludeTweenManager;
 
-        public function get animationSpeed():Number
-        {
-            return this._animationSpeed;
-        }
+      override protected function configUI() : void {
+         super.configUI();
+         textField.selectable = false;
+         if(!isNaN(this._livingTime))
+         {
+            App.utils.scheduler.scheduleTask(this.startMessageHiding,this._livingTime);
+         }
+      }
 
-        public override function dispose():void
-        {
-            App.utils.scheduler.cancelTask(this.startMessageHiding);
-            if (this.tweenManager) 
-            {
-                this.tweenManager.unregisterAll();
-                this.tweenManager = null;
-            }
-            super.dispose();
-            return;
-        }
+      private function startMessageHiding() : void {
+         var _loc1_:Tween = null;
+         if(!isNaN(this._animationSpeed))
+         {
+            _loc1_ = this.tweenManager.registerAndLaunch(this._animationSpeed,this,{"alpha":0},{"onComplete":this.onHideTweenComplete});
+            _loc1_.fastTransform = false;
+         }
+         else
+         {
+            dispatchEvent(new Event(HIDED));
+         }
+      }
 
-        public static const HIDED:String="hided";
+      private function onHideTweenComplete(param1:Tween) : void {
+         this.tweenManager.unregister(param1);
+         dispatchEvent(new Event(HIDED));
+      }
 
-        internal var _livingTime:Number=NaN;
+      public function get livingTime() : Number {
+         return this._livingTime;
+      }
 
-        internal var _animationSpeed:Number=NaN;
+      public function set livingTime(param1:Number) : void {
+         this._livingTime = param1;
+      }
 
-        internal var tweenManager:net.wg.gui.utils.ExcludeTweenManager;
-    }
+      public function set animationSpeed(param1:Number) : void {
+         this._animationSpeed = param1;
+      }
+
+      public function get animationSpeed() : Number {
+         return this._animationSpeed;
+      }
+
+      override public function dispose() : void {
+         App.utils.scheduler.cancelTask(this.startMessageHiding);
+         if(this.tweenManager)
+         {
+            this.tweenManager.dispose();
+            this.tweenManager = null;
+         }
+         super.dispose();
+      }
+   }
+
 }

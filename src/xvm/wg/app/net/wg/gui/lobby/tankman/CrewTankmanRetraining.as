@@ -1,426 +1,375 @@
-package net.wg.gui.lobby.tankman 
+package net.wg.gui.lobby.tankman
 {
-    import flash.display.*;
-    import flash.events.*;
-    import net.wg.data.constants.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.events.*;
-    import net.wg.infrastructure.interfaces.*;
-    import scaleform.clik.controls.*;
-    import scaleform.clik.core.*;
-    import scaleform.clik.data.*;
-    import scaleform.clik.events.*;
-    
-    public class CrewTankmanRetraining extends scaleform.clik.core.UIComponent implements net.wg.infrastructure.interfaces.IViewStackContent
-    {
-        public function CrewTankmanRetraining()
-        {
-            this.retrainingButtons = [];
-            this.vehicleButtons = [];
-            this.toolTipBindHash = {};
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import net.wg.infrastructure.interfaces.IViewStackContent;
+   import net.wg.gui.components.controls.SoundButtonEx;
+   import scaleform.clik.controls.ButtonGroup;
+   import net.wg.gui.components.controls.TankmanTrainingSmallButton;
+   import net.wg.gui.components.controls.DropdownMenu;
+   import scaleform.clik.events.ButtonEvent;
+   import scaleform.clik.events.ListEvent;
+   import flash.display.DisplayObject;
+   import flash.events.MouseEvent;
+   import scaleform.clik.data.DataProvider;
+   import net.wg.data.constants.VehicleTypes;
+   import net.wg.gui.events.PersonalCaseEvent;
 
-        internal function applyRetrainingButtonClick(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            var loc1:*=new net.wg.gui.events.PersonalCaseEvent(net.wg.gui.events.PersonalCaseEvent.APPLY_RETRAINING);
-            var loc2:*={};
-            loc2.innaitonID = this.currentSelectedInnationID;
-            loc2.inventoryID = this.model.tankmanID;
-            loc2.tankmanCostTypeIndex = this.currentSelectedCostIndex;
-            loc1.retrainingTankmanData = loc2;
-            dispatchEvent(loc1);
-            return;
-        }
 
-        internal function retrainingTypeClick(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            this.currentSelectedCostIndex = this.retrainingButtonGroup.selectedIndex;
-            return;
-        }
+   public class CrewTankmanRetraining extends UIComponent implements IViewStackContent
+   {
+          
+      public function CrewTankmanRetraining() {
+         this.retrainingButtons = [];
+         this.vehicleButtons = [];
+         this.toolTipBindHash = {};
+         super();
+      }
 
-        internal function checkEnabledResetBtn(arg1:int):void
-        {
-            if (this.model.currentVehicle) 
+      public var btnRetraining:SoundButtonEx;
+
+      private var vehicleGroup:ButtonGroup = null;
+
+      public var lightTankBtn:VehicleTypeButton = null;
+
+      public var mediumTankBtn:VehicleTypeButton = null;
+
+      public var heavyTankBtn:VehicleTypeButton = null;
+
+      public var at_spgBtn:VehicleTypeButton = null;
+
+      public var spgBtn:VehicleTypeButton = null;
+
+      private var retrainingButtonGroup:ButtonGroup = null;
+
+      public var btnAcademy:TankmanTrainingSmallButton = null;
+
+      public var btnScool:TankmanTrainingSmallButton = null;
+
+      public var btnCourses:TankmanTrainingSmallButton = null;
+
+      public var vehiclesDropdown:DropdownMenu = null;
+
+      public var btnReset:SoundButtonEx = null;
+
+      private var currentSelectedVehicleType:String = null;
+
+      private var currentSelectedInnationID:int = 0;
+
+      private var currentSelectedCostIndex:int = -1;
+
+      private var retrainingButtons:Array;
+
+      private var vehicleButtons:Array;
+
+      private var toolTipBindHash:Object;
+
+      private var model:PersonalCaseRetrainingModel = null;
+
+      private var needUpdateData:Boolean = false;
+
+      private const UPDATE_DATA:String = "updateData";
+
+      override public function dispose() : void {
+         var _loc1_:* = 0;
+         var _loc2_:VehicleTypeButton = null;
+         var _loc3_:* = 0;
+         var _loc4_:TankmanTrainingSmallButton = null;
+         super.dispose();
+         this.model = null;
+         if(this.vehicleButtons)
+         {
+            _loc1_ = 0;
+            while(_loc1_ < this.vehicleButtons.length)
             {
-                this.btnReset.enabled = !(arg1 == this.model.currentVehicle.innationID);
+               _loc2_ = this.vehicleButtons[_loc1_] as VehicleTypeButton;
+               _loc2_.removeEventListener(ButtonEvent.PRESS,this.vehicleType_buttonPressHandler);
+               _loc1_++;
             }
-            this.currentSelectedInnationID = arg1;
-            this.updateRetrainingButtons();
-            return;
-        }
-
-        internal function vehiclesDropdown_listIndexChangeHandler(arg1:scaleform.clik.events.ListEvent):void
-        {
-            this.checkEnabledResetBtn(arg1.itemData.innationID);
-            return;
-        }
-
-        public function update(arg1:Object):void
-        {
-            if (arg1 == null) 
+            this.vehicleButtons = null;
+         }
+         if(this.retrainingButtons)
+         {
+            _loc3_ = 0;
+            while(_loc3_ < this.retrainingButtons.length)
             {
-                return;
+               _loc4_ = this.retrainingButtons[_loc3_] as TankmanTrainingSmallButton;
+               _loc4_.dispose();
+               _loc4_.removeEventListener(ButtonEvent.CLICK,this.retrainingTypeClick);
+               _loc3_++;
             }
-            this.model = arg1 as net.wg.gui.lobby.tankman.PersonalCaseRetrainingModel;
-            this.btnReset.enabled = !(this.model.currentVehicle == null);
-            this.needUpdateData = true;
-            invalidate(this.UPDATE_DATA);
-            return;
-        }
+            this.retrainingButtons = null;
+         }
+         this.btnReset.removeEventListener(ButtonEvent.CLICK,this.btnReset_buttonClickHandler);
+         this.vehiclesDropdown.removeEventListener(ListEvent.INDEX_CHANGE,this.vehiclesDropdown_listIndexChangeHandler);
+         this.btnRetraining.removeEventListener(ButtonEvent.CLICK,this.applyRetrainingButtonClick);
+         this.setToolTipListeners(this.vehiclesDropdown,false);
+         this.setToolTipListeners(this.btnReset,false);
+      }
 
-        internal function btnReset_buttonClickHandler(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            this.currentSelectedVehicleType = this.model.currentVehicle.type;
-            this.currentSelectedInnationID = this.model.currentVehicle.innationID;
-            this.autoSelectVehicleType();
-            this.autoSelectVehicle();
-            return;
-        }
+      override protected function draw() : void {
+         super.draw();
+         if((isInvalid(this.UPDATE_DATA)) && (this.needUpdateData))
+         {
+            this.needUpdateData = false;
+            this.updateViewElements();
+         }
+      }
 
-        internal function autoSelectVehicle(arg1:Boolean=true):void
-        {
-            var loc1:*=null;
-            var loc2:*=false;
-            var loc3:*=0;
-            var loc4:*=this.currentSelectedVehicleType;
-            switch (loc4) 
+      override protected function configUI() : void {
+         this.vehiclesDropdown.buttonMode = true;
+         this.setToolTipListeners(this.vehiclesDropdown);
+         this.setToolTipListeners(this.btnReset);
+         super.configUI();
+         this.btnReset.addEventListener(ButtonEvent.CLICK,this.btnReset_buttonClickHandler);
+         this.vehiclesDropdown.addEventListener(ListEvent.INDEX_CHANGE,this.vehiclesDropdown_listIndexChangeHandler);
+         this.btnRetraining.addEventListener(ButtonEvent.CLICK,this.applyRetrainingButtonClick);
+         this.toolTipBindHash["lightTankBtn"] = "#tooltips:personal_case/training/light_tank_btn";
+         this.toolTipBindHash["mediumTankBtn"] = "#tooltips:personal_case/training/medium_tank_btn";
+         this.toolTipBindHash["heavyTankBtn"] = "#tooltips:personal_case/training/heavy_tank_btn";
+         this.toolTipBindHash["at_spgBtn"] = "#tooltips:personal_case/training/at_spg_btn";
+         this.toolTipBindHash["spgBtn"] = "#tooltips:personal_case/training/spg_btn";
+         this.toolTipBindHash["vehiclesDropdown"] = "#tooltips:personal_case/training/tank";
+         this.toolTipBindHash["btnReset"] = "#tooltips:personal_case/training/current_tank";
+         this.vehicleButtons = [this.lightTankBtn,this.mediumTankBtn,this.heavyTankBtn,this.at_spgBtn,this.spgBtn];
+         this.retrainingButtons = [this.btnCourses,this.btnScool,this.btnAcademy];
+         this.initRetrainingButton();
+         this.initVehicleTypes();
+      }
+
+      private function setToolTipListeners(param1:DisplayObject, param2:Boolean=true) : void {
+         if(param2)
+         {
+            param1.addEventListener(MouseEvent.MOUSE_OVER,this.currentItem_mouseOverHandler);
+            param1.addEventListener(MouseEvent.MOUSE_OUT,this.currnetItem_mouseOutHandler);
+         }
+         else
+         {
+            param1.removeEventListener(MouseEvent.MOUSE_OVER,this.currentItem_mouseOverHandler);
+            param1.removeEventListener(MouseEvent.MOUSE_OUT,this.currnetItem_mouseOutHandler);
+         }
+      }
+
+      private function updateViewElements() : void {
+         this.enableVehicleTypeButton();
+         if(this.currentSelectedVehicleType == null)
+         {
+            this.currentSelectedVehicleType = this.model.nativeVehicle.type;
+         }
+         this.currentSelectedInnationID = this.model.nativeVehicle.innationID;
+         this.autoSelectVehicleType();
+         this.autoSelectVehicle();
+      }
+
+      private function enableVehicleTypeButton() : void {
+         this.lightTankBtn.enabled = this.model.lightTanks.length > 0;
+         this.mediumTankBtn.enabled = this.model.mediumTanks.length > 0;
+         this.heavyTankBtn.enabled = this.model.heavyTanks.length > 0;
+         this.at_spgBtn.enabled = this.model.AT_SPG.length > 0;
+         this.spgBtn.enabled = this.model.SPG.length > 0;
+      }
+
+      private function initRetrainingButton() : void {
+         var _loc2_:TankmanTrainingSmallButton = null;
+         this.retrainingButtonGroup = ButtonGroup.getGroup("retrainingButtonGroup",this);
+         var _loc1_:* = 0;
+         while(_loc1_ < this.retrainingButtons.length)
+         {
+            _loc2_ = this.retrainingButtons[_loc1_] as TankmanTrainingSmallButton;
+            _loc2_.addEventListener(ButtonEvent.CLICK,this.retrainingTypeClick);
+            _loc2_.groupName = "retrainingButtonGroup";
+            _loc2_.retraining = true;
+            _loc2_.allowDeselect = false;
+            _loc1_++;
+         }
+      }
+
+      private function updateRetrainingButtons() : void {
+         var _loc1_:* = this.currentSelectedInnationID == this.model.nativeVehicle.innationID;
+         var _loc2_:* = this.currentSelectedVehicleType == this.model.nativeVehicle.type;
+         var _loc3_:* = 0;
+         while(_loc3_ < this.retrainingButtons.length)
+         {
+            TankmanTrainingSmallButton(this.retrainingButtons[_loc3_]).setData(this.model.tankmanCost[_loc3_],this.model.gold,this.model.credits,this.model.specializationLevel,_loc1_,_loc2_,this.model.nationID);
+            _loc3_++;
+         }
+         this.autoSelectRetrainingButtons();
+      }
+
+      private function autoSelectRetrainingButtons() : void {
+         var _loc2_:TankmanTrainingSmallButton = null;
+         var _loc1_:* = 0;
+         while(_loc1_ < this.retrainingButtons.length)
+         {
+            _loc2_ = this.retrainingButtons[_loc1_] as TankmanTrainingSmallButton;
+            if(_loc2_.enabled == true)
             {
-                case net.wg.data.constants.VehicleTypes.LIGHT_TANK:
-                {
-                    loc1 = new scaleform.clik.data.DataProvider(this.model.lightTanks);
-                    break;
-                }
-                case net.wg.data.constants.VehicleTypes.MEDIUM_TANK:
-                {
-                    loc1 = new scaleform.clik.data.DataProvider(this.model.mediumTanks);
-                    break;
-                }
-                case net.wg.data.constants.VehicleTypes.HEAVY_TANK:
-                {
-                    loc1 = new scaleform.clik.data.DataProvider(this.model.heavyTanks);
-                    break;
-                }
-                case net.wg.data.constants.VehicleTypes.AT_SPG:
-                {
-                    loc1 = new scaleform.clik.data.DataProvider(this.model.AT_SPG);
-                    break;
-                }
-                case net.wg.data.constants.VehicleTypes.SPG:
-                {
-                    loc1 = new scaleform.clik.data.DataProvider(this.model.SPG);
-                    break;
-                }
-                default:
-                {
-                    DebugUtils.LOG_DEBUG("ERROR unknown tank type");
-                    break;
-                }
+               _loc2_.selected = true;
+               this.currentSelectedCostIndex = _loc1_;
+               this.btnRetraining.enabled = true;
+               return;
             }
-            this.vehiclesDropdown.labelField = "userName";
-            this.vehiclesDropdown.dataProvider = loc1;
-            if (arg1) 
+            _loc1_++;
+         }
+         this.btnRetraining.enabled = false;
+      }
+
+      private function initVehicleTypes() : void {
+         var _loc2_:VehicleTypeButton = null;
+         this.vehicleGroup = ButtonGroup.getGroup("vehicleGroup",this);
+         var _loc1_:* = 0;
+         while(_loc1_ < this.vehicleButtons.length)
+         {
+            _loc2_ = this.vehicleButtons[_loc1_] as VehicleTypeButton;
+            _loc2_.addEventListener(ButtonEvent.PRESS,this.vehicleType_buttonPressHandler);
+            this.setToolTipListeners(_loc2_);
+            _loc2_.groupName = "vehicleGroup";
+            _loc2_.allowDeselect = false;
+            _loc2_.validateNow();
+            _loc1_++;
+         }
+      }
+
+      private function currentItem_mouseOverHandler(param1:MouseEvent) : void {
+         var _loc2_:String = null;
+         if(this.toolTipBindHash[param1.currentTarget.name] != null)
+         {
+            _loc2_ = this.toolTipBindHash[param1.currentTarget.name];
+         }
+         App.toolTipMgr.showComplex(_loc2_);
+      }
+
+      private function currnetItem_mouseOutHandler(param1:MouseEvent) : void {
+         App.toolTipMgr.hide();
+      }
+
+      private function vehicleType_buttonPressHandler(param1:ButtonEvent) : void {
+         var _loc2_:* = false;
+         var _loc3_:* = false;
+         if(this.currentSelectedVehicleType != VehicleTypeButton(param1.currentTarget).type)
+         {
+            this.currentSelectedVehicleType = VehicleTypeButton(param1.currentTarget).type;
+            _loc2_ = false;
+            if(this.model.currentVehicle)
             {
-                loc2 = false;
-                loc3 = 0;
-                while (loc3 < this.vehiclesDropdown.dataProvider.length) 
-                {
-                    if (this.vehiclesDropdown.dataProvider[loc3].innationID == this.currentSelectedInnationID) 
-                    {
-                        this.vehiclesDropdown.selectedIndex = loc3;
-                        loc2 = true;
-                        break;
-                    }
-                    ++loc3;
-                }
-                if (!loc2) 
-                {
-                    this.vehiclesDropdown.selectedIndex = 0;
-                }
+               _loc2_ = this.currentSelectedVehicleType == this.model.currentVehicle.type;
             }
-            else 
+            _loc3_ = this.currentSelectedVehicleType == this.model.nativeVehicle.type;
+            this.currentSelectedInnationID = _loc2_?this.model.currentVehicle.innationID:this.model.nativeVehicle.innationID;
+            this.autoSelectVehicle((_loc2_) || (_loc3_));
+         }
+      }
+
+      private function autoSelectVehicleType() : void {
+         var _loc1_:* = 0;
+         while(_loc1_ < this.vehicleButtons.length)
+         {
+            if(this.currentSelectedVehicleType == this.vehicleButtons[_loc1_].type)
             {
-                this.vehiclesDropdown.selectedIndex = 0;
+               this.vehicleButtons[_loc1_].selected = true;
             }
-            this.checkEnabledResetBtn(this.vehiclesDropdown.dataProvider[this.vehiclesDropdown.selectedIndex].innationID);
-            this.currentSelectedCostIndex = -1;
-            this.autoSelectRetrainingButtons();
-            this.vehiclesDropdown.validateNow();
-            return;
-        }
+            _loc1_++;
+         }
+      }
 
-        internal function autoSelectVehicleType():void
-        {
-            var loc1:*=0;
-            while (loc1 < this.vehicleButtons.length) 
+      private function autoSelectVehicle(param1:Boolean=true) : void {
+         var _loc2_:DataProvider = null;
+         var _loc3_:* = false;
+         var _loc4_:* = 0;
+         switch(this.currentSelectedVehicleType)
+         {
+            case VehicleTypes.LIGHT_TANK:
+               _loc2_ = new DataProvider(this.model.lightTanks);
+               break;
+            case VehicleTypes.MEDIUM_TANK:
+               _loc2_ = new DataProvider(this.model.mediumTanks);
+               break;
+            case VehicleTypes.HEAVY_TANK:
+               _loc2_ = new DataProvider(this.model.heavyTanks);
+               break;
+            case VehicleTypes.AT_SPG:
+               _loc2_ = new DataProvider(this.model.AT_SPG);
+               break;
+            case VehicleTypes.SPG:
+               _loc2_ = new DataProvider(this.model.SPG);
+               break;
+            default:
+               DebugUtils.LOG_DEBUG("ERROR unknown tank type");
+         }
+         this.vehiclesDropdown.labelField = "userName";
+         this.vehiclesDropdown.dataProvider = _loc2_;
+         if(param1)
+         {
+            _loc3_ = false;
+            _loc4_ = 0;
+            while(_loc4_ < this.vehiclesDropdown.dataProvider.length)
             {
-                if (this.currentSelectedVehicleType == this.vehicleButtons[loc1].type) 
-                {
-                    this.vehicleButtons[loc1].selected = true;
-                }
-                ++loc1;
+               if(this.vehiclesDropdown.dataProvider[_loc4_].innationID == this.currentSelectedInnationID)
+               {
+                  this.vehiclesDropdown.selectedIndex = _loc4_;
+                  _loc3_ = true;
+                  break;
+               }
+               _loc4_++;
             }
-            return;
-        }
-
-        internal function vehicleType_buttonPressHandler(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            var loc1:*=false;
-            var loc2:*=false;
-            if (this.currentSelectedVehicleType != net.wg.gui.lobby.tankman.VehicleTypeButton(arg1.currentTarget).type) 
+            if(!_loc3_)
             {
-                this.currentSelectedVehicleType = net.wg.gui.lobby.tankman.VehicleTypeButton(arg1.currentTarget).type;
-                loc1 = false;
-                if (this.model.currentVehicle) 
-                {
-                    loc1 = this.currentSelectedVehicleType == this.model.currentVehicle.type;
-                }
-                loc2 = this.currentSelectedVehicleType == this.model.nativeVehicle.type;
-                this.currentSelectedInnationID = loc1 ? this.model.currentVehicle.innationID : this.model.nativeVehicle.innationID;
-                this.autoSelectVehicle(loc1 || loc2);
+               this.vehiclesDropdown.selectedIndex = 0;
             }
+         }
+         else
+         {
+            this.vehiclesDropdown.selectedIndex = 0;
+         }
+         this.checkEnabledResetBtn(this.vehiclesDropdown.dataProvider[this.vehiclesDropdown.selectedIndex].innationID);
+         this.currentSelectedCostIndex = -1;
+         this.autoSelectRetrainingButtons();
+         this.vehiclesDropdown.validateNow();
+      }
+
+      public function update(param1:Object) : void {
+         if(param1 == null)
+         {
             return;
-        }
+         }
+         this.model = param1 as PersonalCaseRetrainingModel;
+         this.btnReset.enabled = !(this.model.currentVehicle == null);
+         this.needUpdateData = true;
+         invalidate(this.UPDATE_DATA);
+      }
 
-        internal function currnetItem_mouseOutHandler(arg1:flash.events.MouseEvent):void
-        {
-            App.toolTipMgr.hide();
-            return;
-        }
+      private function btnReset_buttonClickHandler(param1:ButtonEvent) : void {
+         this.currentSelectedVehicleType = this.model.currentVehicle.type;
+         this.currentSelectedInnationID = this.model.currentVehicle.innationID;
+         this.autoSelectVehicleType();
+         this.autoSelectVehicle();
+      }
 
-        internal function currentItem_mouseOverHandler(arg1:flash.events.MouseEvent):void
-        {
-            var loc1:*=null;
-            if (this.toolTipBindHash[arg1.currentTarget.name] != null) 
-            {
-                loc1 = this.toolTipBindHash[arg1.currentTarget.name];
-            }
-            App.toolTipMgr.showComplex(loc1);
-            return;
-        }
+      private function vehiclesDropdown_listIndexChangeHandler(param1:ListEvent) : void {
+         this.checkEnabledResetBtn(param1.itemData.innationID);
+      }
 
-        internal function initVehicleTypes():void
-        {
-            var loc2:*=null;
-            this.vehicleGroup = scaleform.clik.controls.ButtonGroup.getGroup("vehicleGroup", this);
-            var loc1:*=0;
-            while (loc1 < this.vehicleButtons.length) 
-            {
-                loc2 = this.vehicleButtons[loc1] as net.wg.gui.lobby.tankman.VehicleTypeButton;
-                loc2.addEventListener(scaleform.clik.events.ButtonEvent.PRESS, this.vehicleType_buttonPressHandler);
-                this.setToolTipListeners(loc2);
-                loc2.groupName = "vehicleGroup";
-                loc2.allowDeselect = false;
-                loc2.validateNow();
-                ++loc1;
-            }
-            return;
-        }
+      private function checkEnabledResetBtn(param1:int) : void {
+         if(this.model.currentVehicle)
+         {
+            this.btnReset.enabled = !(param1 == this.model.currentVehicle.innationID);
+         }
+         this.currentSelectedInnationID = param1;
+         this.updateRetrainingButtons();
+      }
 
-        internal function autoSelectRetrainingButtons():void
-        {
-            var loc2:*=null;
-            var loc1:*=0;
-            while (loc1 < this.retrainingButtons.length) 
-            {
-                loc2 = this.retrainingButtons[loc1] as net.wg.gui.components.controls.TankmanTrainingSmallButton;
-                if (loc2.enabled == true) 
-                {
-                    loc2.selected = true;
-                    this.currentSelectedCostIndex = loc1;
-                    this.btnRetraining.enabled = true;
-                    return;
-                }
-                ++loc1;
-            }
-            this.btnRetraining.enabled = false;
-            return;
-        }
+      private function retrainingTypeClick(param1:ButtonEvent) : void {
+         this.currentSelectedCostIndex = this.retrainingButtonGroup.selectedIndex;
+      }
 
-        internal function updateRetrainingButtons():void
-        {
-            var loc1:*=this.currentSelectedInnationID == this.model.nativeVehicle.innationID;
-            var loc2:*=this.currentSelectedVehicleType == this.model.nativeVehicle.type;
-            var loc3:*=0;
-            while (loc3 < this.retrainingButtons.length) 
-            {
-                net.wg.gui.components.controls.TankmanTrainingSmallButton(this.retrainingButtons[loc3]).setData(this.model.tankmanCost[loc3], this.model.gold, this.model.credits, this.model.specializationLevel, loc1, loc2, this.model.nationID);
-                ++loc3;
-            }
-            this.autoSelectRetrainingButtons();
-            return;
-        }
+      private function applyRetrainingButtonClick(param1:ButtonEvent) : void {
+         var _loc2_:PersonalCaseEvent = new PersonalCaseEvent(PersonalCaseEvent.APPLY_RETRAINING);
+         var _loc3_:Object = {};
+         _loc3_.innaitonID = this.currentSelectedInnationID;
+         _loc3_.inventoryID = this.model.tankmanID;
+         _loc3_.tankmanCostTypeIndex = this.currentSelectedCostIndex;
+         _loc2_.retrainingTankmanData = _loc3_;
+         dispatchEvent(_loc2_);
+      }
+   }
 
-        internal function initRetrainingButton():void
-        {
-            var loc2:*=null;
-            this.retrainingButtonGroup = scaleform.clik.controls.ButtonGroup.getGroup("retrainingButtonGroup", this);
-            var loc1:*=0;
-            while (loc1 < this.retrainingButtons.length) 
-            {
-                loc2 = this.retrainingButtons[loc1] as net.wg.gui.components.controls.TankmanTrainingSmallButton;
-                loc2.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.retrainingTypeClick);
-                loc2.groupName = "retrainingButtonGroup";
-                loc2.retraining = true;
-                loc2.allowDeselect = false;
-                ++loc1;
-            }
-            return;
-        }
-
-        internal function enableVehicleTypeButton():void
-        {
-            this.lightTankBtn.enabled = this.model.lightTanks.length > 0;
-            this.mediumTankBtn.enabled = this.model.mediumTanks.length > 0;
-            this.heavyTankBtn.enabled = this.model.heavyTanks.length > 0;
-            this.at_spgBtn.enabled = this.model.AT_SPG.length > 0;
-            this.spgBtn.enabled = this.model.SPG.length > 0;
-            return;
-        }
-
-        internal function updateViewElements():void
-        {
-            this.enableVehicleTypeButton();
-            if (this.currentSelectedVehicleType == null) 
-            {
-                this.currentSelectedVehicleType = this.model.nativeVehicle.type;
-            }
-            this.currentSelectedInnationID = this.model.nativeVehicle.innationID;
-            this.autoSelectVehicleType();
-            this.autoSelectVehicle();
-            return;
-        }
-
-        internal function setToolTipListeners(arg1:flash.display.DisplayObject, arg2:Boolean=true):void
-        {
-            if (arg2) 
-            {
-                arg1.addEventListener(flash.events.MouseEvent.MOUSE_OVER, this.currentItem_mouseOverHandler);
-                arg1.addEventListener(flash.events.MouseEvent.MOUSE_OUT, this.currnetItem_mouseOutHandler);
-            }
-            else 
-            {
-                arg1.removeEventListener(flash.events.MouseEvent.MOUSE_OVER, this.currentItem_mouseOverHandler);
-                arg1.removeEventListener(flash.events.MouseEvent.MOUSE_OUT, this.currnetItem_mouseOutHandler);
-            }
-            return;
-        }
-
-        protected override function configUI():void
-        {
-            this.vehiclesDropdown.buttonMode = true;
-            this.setToolTipListeners(this.vehiclesDropdown);
-            this.setToolTipListeners(this.btnReset);
-            super.configUI();
-            this.btnReset.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.btnReset_buttonClickHandler);
-            this.vehiclesDropdown.addEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.vehiclesDropdown_listIndexChangeHandler);
-            this.btnRetraining.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.applyRetrainingButtonClick);
-            this.toolTipBindHash["lightTankBtn"] = "#tooltips:personal_case/training/light_tank_btn";
-            this.toolTipBindHash["mediumTankBtn"] = "#tooltips:personal_case/training/medium_tank_btn";
-            this.toolTipBindHash["heavyTankBtn"] = "#tooltips:personal_case/training/heavy_tank_btn";
-            this.toolTipBindHash["at_spgBtn"] = "#tooltips:personal_case/training/at_spg_btn";
-            this.toolTipBindHash["spgBtn"] = "#tooltips:personal_case/training/spg_btn";
-            this.toolTipBindHash["vehiclesDropdown"] = "#tooltips:personal_case/training/tank";
-            this.toolTipBindHash["btnReset"] = "#tooltips:personal_case/training/current_tank";
-            this.vehicleButtons = [this.lightTankBtn, this.mediumTankBtn, this.heavyTankBtn, this.at_spgBtn, this.spgBtn];
-            this.retrainingButtons = [this.btnCourses, this.btnScool, this.btnAcademy];
-            this.initRetrainingButton();
-            this.initVehicleTypes();
-            return;
-        }
-
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(this.UPDATE_DATA) && this.needUpdateData) 
-            {
-                this.needUpdateData = false;
-                this.updateViewElements();
-            }
-            return;
-        }
-
-        public override function dispose():void
-        {
-            var loc1:*=0;
-            var loc2:*=null;
-            var loc3:*=0;
-            var loc4:*=null;
-            super.dispose();
-            this.model = null;
-            if (this.vehicleButtons) 
-            {
-                loc1 = 0;
-                while (loc1 < this.vehicleButtons.length) 
-                {
-                    loc2 = this.vehicleButtons[loc1] as net.wg.gui.lobby.tankman.VehicleTypeButton;
-                    loc2.removeEventListener(scaleform.clik.events.ButtonEvent.PRESS, this.vehicleType_buttonPressHandler);
-                    ++loc1;
-                }
-                this.vehicleButtons = null;
-            }
-            if (this.retrainingButtons) 
-            {
-                loc3 = 0;
-                while (loc3 < this.retrainingButtons.length) 
-                {
-                    (loc4 = this.retrainingButtons[loc3] as net.wg.gui.components.controls.TankmanTrainingSmallButton).dispose();
-                    loc4.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.retrainingTypeClick);
-                    ++loc3;
-                }
-                this.retrainingButtons = null;
-            }
-            this.btnReset.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.btnReset_buttonClickHandler);
-            this.vehiclesDropdown.removeEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.vehiclesDropdown_listIndexChangeHandler);
-            this.btnRetraining.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.applyRetrainingButtonClick);
-            this.setToolTipListeners(this.vehiclesDropdown, false);
-            this.setToolTipListeners(this.btnReset, false);
-            return;
-        }
-
-        internal const UPDATE_DATA:String="updateData";
-
-        internal var needUpdateData:Boolean=false;
-
-        internal var model:net.wg.gui.lobby.tankman.PersonalCaseRetrainingModel=null;
-
-        internal var toolTipBindHash:Object;
-
-        internal var vehicleButtons:Array;
-
-        internal var retrainingButtons:Array;
-
-        internal var currentSelectedCostIndex:int=-1;
-
-        internal var currentSelectedInnationID:int=0;
-
-        internal var currentSelectedVehicleType:String=null;
-
-        public var btnReset:net.wg.gui.components.controls.SoundButtonEx=null;
-
-        public var vehiclesDropdown:net.wg.gui.components.controls.DropdownMenu=null;
-
-        public var btnCourses:net.wg.gui.components.controls.TankmanTrainingSmallButton=null;
-
-        public var btnScool:net.wg.gui.components.controls.TankmanTrainingSmallButton=null;
-
-        public var btnAcademy:net.wg.gui.components.controls.TankmanTrainingSmallButton=null;
-
-        internal var retrainingButtonGroup:scaleform.clik.controls.ButtonGroup=null;
-
-        public var spgBtn:net.wg.gui.lobby.tankman.VehicleTypeButton=null;
-
-        public var heavyTankBtn:net.wg.gui.lobby.tankman.VehicleTypeButton=null;
-
-        public var at_spgBtn:net.wg.gui.lobby.tankman.VehicleTypeButton=null;
-
-        public var mediumTankBtn:net.wg.gui.lobby.tankman.VehicleTypeButton=null;
-
-        public var lightTankBtn:net.wg.gui.lobby.tankman.VehicleTypeButton=null;
-
-        internal var vehicleGroup:scaleform.clik.controls.ButtonGroup=null;
-
-        public var btnRetraining:net.wg.gui.components.controls.SoundButtonEx;
-    }
 }

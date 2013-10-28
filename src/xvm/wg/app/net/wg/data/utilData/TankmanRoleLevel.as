@@ -1,59 +1,55 @@
-package net.wg.data.utilData 
+package net.wg.data.utilData
 {
-    public class TankmanRoleLevel extends Object
-    {
-        public function TankmanRoleLevel(arg1:uint, arg2:int, arg3:int, arg4:int, arg5:int, arg6:int)
-        {
-            super();
-            this._roleLevel = arg1;
-            this._common = arg2;
-            this._brotherhood = arg3;
-            this._equipment = arg4;
-            this._optDevs = arg5;
-            this._penalty = arg6;
-            return;
-        }
 
-        public function get roleLevel():uint
-        {
-            return this._roleLevel;
-        }
 
-        public function get common():uint
-        {
-            return this._common;
-        }
+   public class TankmanRoleLevel extends Object
+   {
+          
+      public function TankmanRoleLevel(param1:uint, param2:int, param3:int, param4:int, param5:int, param6:int) {
+         super();
+         this._roleLevel = param1;
+         this._common = param2;
+         this._brotherhood = param3;
+         this._equipment = param4;
+         this._optDevs = param5;
+         this._penalty = param6;
+      }
 
-        public function get brotherhood():uint
-        {
-            return this._brotherhood;
-        }
+      private var _roleLevel:uint;
 
-        public function get equipment():uint
-        {
-            return this._equipment;
-        }
+      private var _common:int;
 
-        public function get optDevs():uint
-        {
-            return this._optDevs;
-        }
+      private var _brotherhood:int;
 
-        public function get penalty():uint
-        {
-            return this._penalty;
-        }
+      private var _equipment:int;
 
-        internal var _roleLevel:uint;
+      private var _optDevs:int;
 
-        internal var _common:int;
+      private var _penalty:int;
 
-        internal var _brotherhood:int;
+      public function get roleLevel() : uint {
+         return this._roleLevel;
+      }
 
-        internal var _equipment:int;
+      public function get common() : uint {
+         return this._common;
+      }
 
-        internal var _optDevs:int;
+      public function get brotherhood() : uint {
+         return this._brotherhood;
+      }
 
-        internal var _penalty:int;
-    }
+      public function get equipment() : uint {
+         return this._equipment;
+      }
+
+      public function get optDevs() : uint {
+         return this._optDevs;
+      }
+
+      public function get penalty() : uint {
+         return this._penalty;
+      }
+   }
+
 }

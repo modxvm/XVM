@@ -1,60 +1,66 @@
-package net.wg.gui.lobby.profile.pages.statistics 
+package net.wg.gui.lobby.profile.pages.statistics
 {
-    import net.wg.gui.lobby.profile.components.chart.*;
-    import scaleform.clik.interfaces.*;
-    
-    public class StatisticsBarChart extends net.wg.gui.lobby.profile.components.chart.AxisChart
-    {
-        public function StatisticsBarChart()
-        {
-            super();
-            var loc1:*=new net.wg.gui.lobby.profile.pages.statistics.StatisticBarChartLayout();
-            loc1.paddingRight = 26;
-            loc1.paddingLeft = 27;
-            loc1.gap = 18;
-            currentLayout = loc1;
-            horizontalAxis = this.mainHorizontalAxis;
+   import net.wg.gui.lobby.profile.components.chart.AxisChart;
+   import scaleform.clik.interfaces.IDataProvider;
+
+
+   public class StatisticsBarChart extends AxisChart
+   {
+          
+      public function StatisticsBarChart() {
+         super();
+         var _loc1_:StatisticBarChartLayout = new StatisticBarChartLayout();
+         _loc1_.paddingRight = 26;
+         _loc1_.paddingLeft = 27;
+         _loc1_.gap = 18;
+         currentLayout = _loc1_;
+         horizontalAxis = this.mainHorizontalAxis;
+         this.initializer = new StatisticBarChartInitializer(this);
+      }
+
+      private static const percent100:uint = 100;
+
+      public var mainHorizontalAxis:StatisticsBarChartAxis;
+
+      private var initializer:StatisticBarChartInitializer;
+
+      override public function set dataProvider(param1:IDataProvider) : void {
+         var _loc3_:StatisticChartInfo = null;
+         if(!param1)
+         {
             return;
-        }
-
-        public override function set dataProvider(arg1:scaleform.clik.interfaces.IDataProvider):void
-        {
-            var loc2:*=null;
-            if (!arg1) 
+         }
+         var _loc2_:Number = 0;
+         var _loc4_:uint = param1.length;
+         var _loc5_:* = 0;
+         while(_loc5_ < _loc4_)
+         {
+            _loc3_ = param1[_loc5_];
+            if(_loc2_ < _loc3_.yField)
             {
-                return;
+               _loc2_ = Number(_loc3_.yField);
             }
-            var loc1:*=0;
-            var loc3:*=arg1.length;
-            var loc4:*=0;
-            while (loc4 < loc3) 
-            {
-                loc2 = arg1[loc4];
-                if (loc1 < loc2.yField) 
-                {
-                    loc1 = Number(loc2.yField);
-                }
-                this.adjustProviderItem(loc2, loc4);
-                ++loc4;
-            }
-            loc4 = 0;
-            while (loc4 < loc3) 
-            {
-                loc2 = arg1[loc4];
-                loc2.percentValue = Math.round(Number(loc2.yField) / loc1 * percent100);
-                ++loc4;
-            }
-            super.dataProvider = arg1;
-            return;
-        }
+            this.adjustProviderItem(_loc3_,_loc5_);
+            _loc5_++;
+         }
+         _loc5_ = 0;
+         while(_loc5_ < _loc4_)
+         {
+            _loc3_ = param1[_loc5_];
+            _loc3_.percentValue = Math.round(Number(_loc3_.yField) / _loc2_ * percent100);
+            _loc5_++;
+         }
+         super.dataProvider = param1;
+      }
 
-        protected function adjustProviderItem(arg1:net.wg.gui.lobby.profile.pages.statistics.StatisticChartInfo, arg2:int):void
-        {
-            return;
-        }
+      protected function adjustProviderItem(param1:StatisticChartInfo, param2:int) : void {
+          
+      }
 
-        internal static const percent100:uint=100;
+      override public function dispose() : void {
+         this.initializer.dispose();
+         super.dispose();
+      }
+   }
 
-        public var mainHorizontalAxis:net.wg.gui.lobby.profile.pages.statistics.StatisticsBarChartAxis;
-    }
 }

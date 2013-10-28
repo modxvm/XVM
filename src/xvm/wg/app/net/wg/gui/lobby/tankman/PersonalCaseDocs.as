@@ -1,242 +1,219 @@
-package net.wg.gui.lobby.tankman 
+package net.wg.gui.lobby.tankman
 {
-    import flash.events.*;
-    import net.wg.data.constants.*;
-    import net.wg.gui.components.carousels.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.events.*;
-    import net.wg.infrastructure.interfaces.*;
-    import scaleform.clik.core.*;
-    import scaleform.clik.data.*;
-    import scaleform.clik.events.*;
-    
-    public class PersonalCaseDocs extends scaleform.clik.core.UIComponent implements net.wg.infrastructure.interfaces.IViewStackContent
-    {
-        public function PersonalCaseDocs()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import net.wg.infrastructure.interfaces.IViewStackContent;
+   import net.wg.gui.components.controls.IconText;
+   import net.wg.gui.components.controls.SoundButtonEx;
+   import net.wg.gui.components.carousels.PortraitsCarousel;
+   import scaleform.clik.events.ButtonEvent;
+   import scaleform.clik.events.ListEvent;
+   import scaleform.clik.data.DataProvider;
+   import net.wg.gui.components.carousels.CarouselBase;
+   import net.wg.data.constants.Currencies;
+   import flash.events.Event;
+   import net.wg.gui.events.PersonalCaseEvent;
 
-        protected override function draw():void
-        {
-            super.draw();
-            return;
-        }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.submitBtn.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.submitBtn_buttonClickHandler);
-            this.firstnames.addEventListener(net.wg.gui.lobby.tankman.PersonalCaseInputList.NAME_SELECTED, this.firstnames_nameSelectedHandler);
-            this.lastnames.addEventListener(net.wg.gui.lobby.tankman.PersonalCaseInputList.NAME_SELECTED, this.lastnames_nameSelectedHandler);
-            return;
-        }
+   public class PersonalCaseDocs extends UIComponent implements IViewStackContent
+   {
+          
+      public function PersonalCaseDocs() {
+         super();
+      }
 
-        public override function dispose():void
-        {
-            super.dispose();
-            if (this.submitBtn) 
-            {
-                this.submitBtn.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.submitBtn_buttonClickHandler);
-            }
-            if (this.firstnames) 
-            {
-                this.firstnames.removeEventListener(net.wg.gui.lobby.tankman.PersonalCaseInputList.NAME_SELECTED, this.firstnames_nameSelectedHandler);
-                this.firstnames.dispose();
-            }
-            if (this.lastnames) 
-            {
-                this.lastnames.removeEventListener(net.wg.gui.lobby.tankman.PersonalCaseInputList.NAME_SELECTED, this.lastnames_nameSelectedHandler);
-                this.lastnames.dispose();
-            }
-            if (this.portraitsCarousel) 
-            {
-                this.portraitsCarousel.removeEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.portraitsCarousel_listIndexChangeHandler);
-                this.portraitsCarousel.dispose();
-                this.portraitsCarousel = null;
-            }
-            this.cleanTempData();
-            this.firstnames = null;
-            this.lastnames = null;
-            this.model = null;
-            this.submitBtn = null;
-            this.gold = null;
-            this.credits = null;
-            return;
-        }
+      public var gold:IconText = null;
 
-        internal function cleanTempData():void
-        {
-            this.selectedFirstName = null;
-            this.selectedLastName = null;
+      public var credits:IconText = null;
+
+      public var submitBtn:SoundButtonEx = null;
+
+      public var firstnames:PersonalCaseInputList = null;
+
+      public var lastnames:PersonalCaseInputList = null;
+
+      public var portraitsCarousel:PortraitsCarousel = null;
+
+      private var model:PersonalCaseDocsModel = null;
+
+      private var isDataProviderUpdated:Boolean = false;
+
+      private var selectedFirstName:Object = null;
+
+      private var selectedLastName:Object = null;
+
+      private var selectedIcon:Object = null;
+
+      override protected function draw() : void {
+         super.draw();
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.submitBtn.addEventListener(ButtonEvent.CLICK,this.submitBtn_buttonClickHandler);
+         this.firstnames.addEventListener(PersonalCaseInputList.NAME_SELECTED,this.firstnames_nameSelectedHandler);
+         this.lastnames.addEventListener(PersonalCaseInputList.NAME_SELECTED,this.lastnames_nameSelectedHandler);
+      }
+
+      override public function dispose() : void {
+         super.dispose();
+         if(this.submitBtn)
+         {
+            this.submitBtn.removeEventListener(ButtonEvent.CLICK,this.submitBtn_buttonClickHandler);
+         }
+         if(this.firstnames)
+         {
+            this.firstnames.removeEventListener(PersonalCaseInputList.NAME_SELECTED,this.firstnames_nameSelectedHandler);
+            this.firstnames.dispose();
+         }
+         if(this.lastnames)
+         {
+            this.lastnames.removeEventListener(PersonalCaseInputList.NAME_SELECTED,this.lastnames_nameSelectedHandler);
+            this.lastnames.dispose();
+         }
+         if(this.portraitsCarousel)
+         {
+            this.portraitsCarousel.removeEventListener(ListEvent.INDEX_CHANGE,this.portraitsCarousel_listIndexChangeHandler);
+            this.portraitsCarousel.dispose();
+            this.portraitsCarousel = null;
+         }
+         this.cleanTempData();
+         this.firstnames = null;
+         this.lastnames = null;
+         this.model = null;
+         this.submitBtn = null;
+         this.gold = null;
+         this.credits = null;
+      }
+
+      private function cleanTempData() : void {
+         this.selectedFirstName = null;
+         this.selectedLastName = null;
+         this.selectedIcon = null;
+      }
+
+      public function update(param1:Object) : void {
+         if(param1 == null)
+         {
+            return;
+         }
+         this.model = param1 as PersonalCaseDocsModel;
+         this.cleanTempData();
+         this.firstnames.updateData(this.model.firstNames,this.model.currentTankmanFirstName);
+         this.firstnames.searchText.maxChars = this.model.fistNameMaxChars;
+         this.lastnames.updateData(this.model.lastNames,this.model.currentTankmanLastName);
+         this.lastnames.searchText.maxChars = this.model.lastNameMaxChars;
+         this.gold.text = this.model.priceOfGold.toString();
+         this.credits.text = this.model.priveOfCredits.toString();
+         this.updateTextColor();
+         this.submitBtn.enabled = false;
+         if(!this.isDataProviderUpdated)
+         {
+            this.updatePortraitsDocs();
+            this.isDataProviderUpdated = true;
+         }
+      }
+
+      private function updatePortraitsDocs() : void {
+         this.portraitsCarousel.addEventListener(ListEvent.INDEX_CHANGE,this.portraitsCarousel_listIndexChangeHandler);
+         this.portraitsCarousel.dataProvider = new DataProvider(this.model.icons);
+         this.portraitsCarousel.invalidate(CarouselBase.INIT_CAROUSEL);
+      }
+
+      private function updateTextColor() : void {
+         var _loc1_:Boolean = this.isHasMoney();
+         this.gold.textColor = _loc1_?Currencies.TEXT_COLORS[Currencies.GOLD]:Currencies.TEXT_COLORS[Currencies.ERROR];
+         this.credits.textColor = this.model.useOnlyGold?Currencies.TEXT_COLORS[Currencies.CREDITS]:_loc1_?Currencies.TEXT_COLORS[Currencies.CREDITS]:Currencies.TEXT_COLORS[Currencies.ERROR];
+      }
+
+      private function isHasMoney() : Boolean {
+         if(this.model.useOnlyGold)
+         {
+            return this.model.userGold >= this.model.priceOfGold;
+         }
+         return this.model.userGold >= this.model.priceOfGold || this.model.userCredits >= this.model.priveOfCredits;
+      }
+
+      private function firstnames_nameSelectedHandler(param1:Event) : void {
+         this.selectedFirstName = this.firstnames.selectedItem;
+         this.checkSelectedItems();
+      }
+
+      private function lastnames_nameSelectedHandler(param1:Event) : void {
+         this.selectedLastName = this.lastnames.selectedItem;
+         this.checkSelectedItems();
+      }
+
+      private function checkSelectedItems() : void {
+         this.submitBtn.enabled = this.checkAllData();
+      }
+
+      private function checkAllData() : Boolean {
+         if(!this.isHasMoney())
+         {
+            return false;
+         }
+         if((this.selectedFirstName) && !(this.selectedFirstName.value == this.model.currentTankmanFirstName))
+         {
+            return true;
+         }
+         if((this.selectedLastName) && !(this.selectedLastName.value == this.model.currentTankmanLastName))
+         {
+            return true;
+         }
+         if((this.selectedIcon) && (this.checkOriginalIcon(this.selectedIcon.value)))
+         {
+            return true;
+         }
+         return false;
+      }
+
+      private function submitBtn_buttonClickHandler(param1:ButtonEvent) : void {
+         var _loc3_:String = null;
+         var _loc4_:* = 0;
+         var _loc5_:* = 0;
+         var _loc6_:String = null;
+         var _loc2_:PersonalCaseEvent = new PersonalCaseEvent(PersonalCaseEvent.CHANGE_PASSPORT,true);
+         _loc2_.newTankmanFirstName = this.selectedFirstName?this.selectedFirstName:this.firstnames.selectedItem;
+         _loc2_.newTankmanLastName = this.selectedLastName?this.selectedLastName:this.lastnames.selectedItem;
+         if(!this.selectedIcon)
+         {
+            _loc3_ = this.model.originalIconFile;
+            _loc4_ = _loc3_.lastIndexOf("-") + 1;
+            _loc5_ = _loc3_.lastIndexOf(".");
+            _loc6_ = _loc3_.substr(_loc4_,_loc5_ - _loc4_);
+            this.selectedIcon = {};
+            this.selectedIcon.id = parseInt(_loc6_);
+            this.selectedIcon.value = "fake";
+         }
+         _loc2_.newIcon = this.selectedIcon;
+         dispatchEvent(_loc2_);
+      }
+
+      private function portraitsCarousel_listIndexChangeHandler(param1:ListEvent) : void {
+         if(param1.itemData == null)
+         {
+            return;
+         }
+         if((param1.itemData) && (this.checkOriginalIcon(param1.itemData.value)))
+         {
+            this.selectedIcon = {};
+            this.selectedIcon.id = param1.itemData.id;
+            this.selectedIcon.value = param1.itemData.value;
+         }
+         else
+         {
             this.selectedIcon = null;
-            return;
-        }
+         }
+         this.checkSelectedItems();
+      }
 
-        public function update(arg1:Object):void
-        {
-            if (arg1 == null) 
-            {
-                return;
-            }
-            this.model = arg1 as net.wg.gui.lobby.tankman.PersonalCaseDocsModel;
-            this.cleanTempData();
-            this.firstnames.updateData(this.model.firstNames, this.model.currentTankmanFirstName);
-            this.firstnames.searchText.maxChars = this.model.fistNameMaxChars;
-            this.lastnames.updateData(this.model.lastNames, this.model.currentTankmanLastName);
-            this.lastnames.searchText.maxChars = this.model.lastNameMaxChars;
-            this.gold.text = this.model.priceOfGold.toString();
-            this.credits.text = this.model.priveOfCredits.toString();
-            this.updateTextColor();
-            this.submitBtn.enabled = false;
-            if (!this.isDataProviderUpdated) 
-            {
-                this.updatePortraitsDocs();
-                this.isDataProviderUpdated = true;
-            }
-            return;
-        }
+      private function checkOriginalIcon(param1:String=null) : Boolean {
+         if(this.model.originalIconFile.indexOf(param1,0) == -1)
+         {
+            return true;
+         }
+         return false;
+      }
+   }
 
-        internal function updatePortraitsDocs():void
-        {
-            this.portraitsCarousel.addEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.portraitsCarousel_listIndexChangeHandler);
-            this.portraitsCarousel.dataProvider = new scaleform.clik.data.DataProvider(this.model.icons);
-            this.portraitsCarousel.invalidate(net.wg.gui.components.carousels.CarouselBase.INIT_CAROUSEL);
-            return;
-        }
-
-        internal function updateTextColor():void
-        {
-            var loc1:*=this.isHasMoney();
-            this.gold.textColor = loc1 ? net.wg.data.constants.Currencies.TEXT_COLORS[net.wg.data.constants.Currencies.GOLD] : net.wg.data.constants.Currencies.TEXT_COLORS[net.wg.data.constants.Currencies.ERROR];
-            this.credits.textColor = this.model.useOnlyGold ? net.wg.data.constants.Currencies.TEXT_COLORS[net.wg.data.constants.Currencies.CREDITS] : loc1 ? net.wg.data.constants.Currencies.TEXT_COLORS[net.wg.data.constants.Currencies.CREDITS] : net.wg.data.constants.Currencies.TEXT_COLORS[net.wg.data.constants.Currencies.ERROR];
-            return;
-        }
-
-        internal function isHasMoney():Boolean
-        {
-            if (this.model.useOnlyGold) 
-            {
-                return this.model.userGold >= this.model.priceOfGold;
-            }
-            return this.model.userGold >= this.model.priceOfGold || this.model.userCredits >= this.model.priveOfCredits;
-        }
-
-        internal function firstnames_nameSelectedHandler(arg1:flash.events.Event):void
-        {
-            this.selectedFirstName = this.firstnames.selectedItem;
-            this.checkSelectedItems();
-            return;
-        }
-
-        internal function lastnames_nameSelectedHandler(arg1:flash.events.Event):void
-        {
-            this.selectedLastName = this.lastnames.selectedItem;
-            this.checkSelectedItems();
-            return;
-        }
-
-        internal function checkSelectedItems():void
-        {
-            this.submitBtn.enabled = this.checkAllData();
-            return;
-        }
-
-        internal function checkAllData():Boolean
-        {
-            if (!this.isHasMoney()) 
-            {
-                return false;
-            }
-            if (this.selectedFirstName && !(this.selectedFirstName.value == this.model.currentTankmanFirstName)) 
-            {
-                return true;
-            }
-            if (this.selectedLastName && !(this.selectedLastName.value == this.model.currentTankmanLastName)) 
-            {
-                return true;
-            }
-            if (this.selectedIcon && this.checkOriginalIcon(this.selectedIcon.value)) 
-            {
-                return true;
-            }
-            return false;
-        }
-
-        internal function submitBtn_buttonClickHandler(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            var loc2:*=null;
-            var loc3:*=0;
-            var loc4:*=0;
-            var loc5:*=null;
-            var loc1:*=new net.wg.gui.events.PersonalCaseEvent(net.wg.gui.events.PersonalCaseEvent.CHANGE_PASSPORT, true);
-            loc1.newTankmanFirstName = this.selectedFirstName ? this.selectedFirstName : this.firstnames.selectedItem;
-            loc1.newTankmanLastName = this.selectedLastName ? this.selectedLastName : this.lastnames.selectedItem;
-            if (!this.selectedIcon) 
-            {
-                loc2 = this.model.originalIconFile;
-                loc3 = loc2.lastIndexOf("-") + 1;
-                loc4 = loc2.lastIndexOf(".");
-                loc5 = loc2.substr(loc3, loc4 - loc3);
-                this.selectedIcon = {};
-                this.selectedIcon.id = parseInt(loc5);
-                this.selectedIcon.value = "fake";
-            }
-            loc1.newIcon = this.selectedIcon;
-            dispatchEvent(loc1);
-            return;
-        }
-
-        internal function portraitsCarousel_listIndexChangeHandler(arg1:scaleform.clik.events.ListEvent):void
-        {
-            if (arg1.itemData == null) 
-            {
-                return;
-            }
-            if (arg1.itemData && this.checkOriginalIcon(arg1.itemData.value)) 
-            {
-                this.selectedIcon = {};
-                this.selectedIcon.id = arg1.itemData.id;
-                this.selectedIcon.value = arg1.itemData.value;
-            }
-            else 
-            {
-                this.selectedIcon = null;
-            }
-            this.checkSelectedItems();
-            return;
-        }
-
-        internal function checkOriginalIcon(arg1:String=null):Boolean
-        {
-            if (this.model.originalIconFile.indexOf(arg1, 0) == -1) 
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public var gold:net.wg.gui.components.controls.IconText=null;
-
-        public var credits:net.wg.gui.components.controls.IconText=null;
-
-        public var submitBtn:net.wg.gui.components.controls.SoundButtonEx=null;
-
-        public var firstnames:net.wg.gui.lobby.tankman.PersonalCaseInputList=null;
-
-        public var lastnames:net.wg.gui.lobby.tankman.PersonalCaseInputList=null;
-
-        public var portraitsCarousel:net.wg.gui.components.carousels.PortraitsCarousel=null;
-
-        internal var model:net.wg.gui.lobby.tankman.PersonalCaseDocsModel=null;
-
-        internal var isDataProviderUpdated:Boolean=false;
-
-        internal var selectedFirstName:Object=null;
-
-        internal var selectedLastName:Object=null;
-
-        internal var selectedIcon:Object=null;
-    }
 }

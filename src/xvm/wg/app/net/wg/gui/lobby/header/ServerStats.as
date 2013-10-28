@@ -1,98 +1,81 @@
-package net.wg.gui.lobby.header 
+package net.wg.gui.lobby.header
 {
-    import flash.display.*;
-    import flash.events.*;
-    import net.wg.utils.*;
-    import scaleform.clik.core.*;
-    
-    public class ServerStats extends scaleform.clik.core.UIComponent
-    {
-        public function ServerStats()
-        {
-            super();
-            visible = false;
-            this.players_online.useHandCursor = false;
-            this.players_online.addEventListener(flash.events.MouseEvent.ROLL_OVER, this.showPlayersTooltip);
-            this.players_online.addEventListener(flash.events.MouseEvent.ROLL_OUT, this.hideTooltip);
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.display.MovieClip;
+   import net.wg.utils.ILocale;
+   import flash.events.MouseEvent;
 
-        public override function dispose():void
-        {
-            super.dispose();
-            this.players_online.removeEventListener(flash.events.MouseEvent.ROLL_OVER, this.showPlayersTooltip);
-            this.players_online.removeEventListener(flash.events.MouseEvent.ROLL_OUT, this.hideTooltip);
-            return;
-        }
 
-        public function setValues(arg1:Object):void
-        {
-            var loc1:*=arg1.regionCCU == undefined ? 0 : arg1.regionCCU;
-            var loc2:*=arg1.clusterCCU == undefined ? 0 : arg1.clusterCCU;
-            var loc3:*="";
-            var loc4:*=App.utils.locale;
-            if (loc2 != loc1) 
-            {
-                this.tooltipType = TYPE_FULL;
-                loc3 = !(loc2 == 0) && !(loc1 == 0) ? loc4.integer(loc2) + " / " + loc4.integer(loc1) : "";
-            }
-            else 
-            {
-                this.tooltipType = TYPE_CLUSTER;
-                loc3 = loc2 == 0 ? "" : loc4.integer(loc2);
-            }
-            this.players_online.pCount.text = loc3;
-            this.visible = !(loc3 == "");
-            return;
-        }
+   public class ServerStats extends UIComponent
+   {
+          
+      public function ServerStats() {
+         super();
+         visible = false;
+         this.players_online.useHandCursor = false;
+         this.players_online.addEventListener(MouseEvent.ROLL_OVER,this.showPlayersTooltip);
+         this.players_online.addEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
+      }
 
-        public function hideTooltip(arg1:Object):void
-        {
-            App.toolTipMgr.hide();
-            return;
-        }
+      private static const TYPE_CLUSTER:String = "clusterCCU";
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            visible = App.instance.globalVarsMgr.isShowServerStatsS();
-            return;
-        }
+      private static const TYPE_FULL:String = "regionCCU/clusterCCU";
 
-        public function showPlayersTooltip(arg1:flash.events.MouseEvent):void
-        {
-            var loc1:*=this.tooltipType;
-            switch (loc1) 
-            {
-                case TYPE_CLUSTER:
-                {
-                    App.toolTipMgr.showComplex(TOOLTIPS.HEADER_INFO_PLAYERS_ONLINE_REGION);
-                    break;
-                }
-                case TYPE_FULL:
-                {
-                    App.toolTipMgr.showComplex(this.tooltipFullData);
-                    break;
-                }
-                default:
-                {
-                    App.toolTipMgr.showComplex(TOOLTIPS.HEADER_INFO_PLAYERS_ONLINE_REGION);
-                    break;
-                }
-            }
-            return;
-        }
+      public var players_online:MovieClip;
 
-        internal static const TYPE_CLUSTER:String="clusterCCU";
+      public var tooltipType:String = "regionCCU/clusterCCU";
 
-        internal static const TYPE_FULL:String="regionCCU/clusterCCU";
+      public var tooltipFullData:String = "";
 
-        public var players_online:flash.display.MovieClip;
+      private var locale:ILocale;
 
-        public var tooltipType:String="regionCCU/clusterCCU";
+      override public function dispose() : void {
+         super.dispose();
+         this.players_online.removeEventListener(MouseEvent.ROLL_OVER,this.showPlayersTooltip);
+         this.players_online.removeEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
+      }
 
-        public var tooltipFullData:String="";
+      public function setValues(param1:Object) : void {
+         var _loc2_:Number = param1.regionCCU != undefined?param1.regionCCU:0;
+         var _loc3_:Number = param1.clusterCCU != undefined?param1.clusterCCU:0;
+         var _loc4_:* = "";
+         var _loc5_:ILocale = App.utils.locale;
+         if(_loc3_ == _loc2_)
+         {
+            this.tooltipType = TYPE_CLUSTER;
+            _loc4_ = _loc3_ != 0?_loc5_.integer(_loc3_):"";
+         }
+         else
+         {
+            this.tooltipType = TYPE_FULL;
+            _loc4_ = !(_loc3_ == 0) && !(_loc2_ == 0)?_loc5_.integer(_loc3_) + " / " + _loc5_.integer(_loc2_):"";
+         }
+         this.players_online.pCount.text = _loc4_;
+         this.visible = !(_loc4_ == "");
+      }
 
-        internal var locale:net.wg.utils.ILocale;
-    }
+      public function hideTooltip(param1:Object) : void {
+         App.toolTipMgr.hide();
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         visible = App.instance.globalVarsMgr.isShowServerStatsS();
+      }
+
+      public function showPlayersTooltip(param1:MouseEvent) : void {
+         switch(this.tooltipType)
+         {
+            case TYPE_CLUSTER:
+               App.toolTipMgr.showComplex(TOOLTIPS.HEADER_INFO_PLAYERS_ONLINE_REGION);
+               break;
+            case TYPE_FULL:
+               App.toolTipMgr.showComplex(this.tooltipFullData);
+               break;
+            default:
+               App.toolTipMgr.showComplex(TOOLTIPS.HEADER_INFO_PLAYERS_ONLINE_REGION);
+         }
+      }
+   }
+
 }

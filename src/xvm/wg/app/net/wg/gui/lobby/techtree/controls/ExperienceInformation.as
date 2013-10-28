@@ -1,170 +1,168 @@
-package net.wg.gui.lobby.techtree.controls 
+package net.wg.gui.lobby.techtree.controls
 {
-    import flash.text.*;
-    import net.wg.gui.lobby.techtree.*;
-    import net.wg.gui.lobby.techtree.constants.*;
-    import net.wg.gui.lobby.techtree.interfaces.*;
-    
-    public class ExperienceInformation extends net.wg.gui.lobby.techtree.controls.NodeComponent
-    {
-        public function ExperienceInformation()
-        {
-            super();
+   import flash.text.TextField;
+   import net.wg.gui.components.controls.WalletResourcesStatus;
+   import net.wg.gui.lobby.techtree.interfaces.IRenderer;
+   import net.wg.gui.lobby.techtree.TechTreeEvent;
+   import net.wg.gui.lobby.techtree.constants.TTInvalidationType;
+   import net.wg.gui.lobby.techtree.constants.XpTypeStrings;
+   import net.wg.gui.lobby.techtree.constants.NodeState;
+
+
+   public class ExperienceInformation extends NodeComponent
+   {
+          
+      public function ExperienceInformation() {
+         super();
+      }
+
+      private var _freeXP:Number = 0;
+
+      public var vehXPLabel:TextField;
+
+      public var vehXPIcon:XPIcon;
+
+      public var vehXPField:TextField;
+
+      public var freeXPLabel:TextField;
+
+      public var freeXPField:TextField;
+
+      public var totalXPLabel:TextField;
+
+      public var vehXPInTotalIcon:XPIcon;
+
+      public var totalXPField:TextField;
+
+      public var haveNotFreeXp:WalletResourcesStatus;
+
+      override public function dispose() : void {
+         this.haveNotFreeXp.dispose();
+         this.haveNotFreeXp = null;
+         super.dispose();
+      }
+
+      override public function setOwner(param1:IRenderer, param2:Boolean=false) : void {
+         if(_owner != null)
+         {
+            _owner.removeEventListener(TechTreeEvent.STATE_CHANGED,this.handleOwnerStateChanged);
+         }
+         super.setOwner(param1);
+         if(_owner != null)
+         {
+            _owner.addEventListener(TechTreeEvent.STATE_CHANGED,this.handleOwnerStateChanged,false,0,true);
+         }
+         invalidate(TTInvalidationType.ELITE,TTInvalidationType.VEH_XP);
+      }
+
+      public function setFreeXP(param1:Number) : void {
+         if(this._freeXP == param1)
+         {
             return;
-        }
+         }
+         this._freeXP = param1;
+         invalidate(TTInvalidationType.FREE_XP);
+      }
 
-        public override function setOwner(arg1:net.wg.gui.lobby.techtree.interfaces.IRenderer, arg2:Boolean=false):void
-        {
-            if (_owner != null) 
-            {
-                _owner.removeEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.STATE_CHANGED, this.handleOwnerStateChanged);
-            }
-            super.setOwner(arg1);
-            if (_owner != null) 
-            {
-                _owner.addEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.STATE_CHANGED, this.handleOwnerStateChanged, false, 0, true);
-            }
-            invalidate(net.wg.gui.lobby.techtree.constants.TTInvalidationType.ELITE, net.wg.gui.lobby.techtree.constants.TTInvalidationType.VEH_XP);
+      public function setWalletStatus() : void {
+         this.freeXPField.visible = !this.haveNotFreeXp.updateStatus(App.utils.voMgr.walletStatusVO.freeXpStatus);
+      }
+
+      override protected function configUI() : void {
+         if(this.vehXPLabel != null)
+         {
+            this.vehXPLabel.text = MENU.RESEARCH_LABELS_VEHXP;
+         }
+         if(this.freeXPLabel != null)
+         {
+            this.freeXPLabel.text = MENU.RESEARCH_LABELS_FREEXP;
+         }
+         if(this.totalXPLabel != null)
+         {
+            this.totalXPLabel.text = MENU.RESEARCH_LABELS_TOTALXP;
+         }
+         super.configUI();
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         if(_owner == null)
+         {
             return;
-        }
+         }
+         if(isInvalid(TTInvalidationType.ELITE))
+         {
+            this.changeStars();
+         }
+         var _loc1_:Boolean = isInvalid(TTInvalidationType.VEH_XP,TTInvalidationType.FREE_XP);
+         if(_loc1_)
+         {
+            this.makeVehXPString();
+            this.makeFreeXPString();
+            this.makeTotalXPString();
+         }
+      }
 
-        public function setFreeXP(arg1:Number):void
-        {
-            if (this._freeXP == arg1) 
+      private function changeStars() : void {
+         var _loc1_:String = _owner.isElite()?XpTypeStrings.ELITE_XP_TYPE:XpTypeStrings.EARNED_XP_TYPE;
+         this.vehXPIcon.type = _loc1_;
+         this.vehXPInTotalIcon.type = _loc1_;
+      }
+
+      private function makeVehXPString() : void {
+         var _loc2_:String = null;
+         var _loc1_:Number = _owner.getEarnedXP();
+         if(App.utils != null)
+         {
+            _loc2_ = App.utils.locale.integer(_loc1_);
+         }
+         else
+         {
+            _loc2_ = _loc1_.toString();
+         }
+         this.vehXPField.text = _loc2_;
+      }
+
+      private function makeFreeXPString() : void {
+         var _loc1_:String = null;
+         if(App.utils != null)
+         {
+            _loc1_ = App.utils.locale.integer(this._freeXP);
+         }
+         else
+         {
+            _loc1_ = this._freeXP.toString();
+         }
+         this.freeXPField.text = _loc1_;
+      }
+
+      private function makeTotalXPString() : void {
+         var _loc2_:String = null;
+         var _loc1_:Number = _owner.getEarnedXP() + Math.max(0,this._freeXP);
+         if(App.utils != null)
+         {
+            _loc2_ = App.utils.locale.integer(_loc1_);
+         }
+         else
+         {
+            _loc2_ = _loc1_.toString();
+         }
+         this.totalXPField.text = _loc2_;
+      }
+
+      private function handleOwnerStateChanged(param1:TechTreeEvent) : void {
+         if(param1.primary == NodeState.ELITE)
+         {
+            invalidate(TTInvalidationType.ELITE);
+         }
+         else
+         {
+            if(param1.primary == 0)
             {
-                return;
+               invalidate(TTInvalidationType.VEH_XP);
             }
-            this._freeXP = arg1;
-            invalidate(net.wg.gui.lobby.techtree.constants.TTInvalidationType.FREE_XP);
-            return;
-        }
+         }
+      }
+   }
 
-        protected override function configUI():void
-        {
-            if (this.vehXPLabel != null) 
-            {
-                this.vehXPLabel.text = MENU.RESEARCH_LABELS_VEHXP;
-            }
-            if (this.freeXPLabel != null) 
-            {
-                this.freeXPLabel.text = MENU.RESEARCH_LABELS_FREEXP;
-            }
-            if (this.totalXPLabel != null) 
-            {
-                this.totalXPLabel.text = MENU.RESEARCH_LABELS_TOTALXP;
-            }
-            super.configUI();
-            return;
-        }
-
-        protected override function draw():void
-        {
-            super.draw();
-            if (_owner == null) 
-            {
-                return;
-            }
-            if (isInvalid(net.wg.gui.lobby.techtree.constants.TTInvalidationType.ELITE)) 
-            {
-                this.changeStars();
-            }
-            var loc1:*=isInvalid(net.wg.gui.lobby.techtree.constants.TTInvalidationType.VEH_XP, net.wg.gui.lobby.techtree.constants.TTInvalidationType.FREE_XP);
-            if (loc1) 
-            {
-                this.makeVehXPString();
-                this.makeFreeXPString();
-                this.makeTotalXPString();
-            }
-            return;
-        }
-
-        internal function changeStars():void
-        {
-            var loc1:*=_owner.isElite() ? net.wg.gui.lobby.techtree.constants.XpTypeStrings.ELITE_XP_TYPE : net.wg.gui.lobby.techtree.constants.XpTypeStrings.EARNED_XP_TYPE;
-            this.vehXPIcon.type = loc1;
-            this.vehXPInTotalIcon.type = loc1;
-            return;
-        }
-
-        internal function makeVehXPString():void
-        {
-            var loc2:*=null;
-            var loc1:*=_owner.getEarnedXP();
-            if (App.utils == null) 
-            {
-                loc2 = loc1.toString();
-            }
-            else 
-            {
-                loc2 = App.utils.locale.integer(loc1);
-            }
-            this.vehXPField.text = loc2;
-            return;
-        }
-
-        internal function makeFreeXPString():void
-        {
-            var loc1:*=null;
-            if (App.utils == null) 
-            {
-                loc1 = this._freeXP.toString();
-            }
-            else 
-            {
-                loc1 = App.utils.locale.integer(this._freeXP);
-            }
-            this.freeXPField.text = loc1;
-            return;
-        }
-
-        internal function makeTotalXPString():void
-        {
-            var loc2:*=null;
-            var loc1:*=_owner.getEarnedXP() + this._freeXP;
-            if (App.utils == null) 
-            {
-                loc2 = loc1.toString();
-            }
-            else 
-            {
-                loc2 = App.utils.locale.integer(loc1);
-            }
-            this.totalXPField.text = loc2;
-            return;
-        }
-
-        internal function handleOwnerStateChanged(arg1:net.wg.gui.lobby.techtree.TechTreeEvent):void
-        {
-            if (arg1.primary != net.wg.gui.lobby.techtree.constants.NodeState.ELITE) 
-            {
-                if (arg1.primary == 0) 
-                {
-                    invalidate(net.wg.gui.lobby.techtree.constants.TTInvalidationType.VEH_XP);
-                }
-            }
-            else 
-            {
-                invalidate(net.wg.gui.lobby.techtree.constants.TTInvalidationType.ELITE);
-            }
-            return;
-        }
-
-        internal var _freeXP:Number=0;
-
-        public var vehXPLabel:flash.text.TextField;
-
-        public var vehXPIcon:net.wg.gui.lobby.techtree.controls.XPIcon;
-
-        public var vehXPField:flash.text.TextField;
-
-        public var freeXPLabel:flash.text.TextField;
-
-        public var freeXPField:flash.text.TextField;
-
-        public var totalXPLabel:flash.text.TextField;
-
-        public var vehXPInTotalIcon:net.wg.gui.lobby.techtree.controls.XPIcon;
-
-        public var totalXPField:flash.text.TextField;
-    }
 }

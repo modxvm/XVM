@@ -1,18 +1,15 @@
-package net.wg.gui.lobby.window 
+package net.wg.gui.lobby.window
 {
-    public class _Importer extends Object
-    {
-        public function _Importer()
-        {
-            super();
-            return;
-        }
-    }
-}
+   import net.wg.infrastructure.BaseImporter;
 
 
+   public class _Importer extends BaseImporter
+   {
+          
+      public function _Importer() {
+         super();
+         importClasses(Vector.<Class>([ExchangeWindow,ExchangeVcoinWindow,ExchangeCurrencyWindow,ExchangeXPWindow,ExchangeXPFromVehicleIR,ExchangeFreeToTankmanXpWindow,ProfileWindow,ExchangeHeader,ProfileWindowInitVO]));
+      }
+   }
 
-{
-    var loc1:*=net.wg.gui.lobby.window.ExchangeHeader;
-    loc1;
 }

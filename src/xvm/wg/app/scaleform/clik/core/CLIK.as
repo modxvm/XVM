@@ -1,177 +1,155 @@
-package scaleform.clik.core 
+package scaleform.clik.core
 {
-    import __AS3__.vec.*;
-    import flash.display.*;
-    import flash.events.*;
-    import flash.utils.*;
-    import scaleform.clik.managers.*;
-    import scaleform.gfx.*;
-    
-    public dynamic class CLIK extends Object
-    {
-        public function CLIK()
-        {
-            super();
+   import flash.display.Stage;
+   import flash.utils.Dictionary;
+   import __AS3__.vec.Vector;
+   import scaleform.gfx.Extensions;
+   import scaleform.clik.managers.FocusHandler;
+   import scaleform.clik.managers.PopUpManager;
+   import flash.display.DisplayObjectContainer;
+   import flash.events.Event;
+
+
+   public dynamic class CLIK extends Object
+   {
+          
+      public function CLIK() {
+         super();
+      }
+
+      public static var stage:Stage;
+
+      public static var initialized:Boolean = false;
+
+      public static var disableNullFocusMoves:Boolean = false;
+
+      public static var disableDynamicTextFieldFocus:Boolean = false;
+
+      public static var disableTextFieldToNullFocusMoves:Boolean = true;
+
+      public static var useImmediateCallbacks:Boolean = false;
+
+      protected static var isInitListenerActive:Boolean = false;
+
+      protected static var firingInitCallbacks:Boolean = false;
+
+      protected static var initQueue:Dictionary;
+
+      protected static var validDictIndices:Vector.<uint>;
+
+      public static function initialize(param1:Stage, param2:UIComponent) : void {
+         if(initialized)
+         {
             return;
-        }
+         }
+         CLIK.stage = param1;
+         Extensions.enabled = true;
+         initialized = true;
+         FocusHandler.init(param1,param2);
+         PopUpManager.init(param1);
+         initQueue = new Dictionary(true);
+         validDictIndices = new Vector.<uint>();
+      }
 
-        public static function initialize(arg1:flash.display.Stage, arg2:scaleform.clik.core.UIComponent):void
-        {
-            if (initialized) 
+      public static function getTargetPathFor(param1:DisplayObjectContainer) : String {
+         var _loc2_:String = null;
+         if(!param1.parent)
+         {
+            return param1.name;
+         }
+         _loc2_ = param1.name;
+         return getTargetPathImpl(param1.parent as DisplayObjectContainer,_loc2_);
+      }
+
+      public static function queueInitCallback(param1:UIComponent) : void {
+         var _loc3_:Array = null;
+         var _loc4_:uint = 0;
+         var _loc5_:Dictionary = null;
+         var _loc2_:String = getTargetPathFor(param1);
+         if((useImmediateCallbacks) || (firingInitCallbacks))
+         {
+            Extensions.CLIK_addedToStageCallback(param1.name,_loc2_,param1);
+         }
+         else
+         {
+            _loc3_ = _loc2_.split(".");
+            _loc4_ = _loc3_.length-1;
+            _loc5_ = initQueue[_loc4_];
+            if(_loc5_ == null)
             {
-                return;
+               _loc5_ = new Dictionary(true);
+               initQueue[_loc4_] = _loc5_;
+               validDictIndices.push(_loc4_);
+               if(validDictIndices.length > 1)
+               {
+                  validDictIndices.sort(sortFunc);
+               }
             }
-            scaleform.clik.core.CLIK.stage = arg1;
-            scaleform.gfx.Extensions.enabled = true;
-            initialized = true;
-            scaleform.clik.managers.FocusHandler.init(arg1, arg2);
-            scaleform.clik.managers.PopUpManager.init(arg1);
-            initQueue = new flash.utils.Dictionary(true);
-            validDictIndices = new Vector.<uint>();
-            return;
-        }
-
-        public static function getTargetPathFor(arg1:flash.display.DisplayObjectContainer):String
-        {
-            var loc1:*=null;
-            if (!arg1.parent) 
+            _loc5_[param1] = _loc2_;
+            if(!isInitListenerActive)
             {
-                return arg1.name;
+               isInitListenerActive = true;
+               stage.addEventListener(Event.EXIT_FRAME,fireInitCallback,false,0,true);
             }
-            loc1 = arg1.name;
-            return getTargetPathImpl(arg1.parent as flash.display.DisplayObjectContainer, loc1);
-        }
+         }
+      }
 
-        public static function queueInitCallback(arg1:scaleform.clik.core.UIComponent):void
-        {
-            var loc2:*=null;
-            var loc3:*=0;
-            var loc4:*=null;
-            var loc1:*=getTargetPathFor(arg1);
-            if (useImmediateCallbacks || firingInitCallbacks) 
+      protected static function fireInitCallback(param1:Event) : void {
+         var _loc2_:uint = 0;
+         var _loc3_:uint = 0;
+         var _loc4_:Dictionary = null;
+         var _loc5_:Object = null;
+         var _loc6_:UIComponent = null;
+         firingInitCallbacks = true;
+         stage.removeEventListener(Event.EXIT_FRAME,fireInitCallback,false);
+         isInitListenerActive = false;
+         while(_loc2_ < validDictIndices.length)
+         {
+            _loc3_ = validDictIndices[_loc2_];
+            _loc4_ = initQueue[_loc3_] as Dictionary;
+            for (_loc5_ in _loc4_)
             {
-                scaleform.gfx.Extensions.CLIK_addedToStageCallback(arg1.name, loc1, arg1);
+               _loc6_ = _loc5_ as UIComponent;
+               Extensions.CLIK_addedToStageCallback(_loc6_.name,_loc4_[_loc6_],_loc6_);
+               _loc4_[_loc6_] = null;
             }
-            else 
-            {
-                loc2 = loc1.split(".");
-                loc3 = (loc2.length - 1);
-                if ((loc4 = initQueue[loc3]) == null) 
-                {
-                    loc4 = new flash.utils.Dictionary(true);
-                    initQueue[loc3] = loc4;
-                    validDictIndices.push(loc3);
-                    if (validDictIndices.length > 1) 
-                    {
-                        validDictIndices.sort(sortFunc);
-                    }
-                }
-                loc4[arg1] = loc1;
-                if (!isInitListenerActive) 
-                {
-                    isInitListenerActive = true;
-                    stage.addEventListener(flash.events.Event.EXIT_FRAME, fireInitCallback, false, 0, true);
-                }
-            }
-            return;
-        }
+            _loc2_++;
+         }
+         validDictIndices.length = 0;
+         clearQueue();
+         firingInitCallbacks = false;
+      }
 
-        protected static function fireInitCallback(arg1:flash.events.Event):void
-        {
-            var loc1:*=0;
-            var loc2:*=0;
-            var loc3:*=null;
-            var loc4:*=null;
-            var loc5:*=null;
-            firingInitCallbacks = true;
-            stage.removeEventListener(flash.events.Event.EXIT_FRAME, fireInitCallback, false);
-            isInitListenerActive = false;
-            while (loc1 < validDictIndices.length) 
-            {
-                loc2 = validDictIndices[loc1];
-                loc3 = initQueue[loc2] as flash.utils.Dictionary;
-                var loc6:*=0;
-                var loc7:*=loc3;
-                for (loc4 in loc7) 
-                {
-                    loc5 = loc4 as scaleform.clik.core.UIComponent;
-                    scaleform.gfx.Extensions.CLIK_addedToStageCallback(loc5.name, loc3[loc5], loc5);
-                    loc3[loc5] = null;
-                }
-                ++loc1;
-            }
-            validDictIndices.length = 0;
-            clearQueue();
-            firingInitCallbacks = false;
-            return;
-        }
+      protected static function clearQueue() : void {
+         var _loc1_:* = undefined;
+         for (_loc1_ in initQueue)
+         {
+            initQueue[_loc1_] = null;
+         }
+      }
 
-        protected static function clearQueue():void
-        {
-            var loc1:*=undefined;
-            var loc2:*=0;
-            var loc3:*=initQueue;
-            for (loc1 in loc3) 
-            {
-                initQueue[loc1] = null;
-            }
-            return;
-        }
+      protected static function sortFunc(param1:uint, param2:uint) : Number {
+         if(param1 < param2)
+         {
+            return -1;
+         }
+         if(param1 > param2)
+         {
+            return 1;
+         }
+         return 0;
+      }
 
-        protected static function sortFunc(arg1:uint, arg2:uint):Number
-        {
-            if (arg1 < arg2) 
-            {
-                return -1;
-            }
-            if (arg1 > arg2) 
-            {
-                return 1;
-            }
-            return 0;
-        }
+      protected static function getTargetPathImpl(param1:DisplayObjectContainer, param2:String="") : String {
+         var _loc3_:String = null;
+         if(!param1)
+         {
+            return param2;
+         }
+         _loc3_ = param1.name?param1.name + ".":"";
+         var param2:String = _loc3_ + param2;
+         return getTargetPathImpl(param1.parent as DisplayObjectContainer,param2);
+      }
+   }
 
-        protected static function getTargetPathImpl(arg1:flash.display.DisplayObjectContainer, arg2:String=""):String
-        {
-            var loc1:*=null;
-            if (!arg1) 
-            {
-                return arg2;
-            }
-            loc1 = arg1.name ? arg1.name + "." : "";
-            arg2 = loc1 + arg2;
-            return getTargetPathImpl(arg1.parent as flash.display.DisplayObjectContainer, arg2);
-        }
-
-        
-        {
-            initialized = false;
-            disableNullFocusMoves = false;
-            disableDynamicTextFieldFocus = false;
-            disableTextFieldToNullFocusMoves = true;
-            useImmediateCallbacks = false;
-            isInitListenerActive = false;
-            firingInitCallbacks = false;
-        }
-
-        public static var stage:flash.display.Stage;
-
-        public static var initialized:Boolean=false;
-
-        public static var disableNullFocusMoves:Boolean=false;
-
-        public static var disableDynamicTextFieldFocus:Boolean=false;
-
-        public static var disableTextFieldToNullFocusMoves:Boolean=true;
-
-        public static var useImmediateCallbacks:Boolean=false;
-
-        protected static var isInitListenerActive:Boolean=false;
-
-        protected static var firingInitCallbacks:Boolean=false;
-
-        protected static var initQueue:flash.utils.Dictionary;
-
-        protected static var validDictIndices:__AS3__.vec.Vector.<uint>;
-    }
 }

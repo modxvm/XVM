@@ -1,376 +1,314 @@
-package scaleform.clik.controls 
+package scaleform.clik.controls
 {
-    import flash.events.*;
-    import flash.geom.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.core.*;
-    import scaleform.clik.events.*;
-    import scaleform.clik.ui.*;
-    import scaleform.clik.utils.*;
-    
-    public class Slider extends scaleform.clik.core.UIComponent
-    {
-        public function Slider()
-        {
-            super();
+   import scaleform.clik.core.UIComponent;
+   import scaleform.clik.utils.Constraints;
+   import scaleform.clik.constants.ConstrainMode;
+   import scaleform.clik.events.SliderEvent;
+   import scaleform.clik.constants.InvalidationType;
+   import scaleform.clik.events.InputEvent;
+   import scaleform.clik.ui.InputDetails;
+   import scaleform.clik.constants.InputValue;
+   import scaleform.clik.constants.NavigationCode;
+   import flash.events.MouseEvent;
+   import flash.geom.Point;
+   import flash.events.Event;
+
+
+   public class Slider extends UIComponent
+   {
+          
+      public function Slider() {
+         super();
+      }
+
+      public var liveDragging:Boolean = true;
+
+      public var state:String = "default";
+
+      public var offsetLeft:Number = 0;
+
+      public var offsetRight:Number = 0;
+
+      protected var _minimum:Number = 0;
+
+      protected var _maximum:Number = 10;
+
+      protected var _value:Number = 0;
+
+      protected var _snapInterval:Number = 1;
+
+      protected var _snapping:Boolean = false;
+
+      protected var _dragOffset:Object;
+
+      protected var _trackDragMouseIndex:Number;
+
+      protected var _trackPressed:Boolean = false;
+
+      protected var _thumbPressed:Boolean = false;
+
+      public var thumb:Button;
+
+      public var track:Button;
+
+      override protected function preInitialize() : void {
+         constraints = new Constraints(this,ConstrainMode.REFLOW);
+      }
+
+      override protected function initialize() : void {
+         super.initialize();
+         tabChildren = false;
+         mouseEnabled = mouseChildren = this.enabled;
+      }
+
+      override public function get enabled() : Boolean {
+         return super.enabled;
+      }
+
+      override public function set enabled(param1:Boolean) : void {
+         if(param1 == super.enabled)
+         {
             return;
-        }
+         }
+         super.enabled = param1;
+         this.thumb.enabled = this.track.enabled = param1;
+      }
 
-        public function get snapInterval():Number
-        {
-            return this._snapInterval;
-        }
+      override public function get focusable() : Boolean {
+         return _focusable;
+      }
 
-        public function set snapInterval(arg1:Number):void
-        {
-            this._snapInterval = arg1;
-            this.invalidateSettings();
+      override public function set focusable(param1:Boolean) : void {
+         super.focusable = param1;
+         tabChildren = false;
+      }
+
+      public function get value() : Number {
+         return this._value;
+      }
+
+      public function set value(param1:Number) : void {
+         this._value = this.lockValue(param1);
+         dispatchEvent(new SliderEvent(SliderEvent.VALUE_CHANGE,false,true,this._value));
+         this.draw();
+      }
+
+      public function get maximum() : Number {
+         return this._maximum;
+      }
+
+      public function set maximum(param1:Number) : void {
+         this._maximum = param1;
+      }
+
+      public function get minimum() : Number {
+         return this._minimum;
+      }
+
+      public function set minimum(param1:Number) : void {
+         this._minimum = param1;
+      }
+
+      public function get position() : Number {
+         return this._value;
+      }
+
+      public function set position(param1:Number) : void {
+         this._value = param1;
+      }
+
+      public function get snapping() : Boolean {
+         return this._snapping;
+      }
+
+      public function set snapping(param1:Boolean) : void {
+         this._snapping = param1;
+         this.invalidateSettings();
+      }
+
+      public function get snapInterval() : Number {
+         return this._snapInterval;
+      }
+
+      public function set snapInterval(param1:Number) : void {
+         this._snapInterval = param1;
+         this.invalidateSettings();
+      }
+
+      public function invalidateSettings() : void {
+         invalidate(InvalidationType.SETTINGS);
+      }
+
+      override public function handleInput(param1:InputEvent) : void {
+         if(param1.isDefaultPrevented())
+         {
             return;
-        }
+         }
+         var _loc2_:InputDetails = param1.details;
+         var _loc3_:uint = _loc2_.controllerIndex;
+         var _loc4_:Boolean = _loc2_.value == InputValue.KEY_DOWN || _loc2_.value == InputValue.KEY_HOLD;
+         switch(_loc2_.navEquivalent)
+         {
+            case NavigationCode.RIGHT:
+               if(_loc4_)
+               {
+                  this.value = this.value + this._snapInterval;
+                  param1.handled = true;
+               }
+               break;
+            case NavigationCode.LEFT:
+               if(_loc4_)
+               {
+                  this.value = this.value - this._snapInterval;
+                  param1.handled = true;
+               }
+               break;
+            case NavigationCode.HOME:
+               if(!_loc4_)
+               {
+                  this.value = this.minimum;
+                  param1.handled = true;
+               }
+               break;
+            case NavigationCode.END:
+               if(!_loc4_)
+               {
+                  this.value = this.maximum;
+                  param1.handled = true;
+               }
+               break;
+         }
+      }
 
-        public function invalidateSettings():void
-        {
-            invalidate(scaleform.clik.constants.InvalidationType.SETTINGS);
-            return;
-        }
+      override public function toString() : String {
+         return "[CLIK Slider " + name + "]";
+      }
 
-        public override function handleInput(arg1:scaleform.clik.events.InputEvent):void
-        {
-            if (arg1.isDefaultPrevented()) 
+      override protected function configUI() : void {
+         addEventListener(InputEvent.INPUT,this.handleInput,false,0,true);
+         this.thumb.addEventListener(MouseEvent.MOUSE_DOWN,this.beginDrag,false,0,true);
+         this.track.addEventListener(MouseEvent.MOUSE_DOWN,this.trackPress,false,0,true);
+         tabEnabled = true;
+         this.thumb.focusTarget = this.track.focusTarget = this;
+         this.thumb.enabled = this.track.enabled = this.enabled;
+         this.thumb.lockDragStateChange = true;
+         constraints.addElement("track",this.track,Constraints.LEFT | Constraints.RIGHT);
+      }
+
+      override protected function draw() : void {
+         if(isInvalid(InvalidationType.STATE))
+         {
+            gotoAndPlay(!this.enabled?"disabled":_focused?"focused":"default");
+         }
+         if(isInvalid(InvalidationType.SIZE))
+         {
+            setActualSize(_width,_height);
+            constraints.update(_width,_height);
+         }
+         this.updateThumb();
+      }
+
+      override protected function changeFocus() : void {
+         super.changeFocus();
+         invalidateState();
+         if(this.enabled)
+         {
+            if(!this._thumbPressed)
             {
-                return;
+               this.thumb.displayFocus = !(_focused == 0);
             }
-            var loc1:*=arg1.details;
-            var loc2:*=loc1.controllerIndex;
-            var loc3:*=loc1.value == scaleform.clik.constants.InputValue.KEY_DOWN || loc1.value == scaleform.clik.constants.InputValue.KEY_HOLD;
-            var loc4:*=loc1.navEquivalent;
-            switch (loc4) 
+            if(!this._trackPressed)
             {
-                case scaleform.clik.constants.NavigationCode.RIGHT:
-                {
-                    if (loc3) 
-                    {
-                        this.value = this.value + this._snapInterval;
-                        arg1.handled = true;
-                    }
-                    break;
-                }
-                case scaleform.clik.constants.NavigationCode.LEFT:
-                {
-                    if (loc3) 
-                    {
-                        this.value = this.value - this._snapInterval;
-                        arg1.handled = true;
-                    }
-                    break;
-                }
-                case scaleform.clik.constants.NavigationCode.HOME:
-                {
-                    if (!loc3) 
-                    {
-                        this.value = this.minimum;
-                        arg1.handled = true;
-                    }
-                    break;
-                }
-                case scaleform.clik.constants.NavigationCode.END:
-                {
-                    if (!loc3) 
-                    {
-                        this.value = this.maximum;
-                        arg1.handled = true;
-                    }
-                    break;
-                }
-                default:
-                {
-                    break;
-                }
+               this.track.displayFocus = !(_focused == 0);
             }
+         }
+      }
+
+      protected function updateThumb() : void {
+         if(!this.enabled)
+         {
             return;
-        }
+         }
+         var _loc1_:Number = _width - this.offsetLeft - this.offsetRight;
+         this.thumb.x = (this._value - this._minimum) / (this._maximum - this._minimum) * _loc1_ - this.thumb.width / 2 + this.offsetLeft;
+      }
 
-        public function set value(arg1:Number):void
-        {
-            this._value = this.lockValue(arg1);
-            dispatchEvent(new scaleform.clik.events.SliderEvent(scaleform.clik.events.SliderEvent.VALUE_CHANGE, false, true, this._value));
-            this.draw();
+      protected function beginDrag(param1:MouseEvent) : void {
+         this._thumbPressed = true;
+         var _loc2_:Point = globalToLocal(new Point(param1.stageX,param1.stageY));
+         this._dragOffset = {"x":_loc2_.x - this.thumb.x - this.thumb.width / 2};
+         stage.addEventListener(MouseEvent.MOUSE_MOVE,this.doDrag,false,0,true);
+         stage.addEventListener(MouseEvent.MOUSE_UP,this.endDrag,false,0,true);
+      }
+
+      protected function doDrag(param1:MouseEvent) : void {
+         var _loc2_:Point = globalToLocal(new Point(param1.stageX,param1.stageY));
+         var _loc3_:Number = _loc2_.x - this._dragOffset.x;
+         var _loc4_:Number = _width - this.offsetLeft - this.offsetRight;
+         var _loc5_:Number = this.lockValue((_loc3_ - this.offsetLeft) / _loc4_ * (this._maximum - this._minimum) + this._minimum);
+         if(this.value == _loc5_)
+         {
             return;
-        }
+         }
+         this._value = _loc5_;
+         this.updateThumb();
+         if(this.liveDragging)
+         {
+            dispatchEvent(new SliderEvent(SliderEvent.VALUE_CHANGE,false,true,this._value));
+         }
+      }
 
-        public override function toString():String
-        {
-            return "[CLIK Slider " + name + "]";
-        }
+      protected function endDrag(param1:MouseEvent) : void {
+         stage.removeEventListener(MouseEvent.MOUSE_MOVE,this.doDrag,false);
+         stage.removeEventListener(MouseEvent.MOUSE_UP,this.endDrag,false);
+         if(!this.liveDragging)
+         {
+            dispatchEvent(new SliderEvent(SliderEvent.VALUE_CHANGE,false,true,this._value));
+         }
+         this._trackDragMouseIndex = undefined;
+         this._thumbPressed = false;
+         this._trackPressed = false;
+      }
 
-        protected override function configUI():void
-        {
-            addEventListener(scaleform.clik.events.InputEvent.INPUT, this.handleInput, false, 0, true);
-            this.thumb.addEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.beginDrag, false, 0, true);
-            this.track.addEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.trackPress, false, 0, true);
-            tabEnabled = true;
-            var loc1:*;
-            this.track.focusTarget = loc1 = this;
-            this.thumb.focusTarget = loc1;
-            this.track.enabled = loc1 = this.enabled;
-            this.thumb.enabled = loc1;
-            this.thumb.lockDragStateChange = true;
-            constraints.addElement("track", this.track, scaleform.clik.utils.Constraints.LEFT | scaleform.clik.utils.Constraints.RIGHT);
+      protected function trackPress(param1:MouseEvent) : void {
+         this._trackPressed = true;
+         this.track.focused = _focused;
+         var _loc2_:Number = _width - this.offsetLeft - this.offsetRight;
+         var _loc3_:Number = this.lockValue((param1.localX * scaleX - this.offsetLeft) / _loc2_ * (this._maximum - this._minimum) + this._minimum);
+         if(this.value == _loc3_)
+         {
             return;
-        }
+         }
+         this.value = _loc3_;
+         if(!this.liveDragging)
+         {
+            dispatchEvent(new SliderEvent(SliderEvent.VALUE_CHANGE,false,true,this._value));
+         }
+         this._trackDragMouseIndex = 0;
+         this._dragOffset = {"x":0};
+         var _loc4_:MouseEvent = new MouseEvent(MouseEvent.MOUSE_DOWN,false,true);
+         _loc4_.localX = this.thumb.mouseX;
+         _loc4_.localY = this.thumb.mouseY;
+         this.thumb.dispatchEvent(_loc4_);
+      }
 
-        protected override function draw():void
-        {
-            if (isInvalid(scaleform.clik.constants.InvalidationType.STATE)) 
-            {
-                gotoAndPlay(this.enabled ? _focused ? "focused" : "default" : "disabled");
-            }
-            if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
-            {
-                setActualSize(_width, _height);
-                constraints.update(_width, _height);
-            }
-            this.updateThumb();
-            return;
-        }
+      protected function lockValue(param1:Number) : Number {
+         var param1:Number = Math.max(this._minimum,Math.min(this._maximum,param1));
+         if(!this.snapping)
+         {
+            return param1;
+         }
+         var _loc2_:Number = Math.round(param1 / this.snapInterval) * this.snapInterval;
+         return _loc2_;
+      }
 
-        protected override function changeFocus():void
-        {
-            super.changeFocus();
-            invalidateState();
-            if (this.enabled) 
-            {
-                if (!this._thumbPressed) 
-                {
-                    this.thumb.displayFocus = !(_focused == 0);
-                }
-                if (!this._trackPressed) 
-                {
-                    this.track.displayFocus = !(_focused == 0);
-                }
-            }
-            return;
-        }
+      protected function scrollWheel(param1:Number) : void {
+         if(_focused)
+         {
+            this.value = this.value - param1 * this._snapInterval;
+            dispatchEvent(new Event(Event.CHANGE));
+         }
+      }
+   }
 
-        protected function updateThumb():void
-        {
-            if (!this.enabled) 
-            {
-                return;
-            }
-            var loc1:*=_width - this.offsetLeft - this.offsetRight;
-            this.thumb.x = (this._value - this._minimum) / (this._maximum - this._minimum) * loc1 - this.thumb.width / 2 + this.offsetLeft;
-            return;
-        }
-
-        protected function doDrag(arg1:flash.events.MouseEvent):void
-        {
-            var loc1:*=globalToLocal(new flash.geom.Point(arg1.stageX, arg1.stageY));
-            var loc2:*=loc1.x - this._dragOffset.x;
-            var loc3:*=_width - this.offsetLeft - this.offsetRight;
-            var loc4:*=this.lockValue((loc2 - this.offsetLeft) / loc3 * (this._maximum - this._minimum) + this._minimum);
-            if (this.value == loc4) 
-            {
-                return;
-            }
-            this._value = loc4;
-            this.updateThumb();
-            if (this.liveDragging) 
-            {
-                dispatchEvent(new scaleform.clik.events.SliderEvent(scaleform.clik.events.SliderEvent.VALUE_CHANGE, false, true, this._value));
-            }
-            return;
-        }
-
-        protected function endDrag(arg1:flash.events.MouseEvent):void
-        {
-            stage.removeEventListener(flash.events.MouseEvent.MOUSE_MOVE, this.doDrag, false);
-            stage.removeEventListener(flash.events.MouseEvent.MOUSE_UP, this.endDrag, false);
-            if (!this.liveDragging) 
-            {
-                dispatchEvent(new scaleform.clik.events.SliderEvent(scaleform.clik.events.SliderEvent.VALUE_CHANGE, false, true, this._value));
-            }
-            this._trackDragMouseIndex = undefined;
-            this._thumbPressed = false;
-            this._trackPressed = false;
-            return;
-        }
-
-        protected function trackPress(arg1:flash.events.MouseEvent):void
-        {
-            this._trackPressed = true;
-            this.track.focused = _focused;
-            var loc1:*=_width - this.offsetLeft - this.offsetRight;
-            var loc2:*=this.lockValue((arg1.localX * scaleX - this.offsetLeft) / loc1 * (this._maximum - this._minimum) + this._minimum);
-            if (this.value == loc2) 
-            {
-                return;
-            }
-            this.value = loc2;
-            if (!this.liveDragging) 
-            {
-                dispatchEvent(new scaleform.clik.events.SliderEvent(scaleform.clik.events.SliderEvent.VALUE_CHANGE, false, true, this._value));
-            }
-            this._trackDragMouseIndex = 0;
-            this._dragOffset = {"x":0};
-            return;
-        }
-
-        protected function lockValue(arg1:Number):Number
-        {
-            arg1 = Math.max(this._minimum, Math.min(this._maximum, arg1));
-            if (!this.snapping) 
-            {
-                return arg1;
-            }
-            var loc1:*=Math.round(arg1 / this.snapInterval) * this.snapInterval;
-            return loc1;
-        }
-
-        protected function scrollWheel(arg1:Number):void
-        {
-            if (_focused) 
-            {
-                this.value = this.value - arg1 * this._snapInterval;
-                dispatchEvent(new flash.events.Event(flash.events.Event.CHANGE));
-            }
-            return;
-        }
-
-        protected override function preInitialize():void
-        {
-            constraints = new scaleform.clik.utils.Constraints(this, scaleform.clik.constants.ConstrainMode.REFLOW);
-            return;
-        }
-
-        protected override function initialize():void
-        {
-            super.initialize();
-            tabChildren = false;
-            var loc1:*;
-            mouseChildren = loc1 = this.enabled;
-            mouseEnabled = loc1;
-            return;
-        }
-
-        public override function get enabled():Boolean
-        {
-            return super.enabled;
-        }
-
-        public override function set enabled(arg1:Boolean):void
-        {
-            if (arg1 == super.enabled) 
-            {
-                return;
-            }
-            super.enabled = arg1;
-            var loc1:*;
-            this.track.enabled = loc1 = arg1;
-            this.thumb.enabled = loc1;
-            return;
-        }
-
-        public override function get focusable():Boolean
-        {
-            return _focusable;
-        }
-
-        public override function set focusable(arg1:Boolean):void
-        {
-            super.focusable = arg1;
-            tabChildren = false;
-            return;
-        }
-
-        public function get value():Number
-        {
-            return this._value;
-        }
-
-        protected function beginDrag(arg1:flash.events.MouseEvent):void
-        {
-            this._thumbPressed = true;
-            var loc1:*=globalToLocal(new flash.geom.Point(arg1.stageX, arg1.stageY));
-            this._dragOffset = {"x":loc1.x - this.thumb.x - this.thumb.width / 2};
-            stage.addEventListener(flash.events.MouseEvent.MOUSE_MOVE, this.doDrag, false, 0, true);
-            stage.addEventListener(flash.events.MouseEvent.MOUSE_UP, this.endDrag, false, 0, true);
-            return;
-        }
-
-        public function get maximum():Number
-        {
-            return this._maximum;
-        }
-
-        public function set maximum(arg1:Number):void
-        {
-            this._maximum = arg1;
-            return;
-        }
-
-        public function get minimum():Number
-        {
-            return this._minimum;
-        }
-
-        public function set minimum(arg1:Number):void
-        {
-            this._minimum = arg1;
-            return;
-        }
-
-        public function get position():Number
-        {
-            return this._value;
-        }
-
-        public function set position(arg1:Number):void
-        {
-            this._value = arg1;
-            return;
-        }
-
-        public function get snapping():Boolean
-        {
-            return this._snapping;
-        }
-
-        public function set snapping(arg1:Boolean):void
-        {
-            this._snapping = arg1;
-            this.invalidateSettings();
-            return;
-        }
-
-        public var liveDragging:Boolean=true;
-
-        public var state:String="default";
-
-        public var offsetLeft:Number=0;
-
-        public var offsetRight:Number=0;
-
-        protected var _maximum:Number=10;
-
-        protected var _value:Number=0;
-
-        protected var _snapInterval:Number=1;
-
-        protected var _snapping:Boolean=false;
-
-        protected var _dragOffset:Object;
-
-        protected var _trackDragMouseIndex:Number;
-
-        protected var _trackPressed:Boolean=false;
-
-        protected var _thumbPressed:Boolean=false;
-
-        public var thumb:scaleform.clik.controls.Button;
-
-        public var track:scaleform.clik.controls.Button;
-
-        protected var _minimum:Number=0;
-    }
 }

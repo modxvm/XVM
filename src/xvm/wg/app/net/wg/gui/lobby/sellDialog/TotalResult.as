@@ -1,36 +1,34 @@
-package net.wg.gui.lobby.sellDialog 
+package net.wg.gui.lobby.sellDialog
 {
-    import flash.text.*;
-    import net.wg.gui.components.controls.*;
-    import scaleform.clik.core.*;
-    
-    public class TotalResult extends scaleform.clik.core.UIComponent
-    {
-        public function TotalResult()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.text.TextField;
+   import net.wg.gui.components.controls.IconText;
 
-        protected override function configUI():void
-        {
-            this.headerTF.text = DIALOGS.VEHICLESELLDIALOG_COMMONRESULT;
-            this.creditsIT.textFieldYOffset = net.wg.gui.lobby.sellDialog.VehicleSellDialog.ICONS_TEXT_OFFSET;
-            this.goldIT.textFieldYOffset = net.wg.gui.lobby.sellDialog.VehicleSellDialog.ICONS_TEXT_OFFSET;
-            return;
-        }
 
-        public function getSize():int
-        {
-            return this.headerTF.y + this.headerTF.height + PADDING_NEXT_BLOCK;
-        }
+   public class TotalResult extends UIComponent
+   {
+          
+      public function TotalResult() {
+         super();
+      }
 
-        internal static const PADDING_NEXT_BLOCK:int=25;
+      private static const PADDING_NEXT_BLOCK:int = 25;
 
-        public var headerTF:flash.text.TextField;
+      public var headerTF:TextField;
 
-        public var creditsIT:net.wg.gui.components.controls.IconText;
+      public var creditsIT:IconText;
 
-        public var goldIT:net.wg.gui.components.controls.IconText;
-    }
+      public var goldIT:IconText;
+
+      override protected function configUI() : void {
+         this.headerTF.text = DIALOGS.VEHICLESELLDIALOG_COMMONRESULT;
+         this.creditsIT.textFieldYOffset = VehicleSellDialog.ICONS_TEXT_OFFSET;
+         this.goldIT.textFieldYOffset = VehicleSellDialog.ICONS_TEXT_OFFSET;
+      }
+
+      public function getSize() : int {
+         return this.headerTF.y + this.headerTF.height + PADDING_NEXT_BLOCK;
+      }
+   }
+
 }

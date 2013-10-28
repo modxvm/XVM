@@ -1,273 +1,258 @@
-package net.wg.gui.notification 
+package net.wg.gui.notification
 {
-    import flash.display.*;
-    import flash.events.*;
-    import flash.text.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.events.*;
-    import scaleform.clik.core.*;
-    import scaleform.clik.events.*;
-    
-    public class ServiceMessage extends scaleform.clik.core.UIComponent
-    {
-        public function ServiceMessage()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.display.MovieClip;
+   import net.wg.gui.components.controls.UILoaderAlt;
+   import net.wg.gui.components.controls.BitmapFill;
+   import net.wg.gui.components.controls.SoundButtonEx;
+   import flash.text.TextField;
+   import flash.text.StyleSheet;
+   import flash.text.TextFieldAutoSize;
+   import scaleform.clik.events.ButtonEvent;
+   import flash.events.TextEvent;
+   import flash.events.MouseEvent;
+   import net.wg.gui.events.UILoaderEvent;
+   import flash.events.Event;
 
-        protected function updateAfterStateChange():void
-        {
-            isInvalid(LAYOUT_INVALID);
-            return;
-        }
 
-        public function get messageTopOffset():Number
-        {
-            return this._messageTopOffset;
-        }
+   public class ServiceMessage extends UIComponent
+   {
+          
+      public function ServiceMessage() {
+         super();
+      }
 
-        public function set messageTopOffset(arg1:Number):void
-        {
-            this._messageTopOffset = arg1;
-            invalidate(LAYOUT_INVALID);
-            return;
-        }
+      public static const RESIZED:String = "resized";
 
-        public function get messageBottomOffset():Number
-        {
-            return this._messageBottomOffset;
-        }
+      private static const DATA_INVALID:String = "dataInv";
 
-        public function set messageBottomOffset(arg1:Number):void
-        {
-            this._messageBottomOffset = arg1;
-            invalidate(LAYOUT_INVALID);
-            return;
-        }
+      private static const LAYOUT_INVALID:String = "layoutInv";
 
-        public function get buttonPadding():int
-        {
-            return this._buttonPadding;
-        }
+      private static const LINK_COLOR_NORMAL:String = "#E2D2A2";
 
-        public function set buttonPadding(arg1:int):void
-        {
-            this._buttonPadding = arg1;
-            invalidate(LAYOUT_INVALID);
-            return;
-        }
+      private static const LINK_COLOR_HOVER:String = "#FF0000";
 
-        public override function get width():Number
-        {
-            return actualWidth;
-        }
+      private static var allowBgFill:Array;
 
-        public override function get height():Number
-        {
-            return actualHeight;
-        }
+      public var background:MovieClip;
 
-        public override function dispose():void
-        {
-            this.textField.removeEventListener(flash.events.TextEvent.LINK, this.onMessageLinkClick);
-            this.textField.removeEventListener(flash.events.MouseEvent.CLICK, this.onMessageMouseClick);
-            this.btnMoreInfo.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.btnClickHandler);
-            this.icon.removeEventListener(net.wg.gui.events.UILoaderEvent.COMPLETE, this.iconLoadingCompleteHandler);
-            this.icon.removeEventListener(net.wg.gui.events.UILoaderEvent.IOERROR, this.iconLoadingErrorHandler);
-            removeEventListener(flash.events.MouseEvent.CLICK, this.componentClickHandler);
-            super.dispose();
-            return;
-        }
+      public var icon:UILoaderAlt;
 
-        
-        {
-            allowBgFill = ["action"];
-        }
+      public var bmpFill:BitmapFill;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            var loc1:*=new flash.text.StyleSheet();
-            loc1.setStyle("a:link", {"color":LINK_COLOR_NORMAL, "textDecoration":"underline"});
-            loc1.setStyle("a:hover", {"color":LINK_COLOR_HOVER, "textDecoration":"underline"});
-            this.textField.styleSheet = loc1;
-            this.textField.htmlText = "A long time ago, in a galaxy far, far away..." + "It is a period of civil war. Rebel spaceships, striking from a hidden base, " + "have won their first victory against the evil Galactic Empire.";
-            this.textField.autoSize = flash.text.TextFieldAutoSize.LEFT;
-            this.textField.multiline = true;
-            this.textField.wordWrap = true;
-            this.textField.selectable = true;
-            this.background.tabEnabled = false;
-            this.markerMc.tabEnabled = false;
-            this.btnMoreInfo.tabEnabled = false;
-            this.btnMoreInfo.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.btnClickHandler, false, 0, true);
-            this.btnMoreInfo.label = App.utils ? App.utils.locale.makeString(MESSENGER.SERVICECHANNELMESSAGES_BATTLERESULTS_BUTTON) : "more info...";
-            this.textField.addEventListener(flash.events.TextEvent.LINK, this.onMessageLinkClick, false, 0, true);
-            this.textField.addEventListener(flash.events.MouseEvent.CLICK, this.onMessageMouseClick, false, 0, true);
-            this.icon.addEventListener(net.wg.gui.events.UILoaderEvent.COMPLETE, this.iconLoadingCompleteHandler, false, 0, true);
-            this.icon.addEventListener(net.wg.gui.events.UILoaderEvent.IOERROR, this.iconLoadingErrorHandler, false, 0, true);
-            addEventListener(flash.events.MouseEvent.CLICK, this.componentClickHandler, false, 0, true);
-            return;
-        }
+      public var markerMc:MovieClip;
 
-        internal function onMessageLinkClick(arg1:flash.events.TextEvent):void
-        {
-            if (!this._isTFClickedByMBR) 
+      public var btnMoreInfo:SoundButtonEx;
+
+      public var textField:TextField;
+
+      private var _messageTopOffset:int = 3;
+
+      private var _messageBottomOffset:int = 4;
+
+      private var _buttonPadding:int = 10;
+
+      private var _isTFClickedByMBR:Boolean = false;
+
+      private var _data:NotificationInfoVO;
+
+      override protected function configUI() : void {
+         super.configUI();
+         var _loc1_:StyleSheet = new StyleSheet();
+         _loc1_.setStyle("a:link",
             {
-                dispatchEvent(new net.wg.gui.notification.ServiceMessageEvent(net.wg.gui.notification.ServiceMessageEvent.MESSAGE_LINK_CLICKED, true, false, arg1.text));
+               "color":LINK_COLOR_NORMAL,
+               "textDecoration":"underline"
             }
-            return;
-        }
+         );
+         _loc1_.setStyle("a:hover",
+            {
+               "color":LINK_COLOR_HOVER,
+               "textDecoration":"underline"
+            }
+         );
+         this.textField.styleSheet = _loc1_;
+         this.textField.htmlText = "A long time ago, in a galaxy far, far away..." + "It is a period of civil war. Rebel spaceships, striking from a hidden base, " + "have won their first victory against the evil Galactic Empire.";
+         this.textField.autoSize = TextFieldAutoSize.LEFT;
+         this.textField.multiline = true;
+         this.textField.wordWrap = true;
+         this.textField.selectable = true;
+         this.background.tabEnabled = false;
+         this.markerMc.tabEnabled = false;
+         this.btnMoreInfo.tabEnabled = false;
+         this.btnMoreInfo.addEventListener(ButtonEvent.CLICK,this.btnClickHandler,false,0,true);
+         this.btnMoreInfo.label = App.utils?App.utils.locale.makeString(MESSENGER.SERVICECHANNELMESSAGES_BATTLERESULTS_BUTTON):"more info...";
+         this.textField.addEventListener(TextEvent.LINK,this.onMessageLinkClick,false,0,true);
+         this.textField.addEventListener(MouseEvent.CLICK,this.onMessageMouseClick,false,0,true);
+         this.icon.addEventListener(UILoaderEvent.COMPLETE,this.iconLoadingCompleteHandler,false,0,true);
+         this.icon.addEventListener(UILoaderEvent.IOERROR,this.iconLoadingErrorHandler,false,0,true);
+         addEventListener(MouseEvent.CLICK,this.componentClickHandler,false,0,true);
+      }
 
-        internal function onMessageMouseClick(arg1:flash.events.MouseEvent):void
-        {
-            this._isTFClickedByMBR = App.utils.commons.isRightButton(arg1);
-            return;
-        }
+      private function onMessageLinkClick(param1:TextEvent) : void {
+         if(!this._isTFClickedByMBR)
+         {
+            dispatchEvent(new ServiceMessageEvent(ServiceMessageEvent.MESSAGE_LINK_CLICKED,true,false,param1.text));
+         }
+      }
 
-        internal function iconLoadingErrorHandler(arg1:net.wg.gui.events.UILoaderEvent):void
-        {
-            this.icon.visible = false;
-            return;
-        }
+      private function onMessageMouseClick(param1:MouseEvent) : void {
+         this._isTFClickedByMBR = App.utils.commons.isRightButton(param1);
+      }
 
-        internal function iconLoadingCompleteHandler(arg1:net.wg.gui.events.UILoaderEvent):void
-        {
+      private function iconLoadingErrorHandler(param1:UILoaderEvent) : void {
+         this.icon.visible = false;
+      }
+
+      private function iconLoadingCompleteHandler(param1:UILoaderEvent) : void {
+         invalidate(LAYOUT_INVALID);
+      }
+
+      public function set data(param1:Object) : void {
+         this._data = param1 as NotificationInfoVO;
+         invalidate(DATA_INVALID);
+      }
+
+      public function get data() : Object {
+         return this._data;
+      }
+
+      override protected function draw() : void {
+         var _loc1_:MessageInfoVO = null;
+         var _loc2_:String = null;
+         var _loc3_:* = NaN;
+         var _loc4_:* = NaN;
+         var _loc5_:* = NaN;
+         var _loc6_:* = 0;
+         super.draw();
+         if(isInvalid(DATA_INVALID))
+         {
+            if(this._data)
+            {
+               _loc1_ = this._data.messageVO;
+               this.textField.htmlText = _loc1_.message;
+               _loc2_ = _loc1_.type;
+               if(_loc2_)
+               {
+                  this.markerMc.gotoAndStop(_loc2_);
+               }
+               if(_loc1_.icon)
+               {
+                  this.icon.source = _loc1_.icon;
+               }
+               if(_loc1_.defaultIcon)
+               {
+                  this.icon.sourceAlt = _loc1_.defaultIcon;
+               }
+               if(!(_loc2_ == null) && allowBgFill.join().indexOf(_loc2_,0) > -1)
+               {
+                  this.bmpFill.visible = true;
+                  this.bmpFill.repeat = "all";
+                  this.bmpFill.startPos = "TL";
+                  this.bmpFill.source = _loc2_ + "BgFill";
+                  this.bmpFill.setSize(100,50);
+               }
+               else
+               {
+                  this.bmpFill.visible = false;
+               }
+               this.btnMoreInfo.visible = _loc1_.showMoreVO.enabled;
+            }
             invalidate(LAYOUT_INVALID);
-            return;
-        }
-
-        public function set data(arg1:Object):void
-        {
-            this._data = arg1 as net.wg.gui.notification.NotificationInfoVO;
-            invalidate(DATA_INVALID);
-            return;
-        }
-
-        public function get data():Object
-        {
-            return this._data;
-        }
-
-        protected override function draw():void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            var loc3:*=NaN;
-            var loc4:*=NaN;
-            var loc5:*=NaN;
-            var loc6:*=0;
-            super.draw();
-            if (isInvalid(DATA_INVALID)) 
+         }
+         if(isInvalid(LAYOUT_INVALID))
+         {
+            this.textField.y = this._messageTopOffset;
+            _loc3_ = 0;
+            if(this.btnMoreInfo.visible)
             {
-                if (this._data) 
-                {
-                    loc1 = this._data.messageVO;
-                    this.textField.htmlText = loc1.message;
-                    loc2 = loc1.type;
-                    if (loc2) 
-                    {
-                        this.markerMc.gotoAndStop(loc2);
-                    }
-                    if (loc1.icon) 
-                    {
-                        this.icon.source = loc1.icon;
-                    }
-                    if (loc1.defaultIcon) 
-                    {
-                        this.icon.sourceAlt = loc1.defaultIcon;
-                    }
-                    if (!(loc2 == null) && allowBgFill.join().indexOf(loc2, 0) > -1) 
-                    {
-                        this.bmpFill.visible = true;
-                        this.bmpFill.repeat = "all";
-                        this.bmpFill.startPos = "TL";
-                        this.bmpFill.source = loc2 + "BgFill";
-                        this.bmpFill.setSize(100, 50);
-                    }
-                    else 
-                    {
-                        this.bmpFill.visible = false;
-                    }
-                    this.btnMoreInfo.visible = loc1.showMoreVO.enabled;
-                }
-                invalidate(LAYOUT_INVALID);
+               _loc3_ = this.btnMoreInfo.height + this._buttonPadding + 8;
             }
-            if (isInvalid(LAYOUT_INVALID)) 
+            _loc4_ = this.textField.height;
+            _loc5_ = Math.round(_loc4_ + this._messageTopOffset + this._messageBottomOffset + _loc3_);
+            _loc6_ = 3;
+            this.icon.x = _loc6_ + Math.round((this.textField.x - _loc6_ - this.icon.width) / 2);
+            if(this.textField.textHeight < this.icon.height)
             {
-                this.textField.y = this._messageTopOffset;
-                loc3 = 0;
-                if (this.btnMoreInfo.visible) 
-                {
-                    loc3 = this.btnMoreInfo.height + this._buttonPadding + 8;
-                }
-                loc4 = this.textField.height;
-                loc5 = Math.round(loc4 + this._messageTopOffset + this._messageBottomOffset + loc3);
-                loc6 = 3;
-                this.icon.x = loc6 + Math.round((this.textField.x - loc6 - this.icon.width) / 2);
-                if (this.textField.textHeight < this.icon.height) 
-                {
-                    this.icon.y = Math.round(this.textField.y + (-this.icon.height + this.textField.textHeight) / 2 + 2);
-                }
-                this.markerMc.height = loc5 - 2 * this.markerMc.y;
-                this.background.height = loc5;
-                if (this.btnMoreInfo.visible) 
-                {
-                    this.btnMoreInfo.y = loc4 + this.textField.y + this._buttonPadding;
-                }
-                if (this.bmpFill.visible) 
-                {
-                    this.bmpFill.setSize(this.markerMc.width, loc5 - 2 * this.bmpFill.y);
-                }
-                dispatchEvent(new flash.events.Event(RESIZED));
+               this.icon.y = Math.round(this.textField.y + (-this.icon.height + this.textField.textHeight) / 2 + 2);
             }
-            return;
-        }
+            this.markerMc.height = _loc5_ - 2 * this.markerMc.y;
+            this.background.height = _loc5_;
+            if(this.btnMoreInfo.visible)
+            {
+               this.btnMoreInfo.y = _loc4_ + this.textField.y + this._buttonPadding;
+            }
+            if(this.bmpFill.visible)
+            {
+               this.bmpFill.setSize(this.markerMc.width,_loc5_ - 2 * this.bmpFill.y);
+            }
+            dispatchEvent(new Event(RESIZED));
+         }
+      }
 
-        protected function componentClickHandler(arg1:flash.events.MouseEvent):void
-        {
-            dispatchEvent(new net.wg.gui.notification.ServiceMessageEvent(net.wg.gui.notification.ServiceMessageEvent.MESSAGE_AREA_CLICKED, true));
-            return;
-        }
+      protected function componentClickHandler(param1:MouseEvent) : void {
+         dispatchEvent(new ServiceMessageEvent(ServiceMessageEvent.MESSAGE_AREA_CLICKED,true));
+      }
 
-        protected function btnClickHandler(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            dispatchEvent(new net.wg.gui.notification.ServiceMessageEvent(net.wg.gui.notification.ServiceMessageEvent.MESSAGE_BUTTON_CLICKED, true));
-            return;
-        }
+      protected function btnClickHandler(param1:ButtonEvent) : void {
+         dispatchEvent(new ServiceMessageEvent(ServiceMessageEvent.MESSAGE_BUTTON_CLICKED,true));
+      }
 
-        internal static const DATA_INVALID:String="dataInv";
+      protected function updateAfterStateChange() : void {
+         isInvalid(LAYOUT_INVALID);
+      }
 
-        internal static const LAYOUT_INVALID:String="layoutInv";
+      public function get messageTopOffset() : Number {
+         return this._messageTopOffset;
+      }
 
-        internal static const LINK_COLOR_NORMAL:String="#E2D2A2";
+      public function set messageTopOffset(param1:Number) : void {
+         this._messageTopOffset = param1;
+         invalidate(LAYOUT_INVALID);
+      }
 
-        internal static const LINK_COLOR_HOVER:String="#FF0000";
+      public function get messageBottomOffset() : Number {
+         return this._messageBottomOffset;
+      }
 
-        public static const RESIZED:String="resized";
+      public function set messageBottomOffset(param1:Number) : void {
+         this._messageBottomOffset = param1;
+         invalidate(LAYOUT_INVALID);
+      }
 
-        public var background:flash.display.MovieClip;
+      public function get buttonPadding() : int {
+         return this._buttonPadding;
+      }
 
-        public var icon:net.wg.gui.components.controls.UILoaderAlt;
+      public function set buttonPadding(param1:int) : void {
+         this._buttonPadding = param1;
+         invalidate(LAYOUT_INVALID);
+      }
 
-        public var bmpFill:net.wg.gui.components.controls.BitmapFill;
+      override public function get width() : Number {
+         return actualWidth;
+      }
 
-        public var markerMc:flash.display.MovieClip;
+      override public function get height() : Number {
+         return actualHeight;
+      }
 
-        public var btnMoreInfo:net.wg.gui.components.controls.SoundButtonEx;
+      override public function dispose() : void {
+         this.textField.removeEventListener(TextEvent.LINK,this.onMessageLinkClick);
+         this.textField.removeEventListener(MouseEvent.CLICK,this.onMessageMouseClick);
+         this.btnMoreInfo.removeEventListener(ButtonEvent.CLICK,this.btnClickHandler);
+         this.icon.removeEventListener(UILoaderEvent.COMPLETE,this.iconLoadingCompleteHandler);
+         this.icon.removeEventListener(UILoaderEvent.IOERROR,this.iconLoadingErrorHandler);
+         removeEventListener(MouseEvent.CLICK,this.componentClickHandler);
+         this.background = null;
+         this.icon.dispose();
+         this.bmpFill.dispose();
+         this.markerMc = null;
+         this.btnMoreInfo.dispose();
+         this.btnMoreInfo = null;
+         this.textField = null;
+         super.dispose();
+      }
+   }
 
-        public var textField:flash.text.TextField;
-
-        internal var _messageTopOffset:int=3;
-
-        internal var _messageBottomOffset:int=4;
-
-        internal var _buttonPadding:int=10;
-
-        internal var _isTFClickedByMBR:Boolean=false;
-
-        internal var _data:net.wg.gui.notification.NotificationInfoVO;
-
-        internal static var allowBgFill:Array;
-    }
 }

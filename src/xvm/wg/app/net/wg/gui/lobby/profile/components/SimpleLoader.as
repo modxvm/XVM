@@ -1,123 +1,106 @@
-package net.wg.gui.lobby.profile.components 
+package net.wg.gui.lobby.profile.components
 {
-    import flash.display.*;
-    import flash.events.*;
-    import flash.net.*;
-    import flash.utils.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    
-    public class SimpleLoader extends flash.display.Sprite implements net.wg.infrastructure.interfaces.entity.IDisposable
-    {
-        public function SimpleLoader()
-        {
-            super();
+   import flash.display.Sprite;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import flash.display.Loader;
+   import flash.net.URLRequest;
+   import flash.events.Event;
+   import flash.events.IOErrorEvent;
+   import flash.utils.getQualifiedClassName;
+
+
+   public class SimpleLoader extends Sprite implements IDisposable
+   {
+          
+      public function SimpleLoader() {
+         super();
+      }
+
+      public static const LOADED:String = "sourceLoaded";
+
+      public static const LOAD_ERROR:String = "sourceLoadError";
+
+      protected var loader:Loader;
+
+      private var currentSourcePath:String;
+
+      public function setSource(param1:String) : void {
+         if(this.currentSourcePath == param1)
+         {
             return;
-        }
+         }
+         if(this.loader)
+         {
+            this.loader.unloadAndStop(true);
+         }
+         this.currentSourcePath = param1;
+         if((param1) && !(param1 == ""))
+         {
+            this.startLoading(param1);
+         }
+         else
+         {
+            this.clear();
+         }
+      }
 
-        public function setSource(arg1:String):void
-        {
-            if (this.currentSourcePath == arg1) 
-            {
-                return;
-            }
-            if (this.loader) 
-            {
-                this.loader.unloadAndStop(true);
-            }
-            this.currentSourcePath = arg1;
-            if (arg1 && !(arg1 == "")) 
-            {
-                this.startLoading(arg1);
-            }
-            else 
-            {
-                this.clear();
-            }
-            return;
-        }
+      public function clear() : void {
+         this.disposeLoader();
+      }
 
-        public function clear():void
-        {
-            this.disposeLoader();
-            return;
-        }
+      public function disposeLoader() : void {
+         this.currentSourcePath = null;
+         if(this.loader)
+         {
+            this.removeLoaderHandlers();
+            this.loader.unloadAndStop(true);
+            this.loader.parent.removeChild(this.loader);
+            this.loader = null;
+         }
+      }
 
-        public function disposeLoader():void
-        {
-            this.currentSourcePath = null;
-            if (this.loader) 
-            {
-                this.removeLoaderHandlers();
-                this.loader.unloadAndStop(true);
-                this.loader.parent.removeChild(this.loader);
-                this.loader = null;
-            }
-            return;
-        }
+      public function dispose() : void {
+         this.disposeLoader();
+      }
 
-        public function dispose():void
-        {
-            this.disposeLoader();
-            return;
-        }
+      protected function startLoading(param1:String) : void {
+         if(!this.loader)
+         {
+            this.loader = new Loader();
+            this.addLoaderHandlers();
+            addChild(this.loader);
+         }
+         this.loader.load(new URLRequest(param1));
+      }
 
-        protected function startLoading(arg1:String):void
-        {
-            if (!this.loader) 
-            {
-                this.loader = new flash.display.Loader();
-                this.addLoaderHandlers();
-                addChild(this.loader);
-            }
-            this.loader.load(new flash.net.URLRequest(arg1));
-            return;
-        }
+      protected function onLoadingComplete() : void {
+          
+      }
 
-        protected function onLoadingComplete():void
-        {
-            return;
-        }
+      protected function onLoadingError() : void {
+          
+      }
 
-        protected function onLoadingError():void
-        {
-            return;
-        }
+      private function addLoaderHandlers() : void {
+         this.loader.contentLoaderInfo.addEventListener(Event.COMPLETE,this.loadingCompleteHandler,false,0,true);
+         this.loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,this.loadingErrorHandler,false,0,true);
+      }
 
-        internal function addLoaderHandlers():void
-        {
-            this.loader.contentLoaderInfo.addEventListener(flash.events.Event.COMPLETE, this.loadingCompleteHandler, false, 0, true);
-            this.loader.contentLoaderInfo.addEventListener(flash.events.IOErrorEvent.IO_ERROR, this.loadingErrorHandler, false, 0, true);
-            return;
-        }
+      private function removeLoaderHandlers() : void {
+         this.loader.contentLoaderInfo.removeEventListener(Event.COMPLETE,this.loadingCompleteHandler);
+         this.loader.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR,this.loadingErrorHandler);
+      }
 
-        internal function removeLoaderHandlers():void
-        {
-            this.loader.contentLoaderInfo.removeEventListener(flash.events.Event.COMPLETE, this.loadingCompleteHandler);
-            this.loader.contentLoaderInfo.removeEventListener(flash.events.IOErrorEvent.IO_ERROR, this.loadingErrorHandler);
-            return;
-        }
+      private function loadingErrorHandler(param1:IOErrorEvent) : void {
+         this.onLoadingError();
+         DebugUtils.LOG_DEBUG(getQualifiedClassName(this) + " : couldn\'t load extra icon!",this.currentSourcePath);
+         dispatchEvent(new Event(LOAD_ERROR));
+      }
 
-        internal function loadingErrorHandler(arg1:flash.events.IOErrorEvent):void
-        {
-            this.onLoadingError();
-            DebugUtils.LOG_DEBUG(flash.utils.getQualifiedClassName(this) + " : couldn\'t load extra icon!", this.currentSourcePath);
-            dispatchEvent(new flash.events.Event(LOAD_ERROR));
-            return;
-        }
+      private function loadingCompleteHandler(param1:Event) : void {
+         this.onLoadingComplete();
+         dispatchEvent(new Event(LOADED));
+      }
+   }
 
-        internal function loadingCompleteHandler(arg1:flash.events.Event):void
-        {
-            this.onLoadingComplete();
-            dispatchEvent(new flash.events.Event(LOADED));
-            return;
-        }
-
-        public static const LOADED:String="sourceLoaded";
-
-        public static const LOAD_ERROR:String="sourceLoadError";
-
-        protected var loader:flash.display.Loader;
-
-        internal var currentSourcePath:String;
-    }
 }

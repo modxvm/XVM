@@ -1,16 +1,17 @@
-package net.wg.gui.lobby.window 
+package net.wg.gui.lobby.window
 {
-    import flash.display.*;
-    import flash.text.*;
-    
-    public class ExchangeFreeToTankmanXpWarning extends flash.display.MovieClip
-    {
-        public function ExchangeFreeToTankmanXpWarning()
-        {
-            super();
-            return;
-        }
+   import flash.display.MovieClip;
+   import flash.text.TextField;
 
-        public var textField:flash.text.TextField;
-    }
+
+   public class ExchangeFreeToTankmanXpWarning extends MovieClip
+   {
+          
+      public function ExchangeFreeToTankmanXpWarning() {
+         super();
+      }
+
+      public var textField:TextField;
+   }
+
 }

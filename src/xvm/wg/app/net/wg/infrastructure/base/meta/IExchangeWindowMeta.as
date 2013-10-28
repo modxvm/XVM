@@ -1,9 +1,14 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IExchangeWindowMeta extends flash.events.IEventDispatcher
-    {
-        function as_setSecondaryCurrency(arg1:Number):void;
-    }
+   import flash.events.IEventDispatcher;
+
+
+   public interface IExchangeWindowMeta extends IEventDispatcher
+   {
+          
+      function as_setSecondaryCurrency(param1:Number) : void;
+
+      function as_setWalletStatus(param1:Object) : void;
+   }
+
 }

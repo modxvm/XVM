@@ -1,30 +1,29 @@
-package scaleform.clik.events 
+package scaleform.clik.events
 {
-    import flash.events.*;
-    
-    public final class FocusHandlerEvent extends flash.events.Event
-    {
-        public function FocusHandlerEvent(arg1:String, arg2:Boolean=true, arg3:Boolean=false, arg4:uint=0)
-        {
-            super(arg1, arg2, arg3);
-            this.controllerIdx = arg4;
-            return;
-        }
+   import flash.events.Event;
 
-        public override function clone():flash.events.Event
-        {
-            return new scaleform.clik.events.FocusHandlerEvent(type, bubbles, cancelable, this.controllerIdx);
-        }
 
-        public override function toString():String
-        {
-            return formatToString("FocusHandlerEvent", "type", "bubbles", "cancelable", "controllerIdx");
-        }
+   public final class FocusHandlerEvent extends Event
+   {
+          
+      public function FocusHandlerEvent(param1:String, param2:Boolean=true, param3:Boolean=false, param4:uint=undefined) {
+         super(param1,param2,param3);
+         this.controllerIdx = param4;
+      }
 
-        public static const FOCUS_IN:String="CLIK_focusIn";
+      public static const FOCUS_IN:String = "CLIK_focusIn";
 
-        public static const FOCUS_OUT:String="CLIK_focusOut";
+      public static const FOCUS_OUT:String = "CLIK_focusOut";
 
-        public var controllerIdx:uint=0;
-    }
+      public var controllerIdx:uint = 0;
+
+      override public function clone() : Event {
+         return new FocusHandlerEvent(type,bubbles,cancelable,this.controllerIdx);
+      }
+
+      override public function toString() : String {
+         return formatToString("FocusHandlerEvent","type","bubbles","cancelable","controllerIdx");
+      }
+   }
+
 }

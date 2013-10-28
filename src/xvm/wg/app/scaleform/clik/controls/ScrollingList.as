@@ -1,595 +1,550 @@
-package scaleform.clik.controls 
+package scaleform.clik.controls
 {
-    import flash.display.*;
-    import flash.events.*;
-    import flash.utils.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.data.*;
-    import scaleform.clik.events.*;
-    import scaleform.clik.interfaces.*;
-    import scaleform.clik.ui.*;
-    import scaleform.clik.utils.*;
-    
-    public class ScrollingList extends scaleform.clik.controls.CoreList
-    {
-        public function ScrollingList()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.utils.Padding;
+   import scaleform.clik.interfaces.IScrollBar;
+   import scaleform.clik.constants.InvalidationType;
+   import scaleform.clik.events.InputEvent;
+   import scaleform.clik.interfaces.IListItemRenderer;
+   import scaleform.clik.ui.InputDetails;
+   import scaleform.clik.constants.InputValue;
+   import scaleform.clik.constants.WrappingMode;
+   import scaleform.clik.constants.NavigationCode;
+   import flash.events.Event;
+   import flash.display.DisplayObject;
+   import flash.utils.getDefinitionByName;
+   import flash.events.MouseEvent;
+   import scaleform.clik.data.ListData;
 
-        protected override function drawLayout():void
-        {
-            var loc8:*=null;
-            var loc1:*=_renderers.length;
-            var loc2:*=this.rowHeight;
-            var loc3:*=this.availableWidth - this.padding.horizontal;
-            var loc4:*=this.margin + this.padding.left;
-            var loc5:*=this.margin + this.padding.top;
-            var loc6:*=isInvalid(scaleform.clik.constants.InvalidationType.DATA);
-            var loc7:*=0;
-            while (loc7 < loc1) 
-            {
-                (loc8 = getRendererAt(loc7)).x = loc4;
-                loc8.y = loc5 + loc7 * loc2;
-                loc8.width = loc3;
-                loc8.height = loc2;
-                if (!loc6) 
-                {
-                    loc8.validateNow();
-                }
-                ++loc7;
-            }
-            this.drawScrollBar();
-            return;
-        }
 
-        protected function createScrollBar():void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            var loc3:*=null;
-            if (this._scrollBar) 
+   public class ScrollingList extends CoreList
+   {
+          
+      public function ScrollingList() {
+         super();
+      }
+
+      public var wrapping:String = "normal";
+
+      public var thumbOffset:Object;
+
+      public var thumbSizeFactor:Number = 1;
+
+      protected var _rowHeight:Number = NaN;
+
+      protected var _autoRowHeight:Number = NaN;
+
+      protected var _rowCount:Number = NaN;
+
+      protected var _scrollPosition:uint = 0;
+
+      protected var _autoScrollBar:Boolean = false;
+
+      protected var _scrollBarValue:Object;
+
+      protected var _margin:Number = 0;
+
+      protected var _padding:Padding;
+
+      protected var _scrollBar:IScrollBar;
+
+      override protected function initialize() : void {
+         super.initialize();
+      }
+
+      public function get margin() : Number {
+         return this._margin;
+      }
+
+      public function set margin(param1:Number) : void {
+         this._margin = param1;
+         invalidateSize();
+      }
+
+      public function get padding() : Padding {
+         return this._padding;
+      }
+
+      public function set padding(param1:Padding) : void {
+         this._padding = param1;
+         invalidateSize();
+      }
+
+      public function set inspectablePadding(param1:Object) : void {
+         if(!componentInspectorSetting)
+         {
+            return;
+         }
+         this.padding = new Padding(param1.top,param1.right,param1.bottom,param1.left);
+      }
+
+      public function get scrollBar() : Object {
+         return this._scrollBar;
+      }
+
+      public function set scrollBar(param1:Object) : void {
+         this._scrollBarValue = param1;
+         invalidate(InvalidationType.SCROLL_BAR);
+      }
+
+      public function get scrollPosition() : Number {
+         return this._scrollPosition;
+      }
+
+      public function set scrollPosition(param1:Number) : void {
+         var param1:Number = Math.max(0,Math.min(_dataProvider.length - _totalRenderers,Math.round(param1)));
+         if(this._scrollPosition == param1)
+         {
+            return;
+         }
+         this._scrollPosition = param1;
+         invalidateData();
+      }
+
+      override public function set selectedIndex(param1:int) : void {
+         if(param1 == _selectedIndex || param1 == _newSelectedIndex)
+         {
+            return;
+         }
+         _newSelectedIndex = param1;
+         invalidateSelectedIndex();
+      }
+
+      public function get rowCount() : uint {
+         return _totalRenderers;
+      }
+
+      public function set rowCount(param1:uint) : void {
+         var _loc2_:Number = this.rowHeight;
+         if(isNaN(this.rowHeight))
+         {
+            this.calculateRendererTotal(this.availableWidth,this.availableHeight);
+         }
+         _loc2_ = this.rowHeight;
+         height = _loc2_ * param1 + this.margin * 2;
+      }
+
+      public function get rowHeight() : Number {
+         return isNaN(this._autoRowHeight)?this._rowHeight:this._autoRowHeight;
+      }
+
+      public function set rowHeight(param1:Number) : void {
+         if(param1 == 0)
+         {
+            param1 = NaN;
+            if(_inspector)
             {
-                this._scrollBar.removeEventListener(flash.events.Event.SCROLL, this.handleScroll, false);
-                this._scrollBar.removeEventListener(flash.events.Event.CHANGE, this.handleScroll, false);
-                this._scrollBar.focusTarget = null;
-                if (container.contains(this._scrollBar as flash.display.DisplayObject)) 
-                {
-                    container.removeChild(this._scrollBar as flash.display.DisplayObject);
-                }
-                this._scrollBar = null;
+               return;
             }
-            if (!this._scrollBarValue || this._scrollBarValue == "") 
+         }
+         this._rowHeight = param1;
+         this._autoRowHeight = NaN;
+         invalidateSize();
+      }
+
+      override public function get availableWidth() : Number {
+         return Math.round(_width) - this.margin * 2 - (this._autoScrollBar?Math.round(this._scrollBar.width):0);
+      }
+
+      override public function get availableHeight() : Number {
+         return Math.round(_height) - this.margin * 2;
+      }
+
+      override public function scrollToIndex(param1:uint) : void {
+         if(_totalRenderers == 0)
+         {
+            return;
+         }
+         if(param1 >= this._scrollPosition && param1 < this._scrollPosition + _totalRenderers)
+         {
+            return;
+         }
+         if(param1 < this._scrollPosition)
+         {
+            this.scrollPosition = param1;
+         }
+         else
+         {
+            this.scrollPosition = param1 - (_totalRenderers-1);
+         }
+      }
+
+      override public function handleInput(param1:InputEvent) : void {
+         if(param1.handled)
+         {
+            return;
+         }
+         var _loc2_:IListItemRenderer = getRendererAt(_selectedIndex,this._scrollPosition);
+         if(_loc2_ != null)
+         {
+            _loc2_.handleInput(param1);
+            if(param1.handled)
             {
-                return;
+               return;
             }
-            this._autoScrollBar = false;
-            if (this._scrollBarValue is String) 
-            {
-                if (parent != null) 
-                {
-                    loc1 = parent.getChildByName(this._scrollBarValue.toString()) as scaleform.clik.interfaces.IScrollBar;
-                }
-                if (loc1 == null) 
-                {
-                    loc2 = flash.utils.getDefinitionByName(this._scrollBarValue.toString()) as Class;
-                    if (loc2) 
-                    {
-                        loc1 = new loc2() as scaleform.clik.interfaces.IScrollBar;
-                    }
-                    if (loc1) 
-                    {
-                        this._autoScrollBar = true;
-                        loc3 = loc1 as Object;
-                        if (loc3 && this.thumbOffset) 
+         }
+         var _loc3_:InputDetails = param1.details;
+         var _loc4_:Boolean = _loc3_.value == InputValue.KEY_DOWN || _loc3_.value == InputValue.KEY_HOLD;
+         switch(_loc3_.navEquivalent)
+         {
+            case NavigationCode.UP:
+               if(selectedIndex == -1)
+               {
+                  if(_loc4_)
+                  {
+                     this.selectedIndex = this.scrollPosition + _totalRenderers-1;
+                  }
+               }
+               else
+               {
+                  if(_selectedIndex > 0)
+                  {
+                     if(_loc4_)
+                     {
+                        selectedIndex--;
+                     }
+                  }
+                  else
+                  {
+                     if(this.wrapping != WrappingMode.STICK)
+                     {
+                        if(this.wrapping == WrappingMode.WRAP)
                         {
-                            loc3.offsetTop = this.thumbOffset.top;
-                            loc3.offsetBottom = this.thumbOffset.bottom;
+                           if(_loc4_)
+                           {
+                              this.selectedIndex = _dataProvider.length-1;
+                           }
                         }
-                        loc1.addEventListener(flash.events.MouseEvent.MOUSE_WHEEL, this.blockMouseWheel, false, 0, true);
-                        container.addChild(loc1 as flash.display.DisplayObject);
-                    }
-                }
-            }
-            else if (this._scrollBarValue is Class) 
-            {
-                loc1 = new (this._scrollBarValue as Class)() as scaleform.clik.interfaces.IScrollBar;
-                loc1.addEventListener(flash.events.MouseEvent.MOUSE_WHEEL, this.blockMouseWheel, false, 0, true);
-                if (loc1 != null) 
-                {
-                    this._autoScrollBar = true;
-                    (loc1 as Object).offsetTop = this.thumbOffset.top;
-                    (loc1 as Object).offsetBottom = this.thumbOffset.bottom;
-                    container.addChild(loc1 as flash.display.DisplayObject);
-                }
-            }
-            else 
-            {
-                loc1 = this._scrollBarValue as scaleform.clik.interfaces.IScrollBar;
-            }
-            this._scrollBar = loc1;
-            App.utils.events.enableDisposingForObj(flash.display.DisplayObject(this._scrollBar));
-            invalidateSize();
-            if (this._scrollBar == null) 
-            {
-                return;
-            }
-            this._scrollBar.addEventListener(flash.events.Event.SCROLL, this.handleScroll, false, 0, true);
-            this._scrollBar.addEventListener(flash.events.Event.CHANGE, this.handleScroll, false, 0, true);
-            this._scrollBar.focusTarget = this;
-            this._scrollBar.tabEnabled = false;
-            return;
-        }
+                        else
+                        {
+                           return;
+                        }
+                     }
+                  }
+               }
+               break;
+            case NavigationCode.DOWN:
+               if(_selectedIndex == -1)
+               {
+                  if(_loc4_)
+                  {
+                     this.selectedIndex = this._scrollPosition;
+                  }
+               }
+               else
+               {
+                  if(_selectedIndex < _dataProvider.length-1)
+                  {
+                     if(_loc4_)
+                     {
+                        selectedIndex++;
+                     }
+                  }
+                  else
+                  {
+                     if(this.wrapping != WrappingMode.STICK)
+                     {
+                        if(this.wrapping == WrappingMode.WRAP)
+                        {
+                           if(_loc4_)
+                           {
+                              this.selectedIndex = 0;
+                           }
+                        }
+                        else
+                        {
+                           return;
+                        }
+                     }
+                  }
+               }
+               break;
+            case NavigationCode.END:
+               if(!_loc4_)
+               {
+                  this.selectedIndex = _dataProvider.length-1;
+               }
+               break;
+            case NavigationCode.HOME:
+               if(!_loc4_)
+               {
+                  this.selectedIndex = 0;
+               }
+               break;
+            case NavigationCode.PAGE_UP:
+               if(_loc4_)
+               {
+                  this.selectedIndex = Math.max(0,_selectedIndex - _totalRenderers);
+               }
+               break;
+            case NavigationCode.PAGE_DOWN:
+               if(_loc4_)
+               {
+                  this.selectedIndex = Math.min(_dataProvider.length-1,_selectedIndex + _totalRenderers);
+               }
+               break;
+            default:
+               return;
+         }
+         param1.handled = true;
+      }
 
-        protected function drawScrollBar():void
-        {
-            if (!this._autoScrollBar) 
-            {
-                return;
-            }
-            this._scrollBar.x = _width - this._scrollBar.width - this.margin;
-            this._scrollBar.y = this.margin;
-            this._scrollBar.height = this.availableHeight;
-            this._scrollBar.validateNow();
-            return;
-        }
+      override public function toString() : String {
+         return "[CLIK ScrollingList " + name + "]";
+      }
 
-        protected function updateScrollBar():void
-        {
-            var loc2:*=null;
-            if (this._scrollBar == null) 
-            {
-                return;
-            }
-            var loc1:*=Math.max(0, _dataProvider.length - _totalRenderers);
-            if (this._scrollBar is scaleform.clik.controls.ScrollIndicator) 
-            {
-                loc2 = this._scrollBar as scaleform.clik.controls.ScrollIndicator;
-                loc2.setScrollProperties(_dataProvider.length - _totalRenderers, 0, _dataProvider.length - _totalRenderers);
-            }
-            this._scrollBar.position = this._scrollPosition;
-            this._scrollBar.validateNow();
-            return;
-        }
+      override protected function configUI() : void {
+         super.configUI();
+         if(this.padding == null)
+         {
+            this.padding = new Padding();
+         }
+         if(_itemRenderer == null && !_usingExternalRenderers)
+         {
+            itemRendererName = _itemRendererName;
+         }
+      }
 
-        public override function set selectedIndex(arg1:int):void
-        {
-            if (arg1 == _selectedIndex || arg1 == _newSelectedIndex) 
-            {
-                return;
-            }
-            _newSelectedIndex = arg1;
-            invalidateSelectedIndex();
-            return;
-        }
-
-        protected override function changeFocus():void
-        {
-            super.changeFocus();
-            var loc1:*=getRendererAt(_selectedIndex, this._scrollPosition);
-            if (loc1 != null) 
-            {
-                loc1.displayFocus = focused > 0;
-                loc1.validateNow();
-            }
-            return;
-        }
-
-        protected override function refreshData():void
-        {
-            this._scrollPosition = Math.min(Math.max(0, _dataProvider.length - _totalRenderers), this._scrollPosition);
-            this.selectedIndex = Math.min((_dataProvider.length - 1), _selectedIndex);
-            this.updateSelectedIndex();
-            _dataProvider.requestItemRange(this._scrollPosition, Math.min((_dataProvider.length - 1), (this._scrollPosition + _totalRenderers - 1)), this.populateData);
-            return;
-        }
-
-        protected override function calculateRendererTotal(arg1:Number, arg2:Number):uint
-        {
-            var loc1:*=null;
-            if (isNaN(this._rowHeight) && isNaN(this._autoRowHeight)) 
-            {
-                loc1 = createRenderer(0);
-                this._autoRowHeight = loc1.height;
-                cleanUpRenderer(loc1);
-            }
-            return (this.availableHeight - this.padding.vertical) / this.rowHeight >> 0;
-        }
-
-        protected function handleScroll(arg1:flash.events.Event):void
-        {
-            this.scrollPosition = this._scrollBar.position;
-            return;
-        }
-
-        protected function populateData(arg1:Array):void
-        {
-            var loc4:*=null;
-            var loc5:*=0;
-            var loc6:*=null;
-            var loc1:*=arg1.length;
-            var loc2:*=_renderers.length;
-            var loc3:*=0;
-            while (loc3 < loc2) 
-            {
-                loc4 = getRendererAt(loc3);
-                loc5 = this._scrollPosition + loc3;
-                loc6 = new scaleform.clik.data.ListData(loc5, itemToLabel(arg1[loc3]), _selectedIndex == loc5);
-                loc4.enabled = loc3 >= loc1 ? false : true;
-                loc4.setListData(loc6);
-                loc4.setData(arg1[loc3]);
-                loc4.validateNow();
-                ++loc3;
-            }
-            return;
-        }
-
-        protected override function scrollList(arg1:int):void
-        {
-            this.scrollPosition = this.scrollPosition - arg1;
-            return;
-        }
-
-        protected function blockMouseWheel(arg1:flash.events.MouseEvent):void
-        {
-            arg1.stopPropagation();
-            return;
-        }
-
-        protected override function initialize():void
-        {
-            super.initialize();
-            return;
-        }
-
-        public function get margin():Number
-        {
-            return this._margin;
-        }
-
-        public function set margin(arg1:Number):void
-        {
-            this._margin = arg1;
-            invalidateSize();
-            return;
-        }
-
-        public function get padding():scaleform.clik.utils.Padding
-        {
-            return this._padding;
-        }
-
-        public function set padding(arg1:scaleform.clik.utils.Padding):void
-        {
-            this._padding = arg1;
-            invalidateSize();
-            return;
-        }
-
-        public function set inspectablePadding(arg1:Object):void
-        {
-            if (!componentInspectorSetting) 
-            {
-                return;
-            }
-            this.padding = new scaleform.clik.utils.Padding(arg1.top, arg1.right, arg1.bottom, arg1.left);
-            return;
-        }
-
-        public function get scrollBar():Object
-        {
-            return this._scrollBar;
-        }
-
-        public function set scrollBar(arg1:Object):void
-        {
-            this._scrollBarValue = arg1;
-            invalidate(scaleform.clik.constants.InvalidationType.SCROLL_BAR);
-            return;
-        }
-
-        public function get scrollPosition():Number
-        {
-            return this._scrollPosition;
-        }
-
-        public function set scrollPosition(arg1:Number):void
-        {
-            arg1 = Math.max(0, Math.min(_dataProvider.length - _totalRenderers, Math.round(arg1)));
-            if (this._scrollPosition == arg1) 
-            {
-                return;
-            }
-            this._scrollPosition = arg1;
-            invalidateData();
-            return;
-        }
-
-        protected override function updateSelectedIndex():void
-        {
-            if (_selectedIndex == _newSelectedIndex) 
-            {
-                return;
-            }
-            if (_totalRenderers == 0) 
-            {
-                return;
-            }
-            var loc1:*=getRendererAt(_selectedIndex, this.scrollPosition);
-            if (loc1 != null) 
-            {
-                loc1.selected = false;
-                loc1.validateNow();
-            }
-            super.selectedIndex = _newSelectedIndex;
-            if (_selectedIndex < 0 || _selectedIndex >= _dataProvider.length) 
-            {
-                return;
-            }
-            loc1 = getRendererAt(_selectedIndex, this._scrollPosition);
-            if (loc1 == null) 
-            {
-                this.scrollToIndex(_selectedIndex);
-                loc1 = getRendererAt(_selectedIndex, this.scrollPosition);
-                loc1.selected = true;
-                loc1.validateNow();
-            }
-            else 
-            {
-                loc1.selected = true;
-                loc1.validateNow();
-            }
-            return;
-        }
-
-        public function get rowCount():uint
-        {
-            return _totalRenderers;
-        }
-
-        public function set rowCount(arg1:uint):void
-        {
-            var loc1:*=this.rowHeight;
-            if (isNaN(this.rowHeight)) 
-            {
-                this.calculateRendererTotal(this.availableWidth, this.availableHeight);
-            }
-            loc1 = this.rowHeight;
-            height = loc1 * arg1 + this.margin * 2;
-            return;
-        }
-
-        public function get rowHeight():Number
-        {
-            return isNaN(this._autoRowHeight) ? this._rowHeight : this._autoRowHeight;
-        }
-
-        public function set rowHeight(arg1:Number):void
-        {
-            if (arg1 == 0) 
-            {
-                arg1 = NaN;
-                if (_inspector) 
-                {
-                    return;
-                }
-            }
-            this._rowHeight = arg1;
+      override protected function draw() : void {
+         if(isInvalid(InvalidationType.SCROLL_BAR))
+         {
+            this.createScrollBar();
+         }
+         if(isInvalid(InvalidationType.RENDERERS))
+         {
             this._autoRowHeight = NaN;
-            invalidateSize();
+         }
+         super.draw();
+         if(isInvalid(InvalidationType.DATA))
+         {
+            this.updateScrollBar();
+         }
+      }
+
+      override protected function drawLayout() : void {
+         var _loc8_:IListItemRenderer = null;
+         var _loc1_:uint = _renderers.length;
+         var _loc2_:Number = this.rowHeight;
+         var _loc3_:Number = this.availableWidth - this.padding.horizontal;
+         var _loc4_:Number = this.margin + this.padding.left;
+         var _loc5_:Number = this.margin + this.padding.top;
+         var _loc6_:Boolean = isInvalid(InvalidationType.DATA);
+         var _loc7_:uint = 0;
+         while(_loc7_ < _loc1_)
+         {
+            _loc8_ = getRendererAt(_loc7_);
+            _loc8_.x = _loc4_;
+            _loc8_.y = _loc5_ + _loc7_ * _loc2_;
+            _loc8_.width = _loc3_;
+            _loc8_.height = _loc2_;
+            if(!_loc6_)
+            {
+               _loc8_.validateNow();
+            }
+            _loc7_++;
+         }
+         this.drawScrollBar();
+      }
+
+      protected function createScrollBar() : void {
+         var _loc1_:IScrollBar = null;
+         var _loc2_:Class = null;
+         var _loc3_:Object = null;
+         if(this._scrollBar)
+         {
+            this._scrollBar.removeEventListener(Event.SCROLL,this.handleScroll,false);
+            this._scrollBar.removeEventListener(Event.CHANGE,this.handleScroll,false);
+            this._scrollBar.focusTarget = null;
+            if(container.contains(this._scrollBar as DisplayObject))
+            {
+               container.removeChild(this._scrollBar as DisplayObject);
+            }
+            this._scrollBar = null;
+         }
+         if(!this._scrollBarValue || this._scrollBarValue == "")
+         {
             return;
-        }
-
-        public override function get availableWidth():Number
-        {
-            return Math.round(_width) - this.margin * 2 - (this._autoScrollBar ? Math.round(this._scrollBar.width) : 0);
-        }
-
-        public override function get availableHeight():Number
-        {
-            return Math.round(_height) - this.margin * 2;
-        }
-
-        public override function scrollToIndex(arg1:uint):void
-        {
-            if (_totalRenderers == 0) 
+         }
+         this._autoScrollBar = false;
+         if(this._scrollBarValue  is  String)
+         {
+            if(parent != null)
             {
-                return;
+               _loc1_ = parent.getChildByName(this._scrollBarValue.toString()) as IScrollBar;
             }
-            if (arg1 >= this._scrollPosition && arg1 < this._scrollPosition + _totalRenderers) 
+            if(_loc1_ == null)
             {
-                return;
+               _loc2_ = getDefinitionByName(this._scrollBarValue.toString()) as Class;
+               if(_loc2_)
+               {
+                  _loc1_ = new _loc2_() as IScrollBar;
+               }
+               if(_loc1_)
+               {
+                  this._autoScrollBar = true;
+                  _loc3_ = _loc1_ as Object;
+                  if((_loc3_) && (this.thumbOffset))
+                  {
+                     _loc3_.offsetTop = this.thumbOffset.top;
+                     _loc3_.offsetBottom = this.thumbOffset.bottom;
+                  }
+                  _loc1_.addEventListener(MouseEvent.MOUSE_WHEEL,this.blockMouseWheel,false,0,true);
+                  container.addChild(_loc1_ as DisplayObject);
+               }
             }
-            if (arg1 < this._scrollPosition) 
+         }
+         else
+         {
+            if(this._scrollBarValue  is  Class)
             {
-                this.scrollPosition = arg1;
+               _loc1_ = new (this._scrollBarValue as Class)() as IScrollBar;
+               _loc1_.addEventListener(MouseEvent.MOUSE_WHEEL,this.blockMouseWheel,false,0,true);
+               if(_loc1_ != null)
+               {
+                  this._autoScrollBar = true;
+                  (_loc1_ as Object).offsetTop = this.thumbOffset.top;
+                  (_loc1_ as Object).offsetBottom = this.thumbOffset.bottom;
+                  container.addChild(_loc1_ as DisplayObject);
+               }
             }
-            else 
+            else
             {
-                this.scrollPosition = arg1 - (_totalRenderers - 1);
+               _loc1_ = this._scrollBarValue as IScrollBar;
             }
+         }
+         this._scrollBar = _loc1_;
+         App.utils.events.enableDisposingForObj(DisplayObject(this._scrollBar));
+         invalidateSize();
+         if(this._scrollBar == null)
+         {
             return;
-        }
+         }
+         this._scrollBar.addEventListener(Event.SCROLL,this.handleScroll,false,0,true);
+         this._scrollBar.addEventListener(Event.CHANGE,this.handleScroll,false,0,true);
+         this._scrollBar.focusTarget = this;
+         this._scrollBar.tabEnabled = false;
+      }
 
-        public override function handleInput(arg1:scaleform.clik.events.InputEvent):void
-        {
-            if (arg1.handled) 
-            {
-                return;
-            }
-            var loc1:*=getRendererAt(_selectedIndex, this._scrollPosition);
-            if (loc1 != null) 
-            {
-                loc1.handleInput(arg1);
-                if (arg1.handled) 
-                {
-                    return;
-                }
-            }
-            var loc2:*=arg1.details;
-            var loc3:*=loc2.value == scaleform.clik.constants.InputValue.KEY_DOWN || loc2.value == scaleform.clik.constants.InputValue.KEY_HOLD;
-            var loc4:*=loc2.navEquivalent;
-            switch (loc4) 
-            {
-                case scaleform.clik.constants.NavigationCode.UP:
-                {
-                    if (selectedIndex != -1) 
-                    {
-                        if (_selectedIndex > 0) 
-                        {
-                            if (loc3) 
-                            {
-                                selectedIndex--;
-                            }
-                        }
-                        else if (this.wrapping != scaleform.clik.constants.WrappingMode.STICK) 
-                        {
-                            if (this.wrapping != scaleform.clik.constants.WrappingMode.WRAP) 
-                            {
-                                return;
-                            }
-                            else if (loc3) 
-                            {
-                                this.selectedIndex = (_dataProvider.length - 1);
-                            }
-                        }
-                    }
-                    else if (loc3) 
-                    {
-                        this.selectedIndex = (this.scrollPosition + _totalRenderers - 1);
-                    }
-                    break;
-                }
-                case scaleform.clik.constants.NavigationCode.DOWN:
-                {
-                    if (_selectedIndex != -1) 
-                    {
-                        if (_selectedIndex < (_dataProvider.length - 1)) 
-                        {
-                            if (loc3) 
-                            {
-                                selectedIndex++;
-                            }
-                        }
-                        else if (this.wrapping != scaleform.clik.constants.WrappingMode.STICK) 
-                        {
-                            if (this.wrapping != scaleform.clik.constants.WrappingMode.WRAP) 
-                            {
-                                return;
-                            }
-                            else if (loc3) 
-                            {
-                                this.selectedIndex = 0;
-                            }
-                        }
-                    }
-                    else if (loc3) 
-                    {
-                        this.selectedIndex = this._scrollPosition;
-                    }
-                    break;
-                }
-                case scaleform.clik.constants.NavigationCode.END:
-                {
-                    if (!loc3) 
-                    {
-                        this.selectedIndex = (_dataProvider.length - 1);
-                    }
-                    break;
-                }
-                case scaleform.clik.constants.NavigationCode.HOME:
-                {
-                    if (!loc3) 
-                    {
-                        this.selectedIndex = 0;
-                    }
-                    break;
-                }
-                case scaleform.clik.constants.NavigationCode.PAGE_UP:
-                {
-                    if (loc3) 
-                    {
-                        this.selectedIndex = Math.max(0, _selectedIndex - _totalRenderers);
-                    }
-                    break;
-                }
-                case scaleform.clik.constants.NavigationCode.PAGE_DOWN:
-                {
-                    if (loc3) 
-                    {
-                        this.selectedIndex = Math.min((_dataProvider.length - 1), _selectedIndex + _totalRenderers);
-                    }
-                    break;
-                }
-                default:
-                {
-                    return;
-                }
-            }
-            arg1.handled = true;
+      protected function drawScrollBar() : void {
+         if(!this._autoScrollBar)
+         {
             return;
-        }
+         }
+         this._scrollBar.x = _width - this._scrollBar.width - this.margin;
+         this._scrollBar.y = this.margin;
+         this._scrollBar.height = this.availableHeight;
+         this._scrollBar.validateNow();
+      }
 
-        public override function toString():String
-        {
-            return "[CLIK ScrollingList " + name + "]";
-        }
-
-        protected override function configUI():void
-        {
-            super.configUI();
-            if (this.padding == null) 
-            {
-                this.padding = new scaleform.clik.utils.Padding();
-            }
-            if (_itemRenderer == null && !_usingExternalRenderers) 
-            {
-                itemRendererName = _itemRendererName;
-            }
+      protected function updateScrollBar() : void {
+         var _loc2_:ScrollIndicator = null;
+         if(this._scrollBar == null)
+         {
             return;
-        }
+         }
+         var _loc1_:Number = Math.max(0,_dataProvider.length - _totalRenderers);
+         if(this._scrollBar  is  ScrollIndicator)
+         {
+            _loc2_ = this._scrollBar as ScrollIndicator;
+            _loc2_.setScrollProperties(_dataProvider.length - _totalRenderers,0,_dataProvider.length - _totalRenderers);
+         }
+         this._scrollBar.position = this._scrollPosition;
+         this._scrollBar.validateNow();
+      }
 
-        protected override function draw():void
-        {
-            if (isInvalid(scaleform.clik.constants.InvalidationType.SCROLL_BAR)) 
-            {
-                this.createScrollBar();
-            }
-            if (isInvalid(scaleform.clik.constants.InvalidationType.RENDERERS)) 
-            {
-                this._autoRowHeight = NaN;
-            }
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
-            {
-                this.updateScrollBar();
-            }
+      override protected function changeFocus() : void {
+         super.changeFocus();
+         var _loc1_:IListItemRenderer = getRendererAt(_selectedIndex,this._scrollPosition);
+         if(_loc1_ != null)
+         {
+            _loc1_.displayFocus = focused > 0;
+            _loc1_.validateNow();
+         }
+      }
+
+      override protected function refreshData() : void {
+         this._scrollPosition = Math.min(Math.max(0,_dataProvider.length - _totalRenderers),this._scrollPosition);
+         this.selectedIndex = Math.min(_dataProvider.length-1,_selectedIndex);
+         this.updateSelectedIndex();
+         _dataProvider.requestItemRange(this._scrollPosition,Math.min(_dataProvider.length-1,this._scrollPosition + _totalRenderers-1),this.populateData);
+      }
+
+      override protected function updateSelectedIndex() : void {
+         if(_selectedIndex == _newSelectedIndex)
+         {
             return;
-        }
+         }
+         if(_totalRenderers == 0)
+         {
+            return;
+         }
+         var _loc1_:IListItemRenderer = getRendererAt(_selectedIndex,this.scrollPosition);
+         if(_loc1_ != null)
+         {
+            _loc1_.selected = false;
+            _loc1_.validateNow();
+         }
+         super.selectedIndex = _newSelectedIndex;
+         if(_selectedIndex < 0 || _selectedIndex >= _dataProvider.length)
+         {
+            return;
+         }
+         _loc1_ = getRendererAt(_selectedIndex,this._scrollPosition);
+         if(_loc1_ != null)
+         {
+            _loc1_.selected = true;
+            _loc1_.validateNow();
+         }
+         else
+         {
+            this.scrollToIndex(_selectedIndex);
+            _loc1_ = getRendererAt(_selectedIndex,this.scrollPosition);
+            _loc1_.selected = true;
+            _loc1_.validateNow();
+         }
+      }
 
-        public var wrapping:String="normal";
+      override protected function calculateRendererTotal(param1:Number, param2:Number) : uint {
+         var _loc3_:IListItemRenderer = null;
+         if((isNaN(this._rowHeight)) && (isNaN(this._autoRowHeight)))
+         {
+            _loc3_ = createRenderer(0);
+            this._autoRowHeight = _loc3_.height;
+            cleanUpRenderer(_loc3_);
+         }
+         return (this.availableHeight - this.padding.vertical) / this.rowHeight >> 0;
+      }
 
-        public var thumbOffset:Object;
+      protected function handleScroll(param1:Event) : void {
+         this.scrollPosition = this._scrollBar.position;
+      }
 
-        public var thumbSizeFactor:Number=1;
+      protected function populateData(param1:Array) : void {
+         var _loc5_:IListItemRenderer = null;
+         var _loc6_:uint = 0;
+         var _loc7_:ListData = null;
+         var _loc2_:uint = param1.length;
+         var _loc3_:uint = _renderers.length;
+         var _loc4_:uint = 0;
+         while(_loc4_ < _loc3_)
+         {
+            _loc5_ = getRendererAt(_loc4_);
+            _loc6_ = this._scrollPosition + _loc4_;
+            _loc7_ = new ListData(_loc6_,itemToLabel(param1[_loc4_]),_selectedIndex == _loc6_);
+            _loc5_.enabled = _loc4_ >= _loc2_?false:true;
+            _loc5_.setListData(_loc7_);
+            _loc5_.setData(param1[_loc4_]);
+            _loc5_.validateNow();
+            _loc4_++;
+         }
+      }
 
-        protected var _rowHeight:Number=NaN;
+      override protected function scrollList(param1:int) : void {
+         this.scrollPosition = this.scrollPosition - param1;
+      }
 
-        protected var _rowCount:Number=NaN;
+      protected function blockMouseWheel(param1:MouseEvent) : void {
+         param1.stopPropagation();
+      }
+   }
 
-        protected var _scrollPosition:uint=0;
-
-        protected var _autoScrollBar:Boolean=false;
-
-        protected var _scrollBarValue:Object;
-
-        protected var _margin:Number=0;
-
-        protected var _padding:scaleform.clik.utils.Padding;
-
-        protected var _scrollBar:scaleform.clik.interfaces.IScrollBar;
-
-        protected var _autoRowHeight:Number=NaN;
-    }
 }

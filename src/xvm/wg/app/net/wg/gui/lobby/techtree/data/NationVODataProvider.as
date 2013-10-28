@@ -1,57 +1,57 @@
-package net.wg.gui.lobby.techtree.data 
+package net.wg.gui.lobby.techtree.data
 {
-    import net.wg.gui.lobby.techtree.data.vo.*;
-    import net.wg.gui.lobby.techtree.interfaces.*;
-    import net.wg.utils.*;
-    
-    public class NationVODataProvider extends net.wg.gui.lobby.techtree.data.AbstractDataProvider implements net.wg.gui.lobby.techtree.interfaces.INationTreeDataProvider
-    {
-        public function NationVODataProvider()
-        {
-            this._displaySettings = new net.wg.gui.lobby.techtree.data.vo.NationDisplaySettings();
-            super();
-            return;
-        }
+   import net.wg.gui.lobby.techtree.interfaces.INationTreeDataProvider;
+   import net.wg.gui.lobby.techtree.data.vo.NationDisplaySettings;
+   import net.wg.gui.lobby.techtree.data.vo.NodeData;
+   import net.wg.gui.lobby.techtree.data.vo.NTDisplayInfo;
+   import net.wg.utils.ILocale;
 
-        public function get scrollIndex():Number
-        {
-            return this._scrollIndex;
-        }
 
-        public function get displaySettings():net.wg.gui.lobby.techtree.data.vo.NationDisplaySettings
-        {
-            return this._displaySettings;
-        }
+   public class NationVODataProvider extends AbstractDataProvider implements INationTreeDataProvider
+   {
+          
+      public function NationVODataProvider() {
+         this._displaySettings = new NationDisplaySettings();
+         super();
+      }
 
-        public override function parse(arg1:Object):void
-        {
-            var loc4:*=null;
-            clearUp();
-            net.wg.gui.lobby.techtree.data.vo.NodeData.setDisplayInfoClass(net.wg.gui.lobby.techtree.data.vo.NTDisplayInfo);
-            var loc1:*=arg1.nodes;
-            var loc2:*=App.utils.locale;
-            if (arg1.hasOwnProperty("scrollIndex")) 
-            {
-                this._scrollIndex = arg1.scrollIndex;
-            }
-            if (arg1.hasOwnProperty("displaySettings")) 
-            {
-                this._displaySettings.fromObject(arg1.displaySettings, loc2);
-            }
-            var loc3:*=loc1.length;
-            var loc5:*=0;
-            while (loc5 < loc3) 
-            {
-                (loc4 = new net.wg.gui.lobby.techtree.data.vo.NodeData()).fromObject(loc1[loc5], loc2);
-                nodeIdxCache[loc4.id] = nodeData.length;
-                nodeData.push(loc4);
-                ++loc5;
-            }
-            return;
-        }
+      protected var _scrollIndex:Number = -1;
 
-        protected var _scrollIndex:Number=-1;
+      protected var _displaySettings:NationDisplaySettings;
 
-        protected var _displaySettings:net.wg.gui.lobby.techtree.data.vo.NationDisplaySettings;
-    }
+      public function get scrollIndex() : Number {
+         return this._scrollIndex;
+      }
+
+      public function get displaySettings() : NationDisplaySettings {
+         return this._displaySettings;
+      }
+
+      override public function parse(param1:Object) : void {
+         var _loc5_:NodeData = null;
+         clearUp();
+         NodeData.setDisplayInfoClass(NTDisplayInfo);
+         var _loc2_:Array = param1.nodes;
+         var _loc3_:ILocale = App.utils.locale;
+         if(param1.hasOwnProperty("scrollIndex"))
+         {
+            this._scrollIndex = param1.scrollIndex;
+         }
+         if(param1.hasOwnProperty("displaySettings"))
+         {
+            this._displaySettings.fromObject(param1.displaySettings,_loc3_);
+         }
+         var _loc4_:Number = _loc2_.length;
+         var _loc6_:Number = 0;
+         while(_loc6_ < _loc4_)
+         {
+            _loc5_ = new NodeData();
+            _loc5_.fromObject(_loc2_[_loc6_],_loc3_);
+            nodeIdxCache[_loc5_.id] = nodeData.length;
+            nodeData.push(_loc5_);
+            _loc6_++;
+         }
+      }
+   }
+
 }

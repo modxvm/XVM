@@ -1,10 +1,13 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    import net.wg.data.VO.*;
-    
-    public interface IInventoryMeta extends flash.events.IEventDispatcher
-    {
-        function sellItemS(arg1:net.wg.data.VO.StoreTableData):void;
-    }
+   import flash.events.IEventDispatcher;
+   import net.wg.data.VO.StoreTableData;
+
+
+   public interface IInventoryMeta extends IEventDispatcher
+   {
+          
+      function sellItemS(param1:StoreTableData) : void;
+   }
+
 }

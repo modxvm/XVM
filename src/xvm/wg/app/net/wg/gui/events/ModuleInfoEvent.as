@@ -1,23 +1,23 @@
-package net.wg.gui.events 
+package net.wg.gui.events
 {
-    import flash.events.*;
-    
-    public class ModuleInfoEvent extends flash.events.Event
-    {
-        public function ModuleInfoEvent(arg1:String, arg2:String)
-        {
-            super(arg1, true, true);
-            this.id = arg2;
-            return;
-        }
+   import flash.events.Event;
 
-        public override function clone():flash.events.Event
-        {
-            return new net.wg.gui.events.ModuleInfoEvent(type, this.id);
-        }
 
-        public static const SHOW_INFO:String="showInfo";
+   public class ModuleInfoEvent extends Event
+   {
+          
+      public function ModuleInfoEvent(param1:String, param2:String) {
+         super(param1,true,true);
+         this.id = param2;
+      }
 
-        public var id:String;
-    }
+      public static const SHOW_INFO:String = "showInfo";
+
+      public var id:String;
+
+      override public function clone() : Event {
+         return new ModuleInfoEvent(type,this.id);
+      }
+   }
+
 }

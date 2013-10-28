@@ -1,97 +1,89 @@
-package net.wg.gui.lobby.hangar 
+package net.wg.gui.lobby.hangar
 {
-    import net.wg.gui.components.controls.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import net.wg.infrastructure.interfaces.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.events.*;
-    
-    public class ResearchPanel extends net.wg.infrastructure.base.meta.impl.ResearchPanelMeta implements net.wg.infrastructure.base.meta.IResearchPanelMeta, net.wg.infrastructure.interfaces.IHelpLayoutComponent
-    {
-        public function ResearchPanel()
-        {
-            super();
+   import net.wg.infrastructure.base.meta.impl.ResearchPanelMeta;
+   import net.wg.infrastructure.base.meta.IResearchPanelMeta;
+   import net.wg.infrastructure.interfaces.IHelpLayoutComponent;
+   import net.wg.gui.components.controls.IconText;
+   import net.wg.gui.components.controls.IconTextButton;
+   import scaleform.clik.events.ButtonEvent;
+   import scaleform.clik.constants.InvalidationType;
+
+
+   public class ResearchPanel extends ResearchPanelMeta implements IResearchPanelMeta, IHelpLayoutComponent
+   {
+          
+      public function ResearchPanel() {
+         super();
+      }
+
+      private var _earnedXP:Number = 0;
+
+      private var _isElite:Boolean = false;
+
+      public var xpText:IconText;
+
+      public var button:IconTextButton;
+
+      override protected function onPopulate() : void {
+         super.onPopulate();
+         this.xpText.focusable = false;
+         this.xpText.mouseChildren = false;
+         if(this.button != null)
+         {
+            this.button.addEventListener(ButtonEvent.CLICK,this.handleButtonClick,false,0,true);
+         }
+      }
+
+      override protected function onDispose() : void {
+         super.onDispose();
+         if(this.button != null)
+         {
+            this.button.removeEventListener(ButtonEvent.CLICK,this.handleButtonClick);
+         }
+         this.xpText.dispose();
+         this.xpText = null;
+         this.button.dispose();
+         this.button = null;
+      }
+
+      public function as_setEarnedXP(param1:Number) : void {
+         if(this._earnedXP == param1)
+         {
             return;
-        }
+         }
+         this._earnedXP = param1;
+         invalidateData();
+      }
 
-        protected override function onPopulate():void
-        {
-            super.onPopulate();
-            if (this.button != null) 
-            {
-                this.button.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.handleButtonClick, false, 0, true);
-            }
+      public function as_setElite(param1:Boolean) : void {
+         if(this._isElite == param1)
+         {
             return;
-        }
+         }
+         this._isElite = param1;
+         invalidateData();
+      }
 
-        protected override function onDispose():void
-        {
-            super.onDispose();
-            if (this.button != null) 
-            {
-                this.button.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.handleButtonClick);
-            }
-            return;
-        }
+      public function showHelpLayout() : void {
+         this.button.showHelpLayout();
+      }
 
-        public function as_setEarnedXP(arg1:Number):void
-        {
-            if (this._earnedXP == arg1) 
-            {
-                return;
-            }
-            this._earnedXP = arg1;
-            invalidateData();
-            return;
-        }
+      public function closeHelpLayout() : void {
+         this.button.closeHelpLayout();
+      }
 
-        public function as_setElite(arg1:Boolean):void
-        {
-            if (this._isElite == arg1) 
-            {
-                return;
-            }
-            this._isElite = arg1;
-            invalidateData();
-            return;
-        }
+      override protected function draw() : void {
+         super.draw();
+         if((isInvalid(InvalidationType.DATA)) && !(this.xpText == null))
+         {
+            this.xpText.text = App.utils != null?App.utils.locale.integer(this._earnedXP):this._earnedXP.toString();
+            this.xpText.icon = this._isElite?IconText.ELITE_XP:IconText.XP;
+         }
+      }
 
-        public function showHelpLayout():void
-        {
-            this.button.showHelpLayout();
-            return;
-        }
+      private function handleButtonClick(param1:ButtonEvent) : void {
+         goToResearchS();
+      }
+   }
 
-        public function closeHelpLayout():void
-        {
-            this.button.closeHelpLayout();
-            return;
-        }
-
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA) && !(this.xpText == null)) 
-            {
-                this.xpText.text = App.utils == null ? this._earnedXP.toString() : App.utils.locale.integer(this._earnedXP);
-                this.xpText.icon = this._isElite ? net.wg.gui.components.controls.IconText.ELITE_XP : net.wg.gui.components.controls.IconText.XP;
-            }
-            return;
-        }
-
-        internal function handleButtonClick(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            goToResearchS();
-            return;
-        }
-
-        internal var _earnedXP:Number=0;
-
-        internal var _isElite:Boolean=false;
-
-        public var xpText:net.wg.gui.components.controls.IconText;
-
-        public var button:net.wg.gui.components.controls.IconTextButton;
-    }
 }

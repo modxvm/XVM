@@ -1,94 +1,91 @@
-package net.wg.infrastructure.helpers 
+package net.wg.infrastructure.helpers
 {
-    import __AS3__.vec.*;
-    import flash.display.*;
-    import net.wg.infrastructure.events.*;
-    import net.wg.infrastructure.interfaces.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    
-    public class DropListDelegate extends flash.display.MovieClip implements net.wg.infrastructure.interfaces.IDragDropListDelegate
-    {
-        public function DropListDelegate(arg1:flash.display.InteractiveObject, arg2:String)
-        {
-            super();
-            this._hitArea = arg1;
-            this._dropElementLinkage = arg2;
-            return;
-        }
+   import flash.display.MovieClip;
+   import net.wg.infrastructure.interfaces.IDragDropListDelegate;
+   import __AS3__.vec.Vector;
+   import flash.display.InteractiveObject;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import net.wg.infrastructure.events.DragDropEvent;
+   import flash.display.Sprite;
 
-        public function dispose():void
-        {
-            this._pairedScrollLists.splice(0, this._pairedScrollLists.length);
-            this._pairedScrollLists = null;
-            this._hitArea = null;
-            this._dropElementLinkage = null;
-            return;
-        }
 
-        public function onBeforeDrop(arg1:flash.display.InteractiveObject, arg2:flash.display.InteractiveObject):void
-        {
-            this.dispatchDragEvent(net.wg.infrastructure.events.DragDropEvent.BEFORE_DROP, arg1, null, arg2);
-            return;
-        }
+   public class DropListDelegate extends MovieClip implements IDragDropListDelegate
+   {
+          
+      public function DropListDelegate(param1:InteractiveObject, param2:String) {
+         super();
+         this._hitArea = param1;
+         this._dropElementLinkage = param2;
+      }
 
-        public function onAfterDrop(arg1:flash.display.InteractiveObject, arg2:flash.display.InteractiveObject):void
-        {
-            this.dispatchDragEvent(net.wg.infrastructure.events.DragDropEvent.AFTER_DROP, arg1, null, arg2);
-            if (App.cursor.getAttachedSprite() != null) 
+      private var _pairedScrollLists:Vector.<InteractiveObject> = null;
+
+      private var _hitArea:InteractiveObject = null;
+
+      private var _dropElementLinkage:String = null;
+
+      public function dispose() : void {
+         if(App.cursor.getAttachedSprite() != null)
+         {
+            if(App.cursor.getAttachedSprite()  is  IDisposable)
             {
-                if (App.cursor.getAttachedSprite() is net.wg.infrastructure.interfaces.entity.IDisposable) 
-                {
-                    net.wg.infrastructure.interfaces.entity.IDisposable(App.cursor.getAttachedSprite()).dispose();
-                }
-                App.cursor.detachFromCursor();
+               IDisposable(App.cursor.getAttachedSprite()).dispose();
             }
-            return;
-        }
+            App.cursor.detachFromCursor();
+         }
+         this._pairedScrollLists.splice(0,this._pairedScrollLists.length);
+         this._pairedScrollLists = null;
+         this._hitArea = null;
+         this._dropElementLinkage = null;
+      }
 
-        public function onStartDrop(arg1:flash.display.InteractiveObject, arg2:flash.display.InteractiveObject, arg3:Number, arg4:Number):void
-        {
-            var loc1:*=null;
-            if (App.instance) 
+      public function onBeforeDrop(param1:InteractiveObject, param2:InteractiveObject) : Boolean {
+         this.dispatchDragEvent(DragDropEvent.BEFORE_DROP,param1,null,param2);
+         return true;
+      }
+
+      public function onAfterDrop(param1:InteractiveObject, param2:InteractiveObject) : void {
+         this.dispatchDragEvent(DragDropEvent.AFTER_DROP,param1,null,param2);
+         if(App.cursor.getAttachedSprite() != null)
+         {
+            if(App.cursor.getAttachedSprite()  is  IDisposable)
             {
-                loc1 = App.utils.classFactory.getComponent(this._dropElementLinkage, flash.display.Sprite);
-                App.cursor.attachToCursor(loc1, -arg3, -arg4);
+               IDisposable(App.cursor.getAttachedSprite()).dispose();
             }
-            this.dispatchDragEvent(net.wg.infrastructure.events.DragDropEvent.START_DROP, arg1, null, arg2);
-            return;
-        }
+            App.cursor.detachFromCursor();
+         }
+      }
 
-        public function onEndDrop(arg1:flash.display.InteractiveObject, arg2:flash.display.InteractiveObject, arg3:flash.display.InteractiveObject):void
-        {
-            this.dispatchDragEvent(net.wg.infrastructure.events.DragDropEvent.END_DROP, arg1, arg2, arg3);
-            return;
-        }
+      public function onStartDrop(param1:InteractiveObject, param2:InteractiveObject, param3:Number, param4:Number) : Boolean {
+         var _loc5_:Sprite = null;
+         if(App.instance)
+         {
+            _loc5_ = App.utils.classFactory.getComponent(this._dropElementLinkage,Sprite);
+            App.cursor.attachToCursor(_loc5_,-param3,-param4);
+         }
+         this.dispatchDragEvent(DragDropEvent.START_DROP,param1,null,param2);
+         return true;
+      }
 
-        public function getDropGroup():__AS3__.vec.Vector.<flash.display.InteractiveObject>
-        {
-            return Vector.<flash.display.InteractiveObject>(this._pairedScrollLists);
-        }
+      public function onEndDrop(param1:InteractiveObject, param2:InteractiveObject, param3:InteractiveObject, param4:InteractiveObject) : void {
+         this.dispatchDragEvent(DragDropEvent.END_DROP,param1,param2,param3);
+      }
 
-        public function getHitArea():flash.display.InteractiveObject
-        {
-            return this._hitArea;
-        }
+      public function getDropGroup() : Vector.<InteractiveObject> {
+         return Vector.<InteractiveObject>(this._pairedScrollLists);
+      }
 
-        public function setPairedDropLists(arg1:__AS3__.vec.Vector.<flash.display.InteractiveObject>):void
-        {
-            this._pairedScrollLists = arg1;
-            return;
-        }
+      public function getHitArea() : InteractiveObject {
+         return this._hitArea;
+      }
 
-        internal function dispatchDragEvent(arg1:String, arg2:flash.display.InteractiveObject, arg3:flash.display.InteractiveObject, arg4:flash.display.InteractiveObject):void
-        {
-            this._hitArea.dispatchEvent(new net.wg.infrastructure.events.DragDropEvent(arg1, arg2, arg3, arg4));
-            return;
-        }
+      public function setPairedDropLists(param1:Vector.<InteractiveObject>) : void {
+         this._pairedScrollLists = param1;
+      }
 
-        internal var _pairedScrollLists:__AS3__.vec.Vector.<flash.display.InteractiveObject>=null;
+      private function dispatchDragEvent(param1:String, param2:InteractiveObject, param3:InteractiveObject, param4:InteractiveObject) : void {
+         this._hitArea.dispatchEvent(new DragDropEvent(param1,param2,param3,param4));
+      }
+   }
 
-        internal var _hitArea:flash.display.InteractiveObject=null;
-
-        internal var _dropElementLinkage:String=null;
-    }
 }

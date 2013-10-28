@@ -1,146 +1,125 @@
-package scaleform.gfx 
+package scaleform.gfx
 {
-    import flash.display.*;
-    import flash.text.*;
-    
-    public final class TextFieldEx extends scaleform.gfx.InteractiveObjectEx
-    {
-        public function TextFieldEx()
-        {
-            super();
-            return;
-        }
+   import flash.text.TextField;
+   import flash.display.BitmapData;
 
-        public static function getNoTranslate(arg1:flash.text.TextField):Boolean
-        {
-            return false;
-        }
 
-        public static function setBidirectionalTextEnabled(arg1:flash.text.TextField, arg2:Boolean):void
-        {
-            return;
-        }
+   public final class TextFieldEx extends InteractiveObjectEx
+   {
+          
+      public function TextFieldEx() {
+         super();
+      }
 
-        public static function getBidirectionalTextEnabled(arg1:flash.text.TextField):Boolean
-        {
-            return false;
-        }
+      public static const VALIGN_NONE:String = "none";
 
-        public static function setSelectionTextColor(arg1:flash.text.TextField, arg2:uint):void
-        {
-            return;
-        }
+      public static const VALIGN_TOP:String = "top";
 
-        public static function getSelectionTextColor(arg1:flash.text.TextField):uint
-        {
-            return 4294967295;
-        }
+      public static const VALIGN_CENTER:String = "center";
 
-        public static function setSelectionBkgColor(arg1:flash.text.TextField, arg2:uint):void
-        {
-            return;
-        }
+      public static const VALIGN_BOTTOM:String = "bottom";
 
-        public static function getSelectionBkgColor(arg1:flash.text.TextField):uint
-        {
-            return 4278190080;
-        }
+      public static const TEXTAUTOSZ_NONE:String = "none";
 
-        public static function setInactiveSelectionTextColor(arg1:flash.text.TextField, arg2:uint):void
-        {
-            return;
-        }
+      public static const TEXTAUTOSZ_SHRINK:String = "shrink";
 
-        public static function getInactiveSelectionTextColor(arg1:flash.text.TextField):uint
-        {
-            return 4294967295;
-        }
+      public static const TEXTAUTOSZ_FIT:String = "fit";
 
-        public static function setInactiveSelectionBkgColor(arg1:flash.text.TextField, arg2:uint):void
-        {
-            return;
-        }
+      public static const VAUTOSIZE_NONE:String = "none";
 
-        public static function getInactiveSelectionBkgColor(arg1:flash.text.TextField):uint
-        {
-            return 4278190080;
-        }
+      public static const VAUTOSIZE_TOP:String = "top";
 
-        public static function appendHtml(arg1:flash.text.TextField, arg2:String):void
-        {
-            return;
-        }
+      public static const VAUTOSIZE_CENTER:String = "center";
 
-        public static function setIMEEnabled(arg1:flash.text.TextField, arg2:Boolean):void
-        {
-            return;
-        }
+      public static const VAUTOSIZE_BOTTOM:String = "bottom";
 
-        public static function setVerticalAlign(arg1:flash.text.TextField, arg2:String):void
-        {
-            return;
-        }
+      public static function appendHtml(param1:TextField, param2:String) : void {
+          
+      }
 
-        public static function getVerticalAlign(arg1:flash.text.TextField):String
-        {
-            return "none";
-        }
+      public static function setIMEEnabled(param1:TextField, param2:Boolean) : void {
+          
+      }
 
-        public static function setVerticalAutoSize(arg1:flash.text.TextField, arg2:String):void
-        {
-            return;
-        }
+      public static function setVerticalAlign(param1:TextField, param2:String) : void {
+          
+      }
 
-        public static function getVerticalAutoSize(arg1:flash.text.TextField):String
-        {
-            return "none";
-        }
+      public static function getVerticalAlign(param1:TextField) : String {
+         return "none";
+      }
 
-        public static function setTextAutoSize(arg1:flash.text.TextField, arg2:String):void
-        {
-            return;
-        }
+      public static function setVerticalAutoSize(param1:TextField, param2:String) : void {
+          
+      }
 
-        public static function getTextAutoSize(arg1:flash.text.TextField):String
-        {
-            return "none";
-        }
+      public static function getVerticalAutoSize(param1:TextField) : String {
+         return "none";
+      }
 
-        public static function setImageSubstitutions(arg1:flash.text.TextField, arg2:Object):void
-        {
-            return;
-        }
+      public static function setTextAutoSize(param1:TextField, param2:String) : void {
+          
+      }
 
-        public static function updateImageSubstitution(arg1:flash.text.TextField, arg2:String, arg3:flash.display.BitmapData):void
-        {
-            return;
-        }
+      public static function getTextAutoSize(param1:TextField) : String {
+         return "none";
+      }
 
-        public static function setNoTranslate(arg1:flash.text.TextField, arg2:Boolean):void
-        {
-            return;
-        }
+      public static function setImageSubstitutions(param1:TextField, param2:Object) : void {
+          
+      }
 
-        public static const VALIGN_NONE:String="none";
+      public static function updateImageSubstitution(param1:TextField, param2:String, param3:BitmapData) : void {
+          
+      }
 
-        public static const VALIGN_TOP:String="top";
+      public static function setNoTranslate(param1:TextField, param2:Boolean) : void {
+          
+      }
 
-        public static const VALIGN_CENTER:String="center";
+      public static function getNoTranslate(param1:TextField) : Boolean {
+         return false;
+      }
 
-        public static const VALIGN_BOTTOM:String="bottom";
+      public static function setBidirectionalTextEnabled(param1:TextField, param2:Boolean) : void {
+          
+      }
 
-        public static const TEXTAUTOSZ_NONE:String="none";
+      public static function getBidirectionalTextEnabled(param1:TextField) : Boolean {
+         return false;
+      }
 
-        public static const TEXTAUTOSZ_SHRINK:String="shrink";
+      public static function setSelectionTextColor(param1:TextField, param2:uint) : void {
+          
+      }
 
-        public static const TEXTAUTOSZ_FIT:String="fit";
+      public static function getSelectionTextColor(param1:TextField) : uint {
+         return 4.294967295E9;
+      }
 
-        public static const VAUTOSIZE_NONE:String="none";
+      public static function setSelectionBkgColor(param1:TextField, param2:uint) : void {
+          
+      }
 
-        public static const VAUTOSIZE_TOP:String="top";
+      public static function getSelectionBkgColor(param1:TextField) : uint {
+         return 4.27819008E9;
+      }
 
-        public static const VAUTOSIZE_CENTER:String="center";
+      public static function setInactiveSelectionTextColor(param1:TextField, param2:uint) : void {
+          
+      }
 
-        public static const VAUTOSIZE_BOTTOM:String="bottom";
-    }
+      public static function getInactiveSelectionTextColor(param1:TextField) : uint {
+         return 4.294967295E9;
+      }
+
+      public static function setInactiveSelectionBkgColor(param1:TextField, param2:uint) : void {
+          
+      }
+
+      public static function getInactiveSelectionBkgColor(param1:TextField) : uint {
+         return 4.27819008E9;
+      }
+   }
+
 }

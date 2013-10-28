@@ -1,89 +1,84 @@
-package net.wg.gui.utils 
+package net.wg.gui.utils
 {
-    import flash.filters.*;
-    import flash.text.*;
-    import net.wg.data.constants.*;
-    
-    public class VehicleStateString extends Object
-    {
-        public function VehicleStateString()
-        {
-            super();
-            return;
-        }
+   import flash.text.TextField;
+   import flash.filters.DropShadowFilter;
+   import flash.filters.GlowFilter;
+   import net.wg.data.constants.VehicleState;
 
-        public static function getI18nKey(arg1:String):String
-        {
-            return arg1.length > 0 ? MENU.tankcarousel_vehiclestates(arg1) : "";
-        }
 
-        public static function appendText(arg1:flash.text.TextField, arg2:String):void
-        {
-            var loc1:*=[];
-            var loc2:*=0;
-            var loc3:*=null;
-            var loc4:*=arg2;
-            switch (loc4) 
-            {
-                case net.wg.data.constants.VehicleState.IN_BATTLE:
-                case net.wg.data.constants.VehicleState.IN_PREBATTLE:
-                {
-                    loc2 = 13617064;
-                    (loc3 = new flash.filters.DropShadowFilter()).distance = 0;
-                    loc3.angle = 90;
-                    loc3.color = 0;
-                    loc3.alpha = 0.25;
-                    loc3.blurX = 8;
-                    loc3.blurY = 8;
-                    loc3.strength = 16;
-                    loc3.quality = 2;
-                    loc3.inner = false;
-                    loc3.knockout = false;
-                    loc3.hideObject = false;
-                    loc1.push(loc3);
-                    break;
-                }
-                case net.wg.data.constants.VehicleState.BUY_VEHICLE:
-                case net.wg.data.constants.VehicleState.BUY_SLOT:
-                {
-                    loc2 = 15329754;
-                    (loc3 = new flash.filters.GlowFilter()).color = 16777150;
-                    loc3.alpha = 0.2;
-                    loc3.blurX = 15;
-                    loc3.blurY = 15;
-                    loc3.strength = 4;
-                    loc3.quality = 2;
-                    loc3.inner = false;
-                    loc3.knockout = false;
-                    loc1.push(loc3);
-                    break;
-                }
-                case net.wg.data.constants.VehicleState.AMMO_NOT_FULL:
-                case net.wg.data.constants.VehicleState.CREW_NOT_FULL:
-                case net.wg.data.constants.VehicleState.EXPLODED:
-                case net.wg.data.constants.VehicleState.DESTROYED:
-                case net.wg.data.constants.VehicleState.DAMAGED:
-                {
-                    loc2 = 15400960;
-                    (loc3 = new flash.filters.DropShadowFilter()).distance = 0;
-                    loc3.angle = 90;
-                    loc3.color = 0;
-                    loc3.alpha = 0.25;
-                    loc3.blurX = 8;
-                    loc3.blurY = 8;
-                    loc3.strength = 16;
-                    loc3.quality = 2;
-                    loc3.inner = false;
-                    loc3.knockout = false;
-                    loc3.hideObject = false;
-                    loc1.push(loc3);
-                    break;
-                }
-            }
-            arg1.text = getI18nKey(arg2);
-            arg1.textColor = loc2;
-            arg1.filters = loc1;
-            return;
-        }
-    }
+   public class VehicleStateString extends Object
+   {
+          
+      public function VehicleStateString() {
+         super();
+      }
+
+      public static function getI18nKey(param1:String) : String {
+         return param1.length > 0?MENU.tankcarousel_vehiclestates(param1):"";
+      }
+
+      public static function appendText(param1:TextField, param2:String) : void {
+         var _loc3_:Array = [];
+         var _loc4_:Number = 0;
+         var _loc5_:* = null;
+         switch(param2)
+         {
+            case VehicleState.IN_BATTLE:
+            case VehicleState.IN_PREBATTLE:
+               _loc4_ = 13617064;
+               _loc5_ = new DropShadowFilter();
+               _loc5_.distance = 0;
+               _loc5_.angle = 90;
+               _loc5_.color = 0;
+               _loc5_.alpha = 0.25;
+               _loc5_.blurX = 8;
+               _loc5_.blurY = 8;
+               _loc5_.strength = 16;
+               _loc5_.quality = 2;
+               _loc5_.inner = false;
+               _loc5_.knockout = false;
+               _loc5_.hideObject = false;
+               _loc3_.push(_loc5_);
+               break;
+            case VehicleState.BUY_VEHICLE:
+            case VehicleState.BUY_SLOT:
+               _loc4_ = 15329754;
+               _loc5_ = new GlowFilter();
+               _loc5_.color = 16777150;
+               _loc5_.alpha = 0.2;
+               _loc5_.blurX = 15;
+               _loc5_.blurY = 15;
+               _loc5_.strength = 4;
+               _loc5_.quality = 2;
+               _loc5_.inner = false;
+               _loc5_.knockout = false;
+               _loc3_.push(_loc5_);
+               break;
+            case VehicleState.AMMO_NOT_FULL:
+            case VehicleState.CREW_NOT_FULL:
+            case VehicleState.EXPLODED:
+            case VehicleState.DESTROYED:
+            case VehicleState.DAMAGED:
+               _loc4_ = 15400960;
+               _loc5_ = new DropShadowFilter();
+               _loc5_.distance = 0;
+               _loc5_.angle = 90;
+               _loc5_.color = 0;
+               _loc5_.alpha = 0.25;
+               _loc5_.blurX = 8;
+               _loc5_.blurY = 8;
+               _loc5_.strength = 16;
+               _loc5_.quality = 2;
+               _loc5_.inner = false;
+               _loc5_.knockout = false;
+               _loc5_.hideObject = false;
+               _loc3_.push(_loc5_);
+               break;
+         }
+         param1.text = getI18nKey(param2);
+         param1.textColor = _loc4_;
+         param1.filters = _loc3_;
+      }
+   }
+
 }

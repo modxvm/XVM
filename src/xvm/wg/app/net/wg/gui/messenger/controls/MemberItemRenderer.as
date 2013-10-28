@@ -1,201 +1,182 @@
-package net.wg.gui.messenger.controls 
+package net.wg.gui.messenger.controls
 {
-    import flash.display.*;
-    import flash.events.*;
-    import flash.geom.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.messenger.data.*;
-    import net.wg.gui.prebattle.squad.*;
-    import net.wg.infrastructure.events.*;
-    import scaleform.clik.constants.*;
-    
-    public class MemberItemRenderer extends net.wg.gui.components.controls.SoundListItemRenderer
-    {
-        public function MemberItemRenderer()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.components.controls.SoundListItemRenderer;
+   import flash.display.MovieClip;
+   import net.wg.gui.components.controls.VoiceWave;
+   import net.wg.gui.messenger.data.ChannelMemberVO;
+   import net.wg.infrastructure.events.VoiceChatEvent;
+   import flash.geom.Point;
+   import scaleform.clik.constants.InvalidationType;
+   import net.wg.gui.prebattle.squad.MessengerUtils;
+   import flash.events.MouseEvent;
 
-        public override function setData(arg1:Object):void
-        {
-            super.setData(arg1);
-            if (!arg1) 
+
+   public class MemberItemRenderer extends SoundListItemRenderer
+   {
+          
+      public function MemberItemRenderer() {
+         super();
+      }
+
+      private static const TEXT_WIDTH_CORRECTION:Number = 12;
+
+      private static const STATUS_ONLINE:String = "online";
+
+      private static const STATUS_OFFLINE:String = "offline";
+
+      private static const STATUS_IGNORED:String = "ignored";
+
+      private static const STATUS_HIMSELF:String = "himself";
+
+      public var status:MovieClip;
+
+      public var voiceWave:VoiceWave;
+
+      protected var model:ChannelMemberVO;
+
+      protected var tooltip:String;
+
+      override public function setData(param1:Object) : void {
+         super.setData(param1);
+         if(!param1)
+         {
+            visible = false;
+            this.model = null;
+            return;
+         }
+         visible = true;
+         this.model = new ChannelMemberVO(param1);
+         label = this.model.userName;
+         this.tooltip = this.model.userName;
+         invalidateData();
+      }
+
+      override public function dispose() : void {
+         if(this.model)
+         {
+            this.model.dispose();
+            this.model = null;
+         }
+         App.voiceChatMgr.removeEventListener(VoiceChatEvent.START_SPEAKING,this.speakHandler);
+         App.voiceChatMgr.removeEventListener(VoiceChatEvent.STOP_SPEAKING,this.speakHandler);
+         super.dispose();
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.voiceWave.visible = App.voiceChatMgr.isVOIPEnabledS();
+         App.voiceChatMgr.addEventListener(VoiceChatEvent.START_SPEAKING,this.speakHandler);
+         App.voiceChatMgr.addEventListener(VoiceChatEvent.STOP_SPEAKING,this.speakHandler);
+         setState("out");
+      }
+
+      override protected function draw() : void {
+         var _loc1_:Point = null;
+         if((isInvalid(InvalidationType.DATA)) && (this.model))
+         {
+            this.status.gotoAndPlay(this.getStatusFrame());
+            this.voiceWave.setMuted(MessengerUtils.isMuted(this.model));
+            this.setSpeaking(this.model.isPlayerSpeaking,true);
+            if(enabled)
             {
-                visible = false;
-                this.model = null;
-                return;
+               _loc1_ = new Point(mouseX,mouseY);
+               _loc1_ = localToGlobal(_loc1_);
+               if(hitTestPoint(_loc1_.x,_loc1_.y,true))
+               {
+                  setState("over");
+                  App.soundMgr.playControlsSnd(state,soundType,soundId);
+                  dispatchEvent(new MouseEvent(MouseEvent.ROLL_OVER));
+               }
             }
-            visible = true;
-            this.model = new net.wg.gui.messenger.data.ChannelMemberVO(arg1);
-            label = this.model.userName;
-            this.tooltip = this.model.userName;
-            invalidateData();
-            return;
-        }
+         }
+         super.draw();
+      }
 
-        public override function dispose():void
-        {
-            if (this.model) 
+      override protected function updateAfterStateChange() : void {
+         super.updateAfterStateChange();
+         if(this.model)
+         {
+            textField.textColor = this.model.color;
+         }
+      }
+
+      private function getStatusFrame() : String {
+         var _loc1_:String = MessengerUtils.isIgnored(this.model)?STATUS_IGNORED:this.model.himself?STATUS_HIMSELF:STATUS_ONLINE;
+         return _loc1_;
+      }
+
+      override protected function handleMouseRollOver(param1:MouseEvent) : void {
+         super.handleMouseRollOver(param1);
+         if(this.tooltip)
+         {
+            App.toolTipMgr.show(this.tooltip);
+         }
+      }
+
+      override protected function handleMouseRollOut(param1:MouseEvent) : void {
+         super.handleMouseRollOut(param1);
+         App.toolTipMgr.hide();
+         if(enabled)
+         {
+            if(!_focused && !_displayFocus || !(focusIndicator == null))
             {
-                this.model.dispose();
-                this.model = null;
+               setState("out");
             }
-            App.voiceChatMgr.removeEventListener(net.wg.infrastructure.events.VoiceChatEvent.START_SPEAKING, this.speakHandler);
-            App.voiceChatMgr.removeEventListener(net.wg.infrastructure.events.VoiceChatEvent.STOP_SPEAKING, this.speakHandler);
-            super.dispose();
-            return;
-        }
+         }
+      }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.voiceWave.visible = App.voiceChatMgr.isVOIPEnabledS();
-            App.voiceChatMgr.addEventListener(net.wg.infrastructure.events.VoiceChatEvent.START_SPEAKING, this.speakHandler);
-            App.voiceChatMgr.addEventListener(net.wg.infrastructure.events.VoiceChatEvent.STOP_SPEAKING, this.speakHandler);
-            setState("out");
-            return;
-        }
+      override protected function updateText() : void {
+         if(!(_label == null) && !(textField == null))
+         {
+            textField.text = _label;
+            this.truncateText();
+         }
+      }
 
-        protected override function draw():void
-        {
-            var loc1:*=null;
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA) && this.model) 
+      private function truncateText() : void {
+         var _loc1_:String = null;
+         var _loc2_:String = null;
+         var _loc3_:uint = 0;
+         if(textField.textWidth > textField.width - TEXT_WIDTH_CORRECTION)
+         {
+            _loc1_ = textField.text.length > 0?textField.text:_label;
+            _loc2_ = _loc1_;
+            _loc3_ = 1;
+            while(_loc2_.length > 0 && _loc3_ > 0)
             {
-                this.status.gotoAndPlay(this.getStatusFrame());
-                this.voiceWave.setMuted(net.wg.gui.prebattle.squad.MessengerUtils.isMuted(this.model));
-                this.setSpeaking(this.model.isPlayerSpeaking, true);
-                if (enabled) 
-                {
-                    loc1 = new flash.geom.Point(mouseX, mouseY);
-                    loc1 = localToGlobal(loc1);
-                    if (hitTestPoint(loc1.x, loc1.y, true)) 
-                    {
-                        setState("over");
-                        App.soundMgr.playControlsSnd(state, soundType, soundId);
-                        dispatchEvent(new flash.events.MouseEvent(flash.events.MouseEvent.ROLL_OVER));
-                    }
-                }
+               _loc2_ = _loc1_.substring(0,_loc1_.length - _loc3_) + "..";
+               textField.text = _loc2_;
+               if(textField.textWidth > textField.width - TEXT_WIDTH_CORRECTION)
+               {
+                  _loc3_++;
+               }
+               else
+               {
+                  _loc3_ = 0;
+               }
             }
-            super.draw();
-            return;
-        }
+         }
+      }
 
-        protected override function updateAfterStateChange():void
-        {
-            super.updateAfterStateChange();
-            if (this.model) 
-            {
-                textField.textColor = this.model.color;
-            }
-            return;
-        }
+      private function speakHandler(param1:VoiceChatEvent) : void {
+         var _loc2_:uint = param1.getAccountDBID();
+         var _loc3_:* = param1.type == VoiceChatEvent.START_SPEAKING;
+         if((this.model) && this.model.uid == _loc2_)
+         {
+            this.setSpeaking(_loc3_,false);
+         }
+      }
 
-        internal function getStatusFrame():String
-        {
-            var loc1:*=net.wg.gui.prebattle.squad.MessengerUtils.isIgnored(this.model) ? STATUS_IGNORED : this.model.himself ? STATUS_HIMSELF : STATUS_ONLINE;
-            return loc1;
-        }
+      private function setSpeaking(param1:Boolean, param2:Boolean=false) : void {
+         if(param1)
+         {
+            param2 = false;
+         }
+         if(this.voiceWave  is  VoiceWave)
+         {
+            this.voiceWave.setSpeaking(param1,param2);
+         }
+      }
+   }
 
-        protected override function handleMouseRollOver(arg1:flash.events.MouseEvent):void
-        {
-            super.handleMouseRollOver(arg1);
-            if (this.tooltip) 
-            {
-                App.toolTipMgr.show(this.tooltip);
-            }
-            return;
-        }
-
-        protected override function handleMouseRollOut(arg1:flash.events.MouseEvent):void
-        {
-            super.handleMouseRollOut(arg1);
-            App.toolTipMgr.hide();
-            if (enabled) 
-            {
-                if (!_focused && !_displayFocus || !(focusIndicator == null)) 
-                {
-                    setState("out");
-                }
-            }
-            return;
-        }
-
-        protected override function updateText():void
-        {
-            if (!(_label == null) && !(textField == null)) 
-            {
-                textField.text = _label;
-                this.truncateText();
-            }
-            return;
-        }
-
-        internal function truncateText():void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            var loc3:*=0;
-            if (textField.textWidth > textField.width - TEXT_WIDTH_CORRECTION) 
-            {
-                loc1 = textField.text.length > 0 ? textField.text : _label;
-                loc2 = loc1;
-                loc3 = 1;
-                while (loc2.length > 0 && loc3 > 0) 
-                {
-                    loc2 = loc1.substring(0, loc1.length - loc3) + "..";
-                    textField.text = loc2;
-                    if (textField.textWidth > textField.width - TEXT_WIDTH_CORRECTION) 
-                    {
-                        ++loc3;
-                        continue;
-                    }
-                    loc3 = 0;
-                }
-            }
-            return;
-        }
-
-        internal function speakHandler(arg1:net.wg.infrastructure.events.VoiceChatEvent):void
-        {
-            var loc1:*=arg1.getAccountDBID();
-            var loc2:*=arg1.type == net.wg.infrastructure.events.VoiceChatEvent.START_SPEAKING;
-            if (this.model && this.model.uid == loc1) 
-            {
-                this.setSpeaking(loc2, false);
-            }
-            return;
-        }
-
-        internal function setSpeaking(arg1:Boolean, arg2:Boolean=false):void
-        {
-            if (arg1) 
-            {
-                arg2 = false;
-            }
-            if (this.voiceWave is net.wg.gui.components.controls.VoiceWave) 
-            {
-                this.voiceWave.setSpeaking(arg1, arg2);
-            }
-            return;
-        }
-
-        internal static const TEXT_WIDTH_CORRECTION:Number=12;
-
-        internal static const STATUS_ONLINE:String="online";
-
-        internal static const STATUS_OFFLINE:String="offline";
-
-        internal static const STATUS_IGNORED:String="ignored";
-
-        internal static const STATUS_HIMSELF:String="himself";
-
-        public var status:flash.display.MovieClip;
-
-        public var voiceWave:net.wg.gui.components.controls.VoiceWave;
-
-        protected var model:net.wg.gui.messenger.data.ChannelMemberVO;
-
-        protected var tooltip:String;
-    }
 }

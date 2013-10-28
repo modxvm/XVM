@@ -1,11 +1,14 @@
-package scaleform.clik.interfaces 
+package scaleform.clik.interfaces
 {
-    import net.wg.infrastructure.interfaces.entity.*;
-    
-    public interface IScrollBar extends scaleform.clik.interfaces.IUIComponent, net.wg.infrastructure.interfaces.entity.IDisposable
-    {
-        function get position():Number;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
 
-        function set position(arg1:Number):void;
-    }
+
+   public interface IScrollBar extends IUIComponent, IDisposable
+   {
+          
+      function get position() : Number;
+
+      function set position(param1:Number) : void;
+   }
+
 }

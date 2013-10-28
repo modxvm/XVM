@@ -1,30 +1,29 @@
-package net.wg.gui.components.common.video.advanced 
+package net.wg.gui.components.common.video.advanced
 {
-    import net.wg.gui.components.controls.*;
-    import scaleform.clik.core.*;
-    
-    public class VideoPlayerTitleBar extends scaleform.clik.core.UIComponent
-    {
-        public function VideoPlayerTitleBar()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import net.wg.gui.components.controls.SoundButtonEx;
 
-        public override function dispose():void
-        {
-            super.dispose();
-            if (this.closeBtn) 
+
+   public class VideoPlayerTitleBar extends UIComponent
+   {
+          
+      public function VideoPlayerTitleBar() {
+         super();
+      }
+
+      public var closeBtn:SoundButtonEx;
+
+      override public function dispose() : void {
+         super.dispose();
+         if(this.closeBtn)
+         {
+            if(this.closeBtn.parent)
             {
-                if (this.closeBtn.parent) 
-                {
-                    this.closeBtn.parent.removeChild(this.closeBtn);
-                }
-                this.closeBtn = null;
+               this.closeBtn.parent.removeChild(this.closeBtn);
             }
-            return;
-        }
+            this.closeBtn = null;
+         }
+      }
+   }
 
-        public var closeBtn:net.wg.gui.components.controls.SoundButtonEx;
-    }
 }

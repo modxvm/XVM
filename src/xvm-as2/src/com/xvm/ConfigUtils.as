@@ -24,6 +24,10 @@ class com.xvm.ConfigUtils
                     // warning: arrays are not checked now
                     return (config instanceof Array) ? config : def;
                 }
+                if (prefix == "def.vehicleNames")
+                {
+                    return config == null ? def : config;
+                }
                 if (def == null)
                     return (typeof config == 'string' || typeof config == 'number') ? config : null;
                 var result: Object = { };

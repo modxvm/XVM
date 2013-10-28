@@ -1,57 +1,49 @@
-package net.wg.gui.components.common.crosshair 
+package net.wg.gui.components.common.crosshair
 {
-    import flash.display.*;
-    
-    public class CrosshairStrategic extends net.wg.gui.components.common.crosshair.CrosshairBase
-    {
-        public function CrosshairStrategic()
-        {
-            super();
-            return;
-        }
+   import flash.display.MovieClip;
 
-        protected override function initCallbacks():void
-        {
-            return;
-        }
 
-        protected override function onSetReloading(arg1:Number, arg2:Number, arg3:Boolean, arg4:Number=0):void
-        {
-            this.radiusNodesGotoAndStop(arg1 != 0 ? NODE_TYPE_RED : NODE_TYPE_GREEN);
-            return;
-        }
+   public class CrosshairStrategic extends CrosshairBase
+   {
+          
+      public function CrosshairStrategic() {
+         super();
+      }
 
-        protected override function onSetReloadingAsPercent(arg1:Number):void
-        {
-            this.radiusNodesGotoAndStop(arg1 < 100 ? NODE_TYPE_RED : NODE_TYPE_GREEN);
-            return;
-        }
+      private static const NODE_TYPE_RED:String = "red";
 
-        protected function onSetAsDebug():void
-        {
-            this.radiusNodesGotoAndStop(NODE_TYPE_DEBUG);
-            return;
-        }
+      private static const NODE_TYPE_GREEN:String = "green";
 
-        internal function radiusNodesGotoAndStop(arg1:String):void
-        {
-            var loc1:*=1;
-            while (loc1 <= NODES_COUNT) 
-            {
-                (getChildByName(NODE_NAME_BASE + loc1) as flash.display.MovieClip).gotoAndStop(arg1);
-                ++loc1;
-            }
-            return;
-        }
+      private static const NODE_TYPE_DEBUG:String = "debug";
 
-        internal static const NODE_TYPE_RED:String="red";
+      private static const NODES_COUNT:uint = 37;
 
-        internal static const NODE_TYPE_GREEN:String="green";
+      private static const NODE_NAME_BASE:String = "elem_";
 
-        internal static const NODE_TYPE_DEBUG:String="debug";
+      override protected function initCallbacks() : void {
+          
+      }
 
-        internal static const NODES_COUNT:uint=37;
+      override protected function onSetReloading(param1:Number, param2:Number, param3:Boolean, param4:Number=0) : void {
+         this.radiusNodesGotoAndStop(param1 == 0?NODE_TYPE_GREEN:NODE_TYPE_RED);
+      }
 
-        internal static const NODE_NAME_BASE:String="elem_";
-    }
+      override protected function onSetReloadingAsPercent(param1:Number) : void {
+         this.radiusNodesGotoAndStop(param1 < 100?NODE_TYPE_RED:NODE_TYPE_GREEN);
+      }
+
+      protected function onSetAsDebug() : void {
+         this.radiusNodesGotoAndStop(NODE_TYPE_DEBUG);
+      }
+
+      private function radiusNodesGotoAndStop(param1:String) : void {
+         var _loc2_:* = 1;
+         while(_loc2_ <= NODES_COUNT)
+         {
+            (getChildByName(NODE_NAME_BASE + _loc2_) as MovieClip).gotoAndStop(param1);
+            _loc2_++;
+         }
+      }
+   }
+
 }

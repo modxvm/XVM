@@ -1,46 +1,44 @@
-package net.wg.gui.lobby.profile 
+package net.wg.gui.lobby.profile
 {
-    import flash.utils.*;
-    import net.wg.data.*;
-    
-    public class SectionsDataUtil extends Object
-    {
-        public function SectionsDataUtil()
-        {
-            this.aliasesByLinkage = new flash.utils.Dictionary(true);
-            super();
-            if (!linkageByAlias) 
-            {
-                linkageByAlias = new flash.utils.Dictionary(true);
-                linkageByAlias[net.wg.data.Aliases.PROFILE_SUMMARY_PAGE] = "ProfileSummaryPage_UI";
-                linkageByAlias[net.wg.data.Aliases.PROFILE_SUMMARY_WINDOW] = "ProfileSummaryWindow_UI";
-                linkageByAlias[net.wg.data.Aliases.PROFILE_AWARDS] = "ProfileAwards_UI";
-                linkageByAlias[net.wg.data.Aliases.PROFILE_STATISTICS] = "ProfileStatistics_UI";
-                linkageByAlias[net.wg.data.Aliases.PROFILE_TECHNIQUE_WINDOW] = "ProfileTechniqueWindow_UI";
-                linkageByAlias[net.wg.data.Aliases.PROFILE_TECHNIQUE_PAGE] = "ProfileTechniquePage_UI";
-            }
-            return;
-        }
+   import flash.utils.Dictionary;
+   import net.wg.data.Aliases;
 
-        public function register(arg1:String):String
-        {
-            var loc1:*=linkageByAlias[arg1];
-            this.aliasesByLinkage[loc1] = arg1;
-            return loc1;
-        }
 
-        public function getLinkageByAlias(arg1:String):String
-        {
-            return linkageByAlias[arg1];
-        }
+   public class SectionsDataUtil extends Object
+   {
+          
+      public function SectionsDataUtil() {
+         this.aliasesByLinkage = new Dictionary(true);
+         super();
+         if(!linkageByAlias)
+         {
+            linkageByAlias = new Dictionary(true);
+            linkageByAlias[Aliases.PROFILE_SUMMARY_PAGE] = "ProfileSummaryPage_UI";
+            linkageByAlias[Aliases.PROFILE_SUMMARY_WINDOW] = "ProfileSummaryWindow_UI";
+            linkageByAlias[Aliases.PROFILE_AWARDS] = "ProfileAwards_UI";
+            linkageByAlias[Aliases.PROFILE_STATISTICS] = "ProfileStatistics_UI";
+            linkageByAlias[Aliases.PROFILE_TECHNIQUE_WINDOW] = "ProfileTechniqueWindow_UI";
+            linkageByAlias[Aliases.PROFILE_TECHNIQUE_PAGE] = "ProfileTechniquePage_UI";
+         }
+      }
 
-        public function getAliasByLinkage(arg1:String):String
-        {
-            return this.aliasesByLinkage[arg1];
-        }
+      private static var linkageByAlias:Dictionary;
 
-        internal var aliasesByLinkage:flash.utils.Dictionary;
+      private var aliasesByLinkage:Dictionary;
 
-        internal static var linkageByAlias:flash.utils.Dictionary;
-    }
+      public function register(param1:String) : String {
+         var _loc2_:String = linkageByAlias[param1];
+         this.aliasesByLinkage[_loc2_] = param1;
+         return _loc2_;
+      }
+
+      public function getLinkageByAlias(param1:String) : String {
+         return linkageByAlias[param1];
+      }
+
+      public function getAliasByLinkage(param1:String) : String {
+         return this.aliasesByLinkage[param1];
+      }
+   }
+
 }

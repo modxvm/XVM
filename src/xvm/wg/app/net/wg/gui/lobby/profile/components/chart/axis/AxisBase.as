@@ -1,137 +1,130 @@
-package net.wg.gui.lobby.profile.components.chart.axis 
+package net.wg.gui.lobby.profile.components.chart.axis
 {
-    import __AS3__.vec.*;
-    import net.wg.gui.lobby.profile.components.chart.*;
-    import net.wg.gui.lobby.profile.components.chart.layout.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.core.*;
-    import scaleform.clik.interfaces.*;
-    
-    public class AxisBase extends scaleform.clik.core.UIComponent implements net.wg.gui.lobby.profile.components.chart.axis.IChartAxis
-    {
-        public function AxisBase()
-        {
-            this._points = [];
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import net.wg.gui.lobby.profile.components.chart.layout.IChartLayout;
+   import __AS3__.vec.Vector;
+   import net.wg.gui.lobby.profile.components.chart.IChartItem;
+   import scaleform.clik.interfaces.IDataProvider;
+   import scaleform.clik.interfaces.IListItemRenderer;
+   import scaleform.clik.constants.InvalidationType;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
 
-        protected override function draw():void
-        {
-            var loc1:*=null;
-            var loc2:*=0;
-            var loc3:*=null;
-            var loc4:*=0;
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+
+   public class AxisBase extends UIComponent implements IChartAxis
+   {
+          
+      public function AxisBase() {
+         this._points = [];
+         super();
+      }
+
+      protected var _points:Array;
+
+      protected var currentLayout:IChartLayout;
+
+      protected var renderers:Vector.<IChartItem>;
+
+      private var _dataProvider:IDataProvider;
+
+      protected var _pointClass:Class;
+
+      override protected function draw() : void {
+         var _loc1_:IListItemRenderer = null;
+         var _loc2_:uint = 0;
+         var _loc3_:Object = null;
+         var _loc4_:* = 0;
+         super.draw();
+         if(isInvalid(InvalidationType.DATA))
+         {
+            _loc2_ = this._dataProvider?this._dataProvider.length:0;
+            while(this._points.length > _loc2_)
             {
-                loc2 = this._data ? this._data.length : 0;
-                while (this._points.length > loc2) 
-                {
-                    this.removePointAt((this._points.length - 1));
-                }
-                loc4 = 0;
-                while (loc4 < loc2) 
-                {
-                    loc3 = this._data[loc4];
-                    if (loc4 != this._points.length) 
-                    {
-                        loc1 = this._points[loc4];
-                    }
-                    else 
-                    {
-                        loc1 = this.createPoint(loc3);
-                        this._points.push(loc1);
-                    }
-                    this.layoutPoint(loc1, this.renderers[loc4]);
-                    loc1.setData(loc3);
-                    ++loc4;
-                }
-                if (loc2 > 0) 
-                {
-                    this.layoutAll(this.currentLayout);
-                }
+               this.removePointAt(this._points.length-1);
             }
-            return;
-        }
-
-        public function setData(arg1:scaleform.clik.interfaces.IDataProvider, arg2:__AS3__.vec.Vector.<net.wg.gui.lobby.profile.components.chart.IChartItem>, arg3:net.wg.gui.lobby.profile.components.chart.layout.IChartLayout):void
-        {
-            this._data = arg1;
-            this.currentLayout = arg3;
-            this.renderers = arg2;
-            invalidateData();
-            return;
-        }
-
-        protected function layoutAll(arg1:net.wg.gui.lobby.profile.components.chart.layout.IChartLayout):void
-        {
-            return;
-        }
-
-        protected function layoutPoint(arg1:scaleform.clik.interfaces.IListItemRenderer, arg2:net.wg.gui.lobby.profile.components.chart.IChartItem):void
-        {
-            return;
-        }
-
-        protected function createPoint(arg1:Object):scaleform.clik.interfaces.IListItemRenderer
-        {
-            throw new Error("this method should be overridden");
-        }
-
-        protected function removePointAt(arg1:uint):Object
-        {
-            var loc1:*=this._points.splice(arg1, 1)[0];
-            if (loc1 is net.wg.infrastructure.interfaces.entity.IDisposable) 
+            _loc4_ = 0;
+            while(_loc4_ < _loc2_)
             {
-                net.wg.infrastructure.interfaces.entity.IDisposable(loc1).dispose();
+               _loc3_ = this._dataProvider[_loc4_];
+               if(_loc4_ == this._points.length)
+               {
+                  _loc1_ = this.createPoint(_loc3_);
+                  this._points.push(_loc1_);
+               }
+               else
+               {
+                  _loc1_ = this._points[_loc4_];
+               }
+               this.layoutPoint(_loc1_,this.renderers[_loc4_]);
+               _loc1_.setData(_loc3_);
+               _loc4_++;
             }
-            return loc1;
-        }
-
-        public override function dispose():void
-        {
-            var loc1:*=null;
-            super.dispose();
-            this._data = null;
-            this.currentLayout = null;
-            this.renderers = null;
-            while (this._points.length > 0) 
+            if(_loc2_ > 0)
             {
-                loc1 = this._points.splice((this._points.length - 1), 1)[0];
-                try 
-                {
-                    loc1.dispose();
-                }
-                catch (e:Error)
-                {
-                };
-                loc1 = null;
+               this.layoutAll(this.currentLayout);
             }
-            return;
-        }
+         }
+      }
 
-        public function get pointClass():Class
-        {
-            return this._pointClass;
-        }
+      public function setData(param1:IDataProvider, param2:Vector.<IChartItem>, param3:IChartLayout) : void {
+         this._dataProvider = param1;
+         this.currentLayout = param3;
+         this.renderers = param2;
+         invalidateData();
+      }
 
-        public function set pointClass(arg1:Class):void
-        {
-            this._pointClass = arg1;
-            invalidateData();
-            return;
-        }
+      protected function layoutAll(param1:IChartLayout) : void {
+          
+      }
 
-        protected var _points:Array;
+      protected function layoutPoint(param1:IListItemRenderer, param2:IChartItem) : void {
+          
+      }
 
-        protected var currentLayout:net.wg.gui.lobby.profile.components.chart.layout.IChartLayout;
+      protected function createPoint(param1:Object) : IListItemRenderer {
+         throw new Error("this method should be overridden");
+      }
 
-        protected var renderers:__AS3__.vec.Vector.<net.wg.gui.lobby.profile.components.chart.IChartItem>;
+      protected function removePointAt(param1:uint) : Object {
+         var _loc2_:Object = this._points.splice(param1,1)[0];
+         if(_loc2_  is  IDisposable)
+         {
+            IDisposable(_loc2_).dispose();
+         }
+         return _loc2_;
+      }
 
-        internal var _data:scaleform.clik.interfaces.IDataProvider;
+      override public function dispose() : void {
+         var _loc1_:Object = null;
+         super.dispose();
+         this._dataProvider = null;
+         this.currentLayout = null;
+         this.renderers = null;
+         while(this._points.length > 0)
+         {
+            _loc1_ = this._points.splice(this._points.length-1,1)[0];
+            try
+            {
+               _loc1_.dispose();
+            }
+            catch(e:Error)
+            {
+            }
+            _loc1_ = null;
+         }
+      }
 
-        protected var _pointClass:Class;
-    }
+      public function get pointClass() : Class {
+         return this._pointClass;
+      }
+
+      public function set pointClass(param1:Class) : void {
+         this._pointClass = param1;
+         invalidateData();
+      }
+
+      public function getData() : Object {
+         return this._dataProvider;
+      }
+   }
+
 }

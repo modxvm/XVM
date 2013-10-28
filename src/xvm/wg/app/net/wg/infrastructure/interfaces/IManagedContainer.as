@@ -1,28 +1,31 @@
-package net.wg.infrastructure.interfaces 
+package net.wg.infrastructure.interfaces
 {
-    import flash.display.*;
-    import flash.events.*;
-    
-    public interface IManagedContainer extends flash.events.IEventDispatcher
-    {
-        function get type():String;
+   import flash.events.IEventDispatcher;
+   import flash.display.DisplayObject;
 
-        function set type(arg1:String):void;
 
-        function get manageSize():Boolean;
+   public interface IManagedContainer extends IEventDispatcher
+   {
+          
+      function get type() : String;
 
-        function set manageSize(arg1:Boolean):void;
+      function set type(param1:String) : void;
 
-        function updateStage(arg1:Number, arg2:Number):void;
+      function get manageSize() : Boolean;
 
-        function setFocused(arg1:Boolean=false):Boolean;
+      function set manageSize(param1:Boolean) : void;
 
-        function setFocusedView(arg1:flash.display.DisplayObject):void;
+      function updateStage(param1:Number, param2:Number) : void;
 
-        function addChild(arg1:flash.display.DisplayObject):flash.display.DisplayObject;
+      function setFocused(param1:Boolean=false) : Boolean;
 
-        function removeChild(arg1:flash.display.DisplayObject):flash.display.DisplayObject;
+      function setFocusedView(param1:DisplayObject) : void;
 
-        function contains(arg1:flash.display.DisplayObject):Boolean;
-    }
+      function addChild(param1:DisplayObject) : DisplayObject;
+
+      function removeChild(param1:DisplayObject) : DisplayObject;
+
+      function contains(param1:DisplayObject) : Boolean;
+   }
+
 }

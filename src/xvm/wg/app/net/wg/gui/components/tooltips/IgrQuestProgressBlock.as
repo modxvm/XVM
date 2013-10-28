@@ -1,44 +1,43 @@
-package net.wg.gui.components.tooltips 
+package net.wg.gui.components.tooltips
 {
-    import flash.display.*;
-    import flash.text.*;
-    import net.wg.gui.components.tooltips.finstats.*;
-    
-    public class IgrQuestProgressBlock extends flash.display.MovieClip
-    {
-        public function IgrQuestProgressBlock()
-        {
-            super();
-            return;
-        }
+   import flash.display.MovieClip;
+   import flash.text.TextField;
+   import net.wg.gui.components.tooltips.finstats.EfficiencyBlock;
 
-        public function setData(arg1:String, arg2:Array):void
-        {
-            var loc2:*=0;
-            this.headerTF.htmlText = arg1;
-            var loc1:*=arg2.length;
-            var loc3:*="";
-            var loc4:*="";
-            var loc5:*=null;
-            loc2 = 0;
-            while (loc2 < loc1) 
+
+   public class IgrQuestProgressBlock extends MovieClip
+   {
+          
+      public function IgrQuestProgressBlock() {
+         super();
+      }
+
+      public var headerTF:TextField;
+
+      public var valuesBlock:EfficiencyBlock;
+
+      public function setData(param1:String, param2:Array) : void {
+         var _loc4_:* = 0;
+         this.headerTF.htmlText = param1;
+         var _loc3_:int = param2.length;
+         var _loc5_:* = "";
+         var _loc6_:* = "";
+         var _loc7_:Array = null;
+         _loc4_ = 0;
+         while(_loc4_ < _loc3_)
+         {
+            if(_loc4_ > 0)
             {
-                if (loc2 > 0) 
-                {
-                    loc3 = loc3 + "<br/>";
-                    loc4 = loc4 + "<br/>";
-                }
-                loc5 = arg2[loc2];
-                loc3 = loc3 + ("<b>" + loc5[0] + "</b>/" + loc5[1]);
-                loc4 = loc4 + loc5[2];
-                ++loc2;
+               _loc5_ = _loc5_ + "<br/>";
+               _loc6_ = _loc6_ + "<br/>";
             }
-            this.valuesBlock.setData(loc3, loc4);
-            return;
-        }
+            _loc7_ = param2[_loc4_];
+            _loc5_ = _loc5_ + ("<b>" + _loc7_[0] + "</b>/" + _loc7_[1]);
+            _loc6_ = _loc6_ + _loc7_[2];
+            _loc4_++;
+         }
+         this.valuesBlock.setData(_loc5_,_loc6_);
+      }
+   }
 
-        public var headerTF:flash.text.TextField;
-
-        public var valuesBlock:net.wg.gui.components.tooltips.finstats.EfficiencyBlock;
-    }
 }

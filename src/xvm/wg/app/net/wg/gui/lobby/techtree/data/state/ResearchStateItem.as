@@ -1,16 +1,17 @@
-package net.wg.gui.lobby.techtree.data.state 
+package net.wg.gui.lobby.techtree.data.state
 {
-    public class ResearchStateItem extends net.wg.gui.lobby.techtree.data.state.NodeStateItem
-    {
-        public function ResearchStateItem(arg1:uint, arg2:net.wg.gui.lobby.techtree.data.state.StateProperties)
-        {
-            super(arg1, arg2);
-            return;
-        }
 
-        public function resolveProps(arg1:Number, arg2:Number, arg3:Boolean=false):net.wg.gui.lobby.techtree.data.state.StateProperties
-        {
-            return getProps();
-        }
-    }
+
+   public class ResearchStateItem extends NodeStateItem
+   {
+          
+      public function ResearchStateItem(param1:uint, param2:StateProperties) {
+         super(param1,param2);
+      }
+
+      public function resolveProps(param1:Number, param2:Number, param3:Boolean=false) : StateProperties {
+         return getProps();
+      }
+   }
+
 }

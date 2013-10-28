@@ -1,85 +1,95 @@
-package net.wg.infrastructure.managers.utils.impl 
+package net.wg.infrastructure.managers.utils.impl
 {
-    import flash.display.*;
-    import net.wg.data.constants.*;
-    import net.wg.utils.*;
-    
-    public class HelpLayout extends Object implements net.wg.utils.IHelpLayout
-    {
-        public function HelpLayout()
-        {
-            super();
-            return;
-        }
+   import net.wg.utils.IHelpLayout;
+   import flash.display.DisplayObject;
+   import flash.display.DisplayObjectContainer;
+   import net.wg.utils.IUtils;
+   import net.wg.utils.IAssertable;
+   import net.wg.data.constants.Errors;
+   import net.wg.utils.IPopUpManager;
+   import net.wg.data.constants.Linkages;
+   import flash.display.Stage;
 
-        public function create(arg1:flash.display.DisplayObject, arg2:Object, arg3:flash.display.DisplayObjectContainer):flash.display.DisplayObject
-        {
-            var loc1:*;
-            var loc2:*;
-            (loc2 = (loc1 = App.utils).asserter).assertNotNull(arg2.text, "initproperties.text" + net.wg.data.constants.Errors.CANT_NULL);
-            loc2.assert(arg2.text.length > 0, "text in initproperties can`t empty!");
-            var loc3:*;
-            var loc4:*=(loc3 = loc1.popupMgr).create(HL_MAIN_SOURCE, arg2, arg3);
-            loc3.show(loc4, arg2.x, arg2.y, arg3);
-            return loc4;
-        }
 
-        public function createBackground():void
-        {
-            this.destroyBackground();
-            this._modalBackground = App.utils.popupMgr.create(net.wg.data.constants.Linkages.POPUP_MODAL, {"x":0, "y":0, "alpha":0.5});
-            var loc1:*=App.instance.stage;
-            if (this._modalBackground != null) 
+   public class HelpLayout extends Object implements IHelpLayout
+   {
+          
+      public function HelpLayout() {
+         super();
+      }
+
+      private static const HL_MAIN_SOURCE:String = "HelpLayout";
+
+      private var _modalBackground:DisplayObject = null;
+
+      public function create(param1:DisplayObject, param2:Object, param3:DisplayObjectContainer) : DisplayObject {
+         var _loc4_:IUtils = App.utils;
+         var _loc5_:IAssertable = _loc4_.asserter;
+         _loc5_.assertNotNull(param2.text,"initproperties.text" + Errors.CANT_NULL);
+         _loc5_.assert(param2.text.length > 0,"text in initproperties can`t empty!");
+         var _loc6_:IPopUpManager = _loc4_.popupMgr;
+         var _loc7_:DisplayObject = _loc6_.create(HL_MAIN_SOURCE,param2,param3);
+         _loc6_.show(_loc7_,param2.x,param2.y,param3);
+         return _loc7_;
+      }
+
+      public function createBackground() : void {
+         this.destroyBackground();
+         this._modalBackground = App.utils.popupMgr.create(Linkages.POPUP_MODAL,
             {
-                this._modalBackground.width = loc1.width;
-                this._modalBackground.height = loc1.height;
+               "x":0,
+               "y":0,
+               "alpha":0.5
             }
-            return;
-        }
+         );
+         var _loc1_:Stage = App.instance.stage;
+         if(this._modalBackground != null)
+         {
+            this._modalBackground.width = _loc1_.width;
+            this._modalBackground.height = _loc1_.height;
+         }
+      }
 
-        public function destroyBackground():void
-        {
-            if (this._modalBackground != null) 
+      public function destroyBackground() : void {
+         if(this._modalBackground != null)
+         {
+            if(this._modalBackground.parent)
             {
-                if (this._modalBackground.parent) 
-                {
-                    App.utils.popupMgr.remove(this._modalBackground);
-                }
-                this._modalBackground = null;
+               App.utils.popupMgr.remove(this._modalBackground);
             }
-            return;
-        }
+            this._modalBackground = null;
+         }
+      }
 
-        public function isShowed():Boolean
-        {
-            return this._modalBackground == null;
-        }
+      public function isShowed() : Boolean {
+         return this._modalBackground == null;
+      }
 
-        public function destroy(arg1:flash.display.DisplayObject):void
-        {
-            var loc1:*=App.utils;
-            var loc2:*=loc1.asserter.assertNotNull;
-            loc2(arg1, "helpLayoutControl" + net.wg.data.constants.Errors.CANT_NULL);
-            if (arg1.parent) 
-            {
-                loc1.popupMgr.remove(arg1);
-            }
-            return;
-        }
+      public function destroy(param1:DisplayObject) : void {
+         var _loc2_:IUtils = App.utils;
+         var _loc3_:Function = _loc2_.asserter.assertNotNull;
+         _loc3_(param1,"helpLayoutControl" + Errors.CANT_NULL);
+         if(param1.parent)
+         {
+            _loc2_.popupMgr.remove(param1);
+         }
+      }
 
-        public function dispose():void
-        {
-            this.destroyBackground();
-            return;
-        }
+      public function dispose() : void {
+         this.destroyBackground();
+      }
 
-        public function getProps(arg1:Number, arg2:Number, arg3:String, arg4:String, arg5:Number, arg6:Number):Object
-        {
-            return {"borderWidth":arg1, "borderHeight":arg2, "direction":arg3, "text":arg4, "x":arg5, "y":arg6};
-        }
+      public function getProps(param1:Number, param2:Number, param3:String, param4:String, param5:Number, param6:Number) : Object {
+         return {
+            "borderWidth":param1,
+            "borderHeight":param2,
+            "direction":param3,
+            "text":param4,
+            "x":param5,
+            "y":param6
+         }
+         ;
+      }
+   }
 
-        internal static const HL_MAIN_SOURCE:String="HelpLayout";
-
-        internal var _modalBackground:flash.display.DisplayObject=null;
-    }
 }

@@ -1,23 +1,14 @@
-package net.wg.gui.lobby.battlequeue 
+package net.wg.gui.lobby.battlequeue
 {
-    import flash.display.*;
-    
-    public class _Importer extends flash.display.Sprite
-    {
-        public function _Importer()
-        {
-            super();
-            return;
-        }
-    }
-}
-
-import flash.display.*;
-import flash.events.*;
+   import flash.display.Sprite;
 
 
+   public class _Importer extends Sprite
+   {
+          
+      public function _Importer() {
+         super();
+      }
+   }
 
-{
-    var loc1:*=net.wg.gui.lobby.battlequeue.BattleQueue;
-    loc1;
 }

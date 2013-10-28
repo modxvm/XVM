@@ -1,11 +1,14 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface INotificationInvitesButtonMeta extends flash.events.IEventDispatcher
-    {
-        function handleClickS():void;
+   import flash.events.IEventDispatcher;
 
-        function as_setState(arg1:Boolean):void;
-    }
+
+   public interface INotificationInvitesButtonMeta extends IEventDispatcher
+   {
+          
+      function handleClickS() : void;
+
+      function as_setState(param1:Boolean) : void;
+   }
+
 }

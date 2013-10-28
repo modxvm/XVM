@@ -1,202 +1,186 @@
-package net.wg.gui.lobby.tankman 
+package net.wg.gui.lobby.tankman
 {
-    import flash.display.*;
-    import flash.events.*;
-    import flash.geom.*;
-    import flash.text.*;
-    import net.wg.data.constants.*;
-    import net.wg.gui.components.controls.*;
-    import scaleform.clik.events.*;
-    
-    public class PersonalCaseSkillsItemRenderer extends net.wg.gui.components.controls.SoundListItemRenderer
-    {
-        public function PersonalCaseSkillsItemRenderer()
-        {
-            super();
-            soundType = net.wg.data.constants.SoundTypes.RNDR_NORMAL;
-            return;
-        }
+   import net.wg.gui.components.controls.SoundListItemRenderer;
+   import flash.display.MovieClip;
+   import net.wg.gui.components.controls.UILoaderAlt;
+   import flash.text.TextField;
+   import flash.events.MouseEvent;
+   import net.wg.data.constants.Tooltips;
+   import scaleform.clik.events.ButtonEvent;
+   import flash.geom.Point;
+   import flash.events.Event;
+   import net.wg.data.constants.SoundTypes;
 
-        public override function dispose():void
-        {
-            removeEventListener(flash.events.MouseEvent.ROLL_OVER, this.showTooltip);
-            removeEventListener(flash.events.MouseEvent.ROLL_OUT, this.hideTooltip);
-            if (this.icon) 
-            {
-                this.icon.dispose();
-            }
-            if (this.rank) 
-            {
-                this.rank.dispose();
-            }
-            super.dispose();
-            return;
-        }
 
-        protected override function configUI():void
-        {
-            buttonMode = true;
-            allowDeselect = false;
-            super.configUI();
-            addEventListener(flash.events.MouseEvent.ROLL_OVER, this.showTooltip);
-            addEventListener(flash.events.MouseEvent.ROLL_OUT, this.hideTooltip);
-            return;
-        }
+   public class PersonalCaseSkillsItemRenderer extends SoundListItemRenderer
+   {
+          
+      public function PersonalCaseSkillsItemRenderer() {
+         super();
+         soundType = SoundTypes.RNDR_NORMAL;
+      }
 
-        public function showTooltip(arg1:flash.events.MouseEvent=null):void
-        {
-            if (this.isHeader) 
-            {
-                App.toolTipMgr.hide();
-            }
-            else 
-            {
-                App.toolTipMgr.showSpecial(net.wg.data.constants.Tooltips.TANKMAN_SKILL, null, data.title, data.tankmanID);
-            }
-            return;
-        }
+      public static const SKILL_DOUBLE_CLICK:String = "skillDoubleClick";
 
-        public function hideTooltip(arg1:flash.events.MouseEvent=null):void
-        {
-            if (!this.isHeader) 
-            {
-                App.toolTipMgr.hide();
-            }
-            return;
-        }
+      public var clickArea:MovieClip;
 
-        public function onSelect(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            if (!this.isHeader) 
-            {
-                App.toolTipMgr.hide();
-            }
-            return;
-        }
+      public var icon:UILoaderAlt;
 
-        public override function setData(arg1:Object):void
-        {
-            if (arg1 == null) 
-            {
-                if (this.visible) 
-                {
-                    this.visible = false;
-                }
-                return;
-            }
-            if (!this.visible) 
-            {
-                this.visible = true;
-            }
-            super.setData(arg1);
-            var loc1:*=new flash.geom.Point(mouseX, mouseY);
-            loc1 = this.localToGlobal(loc1);
-            if (this.hitTestPoint(loc1.x, loc1.y, true) && !this.isHeader) 
-            {
-                setState("over");
-                App.utils.scheduler.scheduleTask(this.showTooltip, 100);
-            }
-            else 
-            {
-                this.hideTooltip();
-            }
-            this.initVisibleElements();
-            return;
-        }
+      public var rank:SkillsItemsRendererRankIcon;
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(this.UPDATE_DATA) && this.isData) 
+      public var _name:TextField;
+
+      public var desc:TextField;
+
+      private var isHeader:Boolean = false;
+
+      private const UPDATE_DATA:String = "updateData";
+
+      private var isData:Boolean = false;
+
+      public var focusIndicatorUI:MovieClip;
+
+      override public function dispose() : void {
+         removeEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
+         removeEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
+         if(this.icon)
+         {
+            this.icon.dispose();
+         }
+         if(this.rank)
+         {
+            this.rank.dispose();
+         }
+         super.dispose();
+      }
+
+      override protected function configUI() : void {
+         buttonMode = true;
+         allowDeselect = false;
+         super.configUI();
+         addEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
+         addEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
+      }
+
+      public function showTooltip(param1:MouseEvent=null) : void {
+         if(!this.isHeader)
+         {
+            App.toolTipMgr.showSpecial(Tooltips.TANKMAN_SKILL,null,data.title,data.tankmanID);
+         }
+         else
+         {
+            App.toolTipMgr.hide();
+         }
+      }
+
+      public function hideTooltip(param1:MouseEvent=null) : void {
+         if(!this.isHeader)
+         {
+            App.toolTipMgr.hide();
+         }
+      }
+
+      public function onSelect(param1:ButtonEvent) : void {
+         if(!this.isHeader)
+         {
+            App.toolTipMgr.hide();
+         }
+      }
+
+      override public function setData(param1:Object) : void {
+         if(param1 == null)
+         {
+            if(this.visible)
             {
-                this.updateData();
+               this.visible = false;
             }
             return;
-        }
+         }
+         if(!this.visible)
+         {
+            this.visible = true;
+         }
+         super.setData(param1);
+         var _loc2_:Point = new Point(mouseX,mouseY);
+         _loc2_ = this.localToGlobal(_loc2_);
+         if((this.hitTestPoint(_loc2_.x,_loc2_.y,true)) && !this.isHeader)
+         {
+            setState("over");
+            App.utils.scheduler.scheduleTask(this.showTooltip,100);
+         }
+         else
+         {
+            this.hideTooltip();
+         }
+         this.initVisibleElements();
+      }
 
-        internal function updateData():void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            if (this.isHeader) 
+      override protected function draw() : void {
+         super.draw();
+         if((isInvalid(this.UPDATE_DATA)) && (this.isData))
+         {
+            this.updateData();
+         }
+      }
+
+      private function updateData() : void {
+         var _loc1_:String = null;
+         var _loc2_:String = null;
+         if(this.isHeader)
+         {
+            this._name.text = App.utils.locale.makeString("#dialogs:addSkillWindow/label/" + data.title).toUpperCase();
+            this.desc.text = data.rankId == "common" || (data.selfSkill)?"":"#item_types:tankman/Skill_not_be_used";
+            this.rank.visible = false;
+         }
+         else
+         {
+            this.addEventListener(MouseEvent.DOUBLE_CLICK,this.doubleClickHandler);
+            this._name.text = data.name;
+            this.desc.visible = true;
+            this.desc.text = data.desc;
+            if(data.title == "common")
             {
-                this._name.text = App.utils.locale.makeString("#dialogs:addSkillWindow/label/" + data.title).toUpperCase();
-                this.desc.text = data.rankId == "common" || data.selfSkill ? "" : "#item_types:tankman/Skill_not_be_used";
-                this.rank.visible = false;
+               this.rank.visible = false;
             }
-            else 
+            else
             {
-                this.addEventListener(flash.events.MouseEvent.DOUBLE_CLICK, this.doubleClickHandler);
-                this._name.text = data.name;
-                this.desc.visible = true;
-                this.desc.text = data.desc;
-                if (data.title != "common") 
-                {
-                    if (!this.icon.visible) 
-                    {
-                        this.icon.visible = true;
-                    }
-                    loc1 = "../maps/icons/tankmen/skills/big/" + data.title + ".png";
-                    this.icon.source = loc1;
-                    if (data.rankId == "common") 
-                    {
-                        this.rank.visible = false;
-                    }
-                    else 
-                    {
-                        this.rank.visible = true;
-                        this.rank.gotoAndStop(data.enabled ? "enabled" : "disabled");
-                        loc2 = "../maps/icons/tankmen/roles/small/" + data.rankId + ".png";
-                        this.rank.setData(loc2, data.enabled);
-                        this.rank.validateNow();
-                    }
-                }
-                else 
-                {
-                    this.rank.visible = false;
-                }
+               if(!this.icon.visible)
+               {
+                  this.icon.visible = true;
+               }
+               _loc1_ = "../maps/icons/tankmen/skills/big/" + data.title + ".png";
+               this.icon.source = _loc1_;
+               if(data.rankId != "common")
+               {
+                  this.rank.visible = true;
+                  this.rank.gotoAndStop(data.enabled?"enabled":"disabled");
+                  _loc2_ = "../maps/icons/tankmen/roles/small/" + data.rankId + ".png";
+                  this.rank.setData(_loc2_,data.enabled);
+                  this.rank.validateNow();
+               }
+               else
+               {
+                  this.rank.visible = false;
+               }
             }
-            this.isData = false;
-            return;
-        }
+         }
+         this.isData = false;
+      }
 
-        internal function initVisibleElements():void
-        {
-            this.isHeader = data.isHeader;
-            if (data.isHeader) 
-            {
-                enabled = false;
-            }
-            this.isData = true;
-            invalidate(this.UPDATE_DATA);
-            return;
-        }
+      private function initVisibleElements() : void {
+         this.isHeader = data.isHeader;
+         if(data.isHeader)
+         {
+            enabled = false;
+         }
+         this.isData = true;
+         invalidate(this.UPDATE_DATA);
+      }
 
-        internal function doubleClickHandler(arg1:flash.events.MouseEvent):void
-        {
-            DebugUtils.LOG_DEBUG("[PersonalCaseSkillsItemRenderer] : [doubleClickHandler : dispatch event]");
-            dispatchEvent(new flash.events.Event(SKILL_DOUBLE_CLICK, true));
-            return;
-        }
+      private function doubleClickHandler(param1:MouseEvent) : void {
+         DebugUtils.LOG_DEBUG("[PersonalCaseSkillsItemRenderer] : [doubleClickHandler : dispatch event]");
+         dispatchEvent(new Event(SKILL_DOUBLE_CLICK,true));
+      }
+   }
 
-        internal const UPDATE_DATA:String="updateData";
-
-        public static const SKILL_DOUBLE_CLICK:String="skillDoubleClick";
-
-        public var clickArea:flash.display.MovieClip;
-
-        public var icon:net.wg.gui.components.controls.UILoaderAlt;
-
-        public var rank:net.wg.gui.lobby.tankman.SkillsItemsRendererRankIcon;
-
-        public var _name:flash.text.TextField;
-
-        public var desc:flash.text.TextField;
-
-        internal var isHeader:Boolean=false;
-
-        internal var isData:Boolean=false;
-
-        public var focusIndicatorUI:flash.display.MovieClip;
-    }
 }

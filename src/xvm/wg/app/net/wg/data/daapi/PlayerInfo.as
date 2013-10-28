@@ -1,65 +1,64 @@
-package net.wg.data.daapi 
+package net.wg.data.daapi
 {
-    import net.wg.data.daapi.base.*;
-    
-    public class PlayerInfo extends net.wg.data.daapi.base.DAAPIDataClass
-    {
-        public function PlayerInfo(arg1:Object)
-        {
-            super(arg1);
-            return;
-        }
+   import net.wg.data.daapi.base.DAAPIDataClass;
 
-        public function get displayName():String
-        {
-            return this._displayName;
-        }
 
-        public function set displayName(arg1:String):void
-        {
-            this._displayName = arg1;
-            return;
-        }
+   public class PlayerInfo extends DAAPIDataClass
+   {
+          
+      public function PlayerInfo(param1:Object) {
+         super(param1);
+      }
 
-        public function get isMuted():Boolean
-        {
-            return this._isMuted;
-        }
+      private var _isFriend:Boolean;
 
-        public function set isMuted(arg1:Boolean):void
-        {
-            this._isMuted = arg1;
-            return;
-        }
+      private var _isIgnored:Boolean;
 
-        public function get isIgnored():Boolean
-        {
-            return this._isIgnored;
-        }
+      private var _isMuted:Boolean;
 
-        public function set isIgnored(arg1:Boolean):void
-        {
-            this._isIgnored = arg1;
-            return;
-        }
+      private var _displayName:String = "";
 
-        public function get isFriend():Boolean
-        {
-            return this._isFriend;
-        }
+      private var _isEnabledInRoaming:Boolean = true;
 
-        public function set isFriend(arg1:Boolean):void
-        {
-            this._isFriend = arg1;
-            return;
-        }
+      public function get displayName() : String {
+         return this._displayName;
+      }
 
-        internal var _isFriend:Boolean;
+      public function set displayName(param1:String) : void {
+         this._displayName = param1;
+      }
 
-        internal var _isIgnored:Boolean;
+      public function get isMuted() : Boolean {
+         return this._isMuted;
+      }
 
-        internal var _isMuted:Boolean;
+      public function set isMuted(param1:Boolean) : void {
+         this._isMuted = param1;
+      }
 
-        internal var _displayName:String="";
-    }
+      public function get isIgnored() : Boolean {
+         return this._isIgnored;
+      }
+
+      public function set isIgnored(param1:Boolean) : void {
+         this._isIgnored = param1;
+      }
+
+      public function get isFriend() : Boolean {
+         return this._isFriend;
+      }
+
+      public function set isFriend(param1:Boolean) : void {
+         this._isFriend = param1;
+      }
+
+      public function get isEnabledInRoaming() : Boolean {
+         return this._isEnabledInRoaming;
+      }
+
+      public function set isEnabledInRoaming(param1:Boolean) : void {
+         this._isEnabledInRoaming = param1;
+      }
+   }
+
 }

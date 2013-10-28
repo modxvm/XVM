@@ -1,35 +1,33 @@
-package net.wg.data.components 
+package net.wg.data.components
 {
-    import __AS3__.vec.*;
-    import net.wg.data.daapi.*;
-    
-    public class BattleResultsCIGenerator extends net.wg.data.components.ContextItemGenerator
-    {
-        public function BattleResultsCIGenerator(arg1:Boolean)
-        {
-            super();
-            this._isOwnSquad = arg1;
-            return;
-        }
+   import __AS3__.vec.Vector;
+   import net.wg.infrastructure.interfaces.IContextItem;
+   import net.wg.data.daapi.PlayerInfo;
 
-        public function get isOwnSquad():Boolean
-        {
-            return this._isOwnSquad;
-        }
 
-        public function set isOwnSquad(arg1:Boolean):void
-        {
-            this._isOwnSquad = arg1;
-            return;
-        }
+   public class BattleResultsCIGenerator extends ContextItemGenerator
+   {
+          
+      public function BattleResultsCIGenerator(param1:Boolean) {
+         super();
+         this._isOwnSquad = param1;
+      }
 
-        public override function generateData(arg1:net.wg.data.daapi.PlayerInfo, arg2:Number=NaN):__AS3__.vec.Vector.<net.wg.infrastructure.interfaces.IContextItem>
-        {
-            var loc1:*=super.generateData(arg1);
-            loc1.splice(1, 0, getDenunciationsSubmenu(arg2, arg1, this.isOwnSquad));
-            return loc1;
-        }
+      private var _isOwnSquad:Boolean;
 
-        internal var _isOwnSquad:Boolean;
-    }
+      public function get isOwnSquad() : Boolean {
+         return this._isOwnSquad;
+      }
+
+      public function set isOwnSquad(param1:Boolean) : void {
+         this._isOwnSquad = param1;
+      }
+
+      override public function generateData(param1:PlayerInfo, param2:Number=NaN) : Vector.<IContextItem> {
+         var _loc3_:Vector.<IContextItem> = super.generateData(param1);
+         _loc3_.splice(1,0,getDenunciationsSubmenu(param2,param1,this.isOwnSquad));
+         return _loc3_;
+      }
+   }
+
 }

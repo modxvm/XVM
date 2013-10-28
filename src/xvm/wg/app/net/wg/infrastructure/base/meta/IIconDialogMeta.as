@@ -1,9 +1,12 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IIconDialogMeta extends flash.events.IEventDispatcher
-    {
-        function as_setIcon(arg1:String):void;
-    }
+   import flash.events.IEventDispatcher;
+
+
+   public interface IIconDialogMeta extends IEventDispatcher
+   {
+          
+      function as_setIcon(param1:String) : void;
+   }
+
 }

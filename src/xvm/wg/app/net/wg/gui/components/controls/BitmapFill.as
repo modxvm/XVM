@@ -1,234 +1,186 @@
-package net.wg.gui.components.controls 
+package net.wg.gui.components.controls
 {
-    import flash.display.*;
-    import flash.geom.*;
-    import flash.utils.*;
-    import scaleform.clik.core.*;
-    
-    public class BitmapFill extends scaleform.clik.core.UIComponent
-    {
-        public function BitmapFill()
-        {
-            super();
-            if (!this.pos) 
-            {
-                this.createPos();
-                this.pos.x = 0;
-                this.pos.y = 0;
-                this.pos.width = this.tempBg.width * this.scaleX;
-                this.pos.height = this.tempBg.height * this.scaleY;
-            }
-            if (this.tempBg) 
-            {
-                this.tempBg.visible = false;
-            }
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.display.MovieClip;
+   import flash.display.BitmapData;
+   import flash.geom.Rectangle;
+   import flash.utils.getDefinitionByName;
 
-        public override function dispose():void
-        {
-            this.tempBg = null;
-            this.myBitmapData = null;
-            this.pos = null;
-            super.dispose();
-            return;
-        }
 
-        internal function createPos():void
-        {
-            if (!this.pos) 
-            {
-                this.pos = new flash.geom.Rectangle(0, 0, 0, 0);
-            }
-            return;
-        }
-
-        protected override function configUI():void
-        {
-            super.configUI();
-            return;
-        }
-
-        protected override function draw():void
-        {
-            super.draw();
-            this.graphics.clear();
-            if (!this.myBitmapData) 
-            {
-                return;
-            }
-            this.graphics.beginFill(13762560);
-            this.graphics.beginBitmapFill(this.myBitmapData);
-            var loc1:*=this.pos.x;
-            var loc2:*=this.pos.y;
-            var loc3:*=this.pos.width;
-            var loc4:*=this.pos.height;
-            var loc5:*=this.repeat;
-            switch (loc5) 
-            {
-                case "none":
-                {
-                    loc3 = this.myBitmapData.width;
-                    loc4 = this.myBitmapData.height;
-                    break;
-                }
-                case "horizontal":
-                {
-                    loc3 = this.pos.width;
-                    loc4 = this.myBitmapData.height;
-                    break;
-                }
-                case "vertical":
-                {
-                    loc3 = this.myBitmapData.width;
-                    loc4 = this.pos.height;
-                    break;
-                }
-                case "all":
-                {
-                    loc3 = this.pos.width;
-                    loc4 = this.pos.height;
-                    break;
-                }
-            }
-            loc5 = this.startPos;
-            switch (loc5) 
-            {
-                case "TL":
-                {
-                    loc1 = 0;
-                    loc2 = 0;
-                    break;
-                }
-                case "TR":
-                {
-                    loc1 = -loc3;
-                    loc2 = 0;
-                    break;
-                }
-                case "TC":
-                {
-                    loc1 = -Math.round(loc3 / 2);
-                    loc2 = 0;
-                    break;
-                }
-                case "BL":
-                {
-                    loc1 = 0;
-                    loc2 = -loc4;
-                    break;
-                }
-                case "BR":
-                {
-                    loc1 = -loc3;
-                    loc2 = -loc4;
-                    break;
-                }
-                case "BC":
-                {
-                    loc1 = -Math.round(loc3 / 2);
-                    loc2 = -loc4;
-                    break;
-                }
-                case "CL":
-                {
-                    loc1 = 0;
-                    loc2 = -Math.round(loc4 / 2);
-                    break;
-                }
-                case "CR":
-                {
-                    loc1 = -loc3;
-                    loc2 = -Math.round(loc4 / 2);
-                    break;
-                }
-                case "CC":
-                {
-                    loc1 = -Math.round(loc3 / 2);
-                    loc2 = -Math.round(loc4 / 2);
-                    break;
-                }
-            }
-            this.graphics.lineTo(loc1, loc2);
-            this.graphics.lineTo(loc1 + loc3, loc2);
-            this.graphics.lineTo(loc1 + loc3, loc2 + loc4);
-            this.graphics.lineTo(loc1, loc2 + loc4);
-            this.graphics.lineTo(loc1, loc2);
-            this.graphics.endFill();
-            return;
-        }
-
-        public function get source():String
-        {
-            return this._src;
-        }
-
-        public function set source(arg1:String):void
-        {
-            var loc1:*=null;
-            this._src = arg1;
-            if (this._src != "") 
-            {
-                loc1 = flash.utils.getDefinitionByName(this._src) as Class;
-                this.myBitmapData = new loc1() as flash.display.BitmapData;
-                invalidate();
-            }
-            return;
-        }
-
-        public function set setBitmap(arg1:flash.display.BitmapData):void
-        {
-            this.myBitmapData = arg1;
-            invalidate();
-            return;
-        }
-
-        public function get setBitmap():flash.display.BitmapData
-        {
-            return this.myBitmapData;
-        }
-
-        public function set widthFill(arg1:Number):void
-        {
-            this.setSize(arg1, this.pos.height);
-            return;
-        }
-
-        public function get widthFill():Number
-        {
-            return this.pos.width;
-        }
-
-        public function set heightFill(arg1:Number):void
-        {
-            this.setSize(this.pos.width, arg1);
-            return;
-        }
-
-        public function get heightFill():Number
-        {
-            return this.pos.height;
-        }
-
-        public override function setSize(arg1:Number, arg2:Number):void
-        {
+   public class BitmapFill extends UIComponent
+   {
+          
+      public function BitmapFill() {
+         super();
+         if(!this.pos)
+         {
             this.createPos();
-            this.pos.width = arg1;
-            this.pos.height = arg2;
-            this.draw();
+            this.pos.x = 0;
+            this.pos.y = 0;
+            this.pos.width = this.tempBg.width * this.scaleX;
+            this.pos.height = this.tempBg.height * this.scaleY;
+         }
+         if(this.tempBg)
+         {
+            this.tempBg.visible = false;
+         }
+      }
+
+      public var tempBg:MovieClip;
+
+      private var myBitmapData:BitmapData;
+
+      private var _src:String = "";
+
+      public var pos:Rectangle;
+
+      public var repeat:String = "none";
+
+      public var startPos:String = "TL";
+
+      override public function dispose() : void {
+         this.tempBg = null;
+         this.myBitmapData = null;
+         this.pos = null;
+         super.dispose();
+      }
+
+      private function createPos() : void {
+         if(!this.pos)
+         {
+            this.pos = new Rectangle(0,0,0,0);
+         }
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         this.graphics.clear();
+         if(!this.myBitmapData)
+         {
             return;
-        }
+         }
+         this.graphics.beginFill(13762560);
+         this.graphics.beginBitmapFill(this.myBitmapData);
+         var _loc1_:uint = this.pos.x;
+         var _loc2_:uint = this.pos.y;
+         var _loc3_:uint = this.pos.width;
+         var _loc4_:uint = this.pos.height;
+         switch(this.repeat)
+         {
+            case "none":
+               _loc3_ = this.myBitmapData.width;
+               _loc4_ = this.myBitmapData.height;
+               break;
+            case "horizontal":
+               _loc3_ = this.pos.width;
+               _loc4_ = this.myBitmapData.height;
+               break;
+            case "vertical":
+               _loc3_ = this.myBitmapData.width;
+               _loc4_ = this.pos.height;
+               break;
+            case "all":
+               _loc3_ = this.pos.width;
+               _loc4_ = this.pos.height;
+               break;
+         }
+         switch(this.startPos)
+         {
+            case "TL":
+               _loc1_ = 0;
+               _loc2_ = 0;
+               break;
+            case "TR":
+               _loc1_ = -_loc3_;
+               _loc2_ = 0;
+               break;
+            case "TC":
+               _loc1_ = -Math.round(_loc3_ / 2);
+               _loc2_ = 0;
+               break;
+            case "BL":
+               _loc1_ = 0;
+               _loc2_ = -_loc4_;
+               break;
+            case "BR":
+               _loc1_ = -_loc3_;
+               _loc2_ = -_loc4_;
+               break;
+            case "BC":
+               _loc1_ = -Math.round(_loc3_ / 2);
+               _loc2_ = -_loc4_;
+               break;
+            case "CL":
+               _loc1_ = 0;
+               _loc2_ = -Math.round(_loc4_ / 2);
+               break;
+            case "CR":
+               _loc1_ = -_loc3_;
+               _loc2_ = -Math.round(_loc4_ / 2);
+               break;
+            case "CC":
+               _loc1_ = -Math.round(_loc3_ / 2);
+               _loc2_ = -Math.round(_loc4_ / 2);
+               break;
+         }
+         this.graphics.lineTo(_loc1_,_loc2_);
+         this.graphics.lineTo(_loc1_ + _loc3_,_loc2_);
+         this.graphics.lineTo(_loc1_ + _loc3_,_loc2_ + _loc4_);
+         this.graphics.lineTo(_loc1_,_loc2_ + _loc4_);
+         this.graphics.lineTo(_loc1_,_loc2_);
+         this.graphics.endFill();
+      }
 
-        public var tempBg:flash.display.MovieClip;
+      public function get source() : String {
+         return this._src;
+      }
 
-        internal var myBitmapData:flash.display.BitmapData;
+      public function set source(param1:String) : void {
+         var _loc2_:Class = null;
+         this._src = param1;
+         if(this._src != "")
+         {
+            _loc2_ = getDefinitionByName(this._src) as Class;
+            this.myBitmapData = new _loc2_() as BitmapData;
+            invalidate();
+         }
+      }
 
-        internal var _src:String="";
+      public function set setBitmap(param1:BitmapData) : void {
+         this.myBitmapData = param1;
+         invalidate();
+      }
 
-        public var pos:flash.geom.Rectangle;
+      public function get setBitmap() : BitmapData {
+         return this.myBitmapData;
+      }
 
-        public var repeat:String="none";
+      public function set widthFill(param1:Number) : void {
+         this.setSize(param1,this.pos.height);
+      }
 
-        public var startPos:String="TL";
-    }
+      public function get widthFill() : Number {
+         return this.pos.width;
+      }
+
+      public function set heightFill(param1:Number) : void {
+         this.setSize(this.pos.width,param1);
+      }
+
+      public function get heightFill() : Number {
+         return this.pos.height;
+      }
+
+      override public function setSize(param1:Number, param2:Number) : void {
+         this.createPos();
+         this.pos.width = param1;
+         this.pos.height = param2;
+         this.draw();
+      }
+   }
+
 }

@@ -1,7 +1,11 @@
-package net.wg.infrastructure.interfaces.entity 
+package net.wg.infrastructure.interfaces.entity
 {
-    public interface IUpdatable
-    {
-        function update(arg1:Object):void;
-    }
+
+
+   public interface IUpdatable
+   {
+          
+      function update(param1:Object) : void;
+   }
+
 }

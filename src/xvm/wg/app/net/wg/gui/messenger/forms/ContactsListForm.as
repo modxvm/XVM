@@ -1,206 +1,195 @@
-package net.wg.gui.messenger.forms 
+package net.wg.gui.messenger.forms
 {
-    import flash.utils.*;
-    import net.wg.data.daapi.base.*;
-    import net.wg.gui.components.advanced.*;
-    import net.wg.gui.prebattle.invites.*;
-    import net.wg.infrastructure.interfaces.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.core.*;
-    import scaleform.clik.data.*;
-    import scaleform.clik.events.*;
-    import scaleform.clik.utils.*;
-    
-    public class ContactsListForm extends scaleform.clik.core.UIComponent implements net.wg.infrastructure.interfaces.IViewStackContent
-    {
-        public function ContactsListForm()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import net.wg.infrastructure.interfaces.IViewStackContent;
+   import net.wg.gui.components.advanced.Accordion;
+   import net.wg.data.daapi.base.DAAPIDataProvider;
+   import net.wg.gui.prebattle.invites.SendInvitesEvent;
+   import scaleform.clik.events.IndexEvent;
+   import scaleform.clik.utils.Constraints;
+   import scaleform.clik.constants.ConstrainMode;
+   import scaleform.clik.constants.InvalidationType;
+   import scaleform.clik.data.DataProvider;
+   import net.wg.gui.prebattle.invites.PrbSendInviteCIGenerator;
+   import flash.utils.getQualifiedClassName;
 
-        public function update(arg1:Object):void
-        {
-            if (arg1) 
+
+   public class ContactsListForm extends UIComponent implements IViewStackContent
+   {
+          
+      public function ContactsListForm() {
+         super();
+      }
+
+      private static const FRIENDS_ROSTER:String = "ContactsFriendsRosterUI";
+
+      private static const CLAN_ROSTER:String = "ContactsClanRosterUI";
+
+      private static const IGNORED_ROSTER:String = "ContactsIgnoredRosterUI";
+
+      private static const MUTED_ROSTER:String = "ContactsMutedRosterUI";
+
+      private static const INVALIDATE_VIEW:String = "invalidateView";
+
+      public var accordion:Accordion;
+
+      public var friendsDP:DAAPIDataProvider;
+
+      public var clanDP:DAAPIDataProvider;
+
+      public var ignoredDP:DAAPIDataProvider;
+
+      public var mutedDP:DAAPIDataProvider;
+
+      public function update(param1:Object) : void {
+         if(param1)
+         {
+            this.friendsDP = param1.friendsDP;
+            this.clanDP = param1.clanDP;
+            this.ignoredDP = param1.ignoredDP;
+            this.mutedDP = param1.mutedDP;
+            this.updateViewData();
+         }
+      }
+
+      override public function dispose() : void {
+         super.dispose();
+         this.accordion.removeEventListener(SendInvitesEvent.SHOW_CONTEXT_MENU,this.showContextMenu);
+         this.accordion.removeEventListener(IndexEvent.INDEX_CHANGE,this.onViewChanged);
+         if(this.friendsDP)
+         {
+            this.friendsDP.cleanUp();
+            this.friendsDP = null;
+         }
+         if(this.clanDP)
+         {
+            this.clanDP.cleanUp();
+            this.clanDP = null;
+         }
+         if(this.ignoredDP)
+         {
+            this.ignoredDP.cleanUp();
+            this.ignoredDP = null;
+         }
+         if(this.mutedDP)
+         {
+            this.mutedDP.cleanUp();
+            this.mutedDP = null;
+         }
+         if(this.accordion.dataProvider)
+         {
+            this.accordion.dataProvider.cleanUp();
+            this.accordion.dataProvider = null;
+         }
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         constraints = new Constraints(this,ConstrainMode.REFLOW);
+         constraints.addElement("accordion",this.accordion,Constraints.ALL);
+         this.accordion.addEventListener(SendInvitesEvent.SHOW_CONTEXT_MENU,this.showContextMenu);
+         this.accordion.addEventListener(IndexEvent.INDEX_CHANGE,this.onViewChanged);
+         this.initAccordion();
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         if((constraints) && (isInvalid(InvalidationType.SIZE)))
+         {
+            constraints.update(_width,_height);
+            this.updateViewSize();
+         }
+         if(isInvalid(INVALIDATE_VIEW))
+         {
+            this.updateViewData();
+            this.updateViewSize();
+         }
+      }
+
+      private function initAccordion() : void {
+         var _loc1_:Array = [
             {
-                this.friendsDP = arg1.friendsDP;
-                this.clanDP = arg1.clanDP;
-                this.ignoredDP = arg1.ignoredDP;
-                this.mutedDP = arg1.mutedDP;
-                this.updateViewData();
+               "label":MESSENGER.DIALOGS_CONTACTS_TREE_FRIENDS,
+               "linkage":FRIENDS_ROSTER
             }
-            return;
-        }
-
-        public override function dispose():void
-        {
-            super.dispose();
-            this.accordion.removeEventListener(net.wg.gui.prebattle.invites.SendInvitesEvent.SHOW_CONTEXT_MENU, this.showContextMenu);
-            this.accordion.removeEventListener(scaleform.clik.events.IndexEvent.INDEX_CHANGE, this.onViewChanged);
-            if (this.friendsDP) 
+         ,
             {
-                this.friendsDP.cleanUp();
-                this.friendsDP = null;
+               "label":MESSENGER.DIALOGS_CONTACTS_TREE_CLAN,
+               "linkage":CLAN_ROSTER
             }
-            if (this.clanDP) 
+         ,
             {
-                this.clanDP.cleanUp();
-                this.clanDP = null;
+               "label":MESSENGER.DIALOGS_CONTACTS_TREE_IGNORED,
+               "linkage":IGNORED_ROSTER
             }
-            if (this.ignoredDP) 
+         ];
+         if(App.voiceChatMgr.isVOIPEnabledS())
+         {
+            _loc1_.push(
+               {
+                  "label":MESSENGER.DIALOGS_CONTACTS_TREE_MUTED,
+                  "linkage":MUTED_ROSTER
+               }
+            );
+         }
+         this.accordion.view.cache = true;
+         this.accordion.dataProvider = new DataProvider(_loc1_);
+         this.accordion.selectedIndex = 0;
+      }
+
+      private function onViewChanged(param1:IndexEvent) : void {
+         invalidate(INVALIDATE_VIEW);
+      }
+
+      private function showContextMenu(param1:SendInvitesEvent) : void {
+         if(param1.initItem)
+         {
+            App.contextMenuMgr.showUserContextMenu(this,param1.initItem,new PrbSendInviteCIGenerator());
+         }
+      }
+
+      private function updateViewData() : void {
+         var _loc2_:String = null;
+         var _loc3_:DAAPIDataProvider = null;
+         var _loc1_:IViewStackContent = this.accordion.view.currentView as IViewStackContent;
+         if(_loc1_ != null)
+         {
+            _loc2_ = getQualifiedClassName(_loc1_);
+            switch(_loc2_)
             {
-                this.ignoredDP.cleanUp();
-                this.ignoredDP = null;
+               case FRIENDS_ROSTER:
+                  _loc3_ = this.friendsDP;
+                  break;
+               case CLAN_ROSTER:
+                  _loc3_ = this.clanDP;
+                  break;
+               case IGNORED_ROSTER:
+                  _loc3_ = this.ignoredDP;
+                  break;
+               case MUTED_ROSTER:
+                  _loc3_ = this.mutedDP;
+                  break;
             }
-            if (this.mutedDP) 
+            if(_loc3_)
             {
-                this.mutedDP.cleanUp();
-                this.mutedDP = null;
+               _loc1_.update(_loc3_);
             }
-            if (this.accordion.dataProvider) 
+         }
+      }
+
+      private function updateViewSize() : void {
+         var _loc1_:String = null;
+         var _loc2_:UIComponent = null;
+         for (_loc1_ in this.accordion.view.cachedViews)
+         {
+            _loc2_ = this.accordion.view.cachedViews[_loc1_] as UIComponent;
+            _loc2_.setSize(this.accordion.actualViewWidth,this.accordion.actualViewHeight);
+            if(_loc2_ == this.accordion.view.currentView)
             {
-                this.accordion.dataProvider.cleanUp();
-                this.accordion.dataProvider = null;
+               _loc2_.validateNow();
             }
-            return;
-        }
+         }
+      }
+   }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            constraints = new scaleform.clik.utils.Constraints(this, scaleform.clik.constants.ConstrainMode.REFLOW);
-            constraints.addElement("accordion", this.accordion, scaleform.clik.utils.Constraints.ALL);
-            this.accordion.addEventListener(net.wg.gui.prebattle.invites.SendInvitesEvent.SHOW_CONTEXT_MENU, this.showContextMenu);
-            this.accordion.addEventListener(scaleform.clik.events.IndexEvent.INDEX_CHANGE, this.onViewChanged);
-            this.initAccordion();
-            return;
-        }
-
-        protected override function draw():void
-        {
-            super.draw();
-            if (constraints && isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
-            {
-                constraints.update(_width, _height);
-                this.updateViewSize();
-            }
-            if (isInvalid(INVALIDATE_VIEW)) 
-            {
-                this.updateViewData();
-                this.updateViewSize();
-            }
-            return;
-        }
-
-        internal function initAccordion():void
-        {
-            var loc1:*=[{"label":MESSENGER.DIALOGS_CONTACTS_TREE_FRIENDS, "linkage":FRIENDS_ROSTER}, {"label":MESSENGER.DIALOGS_CONTACTS_TREE_CLAN, "linkage":CLAN_ROSTER}, {"label":MESSENGER.DIALOGS_CONTACTS_TREE_IGNORED, "linkage":IGNORED_ROSTER}];
-            if (App.voiceChatMgr.isVOIPEnabledS()) 
-            {
-                loc1.push({"label":MESSENGER.DIALOGS_CONTACTS_TREE_MUTED, "linkage":MUTED_ROSTER});
-            }
-            this.accordion.view.cache = true;
-            this.accordion.dataProvider = new scaleform.clik.data.DataProvider(loc1);
-            this.accordion.selectedIndex = 0;
-            return;
-        }
-
-        internal function onViewChanged(arg1:scaleform.clik.events.IndexEvent):void
-        {
-            invalidate(INVALIDATE_VIEW);
-            return;
-        }
-
-        internal function showContextMenu(arg1:net.wg.gui.prebattle.invites.SendInvitesEvent):void
-        {
-            if (arg1.initItem) 
-            {
-                App.contextMenuMgr.showUserContextMenu(this, arg1.initItem, new net.wg.gui.prebattle.invites.PrbSendInviteCIGenerator());
-            }
-            return;
-        }
-
-        internal function updateViewData():void
-        {
-            var loc2:*=null;
-            var loc3:*=null;
-            var loc1:*=this.accordion.view.currentView as net.wg.infrastructure.interfaces.IViewStackContent;
-            if (loc1 != null) 
-            {
-                loc2 = flash.utils.getQualifiedClassName(loc1);
-                var loc4:*=loc2;
-                switch (loc4) 
-                {
-                    case FRIENDS_ROSTER:
-                    {
-                        loc3 = this.friendsDP;
-                        break;
-                    }
-                    case CLAN_ROSTER:
-                    {
-                        loc3 = this.clanDP;
-                        break;
-                    }
-                    case IGNORED_ROSTER:
-                    {
-                        loc3 = this.ignoredDP;
-                        break;
-                    }
-                    case MUTED_ROSTER:
-                    {
-                        loc3 = this.mutedDP;
-                        break;
-                    }
-                    default:
-                    {
-                        break;
-                    }
-                }
-                if (loc3) 
-                {
-                    loc1.update(loc3);
-                }
-            }
-            return;
-        }
-
-        internal function updateViewSize():void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            var loc3:*=0;
-            var loc4:*=this.accordion.view.cachedViews;
-            for (loc1 in loc4) 
-            {
-                loc2 = this.accordion.view.cachedViews[loc1] as scaleform.clik.core.UIComponent;
-                loc2.setSize(this.accordion.actualViewWidth, this.accordion.actualViewHeight);
-                if (loc2 != this.accordion.view.currentView) 
-                {
-                    continue;
-                }
-                loc2.validateNow();
-            }
-            return;
-        }
-
-        internal static const FRIENDS_ROSTER:String="ContactsFriendsRosterUI";
-
-        internal static const CLAN_ROSTER:String="ContactsClanRosterUI";
-
-        internal static const IGNORED_ROSTER:String="ContactsIgnoredRosterUI";
-
-        internal static const MUTED_ROSTER:String="ContactsMutedRosterUI";
-
-        internal static const INVALIDATE_VIEW:String="invalidateView";
-
-        public var accordion:net.wg.gui.components.advanced.Accordion;
-
-        public var friendsDP:net.wg.data.daapi.base.DAAPIDataProvider;
-
-        public var clanDP:net.wg.data.daapi.base.DAAPIDataProvider;
-
-        public var ignoredDP:net.wg.data.daapi.base.DAAPIDataProvider;
-
-        public var mutedDP:net.wg.data.daapi.base.DAAPIDataProvider;
-    }
 }

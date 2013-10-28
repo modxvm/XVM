@@ -1,94 +1,86 @@
-package net.wg.gui.lobby.battleResults 
+package net.wg.gui.lobby.battleResults
 {
-    import flash.text.*;
-    import net.wg.gui.components.controls.*;
-    import scaleform.clik.core.*;
-    
-    public class DetailsBlock extends scaleform.clik.core.UIComponent
-    {
-        public function DetailsBlock()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.text.TextField;
+   import net.wg.gui.components.controls.SoundButtonEx;
 
-        public override function dispose():void
-        {
-            this._data = null;
-            this.detailedReportBtn.dispose();
-            super.dispose();
-            return;
-        }
 
-        public function get data():Object
-        {
-            return this._data;
-        }
+   public class DetailsBlock extends UIComponent
+   {
+          
+      public function DetailsBlock() {
+         super();
+      }
 
-        public function set data(arg1:Object):void
-        {
-            this._data = arg1;
-            this._dataDirty = true;
-            invalidate();
-            return;
-        }
+      public var noPremTitleLbl:TextField;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.noPremTitleLbl.text = BATTLE_RESULTS.COMMON_DETAILS_NOPREMTITLE;
-            this.premTitleLbl.text = BATTLE_RESULTS.COMMON_DETAILS_PREMTITLE;
-            this.ctreditsTitle.text = BATTLE_RESULTS.COMMON_DETAILS_CREDITSTITLE;
-            this.progressTF.text = BATTLE_RESULTS.COMMON_DETAILS_PROGRESS;
-            return;
-        }
+      public var premTitleLbl:TextField;
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (this._dataDirty) 
-            {
-                this.noPremTitleLbl.alpha = this.data.isPremium ? 0.25 : 1;
-                this.premTitleLbl.alpha = this.data.isPremium ? 0.25 : 1;
-                this.creditsLbl.alpha = this.data.isPremium ? 0.25 : 1;
-                this.xpLbl.alpha = this.data.isPremium ? 0.25 : 1;
-                this.premTitleLbl.alpha = this.data.isPremium ? 1 : 0.25;
-                this.premCreditsLbl.alpha = this.data.isPremium ? 1 : 0.25;
-                this.premXpLbl.alpha = this.data.isPremium ? 1 : 0.25;
-                this.xpTitleLbl.text = this.data.xpTitleStr;
-                this.xpLbl.htmlText = this.data.xpNoPremStr;
-                this.premXpLbl.htmlText = this.data.xpPremStr;
-                this.creditsLbl.htmlText = this.data.creditsNoPremStr;
-                this.premCreditsLbl.htmlText = this.data.creditsPremStr;
-                this._dataDirty = false;
-            }
-            return;
-        }
+      public var creditsTitleLbl:TextField;
 
-        public var noPremTitleLbl:flash.text.TextField;
+      public var creditsLbl:TextField;
 
-        public var premTitleLbl:flash.text.TextField;
+      public var premCreditsLbl:TextField;
 
-        public var creditsTitleLbl:flash.text.TextField;
+      public var xpTitleLbl:TextField;
 
-        public var creditsLbl:flash.text.TextField;
+      public var xpLbl:TextField;
 
-        public var premCreditsLbl:flash.text.TextField;
+      public var premXpLbl:TextField;
 
-        public var xpTitleLbl:flash.text.TextField;
+      public var detailedReportBtn:SoundButtonEx;
 
-        public var xpLbl:flash.text.TextField;
+      public var progressTF:TextField;
 
-        public var premXpLbl:flash.text.TextField;
+      public var ctreditsTitle:TextField;
 
-        public var detailedReportBtn:net.wg.gui.components.controls.SoundButtonEx;
+      private var _data:Object;
 
-        public var progressTF:flash.text.TextField;
+      private var _dataDirty:Boolean = false;
 
-        public var ctreditsTitle:flash.text.TextField;
+      override public function dispose() : void {
+         this._data = null;
+         this.detailedReportBtn.dispose();
+         super.dispose();
+      }
 
-        internal var _data:Object;
+      public function get data() : Object {
+         return this._data;
+      }
 
-        internal var _dataDirty:Boolean=false;
-    }
+      public function set data(param1:Object) : void {
+         this._data = param1;
+         this._dataDirty = true;
+         invalidate();
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.noPremTitleLbl.text = BATTLE_RESULTS.COMMON_DETAILS_NOPREMTITLE;
+         this.premTitleLbl.text = BATTLE_RESULTS.COMMON_DETAILS_PREMTITLE;
+         this.ctreditsTitle.text = BATTLE_RESULTS.COMMON_DETAILS_CREDITSTITLE;
+         this.progressTF.text = BATTLE_RESULTS.COMMON_DETAILS_PROGRESS;
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         if(this._dataDirty)
+         {
+            this.noPremTitleLbl.alpha = this.data.isPremium?0.25:1;
+            this.premTitleLbl.alpha = this.data.isPremium?0.25:1;
+            this.creditsLbl.alpha = this.data.isPremium?0.25:1;
+            this.xpLbl.alpha = this.data.isPremium?0.25:1;
+            this.premTitleLbl.alpha = this.data.isPremium?1:0.25;
+            this.premCreditsLbl.alpha = this.data.isPremium?1:0.25;
+            this.premXpLbl.alpha = this.data.isPremium?1:0.25;
+            this.xpTitleLbl.text = this.data.xpTitleStr;
+            this.xpLbl.htmlText = this.data.xpNoPremStr;
+            this.premXpLbl.htmlText = this.data.xpPremStr;
+            this.creditsLbl.htmlText = this.data.creditsNoPremStr;
+            this.premCreditsLbl.htmlText = this.data.creditsPremStr;
+            this._dataDirty = false;
+         }
+      }
+   }
+
 }

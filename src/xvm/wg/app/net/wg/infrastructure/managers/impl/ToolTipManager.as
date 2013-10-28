@@ -1,144 +1,129 @@
-package net.wg.infrastructure.managers.impl 
+package net.wg.infrastructure.managers.impl
 {
-    import flash.display.*;
-    import net.wg.data.constants.*;
-    import net.wg.data.managers.*;
-    import net.wg.data.managers.impl.*;
-    import net.wg.gui.utils.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import net.wg.infrastructure.interfaces.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    import net.wg.infrastructure.managers.*;
-    import net.wg.utils.*;
-    
-    public class ToolTipManager extends net.wg.infrastructure.base.meta.impl.ToolTipMgrMeta implements net.wg.infrastructure.managers.ITooltipMgr, net.wg.infrastructure.base.meta.IToolTipMgrMeta
-    {
-        public function ToolTipManager(arg1:flash.display.DisplayObjectContainer)
-        {
-            super();
-            this._container = arg1;
+   import net.wg.infrastructure.base.meta.impl.ToolTipMgrMeta;
+   import net.wg.infrastructure.managers.ITooltipMgr;
+   import net.wg.infrastructure.base.meta.IToolTipMgrMeta;
+   import flash.display.DisplayObjectContainer;
+   import flash.display.DisplayObject;
+   import net.wg.data.managers.ITooltipProps;
+   import net.wg.utils.IUtils;
+   import net.wg.infrastructure.interfaces.IToolTip;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import net.wg.data.managers.IToolTipParams;
+   import net.wg.gui.utils.ComplexTooltipHelper;
+   import net.wg.data.constants.Linkages;
+   import net.wg.data.managers.impl.TooltipProps;
+   import net.wg.utils.IScheduler;
+
+
+   public class ToolTipManager extends ToolTipMgrMeta implements ITooltipMgr, IToolTipMgrMeta
+   {
+          
+      public function ToolTipManager(param1:DisplayObjectContainer) {
+         super();
+         this._container = param1;
+      }
+
+      private static const SCHEDULE_TIME:uint = 100;
+
+      private var _container:DisplayObjectContainer = null;
+
+      private var _currentTooltip:DisplayObject = null;
+
+      private var _props:ITooltipProps = null;
+
+      public function as_show(param1:Object, param2:String) : void {
+         this.hide();
+         var _loc3_:IUtils = App.utils;
+         if(this._props.showDelay != 0)
+         {
+            _loc3_.scheduler.scheduleTask(this.hide,this._props.showDelay);
+         }
+         this._currentTooltip = DisplayObject(_loc3_.classFactory.getObject(param2,this._props));
+         if(this._currentTooltip != null)
+         {
+            IToolTip(this._currentTooltip).build(param1,this._props);
+            this._container.addChild(this._currentTooltip);
+         }
+         this._props = null;
+      }
+
+      public function hide() : void {
+         if(this._currentTooltip != null)
+         {
+            IDisposable(this._currentTooltip).dispose();
+            this._container.removeChild(this._currentTooltip);
+            this._currentTooltip = null;
+         }
+         this.cancelTasks();
+      }
+
+      public function showSpecial(param1:String, param2:ITooltipProps, ... rest) : void {
+         this._props = this.prepareProperties(param2);
+         this.cancelTasks();
+         App.utils.scheduler.scheduleTask(onCreateTypedTooltipS,SCHEDULE_TIME,param1,rest,this._props.type);
+      }
+
+      public function showComplex(param1:String, param2:ITooltipProps=null) : void {
+         this._props = this.prepareProperties(param2);
+         this.rescheduleTask(onCreateComplexTooltipS,param1,this._props.type);
+      }
+
+      public function showComplexWithParams(param1:String, param2:IToolTipParams, param3:ITooltipProps=null) : void {
+         if(!param2)
+         {
             return;
-        }
+         }
+         var _loc4_:ComplexTooltipHelper = new ComplexTooltipHelper();
+         if(param2.header)
+         {
+            _loc4_.addHeader(App.utils.locale.makeString(param1 + "/header",param2.header));
+         }
+         if(param2.body)
+         {
+            _loc4_.addBody(App.utils.locale.makeString(param1 + "/body",param2.body));
+         }
+         if(param2.note)
+         {
+            _loc4_.addNote(App.utils.locale.makeString(param1 + "/note",param2.note));
+         }
+         var _loc5_:String = _loc4_.make();
+         if(_loc5_.length > 0)
+         {
+            App.toolTipMgr.showComplex(_loc5_);
+         }
+      }
 
-        public function as_show(arg1:Object, arg2:String):void
-        {
-            this.hide();
-            var loc1:*=App.utils;
-            if (this._props.showDelay != 0) 
-            {
-                loc1.scheduler.scheduleTask(this.hide, this._props.showDelay);
-            }
-            this._currentTooltip = flash.display.DisplayObject(loc1.classFactory.getObject(arg2, this._props));
-            if (this._currentTooltip != null) 
-            {
-                net.wg.infrastructure.interfaces.IToolTip(this._currentTooltip).build(arg1, this._props);
-                this._container.addChild(this._currentTooltip);
-            }
-            this._props = null;
-            return;
-        }
+      public function show(param1:String, param2:ITooltipProps=null) : void {
+         this._props = this.prepareProperties(param2);
+         this.rescheduleTask(this.as_show,param1,Linkages.TOOL_TIP_COMPLEX);
+      }
 
-        public function hide():void
-        {
-            if (this._currentTooltip != null) 
-            {
-                net.wg.infrastructure.interfaces.entity.IDisposable(this._currentTooltip).dispose();
-                this._container.removeChild(this._currentTooltip);
-                this._currentTooltip = null;
-            }
-            this.cancelTasks();
-            return;
-        }
+      public function showLocal(param1:String, param2:Object, param3:ITooltipProps=null) : void {
+         this._props = this.prepareProperties(param3);
+         this.cancelTasks();
+         App.utils.scheduler.scheduleTask(this.as_show,SCHEDULE_TIME,param2,param1);
+      }
 
-        public function showSpecial(arg1:String, arg2:net.wg.data.managers.ITooltipProps, ... rest):void
-        {
-            this._props = this.prepareProperties(arg2);
-            this.cancelTasks();
-            App.utils.scheduler.scheduleTask(onCreateTypedTooltipS, SCHEDULE_TIME, arg1, rest, this._props.type);
-            return;
-        }
+      private function prepareProperties(param1:ITooltipProps) : ITooltipProps {
+         if(param1 == null)
+         {
+            return TooltipProps.DEFAULT;
+         }
+         return param1;
+      }
 
-        public function showComplex(arg1:String, arg2:net.wg.data.managers.ITooltipProps=null):void
-        {
-            this._props = this.prepareProperties(arg2);
-            this.rescheduleTask(onCreateComplexTooltipS, arg1, this._props.type);
-            return;
-        }
+      private function cancelTasks() : void {
+         var _loc1_:IScheduler = App.utils.scheduler;
+         _loc1_.cancelTask(onCreateTypedTooltipS);
+         _loc1_.cancelTask(onCreateComplexTooltipS);
+         _loc1_.cancelTask(this.as_show);
+      }
 
-        public function showComplexWithParams(arg1:String, arg2:net.wg.data.managers.IToolTipParams, arg3:net.wg.data.managers.ITooltipProps=null):void
-        {
-            if (!arg2) 
-            {
-                return;
-            }
-            var loc1:*=new net.wg.gui.utils.ComplexTooltipHelper();
-            if (arg2.header) 
-            {
-                loc1.addHeader(App.utils.locale.makeString(arg1 + "/header", arg2.header));
-            }
-            if (arg2.body) 
-            {
-                loc1.addBody(App.utils.locale.makeString(arg1 + "/body", arg2.body));
-            }
-            if (arg2.note) 
-            {
-                loc1.addNote(App.utils.locale.makeString(arg1 + "/note", arg2.note));
-            }
-            var loc2:*;
-            if ((loc2 = loc1.make()).length > 0) 
-            {
-                App.toolTipMgr.showComplex(loc2);
-            }
-            return;
-        }
+      private function rescheduleTask(param1:Function, param2:String, param3:String) : void {
+         this.cancelTasks();
+         App.utils.scheduler.scheduleTask(param1,SCHEDULE_TIME,param2,param3);
+      }
+   }
 
-        public function show(arg1:String, arg2:net.wg.data.managers.ITooltipProps=null):void
-        {
-            this._props = this.prepareProperties(arg2);
-            this.rescheduleTask(this.as_show, arg1, net.wg.data.constants.Linkages.TOOL_TIP_COMPLEX);
-            return;
-        }
-
-        public function showLocal(arg1:String, arg2:Object, arg3:net.wg.data.managers.ITooltipProps=null):void
-        {
-            this._props = this.prepareProperties(arg3);
-            this.cancelTasks();
-            App.utils.scheduler.scheduleTask(this.as_show, SCHEDULE_TIME, arg2, arg1);
-            return;
-        }
-
-        internal function prepareProperties(arg1:net.wg.data.managers.ITooltipProps):net.wg.data.managers.ITooltipProps
-        {
-            if (arg1 == null) 
-            {
-                return net.wg.data.managers.impl.TooltipProps.DEFAULT;
-            }
-            return arg1;
-        }
-
-        internal function cancelTasks():void
-        {
-            var loc1:*=App.utils.scheduler;
-            loc1.cancelTask(onCreateTypedTooltipS);
-            loc1.cancelTask(onCreateComplexTooltipS);
-            loc1.cancelTask(this.as_show);
-            return;
-        }
-
-        internal function rescheduleTask(arg1:Function, arg2:String, arg3:String):void
-        {
-            this.cancelTasks();
-            App.utils.scheduler.scheduleTask(arg1, SCHEDULE_TIME, arg2, arg3);
-            return;
-        }
-
-        internal static const SCHEDULE_TIME:uint=100;
-
-        internal var _container:flash.display.DisplayObjectContainer=null;
-
-        internal var _currentTooltip:flash.display.DisplayObject=null;
-
-        internal var _props:net.wg.data.managers.ITooltipProps=null;
-    }
 }

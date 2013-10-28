@@ -1,52 +1,44 @@
-package net.wg.gui.lobby.hangar 
+package net.wg.gui.lobby.hangar
 {
-    import net.wg.data.daapi.base.*;
-    
-    public class ParamsVO extends net.wg.data.daapi.base.DAAPIDataClass
-    {
-        public function ParamsVO(arg1:Object)
-        {
-            super(arg1);
-            return;
-        }
+   import net.wg.data.daapi.base.DAAPIDataClass;
 
-        public function get param():String
-        {
-            return this._param;
-        }
 
-        public function set param(arg1:String):void
-        {
-            this._param = arg1;
-            return;
-        }
+   public class ParamsVO extends DAAPIDataClass
+   {
+          
+      public function ParamsVO(param1:Object) {
+         super(param1);
+      }
 
-        public function get text():String
-        {
-            return this._text;
-        }
+      private var _param:String = "";
 
-        public function set text(arg1:String):void
-        {
-            this._text = arg1;
-            return;
-        }
+      private var _text:String = "";
 
-        public function get selected():Boolean
-        {
-            return this._selected;
-        }
+      private var _selected:Boolean;
 
-        public function set selected(arg1:Boolean):void
-        {
-            this._selected = arg1;
-            return;
-        }
+      public function get param() : String {
+         return this._param;
+      }
 
-        internal var _param:String="";
+      public function set param(param1:String) : void {
+         this._param = param1;
+      }
 
-        internal var _text:String="";
+      public function get text() : String {
+         return this._text;
+      }
 
-        internal var _selected:Boolean;
-    }
+      public function set text(param1:String) : void {
+         this._text = param1;
+      }
+
+      public function get selected() : Boolean {
+         return this._selected;
+      }
+
+      public function set selected(param1:Boolean) : void {
+         this._selected = param1;
+      }
+   }
+
 }

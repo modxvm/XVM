@@ -1,36 +1,37 @@
-package net.wg.data.constants 
+package net.wg.data.constants
 {
-    import __AS3__.vec.*;
-    import flash.ui.*;
-    
-    public class Cursors extends Object
-    {
-        public function Cursors()
-        {
-            super();
-            return;
-        }
+   import __AS3__.vec.Vector;
+   import flash.ui.MouseCursor;
 
-        public static const ARROW:String=flash.ui.MouseCursor.ARROW;
 
-        public static const AUTO:String=flash.ui.MouseCursor.AUTO;
+   public class Cursors extends Object
+   {
+          
+      public function Cursors() {
+         super();
+      }
 
-        public static const BUTTON:String=flash.ui.MouseCursor.BUTTON;
+      public static const ARROW:String = MouseCursor.ARROW;
 
-        public static const HAND:String=flash.ui.MouseCursor.HAND;
+      public static const AUTO:String = MouseCursor.AUTO;
 
-        public static const IBEAM:String=flash.ui.MouseCursor.IBEAM;
+      public static const BUTTON:String = MouseCursor.BUTTON;
 
-        public static const ROTATE:String="rotate";
+      public static const HAND:String = MouseCursor.HAND;
 
-        public static const RESIZE:String="resize";
+      public static const IBEAM:String = MouseCursor.IBEAM;
 
-        public static const MOVE:String="move";
+      public static const ROTATE:String = "rotate";
 
-        public static const DRAG_OPEN:String="dragopen";
+      public static const RESIZE:String = "resize";
 
-        public static const DRAG_CLOSE:String="dragclose";
+      public static const MOVE:String = "move";
 
-        public static const CUSTOMIZED_CURSORS:__AS3__.vec.Vector.<String>=Vector.<String>([ROTATE, RESIZE, MOVE, DRAG_OPEN, DRAG_CLOSE]);
-    }
+      public static const DRAG_OPEN:String = "dragopen";
+
+      public static const DRAG_CLOSE:String = "dragclose";
+
+      public static const CUSTOMIZED_CURSORS:Vector.<String> = Vector.<String>([ROTATE,RESIZE,MOVE,DRAG_OPEN,DRAG_CLOSE]);
+   }
+
 }

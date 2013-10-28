@@ -1,16 +1,17 @@
-package net.wg.gui.lobby.premiumForm 
+package net.wg.gui.lobby.premiumForm
 {
-    import flash.text.*;
-    import scaleform.clik.core.*;
-    
-    public class DiscountPrice extends scaleform.clik.core.UIComponent
-    {
-        public function DiscountPrice()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.text.TextField;
 
-        public var quantity:flash.text.TextField;
-    }
+
+   public class DiscountPrice extends UIComponent
+   {
+          
+      public function DiscountPrice() {
+         super();
+      }
+
+      public var quantity:TextField;
+   }
+
 }

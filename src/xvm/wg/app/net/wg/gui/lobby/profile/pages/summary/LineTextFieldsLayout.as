@@ -1,95 +1,84 @@
-package net.wg.gui.lobby.profile.pages.summary 
+package net.wg.gui.lobby.profile.pages.summary
 {
-    import __AS3__.vec.*;
-    import flash.display.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    
-    public class LineTextFieldsLayout extends Object implements net.wg.infrastructure.interfaces.entity.IDisposable
-    {
-        public function LineTextFieldsLayout(arg1:uint, arg2:int)
-        {
-            this.leftPairs = new Vector.<Array>();
-            this.rightPairs = new Vector.<Array>();
-            super();
-            this._maxWidth = arg1;
-            this._centerAreaWidth = arg2;
-            return;
-        }
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import __AS3__.vec.Vector;
+   import flash.display.DisplayObject;
 
-        public function layout():void
-        {
-            this.applyGap(this.leftPairs);
-            this.applyGap(this.rightPairs, (this._maxWidth + this._centerAreaWidth) / 2);
-            return;
-        }
 
-        internal function applyGap(arg1:__AS3__.vec.Vector.<Array>, arg2:int=0):void
-        {
-            var loc4:*=null;
-            var loc6:*=null;
-            var loc7:*=0;
-            var loc8:*=0;
-            var loc1:*=arg1.length;
-            var loc2:*=flash.display.DisplayObject(arg1[0][0]).width;
-            var loc3:*=Math.round(((this._maxWidth - this._centerAreaWidth) / 2 - loc1 * loc2) / (loc1 + 1));
-            var loc5:*=0;
-            while (loc5 < loc1) 
+   public class LineTextFieldsLayout extends Object implements IDisposable
+   {
+          
+      public function LineTextFieldsLayout(param1:uint, param2:int) {
+         this.leftPairs = new Vector.<Array>();
+         this.rightPairs = new Vector.<Array>();
+         super();
+         this._maxWidth = param1;
+         this._centerAreaWidth = param2;
+      }
+
+      private var _maxWidth:uint;
+
+      private var _centerAreaWidth:int;
+
+      private var leftPairs:Vector.<Array>;
+
+      private var rightPairs:Vector.<Array>;
+
+      public function layout() : void {
+         this.applyGap(this.leftPairs);
+         this.applyGap(this.rightPairs,(this._maxWidth + this._centerAreaWidth) / 2);
+      }
+
+      private function applyGap(param1:Vector.<Array>, param2:int=0) : void {
+         var _loc6_:Array = null;
+         var _loc8_:DisplayObject = null;
+         var _loc9_:uint = 0;
+         var _loc10_:* = 0;
+         var _loc3_:uint = param1.length;
+         var _loc4_:Number = DisplayObject(param1[0][0]).width;
+         var _loc5_:int = Math.round(((this._maxWidth - this._centerAreaWidth) / 2 - _loc3_ * _loc4_) / (_loc3_ + 1));
+         var _loc7_:* = 0;
+         while(_loc7_ < _loc3_)
+         {
+            _loc6_ = param1[_loc7_];
+            _loc9_ = _loc6_.length;
+            _loc10_ = 0;
+            while(_loc10_ < _loc9_)
             {
-                loc7 = (loc4 = arg1[loc5]).length;
-                loc8 = 0;
-                while (loc8 < loc7) 
-                {
-                    (loc6 = loc4[loc8]).x = arg2 + loc3 + loc5 * (loc2 + loc3);
-                    ++loc8;
-                }
-                ++loc5;
+               _loc8_ = _loc6_[_loc10_];
+               _loc8_.x = param2 + _loc5_ + _loc7_ * (_loc4_ + _loc5_);
+               _loc10_++;
             }
-            return;
-        }
+            _loc7_++;
+         }
+      }
 
-        public function addLeftPair(arg1:flash.display.DisplayObject, arg2:flash.display.DisplayObject):void
-        {
-            this.leftPairs.push([arg1, arg2]);
-            return;
-        }
+      public function addLeftPair(param1:DisplayObject, param2:DisplayObject) : void {
+         this.leftPairs.push([param1,param2]);
+      }
 
-        public function addRightPair(arg1:flash.display.DisplayObject, arg2:flash.display.DisplayObject):void
-        {
-            this.rightPairs.push([arg1, arg2]);
-            return;
-        }
+      public function addRightPair(param1:DisplayObject, param2:DisplayObject) : void {
+         this.rightPairs.push([param1,param2]);
+      }
 
-        public function set maxWidth(arg1:uint):void
-        {
-            this._maxWidth = arg1;
-            return;
-        }
+      public function set maxWidth(param1:uint) : void {
+         this._maxWidth = param1;
+      }
 
-        public function set centerAreaWidth(arg1:int):void
-        {
-            this._centerAreaWidth = arg1;
-            return;
-        }
+      public function set centerAreaWidth(param1:int) : void {
+         this._centerAreaWidth = param1;
+      }
 
-        public function dispose():void
-        {
-            while (this.leftPairs.length > 0) 
-            {
-                this.leftPairs.splice((this.leftPairs.length - 1), 1);
-            }
-            while (this.rightPairs.length > 0) 
-            {
-                this.rightPairs.splice((this.rightPairs.length - 1), 1);
-            }
-            return;
-        }
+      public function dispose() : void {
+         while(this.leftPairs.length > 0)
+         {
+            this.leftPairs.splice(this.leftPairs.length-1,1);
+         }
+         while(this.rightPairs.length > 0)
+         {
+            this.rightPairs.splice(this.rightPairs.length-1,1);
+         }
+      }
+   }
 
-        internal var _maxWidth:uint;
-
-        internal var _centerAreaWidth:int;
-
-        internal var leftPairs:__AS3__.vec.Vector.<Array>;
-
-        internal var rightPairs:__AS3__.vec.Vector.<Array>;
-    }
 }

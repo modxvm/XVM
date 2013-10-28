@@ -1,188 +1,173 @@
-package net.wg.gui.components.controls 
+package net.wg.gui.components.controls
 {
-    import flash.text.*;
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    import scaleform.clik.controls.*;
-    
-    public class CheckBox extends scaleform.clik.controls.CheckBox implements net.wg.infrastructure.interfaces.entity.ISoundable
-    {
-        public function CheckBox()
-        {
-            super();
+   import scaleform.clik.controls.CheckBox;
+   import net.wg.infrastructure.interfaces.entity.ISoundable;
+   import net.wg.data.constants.SoundManagerStates;
+   import flash.text.TextFormat;
+
+
+   public class CheckBox extends scaleform.clik.controls.CheckBox implements ISoundable
+   {
+          
+      public function CheckBox() {
+         super();
+      }
+
+      private var _soundType:String = "checkBox";
+
+      public var soundId:String = "";
+
+      protected var _textColor:Number = 9868935;
+
+      protected var _disabledTextAlpha:Number = 0.5;
+
+      private var TEXT_FORMAT_INV:String = "textFormatInv";
+
+      private var _textFont:String = "$TextFont";
+
+      private var _textSize:Number = 12;
+
+      private var _dynamicFrameUpdating:Boolean = false;
+
+      public final function getSoundType() : String {
+         return this.soundType;
+      }
+
+      public final function getSoundId() : String {
+         return this.soundId;
+      }
+
+      public function enableDynamicFrameUpdating() : void {
+         this._dynamicFrameUpdating = true;
+      }
+
+      public final function getStateOverSnd() : String {
+         return SoundManagerStates.SND_OVER;
+      }
+
+      public final function getStateOutSnd() : String {
+         return SoundManagerStates.SND_OUT;
+      }
+
+      public final function getStatePressSnd() : String {
+         return SoundManagerStates.SND_PRESS;
+      }
+
+      public function get textFont() : String {
+         return this._textFont;
+      }
+
+      public function set textFont(param1:String) : void {
+         if(this._textFont == param1)
+         {
             return;
-        }
+         }
+         this._textFont = param1;
+         invalidate(this.TEXT_FORMAT_INV);
+      }
 
-        public final function getSoundType():String
-        {
-            return this.soundType;
-        }
+      public function get textSize() : Number {
+         return this._textSize;
+      }
 
-        public final function getSoundId():String
-        {
-            return this.soundId;
-        }
+      override public function set label(param1:String) : void {
+         if(!this._dynamicFrameUpdating || param1.length > 0)
+         {
+            super.label = param1;
+         }
+      }
 
-        public function enableDynamicFrameUpdating():void
-        {
-            this._dynamicFrameUpdating = true;
+      override public function set data(param1:Object) : void {
+         if(!this._dynamicFrameUpdating || param1.length > 0)
+         {
+            super.data = param1;
+         }
+      }
+
+      public function set textSize(param1:Number) : void {
+         if(this._textSize == param1)
+         {
             return;
-        }
+         }
+         this._textSize = param1;
+         invalidate(this.TEXT_FORMAT_INV);
+      }
 
-        public final function getStateOverSnd():String
-        {
-            return net.wg.data.constants.SoundManagerStates.SND_OVER;
-        }
+      public function get textColor() : Number {
+         return this._textColor;
+      }
 
-        public final function getStateOutSnd():String
-        {
-            return net.wg.data.constants.SoundManagerStates.SND_OUT;
-        }
+      public function set textColor(param1:Number) : void {
+         if(this._textColor == param1)
+         {
+            return;
+         }
+         this._textColor = param1;
+         invalidate(this.TEXT_FORMAT_INV);
+      }
 
-        public final function getStatePressSnd():String
-        {
-            return net.wg.data.constants.SoundManagerStates.SND_PRESS;
-        }
+      public function get disabledTextAlpha() : Number {
+         return this._disabledTextAlpha;
+      }
 
-        public function get textFont():String
-        {
-            return this._textFont;
-        }
+      public function set disabledTextAlpha(param1:Number) : void {
+         if(this._disabledTextAlpha == param1)
+         {
+            return;
+         }
+         this._disabledTextAlpha = param1;
+         invalidate(this.TEXT_FORMAT_INV);
+      }
 
-        public function set textFont(arg1:String):void
-        {
-            if (this._textFont == arg1) 
+      override protected function configUI() : void {
+         super.configUI();
+         buttonMode = true;
+         if(App.soundMgr != null)
+         {
+            App.soundMgr.addSoundsHdlrs(this);
+         }
+      }
+
+      override protected function draw() : void {
+         var _loc1_:TextFormat = null;
+         super.draw();
+         if(isInvalid(this.TEXT_FORMAT_INV))
+         {
+            if(textField)
             {
-                return;
+               textField.textColor = this._textColor;
+               _loc1_ = new TextFormat();
+               _loc1_.font = this._textFont;
+               _loc1_.size = this._textSize;
+               textField.setTextFormat(_loc1_);
+               textField.alpha = enabled?1:this._disabledTextAlpha;
             }
-            this._textFont = arg1;
-            invalidate(this.TEXT_FORMAT_INV);
-            return;
-        }
+         }
+      }
 
-        public function get textSize():Number
-        {
-            return this._textSize;
-        }
+      override protected function updateAfterStateChange() : void {
+         super.updateAfterStateChange();
+         invalidate(this.TEXT_FORMAT_INV);
+      }
 
-        public override function set label(arg1:String):void
-        {
-            if (!this._dynamicFrameUpdating || arg1.length > 0) 
-            {
-                super.label = arg1;
-            }
-            return;
-        }
+      override public function dispose() : void {
+         if(App.soundMgr)
+         {
+            App.soundMgr.removeSoundHdlrs(this);
+         }
+         super.dispose();
+      }
 
-        public override function set data(arg1:Object):void
-        {
-            if (!this._dynamicFrameUpdating || arg1.length > 0) 
-            {
-                super.data = arg1;
-            }
-            return;
-        }
+      public function get soundType() : String {
+         return this._soundType;
+      }
 
-        public function set textSize(arg1:Number):void
-        {
-            if (this._textSize == arg1) 
-            {
-                return;
-            }
-            this._textSize = arg1;
-            invalidate(this.TEXT_FORMAT_INV);
-            return;
-        }
+      public function set soundType(param1:String) : void {
+         if((param1) && !(param1 == this._soundType))
+         {
+            this._soundType = param1;
+         }
+      }
+   }
 
-        public function get textColor():Number
-        {
-            return this._textColor;
-        }
-
-        public function set textColor(arg1:Number):void
-        {
-            if (this._textColor == arg1) 
-            {
-                return;
-            }
-            this._textColor = arg1;
-            invalidate(this.TEXT_FORMAT_INV);
-            return;
-        }
-
-        public function get disabledTextAlpha():Number
-        {
-            return this._disabledTextAlpha;
-        }
-
-        public function set disabledTextAlpha(arg1:Number):void
-        {
-            if (this._disabledTextAlpha == arg1) 
-            {
-                return;
-            }
-            this._disabledTextAlpha = arg1;
-            invalidate(this.TEXT_FORMAT_INV);
-            return;
-        }
-
-        protected override function configUI():void
-        {
-            super.configUI();
-            buttonMode = true;
-            if (App.soundMgr != null) 
-            {
-                App.soundMgr.addSoundsHdlrs(this);
-            }
-            return;
-        }
-
-        protected override function draw():void
-        {
-            var loc1:*=null;
-            super.draw();
-            if (isInvalid(this.TEXT_FORMAT_INV)) 
-            {
-                if (textField) 
-                {
-                    textField.textColor = this._textColor;
-                    loc1 = new flash.text.TextFormat();
-                    loc1.font = this._textFont;
-                    loc1.size = this._textSize;
-                    textField.setTextFormat(loc1);
-                    textField.alpha = enabled ? 1 : this._disabledTextAlpha;
-                }
-            }
-            return;
-        }
-
-        protected override function updateAfterStateChange():void
-        {
-            super.updateAfterStateChange();
-            invalidate(this.TEXT_FORMAT_INV);
-            return;
-        }
-
-        public override function dispose():void
-        {
-            super.dispose();
-            return;
-        }
-
-        public var soundType:String="checkBox";
-
-        public var soundId:String="";
-
-        protected var _textColor:Number=9868935;
-
-        protected var _disabledTextAlpha:Number=0.5;
-
-        internal var TEXT_FORMAT_INV:String="textFormatInv";
-
-        internal var _textFont:String="$TextFont";
-
-        internal var _textSize:Number=12;
-
-        internal var _dynamicFrameUpdating:Boolean=false;
-    }
 }

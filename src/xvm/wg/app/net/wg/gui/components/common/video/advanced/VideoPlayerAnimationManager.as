@@ -1,113 +1,108 @@
-package net.wg.gui.components.common.video.advanced 
+package net.wg.gui.components.common.video.advanced
 {
-    import fl.transitions.easing.*;
-    import net.wg.gui.utils.*;
-    import scaleform.clik.motion.*;
-    
-    public class VideoPlayerAnimationManager extends Object
-    {
-        public function VideoPlayerAnimationManager(arg1:net.wg.gui.components.common.video.advanced.AdvancedVideoPlayer)
-        {
-            this.tweenManager = new net.wg.gui.utils.ExcludeTweenManager();
-            super();
-            this.advancedVideoPlayer = arg1;
-            return;
-        }
+   import net.wg.gui.utils.ExcludeTweenManager;
+   import fl.transitions.easing.Strong;
+   import scaleform.clik.motion.Tween;
 
-        public function show(arg1:Number):void
-        {
-            this.tweenManager.unregisterAll();
-            this.applyAnimation(arg1, showAlphaFinalValue, this.getShowAnimTweenSet);
-            return;
-        }
 
-        public function hide(arg1:Number):void
-        {
-            this.tweenManager.unregisterAll();
-            this.applyAnimation(arg1, hideAlphaFinalValue, this.getHideAnimTweenSet);
-            return;
-        }
+   public class VideoPlayerAnimationManager extends Object
+   {
+          
+      public function VideoPlayerAnimationManager(param1:AdvancedVideoPlayer) {
+         this.tweenManager = new ExcludeTweenManager();
+         super();
+         this.advancedVideoPlayer = param1;
+      }
 
-        internal function applyAnimation(arg1:Number, arg2:Number, arg3:Function):void
-        {
-            var loc2:*=null;
-            var loc3:*=null;
-            var loc4:*=false;
-            var loc1:*=this.advancedVideoPlayer.titleBar;
-            loc2 = this.advancedVideoPlayer.controlBar;
-            loc3 = this.advancedVideoPlayer.progressBar;
-            if (arg1 > 0) 
+      private static const animationTweenObect:Object;
+
+      private static const showAlphaFinalValue:Number = 1;
+
+      private static const hideAlphaFinalValue:Number = 0;
+
+      private var advancedVideoPlayer:AdvancedVideoPlayer;
+
+      private var tweenManager:ExcludeTweenManager;
+
+      public function show(param1:Number) : void {
+         this.tweenManager.unregisterAll();
+         this.applyAnimation(param1,showAlphaFinalValue,this.getShowAnimTweenSet);
+      }
+
+      public function hide(param1:Number) : void {
+         this.tweenManager.unregisterAll();
+         this.applyAnimation(param1,hideAlphaFinalValue,this.getHideAnimTweenSet);
+      }
+
+      private function applyAnimation(param1:Number, param2:Number, param3:Function) : void {
+         var _loc5_:VideoPlayerControlBar = null;
+         var _loc6_:AbstractPlayerProgressBar = null;
+         var _loc7_:* = false;
+         var _loc4_:VideoPlayerTitleBar = this.advancedVideoPlayer.titleBar;
+         _loc5_ = this.advancedVideoPlayer.controlBar;
+         _loc6_ = this.advancedVideoPlayer.progressBar;
+         if(param1 > 0)
+         {
+            animationTweenObect.alpha = param2;
+            _loc7_ = true;
+            this.tweenManager.registerAndLaunch(param1,_loc4_,animationTweenObect,param3());
+            this.tweenManager.registerAndLaunch(param1,_loc5_,animationTweenObect,param3());
+            if(_loc6_)
             {
-                animationTweenObect.alpha = arg2;
-                loc4 = true;
-                this.tweenManager.registerAndLaunch(arg1, loc1, animationTweenObect, arg3());
-                this.tweenManager.registerAndLaunch(arg1, loc2, animationTweenObect, arg3());
-                if (loc3) 
-                {
-                    this.tweenManager.registerAndLaunch(arg1, loc3, animationTweenObect, arg3());
-                }
+               this.tweenManager.registerAndLaunch(param1,_loc6_,animationTweenObect,param3());
             }
-            else 
+         }
+         else
+         {
+            _loc7_ = param2 > 0;
+            _loc4_.alpha = param2;
+            _loc5_.alpha = param2;
+            if(_loc6_)
             {
-                loc4 = arg2 > 0;
-                loc1.alpha = arg2;
-                loc2.alpha = arg2;
-                if (loc3) 
-                {
-                    loc3.alpha = arg2;
-                }
+               _loc6_.alpha = param2;
             }
-            loc1.visible = loc4;
-            loc2.visible = loc4;
-            if (loc3) 
-            {
-                loc3.visible = loc4;
-            }
-            return;
-        }
+         }
+         _loc4_.visible = _loc7_;
+         _loc5_.visible = _loc7_;
+         if(_loc6_)
+         {
+            _loc6_.visible = _loc7_;
+         }
+      }
 
-        internal function getShowAnimTweenSet():Object
-        {
-            return {"ease":fl.transitions.easing.Strong.easeOut, "onComplete":this.onShowTweenComplete};
-        }
+      private function getShowAnimTweenSet() : Object {
+         return {
+            "ease":Strong.easeOut,
+            "onComplete":this.onShowTweenComplete
+         }
+         ;
+      }
 
-        internal function getHideAnimTweenSet():Object
-        {
-            return {"ease":fl.transitions.easing.Strong.easeOut, "onComplete":this.onHideTweenComplete};
-        }
+      private function getHideAnimTweenSet() : Object {
+         return {
+            "ease":Strong.easeOut,
+            "onComplete":this.onHideTweenComplete
+         }
+         ;
+      }
 
-        internal function onHideTweenComplete(arg1:scaleform.clik.motion.Tween):void
-        {
-            this.tweenManager.unregister(arg1);
-            arg1.target.visible = false;
-            return;
-        }
+      private function onHideTweenComplete(param1:Tween) : void {
+         this.tweenManager.unregister(param1);
+         param1.target.visible = false;
+      }
 
-        internal function onShowTweenComplete(arg1:scaleform.clik.motion.Tween):void
-        {
-            this.tweenManager.unregister(arg1);
-            return;
-        }
+      private function onShowTweenComplete(param1:Tween) : void {
+         this.tweenManager.unregister(param1);
+      }
 
-        public function dispose():void
-        {
-            this.advancedVideoPlayer = null;
-            if (this.tweenManager) 
-            {
-                this.tweenManager.dispose();
-                this.tweenManager = null;
-            }
-            return;
-        }
+      public function dispose() : void {
+         this.advancedVideoPlayer = null;
+         if(this.tweenManager)
+         {
+            this.tweenManager.dispose();
+            this.tweenManager = null;
+         }
+      }
+   }
 
-        internal static const animationTweenObect:Object={"alpha":1};
-
-        internal static const showAlphaFinalValue:Number=1;
-
-        internal static const hideAlphaFinalValue:Number=0;
-
-        internal var advancedVideoPlayer:net.wg.gui.components.common.video.advanced.AdvancedVideoPlayer;
-
-        internal var tweenManager:net.wg.gui.utils.ExcludeTweenManager;
-    }
 }

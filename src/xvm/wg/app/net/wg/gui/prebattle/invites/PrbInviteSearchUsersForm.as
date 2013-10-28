@@ -1,115 +1,104 @@
-package net.wg.gui.prebattle.invites 
+package net.wg.gui.prebattle.invites
 {
-    import flash.ui.*;
-    import flash.utils.*;
-    import net.wg.gui.components.controls.*;
-    import org.idmedia.as3commons.util.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.events.*;
-    
-    public class PrbInviteSearchUsersForm extends net.wg.gui.prebattle.invites.InviteStackContainerBase
-    {
-        public function PrbInviteSearchUsersForm()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.components.controls.TextInput;
+   import net.wg.gui.components.controls.SoundButtonEx;
+   import scaleform.clik.events.ComponentEvent;
+   import scaleform.clik.events.ButtonEvent;
+   import scaleform.clik.events.InputEvent;
+   import flash.ui.Keyboard;
+   import scaleform.clik.constants.InputValue;
+   import org.idmedia.as3commons.util.StringUtils;
+   import flash.utils.setTimeout;
+   import flash.utils.clearTimeout;
 
-        protected override function configUI():void
-        {
-            this.addEventListener(scaleform.clik.events.ComponentEvent.SHOW, this.showHandler);
-            this.nameInput.focusable = true;
-            if (this.searchButton != null) 
+
+   public class PrbInviteSearchUsersForm extends InviteStackContainerBase
+   {
+          
+      public function PrbInviteSearchUsersForm() {
+         super();
+      }
+
+      public var nameInput:TextInput;
+
+      public var searchButton:SoundButtonEx;
+
+      private var searchButtonIntervalID:uint = 0;
+
+      override protected function configUI() : void {
+         this.addEventListener(ComponentEvent.SHOW,this.showHandler);
+         this.nameInput.focusable = true;
+         if(this.searchButton != null)
+         {
+            this.searchButton.addEventListener(ButtonEvent.CLICK,this.handleSearchUsers);
+            this.nameInput.addEventListener(InputEvent.INPUT,this.handleInput);
+         }
+         if(rosterList != null)
+         {
+            rosterList.labelField = "displayName";
+         }
+         super.configUI();
+      }
+
+      override public function handleInput(param1:InputEvent) : void {
+         if(param1.details.code == Keyboard.ENTER && param1.details.value == InputValue.KEY_UP)
+         {
+            if(((this.nameInput.focused) || (this.searchButton.focused)) && (this.searchButton.enabled))
             {
-                this.searchButton.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.handleSearchUsers);
-                this.nameInput.addEventListener(scaleform.clik.events.InputEvent.INPUT, this.handleInput);
+               this.handleSearchUsers();
+               param1.handled = true;
             }
-            if (rosterList != null) 
-            {
-                rosterList.labelField = "displayName";
-            }
-            super.configUI();
+         }
+      }
+
+      private function handleSearchUsers(param1:ButtonEvent=null) : void {
+         var _loc2_:String = StringUtils.trim(this.nameInput.text);
+         if(_loc2_ == null)
+         {
             return;
-        }
+         }
+         rosterList.selectedIndex = -1;
+         this.coolDownButton();
+         var _loc3_:SendInvitesEvent = new SendInvitesEvent(SendInvitesEvent.SEARCH_TOKEN,true);
+         _loc3_.searchString = _loc2_;
+         dispatchEvent(_loc3_);
+      }
 
-        public override function handleInput(arg1:scaleform.clik.events.InputEvent):void
-        {
-            if (arg1.details.code == flash.ui.Keyboard.ENTER && arg1.details.value == scaleform.clik.constants.InputValue.KEY_UP) 
-            {
-                if ((this.nameInput.focused || this.searchButton.focused) && this.searchButton.enabled) 
-                {
-                    this.handleSearchUsers();
-                    arg1.handled = true;
-                }
-            }
-            return;
-        }
+      private function coolDownButton() : void {
+         this.enableButton(false);
+         this.searchButtonIntervalID = setTimeout(this.enableButton,1000,true);
+      }
 
-        internal function handleSearchUsers(arg1:scaleform.clik.events.ButtonEvent=null):void
-        {
-            var loc1:*=org.idmedia.as3commons.util.StringUtils.trim(this.nameInput.text);
-            if (loc1 == null) 
-            {
-                return;
-            }
-            rosterList.selectedIndex = -1;
-            this.coolDownButton();
-            var loc2:*=new net.wg.gui.prebattle.invites.SendInvitesEvent(net.wg.gui.prebattle.invites.SendInvitesEvent.SEARCH_TOKEN, true);
-            loc2.searchString = loc1;
-            dispatchEvent(loc2);
-            return;
-        }
+      private function enableButton(param1:Boolean=false) : void {
+         this.searchButton.enabled = param1;
+         if(this.searchButtonIntervalID != 0)
+         {
+            clearTimeout(this.searchButtonIntervalID);
+         }
+      }
 
-        internal function coolDownButton():void
-        {
-            this.enableButton(false);
-            this.searchButtonIntervalID = flash.utils.setTimeout(this.enableButton, 1000, true);
-            return;
-        }
+      private function showHandler(param1:ComponentEvent) : void {
+         if(visible)
+         {
+            setTimeout(this.setDefaultFocus,50);
+         }
+      }
 
-        internal function enableButton(arg1:Boolean=false):void
-        {
-            this.searchButton.enabled = arg1;
-            if (this.searchButtonIntervalID != 0) 
-            {
-                flash.utils.clearTimeout(this.searchButtonIntervalID);
-            }
-            return;
-        }
+      private function setDefaultFocus() : void {
+         if(!this.nameInput.hasFocus)
+         {
+            App.utils.focusHandler.setFocus(this.nameInput);
+         }
+      }
 
-        internal function showHandler(arg1:scaleform.clik.events.ComponentEvent):void
-        {
-            if (visible) 
-            {
-                flash.utils.setTimeout(this.setDefaultFocus, 50);
-            }
-            return;
-        }
+      override public function dispose() : void {
+         if(this.searchButton != null)
+         {
+            this.searchButton.removeEventListener(ButtonEvent.CLICK,this.handleSearchUsers);
+            this.nameInput.removeEventListener(InputEvent.INPUT,this.handleInput);
+         }
+         super.dispose();
+      }
+   }
 
-        internal function setDefaultFocus():void
-        {
-            if (!this.nameInput.hasFocus) 
-            {
-                App.utils.focusHandler.setFocus(this.nameInput);
-            }
-            return;
-        }
-
-        public override function dispose():void
-        {
-            if (this.searchButton != null) 
-            {
-                this.searchButton.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.handleSearchUsers);
-                this.nameInput.removeEventListener(scaleform.clik.events.InputEvent.INPUT, this.handleInput);
-            }
-            super.dispose();
-            return;
-        }
-
-        public var nameInput:net.wg.gui.components.controls.TextInput;
-
-        public var searchButton:net.wg.gui.components.controls.SoundButtonEx;
-
-        internal var searchButtonIntervalID:uint=0;
-    }
 }

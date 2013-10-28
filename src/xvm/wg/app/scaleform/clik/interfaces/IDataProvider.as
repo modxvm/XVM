@@ -1,29 +1,32 @@
-package scaleform.clik.interfaces 
+package scaleform.clik.interfaces
 {
-    import flash.events.*;
-    
-    public interface IDataProvider
-    {
-        function get length():uint;
+   import flash.events.Event;
 
-        function requestItemAt(arg1:uint, arg2:Function=null):Object;
 
-        function requestItemRange(arg1:int, arg2:int, arg3:Function=null):Array;
+   public interface IDataProvider
+   {
+          
+      function get length() : uint;
 
-        function indexOf(arg1:Object, arg2:Function=null):int;
+      function requestItemAt(param1:uint, param2:Function=null) : Object;
 
-        function cleanUp():void;
+      function requestItemRange(param1:int, param2:int, param3:Function=null) : Array;
 
-        function invalidate(arg1:uint=0):void;
+      function indexOf(param1:Object, param2:Function=null) : int;
 
-        function addEventListener(arg1:String, arg2:Function, arg3:Boolean=false, arg4:int=0, arg5:Boolean=false):void;
+      function cleanUp() : void;
 
-        function removeEventListener(arg1:String, arg2:Function, arg3:Boolean=false):void;
+      function invalidate(param1:uint=0) : void;
 
-        function dispatchEvent(arg1:flash.events.Event):Boolean;
+      function addEventListener(param1:String, param2:Function, param3:Boolean=false, param4:int=0, param5:Boolean=false) : void;
 
-        function hasEventListener(arg1:String):Boolean;
+      function removeEventListener(param1:String, param2:Function, param3:Boolean=false) : void;
 
-        function willTrigger(arg1:String):Boolean;
-    }
+      function dispatchEvent(param1:Event) : Boolean;
+
+      function hasEventListener(param1:String) : Boolean;
+
+      function willTrigger(param1:String) : Boolean;
+   }
+
 }

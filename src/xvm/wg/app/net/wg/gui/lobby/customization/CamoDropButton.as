@@ -1,38 +1,33 @@
-package net.wg.gui.lobby.customization 
+package net.wg.gui.lobby.customization
 {
-    import scaleform.clik.controls.*;
-    import scaleform.clik.events.*;
-    
-    public class CamoDropButton extends scaleform.clik.controls.Button
-    {
-        public function CamoDropButton()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.controls.Button;
+   import scaleform.clik.events.ButtonEvent;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onClick, false, 0, true);
-            return;
-        }
 
-        public override function dispose():void
-        {
-            super.dispose();
-            removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onClick);
-            return;
-        }
+   public class CamoDropButton extends Button
+   {
+          
+      public function CamoDropButton() {
+         super();
+      }
 
-        internal function onClick(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            var loc1:*=new net.wg.gui.lobby.customization.CustomizationEvent(net.wg.gui.lobby.customization.CustomizationEvent.DROP_ITEM);
-            loc1.kind = this.kind;
-            dispatchEvent(loc1);
-            return;
-        }
+      public var kind:int = -1;
 
-        public var kind:int=-1;
-    }
+      override protected function configUI() : void {
+         super.configUI();
+         addEventListener(ButtonEvent.CLICK,this.onClick,false,0,true);
+      }
+
+      override public function dispose() : void {
+         super.dispose();
+         removeEventListener(ButtonEvent.CLICK,this.onClick);
+      }
+
+      private function onClick(param1:ButtonEvent) : void {
+         var _loc2_:CustomizationEvent = new CustomizationEvent(CustomizationEvent.DROP_ITEM);
+         _loc2_.kind = this.kind;
+         dispatchEvent(_loc2_);
+      }
+   }
+
 }

@@ -1,93 +1,86 @@
-package net.wg.gui.lobby.profile.pages.technique 
+package net.wg.gui.lobby.profile.pages.technique
 {
-    import flash.text.*;
-    import net.wg.gui.components.advanced.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.events.*;
-    import scaleform.clik.constants.*;
-    import scaleform.gfx.*;
-    
-    public class ProfileSortingButton extends net.wg.gui.components.advanced.InteractiveSortingButton
-    {
-        public function ProfileSortingButton()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.components.advanced.InteractiveSortingButton;
+   import flash.text.TextField;
+   import net.wg.gui.events.UILoaderEvent;
+   import scaleform.gfx.TextFieldEx;
+   import flash.text.TextFieldAutoSize;
+   import net.wg.gui.components.controls.UILoaderAlt;
+   import scaleform.clik.constants.InvalidationType;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            mcDescendingIcon.addEventListener(net.wg.gui.events.UILoaderEvent.COMPLETE, this.sortingIconLoadingCompleteHandler);
-            scaleform.gfx.TextFieldEx.setVerticalAlign(this.labelField, flash.text.TextFieldAutoSize.CENTER);
-            return;
-        }
 
-        protected override function sortingIconLoadingCompleteHandler(arg1:net.wg.gui.events.UILoaderEvent):void
-        {
-            var loc1:*=net.wg.gui.components.controls.UILoaderAlt(arg1.target);
-            if (arg1.target == mcAscendingIcon) 
+   public class ProfileSortingButton extends InteractiveSortingButton
+   {
+          
+      public function ProfileSortingButton() {
+         super();
+      }
+
+      public var labelField:TextField;
+
+      override protected function configUI() : void {
+         super.configUI();
+         mcDescendingIcon.addEventListener(UILoaderEvent.COMPLETE,this.sortingIconLoadingCompleteHandler);
+         TextFieldEx.setVerticalAlign(this.labelField,TextFieldAutoSize.CENTER);
+      }
+
+      override protected function sortingIconLoadingCompleteHandler(param1:UILoaderEvent) : void {
+         var _loc2_:UILoaderAlt = UILoaderAlt(param1.target);
+         if(param1.target == mcAscendingIcon)
+         {
+            _loc2_.y = _height - _loc2_.height;
+         }
+         _loc2_.x = (_width - _loc2_.width) / 2;
+         isSortIconLoadingCompete = true;
+         invalidate();
+      }
+
+      override public function set data(param1:Object) : void {
+         var _loc2_:ProfileSortingBtnInfo = null;
+         super.data = param1;
+         if(param1  is  ProfileSortingBtnInfo)
+         {
+            _loc2_ = ProfileSortingBtnInfo(param1);
+            bg.visible = _loc2_.showSeparator;
+            if(_loc2_.label)
             {
-                loc1.y = _height - loc1.height;
+               _label = _loc2_.label;
+               invalidateData();
             }
-            loc1.x = (_width - loc1.width) / 2;
-            isSortIconLoadingCompete = true;
-            invalidate();
-            return;
-        }
+         }
+      }
 
-        public override function set data(arg1:Object):void
-        {
-            var loc1:*=null;
-            super.data = arg1;
-            if (arg1 is net.wg.gui.lobby.profile.pages.technique.ProfileSortingBtnInfo) 
+      override protected function draw() : void {
+         super.draw();
+         if(isInvalid(InvalidationType.SIZE))
+         {
+            if(upperBg)
             {
-                loc1 = net.wg.gui.lobby.profile.pages.technique.ProfileSortingBtnInfo(arg1);
-                bg.visible = loc1.showSeparator;
-                if (loc1.label) 
-                {
-                    _label = loc1.label;
-                    invalidateData();
-                }
+               upperBg.width = bg.visible?_width - 2:_width;
+               upperBg.height = _height;
             }
-            return;
-        }
-
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
-            {
-                if (upperBg) 
-                {
-                    upperBg.width = bg.visible ? _width - 2 : _width;
-                    upperBg.height = _height;
-                }
-                this.labelField.width = _width;
-                this.labelField.height = _height;
-            }
-            if (scaleform.clik.constants.InvalidationType.DATA) 
-            {
-                if (!(_label == null) && !(_label == "") && !(this.labelField == null)) 
-                {
-                    this.labelField.text = _label;
-                }
-                else 
-                {
-                    this.labelField.text = "";
-                }
-            }
-            return;
-        }
-
-        protected override function updateAfterStateChange():void
-        {
-            super.updateAfterStateChange();
             this.labelField.width = _width;
             this.labelField.height = _height;
-            return;
-        }
+         }
+         if(InvalidationType.DATA)
+         {
+            if(!(_label == null) && !(_label == "") && !(this.labelField == null))
+            {
+               this.labelField.text = _label;
+            }
+            else
+            {
+               this.labelField.text = "";
+            }
+         }
+      }
 
-        public var labelField:flash.text.TextField;
-    }
+      override protected function updateAfterStateChange() : void {
+         TextFieldEx.setVerticalAlign(this.labelField,TextFieldAutoSize.CENTER);
+         super.updateAfterStateChange();
+         this.labelField.width = _width;
+         this.labelField.height = _height;
+      }
+   }
+
 }

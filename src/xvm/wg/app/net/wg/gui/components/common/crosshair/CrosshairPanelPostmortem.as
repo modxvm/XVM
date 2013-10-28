@@ -1,53 +1,45 @@
-package net.wg.gui.components.common.crosshair 
+package net.wg.gui.components.common.crosshair
 {
-    public class CrosshairPanelPostmortem extends net.wg.gui.components.common.crosshair.CrosshairPanelBase
-    {
-        public function CrosshairPanelPostmortem()
-        {
-            super();
-            return;
-        }
 
-        protected override function initCallbacks():void
-        {
-            return;
-        }
 
-        protected override function initView():void
-        {
-            this.onUpdatePlayerInfo("");
-            this.onUpdateAmmoState(true);
-            return;
-        }
+   public class CrosshairPanelPostmortem extends CrosshairPanelBase
+   {
+          
+      public function CrosshairPanelPostmortem() {
+         super();
+      }
 
-        protected override function initFrameWalkers():void
-        {
-            return;
-        }
+      private static const AMMO_INFO_VERTICAL_OFFSET:Number = 4;
 
-        protected function onUpdatePlayerInfo(arg1:String):void
-        {
-            g_modeMC.playerInfo.text = arg1;
-            this.updateAmmoInfoPos();
-            return;
-        }
+      override protected function initCallbacks() : void {
+          
+      }
 
-        protected function onUpdateAmmoState(arg1:Boolean):void
-        {
-            g_modeMC.ammoInfo.visible = !arg1;
-            this.updateAmmoInfoPos();
-            return;
-        }
+      override protected function initView() : void {
+         this.onUpdatePlayerInfo("");
+         this.onUpdateAmmoState(true);
+      }
 
-        internal function updateAmmoInfoPos():void
-        {
-            if (g_modeMC.ammoInfo.visible) 
-            {
-                g_modeMC.ammoInfo.y = Math.round(g_modeMC.playerInfo.y + g_modeMC.playerInfo.textHeight + AMMO_INFO_VERTICAL_OFFSET);
-            }
-            return;
-        }
+      override protected function initFrameWalkers() : void {
+          
+      }
 
-        internal static const AMMO_INFO_VERTICAL_OFFSET:Number=4;
-    }
+      protected function onUpdatePlayerInfo(param1:String) : void {
+         g_modeMC.playerInfo.text = param1;
+         this.updateAmmoInfoPos();
+      }
+
+      protected function onUpdateAmmoState(param1:Boolean) : void {
+         g_modeMC.ammoInfo.visible = !param1;
+         this.updateAmmoInfoPos();
+      }
+
+      private function updateAmmoInfoPos() : void {
+         if(g_modeMC.ammoInfo.visible)
+         {
+            g_modeMC.ammoInfo.y = Math.round(g_modeMC.playerInfo.y + g_modeMC.playerInfo.textHeight + AMMO_INFO_VERTICAL_OFFSET);
+         }
+      }
+   }
+
 }

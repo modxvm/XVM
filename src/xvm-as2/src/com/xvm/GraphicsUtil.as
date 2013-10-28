@@ -6,8 +6,10 @@ import com.xvm.Config;
 import com.xvm.Defines;
 import com.xvm.Strings;
 import com.xvm.Utils;
+import com.xvm.VehicleInfo;
 import flash.filters.DropShadowFilter;
 import flash.geom.ColorTransform;
+import com.xvm.DataTypes.VehicleData;
 
 class com.xvm.GraphicsUtil
 {
@@ -126,19 +128,15 @@ class com.xvm.GraphicsUtil
         return max;
     }
 
-    public static function GetVTypeColorValue(iconSource:String, vtype:String, prefix: String, darker: Boolean): String
+    public static function GetVTypeColorValue(iconSource:String, prefix: String, darker: Boolean): String
     {
         if (!prefix)
             prefix = "#";
 
         try
         {
-            if (!vtype || Config.s_config.colors.vtype.usePremiumColor == true)
-            {
-                var vi2 = com.xvm.VehicleInfo.getInfo2(iconSource);
-                if (vi2 != null)
-                    vtype = (Config.s_config.colors.vtype.usePremiumColor == true && vi2.premium == 1) ? "premium" : vi2.type;
-            }
+            var vdata:VehicleData = VehicleInfo.getByIcon(iconSource);
+            var vtype = (Config.s_config.colors.vtype.usePremiumColor == true && vdata.premium) ? "premium" : vdata.vtype;
             if (!vtype || !Config.s_config.colors.vtype[vtype])
                 return "";
             return prefix + Strings.padLeft(Utils.toInt(Config.s_config.colors.vtype[vtype], 0xFFFFFE).toString(16), 6, "0");

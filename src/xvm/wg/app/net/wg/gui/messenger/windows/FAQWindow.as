@@ -1,64 +1,54 @@
-package net.wg.gui.messenger.windows 
+package net.wg.gui.messenger.windows
 {
-    import net.wg.gui.components.advanced.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.messenger.meta.*;
-    import net.wg.gui.messenger.meta.impl.*;
-    import scaleform.clik.events.*;
-    
-    public class FAQWindow extends net.wg.gui.messenger.meta.impl.FAQWindowMeta implements net.wg.gui.messenger.meta.IFAQWindowMeta
-    {
-        public function FAQWindow()
-        {
-            super();
-            isCentered = false;
-            return;
-        }
+   import net.wg.gui.messenger.meta.impl.FAQWindowMeta;
+   import net.wg.gui.messenger.meta.IFAQWindowMeta;
+   import net.wg.gui.components.advanced.TextAreaSimple;
+   import net.wg.gui.components.controls.SoundButtonEx;
+   import net.wg.gui.components.controls.ScrollBar;
+   import scaleform.clik.events.ButtonEvent;
 
-        public function as_appendText(arg1:String):void
-        {
-            this.textArea.appendHtml(arg1);
-            return;
-        }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.closeButton.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onCancelClick);
-            return;
-        }
+   public class FAQWindow extends FAQWindowMeta implements IFAQWindowMeta
+   {
+          
+      public function FAQWindow() {
+         super();
+         isCentered = false;
+      }
 
-        protected override function draw():void
-        {
-            super.draw();
-            return;
-        }
+      public var textArea:TextAreaSimple;
 
-        protected override function onPopulate():void
-        {
-            super.onPopulate();
-            window.useBottomBtns = true;
-            window.title = MESSENGER.LOBBY_FAQ_TITLE;
-            return;
-        }
+      public var closeButton:SoundButtonEx;
 
-        protected override function onDispose():void
-        {
-            super.onDispose();
-            this.closeButton.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onCancelClick);
-            return;
-        }
+      public var scrollBar:ScrollBar;
 
-        internal function onCancelClick(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            onWindowCloseS();
-            return;
-        }
+      public function as_appendText(param1:String) : void {
+         this.textArea.appendHtml(param1);
+      }
 
-        public var textArea:net.wg.gui.components.advanced.TextAreaSimple;
+      override protected function configUI() : void {
+         super.configUI();
+         this.closeButton.addEventListener(ButtonEvent.CLICK,this.onCancelClick);
+      }
 
-        public var closeButton:net.wg.gui.components.controls.SoundButtonEx;
+      override protected function draw() : void {
+         super.draw();
+      }
 
-        public var scrollBar:net.wg.gui.components.controls.ScrollBar;
-    }
+      override protected function onPopulate() : void {
+         super.onPopulate();
+         window.useBottomBtns = true;
+         window.title = MESSENGER.LOBBY_FAQ_TITLE;
+      }
+
+      override protected function onDispose() : void {
+         super.onDispose();
+         this.closeButton.removeEventListener(ButtonEvent.CLICK,this.onCancelClick);
+      }
+
+      private function onCancelClick(param1:ButtonEvent) : void {
+         onWindowCloseS();
+      }
+   }
+
 }

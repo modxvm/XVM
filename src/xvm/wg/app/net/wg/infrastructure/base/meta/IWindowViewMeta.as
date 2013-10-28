@@ -1,19 +1,22 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IWindowViewMeta extends flash.events.IEventDispatcher
-    {
-        function onWindowCloseS():void;
+   import flash.events.IEventDispatcher;
 
-        function onWindowMinimizeS():void;
 
-        function as_showWaiting(arg1:String, arg2:Object):void;
+   public interface IWindowViewMeta extends IEventDispatcher
+   {
+          
+      function onWindowCloseS() : void;
 
-        function as_hideWaiting():void;
+      function onWindowMinimizeS() : void;
 
-        function as_getGeometry():Array;
+      function as_showWaiting(param1:String, param2:Object) : void;
 
-        function as_setGeometry(arg1:Number, arg2:Number, arg3:Number, arg4:Number):void;
-    }
+      function as_hideWaiting() : void;
+
+      function as_getGeometry() : Array;
+
+      function as_setGeometry(param1:Number, param2:Number, param3:Number, param4:Number) : void;
+   }
+
 }

@@ -1,248 +1,230 @@
-package net.wg.gui.prebattle.company 
+package net.wg.gui.prebattle.company
 {
-    import flash.display.*;
-    import flash.events.*;
-    import flash.text.*;
-    import net.wg.gui.components.controls.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.data.*;
-    import scaleform.clik.events.*;
-    import scaleform.clik.utils.*;
-    
-    public class CompanyListItemRenderer extends net.wg.gui.components.controls.SoundListItemRenderer
-    {
-        public function CompanyListItemRenderer()
-        {
-            super();
-            tabEnabled = true;
-            focusable = true;
-            return;
-        }
+   import net.wg.gui.components.controls.SoundListItemRenderer;
+   import flash.text.TextField;
+   import flash.display.MovieClip;
+   import flash.events.MouseEvent;
+   import scaleform.clik.events.ButtonEvent;
+   import scaleform.clik.utils.Constraints;
+   import scaleform.clik.constants.InvalidationType;
+   import scaleform.clik.data.DataProvider;
 
-        public function showPlayersList(arg1:Boolean):void
-        {
-            this._showPlayers = arg1;
-            return;
-        }
 
-        public override function dispose():void
-        {
-            super.dispose();
-            this.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.clickHandler);
-            if (this.dd) 
-            {
-                this.dd.dispose();
-            }
-            if (this.listRefreshData != null) 
-            {
-                this.listRefreshData = null;
-            }
-            return;
-        }
+   public class CompanyListItemRenderer extends SoundListItemRenderer
+   {
+          
+      public function CompanyListItemRenderer() {
+         super();
+         tabEnabled = true;
+         focusable = true;
+      }
 
-        protected override function configUI():void
-        {
-            focusIndicator = this.emtyFocusIndicator;
-            toggle = true;
-            allowDeselect = true;
-            super.configUI();
-            constraints.addElement(this.descriptionField.name, this.descriptionField, scaleform.clik.utils.Constraints.ALL);
-            constraints.addElement(this.pCountField.name, this.pCountField, scaleform.clik.utils.Constraints.ALL);
-            constraints.addElement(this.mainTextField.name, this.mainTextField, scaleform.clik.utils.Constraints.ALL);
-            this.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.clickHandler);
-            return;
-        }
+      public var descriptionField:TextField;
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA) && data) 
-            {
-                this.afterSetData();
-            }
-            return;
-        }
+      public var pCountField:TextField;
 
-        internal function afterSetData():void
-        {
-            this.pCountField.text = data.playersCount;
-            this.divisionField.text = data.division;
-            this.cutText(this.descriptionField, data.comment);
-            this.cutText(this.mainTextField, data.creatorName);
-            this.updateTextFieldWidth();
-            return;
-        }
+      public var divisionField:TextField;
 
-        internal function cutText(arg1:flash.text.TextField, arg2:String):void
-        {
-            var loc1:*=null;
-            var loc2:*=0;
-            arg1.text = arg2;
-            if (arg1.getLineLength(1) != -1) 
-            {
-                loc1 = arg2;
-                loc2 = arg1.getLineLength(0);
-                loc1 = loc1.substr(0, loc2 - 2);
-                loc1 = loc1 + "..";
-                arg1.text = loc1;
-            }
-            return;
-        }
+      public var dd:GroupPlayersDropDownMenu;
 
-        public override function setData(arg1:Object):void
-        {
-            if (arg1 == null) 
-            {
-                visible = false;
-                return;
-            }
-            if (!visible) 
-            {
-                visible = true;
-            }
-            super.setData(arg1);
-            this.dd.prbID = arg1.prbID;
-            if (this.isPlayersData()) 
-            {
-                while (arg1.players.length < 15) 
-                {
-                    arg1.players.push({"label":"", "color":null});
-                }
-                this.dd.dataProvider = new scaleform.clik.data.DataProvider(arg1.players);
-            }
-            if (this._showPlayers && this.isPlayersData() && selected) 
-            {
-                if (!this.dd.isOpen()) 
-                {
-                    this.dd.open();
-                }
-            }
-            else if (this.dd.isOpen()) 
-            {
-                this.dd.close();
-            }
+      public var bg:MovieClip;
+
+      public var mainTextField:TextField;
+
+      public var emtyFocusIndicator:MovieClip;
+
+      private var dropDownState:int = 1;
+
+      private var _showPlayers:Boolean = false;
+
+      private var listRefreshData:Function;
+
+      private var pressEvent:MouseEvent;
+
+      public function showPlayersList(param1:Boolean) : void {
+         this._showPlayers = param1;
+      }
+
+      override public function dispose() : void {
+         super.dispose();
+         this.removeEventListener(ButtonEvent.CLICK,this.clickHandler);
+         if(this.dd)
+         {
+            this.dd.dispose();
+         }
+         if(this.listRefreshData != null)
+         {
+            this.listRefreshData = null;
+         }
+      }
+
+      override protected function configUI() : void {
+         focusIndicator = this.emtyFocusIndicator;
+         toggle = true;
+         allowDeselect = true;
+         super.configUI();
+         constraints.addElement(this.descriptionField.name,this.descriptionField,Constraints.ALL);
+         constraints.addElement(this.pCountField.name,this.pCountField,Constraints.ALL);
+         constraints.addElement(this.mainTextField.name,this.mainTextField,Constraints.ALL);
+         this.addEventListener(ButtonEvent.CLICK,this.clickHandler);
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         if((isInvalid(InvalidationType.DATA)) && (data))
+         {
             this.afterSetData();
-            invalidate(scaleform.clik.constants.InvalidationType.DATA);
-            return;
-        }
+         }
+      }
 
-        internal function clickHandler(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            if (arg1.isKeyboard) 
+      private function afterSetData() : void {
+         this.pCountField.text = data.playersCount;
+         this.divisionField.text = data.division;
+         this.cutText(this.descriptionField,data.comment);
+         this.cutText(this.mainTextField,data.creatorName);
+         this.updateTextFieldWidth();
+      }
+
+      private function cutText(param1:TextField, param2:String) : void {
+         var _loc3_:String = null;
+         var _loc4_:* = 0;
+         param1.text = param2;
+         if(param1.getLineLength(1) != -1)
+         {
+            _loc3_ = param2;
+            _loc4_ = param1.getLineLength(0);
+            _loc3_ = _loc3_.substr(0,_loc4_ - 2);
+            _loc3_ = _loc3_ + "..";
+            param1.text = _loc3_;
+         }
+      }
+
+      override public function setData(param1:Object) : void {
+         if(param1 == null)
+         {
+            visible = false;
+            return;
+         }
+         if(!visible)
+         {
+            visible = true;
+         }
+         super.setData(param1);
+         this.dd.prbID = param1.prbID;
+         if(this.isPlayersData())
+         {
+            while(param1.players.length < 15)
             {
-                return;
+               param1.players.push(
+                  {
+                     "label":"",
+                     "color":null
+                  }
+               );
             }
-            App.utils.focusHandler.setFocus(this);
-            this.dispatchIsSelectedItem(selected);
-            if (this._showPlayers) 
+            this.dd.dataProvider = new DataProvider(param1.players);
+         }
+         if((this._showPlayers) && (this.isPlayersData()) && (selected))
+         {
+            if(!this.dd.isOpen())
             {
-                if (this.dd.isOpen()) 
-                {
-                    this.dd.close();
-                }
-                else if (selected) 
-                {
-                    this.dd.open();
-                }
+               this.dd.open();
             }
-            else if (this.dd.isOpen()) 
+         }
+         else
+         {
+            if(this.dd.isOpen())
             {
-                this.dropDownState = -1;
+               this.dd.close();
             }
-            else 
+         }
+         this.afterSetData();
+         invalidate(InvalidationType.DATA);
+      }
+
+      private function clickHandler(param1:ButtonEvent) : void {
+         if(param1.isKeyboard)
+         {
+            return;
+         }
+         App.utils.focusHandler.setFocus(this);
+         this.dispatchIsSelectedItem(selected);
+         if(this._showPlayers)
+         {
+            if(this.dd.isOpen())
             {
-                this.dropDownState = 1;
+               this.dd.close();
             }
-            return;
-        }
-
-        internal function dispatchIsSelectedItem(arg1:Boolean):void
-        {
-            var loc1:*=new net.wg.gui.prebattle.company.CompanyEvent(net.wg.gui.prebattle.company.CompanyEvent.SELECTED_ITEM, true);
-            loc1.isSelected = arg1;
-            loc1.prbID = data.prbID;
-            dispatchEvent(loc1);
-            return;
-        }
-
-        internal function isPlayersData():Boolean
-        {
-            return data.hasOwnProperty("players") && !(data.players == null);
-        }
-
-        internal function updateTextFieldWidth():void
-        {
-            this.divisionField.x = Math.round(this.mainTextField.x + this.mainTextField.textWidth + 12);
-            this.divisionField.width = Math.round(this.pCountField.x - this.divisionField.x - 8);
-            return;
-        }
-
-        public override function set selected(arg1:Boolean):void
-        {
-            if (!arg1 && this.dd.isOpen()) 
+            else
             {
-                this.dd.close();
+               if(selected)
+               {
+                  this.dd.open();
+               }
             }
-            super.selected = arg1;
-            return;
-        }
-
-        public function refreshPopulateData(arg1:Function):void
-        {
-            this.listRefreshData = arg1;
-            return;
-        }
-
-        protected override function handleMouseRollOver(arg1:flash.events.MouseEvent):void
-        {
-            super.handleMouseRollOver(arg1);
-            App.toolTipMgr.show(data.creatorName);
-            return;
-        }
-
-        protected override function handleMouseRollOut(arg1:flash.events.MouseEvent):void
-        {
-            super.handleMouseRollOut(arg1);
-            App.toolTipMgr.hide();
-            return;
-        }
-
-        protected override function handleMousePress(arg1:flash.events.MouseEvent):void
-        {
-            this.pressEvent = arg1;
-            return;
-        }
-
-        protected override function handleMouseRelease(arg1:flash.events.MouseEvent):void
-        {
-            if (this.pressEvent) 
+         }
+         else
+         {
+            if(this.dd.isOpen())
             {
-                super.handleMousePress(this.pressEvent);
+               this.dropDownState = -1;
             }
-            super.handleMouseRelease(arg1);
-            return;
-        }
+            else
+            {
+               this.dropDownState = 1;
+            }
+         }
+      }
 
-        public var descriptionField:flash.text.TextField;
+      private function dispatchIsSelectedItem(param1:Boolean) : void {
+         var _loc2_:CompanyEvent = new CompanyEvent(CompanyEvent.SELECTED_ITEM,true);
+         _loc2_.isSelected = param1;
+         _loc2_.prbID = data.prbID;
+         dispatchEvent(_loc2_);
+      }
 
-        public var pCountField:flash.text.TextField;
+      private function isPlayersData() : Boolean {
+         return (data.hasOwnProperty("players")) && !(data.players == null);
+      }
 
-        public var divisionField:flash.text.TextField;
+      private function updateTextFieldWidth() : void {
+         this.divisionField.x = Math.round(this.mainTextField.x + this.mainTextField.textWidth + 12);
+         this.divisionField.width = Math.round(this.pCountField.x - this.divisionField.x - 8);
+      }
 
-        public var dd:net.wg.gui.prebattle.company.GroupPlayersDropDownMenu;
+      override public function set selected(param1:Boolean) : void {
+         if(!param1 && (this.dd.isOpen()))
+         {
+            this.dd.close();
+         }
+         super.selected = param1;
+      }
 
-        public var bg:flash.display.MovieClip;
+      public function refreshPopulateData(param1:Function) : void {
+         this.listRefreshData = param1;
+      }
 
-        public var mainTextField:flash.text.TextField;
+      override protected function handleMouseRollOver(param1:MouseEvent) : void {
+         super.handleMouseRollOver(param1);
+         App.toolTipMgr.show(data.creatorName);
+      }
 
-        public var emtyFocusIndicator:flash.display.MovieClip;
+      override protected function handleMouseRollOut(param1:MouseEvent) : void {
+         super.handleMouseRollOut(param1);
+         App.toolTipMgr.hide();
+      }
 
-        internal var dropDownState:int=1;
+      override protected function handleMousePress(param1:MouseEvent) : void {
+         this.pressEvent = param1;
+      }
 
-        internal var _showPlayers:Boolean=false;
+      override protected function handleMouseRelease(param1:MouseEvent) : void {
+         if(this.pressEvent)
+         {
+            super.handleMousePress(this.pressEvent);
+         }
+         super.handleMouseRelease(param1);
+      }
+   }
 
-        internal var listRefreshData:Function;
-
-        internal var pressEvent:flash.events.MouseEvent;
-    }
 }

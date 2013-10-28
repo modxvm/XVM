@@ -1,22 +1,23 @@
-package net.wg.gui.lobby.techtree.math 
+package net.wg.gui.lobby.techtree.math
 {
-    public class MatrixPosition extends Object
-    {
-        public function MatrixPosition(arg1:int=-1, arg2:int=-1)
-        {
-            super();
-            this.row = arg1;
-            this.column = arg2;
-            return;
-        }
 
-        public function toString():String
-        {
-            return "[MatrixPosition: start = " + this.row + ", end = " + this.column + "]";
-        }
 
-        public var row:int;
+   public class MatrixPosition extends Object
+   {
+          
+      public function MatrixPosition(param1:int=undefined, param2:int=undefined) {
+         super();
+         this.row = param1;
+         this.column = param2;
+      }
 
-        public var column:int;
-    }
+      public var row:int;
+
+      public var column:int;
+
+      public function toString() : String {
+         return "[MatrixPosition: start = " + this.row + ", end = " + this.column + "]";
+      }
+   }
+
 }

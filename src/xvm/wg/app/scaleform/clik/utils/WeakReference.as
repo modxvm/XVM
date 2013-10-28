@@ -1,29 +1,27 @@
-package scaleform.clik.utils 
+package scaleform.clik.utils
 {
-    import flash.utils.*;
-    
-    public class WeakReference extends Object
-    {
-        public function WeakReference(arg1:Object)
-        {
-            super();
-            this._dictionary = new flash.utils.Dictionary(true);
-            this._dictionary[arg1] = 1;
-            return;
-        }
+   import flash.utils.Dictionary;
 
-        public function get value():Object
-        {
-            var loc1:*=null;
-            var loc2:*=0;
-            var loc3:*=this._dictionary;
-            for (loc1 in loc3) 
-            {
-                return loc1;
-            }
-            return null;
-        }
 
-        protected var _dictionary:flash.utils.Dictionary;
-    }
+   public class WeakReference extends Object
+   {
+          
+      public function WeakReference(param1:Object) {
+         super();
+         this._dictionary = new Dictionary(true);
+         this._dictionary[param1] = 1;
+      }
+
+      protected var _dictionary:Dictionary;
+
+      public function get value() : Object {
+         var _loc1_:Object = null;
+         for (_loc1_ in this._dictionary)
+         {
+            return _loc1_;
+         }
+         return null;
+      }
+   }
+
 }

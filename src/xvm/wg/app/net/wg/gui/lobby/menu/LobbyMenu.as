@@ -1,99 +1,87 @@
-package net.wg.gui.lobby.menu 
+package net.wg.gui.lobby.menu
 {
-    import flash.text.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import scaleform.clik.events.*;
-    
-    public class LobbyMenu extends net.wg.infrastructure.base.meta.impl.LobbyMenuMeta implements net.wg.infrastructure.base.meta.ILobbyMenuMeta
-    {
-        public function LobbyMenu()
-        {
-            super();
-            isCentered = true;
-            isModal = true;
-            canClose = false;
-            showWindowBg = false;
-            canDrag = false;
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.LobbyMenuMeta;
+   import net.wg.infrastructure.base.meta.ILobbyMenuMeta;
+   import flash.display.MovieClip;
+   import scaleform.clik.events.ButtonEvent;
+   import flash.text.TextFieldAutoSize;
 
-        protected override function onPopulate():void
-        {
-            this.content.logoffBtn.addEventListener(scaleform.clik.events.ButtonEvent.PRESS, this.onLogoffClick);
-            this.content.settingsBtn.addEventListener(scaleform.clik.events.ButtonEvent.PRESS, this.onSettingsClick);
-            this.content.quitBtn.addEventListener(scaleform.clik.events.ButtonEvent.PRESS, this.onQuitClick);
-            this.content.cancelBtn.addEventListener(scaleform.clik.events.ButtonEvent.PRESS, this.onCancelClick);
-            if (App.globalVarsMgr.isTutorialRunningS()) 
-            {
-                this.content.logoffBtn.label = MENU.LOBBY_MENU_BUTTONS_REFUSE_TRAINING;
-                this.content.logoffBtn.enabled = !App.globalVarsMgr.isTutorialDisabledS();
-            }
-            window.getTitleBtnEx().textSize = 20;
-            window.getTitleBtnEx().textAlign = flash.text.TextFieldAutoSize.CENTER;
-            window.getTitleBtnEx().x = window.width - window.getTitleBtnEx().width >> 1;
-            window.getTitleBtnEx().y = 7;
-            window.title = MENU.LOBBY_MENU_TITLE;
-            super.onPopulate();
-            this.updateStage(App.appWidth, App.appHeight);
-            return;
-        }
 
-        protected override function onDispose():void
-        {
-            this.content.logoffBtn.removeEventListener(scaleform.clik.events.ButtonEvent.PRESS, this.onLogoffClick);
-            this.content.settingsBtn.removeEventListener(scaleform.clik.events.ButtonEvent.PRESS, this.onSettingsClick);
-            this.content.quitBtn.removeEventListener(scaleform.clik.events.ButtonEvent.PRESS, this.onQuitClick);
-            this.content.cancelBtn.removeEventListener(scaleform.clik.events.ButtonEvent.PRESS, this.onCancelClick);
-            this.content = null;
-            super.onDispose();
-            return;
-        }
+   public class LobbyMenu extends LobbyMenuMeta implements ILobbyMenuMeta
+   {
+          
+      public function LobbyMenu() {
+         super();
+         isCentered = true;
+         isModal = true;
+         canClose = false;
+         showWindowBg = false;
+         canDrag = false;
+      }
 
-        public override function updateStage(arg1:Number, arg2:Number):void
-        {
-            super.updateStage(arg1, arg2);
-            return;
-        }
+      public var content:LobbyMenuForm = null;
 
-        internal function onLogoffClick(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            if (App.globalVarsMgr.isTutorialRunningS()) 
-            {
-                refuseTrainingS();
-            }
-            else 
-            {
-                logoffClickS();
-            }
-            return;
-        }
+      override protected function onPopulate() : void {
+         MovieClip(window.getBackground()).tabEnabled = false;
+         MovieClip(window.getBackground()).tabChildren = false;
+         this.content.logoffBtn.addEventListener(ButtonEvent.PRESS,this.onLogoffClick);
+         this.content.settingsBtn.addEventListener(ButtonEvent.PRESS,this.onSettingsClick);
+         this.content.quitBtn.addEventListener(ButtonEvent.PRESS,this.onQuitClick);
+         this.content.cancelBtn.addEventListener(ButtonEvent.PRESS,this.onCancelClick);
+         if(App.globalVarsMgr.isTutorialRunningS())
+         {
+            this.content.logoffBtn.label = MENU.LOBBY_MENU_BUTTONS_REFUSE_TRAINING;
+            this.content.logoffBtn.enabled = !App.globalVarsMgr.isTutorialDisabledS();
+         }
+         window.getTitleBtnEx().textSize = 20;
+         window.getTitleBtnEx().textAlign = TextFieldAutoSize.CENTER;
+         window.getTitleBtnEx().x = window.width - window.getTitleBtnEx().width >> 1;
+         window.getTitleBtnEx().y = 7;
+         window.title = MENU.LOBBY_MENU_TITLE;
+         super.onPopulate();
+         this.updateStage(App.appWidth,App.appHeight);
+      }
 
-        internal function onSettingsClick(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            settingsClickS();
-            return;
-        }
+      override protected function onDispose() : void {
+         this.content.logoffBtn.removeEventListener(ButtonEvent.PRESS,this.onLogoffClick);
+         this.content.settingsBtn.removeEventListener(ButtonEvent.PRESS,this.onSettingsClick);
+         this.content.quitBtn.removeEventListener(ButtonEvent.PRESS,this.onQuitClick);
+         this.content.cancelBtn.removeEventListener(ButtonEvent.PRESS,this.onCancelClick);
+         this.content = null;
+         super.onDispose();
+      }
 
-        internal function onQuitClick(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            quitClickS();
-            return;
-        }
+      override public function updateStage(param1:Number, param2:Number) : void {
+         super.updateStage(param1,param2);
+      }
 
-        internal function onCancelClick(arg1:scaleform.clik.events.ButtonEvent=null):void
-        {
-            cancelClickS();
-            return;
-        }
+      private function onLogoffClick(param1:ButtonEvent) : void {
+         if(App.globalVarsMgr.isTutorialRunningS())
+         {
+            refuseTrainingS();
+         }
+         else
+         {
+            logoffClickS();
+         }
+      }
 
-        public override function setFocus():void
-        {
-            super.setFocus();
-            App.utils.focusHandler.setFocus(this.content.cancelBtn);
-            return;
-        }
+      private function onSettingsClick(param1:ButtonEvent) : void {
+         settingsClickS();
+      }
 
-        public var content:net.wg.gui.lobby.menu.LobbyMenuForm=null;
-    }
+      private function onQuitClick(param1:ButtonEvent) : void {
+         quitClickS();
+      }
+
+      private function onCancelClick(param1:ButtonEvent=null) : void {
+         cancelClickS();
+      }
+
+      override public function setFocus() : void {
+         super.setFocus();
+         App.utils.focusHandler.setFocus(this.content.cancelBtn);
+      }
+   }
+
 }

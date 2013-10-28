@@ -113,7 +113,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         GlobalEventDispatcher.removeEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
 
         //Config.s_config.battle.useStandardMarkers = true;
-        
+
         initialize();
     }
 
@@ -141,7 +141,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
     private function initializeSubject():Void
     {
         trace("initializeSubject() standard=" + Config.s_config.battle.useStandardMarkers + " " + m_playerFullName);
-        
+
         // Create marker class depending on config setting
         if (Config.s_config.battle.useStandardMarkers == true)
             createStandardMarker();
@@ -243,7 +243,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
     /**
      * Configured marker type
      */
-    
+
     private function get IsStandardMarker()
     {
         return subject != null && Config.s_config.battle.useStandardMarkers == true;
@@ -271,7 +271,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         m_vehicleClass = vClass;
         m_curHealth = curHealth;
         m_dead = m_curHealth <= 0;
-        
+
         if (Config.s_loaded == true && !subject)
             initializeSubject();
         if (wrapper.m_team == "enemy")
@@ -292,17 +292,18 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
             m_dead = true;
 
         var curHealthAbsolute:Number = (curHealth < 0 ? 0 : curHealth);
-        
+
         if (wrapper.m_team == "enemy") /** Omit allies */
         {
             if (logLists != null)
             {
                 var delta = m_curHealth - curHealthAbsolute;
+                var vdata = VehicleInfo.getByIcon(m_defaultIconSource);
                 logLists.onHpUpdate(flag, delta, curHealth,
-                    VehicleInfo.mapVehicleName(m_defaultIconSource, m_vehicleName),
+                    vdata.localizedName,
                     m_defaultIconSource,
                     m_playerFullName, m_level, damageType,
-                    VehicleInfo.GetVTypeValue(m_defaultIconSource),
+                    Config.s_config.texts.vtype[vdata.vtype],
                     GraphicsUtil.GetVTypeColorValue(m_defaultIconSource),
                     m_dead, curHealthAbsolute);
             }
@@ -317,10 +318,10 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         if (newState == "dead")
         {
             m_dead = true;
-            
+
             /**
              * updateState is sufficient for logDead routine.
-             * 
+             *
              * Method is invoked both on new marker created being already dead
              * and present marker becoming dead at some point in time.
              */

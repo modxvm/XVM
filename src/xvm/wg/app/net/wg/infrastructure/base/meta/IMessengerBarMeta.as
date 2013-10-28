@@ -1,11 +1,14 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IMessengerBarMeta extends flash.events.IEventDispatcher
-    {
-        function channelButtonClickS():void;
+   import flash.events.IEventDispatcher;
 
-        function contactsButtonClickS():void;
-    }
+
+   public interface IMessengerBarMeta extends IEventDispatcher
+   {
+          
+      function channelButtonClickS() : void;
+
+      function contactsButtonClickS() : void;
+   }
+
 }

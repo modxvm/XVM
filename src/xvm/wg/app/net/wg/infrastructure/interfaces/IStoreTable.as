@@ -1,28 +1,31 @@
-package net.wg.infrastructure.interfaces 
+package net.wg.infrastructure.interfaces
 {
-    import net.wg.infrastructure.base.meta.*;
-    import scaleform.clik.interfaces.*;
-    
-    public interface IStoreTable extends net.wg.infrastructure.base.meta.IStoreTableMeta, net.wg.infrastructure.interfaces.IDAAPIModule, scaleform.clik.interfaces.IUIComponent
-    {
-        function setVehicleRendererLinkage(arg1:String):void;
+   import net.wg.infrastructure.base.meta.IStoreTableMeta;
+   import scaleform.clik.interfaces.IUIComponent;
 
-        function setModuleRendererLinkage(arg1:String):void;
 
-        function get name():String;
+   public interface IStoreTable extends IStoreTableMeta, IDAAPIModule, IUIComponent
+   {
+          
+      function setVehicleRendererLinkage(param1:String) : void;
 
-        function updateHeaderCountTitle(arg1:String):void;
+      function setModuleRendererLinkage(param1:String) : void;
 
-        function get visible():Boolean;
+      function get name() : String;
 
-        function set visible(arg1:Boolean):void;
+      function updateHeaderCountTitle(param1:String) : void;
 
-        function get enableInitCallback():Boolean;
+      function get visible() : Boolean;
 
-        function set enableInitCallback(arg1:Boolean):void;
+      function set visible(param1:Boolean) : void;
 
-        function get rightOrientedCount():Boolean;
+      function get enableInitCallback() : Boolean;
 
-        function set rightOrientedCount(arg1:Boolean):void;
-    }
+      function set enableInitCallback(param1:Boolean) : void;
+
+      function get rightOrientedCount() : Boolean;
+
+      function set rightOrientedCount(param1:Boolean) : void;
+   }
+
 }

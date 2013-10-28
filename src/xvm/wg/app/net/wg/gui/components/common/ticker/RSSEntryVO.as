@@ -1,52 +1,44 @@
-package net.wg.gui.components.common.ticker 
+package net.wg.gui.components.common.ticker
 {
-    import net.wg.data.daapi.base.*;
-    
-    public class RSSEntryVO extends net.wg.data.daapi.base.DAAPIDataClass
-    {
-        public function RSSEntryVO(arg1:Object)
-        {
-            super(arg1);
-            return;
-        }
+   import net.wg.data.daapi.base.DAAPIDataClass;
 
-        public function get id():String
-        {
-            return this._id;
-        }
 
-        public function set id(arg1:String):void
-        {
-            this._id = arg1;
-            return;
-        }
+   public class RSSEntryVO extends DAAPIDataClass
+   {
+          
+      public function RSSEntryVO(param1:Object) {
+         super(param1);
+      }
 
-        public function get title():String
-        {
-            return this._title;
-        }
+      private var _id:String = "";
 
-        public function set title(arg1:String):void
-        {
-            this._title = arg1;
-            return;
-        }
+      private var _title:String = "";
 
-        public function get summary():String
-        {
-            return this._summary;
-        }
+      private var _summary:String = "";
 
-        public function set summary(arg1:String):void
-        {
-            this._summary = arg1;
-            return;
-        }
+      public function get id() : String {
+         return this._id;
+      }
 
-        internal var _id:String="";
+      public function set id(param1:String) : void {
+         this._id = param1;
+      }
 
-        internal var _title:String="";
+      public function get title() : String {
+         return this._title;
+      }
 
-        internal var _summary:String="";
-    }
+      public function set title(param1:String) : void {
+         this._title = param1;
+      }
+
+      public function get summary() : String {
+         return this._summary;
+      }
+
+      public function set summary(param1:String) : void {
+         this._summary = param1;
+      }
+   }
+
 }

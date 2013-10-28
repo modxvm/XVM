@@ -1,9 +1,12 @@
-package net.wg.gui.tutorial.meta 
+package net.wg.gui.tutorial.meta
 {
-    import flash.events.*;
-    
-    public interface ITutorialBattleNoResultsMeta extends flash.events.IEventDispatcher
-    {
-        function as_setData(arg1:Object):void;
-    }
+   import flash.events.IEventDispatcher;
+
+
+   public interface ITutorialBattleNoResultsMeta extends IEventDispatcher
+   {
+          
+      function as_setData(param1:Object) : void;
+   }
+
 }

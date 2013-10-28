@@ -1,123 +1,120 @@
-package net.wg.gui.components.advanced 
+package net.wg.gui.components.advanced
 {
-    import flash.display.*;
-    import flash.geom.*;
-    import flash.text.*;
-    import scaleform.clik.core.*;
-    
-    public class FieldSet extends scaleform.clik.core.UIComponent
-    {
-        public function FieldSet()
-        {
-            super();
+   import scaleform.clik.core.UIComponent;
+   import flash.text.TextField;
+   import flash.display.Sprite;
+   import flash.text.TextFieldAutoSize;
+   import flash.geom.Rectangle;
+
+
+   public class FieldSet extends UIComponent
+   {
+          
+      public function FieldSet() {
+         super();
+      }
+
+      public var textField:TextField;
+
+      public var bg:Sprite;
+
+      public var line:Sprite;
+
+      private var startScale:Object;
+
+      private var _margin:Number = 8;
+
+      private var _showLabel:Boolean = true;
+
+      override public function dispose() : void {
+         var _loc1_:String = null;
+         this.textField = null;
+         this.bg = null;
+         this.line = null;
+         for (_loc1_ in this.startScale)
+         {
+            delete this.startScale[[_loc1_]];
+         }
+         this.startScale = null;
+         super.dispose();
+      }
+
+      override public function toString() : String {
+         return "[WG FieldSet " + name + "]";
+      }
+
+      public function get label() : String {
+         return this.textField.text;
+      }
+
+      public function set label(param1:String) : void {
+         this.textField.text = param1;
+         this.textField.autoSize = TextFieldAutoSize.LEFT;
+         invalidate();
+      }
+
+      public function get showLabel() : Boolean {
+         return this._showLabel;
+      }
+
+      public function set showLabel(param1:Boolean) : void {
+         if(this._showLabel == param1)
+         {
             return;
-        }
+         }
+         this._showLabel = param1;
+         this.textField.visible = this._showLabel;
+         invalidate();
+      }
 
-        protected override function preInitialize():void
-        {
-            super.preInitialize();
+      public function get margin() : Number {
+         return this._margin;
+      }
+
+      public function set margin(param1:Number) : void {
+         if(this._margin == param1)
+         {
             return;
-        }
+         }
+         this._margin = param1;
+         invalidate();
+      }
 
-        protected override function initialize():void
-        {
-            super.initialize();
-            return;
-        }
+      override protected function preInitialize() : void {
+         super.preInitialize();
+      }
 
-        protected override function configUI():void
-        {
-            this.startScale = new Object();
-            this.startScale.sX = this.scaleX;
-            this.startScale.sY = this.scaleY;
-            setActualScale(1, 1);
-            this.bg.scale9Grid = null;
-            this.bg.scale9Grid = new flash.geom.Rectangle(32, 12, 155, 176);
-            this.bg.scaleX = this.startScale.sX;
-            this.bg.scaleY = this.startScale.sY;
-            setSize(actualWidth, actualWidth);
-            _originalWidth = actualWidth;
-            _originalHeight = actualHeight;
-            super.configUI();
-            invalidateSize();
-            return;
-        }
+      override protected function initialize() : void {
+         super.initialize();
+      }
 
-        public function get label():String
-        {
-            return this.textField.text;
-        }
+      override protected function configUI() : void {
+         this.startScale = new Object();
+         this.startScale.sX = this.scaleX;
+         this.startScale.sY = this.scaleY;
+         setActualScale(1,1);
+         this.bg.scale9Grid = null;
+         this.bg.scale9Grid = new Rectangle(32,12,155,176);
+         this.bg.scaleX = this.startScale.sX;
+         this.bg.scaleY = this.startScale.sY;
+         setSize(actualWidth,actualWidth);
+         _originalWidth = actualWidth;
+         _originalHeight = actualHeight;
+         super.configUI();
+         invalidateSize();
+      }
 
-        public function set label(arg1:String):void
-        {
-            this.textField.text = arg1;
-            this.textField.autoSize = flash.text.TextFieldAutoSize.LEFT;
-            invalidate();
-            return;
-        }
+      override protected function draw() : void {
+         if(this.showLabel)
+         {
+            this.line.x = this.textField.x + this.textField.textWidth + this.margin;
+         }
+         else
+         {
+            this.line.x = 10;
+         }
+         this.line.width = this.bg.width - 10 - this.line.x + 1;
+      }
+   }
 
-        public function get showLabel():Boolean
-        {
-            return this._showLabel;
-        }
-
-        public function set showLabel(arg1:Boolean):void
-        {
-            if (this._showLabel == arg1) 
-            {
-                return;
-            }
-            this._showLabel = arg1;
-            this.textField.visible = this._showLabel;
-            invalidate();
-            return;
-        }
-
-        public function get margin():Number
-        {
-            return this._margin;
-        }
-
-        public function set margin(arg1:Number):void
-        {
-            if (this._margin == arg1) 
-            {
-                return;
-            }
-            this._margin = arg1;
-            invalidate();
-            return;
-        }
-
-        protected override function draw():void
-        {
-            if (this.showLabel) 
-            {
-                this.line.x = this.textField.x + this.textField.textWidth + this.margin;
-            }
-            else 
-            {
-                this.line.x = 10;
-            }
-            this.line.width = this.bg.width - 10 - this.line.x + 1;
-            return;
-        }
-
-        public override function toString():String
-        {
-            return "[WG FieldSet " + name + "]";
-        }
-
-        public var textField:flash.text.TextField;
-
-        public var bg:flash.display.Sprite;
-
-        public var line:flash.display.Sprite;
-
-        internal var startScale:Object;
-
-        internal var _margin:Number=8;
-
-        internal var _showLabel:Boolean=true;
-    }
 }

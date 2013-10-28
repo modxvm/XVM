@@ -1,65 +1,57 @@
-package net.wg.gui.lobby.profile.pages.statistics 
+package net.wg.gui.lobby.profile.pages.statistics
 {
-    import net.wg.data.managers.impl.*;
-    
-    public class StatisticsChartsUtils extends Object
-    {
-        public function StatisticsChartsUtils()
-        {
-            super();
-            return;
-        }
+   import net.wg.data.managers.impl.ToolTipParams;
 
-        public static function showTypeTooltip(arg1:Object, arg2:String):void
-        {
-            var loc1:*={};
-            if (arg1 && arg1.hasOwnProperty("xField")) 
-            {
-                loc1.value = App.utils.locale.makeString(DIALOGS.vehicleselldialog_vehicletype(arg1["xField"]));
-            }
-            App.toolTipMgr.showComplexWithParams(arg2, new net.wg.data.managers.impl.ToolTipParams(loc1, {}));
-            return;
-        }
 
-        public static function showNationTooltip(arg1:Object, arg2:String):void
-        {
-            var loc2:*=null;
-            var loc3:*=0;
-            var loc4:*=null;
-            var loc1:*={};
-            if (arg1 && arg1.hasOwnProperty("xField")) 
-            {
-                loc2 = App.utils.nations.getNationsData();
-                loc3 = arg1["xField"];
-                var loc5:*=0;
-                var loc6:*=loc2;
-                for each (loc4 in loc6) 
-                {
-                    if (loc4.data != loc3) 
-                    {
-                        continue;
-                    }
-                    loc1.value = App.utils.locale.makeString(loc4.label);
-                    break;
-                }
-            }
-            App.toolTipMgr.showComplexWithParams(arg2, new net.wg.data.managers.impl.ToolTipParams(loc1, {}));
-            return;
-        }
+   public class StatisticsChartsUtils extends Object
+   {
+          
+      public function StatisticsChartsUtils() {
+         super();
+      }
 
-        public static function showLevelTooltip(arg1:Object, arg2:String):void
-        {
-            var loc1:*=null;
-            if (arg2) 
+      public static function showTypeTooltip(param1:Object, param2:String) : void {
+         var _loc3_:Object = {};
+         if((param1) && (param1.hasOwnProperty("xField")))
+         {
+            _loc3_.value = App.utils.locale.makeString(DIALOGS.vehicleselldialog_vehicletype(param1["xField"]));
+         }
+         App.toolTipMgr.showComplexWithParams(param2,new ToolTipParams(_loc3_,{}));
+      }
+
+      public static function showNationTooltip(param1:Object, param2:String) : void {
+         var _loc4_:Array = null;
+         var _loc5_:uint = 0;
+         var _loc6_:Object = null;
+         var _loc3_:Object = {};
+         if((param1) && (param1.hasOwnProperty("xField")))
+         {
+            _loc4_ = App.utils.nations.getNationsData();
+            _loc5_ = param1["xField"];
+            for each (_loc6_ in _loc4_)
             {
-                loc1 = {};
-                if (arg1 && arg1.hasOwnProperty("xField")) 
-                {
-                    loc1.value = arg1["xField"].toString();
-                }
-                App.toolTipMgr.showComplexWithParams(arg2, new net.wg.data.managers.impl.ToolTipParams(loc1, {}));
+               if(_loc6_.data == _loc5_)
+               {
+                  _loc3_.value = App.utils.locale.makeString(_loc6_.label);
+                  break;
+               }
             }
-            return;
-        }
-    }
+         }
+         App.toolTipMgr.showComplexWithParams(param2,new ToolTipParams(_loc3_,{}));
+      }
+
+      public static function showLevelTooltip(param1:Object, param2:String) : void {
+         var _loc3_:Object = null;
+         if(param2)
+         {
+            _loc3_ = {};
+            if((param1) && (param1.hasOwnProperty("xField")))
+            {
+               _loc3_.value = param1["xField"].toString();
+            }
+            App.toolTipMgr.showComplexWithParams(param2,new ToolTipParams(_loc3_,{}));
+         }
+      }
+   }
+
 }

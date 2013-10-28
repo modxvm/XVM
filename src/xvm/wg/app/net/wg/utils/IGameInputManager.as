@@ -1,19 +1,22 @@
-package net.wg.utils 
+package net.wg.utils
 {
-    import flash.events.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    
-    public interface IGameInputManager extends net.wg.infrastructure.interfaces.entity.IDisposable, net.wg.infrastructure.base.meta.IGameInputManagerMeta
-    {
-        function initStage(arg1:flash.events.IEventDispatcher):void;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import net.wg.infrastructure.base.meta.IGameInputManagerMeta;
+   import flash.events.IEventDispatcher;
 
-        function setKeyHandler(arg1:Number, arg2:String, arg3:Function, arg4:Boolean):void;
 
-        function clearKeyHandlers():void;
+   public interface IGameInputManager extends IDisposable, IGameInputManagerMeta
+   {
+          
+      function initStage(param1:IEventDispatcher) : void;
 
-        function clearKeyHandler(arg1:Number, arg2:String):void;
+      function setKeyHandler(param1:Number, param2:String, param3:Function, param4:Boolean, param5:String=null) : void;
 
-        function setIgnoredKeyCode(arg1:Number):void;
-    }
+      function clearKeyHandlers() : void;
+
+      function clearKeyHandler(param1:Number, param2:String) : void;
+
+      function setIgnoredKeyCode(param1:Number) : void;
+   }
+
 }

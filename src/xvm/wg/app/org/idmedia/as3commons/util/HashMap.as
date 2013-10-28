@@ -1,89 +1,80 @@
-package org.idmedia.as3commons.util 
+package org.idmedia.as3commons.util
 {
-    public class HashMap extends org.idmedia.as3commons.util.AbstractMap implements org.idmedia.as3commons.util.Map
-    {
-        public function HashMap()
-        {
-            super();
-            this.entries = new EntrySet();
-            return;
-        }
 
-        public override function entrySet():org.idmedia.as3commons.util.Set
-        {
-            return this.entries;
-        }
 
-        public override function put(arg1:*, arg2:*):*
-        {
-            var loc2:*=null;
-            var loc3:*=undefined;
-            var loc1:*=this.entries.iterator();
-            while (loc1.hasNext()) 
+   public class HashMap extends AbstractMap implements Map
+   {
+          
+      public function HashMap() {
+         super();
+         this.entries = new EntrySet();
+      }
+
+      private var entries:Set;
+
+      override public function entrySet() : Set {
+         return this.entries;
+      }
+
+      override public function put(param1:*, param2:*) : * {
+         var _loc4_:Entry = null;
+         var _loc5_:* = undefined;
+         var _loc3_:Iterator = this.entries.iterator();
+         while(_loc3_.hasNext())
+         {
+            _loc4_ = Entry(_loc3_.next());
+            if(_loc4_.getKey() === param1)
             {
-                if ((loc2 = org.idmedia.as3commons.util.Entry(loc1.next())).getKey() !== arg1) 
-                {
-                    continue;
-                }
-                loc3 = loc2.getValue();
-                loc2.setValue(arg2);
-                return loc3;
+               _loc5_ = _loc4_.getValue();
+               _loc4_.setValue(param2);
+               return _loc5_;
             }
-            this.entries.add(new EntryImpl(arg1, arg2));
-            return null;
-        }
+         }
+         this.entries.add(new EntryImpl(param1,param2));
+         return null;
+      }
 
-        public function forEach(arg1:Function):void
-        {
-            var loc2:*=null;
-            var loc1:*=this.keySet().toArray();
-            var loc3:*=0;
-            var loc4:*=loc1;
-            for each (loc2 in loc4) 
-            {
-                arg1(loc2, this.get(loc2));
-            }
-            return;
-        }
+      public function forEach(param1:Function) : void {
+         var _loc3_:Object = null;
+         var _loc2_:Array = this.keySet().toArray();
+         for each (_loc3_ in _loc2_)
+         {
+            param1(_loc3_,this.get(_loc3_));
+         }
+      }
+   }
 
-        internal var entries:org.idmedia.as3commons.util.Set;
-    }
-}
+}   import org.idmedia.as3commons.util.Entry;
 
 
-class EntryImpl extends Object implements org.idmedia.as3commons.util.Entry
-{
-    public function EntryImpl(arg1:*, arg2:*)
-    {
-        super();
-        this.key = arg1;
-        this.value = arg2;
-        return;
-    }
+   class EntryImpl extends Object implements Entry
+   {
+          
+      function EntryImpl(param1:*, param2:*) {
+         super();
+         this.key = param1;
+         this.value = param2;
+      }
 
-    public function getKey():*
-    {
-        return this.key;
-    }
+      private var key;
 
-    public function getValue():*
-    {
-        return this.value;
-    }
+      private var value;
 
-    public function setValue(arg1:*):*
-    {
-        var loc1:*=this.value;
-        this.value = arg1;
-        return loc1;
-    }
+      public function getKey() : * {
+         return this.key;
+      }
 
-    public function equals(arg1:*):Boolean
-    {
-        return arg1 === this;
-    }
+      public function getValue() : * {
+         return this.value;
+      }
 
-    internal var key:*;
+      public function setValue(param1:*) : * {
+         var _loc2_:* = this.value;
+         this.value = param1;
+         return _loc2_;
+      }
 
-    internal var value:*;
-}
+      public function equals(param1:*) : Boolean {
+         return param1 === this;
+      }
+   }

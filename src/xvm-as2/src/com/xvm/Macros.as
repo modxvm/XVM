@@ -1,15 +1,6 @@
 ﻿import com.natecook.Sprintf;
-import com.xvm.Cache;
-import com.xvm.Config;
-import com.xvm.Defines;
-import com.xvm.GlobalEventDispatcher;
-import com.xvm.GraphicsUtil;
-import com.xvm.Locale;
-import com.xvm.StatData;
-import com.xvm.Strings;
-import com.xvm.Utils;
-import com.xvm.VehicleInfo;
-import com.xvm.DataTypes.Stat;
+import com.xvm.*;
+import com.xvm.DataTypes.*;
 
 class com.xvm.Macros
 {
@@ -53,24 +44,6 @@ class com.xvm.Macros
 
         var pname = Utils.GetNormalizedPlayerName(name);
 
-        // Load stat in FogOfWar
-        if (StatData.s_loaded && Config.s_config.rating.loadEnemyStatsInFogOfWar)
-        {
-            var pdata = StatData.s_data[pname].stat;
-            if (!data.uid)
-                data.uid = pdata.playerId;
-            //Logger.addObject(pdata);
-            //Logger.add("pname=" + pname + " uid=" + data.uid + " r=" + stat.r + " eff=" + stat.e);
-            if ((!pdata || (!pdata.stat && pdata.loadstate == Defines.LOADSTATE_NONE)) ||
-                (StatData.s_data[pname].loadstate == Defines.LOADSTATE_UNKNOWN && VehicleInfo.getInfo2(data.icon).name != "UNKNOWN"))
-            {
-                //Logger.addObject(data);
-                StatData.s_data[pname].vehicleKey = VehicleInfo.getInfo2(data.icon).name.toUpperCase();
-                StatData.s_data[pname].loadstate = Defines.LOADSTATE_NONE;
-                GlobalEventDispatcher.dispatchEvent( { type: "process_fow", data: data, team: team } );
-            }
-        }
-
         Cache.Get("_m/" + pname + "/" + data.vehicle, function()
         {
             if (!Macros.data_provider.hasOwnProperty(pname))
@@ -80,6 +53,8 @@ class com.xvm.Macros
             // vars
             var nick = Macros.modXvmDevLabel(data.label +
                 (data.label.indexOf("[") >= 0 || !data.clanAbbrev ? "" : "[" + data.clanAbbrev + "]"));
+
+            var vdata:VehicleData = VehicleInfo.getByIcon(data.icon);
 
             // {{nick}}
             pdata["nick"] = nick;
@@ -91,11 +66,11 @@ class com.xvm.Macros
             // {{clannb}}
             pdata["clannb"] = Utils.GetClanName(nick);
             // {{vehicle}}
-            pdata["vehicle"] = VehicleInfo.mapVehicleName(data.icon, data.vehicle);
+            pdata["vehicle"] = vdata.localizedName;
             // {{vehiclename}} - usa-M24_Chaffee
-            pdata["vehiclename"] = VehicleInfo.getVehicleName(data.icon);
+            pdata["vehiclename"] = vdata.key;
             // {{vtype}}
-            pdata["vtype"] = VehicleInfo.GetVTypeValue(data.icon);
+            pdata["vtype"] = Config.s_config.texts.vtype[vdata.vtype];
             // {{c:vtype}}
             pdata["c:vtype"] = GraphicsUtil.GetVTypeColorValue(data.icon, data.vtype);
 
@@ -155,7 +130,7 @@ class com.xvm.Macros
         });
     }
 
-    public static function RegisterStatMacros(playerName:String, stat:Stat)
+    public static function RegisterStatMacros(playerName:String, stat:StatData)
     {
         if (!stat)
             return;
@@ -170,7 +145,7 @@ class com.xvm.Macros
         var eff:Number = Utils.toInt(stat.e, 0);
         var b:Number = Utils.toInt(stat.b, 0);
         var w:Number = Utils.toInt(stat.w, 0);
-        var tr:Number = Utils.toInt(stat.tr, 0);
+        var tr:Number = Utils.toInt(stat.v.r, 0);
         var tb:Number = Utils.toInt(stat.v.b, 0);
         var tw:Number = Utils.toInt(stat.v.w, 0);
         var tbK:Number = Math.round(tb / 100) / 10;
@@ -188,11 +163,9 @@ class com.xvm.Macros
         // {{wn}}
         pdata["wn"] = stat.wn <= 0 ? "----" : Strings.padLeft(String(stat.wn), 4);
         // {{e}}
-        pdata["e"] = stat.te == null ? "-" : stat.te >= 10 ? "E" : String(stat.te);
+        pdata["e"] = stat.v.te == null ? "-" : stat.v.te >= 10 ? "E" : String(stat.v.te);
         // {{teff}}
-        pdata["teff"] = stat.teff == null ? "----" : Strings.padLeft(String(stat.teff), 4);
-        //// {{teff2}}
-        //pdata["teff2"] = stat.teff2 == null ? "----" : Strings.padLeft(String(stat.teff2), 4);
+        pdata["teff"] = stat.v.teff == null ? "----" : Strings.padLeft(String(stat.v.teff), 4);
 
         // {{rating}}, {{rating:3}}
         pdata["rating"] = r <= 0 ? "--%" : String(r) + "%";
@@ -221,14 +194,14 @@ class com.xvm.Macros
         pdata["t-hb"] = tb <= 0 ? "--h" : String(Math.round(tb / 100)) + "h";
         pdata["t-hb:3"] = Strings.padLeft(pdata["t-hb"], 3);
         // {{tdb}}, {{tdb:4}}
-        pdata["tdb"] = stat.tdb == null ? "----" : String(stat.tdb);
+        pdata["tdb"] = stat.v.db == null ? "----" : String(stat.v.db);
         pdata["tdb:4"] = Strings.padLeft(pdata["tdb"], 4);
         // {{tdv}}
-        pdata["tdv"] = stat.tdv == null ? "-.-" : Sprintf.format("%.1f", stat.tdv);
+        pdata["tdv"] = stat.v.dv == null ? "-.-" : Sprintf.format("%.1f", stat.v.dv);
         // {{tfb}}
-        pdata["tfb"] = stat.tfb == null ? "-.-" : Sprintf.format("%.1f", stat.tfb);
+        pdata["tfb"] = stat.v.fb == null ? "-.-" : Sprintf.format("%.1f", stat.v.fb);
         // {{tsb}}
-        pdata["tsb"] = stat.tsb == null ? "-.-" : Sprintf.format("%.1f", stat.tsb);
+        pdata["tsb"] = stat.v.sb == null ? "-.-" : Sprintf.format("%.1f", stat.v.sb);
 
         // Dynamic colors
         // {{c:xeff}}
@@ -244,8 +217,8 @@ class com.xvm.Macros
         pdata["c:wn"] = !stat.wn ? ""
             : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN, stat.wn, "#", o.darken); }
         // {{c:e}}
-        pdata["c:e"] = stat.te == null ? ""
-            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.te, "#", o.darken); }
+        pdata["c:e"] = stat.v.te == null ? ""
+            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.v.te, "#", o.darken); }
         // {{c:rating}}
         pdata["c:rating"] = r <= 0 ? ""
             : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, r, "#", o.darken); }
@@ -264,17 +237,17 @@ class com.xvm.Macros
             : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, tb, "#", o.darken); }
         pdata["c:t_battles"] = pdata["c:t-battles"];
         // {{c:tdb}}
-        pdata["c:tdb"] = stat.tdb <= 0 ? ""
-            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, stat.tdb, "#", o.darken); }
+        pdata["c:tdb"] = stat.v.db <= 0 ? ""
+            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, stat.v.db, "#", o.darken); }
         // {{c:tdv}}
-        pdata["c:tdv"] = stat.tdv <= 0 ? ""
-            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, stat.tdv, "#", o.darken); }
+        pdata["c:tdv"] = stat.v.dv <= 0 ? ""
+            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, stat.v.dv, "#", o.darken); }
         // {{c:tfb}}
-        pdata["c:tfb"] = stat.tfb <= 0 ? ""
-            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, stat.tfb, "#", o.darken); }
+        pdata["c:tfb"] = stat.v.fb <= 0 ? ""
+            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, stat.v.fb, "#", o.darken); }
         // {{c:tsb}}
-        pdata["c:tsb"] = stat.tsb <= 0 ? ""
-            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, stat.tsb, "#", o.darken); }
+        pdata["c:tsb"] = stat.v.sb <= 0 ? ""
+            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, stat.v.sb, "#", o.darken); }
 
         // Alpha
         // {{a:xeff}}
@@ -286,7 +259,7 @@ class com.xvm.Macros
         // {{a:wn}}
         pdata["a:wn"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WN, stat.wn); }
         // {{a:e}}
-        pdata["a:e"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_E, stat.te); }
+        pdata["a:e"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_E, stat.v.te); }
         // {{a:rating}}
         pdata["a:rating"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_RATING, r); }
         // {{a:kb}}
@@ -298,13 +271,13 @@ class com.xvm.Macros
         // {{a:t-battles}}
         pdata["a:t-battles"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TBATTLES, tb); }
         // {{a:tdb}}
-        pdata["a:tdb"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TDB, stat.tdb); }
+        pdata["a:tdb"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TDB, stat.v.db); }
         // {{a:tdv}}
-        pdata["a:tdv"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TDV, stat.tdv); }
+        pdata["a:tdv"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TDV, stat.v.dv); }
         // {{a:tfb}}
-        pdata["a:tfb"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TFB, stat.tfb); }
+        pdata["a:tfb"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TFB, stat.v.fb); }
         // {{a:tsb}}
-        pdata["a:tsb"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TSB, stat.tsb); }
+        pdata["a:tsb"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TSB, stat.v.sb); }
     }
 
     // PRIVATE
@@ -323,7 +296,7 @@ class com.xvm.Macros
                     return "«сэр Макс» (XVM)";
                 if (label == "Mixailos")
                     return "Михаил";
-				if (label == "STL1te")
+                if (label == "STL1te")
                     return "О, СТЛайт!";
                 break;
 

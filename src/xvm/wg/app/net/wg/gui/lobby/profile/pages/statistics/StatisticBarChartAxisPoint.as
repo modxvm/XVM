@@ -1,162 +1,144 @@
-package net.wg.gui.lobby.profile.pages.statistics 
+package net.wg.gui.lobby.profile.pages.statistics
 {
-    import flash.events.*;
-    import net.wg.gui.lobby.profile.components.*;
-    import scaleform.clik.core.*;
-    import scaleform.clik.data.*;
-    import scaleform.clik.events.*;
-    import scaleform.clik.interfaces.*;
-    
-    public class StatisticBarChartAxisPoint extends net.wg.gui.lobby.profile.components.SimpleLoader implements scaleform.clik.interfaces.IListItemRenderer
-    {
-        public function StatisticBarChartAxisPoint()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.lobby.profile.components.SimpleLoader;
+   import scaleform.clik.interfaces.IListItemRenderer;
+   import flash.events.MouseEvent;
+   import scaleform.clik.core.UIComponent;
+   import scaleform.clik.data.ListData;
+   import flash.events.Event;
+   import scaleform.clik.events.InputEvent;
 
-        public function get tooltip():String
-        {
-            return this._tooltip;
-        }
 
-        public function set tooltip(arg1:String):void
-        {
-            this._tooltip = arg1;
-            this.disposeHandlers();
-            if (this._tooltip) 
-            {
-                addEventListener(flash.events.MouseEvent.ROLL_OVER, this.mouseRollOverHandler, false, 0, true);
-                addEventListener(flash.events.MouseEvent.ROLL_OUT, mouseRollOutHandler, false, 0, true);
-            }
-            return;
-        }
+   public class StatisticBarChartAxisPoint extends SimpleLoader implements IListItemRenderer
+   {
+          
+      public function StatisticBarChartAxisPoint() {
+         super();
+      }
 
-        internal function disposeHandlers():void
-        {
-            removeEventListener(flash.events.MouseEvent.ROLL_OVER, this.mouseRollOverHandler);
-            removeEventListener(flash.events.MouseEvent.ROLL_OUT, mouseRollOutHandler);
-            return;
-        }
+      private static function mouseRollOutHandler(param1:MouseEvent) : void {
+         App.toolTipMgr.hide();
+      }
 
-        protected function mouseRollOverHandler(arg1:flash.events.MouseEvent):void
-        {
-            this.showToolTip();
-            return;
-        }
+      protected var _data:Object;
 
-        protected function showToolTip():void
-        {
-            return;
-        }
+      private var _tooltip:String = null;
 
-        public function get index():uint
-        {
-            return 0;
-        }
+      private var _initialized:Boolean;
 
-        public function set index(arg1:uint):void
-        {
-            return;
-        }
+      public function get tooltip() : String {
+         return this._tooltip;
+      }
 
-        public function get owner():scaleform.clik.core.UIComponent
-        {
-            return null;
-        }
+      override protected function onLoadingComplete() : void {
+         this._initialized = true;
+         super.onLoadingComplete();
+      }
 
-        public function set owner(arg1:scaleform.clik.core.UIComponent):void
-        {
-            return;
-        }
+      public function set tooltip(param1:String) : void {
+         this._tooltip = param1;
+         this.disposeHandlers();
+         if(this._tooltip)
+         {
+            addEventListener(MouseEvent.ROLL_OVER,this.mouseRollOverHandler,false,0,true);
+            addEventListener(MouseEvent.ROLL_OUT,mouseRollOutHandler,false,0,true);
+         }
+      }
 
-        public function get selectable():Boolean
-        {
-            return false;
-        }
+      private function disposeHandlers() : void {
+         removeEventListener(MouseEvent.ROLL_OVER,this.mouseRollOverHandler);
+         removeEventListener(MouseEvent.ROLL_OUT,mouseRollOutHandler);
+      }
 
-        public function set selectable(arg1:Boolean):void
-        {
-            return;
-        }
+      protected function mouseRollOverHandler(param1:MouseEvent) : void {
+         this.showToolTip();
+      }
 
-        public function get selected():Boolean
-        {
-            return false;
-        }
+      protected function showToolTip() : void {
+          
+      }
 
-        public function set selected(arg1:Boolean):void
-        {
-            return;
-        }
+      public function get index() : uint {
+         return 0;
+      }
 
-        public function get displayFocus():Boolean
-        {
-            return false;
-        }
+      public function set index(param1:uint) : void {
+          
+      }
 
-        public function set displayFocus(arg1:Boolean):void
-        {
-            return;
-        }
+      public function get owner() : UIComponent {
+         return null;
+      }
 
-        public function setListData(arg1:scaleform.clik.data.ListData):void
-        {
-            return;
-        }
+      public function set owner(param1:UIComponent) : void {
+          
+      }
 
-        public function setData(arg1:Object):void
-        {
-            this._data = arg1;
-            setSource(net.wg.gui.lobby.profile.pages.statistics.StatisticChartInfo(this._data).icon);
-            return;
-        }
+      public function get selectable() : Boolean {
+         return false;
+      }
 
-        public function get enabled():Boolean
-        {
-            return false;
-        }
+      public function set selectable(param1:Boolean) : void {
+          
+      }
 
-        public function set enabled(arg1:Boolean):void
-        {
-            return;
-        }
+      public function get selected() : Boolean {
+         return false;
+      }
 
-        public function get focusTarget():scaleform.clik.core.UIComponent
-        {
-            return null;
-        }
+      public function set selected(param1:Boolean) : void {
+          
+      }
 
-        public function set focusTarget(arg1:scaleform.clik.core.UIComponent):void
-        {
-            return;
-        }
+      public function get displayFocus() : Boolean {
+         return false;
+      }
 
-        public function validateNow(arg1:flash.events.Event=null):void
-        {
-            return;
-        }
+      public function set displayFocus(param1:Boolean) : void {
+          
+      }
 
-        public function handleInput(arg1:scaleform.clik.events.InputEvent):void
-        {
-            return;
-        }
+      public function setListData(param1:ListData) : void {
+          
+      }
 
-        public override function dispose():void
-        {
-            this.disposeHandlers();
-            super.dispose();
-            return;
-        }
+      public function setData(param1:Object) : void {
+         this._data = param1;
+         setSource(StatisticChartInfo(this._data).icon);
+      }
 
-        internal static function mouseRollOutHandler(arg1:flash.events.MouseEvent):void
-        {
-            App.toolTipMgr.hide();
-            return;
-        }
+      public function get enabled() : Boolean {
+         return false;
+      }
 
-        protected var _data:Object;
+      public function set enabled(param1:Boolean) : void {
+          
+      }
 
-        internal var _tooltip:String=null;
-    }
+      public function get focusTarget() : UIComponent {
+         return null;
+      }
+
+      public function set focusTarget(param1:UIComponent) : void {
+          
+      }
+
+      public function validateNow(param1:Event=null) : void {
+          
+      }
+
+      public function handleInput(param1:InputEvent) : void {
+          
+      }
+
+      override public function dispose() : void {
+         this.disposeHandlers();
+         super.dispose();
+      }
+
+      public function get initialized() : Boolean {
+         return this._initialized;
+      }
+   }
+
 }

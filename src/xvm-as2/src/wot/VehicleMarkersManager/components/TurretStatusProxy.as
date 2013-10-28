@@ -1,7 +1,8 @@
 import wot.VehicleMarkersManager.AbstractAccessProxy;
 import wot.VehicleMarkersManager.Xvm;
 import com.xvm.VehicleInfo;
-import com.xvm.Config
+import com.xvm.Config;
+import com.xvm.DataTypes.VehicleData;
 
 class wot.VehicleMarkersManager.components.TurretStatusProxy extends AbstractAccessProxy
 {
@@ -17,15 +18,15 @@ class wot.VehicleMarkersManager.components.TurretStatusProxy extends AbstractAcc
 
     public function defineVehicleStatus():Number
     {
-        var vehInfo:Object = VehicleInfo.getInfo2(xvm.m_defaultIconSource);
+        var vdata:VehicleData = VehicleInfo.getByIcon(xvm.m_defaultIconSource);
 
         // If database stock max hp == current vehicle max hp
-        if (vehInfo.hpstock == xvm.m_maxHealth)
+        if (vdata.hpStock == xvm.m_maxHealth)
             /**
              * Current vehicle has stock turret.
              * Return vulnerability status.
              */
-            return vehInfo.turret;
+            return vdata.turret;
 
         return 0; // Turret status unknown
     }

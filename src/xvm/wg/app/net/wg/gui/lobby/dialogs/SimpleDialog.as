@@ -1,392 +1,342 @@
-package net.wg.gui.lobby.dialogs 
+package net.wg.gui.lobby.dialogs
 {
-    import __AS3__.vec.*;
-    import flash.events.*;
-    import flash.text.*;
-    import net.wg.data.constants.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.components.windows.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import net.wg.infrastructure.interfaces.*;
-    import net.wg.utils.*;
-    import scaleform.clik.controls.*;
-    import scaleform.clik.core.*;
-    import scaleform.clik.events.*;
-    import scaleform.clik.utils.*;
-    
-    public class SimpleDialog extends net.wg.infrastructure.base.meta.impl.SimpleDialogMeta implements net.wg.infrastructure.base.meta.ISimpleDialogMeta
-    {
-        public function SimpleDialog()
-        {
-            super();
-            isModal = true;
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.SimpleDialogMeta;
+   import net.wg.infrastructure.base.meta.ISimpleDialogMeta;
+   import scaleform.clik.controls.Button;
+   import flash.text.TextField;
+   import net.wg.gui.components.controls.SoundButtonEx;
+   import scaleform.clik.events.ButtonEvent;
+   import flash.text.TextFieldAutoSize;
+   import __AS3__.vec.Vector;
+   import scaleform.clik.core.UIComponent;
+   import net.wg.gui.components.windows.Window;
+   import net.wg.infrastructure.interfaces.IWindow;
+   import scaleform.clik.utils.Padding;
+   import net.wg.utils.IFocusHandler;
+   import net.wg.data.constants.SoundTypes;
+   import flash.events.EventPhase;
 
-        internal function processButtons(arg1:Function):void
-        {
-            var loc1:*=null;
-            var loc2:*=0;
-            var loc3:*=this.getButtonsOrder();
-            for each (loc1 in loc3) 
+
+   public class SimpleDialog extends SimpleDialogMeta implements ISimpleDialogMeta
+   {
+          
+      public function SimpleDialog() {
+         super();
+         isModal = true;
+      }
+
+      public static const SUBMIT_BUTTON:String = "submit";
+
+      public static const CLOSE_BUTTON:String = "close";
+
+      protected static const ADDITIONAL_MULTI_LINE_PADDING:uint = 5;
+
+      private static const TEXT_HEIGHT_PADDING:uint = 3;
+
+      private static const WINDOW_PADDING:Object;
+
+      private static const LAYOUT_INVALID:String = "layoutInv";
+
+      private static const BUTTON_ENABLE_INVALID:String = "btnEnInv";
+
+      private static const BUTTON_FOCUS_INVALID:String = "btnFocusInv";
+
+      private static function hideBtnProcessor(param1:Button) : void {
+         param1.visible = false;
+      }
+
+      public var textField:TextField = null;
+
+      public var firstBtn:SoundButtonEx = null;
+
+      public var secondBtn:SoundButtonEx = null;
+
+      public var thirdBtn:SoundButtonEx = null;
+
+      public var dynamicWhiteButton:SoundButtonEx = null;
+
+      protected const BTN_MARGIN:Number = 9;
+
+      private const MIN_WIDTH:Number = 360;
+
+      private const MIN_HEIGHT:Number = 115;
+
+      private var _minWidth:Number = 360;
+
+      private var _minHeight:Number = 115;
+
+      private var _btnEnableCandidate:ItemStatusData;
+
+      private var _btnFocusCandidateId:String;
+
+      override protected function onPopulate() : void {
+         window.useBottomBtns = true;
+         canDrag = false;
+         this.reflowDialogToCtrl();
+         updateStage(App.appWidth,App.appHeight);
+         this.processButtons(this.addListenerButtonProcessor);
+         super.onPopulate();
+      }
+
+      override protected function onDispose() : void {
+         this.processButtons(this.removeListenerButtonProcessor);
+         this.dynamicWhiteButton.removeEventListener(ButtonEvent.CLICK,this.onButtonClickHdlr);
+         if(this.textField)
+         {
+            this.textField.text = "";
+            if(this.textField.parent)
             {
-                arg1(loc1);
+               this.textField.parent.removeChild(this.textField);
             }
-            return;
-        }
+            this.textField = null;
+         }
+         super.onDispose();
+      }
 
-        internal function addListenerButtonProcessor(arg1:scaleform.clik.controls.Button):void
-        {
-            arg1.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onButtonClickHdlr);
-            return;
-        }
+      public function as_setText(param1:String) : void {
+         this.textField.htmlText = param1;
+         this.textField.autoSize = TextFieldAutoSize.LEFT;
+         this.invalidateLayout();
+      }
 
-        internal function removeListenerButtonProcessor(arg1:scaleform.clik.controls.Button):void
-        {
-            arg1.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onButtonClickHdlr);
-            return;
-        }
+      protected function invalidateLayout() : void {
+         invalidate(LAYOUT_INVALID);
+      }
 
-        public function get minWidth():Number
-        {
-            return this._minWidth;
-        }
-
-        public function set minWidth(arg1:Number):void
-        {
-            if (arg1 == this._minWidth) 
+      override protected function draw() : void {
+         var _loc1_:String = null;
+         var _loc2_:* = false;
+         var _loc3_:Vector.<Button> = null;
+         var _loc4_:Button = null;
+         var _loc5_:uint = 0;
+         var _loc6_:* = 0;
+         var _loc7_:Vector.<Button> = null;
+         var _loc8_:Button = null;
+         super.draw();
+         if(isInvalid(LAYOUT_INVALID))
+         {
+            this.applyLayout();
+         }
+         if((isInvalid(BUTTON_ENABLE_INVALID)) && (this._btnEnableCandidate))
+         {
+            _loc1_ = this._btnEnableCandidate.id;
+            _loc2_ = this._btnEnableCandidate.status;
+            _loc3_ = this.getAllButtons();
+            _loc5_ = _loc3_.length;
+            _loc6_ = 0;
+            while(_loc6_ < _loc5_)
             {
-                return;
+               _loc4_ = _loc3_[_loc6_];
+               if((_loc4_.data) && (_loc4_.data.hasOwnProperty("id")))
+               {
+                  if(_loc1_ == _loc4_.data.id)
+                  {
+                     _loc4_.enabled = _loc2_;
+                     break;
+                  }
+               }
+               _loc6_++;
             }
-            this._minWidth = arg1;
-            return;
-        }
-
-        public function as_setTitle(arg1:String):void
-        {
-            window.title = arg1;
-            return;
-        }
-
-        public function get minHeight():Number
-        {
-            return this._minHeight;
-        }
-
-        public function set minHeight(arg1:Number):void
-        {
-            if (arg1 == this._minHeight) 
+         }
+         if((isInvalid(BUTTON_FOCUS_INVALID)) && (this._btnFocusCandidateId))
+         {
+            _loc7_ = this.getAllButtons();
+            for each (_loc8_ in _loc7_)
             {
-                return;
+               if((_loc8_.data) && (_loc8_.data.hasOwnProperty("id")) && this._btnFocusCandidateId == _loc8_.data.id)
+               {
+                  if(_loc8_.enabled)
+                  {
+                     App.utils.focusHandler.setFocus(_loc8_);
+                  }
+                  break;
+               }
             }
-            this._minHeight = arg1;
-            this.updateActualSize();
-            return;
-        }
+         }
+      }
 
-        protected function updateActualSize():void
-        {
-            this.textField.height = Math.max(this.textField.textHeight, this._minHeight - this.thirdBtn.height - this.BTN_MARGIN);
-            var loc1:*=this.getBackgroundActualHeight();
-            window.setMinHeight(loc1);
-            window.setSize(actualWidth, loc1);
-            return;
-        }
+      protected function applyLayout() : void {
+         this.layoutButtons(this.getBackgroundActualHeight());
+         UIComponent(window).invalidate(Window.INVALID_SRC_VIEW);
+      }
 
-        internal function onButtonClickHdlr(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            var loc1:*=null;
-            if (arg1.eventPhase == flash.events.EventPhase.AT_TARGET) 
+      override public function get height() : Number {
+         var _loc1_:Number = this.thirdBtn.height;
+         return this.getBackgroundActualHeight() + TEXT_HEIGHT_PADDING + _loc1_;
+      }
+
+      protected function getBackgroundActualHeight() : Number {
+         return Math.max(this.getTextAreaCurrentHeight(),this.getTextAreaMinHeight());
+      }
+
+      protected function getTextAreaMinHeight() : Number {
+         var _loc1_:Number = this.thirdBtn.height;
+         return Math.ceil(this._minHeight - _loc1_ - TEXT_HEIGHT_PADDING);
+      }
+
+      protected function getTextAreaCurrentHeight() : Number {
+         return Math.ceil(this.textField.y + this.textField.textHeight + ADDITIONAL_MULTI_LINE_PADDING);
+      }
+
+      override public function set window(param1:IWindow) : void {
+         var _loc2_:Padding = null;
+         super.window = param1;
+         if(window)
+         {
+            _loc2_ = window.contentPadding as Padding;
+            _loc2_.right = WINDOW_PADDING.right;
+            _loc2_.bottom = WINDOW_PADDING.bottom;
+         }
+      }
+
+      protected function layoutButtons(param1:Number) : void {
+         var _loc2_:Vector.<Button> = this.getAllButtons();
+         var _loc3_:uint = _loc2_.length;
+         var _loc4_:* = 0;
+         while(_loc4_ < _loc3_)
+         {
+            _loc2_[_loc4_].y = param1;
+            _loc4_++;
+         }
+      }
+
+      public function as_setTitle(param1:String) : void {
+         window.title = param1;
+      }
+
+      public function as_setButtons(param1:Array) : void {
+         var _loc6_:SoundButtonEx = null;
+         var _loc7_:String = null;
+         var _loc2_:Vector.<Button> = this.getButtonsOrder();
+         var _loc3_:Number = _loc2_.length - param1.length;
+         assert(_loc3_ >= 0,"buttonNames too much");
+         var _loc4_:IFocusHandler = App.utils.focusHandler;
+         var _loc5_:Number = param1.length-1;
+         while(_loc5_ >= 0)
+         {
+            _loc6_ = _loc2_[_loc5_ + _loc3_] as SoundButtonEx;
+            _loc7_ = param1[_loc5_].id;
+            if(_loc7_ == CLOSE_BUTTON)
             {
-                loc1 = scaleform.clik.controls.Button(arg1.target).data.id;
-                assertNotNull(loc1, "Button has not unique name");
-                onButtonClickS(loc1);
+               this.dynamicWhiteButton.x = _loc6_.x;
+               this.dynamicWhiteButton.y = _loc6_.y;
+               this.dynamicWhiteButton.data = param1[_loc5_];
+               this.dynamicWhiteButton.label = param1[_loc5_].label;
+               if(param1[_loc5_].focused)
+               {
+                  _loc4_.setFocus(this.dynamicWhiteButton);
+               }
+               this.dynamicWhiteButton.visible = true;
+               this.dynamicWhiteButton.soundType = SoundTypes.CANCEL_BTN;
+               this.addListenerButtonProcessor(this.dynamicWhiteButton);
+               _loc6_.visible = false;
             }
-            return;
-        }
-
-        public function as_setButtonEnabling(arg1:String, arg2:Boolean):void
-        {
-            if (!this._btnEnableCandidate) 
+            else
             {
-                this._btnEnableCandidate = new net.wg.gui.lobby.dialogs.ItemStatusData();
+               _loc6_.data = param1[_loc5_];
+               _loc6_.label = param1[_loc5_].label;
+               if(param1[_loc5_].focused)
+               {
+                  _loc4_.setFocus(_loc6_);
+               }
+               _loc6_.visible = true;
+               if(_loc7_ == SUBMIT_BUTTON)
+               {
+                  _loc6_.soundType = SoundTypes.OK_BTN;
+               }
+               else
+               {
+                  _loc6_.soundType = SoundTypes.NORMAL_BTN;
+               }
             }
-            this._btnEnableCandidate.id = arg1;
-            this._btnEnableCandidate.status = arg2;
-            invalidate(BUTTON_ENABLE_INVALID);
+            _loc5_--;
+         }
+      }
+
+      private function reflowDialogToCtrl() : void {
+         this.processButtons(hideBtnProcessor);
+      }
+
+      protected function getButtonsOrder() : Vector.<Button> {
+         return Vector.<Button>([this.firstBtn,this.secondBtn,this.thirdBtn]);
+      }
+
+      protected function getAllButtons() : Vector.<Button> {
+         return Vector.<Button>([this.firstBtn,this.secondBtn,this.thirdBtn,this.dynamicWhiteButton]);
+      }
+
+      private function processButtons(param1:Function) : void {
+         var _loc2_:Button = null;
+         for each (_loc2_ in this.getButtonsOrder())
+         {
+            param1(_loc2_);
+         }
+      }
+
+      private function addListenerButtonProcessor(param1:Button) : void {
+         param1.addEventListener(ButtonEvent.CLICK,this.onButtonClickHdlr);
+      }
+
+      private function removeListenerButtonProcessor(param1:Button) : void {
+         param1.removeEventListener(ButtonEvent.CLICK,this.onButtonClickHdlr);
+      }
+
+      public function get minWidth() : Number {
+         return this._minWidth;
+      }
+
+      public function set minWidth(param1:Number) : void {
+         if(param1 == this._minWidth)
+         {
             return;
-        }
+         }
+         this._minWidth = param1;
+      }
 
-        public function as_setButtonFocus(arg1:String):void
-        {
-            this._btnFocusCandidateId = arg1;
-            invalidate(BUTTON_FOCUS_INVALID);
+      public function get minHeight() : Number {
+         return this._minHeight;
+      }
+
+      public function set minHeight(param1:Number) : void {
+         if(param1 == this._minHeight)
+         {
             return;
-        }
+         }
+         this._minHeight = param1;
+         this.updateActualSize();
+      }
 
-        protected override function onPopulate():void
-        {
-            window.useBottomBtns = true;
-            canDrag = false;
-            this.reflowDialogToCtrl();
-            updateStage(App.appWidth, App.appHeight);
-            this.processButtons(this.addListenerButtonProcessor);
-            super.onPopulate();
-            return;
-        }
+      protected function updateActualSize() : void {
+         this.textField.height = Math.max(this.textField.textHeight,this._minHeight - this.thirdBtn.height - this.BTN_MARGIN);
+         var _loc1_:Number = this.getBackgroundActualHeight();
+         window.setMinHeight(_loc1_);
+         window.setSize(actualWidth,_loc1_);
+      }
 
-        protected override function onDispose():void
-        {
-            this.processButtons(this.removeListenerButtonProcessor);
-            this.dynamicWhiteButton.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onButtonClickHdlr);
-            if (this.textField) 
-            {
-                this.textField.text = "";
-                if (this.textField.parent) 
-                {
-                    this.textField.parent.removeChild(this.textField);
-                }
-                this.textField = null;
-            }
-            super.onDispose();
-            return;
-        }
+      private function onButtonClickHdlr(param1:ButtonEvent) : void {
+         var _loc2_:String = null;
+         if(param1.eventPhase == EventPhase.AT_TARGET)
+         {
+            _loc2_ = Button(param1.target).data.id;
+            assertNotNull(_loc2_,"Button has not unique name");
+            onButtonClickS(_loc2_);
+         }
+      }
 
-        public function as_setText(arg1:String):void
-        {
-            this.textField.htmlText = arg1;
-            this.textField.autoSize = flash.text.TextFieldAutoSize.LEFT;
-            this.invalidateLayout();
-            return;
-        }
+      public function as_setButtonEnabling(param1:String, param2:Boolean) : void {
+         if(!this._btnEnableCandidate)
+         {
+            this._btnEnableCandidate = new ItemStatusData();
+         }
+         this._btnEnableCandidate.id = param1;
+         this._btnEnableCandidate.status = param2;
+         invalidate(BUTTON_ENABLE_INVALID);
+      }
 
-        protected function invalidateLayout():void
-        {
-            invalidate(LAYOUT_INVALID);
-            return;
-        }
+      public function as_setButtonFocus(param1:String) : void {
+         this._btnFocusCandidateId = param1;
+         invalidate(BUTTON_FOCUS_INVALID);
+      }
+   }
 
-        protected override function draw():void
-        {
-            var loc1:*=null;
-            var loc2:*=false;
-            var loc3:*=null;
-            var loc4:*=null;
-            var loc5:*=0;
-            var loc6:*=0;
-            var loc7:*=null;
-            var loc8:*=null;
-            super.draw();
-            if (isInvalid(LAYOUT_INVALID)) 
-            {
-                this.applyLayout();
-            }
-            if (isInvalid(BUTTON_ENABLE_INVALID) && this._btnEnableCandidate) 
-            {
-                loc1 = this._btnEnableCandidate.id;
-                loc2 = this._btnEnableCandidate.status;
-                loc3 = this.getAllButtons();
-                loc5 = loc3.length;
-                loc6 = 0;
-                while (loc6 < loc5) 
-                {
-                    if ((loc4 = loc3[loc6]).data && loc4.data.hasOwnProperty("id")) 
-                    {
-                        if (loc1 == loc4.data.id) 
-                        {
-                            loc4.enabled = loc2;
-                        }
-                    }
-                    ++loc6;
-                }
-            }
-            if (isInvalid(BUTTON_FOCUS_INVALID) && this._btnFocusCandidateId) 
-            {
-                loc7 = this.getAllButtons();
-                var loc9:*=0;
-                var loc10:*=loc7;
-                for each (loc8 in loc10) 
-                {
-                    if (!(loc8.data && loc8.data.hasOwnProperty("id") && this._btnFocusCandidateId == loc8.data.id)) 
-                    {
-                        continue;
-                    }
-                    if (loc8.enabled) 
-                    {
-                        App.utils.focusHandler.setFocus(loc8);
-                    }
-                    break;
-                }
-            }
-            return;
-        }
-
-        protected function applyLayout():void
-        {
-            this.layoutButtons(this.getBackgroundActualHeight());
-            scaleform.clik.core.UIComponent(window).invalidate(net.wg.gui.components.windows.Window.INVALID_SRC_VIEW);
-            return;
-        }
-
-        public override function get height():Number
-        {
-            var loc1:*=this.thirdBtn.height;
-            return this.getBackgroundActualHeight() + TEXT_HEIGHT_PADDING + loc1;
-        }
-
-        protected function getBackgroundActualHeight():Number
-        {
-            return Math.max(this.getTextAreaCurrentHeight(), this.getTextAreaMinHeight());
-        }
-
-        protected function getTextAreaMinHeight():Number
-        {
-            var loc1:*=this.thirdBtn.height;
-            return Math.ceil(this._minHeight - loc1 - TEXT_HEIGHT_PADDING);
-        }
-
-        protected function getTextAreaCurrentHeight():Number
-        {
-            return Math.ceil(this.textField.y + this.textField.textHeight + ADDITIONAL_MULTI_LINE_PADDING);
-        }
-
-        public override function set window(arg1:net.wg.infrastructure.interfaces.IWindow):void
-        {
-            var loc1:*=null;
-            super.window = arg1;
-            if (window) 
-            {
-                loc1 = window.contentPadding as scaleform.clik.utils.Padding;
-                loc1.right = WINDOW_PADDING.right;
-                loc1.bottom = WINDOW_PADDING.bottom;
-            }
-            return;
-        }
-
-        protected function layoutButtons(arg1:Number):void
-        {
-            var loc1:*=this.getAllButtons();
-            var loc2:*=loc1.length;
-            var loc3:*=0;
-            while (loc3 < loc2) 
-            {
-                loc1[loc3].y = arg1;
-                ++loc3;
-            }
-            return;
-        }
-
-        internal static function hideBtnProcessor(arg1:scaleform.clik.controls.Button):void
-        {
-            arg1.visible = false;
-            return;
-        }
-
-        public function as_setButtons(arg1:Array):void
-        {
-            var loc5:*=null;
-            var loc6:*=null;
-            var loc1:*=this.getButtonsOrder();
-            var loc2:*=loc1.length - arg1.length;
-            assert(loc2 >= 0, "buttonNames too much");
-            var loc3:*=App.utils.focusHandler;
-            var loc4:*=(arg1.length - 1);
-            while (loc4 >= 0) 
-            {
-                loc5 = loc1[loc4 + loc2] as net.wg.gui.components.controls.SoundButtonEx;
-                if ((loc6 = arg1[loc4].id) != CLOSE_BUTTON) 
-                {
-                    loc5.data = arg1[loc4];
-                    loc5.label = arg1[loc4].label;
-                    if (arg1[loc4].focused) 
-                    {
-                        loc3.setFocus(loc5);
-                    }
-                    loc5.visible = true;
-                    if (loc6 != SUBMIT_BUTTON) 
-                    {
-                        loc5.soundType = net.wg.data.constants.SoundTypes.NORMAL_BTN;
-                    }
-                    else 
-                    {
-                        loc5.soundType = net.wg.data.constants.SoundTypes.OK_BTN;
-                    }
-                }
-                else 
-                {
-                    this.dynamicWhiteButton.x = loc5.x;
-                    this.dynamicWhiteButton.y = loc5.y;
-                    this.dynamicWhiteButton.data = arg1[loc4];
-                    this.dynamicWhiteButton.label = arg1[loc4].label;
-                    if (arg1[loc4].focused) 
-                    {
-                        loc3.setFocus(this.dynamicWhiteButton);
-                    }
-                    this.dynamicWhiteButton.visible = true;
-                    this.dynamicWhiteButton.soundType = net.wg.data.constants.SoundTypes.CANCEL_BTN;
-                    this.addListenerButtonProcessor(this.dynamicWhiteButton);
-                    loc5.visible = false;
-                }
-                --loc4;
-            }
-            return;
-        }
-
-        internal function reflowDialogToCtrl():void
-        {
-            this.processButtons(hideBtnProcessor);
-            return;
-        }
-
-        protected function getButtonsOrder():__AS3__.vec.Vector.<scaleform.clik.controls.Button>
-        {
-            return Vector.<scaleform.clik.controls.Button>([this.firstBtn, this.secondBtn, this.thirdBtn]);
-        }
-
-        protected function getAllButtons():__AS3__.vec.Vector.<scaleform.clik.controls.Button>
-        {
-            return Vector.<scaleform.clik.controls.Button>([this.firstBtn, this.secondBtn, this.thirdBtn, this.dynamicWhiteButton]);
-        }
-
-        internal const MIN_WIDTH:Number=360;
-
-        internal const MIN_HEIGHT:Number=115;
-
-        public static const SUBMIT_BUTTON:String="submit";
-
-        public static const CLOSE_BUTTON:String="close";
-
-        protected const BTN_MARGIN:Number=9;
-
-        internal static const TEXT_HEIGHT_PADDING:uint=3;
-
-        internal static const WINDOW_PADDING:Object={"right":12, "bottom":15};
-
-        internal static const LAYOUT_INVALID:String="layoutInv";
-
-        internal static const BUTTON_ENABLE_INVALID:String="btnEnInv";
-
-        internal static const BUTTON_FOCUS_INVALID:String="btnFocusInv";
-
-        protected static const ADDITIONAL_MULTI_LINE_PADDING:uint=5;
-
-        public var textField:flash.text.TextField=null;
-
-        public var firstBtn:net.wg.gui.components.controls.SoundButtonEx=null;
-
-        public var secondBtn:net.wg.gui.components.controls.SoundButtonEx=null;
-
-        public var thirdBtn:net.wg.gui.components.controls.SoundButtonEx=null;
-
-        public var dynamicWhiteButton:net.wg.gui.components.controls.SoundButtonEx=null;
-
-        internal var _minWidth:Number=360;
-
-        internal var _minHeight:Number=115;
-
-        internal var _btnEnableCandidate:net.wg.gui.lobby.dialogs.ItemStatusData;
-
-        internal var _btnFocusCandidateId:String;
-    }
 }

@@ -1,17 +1,21 @@
-package net.wg.utils 
+package net.wg.utils
 {
-    import flash.display.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    import scaleform.clik.ui.*;
-    
-    public interface IFocusHandler extends net.wg.infrastructure.interfaces.entity.IDisposable
-    {
-        function set stage(arg1:flash.display.Stage):void;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import flash.display.Stage;
+   import flash.display.InteractiveObject;
+   import scaleform.clik.ui.InputDetails;
 
-        function getFocus(arg1:uint):flash.display.InteractiveObject;
 
-        function setFocus(arg1:flash.display.InteractiveObject, arg2:uint=0, arg3:Boolean=false):void;
+   public interface IFocusHandler extends IDisposable
+   {
+          
+      function set stage(param1:Stage) : void;
 
-        function input(arg1:scaleform.clik.ui.InputDetails):void;
-    }
+      function getFocus(param1:uint) : InteractiveObject;
+
+      function setFocus(param1:InteractiveObject, param2:uint=0, param3:Boolean=false) : void;
+
+      function input(param1:InputDetails) : void;
+   }
+
 }

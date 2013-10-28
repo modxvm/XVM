@@ -1,15 +1,18 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IEULAMeta extends flash.events.IEventDispatcher
-    {
-        function requestEULATextS():void;
+   import flash.events.IEventDispatcher;
 
-        function onLinkClickS(arg1:String):void;
 
-        function onApplyS():void;
+   public interface IEULAMeta extends IEventDispatcher
+   {
+          
+      function requestEULATextS() : void;
 
-        function as_setEULAText(arg1:String):void;
-    }
+      function onLinkClickS(param1:String) : void;
+
+      function onApplyS() : void;
+
+      function as_setEULAText(param1:String) : void;
+   }
+
 }

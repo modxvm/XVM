@@ -1,95 +1,84 @@
-package net.wg.gui.components.advanced 
+package net.wg.gui.components.advanced
 {
-    public class InteractiveSortingButton extends net.wg.gui.components.advanced.SortingButton
-    {
-        public function InteractiveSortingButton()
-        {
-            super();
-            return;
-        }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            _toggle = true;
-            allowDeselect = false;
-            return;
-        }
 
-        public override function set toggle(arg1:Boolean):void
-        {
-            return;
-        }
+   public class InteractiveSortingButton extends SortingButton
+   {
+          
+      public function InteractiveSortingButton() {
+         super();
+      }
 
-        public override function set sortDirection(arg1:String):void
-        {
-            if (!(sortDirection == arg1) && selected) 
+      private var _previousSelectedSorDirection:String;
+
+      override public function set toggle(param1:Boolean) : void {
+          
+      }
+
+      override public function set sortDirection(param1:String) : void {
+         if(!(sortDirection == param1) && (selected))
+         {
+            this._previousSelectedSorDirection = sortDirection;
+         }
+         super.sortDirection = param1;
+      }
+
+      override public function set selected(param1:Boolean) : void {
+         if(selected != param1)
+         {
+            if(param1 == false)
             {
-                this._previousSelectedSorDirection = sortDirection;
+               this.sortDirection = WITHOUT_SORT;
             }
-            super.sortDirection = arg1;
-            return;
-        }
-
-        protected override function draw():void
-        {
-            super.draw();
-            return;
-        }
-
-        protected override function handleRelease(arg1:uint=0):void
-        {
-            super.handleRelease(arg1);
-            return;
-        }
-
-        protected override function handleClick(arg1:uint=0):void
-        {
-            if (selected) 
+            else
             {
-                if (sortDirection != ASCENDING_SORT) 
-                {
-                    if (sortDirection == DESCENDING_SORT) 
-                    {
-                        this.sortDirection = ASCENDING_SORT;
-                    }
-                }
-                else 
-                {
-                    this.sortDirection = DESCENDING_SORT;
-                }
+               if(!(this._previousSelectedSorDirection == ASCENDING_SORT) && !(this._previousSelectedSorDirection == DESCENDING_SORT))
+               {
+                  this.sortDirection = defaultSortDirection == WITHOUT_SORT?ASCENDING_SORT:defaultSortDirection;
+               }
+               else
+               {
+                  this.sortDirection = defaultSortDirection == WITHOUT_SORT?this._previousSelectedSorDirection:defaultSortDirection;
+               }
             }
-            else 
-            {
-                super.handleClick(arg1);
-            }
-            return;
-        }
+         }
+         super.selected = param1;
+      }
 
-        public override function set selected(arg1:Boolean):void
-        {
-            if (selected != arg1) 
-            {
-                if (arg1 != false) 
-                {
-                    if (!(this._previousSelectedSorDirection == ASCENDING_SORT) && !(this._previousSelectedSorDirection == DESCENDING_SORT)) 
-                    {
-                        this.sortDirection = defaultSortDirection != WITHOUT_SORT ? defaultSortDirection : ASCENDING_SORT;
-                    }
-                    else 
-                    {
-                        this.sortDirection = defaultSortDirection != WITHOUT_SORT ? defaultSortDirection : this._previousSelectedSorDirection;
-                    }
-                }
-                else 
-                {
-                    this.sortDirection = WITHOUT_SORT;
-                }
-            }
-            super.selected = arg1;
-            return;
-        }
+      override protected function configUI() : void {
+         super.configUI();
+         _toggle = true;
+         allowDeselect = false;
+      }
 
-        internal var _previousSelectedSorDirection:String;
-    }
+      override protected function draw() : void {
+         super.draw();
+      }
+
+      override protected function handleRelease(param1:uint=0) : void {
+         super.handleRelease(param1);
+      }
+
+      override protected function handleClick(param1:uint=0) : void {
+         if(selected)
+         {
+            if(sortDirection == ASCENDING_SORT)
+            {
+               this.sortDirection = DESCENDING_SORT;
+            }
+            else
+            {
+               if(sortDirection == DESCENDING_SORT)
+               {
+                  this.sortDirection = ASCENDING_SORT;
+               }
+            }
+         }
+         else
+         {
+            super.handleClick(param1);
+         }
+      }
+   }
+
 }

@@ -1,33 +1,34 @@
-package net.wg.gui.components.tooltips.VO 
+package net.wg.gui.components.tooltips.VO
 {
-    import __AS3__.vec.*;
-    import flash.display.*;
-    import flash.text.*;
-    
-    public class ToolTipBlockVO extends Object
-    {
-        public function ToolTipBlockVO()
-        {
-            super();
-            return;
-        }
+   import flash.display.MovieClip;
+   import __AS3__.vec.Vector;
+   import flash.text.StyleSheet;
 
-        public var contener:flash.display.MovieClip=null;
 
-        public var startYPos:Number=0;
+   public class ToolTipBlockVO extends Object
+   {
+          
+      public function ToolTipBlockVO() {
+         super();
+      }
 
-        public var childrenNamePrefix:String="";
+      public var contener:MovieClip = null;
 
-        public var header:String="";
+      public var startYPos:Number = 0;
 
-        public var leftText:String="";
+      public var childrenNamePrefix:String = "";
 
-        public var leftTextColor:Number=16777215;
+      public var header:String = "";
 
-        public var rightTextList:__AS3__.vec.Vector.<net.wg.gui.components.tooltips.VO.ToolTipBlockRightListItemVO>=null;
+      public var leftText:String = "";
 
-        public var rightTextColor:Number=16777215;
+      public var leftTextColor:Number = 16777215;
 
-        public var rightTextCSS:flash.text.StyleSheet=null;
-    }
+      public var rightTextList:Vector.<ToolTipBlockRightListItemVO> = null;
+
+      public var rightTextColor:Number = 16777215;
+
+      public var rightTextCSS:StyleSheet = null;
+   }
+
 }

@@ -1,78 +1,68 @@
-package net.wg.gui.components.icons 
+package net.wg.gui.components.icons
 {
-    import flash.display.*;
-    import scaleform.clik.core.*;
-    
-    public class BattleTypeIcon extends scaleform.clik.core.UIComponent
-    {
-        public function BattleTypeIcon()
-        {
-            super();
-            stop();
-            this._allTypes = this.currentLabels;
+   import scaleform.clik.core.UIComponent;
+   import flash.display.FrameLabel;
+
+
+   public class BattleTypeIcon extends UIComponent
+   {
+          
+      public function BattleTypeIcon() {
+         super();
+         stop();
+         this._allTypes = this.currentLabels;
+      }
+
+      private var _type:String = "neutral";
+
+      private var _allTypes:Array;
+
+      private var _typeByNumber:uint = 1;
+
+      override protected function draw() : void {
+         super.draw();
+         if(currentLabel != this._type)
+         {
+            gotoAndStop(this._type);
+            this._typeByNumber = currentFrame;
+         }
+      }
+
+      public function get type() : String {
+         return this._type;
+      }
+
+      public function set type(param1:String) : void {
+         this._type = param1;
+         invalidate();
+      }
+
+      public function set typeByNumber(param1:uint) : void {
+         if(this._typeByNumber == param1)
+         {
             return;
-        }
+         }
+         this._typeByNumber = param1;
+         this.type = FrameLabel(this.currentLabels[this._typeByNumber-1]).name;
+         invalidate();
+      }
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (currentLabel != this._type) 
-            {
-                gotoAndStop(this._type);
-                this._typeByNumber = currentFrame;
-            }
-            return;
-        }
+      public function get typeByNumber() : uint {
+         return this._typeByNumber;
+      }
 
-        public function get type():String
-        {
-            return this._type;
-        }
+      override public function toString() : String {
+         return "[WG BattleTypeIcon " + name + "]";
+      }
 
-        public function set type(arg1:String):void
-        {
-            this._type = arg1;
-            invalidate();
-            return;
-        }
+      override public function dispose() : void {
+         if(this._allTypes)
+         {
+            this._allTypes.splice(0,this._allTypes.length);
+         }
+         this._allTypes = null;
+         super.dispose();
+      }
+   }
 
-        public function set typeByNumber(arg1:uint):void
-        {
-            if (this._typeByNumber == arg1) 
-            {
-                return;
-            }
-            this._typeByNumber = arg1;
-            this.type = flash.display.FrameLabel(this.currentLabels[(this._typeByNumber - 1)]).name;
-            invalidate();
-            return;
-        }
-
-        public function get typeByNumber():uint
-        {
-            return this._typeByNumber;
-        }
-
-        public override function toString():String
-        {
-            return "[WG BattleTypeIcon " + name + "]";
-        }
-
-        public override function dispose():void
-        {
-            if (this._allTypes) 
-            {
-                this._allTypes.splice(0, this._allTypes.length);
-            }
-            this._allTypes = null;
-            super.dispose();
-            return;
-        }
-
-        internal var _type:String="neutral";
-
-        internal var _allTypes:Array;
-
-        internal var _typeByNumber:uint=1;
-    }
 }

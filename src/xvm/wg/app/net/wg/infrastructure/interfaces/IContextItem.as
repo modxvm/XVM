@@ -1,15 +1,18 @@
-package net.wg.infrastructure.interfaces 
+package net.wg.infrastructure.interfaces
 {
-    import __AS3__.vec.*;
-    
-    public interface IContextItem
-    {
-        function get id():String;
+   import __AS3__.vec.Vector;
 
-        function get label():String;
 
-        function get submenu():__AS3__.vec.Vector.<net.wg.infrastructure.interfaces.IContextItem>;
+   public interface IContextItem
+   {
+          
+      function get id() : String;
 
-        function get initData():Object;
-    }
+      function get label() : String;
+
+      function get submenu() : Vector.<IContextItem>;
+
+      function get initData() : Object;
+   }
+
 }

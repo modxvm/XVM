@@ -1,66 +1,63 @@
-package net.wg.gui.components.tooltips 
+package net.wg.gui.components.tooltips
 {
-    import flash.display.*;
-    import flash.text.*;
-    import net.wg.gui.lobby.profile.components.*;
-    
-    public class ExtraModuleInfo extends net.wg.gui.lobby.profile.components.SimpleLoader
-    {
-        public function ExtraModuleInfo(arg1:flash.text.TextFormat, arg2:flash.text.StyleSheet=null)
-        {
-            super();
-            this._textField = new flash.text.TextField();
-            this._textField.autoSize = flash.text.TextFieldAutoSize.LEFT;
-            this._textField.setTextFormat(arg1);
-            if (arg2) 
-            {
-                this._textField.styleSheet = arg2;
-            }
-            addChild(this._textField);
-            return;
-        }
+   import net.wg.gui.lobby.profile.components.SimpleLoader;
+   import flash.text.TextField;
+   import flash.display.DisplayObject;
+   import flash.text.TextFormat;
+   import flash.text.StyleSheet;
+   import flash.text.TextFieldAutoSize;
 
-        public function setData(arg1:String, arg2:String):void
-        {
-            disposeLoader();
-            this._textField.htmlText = arg2;
-            this.startLoading(arg1);
-            return;
-        }
 
-        protected override function startLoading(arg1:String):void
-        {
-            super.startLoading(arg1);
-            if (loader) 
-            {
-                loader.parent.setChildIndex(loader, 0);
-            }
-            return;
-        }
+   public class ExtraModuleInfo extends SimpleLoader
+   {
+          
+      public function ExtraModuleInfo(param1:TextFormat, param2:StyleSheet=null) {
+         super();
+         this._textField = new TextField();
+         this._textField.autoSize = TextFieldAutoSize.LEFT;
+         this._textField.setTextFormat(param1);
+         if(param2)
+         {
+            this._textField.styleSheet = param2;
+         }
+         addChild(this._textField);
+      }
 
-        protected override function onLoadingComplete():void
-        {
-            super.onLoadingComplete();
-            this.layoutComponents();
-            return;
-        }
+      private var _textField:TextField;
 
-        internal function layoutComponents():void
-        {
-            var loc4:*=null;
-            var loc1:*=0;
-            var loc2:*=5;
-            var loc3:*=0;
-            while (loc3 < numChildren) 
-            {
-                (loc4 = getChildAt(loc3)).y = Math.round((height - loc4.height) / 2);
-                loc4.x = loc1;
-                loc1 = loc1 + Math.round(loc2 + loc4.width);
-                ++loc3;
-            }
-            return;
-        }
+      public function setData(param1:String, param2:String) : void {
+         disposeLoader();
+         this._textField.htmlText = param2;
+         this.startLoading(param1);
+      }
 
-        internal var _textField:flash.text.TextField;
-    }
+      override protected function startLoading(param1:String) : void {
+         super.startLoading(param1);
+         if(loader)
+         {
+            loader.parent.setChildIndex(loader,0);
+         }
+      }
+
+      override protected function onLoadingComplete() : void {
+         super.onLoadingComplete();
+         this.layoutComponents();
+      }
+
+      private function layoutComponents() : void {
+         var _loc4_:DisplayObject = null;
+         var _loc1_:uint = 0;
+         var _loc2_:uint = 5;
+         var _loc3_:* = 0;
+         while(_loc3_ < numChildren)
+         {
+            _loc4_ = getChildAt(_loc3_);
+            _loc4_.y = Math.round((height - _loc4_.height) / 2);
+            _loc4_.x = _loc1_;
+            _loc1_ = _loc1_ + Math.round(_loc2_ + _loc4_.width);
+            _loc3_++;
+         }
+      }
+   }
+
 }

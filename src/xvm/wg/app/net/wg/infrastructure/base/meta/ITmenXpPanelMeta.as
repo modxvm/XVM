@@ -1,11 +1,14 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface ITmenXpPanelMeta extends flash.events.IEventDispatcher
-    {
-        function accelerateTmenXpS(arg1:Boolean):void;
+   import flash.events.IEventDispatcher;
 
-        function as_setTankmenXpPanel(arg1:Boolean, arg2:Boolean):void;
-    }
+
+   public interface ITmenXpPanelMeta extends IEventDispatcher
+   {
+          
+      function accelerateTmenXpS(param1:Boolean) : void;
+
+      function as_setTankmenXpPanel(param1:Boolean, param2:Boolean) : void;
+   }
+
 }

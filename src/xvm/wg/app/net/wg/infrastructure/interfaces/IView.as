@@ -1,43 +1,47 @@
-package net.wg.infrastructure.interfaces 
+package net.wg.infrastructure.interfaces
 {
-    import flash.display.*;
-    import flash.events.*;
-    import scaleform.clik.interfaces.*;
-    
-    public interface IView extends net.wg.infrastructure.interfaces.IDAAPIModule, flash.events.IEventDispatcher, scaleform.clik.interfaces.IUIComponent
-    {
-        function get as_token():String;
+   import flash.events.IEventDispatcher;
+   import scaleform.clik.interfaces.IUIComponent;
+   import flash.display.Loader;
+   import flash.display.DisplayObject;
 
-        function set as_token(arg1:String):void;
 
-        function get as_alias():String;
+   public interface IView extends IDAAPIModule, IEventDispatcher, IUIComponent
+   {
+          
+      function get as_token() : String;
 
-        function set as_alias(arg1:String):void;
+      function set as_token(param1:String) : void;
 
-        function get as_name():String;
+      function get as_alias() : String;
 
-        function set as_name(arg1:String):void;
+      function set as_alias(param1:String) : void;
 
-        function get as_config():Object;
+      function get as_name() : String;
 
-        function set as_config(arg1:Object):void;
+      function set as_name(param1:String) : void;
 
-        function get loader():flash.display.Loader;
+      function get as_config() : Object;
 
-        function set loader(arg1:flash.display.Loader):void;
+      function set as_config(param1:Object) : void;
 
-        function getSubContainer():net.wg.infrastructure.interfaces.IManagedContainer;
+      function get loader() : Loader;
 
-        function playShowTween(arg1:flash.display.DisplayObject, arg2:Function=null):Boolean;
+      function set loader(param1:Loader) : void;
 
-        function playHideTween(arg1:flash.display.DisplayObject, arg2:Function=null):Boolean;
+      function getSubContainer() : IManagedContainer;
 
-        function setFocus():void;
+      function playShowTween(param1:DisplayObject, param2:Function=null) : Boolean;
 
-        function removeFocus():void;
+      function playHideTween(param1:DisplayObject, param2:Function=null) : Boolean;
 
-        function setViewSize(arg1:Number, arg2:Number):void;
+      function setFocus() : void;
 
-        function updateStage(arg1:Number, arg2:Number):void;
-    }
+      function removeFocus() : void;
+
+      function setViewSize(param1:Number, param2:Number) : void;
+
+      function updateStage(param1:Number, param2:Number) : void;
+   }
+
 }

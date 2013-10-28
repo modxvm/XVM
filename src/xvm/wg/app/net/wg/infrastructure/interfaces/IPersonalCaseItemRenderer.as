@@ -1,9 +1,13 @@
-package net.wg.infrastructure.interfaces 
+package net.wg.infrastructure.interfaces
 {
-    public interface IPersonalCaseItemRenderer
-    {
-        function set canSelected(arg1:Boolean):void;
 
-        function get canSelected():Boolean;
-    }
+
+   public interface IPersonalCaseItemRenderer
+   {
+          
+      function set canSelected(param1:Boolean) : void;
+
+      function get canSelected() : Boolean;
+   }
+
 }

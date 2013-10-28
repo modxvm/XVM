@@ -1,170 +1,160 @@
-package net.wg.gui.lobby.store.shop.base 
+package net.wg.gui.lobby.store.shop.base
 {
-    import net.wg.data.VO.*;
-    import net.wg.data.constants.*;
-    import net.wg.gui.lobby.store.*;
-    import net.wg.utils.*;
-    
-    public class ShopTableItemRenderer extends net.wg.gui.lobby.store.StoreListItemRenderer
-    {
-        public function ShopTableItemRenderer()
-        {
-            super();
-            soundId = net.wg.data.constants.SoundManagerStates.RENDERER_SHOP;
+   import net.wg.gui.lobby.store.StoreListItemRenderer;
+   import net.wg.gui.lobby.store.StoreTooltipMapVO;
+   import net.wg.data.constants.Tooltips;
+   import net.wg.data.VO.StoreTableData;
+   import net.wg.data.constants.Currencies;
+   import net.wg.data.constants.FittingTypes;
+   import net.wg.gui.lobby.store.STORE_STATUS_COLOR;
+   import net.wg.utils.ILocale;
+   import net.wg.gui.lobby.store.StoreEvent;
+   import net.wg.data.constants.SoundManagerStates;
+
+
+   public class ShopTableItemRenderer extends StoreListItemRenderer
+   {
+          
+      public function ShopTableItemRenderer() {
+         super();
+         soundId = SoundManagerStates.RENDERER_SHOP;
+      }
+
+      private var _isUseAction:Boolean = false;
+
+      override protected function getTooltipMapping() : StoreTooltipMapVO {
+         return new StoreTooltipMapVO(Tooltips.SHOP_VEHICLE,Tooltips.SHOP_SHELL,Tooltips.SHOP_MODULE);
+      }
+
+      override public function setData(param1:Object) : void {
+         super.setData(param1);
+         if((App.instance) && (param1))
+         {
+            App.utils.asserter.assert(param1  is  StoreTableData,"data must extends a StoreTableData class.");
+         }
+         invalidateData();
+      }
+
+      override protected function updateText() : void {
+          
+      }
+
+      override protected function updateTexts(param1:StoreTableData, param2:Number, param3:Number) : void {
+         var _loc4_:int = param2;
+         var _loc5_:Number = param1.tableVO.gold;
+         if(param1.currency == Currencies.CREDITS)
+         {
+            _loc4_ = param3;
+            _loc5_ = param1.tableVO.credits;
+         }
+         if(0 == _loc4_ && !(param1.requestType == FittingTypes.VEHICLE))
+         {
+            param1.disabled = " ";
+         }
+         var _loc6_:* = false;
+         if(this._isUseAction)
+         {
+            this.updateCreditPriceForAction(param3,param2,param1);
+            if(param2 > param1.tableVO.gold && param3 > param1.tableVO.credits)
+            {
+               _loc6_ = true;
+            }
+         }
+         else
+         {
+            if(_loc4_ > _loc5_)
+            {
+               _loc6_ = true;
+            }
+            this.updateCredits(param2,param1,param3,_loc6_);
+         }
+         if(errorField)
+         {
+            errorField.text = param1.disabled;
+            if(param1.statusLevel)
+            {
+               errorField.textColor = STORE_STATUS_COLOR.getColor(param1.statusLevel);
+            }
+            else
+            {
+               errorField.textColor = STORE_STATUS_COLOR.INFO;
+            }
+         }
+         enabled = !((param1.disabled) || (_loc6_));
+      }
+
+      override protected function onPricesCalculated(param1:Number, param2:Number, param3:StoreTableData) : void {
+         var _loc4_:Boolean = param1 > 0 && param2 > 0 && (param3.goldShellsForCredits) && param3.itemTypeName == FittingTypes.SHELL;
+         var _loc5_:Boolean = param1 > 0 && param2 > 0 && (param3.goldEqsForCredits) && param3.itemTypeName == FittingTypes.EQUIPMENT;
+         this._isUseAction = (_loc4_) || (_loc5_);
+      }
+
+      override protected function onLeftButtonClick() : void {
+         var _loc1_:StoreTableData = StoreTableData(data);
+         if(_loc1_.disabled)
+         {
             return;
-        }
+         }
+         var _loc2_:Boolean = _loc1_.itemTypeName == FittingTypes.SHELL && (_loc1_.goldShellsForCredits);
+         var _loc3_:Boolean = _loc1_.itemTypeName == FittingTypes.EQUIPMENT && (_loc1_.goldEqsForCredits);
+         var _loc4_:* = _loc1_.tableVO.gold >= _loc1_.gold;
+         var _loc5_:* = _loc1_.tableVO.credits >= _loc1_.credits;
+         var _loc6_:Boolean = (_loc2_) || (_loc3_)?(_loc4_) || (_loc5_):(_loc4_) && (_loc5_);
+         if(_loc6_)
+         {
+            this.buyItem();
+         }
+      }
 
-        protected override function getTooltipMapping():net.wg.gui.lobby.store.StoreTooltipMapVO
-        {
-            return new net.wg.gui.lobby.store.StoreTooltipMapVO(net.wg.data.constants.Tooltips.SHOP_VEHICLE, net.wg.data.constants.Tooltips.SHOP_SHELL, net.wg.data.constants.Tooltips.SHOP_MODULE);
-        }
-
-        public override function setData(arg1:Object):void
-        {
-            super.setData(arg1);
-            if (App.instance && arg1) 
+      protected function updateCreditPriceForAction(param1:Number, param2:Number, param3:StoreTableData) : void {
+         var _loc4_:ILocale = null;
+         if(App.instance)
+         {
+            _loc4_ = App.utils.locale;
+            if(param1 > param3.tableVO.credits)
             {
-                App.utils.asserter.assert(arg1 is net.wg.data.VO.StoreTableData, "data must extends a StoreTableData class.");
+               credits.gotoAndStop(ACTION_CREDITS_STATES.ERROR);
+               credits.price.text = _loc4_.integer(param1);
             }
-            invalidateData();
-            return;
-        }
-
-        protected override function updateText():void
-        {
-            return;
-        }
-
-        protected override function updateTexts(arg1:net.wg.data.VO.StoreTableData, arg2:Number, arg3:Number):void
-        {
-            var loc1:*=arg2;
-            var loc2:*=arg1.tableVO.gold;
-            if (arg1.currency == net.wg.data.constants.Currencies.CREDITS) 
+            else
             {
-                loc1 = arg3;
-                loc2 = arg1.tableVO.credits;
+               credits.gotoAndStop(ACTION_CREDITS_STATES.ACTION);
+               credits.price.text = _loc4_.integer(param1);
             }
-            if (0 == loc1 && !(arg1.requestType == net.wg.data.constants.FittingTypes.VEHICLE)) 
-            {
-                arg1.disabled = " ";
-            }
-            var loc3:*=false;
-            if (this._isUseAction) 
-            {
-                this.updateCreditPriceForAction(arg3, arg2, arg1);
-                if (arg2 > arg1.tableVO.gold && arg3 > arg1.tableVO.credits) 
-                {
-                    loc3 = true;
-                }
-            }
-            else 
-            {
-                if (loc1 > loc2) 
-                {
-                    loc3 = true;
-                }
-                this.updateCredits(arg2, arg1, arg3, loc3);
-            }
-            if (errorField) 
-            {
-                errorField.text = arg1.disabled;
-                if (arg1.statusLevel) 
-                {
-                    errorField.textColor = net.wg.gui.lobby.store.STORE_STATUS_COLOR.getColor(arg1.statusLevel);
-                }
-                else 
-                {
-                    errorField.textColor = net.wg.gui.lobby.store.STORE_STATUS_COLOR.INFO;
-                }
-            }
-            enabled = !(arg1.disabled || loc3);
-            return;
-        }
+         }
+      }
 
-        protected override function onPricesCalculated(arg1:Number, arg2:Number, arg3:net.wg.data.VO.StoreTableData):void
-        {
-            var loc1:*=arg1 > 0 && arg2 > 0 && arg3.goldShellsForCredits && arg3.itemTypeName == net.wg.data.constants.FittingTypes.SHELL;
-            var loc2:*=arg1 > 0 && arg2 > 0 && arg3.goldEqsForCredits && arg3.itemTypeName == net.wg.data.constants.FittingTypes.EQUIPMENT;
-            this._isUseAction = loc1 || loc2;
-            return;
-        }
+      protected function get isUseAction() : Boolean {
+         return this._isUseAction;
+      }
 
-        protected override function onLeftButtonClick():void
-        {
-            var loc1:*=net.wg.data.VO.StoreTableData(data);
-            if (loc1.disabled) 
+      private function updateCredits(param1:Number, param2:StoreTableData, param3:Number, param4:Boolean) : void {
+         var _loc5_:ILocale = null;
+         if(App.instance)
+         {
+            _loc5_ = App.utils.locale;
+            if(param4)
             {
-                return;
+               credits.gotoAndStop(param2.currency + "Error");
             }
-            var loc2:*=loc1.itemTypeName == net.wg.data.constants.FittingTypes.SHELL && loc1.goldShellsForCredits;
-            var loc3:*=loc1.itemTypeName == net.wg.data.constants.FittingTypes.EQUIPMENT && loc1.goldEqsForCredits;
-            var loc4:*=loc1.tableVO.gold >= loc1.gold;
-            var loc5:*=loc1.tableVO.credits >= loc1.credits;
-            var loc6:*;
-            if (loc6 = loc2 || loc3 ? loc4 || loc5 : loc4 && loc5) 
+            else
             {
-                this.buyItem();
+               credits.gotoAndStop(param2.currency);
             }
-            return;
-        }
-
-        protected function updateCreditPriceForAction(arg1:Number, arg2:Number, arg3:net.wg.data.VO.StoreTableData):void
-        {
-            var loc1:*=null;
-            if (App.instance) 
+            if(param2.currency == Currencies.GOLD)
             {
-                loc1 = App.utils.locale;
-                if (arg1 > arg3.tableVO.credits) 
-                {
-                    credits.gotoAndStop(net.wg.gui.lobby.store.shop.base.ACTION_CREDITS_STATES.ERROR);
-                    credits.price.text = loc1.integer(arg1);
-                }
-                else 
-                {
-                    credits.gotoAndStop(net.wg.gui.lobby.store.shop.base.ACTION_CREDITS_STATES.ACTION);
-                    credits.price.text = loc1.integer(arg1);
-                }
+               credits.price.text = _loc5_.gold(param1);
             }
-            return;
-        }
-
-        protected function get isUseAction():Boolean
-        {
-            return this._isUseAction;
-        }
-
-        internal function updateCredits(arg1:Number, arg2:net.wg.data.VO.StoreTableData, arg3:Number, arg4:Boolean):void
-        {
-            var loc1:*=null;
-            if (App.instance) 
+            else
             {
-                loc1 = App.utils.locale;
-                if (arg4) 
-                {
-                    credits.gotoAndStop(arg2.currency + "Error");
-                }
-                else 
-                {
-                    credits.gotoAndStop(arg2.currency);
-                }
-                if (arg2.currency != net.wg.data.constants.Currencies.GOLD) 
-                {
-                    credits.price.text = loc1.integer(arg3);
-                }
-                else 
-                {
-                    credits.price.text = loc1.gold(arg1);
-                }
+               credits.price.text = _loc5_.integer(param3);
             }
-            return;
-        }
+         }
+      }
 
-        internal function buyItem():void
-        {
-            dispatchEvent(new net.wg.gui.lobby.store.StoreEvent(net.wg.gui.lobby.store.StoreEvent.BUY, net.wg.data.VO.StoreTableData(data)));
-            return;
-        }
+      private function buyItem() : void {
+         dispatchEvent(new StoreEvent(StoreEvent.BUY,StoreTableData(data)));
+      }
+   }
 
-        internal var _isUseAction:Boolean=false;
-    }
 }

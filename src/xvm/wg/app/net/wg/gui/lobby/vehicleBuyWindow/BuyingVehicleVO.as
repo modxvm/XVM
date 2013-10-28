@@ -1,76 +1,72 @@
-package net.wg.gui.lobby.vehicleBuyWindow 
+package net.wg.gui.lobby.vehicleBuyWindow
 {
-    import net.wg.data.daapi.base.*;
-    
-    public class BuyingVehicleVO extends net.wg.data.daapi.base.DAAPIDataClass
-    {
-        public function BuyingVehicleVO(arg1:Object)
-        {
-            super(arg1);
-            return;
-        }
+   import net.wg.data.daapi.base.DAAPIDataClass;
 
-        public function get isPremium():Boolean
-        {
-            return this._isPremium;
-        }
 
-        public function get actualPrice():uint
-        {
-            return this._actualPrice;
-        }
+   public class BuyingVehicleVO extends DAAPIDataClass
+   {
+          
+      public function BuyingVehicleVO(param1:Object) {
+         super(param1);
+      }
 
-        public function get vehiclePrices():Array
-        {
-            return this._vehiclePrices;
-        }
+      public var name:String = "";
 
-        public function set vehiclePrices(arg1:Array):void
-        {
-            this._vehiclePrices = arg1;
-            if (this._vehiclePrices[1] == 0) 
-            {
-                this._actualPrice = this._vehiclePrices[0];
-                this._isPremium = false;
-            }
-            else 
-            {
-                this._actualPrice = this._vehiclePrices[1];
-                this._isPremium = true;
-            }
-            return;
-        }
+      public var longName:String = "";
 
-        public var name:String="";
+      public var type:String = "";
 
-        public var longName:String="";
+      public var icon:String = "";
 
-        public var type:String="";
+      public var description:String = "";
 
-        public var icon:String="";
+      public var nation:uint;
 
-        public var description:String="";
+      public var level:uint;
 
-        public var nation:uint;
+      private var _isPremium:Boolean;
 
-        public var level:uint;
+      public var isElite:Boolean;
 
-        internal var _isPremium:Boolean;
+      public var tankmenCount:uint;
 
-        public var isElite:Boolean;
+      public var studyPriceCredits:uint;
 
-        public var tankmenCount:uint;
+      public var studyPriceGold:Number;
 
-        public var studyPriceCredits:uint;
+      private var _vehiclePrices:Array;
 
-        public var studyPriceGold:Number;
+      private var _actualPrice:uint;
 
-        internal var _vehiclePrices:Array;
+      public var ammoPrice:Number;
 
-        internal var _actualPrice:uint;
+      public var slotPrice:uint;
 
-        public var ammoPrice:Number;
+      public function get isPremium() : Boolean {
+         return this._isPremium;
+      }
 
-        public var slotPrice:uint;
-    }
+      public function get actualPrice() : uint {
+         return this._actualPrice;
+      }
+
+      public function get vehiclePrices() : Array {
+         return this._vehiclePrices;
+      }
+
+      public function set vehiclePrices(param1:Array) : void {
+         this._vehiclePrices = param1;
+         if(this._vehiclePrices[1] != 0)
+         {
+            this._actualPrice = this._vehiclePrices[1];
+            this._isPremium = true;
+         }
+         else
+         {
+            this._actualPrice = this._vehiclePrices[0];
+            this._isPremium = false;
+         }
+      }
+   }
+
 }

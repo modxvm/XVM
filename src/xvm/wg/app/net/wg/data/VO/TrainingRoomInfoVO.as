@@ -1,169 +1,134 @@
-package net.wg.data.VO 
+package net.wg.data.VO
 {
-    import net.wg.data.daapi.base.*;
-    
-    public class TrainingRoomInfoVO extends net.wg.data.daapi.base.DAAPIDataClass
-    {
-        public function TrainingRoomInfoVO(arg1:Object)
-        {
-            super(arg1);
-            return;
-        }
+   import net.wg.data.daapi.base.DAAPIDataClass;
 
-        public function get creator():String
-        {
-            return this._creator;
-        }
 
-        public function set creator(arg1:String):void
-        {
-            this._creator = arg1;
-            return;
-        }
+   public class TrainingRoomInfoVO extends DAAPIDataClass
+   {
+          
+      public function TrainingRoomInfoVO(param1:Object) {
+         super(param1);
+      }
 
-        public function get arenaSubType():String
-        {
-            return this._arenaSubType;
-        }
+      private var _comment:String = "";
 
-        public function set arenaSubType(arg1:String):void
-        {
-            this._arenaSubType = arg1;
-            return;
-        }
+      private var _arenaName:String = "";
 
-        public function get arenaName():String
-        {
-            return this._arenaName;
-        }
+      private var _roundLenString:String = "";
 
-        public function set arenaName(arg1:String):void
-        {
-            this._arenaName = arg1;
-            return;
-        }
+      private var _maxPlayersCount:Number = 0;
 
-        public function get maxPlayersCount():Number
-        {
-            return this._maxPlayersCount;
-        }
+      private var _arenaSubType:String = "";
 
-        public function set maxPlayersCount(arg1:Number):void
-        {
-            this._maxPlayersCount = arg1;
-            return;
-        }
+      private var _creator:String = "";
 
-        public function get roundLenString():String
-        {
-            return this._roundLenString;
-        }
+      private var _arenaTypeID:Number = 0;
 
-        public function set roundLenString(arg1:String):void
-        {
-            this._roundLenString = arg1;
-            return;
-        }
+      private var _description:String = "";
 
-        public function get comment():String
-        {
-            return this._comment;
-        }
+      private var _title:String = "";
 
-        public function set comment(arg1:String):void
-        {
-            this._comment = arg1;
-            return;
-        }
+      private var _canChangeArenaVOIP:Boolean;
 
-        public function get title():String
-        {
-            return this._title;
-        }
+      private var _arenaVoipChannels:Number = -1;
 
-        public function set title(arg1:String):void
-        {
-            this._title = arg1;
-            return;
-        }
+      private var _isCreator:Boolean;
 
-        public function get isCreator():Boolean
-        {
-            return this._isCreator;
-        }
+      public function get title() : String {
+         return this._title;
+      }
 
-        public function set isCreator(arg1:Boolean):void
-        {
-            this._isCreator = arg1;
-            return;
-        }
+      public function set title(param1:String) : void {
+         this._title = param1;
+      }
 
-        public function get canChangeArenaVOIP():Boolean
-        {
-            return this._canChangeArenaVOIP;
-        }
+      public function get isCreator() : Boolean {
+         return this._isCreator;
+      }
 
-        public function set canChangeArenaVOIP(arg1:Boolean):void
-        {
-            this._canChangeArenaVOIP = arg1;
-            return;
-        }
+      public function set isCreator(param1:Boolean) : void {
+         this._isCreator = param1;
+      }
 
-        public function get arenaVoipChannels():Number
-        {
-            return this._arenaVoipChannels;
-        }
+      public function get canChangeArenaVOIP() : Boolean {
+         return this._canChangeArenaVOIP;
+      }
 
-        public function set arenaVoipChannels(arg1:Number):void
-        {
-            this._arenaVoipChannels = arg1;
-            return;
-        }
+      public function set canChangeArenaVOIP(param1:Boolean) : void {
+         this._canChangeArenaVOIP = param1;
+      }
 
-        public function get description():String
-        {
-            return this._description;
-        }
+      public function get arenaVoipChannels() : Number {
+         return this._arenaVoipChannels;
+      }
 
-        public function set description(arg1:String):void
-        {
-            this._description = arg1;
-            return;
-        }
+      public function set arenaVoipChannels(param1:Number) : void {
+         this._arenaVoipChannels = param1;
+      }
 
-        public function get arenaTypeID():Number
-        {
-            return this._arenaTypeID;
-        }
+      public function get description() : String {
+         return this._description;
+      }
 
-        public function set arenaTypeID(arg1:Number):void
-        {
-            this._arenaTypeID = arg1;
-            return;
-        }
+      public function set description(param1:String) : void {
+         this._description = param1;
+      }
 
-        internal var _comment:String="";
+      public function get arenaTypeID() : Number {
+         return this._arenaTypeID;
+      }
 
-        internal var _arenaName:String="";
+      public function set arenaTypeID(param1:Number) : void {
+         this._arenaTypeID = param1;
+      }
 
-        internal var _roundLenString:String="";
+      public function get creator() : String {
+         return this._creator;
+      }
 
-        internal var _maxPlayersCount:Number=0;
+      public function set creator(param1:String) : void {
+         this._creator = param1;
+      }
 
-        internal var _arenaSubType:String="";
+      public function get arenaSubType() : String {
+         return this._arenaSubType;
+      }
 
-        internal var _creator:String="";
+      public function set arenaSubType(param1:String) : void {
+         this._arenaSubType = param1;
+      }
 
-        internal var _arenaTypeID:Number=0;
+      public function get arenaName() : String {
+         return this._arenaName;
+      }
 
-        internal var _description:String="";
+      public function set arenaName(param1:String) : void {
+         this._arenaName = param1;
+      }
 
-        internal var _title:String="";
+      public function get maxPlayersCount() : Number {
+         return this._maxPlayersCount;
+      }
 
-        internal var _canChangeArenaVOIP:Boolean;
+      public function set maxPlayersCount(param1:Number) : void {
+         this._maxPlayersCount = param1;
+      }
 
-        internal var _arenaVoipChannels:Number=-1;
+      public function get roundLenString() : String {
+         return this._roundLenString;
+      }
 
-        internal var _isCreator:Boolean;
-    }
+      public function set roundLenString(param1:String) : void {
+         this._roundLenString = param1;
+      }
+
+      public function get comment() : String {
+         return this._comment;
+      }
+
+      public function set comment(param1:String) : void {
+         this._comment = param1;
+      }
+   }
+
 }

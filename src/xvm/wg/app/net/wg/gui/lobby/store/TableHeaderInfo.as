@@ -1,25 +1,24 @@
-package net.wg.gui.lobby.store 
+package net.wg.gui.lobby.store
 {
-    import flash.text.*;
-    import scaleform.clik.core.*;
-    
-    public class TableHeaderInfo extends scaleform.clik.core.UIComponent
-    {
-        public function TableHeaderInfo()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.text.TextField;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.textField.text = MENU.SHOP_TABLE_HEADER_PRICE;
-            return;
-        }
 
-        public var countField:flash.text.TextField=null;
+   public class TableHeaderInfo extends UIComponent
+   {
+          
+      public function TableHeaderInfo() {
+         super();
+      }
 
-        public var textField:flash.text.TextField=null;
-    }
+      public var countField:TextField = null;
+
+      public var textField:TextField = null;
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.textField.text = MENU.SHOP_TABLE_HEADER_PRICE;
+      }
+   }
+
 }

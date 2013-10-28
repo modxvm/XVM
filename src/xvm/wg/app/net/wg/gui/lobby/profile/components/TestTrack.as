@@ -1,24 +1,22 @@
-package net.wg.gui.lobby.profile.components 
+package net.wg.gui.lobby.profile.components
 {
-    import scaleform.clik.controls.*;
-    
-    public class TestTrack extends scaleform.clik.controls.Button
-    {
-        public function TestTrack()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.controls.Button;
 
-        public override function set visible(arg1:Boolean):void
-        {
-            super.visible = arg1;
-            return;
-        }
 
-        public override function get visible():Boolean
-        {
-            return super.visible;
-        }
-    }
+   public class TestTrack extends Button
+   {
+          
+      public function TestTrack() {
+         super();
+      }
+
+      override public function set visible(param1:Boolean) : void {
+         super.visible = param1;
+      }
+
+      override public function get visible() : Boolean {
+         return super.visible;
+      }
+   }
+
 }

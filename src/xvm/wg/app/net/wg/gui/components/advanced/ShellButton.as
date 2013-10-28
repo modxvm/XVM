@@ -1,143 +1,137 @@
-package net.wg.gui.components.advanced 
+package net.wg.gui.components.advanced
 {
-    import flash.display.*;
-    import flash.events.*;
-    import flash.text.*;
-    import net.wg.data.constants.*;
-    import net.wg.gui.components.controls.*;
-    
-    public class ShellButton extends net.wg.gui.components.controls.SoundButton
-    {
-        public function ShellButton()
-        {
-            super();
-            soundType = net.wg.data.constants.SoundTypes.FITTING_BUTTON;
-            soundId = "tankShell";
-            this.count = "";
-            return;
-        }
+   import net.wg.gui.components.controls.SoundButton;
+   import flash.text.TextField;
+   import flash.display.MovieClip;
+   import net.wg.gui.components.controls.UILoaderAlt;
+   import flash.events.MouseEvent;
+   import net.wg.data.constants.SoundTypes;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            _stateMap = {"up":["up"], "over":["over"], "down":["down"], "release":["release", "over"], "out":["out", "up"], "disabled":["disabled"], "selecting":["selecting", "over"], "kb_selecting":["kb_selecting", "up"], "kb_release":["kb_release", "out", "up"], "kb_down":["kb_down", "down"]};
-            if (hitMc != null) 
+
+   public class ShellButton extends SoundButton
+   {
+          
+      public function ShellButton() {
+         super();
+         soundType = SoundTypes.FITTING_BUTTON;
+         soundId = "tankShell";
+         this.count = "";
+      }
+
+      public var id:String;
+
+      private var _shellType:String;
+
+      private var _shellIcon:String = "";
+
+      private var _count:String;
+
+      private var _inventoryCount:String;
+
+      public var count_txt:TextField;
+
+      public var countBg:MovieClip;
+
+      public var iconLoader:UILoaderAlt;
+
+      override protected function configUI() : void {
+         super.configUI();
+         _stateMap =
             {
-                this.hitArea = hitMc;
+               "up":["up"],
+               "over":["over"],
+               "down":["down"],
+               "release":["release","over"],
+               "out":["out","up"],
+               "disabled":["disabled"],
+               "selecting":["selecting","over"],
+               "kb_selecting":["kb_selecting","up"],
+               "kb_release":["kb_release","out","up"],
+               "kb_down":["kb_down","down"]
             }
-            addEventListener(flash.events.MouseEvent.MOUSE_OVER, this.onOver);
-            addEventListener(flash.events.MouseEvent.MOUSE_OUT, this.onOut);
-            return;
-        }
+         ;
+         if(hitMc != null)
+         {
+            this.hitArea = hitMc;
+         }
+         addEventListener(MouseEvent.MOUSE_OVER,this.onOver);
+         addEventListener(MouseEvent.MOUSE_OUT,this.onOut);
+      }
 
-        public override function dispose():void
-        {
-            removeEventListener(flash.events.MouseEvent.MOUSE_OVER, this.onOver);
-            removeEventListener(flash.events.MouseEvent.MOUSE_OUT, this.onOut);
-            this.iconLoader.dispose();
-            super.dispose();
-            return;
-        }
+      override public function dispose() : void {
+         removeEventListener(MouseEvent.MOUSE_OVER,this.onOver);
+         removeEventListener(MouseEvent.MOUSE_OUT,this.onOut);
+         this.count_txt = null;
+         this.countBg = null;
+         this.iconLoader.dispose();
+         this.iconLoader = null;
+         super.dispose();
+      }
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (this.iconLoader) 
+      override protected function draw() : void {
+         super.draw();
+         if(this.iconLoader)
+         {
+            this.iconLoader.visible = !(this.shellIcon == "");
+            if(this.shellIcon != "")
             {
-                this.iconLoader.visible = !(this.shellIcon == "");
-                if (this.shellIcon != "") 
-                {
-                    this.iconLoader.source = this.shellIcon;
-                }
+               this.iconLoader.source = this.shellIcon;
             }
-            if (this.count_txt) 
-            {
-                this.count_txt.text = this._count;
-                this.countBg.visible = !(this._count == "");
-            }
-            return;
-        }
+         }
+         if(this.count_txt)
+         {
+            this.count_txt.text = this._count;
+            this.countBg.visible = !(this._count == "");
+         }
+      }
 
-        public function get shellIcon():String
-        {
-            return this._shellIcon;
-        }
+      public function get shellIcon() : String {
+         return this._shellIcon;
+      }
 
-        public function set shellIcon(arg1:String):void
-        {
-            this._shellIcon = arg1;
-            invalidate();
-            return;
-        }
+      public function set shellIcon(param1:String) : void {
+         this._shellIcon = param1;
+         invalidate();
+      }
 
-        public function get shellType():String
-        {
-            return this._shellType;
-        }
+      public function get shellType() : String {
+         return this._shellType;
+      }
 
-        public function set shellType(arg1:String):void
-        {
-            this._shellType = arg1;
-            return;
-        }
+      public function set shellType(param1:String) : void {
+         this._shellType = param1;
+      }
 
-        public function get inventoryCount():String
-        {
-            return this._inventoryCount;
-        }
+      public function get inventoryCount() : String {
+         return this._inventoryCount;
+      }
 
-        public function set inventoryCount(arg1:String):void
-        {
-            this._inventoryCount = arg1;
-            return;
-        }
+      public function set inventoryCount(param1:String) : void {
+         this._inventoryCount = param1;
+      }
 
-        public function get count():String
-        {
-            return this._count;
-        }
+      public function get count() : String {
+         return this._count;
+      }
 
-        public function set count(arg1:String):void
-        {
-            this._count = arg1;
-            return;
-        }
+      public function set count(param1:String) : void {
+         this._count = param1;
+      }
 
-        public function clear():void
-        {
-            this.id = null;
-            this.count = "";
-            this.shellIcon = "";
-            label = "";
-            return;
-        }
+      public function clear() : void {
+         this.id = null;
+         this.count = "";
+         this.shellIcon = "";
+         label = "";
+      }
 
-        internal function onOver(arg1:flash.events.MouseEvent):void
-        {
-            App.toolTipMgr.showSpecial("hangarShell", null, this.id, this.inventoryCount, this.count);
-            return;
-        }
+      private function onOver(param1:MouseEvent) : void {
+         App.toolTipMgr.showSpecial("hangarShell",null,this.id,this.inventoryCount,this.count);
+      }
 
-        public function onOut(arg1:flash.events.MouseEvent):void
-        {
-            App.toolTipMgr.hide();
-            return;
-        }
+      public function onOut(param1:MouseEvent) : void {
+         App.toolTipMgr.hide();
+      }
+   }
 
-        public var id:String;
-
-        internal var _shellType:String;
-
-        internal var _shellIcon:String="";
-
-        internal var _count:String;
-
-        internal var _inventoryCount:String;
-
-        public var count_txt:flash.text.TextField;
-
-        public var countBg:flash.display.MovieClip;
-
-        public var iconLoader:net.wg.gui.components.controls.UILoaderAlt;
-    }
 }

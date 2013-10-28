@@ -1,0 +1,53 @@
+package net.wg.gui.cyberSport.helpers
+{
+   import net.wg.infrastructure.helpers.DragDropListDelegateCtrlr;
+   import flash.display.InteractiveObject;
+   import net.wg.infrastructure.interfaces.entity.IDroppable;
+   import net.wg.infrastructure.interfaces.entity.IDropItem;
+   import net.wg.infrastructure.interfaces.IDropList;
+   import __AS3__.vec.Vector;
+
+
+   public class CSDragDropListDelegateController extends DragDropListDelegateCtrlr
+   {
+          
+      public function CSDragDropListDelegateController(param1:Vector.<InteractiveObject>, param2:Class, param3:String, param4:Function, param5:Function) {
+         var _loc6_:IDroppable = null;
+         super(param1,param2,param3);
+         for each (_loc6_ in getDelegates())
+         {
+            CSDragDropDelegate(_loc6_).setHandlers(param4,param5);
+         }
+      }
+
+      override protected function onHighlightHitAreas(param1:Boolean, param2:InteractiveObject) : void {
+         var _loc3_:IDroppable = null;
+         if(param2  is  IDropItem)
+         {
+            if(param1)
+            {
+               if(param2.alpha == 1)
+               {
+                  param2.alpha = 0.3;
+               }
+            }
+            else
+            {
+               if(param2)
+               {
+                  param2.alpha = 1;
+               }
+               for each (_loc3_ in getDelegates())
+               {
+                  IDropList(_loc3_.getHitArea()).hideHighLight();
+               }
+            }
+         }
+      }
+
+      override protected function getPairedElementsFromVector(param1:InteractiveObject, param2:Vector.<InteractiveObject>) : Vector.<InteractiveObject> {
+         return param2;
+      }
+   }
+
+}

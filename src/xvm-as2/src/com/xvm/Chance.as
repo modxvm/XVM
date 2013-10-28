@@ -2,13 +2,8 @@
  * ...
  * @author Maxim Schedriviy
  */
-import com.xvm.Config;
-import com.xvm.Defines;
-import com.xvm.GraphicsUtil;
-import com.xvm.Locale;
-import com.xvm.Logger;
-import com.xvm.StatData;
-import com.xvm.VehicleInfo;
+import com.xvm.*;
+import com.xvm.DataTypes.*;
 
 class com.xvm.Chance
 {
@@ -77,27 +72,18 @@ class com.xvm.Chance
     {
         var Ka = 0;
         var Ke = 0;
-        for (var pname in StatData.s_data)
+        for (var pname in Stat.s_data)
         {
-            var pdata = StatData.s_data[pname].stat;
-
-            var vi1 = VehicleInfo.getInfo1(pdata.icon);
-            if (!vi1) {
-                var vn = VehicleInfo.getVehicleName(pdata.icon);
-                if (vn == "ussr-Observer" || vn == "noImage")
-                    continue;
-                return { error: "[1] No data for: " + vn };
-            }
-
-            var vi2 = VehicleInfo.getInfo2(pdata.icon);
-            if (!vi2)
-                return { error: "[2] No data for: " + VehicleInfo.getVehicleName(pdata.icon) };
+            var stat:StatData = Stat.s_data[pname].stat;
+            var vdata:VehicleData = stat.v.data;
+            if (!vdata)
+                return { error: "[1] No data for: " + stat.nm };
 
             //Logger.add(pdata.vehicleState);
-            var K = chanceFunc(vi1, vi2, pdata);
+            var K = chanceFunc(vdata, stat);
 
-            Ka += (pdata.team == Defines.TEAM_ALLY) ? K : 0;
-            Ke += (pdata.team == Defines.TEAM_ENEMY) ? K : 0;
+            Ka += (stat.team == Defines.TEAM_ALLY) ? K : 0;
+            Ke += (stat.team == Defines.TEAM_ENEMY) ? K : 0;
         }
 
         //Logger.add("Ka=" + Ka + " Ke=" + Ke);
@@ -121,12 +107,12 @@ class com.xvm.Chance
     }
 
     // http://www.koreanrandom.com/forum/topic/2598-/#entry31429
-    private static function ChanceFuncG(vi1, vi2, stat): Number
+    private static function ChanceFuncG(vdata:VehicleData, stat:StatData): Number
     {
-        var Td = (vi1.tiers[0] + vi1.tiers[1]) / 2.0 - battleTier;
+        var Td = (vdata.tierLo + vdata.tierHi) / 2.0 - battleTier;
 
-        var Tmin = vi1.tiers[0];
-        var Tmax = vi1.tiers[1];
+        var Tmin = vdata.tierLo;
+        var Tmax = vdata.tierHi;
         var T = battleTier;
         var Ea = stat.xwn == null ? Config.s_config.consts.AVG_XVMSCALE : stat.xwn;
         var Ean = Ea + (Ea * (((stat.lvl || T) - T) * 0.05));
@@ -153,17 +139,17 @@ class com.xvm.Chance
         return Math.max(0, Math.min(Config.s_config.consts.MAX_EBN, Eb));
     }
 
-    private static function ChanceFuncT(vi1, vi2, stat): Number
+    private static function ChanceFuncT(vdata:VehicleData, stat): Number
     {
-        var Td = (vi1.tiers[0] + vi1.tiers[1]) / 2.0 - battleTier;
+        var Td = (vdata.tierLo + vdata.tierHi) / 2.0 - battleTier;
 
-        var Tmin = vi1.tiers[0];
-        var Tmax = vi1.tiers[1];
+        var Tmin = vdata.tierLo;
+        var Tmax = vdata.tierHi;
         var T = battleTier;
         var Bt = stat.tb || 0;
         var Et = stat.teff || 0;
         var Rt = stat.tr || 0;
-        var AvgW = vi2.avg.R ? vi2.avg.R * 100 : 49.5;
+        var AvgW = vdata.avg.R ? vdata.avg.R * 100 : 49.5;
         var Ea = stat.xwn == null ? Config.s_config.consts.AVG_XVMSCALE : stat.xwn;
         var Ean = Ea + (Ea * (((stat.lvl || T) - T) * 0.05));
         var Ra = stat.r || Config.s_config.consts.AVG_GWR;
@@ -198,15 +184,15 @@ class com.xvm.Chance
         return Math.max(0, Math.min(Config.s_config.consts.MAX_EBN, Eb));
     }
 
-    private static function ChanceFuncX1(vi1, vi2, stat): Number
+    private static function ChanceFuncX1(vdata:VehicleData, stat): Number
     {
         if (stat.alive == false)
             return 0;
 
-        var Td = (vi1.tiers[0] + vi1.tiers[1]) / 2.0 - battleTier;
+        var Td = (vdata.tierLo + vdata.tierHi) / 2.0 - battleTier;
 
-        var Tmin = vi1.tiers[0];
-        var Tmax = vi1.tiers[1];
+        var Tmin = vdata.tierLo;
+        var Tmax = vdata.tierHi;
         var T = battleTier;
         var Ea = stat.xwn == null ? Config.s_config.consts.AVG_XVMSCALE : stat.xwn;
         var Ean = Ea + (Ea * (((stat.lvl || T) - T) * 0.05));
@@ -233,20 +219,20 @@ class com.xvm.Chance
         return Math.max(0, Math.min(Config.s_config.consts.MAX_EBN, Eb));
     }
 
-    private static function ChanceFuncX2(vi1, vi2, stat): Number
+    private static function ChanceFuncX2(vdata:VehicleData, stat): Number
     {
         if (stat.alive == false)
             return 0;
 
-        var Td = (vi1.tiers[0] + vi1.tiers[1]) / 2.0 - battleTier;
+        var Td = (vdata.tierLo + vdata.tierHi) / 2.0 - battleTier;
 
-        var Tmin = vi1.tiers[0];
-        var Tmax = vi1.tiers[1];
+        var Tmin = vdata.tierLo;
+        var Tmax = vdata.tierHi;
         var T = battleTier;
         var Bt = stat.tb || 0;
         var Et = stat.teff || 0;
         var Rt = stat.tr || 0;
-        var AvgW = vi2.avg.R ? vi2.avg.R * 100 : 49.5;
+        var AvgW = vdata.avg.R ? vdata.avg.R * 100 : 49.5;
         var Ea = stat.xwn == null ? Config.s_config.consts.AVG_XVMSCALE : stat.xwn;
         var Ean = Ea + (Ea * (((stat.lvl || T) - T) * 0.05));
         var Ra = stat.r || Config.s_config.consts.AVG_GWR;
@@ -286,13 +272,13 @@ class com.xvm.Chance
     {
         var nally = 0;
         var nenemy = 0;
-        for (var pname in StatData.s_data)
+        for (var pname in Stat.s_data)
         {
-            var pdata = StatData.s_data[pname].stat;
-            if (pdata.vehicleKey == "UNKNOWN" || pdata.vehicleKey == "OBSERVER") // skip unknown tanks in Fog of War mode and observer
+            var stat:StatData = Stat.s_data[pname].stat;
+            var vdata:VehicleData = stat.v.data;
+            if (vdata == null || vdata.key == "ussr:Observer")
                 continue;
-            //Logger.addObject(pdata);
-            if (pdata.team == Defines.TEAM_ALLY) ++nally else ++nenemy;
+            if (stat.team == Defines.TEAM_ALLY) ++nally else ++nenemy;
         }
         return { ally: nally, enemy: nenemy };
     }
@@ -318,23 +304,16 @@ class com.xvm.Chance
     {
         // 1. Collect all vehicles info
         var vis: Array = [];
-        for (var pname in StatData.s_data)
+        for (var pname:String in Stat.s_data)
         {
-            var pdata = StatData.s_data[pname].stat;
-            var vi1 = VehicleInfo.getInfo1(pdata.icon);
-            if (!vi1) {
-                var vn = VehicleInfo.getVehicleName(pdata.icon);
-                if (vn == "ussr-Observer")
-                    continue;
-                return 0;
-            }
-            var vi2 = VehicleInfo.getInfo2(pdata.icon);
-            if (!vi2)
-                return 0;
+            var stat:StatData = Stat.s_data[pname].stat;
+            var vdata:VehicleData = stat.v.data;
+            if (vdata == null || vdata.key == "ussr:Observer")
+                continue;
             vis.push( {
-                level: vi2.level,
-                Tmin: vi1.tiers[0],
-                Tmax: vi1.tiers[1]
+                level: vdata.level,
+                Tmin: vdata.tierLo,
+                Tmax: vdata.tierHi
             });
         }
 

@@ -1,78 +1,64 @@
-package net.wg.gui.components.controls 
+package net.wg.gui.components.controls
 {
-    import flash.events.*;
-    import net.wg.data.constants.*;
-    import net.wg.gui.events.*;
-    import scaleform.clik.events.*;
-    
-    public class FightListItemRenderer extends net.wg.gui.components.controls.SoundListItemRenderer
-    {
-        public function FightListItemRenderer()
-        {
-            super();
-            soundType = net.wg.data.constants.SoundTypes.RNDR_NORMAL;
-            return;
-        }
+   import flash.events.MouseEvent;
+   import net.wg.gui.events.StateManagerEvent;
+   import scaleform.clik.events.ComponentEvent;
+   import net.wg.data.constants.SoundTypes;
 
-        internal function setup():void
-        {
-            this.textField.text = data.label;
-            this.enabled = !data.disabled;
-            invalidateData();
-            return;
-        }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            addEventListener(flash.events.MouseEvent.MOUSE_OVER, this.onMouseOver, false, 0, true);
-            addEventListener(flash.events.MouseEvent.MOUSE_OUT, this.onMouseOut, false, 0, true);
-            addEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.onMousePress, false, 0, true);
-            return;
-        }
+   public class FightListItemRenderer extends SoundListItemRenderer
+   {
+          
+      public function FightListItemRenderer() {
+         super();
+         soundType = SoundTypes.RNDR_NORMAL;
+      }
 
-        internal function onMouseOverHdlr(arg1:flash.events.MouseEvent):void
-        {
-            return;
-        }
+      protected function setup() : void {
+         this.textField.text = data.label;
+         this.enabled = !data.disabled;
+         invalidateData();
+      }
 
-        protected function onMouseOver(arg1:flash.events.MouseEvent):void
-        {
-            if (data.tooltip) 
-            {
-                App.toolTipMgr.showComplex(this.data.tooltip);
-            }
-            return;
-        }
+      override protected function configUI() : void {
+         super.configUI();
+         addEventListener(MouseEvent.MOUSE_OVER,this.onMouseOver,false,0,true);
+         addEventListener(MouseEvent.MOUSE_OUT,this.onMouseOut,false,0,true);
+         addEventListener(MouseEvent.MOUSE_DOWN,this.onMousePress,false,0,true);
+      }
 
-        protected function onMouseOut(arg1:flash.events.MouseEvent):void
-        {
-            App.toolTipMgr.hide();
-            return;
-        }
+      private function onMouseOverHdlr(param1:MouseEvent) : void {
+          
+      }
 
-        protected function onMousePress(arg1:flash.events.MouseEvent):void
-        {
-            App.toolTipMgr.hide();
-            return;
-        }
+      protected function onMouseOver(param1:MouseEvent) : void {
+         if(data.tooltip)
+         {
+            App.toolTipMgr.showComplex(this.data.tooltip);
+         }
+      }
 
-        public override function setData(arg1:Object):void
-        {
-            super.setData(arg1);
-            this.setup();
-            return;
-        }
+      protected function onMouseOut(param1:MouseEvent) : void {
+         App.toolTipMgr.hide();
+      }
 
-        protected override function updateAfterStateChange():void
-        {
-            if (!initialized) 
-            {
-                return;
-            }
-            this.setup();
-            dispatchEvent(new net.wg.gui.events.StateManagerEvent(scaleform.clik.events.ComponentEvent.STATE_CHANGE, state));
+      protected function onMousePress(param1:MouseEvent) : void {
+         App.toolTipMgr.hide();
+      }
+
+      override public function setData(param1:Object) : void {
+         super.setData(param1);
+         this.setup();
+      }
+
+      override protected function updateAfterStateChange() : void {
+         if(!initialized)
+         {
             return;
-        }
-    }
+         }
+         this.setup();
+         dispatchEvent(new StateManagerEvent(ComponentEvent.STATE_CHANGE,state));
+      }
+   }
+
 }

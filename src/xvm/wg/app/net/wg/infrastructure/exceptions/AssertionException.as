@@ -1,13 +1,14 @@
-package net.wg.infrastructure.exceptions 
+package net.wg.infrastructure.exceptions
 {
-    import net.wg.infrastructure.exceptions.base.*;
-    
-    public class AssertionException extends net.wg.infrastructure.exceptions.base.WGGUIException
-    {
-        public function AssertionException(arg1:*="", arg2:*=0)
-        {
-            super(arg1, arg2);
-            return;
-        }
-    }
+   import net.wg.infrastructure.exceptions.base.WGGUIException;
+
+
+   public class AssertionException extends WGGUIException
+   {
+          
+      public function AssertionException(param1:*=undefined, param2:*=undefined) {
+         super(param1,param2);
+      }
+   }
+
 }

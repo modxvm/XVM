@@ -1,79 +1,86 @@
-package net.wg.gui.lobby.questsWindow 
+package net.wg.gui.lobby.questsWindow
 {
-    import flash.display.*;
-    import net.wg.data.*;
-    import net.wg.gui.components.advanced.*;
-    import net.wg.gui.events.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import net.wg.infrastructure.interfaces.*;
-    import scaleform.clik.data.*;
-    
-    public class QuestsWindow extends net.wg.infrastructure.base.meta.impl.QuestsWindowMeta implements net.wg.infrastructure.base.meta.IQuestsWindowMeta
-    {
-        public function QuestsWindow()
-        {
-            super();
-            showWindowBg = false;
-            isCentered = true;
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.QuestsWindowMeta;
+   import net.wg.infrastructure.base.meta.IQuestsWindowMeta;
+   import net.wg.gui.components.advanced.ButtonBarEx;
+   import net.wg.gui.components.advanced.ViewStack;
+   import flash.display.Sprite;
+   import net.wg.gui.events.ViewStackEvent;
+   import scaleform.clik.data.DataProvider;
+   import net.wg.infrastructure.interfaces.IDAAPIModule;
+   import net.wg.data.Aliases;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.view_mc.addEventListener(net.wg.gui.events.ViewStackEvent.VIEW_CHANGED, this.handleView);
-            this.tabs_mc.dataProvider = new scaleform.clik.data.DataProvider([{"label":QUESTS.QUESTS_TABS_CURRENT, "linkage":"CurrentTab_UI"}, {"label":QUESTS.QUESTS_TABS_FUTURE, "linkage":"FutureTab_UI"}]);
-            this.tabs_mc.selectedIndex = 0;
-            this.tabs_mc.validateNow();
-            App.utils.focusHandler.setFocus(this.tabs_mc);
-            return;
-        }
 
-        protected override function onPopulate():void
-        {
-            super.onPopulate();
-            window.title = QUESTS.QUESTS_TITLE;
-            return;
-        }
+   public class QuestsWindow extends QuestsWindowMeta implements IQuestsWindowMeta
+   {
+          
+      public function QuestsWindow() {
+         super();
+         showWindowBg = false;
+         isCentered = true;
+      }
 
-        protected override function onDispose():void
-        {
-            this.view_mc.removeEventListener(net.wg.gui.events.ViewStackEvent.VIEW_CHANGED, this.handleView);
-            super.onDispose();
-            App.toolTipMgr.hide();
-            return;
-        }
+      public var tabs_mc:ButtonBarEx;
 
-        internal function handleView(arg1:net.wg.gui.events.ViewStackEvent):void
-        {
-            if (arg1.linkage == "CurrentTab_UI" && !this._currentTabRegistered) 
+      public var view_mc:ViewStack;
+
+      public var line:Sprite;
+
+      private var _currentTabRegistered:Boolean = false;
+
+      private var _futureTabRegistered:Boolean = false;
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.view_mc.addEventListener(ViewStackEvent.VIEW_CHANGED,this.handleView);
+         this.tabs_mc.dataProvider = new DataProvider([
             {
-                registerFlashComponentS(net.wg.infrastructure.interfaces.IDAAPIModule(arg1.view), net.wg.data.Aliases.QUESTS_CURRENT_TAB);
-                this._currentTabRegistered = true;
+               "label":QUESTS.QUESTS_TABS_CURRENT,
+               "linkage":"CurrentTab_UI"
             }
-            if (arg1.linkage == "FutureTab_UI" && !this._futureTabRegistered) 
+         ,
             {
-                registerFlashComponentS(net.wg.infrastructure.interfaces.IDAAPIModule(arg1.view), net.wg.data.Aliases.QUESTS_FUTURE_TAB);
-                this._futureTabRegistered = true;
+               "label":QUESTS.QUESTS_TABS_FUTURE,
+               "linkage":"FutureTab_UI"
             }
-            return;
-        }
+         ]);
+         this.tabs_mc.selectedIndex = 0;
+         this.tabs_mc.validateNow();
+         App.utils.focusHandler.setFocus(this.tabs_mc);
+      }
 
-        protected override function draw():void
-        {
-            super.draw();
-            return;
-        }
+      override protected function onPopulate() : void {
+         super.onPopulate();
+         window.title = QUESTS.QUESTS_TITLE;
+      }
 
-        public var tabs_mc:net.wg.gui.components.advanced.ButtonBarEx;
+      override protected function onDispose() : void {
+         this.view_mc.removeEventListener(ViewStackEvent.VIEW_CHANGED,this.handleView);
+         super.onDispose();
+         App.toolTipMgr.hide();
+      }
 
-        public var view_mc:net.wg.gui.components.advanced.ViewStack;
+      private function handleView(param1:ViewStackEvent) : void {
+         if(param1.linkage == "CurrentTab_UI" && !this._currentTabRegistered)
+         {
+            registerFlashComponentS(IDAAPIModule(param1.view),Aliases.QUESTS_CURRENT_TAB);
+            this._currentTabRegistered = true;
+         }
+         if(param1.linkage == "FutureTab_UI" && !this._futureTabRegistered)
+         {
+            registerFlashComponentS(IDAAPIModule(param1.view),Aliases.QUESTS_FUTURE_TAB);
+            this._futureTabRegistered = true;
+         }
+      }
 
-        public var line:flash.display.Sprite;
+      override protected function draw() : void {
+         super.draw();
+      }
 
-        internal var _currentTabRegistered:Boolean=false;
+      override public function setFocus() : void {
+         super.setFocus();
+         App.utils.scheduler.envokeInNextFrame(App.utils.focusHandler.setFocus,this);
+      }
+   }
 
-        internal var _futureTabRegistered:Boolean=false;
-    }
 }

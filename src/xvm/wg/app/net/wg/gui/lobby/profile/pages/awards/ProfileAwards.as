@@ -1,199 +1,186 @@
-package net.wg.gui.lobby.profile.pages.awards 
+package net.wg.gui.lobby.profile.pages.awards
 {
-    import __AS3__.vec.*;
-    import flash.events.*;
-    import net.wg.data.gui_items.dossier.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.lobby.profile.*;
-    import net.wg.gui.lobby.profile.components.*;
-    import net.wg.gui.lobby.profile.data.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import scaleform.clik.data.*;
-    import scaleform.clik.events.*;
-    
-    public class ProfileAwards extends net.wg.infrastructure.base.meta.impl.ProfileAwardsMeta implements net.wg.infrastructure.base.meta.IProfileAwardsMeta
-    {
-        public function ProfileAwards()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.ProfileAwardsMeta;
+   import net.wg.infrastructure.base.meta.IProfileAwardsMeta;
+   import net.wg.gui.lobby.profile.components.ResizableScrollPane;
+   import flash.text.TextField;
+   import net.wg.gui.components.controls.DropdownMenu;
+   import flash.events.MouseEvent;
+   import net.wg.gui.lobby.profile.pages.awards.data.ProfileAwardsInitVO;
+   import net.wg.gui.lobby.profile.pages.awards.data.AchievementFilterVO;
+   import scaleform.clik.data.DataProvider;
+   import scaleform.clik.events.ListEvent;
+   import net.wg.gui.lobby.profile.data.ProfileAchievementVO;
+   import __AS3__.vec.Vector;
+   import flash.text.TextFieldAutoSize;
+   import net.wg.gui.lobby.profile.ProfileConstants;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.startMenuX = this.dropdownMenu.x;
-            var loc1:*=this.getMainContainer();
-            net.wg.gui.lobby.profile.pages.awards.AwardsBlock(loc1.blockSpecialAwards).showProgress = false;
-            this.dropdownMenu.addEventListener(flash.events.MouseEvent.MOUSE_OVER, this.checkBoxMouseOverHandler, false, 0, true);
-            this.dropdownMenu.addEventListener(flash.events.MouseEvent.MOUSE_OUT, this.checkBoxMouseOutHandler, false, 0, true);
-            return;
-        }
 
-        internal function checkBoxMouseOverHandler(arg1:flash.events.MouseEvent):void
-        {
-            App.toolTipMgr.showComplex(PROFILE.SECTION_AWARDS_DROPDOWN_TOOLTIP);
-            return;
-        }
+   public class ProfileAwards extends ProfileAwardsMeta implements IProfileAwardsMeta
+   {
+          
+      public function ProfileAwards() {
+         super();
+      }
 
-        internal function checkBoxMouseOutHandler(arg1:flash.events.MouseEvent):void
-        {
-            App.toolTipMgr.hide();
-            return;
-        }
+      private static const INVOKE_UPD_INVALID:String = "invokeUpdInv";
 
-        protected override function onPopulate():void
-        {
-            super.onPopulate();
-            var loc1:*=[];
-            loc1.push(generateDropdownItem(PROFILE.SECTION_AWARDS_DROPDOWN_LABELS_ALL));
-            loc1.push(generateDropdownItem(PROFILE.SECTION_AWARDS_DROPDOWN_LABELS_INPROCESS));
-            loc1.push(generateDropdownItem(PROFILE.SECTION_AWARDS_DROPDOWN_LABELS_NONE));
-            this.dropdownMenu.dataProvider = new scaleform.clik.data.DataProvider(loc1);
-            this.dropdownMenu.addEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.menuIndexChangeHandler, false, 0, true);
-            this.dropdownMenu.selectedIndex = 0;
-            this.dropdownMenu.validateNow();
-            this.daapiInitialized = true;
-            invalidate(INVOKE_UPD_INVALID);
-            return;
-        }
+      private static function generateDropdownItem(param1:String) : Object {
+         return {"label":App.utils.locale.makeString(param1)};
+      }
 
-        internal function menuIndexChangeHandler(arg1:scaleform.clik.events.ListEvent):void
-        {
-            invalidate(INVOKE_UPD_INVALID);
-            return;
-        }
+      public var mainScrollPane:ResizableScrollPane;
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(INVOKE_UPD_INVALID) && this.daapiInitialized) 
+      public var txtLabel:TextField;
+
+      public var dropdownMenu:DropdownMenu;
+
+      private var daapiInitialized:Boolean;
+
+      private var startMenuX:int;
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.startMenuX = this.dropdownMenu.x;
+         var _loc1_:AwardsMainContainer = this.getMainContainer();
+         AwardsBlock(_loc1_.blockSpecialAwards).showProgress = false;
+         this.dropdownMenu.addEventListener(MouseEvent.MOUSE_OVER,this.checkBoxMouseOverHandler,false,0,true);
+         this.dropdownMenu.addEventListener(MouseEvent.MOUSE_OUT,this.checkBoxMouseOutHandler,false,0,true);
+      }
+
+      private function checkBoxMouseOverHandler(param1:MouseEvent) : void {
+         App.toolTipMgr.showComplex(PROFILE.SECTION_AWARDS_DROPDOWN_TOOLTIP);
+      }
+
+      private function checkBoxMouseOutHandler(param1:MouseEvent) : void {
+         App.toolTipMgr.hide();
+      }
+
+      override public function as_setInitData(param1:Object) : void {
+         var _loc9_:Object = null;
+         super.as_setInitData(param1);
+         var _loc2_:ProfileAwardsInitVO = new ProfileAwardsInitVO(param1);
+         this.txtLabel.text = App.utils.locale.makeString(PROFILE.PROFILE_DROPDOWN_EXISTENCE);
+         var _loc3_:AchievementFilterVO = _loc2_.achievementFilterVO;
+         var _loc4_:String = _loc3_.selectedItem;
+         var _loc5_:Array = _loc3_.dataProvider;
+         this.dropdownMenu.dataProvider = new DataProvider(_loc5_);
+         this.dropdownMenu.addEventListener(ListEvent.INDEX_CHANGE,this.menuIndexChangeHandler,false,0,true);
+         var _loc6_:* = -1;
+         var _loc7_:uint = _loc5_.length;
+         var _loc8_:* = 0;
+         while(_loc8_ < _loc7_)
+         {
+            _loc9_ = _loc5_[_loc8_];
+            if(_loc9_.key == _loc4_)
             {
-                this.updateByDossier(new net.wg.data.gui_items.dossier.AccountDossier(currentDossier ? currentDossier.id : null));
+               _loc6_ = _loc8_;
+               break;
             }
-            return;
-        }
+            _loc8_++;
+         }
+         this.dropdownMenu.selectedIndex = _loc6_;
+         this.dropdownMenu.validateNow();
+         this.daapiInitialized = true;
+         invalidate(INVOKE_UPD_INVALID);
+      }
 
-        protected override function updateByDossier(arg1:net.wg.data.gui_items.dossier.AccountDossier):void
-        {
-            var loc6:*=null;
-            var loc8:*=null;
-            var loc9:*=0;
-            var loc10:*=null;
-            super.updateByDossier(arg1);
-            var loc1:*=this.getMainContainer();
-            var loc2:*=arg1.getAllAchievements();
-            var loc3:*;
-            (loc3 = new Vector.<net.wg.gui.lobby.profile.pages.awards.AwardsBlock>()).push(loc1.blockBattleHeroes);
-            loc3.push(loc1.blockHonors);
-            loc3.push(loc1.blockEpicAwards);
-            loc3.push(loc1.blockGroupAwards);
-            loc3.push(loc1.blockCommemoratives);
-            loc3.push(loc1.blockStageAwards);
-            loc3.push(loc1.blockSpecialAwards);
-            var loc4:*=this.dropdownMenu.selectedIndex;
-            var loc5:*=loc2.length;
-            var loc7:*=0;
-            loc7 = 0;
-            while (loc7 < loc5) 
+      private function menuIndexChangeHandler(param1:ListEvent) : void {
+         setFilterS(param1.itemData.key);
+      }
+
+      override protected function applyData(param1:Object) : Object {
+         var _loc7_:AwardsBlock = null;
+         var _loc11_:ProfileAchievementVO = null;
+         var _loc12_:Array = null;
+         var _loc13_:Array = null;
+         var _loc14_:uint = 0;
+         var _loc15_:uint = 0;
+         var _loc16_:* = 0;
+         var _loc2_:AwardsMainContainer = this.getMainContainer();
+         var _loc3_:Array = param1.achievementsList;
+         var _loc4_:Array = param1.totalItemsList;
+         var _loc5_:Vector.<AwardsBlock> = new Vector.<AwardsBlock>();
+         _loc5_.push(_loc2_.blockBattleHeroes);
+         _loc5_.push(_loc2_.blockHonors);
+         _loc5_.push(_loc2_.blockEpicAwards);
+         _loc5_.push(_loc2_.blockGroupAwards);
+         _loc5_.push(_loc2_.blockCommemoratives);
+         _loc5_.push(_loc2_.blockStageAwards);
+         _loc5_.push(_loc2_.blockSpecialAwards);
+         var _loc6_:uint = _loc4_.length;
+         var _loc8_:* = 0;
+         _loc8_ = 0;
+         while(_loc8_ < _loc6_)
+         {
+            _loc7_ = _loc5_[_loc8_];
+            _loc7_.totalCount = _loc4_[_loc8_];
+            _loc8_++;
+         }
+         var _loc9_:Array = [];
+         var _loc10_:int = this.dropdownMenu.selectedIndex;
+         _loc6_ = _loc3_.length;
+         _loc8_ = 0;
+         while(_loc8_ < _loc6_)
+         {
+            _loc7_ = _loc5_[_loc8_];
+            _loc12_ = [];
+            _loc13_ = _loc3_[_loc8_];
+            _loc14_ = 0;
+            _loc15_ = _loc13_.length;
+            _loc16_ = 0;
+            while(_loc16_ < _loc15_)
             {
-                (loc6 = loc3[loc7]).totalCount = loc2[loc7].length;
-                ++loc7;
+               _loc11_ = new ProfileAchievementVO(_loc13_[_loc16_]);
+               if(_loc10_ == 0)
+               {
+                  if(_loc11_.isInDossier)
+                  {
+                     _loc14_++;
+                  }
+               }
+               _loc12_.push(_loc11_);
+               _loc16_++;
             }
-            var loc11:*=loc4;
-            switch (loc11) 
+            if(_loc10_ != 0)
             {
-                case 1:
-                {
-                    loc2 = arg1.getAchievements(true);
-                    break;
-                }
-                case 2:
-                {
-                    loc2 = arg1.getAchievements(false);
-                    break;
-                }
+               _loc14_ = _loc15_;
             }
-            loc7 = 0;
-            while (loc7 < loc5) 
-            {
-                loc6 = loc3[loc7];
-                loc8 = loc2[loc7];
-                if (loc4 != 0) 
-                {
-                    loc6.currentCount = loc8.length;
-                }
-                else 
-                {
-                    loc9 = 0;
-                    loc11 = 0;
-                    var loc12:*=loc8;
-                    for each (loc10 in loc12) 
-                    {
-                        if (!loc10.isInDossier) 
-                        {
-                            continue;
-                        }
-                        ++loc9;
-                    }
-                    loc6.currentCount = loc9;
-                }
-                ++loc7;
-            }
-            net.wg.gui.lobby.profile.pages.awards.StageAwardsBlock(loc1.blockStageAwards).battlesCount = arg1.getBattlesCount();
-            loc1.data = loc2;
-            return;
-        }
+            _loc7_.currentCount = _loc14_;
+            _loc9_.push(_loc12_);
+            _loc8_++;
+         }
+         _loc2_.data = _loc9_;
+         return param1;
+      }
 
-        protected override function applyResizing():void
-        {
-            var loc1:*=Math.round(currentDimension.x / 2 - centerOffset);
-            this.dropdownMenu.x = this.startMenuX + loc1;
-            var loc2:*=Math.min(net.wg.gui.lobby.profile.ProfileConstants.MIN_APP_WIDTH, currentDimension.x);
-            this.mainScrollPane.target.x = loc1 + (loc2 - this.mainScrollPane.target.width >> 1) + 6;
-            this.mainScrollPane.setSize(currentDimension.x, currentDimension.y);
-            return;
-        }
+      override protected function applyResizing() : void {
+         var _loc1_:Number = Math.round(currentDimension.x / 2 - centerOffset);
+         this.dropdownMenu.x = this.startMenuX + _loc1_;
+         this.txtLabel.autoSize = TextFieldAutoSize.LEFT;
+         this.txtLabel.x = this.dropdownMenu.x - this.txtLabel.width - 5;
+         var _loc2_:Number = Math.min(ProfileConstants.MIN_APP_WIDTH,currentDimension.x);
+         this.mainScrollPane.target.x = _loc1_ + (_loc2_ - this.mainScrollPane.target.width >> 1) + 6;
+         this.mainScrollPane.setSize(currentDimension.x,currentDimension.y);
+      }
 
-        protected function getMainContainer():net.wg.gui.lobby.profile.pages.awards.AwardsMainContainer
-        {
-            return net.wg.gui.lobby.profile.pages.awards.AwardsMainContainer(this.mainScrollPane.target);
-        }
+      protected function getMainContainer() : AwardsMainContainer {
+         return AwardsMainContainer(this.mainScrollPane.target);
+      }
 
-        public function setBattlesHeroesData(arg1:Array):void
-        {
-            this.getMainContainer().blockBattleHeroes.dataProvider = arg1;
-            return;
-        }
+      public function setBattlesHeroesData(param1:Array) : void {
+         this.getMainContainer().blockBattleHeroes.dataProvider = param1;
+      }
 
-        public function setHonorsData(arg1:String, arg2:Array):void
-        {
-            this.getMainContainer().blockHonors.dataProvider = new scaleform.clik.data.DataProvider(arg2);
-            return;
-        }
+      public function setHonorsData(param1:String, param2:Array) : void {
+         this.getMainContainer().blockHonors.dataProvider = new DataProvider(param2);
+      }
 
-        protected override function onDispose():void
-        {
-            this.dropdownMenu.removeEventListener(flash.events.MouseEvent.MOUSE_OVER, this.checkBoxMouseOverHandler);
-            this.dropdownMenu.removeEventListener(flash.events.MouseEvent.MOUSE_OUT, this.checkBoxMouseOutHandler);
-            super.onDispose();
-            return;
-        }
+      override protected function onDispose() : void {
+         this.dropdownMenu.removeEventListener(MouseEvent.MOUSE_OVER,this.checkBoxMouseOverHandler);
+         this.dropdownMenu.removeEventListener(MouseEvent.MOUSE_OUT,this.checkBoxMouseOutHandler);
+         super.onDispose();
+      }
+   }
 
-        internal static function generateDropdownItem(arg1:String):Object
-        {
-            return {"label":App.utils.locale.makeString(arg1)};
-        }
-
-        internal static const INVOKE_UPD_INVALID:String="invokeUpdInv";
-
-        public var mainScrollPane:net.wg.gui.lobby.profile.components.ResizableScrollPane;
-
-        public var dropdownMenu:net.wg.gui.components.controls.DropdownMenu;
-
-        internal var daapiInitialized:Boolean;
-
-        internal var startMenuX:int;
-    }
 }

@@ -1,81 +1,63 @@
-package scaleform.clik.controls 
+package scaleform.clik.controls
 {
-    import scaleform.clik.data.*;
-    import scaleform.clik.interfaces.*;
-    
-    public class ListItemRenderer extends scaleform.clik.controls.Button implements scaleform.clik.interfaces.IListItemRenderer
-    {
-        public function ListItemRenderer()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.interfaces.IListItemRenderer;
+   import scaleform.clik.data.ListData;
 
-        public override function get focusable():Boolean
-        {
-            return _focusable;
-        }
 
-        public override function set focusable(arg1:Boolean):void
-        {
-            return;
-        }
+   public class ListItemRenderer extends Button implements IListItemRenderer
+   {
+          
+      public function ListItemRenderer() {
+         super();
+      }
 
-        public function get index():uint
-        {
-            return this._index;
-        }
+      protected var _index:uint = 0;
 
-        public function set index(arg1:uint):void
-        {
-            this._index = arg1;
-            return;
-        }
+      protected var _selectable:Boolean = true;
 
-        public function get selectable():Boolean
-        {
-            return this._selectable;
-        }
+      override public function get focusable() : Boolean {
+         return _focusable;
+      }
 
-        public function set selectable(arg1:Boolean):void
-        {
-            this._selectable = arg1;
-            return;
-        }
+      override public function set focusable(param1:Boolean) : void {
+          
+      }
 
-        public function setListData(arg1:scaleform.clik.data.ListData):void
-        {
-            this.index = arg1.index;
-            selected = arg1.selected;
-            label = arg1.label || "";
-            return;
-        }
+      public function get index() : uint {
+         return this._index;
+      }
 
-        public function setData(arg1:Object):void
-        {
-            this.data = arg1;
-            return;
-        }
+      public function set index(param1:uint) : void {
+         this._index = param1;
+      }
 
-        public override function toString():String
-        {
-            return "[CLIK ListItemRenderer " + this.index + ", " + name + "]";
-        }
+      public function get selectable() : Boolean {
+         return this._selectable;
+      }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            focusTarget = owner;
-            var loc1:*;
-            mouseChildren = loc1 = false;
-            tabChildren = loc1 = loc1;
-            tabEnabled = loc1 = loc1;
-            _focusable = loc1;
-            return;
-        }
+      public function set selectable(param1:Boolean) : void {
+         this._selectable = param1;
+      }
 
-        protected var _index:uint=0;
+      public function setListData(param1:ListData) : void {
+         this.index = param1.index;
+         selected = param1.selected;
+         label = (param1.label) || "";
+      }
 
-        protected var _selectable:Boolean=true;
-    }
+      public function setData(param1:Object) : void {
+         this.data = param1;
+      }
+
+      override public function toString() : String {
+         return "[CLIK ListItemRenderer " + this.index + ", " + name + "]";
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         focusTarget = owner;
+         _focusable = tabEnabled = tabChildren = mouseChildren = false;
+      }
+   }
+
 }

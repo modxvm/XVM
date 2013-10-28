@@ -1,23 +1,23 @@
-package net.wg.gui.events 
+package net.wg.gui.events
 {
-    import flash.events.*;
-    
-    public class TimelineEvent extends flash.events.Event
-    {
-        public function TimelineEvent(arg1:String, arg2:Boolean=false, arg3:Boolean=false, arg4:Boolean=false)
-        {
-            super(arg1, arg3, arg4);
-            this.isShow = arg2;
-            return;
-        }
+   import flash.events.Event;
 
-        public override function clone():flash.events.Event
-        {
-            return new net.wg.gui.events.TimelineEvent(type, this.isShow, bubbles, cancelable);
-        }
 
-        public static const TWEEN_COMPLETE:String="tweenComplete";
+   public class TimelineEvent extends Event
+   {
+          
+      public function TimelineEvent(param1:String, param2:Boolean=false, param3:Boolean=false, param4:Boolean=false) {
+         super(param1,param3,param4);
+         this.isShow = param2;
+      }
 
-        public var isShow:Boolean=false;
-    }
+      public static const TWEEN_COMPLETE:String = "tweenComplete";
+
+      public var isShow:Boolean = false;
+
+      override public function clone() : Event {
+         return new TimelineEvent(type,this.isShow,bubbles,cancelable);
+      }
+   }
+
 }

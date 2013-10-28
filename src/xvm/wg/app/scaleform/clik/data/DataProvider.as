@@ -1,114 +1,98 @@
-package scaleform.clik.data 
+package scaleform.clik.data
 {
-    import flash.events.*;
-    import scaleform.clik.interfaces.*;
-    
-    public dynamic class DataProvider extends Array implements scaleform.clik.interfaces.IDataProvider, flash.events.IEventDispatcher
-    {
-        public function DataProvider(arg1:Array=null)
-        {
-            super();
-            this.dispatcher = new flash.events.EventDispatcher(this);
-            this.parseSource(arg1);
+   import scaleform.clik.interfaces.IDataProvider;
+   import flash.events.IEventDispatcher;
+   import flash.events.EventDispatcher;
+   import flash.events.Event;
+
+
+   public dynamic class DataProvider extends Array implements IDataProvider, IEventDispatcher
+   {
+          
+      public function DataProvider(param1:Array=null) {
+         super();
+         this.dispatcher = new EventDispatcher(this);
+         this.parseSource(param1);
+      }
+
+      protected var dispatcher:EventDispatcher;
+
+      public function indexOf(param1:Object, param2:Function=null) : int {
+         var _loc3_:int = super.indexOf(param1);
+         if(param2 != null)
+         {
+            param2(_loc3_);
+         }
+         return _loc3_;
+      }
+
+      public function requestItemAt(param1:uint, param2:Function=null) : Object {
+         var _loc3_:Object = this[param1];
+         if(param2 != null)
+         {
+            param2(_loc3_);
+         }
+         return _loc3_;
+      }
+
+      public function requestItemRange(param1:int, param2:int, param3:Function=null) : Array {
+         var _loc4_:Array = this.slice(param1,param2 + 1);
+         if(param3 != null)
+         {
+            param3(_loc4_);
+         }
+         return _loc4_;
+      }
+
+      public function cleanUp() : void {
+         this.splice(0,length);
+      }
+
+      public function invalidate(param1:uint=0) : void {
+         this.dispatcher.dispatchEvent(new Event(Event.CHANGE));
+      }
+
+      public function setSource(param1:Array) : void {
+         this.parseSource(param1);
+      }
+
+      public function toString() : String {
+         return "[CLIK DataProvider " + this.join(",") + "]";
+      }
+
+      protected function parseSource(param1:Array) : void {
+         if(param1 == null)
+         {
             return;
-        }
+         }
+         var _loc2_:uint = param1.length;
+         var _loc3_:uint = 0;
+         while(_loc3_ < _loc2_)
+         {
+            this[_loc3_] = param1[_loc3_];
+            _loc3_++;
+         }
+      }
 
-        public function indexOf(arg1:Object, arg2:Function=null):int
-        {
-            var loc1:*=super.indexOf(arg1);
-            if (arg2 != null) 
-            {
-                arg2(loc1);
-            }
-            return loc1;
-        }
+      public function addEventListener(param1:String, param2:Function, param3:Boolean=false, param4:int=0, param5:Boolean=false) : void {
+         this.dispatcher.addEventListener(param1,param2,param3,param4,param5);
+      }
 
-        public function requestItemAt(arg1:uint, arg2:Function=null):Object
-        {
-            var loc1:*=this[arg1];
-            if (arg2 != null) 
-            {
-                arg2(loc1);
-            }
-            return loc1;
-        }
+      public function removeEventListener(param1:String, param2:Function, param3:Boolean=false) : void {
+         this.dispatcher.removeEventListener(param1,param2,param3);
+      }
 
-        public function requestItemRange(arg1:int, arg2:int, arg3:Function=null):Array
-        {
-            var loc1:*=this.slice(arg1, arg2 + 1);
-            if (arg3 != null) 
-            {
-                arg3(loc1);
-            }
-            return loc1;
-        }
+      public function dispatchEvent(param1:Event) : Boolean {
+         return this.dispatcher.dispatchEvent(param1);
+      }
 
-        public function cleanUp():void
-        {
-            this.splice(0, length);
-            return;
-        }
+      public function hasEventListener(param1:String) : Boolean {
+         return this.dispatcher.hasEventListener(param1);
+      }
 
-        public function invalidate(arg1:uint=0):void
-        {
-            this.dispatcher.dispatchEvent(new flash.events.Event(flash.events.Event.CHANGE));
-            return;
-        }
+      public function willTrigger(param1:String) : Boolean {
+         return this.dispatcher.willTrigger(param1);
+      }
+   }
 
-        public function setSource(arg1:Array):void
-        {
-            this.parseSource(arg1);
-            return;
-        }
-
-        public function toString():String
-        {
-            return "[CLIK DataProvider " + this.join(",") + "]";
-        }
-
-        protected function parseSource(arg1:Array):void
-        {
-            if (arg1 == null) 
-            {
-                return;
-            }
-            var loc1:*=arg1.length;
-            var loc2:*=0;
-            while (loc2 < loc1) 
-            {
-                this[loc2] = arg1[loc2];
-                ++loc2;
-            }
-            return;
-        }
-
-        public function addEventListener(arg1:String, arg2:Function, arg3:Boolean=false, arg4:int=0, arg5:Boolean=false):void
-        {
-            this.dispatcher.addEventListener(arg1, arg2, arg3, arg4, arg5);
-            return;
-        }
-
-        public function removeEventListener(arg1:String, arg2:Function, arg3:Boolean=false):void
-        {
-            this.dispatcher.removeEventListener(arg1, arg2, arg3);
-            return;
-        }
-
-        public function dispatchEvent(arg1:flash.events.Event):Boolean
-        {
-            return this.dispatcher.dispatchEvent(arg1);
-        }
-
-        public function hasEventListener(arg1:String):Boolean
-        {
-            return this.dispatcher.hasEventListener(arg1);
-        }
-
-        public function willTrigger(arg1:String):Boolean
-        {
-            return this.dispatcher.willTrigger(arg1);
-        }
-
-        protected var dispatcher:flash.events.EventDispatcher;
-    }
 }

@@ -1,39 +1,34 @@
-package net.wg.gui.lobby.questsWindow.data 
+package net.wg.gui.lobby.questsWindow.data
 {
-    import net.wg.data.daapi.base.*;
-    
-    public class DescriptionVO extends net.wg.data.daapi.base.DAAPIDataClass
-    {
-        public function DescriptionVO(arg1:Object)
-        {
-            super(arg1);
-            return;
-        }
+   import net.wg.data.daapi.base.DAAPIDataClass;
 
-        public function get title():String
-        {
-            return this._title;
-        }
 
-        public function set title(arg1:String):void
-        {
-            this._title = arg1;
-            return;
-        }
+   public class DescriptionVO extends DAAPIDataClass
+   {
+          
+      public function DescriptionVO(param1:Object) {
+         super(param1);
+      }
 
-        public function get descr():String
-        {
-            return this._descr;
-        }
+      private var _title:String = "";
 
-        public function set descr(arg1:String):void
-        {
-            this._descr = arg1;
-            return;
-        }
+      private var _descr:String = "";
 
-        internal var _title:String="";
+      public function get title() : String {
+         return this._title;
+      }
 
-        internal var _descr:String="";
-    }
+      public function set title(param1:String) : void {
+         this._title = param1;
+      }
+
+      public function get descr() : String {
+         return this._descr;
+      }
+
+      public function set descr(param1:String) : void {
+         this._descr = param1;
+      }
+   }
+
 }

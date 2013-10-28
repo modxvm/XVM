@@ -1,229 +1,222 @@
-package net.wg.gui.lobby.questsWindow 
+package net.wg.gui.lobby.questsWindow
 {
-    import flash.display.*;
-    import flash.events.*;
-    import flash.text.*;
-    import net.wg.data.constants.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.events.*;
-    import net.wg.gui.lobby.questsWindow.data.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.core.*;
-    import scaleform.clik.events.*;
-    
-    public class SubtaskComponent extends scaleform.clik.core.UIComponent
-    {
-        public function SubtaskComponent()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.text.TextField;
+   import net.wg.gui.components.controls.SoundButton;
+   import flash.display.MovieClip;
+   import net.wg.gui.lobby.questsWindow.data.SubtaskVO;
+   import scaleform.clik.events.ButtonEvent;
+   import flash.events.MouseEvent;
+   import scaleform.clik.constants.InvalidationType;
+   import flash.events.Event;
+   import net.wg.data.constants.QuestsStates;
+   import net.wg.gui.events.QuestEvent;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.statusMC.visible = false;
+
+   public class SubtaskComponent extends UIComponent
+   {
+          
+      public function SubtaskComponent() {
+         super();
+      }
+
+      private static const BOTTOM_PADDING:int = 20;
+
+      private static const LINKBTN_PADDING:int = 10;
+
+      public var typeTF:TextField;
+
+      public var taskTF:TextField;
+
+      public var linkBtn:SoundButton;
+
+      public var statusMC:MovieClip;
+
+      public var counter:MovieClip;
+
+      public var progressIndicator:ProgressQuestIndicator;
+
+      public var lineMC:MovieClip;
+
+      private var _data:SubtaskVO = null;
+
+      public var disableBtnHitArea:MovieClip;
+
+      private var _statusTooltip:String = "";
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.statusMC.visible = false;
+         this.progressIndicator.visible = false;
+         this.linkBtn.visible = true;
+         this.linkBtn.focusable = false;
+         this.typeTF.mouseEnabled = false;
+         this.taskTF.mouseEnabled = false;
+         this.disableBtnHitArea.visible = false;
+         this.linkBtn.addEventListener(ButtonEvent.CLICK,this.linkBtnHandler);
+         this.linkBtn.addEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
+         this.linkBtn.addEventListener(MouseEvent.ROLL_OVER,this.showLinkBtnTooltip);
+         this.disableBtnHitArea.addEventListener(ButtonEvent.CLICK,this.hideTooltip);
+         this.disableBtnHitArea.addEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
+         this.disableBtnHitArea.addEventListener(MouseEvent.ROLL_OVER,this.showDisableLinkBtnTooltip);
+         this.counter.addEventListener(MouseEvent.CLICK,this.hideTooltip);
+         this.counter.addEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
+         this.counter.addEventListener(MouseEvent.ROLL_OVER,this.showCounterTooltip);
+         this.statusMC.addEventListener(MouseEvent.CLICK,this.hideTooltip);
+         this.statusMC.addEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
+         this.statusMC.addEventListener(MouseEvent.ROLL_OVER,this.showStatusTooltip);
+      }
+
+      private function showStatusTooltip(param1:MouseEvent) : void {
+         App.toolTipMgr.show(this._statusTooltip);
+      }
+
+      private function hideTooltip(param1:MouseEvent) : void {
+         App.toolTipMgr.hide();
+      }
+
+      private function showLinkBtnTooltip(param1:MouseEvent) : void {
+         App.toolTipMgr.show(TOOLTIPS.QUESTS_LINKBTN_TASK);
+      }
+
+      public function setData(param1:Object) : void {
+         this.data = param1?new SubtaskVO(param1):null;
+         invalidateData();
+      }
+
+      public function disableLinkBtn(param1:Boolean) : void {
+         this.linkBtn.enabled = param1;
+         this.disableBtnHitArea.visible = !param1;
+      }
+
+      override public function dispose() : void {
+         this.linkBtn.removeEventListener(ButtonEvent.CLICK,this.linkBtnHandler);
+         this.linkBtn.removeEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
+         this.linkBtn.removeEventListener(MouseEvent.ROLL_OVER,this.showLinkBtnTooltip);
+         this.disableBtnHitArea.removeEventListener(ButtonEvent.CLICK,this.hideTooltip);
+         this.disableBtnHitArea.removeEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
+         this.disableBtnHitArea.removeEventListener(MouseEvent.ROLL_OVER,this.showDisableLinkBtnTooltip);
+         this.counter.removeEventListener(MouseEvent.CLICK,this.hideTooltip);
+         this.counter.removeEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
+         this.counter.removeEventListener(MouseEvent.ROLL_OVER,this.showCounterTooltip);
+         this.statusMC.removeEventListener(MouseEvent.CLICK,this.hideTooltip);
+         this.statusMC.removeEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
+         this.statusMC.removeEventListener(MouseEvent.ROLL_OVER,this.showStatusTooltip);
+         this.typeTF = null;
+         this.taskTF = null;
+         this.linkBtn.dispose();
+         this.linkBtn = null;
+         this.statusMC = null;
+         this.lineMC = null;
+         this.progressIndicator.dispose();
+         this.progressIndicator = null;
+         this._data = null;
+         super.dispose();
+      }
+
+      private function showCounterTooltip(param1:MouseEvent) : void {
+         App.toolTipMgr.show(TOOLTIPS.QUESTS_COUNTER_LABEL);
+      }
+
+      override protected function draw() : void {
+         var _loc1_:* = NaN;
+         super.draw();
+         if(isInvalid(InvalidationType.DATA))
+         {
+            if(this.data)
+            {
+               this.visible = true;
+               this.typeTF.text = this.data.title;
+               this.taskTF.text = this.data.questInfo.description;
+               this.disableBtnHitArea.y = this.linkBtn.y = (this.taskTF.text?this.taskTF.textHeight + this.taskTF.y - this.linkBtn.height:this.taskTF.y) + 2;
+               this.disableBtnHitArea.x = this.linkBtn.x = this.taskTF.text?this.taskTF.x + this.taskTF.getLineMetrics(this.taskTF.numLines-1).width + LINKBTN_PADDING:this.taskTF.x;
+               this.linkBtn.validateNow();
+               this.checkStatus();
+               this.checkCounter();
+               this.checkProgressBar();
+               this.lineMC.y = this.linkBtn.y + this.linkBtn.height + BOTTOM_PADDING;
+               _loc1_ = Math.round(this.lineMC.y + this.lineMC.height);
+               setSize(this.width,_loc1_);
+               dispatchEvent(new Event(Event.RESIZE));
+            }
+            else
+            {
+               this.visible = false;
+            }
+         }
+      }
+
+      private function checkProgressBar() : void {
+         if((this.data.questInfo.progrBarType) && !this.data.questInfo.status)
+         {
+            this.progressIndicator.visible = true;
+            this.progressIndicator.setValues(this.data.questInfo.progrBarType,this.data.questInfo.currentProgrVal,this.data.questInfo.maxProgrVal);
+            this.progressIndicator.setTooltip(this.data.questInfo.progrTooltip);
+            this.progressIndicator.validateNow();
+         }
+         else
+         {
             this.progressIndicator.visible = false;
-            this.linkBtn.visible = true;
-            this.linkBtn.focusable = false;
-            this.typeTF.mouseEnabled = false;
-            this.taskTF.mouseEnabled = false;
-            this.linkBtn.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.linkBtnHandler);
-            this.linkBtn.addEventListener(flash.events.MouseEvent.ROLL_OUT, this.hideTooltip);
-            this.linkBtn.addEventListener(flash.events.MouseEvent.ROLL_OVER, this.showLinkBtnTooltip);
-            this.counter.addEventListener(flash.events.MouseEvent.CLICK, this.hideTooltip);
-            this.counter.addEventListener(flash.events.MouseEvent.ROLL_OUT, this.hideTooltip);
-            this.counter.addEventListener(flash.events.MouseEvent.ROLL_OVER, this.showCounterTooltip);
-            this.statusMC.addEventListener(flash.events.MouseEvent.CLICK, this.hideTooltip);
-            this.statusMC.addEventListener(flash.events.MouseEvent.ROLL_OUT, this.hideTooltip);
-            this.statusMC.addEventListener(flash.events.MouseEvent.ROLL_OVER, this.showStatusTooltip);
-            return;
-        }
+         }
+      }
 
-        internal function showStatusTooltip(arg1:flash.events.MouseEvent):void
-        {
-            App.toolTipMgr.show(this._statusTooltip);
-            return;
-        }
+      private function checkCounter() : void {
+         if(this.data.questInfo.tasksCount >= 0 && !this.data.questInfo.status)
+         {
+            this.counter.visible = true;
+            this.counter.textField.text = this.data.questInfo.tasksCount.toString();
+         }
+         else
+         {
+            this.counter.visible = false;
+         }
+      }
 
-        internal function hideTooltip(arg1:flash.events.MouseEvent):void
-        {
-            App.toolTipMgr.hide();
-            return;
-        }
-
-        internal function showLinkBtnTooltip(arg1:flash.events.MouseEvent):void
-        {
-            App.toolTipMgr.show(TOOLTIPS.QUESTS_LINKBTN_TASK);
-            return;
-        }
-
-        public function setData(arg1:Object):void
-        {
-            this.data = arg1 ? new net.wg.gui.lobby.questsWindow.data.SubtaskVO(arg1) : null;
-            invalidateData();
-            return;
-        }
-
-        public override function dispose():void
-        {
-            this.linkBtn.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.linkBtnHandler);
-            this.linkBtn.removeEventListener(flash.events.MouseEvent.ROLL_OUT, this.hideTooltip);
-            this.linkBtn.removeEventListener(flash.events.MouseEvent.ROLL_OVER, this.showLinkBtnTooltip);
-            this.counter.removeEventListener(flash.events.MouseEvent.CLICK, this.hideTooltip);
-            this.counter.removeEventListener(flash.events.MouseEvent.ROLL_OUT, this.hideTooltip);
-            this.counter.removeEventListener(flash.events.MouseEvent.ROLL_OVER, this.showCounterTooltip);
-            this.statusMC.removeEventListener(flash.events.MouseEvent.CLICK, this.hideTooltip);
-            this.statusMC.removeEventListener(flash.events.MouseEvent.ROLL_OUT, this.hideTooltip);
-            this.statusMC.removeEventListener(flash.events.MouseEvent.ROLL_OVER, this.showStatusTooltip);
-            this.typeTF = null;
-            this.taskTF = null;
-            this.linkBtn.dispose();
-            this.linkBtn = null;
-            this.statusMC = null;
-            this.lineMC = null;
-            this.progressIndicator.dispose();
-            this.progressIndicator = null;
-            this._data = null;
-            super.dispose();
-            return;
-        }
-
-        internal function showCounterTooltip(arg1:flash.events.MouseEvent):void
-        {
-            App.toolTipMgr.show(TOOLTIPS.QUESTS_COUNTER_LABEL);
-            return;
-        }
-
-        protected override function draw():void
-        {
-            var loc1:*=NaN;
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+      private function checkStatus() : void {
+         this.taskTF.textColor = 6644049;
+         if(this.data.questInfo.status == QuestsStates.NOT_AVAILABLE)
+         {
+            this.statusMC.visible = true;
+            this.statusMC.gotoAndStop(QuestsStates.NOT_AVAILABLE);
+            this.statusMC.textField.text = QUESTS.QUESTS_STATUS_NOTAVAILABLE;
+            TextField(this.statusMC.textField).textColor = 6381142;
+            this._statusTooltip = TOOLTIPS.QUESTS_STATUS_NOTREADY;
+         }
+         else
+         {
+            if(this.data.questInfo.status == QuestsStates.DONE)
             {
-                if (this.data) 
-                {
-                    this.visible = true;
-                    this.typeTF.text = this.data.title;
-                    this.taskTF.text = this.data.questInfo.description;
-                    this.linkBtn.y = (this.taskTF.text ? this.taskTF.textHeight + this.taskTF.y - this.linkBtn.height : this.taskTF.y) + 2;
-                    this.linkBtn.x = this.taskTF.text ? this.taskTF.x + this.taskTF.getLineMetrics((this.taskTF.numLines - 1)).width + LINKBTN_PADDING : this.taskTF.x;
-                    this.linkBtn.validateNow();
-                    this.checkStatus();
-                    this.checkCounter();
-                    this.checkProgressBar();
-                    this.lineMC.y = this.linkBtn.y + this.linkBtn.height + BOTTOM_PADDING;
-                    loc1 = Math.round(this.lineMC.y + this.lineMC.height);
-                    setSize(this.width, loc1);
-                    dispatchEvent(new flash.events.Event(flash.events.Event.RESIZE));
-                }
-                else 
-                {
-                    this.visible = false;
-                }
+               this.statusMC.visible = true;
+               this.statusMC.gotoAndStop(QuestsStates.DONE);
+               this.statusMC.textField.text = QUESTS.QUESTS_STATUS_DONE;
+               TextField(this.statusMC.textField).textColor = 7785801;
+               this._statusTooltip = TOOLTIPS.QUESTS_STATUS_DONE;
             }
-            return;
-        }
-
-        internal function checkProgressBar():void
-        {
-            if (this.data.questInfo.progrBarType) 
+            else
             {
-                this.progressIndicator.visible = true;
-                this.progressIndicator.setValues(this.data.questInfo.progrBarType, this.data.questInfo.currentProgrVal, this.data.questInfo.maxProgrVal);
-                this.progressIndicator.setTooltip(this.data.questInfo.progrTooltip);
-                this.progressIndicator.validateNow();
+               this.statusMC.visible = false;
+               this.taskTF.textColor = 12104084;
+               this._statusTooltip = "";
             }
-            else 
-            {
-                this.progressIndicator.visible = false;
-            }
-            return;
-        }
+         }
+      }
 
-        internal function checkCounter():void
-        {
-            if (this.data.questInfo.tasksCount >= 0) 
-            {
-                this.counter.visible = true;
-                this.counter.textField.text = this.data.questInfo.tasksCount.toString();
-            }
-            else 
-            {
-                this.counter.visible = false;
-            }
-            return;
-        }
+      public function get data() : SubtaskVO {
+         return this._data;
+      }
 
-        internal function checkStatus():void
-        {
-            this.taskTF.textColor = 6644049;
-            if (this.data.questInfo.status != net.wg.data.constants.QuestsStates.NOT_AVAILABLE) 
-            {
-                if (this.data.questInfo.status != net.wg.data.constants.QuestsStates.DONE) 
-                {
-                    this.statusMC.visible = false;
-                    this.taskTF.textColor = 12104084;
-                    this._statusTooltip = "";
-                }
-                else 
-                {
-                    this.statusMC.visible = true;
-                    this.statusMC.gotoAndStop(net.wg.data.constants.QuestsStates.DONE);
-                    this.statusMC.textField.text = QUESTS.QUESTS_STATUS_DONE;
-                    flash.text.TextField(this.statusMC.textField).textColor = 7785801;
-                    this._statusTooltip = TOOLTIPS.QUESTS_STATUS_DONE;
-                }
-            }
-            else 
-            {
-                this.statusMC.visible = true;
-                this.statusMC.gotoAndStop(net.wg.data.constants.QuestsStates.NOT_AVAILABLE);
-                this.statusMC.textField.text = QUESTS.QUESTS_STATUS_NOTAVAILABLE;
-                flash.text.TextField(this.statusMC.textField).textColor = 6381142;
-                this._statusTooltip = TOOLTIPS.QUESTS_STATUS_NOTREADY;
-            }
-            return;
-        }
+      public function set data(param1:SubtaskVO) : void {
+         this._data = param1;
+      }
 
-        public function get data():net.wg.gui.lobby.questsWindow.data.SubtaskVO
-        {
-            return this._data;
-        }
+      private function linkBtnHandler(param1:ButtonEvent) : void {
+         App.toolTipMgr.hide();
+         dispatchEvent(new QuestEvent(QuestEvent.SELECT_QUEST,this.data.questInfo.questID));
+      }
 
-        public function set data(arg1:net.wg.gui.lobby.questsWindow.data.SubtaskVO):void
-        {
-            this._data = arg1;
-            return;
-        }
+      private function showDisableLinkBtnTooltip(param1:MouseEvent) : void {
+         App.toolTipMgr.show(TOOLTIPS.QUESTS_DISABLELINKBTN_TASK);
+      }
+   }
 
-        internal function linkBtnHandler(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            App.toolTipMgr.hide();
-            dispatchEvent(new net.wg.gui.events.QuestEvent(net.wg.gui.events.QuestEvent.SELECT_QUEST, this.data.questInfo.questID));
-            return;
-        }
-
-        internal static const BOTTOM_PADDING:int=20;
-
-        internal static const LINKBTN_PADDING:int=10;
-
-        public var typeTF:flash.text.TextField;
-
-        public var taskTF:flash.text.TextField;
-
-        public var linkBtn:net.wg.gui.components.controls.SoundButton;
-
-        public var statusMC:flash.display.MovieClip;
-
-        public var counter:flash.display.MovieClip;
-
-        public var progressIndicator:net.wg.gui.lobby.questsWindow.ProgressQuestIndicator;
-
-        public var lineMC:flash.display.MovieClip;
-
-        internal var _data:net.wg.gui.lobby.questsWindow.data.SubtaskVO=null;
-
-        internal var _statusTooltip:String="";
-    }
 }

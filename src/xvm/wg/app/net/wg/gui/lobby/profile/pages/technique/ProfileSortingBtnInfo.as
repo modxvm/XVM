@@ -1,15 +1,16 @@
-package net.wg.gui.lobby.profile.pages.technique 
+package net.wg.gui.lobby.profile.pages.technique
 {
-    import net.wg.gui.components.advanced.*;
-    
-    public class ProfileSortingBtnInfo extends net.wg.gui.components.advanced.SortingButtonInfo
-    {
-        public function ProfileSortingBtnInfo()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.components.advanced.SortingButtonInfo;
 
-        public var showSeparator:Boolean=true;
-    }
+
+   public class ProfileSortingBtnInfo extends SortingButtonInfo
+   {
+          
+      public function ProfileSortingBtnInfo() {
+         super();
+      }
+
+      public var showSeparator:Boolean = true;
+   }
+
 }

@@ -1,61 +1,43 @@
-package net.wg.gui.lobby.profile.pages 
+package net.wg.gui.lobby.profile.pages
 {
-    import net.wg.gui.components.controls.achievements.*;
-    import net.wg.gui.lobby.profile.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    
-    public class ProfileAchievementsSection extends net.wg.infrastructure.base.meta.impl.ProfileAchievementSectionMeta implements net.wg.infrastructure.base.meta.IProfileAchievementSectionMeta
-    {
-        public function ProfileAchievementsSection()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.ProfileAchievementSectionMeta;
+   import net.wg.infrastructure.base.meta.IProfileAchievementSectionMeta;
+   import net.wg.gui.components.controls.achievements.AchievementEvent;
+   import net.wg.gui.lobby.profile.ProfileInvalidationTypes;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            addEventListener(net.wg.gui.components.controls.achievements.AchievementEvent.REQUEST_RARE_ACHIEVEMENT, this.requestRareAchievementHandler, false, 0, true);
-            return;
-        }
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(net.wg.gui.lobby.profile.ProfileInvalidationTypes.ACHIEVEMENT_REQUEST_INVALID) && this.isRareAchievementRequested) 
-            {
-                this.isRareAchievementRequested = false;
-                requestDataS(currentDossier ? currentDossier.id : null);
-            }
-            if (isInvalid(net.wg.gui.lobby.profile.ProfileInvalidationTypes.ACHIEVEMENT_RESPONSE_INVALID) && currentDossier) 
-            {
-                updateByDossier(currentDossier);
-            }
-            return;
-        }
+   public class ProfileAchievementsSection extends ProfileAchievementSectionMeta implements IProfileAchievementSectionMeta
+   {
+          
+      public function ProfileAchievementsSection() {
+         super();
+      }
 
-        public override function as_update(arg1:Object):void
-        {
-            super.as_update(arg1);
-            invalidate(net.wg.gui.lobby.profile.ProfileInvalidationTypes.ACHIEVEMENT_RESPONSE_INVALID);
-            return;
-        }
+      private var isRareAchievementRequested:Boolean;
 
-        internal function requestRareAchievementHandler(arg1:net.wg.gui.components.controls.achievements.AchievementEvent):void
-        {
-            this.isRareAchievementRequested = true;
-            invalidate(net.wg.gui.lobby.profile.ProfileInvalidationTypes.ACHIEVEMENT_REQUEST_INVALID);
-            return;
-        }
+      override protected function configUI() : void {
+         super.configUI();
+         addEventListener(AchievementEvent.REQUEST_RARE_ACHIEVEMENT,this.requestRareAchievementHandler,false,0,true);
+      }
 
-        protected override function onDispose():void
-        {
-            removeEventListener(net.wg.gui.components.controls.achievements.AchievementEvent.REQUEST_RARE_ACHIEVEMENT, this.requestRareAchievementHandler);
-            super.onDispose();
-            return;
-        }
+      override protected function draw() : void {
+         super.draw();
+         if((isInvalid(ProfileInvalidationTypes.ACHIEVEMENT_REQUEST_INVALID)) && (this.isRareAchievementRequested))
+         {
+            this.isRareAchievementRequested = false;
+            requestDataS({});
+         }
+      }
 
-        internal var isRareAchievementRequested:Boolean;
-    }
+      private function requestRareAchievementHandler(param1:AchievementEvent) : void {
+         this.isRareAchievementRequested = true;
+         invalidate(ProfileInvalidationTypes.ACHIEVEMENT_REQUEST_INVALID);
+      }
+
+      override protected function onDispose() : void {
+         removeEventListener(AchievementEvent.REQUEST_RARE_ACHIEVEMENT,this.requestRareAchievementHandler);
+         super.onDispose();
+      }
+   }
+
 }

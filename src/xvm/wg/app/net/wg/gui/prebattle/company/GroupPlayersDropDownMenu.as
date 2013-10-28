@@ -1,68 +1,56 @@
-package net.wg.gui.prebattle.company 
+package net.wg.gui.prebattle.company
 {
-    import flash.events.*;
-    import net.wg.gui.components.controls.*;
-    
-    public class GroupPlayersDropDownMenu extends net.wg.gui.components.controls.DropdownMenu
-    {
-        public function GroupPlayersDropDownMenu()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.components.controls.DropdownMenu;
+   import flash.events.MouseEvent;
 
-        public function set prbID(arg1:int):void
-        {
-            this._prbID = arg1;
-            return;
-        }
 
-        public override function dispose():void
-        {
-            super.dispose();
-            if (_dropdownRef) 
-            {
-                _dropdownRef.removeEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.onClickDropDownMenu, false);
-            }
-            return;
-        }
+   public class GroupPlayersDropDownMenu extends DropdownMenu
+   {
+          
+      public function GroupPlayersDropDownMenu() {
+         super();
+      }
 
-        protected override function showDropdown():void
-        {
-            super.showDropdown();
-            _dropdownRef.buttonMode = true;
-            _dropdownRef.mouseEnabled = true;
-            _dropdownRef.addEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.onClickDropDownMenu, false, 1110, true);
-            return;
-        }
+      private var _prbID:int;
 
-        internal function onClickDropDownMenu(arg1:flash.events.MouseEvent):void
-        {
-            var loc1:*=new net.wg.gui.prebattle.company.CompanyEvent(net.wg.gui.prebattle.company.CompanyEvent.DROP_LIST_CLICK, true);
-            loc1.prbID = this._prbID;
-            dispatchEvent(loc1);
-            return;
-        }
+      public function set prbID(param1:int) : void {
+         this._prbID = param1;
+      }
 
-        public override function open():void
-        {
-            selected = true;
-            this.showDropdown();
-            return;
-        }
+      override public function dispose() : void {
+         super.dispose();
+         if(_dropdownRef)
+         {
+            _dropdownRef.removeEventListener(MouseEvent.MOUSE_DOWN,this.onClickDropDownMenu,false);
+         }
+      }
 
-        protected override function changeFocus():void
-        {
-            return;
-        }
+      override protected function showDropdown() : void {
+         super.showDropdown();
+         _dropdownRef.buttonMode = true;
+         _dropdownRef.mouseEnabled = true;
+         _dropdownRef.addEventListener(MouseEvent.MOUSE_DOWN,this.onClickDropDownMenu,false,1110,true);
+      }
 
-        public override function close():void
-        {
-            selected = false;
-            hideDropdown();
-            return;
-        }
+      private function onClickDropDownMenu(param1:MouseEvent) : void {
+         var _loc2_:CompanyEvent = new CompanyEvent(CompanyEvent.DROP_LIST_CLICK,true);
+         _loc2_.prbID = this._prbID;
+         dispatchEvent(_loc2_);
+      }
 
-        internal var _prbID:int;
-    }
+      override public function open() : void {
+         selected = true;
+         this.showDropdown();
+      }
+
+      override protected function changeFocus() : void {
+          
+      }
+
+      override public function close() : void {
+         selected = false;
+         hideDropdown();
+      }
+   }
+
 }

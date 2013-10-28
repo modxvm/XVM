@@ -1,49 +1,63 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface ILobbyHeaderMeta extends flash.events.IEventDispatcher
-    {
-        function menuItemClickS(arg1:String):void;
+   import flash.events.IEventDispatcher;
+   import flash.events.Event;
 
-        function showLobbyMenuS():void;
 
-        function showExchangeWindowS(arg1:Object):void;
+   public interface ILobbyHeaderMeta extends IEventDispatcher
+   {
+          
+      function menuItemClickS(param1:String) : void;
 
-        function showExchangeXPWindowS(arg1:Object):void;
+      function showLobbyMenuS() : void;
 
-        function showPremiumDialogS(arg1:flash.events.Event):void;
+      function showExchangeWindowS(param1:Object) : void;
 
-        function onPaymentS():void;
+      function showExchangeXPWindowS(param1:Object) : void;
 
-        function as_setScreen(arg1:String):void;
+      function showPremiumDialogS(param1:Event) : void;
 
-        function as_creditsResponse(arg1:String):void;
+      function onPaymentS() : void;
 
-        function as_goldResponse(arg1:String):void;
+      function getServersS() : Array;
 
-        function as_setFreeXP(arg1:String):void;
+      function reloginS(param1:int) : void;
 
-        function as_nameResponse(arg1:String, arg2:Boolean, arg3:Boolean):void;
+      function as_setScreen(param1:String) : void;
 
-        function as_setClanEmblem(arg1:String):void;
+      function as_setPeripheryChanging(param1:Boolean) : void;
 
-        function as_setProfileType(arg1:String):void;
+      function as_creditsResponse(param1:String) : void;
 
-        function as_setPremiumParams(arg1:String, arg2:String, arg3:Boolean):void;
+      function as_goldResponse(param1:String) : void;
 
-        function as_setServerStats(arg1:Object):void;
+      function as_setWalletStatus(param1:Object) : void;
 
-        function as_setServerInfo(arg1:String, arg2:String):void;
+      function as_disableRoamingDD(param1:Boolean) : void;
 
-        function as_premiumResponse(arg1:Boolean):void;
+      function as_setFreeXP(param1:String) : void;
 
-        function as_setTankName(arg1:String):void;
+      function as_nameResponse(param1:String, param2:Boolean, param3:Boolean) : void;
 
-        function as_setTankType(arg1:String):void;
+      function as_setClanEmblem(param1:String) : void;
 
-        function as_setTankElite(arg1:Boolean):void;
+      function as_setProfileType(param1:String) : void;
 
-        function as_doDisableNavigation():void;
-    }
+      function as_setPremiumParams(param1:String, param2:String, param3:Boolean) : void;
+
+      function as_setServerStats(param1:Object) : void;
+
+      function as_setServerInfo(param1:String, param2:String) : void;
+
+      function as_premiumResponse(param1:Boolean) : void;
+
+      function as_setTankName(param1:String) : void;
+
+      function as_setTankType(param1:String) : void;
+
+      function as_setTankElite(param1:Boolean) : void;
+
+      function as_doDisableNavigation() : void;
+   }
+
 }

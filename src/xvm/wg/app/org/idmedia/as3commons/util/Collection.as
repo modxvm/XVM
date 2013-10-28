@@ -1,25 +1,29 @@
-package org.idmedia.as3commons.util 
+package org.idmedia.as3commons.util
 {
-    public interface Collection
-    {
-        function add(arg1:*):Boolean;
 
-        function clear():void;
 
-        function contains(arg1:*):Boolean;
+   public interface Collection
+   {
+          
+      function add(param1:*) : Boolean;
 
-        function containsAll(arg1:org.idmedia.as3commons.util.Collection):Boolean;
+      function clear() : void;
 
-        function addAll(arg1:org.idmedia.as3commons.util.Collection):Boolean;
+      function contains(param1:*) : Boolean;
 
-        function isEmpty():Boolean;
+      function containsAll(param1:Collection) : Boolean;
 
-        function iterator():org.idmedia.as3commons.util.Iterator;
+      function addAll(param1:Collection) : Boolean;
 
-        function remove(arg1:*=null):Boolean;
+      function isEmpty() : Boolean;
 
-        function size():int;
+      function iterator() : Iterator;
 
-        function toArray():Array;
-    }
+      function remove(param1:*=null) : Boolean;
+
+      function size() : int;
+
+      function toArray() : Array;
+   }
+
 }

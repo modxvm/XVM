@@ -1,187 +1,162 @@
-package net.wg.gui.lobby.customization 
+package net.wg.gui.lobby.customization
 {
-    import flash.events.*;
-    import flash.text.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.lobby.customization.data.*;
-    import net.wg.infrastructure.interfaces.*;
-    import scaleform.clik.controls.*;
-    import scaleform.clik.core.*;
-    import scaleform.clik.events.*;
-    
-    public class BaseTimedCustomizationGroupView extends scaleform.clik.core.UIComponent implements net.wg.infrastructure.interfaces.IViewStackContent
-    {
-        public function BaseTimedCustomizationGroupView()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import net.wg.infrastructure.interfaces.IViewStackContent;
+   import flash.text.TextField;
+   import net.wg.gui.components.controls.TileList;
+   import net.wg.gui.components.controls.ScrollingListAutoScroll;
+   import net.wg.gui.lobby.customization.data.DAAPIItemsDataProvider;
+   import net.wg.gui.lobby.customization.data.RentalPackageDAAPIDataProvider;
+   import scaleform.clik.events.ListEvent;
+   import flash.events.Event;
 
-        public function update(arg1:Object):void
-        {
-            DebugUtils.LOG_DEBUG("BaseTimedCustomizationGroupView.update", arg1);
-            return;
-        }
 
-        public override function dispose():void
-        {
-            super.dispose();
-            this.clearData();
-            return;
-        }
+   public class BaseTimedCustomizationGroupView extends UIComponent implements IViewStackContent
+   {
+          
+      public function BaseTimedCustomizationGroupView() {
+         super();
+      }
 
-        public function invalidateListData(arg1:Boolean=false):void
-        {
-            if (this.list.initialized && !arg1) 
+      public var timeSectionLabel:TextField = null;
+
+      public var list:TileList = null;
+
+      public var rentalPackageList:ScrollingListAutoScroll = null;
+
+      public var itemsDP:DAAPIItemsDataProvider = null;
+
+      public var rentalPackageDP:RentalPackageDAAPIDataProvider = null;
+
+      public var timeLabel:String = null;
+
+      private var _selectedItemIdx:int = -1;
+
+      private var _selectedPriceIdx:int = -1;
+
+      public function update(param1:Object) : void {
+         DebugUtils.LOG_DEBUG("BaseTimedCustomizationGroupView.update",param1);
+      }
+
+      override public function dispose() : void {
+         super.dispose();
+         this.clearData();
+      }
+
+      public function invalidateListData(param1:Boolean=false) : void {
+         if((this.list.initialized) && !param1)
+         {
+            this.list.scrollPosition = 0;
+         }
+         this.itemsDP.invalidateRemote(param1);
+      }
+
+      public function setListSelectedIndex(param1:String, param2:Object) : void {
+         if(initialized)
+         {
+            this.selectedItemIdx = this.selectedGroupName == param1 && (param2)?param2.index:-1;
+            if((this.selectedItemIdx > -1) && (param2) && (param2.hasOwnProperty("priceIndex")))
             {
-                this.list.scrollPosition = 0;
+               this.rentalPackageList.selectedIndex = param2.priceIndex;
             }
-            this.itemsDP.invalidateRemote(arg1);
-            return;
-        }
+            this.list.selectedIndex = this.selectedItemIdx;
+         }
+      }
 
-        public function setListSelectedIndex(arg1:String, arg2:Object):void
-        {
-            if (initialized) 
+      public function get selectedGroupName() : String {
+         return this.itemsDP.groupName;
+      }
+
+      public function set selectedGroupName(param1:String) : void {
+         this.itemsDP.groupName = param1;
+      }
+
+      public function get selectedItemIdx() : int {
+         return this._selectedItemIdx;
+      }
+
+      public function set selectedItemIdx(param1:int) : void {
+         this._selectedItemIdx = param1;
+      }
+
+      public function get selectedPriceIdx() : int {
+         return this._selectedPriceIdx;
+      }
+
+      public function set selectedPriceIdx(param1:int) : void {
+         this._selectedPriceIdx = param1;
+      }
+
+      public function initData() : void {
+         if(this.rentalPackageList != null)
+         {
+            this.rentalPackageList.labelField = "userString";
+            this.rentalPackageList.addEventListener(ListEvent.INDEX_CHANGE,this.handlePeriodDaysItemChange);
+            this.rentalPackageList.dataProvider = this.rentalPackageDP;
+            this.rentalPackageList.selectedIndex = this.rentalPackageDP.getSelectedPackageIndex();
+         }
+         if(this.list != null)
+         {
+            this.list.dataProvider = this.itemsDP;
+            this.list.selectedIndex = this.selectedItemIdx;
+            this.list.addEventListener(ListEvent.INDEX_CHANGE,this.handleItemChange);
+         }
+         if(this.timeSectionLabel != null)
+         {
+            this.timeSectionLabel.text = this.timeLabel;
+         }
+         this.itemsDP.addEventListener(Event.CHANGE,this.handleItemDataChanged);
+      }
+
+      public function clearData() : void {
+         this.selectedItemIdx = -1;
+         this.selectedPriceIdx = -1;
+         if(this.list)
+         {
+            this.list.dataProvider = null;
+            this.list.removeEventListener(ListEvent.INDEX_CHANGE,this.handleItemChange);
+         }
+         if(this.rentalPackageList)
+         {
+            this.rentalPackageList.dataProvider = null;
+            this.rentalPackageList.removeEventListener(ListEvent.INDEX_CHANGE,this.handlePeriodDaysItemChange);
+         }
+         if(this.itemsDP)
+         {
+            this.itemsDP.removeEventListener(Event.CHANGE,this.handleItemDataChanged);
+         }
+         this.itemsDP = null;
+         this.rentalPackageDP = null;
+      }
+
+      protected function handleItemDataChanged(param1:Event=null) : void {
+         var _loc2_:Object = null;
+         var _loc3_:CustomizationEvent = null;
+         if(this.selectedItemIdx > -1)
+         {
+            _loc2_ = this.itemsDP.requestItemAt(this.selectedItemIdx);
+            if((_loc2_) && (_loc2_.id) && this.selectedPriceIdx > -1)
             {
-                this.selectedItemIdx = this.selectedGroupName == arg1 && arg2 ? arg2.index : -1;
-                if (this.selectedItemIdx > -1 && arg2 && arg2.hasOwnProperty("priceIndex")) 
-                {
-                    this.rentalPackageList.selectedIndex = arg2.priceIndex;
-                }
-                this.list.selectedIndex = this.selectedItemIdx;
+               _loc3_ = new CustomizationEvent(CustomizationEvent.SELECT_NEW);
+               _loc3_.data = _loc2_;
+               _loc3_.index = this.selectedItemIdx;
+               dispatchEvent(_loc3_);
             }
-            return;
-        }
+         }
+      }
 
-        public function get selectedGroupName():String
-        {
-            return this.itemsDP.groupName;
-        }
+      private function handlePeriodDaysItemChange(param1:ListEvent) : void {
+         this.selectedPriceIdx = param1.index;
+         if(param1.index > -1)
+         {
+            this.rentalPackageDP.setSelectedPackageIndex(param1.index);
+         }
+      }
 
-        public function set selectedGroupName(arg1:String):void
-        {
-            this.itemsDP.groupName = arg1;
-            return;
-        }
+      private function handleItemChange(param1:ListEvent) : void {
+         this.selectedItemIdx = param1.index;
+         this.handleItemDataChanged();
+      }
+   }
 
-        public function get selectedItemIdx():int
-        {
-            return this._selectedItemIdx;
-        }
-
-        public function set selectedItemIdx(arg1:int):void
-        {
-            this._selectedItemIdx = arg1;
-            return;
-        }
-
-        public function get selectedPriceIdx():int
-        {
-            return this._selectedPriceIdx;
-        }
-
-        public function set selectedPriceIdx(arg1:int):void
-        {
-            this._selectedPriceIdx = arg1;
-            return;
-        }
-
-        public function initData():void
-        {
-            if (this.rentalPackageList != null) 
-            {
-                this.rentalPackageList.labelField = "userString";
-                this.rentalPackageList.addEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.handlePeriodDaysItemChange);
-                this.rentalPackageList.dataProvider = this.rentalPackageDP;
-                this.rentalPackageList.selectedIndex = this.rentalPackageDP.getSelectedPackageIndex();
-            }
-            if (this.list != null) 
-            {
-                this.list.dataProvider = this.itemsDP;
-                this.list.selectedIndex = this.selectedItemIdx;
-                this.list.addEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.handleItemChange);
-            }
-            if (this.timeSectionLabel != null) 
-            {
-                this.timeSectionLabel.text = this.timeLabel;
-            }
-            this.itemsDP.addEventListener(flash.events.Event.CHANGE, this.handleItemDataChanged);
-            return;
-        }
-
-        public function clearData():void
-        {
-            this.selectedItemIdx = -1;
-            this.selectedPriceIdx = -1;
-            if (this.list) 
-            {
-                this.list.dataProvider = null;
-                this.list.removeEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.handleItemChange);
-            }
-            if (this.rentalPackageList) 
-            {
-                this.rentalPackageList.dataProvider = null;
-                this.rentalPackageList.removeEventListener(scaleform.clik.events.ListEvent.INDEX_CHANGE, this.handlePeriodDaysItemChange);
-            }
-            if (this.itemsDP) 
-            {
-                this.itemsDP.removeEventListener(flash.events.Event.CHANGE, this.handleItemDataChanged);
-            }
-            this.itemsDP = null;
-            this.rentalPackageDP = null;
-            return;
-        }
-
-        protected function handleItemDataChanged(arg1:flash.events.Event=null):void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            if (this.selectedItemIdx > -1) 
-            {
-                loc1 = this.itemsDP.requestItemAt(this.selectedItemIdx);
-                if (loc1 && loc1.id && this.selectedPriceIdx > -1) 
-                {
-                    loc2 = new net.wg.gui.lobby.customization.CustomizationEvent(net.wg.gui.lobby.customization.CustomizationEvent.SELECT_NEW);
-                    loc2.data = loc1;
-                    loc2.index = this.selectedItemIdx;
-                    dispatchEvent(loc2);
-                }
-            }
-            return;
-        }
-
-        internal function handlePeriodDaysItemChange(arg1:scaleform.clik.events.ListEvent):void
-        {
-            this.selectedPriceIdx = arg1.index;
-            if (arg1.index > -1) 
-            {
-                this.rentalPackageDP.setSelectedPackageIndex(arg1.index);
-            }
-            return;
-        }
-
-        internal function handleItemChange(arg1:scaleform.clik.events.ListEvent):void
-        {
-            this.selectedItemIdx = arg1.index;
-            this.handleItemDataChanged();
-            return;
-        }
-
-        public var timeSectionLabel:flash.text.TextField=null;
-
-        public var list:net.wg.gui.components.controls.TileList=null;
-
-        public var rentalPackageList:scaleform.clik.controls.ScrollingList=null;
-
-        public var itemsDP:net.wg.gui.lobby.customization.data.DAAPIItemsDataProvider=null;
-
-        public var rentalPackageDP:net.wg.gui.lobby.customization.data.RentalPackageDAAPIDataProvider=null;
-
-        public var timeLabel:String=null;
-
-        internal var _selectedItemIdx:int=-1;
-
-        internal var _selectedPriceIdx:int=-1;
-    }
 }

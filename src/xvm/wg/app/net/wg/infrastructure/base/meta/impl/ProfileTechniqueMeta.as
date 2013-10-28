@@ -1,13 +1,14 @@
-package net.wg.infrastructure.base.meta.impl 
+package net.wg.infrastructure.base.meta.impl
 {
-    import net.wg.gui.lobby.profile.pages.*;
-    
-    public class ProfileTechniqueMeta extends net.wg.gui.lobby.profile.pages.ProfileSection
-    {
-        public function ProfileTechniqueMeta()
-        {
-            super();
-            return;
-        }
-    }
+   import net.wg.gui.lobby.profile.pages.ProfileSection;
+
+
+   public class ProfileTechniqueMeta extends ProfileSection
+   {
+          
+      public function ProfileTechniqueMeta() {
+         super();
+      }
+   }
+
 }

@@ -1,11 +1,15 @@
-package org.idmedia.as3commons.util 
+package org.idmedia.as3commons.util
 {
-    public interface Iterator
-    {
-        function hasNext():Boolean;
 
-        function next():*;
 
-        function remove():void;
-    }
+   public interface Iterator
+   {
+          
+      function hasNext() : Boolean;
+
+      function next() : *;
+
+      function remove() : void;
+   }
+
 }

@@ -1,11 +1,14 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IColorSchemeManagerMeta extends flash.events.IEventDispatcher
-    {
-        function getColorSchemeS(arg1:String):Object;
+   import flash.events.IEventDispatcher;
 
-        function as_update():void;
-    }
+
+   public interface IColorSchemeManagerMeta extends IEventDispatcher
+   {
+          
+      function getColorSchemeS(param1:String) : Object;
+
+      function as_update() : void;
+   }
+
 }

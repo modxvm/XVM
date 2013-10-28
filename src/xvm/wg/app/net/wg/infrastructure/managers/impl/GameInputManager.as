@@ -1,222 +1,224 @@
-package net.wg.infrastructure.managers.impl 
+package net.wg.infrastructure.managers.impl
 {
-    import flash.events.*;
-    import flash.utils.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import net.wg.utils.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.controls.*;
-    import scaleform.clik.events.*;
-    import scaleform.clik.ui.*;
-    
-    public class GameInputManager extends net.wg.infrastructure.base.meta.impl.GameInputManagerMeta implements net.wg.utils.IGameInputManager
-    {
-        public function GameInputManager()
-        {
-            super();
-            this._inputHandlers = new flash.utils.Dictionary();
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.GameInputManagerMeta;
+   import net.wg.utils.IGameInputManager;
+   import flash.events.IEventDispatcher;
+   import scaleform.clik.events.InputEvent;
+   import flash.events.FocusEvent;
+   import flash.utils.Dictionary;
+   import scaleform.clik.ui.InputDetails;
+   import scaleform.clik.constants.InputValue;
+   import flash.text.TextField;
+   import scaleform.clik.controls.TextInput;
+   import flash.text.TextFieldType;
+   import flash.display.InteractiveObject;
+   import scaleform.gfx.Extensions;
+   import scaleform.gfx.FocusManager;
 
-        public function initStage(arg1:flash.events.IEventDispatcher):void
-        {
-            this._dispatcher = arg1;
-            this._dispatcher.addEventListener(scaleform.clik.events.InputEvent.INPUT, this.onInputHandler, false, 0, true);
-            return;
-        }
 
-        public function as_addKeyHandler(arg1:Number, arg2:String, arg3:Boolean):void
-        {
-            this.setKeyHandler(arg1, arg2, this.pyInputHandler, arg3);
-            return;
-        }
+   public class GameInputManager extends GameInputManagerMeta implements IGameInputManager
+   {
+          
+      public function GameInputManager() {
+         super();
+         this._inputHandlers = new Dictionary();
+      }
 
-        public function as_clearKeyHandler(arg1:Number, arg2:String):void
-        {
-            this.clearKeyHandler(arg1, arg2);
-            return;
-        }
+      public function initStage(param1:IEventDispatcher) : void {
+         this._dispatcher = param1;
+         this._dispatcher.addEventListener(InputEvent.INPUT,this.onInputHandler,false,0,true);
+         this._dispatcher.addEventListener(FocusEvent.FOCUS_IN,this.onFocusInHandler,true,0,true);
+      }
 
-        public function setKeyHandler(arg1:Number, arg2:String, arg3:Function, arg4:Boolean):void
-        {
-            this.assertEventType(arg2);
-            if (this._inputHandlers[arg1] == undefined) 
+      public function as_addKeyHandler(param1:Number, param2:String, param3:Boolean, param4:String=null) : void {
+         this.setKeyHandler(param1,param2,this.pyInputHandler,param3,param4);
+      }
+
+      public function as_clearKeyHandler(param1:Number, param2:String) : void {
+         this.clearKeyHandler(param1,param2);
+      }
+
+      private var _dispatcher:IEventDispatcher = null;
+
+      private var _inputHandlers:Dictionary = null;
+
+      private var _ignoredKeyCode:Number = -1;
+
+      private var _exclusiveHandlers:Dictionary = null;
+
+      private var _changedTextFields:Array = null;
+
+      public function setKeyHandler(param1:Number, param2:String, param3:Function, param4:Boolean, param5:String=null) : void {
+         this.assertEventType(param2);
+         if(this._inputHandlers[param1] == undefined)
+         {
+            this._inputHandlers[param1] = new Dictionary();
+         }
+         if(this._inputHandlers[param1][param2] != undefined)
+         {
+            DebugUtils.LOG_WARNING("GameInputHandler.setKeyHandler. Existing handler for keyCode = " + param1 + " and event = " + param2 + " is to be reset!");
+         }
+         this._inputHandlers[param1][param2] = new GameInputCallback(param3,param4,param5);
+      }
+
+      public function clearKeyHandler(param1:Number, param2:String) : void {
+         this.assertEventType(param2);
+         if(this._inputHandlers[param1])
+         {
+            this._inputHandlers[param1][param2].dispose();
+            delete this._inputHandlers[param1][[param2]];
+            if(this.getDictLength(this._inputHandlers[param1]) == 0)
             {
-                this._inputHandlers[arg1] = new flash.utils.Dictionary();
+               delete this._inputHandlers[[param1]];
             }
-            if (this._inputHandlers[arg1][arg2] != undefined) 
+         }
+      }
+
+      public function setIgnoredKeyCode(param1:Number) : void {
+         this._ignoredKeyCode = param1;
+      }
+
+      public function clearKeyHandlers() : void {
+         var _loc1_:Object = null;
+         var _loc2_:Object = null;
+         var _loc3_:Dictionary = null;
+         var _loc4_:GameInputCallback = null;
+         for (_loc1_ in this._inputHandlers)
+         {
+            _loc3_ = this._inputHandlers[_loc1_];
+            for (_loc2_ in _loc3_)
             {
-                DebugUtils.LOG_WARNING("GameInputHandler.setKeyHandler. Existing handler for keyCode = " + arg1 + " and event = " + arg2 + " is to be reset!");
+               _loc4_ = _loc3_[_loc2_];
+               _loc4_.dispose();
+               delete _loc3_[[_loc2_]];
             }
-            this._inputHandlers[arg1][arg2] = new GameInputCallback(arg3, arg4);
-            return;
-        }
+            delete this._inputHandlers[[_loc1_]];
+         }
+         this._inputHandlers = null;
+         for (_loc1_ in this._exclusiveHandlers)
+         {
+            delete this._exclusiveHandlers[[_loc1_]];
+         }
+         this._exclusiveHandlers = null;
+      }
 
-        public function clearKeyHandler(arg1:Number, arg2:String):void
-        {
-            this.assertEventType(arg2);
-            this._inputHandlers[arg1][arg2].dispose();
-            delete this._inputHandlers[arg1][arg2];
-            if (this.getDictLength(this._inputHandlers[arg1]) == 0) 
+      public function dispose() : void {
+         this.clearKeyHandlers();
+         this._inputHandlers = null;
+         if(this._changedTextFields)
+         {
+            this._changedTextFields.splice();
+            this._changedTextFields = null;
+         }
+         this._dispatcher.removeEventListener(InputEvent.INPUT,this.onInputHandler);
+         this._dispatcher.removeEventListener(FocusEvent.FOCUS_IN,this.onFocusInHandler,true);
+         this._dispatcher = null;
+      }
+
+      private function pyInputHandler(param1:InputEvent) : void {
+         var _loc2_:InputDetails = param1.details;
+         handleGlobalKeyEventS(_loc2_.code,_loc2_.value);
+      }
+
+      private function assertEventType(param1:String) : void {
+         App.utils.asserter.assert(param1 == InputValue.KEY_UP || param1 == InputValue.KEY_DOWN,"Event must be \'keyUp\' or \'keyDown\'");
+      }
+
+      private function getDictLength(param1:Dictionary) : int {
+         var _loc3_:Object = null;
+         var _loc2_:* = 0;
+         for (_loc3_ in param1)
+         {
+            _loc2_++;
+         }
+         return _loc2_;
+      }
+
+      private function onInputHandler(param1:InputEvent) : void {
+         /*
+          * Decompilation error
+          * Code may be obfuscated
+          * Error type: StackOverflowError
+          */
+         throw new IllegalOperationError("Not decompiled due to error");
+      }
+
+      private function getSystemFocus(param1:uint) : InteractiveObject {
+         if(Extensions.isScaleform)
+         {
+            return FocusManager.getFocus(param1);
+         }
+         return App.stage.focus;
+      }
+
+      private function onFocusInHandler(param1:FocusEvent) : void {
+         var _loc3_:TextInput = null;
+         var _loc2_:TextField = param1.target as TextField;
+         if(_loc2_)
+         {
+            _loc3_ = _loc2_.parent as TextInput;
+            if(_loc2_.type == TextFieldType.INPUT && ((_loc3_) && (_loc3_.enabled)) && (_loc3_.editable))
             {
-                delete this._inputHandlers[arg1];
+               if(this.hasExclusiveHandlers())
+               {
+                  if(!this._changedTextFields)
+                  {
+                     this._changedTextFields = [];
+                  }
+                  this._changedTextFields.push(_loc3_);
+                  _loc3_.editable = false;
+               }
             }
-            return;
-        }
+         }
+      }
 
-        public function setIgnoredKeyCode(arg1:Number):void
-        {
-            this._ignoredKeyCode = arg1;
-            return;
-        }
+      private function hasExclusiveHandlers() : Boolean {
+         var _loc2_:Object = null;
+         var _loc1_:* = false;
+         for (_loc2_ in this._exclusiveHandlers)
+         {
+            _loc1_ = true;
+            return _loc1_;
+         }
+      }
+   }
 
-        public function clearKeyHandlers():void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            var loc3:*=null;
-            var loc4:*=null;
-            var loc5:*=0;
-            var loc6:*=this._inputHandlers;
-            for (loc1 in loc6) 
-            {
-                loc3 = this._inputHandlers[loc1];
-                var loc7:*=0;
-                var loc8:*=loc3;
-                for (loc2 in loc8) 
-                {
-                    (loc4 = loc3[loc2]).dispose();
-                    delete loc3[loc2];
-                }
-                delete this._inputHandlers[loc1];
-            }
-            return;
-        }
-
-        public function dispose():void
-        {
-            this.clearKeyHandlers();
-            this._inputHandlers = null;
-            this._dispatcher.removeEventListener(scaleform.clik.events.InputEvent.INPUT, this.onInputHandler);
-            this._dispatcher = null;
-            return;
-        }
-
-        internal function pyInputHandler(arg1:scaleform.clik.events.InputEvent):void
-        {
-            var loc1:*=arg1.details;
-            handleGlobalKeyEventS(loc1.code, loc1.value);
-            return;
-        }
-
-        internal function assertEventType(arg1:String):void
-        {
-            App.utils.asserter.assert(arg1 == scaleform.clik.constants.InputValue.KEY_UP || arg1 == scaleform.clik.constants.InputValue.KEY_DOWN, "Event must be \'keyUp\' or \'keyDown\'");
-            return;
-        }
-
-        internal function getDictLength(arg1:flash.utils.Dictionary):int
-        {
-            var loc2:*=null;
-            var loc1:*=0;
-            var loc3:*=0;
-            var loc4:*=arg1;
-            for (loc2 in loc4) 
-            {
-                ++loc1;
-            }
-            return loc1;
-        }
-
-        internal function onInputHandler(arg1:scaleform.clik.events.InputEvent):void
-        {
-            var event:scaleform.clik.events.InputEvent;
-            var details:scaleform.clik.ui.InputDetails;
-            var callback:GameInputCallback;
-            var focused:scaleform.clik.controls.TextInput;
-
-            var loc1:*;
-            details = null;
-            callback = null;
-            focused = null;
-            event = arg1;
-            try 
-            {
-                details = event.details;
-                if (event.handled || this._ignoredKeyCode == details.code) 
-                {
-                    return;
-                }
-                callback = null;
-                if (this._inputHandlers[details.code] == undefined) 
-                {
-                    return;
-                }
-                callback = this._inputHandlers[details.code][details.value] as GameInputCallback;
-                if (!callback) 
-                {
-                    return;
-                }
-                focused = App.utils.focusHandler.getFocus(0) as scaleform.clik.controls.TextInput;
-                if (callback.isIgnoreText && !(focused == null)) 
-                {
-                    if (focused.editable && focused.enabled) 
-                    {
-                        return;
-                    }
-                }
-                callback.envoke(event);
-            }
-            catch (e:Error)
-            {
-                DebugUtils.LOG_DEBUG(e.message);
-                DebugUtils.LOG_DEBUG(e.getStackTrace());
-            }
-            return;
-        }
-
-        internal var _dispatcher:flash.events.IEventDispatcher=null;
-
-        internal var _inputHandlers:flash.utils.Dictionary=null;
-
-        internal var _ignoredKeyCode:Number=-1;
-    }
-}
-
-import net.wg.data.constants.*;
-import net.wg.infrastructure.interfaces.entity.*;
-import scaleform.clik.events.*;
+}   import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import scaleform.clik.events.InputEvent;
+   import net.wg.data.constants.Errors;
 
 
-class GameInputCallback extends Object implements net.wg.infrastructure.interfaces.entity.IDisposable
-{
-    public function GameInputCallback(arg1:Function, arg2:Boolean)
-    {
-        super();
-        App.utils.asserter.assertNotNull(arg1, "handler" + net.wg.data.constants.Errors.CANT_NULL);
-        this._handler = arg1;
-        this._ignoreText = arg2;
-        return;
-    }
+   class GameInputCallback extends Object implements IDisposable
+   {
+          
+      function GameInputCallback(param1:Function, param2:Boolean, param3:String=null) {
+         super();
+         App.utils.asserter.assertNotNull(param1,"handler" + Errors.CANT_NULL);
+         this._handler = param1;
+         this._ignoreText = param2;
+         this._cancelEvent = param3;
+      }
 
-    public function envoke(arg1:scaleform.clik.events.InputEvent):void
-    {
-        this._handler(arg1);
-        return;
-    }
+      private var _handler:Function = null;
 
-    public function get isIgnoreText():Boolean
-    {
-        return this._ignoreText;
-    }
+      private var _ignoreText:Boolean = false;
 
-    public function dispose():void
-    {
-        this._handler = null;
-        return;
-    }
+      private var _cancelEvent:String = null;
 
-    internal var _handler:Function=null;
+      public function envoke(param1:InputEvent) : void {
+         this._handler(param1);
+      }
 
-    internal var _ignoreText:Boolean=false;
-}
+      public function get isIgnoreText() : Boolean {
+         return this._ignoreText;
+      }
+
+      public function get cancelEvent() : String {
+         return this._cancelEvent;
+      }
+
+      public function dispose() : void {
+         this._handler = null;
+         this._cancelEvent = null;
+      }
+   }

@@ -36,8 +36,8 @@ class wot.PlayersPanel.SpotStatusModel
     public function isArty(uid:Number):Boolean
     {
         var info:Object = PlayersPanelProxy.getPlayerInfo(uid); // "../maps/icons/vehicle/contour/ussr-SU-18.png"
-        var info2:Object = VehicleInfo.getInfo2(info.icon);
-        return info2.type == "SPG";
+        var info2:Object = VehicleInfo.getByIcon(info.icon);
+        return info2.vclass == "SPG";
     }
 
     // -- Private

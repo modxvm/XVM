@@ -1,15 +1,16 @@
-package net.wg.gui.events 
+package net.wg.gui.events
 {
-    import flash.events.*;
-    
-    public class NumericStepperEvent extends flash.events.Event
-    {
-        public function NumericStepperEvent(arg1:String, arg2:Boolean=false, arg3:Boolean=true)
-        {
-            super(arg1, arg2, arg3);
-            return;
-        }
+   import flash.events.Event;
 
-        public static const SUBMIT:String="submit";
-    }
+
+   public class NumericStepperEvent extends Event
+   {
+          
+      public function NumericStepperEvent(param1:String, param2:Boolean=false, param3:Boolean=true) {
+         super(param1,param2,param3);
+      }
+
+      public static const SUBMIT:String = "submit";
+   }
+
 }

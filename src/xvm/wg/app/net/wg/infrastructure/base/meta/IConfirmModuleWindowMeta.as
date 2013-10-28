@@ -1,13 +1,16 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IConfirmModuleWindowMeta extends flash.events.IEventDispatcher
-    {
-        function submitS(arg1:Number, arg2:String):void;
+   import flash.events.IEventDispatcher;
 
-        function as_setData(arg1:Object):void;
 
-        function as_setSettings(arg1:Object):void;
-    }
+   public interface IConfirmModuleWindowMeta extends IEventDispatcher
+   {
+          
+      function submitS(param1:Number, param2:String) : void;
+
+      function as_setData(param1:Object) : void;
+
+      function as_setSettings(param1:Object) : void;
+   }
+
 }

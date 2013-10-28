@@ -1,143 +1,114 @@
-package net.wg.gui.lobby.hangar.crew 
+package net.wg.gui.lobby.hangar.crew
 {
-    import net.wg.data.daapi.base.*;
-    
-    public class SkillsVO extends net.wg.data.daapi.base.DAAPIDataClass
-    {
-        public function SkillsVO(arg1:Object)
-        {
-            super(arg1);
-            return;
-        }
+   import net.wg.data.daapi.base.DAAPIDataClass;
 
-        public function get icon():String
-        {
-            return this._icon;
-        }
 
-        public function set icon(arg1:String):void
-        {
-            this._icon = arg1;
-            return;
-        }
+   public class SkillsVO extends DAAPIDataClass
+   {
+          
+      public function SkillsVO(param1:Object) {
+         super(param1);
+      }
 
-        public function get name():String
-        {
-            return this._name;
-        }
+      private var _icon:String = "";
 
-        public function set name(arg1:String):void
-        {
-            this._name = arg1;
-            return;
-        }
+      private var _inprogress:Boolean;
 
-        public function get active():Boolean
-        {
-            return this._active;
-        }
+      private var _name:String = "";
 
-        public function set active(arg1:Boolean):void
-        {
-            this._active = arg1;
-            return;
-        }
+      private var _desc:String = "";
 
-        public function get selected():Boolean
-        {
-            return this._selected;
-        }
+      private var _active:Boolean;
 
-        public function set selected(arg1:Boolean):void
-        {
-            this._selected = arg1;
-            return;
-        }
+      private var _selected:Boolean;
 
-        public function get tankmanID():Number
-        {
-            return this._tankmanID;
-        }
+      private var _tankmanID:Number;
 
-        public function set tankmanID(arg1:Number):void
-        {
-            this._tankmanID = arg1;
-            return;
-        }
+      private var _buy:Boolean;
 
-        public function get buy():Boolean
-        {
-            return this._buy;
-        }
+      private var _level:Number;
 
-        public function set buy(arg1:Boolean):void
-        {
-            this._buy = arg1;
-            return;
-        }
+      private var _id:String = "";
 
-        public function get inprogress():Boolean
-        {
-            return this._inprogress;
-        }
+      public function get icon() : String {
+         return this._icon;
+      }
 
-        public function set inprogress(arg1:Boolean):void
-        {
-            this._inprogress = arg1;
-            return;
-        }
+      public function set icon(param1:String) : void {
+         this._icon = param1;
+      }
 
-        public function get desc():String
-        {
-            return this._desc;
-        }
+      public function get name() : String {
+         return this._name;
+      }
 
-        public function set desc(arg1:String):void
-        {
-            this._desc = arg1;
-            return;
-        }
+      public function set name(param1:String) : void {
+         this._name = param1;
+      }
 
-        public function get level():Number
-        {
-            return this._level;
-        }
+      public function get active() : Boolean {
+         return this._active;
+      }
 
-        public function set level(arg1:Number):void
-        {
-            this._level = arg1;
-            return;
-        }
+      public function set active(param1:Boolean) : void {
+         this._active = param1;
+      }
 
-        public function get id():String
-        {
-            return this._id;
-        }
+      public function get selected() : Boolean {
+         return this._selected;
+      }
 
-        public function set id(arg1:String):void
-        {
-            this._id = arg1;
-            return;
-        }
+      public function set selected(param1:Boolean) : void {
+         this._selected = param1;
+      }
 
-        internal var _icon:String="";
+      public function get tankmanID() : Number {
+         return this._tankmanID;
+      }
 
-        internal var _inprogress:Boolean;
+      public function set tankmanID(param1:Number) : void {
+         this._tankmanID = param1;
+      }
 
-        internal var _name:String="";
+      public function get buy() : Boolean {
+         return this._buy;
+      }
 
-        internal var _desc:String="";
+      public function set buy(param1:Boolean) : void {
+         this._buy = param1;
+      }
 
-        internal var _active:Boolean;
+      public function get inprogress() : Boolean {
+         return this._inprogress;
+      }
 
-        internal var _selected:Boolean;
+      public function set inprogress(param1:Boolean) : void {
+         this._inprogress = param1;
+      }
 
-        internal var _tankmanID:Number;
+      public function get desc() : String {
+         return this._desc;
+      }
 
-        internal var _buy:Boolean;
+      public function set desc(param1:String) : void {
+         this._desc = param1;
+      }
 
-        internal var _level:Number;
+      public function get level() : Number {
+         return this._level;
+      }
 
-        internal var _id:String="";
-    }
+      public function set level(param1:Number) : void {
+         this._level = param1;
+      }
+
+      public function get id() : String {
+         return this._id;
+      }
+
+      public function set id(param1:String) : void {
+         this._id = param1;
+      }
+   }
+
 }

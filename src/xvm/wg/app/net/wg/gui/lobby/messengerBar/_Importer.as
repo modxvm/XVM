@@ -1,16 +1,18 @@
-package net.wg.gui.lobby.messengerBar 
+package net.wg.gui.lobby.messengerBar
 {
-    import __AS3__.vec.*;
-    import net.wg.gui.lobby.messengerBar.carousel.*;
-    import net.wg.infrastructure.*;
-    
-    public class _Importer extends net.wg.infrastructure.BaseImporter
-    {
-        public function _Importer()
-        {
-            super();
-            importClasses(Vector.<Class>([net.wg.gui.lobby.messengerBar.MessengerBar, net.wg.gui.lobby.messengerBar.NotificationListButton, net.wg.gui.lobby.messengerBar.NotificationInvitesButton, net.wg.gui.lobby.messengerBar.carousel.ChannelCarousel, net.wg.gui.lobby.messengerBar.carousel.ChannelRenderer, net.wg.gui.lobby.messengerBar.carousel.ChannelButton, net.wg.gui.lobby.messengerBar.WindowOffsetsInBar]));
-            return;
-        }
-    }
+   import net.wg.infrastructure.BaseImporter;
+   import net.wg.gui.lobby.messengerBar.carousel.ChannelCarousel;
+   import net.wg.gui.lobby.messengerBar.carousel.ChannelRenderer;
+   import net.wg.gui.lobby.messengerBar.carousel.ChannelButton;
+
+
+   public class _Importer extends BaseImporter
+   {
+          
+      public function _Importer() {
+         super();
+         importClasses(Vector.<Class>([MessengerBar,NotificationListButton,NotificationInvitesButton,ChannelCarousel,ChannelRenderer,ChannelButton,WindowOffsetsInBar]));
+      }
+   }
+
 }

@@ -1,23 +1,26 @@
-package net.wg.infrastructure.interfaces 
+package net.wg.infrastructure.interfaces
 {
-    import scaleform.clik.interfaces.*;
-    
-    public interface ISaleItemBlockRenderer extends scaleform.clik.interfaces.IListItemRenderer
-    {
-        function get inInventory():Boolean;
+   import scaleform.clik.interfaces.IListItemRenderer;
 
-        function get isRemovable():Boolean;
 
-        function get moneyValue():Number;
+   public interface ISaleItemBlockRenderer extends IListItemRenderer
+   {
+          
+      function get inInventory() : Boolean;
 
-        function get type():String;
+      function get isRemovable() : Boolean;
 
-        function get dataInfo():Object;
+      function get moneyValue() : Number;
 
-        function hideLine():void;
+      function get type() : String;
 
-        function setColor(arg1:Number):void;
+      function get dataInfo() : Object;
 
-        function setSize(arg1:Number, arg2:Number):void;
-    }
+      function hideLine() : void;
+
+      function setColor(param1:Number) : void;
+
+      function setSize(param1:Number, param2:Number) : void;
+   }
+
 }

@@ -1,14 +1,15 @@
-package net.wg.infrastructure.managers 
+package net.wg.infrastructure.managers
 {
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    
-    public class GlobalVarsManager extends net.wg.infrastructure.base.meta.impl.GlobalVarsMgrMeta implements net.wg.infrastructure.base.meta.IGlobalVarsMgrMeta
-    {
-        public function GlobalVarsManager()
-        {
-            super();
-            return;
-        }
-    }
+   import net.wg.infrastructure.base.meta.impl.GlobalVarsMgrMeta;
+   import net.wg.infrastructure.base.meta.IGlobalVarsMgrMeta;
+
+
+   public class GlobalVarsManager extends GlobalVarsMgrMeta implements IGlobalVarsMgrMeta
+   {
+          
+      public function GlobalVarsManager() {
+         super();
+      }
+   }
+
 }

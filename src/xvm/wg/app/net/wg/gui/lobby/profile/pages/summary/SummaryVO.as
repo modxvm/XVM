@@ -1,18 +1,20 @@
-package net.wg.gui.lobby.profile.pages.summary 
+package net.wg.gui.lobby.profile.pages.summary
 {
-    import __AS3__.vec.*;
-    import net.wg.data.daapi.base.*;
-    
-    public class SummaryVO extends net.wg.data.daapi.base.DAAPIDataClass
-    {
-        public function SummaryVO(arg1:Object)
-        {
-            super(arg1);
-            return;
-        }
+   import net.wg.data.daapi.base.DAAPIDataClass;
+   import __AS3__.vec.Vector;
+   import net.wg.gui.lobby.profile.data.ProfileAchievementVO;
 
-        public var significantAwards:Array;
 
-        internal var _significantAwardsVec:__AS3__.vec.Vector.<net.wg.gui.lobby.profile.data.ProfileAchievementVO>;
-    }
+   public class SummaryVO extends DAAPIDataClass
+   {
+          
+      public function SummaryVO(param1:Object) {
+         super(param1);
+      }
+
+      public var significantAwards:Array;
+
+      private var _significantAwardsVec:Vector.<ProfileAchievementVO>;
+   }
+
 }

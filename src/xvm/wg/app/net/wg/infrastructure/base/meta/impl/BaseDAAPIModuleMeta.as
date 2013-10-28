@@ -1,13 +1,14 @@
-package net.wg.infrastructure.base.meta.impl 
+package net.wg.infrastructure.base.meta.impl
 {
-    import flash.events.*;
-    
-    public class BaseDAAPIModuleMeta extends flash.events.EventDispatcher
-    {
-        public function BaseDAAPIModuleMeta()
-        {
-            super();
-            return;
-        }
-    }
+   import flash.events.EventDispatcher;
+
+
+   public class BaseDAAPIModuleMeta extends EventDispatcher
+   {
+          
+      public function BaseDAAPIModuleMeta() {
+         super();
+      }
+   }
+
 }

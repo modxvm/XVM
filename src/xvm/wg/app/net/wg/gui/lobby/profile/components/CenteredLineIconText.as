@@ -1,60 +1,52 @@
-package net.wg.gui.lobby.profile.components 
+package net.wg.gui.lobby.profile.components
 {
-    import flash.text.*;
-    
-    public class CenteredLineIconText extends net.wg.gui.lobby.profile.components.LineDescrIconText
-    {
-        public function CenteredLineIconText()
-        {
-            super();
-            return;
-        }
+   import flash.text.TextFieldAutoSize;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            descriptionTextField.autoSize = flash.text.TextFieldAutoSize.CENTER;
-            return;
-        }
 
-        protected override function draw():void
-        {
-            var loc1:*=NaN;
-            super.draw();
-            if (this.isLayoutChanged) 
-            {
-                this.isLayoutChanged = false;
-                loc1 = Math.max(textComponent.textField.width, textComponent.background.width);
-                textComponent.textField.x = loc1 - textComponent.textField.width >> 1;
-                textComponent.background.x = loc1 - textComponent.background.width >> 1;
-                loc1 = Math.max(textComponent.width, descriptionTextField.width);
-                textComponent.x = loc1 - textComponent.width >> 1;
-                descriptionTextField.x = loc1 - descriptionTextField.width >> 1;
-            }
-            return;
-        }
+   public class CenteredLineIconText extends LineDescrIconText
+   {
+          
+      public function CenteredLineIconText() {
+         super();
+      }
 
-        public override function set description(arg1:String):void
-        {
-            super.description = arg1;
-            this.isLayoutChanged = true;
-            invalidate();
-            return;
-        }
+      private var isLayoutChanged:Boolean;
 
-        public override function set text(arg1:String):void
-        {
-            super.text = arg1;
-            this.isLayoutChanged = true;
-            invalidate();
-            return;
-        }
+      override protected function configUI() : void {
+         super.configUI();
+         textField.autoSize = TextFieldAutoSize.CENTER;
+      }
 
-        public override function set iconSource(arg1:String):void
-        {
-            return;
-        }
+      override protected function draw() : void {
+         var _loc1_:* = NaN;
+         super.draw();
+         if(this.isLayoutChanged)
+         {
+            this.isLayoutChanged = false;
+            _loc1_ = Math.max(textComponent.textField.width,textComponent.background.width);
+            textComponent.textField.x = _loc1_ - textComponent.textField.width >> 1;
+            textComponent.background.x = _loc1_ - textComponent.background.width >> 1;
+            _loc1_ = Math.max(textComponent.width,textField.width);
+            textComponent.x = _loc1_ - textComponent.width >> 1;
+            textField.x = _loc1_ - textField.width >> 1;
+         }
+      }
 
-        internal var isLayoutChanged:Boolean;
-    }
+      override public function set description(param1:String) : void {
+         super.description = param1;
+         this.isLayoutChanged = true;
+         invalidate();
+      }
+
+      override public function set text(param1:String) : void {
+         super.text = param1;
+         this.isLayoutChanged = true;
+         invalidate();
+      }
+
+      override public function set iconSource(param1:String) : void {
+          
+      }
+   }
+
 }

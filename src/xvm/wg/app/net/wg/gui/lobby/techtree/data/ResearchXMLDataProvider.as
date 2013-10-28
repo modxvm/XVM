@@ -1,100 +1,93 @@
-package net.wg.gui.lobby.techtree.data 
+package net.wg.gui.lobby.techtree.data
 {
-    import net.wg.gui.lobby.techtree.data.vo.*;
-    
-    public class ResearchXMLDataProvider extends net.wg.gui.lobby.techtree.data.ResearchVODataProvider
-    {
-        public function ResearchXMLDataProvider()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.lobby.techtree.data.vo.NodeData;
+   import net.wg.gui.lobby.techtree.data.vo.ResearchDisplayInfo;
+   import net.wg.gui.lobby.techtree.data.vo.VehGlobalStats;
+   import net.wg.gui.lobby.techtree.data.vo.ExtraInformation;
+   import net.wg.gui.lobby.techtree.data.vo.PrimaryClass;
+   import net.wg.gui.lobby.techtree.data.vo.UnlockProps;
+   import net.wg.gui.lobby.techtree.data.vo.ShopPrice;
 
-        public override function parse(arg1:Object):void
-        {
-            var loc4:*=NaN;
-            var loc5:*=null;
-            var loc6:*=null;
-            var loc7:*=null;
-            clearUp();
-            net.wg.gui.lobby.techtree.data.vo.NodeData.setDisplayInfoClass(net.wg.gui.lobby.techtree.data.vo.ResearchDisplayInfo);
-            var loc1:*=String(arg1);
-            var loc2:*=new XML(loc1);
-            loc2.ignoreWhite = true;
-            var loc3:*=loc2.children()[0];
-            var loc8:*=0;
-            var loc9:*=loc3.children();
-            for each (loc5 in loc9) 
-            {
-                loc6 = this.getNodeData(loc5);
-                loc4 = topData.length;
-                if (isNaN(loc6.id)) 
-                {
-                    continue;
-                }
-                topLevelIdxCache[loc6.id] = loc4;
-                topData.push(loc6);
-            }
-            loc3 = loc2.children()[1];
-            loc8 = 0;
-            loc9 = loc3.children();
-            for each (loc5 in loc9) 
-            {
-                loc6 = this.getNodeData(loc5);
-                loc4 = nodeData.length;
-                if (isNaN(loc6.id)) 
-                {
-                    continue;
-                }
-                nodeIdxCache[loc6.id] = loc4;
-                nodeData.push(loc6);
-                loc7 = loc6.displayInfo as net.wg.gui.lobby.techtree.data.vo.ResearchDisplayInfo;
-                depthOfPaths.push(loc7 == null ? 0 : loc7.getDepthOfPath());
-            }
-            loc3 = loc2.children()[2];
-            global = new net.wg.gui.lobby.techtree.data.vo.VehGlobalStats(Number(loc3.child("enableInstallItems").text()) != 1 ? false : true, loc3.child("statusString").text(), new net.wg.gui.lobby.techtree.data.vo.ExtraInformation(loc3.child("extraInfo").child("type").text(), loc3.child("extraInfo").child("title").text(), loc3.child("extraInfo").child("benefitsHead").text(), loc3.child("extraInfo").child("benefitsList").text()), loc3.child("freeXP").text(), Number(loc3.child("hasNationTree").text()) != 1 ? false : true);
-            return;
-        }
 
-        internal function getNodeDisplayInfo(arg1:XML):net.wg.gui.lobby.techtree.data.vo.ResearchDisplayInfo
-        {
-            var loc2:*=null;
-            var loc1:*=[];
-            var loc3:*=0;
-            var loc4:*=arg1.child("path").children();
-            for each (loc2 in loc4) 
-            {
-                loc1.push(loc2.text());
-            }
-            return new net.wg.gui.lobby.techtree.data.vo.ResearchDisplayInfo(loc1, arg1.child("renderer").text(), arg1.child("level").text());
-        }
+   public class ResearchXMLDataProvider extends ResearchVODataProvider
+   {
+          
+      public function ResearchXMLDataProvider() {
+         super();
+      }
 
-        internal function getNodeData(arg1:XML):net.wg.gui.lobby.techtree.data.vo.NodeData
-        {
-            var loc1:*=null;
-            var loc3:*=null;
-            loc1 = new net.wg.gui.lobby.techtree.data.vo.NodeData();
-            var loc2:*=[];
-            var loc4:*=0;
-            var loc5:*=arg1.child("unlockProps").child("required").children();
-            for each (loc3 in loc5) 
+      override public function parse(param1:Object) : void {
+         var _loc5_:* = NaN;
+         var _loc6_:XML = null;
+         var _loc7_:NodeData = null;
+         var _loc8_:ResearchDisplayInfo = null;
+         clearUp();
+         NodeData.setDisplayInfoClass(ResearchDisplayInfo);
+         var _loc2_:String = String(param1);
+         var _loc3_:XML = new XML(_loc2_);
+         _loc3_.ignoreWhite = true;
+         var _loc4_:XML = _loc3_.children()[0];
+         for each (_loc6_ in _loc4_.children())
+         {
+            _loc7_ = this.getNodeData(_loc6_);
+            _loc5_ = topData.length;
+            if(!isNaN(_loc7_.id))
             {
-                loc2.push(Number(loc3.toString()));
+               topLevelIdxCache[_loc7_.id] = _loc5_;
+               topData.push(_loc7_);
             }
-            loc1.id = arg1.child("id").text();
-            loc1.nameString = arg1.child("nameString").text();
-            loc1.primaryClass = new net.wg.gui.lobby.techtree.data.vo.PrimaryClass(arg1.child("class").child("name").text(), arg1.child("class").child("userString").text());
-            loc1.level = int(arg1.child("level").text());
-            loc1.earnedXP = arg1.child("earnedXP").text();
-            loc1.state = arg1.child("state").text();
-            loc1.unlockProps = new net.wg.gui.lobby.techtree.data.vo.UnlockProps(arg1.child("unlockProps").child("parentID").text(), arg1.child("unlockProps").child("unlockIdx").text(), arg1.child("unlockProps").child("xpCost").text(), loc2);
-            loc1.iconPath = arg1.child("iconPath").text();
-            loc1.smallIconPath = arg1.child("smallIconPath").text();
-            loc1.longName = arg1.child("longName").text();
-            loc1.pickleDump = arg1.child("dump").text();
-            loc1.shopPrice = new net.wg.gui.lobby.techtree.data.vo.ShopPrice(arg1.child("shopPrice").child("credits").text(), arg1.child("shopPrice").child("gold").text());
-            loc1.displayInfo = this.getNodeDisplayInfo(arg1.child("display")[0]);
-            return loc1;
-        }
-    }
+         }
+         _loc4_ = _loc3_.children()[1];
+         for each (_loc6_ in _loc4_.children())
+         {
+            _loc7_ = this.getNodeData(_loc6_);
+            _loc5_ = nodeData.length;
+            if(!isNaN(_loc7_.id))
+            {
+               nodeIdxCache[_loc7_.id] = _loc5_;
+               nodeData.push(_loc7_);
+               _loc8_ = _loc7_.displayInfo as ResearchDisplayInfo;
+               depthOfPaths.push(_loc8_ != null?_loc8_.getDepthOfPath():0);
+            }
+         }
+         _loc4_ = _loc3_.children()[2];
+         global = new VehGlobalStats(Number(_loc4_.child("enableInstallItems").text()) == 1?true:false,_loc4_.child("statusString").text(),new ExtraInformation(_loc4_.child("extraInfo").child("type").text(),_loc4_.child("extraInfo").child("title").text(),_loc4_.child("extraInfo").child("benefitsHead").text(),_loc4_.child("extraInfo").child("benefitsList").text()),_loc4_.child("freeXP").text(),Number(_loc4_.child("hasNationTree").text()) == 1?true:false);
+      }
+
+      private function getNodeDisplayInfo(param1:XML) : ResearchDisplayInfo {
+         var _loc3_:XML = null;
+         var _loc2_:Array = [];
+         for each (_loc3_ in param1.child("path").children())
+         {
+            _loc2_.push(_loc3_.text());
+         }
+         return new ResearchDisplayInfo(_loc2_,param1.child("renderer").text(),param1.child("level").text());
+      }
+
+      private function getNodeData(param1:XML) : NodeData {
+         var _loc2_:NodeData = null;
+         var _loc4_:XML = null;
+         _loc2_ = new NodeData();
+         var _loc3_:Array = [];
+         for each (_loc4_ in param1.child("unlockProps").child("required").children())
+         {
+            _loc3_.push(Number(_loc4_.toString()));
+         }
+         _loc2_.id = param1.child("id").text();
+         _loc2_.nameString = param1.child("nameString").text();
+         _loc2_.primaryClass = new PrimaryClass(param1.child("class").child("name").text(),param1.child("class").child("userString").text());
+         _loc2_.level = int(param1.child("level").text());
+         _loc2_.earnedXP = param1.child("earnedXP").text();
+         _loc2_.state = param1.child("state").text();
+         _loc2_.unlockProps = new UnlockProps(param1.child("unlockProps").child("parentID").text(),param1.child("unlockProps").child("unlockIdx").text(),param1.child("unlockProps").child("xpCost").text(),_loc3_);
+         _loc2_.iconPath = param1.child("iconPath").text();
+         _loc2_.smallIconPath = param1.child("smallIconPath").text();
+         _loc2_.longName = param1.child("longName").text();
+         _loc2_.pickleDump = param1.child("dump").text();
+         _loc2_.shopPrice = new ShopPrice(param1.child("shopPrice").child("credits").text(),param1.child("shopPrice").child("gold").text());
+         _loc2_.displayInfo = this.getNodeDisplayInfo(param1.child("display")[0]);
+         return _loc2_;
+      }
+   }
+
 }

@@ -1,90 +1,73 @@
-package net.wg.gui.lobby.questsWindow.data 
+package net.wg.gui.lobby.questsWindow.data
 {
-    import net.wg.data.constants.*;
-    import net.wg.data.daapi.base.*;
-    
-    public class VehicleBlockVO extends net.wg.data.daapi.base.DAAPIDataClass
-    {
-        public function VehicleBlockVO(arg1:Object)
-        {
-            super(arg1);
-            return;
-        }
+   import net.wg.data.daapi.base.DAAPIDataClass;
 
-        public function get nationID():int
-        {
-            return this._nationID;
-        }
 
-        public function set nationID(arg1:int):void
-        {
-            this._nationID = arg1;
-            return;
-        }
+   public class VehicleBlockVO extends DAAPIDataClass
+   {
+          
+      public function VehicleBlockVO(param1:Object) {
+         super(param1);
+      }
 
-        public function get vType():String
-        {
-            return this._vType;
-        }
+      private var _nationID:int;
 
-        public function set vType(arg1:String):void
-        {
-            this._vType = arg1;
-            return;
-        }
+      private var _vIconSmall:String = "";
 
-        public function get vLevel():int
-        {
-            return this._vLevel;
-        }
+      private var _vType:String = "";
 
-        public function set vLevel(arg1:int):void
-        {
-            this._vLevel = arg1;
-            return;
-        }
+      private var _vLevel:int;
 
-        public function get vName():String
-        {
-            return this._vName;
-        }
+      private var _vName:String = "";
 
-        public function set vName(arg1:String):void
-        {
-            this._vName = arg1;
-            return;
-        }
+      public function get nationID() : int {
+         return this._nationID;
+      }
 
-        public function get nationIconPath():String
-        {
-            var loc1:*=[net.wg.data.constants.Nations.USSR, net.wg.data.constants.Nations.GERMANY, net.wg.data.constants.Nations.USA, net.wg.data.constants.Nations.CHINA, net.wg.data.constants.Nations.FRANCE, net.wg.data.constants.Nations.UK];
-            return "../maps/icons/filters/nations/" + loc1[this._nationID] + ".png";
-        }
+      public function set nationID(param1:int) : void {
+         this._nationID = param1;
+      }
 
-        public function get typeIconPath():String
-        {
-            return "../maps/icons/filters/tanks/" + this._vType + ".png";
-        }
+      public function get vType() : String {
+         return this._vType;
+      }
 
-        public function get vIconSmall():String
-        {
-            return this._vIconSmall;
-        }
+      public function set vType(param1:String) : void {
+         this._vType = param1;
+      }
 
-        public function set vIconSmall(arg1:String):void
-        {
-            this._vIconSmall = arg1;
-            return;
-        }
+      public function get vLevel() : int {
+         return this._vLevel;
+      }
 
-        internal var _nationID:int;
+      public function set vLevel(param1:int) : void {
+         this._vLevel = param1;
+      }
 
-        internal var _vIconSmall:String="";
+      public function get vName() : String {
+         return this._vName;
+      }
 
-        internal var _vType:String="";
+      public function set vName(param1:String) : void {
+         this._vName = param1;
+      }
 
-        internal var _vLevel:int;
+      public function get nationIconPath() : String {
+         var _loc1_:Array = App.utils.getNationNamesS();
+         return "../maps/icons/filters/nations/" + _loc1_[this._nationID] + ".png";
+      }
 
-        internal var _vName:String="";
-    }
+      public function get typeIconPath() : String {
+         return "../maps/icons/filters/tanks/" + this._vType + ".png";
+      }
+
+      public function get vIconSmall() : String {
+         return this._vIconSmall;
+      }
+
+      public function set vIconSmall(param1:String) : void {
+         this._vIconSmall = param1;
+      }
+   }
+
 }

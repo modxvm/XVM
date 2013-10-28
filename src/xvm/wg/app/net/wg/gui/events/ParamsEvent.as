@@ -1,23 +1,23 @@
-package net.wg.gui.events 
+package net.wg.gui.events
 {
-    import flash.events.*;
-    
-    public class ParamsEvent extends flash.events.Event
-    {
-        public function ParamsEvent(arg1:String, arg2:String="empty")
-        {
-            super(arg1, true, true);
-            this.paramsType = arg2;
-            return;
-        }
+   import flash.events.Event;
 
-        public override function clone():flash.events.Event
-        {
-            return new net.wg.gui.events.ParamsEvent(type, this.paramsType);
-        }
 
-        public static const HIGHLIGHT_PARAMS:String="highlightParams";
+   public class ParamsEvent extends Event
+   {
+          
+      public function ParamsEvent(param1:String, param2:String=undefined) {
+         super(param1,true,true);
+         this.paramsType = param2;
+      }
 
-        public var paramsType:String=null;
-    }
+      public static const HIGHLIGHT_PARAMS:String = "highlightParams";
+
+      public var paramsType:String = null;
+
+      override public function clone() : Event {
+         return new ParamsEvent(type,this.paramsType);
+      }
+   }
+
 }

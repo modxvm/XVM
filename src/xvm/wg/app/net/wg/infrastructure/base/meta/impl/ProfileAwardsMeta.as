@@ -1,23 +1,22 @@
-package net.wg.infrastructure.base.meta.impl 
+package net.wg.infrastructure.base.meta.impl
 {
-    import net.wg.data.constants.*;
-    import net.wg.gui.lobby.profile.pages.*;
-    
-    public class ProfileAwardsMeta extends net.wg.gui.lobby.profile.pages.ProfileAchievementsSection
-    {
-        public function ProfileAwardsMeta()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.lobby.profile.pages.ProfileAchievementsSection;
+   import net.wg.data.constants.Errors;
 
-        public function invokeUpdateS():void
-        {
-            App.utils.asserter.assertNotNull(this.invokeUpdate, "invokeUpdate" + net.wg.data.constants.Errors.CANT_NULL);
-            this.invokeUpdate();
-            return;
-        }
 
-        public var invokeUpdate:Function=null;
-    }
+   public class ProfileAwardsMeta extends ProfileAchievementsSection
+   {
+          
+      public function ProfileAwardsMeta() {
+         super();
+      }
+
+      public var setFilter:Function = null;
+
+      public function setFilterS(param1:Object) : void {
+         App.utils.asserter.assertNotNull(this.setFilter,"setFilter" + Errors.CANT_NULL);
+         this.setFilter(param1);
+      }
+   }
+
 }

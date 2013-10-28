@@ -1,5 +1,9 @@
 """ xvm-stat (c) sirmax 2013 """
 
+XVM_STAT_API_VERSION = "2.0"
+XVM_STAT_SERVERS = [ "http://proxy2.bulychev.net:80/{API}/{REQ}" ] # TODO - config
+XVM_STAT_TIMEOUT = 30000 # TODO - config
+
 COMMAND_LOG = "log"
 COMMAND_PING = "ping"
 COMMAND_GETMODS = "getMods"

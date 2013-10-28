@@ -1,152 +1,179 @@
-package net.wg.gui.components.controls 
+package net.wg.gui.components.controls
 {
-    import flash.display.*;
-    import flash.events.*;
-    import flash.geom.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.controls.*;
-    import scaleform.clik.events.*;
-    
-    public class Slider extends scaleform.clik.controls.Slider
-    {
-        public function Slider()
-        {
-            super();
-            offsetLeft = 1;
-            offsetRight = 5;
-            buttonMode = true;
-            return;
-        }
+   import scaleform.clik.controls.Slider;
+   import flash.display.MovieClip;
+   import scaleform.clik.utils.Padding;
+   import flash.events.MouseEvent;
+   import flash.events.Event;
+   import scaleform.clik.constants.InvalidationType;
+   import flash.geom.Point;
+   import scaleform.clik.events.SliderEvent;
 
-        protected override function scrollWheel(arg1:Number):void
-        {
-            if (!this.enabled) 
-            {
-                return;
-            }
-            value = value + arg1 * _snapInterval;
-            dispatchEvent(new flash.events.Event(flash.events.Event.CHANGE));
-            return;
-        }
 
-        protected override function configUI():void
-        {
-            super.configUI();
+   public class Slider extends scaleform.clik.controls.Slider
+   {
+          
+      public function Slider() {
+         this._fillPadding = new Padding(3,6,3,2);
+         super();
+         offsetLeft = 3;
+         offsetRight = 4;
+         if((track) && (track["bg"]) && (track["bg"]["patternMc"]))
+         {
+            this.patternMc = track["bg"]["patternMc"];
+         }
+         if((track) && (track["hitMc"]))
+         {
+            this.hitMc = track["hitMc"];
+         }
+         buttonMode = true;
+      }
+
+      private var progress_mask:MovieClip;
+
+      protected var _undefined:Boolean = false;
+
+      public var hitMc:MovieClip = null;
+
+      public var patternMc:BitmapFill = null;
+
+      private var _fillPaddingX:Number = 11;
+
+      private var _fillPaddingY:Number = 4;
+
+      private var _fillPadding:Padding;
+
+      override public function dispose() : void {
+         removeEventListener(MouseEvent.MOUSE_WHEEL,this.onScrollWheel,false);
+         this.progress_mask = null;
+         if(this.patternMc)
+         {
+            this.patternMc.dispose();
+            this.patternMc = null;
+         }
+         super.dispose();
+      }
+
+      override protected function scrollWheel(param1:Number) : void {
+         if(!this.enabled)
+         {
+            return;
+         }
+         value = value + _snapInterval * (param1 > 0?1:-1);
+         dispatchEvent(new Event(Event.CHANGE));
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         track["progress_mask"].gotoAndStop(0);
+         addEventListener(MouseEvent.MOUSE_WHEEL,this.onScrollWheel,false,0,true);
+      }
+
+      override protected function beginDrag(param1:MouseEvent) : void {
+         if(App.utils.commons.isLeftButton(param1))
+         {
+            super.beginDrag(param1);
+         }
+      }
+
+      override protected function trackPress(param1:MouseEvent) : void {
+         if(App.utils.commons.isLeftButton(param1))
+         {
+            super.trackPress(param1);
+         }
+      }
+
+      protected function onScrollWheel(param1:MouseEvent) : void {
+         this.scrollWheel(param1.delta);
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         this.updatePattern();
+      }
+
+      public function get undefinedDisabled() : Boolean {
+         return this._undefined;
+      }
+
+      public function set undefinedDisabled(param1:Boolean) : void {
+         if(this._undefined == param1)
+         {
+            return;
+         }
+         this._undefined = param1;
+         super.enabled = !param1;
+         thumb.enabled = track.enabled = !param1;
+         thumb.visible = !this._undefined;
+         track["progress_mask"].gotoAndStop(0);
+         invalidate(InvalidationType.STATE);
+      }
+
+      override public function get enabled() : Boolean {
+         return super.enabled;
+      }
+
+      override public function set enabled(param1:Boolean) : void {
+         if(param1 == super.enabled)
+         {
+            return;
+         }
+         super.enabled = param1;
+         thumb.visible = param1;
+         if(!initialized)
+         {
+            return;
+         }
+         invalidate(InvalidationType.STATE);
+      }
+
+      override protected function doDrag(param1:MouseEvent) : void {
+         var _loc2_:Point = globalToLocal(new Point(param1.stageX,param1.stageY));
+         var _loc3_:Number = _loc2_.x - _dragOffset.x;
+         var _loc4_:Number = track.width - offsetLeft - offsetRight;
+         var _loc5_:Number = lockValue((_loc3_ - offsetLeft) / _loc4_ * (_maximum - _minimum) + _minimum);
+         if(value == _loc5_)
+         {
+            return;
+         }
+         _value = _loc5_;
+         this.updateThumb();
+         if(liveDragging)
+         {
+            dispatchEvent(new SliderEvent(SliderEvent.VALUE_CHANGE,false,true,_value));
+         }
+      }
+
+      override protected function updateThumb() : void {
+         var _loc2_:* = NaN;
+         var _loc1_:Number = track.width - offsetLeft - offsetRight;
+         thumb.x = (_value - _minimum) / (_maximum - _minimum) * _loc1_ - thumb.width / 2 + offsetLeft ^ 0;
+         if(!this.enabled)
+         {
             track["progress_mask"].gotoAndStop(0);
-            addEventListener(flash.events.MouseEvent.MOUSE_WHEEL, this.onScrollWheel, false, 0, true);
             return;
-        }
-
-        protected override function beginDrag(arg1:flash.events.MouseEvent):void
-        {
-            if (App.utils.commons.isLeftButton(arg1)) 
-            {
-                super.beginDrag(arg1);
-            }
-            return;
-        }
-
-        protected override function trackPress(arg1:flash.events.MouseEvent):void
-        {
-            if (App.utils.commons.isLeftButton(arg1)) 
-            {
-                super.trackPress(arg1);
-            }
-            return;
-        }
-
-        protected function onScrollWheel(arg1:flash.events.MouseEvent):void
-        {
-            this.scrollWheel(arg1.delta);
-            return;
-        }
-
-        public function get undefinedDisabled():Boolean
-        {
-            return this._undefined;
-        }
-
-        public function set undefinedDisabled(arg1:Boolean):void
-        {
-            if (this._undefined == arg1) 
-            {
-                return;
-            }
-            this._undefined = arg1;
-            super.enabled = !arg1;
-            var loc1:*;
-            track.enabled = loc1 = !arg1;
-            thumb.enabled = loc1;
-            thumb.visible = !this._undefined;
+         }
+         if(!this._undefined)
+         {
+            _loc2_ = (position - _minimum) / (_maximum - _minimum);
+            track["progress_mask"].gotoAndStop(Math.round(_loc2_ * track["progress_mask"].totalFrames));
+         }
+         else
+         {
             track["progress_mask"].gotoAndStop(0);
-            invalidate(scaleform.clik.constants.InvalidationType.STATE);
-            return;
-        }
+         }
+      }
 
-        public override function get enabled():Boolean
-        {
-            return super.enabled;
-        }
+      private function updatePattern() : void {
+         if(this.patternMc)
+         {
+            this.patternMc.x = this._fillPadding.left;
+            this.patternMc.y = this._fillPadding.top;
+            this.patternMc.setActualScale(1 / this.track.actualScaleX,1 / this.track.actualScaleY);
+            this.patternMc.widthFill = Math.round(this.hitMc.width * this.track.actualScaleX);
+            this.patternMc.heightFill = Math.round(this.hitMc.height * this.track.actualScaleY);
+         }
+      }
+   }
 
-        public override function set enabled(arg1:Boolean):void
-        {
-            if (arg1 == super.enabled) 
-            {
-                return;
-            }
-            super.enabled = arg1;
-            thumb.visible = arg1;
-            if (!initialized) 
-            {
-                return;
-            }
-            invalidate(scaleform.clik.constants.InvalidationType.STATE);
-            return;
-        }
-
-        protected override function doDrag(arg1:flash.events.MouseEvent):void
-        {
-            var loc1:*=globalToLocal(new flash.geom.Point(arg1.stageX, arg1.stageY));
-            var loc2:*=loc1.x - _dragOffset.x;
-            var loc3:*=track.width - offsetLeft - offsetRight;
-            var loc4:*=lockValue((loc2 - offsetLeft) / loc3 * (_maximum - _minimum) + _minimum);
-            if (value == loc4) 
-            {
-                return;
-            }
-            _value = loc4;
-            this.updateThumb();
-            if (liveDragging) 
-            {
-                dispatchEvent(new scaleform.clik.events.SliderEvent(scaleform.clik.events.SliderEvent.VALUE_CHANGE, false, true, _value));
-            }
-            return;
-        }
-
-        protected override function updateThumb():void
-        {
-            var loc2:*=NaN;
-            var loc1:*=track.width - offsetLeft - offsetRight;
-            thumb.x = (_value - _minimum) / (_maximum - _minimum) * loc1 - thumb.width / 2 + offsetLeft ^ 0;
-            if (!this.enabled) 
-            {
-                track["progress_mask"].gotoAndStop(0);
-                return;
-            }
-            if (this._undefined) 
-            {
-                track["progress_mask"].gotoAndStop(0);
-            }
-            else 
-            {
-                loc2 = (position - _minimum) / (_maximum - _minimum);
-                track["progress_mask"].gotoAndStop(Math.round(loc2 * track["progress_mask"].totalFrames));
-            }
-            return;
-        }
-
-        internal var progress_mask:flash.display.MovieClip;
-
-        internal var _undefined:Boolean=false;
-    }
 }

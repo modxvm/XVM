@@ -1,249 +1,229 @@
-package org.idmedia.as3commons.util 
+package org.idmedia.as3commons.util
 {
-    import org.idmedia.as3commons.lang.*;
-    
-    public class AbstractMap extends Object implements org.idmedia.as3commons.util.Map
-    {
-        public function AbstractMap()
-        {
-            super();
-            return;
-        }
+   import org.idmedia.as3commons.lang.UnsupportedOperationException;
 
-        public function put(arg1:*, arg2:*):*
-        {
-            throw new org.idmedia.as3commons.lang.UnsupportedOperationException();
-        }
 
-        public function get(arg1:*):*
-        {
-            var loc3:*=null;
-            if (arg1 === undefined) 
-            {
-                return null;
-            }
-            var loc1:*=arg1;
-            var loc2:*=this.entrySet().iterator();
-            while (loc2.hasNext()) 
-            {
-                loc3 = loc2.next() as org.idmedia.as3commons.util.Entry;
-                if (loc1 !== loc3.getKey()) 
-                {
-                    continue;
-                }
-                return loc3.getValue();
-            }
+   public class AbstractMap extends Object implements Map
+   {
+          
+      public function AbstractMap() {
+         super();
+      }
+
+      public function put(param1:*, param2:*) : * {
+         throw new UnsupportedOperationException();
+      }
+
+      public function get(param1:*) : * {
+         var _loc4_:Entry = null;
+         if(param1 === undefined)
+         {
             return null;
-        }
-
-        public function containsKey(arg1:*):Boolean
-        {
-            var loc3:*=null;
-            var loc1:*=arg1 || null;
-            var loc2:*=this.entrySet().iterator();
-            while (loc2.hasNext()) 
+         }
+         var _loc2_:* = param1;
+         var _loc3_:Iterator = this.entrySet().iterator();
+         while(_loc3_.hasNext())
+         {
+            _loc4_ = _loc3_.next() as Entry;
+            if(_loc2_ === _loc4_.getKey())
             {
-                loc3 = loc2.next() as org.idmedia.as3commons.util.Entry;
-                if (loc1 !== loc3.getKey()) 
-                {
-                    continue;
-                }
-                return true;
+               return _loc4_.getValue();
             }
-            return false;
-        }
+         }
+         return null;
+      }
 
-        public function containsValue(arg1:*):Boolean
-        {
-            var loc3:*=null;
-            var loc1:*=arg1 || null;
-            var loc2:*=this.entrySet().iterator();
-            while (loc2.hasNext()) 
+      public function containsKey(param1:*) : Boolean {
+         var _loc4_:Entry = null;
+         var _loc2_:* = (param1) || (null);
+         var _loc3_:Iterator = this.entrySet().iterator();
+         while(_loc3_.hasNext())
+         {
+            _loc4_ = _loc3_.next() as Entry;
+            if(_loc2_ === _loc4_.getKey())
             {
-                loc3 = loc2.next() as org.idmedia.as3commons.util.Entry;
-                if (loc1 !== loc3.getValue()) 
-                {
-                    continue;
-                }
-                return true;
+               return true;
             }
-            return false;
-        }
+         }
+         return false;
+      }
 
-        public function remove(arg1:*):*
-        {
-            var loc5:*=null;
-            var loc1:*=arg1 || null;
-            var loc2:*=this.entrySet().iterator();
-            var loc3:*=null;
-            while (loc3 == null && loc2.hasNext()) 
+      public function containsValue(param1:*) : Boolean {
+         var _loc4_:Entry = null;
+         var _loc2_:* = (param1) || (null);
+         var _loc3_:Iterator = this.entrySet().iterator();
+         while(_loc3_.hasNext())
+         {
+            _loc4_ = _loc3_.next() as Entry;
+            if(_loc2_ === _loc4_.getValue())
             {
-                loc5 = org.idmedia.as3commons.util.Entry(loc2.next());
-                if (arg1 !== loc5.getKey()) 
-                {
-                    continue;
-                }
-                loc3 = loc5;
+               return true;
             }
-            var loc4:*=null;
-            if (loc3 != null) 
+         }
+         return false;
+      }
+
+      public function remove(param1:*) : * {
+         var _loc6_:Entry = null;
+         var _loc2_:* = (param1) || (null);
+         var _loc3_:Iterator = this.entrySet().iterator();
+         var _loc4_:Entry = null;
+         while(_loc4_ == null && (_loc3_.hasNext()))
+         {
+            _loc6_ = Entry(_loc3_.next());
+            if(param1 === _loc6_.getKey())
             {
-                loc4 = loc3.getValue();
-                loc2.remove();
+               _loc4_ = _loc6_;
             }
-            return loc4;
-        }
+         }
+         var _loc5_:* = null;
+         if(_loc4_ != null)
+         {
+            _loc5_ = _loc4_.getValue();
+            _loc3_.remove();
+         }
+         return _loc5_;
+      }
 
-        public function clear():void
-        {
-            this.entrySet().clear();
-            return;
-        }
+      public function clear() : void {
+         this.entrySet().clear();
+      }
 
-        public function size():int
-        {
-            return this.entrySet().size();
-        }
+      public function size() : int {
+         return this.entrySet().size();
+      }
 
-        public function values():org.idmedia.as3commons.util.Collection
-        {
-            if (this.v == null) 
-            {
-                this.v = new CollectionImpl(this);
-            }
-            return this.v;
-        }
+      private var v:Collection = null;
 
-        public function keySet():org.idmedia.as3commons.util.Set
-        {
-            if (this.k == null) 
-            {
-                this.k = new AbstractEntrySet(this);
-            }
-            return this.k;
-        }
+      public function values() : Collection {
+         if(this.v == null)
+         {
+            this.v = new CollectionImpl(this);
+         }
+         return this.v;
+      }
 
-        public function entrySet():org.idmedia.as3commons.util.Set
-        {
-            throw new org.idmedia.as3commons.lang.UnsupportedOperationException();
-        }
+      private var k:Set = null;
 
-        public function isEmpty():Boolean
-        {
-            return this.size() == 0;
-        }
+      public function keySet() : Set {
+         if(this.k == null)
+         {
+            this.k = new AbstractEntrySet(this);
+         }
+         return this.k;
+      }
 
-        public function putAll(arg1:org.idmedia.as3commons.util.Map):void
-        {
-            var loc2:*=null;
-            var loc1:*=arg1.entrySet().iterator();
-            while (loc1.hasNext()) 
-            {
-                loc2 = loc1.next() as org.idmedia.as3commons.util.Entry;
-                this.put(loc2.getKey(), loc2.getValue());
-            }
-            return;
-        }
+      public function entrySet() : Set {
+         throw new UnsupportedOperationException();
+      }
 
-        public function equals(arg1:*):Boolean
-        {
-            return arg1 === this;
-        }
+      public function isEmpty() : Boolean {
+         return this.size() == 0;
+      }
 
-        internal var v:org.idmedia.as3commons.util.Collection=null;
+      public function putAll(param1:Map) : void {
+         var _loc3_:Entry = null;
+         var _loc2_:Iterator = param1.entrySet().iterator();
+         while(_loc2_.hasNext())
+         {
+            _loc3_ = _loc2_.next() as Entry;
+            this.put(_loc3_.getKey(),_loc3_.getValue());
+         }
+      }
 
-        internal var k:org.idmedia.as3commons.util.Set=null;
-    }
-}
+      public function equals(param1:*) : Boolean {
+         return param1 === this;
+      }
+   }
+
+}   import org.idmedia.as3commons.util.AbstractSet;
+   import org.idmedia.as3commons.util.Map;
+   import org.idmedia.as3commons.util.Iterator;
 
 
-class AbstractEntrySet extends org.idmedia.as3commons.util.AbstractSet
-{
-    public function AbstractEntrySet(arg1:org.idmedia.as3commons.util.Map)
-    {
-        super();
-        this.m = arg1;
-        return;
-    }
+   class AbstractEntrySet extends AbstractSet
+   {
+          
+      function AbstractEntrySet(param1:Map) {
+         super();
+         this.m = param1;
+      }
 
-    public override function iterator():org.idmedia.as3commons.util.Iterator
-    {
-        return new KeyIterator(this.m.entrySet().iterator());
-    }
+      private var m:Map = null;
 
-    public override function size():int
-    {
-        return this.m.size();
-    }
+      override public function iterator() : Iterator {
+         return new KeyIterator(this.m.entrySet().iterator());
+      }
 
-    public override function contains(arg1:*):Boolean
-    {
-        return this.m.containsKey(arg1);
-    }
+      override public function size() : int {
+         return this.m.size();
+      }
 
-    internal var m:org.idmedia.as3commons.util.Map=null;
-}
+      override public function contains(param1:*) : Boolean {
+         return this.m.containsKey(param1);
+      }
+   }
+   import org.idmedia.as3commons.util.AbstractCollection;
+   import org.idmedia.as3commons.util.Map;
+   import org.idmedia.as3commons.util.Iterator;
 
-final class CollectionImpl extends org.idmedia.as3commons.util.AbstractCollection
-{
-    public function CollectionImpl(arg1:org.idmedia.as3commons.util.Map)
-    {
-        super();
-        this.map = arg1;
-        return;
-    }
 
-    public override function iterator():org.idmedia.as3commons.util.Iterator
-    {
-        return new ValueIterator(this.map.entrySet().iterator());
-    }
+   final class CollectionImpl extends AbstractCollection
+   {
+          
+      function CollectionImpl(param1:Map) {
+         super();
+         this.map = param1;
+      }
 
-    public override function size():int
-    {
-        return this.map.size();
-    }
+      private var map:Map;
 
-    internal var map:org.idmedia.as3commons.util.Map;
-}
+      override public function iterator() : Iterator {
+         return new ValueIterator(this.map.entrySet().iterator());
+      }
 
-class KeyIterator extends Object implements org.idmedia.as3commons.util.Iterator
-{
-    public function KeyIterator(arg1:org.idmedia.as3commons.util.Iterator)
-    {
-        super();
-        this.iter = arg1;
-        return;
-    }
+      override public function size() : int {
+         return this.map.size();
+      }
+   }
+   import org.idmedia.as3commons.util.Iterator;
+   import org.idmedia.as3commons.util.Entry;
 
-    public function hasNext():Boolean
-    {
-        return this.iter.hasNext();
-    }
 
-    public function next():*
-    {
-        return org.idmedia.as3commons.util.Entry(this.iter.next()).getKey();
-    }
+   class KeyIterator extends Object implements Iterator
+   {
+          
+      function KeyIterator(param1:Iterator) {
+         super();
+         this.iter = param1;
+      }
 
-    public function remove():void
-    {
-        this.iter.remove();
-        return;
-    }
+      protected var iter:Iterator;
 
-    protected var iter:org.idmedia.as3commons.util.Iterator;
-}
+      public function hasNext() : Boolean {
+         return this.iter.hasNext();
+      }
 
-final class ValueIterator extends KeyIterator
-{
-    public function ValueIterator(arg1:org.idmedia.as3commons.util.Iterator)
-    {
-        super(arg1);
-        return;
-    }
+      public function next() : * {
+         return Entry(this.iter.next()).getKey();
+      }
 
-    public override function next():*
-    {
-        return org.idmedia.as3commons.util.Entry(iter.next()).getValue();
-    }
-}
+      public function remove() : void {
+         this.iter.remove();
+      }
+   }
+   import org.idmedia.as3commons.util.Entry;
+   import org.idmedia.as3commons.util.Iterator;
+
+
+   final class ValueIterator extends KeyIterator
+   {
+          
+      function ValueIterator(param1:Iterator) {
+         super(param1);
+      }
+
+      override public function next() : * {
+         return Entry(iter.next()).getValue();
+      }
+   }

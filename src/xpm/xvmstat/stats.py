@@ -61,8 +61,6 @@ class _Stat(object):
         self.cache = {}
         self.cacheUser = {}
         self.info = None
-        self.servers = [ "http://proxy2.bulychev.net/%1" ] # TODO
-        self.timeout = 30000
 
     def __del__(self):
         pass
@@ -78,13 +76,12 @@ class _Stat(object):
         self.resp = None
         self.thread = Thread(target=self.req['func'])
         self.thread.start()
-        if self.req['method'] == RESPOND_USERDATA:
-            self.thread.join() # TODO: main thread blocks execution. find alternative
         self._checkResult()
 
     def _checkResult(self):
         with self.lock:
             #debug("checkResult: " + ("no" if self.resp is None else "yes"))
+            self.thread.join(0.01) # 10 ms
             if self.resp is None:
                 BigWorld.callback(0.05, self._checkResult)
                 return
@@ -131,7 +128,7 @@ class _Stat(object):
         players = {}
         for vehId in self.players:
             pl = self.players[vehId]
-            cacheKey = "%d=%s" % (pl.playerId, pl.vn)
+            cacheKey = "%d=%d" % (pl.playerId, pl.vId)
             if cacheKey not in self.cache:
                 cacheKey = "%d" % (pl.playerId)
                 if cacheKey not in self.cache:
@@ -147,10 +144,10 @@ class _Stat(object):
 
     def _update_players(self):
         vehicles = BigWorld.player().arena.vehicles
-        for (vId, vData) in vehicles.items():
-            if vId not in self.players:
-                self.players[vId] = _Player(vId, vData)
-            self.players[vId].update(vData)
+        for (vehId, vData) in vehicles.items():
+            if vehId not in self.players:
+                self.players[vehId] = _Player(vehId, vData)
+            self.players[vehId].update(vData)
 
 
     def _load_stat(self):
@@ -159,32 +156,31 @@ class _Stat(object):
 
         for vehId in self.players:
             pl = self.players[vehId]
-            cacheKey = "%d=%s" % (pl.playerId, pl.vn)
+            cacheKey = "%d=%d" % (pl.playerId, pl.vId)
 
             if cacheKey in self.cache:
                 continue
             if str(pl.playerId) in self.playersSkip:
                 continue
 
-            if pl.vn in [None, '', 'UNKNOWN']:
-                requestList.append(str(pl.playerId))
-            else:
-                requestList.append("%d=%s%s" % (pl.playerId, pl.vn,
-                        '=1' if pl.vehId == player.playerVehicleID else ''))
+            #if pl.vId in [None, '', 'UNKNOWN']:
+            #    requestList.append(str(pl.playerId))
+            #else:
+            requestList.append("%d=%d%s" % (pl.playerId, pl.vId,
+                '=1' if pl.vehId == player.playerVehicleID else ''))
 
         if not requestList:
             return
         updateRequest = ','.join(requestList)
 
-        if self.servers is None or len(self.servers) <= 0:
+        if XVM_STAT_SERVERS is None or len(XVM_STAT_SERVERS) <= 0:
             err('Cannot read statistics: no suitable server was found.')
             return
 
         try:
             if self.req['args'][0] == True: # allowNetwork
-                updateRequest = updateRequest.replace('?', '%3F') # for Chinese server
-                server = self.servers[randint(0, len(self.servers) - 1)]
-                responseFromServer, duration = self.loadUrl(server, updateRequest)
+                server = XVM_STAT_SERVERS[randint(0, len(XVM_STAT_SERVERS) - 1)]
+                (responseFromServer, duration) = self.loadUrl(server, updateRequest)
 
                 if len(responseFromServer) <= 0:
                     err('Empty response or parsing error')
@@ -206,13 +202,13 @@ class _Stat(object):
 
             for stat in data['players']:
                 #debug(json.dumps(stat))
-                self._fix(stat)
+                self._fix(stat, None)
                 #pprint(stat)
                 if 'nm' not in stat or not stat['nm']:
                     continue
                 if 'b' not in stat or stat['b'] <= 0:
                     continue
-                cacheKey = "%d%s" % (stat['_id'], "=" + stat['vn'] if stat['vn'] else '')
+                cacheKey = "%d=%d" % (stat['_id'], stat.get('v', {}).get('id', 0))
                 self.cache[cacheKey] = stat
 
         except Exception, ex:
@@ -221,24 +217,35 @@ class _Stat(object):
 
     def _get_user(self):
         (value, isId) = self.req['args']
+        orig_value = value
+        reg = region
         if isId:
             value = str(int(value))
-        cacheKey = "%s;%d" % (value, isId)
+        else:
+            if reg == "CT":
+                suf = value[-3:]
+                if suf in ('_RU', '_EU', '_NA', '_SG'):
+                    reg = value[-2:]
+                    value = value[:-3]
+                else:
+                    reg = "RU"
+        cacheKey = "%s/%s" % ("ID" if isId else reg, value)
         data = None
         if cacheKey not in self.cacheUser:
             try:
-                req = "INFO/%s/%s" % ("ID" if isId else region, value)
-                server = self.servers[randint(0, len(self.servers) - 1)]
+                req = "INFO/" + cacheKey
+                server = XVM_STAT_SERVERS[randint(0, len(XVM_STAT_SERVERS) - 1)]
                 responseFromServer, duration = self.loadUrl(server, req)
 
                 if not responseFromServer:
                     err('Empty response or parsing error')
                 else:
                     data = json.loads(responseFromServer)[0]
-                    self._fix(data)
-                    if data is not None and 'nm' in data and '_id' in data:
-                        self.cacheUser[data['nm'] + ";0"] = data
-                        self.cacheUser[str(data['_id']) + ";1"] = data
+                    if data is not None:
+                        self._fix(data, None if isId else orig_value)
+                        if 'nm' in data and '_id' in data:
+                            self.cacheUser[reg + "/" + data['nm']] = data
+                            self.cacheUser["ID/" + str(data['_id'])] = data
 
             except Exception, ex:
                 err('_get_user() exception: ' + traceback.format_exc(ex))
@@ -251,17 +258,15 @@ class _Stat(object):
         s = {
             '_id': pl.playerId,
             'nm': pl.name,
-            'vn': pl.vn,
+            'v': { 'id':pl.vId },
         }
-        return self._fix(s)
+        return self._fix(s, None)
 
-    def loadUrl(self, url, members, test=False):
-        if not test:
-            log('  HTTP: ' + str(members), '[INFO]  ')
-
-        u = urlparse(url.replace('%1', members).replace('%2', _PUBLIC_TOKEN))
-        #debug('loadUrl: ' + url )
-        #time.sleep(10)
+    def loadUrl(self, url, req):
+        url = url.replace("{API}", XVM_STAT_API_VERSION).replace("{REQ}", req)
+        u = urlparse(url)
+        log('  HTTP: ' + u.path, '[INFO]  ')
+        #time.sleep(5)
 
         duration = None
         responseFromServer = ''
@@ -269,7 +274,7 @@ class _Stat(object):
         conn = None
         try:
             #log(u)
-            conn = httplib.HTTPConnection(u.netloc, timeout=self.timeout/1000)
+            conn = httplib.HTTPConnection(u.netloc, timeout=XVM_STAT_TIMEOUT/1000)
             conn.request("GET", u.path)
             resp = conn.getresponse()
             #log(resp.status)
@@ -297,19 +302,16 @@ class _Stat(object):
 
         return responseFromServer, duration
 
-    def _fix(self, stat):
+    def _fix(self, stat, orig_name):
+        #self._r(stat, 'id', '_id')
         if 'twr' in stat:
             del stat['twr']
-        self._r(stat, 'id', '_id')
-        self._r(stat, 'name', 'nm')
-        self._r(stat, 'date', 'dt')
-        self._r(stat, 'status', 'st')
-        self._r(stat, 'battles', 'b')
-        self._r(stat, 'wins', 'w')
-        self._r(stat, 'eff', 'e')
-        self._r(stat, 'vname', 'vn')
+        if 'v' not in stat:
+            stat['v'] = {}
 
         player = BigWorld.player()
+        from avatar import PlayerAvatar
+        team = 0 if player is not PlayerAvatar else player.team
 
         if self.players is not None:
             # TODO: optimize
@@ -319,16 +321,15 @@ class _Stat(object):
                     if pl.clan:
                         stat['clan'] = pl.clan
                     stat['name'] = pl.name
-                    stat['team'] = TEAM_ALLY if player.team == pl.team else TEAM_ENEMY
+                    stat['team'] = TEAM_ALLY if team == pl.team else TEAM_ENEMY
                     stat['alive'] = pl.alive
                     stat['ready'] = pl.ready
-                    if pl.vn == stat['vn'].upper():
-                        stat['vname'] = pl.vName
-                        stat['icon'] = pl.vIcon
-                        stat['maxHealth'] = pl.maxHealth
-                        stat['vtype'] = pl.vType
-                        stat['level'] = pl.vLevel
+                    if 'id' not in stat['v']:
+                        stat['v']['id'] = pl.vId
                     break;
+
+        if orig_name is not None:
+            stat['name'] = orig_name
 
         #log(json.dumps(stat))
         return stat
@@ -351,18 +352,15 @@ class _Player(object):
         self.playerId = vData['accountDBID']
         self.name = vData['name']
         self.clan = vData['clanAbbrev']
-        self.vName = vData['vehicleType'].type.shortUserString
-
+        self.vId = vData['vehicleType'].type.compactDescr
 
     def update(self, vData):
-        self.vName = vData['vehicleType'].type.shortUserString
-        vId = vData['vehicleType'].type.id
-        self.vId = (vId[0] << 4) | (vId[1] << 8)
+        self.vId = vData['vehicleType'].type.compactDescr
         self.vLevel = vData['vehicleType'].type.level
         self.maxHealth = vData['vehicleType'].maxHealth
         self.vIcon = vData['vehicleType'].type.name.replace(':', '-')
-        self.vn = vData['vehicleType'].type.name
-        self.vn = self.vn[self.vn.find(':')+1:].upper()
+        #self.vn = vData['vehicleType'].type.name
+        #self.vn = self.vn[self.vn.find(':')+1:].upper()
         self.vType = set(VEHICLE_CLASS_TAGS.intersection(vData['vehicleType'].type.tags)).pop()
         self.team = vData['team']
         self.alive = vData['isAlive']

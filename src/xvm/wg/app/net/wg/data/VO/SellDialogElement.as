@@ -1,102 +1,83 @@
-package net.wg.data.VO 
+package net.wg.data.VO
 {
-    public class SellDialogElement extends Object
-    {
-        public function SellDialogElement()
-        {
-            super();
-            return;
-        }
 
-        public function get removePrice():Number
-        {
-            return this._removePrice;
-        }
 
-        public function set removePrice(arg1:Number):void
-        {
-            this._removePrice = arg1;
-            return;
-        }
+   public class SellDialogElement extends Object
+   {
+          
+      public function SellDialogElement() {
+         super();
+      }
 
-        public function get moneyValue():Number
-        {
-            return this._moneyValue;
-        }
+      private var _id:String;
 
-        public function set moneyValue(arg1:Number):void
-        {
-            this._moneyValue = arg1;
-            return;
-        }
+      private var _isRemovable:Boolean;
 
-        public function get inInventory():Boolean
-        {
-            return this._inInventory;
-        }
+      private var _data:Object;
 
-        public function set inInventory(arg1:Boolean):void
-        {
-            this._inInventory = arg1;
-            return;
-        }
+      private var _type:String;
 
-        public function get type():String
-        {
-            return this._type;
-        }
+      private var _inInventory:Boolean;
 
-        public function set type(arg1:String):void
-        {
-            this._type = arg1;
-            return;
-        }
+      private var _moneyValue:Number;
 
-        public function get data():Object
-        {
-            return this._data;
-        }
+      private var _removePrice:Number;
 
-        public function set data(arg1:Object):void
-        {
-            this._data = arg1;
-            return;
-        }
+      public function get removePrice() : Number {
+         return this._removePrice;
+      }
 
-        public function get isRemovable():Boolean
-        {
-            return this._isRemovable;
-        }
+      public function set removePrice(param1:Number) : void {
+         this._removePrice = param1;
+      }
 
-        public function set isRemovable(arg1:Boolean):void
-        {
-            this._isRemovable = arg1;
-            return;
-        }
+      public function get moneyValue() : Number {
+         return this._moneyValue;
+      }
 
-        public function get id():String
-        {
-            return this._id;
-        }
+      public function set moneyValue(param1:Number) : void {
+         this._moneyValue = param1;
+      }
 
-        public function set id(arg1:String):void
-        {
-            this._id = arg1;
-            return;
-        }
+      public function get inInventory() : Boolean {
+         return this._inInventory;
+      }
 
-        internal var _id:String;
+      public function set inInventory(param1:Boolean) : void {
+         this._inInventory = param1;
+      }
 
-        internal var _isRemovable:Boolean;
+      public function get type() : String {
+         return this._type;
+      }
 
-        internal var _data:Object;
+      public function set type(param1:String) : void {
+         this._type = param1;
+      }
 
-        internal var _type:String;
+      public function get data() : Object {
+         return this._data;
+      }
 
-        internal var _inInventory:Boolean;
+      public function set data(param1:Object) : void {
+         this._data = param1;
+      }
 
-        internal var _moneyValue:Number;
+      public function get isRemovable() : Boolean {
+         return this._isRemovable;
+      }
 
-        internal var _removePrice:Number;
-    }
+      public function set isRemovable(param1:Boolean) : void {
+         this._isRemovable = param1;
+      }
+
+      public function get id() : String {
+         return this._id;
+      }
+
+      public function set id(param1:String) : void {
+         this._id = param1;
+      }
+   }
+
 }

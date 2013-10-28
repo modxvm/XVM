@@ -1,13 +1,16 @@
-package net.wg.gui.prebattle.meta 
+package net.wg.gui.prebattle.meta
 {
-    import flash.events.*;
-    
-    public interface INotificationInvitesWindowMeta extends flash.events.IEventDispatcher
-    {
-        function requestInvitesS():void;
+   import flash.events.IEventDispatcher;
 
-        function selectedInviteS(arg1:Object):void;
 
-        function as_setInvites(arg1:Object):void;
-    }
+   public interface INotificationInvitesWindowMeta extends IEventDispatcher
+   {
+          
+      function requestInvitesS() : void;
+
+      function selectedInviteS(param1:Object) : void;
+
+      function as_setInvites(param1:Object) : void;
+   }
+
 }

@@ -1,215 +1,150 @@
-package com.adobe.serialization.json 
+package com.adobe.serialization.json
 {
-    import flash.utils.*;
-    
-    public class JSONEncoder extends Object
-    {
-        public function JSONEncoder(arg1:*)
-        {
-            super();
-            this.jsonString = this.convertToString(arg1);
-            return;
-        }
+   import flash.utils.describeType;
 
-        public function getString():String
-        {
-            return this.jsonString;
-        }
 
-        internal function convertToString(arg1:*):String
-        {
-            if (arg1 is String) 
-            {
-                return this.escapeString(arg1 as String);
-            }
-            if (arg1 is Number) 
-            {
-                return isFinite(arg1 as Number) ? arg1.toString() : "null";
-            }
-            if (arg1 is Boolean) 
-            {
-                return arg1 ? "true" : "false";
-            }
-            if (arg1 is Array) 
-            {
-                return this.arrayToString(arg1 as Array);
-            }
-            if (arg1 is Object && !(arg1 == null)) 
-            {
-                return this.objectToString(arg1);
-            }
-            return "null";
-        }
+   public class JSONEncoder extends Object
+   {
+          
+      public function JSONEncoder(param1:*) {
+         super();
+         this.jsonString = this.convertToString(param1);
+      }
 
-        internal function escapeString(arg1:String):String
-        {
-            var loc2:*=null;
-            var loc5:*=null;
-            var loc6:*=null;
-            var loc1:*="";
-            var loc3:*=arg1.length;
-            var loc4:*=0;
-            while (loc4 < loc3) 
-            {
-                loc2 = arg1.charAt(loc4);
-                var loc7:*=loc2;
-                switch (loc7) 
-                {
-                    case "\"":
-                    {
-                        loc1 = loc1 + "\\\"";
-                        break;
-                    }
-                    case "\\":
-                    {
-                        loc1 = loc1 + "\\\\";
-                        break;
-                    }
-                    case "":
-                    {
-                        loc1 = loc1 + "\\b";
-                        break;
-                    }
-                    case "":
-                    {
-                        loc1 = loc1 + "\\f";
-                        break;
-                    }
-                    case "\n":
-                    {
-                        loc1 = loc1 + "\\n";
-                        break;
-                    }
-                    case "\r":
-                    {
-                        loc1 = loc1 + "\\r";
-                        break;
-                    }
-                    case "\t":
-                    {
-                        loc1 = loc1 + "\\t";
-                        break;
-                    }
-                    default:
-                    {
-                        if (loc2 < " ") 
-                        {
-                            loc6 = (loc5 = loc2.charCodeAt(0).toString(16)).length != 2 ? "000" : "00";
-                            loc1 = loc1 + ("\\u" + loc6 + loc5);
-                        }
-                        else 
-                        {
-                            loc1 = loc1 + loc2;
-                        }
-                    }
-                }
-                ++loc4;
-            }
-            return "\"" + loc1 + "\"";
-        }
+      private var jsonString:String;
 
-        internal function arrayToString(arg1:Array):String
-        {
-            var loc1:*="";
-            var loc2:*=arg1.length;
-            var loc3:*=0;
-            while (loc3 < loc2) 
-            {
-                if (loc1.length > 0) 
-                {
-                    loc1 = loc1 + ",";
-                }
-                loc1 = loc1 + this.convertToString(arg1[loc3]);
-                ++loc3;
-            }
-            return "[" + loc1 + "]";
-        }
+      public function getString() : String {
+         return this.jsonString;
+      }
 
-        internal function objectToString(arg1:Object):String
-        {
-            var o:Object;
-            var s:String;
-            var classInfo:XML;
-            var value:Object;
-            var key:String;
-            var v:XML;
+      private function convertToString(param1:*) : String {
+         if(param1  is  String)
+         {
+            return this.escapeString(param1 as String);
+         }
+         if(param1  is  Number)
+         {
+            return isFinite(param1 as Number)?param1.toString():"null";
+         }
+         if(param1  is  Boolean)
+         {
+            return param1?"true":"false";
+         }
+         if(param1  is  Array)
+         {
+            return this.arrayToString(param1 as Array);
+         }
+         if(param1  is  Object && !(param1 == null))
+         {
+            return this.objectToString(param1);
+         }
+         return "null";
+      }
 
-            var loc1:*;
-            value = null;
-            key = null;
-            v = null;
-            o = arg1;
-            s = "";
-            classInfo = flash.utils.describeType(o);
-            if (classInfo.@name.toString() != "Object") 
+      private function escapeString(param1:String) : String {
+         var _loc3_:String = null;
+         var _loc6_:String = null;
+         var _loc7_:String = null;
+         var _loc2_:* = "";
+         var _loc4_:Number = param1.length;
+         var _loc5_:* = 0;
+         while(_loc5_ < _loc4_)
+         {
+            _loc3_ = param1.charAt(_loc5_);
+            switch(_loc3_)
             {
-                loc2 = 0;
-                var loc5:*=0;
-                var loc6:*=classInfo;
-                var loc4:*=new XMLList("");
-                for each (var loc7:* in loc6) 
-                {
-                    var loc8:*;
-                    with (loc8 = loc7) 
-                    {
-                        if (name() == "variable" || name() == "accessor" && attribute("access").charAt(0) == "r") 
-                        {
-                            loc4[loc5] = loc7;
-                        }
-                    }
-                }
-                loc3 = loc4;
-                for each (v in loc3) 
-                {
-                    if (v.metadata) 
-                    {
-                        v.metadata;
-                        loc5 = 0;
-                        loc6 = v.metadata;
-                        loc4 = new XMLList("");
-                        for each (loc7 in loc6) 
-                        {
-                            with (loc8 = loc7) 
-                            {
-                                if (@name == "Transient") 
-                                {
-                                    loc4[loc5] = loc7;
-                                }
-                            }
-                        }
-                    }
-                    if (v.metadata) 
-                    {
-                        continue;
-                    }
-                    if (s.length > 0) 
-                    {
-                        s = s + ",";
-                    }
-                    s = s + (this.escapeString(v.@name.toString()) + ":" + this.convertToString(o[v.@name]));
-                }
+               case "\"":
+                  _loc2_ = _loc2_ + "\\\"";
+                  break;
+               case "\\":
+                  _loc2_ = _loc2_ + "\\\\";
+                  break;
+               case "\b":
+                  _loc2_ = _loc2_ + "\\b";
+                  break;
+               case "\f":
+                  _loc2_ = _loc2_ + "\\f";
+                  break;
+               case "\n":
+                  _loc2_ = _loc2_ + "\\n";
+                  break;
+               case "\r":
+                  _loc2_ = _loc2_ + "\\r";
+                  break;
+               case "\t":
+                  _loc2_ = _loc2_ + "\\t";
+                  break;
+               default:
+                  if(_loc3_ < " ")
+                  {
+                     _loc6_ = _loc3_.charCodeAt(0).toString(16);
+                     _loc7_ = _loc6_.length == 2?"00":"000";
+                     _loc2_ = _loc2_ + ("\\u" + _loc7_ + _loc6_);
+                  }
+                  else
+                  {
+                     _loc2_ = _loc2_ + _loc3_;
+                  }
             }
-            else 
-            {
-                var loc2:*=0;
-                var loc3:*=o;
-                for (key in loc3) 
-                {
-                    value = o[key];
-                    if (value is Function) 
-                    {
-                        continue;
-                    }
-                    if (s.length > 0) 
-                    {
-                        s = s + ",";
-                    }
-                    s = s + (this.escapeString(key) + ":" + this.convertToString(value));
-                }
-            }
-            return "{" + s + "}";
-        }
+            _loc5_++;
+         }
+         return "\"" + _loc2_ + "\"";
+      }
 
-        internal var jsonString:String;
-    }
+      private function arrayToString(param1:Array) : String {
+         var _loc2_:* = "";
+         var _loc3_:int = param1.length;
+         var _loc4_:* = 0;
+         while(_loc4_ < _loc3_)
+         {
+            if(_loc2_.length > 0)
+            {
+               _loc2_ = _loc2_ + ",";
+            }
+            _loc2_ = _loc2_ + this.convertToString(param1[_loc4_]);
+            _loc4_++;
+         }
+         return "[" + _loc2_ + "]";
+      }
+
+      private function objectToString(param1:Object) : String {
+         var value:Object = null;
+         var key:String = null;
+         var v:XML = null;
+         var o:Object = param1;
+         var s:String = "";
+         var classInfo:XML = describeType(o);
+         if(classInfo.@name.toString() == "Object")
+         {
+            for (key in o)
+            {
+               value = o[key];
+               if(!(value  is  Function))
+               {
+                  if(s.length > 0)
+                  {
+                     s = s + ",";
+                  }
+                  s = s + (this.escapeString(key) + ":" + this.convertToString(value));
+               }
+            }
+         }
+         else
+         {
+            for each (v in classInfo..*.(name() == "variable" || name() == "accessor" && attribute("access").charAt(0) == "r"))
+            {
+               if(!((v.metadata) && v.metadata.(@name == "Transient").length() > 0))
+               {
+                  if(s.length > 0)
+                  {
+                     s = s + ",";
+                  }
+                  s = s + (this.escapeString(v.@name.toString()) + ":" + this.convertToString(o[v.@name]));
+               }
+            }
+         }
+         return "{" + s + "}";
+      }
+   }
+
 }

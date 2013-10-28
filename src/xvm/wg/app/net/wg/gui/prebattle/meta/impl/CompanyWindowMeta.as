@@ -1,107 +1,92 @@
-package net.wg.gui.prebattle.meta.impl 
+package net.wg.gui.prebattle.meta.impl
 {
-    import net.wg.data.constants.*;
-    import net.wg.gui.prebattle.meta.abstract.*;
-    
-    public class CompanyWindowMeta extends net.wg.gui.prebattle.meta.abstract.PrebattleWindowAbstract
-    {
-        public function CompanyWindowMeta()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.prebattle.meta.abstract.PrebattleWindowAbstract;
+   import net.wg.data.constants.Errors;
 
-        public function requestToAssignS(arg1:Number):void
-        {
-            App.utils.asserter.assertNotNull(this.requestToAssign, "requestToAssign" + net.wg.data.constants.Errors.CANT_NULL);
-            this.requestToAssign(arg1);
-            return;
-        }
 
-        public function requestToUnassignS(arg1:Number):void
-        {
-            App.utils.asserter.assertNotNull(this.requestToUnassign, "requestToUnassign" + net.wg.data.constants.Errors.CANT_NULL);
-            this.requestToUnassign(arg1);
-            return;
-        }
+   public class CompanyWindowMeta extends PrebattleWindowAbstract
+   {
+          
+      public function CompanyWindowMeta() {
+         super();
+      }
 
-        public function requestToChangeOpenedS(arg1:Boolean):void
-        {
-            App.utils.asserter.assertNotNull(this.requestToChangeOpened, "requestToChangeOpened" + net.wg.data.constants.Errors.CANT_NULL);
-            this.requestToChangeOpened(arg1);
-            return;
-        }
+      public var requestToAssign:Function = null;
 
-        public function requestToChangeCommentS(arg1:String):void
-        {
-            App.utils.asserter.assertNotNull(this.requestToChangeComment, "requestToChangeComment" + net.wg.data.constants.Errors.CANT_NULL);
-            this.requestToChangeComment(arg1);
-            return;
-        }
+      public var requestToUnassign:Function = null;
 
-        public function requestToChangeDivisionS(arg1:uint):void
-        {
-            App.utils.asserter.assertNotNull(this.requestToChangeDivision, "requestToChangeDivision" + net.wg.data.constants.Errors.CANT_NULL);
-            this.requestToChangeDivision(arg1);
-            return;
-        }
+      public var requestToChangeOpened:Function = null;
 
-        public function getCompanyNameS():String
-        {
-            App.utils.asserter.assertNotNull(this.getCompanyName, "getCompanyName" + net.wg.data.constants.Errors.CANT_NULL);
-            return this.getCompanyName();
-        }
+      public var requestToChangeComment:Function = null;
 
-        public function canMoveToAssignedS():Boolean
-        {
-            App.utils.asserter.assertNotNull(this.canMoveToAssigned, "canMoveToAssigned" + net.wg.data.constants.Errors.CANT_NULL);
-            return this.canMoveToAssigned();
-        }
+      public var requestToChangeDivision:Function = null;
 
-        public function canMoveToUnassignedS():Boolean
-        {
-            App.utils.asserter.assertNotNull(this.canMoveToUnassigned, "canMoveToUnassigned" + net.wg.data.constants.Errors.CANT_NULL);
-            return this.canMoveToUnassigned();
-        }
+      public var getCompanyName:Function = null;
 
-        public function canMakeOpenedClosedS():Boolean
-        {
-            App.utils.asserter.assertNotNull(this.canMakeOpenedClosed, "canMakeOpenedClosed" + net.wg.data.constants.Errors.CANT_NULL);
-            return this.canMakeOpenedClosed();
-        }
+      public var canMoveToAssigned:Function = null;
 
-        public function canChangeCommentS():Boolean
-        {
-            App.utils.asserter.assertNotNull(this.canChangeComment, "canChangeComment" + net.wg.data.constants.Errors.CANT_NULL);
-            return this.canChangeComment();
-        }
+      public var canMoveToUnassigned:Function = null;
 
-        public function canChangeDivisionS():Boolean
-        {
-            App.utils.asserter.assertNotNull(this.canChangeDivision, "canChangeDivision" + net.wg.data.constants.Errors.CANT_NULL);
-            return this.canChangeDivision();
-        }
+      public var canMakeOpenedClosed:Function = null;
 
-        public var requestToAssign:Function=null;
+      public var canChangeComment:Function = null;
 
-        public var requestToUnassign:Function=null;
+      public var canChangeDivision:Function = null;
 
-        public var requestToChangeOpened:Function=null;
+      public function requestToAssignS(param1:Number) : void {
+         App.utils.asserter.assertNotNull(this.requestToAssign,"requestToAssign" + Errors.CANT_NULL);
+         this.requestToAssign(param1);
+      }
 
-        public var requestToChangeComment:Function=null;
+      public function requestToUnassignS(param1:Number) : void {
+         App.utils.asserter.assertNotNull(this.requestToUnassign,"requestToUnassign" + Errors.CANT_NULL);
+         this.requestToUnassign(param1);
+      }
 
-        public var requestToChangeDivision:Function=null;
+      public function requestToChangeOpenedS(param1:Boolean) : void {
+         App.utils.asserter.assertNotNull(this.requestToChangeOpened,"requestToChangeOpened" + Errors.CANT_NULL);
+         this.requestToChangeOpened(param1);
+      }
 
-        public var getCompanyName:Function=null;
+      public function requestToChangeCommentS(param1:String) : void {
+         App.utils.asserter.assertNotNull(this.requestToChangeComment,"requestToChangeComment" + Errors.CANT_NULL);
+         this.requestToChangeComment(param1);
+      }
 
-        public var canMoveToAssigned:Function=null;
+      public function requestToChangeDivisionS(param1:uint) : void {
+         App.utils.asserter.assertNotNull(this.requestToChangeDivision,"requestToChangeDivision" + Errors.CANT_NULL);
+         this.requestToChangeDivision(param1);
+      }
 
-        public var canMoveToUnassigned:Function=null;
+      public function getCompanyNameS() : String {
+         App.utils.asserter.assertNotNull(this.getCompanyName,"getCompanyName" + Errors.CANT_NULL);
+         return this.getCompanyName();
+      }
 
-        public var canMakeOpenedClosed:Function=null;
+      public function canMoveToAssignedS() : Boolean {
+         App.utils.asserter.assertNotNull(this.canMoveToAssigned,"canMoveToAssigned" + Errors.CANT_NULL);
+         return this.canMoveToAssigned();
+      }
 
-        public var canChangeComment:Function=null;
+      public function canMoveToUnassignedS() : Boolean {
+         App.utils.asserter.assertNotNull(this.canMoveToUnassigned,"canMoveToUnassigned" + Errors.CANT_NULL);
+         return this.canMoveToUnassigned();
+      }
 
-        public var canChangeDivision:Function=null;
-    }
+      public function canMakeOpenedClosedS() : Boolean {
+         App.utils.asserter.assertNotNull(this.canMakeOpenedClosed,"canMakeOpenedClosed" + Errors.CANT_NULL);
+         return this.canMakeOpenedClosed();
+      }
+
+      public function canChangeCommentS() : Boolean {
+         App.utils.asserter.assertNotNull(this.canChangeComment,"canChangeComment" + Errors.CANT_NULL);
+         return this.canChangeComment();
+      }
+
+      public function canChangeDivisionS() : Boolean {
+         App.utils.asserter.assertNotNull(this.canChangeDivision,"canChangeDivision" + Errors.CANT_NULL);
+         return this.canChangeDivision();
+      }
+   }
+
 }

@@ -4,6 +4,7 @@ import wot.Minimap.dataTypes.Player;
 import wot.Minimap.model.externalProxy.MapConfig;
 import wot.Minimap.dataTypes.cfg.CircleCfg;
 import wot.Minimap.shapes.ShapeAttach;
+import com.xvm.DataTypes.VehicleData;
 
 /**
  * Draws circles around player to indicate distances.
@@ -19,8 +20,8 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
         super();
 
         var player:Player = PlayersPanelProxy.self;
-        var vehType:String = VehicleInfo.getName2(player.icon);
-        var circlesCfg:Array = defineCirclesCfg(vehType);
+        var vdata:VehicleData = VehicleInfo.getByIcon(player.icon);
+        var circlesCfg:Array = defineCirclesCfg(vdata.key);
 
         for (var i in circlesCfg)
         {

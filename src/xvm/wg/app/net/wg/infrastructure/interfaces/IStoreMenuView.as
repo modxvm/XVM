@@ -1,22 +1,25 @@
-package net.wg.infrastructure.interfaces 
+package net.wg.infrastructure.interfaces
 {
-    import flash.events.*;
-    import net.wg.data.VO.*;
-    
-    public interface IStoreMenuView extends net.wg.infrastructure.interfaces.IViewStackContent, flash.events.IEventDispatcher
-    {
-        function setViewData(arg1:Array):void;
+   import flash.events.IEventDispatcher;
+   import net.wg.data.VO.ShopSubFilterData;
 
-        function setSubFilterData(arg1:int, arg2:net.wg.data.VO.ShopSubFilterData):void;
 
-        function updateSubFilter(arg1:int):void;
+   public interface IStoreMenuView extends IViewStackContent, IEventDispatcher
+   {
+          
+      function setViewData(param1:Array) : void;
 
-        function getFilter():Array;
+      function setSubFilterData(param1:int, param2:ShopSubFilterData) : void;
 
-        function resetTemporaryHandlers():void;
+      function updateSubFilter(param1:int) : void;
 
-        function setUIName(arg1:String, arg2:Function):void;
+      function getFilter() : Array;
 
-        function get fittingType():String;
-    }
+      function resetTemporaryHandlers() : void;
+
+      function setUIName(param1:String, param2:Function) : void;
+
+      function get fittingType() : String;
+   }
+
 }

@@ -1,19 +1,20 @@
-package net.wg.gui.lobby.store 
+package net.wg.gui.lobby.store
 {
-    import flash.text.*;
-    import net.wg.gui.components.controls.*;
-    import scaleform.clik.core.*;
-    
-    public class NationFilter extends scaleform.clik.core.UIComponent
-    {
-        public function NationFilter()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import net.wg.gui.components.controls.NationDropDownMenu;
+   import flash.text.TextField;
 
-        public var nation:net.wg.gui.components.controls.NationDropDownMenu=null;
 
-        public var textField:flash.text.TextField=null;
-    }
+   public class NationFilter extends UIComponent
+   {
+          
+      public function NationFilter() {
+         super();
+      }
+
+      public var nation:NationDropDownMenu = null;
+
+      public var textField:TextField = null;
+   }
+
 }

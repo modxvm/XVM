@@ -1,221 +1,279 @@
-package net.wg.gui.lobby.profile.pages.technique 
+package net.wg.gui.lobby.profile.pages.technique
 {
-    import flash.display.*;
-    import flash.events.*;
-    import net.wg.gui.components.advanced.*;
-    import net.wg.gui.components.controls.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.core.*;
-    import scaleform.clik.data.*;
-    
-    public class TechniqueListComponent extends scaleform.clik.core.UIComponent
-    {
-        public function TechniqueListComponent()
-        {
-            super();
-            this.techniqueList.addEventListener(net.wg.gui.lobby.profile.pages.technique.TechniqueList.SELECTED_DATA_CHANGED, this.selectedDataChangeHandler, false, 0, true);
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import scaleform.clik.data.DataProvider;
+   import net.wg.gui.components.advanced.SortingButton;
+   import flash.display.MovieClip;
+   import net.wg.gui.components.advanced.SortableHeaderButtonBar;
+   import net.wg.gui.components.controls.ScrollBar;
+   import net.wg.gui.utils.ExcludeTweenManager;
+   import flash.events.Event;
+   import scaleform.clik.controls.ScrollIndicator;
+   import scaleform.clik.constants.InvalidationType;
+   import fl.transitions.easing.Strong;
+   import scaleform.clik.motion.Tween;
+   import net.wg.gui.lobby.profile.pages.technique.data.TechniqueListVehicleVO;
+   import net.wg.gui.components.controls.SortableScrollingList;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.lowerShadow.mouseEnabled = false;
-            this.sortableButtonBar.dataProvider = getHeadersProvider();
-            this.sortableButtonBar.addEventListener(net.wg.gui.components.advanced.SortingButton.SORT_DIRECTION_CHANGED, this.sortingChangedHandler, false, 0, true);
-            this.sortableButtonBar.selectedIndex = 4;
-            this.techniqueList.sortByBattlesCount(true);
-            return;
-        }
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+   public class TechniqueListComponent extends UIComponent
+   {
+          
+      public function TechniqueListComponent() {
+         this.tweenManager = new ExcludeTweenManager();
+         super();
+         this.techniqueList.addEventListener(TechniqueList.SELECTED_DATA_CHANGED,this.selectedDataChangeHandler,false,0,true);
+         this.techniqueList.addEventListener(SortableScrollingList.DATA_INVALIDATED,this.listDataInvalidateHandler,false,0,true);
+      }
+
+      private static const NATION:String = "nation";
+
+      private static const LEVEL:String = "level";
+
+      private static const TYPE:String = "type";
+
+      private static const VEHICLE_NAME:String = "vName";
+
+      private static const TOTAL_BATTLES:String = "totalBattles";
+
+      private static const TOTAL_WINS:String = "totalWins";
+
+      private static const AVG_EXP:String = "avgExperience";
+
+      private static const MASTERY:String = "mastery";
+
+      public static const DATA_CHANGED:String = "dataChanged";
+
+      private static const LIST_DATA_INVALIDATED:String = "ldInv";
+
+      private static const ANIM_SPEED:uint = 1000;
+
+      private static function getHeadersProvider() : DataProvider {
+         var _loc13_:ProfileSortingBtnInfo = null;
+         var _loc1_:* = "../maps/icons/buttons/tab_sort_button/ascProfileSortArrow.png";
+         var _loc2_:* = "../maps/icons/buttons/tab_sort_button/descProfileSortArrow.png";
+         var _loc3_:Number = 40;
+         var _loc4_:Array = [];
+         var _loc5_:ProfileSortingBtnInfo = new ProfileSortingBtnInfo();
+         _loc5_.iconId = NATION;
+         _loc5_.iconSource = "../maps/icons/filters/nations/all.png";
+         _loc5_.buttonWidth = 36;
+         _loc5_.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_NATION;
+         _loc4_.push(_loc5_);
+         var _loc6_:ProfileSortingBtnInfo = new ProfileSortingBtnInfo();
+         _loc6_.iconId = TYPE;
+         _loc6_.iconSource = "../maps/icons/filters/tanks/all.png";
+         _loc6_.buttonWidth = 34;
+         _loc6_.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_TECHNIQUE;
+         _loc4_.push(_loc6_);
+         var _loc7_:ProfileSortingBtnInfo = new ProfileSortingBtnInfo();
+         _loc7_.iconId = LEVEL;
+         _loc7_.iconSource = "../maps/icons/buttons/tab_sort_button/level.png";
+         _loc7_.buttonWidth = 28;
+         _loc7_.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_LVL;
+         _loc4_.push(_loc7_);
+         var _loc8_:ProfileSortingBtnInfo = new ProfileSortingBtnInfo();
+         _loc8_.iconId = VEHICLE_NAME;
+         _loc8_.label = PROFILE.SECTION_TECHNIQUE_BUTTONBAR_VEHICLENAME;
+         _loc8_.buttonWidth = 158;
+         _loc8_.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_NAME;
+         _loc4_.push(_loc8_);
+         var _loc9_:ProfileSortingBtnInfo = new ProfileSortingBtnInfo();
+         _loc9_.iconId = TOTAL_BATTLES;
+         _loc9_.buttonWidth = 74;
+         _loc9_.label = PROFILE.SECTION_SUMMARY_SCORES_TOTALBATTLES;
+         _loc9_.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_BATTLESCOUNT;
+         _loc4_.push(_loc9_);
+         var _loc10_:ProfileSortingBtnInfo = new ProfileSortingBtnInfo();
+         _loc10_.iconId = TOTAL_WINS;
+         _loc10_.buttonWidth = 74;
+         _loc10_.label = PROFILE.SECTION_TECHNIQUE_BUTTONBAR_TOTALWINS;
+         _loc10_.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_WINS;
+         _loc4_.push(_loc10_);
+         var _loc11_:ProfileSortingBtnInfo = new ProfileSortingBtnInfo();
+         _loc11_.iconId = AVG_EXP;
+         _loc11_.buttonWidth = 90;
+         _loc11_.label = PROFILE.SECTION_TECHNIQUE_BUTTONBAR_AVGEXPERIENCE;
+         _loc11_.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_AVGEXP;
+         _loc4_.push(_loc11_);
+         var _loc12_:ProfileSortingBtnInfo = new ProfileSortingBtnInfo();
+         _loc12_.iconId = MASTERY;
+         _loc12_.buttonWidth = 80;
+         _loc12_.showSeparator = false;
+         _loc12_.label = PROFILE.SECTION_TECHNIQUE_BUTTONBAR_CLASSINESS;
+         _loc12_.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_MARKSOFMASTERY;
+         _loc4_.push(_loc12_);
+         var _loc14_:* = 0;
+         while(_loc14_ < _loc4_.length)
+         {
+            _loc13_ = _loc4_[_loc14_];
+            _loc13_.ascendingIconSource = _loc1_;
+            _loc13_.descendingIconSource = _loc2_;
+            _loc13_.buttonHeight = _loc3_;
+            _loc13_.enabled = true;
+            _loc13_.defaultSortDirection = SortingButton.WITHOUT_SORT;
+            _loc14_++;
+         }
+         return new DataProvider(_loc4_);
+      }
+
+      public var lowerShadow:MovieClip;
+
+      public var upperShadow:MovieClip;
+
+      public var sortableButtonBar:SortableHeaderButtonBar;
+
+      public var techniqueList:TechniqueList;
+
+      public var scrollBar:ScrollBar;
+
+      public var bg:MovieClip;
+
+      private var sortFunctions:Object;
+
+      private var _pendingDataProvider:Array;
+
+      private var isMarkOfMasteryBtnEnabled:Boolean = true;
+
+      private var tweenManager:ExcludeTweenManager;
+
+      private function listDataInvalidateHandler(param1:Event) : void {
+         invalidate(LIST_DATA_INVALIDATED);
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.lowerShadow.mouseEnabled = this.upperShadow.mouseEnabled = false;
+         this.sortableButtonBar.dataProvider = getHeadersProvider();
+         this.sortableButtonBar.addEventListener(SortingButton.SORT_DIRECTION_CHANGED,this.sortingChangedHandler,false,0,true);
+         this.sortableButtonBar.selectedIndex = 4;
+         this.techniqueList.sortByBattlesCount(true);
+      }
+
+      override protected function draw() : void {
+         var _loc1_:uint = 0;
+         var _loc2_:* = 0;
+         var _loc3_:* = 0;
+         var _loc4_:ScrollIndicator = null;
+         var _loc5_:* = NaN;
+         super.draw();
+         if(isInvalid(InvalidationType.DATA))
+         {
+            this.techniqueList.dataProvider = new DataProvider(this._pendingDataProvider);
+         }
+         if(isInvalid(LIST_DATA_INVALIDATED))
+         {
+            _loc1_ = this.techniqueList.dataProvider.length;
+            _loc2_ = this.techniqueList.renderersCount;
+            if(_loc1_ <= _loc2_)
             {
-                this.techniqueList.dataProvider = new scaleform.clik.data.DataProvider(this._pendingDataProvider);
+               this.tweenManager.registerAndLaunch(ANIM_SPEED,this.upperShadow,{"alpha":0},this.getAnimTweenSet());
+               this.tweenManager.registerAndLaunch(ANIM_SPEED,this.lowerShadow,{"alpha":0},this.getAnimTweenSet());
             }
-            return;
-        }
-
-        internal function selectedDataChangeHandler(arg1:flash.events.Event):void
-        {
-            dispatchEvent(new flash.events.Event(DATA_CHANGED));
-            return;
-        }
-
-        internal function sortingChangedHandler(arg1:flash.events.Event):void
-        {
-            var loc2:*=null;
-            arg1.stopImmediatePropagation();
-            var loc1:*=net.wg.gui.components.advanced.SortingButton(arg1.target);
-            if (loc1.sortDirection != net.wg.gui.components.advanced.SortingButton.WITHOUT_SORT) 
+            else
             {
-                if (!this.sortFunctions) 
-                {
-                    this.sortFunctions = {};
-                    this.sortFunctions[NATION] = this.techniqueList.sortByNation;
-                    this.sortFunctions[LEVEL] = this.techniqueList.sortByLevel;
-                    this.sortFunctions[TYPE] = this.techniqueList.sortByType;
-                    this.sortFunctions[VEHICLE_NAME] = this.techniqueList.sortByVehicleName;
-                    this.sortFunctions[TOTAL_BATTLES] = this.techniqueList.sortByBattlesCount;
-                    this.sortFunctions[TOTAL_WINS] = this.techniqueList.sortByWins;
-                    this.sortFunctions[AVG_EXP] = this.techniqueList.sortByAvgExp;
-                    this.sortFunctions[MASTERY] = this.techniqueList.sortByMarkOfMastery;
-                }
-                loc2 = this.sortFunctions[loc1.id];
-                loc2.apply(this, [loc1.sortDirection == net.wg.gui.components.advanced.SortingButton.ASCENDING_SORT]);
+               _loc3_ = _loc1_ - _loc2_;
+               _loc4_ = ScrollIndicator(this.techniqueList.scrollBar);
+               _loc5_ = _loc4_?_loc4_.position:0;
+               this.tweenManager.registerAndLaunch(ANIM_SPEED,this.upperShadow,{"alpha":0},this.getAnimTweenSet());
+               this.tweenManager.registerAndLaunch(ANIM_SPEED,this.lowerShadow,{"alpha":1},this.getAnimTweenSet());
             }
-            return;
-        }
+         }
+      }
 
-        public function setViewSize(arg1:Number, arg2:Number):void
-        {
-            this.techniqueList.setSize(this.techniqueList.width, arg2);
-            this.techniqueList.validateNow();
-            this.bg.height = arg2 - this.bg.y;
-            this.scrollBar.setActualSize(this.scrollBar.width, arg2 - this.scrollBar.y);
-            this.scrollBar.validateNow();
-            this.lowerShadow.y = arg2 - this.lowerShadow.height;
-            return;
-        }
-
-        public function get selectedItem():net.wg.gui.lobby.profile.pages.technique.TechniqueListVehicleVO
-        {
-            return net.wg.gui.lobby.profile.pages.technique.TechniqueListVehicleVO(this.techniqueList.selectedItem);
-        }
-
-        public function set dataProvider(arg1:Array):void
-        {
-            this._pendingDataProvider = arg1;
-            invalidateData();
-            return;
-        }
-
-        public override function dispose():void
-        {
-            this._pendingDataProvider = null;
-            this.sortableButtonBar.removeEventListener(net.wg.gui.components.advanced.SortingButton.SORT_DIRECTION_CHANGED, this.sortingChangedHandler);
-            if (this.techniqueList) 
+      public function enableMarkOfMasteryBtn(param1:Boolean) : void {
+         if(this.isMarkOfMasteryBtnEnabled != param1)
+         {
+            this.isMarkOfMasteryBtnEnabled = param1;
+            if(this.sortableButtonBar.getRenderers().length == 0 && !param1)
             {
-                this.techniqueList.removeEventListener(net.wg.gui.lobby.profile.pages.technique.TechniqueList.SELECTED_DATA_CHANGED, this.selectedDataChangeHandler);
-                this.techniqueList.dispose();
-                this.techniqueList = null;
+               this.sortableButtonBar.validateNow();
             }
-            if (this.sortableButtonBar) 
+            this.sortableButtonBar.getButtonAt(this.sortableButtonBar.dataProvider.length-1).enabled = param1;
+         }
+      }
+
+      private function getAnimTweenSet() : Object {
+         return {
+            "ease":Strong.easeOut,
+            "onComplete":this.onTweenComplete
+         }
+         ;
+      }
+
+      private function onTweenComplete(param1:Tween) : void {
+         this.tweenManager.unregister(param1);
+      }
+
+      private function selectedDataChangeHandler(param1:Event) : void {
+         dispatchEvent(new Event(DATA_CHANGED));
+      }
+
+      private function sortingChangedHandler(param1:Event) : void {
+         var _loc3_:Function = null;
+         param1.stopImmediatePropagation();
+         var _loc2_:SortingButton = SortingButton(param1.target);
+         if(_loc2_.sortDirection != SortingButton.WITHOUT_SORT)
+         {
+            if(!this.sortFunctions)
             {
-                this.sortableButtonBar.dispose();
-                this.sortableButtonBar = null;
+               this.sortFunctions = {};
+               this.sortFunctions[NATION] = this.techniqueList.sortByNation;
+               this.sortFunctions[LEVEL] = this.techniqueList.sortByLevel;
+               this.sortFunctions[TYPE] = this.techniqueList.sortByType;
+               this.sortFunctions[VEHICLE_NAME] = this.techniqueList.sortByVehicleName;
+               this.sortFunctions[TOTAL_BATTLES] = this.techniqueList.sortByBattlesCount;
+               this.sortFunctions[TOTAL_WINS] = this.techniqueList.sortByWins;
+               this.sortFunctions[AVG_EXP] = this.techniqueList.sortByAvgExp;
+               this.sortFunctions[MASTERY] = this.techniqueList.sortByMarkOfMastery;
             }
-            if (this.scrollBar) 
-            {
-                this.scrollBar.dispose();
-                this.scrollBar = null;
-            }
-            this.sortFunctions = null;
-            this.lowerShadow = null;
-            return;
-        }
+            _loc3_ = this.sortFunctions[_loc2_.id];
+            _loc3_.apply(this,[_loc2_.sortDirection == SortingButton.ASCENDING_SORT]);
+         }
+      }
 
-        internal static function getHeadersProvider():scaleform.clik.data.DataProvider
-        {
-            var loc13:*=null;
-            var loc1:*="../maps/icons/buttons/tab_sort_button/ascProfileSortArrow.png";
-            var loc2:*="../maps/icons/buttons/tab_sort_button/descProfileSortArrow.png";
-            var loc3:*=40;
-            var loc4:*=[];
-            var loc5:*;
-            (loc5 = new net.wg.gui.lobby.profile.pages.technique.ProfileSortingBtnInfo()).iconId = NATION;
-            loc5.iconSource = "../maps/icons/filters/nations/all.png";
-            loc5.buttonWidth = 36;
-            loc5.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_NATION;
-            loc4.push(loc5);
-            var loc6:*;
-            (loc6 = new net.wg.gui.lobby.profile.pages.technique.ProfileSortingBtnInfo()).iconId = TYPE;
-            loc6.iconSource = "../maps/icons/filters/tanks/all.png";
-            loc6.buttonWidth = 34;
-            loc6.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_TECHNIQUE;
-            loc4.push(loc6);
-            var loc7:*;
-            (loc7 = new net.wg.gui.lobby.profile.pages.technique.ProfileSortingBtnInfo()).iconId = LEVEL;
-            loc7.iconSource = "../maps/icons/buttons/tab_sort_button/level.png";
-            loc7.buttonWidth = 28;
-            loc7.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_LVL;
-            loc4.push(loc7);
-            var loc8:*;
-            (loc8 = new net.wg.gui.lobby.profile.pages.technique.ProfileSortingBtnInfo()).iconId = VEHICLE_NAME;
-            loc8.label = PROFILE.SECTION_TECHNIQUE_BUTTONBAR_VEHICLENAME;
-            loc8.buttonWidth = 158;
-            loc8.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_NAME;
-            loc4.push(loc8);
-            var loc9:*;
-            (loc9 = new net.wg.gui.lobby.profile.pages.technique.ProfileSortingBtnInfo()).iconId = TOTAL_BATTLES;
-            loc9.buttonWidth = 74;
-            loc9.label = PROFILE.SECTION_SUMMARY_SCORES_TOTALBATTLES;
-            loc9.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_BATTLESCOUNT;
-            loc4.push(loc9);
-            var loc10:*;
-            (loc10 = new net.wg.gui.lobby.profile.pages.technique.ProfileSortingBtnInfo()).iconId = TOTAL_WINS;
-            loc10.buttonWidth = 74;
-            loc10.label = PROFILE.SECTION_TECHNIQUE_BUTTONBAR_TOTALWINS;
-            loc10.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_WINS;
-            loc4.push(loc10);
-            var loc11:*;
-            (loc11 = new net.wg.gui.lobby.profile.pages.technique.ProfileSortingBtnInfo()).iconId = AVG_EXP;
-            loc11.buttonWidth = 90;
-            loc11.label = PROFILE.SECTION_TECHNIQUE_BUTTONBAR_AVGEXPERIENCE;
-            loc11.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_AVGEXP;
-            loc4.push(loc11);
-            var loc12:*;
-            (loc12 = new net.wg.gui.lobby.profile.pages.technique.ProfileSortingBtnInfo()).iconId = MASTERY;
-            loc12.buttonWidth = 80;
-            loc12.showSeparator = false;
-            loc12.label = PROFILE.SECTION_TECHNIQUE_BUTTONBAR_CLASSINESS;
-            loc12.toolTip = PROFILE.SECTION_TECHNIQUE_SORT_TOOLTIP_MARKSOFMASTERY;
-            loc4.push(loc12);
-            var loc14:*=0;
-            while (loc14 < loc4.length) 
-            {
-                (loc13 = loc4[loc14]).ascendingIconSource = loc1;
-                loc13.descendingIconSource = loc2;
-                loc13.buttonHeight = loc3;
-                loc13.enabled = true;
-                loc13.defaultSortDirection = net.wg.gui.components.advanced.SortingButton.WITHOUT_SORT;
-                ++loc14;
-            }
-            return new scaleform.clik.data.DataProvider(loc4);
-        }
+      public function setViewSize(param1:Number, param2:Number) : void {
+         this.techniqueList.setSize(this.techniqueList.width,param2);
+         this.techniqueList.validateNow();
+         this.bg.height = param2 - this.bg.y;
+         this.scrollBar.setActualSize(this.scrollBar.width,param2 - this.scrollBar.y);
+         this.scrollBar.validateNow();
+         this.lowerShadow.y = param2 - this.lowerShadow.height;
+      }
 
-        internal static const NATION:String="nation";
+      public function get selectedItem() : TechniqueListVehicleVO {
+         return TechniqueListVehicleVO(this.techniqueList.selectedItem);
+      }
 
-        internal static const LEVEL:String="level";
+      public function set dataProvider(param1:Array) : void {
+         this._pendingDataProvider = param1;
+         invalidateData();
+      }
 
-        internal static const TYPE:String="type";
+      override public function dispose() : void {
+         this.tweenManager.dispose();
+         this.tweenManager = null;
+         this._pendingDataProvider = null;
+         this.sortableButtonBar.removeEventListener(SortingButton.SORT_DIRECTION_CHANGED,this.sortingChangedHandler);
+         if(this.techniqueList)
+         {
+            this.techniqueList.removeEventListener(TechniqueList.SELECTED_DATA_CHANGED,this.selectedDataChangeHandler);
+            this.techniqueList.dispose();
+            this.techniqueList = null;
+         }
+         if(this.sortableButtonBar)
+         {
+            this.sortableButtonBar.dispose();
+            this.sortableButtonBar = null;
+         }
+         if(this.scrollBar)
+         {
+            this.scrollBar.dispose();
+            this.scrollBar = null;
+         }
+         this.sortFunctions = null;
+         this.lowerShadow = null;
+      }
+   }
 
-        internal static const VEHICLE_NAME:String="vName";
-
-        internal static const TOTAL_BATTLES:String="totalBattles";
-
-        internal static const TOTAL_WINS:String="totalWins";
-
-        internal static const AVG_EXP:String="avgExperience";
-
-        internal static const MASTERY:String="mastery";
-
-        public static const DATA_CHANGED:String="dataChanged";
-
-        public var lowerShadow:flash.display.MovieClip;
-
-        public var sortableButtonBar:net.wg.gui.components.advanced.SortableHeaderButtonBar;
-
-        public var techniqueList:net.wg.gui.lobby.profile.pages.technique.TechniqueList;
-
-        public var scrollBar:net.wg.gui.components.controls.ScrollBar;
-
-        public var bg:flash.display.MovieClip;
-
-        internal var sortFunctions:Object;
-
-        internal var _pendingDataProvider:Array;
-    }
 }

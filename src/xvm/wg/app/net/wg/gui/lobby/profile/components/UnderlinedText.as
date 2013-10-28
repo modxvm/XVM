@@ -1,47 +1,44 @@
-package net.wg.gui.lobby.profile.components 
+package net.wg.gui.lobby.profile.components
 {
-    import flash.display.*;
-    import flash.events.*;
-    import flash.text.*;
-    
-    public class UnderlinedText extends flash.display.Sprite
-    {
-        public function UnderlinedText()
-        {
-            super();
-            this.textField.autoSize = flash.text.TextFieldAutoSize.LEFT;
-            this.bgOriginalWidth = this.background.width;
-            this.layoutBg();
-            return;
-        }
+   import flash.display.Sprite;
+   import flash.text.TextField;
+   import flash.events.Event;
+   import flash.text.TextFormat;
+   import flash.text.TextFieldAutoSize;
 
-        public function set text(arg1:String):void
-        {
-            this.textField.htmlText = arg1;
-            this.layoutBg();
-            return;
-        }
 
-        internal function layoutBg():void
-        {
-            this.background.width = Math.max(this.textField.x + this.textField.width, this.bgOriginalWidth);
-            dispatchEvent(new flash.events.Event(flash.events.Event.RESIZE, true));
-            return;
-        }
+   public class UnderlinedText extends Sprite
+   {
+          
+      public function UnderlinedText() {
+         super();
+         this.textField.autoSize = TextFieldAutoSize.LEFT;
+         this.bgOriginalWidth = this.background.width;
+         this.layoutBg();
+      }
 
-        public function set fontSize(arg1:uint):void
-        {
-            var loc1:*=this.textField.getTextFormat();
-            loc1.size = arg1;
-            this.textField.setTextFormat(loc1);
-            this.textField.defaultTextFormat = loc1;
-            return;
-        }
+      public var textField:TextField;
 
-        public var textField:flash.text.TextField;
+      public var background:Sprite;
 
-        public var background:flash.display.Sprite;
+      private var bgOriginalWidth:Number;
 
-        internal var bgOriginalWidth:Number;
-    }
+      public function set text(param1:String) : void {
+         this.textField.htmlText = param1;
+         this.layoutBg();
+      }
+
+      private function layoutBg() : void {
+         this.background.width = Math.max(this.textField.x + this.textField.width,this.bgOriginalWidth);
+         dispatchEvent(new Event(Event.RESIZE,true));
+      }
+
+      public function set fontSize(param1:uint) : void {
+         var _loc2_:TextFormat = this.textField.getTextFormat();
+         _loc2_.size = param1;
+         this.textField.setTextFormat(_loc2_);
+         this.textField.defaultTextFormat = _loc2_;
+      }
+   }
+
 }

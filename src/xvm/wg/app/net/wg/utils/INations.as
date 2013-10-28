@@ -1,15 +1,19 @@
-package net.wg.utils 
+package net.wg.utils
 {
-    public interface INations
-    {
-        function getNationName(arg1:uint):String;
 
-        function getNationIcon(arg1:int):String;
 
-        function getNationID(arg1:String):uint;
+   public interface INations
+   {
+          
+      function getNationName(param1:uint) : String;
 
-        function getNations():Array;
+      function getNationIcon(param1:int) : String;
 
-        function getNationsData():Array;
-    }
+      function getNationID(param1:String) : uint;
+
+      function getNations() : Array;
+
+      function getNationsData() : Array;
+   }
+
 }

@@ -1,73 +1,69 @@
-package net.wg.gui.lobby.hangar.maintenance.data 
+package net.wg.gui.lobby.hangar.maintenance.data
 {
-    import net.wg.data.constants.*;
-    import net.wg.data.daapi.base.*;
-    
-    public class ModuleVO extends net.wg.data.daapi.base.DAAPIDataClass
-    {
-        public function ModuleVO(arg1:Object)
-        {
-            super(arg1);
-            this._originalHash = arg1;
-            return;
-        }
+   import net.wg.data.daapi.base.DAAPIDataClass;
+   import net.wg.data.constants.Currencies;
 
-        public function clone(arg1:int):net.wg.gui.lobby.hangar.maintenance.data.ModuleVO
-        {
-            var loc1:*=new net.wg.gui.lobby.hangar.maintenance.data.ModuleVO(this._originalHash);
-            loc1.slotIndex = arg1;
-            return loc1;
-        }
 
-        public function get status():String
-        {
-            return this.target == 1 && !(this.slotIndex == this.index) ? MENU.MODULEFITS_WRONG_SLOT : this.fits[this.slotIndex];
-        }
+   public class ModuleVO extends DAAPIDataClass
+   {
+          
+      public function ModuleVO(param1:Object) {
+         super(param1);
+         this._originalHash = param1;
+      }
 
-        public function get price():int
-        {
-            return this.prices[this.currency != net.wg.data.constants.Currencies.CREDITS ? 1 : 0];
-        }
+      private var _originalHash:Object;
 
-        public override function dispose():void
-        {
-            this.prices.splice(0);
-            this.fits.splice(0);
-            this._originalHash = null;
-            super.dispose();
-            return;
-        }
+      public var id:String = "";
 
-        internal var _originalHash:Object;
+      public var name:String = "";
 
-        public var id:String="";
+      public var desc:String = "";
 
-        public var name:String="";
+      public var target:int;
 
-        public var desc:String="";
+      public var compactDescr:int;
 
-        public var target:int;
+      public var prices:Array = null;
 
-        public var compactDescr:int;
+      public var currency:String = "";
 
-        public var prices:Array=null;
+      public var icon:String = "";
 
-        public var currency:String="";
+      public var index:int;
 
-        public var icon:String="";
+      public var slotIndex:int = 0;
 
-        public var index:int;
+      public var inventoryCount:int;
 
-        public var slotIndex:int=0;
+      public var vehicleCount:int;
 
-        public var inventoryCount:int;
+      public var count:int;
 
-        public var vehicleCount:int;
+      public var fits:Array = null;
 
-        public var count:int;
+      public var goldEqsForCredits:Boolean;
 
-        public var fits:Array=null;
+      public function clone(param1:int) : ModuleVO {
+         var _loc2_:ModuleVO = new ModuleVO(this._originalHash);
+         _loc2_.slotIndex = param1;
+         return _loc2_;
+      }
 
-        public var goldEqsForCredits:Boolean;
-    }
+      public function get status() : String {
+         return this.target == 1 && !(this.slotIndex == this.index)?MENU.MODULEFITS_WRONG_SLOT:this.fits[this.slotIndex];
+      }
+
+      public function get price() : int {
+         return this.prices[this.currency == Currencies.CREDITS?0:1];
+      }
+
+      override public function dispose() : void {
+         this.prices.splice(0);
+         this.fits.splice(0);
+         this._originalHash = null;
+         super.dispose();
+      }
+   }
+
 }

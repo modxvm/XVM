@@ -1,261 +1,262 @@
-package net.wg.gui.lobby.hangar.crew 
+package net.wg.gui.lobby.hangar.crew
 {
-    import flash.display.*;
-    import net.wg.data.constants.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.events.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import net.wg.infrastructure.interfaces.*;
-    import scaleform.clik.data.*;
-    import scaleform.clik.interfaces.*;
-    
-    public class Crew extends net.wg.infrastructure.base.meta.impl.CrewMeta implements net.wg.infrastructure.interfaces.IHelpLayoutComponent, net.wg.infrastructure.base.meta.ICrewMeta, net.wg.infrastructure.interfaces.IDAAPIModule
-    {
-        public function Crew()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.CrewMeta;
+   import net.wg.infrastructure.interfaces.IHelpLayoutComponent;
+   import net.wg.infrastructure.base.meta.ICrewMeta;
+   import net.wg.infrastructure.interfaces.IDAAPIModule;
+   import scaleform.clik.interfaces.IDataProvider;
+   import scaleform.clik.data.DataProvider;
+   import net.wg.gui.events.ListEventEx;
+   import net.wg.data.constants.Tooltips;
+   import net.wg.gui.components.controls.ScrollingListEx;
+   import flash.display.MovieClip;
+   import flash.display.DisplayObject;
+   import net.wg.gui.events.CrewEvent;
 
-        protected override function onPopulate():void
-        {
-            super.onPopulate();
-            invalidate(INVALIDATE_LIST);
-            return;
-        }
 
-        protected override function onDispose():void
-        {
-            this.list.removeEventListener(net.wg.gui.events.ListEventEx.ITEM_ROLL_OVER, showTooltip);
-            this.list.removeEventListener(net.wg.gui.events.ListEventEx.ITEM_ROLL_OUT, hideTooltip);
-            this.list.removeEventListener(net.wg.gui.events.ListEventEx.ITEM_PRESS, hideTooltip);
-            App.stage.removeEventListener(net.wg.gui.events.CrewEvent.SHOW_RECRUIT_WINDOW, this.onShowRecruitWindow);
-            App.stage.removeEventListener(net.wg.gui.events.CrewEvent.EQUIP_TANKMAN, this.onEquipTankman);
-            removeEventListener(net.wg.gui.events.CrewEvent.UNLOAD_TANKMAN, this.onUnloadTankman);
-            removeEventListener(net.wg.gui.events.CrewEvent.UNLOAD_ALL_TANKMAN, this.onUnloadAllTankman);
-            removeEventListener(net.wg.gui.events.CrewEvent.OPEN_PERSONAL_CASE, this.openPersonalCaseHandler);
-            this.list.dispose();
-            this.list = null;
-            this.bg = null;
-            if (this._helpLayout) 
+   public class Crew extends CrewMeta implements IHelpLayoutComponent, ICrewMeta, IDAAPIModule
+   {
+          
+      public function Crew() {
+         super();
+      }
+
+      private static const INVALIDATE_LIST:String = "invalidateList";
+
+      private static const INVALIDATE_ENABLE:String = "invalidateEnable";
+
+      private static function setupDataProvider(param1:Array) : IDataProvider {
+         var _loc3_:Object = null;
+         var _loc2_:DataProvider = new DataProvider();
+         for each (_loc3_ in param1)
+         {
+            _loc2_.push(new RecruitRendererVO(_loc3_));
+         }
+         return _loc2_;
+      }
+
+      private static function showTooltip(param1:ListEventEx) : void {
+         App.toolTipMgr.showSpecial(Tooltips.TANKMAN,null,param1.itemData.tankmanID,true);
+      }
+
+      private static function hideTooltip(param1:ListEventEx) : void {
+         App.toolTipMgr.hide();
+      }
+
+      public var list:ScrollingListEx;
+
+      public var maskMC:MovieClip;
+
+      public var bg:MovieClip;
+
+      public var helpDirection:String = "R";
+
+      public var helpText:String = "";
+
+      public var helpConnectorLength:Number = 12;
+
+      private var _helpLayout:DisplayObject = null;
+
+      public function as_tankmenResponse(param1:Array, param2:Array) : void {
+         var _loc3_:Array = null;
+         var _loc7_:Object = null;
+         var _loc8_:* = 0;
+         var _loc9_:* = 0;
+         var _loc10_:Object = null;
+         _loc3_ = [];
+         var _loc4_:uint = param1.length;
+         var _loc5_:* = 0;
+         while(_loc5_ < _loc4_)
+         {
+            if(param1[_loc5_].tankmanID)
             {
-                this.closeHelpLayout();
+               for each (_loc10_ in param2)
+               {
+                  if(_loc10_.tankmanID == param1[_loc5_].tankmanID)
+                  {
+                     _loc7_ = _loc10_;
+                     break;
+                  }
+               }
             }
-            this._helpLayout = null;
-            super.dispose();
-            super.onDispose();
-            return;
-        }
+            else
+            {
+               _loc7_ =
+                  {
+                     "iconFile":(param1[_loc5_].nationID == 0?"ussr-empty.png":"germany-empty.png"),
+                     "role":param1[_loc5_].role,
+                     "roleIconFile":param1[_loc5_].roleIcon,
+                     "firstname":(param1[_loc5_].firstname?param1[_loc5_].firstname:""),
+                     "lastname":(param1[_loc5_].lastname?param1[_loc5_].lastname:""),
+                     "rank":(param1[_loc5_].rank?param1[_loc5_].rank:""),
+                     "specializationLevel":-1,
+                     "vehicleType":param1[_loc5_].vehicleType,
+                     "tankType":param1[_loc5_].tankType,
+                     "tankmanID":NaN
+                  }
+               ;
+            }
+            _loc7_.slot = param1[_loc5_].slot;
+            _loc7_.curVehicleType = param1[_loc5_].tankType;
+            _loc7_.curVehicleName = param1[_loc5_].vehicleType;
+            _loc7_.roles = param1[_loc5_].roles;
+            _loc7_.vehicleElite = param1[_loc5_].vehicleElite;
+            _loc7_.recruitList = [];
+            _loc7_.recruitList.push(
+               {
+                  "specializationLevel":101,
+                  "recruit":true,
+                  "roleType":param1[_loc5_].roleType,
+                  "role":param1[_loc5_].role,
+                  "roleIconFile":param1[_loc5_].roleIcon,
+                  "vehicleType":param1[_loc5_].vehicleType,
+                  "typeID":param1[_loc5_].typeID,
+                  "nationID":param1[_loc5_].nationID,
+                  "iconFile":(param1[_loc5_].nationID == 0?"ussr-empty.png":"germany-empty.png"),
+                  "tankType":param1[_loc5_].tankType
+               }
+            );
+            _loc8_ = param2.length;
+            _loc9_ = 0;
+            while(_loc9_ < _loc8_)
+            {
+               if(param2[_loc9_].roleType == param1[_loc5_].roleType && param2[_loc9_].nationID == param1[_loc5_].nationID)
+               {
+                  if(param2[_loc9_].tankmanID == param1[_loc5_].tankmanID)
+                  {
+                     param2[_loc9_].selected = true;
+                  }
+                  if(!param2[_loc9_].inTank || param2[_loc9_].tankmanID == param1[_loc5_].tankmanID)
+                  {
+                     _loc7_.recruitList.push(param2[_loc9_]);
+                  }
+               }
+               _loc9_++;
+            }
+            _loc3_.push(new RecruitRendererVO(_loc7_));
+            _loc5_++;
+         }
+         var _loc6_:Number = 61;
+         this.maskMC.height = this.bg.height = _loc3_.length * _loc6_;
+         this.list.mask = this.maskMC;
+         this.list.dataProvider.cleanUp();
+         this.list.dataProvider = new DataProvider(_loc3_);
+         this.list.selectedIndex = -1;
+         invalidate(INVALIDATE_ENABLE);
+      }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            mouseEnabled = false;
-            addEventListener(net.wg.gui.events.CrewEvent.UNLOAD_TANKMAN, this.onUnloadTankman);
-            addEventListener(net.wg.gui.events.CrewEvent.UNLOAD_ALL_TANKMAN, this.onUnloadAllTankman);
-            addEventListener(net.wg.gui.events.CrewEvent.OPEN_PERSONAL_CASE, this.openPersonalCaseHandler);
-            App.stage.addEventListener(net.wg.gui.events.CrewEvent.EQUIP_TANKMAN, this.onEquipTankman);
-            App.stage.addEventListener(net.wg.gui.events.CrewEvent.SHOW_RECRUIT_WINDOW, this.onShowRecruitWindow);
-            this.list.addEventListener(net.wg.gui.events.ListEventEx.ITEM_ROLL_OVER, showTooltip);
-            this.list.addEventListener(net.wg.gui.events.ListEventEx.ITEM_ROLL_OUT, hideTooltip);
-            this.list.addEventListener(net.wg.gui.events.ListEventEx.ITEM_PRESS, hideTooltip);
-            this.list.mouseEnabled = false;
+      public function showHelpLayout() : void {
+         var _loc1_:Object =
+            {
+               "borderWidth":204,
+               "borderHeight":height,
+               "direction":this.helpDirection,
+               "text":LOBBY_HELP.HANGAR_CREW,
+               "x":0,
+               "y":0,
+               "connectorLength":this.helpConnectorLength
+            }
+         ;
+         this.setHelpLayout(App.utils.helpLayout.create(this.root,_loc1_,this));
+      }
+
+      public function closeHelpLayout() : void {
+         if(this.getHelpLayout() != null)
+         {
+            App.utils.helpLayout.destroy(this.getHelpLayout());
+         }
+      }
+
+      override public function get enabled() : Boolean {
+         return super.enabled;
+      }
+
+      override public function set enabled(param1:Boolean) : void {
+         super.enabled = param1;
+         invalidate(INVALIDATE_ENABLE);
+      }
+
+      override protected function onPopulate() : void {
+         super.onPopulate();
+         invalidate(INVALIDATE_LIST);
+      }
+
+      override protected function onDispose() : void {
+         this.list.removeEventListener(ListEventEx.ITEM_ROLL_OVER,showTooltip);
+         this.list.removeEventListener(ListEventEx.ITEM_ROLL_OUT,hideTooltip);
+         this.list.removeEventListener(ListEventEx.ITEM_PRESS,hideTooltip);
+         App.stage.removeEventListener(CrewEvent.SHOW_RECRUIT_WINDOW,this.onShowRecruitWindow);
+         App.stage.removeEventListener(CrewEvent.EQUIP_TANKMAN,this.onEquipTankman);
+         removeEventListener(CrewEvent.UNLOAD_TANKMAN,this.onUnloadTankman);
+         removeEventListener(CrewEvent.UNLOAD_ALL_TANKMAN,this.onUnloadAllTankman);
+         removeEventListener(CrewEvent.OPEN_PERSONAL_CASE,this.openPersonalCaseHandler);
+         this.list.dispose();
+         this.list = null;
+         this.bg = null;
+         if(this._helpLayout)
+         {
+            this.closeHelpLayout();
+         }
+         this.maskMC = null;
+         this._helpLayout = null;
+         super.onDispose();
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         mouseEnabled = false;
+         addEventListener(CrewEvent.UNLOAD_TANKMAN,this.onUnloadTankman);
+         addEventListener(CrewEvent.UNLOAD_ALL_TANKMAN,this.onUnloadAllTankman);
+         addEventListener(CrewEvent.OPEN_PERSONAL_CASE,this.openPersonalCaseHandler);
+         App.stage.addEventListener(CrewEvent.EQUIP_TANKMAN,this.onEquipTankman);
+         App.stage.addEventListener(CrewEvent.SHOW_RECRUIT_WINDOW,this.onShowRecruitWindow);
+         this.list.addEventListener(ListEventEx.ITEM_ROLL_OVER,showTooltip);
+         this.list.addEventListener(ListEventEx.ITEM_ROLL_OUT,hideTooltip);
+         this.list.addEventListener(ListEventEx.ITEM_PRESS,hideTooltip);
+         this.list.mouseEnabled = false;
+         this.list.validateNow();
+      }
+
+      override protected function draw() : void {
+         if(isInvalid(INVALIDATE_LIST))
+         {
+            updateTankmenS();
+         }
+         if(isInvalid(INVALIDATE_ENABLE))
+         {
             this.list.validateNow();
-            return;
-        }
+            this.list.enabled = this.enabled;
+            this.list.mouseEnabled = this.enabled;
+         }
+      }
 
-        internal function onEquipTankman(arg1:net.wg.gui.events.CrewEvent):void
-        {
-            equipTankmanS(arg1.initProp.tankmanID, arg1.initProp.slot);
-            return;
-        }
+      protected function setHelpLayout(param1:DisplayObject) : void {
+         this._helpLayout = param1;
+      }
 
-        internal function onUnloadTankman(arg1:net.wg.gui.events.CrewEvent):void
-        {
-            unloadTankmanS(arg1.initProp.tankmanID);
-            return;
-        }
+      protected function getHelpLayout() : DisplayObject {
+         return this._helpLayout;
+      }
 
-        internal function onUnloadAllTankman(arg1:net.wg.gui.events.CrewEvent):void
-        {
-            unloadAllTankmanS();
-            return;
-        }
+      private function onEquipTankman(param1:CrewEvent) : void {
+         equipTankmanS(param1.initProp.tankmanID,param1.initProp.slot);
+      }
 
-        internal function onShowRecruitWindow(arg1:net.wg.gui.events.CrewEvent):void
-        {
-            onShowRecruitWindowClickS(arg1.initProp, arg1.menuEnabled);
-            return;
-        }
+      private function onUnloadTankman(param1:CrewEvent) : void {
+         unloadTankmanS(param1.initProp.tankmanID);
+      }
 
-        public function as_tankmenResponse(arg1:Array, arg2:Array):void
-        {
-            var loc5:*=null;
-            var loc6:*=0;
-            var loc7:*=0;
-            var loc8:*=null;
-            var loc1:*=[];
-            var loc2:*=arg1.length;
-            var loc3:*=0;
-            while (loc3 < loc2) 
-            {
-                if (arg1[loc3].tankmanID) 
-                {
-                    var loc9:*=0;
-                    var loc10:*=arg2;
-                    for each (loc8 in loc10) 
-                    {
-                        if (loc8.tankmanID != arg1[loc3].tankmanID) 
-                        {
-                            continue;
-                        }
-                        loc5 = loc8;
-                        break;
-                    }
-                }
-                else 
-                {
-                    loc5 = {"iconFile":arg1[loc3].nationID != 0 ? "germany-empty.png" : "ussr-empty.png", "role":arg1[loc3].role, "roleIconFile":arg1[loc3].roleIcon, "firstname":arg1[loc3].firstname ? arg1[loc3].firstname : "", "lastname":arg1[loc3].lastname ? arg1[loc3].lastname : "", "rank":arg1[loc3].rank ? arg1[loc3].rank : "", "specializationLevel":-1, "vehicleType":arg1[loc3].vehicleType, "tankType":arg1[loc3].tankType, "tankmanID":NaN};
-                }
-                loc5.slot = arg1[loc3].slot;
-                loc5.curVehicleType = arg1[loc3].tankType;
-                loc5.curVehicleName = arg1[loc3].vehicleType;
-                loc5.roles = arg1[loc3].roles;
-                loc5.vehicleElite = arg1[loc3].vehicleElite;
-                loc5.recruitList = [];
-                loc5.recruitList.push({"specializationLevel":101, "recruit":true, "roleType":arg1[loc3].roleType, "role":arg1[loc3].role, "roleIconFile":arg1[loc3].roleIcon, "vehicleType":arg1[loc3].vehicleType, "typeID":arg1[loc3].typeID, "nationID":arg1[loc3].nationID, "iconFile":arg1[loc3].nationID != 0 ? "germany-empty.png" : "ussr-empty.png", "tankType":arg1[loc3].tankType});
-                loc6 = arg2.length;
-                loc7 = 0;
-                while (loc7 < loc6) 
-                {
-                    if (arg2[loc7].roleType == arg1[loc3].roleType && arg2[loc7].nationID == arg1[loc3].nationID) 
-                    {
-                        if (arg2[loc7].tankmanID == arg1[loc3].tankmanID) 
-                        {
-                            arg2[loc7].selected = true;
-                        }
-                        if (!arg2[loc7].inTank || arg2[loc7].tankmanID == arg1[loc3].tankmanID) 
-                        {
-                            loc5.recruitList.push(arg2[loc7]);
-                        }
-                    }
-                    ++loc7;
-                }
-                loc1.push(new net.wg.gui.lobby.hangar.crew.RecruitRendererVO(loc5));
-                ++loc3;
-            }
-            var loc4:*=61;
-            this.bg.height = loc9 = loc1.length * loc4;
-            this.maskMC.height = loc9;
-            this.list.mask = this.maskMC;
-            this.list.dataProvider.cleanUp();
-            this.list.dataProvider = new scaleform.clik.data.DataProvider(loc1);
-            invalidate(INVALIDATE_ENABLE);
-            return;
-        }
+      private function onUnloadAllTankman(param1:CrewEvent) : void {
+         unloadAllTankmanS();
+      }
 
-        public override function get enabled():Boolean
-        {
-            return super.enabled;
-        }
+      private function onShowRecruitWindow(param1:CrewEvent) : void {
+         onShowRecruitWindowClickS(param1.initProp,param1.menuEnabled);
+      }
 
-        public override function set enabled(arg1:Boolean):void
-        {
-            super.enabled = arg1;
-            invalidate(INVALIDATE_ENABLE);
-            return;
-        }
+      private function openPersonalCaseHandler(param1:CrewEvent) : void {
+         openPersonalCaseS(param1.initProp.tankmanID.toString(),param1.selectedTab);
+      }
+   }
 
-        public function showHelpLayout():void
-        {
-            var loc1:*={"borderWidth":204, "borderHeight":height, "direction":this.helpDirection, "text":LOBBY_HELP.HANGAR_CREW, "x":0, "y":0, "connectorLength":this.helpConnectorLength};
-            this.setHelpLayout(App.utils.helpLayout.create(this.root, loc1, this));
-            return;
-        }
-
-        protected override function draw():void
-        {
-            if (isInvalid(INVALIDATE_LIST)) 
-            {
-                updateTankmenS();
-            }
-            if (isInvalid(INVALIDATE_ENABLE)) 
-            {
-                this.list.validateNow();
-                this.list.enabled = this.enabled;
-                this.list.mouseEnabled = this.enabled;
-            }
-            return;
-        }
-
-        public function closeHelpLayout():void
-        {
-            if (this.getHelpLayout() != null) 
-            {
-                App.utils.helpLayout.destroy(this.getHelpLayout());
-            }
-            return;
-        }
-
-        protected function setHelpLayout(arg1:flash.display.DisplayObject):void
-        {
-            this._helpLayout = arg1;
-            return;
-        }
-
-        protected function getHelpLayout():flash.display.DisplayObject
-        {
-            return this._helpLayout;
-        }
-
-        internal function openPersonalCaseHandler(arg1:net.wg.gui.events.CrewEvent):void
-        {
-            openPersonalCaseS(arg1.initProp.tankmanID.toString(), arg1.selectedTab);
-            return;
-        }
-
-        internal static function setupDataProvider(arg1:Array):scaleform.clik.interfaces.IDataProvider
-        {
-            var loc2:*=null;
-            var loc1:*=new scaleform.clik.data.DataProvider();
-            var loc3:*=0;
-            var loc4:*=arg1;
-            for each (loc2 in loc4) 
-            {
-                loc1.push(new net.wg.gui.lobby.hangar.crew.RecruitRendererVO(loc2));
-            }
-            return loc1;
-        }
-
-        internal static function showTooltip(arg1:net.wg.gui.events.ListEventEx):void
-        {
-            App.toolTipMgr.showSpecial(net.wg.data.constants.Tooltips.TANKMAN, null, arg1.itemData.tankmanID, true);
-            return;
-        }
-
-        internal static function hideTooltip(arg1:net.wg.gui.events.ListEventEx):void
-        {
-            App.toolTipMgr.hide();
-            return;
-        }
-
-        internal static const INVALIDATE_LIST:String="invalidateList";
-
-        internal static const INVALIDATE_ENABLE:String="invalidateEnable";
-
-        public var list:net.wg.gui.components.controls.ScrollingListEx;
-
-        public var maskMC:flash.display.MovieClip;
-
-        public var bg:flash.display.MovieClip;
-
-        public var helpDirection:String="R";
-
-        public var helpText:String="";
-
-        public var helpConnectorLength:Number=12;
-
-        internal var _helpLayout:flash.display.DisplayObject=null;
-    }
 }

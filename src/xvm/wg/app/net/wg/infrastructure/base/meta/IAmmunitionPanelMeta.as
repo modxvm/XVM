@@ -1,23 +1,26 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IAmmunitionPanelMeta extends flash.events.IEventDispatcher
-    {
-        function setVehicleModuleS(arg1:String, arg2:int, arg3:String, arg4:Boolean):void;
+   import flash.events.IEventDispatcher;
 
-        function showModuleInfoS(arg1:String):void;
 
-        function showTechnicalMaintenanceS():void;
+   public interface IAmmunitionPanelMeta extends IEventDispatcher
+   {
+          
+      function setVehicleModuleS(param1:String, param2:int, param3:String, param4:Boolean) : void;
 
-        function showCustomizationS():void;
+      function showModuleInfoS(param1:String) : void;
 
-        function highlightParamsS(arg1:String):void;
+      function showTechnicalMaintenanceS() : void;
 
-        function as_setData(arg1:Array, arg2:String):void;
+      function showCustomizationS() : void;
 
-        function as_setAmmo(arg1:Object):void;
+      function highlightParamsS(param1:String) : void;
 
-        function as_setVehicleHasTurret(arg1:Boolean):void;
-    }
+      function as_setData(param1:Array, param2:String) : void;
+
+      function as_setAmmo(param1:Object) : void;
+
+      function as_setVehicleHasTurret(param1:Boolean) : void;
+   }
+
 }

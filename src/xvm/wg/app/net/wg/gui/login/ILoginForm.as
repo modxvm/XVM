@@ -1,54 +1,60 @@
-package net.wg.gui.login 
+package net.wg.gui.login
 {
-    import flash.text.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    import scaleform.clik.interfaces.*;
-    
-    public interface ILoginForm extends scaleform.clik.interfaces.IUIComponent, net.wg.infrastructure.interfaces.entity.IDisposable
-    {
-        function update(arg1:Object, arg2:Boolean):void;
+   import scaleform.clik.interfaces.IUIComponent;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import net.wg.gui.components.controls.SoundButton;
+   import net.wg.gui.components.controls.CheckBox;
+   import net.wg.gui.components.controls.HyperLink;
+   import net.wg.gui.components.controls.TextInput;
+   import flash.text.TextField;
 
-        function addChangeHandler(arg1:Function):void;
 
-        function removeChangeHandler(arg1:Function):void;
+   public interface ILoginForm extends IUIComponent, IDisposable
+   {
+          
+      function update(param1:Object, param2:Boolean) : void;
 
-        function setDefaultValues(arg1:String, arg2:String, arg3:Boolean, arg4:Boolean, arg5:Boolean, arg6:Boolean):void;
+      function addChangeHandler(param1:Function) : void;
 
-        function setServersList(arg1:Array, arg2:int):void;
+      function removeChangeHandler(param1:Function) : void;
 
-        function setErrorMessage(arg1:String, arg2:int):void;
+      function setDefaultValues(param1:String, param2:String, param3:Boolean, param4:Boolean, param5:Boolean, param6:Boolean) : void;
 
-        function setCapsLockState(arg1:Boolean):void;
+      function setServersList(param1:Array, param2:int) : void;
 
-        function getSelectedServerName():String;
+      function setErrorMessage(param1:String, param2:int) : void;
 
-        function get submit():net.wg.gui.components.controls.SoundButton;
+      function setCapsLockState(param1:Boolean) : void;
 
-        function set submit(arg1:net.wg.gui.components.controls.SoundButton):void;
+      function getSelectedServerName() : String;
 
-        function get rememberPwdCheckbox():net.wg.gui.components.controls.CheckBox;
+      function get submit() : SoundButton;
 
-        function set rememberPwdCheckbox(arg1:net.wg.gui.components.controls.CheckBox):void;
+      function set submit(param1:SoundButton) : void;
 
-        function get registerLink():net.wg.gui.components.controls.HyperLink;
+      function get rememberPwdCheckbox() : CheckBox;
 
-        function set registerLink(arg1:net.wg.gui.components.controls.HyperLink):void;
+      function set rememberPwdCheckbox(param1:CheckBox) : void;
 
-        function get recoveryLink():net.wg.gui.components.controls.HyperLink;
+      function get registerLink() : HyperLink;
 
-        function set recoveryLink(arg1:net.wg.gui.components.controls.HyperLink):void;
+      function set registerLink(param1:HyperLink) : void;
 
-        function get login():net.wg.gui.components.controls.TextInput;
+      function get recoveryLink() : HyperLink;
 
-        function set login(arg1:net.wg.gui.components.controls.TextInput):void;
+      function set recoveryLink(param1:HyperLink) : void;
 
-        function get pass():net.wg.gui.components.controls.TextInput;
+      function get login() : TextInput;
 
-        function set pass(arg1:net.wg.gui.components.controls.TextInput):void;
+      function set login(param1:TextInput) : void;
 
-        function get message():flash.text.TextField;
+      function get pass() : TextInput;
 
-        function set message(arg1:flash.text.TextField):void;
-    }
+      function set pass(param1:TextInput) : void;
+
+      function get message() : TextField;
+
+      function set message(param1:TextField) : void;
+   }
+
 }

@@ -1,40 +1,36 @@
-package net.wg.gui.lobby.profile.components.chart 
+package net.wg.gui.lobby.profile.components.chart
 {
-    import scaleform.clik.core.*;
-    
-    public class BarItem extends scaleform.clik.core.UIComponent
-    {
-        public function BarItem()
-        {
-            super();
-            this.gotoAndStop(1);
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(PERCENT_INV)) 
-            {
-                this.gotoAndStop(this._percent);
-            }
-            return;
-        }
 
-        public function get percent():uint
-        {
-            return this._percent;
-        }
+   public class BarItem extends UIComponent
+   {
+          
+      public function BarItem() {
+         super();
+         this.gotoAndStop(1);
+      }
 
-        public function set percent(arg1:uint):void
-        {
-            this._percent = arg1;
-            invalidate(PERCENT_INV);
-            return;
-        }
+      public static const PERCENT_INV:String = "percInv";
 
-        public static const PERCENT_INV:String="percInv";
+      private var _percent:uint = 0;
 
-        internal var _percent:uint=0;
-    }
+      override protected function draw() : void {
+         super.draw();
+         if(isInvalid(PERCENT_INV))
+         {
+            this.gotoAndStop(this._percent);
+         }
+      }
+
+      public function get percent() : uint {
+         return this._percent;
+      }
+
+      public function set percent(param1:uint) : void {
+         this._percent = param1;
+         invalidate(PERCENT_INV);
+      }
+   }
+
 }

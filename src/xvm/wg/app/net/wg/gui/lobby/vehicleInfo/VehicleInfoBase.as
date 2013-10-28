@@ -1,55 +1,51 @@
-package net.wg.gui.lobby.vehicleInfo 
+package net.wg.gui.lobby.vehicleInfo
 {
-    import net.wg.infrastructure.interfaces.*;
-    import scaleform.clik.core.*;
-    
-    public class VehicleInfoBase extends scaleform.clik.core.UIComponent implements net.wg.infrastructure.interfaces.IViewStackContent
-    {
-        public function VehicleInfoBase()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import net.wg.infrastructure.interfaces.IViewStackContent;
 
-        public function update(arg1:Object):void
-        {
-            var loc1:*=0;
-            var loc2:*=null;
-            this._data = arg1 as Array;
-            loc1 = 0;
-            while (loc1 < this._data.length) 
-            {
-                loc2 = new net.wg.gui.lobby.vehicleInfo.BaseBlock();
-                loc2.setData(this._data[loc1]);
-                loc2.x = this.startX;
-                loc2.y = this.startY + loc1 * this.yOffset;
-                this.addChild(loc2);
-                ++loc1;
-            }
-            return;
-        }
 
-        public override function dispose():void
-        {
-            super.dispose();
-            while (this.numChildren > 0) 
-            {
-                this.removeChildAt(0);
-            }
-            return;
-        }
+   public class VehicleInfoBase extends UIComponent implements IViewStackContent
+   {
+          
+      public function VehicleInfoBase() {
+         super();
+      }
 
-        public override function toString():String
-        {
-            return "[WG VehicleInfoBase " + name + "]";
-        }
+      private var _data:Array;
 
-        internal var _data:Array;
+      private var yOffset:Number = 19;
 
-        internal var yOffset:Number=19;
+      private var startY:Number = 10;
 
-        internal var startY:Number=10;
+      private var startX:Number = 10;
 
-        internal var startX:Number=10;
-    }
+      public function update(param1:Object) : void {
+         var _loc2_:uint = 0;
+         var _loc3_:BaseBlock = null;
+         this._data = param1 as Array;
+         _loc2_ = 0;
+         while(_loc2_ < this._data.length)
+         {
+            _loc3_ = new BaseBlock();
+            _loc3_.setData(this._data[_loc2_]);
+            _loc3_.x = this.startX;
+            _loc3_.y = this.startY + _loc2_ * this.yOffset;
+            this.addChild(_loc3_);
+            _loc2_++;
+         }
+      }
+
+      override public function dispose() : void {
+         super.dispose();
+         while(this.numChildren > 0)
+         {
+            this.removeChildAt(0);
+         }
+      }
+
+      override public function toString() : String {
+         return "[WG VehicleInfoBase " + name + "]";
+      }
+   }
+
 }

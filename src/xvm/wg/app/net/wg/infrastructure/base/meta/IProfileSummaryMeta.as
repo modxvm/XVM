@@ -1,11 +1,16 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface IProfileSummaryMeta extends flash.events.IEventDispatcher
-    {
-        function getPersonalScoreWarningTextS(arg1:Object):String;
+   import flash.events.IEventDispatcher;
 
-        function getGlobalRatingS(arg1:String):Number;
-    }
+
+   public interface IProfileSummaryMeta extends IEventDispatcher
+   {
+          
+      function getPersonalScoreWarningTextS(param1:Object) : String;
+
+      function getGlobalRatingS(param1:String) : Number;
+
+      function as_setUserData(param1:Object) : void;
+   }
+
 }

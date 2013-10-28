@@ -1,64 +1,53 @@
-package net.wg.gui.lobby.techtree.controls 
+package net.wg.gui.lobby.techtree.controls
 {
-    import scaleform.clik.constants.*;
-    import scaleform.clik.core.*;
-    
-    public class XPIcon extends scaleform.clik.core.UIComponent
-    {
-        public function XPIcon()
-        {
-            super();
+   import scaleform.clik.core.UIComponent;
+   import scaleform.clik.constants.InvalidationType;
+
+
+   public class XPIcon extends UIComponent
+   {
+          
+      public function XPIcon() {
+         super();
+      }
+
+      private var _type:String = null;
+
+      public function get type() : String {
+         return this._type;
+      }
+
+      public function set type(param1:String) : void {
+         if(this._type == param1)
+         {
             return;
-        }
+         }
+         this._type = param1;
+         if(this._type != currentFrameLabel)
+         {
+            invalidateData();
+         }
+      }
 
-        public function get type():String
-        {
-            return this._type;
-        }
+      override protected function configUI() : void {
+         mouseEnabled = mouseChildren = focusable = false;
+         super.configUI();
+      }
 
-        public function set type(arg1:String):void
-        {
-            if (this._type == arg1) 
-            {
-                return;
-            }
-            this._type = arg1;
-            if (this._type != currentFrameLabel) 
-            {
-                invalidateData();
-            }
-            return;
-        }
+      override protected function draw() : void {
+         if(isInvalid(InvalidationType.DATA))
+         {
+            this.updateIcon();
+         }
+         super.draw();
+      }
 
-        protected override function configUI():void
-        {
-            var loc1:*;
-            focusable = loc1 = false;
-            mouseChildren = loc1 = loc1;
-            mouseEnabled = loc1;
-            super.configUI();
-            return;
-        }
+      private function updateIcon() : void {
+         if((_labelHash[this._type]) && !(this._type == currentFrameLabel))
+         {
+            gotoAndStop(this._type);
+         }
+      }
+   }
 
-        protected override function draw():void
-        {
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
-            {
-                this.updateIcon();
-            }
-            super.draw();
-            return;
-        }
-
-        internal function updateIcon():void
-        {
-            if (_labelHash[this._type] && !(this._type == currentFrameLabel)) 
-            {
-                gotoAndStop(this._type);
-            }
-            return;
-        }
-
-        internal var _type:String=null;
-    }
 }

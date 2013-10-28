@@ -1,13 +1,16 @@
-package net.wg.gui.prebattle.meta 
+package net.wg.gui.prebattle.meta
 {
-    import flash.events.*;
-    
-    public interface IBattleSessionListMeta extends flash.events.IEventDispatcher
-    {
-        function requestToJoinTeamS(arg1:Number, arg2:Number):void;
+   import flash.events.IEventDispatcher;
 
-        function getClientIDS():Number;
 
-        function as_refreshList(arg1:Array):void;
-    }
+   public interface IBattleSessionListMeta extends IEventDispatcher
+   {
+          
+      function requestToJoinTeamS(param1:Number, param2:Number) : void;
+
+      function getClientIDS() : Number;
+
+      function as_refreshList(param1:Array) : void;
+   }
+
 }

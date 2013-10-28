@@ -1,148 +1,129 @@
-package net.wg.gui.lobby.battleloading 
+package net.wg.gui.lobby.battleloading
 {
-    import flash.text.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.components.icons.*;
-    import scaleform.clik.controls.*;
-    import scaleform.clik.core.*;
-    import scaleform.clik.data.*;
-    
-    public class BattleLoadingForm extends scaleform.clik.core.UIComponent
-    {
-        public function BattleLoadingForm()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.text.TextField;
+   import scaleform.clik.controls.StatusIndicator;
+   import net.wg.gui.components.icons.BattleTypeIcon;
+   import net.wg.gui.components.controls.ReadOnlyScrollingList;
+   import scaleform.clik.data.DataProvider;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            return;
-        }
 
-        public function updateProgress(arg1:Number):void
-        {
-            this.loadingBar.position = arg1;
-            return;
-        }
+   public class BattleLoadingForm extends UIComponent
+   {
+          
+      public function BattleLoadingForm() {
+         super();
+      }
 
-        public function updateMapName(arg1:String):void
-        {
-            this.mapText.text = arg1;
-            this.mapText.text = this.mapText.text.toUpperCase();
-            return;
-        }
+      public var mapText:TextField;
 
-        public function setBattleTypeName(arg1:String):void
-        {
-            this.battleText.text = arg1;
-            return;
-        }
+      public var battleText:TextField;
 
-        public function setBattleTypeFrameNum(arg1:Number):void
-        {
-            this.battleIcon.typeByNumber = arg1;
-            return;
-        }
+      public var winText:TextField;
 
-        public function setBattleTypeFrameName(arg1:String):void
-        {
-            this.battleIcon.type = arg1;
-            return;
-        }
+      public var team1Text:TextField;
 
-        public function updateWinText(arg1:String):void
-        {
-            this.winText.htmlText = arg1;
-            this.winText.y = 128 + (40 - this.winText.textHeight >> 1) ^ 0;
-            return;
-        }
+      public var team2Text:TextField;
 
-        public function updateTeamsHeaders(arg1:String, arg2:String):void
-        {
-            this.team1Text.text = arg1;
-            this.team2Text.text = arg2;
-            return;
-        }
+      public var helpTip:TextField;
 
-        public function updateTip(arg1:String):void
-        {
-            this.helpTip.text = MENU.LOADING_HELPTIP;
-            this.tipText.htmlText = arg1;
-            return;
-        }
+      public var tipText:TextField;
 
-        public function updateTeamValues(arg1:Object):void
-        {
-            var loc2:*=NaN;
-            var loc3:*=null;
-            var loc1:*=arg1.playerID;
-            loc2 = arg1.squadID;
-            var loc4:*=0;
-            loc3 = this.normalizeData(arg1.team1, loc1, loc2, 1);
-            this.team1List.dataProvider = new scaleform.clik.data.DataProvider(loc3.team);
-            this.team1List.selectedIndex = loc3.selected;
-            loc3 = this.normalizeData(arg1.team2, loc1, loc2, 2);
-            this.team2List.dataProvider = new scaleform.clik.data.DataProvider(loc3.team);
-            this.team2List.selectedIndex = loc3.selected;
-            return;
-        }
+      public var loadingBar:StatusIndicator;
 
-        internal function normalizeData(arg1:Array, arg2:Number, arg3:Number, arg4:uint):Object
-        {
-            var loc1:*;
-            (loc1 = new Object()).selected = -1;
-            var loc2:*=0;
-            while (loc2 < arg1.length) 
+      public var battleIcon:BattleTypeIcon;
+
+      public var team1List:ReadOnlyScrollingList;
+
+      public var team2List:ReadOnlyScrollingList;
+
+      private const TEAM1:String = "team1";
+
+      private const TEAM2:String = "team2";
+
+      override protected function configUI() : void {
+         super.configUI();
+      }
+
+      public function updateProgress(param1:Number) : void {
+         this.loadingBar.position = param1;
+      }
+
+      public function updateMapName(param1:String) : void {
+         this.mapText.text = param1;
+         this.mapText.text = this.mapText.text.toUpperCase();
+      }
+
+      public function setBattleTypeName(param1:String) : void {
+         this.battleText.text = param1;
+      }
+
+      public function setBattleTypeFrameNum(param1:Number) : void {
+         this.battleIcon.typeByNumber = param1;
+      }
+
+      public function setBattleTypeFrameName(param1:String) : void {
+         this.battleIcon.type = param1;
+      }
+
+      public function updateWinText(param1:String) : void {
+         this.winText.htmlText = param1;
+         this.winText.y = 128 + (40 - this.winText.textHeight >> 1) ^ 0;
+      }
+
+      public function updateTeamsHeaders(param1:String, param2:String) : void {
+         this.team1Text.text = param1;
+         this.team2Text.text = param2;
+      }
+
+      public function updateTip(param1:String) : void {
+         this.helpTip.text = MENU.LOADING_HELPTIP;
+         this.tipText.htmlText = param1;
+      }
+
+      public function updateTeamValues(param1:Object) : void {
+         var _loc4_:Object = null;
+         var _loc2_:Number = param1.playerID;
+         var _loc3_:Number = param1.squadID;
+         var _loc5_:uint = 0;
+         _loc4_ = this.normalizeData(param1.team1,_loc2_,_loc3_,this.TEAM1);
+         this.team1List.dataProvider = new DataProvider(_loc4_.team);
+         this.team1List.selectedIndex = _loc4_.selected;
+         _loc4_ = this.normalizeData(param1.team2,_loc2_,_loc3_,this.TEAM2);
+         this.team2List.dataProvider = new DataProvider(_loc4_.team);
+         this.team2List.selectedIndex = _loc4_.selected;
+      }
+
+      private function normalizeData(param1:Array, param2:Number, param3:Number, param4:String) : Object {
+         var _loc5_:Object = new Object();
+         _loc5_.selected = -1;
+         var _loc6_:uint = 0;
+         while(_loc6_ < param1.length)
+         {
+            param1[_loc6_].position = _loc6_ + 1;
+            if(param1[_loc6_].playerID == param2)
             {
-                arg1[loc2].position = loc2 + 1;
-                if (arg1[loc2].playerID == arg2) 
-                {
-                    loc1.selected = loc2;
-                }
-                if (arg3 > 0 && arg1[loc2].squad == arg3 && arg4 == 1) 
-                {
-                    arg1[loc2].squad = arg1[loc2].squad + 10;
-                }
-                ++loc2;
+               _loc5_.selected = _loc6_;
             }
-            loc1.team = arg1;
-            return loc1;
-        }
+            if(param3 > 0 && param1[_loc6_].squad == param3 && param4 == this.TEAM1)
+            {
+               param1[_loc6_].squad = param1[_loc6_].squad + 10;
+            }
+            param1[_loc6_].team = param4;
+            _loc6_++;
+         }
+         _loc5_.team = param1;
+         return _loc5_;
+      }
 
-        public function onDispose():void
-        {
-            this.team1List.disposeRenderers();
-            this.team2List.disposeRenderers();
-            return;
-        }
+      public function onDispose() : void {
+         this.team1List.disposeRenderers();
+         this.team2List.disposeRenderers();
+      }
 
-        public override function toString():String
-        {
-            return "[WG BattleLoadingForm " + name + "]";
-        }
+      override public function toString() : String {
+         return "[WG BattleLoadingForm " + name + "]";
+      }
+   }
 
-        public var mapText:flash.text.TextField;
-
-        public var battleText:flash.text.TextField;
-
-        public var winText:flash.text.TextField;
-
-        public var team1Text:flash.text.TextField;
-
-        public var team2Text:flash.text.TextField;
-
-        public var helpTip:flash.text.TextField;
-
-        public var tipText:flash.text.TextField;
-
-        public var loadingBar:scaleform.clik.controls.StatusIndicator;
-
-        public var battleIcon:net.wg.gui.components.icons.BattleTypeIcon;
-
-        public var team1List:net.wg.gui.components.controls.ReadOnlyScrollingList;
-
-        public var team2List:net.wg.gui.components.controls.ReadOnlyScrollingList;
-    }
 }

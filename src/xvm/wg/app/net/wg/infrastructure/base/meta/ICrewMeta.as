@@ -1,21 +1,24 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface ICrewMeta extends flash.events.IEventDispatcher
-    {
-        function onShowRecruitWindowClickS(arg1:Object, arg2:Boolean):void;
+   import flash.events.IEventDispatcher;
 
-        function unloadTankmanS(arg1:String):void;
 
-        function unloadAllTankmanS():void;
+   public interface ICrewMeta extends IEventDispatcher
+   {
+          
+      function onShowRecruitWindowClickS(param1:Object, param2:Boolean) : void;
 
-        function equipTankmanS(arg1:String, arg2:Number):void;
+      function unloadTankmanS(param1:String) : void;
 
-        function openPersonalCaseS(arg1:String, arg2:uint):void;
+      function unloadAllTankmanS() : void;
 
-        function updateTankmenS():void;
+      function equipTankmanS(param1:String, param2:Number) : void;
 
-        function as_tankmenResponse(arg1:Array, arg2:Array):void;
-    }
+      function openPersonalCaseS(param1:String, param2:uint) : void;
+
+      function updateTankmenS() : void;
+
+      function as_tankmenResponse(param1:Array, param2:Array) : void;
+   }
+
 }

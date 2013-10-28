@@ -1,62 +1,56 @@
-package net.wg.gui.lobby.techtree.data.vo 
+package net.wg.gui.lobby.techtree.data.vo
 {
-    import net.wg.gui.lobby.techtree.interfaces.*;
-    import net.wg.utils.*;
-    
-    public class NationDisplaySettings extends Object implements net.wg.gui.lobby.techtree.interfaces.IValueObject
-    {
-        public function NationDisplaySettings(arg1:String="", arg2:Boolean=false)
-        {
-            super();
-            this._nodeRendererName = arg1;
-            this._isLevelDisplayed = arg2;
+   import net.wg.gui.lobby.techtree.interfaces.IValueObject;
+   import net.wg.utils.ILocale;
+
+
+   public class NationDisplaySettings extends Object implements IValueObject
+   {
+          
+      public function NationDisplaySettings(param1:String=undefined, param2:Boolean=false) {
+         super();
+         this._nodeRendererName = param1;
+         this._isLevelDisplayed = param2;
+      }
+
+      private var _nodeRendererName:String;
+
+      private var _isLevelDisplayed:Boolean;
+
+      public function get nodeRendererName() : String {
+         return this._nodeRendererName;
+      }
+
+      public function get isLevelDisplayed() : Boolean {
+         return this._isLevelDisplayed;
+      }
+
+      public function fromArray(param1:Array, param2:ILocale) : void {
+         if(param1.length > 1)
+         {
+            this._nodeRendererName = param1[0]?param1[0]:"";
+            this._isLevelDisplayed = Boolean(param1[1]);
+         }
+      }
+
+      public function fromObject(param1:Object, param2:ILocale) : void {
+         if(param1 == null)
+         {
             return;
-        }
+         }
+         if(param1.nodeRendererName != null)
+         {
+            this._nodeRendererName = param1.nodeRendererName;
+         }
+         if(param1.isLevelDisplayed != null)
+         {
+            this._isLevelDisplayed = param1.isLevelDisplayed;
+         }
+      }
 
-        public function get nodeRendererName():String
-        {
-            return this._nodeRendererName;
-        }
+      public function toString() : String {
+         return "[NationDisplaySettings: nodeRendererName = " + this._nodeRendererName + ", isLevelDisplayed = " + this._isLevelDisplayed + " ]";
+      }
+   }
 
-        public function get isLevelDisplayed():Boolean
-        {
-            return this._isLevelDisplayed;
-        }
-
-        public function fromArray(arg1:Array, arg2:net.wg.utils.ILocale):void
-        {
-            if (arg1.length > 1) 
-            {
-                this._nodeRendererName = arg1[0] ? arg1[0] : "";
-                this._isLevelDisplayed = Boolean(arg1[1]);
-            }
-            return;
-        }
-
-        public function fromObject(arg1:Object, arg2:net.wg.utils.ILocale):void
-        {
-            if (arg1 == null) 
-            {
-                return;
-            }
-            if (arg1.nodeRendererName != null) 
-            {
-                this._nodeRendererName = arg1.nodeRendererName;
-            }
-            if (arg1.isLevelDisplayed != null) 
-            {
-                this._isLevelDisplayed = arg1.isLevelDisplayed;
-            }
-            return;
-        }
-
-        public function toString():String
-        {
-            return "[NationDisplaySettings: nodeRendererName = " + this._nodeRendererName + ", isLevelDisplayed = " + this._isLevelDisplayed + " ]";
-        }
-
-        internal var _nodeRendererName:String;
-
-        internal var _isLevelDisplayed:Boolean;
-    }
 }

@@ -1,137 +1,143 @@
-package net.wg.infrastructure.managers.utils.impl 
+package net.wg.infrastructure.managers.utils.impl
 {
-    import net.wg.infrastructure.base.meta.impl.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    import net.wg.utils.*;
-    
-    public class Utils extends net.wg.infrastructure.base.meta.impl.UtilsManagerMeta implements net.wg.utils.IUtils
-    {
-        public function Utils(arg1:net.wg.utils.IAssertable, arg2:net.wg.utils.IScheduler, arg3:net.wg.utils.ILocale, arg4:net.wg.infrastructure.interfaces.entity.ISerializable, arg5:net.wg.utils.IHelpLayout, arg6:net.wg.utils.IClassFactory, arg7:net.wg.utils.IPopUpManager, arg8:net.wg.utils.ICommons, arg9:net.wg.utils.IFocusHandler, arg10:net.wg.utils.IEventCollector, arg11:net.wg.utils.IIME)
-        {
-            super();
-            this._asserter = arg1;
-            this._scheduler = arg2;
-            this._locale = arg3;
-            this._JSON = arg4;
-            this._helpLayout = arg5;
-            this._classFactory = arg6;
-            this._popupManager = arg7;
-            this._commons = arg8;
-            this._focusHandler = arg9;
-            this._events = arg10;
-            this._ime = arg11;
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.UtilsManagerMeta;
+   import net.wg.utils.IUtils;
+   import net.wg.utils.IAssertable;
+   import net.wg.utils.IScheduler;
+   import net.wg.utils.ILocale;
+   import net.wg.infrastructure.interfaces.entity.ISerializable;
+   import net.wg.utils.IHelpLayout;
+   import net.wg.utils.IClassFactory;
+   import net.wg.utils.IPopUpManager;
+   import net.wg.utils.ICommons;
+   import net.wg.utils.INations;
+   import net.wg.utils.IFocusHandler;
+   import net.wg.utils.IEventCollector;
+   import net.wg.utils.IIME;
+   import net.wg.utils.IVOManager;
 
-        public function setNations(arg1:net.wg.utils.INations):void
-        {
-            this._nations = arg1;
-            return;
-        }
 
-        public function dispose():void
-        {
-            this._events.dispose();
-            this._events = null;
-            this._scheduler.dispose();
-            this._scheduler = null;
-            this._helpLayout.dispose();
-            this._helpLayout = null;
-            this._focusHandler.dispose();
-            this._focusHandler = null;
-            this._asserter = null;
-            this._locale = null;
-            this._JSON = null;
-            this._classFactory = null;
-            this._popupManager = null;
-            this._nations = null;
-            this._ime.dispose();
-            this._ime = null;
-            return;
-        }
+   public class Utils extends UtilsManagerMeta implements IUtils
+   {
+          
+      public function Utils(param1:IAssertable, param2:IScheduler, param3:ILocale, param4:ISerializable, param5:IHelpLayout, param6:IClassFactory, param7:IPopUpManager, param8:ICommons, param9:IFocusHandler, param10:IEventCollector, param11:IIME, param12:IVOManager) {
+         super();
+         this._asserter = param1;
+         this._scheduler = param2;
+         this._locale = param3;
+         this._JSON = param4;
+         this._helpLayout = param5;
+         this._classFactory = param6;
+         this._popupManager = param7;
+         this._commons = param8;
+         this._focusHandler = param9;
+         this._events = param10;
+         this._ime = param11;
+         this._voManager = param12;
+      }
 
-        public function get asserter():net.wg.utils.IAssertable
-        {
-            return this._asserter;
-        }
+      private var _asserter:IAssertable = null;
 
-        public function get scheduler():net.wg.utils.IScheduler
-        {
-            return this._scheduler;
-        }
+      private var _scheduler:IScheduler = null;
 
-        public function get locale():net.wg.utils.ILocale
-        {
-            return this._locale;
-        }
+      private var _locale:ILocale = null;
 
-        public function get JSON():net.wg.infrastructure.interfaces.entity.ISerializable
-        {
-            return this._JSON;
-        }
+      private var _JSON:ISerializable = null;
 
-        public function get helpLayout():net.wg.utils.IHelpLayout
-        {
-            return this._helpLayout;
-        }
+      private var _helpLayout:IHelpLayout = null;
 
-        public function get classFactory():net.wg.utils.IClassFactory
-        {
-            return this._classFactory;
-        }
+      private var _classFactory:IClassFactory = null;
 
-        public function get popupMgr():net.wg.utils.IPopUpManager
-        {
-            return this._popupManager;
-        }
+      private var _popupManager:IPopUpManager = null;
 
-        public function get commons():net.wg.utils.ICommons
-        {
-            return this._commons;
-        }
+      private var _commons:ICommons = null;
 
-        public function get nations():net.wg.utils.INations
-        {
-            return this._nations;
-        }
+      private var _nations:INations = null;
 
-        public function get focusHandler():net.wg.utils.IFocusHandler
-        {
-            return this._focusHandler;
-        }
+      private var _focusHandler:IFocusHandler = null;
 
-        public function get events():net.wg.utils.IEventCollector
-        {
-            return this._events;
-        }
+      private var _events:IEventCollector = null;
 
-        public function get IME():net.wg.utils.IIME
-        {
-            return this._ime;
-        }
+      private var _ime:IIME = null;
 
-        internal var _asserter:net.wg.utils.IAssertable=null;
+      private var _voManager:IVOManager = null;
 
-        internal var _scheduler:net.wg.utils.IScheduler=null;
+      public function setNations(param1:INations) : void {
+         this._nations = param1;
+      }
 
-        internal var _locale:net.wg.utils.ILocale=null;
+      public function dispose() : void {
+         this._events.dispose();
+         this._events = null;
+         this._scheduler.dispose();
+         this._scheduler = null;
+         this._helpLayout.dispose();
+         this._helpLayout = null;
+         this._focusHandler.dispose();
+         this._focusHandler = null;
+         this._asserter = null;
+         this._locale = null;
+         this._JSON = null;
+         this._classFactory = null;
+         this._popupManager = null;
+         this._nations = null;
+         this._ime.dispose();
+         this._ime = null;
+         this._voManager.dispose();
+         this._voManager = null;
+      }
 
-        internal var _JSON:net.wg.infrastructure.interfaces.entity.ISerializable=null;
+      public function get asserter() : IAssertable {
+         return this._asserter;
+      }
 
-        internal var _helpLayout:net.wg.utils.IHelpLayout=null;
+      public function get scheduler() : IScheduler {
+         return this._scheduler;
+      }
 
-        internal var _classFactory:net.wg.utils.IClassFactory=null;
+      public function get locale() : ILocale {
+         return this._locale;
+      }
 
-        internal var _popupManager:net.wg.utils.IPopUpManager=null;
+      public function get JSON() : ISerializable {
+         return this._JSON;
+      }
 
-        internal var _commons:net.wg.utils.ICommons=null;
+      public function get helpLayout() : IHelpLayout {
+         return this._helpLayout;
+      }
 
-        internal var _nations:net.wg.utils.INations=null;
+      public function get classFactory() : IClassFactory {
+         return this._classFactory;
+      }
 
-        internal var _focusHandler:net.wg.utils.IFocusHandler=null;
+      public function get popupMgr() : IPopUpManager {
+         return this._popupManager;
+      }
 
-        internal var _events:net.wg.utils.IEventCollector=null;
+      public function get commons() : ICommons {
+         return this._commons;
+      }
 
-        internal var _ime:net.wg.utils.IIME=null;
-    }
+      public function get nations() : INations {
+         return this._nations;
+      }
+
+      public function get focusHandler() : IFocusHandler {
+         return this._focusHandler;
+      }
+
+      public function get events() : IEventCollector {
+         return this._events;
+      }
+
+      public function get IME() : IIME {
+         return this._ime;
+      }
+
+      public function get voMgr() : IVOManager {
+         return this._voManager;
+      }
+   }
+
 }

@@ -1,93 +1,79 @@
-package net.wg.gui.components.common.cursor.base 
+package net.wg.gui.components.common.cursor.base
 {
-    import flash.display.*;
-    import flash.events.*;
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.events.*;
-    import net.wg.infrastructure.interfaces.*;
-    
-    internal class ResizingCursor extends net.wg.gui.components.common.cursor.base.BaseCursor
-    {
-        public function ResizingCursor()
-        {
-            super();
-            return;
-        }
+   import flash.display.InteractiveObject;
+   import net.wg.data.constants.Errors;
+   import flash.events.MouseEvent;
+   import net.wg.infrastructure.interfaces.IView;
+   import net.wg.infrastructure.events.LifeCycleEvent;
+   import net.wg.data.constants.Cursors;
 
-        public function useResizeCursor(arg1:flash.display.InteractiveObject):void
-        {
-            assertNotNull(arg1, "window" + net.wg.data.constants.Errors.CANT_NULL);
-            arg1.addEventListener(flash.events.MouseEvent.ROLL_OVER, this.onResizableObjectRollOver, false, 0, true);
-            arg1.addEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.onResizableObjectMouseDn, false, 0, true);
-            if (arg1 is net.wg.infrastructure.interfaces.IView) 
-            {
-                arg1.addEventListener(net.wg.infrastructure.events.LifeCycleEvent.ON_BEFORE_DISPOSE, this.onBeforeResizableObjDispose, false, 0, true);
-            }
-            return;
-        }
 
-        public function unUseResizeCursor(arg1:flash.display.InteractiveObject):void
-        {
-            assertNotNull(arg1, "window" + net.wg.data.constants.Errors.CANT_NULL);
-            arg1.removeEventListener(flash.events.MouseEvent.ROLL_OVER, this.onResizableObjectRollOver);
-            arg1.removeEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.onResizableObjectMouseDn);
-            if (arg1 is net.wg.infrastructure.interfaces.IView) 
-            {
-                arg1.removeEventListener(net.wg.infrastructure.events.LifeCycleEvent.ON_BEFORE_DISPOSE, this.onBeforeResizableObjDispose);
-            }
-            return;
-        }
+   class ResizingCursor extends BaseCursor
+   {
+          
+      function ResizingCursor() {
+         super();
+      }
 
-        protected override function cursorIsFree():Boolean
-        {
-            return !this._isOnResizing;
-        }
+      private var _isOnResizing:Boolean = false;
 
-        internal function onResizableObjectRollOver(arg1:flash.events.MouseEvent):void
-        {
-            setCursor(net.wg.data.constants.Cursors.RESIZE);
-            return;
-        }
+      public function useResizeCursor(param1:InteractiveObject) : void {
+         assertNotNull(param1,"window" + Errors.CANT_NULL);
+         param1.addEventListener(MouseEvent.ROLL_OVER,this.onResizableObjectRollOver,false,0,true);
+         param1.addEventListener(MouseEvent.MOUSE_DOWN,this.onResizableObjectMouseDn,false,0,true);
+         if(param1  is  IView)
+         {
+            param1.addEventListener(LifeCycleEvent.ON_BEFORE_DISPOSE,this.onBeforeResizableObjDispose,false,0,true);
+         }
+      }
 
-        internal function onResizableObjectMouseDn(arg1:flash.events.MouseEvent):void
-        {
-            if (this.isLeftButton(arg1)) 
-            {
-                stage.addEventListener(flash.events.MouseEvent.MOUSE_UP, this.onResizableObjectMouseUp);
-                this.setResizing(true);
-            }
-            return;
-        }
+      public function unUseResizeCursor(param1:InteractiveObject) : void {
+         assertNotNull(param1,"window" + Errors.CANT_NULL);
+         param1.removeEventListener(MouseEvent.ROLL_OVER,this.onResizableObjectRollOver);
+         param1.removeEventListener(MouseEvent.MOUSE_DOWN,this.onResizableObjectMouseDn);
+         if(param1  is  IView)
+         {
+            param1.removeEventListener(LifeCycleEvent.ON_BEFORE_DISPOSE,this.onBeforeResizableObjDispose);
+         }
+      }
 
-        protected final function isLeftButton(arg1:flash.events.MouseEvent):Boolean
-        {
-            return App.utils.commons.isLeftButton(arg1);
-        }
+      override protected function cursorIsFree() : Boolean {
+         return !this._isOnResizing;
+      }
 
-        internal function onResizableObjectMouseUp(arg1:flash.events.MouseEvent):void
-        {
-            stage.removeEventListener(flash.events.MouseEvent.MOUSE_UP, this.onResizableObjectMouseUp);
-            this.setResizing(false);
-            return;
-        }
+      private function onResizableObjectRollOver(param1:MouseEvent) : void {
+         setCursor(Cursors.RESIZE);
+      }
 
-        internal function onBeforeResizableObjDispose(arg1:net.wg.infrastructure.events.LifeCycleEvent):void
-        {
-            var loc1:*=flash.display.InteractiveObject(arg1.target);
-            this.unUseResizeCursor(loc1);
-            return;
-        }
+      private function onResizableObjectMouseDn(param1:MouseEvent) : void {
+         if(this.isLeftButton(param1))
+         {
+            stage.addEventListener(MouseEvent.MOUSE_UP,this.onResizableObjectMouseUp);
+            this.setResizing(true);
+         }
+      }
 
-        internal function setResizing(arg1:Boolean):void
-        {
-            if (arg1 != this._isOnResizing) 
-            {
-                this._isOnResizing = arg1;
-                tryToResetCursor();
-            }
-            return;
-        }
+      protected final function isLeftButton(param1:MouseEvent) : Boolean {
+         return App.utils.commons.isLeftButton(param1);
+      }
 
-        internal var _isOnResizing:Boolean=false;
-    }
+      private function onResizableObjectMouseUp(param1:MouseEvent) : void {
+         stage.removeEventListener(MouseEvent.MOUSE_UP,this.onResizableObjectMouseUp);
+         this.setResizing(false);
+      }
+
+      private function onBeforeResizableObjDispose(param1:LifeCycleEvent) : void {
+         var _loc2_:InteractiveObject = InteractiveObject(param1.target);
+         this.unUseResizeCursor(_loc2_);
+      }
+
+      private function setResizing(param1:Boolean) : void {
+         if(param1 != this._isOnResizing)
+         {
+            this._isOnResizing = param1;
+            tryToResetCursor();
+         }
+      }
+   }
+
 }

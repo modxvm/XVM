@@ -1,27 +1,32 @@
-package net.wg.gui.messenger.meta 
+package net.wg.gui.messenger.meta
 {
-    import flash.events.*;
-    
-    public interface IContactsWindowMeta extends flash.events.IEventDispatcher
-    {
-        function searchContactS(arg1:String):void;
+   import flash.events.IEventDispatcher;
 
-        function addToFriendsS(arg1:Number, arg2:String):void;
 
-        function addToIgnoredS(arg1:Number, arg2:String):void;
+   public interface IContactsWindowMeta extends IEventDispatcher
+   {
+          
+      function searchContactS(param1:String) : void;
 
-        function as_getFriendsDP():Object;
+      function addToFriendsS(param1:Number, param2:String) : void;
 
-        function as_getClanDP():Object;
+      function addToIgnoredS(param1:Number, param2:String) : void;
 
-        function as_getIgnoredDP():Object;
+      function isEnabledInRoamingS(param1:Number) : Boolean;
 
-        function as_getMutedDP():Object;
+      function as_getFriendsDP() : Object;
 
-        function as_getSearchDP():Object;
+      function as_getClanDP() : Object;
 
-        function as_setSearchResultText(arg1:String):void;
+      function as_getIgnoredDP() : Object;
 
-        function as_frozenSearchAction(arg1:Boolean):void;
-    }
+      function as_getMutedDP() : Object;
+
+      function as_getSearchDP() : Object;
+
+      function as_setSearchResultText(param1:String) : void;
+
+      function as_frozenSearchAction(param1:Boolean) : void;
+   }
+
 }

@@ -1,249 +1,232 @@
-package net.wg.gui.lobby.sellDialog 
+package net.wg.gui.lobby.sellDialog
 {
-    import flash.display.*;
-    import flash.geom.*;
-    import net.wg.data.VO.*;
-    import net.wg.gui.events.*;
-    import net.wg.utils.*;
-    import scaleform.clik.core.*;
-    import scaleform.clik.data.*;
-    
-    public class SellSlidingComponent extends scaleform.clik.core.UIComponent
-    {
-        public function SellSlidingComponent()
-        {
-            this.sellData = [];
-            super();
-            scrollRect = new flash.geom.Rectangle(0, 0, 480, 270);
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.display.MovieClip;
+   import net.wg.gui.events.VehicleSellDialogEvent;
+   import net.wg.data.VO.SellDialogElement;
+   import net.wg.data.VO.SellDialogItem;
+   import net.wg.utils.ILocale;
+   import scaleform.clik.data.DataProvider;
+   import flash.geom.Rectangle;
 
-        public function getNextPosition():int
-        {
-            return this.expandBg.y + this.expandBg.height + PADDING_FOR_NEXT_ELEMENT;
-        }
 
-        public function get isOpened():Boolean
-        {
-            return this._isOpened;
-        }
+   public class SellSlidingComponent extends UIComponent
+   {
+          
+      public function SellSlidingComponent() {
+         this.sellData = [];
+         super();
+         scrollRect = new Rectangle(0,0,480,270);
+      }
 
-        public function set isOpened(arg1:Boolean):void
-        {
-            this._isOpened = arg1;
-            this.settingsBtn.setingsDropBtn.selected = this.isOpened;
-            return;
-        }
+      private static const PADDING_FOR_NEXT_ELEMENT:uint = 10;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.settingsBtn.visible = false;
-            this.expandBg.visible = false;
-            this.slidingScrList.addEventListener(net.wg.gui.events.VehicleSellDialogEvent.LIST_WAS_DRAWN, this.wasDrawnHandler, false, 5);
-            return;
-        }
+      public var settingsBtn:SettingsButton;
 
-        internal function wasDrawnHandler(arg1:net.wg.gui.events.VehicleSellDialogEvent):void
-        {
-            this.listHeight = arg1.listVisibleHight;
-            this.updateElements();
-            return;
-        }
+      public var mask_mc:MovieClip;
 
-        public function setShells(arg1:Object):void
-        {
-            var loc4:*=null;
-            var loc1:*=new net.wg.data.VO.SellDialogItem();
-            var loc2:*=App.utils.locale;
-            var loc3:*=0;
-            while (loc3 < arg1.shells.length) 
+      public var slidingScrList:SlidingScrollingList;
+
+      public var expandBg:MovieClip;
+
+      public var sellData:Array;
+
+      public var resultExpand:int = 0;
+
+      private var _isOpened:Boolean = false;
+
+      private var listHeight:int = 0;
+
+      public function getNextPosition() : int {
+         return this.expandBg.y + this.expandBg.height + PADDING_FOR_NEXT_ELEMENT;
+      }
+
+      public function get isOpened() : Boolean {
+         return this._isOpened;
+      }
+
+      public function set isOpened(param1:Boolean) : void {
+         this._isOpened = param1;
+         this.settingsBtn.setingsDropBtn.selected = this.isOpened;
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.settingsBtn.visible = false;
+         this.expandBg.visible = false;
+         this.slidingScrList.addEventListener(VehicleSellDialogEvent.LIST_WAS_DRAWN,this.wasDrawnHandler,false,5);
+      }
+
+      private function wasDrawnHandler(param1:VehicleSellDialogEvent) : void {
+         this.listHeight = param1.listVisibleHight;
+         this.updateElements();
+      }
+
+      public function setShells(param1:Object) : void {
+         var _loc5_:SellDialogElement = null;
+         var _loc2_:SellDialogItem = new SellDialogItem();
+         var _loc3_:ILocale = App.utils.locale;
+         var _loc4_:uint = 0;
+         while(_loc4_ < param1.shells.length)
+         {
+            if(param1.shells[_loc4_] != undefined)
             {
-                if (arg1.shells[loc3] != undefined) 
-                {
-                    if (arg1.shells[loc3].count != 0) 
-                    {
-                        (loc4 = new net.wg.data.VO.SellDialogElement()).id = arg1.shells[loc3].userName + " (" + arg1.shells[loc3].count + " " + loc2.makeString(DIALOGS.VEHICLESELLDIALOG_COUNT) + ")";
-                        loc4.isRemovable = true;
-                        loc4.type = "shells";
-                        loc4.data = arg1.shells[loc3];
-                        if (arg1.shells[loc3].buyPrice[1] > 0) 
-                        {
-                            loc4.inInventory = true;
-                        }
-                        else 
-                        {
-                            loc4.inInventory = false;
-                        }
-                        loc4.moneyValue = arg1.shells[loc3].sellPrice[0] * arg1.shells[loc3].count;
-                        loc1.elements.push(loc4);
-                    }
-                }
-                ++loc3;
+               if(param1.shells[_loc4_].count != 0)
+               {
+                  _loc5_ = new SellDialogElement();
+                  _loc5_.id = param1.shells[_loc4_].userName + " (" + param1.shells[_loc4_].count + " " + _loc3_.makeString(DIALOGS.VEHICLESELLDIALOG_COUNT) + ")";
+                  _loc5_.isRemovable = true;
+                  _loc5_.type = "shells";
+                  _loc5_.data = param1.shells[_loc4_];
+                  if(param1.shells[_loc4_].buyPrice[1] > 0)
+                  {
+                     _loc5_.inInventory = true;
+                  }
+                  else
+                  {
+                     _loc5_.inInventory = false;
+                  }
+                  _loc5_.moneyValue = param1.shells[_loc4_].sellPrice[0] * param1.shells[_loc4_].count;
+                  _loc2_.elements.push(_loc5_);
+               }
             }
-            if (loc1.elements.length != 0) 
+            _loc4_++;
+         }
+         if(_loc2_.elements.length != 0)
+         {
+            _loc2_.header = DIALOGS.VEHICLESELLDIALOG_AMMO_LABEL;
+            this.sellData.push(_loc2_);
+         }
+      }
+
+      public function setEquipment(param1:Object) : void {
+         var _loc4_:SellDialogElement = null;
+         var _loc2_:SellDialogItem = new SellDialogItem();
+         var _loc3_:uint = 0;
+         while(_loc3_ < param1.eqs.length)
+         {
+            if(param1.eqs[_loc3_] != undefined)
             {
-                loc1.header = DIALOGS.VEHICLESELLDIALOG_AMMO_LABEL;
-                this.sellData.push(loc1);
+               _loc4_ = new SellDialogElement();
+               _loc4_.id = param1.eqs[_loc3_].userName;
+               _loc4_.type = "eqs";
+               _loc4_.moneyValue = param1.eqs[_loc3_].sellPrice[0];
+               _loc4_.inInventory = true;
+               _loc4_.data = param1.eqs[_loc3_];
+               _loc4_.isRemovable = true;
+               _loc2_.elements.push(_loc4_);
             }
-            return;
-        }
+            _loc3_++;
+         }
+         if(_loc2_.elements.length != 0)
+         {
+            _loc2_.header = DIALOGS.VEHICLESELLDIALOG_EQUIPMENT;
+            this.sellData.push(_loc2_);
+         }
+      }
 
-        public function setEquipment(arg1:Object):void
-        {
-            var loc3:*=null;
-            var loc1:*=new net.wg.data.VO.SellDialogItem();
-            var loc2:*=0;
-            while (loc2 < arg1.eqs.length) 
+      public function calculateOpenedState() : void {
+         this.settingsBtn.y = 0;
+         this.slidingScrList.y = this.settingsBtn.y + this.settingsBtn.height;
+         this.slidingScrList.height = this.listHeight;
+         this.expandBg.height = this.slidingScrList.y + this.listHeight-1;
+         this.mask_mc.y = this.slidingScrList.y;
+         this.mask_mc.height = this.listHeight;
+      }
+
+      public function calculateClosedState() : void {
+         this.settingsBtn.y = 0;
+         this.slidingScrList.height = this.listHeight;
+         this.slidingScrList.y = this.slidingScrList.height * -1 + this.settingsBtn.y + this.settingsBtn.height;
+         this.mask_mc.y = this.settingsBtn.y + this.settingsBtn.height;
+         this.mask_mc.height = 0;
+      }
+
+      public function setInventory(param1:Object, param2:Object) : void {
+         var _loc10_:SellDialogElement = null;
+         var _loc3_:SellDialogItem = new SellDialogItem();
+         var _loc4_:Number = 0;
+         var _loc5_:SellDialogElement = new SellDialogElement();
+         _loc5_.inInventory = true;
+         var _loc6_:Number = 0;
+         var _loc7_:uint = 0;
+         while(_loc7_ < param1.length)
+         {
+            _loc4_ = _loc4_ + param1[_loc7_][0].sellPrice[0] * param1[_loc7_][0].inventoryCount;
+            _loc6_ = _loc6_ + param1[_loc7_][0].inventoryCount;
+            if(param1[_loc7_][1])
             {
-                if (arg1.eqs[loc2] != undefined) 
-                {
-                    (loc3 = new net.wg.data.VO.SellDialogElement()).id = arg1.eqs[loc2].userName;
-                    loc3.type = "eqs";
-                    loc3.moneyValue = arg1.eqs[loc2].sellPrice[0];
-                    loc3.inInventory = true;
-                    loc3.data = arg1.eqs[loc2];
-                    loc3.isRemovable = true;
-                    loc1.elements.push(loc3);
-                }
-                ++loc2;
+               _loc5_.inInventory = true;
             }
-            if (loc1.elements.length != 0) 
+            _loc7_++;
+         }
+         var _loc8_:ILocale = App.utils.locale;
+         if(param1.length > 0)
+         {
+            _loc5_.moneyValue = _loc4_;
+            _loc5_.id = _loc8_.makeString(DIALOGS.VEHICLESELLDIALOG_NOTINSTALLED_MODULES) + " (" + _loc6_ + " " + _loc8_.makeString(DIALOGS.VEHICLESELLDIALOG_COUNT) + ")";
+            _loc5_.isRemovable = true;
+            _loc5_.type = "modules";
+            _loc5_.data = param1;
+            _loc3_.elements.push(_loc5_);
+         }
+         var _loc9_:uint = 0;
+         while(_loc9_ < param2.length)
+         {
+            if(param2[_loc9_][0] != undefined)
             {
-                loc1.header = DIALOGS.VEHICLESELLDIALOG_EQUIPMENT;
-                this.sellData.push(loc1);
+               if(param2[_loc9_][0].inventoryCount != 0)
+               {
+                  _loc10_ = new SellDialogElement();
+                  _loc10_.id = param2[_loc9_][0].userName + " (" + param2[_loc9_][0].inventoryCount + " " + _loc8_.makeString(DIALOGS.VEHICLESELLDIALOG_COUNT) + ")";
+                  _loc10_.isRemovable = true;
+                  _loc10_.data = param2[_loc9_][0];
+                  _loc10_.type = "invShells";
+                  if(param2[_loc9_][0].buyPrice[1] > 0 || (param2[_loc9_][1]))
+                  {
+                     _loc10_.inInventory = true;
+                  }
+                  else
+                  {
+                     _loc10_.inInventory = false;
+                  }
+                  _loc10_.moneyValue = param2[_loc9_][0].sellPrice[0] * param2[_loc9_][0].inventoryCount;
+                  _loc3_.elements.push(_loc10_);
+               }
             }
-            return;
-        }
+            _loc9_++;
+         }
+         if(_loc3_.elements.length != 0)
+         {
+            _loc3_.header = DIALOGS.VEHICLESELLDIALOG_INVENTORY;
+            this.sellData.push(_loc3_);
+         }
+         this.slidingScrList.dataProvider = new DataProvider(this.sellData);
+      }
 
-        public function calculateOpenedState():void
-        {
-            this.settingsBtn.y = 0;
-            this.slidingScrList.y = this.settingsBtn.y + this.settingsBtn.height;
-            this.slidingScrList.height = this.listHeight;
-            this.expandBg.height = (this.slidingScrList.y + this.listHeight - 1);
-            this.mask_mc.y = this.slidingScrList.y;
-            this.mask_mc.height = this.listHeight;
-            return;
-        }
+      private function updateElements() : void {
+         this.preInitStates();
+         if(this.isOpened)
+         {
+            this.calculateOpenedState();
+            this.mask_mc.visible = true;
+            this.slidingScrList.visible = true;
+            this.settingsBtn.creditsIT.alpha = 0;
+            this.settingsBtn.ddLine.alpha = 1;
+         }
+         else
+         {
+            this.calculateClosedState();
+            this.mask_mc.visible = false;
+            this.slidingScrList.visible = false;
+            this.settingsBtn.creditsIT.alpha = 1;
+            this.settingsBtn.ddLine.alpha = 0;
+         }
+      }
 
-        public function calculateClosedState():void
-        {
-            this.settingsBtn.y = 0;
-            this.slidingScrList.height = this.listHeight;
-            this.slidingScrList.y = this.slidingScrList.height * -1 + this.settingsBtn.y + this.settingsBtn.height;
-            this.mask_mc.y = this.settingsBtn.y + this.settingsBtn.height;
-            this.mask_mc.height = 0;
-            return;
-        }
+      public function preInitStates() : void {
+         this.resultExpand = this.settingsBtn.height + this.listHeight-1 - this.expandBg.height;
+      }
+   }
 
-        public function setInventory(arg1:Object, arg2:Object):void
-        {
-            var loc8:*=null;
-            var loc1:*=new net.wg.data.VO.SellDialogItem();
-            var loc2:*=0;
-            var loc3:*;
-            (loc3 = new net.wg.data.VO.SellDialogElement()).inInventory = true;
-            var loc4:*=0;
-            var loc5:*=0;
-            while (loc5 < arg1.length) 
-            {
-                loc2 = loc2 + arg1[loc5][0].sellPrice[0] * arg1[loc5][0].inventoryCount;
-                loc4 = loc4 + arg1[loc5][0].inventoryCount;
-                if (arg1[loc5][1]) 
-                {
-                    loc3.inInventory = true;
-                }
-                ++loc5;
-            }
-            var loc6:*=App.utils.locale;
-            if (arg1.length > 0) 
-            {
-                loc3.moneyValue = loc2;
-                loc3.id = loc6.makeString(DIALOGS.VEHICLESELLDIALOG_NOTINSTALLED_MODULES) + " (" + loc4 + " " + loc6.makeString(DIALOGS.VEHICLESELLDIALOG_COUNT) + ")";
-                loc3.isRemovable = true;
-                loc3.type = "modules";
-                loc3.data = arg1;
-                loc1.elements.push(loc3);
-            }
-            var loc7:*=0;
-            while (loc7 < arg2.length) 
-            {
-                if (arg2[loc7][0] != undefined) 
-                {
-                    if (arg2[loc7][0].inventoryCount != 0) 
-                    {
-                        (loc8 = new net.wg.data.VO.SellDialogElement()).id = arg2[loc7][0].userName + " (" + arg2[loc7][0].inventoryCount + " " + loc6.makeString(DIALOGS.VEHICLESELLDIALOG_COUNT) + ")";
-                        loc8.isRemovable = true;
-                        loc8.data = arg2[loc7][0];
-                        loc8.type = "invShells";
-                        if (arg2[loc7][0].buyPrice[1] > 0 || arg2[loc7][1]) 
-                        {
-                            loc8.inInventory = true;
-                        }
-                        else 
-                        {
-                            loc8.inInventory = false;
-                        }
-                        loc8.moneyValue = arg2[loc7][0].sellPrice[0] * arg2[loc7][0].inventoryCount;
-                        loc1.elements.push(loc8);
-                    }
-                }
-                ++loc7;
-            }
-            if (loc1.elements.length != 0) 
-            {
-                loc1.header = DIALOGS.VEHICLESELLDIALOG_INVENTORY;
-                this.sellData.push(loc1);
-            }
-            this.slidingScrList.dataProvider = new scaleform.clik.data.DataProvider(this.sellData);
-            return;
-        }
-
-        internal function updateElements():void
-        {
-            this.preInitStates();
-            if (this.isOpened) 
-            {
-                this.calculateOpenedState();
-                this.mask_mc.visible = true;
-                this.slidingScrList.visible = true;
-                this.settingsBtn.creditsIT.alpha = 0;
-                this.settingsBtn.ddLine.alpha = 1;
-            }
-            else 
-            {
-                this.calculateClosedState();
-                this.mask_mc.visible = false;
-                this.slidingScrList.visible = false;
-                this.settingsBtn.creditsIT.alpha = 1;
-                this.settingsBtn.ddLine.alpha = 0;
-            }
-            return;
-        }
-
-        public function preInitStates():void
-        {
-            this.resultExpand = (this.settingsBtn.height + this.listHeight - 1) - this.expandBg.height;
-            return;
-        }
-
-        internal static const PADDING_FOR_NEXT_ELEMENT:uint=10;
-
-        public var settingsBtn:net.wg.gui.lobby.sellDialog.SettingsButton;
-
-        public var mask_mc:flash.display.MovieClip;
-
-        public var slidingScrList:net.wg.gui.lobby.sellDialog.SlidingScrollingList;
-
-        public var expandBg:flash.display.MovieClip;
-
-        public var sellData:Array;
-
-        public var resultExpand:int=0;
-
-        internal var _isOpened:Boolean=false;
-
-        internal var listHeight:int=0;
-    }
 }

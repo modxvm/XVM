@@ -1,301 +1,255 @@
-package scaleform.clik.controls 
+package scaleform.clik.controls
 {
-    import flash.text.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.core.*;
-    import scaleform.clik.events.*;
-    import scaleform.clik.utils.*;
-    
-    public class Label extends scaleform.clik.core.UIComponent
-    {
-        public function Label()
-        {
-            super();
+   import scaleform.clik.core.UIComponent;
+   import flash.text.TextField;
+   import scaleform.clik.utils.Constraints;
+   import scaleform.clik.constants.ConstrainMode;
+   import scaleform.clik.utils.ConstrainedElement;
+   import flash.text.TextFieldAutoSize;
+   import scaleform.clik.constants.InvalidationType;
+   import scaleform.clik.events.ComponentEvent;
+
+
+   public class Label extends UIComponent
+   {
+          
+      public function Label() {
+         super();
+      }
+
+      public var constraintsDisabled:Boolean = false;
+
+      protected var _text:String;
+
+      protected var _autoSize:String = "none";
+
+      protected var isHtml:Boolean;
+
+      protected var state:String = "default";
+
+      protected var _newFrame:String;
+
+      public var textField:TextField;
+
+      override protected function preInitialize() : void {
+         if(!this.constraintsDisabled)
+         {
+            constraints = new Constraints(this,ConstrainMode.COUNTER_SCALE);
+         }
+      }
+
+      override protected function initialize() : void {
+         super.initialize();
+      }
+
+      override public function get enabled() : Boolean {
+         return super.enabled;
+      }
+
+      override public function set enabled(param1:Boolean) : void {
+         if(param1 == super.enabled)
+         {
             return;
-        }
+         }
+         super.enabled = param1;
+         mouseEnabled = mouseChildren = param1;
+         this.setState(this.defaultState);
+      }
 
-        protected override function preInitialize():void
-        {
-            if (!this.constraintsDisabled) 
-            {
-                constraints = new scaleform.clik.utils.Constraints(this, scaleform.clik.constants.ConstrainMode.COUNTER_SCALE);
-            }
+      public function get text() : String {
+         return this._text;
+      }
+
+      public function set text(param1:String) : void {
+         if(param1 == null)
+         {
+         }
+         this.isHtml = false;
+         this._text = param1;
+         invalidateData();
+      }
+
+      public function get htmlText() : String {
+         return this._text;
+      }
+
+      public function set htmlText(param1:String) : void {
+         if(param1 == null)
+         {
+         }
+         this.isHtml = true;
+         this._text = param1;
+         invalidateData();
+      }
+
+      public function get autoSize() : String {
+         return this._autoSize;
+      }
+
+      public function set autoSize(param1:String) : void {
+         if(param1 == this._autoSize)
+         {
             return;
-        }
+         }
+         this._autoSize = param1;
+         invalidateData();
+      }
 
-        protected override function initialize():void
-        {
-            super.initialize();
+      public function get length() : uint {
+         return this.textField.length;
+      }
+
+      public function get defaultState() : String {
+         return !this.enabled?"disabled":focused?"focused":"default";
+      }
+
+      public function appendText(param1:String) : void {
+         this._text = this._text + param1;
+         this.isHtml = false;
+         invalidateData();
+      }
+
+      public function appendHtml(param1:String) : void {
+         this._text = this._text + param1;
+         this.isHtml = true;
+         invalidateData();
+      }
+
+      override public function toString() : String {
+         return "[CLIK Label " + name + "]";
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         if(!this.constraintsDisabled)
+         {
+            constraints.addElement("textField",this.textField,Constraints.ALL);
+         }
+         focusable = false;
+      }
+
+      protected function calculateWidth() : Number {
+         var _loc2_:ConstrainedElement = null;
+         if(constraints == null || this.textField == null)
+         {
+            return actualWidth;
+         }
+         if(!this.constraintsDisabled)
+         {
+            _loc2_ = constraints.getElement("textField");
+         }
+         var _loc1_:Number = Math.ceil(this.textField.textWidth + _loc2_.left + _loc2_.right + 5);
+         return _loc1_;
+      }
+
+      protected function alignForAutoSize() : void {
+         var _loc1_:* = NaN;
+         var _loc3_:* = NaN;
+         var _loc4_:* = NaN;
+         if(!initialized || this._autoSize == TextFieldAutoSize.NONE || this.textField == null)
+         {
             return;
-        }
+         }
+         _loc1_ = _width;
+         var _loc2_:Number = _width = this.calculateWidth();
+         switch(this._autoSize)
+         {
+            case TextFieldAutoSize.RIGHT:
+               _loc3_ = x + _loc1_;
+               x = _loc3_ - _loc2_;
+               break;
+            case TextFieldAutoSize.CENTER:
+               _loc4_ = x + _loc1_ * 0.5;
+               x = _loc4_ - _loc2_ * 0.5;
+               break;
+         }
+      }
 
-        public override function get enabled():Boolean
-        {
-            return super.enabled;
-        }
-
-        public override function set enabled(arg1:Boolean):void
-        {
-            if (arg1 == super.enabled) 
+      override protected function draw() : void {
+         if(isInvalid(InvalidationType.STATE))
+         {
+            if(this._newFrame)
             {
-                return;
+               gotoAndPlay(this._newFrame);
+               this._newFrame = null;
             }
-            super.enabled = arg1;
-            var loc1:*;
-            mouseChildren = loc1 = arg1;
-            mouseEnabled = loc1;
-            this.setState(this.defaultState);
-            return;
-        }
-
-        public function get text():String
-        {
-            return this._text;
-        }
-
-        public function set text(arg1:String):void
-        {
-            if (arg1 == null) 
-            {
-                arg1 == "";
-            }
-            this.isHtml = false;
-            this._text = arg1;
-            invalidateData();
-            return;
-        }
-
-        public function get htmlText():String
-        {
-            return this._text;
-        }
-
-        public function set htmlText(arg1:String):void
-        {
-            if (arg1 == null) 
-            {
-                arg1 == "";
-            }
-            this.isHtml = true;
-            this._text = arg1;
-            invalidateData();
-            return;
-        }
-
-        public function get autoSize():String
-        {
-            return this._autoSize;
-        }
-
-        public function set autoSize(arg1:String):void
-        {
-            if (arg1 == this._autoSize) 
-            {
-                return;
-            }
-            this._autoSize = arg1;
-            invalidateData();
-            return;
-        }
-
-        public function get length():uint
-        {
-            return this.textField.length;
-        }
-
-        public function get defaultState():String
-        {
-            return this.enabled ? focused ? "focused" : "default" : "disabled";
-        }
-
-        public function appendText(arg1:String):void
-        {
-            this._text = this._text + arg1;
-            this.isHtml = false;
-            invalidateData();
-            return;
-        }
-
-        public function appendHtml(arg1:String):void
-        {
-            this._text = this._text + arg1;
-            this.isHtml = true;
-            invalidateData();
-            return;
-        }
-
-        public override function toString():String
-        {
-            return "[CLIK Label " + name + "]";
-        }
-
-        protected override function configUI():void
-        {
-            super.configUI();
-            if (!this.constraintsDisabled) 
-            {
-                constraints.addElement("textField", this.textField, scaleform.clik.utils.Constraints.ALL);
-            }
-            focusable = false;
-            return;
-        }
-
-        protected function calculateWidth():Number
-        {
-            var loc2:*=null;
-            if (constraints == null || this.textField == null) 
-            {
-                return actualWidth;
-            }
-            if (!this.constraintsDisabled) 
-            {
-                loc2 = constraints.getElement("textField");
-            }
-            var loc1:*=Math.ceil(this.textField.textWidth + loc2.left + loc2.right + 5);
-            return loc1;
-        }
-
-        protected function alignForAutoSize():void
-        {
-            var loc1:*=NaN;
-            var loc3:*=NaN;
-            var loc4:*=NaN;
-            if (!initialized || this._autoSize == flash.text.TextFieldAutoSize.NONE || this.textField == null) 
-            {
-                return;
-            }
-            loc1 = _width;
-            var loc5:*;
-            _width = loc5 = this.calculateWidth();
-            var loc2:*=loc5;
-            loc5 = this._autoSize;
-            switch (loc5) 
-            {
-                case flash.text.TextFieldAutoSize.RIGHT:
-                {
-                    loc3 = x + loc1;
-                    x = loc3 - loc2;
-                    break;
-                }
-                case flash.text.TextFieldAutoSize.CENTER:
-                {
-                    loc4 = x + loc1 * 0.5;
-                    x = loc4 - loc2 * 0.5;
-                    break;
-                }
-            }
-            return;
-        }
-
-        protected override function draw():void
-        {
-            if (isInvalid(scaleform.clik.constants.InvalidationType.STATE)) 
-            {
-                if (this._newFrame) 
-                {
-                    gotoAndPlay(this._newFrame);
-                    this._newFrame = null;
-                }
-                this.updateAfterStateChange();
-                dispatchEvent(new scaleform.clik.events.ComponentEvent(scaleform.clik.events.ComponentEvent.STATE_CHANGE));
-                invalidate(scaleform.clik.constants.InvalidationType.SIZE);
-            }
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
-            {
-                this.updateText();
-                if (this.autoSize != flash.text.TextFieldAutoSize.NONE) 
-                {
-                    this.alignForAutoSize();
-                    invalidateSize();
-                }
-            }
-            if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
-            {
-                setActualSize(_width, _height);
-                if (!this.constraintsDisabled) 
-                {
-                    constraints.update(_width, _height);
-                }
-            }
-            return;
-        }
-
-        protected function updateText():void
-        {
-            if (!(this._text == null) && !(this.textField == null)) 
-            {
-                if (this.isHtml) 
-                {
-                    this.textField.htmlText = this._text;
-                }
-                else 
-                {
-                    this.textField.text = this._text;
-                }
-            }
-            return;
-        }
-
-        protected function updateAfterStateChange():void
-        {
-            if (!initialized) 
-            {
-                return;
-            }
-            if (!(constraints == null) && !this.constraintsDisabled) 
-            {
-                constraints.updateElement("textField", this.textField);
-            }
+            this.updateAfterStateChange();
+            dispatchEvent(new ComponentEvent(ComponentEvent.STATE_CHANGE));
+            invalidate(InvalidationType.SIZE);
+         }
+         if(isInvalid(InvalidationType.DATA))
+         {
             this.updateText();
-            dispatchEvent(new scaleform.clik.events.ComponentEvent(scaleform.clik.events.ComponentEvent.STATE_CHANGE));
-            return;
-        }
-
-        protected function setState(... rest):void
-        {
-            var loc3:*=null;
-            var loc4:*=null;
-            if (rest.length == 1) 
+            if(this.autoSize != TextFieldAutoSize.NONE)
             {
-                loc3 = rest[0].toString();
-                if (!(this.state == loc3) && _labelHash[loc3]) 
-                {
-                    var loc5:*;
-                    this._newFrame = loc5 = loc3;
-                    this.state = loc5;
-                    invalidateState();
-                }
-                return;
+               this.alignForAutoSize();
+               invalidateSize();
             }
-            var loc1:*=rest.length;
-            var loc2:*=0;
-            while (loc2 < loc1) 
+         }
+         if(isInvalid(InvalidationType.SIZE))
+         {
+            setActualSize(_width,_height);
+            if(!this.constraintsDisabled)
             {
-                loc4 = rest[loc2].toString();
-                if (_labelHash[loc4]) 
-                {
-                    this._newFrame = loc5 = loc4;
-                    this.state = loc5;
-                    invalidateState();
-                    break;
-                }
-                ++loc2;
+               constraints.update(_width,_height);
+            }
+         }
+      }
+
+      protected function updateText() : void {
+         if(!(this._text == null) && !(this.textField == null))
+         {
+            if(this.isHtml)
+            {
+               this.textField.htmlText = this._text;
+            }
+            else
+            {
+               this.textField.text = this._text;
+            }
+         }
+      }
+
+      protected function updateAfterStateChange() : void {
+         if(!initialized)
+         {
+            return;
+         }
+         if(!(constraints == null) && !this.constraintsDisabled)
+         {
+            constraints.updateElement("textField",this.textField);
+         }
+         this.updateText();
+         dispatchEvent(new ComponentEvent(ComponentEvent.STATE_CHANGE));
+      }
+
+      protected function setState(... rest) : void {
+         var _loc4_:String = null;
+         var _loc5_:String = null;
+         if(rest.length == 1)
+         {
+            _loc4_ = rest[0].toString();
+            if(!(this.state == _loc4_) && (_labelHash[_loc4_]))
+            {
+               this.state = this._newFrame = _loc4_;
+               invalidateState();
             }
             return;
-        }
+         }
+         var _loc2_:uint = rest.length;
+         var _loc3_:uint = 0;
+         while(_loc3_ < _loc2_)
+         {
+            _loc5_ = rest[_loc3_].toString();
+            if(_labelHash[_loc5_])
+            {
+               this.state = this._newFrame = _loc5_;
+               invalidateState();
+               break;
+            }
+            _loc3_++;
+         }
+      }
+   }
 
-        public var constraintsDisabled:Boolean=false;
-
-        protected var _text:String;
-
-        protected var _autoSize:String="none";
-
-        protected var isHtml:Boolean;
-
-        protected var state:String="default";
-
-        protected var _newFrame:String;
-
-        public var textField:flash.text.TextField;
-    }
 }

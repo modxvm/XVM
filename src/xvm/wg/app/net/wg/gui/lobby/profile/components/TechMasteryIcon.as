@@ -1,48 +1,41 @@
-package net.wg.gui.lobby.profile.components 
+package net.wg.gui.lobby.profile.components
 {
-    import flash.events.*;
-    import net.wg.data.constants.*;
-    import net.wg.gui.components.controls.*;
-    
-    public class TechMasteryIcon extends net.wg.gui.components.controls.UILoaderAlt
-    {
-        public function TechMasteryIcon()
-        {
-            super();
-            this.addEventListener(flash.events.MouseEvent.ROLL_OVER, this.rollOverHandler, false, 0, true);
-            this.addEventListener(flash.events.MouseEvent.ROLL_OUT, this.rollOutHandler, false, 0, true);
-            return;
-        }
+   import net.wg.gui.components.controls.UILoaderAlt;
+   import flash.events.MouseEvent;
+   import net.wg.data.constants.Tooltips;
 
-        internal function rollOverHandler(arg1:flash.events.MouseEvent):void
-        {
-            if (this._data) 
-            {
-                App.toolTipMgr.showSpecial(net.wg.data.constants.Tooltips.TANK_CLASS, null, "markOfMastery", this._data.markOfMastery);
-            }
-            return;
-        }
 
-        internal function rollOutHandler(arg1:flash.events.MouseEvent):void
-        {
-            App.toolTipMgr.hide();
-            return;
-        }
+   public class TechMasteryIcon extends UILoaderAlt
+   {
+          
+      public function TechMasteryIcon() {
+         super();
+         this.addEventListener(MouseEvent.ROLL_OVER,this.rollOverHandler,false,0,true);
+         this.addEventListener(MouseEvent.ROLL_OUT,this.rollOutHandler,false,0,true);
+      }
 
-        public function set data(arg1:Object):void
-        {
-            this._data = arg1;
-            return;
-        }
+      private var _data:Object;
 
-        public override function dispose():void
-        {
-            this.removeEventListener(flash.events.MouseEvent.ROLL_OVER, this.rollOverHandler);
-            this.removeEventListener(flash.events.MouseEvent.ROLL_OUT, this.rollOutHandler);
-            super.dispose();
-            return;
-        }
+      private function rollOverHandler(param1:MouseEvent) : void {
+         if(this._data)
+         {
+            App.toolTipMgr.showSpecial(Tooltips.TANK_CLASS,null,"markOfMastery",this._data.markOfMastery);
+         }
+      }
 
-        internal var _data:Object;
-    }
+      private function rollOutHandler(param1:MouseEvent) : void {
+         App.toolTipMgr.hide();
+      }
+
+      public function set data(param1:Object) : void {
+         this._data = param1;
+      }
+
+      override public function dispose() : void {
+         this.removeEventListener(MouseEvent.ROLL_OVER,this.rollOverHandler);
+         this.removeEventListener(MouseEvent.ROLL_OUT,this.rollOutHandler);
+         super.dispose();
+      }
+   }
+
 }

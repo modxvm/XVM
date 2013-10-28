@@ -1,484 +1,454 @@
-package net.wg.gui.lobby.hangar.crew 
+package net.wg.gui.lobby.hangar.crew
 {
-    import __AS3__.vec.*;
-    import flash.display.*;
-    import flash.events.*;
-    import flash.geom.*;
-    import flash.text.*;
-    import net.wg.data.constants.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.events.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.data.*;
-    import scaleform.clik.events.*;
-    import scaleform.clik.ui.*;
-    
-    public class RecruitItemRenderer extends net.wg.gui.components.controls.SoundListItemRenderer
-    {
-        public function RecruitItemRenderer()
-        {
-            super();
-            soundType = "rendererRecruit";
-            this.goups_icons_prop = new net.wg.gui.lobby.hangar.crew.IconsProps();
-            return;
-        }
+   import net.wg.gui.components.controls.SoundListItemRenderer;
+   import flash.events.MouseEvent;
+   import net.wg.gui.components.controls.TileList;
+   import flash.display.MovieClip;
+   import flash.text.TextField;
+   import net.wg.data.constants.Tooltips;
+   import scaleform.clik.events.InputEvent;
+   import scaleform.clik.ui.InputDetails;
+   import scaleform.clik.constants.InputValue;
+   import scaleform.clik.constants.NavigationCode;
+   import net.wg.gui.events.CrewEvent;
+   import flash.text.TextFieldAutoSize;
+   import scaleform.clik.data.DataProvider;
+   import flash.geom.Point;
+   import scaleform.clik.data.ListData;
+   import scaleform.clik.constants.InvalidationType;
+   import __AS3__.vec.Vector;
 
-        public override function dispose():void
-        {
-            removeEventListener(flash.events.MouseEvent.CLICK, this.onItemClick);
-            removeEventListener(flash.events.MouseEvent.ROLL_OVER, this.showTooltip);
-            removeEventListener(flash.events.MouseEvent.ROLL_OUT, hideTooltip);
-            removeEventListener(flash.events.MouseEvent.MOUSE_DOWN, hideTooltip);
-            if (this.icon) 
-            {
-                this.icon.imageLoader.dispose();
-                this.icon.imageLoader = null;
-                this.icon = null;
-            }
-            if (this.iconRole) 
-            {
-                this.iconRole.imageLoader.dispose();
-                this.iconRole.imageLoader = null;
-                this.iconRole = null;
-            }
-            if (this.iconRank) 
-            {
-                this.iconRank.imageLoader.dispose();
-                this.iconRank.imageLoader = null;
-                this.iconRank = null;
-            }
-            if (this.skills) 
-            {
-                this.skills.dispose();
-                this.skills = null;
-            }
-            this.bg = null;
-            this.goups_icons = null;
-            this.levelSpecializationMain = null;
-            this.nameTF = null;
-            this.rank = null;
-            this.role = null;
-            this.vehicleType = null;
-            this.lastSkillLevel = null;
-            this.textObj = null;
-            focusIndicator = null;
-            this.goups_icons_prop = null;
-            _data = null;
-            super.dispose();
-            return;
-        }
 
-        internal function showTooltip(arg1:flash.events.MouseEvent):void
-        {
-            if (owner.visible) 
-            {
-                App.toolTipMgr.showSpecial(net.wg.data.constants.Tooltips.TANKMAN, null, data.tankmanID, true);
-            }
-            return;
-        }
+   public class RecruitItemRenderer extends SoundListItemRenderer
+   {
+          
+      public function RecruitItemRenderer() {
+         super();
+         soundType = "rendererRecruit";
+         this.goups_icons_prop = new IconsProps();
+      }
 
-        public function onItemClick(arg1:flash.events.MouseEvent):void
-        {
-            if (App.utils.commons.isLeftButton(arg1)) 
-            {
-                this.checkClick();
-            }
-            return;
-        }
+      private static const BUFF:String = "#00FF00";
 
-        public override function handleInput(arg1:scaleform.clik.events.InputEvent):void
-        {
-            if (arg1.isDefaultPrevented()) 
-            {
-                return;
-            }
-            var loc1:*=arg1.details;
-            var loc2:*=loc1.controllerIndex;
-            var loc3:*=loc1.navEquivalent;
-            switch (loc3) 
-            {
-                case scaleform.clik.constants.NavigationCode.ENTER:
-                {
-                    if (loc1.value != scaleform.clik.constants.InputValue.KEY_DOWN) 
-                    {
-                        if (loc1.value == scaleform.clik.constants.InputValue.KEY_UP) 
-                        {
-                            if (_pressedByKeyboard) 
-                            {
-                                handleRelease(loc2);
-                                arg1.handled = true;
-                            }
-                        }
-                    }
-                    else 
-                    {
-                        handlePress(loc2);
-                        this.checkClick();
-                        arg1.handled = true;
-                    }
-                    break;
-                }
-            }
-            return;
-        }
+      private static const DEBUFF:String = "#FF0000";
 
-        internal function checkClick():void
-        {
-            var loc1:*=null;
-            if (this._recruit != true) 
-            {
-                if (data) 
-                {
-                    loc1 = net.wg.gui.lobby.hangar.crew.RecruitRendererVO(data);
-                    if (loc1.tankmanID == loc1.parentTankmanID) 
-                    {
-                        return;
-                    }
-                    if (loc1.tankmanID != loc1.parentTankmanID) 
-                    {
-                        dispatchEvent(new net.wg.gui.events.CrewEvent(net.wg.gui.events.CrewEvent.EQUIP_TANKMAN, data));
-                    }
-                }
-            }
-            else 
-            {
-                dispatchEvent(new net.wg.gui.events.CrewEvent(net.wg.gui.events.CrewEvent.SHOW_RECRUIT_WINDOW, data));
-            }
-            return;
-        }
+      private static const INVALIDATE_GROUP_PROPS:String = "groups_icons_prop";
 
-        public override function setData(arg1:Object):void
-        {
-            var loc5:*=null;
-            var loc6:*=0;
-            var loc7:*=NaN;
-            var loc8:*=NaN;
-            var loc9:*=0;
-            if (!arg1) 
+      public static var MAX_ICONS:Number = 5;
+
+      private static function hideTooltip(param1:MouseEvent) : void {
+         App.toolTipMgr.hide();
+      }
+
+      private static function createSkillObj(param1:RecruitRendererVO, param2:Number) : SkillsVO {
+         var _loc3_:SkillsVO = new SkillsVO({});
+         var _loc4_:SkillsVO = SkillsVO(param1.skills[param2]);
+         if(!_loc4_.buy)
+         {
+            _loc3_.icon = "../maps/icons/tankmen/skills/small/" + _loc4_.icon;
+            _loc3_.inprogress = param2 == param1.skills.length-1 && !(param1.lastSkillLevel == 100);
+            _loc3_.name = _loc4_.name;
+            _loc3_.desc = _loc4_.desc;
+            _loc3_.active = _loc4_.active;
+            _loc3_.selected = param2 == param1.skills.length-1;
+         }
+         else
+         {
+            _loc3_.icon = "../maps/icons/tankmen/skills/small/new_skill.png";
+            _loc3_.tankmanID = param1.tankmanID;
+            _loc3_.buy = true;
+            _loc3_.active = _loc4_.active;
+         }
+         return _loc3_;
+      }
+
+      public var icon:TankmenIcons;
+
+      public var iconRole:TankmenIcons;
+
+      public var iconRank:TankmenIcons;
+
+      public var skills:TileList;
+
+      public var bg:MovieClip;
+
+      public var goups_icons:MovieClip;
+
+      public var levelSpecializationMain:TextField;
+
+      public var nameTF:TextField;
+
+      public var rank:TextField;
+
+      public var role:TextField;
+
+      public var vehicleType:TextField;
+
+      public var lastSkillLevel:TextField;
+
+      private var _recruit:Boolean = false;
+
+      private var _personalCase:Boolean = false;
+
+      private var goups_icons_prop:IconsProps = null;
+
+      private var textObj:TextObject;
+
+      public var focusIndicatorUI:MovieClip;
+
+      override protected function configUI() : void {
+         this.visible = false;
+         addEventListener(MouseEvent.CLICK,this.onItemClick);
+         addEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
+         addEventListener(MouseEvent.ROLL_OUT,hideTooltip);
+         addEventListener(MouseEvent.MOUSE_DOWN,hideTooltip);
+         this.focusIndicator = this.focusIndicatorUI;
+         super.configUI();
+      }
+
+      override public function dispose() : void {
+         removeEventListener(MouseEvent.CLICK,this.onItemClick);
+         removeEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
+         removeEventListener(MouseEvent.ROLL_OUT,hideTooltip);
+         removeEventListener(MouseEvent.MOUSE_DOWN,hideTooltip);
+         if(this.icon)
+         {
+            this.icon.imageLoader.dispose();
+            this.icon.imageLoader = null;
+            this.icon = null;
+         }
+         if(this.iconRole)
+         {
+            this.iconRole.imageLoader.dispose();
+            this.iconRole.imageLoader = null;
+            this.iconRole = null;
+         }
+         if(this.iconRank)
+         {
+            this.iconRank.imageLoader.dispose();
+            this.iconRank.imageLoader = null;
+            this.iconRank = null;
+         }
+         if(this.skills)
+         {
+            this.skills.dispose();
+            this.skills = null;
+         }
+         this.bg = null;
+         this.goups_icons = null;
+         this.levelSpecializationMain = null;
+         this.nameTF = null;
+         this.rank = null;
+         this.role = null;
+         this.vehicleType = null;
+         this.lastSkillLevel = null;
+         this.textObj = null;
+         focusIndicator = null;
+         this.goups_icons_prop = null;
+         _data = null;
+         super.dispose();
+      }
+
+      private function showTooltip(param1:MouseEvent) : void {
+         if(owner.visible)
+         {
+            App.toolTipMgr.showSpecial(Tooltips.TANKMAN,null,data.tankmanID,true);
+         }
+      }
+
+      public function onItemClick(param1:MouseEvent) : void {
+         App.toolTipMgr.hide();
+         if(App.utils.commons.isLeftButton(param1))
+         {
+            this.checkClick();
+         }
+      }
+
+      override public function handleInput(param1:InputEvent) : void {
+         if(param1.isDefaultPrevented())
+         {
+            return;
+         }
+         var _loc2_:InputDetails = param1.details;
+         var _loc3_:uint = _loc2_.controllerIndex;
+         switch(_loc2_.navEquivalent)
+         {
+            case NavigationCode.ENTER:
+               if(_loc2_.value == InputValue.KEY_DOWN)
+               {
+                  handlePress(_loc3_);
+                  this.checkClick();
+                  param1.handled = true;
+               }
+               else
+               {
+                  if(_loc2_.value == InputValue.KEY_UP)
+                  {
+                     if(_pressedByKeyboard)
+                     {
+                        handleRelease(_loc3_);
+                        param1.handled = true;
+                     }
+                  }
+               }
+               break;
+         }
+      }
+
+      private function checkClick() : void {
+         var _loc1_:RecruitRendererVO = null;
+         if(this._recruit == true)
+         {
+            dispatchEvent(new CrewEvent(CrewEvent.SHOW_RECRUIT_WINDOW,data));
+         }
+         else
+         {
+            if(data)
             {
-                return;
+               _loc1_ = RecruitRendererVO(data);
+               if(_loc1_.tankmanID == _loc1_.parentTankmanID)
+               {
+                  return;
+               }
+               if(_loc1_.tankmanID != _loc1_.parentTankmanID)
+               {
+                  dispatchEvent(new CrewEvent(CrewEvent.EQUIP_TANKMAN,data));
+               }
             }
-            this.data = arg1;
-            var loc1:*=net.wg.gui.lobby.hangar.crew.RecruitRendererVO(arg1);
-            this.recruit = loc1.recruit == true;
-            this.personalCase = loc1.personalCase == true;
-            var loc10:*;
-            this.iconRole.visible = loc10 = !loc1.personalCase && !loc1.recruit;
-            this.iconRank.visible = loc10 = loc10;
-            this.icon.visible = loc10;
-            if (!(loc1.iconFile == this.icon.imageLoader.source) && loc1.iconFile) 
+         }
+      }
+
+      override public function setData(param1:Object) : void {
+         var _loc6_:Array = null;
+         var _loc7_:* = 0;
+         var _loc8_:* = NaN;
+         var _loc9_:* = NaN;
+         var _loc10_:* = 0;
+         if(!param1)
+         {
+            return;
+         }
+         this.data = param1;
+         var _loc2_:RecruitRendererVO = RecruitRendererVO(param1);
+         this.recruit = _loc2_.recruit == true;
+         this.personalCase = _loc2_.personalCase == true;
+         this.icon.visible = this.iconRank.visible = this.iconRole.visible = !_loc2_.personalCase && !_loc2_.recruit;
+         if(!(_loc2_.iconFile == this.icon.imageLoader.source) && (_loc2_.iconFile))
+         {
+            this.icon.imageLoader.visible = true;
+            this.icon.imageLoader.source = "../maps/icons/tankmen/icons/small/" + _loc2_.iconFile;
+         }
+         if(!(_loc2_.rankIconFile == this.iconRank.imageLoader.source) && (_loc2_.rankIconFile))
+         {
+            this.iconRank.imageLoader.visible = true;
+            this.iconRank.imageLoader.source = "../maps/icons/tankmen/ranks/small/" + _loc2_.rankIconFile;
+         }
+         if(!(_loc2_.roleIconFile == this.iconRole.imageLoader.source) && (_loc2_.roleIconFile))
+         {
+            this.iconRole.imageLoader.visible = true;
+            this.iconRole.imageLoader.source = _loc2_.roleIconFile;
+         }
+         if(this.skills)
+         {
+            if(_loc2_.skills)
             {
-                this.icon.imageLoader.visible = true;
-                this.icon.imageLoader.source = "../maps/icons/tankmen/icons/small/" + loc1.iconFile;
+               _loc6_ = [];
+               if(_loc2_.skills.length <= MAX_ICONS)
+               {
+                  this.goups_icons_prop.alpha = 0;
+                  this.goups_icons_prop.visible = false;
+                  _loc7_ = 0;
+                  while(_loc7_ < _loc2_.skills.length)
+                  {
+                     _loc6_.push(createSkillObj(_loc2_,_loc7_));
+                     _loc7_++;
+                  }
+               }
+               else
+               {
+                  this.goups_icons_prop.alpha = 1;
+                  this.goups_icons_prop.visible = true;
+                  _loc8_ = 0;
+                  if(_loc2_.lastSkillLevel == 100 && _loc2_.availableSkillsCount == _loc2_.skills.length && !_loc2_.skills[_loc2_.skills.length-1].buy)
+                  {
+                     _loc8_ = 1;
+                  }
+                  _loc9_ = _loc2_.skills.length - 2;
+                  this.goups_icons_prop.autoSize = TextFieldAutoSize.LEFT;
+                  this.goups_icons_prop.text = "x" + (_loc9_ + 1 + _loc8_);
+                  _loc10_ = _loc2_.skills.length-1 - _loc8_;
+                  while(_loc10_ >= _loc9_)
+                  {
+                     if(_loc10_ == _loc9_)
+                     {
+                        _loc6_.push(new SkillsVO({}));
+                        _loc6_.push(new SkillsVO({}));
+                     }
+                     _loc6_.push(createSkillObj(_loc2_,_loc10_ + _loc8_));
+                     _loc10_--;
+                  }
+                  _loc6_ = _loc6_.reverse();
+               }
+               invalidate(INVALIDATE_GROUP_PROPS);
+               this.skills.dataProvider = new DataProvider(_loc6_);
             }
-            if (!(loc1.rankIconFile == this.iconRank.imageLoader.source) && loc1.rankIconFile) 
+         }
+         this.textObj = new TextObject();
+         this.textObj.nameTF = _loc2_.firstname + " " + _loc2_.lastname;
+         this.textObj.rank = _loc2_.rank;
+         this.textObj.roleHtml = _loc2_.role;
+         var _loc3_:* = _loc2_.specializationLevel + "%";
+         var _loc4_:String = App.utils.locale.makeString(MENU.tankmen(_loc2_.tankType),{});
+         if(isNaN(_loc2_.tankmanID))
+         {
+            this.textObj.levelSpecializationMainHtml = "";
+            this.textObj.roleHtml = this.textObj.roleHtml + (", " + _loc4_ + " " + _loc2_.vehicleType);
+         }
+         else
+         {
+            if(_loc2_.curVehicleType != _loc2_.tankType)
             {
-                this.iconRank.imageLoader.visible = true;
-                this.iconRank.imageLoader.source = "../maps/icons/tankmen/ranks/small/" + loc1.rankIconFile;
+               this.textObj.levelSpecializationMainHtml = " <font color=\'" + DEBUFF + "\'>" + _loc3_ + "</font>";
+               this.textObj.roleHtml = this.textObj.roleHtml + (", <font color=\'" + DEBUFF + "\'>" + _loc4_ + " " + _loc2_.vehicleType + "</font>");
             }
-            if (!(loc1.roleIconFile == this.iconRole.imageLoader.source) && loc1.roleIconFile) 
+            else
             {
-                this.iconRole.imageLoader.visible = true;
-                this.iconRole.imageLoader.source = loc1.roleIconFile;
+               if(_loc2_.curVehicleName != _loc2_.vehicleType)
+               {
+                  if(!_loc2_.vehicleElite)
+                  {
+                     this.textObj.levelSpecializationMainHtml = " <font color=\'" + DEBUFF + "\'>" + _loc3_ + "</font>";
+                  }
+                  else
+                  {
+                     this.textObj.levelSpecializationMainHtml = _loc3_;
+                  }
+                  this.textObj.roleHtml = this.textObj.roleHtml + (", " + _loc4_ + " <font color=\'" + DEBUFF + "\'> " + _loc2_.vehicleType + "</font>");
+               }
+               else
+               {
+                  this.textObj.levelSpecializationMainHtml = _loc3_;
+                  this.textObj.roleHtml = this.textObj.roleHtml + (", " + _loc4_ + " " + _loc2_.vehicleType);
+               }
             }
-            if (this.skills) 
+         }
+         this.lastSkillLevel.text = "";
+         this.lastSkillLevel.autoSize = TextFieldAutoSize.LEFT;
+         if((((_loc2_.skills) && (_loc2_.skills.length > 0)) && (!_loc2_.skills[0].buy)) && (!isNaN(_loc2_.lastSkillLevel)) && !(_loc2_.lastSkillLevel == 100))
+         {
+            this.lastSkillLevel.visible = true;
+            this.lastSkillLevel.text = _loc2_.lastSkillLevel + "%";
+         }
+         else
+         {
+            this.lastSkillLevel.visible = false;
+         }
+         this.lastSkillLevel.x = this.skills.x + (this.skills.columnWidth + this.skills.paddingRight) * Math.min(5,this.skills.dataProvider.length);
+         setState("up");
+         var _loc5_:Point = new Point(mouseX,mouseY);
+         _loc5_ = this.localToGlobal(_loc5_);
+         if(this.hitTestPoint(_loc5_.x,_loc5_.y,true))
+         {
+            if(owner.visible)
             {
-                if (loc1.skills) 
-                {
-                    loc5 = [];
-                    if (loc1.skills.length <= MAX_ICONS) 
-                    {
-                        this.goups_icons_prop.alpha = 0;
-                        this.goups_icons_prop.visible = false;
-                        loc6 = 0;
-                        while (loc6 < loc1.skills.length) 
-                        {
-                            loc5.push(createSkillObj(loc1, loc6));
-                            ++loc6;
-                        }
-                    }
-                    else 
-                    {
-                        this.goups_icons_prop.alpha = 1;
-                        this.goups_icons_prop.visible = true;
-                        loc7 = 0;
-                        if (loc1.lastSkillLevel == 100 && loc1.availableSkillsCount == loc1.skills.length && !loc1.skills[(loc1.skills.length - 1)].buy) 
-                        {
-                            loc7 = 1;
-                        }
-                        loc8 = loc1.skills.length - 2;
-                        this.goups_icons_prop.autoSize = flash.text.TextFieldAutoSize.LEFT;
-                        this.goups_icons_prop.text = "x" + (loc8 + 1 + loc7);
-                        loc9 = (loc1.skills.length - 1) - loc7;
-                        while (loc9 >= loc8) 
-                        {
-                            if (loc9 == loc8) 
-                            {
-                                loc5.push(new net.wg.gui.lobby.hangar.crew.SkillsVO({}));
-                                loc5.push(new net.wg.gui.lobby.hangar.crew.SkillsVO({}));
-                            }
-                            loc5.push(createSkillObj(loc1, loc9 + loc7));
-                            --loc9;
-                        }
-                        loc5 = loc5.reverse();
-                    }
-                    invalidate(INVALIDATE_GROUP_PROPS);
-                    this.skills.dataProvider = new scaleform.clik.data.DataProvider(loc5);
-                }
+               App.toolTipMgr.showSpecial(Tooltips.TANKMAN,null,_loc2_.tankmanID,true);
             }
-            this.textObj = new net.wg.gui.lobby.hangar.crew.TextObject();
-            this.textObj.nameTF = loc1.firstname + " " + loc1.lastname;
-            this.textObj.rank = loc1.rank;
-            this.textObj.roleHtml = loc1.role;
-            var loc2:*=loc1.specializationLevel + "%";
-            var loc3:*=App.utils.locale.makeString(MENU.tankmen(loc1.tankType), {});
-            if (isNaN(loc1.tankmanID)) 
+         }
+      }
+
+      override public function setListData(param1:ListData) : void {
+         index = param1.index;
+         selected = param1.selected;
+         setState("up");
+      }
+
+      override protected function draw() : void {
+         var _loc2_:Point = null;
+         super.draw();
+         this.skills.validateNow();
+         this.skills.visible = true;
+         var _loc1_:RecruitRendererVO = RecruitRendererVO(data);
+         if(isInvalid(INVALIDATE_GROUP_PROPS))
+         {
+            this.goups_icons.alpha = this.goups_icons_prop.alpha;
+            this.goups_icons.visible = this.goups_icons_prop.visible;
+            if(this.goups_icons_prop.visible)
             {
-                this.textObj.levelSpecializationMainHtml = "";
-                this.textObj.roleHtml = this.textObj.roleHtml + (", " + loc3 + " " + loc1.vehicleType);
+               this.goups_icons.skillsGroupNum.autoSize = this.goups_icons_prop.autoSize;
+               this.goups_icons.skillsGroupNum.text = this.goups_icons_prop.text;
             }
-            else if (loc1.curVehicleType == loc1.tankType) 
-            {
-                if (loc1.curVehicleName == loc1.vehicleType) 
-                {
-                    this.textObj.levelSpecializationMainHtml = loc2;
-                    this.textObj.roleHtml = this.textObj.roleHtml + (", " + loc3 + " " + loc1.vehicleType);
-                }
-                else 
-                {
-                    if (loc1.vehicleElite) 
-                    {
-                        this.textObj.levelSpecializationMainHtml = loc2;
-                    }
-                    else 
-                    {
-                        this.textObj.levelSpecializationMainHtml = " <font color=\'" + DEBUFF + "\'>" + loc2 + "</font>";
-                    }
-                    this.textObj.roleHtml = this.textObj.roleHtml + (", " + loc3 + " <font color=\'" + DEBUFF + "\'> " + loc1.vehicleType + "</font>");
-                }
-            }
-            else 
-            {
-                this.textObj.levelSpecializationMainHtml = " <font color=\'" + DEBUFF + "\'>" + loc2 + "</font>";
-                this.textObj.roleHtml = this.textObj.roleHtml + (", <font color=\'" + DEBUFF + "\'>" + loc3 + " " + loc1.vehicleType + "</font>");
-            }
+         }
+         if(this._recruit == true)
+         {
+            this.role.text = MENU.tankmanrecruitrenderer(_loc1_.roleType);
+            this.rank.text = MENU.TANKMANRECRUITRENDERER_DESCR;
+            this.skills.visible = false;
             this.lastSkillLevel.text = "";
-            this.lastSkillLevel.autoSize = flash.text.TextFieldAutoSize.LEFT;
-            if (loc1.skills && loc1.skills.length > 0 && !loc1.skills[0].buy && !isNaN(loc1.lastSkillLevel) && !(loc1.lastSkillLevel == 100)) 
+         }
+         if(this._personalCase == true)
+         {
+            this.role.text = MENU.TANKMANRECRUITRENDERER_PERSONALCASE;
+            this.skills.visible = false;
+            this.lastSkillLevel.text = "";
+         }
+         if((this.nameTF) && (this.rank) && (this.role) && (this.levelSpecializationMain))
+         {
+            if(this.textObj != null)
             {
-                this.lastSkillLevel.visible = true;
-                this.lastSkillLevel.text = loc1.lastSkillLevel + "%";
+               this.nameTF.text = this.textObj.nameTF;
+               this.rank.text = this.textObj.rank;
+               this.role.htmlText = this.textObj.roleHtml;
+               this.levelSpecializationMain.htmlText = this.textObj.levelSpecializationMainHtml;
             }
-            else 
+         }
+         this.visible = true;
+         if((isInvalid(InvalidationType.DATA)) && (data))
+         {
+            _loc2_ = new Point(mouseX,mouseY);
+            _loc2_ = this.localToGlobal(_loc2_);
+            if(this.hitTestPoint(_loc2_.x,_loc2_.y,true))
             {
-                this.lastSkillLevel.visible = false;
+               if(owner.visible)
+               {
+                  App.toolTipMgr.showSpecial(Tooltips.TANKMAN,null,_loc1_.tankmanID,true);
+               }
             }
-            this.lastSkillLevel.x = this.skills.x + (this.skills.columnWidth + this.skills.paddingRight) * Math.min(5, this.skills.dataProvider.length);
-            setState("up");
-            var loc4:*=new flash.geom.Point(mouseX, mouseY);
-            loc4 = this.localToGlobal(loc4);
-            if (this.hitTestPoint(loc4.x, loc4.y, true)) 
-            {
-                if (owner.visible) 
-                {
-                    App.toolTipMgr.showSpecial(net.wg.data.constants.Tooltips.TANKMAN, null, loc1.tankmanID, true);
-                }
-            }
-            return;
-        }
+         }
+      }
 
-        public override function setListData(arg1:scaleform.clik.data.ListData):void
-        {
-            index = arg1.index;
-            selected = arg1.selected;
-            setState("up");
-            return;
-        }
+      override protected function getStatePrefixes() : Vector.<String> {
+         if(this._recruit)
+         {
+            return Vector.<String>(["recruit_"]);
+         }
+         if(this._personalCase)
+         {
+            return Vector.<String>(["personalCase_"]);
+         }
+         return _selected?statesSelected:statesDefault;
+      }
 
-        protected override function draw():void
-        {
-            var loc2:*=null;
-            super.draw();
-            this.skills.validateNow();
-            this.skills.visible = true;
-            var loc1:*=net.wg.gui.lobby.hangar.crew.RecruitRendererVO(data);
-            if (isInvalid(INVALIDATE_GROUP_PROPS)) 
-            {
-                this.goups_icons.alpha = this.goups_icons_prop.alpha;
-                this.goups_icons.visible = this.goups_icons_prop.visible;
-                if (this.goups_icons_prop.visible) 
-                {
-                    this.goups_icons.skillsGroupNum.autoSize = this.goups_icons_prop.autoSize;
-                    this.goups_icons.skillsGroupNum.text = this.goups_icons_prop.text;
-                }
-            }
-            if (this._recruit == true) 
-            {
-                this.role.text = MENU.tankmanrecruitrenderer(loc1.roleType);
-                this.rank.text = MENU.TANKMANRECRUITRENDERER_DESCR;
-                this.skills.visible = false;
-                this.lastSkillLevel.text = "";
-            }
-            if (this._personalCase == true) 
-            {
-                this.role.text = MENU.TANKMANRECRUITRENDERER_PERSONALCASE;
-                this.skills.visible = false;
-                this.lastSkillLevel.text = "";
-            }
-            if (this.nameTF && this.rank && this.role && this.levelSpecializationMain) 
-            {
-                if (this.textObj != null) 
-                {
-                    this.nameTF.text = this.textObj.nameTF;
-                    this.rank.text = this.textObj.rank;
-                    this.role.htmlText = this.textObj.roleHtml;
-                    this.levelSpecializationMain.htmlText = this.textObj.levelSpecializationMainHtml;
-                }
-            }
-            this.visible = true;
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA) && data) 
-            {
-                loc2 = new flash.geom.Point(mouseX, mouseY);
-                loc2 = this.localToGlobal(loc2);
-                if (this.hitTestPoint(loc2.x, loc2.y, true)) 
-                {
-                    if (owner.visible) 
-                    {
-                        App.toolTipMgr.showSpecial(net.wg.data.constants.Tooltips.TANKMAN, null, loc1.tankmanID, true);
-                    }
-                }
-            }
-            return;
-        }
+      public function get recruit() : Boolean {
+         return this._recruit;
+      }
 
-        protected override function getStatePrefixes():__AS3__.vec.Vector.<String>
-        {
-            if (this._recruit) 
-            {
-                return Vector.<String>(["recruit_"]);
-            }
-            if (this._personalCase) 
-            {
-                return Vector.<String>(["personalCase_"]);
-            }
-            return _selected ? statesSelected : statesDefault;
-        }
+      public function set recruit(param1:Boolean) : void {
+         this._recruit = param1;
+         setState("up");
+      }
 
-        public function get recruit():Boolean
-        {
-            return this._recruit;
-        }
+      public function get personalCase() : Boolean {
+         return this._personalCase;
+      }
 
-        public function set recruit(arg1:Boolean):void
-        {
-            this._recruit = arg1;
-            setState("up");
-            return;
-        }
+      public function set personalCase(param1:Boolean) : void {
+         this._personalCase = param1;
+         setState("up");
+      }
 
-        public function get personalCase():Boolean
-        {
-            return this._personalCase;
-        }
+      override public function toString() : String {
+         return "[Scaleform RecruitItemRenderer " + name + "]";
+      }
+   }
 
-        public function set personalCase(arg1:Boolean):void
-        {
-            this._personalCase = arg1;
-            setState("up");
-            return;
-        }
-
-        public override function toString():String
-        {
-            return "[Scaleform RecruitItemRenderer " + name + "]";
-        }
-
-        internal static function hideTooltip(arg1:flash.events.MouseEvent):void
-        {
-            App.toolTipMgr.hide();
-            return;
-        }
-
-        internal static function createSkillObj(arg1:net.wg.gui.lobby.hangar.crew.RecruitRendererVO, arg2:Number):net.wg.gui.lobby.hangar.crew.SkillsVO
-        {
-            var loc1:*=new net.wg.gui.lobby.hangar.crew.SkillsVO({});
-            var loc2:*;
-            if ((loc2 = net.wg.gui.lobby.hangar.crew.SkillsVO(arg1.skills[arg2])).buy) 
-            {
-                loc1.icon = "../maps/icons/tankmen/skills/small/new_skill.png";
-                loc1.tankmanID = arg1.tankmanID;
-                loc1.buy = true;
-                loc1.active = loc2.active;
-            }
-            else 
-            {
-                loc1.icon = "../maps/icons/tankmen/skills/small/" + loc2.icon;
-                loc1.inprogress = arg2 == (arg1.skills.length - 1) && !(arg1.lastSkillLevel == 100);
-                loc1.name = loc2.name;
-                loc1.desc = loc2.desc;
-                loc1.active = loc2.active;
-                loc1.selected = arg2 == (arg1.skills.length - 1);
-            }
-            return loc1;
-        }
-
-        
-        {
-            MAX_ICONS = 5;
-        }
-
-        protected override function configUI():void
-        {
-            this.visible = false;
-            addEventListener(flash.events.MouseEvent.CLICK, this.onItemClick);
-            addEventListener(flash.events.MouseEvent.ROLL_OVER, this.showTooltip);
-            addEventListener(flash.events.MouseEvent.ROLL_OUT, hideTooltip);
-            addEventListener(flash.events.MouseEvent.MOUSE_DOWN, hideTooltip);
-            this.focusIndicator = this.focusIndicatorUI;
-            super.configUI();
-            return;
-        }
-
-        internal static const BUFF:String="#00FF00";
-
-        internal static const DEBUFF:String="#FF0000";
-
-        internal static const INVALIDATE_GROUP_PROPS:String="groups_icons_prop";
-
-        public var icon:net.wg.gui.lobby.hangar.crew.TankmenIcons;
-
-        public var iconRole:net.wg.gui.lobby.hangar.crew.TankmenIcons;
-
-        public var iconRank:net.wg.gui.lobby.hangar.crew.TankmenIcons;
-
-        public var skills:net.wg.gui.components.controls.TileList;
-
-        public var bg:flash.display.MovieClip;
-
-        public var goups_icons:flash.display.MovieClip;
-
-        public var levelSpecializationMain:flash.text.TextField;
-
-        public var nameTF:flash.text.TextField;
-
-        public var rank:flash.text.TextField;
-
-        public var role:flash.text.TextField;
-
-        public var vehicleType:flash.text.TextField;
-
-        public var lastSkillLevel:flash.text.TextField;
-
-        internal var _recruit:Boolean=false;
-
-        internal var _personalCase:Boolean=false;
-
-        internal var goups_icons_prop:net.wg.gui.lobby.hangar.crew.IconsProps=null;
-
-        internal var textObj:net.wg.gui.lobby.hangar.crew.TextObject;
-
-        public var focusIndicatorUI:flash.display.MovieClip;
-
-        public static var MAX_ICONS:Number=5;
-    }
 }

@@ -1,185 +1,188 @@
 package net.wg.gui.lobby.profile.pages.summary
 {
-    import flash.display.*;
-    import flash.events.*;
-    import net.wg.data.constants.*;
-    import net.wg.data.gui_items.dossier.*;
-    import net.wg.gui.lobby.profile.components.*;
-    import net.wg.gui.lobby.profile.data.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import scaleform.clik.core.*;
+   import net.wg.infrastructure.base.meta.impl.ProfileSummaryMeta;
+   import net.wg.infrastructure.base.meta.IProfileSummaryMeta;
+   import flash.display.DisplayObjectContainer;
+   import scaleform.clik.core.UIComponent;
+   import net.wg.gui.lobby.profile.components.LditBattles;
+   import net.wg.gui.lobby.profile.components.LineDescrIconText;
+   import net.wg.gui.lobby.profile.components.LditMarksOfMastery;
+   import net.wg.gui.lobby.profile.components.LditValued;
+   import net.wg.gui.lobby.profile.components.PersonalScoreComponent;
+   import net.wg.gui.lobby.profile.components.ProfileFooter;
+   import net.wg.gui.lobby.profile.data.ProfileUserVO;
+   import net.wg.gui.lobby.profile.data.SectionLayoutManager;
+   import flash.events.Event;
+   import net.wg.data.gui_items.dossier.Dossier;
 
-    public class ProfileSummary extends net.wg.infrastructure.base.meta.impl.ProfileSummaryMeta implements net.wg.infrastructure.base.meta.IProfileSummaryMeta
-    {
-        public function ProfileSummary()
-        {
-            super();
-            addEventListener(flash.events.Event.ADDED_TO_STAGE, this.onAddedToStage, false, 0, true);
-            return;
-        }
 
-        protected override function initialize():void
-        {
-            super.initialize();
-            layoutManager = new net.wg.gui.lobby.profile.data.SectionLayoutManager(525, 740);
-            layoutManager.registerComponents(this.tfTotalBattles, this.tfWins, this.tfMarksOfMastery, this.tfMaxDestroyed, this.tfMaxExperience, this.tfHits, this.tfAvgDamage, this.tfAvgExperience, this.tfPersonalScore, this.significantAwards);
-            this.lineTextFieldsLayout = new net.wg.gui.lobby.profile.pages.summary.LineTextFieldsLayout(988, 140);
-            this.lineTextFieldsLayout.addLeftPair(this.tfTotalBattles, this.tfAvgDamage);
-            this.lineTextFieldsLayout.addLeftPair(this.tfWins, this.tfHits);
-            this.lineTextFieldsLayout.addRightPair(this.tfAvgExperience, this.tfMaxDestroyed);
-            this.lineTextFieldsLayout.addRightPair(this.tfMaxExperience, this.tfMarksOfMastery);
-            this.lineTextFieldsLayout.layout();
-            return;
-        }
+   public class ProfileSummary extends ProfileSummaryMeta implements IProfileSummaryMeta
+   {
+          
+      public function ProfileSummary() {
+         super();
+         addEventListener(Event.ADDED_TO_STAGE,this.onAddedToStage,false,0,true);
+      }
 
-        protected override function applyResizing():void
-        {
-            if (layoutManager)
+      private static const INIT_DATA_INVALID:String = "idInv";
+
+      private static function validateChildren(param1:DisplayObjectContainer) : void {
+         var _loc3_:DisplayObjectContainer = null;
+         var _loc4_:UIComponent = null;
+         var _loc2_:* = 0;
+         while(_loc2_ < param1.numChildren)
+         {
+            _loc3_ = param1.getChildAt(_loc2_) as DisplayObjectContainer;
+            _loc4_ = _loc3_ as UIComponent;
+            if(_loc4_)
             {
-                layoutManager.setDimension(currentDimension.x, currentDimension.y);
+               _loc4_.validateNow();
             }
-            this.x = Math.round(currentDimension.x / 2 - _centerOffset);
-            return;
-        }
-
-        internal function onAddedToStage(arg1:flash.events.Event):void
-        {
-            validateChildren(this);
-            return;
-        }
-
-        protected override function updateByDossier(arg1:net.wg.data.gui_items.dossier.AccountDossier):void
-        {
-            super.updateByDossier(arg1);
-            this.tfTotalBattles.text = arg1.getBattlesCountStr();
-            this.tfWins.text = arg1.getWinsEfficiencyStr();
-            this.tfMarksOfMastery.text = arg1.getSpecifiedMarksOfMasteryStr(net.wg.data.constants.MarksOfMastery.MASTER);
-            this.tfMarksOfMastery.totalCount = arg1.getVehiclesCount();
-            this.tfMaxDestroyed.text = arg1.getMaxFragsStr();
-            this.tfMaxDestroyed.value = arg1.getMaxFragsVehicleDescr();
-            this.tfMaxExperience.value = arg1.getMaxXPVehicleDescr();
-            this.tfMaxExperience.text = arg1.getMaxXPStr();
-            this.tfAvgDamage.text = arg1.getAvgDamageStr();
-            this.tfAvgExperience.text = arg1.getAvgXPStr();
-            this.tfHits.text = arg1.getHitsEfficiencyStr();
-            this.setGlobalRating(getGlobalRatingS(arg1.id));
-            this.significantAchievementProvider = arg1.getSignificantAchievements();
-            return;
-        }
-
-        public function setGlobalRating(arg1:Number):void
-        {
-            this.tfPersonalScore.text = App.utils.locale.integer(arg1);
-            return;
-        }
-
-        public override function as_setInitData(arg1:Object):void
-        {
-            super.as_setInitData(arg1);
-            this.applyInitData(new net.wg.gui.lobby.profile.pages.summary.SummaryInitVO(arg1));
-            return;
-        }
-
-        protected function applyInitData(arg1:net.wg.gui.lobby.profile.pages.summary.SummaryInitVO):void
-        {
-            var loc1:*=arg1.commonScores;
-            this.tfTotalBattles.tooltip = PROFILE.PROFILE_PARAMS_TOOLTIP_BATTLESCOUNT;
-            this.tfWins.tooltip = PROFILE.PROFILE_PARAMS_TOOLTIP_WINS;
-            this.tfMarksOfMastery.tooltip = PROFILE.PROFILE_PARAMS_TOOLTIP_MARKOFMASTERY;
-            this.tfMaxDestroyed.tooltip = PROFILE.PROFILE_PARAMS_TOOLTIP_MAXDESTROYED;
-            this.tfMaxExperience.tooltip = PROFILE.PROFILE_PARAMS_TOOLTIP_MAXEXP;
-            this.tfAvgExperience.tooltip = PROFILE.PROFILE_PARAMS_TOOLTIP_AVGEXP;
-            this.tfHits.tooltip = PROFILE.PROFILE_PARAMS_TOOLTIP_HITS;
-            this.tfAvgDamage.tooltip = PROFILE.PROFILE_PARAMS_TOOLTIP_AVGDAMAGE;
-            applyInitDataToTextField("battles", arg1.commonScores, this.tfTotalBattles);
-            applyInitDataToTextField("wins", arg1.commonScores, this.tfWins);
-            applyInitDataToTextField("coolSigns", arg1.commonScores, this.tfMarksOfMastery);
-            applyInitDataToTextField("maxDestroyed", arg1.commonScores, this.tfMaxDestroyed);
-            applyInitDataToTextField("maxExperience", arg1.commonScores, this.tfMaxExperience);
-            applyInitDataToTextField("avgExperience", arg1.commonScores, this.tfAvgExperience);
-            applyInitDataToTextField("hits", arg1.commonScores, this.tfHits);
-            applyInitDataToTextField("avgDamage", arg1.commonScores, this.tfAvgDamage);
-            this.tfPersonalScore.description = loc1["personalScore"]["description"];
-            this.significantAwards.label = arg1.significantAwardsLabel;
-            this.significantAwards.errorText = arg1.significantAwardsErrorText;
-            return;
-        }
-
-        public function set significantAchievementProvider(arg1:Array):void
-        {
-            this.significantAwards.dataProvider = arg1;
-            return;
-        }
-
-        protected override function handleStageChange(arg1:flash.events.Event):void
-        {
-            if (arg1.type == flash.events.Event.ADDED_TO_STAGE)
+            if(_loc3_)
             {
-                removeEventListener(flash.events.Event.ADDED_TO_STAGE, this.handleStageChange, false);
-                addEventListener(flash.events.Event.RENDER, validateNow, false, 0, true);
-                addEventListener(flash.events.Event.ENTER_FRAME, validateNow, false, 0, true);
-                if (stage != null)
-                {
-                    stage.invalidate();
-                }
+               validateChildren(_loc3_);
             }
-            return;
-        }
+            _loc2_++;
+         }
+      }
 
-        protected override function onDispose():void
-        {
-            super.onDispose();
-            if (this.lineTextFieldsLayout)
+      public var tfTotalBattles:LditBattles;
+
+      public var tfWins:LineDescrIconText;
+
+      public var tfMarksOfMastery:LditMarksOfMastery;
+
+      public var tfMaxDestroyed:LditValued;
+
+      public var tfMaxExperience:LditValued;
+
+      public var tfAvgExperience:LineDescrIconText;
+
+      public var tfHits:LineDescrIconText;
+
+      public var tfAvgDamage:LineDescrIconText;
+
+      public var tfPersonalScore:PersonalScoreComponent;
+
+      public var footer:ProfileFooter;
+
+      private var initData:ProfileUserVO;
+
+      public var significantAwards:AwardsListComponent;
+
+      private var lineTextFieldsLayout:LineTextFieldsLayout;
+
+      override protected function initialize() : void {
+         super.initialize();
+         layoutManager = new SectionLayoutManager(525,740);
+         layoutManager.registerComponents(this.tfTotalBattles,this.tfWins,this.tfMarksOfMastery,this.tfMaxDestroyed,this.tfMaxExperience,this.tfHits,this.tfAvgDamage,this.tfAvgExperience,this.tfPersonalScore,this.significantAwards,this.footer);
+         this.lineTextFieldsLayout = new LineTextFieldsLayout(988,140);
+         this.lineTextFieldsLayout.addLeftPair(this.tfTotalBattles,this.tfAvgDamage);
+         this.lineTextFieldsLayout.addLeftPair(this.tfWins,this.tfHits);
+         this.lineTextFieldsLayout.addRightPair(this.tfAvgExperience,this.tfMaxDestroyed);
+         this.lineTextFieldsLayout.addRightPair(this.tfMaxExperience,this.tfMarksOfMastery);
+         this.lineTextFieldsLayout.layout();
+      }
+
+      override protected function applyResizing() : void {
+         if(layoutManager)
+         {
+            layoutManager.setDimension(currentDimension.x,currentDimension.y);
+         }
+         this.x = Math.round(currentDimension.x / 2 - _centerOffset);
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         if((isInvalid(INIT_DATA_INVALID)) && (this.initData))
+         {
+            this.footer.setUserData(this.initData);
+         }
+      }
+
+      private function onAddedToStage(param1:Event) : void {
+         validateChildren(this);
+      }
+
+      override protected function applyData(param1:Object) : Object {
+         var _loc2_:ProfileSummaryVO = new ProfileSummaryVO(param1);
+         this.tfTotalBattles.text = _loc2_.getBattlesCountStr();
+         this.tfTotalBattles.setValues(_loc2_.getWinsCountStr(),_loc2_.getLossesCountStr(),_loc2_.getDrawsCountStr());
+         this.tfWins.text = _loc2_.getWinsEfficiencyStr() + "%";
+         this.tfMarksOfMastery.text = _loc2_.getMarksOfMasteryCountStr();
+         this.tfMarksOfMastery.totalCount = _loc2_.totalUserVehiclesCount;
+         this.tfMaxDestroyed.text = _loc2_.getMaxDestroyedStr();
+         var _loc3_:String = _loc2_.maxDestroyed > 0?_loc2_.maxDestroyedByVehicle:null;
+         this.tfMaxDestroyed.value = _loc3_;
+         this.tfMaxExperience.text = _loc2_.getMaxExperienceStr();
+         _loc3_ = _loc2_.maxXP > 0?_loc2_.maxXPByVehicle:null;
+         this.tfMaxExperience.value = _loc3_;
+         this.tfAvgDamage.text = _loc2_.getAvgDamageStr();
+         this.tfAvgExperience.text = _loc2_.getAvgExperienceStr();
+         this.tfHits.text = _loc2_.getHitsEfficiencyStr() + "%";
+         this.tfPersonalScore.text = _loc2_.getGlobalRatingStr();
+         this.significantAchievementProvider = Dossier.getAchievementVector(_loc2_.significantAchievements);
+         return _loc2_;
+      }
+
+      override public function as_setInitData(param1:Object) : void {
+         super.as_setInitData(param1);
+         this.applyInitData(new SummaryInitVO(param1));
+      }
+
+      protected function applyInitData(param1:SummaryInitVO) : void {
+         var _loc2_:Object = param1.commonScores;
+         this.tfTotalBattles.tooltip = PROFILE.PROFILE_PARAMS_TOOLTIP_BATTLESCOUNT;
+         this.tfWins.tooltip = PROFILE.PROFILE_PARAMS_TOOLTIP_WINS;
+         this.tfMarksOfMastery.tooltip = PROFILE.PROFILE_PARAMS_TOOLTIP_MARKOFMASTERY;
+         this.tfMaxDestroyed.tooltip = PROFILE.PROFILE_PARAMS_TOOLTIP_MAXDESTROYED;
+         this.tfMaxExperience.tooltip = PROFILE.PROFILE_PARAMS_TOOLTIP_MAXEXP;
+         this.tfAvgExperience.tooltip = PROFILE.PROFILE_PARAMS_TOOLTIP_AVGEXP;
+         this.tfHits.tooltip = PROFILE.PROFILE_PARAMS_TOOLTIP_HITS;
+         this.tfAvgDamage.tooltip = PROFILE.PROFILE_PARAMS_TOOLTIP_AVGDAMAGE;
+         applyInitDataToTextField("battles",param1.commonScores,this.tfTotalBattles);
+         applyInitDataToTextField("wins",param1.commonScores,this.tfWins);
+         applyInitDataToTextField("coolSigns",param1.commonScores,this.tfMarksOfMastery);
+         applyInitDataToTextField("maxDestroyed",param1.commonScores,this.tfMaxDestroyed);
+         applyInitDataToTextField("maxExperience",param1.commonScores,this.tfMaxExperience);
+         applyInitDataToTextField("avgExperience",param1.commonScores,this.tfAvgExperience);
+         applyInitDataToTextField("hits",param1.commonScores,this.tfHits);
+         applyInitDataToTextField("avgDamage",param1.commonScores,this.tfAvgDamage);
+         this.tfPersonalScore.description = _loc2_["personalScore"]["description"];
+         this.significantAwards.label = param1.significantAwardsLabel;
+         this.significantAwards.errorText = param1.significantAwardsErrorText;
+      }
+
+      public function set significantAchievementProvider(param1:Array) : void {
+         this.significantAwards.dataProvider = param1;
+      }
+
+      override protected function handleStageChange(param1:Event) : void {
+         if(param1.type == Event.ADDED_TO_STAGE)
+         {
+            removeEventListener(Event.ADDED_TO_STAGE,this.handleStageChange,false);
+            addEventListener(Event.RENDER,validateNow,false,0,true);
+            addEventListener(Event.ENTER_FRAME,validateNow,false,0,true);
+            if(stage != null)
             {
-                this.lineTextFieldsLayout.dispose();
-                this.lineTextFieldsLayout = null;
+               stage.invalidate();
             }
-            return;
-        }
+         }
+      }
 
-        internal static function validateChildren(arg1:flash.display.DisplayObjectContainer):void
-        {
-            var loc2:*=null;
-            var loc3:*=null;
-            var loc1:*=0;
-            while (loc1 < arg1.numChildren)
-            {
-                loc2 = arg1.getChildAt(loc1) as flash.display.DisplayObjectContainer;
-                loc3 = loc2 as scaleform.clik.core.UIComponent;
-                if (loc3)
-                {
-                    loc3.validateNow();
-                }
-                if (loc2)
-                {
-                    validateChildren(loc2);
-                }
-                ++loc1;
-            }
-            return;
-        }
+      override protected function onDispose() : void {
+         super.onDispose();
+         if(this.lineTextFieldsLayout)
+         {
+            this.lineTextFieldsLayout.dispose();
+            this.lineTextFieldsLayout = null;
+         }
+      }
 
-        public var tfTotalBattles:net.wg.gui.lobby.profile.components.LineDescrIconText;
+      public function as_setUserData(param1:Object) : void {
+         this.initData = new ProfileUserVO(param1);
+         invalidate(INIT_DATA_INVALID);
+      }
+   }
 
-        public var tfWins:net.wg.gui.lobby.profile.components.LineDescrIconText;
-
-        public var tfMarksOfMastery:net.wg.gui.lobby.profile.components.LditMarksOfMastery;
-
-        public var tfMaxDestroyed:net.wg.gui.lobby.profile.components.LditValued;
-
-        public var tfMaxExperience:net.wg.gui.lobby.profile.components.LditValued;
-
-        public var tfAvgExperience:net.wg.gui.lobby.profile.components.LineDescrIconText;
-
-        public var tfHits:net.wg.gui.lobby.profile.components.LineDescrIconText;
-
-        public var tfAvgDamage:net.wg.gui.lobby.profile.components.LineDescrIconText;
-
-        public var tfPersonalScore:net.wg.gui.lobby.profile.components.PersonalScoreComponent;
-
-        public var significantAwards:net.wg.gui.lobby.profile.pages.summary.AwardsListComponent;
-
-        internal var lineTextFieldsLayout:net.wg.gui.lobby.profile.pages.summary.LineTextFieldsLayout;
-    }
 }

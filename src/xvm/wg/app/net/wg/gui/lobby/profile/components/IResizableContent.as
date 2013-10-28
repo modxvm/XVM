@@ -1,17 +1,20 @@
-package net.wg.gui.lobby.profile.components 
+package net.wg.gui.lobby.profile.components
 {
-    import net.wg.infrastructure.interfaces.*;
-    
-    public interface IResizableContent extends net.wg.infrastructure.interfaces.IViewStackContent
-    {
-        function setViewSize(arg1:Number, arg2:Number):void;
+   import net.wg.infrastructure.interfaces.IViewStackContent;
 
-        function set centerOffset(arg1:int):void;
 
-        function get centerOffset():int;
+   public interface IResizableContent extends IViewStackContent
+   {
+          
+      function setViewSize(param1:Number, param2:Number) : void;
 
-        function set active(arg1:Boolean):void;
+      function set centerOffset(param1:int) : void;
 
-        function get active():Boolean;
-    }
+      function get centerOffset() : int;
+
+      function set active(param1:Boolean) : void;
+
+      function get active() : Boolean;
+   }
+
 }

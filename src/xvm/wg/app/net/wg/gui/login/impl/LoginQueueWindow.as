@@ -1,85 +1,72 @@
-package net.wg.gui.login.impl 
+package net.wg.gui.login.impl
 {
-    import flash.text.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import scaleform.clik.events.*;
-    
-    public class LoginQueueWindow extends net.wg.infrastructure.base.meta.impl.LoginQueueWindowMeta implements net.wg.infrastructure.base.meta.ILoginQueueWindowMeta
-    {
-        public function LoginQueueWindow()
-        {
-            super();
-            canClose = false;
-            showWindowBg = false;
-            isCentered = true;
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.LoginQueueWindowMeta;
+   import net.wg.infrastructure.base.meta.ILoginQueueWindowMeta;
+   import net.wg.gui.components.controls.SoundButtonEx;
+   import flash.text.TextField;
+   import scaleform.clik.events.ButtonEvent;
 
-        public override function updateStage(arg1:Number, arg2:Number):void
-        {
-            super.updateStage(arg1, arg2);
-            var loc1:*=App.appWidth - window.width >> 1;
-            var loc2:*=App.appHeight - window.height >> 1;
-            if (this.isFirstUpdateStage) 
-            {
-                this.isFirstUpdateStage = false;
-            }
-            else 
-            {
-                window.x = loc1;
-                window.y = loc2;
-            }
-            return;
-        }
 
-        public function as_setTitle(arg1:String):void
-        {
-            this.titleField.htmlText = arg1;
-            return;
-        }
+   public class LoginQueueWindow extends LoginQueueWindowMeta implements ILoginQueueWindowMeta
+   {
+          
+      public function LoginQueueWindow() {
+         super();
+         canClose = false;
+         showWindowBg = false;
+         isCentered = true;
+      }
 
-        public function as_setMessage(arg1:String):void
-        {
-            this.messageTextField.htmlText = arg1;
-            return;
-        }
+      public var cancelBtn:SoundButtonEx = null;
 
-        public function as_setCancelLabel(arg1:String):void
-        {
-            this.cancelBtn.label = arg1;
-            return;
-        }
+      public var titleField:TextField = null;
 
-        protected override function onPopulate():void
-        {
-            super.onPopulate();
-            this.cancelBtn.addEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onCancelBtnClickHandler, false, 0, true);
-            window.getBackground().alpha = 0;
-            App.utils.focusHandler.setFocus(this.cancelBtn);
-            return;
-        }
+      public var messageTextField:TextField = null;
 
-        protected override function onDispose():void
-        {
-            super.onDispose();
-            this.cancelBtn.removeEventListener(scaleform.clik.events.ButtonEvent.CLICK, this.onCancelBtnClickHandler);
-            return;
-        }
+      private var isFirstUpdateStage:Boolean = true;
 
-        internal function onCancelBtnClickHandler(arg1:scaleform.clik.events.ButtonEvent):void
-        {
-            onCancelClickS();
-            return;
-        }
+      override public function updateStage(param1:Number, param2:Number) : void {
+         super.updateStage(param1,param2);
+         var _loc3_:Number = App.appWidth - window.width >> 1;
+         var _loc4_:Number = App.appHeight - window.height >> 1;
+         if(!this.isFirstUpdateStage)
+         {
+            window.x = _loc3_;
+            window.y = _loc4_;
+         }
+         else
+         {
+            this.isFirstUpdateStage = false;
+         }
+      }
 
-        public var cancelBtn:net.wg.gui.components.controls.SoundButtonEx=null;
+      public function as_setTitle(param1:String) : void {
+         this.titleField.htmlText = param1;
+      }
 
-        public var titleField:flash.text.TextField=null;
+      public function as_setMessage(param1:String) : void {
+         this.messageTextField.htmlText = param1;
+      }
 
-        public var messageTextField:flash.text.TextField=null;
+      public function as_setCancelLabel(param1:String) : void {
+         this.cancelBtn.label = param1;
+      }
 
-        internal var isFirstUpdateStage:Boolean=true;
-    }
+      override protected function onPopulate() : void {
+         super.onPopulate();
+         this.cancelBtn.addEventListener(ButtonEvent.CLICK,this.onCancelBtnClickHandler,false,0,true);
+         window.getBackground().alpha = 0;
+         App.utils.focusHandler.setFocus(this.cancelBtn);
+      }
+
+      override protected function onDispose() : void {
+         super.onDispose();
+         this.cancelBtn.removeEventListener(ButtonEvent.CLICK,this.onCancelBtnClickHandler);
+      }
+
+      private function onCancelBtnClickHandler(param1:ButtonEvent) : void {
+         onCancelClickS();
+      }
+   }
+
 }

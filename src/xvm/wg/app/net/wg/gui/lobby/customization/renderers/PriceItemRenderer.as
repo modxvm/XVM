@@ -1,126 +1,114 @@
-package net.wg.gui.lobby.customization.renderers 
+package net.wg.gui.lobby.customization.renderers
 {
-    import net.wg.data.constants.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.lobby.customization.*;
-    import scaleform.clik.constants.*;
-    
-    public class PriceItemRenderer extends net.wg.gui.components.controls.SoundListItemRenderer
-    {
-        public function PriceItemRenderer()
-        {
-            super();
-            soundType = net.wg.data.constants.SoundTypes.RNDR_NORMAL;
-            soundId = net.wg.data.constants.SoundTypes.PRICE_RENDERER;
+   import net.wg.gui.components.controls.SoundListItemRenderer;
+   import net.wg.gui.components.controls.CheckBox;
+   import net.wg.gui.components.controls.IconText;
+   import scaleform.clik.constants.InvalidationType;
+   import net.wg.gui.lobby.customization.CustomizationEvent;
+   import net.wg.data.constants.SoundTypes;
+
+
+   public class PriceItemRenderer extends SoundListItemRenderer
+   {
+          
+      public function PriceItemRenderer() {
+         super();
+         soundType = SoundTypes.RNDR_NORMAL;
+         soundId = SoundTypes.PRICE_RENDERER;
+      }
+
+      public var checkBox:CheckBox;
+
+      public var costField:IconText;
+
+      private var _lock:Boolean = false;
+
+      override public function setData(param1:Object) : void {
+         super.setData(param1);
+         invalidateData();
+      }
+
+      public function get lock() : Boolean {
+         return this._lock;
+      }
+
+      public function set lock(param1:Boolean) : void {
+         if(this._lock == param1)
+         {
             return;
-        }
+         }
+         this._lock = param1;
+         this.enabled = !param1;
+      }
 
-        public override function setData(arg1:Object):void
-        {
-            super.setData(arg1);
-            invalidateData();
+      override public function set enabled(param1:Boolean) : void {
+         if(this.lock)
+         {
             return;
-        }
+         }
+         super.enabled = param1;
+         invalidateData();
+      }
 
-        public function get lock():Boolean
-        {
-            return this._lock;
-        }
+      override protected function configUI() : void {
+         super.configUI();
+      }
 
-        public function set lock(arg1:Boolean):void
-        {
-            if (this._lock == arg1) 
+      override protected function draw() : void {
+         super.draw();
+         if(isInvalid(InvalidationType.DATA))
+         {
+            if(data)
             {
-                return;
+               visible = true;
+               this.populateData();
             }
-            this._lock = arg1;
-            this.enabled = !arg1;
-            return;
-        }
-
-        public override function set enabled(arg1:Boolean):void
-        {
-            if (this.lock) 
+            else
             {
-                return;
+               visible = false;
             }
-            super.enabled = arg1;
-            invalidateData();
-            return;
-        }
+         }
+      }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            return;
-        }
+      override protected function handleClick(param1:uint=0) : void {
+         if(toggle)
+         {
+            selected = !_selected;
+         }
+         this.checkBox.selected = !this.checkBox.selected;
+         data.selected = this.checkBox.selected;
+         dispatchEvent(new CustomizationEvent(CustomizationEvent.PRICE_ITEM_CLICK));
+      }
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(scaleform.clik.constants.InvalidationType.DATA)) 
+      private function populateData() : void {
+         var _loc1_:Object = null;
+         this.checkBox.enabled = enabled;
+         this.checkBox.mouseEnabled = enabled;
+         if(data.label != null)
+         {
+            this.checkBox.label = data.label;
+         }
+         if(data.selected != null)
+         {
+            this.checkBox.selected = data.selected;
+         }
+         this.checkBox.validateNow();
+         if(!(this.costField == null) && !(data.price == null))
+         {
+            _loc1_ = data.price;
+            if(_loc1_.isGold)
             {
-                if (data) 
-                {
-                    visible = true;
-                    this.populateData();
-                }
-                else 
-                {
-                    visible = false;
-                }
+               this.costField.text = App.utils.locale.gold(_loc1_.cost);
+               this.costField.icon = IconText.GOLD;
             }
-            return;
-        }
-
-        protected override function handleClick(arg1:uint=0):void
-        {
-            if (toggle) 
+            else
             {
-                selected = !_selected;
+               this.costField.text = App.utils.locale.integer(_loc1_.cost);
+               this.costField.icon = IconText.CREDITS;
             }
-            this.checkBox.selected = !this.checkBox.selected;
-            data.selected = this.checkBox.selected;
-            dispatchEvent(new net.wg.gui.lobby.customization.CustomizationEvent(net.wg.gui.lobby.customization.CustomizationEvent.PRICE_ITEM_CLICK));
-            return;
-        }
+            this.costField.validateNow();
+         }
+      }
+   }
 
-        internal function populateData():void
-        {
-            var loc1:*=null;
-            this.checkBox.enabled = enabled;
-            this.checkBox.mouseEnabled = enabled;
-            if (data.label != null) 
-            {
-                this.checkBox.label = data.label;
-            }
-            if (data.selected != null) 
-            {
-                this.checkBox.selected = data.selected;
-            }
-            this.checkBox.validateNow();
-            if (!(this.costField == null) && !(data.price == null)) 
-            {
-                loc1 = data.price;
-                if (loc1.isGold) 
-                {
-                    this.costField.text = App.utils.locale.gold(loc1.cost);
-                    this.costField.icon = net.wg.gui.components.controls.IconText.GOLD;
-                }
-                else 
-                {
-                    this.costField.text = App.utils.locale.integer(loc1.cost);
-                    this.costField.icon = net.wg.gui.components.controls.IconText.CREDITS;
-                }
-                this.costField.validateNow();
-            }
-            return;
-        }
-
-        public var checkBox:net.wg.gui.components.controls.CheckBox;
-
-        public var costField:net.wg.gui.components.controls.IconText;
-
-        internal var _lock:Boolean=false;
-    }
 }

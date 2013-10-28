@@ -1,141 +1,128 @@
-package net.wg.gui.tutorial.windows 
+package net.wg.gui.tutorial.windows
 {
-    import flash.text.*;
-    import net.wg.utils.*;
-    
-    public class TutorialQueueDialog extends net.wg.gui.tutorial.windows.TutorialDialog
-    {
-        public function TutorialQueueDialog()
-        {
-            this._timePointcuts = [];
-            super();
-            canClose = false;
-            showWindowBg = false;
-            isModal = true;
-            return;
-        }
+   import flash.text.TextField;
+   import flash.text.TextFieldAutoSize;
+   import net.wg.utils.ILocale;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            messageField.wordWrap = true;
-            messageField.autoSize = flash.text.TextFieldAutoSize.LEFT;
-            this.updateMessageText();
-            App.utils.scheduler.scheduleTask(this.updateWaitingTime, 1000 * 60);
-            App.utils.focusHandler.setFocus(submitBtn);
-            return;
-        }
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(INVALIDATE_MESSAGE)) 
+   public class TutorialQueueDialog extends TutorialDialog
+   {
+          
+      public function TutorialQueueDialog() {
+         this._timePointcuts = [];
+         super();
+         canClose = false;
+         showWindowBg = false;
+         isModal = true;
+      }
+
+      private static const INVALIDATE_MESSAGE:String = "invalidateMessage";
+
+      public var titleField:TextField;
+
+      private var _waitingTime:int = 0;
+
+      private var _playerTimeTextStart:String = "";
+
+      private var _playerTimeTextEnd:String = "";
+
+      private var _avgTimeText:String = "";
+
+      private var _timePointcuts:Array;
+
+      private var _baseMessage:String = "";
+
+      private var _messageText:String = "";
+
+      override protected function configUI() : void {
+         super.configUI();
+         messageField.wordWrap = true;
+         messageField.autoSize = TextFieldAutoSize.LEFT;
+         this.updateMessageText();
+         App.utils.scheduler.scheduleTask(this.updateWaitingTime,1000 * 60);
+         App.utils.focusHandler.setFocus(submitBtn);
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         if(isInvalid(INVALIDATE_MESSAGE))
+         {
+            messageField.htmlText = this._messageText;
+         }
+      }
+
+      override protected function drawData() : void {
+         this.titleField.text = _data.title;
+      }
+
+      override public function as_setContent(param1:Object) : void {
+         super.as_setContent(param1);
+         this._baseMessage = _data.message;
+         this._playerTimeTextStart = _data.playerTimeTextStart;
+         this._playerTimeTextEnd = _data.playerTimeTextEnd;
+         this._avgTimeText = _data.avgTimeText;
+         this._timePointcuts = _data.timePointcuts;
+         this.updateMessageText();
+      }
+
+      override public function as_updateContent(param1:Object) : void {
+         this._avgTimeText = param1.avgTimeText;
+         this.updateMessageText();
+      }
+
+      public function updateWaitingTime() : void {
+         this._waitingTime = this._waitingTime + 1;
+         this.updateMessageText();
+         App.utils.scheduler.scheduleTask(this.updateWaitingTime,1000 * 60);
+      }
+
+      private function updateMessageText() : void {
+         var _loc1_:String = null;
+         var _loc2_:* = NaN;
+         var _loc3_:ILocale = null;
+         if(messageField)
+         {
+            _loc2_ = this._timePointcuts.length;
+            _loc3_ = App.utils.locale;
+            if(_loc2_ > 0)
             {
-                messageField.htmlText = this._messageText;
+               if(this._waitingTime < this._timePointcuts[0])
+               {
+                  _loc1_ = _loc3_.makeString(BATTLE_TUTORIAL.LABELS_LESS_N_MINUTES,{"minutes":this._timePointcuts[0].toString()});
+               }
+               else
+               {
+                  if(this._waitingTime > this._timePointcuts[_loc2_-1])
+                  {
+                     _loc1_ = _loc3_.makeString(BATTLE_TUTORIAL.LABELS_MORE_N_MINUTES,{"minutes":this._timePointcuts[_loc2_-1].toString()});
+                     App.utils.scheduler.cancelTask(this.updateWaitingTime);
+                  }
+                  else
+                  {
+                     _loc1_ = _loc3_.makeString(BATTLE_TUTORIAL.LABELS_MINUTES,{"minutes":this._waitingTime.toString()});
+                  }
+               }
             }
-            return;
-        }
-
-        protected override function drawData():void
-        {
-            this.titleField.text = _data.title;
-            return;
-        }
-
-        public override function as_setContent(arg1:Object):void
-        {
-            super.as_setContent(arg1);
-            this._baseMessage = _data.message;
-            this._playerTimeTextStart = _data.playerTimeTextStart;
-            this._playerTimeTextEnd = _data.playerTimeTextEnd;
-            this._avgTimeText = _data.avgTimeText;
-            this._timePointcuts = _data.timePointcuts;
-            this.updateMessageText();
-            return;
-        }
-
-        public override function as_updateContent(arg1:Object):void
-        {
-            this._avgTimeText = arg1.avgTimeText;
-            this.updateMessageText();
-            return;
-        }
-
-        public function updateWaitingTime():void
-        {
-            this._waitingTime = this._waitingTime + 1;
-            this.updateMessageText();
-            App.utils.scheduler.scheduleTask(this.updateWaitingTime, 1000 * 60);
-            return;
-        }
-
-        internal function updateMessageText():void
-        {
-            var loc1:*=null;
-            var loc2:*=NaN;
-            var loc3:*=null;
-            if (messageField) 
+            else
             {
-                loc2 = this._timePointcuts.length;
-                loc3 = App.utils.locale;
-                if (loc2 > 0) 
-                {
-                    if (this._waitingTime < this._timePointcuts[0]) 
-                    {
-                        loc1 = loc3.makeString(BATTLE_TUTORIAL.LABELS_LESS_N_MINUTES, {"minutes":this._timePointcuts[0].toString()});
-                    }
-                    else if (this._waitingTime > this._timePointcuts[(loc2 - 1)]) 
-                    {
-                        loc1 = loc3.makeString(BATTLE_TUTORIAL.LABELS_MORE_N_MINUTES, {"minutes":this._timePointcuts[(loc2 - 1)].toString()});
-                        App.utils.scheduler.cancelTask(this.updateWaitingTime);
-                    }
-                    else 
-                    {
-                        loc1 = loc3.makeString(BATTLE_TUTORIAL.LABELS_MINUTES, {"minutes":this._waitingTime.toString()});
-                    }
-                }
-                else 
-                {
-                    loc1 = loc3.makeString(BATTLE_TUTORIAL.LABELS_MINUTES, {"minutes":this._waitingTime.toString()});
-                }
-                this._messageText = this._baseMessage ? this._baseMessage : "";
-                this._messageText = this._messageText + (this._playerTimeTextStart + loc1 + this._playerTimeTextEnd);
-                this._messageText = this._messageText + this._avgTimeText;
-                invalidate(INVALIDATE_MESSAGE);
+               _loc1_ = _loc3_.makeString(BATTLE_TUTORIAL.LABELS_MINUTES,{"minutes":this._waitingTime.toString()});
             }
-            return;
-        }
+            this._messageText = this._baseMessage?this._baseMessage:"";
+            this._messageText = this._messageText + (this._playerTimeTextStart + _loc1_ + this._playerTimeTextEnd);
+            this._messageText = this._messageText + this._avgTimeText;
+            invalidate(INVALIDATE_MESSAGE);
+         }
+      }
 
-        protected override function onPopulate():void
-        {
-            window.getBackground().visible = false;
-            return;
-        }
+      override protected function onPopulate() : void {
+         window.getBackground().visible = false;
+      }
 
-        protected override function onDispose():void
-        {
-            super.onDispose();
-            App.utils.scheduler.cancelTask(this.updateWaitingTime);
-            this._timePointcuts = this._timePointcuts.splice(0, this._timePointcuts.length);
-            return;
-        }
+      override protected function onDispose() : void {
+         super.onDispose();
+         App.utils.scheduler.cancelTask(this.updateWaitingTime);
+         this._timePointcuts = this._timePointcuts.splice(0,this._timePointcuts.length);
+      }
+   }
 
-        internal static const INVALIDATE_MESSAGE:String="invalidateMessage";
-
-        public var titleField:flash.text.TextField;
-
-        internal var _waitingTime:int=0;
-
-        internal var _playerTimeTextStart:String="";
-
-        internal var _playerTimeTextEnd:String="";
-
-        internal var _avgTimeText:String="";
-
-        internal var _timePointcuts:Array;
-
-        internal var _baseMessage:String="";
-
-        internal var _messageText:String="";
-    }
 }

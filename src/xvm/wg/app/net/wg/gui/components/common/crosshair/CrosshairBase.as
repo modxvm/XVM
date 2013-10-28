@@ -1,65 +1,58 @@
-package net.wg.gui.components.common.crosshair 
+package net.wg.gui.components.common.crosshair
 {
-    import flash.display.*;
-    import flash.events.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    
-    public class CrosshairBase extends flash.display.Sprite implements net.wg.infrastructure.interfaces.entity.IDisposable
-    {
-        public function CrosshairBase()
-        {
-            super();
-            this.init();
-            return;
-        }
+   import flash.display.Sprite;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import flash.events.Event;
+   import flash.display.StageScaleMode;
+   import flash.display.StageAlign;
 
-        internal function init():void
-        {
-            this.initCallbacks();
-            this.initView();
-            if (stage) 
-            {
-                this.initStage();
-            }
-            else 
-            {
-                addEventListener(flash.events.Event.ADDED_TO_STAGE, this.initStage);
-            }
-            return;
-        }
 
-        internal function initStage(arg1:flash.events.Event=null):void
-        {
-            removeEventListener(flash.events.Event.ADDED_TO_STAGE, this.initStage);
-            stage.scaleMode = flash.display.StageScaleMode.NO_SCALE;
-            stage.align = flash.display.StageAlign.TOP_LEFT;
-            return;
-        }
+   public class CrosshairBase extends Sprite implements IDisposable
+   {
+          
+      public function CrosshairBase() {
+         super();
+         this.init();
+      }
 
-        protected function initView():void
-        {
-            return;
-        }
+      private function init() : void {
+         this.initCallbacks();
+         this.initView();
+         if(stage)
+         {
+            this.initStage();
+         }
+         else
+         {
+            addEventListener(Event.ADDED_TO_STAGE,this.initStage);
+         }
+      }
 
-        protected function initCallbacks():void
-        {
-            return;
-        }
+      private function initStage(param1:Event=null) : void {
+         removeEventListener(Event.ADDED_TO_STAGE,this.initStage);
+         stage.scaleMode = StageScaleMode.NO_SCALE;
+         stage.align = StageAlign.TOP_LEFT;
+      }
 
-        protected function onSetReloading(arg1:Number, arg2:Number, arg3:Boolean, arg4:Number=0):void
-        {
-            return;
-        }
+      protected function initView() : void {
+          
+      }
 
-        protected function onSetReloadingAsPercent(arg1:Number):void
-        {
-            return;
-        }
+      protected function initCallbacks() : void {
+          
+      }
 
-        public function dispose():void
-        {
-            removeEventListener(flash.events.Event.ADDED_TO_STAGE, this.initStage);
-            return;
-        }
-    }
+      protected function onSetReloading(param1:Number, param2:Number, param3:Boolean, param4:Number=0) : void {
+          
+      }
+
+      protected function onSetReloadingAsPercent(param1:Number) : void {
+          
+      }
+
+      public function dispose() : void {
+         removeEventListener(Event.ADDED_TO_STAGE,this.initStage);
+      }
+   }
+
 }

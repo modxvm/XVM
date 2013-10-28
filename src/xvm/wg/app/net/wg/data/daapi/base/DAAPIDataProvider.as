@@ -1,95 +1,85 @@
-package net.wg.data.daapi.base 
+package net.wg.data.daapi.base
 {
-    import flash.events.*;
-    import net.wg.infrastructure.interfaces.*;
-    import scaleform.clik.interfaces.*;
-    
-    public class DAAPIDataProvider extends flash.events.EventDispatcher implements scaleform.clik.interfaces.IDataProvider, net.wg.infrastructure.interfaces.IDAAPIModule
-    {
-        public function DAAPIDataProvider()
-        {
-            super();
-            return;
-        }
+   import flash.events.EventDispatcher;
+   import scaleform.clik.interfaces.IDataProvider;
+   import net.wg.infrastructure.interfaces.IDAAPIModule;
+   import flash.events.Event;
 
-        public function get disposed():Boolean
-        {
-            return false;
-        }
 
-        public function get length():uint
-        {
-            if (this.lengthHandler != null) 
-            {
-                return this.lengthHandler();
-            }
-            return 0;
-        }
+   public class DAAPIDataProvider extends EventDispatcher implements IDataProvider, IDAAPIModule
+   {
+          
+      public function DAAPIDataProvider() {
+         super();
+      }
 
-        public function requestItemAt(arg1:uint, arg2:Function=null):Object
-        {
-            var loc1:*=this.requestItemAtHandler(arg1);
-            if (arg2 != null) 
-            {
-                arg2(loc1);
-            }
-            return loc1;
-        }
+      public var lengthHandler:Function;
 
-        public function requestItemRange(arg1:int, arg2:int, arg3:Function=null):Array
-        {
-            if (!Boolean(this.requestItemRangeHandler)) 
-            {
-                return [];
-            }
-            var loc1:*=this.requestItemRangeHandler(arg1, arg2);
-            if (arg3 != null) 
-            {
-                arg3(loc1);
-            }
-            return loc1;
-        }
+      public var requestItemAtHandler:Function;
 
-        public function indexOf(arg1:Object, arg2:Function=null):int
-        {
-            if (arg2 != null) 
-            {
-                arg2(-1);
-            }
-            return -1;
-        }
+      public var requestItemRangeHandler:Function;
 
-        public function cleanUp():void
-        {
-            return;
-        }
+      public function get disposed() : Boolean {
+         return false;
+      }
 
-        public function triggerInvalidation():void
-        {
-            this.invalidate(this.lengthHandler());
-            return;
-        }
+      public function get length() : uint {
+         if(this.lengthHandler != null)
+         {
+            return this.lengthHandler();
+         }
+         return 0;
+      }
 
-        public function invalidate(arg1:uint=0):void
-        {
-            dispatchEvent(new flash.events.Event(flash.events.Event.CHANGE));
-            return;
-        }
+      public function requestItemAt(param1:uint, param2:Function=null) : Object {
+         var _loc3_:Object = this.requestItemAtHandler(param1);
+         if(param2 != null)
+         {
+            param2(_loc3_);
+         }
+         return _loc3_;
+      }
 
-        public function as_populate():void
-        {
-            return;
-        }
+      public function requestItemRange(param1:int, param2:int, param3:Function=null) : Array {
+         if(!Boolean(this.requestItemRangeHandler))
+         {
+            return [];
+         }
+         var _loc4_:Array = this.requestItemRangeHandler(param1,param2);
+         if(param3 != null)
+         {
+            param3(_loc4_);
+         }
+         return _loc4_;
+      }
 
-        public function as_dispose():void
-        {
-            return;
-        }
+      public function indexOf(param1:Object, param2:Function=null) : int {
+         if(param2 != null)
+         {
+            param2(-1);
+         }
+         return -1;
+      }
 
-        public var lengthHandler:Function;
+      public function cleanUp() : void {
+          
+      }
 
-        public var requestItemAtHandler:Function;
+      public function triggerInvalidation() : void {
+         this.invalidate(this.lengthHandler());
+      }
 
-        public var requestItemRangeHandler:Function;
-    }
+      public function invalidate(param1:uint=0) : void {
+         dispatchEvent(new Event(Event.CHANGE));
+      }
+
+      public function as_populate() : void {
+          
+      }
+
+      public function as_dispose() : void {
+          
+      }
+   }
+
 }

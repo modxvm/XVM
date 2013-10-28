@@ -1,13 +1,16 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    
-    public interface ILoginCreateAnAccountWindowMeta extends flash.events.IEventDispatcher
-    {
-        function onRegisterS(arg1:String):void;
+   import flash.events.IEventDispatcher;
 
-        function as_updateTexts(arg1:String, arg2:String, arg3:String, arg4:String):void;
 
-        function as_registerResponse(arg1:Boolean, arg2:String):void;
-    }
+   public interface ILoginCreateAnAccountWindowMeta extends IEventDispatcher
+   {
+          
+      function onRegisterS(param1:String) : void;
+
+      function as_updateTexts(param1:String, param2:String, param3:String, param4:String) : void;
+
+      function as_registerResponse(param1:Boolean, param2:String) : void;
+   }
+
 }

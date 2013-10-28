@@ -1,51 +1,46 @@
-package net.wg.gui.lobby.window 
+package net.wg.gui.lobby.window
 {
-    import flash.text.*;
-    import scaleform.clik.core.*;
-    
-    public class DiscountMC extends scaleform.clik.core.UIComponent
-    {
-        public function DiscountMC()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.text.TextField;
+   import flash.text.TextFieldAutoSize;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.textField.autoSize = flash.text.TextFieldAutoSize.LEFT;
-            return;
-        }
 
-        public function get text():String
-        {
-            return this._text;
-        }
+   public class DiscountMC extends UIComponent
+   {
+          
+      public function DiscountMC() {
+         super();
+      }
 
-        public function set text(arg1:String):void
-        {
-            this._text = arg1;
-            this.isTextChanged = true;
-            invalidate();
-            return;
-        }
+      public var textField:TextField;
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (this.isTextChanged) 
-            {
-                this.isTextChanged = false;
-                this.textField.text = this._text;
-            }
-            return;
-        }
+      private var _text:String;
 
-        public var textField:flash.text.TextField;
+      private var isTextChanged:Boolean;
 
-        internal var _text:String;
+      override protected function configUI() : void {
+         super.configUI();
+         this.textField.autoSize = TextFieldAutoSize.LEFT;
+      }
 
-        internal var isTextChanged:Boolean;
-    }
+      public function get text() : String {
+         return this._text;
+      }
+
+      public function set text(param1:String) : void {
+         this._text = param1;
+         this.isTextChanged = true;
+         invalidate();
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         if(this.isTextChanged)
+         {
+            this.isTextChanged = false;
+            this.textField.text = this._text;
+         }
+      }
+   }
+
 }

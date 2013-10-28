@@ -1,32 +1,29 @@
-package net.wg.infrastructure.base.meta.impl 
+package net.wg.infrastructure.base.meta.impl
 {
-    import net.wg.data.constants.*;
-    import net.wg.infrastructure.base.*;
-    
-    public class ChannelCarouselMeta extends net.wg.infrastructure.base.BaseDAAPIComponent
-    {
-        public function ChannelCarouselMeta()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.BaseDAAPIComponent;
+   import net.wg.data.constants.Errors;
 
-        public function channelOpenClickS(arg1:Number):void
-        {
-            App.utils.asserter.assertNotNull(this.channelOpenClick, "channelOpenClick" + net.wg.data.constants.Errors.CANT_NULL);
-            this.channelOpenClick(arg1);
-            return;
-        }
 
-        public function channelCloseClickS(arg1:Number):void
-        {
-            App.utils.asserter.assertNotNull(this.channelCloseClick, "channelCloseClick" + net.wg.data.constants.Errors.CANT_NULL);
-            this.channelCloseClick(arg1);
-            return;
-        }
+   public class ChannelCarouselMeta extends BaseDAAPIComponent
+   {
+          
+      public function ChannelCarouselMeta() {
+         super();
+      }
 
-        public var channelOpenClick:Function=null;
+      public var channelOpenClick:Function = null;
 
-        public var channelCloseClick:Function=null;
-    }
+      public var channelCloseClick:Function = null;
+
+      public function channelOpenClickS(param1:Number) : void {
+         App.utils.asserter.assertNotNull(this.channelOpenClick,"channelOpenClick" + Errors.CANT_NULL);
+         this.channelOpenClick(param1);
+      }
+
+      public function channelCloseClickS(param1:Number) : void {
+         App.utils.asserter.assertNotNull(this.channelCloseClick,"channelCloseClick" + Errors.CANT_NULL);
+         this.channelCloseClick(param1);
+      }
+   }
+
 }

@@ -1,156 +1,124 @@
-package net.wg.gui.components.common.markers.data 
+package net.wg.gui.components.common.markers.data
 {
-    import net.wg.data.daapi.base.*;
-    
-    public class VehicleMarkerVO extends net.wg.data.daapi.base.DAAPIDataClass
-    {
-        public function VehicleMarkerVO(arg1:Object)
-        {
-            super(arg1);
-            return;
-        }
+   import net.wg.data.daapi.base.DAAPIDataClass;
 
-        public function set curHealth(arg1:Number):void
-        {
-            this._curHealth = arg1;
-            return;
-        }
 
-        public function get maxHealth():Number
-        {
-            return this._maxHealth;
-        }
+   public class VehicleMarkerVO extends DAAPIDataClass
+   {
+          
+      public function VehicleMarkerVO(param1:Object) {
+         super(param1);
+      }
 
-        public function set maxHealth(arg1:Number):void
-        {
-            this._maxHealth = arg1;
-            return;
-        }
+      private var _vClass:String = "";
 
-        public function get entityName():String
-        {
-            return this._entityName;
-        }
+      private var _vIconSource:String = "";
 
-        public function set entityName(arg1:String):void
-        {
-            this._entityName = arg1;
-            return;
-        }
+      private var _vType:String = "";
 
-        public function get speaking():Boolean
-        {
-            return this._speaking;
-        }
+      private var _vLevel:Number;
 
-        public function set speaking(arg1:Boolean):void
-        {
-            this._speaking = arg1;
-            return;
-        }
+      private var _pFullName:String = "";
 
-        public function get hunt():Boolean
-        {
-            return this._hunt;
-        }
+      private var _curHealth:Number;
 
-        public function set hunt(arg1:Boolean):void
-        {
-            this._hunt = arg1;
-            return;
-        }
+      private var _maxHealth:Number;
 
-        public function get entityType():String
-        {
-            return this._entityType;
-        }
+      private var _entityName:String = "";
 
-        public function set entityType(arg1:String):void
-        {
-            this._entityType = arg1;
-            return;
-        }
+      private var _speaking:Boolean;
 
-        public function get vClass():String
-        {
-            return this._vClass;
-        }
+      private var _hunt:Boolean;
 
-        public function set vClass(arg1:String):void
-        {
-            this._vClass = arg1;
-            return;
-        }
+      private var _entityType:String = "";
 
-        public function get vIconSource():String
-        {
-            return this._vIconSource;
-        }
+      public function get vClass() : String {
+         return this._vClass;
+      }
 
-        public function set vIconSource(arg1:String):void
-        {
-            this._vIconSource = arg1;
-            return;
-        }
+      public function set vClass(param1:String) : void {
+         this._vClass = param1;
+      }
 
-        public function get vType():String
-        {
-            return this._vType;
-        }
+      public function get vIconSource() : String {
+         return this._vIconSource;
+      }
 
-        public function set vType(arg1:String):void
-        {
-            this._vType = arg1;
-            return;
-        }
+      public function set vIconSource(param1:String) : void {
+         this._vIconSource = param1;
+      }
 
-        public function get vLevel():Number
-        {
-            return this._vLevel;
-        }
+      public function get vType() : String {
+         return this._vType;
+      }
 
-        public function set vLevel(arg1:Number):void
-        {
-            this._vLevel = arg1;
-            return;
-        }
+      public function set vType(param1:String) : void {
+         this._vType = param1;
+      }
 
-        public function get pFullName():String
-        {
-            return this._pFullName;
-        }
+      public function get vLevel() : Number {
+         return this._vLevel;
+      }
 
-        public function set pFullName(arg1:String):void
-        {
-            this._pFullName = arg1;
-            return;
-        }
+      public function set vLevel(param1:Number) : void {
+         this._vLevel = param1;
+      }
 
-        public function get curHealth():Number
-        {
-            return this._curHealth;
-        }
+      public function get pFullName() : String {
+         return this._pFullName;
+      }
 
-        internal var _vClass:String="";
+      public function set pFullName(param1:String) : void {
+         this._pFullName = param1;
+      }
 
-        internal var _vIconSource:String="";
+      public function get curHealth() : Number {
+         return this._curHealth;
+      }
 
-        internal var _vType:String="";
+      public function set curHealth(param1:Number) : void {
+         this._curHealth = param1;
+      }
 
-        internal var _vLevel:Number;
+      public function get maxHealth() : Number {
+         return this._maxHealth;
+      }
 
-        internal var _pFullName:String="";
+      public function set maxHealth(param1:Number) : void {
+         this._maxHealth = param1;
+      }
 
-        internal var _curHealth:Number;
+      public function get entityName() : String {
+         return this._entityName;
+      }
 
-        internal var _maxHealth:Number;
+      public function set entityName(param1:String) : void {
+         this._entityName = param1;
+      }
 
-        internal var _entityName:String="";
+      public function get speaking() : Boolean {
+         return this._speaking;
+      }
 
-        internal var _speaking:Boolean;
+      public function set speaking(param1:Boolean) : void {
+         this._speaking = param1;
+      }
 
-        internal var _hunt:Boolean;
+      public function get hunt() : Boolean {
+         return this._hunt;
+      }
 
-        internal var _entityType:String="";
-    }
+      public function set hunt(param1:Boolean) : void {
+         this._hunt = param1;
+      }
+
+      public function get entityType() : String {
+         return this._entityType;
+      }
+
+      public function set entityType(param1:String) : void {
+         this._entityType = param1;
+      }
+   }
+
 }

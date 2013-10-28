@@ -1,25 +1,24 @@
-package net.wg.gui.lobby.vehicleInfo 
+package net.wg.gui.lobby.vehicleInfo
 {
-    import flash.display.*;
-    import flash.text.*;
-    
-    public class CrewBlock extends flash.display.Sprite
-    {
-        public function CrewBlock()
-        {
-            super();
-            return;
-        }
+   import flash.display.Sprite;
+   import flash.text.TextField;
 
-        public function setData(arg1:Object):void
-        {
-            this.crewTankMan.text = arg1.tankmanType;
-            this.crewValue.text = arg1.value;
-            return;
-        }
 
-        public var crewTankMan:flash.text.TextField;
+   public class CrewBlock extends Sprite
+   {
+          
+      public function CrewBlock() {
+         super();
+      }
 
-        public var crewValue:flash.text.TextField;
-    }
+      public var crewTankMan:TextField;
+
+      public var crewValue:TextField;
+
+      public function setData(param1:Object) : void {
+         this.crewTankMan.text = param1.tankmanType;
+         this.crewValue.text = param1.value;
+      }
+   }
+
 }

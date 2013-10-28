@@ -1,27 +1,26 @@
-package net.wg.gui.events 
+package net.wg.gui.events
 {
-    import flash.events.*;
-    import scaleform.clik.events.*;
-    
-    public class StateManagerEvent extends scaleform.clik.events.ComponentEvent
-    {
-        public function StateManagerEvent(arg1:String, arg2:String, arg3:Boolean=false, arg4:Boolean=false)
-        {
-            this._state = arg2;
-            super(arg1, arg3, arg4);
-            return;
-        }
+   import scaleform.clik.events.ComponentEvent;
+   import flash.events.Event;
 
-        public override function clone():flash.events.Event
-        {
-            return new net.wg.gui.events.StateManagerEvent(type, this._state, bubbles, cancelable);
-        }
 
-        public override function toString():String
-        {
-            return formatToString("StateManagerEvent", "_state", "type", "bubbles", "cancelable", "eventPhase");
-        }
+   public class StateManagerEvent extends ComponentEvent
+   {
+          
+      public function StateManagerEvent(param1:String, param2:String, param3:Boolean=false, param4:Boolean=false) {
+         this._state = param2;
+         super(param1,param3,param4);
+      }
 
-        internal var _state:String="";
-    }
+      private var _state:String = "";
+
+      override public function clone() : Event {
+         return new StateManagerEvent(type,this._state,bubbles,cancelable);
+      }
+
+      override public function toString() : String {
+         return formatToString("StateManagerEvent","_state","type","bubbles","cancelable","eventPhase");
+      }
+   }
+
 }

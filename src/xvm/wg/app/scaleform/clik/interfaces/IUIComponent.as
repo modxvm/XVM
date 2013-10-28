@@ -1,54 +1,58 @@
-package scaleform.clik.interfaces 
+package scaleform.clik.interfaces
 {
-    import flash.events.*;
-    import flash.geom.*;
-    import scaleform.clik.core.*;
-    import scaleform.clik.events.*;
-    
-    public interface IUIComponent extends flash.events.IEventDispatcher
-    {
-        function get x():Number;
+   import flash.events.IEventDispatcher;
+   import flash.geom.Rectangle;
+   import scaleform.clik.core.UIComponent;
+   import flash.events.Event;
+   import scaleform.clik.events.InputEvent;
 
-        function set x(arg1:Number):void;
 
-        function get y():Number;
+   public interface IUIComponent extends IEventDispatcher
+   {
+          
+      function get x() : Number;
 
-        function set y(arg1:Number):void;
+      function set x(param1:Number) : void;
 
-        function get width():Number;
+      function get y() : Number;
 
-        function set width(arg1:Number):void;
+      function set y(param1:Number) : void;
 
-        function get height():Number;
+      function get width() : Number;
 
-        function set height(arg1:Number):void;
+      function set width(param1:Number) : void;
 
-        function get enabled():Boolean;
+      function get height() : Number;
 
-        function set enabled(arg1:Boolean):void;
+      function set height(param1:Number) : void;
 
-        function get tabEnabled():Boolean;
+      function get enabled() : Boolean;
 
-        function set tabEnabled(arg1:Boolean):void;
+      function set enabled(param1:Boolean) : void;
 
-        function get scale9Grid():flash.geom.Rectangle;
+      function get tabEnabled() : Boolean;
 
-        function set scale9Grid(arg1:flash.geom.Rectangle):void;
+      function set tabEnabled(param1:Boolean) : void;
 
-        function get alpha():Number;
+      function get scale9Grid() : Rectangle;
 
-        function set alpha(arg1:Number):void;
+      function set scale9Grid(param1:Rectangle) : void;
 
-        function get doubleClickEnabled():Boolean;
+      function get alpha() : Number;
 
-        function set doubleClickEnabled(arg1:Boolean):void;
+      function set alpha(param1:Number) : void;
 
-        function get focusTarget():scaleform.clik.core.UIComponent;
+      function get doubleClickEnabled() : Boolean;
 
-        function set focusTarget(arg1:scaleform.clik.core.UIComponent):void;
+      function set doubleClickEnabled(param1:Boolean) : void;
 
-        function validateNow(arg1:flash.events.Event=null):void;
+      function get focusTarget() : UIComponent;
 
-        function handleInput(arg1:scaleform.clik.events.InputEvent):void;
-    }
+      function set focusTarget(param1:UIComponent) : void;
+
+      function validateNow(param1:Event=null) : void;
+
+      function handleInput(param1:InputEvent) : void;
+   }
+
 }

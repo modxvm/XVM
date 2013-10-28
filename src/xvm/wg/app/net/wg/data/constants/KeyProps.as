@@ -1,39 +1,35 @@
-package net.wg.data.constants 
+package net.wg.data.constants
 {
-    public class KeyProps extends Object
-    {
-        public function KeyProps(arg1:String="", arg2:String="")
-        {
-            super();
-            this.keyCommand = arg1;
-            this.keyName = arg2;
-            return;
-        }
 
-        public function set keyCommand(arg1:String):void
-        {
-            this._keyCommand = arg1;
-            return;
-        }
 
-        public function get keyCommand():String
-        {
-            return this._keyCommand;
-        }
+   public class KeyProps extends Object
+   {
+          
+      public function KeyProps(param1:String=undefined, param2:String=undefined) {
+         super();
+         this.keyCommand = param1;
+         this.keyName = param2;
+      }
 
-        public function set keyName(arg1:String):void
-        {
-            this._keyName = arg1;
-            return;
-        }
+      private var _keyCommand:String;
 
-        public function get keyName():String
-        {
-            return this._keyName;
-        }
+      private var _keyName:String;
 
-        internal var _keyCommand:String;
+      public function set keyCommand(param1:String) : void {
+         this._keyCommand = param1;
+      }
 
-        internal var _keyName:String;
-    }
+      public function get keyCommand() : String {
+         return this._keyCommand;
+      }
+
+      public function set keyName(param1:String) : void {
+         this._keyName = param1;
+      }
+
+      public function get keyName() : String {
+         return this._keyName;
+      }
+   }
+
 }

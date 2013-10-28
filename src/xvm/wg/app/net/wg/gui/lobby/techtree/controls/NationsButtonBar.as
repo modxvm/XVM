@@ -1,101 +1,85 @@
-package net.wg.gui.lobby.techtree.controls 
+package net.wg.gui.lobby.techtree.controls
 {
-    import flash.display.*;
-    import net.wg.gui.components.advanced.*;
-    import scaleform.clik.controls.*;
-    
-    public class NationsButtonBar extends net.wg.gui.components.advanced.ButtonBarEx
-    {
-        public function NationsButtonBar()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.components.advanced.ButtonBarEx;
+   import flash.display.Sprite;
+   import scaleform.clik.controls.Button;
 
-        public function get tabVAlign():String
-        {
-            return this._tabVAlign;
-        }
 
-        public function set tabVAlign(arg1:String):void
-        {
-            this._tabVAlign = arg1;
-            invalidate();
-            return;
-        }
+   public class NationsButtonBar extends ButtonBarEx
+   {
+          
+      public function NationsButtonBar() {
+         super();
+      }
 
-        protected override function configUI():void
-        {
-            if (this.barBG != null) 
-            {
-                this.barBG.mouseEnabled = false;
-            }
-            super.configUI();
-            return;
-        }
+      public static const TOP_ALIGN:String = "top";
 
-        protected override function draw():void
-        {
-            super.draw();
-            return;
-        }
+      public static const CENTER_ALIGN:String = "center";
 
-        protected override function updateRenderers():void
-        {
-            var loc1:*=null;
-            super.updateRenderers();
-            var loc2:*=this.tabVAlign;
-            switch (loc2) 
-            {
-                case CENTER_ALIGN:
-                {
-                    if (_renderers.length > 0 && _dataProvider.length >= _renderers.length) 
-                    {
-                        loc1 = _renderers[(_renderers.length - 1)];
-                        this.repositionRenderers((actualHeight >> 1) - (loc1.y + loc1.height >> 1));
-                    }
-                    break;
-                }
-                case BOTTOM_ALIGN:
-                {
-                    if (_renderers.length > 0 && _dataProvider.length >= _renderers.length) 
-                    {
-                        loc1 = _renderers[(_renderers.length - 1)];
-                        this.repositionRenderers(actualHeight - (loc1.y + loc1.height));
-                    }
-                    break;
-                }
-            }
-            return;
-        }
+      public static const BOTTOM_ALIGN:String = "bottom";
 
-        public override function toString():String
-        {
-            return "[WG NationsButtonBar " + name + "]";
-        }
+      private var _tabVAlign:String;
 
-        internal function repositionRenderers(arg1:Number):void
-        {
-            var loc1:*=null;
-            var loc2:*=0;
-            while (loc2 < _renderers.length) 
-            {
-                loc1 = _renderers[loc2];
-                loc1.y = arg1;
-                arg1 = arg1 + (loc1.height + _spacing);
-                ++loc2;
-            }
-            return;
-        }
+      public var barBG:Sprite;
 
-        public static const TOP_ALIGN:String="top";
+      public function get tabVAlign() : String {
+         return this._tabVAlign;
+      }
 
-        public static const CENTER_ALIGN:String="center";
+      public function set tabVAlign(param1:String) : void {
+         this._tabVAlign = param1;
+         invalidate();
+      }
 
-        public static const BOTTOM_ALIGN:String="bottom";
+      override protected function configUI() : void {
+         if(this.barBG != null)
+         {
+            this.barBG.mouseEnabled = false;
+         }
+         super.configUI();
+      }
 
-        internal var _tabVAlign:String;
+      override protected function draw() : void {
+         super.draw();
+      }
 
-        public var barBG:flash.display.Sprite;
-    }
+      override protected function updateRenderers() : void {
+         var _loc1_:Button = null;
+         super.updateRenderers();
+         switch(this.tabVAlign)
+         {
+            case CENTER_ALIGN:
+               if(_renderers.length > 0 && _dataProvider.length >= _renderers.length)
+               {
+                  _loc1_ = _renderers[_renderers.length-1];
+                  this.repositionRenderers((actualHeight >> 1) - (_loc1_.y + _loc1_.height >> 1));
+               }
+               break;
+            case BOTTOM_ALIGN:
+               if(_renderers.length > 0 && _dataProvider.length >= _renderers.length)
+               {
+                  _loc1_ = _renderers[_renderers.length-1];
+                  this.repositionRenderers(actualHeight - (_loc1_.y + _loc1_.height));
+               }
+               break;
+         }
+      }
+
+      override public function toString() : String {
+         return "[WG NationsButtonBar " + name + "]";
+      }
+
+      private function repositionRenderers(param1:Number) : void {
+         var _loc2_:Button = null;
+         var _loc3_:Number = 0;
+         while(_loc3_ < _renderers.length)
+         {
+            _loc2_ = _renderers[_loc3_];
+            _loc2_.y = param1;
+            param1 = param1 + (_loc2_.height + _spacing);
+            _loc3_++;
+         }
+      }
+   }
+
 }

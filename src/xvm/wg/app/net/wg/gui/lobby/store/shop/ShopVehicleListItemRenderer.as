@@ -1,35 +1,32 @@
-package net.wg.gui.lobby.store.shop 
+package net.wg.gui.lobby.store.shop
 {
-    import net.wg.data.VO.*;
-    import net.wg.gui.components.advanced.*;
-    import net.wg.gui.lobby.store.shop.base.*;
-    
-    public class ShopVehicleListItemRenderer extends net.wg.gui.lobby.store.shop.base.ShopTableItemRenderer
-    {
-        public function ShopVehicleListItemRenderer()
-        {
-            super();
-            return;
-        }
+   import net.wg.gui.lobby.store.shop.base.ShopTableItemRenderer;
+   import net.wg.gui.components.advanced.TankIcon;
+   import net.wg.data.VO.StoreTableData;
 
-        protected override function update():void
-        {
-            var loc1:*=null;
-            super.update();
-            if (data) 
-            {
-                loc1 = net.wg.data.VO.StoreTableData(data);
-                this.updateVehicleIcon(loc1);
-            }
-            return;
-        }
 
-        internal function updateVehicleIcon(arg1:net.wg.data.VO.StoreTableData):void
-        {
-            getHelper().initVehicleIcon(this.vehicleIcon, arg1);
-            return;
-        }
+   public class ShopVehicleListItemRenderer extends ShopTableItemRenderer
+   {
+          
+      public function ShopVehicleListItemRenderer() {
+         super();
+      }
 
-        public var vehicleIcon:net.wg.gui.components.advanced.TankIcon=null;
-    }
+      public var vehicleIcon:TankIcon = null;
+
+      override protected function update() : void {
+         var _loc1_:StoreTableData = null;
+         super.update();
+         if(data)
+         {
+            _loc1_ = StoreTableData(data);
+            this.updateVehicleIcon(_loc1_);
+         }
+      }
+
+      private function updateVehicleIcon(param1:StoreTableData) : void {
+         getHelper().initVehicleIcon(this.vehicleIcon,param1);
+      }
+   }
+
 }

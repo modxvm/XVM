@@ -5,7 +5,6 @@
     "standardMarkers": false,
 
     "formatNick":  "{{name}}{{clan}}",
-    //"formatNick":  "<font color='#123456'>{{clan}}</font>{{name}}",
     "formatVehicle":  "<font face='Consolas' size='11'><font color='{{c:avglvl}}'>{{avglvl}}</font> <font face='Symbol' color='#111111'><b><font color='{{c:tdv}}'>·</font><font color='{{c:tfb}}'>·</font><font color='{{c:tsb}}'>·</font></b></font> <font color='{{c:e}}'>{{e}}</font>|<font color='{{c:xeff}}'>{{xeff}}</font>|<font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font>",
 
     "markersStat": "<b><font face='Symbol' color='#CCCCCC' size='11'><font color='{{c:t-battles}}'>·</font> <font color='{{c:e}}'>·</font> <font color='{{c:xeff}}'>·</font> <font color='{{c:xwn}}'>·</font></font></b>",
@@ -538,6 +537,11 @@
     "playersPanelEnemy":  "contour/HARDicons",
     "vehicleMarker": "contour/Aslain/iconset2"
   },
+  "vehicleNames": {
+    "ussr:T-34": { "name": "т-34.", "short": "т-34" },
+    "usa:T34_hvy": { "name": "т34.", "short": "т34" }
+  },
+  "texts": { "vtype": { "LT":  "ЛТ" } },
 //  "colors": ${"sirmax-colors.xc":"colors"},
   "consts": { "VM_COEFF_VMM_DEAD": 0.75 }
 }

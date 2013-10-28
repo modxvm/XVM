@@ -1,201 +1,192 @@
-package net.wg.gui.lobby.dialogs 
+package net.wg.gui.lobby.dialogs
 {
-    import flash.text.*;
-    import flash.ui.*;
-    import net.wg.gui.components.controls.*;
-    import net.wg.gui.lobby.tankman.*;
-    import net.wg.infrastructure.base.meta.*;
-    import net.wg.infrastructure.base.meta.impl.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.core.*;
-    import scaleform.clik.events.*;
-    import scaleform.clik.utils.*;
-    
-    public class DismissTankmanDialog extends net.wg.infrastructure.base.meta.impl.DismissTankmanDialogMeta implements net.wg.infrastructure.base.meta.IDismissTankmanDialogMeta
-    {
-        public function DismissTankmanDialog()
-        {
-            super();
-            return;
-        }
+   import net.wg.infrastructure.base.meta.impl.DismissTankmanDialogMeta;
+   import net.wg.infrastructure.base.meta.IDismissTankmanDialogMeta;
+   import net.wg.gui.lobby.tankman.TankmanSkillsInfoBlock;
+   import flash.text.TextField;
+   import net.wg.gui.lobby.tankman.SkillDropModel;
+   import net.wg.gui.components.controls.TextInput;
+   import scaleform.clik.utils.Padding;
+   import scaleform.clik.core.UIComponent;
+   import scaleform.clik.events.InputEvent;
+   import scaleform.clik.constants.InputValue;
+   import flash.ui.Keyboard;
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (this.model && isInvalid(UPDATE_BLOCK)) 
+
+   public class DismissTankmanDialog extends DismissTankmanDialogMeta implements IDismissTankmanDialogMeta
+   {
+          
+      public function DismissTankmanDialog() {
+         super();
+      }
+
+      private static const UPDATE_BLOCK:String = "updateBlock";
+
+      private static const AUTO_UPDATE_INTERVAL:int = 3000;
+
+      public var mainBlock:TankmanSkillsInfoBlock;
+
+      public var question:TextField;
+
+      public var errorMessage:TextField;
+
+      public var model:SkillDropModel;
+
+      public var controlText:TextInput;
+
+      private var questionForUser:String = "";
+
+      private var enabledButton:Boolean = false;
+
+      private var controlNumber:String = "";
+
+      private var protectedState:Boolean = true;
+
+      private const SIMPLE_DIALOG_PADDING:int = -6;
+
+      override protected function draw() : void {
+         super.draw();
+         if((this.model) && (isInvalid(UPDATE_BLOCK)))
+         {
+            this.setData();
+         }
+      }
+
+      override protected function onPopulate() : void {
+         super.onPopulate();
+         var _loc1_:Padding = window.contentPadding as Padding;
+         _loc1_.right = 14;
+         this.errorMessage.visible = false;
+         this.errorMessage.mouseEnabled = false;
+         this.errorMessage.text = DIALOGS.PROTECTEDDISMISSTANKMAN_ERRORMESSAGE;
+      }
+
+      private function updateFocus(param1:UIComponent) : void {
+         App.utils.focusHandler.setFocus(param1);
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         if(this.protectedState)
+         {
+            this.controlText.addEventListener(InputEvent.INPUT,this.controlText_inputHandler);
+            App.utils.scheduler.envokeInNextFrame(this.updateFocus,this.controlText);
+         }
+         else
+         {
+            App.utils.scheduler.envokeInNextFrame(this.updateFocus,secondBtn);
+         }
+      }
+
+      override protected function onDispose() : void {
+         super.onDispose();
+         this.controlText.removeEventListener(InputEvent.INPUT,this.controlText_inputHandler);
+         this.controlText.dispose();
+         this.model.dispose();
+         this.mainBlock.dispose();
+         App.utils.scheduler.cancelTask(this.updateFocus);
+         App.utils.scheduler.cancelTask(this.runtimeValidate);
+      }
+
+      public function as_enabledButton(param1:Boolean) : void {
+         this.enabledButton = param1;
+         this.updateButton();
+      }
+
+      public function as_controlTextInput(param1:String) : void {
+         this.controlNumber = param1;
+      }
+
+      private function updateButton() : void {
+         if(!(secondBtn.enabled == this.enabledButton) && (this.protectedState))
+         {
+            secondBtn.enabled = this.enabledButton;
+            if(this.enabledButton)
             {
-                this.setData();
+               this.showAlertState(false);
+               App.utils.scheduler.envokeInNextFrame(this.updateFocus,secondBtn);
             }
-            return;
-        }
+         }
+      }
 
-        protected override function onPopulate():void
-        {
-            super.onPopulate();
-            var loc1:*=window.contentPadding as scaleform.clik.utils.Padding;
-            loc1.right = 14;
-            this.errorMessage.visible = false;
-            this.errorMessage.mouseEnabled = false;
-            this.errorMessage.text = DIALOGS.PROTECTEDDISMISSTANKMAN_ERRORMESSAGE;
+      public function as_tankMan(param1:Object) : void {
+         if(param1 == null)
+         {
             return;
-        }
+         }
+         this.model = SkillDropModel.parseFromObject(param1);
+         if(this.model.roleLevel < 100 && this.model.lastSkill == null && this.model.hasNewSkill == false)
+         {
+            this.protectedState = false;
+            this.controlText.visible = false;
+         }
+         invalidate(UPDATE_BLOCK);
+      }
 
-        internal function updateFocus(arg1:scaleform.clik.core.UIComponent):void
-        {
-            App.utils.focusHandler.setFocus(arg1);
+      public function as_setQuestionForUser(param1:String) : void {
+         if(param1 == null)
+         {
             return;
-        }
+         }
+         this.questionForUser = param1;
+         invalidate(UPDATE_BLOCK);
+      }
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.controlText.addEventListener(scaleform.clik.events.InputEvent.INPUT, this.controlText_inputHandler);
-            App.utils.scheduler.envokeInNextFrame(this.updateFocus, this.controlText);
-            return;
-        }
+      private function setData() : void {
+         this.updateButton();
+         this.mainBlock.nation = this.model.nation;
+         this.mainBlock.tankmanName = this.model.tankmanName;
+         this.mainBlock.portraitSource = this.model.tankmanIcon;
+         this.mainBlock.roleSource = this.model.roleIcon;
+         this.mainBlock.setSkills(this.protectedState?this.model.skillsCount:-1,this.model.preLastSkill,this.model.lastSkill,this.model.lastSkillLevel,this.model.hasNewSkill);
+         this.mainBlock.setRoleLevel(this.model.roleLevel);
+         this.question.htmlText = this.questionForUser;
+      }
 
-        protected override function onDispose():void
-        {
-            super.onDispose();
-            this.controlText.removeEventListener(scaleform.clik.events.InputEvent.INPUT, this.controlText_inputHandler);
-            this.controlText.dispose();
-            this.model.dispose();
-            this.mainBlock.dispose();
-            App.utils.scheduler.cancelTask(this.updateFocus);
-            App.utils.scheduler.cancelTask(this.runtimeValidate);
-            return;
-        }
-
-        public function as_enabledButton(arg1:Boolean):void
-        {
-            this.enabledButton = arg1;
-            this.updateButton();
-            return;
-        }
-
-        public function as_controlTextInput(arg1:String):void
-        {
-            this.controlNumber = arg1;
-            return;
-        }
-
-        internal function updateButton():void
-        {
-            if (secondBtn.enabled != this.enabledButton) 
-            {
-                secondBtn.enabled = this.enabledButton;
-                if (this.enabledButton) 
-                {
-                    this.showAlertState(false);
-                    App.utils.scheduler.envokeInNextFrame(this.updateFocus, secondBtn);
-                }
-            }
-            return;
-        }
-
-        public function as_tankMan(arg1:Object):void
-        {
-            if (arg1 == null) 
-            {
-                return;
-            }
-            this.model = net.wg.gui.lobby.tankman.SkillDropModel.parseFromObject(arg1);
-            invalidate(UPDATE_BLOCK);
-            return;
-        }
-
-        public function as_setQuestionForUser(arg1:String):void
-        {
-            if (arg1 == null) 
-            {
-                return;
-            }
-            this.questionForUser = arg1;
-            invalidate(UPDATE_BLOCK);
-            return;
-        }
-
-        internal function setData():void
-        {
-            this.updateButton();
-            this.mainBlock.nation = this.model.nation;
-            this.mainBlock.tankmanName = this.model.tankmanName;
-            this.mainBlock.portraitSource = this.model.tankmanIcon;
-            this.mainBlock.roleSource = this.model.roleIcon;
-            this.mainBlock.setSkills(this.model.skillsCount, this.model.preLastSkill, this.model.lastSkill, this.model.lastSkillLevel, this.model.hasNewSkill);
-            this.mainBlock.setRoleLevel(this.model.roleLevel);
-            this.question.htmlText = this.questionForUser;
-            return;
-        }
-
-        protected override function getBackgroundActualHeight():Number
-        {
+      override protected function getBackgroundActualHeight() : Number {
+         if(this.protectedState)
+         {
             return firstBtn.y + firstBtn.height;
-        }
+         }
+         return this.question.y + this.question.height + this.SIMPLE_DIALOG_PADDING;
+      }
 
-        internal function controlText_inputHandler(arg1:scaleform.clik.events.InputEvent):void
-        {
-            if (arg1.details.value == scaleform.clik.constants.InputValue.KEY_UP) 
+      private function controlText_inputHandler(param1:InputEvent) : void {
+         if(param1.details.value == InputValue.KEY_UP)
+         {
+            this.showAlertState(false);
+            App.utils.scheduler.cancelTask(this.runtimeValidate);
+            if(param1.details.code == Keyboard.ENTER)
             {
-                this.showAlertState(false);
-                App.utils.scheduler.cancelTask(this.runtimeValidate);
-                if (arg1.details.code != flash.ui.Keyboard.ENTER) 
-                {
-                    if (!this.isEmptyText) 
-                    {
-                        App.utils.scheduler.scheduleTask(this.runtimeValidate, AUTO_UPDATE_INTERVAL);
-                    }
-                }
-                else 
-                {
-                    this.showAlertState(!this.isValidText);
-                }
-                sendControlNumberS(this.controlText.text);
+               this.showAlertState(!this.isValidText);
             }
-            return;
-        }
+            else
+            {
+               if(!this.isEmptyText)
+               {
+                  App.utils.scheduler.scheduleTask(this.runtimeValidate,AUTO_UPDATE_INTERVAL);
+               }
+            }
+            sendControlNumberS(this.controlText.text);
+         }
+      }
 
-        internal function get isEmptyText():Boolean
-        {
-            return this.controlText.text == "";
-        }
+      private function get isEmptyText() : Boolean {
+         return this.controlText.text == "";
+      }
 
-        internal function get isValidText():Boolean
-        {
-            return this.controlText.text == this.controlNumber;
-        }
+      private function get isValidText() : Boolean {
+         return this.controlText.text == this.controlNumber;
+      }
 
-        internal function runtimeValidate():void
-        {
-            this.showAlertState(!this.isValidText);
-            return;
-        }
+      private function runtimeValidate() : void {
+         this.showAlertState(!this.isValidText);
+      }
 
-        internal function showAlertState(arg1:Boolean):void
-        {
-            this.controlText.highlight = arg1;
-            this.errorMessage.visible = arg1;
-            return;
-        }
+      private function showAlertState(param1:Boolean) : void {
+         this.controlText.highlight = param1;
+         this.errorMessage.visible = param1;
+      }
+   }
 
-        internal static const UPDATE_BLOCK:String="updateBlock";
-
-        internal static const AUTO_UPDATE_INTERVAL:int=3000;
-
-        public var mainBlock:net.wg.gui.lobby.tankman.TankmanSkillsInfoBlock;
-
-        public var question:flash.text.TextField;
-
-        public var errorMessage:flash.text.TextField;
-
-        public var model:net.wg.gui.lobby.tankman.SkillDropModel;
-
-        public var controlText:net.wg.gui.components.controls.TextInput;
-
-        internal var questionForUser:String="";
-
-        internal var enabledButton:Boolean=false;
-
-        internal var controlNumber:String="";
-    }
 }

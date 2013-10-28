@@ -1,277 +1,293 @@
-package net.wg.gui.components.controls 
+package net.wg.gui.components.controls
 {
-    import flash.display.*;
-    import flash.events.*;
-    import flash.utils.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.controls.*;
-    import scaleform.clik.events.*;
-    import scaleform.clik.interfaces.*;
-    import scaleform.clik.ui.*;
-    
-    public class FightButtonSelect extends net.wg.gui.components.controls.DropdownMenu
-    {
-        public function FightButtonSelect()
-        {
-            super();
-            handleScroll = false;
+   import flash.events.MouseEvent;
+   import flash.display.MovieClip;
+   import net.wg.gui.events.FightButtonEvent;
+   import flash.events.Event;
+   import scaleform.clik.controls.CoreList;
+   import scaleform.clik.controls.ScrollingList;
+   import scaleform.clik.events.ListEvent;
+   import scaleform.clik.events.InputEvent;
+   import scaleform.clik.ui.InputDetails;
+   import scaleform.clik.constants.InputValue;
+   import scaleform.clik.constants.NavigationCode;
+   import scaleform.clik.interfaces.IDataProvider;
+   import flash.utils.getDefinitionByName;
+   import flash.geom.Point;
+   import flash.display.DisplayObject;
+
+
+   public class FightButtonSelect extends DropdownMenu
+   {
+          
+      public function FightButtonSelect() {
+         super();
+         handleScroll = false;
+      }
+
+      public static function showTooltip(param1:MouseEvent) : void {
+         App.toolTipMgr.showComplex(TOOLTIPS.HEADER_FIGHT_BUTTON_DROPDOWN);
+      }
+
+      public static function hideTooltip(param1:MouseEvent) : void {
+         App.toolTipMgr.hide();
+      }
+
+      public var iconText:IconText;
+
+      public var hit_mc:MovieClip;
+
+      protected var _fightBtnlabel:String;
+
+      override public function open() : void {
+         if(selected)
+         {
             return;
-        }
+         }
+         this.selected = true;
+         stage.addEventListener(MouseEvent.MOUSE_DOWN,this.handleStageClick,false,0,true);
+         this.showDropdown();
+         if(_dropdownRef)
+         {
+            this.iconText.textColor = 14008503;
+            this.iconText.icon = "arrowUp";
+            this.iconText.validateNow();
+         }
+      }
 
-        public override function open():void
-        {
-            if (selected) 
-            {
-                return;
-            }
-            selected = true;
-            stage.addEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.handleStageClick, false, 0, true);
-            this.showDropdown();
-            if (_dropdownRef) 
-            {
-                this.y = this.y + _dropdownRef.height;
-                this.iconText.textColor = 14008503;
-                this.iconText.icon = "arrowUp";
-                this.iconText.validateNow();
-            }
+      public function get fightBtnlabel() : String {
+         return _label;
+      }
+
+      public function set fightBtnlabel(param1:String) : void {
+         if(this._fightBtnlabel == param1)
+         {
             return;
-        }
+         }
+         this._fightBtnlabel = param1;
+         invalidateData();
+      }
 
-        public function get fightBtnlabel():String
-        {
-            return _label;
-        }
-
-        public function set fightBtnlabel(arg1:String):void
-        {
-            if (this._fightBtnlabel == arg1) 
-            {
-                return;
-            }
-            this._fightBtnlabel = arg1;
-            invalidateData();
+      override public function close() : void {
+         if(!selected)
+         {
             return;
-        }
-
-        public override function close():void
-        {
-            if (!selected) 
-            {
-                return;
-            }
-            selected = false;
-            stage.removeEventListener(flash.events.MouseEvent.MOUSE_DOWN, this.handleStageClick, false);
-            if (_dropdownRef) 
-            {
-                this.iconText.icon = "arrowDown";
-                this.iconText.textColor = 14008503;
-                this.iconText.validateNow();
-                this.y = this.y - _dropdownRef.height;
-            }
-            this.hideDropdown();
-            return;
-        }
-
-        protected override function updateText():void
-        {
-            if (!(this._fightBtnlabel == null) && !(this.iconText == null)) 
-            {
-                this.iconText.text = this._fightBtnlabel;
-                this.iconText.validateNow();
-            }
-            return;
-        }
-
-        protected override function configUI():void
-        {
-            super.configUI();
-            this.hitArea = this.hit_mc;
+         }
+         this.selected = false;
+         stage.removeEventListener(MouseEvent.MOUSE_DOWN,this.handleStageClick,false);
+         if(_dropdownRef)
+         {
             this.iconText.icon = "arrowDown";
             this.iconText.textColor = 14008503;
             this.iconText.validateNow();
-            addEventListener(flash.events.MouseEvent.ROLL_OVER, showTooltip, false, 0, true);
-            addEventListener(flash.events.MouseEvent.ROLL_OUT, hideTooltip, false, 0, true);
-            addEventListener(flash.events.MouseEvent.MOUSE_DOWN, hideTooltip, false, 0, true);
+         }
+         this.hideDropdown();
+      }
+
+      override public function set selected(param1:Boolean) : void {
+         super.selected = param1;
+         dispatchEvent(new FightButtonEvent(FightButtonEvent.SELECT_TOGGLE));
+      }
+
+      override protected function updateText() : void {
+         if(!(this._fightBtnlabel == null) && !(this.iconText == null))
+         {
+            this.iconText.text = this._fightBtnlabel;
+            this.iconText.validateNow();
+         }
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.hitArea = this.hit_mc;
+         this.iconText.icon = "arrowDown";
+         this.iconText.textColor = 14008503;
+         this.iconText.validateNow();
+         addEventListener(MouseEvent.ROLL_OVER,showTooltip,false,0,true);
+         addEventListener(MouseEvent.ROLL_OUT,hideTooltip,false,0,true);
+         addEventListener(MouseEvent.MOUSE_DOWN,hideTooltip,false,0,true);
+      }
+
+      override public function dispose() : void {
+         removeEventListener(MouseEvent.ROLL_OVER,showTooltip,false);
+         removeEventListener(MouseEvent.ROLL_OUT,hideTooltip,false);
+         removeEventListener(MouseEvent.MOUSE_DOWN,hideTooltip,false);
+         App.stage.removeEventListener(MouseEvent.MOUSE_DOWN,this.handleStageClick,false);
+         App.stage.removeEventListener(Event.RESIZE,this.updateDDPosition);
+         this.iconText.dispose();
+         super.dispose();
+      }
+
+      override public function get selectedIndex() : int {
+         return _selectedIndex;
+      }
+
+      override public function set selectedIndex(param1:int) : void {
+         var _loc2_:CoreList = null;
+         var _loc3_:uint = 0;
+         if(_selectedIndex == param1)
+         {
             return;
-        }
+         }
+         _selectedIndex = param1;
+         invalidateSelectedIndex();
+         if(_dropdownRef != null)
+         {
+            _loc2_ = _dropdownRef.list as CoreList;
+            _loc3_ = _loc2_  is  ScrollingList?(_loc2_ as ScrollingList).scrollPosition:0;
+            dispatchEvent(new ListEvent(ListEvent.INDEX_CHANGE,true,false,_selectedIndex,-1,-1,_loc2_.getRendererAt(_selectedIndex,_loc3_),_dataProvider[_selectedIndex]));
+         }
+      }
 
-        public override function get selectedIndex():int
-        {
-            return _selectedIndex;
-        }
-
-        public override function set selectedIndex(arg1:int):void
-        {
-            var loc1:*=null;
-            var loc2:*=0;
-            if (_selectedIndex == arg1) 
-            {
-                return;
-            }
-            _selectedIndex = arg1;
-            invalidateSelectedIndex();
-            if (_dropdownRef != null) 
-            {
-                loc1 = _dropdownRef as scaleform.clik.controls.CoreList;
-                loc2 = loc1 is scaleform.clik.controls.ScrollingList ? (loc1 as scaleform.clik.controls.ScrollingList).scrollPosition : 0;
-                dispatchEvent(new scaleform.clik.events.ListEvent(scaleform.clik.events.ListEvent.INDEX_CHANGE, true, false, _selectedIndex, -1, -1, loc1.getRendererAt(_selectedIndex, loc2), _dataProvider[_selectedIndex]));
-            }
+      override public function handleInput(param1:InputEvent) : void {
+         if(param1.handled)
+         {
             return;
-        }
+         }
+         if(!(_dropdownRef == null) && (selected))
+         {
+            _dropdownRef.handleInput(param1);
+            if(param1.handled)
+            {
+               return;
+            }
+         }
+         super.handleInput(param1);
+         var _loc2_:InputDetails = param1.details;
+         var _loc3_:* = _loc2_.value == InputValue.KEY_DOWN;
+         switch(_loc2_.navEquivalent)
+         {
+            case NavigationCode.ESCAPE:
+               if(selected)
+               {
+                  if(_loc3_)
+                  {
+                     this.close();
+                  }
+                  param1.handled = true;
+                  break;
+               }
+               break;
+         }
+      }
 
-        public override function handleInput(arg1:scaleform.clik.events.InputEvent):void
-        {
-            if (arg1.handled) 
-            {
-                return;
-            }
-            if (!(_dropdownRef == null) && selected) 
-            {
-                _dropdownRef.handleInput(arg1);
-                if (arg1.handled) 
-                {
-                    return;
-                }
-            }
-            super.handleInput(arg1);
-            var loc1:*=arg1.details;
-            var loc2:*=loc1.value == scaleform.clik.constants.InputValue.KEY_DOWN;
-            var loc3:*=loc1.navEquivalent;
-            switch (loc3) 
-            {
-                case scaleform.clik.constants.NavigationCode.ESCAPE:
-                {
-                    if (selected) 
-                    {
-                        if (loc2) 
-                        {
-                            this.close();
-                        }
-                        arg1.handled = true;
-                    }
-                }
-                default:
-                {
-                    break;
-                }
-            }
-            return;
-        }
+      override public function set dataProvider(param1:IDataProvider) : void {
+         super.dataProvider = param1;
+         if(_dropdownRef)
+         {
+            CoreList(_dropdownRef).dataProvider = _dataProvider;
+         }
+      }
 
-        public override function set dataProvider(arg1:scaleform.clik.interfaces.IDataProvider):void
-        {
-            super.dataProvider = arg1;
-            if (_dropdownRef) 
-            {
-                scaleform.clik.controls.CoreList(_dropdownRef).dataProvider = _dataProvider;
-            }
-            return;
-        }
-
-        protected override function changeFocus():void
-        {
-            super.changeFocus();
-            if (_selected && _dropdownRef) 
-            {
-                this.close();
-            }
-            return;
-        }
-
-        protected override function showDropdown():void
-        {
-            var loc1:*=null;
-            var loc2:*=null;
-            if (dropdown == null) 
-            {
-                return;
-            }
-            if (dropdown is String && !(dropdown == "")) 
-            {
-                loc2 = flash.utils.getDefinitionByName(dropdown.toString()) as Class;
-                if (loc2 != null) 
-                {
-                    loc1 = new loc2();
-                }
-            }
-            if (loc1) 
-            {
-                if (itemRenderer is String && !(itemRenderer == "")) 
-                {
-                    loc1.itemRenderer = flash.utils.getDefinitionByName(itemRenderer.toString()) as Class;
-                }
-                else if (itemRenderer is Class) 
-                {
-                    loc1.itemRenderer = itemRenderer as Class;
-                }
-                if (scrollBar is String && !(scrollBar == "")) 
-                {
-                    loc1.scrollBar = flash.utils.getDefinitionByName(scrollBar.toString()) as Class;
-                }
-                else if (scrollBar is Class) 
-                {
-                    loc1.scrollBar = scrollBar as Class;
-                }
-                loc1.selectedIndex = _selectedIndex;
-                loc1.width = menuWidth != -1 ? menuWidth : width + menuOffset.left + menuOffset.right;
-                loc1.dataProvider = _dataProvider;
-                loc1.padding = menuPadding;
-                loc1.wrapping = menuWrapping;
-                loc1.margin = menuMargin;
-                loc1.thumbOffset = {"top":thumbOffsetTop, "bottom":thumbOffsetBottom};
-                loc1.focusTarget = this;
-                loc1.rowCount = menuRowCount < 1 ? 5 : menuRowCount;
-                loc1.labelField = _labelField;
-                loc1.labelFunction = _labelFunction;
-                loc1.addEventListener(scaleform.clik.events.ListEvent.ITEM_CLICK, handleMenuItemClick, false, 0, true);
-                _dropdownRef = loc1;
-                _dropdownRef.x = x + menuOffset.left;
-                _dropdownRef.y = menuDirection != "down" ? y - _dropdownRef.height + menuOffset.bottom : y + height + menuOffset.top;
-                parent.addChild(_dropdownRef);
-            }
-            return;
-        }
-
-        protected override function hideDropdown():void
-        {
-            if (_dropdownRef) 
-            {
-                _dropdownRef.parent.removeChild(_dropdownRef);
-                _dropdownRef = null;
-            }
-            return;
-        }
-
-        protected override function handleStageClick(arg1:flash.events.MouseEvent):void
-        {
-            if (this.contains(arg1.target as flash.display.DisplayObject)) 
-            {
-                return;
-            }
-            if (this._dropdownRef.contains(arg1.target as flash.display.DisplayObject)) 
-            {
-                return;
-            }
+      override protected function changeFocus() : void {
+         super.changeFocus();
+         if((_selected) && (_dropdownRef))
+         {
             this.close();
-            return;
-        }
+         }
+      }
 
-        public static function showTooltip(arg1:flash.events.MouseEvent):void
-        {
-            App.toolTipMgr.showComplex(TOOLTIPS.HEADER_FIGHT_BUTTON_DROPDOWN);
+      override protected function showDropdown() : void {
+         var _loc1_:MovieClip = null;
+         var _loc2_:Class = null;
+         if(dropdown == null)
+         {
             return;
-        }
+         }
+         if(dropdown  is  String && !(dropdown == ""))
+         {
+            _loc2_ = getDefinitionByName(dropdown.toString()) as Class;
+            if(_loc2_ != null)
+            {
+               _loc1_ = new _loc2_();
+            }
+         }
+         if(_loc1_)
+         {
+            if(itemRenderer  is  String && !(itemRenderer == ""))
+            {
+               _loc1_.itemRenderer = getDefinitionByName(itemRenderer.toString()) as Class;
+            }
+            else
+            {
+               if(itemRenderer  is  Class)
+               {
+                  _loc1_.itemRenderer = itemRenderer as Class;
+               }
+            }
+            if(scrollBar  is  String && !(scrollBar == ""))
+            {
+               _loc1_.scrollBar = getDefinitionByName(scrollBar.toString()) as Class;
+            }
+            else
+            {
+               if(scrollBar  is  Class)
+               {
+                  _loc1_.scrollBar = scrollBar as Class;
+               }
+            }
+            _loc1_.selectedIndex = _selectedIndex;
+            _loc1_.width = menuWidth == -1?width + menuOffset.left + menuOffset.right:menuWidth;
+            _loc1_.dataProvider = _dataProvider;
+            _loc1_.padding = menuPadding;
+            _loc1_.wrapping = menuWrapping;
+            _loc1_.margin = menuMargin;
+            _loc1_.thumbOffset =
+               {
+                  "top":thumbOffsetTop,
+                  "bottom":thumbOffsetBottom
+               }
+            ;
+            _loc1_.focusTarget = this;
+            _loc1_.rowCount = _dataProvider.length;
+            _loc1_.labelField = _labelField;
+            _loc1_.labelFunction = _labelFunction;
+            _loc1_.list.addEventListener(ListEvent.ITEM_CLICK,handleMenuItemClick,false,0,true);
+            _dropdownRef = _loc1_;
+            _dropdownRef.x = x + menuOffset.left;
+            _dropdownRef.y = menuDirection == "down"?y + height + menuOffset.top:y - _dropdownRef.height + menuOffset.bottom;
+            App.utils.popupMgr.show(_loc1_,x + menuOffset.left,menuDirection == "down"?y + height + menuOffset.top:y - _loc1_.height + menuOffset.bottom,parent);
+            stage.addEventListener(Event.RESIZE,this.updateDDPosition);
+         }
+      }
 
-        public static function hideTooltip(arg1:flash.events.MouseEvent):void
-        {
+      override protected function updateDDPosition(param1:Event) : void {
+         if(_dropdownRef)
+         {
+            super.updateDDPosition(param1);
+         }
+      }
+
+      override protected function hideDropdown() : void {
+         if(_dropdownRef)
+         {
+            this.hideToolTips();
+            _dropdownRef.parent.removeChild(_dropdownRef);
+            _dropdownRef = null;
+         }
+         stage.removeEventListener(Event.RESIZE,this.updateDDPosition);
+      }
+
+      private function hideToolTips() : void {
+         var _loc1_:Point = new Point(_dropdownRef.mouseX,_dropdownRef.mouseY);
+         _loc1_ = localToGlobal(_loc1_);
+         if(_dropdownRef.hitTestPoint(_loc1_.x,_loc1_.y,true))
+         {
             App.toolTipMgr.hide();
+         }
+      }
+
+      override protected function handleStageClick(param1:MouseEvent) : void {
+         if(this.contains(param1.target as DisplayObject))
+         {
             return;
-        }
+         }
+         if(this._dropdownRef.contains(param1.target as DisplayObject))
+         {
+            return;
+         }
+         this.close();
+      }
+   }
 
-        public var iconText:net.wg.gui.components.controls.IconText;
-
-        public var hit_mc:flash.display.MovieClip;
-
-        protected var _fightBtnlabel:String;
-    }
 }

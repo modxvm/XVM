@@ -2,18 +2,7 @@
  * ...
  * @author sirmax2
  */
-import com.xvm.Strings;
-import com.xvm.Cache;
-import com.xvm.Config;
-import com.xvm.Defines;
-import com.xvm.GlobalEventDispatcher;
-import com.xvm.IconLoader;
-import com.xvm.Logger;
-import com.xvm.Macros;
-import com.xvm.PlayerInfo;
-import com.xvm.StatData;
-import com.xvm.StatLoader;
-import com.xvm.Utils;
+import com.xvm.*;
 import net.wargaming.controls.UILoaderAlt;
 import wot.StatisticForm.WinChances;
 
@@ -68,7 +57,7 @@ class wot.StatisticForm.BattleStatItemRenderer
         wrapper.col3.verticalAutoSize = true;
 
         GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
-        GlobalEventDispatcher.addEventListener(StatData.E_STAT_LOADED, wrapper, updateData);
+        GlobalEventDispatcher.addEventListener(Stat.E_STAT_LOADED, wrapper, updateData);
 
         Config.LoadConfig();
     }
@@ -128,24 +117,24 @@ class wot.StatisticForm.BattleStatItemRenderer
 
         var start = new Date();
 
-        wrapper.col3.condenseWhite = StatData.s_empty;
+        wrapper.col3.condenseWhite = Stat.s_empty;
 
         var pname = Utils.GetNormalizedPlayerName(wrapper.data.label);
         var name = Utils.GetPlayerName(wrapper.data.label);
         Macros.RegisterPlayerData(pname, wrapper.data, team);
 
-        var key = "SF/" + pname + "/" + (StatData.s_data[name] ? StatData.s_data[name].loadstate : "0");
+        var key = "SF/" + pname + "/" + (Stat.s_data[name] ? Stat.s_data[name].loadstate : "0");
         var saved_icon = wrapper.data.icon;
         var saved_label = wrapper.data.label;
 
         // Add data for Win Chance calculation
         //Logger.addObject(data);
         if (Config.s_config.rating.showPlayersStatistics) {
-            if (StatData.s_data[name] && StatData.s_data[name].stat)
-                StatData.s_data[name].stat.alive = (wrapper.data.vehicleState & 1) != 0;
+            if (Stat.s_data[name] && Stat.s_data[name].stat)
+                Stat.s_data[name].stat.alive = (wrapper.data.vehicleState & 1) != 0;
         }
         // Chance
-        if (!StatData.s_empty && Config.s_config.statisticForm.showChances && wrapper.selected == true)
+        if (!Stat.s_empty && Config.s_config.statisticForm.showChances && wrapper.selected == true)
             s_winChances.showWinChances();
 
         // Alternative icon set

@@ -1,41 +1,43 @@
-package net.wg.gui.lobby.tankman 
+package net.wg.gui.lobby.tankman
 {
-    public class CarouselTankmanSkillsModel extends Object
-    {
-        public function CarouselTankmanSkillsModel()
-        {
-            super();
-            return;
-        }
 
-        public static const ROLE_TYPE_COMMON:String="common";
 
-        public var name:String=null;
+   public class CarouselTankmanSkillsModel extends Object
+   {
+          
+      public function CarouselTankmanSkillsModel() {
+         super();
+      }
 
-        public var description:String=null;
+      public static const ROLE_TYPE_COMMON:String = "common";
 
-        public var icon:String="";
+      public var name:String = null;
 
-        public var roleIcon:String="";
+      public var description:String = null;
 
-        public var isActive:Boolean=false;
+      public var icon:String = "";
 
-        public var isCommon:Boolean=false;
+      public var roleIcon:String = "";
 
-        public var isPerk:Boolean=false;
+      public var isActive:Boolean = false;
 
-        public var level:int=-1;
+      public var isCommon:Boolean = false;
 
-        public var userName:String=null;
+      public var isPerk:Boolean = false;
 
-        public var isNewSkill:Boolean=false;
+      public var level:int = -1;
 
-        public var skillsCountForLearn:int=0;
+      public var userName:String = null;
 
-        public var enabled:Boolean=true;
+      public var isNewSkill:Boolean = false;
 
-        public var roleType:String=null;
+      public var skillsCountForLearn:int = 0;
 
-        public var tankmanID:int=-1;
-    }
+      public var enabled:Boolean = true;
+
+      public var roleType:String = null;
+
+      public var tankmanID:int = -1;
+   }
+
 }

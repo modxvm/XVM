@@ -1,31 +1,34 @@
-package net.wg.gui.prebattle.meta 
+package net.wg.gui.prebattle.meta
 {
-    import flash.events.*;
-    
-    public interface ICompaniesWindowMeta extends flash.events.IEventDispatcher
-    {
-        function createCompanyS():void;
+   import flash.events.IEventDispatcher;
 
-        function joinCompanyS(arg1:uint):void;
 
-        function getDivisionsListS():Array;
+   public interface ICompaniesWindowMeta extends IEventDispatcher
+   {
+          
+      function createCompanyS() : void;
 
-        function refreshCompaniesListS(arg1:String, arg2:Boolean, arg3:uint):void;
+      function joinCompanyS(param1:uint) : void;
 
-        function requestPlayersListS(arg1:uint):void;
+      function getDivisionsListS() : Array;
 
-        function showFAQWindowS():void;
+      function refreshCompaniesListS(param1:String, param2:Boolean, param3:uint) : void;
 
-        function getClientIDS():Number;
+      function requestPlayersListS(param1:uint) : void;
 
-        function as_getCompaniesListDP():Object;
+      function showFAQWindowS() : void;
 
-        function as_showPlayersList(arg1:uint):void;
+      function getClientIDS() : Number;
 
-        function as_setDefaultFilter(arg1:String, arg2:Boolean, arg3:uint):void;
+      function as_getCompaniesListDP() : Object;
 
-        function as_setRefreshCoolDown(arg1:Number):void;
+      function as_showPlayersList(param1:uint) : void;
 
-        function as_disableCreateButton(arg1:Boolean):void;
-    }
+      function as_setDefaultFilter(param1:String, param2:Boolean, param3:uint) : void;
+
+      function as_setRefreshCoolDown(param1:Number) : void;
+
+      function as_disableCreateButton(param1:Boolean) : void;
+   }
+
 }

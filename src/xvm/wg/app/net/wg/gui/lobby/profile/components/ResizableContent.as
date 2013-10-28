@@ -1,85 +1,73 @@
-package net.wg.gui.lobby.profile.components 
+package net.wg.gui.lobby.profile.components
 {
-    import flash.geom.*;
-    import scaleform.clik.core.*;
-    
-    public class ResizableContent extends scaleform.clik.core.UIComponent implements net.wg.gui.lobby.profile.components.IResizableContent
-    {
-        public function ResizableContent()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.geom.Point;
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(net.wg.gui.lobby.profile.components.ResizableInvalidationTypes.CURRENT_DIMENSION_INVALID) && this.currentDimension) 
-            {
-                this.applyResizing();
-            }
-            if (isInvalid(net.wg.gui.lobby.profile.components.ResizableInvalidationTypes.ACTIVE_INVALID)) 
-            {
-                this.applyActivation();
-            }
-            return;
-        }
 
-        protected function applyActivation():void
-        {
-            return;
-        }
+   public class ResizableContent extends UIComponent implements IResizableContent
+   {
+          
+      public function ResizableContent() {
+         super();
+      }
 
-        protected function applyResizing():void
-        {
-            return;
-        }
+      protected var currentDimension:Point;
 
-        public function setViewSize(arg1:Number, arg2:Number):void
-        {
-            if (!this.currentDimension) 
-            {
-                this.currentDimension = new flash.geom.Point();
-            }
-            this.currentDimension.x = arg1;
-            this.currentDimension.y = arg2;
-            invalidate(net.wg.gui.lobby.profile.components.ResizableInvalidationTypes.CURRENT_DIMENSION_INVALID);
-            return;
-        }
+      private var _centerOffset:int;
 
-        public function set active(arg1:Boolean):void
-        {
-            this.isActive = arg1;
-            invalidate(net.wg.gui.lobby.profile.components.ResizableInvalidationTypes.ACTIVE_INVALID);
-            return;
-        }
+      private var isActive:Boolean;
 
-        public function get active():Boolean
-        {
-            return this.isActive;
-        }
+      override protected function draw() : void {
+         super.draw();
+         if((isInvalid(ResizableInvalidationTypes.CURRENT_DIMENSION_INVALID)) && (this.currentDimension))
+         {
+            this.applyResizing();
+         }
+         if(isInvalid(ResizableInvalidationTypes.ACTIVE_INVALID))
+         {
+            this.applyActivation();
+         }
+      }
 
-        public function set centerOffset(arg1:int):void
-        {
-            this._centerOffset = arg1;
-            invalidate(net.wg.gui.lobby.profile.components.ResizableInvalidationTypes.CURRENT_DIMENSION_INVALID);
-            return;
-        }
+      protected function applyActivation() : void {
+          
+      }
 
-        public function get centerOffset():int
-        {
-            return this._centerOffset;
-        }
+      protected function applyResizing() : void {
+          
+      }
 
-        public function update(arg1:Object):void
-        {
-            return;
-        }
+      public function setViewSize(param1:Number, param2:Number) : void {
+         if(!this.currentDimension)
+         {
+            this.currentDimension = new Point();
+         }
+         this.currentDimension.x = param1;
+         this.currentDimension.y = param2;
+         invalidate(ResizableInvalidationTypes.CURRENT_DIMENSION_INVALID);
+      }
 
-        protected var currentDimension:flash.geom.Point;
+      public function set active(param1:Boolean) : void {
+         this.isActive = param1;
+         invalidate(ResizableInvalidationTypes.ACTIVE_INVALID);
+      }
 
-        internal var _centerOffset:int;
+      public function get active() : Boolean {
+         return this.isActive;
+      }
 
-        internal var isActive:Boolean;
-    }
+      public function set centerOffset(param1:int) : void {
+         this._centerOffset = param1;
+         invalidate(ResizableInvalidationTypes.CURRENT_DIMENSION_INVALID);
+      }
+
+      public function get centerOffset() : int {
+         return this._centerOffset;
+      }
+
+      public function update(param1:Object) : void {
+          
+      }
+   }
+
 }

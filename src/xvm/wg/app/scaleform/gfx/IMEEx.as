@@ -1,34 +1,31 @@
-package scaleform.gfx 
+package scaleform.gfx
 {
-    import flash.display.*;
-    import flash.events.*;
-    
-    public final class IMEEx extends flash.events.EventDispatcher
-    {
-        public function IMEEx()
-        {
-            super();
-            return;
-        }
+   import flash.events.EventDispatcher;
+   import flash.display.Sprite;
 
-        public static function getIMECandidateListStyle():scaleform.gfx.IMECandidateListStyle
-        {
-            return null;
-        }
 
-        public static function setIMECandidateListStyle(arg1:scaleform.gfx.IMECandidateListStyle):void
-        {
-            return;
-        }
+   public final class IMEEx extends EventDispatcher
+   {
+          
+      public function IMEEx() {
+         super();
+      }
 
-        public static function SendLangBarMessage(arg1:flash.display.Sprite, arg2:String, arg3:String):void
-        {
-            return;
-        }
+      public static function getIMECandidateListStyle() : IMECandidateListStyle {
+         return null;
+      }
 
-        public static function GetOSVersion():String
-        {
-            return null;
-        }
-    }
+      public static function setIMECandidateListStyle(param1:IMECandidateListStyle) : void {
+          
+      }
+
+      public static function SendLangBarMessage(param1:Sprite, param2:String, param3:String) : void {
+          
+      }
+
+      public static function GetOSVersion() : String {
+         return null;
+      }
+   }
+
 }

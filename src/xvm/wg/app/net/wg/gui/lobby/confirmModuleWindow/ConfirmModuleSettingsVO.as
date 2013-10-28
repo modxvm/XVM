@@ -1,19 +1,20 @@
-package net.wg.gui.lobby.confirmModuleWindow 
+package net.wg.gui.lobby.confirmModuleWindow
 {
-    import net.wg.data.daapi.base.*;
-    
-    public class ConfirmModuleSettingsVO extends net.wg.data.daapi.base.DAAPIDataClass
-    {
-        public function ConfirmModuleSettingsVO(arg1:Object)
-        {
-            super(arg1);
-            return;
-        }
+   import net.wg.data.daapi.base.DAAPIDataClass;
 
-        public var title:String="";
 
-        public var submitBtnLabel:String="";
+   public class ConfirmModuleSettingsVO extends DAAPIDataClass
+   {
+          
+      public function ConfirmModuleSettingsVO(param1:Object) {
+         super(param1);
+      }
 
-        public var cancelBtnLabel:String="";
-    }
+      public var title:String = "";
+
+      public var submitBtnLabel:String = "";
+
+      public var cancelBtnLabel:String = "";
+   }
+
 }

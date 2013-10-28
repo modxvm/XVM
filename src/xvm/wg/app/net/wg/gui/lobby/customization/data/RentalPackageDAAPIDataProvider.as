@@ -1,17 +1,18 @@
-package net.wg.gui.lobby.customization.data 
+package net.wg.gui.lobby.customization.data
 {
-    import net.wg.data.daapi.base.*;
-    
-    public class RentalPackageDAAPIDataProvider extends net.wg.data.daapi.base.DAAPIDataProvider
-    {
-        public function RentalPackageDAAPIDataProvider()
-        {
-            super();
-            return;
-        }
+   import net.wg.data.daapi.base.DAAPIDataProvider;
 
-        public var getSelectedPackageIndex:Function;
 
-        public var setSelectedPackageIndex:Function;
-    }
+   public class RentalPackageDAAPIDataProvider extends DAAPIDataProvider
+   {
+          
+      public function RentalPackageDAAPIDataProvider() {
+         super();
+      }
+
+      public var getSelectedPackageIndex:Function;
+
+      public var setSelectedPackageIndex:Function;
+   }
+
 }

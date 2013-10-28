@@ -1,22 +1,21 @@
-package net.wg.gui.components.common.video.advanced 
+package net.wg.gui.components.common.video.advanced
 {
-    import net.wg.gui.components.common.video.*;
-    
-    public class AbstractPlayerController extends Object
-    {
-        public function AbstractPlayerController(arg1:net.wg.gui.components.common.video.SimpleVideoPlayer)
-        {
-            super();
-            this.videoPlayer = arg1;
-            return;
-        }
+   import net.wg.gui.components.common.video.SimpleVideoPlayer;
 
-        public function dispose():void
-        {
-            this.videoPlayer = null;
-            return;
-        }
 
-        protected var videoPlayer:net.wg.gui.components.common.video.SimpleVideoPlayer;
-    }
+   public class AbstractPlayerController extends Object
+   {
+          
+      public function AbstractPlayerController(param1:SimpleVideoPlayer) {
+         super();
+         this.videoPlayer = param1;
+      }
+
+      protected var videoPlayer:SimpleVideoPlayer;
+
+      public function dispose() : void {
+         this.videoPlayer = null;
+      }
+   }
+
 }

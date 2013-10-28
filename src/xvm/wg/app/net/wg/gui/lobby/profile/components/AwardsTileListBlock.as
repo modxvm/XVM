@@ -1,120 +1,102 @@
-package net.wg.gui.lobby.profile.components 
+package net.wg.gui.lobby.profile.components
 {
-    import flash.events.*;
-    import flash.text.*;
-    import scaleform.clik.constants.*;
-    import scaleform.clik.core.*;
-    import scaleform.clik.data.*;
-    
-    public class AwardsTileListBlock extends scaleform.clik.core.UIComponent
-    {
-        public function AwardsTileListBlock()
-        {
-            super();
-            return;
-        }
+   import scaleform.clik.core.UIComponent;
+   import flash.text.TextField;
+   import flash.events.Event;
+   import scaleform.clik.constants.DirectionMode;
+   import scaleform.clik.constants.InvalidationType;
+   import scaleform.clik.data.DataProvider;
 
-        protected override function configUI():void
-        {
-            super.configUI();
-            addEventListener(flash.events.Event.RESIZE, this.tileResizeHandler, false, 0, true);
-            this.tileList.direction = scaleform.clik.constants.DirectionMode.VERTICAL;
-            this.tileList.columnCount = 12;
-            return;
-        }
 
-        protected override function draw():void
-        {
-            super.draw();
-            if (isInvalid(DATA_PROVIDER_INV)) 
-            {
-                this.applyDataChanges();
-            }
-            if (isInvalid(LABEL_INV)) 
-            {
-                this.applyLabel();
-            }
-            if (isInvalid(scaleform.clik.constants.InvalidationType.SIZE)) 
-            {
-                this.applySizeChanges();
-            }
-            return;
-        }
+   public class AwardsTileListBlock extends UIComponent
+   {
+          
+      public function AwardsTileListBlock() {
+         super();
+      }
 
-        protected function applyLabel():void
-        {
-            this.textField.text = this._labelText;
-            return;
-        }
+      protected static const DATA_PROVIDER_INV:String = "dpInv";
 
-        protected function applySizeChanges():void
-        {
-            _height = this.tileList.y + this.tileList.height;
-            return;
-        }
+      protected static const LABEL_INV:String = "lblInv";
 
-        protected function applyDataChanges():void
-        {
-            this.tileList.dataProvider = new scaleform.clik.data.DataProvider(this._dataProvider);
-            invalidate(LABEL_INV);
-            return;
-        }
+      public var textField:TextField;
 
-        internal function tileResizeHandler(arg1:flash.events.Event):void
-        {
+      private var _labelText:String = "";
+
+      public var tileList:ResizableTileList;
+
+      protected var _dataProvider:Array;
+
+      override protected function configUI() : void {
+         super.configUI();
+         addEventListener(Event.RESIZE,this.tileResizeHandler,false,0,true);
+         this.tileList.direction = DirectionMode.VERTICAL;
+         this.tileList.columnCount = 12;
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         if(isInvalid(DATA_PROVIDER_INV))
+         {
+            this.applyDataChanges();
+         }
+         if(isInvalid(LABEL_INV))
+         {
+            this.applyLabel();
+         }
+         if(isInvalid(InvalidationType.SIZE))
+         {
             this.applySizeChanges();
-            return;
-        }
+         }
+      }
 
-        public function set labelText(arg1:String):void
-        {
-            this._labelText = arg1;
-            invalidate(LABEL_INV);
-            return;
-        }
+      protected function applyLabel() : void {
+         this.textField.text = this._labelText;
+      }
 
-        public function get dataProvider():Array
-        {
-            return this._dataProvider;
-        }
+      protected function applySizeChanges() : void {
+         _height = this.tileList.y + this.tileList.height;
+      }
 
-        public function set dataProvider(arg1:Array):void
-        {
-            this._dataProvider = arg1;
-            invalidate(DATA_PROVIDER_INV);
-            return;
-        }
+      protected function applyDataChanges() : void {
+         this.tileList.dataProvider = new DataProvider(this._dataProvider);
+         invalidate(LABEL_INV);
+      }
 
-        public override function dispose():void
-        {
-            if (this.tileList) 
-            {
-                this.tileList.dispose();
-                this.tileList = null;
-            }
-            if (this.dataProvider) 
-            {
-                this.dataProvider = null;
-            }
-            super.dispose();
-            return;
-        }
+      private function tileResizeHandler(param1:Event) : void {
+         this.applySizeChanges();
+      }
 
-        public function get labelText():String
-        {
-            return this._labelText;
-        }
+      public function set labelText(param1:String) : void {
+         this._labelText = param1;
+         invalidate(LABEL_INV);
+      }
 
-        protected static const DATA_PROVIDER_INV:String="dpInv";
+      public function get dataProvider() : Array {
+         return this._dataProvider;
+      }
 
-        protected static const LABEL_INV:String="lblInv";
+      public function set dataProvider(param1:Array) : void {
+         this._dataProvider = param1;
+         invalidate(DATA_PROVIDER_INV);
+      }
 
-        public var textField:flash.text.TextField;
+      override public function dispose() : void {
+         if(this.tileList)
+         {
+            this.tileList.dispose();
+            this.tileList = null;
+         }
+         if(this.dataProvider)
+         {
+            this.dataProvider = null;
+         }
+         super.dispose();
+      }
 
-        internal var _labelText:String="";
+      public function get labelText() : String {
+         return this._labelText;
+      }
+   }
 
-        public var tileList:net.wg.gui.lobby.profile.components.ResizableTileList;
-
-        protected var _dataProvider:Array;
-    }
 }

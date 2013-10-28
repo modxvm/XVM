@@ -1,42 +1,50 @@
-package net.wg.infrastructure.base.meta 
+package net.wg.infrastructure.base.meta
 {
-    import flash.events.*;
-    import net.wg.infrastructure.managers.*;
-    
-    public interface IApplicationMeta extends flash.events.IEventDispatcher
-    {
-        function setLoaderMgrS(arg1:net.wg.infrastructure.base.meta.ILoaderManagerMeta):void;
+   import flash.events.IEventDispatcher;
+   import net.wg.infrastructure.managers.ISoundManager;
+   import net.wg.infrastructure.managers.IContainerManager;
+   import net.wg.infrastructure.managers.IContextMenuManager;
+   import net.wg.infrastructure.managers.IColorSchemeManager;
+   import net.wg.infrastructure.managers.ITooltipMgr;
+   import net.wg.infrastructure.managers.IVoiceChatManager;
 
-        function setGlobalVarsMgrS(arg1:net.wg.infrastructure.base.meta.IGlobalVarsMgrMeta):void;
 
-        function setSoundMgrS(arg1:net.wg.infrastructure.managers.ISoundManager):void;
+   public interface IApplicationMeta extends IEventDispatcher
+   {
+          
+      function setLoaderMgrS(param1:ILoaderManagerMeta) : void;
 
-        function setContainerMgrS(arg1:net.wg.infrastructure.managers.IContainerManager):void;
+      function setGlobalVarsMgrS(param1:IGlobalVarsMgrMeta) : void;
 
-        function setContextMenuMgrS(arg1:net.wg.infrastructure.managers.IContextMenuManager):void;
+      function setSoundMgrS(param1:ISoundManager) : void;
 
-        function setColorSchemeMgrS(arg1:net.wg.infrastructure.managers.IColorSchemeManager):void;
+      function setContainerMgrS(param1:IContainerManager) : void;
 
-        function setTooltipMgrS(arg1:net.wg.infrastructure.managers.ITooltipMgr):void;
+      function setContextMenuMgrS(param1:IContextMenuManager) : void;
 
-        function setStatsStorageS(arg1:net.wg.infrastructure.base.meta.IStatsStorageMeta):void;
+      function setColorSchemeMgrS(param1:IColorSchemeManager) : void;
 
-        function setGuiItemsMgrS(arg1:net.wg.infrastructure.base.meta.IGuiItemsManagerMeta):void;
+      function setTooltipMgrS(param1:ITooltipMgr) : void;
 
-        function setVoiceChatMgrS(arg1:net.wg.infrastructure.managers.IVoiceChatManager):void;
+      function setStatsStorageS(param1:IStatsStorageMeta) : void;
 
-        function setUtilsMgrS(arg1:net.wg.infrastructure.base.meta.IUtilsManagerMeta):void;
+      function setGuiItemsMgrS(param1:IGuiItemsManagerMeta) : void;
 
-        function setGameInputMgrS(arg1:net.wg.infrastructure.base.meta.IGameInputManagerMeta):void;
+      function setVoiceChatMgrS(param1:IVoiceChatManager) : void;
 
-        function handleGlobalKeyEventS(arg1:String):void;
+      function setUtilsMgrS(param1:IUtilsManagerMeta) : void;
 
-        function as_populate():void;
+      function setGameInputMgrS(param1:IGameInputManagerMeta) : void;
 
-        function as_dispose():void;
+      function handleGlobalKeyEventS(param1:String) : void;
 
-        function as_registerManagers():void;
+      function as_populate() : void;
 
-        function as_updateStage(arg1:Number, arg2:Number):void;
-    }
+      function as_dispose() : void;
+
+      function as_registerManagers() : void;
+
+      function as_updateStage(param1:Number, param2:Number) : void;
+   }
+
 }

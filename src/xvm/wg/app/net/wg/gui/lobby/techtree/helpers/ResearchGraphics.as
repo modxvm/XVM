@@ -1,421 +1,411 @@
-package net.wg.gui.lobby.techtree.helpers 
+package net.wg.gui.lobby.techtree.helpers
 {
-    import __AS3__.vec.*;
-    import flash.display.*;
-    import flash.geom.*;
-    import net.wg.gui.lobby.techtree.*;
-    import net.wg.gui.lobby.techtree.constants.*;
-    import net.wg.gui.lobby.techtree.controls.*;
-    import net.wg.gui.lobby.techtree.data.state.*;
-    import net.wg.gui.lobby.techtree.interfaces.*;
-    import net.wg.gui.lobby.techtree.nodes.*;
-    
-    public class ResearchGraphics extends net.wg.gui.lobby.techtree.helpers.LinesGraphics
-    {
-        public function ResearchGraphics()
-        {
-            super();
+   import net.wg.gui.lobby.techtree.nodes.ResearchRoot;
+   import net.wg.gui.lobby.techtree.controls.ExperienceInformation;
+   import net.wg.gui.lobby.techtree.interfaces.IResearchContainer;
+   import net.wg.gui.lobby.techtree.interfaces.IRenderer;
+   import __AS3__.vec.Vector;
+   import flash.geom.Point;
+   import net.wg.gui.lobby.techtree.constants.ColorIndex;
+   import flash.display.DisplayObject;
+   import net.wg.gui.lobby.techtree.TechTreeEvent;
+   import net.wg.gui.lobby.techtree.data.state.NodeStateCollection;
+
+
+   public class ResearchGraphics extends LinesGraphics
+   {
+          
+      public function ResearchGraphics() {
+         super();
+      }
+
+      private static const OUTGOING_LINES_LITERAL:String = "lines";
+
+      private static const TOP_LINES_LITERAL:String = "topLines";
+
+      public var xRatio:Number = 0;
+
+      public var rootRenderer:ResearchRoot;
+
+      public var xpInfo:ExperienceInformation;
+
+      public function get containerEx() : IResearchContainer {
+         return _container as IResearchContainer;
+      }
+
+      public function drawOutgoingLines(param1:IRenderer, param2:Vector.<IRenderer>, param3:Boolean, param4:Boolean) : void {
+         var _loc12_:Point = null;
+         var _loc13_:IRenderer = null;
+         var _loc5_:Number = param2.length;
+         if(_loc5_ == 0)
+         {
             return;
-        }
+         }
+         clearLinesAndArrows(param1,OUTGOING_LINES_LITERAL);
+         var _loc6_:Point = new Point(param1.getOutX(),param1.getY());
+         var _loc7_:Point = new Point(_loc6_.x + this.xRatio,_loc6_.y);
+         var _loc8_:Array = [];
+         var _loc9_:Array = [];
+         var _loc10_:Object = null;
+         var _loc11_:ResearchLineInfo = null;
+         var _loc14_:Number = 0;
+         while(_loc14_ < _loc5_)
+         {
+            _loc13_ = param2[_loc14_];
+            if(_loc13_ != null)
+            {
+               _loc12_ = new Point(_loc13_.getInX() - lineRatio,_loc13_.getY());
+               _loc11_ = new ResearchLineInfo(param1,_loc13_,_loc12_,!_loc13_.isFake());
+               if(_loc6_.y > _loc12_.y)
+               {
+                  _loc8_.push(_loc11_);
+               }
+               else
+               {
+                  if(_loc6_.y < _loc12_.y)
+                  {
+                     _loc9_.push(_loc11_);
+                  }
+                  else
+                  {
+                     if(_loc6_.y == _loc12_.y)
+                     {
+                        _loc10_ = _loc11_;
+                     }
+                  }
+               }
+            }
+            _loc14_++;
+         }
+         var _loc15_:Number = ColorIndex.DEFAULT;
+         var _loc16_:Number = this.drawUpLines(_loc8_,_loc7_,param3,param4,false);
+         var _loc17_:Number = this.drawDownLines(_loc9_,_loc7_,param3,param4,false);
+         if(_loc10_ != null)
+         {
+            _loc13_ = _loc10_.child;
+            if(param4)
+            {
+               _loc15_ = _loc13_.getColorIdxEx(param1);
+            }
+            if(_loc5_ == 1)
+            {
+               drawLine(param1,colorIdxs[_loc15_],_loc6_,_loc10_.point,OUTGOING_LINES_LITERAL);
+               if(_loc10_.drawArrow)
+               {
+                  drawArrowEx(param1,colorIdxs[_loc15_],_loc6_,_loc10_.point,OUTGOING_LINES_LITERAL);
+               }
+            }
+            else
+            {
+               drawLine(param1,colorIdxs[_loc15_],new Point(_loc7_.x + lineRatio,_loc6_.y),_loc10_.point,OUTGOING_LINES_LITERAL);
+               if(_loc10_.drawArrow)
+               {
+                  drawArrowEx(param1,colorIdxs[_loc15_],_loc7_,_loc10_.point,OUTGOING_LINES_LITERAL);
+               }
+               _loc16_ = Math.min(_loc15_,_loc16_);
+            }
+            if(!param3)
+            {
+               this.addNodeStateChangedListener(_loc13_);
+            }
+         }
+         if(_loc5_ > 1 || _loc10_ == null)
+         {
+            drawLine(param1,colorIdxs[Math.min(_loc16_,_loc17_)],_loc6_,_loc7_,OUTGOING_LINES_LITERAL);
+         }
+      }
 
-        public function get containerEx():net.wg.gui.lobby.techtree.interfaces.IResearchContainer
-        {
-            return _container as net.wg.gui.lobby.techtree.interfaces.IResearchContainer;
-        }
-
-        public function drawOutgoingLines(arg1:net.wg.gui.lobby.techtree.interfaces.IRenderer, arg2:__AS3__.vec.Vector.<net.wg.gui.lobby.techtree.interfaces.IRenderer>, arg3:Boolean, arg4:Boolean):void
-        {
-            var loc8:*=null;
-            var loc9:*=null;
-            var loc1:*;
-            if ((loc1 = arg2.length) == 0) 
-            {
-                return;
-            }
-            if (arg3) 
-            {
-                clearLinesAndArrows(arg1, OUTGOING_LINES_LITERAL);
-            }
-            var loc2:*=new flash.geom.Point(arg1.getOutX(), arg1.getY());
-            var loc3:*=new flash.geom.Point(loc2.x + this.xRatio, loc2.y);
-            var loc4:*=[];
-            var loc5:*=[];
-            var loc6:*=null;
-            var loc7:*=null;
-            var loc10:*=0;
-            while (loc10 < loc1) 
-            {
-                if ((loc9 = arg2[loc10]) != null) 
-                {
-                    loc8 = new flash.geom.Point(loc9.getInX() - lineRatio, loc9.getY());
-                    loc7 = new ResearchLineInfo(arg1, loc9, loc8, !loc9.isFake());
-                    if (loc2.y > loc8.y) 
-                    {
-                        loc4.push(loc7);
-                    }
-                    else if (loc2.y < loc8.y) 
-                    {
-                        loc5.push(loc7);
-                    }
-                    else if (loc2.y == loc8.y) 
-                    {
-                        loc6 = loc7;
-                    }
-                }
-                ++loc10;
-            }
-            var loc11:*=net.wg.gui.lobby.techtree.constants.ColorIndex.DEFAULT;
-            var loc12:*=this.drawUpLines(loc4, loc3, arg3, arg4, false);
-            var loc13:*=this.drawDownLines(loc5, loc3, arg3, arg4, false);
-            if (loc6 != null) 
-            {
-                loc9 = loc6.child;
-                if (arg4) 
-                {
-                    loc11 = loc9.getColorIdxEx(arg1);
-                }
-                if (loc1 != 1) 
-                {
-                    drawLine(arg1, colorIdxs[loc11], new flash.geom.Point(loc3.x + lineRatio, loc2.y), loc6.point, OUTGOING_LINES_LITERAL);
-                    if (loc6.drawArrow) 
-                    {
-                        drawArrowEx(arg1, colorIdxs[loc11], loc3, loc6.point, OUTGOING_LINES_LITERAL);
-                    }
-                    loc12 = Math.min(loc11, loc12);
-                }
-                else 
-                {
-                    drawLine(arg1, colorIdxs[loc11], loc2, loc6.point, OUTGOING_LINES_LITERAL);
-                    if (loc6.drawArrow) 
-                    {
-                        drawArrowEx(arg1, colorIdxs[loc11], loc2, loc6.point, OUTGOING_LINES_LITERAL);
-                    }
-                }
-                if (!arg3) 
-                {
-                    this.addNodeStateChangedListener(loc9);
-                }
-            }
-            if (loc1 > 1 || loc6 == null) 
-            {
-                drawLine(arg1, colorIdxs[Math.min(loc12, loc13)], loc2, loc3, OUTGOING_LINES_LITERAL);
-            }
+      public function drawTopLevelLines(param1:IRenderer, param2:Vector.<IRenderer>, param3:Boolean) : void {
+         var _loc5_:Point = null;
+         var _loc8_:IRenderer = null;
+         var _loc16_:* = NaN;
+         var _loc4_:Number = param2.length;
+         if(_loc4_ == 0 || param1 == null)
+         {
             return;
-        }
-
-        public function drawTopLevelLines(arg1:net.wg.gui.lobby.techtree.interfaces.IRenderer, arg2:__AS3__.vec.Vector.<net.wg.gui.lobby.techtree.interfaces.IRenderer>, arg3:Boolean):void
-        {
-            var loc2:*=null;
-            var loc5:*=null;
-            var loc13:*=NaN;
-            var loc1:*;
-            if ((loc1 = arg2.length) == 0 || arg1 == null) 
+         }
+         clearLinesAndArrows(param1,TOP_LINES_LITERAL);
+         if(!param3)
+         {
+            this.addTopStateChangedListener(param1);
+         }
+         var _loc6_:Point = new Point(param1.getInX(),param1.getY());
+         var _loc7_:Point = new Point(_loc6_.x - this.xRatio,_loc6_.y);
+         var _loc9_:Array = [];
+         var _loc10_:Array = [];
+         var _loc11_:Object = null;
+         var _loc12_:ResearchLineInfo = null;
+         var _loc13_:Number = 0;
+         while(_loc13_ < _loc4_)
+         {
+            _loc8_ = param2[_loc13_];
+            if(_loc8_ != null)
             {
-                return;
+               clearLinesAndArrows(_loc8_);
+               _loc5_ = new Point(_loc8_.getOutX(),_loc8_.getY());
+               _loc12_ = new ResearchLineInfo(_loc8_,param1,_loc5_,false);
+               if(_loc5_.y < _loc6_.y)
+               {
+                  _loc9_.push(_loc12_);
+               }
+               else
+               {
+                  if(_loc5_.y > _loc6_.y)
+                  {
+                     _loc10_.push(_loc12_);
+                  }
+                  else
+                  {
+                     if(_loc5_.y == _loc6_.y)
+                     {
+                        _loc12_.drawArrow = true;
+                        _loc11_ = _loc12_;
+                     }
+                  }
+               }
             }
-            clearLinesAndArrows(arg1, TOP_LINES_LITERAL);
-            if (!arg3) 
+            _loc13_++;
+         }
+         var _loc14_:Number = this.drawUpLines(_loc9_,_loc7_,param3,true,true);
+         var _loc15_:Number = this.drawDownLines(_loc10_,_loc7_,param3,true,true);
+         if(_loc11_ != null)
+         {
+            _loc8_ = _loc11_.parent;
+            _loc16_ = param1.getColorIdx(_loc11_.parent.getID());
+            if(_loc4_ == 1)
             {
-                this.addTopStateChangedListener(arg1);
+               drawLine(_loc8_,colorIdxs[_loc16_],_loc11_.point,_loc6_,OUTGOING_LINES_LITERAL);
+               drawArrowEx(_loc8_,colorIdxs[_loc16_],_loc11_.point,_loc6_,OUTGOING_LINES_LITERAL);
             }
-            var loc3:*=new flash.geom.Point(arg1.getInX(), arg1.getY());
-            var loc4:*=new flash.geom.Point(loc3.x - this.xRatio, loc3.y);
-            var loc6:*=[];
-            var loc7:*=[];
-            var loc8:*=null;
-            var loc9:*=null;
-            var loc10:*=0;
-            while (loc10 < loc1) 
+            else
             {
-                if ((loc5 = arg2[loc10]) != null) 
-                {
-                    clearLinesAndArrows(loc5);
-                    loc2 = new flash.geom.Point(loc5.getOutX(), loc5.getY());
-                    loc9 = new ResearchLineInfo(loc5, arg1, loc2, false);
-                    if (loc2.y < loc3.y) 
-                    {
-                        loc6.push(loc9);
-                    }
-                    else if (loc2.y > loc3.y) 
-                    {
-                        loc7.push(loc9);
-                    }
-                    else if (loc2.y == loc3.y) 
-                    {
-                        loc9.drawArrow = true;
-                        loc8 = loc9;
-                    }
-                }
-                ++loc10;
+               drawLine(_loc8_,colorIdxs[_loc16_],_loc11_.point,_loc7_,OUTGOING_LINES_LITERAL);
+               _loc14_ = Math.min(_loc16_,_loc14_);
             }
-            var loc11:*=this.drawUpLines(loc6, loc4, arg3, true, true);
-            var loc12:*=this.drawDownLines(loc7, loc4, arg3, true, true);
-            if (loc8 != null) 
+            if(!param3)
             {
-                loc5 = loc8.parent;
-                loc13 = arg1.getColorIdx(loc8.parent.getID());
-                if (loc1 != 1) 
-                {
-                    drawLine(loc5, colorIdxs[loc13], loc8.point, loc4, OUTGOING_LINES_LITERAL);
-                    loc11 = Math.min(loc13, loc11);
-                }
-                else 
-                {
-                    drawLine(loc5, colorIdxs[loc13], loc8.point, loc3, OUTGOING_LINES_LITERAL);
-                    drawArrowEx(loc5, colorIdxs[loc13], loc8.point, loc3, OUTGOING_LINES_LITERAL);
-                }
-                if (!arg3) 
-                {
-                    this.addTopStateChangedListener(loc5);
-                }
+               this.addTopStateChangedListener(_loc8_);
             }
-            if (loc1 > 1 || loc8 == null) 
+         }
+         if(_loc4_ > 1 || _loc11_ == null)
+         {
+            _loc16_ = Math.min(_loc14_,_loc15_);
+            drawLine(param1,colorIdxs[_loc16_],_loc7_,_loc6_,TOP_LINES_LITERAL);
+            drawArrowEx(param1,colorIdxs[_loc16_],_loc7_,_loc6_,TOP_LINES_LITERAL);
+            if(!param3)
             {
-                loc13 = Math.min(loc11, loc12);
-                drawLine(arg1, colorIdxs[loc13], loc4, loc3, TOP_LINES_LITERAL);
-                drawArrowEx(arg1, colorIdxs[loc13], loc4, loc3, TOP_LINES_LITERAL);
-                if (!arg3) 
-                {
-                    this.addTopStateChangedListener(arg1);
-                }
+               this.addTopStateChangedListener(param1);
             }
-            return;
-        }
+         }
+      }
 
-        public override function setup():void
-        {
-            super.setup();
-            if (this.xpInfo != null) 
+      override public function setup() : void {
+         super.setup();
+         if(this.xpInfo != null)
+         {
+            this.xpInfo.setOwner(this.rootRenderer);
+         }
+      }
+
+      override public function clearUp() : void {
+         var _loc3_:DisplayObject = null;
+         super.clearUp();
+         var _loc1_:Number = 0;
+         var _loc2_:Number = 0;
+         if(this.rootRenderer != null)
+         {
+            _loc2_++;
+         }
+         if(this.xpInfo != null)
+         {
+            _loc2_++;
+         }
+         while(numChildren > _loc2_)
+         {
+            _loc3_ = getChildAt(_loc1_);
+            if(!(_loc3_ == this.rootRenderer) && !(_loc3_ == this.xpInfo))
             {
-                this.xpInfo.setOwner(this.rootRenderer);
+               if(_loc3_  is  IRenderer)
+               {
+                  this.clearUpRenderer(IRenderer(_loc3_));
+               }
+               removeChildAt(_loc1_);
             }
-            return;
-        }
-
-        public override function clearUp():void
-        {
-            var loc3:*=null;
-            super.clearUp();
-            var loc1:*=0;
-            var loc2:*=0;
-            if (this.rootRenderer != null) 
+            else
             {
-                ++loc2;
+               _loc1_++;
             }
-            if (this.xpInfo != null) 
+         }
+      }
+
+      override public function clearUpRenderer(param1:IRenderer) : void {
+         param1.removeEventListener(TechTreeEvent.STATE_CHANGED,this.handleTopLevelStatesChanged);
+         param1.removeEventListener(TechTreeEvent.STATE_CHANGED,this.handleNodesStatesChanged);
+      }
+
+      public function removeReferences() : void {
+         container = null;
+         if(this.xpInfo != null)
+         {
+            this.xpInfo.dispose();
+         }
+      }
+
+      private function drawUpLines(param1:Array, param2:Point, param3:Boolean, param4:Boolean, param5:Boolean) : Number {
+         var _loc7_:IRenderer = null;
+         var _loc8_:IRenderer = null;
+         var _loc11_:Point = null;
+         var _loc12_:Point = null;
+         var _loc13_:ResearchLineInfo = null;
+         var _loc6_:Number = param1.length;
+         var _loc9_:Number = ColorIndex.DEFAULT;
+         var _loc10_:Number = ColorIndex.DEFAULT;
+         param1.sortOn("y",Array.NUMERIC);
+         var _loc14_:Number = 0;
+         while(_loc14_ < _loc6_)
+         {
+            _loc13_ = param1[_loc14_];
+            _loc8_ = _loc13_.child;
+            _loc7_ = _loc13_.parent;
+            if(param4)
             {
-                ++loc2;
+               _loc10_ = _loc8_.getColorIdxEx(_loc7_);
+               _loc9_ = Math.min(_loc9_,_loc10_);
             }
-            while (numChildren > loc2) 
+            _loc11_ = new Point(param2.x,_loc13_.point.y);
+            _loc12_ = new Point(param2.x,(_loc14_ == _loc6_-1?param2.y:param1[_loc14_ + 1].point.y) - lineThickness);
+            drawLine(_loc7_,colorIdxs[_loc10_],_loc11_,_loc13_.point,OUTGOING_LINES_LITERAL);
+            if(_loc13_.drawArrow)
             {
-                loc3 = getChildAt(loc1);
-                if (!(loc3 == this.rootRenderer) && !(loc3 == this.xpInfo)) 
-                {
-                    if (loc3 is net.wg.gui.lobby.techtree.interfaces.IRenderer) 
-                    {
-                        this.clearUpRenderer(net.wg.gui.lobby.techtree.interfaces.IRenderer(loc3));
-                    }
-                    removeChildAt(loc1);
-                    continue;
-                }
-                ++loc1;
+               drawArrowEx(_loc7_,colorIdxs[_loc10_],_loc11_,_loc13_.point,OUTGOING_LINES_LITERAL);
             }
-            return;
-        }
-
-        public override function clearUpRenderer(arg1:net.wg.gui.lobby.techtree.interfaces.IRenderer):void
-        {
-            arg1.removeEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.STATE_CHANGED, this.handleTopLevelStatesChanged);
-            arg1.removeEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.STATE_CHANGED, this.handleNodesStatesChanged);
-            return;
-        }
-
-        public function removeReferences():void
-        {
-            container = null;
-            if (this.xpInfo != null) 
+            drawLine(_loc7_,colorIdxs[_loc9_],_loc11_,_loc12_,OUTGOING_LINES_LITERAL);
+            if(!param3)
             {
-                this.xpInfo.dispose();
+               if(param5)
+               {
+                  this.addTopStateChangedListener(_loc7_);
+               }
+               else
+               {
+                  this.addNodeStateChangedListener(_loc8_);
+               }
             }
-            return;
-        }
+            _loc14_++;
+         }
+         return _loc9_;
+      }
 
-        internal function drawUpLines(arg1:Array, arg2:flash.geom.Point, arg3:Boolean, arg4:Boolean, arg5:Boolean):Number
-        {
-            var loc2:*=null;
-            var loc3:*=null;
-            var loc6:*=null;
-            var loc7:*=null;
-            var loc8:*=null;
-            var loc1:*=arg1.length;
-            var loc4:*=net.wg.gui.lobby.techtree.constants.ColorIndex.DEFAULT;
-            var loc5:*=net.wg.gui.lobby.techtree.constants.ColorIndex.DEFAULT;
-            arg1.sortOn("y", Array.NUMERIC);
-            var loc9:*=0;
-            while (loc9 < loc1) 
+      private function drawDownLines(param1:Array, param2:Point, param3:Boolean, param4:Boolean, param5:Boolean) : Number {
+         var _loc7_:IRenderer = null;
+         var _loc8_:IRenderer = null;
+         var _loc11_:Point = null;
+         var _loc12_:Point = null;
+         var _loc13_:ResearchLineInfo = null;
+         var _loc6_:Number = param1.length;
+         var _loc9_:Number = ColorIndex.DEFAULT;
+         var _loc10_:Number = ColorIndex.DEFAULT;
+         param1.sortOn("y",Array.NUMERIC | Array.DESCENDING);
+         var _loc14_:Number = 0;
+         while(_loc14_ < _loc6_)
+         {
+            _loc13_ = param1[_loc14_];
+            _loc8_ = _loc13_.child;
+            _loc7_ = _loc13_.parent;
+            if(param4)
             {
-                loc3 = (loc8 = arg1[loc9]).child;
-                loc2 = loc8.parent;
-                if (arg4) 
-                {
-                    loc5 = loc3.getColorIdxEx(loc2);
-                    loc4 = Math.min(loc4, loc5);
-                }
-                loc6 = new flash.geom.Point(arg2.x, loc8.point.y);
-                loc7 = new flash.geom.Point(arg2.x, (loc9 != (loc1 - 1) ? arg1[loc9 + 1].point.y : arg2.y) - lineThickness);
-                drawLine(loc2, colorIdxs[loc5], loc6, loc8.point, OUTGOING_LINES_LITERAL);
-                if (loc8.drawArrow) 
-                {
-                    drawArrowEx(loc2, colorIdxs[loc5], loc6, loc8.point, OUTGOING_LINES_LITERAL);
-                }
-                drawLine(loc2, colorIdxs[loc4], loc6, loc7, OUTGOING_LINES_LITERAL);
-                if (!arg3) 
-                {
-                    if (arg5) 
-                    {
-                        this.addTopStateChangedListener(loc2);
-                    }
-                    else 
-                    {
-                        this.addNodeStateChangedListener(loc3);
-                    }
-                }
-                ++loc9;
+               _loc10_ = _loc8_.getColorIdxEx(_loc7_);
+               _loc9_ = Math.min(_loc9_,_loc10_);
             }
-            return loc4;
-        }
-
-        internal function drawDownLines(arg1:Array, arg2:flash.geom.Point, arg3:Boolean, arg4:Boolean, arg5:Boolean):Number
-        {
-            var loc2:*=null;
-            var loc3:*=null;
-            var loc6:*=null;
-            var loc7:*=null;
-            var loc8:*=null;
-            var loc1:*=arg1.length;
-            var loc4:*=net.wg.gui.lobby.techtree.constants.ColorIndex.DEFAULT;
-            var loc5:*=net.wg.gui.lobby.techtree.constants.ColorIndex.DEFAULT;
-            arg1.sortOn("y", Array.NUMERIC | Array.DESCENDING);
-            var loc9:*=0;
-            while (loc9 < loc1) 
+            _loc11_ = new Point(param2.x,_loc13_.point.y);
+            _loc12_ = new Point(param2.x,(_loc14_ == _loc6_-1?param2.y:param1[_loc14_ + 1].point.y) + lineThickness);
+            drawLine(_loc7_,colorIdxs[_loc9_],_loc11_,_loc12_,OUTGOING_LINES_LITERAL);
+            drawLine(_loc7_,colorIdxs[_loc10_],_loc11_,_loc13_.point,OUTGOING_LINES_LITERAL);
+            if(_loc13_.drawArrow)
             {
-                loc3 = (loc8 = arg1[loc9]).child;
-                loc2 = loc8.parent;
-                if (arg4) 
-                {
-                    loc5 = loc3.getColorIdxEx(loc2);
-                    loc4 = Math.min(loc4, loc5);
-                }
-                loc6 = new flash.geom.Point(arg2.x, loc8.point.y);
-                loc7 = new flash.geom.Point(arg2.x, (loc9 != (loc1 - 1) ? arg1[loc9 + 1].point.y : arg2.y) + lineThickness);
-                drawLine(loc2, colorIdxs[loc4], loc6, loc7, OUTGOING_LINES_LITERAL);
-                drawLine(loc2, colorIdxs[loc5], loc6, loc8.point, OUTGOING_LINES_LITERAL);
-                if (loc8.drawArrow) 
-                {
-                    drawArrowEx(loc2, colorIdxs[loc5], loc6, loc8.point, OUTGOING_LINES_LITERAL);
-                }
-                if (!arg3) 
-                {
-                    if (arg5) 
-                    {
-                        this.addTopStateChangedListener(loc2);
-                    }
-                    else 
-                    {
-                        this.addNodeStateChangedListener(loc3);
-                    }
-                }
-                ++loc9;
+               drawArrowEx(_loc7_,colorIdxs[_loc10_],_loc11_,_loc13_.point,OUTGOING_LINES_LITERAL);
             }
-            return loc4;
-        }
-
-        internal function addNodeStateChangedListener(arg1:net.wg.gui.lobby.techtree.interfaces.IRenderer):void
-        {
-            arg1.addEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.STATE_CHANGED, this.handleNodesStatesChanged, false, 0, true);
-            return;
-        }
-
-        internal function addTopStateChangedListener(arg1:net.wg.gui.lobby.techtree.interfaces.IRenderer):void
-        {
-            arg1.addEventListener(net.wg.gui.lobby.techtree.TechTreeEvent.STATE_CHANGED, this.handleTopLevelStatesChanged, false, 0, true);
-            return;
-        }
-
-        internal function handleTopLevelStatesChanged(arg1:net.wg.gui.lobby.techtree.TechTreeEvent):void
-        {
-            if (net.wg.gui.lobby.techtree.data.state.NodeStateCollection.isRedrawResearchLines(arg1.primary)) 
+            if(!param3)
             {
-                this.drawTopLevelLines(this.rootRenderer, this.containerEx.getTopLevel(), true);
+               if(param5)
+               {
+                  this.addTopStateChangedListener(_loc7_);
+               }
+               else
+               {
+                  this.addNodeStateChangedListener(_loc8_);
+               }
             }
-            return;
-        }
+            _loc14_++;
+         }
+         return _loc9_;
+      }
 
-        internal function handleNodesStatesChanged(arg1:net.wg.gui.lobby.techtree.TechTreeEvent):void
-        {
-            var loc1:*=null;
-            var loc2:*=false;
-            var loc3:*=null;
-            var loc4:*=null;
-            var loc5:*=NaN;
-            if (net.wg.gui.lobby.techtree.data.state.NodeStateCollection.isRedrawResearchLines(arg1.primary)) 
+      private function addNodeStateChangedListener(param1:IRenderer) : void {
+         param1.addEventListener(TechTreeEvent.STATE_CHANGED,this.handleNodesStatesChanged,false,0,true);
+      }
+
+      private function addTopStateChangedListener(param1:IRenderer) : void {
+         param1.addEventListener(TechTreeEvent.STATE_CHANGED,this.handleTopLevelStatesChanged,false,0,true);
+      }
+
+      private function handleTopLevelStatesChanged(param1:TechTreeEvent) : void {
+         if(NodeStateCollection.isRedrawResearchLines(param1.primary))
+         {
+            this.drawTopLevelLines(this.rootRenderer,this.containerEx.getTopLevel(),true);
+         }
+      }
+
+      private function handleNodesStatesChanged(param1:TechTreeEvent) : void {
+         var _loc2_:IRenderer = null;
+         var _loc3_:* = false;
+         var _loc4_:Vector.<IRenderer> = null;
+         var _loc5_:IRenderer = null;
+         var _loc6_:* = NaN;
+         if(NodeStateCollection.isRedrawResearchLines(param1.primary))
+         {
+            _loc2_ = param1.target as IRenderer;
+            _loc3_ = this.containerEx.isRootUnlocked();
+            if(_loc2_ != null)
             {
-                loc1 = arg1.target as net.wg.gui.lobby.techtree.interfaces.IRenderer;
-                loc2 = this.containerEx.isRootUnlocked();
-                if (loc1 != null) 
-                {
-                    loc3 = this.containerEx.getParents(loc1);
-                    loc5 = 0;
-                    while (loc5 < loc3.length) 
-                    {
-                        loc4 = loc3[loc5];
-                        this.drawOutgoingLines(loc4, this.containerEx.getChildren(loc4), true, loc2);
-                        ++loc5;
-                    }
-                    this.drawOutgoingLines(loc1, this.containerEx.getChildren(loc1), true, loc2);
-                }
+               _loc4_ = this.containerEx.getParents(_loc2_);
+               _loc6_ = 0;
+               while(_loc6_ < _loc4_.length)
+               {
+                  _loc5_ = _loc4_[_loc6_];
+                  this.drawOutgoingLines(_loc5_,this.containerEx.getChildren(_loc5_),true,_loc3_);
+                  _loc6_++;
+               }
+               this.drawOutgoingLines(_loc2_,this.containerEx.getChildren(_loc2_),true,_loc3_);
             }
-            return;
-        }
+         }
+      }
+   }
 
-        internal static const OUTGOING_LINES_LITERAL:String="lines";
-
-        internal static const TOP_LINES_LITERAL:String="topLines";
-
-        public var xRatio:Number=0;
-
-        public var rootRenderer:net.wg.gui.lobby.techtree.nodes.ResearchRoot;
-
-        public var xpInfo:net.wg.gui.lobby.techtree.controls.ExperienceInformation;
-    }
-}
-
-import flash.geom.*;
-import net.wg.gui.lobby.techtree.interfaces.*;
+}   import flash.geom.Point;
+   import net.wg.gui.lobby.techtree.interfaces.IRenderer;
 
 
-class ResearchLineInfo extends Object
-{
-    public function ResearchLineInfo(arg1:net.wg.gui.lobby.techtree.interfaces.IRenderer, arg2:net.wg.gui.lobby.techtree.interfaces.IRenderer, arg3:flash.geom.Point, arg4:Boolean)
-    {
-        super();
-        this.parent = arg1;
-        this.child = arg2;
-        this.point = arg3;
-        this.drawArrow = arg4;
-        return;
-    }
+   class ResearchLineInfo extends Object
+   {
+          
+      function ResearchLineInfo(param1:IRenderer, param2:IRenderer, param3:Point, param4:Boolean) {
+         super();
+         this.parent = param1;
+         this.child = param2;
+         this.point = param3;
+         this.drawArrow = param4;
+      }
 
-    public function get y():Number
-    {
-        return this.point.y;
-    }
+      public var point:Point;
 
-    public var point:flash.geom.Point;
+      public var parent:IRenderer;
 
-    public var parent:net.wg.gui.lobby.techtree.interfaces.IRenderer;
+      public var child:IRenderer;
 
-    public var child:net.wg.gui.lobby.techtree.interfaces.IRenderer;
+      public var drawArrow:Boolean;
 
-    public var drawArrow:Boolean;
-}
+      public function get y() : Number {
+         return this.point.y;
+      }
+   }
