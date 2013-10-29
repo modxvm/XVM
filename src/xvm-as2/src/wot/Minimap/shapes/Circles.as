@@ -1,3 +1,4 @@
+import com.xvm.Logger;
 import com.xvm.VehicleInfo;
 import wot.PlayersPanel.PlayersPanelProxy;
 import wot.Minimap.dataTypes.Player;
@@ -21,7 +22,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
 
         var player:Player = PlayersPanelProxy.self;
         var vdata:VehicleData = VehicleInfo.getByIcon(player.icon);
-        var circlesCfg:Array = defineCirclesCfg(vdata.key);
+        var circlesCfg:Array = defineCirclesCfg(vdata.key.substr(vdata.nation.length+1).toLowerCase()); // TODO
 
         for (var i in circlesCfg)
         {
