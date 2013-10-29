@@ -61,6 +61,10 @@ package net.wg.gui.cyberSport.controls
 
       override public function setData(param1:Object) : void {
          this._dataChanged = (this.data && param1) && !(param1.unitMgrID == this.data.unitMgrID) || (this.data) && !param1;
+         if(((!this._dataChanged) && (this.data)) && (param1) && (this.data.isEquals(param1)))
+         {
+            return;
+         }
          this.data = param1;
          invalidateData();
       }

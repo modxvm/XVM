@@ -26,7 +26,7 @@ package net.wg.infrastructure.base.meta
 
       function toggleReadyStateRequestS() : void;
 
-      function onSlotsHighlihgtingNeedS() : Array;
+      function onSlotsHighlihgtingNeedS(param1:Number) : Array;
 
       function lockSlotRequestS(param1:int) : void;
 

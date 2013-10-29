@@ -90,9 +90,9 @@ package net.wg.infrastructure.base.meta.impl
          this.toggleReadyStateRequest();
       }
 
-      public function onSlotsHighlihgtingNeedS() : Array {
+      public function onSlotsHighlihgtingNeedS(param1:Number) : Array {
          App.utils.asserter.assertNotNull(this.onSlotsHighlihgtingNeed,"onSlotsHighlihgtingNeed" + Errors.CANT_NULL);
-         return this.onSlotsHighlihgtingNeed();
+         return this.onSlotsHighlihgtingNeed(param1);
       }
 
       public function lockSlotRequestS(param1:int) : void {

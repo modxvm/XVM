@@ -20,6 +20,8 @@ package net.wg.infrastructure.base.meta
 
       function as_setTeamsData(param1:Array, param2:Number) : void;
 
+      function as_updateTeamsData(param1:Object) : void;
+
       function as_setSelectedUnit(param1:Object) : void;
 
       function as_clearSelectedUnit() : void;

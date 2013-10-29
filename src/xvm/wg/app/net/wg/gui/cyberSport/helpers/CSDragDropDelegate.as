@@ -5,6 +5,7 @@ package net.wg.gui.cyberSport.helpers
    import net.wg.infrastructure.interfaces.entity.IUpdatable;
    import net.wg.infrastructure.interfaces.entity.IDropItem;
    import net.wg.data.constants.Errors;
+   import net.wg.gui.cyberSport.vo.UnitCandidateVO;
    import net.wg.gui.cyberSport.controls.SlotDropIndicator;
 
 
@@ -48,11 +49,12 @@ package net.wg.gui.cyberSport.helpers
       }
 
       override public function onBeforeDrop(param1:InteractiveObject, param2:InteractiveObject) : Boolean {
-         if(param2  is  IDropItem)
+         var _loc3_:IDropItem = param2 as IDropItem;
+         if(_loc3_)
          {
-            if(!(IDropItem(param2).data == null) && !IDropItem(param2).data.isCommander)
+            if(!(_loc3_.data == null) && !_loc3_.data.isCommander)
             {
-               s_lastFreeSlots = [].concat(this._highlightingHandler());
+               s_lastFreeSlots = [].concat(this._highlightingHandler(UnitCandidateVO(_loc3_.data).databaseID));
                App.utils.asserter.assertNotNull(s_lastFreeSlots,"_lastFreeSlots" + Errors.CANT_NULL);
                return super.onBeforeDrop(param1,param2);
             }

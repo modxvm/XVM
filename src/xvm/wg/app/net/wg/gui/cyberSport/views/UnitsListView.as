@@ -77,6 +77,11 @@ package net.wg.gui.cyberSport.views
          invalidateData();
       }
 
+      public function as_updateTeamsData(param1:Object) : void {
+         this.unitsList.updateData(param1.toRemove,param1.toUpdate);
+         invalidateData();
+      }
+
       public function as_appendTeamsData(param1:Array) : void {
          this.unitsList.appendData(param1);
          this.unitsList.selectedIndex = -1;
@@ -182,6 +187,7 @@ package net.wg.gui.cyberSport.views
                return;
             }
          }
+         this.as_clearSelectedUnit();
       }
 
       public function as_clearSelectedUnit() : void {

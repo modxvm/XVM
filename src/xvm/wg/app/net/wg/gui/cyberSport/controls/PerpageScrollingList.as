@@ -52,6 +52,45 @@ package net.wg.gui.cyberSport.controls
          this._currentPageIndex = 0;
       }
 
+      public function updateData(param1:Array, param2:Array) : void {
+         var _loc3_:CSCommandVO = null;
+         var _loc4_:Object = null;
+         var _loc6_:* = 0;
+         this.assertArray(param1,DATA_ARG_NAME);
+         this.assertArray(param2,DATA_ARG_NAME);
+         this.totalCommands = this.totalCommands - param1.length;
+         var _loc5_:Array = [];
+         var _loc7_:int = dataProvider.length;
+         _loc6_ = 0;
+         while(_loc6_ < _loc7_)
+         {
+            _loc3_ = dataProvider[_loc6_];
+            if(param1.indexOf(_loc3_.cfdUnitID) != -1)
+            {
+               _loc5_.push(_loc6_);
+            }
+            else
+            {
+               for each (_loc4_ in param2)
+               {
+                  if(_loc4_.cfdUnitID == _loc3_.cfdUnitID)
+                  {
+                     _loc3_.fromHash(_loc4_);
+                  }
+               }
+            }
+            _loc6_++;
+         }
+         _loc7_ = _loc5_.length;
+         _loc6_ = 0;
+         while(_loc6_ < _loc7_)
+         {
+            (dataProvider as Array).splice(_loc5_[_loc6_],1);
+            _loc6_++;
+         }
+         dataProvider.invalidate();
+      }
+
       public function appendData(param1:Array) : void {
          var _loc2_:String = null;
          var _loc3_:CSCommandVO = null;
