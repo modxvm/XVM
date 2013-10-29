@@ -1,4 +1,3 @@
-import com.xvm.Logger;
 import com.xvm.VehicleInfo;
 import wot.PlayersPanel.PlayersPanelProxy;
 import wot.Minimap.dataTypes.Player;
