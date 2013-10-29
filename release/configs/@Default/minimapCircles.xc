@@ -21,7 +21,7 @@
         // Many configuration lines for the same vehicle make many circles.
         // Only artillery top gun range by default.
         // See other vehicle types at:
-        // http://code.google.com/p/wot-xvm/source/browse/trunk/src/xvm/xvm/com/xvm/vehinfo/VehicleInfoData2.as
+        // http://code.google.com/p/wot-xvm/source/browse/trunk/src/xpm/xvmstat/vehinfo_short.py
         // Artillery gun fire range may differ depending on vehicle angle relative to ground
         // and vehicle height positioning relative to target. These factors are not considered.
         // See pics at http://goo.gl/ZqlPa
@@ -29,8 +29,8 @@
         // Специальные круги, зависящие от модели техники.
         // Несколько строк для одной техники делают несколько кругов.
         // По умолчанию в списке только круги дальнобойности артиллерии с топ орудиями.
-        // Названия танков для дополнения брать по ссылке
-        // http://code.google.com/p/wot-xvm/source/browse/trunk/src/xvm/xvm/com/xvm/vehinfo/VehicleInfoData2.as
+        // Названия танков для дополнения брать по ссылке:
+        // http://code.google.com/p/wot-xvm/source/browse/trunk/src/xpm/xvmstat/vehinfo_short.py
         // Дальнобойность арты может меняться в зависимости от углов постановки машины на склонах местности
         // и высоте расположения машины относительно цели. На миникарте эти факторы не учитываются.
         // Подробнее по ссылке: http://goo.gl/ZqlPa
