@@ -48,6 +48,7 @@
     <internalBrowser>False</internalBrowser>
   </movingText>
   <freeXpToTankman>False</freeXpToTankman>
+  <roaming>	True	</roaming>
   <eula>
     <full>
       <lang>ko</lang>
