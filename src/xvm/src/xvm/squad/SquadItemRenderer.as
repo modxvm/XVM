@@ -38,7 +38,7 @@ package xvm.squad
             if (!proxy.data || proxy.data.dummy)
                 return null;
 
-            var vdata:VehicleData = VehicleInfo.getByLocalizedShortName(proxy.model.vShortName);
+            var vdata:VehicleData = VehicleInfo.getByLocalizedShortName(proxy.data.vShortName);
             if (vdata == null)
                 return null;
             return Locale.get("Type") + ": " + Locale.get(vdata.vtype) + "\n" +
