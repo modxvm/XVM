@@ -6,6 +6,7 @@ package xvm.hangar.components.BattleResults
     import flash.text.TextField;
     import flash.text.TextFieldAutoSize;
     import flash.text.TextFormatAlign;
+    import flash.utils.*;
     import net.wg.gui.lobby.battleResults.CommonStats;
     import xvm.hangar.UI.battleResults.UI_BR_SubtaskComponent_UI;
 
@@ -49,9 +50,7 @@ package xvm.hangar.components.BattleResults
 
         private function compactQuests():void
         {
-            // replace quest item renderer class
-            UI_BR_SubtaskComponent_UI; // this make sure it's compiled
-            view.questList.linkage = "xvm.UI.battleResults.UI_BR_SubtaskComponent_UI";
+            view.questList.linkage = getQualifiedClassName(UI_BR_SubtaskComponent_UI);
 
             // hide shadows
             view.upperShadow.visible = false;
