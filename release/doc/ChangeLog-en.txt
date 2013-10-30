@@ -1,4 +1,6 @@
-﻿XVM-dev:
+﻿XVM-5.0.1-test1:
+  * adaptation to WoT 0.8.9
+
   [NEW FUNCTIONS]
   * localization: added Brazilian Portuguese language
   [MACROS]
