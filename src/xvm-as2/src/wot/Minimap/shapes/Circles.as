@@ -21,7 +21,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
 
         var player:Player = PlayersPanelProxy.self;
         var vdata:VehicleData = VehicleInfo.getByIcon(player.icon);
-        var circlesCfg:Array = defineCirclesCfg(vdata.key.substr(vdata.nation.length+1).toLowerCase()); // TODO
+        var circlesCfg:Array = defineCirclesCfg(vdata.key.substr(vdata.nation.length+1).split("-").join("_").toLowerCase()); // TODO
 
         for (var i in circlesCfg)
         {
