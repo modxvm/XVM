@@ -72,7 +72,7 @@ class com.xvm.Macros
             // {{vtype}}
             pdata["vtype"] = VehicleInfo.getVTypeValue(vdata.vtype);
             // {{c:vtype}}
-            pdata["c:vtype"] = GraphicsUtil.GetVTypeColorValue(data.icon, data.vtype);
+            pdata["c:vtype"] = GraphicsUtil.GetVTypeColorValue(data.icon);
 
             // VMM only - static
             // {{squad}}
