@@ -74,14 +74,14 @@ class wot.StatisticForm.BattleStatItemRenderer
         m_iconLoaded = true;
 
         wrapper.col3._width += 100;
-        if (team == Defines.TEAM_ALLY)
+        if (this.team == Defines.TEAM_ALLY)
         {
             wrapper.col3._x -= 100;
             //Logger.addObject(event.target);
         }
         if (!Config.s_config.battle.mirroredVehicleIcons)
         {
-            if (team == Defines.TEAM_ENEMY)
+            if (this.team == Defines.TEAM_ENEMY)
             {
                 wrapper.iconLoader._xscale = -wrapper.iconLoader._xscale;
                 wrapper.iconLoader._x -= 80 - 5; // FIXIT: where I can get image width?
@@ -121,7 +121,7 @@ class wot.StatisticForm.BattleStatItemRenderer
 
         var pname = Utils.GetNormalizedPlayerName(wrapper.data.label);
         var name = Utils.GetPlayerName(wrapper.data.label);
-        Macros.RegisterPlayerData(pname, wrapper.data, team);
+        Macros.RegisterPlayerData(pname, wrapper.data, this.team);
 
         var key = "SF/" + pname + "/" + (Stat.s_data[name] ? Stat.s_data[name].loadstate : "0");
         var saved_icon = wrapper.data.icon;
@@ -141,7 +141,7 @@ class wot.StatisticForm.BattleStatItemRenderer
         if (!m_iconset)
             m_iconset = new IconLoader(this, completeLoad);
         m_iconset.init(wrapper.iconLoader,
-            [ wrapper.data.icon.split(Defines.WG_CONTOUR_ICON_PATH).join(Defines.XVMRES_ROOT + ((team == Defines.TEAM_ALLY)
+            [ wrapper.data.icon.split(Defines.WG_CONTOUR_ICON_PATH).join(Defines.XVMRES_ROOT + ((this.team == Defines.TEAM_ALLY)
             ? Config.s_config.iconset.statisticFormAlly
             : Config.s_config.iconset.statisticFormEnemy)), wrapper.data.icon ]);
 
@@ -158,16 +158,15 @@ class wot.StatisticForm.BattleStatItemRenderer
 
         wrapper.data.icon = saved_icon;
         wrapper.data.label = saved_label;
-        var team = this.team;
 
         // Set Text Fields
         var c:String = "#" + Strings.padLeft(wrapper.textField.textColor.toString(16), 6, '0');
 
         wrapper.textField.htmlText = "<font color='" + c + "'>" + Cache.Get(key + "/n", function() { return Macros.Format(saved_label,
-            team == Defines.TEAM_ALLY ? Config.s_config.statisticForm.formatLeftNick : Config.s_config.statisticForm.formatRightNick,
+            this.team == Defines.TEAM_ALLY ? Config.s_config.statisticForm.formatLeftNick : Config.s_config.statisticForm.formatRightNick,
             { }) } ) + "</font>";
         wrapper.col3.htmlText = "<font color='" + c + "'>" + Cache.Get(key, function() { return Macros.Format(saved_label,
-            team == Defines.TEAM_ALLY ? Config.s_config.statisticForm.formatLeftVehicle : Config.s_config.statisticForm.formatRightVehicle,
+            this.team == Defines.TEAM_ALLY ? Config.s_config.statisticForm.formatLeftVehicle : Config.s_config.statisticForm.formatRightVehicle,
             { }) } ) + "</font>";
 
         if (DEBUG_TIMES)
@@ -198,14 +197,14 @@ class wot.StatisticForm.BattleStatItemRenderer
 
         if (m_clanIcon == null)
         {
-            var x = (!m_iconLoaded || Config.s_config.battle.mirroredVehicleIcons || (team == Defines.TEAM_ALLY))
+            var x = (!m_iconLoaded || Config.s_config.battle.mirroredVehicleIcons || (this.team == Defines.TEAM_ALLY))
                 ? wrapper.iconLoader._x : wrapper.iconLoader._x + 80 - 5;
             m_clanIcon = PlayerInfo.createIcon(wrapper._parent._parent._parent, "clanicon_" + data.uid,
                 cfg, x + wrapper._parent._parent._x + wrapper._parent._x + wrapper._x,
                 wrapper.iconLoader._y + wrapper._parent._parent._y + wrapper._parent._y + wrapper._y,
                 team);
         }
-        PlayerInfo.setSource(m_clanIcon, data.userName, data.clanAbbrev);
+        PlayerInfo.setSource(m_clanIcon, Utils.GetPlayerName(data.userName), data.clanAbbrev);
         m_clanIcon["holder"]._alpha = ((data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) != 0) ? 100 : 50;
     }
 }

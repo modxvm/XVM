@@ -66,7 +66,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     private function mirrorEnemyIcons():Void
     {
-        if (!Config.s_config.battle.mirroredVehicleIcons && team == Defines.TEAM_ENEMY)
+        if (!Config.s_config.battle.mirroredVehicleIcons && this.team == Defines.TEAM_ENEMY)
         {
             wrapper.iconLoader._xscale = -wrapper.iconLoader._xscale;
             wrapper.iconLoader._x -= 80;
@@ -98,7 +98,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
             if (!m_iconset)
                 m_iconset = new IconLoader(this, completeLoad);
             m_iconset.init(wrapper.iconLoader,
-                [ wrapper.data.icon.split(Defines.WG_CONTOUR_ICON_PATH).join(Defines.XVMRES_ROOT + ((team == Defines.TEAM_ALLY)
+                [ wrapper.data.icon.split(Defines.WG_CONTOUR_ICON_PATH).join(Defines.XVMRES_ROOT + ((this.team == Defines.TEAM_ALLY)
                 ? Config.s_config.iconset.playersPanelAlly
                 : Config.s_config.iconset.playersPanelEnemy)), wrapper.data.icon ]);
             wrapper.data.icon = m_iconset.currentIcon;
@@ -124,11 +124,11 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
         if (m_clanIcon == null)
         {
-            var x = (!m_iconLoaded || Config.s_config.battle.mirroredVehicleIcons || (team == Defines.TEAM_ALLY))
+            var x = (!m_iconLoaded || Config.s_config.battle.mirroredVehicleIcons || (this.team == Defines.TEAM_ALLY))
                 ? wrapper.iconLoader._x : wrapper.iconLoader._x + 80;
-            m_clanIcon = PlayerInfo.createIcon(wrapper, "clanicon", cfg, x, wrapper.iconLoader._y, team);
+            m_clanIcon = PlayerInfo.createIcon(wrapper, "clanicon", cfg, x, wrapper.iconLoader._y, this.team);
         }
-        PlayerInfo.setSource(m_clanIcon, data.userName, data.clanAbbrev);
+        PlayerInfo.setSource(m_clanIcon, Utils.GetPlayerName(data.userName), data.clanAbbrev);
         m_clanIcon["holder"]._alpha = ((data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) != 0) ? 100 : 50;
     }
 
