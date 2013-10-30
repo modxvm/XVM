@@ -208,3 +208,31 @@ class wot.StatisticForm.BattleStatItemRenderer
         m_clanIcon["holder"]._alpha = ((data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) != 0) ? 100 : 50;
     }
 }
+/*data: {
+  "igrLabel": "",
+  "uid": 7294494,
+  "position": 7,
+  "denunciations": 5,
+  "userName": "M_r_A[RISER]",
+  "icon": "../maps/icons/vehicle/contour/germany-G_Tiger.png",
+  "teamKiller": false,
+  "vehicleState": 3,
+  "speaking": false,
+  "VIP": false,
+  "vipKilled": 0,
+  "roster": 0,
+  "frags": 0,
+  "vehAction": 0,
+  "vehicle": "G.W. Tiger",
+  "team": "team2",
+  "squad": 0,
+  "level": 9,
+  "himself": true,
+  "vehId": 22644499,
+  "isEnabledInRoaming": false,
+  "muted": false,
+  "isPostmortemView": true,
+  "clanAbbrev": "RISER",
+  "isIGR": false,
+  "label": "Флаттершай - л.."
+}*/
