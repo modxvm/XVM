@@ -106,10 +106,10 @@ class wot.VehicleMarkersManager.log.HpLeft
                 format = formatArr.join(vdata.localizedName);
             formatArr = format.split("{{vehiclename}}");
             if (formatArr.length > 1)
-                format = formatArr.join(vdata.key);
+                format = formatArr.join(vdata.key); // TODO: alter like in Minimap?
             formatArr = format.split("{{vtype}}");
             if (formatArr.length > 1)
-                format = formatArr.join(vdata.vtype);
+                format = formatArr.join(VehicleInfo.getVTypeValue(vdata.vtype));
             formatArr = format.split("{{c:vtype}}");
             if (formatArr.length > 1)
                 format = formatArr.join(GraphicsUtil.GetVTypeColorValue(player.vIconSource));
