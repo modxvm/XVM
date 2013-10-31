@@ -27,6 +27,7 @@ package xvm.squad
         public function setUIConfigured():void
         {
             configUI = true;
+            proxy.vehicleLevelField.alpha = 0; // TODO: use this text field
         }
 
         public function getToolTipData():String

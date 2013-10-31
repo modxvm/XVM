@@ -12,6 +12,6 @@
     "showClan": true,
     // Формат поля информации о танке.
     // Format of vehicle info field.
-    "formatInfoField": ""
+    "formatInfoField": "{{rlevel}}"
   }
 }

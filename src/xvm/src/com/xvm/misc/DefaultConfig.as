@@ -180,7 +180,7 @@ package com.xvm.misc
             var c:CSquad = new CSquad();
             c.enabled = true;                  // Global switch
             c.showClan = true;                 // Show player clan
-            c.formatInfoField = "";  // Format of vehicle info field
+            c.formatInfoField = "{{rlevel}}";  // Format of vehicle info field
             return c;
         }
 

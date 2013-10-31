@@ -123,11 +123,9 @@ class com.xvm.DefaultConfig
                 enableCompanyStatistics: true   // Enable statistics in the company window
             },
             squad: {
-                enabled: true,     // Global switch
-                romanNumbers: true, // Roman level numbers
-                showClan: true,     // Show player clan
-                leftLvlBorder: "",  // Grille [4
-                rightLvlBorder: ""  // Grille 4]
+                enabled: true,                  // Global switch
+                showClan: true,                 // Show player clan
+                formatInfoField: "{{rlevel}}"   // Format of vehicle info field
             },
             userInfo: {
                 showFilters: true,              // Show tank filters
