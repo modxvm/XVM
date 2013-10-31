@@ -270,10 +270,10 @@ class wot.VehicleMarkersManager.log.HitLog
                 format = formatArr.join(vdata.localizedName);
             formatArr = format.split("{{vehiclename}}");
             if (formatArr.length > 1)
-                format = formatArr.join(vdata.key);
+                format = formatArr.join(VehicleInfo.getVIconName(vdata.key));
             formatArr = format.split("{{vtype}}");
             if (formatArr.length > 1)
-                format = formatArr.join(data.vtype);
+                format = formatArr.join(VehicleInfo.getVTypeText(data.vtype));
             formatArr = format.split("{{level}}");
             if (formatArr.length > 1)
                 format = formatArr.join(data.level);

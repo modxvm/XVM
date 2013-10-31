@@ -44,10 +44,10 @@ class wot.Minimap.staticUtils.MinimapMacro
         /** Vehicle system name - usa-M24_Chaffee */
         formatArr = format.split(VEH_NAME);
         if (formatArr.length > 1)
-            format = formatArr.join(vdata.key);
+            format = formatArr.join(VehicleInfo.getVIconName(vdata.key));
         formatArr = format.split(VEH_NAME_ALT);
         if (formatArr.length > 1)
-            format = formatArr.join(vdata.key);
+            format = formatArr.join(VehicleInfo.getVIconName(vdata.key));
 
         /** Vehicle type readable - Chaffee */
         formatArr = format.split(VEH_MACRO);

@@ -68,9 +68,9 @@ class com.xvm.Macros
             // {{vehicle}}
             pdata["vehicle"] = vdata.localizedName;
             // {{vehiclename}} - usa-M24_Chaffee
-            pdata["vehiclename"] = vdata.key; // TODO: alter like in Minimap?
+            pdata["vehiclename"] = VehicleInfo.getVIconName(vdata.key);
             // {{vtype}}
-            pdata["vtype"] = VehicleInfo.getVTypeValue(vdata.vtype);
+            pdata["vtype"] = VehicleInfo.getVTypeText(vdata.vtype);
             // {{c:vtype}}
             pdata["c:vtype"] = GraphicsUtil.GetVTypeColorValue(data.icon);
 

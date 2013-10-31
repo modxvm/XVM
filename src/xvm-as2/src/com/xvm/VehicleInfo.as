@@ -33,12 +33,22 @@ class com.xvm.VehicleInfo
         return instance._getByLocalizedShortName(localizedShortName);
     }
 
-    public static function getVTypeValue(vtype:String):String
+    public static function getVTypeText(vtype:String):String
     {
         // vtype = HT
+        // return: HT text
         if (!vtype || !Config.s_config.texts.vtype[vtype])
             return "";
         return Config.s_config.texts.vtype[vtype];
+    }
+
+    public static function getVIconName(vkey:String):String
+    {
+        // vkey = ussr:KV-220_action
+        // return: ussr-KV-220_action
+        if (!vkey)
+            return "";
+        return vkey.split(":").join("-");
     }
 
     // PRIVATE

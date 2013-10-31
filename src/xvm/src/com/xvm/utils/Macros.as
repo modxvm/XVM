@@ -95,14 +95,14 @@ package com.xvm.utils
             var vdata:VehicleData = VehicleInfo.get(vid);
             // {{vehicle}} - T-34-85
             pdata["vehicle"] = vdata.localizedName;
-            // {{vehiclename}} - ussr:T-34-85
-            pdata["vehiclename"] = vdata.key;
+            // {{vehiclename}} - ussr-T-34-85
+            pdata["vehiclename"] = VehicleInfo.getVIconName(vdata.key);
             // {{level}}
             pdata["level"] = vdata ? String(vdata.level) : "";
             // {{rlevel}}
             pdata["rlevel"] = vdata ? Defines.ROMAN_LEVEL[vdata.level - 1] : "";
             // {{vtype}} - MT
-            pdata["vtype"] = Config.config.texts.vtype[vdata.vtype];
+            pdata["vtype"] = VehicleInfo.getVTypeText(vdata.vtype);
             // {{vtype-l}} - Medium Tank
             pdata["vtype-l"] = Locale.get(vdata.vtype);
             // {{c:vtype}}
