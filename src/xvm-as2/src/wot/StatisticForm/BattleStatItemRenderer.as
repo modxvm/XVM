@@ -159,14 +159,16 @@ class wot.StatisticForm.BattleStatItemRenderer
         wrapper.data.icon = saved_icon;
         wrapper.data.label = saved_label;
 
+        var team:Number = (wrapper.owner._name == "team1") ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY;
+
         // Set Text Fields
         var c:String = "#" + Strings.padLeft(wrapper.textField.textColor.toString(16), 6, '0');
 
         wrapper.textField.htmlText = "<font color='" + c + "'>" + Cache.Get(key + "/n", function() { return Macros.Format(saved_label,
-            team == Defines.TEAM_ALLY ? Config.s_config.statisticForm.formatLeftNick : Config.s_config.statisticForm.formatRightNick,
+            (team == Defines.TEAM_ALLY) ? Config.s_config.statisticForm.formatLeftNick : Config.s_config.statisticForm.formatRightNick,
             { }) } ) + "</font>";
         wrapper.col3.htmlText = "<font color='" + c + "'>" + Cache.Get(key, function() { return Macros.Format(saved_label,
-            team == Defines.TEAM_ALLY ? Config.s_config.statisticForm.formatLeftVehicle : Config.s_config.statisticForm.formatRightVehicle,
+            (team == Defines.TEAM_ALLY) ? Config.s_config.statisticForm.formatLeftVehicle : Config.s_config.statisticForm.formatRightVehicle,
             { }) } ) + "</font>";
 
         if (DEBUG_TIMES)
