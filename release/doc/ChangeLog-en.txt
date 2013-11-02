@@ -1,4 +1,10 @@
-﻿XVM-5.0.1-test1:
+﻿XVM-dev:
+  [NEW FUNCTIONS]
+  * localization: added Japanese language
+
+XVM-5.0.1-test2:
+
+XVM-5.0.1-test1:
   * adaptation to WoT 0.8.9
 
   [NEW FUNCTIONS]
