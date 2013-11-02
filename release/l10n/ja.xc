@@ -4,7 +4,7 @@
 {
   "locale": {
     // Author of translation
-    "XVM_translator": "naokiharu@gmail.com",
+    "XVM_translator": "naoki",
 
     // Ping
     "Initialization": "初期化中",
@@ -18,7 +18,7 @@
     "global": "総合",
     "per-vehicle": "対車両",
     "chanceExperimental": "対経験値",
-    "chanceBattleTier": "Tier",
+    "chanceBattleTier": "戦闘対象Tier",
 
     // Hitlog
     "attack": "攻撃",
@@ -75,7 +75,7 @@
 
     // Squad
     "Vehicle": "車両",
-    "Battle tiers": "戦闘Tiers",
+    "Battle tiers": "戦闘対象Tier",
     "Type": "タイプ",
     "Nation": "国",
     "ussr": "ロシア",
