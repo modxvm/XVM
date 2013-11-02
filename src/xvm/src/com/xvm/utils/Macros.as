@@ -74,9 +74,17 @@ package com.xvm.utils
 
             // check if already registered
             if (dict.hasOwnProperty(name))
-                return;
+            {
+                if (dict[name][vid] == vid)
+                {
+                    return;
+                }
+            }
+            else
+            {
+                dict[name] = new Dictionary();
+            }
 
-            dict[name] = new Dictionary();
             var pdata:Dictionary = dict[name];
 
             var nick:String = modXvmDevLabel(name);
@@ -92,7 +100,10 @@ package com.xvm.utils
             // {{clannb}}
             pdata["clannb"] = clanWithoutBrackets;
 
+            // Next macro unique for vehicle
             var vdata:VehicleData = VehicleInfo.get(vid);
+            // Internal use
+            pdata["vid"] = vid;
             // {{vehicle}} - T-34-85
             pdata["vehicle"] = vdata.localizedName;
             // {{vehiclename}} - ussr-T-34-85

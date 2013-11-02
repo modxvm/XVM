@@ -35,6 +35,9 @@ package xvm.squad
             if (!Config.config.squad.enabled)
                 return null;
 
+            // Hide WG field
+            proxy.vehicleLevelField.alpha = 0;
+
             // Prevent editing empty or "invite" fields
             if (!proxy.data || proxy.data.dummy)
                 return null;
@@ -55,6 +58,9 @@ package xvm.squad
             // Erase field
             if (vehicleTierField != null)
                 vehicleTierField.htmlText = "";
+
+            // Hide WG field
+            proxy.vehicleLevelField.alpha = 0;
 
             // Prevent editing empty or "invite" fields
             if (!proxy.data || proxy.data.dummy)
