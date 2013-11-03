@@ -311,9 +311,7 @@ class _Stat(object):
 
         player = BigWorld.player()
         from avatar import PlayerAvatar
-        team = player.team # FIXIT
-        # player <class 'avatar.PlayerAvatar'>
-        # PlayerAvatar <class 'Avatar.PlayerAvatar'>
+        team = player.team if hasattr(player, 'team') else 0
 
         if self.players is not None:
             # TODO: optimize
