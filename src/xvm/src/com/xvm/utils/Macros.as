@@ -75,10 +75,8 @@ package com.xvm.utils
             // check if already registered
             if (dict.hasOwnProperty(name))
             {
-                if (dict[name][vid] == vid)
-                {
+                if (dict[name]["vid"] == vid)
                     return;
-                }
             }
             else
             {
