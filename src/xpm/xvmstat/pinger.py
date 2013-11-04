@@ -131,7 +131,7 @@ class _Ping(object):
             processes[x['name']] = Popen(args + x['url'].split(':')[0], stdout=PIPE, startupinfo=si)
 
         # Ответ от 178.20.235.151: число байт=32 время=23мс TTL=58
-        pattern = '.*=.*=(\d+)[^\s].*=.*'
+        pattern = '.*=.*=(\d+).*=.*'
 
         return (pattern, processes)
 
