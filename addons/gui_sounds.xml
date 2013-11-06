@@ -28,17 +28,17 @@
           <press>/GUI/buttons/yes1</press>
         </sounds>
         <groups>iconButton
-					iconTextButton
-					okButton
-					messengerButton
-					radioButton
-					checkBox
-					dropDownMenu
-					dropDownItemRenderer
-					maintenanceDDRenderer
-					shellItemRenderer
-					artefactRenderer
-					trainingBtn</groups>
+          iconTextButton
+          okButton
+          messengerButton
+          radioButton
+          checkBox
+          dropDownMenu
+          dropDownItemRenderer
+          maintenanceDDRenderer
+          shellItemRenderer
+          artefactRenderer
+          trainingBtn</groups>
       </positiveCtl>
       <closeCtl>
         <sounds>
@@ -46,7 +46,7 @@
           <press>/GUI/buttons/cancelcloseno</press>
         </sounds>
         <groups>closeWindow
-					cancelButton</groups>
+          cancelButton</groups>
       </closeCtl>
       <minimizeWindow>
         <sounds>
@@ -87,10 +87,10 @@
           <press>/GUI/buttons/tabb</press>
         </sounds>
         <groups>tab
-					accordion
-					arrow
-					contextmenu
-					scrollBtn</groups>
+          accordion
+          arrow
+          contextmenu
+          scrollBtn</groups>
       </tabCtl>
       <rendererNormal>
         <sounds>
@@ -99,14 +99,14 @@
           <press>/GUI/buttons/yes1</press>
         </sounds>
         <groups>itemRenderer
-					squad
-					rendererRecruit
-					shellRenderer
-					techTreeRenderer
-					barracksItemRendererBuy
-					barracksItemRenderer
-					barracksItemRendererEmpty
-					customizationItemRenderer</groups>
+          squad
+          rendererRecruit
+          shellRenderer
+          techTreeRenderer
+          barracksItemRendererBuy
+          barracksItemRenderer
+          barracksItemRendererEmpty
+          customizationItemRenderer</groups>
       </rendererNormal>
     </schemas>
     <overrides>
