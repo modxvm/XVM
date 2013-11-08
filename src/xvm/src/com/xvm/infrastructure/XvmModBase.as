@@ -105,6 +105,7 @@ package com.xvm.infrastructure
 
         private function processView(view:IView, populated:Boolean):void
         {
+            //Logger.add("processView: " + view.as_alias);
             try
             {
                 if (views == null)

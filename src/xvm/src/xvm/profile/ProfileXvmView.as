@@ -8,9 +8,11 @@ package xvm.profile
     import com.xvm.infrastructure.*;
     import com.xvm.misc.*;
     import com.xvm.utils.*;
+    import flash.events.*;
     import net.wg.gui.components.windows.*;
     import net.wg.gui.events.*;
     import net.wg.gui.lobby.profile.*;
+    import net.wg.gui.lobby.profile.pages.summary.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
     import net.wg.gui.lobby.window.*;
     import net.wg.infrastructure.events.*;
@@ -20,9 +22,12 @@ package xvm.profile
 
     public class ProfileXvmView extends XvmViewBase
     {
+        private var _startPageInitialized:Boolean;
+
         public function ProfileXvmView(view:IView)
         {
             super(view);
+            _startPageInitialized = false;
         }
 
         public function get tabNavigator():ProfileTabNavigator
@@ -45,20 +50,21 @@ package xvm.profile
 
         private function init():void
         {
-            //tabNavigator.bar.addEventListener(IndexEvent.INDEX_CHANGE, onTabBarIndexChanged, false, 0, true);
             tabNavigator.viewStack.addEventListener(ViewStackEvent.VIEW_CHANGED, onSectionViewShowed, false, 0, true);
-        }
-
-        private function onTabBarIndexChanged(e:IndexEvent):void
-        {
-            tabNavigator.bar.removeEventListener(IndexEvent.INDEX_CHANGE, onTabBarIndexChanged);
-            App.utils.scheduler.envokeInNextFrame(
-                function():void { tabNavigator.bar.selectedIndex = Config.config.userInfo.startPage - 1; } );
         }
 
         private function onSectionViewShowed(e:ViewStackEvent):void
         {
+            if (e.view is ProfileSummary && !_startPageInitialized)
+            {
+                _startPageInitialized = true;
+                (e.view as ProfileSummary).addEventListener(LifeCycleEvent.ON_AFTER_POPULATE, onAfterPopulateSummary);
+
+                return;
+            }
+
             var playerName:String;
+
             if (e.view is ProfileTechniquePage)
             {
                 var page:ProfileTechniquePage = e.view as ProfileTechniquePage;
@@ -69,8 +75,10 @@ package xvm.profile
                     tp.name = "xvm_extension";
                     page.addChild(tp);
                 }
+                return;
             }
-            else if (e.view is ProfileTechniqueWindow)
+
+            if (e.view is ProfileTechniqueWindow)
             {
                 var window:ProfileTechniqueWindow = e.view as ProfileTechniqueWindow;
                 if (window.getChildByName("xvm_extension") == null)
@@ -80,6 +88,37 @@ package xvm.profile
                     tw.name = "xvm_extension";
                     window.addChild(tw);
                 }
+                return;
+            }
+        }
+
+        // start page workaround
+
+        private function onAfterPopulateSummary(e:LifeCycleEvent):void
+        {
+            Logger.add("onAfterPopulateSummary");
+            try
+            {
+                var ps:ProfileSummary = e.currentTarget as ProfileSummary;
+                ps.removeEventListener(LifeCycleEvent.ON_AFTER_POPULATE, onAfterPopulateSummary);
+                waitProfileSummaryInitialization(ps);
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
+        }
+
+        private function waitProfileSummaryInitialization(ps:ProfileSummary):void
+        {
+            //Logger.add("1: " + ps.tfTotalBattles.text);
+            if (ps.tfTotalBattles.text == "")
+            {
+                App.utils.scheduler.envokeInNextFrame(function():void { waitProfileSummaryInitialization(ps); } );
+            }
+            else
+            {
+                tabNavigator.bar.selectedIndex = Config.config.userInfo.startPage - 1;
             }
         }
     }

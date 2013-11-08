@@ -8,18 +8,18 @@ package net.wg.gui.lobby.techtree.data.state
 
    public class NodeStateCollection extends Object
    {
-          
+
       public function NodeStateCollection() {
          super();
       }
 
-      private static const statePrefixes:Array;
+      private static var statePrefixes:Array;
 
-      private static const animation:AnimationProperties;
+      private static var animation:AnimationProperties;
 
-      private static const nationNodeStates:Vector.<NodeStateItem>;
+      private static var nationNodeStates:Vector.<NodeStateItem>;
 
-      private static const itemStates:Vector.<ResearchStateItem>;
+      private static var itemStates:Vector.<ResearchStateItem>;
 
       public static function getStateProps(param1:uint, param2:Number, param3:Object) : StateProperties {
          var _loc4_:StateProperties = null;
