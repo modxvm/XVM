@@ -56,6 +56,7 @@
   },
   "userInfo": {
      "inHangarFilterEnabled": true,
+     "startPage": 4,
      //"sortColumn": 5,
      "sortColumn": -3,
      "defaultFilterValue": "+all -premium -master -arty"

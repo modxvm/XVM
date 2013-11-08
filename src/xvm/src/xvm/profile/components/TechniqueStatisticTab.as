@@ -10,6 +10,7 @@ package xvm.profile.components
     import net.wg.data.gui_items.dossier.*;
     import net.wg.gui.lobby.profile.components.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
+    import net.wg.gui.lobby.profile.pages.technique.data.ProfileVehicleDossierVO;
 
     public class TechniqueStatisticTab
     {
@@ -31,6 +32,7 @@ package xvm.profile.components
 
         public function TechniqueStatisticTab(proxy:net.wg.gui.lobby.profile.pages.technique.TechniqueStatisticTab)
         {
+            Logger.add("TechniqueStatisticTab::ctor()");
             try
             {
                 this.proxy = proxy;
@@ -87,12 +89,15 @@ package xvm.profile.components
             }
         }
 
-        public function update(data:Dossier):void
+        /* TODO: FIXIT:
+        public function update(raw_data:ProfileVehicleDossierVO):void
         {
-            //Logger.addObject(data);
+            Logger.addObject(raw_data);
 
             try
             {
+                var data:ProfileVehicleDossierVO = raw_data as ProfileVehicleDossierVO;
+
                 if (_data == data)
                     return;
 
@@ -130,6 +135,7 @@ package xvm.profile.components
                 Logger.add(ex.getStackTrace());
             }
         }
+        */
 
         // PRIVATE
 

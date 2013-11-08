@@ -8,15 +8,16 @@ package xvm.profile
     import com.xvm.infrastructure.*;
     import com.xvm.misc.*;
     import com.xvm.utils.*;
+    import flash.display.MovieClip;
     import flash.events.*;
     import net.wg.gui.components.windows.*;
     import net.wg.gui.events.*;
     import net.wg.gui.lobby.profile.*;
-    import net.wg.gui.lobby.profile.pages.summary.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
     import net.wg.gui.lobby.window.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
+    import scaleform.clik.data.DataProvider;
     import scaleform.clik.events.*;
     import xvm.profile.components.*;
 
@@ -50,18 +51,14 @@ package xvm.profile
 
         private function init():void
         {
+            //Logger.addObject(tabNavigator.bar.dataProvider, 2);
+            tabNavigator.bar.addEventListener(IndexEvent.INDEX_CHANGE, initializeStartPage);
             tabNavigator.viewStack.addEventListener(ViewStackEvent.VIEW_CHANGED, onSectionViewShowed, false, 0, true);
         }
 
         private function onSectionViewShowed(e:ViewStackEvent):void
         {
-            if (e.view is ProfileSummary && !_startPageInitialized)
-            {
-                _startPageInitialized = true;
-                (e.view as ProfileSummary).addEventListener(LifeCycleEvent.ON_AFTER_POPULATE, onAfterPopulateSummary);
-
-                return;
-            }
+            //Logger.addObject("onSectionViewShowed: " + e.view);
 
             var playerName:String;
 
@@ -94,31 +91,17 @@ package xvm.profile
 
         // start page workaround
 
-        private function onAfterPopulateSummary(e:LifeCycleEvent):void
+        public function initializeStartPage(e:IndexEvent):void
         {
-            Logger.add("onAfterPopulateSummary");
-            try
+            if (e.index == 0 && !_startPageInitialized)
             {
-                var ps:ProfileSummary = e.currentTarget as ProfileSummary;
-                ps.removeEventListener(LifeCycleEvent.ON_AFTER_POPULATE, onAfterPopulateSummary);
-                waitProfileSummaryInitialization(ps);
-            }
-            catch (ex:Error)
-            {
-                Logger.add(ex.getStackTrace());
-            }
-        }
-
-        private function waitProfileSummaryInitialization(ps:ProfileSummary):void
-        {
-            //Logger.add("1: " + ps.tfTotalBattles.text);
-            if (ps.tfTotalBattles.text == "")
-            {
-                App.utils.scheduler.envokeInNextFrame(function():void { waitProfileSummaryInitialization(ps); } );
-            }
-            else
-            {
-                tabNavigator.bar.selectedIndex = Config.config.userInfo.startPage - 1;
+                tabNavigator.bar.removeEventListener(IndexEvent.INDEX_CHANGE, initializeStartPage);
+                _startPageInitialized = true;
+                var index:int = Config.config.userInfo.startPage - 1;
+                if (index <= 0)
+                    return;
+                //e.stopImmediatePropagation();
+                //tabNavigator.bar.selectedIndex = index;
             }
         }
     }

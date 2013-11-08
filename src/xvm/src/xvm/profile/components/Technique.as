@@ -3,6 +3,7 @@ package xvm.profile.components
     import com.xvm.*;
     import flash.display.*;
     import flash.events.*;
+    import flash.utils.*;
     import net.wg.data.gui_items.dossier.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
     import net.wg.gui.components.advanced.*;
@@ -31,22 +32,22 @@ package xvm.profile.components
                 // override renderer
                 list.itemRenderer = UI_TechniqueRenderer;
 
-                // Add summary item to the first line of technique list
-                techniqueListAdjuster = new TechniqueListAdjuster(page);
+                // TODO: FIXIT: list.addEventListener(TechniqueList.SELECTED_DATA_CHANGED, listSelectedDataChanged);
 
-                // TODO: FIXIT: page.addEventListener(TechniquePageEvent.DATA_STATUS_CHANGED, viewChanged);
+                // Add summary item to the first line of technique list
+                // TODO: FIXIT: techniqueListAdjuster = new TechniqueListAdjuster(page);
 
                 // remove upper/lower shadow
                 page.listComponent.upperShadow.visible = false;
                 page.listComponent.lowerShadow.visible = false;
 
                 // create filter controls
-                filter = null;
-                if (Config.config.userInfo.showFilters)
-                    createFilters();
+                //filter = null;
+                //if (Config.config.userInfo.showFilters)
+                //    createFilters();
 
                 // post init
-                techniqueListAdjuster.addEventListener(Event.INIT, delayedInit);
+                //techniqueListAdjuster.addEventListener(Event.INIT, delayedInit);
             }
             catch (ex:Error)
             {
@@ -71,6 +72,7 @@ package xvm.profile.components
 
         public function setAccountDossier(playerIdStr:String):void
         {
+            //Logger.add("setAccountDossier: " + playerIdStr);
             if (_accountDossier == null)
             {
                 _accountDossier = new AccountDossier(playerIdStr);
@@ -78,9 +80,29 @@ package xvm.profile.components
             }
         }
 
+        private function listSelectedDataChanged():void
+        {
+            //Logger.add("listSelectedDataChanged: " + playerName);
+
+            // TODO: FIXIT: list.removeEventListener(TechniqueList.SELECTED_DATA_CHANGED, listSelectedDataChanged);
+
+            try
+            {
+                // TechniqueStatisticTab
+                var data:Array = page.stackComponent.buttonBar.dataProvider as Array;
+                data[0].linkage = getQualifiedClassName(UI_TechniqueStatisticTab);
+                page.stackComponent.buttonBar.selectedIndex = -1;
+                page.stackComponent.buttonBar.selectedIndex = 0;
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
+        }
+
         private function delayedInit():void
         {
-            //Logger.add("delayedInit");
+            //Logger.add("delayedInit: " + playerName);
             try
             {
                 // userInfo.sortColumn
@@ -117,23 +139,6 @@ package xvm.profile.components
             filter = new FilterControl();
             filter.addEventListener(Event.CHANGE, techniqueListAdjuster.applyFilter);
             page.addChild(filter);
-        }
-
-        protected function viewChanged(e:Event):void
-        {
-            //page.removeEventListener(TechniquePageEvent.DATA_STATUS_CHANGED, viewChanged);
-
-            try
-            {
-                var data:Array = page.stackComponent.buttonBar.dataProvider as Array;
-                data[0].linkage = "xvm.UI.profileSections.UI_TechniqueStatisticTab";
-                page.stackComponent.buttonBar.selectedIndex = -1;
-                page.stackComponent.buttonBar.selectedIndex = 0;
-            }
-            catch (ex:Error)
-            {
-                Logger.add(ex.getStackTrace());
-            }
         }
 
         // PRIVATE

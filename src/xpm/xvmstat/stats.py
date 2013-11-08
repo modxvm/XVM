@@ -180,13 +180,13 @@ class _Stat(object):
         try:
             if self.req['args'][0] == True: # allowNetwork
                 server = XVM_STAT_SERVERS[randint(0, len(XVM_STAT_SERVERS) - 1)]
-                (responseFromServer, duration) = self.loadUrl(server, updateRequest)
+                (response, duration) = self.loadUrl(server, updateRequest)
 
-                if len(responseFromServer) <= 0:
+                if len(response) <= 0:
                     err('Empty response or parsing error')
                     return
 
-                data = json.loads(responseFromServer)
+                data = json.loads(response)
             else:
                 players = []
                 for vehId in self.players:
@@ -197,7 +197,7 @@ class _Stat(object):
                 self.info = data['info'][region]
 
             if 'players' not in data:
-                err('Stat request failed: ' + str(responseFromServer))
+                err('Stat request failed: ' + str(response))
                 return
 
             for stat in data['players']:
@@ -235,12 +235,16 @@ class _Stat(object):
             try:
                 req = "INFO/" + cacheKey
                 server = XVM_STAT_SERVERS[randint(0, len(XVM_STAT_SERVERS) - 1)]
-                responseFromServer, duration = self.loadUrl(server, req)
+                (response, duration) = self.loadUrl(server, req)
 
-                if not responseFromServer:
+                if not response:
                     err('Empty response or parsing error')
                 else:
-                    data = json.loads(responseFromServer)[0]
+                    try:
+                        data = None if response in ('', '[]') else json.loads(response)[0]
+                    except Exception, ex:
+                        err('  Bad answer: ' + response)
+
                     if data is not None:
                         self._fix(data, None if isId else orig_value)
                         if 'nm' in data and '_id' in data:
@@ -269,7 +273,7 @@ class _Stat(object):
         #time.sleep(5)
 
         duration = None
-        responseFromServer = ''
+        response = ''
         startTime = datetime.datetime.now()
         conn = None
         try:
@@ -281,7 +285,7 @@ class _Stat(object):
 
             if resp.status in [200, 202]:
                 # 200 OK, 202 Accepted
-                responseFromServer = resp.read()
+                response = resp.read()
             else:
                 raise Exception('HTTP Error: [%i] %s' % (resp.status, resp.reason) )
             conn.close()
@@ -294,13 +298,13 @@ class _Stat(object):
 
         elapsed = datetime.datetime.now() - startTime
         msec = elapsed.seconds * 1000 + elapsed.microseconds / 1000
-        log("  Time: %d ms, Size: %d bytes" % (msec, len(responseFromServer)), '[INFO]  ')
-        #debug('responseFromServer: ' + responseFromServer)
+        log("  Time: %d ms, Size: %d bytes" % (msec, len(response)), '[INFO]  ')
+        #debug('response: ' + response)
 
-        if not responseFromServer.lower().startswith('onexception'):
+        if not response.lower().startswith('onexception'):
             duration = msec
 
-        return responseFromServer, duration
+        return (response, duration)
 
     def _fix(self, stat, orig_name):
         #self._r(stat, 'id', '_id')
