@@ -4,26 +4,27 @@
 #Part of XVM build system
 #Do not change anything in this file if you are not sure
 
-#0. Define Flex SDK path
-export FLEXSDK="/opt/apache-flex-4.10"
-archive_postfix="_flex4.10"
+#1. Detect WoT version
+pushd config/ > /dev/null
+flex_version=$(cat flex_version)
+wot_version=$(cat wot_version)
+popd > /dev/null
 
-#1. Detect revision
+#2. Detect revision
 pushd ../../ > /dev/null
 revision=$(svnversion | head -c 4)
 popd > /dev/null
 
-#2. Detect WoT version
-pushd config/ > /dev/null
-wot_version=$(cat wot_version)
-popd > /dev/null
+#3. Define Flex SDK path
+export FLEXSDK="/opt/apache-flex-$flex_version"
+archive_postfix="_flex$flex_version"
 
-#3. Build
+#4. Build
 pushd sh > /dev/null
 ./xvm-build.sh
 popd > /dev/null
 
-#4. Copy swfs,config,l10n,docs etc.
+#5. Copy swfs,config,l10n,docs etc.
 mkdir -p ../../temp/"$wot_version"/gui/flash
 mkdir -p ../../temp/"$wot_version"/gui/scaleform
 
@@ -34,11 +35,12 @@ cp -rf ../../bin/* ../../temp/"$wot_version"/gui/scaleform/
 
 cp -rf ../../release/ ../../temp/xvm/
 cp -rf ../../temp/xvm/doc/* ../../temp/
-rm -rf ../../release/*.swf
 
+rm -rf ../../release/*.swf
+rm -rf ../../release/mods/*.swf
 rm -rf ../../bin/*
 
-#5. Build xvm-py
+#6. Build xvm-py
 pushd ../../src/xpm/ > /dev/null
 ./build-all.sh
 popd > /dev/null
@@ -46,11 +48,7 @@ popd > /dev/null
 cp -rf ../../bin/xpm/* ../../temp/"$wot_version"/
 rm -rf ../../bin/*
 
-#del testmod
-
-rm -rf ../../temp/xvm/mods/testmod.swf
-
-#6. Build archive
+#7. Build archive
 echo "$revision" >> ../../temp/"$revision"
 pushd ../../temp/ > /dev/null && zip -9 -r -q "$revision"_xvm"$archive_postfix".zip ./ && popd > /dev/null
 
