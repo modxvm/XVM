@@ -6,13 +6,15 @@ package xvm.autologin
 {
     import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import flash.display.Stage;
-    import net.wg.gui.components.controls.SoundButton;
+    import flash.display.*;
+    import flash.ui.*;
+    import net.wg.gui.components.controls.*;
     import net.wg.gui.intro.*;
     import net.wg.gui.login.impl.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
-    import scaleform.clik.core.UIComponent;
+    import scaleform.clik.constants.*;
+    import scaleform.clik.core.*;
     import scaleform.clik.events.*;
 
     public class AutoLoginXvmView extends XvmViewBase
@@ -59,13 +61,13 @@ package xvm.autologin
 
         private function autoLogin(page:LoginPage):void
         {
-            //Logger.add("draw: sent=" + sent);
-            if (!ready)
-                return;
-            ready = false;
-
             App.utils.scheduler.envokeInNextFrame(function():void
-                { page.form.submit.dispatchEvent(new ButtonEvent(ButtonEvent.CLICK)); });
+            {
+                if (!ready)
+                    return;
+                ready = false;
+                page.dispatchEvent(new InputEvent(InputEvent.INPUT, new InputDetails(null, Keyboard.ENTER, InputValue.KEY_DOWN)));
+            });
         }
 
         private function confirmOldReplays(page:LoginPage):void
