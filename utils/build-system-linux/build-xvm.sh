@@ -30,6 +30,7 @@ mkdir -p ../../temp/"$wot_version"/gui/scaleform
 
 #cp -f ../../bin/as3/*.swf ../../temp/"$wot_version"/gui/flash/
 #rm -rf ../../bin/as3/
+cp -f ../../src/xvm/swf/flash/*.swf ../../temp/"$wot_version"/gui/flash/
 
 cp -rf ../../bin/* ../../temp/"$wot_version"/gui/scaleform/
 
