@@ -13,7 +13,7 @@ rm -rf ../../../src/xvm-as2/include/
 rm -rf ../../../src/xvm-as2/swf/*.swf
 
 ./xvm-swf-build-as3.sh
-./xvm-swf-patch-as3.sh
+#./xvm-swf-patch-as3.sh
 
 ./xvm-swf-patch-as2.sh
 ./xvm-swf-build-as2.sh
