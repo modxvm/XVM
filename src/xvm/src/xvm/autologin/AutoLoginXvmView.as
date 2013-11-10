@@ -16,6 +16,7 @@ package xvm.autologin
     import scaleform.clik.constants.*;
     import scaleform.clik.core.*;
     import scaleform.clik.events.*;
+    import scaleform.clik.ui.*;
 
     public class AutoLoginXvmView extends XvmViewBase
     {
