@@ -14,18 +14,18 @@
 
     // Win chance
     "Chance error": "誤差",
-    "Chance to win": "勝利確率",
+    "Chance to win": "勝利予想",
     "global": "総合",
     "per-vehicle": "対車両",
     "chanceExperimental": "対経験値",
-    "chanceBattleTier": "戦闘対象Tier",
+    "chanceBattleTier": "戦闘Tier",
 
     // Hitlog
     "attack": "攻撃",
-    "fire": "発砲",
+    "fire": "火災",
     "ramming": "体当たり",
     "world_collision": "落下",
-    "Hits": "命中数",
+    "Hits": "命中",
     "Total": "総ダメージ",
     "Last": "直近",
 
@@ -33,10 +33,10 @@
     "hpLeftTitle": "残HP:",
 
     // Capture
-    "enemyBaseCapture": "敵基地を占領中!",
-    "enemyBaseCaptured": "敵基地を占領完了!",
-    "allyBaseCapture": "自基地が敵により占領中!",
-    "allyBaseCaptured": "自基地が敵により占領完了!",
+    "enemyBaseCapture": "敵陣地を占領中!",
+    "enemyBaseCaptured": "敵陣地の占領を完了!",
+    "allyBaseCapture": "味方陣地が敵により占領中!",
+    "allyBaseCaptured": "味方陣地が敵により占領!",
     "Timeleft": "残り時間",
     "Capturers": "車両数",
 

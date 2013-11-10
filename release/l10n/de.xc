@@ -42,7 +42,7 @@
 
     // BattleResults
     "Hit percent": "Trefferquote",
-    "Damage (assisted / own)": "Schaden (Aufklärung / Verursacht)",
+    "Damage (assisted / own)": "Schaden (ermöglicht / verursacht)",
 
     // TeamRenderers
     "Friend": "Freund",
