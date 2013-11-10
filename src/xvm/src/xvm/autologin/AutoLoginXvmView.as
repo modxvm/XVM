@@ -14,7 +14,7 @@ package xvm.autologin
 
     public class AutoLoginXvmView extends XvmViewBase
     {
-        private static var sent:Boolean = false;
+        private static var ready:Boolean = false;
 
         public function AutoLoginXvmView(view:IView)
         {
@@ -31,6 +31,7 @@ package xvm.autologin
             switch (view.as_alias)
             {
                 case "introVideo":
+                    ready = true;
                     if (Config.config.login.skipIntro == true)
                         skipIntroVideo(view as IntroPage);
                     break;
@@ -41,7 +42,7 @@ package xvm.autologin
                     break;
 
                 case "lobby":
-                    sent = true;
+                    ready = false;
                     break;
             }
         }
@@ -54,9 +55,9 @@ package xvm.autologin
         private function autoLogin(page:LoginPage):void
         {
             //Logger.add("draw: sent=" + sent);
-            if (sent)
+            if (!ready)
                 return;
-            sent = true;
+            ready = false;
 
             App.utils.scheduler.envokeInNextFrame(function():void
                 { page.form.submit.dispatchEvent(new ButtonEvent(ButtonEvent.CLICK)); });
