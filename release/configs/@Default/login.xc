@@ -10,6 +10,9 @@
     // Auto enter to the game
     // Автоматический вход в игру
     "autologin": false,
+    // Auto confirm old replays playing
+    // Автоматически подтверждать проигрывание старых реплеев
+    "confirmOldReplays": false,
     // Ping servers
     // Пинг серверов
     "pingServers": {

@@ -64,6 +64,7 @@ package com.xvm.misc
             var c:CLogin = new CLogin();
             c.skipIntro = true;
             c.autologin = false;
+            c.confirmOldReplays = false;
             // Show ping to the servers
             c.pingServers = new CPingServers;
             c.pingServers.enabled = false;

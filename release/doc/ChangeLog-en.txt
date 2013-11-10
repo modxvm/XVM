@@ -1,6 +1,8 @@
 ﻿XVM-dev:
   [NEW FUNCTIONS]
   * localization: added Japanese language
+  * new options:
+    login/confirmOldReplays - Auto confirm old replays playing
 
 XVM-5.0.1-test2:
 

@@ -112,6 +112,7 @@ private function RefreshLoginPage():void
         section = Config.config.login;
         this.p_login.v_skipIntro.value = section.skipIntro;
         this.p_login.v_autologin.value = section.autologin;
+        this.p_login.v_confirmOldReplays.value = section.confirmOldReplays;
 
         section = Config.config.login.pingServers;
         this.p_pingServers_login.v_enabled.value = section.enabled;

@@ -44,6 +44,7 @@
   "login": {
     "skipIntro": true,
     "autologin": true,
+    "confirmOldReplays": true,
     "pingServers": ${"def.pingServers"}
   },
   "hangar": {
