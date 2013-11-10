@@ -13,10 +13,11 @@ package com.xvm
     import flash.system.*;
     import com.xvm.*;
     import com.xvm.io.*;
+    import net.wg.infrastructure.base.AbstractView;
 
     [SWF(width="1", height="1", backgroundColor="#000000")]
 
-    public class Xvm extends MovieClip
+    public class Xvm extends AbstractView
     {
         // hold references to loaded libs (is required?)
         //private var _libraries:Vector.<Loader>;

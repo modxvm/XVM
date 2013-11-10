@@ -69,9 +69,9 @@ copy_xvm_dir()
   }
 }
 
-for n in $FILES_FLASH; do
-  copy_file_flash $n
-done
+#for n in $FILES_FLASH; do
+#  copy_file_flash $n
+#done
 
 for n in $FILES_SCALEFORM; do
   copy_file_scaleform $n

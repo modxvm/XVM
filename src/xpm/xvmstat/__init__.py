@@ -41,6 +41,16 @@ def FlashBeforeDelete(self):
         return
     debug("FlashBeforeDelete: " + self.swf)
 
+def AppAfterCreate(self):
+    #debug('AppAfterCreate')
+    from gui.Scaleform.framework.entities.View import View
+    class XvmViewStub(View):
+        pass
+    from gui.Scaleform.framework import VIEW_TYPE, VIEW_SCOPE, g_entitiesFactories, ViewSettings
+    g_entitiesFactories.addSettings(
+        ViewSettings('xvm', XvmViewStub, '../../../xvm/mods/xvm.swf', VIEW_TYPE.SERVICE_LAYOUT, None, VIEW_SCOPE.DEFAULT))
+    self.loadView('xvm')
+
 #####################################################################
 # Register events
 
@@ -54,9 +64,11 @@ def _RegisterEvents():
     import game
     RegisterEvent(game, 'handleKeyEvent', handleKeyEvent)
 
+    from gui.Scaleform.framework.application import App
+    RegisterEvent(App, 'afterCreate', AppAfterCreate)
+
     #from Avatar import PlayerAvatar
     #RegisterEvent(PlayerAvatar, 'onEnterWorld', onEnterWorld)
     #RegisterEvent(PlayerAvatar, 'onLeaveWorld', onLeaveWorld)
-    pass
 
 BigWorld.callback(0.001, _RegisterEvents)
