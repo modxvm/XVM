@@ -58,7 +58,7 @@ package xvm.hangar.components.BattleLoading
                     return;
 
                 if (playerName == null)
-                    playerName = data.label + (data.clanAbbrev == null || data.clanAbbrev == "" ? "" : "[" + data.clanAbbrev + "]");
+                    playerName = data.label;
 
                 var vdata:VehicleData = VehicleInfo.getByIcon(data.icon);
                 Macros.RegisterMinimalMacrosData(playerName, vdata.vid);
