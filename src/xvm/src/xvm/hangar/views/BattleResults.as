@@ -19,27 +19,23 @@ package xvm.hangar.views
     {
         public function BattleResults(view:IView)
         {
-            Logger.add("BattleResults.as: BattleResults");
             super(view);
         }
 
         public function get page():net.wg.gui.lobby.battleResults.BattleResults
         {
-            Logger.add("BattleResults.as: page()");
             return super.view as net.wg.gui.lobby.battleResults.BattleResults;
 
         }
 
         override public function onAfterPopulate(e:LifeCycleEvent):void
         {
-            Logger.add("BattleResults.as: onAfterPopulate");
             page.view_mc.addEventListener(ViewStackEvent.VIEW_CHANGED, this.onViewChanged);
             page.tabs_mc.addEventListener(IndexEvent.INDEX_CHANGE, this.onTabIndexChange);
         }
 
         override public function onBeforeDispose(e:LifeCycleEvent):void
         {
-            Logger.add("BattleResults.as: onBeforeDispose");
             page.view_mc.removeEventListener(ViewStackEvent.VIEW_CHANGED, this.onViewChanged);
         }
 
@@ -47,7 +43,6 @@ package xvm.hangar.views
 
         private function onViewChanged(e:ViewStackEvent):void
         {
-            Logger.add("BattleResults.as: onViewChanged");
             try
             {
                 if (processedViews.indexOf(e.linkage) != -1)
@@ -57,7 +52,7 @@ package xvm.hangar.views
                 }
 
                 // tabs: CommonStats, TeamStats, DetailsStats
-                Logger.add("View loaded: battleResults." + e.linkage);
+                //Logger.add("View loaded: battleResults." + e.linkage);
                 switch (e.linkage)
                 {
                     case "CommonStats":
