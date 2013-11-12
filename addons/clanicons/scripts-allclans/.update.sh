@@ -24,7 +24,7 @@ update()
 
   errors=0
   while [ 1 ]; do
-    clan=`wget -qc -t 5 -T 10s "http://$host/uc/clans/$1/" -O - 2>/dev/null | \
+    clan=`wget -qc -t 5 -T 10s "http://$host/community/clans/$1/" -O - 2>/dev/null | \
           grep "<title>" | \
           cut -d[ -f2 | \
           cut -d] -f1`
@@ -53,7 +53,7 @@ update()
   done
 
   echo -n "[$clan] => $clan.png"
-  wget -qc -t 5 -T 10s http://cw.$host/media/clans/emblems/clans_${1:0:1}/$1/emblem_64x64.png \
+  wget -qc -t 5 -T 10s http://clans.$host/media/clans/emblems/clans_${1:0:1}/$1/emblem_64x64.png \
        -O ../icons/$dir/res_mods/xvm/res/clanicons/$dir/clan/$clan.png 2>/dev/null
 
   echo " OK"
