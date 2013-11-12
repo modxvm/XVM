@@ -12,11 +12,13 @@ XPM_GAME_VERSIONS  = ["0.8.9"]
 
 import BigWorld
 import GUI
+from gui.shared import events
 
 from gui.mods.xpm import *
 from logger import *
 from XvmStat import g_xvm
 
+_APP_SWF = 'Application.swf'
 _SWFS = [
     'Application.swf',
     'battle.swf',
@@ -35,20 +37,25 @@ def FlashInit(self, swf, className = 'Flash', args = None, path = None):
         return
     debug("FlashInit: " + self.swf)
     self.addExternalCallback('xvm.cmd', lambda *args: g_xvm.onXvmCommand(self, *args))
+    if self.swf == _APP_SWF:
+        self.addListener(events.GUICommonEvent.APP_STARTED, lambda e: AppStarted(self, e))
 
 def FlashBeforeDelete(self):
     if self.swf not in _SWFS:
         return
     debug("FlashBeforeDelete: " + self.swf)
 
-def AppAfterCreate(self):
-    #debug('AppAfterCreate')
+def AppStarted(self, event):
+    #debug('AppStarted')
+
     from gui.Scaleform.framework.entities.View import View
     class XvmViewStub(View):
         pass
+
     from gui.Scaleform.framework import VIEW_TYPE, VIEW_SCOPE, g_entitiesFactories, ViewSettings
     g_entitiesFactories.addSettings(
-        ViewSettings('xvm', XvmViewStub, '../../../xvm/mods/xvm.swf', VIEW_TYPE.SERVICE_LAYOUT, None, VIEW_SCOPE.DEFAULT))
+        ViewSettings('xvm', XvmViewStub, '../../../xvm/mods/xvm.swf', VIEW_TYPE.WINDOW, None, VIEW_SCOPE.GLOBAL))
+    
     self.loadView('xvm')
 
 #####################################################################
@@ -63,12 +70,5 @@ RegisterEvent(Flash, 'beforeDelete', FlashBeforeDelete)
 def _RegisterEvents():
     import game
     RegisterEvent(game, 'handleKeyEvent', handleKeyEvent)
-
-    from gui.Scaleform.framework.application import App
-    RegisterEvent(App, 'afterCreate', AppAfterCreate)
-
-    #from Avatar import PlayerAvatar
-    #RegisterEvent(PlayerAvatar, 'onEnterWorld', onEnterWorld)
-    #RegisterEvent(PlayerAvatar, 'onLeaveWorld', onLeaveWorld)
 
 BigWorld.callback(0.001, _RegisterEvents)

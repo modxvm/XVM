@@ -19,14 +19,15 @@ package com.xvm
 
     public class Xvm extends AbstractView
     {
-        // hold references to loaded libs (is required?)
-        //private var _libraries:Vector.<Loader>;
-
         public function Xvm():void
         {
-            //_libraries = null;
+            focusable = false;
             Config.load(this, init);
+        }
 
+        override protected function nextFrameAfterPopulateHandler():void
+        {
+            visible = false;
         }
 
         private function init(e:Event = null):void
@@ -55,7 +56,6 @@ package com.xvm
                 var list:Array = JSONx.parse(mods) as Array;
                 if (list == null || list.length == 0)
                     return;
-                //_libraries = new Vector.<Loader>();
 
                 var ctx:LoaderContext = new LoaderContext(false, ApplicationDomain.currentDomain);
 
@@ -104,7 +104,6 @@ package com.xvm
                 loaderInfo.removeEventListener(IOErrorEvent.IO_ERROR, onLibLoadError);
                 //Logger.add("[XVM] Mod loaded: " + loaderInfo.url.replace(/^.*\//, ''));
                 var loader:Loader = loaderInfo.loader;
-                //_libraries.push(loader);
                 loader.visible = false;
                 //loader.addEventListener(Event.UNLOAD, onLibUnload);
                 stage.addChild(loader);
@@ -133,9 +132,6 @@ package com.xvm
         private function onLibUnload(e:Event):void
         {
             Logger.add("unload: " + String(e.target));
-            //var idx:int = _libraries.indexOf(e.target);
-            //if (idx > 0)
-            //    _libraries = _libraries.splice(idx, 1);
         }
     }
 }
