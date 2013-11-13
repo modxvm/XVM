@@ -28,9 +28,9 @@ popd > /dev/null
 mkdir -p ../../temp/"$wot_version"/gui/flash
 mkdir -p ../../temp/"$wot_version"/gui/scaleform
 
-#cp -f ../../bin/as3/*.swf ../../temp/"$wot_version"/gui/flash/
-#rm -rf ../../bin/as3/
-cp -f ../../src/xvm/swf/flash/*.swf ../../temp/"$wot_version"/gui/flash/
+#cp -f ../../src/xvm/swf/flash/*.swf ../../temp/"$wot_version"/gui/flash/
+cp -f ../../bin/as3/*.swf ../../temp/"$wot_version"/gui/flash/
+rm -rf ../../bin/as3/
 
 cp -rf ../../bin/* ../../temp/"$wot_version"/gui/scaleform/
 
