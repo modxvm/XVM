@@ -1,4 +1,4 @@
-""" xvm-stat (c) sirmax 2013 """
+""" xvm (c) sirmax 2013 """
 
 #############################
 # Command

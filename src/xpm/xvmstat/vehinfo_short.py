@@ -1,4 +1,4 @@
-""" xvm-stat (c) sirmax 2013 """
+""" xvm (c) sirmax 2013 """
 
 from gui.mods.xpm import *
 from logger import *

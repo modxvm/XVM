@@ -27,6 +27,9 @@ package com.xvm
 
         override protected function nextFrameAfterPopulateHandler():void
         {
+            //Logger.add("nextFrameAfterPopulateHandler");
+            if (this.parent != App.instance)
+                (App.instance as MovieClip).addChild(this);
             visible = false;
         }
 

@@ -1,4 +1,4 @@
-""" xvm-stat (c) sirmax 2013 """
+""" xvm (c) sirmax 2013 """
 
 import json
 import traceback
@@ -28,7 +28,7 @@ NO_LOG_COMMANDS = (
   COMMAND_LOADUSERDATA,
   )
 
-class XvmStat(object):
+class Xvm(object):
     def __init__(self):
         pass
 
@@ -90,10 +90,10 @@ class XvmStat(object):
         return json.dumps(mods) if mods else None
 
 
-g_xvm = XvmStat()
+g_xvm = Xvm()
 
 from . import XPM_MOD_VERSION, XPM_MOD_URL, XPM_GAME_VERSIONS
-log("xvm-stat %s (%s) for WoT %s" % (XPM_MOD_VERSION, XPM_MOD_URL, ", ".join(XPM_GAME_VERSIONS)))
+log("xvm %s (%s) for WoT %s" % (XPM_MOD_VERSION, XPM_MOD_URL, ", ".join(XPM_GAME_VERSIONS)))
 if IS_DEVELOPMENT:
     try:
         from __version__ import __revision__
