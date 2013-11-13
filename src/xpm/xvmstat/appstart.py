@@ -15,16 +15,4 @@ g_entitiesFactories.addSettings(_settings)
 
 def AppStarted(self, event):
     #debug('AppStarted')
-
-    self.containerManager.onViewAddedToContainer += lambda container, pyView: \
-        onViewAddedToContainer(self, container, pyView)
-
     self.loadView(_alias)
-
-
-def onViewAddedToContainer(self, container, pyView):
-    #debug("onViewAddedToContainer: " + pyView.settings.alias)
-    if pyView.settings.alias == _alias:
-        container = self.containerManager.getContainer(_viewType)
-        if container is not None:
-            container.remove(pyView)
