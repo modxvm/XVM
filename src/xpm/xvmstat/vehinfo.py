@@ -51,6 +51,7 @@ def _init():
                 data['localizedFullName'] = descr['userString']
                 data['premium'] = 'premium' in descr['tags']
 
+                data['visRadius'] = _getMaxVisionRadius(item.turrets[0])
                 stockTurret = item.turrets[0][0]
                 topTurret = item.turrets[0][-1]
                 data['hpStock'] = item.hull['maxHealth'] + stockTurret['maxHealth']
@@ -76,6 +77,14 @@ def _init():
     #pprint(res)
     return json.dumps(res)
 
+
+def _getMaxVisionRadius(turrets):
+    maxRadius = 0
+    for turret in turrets:
+        radius = int(turret['circularVisionRadius'])
+        if maxRadius < radius:
+            maxRadius = radius
+    return maxRadius
 
 def _getTurretType(item, nation):
     stock = item.turrets[0][0]
@@ -105,9 +114,9 @@ def _getTurretType(item, nation):
 def _getMaxGunPrice(nation, guns):
     maxPrice = 0
     for gun in guns:
-       price = _getGunPrice(nation, gun['name'])
-       if maxPrice < price:
-          maxPrice = price
+        price = _getGunPrice(nation, gun['name'])
+        if maxPrice < price:
+            maxPrice = price
     return maxPrice
 
 def _getGunPrice(nation, gunName):

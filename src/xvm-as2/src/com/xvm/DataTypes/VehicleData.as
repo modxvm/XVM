@@ -7,6 +7,7 @@
     public var vclass:String;
     public var nation:String;
     public var premium:Boolean;
+    public var visRadius:Number;
     public var hpStock:Number;
     public var hpTop:Number;
 
