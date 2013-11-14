@@ -4,52 +4,52 @@
 {
   "locale": {
     // Author of translation
-    "XVM_translator": "Mikael Palokangas, Seula and Taifuuni",
+    "XVM_translator": "Mikael Palokangas, Seula, Taifuuni and Tuomas Rantalainen",
 
     // Ping
     "Initialization": "Alustus",
 
     // BattleLoading
-    "New version available": "Uusi versio saatavilla",
+    "New version available": "Uusi versio on saatavilla",
 
     // Win chance
-    "Chance error": "Virhemahdollisuus",
-    "Chance to win": "Voittomahdollisuus",
-    "global": "yleinen",
-    "per-vehicle": "vaunujen mukaan",
-    "chanceExperimental": "exp",
+    "Chance error": "Todennäköisyyden epävarmuus",
+    "Chance to win": "Voittotodennäköisyys",
+    "global": "globaali",
+    "per-vehicle": "ajoneuvokohtainen",
+    "chanceExperimental": "kokeellinen",
     "chanceBattleTier": "T",
 
     // Hitlog
-    "attack": "osuttu",
-    "fire": "sytytetty tuleen",
-    "ramming": "törmätty",
+    "attack": "osuma",
+    "fire": "tulipalo",
+    "ramming": "törmäys",
     "world_collision": "putoaminen",
-    "Hits": "Osumia",
-    "Total": "Summa",
+    "Hits": "Osumat",
+    "Total": "Yhteensä",
     "Last": "Viimeisin",
 
     // Hp Left
-    "hpLeftTitle": "Osumapisteitä jäljellä:",
+    "hpLeftTitle": "Jäljellä olevat kestopisteet:",
 
     // Capture
-    "enemyBaseCapture": "Vihollisen tukikohtaa vallataan!",
-    "enemyBaseCaptured": "Vihollisen tukikohta vallattu!",
-    "allyBaseCapture": "Omaa tukikohtaa vallataan!",
-    "allyBaseCaptured": "Oma tukikohta vallattu!",
+    "enemyBaseCapture": "Omat valtaavat tukikohtaa!",
+    "enemyBaseCaptured": "Omat valtasivat tukikohdan!!",
+    "allyBaseCapture": "Viholliset valtaavat tukikohtaanne!",
+    "allyBaseCaptured": "Viholliset valtasivat tukikohtanne!",
     "Timeleft": "Aikaa jäljellä",
     "Capturers": "Valtaajia",
 
     // BattleResults
     "Hit percent": "Osumaprosentti",
-    "Damage (assisted / own)": "Vahinkoa (autettu / itse)",
+    "Damage (assisted / own)": "Vahinko (avustettu / aiheutettu)",
 
     // TeamRenderers
-    "Friend": "Kaveri",
-    "Ignored": "Estetty",
-    "unknown": "tuntematon",
-    "Fights": "Taisteluita",
-    "Wins": "Voittoja",
+    "Friend": "Liittolainen",
+    "Ignored": "Sivuutettu",
+    "unknown": "ei tietoa",
+    "Fights": "Taistelut",
+    "Wins": "Voitot",
     "Data was updated at": "Tiedot päivitetty",
     "Load statistics": "Lataa tilastot",
 
@@ -59,28 +59,30 @@
     "WN6": "WN6",
     "EFF": "EFF",
     "updated": "päivitetty",
-    " to ": " ",
-    "avg": "keskiarvo",
-    "top": "korkein",
-    "draws": "tasapelejä",
-    "Specific damage (Avg dmg / HP)": "Erityistä vahinkoa (Keskim. vah. / HP)",
-    "Capture points": "Valtauspisteitä",
-    "Defence points": "Puolustuspisteitä",
+    " to ": " to ",
+    "avg": "keskim.",
+    "top": "ylin",
+    "draws": "tasapelit",
+    "Specific damage (Avg dmg / HP)": "Suhteellinen vahinko (Keskim. vahinko / KP)",
+    "Capture points": "Valtauspisteet",
+    "Defence points": "Puolustuspisteet",
     "Filter": "Suodatin",
 
     // Crew
-    "PutOwnCrew": "Aseta vaunun oma miehistö",
+    "PutOwnCrew": "Aseta oma miehistö",
     "PutBestCrew": "Aseta paras miehistö",
-    "PutClassCrew": "Aseta saman vaunutyypin miehistö",
+    "PutClassCrew": "Aseta saman luokan miehistö",
 
     // Squad
-    "Vehicle": "Vaunu",
+    "Vehicle": "Ajoneuvo",
     "Battle tiers": "Taistelutasot",
+    "Type": "Tyyppi",
+    "Nation": "Kansallisuus",
     "ussr": "Neuvostoliitto",
     "germany": "Saksa",
     "usa": "USA",
     "france": "Ranska",
-    "uk": "Iso-Britannia",
+    "uk": "Britannia",
     "china": "Kiina",
     "japan": "Japani",
     "HT": "HT",

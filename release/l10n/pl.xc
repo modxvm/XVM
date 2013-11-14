@@ -4,7 +4,7 @@
 {
   "locale": {
     // Author of translation
-    "XVM_translator": "wRR(updated by shogomad)",
+    "XVM_translator": "wRR(updated by shogomad, jerry1333)",
 
     // Ping
     "Initialization": "Inicjalizacja",
@@ -25,9 +25,9 @@
     "fire": "pożar",
     "ramming": "taranowanie",
     "world_collision": "upadek",
-    "Hits": "Hits",
-    "Total": "Total",
-    "Last": "Last",
+    "Hits": "Trafień",
+    "Total": "Łącznie",
+    "Last": "Ostatnie",
 
     // Hp Left
     "hpLeftTitle": "Pozostałe HP przeciwników:",
@@ -92,6 +92,6 @@
     "SPG": "SPG",
 
     // VehicleMarkersManager
-    "blownUp": "Blown-up!"
+    "blownUp": "Wybuchnął!"
   }
 }
