@@ -88,13 +88,13 @@ def _getRanges(turret, nation, vclass):
 
     for shot in shots:
         radius = int(shot['maxDistance'])
-        if firingRadius < radius
+        if firingRadius < radius:
             firingRadius = radius
 
         if shot['shell']['kind'] == 'HIGH_EXPLOSIVE' and vclass == 'SPG':
             #pitchLimit = min(45, -int(ResMgr.openSection(xmlPath + '/shared/' + gun['name'])['pitchLimits'][0]))
             radius = int(pow(shot['speed'], 2) / shot['gravity'])
-            if artyRadius < radius
+            if artyRadius < radius:
                 artyRadius = radius
 
     return (visionRadius, firingRadius, artyRadius)
