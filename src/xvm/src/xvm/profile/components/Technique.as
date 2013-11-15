@@ -25,6 +25,7 @@ package xvm.profile.components
         {
             try
             {
+                this.name = "xvm_extension";
                 this._page = page;
                 this._playerName = playerName;
                 this._accountDossier = null;

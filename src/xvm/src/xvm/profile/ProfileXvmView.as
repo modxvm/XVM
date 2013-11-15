@@ -68,16 +68,12 @@ package xvm.profile
                 return;
             }
 
-            var playerName:String;
-
             if (e.view is ProfileTechniquePage)
             {
                 var page:ProfileTechniquePage = e.view as ProfileTechniquePage;
                 if (page.getChildByName("xvm_extension") == null)
                 {
-                    playerName = Globals[Globals.NAME];
-                    var tp:TechniquePage = new TechniquePage(page, playerName);
-                    tp.name = "xvm_extension";
+                    var tp:TechniquePage = new TechniquePage(page, Globals[Globals.NAME]);
                     page.addChild(tp);
                 }
                 return;
@@ -88,9 +84,13 @@ package xvm.profile
                 var window:ProfileTechniqueWindow = e.view as ProfileTechniqueWindow;
                 if (window.getChildByName("xvm_extension") == null)
                 {
-                    playerName = WGUtils.GetPlayerName(((view as ProfileWindow).window as Window).title);
-                    var tw:TechniqueWindow = new TechniqueWindow(window, playerName);
-                    tw.name = "xvm_extension";
+                    // get player name from window title
+                    var playerName:String = WGUtils.GetPlayerName(((view as ProfileWindow).window as Window).title);
+
+                    // get player id from the view name.
+                    var playerId:int = parseInt(view.as_name.replace("window_", ""));
+
+                    var tw:TechniqueWindow = new TechniqueWindow(window, playerName, playerId);
                     window.addChild(tw);
                 }
                 return;
@@ -113,10 +113,13 @@ package xvm.profile
                 return;
             }
 
+            //Logger.addObject(summaryPage);
+
             _startPageInitialized = true;
             var index:int = Config.config.userInfo.startPage - 1;
             if (index <= 0)
                 return;
+
             tabNavigator.bar.selectedIndex = index;
         }
     }
