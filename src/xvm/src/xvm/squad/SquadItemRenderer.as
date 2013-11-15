@@ -70,20 +70,20 @@ package xvm.squad
             if (!configUI)
                 return;
 
-            // Remove clan tag from player name
-            if (Config.config.squad.showClan == false)
-                proxy.data.fullName = proxy.data.userName;
-
             // Display vehicle info
             var vdata:VehicleData = VehicleInfo.getByLocalizedShortName(proxy.data.vShortName);
             if (vdata != null)
             {
                 if (vehicleTierField == null)
                     createVehicleTierField();
-                Macros.RegisterMinimalMacrosData(proxy.data.userName, vdata.vid);
+                Macros.RegisterMinimalMacrosData(proxy.data.fullName, vdata.vid);
                 vehicleTierField.htmlText = "<p class='xvm_vehicleTier' align='right'>" +
-                    Macros.Format(proxy.data.userName, Config.config.squad.formatInfoField) + "</p>";
+                    Macros.Format(proxy.data.fullName, Config.config.squad.formatInfoField) + "</p>";
             }
+
+            // Remove clan tag from player name
+            if (Config.config.squad.showClan == false)
+                proxy.data.fullName = proxy.data.userName;
         }
 
         // -- Private
