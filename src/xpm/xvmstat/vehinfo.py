@@ -11,6 +11,7 @@ def getVehicleInfoData():
 # PRIVATE
 
 from pprint import pprint
+from math import sin
 
 import json
 import traceback
@@ -51,12 +52,12 @@ def _init():
                 data['localizedFullName'] = descr['userString']
                 data['premium'] = 'premium' in descr['tags']
 
-                data['visRadius'] = _getMaxVisionRadius(item.turrets[0])
                 stockTurret = item.turrets[0][0]
                 topTurret = item.turrets[0][-1]
                 data['hpStock'] = item.hull['maxHealth'] + stockTurret['maxHealth']
                 data['hpTop'] = item.hull['maxHealth'] + topTurret['maxHealth']
                 data['turret'] = _getTurretType(item, nation)
+                (data['visRadius'], data['firingRadius'], data['artyRadius']) = _getRanges(topTurret, data['nation'], data['vclass'])
 
                 (data['tierLo'], data['tierHi']) = getTiers(data['level'], data['vclass'], data['key'])
 
@@ -77,14 +78,26 @@ def _init():
     #pprint(res)
     return json.dumps(res)
 
+def _getRanges(turret, nation, vclass):
+    visionRadius = firingRadius = artyRadius = 0
+    gun = turret['guns'][-1]
+    shots = gun['shots']
+    xmlPath = _VEHICLE_TYPE_XML_PATH + nation + '/components/guns.xml'
 
-def _getMaxVisionRadius(turrets):
-    maxRadius = 0
-    for turret in turrets:
-        radius = int(turret['circularVisionRadius'])
-        if maxRadius < radius:
-            maxRadius = radius
-    return maxRadius
+    visionRadius = int(turret['circularVisionRadius'])
+
+    for shot in shots:
+        radius = int(shot['maxDistance'])
+        if firingRadius < radius
+            firingRadius = radius
+
+        if shot['shell']['kind'] == 'HIGH_EXPLOSIVE' and vclass == 'SPG':
+            #pitchLimit = min(45, -int(ResMgr.openSection(xmlPath + '/shared/' + gun['name'])['pitchLimits'][0]))
+            radius = int(pow(shot['speed'], 2) / shot['gravity'])
+            if artyRadius < radius
+                artyRadius = radius
+
+    return (visionRadius, firingRadius, artyRadius)
 
 def _getTurretType(item, nation):
     stock = item.turrets[0][0]

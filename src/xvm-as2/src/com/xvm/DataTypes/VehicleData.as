@@ -7,9 +7,12 @@
     public var vclass:String;
     public var nation:String;
     public var premium:Boolean;
-    public var visRadius:Number;
+
     public var hpStock:Number;
     public var hpTop:Number;
+    public var visRadius:Number;
+    public var firingRadius:Number;
+    public var artyRadius:Number;
 
     public var tierLo:Number;
     public var tierHi:Number;
