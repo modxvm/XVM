@@ -10,6 +10,7 @@ package xvm.profile
     import com.xvm.utils.*;
     import flash.display.MovieClip;
     import flash.events.*;
+    import flash.utils.*;
     import net.wg.gui.components.windows.*;
     import net.wg.gui.events.*;
     import net.wg.gui.lobby.profile.*;
@@ -109,7 +110,7 @@ package xvm.profile
 
             if ((summaryPage.footer as UserDateFooter).textDates.htmlText == "")
             {
-                App.utils.scheduler.envokeInNextFrame(initializeStartPage);
+                setTimeout(initializeStartPage, 1); // Start page have strange behavior when using App.utils.scheduler.envokeInNextFrame()
                 return;
             }
 
