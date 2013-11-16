@@ -11,7 +11,7 @@ def getVehicleInfoData():
 # PRIVATE
 
 from pprint import pprint
-from math import sin
+from math import sin, radians
 
 import json
 import traceback
@@ -80,22 +80,26 @@ def _init():
 
 def _getRanges(turret, nation, vclass):
     visionRadius = firingRadius = artyRadius = 0
+    gunsInfoPath = _VEHICLE_TYPE_XML_PATH + nation + '/components/guns.xml/shared/'
+
+    # Turret-dependent
+    visionRadius = int(turret['circularVisionRadius']) # 240..420
     gun = turret['guns'][-1]
+
+    # Gun-dependent
     shots = gun['shots']
-    xmlPath = _VEHICLE_TYPE_XML_PATH + nation + '/components/guns.xml'
-
-    visionRadius = int(turret['circularVisionRadius'])
-
     for shot in shots:
         radius = int(shot['maxDistance'])
         if firingRadius < radius:
-            firingRadius = radius
+            firingRadius = radius # 10000, 720, 395, 360, 350
 
-        if shot['shell']['kind'] == 'HIGH_EXPLOSIVE' and vclass == 'SPG':
-            #pitchLimit = min(45, -int(ResMgr.openSection(xmlPath + '/shared/' + gun['name'])['pitchLimits'][0]))
-            radius = int(pow(shot['speed'], 2) / shot['gravity'])
+        if vclass == 'SPG' and shot['shell']['kind'] == 'HIGH_EXPLOSIVE':
+            pitchLimit = ResMgr.openSection(gunsInfoPath + gun['name']).readInt('pitchLimits')
+            pitchLimit = min(45, -pitchLimit) # -35..-65
+
+            radius = int(pow(shot['speed'], 2) * sin(radians(2 * pitchLimit)) / shot['gravity'])
             if artyRadius < radius:
-                artyRadius = radius
+                artyRadius = radius # 485..1469
 
     return (visionRadius, firingRadius, artyRadius)
 
