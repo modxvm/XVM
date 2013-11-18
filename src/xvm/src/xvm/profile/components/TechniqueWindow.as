@@ -1,14 +1,15 @@
 package xvm.profile.components
 {
     import com.xvm.*;
+    import net.wg.gui.lobby.profile.pages.summary.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
     import net.wg.data.gui_items.dossier.*;
 
     public class TechniqueWindow extends Technique
     {
-        public function TechniqueWindow(window:ProfileTechniqueWindow, playerName:String, playerId:int):void
+        public function TechniqueWindow(window:ProfileTechniqueWindow, summary:ProfileSummary, playerName:String, playerId:int):void
         {
-            super(window, playerName);
+            super(window, summary, playerName);
 
             _accountDossier = new AccountDossier(playerId.toString());
         }

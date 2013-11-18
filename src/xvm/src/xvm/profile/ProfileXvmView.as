@@ -75,7 +75,7 @@ package xvm.profile
                 var page:ProfileTechniquePage = e.view as ProfileTechniquePage;
                 if (page.getChildByName("xvm_extension") == null)
                 {
-                    var tp:TechniquePage = new TechniquePage(page, Globals[Globals.NAME]);
+                    var tp:TechniquePage = new TechniquePage(page, summaryPage, Globals[Globals.NAME]);
                     page.addChild(tp);
                 }
                 return;
@@ -92,7 +92,7 @@ package xvm.profile
                     // get player id from the view name.
                     var playerId:int = parseInt(view.as_name.replace("window_", ""));
 
-                    var tw:TechniqueWindow = new TechniqueWindow(window, playerName, playerId);
+                    var tw:TechniqueWindow = new TechniqueWindow(window, summaryPage, playerName, playerId);
                     window.addChild(tw);
                 }
                 return;

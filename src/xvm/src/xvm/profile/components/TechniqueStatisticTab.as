@@ -147,9 +147,6 @@ package xvm.profile.components
 
         private function setupControls():void
         {
-            // TODO: FIXIT:
-            return;
-
             for each (var c:Object in controls)
             {
                 if (c.hasOwnProperty("y"))
@@ -165,7 +162,7 @@ package xvm.profile.components
             ratingTF.antiAliasType = AntiAliasType.ADVANCED;
             ratingTF.multiline = true;
             ratingTF.wordWrap = false;
-            ratingTF.x = proxy.efficiencyTF.x + 180;
+            ratingTF.x = proxy.efficiencyTF.x + 170;
             ratingTF.y = proxy.battlesDL.y - 62;
             ratingTF.width = 400;
             ratingTF.height = 80;
@@ -230,13 +227,12 @@ package xvm.profile.components
                 s += Locale.get("Avg level") + ": " + (!data.stat.lvl ? "-" :
                     color(App.utils.locale.numberWithoutZeros(data.stat.lvl), MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_AVGLVL, data.stat.lvl))) + " ";
 
-                ratingTF.htmlText = formatHtmlText(s);
+                ratingTF.htmlText = "<textformat leading='-2'>" + formatHtmlText(s) + "</textformat>";
             }
         }
 
         private function updateCommonData(data:Data):void
         {
-/*
             proxy.battlesDL.value = color(App.utils.locale.integer(data.battlesCount));
             TF(proxy.battlesDL).htmlText = formatHtmlText(data.winsToNextPercentStr, Defines.UICOLOR_DEFAULT2);
 
@@ -288,7 +284,6 @@ package xvm.profile.components
             specificDamage.value = "";
             TF(specificDamage).htmlText = "";
             proxy.avgScoutingDmgDL.value = "Will be implemented...";
-*/
         }
 
         private function updateSummaryData():void
@@ -298,7 +293,6 @@ package xvm.profile.components
             updateGlobalRatings(data);
             updateCommonData(data);
 
-            /*
             specificDamage.visible = false;
 
             avgCaptureDL.visible = data.stat != null;
@@ -308,17 +302,16 @@ package xvm.profile.components
                 avgCaptureDL.value = color(size(App.utils.locale.numberWithoutZeros(data.stat.cap / data.stat.b), 12));
                 avgDefenceDL.value = color(size(App.utils.locale.numberWithoutZeros(data.stat.def / data.stat.b), 12));
             }
-            */
         }
 
         private function updateVehicleData(vid:uint):void
         {
-            //var data:Data = prepareData(new Dossier(ItemTypes.VEHICLE_DOSSIER, [tech.accountDossier.id, vid]));
-            var data:Data = prepareData(tech.accountDossier);
+            var data:Data = prepareData(new Dossier(ItemTypes.VEHICLE_DOSSIER, [vid, tech.accountDossier.id]));
+            //var data:Data = prepareData(tech.accountDossier);
             //Logger.addObject(data);
             updateGlobalRatings(data);
             updateCommonData(data);
-/*
+
             var vdata:VehicleData = VehicleInfo.get(vid);
             if (vdata == null)
                 return;
@@ -389,18 +382,18 @@ package xvm.profile.components
 
             avgCaptureDL.visible = false;
             avgDefenceDL.visible = false;
-*/
         }
 
         private function prepareData(dossier:Dossier):Data
         {
             try
             {
+                //Logger.addObject(dossier.getAllVehiclesList());
                 // skip empty result - data is not loaded yet
                 if (dossier.getBattlesCount() == 0)
                     return new Data();
 
-                var key:String = dossier.id == null ? "0" : dossier.id.toString(); // "vId,accountId" or "vid," for self
+                var key:String = dossier.id == null ? "0" : dossier.id.toString();
                 var data:Data = cache[key];
                 if (data == null)
                 {
@@ -410,6 +403,9 @@ package xvm.profile.components
                 }
                 if (data.stat == null)
                     setStatData(data);
+
+                //Logger.addObject(data);
+
                 return data;
             }
             catch (ex:Error)
@@ -436,8 +432,22 @@ package xvm.profile.components
             data.shotsCount = getRecord(dossier, 'shots');
             data.hitsCount = getRecord(dossier, 'hits');
 
-            data.maxXP = (dossier is Dossier) ? dossier.getMaxVehicleXP() : dossier.getMaxVehicleXP();
-            data.maxFrags = (dossier is Dossier) ? dossier.getMaxVehicleFrags() : dossier.getMaxVehicleFrags();
+            if (dossier.itemTypeIdx == ItemTypes.ACCOUNT_DOSSIER)
+            {
+                var maxXP:Array = dossier.getMaxXP();
+                data.maxXP = maxXP[0];
+                data.maxXPVehicleName = VehicleInfo.get(maxXP[1]).localizedName;
+
+                // WG removed maxFrags from AccountDossier. :(
+                data.maxFrags = parseInt(tech.summaryPage.tfMaxDestroyed.text.replace(/ /g, ''));
+                //data.maxFragsVehicleName = VehicleInfo.get(tech.summaryPage.tfMaxDestroyed.value).localizedName;
+            }
+            else
+            {
+                data.maxXP = dossier.getMaxVehicleXP();
+                data.maxFrags = dossier.getMaxVehicleFrags();
+            }
+
             data.fragsCount = dossier.getFragsCount();
             data.fragsEfficiency = dossier.getFragsEfficiency();
             data.deathsCount = dossier.getDeathsCount();
