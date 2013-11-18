@@ -129,6 +129,7 @@ package com.xvm.l10n
             "Load statistics": "Загрузить статистику",
 
             // UserInfo
+            "General stats": "Общая статистика",
             "Summary": "Общие результаты",
             "Avg level": "Ср. уровень",
             //"WN6": "WN6",

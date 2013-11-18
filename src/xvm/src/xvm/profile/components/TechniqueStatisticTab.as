@@ -7,6 +7,7 @@ package xvm.profile.components
     import com.xvm.utils.*;
     import flash.text.*;
     import flash.utils.*;
+    import net.wg.data.constants.ItemTypes;
     import net.wg.data.gui_items.dossier.*;
     import net.wg.gui.lobby.profile.components.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
@@ -17,8 +18,8 @@ package xvm.profile.components
         private static const DL_WIDTH:int = 200;
         private var proxy:net.wg.gui.lobby.profile.pages.technique.TechniqueStatisticTab;
 
-        private var playerId:uint;
-        private var _data:Dossier;
+        //private var playerId:uint;
+        private var _raw_data:ProfileVehicleDossierVO;
 
         private var cache:Dictionary;
         private var controlsMap:Dictionary;
@@ -82,6 +83,8 @@ package xvm.profile.components
             {
                 setupControls();
                 updateCommonData(new Data());
+                proxy.winsPercentSign.visible = proxy.defeatsPercentSign.visible =
+                    proxy.survivePercentSign.visible = proxy.accuracyPercentSign.visible = false;
             }
             catch (ex:Error)
             {
@@ -89,42 +92,34 @@ package xvm.profile.components
             }
         }
 
-        /* TODO: FIXIT:
         public function update(raw_data:ProfileVehicleDossierVO):void
         {
-            Logger.addObject(raw_data);
+            //Logger.addObject(raw_data);
 
             try
             {
-                var data:ProfileVehicleDossierVO = raw_data as ProfileVehicleDossierVO;
-
-                if (_data == data)
+                if (_raw_data == raw_data)
                     return;
-
-                if (!data)
-                {
-                    _data = null;
+                _raw_data = raw_data;
+                if (!raw_data)
                     return;
-                }
 
                 var vid:int = page.listComponent.selectedItem.id;
                 if (vid != 0)
                     ratingTF.htmlText = "";
 
-                //Logger.add("vid: " + vid + ", data.id:" + data.id[0])
-                if (vid != data.id[0])
-                    return;
+                //Logger.add("vid: " + vid)
+                //if (vid != data.id[0])
+                //    return;
 
-                _data = data;
-
-                if (data.id[0] == 0)
+                if (vid == 0)
                 {
-                    playerId = isNaN(data.id[1]) ? 0 : parseInt(data.id[1]);
+                    //playerId = isNaN(data.id[1]) ? 0 : parseInt(data.id[1]);
                     updateSummaryData();
                 }
                 else
                 {
-                    updateVehicleData();
+                    updateVehicleData(vid);
                 }
             }
             catch (ex:Error)
@@ -132,7 +127,6 @@ package xvm.profile.components
                 Logger.add(ex.getStackTrace());
             }
         }
-        */
 
         // PRIVATE
 
@@ -153,6 +147,9 @@ package xvm.profile.components
 
         private function setupControls():void
         {
+            // TODO: FIXIT:
+            return;
+
             for each (var c:Object in controls)
             {
                 if (c.hasOwnProperty("y"))
@@ -168,8 +165,8 @@ package xvm.profile.components
             ratingTF.antiAliasType = AntiAliasType.ADVANCED;
             ratingTF.multiline = true;
             ratingTF.wordWrap = false;
-            ratingTF.x = proxy.efficiencyTF.x + 18;
-            ratingTF.y = proxy.battlesDL.y - 52;
+            ratingTF.x = proxy.efficiencyTF.x + 180;
+            ratingTF.y = proxy.battlesDL.y - 62;
             ratingTF.width = 400;
             ratingTF.height = 80;
             var tf:TextFormat = new TextFormat("$FieldFont", 16, Defines.UICOLOR_DEFAULT2);
@@ -214,8 +211,32 @@ package xvm.profile.components
             }
         }
 
+        private function updateGlobalRatings(data:Data):void
+        {
+            var s:String = "";
+            if (data.stat == null)
+                ratingTF.htmlText = "";
+            else
+            {
+                s += size(Locale.get("General stats") + "(" + color(data.stat.dt.substr(0, 10), 0xCCCCCC) + ")", 14) + "\n";
+
+                s += Locale.get("WN6") + ": " + (!data.stat.wn ? "-- (-)" :
+                    color((data.stat.xwn == 100 ? "XX" : (data.stat.xwn < 10 ? "0" : "") + data.stat.xwn), MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_X, data.stat.xwn)) + " (" +
+                    color(App.utils.locale.integer(data.stat.wn), MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_WN, data.stat.wn)) + ")") + " ";
+                s += Locale.get("EFF") + ": " + (!data.stat.e ? "-- (-)" :
+                    color((data.stat.xeff == 100 ? "XX" : (data.stat.xeff < 10 ? "0" : "") + data.stat.xeff), MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_X, data.stat.xeff)) + " (" +
+                    color(App.utils.locale.integer(data.stat.e), MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_EFF, data.stat.e)) + ")") + "\n";
+
+                s += Locale.get("Avg level") + ": " + (!data.stat.lvl ? "-" :
+                    color(App.utils.locale.numberWithoutZeros(data.stat.lvl), MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_AVGLVL, data.stat.lvl))) + " ";
+
+                ratingTF.htmlText = formatHtmlText(s);
+            }
+        }
+
         private function updateCommonData(data:Data):void
         {
+/*
             proxy.battlesDL.value = color(App.utils.locale.integer(data.battlesCount));
             TF(proxy.battlesDL).htmlText = formatHtmlText(data.winsToNextPercentStr, Defines.UICOLOR_DEFAULT2);
 
@@ -267,31 +288,17 @@ package xvm.profile.components
             specificDamage.value = "";
             TF(specificDamage).htmlText = "";
             proxy.avgScoutingDmgDL.value = "Will be implemented...";
+*/
         }
 
         private function updateSummaryData():void
         {
             var data:Data = prepareData(tech.accountDossier);
+            //Logger.addObject(data);
+            updateGlobalRatings(data);
             updateCommonData(data);
 
-            // stat
-            var s:String = "";
-            if (data.stat == null)
-                ratingTF.htmlText = "";
-            else
-            {
-                s += Locale.get("Avg level") + ": " + (!data.stat.lvl ? "-" :
-                    color(App.utils.locale.numberWithoutZeros(data.stat.lvl), MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_AVGLVL, data.stat.lvl))) + " ";
-                s += Locale.get("WN6") + ": " + (!data.stat.wn ? "-- (-)" :
-                    color((data.stat.xwn == 100 ? "XX" : (data.stat.xwn < 10 ? "0" : "") + data.stat.xwn), MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_X, data.stat.xwn)) + " (" +
-                    color(App.utils.locale.integer(data.stat.wn), MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_WN, data.stat.wn)) + ")") + " ";
-                s += Locale.get("EFF") + ": " + (!data.stat.e ? "-- (-)" :
-                    color((data.stat.xeff == 100 ? "XX" : (data.stat.xeff < 10 ? "0" : "") + data.stat.xeff), MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_X, data.stat.xeff)) + " (" +
-                    color(App.utils.locale.integer(data.stat.e), MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_EFF, data.stat.e)) + ")") + "\n";
-                s += "\t" + size(Locale.get("updated") + ":", 13) + " " + size(color(data.stat.dt.substr(0, 10), 0xCCCCCC), 14);
-                ratingTF.htmlText = "<textformat leading='-2' tabstops='[190]'>" + formatHtmlText(s) + "</textformat>";
-            }
-
+            /*
             specificDamage.visible = false;
 
             avgCaptureDL.visible = data.stat != null;
@@ -301,16 +308,18 @@ package xvm.profile.components
                 avgCaptureDL.value = color(size(App.utils.locale.numberWithoutZeros(data.stat.cap / data.stat.b), 12));
                 avgDefenceDL.value = color(size(App.utils.locale.numberWithoutZeros(data.stat.def / data.stat.b), 12));
             }
+            */
         }
 
-        private function updateVehicleData():void
+        private function updateVehicleData(vid:uint):void
         {
-            var data:Data = prepareData(_data);
+            //var data:Data = prepareData(new Dossier(ItemTypes.VEHICLE_DOSSIER, [tech.accountDossier.id, vid]));
+            var data:Data = prepareData(tech.accountDossier);
+            //Logger.addObject(data);
+            updateGlobalRatings(data);
             updateCommonData(data);
-
-            ratingTF.htmlText = "";
-
-            var vdata:VehicleData = VehicleInfo.get(_data.id[0]);
+/*
+            var vdata:VehicleData = VehicleInfo.get(vid);
             if (vdata == null)
                 return;
             //Logger.addObject(vdata, "", 2);
@@ -380,6 +389,7 @@ package xvm.profile.components
 
             avgCaptureDL.visible = false;
             avgDefenceDL.visible = false;
+*/
         }
 
         private function prepareData(dossier:Dossier):Data
@@ -476,7 +486,7 @@ package xvm.profile.components
 
         private function setStatData(data:Data):void
         {
-            var stat:StatData = playerId != 0 ? Stat.getUserDataById(playerId) : Stat.getUserDataByName(tech.playerName);
+            var stat:StatData = Stat.getUserDataByName(tech.playerName);
             if (stat == null)
                 return;
             data.stat = stat;
