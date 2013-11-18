@@ -19,6 +19,7 @@ package xvm.profile.components
 
         private function initializeInHangarCheckBox():void
         {
+            page.listComponent.removeEventListener(TechniqueListComponent.DATA_CHANGED, initializeInHangarCheckBox);
             if (page.listComponent.visible)
             {
                 var pg:ProfileTechniquePage = page as ProfileTechniquePage;

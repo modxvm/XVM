@@ -218,7 +218,7 @@ package xvm.profile.components
                 ratingTF.htmlText = "";
             else
             {
-                s += size(Locale.get("General stats") + "(" + color(data.stat.dt.substr(0, 10), 0xCCCCCC) + ")", 14) + "\n";
+                s += size(Locale.get("General stats") + " (" + color(data.stat.dt.substr(0, 10), 0xCCCCCC) + ")", 14) + "\n";
 
                 s += Locale.get("WN6") + ": " + (!data.stat.wn ? "-- (-)" :
                     color((data.stat.xwn == 100 ? "XX" : (data.stat.xwn < 10 ? "0" : "") + data.stat.xwn), MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_X, data.stat.xwn)) + " (" +
