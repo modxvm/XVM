@@ -262,13 +262,15 @@ package xvm.profile.components
 
             proxy.totalDeadDL.value = color(App.utils.locale.integer(data.deathsCount));
 
-            proxy.killRatioDL.value = color(App.utils.locale.numberWithoutZeros(data.fragsEfficiency), 0xCBAD78);
+            proxy.killRatioDL.enabled = true;
+            proxy.killRatioDL.value = color(App.utils.locale.numberWithoutZeros(data.fragsCount / data.deathsCount), 0xCBAD78);
 
             proxy.dealtDmgDL.value = color(App.utils.locale.integer(data.damageDealt));
 
             proxy.receivedDmgDL.value = color(App.utils.locale.integer(data.damageReceived));
 
-            proxy.dmgRatioDL.value = color(App.utils.locale.numberWithoutZeros(data.damageEfficiency), 0xCBAD78);
+            proxy.dmgRatioDL.enabled = true;
+            proxy.dmgRatioDL.value = color(App.utils.locale.numberWithoutZeros(data.damageDealt / data.damageReceived), 0xCBAD78);
 
             proxy.avgExpDL.value = color(App.utils.locale.integer(data.avgXP));
             proxy.avgDmgDealtDL.value = color(App.utils.locale.integer(data.avgDamageDealt));
@@ -315,7 +317,7 @@ package xvm.profile.components
             var vdata:VehicleData = VehicleInfo.get(vid);
             if (vdata == null)
                 return;
-            //Logger.addObject(vdata, "", 2);
+            //Logger.addObject(vdata, 2);
 
             var colorAvg:int;
             var colorTop:int;
@@ -436,7 +438,7 @@ package xvm.profile.components
             {
                 var maxXP:Array = dossier.getMaxXP();
                 data.maxXP = maxXP[0];
-                data.maxXPVehicleName = VehicleInfo.get(maxXP[1]).localizedName;
+                data.maxXPVehicleName = VehicleInfo.get(maxXP[1]).localizedFullName;
 
                 // WG removed maxFrags from AccountDossier. :(
                 data.maxFrags = parseInt(tech.summaryPage.tfMaxDestroyed.text.replace(/ /g, ''));
@@ -449,11 +451,9 @@ package xvm.profile.components
             }
 
             data.fragsCount = dossier.getFragsCount();
-            data.fragsEfficiency = dossier.getFragsEfficiency();
             data.deathsCount = dossier.getDeathsCount();
             data.damageDealt = dossier.getDamageDealt();
             data.damageReceived = dossier.getDamageReceived();
-            data.damageEfficiency = dossier.getDamageEfficiency();
             data.avgXP = dossier.getAvgXP();
             data.avgFrags = dossier.getAvgFrags();
             data.avgEnemiesSpotted = dossier.getAvgEnemiesSpotted();
@@ -548,11 +548,9 @@ class Data
     public var maxFrags:Number = 0;
     public var maxFragsVehicleName:String = "";
     public var fragsCount:Number = 0;
-    public var fragsEfficiency:Number = 0;
     public var deathsCount:Number = 0;
     public var damageDealt:Number = 0;
     public var damageReceived:Number = 0;
-    public var damageEfficiency:Number = 0;
     public var avgXP:Number = 0;
     public var avgFrags:Number = 0;
     public var avgEnemiesSpotted:Number = 0;
