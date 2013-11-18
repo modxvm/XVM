@@ -123,7 +123,7 @@ def _getTurretType(item, nation):
     stockMaxPrice = _getMaxGunPrice(nation, stock['guns'])
     topMaxPrice = _getMaxGunPrice(nation, top['guns'])
 
-    if stockMaxPrice <= topMaxPrice:
+    if stockMaxPrice >= topMaxPrice:
         return TURRET_TYPE_TOP_GUN_POSSIBLE
 
     return TURRET_TYPE_NO_TOP_GUN
