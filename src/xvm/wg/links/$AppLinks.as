@@ -27,6 +27,7 @@ import net.wg.gui.lobby.battleResults.*; BattleResults; CommonStats;
 import net.wg.gui.lobby.profile.*; Profile;
 import net.wg.gui.lobby.window.*; ProfileWindow;
 import net.wg.gui.lobby.profile.components.*; UserDateFooter;
+import net.wg.gui.lobby.profile.pages.awards.*; ProfileAwards;
 import net.wg.gui.lobby.profile.pages.summary.*; ProfileSummaryPage; ProfileSummaryWindow;
 import net.wg.gui.lobby.profile.pages.technique.*; ProfileTechniquePage; ProfileTechniqueWindow;
 import net.wg.gui.lobby.techtree.*; TechTreePage;

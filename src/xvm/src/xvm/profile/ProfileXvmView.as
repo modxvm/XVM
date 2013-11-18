@@ -15,6 +15,7 @@ package xvm.profile
     import net.wg.gui.events.*;
     import net.wg.gui.lobby.profile.*;
     import net.wg.gui.lobby.profile.components.*;
+    import net.wg.gui.lobby.profile.pages.awards.*;
     import net.wg.gui.lobby.profile.pages.summary.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
     import net.wg.gui.lobby.window.*;
@@ -26,6 +27,7 @@ package xvm.profile
 
     public class ProfileXvmView extends XvmViewBase
     {
+        private var awardsPage:ProfileAwards;
         private var summaryPage:ProfileSummary;
         private var _startPageInitialized:Boolean;
 
@@ -62,6 +64,14 @@ package xvm.profile
         private function onSectionViewShowed(e:ViewStackEvent):void
         {
             //Logger.addObject("onSectionViewShowed: " + e.view);
+
+            if (e.view is ProfileAwards)
+            {
+                awardsPage = e.view as ProfileAwards;
+                initializeStartPage();
+                return;
+            }
+
             if (e.view is ProfileSummary)
             {
                 summaryPage = e.view as ProfileSummary;
@@ -105,9 +115,18 @@ package xvm.profile
             if (_startPageInitialized)
                 return;
 
-            if (!summaryPage)
+            if (!summaryPage || !awardsPage)
                 return;
 
+            // Wait for awards page data loaded
+            var amc:AwardsMainContainer = AwardsMainContainer(awardsPage.mainScrollPane.target);
+            if (amc.blockBattleHeroes.textField.text == "T1")
+            {
+                setTimeout(initializeStartPage, 1); // Start page have strange behavior when using App.utils.scheduler.envokeInNextFrame()
+                return;
+            }
+
+            // Wait for summary page data loaded
             if ((summaryPage.footer as UserDateFooter).textDates.htmlText == "")
             {
                 setTimeout(initializeStartPage, 1); // Start page have strange behavior when using App.utils.scheduler.envokeInNextFrame()
