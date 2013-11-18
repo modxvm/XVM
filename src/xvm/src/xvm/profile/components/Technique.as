@@ -33,22 +33,22 @@ package xvm.profile.components
                 // override renderer
                 list.itemRenderer = UI_TechniqueRenderer;
 
-                // TODO: FIXIT: list.addEventListener(TechniqueList.SELECTED_DATA_CHANGED, listSelectedDataChanged);
+                list.addEventListener(TechniqueList.SELECTED_DATA_CHANGED, listSelectedDataChanged);
 
                 // Add summary item to the first line of technique list
-                // TODO: FIXIT: techniqueListAdjuster = new TechniqueListAdjuster(page);
+                techniqueListAdjuster = new TechniqueListAdjuster(page);
 
                 // remove upper/lower shadow
                 page.listComponent.upperShadow.visible = false;
                 page.listComponent.lowerShadow.visible = false;
 
                 // create filter controls
-                //filter = null;
-                //if (Config.config.userInfo.showFilters)
-                //    createFilters();
+                filter = null;
+                if (Config.config.userInfo.showFilters)
+                    createFilters();
 
                 // post init
-                //techniqueListAdjuster.addEventListener(Event.INIT, delayedInit);
+                techniqueListAdjuster.addEventListener(Event.INIT, delayedInit);
             }
             catch (ex:Error)
             {
@@ -71,21 +71,11 @@ package xvm.profile.components
             return _accountDossier;
         }
 
-        public function setAccountDossier(playerIdStr:String):void
-        {
-            //Logger.add("setAccountDossier: " + playerIdStr);
-            if (_accountDossier == null)
-            {
-                _accountDossier = new AccountDossier(playerIdStr);
-                page.listComponent.techniqueList.dispatchEvent(new Event(TechniqueList.SELECTED_DATA_CHANGED));
-            }
-        }
-
         private function listSelectedDataChanged():void
         {
             //Logger.add("listSelectedDataChanged: " + playerName);
 
-            // TODO: FIXIT: list.removeEventListener(TechniqueList.SELECTED_DATA_CHANGED, listSelectedDataChanged);
+            list.removeEventListener(TechniqueList.SELECTED_DATA_CHANGED, listSelectedDataChanged);
 
             try
             {

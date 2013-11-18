@@ -107,9 +107,6 @@ package xvm.profile.components
                     return;
                 }
 
-                // TODO: dirty hack - find better way to get player id
-                tech.setAccountDossier(data.id[1]);
-
                 var vid:int = page.listComponent.selectedItem.id;
                 if (vid != 0)
                     ratingTF.htmlText = "";
