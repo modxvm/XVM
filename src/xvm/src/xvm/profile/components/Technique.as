@@ -142,7 +142,8 @@ package xvm.profile.components
         private function onStatLoaded():void
         {
             //Logger.add("onStatLoaded: " + playerName);
-            page.listComponent.dispatchEvent(new Event(TechniqueListComponent.DATA_CHANGED));
+            if (page != null && page.listComponent != null && page.listComponent.visible)
+                page.listComponent.dispatchEvent(new Event(TechniqueListComponent.DATA_CHANGED));
         }
     }
 }

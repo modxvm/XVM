@@ -32,7 +32,7 @@ package xvm.profile.components
 
         public function TechniqueStatisticTab(proxy:net.wg.gui.lobby.profile.pages.technique.TechniqueStatisticTab)
         {
-            Logger.add("TechniqueStatisticTab::ctor()");
+            //Logger.add("TechniqueStatisticTab::ctor()");
             try
             {
                 this.proxy = proxy;
