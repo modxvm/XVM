@@ -30,6 +30,8 @@ package xvm.profile.components
                 this._playerName = playerName;
                 this._accountDossier = null;
 
+                //return;
+
                 // override renderer
                 list.itemRenderer = UI_TechniqueRenderer;
 

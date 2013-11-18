@@ -11,19 +11,19 @@ package xvm.profile.UI
         public function UI_TechniqueStatisticTab()
         {
             super();
-            // TODO: FIXIT: worker = new TechniqueStatisticTab(this);
+            worker = new TechniqueStatisticTab(this);
         }
 
         override protected function configUI():void
         {
             super.configUI();
-            // TODO: FIXIT: worker.configUI();
+            worker.configUI();
         }
 
         override public function update(arg1:Object):void
         {
             super.update(arg1);
-            // TODO: FIXIT: worker.update(arg1 as ProfileVehicleDossierVO);
+            //worker.update(arg1 as ProfileVehicleDossierVO);
         }
     }
 }

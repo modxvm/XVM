@@ -189,7 +189,7 @@ package com.xvm.misc
         private static function getUserInfoSection():Object
         {
             var c:Object = new Object();
-            c.startPage = 4;
+            c.startPage = 1;
             c.sortColumn = 5;                  // Number of column for sorting
             c.inHangarFilterEnabled = false;   // Enable In hangar radio button by default
             c.showFilters = true;              // Show tank filters

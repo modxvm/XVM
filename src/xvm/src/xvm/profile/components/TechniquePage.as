@@ -1,8 +1,10 @@
 package xvm.profile.components
 {
     import com.xvm.*;
+    import flash.utils.*;
     import net.wg.data.gui_items.dossier.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
+    import net.wg.infrastructure.events.*;
 
     public class TechniquePage extends Technique
     {
@@ -12,10 +14,16 @@ package xvm.profile.components
 
             _accountDossier = new AccountDossier(null);
 
-            App.utils.scheduler.envokeInNextFrame(function():void
+            page.listComponent.addEventListener(TechniqueListComponent.DATA_CHANGED, initializeInHangarCheckBox);
+        }
+
+        private function initializeInHangarCheckBox():void
+        {
+            if (page.listComponent.visible)
             {
-                page.checkBoxExistence.selected = Config.config.userInfo.inHangarFilterEnabled;
-            });
+                var pg:ProfileTechniquePage = page as ProfileTechniquePage;
+                pg.checkBoxExistence.selected = Config.config.userInfo.inHangarFilterEnabled;
+            }
         }
 
         override protected function createFilters():void
