@@ -1,10 +1,8 @@
-﻿XVM-dev:
+﻿XVM-5.0.1-test3:
   [NEW FUNCTIONS]
   * localization: added Japanese language
   * new options:
     login/confirmOldReplays - Auto confirm old replays playing
-
-XVM-5.0.1-test2:
 
 XVM-5.0.1-test1:
   * adaptation to WoT 0.8.9
