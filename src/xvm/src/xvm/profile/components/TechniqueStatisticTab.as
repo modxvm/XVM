@@ -296,15 +296,19 @@ package xvm.profile.components
 
             proxy.totalDeadDL.value = color(App.utils.locale.integer(data.deathsCount));
 
+            var ratio:String;
+
             proxy.killRatioDL.enabled = true;
-            proxy.killRatioDL.value = color(App.utils.locale.numberWithoutZeros(data.fragsCount / data.deathsCount), 0xCBAD78);
+            ratio = data.deathsCount <= 0 ? "--" : App.utils.locale.numberWithoutZeros(data.fragsCount / data.deathsCount);
+            proxy.killRatioDL.value = color(ratio, 0xCBAD78);
 
             proxy.dealtDmgDL.value = color(App.utils.locale.integer(data.damageDealt));
 
             proxy.receivedDmgDL.value = color(App.utils.locale.integer(data.damageReceived));
 
             proxy.dmgRatioDL.enabled = true;
-            proxy.dmgRatioDL.value = color(App.utils.locale.numberWithoutZeros(data.damageDealt / data.damageReceived), 0xCBAD78);
+            ratio = data.damageReceived <= 0 ? "--" : App.utils.locale.numberWithoutZeros(data.damageDealt / data.damageReceived);
+            proxy.dmgRatioDL.value = color(ratio, 0xCBAD78);
 
             proxy.avgExpDL.value = color(App.utils.locale.integer(data.avgXP));
             proxy.avgDmgDealtDL.value = color(App.utils.locale.integer(data.avgDamageDealt));
