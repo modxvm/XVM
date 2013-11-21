@@ -41,11 +41,11 @@ package xvm.profile.components
                 controlsMap = new Dictionary(true);
                 createControls();
                 controls = [
-                    { y: 65, width: DL_WIDTH, control: proxy.battlesDL },
-                    { y: 82, width: DL_WIDTH, control: proxy.winsDL },
-                    { y: 99, width: DL_WIDTH, control: proxy.defeatsDL },
+                    { y: 65,  width: DL_WIDTH, control: proxy.battlesDL },
+                    { y: 82,  width: DL_WIDTH, control: proxy.winsDL },
+                    { y: 99,  width: DL_WIDTH, control: proxy.defeatsDL },
                     { y: 116, width: DL_WIDTH, control: proxy.surviveDL },
-                    { y: 133, width: DL_WIDTH + 15, control: proxy.accuracyDL },
+                    { y: 133, width: DL_WIDTH, control: proxy.accuracyDL },
                     { y: 153, control: proxy.efficiencyTF },
                     { y: 173, width: DL_WIDTH, control: proxy.maxExpDL },
                     { y: 190, width: DL_WIDTH, control: proxy.maxKillDL },
@@ -83,8 +83,6 @@ package xvm.profile.components
             {
                 setupControls();
                 updateCommonData(new Data());
-                proxy.winsPercentSign.visible = proxy.defeatsPercentSign.visible =
-                    proxy.survivePercentSign.visible = proxy.accuracyPercentSign.visible = false;
             }
             catch (ex:Error)
             {
@@ -112,6 +110,12 @@ package xvm.profile.components
                 //if (vid != data.id[0])
                 //    return;
 
+                setupControls();
+                clearTextFields();
+
+                if (page && page.battlesDropdown && (page.battlesDropdown.selectedItem == PROFILE.PROFILE_DROPDOWN_LABELS_TEAM))
+                    return;
+
                 if (vid == 0)
                 {
                     //playerId = isNaN(data.id[1]) ? 0 : parseInt(data.id[1]);
@@ -132,12 +136,19 @@ package xvm.profile.components
 
         private function get page():ProfileTechnique
         {
-            return proxy.parent.parent.parent.parent as ProfileTechnique;
+            try
+            {
+                return proxy.parent.parent.parent.parent as ProfileTechnique;
+            }
+            catch (ex:Error)
+            {
+            }
+            return null;
         }
 
         private function get tech():Technique
         {
-            return page.getChildByName("xvm_extension") as Technique;
+            return page ? page.getChildByName("xvm_extension") as Technique : null;
         }
 
         private function TF(dl:DashLineTextItem):TextField
@@ -147,6 +158,8 @@ package xvm.profile.components
 
         private function setupControls():void
         {
+            var team:Boolean = page && page.battlesDropdown && (page.battlesDropdown.selectedItem == PROFILE.PROFILE_DROPDOWN_LABELS_TEAM);
+
             for each (var c:Object in controls)
             {
                 if (c.hasOwnProperty("y"))
@@ -154,6 +167,17 @@ package xvm.profile.components
                 if (c.hasOwnProperty("width"))
                     c.control.width = c.width;
             }
+            proxy.winsPercentSign.x = proxy.winsDL.x + proxy.winsDL.width;
+            proxy.winsPercentSign.y = proxy.winsDL.y;
+            proxy.winsPercentSign.visible = team;
+            proxy.defeatsPercentSign.x = proxy.defeatsDL.x + proxy.defeatsDL.width;
+            proxy.defeatsPercentSign.y = proxy.defeatsDL.y;
+            proxy.defeatsPercentSign.visible = team;
+            proxy.survivePercentSign.x = proxy.surviveDL.x + proxy.surviveDL.width;
+            proxy.survivePercentSign.y = proxy.surviveDL.y;
+            proxy.survivePercentSign.visible = team;
+            proxy.accuracyPercentSign.x = proxy.accuracyDL.x + proxy.accuracyDL.width;
+            proxy.accuracyPercentSign.y = proxy.accuracyDL.y;
         }
 
         private function createControls():void
@@ -208,6 +232,16 @@ package xvm.profile.components
             }
         }
 
+        private function clearTextFields():void
+        {
+            for each (var c:* in controls)
+            {
+                var dl:DashLineTextItem = c.control as DashLineTextItem;
+                if (dl != null)
+                    TF(dl).htmlText = "";
+            }
+        }
+
         private function updateGlobalRatings(data:Data):void
         {
             var s:String = "";
@@ -250,7 +284,7 @@ package xvm.profile.components
             proxy.surviveDL.value = color(App.utils.locale.integer(data.survivalCount));
             TF(proxy.surviveDL).htmlText = formatHtmlText(App.utils.locale.numberWithoutZeros(data.survivePercent) + "%", Defines.UICOLOR_GOLD);
 
-            proxy.accuracyDL.value = convertPercentValue(data.hitsRatio);
+            proxy.accuracyDL.value = color(App.utils.locale.numberWithoutZeros(data.hitsRatio * 100));
 
             proxy.maxExpDL.value = color(App.utils.locale.integer(data.maxXP));
             TF(proxy.maxExpDL).htmlText = formatHtmlText(data.maxXPVehicleName, Defines.UICOLOR_GOLD2);
@@ -520,15 +554,6 @@ package xvm.profile.components
         private function color(txt:String, color:uint=0xFDF4CE):String
         {
             return "<font color='#" + color.toString(16) + "'>" + txt + "</font>";
-        }
-
-        // from WG
-
-        internal function convertPercentValue(arg1:Number):String
-        {
-            var loc1:*=App.utils.locale;
-            var loc2:*=loc1.numberWithoutZeros(arg1 * 100);
-            return color(loc2) + color(" %", 6513507);
         }
     }
 }
