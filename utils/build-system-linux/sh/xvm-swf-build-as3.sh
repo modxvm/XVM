@@ -14,6 +14,7 @@ projects=(
           'xvm-ping'
           'xvm-profile'
           'xvm-squad'
+          'xvm-techtree'
          )
 
 pushd ../../../src/xvm/ > /dev/null
