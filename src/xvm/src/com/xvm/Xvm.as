@@ -68,7 +68,8 @@ package com.xvm
                     "battleLoading.swf",
                     "squadWindow.swf",
                     "profileSections.swf",
-                    "battleResults.swf"
+                    "battleResults.swf",
+                    "nodesLib.swf" // treeview
                 ]; // TODO make configurable dependencies
                 for (var x:int = 0; x < preload.length; ++x)
                 {

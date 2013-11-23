@@ -7,12 +7,12 @@ package net.wg.gui.lobby.techtree.controls
 
    public class NameAndXpField extends NodeComponent
    {
-          
+
       public function NameAndXpField() {
          super();
       }
 
-      private static const statesMap:Object;
+      private static var statesMap:Object;
 
       public var xpLabel:String = "earnedXPLabel";
 

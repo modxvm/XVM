@@ -63,6 +63,8 @@ TechniqueStatisticTab_UI;
 // battleResults.swf
 BR_SubtaskComponent_UI;
 
+// nodesLib.swf
+NationTreeNodeSkinned;
 
 }
 

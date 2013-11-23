@@ -40,6 +40,7 @@ package com.xvm.infrastructure
          */
         public function XvmModBase()
         {
+            //Logger.add(getQualifiedClassName(this));
             try
             {
                 if (stage != null)
