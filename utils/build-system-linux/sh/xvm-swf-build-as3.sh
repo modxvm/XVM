@@ -14,6 +14,7 @@ projects=(
           'xvm-ping'
           'xvm-profile'
           'xvm-squad'
+          'xvm-tcarousel'
           'xvm-techtree'
          )
 
