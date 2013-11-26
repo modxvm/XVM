@@ -1,27 +1,27 @@
-/**
+﻿/**
  * Estonian translation file.
  */
 {
   "locale": {
     // Author of translation
-    "XVM_translator": "jyrka98",
+    "XVM_translator": "jyrka98, Mikk Kiilaspää",
 
     // Ping
-    "Initialization": "Lähtestamine",
+    "Initialization": "Käivitumine",
 
     // BattleLoading
     "New version available": "Uus versioon saadaval",
 
     // Win chance
-    "Chance error": "Koefitsentide arvutamis viga",
-    "Chance to win": "Võimalus võita",
-    "global": "globaalne",
-    "per-vehicle": "sõiduki kohta",
+    "Chance error": "Tõenäosuse viga",
+    "Chance to win": "Võidu tõenäosus",
+    "global": "üldine",
+    "per-vehicle": "masinapõhine",
     "chanceExperimental": "exp",
     "chanceBattleTier": "T",
 
     // Hitlog
-    "attack": "rünnak",
+    "attack": "mürsk",
     "fire": "tuli",
     "ramming": "rammimine",
     "world_collision": "kukkumine",
@@ -30,59 +30,59 @@
     "Last": "Viimane",
 
     // Hp Left
-    "hpLeftTitle": "Elupunkte alles",
+    "hpLeftTitle": "Elusid alles:",
 
     // Capture
-    "enemyBaseCapture": "Vaenlaste baasi vallutamine liitlaste poolt!",
-    "enemyBaseCaptured": "Vaenlaste baas vallutatud!",
-    "allyBaseCapture": "Liitlaste baasi vallutamine vaenlaste poolt!",
-    "allyBaseCaptured": "Baas vallutatud vaenlaste poolt!",
-    "Timeleft": "Timeleft",
-    "Capturers": "Capturers",
+    "enemyBaseCapture": "Vaenlaste baasi vallutus!",
+    "enemyBaseCaptured": "Vaenlaste baas on vallutatud!",
+    "allyBaseCapture": "Sinu baasi vallutus!",
+    "allyBaseCaptured": "Sinu baas on vallutatud!",
+    "Timeleft": "Aega jäänud",
+    "Capturers": "Vallutajaid",
 
     // BattleResults
-    "Hit percent": "Hit percent",
-    "Damage (assisted / own)": "Kahju (aidatud / enda)",
+    "Hit percent": "Tabamus",
+    "Damage (assisted / own)": "Kahju (abistatud / enda)",
 
     // TeamRenderers
     "Friend": "Sõber",
     "Ignored": "Ignoreeritud",
-    "unknown": "teadmata",
+    "unknown": "tundmatu",
     "Fights": "Lahinguid",
     "Wins": "Võite",
-    "Data was updated at": "Andmeid ajakohastati",
+    "Data was updated at": "Andmed uuendatud",
     "Load statistics": "Lae statistika",
 
     // UserInfo
     "Summary": "Kokkuvõte",
-    "Avg level": "Keskmine tase",
+    "Avg level": "Keskmine järk",
     "WN6": "WN6",
     "EFF": "EFF",
-    "updated": "ajakohastatud",
-    " to ": " kuni ",
-    "avg": "keskimiselt",
-    "top": "parim",
+    "updated": "uuendatud",
+    " to ": " saamaks ",
+    "avg": "keskm",
+    "top": "top",
     "draws": "viike",
-    "Specific damage (Avg dmg / HP)": "Konkreetset kahju (Keskmine kahju / HP)",
-    "Capture points": "Baasi vallutus punkte",
-    "Defence points": "Baasi kaitse punkte",
+    "Specific damage (Avg dmg / HP)": "Kahju suhe (Keskm kahju / Elupunkte)",
+    "Capture points": "Vallutuspunkte",
+    "Defence points": "Kaitsepunkte",
     "Filter": "Filter",
 
     // Crew
-    "PutOwnCrew": "Pane enda meeskond",
+    "PutOwnCrew": "Pane oma meeskond",
     "PutBestCrew": "Pane parim meeskond",
     "PutClassCrew": "Pane sama klassi meeskond",
 
     // Squad
-    "Vehicle": "Sõiduk",
-    "Battle tiers": "Lahingu tasemed",
+    "Vehicle": "Masin",
+    "Battle tiers": "Lahingu järgud",
     "Type": "Tüüp",
-    "Nation": "Maa",
-    "ussr": "Venemaa",
+    "Nation": "Rahvus",
+    "ussr": "NSVL",
     "germany": "Saksamaa",
-    "usa": "Ameerika",
-    "france": "Prantsusmaa",
-    "uk": "Inglismaa",
+    "usa": "USA",
+    "france": "Prantsuse",
+    "uk": "Suurbritannia",
     "china": "Hiina",
     "japan": "Jaapan",
     "HT": "HT",
@@ -92,6 +92,6 @@
     "SPG": "SPG",
 
     // VehicleMarkersManager
-    "blownUp": "Hävitatud!"
+    "blownUp": "Plahvatas!"
   }
 }
