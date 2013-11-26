@@ -69,7 +69,8 @@ package com.xvm
                     "squadWindow.swf",
                     "profileSections.swf",
                     "battleResults.swf",
-                    "nodesLib.swf" // treeview
+                    "TankCarousel.swf",         // xvm-tcarousel
+                    "nodesLib.swf"              // xvm-treeview
                 ]; // TODO make configurable dependencies
                 for (var x:int = 0; x < preload.length; ++x)
                 {

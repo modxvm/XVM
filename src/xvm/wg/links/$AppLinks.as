@@ -63,8 +63,12 @@ TechniqueStatisticTab_UI;
 // battleResults.swf
 BR_SubtaskComponent_UI;
 
+// TankCarousel.swf
+TankCarouselItemRendererUI;
+
 // nodesLib.swf
 NationTreeNodeSkinned;
+
 
 }
 

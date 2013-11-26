@@ -2,21 +2,21 @@
  * XVM
  * @author Maxim Schedriviy <m.schedriviy@gmail.com>
  */
-package xvm.crew
+package xvm.tcarousel
 {
     import com.xvm.*;
     import com.xvm.infrastructure.*;
 
-    public class CrewXvmMod extends XvmModBase
+    public class TCarouselXvmMod extends XvmModBase
     {
         public override function get logPrefix():String
         {
-            return "[XVM:CREW]";
+            return "[XVM:TCAROUSEL]";
         }
 
         private static const _views:Object =
         {
-            "hangar": CrewXvmView
+            "hangar": TCarouselXvmView
         }
 
         public override function get views():Object
