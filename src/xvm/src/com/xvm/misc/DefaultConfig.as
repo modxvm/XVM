@@ -1240,7 +1240,7 @@ package com.xvm.misc
                 speed: 2,
                 maxRange: 40,
                 damageMessage: "{{dmg}}",
-                blowupMessage: "{{l10n:blownUp}}"
+                blowupMessage: "{{l10n:blownUp}}\n{{dmg}}"
             }
         }
 
