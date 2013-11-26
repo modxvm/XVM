@@ -270,7 +270,7 @@ package xvm.profile.components
             proxy.battlesDL.value = color(App.utils.locale.integer(data.battlesCount));
             TF(proxy.battlesDL).htmlText = formatHtmlText(data.winsToNextPercentStr, Defines.UICOLOR_DEFAULT2);
 
-            var ratingColor:int = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, data.winPercent);
+            var ratingColor:int = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, Math.round(data.winPercent));
             proxy.winsDL.value = color(App.utils.locale.integer(data.winsCount));
             TF(proxy.winsDL).htmlText = formatHtmlText(App.utils.locale.numberWithoutZeros(data.winPercent) + "%", ratingColor);
 
@@ -363,8 +363,8 @@ package xvm.profile.components
             // wins
             if (vdata.avg.R)
             {
-                colorAvg = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, vdata.avg.R * 100);
-                colorTop = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, vdata.top.R * 100);
+                colorAvg = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, Math.round(vdata.avg.R * 100));
+                colorTop = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, Math.round(vdata.top.R * 100));
                 TF(proxy.winsDL).htmlText += formatHtmlText(
                     " " + Locale.get("avg") + ": " + color(App.utils.locale.numberWithoutZeros(vdata.avg.R * 100), colorAvg) +
                     " " + Locale.get("top") + ": " + color(App.utils.locale.numberWithoutZeros(vdata.top.R * 100), colorTop),
