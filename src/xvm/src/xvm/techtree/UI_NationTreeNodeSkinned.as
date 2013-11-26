@@ -1,6 +1,7 @@
 package xvm.techtree
 {
     import com.xvm.*;
+    import flash.events.MouseEvent;
     import flash.text.*;
     import net.wg.data.gui_items.dossier.*;
     import net.wg.gui.lobby.profile.pages.technique.data.*;
@@ -26,7 +27,7 @@ package xvm.techtree
                 if (TechTreeXvmView.vehiclesData.hasOwnProperty(id))
                 {
                     var data:TechniqueListVehicleVO = TechTreeXvmView.vehiclesData[id];
-                    masteryStr = "<img src='img://gui/maps/icons/library/proficiency/class_icons_" + data.markOfMastery + ".png' width='24' height='24'>";
+                    masteryStr = "<img src='img://gui/maps/icons/library/proficiency/class_icons_" + data.markOfMastery + ".png' width='23' height='23'>";
                 }
             }
             finally
@@ -40,7 +41,7 @@ package xvm.techtree
         private function createControls():void
         {
             masteryTF = new TextField();
-            masteryTF.x = 2;
+            masteryTF.x = 3;
             masteryTF.y = 13;
             masteryTF.width = 32;
             masteryTF.height = 32;
