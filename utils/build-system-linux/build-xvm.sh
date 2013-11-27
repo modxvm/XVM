@@ -25,17 +25,15 @@ pushd sh > /dev/null
 popd > /dev/null
 
 #5. Copy swfs,config,l10n,docs etc.
-mkdir -p ../../temp/"$wot_version"/gui/flash
-mkdir -p ../../temp/"$wot_version"/gui/scaleform
+mkdir -p ../../temp/res_mods/"$wot_version"/gui/flash
+mkdir -p ../../temp/res_mods/"$wot_version"/gui/scaleform
 
-#cp -f ../../src/xvm/swf/flash/*.swf ../../temp/"$wot_version"/gui/flash/
-cp -f ../../bin/as3/*.swf ../../temp/"$wot_version"/gui/flash/
+cp -f ../../bin/as3/*.swf ../../temp/res_mods/"$wot_version"/gui/flash/
 rm -rf ../../bin/as3/
 
-cp -rf ../../bin/* ../../temp/"$wot_version"/gui/scaleform/
+cp -rf ../../bin/* ../../temp/res_mods/"$wot_version"/gui/scaleform/
 
-cp -rf ../../release/ ../../temp/xvm/
-cp -rf ../../temp/xvm/doc/* ../../temp/
+cp -rf ../../release/ ../../temp/res_mods/xvm/
 
 rm -rf ../../release/*.swf
 rm -rf ../../release/mods/*.swf
@@ -46,7 +44,7 @@ pushd ../../src/xpm/ > /dev/null
 ./build-all.sh
 popd > /dev/null
 
-cp -rf ../../bin/xpm/* ../../temp/"$wot_version"/
+cp -rf ../../bin/xpm/* ../../temp/res_mods/"$wot_version"/
 rm -rf ../../bin/*
 
 #7. Build archive
