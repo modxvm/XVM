@@ -34,6 +34,7 @@ rm -rf ../../bin/as3/
 cp -rf ../../bin/* ../../temp/res_mods/"$wot_version"/gui/scaleform/
 
 cp -rf ../../release/ ../../temp/res_mods/xvm/
+cp -rf ../../temp/xvm/doc/* ../../temp/
 
 rm -rf ../../release/*.swf
 rm -rf ../../release/mods/*.swf
