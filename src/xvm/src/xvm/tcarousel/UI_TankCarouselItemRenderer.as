@@ -19,6 +19,9 @@ package xvm.tcarousel
         {
             super.draw();
 
+            if (!masteryTF)
+                return;
+
             var masteryStr:String = "";
             try
             {
@@ -46,12 +49,15 @@ package xvm.tcarousel
 
         private function createControls():void
         {
+            masteryTF = null;
+            if (!vehicleIcon)
+                return;
             masteryTF = new TextField();
             masteryTF.x = 0;
             masteryTF.y = 13;
             masteryTF.width = 32;
             masteryTF.height = 32;
-            this.addChild(masteryTF);
+            vehicleIcon.addChild(masteryTF);
         }
 
     }
