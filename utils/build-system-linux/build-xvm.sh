@@ -34,7 +34,10 @@ rm -rf ../../bin/as3/
 cp -rf ../../bin/* ../../temp/res_mods/"$wot_version"/gui/scaleform/
 
 cp -rf ../../release/ ../../temp/res_mods/xvm/
-cp -rf ../../temp/xvm/doc/* ../../temp/
+
+pushd ../../temp/res_mods/xvm/doc/ > /dev/null
+find . -name "readme-*.txt" -exec cp {} ../../../ \;
+popd > /dev/null
 
 rm -rf ../../release/*.swf
 rm -rf ../../release/mods/*.swf
