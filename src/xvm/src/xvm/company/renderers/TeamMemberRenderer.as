@@ -11,6 +11,7 @@ package xvm.company.renderers
     {
         private var proxy:net.wg.gui.prebattle.controls.TeamMemberRenderer;
 
+        private var vehicleLevelFieldX:Number = 0;
         private var effField:TextField;
 
         public function TeamMemberRenderer(proxy:net.wg.gui.prebattle.controls.TeamMemberRenderer)
@@ -21,7 +22,8 @@ package xvm.company.renderers
                 proxy.textField.x -= 10;
                 proxy.vehicle_type_icon.x -= 8;
                 proxy.vehicleNameField.x -= 8;
-                proxy.vehicleLevelField.x -= 12;
+                vehicleLevelFieldX = proxy.vehicleLevelField.x - 12;
+                proxy.vehicleLevelField.x = vehicleLevelFieldX;
                 effField = new TextField();
                 var tf:TextFormat = proxy.vehicleLevelField.defaultTextFormat;
                 tf.align = TextFormatAlign.RIGHT;
@@ -53,6 +55,11 @@ package xvm.company.renderers
             {
                 Stat.loadUserData(this, onStatLoaded, pname, false);
             }, 10);
+        }
+
+        public function draw():void
+        {
+            proxy.vehicleLevelField.x = vehicleLevelFieldX;
         }
 
         public function handleMouseRollOver(e:MouseEvent):void

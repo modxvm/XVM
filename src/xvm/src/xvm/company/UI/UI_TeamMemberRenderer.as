@@ -20,6 +20,12 @@ package xvm.company.UI
             worker.setData(data);
         }
 
+        override protected function draw():void
+        {
+            super.draw();
+            worker.draw();
+        }
+
         override protected function handleMouseRollOver(e:MouseEvent):void
         {
             super.handleMouseRollOver(e);
