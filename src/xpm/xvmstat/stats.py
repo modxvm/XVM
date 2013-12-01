@@ -250,6 +250,8 @@ class _Stat(object):
                         if 'nm' in data and '_id' in data:
                             self.cacheUser[reg + "/" + data['nm']] = data
                             self.cacheUser["ID/" + str(data['_id'])] = data
+                    elif response == '[]':
+                        self.cacheUser[cacheKey] = {}
 
             except Exception, ex:
                 err('_get_user() exception: ' + traceback.format_exc(ex))

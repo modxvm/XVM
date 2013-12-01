@@ -23,10 +23,12 @@ package xvm.company.renderers
             {
                 this.proxy = proxy;
 
-                effField = Utils.cloneTextField(proxy.pCountField);
+                effField = new TextField();
                 effField.styleSheet = Utils.createTextStyleSheet("eff", proxy.pCountField.defaultTextFormat);
                 effField.x = proxy.pCountField.x - 15;
                 effField.y = proxy.pCountField.y;
+                effField.width = 20;
+                effField.height = proxy.pCountField.height;
                 effField.htmlText = "";
                 proxy.addChild(effField);
 

@@ -34,7 +34,8 @@ package xvm.company
             if (Config.config.rating.enableCompanyStatistics != true)
                 return;
 
-            // TODO
+            page.assignedList.itemRenderer = UI_TeamMemberRenderer;
+            page.unassignedList.itemRenderer = UI_TeamMemberRenderer;
         }
     }
 }

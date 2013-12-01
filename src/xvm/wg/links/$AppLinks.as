@@ -53,6 +53,9 @@ RightItemRendererUI;
 CompanyListItemRendererUI;
 CompanyDropItemRendererUI;
 
+// prebattleComponents.swf
+TeamMemberRendererUI;
+
 // squadWindow.swf
 squadItemRendererUI;
 

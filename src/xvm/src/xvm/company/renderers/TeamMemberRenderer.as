@@ -5,29 +5,31 @@ package xvm.company.renderers
     import com.xvm.types.stat.*;
     import flash.events.*;
     import flash.text.*;
-    import net.wg.gui.prebattle.company.*;
+    import net.wg.gui.prebattle.controls.*;
 
-    public class CompanyDropItemRenderer
+    public class TeamMemberRenderer
     {
-        private var proxy:net.wg.gui.prebattle.company.CompanyDropItemRenderer;
+        private var proxy:net.wg.gui.prebattle.controls.TeamMemberRenderer;
 
         private var effField:TextField;
 
-        public function CompanyDropItemRenderer(proxy:net.wg.gui.prebattle.company.CompanyDropItemRenderer)
+        public function TeamMemberRenderer(proxy:net.wg.gui.prebattle.controls.TeamMemberRenderer)
         {
             try
             {
                 this.proxy = proxy;
-
-                proxy.numberField.x = 0;
-                proxy.numberField.width = 15;
-                proxy.textField.x = 15;
+                proxy.textField.x -= 10;
+                proxy.vehicle_type_icon.x -= 8;
+                proxy.vehicleNameField.x -= 8;
+                proxy.vehicleLevelField.x -= 12;
                 effField = new TextField();
-                effField.styleSheet = Utils.createTextStyleSheet("eff", proxy.textField.defaultTextFormat);
-                effField.x = 20 + proxy.textField.width;
-                effField.y = proxy.textField.y;
+                var tf:TextFormat = proxy.vehicleLevelField.defaultTextFormat;
+                tf.align = TextFormatAlign.RIGHT;
+                effField.styleSheet = Utils.createTextStyleSheet("eff", tf);
+                effField.x = proxy.width - 15;
+                effField.y = proxy.vehicleLevelField.y;
                 effField.width = 20;
-                effField.height = proxy.textField.height;
+                effField.height = proxy.vehicleLevelField.height;
                 effField.htmlText = "";
                 proxy.addChild(effField);
             }
@@ -43,10 +45,10 @@ package xvm.company.renderers
             App.toolTipMgr.hide();
             effField.htmlText = "";
 
-            if (data == null || !data.label)
+            if (data == null || !data.fullName)
                 return;
 
-            var pname:String = WGUtils.GetPlayerName(data.label);
+            var pname:String = WGUtils.GetPlayerName(data.fullName);
             App.utils.scheduler.scheduleTask(function():void
             {
                 Stat.loadUserData(this, onStatLoaded, pname, false);
@@ -57,13 +59,13 @@ package xvm.company.renderers
         {
             try
             {
-                if (proxy.data == null || !proxy.data.label)
+                if (proxy.data == null || !proxy.data.fullName)
                     return;
-                var pname:String = WGUtils.GetPlayerName(proxy.data.label);
+                var pname:String = WGUtils.GetPlayerName(proxy.data.fullName);
                 var sd:StatData = Stat.getUserDataByName(pname);
                 if (sd == null)
                     return;
-                var tip:String = TeamRendererHelper.getToolTipData(proxy.data.label, proxy.data);
+                var tip:String = TeamRendererHelper.getToolTipData(proxy.data.fullName, proxy.data);
                 if (tip == null)
                     return;
                 App.toolTipMgr.show(tip);
@@ -83,8 +85,8 @@ package xvm.company.renderers
 
         private function onStatLoaded():void
         {
-            effField.htmlText = (proxy.data == null || !proxy.data.label) ? "--"
-                : "<span class='eff'>" + TeamRendererHelper.formatXVMStatText(proxy.data.label) + "</span>";
+            effField.htmlText = (proxy.data == null || !proxy.data.fullName) ? "--"
+                : "<span class='eff'>" + TeamRendererHelper.formatXVMStatText(proxy.data.fullName) + "</span>";
         }
     }
 
