@@ -54,6 +54,7 @@
     "Load statistics": "Carga de estadisticas",
  
     // UserInfo
+    "General stats": "Estadistica general",
     "Summary": "Resumen",
     "Avg level": "Nivel promedio",
     "WN6": "WN6",

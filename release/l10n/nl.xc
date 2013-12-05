@@ -4,105 +4,95 @@
 {
   "locale": {
     // Author of translation
-    "XVM_translator": "Herman 'surfplank' Gerards",
+    "XVM_translator": "Ruud Bremer",
 
     // Ping
-    "Initialization": "Initialization",
+    "Initialization": "Initialiseren",
 
     // BattleLoading
-    "New version available": "New version available",
+    "New version available": "Nieuwe versie beschikbaar",
 
     // Win chance
     "Chance error": "Fout kans",
     "Chance to win": "Win kans",
     "global": "globaal",
-    "per-vehicle": "Per-Voertuig",
+    "per-vehicle": "per voertuig",
+    "chanceExperimental": "exp",
+    "chanceBattleTier": "T",
 
     // Hitlog
-    "attack": "Aanval",
-    "fire": "Vuren",
-    "ramming": "Rammen",
-    "world_collision": "Wereld Treffen",
+    "attack": "aanval",
+    "fire": "vuur",
+    "ramming": "rammen",
+    "world_collision": "beschadigd",
     "Hits": "Treffers",
     "Total": "Totaal",
-    "Last": "Last",
+    "Last": "Laatste",
 
     // Hp Left
-    "hpLeftTitle": "Hitpoints left:",
+    "hpLeftTitle": "Trefpunten over:",
 
     // Capture
-    "enemyBaseCapture": "Vijandelijke basis wordt Veroverd!",
+    "enemyBaseCapture": "Vijandelijke basis wordt veroverd!",
     "enemyBaseCaptured": "Vijandelijke basis veroverd!",
     "allyBaseCapture": "Eigen basis wordt Veroverd!",
-    "allyBaseCaptured": "Vijandelijke basis veroverd!",
+    "allyBaseCaptured": "Eigen basis veroverd!",
     "Timeleft": "Tijd over",
     "Capturers": "Veroveraars",
 
     // BattleResults
-    "Hit percent": "Treffer percentage",
-    "Damage upon detecting": "Schade door onderkenning",
-    "Damage dealt": "Schade toe gebracht",
+    "Hit percent": "Treffers percentage",
+    "Damage (assisted / own)": "Schade (geassisteerd / eigen)",
 
     // TeamRenderers
-    "TeamRenderersHeaderTip": "xwn (of xeff).\nto Voor gedetailleerde informatie, Beweeg muis pijl naar spelers naam.",
     "Friend": "Vriend",
-    "Ignored": "Negeer",
-    "Load statistics": "Laadt statistieken",
-    "enabled": "Mogelijk.",
-    "disabled": "Onmogelijk.",
+    "Ignored": "Genegeerd",
+    "unknown": "onbekend",
+    "Fights": "Gevechten",
+    "Wins": "Gewonnen",
+    "Data was updated at": "Gegevens van",
+    "Load statistics": "Laad statistieken",
 
     // UserInfo
-    "UserInfoEHint": "Per voertuig effectiviteit.\nDe waarden zichtbaar tijdens de laatste statistieken opwaardering: %DATE%\n Zie de actuele waarden bij gedetailleerde voertuig informatie.\nDe nauwkeurigheid uit de kolom waarden is afhankelijk van de basis informatie.",
-    "Data was updated at": "De data informatie is geactualiseerd",
-    " to ": "Naar ",
-    "EFF": "Effect",
-    "updated": "Geactualiseerd",
-    "unknown": "Onbekend",
-    "Avg level": "Gemiddeld niveau",
-    "Spotted": "Ontdekt",
-    "Defence": "Verdediging",
-    "Capture": "Veroverd",
-    "player (average / top)": "Spelers (gemiddelde / hoogste)",
-    "Spec dmg": "Speciale schade",
-
-    // UserInfo - filters
+    "General stats": "Algemene statistieken",
+    "Summary": "Overzicht",
+    "Avg level": "Gemid. niveau",
+    "WN6": "WN6",
+    "EFF": "EFF",
+    "updated": "geüpdate",
+    " to ": " naar ",
+    "avg": "gem.",
+    "top": "beste",
+    "draws": "gelijk spel",
+    "Specific damage (Avg dmg / HP)": "Specifieke schade (gem. schade / HP)",
+    "Capture points": "Verover punten",
+    "Defence points": "Verdedig punten",
     "Filter": "Filter",
-    "All tanks": "Alle tanks",
-    "Show all tanks in the game": "Laat alle tanks in het spel zien",
-    "Player tanks": "Spelers tank",
-    "Show all tanks played": "laat alle spelende tanks zien",
-    "In hangar": "hangar",
-    "Show only tanks in own hangar": "laat alleen tanks in hangar zien",
-
-    // UserInfo - buttons
-    "Level": "niveau",
-    "Type": "type",
-    "Nation": "land",
-    "Name": "naam",
-    "Fights": "gevechten",
-    "Wins": "gewonnen",
 
     // Crew
-    "PutOwnCrew": "plaats eigen bemanning",
-    "PutBestCrew": "plaats beste bemanning",
-    "PutClassCrew": "Put same class crew",
+    "PutOwnCrew": "Plaats eigen bemanning",
+    "PutBestCrew": "Plaats beste bemanning",
+    "PutClassCrew": "Plaats bemanning zelfde klasse",
 
     // Squad
-    "Vehicle": "tank",
-    "Battle tiers": "gevechts tier",
-    "ussr": "СССР",
-    "germany": "duitsland",
-    "usa": "amerika",
-    "france": "frankrijk",
-    "uk": "engeland",
-    "china": "china",
+    "Vehicle": "Voertuig",
+    "Battle tiers": "Gevechtsrang",
+    "Type": "Type",
+    "Nation": "Land",
+    "ussr": "USSR",
+    "germany": "Duitsland",
+    "usa": "Amerika",
+    "france": "Frankrijk",
+    "uk": "Verenigd koninkrijk",
+    "china": "China",
+    "japan": "Japan",
     "HT": "HT",
     "MT": "MT",
     "LT": "LT",
-    "TD": "AT",
-    "SPG": "arty",
+    "TD": "TD",
+    "SPG": "SPG",
 
     // VehicleMarkersManager
-    "blownUp": "Blown-up!"
+    "blownUp": "Opgeblazen!"
   }
 }

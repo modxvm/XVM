@@ -38,7 +38,7 @@
     "allyBaseCapture": "Obsadzovanie spojeneckej základne!",
     "allyBaseCaptured": "Spojenecká základňa bola obsadená!",
     "Timeleft": "Čas",
-    "Capturers": "Tankov",
+    "Capturers": "Vozidiel",
 
     // BattleResults
     "Hit percent": "Zásahov / Výstrelov \u0025",
@@ -54,6 +54,7 @@
     "Load statistics": "Načítať štatistiky",
 
     // UserInfo
+    "General stats": "Všeobecné štatistiky",
     "Summary": "Celkový prehľad",
     "Avg level": "Priem. tier",
     "WN6": "WN6",
@@ -63,7 +64,7 @@
     "avg": "priem",
     "top": "naj",
     "draws": "remízy",
-    "Specific damage (Avg dmg / HP)": "Pomer poškodenia (priem / HP)",
+    "Specific damage (Avg dmg / HP)": "Pomer poškodenia (priem. dmg / HP)",
     "Capture points": "Obsadenie",
     "Defence points": "Obrana",
     "Filter": "Filter",

@@ -54,7 +54,7 @@
     "Load statistics": "Statisztika betöltése",
 
     // UserInfo
-	"General stats": "Általános statisztika",
+    "General stats": "Általános statisztika",
     "Summary": "Összefoglaló",
     "Avg level": "Átlag szint",
     "WN6": "WN6",

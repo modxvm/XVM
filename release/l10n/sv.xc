@@ -54,6 +54,7 @@
     "Load statistics": "Ladda statistik",
 
     // UserInfo
+    "General stats": "Generell Stats",
     "Summary": "Sammanfattning",
     "Avg level": "Genomsn. nivå",
     "WN6": "WN6",

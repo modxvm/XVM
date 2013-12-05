@@ -4,7 +4,7 @@
 {
   "locale": {
     // Author of translation
-    "XVM_translator": "wRR(updated by shogomad, jerry1333)",
+    "XVM_translator": "XVM Team, wRR, shogomad, jerry1333",
 
     // Ping
     "Initialization": "Inicjalizacja",
@@ -22,15 +22,15 @@
 
     // Hitlog
     "attack": "atak",
-    "fire": "pożar",
+    "fire": "ogień",
     "ramming": "taranowanie",
     "world_collision": "upadek",
-    "Hits": "Trafień",
+    "Hits": "Trafienia",
     "Total": "Łącznie",
     "Last": "Ostatnie",
 
     // Hp Left
-    "hpLeftTitle": "Pozostałe HP przeciwników:",
+    "hpLeftTitle": "Pozostałe punkty życia:",
 
     // Capture
     "enemyBaseCapture": "Opanowanie bazy przeciwnika!",
@@ -42,19 +42,20 @@
 
     // BattleResults
     "Hit percent": "Procent trafień",
-    "Damage (assisted / own)": "Uszkodzenia (asysta / własne)",
+    "Damage (assisted / own)": "Obrażenia (asysta / własne)",
 
     // TeamRenderers
     "Friend": "Przyjaciel",
     "Ignored": "Ignorowany",
-    "unknown": "Nieznany",
-    "Fights": "Bitwy",
-    "Wins": "Wygranych",
+    "unknown": "nieznany",
+    "Fights": "Walki",
+    "Wins": "Wygrane",
     "Data was updated at": "Dane zaktualizowano",
     "Load statistics": "Pokaż statystyki",
 
     // UserInfo
-    "Summary": "Wyniki ogólne",
+    "General stats": "Ogólne statystyki",
+    "Summary": "Podsumowanie",
     "Avg level": "Śr. poziom",
     "WN6": "WN6",
     "EFF": "EFF",
@@ -63,16 +64,16 @@
     "avg": "średnie",
     "top": "top",
     "draws": "remisy",
-    "Specific damage (Avg dmg / HP)": "Własne (Średnie uszk. / HP)",
-    "Capture points": "Okupacja",
-    "Defence points": "Obrona",
-    "Filter": "Filtr",
-    
+    "Specific damage (Avg dmg / HP)": "Spec dmg (Średnie dmg / HP)",
+    "Capture points": "Punkty okupacji",
+    "Defence points": "Punkty obrony",
+    "Filter": "Filter",
+
     // Crew
     "PutOwnCrew": "Obsadź załogę (własna)",
     "PutBestCrew": "Obsadź załogę (najlepsza)",
-    "PutClassCrew": "Obsadź załogę (typ)",
-
+    "PutClassCrew": "Obsadź członka załogi tej samej klasy",
+    
     // Squad
     "Vehicle": "Pojazd",
     "Battle tiers": "Poziom pojazdów w bitwie",
@@ -92,6 +93,6 @@
     "SPG": "SPG",
 
     // VehicleMarkersManager
-    "blownUp": "Wybuchnął!"
+    "blownUp": "Zniszczony!"
   }
 }

@@ -54,6 +54,7 @@
     "Load statistics": "Загрузіць статыстыку",
 
     // UserInfo
+    "General stats": "Агульная статыстыка",
     "Summary": "Падсумаванне",
     "Avg level": "Сярэдні ўзровень",
     "WN6": "WN6",

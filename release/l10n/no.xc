@@ -4,7 +4,7 @@
 {
   "locale": {
     // Author of translation
-    "XVM_translator": "Orrie(EU)",
+    "XVM_translator": "Orrie (EU)",
 
     // Ping
     "Initialization": "Initialisering",
@@ -54,6 +54,7 @@
     "Load statistics": "Last inn statistikk",
 
     // UserInfo
+    "General stats": "Generelle Stats",
     "Summary": "Sammendrag",
     "Avg level": "Gj.sn. nivå",
     "WN6": "WN6",
@@ -64,8 +65,8 @@
     "top": "topp",
     "draws": "uavgjorte",
     "Specific damage (Avg dmg / HP)": "Spesifikk skade (Gj.sn. skade / HP)",
-    "Capture points": "Overtakelse poeng",
-    "Defence points": "Forsvars poeng",
+    "Capture points": "Overtakelsepoeng",
+    "Defence points": "Forsvarspoeng",
     "Filter": "Filter",
 
     // Crew
