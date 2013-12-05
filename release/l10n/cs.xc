@@ -54,6 +54,7 @@
     "Load statistics": "Načítat statistiky",
 
     // UserInfo
+    "General stats": "Všeobecné statistiky",
     "Summary": "Celkový přehled",
     "Avg level": "Prům. Tier",
     "WN6": "WN6",
