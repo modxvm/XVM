@@ -4,14 +4,14 @@
 {
   "locale": {
     // Author of translation
-    "XVM_translator": "egam/epror",
+    "XVM_translator": "egam/epror, BONNe1704",
 
     // Ping
     "Initialization": "Inicializācija",
-    
+
     // BattleLoading
-    "New version available": "Ir pieejama jaunā versija",
-    
+    "New version available": "Pieejama jauna versija",
+
     // Win chance
     "Chance error": "Kļūda aprēķinos",
     "Chance to win": "Iespēja uzvarēt",
@@ -37,12 +37,12 @@
     "enemyBaseCaptured": "Pretinieka bāze ieņemta!",
     "allyBaseCapture": "Mūsu bāze tiek ieņemta!",
     "allyBaseCaptured": "Mūsu bāze ieņemta!",
-    "Timeleft": "Palika",
-    "Capturers": "Bāzi ieņem",
-    
+    "Timeleft": "Atlikušais laiks",
+    "Capturers": "Iebrucēji",
+
     // BattleResults
     "Hit percent": "Trāpījumu procents",
-    "Damage (assisted / own)": "Bojājums (pēc izlūkdatiem / paša)",
+    "Damage (assisted / own)": "Bojājums (asistētie / paša)",
 
     // TeamRenderers
     "Friend": "Draugs",
@@ -54,29 +54,30 @@
     "Load statistics": "Ielādēt statistiku",
 
     // UserInfo
-    "Summary": "Kopējie rezultāti",
+    "General stats": "Vispārējā statistika",
+    "Summary": "Rezūltātu kopsavilkums",
     "Avg level": "Vid. līmenis",
     "WN6": "WN6",
     "EFF": "ER",
-    "updated": "atjaunināts",
+    "updated": "atjaunots",
     " to ": " līdz ",
     "avg": "vid.",
     "top": "top",
     "draws": "neizšķirts",
-    "Specific damage (Avg dmg / HP)": "Īpašs bojājums(vid. bojājums / HP)",
+    "Specific damage (Avg dmg / HP)": "Sp. bojājumi(vid. bojājums / HP)",
     "Capture points": "Ieņemšanas punkti",
     "Defence points": "Aizsardzības punkti",
     "Filter": "Filtrs",
-    
+
     // Crew
-    "PutOwnCrew": "Tanka ekipāža",
-    "PutBestCrew": "Labākā ekipāža",
-    "PutClassCrew": "Tās pašas klases ekipāža",
+    "PutOwnCrew": "Šī tanka apkalpe",
+    "PutBestCrew": "Labākā apkalpe",
+    "PutClassCrew": "Tās pašas klases apkalpe",
 
     // Squad
     "Vehicle": "Tanks",
     "Battle tiers": "Kauju līmenis",
-    "Type": "Tips",
+    "Type": "Veids",
     "Nation": "Nācija",
     "ussr": "PSRS",
     "germany": "Vācija",

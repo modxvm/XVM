@@ -54,6 +54,7 @@
     "Load statistics": "Lade Statistiken",
 
     // UserInfo
+    "General stats": "Allgemeine Statistik",
     "Summary": "Zusammenfassung",
     "Avg level": "Ø-Stufe",
     "WN6": "WN6",
