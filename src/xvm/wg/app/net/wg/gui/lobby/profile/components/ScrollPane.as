@@ -117,6 +117,9 @@ package net.wg.gui.lobby.profile.components
       }
 
       protected function applyScrollBarUpdating() : void {
+         var _loc6_:* = NaN;
+         var _loc7_:* = NaN;
+         var _loc8_:* = NaN;
          var _loc1_:Number = this.scrollPageSize;
          var _loc2_:* = 0;
          var _loc3_:int = this.maxScroll;
@@ -129,7 +132,10 @@ package net.wg.gui.lobby.profile.components
          }
          if(this._target)
          {
-            this._target.y = -(this._scrollStepFactor * this._scrollPosition);
+            _loc6_ = this.getContentHeight() - _height > 0?this.getContentHeight() - _height:0;
+            _loc7_ = this._scrollStepFactor * this._scrollPosition;
+            _loc8_ = Math.round(_loc6_ >= _loc7_?_loc7_:_loc6_);
+            this._target.y = -_loc8_;
          }
          this.scrollBar.visible = _loc5_;
          this.scrollBar.position = this._scrollPosition;

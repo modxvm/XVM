@@ -236,7 +236,7 @@ package net.wg.gui.components.advanced
       }
 
       protected function sortingIconLoadingCompleteHandler(param1:UILoaderEvent) : void {
-         this.mcAscendingIcon.y = _height - this.mcAscendingIcon.height;
+         this.mcAscendingIcon.y = Math.round(_height - this.mcAscendingIcon.height);
          this.isSortIconLoadingCompete = true;
          invalidate();
       }

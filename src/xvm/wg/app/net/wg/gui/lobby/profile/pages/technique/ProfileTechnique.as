@@ -66,21 +66,6 @@ package net.wg.gui.lobby.profile.pages.technique
          }
       }
 
-      override protected function onDispose() : void {
-         if(this.listComponent)
-         {
-            this.listComponent.removeEventListener(TechniqueListComponent.DATA_CHANGED,this.listDataChangeHandler);
-            this.listComponent.dispose();
-            this.listComponent = null;
-         }
-         if(this.stackComponent)
-         {
-            this.stackComponent.dispose();
-            this.stackComponent = null;
-         }
-         super.onDispose();
-      }
-
       override protected function applyResizing() : void {
          if(layoutManager)
          {
@@ -89,8 +74,27 @@ package net.wg.gui.lobby.profile.pages.technique
          this.x = Math.round(currentDimension.x / 2 - centerOffset);
          var _loc1_:Number = Math.min(currentDimension.x,ProfileConstants.MIN_APP_WIDTH);
          this.emptyScreen.x = _loc1_ - this.emptyScreen.width >> 1;
-         this.listComponent.setViewSize(currentDimension.x,currentDimension.y - this.listComponent.y);
+         this.listComponent.setSize(currentDimension.x,currentDimension.y - this.listComponent.y);
          this.stackComponent.setViewSize(_loc1_ - this.stackComponent.x,currentDimension.y - this.stackComponent.y);
+      }
+
+      override public function as_responseDossier(param1:String, param2:Object) : void {
+         super.as_responseDossier(param1,param2);
+         if(battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_ALL)
+         {
+            this.emptyScreen.text = App.utils.locale.makeString(PROFILE.SECTION_TECHNIQUE_EMPTYSCREENLABEL_BATTLETYPE_ALL);
+         }
+         else
+         {
+            if(battlesType == PROFILE.PROFILE_DROPDOWN_LABELS_TEAM)
+            {
+               this.emptyScreen.text = App.utils.locale.makeString(PROFILE.SECTION_TECHNIQUE_EMPTYSCREENLABEL_BATTLETYPE_TEAM);
+            }
+            else
+            {
+               DebugUtils.LOG_WARNING("Battle type is not implemented!",battlesType);
+            }
+         }
       }
 
       override protected function draw() : void {
@@ -110,6 +114,29 @@ package net.wg.gui.lobby.profile.pages.technique
          {
             this.stackComponent.updateTankData(new ProfileVehicleDossierVO({}));
          }
+      }
+
+      override protected function onDispose() : void {
+         if(this.listComponent)
+         {
+            this.listComponent.removeEventListener(TechniqueListComponent.DATA_CHANGED,this.listDataChangeHandler);
+            this.listComponent.dispose();
+            this.listComponent = null;
+         }
+         if(this.stackComponent)
+         {
+            this.stackComponent.dispose();
+            this.stackComponent = null;
+         }
+         if(this.emptyScreen)
+         {
+            if(this.emptyScreen.parent)
+            {
+               this.emptyScreen.parent.removeChild(this.emptyScreen);
+            }
+            this.emptyScreen = null;
+         }
+         super.onDispose();
       }
    }
 

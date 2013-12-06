@@ -3,6 +3,7 @@ package net.wg.infrastructure.managers
    import net.wg.infrastructure.base.meta.impl.LoaderManagerMeta;
    import net.wg.infrastructure.base.meta.ILoaderManagerMeta;
    import flash.utils.Dictionary;
+   import net.wg.data.Aliases;
    import flash.net.URLRequest;
    import flash.display.Loader;
    import flash.system.LoaderContext;
@@ -24,7 +25,14 @@ package net.wg.infrastructure.managers
 
       private var loaderToToken:Dictionary;
 
+      private var firstTimeLoadLobby:Boolean = false;
+
       public function as_loadView(param1:Object, param2:String, param3:String, param4:String) : void {
+         if(param3 == Aliases.LOBBY && !this.firstTimeLoadLobby)
+         {
+            App.libraryLoader.load(Vector.<String>(["toolTips.swf"]));
+            this.firstTimeLoadLobby = true;
+         }
          var _loc5_:URLRequest = new URLRequest(param1.url);
          var _loc6_:Loader = new Loader();
          var _loc7_:LoaderContext = new LoaderContext(false,ApplicationDomain.currentDomain);

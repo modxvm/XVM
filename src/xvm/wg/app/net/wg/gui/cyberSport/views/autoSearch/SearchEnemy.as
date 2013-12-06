@@ -20,11 +20,7 @@ package net.wg.gui.cyberSport.views.autoSearch
 
       override protected function updateView() : void {
          super.updateView();
-         if(model.canInvokeBattleQueue)
-         {
-            this.buttonsBG.visible = true;
-            cancelButton.visible = true;
-         }
+         this.buttonsBG.visible = cancelButton.visible = model.canInvokeBattleQueue;
          updateTime();
          startTimer();
       }

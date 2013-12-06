@@ -35,6 +35,10 @@ package net.wg.gui.lobby.profile.pages.summary
          var _loc9_:uint = 0;
          var _loc10_:* = 0;
          var _loc3_:uint = param1.length;
+         if(param1.length == 0 || param1[0].length == 0)
+         {
+            return;
+         }
          var _loc4_:Number = DisplayObject(param1[0][0]).width;
          var _loc5_:int = Math.round(((this._maxWidth - this._centerAreaWidth) / 2 - _loc3_ * _loc4_) / (_loc3_ + 1));
          var _loc7_:* = 0;
@@ -74,10 +78,12 @@ package net.wg.gui.lobby.profile.pages.summary
          {
             this.leftPairs.splice(this.leftPairs.length-1,1);
          }
+         this.leftPairs = null;
          while(this.rightPairs.length > 0)
          {
             this.rightPairs.splice(this.rightPairs.length-1,1);
          }
+         this.rightPairs = null;
       }
    }
 

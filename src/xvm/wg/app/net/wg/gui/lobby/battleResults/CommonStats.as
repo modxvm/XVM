@@ -25,24 +25,6 @@ package net.wg.gui.lobby.battleResults
          super();
       }
 
-      private static function createQuestsData(param1:Array) : Array {
-         var _loc4_:Object = null;
-         var _loc2_:Array = [];
-         var _loc3_:* = 0;
-         while(_loc3_ < param1.length)
-         {
-            _loc4_ =
-               {
-                  "title":param1[_loc3_].taskType,
-                  "questInfo":param1[_loc3_]
-               }
-            ;
-            _loc2_.push(_loc4_);
-            _loc3_++;
-         }
-         return _loc2_;
-      }
-
       private static function onIconRollOver(param1:FinalStatisticEvent) : void {
          var _loc2_:Array = null;
          var _loc3_:Object = null;
@@ -202,10 +184,17 @@ package net.wg.gui.lobby.battleResults
          this.arenaNameLbl.text = _loc3_.arenaStr;
          this.tankSlot.areaIcon.source = _loc3_.arenaIcon;
          this.tankSlot.tankIcon.source = _loc3_.tankIcon;
-         this.tankSlot.playerNameLbl.text = _loc3_.playerNameStr;
+         App.utils.commons.formatPlayerName(this.tankSlot.playerNameLbl,_loc3_.playerNameStr,_loc3_.clanNameStr,_loc3_.regionNameStr);
          this.tankSlot.tankNameLbl.text = _loc3_.vehicleName;
          this.tankSlot.arenaCreateDateLbl.text = _loc3_.arenaCreateTimeStr;
-         this.tankSlot.vehicleStateLbl.text = _loc3_.vehicleStateStr;
+         if(_loc2_.killerID > 0)
+         {
+            App.utils.commons.formatPlayerName(this.tankSlot.vehicleStateLbl,_loc3_.killerNameStr,_loc3_.killerClanNameStr,_loc3_.killerRegionNameStr,false,_loc3_.vehicleStatePrefixStr,_loc3_.vehicleStateSuffixStr);
+         }
+         else
+         {
+            this.tankSlot.vehicleStateLbl.text = _loc3_.vehicleStateStr;
+         }
          this.tankSlot.vehicleStateLbl.textColor = _loc2_.killerID == 0?13224374:8684674;
          this.detailsMc.data = _loc2_;
          this.detailsMc.detailedReportBtn.addEventListener(ButtonEvent.CLICK,this.onDetailsClick);
@@ -230,7 +219,7 @@ package net.wg.gui.lobby.battleResults
          this.questList.addEventListener(QuestEvent.SELECT_QUEST,this.showQuest);
          if((_loc4_) && _loc4_.length > 0)
          {
-            this.questList.setData(createQuestsData(_loc4_));
+            this.questList.setData(_loc4_);
             this.noProgressTF.visible = false;
          }
          else
@@ -260,7 +249,7 @@ package net.wg.gui.lobby.battleResults
       }
 
       private function showQuest(param1:QuestEvent) : void {
-         this.myParent.showQuestsWindow(param1.questID);
+         this.myParent.showEventsWindow(param1.questID);
       }
    }
 

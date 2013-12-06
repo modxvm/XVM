@@ -38,6 +38,8 @@ package net.wg.gui.lobby.tankman
             _loc2_.preLastSkill = _loc4_.icon.small;
          }
          _loc2_.hasNewSkill = param1.hasNewSkills;
+         _loc2_.newSkillsCount = param1.newSkills[0];
+         _loc2_.lastNewSkillLevel = param1.newSkills[1];
          _loc2_.dropSkillFree = SkillDropModel.parseFromObject(param1.dropSkillsCost[0]);
          _loc2_.dropSkillFree.id = 0;
          _loc2_.dropSkillCredits = SkillDropModel.parseFromObject(param1.dropSkillsCost[1]);
@@ -74,6 +76,10 @@ package net.wg.gui.lobby.tankman
 
       public var hasNewSkill:Boolean;
 
+      public var newSkillsCount:int = 0;
+
+      public var lastNewSkillLevel:Number = 0;
+
       public var dropSkillFree:DropSkillsCost;
 
       public var dropSkillCredits:DropSkillsCost;
@@ -106,15 +112,24 @@ package net.wg.gui.lobby.tankman
          var _loc2_:DropSkillsCost = new DropSkillsCost();
          _loc2_.gold = param1.gold;
          _loc2_.credits = param1.credits;
+         _loc2_.defGold = param1.defGold;
+         _loc2_.defCredits = param1.defCredits;
          _loc2_.xpReuseFraction = param1.xpReuseFraction;
+         _loc2_.actionPrc = param1.actionPrc;
          return _loc2_;
       }
 
       public var credits:int;
 
+      public var defCredits:int;
+
       public var gold:int;
+
+      public var defGold:int;
 
       public var xpReuseFraction:Number;
 
       public var id:int;
+
+      public var actionPrc:Number;
    }

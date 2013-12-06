@@ -30,6 +30,8 @@ package scaleform.clik.interfaces
       function setListData(param1:ListData) : void;
 
       function setData(param1:Object) : void;
+
+      function getData() : Object;
    }
 
 }

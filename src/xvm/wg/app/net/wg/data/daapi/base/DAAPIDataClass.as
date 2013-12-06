@@ -24,34 +24,53 @@ package net.wg.data.daapi.base
          var _loc3_:* = typeof param1;
          if(_loc3_ == "object")
          {
-            if(param1 as Array)
+            if(param1  is  Array)
             {
                _loc4_ = param1 as Array;
-               _loc5_ = _loc4_.length;
-               _loc6_ = 0;
-               while(_loc6_ < _loc5_)
+               if(param2  is  Array)
                {
-                  if(!compare(_loc4_[_loc6_],param2[_loc6_]))
+                  _loc5_ = _loc4_.length;
+                  if(_loc5_ == param2.length)
+                  {
+                     _loc6_ = 0;
+                     while(_loc6_ < _loc5_)
+                     {
+                        if(!compare(_loc4_[_loc6_],param2[_loc6_]))
+                        {
+                           return false;
+                        }
+                        _loc6_++;
+                     }
+                  }
+                  else
                   {
                      return false;
                   }
-                  _loc6_++;
+               }
+               else
+               {
+                  return false;
                }
             }
             else
             {
                for (_loc7_ in param1)
                {
-                  if(!compare(param1[_loc7_],param2[_loc7_]))
+                  if(param2.hasOwnProperty(_loc7_.toString()))
                   {
-                     return false;
+                     if(!compare(param1[_loc7_],param2[_loc7_]))
+                     {
+                        return false;
+                     }
+                     continue;
                   }
+                  return false;
                }
             }
          }
          else
          {
-            if(param1 != param2)
+            if(param1 !== param2)
             {
                return false;
             }
@@ -136,7 +155,7 @@ package net.wg.data.daapi.base
          return true;
       }
 
-      private function getHash() : Object {
+      public function getHash() : Object {
          return this._hash;
       }
 

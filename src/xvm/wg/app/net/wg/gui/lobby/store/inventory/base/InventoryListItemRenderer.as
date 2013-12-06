@@ -4,6 +4,7 @@ package net.wg.gui.lobby.store.inventory.base
    import net.wg.data.VO.StoreTableData;
    import net.wg.utils.ILocale;
    import net.wg.data.constants.Currencies;
+   import net.wg.gui.components.controls.IconText;
    import net.wg.gui.lobby.store.STORE_STATUS_COLOR;
    import net.wg.gui.lobby.store.StoreEvent;
    import net.wg.gui.lobby.store.StoreTooltipMapVO;
@@ -25,20 +26,34 @@ package net.wg.gui.lobby.store.inventory.base
          this.sellItem();
       }
 
-      override protected function updateTexts(param1:StoreTableData, param2:Number, param3:Number) : void {
-         var _loc4_:ILocale = null;
+      override protected function updateTexts(param1:StoreTableData, param2:Number, param3:Number, param4:Number, param5:Number) : void {
+         var _loc6_:ILocale = null;
+         var _loc7_:String = null;
+         var _loc8_:* = NaN;
+         var _loc9_:* = NaN;
          if(App.instance)
          {
-            _loc4_ = App.utils.locale;
+            _loc6_ = App.utils.locale;
             credits.gotoAndStop(param1.currency);
+            _loc7_ = "";
+            _loc8_ = 0;
+            _loc9_ = 0;
             if(param1.currency == Currencies.GOLD)
             {
-               credits.price.text = _loc4_.gold(param2);
+               credits.price.text = _loc6_.gold(param2);
+               _loc8_ = param2;
+               _loc9_ = param5;
+               _loc7_ = IconText.GOLD;
             }
             else
             {
-               credits.price.text = _loc4_.integer(param3);
+               credits.price.text = _loc6_.integer(param3);
+               _loc7_ = IconText.CREDITS;
+               _loc8_ = param3;
+               _loc9_ = param4;
             }
+            actionPrice.setData(param1.actionPrc,_loc8_,_loc9_,_loc7_,false,param1.requestType);
+            credits.visible = !actionPrice.visible;
             if(errorField)
             {
                errorField.text = param1.disabled;

@@ -21,7 +21,7 @@ package net.wg.data.constants
 
       public static const CANT_NAN:String = " can`t be NaN.";
 
-      public static const CANT_EMPTY:String = " can`t emty.";
+      public static const CANT_EMPTY:String = " can`t empty.";
 
       public static const WASNT_FOUND:String = " was not found.";
 

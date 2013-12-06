@@ -9,6 +9,7 @@ package net.wg.gui.lobby.training
    import flash.text.TextField;
    import net.wg.gui.components.controls.SoundButton;
    import net.wg.gui.components.controls.SoundButtonEx;
+   import net.wg.gui.components.controls.UserNameField;
    import net.wg.gui.components.controls.TextFieldShort;
    import net.wg.gui.components.advanced.TextAreaSimple;
    import net.wg.gui.components.icons.BattleTypeIcon;
@@ -18,6 +19,7 @@ package net.wg.gui.lobby.training
    import net.wg.utils.ILocale;
    import net.wg.utils.IScheduler;
    import net.wg.data.VO.TrainingRoomInfoVO;
+   import net.wg.data.VO.UserVO;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.data.constants.Linkages;
    import flash.ui.Keyboard;
@@ -113,7 +115,7 @@ package net.wg.gui.lobby.training
 
       public var minimap:MinimapLobby;
 
-      public var owner:TextFieldShort;
+      public var owner:UserNameField;
 
       public var timeout:TextFieldShort;
 
@@ -258,7 +260,17 @@ package net.wg.gui.lobby.training
          this.map.htmlText = _loc2_.arenaName;
          this.titleField.htmlText = _loc2_.title;
          this.typeField.htmlText = _loc2_.arenaSubType;
-         this.owner.label = _loc2_.creator;
+         this.owner.userVO = new UserVO(
+            {
+               "accID":-1,
+               "uid":-1,
+               "fullName":_loc2_.creatorFullName,
+               "userName":_loc2_.creator,
+               "clanAbbrev":_loc2_.creatorClan,
+               "region":_loc2_.creatorRegion,
+               "igrType":_loc2_.creatorIgrType
+            }
+         );
          this.minimap.setMapS(_loc2_.arenaTypeID);
          this.description.position = 0;
          this.description.htmlText = _loc2_.description;

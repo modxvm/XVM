@@ -30,6 +30,12 @@ package net.wg.gui.lobby.questsWindow.data
       public function set elements(param1:Array) : void {
          this._elements = param1;
       }
+
+      override public function dispose() : void {
+         this._elements.splice(0,this._elements.length);
+         this._elements = null;
+         super.dispose();
+      }
    }
 
 }

@@ -14,6 +14,8 @@ package net.wg.gui.lobby.questsWindow
          super();
       }
 
+      private static const CONDITION_PADDING:int = 10;
+
       public var description:DescriptionBlock;
 
       public var subtasksList:SubtasksList;
@@ -30,7 +32,9 @@ package net.wg.gui.lobby.questsWindow
 
       override protected function configUI() : void {
          super.configUI();
+         this.conditions.visible = false;
          this.description.visible = false;
+         this.subtasksList.visible = false;
          this.description.mouseChildren = false;
          this.description.mouseEnabled = false;
       }
@@ -83,7 +87,7 @@ package net.wg.gui.lobby.questsWindow
       }
 
       private function setCondition() : void {
-         this.conditions.y = this.descrHeight + this.subtasksHeight;
+         this.conditions.y = this.descrHeight + this.subtasksHeight > 0?this.descrHeight + this.subtasksHeight + CONDITION_PADDING:0;
          if(this.infoData.conditions)
          {
             this.conditions.setData(this.infoData.conditions);

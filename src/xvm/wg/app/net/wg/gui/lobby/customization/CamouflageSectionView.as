@@ -138,6 +138,7 @@ package net.wg.gui.lobby.customization
          {
             view.invalidateListData(true);
          }
+         this.requestCurrentItem();
       }
 
       override public function requestCurrentItem() : void {
@@ -175,11 +176,11 @@ package net.wg.gui.lobby.customization
             if((_loc5_) && (_loc5_.selectedItems))
             {
                _loc6_ = _loc5_.selectedItems[this._selectedKind];
-               view.setListSelectedIndex(_loc2_.name,_loc6_);
+               view.setListSelectedIndex(_loc2_.name,false,_loc6_);
             }
             else
             {
-               view.setListSelectedIndex(_loc2_.name,null);
+               view.setListSelectedIndex(_loc2_.name,false,null);
             }
             view.invalidateListData(false);
             if((_loc6_ == null || _loc6_.id == null) && (this.currentData[this._selectedKind].id))
@@ -247,7 +248,6 @@ package net.wg.gui.lobby.customization
       override protected function configUI() : void {
          var _loc3_:CamoDemoRenderer = null;
          var _loc4_:CamoDropButton = null;
-         var _loc5_:* = NaN;
          var _loc6_:Object = null;
          var _loc7_:String = null;
          mouseChildren = true;
@@ -286,7 +286,7 @@ package net.wg.gui.lobby.customization
             list.addEventListener(ListEvent.INDEX_CHANGE,this.handleChangeGroupSelectedIndex);
          }
          var _loc2_:Number = 3;
-         _loc5_ = 0;
+         var _loc5_:Number = 0;
          _loc5_ = 0;
          while(_loc5_ < _loc2_)
          {
@@ -418,11 +418,14 @@ package net.wg.gui.lobby.customization
       }
 
       private function handleResetNewItem(param1:CustomizationEvent) : void {
+         this.newData = [null,null,null];
          this.newItemData = this.getEmptyDataItem();
          if(view != null)
          {
             view.list.selectedIndex = -1;
          }
+         this.currentDataDirty = true;
+         invalidate();
       }
 
       private function handleChangeActionLock(param1:CustomizationEvent) : void {

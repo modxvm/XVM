@@ -13,7 +13,7 @@ package net.wg.gui.components.tooltips.VO
 
       private var _commanderName:String = "";
 
-      private var _commanderRating:Number = 0;
+      private var _commanderRating:String = "";
 
       private var _isPeripheryAnother:Boolean = false;
 
@@ -33,11 +33,11 @@ package net.wg.gui.components.tooltips.VO
          this._commanderName = param1;
       }
 
-      public function get commanderRating() : Number {
+      public function get commanderRating() : String {
          return this._commanderRating;
       }
 
-      public function set commanderRating(param1:Number) : void {
+      public function set commanderRating(param1:String) : void {
          this._commanderRating = param1;
       }
 

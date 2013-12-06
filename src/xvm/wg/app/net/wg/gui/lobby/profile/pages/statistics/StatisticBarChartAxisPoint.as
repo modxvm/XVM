@@ -107,6 +107,10 @@ package net.wg.gui.lobby.profile.pages.statistics
          setSource(StatisticChartInfo(this._data).icon);
       }
 
+      public function getData() : Object {
+         return this._data;
+      }
+
       public function get enabled() : Boolean {
          return false;
       }

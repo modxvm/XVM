@@ -24,7 +24,21 @@ package net.wg.gui.lobby.profile.data
 
       public var isDossierForCurrentUser:Boolean;
 
+      public var showProgress:Boolean;
+
+      public var minValueForRecord:int = -1;
+
       public var arr:Array;
+
+      override protected function onDataWrite(param1:String, param2:Object) : Boolean {
+         if(param1 == "isDossierForCurrentUser")
+         {
+            this.showProgress = param2;
+            this.isDossierForCurrentUser = param2;
+            return false;
+         }
+         return super.onDataWrite(param1,param2);
+      }
    }
 
 }

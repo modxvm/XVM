@@ -31,7 +31,14 @@ package net.wg.infrastructure.base
       }
 
       public function setSize(param1:IWindow) : Boolean {
-         param1.updateSize(this._width,this._height);
+         if(this._width > 0 && this._height > 0)
+         {
+            param1.updateSize(this._width,this._height);
+         }
+         else
+         {
+            param1.updateSize(param1.getMinWidth(),param1.getMinHeight());
+         }
          return true;
       }
 

@@ -7,11 +7,12 @@ package net.wg.gui.lobby.techtree.data.vo
    public class UnlockProps extends Object implements IValueObject
    {
           
-      public function UnlockProps(param1:Number=undefined, param2:Number=undefined, param3:Number=undefined, param4:Array=null) {
+      public function UnlockProps(param1:Number=undefined, param2:Number=undefined, param3:Number=undefined, param4:Array=null, param5:Number=undefined) {
          super();
          this._parentID = param1;
          this._unlockIdx = param2;
          this._xpCost = param3;
+         this._defXpCost = param5;
          this._required = param4 != null?param4:[];
          if(this._xpCost > 0)
          {
@@ -29,6 +30,8 @@ package net.wg.gui.lobby.techtree.data.vo
 
       private var _xpCost:Number;
 
+      private var _defXpCost:Number;
+
       private var _xpCostLabel:String;
 
       private var _required:Array;
@@ -45,6 +48,10 @@ package net.wg.gui.lobby.techtree.data.vo
          return this._xpCost;
       }
 
+      public function get defXpCost() : Number {
+         return this._defXpCost;
+      }
+
       public function get xpCostLabel() : String {
          return this._xpCostLabel;
       }
@@ -55,6 +62,7 @@ package net.wg.gui.lobby.techtree.data.vo
             this._parentID = isNaN(param1[0])?0:param1[0];
             this._unlockIdx = isNaN(param1[1])?0:param1[1];
             this._xpCost = isNaN(param1[2])?0:param1[2];
+            this._defXpCost = isNaN(param1[3])?0:param1[3];
             this._xpCostLabel = param2.integer(this._xpCost);
             this._required = param1[3];
          }
@@ -78,6 +86,10 @@ package net.wg.gui.lobby.techtree.data.vo
             this._xpCost = param1.xpCost;
             this._xpCostLabel = param2.integer(this._xpCost);
          }
+         if(!isNaN(param1.defXpCost))
+         {
+            this._defXpCost = param1.defXpCost;
+         }
          if(param1.required != null)
          {
             this._required = param1.required;
@@ -92,6 +104,7 @@ package net.wg.gui.lobby.techtree.data.vo
          this._parentID = 0;
          this._unlockIdx = -1;
          this._xpCost = 0;
+         this._defXpCost = 0;
          this._xpCostLabel = "0";
          if(this._required != null)
          {
@@ -100,7 +113,7 @@ package net.wg.gui.lobby.techtree.data.vo
       }
 
       public function toString() : String {
-         return "[UnlockProps: parentID = " + this._parentID + ", unlockIdx = " + this.unlockIdx + ", xpCost = " + this._xpCost + ", required = " + this._required + " ]";
+         return "[UnlockProps: parentID = " + this._parentID + ", unlockIdx = " + this.unlockIdx + ", xpCost = " + this._xpCost + ", required = " + this._required + " defXpCost = " + this._defXpCost + "]";
       }
    }
 

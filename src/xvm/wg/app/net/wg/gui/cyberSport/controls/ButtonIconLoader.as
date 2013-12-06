@@ -70,9 +70,13 @@ package net.wg.gui.cyberSport.controls
       private function loaderDispose() : void {
          if(this.loader)
          {
+            this.loader.unloadAndStop(true);
             this.loader.contentLoaderInfo.removeEventListener(Event.COMPLETE,this.completeHandler);
             this.loader.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR,this.ioErrorHandler);
-            this.loader.parent.removeChild(this.loader);
+            if((this.container) && (this.container.contains(this.loader)))
+            {
+               this.container.removeChild(this.loader);
+            }
             this.loader = null;
          }
       }
@@ -82,8 +86,8 @@ package net.wg.gui.cyberSport.controls
       }
 
       override public function dispose() : void {
-         super.dispose();
          this.loaderDispose();
+         super.dispose();
       }
    }
 

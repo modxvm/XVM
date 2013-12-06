@@ -2,6 +2,7 @@ package net.wg.gui.lobby.profile.components
 {
    import net.wg.gui.components.advanced.ViewStack;
    import flash.geom.Point;
+   import net.wg.infrastructure.interfaces.entity.IUpdatable;
    import flash.display.MovieClip;
 
 
@@ -47,9 +48,10 @@ package net.wg.gui.lobby.profile.components
       }
 
       protected function applyData() : void {
-         if(currentView)
+         var _loc1_:IUpdatable = null;
+         for each (_loc1_ in cachedViews)
          {
-            currentView.update(this._dataForUpdate);
+            _loc1_.update(this._dataForUpdate);
          }
       }
 

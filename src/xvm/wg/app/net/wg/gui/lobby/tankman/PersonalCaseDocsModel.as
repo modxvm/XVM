@@ -24,7 +24,11 @@ package net.wg.gui.lobby.tankman
 
       public var priceOfGold:Number = 0;
 
-      public var priveOfCredits:Number = 0;
+      public var priceOfCredits:Number = 0;
+
+      public var defPriceOfGold:Number = 0;
+
+      public var defPriceOfCredits:Number = 0;
 
       public var useOnlyGold:Boolean = false;
 
@@ -35,6 +39,8 @@ package net.wg.gui.lobby.tankman
       public var currentTankmanIcon:String = null;
 
       public var originalIconFile:String = null;
+
+      public var actionPrc:Number = 0;
 
       public var fistNameMaxChars:uint = 0;
 

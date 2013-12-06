@@ -1,18 +1,16 @@
 package net.wg.gui.cyberSport.vo
 {
    import net.wg.infrastructure.interfaces.entity.IDisposable;
-   import net.wg.data.gui_items.Vehicle;
    import net.wg.gui.cyberSport.CSConstants;
 
 
    public class VehicleSelectorItemVO extends Object implements IDisposable
    {
           
-      public function VehicleSelectorItemVO(param1:int, param2:Boolean=false, param3:Boolean=false) {
+      public function VehicleSelectorItemVO(param1:Object, param2:Boolean=false, param3:Boolean=false) {
          super();
-         this._compactDescriptor = param1;
          this._useCache = param2;
-         this._vehicle = new Vehicle(param1);
+         this._vehicle = param1?new VehicleVO(param1):null;
          this._selected = param3;
          if(this._useCache)
          {
@@ -29,11 +27,9 @@ package net.wg.gui.cyberSport.vo
          }
       }
 
-      private var _compactDescriptor:int;
-
       private var _useCache:Boolean = false;
 
-      private var _vehicle:Vehicle;
+      private var _vehicle:VehicleVO;
 
       private var _selected:Boolean;
 
@@ -49,7 +45,7 @@ package net.wg.gui.cyberSport.vo
       }
 
       public function get compactDescriptor() : int {
-         return this._compactDescriptor;
+         return this._vehicle?this._vehicle.intCD:-1;
       }
 
       public function get selected() : Boolean {
@@ -86,6 +82,10 @@ package net.wg.gui.cyberSport.vo
 
       public function get isReadyToFight() : Boolean {
          return this.getDataSource().isReadyToFight;
+      }
+
+      public function get vehicle() : VehicleVO {
+         return this._vehicle;
       }
    }
 

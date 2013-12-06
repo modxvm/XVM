@@ -28,9 +28,11 @@ package net.wg.gui.lobby.dialogs
          return _loc1_ + PRICE_TEXT_OFFSET + this.priceMc.height + PRICE_BOTTOM_OFFSET;
       }
 
-      public function as_setMessagePrice(param1:String, param2:String) : void {
-         this.priceMc.priceValue.icon = param2;
-         this.priceMc.priceValue.text = param1;
+      public function as_setMessagePrice(param1:Number, param2:Number, param3:String, param4:Number) : void {
+         this.priceMc.currency = param3;
+         this.priceMc.price = param1;
+         this.priceMc.defPrice = param2;
+         this.priceMc.actionPrc = param4;
       }
 
       public function as_setPriceLabel(param1:String) : void {

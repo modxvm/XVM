@@ -22,6 +22,10 @@ package net.wg.gui.prebattle.data
 
       private var _canDecline:Boolean = false;
 
+      private var _isAcceptVisible:Boolean = false;
+
+      private var _isDeclineVisible:Boolean = false;
+
       public function get id() : int {
          return this._id;
       }
@@ -68,6 +72,22 @@ package net.wg.gui.prebattle.data
 
       public function set canDecline(param1:Boolean) : void {
          this._canDecline = param1;
+      }
+
+      public function get isAcceptVisible() : Boolean {
+         return this._isAcceptVisible;
+      }
+
+      public function set isAcceptVisible(param1:Boolean) : void {
+         this._isAcceptVisible = param1;
+      }
+
+      public function get isDeclineVisible() : Boolean {
+         return this._isDeclineVisible;
+      }
+
+      public function set isDeclineVisible(param1:Boolean) : void {
+         this._isDeclineVisible = param1;
       }
 
       public function hasNote() : Boolean {

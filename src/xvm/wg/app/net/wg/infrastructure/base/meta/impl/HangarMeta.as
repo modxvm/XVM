@@ -19,6 +19,8 @@ package net.wg.infrastructure.base.meta.impl
 
       public var closeHelpLayout:Function = null;
 
+      public var toggleGUIEditor:Function = null;
+
       public function onEscapeS() : void {
          App.utils.asserter.assertNotNull(this.onEscape,"onEscape" + Errors.CANT_NULL);
          this.onEscape();
@@ -37,6 +39,11 @@ package net.wg.infrastructure.base.meta.impl
       public function closeHelpLayoutS() : void {
          App.utils.asserter.assertNotNull(this.closeHelpLayout,"closeHelpLayout" + Errors.CANT_NULL);
          this.closeHelpLayout();
+      }
+
+      public function toggleGUIEditorS() : void {
+         App.utils.asserter.assertNotNull(this.toggleGUIEditor,"toggleGUIEditor" + Errors.CANT_NULL);
+         this.toggleGUIEditor();
       }
    }
 

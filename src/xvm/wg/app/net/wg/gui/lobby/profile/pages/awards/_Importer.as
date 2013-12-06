@@ -8,7 +8,7 @@ package net.wg.gui.lobby.profile.pages.awards
           
       public function _Importer() {
          super();
-         importClasses(Vector.<Class>([ProfileAwards,AwardsMainContainer,AwardsBlock,StageAwardsBlock,ProfileAwards]));
+         importClasses(Vector.<Class>([AwardsMainContainer,AwardsBlock,StageAwardsBlock,ProfileAwards]));
       }
    }
 

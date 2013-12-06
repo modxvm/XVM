@@ -41,9 +41,9 @@ package net.wg.infrastructure.base.meta.impl
          this.setUserInput(param1);
       }
 
-      public function setResultCreditS(param1:int) : void {
+      public function setResultCreditS(param1:Boolean, param2:int) : void {
          App.utils.asserter.assertNotNull(this.setResultCredit,"setResultCredit" + Errors.CANT_NULL);
-         this.setResultCredit(param1);
+         this.setResultCredit(param1,param2);
       }
    }
 

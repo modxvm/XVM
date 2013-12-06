@@ -13,6 +13,10 @@ package net.wg.gui.lobby.profile.pages.summary
          super.applyResizing();
          footer.y = Math.round(currentDimension.y - footer.height);
       }
+
+      override protected function onDispose() : void {
+         super.onDispose();
+      }
    }
 
 }

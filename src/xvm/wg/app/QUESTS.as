@@ -13,6 +13,8 @@ package
 
       public static const IGR_TOOLTIP_WINSLABEL:String = "#quests:igr/tooltip/winsLabel";
 
+      public static const POSTBATTLE_PROGRESSRESET:String = "#quests:postBattle/progressReset";
+
       public static const TOOLTIP_PROGRESS_GROUPBY_HEADER:String = "#quests:tooltip/progress/groupBy/header";
 
       public static const TOOLTIP_PROGRESS_GROUPBY_BODY:String = "#quests:tooltip/progress/groupBy/body";
@@ -145,11 +147,115 @@ package
 
       public static const DETAILS_CONDITIONS_VEHICLEDESCR:String = "#quests:details/conditions/vehicleDescr";
 
+      public static const DETAILS_CONDITIONS_VEHICLE:String = "#quests:details/conditions/vehicle";
+
       public static const DETAILS_CONDITIONS_VEHICLEKILLS:String = "#quests:details/conditions/vehicleKills";
 
       public static const DETAILS_CONDITIONS_VEHICLESUNLOCKED:String = "#quests:details/conditions/vehiclesUnlocked";
 
       public static const DETAILS_CONDITIONS_VEHICLESOWNED:String = "#quests:details/conditions/vehiclesOwned";
+
+      public static const DETAILS_MODIFIERS_TITLE_DISCOUNT:String = "#quests:details/modifiers/title/discount";
+
+      public static const DETAILS_MODIFIERS_TITLE_SELLING:String = "#quests:details/modifiers/title/selling";
+
+      public static const DETAILS_MODIFIERS_ECONOMICS_SLOTSPRICES:String = "#quests:details/modifiers/economics/slotsPrices";
+
+      public static const DETAILS_MODIFIERS_ECONOMICS_BERTHSPRICES:String = "#quests:details/modifiers/economics/berthsPrices";
+
+      public static const DETAILS_MODIFIERS_ECONOMICS_CREDITSTANKMANCOST:String = "#quests:details/modifiers/economics/creditsTankmanCost";
+
+      public static const DETAILS_MODIFIERS_ECONOMICS_GOLDTANKMANCOST:String = "#quests:details/modifiers/economics/goldTankmanCost";
+
+      public static const DETAILS_MODIFIERS_ECONOMICS_CREDITSDROPSKILLSCOST:String = "#quests:details/modifiers/economics/creditsDropSkillsCost";
+
+      public static const DETAILS_MODIFIERS_ECONOMICS_GOLDDROPSKILLSCOST:String = "#quests:details/modifiers/economics/goldDropSkillsCost";
+
+      public static const DETAILS_MODIFIERS_ECONOMICS_EXCHANGERATE:String = "#quests:details/modifiers/economics/exchangeRate";
+
+      public static const DETAILS_MODIFIERS_ECONOMICS_EXCHANGERATEFORSHELLSANDEQS:String = "#quests:details/modifiers/economics/exchangeRateForShellsAndEqs";
+
+      public static const DETAILS_MODIFIERS_ECONOMICS_PAIDREMOVALCOST:String = "#quests:details/modifiers/economics/paidRemovalCost";
+
+      public static const DETAILS_MODIFIERS_ECONOMICS_PASSPORTCHANGECOST:String = "#quests:details/modifiers/economics/passportChangeCost";
+
+      public static const DETAILS_MODIFIERS_ECONOMICS_CLANCREATIONCOST:String = "#quests:details/modifiers/economics/clanCreationCost";
+
+      public static const DETAILS_MODIFIERS_ECONOMICS_FREEXPCONVERSIONDISCRECITY:String = "#quests:details/modifiers/economics/freeXPConversionDiscrecity";
+
+      public static const DETAILS_MODIFIERS_ECONOMICS_FREEXPTOTMANXPRATE:String = "#quests:details/modifiers/economics/freeXPToTManXPRate";
+
+      public static const DETAILS_MODIFIERS_ECONOMICS_PREMIUMPACKET1:String = "#quests:details/modifiers/economics/premiumPacket1";
+
+      public static const DETAILS_MODIFIERS_ECONOMICS_PREMIUMPACKET3:String = "#quests:details/modifiers/economics/premiumPacket3";
+
+      public static const DETAILS_MODIFIERS_ECONOMICS_PREMIUMPACKET7:String = "#quests:details/modifiers/economics/premiumPacket7";
+
+      public static const DETAILS_MODIFIERS_ECONOMICS_PREMIUMPACKET30:String = "#quests:details/modifiers/economics/premiumPacket30";
+
+      public static const DETAILS_MODIFIERS_ECONOMICS_PREMIUMPACKET180:String = "#quests:details/modifiers/economics/premiumPacket180";
+
+      public static const DETAILS_MODIFIERS_ECONOMICS_PREMIUMPACKET360:String = "#quests:details/modifiers/economics/premiumPacket360";
+
+      public static const DETAILS_MODIFIERS_ECONOMICS_CAMOUFLAGEPACKETINFCOST:String = "#quests:details/modifiers/economics/camouflagePacketInfCost";
+
+      public static const DETAILS_MODIFIERS_ECONOMICS_CAMOUFLAGEPACKET7COST:String = "#quests:details/modifiers/economics/camouflagePacket7Cost";
+
+      public static const DETAILS_MODIFIERS_ECONOMICS_CAMOUFLAGEPACKET30COST:String = "#quests:details/modifiers/economics/camouflagePacket30Cost";
+
+      public static const DETAILS_MODIFIERS_ECONOMICS_INSCRIPTIONPACKETINFCOST:String = "#quests:details/modifiers/economics/inscriptionPacketInfCost";
+
+      public static const DETAILS_MODIFIERS_ECONOMICS_INSCRIPTIONPACKET7COST:String = "#quests:details/modifiers/economics/inscriptionPacket7Cost";
+
+      public static const DETAILS_MODIFIERS_ECONOMICS_INSCRIPTIONPACKET30COST:String = "#quests:details/modifiers/economics/inscriptionPacket30Cost";
+
+      public static const DETAILS_MODIFIERS_ECONOMICS_EMBLEMPACKETINFCOST:String = "#quests:details/modifiers/economics/emblemPacketInfCost";
+
+      public static const DETAILS_MODIFIERS_ECONOMICS_EMBLEMPACKET7COST:String = "#quests:details/modifiers/economics/emblemPacket7Cost";
+
+      public static const DETAILS_MODIFIERS_ECONOMICS_EMBLEMPACKET30COST:String = "#quests:details/modifiers/economics/emblemPacket30Cost";
+
+      public static const DETAILS_MODIFIERS_EQUIPMENT_GOLD:String = "#quests:details/modifiers/equipment/gold";
+
+      public static const DETAILS_MODIFIERS_EQUIPMENT_CREDITS:String = "#quests:details/modifiers/equipment/credits";
+
+      public static const DETAILS_MODIFIERS_EQUIPMENT_GOLDPRICEMULTIPLIER:String = "#quests:details/modifiers/equipment/goldPriceMultiplier";
+
+      public static const DETAILS_MODIFIERS_EQUIPMENT_CREDITSPRICEMULTIPLIER:String = "#quests:details/modifiers/equipment/creditsPriceMultiplier";
+
+      public static const DETAILS_MODIFIERS_OPTDEVICE:String = "#quests:details/modifiers/optDevice";
+
+      public static const DETAILS_MODIFIERS_OPTDEVICE_GOLDPRICEMULTIPLIER:String = "#quests:details/modifiers/optDevice/goldPriceMultiplier";
+
+      public static const DETAILS_MODIFIERS_OPTDEVICE_CREDITSPRICEMULTIPLIER:String = "#quests:details/modifiers/optDevice/creditsPriceMultiplier";
+
+      public static const DETAILS_MODIFIERS_SHELL_GOLD:String = "#quests:details/modifiers/shell/gold";
+
+      public static const DETAILS_MODIFIERS_SHELL_CREDITS:String = "#quests:details/modifiers/shell/credits";
+
+      public static const DETAILS_MODIFIERS_SHELL_GOLDPRICEMULTIPLIER:String = "#quests:details/modifiers/shell/goldPriceMultiplier";
+
+      public static const DETAILS_MODIFIERS_SHELL_CREDITSPRICEMULTIPLIER:String = "#quests:details/modifiers/shell/creditsPriceMultiplier";
+
+      public static const DETAILS_MODIFIERS_SHELL_NATION_GOLDPRICEMULTIPLIER:String = "#quests:details/modifiers/shell/nation/goldPriceMultiplier";
+
+      public static const DETAILS_MODIFIERS_SHELL_NATION_CREDITSPRICEMULTIPLIER:String = "#quests:details/modifiers/shell/nation/creditsPriceMultiplier";
+
+      public static const DETAILS_MODIFIERS_VEHICLE:String = "#quests:details/modifiers/vehicle";
+
+      public static const DETAILS_MODIFIERS_VEHICLE_SELL:String = "#quests:details/modifiers/vehicle/sell";
+
+      public static const DETAILS_MODIFIERS_VEHICLE_GOLDPRICEMULTIPLIER:String = "#quests:details/modifiers/vehicle/goldPriceMultiplier";
+
+      public static const DETAILS_MODIFIERS_VEHICLE_CREDITSPRICEMULTIPLIER:String = "#quests:details/modifiers/vehicle/creditsPriceMultiplier";
+
+      public static const DETAILS_MODIFIERS_VEHICLE_NATION_GOLDPRICEMULTIPLIER:String = "#quests:details/modifiers/vehicle/nation/goldPriceMultiplier";
+
+      public static const DETAILS_MODIFIERS_VEHICLE_NATION_CREDITSPRICEMULTIPLIER:String = "#quests:details/modifiers/vehicle/nation/creditsPriceMultiplier";
+
+      public static const DETAILS_MODIFIERS_CUSTOMIZATION_VEHCAMOUFLAGE:String = "#quests:details/modifiers/customization/vehCamouflage";
+
+      public static const DETAILS_MODIFIERS_CUSTOMIZATION_GROUPEMBLEM:String = "#quests:details/modifiers/customization/groupEmblem";
    }
 
 }

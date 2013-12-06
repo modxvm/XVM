@@ -80,7 +80,7 @@ package net.wg.gui.components.common
             }
             if(this.manageFocus)
             {
-               param1.addEventListener(MouseEvent.MOUSE_DOWN,this.onViewClick,true,0,true);
+               param1.addEventListener(MouseEvent.MOUSE_DOWN,this.onViewClick,false,0,true);
             }
             if(param1  is  AbstractView)
             {
@@ -326,7 +326,7 @@ package net.wg.gui.components.common
          super.removeChild(param1);
          if(this.manageFocus)
          {
-            param1.removeEventListener(MouseEvent.MOUSE_DOWN,this.onViewClick,true);
+            param1.removeEventListener(MouseEvent.MOUSE_DOWN,this.onViewClick,false);
          }
          dispatchEvent(new ManagedContainerEvent(ManagedContainerEvent.CHILD_REMOVED));
       }

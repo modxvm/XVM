@@ -5,6 +5,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
    import flash.display.MovieClip;
    import flash.text.TextField;
    import net.wg.gui.components.controls.IconText;
+   import net.wg.gui.components.controls.ActionPrice;
    import net.wg.gui.events.DeviceEvent;
    import net.wg.utils.IEventCollector;
    import scaleform.clik.events.ButtonEvent;
@@ -59,9 +60,9 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
 
       public var priceMC:IconText;
 
-      public var targetMC:MovieClip;
+      public var actionPrice:ActionPrice;
 
-      public var clickArea:MovieClip;
+      public var targetMC:MovieClip;
 
       private var extraIcon:ExtraIcon;
 
@@ -81,8 +82,15 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
       }
 
       override protected function configUI() : void {
+         var _loc1_:IEventCollector = null;
          super.configUI();
-         var _loc1_:IEventCollector = App.utils.events;
+         if(this.actionPrice)
+         {
+            this.actionPrice.invalidate();
+            this.actionPrice.validateNow();
+            this.actionPrice.visible = false;
+         }
+         _loc1_ = App.utils.events;
          if(this.destroyButton)
          {
             this.destroyButton.focusTarget = this;
@@ -105,7 +113,6 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
          if(this.priceMC)
          {
             this.priceMC.mouseEnabled = this.priceMC.mouseChildren = false;
-            this.priceMC.textFieldYOffset = 2;
          }
          if(this.targetMC)
          {
@@ -148,6 +155,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
          var _loc1_:* = 0;
          var _loc2_:String = null;
          var _loc3_:String = null;
+         var _loc4_:* = NaN;
          if(!data)
          {
             return;
@@ -199,6 +207,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
          {
             this.targetMC.visible = true;
             this.priceMC.visible = false;
+            this.actionPrice.visible = false;
             if(data.target == 3)
             {
                this.priceMC.icon = data.currency;
@@ -212,10 +221,15 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
                }
                if(data.status == MENU.MODULEFITS_CREDIT_ERROR)
                {
+                  if(this.actionPrice)
+                  {
+                     this.actionPrice.textColorType = ActionPrice.TEXT_COLOR_TYPE_ERROR;
+                  }
                   this.priceMC.textColor = 10158594;
                }
                else
                {
+                  this.actionPrice.textColorType = ActionPrice.TEXT_COLOR_TYPE_ICON;
                   if(data.status != "")
                   {
                      this.priceMC.textColor = 6710886;
@@ -225,8 +239,14 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
                      this.priceMC.textColor = 13556185;
                   }
                }
+               if(this.actionPrice)
+               {
+                  _loc4_ = data.hasOwnProperty("actionPrc")?data.actionPrc:0;
+                  this.actionPrice.setData(_loc4_,data.price,data.defPrice,data.currency);
+                  this.actionPrice.setup(this);
+               }
                this.targetMC.gotoAndPlay(SHOP_STATE);
-               this.priceMC.visible = true;
+               this.priceMC.visible = this.actionPrice?!this.actionPrice.visible:true;
                this.targetMC.visible = false;
                this.priceMC.validateNow();
             }
@@ -284,10 +304,31 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
       }
 
       override public function set enabled(param1:Boolean) : void {
+         if(this.actionPrice)
+         {
+            this.actionPrice.textColorType = param1?ActionPrice.TEXT_COLOR_TYPE_ICON:ActionPrice.TEXT_COLOR_TYPE_DISABLE;
+         }
          super.enabled = param1;
          mouseEnabled = true;
          mouseChildren = true;
          buttonMode = enabled;
+      }
+
+      override public function dispose() : void {
+         var _loc1_:IEventCollector = App.utils.events;
+         if(this.destroyButton)
+         {
+            _loc1_.removeEvent(this.destroyButton,ButtonEvent.CLICK,this.onRemoveButtonClick);
+         }
+         if(this.removeButton)
+         {
+            _loc1_.removeEvent(this.removeButton,ButtonEvent.CLICK,this.onRemoveButtonClick);
+         }
+         if(this.actionPrice)
+         {
+            this.actionPrice.dispose();
+         }
+         super.dispose();
       }
 
       private function onClick(param1:MouseEvent) : void {

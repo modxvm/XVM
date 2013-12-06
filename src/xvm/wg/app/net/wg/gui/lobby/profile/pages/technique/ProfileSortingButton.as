@@ -28,9 +28,9 @@ package net.wg.gui.lobby.profile.pages.technique
          var _loc2_:UILoaderAlt = UILoaderAlt(param1.target);
          if(param1.target == mcAscendingIcon)
          {
-            _loc2_.y = _height - _loc2_.height;
+            _loc2_.y = Math.round(_height - _loc2_.height);
          }
-         _loc2_.x = (_width - _loc2_.width) / 2;
+         _loc2_.x = Math.round((_width - _loc2_.width) / 2);
          isSortIconLoadingCompete = true;
          invalidate();
       }

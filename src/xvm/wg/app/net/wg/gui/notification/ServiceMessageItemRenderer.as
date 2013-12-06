@@ -45,6 +45,10 @@ package net.wg.gui.notification
          this.data = param1;
       }
 
+      public function getData() : Object {
+         return this.data;
+      }
+
       override public function toString() : String {
          return "[Service message ListItemRenderer " + this.index + ", " + name + "]";
       }

@@ -6,8 +6,12 @@ package net.wg.gui.cyberSport.views.autoSearch
    import net.wg.gui.components.controls.SoundButtonEx;
    import net.wg.gui.cyberSport.vo.AutoSearchVO;
    import scaleform.clik.events.ButtonEvent;
+   import scaleform.clik.events.InputEvent;
    import flash.events.Event;
    import net.wg.gui.cyberSport.controls.events.CSComponentEvent;
+   import scaleform.clik.ui.InputDetails;
+   import flash.ui.Keyboard;
+   import scaleform.clik.constants.InputValue;
 
 
    public class StateViewBase extends Sprite implements ICSAutoSearchMainView
@@ -33,6 +37,7 @@ package net.wg.gui.cyberSport.views.autoSearch
             this.cancelButton.addEventListener(ButtonEvent.CLICK,this.cancelButtonOnClick);
             this.cancelButton.mouseEnabled = true;
          }
+         addEventListener(InputEvent.INPUT,this.handleInput);
       }
 
       public static const UPDATE_TIMER:String = "csUpdateTimer";
@@ -156,6 +161,7 @@ package net.wg.gui.cyberSport.views.autoSearch
             this.cancelButton.removeEventListener(ButtonEvent.CLICK,this.cancelButtonOnClick);
             this.cancelButton.dispose();
          }
+         removeEventListener(InputEvent.INPUT,this.handleInput);
       }
 
       protected function updateTime() : void {
@@ -173,8 +179,21 @@ package net.wg.gui.cyberSport.views.autoSearch
          dispatchEvent(new CSComponentEvent(CSComponentEvent.AUTO_SEARCH_APPLY_BTN,this.currentState));
       }
 
-      protected function cancelButtonOnClick(param1:ButtonEvent) : void {
+      protected function cancelButtonOnClick(param1:ButtonEvent=null) : void {
          dispatchEvent(new CSComponentEvent(CSComponentEvent.AUTO_SEARCH_CANCEL_BTN,this.currentState));
+      }
+
+      public function handleInput(param1:InputEvent) : void {
+         if(param1.handled)
+         {
+            return;
+         }
+         var _loc2_:InputDetails = param1.details;
+         if((this.cancelButton) && (_loc2_.code == Keyboard.ESCAPE) && _loc2_.value == InputValue.KEY_DOWN)
+         {
+            param1.handled = true;
+            this.cancelButtonOnClick();
+         }
       }
    }
 

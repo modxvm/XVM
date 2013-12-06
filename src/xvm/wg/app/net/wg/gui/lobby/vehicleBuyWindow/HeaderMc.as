@@ -5,6 +5,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
    import net.wg.gui.components.advanced.TankIcon;
    import net.wg.gui.components.advanced.TextAreaSimple;
    import net.wg.gui.components.controls.IconText;
+   import net.wg.gui.components.controls.ActionPrice;
    import net.wg.gui.components.controls.ScrollBar;
 
 
@@ -25,7 +26,15 @@ package net.wg.gui.lobby.vehicleBuyWindow
 
       public var tankPrice:IconText;
 
+      public var tankActionPrice:ActionPrice;
+
       public var descriptionScrollBar:ScrollBar;
+
+      override public function dispose() : void {
+         this.tankActionPrice.dispose();
+         this.tankActionPrice = null;
+         super.dispose();
+      }
    }
 
 }

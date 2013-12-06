@@ -2,7 +2,7 @@ package net.wg.gui.components.common.waiting
 {
    import net.wg.infrastructure.base.meta.impl.WaitingViewMeta;
    import net.wg.infrastructure.managers.IWaitingView;
-   import flash.events.Event;
+   import scaleform.clik.events.InputEvent;
    import net.wg.infrastructure.interfaces.IView;
    import scaleform.gfx.FocusManager;
    import flash.events.MouseEvent;
@@ -15,13 +15,9 @@ package net.wg.gui.components.common.waiting
          super();
       }
 
-      public static const WAITING_STATE_CHANGED:String = "waitingStateChanged";
-
       private static const VISIBLE_INVALID:String = "visibleInv";
 
       public var waitingComponent:WaitingComponent;
-
-      private var _isVisible:Boolean;
 
       override public function updateStage(param1:Number, param2:Number) : void {
          super.updateStage(param1,param2);
@@ -29,39 +25,41 @@ package net.wg.gui.components.common.waiting
       }
 
       public function show(param1:Object) : void {
+         addEventListener(InputEvent.INPUT,this.handleInput,false,0,true);
          this.waitingComponent.setMessage(param1.toString());
-         this.setVisibility(true);
+         this.visible = true;
       }
 
       public function hide(param1:Object) : void {
-         this.setVisibility(false);
+         removeEventListener(InputEvent.INPUT,this.handleInput);
+         this.visible = false;
       }
 
       override public function set visible(param1:Boolean) : void {
-         super.visible = this._isVisible;
-      }
-
-      public function get isVisible() : Boolean {
-         return this._isVisible;
-      }
-
-      override protected function draw() : void {
-         super.draw();
-         if(isInvalid(VISIBLE_INVALID))
+         if(param1 != visible)
          {
-            this.visible = this._isVisible;
-            this.waitingComponent.setAnimationStatus(!this._isVisible);
-            dispatchEvent(new Event(WAITING_STATE_CHANGED));
+            super.visible = param1;
+            this.onWaitingStateChanged();
+            if(this.waitingComponent)
+            {
+               this.waitingComponent.setAnimationStatus(!param1);
+            }
          }
       }
 
-      override protected function onPopulate() : void {
-         super.onPopulate();
-         addEventListener(WaitingView.WAITING_STATE_CHANGED,this.waitingStateChangedHandler);
+      override protected function configUI() : void {
+         super.configUI();
+         if(this.waitingComponent)
+         {
+            this.waitingComponent.setAnimationStatus(!visible);
+         }
+      }
+
+      override protected function nextFrameAfterPopulateHandler() : void {
+         super.visible = false;
       }
 
       override protected function onDispose() : void {
-         removeEventListener(WaitingView.WAITING_STATE_CHANGED,this.waitingStateChangedHandler);
          if(this.waitingComponent)
          {
             this.waitingComponent.parent.removeChild(this.waitingComponent);
@@ -71,17 +69,9 @@ package net.wg.gui.components.common.waiting
          super.onDispose();
       }
 
-      private function setVisibility(param1:Boolean) : void {
-         if(this._isVisible != param1)
-         {
-            this._isVisible = param1;
-            invalidate(VISIBLE_INVALID);
-         }
-      }
-
-      private function waitingStateChangedHandler(param1:Event) : void {
-         var _loc2_:IView = null;
-         if(this.isVisible)
+      private function onWaitingStateChanged() : void {
+         var _loc1_:IView = null;
+         if(visible)
          {
             FocusManager.setFocus(this);
             FocusManager.setModalClip(this);
@@ -91,11 +81,16 @@ package net.wg.gui.components.common.waiting
             FocusManager.setModalClip(null);
             if(App.containerMgr.lastFocusedView)
             {
-               _loc2_ = App.containerMgr.lastFocusedView;
+               _loc1_ = App.containerMgr.lastFocusedView;
                App.containerMgr.lastFocusedView = null;
-               _loc2_.dispatchEvent(new MouseEvent(MouseEvent.MOUSE_DOWN));
+               _loc1_.dispatchEvent(new MouseEvent(MouseEvent.MOUSE_DOWN));
             }
          }
+      }
+
+      override public function handleInput(param1:InputEvent) : void {
+         param1.handled = true;
+         super.handleInput(param1);
       }
    }
 

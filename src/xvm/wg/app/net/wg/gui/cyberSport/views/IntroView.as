@@ -10,6 +10,7 @@ package net.wg.gui.cyberSport.views
    import net.wg.gui.cyberSport.controls.ButtonDnmIcon;
    import scaleform.clik.events.ButtonEvent;
    import flash.events.MouseEvent;
+   import net.wg.data.constants.Tooltips;
    import net.wg.gui.utils.ComplexTooltipHelper;
    import net.wg.gui.cyberSport.controls.events.CSComponentEvent;
    import net.wg.data.constants.generated.CYBER_SPORT_ALIASES;
@@ -124,9 +125,7 @@ package net.wg.gui.cyberSport.views
                this.showTooltip(_loc2_,_loc3_);
                break;
             case this.selectedVehiclesInfo:
-               _loc2_ = CYBERSPORT.BUTTON_CHOOSEVEHICLES_INFO_TOOLTIP_TITLE;
-               _loc3_ = this._readyVehiclesSelected?CYBERSPORT.BUTTON_CHOOSEVEHICLES_INFO_TOOLTIP_DESCRIPTION_VALID:this._selectedVehicles.length == 0?CYBERSPORT.BUTTON_CHOOSEVEHICLES_INFO_TOOLTIP_DESCRIPTION_NOTSELECTED:CYBERSPORT.BUTTON_CHOOSEVEHICLES_INFO_TOOLTIP_DESCRIPTION_NOTVALID;
-               this.showTooltip(_loc2_,_loc3_);
+               App.toolTipMgr.showSpecial(Tooltips.CYBER_SPORT_AUTOSEARCH_VEHICLES,null,this._selectedVehicles);
                break;
          }
       }

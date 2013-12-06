@@ -65,6 +65,10 @@ package
 
       public static const WINDOW_VEHICLESELECTOR_FILTERS_ALL:String = "#cyberSport:window/vehicleSelector/filters/all";
 
+      public static const WINDOW_VEHICLESELECTOR_FILTERS_LEVEL:String = "#cyberSport:window/vehicleSelector/filters/level";
+
+      public static const WINDOW_VEHICLESELECTOR_FILTERS_ALLLEVELS:String = "#cyberSport:window/vehicleSelector/filters/allLevels";
+
       public static const WINDOW_VEHICLESELECTOR_BUTTONS_SELECT:String = "#cyberSport:window/vehicleSelector/buttons/select";
 
       public static const WINDOW_VEHICLESELECTOR_BUTTONS_CANCEL:String = "#cyberSport:window/vehicleSelector/buttons/cancel";
@@ -130,6 +134,12 @@ package
       public static const WINDOW_UNIT_CANCELSLOTSETTINGS:String = "#cyberSport:window/unit/cancelSlotSettings";
 
       public static const WINDOW_UNIT_MESSAGE_CANDIDATE:String = "#cyberSport:window/unit/message/candidate";
+
+      public static const WINDOW_UNIT_MESSAGE_CANDIDATE_LOCKEDUNITS:String = "#cyberSport:window/unit/message/candidate/lockedUnits";
+
+      public static const WINDOW_UNIT_MESSAGE_CANDIDATE_INVALIDVEHICLES:String = "#cyberSport:window/unit/message/candidate/invalidVehicles";
+
+      public static const WINDOW_UNIT_MESSAGE_CANDIDATE_UNITISFULL:String = "#cyberSport:window/unit/message/candidate/unitIsFull";
 
       public static const WINDOW_UNIT_MESSAGE_NOVEHICLE:String = "#cyberSport:window/unit/message/noVehicle";
 

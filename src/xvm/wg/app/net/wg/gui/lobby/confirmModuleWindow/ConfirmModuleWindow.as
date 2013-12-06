@@ -5,6 +5,7 @@ package net.wg.gui.lobby.confirmModuleWindow
    import net.wg.gui.components.controls.SoundButtonEx;
    import net.wg.gui.components.controls.IconText;
    import flash.text.TextField;
+   import net.wg.gui.components.controls.ActionPrice;
    import net.wg.gui.components.controls.NumericStepper;
    import net.wg.gui.components.advanced.ExtraModuleIcon;
    import net.wg.gui.components.controls.DropdownMenu;
@@ -59,6 +60,8 @@ package net.wg.gui.lobby.confirmModuleWindow
       public var price:IconText;
 
       public var total:IconText;
+
+      public var actionPrice:ActionPrice;
 
       public var nsCount:NumericStepper;
 
@@ -119,9 +122,15 @@ package net.wg.gui.lobby.confirmModuleWindow
          var _loc5_:uint = 0;
          var _loc6_:* = NaN;
          var _loc7_:ILocale = null;
-         var _loc8_:String = null;
-         var _loc9_:String = null;
-         var _loc10_:String = null;
+         var _loc8_:* = NaN;
+         var _loc9_:* = NaN;
+         var _loc10_:* = NaN;
+         var _loc11_:* = NaN;
+         var _loc12_:String = null;
+         var _loc13_:String = null;
+         var _loc14_:String = null;
+         var _loc15_:* = NaN;
+         var _loc16_:* = NaN;
          super.draw();
          if(isInvalid(DATA_INVALID))
          {
@@ -212,16 +221,24 @@ package net.wg.gui.lobby.confirmModuleWindow
                {
                   if(this.dropdownMenu.selectedIndex == 0)
                   {
-                     _loc8_ = "0";
-                     _loc9_ = _loc7_.integer(this.nsCount.value * this.moduleInfo.price[0]);
-                     _loc10_ = _loc9_;
+                     _loc12_ = "0";
+                     _loc9_ = this.nsCount.value * this.moduleInfo.price[0];
+                     _loc11_ = this.nsCount.value * this.moduleInfo.defPrice[0];
+                     _loc13_ = _loc7_.integer(_loc9_);
+                     _loc14_ = _loc13_;
+                     _loc15_ = _loc9_;
+                     _loc16_ = _loc11_;
                      this.currency = Currencies.CREDITS;
                   }
                   else
                   {
-                     _loc9_ = "0";
-                     _loc8_ = _loc7_.gold(this.nsCount.value * this.moduleInfo.price[1]);
-                     _loc10_ = _loc8_;
+                     _loc13_ = "0";
+                     _loc8_ = this.nsCount.value * this.moduleInfo.price[1];
+                     _loc10_ = this.nsCount.value * this.moduleInfo.defPrice[1];
+                     _loc12_ = _loc7_.gold(_loc8_);
+                     _loc14_ = _loc12_;
+                     _loc15_ = _loc8_;
+                     _loc16_ = _loc10_;
                      this.currency = Currencies.GOLD;
                   }
                }
@@ -230,24 +247,35 @@ package net.wg.gui.lobby.confirmModuleWindow
                   this.currency = this.moduleInfo.currency;
                   if(this.moduleInfo.currency == Currencies.GOLD)
                   {
-                     _loc8_ = _loc7_.gold(this.nsCount.value * this.moduleInfo.price[1]);
-                     _loc10_ = _loc8_;
-                     _loc9_ = "0";
+                     _loc8_ = this.nsCount.value * this.moduleInfo.price[1];
+                     _loc10_ = this.nsCount.value * this.moduleInfo.defPrice[1];
+                     _loc12_ = _loc7_.gold(_loc8_);
+                     _loc14_ = _loc12_;
+                     _loc15_ = _loc8_;
+                     _loc16_ = _loc10_;
+                     _loc13_ = "0";
                   }
                   else
                   {
-                     _loc9_ = _loc7_.integer(this.nsCount.value * this.moduleInfo.price[0]);
-                     _loc10_ = _loc9_;
-                     _loc8_ = "0";
+                     _loc9_ = this.nsCount.value * this.moduleInfo.price[0];
+                     _loc11_ = this.nsCount.value * this.moduleInfo.defPrice[0];
+                     _loc13_ = _loc7_.integer(_loc9_);
+                     _loc14_ = _loc13_;
+                     _loc15_ = _loc9_;
+                     _loc12_ = "0";
+                     _loc16_ = _loc11_;
                   }
                }
-               this.resultGold.text = _loc8_;
-               this.resultCredits.text = _loc9_;
+               this.resultGold.text = _loc12_;
+               this.resultCredits.text = _loc13_;
                this.price.icon = this.currency;
                this.price.textColor = Currencies.TEXT_COLORS[this.currency];
                this.total.icon = this.currency;
                this.total.textColor = Currencies.TEXT_COLORS[this.currency];
-               this.total.text = _loc10_;
+               this.total.text = _loc14_;
+               this.actionPrice.textColorType = ActionPrice.TEXT_COLOR_TYPE_ICON;
+               this.actionPrice.setData(this.moduleInfo.actionPrc,_loc15_,_loc16_,this.currency,false,this.moduleInfo.type);
+               this.total.visible = !this.actionPrice.visible;
             }
          }
          if(isInvalid(SETTINGS_INVALID))
@@ -285,6 +313,8 @@ package net.wg.gui.lobby.confirmModuleWindow
          this.submitBtn = null;
          this.nsCount.dispose();
          this.nsCount = null;
+         this.actionPrice.dispose();
+         this.actionPrice = null;
       }
 
       private function selectedCountChangeHandler(param1:IndexEvent) : void {

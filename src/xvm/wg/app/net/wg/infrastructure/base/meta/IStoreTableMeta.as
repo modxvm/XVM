@@ -6,7 +6,11 @@ package net.wg.infrastructure.base.meta
    public interface IStoreTableMeta extends IEventDispatcher
    {
           
-      function as_setTable(param1:Array) : void;
+      function refreshStoreTableDataProviderS() : void;
+
+      function as_getTableDataProvider() : Object;
+
+      function as_setTableType(param1:String) : void;
 
       function as_scrollToFirst(param1:Number, param2:String, param3:String) : void;
 

@@ -81,8 +81,9 @@ package net.wg.gui.lobby.techtree.data
       }
 
       private function getNodeData(param1:XML) : NodeData {
+         var _loc2_:NodeData = null;
          var _loc4_:XML = null;
-         var _loc2_:NodeData = new NodeData();
+         _loc2_ = new NodeData();
          var _loc3_:Array = [];
          for each (_loc4_ in param1.child("unlockProps").child("topIDs").children())
          {

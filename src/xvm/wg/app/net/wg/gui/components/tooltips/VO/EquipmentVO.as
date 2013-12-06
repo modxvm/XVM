@@ -39,6 +39,12 @@ package net.wg.gui.components.tooltips.VO
 
       public var stats:Array = null;
 
+      public var useGold:Boolean = false;
+
+      public var useCredits:Boolean = false;
+
+      public var isAction:Boolean = false;
+
       public var params:Array = null;
 
       public var paramsEx:Object = null;
@@ -97,6 +103,7 @@ package net.wg.gui.components.tooltips.VO
             this.statusHeader = (param1["status"].hasOwnProperty("header")) && !(param1["status"]["header"] == undefined)?param1["status"]["header"]:"";
             this.statusText = (param1["status"].hasOwnProperty("text")) && !(param1["status"]["text"] == undefined)?param1["status"]["text"]:"";
             this.statusLevel = (param1["status"].hasOwnProperty("level")) && !(param1["status"]["level"] == undefined)?param1["status"]["level"]:"";
+            this.status = !(this.statusHeader == "") || !(this.statusText == "");
          }
          if((param1.hasOwnProperty("effect")) && !(param1["effect"] == undefined))
          {

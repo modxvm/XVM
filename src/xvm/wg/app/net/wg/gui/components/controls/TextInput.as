@@ -2,11 +2,12 @@ package net.wg.gui.components.controls
 {
    import scaleform.clik.controls.TextInput;
    import scaleform.clik.core.UIComponent;
+   import flash.events.MouseEvent;
    import flash.events.FocusEvent;
+   import scaleform.gfx.TextFieldEx;
+   import flash.events.Event;
    import scaleform.clik.events.InputEvent;
    import flash.ui.Keyboard;
-   import flash.events.Event;
-   import scaleform.gfx.TextFieldEx;
 
 
    public class TextInput extends scaleform.clik.controls.TextInput
@@ -16,16 +17,86 @@ package net.wg.gui.components.controls
          super();
       }
 
-      protected var _extractEscapes:Boolean = true;
-
       public var highlightMc:UIComponent = null;
+
+      protected var _extractEscapes:Boolean = true;
 
       private var _selectionTextColor:uint = 1973787;
 
       private var _selectionBgColor:uint = 9868935;
 
+      private var _focusOutByWaiting:Boolean = false;
+
+      private var _pastSelectionStart:Number = 0;
+
+      private var _pastSelectionEnd:Number = 0;
+
+      override public function dispose() : void {
+         this.highlightMc.dispose();
+         this.highlightMc = null;
+         removeEventListener(MouseEvent.MOUSE_UP,this.handleMouseUp,false);
+         textField.removeEventListener(FocusEvent.FOCUS_OUT,this.handleTextFieldFocusOut,false);
+         super.dispose();
+      }
+
+      override public function set focusable(param1:Boolean) : void {
+         super.focusable = param1;
+         if((_focusable) && (editable))
+         {
+            addEventListener(MouseEvent.MOUSE_UP,this.handleMouseUp,false,0,true);
+         }
+         else
+         {
+            removeEventListener(MouseEvent.MOUSE_UP,this.handleMouseUp,false);
+         }
+      }
+
+      public function get selectionTextColor() : uint {
+         return this._selectionTextColor;
+      }
+
+      public function set selectionTextColor(param1:uint) : void {
+         this._selectionTextColor = this.rgbToArgb(param1);
+         TextFieldEx.setSelectionTextColor(textField,this._selectionTextColor);
+         TextFieldEx.setInactiveSelectionTextColor(textField,this.rgbToArgb(textField.textColor));
+      }
+
+      public function get selectionBgColor() : uint {
+         return this._selectionBgColor;
+      }
+
+      public function set selectionBgColor(param1:uint) : void {
+         this._selectionBgColor = this.rgbToArgb(param1);
+         TextFieldEx.setSelectionBkgColor(textField,this._selectionBgColor);
+         TextFieldEx.setInactiveSelectionBkgColor(textField,0);
+      }
+
+      public function get extractEscapes() : Boolean {
+         return this._extractEscapes;
+      }
+
+      public function set extractEscapes(param1:Boolean) : void {
+         if(this._extractEscapes == param1)
+         {
+            return;
+         }
+         this._extractEscapes = param1;
+      }
+
+      public function get highlight() : Boolean {
+         return this.highlightMc.visible;
+      }
+
+      public function set highlight(param1:Boolean) : void {
+         this.highlightMc.visible = param1;
+      }
+
       override protected function configUI() : void {
          super.configUI();
+         if((focusable) && (editable))
+         {
+            addEventListener(MouseEvent.MOUSE_UP,this.handleMouseUp,false,0,true);
+         }
       }
 
       override protected function updateTextField() : void {
@@ -47,33 +118,26 @@ package net.wg.gui.components.controls
          }
       }
 
+      protected function autoSelectionText() : void {
+         if(this._focusOutByWaiting)
+         {
+            textField.setSelection(this._pastSelectionStart,this._pastSelectionEnd);
+         }
+         else
+         {
+            textField.setSelection(0,textField.text.length);
+         }
+         this._focusOutByWaiting = false;
+      }
+
+      override protected function handleMouseDown(param1:MouseEvent) : void {
+         super.handleMouseDown(param1);
+      }
+
       override protected function handleTextFieldFocusIn(param1:FocusEvent) : void {
          super.handleTextFieldFocusIn(param1);
          this.autoSelectionText();
          App.utils.IME.setVisible(true);
-      }
-
-      protected function autoSelectionText() : void {
-         textField.setSelection(0,textField.text.length);
-      }
-
-      protected function handleTextFieldFocusOut(param1:FocusEvent) : void {
-         App.utils.IME.setVisible(false);
-      }
-
-      override public function handleInput(param1:InputEvent) : void {
-         switch(param1.details.code)
-         {
-            case Keyboard.LEFT:
-            case Keyboard.RIGHT:
-            case Keyboard.UP:
-            case Keyboard.DOWN:
-               param1.handled = true;
-               return;
-            default:
-               super.handleInput(param1);
-               return;
-         }
       }
 
       override protected function handleTextChange(param1:Event) : void {
@@ -103,48 +167,45 @@ package net.wg.gui.components.controls
          }
       }
 
-      public function get selectionTextColor() : uint {
-         return this._selectionTextColor;
-      }
-
-      public function set selectionTextColor(param1:uint) : void {
-         this._selectionTextColor = this.rgbToArgb(param1);
-         TextFieldEx.setSelectionTextColor(textField,this._selectionTextColor);
-         TextFieldEx.setInactiveSelectionTextColor(textField,this.rgbToArgb(textField.textColor));
-      }
-
-      public function get selectionBgColor() : uint {
-         return this._selectionBgColor;
-      }
-
-      public function set selectionBgColor(param1:uint) : void {
-         this._selectionBgColor = this.rgbToArgb(param1);
-         TextFieldEx.setSelectionBkgColor(textField,this._selectionBgColor);
-         TextFieldEx.setInactiveSelectionBkgColor(textField,0);
-      }
-
       private function rgbToArgb(param1:uint) : uint {
          return 4.27819008E9 + param1;
       }
 
-      public function get extractEscapes() : Boolean {
-         return this._extractEscapes;
+      private function handleMouseUp(param1:MouseEvent) : void {
+         this._pastSelectionStart = textField.selectionBeginIndex;
+         this._pastSelectionEnd = textField.selectionEndIndex;
       }
 
-      public function set extractEscapes(param1:Boolean) : void {
-         if(this._extractEscapes == param1)
+      protected function handleTextFieldFocusOut(param1:FocusEvent) : void {
+         this._focusOutByWaiting = App.waiting.visible;
+         if(this._focusOutByWaiting)
          {
-            return;
+            if(this._pastSelectionStart == this._pastSelectionEnd)
+            {
+               this._pastSelectionStart = this._pastSelectionEnd = textField.caretIndex;
+            }
          }
-         this._extractEscapes = param1;
+         App.utils.IME.setVisible(false);
       }
 
-      public function set highlight(param1:Boolean) : void {
-         this.highlightMc.visible = param1;
-      }
-
-      public function get highlight() : Boolean {
-         return this.highlightMc.visible;
+      override public function handleInput(param1:InputEvent) : void {
+         if(!this._focusOutByWaiting)
+         {
+            this._pastSelectionStart = textField.selectionBeginIndex;
+            this._pastSelectionEnd = textField.selectionEndIndex;
+         }
+         switch(param1.details.code)
+         {
+            case Keyboard.LEFT:
+            case Keyboard.RIGHT:
+            case Keyboard.UP:
+            case Keyboard.DOWN:
+               param1.handled = true;
+               return;
+            default:
+               super.handleInput(param1);
+               return;
+         }
       }
    }
 

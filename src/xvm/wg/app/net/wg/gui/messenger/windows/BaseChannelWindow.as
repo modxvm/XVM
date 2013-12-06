@@ -36,7 +36,7 @@ package net.wg.gui.messenger.windows
             param1.handled = true;
             showFAQWindowS();
          }
-         if(_loc2_.code == Keyboard.ESCAPE && _loc2_.value == InputValue.KEY_DOWN)
+         if(canCloseFromInputDetails(_loc2_))
          {
             param1.handled = true;
             onWindowMinimizeS();

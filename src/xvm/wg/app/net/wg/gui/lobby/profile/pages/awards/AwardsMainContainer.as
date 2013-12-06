@@ -17,7 +17,7 @@ package net.wg.gui.lobby.profile.pages.awards
          addEventListener(Event.RESIZE,this.blockResizeHandler,false,0,true);
       }
 
-      private static function applyBlockData(param1:AwardsTileListBlock, param2:Array) : void {
+      private static function applyBlockData(param1:AwardsTileListBlock, param2:Array) : Boolean {
          var _loc6_:* = false;
          var _loc7_:ProfileAchievementVO = null;
          var _loc8_:* = 0;
@@ -48,6 +48,7 @@ package net.wg.gui.lobby.profile.pages.awards
          {
             param1.dataProvider = param2;
          }
+         return _loc6_;
       }
 
       private var _gapBetweenBlocks:uint = 20;

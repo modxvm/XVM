@@ -32,6 +32,10 @@ package net.wg.gui.lobby.battlequeue
          invalidate();
       }
 
+      public function getData() : Object {
+         return this.data;
+      }
+
       override protected function draw() : void {
          if(this.data)
          {

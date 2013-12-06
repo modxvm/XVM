@@ -5,12 +5,12 @@ package net.wg.gui.lobby.messengerBar.carousel.data
 
    public class ChannelListItemVO extends DAAPIDataClass
    {
-          
+
       public function ChannelListItemVO(param1:Object) {
          super(param1);
       }
 
-      private static var excluded:Array;
+      private static const excluded:Array = null;
 
       private var _clientID:Number = 0;
 
@@ -21,6 +21,8 @@ package net.wg.gui.lobby.messengerBar.carousel.data
       private var _isNotified:Boolean = false;
 
       private var _icon:String = "";
+
+      private var _isInProgress:Boolean = false;
 
       public function get clientID() : Number {
          return this._clientID;
@@ -68,6 +70,14 @@ package net.wg.gui.lobby.messengerBar.carousel.data
             return false;
          }
          return super.onDataWrite(param1,param2);
+      }
+
+      public function get isInProgress() : Boolean {
+         return this._isInProgress;
+      }
+
+      public function set isInProgress(param1:Boolean) : void {
+         this._isInProgress = param1;
       }
    }
 

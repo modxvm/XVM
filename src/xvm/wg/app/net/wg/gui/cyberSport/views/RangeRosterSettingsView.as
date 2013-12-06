@@ -20,7 +20,9 @@ package net.wg.gui.cyberSport.views
       public function RangeRosterSettingsView() {
          this.selectedNations = [];
          this.selectedTypes = [];
+         this.guiNations = [];
          super();
+         this.guiNations = App.utils.nations.getNations();
       }
 
       private static const NATION_TYPE_GROUP:String = "rosterGroup";
@@ -75,6 +77,8 @@ package net.wg.gui.cyberSport.views
 
       private var selectedTypes:Array;
 
+      private var guiNations:Array;
+
       public function update(param1:Object) : void {
          if(param1 == null)
          {
@@ -125,6 +129,7 @@ package net.wg.gui.cyberSport.views
          this.flagsButtons.splice(0,this.flagsButtons.length);
          this.disposeItems(this.vTypesButtons);
          this.vTypesButtons.splice(0,this.vTypesButtons.length);
+         this.guiNations.splice(0,this.guiNations.length);
       }
 
       private function disposeItems(param1:Array) : void {
@@ -151,6 +156,10 @@ package net.wg.gui.cyberSport.views
          while(_loc4_ < _loc3_)
          {
             Button(param1[_loc4_]).groupName = param2;
+            if(param2 == NATION_TYPE_GROUP)
+            {
+               CSRosterToggleButton(param1[_loc4_]).nationFlag = this.guiNations[_loc4_];
+            }
             _loc4_++;
          }
       }

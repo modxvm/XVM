@@ -10,7 +10,7 @@ package net.wg.gui.utils
           
       public function ExcludeTweenManager() {
          super();
-         this.currentTweens = new Dictionary(true);
+         this.currentTweens = new Dictionary();
       }
 
       private var currentTweens:Dictionary;
@@ -20,7 +20,6 @@ package net.wg.gui.utils
          if(this.currentTweens[param2])
          {
             _loc5_ = Tween(this.currentTweens[param2]);
-            _loc5_.paused = true;
             this.unregister(_loc5_);
          }
          _loc5_ = new Tween(param1,param2,param3,param4);
@@ -31,6 +30,8 @@ package net.wg.gui.utils
       public function unregister(param1:Tween) : void {
          if((this.currentTweens) && (this.currentTweens[param1.target]))
          {
+            param1.paused = true;
+            param1.dispose();
             delete this.currentTweens[[param1.target]];
          }
       }
@@ -41,9 +42,8 @@ package net.wg.gui.utils
          for (_loc1_ in this.currentTweens)
          {
             _loc2_ = Tween(this.currentTweens[_loc1_]);
-            _loc2_.onComplete = null;
-            _loc2_.onChange = null;
             _loc2_.paused = true;
+            _loc2_.dispose();
             delete this.currentTweens[[_loc1_]];
          }
       }

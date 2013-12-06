@@ -35,7 +35,7 @@ package net.wg.infrastructure.base.meta
 
       function as_disableRoamingDD(param1:Boolean) : void;
 
-      function as_setFreeXP(param1:String) : void;
+      function as_setFreeXP(param1:String, param2:Boolean) : void;
 
       function as_nameResponse(param1:String, param2:Boolean, param3:Boolean) : void;
 

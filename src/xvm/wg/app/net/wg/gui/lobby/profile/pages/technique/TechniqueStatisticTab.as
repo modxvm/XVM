@@ -169,9 +169,11 @@ package net.wg.gui.lobby.profile.pages.technique
       override public function dispose() : void {
          this.tweenManager.dispose();
          this.tweenManager = null;
-         this._data = null;
-         this.efficiencyTF = null;
-         this.avgResultsTF = null;
+         if(this._data)
+         {
+            this._data.dispose();
+            this._data = null;
+         }
          this.battlesDL.dispose();
          this.winsDL.dispose();
          this.defeatsDL.dispose();

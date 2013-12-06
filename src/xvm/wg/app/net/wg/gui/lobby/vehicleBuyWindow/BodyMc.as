@@ -4,6 +4,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
    import net.wg.gui.components.controls.CheckBox;
    import flash.text.TextField;
    import net.wg.gui.components.controls.IconText;
+   import net.wg.gui.components.controls.ActionPrice;
    import net.wg.gui.components.controls.TankmanTrainingButton;
    import scaleform.clik.controls.ButtonGroup;
    import scaleform.clik.controls.Button;
@@ -32,6 +33,10 @@ package net.wg.gui.lobby.vehicleBuyWindow
       public var slotPrice:IconText;
 
       public var ammoPrice:IconText;
+
+      public var slotActionPrice:ActionPrice;
+
+      public var ammoActionPrice:ActionPrice;
 
       public var academyBtn:TankmanTrainingButton;
 
@@ -132,6 +137,17 @@ package net.wg.gui.lobby.vehicleBuyWindow
             this.lastSelectedButton = this.btnGroup.selectedButton;
          }
          dispatchEvent(new Event(BUTTONS_GROUP_SELECTION_CHANGED));
+      }
+
+      override public function dispose() : void {
+         this.slotActionPrice.dispose();
+         this.slotActionPrice = null;
+         this.ammoActionPrice.dispose();
+         this.ammoActionPrice = null;
+         this.academyBtn.dispose();
+         this.scoolBtn.dispose();
+         this.freeBtn.dispose();
+         super.dispose();
       }
    }
 

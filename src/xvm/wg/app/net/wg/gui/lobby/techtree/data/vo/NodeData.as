@@ -23,6 +23,8 @@ package net.wg.gui.lobby.techtree.data.vo
 
       private var _earnedXP:Number = 0;
 
+      private var _defEarnedXP:Number = 0;
+
       private var _earnedXPLabel:String = "";
 
       public var id:Number = 0;
@@ -71,6 +73,18 @@ package net.wg.gui.lobby.techtree.data.vo
          }
       }
 
+      public function get defEarnedXP() : Number {
+         return this._defEarnedXP;
+      }
+
+      public function set defEarnedXP(param1:Number) : void {
+         if(this._defEarnedXP == param1)
+         {
+            return;
+         }
+         this._defEarnedXP = param1;
+      }
+
       public function get earnedXPLabel() : String {
          return this._earnedXPLabel;
       }
@@ -105,6 +119,10 @@ package net.wg.gui.lobby.techtree.data.vo
          if(!isNaN(param1.earnedXP))
          {
             this.earnedXP = param1.earnedXP;
+         }
+         if(!isNaN(param1.defEarnedXP))
+         {
+            this.defEarnedXP = param1.defEarnedXP;
          }
          if(!isNaN(param1.state))
          {
@@ -160,6 +178,7 @@ package net.wg.gui.lobby.techtree.data.vo
          this.primaryClass = null;
          this.level = -1;
          this._earnedXP = 0;
+         this._defEarnedXP = 0;
          this._earnedXPLabel = "";
          this.state = 0;
          this.iconPath = "";
@@ -178,7 +197,7 @@ package net.wg.gui.lobby.techtree.data.vo
       }
 
       public function toString() : String {
-         return "[\nNodeData:\n id = " + this.id + ",\n nameString = " + this.nameString + ",\n primaryClass = " + this.primaryClass + ",\n level = " + this.level + ",\n earnedXP = " + this.earnedXP + ",\n state = " + this.state + ",\n unlockProps = " + this.unlockProps + ",\n iconPath = " + this.iconPath + ",\n longName = " + this.longName + ",\n extraInfo = " + this.extraInfo + ",\n pickleDump = " + this.pickleDump + ",\n shopPrice = " + this.shopPrice + "\n displayInfo = " + this.displayInfo + "\n]";
+         return "[\nNodeData:\n id = " + this.id + ",\n nameString = " + this.nameString + ",\n primaryClass = " + this.primaryClass + ",\n level = " + this.level + ",\n earnedXP = " + this.earnedXP + ",\n state = " + this.state + ",\n unlockProps = " + this.unlockProps + ",\n iconPath = " + this.iconPath + ",\n longName = " + this.longName + ",\n extraInfo = " + this.extraInfo + ",\n pickleDump = " + this.pickleDump + ",\n shopPrice = " + this.shopPrice + "\n displayInfo = " + this.displayInfo + "\n defEarnedXP = " + this._defEarnedXP + "\n]";
       }
    }
 

@@ -8,6 +8,7 @@ package net.wg.gui.lobby.hangar.maintenance.data
    {
           
       public function ShellVO(param1:Object) {
+         this.userCredits = [];
          super(param1);
       }
 
@@ -31,6 +32,8 @@ package net.wg.gui.lobby.hangar.maintenance.data
 
       public var prices:Array = null;
 
+      public var defPrices:Array = null;
+
       public var currency:String = "";
 
       public var ammoName:String = "";
@@ -39,6 +42,8 @@ package net.wg.gui.lobby.hangar.maintenance.data
 
       public var maxAmmo:int;
 
+      public var actionPrc:int = 0;
+
       public var list:Array = null;
 
       public var possibleMax:int;
@@ -46,6 +51,8 @@ package net.wg.gui.lobby.hangar.maintenance.data
       public var totalLoaded:int;
 
       private var _userCount:int;
+
+      public var userCredits:Array;
 
       public function get userCount() : int {
          return this._userCount;
@@ -76,6 +83,7 @@ package net.wg.gui.lobby.hangar.maintenance.data
          {
             _loc2_.possibleMax = this.maxAmmo - _loc3_ + _loc5_ + _loc2_.userCount;
             _loc2_.setUserCount(_loc2_.userCount - (_loc2_ == _loc4_?_loc5_:0));
+            _loc2_.userCredits = this.userCredits;
          }
          dispatchEvent(new ShellRendererEvent(ShellRendererEvent.USER_COUNT_CHANGED));
       }

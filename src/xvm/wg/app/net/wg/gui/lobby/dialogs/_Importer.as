@@ -8,7 +8,7 @@ package net.wg.gui.lobby.dialogs
           
       public function _Importer() {
          super();
-         importClasses(Vector.<Class>([SimpleDialog,IconDialog,IconDialog,IconPriceDialog,DemountDeviceDialog,DestroyDeviceDialog,PriceMc,DismissTankmanDialog]));
+         importClasses(Vector.<Class>([SimpleDialog,IconDialog,IconDialog,IconPriceDialog,DemountDeviceDialog,DestroyDeviceDialog,PriceMc,DismissTankmanDialog,FreeXPInfoWindow]));
       }
    }
 

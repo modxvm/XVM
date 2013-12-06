@@ -25,6 +25,8 @@ package net.wg.gui.cyberSport
    import net.wg.gui.cyberSport.views.autoSearch.WaitingPlayers;
    import net.wg.gui.cyberSport.views.autoSearch.StateViewBase;
    import net.wg.gui.cyberSport.views.unit.SimpleSlotRenderer;
+   import net.wg.gui.cyberSport.data.CandidatesDataProvider;
+   import net.wg.gui.cyberSport.data.ManualSearchDataProvider;
 
 
    public class _Importer extends BaseImporter
@@ -32,7 +34,7 @@ package net.wg.gui.cyberSport
           
       public function _Importer() {
          super();
-         importClasses(Vector.<Class>([CyberSportEvent,CyberSportMainWindow,IntroView,UnitsListView,UnitView,VehicleSelectorPopup,RosterSlotSettingsWindow,RangeRosterSettingsView,ChatSection,SlotRenderer,TeamSection,WaitListSection,AnimatedRosterSettingsView,RosterSettingsView,CSDragDropDelegate,CSDragDropListDelegateController,SlotDropIndicator,CSAutoSearchMainView,ConfirmationReadinessStatus,ErrorState,SearchCommands,SearchEnemy,WaitingPlayers,StateViewBase,SimpleSlotRenderer]));
+         importClasses(Vector.<Class>([CyberSportEvent,CyberSportMainWindow,IntroView,UnitsListView,UnitView,VehicleSelectorPopup,RosterSlotSettingsWindow,RangeRosterSettingsView,ChatSection,SlotRenderer,TeamSection,WaitListSection,AnimatedRosterSettingsView,RosterSettingsView,CSDragDropDelegate,CSDragDropListDelegateController,SlotDropIndicator,CSAutoSearchMainView,ConfirmationReadinessStatus,ErrorState,SearchCommands,SearchEnemy,WaitingPlayers,StateViewBase,SimpleSlotRenderer,CandidatesDataProvider,ManualSearchDataProvider]));
       }
    }
 

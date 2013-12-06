@@ -56,7 +56,7 @@ package net.wg.gui.lobby.battleloading
 
       private var tip:String = "";
 
-      private var teamValues:Object = "";
+      private var teamValues:Object = null;
 
       override protected function configUI() : void {
          super.configUI();
@@ -100,7 +100,7 @@ package net.wg.gui.lobby.battleloading
          {
             this.form.updateTip(this.tip);
          }
-         if((isInvalid(TEAM_VALUES_IS_INVALID)) && (this.form))
+         if((isInvalid(TEAM_VALUES_IS_INVALID)) && (this.form) && (this.teamValues))
          {
             this.form.updateTeamValues(this.teamValues);
          }
@@ -112,6 +112,10 @@ package net.wg.gui.lobby.battleloading
             return;
          }
          this.mapBgSource = param1;
+         if(this.mapBG)
+         {
+            this.mapBG.source = this.mapBgSource;
+         }
          invalidate(MAP_BG_IS_INVALID);
       }
 

@@ -15,7 +15,8 @@ package net.wg.gui.lobby.settings.vo
          this.isDependOn = param6;
          this.readOnly = param7;
          this.advanced = param8;
-         this.lastVal = param9;
+         this.prevVal = param9;
+         this.changedVal = param1;
          this.isDataAsSelectedIndex = param10;
          this._default = param11;
       }
@@ -38,11 +39,14 @@ package net.wg.gui.lobby.settings.vo
 
       public var _default = null;
 
-      private var _lastVal = null;
+      private var _prevVal = null;
+
+      private var _changedVal = null;
 
       private var _isDataAsSelectedIndex:Boolean = false;
 
       public function set current(param1:*) : void {
+         this.changedVal = param1;
          if(this._current === param1)
          {
             return;
@@ -138,16 +142,28 @@ package net.wg.gui.lobby.settings.vo
          return this._advanced;
       }
 
-      public function set lastVal(param1:*) : void {
-         if(this._lastVal == param1)
+      public function set prevVal(param1:*) : void {
+         if(this._prevVal == param1)
          {
             return;
          }
-         this._lastVal = param1;
+         this._prevVal = param1;
       }
 
-      public function get lastVal() : * {
-         return this._lastVal;
+      public function get prevVal() : * {
+         return this._prevVal;
+      }
+
+      public function set changedVal(param1:*) : void {
+         if(this._changedVal == param1)
+         {
+            return;
+         }
+         this._changedVal = param1;
+      }
+
+      public function get changedVal() : * {
+         return this._changedVal;
       }
 
       public function set isDataAsSelectedIndex(param1:Boolean) : void {
@@ -163,7 +179,7 @@ package net.wg.gui.lobby.settings.vo
       }
 
       public function clone() : SettingsControlProp {
-         return new SettingsControlProp(this.current,this.options,this.type,this.hasLabel,this.hasValue,this.isDependOn,this.readOnly,this.advanced,this.lastVal,this.isDataAsSelectedIndex,this._default);
+         return new SettingsControlProp(this.current,this.options,this.type,this.hasLabel,this.hasValue,this.isDependOn,this.readOnly,this.advanced,this.prevVal,this.isDataAsSelectedIndex,this._default);
       }
 
       public function clear() : void {

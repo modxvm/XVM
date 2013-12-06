@@ -261,7 +261,7 @@ package
 
       public static const DETAILS_CALCULATIONS_AUTOEQUIP:String = "#battle_results:details/calculations/autoEquip";
 
-      public static const DETAILS_CALCULATIONS_AOGAS:String = "#battle_results:details/calculations/aogas";
+      public static const DETAILS_CALCULATIONS_AOGASFACTOR:String = "#battle_results:details/calculations/aogasFactor";
 
       public static const DETAILS_CALCULATIONS_TOTAL:String = "#battle_results:details/calculations/total";
 

@@ -50,7 +50,7 @@ package net.wg.gui.cyberSport.popups
       }
 
       private function onFiltersChanged(param1:VehicleSelectorFilterEvent) : void {
-         onFiltersUpdateS(param1.nation,param1.vehicleType,param1.isMain);
+         onFiltersUpdateS(param1.nation,param1.vehicleType,param1.isMain,param1.level);
       }
 
       private function onCancelClick(param1:ButtonEvent) : void {
@@ -70,7 +70,7 @@ package net.wg.gui.cyberSport.popups
       }
 
       public function as_setListData(param1:Array, param2:Array) : void {
-         var _loc4_:* = 0;
+         var _loc4_:Object = null;
          var _loc3_:Array = [];
          for each (_loc4_ in param1)
          {

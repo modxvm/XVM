@@ -47,12 +47,15 @@ package net.wg.gui.lobby.profile.pages.statistics
 
       public var ltAvgDetectedEnemies:ProfileDashLineTextItem;
 
+      public var hit:UIComponent;
+
       override protected function configUI() : void {
          super.configUI();
          this.ltKilled.width = this.ltDestroyed.width = this.ltDestructionCoefficient.width = this.ltDealOutDamage.width = this.ltReceivedDamage.width = this.ltDamageCoefficient.width = TF_BLOCK1_WIDTH;
          this.ltAvgDestroyedVehicles.width = this.ltMaxDestroyedVehicles.width = this.ltAvgDamage.width = this.ltAvgReceivedDamage.width = this.ltAvgDetectedEnemies.width = TF_BLOCK2_WIDTH;
          this.ltDestructionCoefficient.tooltip = PROFILE.PROFILE_PARAMS_TOOLTIP_DESTROYCOEFF;
          this.ltDamageCoefficient.tooltip = PROFILE.PROFILE_PARAMS_TOOLTIP_DAMAGECOEFF;
+         hitArea = this.hit;
       }
 
       public function setLabels(param1:Object) : void {

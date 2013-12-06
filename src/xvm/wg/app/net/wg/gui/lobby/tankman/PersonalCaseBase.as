@@ -82,6 +82,7 @@ package net.wg.gui.lobby.tankman
          this.retrainingData.vehicles = param1.vehicles;
          this.retrainingData.testData = this.data;
          this.retrainingData.testStats = this.stats;
+         this.retrainingData.actionPrc = param1.actionPrc;
          var _loc2_:Array = param1.vehicles;
          var _loc3_:* = 0;
          while(_loc3_ < _loc2_.length)
@@ -178,6 +179,7 @@ package net.wg.gui.lobby.tankman
             this.createTestNames(param1.firstnames);
             this.createTestNames(param1.lastnames);
          }
+         this.documentsData.actionPrc = param1.hasOwnProperty("actionPrc")?param1.actionPrc:0;
          this.documentsData.originalIconFile = this.data.iconFile;
          this.documentsData.firstNames = param1.firstnames;
          this.documentsData.lastNames = param1.lastnames;
@@ -189,13 +191,26 @@ package net.wg.gui.lobby.tankman
          if(param1.passportChangeCost  is  Array)
          {
             this.documentsData.priceOfGold = param1.passportChangeCost[0];
-            this.documentsData.priveOfCredits = param1.passportChangeCost[1];
+            this.documentsData.priceOfCredits = param1.passportChangeCost[1];
          }
          else
          {
             if(param1.passportChangeCost  is  int)
             {
                this.documentsData.priceOfGold = param1.passportChangeCost;
+               this.documentsData.useOnlyGold = true;
+            }
+         }
+         if(param1.defPassportChangeCost  is  Array)
+         {
+            this.documentsData.defPriceOfGold = param1.defPassportChangeCost[0];
+            this.documentsData.defPriceOfCredits = param1.defPassportChangeCost[1];
+         }
+         else
+         {
+            if(param1.defPassportChangeCost  is  int)
+            {
+               this.documentsData.defPriceOfGold = param1.defPassportChangeCost;
                this.documentsData.useOnlyGold = true;
             }
          }

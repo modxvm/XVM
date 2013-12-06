@@ -202,7 +202,10 @@ package net.wg.gui.lobby.profile.pages.technique
       }
 
       private function onTweenComplete(param1:Tween) : void {
-         this.tweenManager.unregister(param1);
+         if(this.tweenManager)
+         {
+            this.tweenManager.unregister(param1);
+         }
       }
 
       private function selectedDataChangeHandler(param1:Event) : void {
@@ -232,17 +235,23 @@ package net.wg.gui.lobby.profile.pages.technique
          }
       }
 
-      public function setViewSize(param1:Number, param2:Number) : void {
-         this.techniqueList.setSize(this.techniqueList.width,param2);
-         this.techniqueList.validateNow();
-         this.bg.height = param2 - this.bg.y;
-         this.scrollBar.setActualSize(this.scrollBar.width,param2 - this.scrollBar.y);
-         this.scrollBar.validateNow();
-         this.lowerShadow.y = param2 - this.lowerShadow.height;
-      }
-
       public function get selectedItem() : TechniqueListVehicleVO {
          return TechniqueListVehicleVO(this.techniqueList.selectedItem);
+      }
+
+      override public function setSize(param1:Number, param2:Number) : void {
+         super.setSize(param1,param2);
+         var _loc3_:Number = this.techniqueList.rowHeight;
+         var _loc4_:int = int(_height / _loc3_);
+         _loc4_ = _loc4_ != -1?_loc4_:0;
+         this.techniqueList.rowCount = _loc4_;
+         var _loc5_:uint = _loc3_ * _loc4_;
+         this.techniqueList.setSize(this.techniqueList.width,_loc5_);
+         this.techniqueList.validateNow();
+         this.bg.height = _loc5_ - this.bg.y;
+         this.scrollBar.setActualSize(this.scrollBar.width,_loc5_ - this.scrollBar.y);
+         this.scrollBar.validateNow();
+         this.lowerShadow.y = _loc5_ - this.lowerShadow.height;
       }
 
       public function set dataProvider(param1:Array) : void {
@@ -273,6 +282,7 @@ package net.wg.gui.lobby.profile.pages.technique
          }
          this.sortFunctions = null;
          this.lowerShadow = null;
+         super.dispose();
       }
    }
 

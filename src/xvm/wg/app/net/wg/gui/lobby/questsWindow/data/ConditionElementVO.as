@@ -13,6 +13,8 @@ package net.wg.gui.lobby.questsWindow.data
 
       private var _descr:String = "";
 
+      private var _discountVal:String = "";
+
       private var _vehicles:Array;
 
       public function get descr() : String {
@@ -29,6 +31,21 @@ package net.wg.gui.lobby.questsWindow.data
 
       public function set vehicles(param1:Array) : void {
          this._vehicles = param1;
+      }
+
+      override public function dispose() : void {
+         this._descr = null;
+         this._vehicles.splice(0,this._vehicles.length);
+         this._vehicles = null;
+         super.dispose();
+      }
+
+      public function get discountVal() : String {
+         return this._discountVal;
+      }
+
+      public function set discountVal(param1:String) : void {
+         this._discountVal = param1;
       }
    }
 

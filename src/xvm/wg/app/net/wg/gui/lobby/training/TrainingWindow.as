@@ -12,6 +12,7 @@ package net.wg.gui.lobby.training
    import net.wg.data.VO.TrainingWindowVO;
    import scaleform.clik.events.ButtonEvent;
    import scaleform.clik.events.ListEvent;
+   import scaleform.clik.constants.WrappingMode;
    import net.wg.data.Aliases;
    import scaleform.clik.constants.InvalidationType;
    import scaleform.clik.data.DataProvider;
@@ -66,6 +67,7 @@ package net.wg.gui.lobby.training
          this.isPrivate.addEventListener(MouseEvent.ROLL_OUT,hideTooltip);
          this.isPrivate.addEventListener(MouseEvent.CLICK,hideTooltip);
          this.maps.addEventListener(ListEvent.INDEX_CHANGE,this.onMapChange);
+         this.maps.wrapping = WrappingMode.STICK;
          App.utils.focusHandler.setFocus(this.createButon);
          this.description.text = "";
       }

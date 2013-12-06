@@ -9,7 +9,6 @@ package net.wg.gui.cyberSport.views.unit
    import flash.events.MouseEvent;
    import net.wg.gui.cyberSport.controls.events.CSComponentEvent;
    import net.wg.infrastructure.events.VoiceChatEvent;
-   import scaleform.clik.constants.InvalidationType;
    import net.wg.gui.prebattle.squad.MessengerUtils;
    import net.wg.gui.utils.ComplexTooltipHelper;
 
@@ -73,53 +72,56 @@ package net.wg.gui.cyberSport.views.unit
          vehicleBtn.addEventListener(CSComponentEvent.CHOOSE_VEHICLE,this.onChooseVehicleClick);
       }
 
-      override protected function draw() : void {
-         super.draw();
-         if(InvalidationType.DATA)
+      override protected function updateComponents() : void {
+         var _loc1_:* = false;
+         super.updateComponents();
+         if(slotData)
          {
-            if(slotData)
+            this.setStatus(slotData.playerStatus);
+            this.levelLbl.text = String(slotData.selectedVehicleLevel);
+            this.levelLbl.alpha = slotData.selectedVehicleLevel?1:0.33;
+            if(!slotData.isClosed)
             {
-               this.setStatus(slotData.playerStatus);
-               this.levelLbl.text = String(slotData.selectedVehicleLevel);
-               this.levelLbl.alpha = slotData.selectedVehicleLevel?1:0.33;
-               if(!slotData.isClosed)
+               if(slotData.isCommanderState)
                {
-                  if(slotData.isCommanderState)
+                  if(slotData.player)
                   {
-                     if(slotData.player)
-                     {
-                        this.removeBtn.visible = index > 0;
-                        this.removeBtn.icon = GrayTransparentButton.ICON_CROSS;
-                     }
-                     else
-                     {
-                        this.removeBtn.visible = index > 4;
-                        this.removeBtn.icon = GrayTransparentButton.ICON_LOCK;
-                     }
+                     this.removeBtn.visible = index > 0;
+                     this.removeBtn.icon = GrayTransparentButton.ICON_CROSS;
                   }
                   else
                   {
-                     this.removeBtn.visible = (slotData.player) && (slotData.player.isSelf);
+                     this.removeBtn.visible = index > 4;
+                     this.removeBtn.icon = GrayTransparentButton.ICON_LOCK;
                   }
-                  this.statusIndicator.visible = true;
                }
                else
                {
-                  this.removeBtn.visible = slotData.isCommanderState;
-                  this.removeBtn.icon = GrayTransparentButton.ICON_LOCK;
-                  this.statusIndicator.visible = false;
+                  _loc1_ = (slotData.player) && (slotData.player.isSelf);
+                  this.removeBtn.visible = _loc1_;
+                  if(_loc1_)
+                  {
+                     this.removeBtn.icon = GrayTransparentButton.ICON_CROSS;
+                  }
                }
-               if(slotData.player)
-               {
-                  this.setSpeakers(slotData.player.isPlayerSpeaking,true);
-               }
-               else
-               {
-                  this.setSpeakers(false,true);
-               }
+               this.statusIndicator.visible = true;
             }
-            this.updateVoiceWave();
+            else
+            {
+               this.removeBtn.visible = slotData.isCommanderState;
+               this.removeBtn.icon = GrayTransparentButton.ICON_LOCK;
+               this.statusIndicator.visible = false;
+            }
+            if(slotData.player)
+            {
+               this.setSpeakers(slotData.player.isPlayerSpeaking,true);
+            }
+            else
+            {
+               this.setSpeakers(false,true);
+            }
          }
+         this.updateVoiceWave();
       }
 
       override protected function initControlsState() : void {
@@ -134,7 +136,7 @@ package net.wg.gui.cyberSport.views.unit
 
       private function setStatus(param1:int) : String {
          var _loc2_:String = STATUS_NORMAL;
-         if(index == 0)
+         if(index == 0 && !(param1 == STATUSES.indexOf(STATUS_BATTLE)))
          {
             _loc2_ = STATUS_COMMANDER;
          }
@@ -169,7 +171,7 @@ package net.wg.gui.cyberSport.views.unit
       private function onChooseVehicleClick(param1:CSComponentEvent) : void {
          param1.preventDefault();
          param1.stopImmediatePropagation();
-         if(((slotData) && (slotData.player)) && (slotData.player.isSelf) && !slotData.player.readyState)
+         if((slotData) && (slotData.player) && (slotData.player.isSelf))
          {
             dispatchEvent(new CSComponentEvent(CSComponentEvent.CHOOSE_VEHICLE,slotData.player.databaseID));
          }

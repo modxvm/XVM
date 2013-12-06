@@ -8,7 +8,7 @@ package net.wg.gui.lobby.eliteWindow
    import scaleform.clik.events.ButtonEvent;
    import scaleform.clik.utils.Constraints;
    import net.wg.data.constants.SoundTypes;
-   import net.wg.data.gui_items.Vehicle;
+   import net.wg.gui.cyberSport.vo.VehicleVO;
 
 
    public class EliteWindow extends EliteWindowMeta implements IEliteWindowMeta
@@ -62,8 +62,8 @@ package net.wg.gui.lobby.eliteWindow
          constraints.addElement("closeBtn",this.closeBtn,Constraints.CENTER_H);
       }
 
-      public function as_setVehTypeCompDescr(param1:int) : void {
-         var _loc2_:Vehicle = new Vehicle(param1);
+      public function as_setVehicle(param1:Object) : void {
+         var _loc2_:VehicleVO = new VehicleVO(param1);
          this.vName = _loc2_.userName;
          this.vType = _loc2_.type;
          this.closeBtn.soundType = SoundTypes.CANCEL_BTN;

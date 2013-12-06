@@ -46,6 +46,8 @@ package net.wg.gui.components.controls
 
       public var typeSwitcher:MovieClip;
 
+      public var actionPrice:ActionPrice;
+
       public var priceLabel:IconText;
 
       public var levelLabel:TextField;
@@ -90,14 +92,18 @@ package net.wg.gui.components.controls
 
       private var _priceColors:Object;
 
-      public function setDataForDropSkills(param1:Number, param2:Boolean) : void {
+      public function setDataForDropSkills(param1:Number, param2:Boolean, param3:Number=0, param4:Number=0) : void {
          if(!isNaN(param1))
          {
             this.price = param1.toString();
          }
-         enabled = this.hasMoney = param2;
-         var _loc3_:String = !param2?"disabled":"normal";
-         this.priceLabel.textColor = this._priceColors[_loc3_];
+         this.enabled = this.hasMoney = param2;
+         var _loc5_:String = !param2?"disabled":"normal";
+         this.priceLabel.textColor = this._priceColors[_loc5_];
+         this.actionPrice.textColorType = param2?ActionPrice.TEXT_COLOR_TYPE_ICON:ActionPrice.TEXT_COLOR_TYPE_ERROR;
+         this.actionPrice.setData(param3,param1,param4,this.getIcoOfButtonType());
+         this.actionPrice.setup(this);
+         this.priceLabel.visible = !this.actionPrice.visible;
       }
 
       public function get scopeType() : String {
@@ -146,11 +152,18 @@ package net.wg.gui.components.controls
             this.priceLabel.textAlign = "right";
             this.priceLabel.x = 268 + 10;
             this.priceLabel.text = MENU.TANKMANRETRAININGBTN_FREE;
+            this.actionPrice.visible = false;
+            this.priceLabel.visible = !this.actionPrice.visible;
          }
          else
          {
             this.priceLabel.icon = this._type == "academy"?"gold":"credits";
             this.priceLabel.x = 268;
+         }
+         if(this.priceLabel  is  ActionPrice)
+         {
+            this.priceLabel.invalidate();
+            this.priceLabel.validateNow();
          }
          if(this.priceLabel  is  IconText)
          {
@@ -200,7 +213,7 @@ package net.wg.gui.components.controls
          }
       }
 
-      public function setData(param1:Object, param2:Number, param3:Number, param4:Number, param5:Boolean, param6:Boolean, param7:int) : void {
+      public function setData(param1:Object, param2:Number, param3:Number, param4:Number, param5:Boolean, param6:Boolean, param7:int, param8:Number) : void {
          if(param1 == null)
          {
             return;
@@ -220,9 +233,20 @@ package net.wg.gui.components.controls
          this.setBUY();
          this.nation = param7;
          this.retraining = !param5;
-         this.price = this.model.isPremium?this.model.gold:this.model.credits != 0?this.model.credits:null;
+         var _loc9_:Number = this.model.isPremium?this.model.gold:this.model.credits != 0?this.model.credits:null;
+         var _loc10_:Number = this.model.isPremium?this.model.defGold:this.model.defCredits != 0?this.model.defCredits:null;
+         this.price = _loc9_.toString();
+         this.actionPrice.setData(param8,_loc9_,_loc10_,this.getIcoOfButtonType());
+         this.actionPrice.textColorType = this.hasMoney?ActionPrice.TEXT_COLOR_TYPE_ICON:ActionPrice.TEXT_COLOR_TYPE_ERROR;
+         this.actionPrice.setup(this);
+         this.priceLabel.visible = !this.actionPrice.visible;
          this.type = this._type;
          invalidate(UPDATE_DATA);
+      }
+
+      private function getIcoOfButtonType() : String {
+         var _loc1_:String = this._type == "free"?"":this._type == "academy"?"gold":"credits";
+         return _loc1_;
       }
 
       override protected function configUI() : void {
@@ -234,6 +258,10 @@ package net.wg.gui.components.controls
          {
             this.labelField.text = label;
             this.trainingLabel.text = "";
+         }
+         if(this.actionPrice)
+         {
+            this.actionPrice.setup(this);
          }
       }
 
@@ -290,11 +318,13 @@ package net.wg.gui.components.controls
             if(this._specializationLevel >= this.level)
             {
                this.priceLabel.textColor = this._priceColors["buy"];
+               this.actionPrice.textColorType = ActionPrice.TEXT_COLOR_TYPE_DISABLE;
             }
             else
             {
                _loc1_ = !this.hasMoney?"disabled":"normal";
                this.priceLabel.textColor = this._priceColors[_loc1_];
+               this.actionPrice.textColorType = this.hasMoney?ActionPrice.TEXT_COLOR_TYPE_ICON:ActionPrice.TEXT_COLOR_TYPE_ERROR;
             }
          }
          else
@@ -302,11 +332,13 @@ package net.wg.gui.components.controls
             if(!this.hasMoney)
             {
                this.priceLabel.textColor = this._priceColors["disabled"];
+               this.actionPrice.textColorType = ActionPrice.TEXT_COLOR_TYPE_ERROR;
             }
             else
             {
                _loc2_ = enabled?"normal":"buy";
                this.priceLabel.textColor = this._priceColors[_loc2_];
+               this.actionPrice.textColorType = enabled?ActionPrice.TEXT_COLOR_TYPE_ICON:ActionPrice.TEXT_COLOR_TYPE_DISABLE;
             }
          }
       }
@@ -314,11 +346,19 @@ package net.wg.gui.components.controls
       private function setEnabled() : void {
          if(this.isNativeVehicle)
          {
-            enabled = this._specializationLevel < this.level && (this.hasMoney);
+            this.enabled = this._specializationLevel < this.level && (this.hasMoney);
          }
          else
          {
-            enabled = this.hasMoney;
+            this.enabled = this.hasMoney;
+         }
+      }
+
+      override public function set enabled(param1:Boolean) : void {
+         super.enabled = param1;
+         if(this.actionPrice)
+         {
+            this.actionPrice.setup(this);
          }
       }
 
@@ -435,6 +475,8 @@ package net.wg.gui.components.controls
          this.bg = null;
          this.priceLabel.dispose();
          this.priceLabel = null;
+         this.actionPrice.dispose();
+         this.actionPrice = null;
          this.levelLabel = null;
          this.labelField = null;
          this.trainingLabel = null;

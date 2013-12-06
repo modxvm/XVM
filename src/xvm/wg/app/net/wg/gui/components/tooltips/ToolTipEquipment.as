@@ -20,6 +20,7 @@ package net.wg.gui.components.tooltips
    {
           
       public function ToolTipEquipment() {
+         this.skipFields = [this.DEF_BUY_PRICE,this.DEF_SELL_PRICE,this.ACTION_PRC];
          super();
          this.headerTF = content.headerTF;
          this.discrTF = content.discrTF;
@@ -54,6 +55,14 @@ package net.wg.gui.components.tooltips
 
       private const TYPE_MODULE:String = "module";
 
+      private const DEF_BUY_PRICE:String = "def_buy_price";
+
+      private const DEF_SELL_PRICE:String = "def_sell_price";
+
+      private const ACTION_PRC:String = "action_prc";
+
+      private var skipFields:Array;
+
       override public function build(param1:Object, param2:ITooltipProps) : void {
          super.build(param1,param2);
       }
@@ -74,7 +83,6 @@ package net.wg.gui.components.tooltips
          var _loc3_:EquipmentVO = null;
          var _loc5_:ToolTipBlockResultVO = null;
          var _loc7_:ILocale = null;
-         var _loc10_:* = NaN;
          var _loc17_:String = null;
          var _loc18_:TextFormat = null;
          var _loc19_:StyleSheet = null;
@@ -132,7 +140,7 @@ package net.wg.gui.components.tooltips
          this.headerTF.htmlText = _loc6_ == ""?_loc8_:_loc8_ + "<br/>" + _loc6_;
          this.headerTF.setTextFormat(_loc9_);
          this.headerTF.width = this.headerTF.textWidth + 5;
-         _loc10_ = bgShadowMargin.left + contentMargin.left;
+         var _loc10_:Number = bgShadowMargin.left + contentMargin.left;
          this.headerTF.x = _loc10_;
          this.headerTF.y = topPosition | 0;
          topPosition = topPosition + (this.headerTF.textHeight + Utils.instance.MARGIN_AFTER_SEPARATE);
@@ -198,7 +206,7 @@ package net.wg.gui.components.tooltips
                _loc22_ = _loc3_.stats[_loc1_][0];
                _loc23_ = isNaN(_loc3_.stats[_loc1_][1])?_loc3_.stats[_loc1_][1]:_loc7_.integer(_loc3_.stats[_loc1_][1]);
                _loc24_ = _loc3_.stats[_loc1_][2]?String(_loc3_.stats[_loc1_][2]):null;
-               _loc25_ = Utils.instance.getIcont(_loc22_,_component,_loc3_.gold);
+               _loc25_ = Utils.instance.getIcon(_loc22_,_component,_loc3_.gold);
                _loc26_ = Utils.instance.COLOR_NUMBER;
                _loc27_ = "";
                _loc28_ = "";

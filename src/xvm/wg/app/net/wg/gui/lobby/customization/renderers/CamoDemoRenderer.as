@@ -58,6 +58,7 @@ package net.wg.gui.lobby.customization.renderers
 
       override protected function draw() : void {
          var _loc1_:* = NaN;
+         var _loc2_:* = false;
          super.draw();
          if(this._kindDirty)
          {
@@ -84,6 +85,17 @@ package net.wg.gui.lobby.customization.renderers
          }
          if(isInvalid(InvalidationType.DATA))
          {
+            _loc2_ = ((((freeTF) && (data)) && (data.id > 0) && data.price) && (data.price.cost == 0)) && !data.current && !data.isInHangar;
+            if(_loc2_)
+            {
+               costFrame.x = 1;
+               costFrame.width = 46;
+            }
+            else
+            {
+               costFrame.x = 28;
+               costFrame.width = 20;
+            }
             if(this.timeLeftFld)
             {
                if((data) && (data.timeLeft) && data.timeLeft.length > 0)
@@ -108,6 +120,7 @@ package net.wg.gui.lobby.customization.renderers
       override protected function configUI() : void {
          super.configUI();
          this.timeLeftFld.mouseEnabled = false;
+         freeTF.text = VEHICLE_CUSTOMIZATION.IGR_FREE_CUT;
       }
 
       override protected function setState(param1:String) : void {

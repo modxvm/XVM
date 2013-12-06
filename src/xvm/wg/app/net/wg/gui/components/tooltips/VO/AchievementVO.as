@@ -113,7 +113,7 @@ package net.wg.gui.components.tooltips.VO
          {
             _loc10_ = param1["records"];
             this.achievedOn = (_loc10_.hasOwnProperty("current")) && !(_loc10_["current"] == undefined) && !(_loc10_["current"] == null)?_loc10_["current"]:null;
-            this.closeToRecord = (_loc10_.hasOwnProperty("nearest")) && !(_loc10_["nearest"] == undefined) && !(_loc10_["nearest"] == null)?_loc10_["nearest"]:null;
+            this.closeToRecord = (_loc10_.hasOwnProperty("nearest")) && !(_loc10_["nearest"] == undefined) && !(_loc10_["nearest"] == null) && _loc10_["nearest"]  is  Array && _loc10_["nearest"].length > 0?_loc10_["nearest"]:null;
          }
       }
    }

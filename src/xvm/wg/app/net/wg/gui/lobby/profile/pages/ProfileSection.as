@@ -103,12 +103,16 @@ package net.wg.gui.lobby.profile.pages
       }
 
       override protected function onDispose() : void {
+         this.currentData = null;
+         this.currentDimension = null;
          if(this.battlesDropdown)
          {
             this.battlesDropdown.removeEventListener(Event.CHANGE,this.dropDownChangeHandler);
+            this.battlesDropdown.dispose();
+            this.battlesDropdown = null;
          }
-         super.onDispose();
          this.disposeLayoutManager();
+         super.onDispose();
       }
 
       public function update(param1:Object) : void {

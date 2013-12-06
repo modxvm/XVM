@@ -11,13 +11,8 @@ package net.wg.gui.lobby.questsWindow
 
       override protected function configUI() : void {
          super.configUI();
-         doneCB.visible = false;
-         noQuestsMC.noResult.text = QUESTS.QUESTS_FUTURE_NODATA;
-      }
-
-      override protected function draw() : void {
-         super.draw();
-         doneCB.visible = false;
+         questContent.hideDoneCheckbox(true);
+         questContent.setNodataLabel(QUESTS.QUESTS_FUTURE_NODATA);
       }
    }
 

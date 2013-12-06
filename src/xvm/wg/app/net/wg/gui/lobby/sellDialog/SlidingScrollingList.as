@@ -275,6 +275,7 @@ package net.wg.gui.lobby.sellDialog
          }
          else
          {
+            this.totalHeight = this.totalHeight?this.totalHeight + this.downMargin:this.totalHeight;
             this.drawScrollBar();
          }
          if(this.totalHeight == 0)

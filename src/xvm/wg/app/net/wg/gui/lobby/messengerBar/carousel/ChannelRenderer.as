@@ -3,6 +3,7 @@ package net.wg.gui.lobby.messengerBar.carousel
    import scaleform.clik.core.UIComponent;
    import scaleform.clik.interfaces.IListItemRenderer;
    import scaleform.clik.controls.Button;
+   import flash.display.MovieClip;
    import net.wg.gui.lobby.messengerBar.carousel.data.ChannelListItemVO;
    import scaleform.clik.data.ListData;
    import scaleform.clik.constants.InvalidationType;
@@ -19,6 +20,8 @@ package net.wg.gui.lobby.messengerBar.carousel
       public var openButton:ChannelButton;
 
       public var closeButton:Button;
+
+      public var progressIndicator:MovieClip;
 
       protected var _index:uint = 0;
 
@@ -74,6 +77,10 @@ package net.wg.gui.lobby.messengerBar.carousel
          }
       }
 
+      public function getData() : Object {
+         return this.model;
+      }
+
       override public function dispose() : void {
          super.dispose();
          if(this.model)
@@ -91,6 +98,7 @@ package net.wg.gui.lobby.messengerBar.carousel
             this.openButton.blinking = this.model.isNotified;
             this.openButton.iconSource = this.model.icon;
             this.closeButton.visible = this.model.canClose;
+            this.progressIndicator.visible = this.model.isInProgress;
          }
          visible = Boolean(this.model);
       }

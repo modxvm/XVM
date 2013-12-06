@@ -6,7 +6,7 @@ package net.wg.gui.lobby.hangar.maintenance
    import net.wg.gui.components.controls.CheckBox;
    import net.wg.gui.components.controls.IconText;
    import net.wg.gui.components.controls.SoundButtonEx;
-   import net.wg.gui.components.controls.ScrollingListEx;
+   import net.wg.gui.components.controls.DynamicScrollingListEx;
    import scaleform.clik.controls.ButtonGroup;
    import net.wg.gui.lobby.hangar.maintenance.data.MaintenanceVO;
    import net.wg.gui.lobby.hangar.maintenance.data.ModuleVO;
@@ -72,7 +72,7 @@ package net.wg.gui.lobby.hangar.maintenance
 
       public var shellsTotalCredits:IconText;
 
-      public var shells:ScrollingListEx;
+      public var shells:DynamicScrollingListEx;
 
       public var eqTextfield:TextField;
 
@@ -432,10 +432,11 @@ package net.wg.gui.lobby.hangar.maintenance
       }
 
       private function updateShellsBlock(param1:Boolean=false) : void {
-         var _loc3_:* = 0;
-         var _loc5_:ShellVO = null;
+         var _loc2_:ShellVO = null;
+         var _loc4_:* = 0;
          var _loc6_:ShellVO = null;
-         var _loc7_:Array = null;
+         var _loc7_:ShellVO = null;
+         var _loc8_:Array = null;
          if(this.isResetWindow())
          {
             this.shellsOrderChanged = false;
@@ -444,27 +445,31 @@ package net.wg.gui.lobby.hangar.maintenance
          {
             if(!param1)
             {
-               _loc7_ = [];
-               for each (_loc5_ in this.shells.dataProvider)
+               _loc8_ = [];
+               for each (_loc6_ in this.shells.dataProvider)
                {
-                  for each (_loc6_ in this.maintenanceData.shells)
+                  for each (_loc7_ in this.maintenanceData.shells)
                   {
-                     if(_loc5_.compactDescr == _loc6_.compactDescr)
+                     if(_loc6_.compactDescr == _loc7_.compactDescr)
                      {
-                        _loc6_.setUserCount(_loc5_.userCount);
-                        _loc6_.possibleMax = _loc5_.possibleMax;
-                        _loc6_.currency = _loc5_.currency;
-                        _loc7_.push(_loc6_);
+                        _loc7_.setUserCount(_loc6_.userCount);
+                        _loc7_.possibleMax = _loc6_.possibleMax;
+                        _loc7_.currency = _loc6_.currency;
+                        _loc8_.push(_loc7_);
                      }
                   }
                }
-               for each (_loc6_ in _loc7_)
+               for each (_loc7_ in _loc8_)
                {
-                  _loc6_.list = _loc7_.slice();
-                  _loc6_.list.splice(_loc7_.indexOf(_loc6_),1);
+                  _loc7_.list = _loc8_.slice();
+                  _loc7_.list.splice(_loc8_.indexOf(_loc7_),1);
                }
-               this.maintenanceData.shells = _loc7_;
+               this.maintenanceData.shells = _loc8_;
             }
+         }
+         for each (_loc2_ in this.maintenanceData.shells)
+         {
+            _loc2_.userCredits = [this.maintenanceData.credits,this.maintenanceData.gold];
          }
          if(this.shells.dataProvider != this.maintenanceData.shells)
          {
@@ -474,22 +479,22 @@ package net.wg.gui.lobby.hangar.maintenance
             }
             this.shells.dataProvider = new DataProvider(this.maintenanceData.shells);
          }
-         var _loc2_:IEventCollector = App.utils.events;
-         _loc2_.removeEvent(this.shellsAuto,Event.SELECT,this.updateRefillSettings);
+         var _loc3_:IEventCollector = App.utils.events;
+         _loc3_.removeEvent(this.shellsAuto,Event.SELECT,this.updateRefillSettings);
          this.shellsAuto.selected = this.maintenanceData.autoShells;
-         _loc2_.addEvent(this.shellsAuto,Event.SELECT,this.updateRefillSettings);
+         _loc3_.addEvent(this.shellsAuto,Event.SELECT,this.updateRefillSettings);
          this.casseteField.text = this.maintenanceData.casseteFieldText;
-         var _loc4_:* = 0;
-         _loc4_ = 0;
-         while(_loc4_ < this.maintenanceData.shells.length)
+         var _loc5_:* = 0;
+         _loc5_ = 0;
+         while(_loc5_ < this.maintenanceData.shells.length)
          {
-            _loc3_ = _loc3_ + this.maintenanceData.shells[_loc4_].count;
-            _loc4_++;
+            _loc4_ = _loc4_ + this.maintenanceData.shells[_loc5_].count;
+            _loc5_++;
          }
          this.shellsIndicator.maximum = this.maintenanceData.maxAmmo;
-         this.shellsIndicator.value = this.maintenanceData.maxAmmo - _loc3_;
-         this.shellsIndicator.setDivisor(_loc3_,this.maintenanceData.maxAmmo);
-         this.shellsIndicator.textField.text = _loc3_ + SPLITTER_CHAR + this.maintenanceData.maxAmmo;
+         this.shellsIndicator.value = this.maintenanceData.maxAmmo - _loc4_;
+         this.shellsIndicator.setDivisor(_loc4_,this.maintenanceData.maxAmmo);
+         this.shellsIndicator.textField.text = _loc4_ + SPLITTER_CHAR + this.maintenanceData.maxAmmo;
       }
 
       private function updateEquipmentBlock(param1:Array, param2:Array, param3:Array) : void {

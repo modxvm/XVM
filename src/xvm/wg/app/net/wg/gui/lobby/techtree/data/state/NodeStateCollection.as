@@ -13,13 +13,13 @@ package net.wg.gui.lobby.techtree.data.state
          super();
       }
 
-      private static var statePrefixes:Array;
+      private static const statePrefixes:Array = null;
 
-      private static var animation:AnimationProperties;
+      private static const animation:AnimationProperties = null;
 
-      private static var nationNodeStates:Vector.<NodeStateItem>;
+      private static const nationNodeStates:Vector.<NodeStateItem> = null;
 
-      private static var itemStates:Vector.<ResearchStateItem>;
+      private static const itemStates:Vector.<ResearchStateItem> = null;
 
       public static function getStateProps(param1:uint, param2:Number, param3:Object) : StateProperties {
          var _loc4_:StateProperties = null;
@@ -109,6 +109,10 @@ package net.wg.gui.lobby.techtree.data.state
          {
             _loc2_ = _loc2_ ^ NodeState.CAN_SELL;
          }
+         if((param1 & NodeState.SHOP_ACTION) > 0)
+         {
+            _loc2_ = _loc2_ ^ NodeState.SHOP_ACTION;
+         }
          return _loc2_;
       }
 
@@ -129,6 +133,10 @@ package net.wg.gui.lobby.techtree.data.state
          if((param1 & NodeState.CAN_SELL) > 0)
          {
             _loc2_ = _loc2_ ^ NodeState.CAN_SELL;
+         }
+         if((param1 & NodeState.SHOP_ACTION) > 0)
+         {
+            _loc2_ = _loc2_ ^ NodeState.SHOP_ACTION;
          }
          return _loc2_;
       }

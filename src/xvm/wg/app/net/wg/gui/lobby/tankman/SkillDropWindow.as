@@ -132,8 +132,8 @@ package net.wg.gui.lobby.tankman
       }
 
       private function updateSavingModes() : void {
-         this.goldButton.setDataForDropSkills(this.model.dropSkillGold.gold,this.gold >= this.model.dropSkillGold.gold);
-         this.creditsButton.setDataForDropSkills(this.model.dropSkillCredits.credits,this.credits > this.model.dropSkillCredits.credits);
+         this.goldButton.setDataForDropSkills(this.model.dropSkillGold.gold,this.gold >= this.model.dropSkillGold.gold,this.model.dropSkillGold.actionPrc,this.model.dropSkillGold.defGold);
+         this.creditsButton.setDataForDropSkills(this.model.dropSkillCredits.credits,this.credits > this.model.dropSkillCredits.credits,this.model.dropSkillCredits.actionPrc,this.model.dropSkillCredits.defCredits);
          this.freeButton.setDataForDropSkills(NaN,true);
       }
 
@@ -179,7 +179,7 @@ package net.wg.gui.lobby.tankman
          var _loc3_:Number = _loc2_[0];
          var _loc4_:int = _loc2_[1];
          var _loc5_:Number = _loc2_[2];
-         this.beforeBlock.setSkills(this.model.skillsCount,this.model.preLastSkill,this.model.lastSkill,this.model.lastSkillLevel,this.model.hasNewSkill);
+         this.beforeBlock.setSkills(this.model.skillsCount,this.model.preLastSkill,this.model.lastSkill,this.model.lastSkillLevel,this.model.hasNewSkill,this.model.newSkillsCount,this.model.lastNewSkillLevel);
          var _loc6_:String = _loc4_ > 1?SkillItemViewMini.TYPE_NEW_SKILL:null;
          var _loc7_:String = SkillItemViewMini.TYPE_NEW_SKILL;
          var _loc8_:* = this.model.skillsCount > _loc4_;

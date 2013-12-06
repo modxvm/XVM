@@ -8,7 +8,7 @@ package net.wg.gui.lobby.profile
           
       public function _Importer() {
          super();
-         importClasses(Vector.<Class>([Profile,ProfileConstants,ProfileMenuInfoVO,ProfileTabNavigator,SectionInfo,SectionsDataUtil,SectionViewInfo,UserInfoForm]));
+         importClasses(Vector.<Class>([Profile,ProfileConstants,ProfileMenuInfoVO,ProfileTabNavigator,SectionInfo,SectionsDataUtil,SectionViewInfo,ProfileSectionsImporter,UserInfoForm]));
       }
    }
 

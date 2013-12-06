@@ -161,6 +161,8 @@ package net.wg.gui.lobby.settings
 
       public static var reservedImaginaryControls:Array = [QUALITY_ORDER,WINDOW_SIZE,RESOLUTION,MULTISAMPLING,CUSTOM_AA];
 
+      public static var COLOR_GRADING_TECHNIQUE:String = "COLOR_GRADING_TECHNIQUE";
+
       public static var RENDER_PIPELINE:String = "RENDER_PIPELINE";
 
       public static var CUSTOM:String = "CUSTOM";
@@ -174,6 +176,8 @@ package net.wg.gui.lobby.settings
       public static var DYNAMIC_CAMERA:String = "dynamicCamera";
 
       public static var HOR_STABILIZATION_SNP:String = "horStabilizationSnp";
+
+      public static var POST_PROCESSING_QUALITY:String = "POST_PROCESSING_QUALITY";
 
       public static var KEY_RANGE:Object = {
                                               "defaultRange":["APOSTROPHE","SEMICOLON","LBRACKET","STOP","COMMA","SLASH","BACKSLASH","RBRACKET","SPACE","LSHIFT","LALT","1","2","3","4","5","6","7","8","9","0","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","W","V","X","Y","Z","UPARROW","DOWNARROW","LEFTARROW","RIGHTARROW","LEFTMOUSE","MOUSE1","MOUSE2","MOUSE3","MOUSE4","MOUSE5","MOUSE6","MOUSE7","F2","F3","F4","F5","F6","F7","F8","F9","F10","F11","F12","INSERT","DELETE","HOME","END","NUMPAD0","NUMPAD1","NUMPAD2","NUMPAD3","NUMPAD4","NUMPAD5","NUMPAD6","NUMPAD7","NUMPAD8","NUMPAD9","NAMPADSLASH","NAMPADSTAR","NUMPADMINUS","ADD","NUMPADPERIOD"],
@@ -203,7 +207,7 @@ package net.wg.gui.lobby.settings
                                                        "gameplay_assault":new SettingsControlProp(null,null,TYPE_CHECKBOX),
                                                        "minimapAlpha":new SettingsControlProp(null,null,TYPE_SLIDER),
                                                        "enablePostMortemEffect":new SettingsControlProp(null,null,TYPE_CHECKBOX),
-                                                       "replayEnabled":new SettingsControlProp(null,null,TYPE_CHECKBOX),
+                                                       "replayEnabled":new SettingsControlProp(null,null,TYPE_DROPDOWN),
                                                        "useServerAim":new SettingsControlProp(null,null,TYPE_CHECKBOX),
                                                        "showVehiclesCounter":new SettingsControlProp(null,null,TYPE_CHECKBOX),
                                                        "vibroIsConnected":new SettingsControlProp(null,null,TYPE_CHECKBOX,false,false,null,true),
@@ -244,9 +248,11 @@ package net.wg.gui.lobby.settings
                                                        "FLORA_QUALITY":new SettingsControlProp(null,null,TYPE_DROPDOWN,true),
                                                        "EFFECTS_QUALITY":new SettingsControlProp(null,null,TYPE_DROPDOWN,true),
                                                        "POST_PROCESSING_QUALITY":new SettingsControlProp(null,null,TYPE_DROPDOWN,true),
+                                                       "MOTION_BLUR_QUALITY":new SettingsControlProp(null,null,TYPE_DROPDOWN,true),
                                                        "FAR_PLANE":new SettingsControlProp(null,null,TYPE_DROPDOWN,true),
                                                        "OBJECT_LOD":new SettingsControlProp(null,null,TYPE_DROPDOWN,true),
                                                        "SNIPER_MODE_EFFECTS_QUALITY":new SettingsControlProp(null,null,TYPE_DROPDOWN,true),
+                                                       "COLOR_GRADING_TECHNIQUE":new SettingsControlProp(null,null,TYPE_DROPDOWN,true),
                                                        "fpsPerfomancer":new SettingsControlProp(null,null,TYPE_CHECKBOX),
                                                        "SNIPER_MODE_GRASS_ENABLED":new SettingsControlProp(null,null,TYPE_CHECKBOX),
                                                        "VEHICLE_DUST_ENABLED":new SettingsControlProp(null,null,TYPE_CHECKBOX),

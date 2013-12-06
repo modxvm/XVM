@@ -17,6 +17,8 @@ package net.wg.infrastructure.base.meta
       function as_getGeometry() : Array;
 
       function as_setGeometry(param1:Number, param2:Number, param3:Number, param4:Number) : void;
+
+      function as_isModal() : Boolean;
    }
 
 }

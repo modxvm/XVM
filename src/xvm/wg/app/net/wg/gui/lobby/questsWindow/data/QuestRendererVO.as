@@ -38,6 +38,8 @@ package net.wg.gui.lobby.questsWindow.data
 
       private var _progrTooltip:Object = null;
 
+      private var _eventType:int = 0;
+
       public function get isNew() : Boolean {
          return this._isNew;
       }
@@ -148,6 +150,14 @@ package net.wg.gui.lobby.questsWindow.data
 
       public function set progrTooltip(param1:Object) : void {
          this._progrTooltip = param1;
+      }
+
+      public function get eventType() : int {
+         return this._eventType;
+      }
+
+      public function set eventType(param1:int) : void {
+         this._eventType = param1;
       }
    }
 

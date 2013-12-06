@@ -82,6 +82,7 @@ package net.wg.gui.notification
          this.btnMoreInfo.tabEnabled = false;
          this.btnMoreInfo.addEventListener(ButtonEvent.CLICK,this.btnClickHandler,false,0,true);
          this.btnMoreInfo.label = App.utils?App.utils.locale.makeString(MESSENGER.SERVICECHANNELMESSAGES_BATTLERESULTS_BUTTON):"more info...";
+         this.btnMoreInfo.validateNow();
          this.textField.addEventListener(TextEvent.LINK,this.onMessageLinkClick,false,0,true);
          this.textField.addEventListener(MouseEvent.CLICK,this.onMessageMouseClick,false,0,true);
          this.icon.addEventListener(UILoaderEvent.COMPLETE,this.iconLoadingCompleteHandler,false,0,true);

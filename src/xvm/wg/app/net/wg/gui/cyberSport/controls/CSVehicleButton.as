@@ -5,7 +5,7 @@ package net.wg.gui.cyberSport.controls
    import flash.display.MovieClip;
    import flash.text.TextField;
    import net.wg.utils.IUtils;
-   import net.wg.data.gui_items.Vehicle;
+   import net.wg.gui.cyberSport.vo.VehicleVO;
    import scaleform.clik.constants.InvalidationType;
    import flash.text.TextFormat;
    import flash.events.MouseEvent;
@@ -89,9 +89,7 @@ package net.wg.gui.cyberSport.controls
 
       private var _vehicleCount:int = -1;
 
-      private var currentCompDescriptor:int = -1;
-
-      private var vehicleModel:Vehicle;
+      private var vehicleModel:VehicleVO;
 
       private var _showRangeRosterBg:Boolean = true;
 
@@ -149,7 +147,7 @@ package net.wg.gui.cyberSport.controls
       public function getModel() : * {
          if(this.vehicleModel)
          {
-            return this.currentCompDescriptor;
+            return this.vehicleModel.intCD;
          }
          if(this.rangeModel)
          {
@@ -163,22 +161,10 @@ package net.wg.gui.cyberSport.controls
          return null;
       }
 
-      public function setCompDescriptor(param1:int) : void {
-         if(param1 != -1)
-         {
-            this.clearData();
-            this.currentCompDescriptor = param1;
-            this.vehicleModel = new Vehicle(param1);
-            invalidate(UPDATE_INIT_DATA);
-         }
-      }
-
-      public function get vehicleInventoryID() : Number {
-         if(this.vehicleModel)
-         {
-            return this.currentCompDescriptor;
-         }
-         return NaN;
+      public function setVehicle(param1:VehicleVO) : void {
+         this.clearData();
+         this.vehicleModel = param1;
+         invalidate(UPDATE_INIT_DATA);
       }
 
       public function reset() : void {
@@ -219,7 +205,6 @@ package net.wg.gui.cyberSport.controls
 
       private function clearData() : void {
          this.updatedFlag = false;
-         this.currentCompDescriptor = -1;
          this.vehicleModel = null;
          this.rangeModel = null;
          this._vehicleCount = -1;

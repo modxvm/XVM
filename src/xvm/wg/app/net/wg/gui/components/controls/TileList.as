@@ -140,6 +140,10 @@ package net.wg.gui.components.controls
          var _loc4_:IListItemRenderer = null;
          var _loc5_:IDisposable = null;
          var _loc6_:DisplayObject = null;
+         if(!_renderers)
+         {
+            return;
+         }
          var _loc1_:ICommons = App.utils.commons;
          var _loc2_:Number = _renderers.length;
          _loc3_ = _loc2_-1;

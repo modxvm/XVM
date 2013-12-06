@@ -21,7 +21,13 @@ package net.wg.gui.lobby.customization.data
                }
             ,
             "isNew":false,
-            "current":false
+            "current":false,
+            "defPrice":
+               {
+                  "cost":0,
+                  "isGold":false
+               }
+            
          }
          ;
       }

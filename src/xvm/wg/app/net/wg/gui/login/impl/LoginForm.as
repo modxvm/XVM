@@ -266,7 +266,7 @@ package net.wg.gui.login.impl
          this._submit.soundType = SoundTypes.RED_BTN;
          this.capsLockIndicator.visible = false;
          this.capsLockIndicator.alpha = 1;
-         LoginUtils.instance.initTabIndex([this._login.textField,this._pass.textField,this._rememberPwdCheckbox,this._submit,this._registerLink,this._recoveryLink,this.server]);
+         LoginUtils.instance.initTabIndex([this._login.textField,this._pass.textField,this._submit,this._registerLink,this._recoveryLink,this._rememberPwdCheckbox,this.server]);
       }
 
       override public function handleInput(param1:InputEvent) : void {

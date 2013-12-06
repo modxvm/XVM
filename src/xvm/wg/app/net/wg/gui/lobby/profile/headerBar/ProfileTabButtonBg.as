@@ -1,10 +1,10 @@
 package net.wg.gui.lobby.profile.headerBar
 {
-   import flash.display.MovieClip;
+   import scaleform.clik.core.UIComponent;
    import flash.display.Sprite;
 
 
-   public class ProfileTabButtonBg extends MovieClip
+   public class ProfileTabButtonBg extends UIComponent
    {
           
       public function ProfileTabButtonBg() {

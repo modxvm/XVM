@@ -151,9 +151,8 @@ package net.wg.gui.components.advanced
       }
 
       private function createView(param1:String) : UIComponent {
-         var _loc2_:UIComponent = null;
          var _loc3_:Class = null;
-         _loc2_ = null;
+         var _loc2_:UIComponent = null;
          if(this.cachedViews[param1] != null)
          {
             _loc2_ = this.cachedViews[param1];

@@ -25,6 +25,10 @@ package net.wg.gui.lobby.tankman
 
       public var additionalSkillItem:SkillItemViewMini;
 
+      public var freeSkillItem1:SkillItemViewMini;
+
+      public var freeSkillItem2:SkillItemViewMini;
+
       public var tankmanPic:UILoaderAlt;
 
       public var backgroundSwitcher:UIComponent;
@@ -116,9 +120,11 @@ package net.wg.gui.lobby.tankman
          this.specLevelBar.backPosition = param2;
       }
 
-      public function setSkills(param1:int, param2:String, param3:String, param4:Number, param5:Boolean) : void {
+      public function setSkills(param1:int, param2:String, param3:String, param4:Number, param5:Boolean, param6:int=0, param7:int=0) : void {
          this.mainSkillItem.visible = false;
          this.additionalSkillItem.visible = false;
+         this.freeSkillItem1.visible = false;
+         this.freeSkillItem2.visible = false;
          if(param1 == 0)
          {
             this.buildCurrentSkill(this.mainSkillItem,SkillItemViewMini.TYPE_NEW_SKILL,NaN);
@@ -131,9 +137,24 @@ package net.wg.gui.lobby.tankman
          if(param4 == 100)
          {
             this.buildSkillsPack(this.mainSkillItem,param3,param1 + 1);
-            if(param5)
+            if(param6 > 0)
             {
-               this.buildCurrentSkill(this.additionalSkillItem,SkillItemViewMini.TYPE_NEW_SKILL,NaN);
+               if(param6 > 1)
+               {
+                  this.buildSkillsPack(this.freeSkillItem1,SkillItemViewMini.TYPE_NEW_SKILL,param6);
+                  this.buildCurrentSkill(this.freeSkillItem2,SkillItemViewMini.TYPE_NEW_SKILL,param7);
+               }
+               else
+               {
+                  this.buildCurrentSkill(this.freeSkillItem1,SkillItemViewMini.TYPE_NEW_SKILL,param7);
+               }
+            }
+            else
+            {
+               if(param5)
+               {
+                  this.buildCurrentSkill(this.additionalSkillItem,SkillItemViewMini.TYPE_NEW_SKILL,NaN);
+               }
             }
          }
          else

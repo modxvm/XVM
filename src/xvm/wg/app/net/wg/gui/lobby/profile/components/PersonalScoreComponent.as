@@ -22,7 +22,7 @@ package net.wg.gui.lobby.profile.components
 
       public var tfPersonalScore:CenteredLineIconText;
 
-      public var background:MovieClip;
+      public var icon:MovieClip;
 
       public var tooltipHitArea:MovieClip;
 
@@ -54,8 +54,11 @@ package net.wg.gui.lobby.profile.components
       }
 
       private function disposeHandlers() : void {
-         this.tooltipHitArea.removeEventListener(MouseEvent.ROLL_OVER,this.mouseRollOverHandler);
-         this.tooltipHitArea.removeEventListener(MouseEvent.ROLL_OUT,this.mouseRollOutHandler);
+         if(this.tooltipHitArea)
+         {
+            this.tooltipHitArea.removeEventListener(MouseEvent.ROLL_OVER,this.mouseRollOverHandler);
+            this.tooltipHitArea.removeEventListener(MouseEvent.ROLL_OUT,this.mouseRollOutHandler);
+         }
       }
 
       protected function mouseRollOutHandler(param1:MouseEvent) : void {
@@ -68,6 +71,21 @@ package net.wg.gui.lobby.profile.components
 
       protected function showToolTip() : void {
          App.toolTipMgr.showSpecial(Tooltips.GLOBAL_RATING,null);
+      }
+
+      public function dispose() : void {
+         if(this.tfPersonalScore)
+         {
+            this.tfPersonalScore.parent.removeChild(this.tfPersonalScore);
+            this.tfPersonalScore.dispose();
+            this.tfPersonalScore = null;
+         }
+         if(this.icon)
+         {
+            this.icon.parent.removeChild(this.icon);
+            this.icon = null;
+         }
+         this.disposeHandlers();
       }
    }
 

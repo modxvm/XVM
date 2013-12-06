@@ -5,12 +5,12 @@ package net.wg.gui.lobby.window
    import net.wg.gui.lobby.profile.ProfileTabNavigator;
    import flash.display.MovieClip;
    import net.wg.gui.components.controls.SoundButtonEx;
+   import net.wg.gui.components.advanced.TabButton;
    import flash.display.Sprite;
    import net.wg.utils.ILocale;
    import net.wg.data.Aliases;
    import net.wg.gui.lobby.profile.ProfileConstants;
    import flash.events.MouseEvent;
-   import net.wg.data.gui_items.dossier.AccountDossier;
    import net.wg.infrastructure.interfaces.IWindow;
    import flash.display.Graphics;
    import net.wg.gui.components.windows.Window;
@@ -37,6 +37,8 @@ package net.wg.gui.lobby.window
 
       public static const SETIGNOREDAVAILABLE:String = "setIgnoreChanged";
 
+      public static const CREATEPRIVATECHANNELAVAILABLE:String = "createChannelChanged";
+
       public var tabNavigator:ProfileTabNavigator;
 
       public var maskObj:MovieClip;
@@ -47,16 +49,21 @@ package net.wg.gui.lobby.window
 
       private var isSetIgnoreAvailable:Boolean;
 
+      private var isCreateChannelAvailable:Boolean;
+
       public var btnAddToFriends:SoundButtonEx;
 
       public var btnAddToIgnore:SoundButtonEx;
 
       public var btnCreatePrivateChannel:SoundButtonEx;
 
+      public var btnTemplate:TabButton;
+
       public var background:Sprite;
 
       override protected function configUI() : void {
          super.configUI();
+         this.removeTemplateButton();
          try
          {
             registerComponent(this.tabNavigator,Aliases.PROFILE_TAB_NAVIGATOR);
@@ -73,6 +80,15 @@ package net.wg.gui.lobby.window
          this.btnAddToFriends.addEventListener(MouseEvent.CLICK,this.addToFriendBtnHandler,false,0,true);
          this.btnAddToIgnore.addEventListener(MouseEvent.CLICK,this.addToIgnoreBtnHandler,false,0,true);
          this.btnCreatePrivateChannel.addEventListener(MouseEvent.CLICK,this.createPrivateChannelBtnHandler,false,0,true);
+      }
+
+      private function removeTemplateButton() : void {
+         if(this.btnTemplate)
+         {
+            this.btnTemplate.parent.removeChild(this.btnTemplate);
+            this.btnTemplate.dispose();
+            this.btnTemplate = null;
+         }
       }
 
       private function createPrivateChannelBtnHandler(param1:MouseEvent) : void {
@@ -93,9 +109,7 @@ package net.wg.gui.lobby.window
       }
 
       public function as_update(param1:Object) : void {
-         var _loc2_:String = param1?param1.toString():null;
-         var _loc3_:AccountDossier = new AccountDossier(_loc2_);
-         this.tabNavigator.viewStack.updateData(_loc3_);
+          
       }
 
       override public function set window(param1:IWindow) : void {
@@ -136,12 +150,37 @@ package net.wg.gui.lobby.window
          {
             this.btnAddToIgnore.enabled = this.isSetIgnoreAvailable;
          }
+         if(isInvalid(CREATEPRIVATECHANNELAVAILABLE))
+         {
+            this.btnCreatePrivateChannel.enabled = this.isCreateChannelAvailable;
+         }
       }
 
       override protected function onDispose() : void {
+         this.tabNavigator.mask = null;
+         if(this.maskObj)
+         {
+            this.maskObj.parent.removeChild(this.maskObj);
+            this.maskObj = null;
+         }
+         if(this.background)
+         {
+            this.background.parent.removeChild(this.background);
+            this.background = null;
+         }
+         this.removeTemplateButton();
+         if(this.initData)
+         {
+            this.initData.dispose();
+            this.initData = null;
+         }
+         this.tabNavigator.dispose();
          this.btnAddToFriends.removeEventListener(MouseEvent.CLICK,this.addToFriendBtnHandler);
          this.btnAddToIgnore.removeEventListener(MouseEvent.CLICK,this.addToIgnoreBtnHandler);
          this.btnCreatePrivateChannel.removeEventListener(MouseEvent.CLICK,this.createPrivateChannelBtnHandler);
+         this.btnAddToFriends.dispose();
+         this.btnAddToIgnore.dispose();
+         this.btnCreatePrivateChannel.dispose();
          super.onDispose();
       }
 
@@ -153,6 +192,11 @@ package net.wg.gui.lobby.window
       public function as_setIgnoredAvailable(param1:Boolean) : void {
          this.isSetIgnoreAvailable = param1;
          invalidate(SETIGNOREDAVAILABLE);
+      }
+
+      public function as_setCreateChannelAvailable(param1:Boolean) : void {
+         this.isCreateChannelAvailable = param1;
+         invalidate(CREATEPRIVATECHANNELAVAILABLE);
       }
    }
 

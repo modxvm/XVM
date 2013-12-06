@@ -18,6 +18,8 @@ package net.wg.data.VO
 
       public var userName:String = "";
 
+      public var clanAbbrev:String = "";
+
       public var fullName:String = "";
 
       public var icon:String = "";
@@ -31,6 +33,10 @@ package net.wg.data.VO
       public var stateString:String = "";
 
       public var isPlayerSpeaking:Boolean;
+
+      public var region:String = "";
+
+      public var igrType:int = 0;
    }
 
 }

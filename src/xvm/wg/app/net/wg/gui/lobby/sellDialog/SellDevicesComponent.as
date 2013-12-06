@@ -28,6 +28,12 @@ package net.wg.gui.lobby.sellDialog
 
       private var _removePrice:Number = 0;
 
+      private var _defRemovePrice:Number = 0;
+
+      private var _actionPrc:Number = 0;
+
+      private var _removeActionPrc:Number = 0;
+
       private var _sellData:Array;
 
       override public function dispose() : void {
@@ -49,6 +55,30 @@ package net.wg.gui.lobby.sellDialog
          this._removePrice = param1;
       }
 
+      public function get defRemovePrice() : Number {
+         return this._defRemovePrice;
+      }
+
+      public function set defRemovePrice(param1:Number) : void {
+         this._defRemovePrice = param1;
+      }
+
+      public function get actionPrc() : Number {
+         return this._actionPrc;
+      }
+
+      public function set actionPrc(param1:Number) : void {
+         this._actionPrc = param1;
+      }
+
+      public function get removeActionPrc() : Number {
+         return this._removeActionPrc;
+      }
+
+      public function set removeActionPrc(param1:Number) : void {
+         this._removeActionPrc = param1;
+      }
+
       public function get sellData() : Array {
          return this._sellData;
       }
@@ -65,9 +95,11 @@ package net.wg.gui.lobby.sellDialog
             {
                _loc4_ = new SellDialogElement();
                _loc4_.id = param1.optDevices[_loc3_].userName;
-               _loc4_.type = "optDevices";
+               _loc4_.type = SaleItemBlockRenderer.ITEM_TYPE_OPTIONAL_DEVICE;
                _loc4_.data = param1.optDevices[_loc3_];
                _loc4_.moneyValue = param1.optDevices[_loc3_].sellPrice[0];
+               _loc4_.defMoneyValue = param1.optDevices[_loc3_].defSellPrice[0];
+               _loc4_.actionPrc = param1.optDevices[_loc3_].sellActionPrc;
                if(param1.optDevices[_loc3_].isRemovable)
                {
                   _loc4_.isRemovable = true;
@@ -77,6 +109,8 @@ package net.wg.gui.lobby.sellDialog
                else
                {
                   _loc4_.removePrice = this._removePrice;
+                  _loc4_.defRemovePrice = this._defRemovePrice;
+                  _loc4_.removeActionPrc = this._removeActionPrc;
                   _loc4_.isRemovable = false;
                   _loc4_.inInventory = true;
                   this.complexDevicesArr.elements.push(_loc4_);

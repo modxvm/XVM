@@ -160,10 +160,10 @@ package net.wg.gui.lobby.battleResults
                      _loc1_ = App.colorSchemeMgr.getScheme(data.killerID > 0?"normal_dead":"normal");
                   }
                }
-               App.utils.commons.formatPlayerName(this.playerName,data.playerName,null,null,data.isIGR,_loc1_,-5);
+               App.utils.commons.formatPlayerName(this.playerName,data.playerName,null,null,data.isIGR,"","",_loc1_.rgb,-5);
                this.vehicleIcon.source = data.tankIcon?data.tankIcon:this.vehicleIcon.sourceAlt;
                this.vehicleName.text = data.vehicleName;
-               this.xpLbl.text = App.utils.locale.integer(data.xp);
+               this.xpLbl.text = App.utils.locale.integer(data.xp - data.achievementXP);
                this.damageLbl.text = "0";
                this.fragsLbl.text = " ";
                this.vehicleName.textColor = _loc1_.rgb;

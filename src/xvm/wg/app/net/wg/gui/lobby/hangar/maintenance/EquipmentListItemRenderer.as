@@ -4,6 +4,7 @@ package net.wg.gui.lobby.hangar.maintenance
    import net.wg.gui.components.controls.UILoaderAlt;
    import flash.text.TextField;
    import net.wg.gui.components.controls.IconText;
+   import net.wg.gui.components.controls.ActionPrice;
    import flash.display.MovieClip;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.utils.IEventCollector;
@@ -33,7 +34,11 @@ package net.wg.gui.lobby.hangar.maintenance
 
       public var priceMC:IconText;
 
+      public var actionPrice:ActionPrice;
+
       public var targetMC:MovieClip;
+
+      public var hitMc:MovieClip;
 
       override public function setData(param1:Object) : void {
          super.setData(param1);
@@ -47,6 +52,10 @@ package net.wg.gui.lobby.hangar.maintenance
          _loc1_.addEvent(this,MouseEvent.ROLL_OUT,this.onRollOut);
          _loc1_.addEvent(this,MouseEvent.CLICK,this.onClick);
          soundType = SoundTypes.NORMAL_BTN;
+         if(this.hitMc)
+         {
+            hitArea = this.hitMc;
+         }
       }
 
       override protected function draw() : void {
@@ -66,30 +75,28 @@ package net.wg.gui.lobby.hangar.maintenance
                }
                this.icon.source = this.module.icon;
                this.priceMC.visible = false;
+               this.actionPrice.visible = false;
                if(this.module.target == 3)
                {
-                  this.priceMC.visible = true;
+                  this.actionPrice.setData(this.module.actionPrc,this.module.price,this.module.defPrice,this.module.currency);
+                  this.priceMC.visible = !this.actionPrice.visible;
                   if(this.module.currency == Currencies.GOLD)
                   {
                      this.priceMC.text = App.utils.locale.gold(this.module.price);
-                     this.priceMC.textColor = Currencies.TEXT_COLORS[Currencies.GOLD];
+                     this.priceMC.textColor = this.module.price < this.module.userCredits[1]?Currencies.TEXT_COLORS[Currencies.GOLD]:Currencies.TEXT_COLORS[Currencies.ERROR];
+                     this.actionPrice.textColorType = this.module.price < this.module.userCredits[1]?ActionPrice.TEXT_COLOR_TYPE_ICON:ActionPrice.TEXT_COLOR_TYPE_ERROR;
                   }
                   else
                   {
                      this.priceMC.text = App.utils.locale.integer(this.module.price);
-                     this.priceMC.textColor = Currencies.TEXT_COLORS[Currencies.CREDITS];
+                     this.priceMC.textColor = this.module.price < this.module.userCredits[0]?Currencies.TEXT_COLORS[Currencies.CREDITS]:Currencies.TEXT_COLORS[Currencies.ERROR];
+                     this.actionPrice.textColorType = this.module.price < this.module.userCredits[0]?ActionPrice.TEXT_COLOR_TYPE_ICON:ActionPrice.TEXT_COLOR_TYPE_ERROR;
                   }
-                  if(this.module.status == MENU.MODULEFITS_CREDIT_ERROR || this.module.status == MENU.MODULEFITS_GOLD_ERROR)
+                  if(this.module.status == MENU.MODULEFITS_NOT_WITH_INSTALLED_EQUIPMENT)
                   {
-                     this.priceMC.textColor = Currencies.TEXT_COLORS[Currencies.ERROR];
+                     this.priceMC.textColor = 6710886;
                   }
-                  else
-                  {
-                     if(this.module.status != "")
-                     {
-                        this.priceMC.textColor = 6710886;
-                     }
-                  }
+                  this.actionPrice.textColorType = this.module.status == MENU.MODULEFITS_NOT_WITH_INSTALLED_EQUIPMENT?ActionPrice.TEXT_COLOR_TYPE_DISABLE:ActionPrice.TEXT_COLOR_TYPE_ICON;
                   this.priceMC.icon = this.module.currency;
                   this.priceMC.validateNow();
                   this.targetMC.gotoAndStop("shop");
@@ -129,6 +136,10 @@ package net.wg.gui.lobby.hangar.maintenance
             }
          }
          super.draw();
+         if(this.actionPrice)
+         {
+            this.actionPrice.setup(this);
+         }
       }
 
       private function onRollOver(param1:MouseEvent) : void {

@@ -27,6 +27,8 @@ package net.wg.gui.prebattle.company
    import scaleform.clik.events.ListEvent;
    import flash.events.FocusEvent;
    import flash.events.Event;
+   import flash.geom.Point;
+   import net.wg.utils.IEventCollector;
 
 
    public class CompaniesListWindow extends CompaniesWindowMeta implements ICompaniesWindowMeta
@@ -189,6 +191,7 @@ package net.wg.gui.prebattle.company
          this.filterButton.addEventListener(ButtonEvent.CLICK,this.onFilterButtonPress);
          this.filterInBattleCheckbox.selected = this.selectedFilterInBattleCheckbox;
          this.filterTextField.text = this.defaultFilterText;
+         addEventListener(CompanyDropDownEvent.SHOW_DROP_DOWN,this.onShowDropwDownHandler);
          this.setFocus();
       }
 
@@ -211,6 +214,7 @@ package net.wg.gui.prebattle.company
          this.filterButton.dispose();
          this.groupsScrollBar.dispose();
          App.utils.scheduler.cancelTask(this.enableFilterButtons);
+         removeEventListener(CompanyDropDownEvent.SHOW_DROP_DOWN,this.onShowDropwDownHandler);
          super.onDispose();
       }
 
@@ -286,6 +290,16 @@ package net.wg.gui.prebattle.company
             refreshCompaniesListS(this.filterTextField.text,this.filterInBattleCheckbox.selected,this.division.selectedIndex);
             this.filterTextField.removeEventListener(InputEvent.INPUT,this.filterTextField_inputHandler);
          }
+      }
+
+      private function onShowDropwDownHandler(param1:CompanyDropDownEvent) : void {
+         var _loc2_:Point = globalToLocal(new Point(param1.dropDownref.x,param1.dropDownref.y));
+         var _loc3_:IEventCollector = App.utils.events;
+         _loc3_.disableDisposingForObj(param1.dropDownref);
+         addChild(param1.dropDownref);
+         _loc3_.enableDisposingForObj(param1.dropDownref);
+         param1.dropDownref.x = _loc2_.x;
+         param1.dropDownref.y = _loc2_.y;
       }
    }
 

@@ -76,7 +76,7 @@ package net.wg.gui.lobby.sellDialog
                   _loc5_ = new SellDialogElement();
                   _loc5_.id = param1.shells[_loc4_].userName + " (" + param1.shells[_loc4_].count + " " + _loc3_.makeString(DIALOGS.VEHICLESELLDIALOG_COUNT) + ")";
                   _loc5_.isRemovable = true;
-                  _loc5_.type = "shells";
+                  _loc5_.type = SaleItemBlockRenderer.ITEM_TYPE_SHELL;
                   _loc5_.data = param1.shells[_loc4_];
                   if(param1.shells[_loc4_].buyPrice[1] > 0)
                   {
@@ -87,6 +87,8 @@ package net.wg.gui.lobby.sellDialog
                      _loc5_.inInventory = false;
                   }
                   _loc5_.moneyValue = param1.shells[_loc4_].sellPrice[0] * param1.shells[_loc4_].count;
+                  _loc5_.defMoneyValue = param1.shells[_loc4_].defSellPrice[0] * param1.shells[_loc4_].count;
+                  _loc5_.actionPrc = param1.shells[_loc4_].sellActionPrc;
                   _loc2_.elements.push(_loc5_);
                }
             }
@@ -109,8 +111,10 @@ package net.wg.gui.lobby.sellDialog
             {
                _loc4_ = new SellDialogElement();
                _loc4_.id = param1.eqs[_loc3_].userName;
-               _loc4_.type = "eqs";
+               _loc4_.type = SaleItemBlockRenderer.ITEM_TYPE_EQUIPMENT;
                _loc4_.moneyValue = param1.eqs[_loc3_].sellPrice[0];
+               _loc4_.defMoneyValue = param1.eqs[_loc3_].defSellPrice[0];
+               _loc4_.actionPrc = param1.eqs[_loc3_].sellActionPrc;
                _loc4_.inInventory = true;
                _loc4_.data = param1.eqs[_loc3_];
                _loc4_.isRemovable = true;
@@ -143,58 +147,65 @@ package net.wg.gui.lobby.sellDialog
       }
 
       public function setInventory(param1:Object, param2:Object) : void {
-         var _loc10_:SellDialogElement = null;
+         var _loc11_:SellDialogElement = null;
          var _loc3_:SellDialogItem = new SellDialogItem();
          var _loc4_:Number = 0;
-         var _loc5_:SellDialogElement = new SellDialogElement();
-         _loc5_.inInventory = true;
-         var _loc6_:Number = 0;
-         var _loc7_:uint = 0;
-         while(_loc7_ < param1.length)
+         var _loc5_:Number = 0;
+         var _loc6_:SellDialogElement = new SellDialogElement();
+         _loc6_.inInventory = true;
+         var _loc7_:Number = 0;
+         var _loc8_:uint = 0;
+         while(_loc8_ < param1.length)
          {
-            _loc4_ = _loc4_ + param1[_loc7_][0].sellPrice[0] * param1[_loc7_][0].inventoryCount;
-            _loc6_ = _loc6_ + param1[_loc7_][0].inventoryCount;
-            if(param1[_loc7_][1])
+            _loc4_ = _loc4_ + param1[_loc8_][0].sellPrice[0] * param1[_loc8_][0].inventoryCount;
+            _loc5_ = _loc5_ + param1[_loc8_][0].defSellPrice[0] * param1[_loc8_][0].inventoryCount;
+            _loc7_ = _loc7_ + param1[_loc8_][0].inventoryCount;
+            if(param1[_loc8_][1])
             {
-               _loc5_.inInventory = true;
+               _loc6_.inInventory = true;
             }
-            _loc7_++;
+            _loc8_++;
          }
-         var _loc8_:ILocale = App.utils.locale;
+         var _loc9_:ILocale = App.utils.locale;
          if(param1.length > 0)
          {
-            _loc5_.moneyValue = _loc4_;
-            _loc5_.id = _loc8_.makeString(DIALOGS.VEHICLESELLDIALOG_NOTINSTALLED_MODULES) + " (" + _loc6_ + " " + _loc8_.makeString(DIALOGS.VEHICLESELLDIALOG_COUNT) + ")";
-            _loc5_.isRemovable = true;
-            _loc5_.type = "modules";
-            _loc5_.data = param1;
-            _loc3_.elements.push(_loc5_);
+            _loc6_.moneyValue = _loc4_;
+            _loc6_.defMoneyValue = _loc5_;
+            _loc6_.actionPrc = 0;
+            _loc6_.id = _loc9_.makeString(DIALOGS.VEHICLESELLDIALOG_NOTINSTALLED_MODULES) + " (" + _loc7_ + " " + _loc9_.makeString(DIALOGS.VEHICLESELLDIALOG_COUNT) + ")";
+            _loc6_.isRemovable = true;
+            _loc6_.type = SaleItemBlockRenderer.ITEM_TYPE_MODULE;
+            _loc6_.data = param1;
+            _loc3_.elements.push(_loc6_);
          }
-         var _loc9_:uint = 0;
-         while(_loc9_ < param2.length)
+         var _loc10_:uint = 0;
+         while(_loc10_ < param2.length)
          {
-            if(param2[_loc9_][0] != undefined)
+            if(param2[_loc10_][0] != undefined)
             {
-               if(param2[_loc9_][0].inventoryCount != 0)
+               if(param2[_loc10_][0].inventoryCount != 0)
                {
-                  _loc10_ = new SellDialogElement();
-                  _loc10_.id = param2[_loc9_][0].userName + " (" + param2[_loc9_][0].inventoryCount + " " + _loc8_.makeString(DIALOGS.VEHICLESELLDIALOG_COUNT) + ")";
-                  _loc10_.isRemovable = true;
-                  _loc10_.data = param2[_loc9_][0];
-                  _loc10_.type = "invShells";
-                  if(param2[_loc9_][0].buyPrice[1] > 0 || (param2[_loc9_][1]))
+                  _loc11_ = new SellDialogElement();
+                  _loc11_.id = param2[_loc10_][0].userName + " (" + param2[_loc10_][0].inventoryCount + " " + _loc9_.makeString(DIALOGS.VEHICLESELLDIALOG_COUNT) + ")";
+                  _loc11_.isRemovable = true;
+                  _loc11_.data = param2[_loc10_][0];
+                  _loc11_.type = SaleItemBlockRenderer.ITEM_TYPE_SHELL;
+                  _loc11_.itemInInventory = true;
+                  if(param2[_loc10_][0].buyPrice[1] > 0 || (param2[_loc10_][1]))
                   {
-                     _loc10_.inInventory = true;
+                     _loc11_.inInventory = true;
                   }
                   else
                   {
-                     _loc10_.inInventory = false;
+                     _loc11_.inInventory = false;
                   }
-                  _loc10_.moneyValue = param2[_loc9_][0].sellPrice[0] * param2[_loc9_][0].inventoryCount;
-                  _loc3_.elements.push(_loc10_);
+                  _loc11_.moneyValue = param2[_loc10_][0].sellPrice[0] * param2[_loc10_][0].inventoryCount;
+                  _loc11_.defMoneyValue = param2[_loc10_][0].defSellPrice[0] * param2[_loc10_][0].inventoryCount;
+                  _loc11_.actionPrc = param2[_loc10_][0].sellActionPrc;
+                  _loc3_.elements.push(_loc11_);
                }
             }
-            _loc9_++;
+            _loc10_++;
          }
          if(_loc3_.elements.length != 0)
          {

@@ -55,9 +55,8 @@ package net.wg.gui.tutorial.controls
       }
 
       public function relayout() : void {
-         var _loc1_:* = NaN;
          var _loc2_:HintBaseItemRenderer = null;
-         _loc1_ = 0;
+         var _loc1_:Number = 0;
          for each (_loc2_ in this.items)
          {
             _loc2_.y = _loc1_ ^ 0;

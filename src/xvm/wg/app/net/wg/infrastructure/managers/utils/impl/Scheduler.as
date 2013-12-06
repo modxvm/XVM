@@ -52,6 +52,10 @@ package net.wg.infrastructure.managers.utils.impl
          this.updateTimer();
       }
 
+      public function isEmpty() : Boolean {
+         return this._taskStack.isEmpty();
+      }
+
       public function dispose() : void {
          this.cancelAll();
          this._taskStack = null;
@@ -156,16 +160,38 @@ package net.wg.infrastructure.managers.utils.impl
       private var _tasks:Vector.<Task> = null;
 
       private function pushTask(param1:Task) : void {
-         var _loc2_:Number = this._tasks.length;
-         while(_loc2_ > 0)
+         var _loc2_:Number = this._tasks.length-1;
+         var _loc3_:Number = -1;
+         var _loc4_:Number = -1;
+         while(_loc2_ >= 0)
          {
-            if(this._tasks[_loc2_-1].finishTime > param1.finishTime)
+            if(this._tasks[_loc2_].finishTime > param1.finishTime && _loc3_ == -1)
+            {
+               _loc3_ = _loc2_ + 1;
+            }
+            if(this._tasks[_loc2_].handler == param1.handler)
+            {
+               _loc4_ = _loc2_;
+            }
+            if(!(_loc3_ == -1) && !(_loc4_ == -1))
             {
                break;
             }
             _loc2_--;
          }
-         this._tasks.splice(_loc2_,0,param1);
+         if(_loc3_ == -1)
+         {
+            _loc3_ = 0;
+         }
+         if(_loc4_ < _loc3_ && !(_loc4_ == -1))
+         {
+            _loc3_--;
+         }
+         if(_loc4_ != -1)
+         {
+            this._tasks.splice(_loc4_,1);
+         }
+         this._tasks.splice(_loc3_,0,param1);
       }
 
       private function removeTaskByHandler(param1:Function) : void {

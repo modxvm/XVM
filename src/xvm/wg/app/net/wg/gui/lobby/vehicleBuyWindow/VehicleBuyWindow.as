@@ -9,7 +9,9 @@ package net.wg.gui.lobby.vehicleBuyWindow
    import net.wg.utils.ILocale;
    import scaleform.clik.events.ButtonEvent;
    import flash.filters.DropShadowFilter;
+   import net.wg.infrastructure.constants.WindowViewInvalidationType;
    import net.wg.data.constants.Currencies;
+   import net.wg.gui.components.controls.IconText;
    import scaleform.clik.utils.Constraints;
 
 
@@ -155,7 +157,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
          var _loc7_:* = NaN;
          var _loc8_:* = NaN;
          var _loc9_:* = false;
-         if((isInvalid(UPDATE_STAGE_INVALID)) && (window))
+         if((window) && (isInvalid(WindowViewInvalidationType.POSITION_INVALID)))
          {
             if(isCentered)
             {
@@ -189,6 +191,8 @@ package net.wg.gui.lobby.vehicleBuyWindow
             this.headerMc.icon.iconLoader.source = this.initInfo.icon;
             this.headerMc.icon.nation = this.initInfo.nation;
             this.headerMc.icon.level = this.initInfo.level;
+            this.headerMc.tankActionPrice.setData(this.initInfo.actionPrc,this.initInfo.actualPrice,this.initInfo.defActualPrice,this.initInfo.isPremium?Currencies.GOLD:Currencies.CREDITS);
+            this.headerMc.tankPrice.visible = !this.headerMc.tankActionPrice.visible;
             this.headerMc.tankPrice.icon = this.initInfo.isPremium?Currencies.GOLD:Currencies.CREDITS;
             this.headerMc.tankPrice.textColor = this.initInfo.isPremium?goldColor:creditsColor;
             this.headerMc.tankPrice.text = _loc1_.integer(this.initInfo.actualPrice);
@@ -196,14 +200,18 @@ package net.wg.gui.lobby.vehicleBuyWindow
             this.headerMc.icon.isPremium = this.initInfo.isPremium;
             _loc5_ = "<b>" + _loc1_.makeString(DIALOGS.BUYVEHICLEDIALOG_TANKMEN) + " " + this.initInfo.tankmenCount + "</b>";
             this.bodyMc.tankmenLabel.htmlText = _loc1_.makeString(DIALOGS.BUYVEHICLEDIALOG_TANKMENLABEL,{"count":_loc5_});
-            this.bodyMc.scoolBtn.price = this.initInfo.studyPriceCredits.toString();
-            this.bodyMc.academyBtn.price = this.initInfo.studyPriceGold.toString();
-            this.bodyMc.freeBtn.price = "0";
+            this.bodyMc.scoolBtn.updatePrice(this.initInfo.actionPrcStudyCredits,this.initInfo.studyPriceCredits,this.initInfo.defStudyPriceCredits,IconText.CREDITS);
+            this.bodyMc.academyBtn.updatePrice(this.initInfo.actionPrcStudyGold,this.initInfo.studyPriceGold,this.initInfo.defStudyPriceGold,IconText.GOLD);
+            this.bodyMc.freeBtn.updatePrice(0,0,0,"");
             this.bodyMc.scoolBtn.data = this.initInfo.studyPriceCredits;
             this.bodyMc.academyBtn.data = this.initInfo.studyPriceGold;
             this.bodyMc.freeBtn.data = 0;
+            this.bodyMc.ammoActionPrice.setData(this.initInfo.ammoActionPrc,this.initInfo.ammoPrice,this.initInfo.defAmmoPrice,IconText.CREDITS);
             this.bodyMc.ammoPrice.text = _loc1_.integer(this.initInfo.ammoPrice);
+            this.bodyMc.ammoPrice.visible = !this.bodyMc.ammoActionPrice.visible;
             this.bodyMc.slotPrice.text = _loc1_.integer(this.initInfo.slotPrice);
+            this.bodyMc.slotActionPrice.setData(this.initInfo.slotActionPrc,this.initInfo.slotPrice,this.initInfo.defSlotPrice,IconText.GOLD);
+            this.bodyMc.slotPrice.visible = !this.bodyMc.slotActionPrice.visible;
             this.bodyMc.scoolBtn.nation = this.bodyMc.academyBtn.nation = this.bodyMc.freeBtn.nation = this.initInfo.nation;
             this.isTotalResultChanged = true;
             _loc6_ = this.headerMc.tankPriceLabel.filters[0];
@@ -275,6 +283,10 @@ package net.wg.gui.lobby.vehicleBuyWindow
             this.animManager.dispose();
             this.animManager = null;
          }
+         if(this.headerMc)
+         {
+            this.headerMc.dispose();
+         }
          if(this.footerMc)
          {
             this.footerMc.expandBtn.removeEventListener(ButtonEvent.CLICK,this.expandButtonClickHandler);
@@ -287,6 +299,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
             this.bodyMc.ammoCheckbox.removeEventListener(Event.SELECT,this.checkBoxSelectHandler);
             this.bodyMc.slotCheckbox.removeEventListener(Event.SELECT,this.checkBoxSelectHandler);
             this.bodyMc.crewCheckbox.removeEventListener(Event.SELECT,this.crewCheckBoxSelectHandler);
+            this.bodyMc.dispose();
          }
          this.disposeWindowRefHandlers();
       }
@@ -347,7 +360,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
 
       private function windowRefResizeHandler(param1:Event) : void {
          this.windowBackgroundSizeInitialized = true;
-         invalidate(UPDATE_STAGE_INVALID);
+         invalidate(WindowViewInvalidationType.POSITION_INVALID);
       }
    }
 

@@ -14,13 +14,11 @@ package net.wg.infrastructure.helpers
    import flash.events.IOErrorEvent;
 
 
-   public class LibraryLoader extends EventDispatcher
+   public class LibraryLoader extends EventDispatcher implements ILibraryLoader
    {
           
-      public function LibraryLoader(param1:DisplayObjectContainer) {
+      public function LibraryLoader() {
          super();
-         this.container = param1;
-         this.loaders = new Vector.<Loader>();
       }
 
       private var container:DisplayObjectContainer;
@@ -30,6 +28,11 @@ package net.wg.infrastructure.helpers
       private var processedCounter:int = 0;
 
       private var loaders:Vector.<Loader> = null;
+
+      public function init(param1:DisplayObjectContainer) : void {
+         this.container = param1;
+         this.loaders = new Vector.<Loader>();
+      }
 
       public function dispose() : void {
          var _loc1_:Loader = null;

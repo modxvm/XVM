@@ -9,7 +9,6 @@ package net.wg.gui.cyberSport.views.unit
    import net.wg.gui.cyberSport.vo.UnitSlotVO;
    import flash.events.MouseEvent;
    import scaleform.clik.events.ButtonEvent;
-   import scaleform.clik.constants.InvalidationType;
    import flash.display.DisplayObject;
    import net.wg.data.constants.Tooltips;
    import net.wg.gui.cyberSport.controls.events.CSComponentEvent;
@@ -58,7 +57,7 @@ package net.wg.gui.cyberSport.views.unit
 
       public function set slotData(param1:UnitSlotVO) : void {
          this._slotData = param1;
-         invalidateData();
+         this.updateComponents();
       }
 
       override protected function configUI() : void {
@@ -75,75 +74,82 @@ package net.wg.gui.cyberSport.views.unit
          }
          this.vehicleBtn.addEventListener(MouseEvent.ROLL_OVER,this.onMedallionRollOver);
          this.vehicleBtn.addEventListener(MouseEvent.ROLL_OUT,this.onMedallionRollOut);
-         this.tooltipSubscribe([this.slotLabel,this.takePlaceBtn,this.takePlaceFirstTimeBtn]);
+         var _loc1_:Array = [this.slotLabel,this.takePlaceBtn,this.takePlaceFirstTimeBtn];
+         if(this.contextMenuArea)
+         {
+            _loc1_.push(this.contextMenuArea);
+         }
+         this.tooltipSubscribe(_loc1_,true);
          this.takePlaceBtn.addEventListener(ButtonEvent.CLICK,this.onTakePlaceClick);
          this.takePlaceFirstTimeBtn.addEventListener(ButtonEvent.CLICK,this.onTakePlaceClick);
       }
 
-      override protected function draw() : void {
-         super.draw();
-         if(InvalidationType.DATA)
+      protected function updateComponents() : void {
+         this.initControlsState();
+         if(this.slotData)
          {
-            this.initControlsState();
-            if(this.slotData)
+            if(!this.slotData.isClosed)
             {
-               this.slotLabel.htmlText = App.utils.commons.formatPlayerName(this.slotLabel,this.slotData.slotLabel);
-               if(!this.slotData.isClosed)
+               this.vehicleBtn.visible = true;
+               this.takePlaceBtn.visible = this.index > 0 && (this.slotData.canBeTaken) && !this.slotData.isClosed && !this.slotData.isFreezed && !this.slotData.isCommanderState;
+               if(this.slotData.selectedVehicle)
                {
-                  this.vehicleBtn.visible = true;
-                  this.takePlaceBtn.visible = this.index > 0 && (this.slotData.canBeTaken) && !this.slotData.isClosed && !this.slotData.isFreezed && !this.slotData.isCommanderState;
-                  if(this.slotData.selectedVehicleCD != -1)
+                  this.vehicleBtn.setVehicle(this.slotData.selectedVehicle);
+               }
+               else
+               {
+                  if((this.slotData.isCommanderState) && this.index == 0 || !this.slotData.isCommanderState && !this.slotData.player)
                   {
-                     this.vehicleBtn.setCompDescriptor(this.slotData.selectedVehicleCD);
+                     this.vehicleBtn.vehicleCount = this.index == 0?-1:this.slotData.compatibleVehiclesCount;
                   }
                   else
                   {
-                     if((this.slotData.isCommanderState) && this.index == 0 || !this.slotData.isCommanderState && !this.slotData.player)
+                     if((this.slotData.isCommanderState) && !(this.index == 0) && (!(this.slotData.restrictions[0] == null) || !(this.slotData.restrictions[1] == null)))
                      {
-                        this.vehicleBtn.vehicleCount = this.index == 0?-1:this.slotData.compatibleVehiclesCount;
+                        this.vehicleBtn.showCommanderSettings = true;
                      }
                      else
                      {
-                        if((this.slotData.isCommanderState) && !(this.index == 0) && (!(this.slotData.restrictions[0] == null) || !(this.slotData.restrictions[1] == null)))
-                        {
-                           this.vehicleBtn.showCommanderSettings = true;
-                        }
-                        else
-                        {
-                           this.vehicleBtn.vehicleCount = -1;
-                           this.vehicleBtn.visible = Boolean(this.slotData.player);
-                        }
+                        this.vehicleBtn.vehicleCount = -1;
+                        this.vehicleBtn.visible = Boolean(this.slotData.player);
                      }
                   }
-                  this.vehicleBtn.selectState(this.slotData.selectedVehicleCD == -1 && (this.slotData.player) && (this.slotData.player.isSelf));
-                  this.lockBackground.visible = false;
-                  if((this.slotData) && (this.slotData.player))
-                  {
-                     this.vehicleBtn.enabled = (this.slotData.player.isSelf) && !(this.slotData.playerStatus == 2);
-                  }
                }
-               else
+               this.vehicleBtn.selectState(!this.slotData.selectedVehicle && (this.slotData.player) && (this.slotData.player.isSelf));
+               this.lockBackground.visible = false;
+               if((this.slotData) && (this.slotData.player))
                {
-                  this.takePlaceBtn.visible = false;
-                  this.vehicleBtn.visible = false;
-                  this.lockBackground.visible = true;
+                  this.vehicleBtn.enabled = (this.slotData.player.isSelf) && !(this.slotData.playerStatus == 2);
                }
-               this.slotLabel.visible = !this.takePlaceBtn.visible;
+            }
+            else
+            {
+               this.takePlaceBtn.visible = false;
+               this.vehicleBtn.visible = false;
+               this.lockBackground.visible = true;
+            }
+            this.slotLabel.visible = !this.takePlaceBtn.visible;
+            if(this.contextMenuArea)
+            {
+               this.contextMenuArea.visible = (this.slotData) && (this.slotData.player) && !this.slotData.player.isSelf;
+            }
+            if(this.slotData.player)
+            {
+               this.ratingTF.text = this.slotData.player.rating;
+               this.ratingTF.visible = true;
+               this.slotLabel.width = this.ratingTF.x + this.ratingTF.width - this.slotLabel.x - this.ratingTF.textWidth - 10;
                if(this.contextMenuArea)
                {
-                  this.contextMenuArea.visible = (this.slotData) && (this.slotData.player) && !this.slotData.player.isSelf;
+                  this.contextMenuArea.width = this.slotLabel.width;
                }
-               if(this.slotData.player)
-               {
-                  this.ratingTF.text = this.slotData.player.rating.toString();
-                  this.ratingTF.visible = true;
-               }
-               else
-               {
-                  this.ratingTF.visible = false;
-               }
-               this.updateTakePlaceButtonView();
+               App.utils.commons.formatPlayerName(this.slotLabel,this.slotData.player.name,this.slotData.player.clan,this.slotData.player.region,this.slotData.player.isIgr,"","",this.slotData.player.color);
             }
+            else
+            {
+               this.slotLabel.htmlText = this.slotData.slotLabel;
+               this.ratingTF.visible = false;
+            }
+            this.updateTakePlaceButtonView();
          }
       }
 
@@ -174,10 +180,33 @@ package net.wg.gui.cyberSport.views.unit
                }
                else
                {
-                  if(this.slotData.compatibleVehiclesCount == 0 && !this.slotData.isCommanderState)
+                  if(this.slotData.compatibleVehiclesCount == 0 && !this.slotData.player)
                   {
-                     App.toolTipMgr.showComplex(TOOLTIPS.CYBERSPORT_UNIT_SLOTLABELUNAVAILABLE);
+                     if(this.slotData.isCommanderState)
+                     {
+                        if((this.slotData.restrictions) && ((this.slotData.restrictions[0]) || (this.slotData.restrictions[1])))
+                        {
+                           App.toolTipMgr.showSpecial(Tooltips.CYBER_SPORT_SLOT,null,this.index,this._slotData.unitIdx);
+                        }
+                     }
+                     else
+                     {
+                        App.toolTipMgr.showComplex(TOOLTIPS.CYBERSPORT_UNIT_SLOTLABELUNAVAILABLE);
+                     }
                   }
+                  else
+                  {
+                     if(this.slotData.player)
+                     {
+                        App.toolTipMgr.show(this.slotData.player.getToolTip());
+                     }
+                  }
+               }
+               break;
+            case this.contextMenuArea:
+               if((this.slotData) && (this.slotData.player))
+               {
+                  App.toolTipMgr.show(this.slotData.player.getToolTip());
                }
                break;
             case this.takePlaceBtn:
@@ -194,7 +223,8 @@ package net.wg.gui.cyberSport.views.unit
       }
 
       private function updateTakePlaceButtonView() : void {
-         var _loc1_:Boolean = this.takePlaceBtn.visible;
+         var _loc1_:* = false;
+         _loc1_ = this.takePlaceBtn.visible;
          this.takePlaceFirstTimeBtn.visible = (_loc1_) && !this.slotData.isCurrentUserInSlot;
          this.takePlaceBtn.visible = (_loc1_) && (this.slotData.isCurrentUserInSlot);
       }
@@ -204,7 +234,12 @@ package net.wg.gui.cyberSport.views.unit
          this.vehicleBtn.removeEventListener(MouseEvent.ROLL_OUT,this.onMedallionRollOut);
          this.takePlaceBtn.removeEventListener(ButtonEvent.CLICK,this.onTakePlaceClick);
          this.takePlaceFirstTimeBtn.addEventListener(ButtonEvent.CLICK,this.onTakePlaceClick);
-         this.tooltipSubscribe([this.slotLabel,this.takePlaceBtn,this.takePlaceFirstTimeBtn],false);
+         var _loc1_:Array = [this.slotLabel,this.takePlaceBtn,this.takePlaceFirstTimeBtn];
+         if(this.contextMenuArea)
+         {
+            _loc1_.push(this.contextMenuArea);
+         }
+         this.tooltipSubscribe(_loc1_,false);
          if(this.contextMenuArea)
          {
             this.contextMenuArea.removeEventListener(MouseEvent.CLICK,this.onContextMenuAreaClick);

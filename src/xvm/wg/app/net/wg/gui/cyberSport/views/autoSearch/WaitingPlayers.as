@@ -42,11 +42,7 @@ package net.wg.gui.cyberSport.views.autoSearch
 
       override protected function updateView() : void {
          super.updateView();
-         if(model.canInvokeAutoSearch)
-         {
-            this.buttonsBG.visible = true;
-            cancelButton.visible = true;
-         }
+         this.buttonsBG.visible = cancelButton.visible = model.canInvokeAutoSearch;
          updateTime();
          startTimer();
          this.initPlayersState(model.playersReadiness);
@@ -87,7 +83,7 @@ package net.wg.gui.cyberSport.views.autoSearch
          super.dispose();
       }
 
-      override protected function cancelButtonOnClick(param1:ButtonEvent) : void {
+      override protected function cancelButtonOnClick(param1:ButtonEvent=null) : void {
          super.cancelButtonOnClick(param1);
          cancelButton.enabled = false;
       }

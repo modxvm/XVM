@@ -22,6 +22,8 @@ package net.wg.gui.lobby.questsWindow.data
 
       private var _progrBarType:String = "";
 
+      private var _eventType:int = 0;
+
       private var _maxProgrVal:Number = 0;
 
       private var _currentProgrVal:Number = 0;
@@ -29,6 +31,11 @@ package net.wg.gui.lobby.questsWindow.data
       private var _tasksCount:int = 0;
 
       private var _progrTooltip:Object = null;
+
+      override public function dispose() : void {
+         this._progrTooltip = null;
+         super.dispose();
+      }
 
       public function get title() : String {
          return this._title;
@@ -108,6 +115,14 @@ package net.wg.gui.lobby.questsWindow.data
 
       public function set progrTooltip(param1:Object) : void {
          this._progrTooltip = param1;
+      }
+
+      public function get eventType() : int {
+         return this._eventType;
+      }
+
+      public function set eventType(param1:int) : void {
+         this._eventType = param1;
       }
    }
 

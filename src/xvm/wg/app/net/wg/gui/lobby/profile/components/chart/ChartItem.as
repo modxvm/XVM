@@ -12,7 +12,7 @@ package net.wg.gui.lobby.profile.components.chart
 
       private static const VALUE_INV:String = "valInv";
 
-      private var _value:uint = 0;
+      private var _value:Number = 0;
 
       override public function setData(param1:Object) : void {
          super.setData(param1);
@@ -24,9 +24,9 @@ package net.wg.gui.lobby.profile.components.chart
          }
          else
          {
-            if(!isNaN(uint(_data)))
+            if(!isNaN(Number(_data)))
             {
-               this.value = uint(_data);
+               this.value = Number(_data);
             }
          }
       }
@@ -52,11 +52,11 @@ package net.wg.gui.lobby.profile.components.chart
           
       }
 
-      public function get value() : uint {
+      public function get value() : Number {
          return this._value;
       }
 
-      public function set value(param1:uint) : void {
+      public function set value(param1:Number) : void {
          this._value = param1;
          invalidate(VALUE_INV);
       }

@@ -16,14 +16,14 @@ package net.wg.gui.lobby.store.inventory
 
       override protected function onPopulate() : void {
          super.onPopulate();
-         storeTable.setModuleRendererLinkage(Linkages.INVENTORY_MODULE_ITEM_RENDERER);
-         storeTable.setVehicleRendererLinkage(Linkages.INVENTORY_VEHICLE_ITEM_RENDERER);
-         storeTable.addEventListener(StoreEvent.SELL,this.onSellItemHandler);
+         form.storeTable.setModuleRendererLinkage(Linkages.INVENTORY_MODULE_ITEM_RENDERER);
+         form.storeTable.setVehicleRendererLinkage(Linkages.INVENTORY_VEHICLE_ITEM_RENDERER);
+         form.storeTable.addEventListener(StoreEvent.SELL,this.onSellItemHandler);
       }
 
       override protected function onDispose() : void {
          super.onDispose();
-         storeTable.removeEventListener(StoreEvent.SELL,this.onSellItemHandler);
+         form.storeTable.removeEventListener(StoreEvent.SELL,this.onSellItemHandler);
       }
 
       override protected function onMenuChangeType() : void {
@@ -32,7 +32,7 @@ package net.wg.gui.lobby.store.inventory
          {
             _loc1_ = getCurrentView();
             assertNotNull(_loc1_,"currentView");
-            _loc1_.setSubFilterData(nationFilter.nation.selectedIndex-1,subFilterData);
+            _loc1_.setSubFilterData(form.nationFilter.nation.selectedIndex-1,subFilterData);
          }
          super.onMenuChangeType();
       }
@@ -56,7 +56,7 @@ package net.wg.gui.lobby.store.inventory
             param1.setSubFilterData(nation,subFilterData);
          }
          param1.update(getViewData(param2));
-         storeTable.updateHeaderCountTitle(MENU.shop_table_header_count(param1.fittingType));
+         form.storeTable.updateHeaderCountTitle(MENU.shop_table_header_count(param1.fittingType));
       }
 
       private function onSellItemHandler(param1:StoreEvent) : void {

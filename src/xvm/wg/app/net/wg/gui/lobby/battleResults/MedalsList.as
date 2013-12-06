@@ -8,9 +8,9 @@ package net.wg.gui.lobby.battleResults
    import flash.filters.ColorMatrixFilter;
    import flash.filters.DropShadowFilter;
    import flash.events.Event;
+   import flash.display.DisplayObject;
    import scaleform.clik.interfaces.IListItemRenderer;
    import flash.utils.getDefinitionByName;
-   import flash.display.DisplayObject;
    import scaleform.clik.events.ButtonEvent;
    import flash.events.MouseEvent;
    import scaleform.clik.events.ListEvent;
@@ -149,13 +149,18 @@ package net.wg.gui.lobby.battleResults
       }
 
       private function drawRenderers(param1:Number) : void {
+         var _loc2_:Object = null;
          while(this.renderers.length)
          {
             this.contentArea.removeChild(this.renderers.pop());
          }
          while(this.stripes.length)
          {
-            this.stripesArea.removeChild(this.stripes.pop());
+            _loc2_ = this.stripes.pop();
+            if(_loc2_)
+            {
+               this.stripesArea.removeChild(_loc2_ as DisplayObject);
+            }
          }
          while(this.renderers.length < param1)
          {
@@ -350,15 +355,22 @@ package net.wg.gui.lobby.battleResults
             _loc4_ = param1[_loc2_];
             _loc3_.setData(_loc4_);
             _loc3_.enabled = this.enabled;
-            if(!(this._stripeRenderer == "") && (_loc4_.isEpic))
+            if(this._stripeRenderer != "")
             {
-               _loc5_ = getDefinitionByName(this._stripeRenderer) as Class;
-               _loc6_ = new _loc5_() as MovieClip;
-               this.stripesArea.addChild(_loc6_);
-               if(_loc6_)
+               if(_loc4_.isEpic)
                {
-                  this.stripes.push(_loc6_);
-                  _loc6_.visible = false;
+                  _loc5_ = getDefinitionByName(this._stripeRenderer) as Class;
+                  _loc6_ = new _loc5_() as MovieClip;
+                  this.stripesArea.addChild(_loc6_);
+                  if(_loc6_)
+                  {
+                     this.stripes.push(_loc6_);
+                     _loc6_.visible = false;
+                  }
+               }
+               else
+               {
+                  this.stripes.push(null);
                }
             }
             _loc2_++;

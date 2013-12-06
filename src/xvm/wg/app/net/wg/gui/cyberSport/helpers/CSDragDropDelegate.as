@@ -7,6 +7,7 @@ package net.wg.gui.cyberSport.helpers
    import net.wg.data.constants.Errors;
    import net.wg.gui.cyberSport.vo.UnitCandidateVO;
    import net.wg.gui.cyberSport.controls.SlotDropIndicator;
+   import net.wg.gui.cyberSport.controls.CSCandidatesScrollingList;
 
 
    public class CSDragDropDelegate extends DropListDelegate
@@ -22,6 +23,8 @@ package net.wg.gui.cyberSport.helpers
       private var _highlightingHandler:Function = null;
 
       private var _onEndDropHandler:Function = null;
+
+      private var _leaveSlotHandler:Function = null;
 
       private var id:Number = 0;
 
@@ -65,8 +68,9 @@ package net.wg.gui.cyberSport.helpers
 
       override public function onEndDrop(param1:InteractiveObject, param2:InteractiveObject, param3:InteractiveObject, param4:InteractiveObject) : void {
          var _loc5_:* = NaN;
+         var _loc6_:* = false;
          super.onEndDrop(param1,param2,param3,param4);
-         trace(param1,param2,param3,param4.parent);
+         trace(param1,param2,param3,param4.parent,param4);
          App.utils.asserter.assertNotNull(s_lastFreeSlots,"_lastFreeSlots" + Errors.CANT_NULL);
          if(param4  is  SlotDropIndicator)
          {
@@ -76,17 +80,30 @@ package net.wg.gui.cyberSport.helpers
                this._onEndDropHandler(_loc5_,IDropItem(param3).data.databaseID);
             }
          }
+         else
+         {
+            if(param2  is  CSCandidatesScrollingList)
+            {
+               _loc6_ = param1  is  CSCandidatesScrollingList;
+               if(!_loc6_)
+               {
+                  this._leaveSlotHandler(IDropItem(param3).data.databaseID);
+               }
+            }
+         }
       }
 
       override public function dispose() : void {
          this._highlightingHandler = null;
          this._onEndDropHandler = null;
+         this._leaveSlotHandler = null;
          super.dispose();
       }
 
-      public function setHandlers(param1:Function, param2:Function) : void {
+      public function setHandlers(param1:Function, param2:Function, param3:Function) : void {
          this._highlightingHandler = param1;
          this._onEndDropHandler = param2;
+         this._leaveSlotHandler = param3;
       }
    }
 

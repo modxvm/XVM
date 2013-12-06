@@ -110,8 +110,15 @@ package net.wg.gui.notification
 
       private function messageClickHandler(param1:Event) : void {
          param1.stopImmediatePropagation();
-         var _loc2_:ServiceMessagePopUp = ServiceMessagePopUp(param1.target);
-         App.utils.scheduler.scheduleTask(this.removePopupAt,50,this.displayingNowPopUps.indexOf(_loc2_),false);
+         App.utils.scheduler.scheduleTask(this.postponedPopupRemoving,50,param1.target,false,true);
+      }
+
+      private function postponedPopupRemoving(param1:ServiceMessagePopUp, param2:Boolean, param3:Boolean=true) : void {
+         var _loc4_:int = this.displayingNowPopUps.indexOf(param1);
+         if(_loc4_ != -1)
+         {
+            this.removePopupAt(_loc4_,param2,param3);
+         }
       }
 
       private function mouseButtonClickHandler(param1:Event) : void {

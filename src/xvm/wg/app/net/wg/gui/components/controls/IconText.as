@@ -95,6 +95,8 @@ package net.wg.gui.components.controls
 
       private var _xCorrect:Number = 0;
 
+      private var _enabledTooltip:Boolean = true;
+
       private var _textFieldYOffset:Number = 0;
 
       override public function dispose() : void {
@@ -250,6 +252,18 @@ package net.wg.gui.components.controls
          invalidate();
       }
 
+      public function get enabledTooltip() : Boolean {
+         return this._enabledTooltip;
+      }
+
+      public function set enabledTooltip(param1:Boolean) : void {
+         if(param1 == this._enabledTooltip)
+         {
+            return;
+         }
+         this._enabledTooltip = param1;
+      }
+
       public function get textFieldYOffset() : Number {
          return this._textFieldYOffset;
       }
@@ -375,7 +389,7 @@ package net.wg.gui.components.controls
          {
             return;
          }
-         if(this.toolTip)
+         if((this.toolTip) && (this._enabledTooltip))
          {
             App.toolTipMgr.showComplex(this.toolTip);
          }
@@ -386,7 +400,10 @@ package net.wg.gui.components.controls
          {
             return;
          }
-         App.toolTipMgr.hide();
+         if(this._enabledTooltip)
+         {
+            App.toolTipMgr.hide();
+         }
       }
    }
 

@@ -7,8 +7,9 @@ package net.wg.gui.cyberSport.controls
    import flash.text.TextField;
    import net.wg.gui.components.controls.VoiceWave;
    import net.wg.infrastructure.events.VoiceChatEvent;
-   import scaleform.clik.constants.InvalidationType;
+   import flash.events.MouseEvent;
    import net.wg.gui.cyberSport.vo.UnitCandidateVO;
+   import scaleform.clik.constants.InvalidationType;
    import net.wg.gui.prebattle.squad.MessengerUtils;
 
 
@@ -32,11 +33,15 @@ package net.wg.gui.cyberSport.controls
          this.voiceWave.visible = App.voiceChatMgr.isVOIPEnabledS();
          App.voiceChatMgr.addEventListener(VoiceChatEvent.START_SPEAKING,this.speakHandler);
          App.voiceChatMgr.addEventListener(VoiceChatEvent.STOP_SPEAKING,this.speakHandler);
+         addEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
+         addEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
       }
 
       override public function dispose() : void {
          App.voiceChatMgr.removeEventListener(VoiceChatEvent.START_SPEAKING,this.speakHandler);
          App.voiceChatMgr.removeEventListener(VoiceChatEvent.STOP_SPEAKING,this.speakHandler);
+         removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
+         removeEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
          this.voiceWave.dispose();
          this.voiceWave = null;
          this.inviteIndicator = null;
@@ -45,16 +50,27 @@ package net.wg.gui.cyberSport.controls
       }
 
       override protected function draw() : void {
+         var _loc1_:UnitCandidateVO = null;
          super.draw();
          if(isInvalid(InvalidationType.DATA))
          {
-            visible = !(data == null);
-            if(data)
+            _loc1_ = UnitCandidateVO(data);
+            visible = !(_loc1_ == null);
+            if(_loc1_)
             {
-               this.inviteIndicator.visible = UnitCandidateVO(data).isInvite;
-               this.candidateName.htmlText = App.utils.commons.formatPlayerName(this.candidateName,UnitCandidateVO(data).name);
-               this.candidateRating.text = UnitCandidateVO(data).rating.toString();
-               this.setSpeakers(data.isPlayerSpeaking,true);
+               this.inviteIndicator.visible = _loc1_.isInvite;
+               if(_loc1_.isRatingAvailable())
+               {
+                  this.candidateRating.visible = true;
+                  this.candidateRating.text = _loc1_.rating;
+               }
+               else
+               {
+                  this.candidateRating.visible = false;
+               }
+               this.candidateName.width = this.candidateRating.x + this.candidateRating.width - this.candidateName.x - this.candidateRating.textWidth - 10;
+               App.utils.commons.formatPlayerName(this.candidateName,_loc1_.name,_loc1_.clan,_loc1_.region,_loc1_.isIgr,"","",_loc1_.color);
+               this.setSpeakers(_loc1_.isPlayerSpeaking,true);
             }
             else
             {
@@ -102,6 +118,18 @@ package net.wg.gui.cyberSport.controls
          {
             this.setSpeakers(param2);
          }
+      }
+
+      private function onRollOverHandler(param1:MouseEvent) : void {
+         var _loc2_:UnitCandidateVO = UnitCandidateVO(data);
+         if(_loc2_)
+         {
+            App.toolTipMgr.show(_loc2_.getToolTip());
+         }
+      }
+
+      private function onRollOutHandler(param1:MouseEvent) : void {
+         App.toolTipMgr.hide();
       }
    }
 

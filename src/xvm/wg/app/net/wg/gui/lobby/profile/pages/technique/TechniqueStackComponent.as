@@ -8,6 +8,7 @@ package net.wg.gui.lobby.profile.pages.technique
    import net.wg.gui.lobby.profile.components.ResizableViewStack;
    import scaleform.clik.data.DataProvider;
    import flash.geom.Rectangle;
+   import scaleform.clik.controls.Button;
 
 
    public class TechniqueStackComponent extends UIComponent
@@ -43,6 +44,7 @@ package net.wg.gui.lobby.profile.pages.technique
                "tooltip":PROFILE.SECTION_TECHNIQUE_TABBTN_AWARDS_TOOLTIP
             }
          ]);
+         this.buttonBar.selectedIndex = 1;
          this.buttonBar.selectedIndex = 0;
          this.buttonBar.validateNow();
       }
@@ -93,7 +95,11 @@ package net.wg.gui.lobby.profile.pages.technique
          {
             this.buttonBar.selectedIndex = 0;
          }
-         this.buttonBar.getButtonAt(1).enabled = param1;
+         var _loc2_:Button = this.buttonBar.getButtonAt(1);
+         if(_loc2_)
+         {
+            _loc2_.enabled = param1;
+         }
       }
    }
 

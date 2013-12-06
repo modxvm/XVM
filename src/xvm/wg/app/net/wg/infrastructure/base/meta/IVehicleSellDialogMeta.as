@@ -14,9 +14,9 @@ package net.wg.infrastructure.base.meta
 
       function setUserInputS(param1:String) : void;
 
-      function setResultCreditS(param1:int) : void;
+      function setResultCreditS(param1:Boolean, param2:int) : void;
 
-      function as_setData(param1:Object, param2:Object, param3:Object, param4:Number, param5:Number) : void;
+      function as_setData(param1:Object, param2:Object, param3:Object, param4:Object, param5:Number) : void;
 
       function as_checkGold(param1:Number) : void;
 
@@ -26,7 +26,7 @@ package net.wg.infrastructure.base.meta
 
       function as_setCtrlQuestion(param1:String) : void;
 
-      function as_setControlNumber(param1:String) : void;
+      function as_setControlNumber(param1:Boolean, param2:String) : void;
    }
 
 }

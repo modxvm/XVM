@@ -77,9 +77,17 @@ package net.wg.gui.lobby.battleResults
             if(this.data)
             {
                this.tankIcon.source = this.data.bigTankIcon;
-               this.playerName.text = this.data.playerName;
+               App.utils.commons.formatPlayerName(this.playerName,this.data.playerName,this.data.playerClan,this.data.playerRegion);
                this.vehicleName.text = this.data.vehicleFullName;
                this.vehicleStateLbl.text = this.data.vehicleStateStr;
+               if(this.data.killerID > 0)
+               {
+                  App.utils.commons.formatPlayerName(this.vehicleStateLbl,this.data.killerNameStr,this.data.killerClanNameStr,this.data.killerRegionNameStr,false,this.data.vehicleStatePrefixStr,this.data.vehicleStateSuffixStr);
+               }
+               else
+               {
+                  this.vehicleStateLbl.text = this.data.vehicleStateStr;
+               }
                this.vehicleStats.data = this.data.statValues;
                this.deadBg.visible = this.data.killerID > 0;
                this.medalBg.visible = this.data.medalsCount > 0;

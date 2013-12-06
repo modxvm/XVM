@@ -26,6 +26,7 @@ package net.wg.gui.components.controls
          this.loader.contentLoaderInfo.addEventListener(Event.COMPLETE,this.onLoadComplete);
          this.loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,this.onIOError);
          this.loader.contentLoaderInfo.addEventListener(Event.UNLOAD,this.onUnloadComplete);
+         this.hideLoader = true;
       }
 
       private static const CONTENT_TYPE_SWF:String = "application/x-shockwave-flash";
@@ -61,6 +62,12 @@ package net.wg.gui.components.controls
       private var loader:Loader;
 
       private var _invalid:Boolean = false;
+
+      public function setSourceSize(param1:Number, param2:Number) : void {
+         this.loader.width = param1;
+         this.loader.height = param2;
+         this.loader.scaleX = this.loader.scaleY = Math.min(this._height / param2,this._width / param1);
+      }
 
       public function dispose() : void {
          if(this.loader)
@@ -207,7 +214,7 @@ package net.wg.gui.components.controls
          }
       }
 
-      private function updateSize(param1:Event=null) : void {
+      public function updateSize(param1:Event=null) : void {
          var _loc2_:* = NaN;
          removeEventListener(Event.ADDED_TO_STAGE,this.handleStageChange);
          removeEventListener(Event.ENTER_FRAME,this.handleEnterFrameValidation);
@@ -247,6 +254,7 @@ package net.wg.gui.components.controls
             this.loader.scaleY = 1 / scaleY;
          }
          this.toggleVisible(true);
+         this.hideLoader = false;
          dispatchEvent(new UILoaderEvent(UILoaderEvent.COMPLETE));
          this._invalid = false;
       }

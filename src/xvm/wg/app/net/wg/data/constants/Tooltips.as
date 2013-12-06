@@ -63,6 +63,8 @@ package net.wg.data.constants
 
       public static const CYBER_SPORT_SLOT:String = "cyberSportSlot";
 
+      public static const CYBER_SPORT_AUTOSEARCH_VEHICLES:String = "cyberSportAutoSearchVehicles";
+
       public static const CYBER_SPORT_SLOT_SELECTED:String = "cyberSportSlotSelected";
 
       public static const CYBER_SPORT_TEAM:String = "cyberSportTeam";

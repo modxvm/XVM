@@ -341,7 +341,45 @@ package
 
       public static const TANKCAROUSEL_VEHICLESTATES_CREWNOTFULL:String = "#menu:tankCarousel/vehicleStates/crewNotFull";
 
+      public static const TANKCAROUSEL_VEHICLESTATES_BUYTANK:String = "#menu:tankCarousel/vehicleStates/buyTank";
+
+      public static const TANKCAROUSEL_VEHICLESTATES_BUYTANKEMPTYCOUNT:String = "#menu:tankCarousel/vehicleStates/buyTankEmptyCount";
+
+      public static const TANKCAROUSEL_VEHICLESTATES_BUYSLOT:String = "#menu:tankCarousel/vehicleStates/buySlot";
+
+      public static const STORE_VEHICLESTATES_BATTLE:String = "#menu:store/vehicleStates/battle";
+
+      public static const STORE_VEHICLESTATES_LOCKED:String = "#menu:store/vehicleStates/locked";
+
+      public static const STORE_VEHICLESTATES_CLANLOCKED:String = "#menu:store/vehicleStates/clanLocked";
+
+      public static const STORE_VEHICLESTATES_INPREBATTLE:String = "#menu:store/vehicleStates/inPrebattle";
+
+      public static const STORE_VEHICLESTATES_AMMONOTFULL:String = "#menu:store/vehicleStates/ammoNotFull";
+
+      public static const STORE_VEHICLESTATES_DAMAGED:String = "#menu:store/vehicleStates/damaged";
+
+      public static const STORE_VEHICLESTATES_DESTROYED:String = "#menu:store/vehicleStates/destroyed";
+
+      public static const STORE_VEHICLESTATES_EXPLODED:String = "#menu:store/vehicleStates/exploded";
+
+      public static const STORE_VEHICLESTATES_NOTPRESENT:String = "#menu:store/vehicleStates/notpresent";
+
+      public static const STORE_VEHICLESTATES_UNDAMAGED:String = "#menu:store/vehicleStates/undamaged";
+
+      public static const STORE_VEHICLESTATES_SERVERRESTRICTION:String = "#menu:store/vehicleStates/serverRestriction";
+
+      public static const STORE_VEHICLESTATES_CREWNOTFULL:String = "#menu:store/vehicleStates/crewNotFull";
+
+      public static const STORE_VEHICLESTATES_BUYTANK:String = "#menu:store/vehicleStates/buyTank";
+
+      public static const STORE_VEHICLESTATES_BUYTANKEMPTYCOUNT:String = "#menu:store/vehicleStates/buyTankEmptyCount";
+
+      public static const STORE_VEHICLESTATES_BUYSLOT:String = "#menu:store/vehicleStates/buySlot";
+
       public static const CURRENTVEHICLESTATUS_BATTLE:String = "#menu:currentVehicleStatus/battle";
+
+      public static const CURRENTVEHICLESTATUS_INPREBATTLE:String = "#menu:currentVehicleStatus/inPrebattle";
 
       public static const CURRENTVEHICLESTATUS_SERVERRESTRICTION:String = "#menu:currentVehicleStatus/serverRestriction";
 
@@ -496,6 +534,8 @@ package
       public static const NATION_TREE_TITLE_UK:String = "#menu:nation_tree/title/uk";
 
       public static const NATION_TREE_TITLE_CHINA:String = "#menu:nation_tree/title/china";
+
+      public static const NATION_TREE_TITLE_JAPAN:String = "#menu:nation_tree/title/japan";
 
       public static const SERVERSTATS_PLAYERSCOUNT:String = "#menu:serverStats/playersCount";
 
@@ -1513,12 +1553,6 @@ package
 
       public static const HANGAR_AMMUNITIONPANEL_TECHNICALMAITENANCE_BUTTONS_LABELTOTAL:String = "#menu:hangar/ammunitionPanel/technicalMaitenance/buttons/labelTotal";
 
-      public static const TANKCAROUSEL_VEHICLESTATES_BUYTANK:String = "#menu:tankCarousel/vehicleStates/buyTank";
-
-      public static const TANKCAROUSEL_VEHICLESTATES_BUYTANKEMPTYCOUNT:String = "#menu:tankCarousel/vehicleStates/buyTankEmptyCount";
-
-      public static const TANKCAROUSEL_VEHICLESTATES_BUYSLOT:String = "#menu:tankCarousel/vehicleStates/buySlot";
-
       public static const FITTINGLISTITEMRENDERER_UNLOAD:String = "#menu:fittingListItemRenderer/unload";
 
       public static const FITTINGLISTITEMRENDERER_REPLACE:String = "#menu:fittingListItemRenderer/replace";
@@ -1555,21 +1589,31 @@ package
 
       public static const CUSTOMIZATION_REMOVE_CAMOUFLAGE_SIDE_02:String = "#menu:customization/remove/camouflage/side-02";
 
+      public static const CUSTOMIZATION_REMOVE_CAMOUFLAGE_SIDE_03:String = "#menu:customization/remove/camouflage/side-03";
+
       public static const CUSTOMIZATION_REMOVE_EMBLEMLEFT_SIDE_01:String = "#menu:customization/remove/emblemLeft/side-01";
 
       public static const CUSTOMIZATION_REMOVE_EMBLEMLEFT_SIDE_02:String = "#menu:customization/remove/emblemLeft/side-02";
+
+      public static const CUSTOMIZATION_REMOVE_EMBLEMLEFT_SIDE_03:String = "#menu:customization/remove/emblemLeft/side-03";
 
       public static const CUSTOMIZATION_REMOVE_EMBLEMRIGHT_SIDE_01:String = "#menu:customization/remove/emblemRight/side-01";
 
       public static const CUSTOMIZATION_REMOVE_EMBLEMRIGHT_SIDE_02:String = "#menu:customization/remove/emblemRight/side-02";
 
+      public static const CUSTOMIZATION_REMOVE_EMBLEMRIGHT_SIDE_03:String = "#menu:customization/remove/emblemRight/side-03";
+
       public static const CUSTOMIZATION_REMOVE_INSCRIPTIONLEFT_SIDE_01:String = "#menu:customization/remove/inscriptionLeft/side-01";
 
       public static const CUSTOMIZATION_REMOVE_INSCRIPTIONLEFT_SIDE_02:String = "#menu:customization/remove/inscriptionLeft/side-02";
 
+      public static const CUSTOMIZATION_REMOVE_INSCRIPTIONLEFT_SIDE_03:String = "#menu:customization/remove/inscriptionLeft/side-03";
+
       public static const CUSTOMIZATION_REMOVE_INSCRIPTIONRIGHT_SIDE_01:String = "#menu:customization/remove/inscriptionRight/side-01";
 
       public static const CUSTOMIZATION_REMOVE_INSCRIPTIONRIGHT_SIDE_02:String = "#menu:customization/remove/inscriptionRight/side-02";
+
+      public static const CUSTOMIZATION_REMOVE_INSCRIPTIONRIGHT_SIDE_03:String = "#menu:customization/remove/inscriptionRight/side-03";
 
       public static const CUSTOMIZATION_REMOVE_HORN_SIDE_01:String = "#menu:customization/remove/horn/side-01";
 
@@ -1648,6 +1692,10 @@ package
       public static const CUSTOMIZATION_PERIOD_DAY:String = "#menu:customization/period/day";
 
       public static const CUSTOMIZATION_PERIOD_DAYS:String = "#menu:customization/period/days";
+
+      public static const CUSTOMIZATION_PERIOD_IGR:String = "#menu:customization/period/igr";
+
+      public static const CUSTOMIZATION_GROUP_IGR:String = "#menu:customization/group/igr";
 
       public static const SCREENSHOT_SAVE:String = "#menu:screenshot/save";
 
@@ -1821,7 +1869,7 @@ package
 
       public static const IGR_INFO:String = "#menu:igr/info";
 
-      public static const NATION_TREE_TITLE_ENUM:Array = [NATION_TREE_TITLE_USSR,NATION_TREE_TITLE_GERMANY,NATION_TREE_TITLE_USA,NATION_TREE_TITLE_FRANCE,NATION_TREE_TITLE_UK,NATION_TREE_TITLE_CHINA];
+      public static const NATION_TREE_TITLE_ENUM:Array = [NATION_TREE_TITLE_USSR,NATION_TREE_TITLE_GERMANY,NATION_TREE_TITLE_USA,NATION_TREE_TITLE_FRANCE,NATION_TREE_TITLE_UK,NATION_TREE_TITLE_CHINA,NATION_TREE_TITLE_JAPAN];
 
       public static const TANKMANTRAININGWINDOW_ENUM:Array = [TANKMANTRAININGWINDOW_TITLE,TANKMANTRAININGWINDOW_ACADEMY,TANKMANTRAININGWINDOW_SCOOL,TANKMANTRAININGWINDOW_FREE,TANKMANTRAININGWINDOW_TRAININGTO,TANKMANTRAININGWINDOW_CLOSEBTN];
 

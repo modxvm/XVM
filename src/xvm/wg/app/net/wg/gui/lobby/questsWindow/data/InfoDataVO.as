@@ -52,6 +52,25 @@ package net.wg.gui.lobby.questsWindow.data
       public function set conditions(param1:Array) : void {
          this._conditions = param1;
       }
+
+      override public function dispose() : void {
+         if(this._descr)
+         {
+            this._descr.dispose();
+            this._descr = null;
+         }
+         if(this._subtasks)
+         {
+            this._subtasks.splice(0,this._subtasks.length);
+            this._subtasks = null;
+         }
+         if(this._conditions)
+         {
+            this._conditions.splice(0,this._conditions.length);
+            this._conditions = null;
+         }
+         super.dispose();
+      }
    }
 
 }

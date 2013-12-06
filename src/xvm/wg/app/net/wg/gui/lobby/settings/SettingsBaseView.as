@@ -2,12 +2,13 @@ package net.wg.gui.lobby.settings
 {
    import scaleform.clik.core.UIComponent;
    import net.wg.infrastructure.interfaces.IViewStackContent;
+   import net.wg.infrastructure.interfaces.ISettingsBase;
    import net.wg.gui.components.controls.LabelControl;
    import flash.text.TextField;
    import net.wg.gui.components.controls.CheckBox;
 
 
-   public class SettingsBaseView extends UIComponent implements IViewStackContent
+   public class SettingsBaseView extends UIComponent implements IViewStackContent, ISettingsBase
    {
           
       public function SettingsBaseView() {
@@ -72,6 +73,10 @@ package net.wg.gui.lobby.settings
       }
 
       protected function setData(param1:Object) : void {
+          
+      }
+
+      public function updateDependentData() : void {
           
       }
 

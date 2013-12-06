@@ -30,17 +30,39 @@ package net.wg.gui.lobby.vehicleBuyWindow
 
       public var tankmenCount:uint;
 
-      public var studyPriceCredits:uint;
+      public var studyPriceCredits:Number;
+
+      public var defStudyPriceCredits:Number;
+
+      public var actionPrcStudyCredits:Number;
 
       public var studyPriceGold:Number;
 
+      public var defStudyPriceGold:Number;
+
+      public var actionPrcStudyGold:Number;
+
       private var _vehiclePrices:Array;
+
+      private var _defVehiclePrices:Array;
 
       private var _actualPrice:uint;
 
+      private var _defActualPrice:uint;
+
+      public var actionPrc:Number;
+
       public var ammoPrice:Number;
 
+      public var defAmmoPrice:Number;
+
+      public var ammoActionPrc:Number;
+
       public var slotPrice:uint;
+
+      public var defSlotPrice:uint;
+
+      public var slotActionPrc:Number;
 
       public function get isPremium() : Boolean {
          return this._isPremium;
@@ -48,6 +70,10 @@ package net.wg.gui.lobby.vehicleBuyWindow
 
       public function get actualPrice() : uint {
          return this._actualPrice;
+      }
+
+      public function get defActualPrice() : uint {
+         return this._defActualPrice;
       }
 
       public function get vehiclePrices() : Array {
@@ -65,6 +91,22 @@ package net.wg.gui.lobby.vehicleBuyWindow
          {
             this._actualPrice = this._vehiclePrices[0];
             this._isPremium = false;
+         }
+      }
+
+      public function get defVehiclePrices() : Array {
+         return this._defVehiclePrices;
+      }
+
+      public function set defVehiclePrices(param1:Array) : void {
+         this._defVehiclePrices = param1;
+         if(this.defVehiclePrices[1] != 0)
+         {
+            this._defActualPrice = this._defVehiclePrices[1];
+         }
+         else
+         {
+            this._defActualPrice = this._defVehiclePrices[0];
          }
       }
    }

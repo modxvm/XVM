@@ -11,12 +11,12 @@ package net.wg.gui.cyberSport.helpers
    public class CSDragDropListDelegateController extends DragDropListDelegateCtrlr
    {
           
-      public function CSDragDropListDelegateController(param1:Vector.<InteractiveObject>, param2:Class, param3:String, param4:Function, param5:Function) {
-         var _loc6_:IDroppable = null;
+      public function CSDragDropListDelegateController(param1:Vector.<InteractiveObject>, param2:Class, param3:String, param4:Function, param5:Function, param6:Function) {
+         var _loc7_:IDroppable = null;
          super(param1,param2,param3);
-         for each (_loc6_ in getDelegates())
+         for each (_loc7_ in getDelegates())
          {
-            CSDragDropDelegate(_loc6_).setHandlers(param4,param5);
+            CSDragDropDelegate(_loc7_).setHandlers(param4,param5,param6);
          }
       }
 

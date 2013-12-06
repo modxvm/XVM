@@ -57,9 +57,9 @@ package net.wg.infrastructure.base.meta.impl
          this.onCreateUnit();
       }
 
-      public function onJoinUnitS(param1:Number, param2:Number) : void {
+      public function onJoinUnitS(param1:Number, param2:Number, param3:Number) : void {
          App.utils.asserter.assertNotNull(this.onJoinUnit,"onJoinUnit" + Errors.CANT_NULL);
-         this.onJoinUnit(param1,param2);
+         this.onJoinUnit(param1,param2,param3);
       }
 
       public function onBackClickS() : void {

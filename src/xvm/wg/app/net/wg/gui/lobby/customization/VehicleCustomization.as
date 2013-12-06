@@ -269,6 +269,21 @@ package net.wg.gui.lobby.customization
          this.calculateTotalPrice();
       }
 
+      public function as_refreshData() : void {
+         this._sectionsData = {};
+         this.camouflageRentalPackageDP.invalidate();
+         this.emblemLeftRentalPackageDP.invalidate();
+         this.emblemRightRentalPackageDP.invalidate();
+         this.inscriptionLeftRentalPackageDP.invalidate();
+         this.inscriptionRightRentalPackageDP.invalidate();
+         this.camouflageGroupsDataProvider.invalidate();
+         this.emblemLeftGroupsDataProvider.invalidate();
+         this.emblemRightGroupsDataProvider.invalidate();
+         this.inscriptionLeftGroupsDataProvider.invalidate();
+         this.inscriptionRightGroupsDataProvider.invalidate();
+         this.accordion.view.currentView.refreshSelection(true);
+      }
+
       public function isActionsLocked() : Boolean {
          return this._actionsLocked;
       }
@@ -449,6 +464,7 @@ package net.wg.gui.lobby.customization
          if((this.accordion.view.currentView) && (this.accordion.view.currentView.initialized))
          {
             this.showView(this.accordion.view.currentView.getViewLinkage());
+            this.accordion.view.currentView.refreshSelection(true);
             this.accordion.view.currentView.requestCurrentItem();
          }
       }

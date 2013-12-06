@@ -19,6 +19,8 @@ package net.wg.infrastructure.base.meta
       function as_addFriendAvailable(param1:Boolean) : void;
 
       function as_setIgnoredAvailable(param1:Boolean) : void;
+
+      function as_setCreateChannelAvailable(param1:Boolean) : void;
    }
 
 }

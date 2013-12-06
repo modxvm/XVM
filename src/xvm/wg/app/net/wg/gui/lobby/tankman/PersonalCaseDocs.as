@@ -3,6 +3,7 @@ package net.wg.gui.lobby.tankman
    import scaleform.clik.core.UIComponent;
    import net.wg.infrastructure.interfaces.IViewStackContent;
    import net.wg.gui.components.controls.IconText;
+   import net.wg.gui.components.controls.ActionPrice;
    import net.wg.gui.components.controls.SoundButtonEx;
    import net.wg.gui.components.carousels.PortraitsCarousel;
    import scaleform.clik.events.ButtonEvent;
@@ -24,6 +25,10 @@ package net.wg.gui.lobby.tankman
       public var gold:IconText = null;
 
       public var credits:IconText = null;
+
+      public var actionPriceGold:ActionPrice = null;
+
+      public var actionPriceCredits:ActionPrice = null;
 
       public var submitBtn:SoundButtonEx = null;
 
@@ -83,6 +88,8 @@ package net.wg.gui.lobby.tankman
          this.submitBtn = null;
          this.gold = null;
          this.credits = null;
+         this.actionPriceGold.dispose();
+         this.actionPriceCredits.dispose();
       }
 
       private function cleanTempData() : void {
@@ -103,7 +110,13 @@ package net.wg.gui.lobby.tankman
          this.lastnames.updateData(this.model.lastNames,this.model.currentTankmanLastName);
          this.lastnames.searchText.maxChars = this.model.lastNameMaxChars;
          this.gold.text = this.model.priceOfGold.toString();
-         this.credits.text = this.model.priveOfCredits.toString();
+         this.credits.text = this.model.priceOfCredits.toString();
+         this.actionPriceGold.setData(this.model.actionPrc,this.model.priceOfGold,this.model.defPriceOfGold,IconText.GOLD);
+         this.actionPriceCredits.setData(this.model.actionPrc,this.model.priceOfCredits,this.model.defPriceOfCredits,IconText.CREDITS);
+         this.actionPriceGold.visible = (this.model.priceOfGold) && (this.model.actionPrc);
+         this.actionPriceCredits.visible = (this.model.priceOfCredits) && (this.model.actionPrc);
+         this.gold.visible = !this.actionPriceGold.visible;
+         this.credits.visible = !this.actionPriceCredits.visible && (this.model.priceOfCredits);
          this.updateTextColor();
          this.submitBtn.enabled = false;
          if(!this.isDataProviderUpdated)
@@ -123,6 +136,8 @@ package net.wg.gui.lobby.tankman
          var _loc1_:Boolean = this.isHasMoney();
          this.gold.textColor = _loc1_?Currencies.TEXT_COLORS[Currencies.GOLD]:Currencies.TEXT_COLORS[Currencies.ERROR];
          this.credits.textColor = this.model.useOnlyGold?Currencies.TEXT_COLORS[Currencies.CREDITS]:_loc1_?Currencies.TEXT_COLORS[Currencies.CREDITS]:Currencies.TEXT_COLORS[Currencies.ERROR];
+         this.actionPriceGold.textColorType = _loc1_?ActionPrice.TEXT_COLOR_TYPE_ICON:ActionPrice.TEXT_COLOR_TYPE_ERROR;
+         this.actionPriceCredits.textColorType = this.model.useOnlyGold?ActionPrice.TEXT_COLOR_TYPE_ICON:_loc1_?ActionPrice.TEXT_COLOR_TYPE_ICON:ActionPrice.TEXT_COLOR_TYPE_ERROR;
       }
 
       private function isHasMoney() : Boolean {
@@ -130,7 +145,7 @@ package net.wg.gui.lobby.tankman
          {
             return this.model.userGold >= this.model.priceOfGold;
          }
-         return this.model.userGold >= this.model.priceOfGold || this.model.userCredits >= this.model.priveOfCredits;
+         return this.model.userGold >= this.model.priceOfGold || this.model.userCredits >= this.model.priceOfCredits;
       }
 
       private function firstnames_nameSelectedHandler(param1:Event) : void {

@@ -1,7 +1,6 @@
 package 
 {
-    $AppLinks;
-
+   $AppLinks;
    import net.wg.app.IApplication;
    import net.wg.infrastructure.base.meta.IGlobalVarsMgrMeta;
    import net.wg.infrastructure.managers.ISoundManager;
@@ -20,6 +19,7 @@ package
    import net.wg.utils.IHelpLayout;
    import flash.display.Stage;
    import flash.display.DisplayObjectContainer;
+   import net.wg.infrastructure.helpers.ILibraryLoader;
 
 
    public class App extends Object
@@ -120,6 +120,10 @@ package
 
       public static function get systemMessages() : DisplayObjectContainer {
          return instance.systemMessages;
+      }
+
+      public static function get libraryLoader() : ILibraryLoader {
+         return instance.libraryLoader;
       }
    }
 

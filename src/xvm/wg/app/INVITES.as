@@ -29,6 +29,18 @@ package
 
       public static const INVITES_PREBATTLE_ACCEPTNOTALLOWED_OTHERPERIPHERY:String = "#invites:invites/prebattle/acceptNotAllowed/otherPeriphery";
 
+      public static const INVITES_PREBATTLE_ACCEPTNOTALLOWED_SQUADALREADYJOINED:String = "#invites:invites/prebattle/acceptNotAllowed/squadAlreadyJoined";
+
+      public static const INVITES_PREBATTLE_ACCEPTNOTALLOWED_COMPANYALREADYJOINED:String = "#invites:invites/prebattle/acceptNotAllowed/companyAlreadyJoined";
+
+      public static const INVITES_PREBATTLE_ACCEPTNOTALLOWED_TRAININGALREADYJOINED:String = "#invites:invites/prebattle/acceptNotAllowed/trainingAlreadyJoined";
+
+      public static const INVITES_PREBATTLE_ACCEPTNOTALLOWED_CLANALREADYJOINED:String = "#invites:invites/prebattle/acceptNotAllowed/clanAlreadyJoined";
+
+      public static const INVITES_PREBATTLE_ACCEPTNOTALLOWED_TOURNAMENTALREADYJOINED:String = "#invites:invites/prebattle/acceptNotAllowed/tournamentAlreadyJoined";
+
+      public static const INVITES_PREBATTLE_ACCEPTNOTALLOWED_UNITALREADYJOINED:String = "#invites:invites/prebattle/acceptNotAllowed/unitAlreadyJoined";
+
       public static const INVITES_SQUAD_INVITE:String = "#invites:invites/squad/invite";
 
       public static const INVITES_SQUAD_ACCEPT:String = "#invites:invites/squad/accept";

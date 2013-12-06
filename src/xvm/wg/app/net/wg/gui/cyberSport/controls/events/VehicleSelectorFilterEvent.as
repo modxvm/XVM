@@ -17,6 +17,8 @@ package net.wg.gui.cyberSport.controls.events
       public var vehicleType:String;
 
       public var isMain:Boolean;
+
+      public var level:int;
    }
 
 }

@@ -9,9 +9,10 @@ package net.wg.gui.components.tooltips
    import net.wg.gui.components.tooltips.VO.SuitableVehicleVO;
    import flash.text.TextFieldAutoSize;
    import net.wg.gui.components.tooltips.helpers.Utils;
+   import net.wg.data.constants.Tooltips;
    import flash.display.MovieClip;
+   import net.wg.gui.cyberSport.vo.VehicleVO;
    import net.wg.gui.cyberSport.controls.SettingRosterVO;
-   import net.wg.data.gui_items.Vehicle;
 
 
    public class ToolTipSuitableVehicle extends ToolTipSpecial
@@ -87,21 +88,22 @@ package net.wg.gui.components.tooltips
 
       override protected function redraw() : void {
          var _loc1_:ILocale = null;
+         var _loc2_:SuitableVehicleVO = null;
          var _loc5_:TextField = null;
          var _loc6_:TextField = null;
          _loc1_ = App.utils.locale;
-         var _loc2_:SuitableVehicleVO = new SuitableVehicleVO(_data);
+         _loc2_ = new SuitableVehicleVO(_data);
          var _loc3_:Number = 300;
          var _loc4_:Separator = null;
          separators = new Vector.<Separator>();
          this.headerTF.autoSize = TextFieldAutoSize.LEFT;
          if(!_loc2_.isCreator)
          {
-            this.headerTF.htmlText = Utils.instance.htmlWrapper(_loc1_.makeString(TOOLTIPS.SUITABLEVEHICLE_HEADER),Utils.instance.COLOR_HEADER,18,"$TitleFont");
+            this.headerTF.htmlText = Utils.instance.htmlWrapper(_loc1_.makeString(_loc2_.toolTipType == Tooltips.CYBER_SPORT_SLOT?TOOLTIPS.SUITABLEVEHICLE_HEADER:TOOLTIPS.CSAUTOSEARCHVEHICLE_HEADER),Utils.instance.COLOR_HEADER,18,"$TitleFont");
          }
          else
          {
-            this.headerTF.htmlText = Utils.instance.htmlWrapper(_loc1_.makeString(TOOLTIPS.SUITABLEVEHICLE_CONDITIONSTITLE),Utils.instance.COLOR_HEADER,18,"$TitleFont");
+            this.headerTF.htmlText = Utils.instance.htmlWrapper(_loc1_.makeString(_loc2_.toolTipType == Tooltips.CYBER_SPORT_SLOT?TOOLTIPS.SUITABLEVEHICLE_CONDITIONSTITLE:TOOLTIPS.CSAUTOSEARCHVEHICLE_CONDITIONSTITLE),Utils.instance.COLOR_HEADER,18,"$TitleFont");
          }
          this.headerTF.width = this.headerTF.textWidth + 5;
          this.headerTF.x = bgShadowMargin.left + contentMargin.left;
@@ -115,7 +117,7 @@ package net.wg.gui.components.tooltips
             topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
             if(!_loc2_.isCreator)
             {
-               _loc5_ = Utils.instance.addHeader("conditionsHeader",contentMargin.left + bgShadowMargin.left,topPosition,_loc1_.makeString(TOOLTIPS.SUITABLEVEHICLE_CONDITIONSTITLE));
+               _loc5_ = Utils.instance.addHeader("conditionsHeader",contentMargin.left + bgShadowMargin.left,topPosition,_loc1_.makeString(_loc2_.toolTipType == Tooltips.CYBER_SPORT_SLOT?TOOLTIPS.SUITABLEVEHICLE_CONDITIONSTITLE:TOOLTIPS.CSAUTOSEARCHVEHICLE_CONDITIONSTITLE));
                content.addChild(_loc5_);
                topPosition = topPosition + (_loc5_.textHeight + this.MARGIN_AFTER_SUBHEADER ^ 0);
             }
@@ -136,7 +138,7 @@ package net.wg.gui.components.tooltips
             separators.push(_loc4_);
             this.whiteBg.y = _loc4_.y;
             topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
-            _loc6_ = Utils.instance.addHeader("suitableHeader",contentMargin.left + bgShadowMargin.left,topPosition,_loc1_.makeString(TOOLTIPS.SUITABLEVEHICLE_SUITABLETITLE));
+            _loc6_ = Utils.instance.addHeader("suitableHeader",contentMargin.left + bgShadowMargin.left,topPosition,_loc1_.makeString(_loc2_.toolTipType == Tooltips.CYBER_SPORT_SLOT?TOOLTIPS.SUITABLEVEHICLE_SUITABLETITLE:TOOLTIPS.CSAUTOSEARCHVEHICLE_SUITABLETITLE));
             content.addChild(_loc6_);
             topPosition = topPosition + (_loc6_.textHeight + this.MARGIN_AFTER_SUBHEADER ^ 0);
             this.i = 0;
@@ -161,7 +163,7 @@ package net.wg.gui.components.tooltips
                this.alertSuitable.multiline = true;
                this.alertSuitable.wordWrap = true;
                this.alertSuitable.autoSize = TextFieldAutoSize.CENTER;
-               this.alertSuitable.text = TOOLTIPS.SUITABLEVEHICLE_UNSUITABLE;
+               this.alertSuitable.text = _loc2_.toolTipType == Tooltips.CYBER_SPORT_SLOT?TOOLTIPS.SUITABLEVEHICLE_UNSUITABLE:TOOLTIPS.CSAUTOSEARCHVEHICLE_UNSUITABLE;
                this.alertSuitable.textColor = 16719904;
                this.alertSuitable.visible = true;
                this.alertSuitable.x = contentMargin.left + bgShadowMargin.left;
@@ -178,7 +180,7 @@ package net.wg.gui.components.tooltips
          }
          if(!_loc2_.isCreator && _loc2_.leftCount > 0)
          {
-            this.notEnoughTF.htmlText = Utils.instance.htmlWrapper(_loc1_.makeString(TOOLTIPS.SUITABLEVEHICLE_MORE),Utils.instance.COLOR_ADD_INFO,13,"$TitleFont") + " " + Utils.instance.htmlWrapper(_loc2_.leftCount.toString(),Utils.instance.COLOR_NUMBER,13,"$TitleFont");
+            this.notEnoughTF.htmlText = Utils.instance.htmlWrapper(_loc1_.makeString(_loc2_.toolTipType == Tooltips.CYBER_SPORT_SLOT?TOOLTIPS.SUITABLEVEHICLE_MORE:TOOLTIPS.CSAUTOSEARCHVEHICLE_MORE),Utils.instance.COLOR_ADD_INFO,13,"$TitleFont") + " " + Utils.instance.htmlWrapper(_loc2_.leftCount.toString(),Utils.instance.COLOR_NUMBER,13,"$TitleFont");
             this.notEnoughTF.width = this.notEnoughTF.textWidth + 5;
             this.notEnoughTF.height = this.notEnoughTF.textHeight + 5;
             this.notEnoughTF.y = topPosition;
@@ -236,7 +238,7 @@ package net.wg.gui.components.tooltips
             param4.showRangeRosterBg = false;
             if(_loc6_)
             {
-               param4.setCompDescriptor(param2["vehicle"]);
+               param4.setVehicle(new VehicleVO(param2["vehicle"]));
             }
             else
             {
@@ -249,7 +251,7 @@ package net.wg.gui.components.tooltips
          return param3;
       }
 
-      private function addSuitableVehicleBlockItem(param1:MovieClip, param2:Vehicle, param3:Number) : Number {
+      private function addSuitableVehicleBlockItem(param1:MovieClip, param2:VehicleVO, param3:Number) : Number {
          var _loc4_:SuitableVehicleBlockItem = App.utils.classFactory.getComponent("SuitableVehicleBlockItemUI",SuitableVehicleBlockItem);
          _loc4_.setData(App.utils.nations.getNationIcon(param2.nationID),param2.level,param2.smallIconPath,"../maps/icons/filters/tanks/" + param2.type + ".png",param2.shortUserName);
          _loc4_.x = contentMargin.left + bgShadowMargin.left;

@@ -27,6 +27,10 @@ package net.wg.gui.events
 
       public static const SHOW_BERTH_BUY_DIALOG:String = "showBerthBuyDialog";
 
+      public static const ON_INVALID_TANK_LIST:String = "onInvalidTankList";
+
+      public static const ON_CHANGE_BARRACKS_FILTER:String = "onChangeBarracksFilter";
+
       public var initProp:Object;
 
       public var menuEnabled:Boolean;

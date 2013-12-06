@@ -16,6 +16,10 @@ package net.wg.gui.lobby.profile.pages
       private var isRareAchievementRequested:Boolean;
 
       override protected function configUI() : void {
+         if(_baseDisposed)
+         {
+            return;
+         }
          super.configUI();
          addEventListener(AchievementEvent.REQUEST_RARE_ACHIEVEMENT,this.requestRareAchievementHandler,false,0,true);
       }

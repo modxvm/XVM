@@ -9,7 +9,7 @@ package net.wg.gui.lobby.store.shop.base
          super();
       }
 
-      public static const ACTION:String = "creditsAction";
+      public static const CREDITS:String = "credits";
 
       public static const ERROR:String = "creditsError";
 

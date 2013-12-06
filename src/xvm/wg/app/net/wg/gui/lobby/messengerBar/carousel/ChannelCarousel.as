@@ -95,7 +95,6 @@ package net.wg.gui.lobby.messengerBar.carousel
          }
          this.list.dispose();
          this.list = null;
-         this.scrollBar.dispose();
          this.scrollBar = null;
          this.background = null;
          this._commonChannelHL = null;

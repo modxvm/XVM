@@ -1,6 +1,7 @@
 package net.wg.gui.lobby.profile.components
 {
    import flash.text.TextField;
+   import flash.display.MovieClip;
    import flash.text.TextFieldAutoSize;
    import flash.events.MouseEvent;
    import scaleform.clik.constants.InvalidationType;
@@ -55,14 +56,19 @@ package net.wg.gui.lobby.profile.components
 
       public var textUserInfo:TextField;
 
+      public var leftTextHitMC:MovieClip;
+
+      public var background:MovieClip;
+
       private var _textLeft:String = " ";
 
       override protected function configUI() : void {
          super.configUI();
          textDates.autoSize = TextFieldAutoSize.LEFT;
          this.textUserInfo.selectable = textDates.selectable = false;
-         this.textUserInfo.addEventListener(MouseEvent.MOUSE_OVER,this.leftTextMouseOverHandler,false,0,true);
-         this.textUserInfo.addEventListener(MouseEvent.MOUSE_OUT,this.leftTextMouseOutHandler,false,0,true);
+         this.textUserInfo.mouseEnabled = false;
+         this.leftTextHitMC.addEventListener(MouseEvent.MOUSE_OVER,this.leftTextMouseOverHandler,false,0,true);
+         this.leftTextHitMC.addEventListener(MouseEvent.MOUSE_OUT,this.leftTextMouseOutHandler,false,0,true);
       }
 
       override protected function draw() : void {
@@ -76,6 +82,7 @@ package net.wg.gui.lobby.profile.components
          {
             this.textUserInfo.x = this._sidesGap;
             textDates.x = this.width - this._sidesGap - textDates.width;
+            this.background.width = this.width;
          }
       }
 
@@ -103,8 +110,8 @@ package net.wg.gui.lobby.profile.components
       }
 
       override public function dispose() : void {
-         this.textUserInfo.removeEventListener(MouseEvent.MOUSE_OVER,this.leftTextMouseOverHandler);
-         this.textUserInfo.removeEventListener(MouseEvent.MOUSE_OUT,this.leftTextMouseOutHandler);
+         this.leftTextHitMC.removeEventListener(MouseEvent.MOUSE_OVER,this.leftTextMouseOverHandler);
+         this.leftTextHitMC.removeEventListener(MouseEvent.MOUSE_OUT,this.leftTextMouseOutHandler);
          super.dispose();
       }
    }

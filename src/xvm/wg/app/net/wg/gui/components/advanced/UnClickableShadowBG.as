@@ -9,8 +9,7 @@ package net.wg.gui.components.advanced
           
       public function UnClickableShadowBG() {
          super();
-         this.shadow.buttonMode = true;
-         this.shadow.hitArea = this.hit;
+         this.shadow.mouseEnabled = false;
       }
 
       public var shadow:MovieClip;

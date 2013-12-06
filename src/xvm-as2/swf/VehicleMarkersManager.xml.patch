@@ -1,5 +1,5 @@
---- orig\VehicleMarkersManager.xml	2013-08-24 02:45:30.613071700 +0300
-+++ VehicleMarkersManager.xml	2013-08-24 02:45:30.991093400 +0300
+--- orig\VehicleMarkersManager.xml	2013-12-06 16:49:57.102867500 +0200
++++ VehicleMarkersManager.xml	2013-12-06 16:49:57.532871800 +0200
 @@ -15,4 +15,7 @@
          </color>
        </SetBackgroundColor>

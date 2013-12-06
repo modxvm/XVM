@@ -107,6 +107,12 @@ package
 
       public static const CUSTOMIZATION_INSCRIPTIONRIGHT_CURRENT_DROP:String = "#tooltips:customization/inscriptionRight/current/drop";
 
+      public static const CUSTOMIZATION_CAMOUFLAGE_IGR:String = "#tooltips:customization/camouflage/igr";
+
+      public static const CUSTOMIZATION_EMBLEM_IGR:String = "#tooltips:customization/emblem/igr";
+
+      public static const CUSTOMIZATION_INSCRIPTION_IGR:String = "#tooltips:customization/inscription/igr";
+
       public static const SETTINGS_DIALOG_SOUND_PTTKEY:String = "#tooltips:settings_dialog/sound/PTTKey";
 
       public static const SETTINGS_DIALOG_SOUND_ALTERNATIVEVOICES:String = "#tooltips:settings_dialog/sound/alternativeVoices";
@@ -141,6 +147,10 @@ package
 
       public static const CYBERSPORT_UNITLIST_REFRESH:String = "#tooltips:cyberSport/unitList/refresh";
 
+      public static const CYBERSPORT_UNITLIST_PAGINGDOWN:String = "#tooltips:cyberSport/unitList/pagingDown";
+
+      public static const CYBERSPORT_UNITLIST_PAGINGUP:String = "#tooltips:cyberSport/unitList/pagingUp";
+
       public static const CYBERSPORT_UNIT_CONFIGURE:String = "#tooltips:cyberSport/unit/configure";
 
       public static const CYBERSPORT_UNITLIST_JOIN:String = "#tooltips:cyberSport/unitList/join";
@@ -152,6 +162,32 @@ package
       public static const CYBERSPORT_UNIT_TAKEPLACEBTN:String = "#tooltips:cyberSport/unit/takePlaceBtn";
 
       public static const CYBERSPORT_UNIT_TAKEPLACEFIRSTTIMEBTN:String = "#tooltips:cyberSport/unit/takePlaceFirstTimeBtn";
+
+      public static const CYBERSPORT_VEHICLESELECTOR_NOTREADY:String = "#tooltips:cyberSport/vehicleSelector/notReady";
+
+      public static const CYBERSPORT_VEHICLESELECTOR_OVERFLOWLEVEL:String = "#tooltips:cyberSport/vehicleSelector/overflowLevel";
+
+      public static const ACTIONPRICE_HEADER:String = "#tooltips:actionPrice/header";
+
+      public static const ACTIONPRICE_BODY:String = "#tooltips:actionPrice/body";
+
+      public static const ACTIONPRICE_SELL_HEADER:String = "#tooltips:actionPrice/sell/header";
+
+      public static const ACTIONPRICE_SELL_BODY:String = "#tooltips:actionPrice/sell/body";
+
+      public static const ACTIONPRICE_SELL_TYPE_VEHICLE:String = "#tooltips:actionPrice/sell/type/vehicle";
+
+      public static const ACTIONPRICE_SELL_TYPE_MODULE:String = "#tooltips:actionPrice/sell/type/module";
+
+      public static const ACTIONPRICE_SELL_TYPE_EQUIPMENT:String = "#tooltips:actionPrice/sell/type/equipment";
+
+      public static const ACTIONPRICE_SELL_TYPE_SHELL:String = "#tooltips:actionPrice/sell/type/shell";
+
+      public static const ACTIONPRICE_SELL_TYPE_OPTIONALDEVICE:String = "#tooltips:actionPrice/sell/type/optionalDevice";
+
+      public static const ACTIONPRICE_EXCHANGE_HEADER:String = "#tooltips:actionPrice/exchange/header";
+
+      public static const ACTIONPRICE_EXCHANGE_BODY:String = "#tooltips:actionPrice/exchange/body";
 
       public static const GOLD_HEADER:String = "#tooltips:gold/header";
 
@@ -172,6 +208,10 @@ package
       public static const FREEXP_HEADER:String = "#tooltips:freeXP/header";
 
       public static const FREEXP_BODY:String = "#tooltips:freeXP/body";
+
+      public static const USEFREEXP_HEADER:String = "#tooltips:useFreeXP/header";
+
+      public static const USEFREEXP_BODY:String = "#tooltips:useFreeXP/body";
 
       public static const XP_HEADER:String = "#tooltips:XP/header";
 
@@ -803,6 +843,18 @@ package
 
       public static const CUSTOMIZATION_CAMOUFLAGE_EMPTY:String = "#tooltips:customization/camouflage/empty";
 
+      public static const CUSTOMIZATION_CAMOUFLAGE_IGR_HEADER:String = CUSTOMIZATION_CAMOUFLAGE_IGR + "/header";
+
+      public static const CUSTOMIZATION_CAMOUFLAGE_IGR_BODY:String = CUSTOMIZATION_CAMOUFLAGE_IGR + "/body";
+
+      public static const CUSTOMIZATION_EMBLEM_IGR_HEADER:String = CUSTOMIZATION_EMBLEM_IGR + "/header";
+
+      public static const CUSTOMIZATION_EMBLEM_IGR_BODY:String = CUSTOMIZATION_EMBLEM_IGR + "/body";
+
+      public static const CUSTOMIZATION_INSCRIPTION_IGR_HEADER:String = CUSTOMIZATION_INSCRIPTION_IGR + "/header";
+
+      public static const CUSTOMIZATION_INSCRIPTION_IGR_BODY:String = CUSTOMIZATION_INSCRIPTION_IGR + "/body";
+
       public static const VEHICLEPARAMS_SPEEDLIMITS:String = "#tooltips:vehicleParams/speedLimits";
 
       public static const VEHICLEPARAMS_ENGINEPOWER:String = "#tooltips:vehicleParams/enginePower";
@@ -857,6 +909,8 @@ package
 
       public static const VEHICLE_BUY_PRICE:String = "#tooltips:vehicle/buy_price";
 
+      public static const VEHICLE_ACTION_PRC:String = "#tooltips:vehicle/action_prc";
+
       public static const VEHICLE_BUY_PRICE_ACTION:String = "#tooltips:vehicle/buy_price_action";
 
       public static const VEHICLE_SELL_PRICE:String = "#tooltips:vehicle/sell_price";
@@ -889,9 +943,13 @@ package
 
       public static const QUESTS_PROGRESS_CURRENT:String = "#tooltips:quests/progress/current";
 
+      public static const QUESTS_PROGRESS_EARNEDINBATTLE:String = "#tooltips:quests/progress/earnedInBattle";
+
       public static const QUESTS_IGR:String = "#tooltips:quests/igr";
 
       public static const QUESTS_NEWLABEL_TASK:String = "#tooltips:quests/newLabel/task";
+
+      public static const QUESTS_NEWLABEL_ACTION:String = "#tooltips:quests/newLabel/action";
 
       public static const QUESTS_LINKBTN_TASK:String = "#tooltips:quests/linkBtn/task";
 
@@ -916,6 +974,8 @@ package
       public static const VEHICLESTATUS_BATTLE_HEADER:String = "#tooltips:vehicleStatus/battle/header";
 
       public static const VEHICLESTATUS_LOCKED_HEADER:String = "#tooltips:vehicleStatus/locked/header";
+
+      public static const VEHICLESTATUS_INPREBATTLE_HEADER:String = "#tooltips:vehicleStatus/inPrebattle/header";
 
       public static const VEHICLESTATUS_CLANLOCKED_HEADER:String = "#tooltips:vehicleStatus/clanLocked/header";
 
@@ -1019,6 +1079,8 @@ package
 
       public static const TECHTREEPAGE_NATIONS_UK:String = "#tooltips:techTreePage/nations/uk";
 
+      public static const TECHTREEPAGE_NATIONS_JAPAN:String = "#tooltips:techTreePage/nations/japan";
+
       public static const VEHICLESELLDIALOG_RENDERER_ALERTICON_HEADER:String = VEHICLESELLDIALOG_RENDERER_ALERTICON + "/header";
 
       public static const VEHICLESELLDIALOG_RENDERER_ALERTICON_BODY:String = VEHICLESELLDIALOG_RENDERER_ALERTICON + "/body";
@@ -1030,6 +1092,8 @@ package
       public static const IGR_MSG1:String = "#tooltips:igr/msg1";
 
       public static const IGR_MSG2:String = "#tooltips:igr/msg2";
+
+      public static const IGR_MSG3:String = "#tooltips:igr/msg3";
 
       public static const IGR_PROGRESSHEADER:String = "#tooltips:igr/progressHeader";
 
@@ -1048,6 +1112,24 @@ package
       public static const SUITABLEVEHICLE_MORE:String = "#tooltips:suitableVehicle/more";
 
       public static const SUITABLEVEHICLE_UNSUITABLE:String = "#tooltips:suitableVehicle/unsuitable";
+
+      public static const CSAUTOSEARCHVEHICLE_HEADER:String = "#tooltips:csAutoSearchVehicle/header";
+
+      public static const CSAUTOSEARCHVEHICLE_SUITABLETITLE:String = "#tooltips:csAutoSearchVehicle/suitableTitle";
+
+      public static const CSAUTOSEARCHVEHICLE_CONDITIONSTITLE:String = "#tooltips:csAutoSearchVehicle/conditionsTitle";
+
+      public static const CSAUTOSEARCHVEHICLE_MORE:String = "#tooltips:csAutoSearchVehicle/more";
+
+      public static const CSAUTOSEARCHVEHICLE_UNSUITABLE:String = "#tooltips:csAutoSearchVehicle/unsuitable";
+
+      public static const CYBERSPORT_VEHICLESELECTOR_NOTREADY_HEADER:String = CYBERSPORT_VEHICLESELECTOR_NOTREADY + "/header";
+
+      public static const CYBERSPORT_VEHICLESELECTOR_NOTREADY_BODY:String = CYBERSPORT_VEHICLESELECTOR_NOTREADY + "/body";
+
+      public static const CYBERSPORT_VEHICLESELECTOR_OVERFLOWLEVEL_HEADER:String = CYBERSPORT_VEHICLESELECTOR_OVERFLOWLEVEL + "/header";
+
+      public static const CYBERSPORT_VEHICLESELECTOR_OVERFLOWLEVEL_BODY:String = CYBERSPORT_VEHICLESELECTOR_OVERFLOWLEVEL + "/body";
 
       public static const SETTINGSICON_FREEZED_HEADER:String = SETTINGSICON_FREEZED + "/header";
 
@@ -1084,6 +1166,14 @@ package
       public static const CYBERSPORT_UNITLIST_REFRESH_HEADER:String = CYBERSPORT_UNITLIST_REFRESH + "/header";
 
       public static const CYBERSPORT_UNITLIST_REFRESH_BODY:String = CYBERSPORT_UNITLIST_REFRESH + "/body";
+
+      public static const CYBERSPORT_UNITLIST_PAGINGUP_HEADER:String = CYBERSPORT_UNITLIST_PAGINGUP + "/header";
+
+      public static const CYBERSPORT_UNITLIST_PAGINGUP_BODY:String = CYBERSPORT_UNITLIST_PAGINGUP + "/body";
+
+      public static const CYBERSPORT_UNITLIST_PAGINGDOWN_HEADER:String = CYBERSPORT_UNITLIST_PAGINGDOWN + "/header";
+
+      public static const CYBERSPORT_UNITLIST_PAGINGDOWN_BODY:String = CYBERSPORT_UNITLIST_PAGINGDOWN + "/body";
 
       public static const CYBERSPORT_UNITLIST_JOIN_HEADER:String = CYBERSPORT_UNITLIST_JOIN + "/header";
 
@@ -1129,15 +1219,17 @@ package
 
       public static const CYBERSPORT_UNIT_COMMAND:String = "#tooltips:cyberSport/unit/command";
 
-      public static const TECHTREEPAGE_NATIONS_ENUM:Array = [TECHTREEPAGE_NATIONS_USSR,TECHTREEPAGE_NATIONS_GERMANY,TECHTREEPAGE_NATIONS_USA,TECHTREEPAGE_NATIONS_CHINA,TECHTREEPAGE_NATIONS_FRANCE,TECHTREEPAGE_NATIONS_UK];
+      public static const TECHTREEPAGE_NATIONS_ENUM:Array = [TECHTREEPAGE_NATIONS_USSR,TECHTREEPAGE_NATIONS_GERMANY,TECHTREEPAGE_NATIONS_USA,TECHTREEPAGE_NATIONS_CHINA,TECHTREEPAGE_NATIONS_FRANCE,TECHTREEPAGE_NATIONS_UK,TECHTREEPAGE_NATIONS_JAPAN];
 
       public static const ACHIEVEMENT_PARAMS_ENUM:Array = [ACHIEVEMENT_PARAMS_MAXSNIPERSERIES,ACHIEVEMENT_PARAMS_MAXINVINCIBLESERIES,ACHIEVEMENT_PARAMS_MAXDIEHARDSERIES,ACHIEVEMENT_PARAMS_MAXKILLINGSERIES,ACHIEVEMENT_PARAMS_MAXPIERCINGSERIES,ACHIEVEMENT_PARAMS_NO_CLASS_ACHIEVEMENT_LEFT,ACHIEVEMENT_PARAMS_LEFT4,ACHIEVEMENT_PARAMS_LEFT3,ACHIEVEMENT_PARAMS_LEFT2,ACHIEVEMENT_PARAMS_LEFT1,ACHIEVEMENT_PARAMS_HEROESLEFT,ACHIEVEMENT_PARAMS_VEHICLESLEFT,ACHIEVEMENT_PARAMS_DAMAGELEFT,ACHIEVEMENT_PARAMS_BATTLESLEFT,ACHIEVEMENT_PARAMS_CAPTUREPOINTSLEFT,ACHIEVEMENT_PARAMS_DROPPOINTSLEFT,ACHIEVEMENT_PARAMS_VEHICLESTOKILL,ACHIEVEMENT_PARAMS_VEHICLESTORESEARCH,ACHIEVEMENT_PARAMS_VEHICLES];
 
       public static const TANKCARUSEL_LOCK_ENUM:Array = [TANKCARUSEL_LOCK_HEADER,TANKCARUSEL_LOCK_TO,TANKCARUSEL_LOCK_CLAN,TANKCARUSEL_LOCK_TOURNAMENT,TANKCARUSEL_LOCK_ROAMING];
 
+      public static const ACTIONPRICE_SELL_TYPE_ENUM:Array = [ACTIONPRICE_SELL_TYPE_VEHICLE,ACTIONPRICE_SELL_TYPE_MODULE,ACTIONPRICE_SELL_TYPE_EQUIPMENT,ACTIONPRICE_SELL_TYPE_SHELL,ACTIONPRICE_SELL_TYPE_OPTIONALDEVICE];
+
       public static const LEVEL_ENUM:Array = [LEVEL_1,LEVEL_2,LEVEL_3,LEVEL_4,LEVEL_5,LEVEL_6,LEVEL_7,LEVEL_8,LEVEL_9,LEVEL_10];
 
-      public static const VEHICLE_ENUM:Array = [VEHICLE_GRAPH_NOTES_SHOWCONTEXTMENU,VEHICLE_GRAPH_NOTES_SHOWINFOWINDOW,VEHICLE_GRAPH_NOTES_VEHICLEUNLOCK,VEHICLE_GRAPH_NOTES_MODULEUNLOCK,VEHICLE_GRAPH_NOTES_EQUIP,VEHICLE_GRAPH_NOTES_BUYANDEQUIP,VEHICLE_GRAPH_NOTES_GOTONATIONTREE,VEHICLE_GRAPH_NOTES_GOTONEXTVEHICLE,VEHICLE_GRAPH_BODY_MODULEINSTALLED,VEHICLE_GRAPH_BODY_NOTENOUGH,VEHICLEPARAMS_SPEEDLIMITS,VEHICLEPARAMS_ENGINEPOWER,VEHICLEPARAMS_CHASSISROTATIONSPEED,VEHICLEPARAMS_DAMAGE,VEHICLEPARAMS_HULLARMOR,VEHICLEPARAMS_TURRETARMOR,VEHICLEPARAMS_PIERCINGPOWER,VEHICLE_INVENTORYCOUNT,VEHICLE_VEHICLECOUNT,VEHICLE_LEVEL,VEHICLE_ELITE,VEHICLE_CREW,VEHICLE_AMMO,VEHICLE_XP,VEHICLE_MULTIPLIED_XP,VEHICLE_UNLOCK_PRICE,VEHICLE_BUY_PRICE,VEHICLE_BUY_PRICE_ACTION,VEHICLE_SELL_PRICE,VEHICLE_EQUIPMENTS,VEHICLE_DEVICES,VEHICLE_FAVORITE,VEHICLE_DAILYXPFACTOR,VEHICLE_SPEEDLIMITS,VEHICLE_DAMAGE,VEHICLE_TURRETROTATIONSPEED,VEHICLE_RADIODISTANCE,VEHICLE_TEXTDELIMITER_OR,VEHICLESTATUS_BATTLE_HEADER,VEHICLESTATUS_LOCKED_HEADER,VEHICLESTATUS_CLANLOCKED_HEADER,VEHICLESTATUS_AMMONOTFULL_HEADER,VEHICLESTATUS_DAMAGED_HEADER,VEHICLESTATUS_DESTROYED_HEADER,VEHICLESTATUS_EXPLODED_HEADER,VEHICLESTATUS_NOTPRESENT_HEADER,VEHICLESTATUS_UNDAMAGED_HEADER,VEHICLESTATUS_CREWNOTFULL_HEADER,VEHICLESTATUS_NOTUNLOCKED_HEADER,VEHICLESTATUS_INHANGAR_HEADER,VEHICLESTATUS_SERVERRESTRICTION_HEADER,VEHICLESTATUS_NOTENOUGHCREDITS_HEADER,VEHICLESTATUS_NOTENOUGHCREDITS_TEXT,VEHICLESTATUS_NOTENOUGHGOLD_HEADER,VEHICLESTATUS_NOTENOUGHGOLD_TEXT,VEHICLESELLDIALOG_RENDERER_ALERTICON_HEADER,VEHICLESELLDIALOG_RENDERER_ALERTICON_BODY];
+      public static const VEHICLE_ENUM:Array = [VEHICLE_GRAPH_NOTES_SHOWCONTEXTMENU,VEHICLE_GRAPH_NOTES_SHOWINFOWINDOW,VEHICLE_GRAPH_NOTES_VEHICLEUNLOCK,VEHICLE_GRAPH_NOTES_MODULEUNLOCK,VEHICLE_GRAPH_NOTES_EQUIP,VEHICLE_GRAPH_NOTES_BUYANDEQUIP,VEHICLE_GRAPH_NOTES_GOTONATIONTREE,VEHICLE_GRAPH_NOTES_GOTONEXTVEHICLE,VEHICLE_GRAPH_BODY_MODULEINSTALLED,VEHICLE_GRAPH_BODY_NOTENOUGH,VEHICLEPARAMS_SPEEDLIMITS,VEHICLEPARAMS_ENGINEPOWER,VEHICLEPARAMS_CHASSISROTATIONSPEED,VEHICLEPARAMS_DAMAGE,VEHICLEPARAMS_HULLARMOR,VEHICLEPARAMS_TURRETARMOR,VEHICLEPARAMS_PIERCINGPOWER,VEHICLE_INVENTORYCOUNT,VEHICLE_VEHICLECOUNT,VEHICLE_LEVEL,VEHICLE_ELITE,VEHICLE_CREW,VEHICLE_AMMO,VEHICLE_XP,VEHICLE_MULTIPLIED_XP,VEHICLE_UNLOCK_PRICE,VEHICLE_BUY_PRICE,VEHICLE_ACTION_PRC,VEHICLE_BUY_PRICE_ACTION,VEHICLE_SELL_PRICE,VEHICLE_EQUIPMENTS,VEHICLE_DEVICES,VEHICLE_FAVORITE,VEHICLE_DAILYXPFACTOR,VEHICLE_SPEEDLIMITS,VEHICLE_DAMAGE,VEHICLE_TURRETROTATIONSPEED,VEHICLE_RADIODISTANCE,VEHICLE_TEXTDELIMITER_OR,VEHICLESTATUS_BATTLE_HEADER,VEHICLESTATUS_LOCKED_HEADER,VEHICLESTATUS_INPREBATTLE_HEADER,VEHICLESTATUS_CLANLOCKED_HEADER,VEHICLESTATUS_AMMONOTFULL_HEADER,VEHICLESTATUS_DAMAGED_HEADER,VEHICLESTATUS_DESTROYED_HEADER,VEHICLESTATUS_EXPLODED_HEADER,VEHICLESTATUS_NOTPRESENT_HEADER,VEHICLESTATUS_UNDAMAGED_HEADER,VEHICLESTATUS_CREWNOTFULL_HEADER,VEHICLESTATUS_NOTUNLOCKED_HEADER,VEHICLESTATUS_INHANGAR_HEADER,VEHICLESTATUS_SERVERRESTRICTION_HEADER,VEHICLESTATUS_NOTENOUGHCREDITS_HEADER,VEHICLESTATUS_NOTENOUGHCREDITS_TEXT,VEHICLESTATUS_NOTENOUGHGOLD_HEADER,VEHICLESTATUS_NOTENOUGHGOLD_TEXT,VEHICLESELLDIALOG_RENDERER_ALERTICON_HEADER,VEHICLESELLDIALOG_RENDERER_ALERTICON_BODY];
 
       public static const TANKCARUSELTOOLTIP_VEHICLETYPE_ELITE_ENUM:Array = [TANKCARUSELTOOLTIP_VEHICLETYPE_ELITE_LIGHTTANK,TANKCARUSELTOOLTIP_VEHICLETYPE_ELITE_MEDIUMTANK,TANKCARUSELTOOLTIP_VEHICLETYPE_ELITE_HEAVYTANK,TANKCARUSELTOOLTIP_VEHICLETYPE_ELITE_AT_SPG,TANKCARUSELTOOLTIP_VEHICLETYPE_ELITE_SPG];
 
@@ -1160,6 +1252,12 @@ package
       public static function tankcarusel_lock(param1:String) : String {
          var _loc2_:String = "#tooltips:tankCarusel/lock/" + param1;
          App.utils.asserter.assert(!(TANKCARUSEL_LOCK_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
+         return _loc2_;
+      }
+
+      public static function actionprice_sell_type(param1:String) : String {
+         var _loc2_:String = "#tooltips:actionPrice/sell/type/" + param1;
+         App.utils.asserter.assert(!(ACTIONPRICE_SELL_TYPE_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
          return _loc2_;
       }
 

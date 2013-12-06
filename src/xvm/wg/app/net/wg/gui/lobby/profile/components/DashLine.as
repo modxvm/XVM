@@ -25,13 +25,6 @@ package net.wg.gui.lobby.profile.components
 
       private var _dashLength:uint = 1;
 
-      override public function dispose() : void {
-         this.background.mask = null;
-         this.background = null;
-         this.maskObj = null;
-         super.dispose();
-      }
-
       override protected function configUI() : void {
          super.configUI();
          addChild(this.maskObj);
@@ -90,6 +83,13 @@ package net.wg.gui.lobby.profile.components
       public function set dashLength(param1:uint) : void {
          this._dashLength = param1;
          invalidate(REDRAW_INV);
+      }
+
+      override public function dispose() : void {
+         this.background.mask = null;
+         this.background = null;
+         this.maskObj = null;
+         super.dispose();
       }
    }
 

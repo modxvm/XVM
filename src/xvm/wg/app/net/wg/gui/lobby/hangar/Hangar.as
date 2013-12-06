@@ -32,7 +32,7 @@ package net.wg.gui.lobby.hangar
 
       private static const RESEARCH_PANEL_RIGHT_MARGIN:int = 172;
 
-      private static const MESSENGER_BAR_PADDING:int = 38;
+      private static const MESSENGER_BAR_PADDING:int = 45;
 
       private static const INVALIDATE_ENABLED_CREW:String = "InvalidateEnabledCrew";
 
@@ -195,8 +195,11 @@ package net.wg.gui.lobby.hangar
          removeEventListener(CrewDropDownEvent.SHOW_DROP_DOWN,this.onShowCrewDropwDownHandler);
          App.gameInputMgr.clearKeyHandler(Keyboard.F1,KeyboardEvent.KEY_DOWN);
          App.gameInputMgr.clearKeyHandler(Keyboard.F1,KeyboardEvent.KEY_UP);
+         if(App.globalVarsMgr.isDevelopmentS())
+         {
+            App.gameInputMgr.clearKeyHandler(Keyboard.F2,KeyboardEvent.KEY_UP);
+         }
          super.onDispose();
-         this.vehResearchPanel.dispose();
          this.vehResearchPanel = null;
          this.tmenXpPanel = null;
          this.crew = null;
@@ -221,6 +224,14 @@ package net.wg.gui.lobby.hangar
          App.gameInputMgr.setKeyHandler(Keyboard.F1,KeyboardEvent.KEY_DOWN,this.showLayoutHandler,true);
          App.gameInputMgr.setKeyHandler(Keyboard.F1,KeyboardEvent.KEY_UP,this.closeLayoutHandler,true);
          App.gameInputMgr.setKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN,this.handleEscape,true);
+         if(App.globalVarsMgr.isDevelopmentS())
+         {
+            App.gameInputMgr.setKeyHandler(Keyboard.F2,KeyboardEvent.KEY_UP,this.toggleGUIEditorHandler,true);
+         }
+      }
+
+      private function toggleGUIEditorHandler(param1:InputEvent) : void {
+         toggleGUIEditorS();
       }
 
       override protected function draw() : void {

@@ -1,10 +1,12 @@
 package net.wg.gui.lobby.questsWindow
 {
    import scaleform.clik.core.UIComponent;
+   import flash.events.MouseEvent;
    import flash.text.TextField;
    import flash.display.MovieClip;
+   import net.wg.gui.lobby.questsWindow.components.QuestsCounter;
+   import net.wg.gui.lobby.questsWindow.components.ProgressQuestIndicator;
    import net.wg.gui.lobby.questsWindow.data.HeaderDataVO;
-   import flash.events.MouseEvent;
    import scaleform.clik.constants.InvalidationType;
    import flash.events.Event;
    import net.wg.data.constants.QuestsStates;
@@ -28,9 +30,13 @@ package net.wg.gui.lobby.questsWindow
 
       private static const COUNTER_NO_DATA:int = -1;
 
-      private static const COUNTER_X:int = 307;
+      private static const COUNTER_X:int = 347;
 
       private static const STATUS_MARGIN:int = 18;
+
+      private static function hideTooltip(param1:MouseEvent) : void {
+         App.toolTipMgr.hide();
+      }
 
       public var lableTF:TextField;
 
@@ -42,7 +48,7 @@ package net.wg.gui.lobby.questsWindow
 
       public var statusMC:MovieClip;
 
-      public var counter:MovieClip;
+      public var counter:QuestsCounter;
 
       public var bg:MovieClip;
 
@@ -63,13 +69,23 @@ package net.wg.gui.lobby.questsWindow
 
       override protected function configUI() : void {
          super.configUI();
-         this.counter.addEventListener(MouseEvent.CLICK,this.hideTooltip);
-         this.counter.addEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
-         this.counter.addEventListener(MouseEvent.ROLL_OVER,this.showCounterTooltip);
-         this.statusMC.addEventListener(MouseEvent.CLICK,this.hideTooltip);
-         this.statusMC.addEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
-         this.statusMC.addEventListener(MouseEvent.ROLL_OVER,this.showStatusTooltip);
+         this.addListeners();
+         this.maskMC.height = 0;
+         this.bg.mouseEnabled = false;
+         this.bg.mouseChildren = false;
          this.hitArea = this.maskMC;
+      }
+
+      private function addListeners() : void {
+         this.statusMC.addEventListener(MouseEvent.CLICK,hideTooltip);
+         this.statusMC.addEventListener(MouseEvent.ROLL_OUT,hideTooltip);
+         this.statusMC.addEventListener(MouseEvent.ROLL_OVER,this.showStatusTooltip);
+      }
+
+      private function removeListeners() : void {
+         this.statusMC.removeEventListener(MouseEvent.CLICK,hideTooltip);
+         this.statusMC.removeEventListener(MouseEvent.ROLL_OUT,hideTooltip);
+         this.statusMC.removeEventListener(MouseEvent.ROLL_OVER,this.showStatusTooltip);
       }
 
       private function showStatusTooltip(param1:MouseEvent) : void {
@@ -97,16 +113,16 @@ package net.wg.gui.lobby.questsWindow
       }
 
       override public function dispose() : void {
-         if(this.counter)
+         this.removeListeners();
+         this.progressIndicator.dispose();
+         this.counter.dispose();
+         if(this.headerData)
          {
-            this.counter.removeEventListener(MouseEvent.CLICK,this.hideTooltip);
-            this.counter.removeEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
-            this.counter.removeEventListener(MouseEvent.ROLL_OVER,this.showCounterTooltip);
-            this.statusMC.removeEventListener(MouseEvent.CLICK,this.hideTooltip);
-            this.statusMC.removeEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
-            this.statusMC.removeEventListener(MouseEvent.ROLL_OVER,this.showStatusTooltip);
-            this.counter = null;
+            this.headerData.dispose();
+            this.headerData = null;
          }
+         this.hitArea = null;
+         this.counter = null;
          this.lableTF = null;
          this.timeTF = null;
          this.typeTF = null;
@@ -114,16 +130,7 @@ package net.wg.gui.lobby.questsWindow
          this.statusMC = null;
          this.bg = null;
          this.maskMC = null;
-         if(this.progressIndicator)
-         {
-            this.progressIndicator.dispose();
-            this.progressIndicator = null;
-         }
-         if(this.headerData)
-         {
-            this.headerData.dispose();
-            this.headerData = null;
-         }
+         this.progressIndicator = null;
          super.dispose();
       }
 
@@ -157,6 +164,7 @@ package net.wg.gui.lobby.questsWindow
          {
             this.progressIndicator.setValues(this.headerData.progrBarType,this.headerData.currentProgrVal,this.headerData.maxProgrVal);
             this.progressIndicator.setTooltip(this.headerData.progrTooltip);
+            this.progressIndicator.validateNow();
          }
       }
 
@@ -183,7 +191,7 @@ package net.wg.gui.lobby.questsWindow
             this.statusMC.gotoAndStop(QuestsStates.NOT_AVAILABLE);
             this._statusTooltip = TOOLTIPS.QUESTS_STATUS_NOTREADY;
             this.counter.x = this._noProgress?COUNTER_X:COUNTER_X + STATUS_MARGIN;
-            this.lableTF.textColor = 6644049;
+            this.lableTF.textColor = QuestsStates.CLR_TASK_TF_WITH_STATUS;
          }
          else
          {
@@ -193,24 +201,16 @@ package net.wg.gui.lobby.questsWindow
                this.statusMC.gotoAndStop(QuestsStates.DONE);
                this._statusTooltip = TOOLTIPS.QUESTS_STATUS_DONE;
                this.counter.x = COUNTER_X;
-               this.lableTF.textColor = 6644049;
+               this.lableTF.textColor = QuestsStates.CLR_TASK_TF_WITH_STATUS;
             }
             else
             {
                this.statusMC.visible = false;
-               this.lableTF.textColor = 12104084;
+               this.lableTF.textColor = QuestsStates.CLR_TASK_TF_NORMAL;
                this._statusTooltip = "";
                this.counter.x = COUNTER_X + STATUS_MARGIN;
             }
          }
-      }
-
-      private function hideTooltip(param1:MouseEvent) : void {
-         App.toolTipMgr.hide();
-      }
-
-      private function showCounterTooltip(param1:MouseEvent) : void {
-         App.toolTipMgr.show(TOOLTIPS.QUESTS_COUNTER_LABEL);
       }
    }
 

@@ -14,6 +14,7 @@ package net.wg.gui.lobby.profile
          {
             linkageByAlias = new Dictionary(true);
             linkageByAlias[Aliases.PROFILE_SUMMARY_PAGE] = "ProfileSummaryPage_UI";
+            linkageByAlias[Aliases.PROFILE_SECTION] = "ProfileTest_UI";
             linkageByAlias[Aliases.PROFILE_SUMMARY_WINDOW] = "ProfileSummaryWindow_UI";
             linkageByAlias[Aliases.PROFILE_AWARDS] = "ProfileAwards_UI";
             linkageByAlias[Aliases.PROFILE_STATISTICS] = "ProfileStatistics_UI";

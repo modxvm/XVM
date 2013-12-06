@@ -13,6 +13,7 @@ package net.wg.gui.cyberSport.views
    import net.wg.gui.cyberSport.vo.UnitVO;
    import net.wg.gui.cyberSport.vo.ActionButtonVO;
    import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import net.wg.gui.cyberSport.vo.VehicleVO;
    import net.wg.gui.cyberSport.CSInvalidationType;
    import net.wg.gui.messenger.ChannelComponent;
    import net.wg.gui.cyberSport.controls.events.CSComponentEvent;
@@ -50,12 +51,87 @@ package net.wg.gui.cyberSport.views
 
       private var _dragDropListDelegateCtrlr:IDisposable = null;
 
+      public function preInitFadeAnimationCancel() : void {
+         this.initFadeAnimation();
+         cancelRosterSlotsSettingsS();
+      }
+
       public function update(param1:Object) : void {
           
       }
 
+      public function as_setMembers(param1:Boolean, param2:Array) : void {
+         if(this._unitData)
+         {
+            this.teamSection.updateMembers(param1,param2);
+         }
+      }
+
+      public function as_setMemberStatus(param1:uint, param2:uint) : void {
+         if(this._unitData)
+         {
+            this.teamSection.setMemberStatus(param1,param2);
+         }
+      }
+
+      public function as_setMemberOffline(param1:uint, param2:Boolean) : void {
+         if(this._unitData)
+         {
+            this.teamSection.setOfflineStatus(param1,param2);
+         }
+      }
+
+      public function as_setMemberVehicle(param1:uint, param2:uint, param3:Object) : void {
+         if(this._unitData)
+         {
+            this.teamSection.setMemberVehicle(param1,param2,param3?new VehicleVO(param3):null);
+         }
+      }
+
+      public function as_setComment(param1:String) : void {
+         if(this._unitData)
+         {
+            this._unitData.description = param1;
+            invalidate(CSInvalidationType.UPDATE_COMMENTS);
+         }
+      }
+
+      public function as_setOpened(param1:Boolean, param2:String) : void {
+         if(this._unitData)
+         {
+            this.waitingListSection.updateUnitStatus(param1,param2);
+         }
+      }
+
+      public function as_setTotalLabel(param1:Boolean, param2:String) : void {
+         if(this._unitData)
+         {
+            this.teamSection.updateTotalLabel(param1,param2);
+         }
+      }
+
+      public function as_closeSlot(param1:uint, param2:uint, param3:String) : void {
+         if(this._unitData)
+         {
+            this.teamSection.closeSlot(param1,false,param2,param3,true,-1);
+         }
+      }
+
+      public function as_openSlot(param1:uint, param2:Boolean, param3:String, param4:uint) : void {
+         if(this._unitData)
+         {
+            this.teamSection.closeSlot(param1,param2,0,param3,false,param4);
+         }
+      }
+
+      public function as_lockUnit(param1:Boolean, param2:Array) : void {
+         if(this._unitData)
+         {
+            this.teamSection.updateLockedUnit(param1,param2);
+         }
+      }
+
       public function as_setChangeStateCoolDown(param1:Number) : void {
-         DebugUtils.LOG_DEBUG("CALL  [as_setChangeStateCoolDown] : ",param1);
          this.mainCoolDownHandler(false);
          App.utils.scheduler.scheduleTask(this.mainCoolDownHandler,param1 * 1000,true);
       }
@@ -63,6 +139,10 @@ package net.wg.gui.cyberSport.views
       public function as_setCoolDownForReadyButton(param1:Number) : void {
          this.readyButtonCoolDown(false);
          App.utils.scheduler.scheduleTask(this.readyButtonCoolDown,param1 * 1000,true);
+      }
+
+      public function as_getCandidatesDP() : Object {
+         return this.waitingListSection.getCandidatesDP();
       }
 
       public function as_setPyAlias(param1:String) : void {
@@ -77,24 +157,17 @@ package net.wg.gui.cyberSport.views
          if(param1)
          {
             this._unitData = new UnitVO(param1);
+            this.teamSection.unitData = this._unitData;
+            invalidate(CSInvalidationType.UNIT_DATA);
          }
-         else
-         {
-            this._unitData = null;
-         }
-         invalidate(CSInvalidationType.UNIT_DATA);
       }
 
       public function as_setActionButtonState(param1:Object) : void {
          if(param1)
          {
             this._actionButtonData = new ActionButtonVO(param1);
+            invalidate(CSInvalidationType.ACTION_BUTTON_DATA);
          }
-         else
-         {
-            this._actionButtonData = null;
-         }
-         invalidate(CSInvalidationType.ACTION_BUTTON_DATA);
       }
 
       public function as_highlightSlots(param1:Array) : void {
@@ -132,15 +205,18 @@ package net.wg.gui.cyberSport.views
 
       override protected function draw() : void {
          super.draw();
-         if(isInvalid(CSInvalidationType.UNIT_DATA))
+         if((isInvalid(CSInvalidationType.UNIT_DATA)) && (this._unitData))
          {
             this.waitingListSection.unitData = this._unitData;
-            this.teamSection.unitData = this._unitData;
             this.chatSection.unitData = this._unitData;
             if(this._unitData)
             {
                this.initializeDragDropSystem();
             }
+         }
+         if((isInvalid(CSInvalidationType.UPDATE_COMMENTS)) && (this._unitData))
+         {
+            this.chatSection.setDescription(this._unitData.description);
          }
          if(isInvalid(CSInvalidationType.ACTION_BUTTON_DATA))
          {
@@ -189,7 +265,7 @@ package net.wg.gui.cyberSport.views
          {
             _loc1_ = App.utils.classFactory.getClass(Linkages.CS_DRAG_DROP_DELEGATE);
             _loc2_ = [this.waitingListSection.candidates,this.teamSection];
-            this._dragDropListDelegateCtrlr = new CSDragDropListDelegateController(Vector.<InteractiveObject>(_loc2_),_loc1_,Linkages.CANDIDATE_LIST_ITEM_RENDERER_UI,onSlotsHighlihgtingNeedS,assignSlotRequestS);
+            this._dragDropListDelegateCtrlr = new CSDragDropListDelegateController(Vector.<InteractiveObject>(_loc2_),_loc1_,Linkages.CANDIDATE_LIST_ITEM_RENDERER_UI,onSlotsHighlihgtingNeedS,assignSlotRequestS,leaveSlotRequestS);
          }
       }
 
@@ -204,7 +280,7 @@ package net.wg.gui.cyberSport.views
          }
       }
 
-      private var rosterTeamContext:Boolean = false;
+      public var rosterTeamContext:Boolean = false;
 
       private function fadeIn() : void {
          if(this._unitData.slots)
@@ -310,8 +386,7 @@ package net.wg.gui.cyberSport.views
       }
 
       private function cancelRosterSettings(param1:CSComponentEvent) : void {
-         this.initFadeAnimation();
-         cancelRosterSlotsSettingsS();
+         this.preInitFadeAnimationCancel();
       }
 
       private function showSettingsRosterWndHandler(param1:CSComponentEvent) : void {

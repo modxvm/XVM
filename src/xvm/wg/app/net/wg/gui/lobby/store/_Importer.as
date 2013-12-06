@@ -8,7 +8,7 @@ package net.wg.gui.lobby.store
           
       public function _Importer() {
          super();
-         importClasses(Vector.<Class>([ComplexListItemRenderer,ModuleRendererCredits,NationFilter,Store,StoreListItemRenderer,StoreTable,TableHeader,TableHeaderInfo]));
+         importClasses(Vector.<Class>([ComplexListItemRenderer,ModuleRendererCredits,NationFilter,Store,StoreForm,StoreListItemRenderer,StoreTable,StoreTableDataProvider,TableHeader,TableHeaderInfo]));
       }
    }
 

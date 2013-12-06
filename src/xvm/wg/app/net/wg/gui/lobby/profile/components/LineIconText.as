@@ -56,6 +56,15 @@ package net.wg.gui.lobby.profile.components
          this._iconSource = param1;
          invalidate(ICON_INVALID);
       }
+
+      override public function dispose() : void {
+         super.dispose();
+         if(this.icon)
+         {
+            this.icon.dispose();
+         }
+         this.icon = null;
+      }
    }
 
 }

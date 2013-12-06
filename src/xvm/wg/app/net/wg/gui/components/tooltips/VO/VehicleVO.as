@@ -36,7 +36,13 @@ package net.wg.gui.components.tooltips.VO
 
       public var statusText:String = null;
 
-      public var stats:Array = null;
+      public var stats:Object = null;
+
+      public var useGold:Boolean = false;
+
+      public var useCredits:Boolean = false;
+
+      public var isAction:Boolean = false;
 
       public var characteristics:Array = null;
 
@@ -75,7 +81,33 @@ package net.wg.gui.components.tooltips.VO
                   break;
             }
          }
-         this.stats = (param1.hasOwnProperty("stats")) && !(param1["stats"] == undefined)?param1["stats"]:null;
+         this.stats = (param1.hasOwnProperty("stats")) && !(param1["stats"] == undefined) && !(param1["stats"]  is  Array)?param1["stats"]:null;
+         if(this.stats)
+         {
+            if((this.stats.hasOwnProperty("buy_price")) && this.stats["buy_price"][0]  is  Array)
+            {
+               if(this.stats["buy_price"][0][0] > 0)
+               {
+                  this.useCredits = true;
+               }
+               if(this.stats["buy_price"][0][1] > 0)
+               {
+                  this.useGold = true;
+               }
+            }
+            if((this.stats.hasOwnProperty("sell_price")) && this.stats["sell_price"]  is  Array)
+            {
+               if(this.stats["sell_price"][0] > 0)
+               {
+                  this.useCredits = true;
+               }
+               if(this.stats["sell_price"][1] > 0)
+               {
+                  this.useGold = true;
+               }
+            }
+            this.isAction = (this.stats.hasOwnProperty("action_prc")) && !(this.stats["action_prc"] == 0);
+         }
          var _loc2_:Array = (param1.hasOwnProperty("params")) && !(param1["params"] == undefined)?param1["params"]:null;
          if(_loc2_)
          {

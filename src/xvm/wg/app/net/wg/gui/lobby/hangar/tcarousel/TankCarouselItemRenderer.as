@@ -5,6 +5,7 @@ package net.wg.gui.lobby.hangar.tcarousel
    import net.wg.gui.components.controls.IconText;
    import flash.text.TextField;
    import flash.display.MovieClip;
+   import net.wg.gui.components.controls.ActionPrice;
    import flash.text.TextFormat;
    import net.wg.data.constants.SoundTypes;
    import net.wg.data.constants.SoundManagerStates;
@@ -20,10 +21,6 @@ package net.wg.gui.lobby.hangar.tcarousel
       public function TankCarouselItemRenderer() {
          super();
          focusIndicator = this.focusIndicator1;
-         if(this.hitMC)
-         {
-            this.hitArea = this.hitMC;
-         }
       }
 
       private var _id:String = "";
@@ -62,9 +59,13 @@ package net.wg.gui.lobby.hangar.tcarousel
 
       private var _buySlot:Boolean = false;
 
-      private var _avalibleSlots:Number = 0;
+      private var _availableSlots:Number = 0;
 
       private var _slotPrice:Number = 0;
+
+      private var _defSlotPrice:Number = 0;
+
+      private var _slotActionPricePrc:Number = 0;
 
       public var vehicleIcon:TankIcon;
 
@@ -79,6 +80,8 @@ package net.wg.gui.lobby.hangar.tcarousel
       public var hitMC:MovieClip;
 
       public var clanLockUI:ClanLockUI;
+
+      public var actionPrice:ActionPrice;
 
       public var focusIndicator1:MovieClip = null;
 
@@ -130,6 +133,10 @@ package net.wg.gui.lobby.hangar.tcarousel
          }
          this.soundType = SoundTypes.CAROUSEL_BTN;
          this.soundId = SoundManagerStates.CAROUSEL_CELL_BTN;
+         if(this.hitMC)
+         {
+            this.hitArea = this.hitMC;
+         }
       }
 
       override public function setData(param1:Object) : void {
@@ -157,8 +164,10 @@ package net.wg.gui.lobby.hangar.tcarousel
             this.buyTank = param1.buyTank;
             this.buySlot = param1.buySlot;
             this._tankType = param1.tankType;
-            this._avalibleSlots = param1.avalibleSlots;
+            this._availableSlots = param1.availableSlots;
             this._slotPrice = param1.slotPrice;
+            this._defSlotPrice = param1.defSlotPrice;
+            this._slotActionPricePrc = param1.hasOwnProperty("slotPricePrc")?param1.slotPricePrc:0;
             _dataDirty = true;
             invalidate();
          }
@@ -166,6 +175,10 @@ package net.wg.gui.lobby.hangar.tcarousel
 
       override protected function draw() : void {
          var _loc1_:* = false;
+         if(_baseDisposed)
+         {
+            return;
+         }
          super.draw();
          if(_dataDirty)
          {
@@ -199,12 +212,18 @@ package net.wg.gui.lobby.hangar.tcarousel
             if(this.buyTank)
             {
                this.emptyInfoTxt.text = MENU.TANKCAROUSEL_VEHICLESTATES_BUYTANKEMPTYCOUNT;
-               this.emptyInfoTxt.text = this.emptyInfoTxt.text + " " + this._avalibleSlots;
+               this.emptyInfoTxt.text = this.emptyInfoTxt.text + " " + this._availableSlots;
                this.emptyInfoTxt.visible = true;
             }
             if(this.buySlot)
             {
                this.slotPrice.text = this._slotPrice.toString();
+               if(this.actionPrice)
+               {
+                  this.actionPrice.setData(this._slotActionPricePrc,this._slotPrice,this._defSlotPrice,IconText.GOLD);
+                  this.slotPrice.visible = !this.actionPrice.visible;
+                  this.actionPrice.setup(this);
+               }
             }
             if(empty)
             {
@@ -213,6 +232,15 @@ package net.wg.gui.lobby.hangar.tcarousel
             _dataDirty = false;
          }
          this.scaleX = this.scaleY = 1;
+      }
+
+      override public function set enabled(param1:Boolean) : void {
+         super.enabled = param1;
+         useHandCursor = param1;
+         if(this.buySlot)
+         {
+            this.mouseChildren = param1;
+         }
       }
 
       public function get favorite() : Boolean {

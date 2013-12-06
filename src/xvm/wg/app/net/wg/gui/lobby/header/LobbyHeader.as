@@ -88,8 +88,8 @@ package net.wg.gui.lobby.header
          this.account.setPremiumParams(param1,param2,param3);
       }
 
-      public function as_setFreeXP(param1:String) : void {
-         this.account.setExp(param1);
+      public function as_setFreeXP(param1:String, param2:Boolean) : void {
+         this.account.setExp(param1,param2);
       }
 
       public function as_creditsResponse(param1:String) : void {

@@ -70,7 +70,7 @@ package net.wg.gui.components.tooltips.helpers
 
       public const MARGIN_AFTER_SUBHEADER:Number = 12;
 
-      public function getIcont(param1:String, param2:String="", param3:Boolean=false, param4:Boolean=false) : String {
+      public function getIcon(param1:String, param2:String="", param3:Boolean=false, param4:Boolean=false) : String {
          var _loc5_:String = IconText.EMPTY;
          switch(param1)
          {
@@ -91,7 +91,7 @@ package net.wg.gui.components.tooltips.helpers
                break;
             case "buy_price":
             case "sell_price":
-               if((param3) && param2 == "shop" || param2 == "hangar" && (param3))
+               if(param3)
                {
                   _loc5_ = IconText.GOLD;
                }
@@ -103,6 +103,8 @@ package net.wg.gui.components.tooltips.helpers
             default:
                _loc5_ = IconText.EMPTY;
          }
+         trace("getIcon","res=",_loc5_);
+         trace(" ");
          return _loc5_;
       }
 
@@ -194,7 +196,7 @@ package net.wg.gui.components.tooltips.helpers
             _loc16_.icon = _loc17_.icon;
             _loc16_.text = _loc17_.text;
             _loc16_.textField.htmlText = _loc17_.text;
-            _loc16_.textField.width = _loc16_.textField.textWidth + 4;
+            _loc16_.textField.width = _loc16_.textField.textWidth + 2;
             _loc16_.iconClip.y = _loc17_.textYOffset;
             _loc16_.validateNow();
             if(!(_loc16_.iconClip.currentFrame == 1) && !_loc7_)

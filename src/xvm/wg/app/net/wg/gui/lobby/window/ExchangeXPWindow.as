@@ -355,24 +355,26 @@ package net.wg.gui.lobby.window
       private function submitBtnClickHandler(param1:ButtonEvent) : void {
          var _loc3_:ExchangeXPVehicleVO = null;
          var _loc2_:Array = [];
-         var _loc4_:* = 0;
-         while(_loc4_ < this.scrollListProvider.length)
+         var _loc4_:DataProvider = DataProvider(this.scrollList.dataProvider);
+         var _loc5_:uint = _loc4_.length;
+         var _loc6_:* = 0;
+         while(_loc6_ < _loc5_)
          {
-            _loc3_ = ExchangeXPVehicleVO(this.scrollListProvider[_loc4_]);
+            _loc3_ = ExchangeXPVehicleVO(_loc4_[_loc6_]);
             if(_loc3_.isSelectCandidate)
             {
                _loc2_.push(_loc3_.id);
             }
-            _loc4_++;
+            _loc6_++;
          }
          App.utils.asserter.assert(_loc2_.length > 0,"Flash Asserter warning: Exchange XP Window submit method have empty data array");
-         var _loc5_:Object =
+         var _loc7_:Object =
             {
                "exchangeXp":this.nsXpExchange.value,
                "selectedVehicles":_loc2_
             }
          ;
-         exchangeS(_loc5_);
+         exchangeS(_loc7_);
       }
 
       public function as_setWalletStatus(param1:Object) : void {

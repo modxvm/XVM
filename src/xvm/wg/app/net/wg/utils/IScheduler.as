@@ -13,6 +13,8 @@ package net.wg.utils
       function cancelTask(param1:Function) : void;
 
       function cancelAll() : void;
+
+      function isEmpty() : Boolean;
    }
 
 }

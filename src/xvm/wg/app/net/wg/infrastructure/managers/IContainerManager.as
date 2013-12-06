@@ -9,6 +9,7 @@ package net.wg.infrastructure.managers
    public interface IContainerManager extends IEventDispatcher
    {
       function get loader():ILoaderManagerMeta;
+
       function set loader(param1:ILoaderManagerMeta) : void;
 
       function registerContainer(param1:IManagedContainer) : void;

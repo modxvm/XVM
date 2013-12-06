@@ -18,7 +18,7 @@ package net.wg.infrastructure.base.meta
 
       function onCreateUnitS() : void;
 
-      function onJoinUnitS(param1:Number, param2:Number) : void;
+      function onJoinUnitS(param1:Number, param2:Number, param3:Number) : void;
 
       function onBackClickS() : void;
 

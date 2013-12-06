@@ -56,8 +56,13 @@ package net.wg.gui.lobby.questsWindow
 
       override protected function onDispose() : void {
          this.view_mc.removeEventListener(ViewStackEvent.VIEW_CHANGED,this.handleView);
-         super.onDispose();
+         this.tabs_mc.dispose();
+         this.tabs_mc = null;
+         this.view_mc.dispose();
+         this.view_mc = null;
+         this.line = null;
          App.toolTipMgr.hide();
+         super.onDispose();
       }
 
       private function handleView(param1:ViewStackEvent) : void {

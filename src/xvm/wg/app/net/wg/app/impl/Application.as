@@ -1,7 +1,6 @@
 package net.wg.app.impl
 {
    import net.wg.app.impl.base.AbstractApplication;
-   import net.wg.infrastructure.helpers.LibraryLoader;
    import flash.display.MovieClip;
    import net.wg.gui.components.common.ManagedContainer;
    import net.wg.gui.components.common.MainViewContainer;
@@ -21,6 +20,7 @@ package net.wg.app.impl
    import net.wg.infrastructure.managers.utils.impl.EventCollector;
    import net.wg.infrastructure.managers.utils.impl.IME;
    import net.wg.infrastructure.managers.utils.impl.VOManager;
+   import net.wg.infrastructure.managers.utils.impl.Icons;
    import net.wg.infrastructure.managers.utils.impl.Nations;
    import net.wg.data.constants.ContainerTypes;
    import net.wg.gui.components.common.CursorManagedContainer;
@@ -56,7 +56,7 @@ package net.wg.app.impl
           
       public function Application() {
          this.browserBgClassValue = Application_browserBgClassValue;
-         this._librariesList = Vector.<String>(["windows.swf","toolTips.swf"]);
+         this._librariesList = Vector.<String>(["windows.swf"]);
          super();
          Extensions.enabled = true;
          Extensions.noInvisibleAdvance = true;
@@ -68,8 +68,6 @@ package net.wg.app.impl
       public var browserBgClassValue:Class;
 
       private var _librariesList:Vector.<String>;
-
-      private var _loader:LibraryLoader = null;
 
       private var _libraries:MovieClip;
 
@@ -102,7 +100,7 @@ package net.wg.app.impl
       }
 
       override protected function getNewUtils() : IUtils {
-         var _loc1_:IUtils = new Utils(new Asserter(),new Scheduler(),new Locale(),new WGJSON(),new HelpLayout(),new ClassFactory(),new PopupManager(),new Commons(),new FocusHandlerEx(),new EventCollector(),new IME(),new VOManager());
+         var _loc1_:IUtils = new Utils(new Asserter(),new Scheduler(),new Locale(),new WGJSON(),new HelpLayout(),new ClassFactory(),new PopupManager(),new Commons(),new FocusHandlerEx(),new EventCollector(),new IME(),new VOManager(),new Icons());
          _loc1_.setNations(new Nations(_loc1_));
          return _loc1_;
       }
@@ -144,8 +142,6 @@ package net.wg.app.impl
       }
 
       override protected function onDispose() : void {
-         this._loader.dispose();
-         this._loader = null;
          super.onDispose();
       }
 
@@ -206,8 +202,12 @@ package net.wg.app.impl
 
       override protected function onAppConfiguring() : void {
          super.onAppConfiguring();
-         this._loader = new LibraryLoader(this._libraries);
-         this._loader.load(this._librariesList);
+         libraryLoader.load(this._librariesList);
+      }
+
+      override protected function onBeforeAppConfiguring() : void {
+         super.onBeforeAppConfiguring();
+         libraryLoader.init(this._libraries);
       }
 
       override protected function onPopUpManagerInit() : void {

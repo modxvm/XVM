@@ -63,7 +63,7 @@ package net.wg.gui.lobby
          this.vehicleHitArea.width = param1;
          this.vehicleHitArea.height = param2 - this.vehicleHitArea.y;
          this.messengerBar.updateStage(param1,param2);
-         var _loc3_:Number = param2 - this.subViewContainer.y - this.messengerBar.height - this.messengerBar.paddingBottom;
+         var _loc3_:Number = param2 - this.subViewContainer.y - this.messengerBar.height - this.messengerBar.paddingBottom + this.messengerBar.paddingTop;
          this.subViewContainer.updateStage(param1,_loc3_);
          this.header.width = param1;
          if(this.notificationPopupViewer)

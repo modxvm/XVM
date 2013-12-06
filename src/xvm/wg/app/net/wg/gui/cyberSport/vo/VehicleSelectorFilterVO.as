@@ -16,7 +16,11 @@ package net.wg.gui.cyberSport.vo
 
       private var _isMain:Boolean = false;
 
+      private var _level:int = -1;
+
       private var _vehicleTypesDP:Array = null;
+
+      private var _levelsDP:Array = null;
 
       public function get vehicleTypesDP() : Array {
          return this._vehicleTypesDP;
@@ -24,6 +28,14 @@ package net.wg.gui.cyberSport.vo
 
       public function set vehicleTypesDP(param1:Array) : void {
          this._vehicleTypesDP = param1;
+      }
+
+      public function get levelsDP() : Array {
+         return this._levelsDP;
+      }
+
+      public function set levelsDP(param1:Array) : void {
+         this._levelsDP = param1;
       }
 
       public function get nation() : int {
@@ -48,6 +60,14 @@ package net.wg.gui.cyberSport.vo
 
       public function set isMain(param1:Boolean) : void {
          this._isMain = param1;
+      }
+
+      public function get level() : int {
+         return this._level;
+      }
+
+      public function set level(param1:int) : void {
+         this._level = param1;
       }
    }
 

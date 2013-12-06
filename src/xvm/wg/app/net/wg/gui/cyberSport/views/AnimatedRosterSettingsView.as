@@ -8,6 +8,7 @@ package net.wg.gui.cyberSport.views
    import scaleform.clik.events.ButtonEvent;
    import net.wg.gui.cyberSport.controls.events.CSComponentEvent;
    import scaleform.clik.constants.InvalidationType;
+   import net.wg.gui.cyberSport.vo.VehicleVO;
    import net.wg.gui.cyberSport.controls.SettingRosterVO;
    import fl.transitions.easing.Strong;
 
@@ -86,9 +87,9 @@ package net.wg.gui.cyberSport.views
       }
 
       private function defType(param1:CSVehicleButton, param2:*) : void {
-         if(param2  is  int)
+         if(param2  is  Object && (param2.hasOwnProperty("isReadyToFight")))
          {
-            this.setCompactDscr(param1,parseInt(param2));
+            this.setVehicle(param1,new VehicleVO(param2));
          }
          else
          {
@@ -110,8 +111,8 @@ package net.wg.gui.cyberSport.views
          }
       }
 
-      private function setCompactDscr(param1:CSVehicleButton, param2:int) : void {
-         param1.setCompDescriptor(param2);
+      private function setVehicle(param1:CSVehicleButton, param2:VehicleVO) : void {
+         param1.setVehicle(param2);
       }
 
       private function setRangeData(param1:CSVehicleButton, param2:*) : void {

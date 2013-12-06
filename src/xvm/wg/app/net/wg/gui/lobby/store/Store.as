@@ -2,20 +2,17 @@ package net.wg.gui.lobby.store
 {
    import net.wg.infrastructure.base.meta.impl.StoreMeta;
    import net.wg.infrastructure.base.meta.IStoreMeta;
-   import net.wg.infrastructure.interfaces.IStoreTable;
-   import net.wg.gui.components.advanced.Accordion;
-   import net.wg.gui.components.controls.TextFieldShort;
-   import net.wg.gui.components.controls.CloseButton;
    import flash.utils.Dictionary;
    import net.wg.infrastructure.interfaces.IStoreMenuView;
+   import net.wg.gui.components.controls.CloseButton;
    import net.wg.data.VO.ShopSubFilterData;
    import scaleform.clik.events.InputEvent;
    import scaleform.clik.utils.Constraints;
    import scaleform.clik.constants.ConstrainMode;
    import flash.display.DisplayObject;
-   import scaleform.clik.events.ButtonEvent;
    import flash.ui.Keyboard;
    import flash.events.KeyboardEvent;
+   import scaleform.clik.events.ButtonEvent;
    import net.wg.data.Aliases;
    import scaleform.clik.events.IndexEvent;
    import net.wg.gui.events.ViewStackEvent;
@@ -39,16 +36,6 @@ package net.wg.gui.lobby.store
          this._viewsHash = new Dictionary(false);
       }
 
-      public var storeTable:IStoreTable = null;
-
-      public var menu:Accordion = null;
-
-      public var title:TextFieldShort = null;
-
-      public var nationFilter:NationFilter = null;
-
-      public var closeButton:CloseButton = null;
-
       private var _viewsHash:Dictionary = null;
 
       private var _currentView:IStoreMenuView = null;
@@ -58,6 +45,10 @@ package net.wg.gui.lobby.store
       private var _myHeight:Number = 0;
 
       private var _programUpdating:Boolean = false;
+
+      private var closeButton:CloseButton = null;
+
+      public var form:StoreForm = null;
 
       private var _subFilterData:ShopSubFilterData = null;
 
@@ -101,19 +92,20 @@ package net.wg.gui.lobby.store
       }
 
       override protected function configUI() : void {
-         assert(this.storeTable  is  DisplayObject,"storeTable must extends a DisplayObject class");
-         constraints.addElement(this.nationFilter.name,this.nationFilter,Constraints.LEFT);
-         constraints.addElement(this.storeTable.name,DisplayObject(this.storeTable),Constraints.ALL);
+         assert(this.form.storeTable  is  DisplayObject,"storeTable must extends a DisplayObject class");
+         constraints.addElement(this.form.nationFilter.name,this.form.nationFilter,Constraints.LEFT);
+         constraints.addElement(this.form.storeTable.name,DisplayObject(this.form.storeTable),Constraints.ALL);
          this.updateStage(parent.width,parent.height);
-         this.closeButton.addEventListener(ButtonEvent.CLICK,this.onCloseButtonClickHandler);
          App.gameInputMgr.setKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN,this.handleEscape,true);
+         this.closeButton = this.form.closeButton;
+         this.closeButton.addEventListener(ButtonEvent.CLICK,this.onCloseButtonClickHandler);
          super.configUI();
       }
 
       override protected function onPopulate() : void {
          super.onPopulate();
-         registerComponent(this.storeTable,Aliases.SHOP_TABLE);
-         this.storeTable.addEventListener(StoreEvent.INFO,this.onInfoItemHandler);
+         registerComponent(this.form.storeTable,Aliases.SHOP_TABLE);
+         this.form.storeTable.addEventListener(StoreEvent.INFO,this.onInfoItemHandler);
       }
 
       override protected function onDispose() : void {
@@ -121,11 +113,13 @@ package net.wg.gui.lobby.store
          this.setCurrentView(null);
          this._subFilterData.dispose();
          this._subFilterData = null;
-         this.nationFilter.nation.removeEventListener(IndexEvent.INDEX_CHANGE,this.onNationMenuChangeHandler);
-         this.menu.removeEventListener(IndexEvent.INDEX_CHANGE,this.onMenuChangeTypeHandler);
-         this.menu.view.removeEventListener(ViewStackEvent.NEED_UPDATE,this.onViewNeedUpdateHandler);
-         this.menu.dispose();
+         this.form.nationFilter.nation.removeEventListener(IndexEvent.INDEX_CHANGE,this.onNationMenuChangeHandler);
+         this.form.menu.removeEventListener(IndexEvent.INDEX_CHANGE,this.onMenuChangeTypeHandler);
+         this.form.menu.view.removeEventListener(ViewStackEvent.NEED_UPDATE,this.onViewNeedUpdateHandler);
+         this.form.menu.dispose();
          this.closeButton.removeEventListener(ButtonEvent.CLICK,this.onCloseButtonClickHandler);
+         this.closeButton.dispose();
+         this.closeButton = null;
          for each (_loc1_ in this._viewsHash)
          {
             delete this._viewsHash[[_loc1_]];
@@ -146,15 +140,15 @@ package net.wg.gui.lobby.store
 
       override protected function setFilterType(param1:ShopNationFilterData) : void {
          var _loc3_:IStoreMenuView = null;
-         this.nationFilter.nation.selectedIndex = param1.language + 1;
+         this.form.nationFilter.nation.selectedIndex = param1.language + 1;
          var _loc2_:Number = FittingTypes.STORE_SLOTS.indexOf(param1.type);
          if(_loc2_ != -1)
          {
-            this.menu.selectedIndex = _loc2_;
+            this.form.menu.selectedIndex = _loc2_;
             if(this.initializing)
             {
-               this.menu.validateNow();
-               _loc3_ = IStoreMenuView(this.menu.view.currentView);
+               this.form.menu.validateNow();
+               _loc3_ = IStoreMenuView(this.form.menu.view.currentView);
                this.onViewNeedUpdate(_loc3_,this.getLinkageFromFittingType(param1.type));
             }
          }
@@ -162,8 +156,8 @@ package net.wg.gui.lobby.store
 
       public function as_setNations(param1:Array) : void {
          assert(param1.length > 0,Errors.CANT_EMPTY);
-         this.nationFilter.nation.menuRowCount = param1.length;
-         this.nationFilter.nation.createNationFilter(param1);
+         this.form.nationFilter.nation.menuRowCount = param1.length;
+         this.form.nationFilter.nation.createNationFilter(param1);
          if(this.initializing)
          {
             this.initMenu(this.getLocalizator());
@@ -173,7 +167,7 @@ package net.wg.gui.lobby.store
       public function as_setSubFilter(param1:Object) : void {
          this._subFilterData = new ShopSubFilterData(param1);
          assertNotNull(this.getCurrentView(),"currentView",NullPointerException);
-         this.getCurrentView().setSubFilterData(this.nationFilter.nation.selectedIndex-1,this._subFilterData);
+         this.getCurrentView().setSubFilterData(this.form.nationFilter.nation.selectedIndex-1,this._subFilterData);
       }
 
       public function as_setFilterOptions(param1:Array) : void {
@@ -182,9 +176,9 @@ package net.wg.gui.lobby.store
       }
 
       public function as_completeInit() : void {
-         this.menu.view.addEventListener(ViewStackEvent.NEED_UPDATE,this.onViewNeedUpdateHandler);
-         this.menu.addEventListener(IndexEvent.INDEX_CHANGE,this.onMenuChangeTypeHandler);
-         this.nationFilter.nation.addEventListener(ListEvent.INDEX_CHANGE,this.onNationMenuChangeHandler);
+         this.form.menu.view.addEventListener(ViewStackEvent.NEED_UPDATE,this.onViewNeedUpdateHandler);
+         this.form.menu.addEventListener(IndexEvent.INDEX_CHANGE,this.onMenuChangeTypeHandler);
+         this.form.nationFilter.nation.addEventListener(ListEvent.INDEX_CHANGE,this.onNationMenuChangeHandler);
          this._initializing = false;
       }
 
@@ -199,15 +193,15 @@ package net.wg.gui.lobby.store
       protected final function updateTable() : void {
          var _loc1_:Array = null;
          var _loc2_:String = null;
-         if(this.nation != this.nationFilter.nation.selectedIndex-1)
+         if(this.nation != this.form.nationFilter.nation.selectedIndex-1)
          {
             if(this._currentView)
             {
-               this.nation = this.nationFilter.nation.selectedIndex-1;
+               this.nation = this.form.nationFilter.nation.selectedIndex-1;
                this._currentView.updateSubFilter(this.nation);
             }
          }
-         if((this.menu.enabled) && (this._currentView) && !this._programUpdating)
+         if((this.form.menu.enabled) && (this._currentView) && !this._programUpdating)
          {
             _loc1_ = this._currentView.getFilter();
             _loc2_ = this._currentView.fittingType;
@@ -288,7 +282,7 @@ package net.wg.gui.lobby.store
             this._viewsHash[_loc4_] = _loc3_;
             _loc2_.push(_loc3_);
          }
-         this.menu.dataProvider = _loc2_;
+         this.form.menu.dataProvider = _loc2_;
       }
 
       private function onViewNeedUpdateHandler(param1:ViewStackEvent) : void {
@@ -313,12 +307,12 @@ package net.wg.gui.lobby.store
          this.onPopulateMenuFilterNeed(param1.viewType);
       }
 
-      private function onCloseButtonClickHandler(param1:ButtonEvent) : void {
-         onCloseButtonClickS();
-      }
-
       private function onInfoItemHandler(param1:StoreEvent) : void {
          onShowInfoS(param1.data);
+      }
+
+      private function onCloseButtonClickHandler(param1:ButtonEvent) : void {
+         onCloseButtonClickS();
       }
    }
 

@@ -9,7 +9,7 @@ package net.wg.data.VO
           
       public function _Importer() {
          super();
-         importClasses(Vector.<Class>([AnimationObject,ColorScheme,PointVO,PremiumFormModel,SellDialogElement,SellDialogItem,ShopNationFilterData,ShopSubFilterData,ShopVehicleFilterElementData,StoreTableData,StoreTableVO,TrainingFormRendererVO,TrainingRoomInfoVO,TrainingRoomListVO,TrainingWindowVO,TrainingRoomRendererVO,WalletStatusVO]));
+         importClasses(Vector.<Class>([AnimationObject,BattleResultsQuestVO,ColorScheme,PointVO,PremiumFormModel,ProgressElementVO,SellDialogElement,SellDialogItem,ShopNationFilterData,ShopSubFilterData,ShopVehicleFilterElementData,StoreTableData,StoreTableVO,TrainingFormRendererVO,TrainingRoomInfoVO,TrainingRoomListVO,TrainingWindowVO,TrainingRoomRendererVO,WalletStatusVO]));
       }
    }
 

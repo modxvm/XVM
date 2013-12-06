@@ -17,6 +17,7 @@ package net.wg.app.impl.base
    import net.wg.infrastructure.managers.IColorSchemeManager;
    import net.wg.infrastructure.managers.IVoiceChatManager;
    import net.wg.infrastructure.interfaces.ICursor;
+   import net.wg.infrastructure.helpers.ILibraryLoader;
    import net.wg.infrastructure.interfaces.IView;
    import net.wg.infrastructure.base.meta.IGlobalVarsMgrMeta;
    import flash.display.DisplayObjectContainer;
@@ -32,6 +33,7 @@ package net.wg.app.impl.base
    import scaleform.clik.core.CLIK;
    import flash.display.StageScaleMode;
    import flash.display.StageAlign;
+   import net.wg.infrastructure.helpers.LibraryLoader;
 
 
    public class AbstractApplication extends ApplicationMeta implements IApplication
@@ -41,6 +43,7 @@ package net.wg.app.impl.base
          super();
          App.instance = this;
          this._utils = this.getNewUtils();
+         this._loader = new LibraryLoader();
          this.createContainers();
          this.createManagers();
          this.populateContainers();
@@ -86,6 +89,8 @@ package net.wg.app.impl.base
       private var _voiceChatMgr:IVoiceChatManager = null;
 
       private var _cursor:ICursor = null;
+
+      private var _loader:ILibraryLoader = null;
 
       private var _appWidth:Number = 0;
 
@@ -137,6 +142,10 @@ package net.wg.app.impl.base
 
       public final function get utils() : IUtils {
          return this._utils;
+      }
+
+      public function get libraryLoader() : ILibraryLoader {
+         return this._loader;
       }
 
       public function get soundMgr() : ISoundManager {
@@ -208,6 +217,7 @@ package net.wg.app.impl.base
       }
 
       protected function onDispose() : void {
+         this._loader.dispose();
          this.disposeManagers();
          this.disposeContainers();
          this._utils.dispose();
@@ -279,6 +289,10 @@ package net.wg.app.impl.base
       }
 
       protected function onAppConfiguring() : void {
+          
+      }
+
+      protected function onBeforeAppConfiguring() : void {
           
       }
 
@@ -370,6 +384,7 @@ package net.wg.app.impl.base
 
       private function onFirstFrame(param1:Event) : void {
          removeEventListener(Event.ENTER_FRAME,this.onFirstFrame);
+         this.onBeforeAppConfiguring();
          this._environmentMgr.envoke(this.getRegCmdName());
          this.configure();
          this.onAppConfiguring();

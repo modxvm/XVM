@@ -138,7 +138,7 @@ package net.wg.gui.lobby.dialogs
          this.mainBlock.tankmanName = this.model.tankmanName;
          this.mainBlock.portraitSource = this.model.tankmanIcon;
          this.mainBlock.roleSource = this.model.roleIcon;
-         this.mainBlock.setSkills(this.protectedState?this.model.skillsCount:-1,this.model.preLastSkill,this.model.lastSkill,this.model.lastSkillLevel,this.model.hasNewSkill);
+         this.mainBlock.setSkills(this.protectedState?this.model.skillsCount:-1,this.model.preLastSkill,this.model.lastSkill,this.model.lastSkillLevel,this.model.hasNewSkill,this.model.newSkillsCount,this.model.lastNewSkillLevel);
          this.mainBlock.setRoleLevel(this.model.roleLevel);
          this.question.htmlText = this.questionForUser;
       }

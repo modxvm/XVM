@@ -9,8 +9,8 @@ package net.wg.gui.components.tooltips
    import flash.display.DisplayObject;
    import net.wg.utils.ILocale;
    import net.wg.gui.components.tooltips.VO.AchievementVO;
-   import net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO;
    import net.wg.gui.components.tooltips.VO.ToolTipBlockVO;
+   import net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO;
    import flash.text.TextFieldAutoSize;
    import net.wg.gui.components.tooltips.helpers.Utils;
    import net.wg.gui.components.tooltips.VO.ToolTipBlockRightListItemVO;
@@ -130,7 +130,6 @@ package net.wg.gui.components.tooltips
          var _loc1_:ILocale = null;
          var _loc4_:* = NaN;
          var _loc5_:AchievementVO = null;
-         var _loc6_:ToolTipBlockResultVO = null;
          var _loc7_:* = NaN;
          var _loc10_:ToolTipBlockVO = null;
          var _loc11_:String = null;
@@ -141,7 +140,7 @@ package net.wg.gui.components.tooltips
          var _loc3_:uint = 0;
          _loc4_ = 300;
          _loc5_ = new AchievementVO(_data);
-         _loc6_ = null;
+         var _loc6_:ToolTipBlockResultVO = null;
          blockResults = new Vector.<ToolTipBlockResultVO>();
          this.flagsBlocks = new Vector.<AchievementsCustomBlockItem>();
          topPosition = bgShadowMargin.top + contentMargin.top;

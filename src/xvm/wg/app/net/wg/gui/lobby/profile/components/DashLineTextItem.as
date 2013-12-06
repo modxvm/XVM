@@ -15,13 +15,13 @@ package net.wg.gui.lobby.profile.components
          super();
       }
 
-      private static const LABEL_INV:String = "lblInv";
+      public static const LABEL_INV:String = "lblInv";
 
       private static const HTML_VALUE_INV:String = "htmlValInv";
 
-      private static const VALUE_INV:String = "valInv";
+      public static const VALUE_INV:String = "valInv";
 
-      private static const dashLinePadding:uint = 1;
+      public static const dashLinePadding:uint = 1;
 
       private static function hideToolTip() : void {
          App.toolTipMgr.hide();
@@ -39,7 +39,7 @@ package net.wg.gui.lobby.profile.components
 
       private var _tooltip:String;
 
-      private var _myEnabled:Boolean = true;
+      protected var _myEnabled:Boolean = true;
 
       protected function mouseRollOutHandler(param1:MouseEvent) : void {
          hideToolTip();
@@ -126,6 +126,7 @@ package net.wg.gui.lobby.profile.components
       }
 
       override public function dispose() : void {
+         this.dashLine.dispose();
          this.disposeListeners();
          super.dispose();
       }

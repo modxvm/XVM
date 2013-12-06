@@ -34,8 +34,20 @@ package net.wg.gui.lobby.hangar.tcarousel
          this.filterData = {};
          super();
          dragHitArea = this.dragHitArea1;
+         if(leftArrow)
+         {
+            leftArrow.dispose();
+         }
          leftArrow = this.leftArrow1;
+         if(rightArrow)
+         {
+            rightArrow.dispose();
+         }
          rightArrow = this.rightArrow1;
+         if(renderersMask)
+         {
+            renderersMask.dispose();
+         }
          renderersMask = this.renderersMask1;
          this.nationFilter = this.vehicleFilters.nationFilter;
          this.tankFilter = this.vehicleFilters.tankFilter;
@@ -67,7 +79,11 @@ package net.wg.gui.lobby.hangar.tcarousel
 
       private var checkBoxToMain:CheckBox;
 
+      private var slotPricePrc:Number = 0;
+
       private var slotPrice:Number = 0;
+
+      private var defSlotPrice:Number = 0;
 
       private var selectedTankID:String = "";
 
@@ -139,7 +155,7 @@ package net.wg.gui.lobby.hangar.tcarousel
                   _loc3_.empty = _loc3_.empty != undefined?_loc3_.empty:null;
                   _loc3_.buyTank = _loc3_.buyTank != undefined?_loc3_.buyTank:false;
                   _loc3_.buySlot = _loc3_.buySlot != undefined?_loc3_.buySlot:false;
-                  _loc3_.avalibleSlots = _loc3_.avalibleSlots != undefined?_loc3_.avalibleSlots:0;
+                  _loc3_.availableSlots = _loc3_.avalibleSlots != undefined?_loc3_.avalibleSlots:0;
                   _loc2_++;
                }
             }
@@ -175,9 +191,7 @@ package net.wg.gui.lobby.hangar.tcarousel
          this.vehicleFilters.dispose();
          this.vehicleFilters = null;
          this.dragHitArea1 = null;
-         this.leftArrow1.dispose();
          this.leftArrow1 = null;
-         this.rightArrow1.dispose();
          this.rightArrow1 = null;
          this.renderersMask1 = null;
          this.bg1 = null;
@@ -186,11 +200,8 @@ package net.wg.gui.lobby.hangar.tcarousel
             delete this.filterData[[_loc1_]];
          }
          this.filterData = null;
-         this.nationFilter.dispose();
          this.nationFilter = null;
-         this.tankFilter.dispose();
          this.tankFilter = null;
-         this.checkBoxToMain.dispose();
          this.checkBoxToMain = null;
          this._rendererHelpLayout = null;
          super.dispose();
@@ -405,13 +416,18 @@ package net.wg.gui.lobby.hangar.tcarousel
       }
 
       override protected function handleMouseWheel(param1:MouseEvent) : void {
-         if((enabled) && (dragHitArea.hitTestPoint(stage.mouseX,stage.mouseY)) && !isDragging)
+         if((enabled) && (dragHitArea.hitTestPoint(stage.mouseX,stage.mouseY)) && !isPreDragging)
          {
             super.handleMouseWheel(param1);
          }
       }
 
       override protected function onItemRollOver(param1:ListEventEx) : void {
+         super.onItemRollOver(param1);
+         if(isSliding)
+         {
+            return;
+         }
          var _loc2_:Object = param1.itemData;
          if(TankCarouselItemRenderer(param1.itemRenderer).empty)
          {
@@ -431,6 +447,7 @@ package net.wg.gui.lobby.hangar.tcarousel
       }
 
       override protected function onItemRollOut(param1:ListEventEx) : void {
+         super.onItemRollOut(param1);
          App.toolTipMgr.hide();
       }
 
@@ -441,9 +458,9 @@ package net.wg.gui.lobby.hangar.tcarousel
 
       override protected function handleItemClick(param1:ButtonEvent) : void {
          App.toolTipMgr.hide();
-         if(needCanceledClick)
+         if(isMoving)
          {
-            needCanceledClick = false;
+            isMoving = false;
             return;
          }
          var _loc2_:IListItemRenderer = param1.currentTarget as IListItemRenderer;
@@ -491,7 +508,7 @@ package net.wg.gui.lobby.hangar.tcarousel
          }
          else
          {
-            if(param1.buttonIdx == 1 && !_loc2_.buyTank && !_loc2_.buySlot && slidingIntervalId == 0 && !isTween && arrowSlideIntervalId == 0)
+            if(param1.buttonIdx == 1 && !_loc2_.buyTank && !_loc2_.buySlot)
             {
                this.showContextMenu(_loc2_);
             }
@@ -624,6 +641,8 @@ package net.wg.gui.lobby.hangar.tcarousel
             tryClearTween();
          }
          this.slotPrice = param1.slotPrice;
+         this.defSlotPrice = param1.hasOwnProperty("defSlotPrice")?param1.defSlotPrice:0;
+         this.slotPricePrc = param1.hasOwnProperty("actionPrc")?param1.actionPrc:0;
          this.selectedTankID = param1.selectedTankID;
          this.availableTanksCount = param1.slots.length;
          this.emptySlotsCountForByTank = param1.availableSlotsForBuy;
@@ -669,7 +688,7 @@ package net.wg.gui.lobby.hangar.tcarousel
                "empty":false,
                "buyTank":true,
                "buySlot":false,
-               "avalibleSlots":this.emptySlotsCountForByTank,
+               "availableSlots":this.emptySlotsCountForByTank,
                "slotPrice":this.slotPrice
             }
          ;
@@ -689,8 +708,10 @@ package net.wg.gui.lobby.hangar.tcarousel
                "empty":false,
                "buyTank":false,
                "buySlot":true,
-               "avalibleSlots":this.emptySlotsCountForByTank,
-               "slotPrice":this.slotPrice
+               "availableSlots":this.emptySlotsCountForByTank,
+               "slotPrice":this.slotPrice,
+               "defSlotPrice":this.defSlotPrice,
+               "slotPricePrc":this.slotPricePrc
             }
          ;
          return _loc1_;

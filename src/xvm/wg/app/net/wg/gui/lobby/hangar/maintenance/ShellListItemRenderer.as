@@ -4,6 +4,8 @@ package net.wg.gui.lobby.hangar.maintenance
    import net.wg.gui.components.controls.UILoaderAlt;
    import flash.text.TextField;
    import net.wg.gui.components.controls.IconText;
+   import net.wg.gui.components.controls.ActionPrice;
+   import flash.display.MovieClip;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.utils.IEventCollector;
    import flash.events.MouseEvent;
@@ -31,6 +33,10 @@ package net.wg.gui.lobby.hangar.maintenance
 
       public var price:IconText;
 
+      public var actionPrice:ActionPrice;
+
+      public var hitMc:MovieClip;
+
       override public function setData(param1:Object) : void {
          super.setData(param1);
          invalidate(InvalidationType.DATA);
@@ -44,10 +50,17 @@ package net.wg.gui.lobby.hangar.maintenance
          _loc1_.addEvent(this,MouseEvent.ROLL_OUT,this.onRollOut);
          _loc1_.addEvent(this,MouseEvent.CLICK,this.onClick);
          soundType = SoundTypes.NORMAL_BTN;
+         if(this.hitMc)
+         {
+            hitArea = this.hitMc;
+         }
       }
 
       override protected function draw() : void {
          var _loc1_:ILocale = null;
+         var _loc2_:* = NaN;
+         var _loc3_:* = NaN;
+         var _loc4_:* = NaN;
          super.draw();
          if(isInvalid(InvalidationType.DATA))
          {
@@ -58,10 +71,26 @@ package net.wg.gui.lobby.hangar.maintenance
                this.icon.source = data.icon;
                this.title.text = data.ammoName;
                this.price.icon = data.currency;
-               this.price.textColor = Currencies.TEXT_COLORS[data.currency];
                _loc1_ = App.utils.locale;
+               if(data.currency == Currencies.CREDITS)
+               {
+                  this.price.textColor = data.prices[0] < data.userCredits[0]?Currencies.TEXT_COLORS[data.currency]:Currencies.TEXT_COLORS[Currencies.ERROR];
+                  this.actionPrice.textColorType = data.prices[0] < data.userCredits[0]?ActionPrice.TEXT_COLOR_TYPE_ICON:ActionPrice.TEXT_COLOR_TYPE_ERROR;
+               }
+               else
+               {
+                  this.price.textColor = data.prices[1] < data.userCredits[1]?Currencies.TEXT_COLORS[data.currency]:Currencies.TEXT_COLORS[Currencies.ERROR];
+                  this.actionPrice.textColorType = data.prices[0] < data.userCredits[0]?ActionPrice.TEXT_COLOR_TYPE_ICON:ActionPrice.TEXT_COLOR_TYPE_ERROR;
+               }
                this.price.text = data.currency == Currencies.CREDITS?_loc1_.integer(data.prices[0]):_loc1_.gold(data.prices[1]);
                this.price.validateNow();
+               _loc2_ = data.hasOwnProperty("actionPrc")?data.actionPrc:0;
+               _loc3_ = data.currency == Currencies.CREDITS?data.prices[0]:data.prices[1];
+               _loc4_ = data.currency == Currencies.CREDITS?data.prices[2]:data.prices[3];
+               this.actionPrice.setData(_loc2_,_loc3_,_loc4_,data.currency);
+               this.actionPrice.setup(this);
+               this.price.visible = !this.actionPrice.visible;
+               this.actionPrice.validateNow();
             }
             else
             {

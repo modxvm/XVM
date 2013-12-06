@@ -17,6 +17,8 @@ package net.wg.infrastructure.base.meta
       function as_setFightButton(param1:String, param2:String, param3:Array, param4:Boolean) : void;
 
       function as_setDemonstratorButton(param1:Boolean) : void;
+
+      function as_setCoolDownForReady(param1:uint) : void;
    }
 
 }

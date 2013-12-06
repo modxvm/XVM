@@ -27,6 +27,8 @@ package net.wg.gui.cyberSport.controls
 
       private static const INVALID_MODE:String = "invalidMode";
 
+      public var levelDD:DropDownImageText;
+
       public var nationDD:DropDownImageText;
 
       public var vehicleTypeDD:DropDownImageText;
@@ -46,6 +48,7 @@ package net.wg.gui.cyberSport.controls
          super.configUI();
          this.nationDD.addEventListener(ListEvent.INDEX_CHANGE,this.onFiltersChanged);
          this.vehicleTypeDD.addEventListener(ListEvent.INDEX_CHANGE,this.onFiltersChanged);
+         this.levelDD.addEventListener(ListEvent.INDEX_CHANGE,this.onFiltersChanged);
          this.mainCheckBox.addEventListener(Event.SELECT,this.onFiltersChanged);
          this.initFilters();
       }
@@ -60,8 +63,11 @@ package net.wg.gui.cyberSport.controls
          {
             this.vehicleTypeDD.dataProvider = new DataProvider(this._model.vehicleTypesDP);
             this.vehicleTypeDD.selectedIndex = 0;
+            this.levelDD.dataProvider = new DataProvider(this._model.levelsDP);
+            this.levelDD.selectedIndex = 0;
             this.selectNation(this._model.nation);
             this.selectVehicleType(this._model.vehicleType);
+            this.selectLevel(this._model.level);
             if(this._mode == MODE_USER_VEHICLES)
             {
                this.mainCheckBox.selected = this._model.isMain;
@@ -93,16 +99,28 @@ package net.wg.gui.cyberSport.controls
          }
       }
 
+      private function selectLevel(param1:int) : void {
+         var _loc2_:Object = null;
+         for each (_loc2_ in this.levelDD.dataProvider)
+         {
+            if(_loc2_.data == param1)
+            {
+               this.levelDD.selectedIndex = this.levelDD.dataProvider.indexOf(_loc2_);
+               return;
+            }
+         }
+      }
+
       private function onFiltersChanged(param1:Event) : void {
          var _loc2_:Object = this.nationDD.dataProvider.requestItemAt(this.nationDD.selectedIndex);
-         var _loc3_:int = _loc2_?_loc2_.data:-1;
-         var _loc4_:Object = this.vehicleTypeDD.dataProvider.requestItemAt(this.vehicleTypeDD.selectedIndex);
-         var _loc5_:String = _loc4_?_loc4_.data:null;
-         var _loc6_:VehicleSelectorFilterEvent = new VehicleSelectorFilterEvent(VehicleSelectorFilterEvent.CHANGE,true);
-         _loc6_.nation = _loc2_?_loc2_.data:-1;
-         _loc6_.vehicleType = _loc4_?_loc4_.data:null;
-         _loc6_.isMain = this.mainCheckBox.selected;
-         dispatchEvent(_loc6_);
+         var _loc3_:Object = this.vehicleTypeDD.dataProvider.requestItemAt(this.vehicleTypeDD.selectedIndex);
+         var _loc4_:Object = this.levelDD.dataProvider.requestItemAt(this.levelDD.selectedIndex);
+         var _loc5_:VehicleSelectorFilterEvent = new VehicleSelectorFilterEvent(VehicleSelectorFilterEvent.CHANGE,true);
+         _loc5_.nation = _loc2_?_loc2_.data:-1;
+         _loc5_.vehicleType = _loc3_?_loc3_.data:null;
+         _loc5_.level = _loc4_?_loc4_.data:-1;
+         _loc5_.isMain = this.mainCheckBox.selected;
+         dispatchEvent(_loc5_);
       }
 
       private function initFilters() : void {
@@ -130,9 +148,11 @@ package net.wg.gui.cyberSport.controls
          super.dispose();
          this.nationDD.removeEventListener(ListEvent.INDEX_CHANGE,this.onFiltersChanged);
          this.vehicleTypeDD.removeEventListener(ListEvent.INDEX_CHANGE,this.onFiltersChanged);
+         this.levelDD.removeEventListener(ListEvent.INDEX_CHANGE,this.onFiltersChanged);
          this.mainCheckBox.removeEventListener(Event.SELECT,this.onFiltersChanged);
          this.nationDD.dispose();
          this.vehicleTypeDD.dispose();
+         this.levelDD.dispose();
          this.mainCheckBox.dispose();
       }
 

@@ -12,7 +12,7 @@ package net.wg.gui.lobby.hangar
          this._dropDownref = param2;
       }
 
-      public static const SHOW_DROP_DOWN:String = "showCrewDropDown";
+      public static const SHOW_DROP_DOWN:String = "showCompanyDropDown";
 
       private var _dropDownref:MovieClip = null;
 

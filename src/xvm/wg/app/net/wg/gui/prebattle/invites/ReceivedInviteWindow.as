@@ -109,15 +109,18 @@ package net.wg.gui.prebattle.invites
          {
             this.noteTextField.text = this.inviteVO.note;
          }
-         var _loc2_:Boolean = !isNaN(this.inviteVO.id) && ((this.inviteVO.canAccept) || (this.inviteVO.canDecline));
          if(this.acceptButton != null)
          {
-            this.acceptButton.visible = _loc2_;
+            this.acceptButton.visible = this.inviteVO.isAcceptVisible;
             this.acceptButton.enabled = this.inviteVO.canAccept;
+            if((this.declineButton) && (this.inviteVO.isAcceptVisible) && !this.inviteVO.isDeclineVisible)
+            {
+               this.acceptButton.x = this.declineButton.x;
+            }
          }
          if(this.declineButton != null)
          {
-            this.declineButton.visible = _loc2_;
+            this.declineButton.visible = this.inviteVO.isDeclineVisible;
             this.declineButton.enabled = this.inviteVO.canDecline;
          }
          setSize(actualWidth,actualHeight);

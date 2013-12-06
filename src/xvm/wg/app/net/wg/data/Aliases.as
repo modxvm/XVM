@@ -149,6 +149,8 @@ package net.wg.data
 
       public static const PROFILE_SUMMARY_PAGE:String = "profileSummaryPage";
 
+      public static const PROFILE_SECTION:String = "profileSection";
+
       public static const PROFILE_SUMMARY_WINDOW:String = "profileSummaryWindow";
 
       public static const PROFILE_AWARDS:String = "profileAwards";
@@ -177,7 +179,7 @@ package net.wg.data
 
       public static const SYSTEM_VIEWS:Array = [PRESENTER,CURSOR];
 
-      public static const DEFAULT_VIEWS:Array = [EXCHANGE_XP_WINDOW];
+      public static const DEFAULT_VIEWS:Array = [EXCHANGE_WINDOW];
    }
 
 }

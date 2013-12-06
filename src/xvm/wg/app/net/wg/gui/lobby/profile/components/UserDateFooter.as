@@ -27,8 +27,8 @@ package net.wg.gui.lobby.profile.components
 
       override public function setUserData(param1:ProfileUserVO) : void {
          super.setUserData(param1);
-         var _loc2_:* = param1.registrationDate + ". ";
-         _loc2_ = _loc2_ + (param1.lastBattleDate != Values.EMPTY_STR?param1.lastBattleDate + ".":"");
+         var _loc2_:* = param1.registrationDate + "  ";
+         _loc2_ = _loc2_ + (param1.lastBattleDate != Values.EMPTY_STR?param1.lastBattleDate:"");
          this._textDates = _loc2_;
          invalidateData();
       }

@@ -23,6 +23,10 @@ package net.wg.infrastructure.base
          this._geometry = new DefaultWindowGeometry();
       }
 
+      private static const BG_ENABLED:String = "enable";
+
+      private static const BG_DISABLED:String = "disable";
+
       private var _waiting:Waiting;
 
       private var waitingMessage:String;
@@ -61,7 +65,7 @@ package net.wg.infrastructure.base
          super.setFocus();
          if((this.window) && (this.window.getBackground()))
          {
-            this.window.getBackground().gotoAndPlay("enable");
+            this.window.getBackground().gotoAndPlay(BG_ENABLED);
          }
       }
 
@@ -69,7 +73,7 @@ package net.wg.infrastructure.base
          super.removeFocus();
          if((this.window) && (this.window.getBackground()))
          {
-            this.window.getBackground().gotoAndPlay("disable");
+            this.window.getBackground().gotoAndPlay(BG_DISABLED);
          }
       }
 
@@ -106,6 +110,10 @@ package net.wg.infrastructure.base
       public function as_setGeometry(param1:Number, param2:Number, param3:Number, param4:Number) : void {
          this._geometry = new StoredWindowGeometry(param1,param2,param3,param4);
          invalidate(WindowViewInvalidationType.POSITION_INVALID);
+      }
+
+      public function as_isModal() : Boolean {
+         return this._isModal;
       }
 
       public function get window() : IWindow {
@@ -337,11 +345,15 @@ package net.wg.infrastructure.base
             return;
          }
          var _loc2_:InputDetails = param1.details;
-         if(_loc2_.code == Keyboard.ESCAPE && _loc2_.value == InputValue.KEY_DOWN)
+         if(this.canCloseFromInputDetails(_loc2_))
          {
             param1.handled = true;
             onWindowCloseS();
          }
+      }
+
+      protected final function canCloseFromInputDetails(param1:InputDetails) : Boolean {
+         return param1.code == Keyboard.ESCAPE && param1.value == InputValue.KEY_DOWN && this.window.getBackground().currentLabel == BG_ENABLED;
       }
 
       public function get waiting() : Waiting {

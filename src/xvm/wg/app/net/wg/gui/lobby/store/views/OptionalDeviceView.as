@@ -53,7 +53,7 @@ package net.wg.gui.lobby.store.views
             getFilterData().current = param1[param2].data;
             myVehiclesRadioBtn.enabled = true;
          }
-         otherVehiclesRadioBtn.enabled = param3 == -1 || getUIName() == STORE_TYPES.INVENTORY;
+         otherVehiclesRadioBtn.enabled = true;
       }
    }
 

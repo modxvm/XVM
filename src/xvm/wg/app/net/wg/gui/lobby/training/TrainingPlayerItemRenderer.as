@@ -3,7 +3,7 @@ package net.wg.gui.lobby.training
    import scaleform.clik.controls.ListItemRenderer;
    import net.wg.infrastructure.interfaces.entity.IDropItem;
    import flash.events.MouseEvent;
-   import net.wg.gui.components.controls.TextFieldShort;
+   import net.wg.gui.components.controls.UserNameField;
    import flash.text.TextField;
    import flash.geom.ColorTransform;
    import net.wg.gui.components.controls.UILoaderAlt;
@@ -14,6 +14,7 @@ package net.wg.gui.lobby.training
    import net.wg.data.components.BattleResultsCIGenerator;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.gui.prebattle.squad.MessengerUtils;
+   import net.wg.data.VO.UserVO;
    import scaleform.clik.data.ListData;
 
 
@@ -34,7 +35,7 @@ package net.wg.gui.lobby.training
          App.toolTipMgr.hide();
       }
 
-      public var nameField:TextFieldShort;
+      public var nameField:UserNameField;
 
       public var vehicleField:TextField;
 
@@ -181,13 +182,23 @@ package net.wg.gui.lobby.training
                {
                   this.voiceWave.setMuted(MessengerUtils.isMuted(data));
                }
-               this.nameField.label = _loc1_.fullName;
+               this.nameField.userVO = new UserVO(
+                  {
+                     "accID":_loc1_.accID,
+                     "uid":_loc1_.uid,
+                     "fullName":_loc1_.fullName,
+                     "userName":_loc1_.userName,
+                     "clanAbbrev":_loc1_.clanAbbrev,
+                     "region":_loc1_.region,
+                     "igrType":_loc1_.igrType
+                  }
+               );
             }
             else
             {
                if(this.nameField)
                {
-                  this.nameField.label = "";
+                  this.nameField.userVO = null;
                }
                if(this.vehicleField)
                {

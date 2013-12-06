@@ -6,8 +6,10 @@ package net.wg.gui.lobby.profile.components
    import flash.text.TextFieldAutoSize;
    import scaleform.clik.events.ListEvent;
    import scaleform.clik.data.DataProvider;
+   import flash.events.MouseEvent;
    import scaleform.clik.interfaces.IDataProvider;
    import scaleform.clik.constants.InvalidationType;
+   import net.wg.data.managers.IToolTipParams;
    import flash.events.Event;
 
 
@@ -18,6 +20,10 @@ package net.wg.gui.lobby.profile.components
          super();
       }
 
+      private static function hideToolTip() : void {
+         App.toolTipMgr.hide();
+      }
+
       public var txtLabel:TextField;
 
       public var dropdownMenu:DropdownMenu;
@@ -25,6 +31,10 @@ package net.wg.gui.lobby.profile.components
       private var _padding:int = 1;
 
       private var _selectedItem:String;
+
+      private var _tooltip:String = null;
+
+      private var _isToolTipShowing:Boolean;
 
       override protected function configUI() : void {
          var _loc4_:String = null;
@@ -52,6 +62,26 @@ package net.wg.gui.lobby.profile.components
          }
          this.dropdownMenu.dataProvider = new DataProvider(_loc1_);
          this.dropdownMenu.validateNow();
+         this.tooltip = PROFILE.TOOLTIP_DROPDOWN_BATTLETYPE;
+      }
+
+      public function get tooltip() : String {
+         return this._tooltip;
+      }
+
+      public function set tooltip(param1:String) : void {
+         this._tooltip = param1;
+         this.disposeHandlers();
+         if(this._isToolTipShowing)
+         {
+            hideToolTip();
+            this.showToolTip(null);
+         }
+         if(this._tooltip)
+         {
+            this.dropdownMenu.addEventListener(MouseEvent.ROLL_OVER,this.mouseRollOverHandler,false,0,true);
+            this.dropdownMenu.addEventListener(MouseEvent.ROLL_OUT,this.mouseRollOutHandler,false,0,true);
+         }
       }
 
       override protected function draw() : void {
@@ -84,6 +114,28 @@ package net.wg.gui.lobby.profile.components
          }
       }
 
+      private function disposeHandlers() : void {
+         this.dropdownMenu.removeEventListener(MouseEvent.ROLL_OVER,this.mouseRollOverHandler);
+         this.dropdownMenu.removeEventListener(MouseEvent.ROLL_OUT,this.mouseRollOutHandler);
+      }
+
+      protected function mouseRollOverHandler(param1:MouseEvent) : void {
+         this._isToolTipShowing = true;
+         this.showToolTip(null);
+      }
+
+      protected function mouseRollOutHandler(param1:MouseEvent) : void {
+         this._isToolTipShowing = false;
+         hideToolTip();
+      }
+
+      protected function showToolTip(param1:IToolTipParams) : void {
+         if(this._tooltip)
+         {
+            App.toolTipMgr.showComplex(this._tooltip);
+         }
+      }
+
       private function menuIndexChangeHandler(param1:ListEvent=null) : void {
          param1.stopImmediatePropagation();
          this._selectedItem = param1.itemData.key;
@@ -97,6 +149,11 @@ package net.wg.gui.lobby.profile.components
       public function set selectedItem(param1:String) : void {
          this._selectedItem = param1;
          invalidateData();
+      }
+
+      override public function dispose() : void {
+         this.disposeHandlers();
+         super.dispose();
       }
    }
 

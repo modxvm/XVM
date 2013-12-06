@@ -5,10 +5,10 @@ package net.wg.gui.lobby.dialogs
    import scaleform.clik.controls.Button;
    import flash.text.TextField;
    import net.wg.gui.components.controls.SoundButtonEx;
+   import scaleform.clik.core.UIComponent;
    import scaleform.clik.events.ButtonEvent;
    import flash.text.TextFieldAutoSize;
    import __AS3__.vec.Vector;
-   import scaleform.clik.core.UIComponent;
    import net.wg.gui.components.windows.Window;
    import net.wg.infrastructure.interfaces.IWindow;
    import scaleform.clik.utils.Padding;
@@ -29,7 +29,7 @@ package net.wg.gui.lobby.dialogs
 
       public static const CLOSE_BUTTON:String = "close";
 
-      protected static const ADDITIONAL_MULTI_LINE_PADDING:uint = 5;
+      protected static const ADDITIONAL_MULTI_LINE_PADDING:uint = 10;
 
       private static const TEXT_HEIGHT_PADDING:uint = 3;
 
@@ -69,6 +69,16 @@ package net.wg.gui.lobby.dialogs
 
       private var _btnFocusCandidateId:String;
 
+      private var lastFocusedObject:UIComponent;
+
+      override public function setFocus() : void {
+         super.setFocus();
+         if((this.lastFocusedObject) && (!this.lastFocusedObject.focused) && (initialized))
+         {
+            App.utils.focusHandler.setFocus(this.lastFocusedObject);
+         }
+      }
+
       override protected function onPopulate() : void {
          window.useBottomBtns = true;
          canDrag = false;
@@ -89,6 +99,11 @@ package net.wg.gui.lobby.dialogs
                this.textField.parent.removeChild(this.textField);
             }
             this.textField = null;
+         }
+         if(this.lastFocusedObject)
+         {
+            this.lastFocusedObject.dispose();
+            this.lastFocusedObject = null;
          }
          super.onDispose();
       }
@@ -238,6 +253,7 @@ package net.wg.gui.lobby.dialogs
                if(param1[_loc5_].focused)
                {
                   _loc4_.setFocus(_loc6_);
+                  this.lastFocusedObject = _loc6_;
                }
                _loc6_.visible = true;
                if(_loc7_ == SUBMIT_BUTTON)

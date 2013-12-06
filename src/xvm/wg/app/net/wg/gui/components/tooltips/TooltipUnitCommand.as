@@ -5,10 +5,10 @@ package net.wg.gui.components.tooltips
    import net.wg.gui.components.controls.UnitCommanderStats;
    import flash.text.TextFieldAutoSize;
    import net.wg.gui.components.tooltips.helpers.Utils;
-   import net.wg.gui.components.tooltips.VO.UnitCommandVO;
    import net.wg.utils.ILocale;
+   import net.wg.gui.components.tooltips.VO.UnitCommandVO;
    import flash.display.MovieClip;
-   import net.wg.data.gui_items.Vehicle;
+   import net.wg.gui.cyberSport.vo.VehicleVO;
 
 
    public class TooltipUnitCommand extends ToolTipSpecial
@@ -57,11 +57,12 @@ package net.wg.gui.components.tooltips
       }
 
       override protected function redraw() : void {
+         var _loc1_:ILocale = null;
          var _loc2_:UnitCommandVO = null;
          var _loc4_:Separator = null;
          var _loc6_:TextField = null;
          var _loc7_:* = 0;
-         var _loc1_:ILocale = App.utils.locale;
+         _loc1_ = App.utils.locale;
          _loc2_ = new UnitCommandVO(_data);
          var _loc3_:Number = 300;
          _loc4_ = null;
@@ -70,7 +71,7 @@ package net.wg.gui.components.tooltips
          _loc4_ = this.addSeparatorWithMargin(_loc4_);
          this.commanderStats.y = topPosition ^ 0;
          this.commanderStats.x = bgShadowMargin.left;
-         this.commanderStats.stats.text = App.utils.locale.integer(_loc2_.commanderRating);
+         this.commanderStats.stats.text = _loc2_.commanderRating;
          topPosition = topPosition + (this.commanderStats.height + Utils.instance.MARGIN_AFTER_BLOCK);
          _loc4_ = this.addSeparatorWithMargin(_loc4_);
          if(_loc2_.unitComment)
@@ -147,7 +148,7 @@ package net.wg.gui.components.tooltips
          return param1;
       }
 
-      private function addSuitableVehicleBlockItem(param1:MovieClip, param2:Vehicle, param3:Number) : Number {
+      private function addSuitableVehicleBlockItem(param1:MovieClip, param2:VehicleVO, param3:Number) : Number {
          var _loc4_:SuitableVehicleBlockItem = App.utils.classFactory.getComponent("SuitableVehicleBlockItemUI",SuitableVehicleBlockItem);
          _loc4_.setData(App.utils.nations.getNationIcon(param2.nationID),param2.level,param2.smallIconPath,"../maps/icons/filters/tanks/" + param2.type + ".png",param2.shortUserName);
          _loc4_.x = contentMargin.left + bgShadowMargin.left;

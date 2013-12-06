@@ -35,6 +35,8 @@ package net.wg.utils
       function setNations(param1:INations) : void;
 
       function get voMgr() : IVOManager;
+
+      function get icons() : IIcons;
    }
 
 }

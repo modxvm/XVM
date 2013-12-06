@@ -16,6 +16,7 @@ package net.wg.app
    import net.wg.infrastructure.managers.IVoiceChatManager;
    import net.wg.utils.IGameInputManager;
    import net.wg.utils.IUtils;
+   import net.wg.infrastructure.helpers.ILibraryLoader;
 
 
    public interface IApplication extends IApplicationMeta
@@ -58,6 +59,8 @@ package net.wg.app
       function get utils() : IUtils;
 
       function get browserBgClass() : Class;
+
+      function get libraryLoader() : ILibraryLoader;
    }
 
 }

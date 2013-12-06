@@ -52,8 +52,11 @@ package net.wg.gui.lobby.header
 
       private var _actualEnabledVal:Boolean;
 
+      private var _isInCoolDown:Boolean = false;
+
       public function as_disableFightButton(param1:Boolean, param2:String) : void {
-         this._actualEnabledVal = this.button.enabled = !param1;
+         this._actualEnabledVal = !param1;
+         this.button.enabled = !this._isInCoolDown?this._actualEnabledVal:!this._isInCoolDown;
          this.button.validateNow();
          this.toolTip = param2;
          this.buttondropdown.validateNow();
@@ -62,12 +65,24 @@ package net.wg.gui.lobby.header
          App.toolTipMgr.hide();
       }
 
+      public function as_setCoolDownForReady(param1:uint) : void {
+         this._isInCoolDown = true;
+         App.utils.scheduler.cancelTask(this.stopReadyCoolDown);
+         this.button.enabled = false;
+         App.utils.scheduler.scheduleTask(this.stopReadyCoolDown,param1 * 1000);
+      }
+
+      private function stopReadyCoolDown() : void {
+         this._isInCoolDown = false;
+         this.button.enabled = this._actualEnabledVal;
+      }
+
       public function as_setFightButton(param1:String, param2:String, param3:Array, param4:Boolean) : void {
-         this.mainButtonLabel = param1;
+         this.button.label = param1;
+         this.button.validateNow();
          this.dropDownButtonLabel = param2?param2:MENU.HEADERBUTTONS_BATTLE;
          this.items = param3;
          this.isDataInvalid = true;
-         this.isMainButtonLabelInvalid = true;
          this.buttondropdown.enabled = !param4;
          invalidate();
       }
@@ -101,6 +116,7 @@ package net.wg.gui.lobby.header
             removeEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
             removeEventListener(MouseEvent.ROLL_OUT,hideTooltip);
          }
+         App.utils.scheduler.cancelTask(this.stopReadyCoolDown);
          if(this.buttondropdown)
          {
             this.buttondropdown.removeEventListener(ListEvent.INDEX_CHANGE,this.onFightSelect);

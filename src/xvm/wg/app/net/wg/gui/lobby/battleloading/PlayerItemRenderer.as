@@ -102,7 +102,8 @@ package net.wg.gui.lobby.battleloading
             this.selfBg.visible = _selected;
             if(data.label)
             {
-               label = App.utils.commons.formatPlayerName(textField,data.label,data.clanAbbrev,null,data.isIGR);
+               App.utils.commons.formatPlayerName(textField,data.label,data.clanAbbrev,null,data.isIGR);
+               label = textField.htmlText;
             }
             if(!(this.vehicleField == null) && !(data.vehicle == null))
             {
@@ -133,6 +134,11 @@ package net.wg.gui.lobby.battleloading
                if(data.muted != null)
                {
                   this.voiceWave.setMuted(data.muted);
+                  if(data.muted)
+                  {
+                     this.voiceWave.setSpeaking(false);
+                     this.voiceWave.validateNow();
+                  }
                }
             }
             if(!(this.playerActionMarker == null) && !(data.vehAction == null) && !(data.team == null))
@@ -200,7 +206,8 @@ package net.wg.gui.lobby.battleloading
          {
             if(data)
             {
-               label = App.utils.commons.formatPlayerName(textField,data.label,null,null,data.isIGR,_loc1_);
+               App.utils.commons.formatPlayerName(textField,data.label,null,null,data.isIGR,"","",_loc1_.rgb);
+               label = textField.htmlText;
             }
             this.vehicleField.textColor = _loc1_.rgb;
             if(_loc2_)

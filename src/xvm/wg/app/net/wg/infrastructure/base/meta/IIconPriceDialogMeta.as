@@ -6,7 +6,7 @@ package net.wg.infrastructure.base.meta
    public interface IIconPriceDialogMeta extends IEventDispatcher
    {
           
-      function as_setMessagePrice(param1:String, param2:String) : void;
+      function as_setMessagePrice(param1:Number, param2:Number, param3:String, param4:Number) : void;
 
       function as_setPriceLabel(param1:String) : void;
 

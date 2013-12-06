@@ -51,14 +51,22 @@ package net.wg.gui.lobby.customization
          this.itemsDP.invalidateRemote(param1);
       }
 
-      public function setListSelectedIndex(param1:String, param2:Object) : void {
+      public function setListSelectedIndex(param1:String, param2:Boolean, param3:Object) : void {
          if(initialized)
          {
-            this.selectedItemIdx = this.selectedGroupName == param1 && (param2)?param2.index:-1;
-            if((this.selectedItemIdx > -1) && (param2) && (param2.hasOwnProperty("priceIndex")))
+            this.selectedItemIdx = this.selectedGroupName == param1 && (param3)?param3.index:-1;
+            if((this.selectedItemIdx > -1) && (param3) && (param3.hasOwnProperty("priceIndex")))
             {
-               this.rentalPackageList.selectedIndex = param2.priceIndex;
+               this.rentalPackageList.selectedIndex = param3.priceIndex;
             }
+            else
+            {
+               if(param2)
+               {
+                  this.rentalPackageList.selectedIndex = 0;
+               }
+            }
+            this.rentalPackageList.enabled = !param2;
             this.list.selectedIndex = this.selectedItemIdx;
          }
       }
@@ -145,7 +153,7 @@ package net.wg.gui.lobby.customization
          }
       }
 
-      private function handlePeriodDaysItemChange(param1:ListEvent) : void {
+      protected function handlePeriodDaysItemChange(param1:ListEvent) : void {
          this.selectedPriceIdx = param1.index;
          if(param1.index > -1)
          {
@@ -153,7 +161,7 @@ package net.wg.gui.lobby.customization
          }
       }
 
-      private function handleItemChange(param1:ListEvent) : void {
+      protected function handleItemChange(param1:ListEvent) : void {
          this.selectedItemIdx = param1.index;
          this.handleItemDataChanged();
       }

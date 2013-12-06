@@ -48,6 +48,13 @@ package net.wg.gui.components.controls
          App.soundMgr.addSoundsHdlrs(this);
       }
 
+      override protected function updateText() : void {
+         if(!(_label == null) && !(textField == null))
+         {
+            textField.htmlText = _label;
+         }
+      }
+
       public final function getSoundType() : String {
          return this.soundType;
       }

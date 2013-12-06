@@ -1,6 +1,8 @@
 package net.wg.gui.components.controls
 {
+   import net.wg.infrastructure.interfaces.IDraggableList;
    import flash.events.MouseEvent;
+   import scaleform.clik.core.UIComponent;
    import scaleform.gfx.MouseEventEx;
    import net.wg.gui.events.ListEventEx;
 
@@ -20,9 +22,34 @@ package net.wg.gui.components.controls
 
       protected var _empty:Boolean = false;
 
+      protected var draggableOwner:IDraggableList = null;
+
       protected var _dataDirty:Boolean = false;
 
       private var _dragEnabled:Boolean = false;
+
+      public function imitateMouseOver() : void {
+         this.dispatchEvent(new MouseEvent(MouseEvent.ROLL_OVER,false,false,this.mouseX,this.mouseY));
+      }
+
+      override public function set owner(param1:UIComponent) : void {
+         super.owner = param1;
+         this.draggableOwner = param1 as IDraggableList;
+      }
+
+      override protected function handleMouseRollOver(param1:MouseEvent) : void {
+         if((this.draggableOwner) && !this.draggableOwner.isSliding)
+         {
+            super.handleMouseRollOver(param1);
+         }
+      }
+
+      override protected function handleMouseRollOut(param1:MouseEvent) : void {
+         if((this.draggableOwner) && !this.draggableOwner.isSliding)
+         {
+            super.handleMouseRollOut(param1);
+         }
+      }
 
       override protected function handleMousePress(param1:MouseEvent) : void {
          var _loc2_:MouseEventEx = null;

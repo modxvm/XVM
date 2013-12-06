@@ -3,7 +3,7 @@ package net.wg.gui.lobby.window
    import net.wg.gui.components.controls.SoundListItemRenderer;
    import __AS3__.vec.Vector;
    import net.wg.gui.components.controls.UILoaderAlt;
-   import net.wg.gui.components.controls.CompactCheckBox;
+   import net.wg.gui.components.controls.CheckBox;
    import net.wg.gui.components.controls.IconText;
    import flash.text.TextField;
    import flash.display.MovieClip;
@@ -36,7 +36,7 @@ package net.wg.gui.lobby.window
 
       public var vehicleTypeIcon:UILoaderAlt;
 
-      public var checkboxVehicle:CompactCheckBox;
+      public var checkboxVehicle:CheckBox;
 
       public var xpLabel:IconText;
 

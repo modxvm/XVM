@@ -41,7 +41,9 @@ package net.wg.gui.components.controls
 
       public var typeSwitcher:MovieClip;
 
-      public var priceLabel:TextField;
+      public var priceLabel:IconText = null;
+
+      public var actionPrice:ActionPrice;
 
       public var typeLabel:TextField;
 
@@ -53,6 +55,12 @@ package net.wg.gui.components.controls
 
       private var _priceColors:Object;
 
+      override public function dispose() : void {
+         this.actionPrice.dispose();
+         this.actionPrice = null;
+         super.dispose();
+      }
+
       public function get buy() : Boolean {
          return this._buy;
       }
@@ -63,7 +71,11 @@ package net.wg.gui.components.controls
             return;
          }
          this._buy = param1;
-         this.priceLabel.visible = !this._buy && !(this._type == "free");
+         this.priceLabel.visible = !this._buy && !(this._type == "free") && !this.actionPrice.visible;
+         if((this._buy) || this._type == "free")
+         {
+            this.actionPrice.visible = false;
+         }
          clearRepeatInterval();
          setState(this._buy?"buy":"up");
       }
@@ -126,6 +138,8 @@ package net.wg.gui.components.controls
 
       override protected function configUI() : void {
          super.configUI();
+         this.hitArea = hitMc;
+         this.actionPrice.setup(this);
       }
 
       public function get nation() : Number {
@@ -149,14 +163,22 @@ package net.wg.gui.components.controls
          }
       }
 
-      public function get price() : String {
-         return this.priceLabel.text;
-      }
-
-      public function set price(param1:String) : void {
-         var _loc2_:String = !enabled?"disabled":"normal";
-         this.priceLabel.textColor = this._priceColors[_loc2_];
-         this.priceLabel.text = this._type == "academy"?App.utils.locale.gold(param1):App.utils.locale.integer(param1);
+      public function updatePrice(param1:Number, param2:Number, param3:Number, param4:String) : void {
+         var _loc5_:String = null;
+         if(!this._buy && !(this._type == "free") && !(param2 == 0))
+         {
+            _loc5_ = !enabled?"disabled":"normal";
+            this.priceLabel.textColor = this._priceColors[_loc5_];
+            this.priceLabel.text = this._type == "academy"?App.utils.locale.gold(param2):App.utils.locale.integer(param2);
+            this.priceLabel.icon = this._type == "academy"?IconText.GOLD:IconText.CREDITS;
+            this.actionPrice.setData(param1,param2,param3,param4);
+            this.priceLabel.visible = !this.actionPrice.visible;
+         }
+         else
+         {
+            this.priceLabel.visible = false;
+            this.actionPrice.visible = false;
+         }
       }
 
       override public function toString() : String {
@@ -171,7 +193,25 @@ package net.wg.gui.components.controls
          }
          if(isInvalid(TYPE_INVALID))
          {
-            this.priceLabel.visible = !(this._type == "free");
+            if(this._type == "free")
+            {
+               this.priceLabel.visible = false;
+               if(this.actionPrice)
+               {
+                  this.actionPrice.visible = false;
+               }
+            }
+            else
+            {
+               if(this.actionPrice)
+               {
+                  this.priceLabel.visible = !this.actionPrice.visible;
+               }
+               else
+               {
+                  this.priceLabel.visible = true;
+               }
+            }
             this.typeLabel.text = MENU.tankmantrainingwindow(this._type);
             this.typeSwitcher.gotoAndPlay(this._type);
          }

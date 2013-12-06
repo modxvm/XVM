@@ -13,7 +13,7 @@ package net.wg.gui.lobby.profile.headerBar
          super();
          preventAutosizing = true;
          constraintsDisabled = true;
-         this.widthOffset = this.highLight.width - this.background.width;
+         this.widthOffset = this.highLight.width - this.backGround.width;
       }
 
       private static const LAST_LINE_INVALID:String = "lli";
@@ -22,7 +22,7 @@ package net.wg.gui.lobby.profile.headerBar
 
       public var highLight:MovieClip;
 
-      public var background:MovieClip;
+      public var backGround:MovieClip;
 
       private var textHOffset:uint = 14;
 
@@ -50,12 +50,12 @@ package net.wg.gui.lobby.profile.headerBar
             textField.x = this.textHOffset;
             _loc1_ = this.receiveWidth();
             this.highLight.width = _loc1_ + this.widthOffset;
-            this.background.width = _loc1_;
+            this.backGround.width = _loc1_;
             this.hit.width = _loc1_;
          }
          if(isInvalid(LAST_LINE_INVALID))
          {
-            _loc2_ = this.background as ProfileTabButtonBg;
+            _loc2_ = this.backGround as ProfileTabButtonBg;
             if(_loc2_)
             {
                _loc2_.lastLine.visible = this._showLastLineItem;

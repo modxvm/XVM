@@ -13,8 +13,8 @@ package net.wg.gui.components.controls.achievements
       }
 
       override protected function applyData() : void {
-         var _loc6_:* = false;
-         var _loc7_:* = false;
+         var _loc8_:* = 0;
+         var _loc9_:* = false;
          if(data == null)
          {
             return;
@@ -22,11 +22,12 @@ package net.wg.gui.components.controls.achievements
          var _loc1_:String = getDataOwnValue("type","");
          var _loc2_:String = getDataOwnValue("section","");
          var _loc3_:Number = getDataOwnValue("value",NaN);
-         var _loc4_:Number = getDataOwnValue("lvlUpTotalValue",0);
-         var _loc5_:Number = _loc4_ - getDataOwnValue("lvlUpValue",0);
-         _loc6_ = getDataOwnValue("isRare",false);
+         var _loc4_:uint = getDataOwnValue("lvlUpTotalValue",0);
+         var _loc5_:uint = getDataOwnValue("lvlUpValue",0);
+         var _loc6_:uint = _loc4_ - _loc5_;
+         var _loc7_:Boolean = getDataOwnValue("isRare",false);
          loader.alpha = 1;
-         if(_loc6_)
+         if(_loc7_)
          {
             hideProgress();
             counterType = AchievementCounter.NONE;
@@ -62,7 +63,8 @@ package net.wg.gui.components.controls.achievements
                         case AchievementSection.SPECIAL:
                            counterType = AchievementCounter.NONE;
                            this.setRecordRepeatable(AchievementCounter.YELLOW);
-                           if(!isNaN(_loc3_) && _loc5_ / _loc4_ >= 0.9)
+                           _loc8_ = getDataOwnValue("minValueForRecord",-1);
+                           if(!isNaN(_loc3_) && (_loc6_ / _loc4_ >= 0.9 || !(_loc6_ == 0) && _loc5_ < _loc8_))
                            {
                               this.showProgress();
                            }
@@ -81,8 +83,8 @@ package net.wg.gui.components.controls.achievements
                      {
                         case AchievementSection.SPECIAL:
                            counterType = AchievementCounter.NONE;
-                           _loc7_ = getDataOwnValue("isInDossier",false);
-                           if(_loc7_)
+                           _loc9_ = getDataOwnValue("isInDossier",false);
+                           if(_loc9_)
                            {
                               this.showIcon();
                            }
@@ -90,7 +92,7 @@ package net.wg.gui.components.controls.achievements
                            {
                               this.hideIcon();
                            }
-                           if(_loc5_ != _loc4_)
+                           if(_loc6_ != _loc4_)
                            {
                               this.showProgress();
                            }
@@ -109,7 +111,7 @@ package net.wg.gui.components.controls.achievements
                         case AchievementSection.CLASS:
                            this.checkReceived(_loc3_,AchievementCounter.BEIGE);
                            counterType = AchievementCounter.BEIGE;
-                           if(_loc5_ != _loc4_)
+                           if(_loc6_ != _loc4_)
                            {
                               this.showProgress();
                            }
@@ -129,7 +131,7 @@ package net.wg.gui.components.controls.achievements
       }
 
       override protected function showProgress() : void {
-         if(!getDataOwnValue("isDossierForCurrentUser",null))
+         if(!getDataOwnValue("showProgress",null))
          {
             return;
          }

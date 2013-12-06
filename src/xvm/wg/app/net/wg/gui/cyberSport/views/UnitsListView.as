@@ -4,19 +4,23 @@ package net.wg.gui.cyberSport.views
    import net.wg.infrastructure.base.meta.ICyberSportUnitsListMeta;
    import net.wg.infrastructure.base.meta.ICyberSportBaseViewMeta;
    import net.wg.infrastructure.interfaces.IViewStackContent;
-   import net.wg.gui.cyberSport.controls.PerpageScrollingList;
+   import net.wg.gui.cyberSport.controls.ManualSearchScrollingList;
+   import net.wg.gui.cyberSport.controls.NavigationBlock;
    import net.wg.gui.cyberSport.controls.ButtonDnmIcon;
    import flash.text.TextField;
-   import net.wg.gui.components.controls.ScrollBar;
    import net.wg.gui.cyberSport.views.unit.JoinUnitSection;
+   import net.wg.gui.cyberSport.data.ManualSearchDataProvider;
+   import net.wg.gui.cyberSport.vo.NavigationBlockVO;
    import scaleform.clik.events.ButtonEvent;
    import net.wg.gui.events.ListEventEx;
    import net.wg.gui.cyberSport.controls.events.CSComponentEvent;
    import flash.events.MouseEvent;
+   import net.wg.gui.cyberSport.vo.CSCommandVO;
    import net.wg.gui.cyberSport.views.events.CyberSportEvent;
    import net.wg.data.constants.generated.CYBER_SPORT_ALIASES;
    import scaleform.clik.events.ListEvent;
-   import net.wg.gui.cyberSport.vo.CSCommandVO;
+   import net.wg.gui.cyberSport.vo.UnitShortVO;
+   import scaleform.gfx.MouseEventEx;
    import net.wg.gui.cyberSport.vo.UnitVO;
    import net.wg.data.constants.Tooltips;
    import flash.events.Event;
@@ -27,14 +31,15 @@ package net.wg.gui.cyberSport.views
    {
           
       public function UnitsListView() {
+         this._searchDP = new ManualSearchDataProvider();
          super();
       }
 
       private static const REFRESH_BUTTON_OFFSET:Number = 14;
 
-      private static const MAXIMUM_REQUESTS:int = 3;
+      public var unitsList:ManualSearchScrollingList;
 
-      public var unitsList:PerpageScrollingList;
+      public var navigationBlock:NavigationBlock;
 
       public var suitedTanksBtn:ButtonDnmIcon = null;
 
@@ -44,13 +49,11 @@ package net.wg.gui.cyberSport.views
 
       public var selectVehiclesTF:TextField;
 
-      public var scrBar:ScrollBar;
-
       public var joinUnitSection:JoinUnitSection;
 
-      private var _unitMgrID:Number = 0;
-
       private var _selectedVehiclesCount:int = 0;
+
+      private var _searchDP:ManualSearchDataProvider;
 
       public function update(param1:Object) : void {
           
@@ -62,40 +65,55 @@ package net.wg.gui.cyberSport.views
          this._pyAlias = param1;
       }
 
+      private var isCoolDownState:Boolean = false;
+
       public function as_setRefreshCoolDown(param1:Number) : void {
-         this.enableRefreshButton(false);
-         App.utils.scheduler.scheduleTask(this.enableRefreshButton,param1 * 1000,true);
+         if(this.isCoolDownState == false)
+         {
+            this.enableRefreshButton(false);
+            this.isCoolDownState = true;
+            App.utils.scheduler.scheduleTask(this.enableRefreshButton,param1 * 1000,true);
+         }
       }
 
       public function as_getPyAlias() : String {
          return this._pyAlias;
       }
 
-      public function as_setTeamsData(param1:Array, param2:Number) : void {
-         this.unitsList.totalCommands = param2;
-         this.unitsList.setData(param1);
-         invalidateData();
+      private var navigationConfig:NavigationBlockVO;
+
+      public function as_updateNavigationBlock(param1:Object) : void {
+         this.navigationConfig = new NavigationBlockVO(param1);
+         this.navigationBlock.setup(this.navigationConfig);
       }
 
-      public function as_updateTeamsData(param1:Object) : void {
-         this.unitsList.updateData(param1.toRemove,param1.toUpdate);
-         invalidateData();
+      public function as_getSearchDP() : Object {
+         return this._searchDP;
       }
 
-      public function as_appendTeamsData(param1:Array) : void {
-         this.unitsList.appendData(param1);
-         this.unitsList.selectedIndex = -1;
+      public function as_setSelectedUnitIdx(param1:int) : void {
+         if(this.unitsList.selectedIndex != param1)
+         {
+            this.unitsList.selectedIndex = param1;
+         }
+         else
+         {
+            this.requestTeamData(param1);
+         }
       }
 
       override protected function configUI() : void {
          super.configUI();
-         this.unitsList.setPagesMaximum(MAXIMUM_REQUESTS);
+         if(this.unitsList)
+         {
+            this.unitsList.dataProvider = this._searchDP;
+         }
          this.refreshBtn.addEventListener(ButtonEvent.CLICK,this.onRefreshClick);
          this.suitedTanksBtn.addEventListener(ButtonEvent.CLICK,this.onSuitedTanksBtnClick);
          this.unitsList.addEventListener(ListEventEx.INDEX_CHANGE,this.selectTeam);
          this.unitsList.addEventListener(ListEventEx.ITEM_DOUBLE_CLICK,this.onListItemDoubleClick);
-         this.unitsList.addEventListener(CSComponentEvent.LOAD_PREVIOUS_REQUEST,this.onLoadPreviousRequest);
-         this.unitsList.addEventListener(CSComponentEvent.LOAD_NEXT_REQUEST,this.onLoadNextRequest);
+         this.navigationBlock.addEventListener(CSComponentEvent.LOAD_PREVIOUS_REQUEST,this.onLoadPreviousRequest);
+         this.navigationBlock.addEventListener(CSComponentEvent.LOAD_NEXT_REQUEST,this.onLoadNextRequest);
          this.unitsList.addEventListener(ListEventEx.ITEM_ROLL_OVER,this.onItemRollOver);
          this.unitsList.addEventListener(ListEventEx.ITEM_ROLL_OUT,this.onItemRollOut);
          this.suitedTanksBtn.addEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
@@ -108,7 +126,11 @@ package net.wg.gui.cyberSport.views
       }
 
       private function onJoinRequest(param1:CSComponentEvent) : void {
-         dispatchEvent(new CyberSportEvent(CyberSportEvent.LOAD_VIEW_REQUEST,CYBER_SPORT_ALIASES.UNIT_VIEW_UI,this._unitMgrID,param1.data?param1.data:-1));
+         var _loc2_:CSCommandVO = this.unitsList.getSelectedVO();
+         if((_loc2_) && !(_loc2_.unitMgrID == 0))
+         {
+            dispatchEvent(new CyberSportEvent(CyberSportEvent.LOAD_VIEW_REQUEST,CYBER_SPORT_ALIASES.UNIT_VIEW_UI,_loc2_.unitMgrID,_loc2_.peripheryID,param1.data?param1.data:-1));
+         }
       }
 
       override protected function onPopulate() : void {
@@ -131,6 +153,7 @@ package net.wg.gui.cyberSport.views
          this.refreshBtn.removeEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
          this.refreshBtn.removeEventListener(MouseEvent.ROLL_OUT,this.onItemRollOut);
          App.utils.scheduler.cancelTask(this.enableRefreshButton);
+         App.utils.scheduler.cancelTask(this.requestTeamData);
          this.unitsList.dispose();
          this.unitsList = null;
          this.joinUnitSection.dispose();
@@ -147,20 +170,23 @@ package net.wg.gui.cyberSport.views
       }
 
       private function selectTeam(param1:ListEvent) : void {
-         var _loc2_:CSCommandVO = param1.itemData as CSCommandVO;
-         if((_loc2_) && !_loc2_.isLoadMoreState)
+         var _loc2_:int = param1.index;
+         if(!isNaN(_loc2_))
          {
-            this._unitMgrID = _loc2_.unitMgrID;
-            getTeamDataS(_loc2_.cfdUnitID);
+            App.utils.scheduler.envokeInNextFrame(this.requestTeamData,_loc2_);
          }
+      }
+
+      private function requestTeamData(param1:int) : void {
+         var _loc2_:Object = getTeamDataS(param1);
+         this.joinUnitSection.setData(_loc2_ != null?new UnitShortVO(_loc2_):null);
       }
 
       private function onListItemDoubleClick(param1:ListEvent) : void {
          var _loc2_:CSCommandVO = param1.itemData as CSCommandVO;
-         if((_loc2_) && !_loc2_.isLoadMoreState)
+         if((param1.buttonIdx == MouseEventEx.LEFT_BUTTON) && (_loc2_) && (this.navigationConfig))
          {
-            this._unitMgrID = _loc2_.unitMgrID;
-            dispatchEvent(new CyberSportEvent(CyberSportEvent.LOAD_VIEW_REQUEST,CYBER_SPORT_ALIASES.UNIT_VIEW_UI,this._unitMgrID,-1));
+            dispatchEvent(new CyberSportEvent(CyberSportEvent.LOAD_VIEW_REQUEST,CYBER_SPORT_ALIASES.UNIT_VIEW_UI,_loc2_.unitMgrID,_loc2_.peripheryID,-1));
          }
       }
 
@@ -197,7 +223,7 @@ package net.wg.gui.cyberSport.views
 
       private function onItemRollOver(param1:ListEventEx) : void {
          var _loc2_:CSCommandVO = param1.itemData as CSCommandVO;
-         if((_loc2_) && !_loc2_.isLoadMoreState)
+         if((_loc2_) && (this.navigationConfig))
          {
             App.toolTipMgr.showSpecial(Tooltips.CYBER_SPORT_TEAM,null,_loc2_.unitMgrID);
          }
@@ -220,7 +246,11 @@ package net.wg.gui.cyberSport.views
       private function enableRefreshButton(param1:Boolean) : void {
          this.refreshBtn.enabled = param1;
          this.suitedTanksBtn.enabled = param1;
-         this.unitsList.setNavInCoolDown(!param1);
+         this.navigationBlock.setInCoolDown(!param1);
+         if(param1)
+         {
+            this.isCoolDownState = false;
+         }
       }
 
       private function onControlRollOver(param1:MouseEvent) : void {

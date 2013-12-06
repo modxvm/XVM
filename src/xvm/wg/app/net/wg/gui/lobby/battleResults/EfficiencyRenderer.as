@@ -71,6 +71,10 @@ package net.wg.gui.lobby.battleResults
          invalidate();
       }
 
+      public function getData() : Object {
+         return this.data;
+      }
+
       override protected function configUI() : void {
          var _loc2_:EfficiencyIconRenderer = null;
          super.configUI();

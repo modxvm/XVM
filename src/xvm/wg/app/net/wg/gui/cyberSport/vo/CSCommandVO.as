@@ -7,19 +7,16 @@ package net.wg.gui.cyberSport.vo
    {
           
       public function CSCommandVO(param1:Object) {
-         this.vehicles = [];
          super(param1);
       }
 
-      public var creator:String = "";
+      private static const CREATOR_FIELD:String = "creator";
 
-      public var vehicles:Array;
+      public var creator:UnitCandidateVO = null;
 
       public var cfdUnitID:Number = 0;
 
       public var unitMgrID:Number = 0;
-
-      public var specialState:String = "";
 
       public var inBattle:Boolean = false;
 
@@ -27,27 +24,26 @@ package net.wg.gui.cyberSport.vo
 
       public var playersCount:Number = 0;
 
-      public var rating:Number = 0;
+      public var rating:String = "";
 
       public var isFreezed:Boolean = false;
 
       public var isRestricted:Boolean = false;
 
+      public var peripheryID:Number = 0;
+
       public var server:String = "";
 
-      public var navigationConfig:NavigationBlockVO = null;
+      public var unit:UnitVO = null;
 
       override protected function onDataWrite(param1:String, param2:Object) : Boolean {
-         if(param1 == "navigationBlock")
+         var _loc3_:* = true;
+         if(param1 == CREATOR_FIELD)
          {
-            this.navigationConfig = new NavigationBlockVO(param2);
-            return false;
+            this.creator = new UnitCandidateVO(param2);
+            _loc3_ = false;
          }
-         return this.hasOwnProperty(param1);
-      }
-
-      public function get isLoadMoreState() : Boolean {
-         return !(this.navigationConfig == null);
+         return _loc3_;
       }
    }
 

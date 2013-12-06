@@ -101,8 +101,9 @@ package net.wg.gui.lobby.header
          this.premium_info.textField.htmlText = this.premium_info.textField.htmlText + (" " + param1);
       }
 
-      public function setExp(param1:String) : void {
+      public function setExp(param1:String, param2:Boolean) : void {
          this.experience.text = param1;
+         this.experience.toolTip = param2?"#tooltips:useFreeXP":"#tooltips:freeXP";
       }
 
       public function setCredits(param1:String) : void {

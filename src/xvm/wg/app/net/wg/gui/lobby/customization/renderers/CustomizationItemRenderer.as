@@ -3,7 +3,10 @@ package net.wg.gui.lobby.customization.renderers
    import net.wg.gui.components.controls.SoundListItemRenderer;
    import flash.display.MovieClip;
    import net.wg.gui.components.controls.UILoaderAlt;
+   import net.wg.gui.components.controls.ActionPrice;
    import net.wg.gui.components.controls.IconText;
+   import flash.display.Sprite;
+   import flash.text.TextField;
    import flash.events.MouseEvent;
    import scaleform.clik.events.InputEvent;
    import net.wg.gui.events.UILoaderEvent;
@@ -32,11 +35,19 @@ package net.wg.gui.lobby.customization.renderers
 
       public var uiLoader:UILoaderAlt;
 
+      public var actionPrice:ActionPrice;
+
       public var costField:IconText;
 
       public var costFrame:MovieClip;
 
       public var border:RendererBorder;
+
+      public var hitMc:Sprite;
+
+      public var targetIcon:MovieClip;
+
+      public var freeTF:TextField;
 
       protected var isNew:Boolean = false;
 
@@ -44,11 +55,19 @@ package net.wg.gui.lobby.customization.renderers
 
       protected var costVal:String = "";
 
+      protected var priceVal:Number = 0;
+
+      protected var defPriceVal:Number = 0;
+
+      protected var actionPrc:Number = 0;
+
       private var costVisible:Boolean = false;
 
       private var texturePath:String;
 
       private var _current:Boolean = false;
+
+      private var _isMouseOver:Boolean = false;
 
       private var _demoMode:String = "off";
 
@@ -72,12 +91,13 @@ package net.wg.gui.lobby.customization.renderers
       }
 
       public function set demoMode(param1:String) : void {
+         var _loc2_:* = false;
          if(this._demoMode == param1)
          {
             return;
          }
          this._demoMode = param1;
-         var _loc2_:Boolean = (this._useHandCursorForse) || this._demoMode == DEMO_OFF;
+         _loc2_ = (this._useHandCursorForse) || this._demoMode == DEMO_OFF;
          super.enabled = _loc2_;
          useHandCursor = _loc2_;
          setState(state);
@@ -100,11 +120,17 @@ package net.wg.gui.lobby.customization.renderers
             {
                this.current = data.current;
             }
-            this.costVisible = this.demoMode == CustomizationItemRenderer.DEMO_NEW && data.id > 0 || this.demoMode == CustomizationItemRenderer.DEMO_OFF;
+            this.costVisible = this.demoMode == CustomizationItemRenderer.DEMO_NEW && data.id > 0 && !data.isInHangar || this.demoMode == CustomizationItemRenderer.DEMO_OFF && !((data.current) || (data.isInHangar));
             if(data.price)
             {
                this.costVal = data.price.isGold?App.utils.locale.gold(data.price.cost):App.utils.locale.integer(data.price.cost);
+               this.priceVal = data.price.cost;
+               this.defPriceVal = data.defPrice.cost;
                this.isGold = data.price.isGold;
+            }
+            if(data.actionPrc != undefined)
+            {
+               this.actionPrc = data.actionPrc;
             }
             _loc2_ = data.isNew;
             if(this.uiLoader)
@@ -135,13 +161,16 @@ package net.wg.gui.lobby.customization.renderers
          {
             removeChild(this.newMarker);
          }
+         if(this.actionPrice)
+         {
+            this.actionPrice.dispose();
+         }
          data = null;
       }
 
       override protected function configUI() : void {
-         var _loc1_:* = false;
          super.configUI();
-         _loc1_ = (this._useHandCursorForse) || this._demoMode == DEMO_OFF;
+         var _loc1_:Boolean = (this._useHandCursorForse) || this._demoMode == DEMO_OFF;
          super.enabled = _loc1_;
          useHandCursor = _loc1_;
          this.uiLoader.addEventListener(UILoaderEvent.COMPLETE,this.onImageLoadComplete);
@@ -151,17 +180,75 @@ package net.wg.gui.lobby.customization.renderers
          {
             this.loadTexture(data.texturePath);
          }
+         if(this.freeTF)
+         {
+            this.freeTF.text = VEHICLE_CUSTOMIZATION.IGR_FREE_FULL;
+         }
+         if(this.hitMc)
+         {
+            this.hitArea = this.hitMc;
+         }
+         if(this.actionPrice)
+         {
+            this.actionPrice.setup(this);
+         }
+      }
+
+      override public function set enabled(param1:Boolean) : void {
+         super.enabled = param1;
+         mouseChildren = true;
       }
 
       override protected function draw() : void {
+         var _loc1_:* = false;
          super.draw();
          if(isInvalid(InvalidationType.DATA))
          {
             this.visible = !(this.data == null);
-            this.costField.visible = this.costVisible;
             this.costFrame.visible = this.costVisible;
-            this.costField.text = this.costVal;
-            this.costField.icon = this.isGold?IconText.GOLD:IconText.CREDITS;
+            _loc1_ = ((((this.freeTF) && (data)) && (data.id > 0) && data.price) && (data.price.cost == 0)) && !data.current && !data.isInHangar;
+            if(this.actionPrice)
+            {
+               if(this.costVisible)
+               {
+                  this.actionPrice.setData(this.actionPrc,this.priceVal,this.defPriceVal,this.isGold?IconText.GOLD:IconText.CREDITS);
+                  this.costField.visible = !this.actionPrice.visible && !_loc1_;
+               }
+               else
+               {
+                  this.actionPrice.visible = false;
+                  this.costField.visible = false;
+               }
+            }
+            else
+            {
+               this.costField.visible = (this.costVisible) && !_loc1_;
+            }
+            if(_loc1_)
+            {
+               this.freeTF.visible = true;
+               if(this.actionPrice)
+               {
+                  this.actionPrice.visible = false;
+               }
+            }
+            else
+            {
+               if(this.freeTF)
+               {
+                  this.freeTF.visible = false;
+               }
+               this.costField.text = this.costVal;
+               this.costField.icon = this.isGold?IconText.GOLD:IconText.CREDITS;
+            }
+            if(this.targetIcon)
+            {
+               this.targetIcon.visible = !(this.demoMode == DEMO_CURRENT) && (data) && ((data.current) || (data.isInHangar));
+               if(this.targetIcon.visible)
+               {
+                  this.targetIcon.gotoAndStop(data.current?"current":"hangar");
+               }
+            }
             this.checkTooltip();
          }
       }
@@ -172,8 +259,8 @@ package net.wg.gui.lobby.customization.renderers
             return;
          }
          var _loc1_:Point = new Point(mouseX,mouseY);
-         _loc1_ = localToGlobal(_loc1_);
-         if(hitTestPoint(_loc1_.x,_loc1_.y))
+         _loc1_ = this.localToGlobal(_loc1_);
+         if((this.hitTestPoint(_loc1_.x,_loc1_.y,true)) && (this._isMouseOver))
          {
             this.showTooltip();
          }
@@ -230,7 +317,8 @@ package net.wg.gui.lobby.customization.renderers
       }
 
       protected function onImageLoadComplete(param1:Event) : void {
-         invalidate(InvalidationType.SIZE);
+         invalidateSize();
+         validateNow();
       }
 
       private function loadTexture(param1:String) : void {
@@ -246,6 +334,7 @@ package net.wg.gui.lobby.customization.renderers
       }
 
       private function showTooltip(param1:MouseEvent=null) : void {
+         this._isMouseOver = true;
          if((data) && data.description.length > 0)
          {
             App.toolTipMgr.showComplex(data.description);
@@ -253,6 +342,7 @@ package net.wg.gui.lobby.customization.renderers
       }
 
       private function hideTooltip(param1:MouseEvent=null) : void {
+         this._isMouseOver = false;
          App.toolTipMgr.hide();
       }
    }

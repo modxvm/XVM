@@ -4,6 +4,7 @@ package net.wg.gui.lobby.sellDialog
    import flash.display.MovieClip;
    import flash.text.TextField;
    import net.wg.gui.components.controls.TextInput;
+   import net.wg.infrastructure.interfaces.IFormattedInt;
    import scaleform.clik.events.InputEvent;
    import scaleform.clik.constants.InvalidationType;
    import scaleform.clik.constants.InputValue;
@@ -42,12 +43,25 @@ package net.wg.gui.lobby.sellDialog
 
       private var _controlText:String = "";
 
+      private var _formattedControlText:String = "";
+
+      private var creditsParseResult:IFormattedInt;
+
       public function get controlText() : String {
          return this._controlText;
       }
 
       public function set controlText(param1:String) : void {
          this._controlText = param1;
+      }
+
+      public function get formattedControlText() : String {
+         return this._formattedControlText;
+      }
+
+      public function set formattedControlText(param1:String) : void {
+         this.creditsParseResult = App.utils.locale.parseFormattedInteger(param1);
+         this._formattedControlText = param1;
       }
 
       public function get headerText() : String {
@@ -79,7 +93,8 @@ package net.wg.gui.lobby.sellDialog
       }
 
       public function getUserText() : String {
-         return this.userInput.text;
+         var _loc1_:IFormattedInt = App.utils.locale.parseFormattedInteger(this.userInput.text);
+         return _loc1_.value.toString();
       }
 
       override protected function configUI() : void {
@@ -92,6 +107,7 @@ package net.wg.gui.lobby.sellDialog
          super.dispose();
          this.userInput.removeEventListener(InputEvent.INPUT,this.userInputHandler);
          this.userInput.dispose();
+         this.creditsParseResult = null;
          App.utils.scheduler.cancelTask(this.runtimeValidate);
       }
 
@@ -147,7 +163,37 @@ package net.wg.gui.lobby.sellDialog
       }
 
       public function get isValidControlInput() : Boolean {
-         return this.userInput.text == this.controlText;
+         return this.userInput.text == this.controlText || (this.parseUserString());
+      }
+
+      private function parseUserString() : Boolean {
+         var _loc5_:* = 0;
+         var _loc1_:Array = this.userInput.text.split("");
+         if(this.creditsParseResult.delimiter.charCodeAt(0) == 160)
+         {
+            _loc5_ = 0;
+            while(_loc5_ < _loc1_.length)
+            {
+               if(_loc1_[_loc5_] == " ")
+               {
+                  _loc1_[_loc5_] = this.creditsParseResult.delimiter;
+               }
+               _loc5_++;
+            }
+         }
+         var _loc2_:String = _loc1_.join("");
+         var _loc3_:* = false;
+         var _loc4_:* = this.formattedControlText.split("");
+         if(_loc4_[_loc4_.length-1].charCodeAt(0) == 32)
+         {
+            _loc4_.pop();
+            _loc3_ = _loc4_.join("") == _loc2_;
+         }
+         else
+         {
+            _loc3_ = this.formattedControlText == _loc2_;
+         }
+         return _loc3_;
       }
 
       public function cleanField() : void {

@@ -680,9 +680,9 @@ package net.wg.gui.lobby.techtree.sub
                _loc4_ = this._dataProvider.getTopLevelAt(_loc6_);
                this.positionByID[_loc4_.id] = _loc3_;
                _loc2_.setup(_loc6_,_loc4_,NodeEntityType.TOP_VEHICLE,_loc3_);
-               _loc2_.validateNow();
                if(_loc5_)
                {
+                  _loc2_.validateNowEx();
                   this.topRenderers.push(_loc2_);
                   this.rGraphics.addChild(DisplayObject(_loc2_));
                }

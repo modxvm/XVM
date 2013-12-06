@@ -4,10 +4,12 @@ package net.wg.gui.lobby.store.shop
    import net.wg.gui.components.advanced.ExtraModuleIcon;
    import flash.text.TextField;
    import net.wg.gui.lobby.store.ModuleRendererCredits;
+   import net.wg.gui.components.controls.ActionPrice;
    import scaleform.clik.utils.Constraints;
    import net.wg.data.VO.StoreTableData;
    import net.wg.utils.ILocale;
    import net.wg.gui.lobby.store.shop.base.ACTION_CREDITS_STATES;
+   import net.wg.gui.components.controls.IconText;
    import net.wg.utils.IAssertable;
    import flash.display.DisplayObject;
    import net.wg.data.constants.Errors;
@@ -27,9 +29,16 @@ package net.wg.gui.lobby.store.shop
 
       public var actionCredits:ModuleRendererCredits = null;
 
+      public var actionPriceLeft:ActionPrice = null;
+
       public var vehCount:TextField = null;
 
       public var count:TextField = null;
+
+      override public function dispose() : void {
+         this.actionPriceLeft.dispose();
+         super.dispose();
+      }
 
       override protected function configUI() : void {
          super.configUI();
@@ -38,13 +47,18 @@ package net.wg.gui.lobby.store.shop
          this.orTextField.text = MENU.SHOP_TABLE_BUYACTIONOR;
       }
 
+      override protected function draw() : void {
+         super.draw();
+         this.actionPriceLeft.setup(this);
+      }
+
       override protected function update() : void {
          var _loc1_:StoreTableData = null;
          super.update();
          if(data)
          {
             _loc1_ = StoreTableData(data);
-            this.showHideAction();
+            this.showHideAction(_loc1_);
             this.updateModuleIcon(_loc1_);
             getHelper().updateCountFields(this.count,this.vehCount,_loc1_);
          }
@@ -54,27 +68,50 @@ package net.wg.gui.lobby.store.shop
          }
       }
 
-      override protected function updateCreditPriceForAction(param1:Number, param2:Number, param3:StoreTableData) : void {
-         var _loc4_:ILocale = null;
+      override protected function updateCreditPriceForAction(param1:Number, param2:Number, param3:Number, param4:Number, param5:StoreTableData) : void {
+         var _loc6_:ILocale = null;
          if(App.instance)
          {
-            super.updateCreditPriceForAction(param1,param2,param3);
-            _loc4_ = App.utils.locale;
-            if(param2 > param3.tableVO.gold)
+            super.updateCreditPriceForAction(param1,param2,param3,param4,param5);
+            _loc6_ = App.utils.locale;
+            if(param3 > param5.tableVO.gold)
             {
                this.actionCredits.gotoAndStop(ACTION_CREDITS_STATES.GOLD_ERROR);
+               this.actionPriceLeft.textColorType = ActionPrice.TEXT_COLOR_TYPE_ERROR;
             }
             else
             {
                this.actionCredits.gotoAndStop(ACTION_CREDITS_STATES.GOLD);
+               this.actionPriceLeft.textColorType = ActionPrice.TEXT_COLOR_TYPE_ICON;
             }
-            this.actionCredits.price.text = _loc4_.gold(param2);
+            this.actionCredits.price.text = _loc6_.gold(param3);
+            if(this.actionPriceLeft)
+            {
+               this.actionPriceLeft.setData(param5.actionPrc,param3,param4,IconText.GOLD);
+               this.actionPriceLeft.visible = (isUseGoldAndCredits) && (this.actionPriceLeft.visible);
+               this.actionCredits.visible = (isUseGoldAndCredits) && !this.actionPriceLeft.visible;
+            }
          }
       }
 
-      private function showHideAction() : void {
-         this.orTextField.visible = isUseAction;
-         this.actionCredits.visible = isUseAction;
+      private function showHideAction(param1:StoreTableData=null) : void {
+         var _loc2_:* = 0;
+         var _loc3_:* = NaN;
+         var _loc4_:* = NaN;
+         this.orTextField.visible = isUseGoldAndCredits;
+         if(param1)
+         {
+            _loc2_ = 1;
+            _loc3_ = param1.price[_loc2_];
+            _loc4_ = param1.defPrice[_loc2_];
+            this.actionPriceLeft.setData(param1.actionPrc,_loc3_,_loc4_,IconText.GOLD);
+         }
+         else
+         {
+            this.actionPriceLeft.visible = false;
+         }
+         this.actionPriceLeft.visible = (isUseGoldAndCredits) && (this.actionPriceLeft.visible);
+         this.actionCredits.visible = (isUseGoldAndCredits) && !this.actionPriceLeft.visible;
       }
 
       private function updateModuleIcon(param1:StoreTableData) : void {

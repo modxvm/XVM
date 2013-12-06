@@ -53,6 +53,10 @@ package net.wg.gui.lobby.profile.components.chart
          this._data = param1;
       }
 
+      public function getData() : Object {
+         return this._data;
+      }
+
       override public function dispose() : void {
          super.dispose();
       }

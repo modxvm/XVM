@@ -2,8 +2,10 @@ package net.wg.gui.lobby.questsWindow
 {
    import scaleform.clik.core.UIComponent;
    import __AS3__.vec.Vector;
+   import net.wg.infrastructure.interfaces.ISubtaskComponent;
    import scaleform.clik.constants.InvalidationType;
    import flash.events.Event;
+   import flash.display.DisplayObject;
 
 
    public class SubtasksList extends UIComponent
@@ -12,7 +14,7 @@ package net.wg.gui.lobby.questsWindow
       public function SubtasksList() {
          this.data = [];
          super();
-         this._tasks = new Vector.<SubtaskComponent>();
+         this._tasks = new Vector.<ISubtaskComponent>();
          this._availableQuests = new Vector.<String>();
       }
 
@@ -20,7 +22,7 @@ package net.wg.gui.lobby.questsWindow
 
       private var data:Array;
 
-      private var _tasks:Vector.<SubtaskComponent> = null;
+      private var _tasks:Vector.<ISubtaskComponent> = null;
 
       private var _availableQuests:Vector.<String> = null;
 
@@ -70,7 +72,6 @@ package net.wg.gui.lobby.questsWindow
          super.draw();
          if(isInvalid(InvalidationType.DATA))
          {
-            this.clearTasks();
             this.createTasks();
             this.layoutTasks();
             this.disableInvalidQuests();
@@ -82,27 +83,14 @@ package net.wg.gui.lobby.questsWindow
       }
 
       private function disableInvalidQuests() : void {
-         var _loc1_:SubtaskComponent = null;
-         var _loc2_:* = false;
+         var _loc1_:ISubtaskComponent = null;
          if(this._needCheck)
          {
             for each (_loc1_ in this._tasks)
             {
-               _loc2_ = !(this._availableQuests.indexOf(_loc1_.data.questInfo.questID) == -1);
-               _loc1_.disableLinkBtn(_loc2_);
+               _loc1_.disableLinkBtns(this._availableQuests);
             }
          }
-      }
-
-      private function clearTasks() : void {
-         var _loc1_:* = 0;
-         while(_loc1_ < this._tasks.length)
-         {
-            this._tasks[_loc1_].dispose();
-            removeChild(this._tasks[_loc1_]);
-            _loc1_++;
-         }
-         this._tasks.splice(0,this._tasks.length);
       }
 
       private function layoutTasks() : void {
@@ -112,29 +100,68 @@ package net.wg.gui.lobby.questsWindow
             this._tasks[_loc1_].y = this._tasks[_loc1_-1].y + this._tasks[_loc1_-1].height;
             _loc1_++;
          }
-         var _loc2_:SubtaskComponent = this._tasks.length?this._tasks[this._tasks.length-1]:null;
+         var _loc2_:ISubtaskComponent = this._tasks.length?this._tasks[this._tasks.length-1]:null;
          var _loc3_:Number = _loc2_?_loc2_.y + _loc2_.height:0;
-         dispatchEvent(new Event(Event.RESIZE));
          setSize(this.width,_loc3_);
+         dispatchEvent(new Event(Event.RESIZE));
+      }
+
+      private function clearTasks() : void {
+         var _loc1_:* = 0;
+         while(_loc1_ < this._tasks.length)
+         {
+            this._tasks[_loc1_].dispose();
+            removeChild(DisplayObject(this._tasks[_loc1_]));
+            _loc1_++;
+         }
+         this._tasks.splice(0,this._tasks.length);
       }
 
       private function createTasks() : void {
          var _loc1_:* = 0;
          var _loc2_:* = 0;
-         var _loc3_:SubtaskComponent = null;
+         var _loc3_:* = 0;
+         var _loc4_:* = 0;
+         var _loc5_:ISubtaskComponent = null;
+         var _loc6_:ISubtaskComponent = null;
          if(this.data)
          {
             _loc1_ = this.data.length;
-            _loc2_ = 0;
-            while(_loc2_ < _loc1_)
+            if(this._tasks.length < _loc1_)
             {
-               _loc3_ = App.utils.classFactory.getComponent(this._linkage,SubtaskComponent);
-               this._tasks.push(_loc3_);
-               addChild(_loc3_);
-               _loc3_.setData(this.data[_loc2_]);
-               _loc3_.validateNow();
+               _loc3_ = _loc1_ - this._tasks.length;
+               _loc4_ = 0;
+               while(_loc4_ < _loc3_)
+               {
+                  _loc5_ = App.utils.classFactory.getComponent(this._linkage,ISubtaskComponent);
+                  this._tasks.push(_loc5_);
+                  addChild(DisplayObject(_loc5_));
+                  _loc4_++;
+               }
+            }
+            else
+            {
+               if(this._tasks.length > _loc1_)
+               {
+                  while(this._tasks.length > _loc1_)
+                  {
+                     _loc6_ = this._tasks.pop();
+                     _loc6_.dispose();
+                     removeChild(DisplayObject(_loc6_));
+                  }
+               }
+            }
+            _loc2_ = 0;
+            while(_loc2_ < this.data.length)
+            {
+               this._tasks[_loc2_].setData(this.data[_loc2_]);
+               this._tasks[_loc2_].validateNow();
                _loc2_++;
             }
+         }
+         else
+         {
+            this.clearTasks();
          }
       }
 

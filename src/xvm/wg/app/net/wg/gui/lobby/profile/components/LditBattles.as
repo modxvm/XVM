@@ -37,6 +37,10 @@ package net.wg.gui.lobby.profile.components
          this._losses = param2;
          this._draws = param3;
       }
+
+      override public function dispose() : void {
+         super.dispose();
+      }
    }
 
 }

@@ -111,6 +111,7 @@ package net.wg.gui.lobby.customization
          {
             this.view.invalidateListData(true);
          }
+         this.requestCurrentItem();
       }
 
       public function get currentItemData() : Object {
@@ -160,11 +161,11 @@ package net.wg.gui.lobby.customization
                _loc3_ = this.form.getSectionData(this.getSectionName());
                if(_loc3_ != null)
                {
-                  this.view.setListSelectedIndex(_loc3_.groupName,_loc3_._new);
+                  this.view.setListSelectedIndex(_loc3_.groupName,_loc2_.isIGR,_loc3_._new);
                }
                else
                {
-                  this.view.setListSelectedIndex(_loc2_.name,null);
+                  this.view.setListSelectedIndex(_loc2_.name,_loc2_.isIGR,null);
                }
             }
             this.view.invalidateListData(false);
@@ -262,30 +263,79 @@ package net.wg.gui.lobby.customization
          this.dropButton.enabled = !param1;
       }
 
+      public function refreshSelection(param1:Boolean=false) : void {
+         var _loc4_:* = 0;
+         var _loc6_:Object = null;
+         var _loc7_:Object = null;
+         var _loc2_:Number = 0;
+         var _loc3_:Object = this.form.getSectionData(this.getSectionName());
+         if(_loc3_ != null)
+         {
+            if(_loc3_._new.id != null)
+            {
+               this.newItemData = _loc3_._new;
+            }
+            if(_loc3_.selectedGroupIdx != null)
+            {
+               _loc2_ = _loc3_.selectedGroupIdx;
+            }
+         }
+         var _loc5_:int = this._groupsDataProvider.length;
+         if(!this._groupsDataProvider.requestItemAt(_loc2_).enabled)
+         {
+            _loc4_ = 0;
+            while(_loc4_ < _loc5_)
+            {
+               _loc6_ = this._groupsDataProvider.requestItemAt(_loc4_);
+               if(_loc6_.enabled)
+               {
+                  _loc2_ = _loc4_;
+                  break;
+               }
+               _loc4_++;
+            }
+         }
+         this.list.selectedIndex = _loc2_;
+         if(((param1) && (this.view)) && (this.view.rentalPackageDP) && (this.view.rentalPackageList))
+         {
+            _loc7_ = this.view.rentalPackageDP.requestItemAt(this.view.rentalPackageList.selectedIndex);
+            if((_loc7_) && !_loc7_.enabled)
+            {
+               _loc5_ = this.view.rentalPackageDP.length;
+               _loc4_ = 0;
+               while(_loc4_ < _loc5_)
+               {
+                  _loc6_ = this.view.rentalPackageDP.requestItemAt(_loc4_);
+                  if(_loc6_.enabled)
+                  {
+                     this.view.rentalPackageList.selectedIndex = _loc4_;
+                     break;
+                  }
+                  _loc4_++;
+               }
+            }
+         }
+      }
+
       override protected function configUI() : void {
-         var _loc2_:Object = null;
-         var _loc3_:String = null;
+         var _loc1_:Object = null;
+         var _loc2_:String = null;
          mouseChildren = true;
          mouseEnabled = true;
-         var _loc1_:Number = 0;
          if(this.form != null)
          {
-            _loc2_ = this.form.getSectionData(this.getSectionName());
-            if(_loc2_ != null)
+            _loc1_ = this.form.getSectionData(this.getSectionName());
+            if(_loc1_ != null)
             {
-               if(_loc2_._new.id != null)
+               if(_loc1_._new.id != null)
                {
-                  this.newItemData = _loc2_._new;
-               }
-               if(_loc2_.selectedGroupIdx != null)
-               {
-                  _loc1_ = _loc2_.selectedGroupIdx;
+                  this.newItemData = _loc1_._new;
                }
             }
             this.form.addEventListener(CustomizationEvent.CHANGE_ACTIONS_LOCK,this.handleChangeActionLock);
             this.form.addEventListener(CustomizationEvent.RESET_NEW_ITEM,this.handleResetNewItem);
-            _loc3_ = this.getViewLinkage();
-            this.view = BaseTimedCustomizationGroupView(this.form.showView(_loc3_));
+            _loc2_ = this.getViewLinkage();
+            this.view = BaseTimedCustomizationGroupView(this.form.showView(_loc2_));
             this.view.timeLabel = this.getTimeSectionLabel();
             this.view.itemsDP = this.getItemsDP();
             this.view.rentalPackageDP = this.getRentalPackagesDP();
@@ -297,7 +347,7 @@ package net.wg.gui.lobby.customization
          {
             this.list.labelField = this.getListLabelFieldName();
             this.list.dataProvider = this._groupsDataProvider;
-            this.list.selectedIndex = _loc1_;
+            this.refreshSelection();
             this.list.addEventListener(ListEvent.INDEX_CHANGE,this.handleChangeGroupSelectedIndex);
          }
          if(this.currentItemRenderer != null)
@@ -326,8 +376,7 @@ package net.wg.gui.lobby.customization
       }
 
       private function setNewItemView(param1:int, param2:Object, param3:int) : void {
-         var _loc4_:* = 0;
-         _loc4_ = param2.id;
+         var _loc4_:int = param2.id;
          if(this.currentItemData.id == _loc4_)
          {
             this.newItemData = this.getEmptyDataItem();
@@ -348,7 +397,8 @@ package net.wg.gui.lobby.customization
                "selectedGroupIdx":this.list.selectedIndex,
                "groupName":this.view.selectedGroupName,
                "price":this.newItemData.price,
-               "_new":this.newItemData
+               "_new":this.newItemData,
+               "isIGR":this._groupsDataProvider.requestItemAt(this.list.selectedIndex).isIGR
             }
          );
       }

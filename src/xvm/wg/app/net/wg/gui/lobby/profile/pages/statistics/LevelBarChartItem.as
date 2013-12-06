@@ -19,13 +19,13 @@ package net.wg.gui.lobby.profile.pages.statistics
          var _loc1_:StatisticChartInfo = StatisticChartInfo(_data);
          if(_loc1_.yField == -1)
          {
-            this.visible = false;
+            tweenManager.registerAndLaunch(tweeSpeed,this,{"alpha":0},getQuickSet());
          }
          else
          {
-            super.applyValueChange();
-            this.visible = true;
+            tweenManager.registerAndLaunch(tweeSpeed,this,{"alpha":1},getQuickSet());
          }
+         super.applyValueChange();
       }
 
       override protected function showToolTip(param1:IToolTipParams) : void {

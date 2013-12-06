@@ -49,6 +49,10 @@ package scaleform.clik.controls
          this.data = param1;
       }
 
+      public function getData() : Object {
+         return this.data;
+      }
+
       override public function toString() : String {
          return "[CLIK ListItemRenderer " + this.index + ", " + name + "]";
       }

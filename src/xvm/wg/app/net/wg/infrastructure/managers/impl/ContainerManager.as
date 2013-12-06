@@ -120,6 +120,7 @@ package net.wg.infrastructure.managers.impl
             delete this.tokenToView[[param1]];
             _loc3_.removeView();
             _loc3_.dispose();
+            _loc3_ = null;
             _loc2_ = true;
             this.updateFocus();
             return _loc2_;
@@ -327,43 +328,61 @@ package net.wg.infrastructure.managers.impl
       }
    }
 
-}   import net.wg.infrastructure.base.AbstractView;
+}   import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import net.wg.infrastructure.base.AbstractView;
    import net.wg.infrastructure.interfaces.IManagedContainer;
+   import net.wg.utils.IAssertable;
+   import net.wg.data.constants.Errors;
    import net.wg.infrastructure.interfaces.IAbstractWindowView;
    import flash.display.DisplayObject;
 
 
-   class ViewInfo extends Object
+   class ViewInfo extends Object implements IDisposable
    {
           
       function ViewInfo(param1:IManagedContainer, param2:AbstractView) {
          super();
-         this.container = param1;
-         this.view = param2;
+         App.utils.asserter.assertNotNull(param1,"_container " + Errors.CANT_NULL);
+         this._container = param1;
+         this._view = param2;
       }
 
-      public var view:AbstractView;
+      private var _view:AbstractView = null;
 
-      public var container:IManagedContainer;
+      private var _container:IManagedContainer = null;
 
       public function dispose() : void {
-         this.container = null;
-         this.view = null;
+         this._container = null;
+         this._view = null;
       }
 
       public function addView() : void {
-         this.container.addChild(this.view);
+         this._container.addChild(this._view);
       }
 
       public function setFocused() : void {
-         this.container.setFocusedView(this.view);
+         this._container.setFocusedView(this._view);
       }
 
       public function removeView() : void {
-         var _loc1_:DisplayObject = this.view  is  IAbstractWindowView?DisplayObject((this.view as IAbstractWindowView).window):this.view;
-         if(this.container.contains(_loc1_))
+         var _loc1_:IAssertable = App.utils.asserter;
+         _loc1_.assertNotNull(this._container,"_container " + Errors.CANT_NULL);
+         _loc1_.assertNotNull(this._view,"_view " + Errors.CANT_NULL);
+         var _loc2_:DisplayObject = this._view  is  IAbstractWindowView?DisplayObject((this._view as IAbstractWindowView).window):this._view;
+         if(_loc2_)
          {
-            this.container.removeChild(this.view);
+            if(this._container.contains(_loc2_))
+            {
+               this._container.removeChild(this._view);
+            }
          }
+      }
+
+      public function get view() : AbstractView {
+         return this._view;
+      }
+
+      public function get container() : IManagedContainer {
+         return this._container;
       }
    }

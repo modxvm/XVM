@@ -5,7 +5,7 @@ package net.wg.gui.cyberSport.views.unit
    import flash.text.TextField;
    import net.wg.gui.cyberSport.controls.GrayButtonText;
    import flash.display.MovieClip;
-   import net.wg.gui.cyberSport.vo.UnitVO;
+   import net.wg.gui.cyberSport.vo.UnitShortVO;
    import scaleform.clik.events.ButtonEvent;
    import flash.events.MouseEvent;
    import __AS3__.vec.Vector;
@@ -54,7 +54,7 @@ package net.wg.gui.cyberSport.views.unit
 
       public var slot6:SimpleSlotRenderer;
 
-      protected var model:UnitVO;
+      protected var model:UnitShortVO;
 
       private var slots:Array;
 
@@ -62,7 +62,7 @@ package net.wg.gui.cyberSport.views.unit
          this.slots = [this.slot0,this.slot1,this.slot2,this.slot3,this.slot4,this.slot5,this.slot6];
       }
 
-      public function setData(param1:UnitVO) : void {
+      public function setData(param1:UnitShortVO) : void {
          this.model = param1;
          invalidateData();
       }
@@ -82,6 +82,8 @@ package net.wg.gui.cyberSport.views.unit
          this.freezeIcon.addEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
          this.restrictionIcon.addEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
          this.restrictionIcon.addEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
+         this.headerTF.addEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
+         this.headerTF.addEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
       }
 
       override protected function draw() : void {
@@ -92,7 +94,7 @@ package net.wg.gui.cyberSport.views.unit
          {
             if(this.model)
             {
-               this.headerTF.text = App.utils.locale.makeString(CYBERSPORT.WINDOW_UNITLISTVIEW_SELECTEDTEAM) + " " + this.model.commanderName;
+               App.utils.commons.formatPlayerName(this.headerTF,App.utils.locale.makeString(CYBERSPORT.WINDOW_UNITLISTVIEW_SELECTEDTEAM) + " " + this.model.commander.name,this.model.commander.clan,this.model.commander.region,this.model.commander.isIgr);
                this.descriptionTF.text = this.model.description;
                this.freezeIcon.visible = this.model.isFreezed;
                this.restrictionIcon.visible = this.model.hasRestrictions;
@@ -122,6 +124,9 @@ package net.wg.gui.cyberSport.views.unit
             case this.joinButton:
                App.toolTipMgr.showComplex(TOOLTIPS.CYBERSPORT_UNITLIST_JOIN);
                break;
+            case this.headerTF:
+               App.toolTipMgr.show(App.utils.locale.makeString(CYBERSPORT.WINDOW_UNITLISTVIEW_SELECTEDTEAM) + " " + this.model.commander.getToolTip());
+               break;
          }
       }
 
@@ -142,6 +147,8 @@ package net.wg.gui.cyberSport.views.unit
          this.freezeIcon.removeEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
          this.restrictionIcon.removeEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
          this.restrictionIcon.removeEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
+         this.headerTF.removeEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
+         this.headerTF.removeEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
          for each (_loc1_ in this.slots)
          {
             _loc1_.dispose();

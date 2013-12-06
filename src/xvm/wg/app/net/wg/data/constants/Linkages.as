@@ -53,6 +53,8 @@ package net.wg.data.constants
 
       public static const TICKER_ITEM:String = "TickerItemUI";
 
+      public static const PROGRESS_ELEMENT:String = "ProgressElement_UI";
+
       public static const PERSONAL_CASE_STATS:String = "crewTankmanStats";
 
       public static const PERSONAL_CASE_RETRAINING:String = "CrewTankmanRetraining";

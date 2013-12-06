@@ -5,6 +5,7 @@ package net.wg.gui.lobby.window
    import net.wg.gui.components.controls.NumericStepper;
    import flash.display.MovieClip;
    import net.wg.gui.components.controls.IconText;
+   import net.wg.gui.components.controls.ActionPrice;
    import flash.display.Sprite;
    import net.wg.gui.components.controls.SoundButtonEx;
    import net.wg.gui.components.advanced.SkillsItemRenderer;
@@ -43,6 +44,8 @@ package net.wg.gui.lobby.window
 
       public var itToPay:IconText;
 
+      public var actionPrice:ActionPrice;
+
       public var background:Sprite;
 
       public var warningMc:ExchangeFreeToTankmanXpWarning;
@@ -72,7 +75,9 @@ package net.wg.gui.lobby.window
          invalidate(INIT_DATA_INVALID);
       }
 
-      public function as_setCalcValueResponse(param1:Number) : void {
+      public function as_setCalcValueResponse(param1:Number, param2:Number, param3:Number) : void {
+         this.actionPrice.setData(param3,param1,param2,IconText.FREE_XP);
+         this.itToPay.visible = !this.actionPrice.visible;
          this.itToPay.text = App.utils.locale.integer(param1);
          this.submitBtn.enabled = param1 > 0;
          this.initData.afterSkill.level = this.selectedValue;

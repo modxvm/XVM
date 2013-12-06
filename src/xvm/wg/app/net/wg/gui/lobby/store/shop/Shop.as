@@ -21,7 +21,7 @@ package net.wg.gui.lobby.store.shop
             param1.setSubFilterData(nation,subFilterData);
          }
          param1.update(getViewData(param2));
-         storeTable.updateHeaderCountTitle(MENU.shop_table_header_count(param1.fittingType));
+         form.storeTable.updateHeaderCountTitle(MENU.shop_table_header_count(param1.fittingType));
       }
 
       override protected function getLocalizator() : Function {
@@ -30,14 +30,14 @@ package net.wg.gui.lobby.store.shop
 
       override protected function onPopulate() : void {
          super.onPopulate();
-         storeTable.setModuleRendererLinkage(Linkages.SHOP_MODULE_ITEM_RENDERER);
-         storeTable.setVehicleRendererLinkage(Linkages.SHOP_VEHICLE_ITEM_RENDERER);
-         storeTable.addEventListener(StoreEvent.BUY,this.onBuyItemHandler);
+         form.storeTable.setModuleRendererLinkage(Linkages.SHOP_MODULE_ITEM_RENDERER);
+         form.storeTable.setVehicleRendererLinkage(Linkages.SHOP_VEHICLE_ITEM_RENDERER);
+         form.storeTable.addEventListener(StoreEvent.BUY,this.onBuyItemHandler);
       }
 
       override protected function onDispose() : void {
          super.onDispose();
-         storeTable.removeEventListener(StoreEvent.SELL,this.onBuyItemHandler);
+         form.storeTable.removeEventListener(StoreEvent.SELL,this.onBuyItemHandler);
       }
 
       override protected function onMenuChangeType() : void {
@@ -46,7 +46,7 @@ package net.wg.gui.lobby.store.shop
          {
             _loc1_ = getCurrentView();
             assertNotNull(_loc1_,"currentView");
-            _loc1_.setSubFilterData(nationFilter.nation.selectedIndex-1,subFilterData);
+            _loc1_.setSubFilterData(form.nationFilter.nation.selectedIndex-1,subFilterData);
          }
          super.onMenuChangeType();
       }

@@ -38,8 +38,8 @@ package net.wg.gui.components.advanced
       private function iconLoadingCompleteHandler(param1:UILoaderEvent) : void {
          this.inv = true;
          invalidate();
-         this.loader.x = (_width - this.loader.width) / 2;
-         this.loader.y = (_height - this.loader.height) / 2;
+         this.loader.x = Math.round((_width - this.loader.width) / 2);
+         this.loader.y = Math.round((_height - this.loader.height) / 2);
       }
 
       override protected function draw() : void {

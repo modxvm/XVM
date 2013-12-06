@@ -26,7 +26,7 @@ package net.wg.gui.lobby.profile.data
 
       public var clanPosition:String = "";
 
-      public var clanEmblem:*;
+      public var clanEmblem:* = null;
    }
 
 }

@@ -45,7 +45,7 @@ package net.wg.gui.prebattle
           
       public function _Importer() {
          super();
-         importClasses(Vector.<Class>([BattleSessionList,BattleSessionListRenderer,BattleSessionWindow,BSListRendererVO,FlagsList,RequirementInfo,TopInfo,TopStats,CompaniesListWindow,CompaniesScrollingList,CompaniesListWindow,CompaniesScrollingList,CompanyDropItemRenderer,CompanyDropList,CompanyEvent,CompanyListItemRenderer,CompanyWindow,GroupPlayersDropDownMenu,PrebattleStateFlags,PrebattleStateString,TeamMemberRenderer,PlayerPrbInfoVO,InviteStackContainerBase,NotificationInvitesWindow,PrbInviteSearchUsersForm,PrbSendInviteCIGenerator,PrbSendInvitesWindow,ReceivedInviteWindow,SendInvitesEvent,UserRosterItemRenderer,UserRosterView,ChannelWindow,LazyWindow,MemberDataProvider,MessengerUtils,SquadItemRenderer,SquadWindow,SquadWindowCIGenerator,UserDataFlags]));
+         importClasses(Vector.<Class>([BattleSessionList,BattleSessionListRenderer,BattleSessionWindow,BSListRendererVO,FlagsList,RequirementInfo,TopInfo,TopStats,CompaniesListWindow,CompaniesScrollingList,CompaniesListWindow,CompaniesScrollingList,CompanyDropItemRenderer,CompanyDropList,CompanyEvent,CompanyListItemRenderer,CompanyWindow,GroupPlayersDropDownMenu,PrebattleStateFlags,PrebattleStateString,TeamMemberRenderer,PlayerPrbInfoVO,InviteStackContainerBase,NotificationInvitesWindow,PrbInviteSearchUsersForm,PrbSendInviteCIGenerator,PrbSendInvitesWindow,ReceivedInviteWindow,SendInvitesEvent,UserRosterItemRenderer,UserRosterView,ChannelWindow,LazyWindow,MemberDataProvider,MessengerUtils,SquadItemRenderer,SquadWindow,SquadWindowCIGenerator,UserDataFlags,CompanyEvent]));
       }
    }
 

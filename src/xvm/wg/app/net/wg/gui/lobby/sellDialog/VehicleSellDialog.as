@@ -7,6 +7,7 @@ package net.wg.gui.lobby.sellDialog
    import __AS3__.vec.Vector;
    import net.wg.infrastructure.interfaces.ISaleItemBlockRenderer;
    import scaleform.clik.motion.Tween;
+   import org.idmedia.as3commons.util.StringUtils;
    import net.wg.gui.events.VehicleSellDialogEvent;
    import scaleform.clik.events.ButtonEvent;
    import flash.events.Event;
@@ -120,10 +121,22 @@ package net.wg.gui.lobby.sellDialog
          }
       }
 
-      public function as_setControlNumber(param1:String) : void {
+      public function as_setControlNumber(param1:Boolean, param2:String) : void {
+         var _loc3_:String = null;
          if(this.controlQuestion)
          {
-            this.controlQuestion.controlText = param1;
+            _loc3_ = null;
+            if(param1)
+            {
+               _loc3_ = App.utils.locale.gold(param2);
+               _loc3_ = StringUtils.trim(_loc3_);
+            }
+            else
+            {
+               _loc3_ = App.utils.locale.integer(param2);
+            }
+            this.controlQuestion.controlText = param2;
+            this.controlQuestion.formattedControlText = _loc3_;
             this.controlQuestion.invalidateData();
          }
       }
@@ -169,14 +182,16 @@ package net.wg.gui.lobby.sellDialog
          this.result_mc.goldIT.textColor = _loc2_;
       }
 
-      public function as_setData(param1:Object, param2:Object, param3:Object, param4:Number, param5:Number) : void {
+      public function as_setData(param1:Object, param2:Object, param3:Object, param4:Object, param5:Number) : void {
          this.slidingComponent.sellData = [];
          this.accGold = param5;
          this.goldCommon = 0;
          this.vehicleData = param1;
          this.modulesData = param2;
          this.shellsData = param3;
-         this.devicesComponent.removePrice = param4;
+         this.devicesComponent.removePrice = param4.hasOwnProperty("removePrice")?param4.removePrice:0;
+         this.devicesComponent.defRemovePrice = param4.hasOwnProperty("defRemovePrice")?param4.defRemovePrice:0;
+         this.devicesComponent.removeActionPrc = param4.hasOwnProperty("actionPrc")?param4.actionPrc:0;
          this.window.title = App.utils.locale.makeString(DIALOGS.VEHICLESELLDIALOG_TITLE,{"name":param1.userName});
          invalidateData();
       }
@@ -294,7 +309,7 @@ package net.wg.gui.lobby.sellDialog
          }
          if(_loc8_ > 0)
          {
-            this.result_mc.creditsIT.text = "+ " + _loc3_.gold(_loc8_);
+            this.result_mc.creditsIT.text = "+ " + _loc3_.integer(_loc8_);
          }
          else
          {
@@ -303,7 +318,7 @@ package net.wg.gui.lobby.sellDialog
          if((this.controlQuestion) && (this.controlQuestion.visible))
          {
             this.controlQuestion.cleanField();
-            setResultCreditS(_loc8_ == 0?_loc6_:_loc8_);
+            setResultCreditS(Boolean(_loc8_ == 0),_loc8_ == 0?_loc6_:_loc8_);
             if(this.controlQuestion.userInput.focused == false)
             {
                App.utils.scheduler.envokeInNextFrame(this.updateFocus,this.controlQuestion.userInput);
@@ -311,7 +326,7 @@ package net.wg.gui.lobby.sellDialog
          }
          if(param1 - this.headerComponent.tankPrice > 0)
          {
-            this.slidingComponent.settingsBtn.creditsIT.text = "+ " + _loc3_.gold(param1 - this.headerComponent.tankPrice);
+            this.slidingComponent.settingsBtn.creditsIT.text = "+ " + _loc3_.integer(param1 - this.headerComponent.tankPrice);
             this.slidingComponent.settingsBtn.creditsIT.validateNow();
          }
          else
@@ -372,25 +387,29 @@ package net.wg.gui.lobby.sellDialog
             {
                switch(this.renderersArr[_loc8_].type)
                {
-                  case "optDevices":
+                  case SaleItemBlockRenderer.ITEM_TYPE_OPTIONAL_DEVICE:
                      _loc2_.push(this.renderersArr[_loc8_].dataInfo);
                      break;
-                  case "shells":
-                     _loc3_.push(this.renderersArr[_loc8_].dataInfo);
+                  case SaleItemBlockRenderer.ITEM_TYPE_SHELL:
+                     if(this.renderersArr[_loc8_].itemInInventory)
+                     {
+                        _loc6_.push(this.renderersArr[_loc8_].dataInfo);
+                     }
+                     else
+                     {
+                        _loc3_.push(this.renderersArr[_loc8_].dataInfo);
+                     }
                      break;
-                  case "eqs":
+                  case SaleItemBlockRenderer.ITEM_TYPE_EQUIPMENT:
                      _loc4_.push(this.renderersArr[_loc8_].dataInfo);
                      break;
-                  case "modules":
+                  case SaleItemBlockRenderer.ITEM_TYPE_MODULE:
                      _loc9_ = 0;
                      while(_loc9_ < this.modulesData.length)
                      {
                         _loc6_.push(this.modulesData[_loc9_][0]);
                         _loc9_++;
                      }
-                     break;
-                  case "invShells":
-                     _loc6_.push(this.renderersArr[_loc8_].dataInfo);
                      break;
                }
             }

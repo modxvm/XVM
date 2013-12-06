@@ -11,6 +11,7 @@ package net.wg.gui.lobby.recruitWindow
    import scaleform.clik.data.DataProvider;
    import scaleform.clik.events.ListEvent;
    import scaleform.clik.constants.InvalidationType;
+   import net.wg.gui.components.controls.IconText;
    import scaleform.clik.utils.Constraints;
    import scaleform.clik.constants.ConstrainMode;
    import net.wg.utils.IFocusHandler;
@@ -119,13 +120,14 @@ package net.wg.gui.lobby.recruitWindow
             this.vehicleClassDropdown.validateNow();
             this.vehicleTypeDropdown.validateNow();
             this.roleDropdown.validateNow();
-            this.btnAcademy.price = String(this.data.academyUpgrade);
-            if(this.data.gold < this.data.academyUpgrade)
+            this.btnAcademy.updatePrice(this.data.academyUpgradeActionPrc,this.data.academyUpgradePrice,this.data.academyUpgradeDefPrice,IconText.GOLD);
+            if(this.data.gold < this.data.academyUpgradePrice)
             {
                this.btnAcademy.enabled = false;
             }
-            this.btnScool.price = String(this.data.schoolUpgrade);
-            if(this.data.credits < this.data.schoolUpgrade)
+            this.btnScool.updatePrice(this.data.schoolUpgradeActionPrc,this.data.schoolUpgradePrice,this.data.schoolUpgradeDefPrice,IconText.CREDITS);
+            this.btnCourses.updatePrice(0,0,0,"");
+            if(this.data.credits < this.data.schoolUpgradePrice)
             {
                this.btnScool.enabled = false;
             }
@@ -293,11 +295,11 @@ package net.wg.gui.lobby.recruitWindow
       }
 
       public function as_setCreditsChanged(param1:Number) : void {
-         this.btnScool.enabled = param1 > this.data.schoolUpgrade;
+         this.btnScool.enabled = param1 > this.data.schoolUpgradePrice;
       }
 
       public function as_setGoldChanged(param1:Number) : void {
-         this.btnAcademy.enabled = param1 > this.data.academyUpgrade;
+         this.btnAcademy.enabled = param1 > this.data.academyUpgradePrice;
       }
 
       private function setDefaultSelection() : void {

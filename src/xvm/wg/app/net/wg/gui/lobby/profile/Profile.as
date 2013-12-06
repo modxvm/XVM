@@ -2,12 +2,11 @@ package net.wg.gui.lobby.profile
 {
    import net.wg.infrastructure.base.meta.impl.ProfileMeta;
    import net.wg.infrastructure.base.meta.IProfileMeta;
-   import flash.display.Sprite;
+   import net.wg.gui.components.windows.ScreenBg;
    import scaleform.clik.events.InputEvent;
    import net.wg.data.Aliases;
    import flash.ui.Keyboard;
    import flash.events.KeyboardEvent;
-   import net.wg.data.gui_items.dossier.AccountDossier;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.data.constants.LobbyMetrics;
 
@@ -19,11 +18,7 @@ package net.wg.gui.lobby.profile
          super();
       }
 
-      public var background:Sprite;
-
-      public var headerBackground:Sprite;
-
-      public var mainBackground:Sprite;
+      public var screenBg:ScreenBg = null;
 
       public var tabNavigator:ProfileTabNavigator;
 
@@ -39,9 +34,7 @@ package net.wg.gui.lobby.profile
       }
 
       public function as_update(param1:Object) : void {
-         var _loc2_:String = param1?param1.toString():null;
-         var _loc3_:AccountDossier = new AccountDossier(_loc2_);
-         this.tabNavigator.viewStack.updateData(_loc3_);
+          
       }
 
       override public function updateStage(param1:Number, param2:Number) : void {
@@ -52,15 +45,19 @@ package net.wg.gui.lobby.profile
          super.draw();
          if(isInvalid(InvalidationType.SIZE))
          {
-            this.background.width = _width;
-            this.background.height = _height + LobbyMetrics.LOBBY_MESSENGER_HEIGHT;
+            this.screenBg.setSize(_width,_height + LobbyMetrics.LOBBY_MESSENGER_HEIGHT);
             this.tabNavigator.setAvailableSize(_width,_height - this.tabNavigator.y);
-            this.headerBackground.x = _width - this.headerBackground.width >> 1;
-            this.mainBackground.x = _width - this.mainBackground.width >> 1;
          }
       }
 
       override protected function onDispose() : void {
+         if(this.screenBg)
+         {
+            this.screenBg.parent.removeChild(this.screenBg);
+            this.screenBg.dispose();
+            this.screenBg = null;
+         }
+         this.tabNavigator.dispose();
          App.gameInputMgr.clearKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN);
          super.onDispose();
       }

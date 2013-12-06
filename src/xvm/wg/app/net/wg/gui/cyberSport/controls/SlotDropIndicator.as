@@ -16,6 +16,8 @@ package net.wg.gui.cyberSport.controls
       public function SlotDropIndicator() {
          super();
          addEventListener(MouseEvent.CLICK,this.onClickHandler);
+         addEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
+         addEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
       }
 
       private var _data:UnitCandidateVO = null;
@@ -31,6 +33,8 @@ package net.wg.gui.cyberSport.controls
       override public function dispose() : void {
          this._data = null;
          removeEventListener(MouseEvent.CLICK,this.onClickHandler);
+         removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
+         removeEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
          super.dispose();
       }
 
@@ -48,7 +52,7 @@ package net.wg.gui.cyberSport.controls
       private function updateMouseEnabled() : void {
          if(this._isCurrentUserCommander)
          {
-            mouseEnabled = this._index > 0 && (((this._isHighlighted) || (this._data)) || this._index >= 5);
+            mouseEnabled = this._index > 0 && ((this._isHighlighted) || (this._data));
          }
          else
          {
@@ -98,6 +102,17 @@ package net.wg.gui.cyberSport.controls
                dispatchEvent(new CSComponentEvent(CSComponentEvent.IGNORE_USER_REQUEST,this._data.databaseID));
                break;
          }
+      }
+
+      private function onRollOverHandler(param1:MouseEvent) : void {
+         if(this._data)
+         {
+            App.toolTipMgr.show(this._data.getToolTip());
+         }
+      }
+
+      private function onRollOutHandler(param1:MouseEvent) : void {
+         App.toolTipMgr.hide();
       }
    }
 

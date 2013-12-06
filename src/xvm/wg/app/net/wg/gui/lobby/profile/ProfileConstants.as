@@ -9,7 +9,7 @@ package net.wg.gui.lobby.profile
          super();
       }
 
-      public static const WINDOW_WIDTH:uint = 988;
+      public static const WINDOW_WIDTH:uint = 1000;
 
       public static const MIN_APP_WIDTH:uint = 1024;
 

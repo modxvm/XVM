@@ -8,6 +8,7 @@ package net.wg.gui.lobby.hangar.maintenance.data
    {
           
       public function ModuleVO(param1:Object) {
+         this.userCredits = [];
          super(param1);
          this._originalHash = param1;
       }
@@ -25,6 +26,10 @@ package net.wg.gui.lobby.hangar.maintenance.data
       public var compactDescr:int;
 
       public var prices:Array = null;
+
+      public var defPrices:Array = null;
+
+      public var actionPrc:Number = 0;
 
       public var currency:String = "";
 
@@ -44,6 +49,8 @@ package net.wg.gui.lobby.hangar.maintenance.data
 
       public var goldEqsForCredits:Boolean;
 
+      public var userCredits:Array;
+
       public function clone(param1:int) : ModuleVO {
          var _loc2_:ModuleVO = new ModuleVO(this._originalHash);
          _loc2_.slotIndex = param1;
@@ -56,6 +63,10 @@ package net.wg.gui.lobby.hangar.maintenance.data
 
       public function get price() : int {
          return this.prices[this.currency == Currencies.CREDITS?0:1];
+      }
+
+      public function get defPrice() : int {
+         return this.defPrices[this.currency == Currencies.CREDITS?0:1];
       }
 
       override public function dispose() : void {

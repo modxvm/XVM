@@ -6,7 +6,7 @@ package net.wg.infrastructure.base.meta
    public interface IRosterSlotSettingsWindowMeta extends IEventDispatcher
    {
           
-      function onFiltersUpdateS(param1:int, param2:String, param3:Boolean) : void;
+      function onFiltersUpdateS(param1:int, param2:String, param3:Boolean, param4:int) : void;
 
       function getFilterDataS() : Object;
 

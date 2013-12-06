@@ -25,6 +25,7 @@ package net.wg.gui.lobby.tankman
    import net.wg.utils.IUtils;
    import net.wg.data.constants.Linkages;
    import flash.events.EventDispatcher;
+   import flash.events.Event;
 
 
    public class PersonalCase extends PersonalCaseBase
@@ -533,7 +534,7 @@ package net.wg.gui.lobby.tankman
          onWindowCloseS();
       }
 
-      private function hideTooltip(param1:ButtonEvent) : void {
+      private function hideTooltip(param1:Event) : void {
          App.toolTipMgr.hide();
       }
 

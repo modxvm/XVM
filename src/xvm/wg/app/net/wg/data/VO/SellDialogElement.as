@@ -17,11 +17,37 @@ package net.wg.data.VO
 
       private var _type:String;
 
+      private var _itemInInventory:Boolean = false;
+
       private var _inInventory:Boolean;
 
       private var _moneyValue:Number;
 
+      private var _defMoneyValue:Number;
+
       private var _removePrice:Number;
+
+      private var _defRemovePrice:Number;
+
+      private var _actionPrc:Number = 0;
+
+      private var _removeActionPrc:Number = 0;
+
+      public function get removeActionPrc() : Number {
+         return this._removeActionPrc;
+      }
+
+      public function set removeActionPrc(param1:Number) : void {
+         this._removeActionPrc = param1;
+      }
+
+      public function get actionPrc() : Number {
+         return this._actionPrc;
+      }
+
+      public function set actionPrc(param1:Number) : void {
+         this._actionPrc = param1;
+      }
 
       public function get removePrice() : Number {
          return this._removePrice;
@@ -31,12 +57,28 @@ package net.wg.data.VO
          this._removePrice = param1;
       }
 
+      public function get defRemovePrice() : Number {
+         return this._defRemovePrice;
+      }
+
+      public function set defRemovePrice(param1:Number) : void {
+         this._defRemovePrice = param1;
+      }
+
       public function get moneyValue() : Number {
          return this._moneyValue;
       }
 
       public function set moneyValue(param1:Number) : void {
          this._moneyValue = param1;
+      }
+
+      public function get defMoneyValue() : Number {
+         return this._defMoneyValue;
+      }
+
+      public function set defMoneyValue(param1:Number) : void {
+         this._defMoneyValue = param1;
       }
 
       public function get inInventory() : Boolean {
@@ -53,6 +95,14 @@ package net.wg.data.VO
 
       public function set type(param1:String) : void {
          this._type = param1;
+      }
+
+      public function get itemInInventory() : Boolean {
+         return this._itemInInventory;
+      }
+
+      public function set itemInInventory(param1:Boolean) : void {
+         this._itemInInventory = param1;
       }
 
       public function get data() : Object {

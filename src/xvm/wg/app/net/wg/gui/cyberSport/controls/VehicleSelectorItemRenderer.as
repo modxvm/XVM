@@ -7,8 +7,10 @@ package net.wg.gui.cyberSport.controls
    import flash.text.TextField;
    import net.wg.gui.cyberSport.vo.VehicleSelectorItemVO;
    import __AS3__.vec.Vector;
-   import scaleform.clik.events.ButtonEvent;
+   import flash.geom.Point;
+   import net.wg.data.constants.Cursors;
    import flash.events.MouseEvent;
+   import scaleform.clik.events.ButtonEvent;
    import scaleform.gfx.MouseEventEx;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.gui.cyberSport.controls.events.VehicleSelectorItemEvent;
@@ -25,7 +27,10 @@ package net.wg.gui.cyberSport.controls
          this.statesSelectedNotReady = Vector.<String>(["notReady_selected_",""]);
          this.statesNotReady = Vector.<String>(["notReady_",""]);
          super();
+         this.notReadyAlert.visible = false;
          preventAutosizing = true;
+         this.notReadyAlert.addEventListener(MouseEvent.ROLL_OVER,this.notReadyAlert_rollOverHandler);
+         this.notReadyAlert.addEventListener(MouseEvent.ROLL_OUT,this.notReadyAlert_rollOutHandler);
       }
 
       private static const MODE_MULTI:String = "multiSelection";
@@ -46,6 +51,10 @@ package net.wg.gui.cyberSport.controls
 
       public var vehicleNameTF:TextField;
 
+      public var notReadyAlert:MovieClip;
+
+      public var bg:MovieClip;
+
       protected var model:VehicleSelectorItemVO;
 
       private var _multiSelectionMode:Boolean = false;
@@ -59,11 +68,25 @@ package net.wg.gui.cyberSport.controls
       protected var statesNotReady:Vector.<String>;
 
       override protected function getStatePrefixes() : Vector.<String> {
+         var _loc2_:Vector.<String> = null;
          var _loc1_:Boolean = this.model?this.model.selected:false;
-         return _loc1_?this._isVehicleReady?statesSelected:this.statesSelectedNotReady:this._isVehicleReady?statesDefault:this.statesNotReady;
+         _loc2_ = _loc1_?this._isVehicleReady?statesSelected:this.statesSelectedNotReady:this._isVehicleReady?statesDefault:this.statesNotReady;
+         var _loc3_:Boolean = _loc2_ == this.statesSelectedNotReady || _loc2_ == this.statesNotReady;
+         this.mouseChildren = true;
+         if(this.bg)
+         {
+            this.bg.mouseEnabled = false;
+         }
+         this.notReadyAlert.visible = _loc3_;
+         this.notReadyAlert.buttonMode = (_loc3_) && (enabled);
+         this.notReadyAlert.mouseEnabled = true;
+         return _loc2_;
       }
 
       override public function setData(param1:Object) : void {
+         var _loc2_:Point = null;
+         var _loc3_:* = false;
+         var _loc4_:* = false;
          this.model = param1 as VehicleSelectorItemVO;
          if(this.model)
          {
@@ -71,11 +94,84 @@ package net.wg.gui.cyberSport.controls
             enabled = this.checkBox.enabled = this.model.enabled;
             this._isVehicleReady = this._userVehiclesMode?this.model.isReadyToFight:true;
             setState(state);
+            _loc2_ = new Point(mouseX,mouseY);
+            _loc2_ = localToGlobal(_loc2_);
+            _loc3_ = this.notReadyAlert.hitTestPoint(_loc2_.x,_loc2_.y,true);
+            _loc4_ = this.hitTestPoint(_loc2_.x,_loc2_.y,true);
+            if(_loc3_)
+            {
+               if(!this._isVehicleReady)
+               {
+                  if((this.notReadyAlert.mouseEnabled) && (this.notReadyAlert.buttonMode))
+                  {
+                     App.cursor.setCursor(Cursors.BUTTON);
+                  }
+                  else
+                  {
+                     App.cursor.setCursor(Cursors.ARROW);
+                  }
+                  App.toolTipMgr.showComplex(TOOLTIPS.CYBERSPORT_VEHICLESELECTOR_NOTREADY);
+               }
+               else
+               {
+                  App.toolTipMgr.hide();
+               }
+            }
+            if((_loc4_) && !_loc3_)
+            {
+               if(!enabled)
+               {
+                  App.toolTipMgr.showComplex(TOOLTIPS.CYBERSPORT_VEHICLESELECTOR_OVERFLOWLEVEL);
+               }
+               else
+               {
+                  if((enabled) && !_loc3_)
+                  {
+                     App.toolTipMgr.hide();
+                  }
+               }
+            }
             invalidateData();
          }
          else
          {
             visible = false;
+         }
+      }
+
+      override protected function handleMouseRollOver(param1:MouseEvent) : void {
+         super.handleMouseRollOver(param1);
+         if(!enabled && !this.mouseOverAlert)
+         {
+            App.toolTipMgr.showComplex(TOOLTIPS.CYBERSPORT_VEHICLESELECTOR_OVERFLOWLEVEL);
+         }
+      }
+
+      private var mouseOverAlert:Boolean = false;
+
+      override protected function handleMouseRollOut(param1:MouseEvent) : void {
+         super.handleMouseRollOut(param1);
+         if(!enabled)
+         {
+            App.toolTipMgr.hide();
+         }
+      }
+
+      private function notReadyAlert_rollOverHandler(param1:MouseEvent) : void {
+         this.mouseOverAlert = true;
+         if(!enabled)
+         {
+            App.toolTipMgr.hide();
+         }
+         App.toolTipMgr.showComplex(TOOLTIPS.CYBERSPORT_VEHICLESELECTOR_NOTREADY);
+      }
+
+      private function notReadyAlert_rollOutHandler(param1:MouseEvent) : void {
+         this.mouseOverAlert = false;
+         App.toolTipMgr.hide();
+         if(!enabled)
+         {
+            App.toolTipMgr.showComplex(TOOLTIPS.CYBERSPORT_VEHICLESELECTOR_OVERFLOWLEVEL);
          }
       }
 
@@ -151,6 +247,13 @@ package net.wg.gui.cyberSport.controls
 
       override protected function draw() : void {
          super.draw();
+         if(isInvalid(InvalidationType.STATE))
+         {
+            if(this.bg)
+            {
+               this.bg.mouseEnabled = false;
+            }
+         }
          if((isInvalid(InvalidationType.DATA)) && (this.model))
          {
             this.checkBox.selected = this.model.selected;
@@ -169,6 +272,8 @@ package net.wg.gui.cyberSport.controls
          {
             this.model.dispose();
          }
+         this.notReadyAlert.removeEventListener(MouseEvent.ROLL_OVER,this.notReadyAlert_rollOverHandler);
+         this.notReadyAlert.removeEventListener(MouseEvent.ROLL_OUT,this.notReadyAlert_rollOutHandler);
          super.dispose();
       }
    }

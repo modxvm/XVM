@@ -6,6 +6,7 @@ package net.wg.gui.lobby.hangar.maintenance
    import net.wg.gui.components.controls.DropdownMenu;
    import flash.text.TextField;
    import net.wg.gui.components.controls.IconText;
+   import net.wg.gui.components.controls.ActionPrice;
    import net.wg.utils.IEventCollector;
    import scaleform.clik.events.ListEvent;
    import net.wg.gui.lobby.hangar.maintenance.data.ModuleVO;
@@ -66,6 +67,8 @@ package net.wg.gui.lobby.hangar.maintenance
 
       public var price:IconText;
 
+      public var actionPrice:ActionPrice;
+
       public var toBuyTf:TextField;
 
       public var toBuyDropdown:DropdownMenu;
@@ -84,19 +87,23 @@ package net.wg.gui.lobby.hangar.maintenance
 
       private var installedData:Array;
 
-      private var credits:int;
+      private var credits:Number;
 
-      private var gold:int;
+      private var gold:Number;
+
+      private var actionPrc:Number = 0;
 
       override public function dispose() : void {
          var _loc1_:IEventCollector = App.utils.events;
          _loc1_.removeEvent(this.toBuyDropdown,ListEvent.INDEX_CHANGE,this.onModuleCurrencyChanged);
          _loc1_.removeEvent(this.select,ListEvent.INDEX_CHANGE,this.onItemRendererClick);
          this.cleanupData();
+         this.actionPrice.dispose();
+         this.actionPrice = null;
          super.dispose();
       }
 
-      public function setData(param1:Array, param2:int, param3:Array, param4:Array, param5:int, param6:int) : void {
+      public function setData(param1:Array, param2:int, param3:Array, param4:Array, param5:Number, param6:Number) : void {
          var _loc8_:ModuleVO = null;
          var _loc9_:* = 0;
          if(param1)
@@ -117,6 +124,7 @@ package net.wg.gui.lobby.hangar.maintenance
          while(_loc9_ < _loc10_)
          {
             _loc8_ = param1[_loc9_];
+            _loc8_.userCredits = [param5,param6];
             if(_loc8_.target == 1 && param2 == _loc8_.index)
             {
                this.selectedIndexOld = _loc9_;
@@ -218,7 +226,6 @@ package net.wg.gui.lobby.hangar.maintenance
       }
 
       private function update() : void {
-         var _loc2_:ILocale = null;
          var _loc3_:IEventCollector = null;
          var _loc1_:ModuleVO = this.artifactsData[this.select.selectedIndex];
          this.toBuyDropdown.visible = false;
@@ -226,9 +233,11 @@ package net.wg.gui.lobby.hangar.maintenance
          this.icon.source = _loc1_.icon;
          this.title.text = _loc1_.name;
          this.descr.text = _loc1_.desc;
-         this.countLabel.visible = this.toBuy.visible = this.price.visible = true;
+         this.countLabel.visible = this.toBuy.visible = true;
+         this.actionPrice.setup(this);
+         this.price.visible = !this.actionPrice.visible;
          this.countLabel.alpha = _loc1_.count > 0?1:0.3;
-         _loc2_ = App.utils.locale;
+         var _loc2_:ILocale = App.utils.locale;
          this.countLabel.text = _loc2_.integer(_loc1_.count);
          if(_loc1_.prices[1] > 0 && _loc1_.prices[0] > 0 && (_loc1_.goldEqsForCredits))
          {
@@ -240,7 +249,6 @@ package net.wg.gui.lobby.hangar.maintenance
             this.toBuyDropdown.dataProvider = new DataProvider([_loc2_.htmlTextWithIcon(_loc2_.integer(_loc1_.prices[0]),Currencies.CREDITS),_loc2_.htmlTextWithIcon(_loc2_.gold(_loc1_.prices[1]),Currencies.GOLD)]);
             this.toBuyDropdown.selectedIndex = _loc1_.currency == Currencies.CREDITS?0:1;
             _loc3_.addEvent(this.toBuyDropdown,ListEvent.INDEX_CHANGE,this.onModuleCurrencyChanged);
-            this.price.icon = _loc1_.currency;
          }
          else
          {
@@ -257,15 +265,17 @@ package net.wg.gui.lobby.hangar.maintenance
          this.icon.source = EMPTY_ICON;
          this.title.text = "";
          this.descr.text = "";
-         this.countLabel.visible = this.toBuy.visible = this.price.visible = false;
+         this.countLabel.visible = this.toBuy.visible = this.price.visible = this.actionPrice.visible = false;
       }
 
       private function updateModulePrice() : void {
          var _loc1_:ModuleVO = this.selectedItem;
+         this.actionPrc = _loc1_.actionPrc;
          this.price.icon = this.toBuy.icon = _loc1_.currency;
          var _loc2_:* = 0;
          var _loc3_:* = 0;
-         var _loc4_:* = "";
+         var _loc4_:* = 0;
+         var _loc5_:* = "";
          if(_loc1_.count == 0 && (this.changed) && this.installedData.indexOf(_loc1_.compactDescr) == -1)
          {
             _loc2_ = 1;
@@ -273,15 +283,21 @@ package net.wg.gui.lobby.hangar.maintenance
          if(this.toBuyDropdown.visible)
          {
             _loc3_ = _loc1_.prices[this.toBuyDropdown.selectedIndex];
+            _loc4_ = _loc1_.defPrices[this.toBuyDropdown.selectedIndex];
          }
          else
          {
             _loc3_ = _loc1_.prices[_loc1_.currency == Currencies.CREDITS?0:1];
+            _loc4_ = _loc1_.defPrices[_loc1_.currency == Currencies.CREDITS?0:1];
          }
-         var _loc5_:ILocale = App.utils.locale;
-         _loc4_ = _loc1_.currency == Currencies.CREDITS?_loc5_.integer(_loc3_ * _loc2_):_loc5_.gold(_loc3_ * _loc2_);
+         var _loc6_:ILocale = App.utils.locale;
+         var _loc7_:Number = _loc3_ * _loc2_;
+         var _loc8_:Number = _loc4_ * _loc2_;
+         _loc5_ = _loc1_.currency == Currencies.CREDITS?_loc6_.integer(_loc7_):_loc6_.gold(_loc7_);
          this.toBuy.textColor = this.price.textColor = Currencies.TEXT_COLORS[_loc1_.currency];
-         this.price.text = _loc4_;
+         this.price.text = _loc5_;
+         this.actionPrice.setData(this.actionPrc,_loc7_,_loc8_,_loc1_.currency);
+         this.price.visible = !this.actionPrice.visible;
          this.toBuy.text = _loc2_ + MULTY_CHARS + this.price.text;
          this.toBuyTf.text = _loc2_ + MULTY_CHARS;
          this.toBuy.enabled = this.price.enabled = !(_loc2_ == 0);
@@ -303,6 +319,7 @@ package net.wg.gui.lobby.hangar.maintenance
 
       private function onModuleCurrencyChanged(param1:ListEvent) : void {
          this.price.icon = this.toBuyDropdown.selectedIndex == 0?Currencies.CREDITS:Currencies.GOLD;
+         this.actionPrice.ico = this.toBuyDropdown.selectedIndex == 0?IconText.CREDITS:IconText.GOLD;
          this.selectedItem.currency = this.toBuyDropdown.selectedIndex == 0?Currencies.CREDITS:Currencies.GOLD;
          this.update();
          dispatchEvent(new EquipmentEvent(EquipmentEvent.TOTAL_PRICE_CHANGED));

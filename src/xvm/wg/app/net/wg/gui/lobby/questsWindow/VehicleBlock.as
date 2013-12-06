@@ -3,8 +3,7 @@ package net.wg.gui.lobby.questsWindow
    import scaleform.clik.core.UIComponent;
    import net.wg.gui.components.controls.UILoaderAlt;
    import flash.display.MovieClip;
-   import flash.text.TextField;
-   import net.wg.gui.lobby.questsWindow.data.VehicleBlockVO;
+   import net.wg.gui.lobby.questsWindow.components.QuestsDashlineItem;
    import scaleform.clik.constants.InvalidationType;
 
 
@@ -12,7 +11,10 @@ package net.wg.gui.lobby.questsWindow
    {
           
       public function VehicleBlock() {
+         this.nations = [];
          super();
+         this.levelMC.visible = false;
+         this.nations = App.utils.getNationNamesS();
       }
 
       public var nationIcon:UILoaderAlt;
@@ -23,49 +25,92 @@ package net.wg.gui.lobby.questsWindow
 
       public var tankSmallIcon:UILoaderAlt;
 
-      public var vehicleTF:TextField;
+      public var discountDL:QuestsDashlineItem;
 
-      private var tankData:VehicleBlockVO = null;
+      private var nations:Array;
+
+      public var data:Object = null;
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.discountDL.width = 205;
+         this.nationIcon.hideLoader = false;
+         this.typeIcon.hideLoader = false;
+         this.tankSmallIcon.hideLoader = false;
+      }
 
       public function setData(param1:Object) : void {
-         this.tankData = new VehicleBlockVO(param1);
+         this.data = param1;
          invalidateData();
       }
 
       override protected function draw() : void {
+         var _loc1_:String = null;
+         var _loc2_:String = null;
          if(isInvalid(InvalidationType.DATA))
          {
-            this.nationIcon.source = this.tankData.nationIconPath;
-            this.typeIcon.source = this.tankData.typeIconPath;
-            this.levelMC.gotoAndStop(this.tankData.vLevel);
-            this.tankSmallIcon.source = this.tankData.vIconSmall;
-            this.vehicleTF.text = this.tankData.vName;
+            _loc1_ = this.getNationIconPath(this.data.nationID);
+            _loc2_ = this.getTypeIconPath(this.data.vType);
+            if(this.nationIcon.source != _loc1_)
+            {
+               this.nationIcon.source = _loc1_;
+            }
+            if(this.typeIcon.source != _loc2_)
+            {
+               this.typeIcon.source = _loc2_;
+            }
+            if(this.tankSmallIcon.source != this.data.vIconSmall)
+            {
+               this.tankSmallIcon.source = this.data.vIconSmall;
+            }
+            this.discountDL.label = this.data.vName;
+            this.discountDL.value = this.data.discount;
+            this.levelMC.gotoAndStop(this.data.vLevel);
+            this.levelMC.visible = true;
          }
+      }
+
+      public function getNationIconPath(param1:int) : String {
+         return "../maps/icons/filters/nations/" + this.nations[param1] + ".png";
+      }
+
+      public function getTypeIconPath(param1:String) : String {
+         return "../maps/icons/filters/tanks/" + param1 + ".png";
       }
 
       override public function dispose() : void {
          if(this.nationIcon)
          {
             this.nationIcon.dispose();
+            removeChild(this.nationIcon);
             this.nationIcon = null;
          }
          if(this.typeIcon)
          {
             this.typeIcon.dispose();
+            removeChild(this.typeIcon);
             this.typeIcon = null;
          }
+         removeChild(this.levelMC);
          this.levelMC = null;
          if(this.tankSmallIcon)
          {
             this.tankSmallIcon.dispose();
+            removeChild(this.tankSmallIcon);
             this.tankSmallIcon = null;
          }
-         if(this.tankData)
+         if(this.nations)
          {
-            this.tankData.dispose();
-            this.tankData = null;
+            this.nations.splice(0,this.nations.length);
+            this.nations = null;
          }
-         this.vehicleTF = null;
+         if(this.discountDL)
+         {
+            this.discountDL.dispose();
+            removeChild(this.discountDL);
+            this.discountDL = null;
+         }
+         this.data = null;
          super.dispose();
       }
    }

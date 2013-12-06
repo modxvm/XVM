@@ -2,8 +2,6 @@ package net.wg.gui.lobby.profile
 {
    import net.wg.infrastructure.base.meta.impl.ProfileTabNavigatorMeta;
    import net.wg.infrastructure.base.meta.IProfileTabNavigatorMeta;
-   import scaleform.clik.controls.Button;
-   import flash.display.MovieClip;
    import net.wg.gui.components.advanced.ButtonBarEx;
    import net.wg.gui.lobby.profile.components.ResizableViewStack;
    import scaleform.clik.events.IndexEvent;
@@ -26,9 +24,7 @@ package net.wg.gui.lobby.profile
 
       private static const INIT_DATA_INV:String = "initDataInv";
 
-      public var btnTemplate:Button;
-
-      public var templatesHolder:MovieClip;
+      public var importer:ProfileSectionsImporter;
 
       public var bar:ButtonBarEx;
 
@@ -42,25 +38,22 @@ package net.wg.gui.lobby.profile
 
       override protected function configUI() : void {
          super.configUI();
-         if(this.btnTemplate)
-         {
-            if(this.btnTemplate.parent)
-            {
-               this.btnTemplate.parent.removeChild(this.btnTemplate);
-            }
-            this.btnTemplate = null;
-         }
-         if(this.templatesHolder)
-         {
-            if(this.templatesHolder.parent)
-            {
-               this.templatesHolder.parent.removeChild(this.templatesHolder);
-            }
-            this.templatesHolder = null;
-         }
+         App.utils.scheduler.envokeInNextFrame(this.disposeTemplates);
          this.viewStack.cache = true;
          this.bar.addEventListener(IndexEvent.INDEX_CHANGE,this.onTabBarIndexChanged,false,0,true);
          this.viewStack.addEventListener(ViewStackEvent.VIEW_CHANGED,this.onSectionViewShowed,false,0,true);
+      }
+
+      private function disposeTemplates() : void {
+         if(this.importer)
+         {
+            if(this.importer.parent)
+            {
+               this.importer.dispose();
+               this.importer.parent.removeChild(this.importer);
+            }
+            this.importer = null;
+         }
       }
 
       private function onSectionViewShowed(param1:ViewStackEvent) : void {
@@ -104,8 +97,11 @@ package net.wg.gui.lobby.profile
                _loc6_++;
             }
             this.bar.dataProvider = new DataProvider(_loc3_);
-            this.bar.selectedIndex = _loc5_;
-            this.bar.selectedIndex = 0;
+            if(_loc3_.length > 0)
+            {
+               this.bar.selectedIndex = _loc5_;
+               this.bar.selectedIndex = 0;
+            }
          }
          if(isInvalid(InvalidationType.SIZE))
          {
@@ -119,7 +115,10 @@ package net.wg.gui.lobby.profile
       }
 
       private function onTabBarIndexChanged(param1:IndexEvent) : void {
-         this.viewStack.show(this._sectionsDataUtil.getLinkageByAlias(param1.data.alias));
+         if(param1.index != -1)
+         {
+            this.viewStack.show(this._sectionsDataUtil.getLinkageByAlias(param1.data.alias));
+         }
       }
 
       public function as_setInitData(param1:Object) : void {

@@ -9,8 +9,6 @@ package net.wg.gui.lobby.store
    import net.wg.data.VO.StoreTableVO;
    import net.wg.data.constants.FittingTypes;
    import net.wg.infrastructure.exceptions.ArgumentException;
-   import net.wg.data.VO.StoreTableData;
-   import scaleform.clik.data.DataProvider;
    import scaleform.clik.interfaces.IListItemRenderer;
 
 
@@ -19,6 +17,7 @@ package net.wg.gui.lobby.store
           
       public function StoreTable() {
          super();
+         this._tableDP = new StoreTableDataProvider();
       }
 
       private static const DEFAULT_COUNT_POSITION:Number = 0;
@@ -42,7 +41,9 @@ package net.wg.gui.lobby.store
 
       private var _tableVO:StoreTableVO = null;
 
-      private var _data:Array = null;
+      private var _tableDP:StoreTableDataProvider = null;
+
+      private var _type:String = null;
 
       private var _rightOrientedCount:Boolean = false;
 
@@ -50,9 +51,18 @@ package net.wg.gui.lobby.store
 
       private var moduleRendererLinkage:String = null;
 
-      public function as_setTable(param1:Array) : void {
-         StoreTable.assertNotNull(param1,"tableData");
-         this._data = param1;
+      public function as_getTableDataProvider() : Object {
+         return this._tableDP;
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.list.dataProvider = this._tableDP;
+      }
+
+      public function as_setTableType(param1:String) : void {
+         StoreTable.assertNotNull(param1,"TableType");
+         this._type = param1;
          invalidate(INVALID_TABLE);
       }
 
@@ -114,7 +124,7 @@ package net.wg.gui.lobby.store
       override protected function onPopulate() : void {
          super.onPopulate();
          this._tableVO = new StoreTableVO();
-         if(this._data)
+         if(this._type)
          {
             invalidate(INVALID_TABLE);
          }
@@ -122,24 +132,26 @@ package net.wg.gui.lobby.store
 
       override protected function onDispose() : void {
          super.onDispose();
+         this.header.dispose();
+         this.header = null;
+         this.list.dispose();
+         this.list = null;
+         this.headerTitle = null;
          this._tableVO = null;
-         if(this._data)
-         {
-            this._data.splice(0,this._data.length);
-            this._data = null;
-         }
+         this._type = null;
          this.vehicleRendererLinkage = null;
          this.moduleRendererLinkage = null;
+         this._tableDP.cleanUp();
+         this._tableDP = null;
       }
 
       private function updateTable() : void {
-         StoreTable.assertNotNull(this._data,"_data");
+         StoreTable.assertNotNull(this._type,"_type");
          StoreTable.assertNotNull(this.moduleRendererLinkage,"moduleRendererLinkage");
          StoreTable.assertNotNull(this.vehicleRendererLinkage,"vehicleRendererLinkage");
-         var _loc1_:String = this._data.shift();
          this.list.scrollToIndex(0);
-         this.setupDataProvider(_loc1_);
-         this.setupRendererType(_loc1_);
+         this.setupRendererType(this._type);
+         this.setupDataProvider(this._type);
       }
 
       private function setupRendererType(param1:String) : void {
@@ -167,24 +179,16 @@ package net.wg.gui.lobby.store
       }
 
       private function setupDataProvider(param1:String) : void {
-         var _loc2_:StoreTableData = null;
-         var _loc4_:Object = null;
-         var _loc3_:DataProvider = DataProvider(this.list.dataProvider);
-         _loc3_.splice(0);
-         for each (_loc4_ in this._data)
-         {
-            _loc2_ = new StoreTableData(_loc4_);
-            _loc2_.requestType = param1;
-            _loc2_.tableVO = this._tableVO;
-            _loc3_.push(_loc2_);
-         }
+         this._tableDP.type = param1;
+         this._tableDP.tableVO = this._tableVO;
+         refreshStoreTableDataProviderS();
          if(App.instance)
          {
-            this.headerTitle.text = App.utils.locale.makeString(MENU.SHOP_TABLE_FIND) + " " + _loc3_.length.toString();
+            this.headerTitle.text = App.utils.locale.makeString(MENU.SHOP_TABLE_FIND) + " " + this._tableDP.length.toString();
          }
          else
          {
-            this.headerTitle.text = MENU.SHOP_TABLE_FIND + " " + _loc3_.length.toString();
+            this.headerTitle.text = MENU.SHOP_TABLE_FIND + " " + this._tableDP.length.toString();
          }
       }
 

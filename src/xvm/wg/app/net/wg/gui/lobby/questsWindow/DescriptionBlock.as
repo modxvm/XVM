@@ -38,9 +38,9 @@ package net.wg.gui.lobby.questsWindow
          {
             this.lableTF.text = this._title;
             this.descrTF.text = this._descr;
-            this.descrTF.y = Math.round(this.lableTF.y + this.lableTF.textHeight + 3);
+            this.descrTF.y = this._title?Math.round(this.lableTF.y + this.lableTF.textHeight + 3):this.lableTF.y;
             this.lineMC.y = Math.round(this._descr?this.descrTF.y + this.descrTF.textHeight:this.lableTF.y + this.lableTF.textHeight) + BOTTOM_PADDING;
-            _loc1_ = Math.round(this.lineMC.y + this.lineMC.height);
+            _loc1_ = Math.round(this.lineMC.y);
             setSize(this.width,_loc1_);
          }
       }

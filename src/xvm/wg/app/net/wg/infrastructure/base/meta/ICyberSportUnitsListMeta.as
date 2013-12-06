@@ -6,7 +6,7 @@ package net.wg.infrastructure.base.meta
    public interface ICyberSportUnitsListMeta extends IEventDispatcher
    {
           
-      function getTeamDataS(param1:Number) : void;
+      function getTeamDataS(param1:int) : Object;
 
       function refreshTeamsS() : void;
 
@@ -16,15 +16,7 @@ package net.wg.infrastructure.base.meta
 
       function loadNextS() : void;
 
-      function as_appendTeamsData(param1:Array) : void;
-
-      function as_setTeamsData(param1:Array, param2:Number) : void;
-
-      function as_updateTeamsData(param1:Object) : void;
-
-      function as_setSelectedUnit(param1:Object) : void;
-
-      function as_clearSelectedUnit() : void;
+      function as_setSelectedUnitIdx(param1:int) : void;
 
       function as_setSearchResultText(param1:String) : void;
 
@@ -33,6 +25,10 @@ package net.wg.infrastructure.base.meta
       function as_setRefreshCoolDown(param1:Number) : void;
 
       function as_selectUnitInList(param1:Number) : void;
+
+      function as_updateNavigationBlock(param1:Object) : void;
+
+      function as_getSearchDP() : Object;
    }
 
 }

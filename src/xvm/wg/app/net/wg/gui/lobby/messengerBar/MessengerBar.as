@@ -6,9 +6,9 @@ package net.wg.gui.lobby.messengerBar
    import net.wg.infrastructure.interfaces.IHelpLayoutComponent;
    import net.wg.gui.lobby.messengerBar.carousel.ChannelCarousel;
    import net.wg.gui.components.controls.SoundButtonEx;
+   import flash.display.MovieClip;
    import flash.geom.Point;
    import flash.display.DisplayObject;
-   import flash.display.MovieClip;
    import net.wg.utils.IHelpLayout;
    import net.wg.data.constants.Directions;
    import scaleform.clik.utils.Constraints;
@@ -44,6 +44,8 @@ package net.wg.gui.lobby.messengerBar
 
       public var contactButton:SoundButtonEx;
 
+      public var bg:MovieClip;
+
       private var stageDimensions:Point;
 
       private var _paddingLeft:uint = 0;
@@ -51,6 +53,8 @@ package net.wg.gui.lobby.messengerBar
       private var _paddingRight:uint = 0;
 
       private var _paddingBottom:uint = 0;
+
+      private var _paddingTop:uint = 0;
 
       private var _notificationListBtnHL:DisplayObject;
 
@@ -109,6 +113,15 @@ package net.wg.gui.lobby.messengerBar
          invalidate(LAYOUT_INVALID);
       }
 
+      public function get paddingTop() : uint {
+         return this._paddingTop;
+      }
+
+      public function set paddingTop(param1:uint) : void {
+         this._paddingTop = param1;
+         invalidate(LAYOUT_INVALID);
+      }
+
       override protected function preInitialize() : void {
          super.preInitialize();
          constraints = new Constraints(this,ConstrainMode.REFLOW);
@@ -137,11 +150,8 @@ package net.wg.gui.lobby.messengerBar
          _loc1_.removeEventListener(MessengerBarEvent.PIN_CHANNELS_WINDOW,this.handlePinChannelsWindow);
          _loc1_.removeEventListener(MessengerBarEvent.PIN_CONTACTS_WINDOW,this.handlePinContactsWindow);
          _loc1_.removeEventListener(MessengerBarEvent.PIN_RECEIVED_INVITES_WINDOW,this.handlePinNotificationInviteWindow);
-         this.channelCarousel.dispose();
          this.channelCarousel = null;
-         this.notificationListBtn.dispose();
          this.notificationListBtn = null;
-         this.notificationInvitesBtn.dispose();
          this.notificationInvitesBtn = null;
          this.channelButton.dispose();
          this.channelButton = null;
@@ -172,6 +182,8 @@ package net.wg.gui.lobby.messengerBar
             y = this.stageDimensions.y - this.height - this.paddingBottom;
             x = this.paddingLeft;
             width = this.stageDimensions.x - this.paddingLeft - this.paddingRight;
+            this.bg.x = -this.paddingLeft;
+            this.bg.width = this.stageDimensions.x;
          }
          if(isInvalid(InvalidationType.SIZE))
          {

@@ -9,6 +9,12 @@ package
          super();
       }
 
+      public static const TOOLTIP_DROPDOWN_BATTLETYPE:String = "#profile:tooltip/dropdown/battleType";
+
+      public static const PROFILE_SUMMARY_SIGNIFICANTAWARDS_TOOLTIP:String = "#profile:profile/summary/significantAwards/tooltip";
+
+      public static const PROFILE_SUMMARY_NEXTAWARDS_TOOLTIP:String = "#profile:profile/summary/nextAwards/tooltip";
+
       public static const PROFILE_TABS_TOOLTIP_SUMMARY:String = "#profile:profile/tabs/tooltip/summary";
 
       public static const PROFILE_TABS_TOOLTIP_AWARDS:String = "#profile:profile/tabs/tooltip/awards";
@@ -115,7 +121,15 @@ package
 
       public static const SECTION_SUMMARY_LABELS_SIGNIFICANTAWARDS:String = "#profile:section/summary/labels/significantAwards";
 
+      public static const PROFILE_SUMMARY_SIGNIFICANTAWARDS_TOOLTIP_HEADER:String = PROFILE_SUMMARY_SIGNIFICANTAWARDS_TOOLTIP + "/header";
+
+      public static const PROFILE_SUMMARY_SIGNIFICANTAWARDS_TOOLTIP_BODY:String = PROFILE_SUMMARY_SIGNIFICANTAWARDS_TOOLTIP + "/body";
+
       public static const SECTION_SUMMARY_LABELS_NEXTAWARDS:String = "#profile:section/summary/labels/nextAwards";
+
+      public static const PROFILE_SUMMARY_NEXTAWARDS_TOOLTIP_HEADER:String = PROFILE_SUMMARY_NEXTAWARDS_TOOLTIP + "/header";
+
+      public static const PROFILE_SUMMARY_NEXTAWARDS_TOOLTIP_BODY:String = PROFILE_SUMMARY_NEXTAWARDS_TOOLTIP + "/body";
 
       public static const SECTION_SUMMARY_ERRORTEXT_SIGNIFICANTAWARDS:String = "#profile:section/summary/errorText/significantAwards";
 
@@ -150,6 +164,10 @@ package
       public static const SECTION_AWARDS_DROPDOWN_TOOLTIP_HEADER:String = SECTION_AWARDS_DROPDOWN_TOOLTIP + "/header";
 
       public static const SECTION_AWARDS_DROPDOWN_TOOLTIP_BODY:String = SECTION_AWARDS_DROPDOWN_TOOLTIP + "/body";
+
+      public static const TOOLTIP_DROPDOWN_BATTLETYPE_HEADER:String = TOOLTIP_DROPDOWN_BATTLETYPE + "/header";
+
+      public static const TOOLTIP_DROPDOWN_BATTLETYPE_BODY:String = TOOLTIP_DROPDOWN_BATTLETYPE + "/body";
 
       public static const SECTION_STATISTICS_TITLE:String = "#profile:section/statistics/title";
 
@@ -217,9 +235,9 @@ package
 
       public static const SECTION_STATISTICS_CHART_LEVELDISABLED_TOOLTIP_BODY:String = SECTION_STATISTICS_CHART_LEVELDISABLED_TOOLTIP + "/body";
 
-      public static const SECTION_TECHNIQUE_WINDOW_EMPTYSCREENLABEL:String = "#profile:section/technique/window/emptyScreenLabel";
+      public static const SECTION_TECHNIQUE_EMPTYSCREENLABEL_BATTLETYPE_TEAM:String = "#profile:section/technique/emptyScreenLabel/battleType/team";
 
-      public static const SECTION_TECHNIQUE_PAGE_EMPTYSCREENLABEL:String = "#profile:section/technique/page/emptyScreenLabel";
+      public static const SECTION_TECHNIQUE_EMPTYSCREENLABEL_BATTLETYPE_ALL:String = "#profile:section/technique/emptyScreenLabel/battleType/all";
 
       public static const SECTION_TECHNIQUE_TITLE:String = "#profile:section/technique/title";
 

@@ -99,7 +99,10 @@ package net.wg.gui.prebattle.invites
       private var inviteDefaultTextColor:uint = 4144953;
 
       private function updateWindowProperties(param1:Boolean) : void {
-         Window(window).visible = param1;
+         if(window)
+         {
+            Window(window).visible = param1;
+         }
       }
 
       override protected function onPopulate() : void {
@@ -188,10 +191,12 @@ package net.wg.gui.prebattle.invites
       }
 
       override public function setFocus() : void {
+         super.setFocus();
          App.utils.scheduler.envokeInNextFrame(this.updateFocus);
       }
 
       override protected function onDispose() : void {
+         App.utils.scheduler.cancelTask(this.updateFocus);
          this.sendButton.removeEventListener(ButtonEvent.CLICK,this.handleSendInvitations);
          this.receiverList.removeEventListener(ListEventEx.ITEM_DOUBLE_CLICK,this.receiverList_itemDoubleClickHandler);
          this.messageTextInput.removeEventListener(FocusHandlerEvent.FOCUS_IN,this.messageTextInput_CLIK_focusInHandler);

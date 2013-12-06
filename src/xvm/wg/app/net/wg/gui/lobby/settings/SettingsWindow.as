@@ -22,6 +22,7 @@ package net.wg.gui.lobby.settings
    import scaleform.clik.interfaces.IDataProvider;
    import net.wg.data.constants.KeysMap;
    import net.wg.infrastructure.interfaces.IViewStackContent;
+   import net.wg.infrastructure.interfaces.ISettingsBase;
    import flash.geom.Point;
    import net.wg.data.managers.ITooltipProps;
    import net.wg.data.managers.impl.TooltipProps;
@@ -136,7 +137,7 @@ package net.wg.gui.lobby.settings
          var _loc2_:GraphicSettings = GraphicSettings(this.tryGetView(SettingsConfig.GRAPHIC_SETTINGS));
          if(_loc2_)
          {
-            _loc2_.updateLiveVideoData();
+            _loc2_.updateDependentData();
          }
       }
 
@@ -350,7 +351,7 @@ package net.wg.gui.lobby.settings
                         if(param1[param3][_loc5_]  is  Boolean || param1[param3][_loc5_]  is  String || param1[param3][_loc5_]  is  Number)
                         {
                            _loc6_.current = _loc6_.type == SettingsConfig.TYPE_CHECKBOX?Boolean(param1[param3][_loc5_]):param1[param3][_loc5_];
-                           _loc6_.lastVal = _loc6_.current;
+                           _loc6_.prevVal = _loc6_.current;
                         }
                         else
                         {
@@ -359,7 +360,7 @@ package net.wg.gui.lobby.settings
                               if(_loc6_.type == SettingsConfig.TYPE_CHECKBOX)
                               {
                                  _loc6_.current = Boolean(param1[param3][_loc5_].current);
-                                 _loc6_.lastVal = _loc6_.current;
+                                 _loc6_.prevVal = _loc6_.current;
                                  if(param1[param3][_loc5_].hasOwnProperty("options"))
                                  {
                                     _loc6_.options = _loc4_.cloneObject(param1[param3][_loc5_].options);
@@ -387,7 +388,7 @@ package net.wg.gui.lobby.settings
                               else
                               {
                                  _loc6_.current = Math.max(param1[param3][_loc5_].current,0);
-                                 _loc6_.lastVal = _loc6_.current;
+                                 _loc6_.prevVal = _loc6_.current;
                                  if(param3 == SettingsConfig.CONTROLS_SETTINGS)
                                  {
                                     if(param1[param3][_loc5_].hasOwnProperty("default"))
@@ -609,19 +610,12 @@ package net.wg.gui.lobby.settings
                "data":this._settingsData[param1.linkage]
             }
          );
-         if(param1.linkage == SettingsConfig.GRAPHIC_SETTINGS && (SettingsConfig.liveUpdateVideoSettingsData))
-         {
-            GraphicSettings(_loc2_).updateLiveVideoData();
-         }
       }
 
       private function onViewChangeHandler(param1:ViewStackEvent) : void {
          var _loc2_:IViewStackContent = param1.view;
-         if(param1.linkage == SettingsConfig.MARKER_SETTINGS)
-         {
-            MarkerSettings(_loc2_).updateShowContent();
-            MarkerSettings(_loc2_).updateShowContent();
-         }
+         var _loc3_:ISettingsBase = _loc2_ as ISettingsBase;
+         _loc3_.updateDependentData();
       }
 
       private function onPTTControlChanged(param1:SettingViewEvent) : void {

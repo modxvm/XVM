@@ -15,6 +15,8 @@ package net.wg.gui.cyberSport.vo
 
       private static const PLAYER_FIELD:String = "player";
 
+      private static const VEHICLE_FIELD:String = "selectedVehicle";
+
       public var unitIdx:Number;
 
       public var isCommanderState:Boolean = false;
@@ -35,7 +37,7 @@ package net.wg.gui.cyberSport.vo
 
       public var compatibleVehiclesCount:int = 0;
 
-      public var selectedVehicleCD:int = -1;
+      public var selectedVehicle:VehicleVO = null;
 
       public var selectedVehicleLevel:int = 0;
 
@@ -75,6 +77,11 @@ package net.wg.gui.cyberSport.vo
             this.player = param2?new UnitCandidateVO(param2):null;
             return false;
          }
+         if(param1 == VEHICLE_FIELD)
+         {
+            this.selectedVehicle = param2?new VehicleVO(param2):null;
+            return false;
+         }
          return true;
       }
 
@@ -101,6 +108,11 @@ package net.wg.gui.cyberSport.vo
          if(param1 == PLAYER_FIELD)
          {
             param2[param1] = this.player?this.player.toHash():null;
+            return false;
+         }
+         if(param1 == VEHICLE_FIELD)
+         {
+            param2[param1] = this.selectedVehicle?this.selectedVehicle.toHash():null;
             return false;
          }
          return true;

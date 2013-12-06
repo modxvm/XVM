@@ -9,7 +9,6 @@ package net.wg.utils
    import flash.display.Bitmap;
    import flash.display.BitmapData;
    import flash.geom.Rectangle;
-   import net.wg.infrastructure.interfaces.IColorScheme;
 
 
    public interface ICommons
@@ -35,7 +34,7 @@ package net.wg.utils
 
       function cutBitmapFromBitmapData(param1:BitmapData, param2:Rectangle) : Bitmap;
 
-      function formatPlayerName(param1:TextField, param2:String, param3:String=null, param4:String=null, param5:Boolean=false, param6:IColorScheme=null, param7:int=-4) : String;
+      function formatPlayerName(param1:TextField, param2:String, param3:String=null, param4:String=null, param5:Boolean=false, param6:String="", param7:String="", param8:Number=NaN, param9:int=-4) : Boolean;
    }
 
 }

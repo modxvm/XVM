@@ -33,7 +33,7 @@ package net.wg.gui.login.impl
 
       private static const FREE_SPACE_BORDER_FACTOR:Number = 0.18;
 
-      private static var SPARK_ZONE:Rectangle;
+      private static const SPARK_ZONE:Rectangle = null;
 
       private static const SPARK_QUANTITY:uint = 150;
 
@@ -213,7 +213,9 @@ package net.wg.gui.login.impl
       }
 
       private function onEscapeKeyPress() : void {
-         onEscapeS();
+         this.enableInputs(false);
+         App.utils.scheduler.scheduleTask(onEscapeS,50);
+         App.utils.scheduler.scheduleTask(this.enableInputs,200,true);
       }
 
       private function onEnterKeyPress() : void {
@@ -414,7 +416,7 @@ package net.wg.gui.login.impl
       override public function handleInput(param1:InputEvent) : void {
          var _loc2_:Function = null;
          super.handleInput(param1);
-         if(param1.handled)
+         if((param1.handled) || (App.waiting.visible))
          {
             return;
          }

@@ -20,6 +20,7 @@ package net.wg.gui.lobby.settings
    {
           
       public function GraphicSettings() {
+         this.extendAdvancedControlsIds = [SettingsConfig.COLOR_GRADING_TECHNIQUE];
          super();
       }
 
@@ -105,6 +106,10 @@ package net.wg.gui.lobby.settings
 
       public var POST_PROCESSING_QUALITYDropDown:DropdownMenu = null;
 
+      public var MOTION_BLUR_QUALITYLabel:LabelControl = null;
+
+      public var MOTION_BLUR_QUALITYDropDown:DropdownMenu = null;
+
       public var FAR_PLANELabel:LabelControl = null;
 
       public var FAR_PLANEDropDown:DropdownMenu = null;
@@ -116,6 +121,10 @@ package net.wg.gui.lobby.settings
       public var SNIPER_MODE_EFFECTS_QUALITYLabel:LabelControl = null;
 
       public var SNIPER_MODE_EFFECTS_QUALITYDropDown:DropdownMenu = null;
+
+      public var COLOR_GRADING_TECHNIQUELabel:LabelControl = null;
+
+      public var COLOR_GRADING_TECHNIQUEDropDown:DropdownMenu = null;
 
       public var fpsPerfomancerCheckbox:CheckBox = null;
 
@@ -134,6 +143,10 @@ package net.wg.gui.lobby.settings
       private var useAdvancedGraphic:Boolean = false;
 
       private var allowCheckPresets:Boolean = true;
+
+      private var extendAdvancedControls:Object;
+
+      private var extendAdvancedControlsIds:Array;
 
       override public function update(param1:Object) : void {
          var _loc3_:uint = 0;
@@ -160,6 +173,7 @@ package net.wg.gui.lobby.settings
       }
 
       override public function dispose() : void {
+         var _loc6_:String = null;
          if(this.graphicsQualityDropDown.hasEventListener(ListEvent.INDEX_CHANGE))
          {
             this.graphicsQualityDropDown.removeEventListener(ListEvent.INDEX_CHANGE,this.onGraphicsQualityChangePreset);
@@ -237,6 +251,14 @@ package net.wg.gui.lobby.settings
                _loc5_ = null;
             }
          }
+         if(this.extendAdvancedControls)
+         {
+            for (_loc6_ in this.extendAdvancedControls)
+            {
+               this.extendAdvancedControls[_loc6_] = null;
+            }
+            this.extendAdvancedControls = null;
+         }
          super.dispose();
       }
 
@@ -250,7 +272,14 @@ package net.wg.gui.lobby.settings
          this.autodetectQuality.enabled = true;
       }
 
-      public function updateLiveVideoData() : void {
+      override public function updateDependentData() : void {
+         if(SettingsConfig.liveUpdateVideoSettingsData)
+         {
+            this.updateLiveVideoData();
+         }
+      }
+
+      private function updateLiveVideoData() : void {
          var _loc6_:String = null;
          var _loc7_:SettingsControlProp = null;
          var _loc8_:SettingsControlProp = null;
@@ -289,7 +318,7 @@ package net.wg.gui.lobby.settings
                         _loc9_ = this.fullScreenCheckbox.selected?SettingsConfig.RESOLUTION:SettingsConfig.WINDOW_SIZE;
                         _loc10_ = SettingsControlProp(SettingsConfig.liveUpdateVideoSettingsData[_loc9_]);
                         _loc11_ = this.monitorDropDown.selectedIndex;
-                        SettingsControlProp(_data[_loc9_]).lastVal[_loc11_] = _loc10_.current;
+                        SettingsControlProp(_data[_loc9_]).prevVal[_loc11_] = _loc10_.current;
                         if((_loc10_) && _loc10_.options  is  Array)
                         {
                            _loc2_.dataProvider = new DataProvider(_loc10_.options[_loc11_]);
@@ -335,9 +364,11 @@ package net.wg.gui.lobby.settings
          this.FLORA_QUALITYLabel.text = "";
          this.EFFECTS_QUALITYLabel.text = "";
          this.POST_PROCESSING_QUALITYLabel.text = "";
+         this.MOTION_BLUR_QUALITYLabel.text = "";
          this.FAR_PLANELabel.text = "";
          this.OBJECT_LODLabel.text = "";
          this.SNIPER_MODE_EFFECTS_QUALITYLabel.text = "";
+         this.COLOR_GRADING_TECHNIQUELabel.text = "";
          this.fpsPerfomancerCheckbox.label = "";
          this.SNIPER_MODE_GRASS_ENABLEDCheckbox.label = "";
          this.VEHICLE_DUST_ENABLEDCheckbox.label = "";
@@ -391,6 +422,7 @@ package net.wg.gui.lobby.settings
          var _loc22_:SettingsControlProp = null;
          var _loc23_:* = NaN;
          var _loc24_:String = null;
+         this.extendAdvancedControls = {};
          for (_loc3_ in _data)
          {
             _loc4_ = (this.qualityOrder) && this.qualityOrder.indexOf(_loc3_,0) == -1?false:true;
@@ -400,6 +432,10 @@ package net.wg.gui.lobby.settings
             {
                _loc7_ = SettingsControlProp(_data[_loc3_]);
                _loc8_ = !(_loc7_.current == null || (_loc7_.readOnly));
+               if(this.extendAdvancedControlsIds.indexOf(_loc3_) >= 0)
+               {
+                  this.extendAdvancedControls[_loc3_] = _loc7_.clone();
+               }
                switch(_loc7_.type)
                {
                   case SettingsConfig.TYPE_CHECKBOX:
@@ -458,15 +494,15 @@ package net.wg.gui.lobby.settings
                         _loc8_ = _loc7_.options  is  Array && _loc7_.options.length > 0;
                         _loc18_ = 0;
                         _loc19_ = _loc16_.options  is  Array?_loc16_.options.length:0;
-                        _loc14_.lastVal = null;
-                        _loc15_.lastVal = null;
-                        _loc14_.lastVal = new Array();
-                        _loc15_.lastVal = new Array();
+                        _loc14_.prevVal = null;
+                        _loc15_.prevVal = null;
+                        _loc14_.prevVal = new Array();
+                        _loc15_.prevVal = new Array();
                         _loc18_ = 0;
                         while(_loc18_ < _loc19_)
                         {
-                           _loc14_.lastVal[_loc18_] = _loc18_ == _loc16_.current?_loc14_.current:0;
-                           _loc15_.lastVal[_loc18_] = _loc18_ == _loc16_.current?_loc15_.current:0;
+                           _loc14_.prevVal[_loc18_] = _loc18_ == _loc16_.current?_loc14_.current:0;
+                           _loc15_.prevVal[_loc18_] = _loc18_ == _loc16_.current?_loc15_.current:0;
                            _loc18_++;
                         }
                      }
@@ -482,8 +518,8 @@ package net.wg.gui.lobby.settings
                         _loc7_.current = SettingsControlProp(_data[_loc20_]).current;
                         _loc21_ = SettingsControlProp(_data[SettingsConfig.CUSTOM_AA]);
                         _loc22_ = SettingsControlProp(_data[SettingsConfig.MULTISAMPLING]);
-                        _loc21_.lastVal = _loc21_.current;
-                        _loc22_.lastVal = _loc22_.current;
+                        _loc21_.prevVal = _loc21_.current;
+                        _loc22_.prevVal = _loc22_.current;
                         _loc8_ = (_loc7_.options) && _loc7_.options  is  Array && _loc7_.options.length > 0;
                      }
                      if((_loc6_) || !_loc4_)
@@ -653,6 +689,7 @@ package net.wg.gui.lobby.settings
                }
                _loc7_++;
             }
+            this.updateExtendAdvancedControls();
          }
          else
          {
@@ -665,34 +702,53 @@ package net.wg.gui.lobby.settings
          this.allowCheckPresets = true;
       }
 
+      private function updateExtendAdvancedControls() : void {
+         var _loc1_:SettingsControlProp = null;
+         var _loc2_:String = null;
+         if(this.extendAdvancedControls)
+         {
+            for (_loc2_ in this.extendAdvancedControls)
+            {
+               if(this[_loc2_ + SettingsControlProp(this.extendAdvancedControls[_loc2_]).type])
+               {
+                  _loc1_ = SettingsControlProp(this.extendAdvancedControls[_loc2_]);
+                  this.updateGraphicsElementQualityIfItChangeData(_loc2_,_loc1_);
+               }
+            }
+         }
+      }
+
       private function updateGraphicsQualityDataForAdvanced(param1:Boolean, param2:Boolean) : void {
          var _loc3_:String = null;
          var _loc4_:String = null;
          var _loc5_:SettingsControlProp = null;
          var _loc6_:SettingsControlProp = null;
-         var _loc7_:String = null;
-         var _loc8_:DropdownMenu = null;
-         var _loc9_:* = NaN;
+         var _loc7_:SettingsControlProp = null;
+         var _loc8_:String = null;
+         var _loc9_:DropdownMenu = null;
+         var _loc10_:* = NaN;
+         var _loc11_:String = null;
+         var _loc12_:String = null;
          if(!(this.useAdvancedGraphic == param1) || (param2))
          {
             this.useAdvancedGraphic = param1;
             _loc3_ = "";
             for (_loc3_ in this.graphicsQualityDataProv)
             {
-               _loc6_ = SettingsControlProp(this.graphicsQualityDataProv[_loc3_]);
-               switch(_loc6_.type)
+               _loc7_ = SettingsControlProp(this.graphicsQualityDataProv[_loc3_]);
+               switch(_loc7_.type)
                {
                   case SettingsConfig.TYPE_CHECKBOX:
                      continue;
                   case SettingsConfig.TYPE_SLIDER:
                      continue;
                   case SettingsConfig.TYPE_DROPDOWN:
-                     _loc6_.options = new Array();
-                     for (_loc7_ in _data[_loc3_].options)
+                     _loc7_.options = new Array();
+                     for (_loc8_ in _data[_loc3_].options)
                      {
-                        if((param1) || !_data[_loc3_].options[_loc7_].advanced)
+                        if((param1) || !_data[_loc3_].options[_loc8_].advanced)
                         {
-                           _loc6_.options.push(SettingsControlProp(_data[_loc3_]).options[_loc7_]);
+                           _loc7_.options.push(SettingsControlProp(_data[_loc3_]).options[_loc8_]);
                         }
                      }
                      continue;
@@ -702,17 +758,33 @@ package net.wg.gui.lobby.settings
             }
             _loc4_ = this.useAdvancedGraphic?SettingsConfig.CUSTOM_AA:SettingsConfig.MULTISAMPLING;
             _loc5_ = SettingsControlProp(_data[SettingsConfig.SMOOTHING]);
-            _loc5_.options = _data[_loc4_].options;
+            _loc6_ = SettingsControlProp(_data[_loc4_]);
+            _loc5_.options = _loc6_.options;
             if(this[SettingsConfig.SMOOTHING + _loc5_.type])
             {
-               _loc8_ = this[SettingsConfig.SMOOTHING + _loc5_.type];
-               _loc9_ = _loc8_.selectedIndex;
-               _loc8_.enabled = (_loc5_.options) && _loc5_.options.length > 0;
-               _loc8_.dataProvider = new DataProvider(_loc5_.options);
-               if(_loc9_ != _data[_loc4_].lastVal)
+               _loc9_ = this[SettingsConfig.SMOOTHING + _loc5_.type];
+               _loc10_ = _loc9_.selectedIndex;
+               _loc9_.enabled = (_loc5_.options) && _loc5_.options.length > 0;
+               _loc9_.dataProvider = new DataProvider(_loc5_.options);
+               if(_loc10_ != _loc6_.prevVal)
                {
-                  _loc8_.selectedIndex = _data[_loc4_].lastVal;
-                  dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,SettingsConfig.SMOOTHING,_loc8_.selectedIndex));
+                  _loc9_.selectedIndex = _loc6_.prevVal;
+                  dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,SettingsConfig.SMOOTHING,_loc9_.selectedIndex));
+               }
+            }
+            if(this.extendAdvancedControls)
+            {
+               for (_loc11_ in this.extendAdvancedControls)
+               {
+                  _loc7_ = SettingsControlProp(this.extendAdvancedControls[_loc11_]);
+                  _loc7_.options = new Array();
+                  for (_loc12_ in SettingsControlProp(_data[_loc11_]).options)
+                  {
+                     if((param1) || !_data[_loc11_].options[_loc12_].advanced)
+                     {
+                        _loc7_.options.push(SettingsControlProp(_data[_loc11_]).options[_loc12_]);
+                     }
+                  }
                }
             }
          }
@@ -721,6 +793,27 @@ package net.wg.gui.lobby.settings
       private function updateGraphicsQualityIfChangeAdvanced() : void {
          var _loc1_:String = null;
          var _loc2_:SettingsControlProp = null;
+         this.allowCheckPresets = false;
+         for (_loc1_ in this.graphicsQualityDataProv)
+         {
+            if(this[_loc1_ + SettingsControlProp(this.graphicsQualityDataProv[_loc1_]).type])
+            {
+               _loc2_ = SettingsControlProp(this.graphicsQualityDataProv[_loc1_]);
+               this.updateGraphicsElementQualityIfItChangeData(_loc1_,_loc2_);
+            }
+         }
+         for (_loc1_ in this.extendAdvancedControls)
+         {
+            if(this[_loc1_ + SettingsControlProp(this.extendAdvancedControls[_loc1_]).type])
+            {
+               _loc2_ = SettingsControlProp(this.extendAdvancedControls[_loc1_]);
+               this.updateGraphicsElementQualityIfItChangeData(_loc1_,_loc2_);
+            }
+         }
+         this.allowCheckPresets = true;
+      }
+
+      private function updateGraphicsElementQualityIfItChangeData(param1:String, param2:SettingsControlProp) : void {
          var _loc3_:CheckBox = null;
          var _loc4_:* = false;
          var _loc5_:DropdownMenu = null;
@@ -729,63 +822,48 @@ package net.wg.gui.lobby.settings
          var _loc8_:uint = 0;
          var _loc9_:* = NaN;
          var _loc10_:uint = 0;
-         this.allowCheckPresets = false;
-         for (_loc1_ in this.graphicsQualityDataProv)
+         switch(param2.type)
          {
-            if(this[_loc1_ + SettingsControlProp(this.graphicsQualityDataProv[_loc1_]).type])
-            {
-               _loc2_ = SettingsControlProp(this.graphicsQualityDataProv[_loc1_]);
-               switch(_loc2_.type)
+            case SettingsConfig.TYPE_CHECKBOX:
+               _loc3_ = this[param1 + param2.type];
+               _loc4_ = _loc3_.selected;
+               if(!this.useAdvancedGraphic && (param2.advanced))
                {
-                  case SettingsConfig.TYPE_CHECKBOX:
-                     _loc3_ = this[_loc1_ + _loc2_.type];
-                     _loc4_ = _loc3_.selected;
-                     if(!this.useAdvancedGraphic && (_loc2_.advanced))
-                     {
-                        _loc3_.selected = Boolean((this.useAdvancedGraphic) || (!_loc2_.advanced));
-                     }
-                     _loc3_.enabled = Boolean((this.useAdvancedGraphic) || (!_loc2_.advanced));
-                     if(_loc4_ != _loc3_.selected)
-                     {
-                        dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,_loc1_,_loc3_.selected));
-                     }
-                     continue;
-                  case SettingsConfig.TYPE_SLIDER:
-                     continue;
-                  case SettingsConfig.TYPE_DROPDOWN:
-                     _loc5_ = this[_loc1_ + _loc2_.type];
-                     _loc6_ = _loc5_.dataProvider[_loc5_.selectedIndex].data;
-                     _loc7_ = -1;
-                     _loc8_ = _loc2_.options.length;
-                     _loc10_ = 0;
-                     while(_loc10_ < _loc8_)
-                     {
-                        if(_loc2_.options[_loc10_].data == _loc6_)
-                        {
-                           _loc7_ = _loc10_;
-                           break;
-                        }
-                        _loc10_++;
-                     }
-                     _loc5_.menuRowCount = _loc2_.options.length;
-                     _loc5_.dataProvider = new DataProvider(_loc2_.options);
-                     _loc5_.selectedIndex = _loc7_ != -1?_loc7_:_loc2_.options.length-1;
-                     _loc9_ = _loc2_.options[_loc5_.selectedIndex].data;
-                     if(_loc6_ != _loc9_)
-                     {
-                        dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,_loc1_,_loc9_));
-                     }
-                     continue;
-                  default:
-                     continue;
+                  _loc3_.selected = Boolean((this.useAdvancedGraphic) || (!param2.advanced));
                }
-            }
-            else
-            {
-               continue;
-            }
+               _loc3_.enabled = Boolean((this.useAdvancedGraphic) || (!param2.advanced));
+               if(_loc4_ != _loc3_.selected)
+               {
+                  dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,param1,_loc3_.selected));
+               }
+               break;
+            case SettingsConfig.TYPE_SLIDER:
+               break;
+            case SettingsConfig.TYPE_DROPDOWN:
+               _loc5_ = this[param1 + param2.type];
+               _loc6_ = _loc5_.dataProvider[_loc5_.selectedIndex].data;
+               _loc7_ = -1;
+               _loc8_ = param2.options.length;
+               _loc10_ = 0;
+               while(_loc10_ < _loc8_)
+               {
+                  if(param2.options[_loc10_].data == _loc6_)
+                  {
+                     _loc7_ = _loc10_;
+                     break;
+                  }
+                  _loc10_++;
+               }
+               _loc5_.menuRowCount = param2.options.length;
+               _loc5_.dataProvider = new DataProvider(param2.options);
+               _loc5_.selectedIndex = _loc7_ != -1?_loc7_:param2.options.length-1;
+               _loc9_ = param2.options[_loc5_.selectedIndex].data;
+               if(_loc6_ != _loc9_)
+               {
+                  dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,param1,_loc9_));
+               }
+               break;
          }
-         this.allowCheckPresets = true;
       }
 
       private function checkForCustomsPreset() : void {
@@ -889,7 +967,7 @@ package net.wg.gui.lobby.settings
             _loc7_ = SettingsControlProp(_data[SettingsConfig.RENDER_PIPELINE]);
             _loc8_ = _loc7_.options[this.RENDER_PIPELINEDropDown.selectedIndex].data == 0?true:false;
             _loc9_ = SettingsConfig.MULTISAMPLING;
-            SettingsControlProp(_data[_loc9_]).lastVal = _loc3_;
+            SettingsControlProp(_data[_loc9_]).prevVal = _loc3_;
          }
          else
          {
@@ -898,7 +976,7 @@ package net.wg.gui.lobby.settings
                _loc10_ = this.fullScreenCheckbox.selected;
                _loc4_ = _loc10_?SettingsConfig.RESOLUTION:SettingsConfig.WINDOW_SIZE;
                _loc6_ = this.monitorDropDown.selectedIndex;
-               SettingsControlProp(_data[_loc4_]).lastVal[_loc6_] = _loc3_;
+               SettingsControlProp(_data[_loc4_]).prevVal[_loc6_] = _loc3_;
             }
             else
             {
@@ -911,10 +989,10 @@ package net.wg.gui.lobby.settings
                   if(!this.fullScreenCheckbox.selected)
                   {
                      _loc12_ = this.trySearchSameSizeForAnotherMonitor(this.sizesDropDown.dataProvider.requestItemAt(this.sizesDropDown.selectedIndex).toString(),_loc11_.options);
-                     SettingsControlProp(_data[_loc5_]).lastVal[_loc6_] = _loc12_;
+                     SettingsControlProp(_data[_loc5_]).prevVal[_loc6_] = _loc12_;
                   }
                   this.sizesDropDown.dataProvider = new DataProvider(_loc11_.options);
-                  this.sizesDropDown.selectedIndex = SettingsControlProp(_data[_loc5_]).lastVal[_loc6_];
+                  this.sizesDropDown.selectedIndex = SettingsControlProp(_data[_loc5_]).prevVal[_loc6_];
                   dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,_loc5_,this.sizesDropDown.selectedIndex));
                }
             }
@@ -943,7 +1021,7 @@ package net.wg.gui.lobby.settings
             this.sizesLabel.text = SettingsConfig.LOCALIZATION + _loc5_;
             _loc4_.options = SettingsControlProp(_data[_loc5_]).options[_loc6_];
             this.sizesDropDown.dataProvider = new DataProvider(_loc4_.options);
-            this.sizesDropDown.selectedIndex = SettingsControlProp(_data[_loc5_]).lastVal[_loc6_];
+            this.sizesDropDown.selectedIndex = SettingsControlProp(_data[_loc5_]).prevVal[_loc6_];
             dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,_loc5_,this.sizesDropDown.selectedIndex));
             this.aspectRatioDropDown.enabled = _loc2_.selected;
             this.gammaSlider.enabled = _loc2_.selected;
@@ -967,16 +1045,19 @@ package net.wg.gui.lobby.settings
          var _loc3_:Object = param1.itemData;
          var _loc4_:DropdownMenu = DropdownMenu(param1.target);
          var _loc5_:String = SettingsConfig.getControlId(_loc4_.name,SettingsConfig.TYPE_DROPDOWN);
-         var _loc6_:Number = SettingsControlProp(this.graphicsQualityDataProv[_loc5_]).options[_loc2_].data;
+         var _loc6_:SettingsControlProp = SettingsControlProp(this.graphicsQualityDataProv[_loc5_]);
+         var _loc7_:Number = _loc6_.options[_loc2_].data;
+         var _loc8_:SettingsControlProp = SettingsControlProp(SettingsConfig.settingsData[SettingsConfig.GRAPHIC_SETTINGS][SettingsConfig.POST_PROCESSING_QUALITY]);
+         _loc8_.changedVal = _loc2_;
          if(_loc5_ == SettingsConfig.RENDER_PIPELINE)
          {
-            if(!Boolean(_loc6_) != this.useAdvancedGraphic)
+            if(!Boolean(_loc7_) != this.useAdvancedGraphic)
             {
-               this.updateGraphicsQualityDataForAdvanced(!Boolean(_loc6_),false);
+               this.updateGraphicsQualityDataForAdvanced(!Boolean(_loc7_),false);
                this.updateGraphicsQualityIfChangeAdvanced();
             }
          }
-         dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,_loc5_,_loc6_));
+         dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,_loc5_,_loc7_));
          this.checkForCustomsPreset();
       }
 

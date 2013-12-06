@@ -16,6 +16,8 @@ package net.wg.infrastructure.interfaces
 
       function get dataInfo() : Object;
 
+      function get itemInInventory() : Boolean;
+
       function hideLine() : void;
 
       function setColor(param1:Number) : void;

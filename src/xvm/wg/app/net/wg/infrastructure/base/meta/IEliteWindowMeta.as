@@ -6,7 +6,7 @@ package net.wg.infrastructure.base.meta
    public interface IEliteWindowMeta extends IEventDispatcher
    {
           
-      function as_setVehTypeCompDescr(param1:int) : void;
+      function as_setVehicle(param1:Object) : void;
    }
 
 }

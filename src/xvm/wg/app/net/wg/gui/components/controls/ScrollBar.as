@@ -58,6 +58,18 @@ package net.wg.gui.components.controls
          }
          super.handleTrackClick(param1);
       }
+
+      override public function get enabled() : Boolean {
+         return super.enabled;
+      }
+
+      override public function set enabled(param1:Boolean) : void {
+         super.enabled = param1;
+         upArrow.enabled = param1;
+         downArrow.enabled = param1;
+         thumb.enabled = param1;
+         mouseEnabled = mouseChildren = param1;
+      }
    }
 
 }

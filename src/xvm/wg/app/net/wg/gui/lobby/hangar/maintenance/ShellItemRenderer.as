@@ -1,13 +1,14 @@
 package net.wg.gui.lobby.hangar.maintenance
 {
    import net.wg.gui.components.controls.SoundListItemRenderer;
-   import net.wg.gui.components.controls.DropdownMenu;
    import flash.text.TextField;
    import net.wg.gui.components.controls.IconText;
+   import net.wg.gui.components.controls.DropdownMenu;
    import flash.display.MovieClip;
    import net.wg.gui.components.controls.Slider;
    import net.wg.gui.components.controls.NumericStepper;
    import net.wg.gui.components.controls.UILoaderAlt;
+   import net.wg.gui.components.controls.ActionPrice;
    import net.wg.utils.IEventCollector;
    import scaleform.clik.events.SliderEvent;
    import flash.events.MouseEvent;
@@ -43,7 +44,7 @@ package net.wg.gui.lobby.hangar.maintenance
 
       public var initCounterBgWidth:int = 0;
 
-      public var select:DropdownMenu;
+      public var select:MaintenanceDropDown;
 
       public var countLabel:TextField;
 
@@ -69,6 +70,8 @@ package net.wg.gui.lobby.hangar.maintenance
 
       public var emptyFocusIndicator:MovieClip;
 
+      public var actionPrice:ActionPrice;
+
       override public function dispose() : void {
          var _loc1_:IEventCollector = App.utils.events;
          _loc1_.removeEvent(this.countSlider,SliderEvent.VALUE_CHANGE,this.onSliderValueChange);
@@ -86,6 +89,8 @@ package net.wg.gui.lobby.hangar.maintenance
          this.toBuy = null;
          this.price.dispose();
          this.price = null;
+         this.actionPrice.dispose();
+         this.actionPrice = null;
          this.toBuyTf = null;
          this.toBuyDropdown.dispose();
          this.toBuyDropdown = null;
@@ -153,6 +158,10 @@ package net.wg.gui.lobby.hangar.maintenance
             if(this.shell)
             {
                this.icon.source = this.shell.icon;
+               if(this.actionPrice)
+               {
+                  this.actionPrice.visible = false;
+               }
                if(this.shell.prices[1] > 0 && this.shell.prices[0] > 0 && (this.shell.goldShellsForCredits))
                {
                   this.toBuyDropdown.visible = this.shell.goldShellsForCredits;
@@ -162,6 +171,9 @@ package net.wg.gui.lobby.hangar.maintenance
                   this.toBuyDropdown.dataProvider = new DataProvider([_loc1_.htmlTextWithIcon(_loc1_.integer(this.shell.prices[0]),Currencies.CREDITS),_loc1_.htmlTextWithIcon(_loc1_.gold(this.shell.prices[1]),Currencies.GOLD)]);
                   this.toBuyDropdown.selectedIndex = this.shell.currency == Currencies.CREDITS?0:1;
                   this.price.icon = this.shell.currency;
+                  this.actionPrice.setData(this.shell.actionPrc,0,0,this.shell.currency);
+                  this.actionPrice.setup(this);
+                  this.price.visible = !this.actionPrice.visible;
                }
                else
                {
@@ -215,6 +227,7 @@ package net.wg.gui.lobby.hangar.maintenance
 
       private function onShellCurrencyChanged(param1:ListEvent) : void {
          this.price.icon = this.toBuyDropdown.selectedIndex == 0?Currencies.CREDITS:Currencies.GOLD;
+         this.actionPrice.ico = this.toBuyDropdown.selectedIndex == 0?IconText.CREDITS:IconText.GOLD;
          this.shell.currency = this.toBuyDropdown.selectedIndex == 0?Currencies.CREDITS:Currencies.GOLD;
          this.onUserCountChange();
       }
@@ -230,23 +243,30 @@ package net.wg.gui.lobby.hangar.maintenance
       private function updateShellsPrice() : void {
          var _loc1_:int = this.shell.buyShellsCount;
          var _loc2_:* = 0;
-         var _loc3_:* = "";
-         var _loc4_:ILocale = App.utils.locale;
+         var _loc3_:* = 0;
+         var _loc4_:* = "";
+         var _loc5_:ILocale = App.utils.locale;
          if(this.toBuyDropdown.visible)
          {
             _loc2_ = this.shell.prices[this.toBuyDropdown.selectedIndex];
+            _loc3_ = this.shell.defPrices[this.toBuyDropdown.selectedIndex];
          }
          else
          {
             _loc2_ = this.shell.prices[this.shell.currency == Currencies.CREDITS?0:1];
-            _loc3_ = this.shell.currency == Currencies.CREDITS?_loc4_.integer(_loc2_):_loc4_.gold(_loc2_);
+            _loc3_ = this.shell.defPrices[this.shell.currency == Currencies.CREDITS?0:1];
+            _loc4_ = this.shell.currency == Currencies.CREDITS?_loc5_.integer(_loc2_):_loc5_.gold(_loc2_);
          }
          this.toBuy.icon = this.shell.currency;
          this.price.icon = this.shell.currency;
          this.toBuy.textColor = this.price.textColor = Currencies.TEXT_COLORS[this.shell.currency];
          this.toBuyTf.text = _loc1_ + MULTY_CHARS;
-         this.toBuy.text = _loc1_ + MULTY_CHARS + _loc3_;
-         this.price.text = this.shell.currency == Currencies.CREDITS?_loc4_.integer(_loc2_ * _loc1_):_loc4_.gold(_loc2_ * _loc1_);
+         this.toBuy.text = _loc1_ + MULTY_CHARS + _loc4_;
+         var _loc6_:Number = _loc2_ * _loc1_;
+         var _loc7_:Number = _loc3_ * _loc1_;
+         this.price.text = this.shell.currency == Currencies.CREDITS?_loc5_.integer(_loc6_):_loc5_.gold(_loc6_);
+         this.actionPrice.setData(this.shell.actionPrc,_loc6_,_loc7_,this.shell.currency);
+         this.price.visible = !this.actionPrice.visible;
          this.toBuy.enabled = this.price.enabled = !(_loc1_ == 0);
          this.toBuy.mouseEnabled = this.price.mouseEnabled = false;
          this.toBuyTf.alpha = _loc1_ == 0?0.3:1;

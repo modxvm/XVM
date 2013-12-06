@@ -53,6 +53,10 @@ package net.wg.gui.cyberSport.views.unit
       }
 
       public function set unitData(param1:UnitVO) : void {
+         if(param1 == null)
+         {
+            return;
+         }
          this._unitData = param1;
          invalidate(InvalidationType.DATA,INVALID_EDIT_MODE);
       }
@@ -71,9 +75,12 @@ package net.wg.gui.cyberSport.views.unit
          super.draw();
          if(isInvalid(InvalidationType.DATA))
          {
-            _loc1_ = this._unitData?this._unitData.description:"";
-            this.descriptionInput.text = _loc1_;
-            this._previousComment = _loc1_;
+            if(!this._inEditMode)
+            {
+               _loc1_ = this._unitData?this._unitData.description:"";
+               this.descriptionInput.text = _loc1_;
+               this._previousComment = _loc1_;
+            }
          }
          if(isInvalid(INVALID_EDIT_MODE))
          {
@@ -164,6 +171,10 @@ package net.wg.gui.cyberSport.views.unit
          this.unitChannelComponent.dispose();
          this.descriptionInput.dispose();
          super.dispose();
+      }
+
+      public function setDescription(param1:String) : void {
+         this.descriptionInput.text = param1;
       }
    }
 

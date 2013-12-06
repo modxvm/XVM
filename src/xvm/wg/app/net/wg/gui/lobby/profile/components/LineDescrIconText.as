@@ -1,7 +1,10 @@
 package net.wg.gui.lobby.profile.components
 {
    import flash.text.TextField;
+   import flash.display.Sprite;
+   import flash.display.Graphics;
    import flash.events.Event;
+   import scaleform.clik.constants.InvalidationType;
    import flash.events.MouseEvent;
    import net.wg.data.managers.IToolTipParams;
 
@@ -10,8 +13,8 @@ package net.wg.gui.lobby.profile.components
    {
           
       public function LineDescrIconText() {
+         this.hitSprite = new Sprite();
          super();
-         buttonMode = true;
       }
 
       public static const DESCRIPTION_TEXT_INVALID:String = "dInvalid";
@@ -30,8 +33,16 @@ package net.wg.gui.lobby.profile.components
 
       private var _isToolTipShowing:Boolean;
 
+      private var hitSprite:Sprite;
+
       override protected function configUI() : void {
          super.configUI();
+         var _loc1_:Graphics = this.hitSprite.graphics;
+         _loc1_.beginFill(1,0);
+         _loc1_.drawRect(0,0,1,1);
+         _loc1_.endFill();
+         addChild(this.hitSprite);
+         this.hitArea = this.hitSprite;
       }
 
       public function get description() : String {
@@ -52,8 +63,15 @@ package net.wg.gui.lobby.profile.components
          if(isInvalid(DESCRIPTION_TEXT_INVALID))
          {
             this.textField.multiline = true;
+            this.textField.mouseEnabled = false;
             this.textField.text = this._description;
+            invalidateSize();
             dispatchEvent(new Event(Event.RESIZE,true));
+         }
+         if(isInvalid(InvalidationType.SIZE))
+         {
+            this.hitSprite.width = this.width;
+            this.hitSprite.height = this.textField.y + this.textField.textHeight;
          }
       }
 
@@ -68,12 +86,8 @@ package net.wg.gui.lobby.profile.components
             gotoAndPlay("disabled");
             textComponent.text = "--";
          }
+         invalidateSize();
          invalidate(DESCRIPTION_TEXT_INVALID);
-      }
-
-      protected function mouseRollOutHandler(param1:MouseEvent) : void {
-         this._isToolTipShowing = false;
-         hideToolTip();
       }
 
       protected function mouseRollOverHandler(param1:MouseEvent) : void {
@@ -81,16 +95,16 @@ package net.wg.gui.lobby.profile.components
          this.showToolTip(null);
       }
 
+      protected function mouseRollOutHandler(param1:MouseEvent) : void {
+         this._isToolTipShowing = false;
+         hideToolTip();
+      }
+
       protected function showToolTip(param1:IToolTipParams) : void {
          if(this._tooltip)
          {
             App.toolTipMgr.showComplex(this._tooltip);
          }
-      }
-
-      override public function dispose() : void {
-         this.disposeHandlers();
-         super.dispose();
       }
 
       private function disposeHandlers() : void {
@@ -127,6 +141,11 @@ package net.wg.gui.lobby.profile.components
 
       override public function get enabled() : Boolean {
          return this._myEnabled;
+      }
+
+      override public function dispose() : void {
+         this.disposeHandlers();
+         super.dispose();
       }
    }
 

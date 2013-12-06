@@ -1,7 +1,7 @@
 package net.wg.gui.components.common
 {
-   import flash.display.DisplayObject;
    import scaleform.clik.motion.Tween;
+   import flash.display.DisplayObject;
    import net.wg.infrastructure.interfaces.IView;
    import flash.display.MovieClip;
    import net.wg.data.constants.Linkages;
@@ -16,18 +16,27 @@ package net.wg.gui.components.common
 
       private static const ANIMATION_DURATION:int = 500;
 
+      private var bgFadingTween:Tween = null;
+
       override public function addChild(param1:DisplayObject) : DisplayObject {
-         var _loc2_:Tween = null;
          var param1:DisplayObject = super.addChild(param1);
          if(_modalBg)
          {
             setChildIndex(param1,getChildIndex(_modalBg));
-            _loc2_ = new Tween(ANIMATION_DURATION,_modalBg,{"alpha":0},
-               {
-                  "paused":false,
-                  "onComplete":this.onModalTweenEnd
-               }
-            );
+            if(!this.bgFadingTween)
+            {
+               this.bgFadingTween = new Tween(ANIMATION_DURATION,_modalBg,{"alpha":0},
+                  {
+                     "paused":false,
+                     "onComplete":this.onModalTweenEnd
+                  }
+               );
+            }
+            else
+            {
+               this.bgFadingTween.reset();
+               this.bgFadingTween.paused = false;
+            }
          }
          return param1;
       }
@@ -54,6 +63,15 @@ package net.wg.gui.components.common
             _loc2_--;
          }
          return _loc1_;
+      }
+
+      override public function dispose() : void {
+         super.dispose();
+         if(this.bgFadingTween != null)
+         {
+            this.bgFadingTween.dispose();
+            this.bgFadingTween = null;
+         }
       }
 
       override protected function createModalBg() : void {

@@ -4,9 +4,12 @@ package net.wg.gui.lobby.profile.pages.statistics
    import flash.text.TextField;
    import flash.display.MovieClip;
    import flash.display.Sprite;
+   import net.wg.gui.utils.ExcludeTweenManager;
    import flash.text.TextFieldAutoSize;
    import flash.events.MouseEvent;
    import net.wg.data.managers.IToolTipParams;
+   import fl.transitions.easing.Strong;
+   import scaleform.clik.motion.Tween;
    import flash.geom.Point;
 
 
@@ -14,13 +17,13 @@ package net.wg.gui.lobby.profile.pages.statistics
    {
           
       public function StatisticBarChartItem() {
+         this.tweenManager = new ExcludeTweenManager();
          super();
+         this.animationClient = new StatisticsChartItemAnimClient(this);
          stop();
       }
 
-      public static const topTextColor:uint = 16777215;
-
-      public static const textColor:uint = 12696220;
+      protected static const tweeSpeed:uint = 500;
 
       private static function hideToolTip() : void {
          App.toolTipMgr.hide();
@@ -33,6 +36,10 @@ package net.wg.gui.lobby.profile.pages.statistics
       public var background:Sprite;
 
       private var _tooltip:String = null;
+
+      protected var tweenManager:ExcludeTweenManager;
+
+      private var animationClient:StatisticsChartItemAnimClient;
 
       override protected function configUI() : void {
          super.configUI();
@@ -52,21 +59,26 @@ package net.wg.gui.lobby.profile.pages.statistics
       }
 
       override protected function applyValueChange() : void {
-         this.gotoAndStop(value + 1);
-         var _loc1_:StatisticChartInfo = StatisticChartInfo(_data);
-         this.textField.text = _loc1_.yField.toString();
-         this.textField.textColor = value == 100?topTextColor:textColor;
-         this.textField.y = this.mcMask.y - this.mcMask.height - this.textField.height;
-         this.textField.x = Math.round(this.background.x + this.background.width / 2 - this.textField.width / 2);
+         var _loc1_:Object = {};
+         _loc1_[StatisticsChartItemAnimClient.FRAME_NUMBER_PROPERTY] = value + 1;
+         var _loc2_:Number = Number(StatisticChartInfo(_data).yField);
+         _loc1_[StatisticsChartItemAnimClient.VALUE_PROPERTY] = _loc2_ >= 0?_loc2_:0;
+         this.tweenManager.registerAndLaunch(tweeSpeed,this.animationClient,_loc1_,this.getQuickSet());
+      }
+
+      protected function getQuickSet() : Object {
+         var _loc1_:Object = {};
+         _loc1_.ease = Strong.easeOut;
+         _loc1_.onComplete = this.onTweenComplete;
+         return _loc1_;
+      }
+
+      private function onTweenComplete(param1:Tween) : void {
+         this.tweenManager.unregister(param1);
       }
 
       public function getThumbDimensions() : Point {
          return new Point(this.background.width,this.background.height);
-      }
-
-      override public function dispose() : void {
-         this.disposeHandlers();
-         super.dispose();
       }
 
       private function disposeHandlers() : void {
@@ -86,6 +98,13 @@ package net.wg.gui.lobby.profile.pages.statistics
             addEventListener(MouseEvent.ROLL_OVER,this.mouseRollOverHandler,false,0,true);
             addEventListener(MouseEvent.ROLL_OUT,this.mouseRollOutHandler,false,0,true);
          }
+      }
+
+      override public function dispose() : void {
+         this.tweenManager.dispose();
+         this.animationClient.dispose();
+         this.disposeHandlers();
+         super.dispose();
       }
    }
 

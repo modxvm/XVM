@@ -261,6 +261,10 @@ package net.wg.gui.lobby.hangar.crew
          visible = true;
       }
 
+      public function getData() : Object {
+         return this.data;
+      }
+
       public function updateSkills(param1:RecruitRendererVO) : void {
          var _loc2_:Array = null;
          var _loc3_:* = 0;

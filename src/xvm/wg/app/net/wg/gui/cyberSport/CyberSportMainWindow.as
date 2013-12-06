@@ -13,13 +13,13 @@ package net.wg.gui.cyberSport
    import flash.display.MovieClip;
    import net.wg.gui.cyberSport.views.events.CyberSportEvent;
    import scaleform.clik.utils.Padding;
-   import net.wg.infrastructure.base.DefaultWindowGeometry;
    import scaleform.clik.events.ButtonEvent;
    import net.wg.gui.cyberSport.controls.events.CSComponentEvent;
    import scaleform.clik.events.InputEvent;
    import scaleform.clik.ui.InputDetails;
    import flash.ui.Keyboard;
    import scaleform.clik.constants.InputValue;
+   import net.wg.gui.cyberSport.views.UnitView;
    import net.wg.gui.cyberSport.interfaces.IChannelComponentHolder;
    import flash.display.InteractiveObject;
    import net.wg.data.constants.generated.CYBER_SPORT_ALIASES;
@@ -99,7 +99,14 @@ package net.wg.gui.cyberSport
          super.onPopulate();
          window.title = CYBERSPORT.WINDOW_TITLE;
          window.contentPadding = new Padding(35,13,-5,12);
-         geometry = new DefaultWindowGeometry(125);
+      }
+
+      override public function as_getGeometry() : Array {
+         if(window)
+         {
+            return [window.x,window.y,-1,-1];
+         }
+         return null;
       }
 
       override protected function onDispose() : void {
@@ -109,6 +116,11 @@ package net.wg.gui.cyberSport
       }
 
       override protected function configUI() : void {
+         if(_baseDisposed)
+         {
+            DebugUtils.LOG_DEBUG("!!! CyberSportMainWindow disposed before initializing !!!");
+            return;
+         }
          super.configUI();
          this.backBtn.buttonMode = true;
          this.backBtn.useHandCursor = true;
@@ -127,17 +139,31 @@ package net.wg.gui.cyberSport
          var _loc2_:InputDetails = param1.details;
          if(_loc2_.code == Keyboard.ESCAPE && _loc2_.value == InputValue.KEY_DOWN)
          {
-            if(isBackBtnVisibleS())
+            if(this.autoSearch.visible)
             {
-               param1.handled = true;
-               onBackClickS();
+               this.autoSearch.handleInput(param1);
             }
             else
             {
-               if(window.getCloseBtn().enabled)
+               if(isBackBtnVisibleS())
                {
                   param1.handled = true;
-                  onWindowCloseS();
+                  if(this.currentView  is  UnitView && (UnitView(this.currentView).rosterTeamContext))
+                  {
+                     UnitView(this.currentView).preInitFadeAnimationCancel();
+                  }
+                  else
+                  {
+                     onBackClickS();
+                  }
+               }
+               else
+               {
+                  if(window.getCloseBtn().enabled)
+                  {
+                     param1.handled = true;
+                     onWindowCloseS();
+                  }
                }
             }
          }
@@ -153,7 +179,14 @@ package net.wg.gui.cyberSport
          }
          else
          {
-            App.utils.focusHandler.setFocus(this.currentView as InteractiveObject);
+            if(this.autoSearch.visible)
+            {
+               this.autoSearchUpdateFocus();
+            }
+            else
+            {
+               App.utils.focusHandler.setFocus(this.currentView as InteractiveObject);
+            }
          }
       }
 
@@ -199,7 +232,7 @@ package net.wg.gui.cyberSport
             case CYBER_SPORT_ALIASES.UNIT_VIEW_UI:
                if(param1.itemId)
                {
-                  onJoinUnitS(param1.itemId,param1.slotIndex);
+                  onJoinUnitS(param1.itemId,param1.peripheryID,param1.slotIndex);
                }
                else
                {

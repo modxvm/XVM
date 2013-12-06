@@ -112,7 +112,7 @@ package net.wg.gui.lobby.techtree.nodes
          }
          if(button != null)
          {
-            button.label = getNamedLabel(stateProps.label);
+            button.label = getNamedValue(stateProps.label,Renderer.NAMED_VALUE_TYPE_STRING).toString();
             button.enabled = isActionEnabled();
             if(button.setAnimation(stateProps.id,stateProps.animation))
             {

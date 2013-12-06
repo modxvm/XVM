@@ -2,6 +2,7 @@ package net.wg.gui.prebattle.company
 {
    import net.wg.gui.components.controls.DropdownMenu;
    import flash.events.MouseEvent;
+   import flash.events.Event;
 
 
    public class GroupPlayersDropDownMenu extends DropdownMenu
@@ -27,9 +28,13 @@ package net.wg.gui.prebattle.company
 
       override protected function showDropdown() : void {
          super.showDropdown();
-         _dropdownRef.buttonMode = true;
-         _dropdownRef.mouseEnabled = true;
-         _dropdownRef.addEventListener(MouseEvent.MOUSE_DOWN,this.onClickDropDownMenu,false,1110,true);
+         if(_dropdownRef)
+         {
+            _dropdownRef.buttonMode = true;
+            _dropdownRef.mouseEnabled = true;
+            _dropdownRef.addEventListener(MouseEvent.MOUSE_DOWN,this.onClickDropDownMenu,false,1110,true);
+            dispatchEvent(new CompanyDropDownEvent(CompanyDropDownEvent.SHOW_DROP_DOWN,_dropdownRef));
+         }
       }
 
       private function onClickDropDownMenu(param1:MouseEvent) : void {
@@ -50,6 +55,10 @@ package net.wg.gui.prebattle.company
       override public function close() : void {
          selected = false;
          hideDropdown();
+      }
+
+      override protected function updateDDPosition(param1:Event) : void {
+          
       }
    }
 

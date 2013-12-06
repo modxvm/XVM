@@ -151,17 +151,18 @@ package scaleform.clik.motion
          this.onComplete = null;
          this.onChange = null;
          this.nextTween = null;
-         ticker = null;
-         workingMatrix = null;
          this.next = null;
          this.prev = null;
          this.startMatrix = null;
          this.deltaMatrix = null;
          this.transform = null;
          this.targetDO = null;
-         this.firstProp.next = null;
-         this.firstProp.prev = null;
-         this.firstProp = null;
+         if(this.firstProp)
+         {
+            this.firstProp.next = null;
+            this.firstProp.prev = null;
+            this.firstProp = null;
+         }
          for (_loc1_ in this.props)
          {
             delete this.props[[_loc1_]];

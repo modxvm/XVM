@@ -2,6 +2,7 @@ package net.wg.gui.lobby.sellDialog
 {
    import scaleform.clik.core.UIComponent;
    import net.wg.gui.components.controls.IconText;
+   import net.wg.gui.components.controls.ActionPrice;
    import flash.text.TextField;
    import net.wg.gui.components.advanced.TankIcon;
    import net.wg.gui.components.controls.DropdownMenu;
@@ -29,6 +30,8 @@ package net.wg.gui.lobby.sellDialog
 
       public var emptySellIT:IconText;
 
+      public var vehicleActionPrice:ActionPrice;
+
       public var tankLevelTF:TextField;
 
       public var tankNameTF:TextField;
@@ -55,6 +58,7 @@ package net.wg.gui.lobby.sellDialog
 
       override public function dispose() : void {
          super.dispose();
+         this.vehicleActionPrice.dispose();
          this.emptySellIT.dispose();
          this.inBarracsDrop.dispose();
          this.tankIcon.dispose();
@@ -64,6 +68,7 @@ package net.wg.gui.lobby.sellDialog
          super.configUI();
          this.tankPriceTF.text = DIALOGS.VEHICLESELLDIALOG_VEHICLE_EMPTYSELLPRICE;
          this.emptySellIT.textFieldYOffset = VehicleSellDialog.ICONS_TEXT_OFFSET;
+         this.vehicleActionPrice.textYOffset = VehicleSellDialog.ICONS_TEXT_OFFSET;
       }
 
       public function get tankGoldPrice() : Number {
@@ -142,22 +147,31 @@ package net.wg.gui.lobby.sellDialog
          {
             this._tankGoldPrice = param1.sellPrice[1];
             this._tankPrice = 0;
-            this.showPrice(true,this._tankGoldPrice);
+            this.showPrice(true,this._tankGoldPrice,param1.defSellPrice[1],param1.sellActionPrc);
          }
          else
          {
             this._tankPrice = param1.sellPrice[0];
             this._tankGoldPrice = 0;
-            this.showPrice(false,this._tankPrice);
+            this.showPrice(false,this._tankPrice,param1.defSellPrice[0],param1.sellActionPrc);
             this._creditsCommon = this._creditsCommon + this.tankPrice;
          }
       }
 
-      private function showPrice(param1:Boolean, param2:Number=0) : void {
-         this.emptySellIT.text = "+ " + this.locale.gold(param2);
-         this.emptySellIT.icon = param1?"gold":"credits";
+      private function showPrice(param1:Boolean, param2:Number, param3:Number, param4:Number) : void {
+         if(param1)
+         {
+            this.emptySellIT.text = "+ " + this.locale.gold(param2);
+         }
+         else
+         {
+            this.emptySellIT.text = "+ " + this.locale.integer(param2);
+         }
+         this.emptySellIT.icon = param1?IconText.GOLD:IconText.CREDITS;
          this.emptySellIT.textColor = param1?16763253:13556185;
          this.emptySellIT.validateNow();
+         this.vehicleActionPrice.setData(param4,param2,param3,param1?IconText.GOLD:IconText.CREDITS,false,ActionPrice.ITEM_TYPE_VEHICLE);
+         this.emptySellIT.visible = !this.vehicleActionPrice.visible;
       }
 
       public function getNextPosition() : int {

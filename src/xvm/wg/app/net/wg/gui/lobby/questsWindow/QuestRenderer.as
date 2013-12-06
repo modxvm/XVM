@@ -1,10 +1,13 @@
 package net.wg.gui.lobby.questsWindow
 {
    import net.wg.gui.components.controls.SoundListItemRenderer;
+   import flash.events.MouseEvent;
    import flash.display.MovieClip;
+   import net.wg.gui.lobby.questsWindow.components.QuestsCounter;
+   import net.wg.gui.lobby.questsWindow.components.QuestStatusComponent;
+   import net.wg.gui.lobby.questsWindow.components.ProgressQuestIndicator;
    import flash.text.TextField;
    import net.wg.gui.components.controls.TextFieldShort;
-   import flash.events.MouseEvent;
    import net.wg.gui.lobby.questsWindow.data.QuestRendererVO;
    import scaleform.clik.constants.InvalidationType;
    import scaleform.clik.events.ComponentEvent;
@@ -21,27 +24,42 @@ package net.wg.gui.lobby.questsWindow
          this.counter.visible = false;
          this.statusMC.visible = false;
          this.progressIndicator.visible = false;
+         this.actionMC.visible = false;
       }
 
       private static const DEF_COUNTER_Y:int = 27;
 
       private static const COMPLEX_COUNTER_Y:int = 18;
 
-      private static const NOT_AVAILABLE_COLOR:int = 6381142;
+      private static function showLockTooltip(param1:MouseEvent) : void {
+         App.toolTipMgr.show(TOOLTIPS.QUESTS_COMPLEXTASK_LABEL);
+      }
 
-      private static const DONE_COLOR:int = 7785801;
+      private static function showIGRTooltip(param1:MouseEvent) : void {
+         App.toolTipMgr.show(TOOLTIPS.QUESTS_IGR);
+      }
+
+      private static function hideTooltip(param1:MouseEvent) : void {
+         App.toolTipMgr.hide();
+      }
+
+      private static function showTooltip(param1:MouseEvent) : void {
+         App.toolTipMgr.show(TOOLTIPS.QUESTS_RENDERER_LABEL);
+      }
 
       public var newIndicator:MovieClip;
 
       public var indicatorIGR:MovieClip;
 
-      public var counter:MovieClip;
+      public var counter:QuestsCounter;
 
-      public var statusMC:MovieClip;
+      public var statusMC:QuestStatusComponent;
 
       public var lockUpMC:MovieClip;
 
       public var lockDownMC:MovieClip;
+
+      public var actionMC:MovieClip;
 
       public var progressIndicator:ProgressQuestIndicator;
 
@@ -55,7 +73,7 @@ package net.wg.gui.lobby.questsWindow
 
       public var hitTooltipMc:MovieClip;
 
-      private var _statusTooltip:String = "";
+      private var _status:String = "";
 
       private var wasAnimated:Boolean = false;
 
@@ -63,27 +81,7 @@ package net.wg.gui.lobby.questsWindow
          super.configUI();
          this.mouseChildren = true;
          this.mouseEnabled = true;
-         this.hitTooltipMc.addEventListener(MouseEvent.CLICK,this.hideTooltip);
-         this.hitTooltipMc.addEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
-         this.hitTooltipMc.addEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
-         this.counter.addEventListener(MouseEvent.CLICK,this.hideTooltip);
-         this.counter.addEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
-         this.counter.addEventListener(MouseEvent.ROLL_OVER,this.showCounterTooltip);
-         this.indicatorIGR.addEventListener(MouseEvent.CLICK,this.hideTooltip);
-         this.indicatorIGR.addEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
-         this.indicatorIGR.addEventListener(MouseEvent.ROLL_OVER,this.showIGRTooltip);
-         this.newIndicator.addEventListener(MouseEvent.CLICK,this.hideTooltip);
-         this.newIndicator.addEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
-         this.newIndicator.addEventListener(MouseEvent.ROLL_OVER,this.showNewTooltip);
-         this.lockUpMC.addEventListener(MouseEvent.CLICK,this.hideTooltip);
-         this.lockUpMC.addEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
-         this.lockUpMC.addEventListener(MouseEvent.ROLL_OVER,this.showLockTooltip);
-         this.lockDownMC.addEventListener(MouseEvent.CLICK,this.hideTooltip);
-         this.lockDownMC.addEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
-         this.lockDownMC.addEventListener(MouseEvent.ROLL_OVER,this.showLockTooltip);
-         this.statusMC.addEventListener(MouseEvent.CLICK,this.hideTooltip);
-         this.statusMC.addEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
-         this.statusMC.addEventListener(MouseEvent.ROLL_OVER,this.showStatusTooltip);
+         this.addListeners();
          this.hitArea = this.hitMc;
          this.newIndicator.hitArea = this.newIndicator.hitMC;
          this.hitTooltipMc.buttonMode = true;
@@ -91,30 +89,63 @@ package net.wg.gui.lobby.questsWindow
          this.newIndicator.mouseChildren = false;
       }
 
+      private function addListeners() : void {
+         this.hitTooltipMc.addEventListener(MouseEvent.CLICK,hideTooltip);
+         this.hitTooltipMc.addEventListener(MouseEvent.ROLL_OUT,hideTooltip);
+         this.hitTooltipMc.addEventListener(MouseEvent.ROLL_OVER,showTooltip);
+         this.indicatorIGR.addEventListener(MouseEvent.CLICK,hideTooltip);
+         this.indicatorIGR.addEventListener(MouseEvent.ROLL_OUT,hideTooltip);
+         this.indicatorIGR.addEventListener(MouseEvent.ROLL_OVER,showIGRTooltip);
+         this.newIndicator.addEventListener(MouseEvent.CLICK,hideTooltip);
+         this.newIndicator.addEventListener(MouseEvent.ROLL_OUT,hideTooltip);
+         this.newIndicator.addEventListener(MouseEvent.ROLL_OVER,this.showNewTooltip);
+         this.lockUpMC.addEventListener(MouseEvent.CLICK,hideTooltip);
+         this.lockUpMC.addEventListener(MouseEvent.ROLL_OUT,hideTooltip);
+         this.lockUpMC.addEventListener(MouseEvent.ROLL_OVER,showLockTooltip);
+         this.lockDownMC.addEventListener(MouseEvent.CLICK,hideTooltip);
+         this.lockDownMC.addEventListener(MouseEvent.ROLL_OUT,hideTooltip);
+         this.lockDownMC.addEventListener(MouseEvent.ROLL_OVER,showLockTooltip);
+      }
+
       override public function dispose() : void {
-         this.hitTooltipMc.removeEventListener(MouseEvent.CLICK,this.hideTooltip);
-         this.hitTooltipMc.removeEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
-         this.hitTooltipMc.removeEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
-         this.counter.removeEventListener(MouseEvent.CLICK,this.hideTooltip);
-         this.counter.removeEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
-         this.counter.removeEventListener(MouseEvent.ROLL_OVER,this.showCounterTooltip);
-         this.indicatorIGR.removeEventListener(MouseEvent.CLICK,this.hideTooltip);
-         this.indicatorIGR.removeEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
-         this.indicatorIGR.removeEventListener(MouseEvent.ROLL_OVER,this.showIGRTooltip);
-         this.newIndicator.removeEventListener(MouseEvent.CLICK,this.hideTooltip);
-         this.newIndicator.removeEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
-         this.newIndicator.removeEventListener(MouseEvent.ROLL_OVER,this.showNewTooltip);
-         this.lockUpMC.removeEventListener(MouseEvent.CLICK,this.hideTooltip);
-         this.lockUpMC.removeEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
-         this.lockUpMC.removeEventListener(MouseEvent.ROLL_OVER,this.showLockTooltip);
-         this.lockDownMC.removeEventListener(MouseEvent.CLICK,this.hideTooltip);
-         this.lockDownMC.removeEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
-         this.lockDownMC.removeEventListener(MouseEvent.ROLL_OVER,this.showLockTooltip);
-         this.statusMC.removeEventListener(MouseEvent.CLICK,this.hideTooltip);
-         this.statusMC.removeEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
-         this.statusMC.removeEventListener(MouseEvent.ROLL_OVER,this.showStatusTooltip);
+         this.hitArea = null;
+         this.newIndicator.hitArea = null;
+         this.removeListeners();
+         this.hitTooltipMc = null;
+         this.hitMc = null;
+         this.timerTF = null;
+         this.descrTF.dispose();
+         this.descrTF = null;
+         this.taskTF = null;
+         this.actionMC = null;
+         this.lockUpMC = null;
+         this.lockDownMC = null;
+         this.newIndicator = null;
+         this.indicatorIGR = null;
+         this.counter.dispose();
+         this.counter = null;
+         this.statusMC.dispose();
+         this.statusMC = null;
          this.progressIndicator.dispose();
          super.dispose();
+      }
+
+      private function removeListeners() : void {
+         this.hitTooltipMc.removeEventListener(MouseEvent.CLICK,hideTooltip);
+         this.hitTooltipMc.removeEventListener(MouseEvent.ROLL_OUT,hideTooltip);
+         this.hitTooltipMc.removeEventListener(MouseEvent.ROLL_OVER,showTooltip);
+         this.indicatorIGR.removeEventListener(MouseEvent.CLICK,hideTooltip);
+         this.indicatorIGR.removeEventListener(MouseEvent.ROLL_OUT,hideTooltip);
+         this.indicatorIGR.removeEventListener(MouseEvent.ROLL_OVER,showIGRTooltip);
+         this.newIndicator.removeEventListener(MouseEvent.CLICK,hideTooltip);
+         this.newIndicator.removeEventListener(MouseEvent.ROLL_OUT,hideTooltip);
+         this.newIndicator.removeEventListener(MouseEvent.ROLL_OVER,this.showNewTooltip);
+         this.lockUpMC.removeEventListener(MouseEvent.CLICK,hideTooltip);
+         this.lockUpMC.removeEventListener(MouseEvent.ROLL_OUT,hideTooltip);
+         this.lockUpMC.removeEventListener(MouseEvent.ROLL_OVER,showLockTooltip);
+         this.lockDownMC.removeEventListener(MouseEvent.CLICK,hideTooltip);
+         this.lockDownMC.removeEventListener(MouseEvent.ROLL_OUT,hideTooltip);
+         this.lockDownMC.removeEventListener(MouseEvent.ROLL_OVER,showLockTooltip);
       }
 
       override public function get enabled() : Boolean {
@@ -179,6 +210,11 @@ package net.wg.gui.lobby.questsWindow
          this.checkProgress(param1);
          this.checkLock(param1);
          this.checkIGR(param1);
+         this.checkAction(param1);
+      }
+
+      private function checkAction(param1:QuestRendererVO) : void {
+         this.actionMC.visible = param1.eventType == QuestsStates.ACTION;
       }
 
       private function checkLock(param1:QuestRendererVO) : void {
@@ -249,60 +285,17 @@ package net.wg.gui.lobby.questsWindow
       }
 
       private function checkStatus(param1:QuestRendererVO) : void {
-         this.descrTF.textColor = 6644049;
-         if(param1.status == QuestsStates.NOT_AVAILABLE)
+         if(this._status != param1.status)
          {
-            this.statusMC.visible = true;
-            this.statusMC.gotoAndStop(QuestsStates.NOT_AVAILABLE);
-            this.statusMC.textField.text = QUESTS.QUESTS_STATUS_NOTAVAILABLE;
-            TextField(this.statusMC.textField).textColor = NOT_AVAILABLE_COLOR;
-            this._statusTooltip = TOOLTIPS.QUESTS_STATUS_NOTREADY;
-         }
-         else
-         {
-            if(param1.status == QuestsStates.DONE)
-            {
-               this.statusMC.visible = true;
-               this.statusMC.gotoAndStop(QuestsStates.DONE);
-               this.statusMC.textField.text = QUESTS.QUESTS_STATUS_DONE;
-               TextField(this.statusMC.textField).textColor = DONE_COLOR;
-               this._statusTooltip = TOOLTIPS.QUESTS_STATUS_DONE;
-            }
-            else
-            {
-               this._statusTooltip = "";
-               this.statusMC.visible = false;
-               this.descrTF.textColor = 12104084;
-            }
+            this._status = param1.status;
+            this.statusMC.setStatus(this._status);
+            this.descrTF.textColor = this._status?QuestsStates.CLR_TASK_TF_WITH_STATUS:QuestsStates.CLR_TASK_TF_NORMAL;
          }
       }
 
       private function showNewTooltip(param1:MouseEvent) : void {
-         App.toolTipMgr.show(TOOLTIPS.QUESTS_NEWLABEL_TASK);
-      }
-
-      private function showLockTooltip(param1:MouseEvent) : void {
-         App.toolTipMgr.show(TOOLTIPS.QUESTS_COMPLEXTASK_LABEL);
-      }
-
-      private function showIGRTooltip(param1:MouseEvent) : void {
-         App.toolTipMgr.show(TOOLTIPS.QUESTS_IGR);
-      }
-
-      private function hideTooltip(param1:MouseEvent) : void {
-         App.toolTipMgr.hide();
-      }
-
-      private function showTooltip(param1:MouseEvent) : void {
-         App.toolTipMgr.show(TOOLTIPS.QUESTS_RENDERER_LABEL);
-      }
-
-      private function showCounterTooltip(param1:MouseEvent) : void {
-         App.toolTipMgr.show(TOOLTIPS.QUESTS_COUNTER_LABEL);
-      }
-
-      private function showStatusTooltip(param1:MouseEvent) : void {
-         App.toolTipMgr.show(this._statusTooltip);
+         var _loc2_:QuestRendererVO = QuestRendererVO(data);
+         App.toolTipMgr.show(_loc2_.eventType == QuestsStates.ACTION?TOOLTIPS.QUESTS_NEWLABEL_ACTION:TOOLTIPS.QUESTS_NEWLABEL_TASK);
       }
    }
 

@@ -41,7 +41,7 @@ package net.wg.gui.lobby.techtree.interfaces
 
       function getEarnedXP() : Number;
 
-      function getNamedLabel(param1:String) : String;
+      function getNamedValue(param1:String, param2:String) : Object;
 
       function getDisplayInfo() : Object;
 

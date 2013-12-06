@@ -25,11 +25,6 @@ package net.wg.gui.lobby.profile.pages.technique
 
       private var tweenManager:ExcludeTweenManager;
 
-      override protected function configUI() : void {
-         super.configUI();
-         emptyScreen.text = App.utils.locale.makeString(PROFILE.SECTION_TECHNIQUE_WINDOW_EMPTYSCREENLABEL);
-      }
-
       override protected function draw() : void {
          super.draw();
          if(isInvalid(WindowViewInvalidationType.WAITING_INVALID))
@@ -89,6 +84,8 @@ package net.wg.gui.lobby.profile.pages.technique
       override protected function onDispose() : void {
          this.tweenManager.dispose();
          this.tweenManager = null;
+         this._waiting.dispose();
+         this._waiting = null;
          super.onDispose();
       }
 

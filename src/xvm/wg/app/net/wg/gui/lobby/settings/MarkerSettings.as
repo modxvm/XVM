@@ -166,6 +166,10 @@ package net.wg.gui.lobby.settings
          this.updateShowContent();
       }
 
+      override public function updateDependentData() : void {
+         this.updateShowContent();
+      }
+
       override public function dispose() : void {
          this.tabs.removeEventListener(IndexEvent.INDEX_CHANGE,this.onTabChange);
          if(this.enemyForm.hasEventListener(SettingsSubVewEvent.ON_CONTROL_CHANGE))
@@ -196,7 +200,7 @@ package net.wg.gui.lobby.settings
          this.updateShowContent();
       }
 
-      public function updateShowContent() : void {
+      private function updateShowContent() : void {
          var _loc2_:String = null;
          var _loc3_:String = null;
          var _loc4_:String = null;

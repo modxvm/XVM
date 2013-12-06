@@ -10,7 +10,10 @@ package net.wg.gui.cyberSport.views
    import net.wg.gui.cyberSport.controls.ButtonDnmIcon;
    import net.wg.gui.cyberSport.controls.SettingRosterVO;
    import net.wg.gui.cyberSport.controls.VehicleSelector;
+   import net.wg.infrastructure.interfaces.IWindow;
+   import net.wg.gui.components.windows.WindowEvent;
    import net.wg.gui.components.windows.Window;
+   import net.wg.gui.cyberSport.vo.VehicleVO;
    import net.wg.data.constants.generated.CYBER_SPORT_ALIASES;
    import net.wg.gui.cyberSport.vo.VehicleSelectorItemVO;
    import scaleform.clik.events.ButtonEvent;
@@ -62,6 +65,31 @@ package net.wg.gui.cyberSport.views
 
       private var autoSelectTabIndex:int = 1;
 
+      override public function set window(param1:IWindow) : void {
+         if(window)
+         {
+            window.removeEventListener(WindowEvent.SCALE_X_CHANGED,this.onScaleChanged);
+            window.removeEventListener(WindowEvent.SCALE_Y_CHANGED,this.onScaleChanged);
+         }
+         super.window = param1;
+         if(window)
+         {
+            window.addEventListener(WindowEvent.SCALE_X_CHANGED,this.onScaleChanged);
+            window.addEventListener(WindowEvent.SCALE_Y_CHANGED,this.onScaleChanged);
+         }
+      }
+
+      private function onScaleChanged(param1:WindowEvent) : void {
+         if(param1.type == WindowEvent.SCALE_X_CHANGED)
+         {
+            window.width = param1.prevValue;
+         }
+         else
+         {
+            window.height = param1.prevValue;
+         }
+      }
+
       override protected function onPopulate() : void {
          super.onPopulate();
          Window(window).visible = false;
@@ -71,15 +99,15 @@ package net.wg.gui.cyberSport.views
 
       public function as_setDefaultData(param1:Array) : void {
          this.defaultModel = param1;
-         if(this.defaultModel[2]  is  int && this.defaultModel[2] > 0)
+         if((this.defaultModel[2]) && (this.defaultModel[2].hasOwnProperty("shortUserName")))
          {
             this.refreshBtnState(true);
-            this.selectedResultBtn.setCompDescriptor(this.defaultModel[2]);
+            this.selectedResultBtn.setVehicle(new VehicleVO(this.defaultModel[2]));
             this.autoSelectTabIndex = 0;
          }
          else
          {
-            if(this.defaultModel[2]  is  Object)
+            if(this.defaultModel[2])
             {
                this.rangeModel = new SettingRosterVO(this.defaultModel[2]);
                this.autoSelectTabIndex = 1;
@@ -111,7 +139,7 @@ package net.wg.gui.cyberSport.views
       }
 
       public function as_setListData(param1:Array) : void {
-         var _loc2_:* = 0;
+         var _loc2_:Object = null;
          var _loc3_:VehicleSelectorItemVO = null;
          if(param1)
          {
@@ -267,7 +295,7 @@ package net.wg.gui.cyberSport.views
       }
 
       private function onFiltersChanged(param1:VehicleSelectorFilterEvent) : void {
-         onFiltersUpdateS(param1.nation,param1.vehicleType,param1.isMain);
+         onFiltersUpdateS(param1.nation,param1.vehicleType,param1.isMain,param1.level);
       }
 
       private function rangeChangedHandler(param1:RosterSettingsEvent) : void {
@@ -335,7 +363,7 @@ package net.wg.gui.cyberSport.views
                this.setDefaultRange();
                this.rangeRoster.setDefaultState(false);
             }
-            this.selectedResultBtn.setCompDescriptor(param1.selectedDescriptors[0]);
+            this.selectedResultBtn.setVehicle(param1.selectedObjects[0]);
             if(param1.forceSelect)
             {
                this.onClickSubmitBtnHandler();

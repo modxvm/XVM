@@ -13,6 +13,7 @@ package net.wg.gui.lobby.customization
    import net.wg.gui.lobby.customization.renderers.RentalPackageItemRenderer;
    import net.wg.gui.lobby.customization.renderers.SectionItemRenderer;
    import net.wg.gui.lobby.customization.renderers.TextureItemRenderer;
+   import net.wg.gui.lobby.customization.renderers.InscriptionItemRenderer;
 
 
    public class _Importer extends BaseImporter
@@ -20,7 +21,7 @@ package net.wg.gui.lobby.customization
           
       public function _Importer() {
          super();
-         importClasses(Vector.<Class>([CamouflagesDataProvider,DAAPIDataProvider,DAAPIItemsDataProvider,RentalPackageDAAPIDataProvider,CamoDemoRenderer,CamouflageItemRenderer,CustomizationItemRenderer,PriceItemRenderer,RendererBorder,RentalPackageItemRenderer,SectionItemRenderer,TextureItemRenderer,BaseTimedCustomizationGroupView,BaseTimedCustomizationSectionView,CamoDropButton,CamouflageGroupView,CamouflageSectionView,CustomizationEvent,EmblemLeftSectionView,EmblemRightSectionView,InscriptionLeftSectionView,InscriptionRightSectionView,VehicleCustomization]));
+         importClasses(Vector.<Class>([CamouflagesDataProvider,DAAPIDataProvider,DAAPIItemsDataProvider,RentalPackageDAAPIDataProvider,CamoDemoRenderer,CamouflageItemRenderer,CustomizationItemRenderer,PriceItemRenderer,RendererBorder,RentalPackageItemRenderer,SectionItemRenderer,TextureItemRenderer,InscriptionItemRenderer,BaseTimedCustomizationGroupView,BaseTimedCustomizationSectionView,CamoDropButton,CamouflageGroupView,CamouflageSectionView,CustomizationEvent,EmblemLeftSectionView,EmblemRightSectionView,InscriptionLeftSectionView,InscriptionRightSectionView,VehicleCustomization]));
       }
    }
 

@@ -3,9 +3,11 @@ package net.wg.gui.lobby.sellDialog
    import scaleform.clik.controls.ListItemRenderer;
    import net.wg.infrastructure.interfaces.ISaleItemBlockRenderer;
    import net.wg.gui.components.controls.TextFieldShort;
-   import scaleform.clik.controls.Button;
+   import net.wg.gui.components.controls.AlertIco;
    import net.wg.gui.components.controls.DropdownMenu;
    import net.wg.gui.components.controls.IconText;
+   import net.wg.gui.components.controls.ActionPrice;
+   import scaleform.clik.controls.Button;
    import flash.display.MovieClip;
    import flash.events.MouseEvent;
    import scaleform.clik.events.ListEvent;
@@ -27,13 +29,25 @@ package net.wg.gui.lobby.sellDialog
 
       private static const RIGHT_MARGIN:Number = 7;
 
+      public static var ITEM_TYPE_VEHICLE:String = "vehicle";
+
+      public static var ITEM_TYPE_MODULE:String = "module";
+
+      public static var ITEM_TYPE_EQUIPMENT:String = "equipment";
+
+      public static var ITEM_TYPE_SHELL:String = "shell";
+
+      public static var ITEM_TYPE_OPTIONAL_DEVICE:String = "optionalDevice";
+
       public var tfShort:TextFieldShort;
 
-      public var alertIcon:Button;
+      public var alertIcon:AlertIco;
 
       public var ddm:DropdownMenu;
 
       public var money:IconText;
+
+      public var actionPrice:ActionPrice;
 
       public var clickArea:Button;
 
@@ -43,15 +57,25 @@ package net.wg.gui.lobby.sellDialog
 
       private var _type:String;
 
+      private var _itemInInventory:Boolean;
+
       private var _id:String;
 
       private var _isRemovable:Boolean;
 
       private var _moneyValue:Number = 0;
 
+      private var _defMoneyValue:Number = 0;
+
       private var _dataInfo:Object = null;
 
       private var _removePrice:Number = 0;
+
+      private var _defRemovePrice:Number = 0;
+
+      private var _actionPrc:Number = 0;
+
+      private var _removeActionPrc:Number = 0;
 
       override public function dispose() : void {
          super.dispose();
@@ -76,11 +100,13 @@ package net.wg.gui.lobby.sellDialog
          {
             this._dataInfo = null;
          }
+         this.actionPrice.dispose();
       }
 
       override protected function configUI() : void {
          this.buttonMode = false;
          this.money.textFieldYOffset = VehicleSellDialog.ICONS_TEXT_OFFSET;
+         this.actionPrice.textYOffset = VehicleSellDialog.ICONS_TEXT_OFFSET;
          this.ddm.dataProvider = new DataProvider([{"label":DIALOGS.SELLCONFIRMATION_SUBMIT},{"label":DIALOGS.VEHICLESELLDIALOG_UNLOAD}]);
          this.alertIcon.addEventListener(MouseEvent.ROLL_OVER,this.onAlertIconRollOverHdlr,false,0,true);
          this.alertIcon.addEventListener(MouseEvent.ROLL_OUT,this.onAlertIconRollOutHdlr,false,0,true);
@@ -102,8 +128,12 @@ package net.wg.gui.lobby.sellDialog
       }
 
       private function onAlertIconRollOverHdlr(param1:MouseEvent) : void {
-         var _loc2_:TooltipProps = new TooltipProps(Tooltips.TYPE_INFO,0,0,0,-1,0,330);
-         App.toolTipMgr.showComplex(TOOLTIPS.VEHICLESELLDIALOG_RENDERER_ALERTICON,_loc2_);
+         var _loc2_:TooltipProps = null;
+         if(this.ddm.selectedIndex == 1)
+         {
+            _loc2_ = new TooltipProps(Tooltips.TYPE_INFO,0,0,0,-1,0,330);
+            App.toolTipMgr.showComplex(TOOLTIPS.VEHICLESELLDIALOG_RENDERER_ALERTICON,_loc2_);
+         }
       }
 
       private function onAlertIconRollOutHdlr(param1:MouseEvent) : void {
@@ -126,8 +156,16 @@ package net.wg.gui.lobby.sellDialog
          return this._moneyValue;
       }
 
+      public function get defMoneyValue() : Number {
+         return this._defMoneyValue;
+      }
+
       public function get type() : String {
          return this._type;
+      }
+
+      public function get itemInInventory() : Boolean {
+         return this._itemInInventory;
       }
 
       public function get dataInfo() : Object {
@@ -140,10 +178,15 @@ package net.wg.gui.lobby.sellDialog
          this._inInventory = _loc2_.inInventory;
          this._isRemovable = _loc2_.isRemovable;
          this._moneyValue = _loc2_.moneyValue;
+         this._defMoneyValue = _loc2_.defMoneyValue;
          this._dataInfo = _loc2_.data;
          this._type = _loc2_.type;
          this._id = _loc2_.id;
          this._removePrice = _loc2_.removePrice;
+         this._defRemovePrice = _loc2_.defRemovePrice;
+         this._actionPrc = _loc2_.actionPrc;
+         this._removeActionPrc = _loc2_.removeActionPrc;
+         this._itemInInventory = _loc2_.itemInInventory;
          invalidateData();
       }
 
@@ -166,9 +209,17 @@ package net.wg.gui.lobby.sellDialog
                if(!this.isRemovable)
                {
                   this.money.textColor = 16763253;
-                  this.money.text = "- " + App.utils.locale.gold(this._removePrice);
+                  this.money.text = this.getSign(-this._removePrice,Currencies.GOLD);
                   this.money.icon = Currencies.GOLD;
                   this.alertIcon.visible = true;
+                  if(this._removePrice != 0)
+                  {
+                     this.actionPrice.setData(this._removeActionPrc,this._removePrice,this._defRemovePrice,Currencies.GOLD,true,this._type,"-");
+                  }
+                  else
+                  {
+                     this.actionPrice.visible = false;
+                  }
                }
                else
                {
@@ -176,17 +227,20 @@ package net.wg.gui.lobby.sellDialog
                   this.money.textColor = 13556185;
                   this.money.icon = Currencies.CREDITS;
                   this.alertIcon.visible = false;
+                  this.actionPrice.visible = false;
                }
             }
             else
             {
-               this.money.text = this.getCreditsString(this._moneyValue);
+               this.alertIcon.visible = false;
+               this.money.text = this.getSign(this._moneyValue,Currencies.CREDITS);
                this.money.textColor = 13556185;
                this.money.icon = Currencies.CREDITS;
-               this.alertIcon.visible = false;
+               this.actionPrice.setData(this._actionPrc,this._moneyValue,this._defMoneyValue,Currencies.CREDITS,true,this._type);
             }
+            this.money.visible = !this.actionPrice.visible;
          }
-         if(this._type == "shells" || this._type == "invShells")
+         if(this._type == ITEM_TYPE_SHELL)
          {
             if(this._dataInfo.hasOwnProperty("kind"))
             {
@@ -204,6 +258,7 @@ package net.wg.gui.lobby.sellDialog
 
       override public function setSize(param1:Number, param2:Number) : void {
          this.money.x = param1 - this.money.width - RIGHT_MARGIN;
+         this.actionPrice.x = param1 - 5;
          this.itemUnderline.width = param1;
       }
 
@@ -213,10 +268,18 @@ package net.wg.gui.lobby.sellDialog
             this._inInventory = true;
             if(!this.isRemovable)
             {
-               this.money.text = "- " + App.utils.locale.gold(this._removePrice);
+               this.money.text = this.getSign(-this._removePrice,Currencies.GOLD);
                this.money.textColor = 16763253;
                this.money.icon = Currencies.GOLD;
                this.alertIcon.visible = true;
+               if(this._removePrice != 0)
+               {
+                  this.actionPrice.setData(this._removeActionPrc,this._removePrice,this._defRemovePrice,Currencies.GOLD,true,this._type,"-");
+               }
+               else
+               {
+                  this.actionPrice.visible = false;
+               }
             }
             else
             {
@@ -224,21 +287,28 @@ package net.wg.gui.lobby.sellDialog
                this.money.textColor = 13556185;
                this.money.icon = Currencies.CREDITS;
                this.alertIcon.visible = false;
+               this.actionPrice.visible = false;
             }
          }
          else
          {
+            this.alertIcon.visible = false;
             this._inInventory = false;
-            this.money.text = this.getCreditsString(this.moneyValue);
+            this.money.text = this.getSign(this.moneyValue,Currencies.CREDITS);
             this.money.icon = Currencies.CREDITS;
             this.money.textColor = 13556185;
-            this.alertIcon.visible = false;
+            this.actionPrice.setData(this._actionPrc,this.moneyValue,this.defMoneyValue,Currencies.CREDITS,true,this._type);
          }
+         this.money.visible = !this.actionPrice.visible;
          dispatchEvent(new VehicleSellDialogEvent(VehicleSellDialogEvent.UPDATE_RESULT));
       }
 
-      private function getCreditsString(param1:Number) : String {
-         return (param1 != 0?"+ ":"") + App.utils.locale.gold(param1);
+      private function getSign(param1:Number, param2:String) : String {
+         if(param2 == Currencies.CREDITS)
+         {
+            return (param1 == 0?"":param1 > 0?"+":"") + App.utils.locale.integer(param1);
+         }
+         return (param1 == 0?"":param1 > 0?"+":"") + App.utils.locale.gold(param1);
       }
 
       public function hideLine() : void {

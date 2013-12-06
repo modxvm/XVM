@@ -1,6 +1,8 @@
 package net.wg.gui.lobby.store
 {
+   import net.wg.gui.components.controls.ActionPrice;
    import flash.text.TextField;
+   import flash.display.Sprite;
    import scaleform.clik.utils.Constraints;
    import flash.events.MouseEvent;
    import flash.geom.Point;
@@ -23,7 +25,19 @@ package net.wg.gui.lobby.store
 
       public var credits:ModuleRendererCredits = null;
 
+      public var actionPrice:ActionPrice = null;
+
       public var errorField:TextField = null;
+
+      public var hitMc:Sprite;
+
+      override public function dispose() : void {
+         this.actionPrice.dispose();
+         this.actionPrice = null;
+         this.credits.dispose();
+         this.credits = null;
+         super.dispose();
+      }
 
       override protected function configUI() : void {
          super.configUI();
@@ -31,6 +45,7 @@ package net.wg.gui.lobby.store
          constraints.addElement(descField.name,descField,Constraints.ALL);
          constraints.addElement(this.credits.name,this.credits,Constraints.RIGHT);
          addEventListener(MouseEvent.MOUSE_DOWN,this.onMouseClickHandler);
+         hitArea = this.hitMc;
       }
 
       override protected function draw() : void {
@@ -50,6 +65,10 @@ package net.wg.gui.lobby.store
             }
          }
          super.draw();
+         if(this.actionPrice)
+         {
+            this.actionPrice.setup(this);
+         }
       }
 
       protected function update() : void {
@@ -58,24 +77,28 @@ package net.wg.gui.lobby.store
          var _loc3_:* = 0;
          var _loc4_:* = NaN;
          var _loc5_:* = NaN;
-         var _loc6_:String = null;
+         var _loc6_:* = NaN;
+         var _loc7_:* = NaN;
+         var _loc8_:String = null;
          if(data)
          {
             if(App.instance)
             {
-               _loc6_ = "data in shopTableItemRenderer must extends StoreTableData class!";
-               App.utils.asserter.assert(data  is  StoreTableData,_loc6_);
+               _loc8_ = "data in shopTableItemRenderer must extends StoreTableData class!";
+               App.utils.asserter.assert(data  is  StoreTableData,_loc8_);
             }
             _loc1_ = StoreTableData(data);
             _loc2_ = 0;
             _loc3_ = 1;
             _loc4_ = _loc1_.price[_loc2_];
             _loc5_ = _loc1_.price[_loc3_];
+            _loc6_ = _loc1_.defPrice[_loc2_];
+            _loc7_ = _loc1_.defPrice[_loc3_];
             visible = true;
             this.onPricesCalculated(_loc5_,_loc4_,_loc1_);
             textField.text = _loc1_.name;
             descField.text = _loc1_.desc;
-            this.updateTexts(_loc1_,_loc5_,_loc4_);
+            this.updateTexts(_loc1_,_loc5_,_loc4_,_loc6_,_loc7_);
             if(hitTestPoint(App.stage.mouseX,App.stage.mouseY,true))
             {
                this.shopTooltip();
@@ -91,7 +114,7 @@ package net.wg.gui.lobby.store
           
       }
 
-      protected function updateTexts(param1:StoreTableData, param2:Number, param3:Number) : void {
+      protected function updateTexts(param1:StoreTableData, param2:Number, param3:Number, param4:Number, param5:Number) : void {
           
       }
 

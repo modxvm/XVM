@@ -26,6 +26,7 @@ package net.wg.gui.lobby.profile.pages.statistics
 
       override public function set dataProvider(param1:IDataProvider) : void {
          var _loc3_:StatisticChartInfo = null;
+         var _loc6_:* = NaN;
          if(!param1)
          {
             return;
@@ -36,9 +37,11 @@ package net.wg.gui.lobby.profile.pages.statistics
          while(_loc5_ < _loc4_)
          {
             _loc3_ = param1[_loc5_];
-            if(_loc2_ < _loc3_.yField)
+            _loc6_ = Number(_loc3_.yField);
+            _loc6_ = _loc6_ >= 0?_loc6_:0;
+            if(_loc2_ < _loc6_)
             {
-               _loc2_ = Number(_loc3_.yField);
+               _loc2_ = _loc6_;
             }
             this.adjustProviderItem(_loc3_,_loc5_);
             _loc5_++;
@@ -47,7 +50,9 @@ package net.wg.gui.lobby.profile.pages.statistics
          while(_loc5_ < _loc4_)
          {
             _loc3_ = param1[_loc5_];
-            _loc3_.percentValue = Math.round(Number(_loc3_.yField) / _loc2_ * percent100);
+            _loc6_ = Number(_loc3_.yField);
+            _loc6_ = _loc6_ >= 0?_loc6_:0;
+            _loc3_.percentValue = Math.round(_loc6_ / _loc2_ * percent100);
             _loc5_++;
          }
          super.dataProvider = param1;

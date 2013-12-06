@@ -19,6 +19,8 @@ package net.wg.gui.lobby.questsWindow.data
 
       private var _nextTasks:Array;
 
+      private var _questID:String = "";
+
       override protected function onDataWrite(param1:String, param2:Object) : Boolean {
          switch(param1)
          {
@@ -63,6 +65,34 @@ package net.wg.gui.lobby.questsWindow.data
 
       public function set nextTasks(param1:Array) : void {
          this._nextTasks = param1;
+      }
+
+      override public function dispose() : void {
+         if(this._header)
+         {
+            this._header.dispose();
+            this._header = null;
+         }
+         if(this._info)
+         {
+            this._info.dispose();
+            this._info = null;
+         }
+         this._award = null;
+         if(this._nextTasks)
+         {
+            this._nextTasks.splice(0,this._nextTasks.length);
+            this._nextTasks = null;
+         }
+         super.dispose();
+      }
+
+      public function get questID() : String {
+         return this._questID;
+      }
+
+      public function set questID(param1:String) : void {
+         this._questID = param1;
       }
    }
 

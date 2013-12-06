@@ -24,7 +24,6 @@ package net.wg.infrastructure.managers.utils.impl
    import net.wg.infrastructure.exceptions.ArgumentException;
    import flash.events.MouseEvent;
    import scaleform.gfx.MouseEventEx;
-   import net.wg.infrastructure.interfaces.IColorScheme;
 
 
    public class Commons extends Object implements ICommons
@@ -218,6 +217,32 @@ package net.wg.infrastructure.managers.utils.impl
          object.filters = [colorFilter];
       }
 
+      public function formatPlayerName(param1:TextField, param2:String, param3:String=null, param4:String=null, param5:Boolean=false, param6:String="", param7:String="", param8:Number=NaN, param9:int=-4) : Boolean {
+         var _loc13_:* = 0;
+         var _loc10_:* = "<IMG SRC=\"img://gui/maps/icons/library/igr_32x13.png\" width=\"32\" height=\"13\" vspace=\"" + param9 + "\"/>";
+         var _loc11_:String = param6 + param2 + (param3?"[" + param3 + "]":"") + (param4?" " + param4:"") + (param5?" " + _loc10_:"") + param7;
+         var _loc12_:* = false;
+         param1.htmlText = _loc11_;
+         if(param1.width < param1.textWidth)
+         {
+            _loc12_ = true;
+            _loc11_ = param6 + param2 + (param3?"..":"") + (param4?" " + param4:"") + (param5?" " + _loc10_:"") + param7;
+            param1.htmlText = _loc11_;
+            _loc13_ = param2.length-1;
+            while(param1.width < param1.textWidth && _loc13_ > 0)
+            {
+               _loc11_ = param6 + param2.substr(0,_loc13_) + ".." + (param4?" " + param4:"") + (param5?" " + _loc10_:"") + param7;
+               param1.htmlText = _loc11_;
+               _loc13_--;
+            }
+         }
+         if(!isNaN(param8))
+         {
+            param1.textColor = param8;
+         }
+         return _loc12_;
+      }
+
       private function canToDestroying(param1:Object) : Boolean {
          if(param1)
          {
@@ -248,30 +273,6 @@ package net.wg.infrastructure.managers.utils.impl
             return MouseEventEx(param1).buttonIdx == MouseEventEx.RIGHT_BUTTON;
          }
          return false;
-      }
-
-      public function formatPlayerName(param1:TextField, param2:String, param3:String=null, param4:String=null, param5:Boolean=false, param6:IColorScheme=null, param7:int=-4) : String {
-         var _loc10_:* = 0;
-         var _loc8_:* = "<IMG SRC=\"img://gui/maps/icons/library/igr_32x13.png\" width=\"32\" height=\"13\" vspace=\"" + param7 + "\"/>";
-         var _loc9_:String = param2 + (param3?"[" + param3 + "]":"") + (param4?" " + param4:"") + (param5?" " + _loc8_:"");
-         param1.htmlText = _loc9_;
-         if(param1.width < param1.textWidth)
-         {
-            _loc9_ = param2 + (param3?"..":"") + (param4?" " + param4:"") + (param5?" " + _loc8_:"");
-            param1.htmlText = _loc9_;
-            _loc10_ = param2.length-1;
-            while(param1.width < param1.textWidth && _loc10_ > 0)
-            {
-               _loc9_ = param2.substr(0,_loc10_) + ".." + (param4?" " + param4:"") + (param5?" " + _loc8_:"");
-               param1.htmlText = _loc9_;
-               _loc10_--;
-            }
-         }
-         if(param6)
-         {
-            param1.textColor = param6.rgb;
-         }
-         return param1.htmlText;
       }
    }
 

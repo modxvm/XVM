@@ -9,7 +9,7 @@ package net.wg.gui.cyberSport.controls
           
       public function _Importer() {
          super();
-         importClasses(Vector.<Class>([CSComponentEvent,CSVehicleButton,CandidateItemRenderer,MedalVehicleVO,DynamicRangeVehicles,VehicleSelector,VehicleSelectorFilter,VehicleSelectorItemRenderer,SettingRosterVO,PerpageScrollingList,PerpageScrollingListRenderer,ButtonDnmIcon,ButtonDnmIconSlim,RangeViewComponent,ReadyMsg,CSRosterToggleButton,DoubleSlider,RosterButtonGroup,CSCandidatesScrollingList,SlotDropIndicator,ButtonIconLoader,GrayButtonText,GrayTransparentButton,CSVehicleButtonLevels,RosterSettingsNumerationBlock]));
+         importClasses(Vector.<Class>([CSComponentEvent,CSVehicleButton,CandidateItemRenderer,MedalVehicleVO,DynamicRangeVehicles,VehicleSelector,VehicleSelectorFilter,VehicleSelectorItemRenderer,SettingRosterVO,ManualSearchScrollingList,ManualSearchRenderer,ButtonDnmIcon,ButtonDnmIconSlim,RangeViewComponent,ReadyMsg,CSRosterToggleButton,DoubleSlider,RosterButtonGroup,CSCandidatesScrollingList,SlotDropIndicator,ButtonIconLoader,GrayButtonText,GrayTransparentButton,CSVehicleButtonLevels,RosterSettingsNumerationBlock]));
       }
    }
 

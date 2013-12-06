@@ -5,6 +5,8 @@ package net.wg.gui.lobby.barracks
    import net.wg.gui.components.controls.SoundButtonEx;
    import net.wg.gui.components.controls.UILoaderAlt;
    import flash.display.MovieClip;
+   import net.wg.gui.components.controls.IconText;
+   import net.wg.gui.components.controls.ActionPrice;
    import flash.events.MouseEvent;
    import scaleform.clik.events.ButtonEvent;
    import net.wg.data.constants.SoundTypes;
@@ -13,6 +15,7 @@ package net.wg.gui.lobby.barracks
    import scaleform.clik.events.ListEvent;
    import __AS3__.vec.Vector;
    import flash.geom.Point;
+   import scaleform.clik.constants.InvalidationType;
 
 
    public class BarracksItemRenderer extends SoundListItemRenderer
@@ -59,7 +62,9 @@ package net.wg.gui.lobby.barracks
 
       public var vehicleType:TextField = null;
 
-      public var price:TextField = null;
+      public var price:IconText = null;
+
+      public var actionPrice:ActionPrice = null;
 
       public var descrField:TextField = null;
 
@@ -87,6 +92,8 @@ package net.wg.gui.lobby.barracks
          this.btnDissmiss.removeEventListener(MouseEvent.ROLL_OVER,this.showTooltip,false);
          this.btnDissmiss.removeEventListener(MouseEvent.ROLL_OUT,this.hideTooltip,false);
          this.btnDissmiss.removeEventListener(MouseEvent.CLICK,this.hideTooltip,false);
+         this.removeEventListener(MouseEvent.ROLL_OVER,this.rendererRollOver);
+         this.removeEventListener(MouseEvent.ROLL_OUT,this.rendererRollOut);
          this.btnDissmiss.focusTarget = null;
          if(this.icon)
          {
@@ -114,7 +121,14 @@ package net.wg.gui.lobby.barracks
          this.role = null;
          this.lockMsg = null;
          this.vehicleType = null;
-         this.price = null;
+         if(this.price)
+         {
+            this.price.dispose();
+         }
+         if(this.actionPrice)
+         {
+            this.actionPrice.dispose();
+         }
          this.descrField = null;
          super.dispose();
       }
@@ -127,6 +141,8 @@ package net.wg.gui.lobby.barracks
          this.icon.mouseEnabled = this.iconRole.mouseEnabled = this.iconRank.mouseEnabled = false;
          this.icon.mouseChildren = this.iconRole.mouseChildren = this.iconRank.mouseChildren = false;
          addEventListener(MouseEvent.CLICK,this.onBarracksItemRendererClick,false,0,true);
+         this.addEventListener(MouseEvent.ROLL_OVER,this.rendererRollOver);
+         this.addEventListener(MouseEvent.ROLL_OUT,this.rendererRollOut);
          this.btnDissmiss.addEventListener(MouseEvent.ROLL_OVER,this.showTooltip,false,0,true);
          this.btnDissmiss.addEventListener(MouseEvent.ROLL_OUT,this.hideTooltip,false,0,true);
          this.btnDissmiss.addEventListener(MouseEvent.CLICK,this.hideTooltip,false,0,true);
@@ -240,6 +256,14 @@ package net.wg.gui.lobby.barracks
          dispatchEvent(new ListEvent(ListEvent.ITEM_ROLL_OVER,true,true,-1,-1,-1,null,data));
       }
 
+      private function rendererRollOver(param1:MouseEvent) : void {
+         dispatchEvent(new ListEvent(ListEvent.ITEM_ROLL_OVER,true,true,-1,-1,-1,null,data));
+      }
+
+      private function rendererRollOut(param1:MouseEvent) : void {
+         dispatchEvent(new ListEvent(ListEvent.ITEM_ROLL_OUT,true,true,-1,-1,-1,null,data));
+      }
+
       override protected function getStatePrefixes() : Vector.<String> {
          if(this._empty)
          {
@@ -342,6 +366,13 @@ package net.wg.gui.lobby.barracks
          var _loc3_:String = null;
          var _loc4_:String = null;
          super.draw();
+         if(isInvalid(InvalidationType.STATE))
+         {
+            if(this.actionPrice)
+            {
+               this.actionPrice.setup(this);
+            }
+         }
          if(!_baseDisposed)
          {
             if((isInvalid(INVALIDATE_IN_TANK)) && (this.selection))
@@ -375,7 +406,26 @@ package net.wg.gui.lobby.barracks
                this.countField.text = "";
                if(this._buy)
                {
-                  this.price.text = data.price;
+                  if(this.price)
+                  {
+                     this.price.text = App.utils.locale.gold(data.price);
+                     this.price.visible = true;
+                  }
+                  if(this.actionPrice)
+                  {
+                     if(data.hasOwnProperty("actionPrc"))
+                     {
+                        this.actionPrice.setData(data.actionPrc,data.price,data.defPrice,IconText.GOLD);
+                     }
+                     else
+                     {
+                        this.actionPrice.visible = false;
+                     }
+                     if(this.price)
+                     {
+                        this.price.visible = !this.actionPrice.visible;
+                     }
+                  }
                   this.countField.text = "+" + data.count;
                   this.descrField.text = App.utils.locale.makeString(MENU.BARRACKS_BTNBUYBERTHDECS);
                   this.descrField.replaceText(this.descrField.text.indexOf("{"),this.descrField.text.indexOf("}") + 1,String(data.count));

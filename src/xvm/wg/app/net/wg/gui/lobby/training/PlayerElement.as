@@ -3,11 +3,12 @@ package net.wg.gui.lobby.training
    import scaleform.clik.core.UIComponent;
    import net.wg.infrastructure.interfaces.entity.IUpdatable;
    import net.wg.gui.components.controls.UILoaderAlt;
-   import net.wg.gui.components.controls.TextFieldShort;
+   import net.wg.gui.components.controls.UserNameField;
    import flash.text.TextField;
    import net.wg.data.VO.TrainingRoomRendererVO;
    import flash.geom.ColorTransform;
    import scaleform.clik.constants.InvalidationType;
+   import net.wg.data.VO.UserVO;
 
 
    public class PlayerElement extends UIComponent implements IUpdatable
@@ -25,7 +26,7 @@ package net.wg.gui.lobby.training
 
       public var iconLoader:UILoaderAlt;
 
-      public var nameField:TextFieldShort;
+      public var nameField:UserNameField;
 
       public var vehicleField:TextField;
 
@@ -60,8 +61,11 @@ package net.wg.gui.lobby.training
          this.vehicleField = null;
          this.vehicleLevelField = null;
          this.stateField = null;
-         this.data.dispose();
-         this.data = null;
+         if(this.data)
+         {
+            this.data.dispose();
+            this.data = null;
+         }
          this.defColorTrans = null;
          super.dispose();
       }
@@ -72,7 +76,17 @@ package net.wg.gui.lobby.training
          {
             if(this.data)
             {
-               this.nameField.label = this.data.fullName;
+               this.nameField.userVO = new UserVO(
+                  {
+                     "accID":this.data.accID,
+                     "uid":this.data.uid,
+                     "fullName":this.data.fullName,
+                     "userName":this.data.userName,
+                     "clanAbbrev":this.data.clanAbbrev,
+                     "region":this.data.region,
+                     "igrType":this.data.igrType
+                  }
+               );
                this.vehicleField.text = this.data.vShortName;
                this.stateField.text = this.data.stateString;
                this.vehicleLevelField.text = this.data.vLevel;
@@ -112,7 +126,7 @@ package net.wg.gui.lobby.training
             }
             else
             {
-               this.nameField.label = "";
+               this.nameField.userVO = null;
                this.vehicleField.text = "";
                this.vehicleLevelField.text = "";
                this.iconLoader.visible = false;

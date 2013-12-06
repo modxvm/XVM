@@ -19,9 +19,9 @@ package net.wg.infrastructure.base.meta.impl
 
       public var cancelButtonHandler:Function = null;
 
-      public function onFiltersUpdateS(param1:int, param2:String, param3:Boolean) : void {
+      public function onFiltersUpdateS(param1:int, param2:String, param3:Boolean, param4:int) : void {
          App.utils.asserter.assertNotNull(this.onFiltersUpdate,"onFiltersUpdate" + Errors.CANT_NULL);
-         this.onFiltersUpdate(param1,param2,param3);
+         this.onFiltersUpdate(param1,param2,param3,param4);
       }
 
       public function getFilterDataS() : Object {

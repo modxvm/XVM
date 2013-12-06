@@ -5,6 +5,7 @@ package net.wg.gui.cyberSport.views.autoSearch
    import net.wg.gui.components.common.waiting.WaitingMc;
    import net.wg.gui.cyberSport.vo.AutoSearchVO;
    import flash.events.Event;
+   import scaleform.clik.events.InputEvent;
    import net.wg.data.constants.generated.CYBER_SPORT_ALIASES;
    import flash.display.InteractiveObject;
    import scaleform.clik.constants.InvalidationType;
@@ -78,6 +79,20 @@ package net.wg.gui.cyberSport.views.autoSearch
          {
             ICSAutoSearchMainView(this.views[_loc1_]).updateFocus();
             _loc1_++;
+         }
+      }
+
+      override public function handleInput(param1:InputEvent) : void {
+         var _loc2_:ICSAutoSearchMainView = null;
+         var _loc3_:* = 0;
+         while(_loc3_ < this.viewsLength)
+         {
+            _loc2_ = this.views[_loc3_];
+            if((_loc2_) && (_loc2_.visible))
+            {
+               _loc2_.handleInput(param1);
+            }
+            _loc3_++;
          }
       }
 

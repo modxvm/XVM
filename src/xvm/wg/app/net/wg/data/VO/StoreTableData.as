@@ -33,6 +33,8 @@ package net.wg.data.VO
 
       private var _price:Array = null;
 
+      private var _defPrice:Array = null;
+
       private var _currency:String = "";
 
       private var _level:int = 0;
@@ -58,6 +60,8 @@ package net.wg.data.VO
       private var _goldShellsForCredits:Boolean = false;
 
       private var _goldEqsForCredits:Boolean = false;
+
+      private var _actionPrc:Number = 0;
 
       private var _tableVO:StoreTableVO = null;
 
@@ -147,6 +151,14 @@ package net.wg.data.VO
 
       public function set price(param1:Array) : void {
          this._price = param1;
+      }
+
+      public function get defPrice() : Array {
+         return this._defPrice;
+      }
+
+      public function set defPrice(param1:Array) : void {
+         this._defPrice = param1;
       }
 
       public function get currency() : String {
@@ -243,6 +255,14 @@ package net.wg.data.VO
 
       public function set goldShellsForCredits(param1:Boolean) : void {
          this._goldShellsForCredits = param1;
+      }
+
+      public function get actionPrc() : Number {
+         return this._actionPrc;
+      }
+
+      public function set actionPrc(param1:Number) : void {
+         this._actionPrc = param1;
       }
 
       public function get tableVO() : StoreTableVO {
