@@ -31,24 +31,15 @@ class wot.PlayersPanel.PlayersPanel
         return this.onRecreateDeviceImpl.apply(this, arguments);
     }
 
-    function _setVehiclesStr()
-    {
-        return this._setVehiclesStrImpl.apply(this, arguments);
-    }
-
-    function _setNamesStr()
-    {
-        return this._setNamesStrImpl.apply(this, arguments);
-    }
-
     function updateWidthOfLongestName()
     {
         // stub
     }
 
-    function _getHTMLText()
+    function update()
     {
-        return this._getHTMLTextImpl.apply(this, arguments);
+        _lastAdjustedState = "";
+        wrapper.update();
     }
 
     // wrapped methods
@@ -77,7 +68,7 @@ class wot.PlayersPanel.PlayersPanel
 
         GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, StatLoader.LoadData);
         GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
-        GlobalEventDispatcher.addEventListener(Stat.E_STAT_LOADED, this, onStatLoaded);
+        GlobalEventDispatcher.addEventListener(Stat.E_STAT_LOADED, wrapper, update);
 
         GlobalEventDispatcher.addEventListener(AutoUpdate.UPDATE_BY_TIMER_EVENT, this, updateSpotStatusMarkers);
 
@@ -94,12 +85,6 @@ class wot.PlayersPanel.PlayersPanel
         {
             spotStatusModel = new SpotStatusModel();
         }
-    }
-
-    private function onStatLoaded()
-    {
-        _lastAdjustedState = "";
-        wrapper.update();
     }
 
     /**
@@ -122,7 +107,7 @@ class wot.PlayersPanel.PlayersPanel
         }
     }
 
-    private function setDataImpl(data, sel, postmortemIndex, isColorBlind, knownPlayersCount)
+    private function setDataImpl(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStr, vehiclesStr, namesStr)
     {
         //Logger.add("PlayersPanel.setData()");
         // fix WG bug - double redrawing panels on kill
@@ -131,7 +116,7 @@ class wot.PlayersPanel.PlayersPanel
         {
             var start = new Date();
             delete this.onEnterFrame;
-            me.setData2(data, sel, postmortemIndex, isColorBlind, knownPlayersCount);
+            me.setData2(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStr, vehiclesStr, namesStr);
             if (PlayersPanel.DEBUG_TIMES)
                 Logger.add("DEBUG TIME: PlayersPanel: setData2(" + this.m_type + "): " + Utils.elapsedMSec(start, new Date()) + " ms");
         }
@@ -157,10 +142,12 @@ class wot.PlayersPanel.PlayersPanel
         }
     }
 
-    private function setData2(data, sel, postmortemIndex, isColorBlind, knownPlayersCount)
+    private function setData2(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStr, vehiclesStr, namesStr)
     {
         //Logger.add("PlayersPanel.setData2()");
-        //Logger.add(data);
+        //Logger.addObject(data, 3);
+        //Logger.add(vehiclesStr);
+        //Logger.add(namesStr);
 
         m_data = data;
 
@@ -190,7 +177,7 @@ class wot.PlayersPanel.PlayersPanel
         // [2/3] fix WG bug - this function is slow, don't call it if not required.
         wrapper.m_list["invalidateData"] = function() {}
 
-        base.setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount);
+        base.setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStr, vehiclesStr, namesStr);
 
         // [3/3] fix WG bug - this function is slow, don't call it if not required.
         wrapper.m_list["invalidateData"] = wrapper.m_list["invalidateData2"];
@@ -198,12 +185,14 @@ class wot.PlayersPanel.PlayersPanel
         wrapper.players_bg._alpha = Config.s_config.playersPanel.alpha;
         wrapper.m_list._alpha = Config.s_config.playersPanel.iconAlpha;
 
-        if (data && m_knownPlayersCount != data.length)
+        // new player added in the FoW mode
+        if (data != null && m_knownPlayersCount != data.length)
         {
             m_knownPlayersCount = data.length;
-            XVMAdjustPanelSize();
+            _lastAdjustedState = "";
         }
 
+        // panel mode switched
         if (wrapper.state != _lastAdjustedState)
         {
             XVMAdjustPanelSize();
@@ -434,21 +423,21 @@ class wot.PlayersPanel.PlayersPanel
 
         if (wrapper.type == "left")
         {
-            wrapper.m_names._x = squadSize;
-            wrapper.m_frags._x = wrapper.m_names._x + wrapper.m_names._width;
-            wrapper.m_vehicles._x = wrapper.m_frags._x + wrapper.m_frags._width;
+            wrapper.m_frags._x = squadSize;
+            wrapper.m_names._x = wrapper.m_frags._x + wrapper.m_frags._width;
+            wrapper.m_vehicles._x = wrapper.m_names._x + wrapper.m_names._width;
             wrapper.m_list._x = wrapper.players_bg._x = net.wargaming.ingame.PlayersPanel.STATES[wrapper.state].bg_x - widthDelta;
             if (squadSize > 0)
                 wrapper.m_list.updateSquadIconPosition(-wrapper.m_list._x);
         }
         else
         {
-            wrapper.m_names._x = wrapper.players_bg._width - wrapper.m_names._width - squadSize;
-            wrapper.m_frags._x = wrapper.m_names._x - wrapper.m_frags._width;
-            wrapper.m_vehicles._x = wrapper.m_frags._x - wrapper.m_vehicles._width;
+            wrapper.m_frags._x = wrapper.players_bg._width - wrapper.m_frags._width - squadSize;
+            wrapper.m_names._x = wrapper.m_frags._x - wrapper.m_names._width;
+            wrapper.m_vehicles._x = wrapper.m_names._x - wrapper.m_vehicles._width;
             wrapper.m_list._x = wrapper.players_bg._x = wrapper.players_bg._width - net.wargaming.ingame.PlayersPanel.STATES[wrapper.state].bg_x + widthDelta;
             if (squadSize > 0)
-                wrapper.m_list.updateSquadIconPosition(-440 + wrapper.m_names._width + wrapper.m_frags._width + wrapper.m_vehicles._width + squadSize);
+                wrapper.m_list.updateSquadIconPosition(-440 + wrapper.m_frags._width + wrapper.m_names._width + wrapper.m_vehicles._width + squadSize);
         }
     }
 

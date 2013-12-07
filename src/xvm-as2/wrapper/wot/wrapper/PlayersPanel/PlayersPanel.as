@@ -9,10 +9,8 @@ class wot.wrapper.PlayersPanel.PlayersPanel extends net.wargaming.ingame.Players
         var OVERRIDE_FUNCTIONS:Array = [
             "setData",
             "onRecreateDevice",
-            "_setVehiclesStr",
-            "_setNamesStr",
             "updateWidthOfLongestName",
-            "_getHTMLText"
+            "update"
         ];
         Wrapper.override(this, new wot.PlayersPanel.PlayersPanel(this, super), OVERRIDE_FUNCTIONS);
     }
