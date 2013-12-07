@@ -16,7 +16,7 @@ package xvm.tcarousel
 
         private static const _views:Object =
         {
-            "hangar": TCarouselXvmView
+            // TODO: 0.8.10 "hangar": TCarouselXvmView
         }
 
         public override function get views():Object

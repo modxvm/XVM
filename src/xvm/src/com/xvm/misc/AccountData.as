@@ -5,11 +5,13 @@
 package com.xvm.misc
 {
     import com.xvm.*;
-    import net.wg.data.gui_items.dossier.*;
+    // TODO: 0.8.10 import net.wg.data.gui_items.dossier.*;
     import net.wg.gui.lobby.profile.pages.technique.data.*;
 
     public class AccountData
     {
+        // TODO: 0.8.10
+        /*
         public static var dossier:AccountDossier = null;
         public static var vehicles:Object = null;
 
@@ -30,5 +32,6 @@ package com.xvm.misc
                 Logger.add(ex.getStackTrace());
             }
         }
+        */
     }
 }

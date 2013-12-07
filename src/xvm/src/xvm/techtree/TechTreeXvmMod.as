@@ -16,7 +16,7 @@ package xvm.techtree
 
         private static const _views:Object =
         {
-            "techtree": TechTreeXvmView
+            // TODO: 0.8.10 "techtree": TechTreeXvmView
         }
 
         public override function get views():Object

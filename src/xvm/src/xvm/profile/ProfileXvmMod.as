@@ -16,9 +16,9 @@ package xvm.profile
 
         private static const _views:Object =
         {
-            "lobby": ProfileLobbyXvmView,
-            "profile": ProfileXvmView,
-            "profileWindow": ProfileXvmView
+            // TODO: 0.8.10 "lobby": ProfileLobbyXvmView,
+            // TODO: 0.8.10 "profile": ProfileXvmView,
+            // TODO: 0.8.10 "profileWindow": ProfileXvmView
         }
 
         public override function get views():Object
