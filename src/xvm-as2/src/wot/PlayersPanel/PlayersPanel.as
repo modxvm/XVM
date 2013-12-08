@@ -53,9 +53,7 @@ class wot.PlayersPanel.PlayersPanel
 
     static var DEBUG_TIMES = false;
 
-    private var m_fieldType:Number = 0;
-    private var m_data:Object = null;
-    private var m_item:Number = 0;
+    private var m_data:Object;
 
     private var m_knownPlayersCount:Number = 0; // for Fog of War mode.
     private var m_postmortemIndex:Number = 0;
@@ -135,11 +133,10 @@ class wot.PlayersPanel.PlayersPanel
         if (m_data == null)
             return;
         var pos:Number = event.details.code == 48 ? 9 : event.details.code - 49;
-        if (pos < m_data.length)
-        {
-            Logger.add("selectPlayer: " + m_data[pos].vehId);
-            gfx.io.GameDelegate.call("Battle.selectPlayer", [m_data[pos].vehId]);
-        }
+        if (pos >= m_data.length)
+            return;
+        Logger.add("selectPlayer: " + m_data[pos].vehId);
+        gfx.io.GameDelegate.call("Battle.selectPlayer", [m_data[pos].vehId]);
     }
 
     private function setData2(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStr, vehiclesStr, namesStr)
@@ -165,12 +162,27 @@ class wot.PlayersPanel.PlayersPanel
             wrapper.m_list["invalidateData2"] = wrapper.m_list["invalidateData"];
         }
 
-        if (data)
+        if (data != null)
         {
-            for (var i in data)
+            var values:Array = vehiclesStr.split("<br/>");
+            namesStr = "";
+            vehiclesStr = "";
+            var len = data.length;
+            for (var i = 0; i < len; ++i)
             {
-                Macros.RegisterPlayerData(Utils.GetNormalizedPlayerName(data[i].label), data[i],
+                var item = data[i];
+                var value = values[i];
+
+                Macros.RegisterPlayerData(Utils.GetNormalizedPlayerName(item.label), item,
                     wrapper.type == "left" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
+
+                if (i != 0)
+                {
+                    namesStr += "<br/>";
+                    vehiclesStr += "<br/>";
+                }
+                namesStr += value.split(item.vehicle).join(getTextValue(Defines.FIELDTYPE_NICK, item, item.userName));
+                vehiclesStr += value.split(item.vehicle).join(getTextValue(Defines.FIELDTYPE_VEHICLE, item, item.vehicle));
             }
         }
 
@@ -214,69 +226,34 @@ class wot.PlayersPanel.PlayersPanel
         XVMAdjustPanelSize();
     }
 
-    private function _setVehiclesStrImpl(data, sel, isColorBlind, knownPlayersCount)
-    {
-        //Logger.add("PlayersPanel._setVehiclesStr(): knownPlayersCount=" + knownPlayersCount + " sel=" + sel);
-        try
-        {
-            m_fieldType = Defines.FIELDTYPE_VEHICLE;
-            m_item = 0;
-            base._setVehiclesStr(data, sel, isColorBlind, knownPlayersCount);
-        }
-        finally
-        {
-            m_fieldType = Defines.FIELDTYPE_NONE;
-            m_item = 0;
-        }
-    }
-
-    private function _setNamesStrImpl(data, sel, isColorBlind, knownPlayersCount)
-    {
-        //Logger.add("PlayersPanel._setNameStr()");
-        try
-        {
-            m_fieldType = Defines.FIELDTYPE_NICK;
-            m_item = 0;
-            base._setNamesStr(data, sel, isColorBlind, knownPlayersCount);
-        }
-        finally
-        {
-            m_fieldType = Defines.FIELDTYPE_NONE;
-            m_item = 0;
-        }
-    }
-
-    private function _getHTMLTextImpl(colorScheme, text)
+    private function getTextValue(fieldType, data, text)
     {
         //Logger.add("PlayersPanel._getHTMLText()");
-        if (m_fieldType == Defines.FIELDTYPE_NONE)
-            return base._getHTMLText(colorScheme, text);
-
         var format: String = null;
         switch (wrapper.state)
         {
             case "medium":
-                if (m_fieldType == Defines.FIELDTYPE_VEHICLE)
+                if (fieldType == Defines.FIELDTYPE_VEHICLE)
                     break;
                 format = (wrapper.type == "left")
                     ? Config.s_config.playersPanel.medium.formatLeft
                     : Config.s_config.playersPanel.medium.formatRight;
                 break;
             case "medium2":
-                if (m_fieldType == Defines.FIELDTYPE_NICK)
+                if (fieldType == Defines.FIELDTYPE_NICK)
                     break;
                 format = (wrapper.type == "left")
                     ? Config.s_config.playersPanel.medium2.formatLeft
                     : Config.s_config.playersPanel.medium2.formatRight;
                 break;
             case "large":
-                if (m_fieldType == Defines.FIELDTYPE_NICK)
+                if (fieldType == Defines.FIELDTYPE_NICK)
                 {
                     format = (wrapper.type == "left")
                         ? Config.s_config.playersPanel.large.nickFormatLeft
                         : Config.s_config.playersPanel.large.nickFormatRight;
                 }
-                else if (m_fieldType == Defines.FIELDTYPE_VEHICLE)
+                else if (fieldType == Defines.FIELDTYPE_VEHICLE)
                 {
                     format = (wrapper.type == "left")
                         ? Config.s_config.playersPanel.large.vehicleFormatLeft
@@ -290,12 +267,11 @@ class wot.PlayersPanel.PlayersPanel
         if (format != null)
         {
             //Logger.add("before: " + text);
-            var data = m_data[m_item++];
-            var deadState = Strings.endsWith("dead", colorScheme) ? Defines.DEADSTATE_DEAD : Defines.DEADSTATE_ALIVE;
+            var deadState = ((data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) == 0) ? Defines.DEADSTATE_DEAD : Defines.DEADSTATE_ALIVE;
             var state = wrapper.state;
             var field = state == "medium2" ? wrapper.m_vehicles : wrapper.m_names;
             var nm = Utils.GetPlayerName(data.label);
-            var key = "PP/" + deadState + "/" + nm + "/" + state + "/" + m_fieldType + "/" +
+            var key = "PP/" + deadState + "/" + nm + "/" + state + "/" + fieldType + "/" +
                 (Stat.s_data[nm] ? Stat.s_data[nm].loadstate : "0");
             //Logger.add(key);
             text = Cache.Get(key, function()
@@ -320,7 +296,7 @@ class wot.PlayersPanel.PlayersPanel
             //Logger.add("after: " + text);
         }
 
-        return base._getHTMLText(colorScheme, text);
+        return text;
     }
 
     /**
@@ -423,18 +399,18 @@ class wot.PlayersPanel.PlayersPanel
 
         if (wrapper.type == "left")
         {
-            wrapper.m_frags._x = squadSize;
-            wrapper.m_names._x = wrapper.m_frags._x + wrapper.m_frags._width;
-            wrapper.m_vehicles._x = wrapper.m_names._x + wrapper.m_names._width;
+            wrapper.m_names._x = squadSize;
+            wrapper.m_frags._x = wrapper.m_names._x + wrapper.m_names._width;
+            wrapper.m_vehicles._x = wrapper.m_frags._x + wrapper.m_frags._width;
             wrapper.m_list._x = wrapper.players_bg._x = net.wargaming.ingame.PlayersPanel.STATES[wrapper.state].bg_x - widthDelta;
             if (squadSize > 0)
                 wrapper.m_list.updateSquadIconPosition(-wrapper.m_list._x);
         }
         else
         {
-            wrapper.m_frags._x = wrapper.players_bg._width - wrapper.m_frags._width - squadSize;
-            wrapper.m_names._x = wrapper.m_frags._x - wrapper.m_names._width;
-            wrapper.m_vehicles._x = wrapper.m_names._x - wrapper.m_vehicles._width;
+            wrapper.m_names._x = wrapper.players_bg._width - wrapper.m_names._width - squadSize;
+            wrapper.m_frags._x = wrapper.m_names._x - wrapper.m_frags._width;
+            wrapper.m_vehicles._x = wrapper.m_frags._x - wrapper.m_vehicles._width;
             wrapper.m_list._x = wrapper.players_bg._x = wrapper.players_bg._width - net.wargaming.ingame.PlayersPanel.STATES[wrapper.state].bg_x + widthDelta;
             if (squadSize > 0)
                 wrapper.m_list.updateSquadIconPosition(-440 + wrapper.m_frags._width + wrapper.m_names._width + wrapper.m_vehicles._width + squadSize);
