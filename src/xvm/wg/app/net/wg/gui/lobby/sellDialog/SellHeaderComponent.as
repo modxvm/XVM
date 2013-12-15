@@ -142,7 +142,7 @@ package net.wg.gui.lobby.sellDialog
             this.inBarracsDrop.enabled = true;
          }
          this.inBarracsDrop.validateNow();
-         this.crewTF.text = _loc5_.toUpperCase() + ": ";
+         this.crewTF.text = App.utils.toUpperOrLowerCase(_loc5_,true) + ": ";
          if(param1.sellPrice[1] > 0)
          {
             this._tankGoldPrice = param1.sellPrice[1];

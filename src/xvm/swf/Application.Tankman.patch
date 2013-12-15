@@ -1,7 +1,7 @@
 diff -Naur Application.orig-0.orig/net/wg/gui/components/tooltips/ToolTipTankmen.class.asasm Application.orig-0/net/wg/gui/components/tooltips/ToolTipTankmen.class.asasm
 --- Application.orig-0.orig/net/wg/gui/components/tooltips/ToolTipTankmen.class.asasm	2013-10-03 11:10:19.223971000 +0300
 +++ Application.orig-0/net/wg/gui/components/tooltips/ToolTipTankmen.class.asasm	2013-10-03 11:16:56.693352200 +0300
-@@ -427,20 +427,24 @@
+@@ -431,20 +431,24 @@
  
        getlocal0
        getproperty         QName(PackageNamespace(""), "vehicleIco")
@@ -33,7 +33,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/components/tooltips/ToolTipTankmen
        getlocal            5
        getlex              QName(PackageNamespace(""), "MENU")
        getlocal0
-@@ -519,17 +523,17 @@
+@@ -526,17 +530,17 @@
        getproperty         QName(PackageNamespace(""), "tankInfoTF")
        getlocal0
        getproperty         QName(PackageNamespace(""), "vehicleIco")
@@ -59,7 +59,7 @@ diff -Naur Application.orig-0.orig/net/wg/gui/components/tooltips/ToolTipTankmen
  
        getlocal0
        getproperty         QName(PackageNamespace(""), "vehicleIco")
-@@ -1335,30 +1339,18 @@
+@@ -1342,30 +1346,18 @@
  
  L15:
        getlocal0

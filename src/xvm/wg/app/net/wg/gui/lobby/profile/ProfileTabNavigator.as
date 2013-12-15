@@ -7,7 +7,6 @@ package net.wg.gui.lobby.profile
    import scaleform.clik.events.IndexEvent;
    import net.wg.gui.events.ViewStackEvent;
    import net.wg.infrastructure.interfaces.IDAAPIModule;
-   import net.wg.data.Aliases;
    import scaleform.clik.data.DataProvider;
    import scaleform.clik.constants.InvalidationType;
 
@@ -70,18 +69,16 @@ package net.wg.gui.lobby.profile
          var _loc3_:Array = null;
          var _loc4_:Object = null;
          var _loc5_:* = 0;
-         var _loc6_:* = 0;
          super.draw();
          if((isInvalid(INIT_DATA_INV)) && (this.initData))
          {
             _loc1_ = this.initData.sectionsData;
             _loc2_ = _loc1_.length;
             _loc3_ = [];
-            _loc5_ = -1;
-            _loc6_ = 0;
-            while(_loc6_ < _loc2_)
+            _loc5_ = 0;
+            while(_loc5_ < _loc2_)
             {
-               _loc4_ = _loc1_[_loc6_];
+               _loc4_ = _loc1_[_loc5_];
                _loc3_.push(
                   {
                      "label":_loc4_.label,
@@ -90,16 +87,11 @@ package net.wg.gui.lobby.profile
                      "tooltip":_loc4_.tooltip
                   }
                );
-               if(_loc4_.alias == Aliases.PROFILE_AWARDS)
-               {
-                  _loc5_ = _loc6_;
-               }
-               _loc6_++;
+               _loc5_++;
             }
             this.bar.dataProvider = new DataProvider(_loc3_);
             if(_loc3_.length > 0)
             {
-               this.bar.selectedIndex = _loc5_;
                this.bar.selectedIndex = 0;
             }
          }

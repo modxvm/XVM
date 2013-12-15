@@ -601,6 +601,10 @@ package net.wg.gui.prebattle.company
       }
 
       private function enableChangeSettings(param1:Boolean=false) : void {
+         if(_baseDisposed)
+         {
+            return;
+         }
          if(!param1)
          {
             if(this.commentInput.hasEventListener(InputEvent.INPUT))

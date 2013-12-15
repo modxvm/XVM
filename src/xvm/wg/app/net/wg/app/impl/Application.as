@@ -200,8 +200,8 @@ package net.wg.app.impl
          return new GameInputManager();
       }
 
-      override protected function onAppConfiguring() : void {
-         super.onAppConfiguring();
+      override protected function onAfterAppConfiguring() : void {
+         super.onAfterAppConfiguring();
          libraryLoader.load(this._librariesList);
       }
 

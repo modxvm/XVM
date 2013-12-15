@@ -65,6 +65,8 @@ package net.wg.gui.login.impl
 
       private var isTFClickedByMBR:Boolean = false;
 
+      private var focusInited:Boolean = false;
+
       override public function updateStage(param1:Number, param2:Number) : void {
          this.updateContent();
          if(this._sparksManager)
@@ -73,17 +75,17 @@ package net.wg.gui.login.impl
          }
       }
 
+      override public function setFocus() : void {
+         super.setFocus();
+         this.initFocus();
+      }
+
       public function as_setDefaultValues(param1:String, param2:String, param3:Boolean, param4:Boolean, param5:Boolean, param6:Boolean) : void {
          this.form.setDefaultValues(param1,param2,param3,param4,param5,param6);
       }
 
       public function as_setErrorMessage(param1:String, param2:int) : void {
          this.setErrorMessage(param1,param2);
-      }
-
-      private function setErrorMessage(param1:String, param2:int) : void {
-         this.form.setErrorMessage(param1,param2);
-         this.initFocus();
       }
 
       public function as_setServersList(param1:Array, param2:int) : void {
@@ -158,7 +160,6 @@ package net.wg.gui.login.impl
       override protected function onPopulate() : void {
          super.onPopulate();
          this.initLoginForm();
-         App.utils.scheduler.envokeInNextFrame(this.initFocus);
          alpha = 1;
          this.keyMappings = App.utils.commons.createMap([Keyboard.ESCAPE,this.onEscapeKeyPress,Keyboard.ENTER,this.onEnterKeyPress]);
       }
@@ -180,11 +181,19 @@ package net.wg.gui.login.impl
          this.enableInputs(false);
          this.keyMappings.clear();
          this.keyMappings = null;
+         App.utils.scheduler.cancelTask(this.initFocus);
+         App.utils.scheduler.cancelTask(onEscapeS);
+         App.utils.scheduler.cancelTask(this.enableInputs);
          if(this._sparksManager)
          {
             this._sparksManager.dispose();
             this._sparksManager = null;
          }
+      }
+
+      private function setErrorMessage(param1:String, param2:int) : void {
+         this.form.setErrorMessage(param1,param2);
+         this.initFocus();
       }
 
       private function disposeLoginForm() : void {
@@ -300,6 +309,10 @@ package net.wg.gui.login.impl
          if(param1)
          {
             addEventListener(InputEvent.INPUT,this.handleInput);
+            if(!this.focusInited)
+            {
+               this.initFocus();
+            }
          }
          else
          {
@@ -341,13 +354,25 @@ package net.wg.gui.login.impl
       }
 
       private function initFocus() : void {
-         if(this.form.login.text.length == 0 || (this.form.login.highlight))
+         App.utils.scheduler.cancelTask(this.initFocus);
+         if(hasFocus)
          {
-            App.utils.focusHandler.setFocus(this.form.login);
-         }
-         else
-         {
-            App.utils.focusHandler.setFocus(this.form.pass);
+            if(initialized)
+            {
+               if(this.form.login.text.length == 0 || (this.form.login.highlight))
+               {
+                  App.utils.focusHandler.setFocus(this.form.login);
+               }
+               else
+               {
+                  App.utils.focusHandler.setFocus(this.form.pass);
+               }
+               this.focusInited = true;
+            }
+            else
+            {
+               App.utils.scheduler.envokeInNextFrame(this.initFocus);
+            }
          }
       }
 

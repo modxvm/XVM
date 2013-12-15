@@ -131,7 +131,7 @@ package net.wg.gui.components.tooltips
          else
          {
             _loc7_ = _loc6_.makeString(MENU.tankmen(_data.type));
-            _loc7_ = _loc7_.slice(0,1).toUpperCase() + _loc7_.slice(1,_loc7_.length);
+            _loc7_ = App.utils.toUpperOrLowerCase(_loc7_.slice(0,1),true) + _loc7_.slice(1,_loc7_.length);
          }
          var _loc8_:String = _loc6_.makeString(TOOLTIPS.level(_data.level));
          var _loc9_:String = _loc6_.makeString(TOOLTIPS.VEHICLE_LEVEL);

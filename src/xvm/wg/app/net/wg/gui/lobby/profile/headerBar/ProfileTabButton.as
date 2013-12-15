@@ -76,7 +76,7 @@ package net.wg.gui.lobby.profile.headerBar
       }
 
       override public function set label(param1:String) : void {
-         super.label = param1.toUpperCase();
+         super.label = App.utils.toUpperOrLowerCase(param1,true);
       }
 
       private function receiveWidth() : uint {

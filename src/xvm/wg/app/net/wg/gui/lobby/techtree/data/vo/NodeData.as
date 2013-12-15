@@ -2,6 +2,7 @@ package net.wg.gui.lobby.techtree.data.vo
 {
    import net.wg.gui.lobby.techtree.interfaces.IValueObject;
    import net.wg.utils.ILocale;
+   import net.wg.gui.lobby.techtree.constants.NamedLabels;
 
 
    public class NodeData extends Object implements IValueObject
@@ -73,22 +74,6 @@ package net.wg.gui.lobby.techtree.data.vo
          }
       }
 
-      public function get defEarnedXP() : Number {
-         return this._defEarnedXP;
-      }
-
-      public function set defEarnedXP(param1:Number) : void {
-         if(this._defEarnedXP == param1)
-         {
-            return;
-         }
-         this._defEarnedXP = param1;
-      }
-
-      public function get earnedXPLabel() : String {
-         return this._earnedXPLabel;
-      }
-
       public function fromArray(param1:Array, param2:ILocale) : void {
          throw new Error("Does not call method NodeData.fromArray.");
       }
@@ -122,7 +107,7 @@ package net.wg.gui.lobby.techtree.data.vo
          }
          if(!isNaN(param1.defEarnedXP))
          {
-            this.defEarnedXP = param1.defEarnedXP;
+            this._defEarnedXP = param1.defEarnedXP;
          }
          if(!isNaN(param1.state))
          {
@@ -194,6 +179,78 @@ package net.wg.gui.lobby.techtree.data.vo
          {
             this.displayInfo.clearUp();
          }
+      }
+
+      public function getNamedLabel(param1:String) : String {
+         var _loc2_:String = null;
+         switch(param1)
+         {
+            case NamedLabels.XP_COST:
+               _loc2_ = this.unlockProps.xpCostLabel;
+               break;
+            case NamedLabels.EARNED_XP:
+               _loc2_ = this._earnedXPLabel;
+               break;
+            case NamedLabels.CREDITS_PRICE:
+               _loc2_ = this.shopPrice.creditsLabel;
+               break;
+            case NamedLabels.GOLD_PRICE:
+               _loc2_ = this.shopPrice.goldLabel;
+               break;
+            default:
+               _loc2_ = "";
+         }
+         return _loc2_;
+      }
+
+      public function getNamedValue(param1:String) : Number {
+         var _loc2_:* = NaN;
+         switch(param1)
+         {
+            case NamedLabels.XP_COST:
+               _loc2_ = this.unlockProps.xpCost;
+               break;
+            case NamedLabels.EARNED_XP:
+               _loc2_ = this._earnedXP;
+               break;
+            case NamedLabels.CREDITS_PRICE:
+               _loc2_ = this.shopPrice.credits;
+               break;
+            case NamedLabels.GOLD_PRICE:
+               _loc2_ = this.shopPrice.gold;
+               break;
+            default:
+               _loc2_ = 0;
+         }
+         return _loc2_;
+      }
+
+      public function getActionData(param1:String) : ActionData {
+         var _loc2_:ActionData = new ActionData();
+         switch(param1)
+         {
+            case NamedLabels.XP_COST:
+               _loc2_.price = this.unlockProps.xpCost;
+               _loc2_.defaultPrice = this.unlockProps.defXpCost;
+               break;
+            case NamedLabels.EARNED_XP:
+               _loc2_.price = this._earnedXP;
+               _loc2_.defaultPrice = this._defEarnedXP;
+               break;
+            case NamedLabels.CREDITS_PRICE:
+               _loc2_.price = this.shopPrice.credits;
+               _loc2_.defaultPrice = this.shopPrice.defCredits;
+               _loc2_.actionPrice = this.shopPrice.actionPrc;
+               break;
+            case NamedLabels.GOLD_PRICE:
+               _loc2_.price = this.shopPrice.gold;
+               _loc2_.defaultPrice = this.shopPrice.defGold;
+               _loc2_.actionPrice = this.shopPrice.actionPrc;
+               break;
+            default:
+               _loc2_.price = 0;
+         }
+         return _loc2_;
       }
 
       public function toString() : String {

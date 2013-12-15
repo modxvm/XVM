@@ -515,6 +515,12 @@ package
 
       public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_VEHICLESLOTS:String = "#messenger:serviceChannelMessages/battleResults/quests/vehicleSlots";
 
+      public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_FREEXP:String = "#messenger:serviceChannelMessages/battleResults/quests/freeXP";
+
+      public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_CREDITS:String = "#messenger:serviceChannelMessages/battleResults/quests/credits";
+
+      public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_GOLD:String = "#messenger:serviceChannelMessages/battleResults/quests/gold";
+
       public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_BERTHS:String = "#messenger:serviceChannelMessages/battleResults/quests/berths";
 
       public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_PREMIUM:String = "#messenger:serviceChannelMessages/battleResults/quests/premium";

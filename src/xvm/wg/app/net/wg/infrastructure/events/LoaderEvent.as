@@ -16,6 +16,8 @@ package net.wg.infrastructure.events
 
       public static const VIEW_LOADED:String = "viewLoaded";
 
+      public static const VIEW_LOADING:String = "viewLoading";
+
       public static const CURSOR_LOADED:String = "cursorLoaded";
 
       public static const WAITING_LOADED:String = "waitingLoaded";

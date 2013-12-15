@@ -18,6 +18,7 @@ package net.wg.gui.cyberSport.controls
          addEventListener(MouseEvent.CLICK,this.onClickHandler);
          addEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
          addEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
+         this.setHighlightState(false);
       }
 
       private var _data:UnitCandidateVO = null;

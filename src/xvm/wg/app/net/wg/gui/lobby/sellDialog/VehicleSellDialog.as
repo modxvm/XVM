@@ -284,9 +284,10 @@ package net.wg.gui.lobby.sellDialog
       }
 
       private function setGoldText(param1:Number, param2:Number) : void {
+         var _loc5_:* = false;
          var _loc3_:ILocale = App.utils.locale;
          var _loc4_:String = _loc3_.gold(param1);
-         var _loc5_:* = true;
+         _loc5_ = true;
          var _loc6_:Number = this.headerComponent.tankGoldPrice > 0?this.headerComponent.tankGoldPrice - param2:param2;
          if(_loc6_ >= 0)
          {

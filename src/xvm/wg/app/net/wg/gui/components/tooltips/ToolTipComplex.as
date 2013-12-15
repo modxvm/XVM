@@ -24,7 +24,7 @@ package net.wg.gui.components.tooltips
          param1.multiline = true;
          param1.autoSize = param4;
          param1.embedFonts = true;
-         var _loc5_:Number = param2.toLowerCase().indexOf("face=\"",0);
+         var _loc5_:Number = App.utils.toUpperOrLowerCase(param2,false).indexOf("face=\"",0);
          if(_loc5_ > 0)
          {
             param3.font = param2.slice(_loc5_ + 6,param2.indexOf("\"",_loc5_ + 6));

@@ -13,11 +13,11 @@ package net.wg.gui.lobby.techtree.nodes
    import net.wg.gui.lobby.techtree.data.vo.NTDisplayInfo;
    import flash.events.MouseEvent;
    import net.wg.gui.lobby.techtree.constants.NodeState;
-   import net.wg.gui.lobby.techtree.constants.NamedLabels;
    import net.wg.gui.lobby.techtree.MenuHandler;
    import net.wg.gui.lobby.techtree.TechTreeEvent;
    import net.wg.gui.lobby.techtree.constants.ColorIndex;
-   import net.wg.gui.components.controls.IconText;
+   import net.wg.gui.lobby.techtree.data.vo.ActionData;
+   import net.wg.gui.lobby.techtree.constants.IconTextResolver;
    import net.wg.gui.lobby.techtree.constants.TTSoundID;
    import scaleform.clik.constants.InvalidationType;
    import __AS3__.vec.Vector;
@@ -43,10 +43,6 @@ package net.wg.gui.lobby.techtree.nodes
       }
 
       public static const LINES_AND_ARROWS_NAME:String = "linesAndArrows";
-
-      public static const NAMED_VALUE_TYPE_NUMBER:String = "Number";
-
-      public static const NAMED_VALUE_TYPE_STRING:String = "String";
 
       protected var _valueObject:NodeData;
 
@@ -115,8 +111,8 @@ package net.wg.gui.lobby.techtree.nodes
          this.container = null;
          if(this.button != null)
          {
-            this.button.removeEventListener(MouseEvent.MOUSE_OVER,this.buttonOver);
-            this.button.removeEventListener(MouseEvent.MOUSE_OUT,this.buttonOut);
+            this.button.removeEventListener(MouseEvent.MOUSE_OVER,this.buttonOver,false);
+            this.button.removeEventListener(MouseEvent.MOUSE_OUT,this.buttonOut,false);
             this.button.dispose();
          }
          if((this.isDelegateEvents) && !(this.hit == null))
@@ -230,86 +226,28 @@ package net.wg.gui.lobby.techtree.nodes
          return (this.dataInited) && (this._valueObject.state & NodeState.SHOP_ACTION) > 0;
       }
 
+      public function isInAction() : Boolean {
+         return (this.isShopAction()) && !(this.button == null) && (this.stateProps.visible);
+      }
+
       public function getEarnedXP() : Number {
          return this.dataInited?this._valueObject.earnedXP:0;
       }
 
-      public function getNamedDefValue(param1:String) : Number {
-         var _loc2_:* = NaN;
-         if(!this.dataInited)
-         {
-            return 0;
-         }
-         switch(param1)
-         {
-            case NamedLabels.XP_COST:
-               _loc2_ = this._valueObject.unlockProps.defXpCost;
-               break;
-            case NamedLabels.EARNED_XP:
-               _loc2_ = this._valueObject.defEarnedXP;
-               break;
-            case NamedLabels.CREDITS_PRICE:
-               _loc2_ = this._valueObject.shopPrice.defCredits;
-               break;
-            case NamedLabels.GOLD_PRICE:
-               _loc2_ = this._valueObject.shopPrice.defGold;
-               break;
-            default:
-               _loc2_ = 0;
-         }
-         return _loc2_;
-      }
-
-      public function getNamedActionPrc(param1:String) : Number {
-         if(!this.dataInited)
-         {
-            return 0;
-         }
-         var _loc2_:Number = 0;
-         switch(param1)
-         {
-            case NamedLabels.XP_COST:
-               _loc2_ = 0;
-               break;
-            case NamedLabels.EARNED_XP:
-               _loc2_ = 0;
-               break;
-            case NamedLabels.CREDITS_PRICE:
-               _loc2_ = this._valueObject.shopPrice.actionPrc;
-               break;
-            case NamedLabels.GOLD_PRICE:
-               _loc2_ = this._valueObject.shopPrice.actionPrc;
-               break;
-            default:
-               _loc2_ = 0;
-         }
-         return _loc2_;
-      }
-
-      public function getNamedValue(param1:String, param2:String) : Object {
-         var _loc3_:Object = null;
+      public function getNamedLabel(param1:String) : String {
          if(!this.dataInited)
          {
             return "";
          }
-         switch(param1)
+         return this._valueObject.getNamedLabel(param1);
+      }
+
+      public function getNamedValue(param1:String) : Number {
+         if(!this.dataInited)
          {
-            case NamedLabels.XP_COST:
-               _loc3_ = param2 == NAMED_VALUE_TYPE_NUMBER?this._valueObject.unlockProps.xpCost:this._valueObject.unlockProps.xpCostLabel;
-               break;
-            case NamedLabels.EARNED_XP:
-               _loc3_ = param2 == NAMED_VALUE_TYPE_NUMBER?this._valueObject.earnedXP:this._valueObject.earnedXPLabel;
-               break;
-            case NamedLabels.CREDITS_PRICE:
-               _loc3_ = param2 == NAMED_VALUE_TYPE_NUMBER?this._valueObject.shopPrice.credits:this._valueObject.shopPrice.creditsLabel;
-               break;
-            case NamedLabels.GOLD_PRICE:
-               _loc3_ = param2 == NAMED_VALUE_TYPE_NUMBER?this._valueObject.shopPrice.gold:this._valueObject.shopPrice.goldLabel;
-               break;
-            default:
-               _loc3_ = param2 == NAMED_VALUE_TYPE_NUMBER?0:"";
+            return 0;
          }
-         return _loc3_;
+         return this._valueObject.getNamedValue(param1);
       }
 
       public function validateNowEx() : void {
@@ -433,14 +371,12 @@ package net.wg.gui.lobby.techtree.nodes
       }
 
       public function populateUI() : void {
-         var _loc1_:* = NaN;
-         var _loc2_:* = NaN;
-         if(this.actionPrice != null)
+         var _loc1_:ActionData = null;
+         if(!(this.actionPrice == null) && (this.dataInited))
          {
-            _loc1_ = Number(this.getNamedValue(this.stateProps.label,Renderer.NAMED_VALUE_TYPE_NUMBER));
-            _loc2_ = Number(this.getNamedDefValue(this.stateProps.label));
-            this.actionPrice.setData(this.getNamedActionPrc(this.stateProps.label),_loc1_,_loc2_,this.getPriceIco(this.stateProps.label));
-            this.actionPrice.visible = (this.isShopAction()) && !(this.button == null) && (this.button.visible);
+            _loc1_ = this._valueObject.getActionData(this.stateProps.label);
+            this.actionPrice.visible = this.isInAction();
+            this.actionPrice.setData(_loc1_.actionPrice,_loc1_.price,_loc1_.defaultPrice,IconTextResolver.getFromNamedLabel(this.stateProps.label));
             if(this._doValidateNow)
             {
                this.actionPrice.validateNow();
@@ -449,31 +385,9 @@ package net.wg.gui.lobby.techtree.nodes
          this._doValidateNow = false;
          if(this.button != null)
          {
-            this.button.addEventListener(MouseEvent.MOUSE_OVER,this.buttonOver);
-            this.button.addEventListener(MouseEvent.MOUSE_OUT,this.buttonOut);
+            this.button.addEventListener(MouseEvent.MOUSE_OVER,this.buttonOver,false,0,true);
+            this.button.addEventListener(MouseEvent.MOUSE_OUT,this.buttonOut,false,0,true);
          }
-      }
-
-      private function getPriceIco(param1:String) : String {
-         var _loc2_:* = "";
-         switch(param1)
-         {
-            case NamedLabels.XP_COST:
-               _loc2_ = IconText.XP_PRICE;
-               break;
-            case NamedLabels.EARNED_XP:
-               _loc2_ = IconText.XP_PRICE;
-               break;
-            case NamedLabels.CREDITS_PRICE:
-               _loc2_ = IconText.CREDITS;
-               break;
-            case NamedLabels.GOLD_PRICE:
-               _loc2_ = IconText.GOLD;
-               break;
-            default:
-               _loc2_ = "";
-         }
-         return _loc2_;
       }
 
       private function buttonOut(param1:MouseEvent) : void {

@@ -10,6 +10,8 @@ package net.wg.infrastructure.base.meta
 
       function onWindowMinimizeS() : void;
 
+      function onSourceLoadedS() : void;
+
       function as_showWaiting(param1:String, param2:Object) : void;
 
       function as_hideWaiting() : void;

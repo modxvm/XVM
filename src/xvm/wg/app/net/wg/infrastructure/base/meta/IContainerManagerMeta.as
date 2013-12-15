@@ -6,6 +6,12 @@ package net.wg.infrastructure.base.meta
    public interface IContainerManagerMeta extends IEventDispatcher
    {
           
+      function isModalViewsIsExistsS() : Boolean;
+
+      function removeLoadingTokensS(param1:Array) : void;
+
+      function canCancelPreviousLoadingS(param1:String) : Boolean;
+
       function as_getView(param1:String) : Boolean;
 
       function as_show(param1:String, param2:int=0, param3:int=0) : Boolean;

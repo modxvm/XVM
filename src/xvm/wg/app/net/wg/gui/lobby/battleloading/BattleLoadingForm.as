@@ -51,7 +51,7 @@ package net.wg.gui.lobby.battleloading
 
       public function updateMapName(param1:String) : void {
          this.mapText.text = param1;
-         this.mapText.text = this.mapText.text.toUpperCase();
+         this.mapText.text = App.utils.toUpperOrLowerCase(this.mapText.text,true);
       }
 
       public function setBattleTypeName(param1:String) : void {

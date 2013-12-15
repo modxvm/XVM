@@ -21,6 +21,8 @@ package net.wg.gui.lobby.premiumForm
 
       private static const NORMAL_PRICE_WIDTH:Number = 190;
 
+      private static const ACTION_PRICE_POS:Number = 79;
+
       public var pdays:RadioButton;
 
       public var discount:DiscountPrice;
@@ -39,11 +41,11 @@ package net.wg.gui.lobby.premiumForm
          {
             if(data.isDiscountPackage)
             {
-               this.price.width = NORMAL_PRICE_WIDTH;
+               this.price.x = ACTION_PRICE_POS;
             }
             else
             {
-               this.price.x = this.discount.x + this.discount.width - this.price.width;
+               this.price.x = Math.round(this.discount.x + this.discount.width - this.price.width);
             }
          }
       }
@@ -105,9 +107,9 @@ package net.wg.gui.lobby.premiumForm
          ;
          this.pdays.visible = this.price.visible = true;
          this.pdays.validateNow();
-         this.updatePriceAlign = data.isDiscountPackage;
          this.gold = data.userGold;
          this.selected = data.isUserSelected;
+         invalidate(PRICE_POSITION);
       }
 
       private function updateDiscountPercent(param1:Number) : void {
@@ -116,10 +118,6 @@ package net.wg.gui.lobby.premiumForm
          this.discount.visible = _loc2_;
          this.discount.quantity.text = _loc2_?"-" + param1 + "%":this.discount.quantity.text;
          this.price.icon = _loc2_?"goldDiscount":"gold";
-      }
-
-      public function set updatePriceAlign(param1:Boolean) : void {
-         invalidate(PRICE_POSITION);
       }
 
       private function getDiscountPercent(param1:Number, param2:Number) : Number {

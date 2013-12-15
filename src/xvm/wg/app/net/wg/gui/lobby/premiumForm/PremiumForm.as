@@ -37,11 +37,11 @@ package net.wg.gui.lobby.premiumForm
 
       private static const OFFSET_TOP:Number = 124;
 
-      private static const PACKET_HEIGHT:Number = 21;
+      private static const PACKET_HEIGHT:Number = 25;
 
-      private static const OFFSET_BOTTOM:Number = 13;
+      private static const OFFSET_BOTTOM:Number = 7;
 
-      private static const PACKET_MARGIN:Number = 24.0;
+      private static const PACKET_MARGIN:Number = 27.0;
 
       public var vs:MovieClip;
 

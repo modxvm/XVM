@@ -108,11 +108,12 @@ package net.wg.gui.lobby.techtree.nodes
          }
          if(this.nameAndXp != null)
          {
+            this.nameAndXp.setIsInAction((actionPrice) && (isInAction()));
             this.nameAndXp.setOwner(this,_doValidateNow);
          }
          if(button != null)
          {
-            button.label = getNamedValue(stateProps.label,Renderer.NAMED_VALUE_TYPE_STRING).toString();
+            button.label = getNamedLabel(stateProps.label);
             button.enabled = isActionEnabled();
             if(button.setAnimation(stateProps.id,stateProps.animation))
             {

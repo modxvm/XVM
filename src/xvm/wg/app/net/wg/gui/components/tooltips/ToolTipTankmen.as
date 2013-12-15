@@ -111,7 +111,7 @@ package net.wg.gui.components.tooltips
             this.vehicleIco.y = topPosition + 35;
             this.vehicleIco.x = contentMargin.left + bgShadowMargin.left;
             _loc6_ = _loc5_.makeString(MENU.tankmen(this.dataVO.currentVehicleType));
-            _loc6_ = _loc6_.slice(0,1).toUpperCase() + _loc6_.slice(1);
+            _loc6_ = App.utils.toUpperOrLowerCase(_loc6_.slice(0,1),true) + _loc6_.slice(1);
             _loc6_ = this.dataVO.currentVehicleName + "<br/>" + _loc6_;
             _loc7_ = new TextFormat();
             _loc7_.leading = -2;

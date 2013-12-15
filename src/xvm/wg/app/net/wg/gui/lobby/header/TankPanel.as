@@ -102,7 +102,7 @@ package net.wg.gui.lobby.header
          if(param1.length != 0)
          {
             _loc2_ = App.utils.locale.makeString(MENU.tankmen(param1),{});
-            this.tank_type.text = _loc2_.toUpperCase();
+            this.tank_type.text = App.utils.toUpperOrLowerCase(_loc2_,true);
          }
          else
          {

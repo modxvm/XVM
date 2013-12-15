@@ -27,10 +27,10 @@ package scaleform.clik.controls
          {
             _loc3_ = groups[param2] = new Object();
          }
-         var _loc4_:ButtonGroup = _loc3_[param1.toLowerCase()];
+         var _loc4_:ButtonGroup = _loc3_[App.utils.toUpperOrLowerCase(param1,false)];
          if(_loc4_ == null)
          {
-            _loc4_ = _loc3_[param1.toLowerCase()] = new ButtonGroup(param1,param2);
+            _loc4_ = _loc3_[App.utils.toUpperOrLowerCase(param1,false)] = new ButtonGroup(param1,param2);
          }
          return _loc4_;
       }

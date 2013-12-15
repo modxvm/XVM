@@ -1,17 +1,15 @@
 package net.wg.infrastructure.base.meta.impl
 {
-   import net.wg.infrastructure.base.AbstractView;
+   import net.wg.infrastructure.base.AbstractWindowView;
    import net.wg.data.constants.Errors;
 
 
-   public class SettingsWindowMeta extends AbstractView
+   public class SettingsWindowMeta extends AbstractWindowView
    {
           
       public function SettingsWindowMeta() {
          super();
       }
-
-      public var closeWindow:Function = null;
 
       public var applySettings:Function = null;
 
@@ -28,11 +26,6 @@ package net.wg.infrastructure.base.meta.impl
       public var isSoundModeValid:Function = null;
 
       public var showWarningDialog:Function = null;
-
-      public function closeWindowS() : void {
-         App.utils.asserter.assertNotNull(this.closeWindow,"closeWindow" + Errors.CANT_NULL);
-         this.closeWindow();
-      }
 
       public function applySettingsS(param1:Object, param2:Boolean) : void {
          App.utils.asserter.assertNotNull(this.applySettings,"applySettings" + Errors.CANT_NULL);

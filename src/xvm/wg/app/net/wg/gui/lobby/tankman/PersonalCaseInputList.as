@@ -72,15 +72,18 @@ package net.wg.gui.lobby.tankman
       }
 
       private function searchIndex(param1:String) : int {
-         var _loc2_:* = 0;
-         while(_loc2_ < this.list.dataProvider.length)
+         var _loc4_:String = null;
+         var _loc2_:String = App.utils.toUpperOrLowerCase(param1,false);
+         var _loc3_:* = 0;
+         while(_loc3_ < this.list.dataProvider.length)
          {
-            if(param1.toLowerCase() == String(this.list.dataProvider[_loc2_].value).toLowerCase().slice(0,param1.length))
+            _loc4_ = App.utils.toUpperOrLowerCase(String(this.list.dataProvider[_loc3_].value),false);
+            if(_loc2_ == _loc4_.slice(0,param1.length))
             {
-               this.selectedItem = this.list.dataProvider[_loc2_];
-               return _loc2_;
+               this.selectedItem = this.list.dataProvider[_loc3_];
+               return _loc3_;
             }
-            _loc2_++;
+            _loc3_++;
          }
          return this.list.selectedIndex;
       }

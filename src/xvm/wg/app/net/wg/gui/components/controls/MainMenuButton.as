@@ -85,7 +85,7 @@ package net.wg.gui.components.controls
                _loc1_ = App.utils.locale.makeString(_label,{});
                if(_loc1_)
                {
-                  _loc1_ = _loc1_.toUpperCase();
+                  _loc1_ = App.utils.toUpperOrLowerCase(_loc1_,true);
                }
                else
                {

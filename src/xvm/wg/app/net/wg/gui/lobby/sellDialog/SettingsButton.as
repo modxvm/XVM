@@ -22,7 +22,7 @@ package net.wg.gui.lobby.sellDialog
       override protected function configUI() : void {
          super.configUI();
          var _loc1_:String = App.utils.locale.makeString(DIALOGS.BUYVEHICLEDIALOG_EXPANDBTNLABEL);
-         _loc1_ = _loc1_.toUpperCase();
+         _loc1_ = App.utils.toUpperOrLowerCase(_loc1_,true);
          this.setingsDropBtn.label = _loc1_;
          this.creditsIT.textFieldYOffset = VehicleSellDialog.ICONS_TEXT_OFFSET;
       }

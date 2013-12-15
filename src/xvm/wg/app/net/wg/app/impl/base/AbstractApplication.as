@@ -2,7 +2,7 @@ package net.wg.app.impl.base
 {
    import net.wg.infrastructure.base.meta.impl.ApplicationMeta;
    import net.wg.app.IApplication;
-   import net.wg.infrastructure.base.meta.ILoaderManagerMeta;
+   import net.wg.infrastructure.managers.ILoaderManager;
    import flash.display.Sprite;
    import net.wg.infrastructure.managers.GlobalVarsManager;
    import net.wg.infrastructure.managers.ITooltipMgr;
@@ -60,7 +60,7 @@ package net.wg.app.impl.base
 
       private static const POPUP_MGR_INIT_EVENT:String = "popUpManagerInited";
 
-      private var _loaderMgr:ILoaderManagerMeta = null;
+      private var _loaderMgr:ILoaderManager = null;
 
       private var _classLoaderMgr:Sprite = null;
 
@@ -288,8 +288,8 @@ package net.wg.app.impl.base
          throw new AbstractException("BaseApp.getRegCmdName" + Errors.ABSTRACT_INVOKE);
       }
 
-      protected function onAppConfiguring() : void {
-          
+      protected function onAfterAppConfiguring() : void {
+         onAsInitializationCompletedS();
       }
 
       protected function onBeforeAppConfiguring() : void {
@@ -378,8 +378,7 @@ package net.wg.app.impl.base
       private function onWaitingLoadedHandler(param1:LoaderEvent) : void {
          this._waiting = param1.view as IWaitingView;
          this._utils.asserter.assertNotNull(this._waiting,"waiting initialization problem");
-         addChild(DisplayObject(this._waiting));
-         IView(this._waiting).updateStage(this._appWidth,this._appHeight);
+         this._waiting.updateStage(this._appWidth,this._appHeight);
       }
 
       private function onFirstFrame(param1:Event) : void {
@@ -387,7 +386,7 @@ package net.wg.app.impl.base
          this.onBeforeAppConfiguring();
          this._environmentMgr.envoke(this.getRegCmdName());
          this.configure();
-         this.onAppConfiguring();
+         this.onAfterAppConfiguring();
       }
 
       private function onPopUpManagerInitHandler(param1:Event) : void {

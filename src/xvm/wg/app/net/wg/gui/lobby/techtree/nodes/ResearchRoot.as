@@ -85,17 +85,18 @@ package net.wg.gui.lobby.techtree.nodes
                this.vIconLoader.visible = true;
             }
          }
-         if(this.nameAndXp != null)
-         {
-            this.nameAndXp.setOwner(this,_doValidateNow);
-         }
          if(this.typeAndLevel != null)
          {
             this.typeAndLevel.setOwner(this,_doValidateNow);
          }
+         if(this.nameAndXp != null)
+         {
+            this.nameAndXp.setIsInAction((actionPrice) && (isInAction()));
+            this.nameAndXp.setOwner(this,_doValidateNow);
+         }
          if(button != null)
          {
-            button.label = getNamedValue(stateProps.label,Renderer.NAMED_VALUE_TYPE_STRING).toString();
+            button.label = getNamedLabel(stateProps.label);
             button.enabled = isActionEnabled();
             button.visible = stateProps.visible;
             button.setOwner(this,_doValidateNow);

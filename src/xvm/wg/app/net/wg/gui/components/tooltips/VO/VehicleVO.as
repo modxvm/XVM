@@ -66,15 +66,15 @@ package net.wg.gui.components.tooltips.VO
             switch(_loc4_)
             {
                case this.LOCK_ROAMING:
-                  this.clanLockHeader = Utils.instance.htmlWrapper(_loc3_.makeString(TOOLTIPS.TANKCARUSEL_LOCK_HEADER).toUpperCase(),"#ffffff",14,"$TitleFont") + "<br/><font face=\"$TextFont\" size=\"3\">&nbsp;</font><br/>";
+                  this.clanLockHeader = Utils.instance.htmlWrapper(App.utils.toUpperOrLowerCase(_loc3_.makeString(TOOLTIPS.TANKCARUSEL_LOCK_HEADER),false),"#ffffff",14,"$TitleFont") + "<br/><font face=\"$TextFont\" size=\"3\">&nbsp;</font><br/>";
                   this.clanLockHeader = this.clanLockHeader + Utils.instance.htmlWrapper(_loc3_.makeString(TOOLTIPS.tankcarusel_lock(_loc4_)),this.LOCK_MSG_COLOR,11,"$TextFont");
                   break;
                case this.LOCK_CLAN:
                case this.LOCK_TOURNAMENT:
                   _loc5_ = param1["locks"][_loc4_];
                   _loc6_ = _loc3_.shortDate(_loc5_) + " " + _loc3_.shortTime(_loc5_);
-                  this.clanLockHeader = Utils.instance.htmlWrapper(_loc3_.makeString(TOOLTIPS.TANKCARUSEL_LOCK_HEADER).toUpperCase(),"#ffffff",14,"$TitleFont") + "<br/>";
-                  this.clanLockHeader = this.clanLockHeader + (Utils.instance.htmlWrapper(_loc3_.makeString(TOOLTIPS.TANKCARUSEL_LOCK_TO).toLowerCase() + " " + _loc6_,"#c2c2c2",13,"$FieldFont") + "<font face=\"$FieldFont\" size=\"12\">&nbsp;</font><br/><font face=\"$TextFont\" size=\"5\">&nbsp;</font><br/>");
+                  this.clanLockHeader = Utils.instance.htmlWrapper(App.utils.toUpperOrLowerCase(_loc3_.makeString(TOOLTIPS.TANKCARUSEL_LOCK_HEADER),false),"#ffffff",14,"$TitleFont") + "<br/>";
+                  this.clanLockHeader = this.clanLockHeader + (Utils.instance.htmlWrapper(App.utils.toUpperOrLowerCase(_loc3_.makeString(TOOLTIPS.TANKCARUSEL_LOCK_TO),false) + " " + _loc6_,"#c2c2c2",13,"$FieldFont") + "<font face=\"$FieldFont\" size=\"12\">&nbsp;</font><br/><font face=\"$TextFont\" size=\"5\">&nbsp;</font><br/>");
                   this.clanLockHeader = this.clanLockHeader + Utils.instance.htmlWrapper(_loc3_.makeString(TOOLTIPS.tankcarusel_lock(_loc4_)),this.LOCK_MSG_COLOR,11,"$TextFont");
                   break;
                case "":

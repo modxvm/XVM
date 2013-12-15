@@ -15,6 +15,8 @@ package net.wg.infrastructure.base.meta.impl
 
       public var onWindowMinimize:Function = null;
 
+      public var onSourceLoaded:Function = null;
+
       public function onWindowCloseS() : void {
          App.utils.asserter.assertNotNull(this.onWindowClose,"onWindowClose" + Errors.CANT_NULL);
          this.onWindowClose();
@@ -23,6 +25,11 @@ package net.wg.infrastructure.base.meta.impl
       public function onWindowMinimizeS() : void {
          App.utils.asserter.assertNotNull(this.onWindowMinimize,"onWindowMinimize" + Errors.CANT_NULL);
          this.onWindowMinimize();
+      }
+
+      public function onSourceLoadedS() : void {
+         App.utils.asserter.assertNotNull(this.onSourceLoaded,"onSourceLoaded" + Errors.CANT_NULL);
+         this.onSourceLoaded();
       }
    }
 

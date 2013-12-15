@@ -203,7 +203,7 @@ package net.wg.gui.lobby.settings.components
          var _loc1_:uint = 0;
          while(_loc1_ < this._keys.length)
          {
-            this._keys[_loc1_] = String(this._keys[_loc1_]).toUpperCase();
+            this._keys[_loc1_] = App.utils.toUpperOrLowerCase(String(this._keys[_loc1_]),true);
             _loc1_++;
          }
       }

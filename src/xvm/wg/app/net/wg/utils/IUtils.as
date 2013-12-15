@@ -2,12 +2,19 @@ package net.wg.utils
 {
    import net.wg.infrastructure.base.meta.IUtilsManagerMeta;
    import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import net.wg.infrastructure.interfaces.IStrCaseProperties;
    import net.wg.infrastructure.interfaces.entity.ISerializable;
 
 
    public interface IUtils extends IUtilsManagerMeta, IDisposable
    {
           
+      function setNations(param1:INations) : void;
+
+      function toUpperOrLowerCase(param1:String, param2:Boolean, param3:IStrCaseProperties=null) : String;
+
+      function getStrCaseProperties() : IStrCaseProperties;
+
       function get asserter() : IAssertable;
 
       function get scheduler() : IScheduler;
@@ -31,8 +38,6 @@ package net.wg.utils
       function get events() : IEventCollector;
 
       function get IME() : IIME;
-
-      function setNations(param1:INations) : void;
 
       function get voMgr() : IVOManager;
 

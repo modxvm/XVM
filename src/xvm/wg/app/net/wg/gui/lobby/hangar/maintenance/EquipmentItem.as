@@ -226,6 +226,7 @@ package net.wg.gui.lobby.hangar.maintenance
       }
 
       private function update() : void {
+         var _loc2_:ILocale = null;
          var _loc3_:IEventCollector = null;
          var _loc1_:ModuleVO = this.artifactsData[this.select.selectedIndex];
          this.toBuyDropdown.visible = false;
@@ -237,7 +238,7 @@ package net.wg.gui.lobby.hangar.maintenance
          this.actionPrice.setup(this);
          this.price.visible = !this.actionPrice.visible;
          this.countLabel.alpha = _loc1_.count > 0?1:0.3;
-         var _loc2_:ILocale = App.utils.locale;
+         _loc2_ = App.utils.locale;
          this.countLabel.text = _loc2_.integer(_loc1_.count);
          if(_loc1_.prices[1] > 0 && _loc1_.prices[0] > 0 && (_loc1_.goldEqsForCredits))
          {

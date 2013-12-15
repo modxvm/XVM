@@ -128,7 +128,7 @@ package net.wg.gui.lobby.tankman
          var _loc2_:String = null;
          if(this.isHeader)
          {
-            this._name.text = App.utils.locale.makeString("#dialogs:addSkillWindow/label/" + data.title).toUpperCase();
+            this._name.text = App.utils.toUpperOrLowerCase(App.utils.locale.makeString("#dialogs:addSkillWindow/label/" + data.title),true);
             this.desc.text = data.rankId == "common" || (data.selfSkill)?"":"#item_types:tankman/Skill_not_be_used";
             this.rank.visible = false;
          }

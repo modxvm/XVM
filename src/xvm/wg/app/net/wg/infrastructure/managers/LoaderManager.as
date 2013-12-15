@@ -1,7 +1,6 @@
 package net.wg.infrastructure.managers
 {
    import net.wg.infrastructure.base.meta.impl.LoaderManagerMeta;
-   import net.wg.infrastructure.base.meta.ILoaderManagerMeta;
    import flash.utils.Dictionary;
    import net.wg.data.Aliases;
    import flash.net.URLRequest;
@@ -10,12 +9,12 @@ package net.wg.infrastructure.managers
    import flash.system.ApplicationDomain;
    import flash.events.Event;
    import flash.events.IOErrorEvent;
-   import flash.display.LoaderInfo;
-   import net.wg.infrastructure.interfaces.IView;
    import net.wg.infrastructure.events.LoaderEvent;
+   import net.wg.infrastructure.interfaces.IView;
+   import flash.display.LoaderInfo;
 
 
-   public class LoaderManager extends LoaderManagerMeta implements ILoaderManagerMeta
+   public class LoaderManager extends LoaderManagerMeta implements ILoaderManager
    {
           
       public function LoaderManager() {
@@ -40,6 +39,32 @@ package net.wg.infrastructure.managers
          _loc6_.contentLoaderInfo.addEventListener(Event.INIT,this.onSWFLoaded,false,0,true);
          _loc6_.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,this.onSWFLoadError,false,0,true);
          this.loaderToToken[_loc6_] = new LoadInfo(param2,param3,param4,param1);
+         this.dispatchLoaderEvent(LoaderEvent.VIEW_LOADING,param1,param2);
+      }
+
+      public function stopLoadingByAliases(param1:Array) : Array {
+         var _loc3_:* = undefined;
+         var _loc4_:Loader = null;
+         var _loc5_:LoadInfo = null;
+         var _loc6_:* = 0;
+         var _loc2_:Array = [];
+         for (_loc3_ in this.loaderToToken)
+         {
+            _loc4_ = Loader(_loc3_);
+            _loc5_ = this.loaderToToken[_loc4_];
+            _loc6_ = param1.indexOf(_loc5_.alias);
+            if(_loc6_ != -1)
+            {
+               param1.splice(_loc6_,1);
+               _loc2_.push(_loc5_.token);
+               _loc3_.contentLoaderInfo.removeEventListener(Event.INIT,this.onSWFLoaded,false);
+               _loc3_.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR,this.onSWFLoadError,false);
+               _loc4_.unloadAndStop(true);
+               _loc5_.dispose();
+               delete this.loaderToToken[[_loc3_]];
+            }
+         }
+         return _loc2_;
       }
 
       override protected function onDispose() : void {
@@ -56,6 +81,10 @@ package net.wg.infrastructure.managers
             _loc2_.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR,this.onSWFLoadError);
             delete this.loaderToToken[[_loc2_]];
          }
+      }
+
+      private function dispatchLoaderEvent(param1:String, param2:Object, param3:String, param4:IView=null) : void {
+         dispatchEvent(new LoaderEvent(param1,param2,param3,param4));
       }
 
       private function onSWFLoaded(param1:Event) : void {
@@ -87,7 +116,7 @@ package net.wg.infrastructure.managers
             view.as_alias = alias;
             view.as_name = name;
             view.loader = loader;
-            dispatchEvent(new LoaderEvent(LoaderEvent.VIEW_LOADED,config,token,view));
+            this.dispatchLoaderEvent(LoaderEvent.VIEW_LOADED,config,token,view);
             viewLoadedS(token,view);
          }
          else

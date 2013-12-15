@@ -8,7 +8,7 @@ package net.wg.gui.lobby.techtree.constants
           
       public function _Importer() {
          super();
-         importClasses(Vector.<Class>([ActionName,ColorIndex,NamedLabels,NavIndicator,NodeEntityType,NodeState,OutLiteral,TTInvalidationType,TTSoundID,XpTypeStrings]));
+         importClasses(Vector.<Class>([ActionName,ColorIndex,IconTextResolver,NamedLabels,NavIndicator,NodeEntityType,NodeState,OutLiteral,TTInvalidationType,TTSoundID,XpTypeStrings]));
       }
    }
 

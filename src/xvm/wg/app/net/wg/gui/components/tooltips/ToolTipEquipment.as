@@ -6,13 +6,13 @@ package net.wg.gui.components.tooltips
    import net.wg.gui.components.tooltips.VO.EquipmentVO;
    import net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO;
    import net.wg.utils.ILocale;
+   import net.wg.gui.components.tooltips.VO.ToolTipBlockVO;
    import flash.text.TextFormat;
    import flash.text.StyleSheet;
    import net.wg.gui.components.tooltips.VO.ToolTipStatusColorsVO;
    import net.wg.gui.components.tooltips.helpers.Utils;
    import flash.text.TextFormatAlign;
    import flash.text.TextFieldAutoSize;
-   import net.wg.gui.components.tooltips.VO.ToolTipBlockVO;
    import net.wg.gui.components.tooltips.VO.ToolTipBlockRightListItemVO;
 
 
@@ -83,6 +83,7 @@ package net.wg.gui.components.tooltips
          var _loc3_:EquipmentVO = null;
          var _loc5_:ToolTipBlockResultVO = null;
          var _loc7_:ILocale = null;
+         var _loc12_:ToolTipBlockVO = null;
          var _loc17_:String = null;
          var _loc18_:TextFormat = null;
          var _loc19_:StyleSheet = null;
@@ -120,7 +121,7 @@ package net.wg.gui.components.tooltips
          {
             case this.TYPE_SHELL:
                _loc17_ = _loc7_.makeString(ITEM_TYPES.shell_kinds(_loc3_.type));
-               _loc17_ = _loc17_.slice(0,1).toUpperCase() + _loc17_.slice(1);
+               _loc17_ = App.utils.toUpperOrLowerCase(_loc17_.slice(0,1),true) + _loc17_.slice(1);
                _loc6_ = _loc6_ + (Utils.instance.htmlWrapper(_loc17_,Utils.instance.COLOR_NORMAL,12,"$TextFont") + "<br/>");
                break;
             case this.TYPE_MODULE:
@@ -182,7 +183,7 @@ package net.wg.gui.components.tooltips
          separators.push(_loc4_);
          topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
          var _loc11_:String = " " + _loc7_.makeString(TOOLTIPS.MODULE_COUNT);
-         var _loc12_:ToolTipBlockVO = new ToolTipBlockVO();
+         _loc12_ = new ToolTipBlockVO();
          _loc12_.contener = content;
          _loc12_.childrenNamePrefix = "stats";
          _loc12_.leftText = "";

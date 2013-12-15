@@ -58,7 +58,6 @@ package net.wg.gui.lobby.store.views
             fitsSelectDropDn.enabled = true;
             myVehiclesRadioBtn.enabled = true;
          }
-         otherVehiclesRadioBtn.enabled = param3 == -1 || getUIName() == STORE_TYPES.SHOP;
       }
    }
 

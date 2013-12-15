@@ -13,6 +13,7 @@ package net.wg.infrastructure.base
    import scaleform.clik.ui.InputDetails;
    import flash.ui.Keyboard;
    import scaleform.clik.constants.InputValue;
+   import flash.display.MovieClip;
 
 
    public class AbstractWindowView extends WindowViewMeta implements IAbstractWindowView
@@ -53,6 +54,8 @@ package net.wg.infrastructure.base
 
       private var _geometry:IWindowGeometry;
 
+      private var _isSourceTracked:Boolean = false;
+
       override public function setViewSize(param1:Number, param2:Number) : void {
           
       }
@@ -63,18 +66,12 @@ package net.wg.infrastructure.base
 
       override public function setFocus() : void {
          super.setFocus();
-         if((this.window) && (this.window.getBackground()))
-         {
-            this.window.getBackground().gotoAndPlay(BG_ENABLED);
-         }
+         App.utils.scheduler.envokeInNextFrame(this.changeBackgroundLabel,BG_ENABLED);
       }
 
       override public function removeFocus() : void {
          super.removeFocus();
-         if((this.window) && (this.window.getBackground()))
-         {
-            this.window.getBackground().gotoAndPlay(BG_DISABLED);
-         }
+         App.utils.scheduler.envokeInNextFrame(this.changeBackgroundLabel,BG_DISABLED);
       }
 
       override public function playHideTween(param1:DisplayObject, param2:Function=null) : Boolean {
@@ -224,6 +221,14 @@ package net.wg.infrastructure.base
          this._geometry = param1;
       }
 
+      public function get isSourceTracked() : Boolean {
+         return this._isSourceTracked;
+      }
+
+      public function set isSourceTracked(param1:Boolean) : void {
+         this._isSourceTracked = param1;
+      }
+
       public function set showWaiting(param1:Boolean) : void {
          if(this._showWaiting != param1)
          {
@@ -257,6 +262,7 @@ package net.wg.infrastructure.base
             this._window.sourceView = null;
             this._window = null;
          }
+         App.utils.scheduler.cancelTask(this.changeBackgroundLabel);
          super.onDispose();
       }
 
@@ -358,6 +364,18 @@ package net.wg.infrastructure.base
 
       public function get waiting() : Waiting {
          return this._waiting;
+      }
+
+      private function changeBackgroundLabel(param1:String) : void {
+         var _loc2_:MovieClip = null;
+         if(this.window)
+         {
+            _loc2_ = this.window.getBackground();
+            if((_loc2_) && !(_loc2_.currentLabel == param1))
+            {
+               _loc2_.gotoAndPlay(param1);
+            }
+         }
       }
    }
 

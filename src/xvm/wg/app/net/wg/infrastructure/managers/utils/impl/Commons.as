@@ -121,6 +121,7 @@ package net.wg.infrastructure.managers.utils.impl
 
       public function keyToString(param1:Number) : KeyProps {
          var _loc2_:KeyProps = new KeyProps();
+         var _loc3_:String = String.fromCharCode(param1);
          if(KeysMap.mapping.hasOwnProperty(param1.toString()))
          {
             if(KeysMap.mapping[param1].hasOwnProperty("to_show"))
@@ -129,7 +130,7 @@ package net.wg.infrastructure.managers.utils.impl
             }
             else
             {
-               _loc2_.keyName = String.fromCharCode(param1).toUpperCase();
+               _loc2_.keyName = App.utils.toUpperOrLowerCase(_loc3_,true);
             }
             if(KeysMap.mapping[param1].hasOwnProperty("command"))
             {
@@ -137,13 +138,13 @@ package net.wg.infrastructure.managers.utils.impl
             }
             else
             {
-               _loc2_.keyCommand = String.fromCharCode(param1).toUpperCase();
+               _loc2_.keyCommand = App.utils.toUpperOrLowerCase(_loc3_,true);
             }
          }
          else
          {
-            _loc2_.keyName = String.fromCharCode(param1).toUpperCase();
-            _loc2_.keyCommand = String.fromCharCode(param1).toUpperCase();
+            _loc2_.keyName = App.utils.toUpperOrLowerCase(_loc3_,true);
+            _loc2_.keyCommand = App.utils.toUpperOrLowerCase(_loc3_,true);
          }
          return _loc2_;
       }

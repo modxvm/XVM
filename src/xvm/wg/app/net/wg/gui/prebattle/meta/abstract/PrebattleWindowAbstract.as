@@ -13,6 +13,7 @@ package net.wg.gui.prebattle.meta.abstract
           
       public function PrebattleWindowAbstract() {
          super();
+         isSourceTracked = true;
       }
 
       public function as_enableLeaveBtn(param1:Boolean) : void {

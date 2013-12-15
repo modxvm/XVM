@@ -150,10 +150,7 @@ package net.wg.gui.components.common.cursor
       }
 
       private function onEnterToDragMode(param1:MouseEvent) : void {
-         if(!this._isOnDragging)
-         {
-            forceSetCursor(Cursors.DRAG_OPEN);
-         }
+         setCursor(Cursors.DRAG_OPEN);
       }
 
       private function draggingHandler(param1:MouseEvent) : void {

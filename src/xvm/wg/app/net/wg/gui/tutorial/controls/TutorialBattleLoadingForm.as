@@ -30,7 +30,7 @@ package net.wg.gui.tutorial.controls
       }
 
       public function updateMapName(param1:String) : void {
-         this.mapText.text = param1?param1.toUpperCase():"";
+         this.mapText.text = param1?App.utils.toUpperOrLowerCase(param1,true):"";
       }
 
       public function updateBattleType(param1:String) : void {

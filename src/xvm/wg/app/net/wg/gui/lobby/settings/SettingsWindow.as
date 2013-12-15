@@ -2,8 +2,6 @@ package net.wg.gui.lobby.settings
 {
    import net.wg.infrastructure.base.meta.impl.SettingsWindowMeta;
    import net.wg.infrastructure.base.meta.ISettingsWindowMeta;
-   import flash.display.MovieClip;
-   import net.wg.gui.components.controls.TextFieldShort;
    import net.wg.gui.components.advanced.ButtonBarEx;
    import flash.display.Sprite;
    import net.wg.gui.components.advanced.ViewStack;
@@ -12,6 +10,7 @@ package net.wg.gui.lobby.settings
    import net.wg.gui.components.controls.DropDownListItemRendererSound;
    import net.wg.gui.lobby.settings.vo.SettingsControlProp;
    import net.wg.utils.ICommons;
+   import net.wg.infrastructure.interfaces.IWindow;
    import scaleform.clik.events.ButtonEvent;
    import scaleform.clik.data.DataProvider;
    import scaleform.clik.events.IndexEvent;
@@ -19,6 +18,7 @@ package net.wg.gui.lobby.settings
    import net.wg.gui.lobby.settings.evnts.SettingViewEvent;
    import net.wg.gui.lobby.settings.evnts.AlternativeVoiceEvent;
    import net.wg.gui.lobby.settings.vo.SettingsKeyProp;
+   import flash.display.MovieClip;
    import scaleform.clik.interfaces.IDataProvider;
    import net.wg.data.constants.KeysMap;
    import net.wg.infrastructure.interfaces.IViewStackContent;
@@ -28,10 +28,6 @@ package net.wg.gui.lobby.settings
    import net.wg.data.managers.impl.TooltipProps;
    import net.wg.data.constants.Tooltips;
    import net.wg.gui.components.tooltips.helpers.Utils;
-   import scaleform.clik.events.InputEvent;
-   import scaleform.clik.ui.InputDetails;
-   import flash.ui.Keyboard;
-   import scaleform.clik.constants.InputValue;
 
 
    public class SettingsWindow extends SettingsWindowMeta implements ISettingsWindowMeta
@@ -39,13 +35,15 @@ package net.wg.gui.lobby.settings
           
       public function SettingsWindow() {
          super();
+         this.canDrag = false;
+         this.canClose = false;
+         this.canResize = false;
+         this.showWindowBg = false;
+         this.isModal = true;
+         this.isCentered = true;
       }
 
       private static var __currentTab:Number = 0;
-
-      public var wndBg:MovieClip = null;
-
-      public var title:TextFieldShort = null;
 
       public var tabs:ButtonBarEx = null;
 
@@ -72,8 +70,7 @@ package net.wg.gui.lobby.settings
       private const SOUND_MODE_WARNING:String = "soundModeInvalid";
 
       override public function updateStage(param1:Number, param2:Number) : void {
-         this.x = param1 - this.width >> 1;
-         this.y = Math.max(param2 - this.height >> 1,10);
+         super.updateStage(param1,param2);
       }
 
       public function as_setCaptureDevices(param1:Number, param2:Array) : void {
@@ -173,8 +170,14 @@ package net.wg.gui.lobby.settings
       public function as_setData(param1:Object) : void {
          this._settingsData = this.normalize(param1);
          this.updateApplayBtnState();
-         _invalid = true;
-         validateNow();
+      }
+
+      override public function set window(param1:IWindow) : void {
+         super.window = param1;
+         if(window)
+         {
+            window.title = SETTINGS.TITLE;
+         }
       }
 
       override protected function configUI() : void {
@@ -184,7 +187,6 @@ package net.wg.gui.lobby.settings
       }
 
       override protected function onPopulate() : void {
-         this.title.label = SETTINGS.TITLE;
          this.submitBtn.label = SETTINGS.OK_BUTTON;
          this.cancelBtn.label = SETTINGS.CANCEL_BUTTON;
          this.applyBtn.label = SETTINGS.APPLY_BUTTON;
@@ -212,6 +214,7 @@ package net.wg.gui.lobby.settings
          {
             this.tabs.selectedIndex = __currentTab;
          }
+         super.draw();
       }
 
       override protected function onDispose() : void {
@@ -689,7 +692,7 @@ package net.wg.gui.lobby.settings
          {
             _loc2_.breakSoundCheck();
          }
-         closeWindowS();
+         onWindowCloseS();
       }
 
       private function applayBtnClickHandler(param1:ButtonEvent) : void {
@@ -698,20 +701,6 @@ package net.wg.gui.lobby.settings
 
       private function submitBtnClickHandler(param1:ButtonEvent) : void {
          this.sendData(true);
-      }
-
-      override public function handleInput(param1:InputEvent) : void {
-         super.handleInput(param1);
-         if(param1.handled)
-         {
-            return;
-         }
-         var _loc2_:InputDetails = param1.details;
-         if(param1.details.code == Keyboard.ESCAPE && _loc2_.value == InputValue.KEY_DOWN)
-         {
-            param1.handled = true;
-            closeWindowS();
-         }
       }
    }
 

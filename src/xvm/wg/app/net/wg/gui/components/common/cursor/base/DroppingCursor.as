@@ -179,14 +179,7 @@ package net.wg.gui.components.common.cursor.base
       private function onEnterToDropMode(param1:MouseEvent) : void {
          if(param1.target  is  IDropItem)
          {
-            if(!this._isOnDropping)
-            {
-               forceSetCursor(Cursors.DRAG_OPEN);
-            }
-            else
-            {
-               setCursor(Cursors.DRAG_OPEN);
-            }
+            setCursor(Cursors.DRAG_OPEN);
          }
       }
 
@@ -223,6 +216,7 @@ package net.wg.gui.components.common.cursor.base
             _loc5_ = _loc2_.container.onBeforeDrop(_loc4_,_loc3_);
             if(_loc5_)
             {
+               this.setDropping(true);
                forceSetCursor(_loc2_.cursor);
                assertNull(this._dropSenderInfo,"_dropSenderInfo");
                assertNull(this._dropItem,"_dropItem");

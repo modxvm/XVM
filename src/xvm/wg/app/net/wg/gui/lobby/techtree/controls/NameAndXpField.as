@@ -2,7 +2,6 @@ package net.wg.gui.lobby.techtree.controls
 {
    import flash.text.TextField;
    import scaleform.clik.constants.InvalidationType;
-   import net.wg.gui.lobby.techtree.nodes.Renderer;
    import net.wg.gui.lobby.techtree.constants.XpTypeStrings;
 
 
@@ -25,6 +24,12 @@ package net.wg.gui.lobby.techtree.controls
 
       public var xpIcon:XPIcon;
 
+      private var _isInAction:Boolean;
+
+      public function setIsInAction(param1:Boolean) : void {
+         this._isInAction = param1;
+      }
+
       override protected function configUI() : void {
          mouseEnabled = mouseChildren = false;
          super.configUI();
@@ -35,8 +40,8 @@ package net.wg.gui.lobby.techtree.controls
          var _loc2_:String = null;
          if(!(_owner == null) && (isInvalid(InvalidationType.DATA)))
          {
-            _loc1_ = this.xpLabel.length > 0?_owner.getNamedValue(this.xpLabel,Renderer.NAMED_VALUE_TYPE_STRING).toString():"";
-            _loc2_ = statesMap[state][_loc1_.length > 0?1:0];
+            _loc1_ = this.xpLabel.length > 0?_owner.getNamedLabel(this.xpLabel):"";
+            _loc2_ = statesMap[state][_loc1_.length > 0?this._isInAction?2:1:0];
             if(!(currentFrameLabel == _loc2_) && (_labelHash[_loc2_]))
             {
                gotoAndStop(_loc2_);

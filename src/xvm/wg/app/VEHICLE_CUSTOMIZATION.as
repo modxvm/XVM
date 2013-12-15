@@ -211,6 +211,12 @@ package
 
       public static const CAMOUFLAGE_IGR_DESERT:String = "#vehicle_customization:camouflage/IGR_Desert";
 
+      public static const CAMOUFLAGE_IGR_CH_WINTER:String = "#vehicle_customization:camouflage/IGR_Ch_Winter";
+
+      public static const CAMOUFLAGE_IGR_CH_SUMMER:String = "#vehicle_customization:camouflage/IGR_Ch_Summer";
+
+      public static const CAMOUFLAGE_IGR_CH_DESERT:String = "#vehicle_customization:camouflage/IGR_Ch_Desert";
+
       public static const EMBLEM_GROUP1_STAR:String = "#vehicle_customization:emblem/group1/star";
 
       public static const EMBLEM_ANIMALS:String = "#vehicle_customization:emblem/animals";

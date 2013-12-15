@@ -38,6 +38,8 @@ package net.wg.infrastructure.base.meta
 
       function handleGlobalKeyEventS(param1:String) : void;
 
+      function onAsInitializationCompletedS() : void;
+
       function as_populate() : void;
 
       function as_dispose() : void;

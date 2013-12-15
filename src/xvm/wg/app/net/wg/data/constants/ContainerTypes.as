@@ -24,7 +24,7 @@ package net.wg.data.constants
 
       public static const SERVICE_LAYOUT:String = "serviceLayout";
 
-      public static const CTNR_ORDER:Vector.<String> = Vector.<String>([SERVICE_LAYOUT,DIALOG,WINDOW,LOBBY_SUB_VIEW,VIEW]);
+      public static const CTNR_ORDER:Vector.<String> = Vector.<String>([WAITING,SERVICE_LAYOUT,DIALOG,WINDOW,LOBBY_SUB_VIEW,VIEW]);
    }
 
 }

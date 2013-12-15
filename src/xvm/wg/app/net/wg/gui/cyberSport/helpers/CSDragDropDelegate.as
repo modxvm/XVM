@@ -26,6 +26,8 @@ package net.wg.gui.cyberSport.helpers
 
       private var _leaveSlotHandler:Function = null;
 
+      private var _playerID:Number = -1;
+
       private var id:Number = 0;
 
       override public function onStartDrop(param1:InteractiveObject, param2:InteractiveObject, param3:Number, param4:Number) : Boolean {
@@ -41,6 +43,7 @@ package net.wg.gui.cyberSport.helpers
                {
                   App.utils.asserter.assertNotNull(_loc6_,"cursor.attachedSprite" + Errors.CANT_NULL);
                   IUpdatable(_loc6_).update(IDropItem(param2).data);
+                  this._playerID = IDropItem(param2).data.databaseID;
                }
                else
                {
@@ -67,27 +70,29 @@ package net.wg.gui.cyberSport.helpers
       }
 
       override public function onEndDrop(param1:InteractiveObject, param2:InteractiveObject, param3:InteractiveObject, param4:InteractiveObject) : void {
-         var _loc5_:* = NaN;
-         var _loc6_:* = false;
+         var _loc7_:* = NaN;
+         var _loc8_:* = false;
          super.onEndDrop(param1,param2,param3,param4);
          trace(param1,param2,param3,param4.parent,param4);
          App.utils.asserter.assertNotNull(s_lastFreeSlots,"_lastFreeSlots" + Errors.CANT_NULL);
+         var _loc5_:IDropItem = IDropItem(param3);
+         var _loc6_:Number = _loc5_.data?_loc5_.data.databaseID:this._playerID;
          if(param4  is  SlotDropIndicator)
          {
-            _loc5_ = SlotDropIndicator(param4).index;
+            _loc7_ = SlotDropIndicator(param4).index;
             if(s_lastFreeSlots.indexOf(SlotDropIndicator(param4).index) != -1)
             {
-               this._onEndDropHandler(_loc5_,IDropItem(param3).data.databaseID);
+               this._onEndDropHandler(_loc7_,_loc6_);
             }
          }
          else
          {
             if(param2  is  CSCandidatesScrollingList)
             {
-               _loc6_ = param1  is  CSCandidatesScrollingList;
-               if(!_loc6_)
+               _loc8_ = param1  is  CSCandidatesScrollingList;
+               if(!_loc8_)
                {
-                  this._leaveSlotHandler(IDropItem(param3).data.databaseID);
+                  this._leaveSlotHandler(_loc6_);
                }
             }
          }

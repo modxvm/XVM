@@ -19,10 +19,10 @@ package net.wg.gui.cyberSport.controls
          {
             _loc3_ = groups[param2] = new Object();
          }
-         var _loc4_:RosterButtonGroup = _loc3_[param1.toLowerCase()];
+         var _loc4_:RosterButtonGroup = _loc3_[App.utils.toUpperOrLowerCase(param1,false)];
          if(_loc4_ == null)
          {
-            _loc4_ = _loc3_[param1.toLowerCase()] = new RosterButtonGroup(param1,param2);
+            _loc4_ = _loc3_[App.utils.toUpperOrLowerCase(param1,false)] = new RosterButtonGroup(param1,param2);
          }
          return _loc4_;
       }

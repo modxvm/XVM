@@ -331,6 +331,10 @@ package net.wg.gui.components.windows
                   trace(e);
                }
             }
+            if(this.sourceView.isSourceTracked)
+            {
+               this.sourceView.onSourceLoadedS();
+            }
          }
          if(isInvalid("padding",INVALID_SRC_VIEW))
          {

@@ -6,8 +6,6 @@ package net.wg.infrastructure.base.meta
    public interface ISettingsWindowMeta extends IEventDispatcher
    {
           
-      function closeWindowS() : void;
-
       function applySettingsS(param1:Object, param2:Boolean) : void;
 
       function autodetectQualityS() : Number;

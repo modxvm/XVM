@@ -16,6 +16,8 @@ package net.wg.infrastructure.managers.utils.impl
    import net.wg.utils.IIME;
    import net.wg.utils.IVOManager;
    import net.wg.utils.IIcons;
+   import net.wg.infrastructure.interfaces.IStrCaseProperties;
+   import net.wg.data.StrCaseProperties;
 
 
    public class Utils extends UtilsManagerMeta implements IUtils
@@ -119,6 +121,14 @@ package net.wg.infrastructure.managers.utils.impl
          this._voManager.dispose();
          this._voManager = null;
          this._icons = null;
+      }
+
+      public function toUpperOrLowerCase(param1:String, param2:Boolean, param3:IStrCaseProperties=null) : String {
+         return changeStringCasing(param1,param2,param3);
+      }
+
+      public function getStrCaseProperties() : IStrCaseProperties {
+         return new StrCaseProperties();
       }
 
       public function get asserter() : IAssertable {

@@ -59,7 +59,7 @@ package net.wg.gui.lobby.battleResults
                ,
                "xp":
                   {
-                     "key":"xp",
+                     "key":"xpSort",
                      "isNumeric":true,
                      "index":5
                   }

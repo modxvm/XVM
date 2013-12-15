@@ -29,6 +29,8 @@ package net.wg.infrastructure.interfaces
       function set window(param1:IWindow) : void;
 
       function get geometry() : IWindowGeometry;
+
+      function get isSourceTracked() : Boolean;
    }
 
 }

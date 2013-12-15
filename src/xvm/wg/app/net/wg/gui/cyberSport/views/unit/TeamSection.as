@@ -316,7 +316,6 @@ package net.wg.gui.cyberSport.views.unit
          {
             _loc4_.index = this._indicatorsUI.indexOf(_loc4_);
             _loc4_.isCurrentUserCommander = _loc1_;
-            _loc4_.setHighlightState(false);
             _loc4_.update(_loc2_?_loc2_[_loc4_.index].player:null);
             _loc4_.playerStatus = _loc2_?_loc2_[_loc4_.index].playerStatus:0;
          }

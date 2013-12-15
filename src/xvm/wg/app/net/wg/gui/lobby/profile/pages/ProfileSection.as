@@ -16,9 +16,12 @@ package net.wg.gui.lobby.profile.pages
           
       public function ProfileSection() {
          super();
+         this.animationManager = new SectionsShowAnimationManager(this);
       }
 
       private static const DOSSIER_DATA_INVALID:String = "ddInvalid";
+
+      private static const ANIMATION_INVALID:String = "animInv";
 
       public static function applyInitDataToTextField(param1:String, param2:Object, param3:LineDescrIconText) : void {
          var _loc4_:Object = param2[param1];
@@ -40,6 +43,10 @@ package net.wg.gui.lobby.profile.pages
 
       protected var battlesType:String;
 
+      private var _isDataInitialized:Boolean = false;
+
+      private var animationManager:SectionsShowAnimationManager;
+
       override protected function draw() : void {
          super.draw();
          if((isInvalid(ResizableInvalidationTypes.CURRENT_DIMENSION_INVALID)) && (this.currentDimension))
@@ -48,7 +55,16 @@ package net.wg.gui.lobby.profile.pages
          }
          if((isInvalid(DOSSIER_DATA_INVALID)) && (this.currentData))
          {
+            if(!this._isDataInitialized)
+            {
+               this._isDataInitialized = true;
+               invalidate(ANIMATION_INVALID);
+            }
             this.applyData(this.currentData);
+         }
+         if((isInvalid(ANIMATION_INVALID)) && (this.isActive) && (this._isDataInitialized) && (this.animationManager))
+         {
+            this.animationManager.play();
          }
       }
 
@@ -102,26 +118,21 @@ package net.wg.gui.lobby.profile.pages
          }
       }
 
-      override protected function onDispose() : void {
-         this.currentData = null;
-         this.currentDimension = null;
-         if(this.battlesDropdown)
-         {
-            this.battlesDropdown.removeEventListener(Event.CHANGE,this.dropDownChangeHandler);
-            this.battlesDropdown.dispose();
-            this.battlesDropdown = null;
-         }
-         this.disposeLayoutManager();
-         super.onDispose();
-      }
-
       public function update(param1:Object) : void {
           
       }
 
       public function set active(param1:Boolean) : void {
          this.isActive = param1;
-         setActiveS(param1);
+         if(this.isActive)
+         {
+            invalidate(ANIMATION_INVALID);
+         }
+         else
+         {
+            this.animationManager.stop();
+         }
+         setActiveS(this.isActive);
       }
 
       public function get active() : Boolean {
@@ -145,6 +156,24 @@ package net.wg.gui.lobby.profile.pages
             this.battlesDropdown.selectedItem = param1;
          }
          invalidate(DOSSIER_DATA_INVALID);
+      }
+
+      override protected function onDispose() : void {
+         this.currentData = null;
+         this.currentDimension = null;
+         if(this.animationManager)
+         {
+            this.animationManager.dispose();
+            this.animationManager = null;
+         }
+         if(this.battlesDropdown)
+         {
+            this.battlesDropdown.removeEventListener(Event.CHANGE,this.dropDownChangeHandler);
+            this.battlesDropdown.dispose();
+            this.battlesDropdown = null;
+         }
+         this.disposeLayoutManager();
+         super.onDispose();
       }
    }
 

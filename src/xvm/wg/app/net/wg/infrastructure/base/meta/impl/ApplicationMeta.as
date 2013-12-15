@@ -49,6 +49,8 @@ package net.wg.infrastructure.base.meta.impl
 
       public var handleGlobalKeyEvent:Function = null;
 
+      public var onAsInitializationCompleted:Function = null;
+
       public function setLoaderMgrS(param1:ILoaderManagerMeta) : void {
          App.utils.asserter.assertNotNull(this.setLoaderMgr,"setLoaderMgr" + Errors.CANT_NULL);
          this.setLoaderMgr(param1);
@@ -112,6 +114,11 @@ package net.wg.infrastructure.base.meta.impl
       public function handleGlobalKeyEventS(param1:String) : void {
          App.utils.asserter.assertNotNull(this.handleGlobalKeyEvent,"handleGlobalKeyEvent" + Errors.CANT_NULL);
          this.handleGlobalKeyEvent(param1);
+      }
+
+      public function onAsInitializationCompletedS() : void {
+         App.utils.asserter.assertNotNull(this.onAsInitializationCompleted,"onAsInitializationCompleted" + Errors.CANT_NULL);
+         this.onAsInitializationCompleted();
       }
    }
 

@@ -3,9 +3,7 @@ package net.wg.gui.components.common.waiting
    import net.wg.infrastructure.base.meta.impl.WaitingViewMeta;
    import net.wg.infrastructure.managers.IWaitingView;
    import scaleform.clik.events.InputEvent;
-   import net.wg.infrastructure.interfaces.IView;
-   import scaleform.gfx.FocusManager;
-   import flash.events.MouseEvent;
+   import net.wg.gui.components.common.waiting.events.WaitingChangeVisibilityEvent;
 
 
    public class WaitingView extends WaitingViewMeta implements IWaitingView
@@ -26,6 +24,7 @@ package net.wg.gui.components.common.waiting
 
       public function show(param1:Object) : void {
          addEventListener(InputEvent.INPUT,this.handleInput,false,0,true);
+         assertNotNull(this.waitingComponent,"waitingComponent");
          this.waitingComponent.setMessage(param1.toString());
          this.visible = true;
       }
@@ -36,23 +35,20 @@ package net.wg.gui.components.common.waiting
       }
 
       override public function set visible(param1:Boolean) : void {
-         if(param1 != visible)
+         if(!(param1 == visible) && (initialized))
          {
             super.visible = param1;
             this.onWaitingStateChanged();
-            if(this.waitingComponent)
-            {
-               this.waitingComponent.setAnimationStatus(!param1);
-            }
+            assertNotNull(this.waitingComponent,"waitingComponent");
+            this.waitingComponent.setAnimationStatus(!param1);
+            this.waitingComponent.validateNow();
          }
       }
 
       override protected function configUI() : void {
          super.configUI();
-         if(this.waitingComponent)
-         {
-            this.waitingComponent.setAnimationStatus(!visible);
-         }
+         assertNotNull(this.waitingComponent,"waitingComponent");
+         this.waitingComponent.setAnimationStatus(true);
       }
 
       override protected function nextFrameAfterPopulateHandler() : void {
@@ -70,22 +66,9 @@ package net.wg.gui.components.common.waiting
       }
 
       private function onWaitingStateChanged() : void {
-         var _loc1_:IView = null;
-         if(visible)
-         {
-            FocusManager.setFocus(this);
-            FocusManager.setModalClip(this);
-         }
-         else
-         {
-            FocusManager.setModalClip(null);
-            if(App.containerMgr.lastFocusedView)
-            {
-               _loc1_ = App.containerMgr.lastFocusedView;
-               App.containerMgr.lastFocusedView = null;
-               _loc1_.dispatchEvent(new MouseEvent(MouseEvent.MOUSE_DOWN));
-            }
-         }
+         var _loc1_:String = visible?WaitingChangeVisibilityEvent.WAITING_SHOWN:WaitingChangeVisibilityEvent.WAITING_HIDDEN;
+         dispatchEvent(new WaitingChangeVisibilityEvent(_loc1_));
+         App.containerMgr.updateFocus();
       }
 
       override public function handleInput(param1:InputEvent) : void {
