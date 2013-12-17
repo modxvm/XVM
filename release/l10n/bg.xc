@@ -17,6 +17,8 @@
     "Chance to win": "Възможност за победа",
     "global": "световен",
     "per-vehicle": "по машина",
+    "chanceExperimental": "exp",
+    "chanceBattleTier": "T",
 
     // Hitlog
     "attack": "изстрел",
@@ -43,43 +45,29 @@
     "Damage (assisted / own)": "Щети (спомогнати / свои)",
 
     // TeamRenderers
-    "TeamRenderersHeaderTip": "Xwn (или xeff) оценка.\nЗа да видите подробна информация,посочете името на играча с мишката.",
     "Friend": "Приятел",
     "Ignored": "Игнориран",
-    "Load statistics": "Зареди статистики",
-    "enabled": "вкючен",
-    "disabled": "изключен",
-
-    // UserInfo
-    "UserInfoEHint": "Ефективност по машина.\nСтойностите са тези от последното обновяване на статистиките: \u0025DATE\u0025\nПроверете настоящите стойности в подробните данни за машините.\nТочността на стойностите зависи от качеството на подадените данни.",
-    "Data was updated at": "Стойностите са обновени на",
-    " to ": " до ",
-    "EFF": "EFF",
-    "updated": "обновено",
-    "unknown": "неизвестно",
-    "Avg level": "Средно ниво",
-    "Spotted": "Открит",
-    "Defence": "Защита",
-    "Capture": "Превземане",
-    "player (average / top)": "Играч (средно / върхово)",
-    "Spec dmg": "Spec щети",
-
-    // UserInfo - filters
-    "Filter": "Филтри",
-    "All tanks": "Всички танкове",
-    "Show all tanks in the game": "Покажи всички танкове в играта",
-    "Player tanks": "Танкове на играча",
-    "Show all tanks played": "Покажи всички играни танкове",
-    "In hangar": "В гаража",
-    "Show only tanks in own hangar": "Покажи само танковете в гаража",
-
-    // UserInfo - buttons
-    "Level": "Ниво",
-    "Type": "Вид",
-    "Nation": "Страна",
-    "Name": "Име",
+    "unknown": "unknown",
     "Fights": "Битки",
     "Wins": "Победи",
+    "Data was updated at": "Данните са обновени на",
+    "Load statistics": "Зареди статистика",
+
+    // UserInfo
+    "General stats": "Главни статистики",
+    "Summary": "Обобщение",
+    "Avg level": "Средно ниво",
+    "WN6": "WN6",
+    "EFF": "EFF",
+    "updated": "обновено",
+    " to ": " до ",
+    "avg": "средно",
+    "top": "върхово",
+    "draws": "равенства",
+    "Specific damage (Avg dmg / HP)": "Определени щети (Средни щети / ТЖ)",
+    "Capture points": "Точки завладяване",
+    "Defence points": "Точки защита",
+    "Filter": "Филтър",
 
     // Crew
     "PutOwnCrew": "Постави роден екипаж",
@@ -89,12 +77,15 @@
     // Squad
     "Vehicle": "Машина",
     "Battle tiers": "Бойни нива",
+    "Type": "Вид",
+    "Nation": "Народ",
     "ussr": "СССР",
     "germany": "Германия",
     "usa": "САЩ",
     "france": "Франция",
     "uk": "Великобритания",
     "china": "Китай",
+    "japan": "Япония",
     "HT": "ТТ",
     "MT": "СТ",
     "LT": "ЛТ",
