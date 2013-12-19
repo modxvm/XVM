@@ -3,25 +3,19 @@
   * changed vehicle names format in config
 
 XVM-5.0.1:
-  [NEW FUNCTIONS]
-  * tech tree, tank carousel: show mark of mastery
-
-  [FIXES]
-  * many fixes
-
-XVM-5.0.1-test3:
-  [NEW FUNCTIONS]
-  * localization: added Japanese language
-  * new options:
-    login/confirmOldReplays - Auto confirm old replays playing
-
-XVM-5.0.1-test1:
   * adaptation to WoT 0.8.9
 
   [NEW FUNCTIONS]
-  * localization: added Brazilian Portuguese language
+  * tech tree, tank carousel: show mark of mastery
+  * localization: added Japanese language, Brazilian Portuguese language
+  * new options:
+    login/confirmOldReplays - Auto confirm old replays playing
+
   [MACROS]
   * squad: added macros {{vtype-l}}
+
+  [FIXES]
+  * many fixes
 
 XVM-5.0.0-test5:
   * adaptation to WoT 0.8.8
