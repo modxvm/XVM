@@ -1,4 +1,7 @@
 ﻿XVM-dev:
+  [NEW FUNCTIONS]
+  * login screen: input fields accept only the required characters
+
   [OTHER]
   * changed vehicle names format in config
 

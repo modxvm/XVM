@@ -11,6 +11,7 @@ projects=(
           'xvm-company'
           'xvm-crew'
           'xvm-hangar'
+          'xvm-loginlayout'
           'xvm-ping'
           'xvm-profile'
           'xvm-squad'
