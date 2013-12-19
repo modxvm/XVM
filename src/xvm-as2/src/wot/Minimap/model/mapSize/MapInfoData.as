@@ -60,6 +60,7 @@ class wot.Minimap.model.mapSize.MapInfoData
         $45_north_america:    { size: 100 }, // Highway
         $47_canada_a:         { size: 100 }, // Serene Coast
         $51_asia:             { size: 100 }, // Dragon Ridge
+        $53_japan:            { size: 100 }, // Hidden Village
         $59_asia_great_wall:  { size: 100 }, // Empire's Border
         $60_asia_miao:        { size: 100 }, // Pearl River
         $63_tundra:           { size: 80 },  // Tundra
