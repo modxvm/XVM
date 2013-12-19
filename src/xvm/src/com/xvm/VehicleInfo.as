@@ -86,7 +86,7 @@ package com.xvm
                 {
                     var data:VehicleData = new VehicleData(obj);
 
-                    var preferredNames:Object = Config.config.vehicleNames[data.key];
+                    var preferredNames:Object = Config.config.vehicleNames[data.key.split(':').join('-')];
                     if (preferredNames != null)
                     {
                         if (preferredNames['name'] != null && preferredNames['name'] != '')

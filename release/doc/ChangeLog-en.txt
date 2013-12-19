@@ -1,4 +1,8 @@
-﻿XVM-5.0.1:
+﻿XVM-dev:
+  [OTHER]
+  * changed vehicle names format in config
+
+XVM-5.0.1:
   [NEW FUNCTIONS]
   * tech tree, tank carousel: show mark of mastery
 
