@@ -1,4 +1,11 @@
-﻿XVM-5.0.1-test3:
+﻿XVM-5.0.1:
+  [NEW FUNCTIONS]
+  * tech tree, tank carousel: show mark of mastery
+
+  [FIXES]
+  * many fixes
+
+XVM-5.0.1-test3:
   [NEW FUNCTIONS]
   * localization: added Japanese language
   * new options:
