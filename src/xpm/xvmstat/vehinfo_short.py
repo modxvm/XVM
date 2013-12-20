@@ -253,7 +253,7 @@ _data = {
     'usa:T69':                           '69',
     'china:Ch05_T34_2':                  '34/2',
     'uk:GB23_Centurion':                 'Cent',
-    'japan:STA_1      ':                 'STA1',
+    'japan:STA_1':                       'STA1',
     'ussr:IS-3':                         '3',
     'ussr:KV4':                          'KV4',
     'germany:Lowe':                      'Lowe',
