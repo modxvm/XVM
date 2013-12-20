@@ -41,7 +41,7 @@ for m in glob.iglob(wd + "/*"):
                  'XPM_GAME_VERSIONS',
                 ])
             print "%s (%s)" % (mod.XPM_MOD_VERSION, mod.XPM_MOD_URL)
-            short_ver = ver[:5] # X.Y.Z
+            short_ver = ver[:5] if len(ver) < 6 or ver[5] == ' ' else ver[:6] # X.Y.Z or X.Y.ZZ
             if not short_ver in mod.XPM_GAME_VERSIONS:
                 print "[XPM] WARNING: Mod is not tested for compatibility with the current version of the game"
                 print "[XPM]          Game version:  " + short_ver

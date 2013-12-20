@@ -1,6 +1,6 @@
 diff -Naur app.orig/App.as app/App.as
---- app.orig/App.as	2013-12-15 17:34:39.136174700 +0200
-+++ app/App.as	2013-12-15 17:50:32.640667100 +0200
+--- app.orig/App.as	2013-12-20 11:27:49.207626800 +0200
++++ app/App.as	2013-12-20 11:33:58.735626800 +0200
 @@ -1,5 +1,6 @@
  package 
  {
@@ -9,8 +9,8 @@ diff -Naur app.orig/App.as app/App.as
     import net.wg.infrastructure.base.meta.IGlobalVarsMgrMeta;
     import net.wg.infrastructure.managers.ISoundManager;
 diff -Naur app.orig/net/wg/data/daapi/base/DAAPIDataClass.as app/net/wg/data/daapi/base/DAAPIDataClass.as
---- app.orig/net/wg/data/daapi/base/DAAPIDataClass.as	2013-12-15 17:34:53.088194400 +0200
-+++ app/net/wg/data/daapi/base/DAAPIDataClass.as	2013-12-15 17:50:32.650667100 +0200
+--- app.orig/net/wg/data/daapi/base/DAAPIDataClass.as	2013-12-20 11:28:03.881626800 +0200
++++ app/net/wg/data/daapi/base/DAAPIDataClass.as	2013-12-20 11:33:58.741626800 +0200
 @@ -155,7 +155,7 @@
           return true;
        }
@@ -21,8 +21,8 @@ diff -Naur app.orig/net/wg/data/daapi/base/DAAPIDataClass.as app/net/wg/data/daa
        }
  
 diff -Naur app.orig/net/wg/gui/components/advanced/TankIcon.as app/net/wg/gui/components/advanced/TankIcon.as
---- app.orig/net/wg/gui/components/advanced/TankIcon.as	2013-12-15 17:35:17.952229400 +0200
-+++ app/net/wg/gui/components/advanced/TankIcon.as	2013-12-15 17:50:32.660667200 +0200
+--- app.orig/net/wg/gui/components/advanced/TankIcon.as	2013-12-20 11:28:31.692626800 +0200
++++ app/net/wg/gui/components/advanced/TankIcon.as	2013-12-20 11:33:58.745626800 +0200
 @@ -91,7 +91,7 @@
  
        private var _isPremiumDirty:Boolean = true;
@@ -33,8 +33,8 @@ diff -Naur app.orig/net/wg/gui/components/advanced/TankIcon.as app/net/wg/gui/co
        override public function dispose() : void {
           this.flag = null;
 diff -Naur app.orig/net/wg/gui/components/controls/ScrollingListEx.as app/net/wg/gui/components/controls/ScrollingListEx.as
---- app.orig/net/wg/gui/components/controls/ScrollingListEx.as	2013-12-15 17:35:22.018236000 +0200
-+++ app/net/wg/gui/components/controls/ScrollingListEx.as	2013-12-15 17:50:32.680667200 +0200
+--- app.orig/net/wg/gui/components/controls/ScrollingListEx.as	2013-12-20 11:28:36.008626800 +0200
++++ app/net/wg/gui/components/controls/ScrollingListEx.as	2013-12-20 11:33:58.755626800 +0200
 @@ -404,7 +404,7 @@
           {
              if(this._scrollBarValue  is  Class)
@@ -45,8 +45,8 @@ diff -Naur app.orig/net/wg/gui/components/controls/ScrollingListEx.as app/net/wg
                 if(_loc1_ != null)
                 {
 diff -Naur app.orig/net/wg/gui/components/windows/Window.as app/net/wg/gui/components/windows/Window.as
---- app.orig/net/wg/gui/components/windows/Window.as	2013-12-15 17:35:48.503273400 +0200
-+++ app/net/wg/gui/components/windows/Window.as	2013-12-15 17:50:32.690667200 +0200
+--- app.orig/net/wg/gui/components/windows/Window.as	2013-12-20 11:29:06.871626800 +0200
++++ app/net/wg/gui/components/windows/Window.as	2013-12-20 11:33:58.766626800 +0200
 @@ -71,7 +71,7 @@
  
        private const TAB_PADDING_Y:Number = 30;
@@ -56,9 +56,21 @@ diff -Naur app.orig/net/wg/gui/components/windows/Window.as app/net/wg/gui/compo
  
        override public function set scaleX(param1:Number) : void {
           var _loc2_:Number = width;
+diff -Naur app.orig/net/wg/gui/lobby/dialogs/SimpleDialog.as app/net/wg/gui/lobby/dialogs/SimpleDialog.as
+--- app.orig/net/wg/gui/lobby/dialogs/SimpleDialog.as	2013-12-20 11:31:04.257626800 +0200
++++ app/net/wg/gui/lobby/dialogs/SimpleDialog.as	2013-12-20 12:34:57.769604700 +0200
+@@ -35,7 +35,7 @@
+ 
+       private static const TEXT_HEIGHT_PADDING:uint = 3;
+ 
+-      private static const WINDOW_PADDING:Object;
++      private static var WINDOW_PADDING:Object;
+ 
+       private static const LAYOUT_INVALID:String = "layoutInv";
+ 
 diff -Naur app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as app/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as
---- app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as	2013-12-15 17:37:07.529034000 +0200
-+++ app/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as	2013-12-15 17:50:32.700667200 +0200
+--- app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as	2013-12-20 11:30:47.443626800 +0200
++++ app/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as	2013-12-20 11:33:58.787626800 +0200
 @@ -73,9 +73,9 @@
  
        private var filterDataInvalid:Boolean = false;
@@ -72,8 +84,8 @@ diff -Naur app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarousel.as app/net/wg
        private var checkBoxToMain:CheckBox;
  
 diff -Naur app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as app/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as
---- app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as	2013-12-15 17:37:08.719102100 +0200
-+++ app/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as	2013-12-15 17:50:32.710667200 +0200
+--- app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as	2013-12-20 11:30:48.663626800 +0200
++++ app/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as	2013-12-20 11:33:58.792626800 +0200
 @@ -22,9 +22,9 @@
  
        public static const FILTER_READY:String = "ready";
@@ -87,8 +99,8 @@ diff -Naur app.orig/net/wg/gui/lobby/hangar/tcarousel/TankCarouselFilters.as app
        public var checkBoxToMain:CheckBox;
  
 diff -Naur app.orig/net/wg/gui/lobby/messengerBar/carousel/data/ChannelListItemVO.as app/net/wg/gui/lobby/messengerBar/carousel/data/ChannelListItemVO.as
---- app.orig/net/wg/gui/lobby/messengerBar/carousel/data/ChannelListItemVO.as	2013-12-15 17:37:49.081587700 +0200
-+++ app/net/wg/gui/lobby/messengerBar/carousel/data/ChannelListItemVO.as	2013-12-15 17:50:32.720667200 +0200
+--- app.orig/net/wg/gui/lobby/messengerBar/carousel/data/ChannelListItemVO.as	2013-12-20 11:31:33.933626800 +0200
++++ app/net/wg/gui/lobby/messengerBar/carousel/data/ChannelListItemVO.as	2013-12-20 11:33:58.797626800 +0200
 @@ -5,12 +5,12 @@
  
     public class ChannelListItemVO extends DAAPIDataClass
@@ -105,8 +117,8 @@ diff -Naur app.orig/net/wg/gui/lobby/messengerBar/carousel/data/ChannelListItemV
        private var _clientID:Number = 0;
  
 diff -Naur app.orig/net/wg/gui/lobby/profile/components/ScrollPane.as app/net/wg/gui/lobby/profile/components/ScrollPane.as
---- app.orig/net/wg/gui/lobby/profile/components/ScrollPane.as	2013-12-15 17:35:33.501252200 +0200
-+++ app/net/wg/gui/lobby/profile/components/ScrollPane.as	2013-12-15 17:50:32.730667200 +0200
+--- app.orig/net/wg/gui/lobby/profile/components/ScrollPane.as	2013-12-20 11:28:48.512626800 +0200
++++ app/net/wg/gui/lobby/profile/components/ScrollPane.as	2013-12-20 11:33:58.803626800 +0200
 @@ -246,7 +246,7 @@
           {
              if(this._scrollBarValue  is  Class)
@@ -117,8 +129,8 @@ diff -Naur app.orig/net/wg/gui/lobby/profile/components/ScrollPane.as app/net/wg
                 if(_loc1_ != null)
                 {
 diff -Naur app.orig/net/wg/gui/lobby/profile/data/ProfileUserVO.as app/net/wg/gui/lobby/profile/data/ProfileUserVO.as
---- app.orig/net/wg/gui/lobby/profile/data/ProfileUserVO.as	2013-12-15 17:37:35.340568400 +0200
-+++ app/net/wg/gui/lobby/profile/data/ProfileUserVO.as	2013-12-15 17:50:32.740667300 +0200
+--- app.orig/net/wg/gui/lobby/profile/data/ProfileUserVO.as	2013-12-20 11:31:18.353626800 +0200
++++ app/net/wg/gui/lobby/profile/data/ProfileUserVO.as	2013-12-20 11:33:58.807626800 +0200
 @@ -26,7 +26,7 @@
  
        public var clanPosition:String = "";
@@ -131,8 +143,8 @@ diff -Naur app.orig/net/wg/gui/lobby/profile/data/ProfileUserVO.as app/net/wg/gu
 \ No newline at end of file
 +}
 diff -Naur app.orig/net/wg/gui/lobby/techtree/constants/IconTextResolver.as app/net/wg/gui/lobby/techtree/constants/IconTextResolver.as
---- app.orig/net/wg/gui/lobby/techtree/constants/IconTextResolver.as	2013-12-15 17:38:00.102603100 +0200
-+++ app/net/wg/gui/lobby/techtree/constants/IconTextResolver.as	2013-12-15 17:51:41.910764700 +0200
+--- app.orig/net/wg/gui/lobby/techtree/constants/IconTextResolver.as	2013-12-20 11:31:47.265626800 +0200
++++ app/net/wg/gui/lobby/techtree/constants/IconTextResolver.as	2013-12-20 11:33:58.813626800 +0200
 @@ -7,14 +7,14 @@
  
     public class IconTextResolver extends Object
@@ -152,8 +164,8 @@ diff -Naur app.orig/net/wg/gui/lobby/techtree/constants/IconTextResolver.as app/
        public static function getFromNamedLabel(param1:String) : String {
           var _loc2_:String = Values.EMPTY_STR;
 diff -Naur app.orig/net/wg/gui/lobby/techtree/controls/NameAndXpField.as app/net/wg/gui/lobby/techtree/controls/NameAndXpField.as
---- app.orig/net/wg/gui/lobby/techtree/controls/NameAndXpField.as	2013-12-15 17:38:07.541615700 +0200
-+++ app/net/wg/gui/lobby/techtree/controls/NameAndXpField.as	2013-12-15 17:50:32.750667300 +0200
+--- app.orig/net/wg/gui/lobby/techtree/controls/NameAndXpField.as	2013-12-20 11:31:56.369626800 +0200
++++ app/net/wg/gui/lobby/techtree/controls/NameAndXpField.as	2013-12-20 11:33:58.820626800 +0200
 @@ -7,12 +7,12 @@
  
     public class NameAndXpField extends NodeComponent
@@ -170,8 +182,8 @@ diff -Naur app.orig/net/wg/gui/lobby/techtree/controls/NameAndXpField.as app/net
        public var xpLabel:String = "earnedXPLabel";
  
 diff -Naur app.orig/net/wg/gui/lobby/techtree/data/state/NodeStateCollection.as app/net/wg/gui/lobby/techtree/data/state/NodeStateCollection.as
---- app.orig/net/wg/gui/lobby/techtree/data/state/NodeStateCollection.as	2013-12-15 17:38:21.134634900 +0200
-+++ app/net/wg/gui/lobby/techtree/data/state/NodeStateCollection.as	2013-12-15 17:50:32.750667300 +0200
+--- app.orig/net/wg/gui/lobby/techtree/data/state/NodeStateCollection.as	2013-12-20 11:32:12.192626800 +0200
++++ app/net/wg/gui/lobby/techtree/data/state/NodeStateCollection.as	2013-12-20 11:33:58.828626800 +0200
 @@ -8,18 +8,18 @@
  
     public class NodeStateCollection extends Object
@@ -197,8 +209,8 @@ diff -Naur app.orig/net/wg/gui/lobby/techtree/data/state/NodeStateCollection.as 
        public static function getStateProps(param1:uint, param2:Number, param3:Object) : StateProperties {
           var _loc4_:StateProperties = null;
 diff -Naur app.orig/net/wg/gui/login/impl/ErrorStates.as app/net/wg/gui/login/impl/ErrorStates.as
---- app.orig/net/wg/gui/login/impl/ErrorStates.as	2013-12-15 17:38:16.583628500 +0200
-+++ app/net/wg/gui/login/impl/ErrorStates.as	2013-12-15 17:50:32.760667300 +0200
+--- app.orig/net/wg/gui/login/impl/ErrorStates.as	2013-12-20 11:32:06.859626800 +0200
++++ app/net/wg/gui/login/impl/ErrorStates.as	2013-12-20 11:33:58.835626800 +0200
 @@ -2,20 +2,20 @@
  {
  
@@ -229,8 +241,8 @@ diff -Naur app.orig/net/wg/gui/login/impl/ErrorStates.as app/net/wg/gui/login/im
 \ No newline at end of file
 +}
 diff -Naur app.orig/net/wg/gui/login/impl/LoginPage.as app/net/wg/gui/login/impl/LoginPage.as
---- app.orig/net/wg/gui/login/impl/LoginPage.as	2013-12-15 17:37:20.332766300 +0200
-+++ app/net/wg/gui/login/impl/LoginPage.as	2013-12-15 17:50:32.770667300 +0200
+--- app.orig/net/wg/gui/login/impl/LoginPage.as	2013-12-20 11:31:01.087626800 +0200
++++ app/net/wg/gui/login/impl/LoginPage.as	2013-12-20 11:33:58.839626800 +0200
 @@ -33,7 +33,7 @@
  
        private static const FREE_SPACE_BORDER_FACTOR:Number = 0.18;
@@ -241,8 +253,8 @@ diff -Naur app.orig/net/wg/gui/login/impl/LoginPage.as app/net/wg/gui/login/impl
        private static const SPARK_QUANTITY:uint = 150;
  
 diff -Naur app.orig/net/wg/gui/prebattle/squad/SquadItemRenderer.as app/net/wg/gui/prebattle/squad/SquadItemRenderer.as
---- app.orig/net/wg/gui/prebattle/squad/SquadItemRenderer.as	2013-12-15 17:37:10.101181100 +0200
-+++ app/net/wg/gui/prebattle/squad/SquadItemRenderer.as	2013-12-15 17:50:32.770667300 +0200
+--- app.orig/net/wg/gui/prebattle/squad/SquadItemRenderer.as	2013-12-20 11:30:49.853626800 +0200
++++ app/net/wg/gui/prebattle/squad/SquadItemRenderer.as	2013-12-20 11:33:58.843626800 +0200
 @@ -105,7 +105,7 @@
                 return;
              }
@@ -264,8 +276,8 @@ diff -Naur app.orig/net/wg/gui/prebattle/squad/SquadItemRenderer.as app/net/wg/g
              this.label = this.model.fullName;
              _loc3_ = this.model.getCurrentColor();
 diff -Naur app.orig/net/wg/gui/prebattle/squad/SquadWindow.as app/net/wg/gui/prebattle/squad/SquadWindow.as
---- app.orig/net/wg/gui/prebattle/squad/SquadWindow.as	2013-12-15 17:37:11.269247900 +0200
-+++ app/net/wg/gui/prebattle/squad/SquadWindow.as	2013-12-15 17:50:32.780667300 +0200
+--- app.orig/net/wg/gui/prebattle/squad/SquadWindow.as	2013-12-20 11:30:51.043626800 +0200
++++ app/net/wg/gui/prebattle/squad/SquadWindow.as	2013-12-20 11:33:58.848626800 +0200
 @@ -78,7 +78,7 @@
           if(param3)
           {
@@ -276,8 +288,8 @@ diff -Naur app.orig/net/wg/gui/prebattle/squad/SquadWindow.as app/net/wg/gui/pre
              {
                 _loc6_ = this.memberList.dataProvider.requestItemAt(_loc5_) as PlayerPrbInfoVO;
 diff -Naur app.orig/net/wg/infrastructure/managers/IContainerManager.as app/net/wg/infrastructure/managers/IContainerManager.as
---- app.orig/net/wg/infrastructure/managers/IContainerManager.as	2013-12-15 17:34:39.066174600 +0200
-+++ app/net/wg/infrastructure/managers/IContainerManager.as	2013-12-15 17:50:32.790667300 +0200
+--- app.orig/net/wg/infrastructure/managers/IContainerManager.as	2013-12-20 11:27:49.127626800 +0200
++++ app/net/wg/infrastructure/managers/IContainerManager.as	2013-12-20 11:33:58.854626800 +0200
 @@ -16,6 +16,8 @@
  
        function isModalViewsExisting() : Boolean;
@@ -288,8 +300,8 @@ diff -Naur app.orig/net/wg/infrastructure/managers/IContainerManager.as app/net/
  
        function get lastFocusedView() : IView;
 diff -Naur app.orig/scaleform/clik/controls/ButtonGroup.as app/scaleform/clik/controls/ButtonGroup.as
---- app.orig/scaleform/clik/controls/ButtonGroup.as	2013-12-15 17:36:35.936227000 +0200
-+++ app/scaleform/clik/controls/ButtonGroup.as	2013-12-15 17:50:32.790667300 +0200
+--- app.orig/scaleform/clik/controls/ButtonGroup.as	2013-12-20 11:30:05.887626800 +0200
++++ app/scaleform/clik/controls/ButtonGroup.as	2013-12-20 11:33:58.864626800 +0200
 @@ -61,8 +61,8 @@
           for (_loc2_ in this.scope)
           {
@@ -301,8 +313,8 @@ diff -Naur app.orig/scaleform/clik/controls/ButtonGroup.as app/scaleform/clik/co
  
        public function addButton(param1:Button) : void {
 diff -Naur app.orig/scaleform/clik/controls/ScrollingList.as app/scaleform/clik/controls/ScrollingList.as
---- app.orig/scaleform/clik/controls/ScrollingList.as	2013-12-15 17:35:25.759241300 +0200
-+++ app/scaleform/clik/controls/ScrollingList.as	2013-12-15 17:50:32.800667300 +0200
+--- app.orig/scaleform/clik/controls/ScrollingList.as	2013-12-20 11:28:39.891626800 +0200
++++ app/scaleform/clik/controls/ScrollingList.as	2013-12-20 11:33:58.868626800 +0200
 @@ -396,7 +396,7 @@
           {
              if(this._scrollBarValue  is  Class)
@@ -313,8 +325,8 @@ diff -Naur app.orig/scaleform/clik/controls/ScrollingList.as app/scaleform/clik/
                 if(_loc1_ != null)
                 {
 diff -Naur app.orig/scaleform/clik/controls/TextArea.as app/scaleform/clik/controls/TextArea.as
---- app.orig/scaleform/clik/controls/TextArea.as	2013-12-15 17:35:18.352230000 +0200
-+++ app/scaleform/clik/controls/TextArea.as	2013-12-15 17:50:32.810667400 +0200
+--- app.orig/scaleform/clik/controls/TextArea.as	2013-12-20 11:28:32.150626800 +0200
++++ app/scaleform/clik/controls/TextArea.as	2013-12-20 11:33:58.873626800 +0200
 @@ -295,7 +295,7 @@
           {
              if(this._scrollBarValue  is  Class)
@@ -325,8 +337,8 @@ diff -Naur app.orig/scaleform/clik/controls/TextArea.as app/scaleform/clik/contr
                 if(_loc1_ != null)
                 {
 diff -Naur app.orig/scaleform/clik/controls/TileList.as app/scaleform/clik/controls/TileList.as
---- app.orig/scaleform/clik/controls/TileList.as	2013-12-15 17:35:31.771249800 +0200
-+++ app/scaleform/clik/controls/TileList.as	2013-12-15 17:50:32.820667400 +0200
+--- app.orig/scaleform/clik/controls/TileList.as	2013-12-20 11:28:46.514626800 +0200
++++ app/scaleform/clik/controls/TileList.as	2013-12-20 11:33:58.879626800 +0200
 @@ -442,7 +442,7 @@
           {
              if(this._scrollBarValue  is  Class)
@@ -337,8 +349,8 @@ diff -Naur app.orig/scaleform/clik/controls/TileList.as app/scaleform/clik/contr
                 if(_loc1_ != null)
                 {
 diff -Naur app.orig/scaleform/clik/ui/InputDetails.as app/scaleform/clik/ui/InputDetails.as
---- app.orig/scaleform/clik/ui/InputDetails.as	2013-12-15 17:34:48.387187700 +0200
-+++ app/scaleform/clik/ui/InputDetails.as	2013-12-15 17:50:32.820667400 +0200
+--- app.orig/scaleform/clik/ui/InputDetails.as	2013-12-20 11:27:59.118626800 +0200
++++ app/scaleform/clik/ui/InputDetails.as	2013-12-20 11:33:58.902626800 +0200
 @@ -21,7 +21,7 @@
  
        public var code:Number;

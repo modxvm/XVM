@@ -35,7 +35,7 @@ package net.wg.gui.lobby.dialogs
 
       private static const TEXT_HEIGHT_PADDING:uint = 3;
 
-      private static const WINDOW_PADDING:Object;
+      private static var WINDOW_PADDING:Object;
 
       private static const LAYOUT_INVALID:String = "layoutInv";
 
