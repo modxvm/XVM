@@ -37,7 +37,7 @@ package net.wg.gui.lobby.questsWindow.components
             if(isInvalid(LABEL_INV))
             {
                labelTextField.autoSize = TextFieldAutoSize.LEFT;
-               labelTextField.text = label;
+               labelTextField.htmlText = label;
                labelTextField.width = _width - 20 - valueTextField.width;
                labelTextField.height = labelTextField.textHeight + 10;
                invalidate(InvalidationType.SIZE);

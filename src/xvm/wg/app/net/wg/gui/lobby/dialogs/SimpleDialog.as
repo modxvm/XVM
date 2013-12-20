@@ -337,7 +337,7 @@ package net.wg.gui.lobby.dialogs
          }
       }
 
-      private function setFocusToButton(param1:Button) : * {
+      private function setFocusToButton(param1:Button) : void {
          if(hasFocus)
          {
             App.utils.focusHandler.setFocus(param1);

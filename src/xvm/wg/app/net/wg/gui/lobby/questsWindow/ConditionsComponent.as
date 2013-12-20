@@ -118,14 +118,13 @@ package net.wg.gui.lobby.questsWindow
       }
 
       private function layoutBlocks() : void {
-         var _loc2_:* = NaN;
          var _loc1_:* = 1;
          while(_loc1_ < this.totalBlocks)
          {
             this._blocks[_loc1_].y = Math.round(this._blocks[_loc1_-1].y + this._blocks[_loc1_-1].height);
             _loc1_++;
          }
-         _loc2_ = Math.round(this.totalBlocks > 0?this._blocks[this.totalBlocks-1].height + this._blocks[this.totalBlocks-1].y + BOTTOM_PADDING:0);
+         var _loc2_:Number = Math.round(this.totalBlocks > 0?this._blocks[this.totalBlocks-1].height + this._blocks[this.totalBlocks-1].y + BOTTOM_PADDING:0);
          this.line.y = _loc2_;
          this.line.visible = this.totalBlocks > 0;
          setSize(this.width,_loc2_);

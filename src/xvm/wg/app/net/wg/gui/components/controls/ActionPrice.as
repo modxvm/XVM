@@ -203,7 +203,7 @@ package net.wg.gui.components.controls
             _loc5_ = this._ico == IconText.GOLD?_loc2_.gold(Math.abs(this._defPrice)):_loc2_.integer(Math.abs(this._defPrice));
             _loc4_ = _loc4_ + (" " + _loc3_);
             _loc5_ = _loc5_ + (" " + _loc3_);
-            _loc1_ = new ComplexTooltipHelper().addHeader(_loc2_.makeString(TOOLTIPS.ACTIONPRICE_HEADER,{"prc":this._actionPrc.toString()})).addBody(_loc2_.makeString(TOOLTIPS.ACTIONPRICE_BODY,
+            _loc1_ = new ComplexTooltipHelper().addHeader(_loc2_.makeString(TOOLTIPS.ACTIONPRICE_HEADER)).addBody(_loc2_.makeString(TOOLTIPS.ACTIONPRICE_BODY,
                {
                   "oldPrice":_loc5_,
                   "newPrice":_loc4_
