@@ -21,6 +21,8 @@ _special = {
     'ussr:BT-SV':                   [ 3, 4 ],
     'ussr:T-127':                   [ 3, 4 ],
     'germany:PzII_J':               [ 3, 4 ],
+    'ussr:SU76I':                   [ 3, 4 ],
+    'japan:Ke_Ni_B':                [ 3, 4 ],
 
     # level 4
     'ussr:Valentine_LL':            [ 4, 4 ],
@@ -30,6 +32,7 @@ _special = {
     'uk:GB04_Valentine':            [ 4, 6 ],
     'uk:GB60_Covenanter':           [ 4, 6 ],
     'ussr:T80':                     [ 4, 6 ],
+    'japan:Ke_Ho':                  [ 4, 6 ],
 
     # level 5
     'germany:PzIV_Hydro':           [ 5, 6 ],
