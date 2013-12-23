@@ -15,7 +15,7 @@ class wot.Minimap.Minimap
 
     public var wrapper:net.wargaming.ingame.Minimap;
     public var base:net.wargaming.ingame.Minimap;
-    
+
     private var autoUpdate:AutoUpdate;
 
     public function Minimap(wrapper:net.wargaming.ingame.Minimap, base:net.wargaming.ingame.Minimap)
@@ -41,7 +41,7 @@ class wot.Minimap.Minimap
     {
         return this.sizeUpImpl.apply(this, arguments);
     }
-    
+
     function scaleMarkers()
     {
         return this.scaleMarkersImpl.apply(this, arguments);
@@ -76,7 +76,7 @@ class wot.Minimap.Minimap
     public static var EXTERNAL_CUSTOM_INDEX:Number = MAX_DEAD_ZINDEX - 1;
     public static var CAMERA_NORMAL_ZINDEX:Number = 100;
     public static var SELF_ZINDEX:Number = 151;
-    
+
     /** Simplified minimap interface for communication with other Python or Flash mods */
     public var externalDeveloperInterface:ExternalDeveloperInterface;
 
@@ -84,7 +84,7 @@ class wot.Minimap.Minimap
     private var isPanelReady:Boolean = false;
     private var loadComplete:Boolean = false;
     private var mapExtended:Boolean = false;
-    
+
     function scaleMarkersImpl(factor:Number)
     {
         if (MapConfig.enabled)
@@ -105,7 +105,7 @@ class wot.Minimap.Minimap
         if (mapExtended)
         {
             SyncModel.instance.updateIconUids();
-            
+
             /**
              * Camera object reconstruction occurs sometimes and all its previous props are lost.
              * Check if alpha is set.
@@ -118,7 +118,7 @@ class wot.Minimap.Minimap
     function correctSizeIndexImpl(sizeIndex:Number, stageHeight:Number):Number
     {
         var featureSizeIndex:Number = Features.instance.disableMapWindowSizeLimitation(sizeIndex);
-        
+
         return featureSizeIndex;
     }
 
@@ -172,12 +172,12 @@ class wot.Minimap.Minimap
     private function startExtendedProcedure():Void
     {
         SyncModel.instance.updateIconUids();
-        
+
         /**
          * Utility model for some features
          */
         AutoUpdate.instance.startTimer();
-        
+
         Features.instance.applyMajorMods();
     }
 }

@@ -15,7 +15,7 @@ class wot.Minimap.model.externalProxy.MapConfig
     public static function get cameraAlpha():Number    {
         return minimap.cameraAlpha;    }
     public static function get iconScale():Number    {
-        return 1;    } // TODO: fix work with ​​different values
+        return minimap.iconScale; }
 
     /** Zoom */
         public static function get zoomEnabled():Boolean    {

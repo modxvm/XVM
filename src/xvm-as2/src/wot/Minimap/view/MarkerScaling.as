@@ -2,12 +2,13 @@ import wot.Minimap.MinimapEntry;
 import wot.Minimap.MinimapProxy;
 import wot.Minimap.model.externalProxy.IconsProxy;
 import wot.Minimap.model.externalProxy.MapConfig;
+import com.xvm.Logger;
 
 class wot.Minimap.view.MarkerScaling
 {
-    
+
     private static var ORIGINAL_MARKERS_SCALING_FACTOR:Number = 0.5;
-    
+
     public function MarkerScaling()
     {
         /**
@@ -15,76 +16,73 @@ class wot.Minimap.view.MarkerScaling
          */
         scale();
     }
-    
+
     public function scale():Void
     {
         /**
          * This behaviour allows to keep original sizes
          * of static entries and modify dynamic entries scaling.
-         * 
+         *
          * Writing alternative implemention
          * of original size scaling attempt failed.
          * This is why original WG algorithm is invoked first.
-         * 
+         *
          * Static entry: capture base, respawn point
          * Dynamic entry: tank
          */
         scaleAllMarkersToOriginalSizes();
         alternateVehicleScaling();
     }
-    
+
     // -- Private
-    
+
     private function scaleAllMarkersToOriginalSizes():Void
     {
         /** Original WG scaling behaviour invocation */
         MinimapProxy.base.scaleMarkers(ORIGINAL_MARKERS_SCALING_FACTOR);
     }
-    
+
     private function alternateVehicleScaling():Void
     {
         /**
          * Modified WG scaling cut-pasted algorithm.
          * Static entries are omitted in scale alteration.
-         * 
+         *
          * icons._xscale is changed by minimap resize
          */
         var scaleFactor:Number = 10000 / icons._xscale;
         scaleFactor = scaleFactor + (100 - scaleFactor);
         scaleFactor = scaleFactor * MapConfig.iconScale;
-        
+
         for (var i in icons)
         {
             if (icons[i] instanceof net.wargaming.ingame.MinimapEntry)
             {
                 var entry = icons[i];
-                if (entry._currentframe != 5 && entry._currentframe != 6)
+                if (entry._currentframe == 5 || entry._currentframe == 6) // cursors
+                    continue;
+
+                if (entry.player != null)
                 {
-                    /**
-                     * Capture bases and respawn point
-                     * should not be alternatively scaled.
-                     * Skip them.
-                     */
-                    if (entry.entryName != MinimapEntry.STATIC_ICON_BASE &&
-                        entry.entryName != MinimapEntry.STATIC_ICON_CONTROL &&
-                        entry.entryName != MinimapEntry.STATIC_ICON_SPAWN)
-                    {
-                        entry._xscale = entry._yscale = scaleFactor;
-                    }
+                    entry.player.litIcon._xscale = entry.player.litIcon._yscale = scaleFactor;
+                }
+                else if (entry.selfIcon != null)
+                {
+                    entry.selfIcon._xscale = entry.selfIcon._yscale = scaleFactor;
                 }
             }
         }
-        
+
         /**
          * Attached MovieClips scaling is also affected.
          * Have to be compensated.
-         * 
+         *
          * TODO: can be fixed by detaching attachments to separate MovieClips
          * plus displacing onEnterFrame()
          */
-        rescaleAttachments();
+        //rescaleAttachments();
     }
-    
+
     private function rescaleAttachments():Void
     {
         var entries:Array = IconsProxy.allEntries;
@@ -94,7 +92,7 @@ class wot.Minimap.view.MarkerScaling
             entry.rescaleAttachments();
         }
     }
-    
+
     private function get icons():MovieClip
     {
         return MinimapProxy.wrapper.icons;
