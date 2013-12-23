@@ -3,7 +3,6 @@ package xvm.profile.components
     import com.xvm.*;
     import net.wg.gui.lobby.profile.pages.summary.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
-    import net.wg.data.gui_items.dossier.*;
 
     public class TechniqueWindow extends Technique
     {

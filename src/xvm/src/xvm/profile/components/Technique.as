@@ -4,7 +4,6 @@ package xvm.profile.components
     import flash.display.*;
     import flash.events.*;
     import flash.utils.*;
-    import net.wg.data.gui_items.dossier.*;
     import net.wg.gui.lobby.profile.pages.summary.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
     import net.wg.gui.components.advanced.*;

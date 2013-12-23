@@ -15,6 +15,7 @@ from logger import *
 from gameregion import *
 from pinger import *
 from stats import getBattleStat, getUserData
+from dossier import getDossier
 from vehinfo import getVehicleInfoData
 
 NO_LOG_COMMANDS = (
@@ -26,6 +27,7 @@ NO_LOG_COMMANDS = (
   COMMAND_GETGAMEREGION,
   COMMAND_GETLANGUAGE,
   COMMAND_LOADUSERDATA,
+  COMMAND_GETDOSSIER,
   )
 
 class Xvm(object):
@@ -56,6 +58,8 @@ class Xvm(object):
                 getBattleStat(proxy, args)
             elif cmd == COMMAND_LOADUSERDATA:
                 getUserData(proxy, args)
+            elif cmd == COMMAND_GETDOSSIER:
+                getDossier(proxy, args)
             elif cmd == COMMAND_LOAD_SETTINGS:
                 pass # TODO
             elif cmd == COMMAND_SAVE_SETTINGS:

@@ -23,11 +23,13 @@ package xvm.techtree
             try
             {
                 var id:Number = getID();
+                /*TODO
                 if (AccountData.vehicles.hasOwnProperty(id))
                 {
                     var data:TechniqueListVehicleVO = AccountData.vehicles[id];
                     masteryStr = "<img src='img://gui/maps/icons/library/proficiency/class_icons_" + data.markOfMastery + ".png' width='23' height='23'>";
                 }
+                */
             }
             catch (ex:Error)
             {

@@ -31,8 +31,14 @@ package xvm.tcarousel
 
         private function init():void
         {
-            AccountData.init();
+            AccountDossier.getDossier(this, dossier);
+
             page.carousel.itemRenderer = UI_TankCarouselItemRenderer;
+        }
+
+        private function dossier():void
+        {
+            Logger.add("dossier");
         }
     }
 }

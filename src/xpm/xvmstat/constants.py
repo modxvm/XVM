@@ -13,12 +13,15 @@ COMMAND_GETGAMEREGION = "getGameRegion"
 COMMAND_GETLANGUAGE = "getLanguage"
 COMMAND_LOADBATTLESTAT = "loadBattleStat"
 COMMAND_LOADUSERDATA = "loadUserData"
+COMMAND_GETDOSSIER = "getDossier"
+COMMAND_LOGSTAT = "logstat";
 COMMAND_LOAD_SETTINGS = "load_settings"
 COMMAND_SAVE_SETTINGS = "save_settings"
 
 RESPOND_PINGDATA = "xvm.pingdata"
 RESPOND_STATDATA = "xvm.statdata"
 RESPOND_USERDATA = "xvm.userdata"
+RESPOND_DOSSIER = "xvm.dossier"
 
 #COMMAND_GETSTAT = "getstat"
 #COMMAND_LOGSTAT = "logstat"

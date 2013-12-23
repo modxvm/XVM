@@ -20,6 +20,7 @@ package com.xvm.io
         private static const COMMAND_GETVEHICLEINFODATA:String = "getVehicleInfoData";
         private static const COMMAND_LOADBATTLESTAT:String = "loadBattleStat";
         private static const COMMAND_LOADUSERDATA:String = "loadUserData";
+        private static const COMMAND_GETDOSSIER:String = "getDossier";
         private static const COMMAND_LOGSTAT:String = "logstat";
         private static const COMMAND_SAVE_SETTINGS:String = "save_settings";
         private static const COMMAND_LOAD_SETTINGS:String = "load_settings";
@@ -27,6 +28,7 @@ package com.xvm.io
         public static const RESPOND_PINGDATA:String = "xvm.pingdata";
         public static const RESPOND_STATDATA:String = "xvm.statdata";
         public static const RESPOND_USERDATA:String = "xvm.userdata";
+        public static const RESPOND_DOSSIER:String = "xvm.dossier";
 
         public static function log(str:String):void
         {
@@ -71,6 +73,11 @@ package com.xvm.io
         public static function loadUserData(value:String, isId:Boolean):void
         {
             _call(null, null, [COMMAND_LOADUSERDATA, value, isId]);
+        }
+
+        public static function getDossier(playerId:*):void
+        {
+            _call(null, null, [COMMAND_GETDOSSIER, playerId]);
         }
 
         public static function logStat():void

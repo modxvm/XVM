@@ -8,7 +8,6 @@ package xvm.profile.components
     import flash.text.*;
     import flash.utils.*;
     import net.wg.data.constants.ItemTypes;
-    import net.wg.data.gui_items.dossier.*;
     import net.wg.gui.lobby.profile.components.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
     import net.wg.gui.lobby.profile.pages.technique.data.ProfileVehicleDossierVO;

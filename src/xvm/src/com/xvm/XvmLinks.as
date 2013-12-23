@@ -12,7 +12,7 @@ internal class XvmLinks
  */
 import com.xvm.*; Stat;
 import com.xvm.infrastructure.*; XvmModBase; XvmViewBase;
-import com.xvm.misc.*; IconLoader; Chance; Globals; AccountData;
+import com.xvm.misc.*; IconLoader; Chance; Globals; AccountDossier;
 import com.xvm.controls.*;
 NationMultiSelectionDropDown;
 ClassMultiSelectionDropDown;

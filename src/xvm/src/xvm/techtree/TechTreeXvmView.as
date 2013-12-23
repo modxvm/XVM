@@ -36,10 +36,15 @@ package xvm.techtree
 
         private function init():void
         {
-            AccountData.init();
+            AccountDossier.getDossier(this, dossier);
 
             page.nationsBar.addEventListener(IndexEvent.INDEX_CHANGE, this.handleIndexChange);
             handleIndexChange();
+        }
+
+        private function dossier():void
+        {
+            Logger.add("dossier");
         }
 
         private function handleIndexChange(e:IndexEvent = null) : void

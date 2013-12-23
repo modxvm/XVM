@@ -29,11 +29,13 @@ package xvm.tcarousel
                     return;
 
                 var id:Number = data.compactDescr;
+                /* TODO
                 if (AccountData.vehicles.hasOwnProperty(id))
                 {
                     var vdata:TechniqueListVehicleVO = AccountData.vehicles[id];
                     masteryStr = "<img src='img://gui/maps/icons/library/proficiency/class_icons_" + vdata.markOfMastery + ".png' width='23' height='23'>";
                 }
+                */
             }
             catch (ex:Error)
             {
