@@ -15,6 +15,7 @@ def getDossier(proxy, args):
 #############################
 # Private
 
+from pprint import pprint
 from threading import Thread, RLock
 from Queue import Queue
 import traceback
@@ -70,7 +71,6 @@ class _Dossier(object):
         #debug("respond: " + self.req['method'])
         if self.req['proxy'] and self.req['proxy'].component and self.req['proxy'].movie:
             strdata = json.dumps(self.resp)
-            #log("resp: " + strdata)
             self.req['proxy'].movie.invoke((self.req['method'], [strdata]))
 
     # Threaded
@@ -80,17 +80,44 @@ class _Dossier(object):
 
         from gui.shared import g_itemsCache
         dossier = g_itemsCache.items.getAccountDossier(playerId)
-        res = self.prepareResult(dossier)
+        res = self.prepareResult(dossier, playerId)
 
         with self.lock:
             self.resp = res
 
-    def prepareResult(self, dossier):
+
+    def prepareResult(self, dossier, playerId):
         res = {}
         if dossier is None:
             return res
 
-        #print(dossier.getTotalStats().getRecord('wins'))
+        stats = dossier.getTotalStats()
+        res = {
+            'playerId': playerId or 0,
+            'battles': stats.getRecord('battlesCount'),
+            'wins': stats.getRecord('wins'),
+            'losses': stats.getRecord('losses'),
+            'survived': stats.getRecord('survivedBattles'),
+            'frags': stats.getRecord('frags'),
+            'shots': stats.getRecord('shots'),
+            'hits': stats.getRecord('hits'),
+            'spotted': stats.getRecord('spotted'),
+            'damageDealt': stats.getRecord('damageDealt'),
+            'damageReceived': stats.getRecord('damageReceived'),
+            'capture': stats.getRecord('capturePoints'),
+            'defence': stats.getRecord('droppedCapturePoints'),
+            'winAndSurvived': stats.getRecord('winAndSurvived'),
+            'vehicles': {}
+        }
+
+        vehicles = stats.getVehicles()
+        for (vehId, vdata) in vehicles.iteritems():
+            res['vehicles'][str(vehId)] = {
+                'battles': vdata.battlesCount,
+                'wins': vdata.wins,
+                'mastery': vdata.markOfMastery,
+                'xp': vdata.xp,
+            }
 
         return res
 

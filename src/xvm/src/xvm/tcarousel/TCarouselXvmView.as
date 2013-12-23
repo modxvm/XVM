@@ -7,6 +7,7 @@ package xvm.tcarousel
     import com.xvm.*;
     import com.xvm.infrastructure.*;
     import com.xvm.misc.*;
+    import com.xvm.types.dossier.*;
     import net.wg.gui.lobby.hangar.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
@@ -31,14 +32,9 @@ package xvm.tcarousel
 
         private function init():void
         {
-            AccountDossier.getDossier(this, dossier);
+            Dossier.loadDossier(page.carousel, page.carousel.invalidateData);
 
             page.carousel.itemRenderer = UI_TankCarouselItemRenderer;
-        }
-
-        private function dossier():void
-        {
-            Logger.add("dossier");
         }
     }
 }

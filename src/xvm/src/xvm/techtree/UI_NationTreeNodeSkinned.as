@@ -2,6 +2,7 @@ package xvm.techtree
 {
     import com.xvm.*;
     import com.xvm.misc.*;
+    import com.xvm.types.dossier.*;
     import flash.text.*;
     import net.wg.gui.lobby.profile.pages.technique.data.*;
 
@@ -23,13 +24,12 @@ package xvm.techtree
             try
             {
                 var id:Number = getID();
-                /*TODO
-                if (AccountData.vehicles.hasOwnProperty(id))
+                var dossier:AccountDossier = Dossier.get();
+                if (dossier != null && dossier.vehicles.hasOwnProperty(id))
                 {
-                    var data:TechniqueListVehicleVO = AccountData.vehicles[id];
-                    masteryStr = "<img src='img://gui/maps/icons/library/proficiency/class_icons_" + data.markOfMastery + ".png' width='23' height='23'>";
+                    var vdata:VehicleDossierItem = dossier.vehicles[id];
+                    masteryStr = "<img src='img://gui/maps/icons/library/proficiency/class_icons_" + vdata.mastery + ".png' width='23' height='23'>";
                 }
-                */
             }
             catch (ex:Error)
             {
