@@ -1,6 +1,8 @@
 package xvm.profile.components
 {
     import com.xvm.*;
+    import com.xvm.misc.*;
+    import com.xvm.types.dossier.*;
     import net.wg.gui.lobby.profile.pages.summary.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
 
@@ -10,7 +12,8 @@ package xvm.profile.components
         {
             super(window, summary, playerName);
 
-            _accountDossier = new AccountDossier(playerId.toString());
+            _playerId = playerId;
+            Dossier.loadDossier(this, dossierLoaded, playerId);
         }
 
         override protected function createFilters():void
@@ -20,6 +23,11 @@ package xvm.profile.components
             filter.visible = false;
             filter.x = 680;
             filter.y = -47;
+        }
+
+        private function dossierLoaded(dossier:AccountDossier):void
+        {
+            // TODO
         }
     }
 }

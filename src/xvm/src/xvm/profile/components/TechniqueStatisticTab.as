@@ -2,15 +2,15 @@ package xvm.profile.components
 {
     import com.xvm.*;
     import com.xvm.l10n.Locale;
+    import com.xvm.types.dossier.*;
     import com.xvm.types.stat.*;
     import com.xvm.types.veh.*;
     import com.xvm.utils.*;
     import flash.text.*;
     import flash.utils.*;
-    import net.wg.data.constants.ItemTypes;
     import net.wg.gui.lobby.profile.components.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
-    import net.wg.gui.lobby.profile.pages.technique.data.ProfileVehicleDossierVO;
+    import net.wg.gui.lobby.profile.pages.technique.data.*;
 
     public class TechniqueStatisticTab
     {
@@ -345,7 +345,7 @@ package xvm.profile.components
 
         private function updateVehicleData(vid:uint):void
         {
-            var data:Data = prepareData(new Dossier(ItemTypes.VEHICLE_DOSSIER, [vid, tech.accountDossier.id]));
+            /*var data:Data = prepareData(new AccountDossier(ItemTypes.VEHICLE_DOSSIER, [vid, tech.accountDossier.id]));
             //var data:Data = prepareData(tech.accountDossier);
             //Logger.addObject(data);
             updateGlobalRatings(data);
@@ -420,19 +420,19 @@ package xvm.profile.components
             }
 
             avgCaptureDL.visible = false;
-            avgDefenceDL.visible = false;
+            avgDefenceDL.visible = false;*/
         }
 
-        private function prepareData(dossier:Dossier):Data
+        private function prepareData(dossier:AccountDossier):Data
         {
             try
             {
                 //Logger.addObject(dossier.getAllVehiclesList());
                 // skip empty result - data is not loaded yet
-                if (dossier.getBattlesCount() == 0)
+                if (dossier.battles == 0)
                     return new Data();
 
-                var key:String = dossier.id == null ? "0" : dossier.id.toString();
+                var key:String = dossier.playerId.toString();
                 var data:Data = cache[key];
                 if (data == null)
                 {
@@ -454,48 +454,33 @@ package xvm.profile.components
             return new Data();
         }
 
-        private function getRecord(dossier:Dossier, recordName:String):*
-        {
-            return uint(App.itemsMgr._callItemMethodS(dossier.itemTypeIdx, dossier.id, 'getRecord', [ recordName ]));
-        }
-
-        private function extractData(dossier:Dossier):Data
+        private function extractData(dossier:AccountDossier):Data
         {
             var data:Data = new Data();
-            data.battlesCount = dossier.getBattlesCount();
-            data.winsCount = dossier.getWinsCount();
-            data.lossesCount = getRecord(dossier, 'losses');
+            data.battlesCount = dossier.battles;
+            data.winsCount = dossier.wins;
+            data.lossesCount = dossier.losses;
 
-            data.survivalCount = getRecord(dossier, 'survivedBattles');
-            data.winAndSurvived = getRecord(dossier, 'winAndSurvived');
-            data.shotsCount = getRecord(dossier, 'shots');
-            data.hitsCount = getRecord(dossier, 'hits');
+            data.survivalCount = dossier.survived;
+            data.winAndSurvived = dossier.winAndSurvived;
+            data.shotsCount = dossier.shots;
+            data.hitsCount = dossier.hits;
 
-            if (dossier.itemTypeIdx == ItemTypes.ACCOUNT_DOSSIER)
-            {
-                var maxXP:Array = dossier.getMaxXP();
-                data.maxXP = maxXP[0];
-                data.maxXPVehicleName = VehicleInfo.get(maxXP[1]).localizedFullName;
+            // WG removed maxXp and maxFrags from AccountDossier. :(
+            data.maxXP = parseNumber(tech.summaryPage.tfMaxExperience.text);
+            //data.maxXPVehicleName = VehicleInfo.get(tech.summaryPage.tfMaxXp.value).localizedName;
+            data.maxFrags = parseNumber(tech.summaryPage.tfMaxDestroyed.text);
+            //data.maxFragsVehicleName = VehicleInfo.get(tech.summaryPage.tfMaxDestroyed.value).localizedName;
 
-                // WG removed maxFrags from AccountDossier. :(
-                data.maxFrags = parseInt(tech.summaryPage.tfMaxDestroyed.text.replace(/ /g, ''));
-                //data.maxFragsVehicleName = VehicleInfo.get(tech.summaryPage.tfMaxDestroyed.value).localizedName;
-            }
-            else
-            {
-                data.maxXP = dossier.getMaxVehicleXP();
-                data.maxFrags = dossier.getMaxVehicleFrags();
-            }
-
-            data.fragsCount = dossier.getFragsCount();
-            data.deathsCount = dossier.getDeathsCount();
-            data.damageDealt = dossier.getDamageDealt();
-            data.damageReceived = dossier.getDamageReceived();
-            data.avgXP = dossier.getAvgXP();
-            data.avgFrags = dossier.getAvgFrags();
-            data.avgEnemiesSpotted = dossier.getAvgEnemiesSpotted();
-            data.avgDamageDealt = dossier.getAvgDamageDealt();
-            data.avgDamageReceived = dossier.getAvgDamageReceived();
+            data.fragsCount = dossier.frags;
+            data.deathsCount = dossier.battles - dossier.survived;
+            data.damageDealt = dossier.damageDealt;
+            data.damageReceived = dossier.damageReceived;
+            data.avgXP = dossier.xp / dossier.battles;
+            data.avgFrags = dossier.frags / dossier.battles;
+            data.avgEnemiesSpotted = dossier.spotted / dossier.battles;
+            data.avgDamageDealt = dossier.damageDealt / dossier.battles;
+            data.avgDamageReceived = dossier.damageReceived / dossier.battles;
 
             return data;
         }
@@ -537,6 +522,19 @@ package xvm.profile.components
             if (stat == null)
                 return;
             data.stat = stat;
+        }
+
+        private function parseNumber(str:String):Number
+        {
+            var s:String = "";
+            var a:Array = str.split('');
+            for (var i:int = 0; i < a.length; ++i)
+            {
+                var x:String = a[i];
+                if (x >= '0' && x <= '9')
+                    s += x;
+            }
+            return parseInt(s);
         }
 
         private function pb(value:Number, battles:Number):Number

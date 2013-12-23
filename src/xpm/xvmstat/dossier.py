@@ -71,16 +71,16 @@ class _Dossier(object):
         #debug("respond: " + self.req['method'])
         if self.req['proxy'] and self.req['proxy'].component and self.req['proxy'].movie:
             strdata = json.dumps(self.resp)
-            self.req['proxy'].movie.invoke((self.req['method'], [strdata]))
+            self.req['proxy'].movie.invoke((self.req['method'], [self.playerId, strdata]))
 
     # Threaded
 
     def getDossier(self):
-        playerId = self.req['args'][0]
+        self.playerId = self.req['args'][0]
 
         from gui.shared import g_itemsCache
-        dossier = g_itemsCache.items.getAccountDossier(playerId)
-        res = self.prepareResult(dossier, playerId)
+        dossier = g_itemsCache.items.getAccountDossier(self.playerId)
+        res = self.prepareResult(dossier, self.playerId)
 
         with self.lock:
             self.resp = res
@@ -107,6 +107,7 @@ class _Dossier(object):
             'capture': stats.getRecord('capturePoints'),
             'defence': stats.getRecord('droppedCapturePoints'),
             'winAndSurvived': stats.getRecord('winAndSurvived'),
+            'xp': stats.getRecord('xp'),
             'vehicles': {}
         }
 

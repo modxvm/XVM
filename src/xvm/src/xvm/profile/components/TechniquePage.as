@@ -1,6 +1,8 @@
 package xvm.profile.components
 {
     import com.xvm.*;
+    import com.xvm.misc.*;
+    import com.xvm.types.dossier.*;
     import flash.utils.*;
     import net.wg.gui.lobby.profile.pages.summary.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
@@ -12,9 +14,15 @@ package xvm.profile.components
         {
             super(page, summary, playerName);
 
-            _accountDossier = new AccountDossier(null);
+            _playerId = 0;
+            Dossier.loadDossier(this, dossierLoaded);
 
             page.listComponent.addEventListener(TechniqueListComponent.DATA_CHANGED, initializeInHangarCheckBox);
+        }
+
+        private function dossierLoaded(dossier:AccountDossier):void
+        {
+            // TODO
         }
 
         private function initializeInHangarCheckBox():void

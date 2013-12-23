@@ -30,7 +30,7 @@ package com.xvm.misc
 
             _initialized = true;
 
-            ExternalInterface.addCallback(Cmd.RESPOND_DOSSIER, dataLoaded);
+            ExternalInterface.addCallback(Cmd.RESPOND_DOSSIER, dossierLoaded);
         }
 
         public static function loadDossier(target:Object, callback:Function, playerId:* = null):void
@@ -43,16 +43,23 @@ package com.xvm.misc
             Cmd.getDossier(playerId);
         }
 
-        private static function dataLoaded(str:String):void
+        private static function dossierLoaded(playerId:int, str:String):void
         {
-            var acc:AccountDossier = new AccountDossier(JSONx.parse(str));
-            _cache[acc.playerId] = acc;
-            var targets:Array = _requests[acc.playerId];
-            delete _requests[acc.playerId];
-            if (targets != null)
+            try
             {
-                for each (var target:Object in targets)
-                    target.callback.call(target.target, acc);
+                var acc:AccountDossier = new AccountDossier(JSONx.parse(str));
+                _cache[playerId] = acc;
+                var targets:Array = _requests[playerId];
+                delete _requests[playerId];
+                if (targets != null)
+                {
+                    for each (var target:Object in targets)
+                        target.callback.call(target.target, acc);
+                }
+            }
+            catch (e:Error)
+            {
+                Logger.add(e.getStackTrace());
             }
         }
     }

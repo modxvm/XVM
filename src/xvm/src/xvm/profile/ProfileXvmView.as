@@ -66,7 +66,7 @@ package xvm.profile
             if (e.view is ProfileSummary)
             {
                 summaryPage = e.view as ProfileSummary;
-                initializeStartPage();
+                // TODO: FIXIT: initializeStartPage();
                 return;
             }
 

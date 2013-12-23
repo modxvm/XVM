@@ -3,6 +3,7 @@ package xvm.profile.components
     import com.xvm.*;
     import com.xvm.events.*;
     import com.xvm.l10n.Locale;
+    import com.xvm.types.dossier.*;
     import flash.events.*;
     import net.wg.gui.components.advanced.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
@@ -221,7 +222,7 @@ package xvm.profile.components
 
         private function get summaryItem():TechniqueListVehicleVO
         {
-            var accountDossier:AccountDossier = tech.accountDossier;
+            var dossier:AccountDossier = tech.accountDossier;
             return new TechniqueListVehicleVO(
             {
                 "id": 0,
@@ -236,9 +237,9 @@ package xvm.profile.components
                 "isInHangar": true,
                 "nationID": -1,
                 "inventoryID": -1,
-                "battlesCount": (accountDossier == null) ? 0 : accountDossier.getBattlesCount(),
-                "winsEfficiency": (accountDossier == null) ? 0 : Math.round(accountDossier.getWinsEfficiency() * 100),
-                "avgExperience": (accountDossier == null) ? "" : accountDossier.getAvgXPStr()
+                "battlesCount": (dossier == null) ? 0 : dossier.battles,
+                "winsEfficiency": (dossier == null) ? 0 : Math.round(dossier.wins / dossier.battles * 100),
+                "avgExperience": (dossier == null) ? "" : dossier.getAvgXPStr()
             });
         }
     }

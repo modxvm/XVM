@@ -1,6 +1,8 @@
 package xvm.profile.components
 {
     import com.xvm.*;
+    import com.xvm.misc.*;
+    import com.xvm.types.dossier.*;
     import flash.display.*;
     import flash.events.*;
     import flash.utils.*;
@@ -15,7 +17,7 @@ package xvm.profile.components
     {
         protected var _page:ProfileTechnique;
         protected var _playerName:String;
-        protected var _accountDossier:AccountDossier;
+        protected var _playerId:int;
         protected var _summary:ProfileSummary;
 
         protected var filter:FilterControl;
@@ -29,7 +31,7 @@ package xvm.profile.components
                 this.name = "xvm_extension";
                 this._page = page;
                 this._playerName = playerName;
-                this._accountDossier = null;
+                this._playerId = 0;
                 this._summary = summary;
 
                 //return;
@@ -72,7 +74,7 @@ package xvm.profile.components
 
         public function get accountDossier():AccountDossier
         {
-            return _accountDossier;
+            return Dossier.get(_playerId);
         }
 
         public function get summaryPage():ProfileSummary

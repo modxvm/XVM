@@ -34,6 +34,16 @@ package com.xvm.types.dossier
         public var capture:int;
         public var defence:int;
         public var winAndSurvived:int;
+        public var xp:int;
         public var vehicles:Object;
+
+        public function getAvgXPStr():String
+        {
+            return App.utils.locale.numberWithoutZeros(xp / battles);
+        }
+
+        /*public function getMaxXP():VehicleDossierItem
+        {
+        }*/
     }
 }
