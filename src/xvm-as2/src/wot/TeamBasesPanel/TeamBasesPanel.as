@@ -36,7 +36,7 @@ class wot.TeamBasesPanel.TeamBasesPanel
     {
         Utils.TraceXvmModule("TeamBasesPanel");
     }
-    
+
     function addImpl(id, sortWeight, capColor, title, points)
     {
         if (CapConfig.enabled)

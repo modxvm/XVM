@@ -60,6 +60,11 @@ class wot.TeamBasesPanel.CaptureBar
         return this.updateTitleImpl.apply(this, arguments);
     }
 
+    function configUI()
+    {
+        return this.configUIImpl.apply(this, arguments);
+    }
+
     // wrapped methods
     /////////////////////////////////////////////////////////////////
 
@@ -67,6 +72,7 @@ class wot.TeamBasesPanel.CaptureBar
     private var m_oneTankSpeed:OneTankSpeed; // define cap min cap speed based on map type
     private var m_macro:Macro;       // defines user presentable html text
     private var m_capColor:String;
+    private var m_captured:Boolean;
 
     /** Ugly hack to allow one tick earlier speed calculation */
     private var m_startPoints:Number
@@ -81,6 +87,7 @@ class wot.TeamBasesPanel.CaptureBar
         Utils.TraceXvmModule("TeamBasesPanel");
 
         m_oneTankSpeed = new OneTankSpeed();
+        m_captured = false;
     }
 
    /**
@@ -138,6 +145,9 @@ class wot.TeamBasesPanel.CaptureBar
             return;
         }
 
+        if (m_captured)
+            return;
+
         m_capSpeed.calculate(newPointsVal, wrapper.m_points || m_startPoints);
 
         base.updateProgress(newPointsVal); // modifies m_point;
@@ -156,8 +166,25 @@ class wot.TeamBasesPanel.CaptureBar
      */
     function updateTitleImpl(value)
     {
+        if (!CapConfig.enabled)
+        {
+            base.updateTitle(value);
+            return;
+        }
+
+        m_captured = true;
+
         wrapper.m_titleTF.htmlText = m_macro.getCaptureDoneText();
         wrapper.m_timerTF.htmlText = "";
+    }
+
+    /**
+     * OVERRIDE
+     */
+    function configUIImpl()
+    {
+        base.configUI();
+        updateProgressImpl(wrapper.m_points);
     }
 
     // -- Private

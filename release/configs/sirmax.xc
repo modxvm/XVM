@@ -87,10 +87,12 @@
   "fragCorrelation": {
     "hideTeamTextFields": true
   },
+  "captureBar": {
+    "enabled": true
+  },
   "hotkeys": {
     "minimapZoom": { "enabled": false, "onHold": true, "keyCode": 17 }
   },
-
   "battleLoading": {
     "showChances": true,
     "showChancesExp": true,
