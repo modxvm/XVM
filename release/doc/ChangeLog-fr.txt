@@ -1,4 +1,35 @@
-﻿XVM-5.0.0-test5:
+﻿XVM-dev:
+  [NOUVEAUTÉS]
+  * traduction : ajout du Malaisien
+
+
+XVM-5.0.2-test1:
+  * adaptations pour WoT 0.8.10
+
+  [NOUVEAUTÉS]
+  * écran de connexion : les champs du formulaire n'accepte que les caractères requis
+
+  [AUTRES]
+  * changement du format des noms de chars dans la configuration
+
+
+XVM-5.0.1:
+  * adaptations pour WoT 0.8.9
+
+  [NOUVEAUTÉS]
+  * arbre technologique, affichage "carrousel" des chars dans le garage : affichage des insignes de maitrise
+  * traduction : ajout du Japonais et du Portugais brésilien
+  * nouvelles options :
+    login/confirmOldReplays - Confirme automatiquement la lecture d'anciens replays
+
+  [MACROS]
+  * panels d'équipes : ajout de la macro {{vtype-l}}
+
+  [CORRECTIONS]
+  * beaucoup de bugs corrigés
+
+
+XVM-5.0.0-test5:
   [NOUVEAUTÉS]
   * ajout de la possibilité de modifier le format du type de véhicule dans les panels d'équipes :
       squad/formatInfoField
