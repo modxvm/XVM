@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Estonian translation file.
  */
 {
@@ -54,12 +54,13 @@
     "Load statistics": "Lae statistika",
 
     // UserInfo
+    "General stats": "Üldine statistika",
     "Summary": "Kokkuvõte",
     "Avg level": "Keskmine järk",
     "WN6": "WN6",
     "EFF": "EFF",
     "updated": "uuendatud",
-    " to ": " saamaks ",
+    " to ": " - ",
     "avg": "keskm",
     "top": "top",
     "draws": "viike",
