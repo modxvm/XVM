@@ -223,6 +223,7 @@ package xvm.profile.components
         private function get summaryItem():TechniqueListVehicleVO
         {
             var dossier:AccountDossier = tech.accountDossier;
+
             return new TechniqueListVehicleVO(
             {
                 "id": 0,
@@ -239,7 +240,7 @@ package xvm.profile.components
                 "inventoryID": -1,
                 "battlesCount": (dossier == null) ? 0 : dossier.battles,
                 "winsEfficiency": (dossier == null) ? 0 : Math.round(dossier.wins / dossier.battles * 100),
-                "avgExperience": (dossier == null) ? "" : dossier.getAvgXPStr()
+                "avgExperience": (dossier == null) ? 0 : Math.round(dossier.xp / dossier.battles)
             });
         }
     }
