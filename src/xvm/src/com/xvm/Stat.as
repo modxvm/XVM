@@ -144,7 +144,7 @@ package com.xvm
             try
             {
                 var response:Object = JSONx.parse(json_str);
-                //Logger.addObject(response, "response", 3);
+                //Logger.addObject(response, 3, "response");
 
                 if (response.info)
                     info = response.info;
@@ -160,7 +160,7 @@ package com.xvm
                         //StatData.s_data[nm].loadstate = (StatData.s_data[nm].vehicleKey == "UNKNOWN")
                         //    ? Defines.LOADSTATE_UNKNOWN : Defines.LOADSTATE_DONE;
                         Macros.RegisterMacrosData(name);
-                        //Logger.addObject(stat[name], "stat[" + name + "]", 3);
+                        //Logger.addObject(stat[name], 3, "stat[" + name + "]");
                     }
                 }
             }

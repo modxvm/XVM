@@ -162,6 +162,8 @@ class com.xvm.Macros
         pdata["eff:4"] = eff <= 0 ? "----" : Strings.padLeft(pdata["eff"], 4);
         // {{wn}}
         pdata["wn"] = stat.wn <= 0 ? "----" : Strings.padLeft(String(stat.wn), 4);
+        // {{wn8}}
+        pdata["wn8"] = stat.wn8 <= 0 ? "----" : Strings.padLeft(String(stat.wn8), 4);
         // {{e}}
         pdata["e"] = stat.v.te == null ? "-" : stat.v.te >= 10 ? "E" : String(stat.v.te);
         // {{teff}}

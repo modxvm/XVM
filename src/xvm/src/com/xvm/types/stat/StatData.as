@@ -23,6 +23,7 @@ package com.xvm.types.stat
         public var lvl:Number = NaN;           // average level (float)
         public var e:Number = NaN;             // eff (int)
         public var wn:Number = NaN;            // WN6 rating (int)
+        public var wn8:Number = NaN;           // WN8 rating (int) *temporary*
 
         public var cid:Number = NaN;           // clanId
         public var emblem:String = null;       // url for clan icon

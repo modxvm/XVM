@@ -221,6 +221,8 @@ package com.xvm.utils
             pdata["eff:4"] = isNaN(stat.e) ? "----" : StringUtils.leftPad(pdata["eff"], 4, ' ');
             // {{wn}}
             pdata["wn"] = isNaN(stat.wn) ? "----" : StringUtils.leftPad(String(stat.wn), 4, ' ');
+            // {{wn8}}
+            pdata["wn8"] = isNaN(stat.wn8) ? "----" : StringUtils.leftPad(String(stat.wn8), 4, ' ');
             // {{e}}
             pdata["e"] = isNaN(stat.v.teff) ? "-" : stat.v.te >= 10 ? "E" : String(stat.v.te);
             // {{teff}}

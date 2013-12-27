@@ -30,7 +30,11 @@ package com.xvm.utils
                 return rawData;
 
             if (rawData == null)
+            {
+                if (typeof(clazz) == typeof(Number))
+                    return NaN;
                 return null;
+            }
 
             if (rawData is clazz)
                 return rawData;
