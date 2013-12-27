@@ -2,6 +2,7 @@ package xvm.profile.components
 {
     import com.xvm.*;
     import com.xvm.l10n.Locale;
+    import com.xvm.misc.*;
     import com.xvm.types.dossier.*;
     import com.xvm.types.stat.*;
     import com.xvm.types.veh.*;
@@ -17,7 +18,6 @@ package xvm.profile.components
         private static const DL_WIDTH:int = 200;
         private var proxy:net.wg.gui.lobby.profile.pages.technique.TechniqueStatisticTab;
 
-        //private var playerId:uint;
         private var _raw_data:ProfileVehicleDossierVO;
 
         private var cache:Dictionary;
@@ -68,7 +68,7 @@ package xvm.profile.components
 
                 setupControls();
                 createTextFields();
-                updateCommonData(new Data());
+                updateCommonData(null);
             }
             catch (ex:Error)
             {
@@ -81,7 +81,7 @@ package xvm.profile.components
             try
             {
                 setupControls();
-                updateCommonData(new Data());
+                updateCommonData(null);
             }
             catch (ex:Error)
             {
@@ -101,13 +101,11 @@ package xvm.profile.components
                 if (!raw_data)
                     return;
 
-                var vid:int = page.listComponent.selectedItem.id;
-                if (vid != 0)
+                var vehId:int = page.listComponent.selectedItem.id;
+                if (vehId != 0)
                     ratingTF.htmlText = "";
 
-                //Logger.add("vid: " + vid)
-                //if (vid != data.id[0])
-                //    return;
+                //Logger.add("vehId: " + vehId)
 
                 setupControls();
                 clearTextFields();
@@ -115,14 +113,13 @@ package xvm.profile.components
                 if (page && page.battlesDropdown && (page.battlesDropdown.selectedItem == PROFILE.PROFILE_DROPDOWN_LABELS_TEAM))
                     return;
 
-                if (vid == 0)
+                if (vehId == 0)
                 {
-                    //playerId = isNaN(data.id[1]) ? 0 : parseInt(data.id[1]);
                     updateSummaryData();
                 }
                 else
                 {
-                    updateVehicleData(vid);
+                    updateVehicleData(vehId);
                 }
             }
             catch (ex:Error)
@@ -241,7 +238,7 @@ package xvm.profile.components
             }
         }
 
-        private function updateGlobalRatings(data:Data):void
+        private function updateGlobalRatings(data:DossierBase):void
         {
             var s:String = "";
             if (data.stat == null)
@@ -264,41 +261,40 @@ package xvm.profile.components
             }
         }
 
-        private function updateCommonData(data:Data):void
+        private function updateCommonData(data:DossierBase):void
         {
-            proxy.battlesDL.value = color(App.utils.locale.integer(data.battlesCount));
-            TF(proxy.battlesDL).htmlText = formatHtmlText(data.winsToNextPercentStr, Defines.UICOLOR_DEFAULT2);
+            if (data == null)
+                data = new DossierBase({});
+
+            proxy.battlesDL.value = color(App.utils.locale.integer(data.battles));
+            TF(proxy.battlesDL).htmlText = formatHtmlText(getWinsToNextPercentStr(data), Defines.UICOLOR_DEFAULT2);
 
             var ratingColor:int = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, Math.round(data.winPercent));
-            proxy.winsDL.value = color(App.utils.locale.integer(data.winsCount));
+            proxy.winsDL.value = color(App.utils.locale.integer(data.wins));
             TF(proxy.winsDL).htmlText = formatHtmlText(App.utils.locale.numberWithoutZeros(data.winPercent) + "%", ratingColor);
 
-            proxy.defeatsDL.value = color(App.utils.locale.integer(data.lossesCount));
+            proxy.defeatsDL.value = color(App.utils.locale.integer(data.losses));
             TF(proxy.defeatsDL).htmlText = formatHtmlText(
                 color(App.utils.locale.numberWithoutZeros(data.lossPercent) + "%", Defines.UICOLOR_GOLD) +
-                " " + Locale.get("draws") + ": " + color(App.utils.locale.integer(data.drawsCount), Defines.UICOLOR_GOLD) +
+                " " + Locale.get("draws") + ": " + color(App.utils.locale.integer(data.draws), Defines.UICOLOR_GOLD) +
                 " (" + color(App.utils.locale.numberWithoutZeros(data.drawsPercent) + "%", Defines.UICOLOR_GOLD) + ")",
                 Defines.UICOLOR_DEFAULT2);
 
-            proxy.surviveDL.value = color(App.utils.locale.integer(data.survivalCount));
+            proxy.surviveDL.value = color(App.utils.locale.integer(data.survived));
             TF(proxy.surviveDL).htmlText = formatHtmlText(App.utils.locale.numberWithoutZeros(data.survivePercent) + "%", Defines.UICOLOR_GOLD);
 
             proxy.accuracyDL.value = color(App.utils.locale.numberWithoutZeros(data.hitsRatio * 100));
 
             proxy.maxExpDL.value = color(App.utils.locale.integer(data.maxXP));
-            TF(proxy.maxExpDL).htmlText = formatHtmlText(data.maxXPVehicleName, Defines.UICOLOR_GOLD2);
-
             proxy.maxKillDL.value = color(App.utils.locale.integer(data.maxFrags));
-            TF(proxy.maxKillDL).htmlText = formatHtmlText(data.maxFragsVehicleName, Defines.UICOLOR_GOLD2);
 
-            proxy.totalKillDL.value = color(App.utils.locale.integer(data.fragsCount));
-
-            proxy.totalDeadDL.value = color(App.utils.locale.integer(data.deathsCount));
+            proxy.totalKillDL.value = color(App.utils.locale.integer(data.frags));
+            proxy.totalDeadDL.value = color(App.utils.locale.integer(data.deaths));
 
             var ratio:String;
 
             proxy.killRatioDL.enabled = true;
-            ratio = data.deathsCount <= 0 ? "--" : App.utils.locale.numberWithoutZeros(data.fragsCount / data.deathsCount);
+            ratio = data.deaths <= 0 ? "--" : App.utils.locale.numberWithoutZeros(data.frags / data.deaths);
             proxy.killRatioDL.value = color(ratio, 0xCBAD78);
 
             proxy.dealtDmgDL.value = color(App.utils.locale.integer(data.damageDealt));
@@ -313,7 +309,7 @@ package xvm.profile.components
             proxy.avgDmgDealtDL.value = color(App.utils.locale.integer(data.avgDamageDealt));
             proxy.avgDmgReceivedDL.value = color(App.utils.locale.integer(data.avgDamageReceived));
             proxy.avgKillsDL.value = color(App.utils.locale.numberWithoutZeros(data.avgFrags));
-            proxy.avgDetectedDL.value = color(App.utils.locale.numberWithoutZeros(data.avgEnemiesSpotted));
+            proxy.avgDetectedDL.value = color(App.utils.locale.numberWithoutZeros(data.avgSpotted));
 
             // stat
 
@@ -327,10 +323,17 @@ package xvm.profile.components
 
         private function updateSummaryData():void
         {
-            var data:Data = prepareData(tech.accountDossier);
-            //Logger.addObject(data);
+            //Logger.addObject(tech.accountDossier, 3, "accountDossier");
+
+            var data:AccountDossier = tech.accountDossier;
+            prepareData(data);
+            //Logger.addObject(data, 3, "prepared");
+
             updateGlobalRatings(data);
             updateCommonData(data);
+
+            TF(proxy.maxExpDL).htmlText = formatHtmlText(data.maxXPVehicleName, Defines.UICOLOR_GOLD2);
+            TF(proxy.maxKillDL).htmlText = formatHtmlText(data.maxFragsVehicleName, Defines.UICOLOR_GOLD2);
 
             specificDamage.visible = false;
 
@@ -343,15 +346,20 @@ package xvm.profile.components
             }
         }
 
-        private function updateVehicleData(vid:uint):void
+        private function updateVehicleData(vehId:uint):void
         {
-            /*var data:Data = prepareData(new AccountDossier(ItemTypes.VEHICLE_DOSSIER, [vid, tech.accountDossier.id]));
-            //var data:Data = prepareData(tech.accountDossier);
-            //Logger.addObject(data);
+            Dossier.loadVehicleDossier(this, updateVehicleDataCallback, vehId, tech.playerId);
+        }
+
+        private function updateVehicleDataCallback(dossier:VehicleDossier):void
+        {
+            var data:VehicleDossier = dossier;
+            prepareData(data);
+
             updateGlobalRatings(data);
             updateCommonData(data);
 
-            var vdata:VehicleData = VehicleInfo.get(vid);
+            var vdata:VehicleData = VehicleInfo.get(dossier.vehId);
             if (vdata == null)
                 return;
             //Logger.addObject(vdata, 2);
@@ -420,107 +428,56 @@ package xvm.profile.components
             }
 
             avgCaptureDL.visible = false;
-            avgDefenceDL.visible = false;*/
+            avgDefenceDL.visible = false;
         }
 
-        private function prepareData(dossier:AccountDossier):Data
+        private function prepareData(dossier:DossierBase):void
         {
             try
             {
                 if (dossier == null)
-                    return null;
+                    return;
 
                 //Logger.addObject(dossier.getAllVehiclesList());
                 // skip empty result - data is not loaded yet
-                if (dossier.battles == 0)
-                    return new Data();
+                if (dossier.battles <= 0)
+                    return;
 
-                var key:String = dossier.playerId.toString();
-                var data:Data = cache[key];
-                if (data == null)
-                {
-                    data = extractData(dossier);
-                    calculateData(data);
-                    cache[key] = data;
-                }
-                if (data.stat == null)
-                    setStatData(data);
+                if (dossier.stat == null)
+                    setStatData(dossier);
 
                 //Logger.addObject(data);
-
-                return data;
             }
             catch (ex:Error)
             {
                 Logger.add(ex.getStackTrace());
             }
-
-            return null;
         }
 
-        private function extractData(dossier:AccountDossier):Data
+        private function getWinsToNextPercentStr(data:DossierBase):String
         {
-            var data:Data = new Data();
-            data.battlesCount = dossier.battles;
-            data.winsCount = dossier.wins;
-            data.lossesCount = dossier.losses;
-
-            data.survivalCount = dossier.survived;
-            data.winAndSurvived = dossier.winAndSurvived;
-            data.shotsCount = dossier.shots;
-            data.hitsCount = dossier.hits;
-
-            // WG removed maxXp and maxFrags from AccountDossier. :(
-            data.maxXP = parseNumber(tech.summaryPage.tfMaxExperience.text);
-            //data.maxXPVehicleName = VehicleInfo.get(tech.summaryPage.tfMaxXp.value).localizedName;
-            data.maxFrags = parseNumber(tech.summaryPage.tfMaxDestroyed.text);
-            //data.maxFragsVehicleName = VehicleInfo.get(tech.summaryPage.tfMaxDestroyed.value).localizedName;
-
-            data.fragsCount = dossier.frags;
-            data.deathsCount = dossier.battles - dossier.survived;
-            data.damageDealt = dossier.damageDealt;
-            data.damageReceived = dossier.damageReceived;
-            data.avgXP = dossier.xp / dossier.battles;
-            data.avgFrags = dossier.frags / dossier.battles;
-            data.avgEnemiesSpotted = dossier.spotted / dossier.battles;
-            data.avgDamageDealt = dossier.damageDealt / dossier.battles;
-            data.avgDamageReceived = dossier.damageReceived / dossier.battles;
-
-            return data;
-        }
-
-        private function calculateData(data:Data):void
-        {
-            // Ratios
-            data.drawsCount = data.battlesCount - data.winsCount - data.lossesCount;
-            data.winPercent = pb(data.winsCount, data.battlesCount) * 100;
-            data.lossPercent = pb(data.lossesCount, data.battlesCount) * 100;
-            data.drawsPercent = pb(data.drawsCount, data.battlesCount) * 100;
-            data.survivePercent = pb(data.survivalCount, data.battlesCount) * 100;
-            data.hitsRatio = pb(data.hitsCount, data.shotsCount);
-
             // Wins to next percent
-            if (data.winPercent > 0 && data.winPercent < 100)
-            {
-                var r1:Number = Math.round(data.winPercent) / 100 + 0.005;
-                var r2:Number = int(data.winPercent) / 100 + 0.01;
-                var b1:Number = (data.battlesCount * r1 - data.winsCount) / (1 - r1);
-                var b2:Number = (data.battlesCount * r2 - data.winsCount) / (1 - r2);
-                b1 = Math.max(0, b1 % 1 == 0 ? b1 : (int(b1) + 1));
-                b2 = Math.max(0, b2 % 1 == 0 ? b2 : (int(b2) + 1));
-                data.winsToNextPercentStr = (b2 > b1)
-                    ? color(App.utils.locale.integer(b1), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
-                        color(App.utils.locale.numberWithoutZeros((r2 * 100 - 0.5).toFixed(1)) + "%", Defines.UICOLOR_GOLD) + " / " +
-                        color(App.utils.locale.integer(b2), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
-                        color(App.utils.locale.numberWithoutZeros((r2 * 100).toFixed(1)) + "%", Defines.UICOLOR_GOLD)
-                    : color(App.utils.locale.integer(b2), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
-                        color(App.utils.locale.numberWithoutZeros((r2 * 100).toFixed(1)) + "%", Defines.UICOLOR_GOLD) + " / " +
-                        color(App.utils.locale.integer(b1), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
-                        color(App.utils.locale.numberWithoutZeros((r2 * 100 + 0.5).toFixed(1)) + "%", Defines.UICOLOR_GOLD);
-            }
+            if (data.winPercent <= 0 || data.winPercent >= 100)
+                return "";
+
+            var r1:Number = Math.round(data.winPercent) / 100 + 0.005;
+            var r2:Number = int(data.winPercent) / 100 + 0.01;
+            var b1:Number = (data.battles * r1 - data.wins) / (1 - r1);
+            var b2:Number = (data.battles * r2 - data.wins) / (1 - r2);
+            b1 = Math.max(0, b1 % 1 == 0 ? b1 : (int(b1) + 1));
+            b2 = Math.max(0, b2 % 1 == 0 ? b2 : (int(b2) + 1));
+            return (b2 > b1)
+                ? color(App.utils.locale.integer(b1), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
+                    color(App.utils.locale.numberWithoutZeros((r2 * 100 - 0.5).toFixed(1)) + "%", Defines.UICOLOR_GOLD) + " / " +
+                    color(App.utils.locale.integer(b2), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
+                    color(App.utils.locale.numberWithoutZeros((r2 * 100).toFixed(1)) + "%", Defines.UICOLOR_GOLD)
+                : color(App.utils.locale.integer(b2), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
+                    color(App.utils.locale.numberWithoutZeros((r2 * 100).toFixed(1)) + "%", Defines.UICOLOR_GOLD) + " / " +
+                    color(App.utils.locale.integer(b1), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
+                    color(App.utils.locale.numberWithoutZeros((r2 * 100 + 0.5).toFixed(1)) + "%", Defines.UICOLOR_GOLD);
         }
 
-        private function setStatData(data:Data):void
+        private function setStatData(data:DossierBase):void
         {
             var stat:StatData = Stat.getUserDataByName(tech.playerName);
             if (stat == null)
@@ -541,11 +498,6 @@ package xvm.profile.components
             return parseInt(s);
         }
 
-        private function pb(value:Number, battles:Number):Number
-        {
-            return battles <= 0 ? 0 : value / battles;
-        }
-
         private function formatHtmlText(txt:String, color:uint=1):String
         {
             return "<span class='txt'>" + (color == 1 ? txt : this.color(txt, color)) + "</span>";
@@ -561,41 +513,4 @@ package xvm.profile.components
             return "<font color='#" + color.toString(16) + "'>" + txt + "</font>";
         }
     }
-}
-import com.xvm.types.stat.StatData;
-
-class Data
-{
-    public var battlesCount:Number = 0;
-    public var winsCount:Number = 0;
-    public var lossesCount:Number = 0;
-    public var survivalCount:Number = 0;
-    public var winAndSurvived:Number = 0;
-    public var shotsCount:Number = 0;
-    public var hitsCount:Number = 0;
-    public var maxXP:Number = 0;
-    public var maxXPVehicleName:String = "";
-    public var maxFrags:Number = 0;
-    public var maxFragsVehicleName:String = "";
-    public var fragsCount:Number = 0;
-    public var deathsCount:Number = 0;
-    public var damageDealt:Number = 0;
-    public var damageReceived:Number = 0;
-    public var avgXP:Number = 0;
-    public var avgFrags:Number = 0;
-    public var avgEnemiesSpotted:Number = 0;
-    public var avgDamageDealt:Number = 0;
-    public var avgDamageReceived:Number = 0;
-
-    // calculated
-    public var drawsCount:Number = 0;
-    public var winPercent:Number = 0;
-    public var lossPercent:Number = 0;
-    public var drawsPercent:Number = 0;
-    public var survivePercent:Number = 0;
-    public var hitsRatio:Number = 0;
-    public var winsToNextPercentStr:String = "";
-
-    // stat
-    public var stat:StatData = null;
 }

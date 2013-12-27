@@ -36,7 +36,7 @@ package xvm.techtree
 
         private function init():void
         {
-            Dossier.loadDossier(page.nationTree, page.nationTree.invalidateData);
+            Dossier.loadAccountDossier(page.nationTree, page.nationTree.invalidateData);
 
             page.nationsBar.addEventListener(IndexEvent.INDEX_CHANGE, this.handleIndexChange);
             handleIndexChange();

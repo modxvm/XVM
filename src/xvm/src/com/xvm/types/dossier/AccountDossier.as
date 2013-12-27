@@ -1,9 +1,11 @@
 package com.xvm.types.dossier
 {
     import com.xvm.*;
+    import com.xvm.misc.*;
+    import com.xvm.types.veh.*;
     import net.wg.data.daapi.base.DAAPIDataClass;
 
-    public class AccountDossier extends DAAPIDataClass
+    public class AccountDossier extends DossierBase
     {
         public function AccountDossier(data:Object)
         {
@@ -12,38 +14,44 @@ package com.xvm.types.dossier
 
             super(data);
 
+            if (data.maxXPVehId)
+                _maxXPVehicleName = VehicleInfo.get(maxXPVehId).localizedName;
+            if (data.maxFragsVehId)
+                _maxFragsVehicleName = VehicleInfo.get(maxFragsVehId).localizedName;
+            if (data.maxDamageVehId)
+                _maxDamageVehicleName = VehicleInfo.get(maxDamageVehId).localizedName;
+
             vehicles = {};
             for (var vehId:String in vehiclesData)
             {
-                vehicles[vehId] = new VehicleDossierItem(vehiclesData[vehId]);
+                vehicles[vehId] = new VehicleDossierCut(vehiclesData[vehId]);
                 vehicles[vehId].vehId = vehId;
             }
         }
 
-        public var playerId:int;
-        public var battles:int;
-        public var wins:int;
-        public var losses:int;
-        public var survived:int;
-        public var frags:int;
-        public var shots:int;
-        public var hits:int;
-        public var spotted:int;
-        public var damageDealt:int;
-        public var damageReceived:int;
-        public var capture:int;
-        public var defence:int;
-        public var winAndSurvived:int;
-        public var xp:int;
+        public var maxXPVehId:int;
+        public var maxFragsVehId:int;
+        public var maxDamageVehId:int;
+
         public var vehicles:Object;
 
-        public function getAvgXPStr():String
+        // Calculated
+        private var _maxXPVehicleName:String = '';
+        public function get maxXPVehicleName():String
         {
-            return App.utils.locale.numberWithoutZeros(xp / battles);
+            return _maxXPVehicleName;
         }
 
-        /*public function getMaxXP():VehicleDossierItem
+        private var _maxFragsVehicleName:String = '';
+        public function get maxFragsVehicleName():String
         {
-        }*/
+            return _maxFragsVehicleName;
+        }
+
+        private var _maxDamageVehicleName:String = '';
+        public function get maxDamageVehicleName():String
+        {
+            return _maxDamageVehicleName;
+        }
     }
 }

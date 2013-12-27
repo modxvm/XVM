@@ -30,10 +30,10 @@ package xvm.tcarousel
                     return;
 
                 var id:Number = data.compactDescr;
-                var dossier:AccountDossier = Dossier.get();
+                var dossier:AccountDossier = Dossier.getAccountDossier();
                 if (dossier != null && dossier.vehicles.hasOwnProperty(id))
                 {
-                    var vdata:VehicleDossierItem = dossier.vehicles[id];
+                    var vdata:VehicleDossierCut = dossier.vehicles[id];
                     masteryStr = "<img src='img://gui/maps/icons/library/proficiency/class_icons_" + vdata.mastery + ".png' width='23' height='23'>";
                 }
             }

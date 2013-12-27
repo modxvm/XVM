@@ -34,6 +34,8 @@ class _Dossier(object):
         self.lock = RLock()
         self.thread = None
         self.req = None
+        self.playerId = None
+        self.vehId = None
         self.resp = None
 
     def __del__(self):
@@ -71,47 +73,66 @@ class _Dossier(object):
         #debug("respond: " + self.req['method'])
         if self.req['proxy'] and self.req['proxy'].component and self.req['proxy'].movie:
             strdata = json.dumps(self.resp)
-            self.req['proxy'].movie.invoke((self.req['method'], [self.playerId, strdata]))
+            self.req['proxy'].movie.invoke((self.req['method'], [self.playerId, self.vehId, strdata]))
+
 
     # Threaded
 
     def getDossier(self):
-        self.playerId = self.req['args'][0]
+        (self.playerId, self.vehId) = self.req['args']
 
         from gui.shared import g_itemsCache
-        dossier = g_itemsCache.items.getAccountDossier(self.playerId)
-        res = self.prepareResult(dossier, self.playerId)
+        if self.vehId is None:
+            dossier = g_itemsCache.items.getAccountDossier(self.playerId)
+            res = self.prepareAccountResult(dossier)
+        else:
+            dossier = g_itemsCache.items.getVehicleDossier(int(self.vehId), self.playerId)
+            res = self.prepareVehicleResult(dossier)
 
         with self.lock:
             self.resp = res
 
 
-    def prepareResult(self, dossier, playerId):
+    def prepareAccountResult(self, dossier):
         res = {}
         if dossier is None:
             return res
 
-        stats = dossier.getTotalStats()
+        total = dossier.getTotalStats()
+        glob = dossier.getGlobalStats()
         res = {
-            'playerId': playerId or 0,
-            'battles': stats.getRecord('battlesCount'),
-            'wins': stats.getRecord('wins'),
-            'losses': stats.getRecord('losses'),
-            'survived': stats.getRecord('survivedBattles'),
-            'frags': stats.getRecord('frags'),
-            'shots': stats.getRecord('shots'),
-            'hits': stats.getRecord('hits'),
-            'spotted': stats.getRecord('spotted'),
-            'damageDealt': stats.getRecord('damageDealt'),
-            'damageReceived': stats.getRecord('damageReceived'),
-            'capture': stats.getRecord('capturePoints'),
-            'defence': stats.getRecord('droppedCapturePoints'),
-            'winAndSurvived': stats.getRecord('winAndSurvived'),
-            'xp': stats.getRecord('xp'),
+            'playerId': self.playerId or 0,
+
+            'battles': total.getBattlesCount(),
+            'wins': total.getWinsCount(),
+            'losses': total.getLosses(),
+            'survived': total.getSurvivedBattlesCount(),
+            'frags': total.getFragsCount(),
+            'shots': total.getShotsCount(),
+            'hits': total.getHitsCount(),
+            'spotted': total.getSpottedEnemiesCount(),
+            'damageDealt': total.getDamageDealt(),
+            'damageReceived': total.getDamageReceived(),
+            'capture': total.getCapturePoints(),
+            'defence': total.getDroppedCapturePoints(),
+            'winAndSurvived': total.getWinAndSurvived(),
+            'xp': total.getXP(),
+
+            'maxXP': total.getMaxXp(),
+            'maxXPVehId': total.getMaxXpVehicle(),
+            'maxFrags': total.getMaxFrags(),
+            'maxFragsVehId': total.getMaxFragsVehicle(),
+            'maxDamage': total.getMaxDamage(),
+            'maxDamageVehId': total.getMaxDamageVehicle(),
+
+            'battleLifeTime': glob.getBattleLifeTime(),
+            'mileage': glob.getMileage(),
+            'treesCut': glob.getTreesCut(),
+
             'vehicles': {}
         }
 
-        vehicles = stats.getVehicles()
+        vehicles = total.getVehicles()
         for (vehId, vdata) in vehicles.iteritems():
             res['vehicles'][str(vehId)] = {
                 'battles': vdata.battlesCount,
@@ -121,5 +142,44 @@ class _Dossier(object):
             }
 
         return res
+
+
+    def prepareVehicleResult(self, dossier):
+        res = {}
+        if dossier is None:
+            return res
+
+        total = dossier.getTotalStats()
+        glob = dossier.getGlobalStats()
+        res = {
+            'vehId': self.vehId,
+            'playerId': self.playerId or 0,
+
+            'battles': total.getBattlesCount(),
+            'wins': total.getWinsCount(),
+            'losses': total.getLosses(),
+            'survived': total.getSurvivedBattlesCount(),
+            'frags': total.getFragsCount(),
+            'shots': total.getShotsCount(),
+            'hits': total.getHitsCount(),
+            'spotted': total.getSpottedEnemiesCount(),
+            'damageDealt': total.getDamageDealt(),
+            'damageReceived': total.getDamageReceived(),
+            'capture': total.getCapturePoints(),
+            'defence': total.getDroppedCapturePoints(),
+            'winAndSurvived': total.getWinAndSurvived(),
+            'xp': total.getXP(),
+
+            'maxXP': total.getMaxXp(),
+            'maxFrags': total.getMaxFrags(),
+            'maxDamage': total.getMaxDamage(),
+
+            'battleLifeTime': glob.getBattleLifeTime(),
+            'mileage': glob.getMileage(),
+            'treesCut': glob.getTreesCut(),
+        }
+
+        return res
+
 
 _dossier = _Dossier()

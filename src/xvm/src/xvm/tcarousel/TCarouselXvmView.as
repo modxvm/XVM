@@ -32,7 +32,7 @@ package xvm.tcarousel
 
         private function init():void
         {
-            Dossier.loadDossier(page.carousel, page.carousel.invalidateData);
+            Dossier.loadAccountDossier(page.carousel, page.carousel.invalidateData);
 
             page.carousel.itemRenderer = UI_TankCarouselItemRenderer;
         }

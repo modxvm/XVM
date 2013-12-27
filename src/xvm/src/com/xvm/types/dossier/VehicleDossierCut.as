@@ -2,11 +2,11 @@ package com.xvm.types.dossier
 {
    import net.wg.data.daapi.base.DAAPIDataClass;
 
-   public class VehicleDossierItem extends DAAPIDataClass
+   public class VehicleDossierCut extends DAAPIDataClass
    {
-        public function VehicleDossierItem(param1:Object)
+        public function VehicleDossierCut(data:Object)
         {
-            super(param1);
+            super(data);
         }
 
         public var vehId:int;

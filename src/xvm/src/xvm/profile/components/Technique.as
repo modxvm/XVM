@@ -72,9 +72,14 @@ package xvm.profile.components
             return _playerName;
         }
 
+        public function get playerId():int
+        {
+            return _playerId;
+        }
+
         public function get accountDossier():AccountDossier
         {
-            return Dossier.get(_playerId);
+            return Dossier.getAccountDossier(playerId);
         }
 
         public function get summaryPage():ProfileSummary

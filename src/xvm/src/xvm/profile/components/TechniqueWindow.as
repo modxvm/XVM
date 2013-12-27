@@ -13,7 +13,7 @@ package xvm.profile.components
             super(window, summary, playerName);
 
             _playerId = playerId;
-            Dossier.loadDossier(this, dossierLoaded, playerId);
+            Dossier.loadAccountDossier(this, dossierLoaded, playerId);
         }
 
         override protected function createFilters():void

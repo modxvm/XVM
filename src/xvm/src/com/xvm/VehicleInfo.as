@@ -20,9 +20,9 @@ package com.xvm
             Cmd.getVehicleInfoData(instance, instance.onVehicleInfoData);
         }
 
-        public static function get(vId:int):VehicleData
+        public static function get(vehId:int):VehicleData
         {
-            return instance._get(vId);
+            return instance._get(vehId);
         }
 
         public static function getByIcon(icon:String):VehicleData
@@ -108,9 +108,9 @@ package com.xvm
             }
         }
 
-        private function _get(vId:int):VehicleData
+        private function _get(vehId:int):VehicleData
         {
-            return vehicles[vId];
+            return vehicles[vehId];
         }
 
         private function _getByIcon(icon:String):VehicleData
