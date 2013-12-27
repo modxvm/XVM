@@ -69,7 +69,9 @@ package xvm.autologin
                 if (!ready)
                     return;
                 ready = false;
-                page.dispatchEvent(new InputEvent(InputEvent.INPUT, new InputDetails(null, Keyboard.ENTER, InputValue.KEY_DOWN)));
+                var rememberPwdCheckbox:CheckBox = page.form.rememberPwdCheckbox;
+                if (rememberPwdCheckbox.selected)
+                    page.dispatchEvent(new InputEvent(InputEvent.INPUT, new InputDetails(null, Keyboard.ENTER, InputValue.KEY_DOWN)));
             });
         }
 
