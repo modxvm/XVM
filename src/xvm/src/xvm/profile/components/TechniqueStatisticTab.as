@@ -427,6 +427,9 @@ package xvm.profile.components
         {
             try
             {
+                if (dossier == null)
+                    return null;
+
                 //Logger.addObject(dossier.getAllVehiclesList());
                 // skip empty result - data is not loaded yet
                 if (dossier.battles == 0)
@@ -451,7 +454,8 @@ package xvm.profile.components
             {
                 Logger.add(ex.getStackTrace());
             }
-            return new Data();
+
+            return null;
         }
 
         private function extractData(dossier:AccountDossier):Data

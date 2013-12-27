@@ -75,7 +75,7 @@ package com.xvm.io
             _call(null, null, [COMMAND_LOADUSERDATA, value, isId]);
         }
 
-        public static function getDossier(playerId:*):void
+        public static function getDossier(playerId:String):void
         {
             _call(null, null, [COMMAND_GETDOSSIER, playerId]);
         }
