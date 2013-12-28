@@ -24,7 +24,8 @@ package xvm.profile.components
         private var controlsMap:Dictionary;
         private var controls:Array;
         private var ratingTF:TextField;
-        private var specificDamage:DashLineTextItem;
+        private var maxDamageDL:DashLineTextItem;
+        private var specDamageDL:DashLineTextItem;
         private var avgCaptureDL:DashLineTextItem;
         private var avgDefenceDL:DashLineTextItem;
 
@@ -40,29 +41,30 @@ package xvm.profile.components
                 controlsMap = new Dictionary(true);
                 createControls();
                 controls = [
-                    { y: 65,  width: DL_WIDTH, control: proxy.battlesDL },
-                    { y: 82,  width: DL_WIDTH, control: proxy.winsDL },
-                    { y: 99,  width: DL_WIDTH, control: proxy.defeatsDL },
-                    { y: 116, width: DL_WIDTH, control: proxy.surviveDL },
-                    { y: 133, width: DL_WIDTH, control: proxy.accuracyDL },
-                    { y: 153, control: proxy.efficiencyTF },
-                    { y: 173, width: DL_WIDTH, control: proxy.maxExpDL },
-                    { y: 190, width: DL_WIDTH, control: proxy.maxKillDL },
-                    { y: 213, width: DL_WIDTH, control: proxy.totalKillDL },
-                    { y: 230, width: DL_WIDTH, control: proxy.totalDeadDL },
-                    { y: 247, width: DL_WIDTH, control: proxy.killRatioDL },
-                    { y: 270, width: DL_WIDTH, control: proxy.dealtDmgDL },
-                    { y: 287, width: DL_WIDTH, control: proxy.receivedDmgDL },
-                    { y: 304, width: DL_WIDTH, control: proxy.dmgRatioDL },
-                    { y: 324, control: proxy.avgResultsTF },
-                    { y: 344, width: DL_WIDTH, control: proxy.avgExpDL },
-                    { y: 361, width: DL_WIDTH, control: proxy.avgDmgDealtDL },
-                    { y: 378, width: DL_WIDTH, control: proxy.avgDmgReceivedDL },
-                    { y: 395, width: DL_WIDTH, control: proxy.avgKillsDL },
-                    { y: 412, width: DL_WIDTH, control: proxy.avgDetectedDL },
-                    { y: 429, width: DL_WIDTH, control: specificDamage },       // vehicle only
-                    { y: 429, width: DL_WIDTH, control: avgCaptureDL },         // summary only
-                    { y: 446, width: DL_WIDTH, control: avgDefenceDL }          // summary only
+                    { y: 60,  width: DL_WIDTH, control: proxy.battlesDL },
+                    { y: 77,  width: DL_WIDTH, control: proxy.winsDL },
+                    { y: 94,  width: DL_WIDTH, control: proxy.defeatsDL },
+                    { y: 111, width: DL_WIDTH, control: proxy.surviveDL },
+                    { y: 128, width: DL_WIDTH, control: proxy.accuracyDL },
+                    { y: 148, control: proxy.efficiencyTF },
+                    { y: 168, width: DL_WIDTH, control: proxy.maxExpDL },
+                    { y: 185, width: DL_WIDTH, control: proxy.maxKillDL },
+                    { y: 202, width: DL_WIDTH, control: maxDamageDL },
+                    { y: 224, width: DL_WIDTH, control: proxy.totalKillDL },
+                    { y: 241, width: DL_WIDTH, control: proxy.totalDeadDL },
+                    { y: 258, width: DL_WIDTH, control: proxy.killRatioDL },
+                    { y: 280, width: DL_WIDTH, control: proxy.dealtDmgDL },
+                    { y: 297, width: DL_WIDTH, control: proxy.receivedDmgDL },
+                    { y: 314, width: DL_WIDTH, control: proxy.dmgRatioDL },
+                    { y: 334, control: proxy.avgResultsTF },
+                    { y: 354, width: DL_WIDTH, control: proxy.avgExpDL },
+                    { y: 371, width: DL_WIDTH, control: proxy.avgDmgDealtDL },
+                    { y: 388, width: DL_WIDTH, control: proxy.avgDmgReceivedDL },
+                    { y: 405, width: DL_WIDTH, control: proxy.avgKillsDL },
+                    { y: 422, width: DL_WIDTH, control: proxy.avgDetectedDL },
+                    { y: 439, width: DL_WIDTH, control: specDamageDL },         // vehicle only
+                    { y: 439, width: DL_WIDTH, control: avgCaptureDL },         // summary only
+                    { y: 456, width: DL_WIDTH, control: avgDefenceDL }          // summary only
                     //{ y: 463, width: DL_WIDTH, control: proxy.avgScoutingDmgDL }
                 ];
 
@@ -102,13 +104,10 @@ package xvm.profile.components
                     return;
 
                 var vehId:int = page.listComponent.selectedItem.id;
-                if (vehId != 0)
-                    ratingTF.htmlText = "";
 
                 //Logger.add("vehId: " + vehId)
 
                 setupControls();
-                clearTextFields();
 
                 if (page && page.battlesDropdown && (page.battlesDropdown.selectedItem == PROFILE.PROFILE_DROPDOWN_LABELS_TEAM))
                     return;
@@ -190,21 +189,22 @@ package xvm.profile.components
             ratingTF.styleSheet = Utils.createTextStyleSheet("txt", tf);
             proxy.addChild(ratingTF);
 
-            specificDamage = Utils.cloneDashLineTextItem(proxy.avgDmgReceivedDL);
-            specificDamage.label = Locale.get("Specific damage (Avg dmg / HP)");
-            specificDamage.y += 17;
-            specificDamage.visible = false;
-            proxy.addChild(specificDamage);
+            maxDamageDL = Utils.cloneDashLineTextItem(proxy.battlesDL);
+            maxDamageDL.label = Locale.get("Maximum damage");
+            proxy.addChild(maxDamageDL);
 
-            avgCaptureDL = Utils.cloneDashLineTextItem(specificDamage);
+            specDamageDL = Utils.cloneDashLineTextItem(proxy.battlesDL);
+            specDamageDL.label = Locale.get("Specific damage (Avg dmg / HP)");
+            specDamageDL.visible = false;
+            proxy.addChild(specDamageDL);
+
+            avgCaptureDL = Utils.cloneDashLineTextItem(proxy.battlesDL);
             avgCaptureDL.label = Locale.get("Capture points");
-            avgCaptureDL.y += 17;
             avgCaptureDL.visible = false;
             proxy.addChild(avgCaptureDL);
 
-            avgDefenceDL = Utils.cloneDashLineTextItem(avgCaptureDL);
+            avgDefenceDL = Utils.cloneDashLineTextItem(proxy.battlesDL);
             avgDefenceDL.label = Locale.get("Defence points");
-            avgDefenceDL.y += 17;
             avgDefenceDL.visible = false;
             proxy.addChild(avgDefenceDL);
         }
@@ -263,6 +263,8 @@ package xvm.profile.components
 
         private function updateCommonData(data:DossierBase):void
         {
+            clearTextFields();
+
             if (data == null)
                 data = new DossierBase({});
 
@@ -287,6 +289,8 @@ package xvm.profile.components
 
             proxy.maxExpDL.value = color(App.utils.locale.integer(data.maxXP));
             proxy.maxKillDL.value = color(App.utils.locale.integer(data.maxFrags));
+            maxDamageDL.value = data.maxDamage <= 0 ? color("--", Defines.UICOLOR_GOLD2)
+                : color(size(App.utils.locale.integer(data.maxDamage), 12));
 
             proxy.totalKillDL.value = color(App.utils.locale.integer(data.frags));
             proxy.totalDeadDL.value = color(App.utils.locale.integer(data.deaths));
@@ -295,7 +299,7 @@ package xvm.profile.components
 
             proxy.killRatioDL.enabled = true;
             ratio = data.deaths <= 0 ? "--" : App.utils.locale.numberWithoutZeros(data.frags / data.deaths);
-            proxy.killRatioDL.value = color(ratio, 0xCBAD78);
+            proxy.killRatioDL.value = color(ratio, Defines.UICOLOR_GOLD2);
 
             proxy.dealtDmgDL.value = color(App.utils.locale.integer(data.damageDealt));
 
@@ -303,7 +307,7 @@ package xvm.profile.components
 
             proxy.dmgRatioDL.enabled = true;
             ratio = data.damageReceived <= 0 ? "--" : App.utils.locale.numberWithoutZeros(data.damageDealt / data.damageReceived);
-            proxy.dmgRatioDL.value = color(ratio, 0xCBAD78);
+            proxy.dmgRatioDL.value = color(ratio, Defines.UICOLOR_GOLD2);
 
             proxy.avgExpDL.value = color(App.utils.locale.integer(data.avgXP));
             proxy.avgDmgDealtDL.value = color(App.utils.locale.integer(data.avgDamageDealt));
@@ -316,9 +320,8 @@ package xvm.profile.components
             TF(proxy.avgDmgDealtDL).htmlText = "";
             TF(proxy.avgKillsDL).htmlText = "";
             TF(proxy.avgDetectedDL).htmlText = "";
-            specificDamage.value = "";
-            TF(specificDamage).htmlText = "";
-            proxy.avgScoutingDmgDL.value = "Will be implemented...";
+
+            //proxy.avgScoutingDmgDL.value = "Will be implemented...";
         }
 
         private function updateSummaryData():void
@@ -334,8 +337,10 @@ package xvm.profile.components
 
             TF(proxy.maxExpDL).htmlText = formatHtmlText(data.maxXPVehicleName, Defines.UICOLOR_GOLD2);
             TF(proxy.maxKillDL).htmlText = formatHtmlText(data.maxFragsVehicleName, Defines.UICOLOR_GOLD2);
+            TF(maxDamageDL).htmlText = formatHtmlText(size(data.maxDamageVehicleName, 12), Defines.UICOLOR_GOLD2);
 
-            specificDamage.visible = false;
+            specDamageDL.visible = false;
+            TF(specDamageDL).htmlText = "";
 
             avgCaptureDL.visible = data.stat != null;
             avgDefenceDL.visible = data.stat != null;
@@ -416,12 +421,12 @@ package xvm.profile.components
 
             // specific damage
             var specDmg:Number = data.avgDamageDealt / vdata.hpTop;
-            specificDamage.visible = true;
-            specificDamage.value = color(size(App.utils.locale.numberWithoutZeros(specDmg), 12));
+            specDamageDL.visible = true;
+            specDamageDL.value = color(size(App.utils.locale.numberWithoutZeros(specDmg), 12));
 
             if (vdata.avg.E)
             {
-                TF(specificDamage).htmlText = formatHtmlText(size(
+                TF(specDamageDL).htmlText = formatHtmlText(size(
                     Locale.get("avg") + ": " + color(App.utils.locale.numberWithoutZeros(vdata.avg.E), Defines.UICOLOR_GOLD) +
                     " " + Locale.get("top") + ": " + color(App.utils.locale.numberWithoutZeros(vdata.top.E), Defines.UICOLOR_GOLD),
                     12), Defines.UICOLOR_DEFAULT2);
