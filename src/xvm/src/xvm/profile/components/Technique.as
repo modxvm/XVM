@@ -93,10 +93,20 @@ package xvm.profile.components
 
             list.removeEventListener(TechniqueList.SELECTED_DATA_CHANGED, listSelectedDataChanged);
 
+            initializeTechniqueStatisticTab();
+        }
+
+        private function initializeTechniqueStatisticTab():void
+        {
             try
             {
-                // TechniqueStatisticTab
+                Logger.add("initializeTechniqueStatisticTab");
                 var data:Array = page.stackComponent.buttonBar.dataProvider as Array;
+                if (data == null || data.length == 0 || !(data[0].hasOwnProperty("linkage")))
+                {
+                    App.utils.scheduler.envokeInNextFrame(initializeTechniqueStatisticTab);
+                    return;
+                }
                 data[0].linkage = getQualifiedClassName(UI_TechniqueStatisticTab);
                 page.stackComponent.buttonBar.selectedIndex = -1;
                 page.stackComponent.buttonBar.selectedIndex = 0;

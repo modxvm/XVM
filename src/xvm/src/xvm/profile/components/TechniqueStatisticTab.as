@@ -190,7 +190,7 @@ package xvm.profile.components
             proxy.addChild(ratingTF);
 
             maxDamageDL = Utils.cloneDashLineTextItem(proxy.battlesDL);
-            maxDamageDL.label = Locale.get("Maximum damage");
+            maxDamageDL.label = Locale.get("Maximum damage") + " (0.8.8+)";
             proxy.addChild(maxDamageDL);
 
             specDamageDL = Utils.cloneDashLineTextItem(proxy.battlesDL);
@@ -289,7 +289,7 @@ package xvm.profile.components
 
             proxy.maxExpDL.value = color(App.utils.locale.integer(data.maxXP));
             proxy.maxKillDL.value = color(App.utils.locale.integer(data.maxFrags));
-            maxDamageDL.value = data.maxDamage <= 0 ? color("--", Defines.UICOLOR_GOLD2)
+            maxDamageDL.value = data.maxDamage <= 0 ? color(size("--", 12), Defines.UICOLOR_GOLD2)
                 : color(size(App.utils.locale.integer(data.maxDamage), 12));
 
             proxy.totalKillDL.value = color(App.utils.locale.integer(data.frags));

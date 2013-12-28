@@ -28,6 +28,23 @@ package com.xvm.types.dossier
         public var capture:int;
         public var defence:int;
 
+        public var frags8p:int; // what is this?
+
+        public var xpBefore8_8:int;
+        public var battlesBefore8_8:int;
+
+        // Total2
+
+        public var originalXP:int; // what is start point?
+        public var damageAssistedTrack:int; // what is start point?
+        public var damageAssistedRadio:int; // what is start point?
+        public var shotsReceived:int; // what is start point?
+        public var noDamageShotsReceived:int; // what is start point?
+        public var piercedReceived:int; // what is start point?
+        public var heHitsReceived:int; // what is start point?
+        public var he_hits:int; // what is start point?
+        public var pierced:int; // what is start point?
+
         // Max
         public var maxXP:int;
         public var maxFrags:int;
@@ -60,14 +77,25 @@ package com.xvm.types.dossier
         public function get avgDamageReceived():Number { return _ratio(damageReceived, battles); }
         public function get avgFrags():Number { return _ratio(frags, battles); }
         public function get avgSpotted():Number { return _ratio(spotted, battles); }
-        //public function get avgFrags:Number = 0;
-        //public function get avgEnemiesSpotted:Number = 0;
-        //public var avgDamageDealt:Number = 0;
-        //public var avgDamageReceived:Number = 0;
 
-        //public var avgBattleLifeTime:Number = 0; // *** TODO
-        //public var avgMileage:Number = 0; // *** TODO
-        //public var avgTreesCut:Number = 0; // *** TODO
+        // Other
+        public function get battlesAfter8_8():Number { return battles - battlesBefore8_8; }
+        public function get xpAfter8_8():Number { return xp - xpBefore8_8; }
+
+        public function get avgXP_8_8():Number { return _ratio(xpAfter8_8, battlesAfter8_8); }
+        public function get avgOriginalXP_8_8():Number { return _ratio(originalXP, battlesAfter8_8); }
+        public function get damageAssistedTrack_8_8():Number { return _ratio(damageAssistedTrack, battlesAfter8_8); }
+        public function get damageAssistedRadio_8_8():Number { return _ratio(damageAssistedRadio, battlesAfter8_8); }
+        public function get shotsReceived_8_8():Number { return _ratio(shotsReceived, battlesAfter8_8); }
+        public function get noDamageShotsReceived_8_8():Number { return _ratio(noDamageShotsReceived, battlesAfter8_8); }
+        public function get piercedReceived_8_8():Number { return _ratio(piercedReceived, battlesAfter8_8); }
+        public function get heHitsReceived_8_8():Number { return _ratio(heHitsReceived, battlesAfter8_8); }
+        public function get he_hits_8_8():Number { return _ratio(he_hits, battlesAfter8_8); }
+        public function get pierced_8_8():Number { return _ratio(pierced, battlesAfter8_8); }
+
+        public function avgBattleLifeTime():Number { return _ratio(battleLifeTime, battles); }
+        public function avgMileage_8_8():Number { return _ratio(mileage, battlesAfter8_8); }
+        public function avgTreesCut_8_8():Number { return _ratio(treesCut, battlesAfter8_8); }
 
         // PRIVATE
 

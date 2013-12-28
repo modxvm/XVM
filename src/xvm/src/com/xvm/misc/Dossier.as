@@ -56,10 +56,14 @@ package com.xvm.misc
         {
             try
             {
+                //Logger.add(str);
+
                 var key:String = playerId + "," + vehId;
 
                 var data:Object = JSONx.parse(str);
+
                 //Logger.addObject(data, 3, key);
+
                 var dossier:* = (vehId == 0)
                     ? new AccountDossier(data)
                     : new VehicleDossier(data);

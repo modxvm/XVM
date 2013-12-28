@@ -15,11 +15,11 @@ package com.xvm.types.dossier
             super(data);
 
             if (data.maxXPVehId)
-                _maxXPVehicleName = VehicleInfo.get(maxXPVehId).localizedName;
+                _maxXPVehicleName = VehicleInfo.get(maxXPVehId).localizedFullName;
             if (data.maxFragsVehId)
-                _maxFragsVehicleName = VehicleInfo.get(maxFragsVehId).localizedName;
+                _maxFragsVehicleName = VehicleInfo.get(maxFragsVehId).localizedFullName;
             if (data.maxDamageVehId)
-                _maxDamageVehicleName = VehicleInfo.get(maxDamageVehId).localizedName;
+                _maxDamageVehicleName = VehicleInfo.get(maxDamageVehId).localizedFullName;
 
             vehicles = {};
             for (var vehId:String in vehiclesData)
@@ -32,6 +32,9 @@ package com.xvm.types.dossier
         public var maxXPVehId:int;
         public var maxFragsVehId:int;
         public var maxDamageVehId:int;
+
+        public var creationTime:uint;
+        public var lastBattleTime:uint;
 
         public var vehicles:Object;
 

@@ -8,7 +8,6 @@ package xvm.profile
     import com.xvm.infrastructure.*;
     import com.xvm.misc.*;
     import com.xvm.utils.*;
-    import flash.display.MovieClip;
     import flash.events.*;
     import flash.utils.*;
     import net.wg.gui.components.windows.*;
@@ -20,7 +19,6 @@ package xvm.profile
     import net.wg.gui.lobby.window.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
-    import scaleform.clik.data.DataProvider;
     import scaleform.clik.events.*;
     import xvm.profile.components.*;
 
@@ -66,7 +64,11 @@ package xvm.profile
             if (e.view is ProfileSummary)
             {
                 summaryPage = e.view as ProfileSummary;
-                // TODO: FIXIT: initializeStartPage();
+                if (!_startPageInitialized)
+                {
+                    _startPageInitialized = true;
+                    App.utils.scheduler.envokeInNextFrame(initializeStartPage);
+                }
                 return;
             }
 
@@ -103,23 +105,8 @@ package xvm.profile
 
         public function initializeStartPage():void
         {
-            if (_startPageInitialized)
-                return;
-
             if (!summaryPage)
                 return;
-
-            // Wait for summary page data loaded
-            if ((summaryPage.footer as UserDateFooter).textDates.htmlText == "")
-            {
-                setTimeout(initializeStartPage, 10); // Start page have strange behavior when using App.utils.scheduler.envokeInNextFrame()
-                return;
-            }
-
-            //Logger.addObject(summaryPage);
-            //Logger.addObject(tabNavigator.viewStack.cachedViews, 2);
-
-            _startPageInitialized = true;
 
             var index:int = Config.config.userInfo.startPage - 1;
             if (index > 0)
