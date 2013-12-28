@@ -100,7 +100,6 @@ package xvm.profile.components
         {
             try
             {
-                Logger.add("initializeTechniqueStatisticTab");
                 var data:Array = page.stackComponent.buttonBar.dataProvider as Array;
                 if (data == null || data.length == 0 || !(data[0].hasOwnProperty("linkage")))
                 {

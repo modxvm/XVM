@@ -23,7 +23,7 @@ package xvm.profile.components
         private var cache:Dictionary;
         private var controlsMap:Dictionary;
         private var controls:Array;
-        private var ratingTF:TextField;
+        public var ratingTF:TextField;
         private var maxDamageDL:DashLineTextItem;
         private var specDamageDL:DashLineTextItem;
         private var avgCaptureDL:DashLineTextItem;
@@ -127,9 +127,9 @@ package xvm.profile.components
             }
         }
 
-        // PRIVATE
+        // PUBLIC
 
-        private function get page():ProfileTechnique
+        public function get page():ProfileTechnique
         {
             try
             {
@@ -140,6 +140,8 @@ package xvm.profile.components
             }
             return null;
         }
+
+        // PRIVATE
 
         private function get tech():Technique
         {
@@ -228,7 +230,7 @@ package xvm.profile.components
             }
         }
 
-        private function clearTextFields():void
+        public function clearTextFields():void
         {
             for each (var c:* in controls)
             {

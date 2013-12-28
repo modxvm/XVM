@@ -29,7 +29,13 @@ package xvm.profile.UI
 
         override public function update(arg1:Object):void
         {
-            //super.update(arg1);
+            if (worker.page && worker.page.battlesDropdown && (worker.page.battlesDropdown.selectedItem == PROFILE.PROFILE_DROPDOWN_LABELS_TEAM))
+            {
+                worker.ratingTF.htmlText = "";
+                worker.clearTextFields();
+                super.update(arg1);
+                return;
+            }
 
             if(!isDataInitialized)
             {
