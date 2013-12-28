@@ -1,9 +1,10 @@
 package xvm.profile.UI
 {
+    import com.xvm.*;
+    import fl.transitions.easing.Strong;
     import net.wg.gui.lobby.profile.pages.technique.data.ProfileVehicleDossierVO;
     import net.wg.gui.utils.ExcludeTweenManager;
     import xvm.profile.components.TechniqueStatisticTab;
-    import fl.transitions.easing.Strong;
     import scaleform.clik.motion.Tween;
 
     public dynamic class UI_TechniqueStatisticTab extends TechniqueStatisticTab_UI
@@ -32,10 +33,17 @@ package xvm.profile.UI
             if (worker.page && worker.page.battlesDropdown && (worker.page.battlesDropdown.selectedItem == PROFILE.PROFILE_DROPDOWN_LABELS_TEAM))
             {
                 worker.ratingTF.htmlText = "";
+                worker.maxDamageDL.labelTextField.textColor = Defines.UICOLOR_DISABLED;
+                worker.maxDamageDL.value = "<font color='#" + Defines.UICOLOR_DISABLED.toString(16) + "' size='12'>--</font>";
+                worker.specDamageDL.visible = false;
+                worker.avgCaptureDL.visible = false;
+                worker.avgDefenceDL.visible = false;
                 worker.clearTextFields();
                 super.update(arg1);
                 return;
             }
+
+            worker.maxDamageDL.labelTextField.textColor = Defines.UICOLOR_LABEL;
 
             if(!isDataInitialized)
             {

@@ -48,7 +48,8 @@ package com.xvm.misc
             var key:String = playerId + "," + vehId;
             if (_requests[key] == null)
                 _requests[key] = [];
-            _requests[key].push( { target: target, callback: callback } );
+            if (callback != null)
+                _requests[key].push( { target: target, callback: callback } );
             Cmd.getDossier(playerId == 0 ? null : playerId.toString(), vehId == 0 ? null : vehId.toString());
         }
 

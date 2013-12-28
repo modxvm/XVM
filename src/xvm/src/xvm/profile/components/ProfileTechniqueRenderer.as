@@ -34,7 +34,7 @@ package xvm.profile.components
             proxy.vehicleTF.x = isSummary ? 121 : 166;
             proxy.vehicleTF.width = 200;
 
-            proxy.vehicleTF.textColor = Defines.UICOLOR_DEFAULT;
+            proxy.vehicleTF.textColor = Defines.UICOLOR_VALUE;
             if (!isSummary)
             {
                 var vdata:VehicleData = VehicleInfo.get(proxy.data.id);

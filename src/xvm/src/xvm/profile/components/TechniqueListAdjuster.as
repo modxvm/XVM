@@ -75,8 +75,6 @@ package xvm.profile.components
                 return;
             if (tech.accountDossier == null)
                 return;
-            if (!page.battlesDropdown)
-                return;
             if (!page.battlesDropdown || page.battlesDropdown.selectedItem == PROFILE.PROFILE_DROPDOWN_LABELS_TEAM)
                 return;
 
@@ -106,6 +104,8 @@ package xvm.profile.components
 
         private function sortDirectionChanged(e:Event):void
         {
+            if (!page.battlesDropdown || page.battlesDropdown.selectedItem == PROFILE.PROFILE_DROPDOWN_LABELS_TEAM)
+                return;
             //Logger.add("sortDirectionChanged");
             e.stopImmediatePropagation(); // do not call original sorting
             sortList(e.target as SortingButton);

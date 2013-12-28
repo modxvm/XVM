@@ -99,7 +99,7 @@ package xvm.profile.components
             l.y = y;
             l.autoSize = TextFieldAutoSize.LEFT;
             l.height = 17;
-            l.defaultTextFormat = new TextFormat("$FieldFont", 12, Defines.UICOLOR_DEFAULT2);
+            l.defaultTextFormat = new TextFormat("$FieldFont", 12, Defines.UICOLOR_LABEL);
             l.text = Locale.get(label);
             return l;
         }

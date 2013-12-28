@@ -227,16 +227,27 @@ package com.xvm.utils
 
         public static function cloneDashLineTextItem(dl:DashLineTextItem):DashLineTextItem
         {
-            var clone:DashLineTextItem = App.utils.classFactory.getComponent("DashLineTextItem_UI", DashLineTextItem);
-            clone.x = dl.x;
-            clone.y = dl.y;
-            clone.width = dl.width;
-            clone.height = dl.height;
-            clone.labelTextField.defaultTextFormat = dl.labelTextField.defaultTextFormat;
-            clone.valueTextField.defaultTextFormat = dl.valueTextField.defaultTextFormat;
-            clone.label = dl.label;
-            clone.value = dl.value;
+            var clone:DashLineTextItem = App.utils.classFactory.getComponent("DashLineTextItem_UI", DashLineTextItem,
+                {
+                    x:dl.x,
+                    y:dl.y,
+                    width: dl.width,
+                    height: dl.height,
+                    label: dl.label,
+                    value: dl.value
+                });
+
+            clone.labelTextField.defaultTextFormat = cloneTextFormat(dl.labelTextField.defaultTextFormat);
+            clone.valueTextField.defaultTextFormat = cloneTextFormat(dl.valueTextField.defaultTextFormat);
+
             return clone;
+        }
+
+        public static function cloneTextFormat(textFormat:TextFormat):TextFormat
+        {
+            return new TextFormat(textFormat.font, textFormat.size, textFormat.color, textFormat.bold,
+                textFormat.italic, textFormat.underline, textFormat.url, textFormat.target, textFormat.align,
+                textFormat.leftMargin, textFormat.rightMargin, textFormat.indent, textFormat.leading);
         }
 
         public static function createTextStyleSheet(name:String, textFormat:TextFormat):StyleSheet
@@ -244,79 +255,6 @@ package com.xvm.utils
             return Utils.createStyleSheet(Utils.createCSS(name, textFormat.color,
                 textFormat.font, textFormat.size, textFormat.align, textFormat.bold, textFormat.italic));
         }
-
-        /*public static function createButton(mc:Sprite, name:String, _x:Number, _y:Number, txt:String, align:String):ButtonNormal
-        {
-            var b:ButtonNormal = mc.addChild(new ButtonNormal()) as ButtonNormal;
-            b.x = _x;
-            b.y = _y;
-			b.autoSize = align;
-            b.label = txt;
-			
-			b.addEventListener("rollOver", showTooltip);
-            b.addEventListener("rollOut", hideTooltip);
-            return b;
-        }*/
-
-        /*public static function createRadioButton(mc:Sprite, name:String, _x:Number, _y:Number, _width:Number, txt:String, group:String, align:String):RadioButton
-        {
-            var b:RadioButton = mc.addChild(new RadioButton()) as RadioButton;
-            b.x = _x;
-            b.y = _y;
-            b.autoSize = "none";
-            b.width = _width;
-            b.label = txt;
-			b.groupName = group;
-			b.autoSize = align;
-
-            b.addEventListener("rollOver", showTooltip);
-            b.addEventListener("rollOut", hideTooltip);
-
-            return b;
-        }*/
-
-        /*public static function createCheckBox(mc:Sprite, name:String, _x:Number, _y:Number, txt:String, align:String):CheckBox
-        {
-			var b:CheckBox = mc.addChild(new CheckBox()) as CheckBox;
-
-            b.x = _x;
-            b.y = _y;
-            b.autoSize = align;
-            b.label = txt;
-
-            b.addEventListener("rollOver", showTooltip);
-            b.addEventListener("rollOut", hideTooltip);
-
-            return b;
-        }*/
-
-        /*public static function createTextInput(mc:Sprite, name:String, _x:Number, _y:Number, _width:Number):TextInput
-        {
-			var c:TextInput = mc.addChild(new TextInput()) as TextInput;
-            c.x = _x;
-            c.y = _y;
-            c.width = _width;
-            return c;
-        }*/
-
-        /*
-        public static function duplicateButton(src:Object, name:String, offsetX:Number, offsetY:Number,
-            text:String, iconSource:String, toolTip:String):MovieClip
-        {
-            var mc = src.duplicateMovieClip(name, 0);
-            mc._x = src._x + offsetX;
-            mc._y = src._y + offsetY;
-            mc._autoSize = true;
-            mc._iconSource = iconSource;
-            mc.tooltipText = toolTip;
-
-            mc.addEventListener("rollOver", showTooltip);
-            mc.addEventListener("rollOut", hideTooltip);
-
-            mc.configUI();
-
-            return mc;
-        }*/
 
         public static function addEventListeners(obj:Object, target:Object, handlers:Object):void
         {
@@ -335,10 +273,9 @@ package com.xvm.utils
 
         private static function hideTooltip(e:Object):void
         {
-			App.toolTipMgr.hide();
-            //net.wargaming.managers.ToolTipManager.instance.hide();
+            App.toolTipMgr.hide();
         }
-		
+
         /**
          * Create DropShadowFilter from config section
          */

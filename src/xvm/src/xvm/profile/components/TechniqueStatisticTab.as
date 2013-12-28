@@ -24,10 +24,12 @@ package xvm.profile.components
         private var controlsMap:Dictionary;
         private var controls:Array;
         public var ratingTF:TextField;
-        private var maxDamageDL:DashLineTextItem;
-        private var specDamageDL:DashLineTextItem;
-        private var avgCaptureDL:DashLineTextItem;
-        private var avgDefenceDL:DashLineTextItem;
+        public var maxDamageDL:DashLineTextItem;
+        public var maxDamageDLLabelTextFormat:TextFormat;
+        public var maxDamageDLValueTextFormat:TextFormat;
+        public var specDamageDL:DashLineTextItem;
+        public var avgCaptureDL:DashLineTextItem;
+        public var avgDefenceDL:DashLineTextItem;
 
         // ENTRY POINTS
 
@@ -187,7 +189,7 @@ package xvm.profile.components
             ratingTF.y = proxy.battlesDL.y - 62;
             ratingTF.width = 400;
             ratingTF.height = 80;
-            var tf:TextFormat = new TextFormat("$FieldFont", 16, Defines.UICOLOR_DEFAULT2);
+            var tf:TextFormat = new TextFormat("$FieldFont", 16, Defines.UICOLOR_LABEL);
             ratingTF.styleSheet = Utils.createTextStyleSheet("txt", tf);
             proxy.addChild(ratingTF);
 
@@ -271,7 +273,7 @@ package xvm.profile.components
                 data = new DossierBase({});
 
             proxy.battlesDL.value = color(App.utils.locale.integer(data.battles));
-            TF(proxy.battlesDL).htmlText = formatHtmlText(getWinsToNextPercentStr(data), Defines.UICOLOR_DEFAULT2);
+            TF(proxy.battlesDL).htmlText = formatHtmlText(getWinsToNextPercentStr(data), Defines.UICOLOR_LABEL);
 
             var ratingColor:int = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, Math.round(data.winPercent));
             proxy.winsDL.value = color(App.utils.locale.integer(data.wins));
@@ -282,7 +284,7 @@ package xvm.profile.components
                 color(App.utils.locale.numberWithoutZeros(data.lossPercent) + "%", Defines.UICOLOR_GOLD) +
                 " " + Locale.get("draws") + ": " + color(App.utils.locale.integer(data.draws), Defines.UICOLOR_GOLD) +
                 " (" + color(App.utils.locale.numberWithoutZeros(data.drawsPercent) + "%", Defines.UICOLOR_GOLD) + ")",
-                Defines.UICOLOR_DEFAULT2);
+                Defines.UICOLOR_LABEL);
 
             proxy.surviveDL.value = color(App.utils.locale.integer(data.survived));
             TF(proxy.surviveDL).htmlText = formatHtmlText(App.utils.locale.numberWithoutZeros(data.survivePercent) + "%", Defines.UICOLOR_GOLD);
@@ -382,7 +384,7 @@ package xvm.profile.components
                 TF(proxy.winsDL).htmlText += formatHtmlText(
                     " " + Locale.get("avg") + ": " + color(App.utils.locale.numberWithoutZeros(vdata.avg.R * 100), colorAvg) +
                     " " + Locale.get("top") + ": " + color(App.utils.locale.numberWithoutZeros(vdata.top.R * 100), colorTop),
-                    Defines.UICOLOR_DEFAULT2);
+                    Defines.UICOLOR_LABEL);
             }
 
             // survival
@@ -391,7 +393,7 @@ package xvm.profile.components
                 TF(proxy.surviveDL).htmlText += formatHtmlText(
                     " " + Locale.get("avg") + ": " + color(App.utils.locale.numberWithoutZeros(vdata.avg.U * 100), Defines.UICOLOR_GOLD) +
                     " " + Locale.get("top") + ": " + color(App.utils.locale.numberWithoutZeros(vdata.top.U * 100), Defines.UICOLOR_GOLD),
-                    Defines.UICOLOR_DEFAULT2);
+                    Defines.UICOLOR_LABEL);
             }
 
             // dmg
@@ -400,7 +402,7 @@ package xvm.profile.components
                 TF(proxy.avgDmgDealtDL).htmlText = formatHtmlText(
                     Locale.get("avg") + ": " + color(App.utils.locale.numberWithoutZeros(vdata.avg.D), Defines.UICOLOR_GOLD) +
                     " " + Locale.get("top") + ": " + color(App.utils.locale.numberWithoutZeros(vdata.top.D), Defines.UICOLOR_GOLD),
-                    Defines.UICOLOR_DEFAULT2);
+                    Defines.UICOLOR_LABEL);
             }
 
             // frags
@@ -409,7 +411,7 @@ package xvm.profile.components
                 TF(proxy.avgKillsDL).htmlText = formatHtmlText(
                     Locale.get("avg") + ": " + color(App.utils.locale.numberWithoutZeros(vdata.avg.F), Defines.UICOLOR_GOLD) +
                     " " + Locale.get("top") + ": " + color(App.utils.locale.numberWithoutZeros(vdata.top.F), Defines.UICOLOR_GOLD),
-                    Defines.UICOLOR_DEFAULT2);
+                    Defines.UICOLOR_LABEL);
             }
 
             // spotted
@@ -418,7 +420,7 @@ package xvm.profile.components
                 TF(proxy.avgDetectedDL).htmlText = formatHtmlText(
                     Locale.get("avg") + ": " + color(App.utils.locale.numberWithoutZeros(vdata.avg.S), Defines.UICOLOR_GOLD) +
                     " " + Locale.get("top") + ": " + color(App.utils.locale.numberWithoutZeros(vdata.top.S), Defines.UICOLOR_GOLD),
-                    Defines.UICOLOR_DEFAULT2);
+                    Defines.UICOLOR_LABEL);
             }
 
             // specific damage
@@ -431,7 +433,7 @@ package xvm.profile.components
                 TF(specDamageDL).htmlText = formatHtmlText(size(
                     Locale.get("avg") + ": " + color(App.utils.locale.numberWithoutZeros(vdata.avg.E), Defines.UICOLOR_GOLD) +
                     " " + Locale.get("top") + ": " + color(App.utils.locale.numberWithoutZeros(vdata.top.E), Defines.UICOLOR_GOLD),
-                    12), Defines.UICOLOR_DEFAULT2);
+                    12), Defines.UICOLOR_LABEL);
             }
 
             avgCaptureDL.visible = false;
