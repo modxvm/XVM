@@ -4,7 +4,7 @@
 {
   "locale": {
     // Author of translation
-    "XVM_translator": "yhpdoit, PFN",
+    "XVM_translator": "PFN",
 
     // Ping
     "Initialization": "시작 중",
@@ -18,7 +18,7 @@
     "global": "전역 수치",
     "per-vehicle": "전차별 수치",
     "chanceExperimental": "실시간 승률(실험적)",
-    "chanceBattleTier": "탑티어",
+    "chanceBattleTier": "티어",
 
     // Hitlog
     "attack": "명중",
@@ -54,6 +54,7 @@
     "Load statistics": "통계 불러오기",
 
     // UserInfo
+    "General stats": "일반 통계",	
     "Summary": "요약",
     "Avg level": "평균 티어",
     "WN6": "WN6",
@@ -76,6 +77,8 @@
     // Squad
     "Vehicle": "전차",
     "Battle tiers": "배틀 티어",
+    "Type": "타입",
+    "Nation": "국가",	
     "ussr": "소련",
     "germany": "독일",
     "usa": "미국",
