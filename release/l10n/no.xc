@@ -64,6 +64,7 @@
     "avg": "gj.sn.",
     "top": "topp",
     "draws": "uavgjorte",
+    "Maximum damage": "Maksimal skade",
     "Specific damage (Avg dmg / HP)": "Spesifikk skade (Gj.sn. skade / HP)",
     "Capture points": "Overtakelsepoeng",
     "Defence points": "Forsvarspoeng",

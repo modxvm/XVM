@@ -64,6 +64,7 @@
     "avg": "genomsn.",
     "top": "topp",
     "draws": "oavgjorda",
+    "Maximum damage": "Maximal skada",
     "Specific damage (Avg dmg / HP)": "Specifik skada (Genomsn. skada / HP)",
     "Capture points": "Erövringspoäng",
     "Defence points": "Försvarspoäng",

@@ -62,12 +62,13 @@
     "updated": "zaktualizowano",
     " to ": " do ",
     "avg": "średnie",
-    "top": "top",
+    "top": "najlepsze",
     "draws": "remisy",
+    "Maximum damage": "Maksymalne obrażenia",
     "Specific damage (Avg dmg / HP)": "Spec dmg (Średnie dmg / HP)",
     "Capture points": "Punkty okupacji",
     "Defence points": "Punkty obrony",
-    "Filter": "Filter",
+    "Filter": "Filtr",
 
     // Crew
     "PutOwnCrew": "Obsadź załogę (własna)",

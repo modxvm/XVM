@@ -10,7 +10,7 @@
     "Initialization": "Inicializācija",
 
     // BattleLoading
-    "New version available": "Pieejama jauna versija",
+    "New version available": "Pieejama jaunā versija",
 
     // Win chance
     "Chance error": "Kļūda aprēķinos",
@@ -42,20 +42,20 @@
 
     // BattleResults
     "Hit percent": "Trāpījumu procents",
-    "Damage (assisted / own)": "Bojājums (asistētie / paša)",
+    "Damage (assisted / own)": "Bojājumi (asistētie / paša)",
 
     // TeamRenderers
     "Friend": "Draugs",
-    "Ignored": "Ignorēt",
+    "Ignored": "Ignorētie",
     "unknown": "nezināms",
     "Fights": "Kaujas",
     "Wins": "Uzvaras",
-    "Data was updated at": "Dati tika atjaunināti",
+    "Data was updated at": "Dati tika atjaunoti",
     "Load statistics": "Ielādēt statistiku",
 
     // UserInfo
     "General stats": "Vispārējā statistika",
-    "Summary": "Rezūltātu kopsavilkums",
+    "Summary": "Rezultātu kopsavilkums",
     "Avg level": "Vid. līmenis",
     "WN6": "WN6",
     "EFF": "ER",
@@ -64,8 +64,9 @@
     "avg": "vid.",
     "top": "top",
     "draws": "neizšķirts",
-    "Specific damage (Avg dmg / HP)": "Sp. bojājumi(vid. bojājums / HP)",
-    "Capture points": "Ieņemšanas punkti",
+    "Maximum damage": "Maksimālais bojājums",
+    "Specific damage (Avg dmg / HP)": "Sp. bojājums (vid. bojājums / HP)",
+    "Capture points": "Iebrukuma punkti",
     "Defence points": "Aizsardzības punkti",
     "Filter": "Filtrs",
 
