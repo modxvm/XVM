@@ -50,14 +50,21 @@ class _Dossier(object):
             return
         self.req = self.queue.get()
         self.resp = None
-        self.thread = Thread(target=self.req['func'])
-        self.thread.start()
-        self._checkResult()
+
+        # not threaded
+        self.req['func']()
+        self._respond()
+        self.processQueue()
+
+        # threaded (DossierRequester is not thread-safe)
+        #self.thread = Thread(target=self.req['func'])
+        #self.thread.start()
+        #self._checkResult()
 
     def _checkResult(self):
         with self.lock:
             #debug("checkResult: " + ("no" if self.resp is None else "yes"))
-            self.thread.join(0.01) # 10 ms
+            #self.thread.join(0.01) # 10 ms
             if self.resp is None:
                 BigWorld.callback(0.05, self._checkResult)
                 return
