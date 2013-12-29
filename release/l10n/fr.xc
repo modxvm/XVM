@@ -64,6 +64,7 @@
     "avg": "moyenne",
     "top": "top",
     "draws": "égalités",
+    "Maximum damage": "Dégâts maximum",
     "Specific damage (Avg dmg / HP)": "Dégâts spec. (dégâts moyens / PV)",
     "Capture points": "Points de cap",
     "Defence points": "Points de def",
