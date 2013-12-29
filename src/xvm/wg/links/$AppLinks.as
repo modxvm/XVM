@@ -24,7 +24,7 @@ import net.wg.gui.lobby.header.*; TutorialControl;
 import net.wg.gui.lobby.hangar.*; Hangar;
 import net.wg.gui.lobby.hangar.crew.*; Crew; RecruitRendererVO; CrewItemRenderer;
 import net.wg.gui.lobby.battleloading.*; BattleLoading; PlayerItemRenderer;
-import net.wg.gui.lobby.battleResults.*; BattleResults; CommonStats;
+import net.wg.gui.lobby.battleResults.*; BattleResults; CommonStats; ProgressElement;
 import net.wg.gui.lobby.profile.*; Profile;
 import net.wg.gui.lobby.profile.components.*; UserDateFooter;
 import net.wg.gui.lobby.profile.pages.awards.*; ProfileAwards;
@@ -66,6 +66,7 @@ TechniqueStatisticTab_UI;
 
 // battleResults.swf
 BR_SubtaskComponent_UI;
+ProgressElement_UI;
 
 // TankCarousel.swf
 TankCarouselItemRendererUI;

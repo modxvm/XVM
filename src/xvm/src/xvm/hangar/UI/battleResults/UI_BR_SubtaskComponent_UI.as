@@ -1,12 +1,21 @@
 package xvm.hangar.UI.battleResults
 {
-
     import flash.events.Event;
     import flash.utils.*;
     import scaleform.clik.constants.InvalidationType;
+    import xvm.hangar.UI.battleResults.UI_ProgressElement_UI;
 
+    /**
+     * @author Pavel Máca
+     */
     public dynamic class UI_BR_SubtaskComponent_UI extends BR_SubtaskComponent_UI
     {
+        override protected function configUI():void
+        {
+            super.configUI();
+            this.progressList.linkage = getQualifiedClassName(UI_ProgressElement_UI);
+        }
+
         override protected function draw():void
         {
             super.draw();
