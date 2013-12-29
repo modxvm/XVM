@@ -33,7 +33,7 @@ class _Dossier(object):
 
         if self.vehId is None:
             if self.playerId is None:
-                dossier = g_itemsCache.items.getAccountDossier(self.playerId)
+                dossier = g_itemsCache.items.getAccountDossier()
             else:
                 plid = int(self.playerId)
                 container = g_itemsCache.items._ItemsRequester__itemsCache[GUI_ITEM_TYPE.ACCOUNT_DOSSIER]
@@ -53,11 +53,11 @@ class _Dossier(object):
         else:
             vid = int(self.vehId)
             if self.playerId is None:
-                dossier = g_itemsCache.items.getVehicleDossier(vid, self.playerId)
+                dossier = g_itemsCache.items.getVehicleDossier(vid)
             else:
                 plid = int(self.playerId)
                 container = g_itemsCache.items._ItemsRequester__itemsCache[GUI_ITEM_TYPE.VEHICLE_DOSSIER]
-                ddescr = container.get(plid, vid)
+                ddescr = container.get((plid, vid))
                 if ddescr is None:
                     ddescr = yield g_itemsCache.items.requestUserVehicleDossier(plid, vid)
                 from gui.shared.gui_items.dossier import VehicleDossier

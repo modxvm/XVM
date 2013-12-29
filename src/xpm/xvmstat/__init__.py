@@ -50,6 +50,10 @@ def FlashBeforeDelete(self):
     debug("FlashBeforeDelete: " + self.swf)
 
 
+def ProfileTechniqueWindowRequestData(base, self, data):
+    if data.vehicleId:
+        base(self, data)
+
 #####################################################################
 # Register events
 
@@ -62,5 +66,8 @@ RegisterEvent(Flash, 'beforeDelete', FlashBeforeDelete)
 def _RegisterEvents():
     import game
     RegisterEvent(game, 'handleKeyEvent', handleKeyEvent)
+
+    from gui.scaleform.daapi.view.lobby.profile import ProfileTechniqueWindow
+    OverrideMethod(ProfileTechniqueWindow, 'requestData', ProfileTechniqueWindowRequestData)
 
 BigWorld.callback(0.001, _RegisterEvents)

@@ -38,6 +38,9 @@ package xvm.profile.UI
                 worker.specDamageDL.visible = false;
                 worker.avgCaptureDL.visible = false;
                 worker.avgDefenceDL.visible = false;
+                winsPercentSign.visible = true;
+                defeatsPercentSign.visible = true;
+                survivePercentSign.visible = true;
                 worker.clearTextFields();
                 super.update(arg1);
                 return;

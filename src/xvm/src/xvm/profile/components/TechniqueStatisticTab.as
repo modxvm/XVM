@@ -273,23 +273,24 @@ package xvm.profile.components
                 data = new DossierBase({});
 
             proxy.battlesDL.value = color(App.utils.locale.integer(data.battles));
-            TF(proxy.battlesDL).htmlText = formatHtmlText(getWinsToNextPercentStr(data), Defines.UICOLOR_LABEL);
+            //TF(proxy.battlesDL).htmlText = formatHtmlText(getWinsToNextPercentStr(data), Defines.UICOLOR_LABEL);
 
             var ratingColor:int = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, Math.round(data.winPercent));
             proxy.winsDL.value = color(App.utils.locale.integer(data.wins));
-            TF(proxy.winsDL).htmlText = formatHtmlText(App.utils.locale.numberWithoutZeros(data.winPercent) + "%", ratingColor);
+            TF(proxy.winsDL).htmlText = formatHtmlText(App.utils.locale.float(data.winPercent) + "%", ratingColor) + "  " +
+                formatHtmlText(getWinsToNextPercentStr(data), Defines.UICOLOR_LABEL);
 
             proxy.defeatsDL.value = color(App.utils.locale.integer(data.losses));
             TF(proxy.defeatsDL).htmlText = formatHtmlText(
-                color(App.utils.locale.numberWithoutZeros(data.lossPercent) + "%", Defines.UICOLOR_GOLD) +
-                " " + Locale.get("draws") + ": " + color(App.utils.locale.integer(data.draws), Defines.UICOLOR_GOLD) +
-                " (" + color(App.utils.locale.numberWithoutZeros(data.drawsPercent) + "%", Defines.UICOLOR_GOLD) + ")",
+                color(App.utils.locale.float(data.lossPercent) + "%", Defines.UICOLOR_GOLD) +
+                "  " + Locale.get("draws") + ": " + color(App.utils.locale.integer(data.draws), Defines.UICOLOR_GOLD) +
+                " (" + color(App.utils.locale.float(data.drawsPercent) + "%", Defines.UICOLOR_GOLD) + ")",
                 Defines.UICOLOR_LABEL);
 
             proxy.surviveDL.value = color(App.utils.locale.integer(data.survived));
-            TF(proxy.surviveDL).htmlText = formatHtmlText(App.utils.locale.numberWithoutZeros(data.survivePercent) + "%", Defines.UICOLOR_GOLD);
+            TF(proxy.surviveDL).htmlText = formatHtmlText(App.utils.locale.float(data.survivePercent) + "%", Defines.UICOLOR_GOLD);
 
-            proxy.accuracyDL.value = color(App.utils.locale.numberWithoutZeros(data.hitsRatio * 100));
+            proxy.accuracyDL.value = color(App.utils.locale.float(data.hitsRatio * 100));
 
             proxy.maxExpDL.value = color(App.utils.locale.integer(data.maxXP));
             proxy.maxKillDL.value = color(App.utils.locale.integer(data.maxFrags));
@@ -302,7 +303,7 @@ package xvm.profile.components
             var ratio:String;
 
             proxy.killRatioDL.enabled = true;
-            ratio = data.deaths <= 0 ? "--" : App.utils.locale.numberWithoutZeros(data.frags / data.deaths);
+            ratio = data.deaths <= 0 ? "--" : App.utils.locale.float(data.frags / data.deaths);
             proxy.killRatioDL.value = color(ratio, Defines.UICOLOR_GOLD2);
 
             proxy.dealtDmgDL.value = color(App.utils.locale.integer(data.damageDealt));
@@ -310,14 +311,14 @@ package xvm.profile.components
             proxy.receivedDmgDL.value = color(App.utils.locale.integer(data.damageReceived));
 
             proxy.dmgRatioDL.enabled = true;
-            ratio = data.damageReceived <= 0 ? "--" : App.utils.locale.numberWithoutZeros(data.damageDealt / data.damageReceived);
+            ratio = data.damageReceived <= 0 ? "--" : App.utils.locale.float(data.damageDealt / data.damageReceived);
             proxy.dmgRatioDL.value = color(ratio, Defines.UICOLOR_GOLD2);
 
             proxy.avgExpDL.value = color(App.utils.locale.integer(data.avgXP));
             proxy.avgDmgDealtDL.value = color(App.utils.locale.integer(data.avgDamageDealt));
             proxy.avgDmgReceivedDL.value = color(App.utils.locale.integer(data.avgDamageReceived));
-            proxy.avgKillsDL.value = color(App.utils.locale.numberWithoutZeros(data.avgFrags));
-            proxy.avgDetectedDL.value = color(App.utils.locale.numberWithoutZeros(data.avgSpotted));
+            proxy.avgKillsDL.value = color(App.utils.locale.float(data.avgFrags));
+            proxy.avgDetectedDL.value = color(App.utils.locale.float(data.avgSpotted));
 
             // stat
 
@@ -350,8 +351,8 @@ package xvm.profile.components
             avgDefenceDL.visible = data.stat != null;
             if (data.stat != null)
             {
-                avgCaptureDL.value = color(size(App.utils.locale.numberWithoutZeros(data.stat.cap / data.stat.b), 12));
-                avgDefenceDL.value = color(size(App.utils.locale.numberWithoutZeros(data.stat.def / data.stat.b), 12));
+                avgCaptureDL.value = color(size(App.utils.locale.float(data.stat.cap / data.stat.b), 12));
+                avgDefenceDL.value = color(size(App.utils.locale.float(data.stat.def / data.stat.b), 12));
             }
         }
 
@@ -382,8 +383,8 @@ package xvm.profile.components
                 colorAvg = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, Math.round(vdata.avg.R * 100));
                 colorTop = MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, Math.round(vdata.top.R * 100));
                 TF(proxy.winsDL).htmlText += formatHtmlText(
-                    " " + Locale.get("avg") + ": " + color(App.utils.locale.numberWithoutZeros(vdata.avg.R * 100), colorAvg) +
-                    " " + Locale.get("top") + ": " + color(App.utils.locale.numberWithoutZeros(vdata.top.R * 100), colorTop),
+                    " " + Locale.get("avg") + ": " + color(App.utils.locale.float(vdata.avg.R * 100), colorAvg) +
+                    " " + Locale.get("top") + ": " + color(App.utils.locale.float(vdata.top.R * 100), colorTop),
                     Defines.UICOLOR_LABEL);
             }
 
@@ -391,8 +392,8 @@ package xvm.profile.components
             if (vdata.avg.U)
             {
                 TF(proxy.surviveDL).htmlText += formatHtmlText(
-                    " " + Locale.get("avg") + ": " + color(App.utils.locale.numberWithoutZeros(vdata.avg.U * 100), Defines.UICOLOR_GOLD) +
-                    " " + Locale.get("top") + ": " + color(App.utils.locale.numberWithoutZeros(vdata.top.U * 100), Defines.UICOLOR_GOLD),
+                    " " + Locale.get("avg") + ": " + color(App.utils.locale.float(vdata.avg.U * 100), Defines.UICOLOR_GOLD) +
+                    " " + Locale.get("top") + ": " + color(App.utils.locale.float(vdata.top.U * 100), Defines.UICOLOR_GOLD),
                     Defines.UICOLOR_LABEL);
             }
 
@@ -400,8 +401,8 @@ package xvm.profile.components
             if (vdata.avg.D)
             {
                 TF(proxy.avgDmgDealtDL).htmlText = formatHtmlText(
-                    Locale.get("avg") + ": " + color(App.utils.locale.numberWithoutZeros(vdata.avg.D), Defines.UICOLOR_GOLD) +
-                    " " + Locale.get("top") + ": " + color(App.utils.locale.numberWithoutZeros(vdata.top.D), Defines.UICOLOR_GOLD),
+                    Locale.get("avg") + ": " + color(App.utils.locale.integer(vdata.avg.D), Defines.UICOLOR_GOLD) +
+                    " " + Locale.get("top") + ": " + color(App.utils.locale.integer(vdata.top.D), Defines.UICOLOR_GOLD),
                     Defines.UICOLOR_LABEL);
             }
 
@@ -409,8 +410,8 @@ package xvm.profile.components
             if (vdata.avg.F)
             {
                 TF(proxy.avgKillsDL).htmlText = formatHtmlText(
-                    Locale.get("avg") + ": " + color(App.utils.locale.numberWithoutZeros(vdata.avg.F), Defines.UICOLOR_GOLD) +
-                    " " + Locale.get("top") + ": " + color(App.utils.locale.numberWithoutZeros(vdata.top.F), Defines.UICOLOR_GOLD),
+                    Locale.get("avg") + ": " + color(App.utils.locale.float(vdata.avg.F), Defines.UICOLOR_GOLD) +
+                    " " + Locale.get("top") + ": " + color(App.utils.locale.float(vdata.top.F), Defines.UICOLOR_GOLD),
                     Defines.UICOLOR_LABEL);
             }
 
@@ -418,15 +419,15 @@ package xvm.profile.components
             if (vdata.avg.S)
             {
                 TF(proxy.avgDetectedDL).htmlText = formatHtmlText(
-                    Locale.get("avg") + ": " + color(App.utils.locale.numberWithoutZeros(vdata.avg.S), Defines.UICOLOR_GOLD) +
-                    " " + Locale.get("top") + ": " + color(App.utils.locale.numberWithoutZeros(vdata.top.S), Defines.UICOLOR_GOLD),
+                    Locale.get("avg") + ": " + color(App.utils.locale.float(vdata.avg.S), Defines.UICOLOR_GOLD) +
+                    " " + Locale.get("top") + ": " + color(App.utils.locale.float(vdata.top.S), Defines.UICOLOR_GOLD),
                     Defines.UICOLOR_LABEL);
             }
 
             // specific damage
             var specDmg:Number = data.avgDamageDealt / vdata.hpTop;
             specDamageDL.visible = true;
-            specDamageDL.value = color(size(App.utils.locale.numberWithoutZeros(specDmg), 12));
+            specDamageDL.value = color(size(App.utils.locale.float(specDmg), 12));
 
             if (vdata.avg.E)
             {
@@ -475,15 +476,24 @@ package xvm.profile.components
             var b2:Number = (data.battles * r2 - data.wins) / (1 - r2);
             b1 = Math.max(0, b1 % 1 == 0 ? b1 : (int(b1) + 1));
             b2 = Math.max(0, b2 % 1 == 0 ? b2 : (int(b2) + 1));
+            // full
+            /*
             return (b2 > b1)
                 ? color(App.utils.locale.integer(b1), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
-                    color(App.utils.locale.numberWithoutZeros((r2 * 100 - 0.5).toFixed(1)) + "%", Defines.UICOLOR_GOLD) + " / " +
+                    color(App.utils.locale.float((r2 * 100 - 0.5).toFixed(1)) + "%", Defines.UICOLOR_GOLD) + " / " +
                     color(App.utils.locale.integer(b2), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
-                    color(App.utils.locale.numberWithoutZeros((r2 * 100).toFixed(1)) + "%", Defines.UICOLOR_GOLD)
+                    color(App.utils.locale.float((r2 * 100).toFixed(1)) + "%", Defines.UICOLOR_GOLD)
                 : color(App.utils.locale.integer(b2), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
-                    color(App.utils.locale.numberWithoutZeros((r2 * 100).toFixed(1)) + "%", Defines.UICOLOR_GOLD) + " / " +
+                    color(App.utils.locale.float((r2 * 100).toFixed(1)) + "%", Defines.UICOLOR_GOLD) + " / " +
                     color(App.utils.locale.integer(b1), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
-                    color(App.utils.locale.numberWithoutZeros((r2 * 100 + 0.5).toFixed(1)) + "%", Defines.UICOLOR_GOLD);
+                    color(App.utils.locale.float((r2 * 100 + 0.5).toFixed(1)) + "%", Defines.UICOLOR_GOLD);
+            */
+            // short
+            return (b2 > b1)
+                ? color(App.utils.locale.integer(b1), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
+                    color(App.utils.locale.float((r2 * 100 - 0.5).toFixed(1)) + "%", Defines.UICOLOR_GOLD)
+                : color(App.utils.locale.integer(b2), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
+                    color(App.utils.locale.float((r2 * 100).toFixed(1)) + "%", Defines.UICOLOR_GOLD);
         }
 
         private function setStatData(data:DossierBase):void
