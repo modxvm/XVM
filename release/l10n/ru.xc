@@ -64,6 +64,7 @@
     "avg": "ср.",
     "top": "топ",
     "draws": "ничьих",
+    "Maximum damage": "Максимальный урон",
     "Specific damage (Avg dmg / HP)": "Уд. урон (ср. урон / прочность)",
     "Capture points": "Очки захвата",
     "Defence points": "Очки защиты",

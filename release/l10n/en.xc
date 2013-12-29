@@ -64,6 +64,7 @@
     "avg": "avg",
     "top": "top",
     "draws": "draws",
+    "Maximum damage": "Maximum damage",
     "Specific damage (Avg dmg / HP)": "Specific damage (Avg dmg / HP)",
     "Capture points": "Capture points",
     "Defence points": "Defence points",
