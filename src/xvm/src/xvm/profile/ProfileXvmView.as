@@ -26,17 +26,15 @@ package xvm.profile
 
     public class ProfileXvmView extends XvmViewBase
     {
-        private const WINDOW_EXTRA_HEIGHT:int = 0;
+        private const WINDOW_EXTRA_HEIGHT:int = 30;
 
         private var summaryPage:ProfileSummary;
         private var _summaryPageInitialized:Boolean;
-        private var _awardsPageInitialized:Boolean;
 
         public function ProfileXvmView(view:IView)
         {
             super(view);
             _summaryPageInitialized = false;
-            _awardsPageInitialized = false;
         }
 
         public function get tabNavigator():ProfileTabNavigator
@@ -55,7 +53,7 @@ package xvm.profile
             var pw:ProfileWindow = view as ProfileWindow;
             if (pw != null)
             {
-                pw.height += WINDOW_EXTRA_HEIGHT;
+                pw.setActualSize(pw.width, pw.height + WINDOW_EXTRA_HEIGHT);
                 pw.btnAddToFriends.y += WINDOW_EXTRA_HEIGHT;
                 pw.btnAddToIgnore.y += WINDOW_EXTRA_HEIGHT;
                 pw.btnCreatePrivateChannel.y += WINDOW_EXTRA_HEIGHT;
@@ -94,24 +92,13 @@ package xvm.profile
                 return;
             }
 
-            var awards:ProfileAwards = e.view as ProfileAwards;
-            if (awards != null)
-            {
-                if (_awardsPageInitialized == false)
-                {
-                    _awardsPageInitialized = true;
-                    if (profileWindow != null)
-                    {
-                        //awards.mainScrollPane.background.height += WINDOW_EXTRA_HEIGHT;
-                    }
-                }
-            }
-
             var page:ProfileTechniquePage = e.view as ProfileTechniquePage;
             if (page != null)
             {
                 if (page.getChildByName("xvm_extension") == null)
                 {
+                    page.listComponent.techniqueList.rowHeight = 32;
+
                     var tp:TechniquePage = new TechniquePage(page, summaryPage, Globals[Globals.NAME]);
                     page.addChild(tp);
                 }
@@ -123,9 +110,7 @@ package xvm.profile
             {
                 if (window.getChildByName("xvm_extension") == null)
                 {
-                    window.layoutManager = new SectionLayoutManager(525,740 + WINDOW_EXTRA_HEIGHT);
-                    window.layoutManager.registerComponents(window.listComponent,window.stackComponent);
-                    window.invalidateSize();
+                    window.listComponent.techniqueList.rowHeight = 32;
 
                     // get player name from window title
                     var playerName:String = WGUtils.GetPlayerName((profileWindow.window as Window).title);
