@@ -46,6 +46,7 @@ package com.xvm.misc
         {
             init();
             var key:String = playerId + "," + vehId;
+            //Logger.add("loadDossier: " + key);
             if (_requests[key] == null)
                 _requests[key] = [];
             if (callback != null)
