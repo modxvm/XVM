@@ -1,10 +1,10 @@
-/**
+﻿/**
  * Slovak translation file. Set "language": "sk" in @xvm.xc
  */
 {
   "locale": {
     // Author of translation
-    "XVM_translator": "relic242",
+    "XVM_translator": "relic242, Alfavio",
 
     // Ping
     "Initialization": "Načítanie",
@@ -64,6 +64,7 @@
     "avg": "priem",
     "top": "naj",
     "draws": "remízy",
+    "Maximum damage": "Maximum poškodenia",
     "Specific damage (Avg dmg / HP)": "Pomer poškodenia (priem. dmg / HP)",
     "Capture points": "Obsadenie",
     "Defence points": "Obrana",

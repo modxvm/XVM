@@ -64,6 +64,7 @@
     "avg": "Ø",
     "top": "Max.",
     "draws": "Unents.",
+    "Maximum damage": "Maximaler Schaden",
     "Specific damage (Avg dmg / HP)": "Verhältnis Ø-Schaden/Lebenspunkte",
     "Capture points": "Eroberungs Punkte",
     "Defence points": "Verteidigungs Punkte",
