@@ -54,6 +54,7 @@
     "Load statistics": "Charger les statistiques",
 
     // UserInfo
+    "General stats": "Statistiques globales",
     "Summary": "Résumé",
     "Avg level": "Tier moyen",
     "WN6": "WN6",
@@ -71,7 +72,7 @@
     // Crew
     "PutOwnCrew": "Mettre l'équipage adéquat",
     "PutBestCrew": "Mettre le meilleur équipage",
-    "PutClassCrew": "Mettre l'équipage de même classe",
+    "PutClassCrew": "Mettre un équipage de même classe",
 
     // Squad
     "Vehicle": "Char",
