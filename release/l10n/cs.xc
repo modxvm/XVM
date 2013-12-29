@@ -64,6 +64,7 @@
     "avg": "prům",
     "top": "nej",
     "draws": "remízy",
+    "Maximum damage": "Maximum poškození",
     "Specific damage (Avg dmg / HP)": "Potenciál škod (prům. škody / HP)",
     "Capture points": "Obsazení základny",
     "Defence points": "Obrana základny",
