@@ -168,15 +168,19 @@ package xvm.profile.components
             }
             proxy.winsPercentSign.x = proxy.winsDL.x + proxy.winsDL.width;
             proxy.winsPercentSign.y = proxy.winsDL.y;
+            proxy.winsPercentSign.antiAliasType = AntiAliasType.NORMAL;
             proxy.winsPercentSign.visible = team;
             proxy.defeatsPercentSign.x = proxy.defeatsDL.x + proxy.defeatsDL.width;
             proxy.defeatsPercentSign.y = proxy.defeatsDL.y;
+            proxy.defeatsPercentSign.antiAliasType = AntiAliasType.NORMAL;
             proxy.defeatsPercentSign.visible = team;
             proxy.survivePercentSign.x = proxy.surviveDL.x + proxy.surviveDL.width;
             proxy.survivePercentSign.y = proxy.surviveDL.y;
+            proxy.survivePercentSign.antiAliasType = AntiAliasType.NORMAL;
             proxy.survivePercentSign.visible = team;
             proxy.accuracyPercentSign.x = proxy.accuracyDL.x + proxy.accuracyDL.width;
             proxy.accuracyPercentSign.y = proxy.accuracyDL.y;
+            proxy.accuracyPercentSign.antiAliasType = AntiAliasType.NORMAL;
         }
 
         private function createControls():void
