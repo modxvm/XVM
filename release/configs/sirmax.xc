@@ -50,6 +50,8 @@
   "hangar": {
     "hideTutorial": false,
     "widgetsEnabled": true,
+    "masteryMarkInTankCarousel": true,
+    "masteryMarkInTechTree": true,
     "pingServers": {
       "$ref": { "path":"def.pingServers" },
       "x": 5

@@ -13,6 +13,12 @@
     // true - Enable widgets
     // true - включить виджеты
     "widgetsEnabled": false,
+    // true - Show mastery mark in tank carousel
+    // true - Показывать знак мастерства в карусели танков
+    "masteryMarkInTankCarousel": true,
+    // true - Show mastery mark in tech tree
+    // true - Показывать знак мастерства в дереве исследований
+    "masteryMarkInTechTree": true,
     // Ping servers
     // Пинг серверов
     "pingServers": {

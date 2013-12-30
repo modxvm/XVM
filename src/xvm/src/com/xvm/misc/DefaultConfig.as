@@ -110,6 +110,8 @@ package com.xvm.misc
             c.hideTutorial = false;
             c.xwnInCompany = true;
             c.widgetsEnabled = false;
+            c.masteryMarkInTankCarousel = true;
+            c.masteryMarkInTechTree = true;
             // Show ping to the servers
             c.pingServers = new CPingServers();
             c.pingServers.enabled = false;

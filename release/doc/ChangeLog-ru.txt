@@ -1,6 +1,9 @@
 XVM-dev:
   [НОВЫЕ ФУНКЦИИ]
   * локализация: добавлен малайский язык
+  * новые опции:
+      hangar/masteryMarkInTankCarousel
+      hangar/masteryMarkInTechTree
 
 XVM-5.0.2-test1:
   * адаптация к WoT 0.8.10

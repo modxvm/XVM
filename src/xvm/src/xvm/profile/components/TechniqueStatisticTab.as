@@ -512,20 +512,20 @@ package xvm.profile.components
             /*
             return (b2 > b1)
                 ? color(App.utils.locale.integer(b1), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
-                    color(App.utils.locale.float((r2 * 100 - 0.5).toFixed(1)) + "%", Defines.UICOLOR_GOLD) + " / " +
+                    color(App.utils.locale.numberWithoutZeros((r2 * 100 - 0.5).toFixed(1)) + "%", Defines.UICOLOR_GOLD) + " / " +
                     color(App.utils.locale.integer(b2), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
-                    color(App.utils.locale.float((r2 * 100).toFixed(1)) + "%", Defines.UICOLOR_GOLD)
+                    color(App.utils.locale.numberWithoutZeros((r2 * 100).toFixed(1)) + "%", Defines.UICOLOR_GOLD)
                 : color(App.utils.locale.integer(b2), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
-                    color(App.utils.locale.float((r2 * 100).toFixed(1)) + "%", Defines.UICOLOR_GOLD) + " / " +
+                    color(App.utils.locale.numberWithoutZeros((r2 * 100).toFixed(1)) + "%", Defines.UICOLOR_GOLD) + " / " +
                     color(App.utils.locale.integer(b1), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
-                    color(App.utils.locale.float((r2 * 100 + 0.5).toFixed(1)) + "%", Defines.UICOLOR_GOLD);
+                    color(App.utils.locale.numberWithoutZeros((r2 * 100 + 0.5).toFixed(1)) + "%", Defines.UICOLOR_GOLD);
             */
             // short
             return (b2 > b1)
                 ? color(App.utils.locale.integer(b1), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
-                    color(App.utils.locale.float((r2 * 100 - 0.5).toFixed(1)) + "%", Defines.UICOLOR_GOLD)
+                    color(App.utils.locale.numberWithoutZeros((r2 * 100 - 0.5).toFixed(1)) + "%", Defines.UICOLOR_GOLD)
                 : color(App.utils.locale.integer(b2), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
-                    color(App.utils.locale.float((r2 * 100).toFixed(1)) + "%", Defines.UICOLOR_GOLD);
+                    color(App.utils.locale.numberWithoutZeros((r2 * 100).toFixed(1)) + "%", Defines.UICOLOR_GOLD);
         }
 
         private function getBottomText(data:DossierBase):String

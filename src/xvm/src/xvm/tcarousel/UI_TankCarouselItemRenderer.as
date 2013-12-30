@@ -23,27 +23,30 @@ package xvm.tcarousel
             if (!masteryTF)
                 return;
 
-            var masteryStr:String = "";
-            try
+            if (Config.config.hangar.masteryMarkInTankCarousel)
             {
-                if (!data || !data.hasOwnProperty("compactDescr"))
-                    return;
-
-                var id:Number = data.compactDescr;
-                var dossier:AccountDossier = Dossier.getAccountDossier();
-                if (dossier != null && dossier.vehicles.hasOwnProperty(id))
+                var masteryStr:String = "";
+                try
                 {
-                    var vdata:VehicleDossierCut = dossier.vehicles[id];
-                    masteryStr = "<img src='img://gui/maps/icons/library/proficiency/class_icons_" + vdata.mastery + ".png' width='23' height='23'>";
+                    if (!data || !data.hasOwnProperty("compactDescr"))
+                        return;
+
+                    var id:Number = data.compactDescr;
+                    var dossier:AccountDossier = Dossier.getAccountDossier();
+                    if (dossier != null && dossier.vehicles.hasOwnProperty(id))
+                    {
+                        var vdata:VehicleDossierCut = dossier.vehicles[id];
+                        masteryStr = "<img src='img://gui/maps/icons/library/proficiency/class_icons_" + vdata.mastery + ".png' width='23' height='23'>";
+                    }
                 }
-            }
-            catch (ex:Error)
-            {
-                Logger.add(ex.getStackTrace());
-            }
-            finally
-            {
-                masteryTF.htmlText = masteryStr;
+                catch (ex:Error)
+                {
+                    Logger.add(ex.getStackTrace());
+                }
+                finally
+                {
+                    masteryTF.htmlText = masteryStr;
+                }
             }
         }
 
