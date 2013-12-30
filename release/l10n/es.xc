@@ -64,6 +64,7 @@
     "avg": "pro",
     "top": "sup",
     "draws": "empates",
+    "Maximum damage": "Daño maximo",
     "Specific damage (Avg dmg / HP)": "Daño especifico (Promedio / Im)",
     "Capture points": "Captura", 
     "Defence points": "Defensa", 
