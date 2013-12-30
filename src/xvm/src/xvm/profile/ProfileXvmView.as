@@ -26,7 +26,7 @@ package xvm.profile
 
     public class ProfileXvmView extends XvmViewBase
     {
-        private const WINDOW_EXTRA_HEIGHT:int = 30;
+        private const WINDOW_EXTRA_HEIGHT:int = 35;
 
         private var summaryPage:ProfileSummary;
         private var _summaryPageInitialized:Boolean;

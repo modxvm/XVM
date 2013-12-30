@@ -30,6 +30,7 @@ package xvm.profile.components
         public var specDamageDL:DashLineTextItem;
         public var avgCaptureDL:DashLineTextItem;
         public var avgDefenceDL:DashLineTextItem;
+        public var bottomTF:TextField;
 
         // ENTRY POINTS
 
@@ -66,8 +67,9 @@ package xvm.profile.components
                     { y: 422, width: DL_WIDTH, control: proxy.avgDetectedDL },
                     { y: 439, width: DL_WIDTH, control: specDamageDL },         // vehicle only
                     { y: 439, width: DL_WIDTH, control: avgCaptureDL },         // summary only
-                    { y: 456, width: DL_WIDTH, control: avgDefenceDL }          // summary only
-                    //{ y: 463, width: DL_WIDTH, control: proxy.avgScoutingDmgDL }
+                    { y: 456, width: DL_WIDTH, control: avgDefenceDL },          // summary only
+                    //{ y: 473, width: DL_WIDTH, control: proxy.avgScoutingDmgDL }
+                    { y: 473, width: DL_WIDTH + 200, control: bottomTF }
                 ];
 
                 setupControls();
@@ -166,18 +168,22 @@ package xvm.profile.components
                 if (c.hasOwnProperty("width"))
                     c.control.width = c.width;
             }
+
             proxy.winsPercentSign.x = proxy.winsDL.x + proxy.winsDL.width;
             proxy.winsPercentSign.y = proxy.winsDL.y;
             proxy.winsPercentSign.antiAliasType = AntiAliasType.NORMAL;
             proxy.winsPercentSign.visible = team;
+
             proxy.defeatsPercentSign.x = proxy.defeatsDL.x + proxy.defeatsDL.width;
             proxy.defeatsPercentSign.y = proxy.defeatsDL.y;
             proxy.defeatsPercentSign.antiAliasType = AntiAliasType.NORMAL;
             proxy.defeatsPercentSign.visible = team;
+
             proxy.survivePercentSign.x = proxy.surviveDL.x + proxy.surviveDL.width;
             proxy.survivePercentSign.y = proxy.surviveDL.y;
             proxy.survivePercentSign.antiAliasType = AntiAliasType.NORMAL;
             proxy.survivePercentSign.visible = team;
+
             proxy.accuracyPercentSign.x = proxy.accuracyDL.x + proxy.accuracyDL.width;
             proxy.accuracyPercentSign.y = proxy.accuracyDL.y;
             proxy.accuracyPercentSign.antiAliasType = AntiAliasType.NORMAL;
@@ -215,6 +221,15 @@ package xvm.profile.components
             avgDefenceDL.label = Locale.get("Defence points");
             avgDefenceDL.visible = false;
             proxy.addChild(avgDefenceDL);
+
+            bottomTF = new TextField();
+            bottomTF.antiAliasType = AntiAliasType.ADVANCED;
+            bottomTF.multiline = true;
+            bottomTF.wordWrap = false;
+            bottomTF.x = avgDefenceDL.x;
+            bottomTF.height = 80;
+            bottomTF.styleSheet = Utils.createTextStyleSheet("txt", new TextFormat("$FieldFont", 12, Defines.UICOLOR_LABEL));
+            proxy.addChild(bottomTF);
         }
 
         private function createTextFields():void
@@ -331,6 +346,19 @@ package xvm.profile.components
             TF(proxy.avgDetectedDL).htmlText = "";
 
             //proxy.avgScoutingDmgDL.value = "Will be implemented...";
+
+            TF(avgCaptureDL).htmlText = formatHtmlText(size("Avg battle life time: " +
+                color(Utils.FormatDate("H:i:s", new Date(null, null, null, null, null, data.avgBattleLifeTime))), 12), Defines.UICOLOR_LABEL);
+
+            var a:AccountDossier = data as AccountDossier;
+            if (a != null)
+            {
+                TF(avgDefenceDL).htmlText = formatHtmlText(size("Battle life time per day: " +
+                    color(Utils.FormatDate("H:i:s", new Date(null, null, null, null, null,
+                    (data.battleLifeTime/((a.lastBattleTime - a.creationTime)/86400))))), 12), Defines.UICOLOR_LABEL);
+            }
+
+            bottomTF.htmlText = "<textformat leading='-2'>" + formatHtmlText(getBottomText(data)) + "</textformat>";
         }
 
         private function updateSummaryData():void
@@ -498,6 +526,30 @@ package xvm.profile.components
                     color(App.utils.locale.float((r2 * 100 - 0.5).toFixed(1)) + "%", Defines.UICOLOR_GOLD)
                 : color(App.utils.locale.integer(b2), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
                     color(App.utils.locale.float((r2 * 100).toFixed(1)) + "%", Defines.UICOLOR_GOLD);
+        }
+
+        private function getBottomText(data:DossierBase):String
+        {
+            var s:String = "";
+
+            s += color("[8.8+] ", Defines.UICOLOR_GOLD);
+            s += 'battles: ' + color(App.utils.locale.integer(data.battlesAfter8_8)) + ", ";
+            s += 'xp: ' + color(App.utils.locale.integer(data.avgXP_8_8)) + " (orig: " + color(App.utils.locale.integer(data.avgOriginalXP_8_8)) + "), ";
+            s += 'avg km: ' + color(App.utils.locale.numberWithoutZeros(data.avgMileage_8_8 / 1000)) + ", ";
+            s += 'avg trees cut: ' + color(App.utils.locale.numberWithoutZeros(data.avgTreesCut_8_8));
+            s += "\n";
+            s += 'dmg assist: ' + color(App.utils.locale.integer(data.avgDamageAssistedTrack_8_8 + data.avgDamageAssistedRadio_8_8)) + " (";
+            s += 'track: ' + color(App.utils.locale.integer(data.avgDamageAssistedTrack_8_8)) + ", ";
+            s += 'radio: ' + color(App.utils.locale.integer(data.avgDamageAssistedRadio_8_8)) + "), ";
+            s += 'he_hits: ' + color(App.utils.locale.numberWithoutZeros(data.avgHe_hits_8_8)) + ", ";
+            s += 'he_hits_rcvd: ' + color(App.utils.locale.numberWithoutZeros(data.avgHeHitsReceived_8_8));
+            s += "\n";
+            s += 'pierced: ' + color(App.utils.locale.numberWithoutZeros(data.avgPierced_8_8)) + ", ";
+            s += 'shots_rcvd: ' + color(App.utils.locale.numberWithoutZeros(data.avgShotsReceived_8_8)) + ", ";
+            s += 'pier_rcvd: ' + color(App.utils.locale.numberWithoutZeros(data.avgPiercedReceived_8_8)) + ", ";
+            s += 'nodmg_rcv: ' + color(App.utils.locale.numberWithoutZeros(data.avgNoDamageShotsReceived_8_8));
+
+            return s;
         }
 
         private function setStatData(data:DossierBase):void

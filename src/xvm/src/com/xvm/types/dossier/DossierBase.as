@@ -84,18 +84,19 @@ package com.xvm.types.dossier
 
         public function get avgXP_8_8():Number { return _ratio(xpAfter8_8, battlesAfter8_8); }
         public function get avgOriginalXP_8_8():Number { return _ratio(originalXP, battlesAfter8_8); }
-        public function get damageAssistedTrack_8_8():Number { return _ratio(damageAssistedTrack, battlesAfter8_8); }
-        public function get damageAssistedRadio_8_8():Number { return _ratio(damageAssistedRadio, battlesAfter8_8); }
-        public function get shotsReceived_8_8():Number { return _ratio(shotsReceived, battlesAfter8_8); }
-        public function get noDamageShotsReceived_8_8():Number { return _ratio(noDamageShotsReceived, battlesAfter8_8); }
-        public function get piercedReceived_8_8():Number { return _ratio(piercedReceived, battlesAfter8_8); }
-        public function get heHitsReceived_8_8():Number { return _ratio(heHitsReceived, battlesAfter8_8); }
-        public function get he_hits_8_8():Number { return _ratio(he_hits, battlesAfter8_8); }
-        public function get pierced_8_8():Number { return _ratio(pierced, battlesAfter8_8); }
+        public function get avgDamageAssistedTrack_8_8():Number { return _ratio(damageAssistedTrack, battlesAfter8_8); }
+        public function get avgDamageAssistedRadio_8_8():Number { return _ratio(damageAssistedRadio, battlesAfter8_8); }
+        public function get avgHits():Number { return _ratio(hits, battles); }
+        public function get avgShotsReceived_8_8():Number { return _ratio(shotsReceived, battlesAfter8_8); }
+        public function get avgNoDamageShotsReceived_8_8():Number { return _ratio(noDamageShotsReceived, battlesAfter8_8); }
+        public function get avgPiercedReceived_8_8():Number { return _ratio(piercedReceived, battlesAfter8_8); }
+        public function get avgHeHitsReceived_8_8():Number { return _ratio(heHitsReceived, battlesAfter8_8); }
+        public function get avgHe_hits_8_8():Number { return _ratio(he_hits, battlesAfter8_8); }
+        public function get avgPierced_8_8():Number { return _ratio(pierced, battlesAfter8_8); }
 
-        public function avgBattleLifeTime():Number { return _ratio(battleLifeTime, battles); }
-        public function avgMileage_8_8():Number { return _ratio(mileage, battlesAfter8_8); }
-        public function avgTreesCut_8_8():Number { return _ratio(treesCut, battlesAfter8_8); }
+        public function get avgBattleLifeTime():Number { return _ratio(battleLifeTime, battles); }
+        public function get avgMileage_8_8():Number { return _ratio(mileage, battlesAfter8_8); }
+        public function get avgTreesCut_8_8():Number { return _ratio(treesCut, battlesAfter8_8); }
 
         // PRIVATE
 
