@@ -64,6 +64,7 @@
     "avg": "átl.",
     "top": "csúcs",
     "draws": "döntetlen",
+    "Maximum damage": "Legtöbb sebzés",
     "Specific damage (Avg dmg / HP)": "Fajlagos sebzés (Átlag sebzés / Élet)",
     "Capture points": "Foglalási pontok",
     "Defence points": "Védelmi pontok",

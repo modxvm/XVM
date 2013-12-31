@@ -1,6 +1,6 @@
 ﻿XVM-5.0.2-test2:
   [NEW FUNCTIONS]
-  * localization: added Malay language
+  * localization: added Chinese(Taiwan) and Malay languages
   * new options:
       hangar/masteryMarkInTankCarousel - Show mastery mark in tank carousel
       hangar/masteryMarkInTechTree - Show mastery mark in tech tree
