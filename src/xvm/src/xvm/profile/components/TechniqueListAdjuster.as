@@ -121,6 +121,8 @@ package xvm.profile.components
             selectedId = list.selectedItem.id;
             //Logger.add("selectedId: " + selectedId);
 
+            if (selectedId == 0)
+                page.stackComponent.updateTankData(new ProfileVehicleDossierVO({})); // refresh page
             updateStackComponentButtonBar();
         }
 

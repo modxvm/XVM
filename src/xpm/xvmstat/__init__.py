@@ -53,8 +53,8 @@ def FlashBeforeDelete(self):
 def ProfileTechniqueWindowRequestData(base, self, data):
     if data.vehicleId:
         base(self, data)
-    else:
-        self.as_responseVehicleDossierS({})
+#    else:
+#        self.as_responseVehicleDossierS({})
 
 #####################################################################
 # Register events

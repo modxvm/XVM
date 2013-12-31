@@ -30,6 +30,9 @@ package xvm.profile.UI
 
         override public function update(arg1:Object):void
         {
+            if (_baseDisposed)
+                return;
+
             if (worker.page && worker.page.battlesDropdown && (worker.page.battlesDropdown.selectedItem == PROFILE.PROFILE_DROPDOWN_LABELS_TEAM))
             {
                 worker.ratingTF.htmlText = "";
@@ -60,6 +63,11 @@ package xvm.profile.UI
             }
 
             worker.update(arg1 as ProfileVehicleDossierVO);
+        }
+
+        public function get baseDisposed():Boolean
+        {
+            return _baseDisposed;
         }
    }
 }

@@ -1,7 +1,7 @@
 package xvm.profile.components
 {
     import com.xvm.*;
-    import com.xvm.l10n.Locale;
+    import com.xvm.l10n.*;
     import com.xvm.misc.*;
     import com.xvm.types.dossier.*;
     import com.xvm.types.stat.*;
@@ -12,11 +12,12 @@ package xvm.profile.components
     import net.wg.gui.lobby.profile.components.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
     import net.wg.gui.lobby.profile.pages.technique.data.*;
+    import xvm.profile.UI.*;
 
     public class TechniqueStatisticTab
     {
         private static const DL_WIDTH:int = 200;
-        private var proxy:net.wg.gui.lobby.profile.pages.technique.TechniqueStatisticTab;
+        private var proxy:UI_TechniqueStatisticTab;
 
         private var _raw_data:ProfileVehicleDossierVO;
 
@@ -34,7 +35,7 @@ package xvm.profile.components
 
         // ENTRY POINTS
 
-        public function TechniqueStatisticTab(proxy:net.wg.gui.lobby.profile.pages.technique.TechniqueStatisticTab)
+        public function TechniqueStatisticTab(proxy:UI_TechniqueStatisticTab)
         {
             //Logger.add("TechniqueStatisticTab::ctor()");
             try
@@ -395,6 +396,9 @@ package xvm.profile.components
 
         private function updateVehicleDataCallback(dossier:VehicleDossier):void
         {
+            if (proxy.baseDisposed)
+                return;
+
             var data:VehicleDossier = dossier;
             prepareData(data);
 
