@@ -57,11 +57,11 @@ package xvm.profile
                 var xw:int = Config.config.hangar.showExtraDataInProfile ? WINDOW_EXTRA_WIDTH : 0;
                 pw.setActualSize(pw.width + xw, pw.height + WINDOW_EXTRA_HEIGHT);
                 pw.tabNavigator.width += xw;
+                pw.background.width += xw;
+                pw.background.height += WINDOW_EXTRA_HEIGHT;
                 pw.btnAddToFriends.y += WINDOW_EXTRA_HEIGHT;
                 pw.btnAddToIgnore.y += WINDOW_EXTRA_HEIGHT;
                 pw.btnCreatePrivateChannel.y += WINDOW_EXTRA_HEIGHT;
-                pw.background.height += WINDOW_EXTRA_HEIGHT;
-                pw.background.width += WINDOW_EXTRA_WIDTH;
             }
         }
 
