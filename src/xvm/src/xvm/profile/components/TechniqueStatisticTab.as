@@ -7,6 +7,7 @@ package xvm.profile.components
     import com.xvm.types.stat.*;
     import com.xvm.types.veh.*;
     import com.xvm.utils.*;
+    import flash.display.Sprite;
     import flash.text.*;
     import flash.utils.*;
     import net.wg.gui.lobby.profile.components.*;
@@ -32,6 +33,9 @@ package xvm.profile.components
         public var avgCaptureDL:DashLineTextItem;
         public var avgDefenceDL:DashLineTextItem;
         public var bottomTF:TextField;
+        public var extraDataPanel:Sprite;
+        public var extraDataPanelHeader:TextField;
+        public var extraDataPanelLines:Array;
 
         // ENTRY POINTS
 
@@ -43,7 +47,7 @@ package xvm.profile.components
                 this.proxy = proxy;
                 cache = new Dictionary();
                 controlsMap = new Dictionary(true);
-                createControls();
+
                 controls = [
                     { y: 60,  width: DL_WIDTH, control: proxy.battlesDL },
                     { y: 77,  width: DL_WIDTH, control: proxy.winsDL },
@@ -53,7 +57,7 @@ package xvm.profile.components
                     { y: 148, control: proxy.efficiencyTF },
                     { y: 168, width: DL_WIDTH, control: proxy.maxExpDL },
                     { y: 185, width: DL_WIDTH, control: proxy.maxKillDL },
-                    { y: 202, width: DL_WIDTH, control: maxDamageDL },
+                    // y: 202 - maxDamageDL
                     { y: 224, width: DL_WIDTH, control: proxy.totalKillDL },
                     { y: 241, width: DL_WIDTH, control: proxy.totalDeadDL },
                     { y: 258, width: DL_WIDTH, control: proxy.killRatioDL },
@@ -65,13 +69,19 @@ package xvm.profile.components
                     { y: 371, width: DL_WIDTH, control: proxy.avgDmgDealtDL },
                     { y: 388, width: DL_WIDTH, control: proxy.avgDmgReceivedDL },
                     { y: 405, width: DL_WIDTH, control: proxy.avgKillsDL },
-                    { y: 422, width: DL_WIDTH, control: proxy.avgDetectedDL },
+                    { y: 422, width: DL_WIDTH, control: proxy.avgDetectedDL }
+                    //{ y: 473, width: DL_WIDTH, control: proxy.avgScoutingDmgDL }
+                ];
+
+                createControls();
+
+                controls.push(
+                    { y: 202, width: DL_WIDTH, control: maxDamageDL },
                     { y: 439, width: DL_WIDTH, control: specDamageDL },         // vehicle only
                     { y: 439, width: DL_WIDTH, control: avgCaptureDL },         // summary only
-                    { y: 456, width: DL_WIDTH, control: avgDefenceDL },          // summary only
-                    //{ y: 473, width: DL_WIDTH, control: proxy.avgScoutingDmgDL }
+                    { y: 456, width: DL_WIDTH, control: avgDefenceDL },         // summary only
                     { y: 473, width: DL_WIDTH + 200, control: bottomTF }
-                ];
+                );
 
                 setupControls();
                 createTextFields();
@@ -158,6 +168,11 @@ package xvm.profile.components
             return controlsMap[dl];
         }
 
+        private function XDL(n:int):DashLineTextItem
+        {
+            return extraDataPanelLines[n];
+        }
+
         private function setupControls():void
         {
             var team:Boolean = page && page.battlesDropdown && (page.battlesDropdown.selectedItem == PROFILE.PROFILE_DROPDOWN_LABELS_TEAM);
@@ -192,17 +207,11 @@ package xvm.profile.components
 
         private function createControls():void
         {
-            ratingTF = new TextField();
-            ratingTF.antiAliasType = AntiAliasType.ADVANCED;
-            ratingTF.multiline = true;
-            ratingTF.wordWrap = false;
-            ratingTF.x = proxy.efficiencyTF.x + 170;
-            ratingTF.y = proxy.battlesDL.y - 62;
-            ratingTF.width = 400;
-            ratingTF.height = 80;
-            var tf:TextFormat = new TextFormat("$FieldFont", 16, Defines.UICOLOR_LABEL);
-            ratingTF.styleSheet = Utils.createTextStyleSheet("txt", tf);
-            proxy.addChild(ratingTF);
+            if (Config.config.hangar.showExtraDataInProfile)
+            {
+                for each (var c:Object in controls)
+                    c.control.x -= 10;
+            }
 
             maxDamageDL = Utils.cloneDashLineTextItem(proxy.battlesDL);
             maxDamageDL.label = Locale.get("Maximum damage") + " (0.8.8+)";
@@ -222,6 +231,65 @@ package xvm.profile.components
             avgDefenceDL.label = Locale.get("Defence points");
             avgDefenceDL.visible = false;
             proxy.addChild(avgDefenceDL);
+
+            extraDataPanel = new Sprite();
+
+            if (Config.config.hangar.showExtraDataInProfile)
+            {
+                extraDataPanel.visible = true;
+                extraDataPanel.x = proxy.battlesDL.x + DL_WIDTH + 5;
+                extraDataPanel.y = proxy.totalKillDL.y - 10;
+                proxy.addChild(extraDataPanel);
+
+                var extraDataPanelHeader:TextField = new TextField();
+                extraDataPanelHeader.selectable = false;
+                extraDataPanelHeader.antiAliasType = AntiAliasType.ADVANCED;
+                extraDataPanelHeader.styleSheet = Utils.createTextStyleSheet("txt", proxy.efficiencyTF.defaultTextFormat);
+                extraDataPanelHeader.x = 0;
+                extraDataPanelHeader.y = 0;
+                extraDataPanelHeader.width = 220;
+                extraDataPanelHeader.height = 30;
+                extraDataPanelHeader.htmlText = formatHtmlText(Locale.get("Extra data (WoT 0.8.8+)"));
+                extraDataPanel.addChild(extraDataPanelHeader);
+
+                extraDataPanelLines = [];
+                for (var i:int = 0, y:int = 20; i < 16; ++i, y += 17)
+                {
+                    var dl:DashLineTextItem = Utils.cloneDashLineTextItem(proxy.battlesDL);
+                    dl.x = 0;
+                    dl.y = y;
+                    dl.width = 220;
+                    extraDataPanelLines.push(dl);
+                    extraDataPanel.addChild(dl);
+                }
+                XDL(0).label = Locale.get("Average battle life time");
+                XDL(1).label = Locale.get("Battle life time per day");
+                XDL(2).label = Locale.get("Battles after 0.8.8");
+                XDL(3).label = Locale.get("Average XP");
+                XDL(4).label = Locale.get("Average XP without premium");
+                XDL(5).label = Locale.get("Average km per battle");
+                XDL(6).label = Locale.get("Average tree cut per battle");
+                XDL(7).label = Locale.get("Average damage assisted");
+                XDL(8).label = Locale.get("    ... track");
+                XDL(9).label = Locale.get("    ... radio");
+                XDL(10).label = Locale.get("Average splash damage");
+                XDL(11).label = Locale.get("Average splash damage received");
+                XDL(12).label = Locale.get("Average pierced per battle");
+                XDL(13).label = Locale.get("Average shots received");
+                XDL(14).label = Locale.get("Average pierced received");
+                XDL(15).label = Locale.get("Average no dmg shots received");
+            }
+
+            ratingTF = new TextField();
+            ratingTF.antiAliasType = AntiAliasType.ADVANCED;
+            ratingTF.multiline = true;
+            ratingTF.wordWrap = false;
+            ratingTF.x = proxy.efficiencyTF.x + 170;
+            ratingTF.y = proxy.battlesDL.y - 62;
+            ratingTF.width = 400;
+            ratingTF.height = 80;
+            ratingTF.styleSheet = Utils.createTextStyleSheet("txt", new TextFormat("$FieldFont", 16, Defines.UICOLOR_LABEL));
+            proxy.addChild(ratingTF);
 
             bottomTF = new TextField();
             bottomTF.antiAliasType = AntiAliasType.ADVANCED;
@@ -314,8 +382,8 @@ package xvm.profile.components
 
             proxy.maxExpDL.value = color(App.utils.locale.integer(data.maxXP));
             proxy.maxKillDL.value = color(App.utils.locale.integer(data.maxFrags));
-            maxDamageDL.value = data.maxDamage <= 0 ? color(size("--", 12), Defines.UICOLOR_GOLD2)
-                : color(size(App.utils.locale.integer(data.maxDamage), 12));
+            maxDamageDL.value = data.maxDamage <= 0 ? color(size("--"), Defines.UICOLOR_GOLD2)
+                : color(size(App.utils.locale.integer(data.maxDamage)));
 
             proxy.totalKillDL.value = color(App.utils.locale.integer(data.frags));
             proxy.totalDeadDL.value = color(App.utils.locale.integer(data.deaths));
@@ -348,18 +416,10 @@ package xvm.profile.components
 
             //proxy.avgScoutingDmgDL.value = "Will be implemented...";
 
-            TF(avgCaptureDL).htmlText = formatHtmlText(size("Avg battle life time: " +
-                color(Utils.FormatDate("H:i:s", new Date(null, null, null, null, null, data.avgBattleLifeTime))), 12), Defines.UICOLOR_LABEL);
+            if (Config.config.hangar.showExtraDataInProfile)
+                showExtraData(data);
 
-            var a:AccountDossier = data as AccountDossier;
-            if (a != null)
-            {
-                TF(avgDefenceDL).htmlText = formatHtmlText(size("Battle life time per day: " +
-                    color(Utils.FormatDate("H:i:s", new Date(null, null, null, null, null,
-                    (data.battleLifeTime/((a.lastBattleTime - a.creationTime)/86400))))), 12), Defines.UICOLOR_LABEL);
-            }
-
-            bottomTF.htmlText = "<textformat leading='-2'>" + formatHtmlText(getBottomText(data)) + "</textformat>";
+            //bottomTF.htmlText = "<textformat leading='-2'>" + formatHtmlText(getBottomText(data)) + "</textformat>";
         }
 
         private function updateSummaryData():void
@@ -375,7 +435,7 @@ package xvm.profile.components
 
             TF(proxy.maxExpDL).htmlText = formatHtmlText(data.maxXPVehicleName, Defines.UICOLOR_GOLD2);
             TF(proxy.maxKillDL).htmlText = formatHtmlText(data.maxFragsVehicleName, Defines.UICOLOR_GOLD2);
-            TF(maxDamageDL).htmlText = formatHtmlText(size(data.maxDamageVehicleName, 12), Defines.UICOLOR_GOLD2);
+            TF(maxDamageDL).htmlText = formatHtmlText(size(data.maxDamageVehicleName), Defines.UICOLOR_GOLD2);
 
             specDamageDL.visible = false;
             TF(specDamageDL).htmlText = "";
@@ -384,8 +444,8 @@ package xvm.profile.components
             avgDefenceDL.visible = data.stat != null;
             if (data.stat != null)
             {
-                avgCaptureDL.value = color(size(App.utils.locale.float(data.stat.cap / data.stat.b), 12));
-                avgDefenceDL.value = color(size(App.utils.locale.float(data.stat.def / data.stat.b), 12));
+                avgCaptureDL.value = color(size(App.utils.locale.float(data.stat.cap / data.stat.b)));
+                avgDefenceDL.value = color(size(App.utils.locale.float(data.stat.def / data.stat.b)));
             }
         }
 
@@ -463,14 +523,14 @@ package xvm.profile.components
             // specific damage
             var specDmg:Number = data.avgDamageDealt / vdata.hpTop;
             specDamageDL.visible = true;
-            specDamageDL.value = color(size(App.utils.locale.float(specDmg), 12));
+            specDamageDL.value = color(size(App.utils.locale.float(specDmg)));
 
             if (vdata.avg.E)
             {
                 TF(specDamageDL).htmlText = formatHtmlText(size(
                     Locale.get("avg") + ": " + color(App.utils.locale.numberWithoutZeros(vdata.avg.E), Defines.UICOLOR_GOLD) +
-                    " " + Locale.get("top") + ": " + color(App.utils.locale.numberWithoutZeros(vdata.top.E), Defines.UICOLOR_GOLD),
-                    12), Defines.UICOLOR_LABEL);
+                    " " + Locale.get("top") + ": " + color(App.utils.locale.numberWithoutZeros(vdata.top.E), Defines.UICOLOR_GOLD)),
+                    Defines.UICOLOR_LABEL);
             }
 
             avgCaptureDL.visible = false;
@@ -512,48 +572,51 @@ package xvm.profile.components
             var b2:Number = (data.battles * r2 - data.wins) / (1 - r2);
             b1 = Math.max(0, b1 % 1 == 0 ? b1 : (int(b1) + 1));
             b2 = Math.max(0, b2 % 1 == 0 ? b2 : (int(b2) + 1));
-            // full
-            /*
-            return (b2 > b1)
-                ? color(App.utils.locale.integer(b1), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
-                    color(App.utils.locale.numberWithoutZeros((r2 * 100 - 0.5).toFixed(1)) + "%", Defines.UICOLOR_GOLD) + " / " +
-                    color(App.utils.locale.integer(b2), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
-                    color(App.utils.locale.numberWithoutZeros((r2 * 100).toFixed(1)) + "%", Defines.UICOLOR_GOLD)
-                : color(App.utils.locale.integer(b2), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
-                    color(App.utils.locale.numberWithoutZeros((r2 * 100).toFixed(1)) + "%", Defines.UICOLOR_GOLD) + " / " +
-                    color(App.utils.locale.integer(b1), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
-                    color(App.utils.locale.numberWithoutZeros((r2 * 100 + 0.5).toFixed(1)) + "%", Defines.UICOLOR_GOLD);
-            */
-            // short
-            return (b2 > b1)
-                ? color(App.utils.locale.integer(b1), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
-                    color(App.utils.locale.numberWithoutZeros((r2 * 100 - 0.5).toFixed(1)) + "%", Defines.UICOLOR_GOLD)
-                : color(App.utils.locale.integer(b2), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
-                    color(App.utils.locale.numberWithoutZeros((r2 * 100).toFixed(1)) + "%", Defines.UICOLOR_GOLD);
+
+            var info:String = (b2 > b1)
+                    ? color(App.utils.locale.integer(b1), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
+                        color(App.utils.locale.numberWithoutZeros((r2 * 100 - 0.5).toFixed(1)) + "%", Defines.UICOLOR_GOLD)
+                    : color(App.utils.locale.integer(b2), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
+                        color(App.utils.locale.numberWithoutZeros((r2 * 100).toFixed(1)) + "%", Defines.UICOLOR_GOLD);
+
+            if (Config.config.hangar.showExtraDataInProfile)
+            {
+                // full
+                info += " / " + ((b2 > b1)
+                    ? color(App.utils.locale.integer(b2), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
+                        color(App.utils.locale.numberWithoutZeros((r2 * 100).toFixed(1)) + "%", Defines.UICOLOR_GOLD)
+                    : color(App.utils.locale.integer(b1), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
+                        color(App.utils.locale.numberWithoutZeros((r2 * 100 + 0.5).toFixed(1)) + "%", Defines.UICOLOR_GOLD));
+            }
+
+            return info;
         }
 
-        private function getBottomText(data:DossierBase):String
+        private function showExtraData(data:DossierBase):void
         {
-            var s:String = "";
+            XDL(0).value = formatHtmlText(Utils.FormatDate("H:i:s", new Date(null, null, null, null, null, data.avgBattleLifeTime)));
 
-            s += color("[8.8+] ", Defines.UICOLOR_GOLD);
-            s += 'battles: ' + color(App.utils.locale.integer(data.battlesAfter8_8)) + ", ";
-            s += 'xp: ' + color(App.utils.locale.integer(data.avgXP_8_8)) + " (orig: " + color(App.utils.locale.integer(data.avgOriginalXP_8_8)) + "), ";
-            s += 'avg km: ' + color(App.utils.locale.numberWithoutZeros(data.avgMileage_8_8 / 1000)) + ", ";
-            s += 'avg trees cut: ' + color(App.utils.locale.numberWithoutZeros(data.avgTreesCut_8_8));
-            s += "\n";
-            s += 'dmg assist: ' + color(App.utils.locale.integer(data.avgDamageAssistedTrack_8_8 + data.avgDamageAssistedRadio_8_8)) + " (";
-            s += 'track: ' + color(App.utils.locale.integer(data.avgDamageAssistedTrack_8_8)) + ", ";
-            s += 'radio: ' + color(App.utils.locale.integer(data.avgDamageAssistedRadio_8_8)) + "), ";
-            s += 'he_hits: ' + color(App.utils.locale.numberWithoutZeros(data.avgHe_hits_8_8)) + ", ";
-            s += 'he_hits_rcvd: ' + color(App.utils.locale.numberWithoutZeros(data.avgHeHitsReceived_8_8));
-            s += "\n";
-            s += 'pierced: ' + color(App.utils.locale.numberWithoutZeros(data.avgPierced_8_8)) + ", ";
-            s += 'shots_rcvd: ' + color(App.utils.locale.numberWithoutZeros(data.avgShotsReceived_8_8)) + ", ";
-            s += 'pier_rcvd: ' + color(App.utils.locale.numberWithoutZeros(data.avgPiercedReceived_8_8)) + ", ";
-            s += 'nodmg_rcv: ' + color(App.utils.locale.numberWithoutZeros(data.avgNoDamageShotsReceived_8_8));
+            var a:AccountDossier = data as AccountDossier;
+            if (a != null)
+            {
+                XDL(1).value = formatHtmlText(Utils.FormatDate("H:i:s", new Date(null, null, null, null, null,
+                    (data.battleLifeTime/((a.lastBattleTime - a.creationTime)/86400)))));
+            }
 
-            return s;
+            XDL(2).value = formatHtmlText(App.utils.locale.integer(data.battlesAfter8_8));
+            XDL(3).value = formatHtmlText(App.utils.locale.integer(data.avgXP_8_8))
+            XDL(4).value = formatHtmlText(App.utils.locale.integer(data.avgOriginalXP_8_8));
+            XDL(5).value = formatHtmlText(App.utils.locale.numberWithoutZeros(data.avgMileage_8_8 / 1000));
+            XDL(6).value = formatHtmlText(App.utils.locale.numberWithoutZeros(data.avgTreesCut_8_8));
+            XDL(7).value = formatHtmlText(App.utils.locale.integer(data.avgDamageAssistedTrack_8_8 + data.avgDamageAssistedRadio_8_8));
+            XDL(8).value = formatHtmlText(App.utils.locale.integer(data.avgDamageAssistedTrack_8_8));
+            XDL(9).value = formatHtmlText(App.utils.locale.integer(data.avgDamageAssistedRadio_8_8));
+            XDL(10).value = formatHtmlText(App.utils.locale.numberWithoutZeros(data.avgHe_hits_8_8));
+            XDL(11).value = formatHtmlText(App.utils.locale.numberWithoutZeros(data.avgHeHitsReceived_8_8));
+            XDL(12).value = formatHtmlText(App.utils.locale.numberWithoutZeros(data.avgPierced_8_8));
+            XDL(13).value = formatHtmlText(App.utils.locale.numberWithoutZeros(data.avgShotsReceived_8_8));
+            XDL(14).value = formatHtmlText(App.utils.locale.numberWithoutZeros(data.avgPiercedReceived_8_8));
+            XDL(15).value = formatHtmlText(App.utils.locale.numberWithoutZeros(data.avgNoDamageShotsReceived_8_8));
         }
 
         private function setStatData(data:DossierBase):void
@@ -579,15 +642,15 @@ package xvm.profile.components
 
         private function formatHtmlText(txt:String, color:uint=1):String
         {
-            return "<span class='txt'>" + (color == 1 ? txt : this.color(txt, color)) + "</span>";
+            return this.color(size("<span class='txt'>" + (color == 1 ? txt : this.color(txt, color)) + "</span>"));
         }
 
-        private function size(txt:String, sz:uint=14):String
+        private function size(txt:String, sz:uint=12):String
         {
             return "<font size='" + sz.toString() + "'>" + txt + "</font>";
         }
 
-        private function color(txt:String, color:uint=0xFDF4CE):String
+        private function color(txt:String, color:uint=Defines.UICOLOR_LIGHT):String
         {
             return "<font color='#" + color.toString(16) + "'>" + txt + "</font>";
         }

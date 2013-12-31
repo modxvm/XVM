@@ -26,6 +26,7 @@ package xvm.profile
 
     public class ProfileXvmView extends XvmViewBase
     {
+        private const WINDOW_EXTRA_WIDTH:int = 70;
         private const WINDOW_EXTRA_HEIGHT:int = 35;
 
         private var summaryPage:ProfileSummary;
@@ -53,11 +54,14 @@ package xvm.profile
             var pw:ProfileWindow = view as ProfileWindow;
             if (pw != null)
             {
-                pw.setActualSize(pw.width, pw.height + WINDOW_EXTRA_HEIGHT);
+                var xw:int = Config.config.hangar.showExtraDataInProfile ? WINDOW_EXTRA_WIDTH : 0;
+                pw.setActualSize(pw.width + xw, pw.height + WINDOW_EXTRA_HEIGHT);
+                pw.tabNavigator.width += xw;
                 pw.btnAddToFriends.y += WINDOW_EXTRA_HEIGHT;
                 pw.btnAddToIgnore.y += WINDOW_EXTRA_HEIGHT;
                 pw.btnCreatePrivateChannel.y += WINDOW_EXTRA_HEIGHT;
                 pw.background.height += WINDOW_EXTRA_HEIGHT;
+                pw.background.width += WINDOW_EXTRA_WIDTH;
             }
         }
 
