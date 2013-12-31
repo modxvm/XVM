@@ -158,9 +158,10 @@ private function RefreshHangarPage():void
         section = Config.config.hangar;
         this.p_hangar.v_hideTutorial.value = section.hideTutorial;
         this.p_hangar.v_xwnInCompany.value = section.xwnInCompany;
-        this.p_hangar.v_widgetsEnabled.value = section.widgetsEnabled;
         this.p_hangar.v_masteryMarkInTankCarousel.value = section.masteryMarkInTankCarousel;
         this.p_hangar.v_masteryMarkInTechTree.value = section.masteryMarkInTechTree;
+        this.p_hangar.v_showExtraDataInProfile.value = section.showExtraDataInProfile;
+        this.p_hangar.v_widgetsEnabled.value = section.widgetsEnabled;
 
         section = Config.config.userInfo;
         this.p_hangar.v_startPage.value = section.startPage;

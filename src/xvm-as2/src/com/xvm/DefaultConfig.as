@@ -63,9 +63,10 @@ class com.xvm.DefaultConfig
             hangar: {
                 hideTutorial: false,
                 xwnInCompany: true,
-                widgetsEnabled: false,
                 masteryMarkInTankCarousel: true,
                 masteryMarkInTechTree: true,
+                showExtraDataInProfile: false,
+                widgetsEnabled: false,
                 // Show ping to the servers
                 pingServers: {
                     enabled: false,

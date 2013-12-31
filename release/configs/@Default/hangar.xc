@@ -10,15 +10,18 @@
     // true - Show XWN instead of XEFF in company windows
     // true - показывать XWN вместо XEFF в окнах рот
     "xwnInCompany": true,
-    // true - Enable widgets
-    // true - включить виджеты
-    "widgetsEnabled": false,
     // true - Show mastery mark in tank carousel
     // true - Показывать знак мастерства в карусели танков
     "masteryMarkInTankCarousel": true,
     // true - Show mastery mark in tech tree
     // true - Показывать знак мастерства в дереве исследований
     "masteryMarkInTechTree": true,
+    // true - Show extra data in profile (experimental)
+    // true - Показывать расширенные данные в профиле (экспериментально)
+    "showExtraDataInProfile": false,
+    // true - Enable widgets
+    // true - включить виджеты
+    "widgetsEnabled": false,
     // Ping servers
     // Пинг серверов
     "pingServers": {

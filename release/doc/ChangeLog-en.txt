@@ -2,8 +2,9 @@
   [NEW FUNCTIONS]
   * localization: added Malay language
   * new options:
-      hangar/masteryMarkInTankCarousel
-      hangar/masteryMarkInTechTree
+      hangar/masteryMarkInTankCarousel - Show mastery mark in tank carousel
+      hangar/masteryMarkInTechTree - Show mastery mark in tech tree
+      hangar/showExtraDataInProfile - Show extra data in profile (experimental)
 
 XVM-5.0.2-test1:
   * adaptation to WoT 0.8.10

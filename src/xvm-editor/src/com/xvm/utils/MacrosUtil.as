@@ -5,7 +5,6 @@
 package com.xvm.utils
 {
     import com.xvm.*;
-    import com.xvm.vehinfo.VehicleInfo;
     import org.idmedia.as3commons.util.StringUtils;
 
     public class MacrosUtil
@@ -102,9 +101,11 @@ package com.xvm.utils
                 var premium:Boolean = Config.config.colors.vtype.usePremiumColor == true;
                 if (!vtype || premium)
                 {
+					/*
                     var vi2:Object = VehicleInfo.getInfo2ByIcon(icon);
                     if (vi2 != null)
                         vtype = (premium && vi2.premium == 1) ? "premium" : vi2.type;
+					*/
                 }
                 if (!vtype || !Config.config.colors.vtype[vtype])
                     return null;

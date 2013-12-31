@@ -8,9 +8,10 @@ package com.xvm.types.cfg
     {
         public var hideTutorial:Boolean;
         public var xwnInCompany:Boolean;
-        public var widgetsEnabled:Boolean;
         public var masteryMarkInTankCarousel:Boolean;
         public var masteryMarkInTechTree:Boolean;
+        public var showExtraDataInProfile:Boolean;
+        public var widgetsEnabled:Boolean;
         public var pingServers:CPingServers; // Show ping to the servers
     }
 }

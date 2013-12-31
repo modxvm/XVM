@@ -1,0 +1,401 @@
+﻿/**
+ * XVM
+ * @author Maxim Schedriviy <m.schedriviy@gmail.com>
+ */
+package
+{
+    import com.xvm.io.JSONx;
+
+    import flash.utils.Dictionary;
+
+    public class VehicleNames
+    {
+        public static function get data():Dictionary
+        {
+            var d:Dictionary = new Dictionary();
+
+            d['ussr-Observer'] = { name: null, short: '' };
+
+            // level 1
+            d['ussr-MS-1'] = { name: null, short: 'MS' };
+            d['germany-Ltraktor'] = { name: null, short: 'Ltrak' };
+            d['usa-T1_Cunningham'] = { name: null, short: 'Cunn' };
+            d['china-Ch06_Renault_NC31'] = { name: null, short: '31' };
+            d['france-RenaultFT'] = { name: null, short: 'FT' };
+            d['japan-NC27'] = { name: null, short: 'Otsu' };
+            d['uk-GB01_Medium_Mark_I'] = { name: null, short: 'Mk1' };
+
+            // level 2
+            d['ussr-BT-2'] = { name: null, short: 'BT2' };
+            d['ussr-T-26'] = { name: null, short: 'T26' };
+            d['ussr-T-60'] = { name: null, short: 'T60' };
+            d['ussr-Tetrarch_LL'] = { name: null, short: 'Tetr' };
+            d['germany-H39_captured'] = { name: null, short: 'H39' };
+            d['germany-Pz35t'] = { name: null, short: 'Pz35' };
+            d['germany-PzII'] = { name: null, short: 'Pz2' };
+            d['usa-M2_lt'] = { name: null, short: 'M2LT' };
+            d['usa-T1_E6'] = { name: null, short: 'T1E6' };
+            d['usa-T7_Combat_Car'] = { name: null, short: 'T7' };
+            d['china-Ch07_Vickers_MkE_Type_BT26'] = { name: null, short: 'BT26' };
+            d['france-D1'] = { name: null, short: 'D1' };
+            d['france-Hotchkiss_H35'] = { name: null, short: 'H35' };
+            d['uk-GB03_Cruiser_Mk_I'] = { name: null, short: 'Cru1' };
+            d['uk-GB58_Cruiser_Mk_III'] = { name: null, short: 'Crui3' };
+            d['uk-GB76_Mk_VIC'] = { name: null, short: 'Mk6c' };
+            d['japan-Ha_Go'] = { name: null, short: 'HaGo' };
+            d['usa-T2_med'] = { name: null, short: 'T2MT' };
+            d['uk-GB05_Vickers_Medium_Mk_II'] = { name: null, short: 'Mk2' };
+            d['japan-Chi_Ni'] = { name: null, short: 'ChiNi' };
+            d['ussr-AT-1'] = { name: null, short: 'AT-1' };
+            d['germany-PanzerJager_I'] = { name: null, short: 'PzJg' };
+            d['usa-T18'] = { name: null, short: 'T18' };
+            d['france-RenaultFT_AC'] = { name: null, short: 'FTAC' };
+            d['uk-GB39_Universal_CarrierQF2'] = { name: null, short: 'QF2' };
+            d['ussr-SU-18'] = { name: null, short: 'Su18' };
+            d['germany-GW_Mk_VIe'] = { name: null, short: 'Gw6e' };
+            d['usa-T57'] = { name: null, short: 'T57' };
+            d['france-RenaultBS'] = { name: null, short: 'BS' };
+            d['uk-GB25_Loyd_Carrier'] = { name: null, short: '2pdr' };
+
+            // level 3
+            d['ussr-BT-7'] = { name: null, short: 'BT7' };
+            d['ussr-LTP'] = { name: null, short: 'LTP' };
+            d['ussr-T-46'] = { name: null, short: 'T46' };
+            d['ussr-T-70'] = { name: null, short: 'T70' };
+            d['germany-Pz_II_AusfG'] = { name: null, short: 'Pz2G' };
+            d['germany-Pz38t'] = { name: null, short: 'Pz38t' };
+            d['germany-PzI_ausf_C'] = { name: null, short: 'Pz2C' };
+            d['germany-PzIII_A'] = { name: null, short: 'Pz3A' };
+            d['germany-T-15'] = { name: null, short: 'T-15' };
+            d['usa-M22_Locust'] = { name: null, short: 'Locus' };
+            d['usa-M3_Stuart'] = { name: null, short: 'M3Stu' };
+            d['usa-MTLS-1G14'] = { name: null, short: 'MTLS' };
+            d['china-Ch08_Type97_Chi_Ha'] = { name: null, short: '97' };
+            d['france-AMX38'] = { name: null, short: 'AMX38' };
+            d['uk-GB59_Cruiser_Mk_IV'] = { name: null, short: 'Crui4' };
+            d['uk-GB69_Cruiser_Mk_II'] = { name: null, short: 'Crui2' };
+            d['japan-Ke_Ni'] = { name: null, short: 'KeNi' };
+            d['japan-Ke_Ni_B'] = { name: null, short: 'KeNiB' };
+            d['germany-S35_captured'] = { name: null, short: 'S35' };
+            d['usa-M2_med'] = { name: null, short: 'M2MT' };
+            d['france-D2'] = { name: null, short: 'D2' };
+            d['uk-GB06_Vickers_Medium_Mk_III'] = { name: null, short: 'Mk3' };
+            d['japan-Chi_Ha'] = { name: null, short: 'ChiHa' };
+            d['ussr-SU-76'] = { name: null, short: 'Su76' };
+            d['ussr-SU76I'] = { name: null, short: 'Su76I' };
+            d['germany-G20_Marder_II'] = { name: null, short: 'Mard2' };
+            d['usa-T82'] = { name: null, short: 'T82' };
+            d['france-FCM_36Pak40'] = { name: null, short: 'Fcm36' };
+            d['france-RenaultUE57'] = { name: null, short: 'UE57' };
+            d['uk-GB42_Valentine_AT'] = { name: null, short: 'ValAT' };
+            d['ussr-SU-26'] = { name: null, short: 'Su26' };
+            d['germany-Bison_I'] = { name: null, short: 'Bison' };
+            d['germany-Wespe'] = { name: null, short: 'Wespe' };
+            d['usa-M7_Priest'] = { name: null, short: 'Pries' };
+            d['usa-Sexton_I'] = { name: null, short: 'Sext1usa' };
+            d['france-Lorraine39_L_AM'] = { name: null, short: 'Lor39' };
+            d['uk-GB27_Sexton'] = { name: null, short: 'Sext' };
+            d['uk-GB78_Sexton_I'] = { name: null, short: 'Sext1' };
+
+            // level 4
+            d['ussr-A-20'] = { name: null, short: 'A20' };
+            d['ussr-T-50'] = { name: null, short: 'T50' };
+            d['germany-Pz38_NA'] = { name: null, short: 'Pz38' };
+            d['germany-PzII_Luchs'] = { name: null, short: 'Luchs' };
+            d['usa-M5_Stuart'] = { name: null, short: 'M5Stu' };
+            d['china-Ch09_M5'] = { name: null, short: 'M5' };
+            d['japan-Ke_Ho'] = { name: null, short: 'KeHo' };
+            d['ussr-T-28'] = { name: null, short: 'T-28' };
+            d['germany-PzIII'] = { name: null, short: 'Pz3' };
+            d['germany-VK2001DB'] = { name: null, short: '2001' };
+            d['usa-M3_Grant'] = { name: null, short: 'M3Lee' };
+            d['uk-GB07_Matilda'] = { name: null, short: 'Matil' };
+            d['japan-Chi_He'] = { name: null, short: 'ChiHe' };
+            d['germany-DW_II'] = { name: null, short: 'DWII' };
+            d['france-B1'] = { name: null, short: 'B1' };
+            d['ussr-GAZ-74b'] = { name: null, short: 'Su85b' };
+            d['germany-Hetzer'] = { name: null, short: 'Hetz' };
+            d['germany-Marder_III'] = { name: null, short: 'Mard3' };
+            d['usa-M8A1'] = { name: null, short: 'M8A1' };
+            d['usa-T40'] = { name: null, short: 'T40' };
+            d['france-Somua_Sau_40'] = { name: null, short: 'Somua' };
+            d['uk-GB57_Alecto'] = { name: null, short: 'Alect' };
+            d['ussr-SU-5'] = { name: null, short: 'Su5' };
+            d['germany-Pz_Sfl_IVb'] = { name: null, short: 'PzS4b' };
+            d['germany-Sturmpanzer_II'] = { name: null, short: 'StPz2' };
+            d['usa-M37'] = { name: null, short: 'M37' };
+            d['france-AMX_Ob_Am105'] = { name: null, short: 'Am105' };
+            d['uk-GB26_Birch_Gun'] = { name: null, short: 'Birch' };
+
+            // level 5
+            d['ussr-T_50_2'] = { name: null, short: '50-2' };
+            d['germany-VK1602'] = { name: null, short: '1602' };
+            d['france-ELC_AMX'] = { name: null, short: 'ELC' };
+            d['ussr-T-34'] = { name: null, short: '34' };
+            d['germany-PzIII_IV'] = { name: null, short: 'Pz3/4' };
+            d['germany-PzIV'] = { name: null, short: 'Pz4' };
+            d['germany-T-25'] = { name: null, short: 'T-25' };
+            d['usa-M4_Sherman'] = { name: null, short: 'Sherm' };
+            d['usa-M7_med'] = { name: null, short: 'M7' };
+            d['usa-Ram-II'] = { name: null, short: 'Ram2' };
+            d['china-Ch21_T34'] = { name: null, short: 't-34' };
+            d['japan-Chi_Nu'] = { name: null, short: 'ChiNu' };
+            d['ussr-KV'] = { name: null, short: 'KV' };
+            d['ussr-KV1'] = { name: null, short: 'KV1' };
+            d['germany-VK3001H'] = { name: null, short: '3001H' };
+            d['usa-T1_hvy'] = { name: null, short: 'T1Hv' };
+            d['france-BDR_G1B'] = { name: null, short: 'BDR' };
+            d['uk-GB08_Churchill_I'] = { name: null, short: 'Chur1' };
+            d['ussr-SU-85'] = { name: null, short: 'Su85' };
+            d['germany-Pz_Sfl_IVc'] = { name: null, short: 'PzS4c' };
+            d['germany-StuGIII'] = { name: null, short: 'StuG' };
+            d['usa-M10_Wolverine'] = { name: null, short: 'Wolv' };
+            d['usa-T49'] = { name: null, short: 'T49' };
+            d['france-S_35CA'] = { name: null, short: 'S35' };
+            d['uk-GB73_AT2'] = { name: null, short: 'AT2' };
+            d['ussr-SU122A'] = { name: null, short: '122A' };
+            d['germany-Grille'] = { name: null, short: 'Grill' };
+            d['usa-M41'] = { name: null, short: 'M41' };
+            d['france-_105_leFH18B2'] = { name: null, short: 'leFH' };
+            d['france-AMX_105AM'] = { name: null, short: '105AM' };
+            d['uk-GB28_Bishop'] = { name: null, short: 'Bishp' };
+
+            // level 6
+            d['ussr-MT25'] = { name: null, short: 'MT25' };
+            d['germany-VK2801'] = { name: null, short: '2801' };
+            d['usa-T21'] = { name: null, short: 'T21' };
+            d['china-Ch15_59_16'] = { name: null, short: '59-16' };
+            d['china-Ch24_Type64'] = { name: null, short: 't-64' };
+            d['france-AMX_12t'] = { name: null, short: '12t' };
+            d['ussr-A43'] = { name: null, short: 'A43' };
+            d['ussr-T-34-85'] = { name: null, short: '3485' };
+            d['germany-PzIV_schmalturm'] = { name: null, short: 'Pz4S' };
+            d['germany-VK3001P'] = { name: null, short: '3001P' };
+            d['germany-VK3002DB_V1'] = { name: null, short: '3002DB' };
+            d['germany-VK3002M'] = { name: null, short: '3002M' };
+            d['usa-M4A3E8_Sherman'] = { name: null, short: 'SheE8' };
+            d['usa-Sherman_Jumbo'] = { name: null, short: 'SheJm' };
+            d['china-Ch20_Type58'] = { name: null, short: '58' };
+            d['uk-GB21_Cromwell'] = { name: null, short: 'Cromw' };
+            d['japan-Chi_To'] = { name: null, short: 'ChiTo' };
+            d['ussr-KV-1s'] = { name: null, short: 'KV1S' };
+            d['ussr-KV2'] = { name: null, short: 'KV2' };
+            d['ussr-T150'] = { name: null, short: 'T150' };
+            d['germany-VK3601H'] = { name: null, short: '3601' };
+            d['usa-M6'] = { name: null, short: 'M6' };
+            d['france-ARL_44'] = { name: null, short: 'ARL' };
+            d['uk-GB09_Churchill_VII'] = { name: null, short: 'Chur7' };
+            d['ussr-SU-100'] = { name: null, short: 'Su100' };
+            d['ussr-SU100Y'] = { name: null, short: '100Y' };
+            d['germany-DickerMax'] = { name: null, short: 'DMax' };
+            d['germany-JagdPzIV'] = { name: null, short: 'JPz' };
+            d['germany-Nashorn'] = { name: null, short: 'Nash' };
+            d['usa-M18_Hellcat'] = { name: null, short: 'Hellc' };
+            d['usa-M36_Slagger'] = { name: null, short: 'Jacks' };
+            d['france-ARL_V39'] = { name: null, short: 'V39' };
+            d['uk-GB40_Gun_Carrier_Churchill'] = { name: null, short: 'GChur' };
+            d['uk-GB74_AT8'] = { name: null, short: 'AT8' };
+            d['ussr-SU-8'] = { name: null, short: 'Su8' };
+            d['germany-Hummel'] = { name: null, short: 'Humm' };
+            d['usa-M44'] = { name: null, short: 'M44' };
+            d['france-AMX_13F3AM'] = { name: null, short: '13F3' };
+            d['uk-GB77_FV304'] = { name: null, short: 'FV304' };
+
+            // level 7
+            d['germany-Auf_Panther'] = { name: null, short: 'APant' };
+            d['usa-T71'] = { name: null, short: '71' };
+            d['china-Ch02_Type62'] = { name: null, short: '62' };
+            d['china-Ch16_WZ_131'] = { name: null, short: '131' };
+            d['france-AMX_13_75'] = { name: null, short: '1375' };
+            d['ussr-A44'] = { name: null, short: 'A44' };
+            d['ussr-KV-13'] = { name: null, short: 'KV13' };
+            d['ussr-T-43'] = { name: null, short: '43' };
+            d['germany-PzV'] = { name: null, short: 'Pant' };
+            d['germany-VK3002DB'] = { name: null, short: '3002D' };
+            d['usa-T20'] = { name: null, short: 'T20' };
+            d['china-Ch04_T34_1'] = { name: null, short: '34/1' };
+            d['uk-GB22_Comet'] = { name: null, short: 'Comet' };
+            d['japan-Chi_Ri'] = { name: null, short: 'ChiRi' };
+            d['ussr-IS'] = { name: null, short: 'IS' };
+            d['ussr-KV-3'] = { name: null, short: 'KV3' };
+            d['germany-PzVI'] = { name: null, short: 'Tger' };
+            d['germany-PzVI_Tiger_P'] = { name: null, short: 'TgerP' };
+            d['usa-T29'] = { name: null, short: 'T29' };
+            d['china-Ch10_IS2'] = { name: null, short: 'IS2' };
+            d['france-AMX_M4_1945'] = { name: null, short: 'AMX1945' };
+            d['uk-GB10_Black_Prince'] = { name: null, short: 'Princ' };
+            d['ussr-SU100M1'] = { name: null, short: '100M1' };
+            d['ussr-SU122_44'] = { name: null, short: '12244' };
+            d['ussr-SU-152'] = { name: null, short: '152' };
+            d['germany-JagdPanther'] = { name: null, short: 'JagP' };
+            d['germany-Sturer_Emil'] = { name: null, short: 'Emil' };
+            d['usa-T25_2'] = { name: null, short: '25/2' };
+            d['usa-T25_AT'] = { name: null, short: '25AT' };
+            d['france-AMX_AC_Mle1946'] = { name: null, short: 'Mle46' };
+            d['uk-GB71_AT_15A'] = { name: null, short: 'AT15A' };
+            d['uk-GB75_AT7'] = { name: null, short: 'AT7' };
+            d['ussr-S-51'] = { name: null, short: 'S51' };
+            d['ussr-SU14_1'] = { name: null, short: 'Su141' };
+            d['germany-G_Panther'] = { name: null, short: 'GwP' };
+            d['usa-M12'] = { name: null, short: 'M12' };
+            d['france-Lorraine155_50'] = { name: null, short: '15550' };
+            d['uk-GB29_Crusader_5inch'] = { name: null, short: 'Crus5' };
+
+            // level 8
+            d['china-Ch17_WZ131_1_WZ132'] = { name: null, short: '132' };
+            d['france-AMX_13_90'] = { name: null, short: '1390' };
+            d['ussr-Object416'] = { name: null, short: 'o416' };
+            d['ussr-T-44'] = { name: null, short: '44' };
+            d['germany-Indien_Panzer'] = { name: null, short: 'IndPz' };
+            d['germany-Panther_II'] = { name: null, short: 'Pant2' };
+            d['usa-Pershing'] = { name: null, short: 'Persh' };
+            d['usa-T23'] = { name: null, short: 'T23' };
+            d['usa-T69'] = { name: null, short: '69' };
+            d['china-Ch05_T34_2'] = { name: null, short: '34/2' };
+            d['uk-GB23_Centurion'] = { name: null, short: 'Cent' };
+            d['japan-STA_1'] = { name: null, short: 'STA1' };
+            d['ussr-IS-3'] = { name: null, short: '3' };
+            d['ussr-KV4'] = { name: null, short: 'KV4' };
+            d['germany-Lowe'] = { name: null, short: 'Lowe' };
+            d['germany-PzVIB_Tiger_II'] = { name: null, short: 'Tger2' };
+            d['germany-VK4502A'] = { name: null, short: '4502A' };
+            d['usa-M6A2E1'] = { name: null, short: 'M6A2E' };
+            d['usa-T32'] = { name: null, short: 'T32' };
+            d['usa-T34_hvy'] = { name: null, short: 'T34Hv' };
+            d['china-Ch03_WZ-111'] = { name: null, short: '111' };
+            d['china-Ch11_110'] = { name: null, short: '110' };
+            d['france-AMX_50_100'] = { name: null, short: '50100' };
+            d['uk-GB11_Caernarvon'] = { name: null, short: 'Caern' };
+            d['ussr-ISU-152'] = { name: null, short: '152' };
+            d['ussr-SU-101'] = { name: null, short: 'Su101' };
+            d['germany-Ferdinand'] = { name: null, short: 'Ferd' };
+            d['germany-JagdPantherII'] = { name: null, short: 'JagP2' };
+            d['germany-RhB_Waffentrager'] = { name: null, short: 'WTRhB' };
+            d['usa-T28'] = { name: null, short: 'T28' };
+            d['usa-T28_Prototype'] = { name: null, short: 'T28Pr' };
+            d['france-AMX_AC_Mle1948'] = { name: null, short: 'Mle48' };
+            d['uk-GB72_AT15'] = { name: null, short: 'AT15' };
+            d['ussr-SU-14'] = { name: null, short: 'Su142' };
+            d['germany-GW_Tiger_P'] = { name: null, short: 'GwTP' };
+            d['usa-M40M43'] = { name: null, short: '4043' };
+            d['france-Lorraine155_51'] = { name: null, short: '15551' };
+            d['uk-GB79_FV206'] = { name: null, short: 'FV206' };
+
+            // level 9
+            d['ussr-R104_Object_430_II'] = { name: null, short: '430/2' };
+            d['ussr-T-54'] = { name: null, short: '54' };
+            d['germany-E-50'] = { name: null, short: '50' };
+            d['germany-Pro_Ag_A'] = { name: null, short: 'LeoPr' };
+            d['usa-M46_Patton'] = { name: null, short: 'Patt' };
+            d['usa-T54E1'] = { name: null, short: '54E1' };
+            d['china-Ch18_WZ-120'] = { name: null, short: '120' };
+            d['france-Lorraine40t'] = { name: null, short: 'Lor40' };
+            d['uk-GB24_Centurion_Mk3'] = { name: null, short: 'Cent3' };
+            d['japan-Type_61'] = { name: null, short: '61' };
+            d['ussr-IS8'] = { name: null, short: '8' };
+            d['ussr-ST_I'] = { name: null, short: 'ST1' };
+            d['germany-E-75'] = { name: null, short: '75' };
+            d['germany-VK4502P'] = { name: null, short: '4502P' };
+            d['usa-M103'] = { name: null, short: '103' };
+            d['china-Ch12_111_1_2_3'] = { name: null, short: '111/1' };
+            d['france-AMX_50_120'] = { name: null, short: '50120' };
+            d['uk-GB12_Conqueror'] = { name: null, short: 'Conq' };
+            d['ussr-Object_704'] = { name: null, short: '704' };
+            d['ussr-SU122_54'] = { name: null, short: '12254' };
+            d['germany-JagdTiger'] = { name: null, short: 'JagT' };
+            d['germany-Waffentrager_IV'] = { name: null, short: 'WT4' };
+            d['usa-T30'] = { name: null, short: 'T30' };
+            d['usa-T95'] = { name: null, short: '95' };
+            d['france-AMX50_Foch'] = { name: null, short: 'Foch' };
+            d['uk-GB32_Tortoise'] = { name: null, short: 'Tort' };
+            d['ussr-Object_212'] = { name: null, short: '212' };
+            d['germany-G_Tiger'] = { name: null, short: 'GwT' };
+            d['usa-M53_55'] = { name: null, short: '5355' };
+            d['france-Bat_Chatillon155_55'] = { name: null, short: 'Bat155' };
+            d['uk-GB30_FV3805'] = { name: null, short: '3805' };
+
+            // level 10
+            d['ussr-Object_140'] = { name: null, short: 'o140' };
+            d['ussr-Object_430'] = { name: null, short: '430' };
+            d['ussr-Object_907'] = { name: null, short: '907' };
+            d['ussr-T62A'] = { name: null, short: '62A' };
+            d['germany-E50_Ausf_M'] = { name: null, short: '50M' };
+            d['germany-Leopard1'] = { name: null, short: 'Leo' };
+            d['usa-M48A1'] = { name: null, short: 'M48' };
+            d['usa-M60'] = { name: null, short: 'M60' };
+            d['china-Ch19_121'] = { name: null, short: '121' };
+            d['france-Bat_Chatillon25t'] = { name: null, short: 'Bat' };
+            d['uk-GB70_FV4202_105'] = { name: null, short: '4202' };
+            d['japan-ST_B1'] = { name: null, short: 'STB1' };
+            d['ussr-IS-4'] = { name: null, short: '4' };
+            d['ussr-IS-7'] = { name: null, short: '7' };
+            d['germany-E-100'] = { name: null, short: '100' };
+            d['germany-Maus'] = { name: null, short: 'Maus' };
+            d['germany-VK7201'] = { name: null, short: '7201' };
+            d['usa-T110'] = { name: null, short: '110E5' };
+            d['usa-T57_58'] = { name: null, short: 'T57H' };
+            d['china-Ch22_113'] = { name: null, short: '113' };
+            d['france-F10_AMX_50B'] = { name: null, short: '50B' };
+            d['uk-GB13_FV215b'] = { name: null, short: '215b' };
+            d['ussr-Object263'] = { name: null, short: '263' };
+            d['ussr-Object268'] = { name: null, short: '268' };
+            d['germany-JagdPz_E100'] = { name: null, short: 'JPz100' };
+            d['germany-Waffentrager_E100'] = { name: null, short: 'WT100' };
+            d['usa-T110E3'] = { name: null, short: 'E3' };
+            d['usa-T110E4'] = { name: null, short: 'E4' };
+            d['france-AMX_50Fosh_155'] = { name: null, short: 'Foch155' };
+            d['uk-GB48_FV215b_183'] = { name: null, short: '183' };
+            d['ussr-Object_261'] = { name: null, short: '261' };
+            d['germany-G_E'] = { name: null, short: 'GwE' };
+            d['usa-T92'] = { name: null, short: 'T92' };
+            d['france-Bat_Chatillon155_58'] = { name: null, short: '15558' };
+            d['uk-GB31_Conqueror_Gun'] = { name: null, short: 'ConqG' };
+
+            // non-standard
+            d['germany-PzI'] = { name: null, short: 'Pz1' };
+            d['usa-T2_lt'] = { name: null, short: 'T2LT' };
+            d['ussr-BT-SV'] = { name: null, short: 'BTSV' };
+            d['ussr-M3_Stuart_LL'] = { name: null, short: 'StuLL' };
+            d['ussr-T-127'] = { name: null, short: 'T127' };
+            d['germany-PzII_J'] = { name: null, short: 'Pz2J' };
+            d['ussr-T80'] = { name: null, short: 'T80' };
+            d['ussr-Valentine_LL'] = { name: null, short: 'ValLL' };
+            d['france-AMX40'] = { name: null, short: 'AMX40' };
+            d['uk-GB04_Valentine'] = { name: null, short: 'Val1' };
+            d['uk-GB60_Covenanter'] = { name: null, short: 'Coven' };
+            d['ussr-A-32'] = { name: null, short: 'A32' };
+            d['germany-B-1bis_captured'] = { name: null, short: 'B1bis' };
+            d['usa-M24_Chaffee'] = { name: null, short: 'Chaff' };
+            d['uk-GB20_Crusader'] = { name: null, short: 'Crus' };
+            d['ussr-Matilda_II_LL'] = { name: null, short: 'MatLL' };
+            d['germany-PzIV_Hydro'] = { name: null, short: 'Pz4H' };
+            d['usa-M4A2E4'] = { name: null, short: 'SheE4' };
+            d['uk-GB68_Matilda_Black_Prince'] = { name: null, short: 'MatilBP' };
+            d['japan-Chi_Nu_Kai'] = { name: null, short: 'ChiNuKai' };
+            d['ussr-Churchill_LL'] = { name: null, short: 'Chur' };
+            d['ussr-KV-220'] = { name: null, short: 'KV220' };
+            d['ussr-KV-220_action'] = { name: null, short: 'KV220A' };
+            d['usa-T14'] = { name: null, short: 'T14' };
+            d['uk-GB51_Excelsior'] = { name: null, short: 'Excel' };
+            d['ussr-SU_85I'] = { name: null, short: 'Su85i' };
+            d['germany-PzV_PzIV'] = { name: null, short: 'Pz5/4' };
+            d['germany-PzV_PzIV_ausf_Alfa'] = { name: null, short: 'Pz5/4A' };
+            d['uk-GB63_TOG_II'] = { name: null, short: 'TOG' };
+            d['ussr-T44_122'] = { name: null, short: 'T44-122' };
+            d['ussr-T44_85'] = { name: null, short: 'T44-85' };
+            d['germany-Panther_M10'] = { name: null, short: 'PaM10' };
+            d['germany-E-25'] = { name: null, short: 'E25' };
+            d['usa-T26_E4_SuperPershing'] = { name: null, short: 'Super' };
+            d['china-Ch01_Type59'] = { name: null, short: '59' };
+            d['china-Ch01_Type59_Gold'] = { name: null, short: '59G' };
+            d['china-Ch14_T34_3'] = { name: null, short: '34/3' };
+            d['ussr-KV-5'] = { name: null, short: 'KV5' };
+            d['ussr-Object252'] = { name: null, short: 'IS6' };
+            d['china-Ch23_112'] = { name: null, short: '112' };
+            d['france-FCM_50t'] = { name: null, short: 'Fcm50' };
+            d['germany-JagdTiger_SdKfz_185'] = { name: null, short: 'JgT88' };
+
+            return d;
+        }
+    }
+}

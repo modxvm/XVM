@@ -5,7 +5,6 @@
 package com.xvm.misc
 {
     import com.xvm.Defines;
-    import com.xvm.vehinfo.VehicleInfo;
 
     public class DefaultConfig
     {
@@ -39,7 +38,7 @@ package com.xvm.misc
             c.alpha = getAlphaSection();
             c.texts = getTextsSection();
             c.iconset = getIconsetSection();
-            c.vehicleNames = VehicleInfo.getVehicleNamesData();
+            c.vehicleNames = VehicleNames.data;
             c.consts = getConstsSection();
             return c;
         }
@@ -108,9 +107,10 @@ package com.xvm.misc
             var c:Object = new Object();
             c.hideTutorial = false;
             c.xwnInCompany = true;
-            c.widgetsEnabled = false;
             c.masteryMarkInTankCarousel = true;
             c.masteryMarkInTechTree = true;
+            c.showExtraDataInProfile = false;
+            c.widgetsEnabled = false;
             // Show ping to the servers
             c.pingServers = new Object();
             c.pingServers.enabled = false;

@@ -49,9 +49,10 @@
   },
   "hangar": {
     "hideTutorial": false,
-    "widgetsEnabled": true,
     "masteryMarkInTankCarousel": true,
     "masteryMarkInTechTree": true,
+    "showExtraDataInProfile": false,
+    "widgetsEnabled": true,
     "pingServers": {
       "$ref": { "path":"def.pingServers" },
       "x": 5

@@ -109,9 +109,10 @@ package com.xvm.misc
             var c:CHangar = new CHangar();
             c.hideTutorial = false;
             c.xwnInCompany = true;
-            c.widgetsEnabled = false;
             c.masteryMarkInTankCarousel = true;
             c.masteryMarkInTechTree = true;
+            c.showExtraDataInProfile = false;
+            c.widgetsEnabled = false;
             // Show ping to the servers
             c.pingServers = new CPingServers();
             c.pingServers.enabled = false;

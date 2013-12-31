@@ -5,7 +5,6 @@
 package com.xvm.utils
 {
     import com.xvm.*;
-    import com.xvm.vehinfo.VehicleInfo;
 
     public class GraphicsUtil
     {

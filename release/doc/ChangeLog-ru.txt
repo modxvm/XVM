@@ -2,8 +2,9 @@ XVM-dev:
   [НОВЫЕ ФУНКЦИИ]
   * локализация: добавлен малайский язык
   * новые опции:
-      hangar/masteryMarkInTankCarousel
-      hangar/masteryMarkInTechTree
+      hangar/masteryMarkInTankCarousel - Показывать знак мастерства в карусели танков
+      hangar/masteryMarkInTechTree - Показывать знак мастерства в дереве исследований
+      hangar/showExtraDataInProfile - Показывать расширенные данные в профиле (экспериментально)
 
 XVM-5.0.2-test1:
   * адаптация к WoT 0.8.10
