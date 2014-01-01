@@ -64,7 +64,11 @@ package xvm.profile
                     pw.setSize(pw.width + WINDOW_EXTRA_WIDTH, pw.height + WINDOW_EXTRA_HEIGHT);
                     App.utils.scheduler.envokeInNextFrame(function():void
                     {
-                        pw.tabNavigator.centerOffset = ProfileConstants.WINDOW_CENTER_OFFSET + WINDOW_EXTRA_WIDTH / 2;
+                        var co:int = ProfileConstants.WINDOW_CENTER_OFFSET + WINDOW_EXTRA_WIDTH / 2;
+                        pw.tabNavigator.centerOffset = co;
+                        var sw:ProfileSummaryWindow = pw.tabNavigator.viewStack.currentView as ProfileSummaryWindow;
+                        if (sw != null)
+                            sw.centerOffset = co;
                     });
                 }
             }
