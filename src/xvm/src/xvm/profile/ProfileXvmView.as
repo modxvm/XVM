@@ -26,7 +26,7 @@ package xvm.profile
 
     public class ProfileXvmView extends XvmViewBase
     {
-        private const WINDOW_EXTRA_WIDTH:int = 70;
+        private const WINDOW_EXTRA_WIDTH:int = 35;
         private const WINDOW_EXTRA_HEIGHT:int = 35;
 
         private var summaryPage:ProfileSummary;
@@ -54,14 +54,22 @@ package xvm.profile
             var pw:ProfileWindow = view as ProfileWindow;
             if (pw != null)
             {
-                var xw:int = Config.config.hangar.showExtraDataInProfile ? WINDOW_EXTRA_WIDTH : 0;
-                pw.setActualSize(pw.width + xw, pw.height + WINDOW_EXTRA_HEIGHT);
-                pw.tabNavigator.width += xw;
-                pw.background.width += xw;
-                pw.background.height += WINDOW_EXTRA_HEIGHT;
-                pw.btnAddToFriends.y += WINDOW_EXTRA_HEIGHT;
-                pw.btnAddToIgnore.y += WINDOW_EXTRA_HEIGHT;
-                pw.btnCreatePrivateChannel.y += WINDOW_EXTRA_HEIGHT;
+                if (Config.config.hangar.showExtraDataInProfile)
+                {
+                    var xw:int = Config.config.hangar.showExtraDataInProfile ? WINDOW_EXTRA_WIDTH : 0;
+                    var xh:int = Config.config.hangar.showExtraDataInProfile ? WINDOW_EXTRA_HEIGHT : 0;
+                    pw.btnAddToFriends.y += xh;
+                    pw.btnAddToIgnore.y += xh;
+                    pw.btnCreatePrivateChannel.y += xh;
+                    pw.background.width += xw;
+                    pw.background.height += xh;
+                    pw.setSize(pw.width + xw, pw.height + WINDOW_EXTRA_HEIGHT);
+                    App.utils.scheduler.envokeInNextFrame(function():void
+                    {
+                        pw.tabNavigator.setSize(pw.tabNavigator.width + xw, pw.tabNavigator.height + xh);
+                        pw.tabNavigator.centerOffset = ProfileConstants.WINDOW_CENTER_OFFSET + WINDOW_EXTRA_WIDTH / 2;
+                    });
+                }
             }
         }
 

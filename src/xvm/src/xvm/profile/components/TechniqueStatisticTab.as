@@ -262,22 +262,22 @@ package xvm.profile.components
                     extraDataPanelLines.push(dl);
                     extraDataPanel.addChild(dl);
                 }
-                XDL(0).label = Locale.get("Average battle life time");
-                XDL(1).label = Locale.get("Battle life time per day");
+                XDL(0).label = Locale.get("Average battle time");
+                XDL(1).label = Locale.get("Average battle time per day");
                 XDL(2).label = Locale.get("Battles after 0.8.8");
-                XDL(3).label = Locale.get("Average XP");
-                XDL(4).label = Locale.get("Average XP without premium");
-                XDL(5).label = Locale.get("Average km per battle");
-                XDL(6).label = Locale.get("Average tree cut per battle");
+                XDL(3).label = Locale.get("Average experience");
+                XDL(4).label = Locale.get("Average experience without premium");
+                XDL(5).label = Locale.get("Average distance driven per battle");
+                XDL(6).label = Locale.get("Average woodcuts per battle");
                 XDL(7).label = Locale.get("Average damage assisted");
-                XDL(8).label = Locale.get("    ... track");
-                XDL(9).label = Locale.get("    ... radio");
-                XDL(10).label = Locale.get("Average splash damage");
-                XDL(11).label = Locale.get("Average splash damage received");
-                XDL(12).label = Locale.get("Average pierced per battle");
-                XDL(13).label = Locale.get("Average shots received");
-                XDL(14).label = Locale.get("Average pierced received");
-                XDL(15).label = Locale.get("Average no dmg shots received");
+                XDL(8).label = Locale.get("    by tracking");
+                XDL(9).label = Locale.get("    by spotting");
+                XDL(10).label = Locale.get("Average HE shells fired (splash)");
+                XDL(11).label = Locale.get("Average HE shells received (splash)");
+                XDL(12).label = Locale.get("Average penetrations per battle");
+                XDL(13).label = Locale.get("Average hits received");
+                XDL(14).label = Locale.get("Average penetrations received");
+                XDL(15).label = Locale.get("Average ricochets received");
             }
 
             ratingTF = new TextField();
