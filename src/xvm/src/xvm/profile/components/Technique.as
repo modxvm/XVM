@@ -9,6 +9,7 @@ package xvm.profile.components
     import net.wg.gui.lobby.profile.pages.summary.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
     import net.wg.gui.components.advanced.*;
+    import scaleform.clik.events.*;
     import xvm.profile.UI.*;
 
     UI_TechniqueStatisticTab;
@@ -159,14 +160,18 @@ package xvm.profile.components
 
         // PRIVATE
 
-
         // STAT
 
         private function onStatLoaded():void
         {
             //Logger.add("onStatLoaded: " + playerName);
             if (page != null && page.listComponent != null && page.listComponent.visible)
-                page.listComponent.dispatchEvent(new Event(TechniqueListComponent.DATA_CHANGED));
+            {
+                if (page is ProfileTechniqueWindow && page.listComponent.selectedItem.id == 0)
+                    page.listComponent.dispatchEvent(new Event(ListEvent.INDEX_CHANGE));
+                else
+                    page.listComponent.dispatchEvent(new Event(TechniqueListComponent.DATA_CHANGED));
+            }
         }
     }
 }

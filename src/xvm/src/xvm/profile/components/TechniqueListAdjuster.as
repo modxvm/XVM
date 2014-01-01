@@ -123,6 +123,7 @@ package xvm.profile.components
 
             if (selectedId == 0)
                 page.stackComponent.updateTankData(new ProfileVehicleDossierVO({})); // refresh page
+
             updateStackComponentButtonBar();
         }
 
