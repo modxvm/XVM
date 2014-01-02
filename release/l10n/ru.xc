@@ -56,7 +56,7 @@
     // UserInfo
 	"General stats": "Общая статистика",
     "Summary": "Общие результаты",
-    "Avg level": "Ср. уровень",
+    "Avg level": "Средний уровень",
     "WN6": "WN6",
     "EFF": "РЭ",
     "updated": "обновлено",
