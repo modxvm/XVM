@@ -64,6 +64,7 @@
     "avg": "keskm",
     "top": "top",
     "draws": "viike",
+    "Maximum damage": "Enim kahju",
     "Specific damage (Avg dmg / HP)": "Kahju suhe (Keskm kahju / Elupunkte)",
     "Capture points": "Vallutuspunkte",
     "Defence points": "Kaitsepunkte",
