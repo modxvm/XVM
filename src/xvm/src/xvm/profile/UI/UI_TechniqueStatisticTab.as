@@ -51,6 +51,7 @@ package xvm.profile.UI
                 return;
             }
 
+            worker.extraDataPanel.visible = true;
             worker.maxDamageDL.labelTextField.textColor = Defines.UICOLOR_LABEL;
 
             if(!isDataInitialized)
