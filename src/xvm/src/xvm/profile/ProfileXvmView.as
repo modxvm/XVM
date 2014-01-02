@@ -54,7 +54,7 @@ package xvm.profile
             var pw:ProfileWindow = view as ProfileWindow;
             if (pw != null)
             {
-                if (Config.config.hangar.showExtraDataInProfile)
+                if (Config.config.userInfo.showExtraDataInProfile)
                 {
                     pw.btnAddToFriends.y += WINDOW_EXTRA_HEIGHT;
                     pw.btnAddToIgnore.y += WINDOW_EXTRA_HEIGHT;

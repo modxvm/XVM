@@ -160,12 +160,12 @@ private function RefreshHangarPage():void
         this.p_hangar.v_xwnInCompany.value = section.xwnInCompany;
         this.p_hangar.v_masteryMarkInTankCarousel.value = section.masteryMarkInTankCarousel;
         this.p_hangar.v_masteryMarkInTechTree.value = section.masteryMarkInTechTree;
-        this.p_hangar.v_showExtraDataInProfile.value = section.showExtraDataInProfile;
         this.p_hangar.v_widgetsEnabled.value = section.widgetsEnabled;
 
         section = Config.config.userInfo;
         this.p_hangar.v_startPage.value = section.startPage;
         this.p_hangar.v_sortColumn.value = section.sortColumn;
+        this.p_hangar.v_showExtraDataInProfile.value = section.showExtraDataInProfile;
         this.p_hangar.v_inHangarFilterEnabled.value = section.inHangarFilterEnabled;
         this.p_hangar.v_showFilters.value = section.showFilters;
         this.p_hangar.v_filterFocused.value = section.filterFocused;

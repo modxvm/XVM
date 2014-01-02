@@ -65,7 +65,6 @@ class com.xvm.DefaultConfig
                 xwnInCompany: true,
                 masteryMarkInTankCarousel: true,
                 masteryMarkInTechTree: true,
-                showExtraDataInProfile: false,
                 widgetsEnabled: false,
                 // Show ping to the servers
                 pingServers: {
@@ -131,6 +130,7 @@ class com.xvm.DefaultConfig
                 formatInfoField: "{{rlevel}}"   // Format of vehicle info field
             },
             userInfo: {
+                showExtraDataInProfile: false,
                 showFilters: true,              // Show tank filters
                 filterFocused: true,            // Set the default focus to the filter text input
                 inHangarFilterEnabled: false,   // Enable In hangar radio button by default

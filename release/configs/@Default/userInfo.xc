@@ -18,6 +18,9 @@
     // 7 - Average XP  / Средний опыт
     // 8 - Class mark  / Классность
     "sortColumn": 5,
+    // true - Show extra data in profile (experimental)
+    // true - Показывать расширенные данные в профиле (экспериментально)
+    "showExtraDataInProfile": false,
     // true - Enable filter tanks in hangar by default.
     // true - включить фильтр отображения танков в ангаре по умолчанию.
     "inHangarFilterEnabled": false,

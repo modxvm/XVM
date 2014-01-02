@@ -51,7 +51,6 @@
     "hideTutorial": false,
     "masteryMarkInTankCarousel": true,
     "masteryMarkInTechTree": true,
-    "showExtraDataInProfile": true,
     "widgetsEnabled": true,
     "pingServers": {
       "$ref": { "path":"def.pingServers" },
@@ -59,11 +58,12 @@
     }
   },
   "userInfo": {
-     "inHangarFilterEnabled": true,
-     "startPage": 4,
-     //"sortColumn": 5,
-     "sortColumn": -3,
-     "defaultFilterValue": "+all -premium -master -arty"
+    "inHangarFilterEnabled": true,
+    "startPage": 4,
+    //"sortColumn": 5,
+    "sortColumn": -3,
+    "showExtraDataInProfile": true,
+    "defaultFilterValue": "+all -premium -master -arty"
   },
   "squad": {
     "enabled": true,

@@ -4,7 +4,7 @@
   * новые опции:
       hangar/masteryMarkInTankCarousel - Показывать знак мастерства в карусели танков
       hangar/masteryMarkInTechTree - Показывать знак мастерства в дереве исследований
-      hangar/showExtraDataInProfile - Показывать расширенные данные в профиле (экспериментально)
+      userInfo/showExtraDataInProfile - Показывать расширенные данные в профиле (экспериментально)
 
 XVM-5.0.2-test1:
   * адаптация к WoT 0.8.10

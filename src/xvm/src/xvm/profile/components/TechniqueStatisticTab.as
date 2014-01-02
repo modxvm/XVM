@@ -207,7 +207,7 @@ package xvm.profile.components
 
         private function createControls():void
         {
-            if (Config.config.hangar.showExtraDataInProfile)
+            if (Config.config.userInfo.showExtraDataInProfile)
             {
                 for each (var c:Object in controls)
                     c.control.x -= 10;
@@ -234,7 +234,7 @@ package xvm.profile.components
 
             extraDataPanel = new Sprite();
 
-            if (Config.config.hangar.showExtraDataInProfile)
+            if (Config.config.userInfo.showExtraDataInProfile)
             {
                 extraDataPanel.visible = true;
                 extraDataPanel.x = proxy.battlesDL.x + DL_WIDTH + 5;
@@ -416,7 +416,7 @@ package xvm.profile.components
 
             //proxy.avgScoutingDmgDL.value = "Will be implemented...";
 
-            if (Config.config.hangar.showExtraDataInProfile)
+            if (Config.config.userInfo.showExtraDataInProfile)
                 showExtraData(data);
 
             //bottomTF.htmlText = "<textformat leading='-2'>" + formatHtmlText(getBottomText(data)) + "</textformat>";
@@ -579,7 +579,7 @@ package xvm.profile.components
                     : color(App.utils.locale.integer(b2), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
                         color(App.utils.locale.numberWithoutZeros((r2 * 100).toFixed(1)) + "%", Defines.UICOLOR_GOLD);
 
-            if (Config.config.hangar.showExtraDataInProfile)
+            if (Config.config.userInfo.showExtraDataInProfile)
             {
                 // full
                 info += " / " + ((b2 > b1)
