@@ -17,7 +17,7 @@ package xvm.profile.components
 
     public class TechniqueStatisticTab
     {
-        private static const DL_WIDTH:int = 200;
+        private static const DL_WIDTH:int = 210;
         private var proxy:UI_TechniqueStatisticTab;
 
         private var _raw_data:ProfileVehicleDossierVO;
@@ -579,7 +579,7 @@ package xvm.profile.components
                     : color(App.utils.locale.integer(b2), Defines.UICOLOR_GOLD) + Locale.get(" to ") +
                         color(App.utils.locale.numberWithoutZeros((r2 * 100).toFixed(1)) + "%", Defines.UICOLOR_GOLD);
 
-            if (Config.config.userInfo.showExtraDataInProfile)
+            if (Config.config.userInfo.showExtraDataInProfile || page is ProfileTechniquePage)
             {
                 // full
                 info += " / " + ((b2 > b1)
@@ -601,6 +601,12 @@ package xvm.profile.components
             {
                 XDL(1).value = formatHtmlText(Utils.FormatDate("H:i:s", new Date(null, null, null, null, null,
                     (data.battleLifeTime/((a.lastBattleTime - a.creationTime)/86400)))));
+                XDL(1).labelTextField.textColor = Defines.UICOLOR_LABEL;
+            }
+            else
+            {
+                XDL(1).value = formatHtmlText("--", Defines.UICOLOR_DISABLED);
+                XDL(1).labelTextField.textColor = Defines.UICOLOR_DISABLED;
             }
 
             XDL(2).value = formatHtmlText(App.utils.locale.integer(data.battlesAfter8_8));
