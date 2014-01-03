@@ -4,26 +4,28 @@
 {
   "locale": {
     // Author of translation
-    "XVM_translator": "RENZIO",
+    "XVM_translator": "RENZIO (EU)",
 
     // Ping
-    "Initialization": "Initialization",
+    "Initialization": "inizializzazione",
 
     // BattleLoading
-    "New version available": "New version available",
+    "New version available": "nuova versione disponibile",
 
     // Win chance
     "Chance error": "Non Calcolabile",
     "Chance to win": "Chance di vittoria",
     "global": "Globale",
     "per-vehicle": "Per veicolo",
+    "chanceExperimental": "esp.",
+    "chanceBattleTier": "T",
 
     // Hitlog
     "attack": "attaccare",
     "fire": "Fuoco",
     "ramming": "rammare",
     "world_collision": "distrutto",
-    "Hits": "Hits",
+    "Hits": "colpi",
     "Total": "Totale",
     "Last": "Ultimo",
 
@@ -31,7 +33,7 @@
     "hpLeftTitle": "Punti vita nemico",
 
     // Capture
-    "enemyBaseCapture": "Stiamo conquistando la base nemica!!",
+    "enemyBaseCapture": "Stiamo conquistando la base nemica!",
     "enemyBaseCaptured": "Base nemica conquistata!",
     "allyBaseCapture": "Il nemico sta conquistando la base!",
     "allyBaseCaptured": "Il nemico ha conquistato la base!",
@@ -39,63 +41,69 @@
     "Capturers": "Invasori",
 
     // BattleResults
-    "Hit percent": "Hit percent",
-    "Damage upon detecting": "Danno da spot",
-    "Damage dealt": "Danno totale",
+    "Hit percent": "percentuale colpi a segno",
+    "Damage (assisted / own)": "Danno (Assist / propri)",
 
     // TeamRenderers
-    "TeamRenderersHeaderTip": "XWN (or XEFF) rating.\nPer vedere i dettagli, muovi il cursore sul nome del giocatore.",
     "Friend": "Amico",
     "Ignored": "Ignora",
-    "Load statistics": "Caricamento statistiche",
-    "enabled": "attivato",
-    "disabled": "disattivato",
-
-    // UserInfo
-    "UserInfoEHint": "Efficienza per veicolo.\nIl valore visualizzato risale all´ ultimo aggiornamento del: \u0025DATE\u0025\nVisualizza i valori attuali nei dettagli veicolo.\nEsattezza dei dati dipende della qualita´della sorgente dati.",
-    "Data was updated at": "Ultimo aggiornamento il ",
-    " to ": " a ",
-    "EFF": "EFF",
-    "updated": "aggiornato",
     "unknown": "sconosciuto",
-    "Avg level": "Livello medio",
-    "Spotted": "spottato",
-    "Defence": "difesa",
-    "Capture": "Cattura",
-    "player (average / top)": "giocatore (average / top)",
-    "Spec dmg": "danno speciale",
-
-    // UserInfo - filters
-    "Filter": "filtro",
-    "All tanks": "Tutti i carri",
-    "Show all tanks in the game": "Visualizza tutti i carri in gioco",
-    "Player tanks": "Carri del giocatore",
-    "Show all tanks played": "Visualizza tutti i carri giocati",
-    "In hangar": "In garage",
-    "Show only tanks in own hangar": "Visualizza sollo i carri in possesso",
-
-    // UserInfo - buttons
-    "Level": "livello",
-    "Type": "Tipo",
-    "Nation": "Nazione",
-    "Name": "Nome",
     "Fights": "Battaglie",
     "Wins": "Vittorie",
+    "Data was updated at": "Ultimo aggiornamento il",
+    "Load statistics": "Caricamento statistiche",
+
+    // UserInfo
+    "General stats": "Statistiche generali",
+    "Summary": "Sommario",
+    "Avg level": "Livello medio",
+    "WN6": "WN6",
+    "EFF": "EFF",
+    "updated": "aggiornato",
+    " to ": " a ",
+    "avg": "medio",
+    "top": "massimo",
+    "draws": "pareggi",
+    "Maximum damage": "danno massimo",
+    "Specific damage (Avg dmg / HP)": "danno speciale(Danno Medio / HP)",
+    "Capture points": "punti cattura",
+    "Defence points": "punti difesa",
+    "Filter": "filtro",
+    "Extra data (WoT 0.8.8+)": "Dati extra (WoT 0.8.8+)",
+    "Average battle time": "Tempo medio di gioco",
+    "Average battle time per day": "tempo medio di gioco per giorno",
+    "Battles after 0.8.8": "Battaglie dopo la 0.8.8",
+    "Average experience": "Esperienza media",
+    "Average experience without premium": "esperienza media senza account premium",
+    "Average distance driven per battle": "distanza media percorsa per battaglia",
+    "Average woodcuts per battle": " Media alberi abbattuti per battaglia",
+    "Average damage assisted": "Media danni da assist",
+    "    by tracking": "    da track",
+    "    by spotting": "    da spot",
+    "Average HE shells fired (splash)": " danni medi da HE fatti (splash)",
+    "Average HE shells received (splash)": "danni medi da HE ricevuti (splash)",
+    "Average penetrations per battle": "Media colpi penetrati per battaglia",
+    "Average hits received": "Media colpi ricevuti",
+    "Average penetrations received": "Media colpi penetrati ricevuti ",
+    "Average ricochets received": "Media rimbalzi ricevuti per battaglia",
 
     // Crew
-    "PutOwnCrew": "Prepara l´equipaggio del carro",
-    "PutBestCrew": "Prepara l´equipaggio migliore",
-    "PutClassCrew": "Put same class crew",
+    "PutOwnCrew": "Prepara l�equipaggio del carro",
+    "PutBestCrew": "Prepara l�equipaggio migliore",
+    "PutClassCrew": "Stessa classe veicolo",
 
     // Squad
     "Vehicle": "Veicolo",
     "Battle tiers": "Livello",
+    "Type": "Tipo",
+    "Nation": "Nazione",
     "ussr": "Russia",
     "germany": "Germania",
     "usa": "USA",
     "france": "Francia",
     "uk": "Gran Bretagna",
     "china": "Cina",
+    "japan": "Giappone",
     "HT": "HT",
     "MT": "MT",
     "LT": "LT",
@@ -103,6 +111,6 @@
     "SPG": "SPG",
 
     // VehicleMarkersManager
-    "blownUp": "KA-BOOM!"
+    "blownUp": "BOOOOOOOOOM!"
   }
 }
