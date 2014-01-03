@@ -54,7 +54,7 @@
     "Load statistics": "Загрузить статистику",
 
     // UserInfo
-	"General stats": "Общая статистика",
+    "General stats": "Общая статистика",
     "Summary": "Общие результаты",
     "Avg level": "Средний уровень",
     "WN6": "WN6",

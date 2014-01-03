@@ -54,7 +54,7 @@
     "Load statistics": "Last inn statistikk",
 
     // UserInfo
-	"General stats": "Generelle Stats",
+    "General stats": "Generelle Stats",
     "Summary": "Sammendrag",
     "Avg level": "Gj.snittlig kampnivå",
     "WN6": "WN6",
