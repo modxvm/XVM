@@ -24,11 +24,6 @@ class com.xvm.StatLoader
         Cmd.loadBattleStat(null);
     }
 
-    public static function LoadUserData(value:String, isId:Boolean)
-    {
-        Cmd.loadUserData(value, isId);
-    }
-
     // PRIVATE
 
     private var _loading = false;
@@ -36,7 +31,6 @@ class com.xvm.StatLoader
     private function StatLoader()
     {
         ExternalInterface.addCallback(Cmd.RESPOND_STATDATA, this, LoadStatDataCallback);
-        ExternalInterface.addCallback(Cmd.RESPOND_USERDATA, this, LoadUserDataCallback);
     }
 
     private function LoadStatDataCallback(json_str)
@@ -200,29 +194,5 @@ class com.xvm.StatLoader
 
 //        Logger.add(stat.vn + " teff=" + stat.teff + " e:" + stat.te);
 //        Logger.addObject(stat);
-    }
-
-    private function LoadUserDataCallback(str)
-    {
-        //Logger.addObject(arguments, "LoadUserDataCallback", 2)
-        var data = null;
-        var error = null;
-        if (!str)
-            error = "no data";
-        else
-        {
-            try
-            {
-                data = JSONx.parse(str);
-            }
-            catch (ex:Error)
-            {
-                error = ex.message;
-            }
-        }
-        if (error == null)
-            GlobalEventDispatcher.dispatchEvent({ type: Stat.E_USERDATA_LOADED, data: data });
-        else
-            GlobalEventDispatcher.dispatchEvent({ type: Stat.E_USERDATA_LOADED, error: error });
     }
 }

@@ -15,7 +15,8 @@
     var m_list: MovieClip;
     var players_bg: MovieClip;
 
-    function setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount);
+    function setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStr, vehiclesStr, namesStr);
+    function saveData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStr, vehiclesStr, namesStr);
     function setPlayerSpeaking(vehicleId, flag);
     function get type();
     function set type(type);

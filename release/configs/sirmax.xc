@@ -82,6 +82,7 @@
   },
   "rating": {
     "showPlayersStatistics": true,
+    //"showPlayersStatistics": false,
     "loadEnemyStatsInFogOfWar": true,
     "enableStatisticsLog": true,
     "enableUserInfoStatistics": true,
@@ -138,6 +139,8 @@
       "nickFormatRight": "{{name}}<font color='#cccccc'>{{clan}}</font> <font color='{{c:xwn}}'>{{xwn}}</font>",
       "vehicleFormatLeft": "",
       "vehicleFormatRight": ""
+      //"vehicleFormatLeft": "<font color='{{c:rating}}'>{{rating}}</font>",
+      //"vehicleFormatRight": "<font color='{{c:rating}}'>{{rating}}</font>"
     },
     "enemySpottedMarker": {
       "enabled": true,

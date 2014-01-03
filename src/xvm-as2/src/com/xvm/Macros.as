@@ -32,8 +32,9 @@ class com.xvm.Macros
             }
         }
 
-//Logger.add(playerName + "> " + format);
-//Logger.add(playerName + "> " + res);
+        //Logger.add(playerName + "> " + format);
+        //Logger.add(playerName + "> " + res);
+
         return Utils.fixImgTag(res);
     }
 

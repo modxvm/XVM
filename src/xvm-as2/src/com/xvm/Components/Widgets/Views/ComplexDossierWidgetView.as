@@ -12,7 +12,7 @@ import com.xvm.Controls.Grid;
 import com.xvm.Controls.Label;
 import com.xvm.Controls.Progress;
 
-class com.xvm.Components.Widgets.ComplexDossierWidgetView
+class com.xvm.Components.Widgets.Views.ComplexDossierWidgetView
 {
     private var cfg:Object;
     private var holder:MovieClip;
@@ -43,16 +43,16 @@ class com.xvm.Components.Widgets.ComplexDossierWidgetView
         panel = Panel.Create(holder, "panel", 0,   0,   410, 200, 0x000000, 60, 1, 0xCCCCCC, 50);
 
         progress = Progress.Create(panel.mc, "progress");
-        
+
         Label.Create(panel.mc, "labelDay",              10,  10,  100, 20,  Defines.UICOLOR_DEFAULT2, 100, "$FieldFont", 13, Locale.get("Day"));
         chartDay = Chart.Create(panel.mc, "chartDay",   10,  30,  100, 40,  0x000000, 60, 0xCCCCCC, 1, 0x008000, 50);
-        
+
         Label.Create(panel.mc, "labelWeek",             10,  70,  100, 20,  Defines.UICOLOR_DEFAULT2, 100, "$FieldFont", 13, Locale.get("Week"));
         chartWeek = Chart.Create(panel.mc, "chartWeek", 10,  90,  100, 40,  0x000000, 60, 0xCCCCCC, 1, 0x008000, 50);
-        
+
         Label.Create(panel.mc, "labelYear",             10,  130, 100, 20,  Defines.UICOLOR_DEFAULT2, 100, "$FieldFont", 13, Locale.get("Year"));
         chartYear = Chart.Create(panel.mc, "chartYear", 10,  150, 100, 40,  0x000000, 60, 0xCCCCCC, 1, 0x008000, 50);
-        
+
         gridStat = Grid.Create(panel.mc, "gridStat",    120, 10,  280, 180, 0x000000, 60, 1, 0xCCCCCC, 50,
             [
                 { w:55, title:"",      align:"left" },
@@ -66,7 +66,7 @@ class com.xvm.Components.Widgets.ComplexDossierWidgetView
         //test = Label.Create(gridStat.mc, "test",        10,  10,  150, 160, Defines.UICOLOR_DEFAULT, 100, "$FieldFont", 10);
         //test.SetText("ABCDEFGHIJKLMNOPQRSTUVWXYZ\nABCDEFGHIJKLMNOPQRSTUVWXYZ\nABCDEFGHIJKLMNOPQRSTUVWXYZ");
     }
-    
+
     public function update(data:Object)
     {
         //Logger.addObject(data);
@@ -77,11 +77,11 @@ class com.xvm.Components.Widgets.ComplexDossierWidgetView
     {
         progress.SetPos(pos);
     }
-    
+
     private var mouseDown:Boolean = false;
     private var mouseX:Number;
     private var mouseY:Number;
-    
+
     private function onPress(mouseIndex, button)
     {
         //Logger.addObject("onPress: " + com.xvm.JSONx.stringify(arguments));

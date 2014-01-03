@@ -39,7 +39,8 @@ class wot.PlayersPanel.PlayersPanel
     function update()
     {
         _lastAdjustedState = "";
-        wrapper.update();
+        //Logger.add("update");
+        base.update();
     }
 
     // wrapped methods
@@ -66,7 +67,7 @@ class wot.PlayersPanel.PlayersPanel
 
         GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, StatLoader.LoadData);
         GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
-        GlobalEventDispatcher.addEventListener(Stat.E_STAT_LOADED, wrapper, update);
+        GlobalEventDispatcher.addEventListener(Stat.E_STAT_LOADED, this, update);
 
         GlobalEventDispatcher.addEventListener(AutoUpdate.UPDATE_BY_TIMER_EVENT, this, updateSpotStatusMarkers);
 
@@ -139,34 +140,38 @@ class wot.PlayersPanel.PlayersPanel
         gfx.io.GameDelegate.call("Battle.selectPlayer", [m_data[pos].vehId]);
     }
 
-    private function setData2(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStr, vehiclesStr, namesStr)
+    private function setData2(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count,
+        fragsStrOrig, vehiclesStrOrig, namesStrOrig)
     {
         //Logger.add("PlayersPanel.setData2()");
+        //Logger.add("_lastAdjustedState: " + _lastAdjustedState);
         //Logger.addObject(data, 3);
         //Logger.add(vehiclesStr);
         //Logger.add(namesStr);
-
-        m_data = data;
-
-        wrapper.m_names.condenseWhite = !Stat.s_loaded;
-        wrapper.m_vehicles.condenseWhite = !Stat.s_loaded;
-
-        if (!_init)
+        try
         {
-            _init = true;
-            centeredTextY = wrapper.m_names._y - 5;
-            wrapper.m_names.verticalAlign = "top"; // for incomplete team - cannot set to "center"
-            wrapper.m_vehicles.verticalAlign = "top"; // for incomplete team - cannot set to "center"
+            m_data = data;
 
-            // [1/3] fix WG bug - this function is slow, don't call it if not required.
-            wrapper.m_list["invalidateData2"] = wrapper.m_list["invalidateData"];
-        }
+            if (data == null)
+                return;
 
-        if (data != null)
-        {
-            var values:Array = vehiclesStr.split("<br/>");
-            namesStr = "";
-            vehiclesStr = "";
+            wrapper.m_names.condenseWhite = !Stat.s_loaded;
+            wrapper.m_vehicles.condenseWhite = !Stat.s_loaded;
+
+            if (!_init)
+            {
+                _init = true;
+                centeredTextY = wrapper.m_names._y - 5;
+                wrapper.m_names.verticalAlign = "top"; // for incomplete team - cannot set to "center"
+                wrapper.m_vehicles.verticalAlign = "top"; // for incomplete team - cannot set to "center"
+
+                // [1/3] fix WG bug - this function is slow, don't call it if not required.
+                wrapper.m_list["invalidateData2"] = wrapper.m_list["invalidateData"];
+            }
+
+            var namesStr:String = "";
+            var vehiclesStr:String = "";
+            var values:Array = vehiclesStrOrig.split("<br/>");
             var len = data.length;
             for (var i = 0; i < len; ++i)
             {
@@ -184,39 +189,47 @@ class wot.PlayersPanel.PlayersPanel
                 namesStr += value.split(item.vehicle).join(getTextValue(Defines.FIELDTYPE_NICK, item, item.userName));
                 vehiclesStr += value.split(item.vehicle).join(getTextValue(Defines.FIELDTYPE_VEHICLE, item, item.vehicle));
             }
+
+            //Logger.add("_lastAdjustedState: " + _lastAdjustedState);
+            //Logger.add(vehiclesStr);
+
+            // [2/3] fix WG bug - this function is slow, don't call it if not required.
+            wrapper.m_list["invalidateData"] = function() {}
+
+            base.setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStrOrig, vehiclesStr, namesStr);
+            base.saveData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStrOrig, vehiclesStrOrig, namesStrOrig);
+
+            // [3/3] fix WG bug - this function is slow, don't call it if not required.
+            wrapper.m_list["invalidateData"] = wrapper.m_list["invalidateData2"];
+
+            wrapper.players_bg._alpha = Config.s_config.playersPanel.alpha;
+            wrapper.m_list._alpha = Config.s_config.playersPanel.iconAlpha;
+
+            // new player added in the FoW mode
+            if (m_knownPlayersCount != data.length)
+            {
+                m_knownPlayersCount = data.length;
+                _lastAdjustedState = "";
+            }
+
+            // panel mode switched
+            if (wrapper.state != _lastAdjustedState)
+            {
+                XVMAdjustPanelSize();
+                _lastAdjustedState = wrapper.state;
+            }
+
+            // FIXIT: this code is not optimal. Find how to set default leading for text fields and remove this code.
+            wrapper.m_names.htmlText = wrapper.m_names.htmlText.split('LEADING="9"').join('LEADING="' + leadingNames + '"');
+            wrapper.m_names._y = centeredTextY + leadingNames / 2.0; // centering on cell, because of align=top
+
+            wrapper.m_vehicles.htmlText = wrapper.m_vehicles.htmlText.split('LEADING="9"').join('LEADING="' + leadingVehicles + '"');
+            wrapper.m_vehicles._y = centeredTextY + leadingVehicles / 2.0; // centering on cell, because of align=top
         }
-
-        // [2/3] fix WG bug - this function is slow, don't call it if not required.
-        wrapper.m_list["invalidateData"] = function() {}
-
-        base.setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStr, vehiclesStr, namesStr);
-
-        // [3/3] fix WG bug - this function is slow, don't call it if not required.
-        wrapper.m_list["invalidateData"] = wrapper.m_list["invalidateData2"];
-
-        wrapper.players_bg._alpha = Config.s_config.playersPanel.alpha;
-        wrapper.m_list._alpha = Config.s_config.playersPanel.iconAlpha;
-
-        // new player added in the FoW mode
-        if (data != null && m_knownPlayersCount != data.length)
+        catch (e:Error)
         {
-            m_knownPlayersCount = data.length;
-            _lastAdjustedState = "";
+            Logger.add(e.toString());
         }
-
-        // panel mode switched
-        if (wrapper.state != _lastAdjustedState)
-        {
-            XVMAdjustPanelSize();
-            _lastAdjustedState = wrapper.state;
-        }
-
-        // FIXIT: this code is not optimal. Find how to set default leading for text fields and remove this code.
-        wrapper.m_names.htmlText = wrapper.m_names.htmlText.split('LEADING="9"').join('LEADING="' + leadingNames + '"');
-        wrapper.m_names._y = centeredTextY + leadingNames / 2.0; // centering on cell, because of align=top
-
-        wrapper.m_vehicles.htmlText = wrapper.m_vehicles.htmlText.split('LEADING="9"').join('LEADING="' + leadingVehicles + '"');
-        wrapper.m_vehicles._y = centeredTextY + leadingVehicles / 2.0; // centering on cell, because of align=top
     }
 
     private function onRecreateDeviceImpl(width, height)
@@ -228,7 +241,7 @@ class wot.PlayersPanel.PlayersPanel
 
     private function getTextValue(fieldType, data, text)
     {
-        //Logger.add("PlayersPanel._getHTMLText()");
+        //Logger.add("getTextValue()");
         var format: String = null;
         switch (wrapper.state)
         {
@@ -273,6 +286,7 @@ class wot.PlayersPanel.PlayersPanel
             var nm = Utils.GetPlayerName(data.label);
             var key = "PP/" + deadState + "/" + nm + "/" + state + "/" + fieldType + "/" +
                 (Stat.s_data[nm] ? Stat.s_data[nm].loadstate : "0");
+            //Logger.add(Stat.s_data[nm]);
             //Logger.add(key);
             text = Cache.Get(key, function()
             {
@@ -378,6 +392,7 @@ class wot.PlayersPanel.PlayersPanel
                 namesWidthDefault = 296;
                 namesWidth = Math.max(XVMGetMaximumFieldWidth(wrapper.m_names), Config.s_config.playersPanel.large.width);
                 vehiclesWidth = XVMGetMaximumFieldWidth(wrapper.m_vehicles);
+                //Logger.add("w: " + vehiclesWidth + " " + wrapper.m_vehicles.htmlText);
                 squadSize = Config.s_config.playersPanel.removeSquadIcon ? 0 : net.wargaming.ingame.PlayersPanel.SQUAD_SIZE;
                 widthDelta = namesWidthDefault - namesWidth + vehiclesWidthDefault - vehiclesWidth - squadSize + net.wargaming.ingame.PlayersPanel.SQUAD_SIZE;
                 break;
