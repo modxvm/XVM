@@ -4,7 +4,7 @@
 {
   "locale": {
     // Author of translation
-    "XVM_translator": "Silwing",
+    "XVM_translator": "PowerBait",
 
     // Ping
     "Initialization": "Initialization",
@@ -17,6 +17,8 @@
     "Chance to win": "Chance for at vinde",
     "global": "global",
     "per-vehicle": "per-vogn",
+    "chanceExperimental": "exp",
+    "chanceBattleTier": "T",
 
     // Hitlog
     "attack": "angreb",
@@ -40,62 +42,68 @@
 
     // BattleResults
     "Hit percent": "Træfprocent",
-    "Damage upon detecting": "Skade ved sporing",
-    "Damage dealt": "Skade tildelt",
+    "Damage (assisted / own)": "Skade (assisteret / egen)",
 
     // TeamRenderers
-    "TeamRenderersHeaderTip": "Xwn (eller xeff) rating.\nFør musen over et spillernavn for at se detaljeret information.",
     "Friend": "Ven",
     "Ignored": "Ignoreret",
+    "unknown": "ukendt",
+    "Fights": "kampe",
+    "Wins": "vundne",
+    "Data was updated at": "Data blev opdateret ",
     "Load statistics": "Hent statistikker",
-    "enabled": "aktiveret",
-    "disabled": "deaktiveret",
 
-    // UserInfo
-    "UserInfoEHint": "Per-vogn effektivitet.\nVærdierne der vises er fra seneste statistik-opdatering: \u0025DATE\u0025\nSe aktuelle værdier i detaljeret kampvogns-info.\nPræcisionen af værdierne afhænger af kvaliteten af feedet.",
-    "Data was updated at": "Data blev opdateret",
-    " to ": " til ",
+// UserInfo
+    "General stats": "Generel statistik",
+    "Summary": "Resumé",
+    "Avg level": "Gns level",
+    "WN6": "WN6",
     "EFF": "EFF",
     "updated": "opdateret",
-    "unknown": "ukendt",
-    "Avg level": "Gns. level",
-    "Spotted": "Opdaget",
-    "Defence": "Forsvar",
-    "Capture": "Erobring",
-    "player (average / top)": "spiller (gennemsnit / top)",
-    "Spec dmg": "Spec skade",
-
-    // UserInfo - filters
-    "Filter": "Filtrer",
-    "All tanks": "Alle kampvogne",
-    "Show all tanks in the game": "Vis alle kampvogne i spillet",
-    "Player tanks": "Spiller-kampvogne",
-    "Show all tanks played": "Vis alle kampvogne spillet",
-    "In hangar": "I hangar",
-    "Show only tanks in own hangar": "Vis kun kampvogne i egen hangar",
-
-    // UserInfo - buttons
-    "Level": "Level",
-    "Type": "Type",
-    "Nation": "Nation",
-    "Name": "Navn",
-    "Fights": "Kampe",
-    "Wins": "Vundne",
+    " to ": " til ",
+    "avg": "gns",
+    "top": "top",
+    "draws": "uafgjort",
+    "Maximum damage": "Maximum skade",
+    "Specific damage (Avg dmg / HP)": "Specifik skade (gns dmg / HP)",
+    "Capture points": "Capture point",
+    "Defence points": "Forsvar point",
+    "Filter": "Filter",
+    "Extra data (WoT 0.8.8+)": "Extra data (WoT 0.8.8+)",
+    "Average battle time": "Gennemsnitlig kamp tid",
+    "Average battle time per day": "Gennemsnitlig kamp tid per dag",
+    "Battles after 0.8.8": "Kampe efter 0.8.8",
+    "Average experience": "Gennemsnitlig erfaring",
+    "Average experience without premium": "Gennemsnitlig erfaring uden premium",
+    "Average distance driven per battle": "Gennemsnitlig afstand kørt per kamp",
+    "Average woodcuts per battle": "Gennemsnitlig træsnit per kamp",
+    "Average damage assisted": "Gennemsnitlig skade assisteret",
+    "    by tracking": "    ved spottet",
+    "    by spotting": "    ved spotting",
+    "Average HE shells fired (splash)": "Gennemsnitlig HE kugler skud (splash)",
+    "Average HE shells received (splash)": "Gennemsnitlig HE kugler modtaget (splash)",
+    "Average penetrations per battle": "Gennemsnitlig penetration per kamp",
+    "Average hits received": "Gennemsnitlig hits modtaget",
+    "Average penetrations received": "Gennemsnitlig penetration modtaget",
+    "Average ricochets received": "Gennemsnitlig ricochets modtaget",
 
     // Crew
-    "PutOwnCrew": "Sæt eget mandskab",
-    "PutBestCrew": "Sæt bedste mandskab",
-    "PutClassCrew": "Put same class crew",
+    "PutOwnCrew": "Sæt eget besætning",
+    "PutBestCrew": "Sæt bedste besætning",
+    "PutClassCrew": "Put samme klasse besætning",
 
     // Squad
     "Vehicle": "Vogn",
     "Battle tiers": "Kampniveauer",
+    "Type": "Type",
+    "Nation": "Nation",
     "ussr": "USSR",
     "germany": "Tyskland",
     "usa": "USA",
     "france": "Frankrig",
     "uk": "UK",
     "china": "Kina",
+    "japan": "Japan",
     "HT": "HT",
     "MT": "MT",
     "LT": "LT",
