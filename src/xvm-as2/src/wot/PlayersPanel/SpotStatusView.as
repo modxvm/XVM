@@ -13,24 +13,37 @@ class wot.PlayersPanel.SpotStatusView
     private static var SPOT_STATUS_TF_NAME:String = "spotStatusTF";
 
     private var renderer:PlayerListItemRenderer;
+    private var cfg:Object;
+    private var formatsCache:Object;
     private var spotStatusMarker:TextField;
 
     public function SpotStatusView(renderer:PlayerListItemRenderer)
     {
         this.renderer = renderer;
-        spotStatusMarker = null;
+        cfg = null;
+        spotStatusMarker = createMarker(renderer);
     }
 
     public function update(status:Number, isArty:Boolean):Void
     {
-        if (spotStatusMarker == null)
-            spotStatusMarker = createMarker(renderer);
+        if (!Config.s_loaded)
+            return;
+        if (cfg == null)
+        {
+            cfg = Config.s_config.playersPanel.enemySpottedMarker;
 
-        spotStatusMarker.htmlText = Utils.fixImgTag(getFormat(status, isArty));
+            formatsCache = { };
+            formatsCache[SpotStatusModel.DEAD] = [ Utils.fixImgTag(cfg.format.dead), Utils.fixImgTag(cfg.format.artillery.dead) ];
+            formatsCache[SpotStatusModel.NEVER_SEEN] = [ Utils.fixImgTag(cfg.format.neverSeen), Utils.fixImgTag(cfg.format.artillery.neverSeen) ];
+            formatsCache[SpotStatusModel.LOST] = [ Utils.fixImgTag(cfg.format.lost), Utils.fixImgTag(cfg.format.artillery.lost) ];
+            formatsCache[SpotStatusModel.REVEALED] = [ Utils.fixImgTag(cfg.format.revealed), Utils.fixImgTag(cfg.format.artillery.revealed) ];
 
-        /** Define point relative to which marker is set  */
-        spotStatusMarker._x = renderer.wrapper.vehicleLevel._x + cfg.Xoffset; // vehicleLevel._x is 8 for example
-        spotStatusMarker._y = renderer.wrapper.vehicleLevel._y + cfg.Yoffset; // vehicleLevel._y is -445.05 for example
+            /** Define point relative to which marker is set  */
+            spotStatusMarker._x = renderer.wrapper.vehicleLevel._x + cfg.Xoffset; // vehicleLevel._x is 8 for example
+            spotStatusMarker._y = renderer.wrapper.vehicleLevel._y + cfg.Yoffset; // vehicleLevel._y is -445.05 for example
+        }
+
+        spotStatusMarker.htmlText = formatsCache[status][isArty ? 1 : 0];
     }
 
     // -- Private
@@ -42,29 +55,5 @@ class wot.PlayersPanel.SpotStatusView
         marker.selectable = false;
         marker.html = true;
         return marker;
-    }
-
-    /** Return HTML text from config file */
-    private function getFormat(status:Number, isArty:Boolean):String
-    {
-        switch (status)
-        {
-            case SpotStatusModel.NEVER_SEEN:
-                return isArty ? cfg.format.artillery.neverSeen : cfg.format.neverSeen;
-            case SpotStatusModel.LOST:
-                return isArty ? cfg.format.artillery.lost : cfg.format.lost;
-            case SpotStatusModel.REVEALED:
-                return isArty ? cfg.format.artillery.revealed : cfg.format.revealed;
-            case SpotStatusModel.DEAD:
-                return isArty ? cfg.format.artillery.dead : cfg.format.dead;
-        }
-        return "ERROR";
-    }
-
-    // -- Getters
-
-    private function get cfg():Object
-    {
-        return Config.s_config.playersPanel.enemySpottedMarker;
     }
 }

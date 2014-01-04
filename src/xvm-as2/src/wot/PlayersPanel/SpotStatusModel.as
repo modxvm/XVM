@@ -1,5 +1,4 @@
-import com.xvm.GlobalEventDispatcher;
-import com.xvm.VehicleInfo;
+import com.xvm.*;
 import wot.Minimap.MinimapEvent;
 import wot.Minimap.model.externalProxy.IconsProxy;
 import wot.PlayersPanel.PlayersPanelProxy;
@@ -24,6 +23,8 @@ class wot.PlayersPanel.SpotStatusModel
 
     public function defineStatus(uid:Number, vehicleState:Number):Number
     {
+        //Logger.add("SpotStatusModel.defineStatus()");
+
         if ((vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) == 0)
             return DEAD;
 
@@ -35,6 +36,7 @@ class wot.PlayersPanel.SpotStatusModel
 
     public function isArty(uid:Number):Boolean
     {
+        //Logger.add("SpotStatusModel.isArty()");
         var info:Object = PlayersPanelProxy.getPlayerInfo(uid); // "../maps/icons/vehicle/contour/ussr-SU-18.png"
         var info2:Object = VehicleInfo.getByIcon(info.icon);
         return info2.vclass == "SPG";
@@ -44,6 +46,7 @@ class wot.PlayersPanel.SpotStatusModel
 
     private function isRevealedRightNow(subjUid):Boolean
     {
+        //Logger.add("SpotStatusModel.isRevealedRightNow()");
         var uids:Array = IconsProxy.syncedUids;
         for (var i in uids)
         {
@@ -55,6 +58,7 @@ class wot.PlayersPanel.SpotStatusModel
 
     private function onRevealed(mmevent:MinimapEvent)
     {
+        //Logger.add("SpotStatusModel.onRevealed()");
         /** Save a guy to revealed enemies list */
         var uid:Number = Number(mmevent.payload);
         seen.push(uid);
@@ -62,6 +66,7 @@ class wot.PlayersPanel.SpotStatusModel
 
     private function wasSeen(uid:Number):Boolean
     {
+        //Logger.add("SpotStatusModel.wasSeen()");
         for (var i in seen)
         {
             if (seen[i] == uid)

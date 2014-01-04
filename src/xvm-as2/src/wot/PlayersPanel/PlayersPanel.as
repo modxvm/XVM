@@ -65,11 +65,11 @@ class wot.PlayersPanel.PlayersPanel
     {
         Utils.TraceXvmModule("PlayersPanel");
 
+        spotStatusModel = null;
+
         GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, StatLoader.LoadData);
         GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
         GlobalEventDispatcher.addEventListener(Stat.E_STAT_LOADED, this, update);
-
-        GlobalEventDispatcher.addEventListener(AutoUpdate.UPDATE_BY_TIMER_EVENT, this, updateSpotStatusMarkers);
 
         Config.LoadConfig();
 
@@ -79,9 +79,14 @@ class wot.PlayersPanel.PlayersPanel
 
     private function onConfigLoaded(event):Void
     {
+        //Logger.add("PlayersPanel.onConfigLoaded()");
+
+        GlobalEventDispatcher.removeEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
+
         // init enemy spotter markers
-        if (isEnemyPanel && Config.s_config.playersPanel.enemySpottedMarker.enabled && spotStatusModel == null)
+        if (Config.s_config.playersPanel.enemySpottedMarker.enabled && isEnemyPanel)
         {
+            GlobalEventDispatcher.addEventListener(AutoUpdate.UPDATE_BY_TIMER_EVENT, this, updateSpotStatusMarkers);
             spotStatusModel = new SpotStatusModel();
         }
     }
@@ -92,8 +97,7 @@ class wot.PlayersPanel.PlayersPanel
      */
     public function updateSpotStatusMarkers():Void
     {
-        if (!isEnemyPanel || !Config.s_config.playersPanel.enemySpottedMarker.enabled)
-            return;
+        //Logger.add("PlayersPanel.updateSpotStatusMarkers()");
 
         /** Redraw every renderer */
         for (var i in wrapper.m_list.renderers)
@@ -102,7 +106,8 @@ class wot.PlayersPanel.PlayersPanel
             var uid:Number = renderer.wrapper.data.uid;
             var status:Number = spotStatusModel.defineStatus(uid, renderer.wrapper.data.vehicleState);
             var subjectIsArtillery:Boolean = spotStatusModel.isArty(uid);
-            renderer.spotStatusView.update(status, subjectIsArtillery);
+            if (renderer.spotStatusView != null)
+                renderer.spotStatusView.update(status, subjectIsArtillery);
         }
     }
 
@@ -239,6 +244,8 @@ class wot.PlayersPanel.PlayersPanel
         XVMAdjustPanelSize();
     }
 
+    // PRIVATE
+
     private function getTextValue(fieldType, data, text)
     {
         //Logger.add("getTextValue()");
@@ -312,10 +319,6 @@ class wot.PlayersPanel.PlayersPanel
 
         return text;
     }
-
-    /**
-     * XVM
-     */
 
     private static var s_widthTester:TextField;
     private static function createWidthTester(textFormat:TextFormat)
@@ -459,8 +462,11 @@ class wot.PlayersPanel.PlayersPanel
     /** Informs Minimap when PlayersPanel is loaded */
     private function checkLoading():Void
     {
+        //Logger.add("PlayersPanel.checkLoading()");
+
         wrapper.m_list.onEnterFrame = function()
         {
+            //Logger.add("PlayersPanel.checkLoading(): frame");
             if (this._dataProvider.length > 0)
             {
                 delete this.onEnterFrame;

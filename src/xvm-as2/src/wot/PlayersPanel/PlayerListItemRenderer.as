@@ -1,11 +1,7 @@
 ﻿/**
  * @author sirmax2
  */
-import com.xvm.Config;
-import com.xvm.Defines;
-import com.xvm.IconLoader;
-import com.xvm.PlayerInfo;
-import com.xvm.Utils;
+import com.xvm.*;
 import net.wargaming.controls.UILoaderAlt;
 import wot.PlayersPanel.SpotStatusView;
 
@@ -27,11 +23,13 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     function __getColorTransform()
     {
+        //Logger.add("PlayerListItemRenderer.__getColorTransform()");
         return this.__getColorTransformImpl.apply(this, arguments);
     }
 
     function update()
     {
+        //Logger.add("PlayerListItemRenderer.update()");
         return this.updateImpl.apply(this, arguments);
     }
 
@@ -91,34 +89,38 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     function updateImpl()
     {
-        var saved_icon = wrapper.data ? wrapper.data.icon : null;
-        if (wrapper.data)
+        var data:Object = wrapper.data;
+        //com.xvm.Logger.add("update: " + (data ? data.label : "(null)"))
+        var saved_icon:String;
+        if (data != null)
         {
+            saved_icon = data.icon;
+
             // Alternative icon set
             if (!m_iconset)
                 m_iconset = new IconLoader(this, completeLoad);
             m_iconset.init(wrapper.iconLoader,
                 [ wrapper.data.icon.split(Defines.WG_CONTOUR_ICON_PATH).join(Defines.XVMRES_ROOT + ((team == Defines.TEAM_ALLY)
                 ? Config.s_config.iconset.playersPanelAlly
-                : Config.s_config.iconset.playersPanelEnemy)), wrapper.data.icon ]);
-            wrapper.data.icon = m_iconset.currentIcon;
+                : Config.s_config.iconset.playersPanelEnemy)), saved_icon ]);
+            data.icon = m_iconset.currentIcon;
 
             // Player/clan icons
-            attachClanIconToPlayer(wrapper.data);
+            attachClanIconToPlayer(data);
         }
 
-        if (Config.s_config.playersPanel.removeSquadIcon && wrapper.squadIcon)
+        if (Config.s_config.playersPanel.removeSquadIcon && (wrapper.squadIcon != null))
             wrapper.squadIcon._visible = false;
 
         base.update();
 
-        if (wrapper.data)
-            wrapper.data.icon = saved_icon;
+        if (data != null)
+            data.icon = saved_icon;
     }
 
-    private function attachClanIconToPlayer(data):Void
+    private function attachClanIconToPlayer(data:Object):Void
     {
-        var cfg = Config.s_config.playersPanel.clanIcon;
+        var cfg:Object = Config.s_config.playersPanel.clanIcon;
         if (!cfg.show)
             return;
 

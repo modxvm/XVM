@@ -1,3 +1,4 @@
+import com.xvm.*;
 import wot.Minimap.dataTypes.Player;
 
 /**
@@ -38,42 +39,50 @@ class wot.PlayersPanel.PlayersPanelProxy
 {
     public static function get leftPanel():net.wargaming.ingame.PlayersPanel
     {
+        //Logger.add("PlayersPanelProxy.leftPanel()");
         return net.wargaming.ingame.PlayersPanel(_root.leftPanel);
     }
 
     public static function get rightPanel():net.wargaming.ingame.PlayersPanel
     {
+        //Logger.add("PlayersPanelProxy.rightPanel()");
         return net.wargaming.ingame.PlayersPanel(_root.rightPanel);
     }
 
     public static function getPlayerInfo(uid:Number):Player
     {
+        //Logger.add("PlayersPanelProxy.getPlayerInfo()");
         return _getPlayerInfoFrom(_allyPlayers, uid) || _getPlayerInfoFrom(_enemyPlayers, uid);
     }
 
     public static function get allyUids():Array
     {
+        //Logger.add("PlayersPanelProxy.allyUids()");
         return _allUidsOfTeam(_allyPlayers);
     }
 
     public static function get enemyUids():Array
     {
+        //Logger.add("PlayersPanelProxy.enemyUids()");
         return _allUidsOfTeam(_enemyPlayers);
     }
 
     public static function get allUids():Array
     {
+        //Logger.add("PlayersPanelProxy.allUids()");
         return allyUids.concat(enemyUids);
     }
 
     public static function isDead(uid:Number):Boolean
     {
+        //Logger.add("PlayersPanelProxy.isDead()");
         var player:Object = getPlayerInfo(uid);
         return (player.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) == 0;
     }
 
     public static function get self():Player
     {
+        //Logger.add("PlayersPanelProxy.self()");
         var myTeam:Array = _allyPlayers;
         for (var i in myTeam)
         {

@@ -77,9 +77,6 @@ class wot.Minimap.Minimap
     public static var CAMERA_NORMAL_ZINDEX:Number = 100;
     public static var SELF_ZINDEX:Number = 151;
 
-    /** Simplified minimap interface for communication with other Python or Flash mods */
-    public var externalDeveloperInterface:ExternalDeveloperInterface;
-
     private var isMinimapReady:Boolean = false;
     private var isPanelReady:Boolean = false;
     private var loadComplete:Boolean = false;
@@ -104,6 +101,7 @@ class wot.Minimap.Minimap
 
         if (mapExtended)
         {
+            //Logger.add("Minimap.onEntryInitedImpl()#extended");
             SyncModel.instance.updateIconUids();
 
             /**
@@ -156,15 +154,9 @@ class wot.Minimap.Minimap
 
         loadComplete = isMinimapReady && isPanelReady;
 
-        if (loadComplete && !mapExtended)
+        if (loadComplete && MapConfig.enabled && !mapExtended)
         {
-            externalDeveloperInterface = new ExternalDeveloperInterface();
-
-            if (MapConfig.enabled)
-            {
-                startExtendedProcedure();
-            }
-
+            startExtendedProcedure();
             mapExtended = true;
         }
     }
