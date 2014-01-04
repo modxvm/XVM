@@ -4,7 +4,7 @@
 {
   "locale": {
     // Author of translation
-    "XVM_translator": "RedMor <contact@by-reservation.com>, Vlad VirusX",
+    "XVM_translator": "RedMor, Vlad VirusX",
 
     // Ping
     "Initialization": "Ініціалізація",
@@ -42,7 +42,7 @@
 
     // BattleResults
     "Hit percent": "Відсоток влучень",
-    "Damage (assisted / own)": "Пошкодження (за розвідданими / свої)",
+    "Damage (assisted / own)": "Пошкодження (з вашою допомогою / свої)",
 
     // TeamRenderers
     "Friend": "Друг",
@@ -54,9 +54,9 @@
     "Load statistics": "Завантажити статистику",
 
     // UserInfo
-    "General stats": "General stats",
+    "General stats": "Загальна статистика",
     "Summary": "Загальні результати",
-    "Avg level": "Сер. рівень",
+    "Avg level": "Середній рівень",
     "WN6": "WN6",
     "EFF": "РЕ",
     "updated": "оновлено",
@@ -64,28 +64,28 @@
     "avg": "сер.",
     "top": "топ",
     "draws": "нічиїх",
-    "Maximum damage": "Maximum damage",
-    "Specific damage (Avg dmg / HP)": "Пит. пошкодж. (сер. пошкодж. / міцність)",
+    "Maximum damage": "Максимальні пошкодження",
+    "Specific damage (Avg dmg / HP)": "Пит. пошкодж. (сер. пошкодж. / HP)",
     "Capture points": "Балів захоплення",
     "Defence points": "Балів захисту",
     "Filter": "Фільтр",
-    "Extra data (WoT 0.8.8+)": "Extra data (WoT 0.8.8+)",
-    "Average battle time": "Average battle time",
-    "Average battle time per day": "Average battle time per day",
-    "Battles after 0.8.8": "Battles after 0.8.8",
-    "Average experience": "Average experience",
-    "Average experience without premium": "Average experience without premium",
-    "Average distance driven per battle": "Average distance driven per battle",
-    "Average woodcuts per battle": "Average woodcuts per battle",
-    "Average damage assisted": "Average damage assisted",
-    "    by tracking": "    by tracking",
-    "    by spotting": "    by spotting",
-    "Average HE shells fired (splash)": "Average HE shells fired (splash)",
-    "Average HE shells received (splash)": "Average HE shells received (splash)",
-    "Average penetrations per battle": "Average penetrations per battle",
-    "Average hits received": "Average hits received",
-    "Average penetrations received": "Average penetrations received",
-    "Average ricochets received": "Average ricochets received",
+    "Extra data (WoT 0.8.8+)": "Дод. дані (WoT 0.8.8+)",
+    "Average battle time": "Середній час життя в бою",
+    "Average battle time per day": "Середній час гри в день",
+    "Battles after 0.8.8": "Боїв після 0.8.8",
+    "Average experience": "Середній досвід",
+    "Average experience without premium": "Середній досвід без преміума",
+    "Average distance driven per battle": "У середньому пройдено км за бій",
+    "Average woodcuts per battle": "У середньому повалено дерев за бій",
+    "Average damage assisted": "Середні пошкодження з вашою допомогою",
+    "    by tracking": "    після збиття гусениці",
+    "    by spotting": "    по розвідданим",
+    "Average HE shells fired (splash)": "Середні пошкодження фугасами (сплеш)",
+    "Average HE shells received (splash)": "Середні отримані пошкодження фугасами",
+    "Average penetrations per battle": "В середньому пробито за бій",
+    "Average hits received": "У середньому отримано влучень",
+    "Average penetrations received": "У середньому отримано пробить",
+    "Average ricochets received": "У середньому отримано рикошетів",
 
     // Crew
     "PutOwnCrew": "Рідний екіпаж",
