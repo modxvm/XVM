@@ -4,7 +4,7 @@
 {
   "locale": {
     // Author of translation
-    "XVM_translator": "naoki",
+    "XVM_translator": "naokii",
 
     // Ping
     "Initialization": "初期化中",
@@ -54,7 +54,8 @@
     "Load statistics": "統計情報を読み込み",
 
     // UserInfo
-    "Summary": "概要",
+    "General stats": "統計情報",
+    "Summary": "サマリー",
     "Avg level": "平均レベル",
     "WN6": "WN6",
     "EFF": "EFF",
@@ -69,9 +70,9 @@
     "Filter": "フィルター",
 
     // Crew
-    "PutOwnCrew": "自搭乗員",
-    "PutBestCrew": "最適な搭乗員",
-    "PutClassCrew": "同クラスの搭乗員",
+    "PutOwnCrew": "元のクルーを搭乗",
+    "PutBestCrew": "最適なクルーを搭乗",
+    "PutClassCrew": "同クラスのクルーを搭乗",
 
     // Squad
     "Vehicle": "車両",
