@@ -25,7 +25,7 @@ package xvm.techtree
             {
                 if (stateProps != null)
                 {
-                    if (stateProps.label == "creditsPriceLabel" && stateProps.animation == null)
+                    if (stateProps.visible && stateProps.label == "creditsPriceLabel" && stateProps.animation == null)
                         stateProps.animation = new AnimationProperties(150, { alpha:0 }, { alpha:1 } );
                 }
             }
