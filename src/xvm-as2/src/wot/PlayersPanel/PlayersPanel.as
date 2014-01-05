@@ -100,14 +100,16 @@ class wot.PlayersPanel.PlayersPanel
         //Logger.add("PlayersPanel.updateSpotStatusMarkers()");
 
         /** Redraw every renderer */
-        for (var i in wrapper.m_list.renderers)
+        var len:Number = wrapper.m_list.renderers.length;
+        for (var i:Number = 0; i < len; ++i)
         {
-            var renderer:PlayerListItemRenderer = net.wargaming.ingame.PlayerListItemRenderer(wrapper.m_list.renderers[i]).xvm_worker;
-            var uid:Number = renderer.wrapper.data.uid;
-            var status:Number = spotStatusModel.defineStatus(uid, renderer.wrapper.data.vehicleState);
+            var renderer:net.wargaming.ingame.PlayerListItemRenderer = net.wargaming.ingame.PlayerListItemRenderer(wrapper.m_list.renderers[i]);
+            var uid:Number = renderer.data.uid;
+            var status:Number = spotStatusModel.defineStatus(uid, renderer.data.vehicleState);
             var subjectIsArtillery:Boolean = spotStatusModel.isArty(uid);
-            if (renderer.spotStatusView != null)
-                renderer.spotStatusView.update(status, subjectIsArtillery);
+            var worker:PlayerListItemRenderer = renderer.xvm_worker;
+            if (worker.spotStatusView != null)
+                worker.spotStatusView.update(status, subjectIsArtillery);
         }
     }
 

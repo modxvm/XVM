@@ -13,11 +13,13 @@ class wot.PlayersPanel.SpotStatusModel
     public static var LOST:Number = 2;
     public static var REVEALED:Number = 3;
 
-    private var seen:Array;
+    private var seen:Object;
+    private var artyCache:Object;
 
     public function SpotStatusModel()
     {
-        seen = [];
+        seen = { };
+        artyCache = { };
         GlobalEventDispatcher.addEventListener(MinimapEvent.ENEMY_REVEALED, this, onRevealed)
     }
 
@@ -31,15 +33,29 @@ class wot.PlayersPanel.SpotStatusModel
         if (isRevealedRightNow(uid))
             return REVEALED;
 
-        return wasSeen(uid) ? LOST : NEVER_SEEN;
+        if (seen.hasOwnProperty(uid.toString()))
+            return LOST;
+
+        return NEVER_SEEN;
     }
 
     public function isArty(uid:Number):Boolean
     {
         //Logger.add("SpotStatusModel.isArty()");
-        var info:Object = PlayersPanelProxy.getPlayerInfo(uid); // "../maps/icons/vehicle/contour/ussr-SU-18.png"
-        var info2:Object = VehicleInfo.getByIcon(info.icon);
-        return info2.vclass == "SPG";
+
+        var uid_str:String = uid.toString();
+        if (!artyCache.hasOwnProperty(uid_str))
+        {
+            var info:Object = PlayersPanelProxy.getPlayerInfo(uid); // "../maps/icons/vehicle/contour/ussr-SU-18.png"
+            if (info == null)
+                return false;
+            var info2:Object = VehicleInfo.getByIcon(info.icon);
+            if (info2 == null)
+                return false;
+            artyCache[uid_str] = info2.vclass == "SPG";
+        }
+
+        return artyCache[uid_str];
     }
 
     // -- Private
@@ -48,7 +64,8 @@ class wot.PlayersPanel.SpotStatusModel
     {
         //Logger.add("SpotStatusModel.isRevealedRightNow()");
         var uids:Array = IconsProxy.syncedUids;
-        for (var i in uids)
+        var len:Number = uids.length;
+        for (var i:Number = 0; i < len; ++i)
         {
             if (uids[i] == subjUid)
                 return true;
@@ -60,18 +77,6 @@ class wot.PlayersPanel.SpotStatusModel
     {
         //Logger.add("SpotStatusModel.onRevealed()");
         /** Save a guy to revealed enemies list */
-        var uid:Number = Number(mmevent.payload);
-        seen.push(uid);
-    }
-
-    private function wasSeen(uid:Number):Boolean
-    {
-        //Logger.add("SpotStatusModel.wasSeen()");
-        for (var i in seen)
-        {
-            if (seen[i] == uid)
-                return true;
-        }
-        return false;
+        seen[mmevent.payload] = true;
     }
 }

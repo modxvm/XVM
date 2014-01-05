@@ -16,18 +16,21 @@ class wot.PlayersPanel.SpotStatusView
     private var cfg:Object;
     private var formatsCache:Object;
     private var spotStatusMarker:TextField;
+    private var lastText:String;
 
     public function SpotStatusView(renderer:PlayerListItemRenderer)
     {
         this.renderer = renderer;
         cfg = null;
         spotStatusMarker = createMarker(renderer);
+        lastText = "";
     }
 
     public function update(status:Number, isArty:Boolean):Void
     {
         if (!Config.s_loaded)
             return;
+
         if (cfg == null)
         {
             cfg = Config.s_config.playersPanel.enemySpottedMarker;
@@ -43,7 +46,12 @@ class wot.PlayersPanel.SpotStatusView
             spotStatusMarker._y = renderer.wrapper.vehicleLevel._y + cfg.Yoffset; // vehicleLevel._y is -445.05 for example
         }
 
-        spotStatusMarker.htmlText = formatsCache[status][isArty ? 1 : 0];
+        var txt:String = formatsCache[status][isArty ? 1 : 0];
+        if (lastText != txt)
+        {
+            lastText = txt;
+            spotStatusMarker.htmlText = txt;
+        }
     }
 
     // -- Private
