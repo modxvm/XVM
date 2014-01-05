@@ -160,6 +160,7 @@ private function RefreshHangarPage():void
         this.p_hangar.v_xwnInCompany.value = section.xwnInCompany;
         this.p_hangar.v_masteryMarkInTankCarousel.value = section.masteryMarkInTankCarousel;
         this.p_hangar.v_masteryMarkInTechTree.value = section.masteryMarkInTechTree;
+        this.p_hangar.v_hidePricesInTechTree.value = section.hidePricesInTechTree;
         this.p_hangar.v_widgetsEnabled.value = section.widgetsEnabled;
 
         section = Config.config.userInfo;

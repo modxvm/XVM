@@ -51,6 +51,7 @@
     "hideTutorial": false,
     "masteryMarkInTankCarousel": true,
     "masteryMarkInTechTree": true,
+    "hidePricesInTechTree": true,
     "widgetsEnabled": true,
     "pingServers": {
       "$ref": { "path":"def.pingServers" },

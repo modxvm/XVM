@@ -58,10 +58,11 @@ package xvm.tcarousel
             if (!vehicleIcon)
                 return;
             masteryTF = new TextField();
-            masteryTF.x = 0;
-            masteryTF.y = 13;
+            masteryTF.x = -1;
+            masteryTF.y = 14;
             masteryTF.width = 32;
             masteryTF.height = 32;
+            masteryTF.selectable = false;
             vehicleIcon.addChild(masteryTF);
         }
 

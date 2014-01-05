@@ -65,6 +65,7 @@ class com.xvm.DefaultConfig
                 xwnInCompany: true,
                 masteryMarkInTankCarousel: true,
                 masteryMarkInTechTree: true,
+                hidePricesInTechTree: false,
                 widgetsEnabled: false,
                 // Show ping to the servers
                 pingServers: {

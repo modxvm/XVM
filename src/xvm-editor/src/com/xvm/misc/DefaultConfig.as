@@ -109,6 +109,7 @@ package com.xvm.misc
             c.xwnInCompany = true;
             c.masteryMarkInTankCarousel = true;
             c.masteryMarkInTechTree = true;
+            c.hidePricesInTechTree = false;
             c.widgetsEnabled = false;
             // Show ping to the servers
             c.pingServers = new Object();

@@ -1,4 +1,9 @@
-﻿XVM-5.0.2-test2:
+﻿XVM-dev:
+  [NEW FUNCTIONS]
+  * new options:
+      hangar/hidePricesInTechTree - Hide price button in tech tree
+
+XVM-5.0.2-test2:
   [NEW FUNCTIONS]
   * localization: added Chinese(Taiwan), Malay and Portuguese languages
   * new options:
