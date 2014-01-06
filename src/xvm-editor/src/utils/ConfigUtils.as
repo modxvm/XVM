@@ -76,10 +76,14 @@ public class ConfigUtils
     {
         Config.config.battle.clanIconsFolder = Utils.fixPath(Config.config.battle.clanIconsFolder);
 
-        Config.config.iconset.battleLoading = Utils.fixPath(Config.config.iconset.battleLoading);
-        Config.config.iconset.playersPanel = Utils.fixPath(Config.config.iconset.playersPanel);
-        Config.config.iconset.statisticForm = Utils.fixPath(Config.config.iconset.statisticForm);
-        Config.config.iconset.vehicleMarker = Utils.fixPath(Config.config.iconset.vehicleMarker);
+        Config.config.iconset.battleLoadingAlly = Utils.fixPath(Config.config.iconset.battleLoadingAlly);
+        Config.config.iconset.battleLoadingEnemy = Utils.fixPath(Config.config.iconset.battleLoadingEnemy);
+        Config.config.iconset.playersPanelAlly = Utils.fixPath(Config.config.iconset.playersPanelAlly);
+        Config.config.iconset.playersPanelEnemy = Utils.fixPath(Config.config.iconset.playersPanelEnemy);
+        Config.config.iconset.statisticFormAlly = Utils.fixPath(Config.config.iconset.statisticFormAlly);
+        Config.config.iconset.statisticFormEnemy = Utils.fixPath(Config.config.iconset.statisticFormEnemy);
+        Config.config.iconset.vehicleMarkerAlly = Utils.fixPath(Config.config.iconset.vehicleMarkerAlly);
+        Config.config.iconset.vehicleMarkerEnemy = Utils.fixPath(Config.config.iconset.vehicleMarkerEnemy);
 
         if (isNaN(Config.config.battleLoading.clanIcon.xr))
             Config.config.battleLoading.clanIcon.xr = Config.config.battleLoading.clanIcon.x;

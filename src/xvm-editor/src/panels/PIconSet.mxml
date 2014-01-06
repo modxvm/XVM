@@ -5,8 +5,12 @@
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:c="components.*"
     title="{_('PIconSet')}">
-    <c:LabeledTextInput label="{_('iconset_battleLoading')}" labelWidth="180" id="v_battleLoading" config="iconset.battleLoading" change="onChange(event)"/>
-    <c:LabeledTextInput label="{_('iconset_statisticForm')}" labelWidth="180" id="v_statisticForm" config="iconset.statisticForm" change="onChange(event)"/>
-    <c:LabeledTextInput label="{_('iconset_playersPanel')}" labelWidth="180" id="v_playersPanel" config="iconset.playersPanel" change="onChange(event)"/>
-    <c:LabeledTextInput label="{_('iconset_vehicleMarker')}" labelWidth="180" id="v_vehicleMarker" config="iconset.vehicleMarker" change="onChange(event)"/>
+    <c:LabeledTextInput label="{_('iconset_battleLoadingAlly')}" labelWidth="200" id="v_battleLoadingAlly" config="iconset.battleLoadingAlly" change="onChange(event)"/>
+    <c:LabeledTextInput label="{_('iconset_battleLoadingEnemy')}" labelWidth="200" id="v_battleLoadingEnemy" config="iconset.battleLoadingEnemy" change="onChange(event)"/>
+    <c:LabeledTextInput label="{_('iconset_statisticFormAlly')}" labelWidth="200" id="v_statisticFormAlly" config="iconset.statisticFormAlly" change="onChange(event)"/>
+    <c:LabeledTextInput label="{_('iconset_statisticFormEnemy')}" labelWidth="200" id="v_statisticFormEnemy" config="iconset.statisticFormEnemy" change="onChange(event)"/>
+    <c:LabeledTextInput label="{_('iconset_playersPanelAlly')}" labelWidth="200" id="v_playersPanelAlly" config="iconset.playersPanelAlly" change="onChange(event)"/>
+    <c:LabeledTextInput label="{_('iconset_playersPanelEnemy')}" labelWidth="200" id="v_playersPanelEnemy" config="iconset.playersPanelEnemy" change="onChange(event)"/>
+    <c:LabeledTextInput label="{_('iconset_vehicleMarkerAlly')}" labelWidth="200" id="v_vehicleMarkerAlly" config="iconset.vehicleMarkerAlly" change="onChange(event)"/>
+    <c:LabeledTextInput label="{_('iconset_vehicleMarkerEnemy')}" labelWidth="200" id="v_vehicleMarkerEnemy" config="iconset.vehicleMarkerEnemy" change="onChange(event)"/>
 </c:PanelComponent>

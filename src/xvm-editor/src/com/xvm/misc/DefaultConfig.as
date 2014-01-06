@@ -1091,10 +1091,14 @@ package com.xvm.misc
         private static function getIconsetSection():Object
         {
             var c:Object = new Object();
-            c.battleLoading = "contour/";
-            c.statisticForm = "contour/";
-            c.playersPanel =  "contour/";
-            c.vehicleMarker = "contour/";
+            c.battleLoadingAlly = "contour/";
+            c.battleLoadingEnemy = "contour/";
+            c.statisticFormAlly = "contour/";
+            c.statisticFormEnemy = "contour/";
+            c.playersPanelAlly =  "contour/";
+            c.playersPanelEnemy =  "contour/";
+            c.vehicleMarkerAlly = "contour/";
+            c.vehicleMarkerEnemy = "contour/";
             return c;
         }
 

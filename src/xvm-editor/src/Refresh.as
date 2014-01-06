@@ -853,10 +853,14 @@ private function RefreshMiscPage():void
         var section:*;
 
         section = Config.config.iconset;
-        this.p_iconSet.v_battleLoading.value = section.battleLoading;
-        this.p_iconSet.v_statisticForm.value = section.statisticForm;
-        this.p_iconSet.v_playersPanel.value = section.playersPanel;
-        this.p_iconSet.v_vehicleMarker.value = section.vehicleMarker;
+        this.p_iconSet.v_battleLoadingAlly.value = section.battleLoadingAlly;
+        this.p_iconSet.v_battleLoadingEnemy.value = section.battleLoadingEnemy;
+        this.p_iconSet.v_statisticFormAlly.value = section.statisticFormAlly;
+        this.p_iconSet.v_statisticFormEnemy.value = section.statisticFormEnemy;
+        this.p_iconSet.v_playersPanelAlly.value = section.playersPanelAlly;
+        this.p_iconSet.v_playersPanelEnemy.value = section.playersPanelEnemy;
+        this.p_iconSet.v_vehicleMarkerAlly.value = section.vehicleMarkerAlly;
+        this.p_iconSet.v_vehicleMarkerEnemy.value = section.vehicleMarkerEnemy;
     }
     catch (ex:Error)
     {
