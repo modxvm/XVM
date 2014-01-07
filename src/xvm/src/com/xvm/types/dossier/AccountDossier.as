@@ -35,6 +35,7 @@ package com.xvm.types.dossier
 
         public var creationTime:uint;
         public var lastBattleTime:uint;
+        public var lastBattleTimeStr:String;
 
         public var vehicles:Object;
 

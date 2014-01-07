@@ -36,6 +36,7 @@ package xvm.profile.UI
             if (worker.page && worker.page.battlesDropdown && (worker.page.battlesDropdown.selectedItem == PROFILE.PROFILE_DROPDOWN_LABELS_TEAM))
             {
                 worker.extraDataPanel.visible = false;
+                worker.lastBattleTimeTF.htmlText = "";
                 worker.ratingTF.htmlText = "";
                 worker.bottomTF.htmlText = "";
                 worker.maxDamageDL.labelTextField.textColor = Defines.UICOLOR_DISABLED;

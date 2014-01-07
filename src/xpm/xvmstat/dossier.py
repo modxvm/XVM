@@ -15,6 +15,8 @@ import traceback
 from adisp import process
 
 from gui.shared.gui_items import GUI_ITEM_TYPE
+from helpers.i18n import makeString
+from gui.Scaleform.locale.MENU import MENU
 
 from gui.mods.xpm import *
 from constants import *
@@ -131,13 +133,16 @@ class _Dossier(object):
         total = dossier.getTotalStats()
         glob = dossier.getGlobalStats()
 
+        lbt = glob.getLastBattleTime()
         res.update({
             'maxXPVehId': total.getMaxXpVehicle(),
             'maxFragsVehId': total.getMaxFragsVehicle(),
             'maxDamageVehId': total.getMaxDamageVehicle(),
 
             'creationTime': glob.getCreationTime(),
-            'lastBattleTime': glob.getLastBattleTime(),
+            'lastBattleTime': lbt,
+            'lastBattleTimeStr': makeString(MENU.PROFILE_HEADER_LASTBATTLEDATETITLE) + ' ' +
+                ('%s %s' % (BigWorld.wg_getLongDateFormat(lbt), BigWorld.wg_getShortTimeFormat(lbt))),
 
             'vehicles': {}
         })

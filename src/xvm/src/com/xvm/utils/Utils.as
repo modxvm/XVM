@@ -218,6 +218,7 @@ package com.xvm.utils
         {
             var clone:TextField = cloneObject(textField, TextField);
             clone.defaultTextFormat = textField.getTextFormat();
+            clone.selectable = false;
             if (textField.parent && replace) {
                 textField.parent.addChild(clone);
                 textField.parent.removeChild(textField);

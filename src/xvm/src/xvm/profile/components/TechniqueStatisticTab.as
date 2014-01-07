@@ -25,6 +25,7 @@ package xvm.profile.components
         private var cache:Dictionary;
         private var controlsMap:Dictionary;
         private var controls:Array;
+        public var lastBattleTimeTF:TextField;
         public var ratingTF:TextField;
         public var maxDamageDL:DashLineTextItem;
         public var maxDamageDLLabelTextFormat:TextFormat;
@@ -280,6 +281,18 @@ package xvm.profile.components
                 XDL(15).label = Locale.get("Average ricochets received");
             }
 
+            // last battle time
+            lastBattleTimeTF = new TextField();
+            lastBattleTimeTF.antiAliasType = AntiAliasType.ADVANCED;
+            lastBattleTimeTF.selectable = false;
+            lastBattleTimeTF.wordWrap = false;
+            lastBattleTimeTF.x = 0;
+            lastBattleTimeTF.y = -30;
+            lastBattleTimeTF.width = 450;
+            lastBattleTimeTF.height = 25;
+            lastBattleTimeTF.styleSheet = Utils.createTextStyleSheet("txt", new TextFormat("$FieldFont", 14, Defines.UICOLOR_LABEL));
+            proxy.addChild(lastBattleTimeTF);
+
             ratingTF = new TextField();
             ratingTF.antiAliasType = AntiAliasType.ADVANCED;
             ratingTF.multiline = true;
@@ -294,7 +307,7 @@ package xvm.profile.components
 
             bottomTF = new TextField();
             bottomTF.antiAliasType = AntiAliasType.ADVANCED;
-            ratingTF.selectable = false;
+            bottomTF.selectable = false;
             bottomTF.multiline = true;
             bottomTF.wordWrap = false;
             bottomTF.x = avgDefenceDL.x;
@@ -432,6 +445,9 @@ package xvm.profile.components
             prepareData(data);
             //Logger.addObject(data, 3, "prepared");
 
+            // LastBattleTime
+            lastBattleTimeTF.htmlText = "<p class='txt' align='right'>" + data.lastBattleTimeStr + "</p>";
+
             updateGlobalRatings(data);
             updateCommonData(data);
 
@@ -453,6 +469,8 @@ package xvm.profile.components
 
         private function updateVehicleData(vehId:uint):void
         {
+            lastBattleTimeTF.htmlText = "";
+
             Dossier.loadVehicleDossier(this, updateVehicleDataCallback, vehId, tech.playerId);
         }
 
