@@ -26,7 +26,17 @@ package xvm.techtree
             if (Config.config.hangar.hidePricesInTechTree)
             {
                 if (nodeData.shopPrice.gold == 0)
-                    nodeData.state |= 0xC0;
+                {
+                    // bits:
+                    //  0 - 0-enabled, 1-disabled
+                    //  1 - 0-opened, 1-closed
+                    // ...
+                    //  7 - 0-not elite, 1-elite
+                    // ...
+                    //Logger.add(nodeData.state.toString());
+                    if ((nodeData.state & 0x3) == 0)
+                        nodeData.state |= 0xC0;
+                }
             }
             super.setup(index, nodeData, entityType, matrixPosition);
         }
