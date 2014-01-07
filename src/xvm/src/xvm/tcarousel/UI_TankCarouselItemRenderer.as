@@ -37,6 +37,8 @@ package xvm.tcarousel
                     {
                         var vdata:VehicleDossierCut = dossier.vehicles[id];
                         masteryStr = "<img src='img://gui/maps/icons/library/proficiency/class_icons_" + vdata.mastery + ".png' width='23' height='23'>";
+                        masteryTF.scaleX = 1 / scaleX;
+                        masteryTF.scaleY = 1 / scaleY;
                     }
                 }
                 catch (ex:Error)
