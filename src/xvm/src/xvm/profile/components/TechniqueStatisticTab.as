@@ -283,6 +283,7 @@ package xvm.profile.components
             ratingTF = new TextField();
             ratingTF.antiAliasType = AntiAliasType.ADVANCED;
             ratingTF.multiline = true;
+            ratingTF.selectable = false;
             ratingTF.wordWrap = false;
             ratingTF.x = proxy.efficiencyTF.x + 170;
             ratingTF.y = proxy.battlesDL.y - 62;
@@ -293,6 +294,7 @@ package xvm.profile.components
 
             bottomTF = new TextField();
             bottomTF.antiAliasType = AntiAliasType.ADVANCED;
+            ratingTF.selectable = false;
             bottomTF.multiline = true;
             bottomTF.wordWrap = false;
             bottomTF.x = avgDefenceDL.x;

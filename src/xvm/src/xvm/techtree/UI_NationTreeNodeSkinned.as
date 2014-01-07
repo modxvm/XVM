@@ -35,7 +35,7 @@ package xvm.techtree
         {
             if (Config.config.hangar.hidePricesInTechTree)
             {
-                if (stateProps != null && stateProps.visible || stateProps.animation == null)
+                if (stateProps != null && stateProps.visible && stateProps.animation == null)
                 {
                     if (stateProps.label == "goldPriceLabel" || stateProps.label == "creditsPriceLabel")
                         stateProps.animation = new AnimationProperties(150, { alpha:0 }, { alpha:1 } );
