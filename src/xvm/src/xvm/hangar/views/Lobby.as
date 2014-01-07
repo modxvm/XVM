@@ -28,7 +28,7 @@ package xvm.hangar.views
             //Logger.add("onAfterPopulate: " + view.as_alias);
             hideTutorial();
 
-            //Cmd.runTest("battleResults", "83008761304453998");
+            //Cmd.runTest("battleResults", "73770011772848350");
         }
 
 
