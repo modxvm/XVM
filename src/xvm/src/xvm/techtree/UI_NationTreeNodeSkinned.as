@@ -7,7 +7,9 @@ package xvm.techtree
     import flash.text.*;
     import net.wg.gui.lobby.profile.pages.technique.data.*;
     import net.wg.gui.lobby.techtree.constants.*;
-    import net.wg.gui.lobby.techtree.data.state.AnimationProperties;
+    import net.wg.gui.lobby.techtree.data.state.*;
+    import net.wg.gui.lobby.techtree.data.vo.*;
+    import net.wg.gui.lobby.techtree.math.*;
 
     public dynamic class UI_NationTreeNodeSkinned extends NationTreeNodeSkinned
     {
@@ -19,13 +21,23 @@ package xvm.techtree
             createControls();
         }
 
+        override public function setup(index:uint, nodeData:NodeData, entityType:uint = 0, matrixPosition:MatrixPosition = null):void
+        {
+            if (Config.config.hangar.hidePricesInTechTree)
+            {
+                if (nodeData.shopPrice.gold == 0)
+                    nodeData.state |= 0xC0;
+            }
+            super.setup(index, nodeData, entityType, matrixPosition);
+        }
+
         override public function populateUI():void
         {
             if (Config.config.hangar.hidePricesInTechTree)
             {
-                if (stateProps != null)
+                if (stateProps != null && stateProps.visible || stateProps.animation == null)
                 {
-                    if (stateProps.visible && (stateProps.label == "creditsPriceLabel" || stateProps.label == "goldPriceLabel") && stateProps.animation == null)
+                    if (stateProps.label == "goldPriceLabel" || stateProps.label == "creditsPriceLabel")
                         stateProps.animation = new AnimationProperties(150, { alpha:0 }, { alpha:1 } );
                 }
             }
