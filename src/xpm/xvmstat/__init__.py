@@ -56,6 +56,7 @@ def ProfileTechniqueWindowRequestData(base, self, data):
 #    else:
 #        self.as_responseVehicleDossierS({})
 
+
 #####################################################################
 # Register events
 

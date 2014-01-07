@@ -17,6 +17,7 @@ COMMAND_GETDOSSIER = "getDossier"
 COMMAND_LOGSTAT = "logstat";
 COMMAND_LOAD_SETTINGS = "load_settings"
 COMMAND_SAVE_SETTINGS = "save_settings"
+COMMAND_TEST = "test"
 
 RESPOND_PINGDATA = "xvm.pingdata"
 RESPOND_STATDATA = "xvm.statdata"

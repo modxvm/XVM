@@ -24,6 +24,7 @@ package com.xvm.io
         private static const COMMAND_LOGSTAT:String = "logstat";
         private static const COMMAND_SAVE_SETTINGS:String = "save_settings";
         private static const COMMAND_LOAD_SETTINGS:String = "load_settings";
+        private static const COMMAND_TEST:String = "test";
 
         public static const RESPOND_PINGDATA:String = "xvm.pingdata";
         public static const RESPOND_STATDATA:String = "xvm.statdata";
@@ -93,6 +94,12 @@ package com.xvm.io
         public static function saveSettings(settingsStr:String):void
         {
             _call(null, null, [COMMAND_SAVE_SETTINGS, settingsStr]);
+        }
+
+        public static function runTest(... args):void
+        {
+            args.unshift(COMMAND_TEST);
+            _call(null, null, args);
         }
 
         /////////////////////////////////////////////////////////////////

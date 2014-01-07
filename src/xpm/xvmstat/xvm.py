@@ -17,6 +17,7 @@ from pinger import *
 from stats import getBattleStat, getUserData
 from dossier import getDossier
 from vehinfo import getVehicleInfoData
+from test import runTest
 
 NO_LOG_COMMANDS = (
   COMMAND_LOG,
@@ -64,6 +65,8 @@ class Xvm(object):
                 pass # TODO
             elif cmd == COMMAND_SAVE_SETTINGS:
                 pass # TODO
+            elif cmd == COMMAND_TEST:
+                runTest(args)
             else:
                 err("unknown command: " + str(cmd))
             proxy.movie.invoke(('xvm.respond', [id, res]))
