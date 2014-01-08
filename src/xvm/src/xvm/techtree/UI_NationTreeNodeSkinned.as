@@ -28,14 +28,15 @@ package xvm.techtree
                 if (nodeData.shopPrice.gold == 0)
                 {
                     // bits:
-                    //  0 - 0-enabled, 1-disabled
-                    //  1 - 0-opened, 1-closed
+                    // 0x01 - 0-enabled, 1-disabled
+                    // 0x02 - 0-opened, 1-closed
                     // ...
-                    //  7 - 0-not elite, 1-elite
+                    // 0x40 - 1-was bought
+                    // 0x80 - 1-elite
                     // ...
                     //Logger.add(nodeData.state.toString());
                     if ((nodeData.state & 0x3) == 0)
-                        nodeData.state |= 0xC0;
+                        nodeData.state |= 0x40;
                 }
             }
             super.setup(index, nodeData, entityType, matrixPosition);
