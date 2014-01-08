@@ -162,7 +162,7 @@ package xvm.hangar.components.BattleResults
                 //Logger.addObject(data, 3);
                 var x:int = view.effencyTitle.x + 294;
                 var y:int = view.effencyTitle.y;
-                var w:int = 31;
+                var w:Number = 32;
 
                 // spotted
                 //view.addChild(createTotalsTextField( { name: EfficiencyIconRenderer.SPOTTED, x: x, y: y1, width: w, height:h,
@@ -185,8 +185,8 @@ package xvm.hangar.components.BattleResults
                     value: getTotalCritsCount(data),
                     tooltip: { value: getTotalCritsCount(data) } } ));
 
-                // hits/damage
-                view.addChild(createTotalItem( { x: x + w * 3, y: y, kind: EfficiencyIconRenderer.DAMAGE,
+                // pierced
+                view.addChild(createTotalItem( { x: x + w * 3 - 1, y: y, kind: EfficiencyIconRenderer.DAMAGE,
                     value: data.pierced,
                     tooltip: (data.details == null || data.details.length == 0) ? null : {
                         values: data.damageDealt + "<br/>" + data.pierced,
@@ -194,7 +194,7 @@ package xvm.hangar.components.BattleResults
                     } } ));
 
                 // kills
-                view.addChild(createTotalItem( { x: x + w * 4, y: y, kind: EfficiencyIconRenderer.KILL,
+                view.addChild(createTotalItem( { x: x + w * 4 - 2, y: y, kind: EfficiencyIconRenderer.KILL,
                     value: data.kills,
                     tooltip: { value: -1 } } ));
             }
