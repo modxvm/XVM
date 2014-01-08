@@ -25,7 +25,6 @@ package xvm.hangar.views
         public function get page():net.wg.gui.lobby.battleResults.BattleResults
         {
             return super.view as net.wg.gui.lobby.battleResults.BattleResults;
-
         }
 
         override public function onAfterPopulate(e:LifeCycleEvent):void

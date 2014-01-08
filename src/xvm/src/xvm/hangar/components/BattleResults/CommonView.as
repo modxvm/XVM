@@ -84,11 +84,22 @@ package xvm.hangar.components.BattleResults
         private function initTextFields():void
         {
             shotsTitle = this.createTextField(FIELD_POS_TITLE, 1);
+
             shotsCount = this.createTextField(FIELD_POS_NON_PREM, 1);
+
             shotsPercent = this.createTextField(FIELD_POS_PREM, 1);
+
             damageAssistedTitle = this.createTextField(FIELD_POS_TITLE, 2);
+
             damageAssistedValue = this.createTextField(FIELD_POS_NON_PREM, 2);
+            damageAssistedValue.name = EfficiencyIconRenderer.ASSIST;
+            damageAssistedValue.addEventListener(MouseEvent.ROLL_OVER, onOver);
+            damageAssistedValue.addEventListener(MouseEvent.ROLL_OUT, onOut);
+
             damageValue = this.createTextField(FIELD_POS_PREM, 2);
+            damageValue.name = EfficiencyIconRenderer.DAMAGE;
+            damageValue.addEventListener(MouseEvent.ROLL_OVER, onOver);
+            damageValue.addEventListener(MouseEvent.ROLL_OUT, onOut);
         }
 
         private function createTextField(position:String, line:Number):TextField
@@ -126,11 +137,6 @@ package xvm.hangar.components.BattleResults
             return newTf;
         }
 
-        private function formatThousand(val:Number):String
-        {
-            return App.utils.locale.integer(val);
-        }
-
         private function formatText(text:String, color:String, align:String = TextFormatAlign.LEFT):String
         {
             return "<p class='" + CSS_FIELD_CLASS + "' align='" + align + "'><font color='" + color + "'>" + text + "</font></p>";
@@ -141,16 +147,12 @@ package xvm.hangar.components.BattleResults
             shotsTitle.htmlText = formatText(Locale.get("Hit percent"), "#C9C9B6");
             shotsCount.htmlText = formatText(data.hits + "/" + data.shots, "#C9C9B6", TextFormatAlign.RIGHT);
 
-            var hitPercent:Number;
-            if (data.shots > 0)
-                hitPercent = (data.hits / data.shots) * 100;
-            else
-                hitPercent = 0;
+            var hitPercent:Number = (data.shots <= 0) ? 0 : (data.hits / data.shots) * 100;
             shotsPercent.htmlText = formatText(App.utils.locale.float(hitPercent) + "%", "#C9C9B6", TextFormatAlign.RIGHT);
 
             damageAssistedTitle.htmlText = formatText(Locale.get("Damage (assisted / own)"), "#C9C9B6");
-            damageAssistedValue.htmlText = formatText(formatThousand(data.damageAssisted), "#408CCF", TextFormatAlign.RIGHT);
-            damageValue.htmlText = formatText(formatThousand(data.damageDealt), "#FFC133", TextFormatAlign.RIGHT);
+            damageAssistedValue.htmlText = formatText(App.utils.locale.integer(data.damageAssisted), "#408CCF", TextFormatAlign.RIGHT);
+            damageValue.htmlText = formatText(App.utils.locale.integer(data.damageDealt), "#FFC133", TextFormatAlign.RIGHT);
         }
 
         private function setTotals(data:Object):void
@@ -158,19 +160,20 @@ package xvm.hangar.components.BattleResults
             try
             {
                 //Logger.addObject(data, 3);
-                var x:int = view.effencyTitle.x + 288;
-                var y1:int = view.effencyTitle.y + 4;
-                var y2:int = view.effencyTitle.y - 3;
+                var x:int = view.effencyTitle.x + 294;
+                var y:int = view.effencyTitle.y;
                 var w:int = 33;
-                var h:int = 32;
 
                 // spotted
-                view.addChild(createTotalsTextField( { name: EfficiencyIconRenderer.SPOTTED, x: x, y: y1, width: w, height:h,
-                    htmlText: getTotalSpottedStr(data) } ));
+                //view.addChild(createTotalsTextField( { name: EfficiencyIconRenderer.SPOTTED, x: x, y: y1, width: w, height:h,
+                //    htmlText: getTotalSpottedStr(data) } ));
+                view.addChild(createTotalItem( { x: x, y: y, kind: EfficiencyIconRenderer.SPOTTED,
+                    value: getTotalSpotted(data),
+                    tooltip: { } } ));
 
                 // damage assisted (radio/tracks)
-                view.addChild(createTotalsTextField( { name: EfficiencyIconRenderer.ASSIST, x: x + w * 1 - 1, y: y1, width: w, height:h,
-                    htmlText: getTotalAssistCountStr(data),
+                view.addChild(createTotalItem( { x: x + w * 1, y: y, kind: EfficiencyIconRenderer.ASSIST,
+                    value: getTotalAssistCount(data),
                     tooltip: (data.details == null || data.details.length == 0) ? null : {
                         value: data.damageAssisted,
                         values: data.damageAssistedRadio + "<br/>" + data.damageAssistedTrack,
@@ -178,21 +181,21 @@ package xvm.hangar.components.BattleResults
                     } } ));
 
                 // crits
-                view.addChild(createTotalsTextField( { name: EfficiencyIconRenderer.CRITS, x: x + w * 2 - 2, y: y1, width: w, height:h,
-                    htmlText: getTotalCritsCountStr(data),
+                view.addChild(createTotalItem( { x: x + w * 2, y: y, kind: EfficiencyIconRenderer.CRITS,
+                    value: getTotalCritsCount(data),
                     tooltip: { value: getTotalCritsCount(data) } } ));
 
                 // hits/damage
-                view.addChild(createTotalsTextField( { name: EfficiencyIconRenderer.DAMAGE, x: x + w * 3 - 3, y: y2, width: w, height:h,
-                    htmlText: getTotalDamageStr(data) + "<br/>" + getTotalHitsStr(data) + "/" + getTotalPiercedStr(data),
+                view.addChild(createTotalItem( { x: x + w * 3, y: y, kind: EfficiencyIconRenderer.DAMAGE,
+                    value: data.pierced,
                     tooltip: (data.details == null || data.details.length == 0) ? null : {
                         values: data.damageDealt + "<br/>" + data.pierced,
                         discript: data.details[0].damageDealtNames
                     } } ));
 
                 // kills
-                view.addChild(createTotalsTextField( { name: EfficiencyIconRenderer.KILL, x: x + w * 4 - 4, y: y1, width: w, height:h,
-                    htmlText: getTotalKillsStr(data),
+                view.addChild(createTotalItem( { x: x + w * 4, y: y, kind: EfficiencyIconRenderer.KILL,
+                    value: data.kills,
                     tooltip: { value: -1 } } ));
             }
             catch (ex:Error)
@@ -222,12 +225,7 @@ package xvm.hangar.components.BattleResults
             return calcDetails(data, "spotted");
         }
 
-        private function getTotalSpottedStr(data:Object):String
-        {
-            return "<font color='#408CCF'>" + getTotalSpotted(data).toString() + "</font>"
-        }
-
-        private function getTotalAssistCountStr(data:Object):String
+        private function getTotalAssistCount(data:Object):Number
         {
             var n:int = 0;
             for each (var obj:Object in data.details)
@@ -235,75 +233,45 @@ package xvm.hangar.components.BattleResults
                 if (obj["damageAssistedRadio"] != 0 || obj["damageAssistedTrack"] != 0)
                     n++;
             }
-            return "<font color='#97EA14'>" + n.toString() + "</font>"
+            return n;
         }
 
-        private function getTotalCritsCount(data:Object):Number
+        private function getTotalCritsCount(data:Object = null):Number
         {
-            return calcDetails(data, "critsCount")
+            return calcDetails(data, "critsCount");
         }
 
-        private function getTotalCritsCountStr(data:Object):String
+        private function createTotalItem(params:Object = null):EfficiencyIconRenderer
         {
-            return "<font color='#FF0000'>" + getTotalCritsCount(data).toString() + "</font>"
-        }
-
-        private function getTotalHitsStr(data:Object):String
-        {
-            return "<font color='#D85600'>" + data.hits + "</font>"
-        }
-
-        private function getTotalPiercedStr(data:Object):String
-        {
-            return "<font color='#D85600'>" + data.pierced + "</font>"
-        }
-
-        private function getTotalDamageStr(data:Object):String
-        {
-            return "<font color='#D85600'>" + data.damageDealt + "</font>"
-        }
-
-        private function getTotalKillsStr(data:Object):String
-        {
-            return "<font color='#FF0000'>" + data.kills + "</font>"
-        }
-
-        private function createTotalsTextField(params:Object = null):TextField
-        {
-            var tf:TextField = new TextField();
-            //tf.border = true; tf.borderColor = 0xFFFFFF;
-            tf.antiAliasType = AntiAliasType.ADVANCED;
-            tf.selectable = false;
-            tf.multiline = true;
-            tf.wordWrap = false;
-            tf.styleSheet = Utils.createTextStyleSheet("txt", new TextFormat("$FieldFont", 12, Defines.UICOLOR_LABEL));
             if (params != null)
             {
-                for (var name:* in params)
+                if (params.hasOwnProperty("tooltip"))
                 {
-                    if (name == "htmlText")
-                        tf[name] = "<textformat leading='-3'><p class='txt' align='center'>" + params[name] + "</p></textformat>";
-                    else if (name == "tooltip")
-                        tooltips[params["name"] || tf.name] = params[name];
-                    else
-                        tf[name] = params[name];
+                    tooltips[params.kind] = params.tooltip;
+                    delete params.tooltip;
                 }
             }
-            tf.addEventListener(MouseEvent.ROLL_OVER, onOver);
-            tf.addEventListener(MouseEvent.ROLL_OUT, onOut);
-            return tf;
+
+            var icon:EfficiencyIconRenderer = App.utils.classFactory.getComponent("EfficiencyIconRendererGUI", EfficiencyIconRenderer, params);
+            icon.enabled = params.value >= 0;
+            icon.addEventListener(MouseEvent.ROLL_OVER, onOver);
+            icon.addEventListener(MouseEvent.ROLL_OUT, onOut);
+
+            return icon;
         }
 
         private function onOver(e:MouseEvent):void
         {
-            var data:Object = {
-                "type":e.currentTarget.name,
-                "disabled":false
-            }
-            var tooltip:* = tooltips[e.currentTarget.name];
-            if (tooltip != null && !(tooltip is String))
-                data = merge(data, tooltip);
-            App.toolTipMgr.showSpecial(Tooltips.EFFICIENCY_PARAM,null,e.currentTarget.name,data);
+            var icon:EfficiencyIconRenderer = e.currentTarget as EfficiencyIconRenderer;
+            var kind:String = icon != null ? icon.kind : e.currentTarget.name;
+            var tooltip:* = tooltips[kind];
+            if (tooltip == null)
+                return;
+            var data:Object = merge(tooltip, {
+                "type":kind,
+                "disabled":icon == null ? false : icon.value <= 0
+            });
+            App.toolTipMgr.showSpecial(Tooltips.EFFICIENCY_PARAM, null, kind, data);
         }
 
         private function onOut(m:MouseEvent):void
