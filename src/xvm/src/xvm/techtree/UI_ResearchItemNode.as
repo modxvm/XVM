@@ -7,6 +7,7 @@ package xvm.techtree
     import com.xvm.*;
     import com.xvm.utils.*;
     import flash.events.*;
+    import net.wg.gui.lobby.techtree.*;
     import net.wg.gui.lobby.techtree.data.state.*;
     import net.wg.gui.lobby.techtree.data.vo.*;
     import net.wg.gui.lobby.techtree.math.*;
@@ -26,6 +27,20 @@ package xvm.techtree
             }
 
             super.populateUI();
+        }
+
+        override public function showContextMenu():void
+        {
+            super.showContextMenu();
+            if (button != null)
+                button.endAnimation(false);
+        }
+
+        override protected function handleClick(value:uint = 0):void
+        {
+            super.handleClick(value);
+            if  (button != null)
+                button.endAnimation(false);
         }
 
         override protected function handleMouseRollOver(e:MouseEvent):void
