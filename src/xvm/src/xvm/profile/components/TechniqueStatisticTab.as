@@ -287,6 +287,8 @@ package xvm.profile.components
             lastBattleTimeTF.selectable = false;
             lastBattleTimeTF.wordWrap = false;
             lastBattleTimeTF.x = 0;
+            if (!Config.config.userInfo.showExtraDataInProfile)
+                lastBattleTimeTF.x -= 40;
             lastBattleTimeTF.y = -30;
             lastBattleTimeTF.width = 450;
             lastBattleTimeTF.height = 25;
@@ -298,7 +300,9 @@ package xvm.profile.components
             ratingTF.multiline = true;
             ratingTF.selectable = false;
             ratingTF.wordWrap = false;
-            ratingTF.x = proxy.efficiencyTF.x + 170;
+            ratingTF.x = proxy.efficiencyTF.x + DL_WIDTH + 5;
+            if (!Config.config.userInfo.showExtraDataInProfile)
+                ratingTF.x -= 20;
             ratingTF.y = proxy.battlesDL.y - 62;
             ratingTF.width = 400;
             ratingTF.height = 80;
