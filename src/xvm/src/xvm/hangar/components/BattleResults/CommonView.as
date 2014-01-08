@@ -162,7 +162,7 @@ package xvm.hangar.components.BattleResults
                 //Logger.addObject(data, 3);
                 var x:int = view.effencyTitle.x + 294;
                 var y:int = view.effencyTitle.y;
-                var w:int = 32;
+                var w:int = 31;
 
                 // spotted
                 //view.addChild(createTotalsTextField( { name: EfficiencyIconRenderer.SPOTTED, x: x, y: y1, width: w, height:h,
