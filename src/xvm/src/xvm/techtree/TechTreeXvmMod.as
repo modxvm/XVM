@@ -16,7 +16,8 @@ package xvm.techtree
 
         private static const _views:Object =
         {
-            "techtree": TechTreeXvmView
+            "techtree": TechTreeXvmView,
+            "research": ResearchXvmView
         }
 
         public override function get views():Object

@@ -1,3 +1,7 @@
+/**
+ * XVM
+ * @author Maxim Schedriviy <m.schedriviy@gmail.com>
+ */
 package xvm.techtree
 {
     import com.xvm.*;
@@ -23,20 +27,13 @@ package xvm.techtree
 
         override public function setup(index:uint, nodeData:NodeData, entityType:uint = 0, matrixPosition:MatrixPosition = null):void
         {
+            //Logger.add("0x" + StringUtils.leftPad(nodeData.state.toString(16), 8, "0") + " " + nodeData.nameString);
             if (Config.config.hangar.hidePricesInTechTree)
             {
                 if (nodeData.shopPrice.gold == 0)
                 {
-                    // bits:
-                    // 0x01 - 0-enabled, 1-disabled
-                    // 0x02 - 0-opened, 1-closed
-                    // ...
-                    // 0x40 - 1-was bought
-                    // 0x80 - 1-elite
-                    // ...
-                    //Logger.add(nodeData.state.toString());
-                    if ((nodeData.state & 0x3) == 0)
-                        nodeData.state |= 0x40;
+                    if ((nodeData.state & NodeState.UNLOCKED) != 0)
+                        nodeData.state |= NodeState.WAS_IN_BATTLE;
                 }
             }
             super.setup(index, nodeData, entityType, matrixPosition);
