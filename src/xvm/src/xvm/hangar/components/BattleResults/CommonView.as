@@ -253,7 +253,7 @@ package xvm.hangar.components.BattleResults
             }
 
             var icon:EfficiencyIconRenderer = App.utils.classFactory.getComponent("EfficiencyIconRendererGUI", EfficiencyIconRenderer, params);
-            icon.enabled = params.value >= 0;
+            icon.enabled = params.value > 0;
             icon.addEventListener(MouseEvent.ROLL_OVER, onOver);
             icon.addEventListener(MouseEvent.ROLL_OUT, onOut);
 
