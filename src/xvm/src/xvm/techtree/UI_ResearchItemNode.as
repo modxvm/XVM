@@ -14,8 +14,6 @@ package xvm.techtree
 
     public dynamic class UI_ResearchItemNode extends ResearchItemNode
     {
-        private var handleAnimation:Boolean = false;
-
         override public function populateUI():void
         {
             if (Config.config.hangar.hidePricesInTechTree)
@@ -23,10 +21,7 @@ package xvm.techtree
                 if (stateProps != null && stateProps.visible && stateProps.animation == null)
                 {
                     if (stateProps.label == "creditsPriceLabel")
-                    {
                         stateProps.animation = new AnimationProperties(150, { alpha:0 }, { alpha:1 } );
-                        handleAnimation = true;
-                    }
                 }
             }
 
@@ -36,21 +31,15 @@ package xvm.techtree
         override protected function handleMouseRollOver(e:MouseEvent):void
         {
             super.handleMouseRollOver(e);
-            if (handleAnimation)
-            {
-                if (button != null)
-                    button.startAnimation();
-            }
+            if (button != null)
+                button.startAnimation();
         }
 
         override protected function handleMouseRollOut(e:MouseEvent):void
         {
             super.handleMouseRollOut(e);
-            if (handleAnimation)
-            {
-                if (button != null)
-                    button.endAnimation(false);
-            }
+            if (button != null)
+                button.endAnimation(false);
         }
     }
 }
