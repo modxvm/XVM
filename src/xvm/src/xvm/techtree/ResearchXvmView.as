@@ -37,6 +37,7 @@ package xvm.techtree
         private function init():void
         {
             page.researchItems.itemNodeName = getQualifiedClassName(UI_ResearchItemNode);
+            page.researchItems.vehicleNodeName = getQualifiedClassName(UI_NationTreeNodeSkinned);
         }
     }
 }
