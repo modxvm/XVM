@@ -4,105 +4,113 @@
 {
   "locale": {
     // Author of translation
-    "XVM_translator": "u u cac cac",
+    "XVM_translator": "3ar0n - VNFS",
 
     // Ping
-    "Initialization": "Initialization",
+    "Initialization": "Đang khởi tạo",
 
     // BattleLoading
-    "New version available": "New version available",
+    "New version available": "Đã có phiên bản mới",
 
     // Win chance
-    "Chance error": "Tỉ lệ thất bại",
-    "Chance to win": "Tỉ lệ thắng",
-    "global": "Chung",
-    "per-vehicle": "Mỗi xe",
+    "Chance error": "Sai sót",
+    "Chance to win": "Cơ hội chiến thắng",
+    "global": "tổng thể",
+    "per-vehicle": "cá nhân",
+    "chanceExperimental": "EXP",
+    "chanceBattleTier": "T",
 
     // Hitlog
-    "attack": "sát thương",
-    "fire": "nổ",
-    "ramming": "đâm",
+    "attack": "bắn",
+    "fire": "cháy",
+    "ramming": "húc",
     "world_collision": "rơi",
-    "Hits": "Hits",
-    "Total": "Total",
-    "Last": "Last",
+    "Hits": "Trúng",
+    "Total": "Tổng",
+    "Last": "Cuối",
 
     // Hp Left
-    "hpLeftTitle": "Hitpoints left:",
+    "hpLeftTitle": "HP địch còn lại:",
 
     // Capture
-    "enemyBaseCapture": "Đang chiếm căn cứ đối phương!",
-    "enemyBaseCaptured": "Căn cứ đối phương đã bị chiếm!",
-    "allyBaseCapture": "Căn cứ bên ta đang bị chiếm!",
-    "allyBaseCaptured": "Căn cứ bên ta đã bị chiếm!",
+    "enemyBaseCapture": "Đang chiếm cứ điểm địch!",
+    "enemyBaseCaptured": "Hoàn thành chiếm cứ điểm!",
+    "allyBaseCapture": "Đang bị chiếm cứ điểm!",
+    "allyBaseCaptured": "Cứ điểm đã bị chiếm!",
     "Timeleft": "Còn lại",
-    "Capturers": "Xe đang chiếm",
+    "Capturers": "Xe chiếm",
 
     // BattleResults
     "Hit percent": "Tỉ lệ trúng",
-    "Damage upon detecting": "Thiệt hại khi phát hiện",
-    "Damage dealt": "Sát thương",
+    "Damage (assisted / own)": "Sát thương (hỗ trợ / bản thân)",
 
     // TeamRenderers
-    "TeamRenderersHeaderTip": "Xwn (or xeff) rating.\nXem thông tin chi tiết, Di chuột đến tên người chơi.",
     "Friend": "Bạn bè",
     "Ignored": "Bỏ qua",
-    "Load statistics": "Nạp thống kê",
-    "enabled": "enabled",
-    "disabled": "disabled",
-
-    // UserInfo
-    "UserInfoEHint": "Per-vehicle efficiency.\nCác giá trị hiển thị là số liệu thống kê cập nhật mới nhất: %DATE%\nXem giá trị thực trong thông tin chi tiết xe.\nĐộ chính xác phụ thuộc vào nguồn cấp dữ liệu.",
-    "Data was updated at": "Dữ liệu đã cập nhật lúc",
-    " to ": " to ",
-    "EFF": "EFF",
-    "updated": "Đã cập nhật",
-    "unknown": "không biết",
-    "Avg level": "Lv Trung bình",
-    "Spotted": "Spotted",
-    "Defence": "Phòng thủ",
-    "Capture": "Chiếm",
-    "player (average / top)": "Người chơi (Trung bình / top)",
-    "Spec dmg": "Spec dmg",
-
-    // UserInfo - filters
-    "Filter": "Lọc",
-    "All tanks": "Tất cả Tank",
-    "Show all tanks in the game": "Hiện tất cả tank trong game",
-    "Player tanks": "Tank đã chơi",
-    "Show all tanks played": "Hiện tất cả tank đã chơi",
-    "In hangar": "Trong xưởng",
-    "Show only tanks in own hangar": "Chỉ hiện xe trong xưởng",
-
-    // UserInfo - buttons
-    "Level": "Level",
-    "Type": "Kiểu",
-    "Nation": "QGia",
-    "Name": "Tên",
+    "unknown": "không rõ",
     "Fights": "Trận",
     "Wins": "Thắng",
+    "Data was updated at": "Dữ liệu được cập nhật lúc",
+    "Load statistics": "Tải thống kê",
+
+    // UserInfo
+    "General stats": "Thông số chung",
+    "Summary": "Tổng",
+    "Avg level": "Cấp độ trung bình",
+    "WN6": "WN6",
+    "EFF": "EFF",
+    "updated": "cập nhật",
+    " to ": " đạt ",
+    "avg": "thấp",
+    "top": "cao",
+    "draws": "hòa",
+    "Maximum damage": "Sát thương tốt đa",
+    "Specific damage (Avg dmg / HP)": "Tỉ lệ sát thương (gây ra / nhận)",
+    "Capture points": "Điểm chiếm",
+    "Defence points": "Điểm phòng thủ",
+    "Filter": "Lọc",
+    "Extra data (WoT 0.8.8+)": "Thông tin thêm (0.8.8+)",
+    "Average battle time": "Thời gian tham chiến mỗi trận",
+    "Average battle time per day": "Thời gian tham chiến mỗi ngày",
+    "Battles after 0.8.8": "Số trận (0.8.8+)",
+    "Average experience": "EXP trung bình",
+    "Average experience without premium": "EXP trung bình (không premium)",
+    "Average distance driven per battle": "Quãng đường di chuyển mỗi trận",
+    "Average woodcuts per battle": "Húc đổ cây mỗi trận",
+    "Average damage assisted": "Sát thương hỗ trợ mỗi trận",
+    "    by tracking": "    nhờ bắn hỏng xích",
+    "    by spotting": "    nhờ phát hiện",
+    "Average HE shells fired (splash)": "Bắn trúng bằng đạn HE (nổ lan)",
+    "Average HE shells received (splash)": "Bị bắn trúng bởi đạn HE (nổ lan)",
+    "Average penetrations per battle": "Bắn xuyên giáp mỗi trận",
+    "Average hits received": "Bị bắn trúng mỗi trận",
+    "Average penetrations received": "Bị bắn xuyên giáp mỗi trận",
+    "Average ricochets received": "Bị bắn không xuyên giáp mỗi trận",
 
     // Crew
-    "PutOwnCrew": "Đặt kíp lái",
-    "PutBestCrew": "Đặt kíp lái tốt nhất",
-    "PutClassCrew": "Put same class crew",
+    "PutOwnCrew": "Dùng kíp lái của xe",
+    "PutBestCrew": "Dùng kíp lái tốt nhất",
+    "PutClassCrew": "Dùng kíp lái cùng loại",
 
     // Squad
     "Vehicle": "Xe",
-    "Battle tiers": "Cấp độ Trận đấu",
-    "ussr": "Nga",
+    "Battle tiers": "Cấp độ trận đấu",
+    "Type": "Kiểu",
+    "Nation": "Quốc gia",
+    "ussr": "Liên Xô",
     "germany": "Đức",
     "usa": "Mỹ",
     "france": "Pháp",
     "uk": "Anh",
-    "china": "Tàu",
-    "HT": "Hạng Nặng",
-    "MT": "Hạng Trung",
-    "LT": "Hạng Nhẹ",
-    "TD": "Chống Tank",
-    "SPG": "Pháo Tự Hành",
+    "china": "Trung Quốc",
+    "japan": "Nhật Bản",
+    "HT": "Tăng hạng nặng",
+    "MT": "Tăng hạng trung",
+    "LT": "Tăng hạng nhẹ",
+    "TD": "Pháo chống tăng",
+    "SPG": "Pháo tự hành",
 
     // VehicleMarkersManager
-    "blownUp": "Blown-up!"
+    "blownUp": "Phát nổ!"
   }
 }
