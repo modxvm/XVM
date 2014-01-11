@@ -29,6 +29,12 @@ package xvm.squad
             var data:String = worker.getToolTipData();
             return (data != null ? data : super.getToolTipData());
         }
+        
+        override protected function draw():void
+        {
+            super.draw();
+            worker.displayVehicleTier();
+        }
     }
 
 }
