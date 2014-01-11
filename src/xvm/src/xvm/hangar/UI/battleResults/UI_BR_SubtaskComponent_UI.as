@@ -31,8 +31,8 @@ package xvm.hangar.UI.battleResults
                     this.taskTF.y -= offsetTop;
                     this.linkBtn.y -= offsetTop;
                     this.statusMC.y -= offsetTop;
-                    this.counter.y -= offsetMiddle;
-                    this.alert.y -= offsetMiddle;
+                    this.counter.y -= offsetTop;
+                    this.alert.y -= offsetTop;
                     this.progressList.y -= offsetMiddle;
                     this.awards.y -= offsetBottom;
 
