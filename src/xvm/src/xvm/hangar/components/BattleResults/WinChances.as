@@ -45,7 +45,6 @@ package xvm.hangar.components.BattleResults
 
             // fix stat data
             //Logger.addObject(page.data, 3);
-            var myTeam:int = page.data.personal.team;
             var playerNames:Vector.<String> = new Vector.<String>();
             for (var name:String in response.players)
             {
@@ -53,16 +52,15 @@ package xvm.hangar.components.BattleResults
                 var sd:StatData = Stat.getData(name);
                 if (sd == null)
                     continue;
-                var plTeam:int = 2;
+                sd.team = Defines.TEAM_ENEMY;
                 for each (var pl:Object in page.data.team1)
                 {
                     if (pl.userName == sd.name)
                     {
-                        plTeam = 1;
+                        sd.team = Defines.TEAM_ALLY;
                         break;
                     }
                 }
-                sd.team = plTeam == myTeam ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY;
             }
 
             var chanceText:String = Chance.GetChanceText(playerNames, false);
