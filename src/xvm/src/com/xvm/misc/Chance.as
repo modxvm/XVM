@@ -23,9 +23,9 @@ package com.xvm.misc
             return "<font color='#FFBBBB'>" + Locale.get("Chance error") + ": " + text + "</font>";
         }
 
-        public static function GetChanceText(showExp:Boolean) : String
+        public static function GetChanceText(playerNames:Vector.<String>, showExp:Boolean) : String
         {
-            var teamsCount:Object = CalculateTeamPlayersCount();
+            var teamsCount:Object = CalculateTeamPlayersCount(playerNames);
             //Logger.addObject(teamsCount);
             // only equal and non empty team supported
             if (teamsCount.ally == 0 || teamsCount.enemy == 0)
@@ -33,10 +33,10 @@ package com.xvm.misc
             if (Math.abs(teamsCount.ally - teamsCount.enemy) > 2)
                 return "";
 
-            Chance.battleTier = Chance.GuessBattleTier();
+            Chance.battleTier = Chance.GuessBattleTier(playerNames);
 
-            var chG:Object = GetChance(ChanceFuncG);
-            var chT:Object = GetChance(ChanceFuncT);
+            var chG:Object = GetChance(playerNames, ChanceFuncG);
+            var chT:Object = GetChance(playerNames, ChanceFuncT);
 
             var text:String = "";
 
@@ -52,8 +52,8 @@ package com.xvm.misc
                 FormatChangeText(Locale.get("per-vehicle"), chT);
             if (showExp)
             {
-                var chX1:Object = GetChance(ChanceFuncX1);
-                var chX2:Object = GetChance(ChanceFuncX2);
+                var chX1:Object = GetChance(playerNames, ChanceFuncX1);
+                var chX2:Object = GetChance(playerNames, ChanceFuncX2);
                 text += " | " + Locale.get("chanceExperimental") + ": " + FormatChangeText("", chX1) + ", " + FormatChangeText("", chX2) + ". " + Locale.get("chanceBattleTier") + "=" + battleTier;
                 //lastChances.X1 = chX1.percentF;
                 //lastChances.X2 = chX2.percentF;
@@ -64,13 +64,14 @@ package com.xvm.misc
         // PRIVATE
         private static var _x1Logged:Boolean = false;
         private static var _x2Logged:Boolean = false;
-        private static function GetChance(chanceFunc:Function):Object
+        private static function GetChance(playerNames:Vector.<String>, chanceFunc:Function):Object
         {
             var Ka:Number = 0;
             var Ke:Number = 0;
-            for (var name:String in Stat.stat)
+            for (var i:int = 0; i < playerNames.length; ++i )
             {
-                var stat:StatData = Stat.getData(name);
+                var pname:String = playerNames[i];
+                var stat:StatData = Stat.getData(pname);
                 if (stat.v.data == null) {
                     //if (stat.icon == "ussr-Observer" || stat.icon == "noImage")
                     //    continue;
@@ -231,7 +232,7 @@ package com.xvm.misc
                 : (Bt <= 2000) ? 0.7 + (Bt - 1000) / 4000      // 1001..2000 => 0.7..0.95
                 : 0.95 + (Bt - 2000) / 8000;                   // 2000..     => 0.95..
             var Kab:Number = (Ba <= 500) ? 0                   //   0..0.5k  => 0
-                : (Ba <= 5000) ? (Ba - 500) / 10000            //  1k..5k => 0..0.45
+                 : (Ba <= 5000) ? (Ba - 500) / 10000            //  1k..5k => 0..0.45
                 : (Ba <= 10000) ? 0.45 + (Ba - 5000) / 20000   //  5k..10k => 0.45..0.7
                 : (Ba <= 20000) ? 0.7 + (Ba - 10000) / 40000   // 10k..20k => 0.7..0.95
                 : 0.95 + (Ba - 20000) / 80000                  // 20k..    => 0.95..
@@ -251,13 +252,16 @@ package com.xvm.misc
         }
 
         // return: { ally: Number, enemy: Number }
-        private static function CalculateTeamPlayersCount(): Object
+        private static function CalculateTeamPlayersCount(playerNames:Vector.<String>):Object
         {
             var nally:Number = 0;
             var nenemy:Number = 0;
-            for (var pname:String in Stat.stat)
+            for (var i:int = 0; i < playerNames.length; ++i )
             {
+                var pname:String = playerNames[i];
                 var stat:StatData = Stat.getData(pname);
+                if (stat == null)
+                    continue;
                 var vdata:VehicleData = stat.v.data;
                 // skip unknown tanks (Fog of War mode) and observer
                 if (vdata == null || vdata.key == "ussr:Observer")
@@ -284,12 +288,13 @@ package com.xvm.misc
             };
         }
 
-        private static function GuessBattleTier(): Number
+        private static function GuessBattleTier(playerNames:Vector.<String>):Number
         {
             // 1. Collect all vehicles info
             var vis:Array = [];
-            for (var pname:String in Stat.stat)
+            for (var i:int = 0; i < playerNames.length; ++i )
             {
+                var pname:String = playerNames[i];
                 var stat:StatData = Stat.getData(pname);
                 var vdata:VehicleData = stat.v.data;
                 if (vdata == null || vdata.key == "ussr:Observer")
@@ -309,7 +314,7 @@ package com.xvm.misc
             var Tmax:Number = vis[0].Tmax;
             //Logger.add("T before=" + Tmin + ".." + Tmax);
             var vis_length:int = vis.length;
-            for (var i:int = 1; i < vis_length; ++i)
+            for (i = 1; i < vis_length; ++i)
             {
                 var vi:Object = vis[i];
                 //Logger.add("l=" + vi.level + " Tmin=" + vi.Tmin + " Tmax=" + vi.Tmax);

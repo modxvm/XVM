@@ -14,7 +14,6 @@ package xvm.hangar.views
     import net.wg.gui.components.controls.*;
     import xvm.hangar.*;
     import xvm.hangar.components.BattleLoading.*;
-    import xvm.hangar.components.WinChances.*;
     import xvm.hangar.UI.battleLoading.*;
 
     public class BattleLoading extends XvmViewBase

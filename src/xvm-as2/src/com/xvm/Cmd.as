@@ -16,8 +16,7 @@ class com.xvm.Cmd
     private static var COMMAND_LOAD_SETTINGS:String = "load_settings";
     private static var COMMAND_GETVEHICLEINFODATA:String = "getVehicleInfoData";
 
-    public static var RESPOND_STATDATA = "xvm.statdata";
-    public static var RESPOND_USERDATA = "xvm.userdata";
+    public static var RESPOND_BATTLEDATA = "xvm.battledata";
 
     public static function log(str:String)
     {
@@ -47,11 +46,6 @@ class com.xvm.Cmd
     public static function loadBattleStat(players:Array)
     {
         _call(null, null, [COMMAND_LOADBATTLESTAT, Config.s_config.rating.showPlayersStatistics, players]);
-    }
-
-    public static function loadUserData(value:String, isId:Boolean)
-    {
-        _call(null, null, [COMMAND_LOADUSERDATA, value, isId]);
     }
 
     public static function logStat()

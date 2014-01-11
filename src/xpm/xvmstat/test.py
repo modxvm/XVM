@@ -17,6 +17,7 @@ def runTest(args):
 
 import BigWorld
 import cPickle
+import traceback
 from gui.mods.xpm import *
 from logger import *
 
@@ -39,5 +40,5 @@ def _getBattleResults(base, arenaUniqueID, callback):
                 callback(AccountCommands.RES_CACHE, convertToFullForm(battleResults))
         return
     except Exception, ex:
-        err('loadUrl failed: ' + str(ex))
+        err('_getBattleResults() exception: ' + traceback.format_exc(ex))
         base(arenaUniqueID, callback)

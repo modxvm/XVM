@@ -17,6 +17,7 @@ package com.xvm
     public class Stat extends EventDispatcher
     {
         public static const COMPLETE_BATTLE:String = "complete_battle";
+        public static const COMPLETE_BATTLERESULTS:String = "complete_battleresults";
         public static const COMPLETE_USERDATA:String = "complete_userdata";
 
         // instance
@@ -45,7 +46,7 @@ package com.xvm
 
         public static function get stat():Dictionary
         {
-            return instance.stat;
+            return instance.statCache;
         }
 
         public static function getData(name:String):StatData
@@ -56,24 +57,29 @@ package com.xvm
         public static function isUserDataCachedByName(name:String):Boolean
         {
             var key:String = Config.gameRegion + "/" + name;
-            return instance.user.hasOwnProperty(key);
+            return instance.userCache.hasOwnProperty(key);
         }
 
         public static function getUserDataByName(name:String):StatData
         {
             var key:String = Config.gameRegion + "/" + name;
-            return instance.user.hasOwnProperty(key) ? instance.user[key] : null;
+            return instance.userCache.hasOwnProperty(key) ? instance.userCache[key] : null;
         }
 
         public static function getUserDataById(id:uint):StatData
         {
             var key:String = "ID/" + id.toString();
-            return instance.user.hasOwnProperty(key) ? instance.user[key] : null;
+            return instance.userCache.hasOwnProperty(key) ? instance.userCache[key] : null;
         }
 
         public static function loadBattleStat(target:Object, callback:Function, force:Boolean = false):void
         {
             instance.loadBattleStat(target, callback, force);
+        }
+
+        public static function loadBattleResultsStat(target:Object, callback:Function, arenaUniqueId:String):void
+        {
+            instance.loadBattleResultsStat(target, callback, arenaUniqueId);
         }
 
         public static function loadUserData(target:Object, callback:Function, value:String, isId:Boolean):void
@@ -83,24 +89,29 @@ package com.xvm
 
         // PRIVATE
 
-        private var stat:Dictionary;
-        private var user:Dictionary;
+        private var statCache:Dictionary;
+        private var battleResultsCache:Dictionary;
+        private var userCache:Dictionary;
         private var info:Object;
         private var loading:Boolean;
         private var loaded:Boolean;
         private var listenersBattle:Vector.<Object>;
+        private var listenersBattleResults:Dictionary;
         private var listenersUser:Dictionary;
 
         function Stat()
         {
             info = { ver: null, message: null };
-            stat = new Dictionary();
-            user = new Dictionary();
+            statCache = new Dictionary();
+            battleResultsCache = new Dictionary();
+            userCache = new Dictionary();
             loading = false;
             loaded = false;
             listenersBattle = new Vector.<Object>();
+            listenersBattleResults = new Dictionary();
             listenersUser = new Dictionary();
-            ExternalInterface.addCallback(Cmd.RESPOND_STATDATA, battleLoaded);
+            ExternalInterface.addCallback(Cmd.RESPOND_BATTLEDATA, battleLoaded);
+            ExternalInterface.addCallback(Cmd.RESPOND_BATTLERESULTSDATA, battleResultsLoaded);
             ExternalInterface.addCallback(Cmd.RESPOND_USERDATA, userLoaded);
         }
 
@@ -199,6 +210,97 @@ package com.xvm
             //Logger.add("TRACE: battleLoaded(): end");
         }
 
+        private function loadBattleResultsStat(target:Object, callback:Function, arenaUniqueId:String):void
+        {
+            //Logger.add("TRACE: loadBattleResultsStat(): target=" + String(target));
+            if (arenaUniqueId == null || arenaUniqueId == "")
+            {
+                callback.call(target, null);
+                return;
+            }
+            var inProgress:Boolean = false;
+            if (callback != null)
+            {
+                if (battleResultsCache.hasOwnProperty(arenaUniqueId))
+                {
+                    callback.call(target, battleResultsCache[arenaUniqueId]);
+                    return;
+                }
+                if (!listenersBattleResults.hasOwnProperty(arenaUniqueId))
+                    listenersBattleResults[arenaUniqueId] = new Vector.<Object>();
+                else
+                {
+                    for each (var l:Object in listenersBattleResults[arenaUniqueId])
+                    {
+                        if (l.target == target && l.callback == callback)
+                            return;
+                    }
+                    inProgress = true;
+                }
+                listenersBattleResults[arenaUniqueId].push({ target:target, callback:callback });
+            }
+
+            if (!inProgress)
+                Cmd.loadBattleResultsStat(arenaUniqueId);
+        }
+
+        private function battleResultsLoaded(json_str:String):void
+        {
+            //Logger.add("TRACE: battleResultsLoaded()");
+            var arenaUniqueId:String = null;
+            try
+            {
+                var response:Object = JSONx.parse(json_str);
+                //Logger.addObject(response, 3, "response");
+
+                arenaUniqueId = response.arenaUniqueId;
+
+                battleResultsCache[arenaUniqueId] = response;
+
+                if (response.info)
+                    info = response.info;
+
+                if (response.players)
+                {
+                    for (var name:String in response.players)
+                    {
+                        var sd:StatData = ObjectConverter.convertData(response.players[name], StatData);
+                        calculateStatValues(sd);
+                        statCache[name] = sd;
+                        Macros.RegisterMacrosData(name);
+                    }
+                }
+            }
+            catch (e:Error)
+            {
+                Logger.add(e.getStackTrace());
+                throw e;
+            }
+            finally
+            {
+                if (arenaUniqueId == null)
+                    return;
+                try
+                {
+                    if (listenersBattleResults.hasOwnProperty(arenaUniqueId))
+                    {
+                        var l:Vector.<Object> = listenersBattleResults[arenaUniqueId];
+                        for (var i:Number = 0; i < l.length; ++i)
+                        {
+                            var o:Object = l[i];
+                            o.callback.call(o.target, battleResultsCache[arenaUniqueId]);
+                        }
+                        delete listenersBattleResults[arenaUniqueId];
+                    }
+                }
+                catch (e:Error)
+                {
+                    Logger.add(e.getStackTrace());
+                }
+                dispatchEvent(new ObjectEvent(COMPLETE_BATTLERESULTS, arenaUniqueId));
+            }
+        }
+
         private function loadUserData(target:Object, callback:Function, value:String, isId:Boolean):void
         {
             //Logger.add("TRACE: loadUserData(): target=" + String(target));
@@ -213,9 +315,9 @@ package com.xvm
                 if (callback != null)
                 {
                     var key:String = (isId ? "ID" : Config.gameRegion) + "/" + value;
-                    if (user.hasOwnProperty(key))
+                    if (userCache.hasOwnProperty(key))
                     {
-                        callback.call(target, user[key]);
+                        callback.call(target, userCache[key]);
                         return;
                     }
                     if (!listenersUser.hasOwnProperty(key))
@@ -255,9 +357,9 @@ package com.xvm
                 name = sd.name || sd.nm;
                 //Logger.addObject(sd, "sd", 2);
                 key1 = Config.gameRegion + "/" + name;
-                user[key1] = sd;
+                userCache[key1] = sd;
                 key2 = "ID/" + sd._id;
-                user[key2] = sd;
+                userCache[key2] = sd;
                 //Logger.add(key1 + ", " + key2);
             }
             catch (e:Error)

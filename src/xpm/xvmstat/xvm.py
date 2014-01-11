@@ -14,7 +14,7 @@ from constants import *
 from logger import *
 from gameregion import *
 from pinger import *
-from stats import getBattleStat, getUserData
+from stats import getBattleStat, getBattleResultsStat, getUserData
 from dossier import getDossier
 from vehinfo import getVehicleInfoData
 from test import runTest
@@ -57,6 +57,8 @@ class Xvm(object):
                 res = getVehicleInfoData()
             elif cmd == COMMAND_LOADBATTLESTAT:
                 getBattleStat(proxy, args)
+            elif cmd == COMMAND_LOADBATTLERESULTSSTAT:
+                getBattleResultsStat(proxy, args)
             elif cmd == COMMAND_LOADUSERDATA:
                 getUserData(proxy, args)
             elif cmd == COMMAND_GETDOSSIER:

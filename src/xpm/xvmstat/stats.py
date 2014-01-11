@@ -7,7 +7,15 @@ def getBattleStat(proxy, args):
     _stat.queue.put({
         'func':_stat.getBattleStat,
         'proxy':proxy,
-        'method':RESPOND_STATDATA,
+        'method':RESPOND_BATTLEDATA,
+        'args':args})
+    _stat.processQueue()
+
+def getBattleResultsStat(proxy, args):
+    _stat.queue.put({
+        'func':_stat.getBattleResultsStat,
+        'proxy':proxy,
+        'method':RESPOND_BATTLERESULTSDATA,
         'args':args})
     _stat.processQueue()
 
@@ -103,11 +111,20 @@ class _Stat(object):
 
     def getBattleStat(self):
         player = BigWorld.player()
-        if player.arena is None:
-            with self.lock:
-                self.resp = {}
+        if player.__class__.__name__ == 'PlayerAvatar' and player.arena is not None:
+            self._get_battle()
             return
-        self._get_battle()
+        with self.lock:
+            self.resp = {}
+
+
+    def getBattleResultsStat(self):
+        player = BigWorld.player()
+        if player.__class__.__name__ == 'PlayerAccount':
+            self._get_battleresults()
+            return
+        with self.lock:
+            self.resp = {}
 
 
     def getUserData(self):
@@ -121,9 +138,15 @@ class _Stat(object):
             self.players = {}
             self.playersSkip = {}
 
-        self._update_players()
+        # update players
+        vehicles = BigWorld.player().arena.vehicles
+        for (vehId, vData) in vehicles.items():
+            if vehId not in self.players:
+                self.players[vehId] = _Player(vehId, vData)
+            self.players[vehId].update(vData)
 
-        self._load_stat()
+        allowNetwork = self.req['args'][0]
+        self._load_stat(player.playerVehicleID, allowNetwork)
 
         players = {}
         for vehId in self.players:
@@ -142,77 +165,51 @@ class _Stat(object):
             self.resp = {'players': players, 'info': self.info}
 
 
-    def _update_players(self):
-        vehicles = BigWorld.player().arena.vehicles
-        for (vehId, vData) in vehicles.items():
-            if vehId not in self.players:
-                self.players[vehId] = _Player(vehId, vData)
-            self.players[vehId].update(vData)
 
-
-    def _load_stat(self):
+    def _get_battleresults(self):
+        (arenaUniqueId,) = self.req['args']
         player = BigWorld.player()
-        requestList = []
+        player.battleResultsCache.get(int(arenaUniqueId), self._battleResultsCallback)
 
+    def _battleResultsCallback(self, responseCode, value = None, revision = 0):
+        if responseCode < 0:
+            with self.lock:
+                self.resp = {}
+            return
+
+        #pprint(value)
+
+        self.players = {}
+        self.playersSkip = {}
+
+        # update players
+        for vehId in value['vehicles']:
+            accountDBID = value['vehicles'][vehId]['accountDBID']
+            vData = {
+              'accountDBID': accountDBID,
+              'name': value['players'][accountDBID]['name'],
+              'clanAbbrev': value['players'][accountDBID]['clanAbbrev'],
+              'typeCompDescr': value['vehicles'][vehId]['typeCompDescr'],
+              'team': value['vehicles'][vehId]['team']}
+            self.players[vehId] = _Player(vehId, vData)
+
+        self._load_stat(0)
+
+        players = {}
         for vehId in self.players:
             pl = self.players[vehId]
             cacheKey = "%d=%d" % (pl.playerId, pl.vId)
-
-            if cacheKey in self.cache:
-                continue
-            if str(pl.playerId) in self.playersSkip:
-                continue
-
-            #if pl.vId in [None, '', 'UNKNOWN']:
-            #    requestList.append(str(pl.playerId))
-            #else:
-            requestList.append("%d=%d%s" % (pl.playerId, pl.vId,
-                '=1' if pl.vehId == player.playerVehicleID else ''))
-
-        if not requestList:
-            return
-        updateRequest = ','.join(requestList)
-
-        if XVM_STAT_SERVERS is None or len(XVM_STAT_SERVERS) <= 0:
-            err('Cannot read statistics: no suitable server was found.')
-            return
-
-        try:
-            if self.req['args'][0] == True: # allowNetwork
-                server = XVM_STAT_SERVERS[randint(0, len(XVM_STAT_SERVERS) - 1)]
-                (response, duration) = self.loadUrl(server, updateRequest)
-
-                if len(response) <= 0:
-                    err('Empty response or parsing error')
-                    return
-
-                data = json.loads(response)
-            else:
-                players = []
-                for vehId in self.players:
-                    players.append(self._get_battle_stub(self.players[vehId]))
-                data = {'players':players}
-
-            if 'info' in data and region in data['info']:
-                self.info = data['info'][region]
-
-            if 'players' not in data:
-                err('Stat request failed: ' + str(response))
-                return
-
-            for stat in data['players']:
-                #debug(json.dumps(stat))
-                self._fix(stat, None)
-                #pprint(stat)
-                if 'nm' not in stat or not stat['nm']:
+            if cacheKey not in self.cache:
+                cacheKey = "%d" % (pl.playerId)
+                if cacheKey not in self.cache:
+                    self.playersSkip[str(pl.playerId)] = True
+                    players[pl.name] = self._get_battle_stub(pl)
                     continue
-                if 'b' not in stat or stat['b'] <= 0:
-                    continue
-                cacheKey = "%d=%d" % (stat['_id'], stat.get('v', {}).get('id', 0))
-                self.cache[cacheKey] = stat
+            players[pl.name] = self.cache[cacheKey]
+        #pprint(players)
 
-        except Exception, ex:
-            err('_load_stat() exception: ' + traceback.format_exc(ex))
+        with self.lock:
+            self.resp = {'arenaUniqueId': value['arenaUniqueID'], 'players': players, 'info': self.info}
 
 
     def _get_user(self):
@@ -268,6 +265,71 @@ class _Stat(object):
         }
         return self._fix(s, None)
 
+
+    def _load_stat(self, playerVehicleID, allowNetwork=True):
+        requestList = []
+
+        for vehId in self.players:
+            pl = self.players[vehId]
+            cacheKey = "%d=%d" % (pl.playerId, pl.vId)
+
+            if cacheKey in self.cache:
+                continue
+            if str(pl.playerId) in self.playersSkip:
+                continue
+
+            #if pl.vId in [None, '', 'UNKNOWN']:
+            #    requestList.append(str(pl.playerId))
+            #else:
+            requestList.append("%d=%d%s" % (pl.playerId, pl.vId,
+                '=1' if pl.vehId == playerVehicleID else ''))
+
+        if not requestList:
+            return
+        updateRequest = ','.join(requestList)
+
+        if XVM_STAT_SERVERS is None or len(XVM_STAT_SERVERS) <= 0:
+            err('Cannot read statistics: no suitable server was found.')
+            return
+
+        try:
+            if allowNetwork:
+                server = XVM_STAT_SERVERS[randint(0, len(XVM_STAT_SERVERS) - 1)]
+                (response, duration) = self.loadUrl(server, updateRequest)
+
+                if len(response) <= 0:
+                    err('Empty response or parsing error')
+                    return
+
+                data = json.loads(response)
+            else:
+                players = []
+                for vehId in self.players:
+                    players.append(self._get_battle_stub(self.players[vehId]))
+                data = {'players':players}
+
+            if 'info' in data and region in data['info']:
+                self.info = data['info'][region]
+
+            if 'players' not in data:
+                err('Stat request failed: ' + str(response))
+                return
+
+            for stat in data['players']:
+                #debug(json.dumps(stat))
+                self._fix(stat, None)
+                #pprint(stat)
+                if 'nm' not in stat or not stat['nm']:
+                    continue
+                if 'b' not in stat or stat['b'] <= 0:
+                    continue
+                cacheKey = "%d=%d" % (stat['_id'], stat.get('v', {}).get('id', 0))
+                self.cache[cacheKey] = stat
+
+        except Exception, ex:
+            err('_load_stat() exception: ' + traceback.format_exc(ex))
+
+
     def loadUrl(self, url, req):
         url = url.replace("{API}", XVM_STAT_API_VERSION).replace("{REQ}", req)
         u = urlparse(url)
@@ -308,6 +370,7 @@ class _Stat(object):
 
         return (response, duration)
 
+
     def _fix(self, stat, orig_name):
         #self._r(stat, 'id', '_id')
         if 'twr' in stat:
@@ -328,8 +391,10 @@ class _Stat(object):
                         stat['clan'] = pl.clan
                     stat['name'] = pl.name
                     stat['team'] = TEAM_ALLY if team == pl.team else TEAM_ENEMY
-                    stat['alive'] = pl.alive
-                    stat['ready'] = pl.ready
+                    if hasattr(pl, 'alive'):
+                        stat['alive'] = pl.alive
+                    if hasattr(pl, 'ready'):
+                        stat['ready'] = pl.ready
                     if 'id' not in stat['v']:
                         stat['v']['id'] = pl.vId
                     break;
@@ -340,11 +405,13 @@ class _Stat(object):
         #log(json.dumps(stat))
         return stat
 
+
     def _r(self, r, a, b):
         if a in r:
             if not b in r:
                 r[b] = r[a]
             del r[a]
+
 
     def _d(self, r, a, d):
         if a not in r:
@@ -358,7 +425,14 @@ class _Player(object):
         self.playerId = vData['accountDBID']
         self.name = vData['name']
         self.clan = vData['clanAbbrev']
-        self.vId = vData['vehicleType'].type.compactDescr
+        self.vId = None
+        if 'typeCompDescr' in vData:
+            self.vId = vData['typeCompDescr']
+        elif 'vehicleType' in vData:
+            self.vId = vData['vehicleType'].type.compactDescr
+        else:
+            self.vId = 0
+        self.team = vData['team']
 
     def update(self, vData):
         self.vId = vData['vehicleType'].type.compactDescr

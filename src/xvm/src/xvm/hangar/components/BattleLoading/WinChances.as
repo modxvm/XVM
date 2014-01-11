@@ -1,4 +1,4 @@
-package xvm.hangar.components.WinChances
+package xvm.hangar.components.BattleLoading
 {
     import flash.display.Sprite;
     import flash.text.*;
@@ -35,7 +35,11 @@ package xvm.hangar.components.WinChances
                 page.form.battleText.styleSheet = Utils.createTextStyleSheet("chances", page.form.battleText.defaultTextFormat);
             }
 
-            var chanceText:String = Chance.GetChanceText(Config.config.battleLoading.showChancesExp);
+            var playerNames:Vector.<String> = new Vector.<String>();
+            for (var name:String in Stat.stat)
+                playerNames.push(name);
+
+            var chanceText:String = Chance.GetChanceText(playerNames, Config.config.battleLoading.showChancesExp);
             if (chanceText)
             {
                 chanceText = '<span class="chances">' + chanceText + '</span>';

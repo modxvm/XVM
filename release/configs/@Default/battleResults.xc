@@ -15,9 +15,6 @@
     "showExtendedInfo": true,
     // true - Enable display of "chance to win"
     // true - включить отображение шансов на победу
-    "showChances": false,
-    // true - Enable display of experimental "chance to win" formula
-    // true - включить отображение экспериментальной формулы расчета шансов
-    "showChancesExp": false
+    "showChances": false
   }
 }

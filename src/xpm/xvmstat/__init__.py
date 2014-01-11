@@ -3,7 +3,7 @@
 #####################################################################
 # MOD INFO (mandatory)
 
-XPM_MOD_VERSION    = "1.0.4"
+XPM_MOD_VERSION    = "1.0.5"
 XPM_MOD_URL        = "http://www.modxvm.com/"
 XPM_MOD_UPDATE_URL = "http://www.modxvm.com/en/download-xvm/"
 XPM_GAME_VERSIONS  = ["0.8.10"]

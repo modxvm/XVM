@@ -19,6 +19,7 @@ package com.xvm.io
         private static const COMMAND_GETMODS:String = "getMods";
         private static const COMMAND_GETVEHICLEINFODATA:String = "getVehicleInfoData";
         private static const COMMAND_LOADBATTLESTAT:String = "loadBattleStat";
+        private static const COMMAND_LOADBATTLERESULTSSTAT:String = "loadBattleResultsStat";
         private static const COMMAND_LOADUSERDATA:String = "loadUserData";
         private static const COMMAND_GETDOSSIER:String = "getDossier";
         private static const COMMAND_LOGSTAT:String = "logstat";
@@ -27,7 +28,8 @@ package com.xvm.io
         private static const COMMAND_TEST:String = "test";
 
         public static const RESPOND_PINGDATA:String = "xvm.pingdata";
-        public static const RESPOND_STATDATA:String = "xvm.statdata";
+        public static const RESPOND_BATTLEDATA:String = "xvm.battledata";
+        public static const RESPOND_BATTLERESULTSDATA:String = "xvm.battleresultsdata";
         public static const RESPOND_USERDATA:String = "xvm.userdata";
         public static const RESPOND_DOSSIER:String = "xvm.dossier";
 
@@ -69,6 +71,11 @@ package com.xvm.io
         public static function loadBattleStat(players:Array = null):void
         {
             _call(null, null, [COMMAND_LOADBATTLESTAT, Config.config.rating.showPlayersStatistics, players]);
+        }
+
+        public static function loadBattleResultsStat(arenaUniqueId:String):void
+        {
+            _call(null, null, [COMMAND_LOADBATTLERESULTSSTAT, arenaUniqueId]);
         }
 
         public static function loadUserData(value:String, isId:Boolean):void

@@ -11,6 +11,5 @@ package com.xvm.types.cfg
         public var showExtendedInfo:Boolean;
 
         public var showChances:Boolean;
-        public var showChancesExp:Boolean;
     }
 }

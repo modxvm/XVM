@@ -12,6 +12,7 @@ COMMAND_GETSCREENSIZE = "getScreenSize"
 COMMAND_GETGAMEREGION = "getGameRegion"
 COMMAND_GETLANGUAGE = "getLanguage"
 COMMAND_LOADBATTLESTAT = "loadBattleStat"
+COMMAND_LOADBATTLERESULTSSTAT = "loadBattleResultsStat"
 COMMAND_LOADUSERDATA = "loadUserData"
 COMMAND_GETDOSSIER = "getDossier"
 COMMAND_LOGSTAT = "logstat";
@@ -20,7 +21,8 @@ COMMAND_SAVE_SETTINGS = "save_settings"
 COMMAND_TEST = "test"
 
 RESPOND_PINGDATA = "xvm.pingdata"
-RESPOND_STATDATA = "xvm.statdata"
+RESPOND_BATTLEDATA = "xvm.battledata"
+RESPOND_BATTLERESULTSDATA = "xvm.battleresultsdata"
 RESPOND_USERDATA = "xvm.userdata"
 RESPOND_DOSSIER = "xvm.dossier"
 

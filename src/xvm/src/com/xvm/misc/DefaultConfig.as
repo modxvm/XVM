@@ -337,7 +337,6 @@ package com.xvm.misc
             c.showNetIncome = true;
             c.showExtendedInfo = true;
             c.showChances = false;
-            c.showChancesExp = false;
             return c;
         }
 

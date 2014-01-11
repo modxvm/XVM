@@ -509,7 +509,6 @@ private function RefreshBattleResultsPage():void
         this.p_battleResults.v_showNetIncome.value = section.showNetIncome;
         this.p_battleResults.v_showExtendedInfo.value = section.showExtendedInfo;
         this.p_battleResults.v_showChances.value = section.showChances;
-        this.p_battleResults.v_showChancesExp.value = section.showChancesExp;
     }
     catch (ex:Error)
     {

@@ -234,8 +234,7 @@ class com.xvm.DefaultConfig
             finalStatistic: {
                 startPage: 1,
                 sortColumn: 6, // XP
-                showChances: false,
-                showChancesExp: false
+                showChances: false
             },
             turretMarkers: {
                 highVulnerability: "*",

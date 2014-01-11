@@ -1,6 +1,7 @@
 package xvm.hangar.UI.battleResults
 {
-    import com.xvm.Defines;
+    import com.xvm.*;
+    import flash.text.*;
 
     /**
      * @author Pavel Máca
@@ -10,7 +11,10 @@ package xvm.hangar.UI.battleResults
         public function UI_ProgressElement_UI()
         {
             super();
-            this.progressIndicator.textField.textColor = Defines.UICOLOR_VALUE;
+            progressIndicator.textField.textColor = Defines.UICOLOR_VALUE;
+            var tf:TextFormat = progressIndicator.textField.defaultTextFormat;
+            tf.size = 10;
+            this.progressIndicator.textField.defaultTextFormat = tf;
         }
     }
 

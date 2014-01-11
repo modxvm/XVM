@@ -161,8 +161,7 @@
   },
   "battleResults": {
     "startPage": 1,
-    "showChances": true,
-    "showChancesExp": true
+    "showChances": true
   },
   "minimap": {
     "enabled": true,

@@ -13,7 +13,7 @@ package xvm.hangar.UI.battleResults
         override protected function configUI():void
         {
             super.configUI();
-            this.progressList.linkage = getQualifiedClassName(UI_ProgressElement_UI);
+            progressList.linkage = getQualifiedClassName(UI_ProgressElement_UI);
         }
 
         override protected function draw():void
@@ -23,19 +23,21 @@ package xvm.hangar.UI.battleResults
             {
                 if (this.data)
                 {
-                    var removePadding:Number = 10;
+                    var offsetTop:Number = 10;
+                    var offsetMiddle:Number = 20;
+                    var offsetBottom:Number = 30;
 
                     // move elements up
-                    this.taskTF.y -= removePadding;
-                    this.linkBtn.y -= removePadding;
-                    this.statusMC.y -= removePadding;
-                    this.counter.y -= removePadding;
-                    this.alert.y -= removePadding;
-                    this.progressList.y -= removePadding;
-                    this.awards.y -= removePadding * 2;
+                    this.taskTF.y -= offsetTop;
+                    this.linkBtn.y -= offsetTop;
+                    this.statusMC.y -= offsetTop;
+                    this.counter.y -= offsetMiddle;
+                    this.alert.y -= offsetMiddle;
+                    this.progressList.y -= offsetMiddle;
+                    this.awards.y -= offsetBottom;
 
                     // resize
-                    this.lineMC.y -= removePadding * 2;
+                    this.lineMC.y -= offsetBottom;
 
                     setSize(this.width, Math.round(this.lineMC.y));
                     dispatchEvent(new Event(Event.RESIZE));

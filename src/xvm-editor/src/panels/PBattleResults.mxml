@@ -9,5 +9,4 @@
     <c:LabeledCheckBox label="{_('showNetIncome')}" id="v_showNetIncome" config="battleResults.showNetIncome" change="onChange(event)"/>
     <c:LabeledCheckBox label="{_('showExtendedInfo')}" id="v_showExtendedInfo" config="battleResults.showExtendedInfo" change="onChange(event)"/>
     <c:LabeledCheckBox enabled="false" label="{_('ShowChances')}" id="v_showChances" config="battleResults.showChances" change="onChange(event)"/>
-    <c:LabeledCheckBox enabled="false" label="{_('ShowChancesExp')}" id="v_showChancesExp" config="battleResults.showChancesExp" change="onChange(event)"/>
 </c:PanelComponent>

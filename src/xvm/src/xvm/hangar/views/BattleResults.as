@@ -13,7 +13,7 @@ package xvm.hangar.views
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
     import scaleform.clik.events.IndexEvent;
-    import xvm.hangar.components.BattleResults.CommonView;
+    import xvm.hangar.components.BattleResults.*;
 
     public class BattleResults extends XvmViewBase
     {
@@ -81,48 +81,10 @@ package xvm.hangar.views
 
             // display win chance
             if (Config.config.rating.showPlayersStatistics && Config.config.battleResults.showChances)
-                loadStats(page.data.team1, page.data.team2);
-        }
-
-        private function loadStats(allyTeam:Array, enemyTeam:Array):void
-        {
-        /** {
-           "playerName": "Assassik [APO]",
-           "name": "Assassik",
-           "accountDBID": 504298250,
-           "userName": "Assassik",
-           "playerId": 504298250,
-           .... and more
-         }*/ /*
-           for each(var ally:Object in allyTeam)
-           {
-           ally.userName;
-           }
-
-           for each(var enemy:Object in enemyTeam)
-           {
-           enemy.userName;
-           }
-
-           onStatsLoaded();
-         */
-        }
-
-        private function onStatsLoaded():void
-        {
-            //var chance:String = Chance.GetChanceText(Config.config.battleResults.showChancesExp);
-            //createWinChanceField(chance);
-        }
-
-        private function createWinChanceField(chanceText:String):void
-        {
-            var tf:TextField = new TextField();
-            tf.selectable = false;
-            tf.autoSize = TextFieldAutoSize.LEFT;
-            tf.htmlText = "<font face='$TitleFont' size='16' color='#E9E7D6'>" + chanceText + "</font>";
-            tf.x = 200;
-            tf.y = -25;
-            page.addChild(tf);
+            {
+                // Components
+                new WinChances(page); // Winning chance info above players list.
+            }
         }
 
     }
