@@ -76,7 +76,10 @@ package xvm.profile.components
             if (tech.accountDossier == null)
                 return;
             if (!page.battlesDropdown || page.battlesDropdown.selectedItem == PROFILE.PROFILE_DROPDOWN_LABELS_TEAM)
+            {
+                updateStackComponentButtonBar(false);
                 return;
+            }
 
             try
             {
@@ -124,7 +127,7 @@ package xvm.profile.components
             if (selectedId == 0)
                 page.stackComponent.updateTankData(new ProfileVehicleDossierVO({})); // refresh page
 
-            updateStackComponentButtonBar();
+            updateStackComponentButtonBar(selectedId == 0);
         }
 
         // PRIVATE
@@ -144,10 +147,10 @@ package xvm.profile.components
             }
         }
 
-        private function updateStackComponentButtonBar():void
+        private function updateStackComponentButtonBar(isCommonInfo:Boolean):void
         {
-            page.stackComponent.buttonBar.getButtonAt(1).visible = selectedId != 0;
-            if (selectedId == 0)
+            page.stackComponent.buttonBar.getButtonAt(1).visible = !isCommonInfo;
+            if (isCommonInfo)
                 page.stackComponent.buttonBar.selectedIndex = 0;
         }
 
@@ -201,7 +204,7 @@ package xvm.profile.components
 
                 list.dispatchEvent(new Event(TechniqueList.SELECTED_DATA_CHANGED));
 
-                updateStackComponentButtonBar();
+                updateStackComponentButtonBar(list.selectedItem.id == 0);
             }
             finally
             {
