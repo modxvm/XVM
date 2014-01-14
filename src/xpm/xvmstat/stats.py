@@ -111,16 +111,11 @@ class _Stat(object):
 
     def getBattleStat(self):
         player = BigWorld.player()
-        if player.arena is None:
-            with self.lock:
-                self.resp = {}
+        if player.__class__.__name__ == 'PlayerAvatar' and player.arena is not None:
+            self._get_battle()
             return
-        self._get_battle()
-        #if player.__class__.__name__ == 'PlayerAvatar' and player.arena is not None:
-        #    self._get_battle()
-        #    return
-        #with self.lock:
-        #    self.resp = {}
+        with self.lock:
+            self.resp = {}
 
 
     def getBattleResultsStat(self):
@@ -382,6 +377,10 @@ class _Stat(object):
             del stat['twr']
         if 'v' not in stat:
             stat['v'] = {}
+        # temporary workaround
+        if 'clan' in stat:
+            stat['clanstat'] = stat['clan']
+            del stat['clan']
 
         player = BigWorld.player()
         from avatar import PlayerAvatar
