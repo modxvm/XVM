@@ -111,11 +111,16 @@ class _Stat(object):
 
     def getBattleStat(self):
         player = BigWorld.player()
-        if player.__class__.__name__ == 'PlayerAvatar' and player.arena is not None:
-            self._get_battle()
+        if player.arena is None:
+            with self.lock:
+                self.resp = {}
             return
-        with self.lock:
-            self.resp = {}
+        self._get_battle()
+        #if player.__class__.__name__ == 'PlayerAvatar' and player.arena is not None:
+        #    self._get_battle()
+        #    return
+        #with self.lock:
+        #    self.resp = {}
 
 
     def getBattleResultsStat(self):
