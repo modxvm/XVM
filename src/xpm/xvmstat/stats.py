@@ -146,7 +146,8 @@ class _Stat(object):
             self.players[vehId].update(vData)
 
         allowNetwork = self.req['args'][0]
-        self._load_stat(player.playerVehicleID, allowNetwork)
+        plVehId = player.playerVehicleID if hasattr(player, 'playerVehicleID') else 0
+        self._load_stat(plVehId, allowNetwork)
 
         players = {}
         for vehId in self.players:
