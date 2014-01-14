@@ -58,7 +58,7 @@ package xvm.hangar.components.BattleResults
 
         private function compactQuests():void
         {
-            view.questList.linkage = getQualifiedClassName(UI_BR_SubtaskComponent_UI);
+            view.questList.linkage = getQualifiedClassName(UI_BR_SubtaskComponent);
 
             // hide shadows
             view.upperShadow.visible = false;

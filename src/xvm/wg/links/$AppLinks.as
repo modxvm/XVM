@@ -67,6 +67,7 @@ TechniqueStatisticTab_UI;
 // battleResults.swf
 BR_SubtaskComponent_UI;
 ProgressElement_UI;
+BattleResultsAwards_UI;
 
 // TankCarousel.swf
 TankCarouselItemRendererUI;

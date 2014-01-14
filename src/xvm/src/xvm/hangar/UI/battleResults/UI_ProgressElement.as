@@ -6,9 +6,9 @@ package xvm.hangar.UI.battleResults
     /**
      * @author Pavel Máca
      */
-    public class UI_ProgressElement_UI extends ProgressElement_UI
+    public class UI_ProgressElement extends ProgressElement_UI
     {
-        public function UI_ProgressElement_UI()
+        public function UI_ProgressElement()
         {
             super();
             progressIndicator.textField.textColor = Defines.UICOLOR_VALUE;
@@ -17,5 +17,4 @@ package xvm.hangar.UI.battleResults
             this.progressIndicator.textField.defaultTextFormat = tf;
         }
     }
-
 }

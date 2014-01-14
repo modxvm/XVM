@@ -1,19 +1,29 @@
 package xvm.hangar.UI.battleResults
 {
-    import flash.events.Event;
+    import flash.events.*;
     import flash.utils.*;
-    import scaleform.clik.constants.InvalidationType;
-    import xvm.hangar.UI.battleResults.UI_ProgressElement_UI;
+    import net.wg.gui.lobby.questsWindow.*;
+    import scaleform.clik.constants.*;
 
     /**
      * @author Pavel Máca
      */
-    public dynamic class UI_BR_SubtaskComponent_UI extends BR_SubtaskComponent_UI
+    public dynamic class UI_BR_SubtaskComponent extends BR_SubtaskComponent_UI
     {
+        public function UI_BR_SubtaskComponent()
+        {
+            super();
+
+            var index:int = getChildIndex(awards);
+            removeChild(awards);
+            awards = App.utils.classFactory.getComponent(getQualifiedClassName(UI_BattleResultsAwards), QuestAwardsBlock);
+            addChildAt(awards, index);
+        }
+
         override protected function configUI():void
         {
             super.configUI();
-            progressList.linkage = getQualifiedClassName(UI_ProgressElement_UI);
+            progressList.linkage = getQualifiedClassName(UI_ProgressElement);
         }
 
         override protected function draw():void
@@ -35,6 +45,7 @@ package xvm.hangar.UI.battleResults
                     this.alert.y -= offsetTop;
                     this.progressList.y -= offsetMiddle;
                     this.awards.y -= offsetBottom;
+                    this.awards.setSize(awards.width, 30);
 
                     // resize
                     this.lineMC.y -= offsetBottom;
@@ -45,5 +56,4 @@ package xvm.hangar.UI.battleResults
             }
         }
     }
-
 }
