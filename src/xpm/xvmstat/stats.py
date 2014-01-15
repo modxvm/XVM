@@ -174,48 +174,57 @@ class _Stat(object):
         player.battleResultsCache.get(int(arenaUniqueId), self._battleResultsCallback)
 
     def _battleResultsCallback(self, responseCode, value = None, revision = 0):
-        if responseCode < 0:
+        try:
+            if responseCode < 0:
+                with self.lock:
+                    self.resp = {}
+                return
+
+            #pprint(value)
+
+            self.players = {}
+            self.playersSkip = {}
+
+            # update players
+            for vehId in value['vehicles']:
+                accountDBID = value['vehicles'][vehId]['accountDBID']
+                vData = {
+                  'accountDBID': accountDBID,
+                  'name': value['players'][accountDBID]['name'],
+                  'clanAbbrev': value['players'][accountDBID]['clanAbbrev'],
+                  'typeCompDescr': value['vehicles'][vehId]['typeCompDescr'],
+                  'team': value['vehicles'][vehId]['team']}
+                self.players[vehId] = _Player(vehId, vData)
+
+            self._load_stat(0)
+
+            players = {}
+            for vehId in self.players:
+                pl = self.players[vehId]
+                cacheKey = "%d=%d" % (pl.playerId, pl.vId)
+                if cacheKey not in self.cache:
+                    cacheKey = "%d" % (pl.playerId)
+                    if cacheKey not in self.cache:
+                        self.playersSkip[str(pl.playerId)] = True
+                        players[pl.name] = self._get_battle_stub(pl)
+                        continue
+                players[pl.name] = self.cache[cacheKey]
+            #pprint(players)
+
+            with self.lock:
+                self.resp = {'arenaUniqueId': value['arenaUniqueID'], 'players': players, 'info': self.info}
+
+        except Exception, ex:
+            err('_battleResultsCallback() exception: ' + traceback.format_exc(ex))
+            print('=================================')
+            print('_battleResultsCallback() exception: ' + traceback.format_exc(ex))
+            pprint(value)
+            print('=================================')
             with self.lock:
                 self.resp = {}
-            return
-
-        #pprint(value)
 
         self.players = {}
         self.playersSkip = {}
-
-        # update players
-        for vehId in value['vehicles']:
-            accountDBID = value['vehicles'][vehId]['accountDBID']
-            vData = {
-              'accountDBID': accountDBID,
-              'name': value['players'][accountDBID]['name'],
-              'clanAbbrev': value['players'][accountDBID]['clanAbbrev'],
-              'typeCompDescr': value['vehicles'][vehId]['typeCompDescr'],
-              'team': value['vehicles'][vehId]['team']}
-            self.players[vehId] = _Player(vehId, vData)
-
-        self._load_stat(0)
-
-        players = {}
-        for vehId in self.players:
-            pl = self.players[vehId]
-            cacheKey = "%d=%d" % (pl.playerId, pl.vId)
-            if cacheKey not in self.cache:
-                cacheKey = "%d" % (pl.playerId)
-                if cacheKey not in self.cache:
-                    self.playersSkip[str(pl.playerId)] = True
-                    players[pl.name] = self._get_battle_stub(pl)
-                    continue
-            players[pl.name] = self.cache[cacheKey]
-        #pprint(players)
-
-        with self.lock:
-            self.resp = {'arenaUniqueId': value['arenaUniqueID'], 'players': players, 'info': self.info}
-
-        self.players = {}
-        self.playersSkip = {}
-
 
     def _get_user(self):
         (value, isId) = self.req['args']
