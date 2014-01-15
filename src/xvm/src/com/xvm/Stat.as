@@ -49,6 +49,11 @@ package com.xvm
             return instance.statCache;
         }
 
+        public static function clearStatCache():void
+        {
+            instance.statCache = new Dictionary();
+        }
+
         public static function getData(name:String):StatData
         {
             return stat.hasOwnProperty(name) ? stat[name] : null;

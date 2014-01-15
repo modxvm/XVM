@@ -14,7 +14,7 @@ Legend:
   'X' - available
   ' ' - not available (can return wrong value - '', 'NaN', 'undefined', ...)
   '.' - TODO
-  '-' - Obsoleted (will be raplaced with other macro)
+  '-' - Obsoleted (will be replaced with other macro)
 
 ┌────────────────────────────┬───┬───┬───┬───┬───┬───┬───┬───┬───┬─────────────────────────────────
 │ macro                      │ BL│ PP│ SF│ VM│ HI│ HL│ CB│ MM│ SQ│ Description

@@ -25,12 +25,12 @@ package com.xvm.misc
 
         public static function GetChanceText(playerNames:Vector.<String>, showExp:Boolean) : String
         {
-            Logger.add("========== begin chance calculation ===========");
+            //Logger.add("========== begin chance calculation ===========");
             try
             {
-                Logger.add("playerNames: " + playerNames.join(", "));
+                //Logger.add("playerNames: " + playerNames.join(", "));
                 var teamsCount:Object = CalculateTeamPlayersCount(playerNames);
-                Logger.add("teamsCount=" + teamsCount.ally + "/" + teamsCount.enemy);
+                //Logger.add("teamsCount=" + teamsCount.ally + "/" + teamsCount.enemy);
                 // only equal and non empty team supported
                 if (teamsCount.ally == 0 || teamsCount.enemy == 0)
                     return "";
@@ -38,7 +38,7 @@ package com.xvm.misc
                     return "";
 
                 Chance.battleTier = Chance.GuessBattleTier(playerNames);
-                Logger.add("battleTier=" + Chance.battleTier);
+                //Logger.add("battleTier=" + Chance.battleTier);
 
                 var chG:Object = GetChance(playerNames, ChanceFuncG);
                 var chT:Object = GetChance(playerNames, ChanceFuncT);
@@ -63,12 +63,12 @@ package com.xvm.misc
                     //lastChances.X1 = chX1.percentF;
                     //lastChances.X2 = chX2.percentF;
                 }
-                Logger.add("RESULT=" + text);
+                //Logger.add("RESULT=" + text);
                 return text;
             }
             finally
             {
-                Logger.add("========== end chance calculation ===========");
+                //Logger.add("========== end chance calculation ===========");
             }
             return null;
         }
@@ -96,7 +96,7 @@ package com.xvm.misc
                 Ke += (stat.team == Defines.TEAM_ENEMY) ? K : 0;
             }
 
-            Logger.add("Ka=" + Ka + " Ke=" + Ke);
+            //Logger.add("Ka=" + Ka + " Ke=" + Ke);
 
             return PrepareChanceResults(Ka, Ke, chanceFunc);
         }

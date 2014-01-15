@@ -134,7 +134,6 @@ class _Stat(object):
     def _get_battle(self):
         player = BigWorld.player()
         if player.arenaUniqueID is None or self.arenaId != player.arenaUniqueID:
-            log("arenaUniqueID=" + str(player.arenaUniqueID))
             self.arenaId = player.arenaUniqueID
             self.players = {}
             self.playersSkip = {}
@@ -223,8 +222,6 @@ class _Stat(object):
             with self.lock:
                 self.resp = {}
 
-        self.players = {}
-        self.playersSkip = {}
 
     def _get_user(self):
         (value, isId) = self.req['args']
