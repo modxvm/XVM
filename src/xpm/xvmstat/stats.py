@@ -38,7 +38,6 @@ import traceback
 import time
 import StringIO
 import gzip
-import zlib
 from random import randint
 from urlparse import urlparse
 import httplib
@@ -372,9 +371,6 @@ class _Stat(object):
 
                 if encoding == 'gzip':
                     response = gzip.GzipFile(fileobj=StringIO.StringIO(response)).read()
-                #elif encoding == 'deflate':
-                #    response = zlib.decompress(response)
-                #    #zlib.decompressobj(-zlib.MAX_WBITS).decompress(response)
                 else:
                     raise Exception('Encoding not supported: ' + encoding)
             else:
