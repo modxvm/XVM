@@ -36,6 +36,9 @@ import datetime
 import json
 import traceback
 import time
+import StringIO
+import gzip
+import zlib
 from random import randint
 from urlparse import urlparse
 import httplib
@@ -349,18 +352,31 @@ class _Stat(object):
 
         duration = None
         response = ''
+        responseSize = 0
         startTime = datetime.datetime.now()
         conn = None
         try:
             #log(u)
             conn = httplib.HTTPConnection(u.netloc, timeout=XVM_STAT_TIMEOUT/1000)
-            conn.request("GET", u.path)
+            conn.request("GET", u.path, None, {"Accept-Encoding":"gzip"}) # deflate
             resp = conn.getresponse()
             #log(resp.status)
 
             if resp.status in [200, 202]:
                 # 200 OK, 202 Accepted
+
                 response = resp.read()
+                responseSize = len(response)
+
+                encoding = resp.getheader('content-encoding')
+
+                if encoding == 'gzip':
+                    response = gzip.GzipFile(fileobj=StringIO.StringIO(response)).read()
+                #elif encoding == 'deflate':
+                #    response = zlib.decompress(response)
+                #    #zlib.decompressobj(-zlib.MAX_WBITS).decompress(response)
+                else:
+                    raise Exception('Encoding not supported: ' + encoding)
             else:
                 raise Exception('HTTP Error: [%i] %s' % (resp.status, resp.reason) )
             conn.close()
@@ -373,7 +389,7 @@ class _Stat(object):
 
         elapsed = datetime.datetime.now() - startTime
         msec = elapsed.seconds * 1000 + elapsed.microseconds / 1000
-        log("  Time: %d ms, Size: %d bytes" % (msec, len(response)), '[INFO]  ')
+        log("  Time: %d ms, Size: %d (%d) bytes" % (msec, responseSize, len(response)), '[INFO]  ')
         #debug('response: ' + response)
 
         if not response.lower().startswith('onexception'):
