@@ -78,9 +78,9 @@ class com.xvm.Locale
 
             // Win chance
             tr["Chance error"] = "Ошибка расчета шансов";
-            tr["Chance to win"] = "Шанс на победу";
-            tr["global"] = "общий";
-            tr["per-vehicle"] = "по технике";
+            tr["Chance to win"] = "Шансы на победу";
+            //tr["global"] = "общий";
+            //tr["per-vehicle"] = "по технике";
 
             // Hitlog
             tr["attack"] = "атака";

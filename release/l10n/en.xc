@@ -15,9 +15,9 @@
     // Win chance
     "Chance error": "Chance error",
     "Chance to win": "Chance to win",
-    "global": "global",
-    "per-vehicle": "per-vehicle",
-    "chanceExperimental": "exp",
+    //"global": "global",
+    //"per-vehicle": "per-vehicle",
+    "chanceLive": "Live",
     "chanceBattleTier": "T",
 
     // Hitlog

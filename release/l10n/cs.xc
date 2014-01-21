@@ -15,9 +15,9 @@
     // Win chance
     "Chance error": "Chyba",
     "Chance to win": "Šance na výhru",
-    "global": "Celková",
-    "per-vehicle": "Dle vozidel",
-    "chanceExperimental": "Aktuální",
+    //"global": "Celková",
+    //"per-vehicle": "Dle vozidel",
+    "chanceLive": "Aktuální",
     "chanceBattleTier": "T",
 
     // Hitlog

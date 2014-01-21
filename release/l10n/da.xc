@@ -15,9 +15,9 @@
     // Win chance
     "Chance error": "Chance-fejl",
     "Chance to win": "Chance for at vinde",
-    "global": "global",
-    "per-vehicle": "per-vogn",
-    "chanceExperimental": "exp",
+    //"global": "global",
+    //"per-vehicle": "per-vogn",
+    "chanceLive": "Live",
     "chanceBattleTier": "T",
 
     // Hitlog

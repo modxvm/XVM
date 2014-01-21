@@ -371,7 +371,6 @@ private function RefreshBattleLoadingPage():void
         section = Config.config.battleLoading;
         this.p_battleLoading.v_clockFormat.value = section.clockFormat;
         this.p_battleLoading.v_showChances.value = section.showChances;
-        this.p_battleLoading.v_showChancesExp.value = section.showChancesExp;
         this.p_battleLoading.v_removeSquadIcon.value = section.removeSquadIcon;
         this.p_battleLoading_text.v_formatLeftNick.value = section.formatLeftNick;
         this.p_battleLoading_text.v_formatRightNick.value = section.formatRightNick;
@@ -403,7 +402,7 @@ private function RefreshStatisticFormPage():void
 
         section = Config.config.statisticForm;
         this.p_statisticForm.v_showChances.value = section.showChances;
-        this.p_statisticForm.v_showChancesExp.value = section.showChancesExp;
+        this.p_statisticForm.v_showChancesLive.value = section.showChancesLive;
         this.p_statisticForm.v_removeSquadIcon.value = section.removeSquadIcon;
         this.p_statisticForm_text.v_formatLeftNick.value = section.formatLeftNick;
         this.p_statisticForm_text.v_formatRightNick.value = section.formatRightNick;

@@ -89,10 +89,10 @@ package com.xvm.l10n
 
             // Win chance
             "Chance error": "Ошибка расчета шансов",
-            "Chance to win": "Шанс на победу",
-            "global": "общий",
-            "per-vehicle": "по технике",
-            "chanceExperimental": "exp",
+            "Chance to win": "Шансы на победу",
+            //"global": "общий",
+            //"per-vehicle": "по технике",
+            "chanceLive": "Живые",
             "chanceBattleTier": "T",
 
             /** xvm-as2
@@ -195,7 +195,7 @@ package com.xvm.l10n
             "XVM_translator": "XVM Team",
 
             // Win chance
-            "chanceExperimental": "exp",
+            "chanceLive": "Live",
             "chanceBattleTier": "T",
 
             /* xvm-as2

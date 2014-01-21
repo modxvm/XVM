@@ -15,9 +15,9 @@
     // Win chance
     "Chance error": "Šansa greške",
     "Chance to win": "Šansa za pobedu",
-    "global": "global",
-    "per-vehicle": "po vozilu",
-    "chanceExperimental": "exp",
+    //"global": "global",
+    //"per-vehicle": "po vozilu",
+    "chanceLive": "Live",
     "chanceBattleTier": "T",
 
     // Hitlog

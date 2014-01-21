@@ -15,9 +15,9 @@
     // Win chance
     "Chance error": "失敗率",
     "Chance to win": "獲勝率",
-    "global": "總勝率",
-    "per-vehicle": "車輛勝率",
-    "chanceExperimental": "新勝率(實驗性)",
+    //"global": "總勝率",
+    //"per-vehicle": "車輛勝率",
+    "chanceLive": "Live",
     "chanceBattleTier": "分房階級",
 
     // Hitlog

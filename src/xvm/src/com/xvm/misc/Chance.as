@@ -14,16 +14,16 @@ package com.xvm.misc
 
     public class Chance
     {
-        private static var battleTier: Number = 0;
+        private static var battleTier:Number = 0;
 
-        //public static var lastChances: Object = null;
+        //public static var lastChances:Object = null;
 
-        public static function ChanceError(text:String) : String
+        public static function ChanceError(text:String):String
         {
             return "<font color='#FFBBBB'>" + Locale.get("Chance error") + ": " + text + "</font>";
         }
 
-        public static function GetChanceText(playerNames:Vector.<String>, showExp:Boolean) : String
+        public static function GetChanceText(playerNames:Vector.<String>, showLive:Boolean = false):String
         {
             Logger.add("========== begin chance calculation ===========");
             try
@@ -41,25 +41,27 @@ package com.xvm.misc
                 Logger.add("battleTier=" + Chance.battleTier);
 
                 var chG:Object = GetChance(playerNames, ChanceFuncG);
-                var chT:Object = GetChance(playerNames, ChanceFuncT);
+                //var chT:Object = GetChance(playerNames, ChanceFuncT);
 
                 var text:String = "";
 
                 if (chG.error)
                     return ChanceError("[G] " + chG.error);
 
-                if (chT.error)
-                    return ChanceError("[T] " + chT.error);
+                //if (chT.error)
+                //    return ChanceError("[T] " + chT.error);
 
                 //lastChances = { g: chG.percentF, t: chT.percentF };
                 text += Locale.get("Chance to win") + ": " +
-                    FormatChangeText(Locale.get("global"), chG) + ", " +
-                    FormatChangeText(Locale.get("per-vehicle"), chT);
-                if (showExp)
+                    FormatChangeText(""/*Locale.get("global")*/, chG)// + ", " +
+                    //FormatChangeText(Locale.get("per-vehicle"), chT);
+                if (showLive)
                 {
                     var chX1:Object = GetChance(playerNames, ChanceFuncX1);
-                    var chX2:Object = GetChance(playerNames, ChanceFuncX2);
-                    text += " | " + Locale.get("chanceExperimental") + ": " + FormatChangeText("", chX1) + ", " + FormatChangeText("", chX2) + ". " + Locale.get("chanceBattleTier") + "=" + battleTier;
+                    //var chX2:Object = GetChance(playerNames, ChanceFuncX2);
+                    text += " | " + Locale.get("chanceLive") + ": " + FormatChangeText("", chX1) +
+                    //    ", " + FormatChangeText("", chX2) +
+                        ". " + Locale.get("chanceBattleTier") + "=" + battleTier;
                     //lastChances.X1 = chX1.percentF;
                     //lastChances.X2 = chX2.percentF;
                 }
@@ -135,6 +137,7 @@ package com.xvm.misc
             return Math.max(0, Math.min(Config.config.consts.MAX_EBN, Eb));
         }
 
+        /*
         private static function ChanceFuncT(vdata:VehicleData, stat:StatData):Number
         {
             var Td:Number = (vdata.tierLo + vdata.tierHi) / 2.0 - battleTier;
@@ -179,6 +182,7 @@ package com.xvm.misc
             // 5
             return Math.max(0, Math.min(Config.config.consts.MAX_EBN, Eb));
         }
+        */
 
         private static function ChanceFuncX1(vdata:VehicleData, stat:StatData):Number
         {
@@ -215,6 +219,7 @@ package com.xvm.misc
             return Math.max(0, Math.min(Config.config.consts.MAX_EBN, Eb));
         }
 
+        /*
         private static function ChanceFuncX2(vdata:VehicleData, stat:StatData):Number
         {
             if (!stat.alive)
@@ -262,6 +267,7 @@ package com.xvm.misc
             // 5
             return Math.max(0, Math.min(Config.config.consts.MAX_EBN, Eb));
         }
+        */
 
         // return: { ally: Number, enemy: Number }
         private static function CalculateTeamPlayersCount(playerNames:Vector.<String>):Object

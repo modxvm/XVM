@@ -98,7 +98,7 @@ class wot.StatisticForm.BattleStatItemRenderer
         {
             s_state = 1;
             s_winChances.showChances = Config.s_config.statisticForm.showChances;
-            s_winChances.showExp = Config.s_config.statisticForm.showChancesExp;
+            s_winChances.showLive = Config.s_config.statisticForm.showChancesLive;
             StatLoader.LoadData();
         }
 

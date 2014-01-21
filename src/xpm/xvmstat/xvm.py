@@ -44,18 +44,25 @@ class Xvm(object):
             if cmd == COMMAND_LOG:
                 log(*args)
             elif cmd == COMMAND_PING:
+                #return
                 ping(proxy)
             elif cmd == COMMAND_GETMODS:
+                #return
                 res = self.getMods()
             elif cmd == COMMAND_GETSCREENSIZE:
+                #return
                 res = json.dumps(list(GUI.screenResolution()))
             elif cmd == COMMAND_GETGAMEREGION:
+                #return
                 res = region
             elif cmd == COMMAND_GETLANGUAGE:
+                #return
                 res = language
             elif cmd == COMMAND_GETVEHICLEINFODATA:
+                #return
                 res = getVehicleInfoData()
             elif cmd == COMMAND_LOADBATTLESTAT:
+                #return
                 getBattleStat(proxy, args)
             elif cmd == COMMAND_LOADBATTLERESULTSSTAT:
                 getBattleResultsStat(proxy, args)

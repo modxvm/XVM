@@ -15,9 +15,9 @@
     // Win chance
     "Chance error": "Не ўдалося разлічыць шанцы",
     "Chance to win": "Шанец перамагчы",
-    "global": "агульны",
-    "per-vehicle": "паводле тэхнікі",
-    "chanceExperimental": "exp",
+    //"global": "агульны",
+    //"per-vehicle": "паводле тэхнікі",
+    "chanceLive": "Live",
     "chanceBattleTier": "T",
 
     // Hitlog

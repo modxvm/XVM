@@ -7,9 +7,9 @@
     // true - Enable display of "chance to win"
     // true - включить отображение шансов на победу
     "showChances": false,
-    // true - Show experimental "chance to win" formula
-    // true - показывать экспериментальную формулу расчета шансов.
-    "showChancesExp": false,
+    // true - Show "chance to win" only for live tanks.
+    // true - Показывать шансы только для живых танков.
+    "showChancesLive": false,
     // true - Disable Platoon icons.
     // true - убрать отображение иконки взвода.
     "removeSquadIcon": false,

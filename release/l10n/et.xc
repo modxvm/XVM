@@ -15,9 +15,9 @@
     // Win chance
     "Chance error": "Tõenäosuse viga",
     "Chance to win": "Võidu tõenäosus",
-    "global": "üldine",
-    "per-vehicle": "masinapõhine",
-    "chanceExperimental": "exp",
+    //"global": "üldine",
+    //"per-vehicle": "masinapõhine",
+    "chanceLive": "Live",
     "chanceBattleTier": "T",
 
     // Hitlog

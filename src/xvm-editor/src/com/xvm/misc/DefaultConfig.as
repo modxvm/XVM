@@ -231,7 +231,6 @@ package com.xvm.misc
 
             c.clockFormat = "H:i:s";   // Format: http://php.net/date
             c.showChances = false;     // Show game round win chances percentage.
-            c.showChancesExp = false;  // Show experimental "chance to win" formula.
             c.removeSquadIcon = false; // Hide squad icon.
             // Playes/clan icon parameters.
             c.clanIcon = new Object();
@@ -255,7 +254,7 @@ package com.xvm.misc
         {
             var c:Object = new Object();
             c.showChances = false;     // Show game round win chances percentage.
-            c.showChancesExp = false;  // Show experimental "chance to win" formula.
+            c.showChancesLive = false;
             c.removeSquadIcon = false; // Hide squad icon.
             // Playes/clan icon parameters.
             c.clanIcon = new Object();

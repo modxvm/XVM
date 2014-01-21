@@ -198,17 +198,23 @@ package com.xvm.misc
                 v = "5.0.0";
             }
 
-    /*
+            if (v == "5.0.0")
+            {
+                s = config.statisticForm;
+                if (s != null)
+                {
+                    if (s.showChancesExp != null && s.showChancesLive == null)
+                        s.showChancesLive = s.showChancesExp;
+                }
+                v = "5.0.1";
+            }
+
+/*
             if (v == "5.x.x")
             {
-                if (config.battle)
-                {
-                    if (config.battle.mirroredVehicleIcons != null)
-                        config.battle.mirroredVehicleIcons = Utils.toBool(config.battle.mirroredVehicleIcons, true);
-                }
                 v = "5.y.y";
             }
-    */
+*/
 
             config.configVersion = v;
             return config;

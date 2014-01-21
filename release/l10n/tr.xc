@@ -15,8 +15,8 @@
     // Win chance
     "Chance error": "Şans hata",
     "Chance to win": "Kazanma şansı",
-    "global": "evrensel",
-    "per-vehicle": "araç-araca",
+    //"global": "evrensel",
+    //"per-vehicle": "araç-araca",
 
     // Hitlog
     "attack": "saldır",

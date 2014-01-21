@@ -39,7 +39,7 @@ package xvm.hangar.components.BattleLoading
             for (var name:String in Stat.stat)
                 playerNames.push(name);
 
-            var chanceText:String = Chance.GetChanceText(playerNames, Config.config.battleLoading.showChancesExp);
+            var chanceText:String = Chance.GetChanceText(playerNames);
             if (chanceText)
             {
                 chanceText = '<span class="chances">' + chanceText + '</span>';

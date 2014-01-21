@@ -376,10 +376,21 @@ public class ConfigUtils
             v = "5.0.0";
         }
 
-/*
-        if (v == "4.x.x")
+        if (v == "5.0.0")
         {
-            v = "4.y.y";
+            s = config.statisticForm;
+            if (s != null)
+            {
+                if (s.showChancesExp != null && s.showChancesLive == null)
+                    s.showChancesLive = s.showChancesExp;
+            }
+            v = "5.0.1";
+        }
+
+/*
+        if (v == "5.x.x")
+        {
+            v = "5.y.y";
         }
 */
 

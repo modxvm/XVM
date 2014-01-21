@@ -7,6 +7,5 @@
     title="{_('PBattleLoading')}">
     <c:LabeledTextInput label="{_('clockFormat')}" toolTip="{_('clockFormatToolTip')}" id="v_clockFormat" config="battleLoading.clockFormat" change="onChange(event)"/>
     <c:LabeledCheckBox label="{_('ShowChances')}" id="v_showChances" config="battleLoading.showChances" change="onChange(event)"/>
-    <c:LabeledCheckBox label="{_('ShowChancesExp')}" id="v_showChancesExp" config="battleLoading.showChancesExp" change="onChange(event)"/>
     <c:LabeledCheckBox label="{_('RemoveSquadIcon')}" id="v_removeSquadIcon" config="battleLoading.removeSquadIcon" change="onChange(event)"/>
 </c:PanelComponent>

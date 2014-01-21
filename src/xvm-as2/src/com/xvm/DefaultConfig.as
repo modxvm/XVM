@@ -158,7 +158,6 @@ class com.xvm.DefaultConfig
                 // Format: http://php.net/date
                 clockFormat: "H:i:s",
                 showChances: false,     // Show game round win chances percentage.
-                showChancesExp: false,  // Show experimental "chance to win" formula.
                 removeSquadIcon: false, // Hide squad icon.
                 // Playes/clan icon parameters.
                 clanIcon: { show: true, x: 0, y: 6, xr: 0, yr: 6, h: 16, w: 16, alpha: 90 },
@@ -170,7 +169,7 @@ class com.xvm.DefaultConfig
             },
             statisticForm: {
                 showChances: false,     // Show game round win chances percentage.
-                showChancesExp: false,  // Show experimental "chance to win" formula.
+                showChancesLive: false, // Show "chance to win" only for live tanks.
                 removeSquadIcon: false, // Hide squad icon.
                 // Playes/clan icon parameters.
                 clanIcon: { show: true, x: 0, y: 6, xr: 0, yr: 6, h: 16, w: 16, alpha: 90 },

@@ -15,9 +15,9 @@
     // Win chance
     "Chance error": "誤差",
     "Chance to win": "勝利予想",
-    "global": "総合",
-    "per-vehicle": "対車両",
-    "chanceExperimental": "対経験値",
+    //"global": "総合",
+    //"per-vehicle": "対車両",
+    "chanceLive": "Live",
     "chanceBattleTier": "戦闘Tier",
 
     // Hitlog

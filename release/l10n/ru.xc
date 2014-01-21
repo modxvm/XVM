@@ -14,10 +14,10 @@
 
     // Win chance
     "Chance error": "Ошибка расчета шансов",
-    "Chance to win": "Шанс на победу",
-    "global": "общий",
-    "per-vehicle": "по технике",
-    "chanceExperimental": "exp",
+    "Chance to win": "Шансы на победу",
+    //"global": "общий",
+    //"per-vehicle": "по технике",
+    "chanceLive": "Живые",
     "chanceBattleTier": "T",
 
     // Hitlog

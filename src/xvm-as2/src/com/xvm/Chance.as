@@ -11,23 +11,23 @@ class com.xvm.Chance
 
     private static var battleTier: Number = 0;
 
-    public static var lastChances: Object = null;
+    //public static var lastChances: Object = null;
 
-    public static function ShowChance(tf:TextField, showExp:Boolean) : String
+    public static function ShowChance(tf:TextField, showLive:Boolean):String
     {
-        var text = GetChanceText(showExp);
+        var text = GetChanceText(showLive);
         if (text == null)
             return tf.text;
         tf.htmlText = (tf.text == "" ? "" : tf.text + " | ") + text;
         return tf.htmlText;
     }
 
-    public static function ChanceError(text:String) : String
+    public static function ChanceError(text:String):String
     {
         return "<font color='#FFBBBB'>" + Locale.get("Chance error") + ": " + text + "</font>";
     }
 
-    public static function GetChanceText(showExp:Boolean) : String
+    public static function GetChanceText(showLive:Boolean):String
     {
         var teamsCount:Object = CalculateTeamPlayersCount();
         //Logger.addObject(teamsCount);
@@ -40,27 +40,29 @@ class com.xvm.Chance
         Chance.battleTier = Chance.GuessBattleTier();
 
         var chG = GetChance(ChanceFuncG);
-        var chT = GetChance(ChanceFuncT);
+        //var chT = GetChance(ChanceFuncT);
 
         var text = "";
 
         if (chG.error)
             return ChanceError("[G] " + chG.error);
 
-        if (chT.error)
-            return ChanceError("[T] " + chT.error);
+        //if (chT.error)
+        //    return ChanceError("[T] " + chT.error);
 
-        lastChances = { g: chG.percentF, t: chT.percentF };
+        //lastChances = { g: chG.percentF/*, t: chT.percentF*/ };
         text += Locale.get("Chance to win") + ": " +
-            FormatChangeText(Locale.get("global"), chG) + ", " +
-            FormatChangeText(Locale.get("per-vehicle"), chT);
-        if (showExp)
+            FormatChangeText(""/*Locale.get("global")*/, chG)// + ", " +
+            //FormatChangeText(Locale.get("per-vehicle"), chT);
+        if (showLive)
         {
             var chX1 = GetChance(ChanceFuncX1);
-            var chX2 = GetChance(ChanceFuncX2);
-            text += " | " + Locale.get("chanceExperimental") + ": " + FormatChangeText("", chX1) + ", " + FormatChangeText("", chX2) + ". " + Locale.get("chanceBattleTier") + "=" + battleTier;
-            lastChances.X1 = chX1.percentF;
-            lastChances.X2 = chX2.percentF;
+            //var chX2 = GetChance(ChanceFuncX2);
+            text += " | " + Locale.get("chanceLive") + ": " + FormatChangeText("", chX1) +
+            //    ", " + FormatChangeText("", chX2) +
+                ". " + Locale.get("chanceBattleTier") + "=" + battleTier;
+            //lastChances.X1 = chX1.percentF;
+            //lastChances.X2 = chX2.percentF;
         }
         return text;
     }
@@ -139,6 +141,7 @@ class com.xvm.Chance
         return Math.max(0, Math.min(Config.s_config.consts.MAX_EBN, Eb));
     }
 
+    /*
     private static function ChanceFuncT(vdata:VehicleData, stat): Number
     {
         var Td = (vdata.tierLo + vdata.tierHi) / 2.0 - battleTier;
@@ -183,6 +186,7 @@ class com.xvm.Chance
         // 5
         return Math.max(0, Math.min(Config.s_config.consts.MAX_EBN, Eb));
     }
+    */
 
     private static function ChanceFuncX1(vdata:VehicleData, stat): Number
     {
@@ -219,6 +223,7 @@ class com.xvm.Chance
         return Math.max(0, Math.min(Config.s_config.consts.MAX_EBN, Eb));
     }
 
+    /*
     private static function ChanceFuncX2(vdata:VehicleData, stat): Number
     {
         if (stat.alive == false)
@@ -266,6 +271,7 @@ class com.xvm.Chance
         // 5
         return Math.max(0, Math.min(Config.s_config.consts.MAX_EBN, Eb));
     }
+    */
 
     // return: { ally: Number, enemy: Number }
     private static function CalculateTeamPlayersCount(): Object

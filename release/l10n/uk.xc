@@ -14,10 +14,10 @@
 
     // Win chance
     "Chance error": "Помилка розрахунку шансів",
-    "Chance to win": "Шанс на перемогу",
-    "global": "загальний",
-    "per-vehicle": "по техніці",
-    "chanceExperimental": "exp",
+    "Chance to win": "Шанси на перемогу",
+    //"global": "загальний",
+    //"per-vehicle": "по техніці",
+    "chanceLive": "Живі",
     "chanceBattleTier": "T",
 
     // Hitlog

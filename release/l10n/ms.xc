@@ -15,9 +15,9 @@
     // Win chance
     "Chance error": "Ralat kemungkinan",
     "Chance to win": "Kemungkinan untuk menang",
-    "global": "global",
-    "per-vehicle": "setiap kenderaan",
-    "chanceExperimental": "exp",
+    //"global": "global",
+    //"per-vehicle": "setiap kenderaan",
+    "chanceLive": "Live",
     "chanceBattleTier": "T",
 
     // Hitlog

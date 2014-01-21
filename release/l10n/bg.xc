@@ -15,9 +15,9 @@
     // Win chance
     "Chance error": "Възможност за грешка",
     "Chance to win": "Възможност за победа",
-    "global": "световен",
-    "per-vehicle": "по машина",
-    "chanceExperimental": "Риск(пробен)",
+    //"global": "световен",
+    //"per-vehicle": "по машина",
+    "chanceLive": "Live",
     "chanceBattleTier": "Т",
 
     // Hitlog

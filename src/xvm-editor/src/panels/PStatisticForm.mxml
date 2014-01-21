@@ -6,6 +6,6 @@
     xmlns:c="components.*"
     title="{_('PStatisticForm')}">
     <c:LabeledCheckBox label="{_('ShowChances')}" id="v_showChances" config="statisticForm.showChances" change="onChange(event)"/>
-    <c:LabeledCheckBox label="{_('ShowChancesExp')}" id="v_showChancesExp" config="statisticForm.showChancesExp" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{_('ShowChancesLive')}" id="v_showChancesLive" config="statisticForm.showChancesLive" change="onChange(event)"/>
     <c:LabeledCheckBox label="{_('RemoveSquadIcon')}" id="v_removeSquadIcon" config="statisticForm.removeSquadIcon" change="onChange(event)"/>
 </c:PanelComponent>

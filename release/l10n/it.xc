@@ -15,9 +15,9 @@
     // Win chance
     "Chance error": "Non Calcolabile",
     "Chance to win": "Chance di vittoria",
-    "global": "Globale",
-    "per-vehicle": "Per veicolo",
-    "chanceExperimental": "esp.",
+    //"global": "Globale",
+    //"per-vehicle": "Per veicolo",
+    "chanceLive": "Live",
     "chanceBattleTier": "T",
 
     // Hitlog

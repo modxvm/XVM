@@ -63,7 +63,7 @@ package xvm.hangar.components.BattleResults
                 }
             }
 
-            var chanceText:String = Chance.GetChanceText(playerNames, false);
+            var chanceText:String = Chance.GetChanceText(playerNames);
             if (chanceText)
             {
                 chanceText = "<p class='txt' align='right'>" + chanceText + '</p>';

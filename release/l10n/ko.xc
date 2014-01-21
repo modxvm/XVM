@@ -15,9 +15,9 @@
     // Win chance
     "Chance error": "확률 에러 발생",
     "Chance to win": "승률",
-    "global": "전역 수치",
-    "per-vehicle": "전차별 수치",
-    "chanceExperimental": "실시간 승률(실험적)",
+    //"global": "전역 수치",
+    //"per-vehicle": "전차별 수치",
+    "chanceLive": "Live",
     "chanceBattleTier": "티어",
 
     // Hitlog

@@ -13,7 +13,6 @@ package com.xvm.types.cfg
         public var clockFormat:String;      // Format: http://php.net/date
 
         public var showChances:Boolean;     // Show game round win chances percentage.
-        public var showChancesExp:Boolean;  // Show experimental "chance to win" formula.
         public var removeSquadIcon:Boolean; // Hide squad icon.
         public var clanIcon:CClanIcon;      // Playes/clan icon parameters.
         // Dispay formats.

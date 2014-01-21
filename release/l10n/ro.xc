@@ -15,8 +15,8 @@
     // Şanse de victorie
     "Chance error": "Eroare posibilităţi de victorie",
     "Chance to win": "Şanse de victorie",
-    "global": "global",
-    "per-vehicle": "per-vehicul",
+    //"global": "global",
+    //"per-vehicle": "per-vehicul",
 
     // Jurnal lovituri
     "attack": "atac",

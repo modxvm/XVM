@@ -15,9 +15,9 @@
     // Win chance
     "Chance error": "Kļūda aprēķinos",
     "Chance to win": "Iespēja uzvarēt",
-    "global": "kopējā",
-    "per-vehicle": "pēc tehnikas",
-    "chanceExperimental": "exp",
+    //"global": "kopējā",
+    //"per-vehicle": "pēc tehnikas",
+    "chanceLive": "Live",
     "chanceBattleTier": "T",
 
     // Hitlog

@@ -10,7 +10,7 @@ package com.xvm
         public static const XVM_VERSION:String = "5.0.2-test3";
         public static const XVM_INTRO:String = "www.modxvm.com";
         public static const WOT_VERSION:String = "0.8.10";
-        public static const CONFIG_VERSION:String = "5.0.0";
+        public static const CONFIG_VERSION:String = "5.0.1";
         public static const EDITOR_VERSION:String = "0.68";
 
         // Locale

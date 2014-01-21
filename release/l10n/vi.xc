@@ -15,9 +15,9 @@
     // Win chance
     "Chance error": "Sai sót",
     "Chance to win": "Cơ hội chiến thắng",
-    "global": "tổng thể",
-    "per-vehicle": "cá nhân",
-    "chanceExperimental": "EXP",
+    //"global": "tổng thể",
+    //"per-vehicle": "cá nhân",
+    "chanceLive": "Live",
     "chanceBattleTier": "T",
 
     // Hitlog

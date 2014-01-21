@@ -15,9 +15,9 @@
     // Win chance
     "Chance error": "Esély lekérdezési hiba",
     "Chance to win": "Esély a győzelemre",
-    "global": "Globálisan",
-    "per-vehicle": "Járművenként",
-    "chanceExperimental": "kísérleti",
+    //"global": "Globálisan",
+    //"per-vehicle": "Járművenként",
+    "chanceLive": "Live",
     "chanceBattleTier": "T",
 
     // Hitlog

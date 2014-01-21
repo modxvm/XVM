@@ -93,7 +93,6 @@ protected function onSetDefaultValue(event:SetDefaultValueEvent):void
             case "battleLoading":
                 ConfigUtilsEditor.SetDefaultValue("battleLoading.showClock");
                 ConfigUtilsEditor.SetDefaultValue("battleLoading.showChances");
-                ConfigUtilsEditor.SetDefaultValue("battleLoading.showChancesExp");
                 ConfigUtilsEditor.SetDefaultValue("battleLoading.removeSquadIcon");
                 break;
 
@@ -106,7 +105,7 @@ protected function onSetDefaultValue(event:SetDefaultValueEvent):void
 
             case "statisticForm":
                 ConfigUtilsEditor.SetDefaultValue("statisticForm.showChances");
-                ConfigUtilsEditor.SetDefaultValue("statisticForm.showChancesExp");
+                ConfigUtilsEditor.SetDefaultValue("statisticForm.showChancesLive");
                 ConfigUtilsEditor.SetDefaultValue("statisticForm.removeSquadIcon");
                 break;
 

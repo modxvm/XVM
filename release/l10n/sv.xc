@@ -15,9 +15,9 @@
     // Win chance
     "Chance error": "Fel med vinstchans",
     "Chance to win": "Vinstchans",
-    "global": "global",
-    "per-vehicle": "per-fordon",
-    "chanceExperimental": "exp",
+    //"global": "global",
+    //"per-vehicle": "per-fordon",
+    "chanceLive": "Live",
     "chanceBattleTier": "T",
 
     // Hitlog
