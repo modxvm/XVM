@@ -2,6 +2,7 @@
   [NEW FUNCTIONS]
   * new options:
       hangar/hidePricesInTechTree - Hide price button in tech tree
+      battleResults/showTotals - Show totals for your battle efficiency in first page
 
 XVM-5.0.2-test2:
   [NEW FUNCTIONS]

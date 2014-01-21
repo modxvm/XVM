@@ -8,5 +8,6 @@
     <c:LabeledNumberSelector label="{_('startPage')}" labelWidth="180" id="v_startPage" config="battleResults.startPage" minimum="1" maximum="3" change="onChange(event)"/>
     <c:LabeledCheckBox label="{_('showNetIncome')}" id="v_showNetIncome" config="battleResults.showNetIncome" change="onChange(event)"/>
     <c:LabeledCheckBox label="{_('showExtendedInfo')}" id="v_showExtendedInfo" config="battleResults.showExtendedInfo" change="onChange(event)"/>
-    <c:LabeledCheckBox enabled="false" label="{_('ShowChances')}" id="v_showChances" config="battleResults.showChances" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{_('showTotals')}" id="v_showTotals" config="battleResults.showTotals" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{_('ShowChances')}" id="v_showChances" config="battleResults.showChances" change="onChange(event)"/>
 </c:PanelComponent>

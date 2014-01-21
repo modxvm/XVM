@@ -127,6 +127,7 @@ protected function onSetDefaultValue(event:SetDefaultValueEvent):void
                 ConfigUtilsEditor.SetDefaultValue("battleResults.startPage");
                 ConfigUtilsEditor.SetDefaultValue("battleResults.showNetIncome");
                 ConfigUtilsEditor.SetDefaultValue("battleResults.showExtendedInfo");
+                ConfigUtilsEditor.SetDefaultValue("battleResults.showTotals");
                 ConfigUtilsEditor.SetDefaultValue("battleResults.showChances");
                 break;
 

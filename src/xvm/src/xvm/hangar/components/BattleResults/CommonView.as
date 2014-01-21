@@ -44,8 +44,10 @@ package xvm.hangar.components.BattleResults
                 instance.hideQuestLabel();
                 instance.initTextFields();
                 instance.setData(view.detailsMc.data);
-                instance.setTotals(view.detailsMc.data);
             }
+
+            if (Config.config.battleResults.showTotals)
+                instance.setTotals(view.detailsMc.data);
 
             if (Config.config.battleResults.showNetIncome)
                 instance.showNetIncome(view.detailsMc.data);
