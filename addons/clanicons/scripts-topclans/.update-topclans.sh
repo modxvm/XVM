@@ -1,5 +1,4 @@
-#!/bin/sh
-LANG=C
+#!/bin/bash
 
 [ "$host" = "" ] && exit
 
@@ -89,7 +88,7 @@ update()
   done
 }
 
-optimize()
+optimize_pngoptimizer()
 {
   echo "Optimizing PNGs..."
   (
@@ -105,5 +104,7 @@ optimize()
 parse_$parser
 sort_topfile
 update
-optimize
+if [ "$OS" = "Windows_NT" ]; then
+    optimize_pngoptimizer
+fi
 rm -f "$tmpfn"

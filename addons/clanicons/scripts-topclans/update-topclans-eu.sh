@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 parser=ivanerr
 url="http://wotclans.net/eu/showclansrating/"
@@ -11,4 +11,4 @@ topfile_persist=topclans-eu.persist.txt
 # Cleaning top clans file
 echo -n > $topfile
 
-. .update-topclans.sh
+. ./.update-topclans.sh
