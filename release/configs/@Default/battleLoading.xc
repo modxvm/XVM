@@ -11,8 +11,8 @@
     // true - Enable display of "chance to win". Read more: http://www.koreanrandom.com/forum/topic/1663-/
     // true - включить отображение шансов на победу. Прочитать подробней: http://www.koreanrandom.com/forum/topic/1663-/
     "showChances": false,
-    // true - Show "chance to win" only for live tanks.
-    // true - Показывать шансы только для живых танков.
+    // true - Disable Platoon icons. This blank space can house, for example, clan logos.
+    // true - убрать отображение иконки взвода. На пустое поле можно вывести, например, иконку клана.
     "removeSquadIcon": false,
     // Display options for Team/Clan logos.
     // Параметры отображения иконки игрока/клана.
