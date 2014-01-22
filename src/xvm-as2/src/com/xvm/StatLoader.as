@@ -21,6 +21,8 @@ class com.xvm.StatLoader
         if (instance._loading)
             return;
         instance._loading = true;
+        Stat.s_data = {};
+        Stat.s_empty = true;
         Cmd.loadBattleStat(null);
     }
 
