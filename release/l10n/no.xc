@@ -58,6 +58,7 @@
     "Summary": "Sammendrag",
     "Avg level": "Gj.snittlig kampnivå",
     "WN6": "WN6",
+    "WN8": "WN8",
     "EFF": "EFF",
     "updated": "oppdatert",
     " to ": " til ",

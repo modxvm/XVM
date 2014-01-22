@@ -141,6 +141,10 @@ package utils
         public static const vtype:Class;
         [Embed("images/macros/wins.png")]
         public static const wins:Class;
+        [Embed("images/macros/wn6.png")]
+        public static const wn6:Class;
+        [Embed("images/macros/wn8.png")]
+        public static const wn8:Class;
         [Embed("images/macros/wn.png")]
         public static const wn:Class;
         [Embed("images/macros/xeff.png")]
@@ -181,6 +185,10 @@ package utils
         public static const c_tfb:Class;
         [Embed("images/macros/c_tsb.png")]
         public static const c_tsb:Class;
+        [Embed("images/macros/c_wn6.png")]
+        public static const c_wn6:Class;
+        [Embed("images/macros/c_wn8.png")]
+        public static const c_wn8:Class;
         [Embed("images/macros/c_wn.png")]
         public static const c_wn:Class;
         [Embed("images/macros/c_xeff.png")]

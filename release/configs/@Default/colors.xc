@@ -211,13 +211,23 @@
     ],
     // Dynamic color by WN6 rating
     // Динамический цвет по рейтингу WN6
-    "wn": [
+    "wn6": [
       { "value": 425,  "color": ${"def.colorRating.very_bad" } },  //    0 - 424  - very bad
       { "value": 795,  "color": ${"def.colorRating.bad"      } },  //  425 - 794  - bad
       { "value": 1175, "color": ${"def.colorRating.normal"   } },  //  795 - 1174 - normal
       { "value": 1570, "color": ${"def.colorRating.good"     } },  // 1175 - 1569 - good
       { "value": 1885, "color": ${"def.colorRating.very_good"} },  // 1570 - 1884 - very good
       { "value": 9999, "color": ${"def.colorRating.unique"   } }   // 1885 - *    - unique
+    ],
+    // Dynamic color by WN8 rating
+    // Динамический цвет по рейтингу WN8
+    "wn8": [
+      { "value": 315,  "color": ${"def.colorRating.very_bad" } },  //    0 - 314  - very bad
+      { "value": 755,  "color": ${"def.colorRating.bad"      } },  //  315 - 754  - bad
+      { "value": 1315, "color": ${"def.colorRating.normal"   } },  //  755 - 1314 - normal
+      { "value": 1965, "color": ${"def.colorRating.good"     } },  // 1315 - 1964 - good
+      { "value": 2525, "color": ${"def.colorRating.very_good"} },  // 1965 - 2524 - very good
+      { "value": 9999, "color": ${"def.colorRating.unique"   } }   // 2525 - *    - unique
     ],
     // Dynamic color by TEFF (E) rating
     // Динамический цвет по рейтингу TEFF (E)

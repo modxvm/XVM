@@ -45,12 +45,12 @@ class com.xvm.Utils
     {
         return _global.setTimeout(function() { callback.call(target) }, timeout);
     }
-    
+
     public static function Interval(target:Object, callback:Function, timeout:Number)
     {
         return _global.setInterval(function() { callback.call(target) }, timeout);
     }
-    
+
     public static function elapsedMSec(start:Date, end:Date):Number
     {
         return end.getTime() - start.getTime();
@@ -173,7 +173,7 @@ class com.xvm.Utils
 
     /**
      * Get children MovieClips of MovieClip
-     * FIXIT: skips TextField? 
+     * FIXIT: skips TextField?
      */
     public static function getChildrenOf(target:MovieClip, recursive:Boolean):Array
     {
@@ -392,11 +392,11 @@ class com.xvm.Utils
             )));
     }
 
-    public static function XWN(value:Number):Number
+    public static function XWN6(WN6:Number):Number
     {
-        return value > 2160 ? 100 :
+        return WN6 > 2160 ? 100 :
             Math.round(Math.max(0, Math.min(100,
-                value * (value * (value * (value *
+                WN6*(WN6*(WN6*(WN6*
                 - 0.00000000001268
                 + 0.00000005147)
                 - 0.00006418)
@@ -404,7 +404,22 @@ class com.xvm.Utils
                 - 7.25
             )));
     }
-    
+
+    public static function XWN8(WN8:Number):Number
+    {
+        return WN8 > 3250 ? 100 :
+            Math.round(Math.max(0, Math.min(100,
+                WN8*(WN8*(WN8*(WN8*(WN8*(WN8*
+                0.00000000000000000007119
+                + 0.0000000000000002334)
+                - 0.000000000006963)
+                + 0.00000002845)
+                - 0.00004558)
+                + 0.06565)
+                - 0.18
+            )));
+    }
+
     /** Create DropShadowFilter from config section */
     public static function extractShadowFilter(source:Object):DropShadowFilter
     {

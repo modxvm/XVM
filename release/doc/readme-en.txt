@@ -212,9 +212,11 @@ Content:
       {{eff}}         - player efficiency: http://wot-news.com/index.php/stat/calc/en/
       {{eff:4}}       - player efficiency aligned from left to 4 chars
       {{teff}}, {{e}} - player per-vehicle efficiency: http://www.koreanrandom.com/forum/topic/1643-
-      {{wn}}          - WN6 rating: http://www.koreanrandom.com/forum/topic/2575-
+      {{wn6}}         - WN6 rating: http://www.koreanrandom.com/forum/topic/2575-
+      {{wn8}}         - WN8 rating: http://www.koreanrandom.com/forum/topic/2575-
+      {{wn}}          - WN8 rating: http://www.koreanrandom.com/forum/topic/2575-
       {{xeff}}        - XVM Scale for efficiency (values 00-99, XX for Tops)
-      {{xwn}}         - XVM Scale for WN6 (values 00-99, XX for Tops)
+      {{xwn}}         - XVM Scale for WN8 (values 00-99, XX for Tops)
       {{rating}}      - GWR (Global Win Ratio)
       {{rating:3}}    - GWR aligned from left to 3 chars
       {{battles}}     - total battles count
@@ -238,9 +240,11 @@ Content:
       {{c:tdb}}, {{c:tdv}}, {{c:tfb}}, {{c:tsb}} - dynamic colors for this macros
       {{c:eff}}       - color depending on player efficiency
       {{c:e}}         - color depending on player per-vehicle efficiency
-      {{c:wn}}        - color depending on WN6 rating
+      {{c:wn6}}       - color depending on WN6 rating
+      {{c:wn8}}       - color depending on WN8 rating
+      {{c:wn}}        - color depending on WN8 rating
       {{c:xeff}}      - color depending on XVM Scale for efficiency
-      {{c:xwn}}       - color depending on XVM Scale for WN6
+      {{c:xwn}}       - color depending on XVM Scale for WN8
       {{c:rating}}    - color depending on GWR
       {{c:kb}}        - color depending on kilo-battles
       {{c:avglvl}}    - color depending on average level of tanks

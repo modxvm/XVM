@@ -19,9 +19,9 @@ package xvm.company.renderers
                 return "";
             if (Config.config.hangar.xwnInCompany == true)
             {
-                return isNaN(stat.wn) ? "--" :
-                    "<font color='" + MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn) + "'>" +
-                    (stat.xwn >= 100 ? "XX" : (stat.xwn < 10 ? "0" : "") + stat.xwn.toString()) + "</font>";
+                return isNaN(stat.wn8) ? "--" :
+                    "<font color='" + MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8) + "'>" +
+                    (stat.xwn8 >= 100 ? "XX" : (stat.xwn8 < 10 ? "0" : "") + stat.xwn8.toString()) + "</font>";
             }
             else
             {
@@ -50,10 +50,10 @@ package xvm.company.renderers
             s += pname + "<font color='#CCCCCC'>" + WGUtils.GetClanNameWithBrackets(fullPlayerName) + "</font>";
             s += "<br>";
             // line 2
-            s += "WN6: " + (!stat.wn ? "--" :
-                "<font color='" + MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn) + "'>" + (stat.xwn == 100 ? "XX" : (stat.xwn < 10 ? "0" : "") + stat.xwn) + "</font>") + " ";
-            s += "(" + (!stat.wn ? "-" :
-                "<font color='" + MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN, stat.wn) + "'>" + stat.wn + "</font>") + ") ";
+            s += "WN8: " + (!stat.wn8 ? "--" :
+                "<font color='" + MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8) + "'>" + (stat.xwn8 == 100 ? "XX" : (stat.xwn8 < 10 ? "0" : "") + stat.xwn8) + "</font>") + " ";
+            s += "(" + (!stat.wn8 ? "-" :
+                "<font color='" + MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, stat.wn8) + "'>" + stat.wn8 + "</font>") + ") ";
             s += Locale.get("EFF") + ": " + (!stat.e ? "--" :
                 "<font color='" + MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff) + "'>" + (stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff) + "</font>") + " ";
             s += "(" + (!stat.e ? "-" :

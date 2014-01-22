@@ -716,12 +716,20 @@ class com.xvm.DefaultConfig
                     { value: 1735, color: ColorPalette.blue },    // very good
                     { value: 9999, color: ColorPalette.purple }   // unique
                 ],
-                wn: [
+                wn6: [
                     { value: 425,  color: ColorPalette.red },     // very bad
                     { value: 795,  color: ColorPalette.orange },  // bad
                     { value: 1175, color: ColorPalette.yellow },  // normal
                     { value: 1570, color: ColorPalette.green },   // good
                     { value: 1885, color: ColorPalette.blue },    // very good
+                    { value: 9999, color: ColorPalette.purple }   // unique
+                ],
+                wn8: [
+                    { value: 315,  color: ColorPalette.red },     // very bad
+                    { value: 755,  color: ColorPalette.orange },  // bad
+                    { value: 1315, color: ColorPalette.yellow },  // normal
+                    { value: 1965, color: ColorPalette.green },   // good
+                    { value: 2525, color: ColorPalette.blue },    // very good
                     { value: 9999, color: ColorPalette.purple }   // unique
                 ],
                 rating: [
@@ -820,10 +828,16 @@ class com.xvm.DefaultConfig
                     { value: 1460, alpha: 60 },
                     { value: 9999, alpha: 40 }
                 ],
-                wn: [
+                wn6: [
                     { value: 795,  alpha: 100 },
                     { value: 1175, alpha: 80 },
                     { value: 1570, alpha: 60 },
+                    { value: 9999, alpha: 40 }
+                ],
+                wn8: [
+                    { value: 755,  alpha: 100 },
+                    { value: 1315, alpha: 80 },
+                    { value: 1965, alpha: 60 },
                     { value: 9999, alpha: 40 }
                 ],
                 rating: [

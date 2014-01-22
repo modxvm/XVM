@@ -58,6 +58,7 @@
     "Summary": "Összefoglaló",
     "Avg level": "Átlag szint",
     "WN6": "WN6",
+    "WN8": "WN8",
     "EFF": "EFF",
     "updated": "frissítve",
     " to ": " -> ",

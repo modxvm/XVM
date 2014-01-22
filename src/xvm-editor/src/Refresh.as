@@ -757,8 +757,10 @@ private function RefreshColorsPage2():void
             p_colors_x.RefreshSource();
         else if (accColors2.selectedChild == nc_colors_eff && p_colors_eff != null)
             p_colors_eff.RefreshSource();
-        else if (accColors2.selectedChild == nc_colors_wn && p_colors_wn != null)
-            p_colors_wn.RefreshSource();
+        else if (accColors2.selectedChild == nc_colors_wn6 && p_colors_wn6 != null)
+            p_colors_wn6.RefreshSource();
+        else if (accColors2.selectedChild == nc_colors_wn8 && p_colors_wn8 != null)
+            p_colors_wn8.RefreshSource();
         else if (accColors2.selectedChild == nc_colors_rating && p_colors_rating != null)
             p_colors_rating.RefreshSource();
         else if (accColors2.selectedChild == nc_colors_kb && p_colors_kb != null)
@@ -795,8 +797,10 @@ private function RefreshTransparencyPage():void
             p_alpha_x.RefreshSource();
         else if (accTransparency.selectedChild == nc_alpha_eff && p_alpha_eff != null)
             p_alpha_eff.RefreshSource();
-        else if (accTransparency.selectedChild == nc_alpha_wn && p_alpha_wn != null)
-            p_alpha_wn.RefreshSource();
+        else if (accTransparency.selectedChild == nc_alpha_wn6 && p_alpha_wn6 != null)
+            p_alpha_wn6.RefreshSource();
+        else if (accTransparency.selectedChild == nc_alpha_wn8 && p_alpha_wn8 != null)
+            p_alpha_wn8.RefreshSource();
         else if (accTransparency.selectedChild == nc_alpha_rating && p_alpha_rating != null)
             p_alpha_rating.RefreshSource();
         else if (accTransparency.selectedChild == nc_alpha_kb && p_alpha_kb != null)

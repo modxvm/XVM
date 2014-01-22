@@ -847,12 +847,20 @@ package com.xvm.misc
                 { value: 1735, color: Defines.C_BLUE },    // very good
                 { value: 9999, color: Defines.C_PURPLE }   // unique
             ];
-            c.wn = [
+            c.wn6 = [
                 { value: 425,  color: Defines.C_RED },     // very bad
                 { value: 795,  color: Defines.C_ORANGE },  // bad
                 { value: 1175, color: Defines.C_YELLOW },  // normal
                 { value: 1570, color: Defines.C_GREEN },   // good
                 { value: 1885, color: Defines.C_BLUE },    // very good
+                { value: 9999, color: Defines.C_PURPLE }   // unique
+            ];
+            c.wn8 = [
+                { value: 315,  color: Defines.C_RED },     // very bad
+                { value: 755,  color: Defines.C_ORANGE },  // bad
+                { value: 1315, color: Defines.C_YELLOW },  // normal
+                { value: 1965, color: Defines.C_GREEN },   // good
+                { value: 2525, color: Defines.C_BLUE },    // very good
                 { value: 9999, color: Defines.C_PURPLE }   // unique
             ];
             c.rating = [
@@ -957,10 +965,16 @@ package com.xvm.misc
                 { value: 1460, alpha: 60 },
                 { value: 9999, alpha: 40 }
             ];
-            c.wn = [
+            c.wn6 = [
                 { value: 795,  alpha: 100 },
                 { value: 1175, alpha: 80 },
                 { value: 1570, alpha: 60 },
+                { value: 9999, alpha: 40 }
+            ];
+            c.wn8 = [
+                { value: 755,  alpha: 100 },
+                { value: 1315, alpha: 80 },
+                { value: 1965, alpha: 60 },
                 { value: 9999, alpha: 40 }
             ];
             c.rating = [

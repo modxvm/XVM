@@ -57,6 +57,7 @@
     "Summary": "Pregled",
     "Avg level": "Prosečan nivo",
     "WN6": "WN6",
+    "WN8": "WN8",
     "EFF": "EFF",
     "updated": "ažurirano",
     " to ": " do ",

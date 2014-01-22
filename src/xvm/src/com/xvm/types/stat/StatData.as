@@ -22,8 +22,8 @@ package com.xvm.types.stat
         public var def:Number = NaN;           // defence (int)
         public var lvl:Number = NaN;           // average level (float)
         public var e:Number = NaN;             // eff (int)
-        public var wn:Number = NaN;            // WN6 rating (int)
-        public var wn8:Number = NaN;           // WN8 rating (int) *temporary*
+        public var wn6:Number = NaN;           // WN6 rating (int)
+        public var wn8:Number = NaN;           // WN8 rating (int)
 
         public var cid:Number = NaN;           // clanId
         public var emblem:String = null;       // url for clan icon
@@ -42,6 +42,7 @@ package com.xvm.types.stat
         // calculated
         public var r:Number = NaN;             // global win rate (int)
         public var xeff:Number = NaN;          // Eff in XVM Scale (int)
-        public var xwn:Number = NaN;           // WN6 in XVM Scale (int)
+        public var xwn6:Number = NaN;          // WN6 in XVM Scale (int)
+        public var xwn8:Number = NaN;          // WN8 in XVM Scale (int)
     }
 }

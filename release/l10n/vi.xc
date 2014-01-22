@@ -58,6 +58,7 @@
     "Summary": "Tổng",
     "Avg level": "Cấp độ trung bình",
     "WN6": "WN6",
+    "WN8": "WN8",
     "EFF": "EFF",
     "updated": "cập nhật",
     " to ": " đạt ",

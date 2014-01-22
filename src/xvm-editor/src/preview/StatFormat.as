@@ -17,6 +17,8 @@ public class StatFormat
         format = format.split("{{xeff}}").join("32");
         format = format.split("{{xwn}}").join("23");
         format = format.split("{{eff}}").join("1230");
+        format = format.split("{{wn6}}").join("1001");
+        format = format.split("{{wn8}}").join("1001");
         format = format.split("{{wn}}").join("1001");
         format = format.split("{{e}}").join("5");
         format = format.split("{{rating}}").join("48%");
@@ -53,7 +55,9 @@ public class StatFormat
         format = format.split("{{c:xeff}}").join(MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, 32, "#", isDead));
         format = format.split("{{c:xwn}}").join(MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, 23, "#", isDead));
         format = format.split("{{c:eff}}").join(MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, 1234, "#", isDead));
-        format = format.split("{{c:wn}}").join(MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN, 1001, "#", isDead));
+        format = format.split("{{c:wn6}}").join(MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN6, 1001, "#", isDead));
+        format = format.split("{{c:wn8}}").join(MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, 1001, "#", isDead));
+        format = format.split("{{c:wn}}").join(MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, 1001, "#", isDead));
         format = format.split("{{c:rating}}").join(MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, 48, "#", isDead));
         format = format.split("{{c:kb}}").join(MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, 10, "#", isDead));
 

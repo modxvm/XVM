@@ -58,6 +58,7 @@
     "Summary": "Overzicht",
     "Avg level": "Gemid. niveau",
     "WN6": "WN6",
+    "WN8": "WN8",
     "EFF": "EFF",
     "updated": "geüpdate",
     " to ": " naar ",

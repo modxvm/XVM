@@ -22,16 +22,31 @@ package com.xvm.utils
                 )));
         }
 
-        public static function XWN(value:Number):Number
+        public static function XWN6(WN6:Number):Number
         {
-            return value > 2160 ? 100 :
+            return WN6 > 2160 ? 100 :
                 Math.round(Math.max(0, Math.min(100,
-                    value * (value * (value * (value *
+                    WN6*(WN6*(WN6*(WN6*
                     - 0.00000000001268
                     + 0.00000005147)
                     - 0.00006418)
                     + 0.07576)
                     - 7.25
+                )));
+        }
+
+        public static function XWN8(WN8:Number):Number
+        {
+            return WN8 > 3250 ? 100 :
+                Math.round(Math.max(0, Math.min(100,
+                    WN8*(WN8*(WN8*(WN8*(WN8*(WN8*
+                    0.00000000000000000007119
+                    + 0.0000000000000002334)
+                    - 0.000000000006963)
+                    + 0.00000002845)
+                    - 0.00004558)
+                    + 0.06565)
+                    - 0.18
                 )));
         }
     }

@@ -58,6 +58,7 @@
     "Summary": "Ringkasan",
     "Avg level": "Tahap purata",
     "WN6": "WN6",
+    "WN8": "WN8",
     "EFF": "EFF",
     "updated": "telah dikemaskini",
     " to ": " ke ",

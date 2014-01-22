@@ -58,6 +58,7 @@
     "Summary": "Resumé",
     "Avg level": "Gns level",
     "WN6": "WN6",
+    "WN8": "WN8",
     "EFF": "EFF",
     "updated": "opdateret",
     " to ": " til ",

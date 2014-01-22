@@ -58,6 +58,7 @@
     "Summary": "サマリー",
     "Avg level": "平均レベル",
     "WN6": "WN6",
+    "WN8": "WN8",
     "EFF": "EFF",
     "updated": "更新された",
     " to ": " へ ",

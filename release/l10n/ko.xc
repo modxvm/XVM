@@ -58,6 +58,7 @@
     "Summary": "요약",
     "Avg level": "평균 티어",
     "WN6": "WN6",
+    "WN8": "WN8",
     "EFF": "EFF",
     "updated": "업데이트 일자",
     " to ": " 승 뒤 ",

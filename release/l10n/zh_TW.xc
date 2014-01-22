@@ -60,6 +60,7 @@
     "Summary": "總結",
     "Avg level": "平均車階",
     "WN6": "WN6",
+    "WN8": "WN8",
     "EFF": "EFF",
     "updated": "已更新",
     " to ": " 至 ",

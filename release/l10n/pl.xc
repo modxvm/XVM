@@ -58,6 +58,7 @@
     "Summary": "Podsumowanie",
     "Avg level": "Śr. poziom",
     "WN6": "WN6",
+    "WN8": "WN8",
     "EFF": "EFF",
     "updated": "zaktualizowano",
     " to ": " do ",

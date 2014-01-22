@@ -58,6 +58,7 @@
     "Summary": "Rezultātu kopsavilkums",
     "Avg level": "Vidējais līmenis",
     "WN6": "WN6",
+    "WN8": "WN8",
     "EFF": "ER",
     "updated": "atjaunots",
     " to ": " līdz ",

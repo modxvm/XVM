@@ -415,9 +415,13 @@ package com.xvm
             if (!isNaN(stat.e))
                 stat.xeff = XvmScale.XEFF(stat.e);
 
-            // xwn
-            if (!isNaN(stat.wn))
-                stat.xwn = XvmScale.XWN(stat.wn);
+            // xwn6
+            if (!isNaN(stat.wn6))
+                stat.xwn6 = XvmScale.XWN6(stat.wn6);
+
+            // xwn8
+            if (!isNaN(stat.wn8))
+                stat.xwn8 = XvmScale.XWN8(stat.wn8);
 
             // vehicle stat
             calculateVehicleStatValues(stat, forceTeff);

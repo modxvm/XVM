@@ -58,6 +58,7 @@
     "Summary": "Kokkuvõte",
     "Avg level": "Keskmine järk",
     "WN6": "WN6",
+    "WN8": "WN8",
     "EFF": "EFF",
     "updated": "uuendatud",
     " to ": " - ",

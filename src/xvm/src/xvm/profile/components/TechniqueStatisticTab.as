@@ -358,9 +358,9 @@ package xvm.profile.components
             {
                 s += size(Locale.get("General stats") + " (" + color(data.stat.dt.substr(0, 10), 0xCCCCCC) + ")", 14) + "\n";
 
-                s += Locale.get("WN6") + ": " + (!data.stat.wn ? "-- (-)" :
-                    color((data.stat.xwn == 100 ? "XX" : (data.stat.xwn < 10 ? "0" : "") + data.stat.xwn), MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_X, data.stat.xwn)) + " (" +
-                    color(App.utils.locale.integer(data.stat.wn), MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_WN, data.stat.wn)) + ")") + " ";
+                s += Locale.get("WN8") + ": " + (!data.stat.wn8 ? "-- (-)" :
+                    color((data.stat.xwn8 == 100 ? "XX" : (data.stat.xwn8 < 10 ? "0" : "") + data.stat.xwn8), MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_X, data.stat.xwn8)) + " (" +
+                    color(App.utils.locale.integer(data.stat.wn8), MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_WN8, data.stat.wn8)) + ")") + " ";
                 s += Locale.get("EFF") + ": " + (!data.stat.e ? "-- (-)" :
                     color((data.stat.xeff == 100 ? "XX" : (data.stat.xeff < 10 ? "0" : "") + data.stat.xeff), MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_X, data.stat.xeff)) + " (" +
                     color(App.utils.locale.integer(data.stat.e), MacrosUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_EFF, data.stat.e)) + ")") + "\n";

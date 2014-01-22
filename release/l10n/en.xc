@@ -58,6 +58,7 @@
     "Summary": "Summary",
     "Avg level": "Avg level",
     "WN6": "WN6",
+    "WN8": "WN8",
     "EFF": "EFF",
     "updated": "updated",
     " to ": " to ",

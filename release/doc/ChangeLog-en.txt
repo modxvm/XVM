@@ -1,5 +1,7 @@
 XVM-5.0.2-test3:
   [NEW FUNCTIONS]
+  * default WN rating changed to WN8
+  * added macros: {{wn6}}, {{wn8}, {{c:wn6}}, {{c:wn8}}, {{a:wn6}}, {{a:wn8}}
   * new options:
       hangar/hidePricesInTechTree - Hide price button in tech tree
       battleResults/showTotals - Show totals for your battle efficiency in first page

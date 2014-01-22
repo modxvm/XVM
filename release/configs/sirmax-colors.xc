@@ -201,16 +201,6 @@
       { "value": 1740, "color": ${"colorRating.very_good"} },  // 1470 - 1739 - very good
       { "value": 9999, "color": ${"colorRating.unique"   } }   // 1740 - *    - unique
     ],
-    // Dynamic color by WN6 rating
-    // Динамический цвет по рейтингу WN6
-    "wn": [
-      { "value": 435,  "color": ${"colorRating.very_bad" } },  //    0 - 434  - very bad
-      { "value": 805,  "color": ${"colorRating.bad"      } },  //  435 - 804  - bad
-      { "value": 1200, "color": ${"colorRating.normal"   } },  //  805 - 1199 - normal
-      { "value": 1595, "color": ${"colorRating.good"     } },  // 1200 - 1594 - good
-      { "value": 1900, "color": ${"colorRating.very_good"} },  // 1595 - 1899 - very good
-      { "value": 9999, "color": ${"colorRating.unique"   } }   // 1900 - *    - unique
-    ],
     // Dynamic color by TEFF (E) rating
     // Динамический цвет по рейтингу TEFF (E)
     "e": [

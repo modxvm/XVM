@@ -112,7 +112,7 @@ package com.xvm.misc
             var Tmax:Number = vdata.tierHi;
             var T:Number = battleTier;
             //Logger.addObject(stat);
-            var Ea:Number = isNaN(stat.xwn) ? Config.config.consts.AVG_XVMSCALE : stat.xwn;
+            var Ea:Number = isNaN(stat.xwn8) ? Config.config.consts.AVG_XVMSCALE : stat.xwn8;
             var Ean:Number = Ea + (Ea * (((stat.lvl || T) - T) * 0.05));
             var Ra:Number = stat.r || Config.config.consts.AVG_GWR;
             var Ba:Number = stat.b || Config.config.consts.AVG_BATTLES;
@@ -149,7 +149,7 @@ package com.xvm.misc
             var Et:Number = stat.v.teff || 0;
             var Rt:Number = stat.v.r || 0;
             var AvgW:Number = vdata.avg.R ? vdata.avg.R * 100 : 49.5;
-            var Ea:Number = isNaN(stat.xwn) ? Config.config.consts.AVG_XVMSCALE : stat.xwn;
+            var Ea:Number = isNaN(stat.xwn8) ? Config.config.consts.AVG_XVMSCALE : stat.xwn8;
             var Ean:Number = Ea + (Ea * (((stat.lvl || T) - T) * 0.05));
             var Ra:Number = stat.r || Config.config.consts.AVG_GWR;
             var Ba:Number = stat.b || Config.config.consts.AVG_BATTLES;
@@ -194,7 +194,7 @@ package com.xvm.misc
             var Tmin:Number = vdata.tierLo;
             var Tmax:Number = vdata.tierHi;
             var T:Number = battleTier;
-            var Ea:Number = isNaN(stat.xwn) ? Config.config.consts.AVG_XVMSCALE : stat.xwn;
+            var Ea:Number = isNaN(stat.xwn8) ? Config.config.consts.AVG_XVMSCALE : stat.xwn8;
             var Ean:Number = Ea + (Ea * (((stat.lvl || T) - T) * 0.05));
             var Ra:Number = stat.r || Config.config.consts.AVG_GWR;
             var Ba:Number = stat.b || Config.config.consts.AVG_BATTLES;
@@ -234,7 +234,7 @@ package com.xvm.misc
             var Et:Number = stat.v.teff || 0;
             var Rt:Number = stat.v.r || 0;
             var AvgW:Number = vdata.avg.R ? vdata.avg.R * 100 : 49.5;
-            var Ea:Number = isNaN(stat.xwn) ? Config.config.consts.AVG_XVMSCALE : stat.xwn;
+            var Ea:Number = isNaN(stat.xwn8) ? Config.config.consts.AVG_XVMSCALE : stat.xwn8;
             var Ean:Number = Ea + (Ea * (((stat.lvl || T) - T) * 0.05));
             var Ra:Number = stat.r || Config.config.consts.AVG_GWR;
             var Ba:Number = stat.b || Config.config.consts.AVG_BATTLES;

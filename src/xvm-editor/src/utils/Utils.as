@@ -303,7 +303,8 @@ public class Utils
 			case Defines.DYNAMIC_COLOR_HP_RATIO:        cfg = cfg_root.hp_ratio; break;
 			case Defines.DYNAMIC_COLOR_EFF:             cfg = cfg_root.eff; break;
 			case Defines.DYNAMIC_COLOR_E:               cfg = cfg_root.e; break;
-			case Defines.DYNAMIC_COLOR_WN:              cfg = cfg_root.wn; break;
+			case Defines.DYNAMIC_COLOR_WN6:             cfg = cfg_root.wn6; break;
+			case Defines.DYNAMIC_COLOR_WN8:             cfg = cfg_root.wn8; break;
 			case Defines.DYNAMIC_COLOR_X:               cfg = cfg_root.x; break;
 			//case Defines.DYNAMIC_COLOR_TWR:             cfg = cfg_root.twr; break;
 			case Defines.DYNAMIC_COLOR_RATING:          cfg = cfg_root.rating; break;
@@ -358,7 +359,8 @@ public class Utils
 			case Defines.DYNAMIC_ALPHA_HP_RATIO:        cfg = cfg_root.hp_ratio; break;
 			case Defines.DYNAMIC_ALPHA_EFF:             cfg = cfg_root.eff; break;
 			case Defines.DYNAMIC_ALPHA_E:               cfg = cfg_root.e; break;
-			case Defines.DYNAMIC_ALPHA_WN:              cfg = cfg_root.wn; break;
+			case Defines.DYNAMIC_ALPHA_WN6:             cfg = cfg_root.wn6; break;
+			case Defines.DYNAMIC_ALPHA_WN8:             cfg = cfg_root.wn8; break;
 			case Defines.DYNAMIC_ALPHA_X:               cfg = cfg_root.x; break;
 			//case Defines.DYNAMIC_ALPHA_TWR:             cfg = cfg_root.twr; break;
 			case Defines.DYNAMIC_ALPHA_RATING:          cfg = cfg_root.rating; break;

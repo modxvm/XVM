@@ -375,8 +375,11 @@
                             <s:NavigatorContent id="nc_colors_eff" label="{_('DynamicColorEfficiency')}" width="100%" height="100%">
                                 <p:PDynamicValues id="p_colors_eff" config="colors.eff" minimum="0" maximum="3000" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
                             </s:NavigatorContent>
-                            <s:NavigatorContent id="nc_colors_wn" label="{_('DynamicColorWN')}" width="100%" height="100%">
-                                <p:PDynamicValues id="p_colors_wn" config="colors.wn" minimum="0" maximum="3000" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
+                            <s:NavigatorContent id="nc_colors_wn6" label="{_('DynamicColorWN6')}" width="100%" height="100%">
+                                <p:PDynamicValues id="p_colors_wn6" config="colors.wn6" minimum="0" maximum="3000" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
+                            </s:NavigatorContent>
+                            <s:NavigatorContent id="nc_colors_wn8" label="{_('DynamicColorWN8')}" width="100%" height="100%">
+                                <p:PDynamicValues id="p_colors_wn8" config="colors.wn8" minimum="0" maximum="3000" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
                             </s:NavigatorContent>
                             <s:NavigatorContent id="nc_colors_rating" label="{_('DynamicColorWinRate')}" width="100%" height="100%">
                                 <p:PDynamicValues id="p_colors_rating" config="colors.rating" minimum="0" maximum="101" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
@@ -418,8 +421,11 @@
                         <s:NavigatorContent id="nc_alpha_eff" label="{_('DynamicAlphaEfficiency')}" width="100%" height="100%">
                             <p:PDynamicValues id="p_alpha_eff" config="alpha.eff" minimum="0" maximum="3000" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
                         </s:NavigatorContent>
-                        <s:NavigatorContent id="nc_alpha_wn" label="{_('DynamicAlphaWN')}" width="100%" height="100%">
-                            <p:PDynamicValues id="p_alpha_wn" config="alpha.wn" minimum="0" maximum="3000" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
+                        <s:NavigatorContent id="nc_alpha_wn6" label="{_('DynamicAlphaWN6')}" width="100%" height="100%">
+                            <p:PDynamicValues id="p_alpha_wn6" config="alpha.wn6" minimum="0" maximum="3000" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
+                        </s:NavigatorContent>
+                        <s:NavigatorContent id="nc_alpha_wn8" label="{_('DynamicAlphaWN8')}" width="100%" height="100%">
+                            <p:PDynamicValues id="p_alpha_wn8" config="alpha.wn8" minimum="0" maximum="3000" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
                         </s:NavigatorContent>
                         <s:NavigatorContent id="nc_alpha_rating" label="{_('DynamicAlphaWinRate')}" width="100%" height="100%">
                             <p:PDynamicValues id="p_alpha_rating" config="alpha.rating" minimum="0" maximum="101" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>

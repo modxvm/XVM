@@ -116,7 +116,7 @@ class com.xvm.Chance
         var Tmin = vdata.tierLo;
         var Tmax = vdata.tierHi;
         var T = battleTier;
-        var Ea = stat.xwn == null ? Config.s_config.consts.AVG_XVMSCALE : stat.xwn;
+        var Ea = stat.xwn8 == null ? Config.s_config.consts.AVG_XVMSCALE : stat.xwn8;
         var Ean = Ea + (Ea * (((stat.lvl || T) - T) * 0.05));
         var Ra = stat.r || Config.s_config.consts.AVG_GWR;
         var Ba = stat.b || Config.s_config.consts.AVG_BATTLES;
@@ -153,7 +153,7 @@ class com.xvm.Chance
         var Et = stat.teff || 0;
         var Rt = stat.tr || 0;
         var AvgW = vdata.avg.R ? vdata.avg.R * 100 : 49.5;
-        var Ea = stat.xwn == null ? Config.s_config.consts.AVG_XVMSCALE : stat.xwn;
+        var Ea = stat.xwn8 == null ? Config.s_config.consts.AVG_XVMSCALE : stat.xwn8;
         var Ean = Ea + (Ea * (((stat.lvl || T) - T) * 0.05));
         var Ra = stat.r || Config.s_config.consts.AVG_GWR;
         var Ba = stat.b || Config.s_config.consts.AVG_BATTLES;
@@ -198,7 +198,7 @@ class com.xvm.Chance
         var Tmin = vdata.tierLo;
         var Tmax = vdata.tierHi;
         var T = battleTier;
-        var Ea = stat.xwn == null ? Config.s_config.consts.AVG_XVMSCALE : stat.xwn;
+        var Ea = stat.xwn8 == null ? Config.s_config.consts.AVG_XVMSCALE : stat.xwn8;
         var Ean = Ea + (Ea * (((stat.lvl || T) - T) * 0.05));
         var Ra = stat.r || Config.s_config.consts.AVG_GWR;
         var Ba = stat.b || Config.s_config.consts.AVG_BATTLES;
@@ -238,7 +238,7 @@ class com.xvm.Chance
         var Et = stat.teff || 0;
         var Rt = stat.tr || 0;
         var AvgW = vdata.avg.R ? vdata.avg.R * 100 : 49.5;
-        var Ea = stat.xwn == null ? Config.s_config.consts.AVG_XVMSCALE : stat.xwn;
+        var Ea = stat.xwn8 == null ? Config.s_config.consts.AVG_XVMSCALE : stat.xwn8;
         var Ean = Ea + (Ea * (((stat.lvl || T) - T) * 0.05));
         var Ra = stat.r || Config.s_config.consts.AVG_GWR;
         var Ba = stat.b || Config.s_config.consts.AVG_BATTLES;

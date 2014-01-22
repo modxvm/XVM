@@ -89,6 +89,8 @@ package utils
             format = format.split("{{xeff}}").join("XX");
             format = format.split("{{xwn}}").join("77");
             format = format.split("{{eff}}").join("1800");
+            format = format.split("{{wn6}}").join("1600");
+            format = format.split("{{wn8}}").join("1600");
             format = format.split("{{wn}}").join("1600");
             format = format.split("{{e}}").join("5");
             format = format.split("{{rating}}").join("66%");
@@ -117,7 +119,9 @@ package utils
             format = format.split("{{c:xeff}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, 100));
             format = format.split("{{c:xwn}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, 77));
             format = format.split("{{c:eff}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, 1800));
-            format = format.split("{{c:wn}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN, 1600));
+            format = format.split("{{c:wn6}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN6, 1600));
+            format = format.split("{{c:wn8}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, 1600));
+            format = format.split("{{c:wn}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, 1600));
             format = format.split("{{c:rating}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, 66));
             format = format.split("{{c:kb}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, 11));
             format = format.split("{{c:e}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, 5));
@@ -245,6 +249,8 @@ package utils
                 { value: "{{xeff}}", label: "xeff", icon: Embed.xeff },
                 { value: "{{xwn}}", label: "xwn", icon: Embed.xwn },
                 { value: "{{eff}}", label: "eff", icon: Embed.eff },
+                { value: "{{wn6}}", label: "wn6", icon: Embed.wn6 },
+                { value: "{{wn8}}", label: "wn8", icon: Embed.wn8 },
                 { value: "{{wn}}", label: "wn", icon: Embed.wn },
                 { value: "{{e}}", label: "e", icon: Embed.e },
                 { value: "{{teff}}", label: "teff", icon: Embed.teff },
@@ -273,6 +279,8 @@ package utils
                 { value: "{{c:xeff}}", label: "c_xeff", icon: Embed.c_xeff },
                 { value: "{{c:xwn}}", label: "c_xwn", icon: Embed.c_xwn },
                 { value: "{{c:eff}}", label: "c_eff", icon: Embed.c_eff },
+                { value: "{{c:wn6}}", label: "c_wn6", icon: Embed.c_wn6 },
+                { value: "{{c:wn8}}", label: "c_wn8", icon: Embed.c_wn8 },
                 { value: "{{c:wn}}", label: "c_wn", icon: Embed.c_wn },
                 { value: "{{c:e}}", label: "c_e", icon: Embed.c_e },
                 { value: "{{c:rating}}", label: "c_rating", icon: Embed.c_rating },

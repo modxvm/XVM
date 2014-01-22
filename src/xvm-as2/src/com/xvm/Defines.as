@@ -68,9 +68,10 @@ class com.xvm.Defines
     public static var DYNAMIC_COLOR_TFB:Number = 9;
     public static var DYNAMIC_COLOR_TSB:Number = 10;
     public static var DYNAMIC_COLOR_E:Number = 11;
-    public static var DYNAMIC_COLOR_WN:Number = 12;
-    public static var DYNAMIC_COLOR_X:Number = 13;
-    public static var DYNAMIC_COLOR_AVGLVL:Number = 14;
+    public static var DYNAMIC_COLOR_WN6:Number = 12;
+    public static var DYNAMIC_COLOR_WN8:Number = 13;
+    public static var DYNAMIC_COLOR_X:Number = 14;
+    public static var DYNAMIC_COLOR_AVGLVL:Number = 15;
 
     // Dynamic alpha types
     public static var DYNAMIC_ALPHA_EFF:Number = 1;
@@ -84,9 +85,10 @@ class com.xvm.Defines
     public static var DYNAMIC_ALPHA_TFB:Number = 9;
     public static var DYNAMIC_ALPHA_TSB:Number = 10;
     public static var DYNAMIC_ALPHA_E:Number = 11;
-    public static var DYNAMIC_ALPHA_WN:Number = 12;
-    public static var DYNAMIC_ALPHA_X:Number = 13;
-    public static var DYNAMIC_ALPHA_AVGLVL:Number = 14;
+    public static var DYNAMIC_ALPHA_WN6:Number = 12;
+    public static var DYNAMIC_ALPHA_WN8:Number = 13;
+    public static var DYNAMIC_ALPHA_X:Number = 14;
+    public static var DYNAMIC_ALPHA_AVGLVL:Number = 15;
 
     // Damage flag at Xvm.as: updateHealth
     public static var FROM_UNKNOWN:Number = 0;

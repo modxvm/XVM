@@ -86,9 +86,11 @@ Legend:
 │ {{eff}}         │ X │ X │ X │ X │  player efficiency: http://wot-news.com/index.php/stat/calc/en/
 │ {{eff:4}}       │ X │ X │ X │ X │ player efficiency aligned from left to 4 chars
 │ {{teff}}, {{e}} │ X │ X │ X │ X │ player per-vehicle efficiency: http://www.koreanrandom.com/forum/topic/1643-
-│ {{wn}}          │ X │ X │ X │ X │ WN6 rating: http://www.koreanrandom.com/forum/topic/2575-
+│ {{wn6}}         │ X │ X │ X │ X │ WN6 rating: http://www.koreanrandom.com/forum/topic/2575-
+│ {{wn8}}         │ X │ X │ X │ X │ WN8 rating: http://www.koreanrandom.com/forum/topic/2575-
+│ {{wn}}          │ X │ X │ X │ X │ WN8 rating: http://www.koreanrandom.com/forum/topic/2575-
 │ {{xeff}}        │ X │ X │ X │ X │ XVM Scale for efficiency (values 00-99, XX for Tops)
-│ {{xwn}}         │ X │ X │ X │ X │ XVM Scale for WN6 (values 00-99, XX for Tops)
+│ {{xwn}}         │ X │ X │ X │ X │ XVM Scale for WN8 (values 00-99, XX for Tops)
 │ {{rating}}      │ X │ X │ X │ X │ GWR (Global Win Ratio)
 │ {{rating:3}}    │ X │ X │ X │ X │ GWR aligned from left to 3 chars
 │ {{battles}}     │ X │ X │ X │ X │ total battles count
@@ -116,9 +118,11 @@ Legend:
 │ {{c:tsb}}       │ X │ X │ X │ X │ dynamic colors for this macros
 │ {{c:eff}}       │ X │ X │ X │ X │ color depending on player efficiency
 │ {{c:e}}         │ X │ X │ X │ X │ color depending on player per-vehicle efficiency
-│ {{c:wn}}        │ X │ X │ X │ X │ color depending on WN6 rating
+│ {{c:wn6}}       │ X │ X │ X │ X │ color depending on WN6 rating
+│ {{c:wn8}}       │ X │ X │ X │ X │ color depending on WN8 rating
+│ {{c:wn}}        │ X │ X │ X │ X │ color depending on WN8 rating
 │ {{c:xeff}}      │ X │ X │ X │ X │ color depending on XVM Scale for efficiency
-│ {{c:xwn}}       │ X │ X │ X │ X │ color depending on XVM Scale for WN6
+│ {{c:xwn}}       │ X │ X │ X │ X │ color depending on XVM Scale for WN8
 │ {{c:rating}}    │ X │ X │ X │ X │ color depending on GWR
 │ {{c:kb}}        │ X │ X │ X │ X │ color depending on kilo-battles
 │ {{c:avglvl}}    │ X │ X │ X │ X │ color depending on average level of tanks

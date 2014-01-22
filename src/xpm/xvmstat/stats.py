@@ -398,12 +398,17 @@ class _Stat(object):
         #self._r(stat, 'id', '_id')
         if 'twr' in stat:
             del stat['twr']
-        if 'v' not in stat:
+        if not 'v' in stat:
             stat['v'] = {}
         # temporary workaround
         if 'clan' in stat:
-            stat['clanstat'] = stat['clan']
+            if not 'clanstat' in stat:
+                stat['clanstat'] = stat['clan']
             del stat['clan']
+        if 'wn' in stat:
+            if not 'wn6' in stat:
+                stat['wn6'] = stat['wn']
+            del stat['wn']
 
         player = BigWorld.player()
         from avatar import PlayerAvatar

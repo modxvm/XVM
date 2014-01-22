@@ -133,6 +133,7 @@ package com.xvm.l10n
             "Summary": "Общие результаты",
             "Avg level": "Средний уровень",
             //"WN6": "WN6",
+            //"WN8": "WN8",
             "EFF": "РЭ",
             "updated": "обновлено",
             " to ": " до ",

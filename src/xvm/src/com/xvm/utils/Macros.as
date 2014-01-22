@@ -215,14 +215,16 @@ package com.xvm.utils
             // {{xeff}}
             pdata["xeff"] = isNaN(stat.xeff) ? "--" : stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff;
             // {{xwn}}
-            pdata["xwn"] = isNaN(stat.xwn) ? "--" : stat.xwn == 100 ? "XX" : (stat.xwn < 10 ? "0" : "") + stat.xwn;
+            pdata["xwn"] = isNaN(stat.xwn8) ? "--" : stat.xwn8 == 100 ? "XX" : (stat.xwn8 < 10 ? "0" : "") + stat.xwn8;
             // {{eff}}, {{eff:4}}
             pdata["eff"] = isNaN(stat.e) ? "----" : String(stat.e);
             pdata["eff:4"] = isNaN(stat.e) ? "----" : StringUtils.leftPad(pdata["eff"], 4, ' ');
-            // {{wn}}
-            pdata["wn"] = isNaN(stat.wn) ? "----" : StringUtils.leftPad(String(stat.wn), 4, ' ');
+            // {{wn6}}
+            pdata["wn6"] = isNaN(stat.wn6) ? "----" : StringUtils.leftPad(String(stat.wn6), 4, ' ');
             // {{wn8}}
             pdata["wn8"] = isNaN(stat.wn8) ? "----" : StringUtils.leftPad(String(stat.wn8), 4, ' ');
+            // {{wn}}
+            pdata["wn"] = pdata["wn8"];
             // {{e}}
             pdata["e"] = isNaN(stat.v.teff) ? "-" : stat.v.te >= 10 ? "E" : String(stat.v.te);
             // {{teff}}
@@ -270,17 +272,23 @@ package com.xvm.utils
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#", o.darken);
             }
             // {{c:xwn}}
-            pdata["c:xwn"] = isNaN(stat.xwn) ? "" : function(o:MacrosFormatOptions):String {
-                return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn, "#", o.darken);
+            pdata["c:xwn"] = isNaN(stat.xwn8) ? "" : function(o:MacrosFormatOptions):String {
+                return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8, "#", o.darken);
             }
             // {{c:eff}}
             pdata["c:eff"] = isNaN(stat.e) ? "" : function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, stat.e, "#", o.darken);
             }
-            // {{c:wn}}
-            pdata["c:wn"] = isNaN(stat.wn) ? "" : function(o:MacrosFormatOptions):String {
-                return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN, stat.wn, "#", o.darken);
+            // {{c:wn6}}
+            pdata["c:wn6"] = isNaN(stat.wn6) ? "" : function(o:MacrosFormatOptions):String {
+                return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN6, stat.wn6, "#", o.darken);
             }
+            // {{c:wn8}}
+            pdata["c:wn8"] = isNaN(stat.wn8) ? "" : function(o:MacrosFormatOptions):String {
+                return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, stat.wn8, "#", o.darken);
+            }
+            // {{c:wn}}
+            pdata["c:wn"] = pdata["c:wn8"];
             // {{c:e}}
             pdata["c:e"] = isNaN(stat.v.teff) ? "" : function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.v.te, "#", o.darken);
@@ -330,17 +338,23 @@ package com.xvm.utils
                 return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xeff);
             }
             // {{a:xwn}}
-            pdata["a:xwn"] = isNaN(stat.xwn) ? "" : function(o:MacrosFormatOptions):Number {
-                return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwn);
+            pdata["a:xwn"] = isNaN(stat.xwn8) ? "" : function(o:MacrosFormatOptions):Number {
+                return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwn8);
             }
             // {{a:eff}}
             pdata["a:eff"] = isNaN(stat.e) ? "" : function(o:MacrosFormatOptions):Number {
                 return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_EFF, stat.e);
             }
-            // {{a:wn}}
-            pdata["a:wn"] = isNaN(stat.wn) ? "" : function(o:MacrosFormatOptions):Number {
-                return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WN, stat.wn);
+            // {{a:wn6}}
+            pdata["a:wn6"] = isNaN(stat.wn6) ? "" : function(o:MacrosFormatOptions):Number {
+                return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WN6, stat.wn6);
             }
+            // {{a:wn8}}
+            pdata["a:wn8"] = isNaN(stat.wn8) ? "" : function(o:MacrosFormatOptions):Number {
+                return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WN8, stat.wn8);
+            }
+            // {{a:wn}}
+            pdata["a:wn"] = pdata["a:wn8"];
             // {{a:e}}
             pdata["a:e"] = isNaN(stat.v.teff) ? "" : function(o:MacrosFormatOptions):Number {
                 return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_E, stat.v.te);
@@ -456,12 +470,12 @@ package com.xvm.utils
             "{{speed}}", "{{short-nick}}", "{{vehicle-type}}", "{{vehicle-class}}", "{{cellsize}}",
             "{{vehicle-name}}", "{{vehicle-short}}", "{{vtype-l}}", "{{battletier-min}}",
             "{{battletier-max}}", "{{avglvl}}", "{{eff}}", "{{eff:4}}", "{{teff}}, {{e}}",
-            "{{wn}}", "{{xeff}}", "{{xwn}}", "{{rating}}", "{{rating:3}}", "{{battles}}", "{{wins}}",
+            "{{wn6}}", "{{wn8}}", "{{xeff}}", "{{xwn}}", "{{rating}}", "{{rating:3}}", "{{battles}}", "{{wins}}",
             "{{kb}}", "{{kb:3}}", "{{t-rating}}", "{{t-rating:3}}", "{{t-battles}}", "{{t-battles:4}}",
             "{{t-wins}}", "{{t-kb}}", "{{t-kb-0}}", "{{t-kb:4}}", "{{t-hb}}", "{{t-hb:3}}", "{{tdb}}",
             "{{tdb:4}}", "{{tdv}}", "{{tfb}}", "{{tsb}}", "{{c:tdb}}", "{{c:tdv}}", "{{c:tfb}}",
-            "{{c:tsb}}", "{{c:eff}}", "{{c:e}}", "{{c:wn}}", "{{c:xeff}}", "{{c:xwn}}", "{{c:rating}}",
-            "{{c:kb}}", "{{c:avglvl}}", "{{c:t-rating}}", "{{c:t-battles}}"
+            "{{c:tsb}}", "{{c:eff}}", "{{c:e}}", "{{c:wn6}}", "{{c:wn8}}", "{{c:xeff}}", "{{c:xwn}}",
+            "{{c:rating}}", "{{c:kb}}", "{{c:avglvl}}", "{{c:t-rating}}", "{{c:t-battles}}"
         ]
 
         public static function TestMacros(playerName:String, options:MacrosFormatOptions = null):void

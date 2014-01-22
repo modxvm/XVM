@@ -60,12 +60,22 @@
     ],
     // Dynamic transparency by WN6 rating
     // Динамическая прозрачность по рейтингу WN6
-    "wn": [
+    "wn6": [
       { "value": 425,  "alpha": ${"alphaRating.very_bad" } },
       { "value": 795,  "alpha": ${"alphaRating.bad"      } },
       { "value": 1175, "alpha": ${"alphaRating.normal"   } },
       { "value": 1570, "alpha": ${"alphaRating.good"     } },
       { "value": 1885, "alpha": ${"alphaRating.very_good"} },
+      { "value": 9999, "alpha": ${"alphaRating.unique"   } }
+    ],
+    // Dynamic transparency by WN8 rating
+    // Динамическая прозрачность по рейтингу WN8
+    "wn8": [
+      { "value": 315,  "alpha": ${"alphaRating.very_bad" } },
+      { "value": 755,  "alpha": ${"alphaRating.bad"      } },
+      { "value": 1315, "alpha": ${"alphaRating.normal"   } },
+      { "value": 1965, "alpha": ${"alphaRating.good"     } },
+      { "value": 2525, "alpha": ${"alphaRating.very_good"} },
       { "value": 9999, "alpha": ${"alphaRating.unique"   } }
     ],
     // Dynamic transparency by TEFF (E) rating
