@@ -17,7 +17,7 @@
     "Chance to win": "Probabilidad de ganar",
     //"global": "global",
     //"per-vehicle": "por vehiculo",
-    "chanceLive": "Live",
+    "chanceLive": "En vivo",
     "chanceBattleTier": "T", 
 
     // Hitlog
