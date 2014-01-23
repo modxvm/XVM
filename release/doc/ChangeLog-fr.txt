@@ -1,13 +1,28 @@
-﻿XVM-dev:
+﻿XVM-5.0.2-test3:
   [NOUVEAUTÉS]
-  * traduction : ajout du Malaisien
+  * classement WN par défaut changé en WN8
+  * ajout des macros : {{wn6}}, {{wn8}, {{c:wn6}}, {{c:wn8}}, {{a:wn6}}, {{a:wn8}},
+      {{xwn6}}, {{xwn8}}, {{c:xwn6}}, {{c:xwn8}}, {{a:xwn6}}, {{a:xwn8}},
+  * macros {{wn}}, {{c:wn}}, {{a:wn}}, {{xwn}}, {{c:xwn}}, {{a:xwn}} désormais obsolètes
+  * nouvelles options :
+      hangar/hidePricesInTechTree - Cache le bouton "Prix" dans l'arbre technologique
+      battleResults/showTotals - Affiche les totaux sur votre efficacité dans la bataille dans la première page
+
+
+XVM-5.0.2-test2:
+  [NOUVEAUTÉS]
+  * traduction : ajout du Chinois (Taiwan), du Malaisien et du Portugais
+  * nouvelles options :
+      hangar/masteryMarkInTankCarousel - Affiche l'insigne de maîtrise dans le carrousel
+      hangar/masteryMarkInTechTree - Affiche l'insigne de maïtrise dans l'arbre technologique
+      userInfo/showExtraDataInProfile - Affiche des données supplémentaires dans le profil (expérimental)
 
 
 XVM-5.0.2-test1:
   * adaptations pour WoT 0.8.10
 
   [NOUVEAUTÉS]
-  * écran de connexion : les champs du formulaire n'accepte que les caractères requis
+  * écran de connexion : les champs de texte n'acceptent que les caractères requis
 
   [AUTRES]
   * changement du format des noms de chars dans la configuration
