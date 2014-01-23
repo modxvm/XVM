@@ -5,7 +5,6 @@
 package com.xvm.misc
 {
     import com.xvm.*;
-    import com.xvm.l10n.*;
     import com.xvm.utils.*;
     import com.xvm.types.stat.*;
     import com.xvm.types.veh.*;
@@ -61,7 +60,7 @@ package com.xvm.misc
                     //var chX2:Object = GetChance(playerNames, ChanceFuncX2);
                     text += " | " + Locale.get("chanceLive") + ": " + FormatChangeText("", chX1) +
                     //    ", " + FormatChangeText("", chX2) +
-                        ". " + Locale.get("chanceBattleTier") + "=" + battleTier;
+                        ". " + Locale.get("chanceBattleTier") + ": " + battleTier;
                     //lastChances.X1 = chX1.percentF;
                     //lastChances.X2 = chX2.percentF;
                 }
@@ -111,7 +110,7 @@ package com.xvm.misc
             var Tmin:Number = vdata.tierLo;
             var Tmax:Number = vdata.tierHi;
             var T:Number = battleTier;
-            //Logger.addObject(stat);
+            Logger.addObject(stat);
             var Ea:Number = isNaN(stat.xwn8) ? Config.config.consts.AVG_XVMSCALE : stat.xwn8;
             var Ean:Number = Ea + (Ea * (((stat.lvl || T) - T) * 0.05));
             var Ra:Number = stat.r || Config.config.consts.AVG_GWR;

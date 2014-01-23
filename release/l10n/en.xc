@@ -17,8 +17,8 @@
     "Chance to win": "Chance to win",
     //"global": "global",
     //"per-vehicle": "per-vehicle",
-    "chanceLive": "Live",
-    "chanceBattleTier": "T",
+    "chanceLive": "For alive",
+    "chanceBattleTier": "Battle tier",
 
     // Hitlog
     "attack": "attack",

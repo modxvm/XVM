@@ -4,7 +4,7 @@
  * @author Michael Pavlyshko
  * @author Pavel Máca
  */
-package com.xvm.l10n
+package com.xvm
 {
     import com.xvm.events.ObjectEvent;
     import flash.events.DataEvent;
@@ -92,8 +92,8 @@ package com.xvm.l10n
             "Chance to win": "Шансы на победу",
             //"global": "общий",
             //"per-vehicle": "по технике",
-            "chanceLive": "Живые",
-            "chanceBattleTier": "T",
+            "chanceLive": "Для живых",
+            "chanceBattleTier": "Уровень боя",
 
             /** xvm-as2
             // Hitlog
@@ -196,8 +196,8 @@ package com.xvm.l10n
             "XVM_translator": "XVM Team",
 
             // Win chance
-            "chanceLive": "Live",
-            "chanceBattleTier": "T",
+            "chanceLive": "For alive",
+            "chanceBattleTier": "Battle tier",
 
             /* xvm-as2
             // Hitlog

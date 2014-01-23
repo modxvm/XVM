@@ -87,11 +87,13 @@ package utils
             // Statistics
             format = format.split("{{avglvl}}").join("5");
             format = format.split("{{xeff}}").join("XX");
-            format = format.split("{{xwn}}").join("77");
+            format = format.split("{{xwn6}}").join("76");
+            format = format.split("{{xwn8}}").join("78");
+            format = format.split("{{xwn}}").join("78");
             format = format.split("{{eff}}").join("1800");
-            format = format.split("{{wn6}}").join("1600");
-            format = format.split("{{wn8}}").join("1600");
-            format = format.split("{{wn}}").join("1600");
+            format = format.split("{{wn6}}").join("1606");
+            format = format.split("{{wn8}}").join("1608");
+            format = format.split("{{wn}}").join("1608");
             format = format.split("{{e}}").join("5");
             format = format.split("{{rating}}").join("66%");
             format = format.split("{{teff}}").join("1024");
@@ -117,11 +119,13 @@ package utils
             format = format.split("{{t-hb:3}}").join(" 5h");
             format = format.split("{{t-battles:4}}").join("5500");
             format = format.split("{{c:xeff}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, 100));
-            format = format.split("{{c:xwn}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, 77));
+            format = format.split("{{c:xwn6}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, 76));
+            format = format.split("{{c:xwn8}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, 78));
+            format = format.split("{{c:xwn}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, 78));
             format = format.split("{{c:eff}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, 1800));
-            format = format.split("{{c:wn6}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN6, 1600));
-            format = format.split("{{c:wn8}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, 1600));
-            format = format.split("{{c:wn}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, 1600));
+            format = format.split("{{c:wn6}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN6, 1606));
+            format = format.split("{{c:wn8}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, 1608));
+            format = format.split("{{c:wn}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, 1608));
             format = format.split("{{c:rating}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, 66));
             format = format.split("{{c:kb}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, 11));
             format = format.split("{{c:e}}").join(Utils.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, 5));
@@ -247,11 +251,11 @@ package utils
                 { value: "{{avglvl}}", label: "avglvl", icon: Embed.avglvl },
                 { value: "{{rating}}", label: "rating", icon: Embed.rating },
                 { value: "{{xeff}}", label: "xeff", icon: Embed.xeff },
-                { value: "{{xwn}}", label: "xwn", icon: Embed.xwn },
+                { value: "{{xwn6}}", label: "xwn6", icon: Embed.xwn6 },
+                { value: "{{xwn8}}", label: "xwn8", icon: Embed.xwn8 },
                 { value: "{{eff}}", label: "eff", icon: Embed.eff },
                 { value: "{{wn6}}", label: "wn6", icon: Embed.wn6 },
                 { value: "{{wn8}}", label: "wn8", icon: Embed.wn8 },
-                { value: "{{wn}}", label: "wn", icon: Embed.wn },
                 { value: "{{e}}", label: "e", icon: Embed.e },
                 { value: "{{teff}}", label: "teff", icon: Embed.teff },
                 { value: "{{tdb}}", label: "tdb", icon: Embed.tdb },
@@ -277,11 +281,11 @@ package utils
             ],
             colors_stat: [
                 { value: "{{c:xeff}}", label: "c_xeff", icon: Embed.c_xeff },
-                { value: "{{c:xwn}}", label: "c_xwn", icon: Embed.c_xwn },
+                { value: "{{c:xwn6}}", label: "c_xwn6", icon: Embed.c_xwn6 },
+                { value: "{{c:xwn8}}", label: "c_xwn8", icon: Embed.c_xwn8 },
                 { value: "{{c:eff}}", label: "c_eff", icon: Embed.c_eff },
                 { value: "{{c:wn6}}", label: "c_wn6", icon: Embed.c_wn6 },
                 { value: "{{c:wn8}}", label: "c_wn8", icon: Embed.c_wn8 },
-                { value: "{{c:wn}}", label: "c_wn", icon: Embed.c_wn },
                 { value: "{{c:e}}", label: "c_e", icon: Embed.c_e },
                 { value: "{{c:rating}}", label: "c_rating", icon: Embed.c_rating },
                 { value: "{{c:t-rating}}", label: "c_t_rating", icon: Embed.c_t_rating },

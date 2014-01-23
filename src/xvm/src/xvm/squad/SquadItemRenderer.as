@@ -5,7 +5,6 @@
 package xvm.squad
 {
     import com.xvm.*;
-    import com.xvm.l10n.Locale;
     import com.xvm.types.veh.*;
     import com.xvm.utils.*;
     import flash.text.*;

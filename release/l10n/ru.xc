@@ -17,8 +17,8 @@
     "Chance to win": "Шансы на победу",
     //"global": "общий",
     //"per-vehicle": "по технике",
-    "chanceLive": "Живые",
-    "chanceBattleTier": "T",
+    "chanceLive": "Для живых",
+    "chanceBattleTier": "Уровень боя",
 
     // Hitlog
     "attack": "атака",

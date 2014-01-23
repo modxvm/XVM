@@ -1,7 +1,6 @@
 package xvm.profile.components
 {
     import com.xvm.*;
-    import com.xvm.l10n.*;
     import com.xvm.misc.*;
     import com.xvm.types.dossier.*;
     import com.xvm.types.stat.*;

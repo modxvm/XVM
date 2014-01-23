@@ -164,8 +164,8 @@ class com.xvm.DefaultConfig
                 // Dispay format. Macro-substitutiones allowed.
                 formatLeftNick: "{{name}}{{clan}}",
                 formatRightNick: "{{name}}{{clan}}",
-                formatLeftVehicle: "{{vehicle}}<font face='Lucida Console' size='12'> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>",
-                formatRightVehicle: "<font face='Lucida Console' size='12'><font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> </font>{{vehicle}}"
+                formatLeftVehicle: "{{vehicle}}<font face='Lucida Console' size='12'> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>",
+                formatRightVehicle: "<font face='Lucida Console' size='12'><font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> </font>{{vehicle}}"
             },
             statisticForm: {
                 showChances: false,     // Show game round win chances percentage.
@@ -176,8 +176,8 @@ class com.xvm.DefaultConfig
                 // Dispay format.
                 formatLeftNick: "{{name}}{{clan}}",
                 formatRightNick: "{{name}}{{clan}}",
-                formatLeftVehicle: "{{vehicle}}<font face='Lucida Console' size='12'> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>",
-                formatRightVehicle: "<font face='Lucida Console' size='12'><font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> </font>{{vehicle}}"
+                formatLeftVehicle: "{{vehicle}}<font face='Lucida Console' size='12'> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>",
+                formatRightVehicle: "<font face='Lucida Console' size='12'><font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> </font>{{vehicle}}"
             },
             playersPanel: {
                 alpha: 60,              // Side panel transparency. 0 - transparent, 100 - opaque.
@@ -208,16 +208,16 @@ class com.xvm.DefaultConfig
                     // 0..250 - player name field width.
                     width: 46,
                     // Dispay format.
-                    formatLeft: "<font color='{{c:xwn}}'>{{nick}}</font>",
-                    formatRight: "<font color='{{c:xwn}}'>{{nick}}</font>"
+                    formatLeft: "<font color='{{c:xwn8}}'>{{nick}}</font>",
+                    formatRight: "<font color='{{c:xwn8}}'>{{nick}}</font>"
                 },
                 // Medium2 mode.
                 medium2: {
                     // 0..250 - player name field width.
                     width: 65,
                     // Dispay format.
-                    formatLeft: "<font color='{{c:xwn}}'>{{vehicle}}</font>",
-                    formatRight: "<font color='{{c:xwn}}'>{{vehicle}}</font>"
+                    formatLeft: "<font color='{{c:xwn8}}'>{{vehicle}}</font>",
+                    formatRight: "<font color='{{c:xwn8}}'>{{vehicle}}</font>"
                 },
                 // Large mode.
                 large: {
@@ -226,8 +226,8 @@ class com.xvm.DefaultConfig
                     // Dispay format.
                     nickFormatLeft: "<font color='{{c:rating}}'>{{rating}}</font> {{nick}}",
                     nickFormatRight: "{{nick}} <font color='{{c:rating}}'>{{rating}}</font>",
-                    vehicleFormatLeft: "<font color='{{c:xwn}}'>{{vehicle}}</font>",
-                    vehicleFormatRight: "<font color='{{c:xwn}}'>{{vehicle}}</font>"
+                    vehicleFormatLeft: "<font color='{{c:xwn8}}'>{{vehicle}}</font>",
+                    vehicleFormatRight: "<font color='{{c:xwn8}}'>{{vehicle}}</font>"
                 }
             },
             finalStatistic: {

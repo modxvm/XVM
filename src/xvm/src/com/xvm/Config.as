@@ -11,7 +11,6 @@ package com.xvm
     import com.xvm.events.ObjectEvent;
     import com.xvm.io.*;
     import com.xvm.utils.*;
-    import com.xvm.l10n.Locale;
     import com.xvm.misc.*;
 
     public class Config

@@ -6,7 +6,6 @@ package xvm.company
 {
     import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import com.xvm.l10n.Locale;
     import flash.events.*;
     import flash.utils.*;
     import net.wg.gui.components.controls.*;

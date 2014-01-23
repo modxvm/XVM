@@ -6,7 +6,6 @@
 package xvm.crew
 {
     import com.xvm.*;
-    import com.xvm.l10n.Locale;
     import com.xvm.utils.*;
     import flash.display.*;
     import flash.events.MouseEvent;

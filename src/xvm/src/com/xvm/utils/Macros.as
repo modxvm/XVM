@@ -4,13 +4,12 @@
  */
 package com.xvm.utils
 {
-    import com.xvm.types.veh.VehicleData;
-    import flash.utils.*;
-    import org.idmedia.as3commons.util.StringUtils;
     import com.xvm.*;
-    import com.xvm.l10n.Locale;
     import com.xvm.utils.*;
     import com.xvm.types.stat.*;
+    import com.xvm.types.veh.*;
+    import flash.utils.*;
+    import org.idmedia.as3commons.util.StringUtils;
 
     public class Macros
     {
@@ -214,8 +213,12 @@ package com.xvm.utils
             pdata["avglvl"] = isNaN(avglvl) ? "-" : avglvl >= 10 ? "X" : avglvl.toString();
             // {{xeff}}
             pdata["xeff"] = isNaN(stat.xeff) ? "--" : stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff;
+            // {{xwn6}}
+            pdata["xwn6"] = isNaN(stat.xwn6) ? "--" : stat.xwn6 == 100 ? "XX" : (stat.xwn6 < 10 ? "0" : "") + stat.xwn6;
+            // {{xwn8}}
+            pdata["xwn8"] = isNaN(stat.xwn8) ? "--" : stat.xwn8 == 100 ? "XX" : (stat.xwn8 < 10 ? "0" : "") + stat.xwn8;
             // {{xwn}}
-            pdata["xwn"] = isNaN(stat.xwn8) ? "--" : stat.xwn8 == 100 ? "XX" : (stat.xwn8 < 10 ? "0" : "") + stat.xwn8;
+            pdata["xwn"] = pdata["xwn8"];
             // {{eff}}, {{eff:4}}
             pdata["eff"] = isNaN(stat.e) ? "----" : String(stat.e);
             pdata["eff:4"] = isNaN(stat.e) ? "----" : StringUtils.leftPad(pdata["eff"], 4, ' ');
@@ -271,10 +274,16 @@ package com.xvm.utils
             pdata["c:xeff"] = isNaN(stat.xeff) ? "" : function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#", o.darken);
             }
-            // {{c:xwn}}
-            pdata["c:xwn"] = isNaN(stat.xwn8) ? "" : function(o:MacrosFormatOptions):String {
+            // {{c:xwn6}}
+            pdata["c:xwn6"] = isNaN(stat.xwn6) ? "" : function(o:MacrosFormatOptions):String {
+                return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn6, "#", o.darken);
+            }
+            // {{c:xwn8}}
+            pdata["c:xwn8"] = isNaN(stat.xwn8) ? "" : function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8, "#", o.darken);
             }
+            // {{c:xwn}}
+            pdata["c:xwn"] = pdata["c:xwn8"]
             // {{c:eff}}
             pdata["c:eff"] = isNaN(stat.e) ? "" : function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, stat.e, "#", o.darken);
@@ -337,10 +346,16 @@ package com.xvm.utils
             pdata["a:xeff"] = isNaN(stat.xeff) ? "" : function(o:MacrosFormatOptions):Number {
                 return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xeff);
             }
-            // {{a:xwn}}
-            pdata["a:xwn"] = isNaN(stat.xwn8) ? "" : function(o:MacrosFormatOptions):Number {
+            // {{a:xwn6}}
+            pdata["a:xwn6"] = isNaN(stat.xwn6) ? "" : function(o:MacrosFormatOptions):Number {
+                return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwn6);
+            }
+            // {{a:xwn8}}
+            pdata["a:xwn8"] = isNaN(stat.xwn8) ? "" : function(o:MacrosFormatOptions):Number {
                 return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwn8);
             }
+            // {{a:xwn}}
+            pdata["a:xwn"] = pdata["a:xwn8"];
             // {{a:eff}}
             pdata["a:eff"] = isNaN(stat.e) ? "" : function(o:MacrosFormatOptions):Number {
                 return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_EFF, stat.e);
@@ -470,8 +485,9 @@ package com.xvm.utils
             "{{speed}}", "{{short-nick}}", "{{vehicle-type}}", "{{vehicle-class}}", "{{cellsize}}",
             "{{vehicle-name}}", "{{vehicle-short}}", "{{vtype-l}}", "{{battletier-min}}",
             "{{battletier-max}}", "{{avglvl}}", "{{eff}}", "{{eff:4}}", "{{teff}}, {{e}}",
-            "{{wn6}}", "{{wn8}}", "{{xeff}}", "{{xwn}}", "{{rating}}", "{{rating:3}}", "{{battles}}", "{{wins}}",
-            "{{kb}}", "{{kb:3}}", "{{t-rating}}", "{{t-rating:3}}", "{{t-battles}}", "{{t-battles:4}}",
+            "{{wn6}}", "{{wn8}}", "{{xeff}}", "{{xwn6}}", "{{xwn8}}", "{{rating}}", "{{rating:3}}",
+            "{{battles}}", "{{wins}}", "{{kb}}", "{{kb:3}}",
+            "{{t-rating}}", "{{t-rating:3}}", "{{t-battles}}", "{{t-battles:4}}",
             "{{t-wins}}", "{{t-kb}}", "{{t-kb-0}}", "{{t-kb:4}}", "{{t-hb}}", "{{t-hb:3}}", "{{tdb}}",
             "{{tdb:4}}", "{{tdv}}", "{{tfb}}", "{{tsb}}", "{{c:tdb}}", "{{c:tdv}}", "{{c:tfb}}",
             "{{c:tsb}}", "{{c:eff}}", "{{c:e}}", "{{c:wn6}}", "{{c:wn8}}", "{{c:xeff}}", "{{c:xwn}}",

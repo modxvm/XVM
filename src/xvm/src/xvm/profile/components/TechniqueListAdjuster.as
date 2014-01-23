@@ -2,7 +2,6 @@ package xvm.profile.components
 {
     import com.xvm.*;
     import com.xvm.events.*;
-    import com.xvm.l10n.Locale;
     import com.xvm.types.dossier.*;
     import flash.events.*;
     import net.wg.gui.components.advanced.*;

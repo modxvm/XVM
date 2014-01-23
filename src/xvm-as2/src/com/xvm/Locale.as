@@ -81,6 +81,8 @@ class com.xvm.Locale
             tr["Chance to win"] = "Шансы на победу";
             //tr["global"] = "общий";
             //tr["per-vehicle"] = "по технике";
+            tr["chanceLive"] = "Для живых";
+            tr["chanceBattleTier"] = "Уровень боя";
 
             // Hitlog
             tr["attack"] = "атака";
@@ -178,6 +180,10 @@ class com.xvm.Locale
         {
             /** Hardcoded EN language */
             tr["XVM_translator"] = "Maxim Schedriviy";
+
+            // Win chance
+            tr["chanceLive"] = "For alive";
+            tr["chanceBattleTier"] = "Battle tier";
 
             // Hitlog
             tr["world_collision"] = "falling";

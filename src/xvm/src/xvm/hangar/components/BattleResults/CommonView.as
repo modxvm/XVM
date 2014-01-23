@@ -1,7 +1,6 @@
 package xvm.hangar.components.BattleResults
 {
     import com.xvm.*;
-    import com.xvm.l10n.*;
     import com.xvm.utils.*;
     import flash.events.*;
     import flash.text.*;

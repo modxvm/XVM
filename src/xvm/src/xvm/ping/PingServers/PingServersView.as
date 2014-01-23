@@ -4,7 +4,6 @@ package xvm.ping.PingServers
     import com.xvm.types.cfg.*;
     import com.xvm.events.*;
     import com.xvm.utils.*;
-    import com.xvm.l10n.Locale;
     import flash.display.*;
     import flash.text.*;
     import flash.filters.*;

@@ -1,7 +1,6 @@
 package xvm.profile.components
 {
     import com.xvm.*;
-    import com.xvm.l10n.Locale;
     import flash.display.*;
     import flash.events.*;
     import flash.text.*;

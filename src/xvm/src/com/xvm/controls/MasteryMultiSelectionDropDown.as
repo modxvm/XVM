@@ -1,6 +1,6 @@
 package com.xvm.controls
 {
-    import com.xvm.l10n.Locale;
+    import com.xvm.*;
     import com.xvm.components.*;
     import scaleform.clik.data.*;
 

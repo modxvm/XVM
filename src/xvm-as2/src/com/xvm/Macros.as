@@ -156,8 +156,12 @@ class com.xvm.Macros
         pdata["avglvl"] = avglvl < 1 ? "-" : avglvl == 10 ? "X" : avglvl;
         // {{xeff}}
         pdata["xeff"] = stat.xeff == null ? "--" : stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff;
+        // {{xwn6}}
+        pdata["xwn6"] = stat.xwn6 == null ? "--" : stat.xwn6 == 100 ? "XX" : (stat.xwn6 < 10 ? "0" : "") + stat.xwn6;
+        // {{xwn8}}
+        pdata["xwn8"] = stat.xwn8 == null ? "--" : stat.xwn8 == 100 ? "XX" : (stat.xwn8 < 10 ? "0" : "") + stat.xwn8;
         // {{xwn}}
-        pdata["xwn"] = stat.xwn8 == null ? "--" : stat.xwn8 == 100 ? "XX" : (stat.xwn8 < 10 ? "0" : "") + stat.xwn8;
+        pdata["xwn"] = pdata["xwn8"];
         // {{eff}}, {{eff:4}}
         pdata["eff"] = eff <= 0 ? "----" : String(eff);
         pdata["eff:4"] = eff <= 0 ? "----" : Strings.padLeft(pdata["eff"], 4);
@@ -212,9 +216,14 @@ class com.xvm.Macros
         // {{c:xeff}}
         pdata["c:xeff"] = stat.xeff == null ? ""
             : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#", o.darken); }
-        // {{c:xwn}}
-        pdata["c:xwn"] = stat.xwn8 == null ? ""
+        // {{c:xwn6}}
+        pdata["c:xwn6"] = stat.xwn6 == null ? ""
+            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn6, "#", o.darken); }
+        // {{c:xwn8}}
+        pdata["c:xwn8"] = stat.xwn8 == null ? ""
             : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8, "#", o.darken); }
+        // {{c:xwn}}
+        pdata["c:xwn"] = pdata["c:xwn8"];
         // {{c:eff}}
         pdata["c:eff"] = eff <= 0 ? ""
             : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff, "#", o.darken); }
@@ -262,8 +271,12 @@ class com.xvm.Macros
         // Alpha
         // {{a:xeff}}
         pdata["a:xeff"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xeff); }
+        // {{a:xwn6}}
+        pdata["a:xwn6"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwn6); }
+        // {{a:xwn8}}
+        pdata["a:xwn8"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwn8); }
         // {{a:xwn}}
-        pdata["a:xwn"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwn8); }
+        pdata["a:xwn"] = pdata["a:xwn8"];
         // {{a:eff}}
         pdata["a:eff"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_EFF, eff); }
         // {{a:wn6}}

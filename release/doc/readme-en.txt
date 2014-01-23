@@ -214,9 +214,9 @@ Content:
       {{teff}}, {{e}} - player per-vehicle efficiency: http://www.koreanrandom.com/forum/topic/1643-
       {{wn6}}         - WN6 rating: http://www.koreanrandom.com/forum/topic/2575-
       {{wn8}}         - WN8 rating: http://www.koreanrandom.com/forum/topic/2575-
-      {{wn}}          - WN8 rating: http://www.koreanrandom.com/forum/topic/2575-
       {{xeff}}        - XVM Scale for efficiency (values 00-99, XX for Tops)
-      {{xwn}}         - XVM Scale for WN8 (values 00-99, XX for Tops)
+      {{xwn6}}        - XVM Scale for WN6 (values 00-99, XX for Tops)
+      {{xwn8}}        - XVM Scale for WN8 (values 00-99, XX for Tops)
       {{rating}}      - GWR (Global Win Ratio)
       {{rating:3}}    - GWR aligned from left to 3 chars
       {{battles}}     - total battles count
@@ -242,9 +242,9 @@ Content:
       {{c:e}}         - color depending on player per-vehicle efficiency
       {{c:wn6}}       - color depending on WN6 rating
       {{c:wn8}}       - color depending on WN8 rating
-      {{c:wn}}        - color depending on WN8 rating
       {{c:xeff}}      - color depending on XVM Scale for efficiency
-      {{c:xwn}}       - color depending on XVM Scale for WN8
+      {{c:xwn6}}      - color depending on XVM Scale for WN6
+      {{c:xwn8}}      - color depending on XVM Scale for WN8
       {{c:rating}}    - color depending on GWR
       {{c:kb}}        - color depending on kilo-battles
       {{c:avglvl}}    - color depending on average level of tanks
@@ -268,16 +268,16 @@ Content:
 
   "format" field examples:
     1. Show number of kilo-battles, efficiency and GWR without changing a color:
-      "{{kb}} {{xwn}} {{rating}}"
+      "{{kb}} {{xwn8}} {{rating}}"
     2. The same, but with each number colored by its value:
-      "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating}}</font>"
+      "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:rating}}'>{{rating}}</font>"
     3. Same as 2, but with aligned columns:
-      "<font face='Consolas' size='11'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>"
+      "<font face='Consolas' size='11'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>"
     4. Show GWR colored by xwn:
-      "<font color='{{c:xwn}}'>{{rating}}</font>"
+      "<font color='{{c:xwn8}}'>{{rating}}</font>"
 
   Dynamic color and transparency usage examples:
-    "color": "{{c:xwn}}" - color depending on xwn
+    "color": "{{c:xwn8}}" - color depending on xwn
     "alpha": "{{a:hp}}" - transparency depending on current health
 
   Clan and players icons.
