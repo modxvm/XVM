@@ -1,4 +1,4 @@
-﻿Contenu :
+Contenu :
   1. Présentation
   2. Installation
   3. Mise à jour
@@ -214,9 +214,11 @@
       {{eff}}         - ER du joueur : http://wot-news.com/index.php/stat/calc/en/ 
       {{eff:4}}       - ER du joueur aligné à gauche sur 4 caractères
       {{teff}}, {{e}} - ER du véhicule : http://www.koreanrandom.com/forum/topic/1643-
-      {{wn}}          - classement WN6 : http://www.koreanrandom.com/forum/topic/2575-
+      {{wn6}}         - classement WN6 : http://www.koreanrandom.com/forum/topic/2575-
+      {{wn8}}         - classement WN8 : http://www.koreanrandom.com/forum/topic/2575-   
+      {{wn}}          - classement WN8 : http://www.koreanrandom.com/forum/topic/2575-
       {{xeff}}        - XVM Scale pour l'ER (de 00 à 99, XX pour les tops serveur)
-      {{xwn}}         - XVM Scale pour le WN6 (de 00 à 99, XX pour les tops serveur)
+      {{xwn}}         - XVM Scale pour le WN8 (de 00 à 99, XX pour les tops serveur)
       {{rating}}      - GWR (Global Win Ratio) = % de victoire global du joueur
       {{rating:3}}    - GWR aligné à gauche sur 3 caractères
       {{battles}}     - nombre total de batailles
@@ -240,9 +242,11 @@
       {{c:tdb}}, {{c:tdv}}, {{c:tfb}}, {{c:tsb}} - couleurs dynamiques pour ces macros
       {{c:eff}}       - couleur en fonction de l'ER du joueur
       {{c:e}}         - couleur en fonction de l'ER du tank
-      {{c:wn}}        - couleur en fonction du classement WN6
+      {{c:wn6}}       - couleur en fonction du classement WN6
+      {{c:wn8}}       - couleur en fonction du classement WN8
+      {{c:wn}}        - couleur en fonction du classement WN8
       {{c:xeff}}      - couleur en fonction de l'XVM Scale pour l'ER
-      {{c:xwn}}       - couleur en fonction de l'XVM Scale pour le WN6
+      {{c:xwn}}       - couleur en fonction de l'XVM Scale pour le WN8
       {{c:rating}}    - couleur en fonction du GWR
       {{c:kb}}        - couleur en fonction du nombre de kilo-batailles
       {{c:avglvl}}    - couleur en fonction du tier moyen des tanks joués
