@@ -409,6 +409,10 @@ class _Stat(object):
             if not 'wn6' in stat:
                 stat['wn6'] = stat['wn']
             del stat['wn']
+        if stat.get('wn6', 0) <= 0:
+            stat['wn6'] = None
+        if stat.get('wn8', 0) <= 0:
+            stat['wn8'] = None
 
         player = BigWorld.player()
         from avatar import PlayerAvatar
