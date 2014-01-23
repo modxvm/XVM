@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Color settings.
  * Настройки цветов.
  */
@@ -222,12 +222,12 @@
     // Dynamic color by WN8 rating
     // Динамический цвет по рейтингу WN8
     "wn8": [
-      { "value": 315,  "color": ${"def.colorRating.very_bad" } },  //    0 - 314  - very bad
-      { "value": 755,  "color": ${"def.colorRating.bad"      } },  //  315 - 754  - bad
-      { "value": 1315, "color": ${"def.colorRating.normal"   } },  //  755 - 1314 - normal
-      { "value": 1965, "color": ${"def.colorRating.good"     } },  // 1315 - 1964 - good
-      { "value": 2525, "color": ${"def.colorRating.very_good"} },  // 1965 - 2524 - very good
-      { "value": 9999, "color": ${"def.colorRating.unique"   } }   // 2525 - *    - unique
+      { "value": 300,  "color": ${"def.colorRating.very_bad" } },  //    0 - 299  - very bad
+      { "value": 900,  "color": ${"def.colorRating.bad"      } },  //  300 - 899  - bad
+      { "value": 1250, "color": ${"def.colorRating.normal"   } },  //  900 - 1249 - normal
+      { "value": 1900, "color": ${"def.colorRating.good"     } },  // 1250 - 1899 - good
+      { "value": 2350, "color": ${"def.colorRating.very_good"} },  // 1900 - 2349 - very good
+      { "value": 9999, "color": ${"def.colorRating.unique"   } }   // 2350 - *    - unique
     ],
     // Dynamic color by TEFF (E) rating
     // Динамический цвет по рейтингу TEFF (E)
