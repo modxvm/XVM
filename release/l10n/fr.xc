@@ -17,17 +17,17 @@
     "Chance to win": "Chances de victoire",
     //"global": "globales",
     //"per-vehicle": "par véhicule",
-    "chanceLive": "Live",
-    "chanceBattleTier": "T",
+    "chanceLive": "par chars restants",
+    "chanceBattleTier": "par tiers",
 
     // Hitlog
     "attack": "attaque",
     "fire": "incendie",
     "ramming": "collision",
     "world_collision": "chute",
-    "Hits": "Tirs",
-    "Total": "Total",
-    "Last": "Dernier",
+    "Hits": "Tirs ",
+    "Total": "Total ",
+    "Last": "Dernier ",
 
     // Hp Left
     "hpLeftTitle": "Points de vie restants :",
