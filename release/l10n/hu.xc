@@ -17,7 +17,7 @@
     "Chance to win": "Esély a győzelemre",
     //"global": "Globálisan",
     //"per-vehicle": "Járművenként",
-    "chanceLive": "Live",
+    "chanceLive": "Élő",
     "chanceBattleTier": "T",
 
     // Hitlog

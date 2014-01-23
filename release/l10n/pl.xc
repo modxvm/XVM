@@ -18,7 +18,7 @@
     //"global": "globalnie",
     //"per-vehicle": "per-pojazd",
     "chanceLive": "Szansa na wygraną (na żywo)",
-    "chanceBattleTier": "Tier:",
+    "chanceBattleTier": "Tier",
 
     // Hitlog
     "attack": "atak",

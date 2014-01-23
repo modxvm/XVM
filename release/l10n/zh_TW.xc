@@ -17,7 +17,7 @@
     "Chance to win": "獲勝率",
     //"global": "總勝率",
     //"per-vehicle": "車輛勝率",
-    "chanceLive": "Live",
+    "chanceLive": "存活率",
     "chanceBattleTier": "分房階級",
 
     // Hitlog
@@ -25,7 +25,7 @@
     "fire": "火災",
     "ramming": "撞擊",
     "world_collision": "墜落",
-    "Hits": "擊穿數",
+    "Hits": "擊中數",
     "Total": "總傷害",
     "AvgDmg": "平均傷害",
     "Last": "前次傷害",
@@ -35,7 +35,7 @@
 
     // Capture
     "enemyBaseCapture": "佔領敵軍基地中!",
-    "enemyBaseCaptured": "勝利! 已佔領敵軍基地!",
+    "enemyBaseCaptured": "勝利! 已攻陷敵軍基地!",
     "allyBaseCapture": "敵軍佔領基地中!",
     "allyBaseCaptured": "失敗! 自軍基地已淪陷!",
     "Timeleft": "剩餘時間",
@@ -57,8 +57,8 @@
 
     // UserInfo
     "General stats": "統計",
-    "Summary": "總結",
-    "Avg level": "平均車階",
+    "Summary": "總計",
+    "Avg level": "平均車輛階級",
     "WN6": "WN6",
     "WN8": "WN8",
     "EFF": "EFF",
@@ -85,8 +85,8 @@
     "Average damage assisted": "平均協助傷害",
     "    by tracking": "    射擊履帶",
     "    by spotting": "    偵查協助",
-    "Average HE shells fired (splash)": "平均高爆傷害 (含爆風濺射)",
-    "Average HE shells received (splash)": "平均受到高爆傷害 (含爆風濺射)",
+    "Average HE shells fired (splash)": "平均高爆傷害 (爆風濺射)",
+    "Average HE shells received (splash)": "平均受到高爆傷害 (爆風濺射)",
     "Average penetrations per battle": "平均每場穿透數",
     "Average hits received": "平均被擊中數",
     "Average penetrations received": "平均被擊中穿透數",
