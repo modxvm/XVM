@@ -38,7 +38,7 @@
     // Rising speed of displayed damage (float up speed).
     // Время отображения отлетающего урона.
     "speed": 2,
-    // Maximimum distance of target for which damage rises.
+    // Maximum distance of target for which damage rises.
     // Расстояние, на которое отлетает урон.
     "maxRange": 40,
     // Text for normal damage (see description of macros in the readme-en.txt).
@@ -72,10 +72,10 @@
       // Максимальный масштаб (по умолчанию 100).
       "maxScale": 100,
       // Offset along the X axis (?)
-      // Cмещение по оси X (?)
+      // Смещение по оси X (?)
       "scaleX": 0,
       // Offset along the Y axis (?)
-      // Cмещение по оси Y (?)
+      // Смещение по оси Y (?)
       "scaleY": 16,
       // Параметры тени.
       "shadow": {
@@ -89,7 +89,7 @@
     },
     // Индикатор здоровья.
     "healthBar": {
-      "visible": false,                  //   false - не отображать
+      "visible": false,                 //   false - не отображать
       "x": -41,                         //   положение по оси X
       "y": -33,                         //   положение по оси Y
       "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)

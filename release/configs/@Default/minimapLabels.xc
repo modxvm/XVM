@@ -120,7 +120,7 @@
           "deadsquad":
            { "enabled": true, "color": "0x000000", "distance": 0, "angle": 45, "alpha": 80, "blur": 3, "strength": 3 }
         },
-        // Field offset ralative to current icon (except lost - relative to enemy last seen position).
+        // Field offset relative to current icon (except lost - relative to enemy last seen position).
         // Смещение полей относительно текущей иконки (кроме lost и dead- относительно последних координат видимой позиции).
         "offset": {
           "ally":           {"x": 3, "y": -1},
@@ -176,7 +176,7 @@
         // Increase sizes in case of field being partially cut off.
         // -------------------------------------------------------------------------------------
         // Уменьшайте размеры, если при изменении размера миникарты изображение карты сжимается.
-        // Увеличивайте размеры, если содержмиое поля обрезается.
+        // Увеличивайте размеры, если содержимое поля обрезается.
         "width": 100,
         "height": 30
       }

@@ -42,7 +42,7 @@
         // Never seen this enemy.
         // Этот враг никогда не светился.
         "neverSeen": "<font face='$FieldFont' size='24' color='#DEDEDE'>*</font>",
-        // This enemy was seen atleast once.
+        // This enemy was seen at least once.
         // Этот враг светился хотя бы один раз и отмечен на миникарте как потерянный.
         "lost": "",
         // Enemy currently revealed at minimap.

@@ -34,7 +34,7 @@
   // Панель счёта в бою.
   "fragCorrelation": {
     // true - hide textfields "Allies | Enemies".
-    // true - cпрятать два текстовых поля "Союзники | Противники".
+    // true - спрятать два текстовых поля "Союзники | Противники".
     "hideTeamTextFields": true
   },
   // Ingame crits panel by "expert" skill.

@@ -38,7 +38,7 @@
     // Rising speed of displayed damage (float up speed).
     // Время отображения отлетающего урона.
     "speed": 2,
-    // Maximimum distance of target for which damage rises.
+    // Maximum distance of target for which damage rises.
     // Расстояние, на которое отлетает урон.
     "maxRange": 40,
     // Text for normal damage (see description of macros in the readme-en.txt).
@@ -72,10 +72,10 @@
       // Максимальный масштаб (по умолчанию 100).
       "maxScale": 100,
       // Offset along the X axis (?)
-      // Cмещение по оси X (?)
+      // Смещение по оси X (?)
       "scaleX": 0,
       // Offset along the Y axis (?)
-      // Cмещение по оси Y (?)
+      // Смещение по оси Y (?)
       "scaleY": 16,
       // Параметры тени.
       "shadow": {
@@ -178,7 +178,7 @@
       // Text field with the name of the player.
       // Текстовое поле с именем игрока.
       {
-        "name": "Player name",           // название текстового поля, ни на что не влияет
+        "name": "Player name",          // название текстового поля, ни на что не влияет
         "visible": true,                // false - не отображать
         "x": 0,                         // положение по оси X
         "y": -36,                       // положение по оси Y

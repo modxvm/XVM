@@ -21,10 +21,10 @@
       // false - не отображать иконки игрока/клана в окне загрузки боя.
       "show": true,
       // Position on the X axis, relative to the vehicle icon.
-      // Положение по оси X оносительно иконки танка.
+      // Положение по оси X относительно иконки танка.
       "x": 0,
       // Position on the Y axis, relative to the vehicle icon.
-      // Положение по оси Y оносительно иконки танка.
+      // Положение по оси Y относительно иконки танка.
       "y": 6,
       // Position on the X axis for right side (positive values run to the *inside* of the table).
       // Положение по оси X для правых ушей (положительные значения поместят иконку *внутрь* панели).
