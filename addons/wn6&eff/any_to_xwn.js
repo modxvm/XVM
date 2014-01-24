@@ -3,19 +3,38 @@
 // нужный текст
 var text_replace1="{{xwn}}";
 var text_replace2="{{c:xwn}}";
+var text_replace3="{{a:xwn}}";
 
 var text_samples1 = [    // заменяемый текст
                         "{{wn}}",
+                        "{{wn6}}",
+                        "{{wn8}}",
                         "{{eff:4}}",
                         "{{eff}}",
                         "{{xeff}}",
-                        "{{xwn}}"
+                        "{{xwn}}",
+                        "{{xwn6}}",
+                        "{{xwn8}}"
                     ];
 var text_samples2 = [    // заменяемый текст
                         "{{c:wn}}",
+                        "{{c:wn6}}",
+                        "{{c:wn8}}",
                         "{{c:eff}}",
                         "{{c:xeff}}",
-                        "{{c:xwn}}"
+                        "{{c:xwn}}",
+                        "{{c:xwn6}}",
+                        "{{c:xwn8}}"
+                    ];
+var text_samples3 = [    // заменяемый текст
+                        "{{a:wn}}",
+                        "{{a:wn6}}",
+                        "{{a:wn8}}",
+                        "{{a:eff}}",
+                        "{{a:xeff}}",
+                        "{{a:xwn}}",
+                        "{{a:xwn6}}",
+                        "{{a:xwn8}}"
                     ];
 
 var i=0;
@@ -54,7 +73,13 @@ do {
           re=new RegExp(text_samples2[j]);
           line_replace=line_replace.replace(re,text_replace2);
           line_replace=line_replace.replace(re,text_replace2);
-      }   
+      }
+      // меняем третий макрос
+      for ( j = 0; j < text_samples3.length; j++) {
+          re=new RegExp(text_samples3[j]);
+          line_replace=line_replace.replace(re,text_replace3);
+          line_replace=line_replace.replace(re,text_replace3);
+      }
       fr.WriteLine(line_replace);
     }
     fo.Close();

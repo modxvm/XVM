@@ -1,9 +1,9 @@
 // Скрипт для замены одного представления рейтинга на другое
 
 // нужный текст
-var text_replace1="{{eff:4}}";
-var text_replace2="{{c:eff}}";
-var text_replace3="{{a:eff}}";
+var text_replace1="{{wn6}}";
+var text_replace2="{{c:wn6}}";
+var text_replace3="{{a:wn6}}";
 
 var text_samples1 = [    // заменяемый текст
                         "{{wn}}",
