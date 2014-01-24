@@ -23,4 +23,4 @@ popd > /dev/null
 asdoc -source-path ../../src/xvm/src -doc-sources ../../src/xvm/src -library-path+="$PLAYERGLOBAL_HOME/10.2/playerglobal.swc" -library-path+=../../src/xvm/lib -output ../../doc
 
 #5. del lib folder
-rm -rf ../../src/xvm/lib
+rm -rf ../../src/xvm/lib/
