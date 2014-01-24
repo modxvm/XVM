@@ -16,7 +16,7 @@ revision=$(svnversion | head -c 4)
 popd > /dev/null
 
 #3. Define Flex SDK path
-export FLEXSDK="/opt/apache-flex-$flex_version"
+export FLEX_HOME="/opt/apache-flex-$flex_version"
 archive_postfix="_flex$flex_version"
 
 #4. Build
