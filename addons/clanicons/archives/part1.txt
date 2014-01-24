@@ -16,7 +16,3 @@
 ../icons/RU/D*.png
 ../icons/RU/E*.png
 ../icons/RU/F*.png
-../icons/RU/G*.png
-../icons/RU/H*.png
-../icons/RU/I*.png
-../icons/RU/J*.png

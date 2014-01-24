@@ -10,8 +10,8 @@ cd archives
 
 datenow=`date +%Y%m%d`
 
-echo "Creating VN package"
-7za a -tzip -mm=deflate -mx0 -mmt=on -mtc=off -ssw -r clanicons-full-vn-$datenow.zip  ../icons/VTC/res_mods/ readme.txt
+#echo "Creating VN package"
+#7za a -tzip -mm=deflate -mx0 -mmt=on -mtc=off -ssw -r clanicons-full-vn-$datenow.zip  ../icons/VTC/res_mods/ readme.txt
 echo "Creating KR package"
 7za a -tzip -mm=deflate -mx0 -mmt=on -mtc=off -ssw -r clanicons-full-kr-$datenow.zip  ../icons/KR/res_mods/ readme.txt
 echo "Creating SG package"
@@ -23,6 +23,7 @@ echo "Creating EU package"
 echo "Creating RU package"
 7za a -tzip -mm=deflate -mx0 -mmt=on -mtc=off -ssw -r clanicons-full-ru-$datenow-part1.zip  @part1.txt readme.txt
 7za a -tzip -mm=deflate -mx0 -mmt=on -mtc=off -ssw -r clanicons-full-ru-$datenow-part2.zip  @part2.txt readme.txt
+7za a -tzip -mm=deflate -mx0 -mmt=on -mtc=off -ssw -r clanicons-full-ru-$datenow-part3.zip  @part3.txt readme.txt
 
 cd ..
 echo "Packages are created"

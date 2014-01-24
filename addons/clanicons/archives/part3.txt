@@ -1,0 +1,7 @@
+../icons/RU/T*.png
+../icons/RU/U*.png
+../icons/RU/V*.png
+../icons/RU/W*.png
+../icons/RU/X*.png
+../icons/RU/Y*.png
+../icons/RU/Z*.png
