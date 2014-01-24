@@ -95,7 +95,7 @@ package com.xvm
             "chanceLive": "Для живых",
             "chanceBattleTier": "Уровень боя",
 
-            /** xvm-as2
+            /* xvm-as2
             // Hitlog
             "attack": "атака",
             "fire": "пожар",
