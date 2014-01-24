@@ -1,6 +1,6 @@
 ﻿/*
 Copyright (c) 2005 JSON.org
-Copyright (c) 2013 m.schedriviy@gmail.com (JSONx extension)
+Copyright (c) 2013 m.schedriviy(at)gmail.com (JSONx extension)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -30,7 +30,7 @@ USAGE:
 		trace(ex.name + ":" + ex.message + ":" + ex.at + ":" + ex.text);
 	}
 
-added JSONx extensions 2012-2013 by Maxim Schedriviy <m.schedriviy@gmail.com>, www.modxvm.com
+added JSONx extensions 2012-2013 by Maxim Schedriviy "m.schedriviy(at)gmail.com", www.modxvm.com
     1. Comments:
         Block: /* *_/
         Line: //
@@ -39,7 +39,7 @@ added JSONx extensions 2012-2013 by Maxim Schedriviy <m.schedriviy@gmail.com>, w
         External: "obj": ${"filename":"path.to.object"}
         Root object: "obj": ${"."}
 
-ported to AS3 2013-08-23 by Maxim Schedriviy <m.schedriviy@gmail.com>, www.modxvm.com
+ported to AS3 2013-08-23 by Maxim Schedriviy "m.schedriviy(at)gmail.com", www.modxvm.com
 */
 
 package com.xvm.io

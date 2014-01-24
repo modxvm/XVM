@@ -1,6 +1,6 @@
 ﻿/**
  * @author LEMAXHO
- * @author Maxim Schedriviy <m.schedriviy@gmail.com>
+ * @author Maxim Schedriviy "m.schedriviy(at)gmail.com"
  * @author Pavel Máca
  */
 package xvm.crew

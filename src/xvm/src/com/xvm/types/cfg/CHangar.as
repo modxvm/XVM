@@ -1,6 +1,6 @@
 /**
  * XVM Config - "hangar" section
- * @author Maxim Schedriviy <m.schedriviy@gmail.com>
+ * @author Maxim Schedriviy "m.schedriviy(at)gmail.com"
  */
 package com.xvm.types.cfg
 {

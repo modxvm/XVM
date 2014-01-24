@@ -1,6 +1,6 @@
 ﻿/**
  * XVM Sandbox Detector
- * @author Maxim Schedriviy <m.schedriviy@gmail.com>
+ * @author Maxim Schedriviy "m.schedriviy(at)gmail.com"
  * @author Michael Pavlyshko
  * @author Pavel Máca
  */

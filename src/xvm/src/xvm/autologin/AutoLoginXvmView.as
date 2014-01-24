@@ -1,6 +1,6 @@
 /**
  * XVM - lobby
- * @author Maxim Schedriviy <m.schedriviy@gmail.com>
+ * @author Maxim Schedriviy "m.schedriviy(at)gmail.com"
  */
 package xvm.autologin
 {

@@ -21,13 +21,13 @@ package com.xvm.utils
         *   // Instead of positional (the order of arguments to print f, you can also use propertie of an object):
         *   var userInfo : Object = {
         	"name": "Arthur Debert",
-        	"email": "arthur@stimuli.com.br",
+        	"email": "arthur(at)stimuli.com.br",
         	"website":"http://www.stimuli.com.br/",
         	"ocupation": "developer"
         }
         *
         *   printf("My name is %(name)s and I am a %(ocupation)s. You can read more on my personal %(website)s, or reach me through my %(email)s", userInfo);
-        *   // outputs: "My name is Arthur Debert and I am a developer. You can read more on my personal http://www.stimuli.com.br/, or reach me through my arthur@stimuli.com.br"
+        *   // outputs: "My name is Arthur Debert and I am a developer. You can read more on my personal http://www.stimuli.com.br/, or reach me through my arthur(at)stimuli.com.br"
         *   // you can also use date parts:
         *   var date : Date = new Date();
         *   printf("Today is %d/%m/%Y", date, date, date)

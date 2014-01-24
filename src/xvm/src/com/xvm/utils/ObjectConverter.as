@@ -2,7 +2,7 @@
  * Generic Object to Class Instance Converter
  * url http://sinnus.blogspot.com/2012/01/how-to-create-typed-as3-objects-from.html
  * source https://gist.github.com/sinnus/1556693
- * enhanced and ported to Scaleform 29.08.2013 by Maxim Schedriviy <m.schedriviy@gmail.com>
+ * enhanced and ported to Scaleform 29.08.2013 by Maxim Schedriviy "m.schedriviy(at)gmail.com"
  */
 package com.xvm.utils
 {

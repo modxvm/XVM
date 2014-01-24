@@ -1,7 +1,7 @@
 ﻿/**
  * XVM Scale for ratings
  * http://www.koreanrandom.com/forum/topic/2625-/
- * @author Maxim Schedriviy <m.schedriviy@gmail.com>
+ * @author Maxim Schedriviy "m.schedriviy(at)gmail.com"
  */
 package com.xvm.utils
 {
