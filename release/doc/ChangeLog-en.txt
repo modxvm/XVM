@@ -1,26 +1,21 @@
-XVM-5.0.2-test3:
-  [NEW FUNCTIONS]
+XVM-dev:
   * default WN rating changed to WN8
-  * added macros: {{wn6}}, {{wn8}, {{c:wn6}}, {{c:wn8}}, {{a:wn6}}, {{a:wn8}},
-      {{xwn6}}, {{xwn8}}, {{c:xwn6}}, {{c:xwn8}}, {{a:xwn6}}, {{a:xwn8}},
-  * macros {{wn}}, {{c:wn}}, {{a:wn}}, {{xwn}}, {{c:xwn}}, {{a:xwn}} are deprecated
-  * new options:
-      hangar/hidePricesInTechTree - Hide price button in tech tree
-      battleResults/showTotals - Show totals for your battle efficiency in first page
 
-XVM-5.0.2-test2:
-  [NEW FUNCTIONS]
-  * localization: added Chinese(Taiwan), Malay and Portuguese languages
-  * new options:
-      hangar/masteryMarkInTankCarousel - Show mastery mark in tank carousel
-      hangar/masteryMarkInTechTree - Show mastery mark in tech tree
-      userInfo/showExtraDataInProfile - Show extra data in profile (experimental)
-
-XVM-5.0.2-test1:
+XVM-5.0.2:
   * adaptation to WoT 0.8.10
 
   [NEW FUNCTIONS]
+  * new options:
+      battleResults/showTotals - Show totals for your battle efficiency in first page
+      hangar/hidePricesInTechTree - Hide price button in tech tree
+      hangar/masteryMarkInTankCarousel - Show mastery mark in tank carousel
+      hangar/masteryMarkInTechTree - Show mastery mark in tech tree
+      userInfo/showExtraDataInProfile - Show extra data in profile (experimental)
+  * added macros: {{wn6}}, {{wn8}, {{c:wn6}}, {{c:wn8}}, {{a:wn6}}, {{a:wn8}},
+      {{xwn6}}, {{xwn8}}, {{c:xwn6}}, {{c:xwn8}}, {{a:xwn6}}, {{a:xwn8}},
+  * macros {{wn}}, {{c:wn}}, {{a:wn}}, {{xwn}}, {{c:xwn}}, {{a:xwn}} are deprecated
   * login screen: input fields accept only the required characters
+  * localization: added Chinese(Taiwan), Malay and Portuguese languages
 
   [OTHER]
   * changed vehicle names format in config
