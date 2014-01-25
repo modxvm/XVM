@@ -8,11 +8,14 @@ package net.wg.gui.lobby.tankman
    import net.wg.gui.components.carousels.PortraitsCarousel;
    import scaleform.clik.events.ButtonEvent;
    import scaleform.clik.events.ListEvent;
+   import net.wg.gui.components.controls.VO.ActionPriceVO;
+   import net.wg.data.constants.IconsTypes;
    import scaleform.clik.data.DataProvider;
    import net.wg.gui.components.carousels.CarouselBase;
    import net.wg.data.constants.Currencies;
    import flash.events.Event;
    import net.wg.gui.events.PersonalCaseEvent;
+   import flash.display.InteractiveObject;
 
 
    public class PersonalCaseDocs extends UIComponent implements IViewStackContent
@@ -48,19 +51,8 @@ package net.wg.gui.lobby.tankman
 
       private var selectedIcon:Object = null;
 
-      override protected function draw() : void {
-         super.draw();
-      }
-
-      override protected function configUI() : void {
-         super.configUI();
-         this.submitBtn.addEventListener(ButtonEvent.CLICK,this.submitBtn_buttonClickHandler);
-         this.firstnames.addEventListener(PersonalCaseInputList.NAME_SELECTED,this.firstnames_nameSelectedHandler);
-         this.lastnames.addEventListener(PersonalCaseInputList.NAME_SELECTED,this.lastnames_nameSelectedHandler);
-      }
-
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          if(this.submitBtn)
          {
             this.submitBtn.removeEventListener(ButtonEvent.CLICK,this.submitBtn_buttonClickHandler);
@@ -92,12 +84,6 @@ package net.wg.gui.lobby.tankman
          this.actionPriceCredits.dispose();
       }
 
-      private function cleanTempData() : void {
-         this.selectedFirstName = null;
-         this.selectedLastName = null;
-         this.selectedIcon = null;
-      }
-
       public function update(param1:Object) : void {
          if(param1 == null)
          {
@@ -111,8 +97,10 @@ package net.wg.gui.lobby.tankman
          this.lastnames.searchText.maxChars = this.model.lastNameMaxChars;
          this.gold.text = this.model.priceOfGold.toString();
          this.credits.text = this.model.priceOfCredits.toString();
-         this.actionPriceGold.setData(this.model.actionPrc,this.model.priceOfGold,this.model.defPriceOfGold,IconText.GOLD);
-         this.actionPriceCredits.setData(this.model.actionPrc,this.model.priceOfCredits,this.model.defPriceOfCredits,IconText.CREDITS);
+         var _loc2_:ActionPriceVO = new ActionPriceVO(this.model.actionPrc,this.model.priceOfGold,this.model.defPriceOfGold,IconsTypes.GOLD);
+         var _loc3_:ActionPriceVO = new ActionPriceVO(this.model.actionPrc,this.model.priceOfCredits,this.model.defPriceOfCredits,IconsTypes.CREDITS);
+         this.actionPriceGold.setData(_loc2_);
+         this.actionPriceCredits.setData(_loc3_);
          this.actionPriceGold.visible = (this.model.priceOfGold) && (this.model.actionPrc);
          this.actionPriceCredits.visible = (this.model.priceOfCredits) && (this.model.actionPrc);
          this.gold.visible = !this.actionPriceGold.visible;
@@ -124,6 +112,23 @@ package net.wg.gui.lobby.tankman
             this.updatePortraitsDocs();
             this.isDataProviderUpdated = true;
          }
+      }
+
+      override protected function draw() : void {
+         super.draw();
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.submitBtn.addEventListener(ButtonEvent.CLICK,this.submitBtn_buttonClickHandler);
+         this.firstnames.addEventListener(PersonalCaseInputList.NAME_SELECTED,this.firstnames_nameSelectedHandler);
+         this.lastnames.addEventListener(PersonalCaseInputList.NAME_SELECTED,this.lastnames_nameSelectedHandler);
+      }
+
+      private function cleanTempData() : void {
+         this.selectedFirstName = null;
+         this.selectedLastName = null;
+         this.selectedIcon = null;
       }
 
       private function updatePortraitsDocs() : void {
@@ -148,16 +153,6 @@ package net.wg.gui.lobby.tankman
          return this.model.userGold >= this.model.priceOfGold || this.model.userCredits >= this.model.priceOfCredits;
       }
 
-      private function firstnames_nameSelectedHandler(param1:Event) : void {
-         this.selectedFirstName = this.firstnames.selectedItem;
-         this.checkSelectedItems();
-      }
-
-      private function lastnames_nameSelectedHandler(param1:Event) : void {
-         this.selectedLastName = this.lastnames.selectedItem;
-         this.checkSelectedItems();
-      }
-
       private function checkSelectedItems() : void {
          this.submitBtn.enabled = this.checkAllData();
       }
@@ -180,6 +175,24 @@ package net.wg.gui.lobby.tankman
             return true;
          }
          return false;
+      }
+
+      private function checkOriginalIcon(param1:String=null) : Boolean {
+         if(this.model.originalIconFile.indexOf(param1,0) == -1)
+         {
+            return true;
+         }
+         return false;
+      }
+
+      private function firstnames_nameSelectedHandler(param1:Event) : void {
+         this.selectedFirstName = this.firstnames.selectedItem;
+         this.checkSelectedItems();
+      }
+
+      private function lastnames_nameSelectedHandler(param1:Event) : void {
+         this.selectedLastName = this.lastnames.selectedItem;
+         this.checkSelectedItems();
       }
 
       private function submitBtn_buttonClickHandler(param1:ButtonEvent) : void {
@@ -222,12 +235,8 @@ package net.wg.gui.lobby.tankman
          this.checkSelectedItems();
       }
 
-      private function checkOriginalIcon(param1:String=null) : Boolean {
-         if(this.model.originalIconFile.indexOf(param1,0) == -1)
-         {
-            return true;
-         }
-         return false;
+      public function getComponentForFocus() : InteractiveObject {
+         return null;
       }
    }
 

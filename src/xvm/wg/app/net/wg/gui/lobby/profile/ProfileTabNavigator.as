@@ -69,6 +69,9 @@ package net.wg.gui.lobby.profile
          var _loc3_:Array = null;
          var _loc4_:Object = null;
          var _loc5_:* = 0;
+         var _loc6_:String = null;
+         var _loc7_:* = 0;
+         var _loc8_:String = null;
          super.draw();
          if((isInvalid(INIT_DATA_INV)) && (this.initData))
          {
@@ -76,23 +79,23 @@ package net.wg.gui.lobby.profile
             _loc2_ = _loc1_.length;
             _loc3_ = [];
             _loc5_ = 0;
-            while(_loc5_ < _loc2_)
+            _loc6_ = this.initData.selectedAlias;
+            _loc7_ = 0;
+            while(_loc7_ < _loc2_)
             {
-               _loc4_ = _loc1_[_loc5_];
-               _loc3_.push(
-                  {
-                     "label":_loc4_.label,
-                     "alias":_loc4_.alias,
-                     "linkage":this._sectionsDataUtil.register(_loc4_.alias),
-                     "tooltip":_loc4_.tooltip
-                  }
-               );
-               _loc5_++;
+               _loc4_ = _loc1_[_loc7_];
+               _loc8_ = _loc4_.alias;
+               _loc3_.push(new SectionInfo(_loc8_,this._sectionsDataUtil.register(_loc8_),_loc4_.label,_loc4_.tooltip));
+               if(_loc6_ == _loc8_)
+               {
+                  _loc5_ = _loc7_;
+               }
+               _loc7_++;
             }
             this.bar.dataProvider = new DataProvider(_loc3_);
             if(_loc3_.length > 0)
             {
-               this.bar.selectedIndex = 0;
+               this.bar.selectedIndex = _loc5_;
             }
          }
          if(isInvalid(InvalidationType.SIZE))
@@ -109,7 +112,7 @@ package net.wg.gui.lobby.profile
       private function onTabBarIndexChanged(param1:IndexEvent) : void {
          if(param1.index != -1)
          {
-            this.viewStack.show(this._sectionsDataUtil.getLinkageByAlias(param1.data.alias));
+            this.viewStack.show(this._sectionsDataUtil.getLinkageByAlias(SectionInfo(param1.data).alias));
          }
       }
 
@@ -124,8 +127,9 @@ package net.wg.gui.lobby.profile
             this.initData.dispose();
             this.initData = null;
          }
-         super.onDispose();
          this.viewStack.dispose();
+         this.viewStack = null;
+         super.onDispose();
       }
 
       public function setAvailableSize(param1:Number, param2:Number) : void {

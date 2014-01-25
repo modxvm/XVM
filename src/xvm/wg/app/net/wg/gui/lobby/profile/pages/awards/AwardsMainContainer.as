@@ -154,7 +154,7 @@ package net.wg.gui.lobby.profile.pages.awards
          invalidateData();
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          var _loc1_:AwardsTileListBlock = null;
          while(this.blocks.length > 0)
          {
@@ -168,7 +168,7 @@ package net.wg.gui.lobby.profile.pages.awards
             _loc1_ = null;
          }
          this._allMedalsData = null;
-         super.dispose();
+         super.onDispose();
       }
 
       public function set gapBetweenBlocks(param1:uint) : void {

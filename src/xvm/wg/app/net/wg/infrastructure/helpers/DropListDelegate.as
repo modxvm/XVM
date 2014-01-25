@@ -24,7 +24,11 @@ package net.wg.infrastructure.helpers
 
       private var _dropElementLinkage:String = null;
 
-      public function dispose() : void {
+      public final function dispose() : void {
+         this.onDispose();
+      }
+
+      protected function onDispose() : void {
          if(App.cursor.getAttachedSprite() != null)
          {
             if(App.cursor.getAttachedSprite()  is  IDisposable)

@@ -41,8 +41,7 @@ package net.wg.gui.components.common.video.advanced
       }
 
       private function videoPlayerStatusHandler(param1:VideoPlayerStatusEvent) : void {
-         var _loc2_:uint = 0;
-         _loc2_ = videoPlayer.status;
+         var _loc2_:uint = videoPlayer.status;
          if(_loc2_ == PlayerStatus.PLAYING)
          {
             if(!this.timer)
@@ -87,7 +86,7 @@ package net.wg.gui.components.common.video.advanced
          this.controlBar.currentTime = 0;
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.stopTimer();
          this.timer = null;
          this.controlBar.playButton.removeEventListener(ButtonEvent.CLICK,this.playButtonClickHandler);
@@ -96,7 +95,7 @@ package net.wg.gui.components.common.video.advanced
          videoPlayer.removeEventListener(VideoPlayerStatusEvent.STATUS_CHANGED,this.videoPlayerStatusHandler);
          videoPlayer.removeEventListener(VideoPlayerEvent.VOLUME_CHANGED,this.volumeChangeHandler);
          videoPlayer.removeEventListener(VideoPlayerEvent.META_DATA_CHANGED,this.videoMetaDataChangeHandler);
-         super.dispose();
+         super.onDispose();
       }
    }
 

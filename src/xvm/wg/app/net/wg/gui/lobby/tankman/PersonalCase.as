@@ -18,12 +18,13 @@ package net.wg.gui.lobby.tankman
    import scaleform.clik.events.IndexEvent;
    import net.wg.gui.events.ViewStackEvent;
    import net.wg.gui.events.PersonalCaseEvent;
-   import net.wg.infrastructure.interfaces.entity.IDisposable;
    import scaleform.clik.data.DataProvider;
    import net.wg.gui.components.carousels.CarouselBase;
    import scaleform.clik.utils.Padding;
    import net.wg.utils.IUtils;
    import net.wg.data.constants.Linkages;
+   import net.wg.utils.ILocale;
+   import flash.text.TextFormat;
    import flash.events.EventDispatcher;
    import flash.events.Event;
 
@@ -47,6 +48,8 @@ package net.wg.gui.lobby.tankman
 
       private static const SKILLS_CAROUSEL_POSITION:Point;
 
+      private static const SPECIALIZATION_MARGIN:Number = 4;
+
       public var tabButtonVisibleFalse:TabButton;
 
       public var drop_skills_button_bg_line:Sprite;
@@ -61,8 +64,6 @@ package net.wg.gui.lobby.tankman
 
       public var levelValue:TextField;
 
-      public var vehicleType:TextField;
-
       public var inTankLabel:TextField;
 
       public var inTankValue:TextField;
@@ -72,6 +73,18 @@ package net.wg.gui.lobby.tankman
       public var view:ViewStack;
 
       public var skills_mc:SkillsCarousel;
+
+      public var specialization:PersonalCaseSpecialization;
+
+      public var modifiersHeaders:TextField;
+
+      public var modifiersValues:TextField;
+
+      public var modifiersNames:TextField;
+
+      private const MODIFIER_COLOR_NORMAL:String = "#FFFFFF";
+
+      private const MODIFIER_COLOR_ALERT:String = "#b70000";
 
       public var unloadBtn:SoundButtonEx;
 
@@ -88,8 +101,6 @@ package net.wg.gui.lobby.tankman
       public var accTeachingOfSkillBtn:SoundButtonEx;
 
       public var usingLevelLoadingBar:StatusIndicator;
-
-      public var contourIcon:UILoaderAlt;
 
       public var roleIcon:MovieClip;
 
@@ -132,12 +143,8 @@ package net.wg.gui.lobby.tankman
          this.tabButtonVisibleFalse = null;
          this.icon1.dispose();
          this.rankIcon.dispose();
-         this.contourIcon.dispose();
-         if(this.currentView)
-         {
-            IDisposable(this.currentView).dispose();
-            this.currentView = null;
-         }
+         this.specialization.dispose();
+         this.currentView = null;
          data = null;
          stats = null;
          retrainingData = null;
@@ -195,11 +202,6 @@ package net.wg.gui.lobby.tankman
          getDocumentsDataS();
       }
 
-      override public function setFocus() : void {
-         super.setFocus();
-         App.utils.focusHandler.setFocus(this);
-      }
-
       override public function as_setCommonData(param1:Object) : void {
          super.as_setCommonData(param1);
          if(isFirtsRun)
@@ -252,7 +254,7 @@ package net.wg.gui.lobby.tankman
             this.skills_mc.visible = false;
          }
          this.initializeDropSkillsButton(this.__isEnableDropSkillsButton());
-         if((data.wg_freeXpToTankman) && data.skills.length > 0 && data.skillsCountForLearn == 0 && Number(data.specializationLevel) == 100)
+         if((data.wg_freeXpToTankman) && data.skills.length > 0 && data.skillsCountForLearn == 0 && data.specializationLevel == 100)
          {
             this.accTeachingOfSkillBtn.visible = true;
             this.accTeachingOfSkillBtn.enabled = true;
@@ -342,19 +344,14 @@ package net.wg.gui.lobby.tankman
             this.rankIcon.visible = true;
             this.rankIcon.source = data.rankIconFile;
          }
-         if(data.nativeVehicle.contourIconFile != null)
-         {
-            this.contourIcon.visible = true;
-         }
          this._name.text = data.firstname + " " + data.lastname;
          this.rank.text = data.rank;
          this.role.text = data.role;
-         this.levelValue.text = data.specializationLevel + "%";
-         this.vehicleType.text = data.nativeVehicle.userName;
-         this.contourIcon.source = data.nativeVehicle.contourIconFile;
+         this.levelValue.text = data.specializationLevel.toString() + "%";
+         this.specialization.setData(data.nativeVehicle.userName,data.nativeVehicle.contourIconFile);
          this.usingLevelLoadingBar.maximum = 100;
          this.usingLevelLoadingBar.minimum = 0;
-         this.usingLevelLoadingBar.position = Number(data.specializationLevel);
+         this.usingLevelLoadingBar.position = data.specializationLevel;
          this.roleIcon.gotoAndStop(data.roleType);
          this.bg_switcher.gotoAndPlay(this.currentNation);
          this.descrSkillButton.visible = true;
@@ -378,6 +375,78 @@ package net.wg.gui.lobby.tankman
          {
             this.dismissBtn.enabled = true;
          }
+         this.updateModifiers();
+      }
+
+      private function updateModifiers() : void {
+         var _loc5_:String = null;
+         var _loc6_:* = false;
+         var _loc7_:uint = 0;
+         var _loc8_:String = null;
+         var _loc1_:ILocale = App.utils.locale;
+         this.modifiersHeaders.htmlText = _loc1_.makeString(MENU.TANKMANPERSONALCASE_MODIFIERSHEADER);
+         this.modifiersValues.htmlText = "";
+         this.modifiersNames.htmlText = "";
+         var _loc2_:Number = 0;
+         var _loc3_:* = "";
+         var _loc4_:* = false;
+         if((data.modifiers) && data.modifiers.length > 0)
+         {
+            _loc6_ = false;
+            _loc7_ = 0;
+            while(_loc7_ < data.modifiers.length)
+            {
+               if(data.modifiers[_loc7_].val != 0)
+               {
+                  _loc4_ = true;
+                  if(data.modifiers[_loc7_].val > 0)
+                  {
+                     _loc3_ = "+";
+                     _loc5_ = this.MODIFIER_COLOR_NORMAL;
+                  }
+                  else
+                  {
+                     _loc3_ = "";
+                     _loc5_ = this.MODIFIER_COLOR_ALERT;
+                     _loc6_ = true;
+                  }
+                  _loc2_ = _loc2_ + data.modifiers[_loc7_].val;
+                  if(_loc7_ != data.modifiers.length-1)
+                  {
+                     this.modifiersHeaders.htmlText = this.modifiersHeaders.htmlText + "<br/>";
+                  }
+                  this.modifiersValues.htmlText = this.modifiersValues.htmlText + ("<font color=\"" + _loc5_ + "\">" + _loc3_ + data.modifiers[_loc7_].val + "%</font><br/>");
+                  this.modifiersNames.htmlText = this.modifiersNames.htmlText + (_loc1_.makeString(MENU.tankmanpersonalcase_modifiers(data.modifiers[_loc7_].id)) + "<br/>");
+               }
+               _loc7_++;
+            }
+            if(_loc4_)
+            {
+               this.modifiersHeaders.htmlText = this.modifiersHeaders.htmlText + ("<font size=\"16\"> </font>" + _loc1_.makeString(MENU.TANKMANPERSONALCASE_MODIFIERSRESULT));
+               _loc8_ = _loc6_?this.MODIFIER_COLOR_ALERT:this.MODIFIER_COLOR_NORMAL;
+               this.modifiersValues.htmlText = this.modifiersValues.htmlText + ("<font color=\"" + _loc8_ + "\" size=\"16\">" + (data.specializationLevel + _loc2_).toString() + "%</font>");
+            }
+            else
+            {
+               this.addNoModifiersInfo();
+            }
+         }
+         else
+         {
+            this.addNoModifiersInfo();
+         }
+         this.modifiersHeaders.height = Math.max(this.modifiersNames.textHeight,Math.max(this.modifiersHeaders.textHeight,this.modifiersValues.textHeight)) + 5;
+         this.modifiersValues.height = this.modifiersHeaders.height;
+         this.modifiersNames.height = this.modifiersHeaders.height;
+         this.specialization.y = Math.round(this.modifiersHeaders.y + this.modifiersHeaders.height + SPECIALIZATION_MARGIN);
+      }
+
+      private function addNoModifiersInfo() : void {
+         this.modifiersValues.htmlText = "-";
+         this.modifiersNames.htmlText = MENU.TANKMANPERSONALCASE_NOMODIFIERS;
+         var _loc1_:TextFormat = this.modifiersNames.getTextFormat();
+         _loc1_.leading = 0;
+         this.modifiersNames.setTextFormat(_loc1_);
       }
 
       private function enableButtons(param1:Boolean, param2:Boolean) : Boolean {

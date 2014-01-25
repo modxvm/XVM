@@ -10,11 +10,12 @@ package net.wg.gui.lobby.hangar.maintenance
    import net.wg.utils.IEventCollector;
    import flash.events.MouseEvent;
    import net.wg.data.constants.SoundTypes;
+   import net.wg.gui.components.controls.VO.ActionPriceVO;
    import net.wg.data.constants.Currencies;
+   import net.wg.gui.lobby.hangar.maintenance.data.ModuleVO;
    import net.wg.gui.lobby.hangar.maintenance.events.OnEquipmentRendererOver;
    import scaleform.gfx.MouseEventEx;
    import net.wg.gui.events.ModuleInfoEvent;
-   import net.wg.gui.lobby.hangar.maintenance.data.ModuleVO;
 
 
    public class EquipmentListItemRenderer extends SoundListItemRenderer
@@ -59,6 +60,7 @@ package net.wg.gui.lobby.hangar.maintenance
       }
 
       override protected function draw() : void {
+         var _loc1_:ActionPriceVO = null;
          if(isInvalid(InvalidationType.DATA))
          {
             if(data)
@@ -78,25 +80,30 @@ package net.wg.gui.lobby.hangar.maintenance
                this.actionPrice.visible = false;
                if(this.module.target == 3)
                {
-                  this.actionPrice.setData(this.module.actionPrc,this.module.price,this.module.defPrice,this.module.currency);
+                  _loc1_ = new ActionPriceVO(this.module.actionPrc,this.module.price,this.module.defPrice,this.module.currency);
+                  this.actionPrice.setData(_loc1_);
                   this.priceMC.visible = !this.actionPrice.visible;
-                  if(this.module.currency == Currencies.GOLD)
+                  this.priceMC.text = App.utils.locale.integer(this.module.price);
+                  this.priceMC.textColor = this.module.price < this.module.userCredits[this.module.currency]?Currencies.TEXT_COLORS[this.module.currency]:Currencies.TEXT_COLORS[Currencies.ERROR];
+                  if(this.module.status == MENU.MODULEFITS_NOT_WITH_INSTALLED_EQUIPMENT)
                   {
-                     this.priceMC.text = App.utils.locale.gold(this.module.price);
-                     this.priceMC.textColor = this.module.price < this.module.userCredits[1]?Currencies.TEXT_COLORS[Currencies.GOLD]:Currencies.TEXT_COLORS[Currencies.ERROR];
-                     this.actionPrice.textColorType = this.module.price < this.module.userCredits[1]?ActionPrice.TEXT_COLOR_TYPE_ICON:ActionPrice.TEXT_COLOR_TYPE_ERROR;
+                     this.actionPrice.textColorType = ActionPrice.TEXT_COLOR_TYPE_DISABLE;
                   }
                   else
                   {
-                     this.priceMC.text = App.utils.locale.integer(this.module.price);
-                     this.priceMC.textColor = this.module.price < this.module.userCredits[0]?Currencies.TEXT_COLORS[Currencies.CREDITS]:Currencies.TEXT_COLORS[Currencies.ERROR];
-                     this.actionPrice.textColorType = this.module.price < this.module.userCredits[0]?ActionPrice.TEXT_COLOR_TYPE_ICON:ActionPrice.TEXT_COLOR_TYPE_ERROR;
+                     if(this.module.price < this.module.userCredits[this.module.currency])
+                     {
+                        this.actionPrice.textColorType = ActionPrice.TEXT_COLOR_TYPE_ICON;
+                     }
+                     else
+                     {
+                        this.actionPrice.textColorType = ActionPrice.TEXT_COLOR_TYPE_ERROR;
+                     }
                   }
                   if(this.module.status == MENU.MODULEFITS_NOT_WITH_INSTALLED_EQUIPMENT)
                   {
                      this.priceMC.textColor = 6710886;
                   }
-                  this.actionPrice.textColorType = this.module.status == MENU.MODULEFITS_NOT_WITH_INSTALLED_EQUIPMENT?ActionPrice.TEXT_COLOR_TYPE_DISABLE:ActionPrice.TEXT_COLOR_TYPE_ICON;
                   this.priceMC.icon = this.module.currency;
                   this.priceMC.validateNow();
                   this.targetMC.gotoAndStop("shop");
@@ -142,6 +149,10 @@ package net.wg.gui.lobby.hangar.maintenance
          }
       }
 
+      private function get module() : ModuleVO {
+         return data as ModuleVO;
+      }
+
       private function onRollOver(param1:MouseEvent) : void {
          owner.dispatchEvent(new OnEquipmentRendererOver(OnEquipmentRendererOver.ON_EQUIPMENT_RENDERER_OVER,this.module.id,this.module.prices,this.module.inventoryCount,this.module.vehicleCount,this.module.slotIndex));
       }
@@ -161,10 +172,6 @@ package net.wg.gui.lobby.hangar.maintenance
                dispatchEvent(new ModuleInfoEvent(ModuleInfoEvent.SHOW_INFO,this.module.id));
             }
          }
-      }
-
-      private function get module() : ModuleVO {
-         return data as ModuleVO;
       }
    }
 

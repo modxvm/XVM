@@ -17,6 +17,12 @@ package net.wg.data.constants
 
       public static const STRATEGIC:String = "strategic";
 
+      public static const COMMON:String = "common";
+
+      public static const CONDITIONS:String = "conditions";
+
+      public static const REQUIREMENTS:String = "requirements";
+
       public static const ACTION:int = 1;
 
       public static const BATTLE_QUEST:int = 2;
@@ -25,7 +31,7 @@ package net.wg.data.constants
 
       public static const CLR_TASK_TF_WITH_STATUS:int = 6644049;
 
-      public static const CLR_TASK_TF_NORMAL:int = 12104084;
+      public static const CLR_TASK_TF_NORMAL:int = 15327935;
 
       public static const CLR_STATUS_NOT_AVAILABLE:int = 6381142;
 

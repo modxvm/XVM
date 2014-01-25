@@ -3,6 +3,7 @@ package net.wg.gui.tutorial.windows
    import net.wg.gui.components.controls.UILoaderAlt;
    import net.wg.gui.tutorial.controls.BattleBonusItem;
    import flash.text.TextField;
+   import flash.display.InteractiveObject;
 
 
    public class TutorialGreetingDialog extends TutorialDialog
@@ -67,7 +68,11 @@ package net.wg.gui.tutorial.windows
       override protected function configUI() : void {
          super.configUI();
          this.restartHintField.text = App.utils.locale.makeString(BATTLE_TUTORIAL.DIALOGS_GREETING_RESTART_HINT_TEXT);
-         App.utils.focusHandler.setFocus(submitBtn);
+      }
+
+      override protected function onInitModalFocus(param1:InteractiveObject) : void {
+         super.onInitModalFocus(param1);
+         setFocus(submitBtn);
       }
 
       override protected function onPopulate() : void {

@@ -2,7 +2,6 @@ package net.wg.gui.prebattle.company
 {
    import net.wg.gui.prebattle.meta.impl.CompaniesWindowMeta;
    import net.wg.gui.prebattle.meta.ICompaniesWindowMeta;
-   import net.wg.data.daapi.base.DAAPIDataProvider;
    import net.wg.gui.messenger.ChannelComponent;
    import flash.display.MovieClip;
    import net.wg.gui.components.controls.ScrollBar;
@@ -11,9 +10,8 @@ package net.wg.gui.prebattle.company
    import net.wg.gui.components.controls.TextInput;
    import net.wg.gui.components.controls.CheckBox;
    import net.wg.gui.components.controls.DropdownMenu;
-   import scaleform.clik.events.InputEvent;
-   import flash.ui.Keyboard;
-   import scaleform.clik.constants.InputValue;
+   import net.wg.data.daapi.base.DAAPIDataProvider;
+   import flash.display.InteractiveObject;
    import scaleform.clik.utils.Padding;
    import net.wg.gui.lobby.messengerBar.WindowGeometryInBar;
    import net.wg.gui.events.MessengerBarEvent;
@@ -27,8 +25,11 @@ package net.wg.gui.prebattle.company
    import scaleform.clik.events.ListEvent;
    import flash.events.FocusEvent;
    import flash.events.Event;
+   import scaleform.clik.events.InputEvent;
+   import flash.ui.Keyboard;
    import flash.geom.Point;
    import net.wg.utils.IEventCollector;
+   import scaleform.clik.constants.InputValue;
 
 
    public class CompaniesListWindow extends CompaniesWindowMeta implements ICompaniesWindowMeta
@@ -39,8 +40,6 @@ package net.wg.gui.prebattle.company
          isCentered = false;
          this.companiesDP = new DAAPIDataProvider();
       }
-
-      private var companiesDP:DAAPIDataProvider;
 
       public var channelComponent:ChannelComponent;
 
@@ -61,6 +60,8 @@ package net.wg.gui.prebattle.company
       public var filterInBattleCheckbox:CheckBox;
 
       public var division:DropdownMenu;
+
+      private var companiesDP:DAAPIDataProvider;
 
       private var defaultFilterText:String = "";
 
@@ -92,35 +93,15 @@ package net.wg.gui.prebattle.company
          }
       }
 
-      override public function setFocus() : void {
-         super.setFocus();
-         if(this.channelComponent)
-         {
-            this.channelComponent.setFocusToInput();
-         }
+      public function as_setDefaultFilter(param1:String, param2:Boolean, param3:uint) : void {
+         this.defaultFilterText = param1;
+         this.selectedFilterInBattleCheckbox = param2;
+         this.defaultSelectedIndex = param3;
       }
 
-      override public function handleInput(param1:InputEvent) : void {
-         if(param1.details.code == Keyboard.ESCAPE && param1.details.value == InputValue.KEY_DOWN)
-         {
-            if(this.cmpList.isOpenedState)
-            {
-               this.cmpList.unselectedRenderers();
-               param1.preventDefault();
-               param1.stopImmediatePropagation();
-               return;
-            }
-         }
-         super.handleInput(param1);
-         if(param1.handled)
-         {
-            return;
-         }
-         if(param1.details.code == Keyboard.F1 && param1.details.value == InputValue.KEY_UP)
-         {
-            showFAQWindowS();
-            param1.handled = true;
-         }
+      override protected function onInitModalFocus(param1:InteractiveObject) : void {
+         super.onInitModalFocus(param1);
+         setFocus(this.channelComponent.getComponentForFocus());
       }
 
       override protected function onPopulate() : void {
@@ -192,7 +173,6 @@ package net.wg.gui.prebattle.company
          this.filterInBattleCheckbox.selected = this.selectedFilterInBattleCheckbox;
          this.filterTextField.text = this.defaultFilterText;
          addEventListener(CompanyDropDownEvent.SHOW_DROP_DOWN,this.onShowDropwDownHandler);
-         this.setFocus();
       }
 
       override protected function onDispose() : void {
@@ -218,25 +198,6 @@ package net.wg.gui.prebattle.company
          super.onDispose();
       }
 
-      public function as_setDefaultFilter(param1:String, param2:Boolean, param3:uint) : void {
-         this.defaultFilterText = param1;
-         this.selectedFilterInBattleCheckbox = param2;
-         this.defaultSelectedIndex = param3;
-      }
-
-      private function handleDivisionsChange(param1:ListEvent) : void {
-         refreshCompaniesListS(this.filterTextField.text,this.filterInBattleCheckbox.selected,this.division.selectedIndex);
-      }
-
-      private function refreshButton_buttonClickHandler(param1:ButtonEvent) : void {
-         refreshCompaniesListS(this.filterTextField.text,this.filterInBattleCheckbox.selected,this.division.selectedIndex);
-      }
-
-      private function groupsList_listClickHandler(param1:CompanyEvent) : void {
-         joinCompanyS(param1.prbID);
-         this.cmpList.updateRenderer();
-      }
-
       private function coolDownProcess(param1:Number) : void {
          this.enableFilterButtons(false);
          App.utils.scheduler.scheduleTask(this.enableFilterButtons,param1,true);
@@ -257,6 +218,19 @@ package net.wg.gui.prebattle.company
          this.refreshButton.enabled = param1;
          this.filterButton.enabled = param1 == false?false:!(this.filterTextField.text == "");
          this.division.enabled = param1;
+      }
+
+      private function handleDivisionsChange(param1:ListEvent) : void {
+         refreshCompaniesListS(this.filterTextField.text,this.filterInBattleCheckbox.selected,this.division.selectedIndex);
+      }
+
+      private function refreshButton_buttonClickHandler(param1:ButtonEvent) : void {
+         refreshCompaniesListS(this.filterTextField.text,this.filterInBattleCheckbox.selected,this.division.selectedIndex);
+      }
+
+      private function groupsList_listClickHandler(param1:CompanyEvent) : void {
+         joinCompanyS(param1.prbID);
+         this.cmpList.updateRenderer();
       }
 
       private function handleCreateButtonClick(param1:ButtonEvent) : void {
@@ -300,6 +274,29 @@ package net.wg.gui.prebattle.company
          _loc3_.enableDisposingForObj(param1.dropDownref);
          param1.dropDownref.x = _loc2_.x;
          param1.dropDownref.y = _loc2_.y;
+      }
+
+      override public function handleInput(param1:InputEvent) : void {
+         if(param1.details.code == Keyboard.ESCAPE && param1.details.value == InputValue.KEY_DOWN)
+         {
+            if(this.cmpList.isOpenedState)
+            {
+               this.cmpList.unselectedRenderers();
+               param1.preventDefault();
+               param1.stopImmediatePropagation();
+               return;
+            }
+         }
+         super.handleInput(param1);
+         if(param1.handled)
+         {
+            return;
+         }
+         if(param1.details.code == Keyboard.F1 && param1.details.value == InputValue.KEY_UP)
+         {
+            showFAQWindowS();
+            param1.handled = true;
+         }
       }
    }
 

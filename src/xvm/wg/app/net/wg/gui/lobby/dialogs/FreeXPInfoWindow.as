@@ -7,8 +7,9 @@ package net.wg.gui.lobby.dialogs
    import net.wg.gui.components.windows.Window;
    import scaleform.clik.events.ButtonEvent;
    import scaleform.clik.constants.ConstrainMode;
+   import flash.display.DisplayObject;
+   import flash.events.IEventDispatcher;
    import flash.events.FocusEvent;
-   import scaleform.gfx.FocusManager;
    import scaleform.clik.events.InputEvent;
    import flash.ui.Keyboard;
    import scaleform.clik.constants.InputValue;
@@ -37,14 +38,6 @@ package net.wg.gui.lobby.dialogs
       public var textInfo:TextField;
 
       public var cancelButton:SoundButtonEx;
-
-      override public function setFocus() : void {
-         super.setFocus();
-         if(this.submitButton)
-         {
-            this.setFocusToSubmitButton();
-         }
-      }
 
       private function updateElements(param1:Boolean=false) : void {
          this.cancelButton.visible = param1;
@@ -90,8 +83,8 @@ package net.wg.gui.lobby.dialogs
          _loc1_ = _loc1_ + window.contentPadding.top + window.contentPadding.bottom;
          window.updateSize(window.width,_loc1_,false);
          window.validateNow();
-         Window(window).visible = true;
-         Window(window).addEventListener(FocusEvent.FOCUS_IN,this.focusInHandler);
+         DisplayObject(window).visible = true;
+         IEventDispatcher(window).addEventListener(FocusEvent.FOCUS_IN,this.focusInHandler);
          App.utils.scheduler.envokeInNextFrame(this.setFocusToSubmitButton);
       }
 
@@ -100,18 +93,13 @@ package net.wg.gui.lobby.dialogs
       }
 
       private function setFocusToSubmitButton() : void {
-         FocusManager.setModalClip(this);
-         if((window) && (window.getBackground()))
-         {
-            window.getBackground().gotoAndPlay("enable");
-         }
-         App.utils.focusHandler.setFocus(this.submitButton);
+         setFocus(this.submitButton);
       }
 
       override protected function onDispose() : void {
          App.utils.scheduler.cancelTask(this.updateWindowSize);
          App.utils.scheduler.cancelTask(this.setFocusToSubmitButton);
-         Window(window).removeEventListener(FocusEvent.FOCUS_IN,this.focusInHandler);
+         IEventDispatcher(window).removeEventListener(FocusEvent.FOCUS_IN,this.focusInHandler);
          this.submitButton.removeEventListener(ButtonEvent.CLICK,this.onClickSubmitButton);
          this.cancelButton.dispose();
          this.submitButton.dispose();
@@ -126,7 +114,7 @@ package net.wg.gui.lobby.dialogs
          if(param1.details.code == Keyboard.ESCAPE && param1.details.value == InputValue.KEY_DOWN)
          {
             param1.preventDefault();
-            param1.stopImmediatePropagation();
+            param1.handled = true;
             onCancelButtonS();
             return;
          }

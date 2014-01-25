@@ -50,13 +50,13 @@ package net.wg.gui.lobby.settings.components
          return "[WG KeyInput " + name + "]";
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.clearEventListeners();
          if(this.hasEventListener(Event.SELECT))
          {
             this.removeEventListener(Event.SELECT,this.onButtonSelect);
          }
-         super.dispose();
+         super.onDispose();
       }
 
       override public function set enabled(param1:Boolean) : void {

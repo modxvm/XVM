@@ -1,9 +1,10 @@
 package net.wg.gui.components.common.video.advanced
 {
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
    import net.wg.gui.components.common.video.SimpleVideoPlayer;
 
 
-   public class AbstractPlayerController extends Object
+   public class AbstractPlayerController extends Object implements IDisposable
    {
           
       public function AbstractPlayerController(param1:SimpleVideoPlayer) {
@@ -13,7 +14,11 @@ package net.wg.gui.components.common.video.advanced
 
       protected var videoPlayer:SimpleVideoPlayer;
 
-      public function dispose() : void {
+      public final function dispose() : void {
+         this.onDispose();
+      }
+
+      protected function onDispose() : void {
          this.videoPlayer = null;
       }
    }

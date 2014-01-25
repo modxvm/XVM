@@ -81,8 +81,8 @@ package net.wg.gui.lobby.messengerBar.carousel
          return this.model;
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          if(this.model)
          {
             this.model.dispose();

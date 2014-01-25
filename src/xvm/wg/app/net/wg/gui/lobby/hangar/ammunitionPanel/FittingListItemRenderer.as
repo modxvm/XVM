@@ -6,12 +6,13 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
    import flash.text.TextField;
    import net.wg.gui.components.controls.IconText;
    import net.wg.gui.components.controls.ActionPrice;
-   import net.wg.gui.events.DeviceEvent;
    import net.wg.utils.IEventCollector;
    import scaleform.clik.events.ButtonEvent;
+   import net.wg.gui.events.DeviceEvent;
    import flash.events.MouseEvent;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.gui.lobby.profile.components.SimpleLoader;
+   import net.wg.gui.components.controls.VO.ActionPriceVO;
    import net.wg.data.constants.FittingTypes;
    import net.wg.gui.components.controls.UILoaderAlt;
    import net.wg.data.constants.Currencies;
@@ -72,6 +73,23 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
          this.onRollOut();
       }
 
+      override protected function onDispose() : void {
+         var _loc1_:IEventCollector = App.utils.events;
+         if(this.destroyButton)
+         {
+            _loc1_.removeEvent(this.destroyButton,ButtonEvent.CLICK,this.onRemoveButtonClick);
+         }
+         if(this.removeButton)
+         {
+            _loc1_.removeEvent(this.removeButton,ButtonEvent.CLICK,this.onRemoveButtonClick);
+         }
+         if(this.actionPrice)
+         {
+            this.actionPrice.dispose();
+         }
+         super.onDispose();
+      }
+
       public function onRemoveButtonClick(param1:Object) : void {
          var _loc2_:Boolean = param1.target == this.removeButton && !data.removable;
          dispatchEvent(new DeviceEvent(DeviceEvent.DEVICE_REMOVE,data,data,_loc2_));
@@ -81,8 +99,18 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
           
       }
 
+      override public function set enabled(param1:Boolean) : void {
+         if(this.actionPrice)
+         {
+            this.actionPrice.textColorType = param1?ActionPrice.TEXT_COLOR_TYPE_ICON:ActionPrice.TEXT_COLOR_TYPE_DISABLE;
+         }
+         super.enabled = param1;
+         mouseEnabled = true;
+         mouseChildren = true;
+         buttonMode = enabled;
+      }
+
       override protected function configUI() : void {
-         var _loc1_:IEventCollector = null;
          super.configUI();
          if(this.actionPrice)
          {
@@ -90,7 +118,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             this.actionPrice.validateNow();
             this.actionPrice.visible = false;
          }
-         _loc1_ = App.utils.events;
+         var _loc1_:IEventCollector = App.utils.events;
          if(this.destroyButton)
          {
             this.destroyButton.focusTarget = this;
@@ -154,8 +182,8 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
       private function setup() : void {
          var _loc1_:* = 0;
          var _loc2_:String = null;
-         var _loc3_:String = null;
-         var _loc4_:* = NaN;
+         var _loc3_:* = NaN;
+         var _loc4_:ActionPriceVO = null;
          if(!data)
          {
             return;
@@ -176,8 +204,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
                {
                   _loc1_ = -3;
                }
-               _loc3_ = this.descField.text.substr(0,this.descField.getLineLength(0) + this.descField.getLineLength(1) + _loc1_) + "...";
-               this.descField.text = _loc3_;
+               this.descField.text = this.descField.text.substr(0,this.descField.getLineLength(0) + this.descField.getLineLength(1) + _loc1_) + "...";
             }
          }
          if(FittingTypes.MANDATORY_SLOTS.indexOf(data.type) > -1)
@@ -241,8 +268,9 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
                }
                if(this.actionPrice)
                {
-                  _loc4_ = data.hasOwnProperty("actionPrc")?data.actionPrc:0;
-                  this.actionPrice.setData(_loc4_,data.price,data.defPrice,data.currency);
+                  _loc3_ = data.hasOwnProperty("actionPrc")?data.actionPrc:0;
+                  _loc4_ = new ActionPriceVO(_loc3_,data.price,data.defPrice,data.currency);
+                  this.actionPrice.setData(_loc4_);
                   this.actionPrice.setup(this);
                }
                this.targetMC.gotoAndPlay(SHOP_STATE);
@@ -301,34 +329,6 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             this.removeButton.validateNow();
          }
          this.errorField.visible = !data.isSelected;
-      }
-
-      override public function set enabled(param1:Boolean) : void {
-         if(this.actionPrice)
-         {
-            this.actionPrice.textColorType = param1?ActionPrice.TEXT_COLOR_TYPE_ICON:ActionPrice.TEXT_COLOR_TYPE_DISABLE;
-         }
-         super.enabled = param1;
-         mouseEnabled = true;
-         mouseChildren = true;
-         buttonMode = enabled;
-      }
-
-      override public function dispose() : void {
-         var _loc1_:IEventCollector = App.utils.events;
-         if(this.destroyButton)
-         {
-            _loc1_.removeEvent(this.destroyButton,ButtonEvent.CLICK,this.onRemoveButtonClick);
-         }
-         if(this.removeButton)
-         {
-            _loc1_.removeEvent(this.removeButton,ButtonEvent.CLICK,this.onRemoveButtonClick);
-         }
-         if(this.actionPrice)
-         {
-            this.actionPrice.dispose();
-         }
-         super.dispose();
       }
 
       private function onClick(param1:MouseEvent) : void {

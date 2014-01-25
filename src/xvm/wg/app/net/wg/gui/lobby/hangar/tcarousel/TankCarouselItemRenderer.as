@@ -6,13 +6,16 @@ package net.wg.gui.lobby.hangar.tcarousel
    import flash.text.TextField;
    import flash.display.MovieClip;
    import net.wg.gui.components.controls.ActionPrice;
-   import flash.text.TextFormat;
+   import net.wg.gui.lobby.hangar.tcarousel.data.VehicleCarouselVO;
    import net.wg.data.constants.SoundTypes;
    import net.wg.data.constants.SoundManagerStates;
-   import flash.display.FrameLabel;
-   import flash.filters.DropShadowFilter;
-   import flash.filters.GlowFilter;
+   import flash.text.TextFormat;
+   import net.wg.gui.components.controls.VO.ActionPriceVO;
+   import net.wg.data.constants.IconsTypes;
    import __AS3__.vec.Vector;
+   import flash.display.FrameLabel;
+   import flash.filters.GlowFilter;
+   import flash.filters.DropShadowFilter;
 
 
    public class TankCarouselItemRenderer extends DragableListItemRenderer
@@ -23,7 +26,25 @@ package net.wg.gui.lobby.hangar.tcarousel
          focusIndicator = this.focusIndicator1;
       }
 
-      private var _id:String = "";
+      public var vehicleIcon:TankIcon;
+
+      public var slotPrice:IconText;
+
+      public var statusText:TextField;
+
+      public var emptyInfoTxt:TextField;
+
+      public var bg_switcher:MovieClip;
+
+      public var hitMC:MovieClip;
+
+      public var clanLockUI:ClanLockUI;
+
+      public var actionPrice:ActionPrice;
+
+      public var focusIndicator1:MovieClip = null;
+
+      private var _id:Number = 0;
 
       private var _image:String = "";
 
@@ -49,6 +70,8 @@ package net.wg.gui.lobby.hangar.tcarousel
 
       private var _elite:Boolean = false;
 
+      public var dataVO:VehicleCarouselVO = null;
+
       private var _premium:Boolean = false;
 
       private var _tankType:String = "";
@@ -67,25 +90,7 @@ package net.wg.gui.lobby.hangar.tcarousel
 
       private var _slotActionPricePrc:Number = 0;
 
-      public var vehicleIcon:TankIcon;
-
-      public var slotPrice:IconText;
-
-      public var statusText:TextField;
-
-      public var emptyInfoTxt:TextField;
-
-      public var bg_switcher:MovieClip;
-
-      public var hitMC:MovieClip;
-
-      public var clanLockUI:ClanLockUI;
-
-      public var actionPrice:ActionPrice;
-
-      public var focusIndicator1:MovieClip = null;
-
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          if(this.vehicleIcon)
          {
             this.vehicleIcon.dispose();
@@ -110,128 +115,45 @@ package net.wg.gui.lobby.hangar.tcarousel
             this.clanLockUI = null;
          }
          this.focusIndicator1 = null;
-         super.dispose();
+         super.onDispose();
       }
 
-      override protected function configUI() : void {
-         var _loc2_:Object = null;
-         super.configUI();
-         var _loc1_:TextFormat = new TextFormat();
-         _loc1_.leading = -6;
-         if(this.statusText)
-         {
-            this.statusText.autoSize = "center";
-            this.statusText.text = this._stat == "undamaged"?"":"#menu:tankCarousel/vehicleStates/" + this._stat;
-            this.statusText.setTextFormat(_loc1_);
-            this.statusText.y = _height - this.statusText.textHeight >> 1;
-            if(this._stat)
-            {
-               _loc2_ = this.getStatColor(this._stat);
-               this.statusText.textColor = _loc2_.color;
-               this.statusText.filters = _loc2_.filterArray;
-            }
-         }
-         this.soundType = SoundTypes.CAROUSEL_BTN;
-         this.soundId = SoundManagerStates.CAROUSEL_CELL_BTN;
-         if(this.hitMC)
-         {
-            this.hitArea = this.hitMC;
-         }
-      }
-
-      override public function setData(param1:Object) : void {
+      public function setDataVO(param1:VehicleCarouselVO) : void {
          if(param1)
          {
-            this.visible = true;
-            this.data = param1;
-            this.id = param1.id;
-            label = param1.label;
-            this.image = param1.image;
-            this.nation = param1.nation;
-            this.level = param1.level;
-            this.stat = param1.stat;
-            this.current = param1.current;
-            this._stateLevel = param1.stateLevel;
-            this._doubleXPReceived = param1.doubleXPReceived;
-            this._compactDescr = param1.compactDescr;
-            this.favorite = param1.favorite;
-            this._canSell = param1.canSell;
-            this._clanLock = param1.clanLock;
-            this._elite = param1.elite;
-            this._premium = param1.premium;
-            this._exp = param1.exp;
-            empty = param1.empty;
-            this.buyTank = param1.buyTank;
-            this.buySlot = param1.buySlot;
-            this._tankType = param1.tankType;
-            this._availableSlots = param1.availableSlots;
-            this._slotPrice = param1.slotPrice;
-            this._defSlotPrice = param1.defSlotPrice;
-            this._slotActionPricePrc = param1.hasOwnProperty("slotPricePrc")?param1.slotPricePrc:0;
+            this.dataVO = VehicleCarouselVO(param1);
+            this.visible = false;
+            this.id = this.dataVO.id;
+            label = this.dataVO.label;
+            this.image = this.dataVO.image;
+            this.nation = this.dataVO.nation;
+            this.level = this.dataVO.level;
+            this.stat = this.dataVO.stat;
+            this.current = this.dataVO.current;
+            this._stateLevel = this.dataVO.stateLevel;
+            this._doubleXPReceived = this.dataVO.doubleXPReceived;
+            this._compactDescr = this.dataVO.compactDescr;
+            this.favorite = this.dataVO.favorite;
+            this._canSell = this.dataVO.canSell;
+            this._clanLock = this.dataVO.clanLock;
+            this._elite = this.dataVO.elite;
+            this._premium = this.dataVO.premium;
+            this._exp = this.dataVO.exp;
+            empty = this.dataVO.empty;
+            this.buyTank = this.dataVO.buyTank;
+            this.buySlot = this.dataVO.buySlot;
+            this._tankType = this.dataVO.type;
+            this._availableSlots = this.dataVO.availableSlots;
+            this._slotPrice = this.dataVO.slotPrice;
+            this._defSlotPrice = this.dataVO.defSlotPrice;
+            this._slotActionPricePrc = this.dataVO.hasOwnProperty("slotPricePrc")?this.dataVO.slotPricePrc:0;
             _dataDirty = true;
             invalidate();
          }
       }
 
-      override protected function draw() : void {
-         var _loc1_:* = false;
-         if(_baseDisposed)
-         {
-            return;
-         }
-         super.draw();
-         if(_dataDirty)
-         {
-            if(((this.vehicleIcon) && (!empty)) && (!this.buyTank) && !this.buySlot)
-            {
-               this.vehicleIcon.image = this._image;
-               this.vehicleIcon.showName = true;
-               this.vehicleIcon.tankName = _label;
-               this.vehicleIcon.level = this._level;
-               this.vehicleIcon.isElite = this._elite;
-               this.vehicleIcon.isPremium = this._premium;
-               this.vehicleIcon.favorite = this._favorite;
-               this.vehicleIcon.nation = this._nation;
-               this.vehicleIcon.showMultyXp = true;
-               this.vehicleIcon.multyXpVal = this._doubleXPReceived;
-               this.vehicleIcon.tankType = this._tankType;
-               this.vehicleIcon.validateNow();
-               this.clanLockUI.timer = this._clanLock;
-               if(this._clanLock > 0)
-               {
-                  this.statusText.y = Math.round(this.clanLockUI.y - this.clanLockUI.textField.height);
-               }
-               else
-               {
-                  this.statusText.y = _height - this.statusText.textHeight >> 1;
-               }
-            }
-            _loc1_ = !(this._stat == "undamaged") && !_empty;
-            this.statusText.visible = _loc1_;
-            this.emptyInfoTxt.visible = false;
-            if(this.buyTank)
-            {
-               this.emptyInfoTxt.text = MENU.TANKCAROUSEL_VEHICLESTATES_BUYTANKEMPTYCOUNT;
-               this.emptyInfoTxt.text = this.emptyInfoTxt.text + " " + this._availableSlots;
-               this.emptyInfoTxt.visible = true;
-            }
-            if(this.buySlot)
-            {
-               this.slotPrice.text = this._slotPrice.toString();
-               if(this.actionPrice)
-               {
-                  this.actionPrice.setData(this._slotActionPricePrc,this._slotPrice,this._defSlotPrice,IconText.GOLD);
-                  this.slotPrice.visible = !this.actionPrice.visible;
-                  this.actionPrice.setup(this);
-               }
-            }
-            if(empty)
-            {
-               this.emptyInfoTxt.text = "";
-            }
-            _dataDirty = false;
-         }
-         this.scaleX = this.scaleY = 1;
+      override public function toString() : String {
+         return "[WG TankCarouselItemRenderer]";
       }
 
       override public function set enabled(param1:Boolean) : void {
@@ -241,6 +163,19 @@ package net.wg.gui.lobby.hangar.tcarousel
          {
             this.mouseChildren = param1;
          }
+      }
+
+      override public function get displayFocus() : Boolean {
+         return _displayFocus;
+      }
+
+      override public function set displayFocus(param1:Boolean) : void {
+         if(param1 == _displayFocus)
+         {
+            return;
+         }
+         _displayFocus = param1;
+         changeFocus();
       }
 
       public function get favorite() : Boolean {
@@ -287,12 +222,12 @@ package net.wg.gui.lobby.hangar.tcarousel
          setState(!enabled?"disabled":"up");
       }
 
-      public function get id() : String {
+      public function get id() : Number {
          return this._id;
       }
 
-      public function set id(param1:String) : void {
-         if(param1 != "")
+      public function set id(param1:Number) : void {
+         if(!isNaN(param1))
          {
             this._id = param1;
          }
@@ -342,26 +277,144 @@ package net.wg.gui.lobby.hangar.tcarousel
       }
 
       public function set stat(param1:String) : void {
-         var _loc2_:TextFormat = null;
-         var _loc3_:Object = null;
          if(param1 != "")
          {
             this._stat = param1;
-            this.bg_switcher.gotoAndPlay(this.getBgLable(this._stat));
-            if((initialized) && (this.statusText))
-            {
-               _loc2_ = new TextFormat();
-               _loc2_.leading = -4;
-               this.statusText.autoSize = "center";
-               this.statusText.text = this._stat == "undamaged"?"":MENU.tankcarousel_vehiclestates(this._stat);
-               this.statusText.setTextFormat(_loc2_);
-               this.statusText.y = _height - this.statusText.textHeight >> 1;
-               _loc3_ = this.getStatColor(this._stat);
-               this.statusText.textColor = _loc3_.color;
-               this.statusText.filters = _loc3_.filterArray;
-               this.statusText.visible = true;
-            }
          }
+         _dataDirty = true;
+         invalidate();
+      }
+
+      public function get current() : Number {
+         return this._current;
+      }
+
+      public function set current(param1:Number) : void {
+         if(param1 >= 0)
+         {
+            this._current = param1;
+         }
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.soundType = SoundTypes.CAROUSEL_BTN;
+         this.soundId = SoundManagerStates.CAROUSEL_CELL_BTN;
+         if(this.hitMC)
+         {
+            this.hitArea = this.hitMC;
+         }
+      }
+
+      override protected function draw() : void {
+         var _loc1_:* = false;
+         var _loc2_:TextFormat = null;
+         var _loc3_:Object = null;
+         var _loc4_:ActionPriceVO = null;
+         if(_baseDisposed)
+         {
+            return;
+         }
+         super.draw();
+         if(_dataDirty)
+         {
+            if(((this.vehicleIcon) && (!empty)) && (!this.buyTank) && !this.buySlot)
+            {
+               this.vehicleIcon.image = this._image;
+               this.vehicleIcon.showName = true;
+               this.vehicleIcon.tankName = _label;
+               this.vehicleIcon.level = this._level;
+               this.vehicleIcon.isElite = this._elite;
+               this.vehicleIcon.isPremium = this._premium;
+               this.vehicleIcon.favorite = this._favorite;
+               this.vehicleIcon.nation = this._nation;
+               this.vehicleIcon.showMultyXp = true;
+               this.vehicleIcon.multyXpVal = this._doubleXPReceived;
+               this.vehicleIcon.tankType = this._tankType;
+               this.vehicleIcon.validateNow();
+               this.clanLockUI.timer = this._clanLock;
+            }
+            if((this._stat) && (this.bg_switcher))
+            {
+               this.bg_switcher.gotoAndPlay(this.getBgLable(this._stat));
+            }
+            if(this.statusText)
+            {
+               if(this._stat)
+               {
+                  _loc2_ = new TextFormat();
+                  if((this.buyTank) || (this.buySlot))
+                  {
+                     _loc2_.leading = -6;
+                  }
+                  else
+                  {
+                     _loc2_.leading = -4;
+                  }
+                  this.statusText.autoSize = "center";
+                  this.statusText.text = this._stat == "undamaged"?"":MENU.tankcarousel_vehiclestates(this._stat);
+                  this.statusText.setTextFormat(_loc2_);
+                  _loc3_ = this.getStatColor(this._stateLevel);
+                  this.statusText.textColor = _loc3_.color;
+                  this.statusText.filters = _loc3_.filterArray;
+                  this.statusText.visible = true;
+               }
+               if(this._clanLock > 0)
+               {
+                  this.statusText.y = Math.round(this.clanLockUI.y - this.clanLockUI.textField.height);
+               }
+               else
+               {
+                  this.statusText.y = _height - this.statusText.textHeight >> 1;
+               }
+            }
+            _loc1_ = !(this._stat == "undamaged") && !_empty;
+            this.statusText.visible = _loc1_;
+            this.emptyInfoTxt.visible = false;
+            if(this.buyTank)
+            {
+               this.emptyInfoTxt.text = MENU.TANKCAROUSEL_VEHICLESTATES_BUYTANKEMPTYCOUNT;
+               this.emptyInfoTxt.text = this.emptyInfoTxt.text + " " + this._availableSlots;
+               this.emptyInfoTxt.visible = true;
+            }
+            if(this.buySlot)
+            {
+               this.slotPrice.text = this._slotPrice.toString();
+               if(this.actionPrice)
+               {
+                  _loc4_ = new ActionPriceVO(this._slotActionPricePrc,this._slotPrice,this._defSlotPrice,IconsTypes.GOLD);
+                  this.actionPrice.setData(_loc4_);
+                  this.slotPrice.visible = !this.actionPrice.visible;
+                  this.actionPrice.setup(this);
+               }
+            }
+            if(empty)
+            {
+               this.emptyInfoTxt.text = "";
+            }
+            _dataDirty = false;
+         }
+         this.scaleX = this.scaleY = 1;
+      }
+
+      override protected function getStatePrefixes() : Vector.<String> {
+         if((_selected) && !_empty && !this._buyTank && !this._buySlot)
+         {
+            return Vector.<String>(["selected_",""]);
+         }
+         if(_empty)
+         {
+            return Vector.<String>(["empty_"]);
+         }
+         if(this._buyTank)
+         {
+            return Vector.<String>(["buyTank_"]);
+         }
+         if(this._buySlot)
+         {
+            return Vector.<String>(["buySlot_"]);
+         }
+         return Vector.<String>([""]);
       }
 
       private function getBgLable(param1:String) : String {
@@ -382,22 +435,11 @@ package net.wg.gui.lobby.hangar.tcarousel
          return _loc2_;
       }
 
-      public function get current() : Number {
-         return this._current;
-      }
-
-      public function set current(param1:Number) : void {
-         if(param1 >= 0)
-         {
-            this._current = param1;
-         }
-      }
-
       private function getStatColor(param1:String) : Object {
-         var _loc15_:DropShadowFilter = null;
-         var _loc16_:GlowFilter = null;
+         var _loc15_:GlowFilter = null;
+         var _loc16_:DropShadowFilter = null;
          var _loc17_:DropShadowFilter = null;
-         var _loc2_:Object = new Object();
+         var _loc2_:Object = {};
          var _loc3_:Number = 0;
          var _loc4_:Number = 0;
          var _loc5_:Number = 0;
@@ -409,11 +451,33 @@ package net.wg.gui.lobby.hangar.tcarousel
          var _loc11_:* = false;
          var _loc12_:* = false;
          var _loc13_:* = false;
-         var _loc14_:Array = new Array();
+         var _loc14_:Array = [];
          switch(param1)
          {
-            case "battle":
-               _loc2_.color = 13617064;
+            case "buyState":
+               _loc2_.color = 15329754;
+               _loc5_ = 16777150;
+               _loc6_ = 0.2;
+               _loc7_ = 15;
+               _loc8_ = 15;
+               _loc9_ = 4;
+               _loc10_ = 2;
+               _loc11_ = false;
+               _loc12_ = false;
+               _loc15_ = new GlowFilter();
+               _loc15_.color = _loc5_;
+               _loc15_.alpha = _loc6_;
+               _loc15_.blurX = _loc7_;
+               _loc15_.blurY = _loc8_;
+               _loc15_.strength = _loc9_;
+               _loc15_.quality = _loc10_;
+               _loc15_.inner = _loc11_;
+               _loc15_.knockout = _loc12_;
+               _loc14_.push(_loc15_);
+               _loc2_.filterArray = _loc14_;
+               break;
+            case "critical":
+               _loc2_.color = 15400960;
                _loc3_ = 0;
                _loc4_ = 90;
                _loc5_ = 0;
@@ -425,33 +489,9 @@ package net.wg.gui.lobby.hangar.tcarousel
                _loc11_ = false;
                _loc12_ = false;
                _loc13_ = false;
-               _loc15_ = new DropShadowFilter();
-               _loc15_.distance = _loc3_;
-               _loc15_.angle = _loc4_;
-               _loc15_.color = _loc5_;
-               _loc15_.alpha = _loc6_;
-               _loc15_.blurX = _loc7_;
-               _loc15_.blurY = _loc8_;
-               _loc15_.strength = _loc9_;
-               _loc15_.quality = _loc10_;
-               _loc15_.inner = _loc11_;
-               _loc15_.knockout = _loc12_;
-               _loc15_.hideObject = _loc13_;
-               _loc14_.push(_loc15_);
-               _loc2_.filterArray = _loc14_;
-               break;
-            case "buyTank":
-            case "buySlot":
-               _loc2_.color = 15329754;
-               _loc5_ = 16777150;
-               _loc6_ = 0.2;
-               _loc7_ = 15;
-               _loc8_ = 15;
-               _loc9_ = 4;
-               _loc10_ = 2;
-               _loc11_ = false;
-               _loc12_ = false;
-               _loc16_ = new GlowFilter();
+               _loc16_ = new DropShadowFilter();
+               _loc16_.distance = _loc3_;
+               _loc16_.angle = _loc4_;
                _loc16_.color = _loc5_;
                _loc16_.alpha = _loc6_;
                _loc16_.blurX = _loc7_;
@@ -460,16 +500,13 @@ package net.wg.gui.lobby.hangar.tcarousel
                _loc16_.quality = _loc10_;
                _loc16_.inner = _loc11_;
                _loc16_.knockout = _loc12_;
+               _loc16_.hideObject = _loc13_;
                _loc14_.push(_loc16_);
                _loc2_.filterArray = _loc14_;
                break;
-            case "ammoNotFull":
-            case "exploded":
-            case "destroyed":
-            case "damaged":
-            case "serverRestriction":
-            case "crewNotFull":
-               _loc2_.color = 15400960;
+            case "info":
+            default:
+               _loc2_.color = 13617064;
                _loc3_ = 0;
                _loc4_ = 90;
                _loc5_ = 0;
@@ -495,46 +532,8 @@ package net.wg.gui.lobby.hangar.tcarousel
                _loc17_.hideObject = _loc13_;
                _loc14_.push(_loc17_);
                _loc2_.filterArray = _loc14_;
-               break;
          }
          return _loc2_;
-      }
-
-      override protected function getStatePrefixes() : Vector.<String> {
-         if((_selected) && !_empty && !this._buyTank && !this._buySlot)
-         {
-            return Vector.<String>(["selected_",""]);
-         }
-         if(_empty)
-         {
-            return Vector.<String>(["empty_"]);
-         }
-         if(this._buyTank)
-         {
-            return Vector.<String>(["buyTank_"]);
-         }
-         if(this._buySlot)
-         {
-            return Vector.<String>(["buySlot_"]);
-         }
-         return Vector.<String>([""]);
-      }
-
-      override public function toString() : String {
-         return "[WG TankCarouselItemRenderer]";
-      }
-
-      override public function get displayFocus() : Boolean {
-         return _displayFocus;
-      }
-
-      override public function set displayFocus(param1:Boolean) : void {
-         if(param1 == _displayFocus)
-         {
-            return;
-         }
-         _displayFocus = param1;
-         changeFocus();
       }
    }
 

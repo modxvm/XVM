@@ -9,6 +9,7 @@ package net.wg.gui.lobby.profile.pages
    import net.wg.gui.lobby.profile.components.BattlesTypeDropdown;
    import net.wg.gui.lobby.profile.components.ResizableInvalidationTypes;
    import flash.events.Event;
+   import flash.display.InteractiveObject;
 
 
    public class ProfileSection extends ProfileSectionMeta implements IProfileSectionMeta, IResizableContent
@@ -76,7 +77,7 @@ package net.wg.gui.lobby.profile.pages
          }
       }
 
-      private function dropDownChangeHandler(param1:Event) : void {
+      protected function dropDownChangeHandler(param1:Event) : void {
          requestDossierS(this.battlesDropdown.selectedItem);
       }
 
@@ -174,6 +175,10 @@ package net.wg.gui.lobby.profile.pages
          }
          this.disposeLayoutManager();
          super.onDispose();
+      }
+
+      public function getComponentForFocus() : InteractiveObject {
+         return null;
       }
    }
 

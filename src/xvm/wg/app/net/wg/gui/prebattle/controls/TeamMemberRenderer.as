@@ -6,6 +6,7 @@ package net.wg.gui.prebattle.controls
    import net.wg.gui.prebattle.data.PlayerPrbInfoVO;
    import net.wg.gui.prebattle.constants.PrebattleStateString;
    import scaleform.gfx.TextFieldEx;
+   import net.wg.data.constants.Values;
 
 
    public class TeamMemberRenderer extends SquadItemRenderer
@@ -28,8 +29,8 @@ package net.wg.gui.prebattle.controls
 
       private var _isVehicleValid:Boolean = true;
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this.commander_icon.dispose();
          this.status_icon.dispose();
          this.wrong_limits.dispose();
@@ -46,6 +47,10 @@ package net.wg.gui.prebattle.controls
             param1 = new PlayerPrbInfoVO(param1);
          }
          super.setData(param1);
+         if(param1)
+         {
+            setSpeakers(PlayerPrbInfoVO(param1).isPlayerSpeaking,true);
+         }
       }
 
       override protected function showToolTips() : void {
@@ -60,6 +65,7 @@ package net.wg.gui.prebattle.controls
          var _loc1_:String = null;
          var _loc3_:String = null;
          this.commander_icon.visible = this.status_icon.visible = this.vehicle_type_icon.visible = false;
+         updatePlayerName();
          if(!model)
          {
             return;
@@ -127,22 +133,21 @@ package net.wg.gui.prebattle.controls
          {
             this.numberField.text = String(model.orderNumber);
          }
-         label = model.fullName;
          this.updateAfterStateChange();
       }
 
       override protected function updateAfterStateChange() : void {
          super.updateAfterStateChange();
-         if(!initialized || model == null)
+         if(!initialized)
          {
             return;
          }
-         if(model.isCreator)
+         if((model) && (model.isCreator))
          {
             this.commander_icon.visible = true;
             this.status_icon.visible = false;
          }
-         if(model.vType)
+         if((model) && (model.vType))
          {
             this.vehicle_type_icon.visible = true;
             this.vehicle_type_icon.gotoAndPlay(model.vType);
@@ -154,9 +159,9 @@ package net.wg.gui.prebattle.controls
          TextFieldEx.setVerticalAlign(textField,TextFieldEx.VALIGN_TOP);
          TextFieldEx.setVerticalAlign(vehicleNameField,TextFieldEx.VALIGN_TOP);
          TextFieldEx.setVerticalAlign(this.numberField,TextFieldEx.VALIGN_TOP);
-         vehicleNameField.text = model.vShortName;
-         this.numberField.text = String(model.orderNumber);
-         var _loc1_:Number = model.getCurrentColor();
+         vehicleNameField.text = model?model.vShortName:Values.EMPTY_STR;
+         this.numberField.text = model?String(model.orderNumber):Values.EMPTY_STR;
+         var _loc1_:Number = model?model.getCurrentColor():Number.NaN;
          if(!isNaN(_loc1_))
          {
             textField.textColor = _loc1_;
@@ -179,20 +184,20 @@ package net.wg.gui.prebattle.controls
       }
 
       private function updateValidVehicleState(param1:Boolean) : void {
-         if(isNaN(model.accID))
+         if((model) && (isNaN(model.accID)))
          {
             return;
          }
          this.wrong_limits.visible = !param1;
          if(param1)
          {
-            vehicleLevelField.htmlText = "";
-            vehicleLevelField.text = model.vLevel;
+            vehicleLevelField.htmlText = Values.EMPTY_STR;
+            vehicleLevelField.text = model?model.vLevel:Values.EMPTY_STR;
          }
          else
          {
-            vehicleLevelField.text = "";
-            vehicleLevelField.htmlText = "<font color=\"#ff0000\">" + model.vLevel + "</font>";
+            vehicleLevelField.text = Values.EMPTY_STR;
+            vehicleLevelField.htmlText = model?"<font color=\"#ff0000\">" + model.vLevel + "</font>":Values.EMPTY_STR;
          }
       }
    }

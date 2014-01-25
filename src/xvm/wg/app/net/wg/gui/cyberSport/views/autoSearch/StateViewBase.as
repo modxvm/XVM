@@ -5,6 +5,7 @@ package net.wg.gui.cyberSport.views.autoSearch
    import flash.text.TextField;
    import net.wg.gui.components.controls.SoundButtonEx;
    import net.wg.gui.cyberSport.vo.AutoSearchVO;
+   import flash.display.InteractiveObject;
    import scaleform.clik.events.ButtonEvent;
    import scaleform.clik.events.InputEvent;
    import flash.events.Event;
@@ -60,22 +61,19 @@ package net.wg.gui.cyberSport.views.autoSearch
 
       protected var _time:int = 0;
 
-      public function updateFocus() : void {
-         if(!this.visible)
+      public function getComponentForFocus() : InteractiveObject {
+         if(this.visible)
          {
-            return;
-         }
-         if(this.submitButton)
-         {
-            App.utils.focusHandler.setFocus(this.submitButton);
-         }
-         else
-         {
+            if(this.submitButton)
+            {
+               return this.submitButton;
+            }
             if(this.cancelButton)
             {
-               App.utils.focusHandler.setFocus(this.cancelButton);
+               return this.cancelButton;
             }
          }
+         return null;
       }
 
       public function enableButton(param1:Boolean) : void {
@@ -85,6 +83,35 @@ package net.wg.gui.cyberSport.views.autoSearch
          }
       }
 
+      public function stopTimer() : void {
+         App.utils.scheduler.cancelTask(this.onTimer);
+         this._time = 0;
+      }
+
+      public final function dispose() : void {
+         this.onDispose();
+      }
+
+      protected function onDispose() : void {
+         App.utils.scheduler.cancelTask(this.onTimer);
+         if(this.model)
+         {
+            this.model.dispose();
+            this.model = null;
+         }
+         if(this.submitButton)
+         {
+            this.submitButton.removeEventListener(ButtonEvent.CLICK,this.submitButtonOnClick);
+            this.submitButton.dispose();
+         }
+         if(this.cancelButton)
+         {
+            this.cancelButton.removeEventListener(ButtonEvent.CLICK,this.cancelButtonOnClick);
+            this.cancelButton.dispose();
+         }
+         removeEventListener(InputEvent.INPUT,this.handleInput);
+      }
+
       public function set changeState(param1:AutoSearchVO) : void {
          if(param1 == null)
          {
@@ -92,20 +119,6 @@ package net.wg.gui.cyberSport.views.autoSearch
          }
          this.model = param1;
          this.visibleState();
-      }
-
-      public function stopTimer() : void {
-         App.utils.scheduler.cancelTask(this.onTimer);
-         this._time = 0;
-      }
-
-      private function visibleState() : void {
-         visible = this.model.state == this.currentState;
-         if(visible)
-         {
-            this.enableButton(true);
-            this.updateView();
-         }
       }
 
       protected function updateView() : void {
@@ -143,27 +156,6 @@ package net.wg.gui.cyberSport.views.autoSearch
          ;
       }
 
-      public function dispose() : void {
-         App.utils.scheduler.cancelTask(this.onTimer);
-         App.utils.scheduler.cancelTask(this.updateFocus);
-         if(this.model)
-         {
-            this.model.dispose();
-            this.model = null;
-         }
-         if(this.submitButton)
-         {
-            this.submitButton.removeEventListener(ButtonEvent.CLICK,this.submitButtonOnClick);
-            this.submitButton.dispose();
-         }
-         if(this.cancelButton)
-         {
-            this.cancelButton.removeEventListener(ButtonEvent.CLICK,this.cancelButtonOnClick);
-            this.cancelButton.dispose();
-         }
-         removeEventListener(InputEvent.INPUT,this.handleInput);
-      }
-
       protected function updateTime() : void {
          var _loc1_:Object = null;
          if((this.min) && (this.sec))
@@ -172,6 +164,15 @@ package net.wg.gui.cyberSport.views.autoSearch
             this.min.text = _loc1_.minutes;
             this.sec.text = _loc1_.seconds;
             dispatchEvent(new Event(UPDATE_TIMER,true));
+         }
+      }
+
+      private function visibleState() : void {
+         visible = this.model.state == this.currentState;
+         if(visible)
+         {
+            this.enableButton(true);
+            this.updateView();
          }
       }
 

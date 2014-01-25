@@ -166,7 +166,7 @@ package net.wg.gui.lobby.profile.pages.technique
          this.tweenManager.unregister(param1);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.tweenManager.dispose();
          this.tweenManager = null;
          if(this._data)
@@ -193,7 +193,7 @@ package net.wg.gui.lobby.profile.pages.technique
          this.avgDmgDealtDL.dispose();
          this.avgDmgReceivedDL.dispose();
          this.avgScoutingDmgDL.dispose();
-         super.dispose();
+         super.onDispose();
       }
    }
 

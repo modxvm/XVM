@@ -11,6 +11,7 @@ package net.wg.app
    import net.wg.infrastructure.interfaces.ICursor;
    import net.wg.infrastructure.managers.IContainerManager;
    import net.wg.infrastructure.managers.IContextMenuManager;
+   import net.wg.infrastructure.managers.IPopoverManager;
    import net.wg.infrastructure.managers.IColorSchemeManager;
    import net.wg.infrastructure.managers.IGuiItemsManager;
    import net.wg.infrastructure.managers.IVoiceChatManager;
@@ -47,6 +48,8 @@ package net.wg.app
       function get containerMgr() : IContainerManager;
 
       function get contextMenuMgr() : IContextMenuManager;
+
+      function get popoverMgr() : IPopoverManager;
 
       function get colorSchemeMgr() : IColorSchemeManager;
 

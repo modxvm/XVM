@@ -10,16 +10,17 @@ package net.wg.gui.prebattle.invites
    import net.wg.gui.components.controls.CheckBox;
    import net.wg.gui.components.controls.TextInput;
    import scaleform.clik.data.DataProvider;
-   import net.wg.gui.components.windows.Window;
+   import flash.utils.setTimeout;
    import scaleform.clik.utils.Padding;
    import scaleform.clik.events.ButtonEvent;
    import scaleform.clik.events.FocusHandlerEvent;
    import net.wg.gui.events.ListEventEx;
-   import flash.utils.setTimeout;
+   import flash.display.InteractiveObject;
+   import net.wg.gui.components.windows.Window;
    import flash.utils.clearTimeout;
+   import net.wg.gui.prebattle.squad.MessengerUtils;
    import scaleform.clik.events.ListEvent;
    import scaleform.gfx.MouseEventEx;
-   import net.wg.gui.prebattle.squad.MessengerUtils;
    import org.idmedia.as3commons.util.StringUtils;
    import net.wg.infrastructure.interfaces.IViewStackContent;
    import flash.utils.getQualifiedClassName;
@@ -98,33 +99,6 @@ package net.wg.gui.prebattle.invites
 
       private var inviteDefaultTextColor:uint = 4144953;
 
-      private function updateWindowProperties(param1:Boolean) : void {
-         if(window)
-         {
-            Window(window).visible = param1;
-         }
-      }
-
-      override protected function onPopulate() : void {
-         this.updateWindowProperties(false);
-         super.onPopulate();
-         showWindowBg = false;
-         window.title = "";
-         var _loc1_:Padding = window.contentPadding as Padding;
-         _loc1_.bottom = 16;
-         _loc1_.left = 13;
-         _loc1_.right = 12;
-      }
-
-      override protected function draw() : void {
-         super.draw();
-         if(isInvalid(UPDATE_DEFAULT_POSITION))
-         {
-            window.x = 0;
-            window.y = 0;
-         }
-      }
-
       public function as_setWindowTitle(param1:String) : void {
          window.title = param1;
       }
@@ -153,6 +127,32 @@ package net.wg.gui.prebattle.invites
          if(this.onlineCheckBox != null)
          {
             this.onlineCheckBox.selected = param1;
+         }
+      }
+
+      public function as_onReceiveSendInvitesCooldown(param1:uint) : void {
+         this.enableManagmentButtons(false);
+         this.sendButton.enabled = false;
+         this.coolDownTimerID = setTimeout(this.onEndSendInvitesCooldown,param1 * 1000);
+      }
+
+      override protected function onPopulate() : void {
+         this.updateWindowProperties(false);
+         super.onPopulate();
+         showWindowBg = false;
+         window.title = "";
+         var _loc1_:Padding = window.contentPadding as Padding;
+         _loc1_.bottom = 16;
+         _loc1_.left = 13;
+         _loc1_.right = 12;
+      }
+
+      override protected function draw() : void {
+         super.draw();
+         if(isInvalid(UPDATE_DEFAULT_POSITION))
+         {
+            window.x = 0;
+            window.y = 0;
          }
       }
 
@@ -185,14 +185,9 @@ package net.wg.gui.prebattle.invites
          invalidate(UPDATE_DEFAULT_POSITION);
       }
 
-      private function updateFocus() : void {
-         this.updateWindowProperties(true);
-         App.utils.focusHandler.setFocus(this);
-      }
-
-      override public function setFocus() : void {
-         super.setFocus();
-         App.utils.scheduler.envokeInNextFrame(this.updateFocus);
+      override protected function onInitModalFocus(param1:InteractiveObject) : void {
+         super.onInitModalFocus(param1);
+         this.updateFocus();
       }
 
       override protected function onDispose() : void {
@@ -216,13 +211,16 @@ package net.wg.gui.prebattle.invites
          super.onDispose();
       }
 
-      private function messageTextInput_CLIK_focusInHandler(param1:FocusHandlerEvent) : void {
-         var _loc2_:uint = this.messageTextInput.textField.getTextFormat()["color"];
-         if(_loc2_ == this.inviteDefaultTextColor)
+      private function updateWindowProperties(param1:Boolean) : void {
+         if(window)
          {
-            this.messageTextInput.textField.textColor = inviteTextColor;
-            this.messageTextInput.text = "";
+            Window(window).visible = param1;
          }
+      }
+
+      private function updateFocus() : void {
+         this.updateWindowProperties(true);
+         setFocus(this);
       }
 
       private function enableManagmentButtons(param1:Boolean) : void {
@@ -230,12 +228,6 @@ package net.wg.gui.prebattle.invites
          this.addAllUsersButton.enabled = param1;
          this.removeAllUsersButton.enabled = param1;
          this.removeUserButton.enabled = param1;
-      }
-
-      public function as_onReceiveSendInvitesCooldown(param1:uint) : void {
-         this.enableManagmentButtons(false);
-         this.sendButton.enabled = false;
-         this.coolDownTimerID = setTimeout(this.onEndSendInvitesCooldown,param1 * 1000);
       }
 
       private function onEndSendInvitesCooldown() : void {
@@ -262,18 +254,6 @@ package net.wg.gui.prebattle.invites
          return _loc2_;
       }
 
-      private function usersAccordion_listItemDoubleClickHandler(param1:SendInvitesEvent) : void {
-         this.onReceiveUserInfo(param1.initItem);
-      }
-
-      private function receiverList_itemDoubleClickHandler(param1:ListEvent) : void {
-         if(param1.buttonIdx == MouseEventEx.RIGHT_BUTTON)
-         {
-            return;
-         }
-         this.removeReceiveItem();
-      }
-
       private function onReceiveUserInfo(param1:Object) : void {
          var _loc2_:Object = makeRoster(param1);
          if(MessengerUtils.isIgnored(_loc2_))
@@ -296,6 +276,85 @@ package net.wg.gui.prebattle.invites
          {
             showErrorS(MENU.PREBATTLE_INVITATIONS_ERRORS_EXISTSINRECEIVELIST);
          }
+      }
+
+      private function onReceiveUsersInfo(param1:Array) : void {
+         var _loc5_:Object = null;
+         var _loc2_:Number = param1.length;
+         if(_loc2_ == 0)
+         {
+            showErrorS(MENU.PREBATTLE_INVITATIONS_ERRORS_NOTFOUNDUSERS);
+            return;
+         }
+         var _loc3_:Number = 0;
+         while(_loc3_ < _loc2_)
+         {
+            _loc5_ = makeRoster(param1[_loc3_]);
+            if(!((MessengerUtils.isIgnored(_loc5_)) || !_loc5_.online))
+            {
+               if(!this.hasUserInReceiverList(_loc5_))
+               {
+                  this.receiverData.push(_loc5_);
+               }
+            }
+            _loc3_++;
+         }
+         this.receiverData.invalidate();
+         var _loc4_:* = this.receiverData.length > 0;
+         if(!_loc4_)
+         {
+            showErrorS(MENU.PREBATTLE_INVITATIONS_ERRORS_NOTFOUNDUSERS);
+         }
+         this.sendButton.enabled = _loc4_;
+      }
+
+      private function removeReceiveItem() : void {
+         if(this.receiverData.length > 0)
+         {
+            if(this.receiverList.selectedIndex > -1)
+            {
+               this.receiverData.splice(this.receiverList.selectedIndex,1);
+               this.receiverData.invalidate();
+               this.sendButton.enabled = !(this.receiverData.length == 0);
+            }
+            else
+            {
+               showErrorS(MENU.PREBATTLE_INVITATIONS_ERRORS_SELECTUSERTOREMOVE);
+            }
+         }
+         else
+         {
+            showErrorS(MENU.PREBATTLE_INVITATIONS_ERRORS_RECEIVERLISTEMPTY);
+         }
+      }
+
+      private function setToken(param1:String) : void {
+         if(param1 == null)
+         {
+            return;
+         }
+         searchTokenS(param1);
+      }
+
+      private function messageTextInput_CLIK_focusInHandler(param1:FocusHandlerEvent) : void {
+         var _loc2_:uint = this.messageTextInput.textField.getTextFormat()["color"];
+         if(_loc2_ == this.inviteDefaultTextColor)
+         {
+            this.messageTextInput.textField.textColor = inviteTextColor;
+            this.messageTextInput.text = "";
+         }
+      }
+
+      private function usersAccordion_listItemDoubleClickHandler(param1:SendInvitesEvent) : void {
+         this.onReceiveUserInfo(param1.initItem);
+      }
+
+      private function receiverList_itemDoubleClickHandler(param1:ListEvent) : void {
+         if(param1.buttonIdx == MouseEventEx.RIGHT_BUTTON)
+         {
+            return;
+         }
+         this.removeReceiveItem();
       }
 
       private function handleClickAddUserButton(param1:ButtonEvent=null) : void {
@@ -334,58 +393,8 @@ package net.wg.gui.prebattle.invites
          }
       }
 
-      private function onReceiveUsersInfo(param1:Array) : void {
-         var _loc5_:Object = null;
-         var _loc2_:Number = param1.length;
-         if(_loc2_ == 0)
-         {
-            showErrorS(MENU.PREBATTLE_INVITATIONS_ERRORS_NOTFOUNDUSERS);
-            return;
-         }
-         var _loc3_:Number = 0;
-         while(_loc3_ < _loc2_)
-         {
-            _loc5_ = makeRoster(param1[_loc3_]);
-            if(!((MessengerUtils.isIgnored(_loc5_)) || !_loc5_.online))
-            {
-               if(!this.hasUserInReceiverList(_loc5_))
-               {
-                  this.receiverData.push(_loc5_);
-               }
-            }
-            _loc3_++;
-         }
-         this.receiverData.invalidate();
-         var _loc4_:* = this.receiverData.length > 0;
-         if(!_loc4_)
-         {
-            showErrorS(MENU.PREBATTLE_INVITATIONS_ERRORS_NOTFOUNDUSERS);
-         }
-         this.sendButton.enabled = _loc4_;
-      }
-
       private function handleClickRemoveUserButton(param1:ButtonEvent=null) : void {
          this.removeReceiveItem();
-      }
-
-      private function removeReceiveItem() : void {
-         if(this.receiverData.length > 0)
-         {
-            if(this.receiverList.selectedIndex > -1)
-            {
-               this.receiverData.splice(this.receiverList.selectedIndex,1);
-               this.receiverData.invalidate();
-               this.sendButton.enabled = !(this.receiverData.length == 0);
-            }
-            else
-            {
-               showErrorS(MENU.PREBATTLE_INVITATIONS_ERRORS_SELECTUSERTOREMOVE);
-            }
-         }
-         else
-         {
-            showErrorS(MENU.PREBATTLE_INVITATIONS_ERRORS_RECEIVERLISTEMPTY);
-         }
       }
 
       private function handleClickRemoveAllUsersButton(param1:ButtonEvent) : void {
@@ -445,14 +454,6 @@ package net.wg.gui.prebattle.invites
       private function usersAccordion_searchTokenHandler(param1:SendInvitesEvent) : void {
          this.lastToken = param1.searchString;
          this.setToken(this.lastToken);
-      }
-
-      private function setToken(param1:String) : void {
-         if(param1 == null)
-         {
-            return;
-         }
-         searchTokenS(param1);
       }
 
       private function usersAccordion_initComponentHandler(param1:SendInvitesEvent) : void {

@@ -64,8 +64,8 @@ package net.wg.gui.components.advanced
 
       private var _expectedWidth:Number;
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this.clearLines();
          this.tFormat = null;
          this.tfMetrics = null;
@@ -234,7 +234,7 @@ package net.wg.gui.components.advanced
       }
 
       private function startAnim() : void {
-         if((this.number > -1 && !(this.font == "") && this.size > 0) && (this.color) && this.speed > 0)
+         if((!(this.font == "") && this.size > 0) && (this.color) && this.speed > 0)
          {
             this.checkTruePosition = [];
             this.tFormat = this.tempTF.getTextFormat();
@@ -248,7 +248,7 @@ package net.wg.gui.components.advanced
             this.tempTF.setTextFormat(this.tFormat);
             this.tFormat = this.tempTF.getTextFormat(0,1);
             this.realMetricsWidth = this.tempTF.getLineMetrics(0).width;
-            this.tfMetrics.lines = String(this.number).length;
+            this.tfMetrics.lines = String(Math.abs(this.number)).length;
             this.tempTF.text = "";
             this.tempTF.visible = false;
             this.clearLines();
@@ -289,7 +289,7 @@ package net.wg.gui.components.advanced
          {
             this.checkTruePosition[_loc6_] = {};
             this.checkTruePosition[_loc6_].stand = false;
-            this.checkTruePosition[_loc6_].num = Math.floor(ANIMATE_STEP_FRAMES * Math.floor(this.number / Math.pow(10,_loc6_) % 10)) + START_FRAME;
+            this.checkTruePosition[_loc6_].num = Math.floor(ANIMATE_STEP_FRAMES * Math.floor(Math.abs(this.number) / Math.pow(10,_loc6_) % 10)) + START_FRAME;
             if(_loc6_ > 0 && _loc6_ % 3 == 0 && this.localizationSymbol.length > 0)
             {
                _loc4_ = new TextField();
@@ -309,7 +309,7 @@ package net.wg.gui.components.advanced
             _loc3_ = _loc5_.getComponent("NumberLine",MovieClip);
             this.contener_mc.addChild(_loc3_);
             this.tempTF.autoSize = "left";
-            this.tempTF.text = String(Math.floor(this.number / Math.pow(10,_loc6_) % 10));
+            this.tempTF.text = String(Math.floor(Math.abs(this.number) / Math.pow(10,_loc6_) % 10));
             this.tempTF.setTextFormat(this.tFormat);
             _loc2_ = this.tempTF.getLineMetrics(0);
             this.tempTF.visible = false;
@@ -327,6 +327,18 @@ package net.wg.gui.components.advanced
             this.lines[_loc6_] = _loc3_;
             _loc6_++;
          }
+         if(this.number < 0)
+         {
+            _loc4_ = new TextField();
+            this.contener_mc.addChild(_loc4_);
+            _loc4_.selectable = false;
+            _loc4_.autoSize = "left";
+            _loc4_.textColor = this.color;
+            _loc4_.text = "-";
+            _loc4_.setTextFormat(this.tFormat);
+            _loc1_ = _loc1_ - Math.round(_loc4_.textWidth + this.letterSpacing);
+            _loc4_.x = _loc1_;
+         }
          this._expectedWidth = Math.abs(_loc1_);
          this.checkTruePosition.push(
             {
@@ -340,7 +352,7 @@ package net.wg.gui.components.advanced
          var _loc1_:* = 0;
          if(this.playAnim)
          {
-            this.tween = new Tween(this.speed,this,{"tweenNum":this.number},
+            this.tween = new Tween(this.speed,this,{"tweenNum":Math.abs(this.number)},
                {
                   "paused":false,
                   "ease":Cubic.easeOut,
@@ -364,7 +376,7 @@ package net.wg.gui.components.advanced
          var _loc2_:* = 0;
          while(_loc2_ < this.lines.length)
          {
-            if(((!this.checkTruePosition[_loc2_].stand) && (this.checkTruePosition[_loc2_ + 1].stand)) && (this.lines[_loc2_].currentFrame + START_FRAME > this.checkTruePosition[_loc2_].num) || param1 == this.number)
+            if(((!this.checkTruePosition[_loc2_].stand) && (this.checkTruePosition[_loc2_ + 1].stand)) && (this.lines[_loc2_].currentFrame + START_FRAME > this.checkTruePosition[_loc2_].num) || param1 == Math.abs(this.number))
             {
                this.checkTruePosition[_loc2_].stand = true;
                this.lines[_loc2_].gotoAndStop(this.checkTruePosition[_loc2_].num);

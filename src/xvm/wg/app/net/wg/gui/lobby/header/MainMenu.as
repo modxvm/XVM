@@ -74,8 +74,8 @@ package net.wg.gui.lobby.header
 
       protected var buttonsArr:DataProvider;
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this.bar.removeEventListener(IndexEvent.INDEX_CHANGE,this.buttonClickHandler);
          this.buttonsArr = null;
       }
@@ -111,7 +111,6 @@ package net.wg.gui.lobby.header
          this.bar.validateNow();
          this.bar.dataProvider = this.buttonsArr;
          this.bar.addEventListener(ButtonEvent.CLICK,this.buttonClickHandler,false,0,true);
-         App.utils.focusHandler.setFocus(this.bar);
       }
 
       override protected function draw() : void {

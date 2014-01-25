@@ -67,11 +67,11 @@ package net.wg.gui.components.common.markers
          this._actionRendererMap = param1;
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.removeActionRenderer();
          this._actionRendererMap = null;
          this.hideTween = null;
-         super.dispose();
+         super.onDispose();
       }
    }
 

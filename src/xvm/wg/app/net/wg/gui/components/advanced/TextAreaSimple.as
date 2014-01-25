@@ -100,7 +100,7 @@ package net.wg.gui.components.advanced
          return 4.27819008E9 + param1;
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this._textPadding = null;
          this.bgForm = null;
          textField.removeEventListener(FocusEvent.FOCUS_IN,handleTextFieldFocusIn,false);
@@ -109,7 +109,7 @@ package net.wg.gui.components.advanced
          removeEventListener(MouseEvent.MOUSE_DOWN,handleMouseDown,false);
          removeEventListener(InputEvent.INPUT,this.handleInput,false);
          removeEventListener(MouseEvent.MOUSE_WHEEL,this.onMouseWheel);
-         super.dispose();
+         super.onDispose();
       }
 
       override public function get focusable() : Boolean {

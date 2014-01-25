@@ -93,9 +93,9 @@ package net.wg.gui.lobby.profile.components.chart.axis
          return _loc2_;
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          var _loc1_:Object = null;
-         super.dispose();
+         super.onDispose();
          this._dataProvider = null;
          this.currentLayout = null;
          this.renderers = null;

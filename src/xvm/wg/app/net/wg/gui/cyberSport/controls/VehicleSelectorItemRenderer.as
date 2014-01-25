@@ -29,8 +29,8 @@ package net.wg.gui.cyberSport.controls
          super();
          this.notReadyAlert.visible = false;
          preventAutosizing = true;
-         this.notReadyAlert.addEventListener(MouseEvent.ROLL_OVER,this.notReadyAlert_rollOverHandler);
-         this.notReadyAlert.addEventListener(MouseEvent.ROLL_OUT,this.notReadyAlert_rollOutHandler);
+         this.notReadyAlert.addEventListener(MouseEvent.ROLL_OVER,this.onRollOverAlert);
+         this.notReadyAlert.addEventListener(MouseEvent.ROLL_OUT,this.onRollOutAlert);
       }
 
       private static const MODE_MULTI:String = "multiSelection";
@@ -157,7 +157,7 @@ package net.wg.gui.cyberSport.controls
          }
       }
 
-      private function notReadyAlert_rollOverHandler(param1:MouseEvent) : void {
+      private function onRollOverAlert(param1:MouseEvent) : void {
          this.mouseOverAlert = true;
          if(!enabled)
          {
@@ -166,7 +166,7 @@ package net.wg.gui.cyberSport.controls
          App.toolTipMgr.showComplex(TOOLTIPS.CYBERSPORT_VEHICLESELECTOR_NOTREADY);
       }
 
-      private function notReadyAlert_rollOutHandler(param1:MouseEvent) : void {
+      private function onRollOutAlert(param1:MouseEvent) : void {
          this.mouseOverAlert = false;
          App.toolTipMgr.hide();
          if(!enabled)
@@ -265,16 +265,19 @@ package net.wg.gui.cyberSport.controls
          }
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          removeEventListener(ButtonEvent.CLICK,this.onClick);
          removeEventListener(MouseEvent.DOUBLE_CLICK,this.onDoubleClick);
          if(this.model)
          {
             this.model.dispose();
          }
-         this.notReadyAlert.removeEventListener(MouseEvent.ROLL_OVER,this.notReadyAlert_rollOverHandler);
-         this.notReadyAlert.removeEventListener(MouseEvent.ROLL_OUT,this.notReadyAlert_rollOutHandler);
-         super.dispose();
+         this.notReadyAlert.removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverAlert);
+         this.notReadyAlert.removeEventListener(MouseEvent.ROLL_OUT,this.onRollOutAlert);
+         this.checkBox.dispose();
+         this.flagLoader.dispose();
+         this.tankIcon.dispose();
+         super.onDispose();
       }
    }
 

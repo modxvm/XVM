@@ -109,10 +109,10 @@ package net.wg.gui.lobby.profile.components
          App.toolTipMgr.hide();
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.leftTextHitMC.removeEventListener(MouseEvent.MOUSE_OVER,this.leftTextMouseOverHandler);
          this.leftTextHitMC.removeEventListener(MouseEvent.MOUSE_OUT,this.leftTextMouseOutHandler);
-         super.dispose();
+         super.onDispose();
       }
    }
 

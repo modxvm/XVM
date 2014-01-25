@@ -7,6 +7,7 @@ package net.wg.infrastructure.base.meta.impl
    import net.wg.infrastructure.managers.ISoundManager;
    import net.wg.infrastructure.managers.IContainerManager;
    import net.wg.infrastructure.managers.IContextMenuManager;
+   import net.wg.infrastructure.managers.IPopoverManager;
    import net.wg.infrastructure.managers.IColorSchemeManager;
    import net.wg.infrastructure.managers.ITooltipMgr;
    import net.wg.infrastructure.base.meta.IStatsStorageMeta;
@@ -32,6 +33,8 @@ package net.wg.infrastructure.base.meta.impl
       public var setContainerMgr:Function = null;
 
       public var setContextMenuMgr:Function = null;
+
+      public var setPopoverMgr:Function = null;
 
       public var setColorSchemeMgr:Function = null;
 
@@ -74,6 +77,11 @@ package net.wg.infrastructure.base.meta.impl
       public function setContextMenuMgrS(param1:IContextMenuManager) : void {
          App.utils.asserter.assertNotNull(this.setContextMenuMgr,"setContextMenuMgr" + Errors.CANT_NULL);
          this.setContextMenuMgr(param1);
+      }
+
+      public function setPopoverMgrS(param1:IPopoverManager) : void {
+         App.utils.asserter.assertNotNull(this.setPopoverMgr,"setPopoverMgr" + Errors.CANT_NULL);
+         this.setPopoverMgr(param1);
       }
 
       public function setColorSchemeMgrS(param1:IColorSchemeManager) : void {

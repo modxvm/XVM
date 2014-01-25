@@ -20,6 +20,36 @@ package net.wg.data.VO
 
       private var _create:Boolean;
 
+      private var _canMakeOpenedClosed:Boolean;
+
+      private var _canChangeComment:Boolean;
+
+      private var _canChangeArena:Boolean;
+
+      public function get canMakeOpenedClosed() : Boolean {
+         return this._canMakeOpenedClosed;
+      }
+
+      public function set canMakeOpenedClosed(param1:Boolean) : void {
+         this._canMakeOpenedClosed = param1;
+      }
+
+      public function get canChangeComment() : Boolean {
+         return this._canChangeComment;
+      }
+
+      public function set canChangeComment(param1:Boolean) : void {
+         this._canChangeComment = param1;
+      }
+
+      public function get canChangeArena() : Boolean {
+         return this._canChangeArena;
+      }
+
+      public function set canChangeArena(param1:Boolean) : void {
+         this._canChangeArena = param1;
+      }
+
       public function get create() : Boolean {
          return this._create;
       }

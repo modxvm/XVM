@@ -2,6 +2,7 @@ package net.wg.gui.lobby.hangar
 {
    import net.wg.infrastructure.base.meta.impl.HangarMeta;
    import net.wg.infrastructure.base.meta.IHangarMeta;
+   import net.wg.gui.components.controls.IconButton;
    import net.wg.gui.lobby.hangar.crew.Crew;
    import net.wg.gui.lobby.hangar.tcarousel.TankCarousel;
    import net.wg.gui.lobby.hangar.ammunitionPanel.AmmunitionPanel;
@@ -13,8 +14,10 @@ package net.wg.gui.lobby.hangar
    import flash.events.KeyboardEvent;
    import flash.events.MouseEvent;
    import net.wg.gui.events.LobbyEvent;
-   import scaleform.clik.events.InputEvent;
+   import scaleform.clik.events.ButtonEvent;
+   import flash.events.Event;
    import flash.geom.Point;
+   import scaleform.clik.events.InputEvent;
    import net.wg.utils.IEventCollector;
    import net.wg.data.constants.Tooltips;
 
@@ -41,6 +44,8 @@ package net.wg.gui.lobby.hangar
       public var vehResearchPanel:ResearchPanel;
 
       public var tmenXpPanel:TmenXpPanel;
+
+      public var crewOperationBtn:IconButton;
 
       public var crew:Crew;
 
@@ -195,6 +200,7 @@ package net.wg.gui.lobby.hangar
          removeEventListener(CrewDropDownEvent.SHOW_DROP_DOWN,this.onShowCrewDropwDownHandler);
          App.gameInputMgr.clearKeyHandler(Keyboard.F1,KeyboardEvent.KEY_DOWN);
          App.gameInputMgr.clearKeyHandler(Keyboard.F1,KeyboardEvent.KEY_UP);
+         this.crewOperationBtn.removeEventListener(ButtonEvent.CLICK,this.retrainBtnClickHandler);
          if(App.globalVarsMgr.isDevelopmentS())
          {
             App.gameInputMgr.clearKeyHandler(Keyboard.F2,KeyboardEvent.KEY_UP);
@@ -228,6 +234,13 @@ package net.wg.gui.lobby.hangar
          {
             App.gameInputMgr.setKeyHandler(Keyboard.F2,KeyboardEvent.KEY_UP,this.toggleGUIEditorHandler,true);
          }
+         this.crewOperationBtn.tooltip = CREW_OPERATIONS.CREWOPERATIONS_BTN_TOOLTIP;
+         this.crewOperationBtn.addEventListener(ButtonEvent.CLICK,this.retrainBtnClickHandler,false,0,true);
+      }
+
+      private function retrainBtnClickHandler(param1:Event) : void {
+         var _loc2_:Point = localToGlobal(new Point(this.crewOperationBtn.x + this.crewOperationBtn.width,this.crewOperationBtn.y + this.crewOperationBtn.height / 2));
+         App.popoverMgr.show(this.crewOperationBtn,Aliases.CREW_OPERATIONS_POPOVER,_loc2_.x,_loc2_.y);
       }
 
       private function toggleGUIEditorHandler(param1:InputEvent) : void {
@@ -239,6 +252,7 @@ package net.wg.gui.lobby.hangar
          if(isInvalid(INVALIDATE_ENABLED_CREW))
          {
             this.crew.enabled = this.crewEnabled;
+            this.crewOperationBtn.enabled = this.crewEnabled;
          }
       }
 

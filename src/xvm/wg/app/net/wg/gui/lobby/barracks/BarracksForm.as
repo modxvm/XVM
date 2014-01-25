@@ -248,7 +248,7 @@ package net.wg.gui.lobby.barracks
          this.tankmenTileList.addEventListener(ListEvent.ITEM_PRESS,hideTooltip);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          App.toolTipMgr.hide();
          this.tankmenTileList.removeEventListener(ListEvent.ITEM_ROLL_OVER,showTooltip);
          this.tankmenTileList.removeEventListener(ListEvent.ITEM_ROLL_OUT,hideTooltip);
@@ -285,7 +285,7 @@ package net.wg.gui.lobby.barracks
          this._tankType = null;
          this._location = null;
          this._nationID = null;
-         super.dispose();
+         super.onDispose();
       }
 
       public function onPopulate() : void {

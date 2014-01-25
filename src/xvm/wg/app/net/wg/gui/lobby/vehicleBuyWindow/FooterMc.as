@@ -38,8 +38,8 @@ package net.wg.gui.lobby.vehicleBuyWindow
          this.expandBtn.buttonMode = true;
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this.submitBtn.dispose();
          this.cancelBtn.dispose();
          this.expandBtn.dispose();

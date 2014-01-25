@@ -6,8 +6,6 @@ package net.wg.infrastructure.base.meta
    public interface IWindowViewMeta extends IEventDispatcher
    {
           
-      function onWindowCloseS() : void;
-
       function onWindowMinimizeS() : void;
 
       function onSourceLoadedS() : void;

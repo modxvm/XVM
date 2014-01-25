@@ -52,8 +52,8 @@ package net.wg.gui.prebattle.company
          refreshData();
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          App.utils.scheduler.cancelTask(this.updateRenderer);
          this.removeEventListener(FocusEvent.FOCUS_OUT,this.focusOutHandler);
          this.removeEventListener(CompanyEvent.SELECTED_ITEM,this.selectedItemHandler);

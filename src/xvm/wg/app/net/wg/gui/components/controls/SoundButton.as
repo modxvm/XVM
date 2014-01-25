@@ -45,7 +45,7 @@ package net.wg.gui.components.controls
          return "[WG SoundButton " + name + "]";
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.hitMc = null;
          if(_repeatTimer != null)
          {
@@ -58,7 +58,7 @@ package net.wg.gui.components.controls
          }
          App.utils.scheduler.cancelTask(this.unlockKeyboardHandling);
          App.utils.scheduler.cancelTask(this.unlockMouseHandling);
-         super.dispose();
+         super.onDispose();
       }
 
       public final function getSoundType() : String {

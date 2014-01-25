@@ -18,8 +18,8 @@ package net.wg.gui.lobby.browser
 
       private var bgImg:Bitmap;
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          removeEventListener(MouseEvent.MOUSE_MOVE,this.onMouseMoveHandler);
          removeEventListener(MouseEvent.MOUSE_WHEEL,this.onMouseWheelHandler);
          removeEventListener(MouseEvent.ROLL_OVER,this.onMouseRollOverHandler);

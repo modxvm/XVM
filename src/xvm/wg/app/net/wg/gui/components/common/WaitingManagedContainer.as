@@ -52,9 +52,9 @@ package net.wg.gui.components.common
          removeChild(DisplayObject(this._waiting));
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this._waiting = null;
-         super.dispose();
+         super.onDispose();
       }
    }
 

@@ -27,6 +27,8 @@ package net.wg.infrastructure.base.meta.impl
 
       public var favoriteVehicle:Function = null;
 
+      public var showVehicleStats:Function = null;
+
       public var getVehicleTypeProvider:Function = null;
 
       public function showVehicleInfoS(param1:String) : void {
@@ -67,6 +69,11 @@ package net.wg.infrastructure.base.meta.impl
       public function favoriteVehicleS(param1:String, param2:Boolean) : void {
          App.utils.asserter.assertNotNull(this.favoriteVehicle,"favoriteVehicle" + Errors.CANT_NULL);
          this.favoriteVehicle(param1,param2);
+      }
+
+      public function showVehicleStatsS(param1:Number) : void {
+         App.utils.asserter.assertNotNull(this.showVehicleStats,"showVehicleStats" + Errors.CANT_NULL);
+         this.showVehicleStats(param1);
       }
 
       public function getVehicleTypeProviderS() : Array {

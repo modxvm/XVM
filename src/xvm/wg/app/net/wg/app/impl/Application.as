@@ -39,6 +39,8 @@ package net.wg.app.impl
    import net.wg.infrastructure.managers.impl.ColorSchemeManager;
    import net.wg.infrastructure.managers.IContextMenuManager;
    import net.wg.infrastructure.managers.impl.ContextMenuManager;
+   import net.wg.infrastructure.managers.IPopoverManager;
+   import net.wg.infrastructure.managers.impl.PopoverManager;
    import net.wg.infrastructure.managers.impl.ClassManager;
    import net.wg.infrastructure.managers.IGuiItemsManager;
    import net.wg.infrastructure.managers.impl.GuiItemsManager;
@@ -56,7 +58,7 @@ package net.wg.app.impl
           
       public function Application() {
          this.browserBgClassValue = Application_browserBgClassValue;
-         this._librariesList = Vector.<String>(["windows.swf"]);
+         this._librariesList = Vector.<String>(["windows.swf","popovers.swf"]);
          super();
          Extensions.enabled = true;
          Extensions.noInvisibleAdvance = true;
@@ -115,7 +117,7 @@ package net.wg.app.impl
          this._windows.type = ContainerTypes.WINDOW;
          this._systemMessages = new Sprite();
          this._dialogs = new ManagedContainer();
-         this._dialogs.type = ContainerTypes.DIALOG;
+         this._dialogs.type = ContainerTypes.TOP_WINDOW;
          this._toolTips = new MovieClip();
          this._cursorCtnr = new CursorManagedContainer();
          this._waitingCtnr = new WaitingManagedContainer();
@@ -184,7 +186,11 @@ package net.wg.app.impl
          return new ContextMenuManager();
       }
 
-      override protected function getNewClassManager() : Sprite {
+      override protected function getNewPopoverManager() : IPopoverManager {
+         return new PopoverManager(stage);
+      }
+
+      override protected function getNewClassManager() : Object {
          return new ClassManager();
       }
 

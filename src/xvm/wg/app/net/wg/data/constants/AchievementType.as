@@ -16,6 +16,8 @@ package net.wg.data.constants
       public static const CUSTOM:String = "custom";
 
       public static const SERIES:String = "series";
+
+      public static const SINGLE:String = "single";
    }
 
 }

@@ -37,7 +37,7 @@ package net.wg.gui.components.tooltips.VO
 
       public var haveResearchXP:Boolean = false;
 
-      public var stats:Array = null;
+      public var stats:Object = null;
 
       public var useGold:Boolean = false;
 
@@ -82,7 +82,33 @@ package net.wg.gui.components.tooltips.VO
          this.gold = (param1.hasOwnProperty("gold")) && !(param1["gold"] == undefined)?param1["gold"]:"";
          this.removeable = (param1.hasOwnProperty("removeable")) && !(param1["removeable"] == undefined)?param1["removeable"]:"";
          this.haveResearchXP = (param1.hasOwnProperty("haveResearchXP")) && !(param1["haveResearchXP"] == undefined)?param1["haveResearchXP"]:"";
-         this.stats = (param1.hasOwnProperty("stats")) && !(param1["stats"] == undefined)?param1["stats"]:null;
+         this.stats = (param1.hasOwnProperty("stats")) && !(param1["stats"] == undefined) && !(param1["stats"]  is  Array)?param1["stats"]:null;
+         if(this.stats)
+         {
+            if((this.stats.hasOwnProperty("buy_price")) && this.stats["buy_price"][0]  is  Array)
+            {
+               if(this.stats["buy_price"][0][0] > 0)
+               {
+                  this.useCredits = true;
+               }
+               if(this.stats["buy_price"][0][1] > 0)
+               {
+                  this.useGold = true;
+               }
+            }
+            if((this.stats.hasOwnProperty("sell_price")) && this.stats["sell_price"]  is  Array)
+            {
+               if(this.stats["sell_price"][0] > 0)
+               {
+                  this.useCredits = true;
+               }
+               if(this.stats["sell_price"][1] > 0)
+               {
+                  this.useGold = true;
+               }
+            }
+            this.isAction = (this.stats.hasOwnProperty("action_prc")) && !(this.stats["action_prc"] == 0);
+         }
          if((param1.hasOwnProperty("params")) && !(param1["params"] == undefined))
          {
             this.params = (param1["params"][0]) && (!(param1["params"][0] == undefined)) && param1["params"][0].length > 0?param1["params"][0]:null;

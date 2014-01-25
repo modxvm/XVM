@@ -49,7 +49,7 @@ package net.wg.gui.lobby.questsWindow
          invalidate(DISABLED_QUESTS);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          if(this._tasks)
          {
             this.clearTasks();
@@ -65,7 +65,7 @@ package net.wg.gui.lobby.questsWindow
             this._availableQuests.splice(0,this._availableQuests.length);
             this._availableQuests = null;
          }
-         super.dispose();
+         super.onDispose();
       }
 
       override protected function draw() : void {

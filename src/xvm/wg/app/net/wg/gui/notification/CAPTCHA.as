@@ -8,7 +8,6 @@ package net.wg.gui.notification
    import net.wg.gui.components.controls.SoundButtonEx;
    import net.wg.gui.components.controls.UILoaderAlt;
    import scaleform.clik.events.ButtonEvent;
-   import flash.events.Event;
    import scaleform.clik.events.InputEvent;
    import scaleform.clik.constants.InputValue;
    import flash.ui.Keyboard;
@@ -55,11 +54,13 @@ package net.wg.gui.notification
          this._imageURL = param1;
          this._imageWidth = param2;
          this._imageHeight = param3;
+         this.setInputFocus();
          invalidate(INVALID_IMAGE);
       }
 
       public function as_setErrorMessage(param1:String) : void {
          this._errorMessage = param1;
+         this.setInputFocus();
          invalidate(INVALID_MESSAGE);
       }
 
@@ -68,7 +69,6 @@ package net.wg.gui.notification
          this.submitButton.addEventListener(ButtonEvent.CLICK,this.onSubmitClick);
          this.reloadButton.addEventListener(ButtonEvent.CLICK,this.onReloadClick);
          this.closeButton.addEventListener(ButtonEvent.CLICK,this.onCloseClick);
-         addEventListener(Event.ENTER_FRAME,this.setInputFocus);
       }
 
       override protected function draw() : void {
@@ -102,15 +102,10 @@ package net.wg.gui.notification
       private function clearFields() : void {
          this.inputField.text = "";
          this.errorField.text = "";
-         if(!this.inputField.focused)
-         {
-            App.utils.focusHandler.setFocus(this.inputField);
-         }
       }
 
-      private function setInputFocus(param1:Event) : void {
-         removeEventListener(Event.ENTER_FRAME,this.setInputFocus);
-         App.utils.focusHandler.setFocus(this.inputField);
+      private function setInputFocus() : void {
+         setFocus(this.inputField);
       }
 
       private function onSubmitClick(param1:ButtonEvent=null) : void {

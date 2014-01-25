@@ -50,9 +50,9 @@ package net.wg.gui.lobby.hangar.maintenance.data
          }
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.disposeShells();
-         super.dispose();
+         super.onDispose();
       }
 
       override protected function onDataWrite(param1:String, param2:Object) : Boolean {

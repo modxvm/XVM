@@ -288,12 +288,12 @@ package net.wg.gui.lobby.settings.components
          return _loc1_;
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          var _loc1_:* = 0;
          var _loc2_:* = 0;
          var _loc3_:IListItemRenderer = null;
          var _loc4_:DisplayObject = null;
-         super.dispose();
+         super.onDispose();
          if(_renderers != null)
          {
             _loc1_ = _renderers.length;

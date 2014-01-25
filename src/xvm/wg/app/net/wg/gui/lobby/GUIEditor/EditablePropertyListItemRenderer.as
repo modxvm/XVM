@@ -2,10 +2,10 @@ package net.wg.gui.lobby.GUIEditor
 {
    import scaleform.clik.controls.ListItemRenderer;
    import flash.text.TextField;
+   import flash.events.Event;
    import flash.geom.Point;
    import scaleform.clik.constants.InvalidationType;
    import flash.events.MouseEvent;
-   import flash.events.Event;
 
 
    public class EditablePropertyListItemRenderer extends ListItemRenderer
@@ -16,6 +16,18 @@ package net.wg.gui.lobby.GUIEditor
       }
 
       public var valueField:TextField = null;
+
+      override public function setData(param1:Object) : void {
+         super.setData(param1);
+         invalidateData();
+      }
+
+      override protected function onDispose() : void {
+         super.onDispose();
+         this.valueField.removeEventListener(Event.CHANGE,this.onTextInputHandler);
+         this.valueField = null;
+         textField = null;
+      }
 
       override protected function draw() : void {
          var _loc1_:Point = null;
@@ -51,18 +63,6 @@ package net.wg.gui.lobby.GUIEditor
          _focusable = tabEnabled = tabChildren = mouseChildren = true;
          mouseEnabled = true;
          this.valueField.addEventListener(Event.CHANGE,this.onTextInputHandler);
-      }
-
-      override public function setData(param1:Object) : void {
-         super.setData(param1);
-         invalidateData();
-      }
-
-      override public function dispose() : void {
-         super.dispose();
-         this.valueField.removeEventListener(Event.CHANGE,this.onTextInputHandler);
-         this.valueField = null;
-         textField = null;
       }
 
       private function onTextInputHandler(param1:Event) : void {

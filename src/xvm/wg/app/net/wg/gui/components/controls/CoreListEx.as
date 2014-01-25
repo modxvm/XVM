@@ -183,6 +183,10 @@ package net.wg.gui.components.controls
          }
          if(this.dispatchItemEvent(param1))
          {
+            if(_baseDisposed)
+            {
+               return;
+            }
             if((this.useRightButton) && (this.useRightButtonForSelect) || param1.buttonIdx == 0)
             {
                selectedIndex = _loc2_;

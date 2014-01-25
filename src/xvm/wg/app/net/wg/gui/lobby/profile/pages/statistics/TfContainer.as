@@ -122,9 +122,9 @@ package net.wg.gui.lobby.profile.pages.statistics
          }
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          removeEventListener(Event.RESIZE,this.resizeComponentsHandler);
-         super.dispose();
+         super.onDispose();
       }
    }
 

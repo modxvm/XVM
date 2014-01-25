@@ -238,7 +238,7 @@ package net.wg.gui.notification
          return actualHeight;
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.textField.removeEventListener(TextEvent.LINK,this.onMessageLinkClick);
          this.textField.removeEventListener(MouseEvent.CLICK,this.onMessageMouseClick);
          this.btnMoreInfo.removeEventListener(ButtonEvent.CLICK,this.btnClickHandler);
@@ -252,7 +252,7 @@ package net.wg.gui.notification
          this.btnMoreInfo.dispose();
          this.btnMoreInfo = null;
          this.textField = null;
-         super.dispose();
+         super.onDispose();
       }
    }
 

@@ -53,14 +53,14 @@ package net.wg.gui.lobby.browser
                this.showStopIcon(true);
             }
          }
-         if(!this._isMouseOver && this.action == ACTION_LOADING)
-         {
-            App.utils.focusHandler.setFocus(this.parent);
-         }
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      public function get isMouseOver() : Boolean {
+         return this._isMouseOver;
+      }
+
+      override protected function onDispose() : void {
+         super.onDispose();
          this.btn.removeEventListener(ButtonEvent.CLICK,this.onBtnClick);
          this.btn.removeEventListener(MouseEvent.ROLL_OVER,this.onBtnRollOver);
          this.btn.removeEventListener(MouseEvent.ROLL_OUT,this.onBtnRollOut);

@@ -117,11 +117,6 @@ package net.wg.gui.lobby.profile.pages.technique
          invalidateSelectedIndex();
       }
 
-      override public function set selectedIndex(param1:int) : void {
-         this.updateOldSelected();
-         super.selectedIndex = param1;
-      }
-
       override protected function draw() : void {
          super.draw();
          this.isSortingTheLastActivity = false;
@@ -141,19 +136,19 @@ package net.wg.gui.lobby.profile.pages.technique
       }
 
       private function invalidateSorting(param1:String) : void {
-         this.updateOldSelected();
+         this.updateOldSelected(_selectedIndex);
          sortPropName = param1;
          this.isSortingTheLastActivity = true;
          invalidate(SORTING_INVALID);
       }
 
-      private function updateOldSelected() : void {
-         var _loc2_:TechniqueListVehicleVO = null;
-         var _loc1_:IListItemRenderer = getRendererAt(selectedIndex);
-         if(_loc1_)
+      private function updateOldSelected(param1:int) : void {
+         var _loc3_:TechniqueListVehicleVO = null;
+         var _loc2_:IListItemRenderer = getRendererAt(param1);
+         if(_loc2_)
          {
-            _loc2_ = TechniqueListVehicleVO(_dataProvider[selectedIndex]);
-            this.oldSelectedItemId = _loc2_.id;
+            _loc3_ = TechniqueListVehicleVO(_dataProvider[param1]);
+            this.oldSelectedItemId = _loc3_.id;
          }
       }
 
@@ -256,9 +251,30 @@ package net.wg.gui.lobby.profile.pages.technique
          drawScrollBar();
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.removeEventListener(ListEvent.INDEX_CHANGE,this.indexChangedHandler);
-         super.dispose();
+         super.onDispose();
+      }
+
+      public function set selectedVehIntCD(param1:int) : void {
+         var _loc4_:TechniqueListVehicleVO = null;
+         this.oldSelectedItemId = param1;
+         var _loc2_:* = -1;
+         var _loc3_:uint = dataProvider.length;
+         var _loc5_:* = 0;
+         while(_loc5_ < _loc3_)
+         {
+            _loc4_ = dataProvider[_loc5_];
+            if(param1 == _loc4_.id)
+            {
+               _loc2_ = _loc5_;
+               break;
+            }
+            _loc5_++;
+         }
+         _selectedIndex = _newSelectedIndex = _loc2_;
+         scrollToIndex(_selectedIndex);
+         invalidateSelectedIndex();
       }
    }
 

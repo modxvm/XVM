@@ -2,6 +2,9 @@ package net.wg.gui.lobby.vehicleInfo
 {
    import scaleform.clik.core.UIComponent;
    import net.wg.infrastructure.interfaces.IViewStackContent;
+   import flash.display.InteractiveObject;
+   import net.wg.infrastructure.exceptions.AbstractException;
+   import net.wg.data.constants.Errors;
 
 
    public class VehicleInfoBase extends UIComponent implements IViewStackContent
@@ -19,6 +22,18 @@ package net.wg.gui.lobby.vehicleInfo
 
       private var startX:Number = 10;
 
+      override protected function onDispose() : void {
+         super.onDispose();
+         while(this.numChildren > 0)
+         {
+            this.removeChildAt(0);
+         }
+      }
+
+      override public function toString() : String {
+         return "[WG VehicleInfoBase " + name + "]";
+      }
+
       public function update(param1:Object) : void {
          var _loc3_:BaseBlock = null;
          this._data = param1 as Array;
@@ -34,16 +49,8 @@ package net.wg.gui.lobby.vehicleInfo
          }
       }
 
-      override public function dispose() : void {
-         super.dispose();
-         while(this.numChildren > 0)
-         {
-            this.removeChildAt(0);
-         }
-      }
-
-      override public function toString() : String {
-         return "[WG VehicleInfoBase " + name + "]";
+      public function getComponentForFocus() : InteractiveObject {
+         throw new AbstractException("VehicleInfoBase::componentForFocus" + Errors.ABSTRACT_INVOKE);
       }
    }
 

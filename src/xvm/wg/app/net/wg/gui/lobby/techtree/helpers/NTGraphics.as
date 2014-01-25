@@ -218,10 +218,10 @@ package net.wg.gui.lobby.techtree.helpers
          return this.levels.updateLevels(param1,param2,param3);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.tween = null;
          this.clearUp();
-         super.dispose();
+         super.onDispose();
       }
 
       override public function clearUp() : void {

@@ -10,6 +10,7 @@ package net.wg.gui.lobby.customization
    import net.wg.gui.lobby.customization.data.RentalPackageDAAPIDataProvider;
    import scaleform.clik.events.ListEvent;
    import flash.events.MouseEvent;
+   import flash.display.InteractiveObject;
 
 
    public class BaseTimedCustomizationSectionView extends UIComponent implements IViewStackContent
@@ -75,23 +76,26 @@ package net.wg.gui.lobby.customization
       }
 
       public function onChangeSuccess() : void {
-         this.currentItemData = this.newItemData;
-         this.currentItemRenderer.setData(this.currentItemData);
-         this.currentItemRenderer.enabled = true;
-         if(this.dropButton != null)
+         if((this.newItemData) && (this.newItemData.id))
          {
-            this.dropButton.visible = true;
-         }
-         if(this.timeLeftField != null)
-         {
-            this.timeLeftField.text = "";
-         }
-         this.newItemData = this.getEmptyDataItem();
-         this.newItemRenderer.setData(this.newItemData);
-         this.newItemRenderer.enabled = false;
-         if(this.view != null)
-         {
-            this.view.invalidateListData(true);
+            this.currentItemData = this.newItemData;
+            this.currentItemRenderer.setData(this.currentItemData);
+            this.currentItemRenderer.enabled = true;
+            if(this.dropButton != null)
+            {
+               this.dropButton.visible = true;
+            }
+            if(this.timeLeftField != null)
+            {
+               this.timeLeftField.text = "";
+            }
+            this.newItemData = this.getEmptyDataItem();
+            this.newItemRenderer.setData(this.newItemData);
+            this.newItemRenderer.enabled = false;
+            if(this.view != null)
+            {
+               this.view.invalidateListData(true);
+            }
          }
       }
 
@@ -212,43 +216,50 @@ package net.wg.gui.lobby.customization
          return "";
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
          if(this.form != null)
          {
-            this.form.removeEventListener(CustomizationEvent.CHANGE_ACTIONS_LOCK,this.handleChangeActionLock);
-            this.form.removeEventListener(CustomizationEvent.RESET_NEW_ITEM,this.handleResetNewItem);
+            this.form.removeEventListener(CustomizationEvent.CHANGE_ACTIONS_LOCK,this.onChangeActionLock);
+            this.form.removeEventListener(CustomizationEvent.RESET_NEW_ITEM,this.onResetNewItem);
             this.form = null;
          }
          if(this.view)
          {
-            this.view.removeEventListener(CustomizationEvent.SELECT_NEW,this.handleSelectNewItem);
-            this.view.dispose();
+            this.view.removeEventListener(CustomizationEvent.SELECT_NEW,this.onSelectNewItem);
             this.view = null;
          }
          if(this.list != null)
          {
             this.list.removeEventListener(ListEvent.INDEX_CHANGE,this.handleChangeGroupSelectedIndex);
             this.list.dataProvider = null;
+            this.list.dispose();
+            this.list = null;
          }
          if(this.currentItemRenderer != null)
          {
             this.currentItemRenderer.setData(null);
+            this.currentItemRenderer.dispose();
+            this.currentItemRenderer = null;
          }
          if(this.dropButton != null)
          {
-            this.dropButton.removeEventListener(MouseEvent.ROLL_OVER,this.hadleRollOverDropButton);
-            this.dropButton.removeEventListener(MouseEvent.ROLL_OUT,this.hadleRollOutDropButton);
-            this.dropButton.removeEventListener(CustomizationEvent.DROP_ITEM,this.handleClickDropButton);
+            this.dropButton.removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverDropButton);
+            this.dropButton.removeEventListener(MouseEvent.ROLL_OUT,this.onRollOutDropButton);
+            this.dropButton.removeEventListener(CustomizationEvent.DROP_ITEM,this.onClickDropButton);
+            this.dropButton.dispose();
+            this.dropButton = null;
          }
          if(this.newItemRenderer != null)
          {
             this.newItemRenderer.setData(null);
+            this.newItemRenderer.dispose();
+            this.newItemRenderer = null;
          }
          this._currentItemData = null;
          this._newItemData = null;
          this._groupsDataProvider = null;
          this._data = null;
+         super.onDispose();
       }
 
       public function update(param1:Object) : void {
@@ -332,15 +343,15 @@ package net.wg.gui.lobby.customization
                   this.newItemData = _loc1_._new;
                }
             }
-            this.form.addEventListener(CustomizationEvent.CHANGE_ACTIONS_LOCK,this.handleChangeActionLock);
-            this.form.addEventListener(CustomizationEvent.RESET_NEW_ITEM,this.handleResetNewItem);
+            this.form.addEventListener(CustomizationEvent.CHANGE_ACTIONS_LOCK,this.onChangeActionLock);
+            this.form.addEventListener(CustomizationEvent.RESET_NEW_ITEM,this.onResetNewItem);
             _loc2_ = this.getViewLinkage();
             this.view = BaseTimedCustomizationGroupView(this.form.showView(_loc2_));
             this.view.timeLabel = this.getTimeSectionLabel();
             this.view.itemsDP = this.getItemsDP();
             this.view.rentalPackageDP = this.getRentalPackagesDP();
             this.view.rentalPackageDP.triggerInvalidation();
-            this.view.addEventListener(CustomizationEvent.SELECT_NEW,this.handleSelectNewItem);
+            this.view.addEventListener(CustomizationEvent.SELECT_NEW,this.onSelectNewItem);
             this.view.initData();
          }
          if(this.list != null)
@@ -358,9 +369,9 @@ package net.wg.gui.lobby.customization
          if(this.dropButton != null)
          {
             this.dropButton.visible = false;
-            this.dropButton.addEventListener(MouseEvent.ROLL_OVER,this.hadleRollOverDropButton);
-            this.dropButton.addEventListener(MouseEvent.ROLL_OUT,this.hadleRollOutDropButton);
-            this.dropButton.addEventListener(CustomizationEvent.DROP_ITEM,this.handleClickDropButton);
+            this.dropButton.addEventListener(MouseEvent.ROLL_OVER,this.onRollOverDropButton);
+            this.dropButton.addEventListener(MouseEvent.ROLL_OUT,this.onRollOutDropButton);
+            this.dropButton.addEventListener(CustomizationEvent.DROP_ITEM,this.onClickDropButton);
          }
          if(this.newItemRenderer != null)
          {
@@ -376,7 +387,8 @@ package net.wg.gui.lobby.customization
       }
 
       private function setNewItemView(param1:int, param2:Object, param3:int) : void {
-         var _loc4_:int = param2.id;
+         var _loc4_:* = 0;
+         _loc4_ = param2.id;
          if(this.currentItemData.id == _loc4_)
          {
             this.newItemData = this.getEmptyDataItem();
@@ -403,23 +415,23 @@ package net.wg.gui.lobby.customization
          );
       }
 
-      private function handleSelectNewItem(param1:CustomizationEvent) : void {
+      private function onSelectNewItem(param1:CustomizationEvent) : void {
          this.setNewItemView(param1.index,param1.data,0);
       }
 
-      private function hadleRollOverDropButton(param1:MouseEvent) : void {
+      private function onRollOverDropButton(param1:MouseEvent) : void {
          App.toolTipMgr.showComplex(this.getDropButtonTooltip());
       }
 
-      private function hadleRollOutDropButton(param1:MouseEvent) : void {
+      private function onRollOutDropButton(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
       }
 
-      private function handleChangeActionLock(param1:CustomizationEvent) : void {
+      private function onChangeActionLock(param1:CustomizationEvent) : void {
          this.dropButton.enabled = !param1.locked;
       }
 
-      private function handleResetNewItem(param1:CustomizationEvent) : void {
+      private function onResetNewItem(param1:CustomizationEvent) : void {
          this.newItemData = this.getEmptyDataItem();
          this.newItemRenderer.setData(this.newItemData);
          this.newItemRenderer.enabled = false;
@@ -429,12 +441,16 @@ package net.wg.gui.lobby.customization
          }
       }
 
-      private function handleClickDropButton(param1:CustomizationEvent) : void {
+      private function onClickDropButton(param1:CustomizationEvent) : void {
          App.toolTipMgr.hide();
          if(this.form)
          {
             this.form.dropCurrentItemInSection(this.getSectionName(),param1.kind);
          }
+      }
+
+      public function getComponentForFocus() : InteractiveObject {
+         return null;
       }
    }
 

@@ -81,9 +81,8 @@ package net.wg.gui.lobby.techtree.data
       }
 
       private function getNodeData(param1:XML) : NodeData {
-         var _loc2_:NodeData = null;
          var _loc4_:XML = null;
-         _loc2_ = new NodeData();
+         var _loc2_:NodeData = new NodeData();
          var _loc3_:Array = [];
          for each (_loc4_ in param1.child("unlockProps").child("topIDs").children())
          {
@@ -99,7 +98,6 @@ package net.wg.gui.lobby.techtree.data
          _loc2_.iconPath = param1.child("iconPath").text();
          _loc2_.smallIconPath = param1.child("smallIconPath").text();
          _loc2_.longName = param1.child("longName").text();
-         _loc2_.pickleDump = param1.child("dump").text();
          _loc2_.shopPrice = new ShopPrice(param1.child("shopPrice").child("credits").text(),param1.child("shopPrice").child("gold").text());
          _loc2_.displayInfo = this.getNodeDisplayInfo(param1.child("display")[0]);
          return _loc2_;

@@ -46,17 +46,18 @@ package net.wg.gui.lobby.training
 
       private static const SUB_VIEW_MARGIN:Number = 120;
 
-      private static function checkStatus(param1:CoreList, param2:Number, param3:String, param4:String, param5:String, param6:String) : void {
-         var _loc8_:TrainingRoomRendererVO = null;
-         var _loc7_:IDataProvider = param1.dataProvider;
-         for each (_loc8_ in _loc7_)
+      private static function checkStatus(param1:CoreList, param2:Number, param3:String, param4:String, param5:String, param6:String, param7:int) : void {
+         var _loc9_:TrainingRoomRendererVO = null;
+         var _loc8_:IDataProvider = param1.dataProvider;
+         for each (_loc9_ in _loc8_)
          {
-            if(_loc8_.uid == param2)
+            if(_loc9_.uid == param2)
             {
-               _loc8_.stateString = param3;
-               _loc8_.icon = param4;
-               _loc8_.vShortName = param5;
-               _loc8_.vLevel = param6;
+               _loc9_.stateString = param3;
+               _loc9_.icon = param4;
+               _loc9_.vShortName = param5;
+               _loc9_.vLevel = param6;
+               _loc9_.igrType = param7;
                param1.invalidateData();
                break;
             }
@@ -158,16 +159,16 @@ package net.wg.gui.lobby.training
          invalidateSize();
       }
 
-      public function as_setPlayerStateInTeam1(param1:Number, param2:String, param3:String, param4:String, param5:String) : void {
-         checkStatus(this.team1,param1,param2,param3,param4,param5);
+      public function as_setPlayerStateInTeam1(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int) : void {
+         checkStatus(this.team1,param1,param2,param3,param4,param5,param6);
       }
 
-      public function as_setPlayerStateInTeam2(param1:Number, param2:String, param3:String, param4:String, param5:String) : void {
-         checkStatus(this.team2,param1,param2,param3,param4,param5);
+      public function as_setPlayerStateInTeam2(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int) : void {
+         checkStatus(this.team2,param1,param2,param3,param4,param5,param6);
       }
 
-      public function as_setPlayerStateInOther(param1:Number, param2:String, param3:String, param4:String, param5:String) : void {
-         checkStatus(this.other,param1,param2,param3,param4,param5);
+      public function as_setPlayerStateInOther(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int) : void {
+         checkStatus(this.other,param1,param2,param3,param4,param5,param6);
       }
 
       public function as_setPlayerChatRosterInTeam1(param1:Number, param2:Number) : void {
@@ -198,8 +199,7 @@ package net.wg.gui.lobby.training
       }
 
       public function as_startCoolDownSwapButton(param1:Number) : void {
-         var _loc2_:IScheduler = null;
-         _loc2_ = App.utils.scheduler;
+         var _loc2_:IScheduler = App.utils.scheduler;
          _loc2_.cancelTask(this.stopCoolDownSwapButton);
          this.swapButton.enabled = false;
          _loc2_.scheduleTask(this.stopCoolDownSwapButton,param1 * 1000);
@@ -243,11 +243,14 @@ package net.wg.gui.lobby.training
          if(this.isCreator != _loc2_.isCreator)
          {
             this.isCreator = _loc2_.isCreator;
-            if(this.isCreator)
-            {
-               this.createDragController();
-            }
-            else
+         }
+         if((canAssignToTeamS(1)) || (canAssignToTeamS(2)) || (canChangePlayerTeamS()))
+         {
+            this.createDragController();
+         }
+         else
+         {
+            if(this._dragDropListDelegateCtrlr)
             {
                this._dragDropListDelegateCtrlr.dispose();
                this._dragDropListDelegateCtrlr = null;
@@ -274,15 +277,15 @@ package net.wg.gui.lobby.training
          this.minimap.setMapS(_loc2_.arenaTypeID);
          this.description.position = 0;
          this.description.htmlText = _loc2_.description;
-         this.arenaVoipSettings.setCanChangeArenaVOIP(_loc2_.canChangeArenaVOIP);
          this.arenaVoipSettings.setUseArenaVoip(_loc2_.arenaVoipChannels);
+         this.arenaVoipSettings.setCanChangeArenaVOIP(_loc2_.canChangeArenaVOIP);
          invalidate(InvalidationType.STATE);
       }
 
       private function createDragController() : void {
          var _loc1_:Class = App.utils.classFactory.getClass(Linkages.TRAINING_DRAG_DELEGATE);
          assertNull(this._dragDropListDelegateCtrlr,"_dragDropListDelegateCtrlr");
-         this._dragDropListDelegateCtrlr = new TrainingDragController(this._slots,_loc1_,Linkages.PLAYER_ELEMENT_UI);
+         this._dragDropListDelegateCtrlr = new TrainingDragController(this._slots,_loc1_,Linkages.PLAYER_ELEMENT_UI,this.isSlotDroppable);
       }
 
       public function as_updateComment(param1:String) : void {
@@ -332,11 +335,10 @@ package net.wg.gui.lobby.training
       }
 
       override protected function onPopulate() : void {
-         var _loc1_:* = false;
          super.onPopulate();
          registerComponent(this.minimap,Aliases.LOBBY_MINIMAP);
          this.setTeamsInfo();
-         _loc1_ = App.voiceChatMgr.isYYS();
+         var _loc1_:Boolean = App.voiceChatMgr.isYYS();
          this.arenaVoipSettings.visible = (App.voiceChatMgr.isVOIPEnabledS()) || (_loc1_);
          this.arenaVOIPLabel.text = (App.voiceChatMgr.isVOIPEnabledS()) || (_loc1_)?MENU.TRAINING_INFO_VOICECHAT:"";
       }
@@ -411,13 +413,13 @@ package net.wg.gui.lobby.training
          }
          if(isInvalid(InvalidationType.STATE))
          {
-            if(!this.isCreator)
+            this.inviteButton.visible = canSendInviteS();
+            this.swapButton.visible = canChangePlayerTeamS();
+            this.settingsButton.visible = canChangeSettingS();
+            this.startButton.visible = canStartBattleS();
+            if(!canDestroyRoomS())
             {
-               this.settingsButton.visible = false;
-               this.startButton.visible = false;
                this.closeButton.label = MENU.TRAINING_INFO_EXITBUTTON;
-               this.inviteButton.visible = false;
-               this.swapButton.visible = false;
             }
          }
       }
@@ -471,7 +473,7 @@ package net.wg.gui.lobby.training
          }
          else
          {
-            if(!this._dragDropListDelegateCtrlr)
+            if(!this._dragDropListDelegateCtrlr && ((canAssignToTeamS(1)) || (canAssignToTeamS(2)) || (canChangePlayerTeamS())))
             {
                this.createDragController();
             }
@@ -480,6 +482,23 @@ package net.wg.gui.lobby.training
 
       private function stopCoolDownSwapButton() : void {
          this.swapButton.enabled = true;
+      }
+
+      private function isSlotDroppable(param1:uint, param2:uint) : Boolean {
+         var _loc3_:uint = getPlayerTeamS(param1);
+         if(_loc3_ == param2)
+         {
+            return true;
+         }
+         if(param2 == 0 && (canAssignToTeamS(_loc3_)))
+         {
+            return true;
+         }
+         if(!(param2 == 0) && (canChangePlayerTeamS()))
+         {
+            return true;
+         }
+         return false;
       }
 
       private function stopCoolDownSetting() : void {
@@ -522,7 +541,10 @@ package net.wg.gui.lobby.training
          {
             _loc2_ = ListItemRenderer(param1.draggedItem).data.accID;
             _loc3_ = this._slots.indexOf(param1.receiver);
-            changeTeamS(_loc2_,_loc3_);
+            if(this.isSlotDroppable(_loc2_,_loc3_))
+            {
+               changeTeamS(_loc2_,_loc3_);
+            }
          }
       }
 

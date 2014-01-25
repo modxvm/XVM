@@ -62,7 +62,7 @@ package net.wg.gui.lobby.dialogs
       }
 
       private function updateFocus(param1:UIComponent) : void {
-         App.utils.focusHandler.setFocus(param1);
+         setFocus(param1);
       }
 
       override protected function configUI() : void {

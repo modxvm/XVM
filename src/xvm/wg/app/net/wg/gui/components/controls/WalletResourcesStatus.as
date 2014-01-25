@@ -23,6 +23,8 @@ package net.wg.gui.components.controls
 
       public static const RESOURCE_ICO_ALIGN_LEFT:String = "resIcoLeft";
 
+      public static const RESOURCE_ICO_ALIGN_LEFT_ALERT_RIGHT:String = "resIcoLeftAlertRight";
+
       public static const RESOURCE_ICO_ALIGN_RIGHT:String = "resIcoRight";
 
       public static const RESOURCE_ICO_FOR_TECH_TREE:String = "resIcoForTechTree";
@@ -61,7 +63,7 @@ package net.wg.gui.components.controls
          }
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.hit.removeEventListener(MouseEvent.ROLL_OVER,this.onOver);
          this.hit.removeEventListener(MouseEvent.ROLL_OUT,this.onOut);
          App.toolTipMgr.hide();
@@ -105,6 +107,7 @@ package net.wg.gui.components.controls
          if((isInvalid(InvalidationType.STATE)) && !(this._state == STATE_EMPTY))
          {
             gotoAndStop(this._state);
+            this.alertIco.x = this._state == RESOURCE_ICO_ALIGN_LEFT_ALERT_RIGHT?35:0;
          }
          if((isInvalid(InvalidationType.DATA)) && !(this._icoType == ""))
          {

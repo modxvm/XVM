@@ -9,6 +9,7 @@ package net.wg.gui.lobby.customization
    import net.wg.gui.lobby.customization.data.RentalPackageDAAPIDataProvider;
    import scaleform.clik.events.ListEvent;
    import flash.events.Event;
+   import flash.display.InteractiveObject;
 
 
    public class BaseTimedCustomizationGroupView extends UIComponent implements IViewStackContent
@@ -38,9 +39,9 @@ package net.wg.gui.lobby.customization
          DebugUtils.LOG_DEBUG("BaseTimedCustomizationGroupView.update",param1);
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
          this.clearData();
+         super.onDispose();
       }
 
       public function invalidateListData(param1:Boolean=false) : void {
@@ -123,11 +124,15 @@ package net.wg.gui.lobby.customization
          {
             this.list.dataProvider = null;
             this.list.removeEventListener(ListEvent.INDEX_CHANGE,this.handleItemChange);
+            this.list.dispose();
+            this.list = null;
          }
          if(this.rentalPackageList)
          {
             this.rentalPackageList.dataProvider = null;
             this.rentalPackageList.removeEventListener(ListEvent.INDEX_CHANGE,this.handlePeriodDaysItemChange);
+            this.rentalPackageList.dispose();
+            this.rentalPackageList = null;
          }
          if(this.itemsDP)
          {
@@ -164,6 +169,10 @@ package net.wg.gui.lobby.customization
       protected function handleItemChange(param1:ListEvent) : void {
          this.selectedItemIdx = param1.index;
          this.handleItemDataChanged();
+      }
+
+      public function getComponentForFocus() : InteractiveObject {
+         return null;
       }
    }
 

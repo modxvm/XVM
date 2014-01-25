@@ -65,8 +65,8 @@ package net.wg.gui.components.common.waiting
          visible = false;
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          if(this.waitingComponent)
          {
             if(this.waitingComponent.parent)

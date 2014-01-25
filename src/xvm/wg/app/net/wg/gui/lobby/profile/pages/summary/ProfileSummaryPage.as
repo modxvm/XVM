@@ -35,7 +35,7 @@ package net.wg.gui.lobby.profile.pages.summary
       }
 
       override protected function onDispose() : void {
-         this.nearestAwards.dispose();
+         this.nearestAwards = null;
          super.onDispose();
       }
    }

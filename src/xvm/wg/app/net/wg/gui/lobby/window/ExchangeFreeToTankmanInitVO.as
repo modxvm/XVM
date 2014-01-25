@@ -21,7 +21,7 @@ package net.wg.gui.lobby.window
 
       private var _beforeSkill:CarouselTankmanSkillsModel;
 
-      private var _afterSkill:CarouselTankmanSkillsModel;
+      private var _afterSkill:ExchangeXPTankmanSkillsModel;
 
       public function get currentSkill() : Object {
          return this._currentSkill;
@@ -29,35 +29,32 @@ package net.wg.gui.lobby.window
 
       public function set currentSkill(param1:Object) : void {
          this._currentSkill = param1;
-         this._beforeSkill = this.getNewCurrentSkillInstance(this._currentSkill);
-         this._afterSkill = this.getNewCurrentSkillInstance(this._currentSkill);
+         this._beforeSkill = new CarouselTankmanSkillsModel();
+         this.initObject(this._beforeSkill,this._currentSkill);
+         this._afterSkill = new ExchangeXPTankmanSkillsModel();
+         this.initObject(this._afterSkill,this._currentSkill);
+         this._afterSkill.defaultActiveValue = param1.isActive;
       }
 
-      public function getNewCurrentSkillInstance(param1:Object) : CarouselTankmanSkillsModel {
-         var _loc2_:CarouselTankmanSkillsModel = null;
-         if(param1)
-         {
-            _loc2_ = new CarouselTankmanSkillsModel();
-            _loc2_.description = param1.description;
-            _loc2_.icon = param1.icon.big;
-            _loc2_.roleIcon = param1.icon.role;
-            _loc2_.isActive = param1.isActive;
-            _loc2_.isCommon = param1.roleType == CarouselTankmanSkillsModel.ROLE_TYPE_COMMON;
-            _loc2_.roleType = param1.roleType;
-            _loc2_.isPerk = param1.isPerk;
-            _loc2_.level = param1.level;
-            _loc2_.userName = param1.userName;
-            _loc2_.name = param1.name;
-            _loc2_.tankmanID = this.tankmanID;
-         }
-         return _loc2_;
+      private function initObject(param1:CarouselTankmanSkillsModel, param2:Object) : void {
+         param1.description = param2.description;
+         param1.icon = param2.icon.big;
+         param1.roleIcon = param2.icon.role;
+         param1.isActive = param2.isActive;
+         param1.isCommon = param2.roleType == CarouselTankmanSkillsModel.ROLE_TYPE_COMMON;
+         param1.roleType = param2.roleType;
+         param1.isPerk = param2.isPerk;
+         param1.level = param2.level;
+         param1.userName = param2.userName;
+         param1.name = param2.name;
+         param1.tankmanID = this.tankmanID;
       }
 
       public function get beforeSkill() : CarouselTankmanSkillsModel {
          return this._beforeSkill;
       }
 
-      public function get afterSkill() : CarouselTankmanSkillsModel {
+      public function get afterSkill() : ExchangeXPTankmanSkillsModel {
          return this._afterSkill;
       }
    }

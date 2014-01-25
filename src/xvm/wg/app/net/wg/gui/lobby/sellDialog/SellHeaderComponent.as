@@ -10,6 +10,9 @@ package net.wg.gui.lobby.sellDialog
    import net.wg.utils.ILocale;
    import flash.text.TextFormat;
    import scaleform.clik.data.DataProvider;
+   import net.wg.data.constants.IconsTypes;
+   import net.wg.gui.components.controls.VO.ActionPriceVO;
+   import net.wg.data.constants.FittingTypes;
 
 
    public class SellHeaderComponent extends UIComponent
@@ -56,43 +59,12 @@ package net.wg.gui.lobby.sellDialog
 
       private var locale:ILocale;
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this.vehicleActionPrice.dispose();
          this.emptySellIT.dispose();
          this.inBarracsDrop.dispose();
          this.tankIcon.dispose();
-      }
-
-      override protected function configUI() : void {
-         super.configUI();
-         this.tankPriceTF.text = DIALOGS.VEHICLESELLDIALOG_VEHICLE_EMPTYSELLPRICE;
-         this.emptySellIT.textFieldYOffset = VehicleSellDialog.ICONS_TEXT_OFFSET;
-         this.vehicleActionPrice.textYOffset = VehicleSellDialog.ICONS_TEXT_OFFSET;
-      }
-
-      public function get tankGoldPrice() : Number {
-         return this._tankGoldPrice;
-      }
-
-      public function set tankGoldPrice(param1:Number) : void {
-         this._tankGoldPrice = param1;
-      }
-
-      public function set tankPrice(param1:Number) : void {
-         this._tankPrice = param1;
-      }
-
-      public function get tankPrice() : Number {
-         return this._tankPrice;
-      }
-
-      public function set creditsCommon(param1:Number) : void {
-         this._creditsCommon = param1;
-      }
-
-      public function get creditsCommon() : Number {
-         return this._creditsCommon;
       }
 
       public function setData(param1:Object) : void {
@@ -158,6 +130,41 @@ package net.wg.gui.lobby.sellDialog
          }
       }
 
+      public function getNextPosition() : int {
+         return this.crewBG.y + this.crewBG.height + PADDING_FOR_NEXT_ELEMENT;
+      }
+
+      public function get tankGoldPrice() : Number {
+         return this._tankGoldPrice;
+      }
+
+      public function set tankGoldPrice(param1:Number) : void {
+         this._tankGoldPrice = param1;
+      }
+
+      public function get tankPrice() : Number {
+         return this._tankPrice;
+      }
+
+      public function set tankPrice(param1:Number) : void {
+         this._tankPrice = param1;
+      }
+
+      public function get creditsCommon() : Number {
+         return this._creditsCommon;
+      }
+
+      public function set creditsCommon(param1:Number) : void {
+         this._creditsCommon = param1;
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.tankPriceTF.text = DIALOGS.VEHICLESELLDIALOG_VEHICLE_EMPTYSELLPRICE;
+         this.emptySellIT.textFieldYOffset = VehicleSellDialog.ICONS_TEXT_OFFSET;
+         this.vehicleActionPrice.textYOffset = VehicleSellDialog.ICONS_TEXT_OFFSET;
+      }
+
       private function showPrice(param1:Boolean, param2:Number, param3:Number, param4:Number) : void {
          if(param1)
          {
@@ -167,15 +174,12 @@ package net.wg.gui.lobby.sellDialog
          {
             this.emptySellIT.text = "+ " + this.locale.integer(param2);
          }
-         this.emptySellIT.icon = param1?IconText.GOLD:IconText.CREDITS;
+         this.emptySellIT.icon = param1?IconsTypes.GOLD:IconsTypes.CREDITS;
          this.emptySellIT.textColor = param1?16763253:13556185;
          this.emptySellIT.validateNow();
-         this.vehicleActionPrice.setData(param4,param2,param3,param1?IconText.GOLD:IconText.CREDITS,false,ActionPrice.ITEM_TYPE_VEHICLE);
+         var _loc5_:ActionPriceVO = new ActionPriceVO(param4,param2,param3,param1?IconsTypes.GOLD:IconsTypes.CREDITS,false,FittingTypes.VEHICLE);
+         this.vehicleActionPrice.setData(_loc5_);
          this.emptySellIT.visible = !this.vehicleActionPrice.visible;
-      }
-
-      public function getNextPosition() : int {
-         return this.crewBG.y + this.crewBG.height + PADDING_FOR_NEXT_ELEMENT;
       }
    }
 

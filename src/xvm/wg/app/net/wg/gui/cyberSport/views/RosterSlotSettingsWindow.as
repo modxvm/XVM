@@ -12,10 +12,10 @@ package net.wg.gui.cyberSport.views
    import net.wg.gui.cyberSport.controls.VehicleSelector;
    import net.wg.infrastructure.interfaces.IWindow;
    import net.wg.gui.components.windows.WindowEvent;
-   import net.wg.gui.components.windows.Window;
    import net.wg.gui.cyberSport.vo.VehicleVO;
    import net.wg.data.constants.generated.CYBER_SPORT_ALIASES;
    import net.wg.gui.cyberSport.vo.VehicleSelectorItemVO;
+   import net.wg.gui.components.windows.Window;
    import scaleform.clik.events.ButtonEvent;
    import net.wg.gui.events.ViewStackEvent;
    import scaleform.clik.data.DataProvider;
@@ -65,36 +65,18 @@ package net.wg.gui.cyberSport.views
 
       private var autoSelectTabIndex:int = 1;
 
-      override public function set window(param1:IWindow) : void {
+      override public function setWindow(param1:IWindow) : void {
          if(window)
          {
             window.removeEventListener(WindowEvent.SCALE_X_CHANGED,this.onScaleChanged);
             window.removeEventListener(WindowEvent.SCALE_Y_CHANGED,this.onScaleChanged);
          }
-         super.window = param1;
+         super.setWindow(param1);
          if(window)
          {
             window.addEventListener(WindowEvent.SCALE_X_CHANGED,this.onScaleChanged);
             window.addEventListener(WindowEvent.SCALE_Y_CHANGED,this.onScaleChanged);
          }
-      }
-
-      private function onScaleChanged(param1:WindowEvent) : void {
-         if(param1.type == WindowEvent.SCALE_X_CHANGED)
-         {
-            window.width = param1.prevValue;
-         }
-         else
-         {
-            window.height = param1.prevValue;
-         }
-      }
-
-      override protected function onPopulate() : void {
-         super.onPopulate();
-         Window(window).visible = false;
-         showWindowBg = false;
-         window.title = CYBERSPORT.WINDOW_ROSTERSLOTSETTINGS_TITLE;
       }
 
       public function as_setDefaultData(param1:Array) : void {
@@ -160,6 +142,13 @@ package net.wg.gui.cyberSport.views
          }
       }
 
+      override protected function onPopulate() : void {
+         super.onPopulate();
+         Window(window).visible = false;
+         showWindowBg = false;
+         window.title = CYBERSPORT.WINDOW_ROSTERSLOTSETTINGS_TITLE;
+      }
+
       override protected function configUI() : void {
          super.configUI();
          if(!this.rangeModel)
@@ -197,24 +186,19 @@ package net.wg.gui.cyberSport.views
          this.selectedTxt.mouseEnabled = false;
       }
 
-      private function createDefaultRangeModel() : void {
-         var _loc1_:Object = new Object();
-         _loc1_.nationIDRange = [];
-         _loc1_.vLevelRange = [];
-         _loc1_.vTypeRange = [];
-         this.rangeModel = new SettingRosterVO(_loc1_);
-      }
-
       override protected function onDispose() : void {
          this.submitBtn.removeEventListener(ButtonEvent.CLICK,this.onClickSubmitBtnHandler);
          this.submitBtn.dispose();
          this.cancelBtn.removeEventListener(ButtonEvent.CLICK,this.cancelBtn_buttonClickHandler);
          this.cancelBtn.dispose();
+         this.cancelBtn = null;
          this.refreshBtn.removeEventListener(ButtonEvent.CLICK,this.onClickrefreshBtnHandler);
          this.refreshBtn.dispose();
+         this.refreshBtn = null;
          this.viewStack.removeEventListener(ViewStackEvent.NEED_UPDATE,this.viewStackUpdateHandler);
          this.viewStack.removeEventListener(ViewStackEvent.VIEW_CHANGED,this.viewStackChangedHandler);
          this.viewStack.dispose();
+         this.viewStack = null;
          if(this.rangeModel)
          {
             this.rangeModel.dispose();
@@ -228,7 +212,6 @@ package net.wg.gui.cyberSport.views
          if(this.rangeRoster)
          {
             this.rangeRoster.removeEventListener(RosterSettingsEvent.RANGE_ROSTER_CHANGED,this.rangeChangedHandler);
-            this.rangeRoster.dispose();
             this.rangeRoster = null;
          }
          if(this.vehicleSelector)
@@ -257,6 +240,56 @@ package net.wg.gui.cyberSport.views
             this.buttonBar = null;
          }
          super.onDispose();
+      }
+
+      private function createDefaultRangeModel() : void {
+         var _loc1_:Object = new Object();
+         _loc1_.nationIDRange = [];
+         _loc1_.vLevelRange = [];
+         _loc1_.vTypeRange = [];
+         this.rangeModel = new SettingRosterVO(_loc1_);
+      }
+
+      private function updateWindow(param1:Boolean) : void {
+         if(Window(window).visible != param1)
+         {
+            Window(window).visible = param1;
+         }
+      }
+
+      private function setDefaultRange() : void {
+         this.rangeModel.vLevelRange = [];
+         this.rangeModel.nationIDRange = [];
+         this.rangeModel.vTypeRange = [];
+      }
+
+      private function isDefaultRange() : Boolean {
+         if(this.rangeModel.nationIDRange.length == 0 && this.rangeModel.vTypeRange.length == 0)
+         {
+            if(this.rangeModel.vLevelRange.length == 0)
+            {
+               return true;
+            }
+         }
+         return false;
+      }
+
+      private function refreshBtnState(param1:Boolean) : void {
+         if(this.selectedResultBtn.visible != param1)
+         {
+            this.selectedResultBtn.visible = param1;
+         }
+      }
+
+      private function onScaleChanged(param1:WindowEvent) : void {
+         if(param1.type == WindowEvent.SCALE_X_CHANGED)
+         {
+            window.width = param1.prevValue;
+         }
+         else
+         {
+            window.height = param1.prevValue;
+         }
       }
 
       private function viewStackUpdateHandler(param1:ViewStackEvent) : void {
@@ -306,13 +339,6 @@ package net.wg.gui.cyberSport.views
          this.updateWindow(true);
       }
 
-      private function updateWindow(param1:Boolean) : void {
-         if(Window(window).visible != param1)
-         {
-            Window(window).visible = param1;
-         }
-      }
-
       private function viewStackChangedHandler(param1:ViewStackEvent) : void {
           
       }
@@ -327,30 +353,6 @@ package net.wg.gui.cyberSport.views
          if(this.rangeRoster)
          {
             this.rangeRoster.update(this.rangeModel);
-         }
-      }
-
-      private function setDefaultRange() : void {
-         this.rangeModel.vLevelRange = [];
-         this.rangeModel.nationIDRange = [];
-         this.rangeModel.vTypeRange = [];
-      }
-
-      private function isDefaultRange() : Boolean {
-         if(this.rangeModel.nationIDRange.length == 0 && this.rangeModel.vTypeRange.length == 0)
-         {
-            if(this.rangeModel.vLevelRange.length == 0)
-            {
-               return true;
-            }
-         }
-         return false;
-      }
-
-      private function refreshBtnState(param1:Boolean) : void {
-         if(this.selectedResultBtn.visible != param1)
-         {
-            this.selectedResultBtn.visible = param1;
          }
       }
 

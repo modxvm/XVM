@@ -12,8 +12,6 @@ internal class $AppLinks
  */
 import org.idmedia.as3commons.util.*; StringUtils;
 import net.wg.data.daapi.base.*; DAAPIDataClass;
-import net.wg.infrastructure.events.*; LoaderEvent; LifeCycleEvent;
-import net.wg.infrastructure.managers.impl.*; ContainerManager;
 import net.wg.gui.components.common.*; MainViewContainer;
 import net.wg.gui.components.controls.ReadOnlyScrollingList; ReadOnlyScrollingList;
 import net.wg.gui.intro.*; IntroPage;
@@ -35,6 +33,9 @@ import net.wg.gui.lobby.window.*; ProfileWindow;
 import net.wg.gui.messenger.controls.*; MemberItemRenderer;
 import net.wg.gui.prebattle.company.*; CompaniesListWindow; CompanyWindow;
 import net.wg.gui.prebattle.squad.*; SquadWindow; MessengerUtils;
+import net.wg.infrastructure.base.*; BaseViewWrapper;
+import net.wg.infrastructure.events.*; LoaderEvent; LifeCycleEvent;
+import net.wg.infrastructure.managers.impl.*; ContainerManager;
 
 /**
  * UIs

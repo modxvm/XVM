@@ -19,8 +19,8 @@ package net.wg.gui.lobby.tankman
 
       private const UPDATE_DATA:String = "updateData";
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this.iconRank.dispose();
       }
 

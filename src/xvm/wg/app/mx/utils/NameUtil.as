@@ -34,8 +34,7 @@ package mx.utils
          {
             _loc2_ = _loc2_ + "_";
          }
-         _loc5_.counter = counter+1;
-         return _loc2_ + counter;
+         return _loc2_ + counter++;
       }
 
       public static function displayObjectToString(param1:DisplayObject) : String {

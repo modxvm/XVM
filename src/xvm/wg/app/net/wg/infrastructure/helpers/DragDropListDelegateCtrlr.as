@@ -40,7 +40,11 @@ package net.wg.infrastructure.helpers
 
       private var _currentDroppedItem:InteractiveObject = null;
 
-      public function dispose() : void {
+      public final function dispose() : void {
+         this.onDispose();
+      }
+
+      protected function onDispose() : void {
          var _loc1_:IDragDropListDelegate = null;
          var _loc2_:IEventDispatcher = null;
          for each (_loc1_ in this._delegates)

@@ -4,16 +4,23 @@ package net.wg.infrastructure.base
    import net.wg.infrastructure.interfaces.IView;
    import net.wg.infrastructure.base.meta.IAbstractViewMeta;
    import flash.display.Loader;
+   import flash.display.InteractiveObject;
    import net.wg.infrastructure.exceptions.base.WGGUIException;
    import net.wg.infrastructure.events.LifeCycleEvent;
-   import avmplus.getQualifiedClassName;
+   import flash.utils.getQualifiedClassName;
    import net.wg.infrastructure.interfaces.IManagedContainer;
    import flash.display.DisplayObject;
    import net.wg.infrastructure.interfaces.IDAAPIModule;
+   import net.wg.infrastructure.interfaces.IManagedContent;
    import scaleform.clik.events.InputEvent;
    import scaleform.clik.constants.InvalidationType;
+   import flash.display.DisplayObjectContainer;
+   import net.wg.infrastructure.exceptions.InfrastructureException;
+   import scaleform.clik.core.UIComponent;
+   import net.wg.utils.IUtils;
    import net.wg.data.constants.Errors;
    import net.wg.infrastructure.exceptions.LifecycleException;
+   import scaleform.clik.events.FocusHandlerEvent;
 
 
    public class AbstractView extends AbstractViewMeta implements IView, IAbstractViewMeta
@@ -24,17 +31,25 @@ package net.wg.infrastructure.base
          super();
       }
 
+      private static var INVALID_MODAL_FOCUS:String = "invalidModalFocus";
+
       private var _disposed:Boolean = false;
 
-      private var _token:String;
+      private var _token:String = null;
 
-      private var _alias:String;
+      private var _alias:String = null;
 
-      private var _name:String;
+      private var _name:String = null;
 
-      private var _config:Object;
+      private var _config:Object = null;
 
-      private var _loader:Loader;
+      private var _loader:Loader = null;
+
+      private var _lastFocusedElement:InteractiveObject = null;
+
+      private var _waitingFocusToInitialization:Boolean = false;
+
+      private var _firstModalFocusUpdating:Boolean = true;
 
       public final function as_populate() : void {
          try
@@ -50,19 +65,15 @@ package net.wg.infrastructure.base
          }
       }
 
-      protected function nextFrameAfterPopulateHandler() : void {
-         visible = true;
-      }
-
       public final function as_dispose() : void {
          try
          {
             this.assert(!this._disposed,"view " + this.as_alias + " can not to dispose, because it already disposed.");
             dispatchEvent(new LifeCycleEvent(LifeCycleEvent.ON_BEFORE_DISPOSE));
-            this.onDispose();
-            this.dispose();
+            this.setLastFocusedElement(null);
+            dispose();
             dispatchEvent(new LifeCycleEvent(LifeCycleEvent.ON_AFTER_DISPOSE));
-            this.assertNotNull(this.loader,"loader in " + getQualifiedClassName(this) + "(" + this.as_alias + "alias)");
+            this.assertNotNull(this.loader,"loader` in " + getQualifiedClassName(this) + "(" + this.as_alias + "alias)");
             this._loader.unloadAndStop();
             this._loader = null;
             App.utils.commons.releaseReferences(this);
@@ -104,6 +115,31 @@ package net.wg.infrastructure.base
       public function unregisterComponent(param1:String) : void {
          this.assertLifeCycle();
          unregisterFlashComponent(param1);
+      }
+
+      public final function setModalFocus() : void {
+         invalidate(INVALID_MODAL_FOCUS);
+      }
+
+      public final function leaveModalFocus() : void {
+         cancelValidation(INVALID_MODAL_FOCUS);
+         this.onLeaveModalFocus();
+      }
+
+      override public final function get hasFocus() : Boolean {
+         return App.utils.focusHandler.hasModalFocus(this);
+      }
+
+      public function get isModal() : Boolean {
+         return false;
+      }
+
+      public function get sourceView() : IView {
+         return this;
+      }
+
+      public function get containerContent() : IManagedContent {
+         return this;
       }
 
       public function get disposed() : Boolean {
@@ -151,14 +187,6 @@ package net.wg.infrastructure.base
          this._loader = param1;
       }
 
-      public function setFocus() : void {
-          
-      }
-
-      public function removeFocus() : void {
-          
-      }
-
       override protected function configUI() : void {
          super.configUI();
          if(this.allowHandleInput())
@@ -168,16 +196,85 @@ package net.wg.infrastructure.base
          initSize();
       }
 
-      protected function allowHandleInput() : Boolean {
-         return true;
-      }
-
       override protected function draw() : void {
+         var _loc1_:InteractiveObject = null;
          super.draw();
          if((constraints) && (isInvalid(InvalidationType.SIZE)))
          {
             constraints.update(_width,_height);
          }
+         if((isInvalid(INVALID_MODAL_FOCUS)) && (this.hasFocus))
+         {
+            _loc1_ = this.getManualFocus();
+            if(this._firstModalFocusUpdating)
+            {
+               this._firstModalFocusUpdating = false;
+               this.onInitModalFocus(_loc1_);
+            }
+            this.onSetModalFocus(_loc1_);
+            if(this.getManualFocus() == null && !this._waitingFocusToInitialization)
+            {
+               this.setFocus(this);
+            }
+         }
+      }
+
+      protected function getViewContainer() : DisplayObjectContainer {
+         return this;
+      }
+
+      protected function onInitModalFocus(param1:InteractiveObject) : void {
+          
+      }
+
+      protected function onSetModalFocus(param1:InteractiveObject) : void {
+         var _loc2_:String = null;
+         if(!(this._lastFocusedElement == null) && (param1 == this._lastFocusedElement || param1 == null))
+         {
+            _loc2_ = "Last focused element is not on display list! Use setfocus before removing element " + this._lastFocusedElement + "!";
+            App.utils.asserter.assertNotNull(this._lastFocusedElement.parent,_loc2_,InfrastructureException);
+            this.setFocus(this._lastFocusedElement);
+         }
+         else
+         {
+            this.setLastFocusedElement(param1);
+         }
+      }
+
+      protected function onLeaveModalFocus() : void {
+         var _loc1_:InteractiveObject = this.getManualFocus();
+         if(_loc1_ != null)
+         {
+            this.setLastFocusedElement(_loc1_);
+         }
+      }
+
+      protected final function setFocus(param1:InteractiveObject) : void {
+         this.assertNotNull(param1,"you can`t remove focus from the view.");
+         this.assertNotNull(param1.stage,"focus must be set to object in display list only.");
+         App.utils.scheduler.cancelTask(this.setFocus);
+         this._waitingFocusToInitialization = false;
+         if(this.hasFocus)
+         {
+            if(param1  is  UIComponent && !UIComponent(param1).initialized)
+            {
+               App.utils.scheduler.envokeInNextFrame(this.setFocus,param1);
+               this._waitingFocusToInitialization = true;
+            }
+            else
+            {
+               App.utils.focusHandler.setFocus(param1);
+            }
+         }
+         this.setLastFocusedElement(param1);
+      }
+
+      protected function nextFrameAfterPopulateHandler() : void {
+         visible = true;
+      }
+
+      protected function allowHandleInput() : Boolean {
+         return true;
       }
 
       protected function onPopulate() : void {
@@ -185,14 +282,13 @@ package net.wg.infrastructure.base
          App.contextMenuMgr.hide();
       }
 
-      protected function onDispose() : void {
+      override protected function onDispose() : void {
+         super.onDispose();
+         var _loc1_:IUtils = App.utils;
          App.toolTipMgr.hide();
          App.contextMenuMgr.hide();
+         _loc1_.scheduler.cancelTask(this.setFocus);
          removeEventListener(InputEvent.INPUT,handleInput);
-      }
-
-      override public final function dispose() : void {
-         super.dispose();
       }
 
       protected final function assert(param1:Boolean, param2:String="failed assert", param3:Class=null) : void {
@@ -203,7 +299,7 @@ package net.wg.infrastructure.base
       }
 
       protected final function assertLifeCycle() : void {
-         this.assert(!this.disposed,Errors.HDLR_CORRUPT_INVOKE,LifecycleException);
+         this.assert(!this.disposed,Errors.MTHD_CORRUPT_INVOKE,LifecycleException);
       }
 
       protected final function assertNotNull(param1:Object, param2:String="object", param3:Class=null) : void {
@@ -218,6 +314,54 @@ package net.wg.infrastructure.base
          {
             App.utils.asserter.assertNull(param1,param2 + Errors.MUST_NULL,param3);
          }
+      }
+
+      private function getManualFocus() : InteractiveObject {
+         var _loc2_:InteractiveObject = null;
+         var _loc1_:InteractiveObject = App.utils.focusHandler.getFocus(0);
+         if(!(_loc1_ == null) && !(_loc1_.stage == null))
+         {
+            _loc2_ = _loc1_;
+            if(this._lastFocusedElement != _loc2_)
+            {
+               while(_loc2_ != null)
+               {
+                  if(_loc2_ == this.getViewContainer())
+                  {
+                     return _loc1_;
+                  }
+                  _loc2_ = _loc2_.parent;
+               }
+            }
+            else
+            {
+               return _loc1_;
+            }
+         }
+         return null;
+      }
+
+      private function setLastFocusedElement(param1:InteractiveObject) : void {
+         if(this._lastFocusedElement != null)
+         {
+            this._lastFocusedElement.removeEventListener(FocusHandlerEvent.FOCUS_OUT,this.onFocusOutFromLastFocusedElementHandler);
+         }
+         this._lastFocusedElement = param1;
+         if(this._lastFocusedElement != null)
+         {
+            this._lastFocusedElement.addEventListener(FocusHandlerEvent.FOCUS_OUT,this.onFocusOutFromLastFocusedElementHandler);
+         }
+      }
+
+      private function onFocusOutFromLastFocusedElementHandler(param1:FocusHandlerEvent) : void {
+         var _loc3_:String = null;
+         var _loc2_:InteractiveObject = this.getManualFocus();
+         if(this.hasFocus)
+         {
+            _loc3_ = "modal-focused view \'" + this + "\' has lost a component focus!";
+            this.assert(!(_loc2_ == null),_loc3_,InfrastructureException);
+         }
+         this.setLastFocusedElement(_loc2_);
       }
    }
 

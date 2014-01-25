@@ -141,7 +141,11 @@ package net.wg.gui.lobby.techtree.helpers
          this.lineRatio = 0.5 * this.lineThickness;
       }
 
-      public function dispose() : void {
+      public final function dispose() : void {
+         this.onDispose();
+      }
+
+      protected function onDispose() : void {
          this._container = null;
          this.getComponent = null;
       }

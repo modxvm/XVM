@@ -1,6 +1,7 @@
 package net.wg.gui.components.controls
 {
    import scaleform.clik.core.UIComponent;
+   import net.wg.infrastructure.interfaces.ITextContainer;
    import flash.text.TextField;
    import flash.display.MovieClip;
    import flash.text.TextFormat;
@@ -12,56 +13,12 @@ package net.wg.gui.components.controls
    import flash.text.TextFormatAlign;
 
 
-   public class IconText extends UIComponent
+   public class IconText extends UIComponent implements ITextContainer
    {
           
       public function IconText() {
          super();
       }
-
-      public static const EMPTY:String = "empty";
-
-      public static const CREDITS:String = "credits";
-
-      public static const GOLD:String = "gold";
-
-      public static const GOLD_DISCOUNT:String = "goldDiscount";
-
-      public static const XP:String = "xp";
-
-      public static const ELITE_XP:String = "eliteXp";
-
-      public static const elite:String = "elite";
-
-      public static const ARROW_DOWN:String = "arrowDown";
-
-      public static const ARROW_UP:String = "arrowUp";
-
-      public static const ARROW_DOWN_DISABLED:String = "arrowDownDisabled";
-
-      public static const ELITE_TANK_XP:String = "elite_tank_xp";
-
-      public static const FREE_XP:String = "freeXp";
-
-      public static const TANK_DAILYXPFACTOR:String = "tank_dailyXPFactor";
-
-      public static const TANK_UNLOCK_PRICE:String = "tank_unlock_price";
-
-      public static const DOUBLE_XP_FACTOR:String = "doubleXPFactor";
-
-      public static const ACTION_XP_FACTOR:String = "actionXPFactor";
-
-      public static const VCOIN:String = "vcoin";
-
-      public static const CLASS1:String = "class1";
-
-      public static const CLASS2:String = "class2";
-
-      public static const CLASS3:String = "class3";
-
-      public static const CLASS4:String = "class4";
-
-      public static const XP_PRICE:String = "xp_price";
 
       public var textField:TextField;
 
@@ -99,23 +56,10 @@ package net.wg.gui.components.controls
 
       private var _textFieldYOffset:Number = 0;
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          removeEventListener(MouseEvent.ROLL_OVER,this.handleMouseRollOver);
          removeEventListener(MouseEvent.ROLL_OUT,this.handleMouseRollOut);
-      }
-
-      override protected function configUI() : void {
-         super.configUI();
-         this._textFormat = this.textField.getTextFormat();
-         this._iconWidth = this.iconClip.width;
-         this.iconClip.visible = false;
-         useHandCursor = false;
-         constraints = new Constraints(this,ConstrainMode.COUNTER_SCALE);
-         constraints.addElement("iconClip",this.iconClip,Constraints.LEFT);
-         constraints.addElement("textField",this.textField,Constraints.ALL);
-         addEventListener(MouseEvent.ROLL_OVER,this.handleMouseRollOver,false,0,true);
-         addEventListener(MouseEvent.ROLL_OUT,this.handleMouseRollOut,false,0,true);
       }
 
       public function get iconPosition() : String {
@@ -286,6 +230,28 @@ package net.wg.gui.components.controls
          invalidate();
       }
 
+      public function get xCorrect() : Number {
+         return this._xCorrect;
+      }
+
+      public function set xCorrect(param1:Number) : void {
+         this._xCorrect = param1;
+         invalidate();
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         this._textFormat = this.textField.getTextFormat();
+         this._iconWidth = this.iconClip.width;
+         this.iconClip.visible = false;
+         useHandCursor = false;
+         constraints = new Constraints(this,ConstrainMode.COUNTER_SCALE);
+         constraints.addElement("iconClip",this.iconClip,Constraints.LEFT);
+         constraints.addElement("textField",this.textField,Constraints.ALL);
+         addEventListener(MouseEvent.ROLL_OVER,this.handleMouseRollOver,false,0,true);
+         addEventListener(MouseEvent.ROLL_OUT,this.handleMouseRollOut,false,0,true);
+      }
+
       override protected function draw() : void {
          var _loc1_:* = NaN;
          var _loc2_:* = NaN;
@@ -373,15 +339,6 @@ package net.wg.gui.components.controls
             }
          }
          this.alpha = enabled?1:0.3;
-      }
-
-      public function get xCorrect() : Number {
-         return this._xCorrect;
-      }
-
-      public function set xCorrect(param1:Number) : void {
-         this._xCorrect = param1;
-         invalidate();
       }
 
       protected function handleMouseRollOver(param1:MouseEvent) : void {

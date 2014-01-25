@@ -15,6 +15,8 @@ package net.wg.infrastructure.base.meta
       function as_setInitData(param1:Object) : void;
 
       function as_setCalcValueResponse(param1:Number, param2:Number, param3:Number) : void;
+
+      function as_setWalletStatus(param1:Object) : void;
    }
 
 }

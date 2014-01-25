@@ -13,8 +13,8 @@ package net.wg.gui.components.common.video.advanced
 
       public var closeBtn:SoundButtonEx;
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          if(this.closeBtn)
          {
             if(this.closeBtn.parent)

@@ -13,8 +13,8 @@ package net.wg.gui.lobby.tankman
 
       public var icoLoader:UILoaderAlt;
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this.icoLoader.dispose();
       }
    }

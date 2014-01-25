@@ -69,8 +69,8 @@ package net.wg.gui.tutorial.controls
          this.setupTasks();
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this.clearItems(this.separatorsContainer,this.separatorItems);
          this.clearItems(this.phasesContainer,this.phaseItems);
          this.clearItems(this.tasksContainer,this.taskItems);

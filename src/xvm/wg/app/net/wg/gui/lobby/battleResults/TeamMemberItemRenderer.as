@@ -8,6 +8,7 @@ package net.wg.gui.lobby.battleResults
    import net.wg.data.components.BattleResultsCIGenerator;
    import flash.filters.ColorMatrixFilter;
    import net.wg.infrastructure.interfaces.IColorScheme;
+   import net.wg.infrastructure.interfaces.IUserProps;
 
 
    public class TeamMemberItemRenderer extends SoundListItemRenderer
@@ -59,8 +60,8 @@ package net.wg.gui.lobby.battleResults
          this.medalIcon.addEventListener(MouseEvent.CLICK,this.onMedalClick);
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this.medalIcon.removeEventListener(MouseEvent.ROLL_OVER,this.onMedalRollOver);
          this.medalIcon.removeEventListener(MouseEvent.ROLL_OUT,this.onMedalRollOut);
          this.medalIcon.removeEventListener(MouseEvent.CLICK,this.onMedalClick);
@@ -135,7 +136,8 @@ package net.wg.gui.lobby.battleResults
 
       override protected function draw() : void {
          var _loc1_:IColorScheme = null;
-         var _loc2_:* = NaN;
+         var _loc2_:IUserProps = null;
+         var _loc3_:* = NaN;
          super.draw();
          if(this._dataDirty)
          {
@@ -160,7 +162,10 @@ package net.wg.gui.lobby.battleResults
                      _loc1_ = App.colorSchemeMgr.getScheme(data.killerID > 0?"normal_dead":"normal");
                   }
                }
-               App.utils.commons.formatPlayerName(this.playerName,data.playerName,null,null,data.isIGR,"","",_loc1_.rgb,-5);
+               _loc2_ = App.utils.commons.getUserProps(data.playerName,data.playerClan,data.playerRegion,data.playerIgrType);
+               _loc2_.rgb = _loc1_.rgb;
+               _loc2_.igrVspace = -5;
+               App.utils.commons.formatPlayerName(this.playerName,_loc2_);
                this.vehicleIcon.source = data.tankIcon?data.tankIcon:this.vehicleIcon.sourceAlt;
                this.vehicleName.text = data.vehicleName;
                this.xpLbl.text = App.utils.locale.integer(data.xp - data.achievementXP);
@@ -200,8 +205,8 @@ package net.wg.gui.lobby.battleResults
                }
                if(data.tkills > 0)
                {
-                  _loc2_ = this.getColorForAlias("teamkiller",65535);
-                  this.fragsLbl.htmlText = this.fragsLbl.htmlText + ("(<FONT color=\"#" + _loc2_.toString(16) + "\">" + data.tkills + "</FONT>)");
+                  _loc3_ = this.getColorForAlias("teamkiller",65535);
+                  this.fragsLbl.htmlText = this.fragsLbl.htmlText + ("(<FONT color=\"#" + _loc3_.toString(16) + "\">" + data.tkills + "</FONT>)");
                }
                if(data.medalsCount > 0)
                {

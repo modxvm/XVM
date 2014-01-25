@@ -25,8 +25,8 @@ package net.wg.gui.components.common.ticker
          invalidate(INVALID_MODEL);
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          if(this._model)
          {
             this._model.dispose();

@@ -10,6 +10,7 @@ package net.wg.gui.login.impl
    import net.wg.gui.components.common.BaseLogoView;
    import net.wg.gui.login.ISparksManager;
    import org.idmedia.as3commons.util.Map;
+   import flash.display.InteractiveObject;
    import net.wg.gui.events.UILoaderEvent;
    import flash.ui.Keyboard;
    import scaleform.clik.events.ButtonEvent;
@@ -75,8 +76,12 @@ package net.wg.gui.login.impl
          }
       }
 
-      override public function setFocus() : void {
-         super.setFocus();
+      override protected function onSetModalFocus(param1:InteractiveObject) : void {
+         super.onSetModalFocus(param1);
+      }
+
+      override protected function onInitModalFocus(param1:InteractiveObject) : void {
+         super.onInitModalFocus(param1);
          this.initFocus();
       }
 
@@ -165,7 +170,6 @@ package net.wg.gui.login.impl
       }
 
       override protected function onDispose() : void {
-         super.onDispose();
          this.bg_image.removeEventListener(UILoaderEvent.COMPLETE,this.onLoadingImageCompleteHandler);
          this.bg_image.dispose();
          this.bg_image = null;
@@ -181,7 +185,6 @@ package net.wg.gui.login.impl
          this.enableInputs(false);
          this.keyMappings.clear();
          this.keyMappings = null;
-         App.utils.scheduler.cancelTask(this.initFocus);
          App.utils.scheduler.cancelTask(onEscapeS);
          App.utils.scheduler.cancelTask(this.enableInputs);
          if(this._sparksManager)
@@ -189,6 +192,7 @@ package net.wg.gui.login.impl
             this._sparksManager.dispose();
             this._sparksManager = null;
          }
+         super.onDispose();
       }
 
       private function setErrorMessage(param1:String, param2:int) : void {
@@ -309,10 +313,7 @@ package net.wg.gui.login.impl
          if(param1)
          {
             addEventListener(InputEvent.INPUT,this.handleInput);
-            if(!this.focusInited)
-            {
-               this.initFocus();
-            }
+            this.initFocus();
          }
          else
          {
@@ -354,25 +355,18 @@ package net.wg.gui.login.impl
       }
 
       private function initFocus() : void {
-         App.utils.scheduler.cancelTask(this.initFocus);
-         if(hasFocus)
+         assertLifeCycle();
+         if(!this.focusInited)
          {
-            if(initialized)
+            if(this.form.login.text.length == 0 || (this.form.login.highlight))
             {
-               if(this.form.login.text.length == 0 || (this.form.login.highlight))
-               {
-                  App.utils.focusHandler.setFocus(this.form.login);
-               }
-               else
-               {
-                  App.utils.focusHandler.setFocus(this.form.pass);
-               }
-               this.focusInited = true;
+               setFocus(this.form.login);
             }
             else
             {
-               App.utils.scheduler.envokeInNextFrame(this.initFocus);
+               setFocus(this.form.pass);
             }
+            this.focusInited = true;
          }
       }
 

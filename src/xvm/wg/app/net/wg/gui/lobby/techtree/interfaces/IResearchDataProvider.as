@@ -29,8 +29,6 @@ package net.wg.gui.lobby.techtree.interfaces
 
       function setTopLevelUnlockProps(param1:Number, param2:UnlockProps) : Boolean;
 
-      function setTopLevelDump(param1:Number, param2:String) : Boolean;
-
       function setTopLevelField(param1:String, param2:Number, param3:Object) : Boolean;
 
       function resolveEntityType(param1:NodeData, param2:Boolean=false) : uint;

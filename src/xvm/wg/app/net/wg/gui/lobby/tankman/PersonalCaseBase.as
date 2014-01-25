@@ -114,7 +114,7 @@ package net.wg.gui.lobby.tankman
          this.retrainingData.tankmanID = this.data.inventoryID;
          this.retrainingData.currentVehicle = this.data.currentVehicle;
          this.retrainingData.nativeVehicle = this.data.nativeVehicle;
-         this.retrainingData.specializationLevel = parseInt(this.data.specializationLevel);
+         this.retrainingData.specializationLevel = this.data.specializationLevel;
          this.runtimeUpdateByModel(CrewTankmanRetraining,this.retrainingData);
       }
 
@@ -268,6 +268,7 @@ package net.wg.gui.lobby.tankman
          _loc2_.skills = this.parseCarouselTankmanSkills(_loc4_.skills,_loc2_.skillsCountForLearn,_loc2_.lastNewSkillExp,_loc2_.inventoryID);
          _loc2_.roleType = _loc4_.roleName;
          _loc2_.role = _loc4_.roleUserName;
+         _loc2_.modifiers = param1.modifiers;
          this.autoSelectTab = parseInt(param1.tabIndex);
          this.data = _loc2_;
       }

@@ -14,6 +14,12 @@ package net.wg.gui.prebattle.data
          super(param1);
       }
 
+      public var igrType:int = 0;
+
+      public var clanAbbrev:String = "";
+
+      public var region:String = "";
+
       private var _accID:Number;
 
       private var _uid:Number;

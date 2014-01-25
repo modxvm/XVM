@@ -3,10 +3,14 @@ package net.wg.infrastructure.interfaces
    import net.wg.infrastructure.base.meta.IWindowViewMeta;
 
 
-   public interface IAbstractWindowView extends IWindowViewMeta, IView
+   public interface IAbstractWindowView extends IAbstractWrapperView, IWindowViewMeta
    {
           
       function handleWindowMinimize() : void;
+
+      function setWindow(param1:IWindow) : void;
+
+      function get window() : IWindow;
 
       function get canDrag() : Boolean;
 
@@ -21,12 +25,6 @@ package net.wg.infrastructure.interfaces
       function get enabledCloseBtn() : Boolean;
 
       function get isCentered() : Boolean;
-
-      function get isModal() : Boolean;
-
-      function get window() : IWindow;
-
-      function set window(param1:IWindow) : void;
 
       function get geometry() : IWindowGeometry;
 

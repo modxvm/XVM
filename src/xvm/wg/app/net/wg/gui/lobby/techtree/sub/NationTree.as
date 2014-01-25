@@ -136,7 +136,7 @@ package net.wg.gui.lobby.techtree.sub
          }
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          visible = false;
          this.removeItemRenderers();
          this.view = null;
@@ -161,7 +161,7 @@ package net.wg.gui.lobby.techtree.sub
             this._dataProvider.clearUp();
             this._dataProvider = null;
          }
-         super.dispose();
+         super.onDispose();
       }
 
       public function scrollToIndex(param1:Number) : void {
@@ -493,12 +493,30 @@ package net.wg.gui.lobby.techtree.sub
          }
       }
 
+      private function handleSelectVehicleInHangar(param1:TechTreeEvent) : void {
+         var _loc2_:NodeData = null;
+         if(!this.requestInCoolDown && !(this.view == null) && param1.index > -1)
+         {
+            _loc2_ = this._dataProvider.getItemAt(param1.index);
+            this.view.request4SelectInHangarS(_loc2_.id);
+         }
+      }
+
+      private function handleShowVehicleInStats(param1:TechTreeEvent) : void {
+         var _loc2_:NodeData = null;
+         if(!this.requestInCoolDown && !(this.view == null) && param1.index > -1)
+         {
+            _loc2_ = this._dataProvider.getItemAt(param1.index);
+            this.view.request4ShowVehicleStatisticsS(_loc2_.id);
+         }
+      }
+
       private function handleVehicleInfo(param1:TechTreeEvent) : void {
          var _loc2_:NodeData = null;
          if(!(this.view == null) && param1.index > -1)
          {
             _loc2_ = this._dataProvider.getItemAt(param1.index);
-            this.view.requestVehicleInfoS(_loc2_.pickleDump);
+            this.view.requestVehicleInfoS(_loc2_.id);
          }
       }
 
@@ -519,6 +537,8 @@ package net.wg.gui.lobby.techtree.sub
          _loc3_.addEventListener(TechTreeEvent.CLICK_2_UNLOCK,this.handleUnlockNode,false,0,true);
          _loc3_.addEventListener(TechTreeEvent.CLICK_2_BUY,this.handleBuyNode,false,0,true);
          _loc3_.addEventListener(TechTreeEvent.CLICK_2_SELL,this.handleSellNode,false,0,true);
+         _loc3_.addEventListener(TechTreeEvent.CLICK_2_SELECT_IN_HANGAR,this.handleSelectVehicleInHangar,false,0,true);
+         _loc3_.addEventListener(TechTreeEvent.CLICK_2_SHOW_VEHICLE_STATS,this.handleShowVehicleInStats,false,0,true);
          _loc3_.addEventListener(TechTreeEvent.CLICK_2_VEHICLE_INFO,this.handleVehicleInfo,false,0,true);
          _loc3_.validateNowEx();
          return _loc3_;
@@ -530,6 +550,8 @@ package net.wg.gui.lobby.techtree.sub
          param1.removeEventListener(TechTreeEvent.CLICK_2_UNLOCK,this.handleUnlockNode);
          param1.removeEventListener(TechTreeEvent.CLICK_2_BUY,this.handleBuyNode);
          param1.removeEventListener(TechTreeEvent.CLICK_2_SELL,this.handleSellNode);
+         param1.removeEventListener(TechTreeEvent.CLICK_2_SELECT_IN_HANGAR,this.handleSelectVehicleInHangar);
+         param1.removeEventListener(TechTreeEvent.CLICK_2_SHOW_VEHICLE_STATS,this.handleShowVehicleInStats);
          param1.removeEventListener(TechTreeEvent.CLICK_2_VEHICLE_INFO,this.handleVehicleInfo);
       }
 

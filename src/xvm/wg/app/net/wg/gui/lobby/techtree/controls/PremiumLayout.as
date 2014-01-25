@@ -52,9 +52,9 @@ package net.wg.gui.lobby.techtree.controls
          invalidate(TTInvalidationType.NATION,TTInvalidationType.DESCRIPTION);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this._context = null;
-         super.dispose();
+         super.onDispose();
       }
 
       override protected function configUI() : void {

@@ -101,7 +101,7 @@ package net.wg.gui.components.common.video.advanced
          }
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.stopSeekingByCoolDown();
          this.progressBar.removeEventListener(ProgressBarEvent.POSITION_UPDATED,this.progressBarUpdatePositionHandler);
          this.progressBar.removeEventListener(AbstractPlayerProgressBar.UNDER_USING_STATE,this.underUsingStateChangedHandler);
@@ -109,7 +109,7 @@ package net.wg.gui.components.common.video.advanced
          videoPlayer.removeEventListener(VideoPlayerEvent.SEEK_START,this.seekStartHandler);
          videoPlayer.removeEventListener(VideoPlayerEvent.SEEK_COMPLETE,this.seekCompleteHandler);
          this.progressBar = null;
-         super.dispose();
+         super.onDispose();
       }
    }
 

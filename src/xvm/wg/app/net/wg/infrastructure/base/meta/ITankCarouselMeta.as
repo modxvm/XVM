@@ -22,13 +22,17 @@ package net.wg.infrastructure.base.meta
 
       function favoriteVehicleS(param1:String, param2:Boolean) : void;
 
-      function getVehicleTypeProviderS() : Array;
+      function showVehicleStatsS(param1:Number) : void;
 
-      function as_vehiclesResponse(param1:Object) : void;
+      function getVehicleTypeProviderS() : Array;
 
       function as_setCarouselFilter(param1:Object) : void;
 
-      function as_changeVehicleByCompDescr(param1:Number) : void;
+      function as_setParams(param1:Object) : void;
+
+      function as_updateVehicles(param1:Object, param2:Boolean) : void;
+
+      function as_showVehicles(param1:Array) : void;
    }
 
 }

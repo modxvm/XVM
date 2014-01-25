@@ -7,12 +7,17 @@ package net.wg.infrastructure.base
    import net.wg.infrastructure.interfaces.IWindowGeometry;
    import flash.display.DisplayObject;
    import net.wg.infrastructure.constants.WindowViewInvalidationType;
+   import net.wg.infrastructure.interfaces.IManagedContent;
+   import net.wg.data.constants.Linkages;
+   import net.wg.infrastructure.interfaces.IWrapper;
+   import flash.display.InteractiveObject;
+   import flash.display.DisplayObjectContainer;
    import scaleform.clik.events.InputEvent;
-   import scaleform.clik.core.UIComponent;
-   import net.wg.gui.components.windows.Window;
    import scaleform.clik.ui.InputDetails;
    import flash.ui.Keyboard;
    import scaleform.clik.constants.InputValue;
+   import scaleform.clik.core.UIComponent;
+   import net.wg.gui.components.windows.Window;
    import flash.display.MovieClip;
 
 
@@ -64,16 +69,6 @@ package net.wg.infrastructure.base
          return false;
       }
 
-      override public function setFocus() : void {
-         super.setFocus();
-         App.utils.scheduler.envokeInNextFrame(this.changeBackgroundLabel,BG_ENABLED);
-      }
-
-      override public function removeFocus() : void {
-         super.removeFocus();
-         App.utils.scheduler.envokeInNextFrame(this.changeBackgroundLabel,BG_DISABLED);
-      }
-
       override public function playHideTween(param1:DisplayObject, param2:Function=null) : Boolean {
          return false;
       }
@@ -97,9 +92,9 @@ package net.wg.infrastructure.base
       }
 
       public function as_getGeometry() : Array {
-         if(this.window)
+         if(this._window)
          {
-            return [this.window.x,this.window.y,this.window.width,this.window.height];
+            return [this._window.x,this._window.y,this._window.width,this._window.height];
          }
          return null;
       }
@@ -113,12 +108,24 @@ package net.wg.infrastructure.base
          return this._isModal;
       }
 
-      public function get window() : IWindow {
+      public function setWindow(param1:IWindow) : void {
+         this._window = param1;
+      }
+
+      override public function get isModal() : Boolean {
+         return this._isModal;
+      }
+
+      public function set isModal(param1:Boolean) : void {
+         this._isModal = param1;
+      }
+
+      override public function get containerContent() : IManagedContent {
          return this._window;
       }
 
-      public function set window(param1:IWindow) : void {
-         this._window = param1;
+      public function get window() : IWindow {
+         return this._window;
       }
 
       public function get canMinimize() : Boolean {
@@ -197,16 +204,16 @@ package net.wg.infrastructure.base
          this._showWindowBg = param1;
       }
 
-      public function get isModal() : Boolean {
-         return this._isModal;
-      }
-
-      public function set isModal(param1:Boolean) : void {
-         this._isModal = param1;
-      }
-
       public function get showWaiting() : Boolean {
          return this._showWaiting;
+      }
+
+      public function set showWaiting(param1:Boolean) : void {
+         if(this._showWaiting != param1)
+         {
+            this._showWaiting = param1;
+            invalidate(WindowViewInvalidationType.WAITING_INVALID);
+         }
       }
 
       public function get geometry() : IWindowGeometry {
@@ -229,12 +236,34 @@ package net.wg.infrastructure.base
          this._isSourceTracked = param1;
       }
 
-      public function set showWaiting(param1:Boolean) : void {
-         if(this._showWaiting != param1)
-         {
-            this._showWaiting = param1;
-            invalidate(WindowViewInvalidationType.WAITING_INVALID);
-         }
+      public function get waiting() : Waiting {
+         return this._waiting;
+      }
+
+      public function get wrapperLinkage() : String {
+         return Linkages.WINDOW;
+      }
+
+      public function get wrapper() : IWrapper {
+         return this._window;
+      }
+
+      public function set wrapper(param1:IWrapper) : void {
+         this.setWindow(IWindow(param1));
+      }
+
+      override protected function onSetModalFocus(param1:InteractiveObject) : void {
+         super.onSetModalFocus(param1);
+         App.utils.scheduler.envokeInNextFrame(this.changeBackgroundLabel,BG_ENABLED);
+      }
+
+      override protected function onLeaveModalFocus() : void {
+         super.onLeaveModalFocus();
+         App.utils.scheduler.envokeInNextFrame(this.changeBackgroundLabel,BG_DISABLED);
+      }
+
+      override protected function getViewContainer() : DisplayObjectContainer {
+         return DisplayObjectContainer(this.window);
       }
 
       override protected function configUI() : void {
@@ -259,7 +288,7 @@ package net.wg.infrastructure.base
          {
             this._window.removeEventListener(InputEvent.INPUT,this.handleInput);
             this._window.dispose();
-            this._window.sourceView = null;
+            this._window.setWindowContent(null);
             this._window = null;
          }
          App.utils.scheduler.cancelTask(this.changeBackgroundLabel);
@@ -272,9 +301,9 @@ package net.wg.infrastructure.base
             this.applyWaitingChanges();
          }
          super.draw();
-         if((this.geometry) && (this.window) && (isInvalid(WindowViewInvalidationType.POSITION_INVALID)))
+         if((this.geometry) && (this._window) && (isInvalid(WindowViewInvalidationType.POSITION_INVALID)))
          {
-            this.geometry.setPosition(this.window);
+            this.geometry.setPosition(this._window);
             this.checkAppBounds();
          }
       }
@@ -304,43 +333,59 @@ package net.wg.infrastructure.base
          }
       }
 
+      protected final function canCloseFromInputDetails(param1:InputDetails) : Boolean {
+         return param1.code == Keyboard.ESCAPE && param1.value == InputValue.KEY_DOWN && this._window.getBackground().currentLabel == BG_ENABLED;
+      }
+
       private function checkAppBounds() : void {
-         if(this.window.width > App.appWidth)
+         if(this._window.width > App.appWidth)
          {
-            this.window.x = Math.round((App.appWidth - this.window.width) / 2);
+            this._window.x = Math.round((App.appWidth - this._window.width) / 2);
          }
          else
          {
-            if(this.window.x < 0)
+            if(this._window.x < 0)
             {
-               this.window.x = 0;
+               this._window.x = 0;
             }
-            if(this.window.x + this.window.width > App.appWidth)
+            if(this._window.x + this._window.width > App.appWidth)
             {
-               this.window.x = Math.round(App.appWidth - this.window.width);
+               this._window.x = Math.round(App.appWidth - this._window.width);
             }
          }
-         if(this.window.height > App.appHeight)
+         if(this._window.height > App.appHeight)
          {
-            this.window.y = Math.round((App.appHeight - this.window.height) / 2);
+            this._window.y = Math.round((App.appHeight - this._window.height) / 2);
          }
          else
          {
-            if(this.window.y < 0)
+            if(this._window.y < 0)
             {
-               this.window.y = 0;
+               this._window.y = 0;
             }
-            if(this.window.y + this.window.height > App.appHeight)
+            if(this._window.y + this._window.height > App.appHeight)
             {
-               this.window.y = Math.round(App.appHeight - this.window.height);
+               this._window.y = Math.round(App.appHeight - this._window.height);
             }
          }
       }
 
       private function validateView() : void {
-         if(this.window != null)
+         if(this._window != null)
          {
-            UIComponent(this.window).invalidate(Window.INVALID_SRC_VIEW);
+            UIComponent(this._window).invalidate(Window.INVALID_SRC_VIEW);
+         }
+      }
+
+      private function changeBackgroundLabel(param1:String) : void {
+         var _loc2_:MovieClip = null;
+         if(this.window)
+         {
+            _loc2_ = this._window.getBackground();
+            if((_loc2_) && !(_loc2_.currentLabel == param1))
+            {
+               _loc2_.gotoAndPlay(param1);
+            }
          }
       }
 
@@ -355,26 +400,6 @@ package net.wg.infrastructure.base
          {
             param1.handled = true;
             onWindowCloseS();
-         }
-      }
-
-      protected final function canCloseFromInputDetails(param1:InputDetails) : Boolean {
-         return param1.code == Keyboard.ESCAPE && param1.value == InputValue.KEY_DOWN && this.window.getBackground().currentLabel == BG_ENABLED;
-      }
-
-      public function get waiting() : Waiting {
-         return this._waiting;
-      }
-
-      private function changeBackgroundLabel(param1:String) : void {
-         var _loc2_:MovieClip = null;
-         if(this.window)
-         {
-            _loc2_ = this.window.getBackground();
-            if((_loc2_) && !(_loc2_.currentLabel == param1))
-            {
-               _loc2_.gotoAndPlay(param1);
-            }
          }
       }
    }

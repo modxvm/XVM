@@ -10,6 +10,8 @@ package net.wg.data.VO
          super(param1);
       }
 
+      private var _linkage:String = "";
+
       private var _progrTooltip:Object = null;
 
       private var _progrBarType:String = "";
@@ -21,6 +23,8 @@ package net.wg.data.VO
       private var _description:String = "";
 
       private var _progressDiff:String = "";
+
+      private var _progrIndex:int = 0;
 
       public function get progrTooltip() : Object {
          return this._progrTooltip;
@@ -68,6 +72,22 @@ package net.wg.data.VO
 
       public function set progressDiff(param1:String) : void {
          this._progressDiff = param1;
+      }
+
+      public function get linkage() : String {
+         return this._linkage;
+      }
+
+      public function set linkage(param1:String) : void {
+         this._linkage = param1;
+      }
+
+      public function get progrIndex() : int {
+         return this._progrIndex;
+      }
+
+      public function set progrIndex(param1:int) : void {
+         this._progrIndex = param1;
       }
    }
 

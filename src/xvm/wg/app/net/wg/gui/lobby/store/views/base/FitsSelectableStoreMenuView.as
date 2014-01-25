@@ -26,8 +26,8 @@ package net.wg.gui.lobby.store.views.base
 
       private var _programUpdating:Boolean = false;
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          resetTemporaryHandlers();
          this.fitsSelectDropDn.removeEventListener(ListEvent.INDEX_CHANGE,this.fitsSelectDropDnChangeHandler);
       }

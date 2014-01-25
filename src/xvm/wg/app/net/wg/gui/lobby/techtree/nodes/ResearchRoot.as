@@ -5,8 +5,12 @@ package net.wg.gui.lobby.techtree.nodes
    import net.wg.gui.lobby.techtree.controls.TypeAndLevelField;
    import flash.text.TextField;
    import flash.display.MovieClip;
+   import net.wg.gui.components.controls.SoundButtonEx;
+   import scaleform.clik.events.ButtonEvent;
    import net.wg.gui.lobby.techtree.TechTreeEvent;
    import net.wg.gui.utils.VehicleStateString;
+   import __AS3__.vec.Vector;
+   import flash.display.DisplayObjectContainer;
    import net.wg.gui.lobby.techtree.MenuHandler;
    import net.wg.gui.lobby.techtree.interfaces.IRenderer;
    import net.wg.gui.lobby.techtree.constants.ColorIndex;
@@ -35,12 +39,19 @@ package net.wg.gui.lobby.techtree.nodes
 
       public var flag:MovieClip;
 
+      public var btnShowInHangar:SoundButtonEx;
+
       public function setupEx(param1:String) : void {
          this.statusString = param1;
          invalidateData();
       }
 
       override public function cleanUp() : void {
+         if(this.btnShowInHangar != null)
+         {
+            this.btnShowInHangar.removeEventListener(ButtonEvent.CLICK,this.btnShowInHangarClickHandler);
+            this.btnShowInHangar.dispose();
+         }
          if(this.nameAndXp != null)
          {
             this.nameAndXp.dispose();
@@ -101,7 +112,25 @@ package net.wg.gui.lobby.techtree.nodes
             button.visible = stateProps.visible;
             button.setOwner(this,_doValidateNow);
          }
+         if(this.btnShowInHangar)
+         {
+            this.btnShowInHangar.label = App.utils.locale.makeString(MENU.RESEARCH_LABELS_BUTTON_SHOWINHANGAR);
+            this.btnShowInHangar.addEventListener(ButtonEvent.CLICK,this.btnShowInHangarClickHandler,false,0,true);
+         }
          super.populateUI();
+      }
+
+      override protected function getMouseEnabledChildren() : Vector.<DisplayObjectContainer> {
+         var _loc1_:Vector.<DisplayObjectContainer> = super.getMouseEnabledChildren();
+         if(this.btnShowInHangar)
+         {
+            _loc1_.push(this.btnShowInHangar);
+         }
+         return _loc1_;
+      }
+
+      private function btnShowInHangarClickHandler(param1:ButtonEvent) : void {
+         dispatchEvent(new TechTreeEvent(TechTreeEvent.CLICK_2_SELECT_IN_HANGAR,0,_index,_entityType));
       }
 
       override public function showContextMenu() : void {

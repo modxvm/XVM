@@ -11,6 +11,7 @@ package net.wg.gui.lobby.hangar.maintenance
    import flash.events.MouseEvent;
    import net.wg.data.constants.SoundTypes;
    import net.wg.utils.ILocale;
+   import net.wg.gui.components.controls.VO.ActionPriceVO;
    import net.wg.data.constants.Currencies;
    import net.wg.data.constants.Tooltips;
    import scaleform.gfx.MouseEventEx;
@@ -61,6 +62,7 @@ package net.wg.gui.lobby.hangar.maintenance
          var _loc2_:* = NaN;
          var _loc3_:* = NaN;
          var _loc4_:* = NaN;
+         var _loc5_:ActionPriceVO = null;
          super.draw();
          if(isInvalid(InvalidationType.DATA))
          {
@@ -72,22 +74,15 @@ package net.wg.gui.lobby.hangar.maintenance
                this.title.text = data.ammoName;
                this.price.icon = data.currency;
                _loc1_ = App.utils.locale;
-               if(data.currency == Currencies.CREDITS)
-               {
-                  this.price.textColor = data.prices[0] < data.userCredits[0]?Currencies.TEXT_COLORS[data.currency]:Currencies.TEXT_COLORS[Currencies.ERROR];
-                  this.actionPrice.textColorType = data.prices[0] < data.userCredits[0]?ActionPrice.TEXT_COLOR_TYPE_ICON:ActionPrice.TEXT_COLOR_TYPE_ERROR;
-               }
-               else
-               {
-                  this.price.textColor = data.prices[1] < data.userCredits[1]?Currencies.TEXT_COLORS[data.currency]:Currencies.TEXT_COLORS[Currencies.ERROR];
-                  this.actionPrice.textColorType = data.prices[0] < data.userCredits[0]?ActionPrice.TEXT_COLOR_TYPE_ICON:ActionPrice.TEXT_COLOR_TYPE_ERROR;
-               }
+               this.price.textColor = data.prices[0] < data.userCredits[data.currency]?Currencies.TEXT_COLORS[data.currency]:Currencies.TEXT_COLORS[Currencies.ERROR];
+               this.actionPrice.textColorType = data.prices[0] < data.userCredits[data.currency]?ActionPrice.TEXT_COLOR_TYPE_ICON:ActionPrice.TEXT_COLOR_TYPE_ERROR;
                this.price.text = data.currency == Currencies.CREDITS?_loc1_.integer(data.prices[0]):_loc1_.gold(data.prices[1]);
                this.price.validateNow();
                _loc2_ = data.hasOwnProperty("actionPrc")?data.actionPrc:0;
                _loc3_ = data.currency == Currencies.CREDITS?data.prices[0]:data.prices[1];
                _loc4_ = data.currency == Currencies.CREDITS?data.prices[2]:data.prices[3];
-               this.actionPrice.setData(_loc2_,_loc3_,_loc4_,data.currency);
+               _loc5_ = new ActionPriceVO(_loc2_,_loc3_,_loc4_,data.currency);
+               this.actionPrice.setData(_loc5_);
                this.actionPrice.setup(this);
                this.price.visible = !this.actionPrice.visible;
                this.actionPrice.validateNow();

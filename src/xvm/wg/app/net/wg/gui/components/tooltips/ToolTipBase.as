@@ -6,9 +6,9 @@ package net.wg.gui.components.tooltips
    import flash.display.MovieClip;
    import __AS3__.vec.Vector;
    import scaleform.clik.utils.Padding;
-   import scaleform.clik.motion.Tween;
    import flash.text.TextField;
    import net.wg.data.managers.ITooltipProps;
+   import scaleform.clik.motion.Tween;
    import fl.transitions.easing.*;
    import flash.utils.setTimeout;
    import flash.utils.clearTimeout;
@@ -35,29 +35,23 @@ package net.wg.gui.components.tooltips
 
       public static var COMPONENT_PROFILE_VEHICLE:String = "profileVehicle";
 
-      protected var _data:Object = null;
-
-      protected var _type:String = "";
-
-      protected var _component:String = "";
-
       public var background:Sprite = null;
 
       public var content:MovieClip = null;
 
       public var contentWidth:Number = 0;
 
+      protected var _data:Object = null;
+
+      protected var _type:String = "";
+
+      protected var _component:String = "";
+
       protected var separators:Vector.<Separator> = null;
 
       protected var contentMargin:Padding;
 
       protected var bgShadowMargin:Padding;
-
-      private const CURSOR_OFFSET:Number = 10;
-
-      private const BORDER_OFFSET:Number = 15;
-
-      private var tween:Tween = null;
 
       protected var headerList:Array = null;
 
@@ -81,16 +75,35 @@ package net.wg.gui.components.tooltips
 
       protected var _props:ITooltipProps = null;
 
-      private const SHOW_DELAY:Number = 400;
+      private var tween:Tween = null;
 
       private var showDelayIntervalID:Number = 0;
 
-      override protected function configUI() : void {
-         super.configUI();
-         if((this._data) && !this.isRedrawed)
+      private const CURSOR_OFFSET:Number = 10;
+
+      private const BORDER_OFFSET:Number = 15;
+
+      private const SHOW_DELAY:Number = 400;
+
+      override protected function onDispose() : void {
+         var _loc1_:Separator = null;
+         if(this.separators)
          {
-            this.redraw();
+            while(this.separators.length > 0)
+            {
+               _loc1_ = this.separators.pop();
+               this.content.removeChild(_loc1_);
+               _loc1_ = null;
+            }
+            this.separators = null;
          }
+         super.onDispose();
+         this.clearDelayIntervalID();
+         this.tryClearTween();
+      }
+
+      override public function toString() : String {
+         return "[WG ToolTipBase " + name + "]";
       }
 
       public function build(param1:Object, param2:ITooltipProps) : void {
@@ -106,12 +119,29 @@ package net.wg.gui.components.tooltips
          }
       }
 
+      override protected function configUI() : void {
+         super.configUI();
+         if((this._data) && !this.isRedrawed)
+         {
+            this.redraw();
+         }
+      }
+
       protected function redraw() : void {
          this.isRedrawed = true;
          this.updateSize();
          this.clearDelayIntervalID();
          var _loc1_:Number = (this._props) && !(this._props.drawDelay == -1)?this._props.drawDelay:this.SHOW_DELAY;
          this.showDelayIntervalID = setTimeout(this.startShow,_loc1_,this);
+      }
+
+      protected function updateSize() : void {
+         if(this.contentWidth == 0)
+         {
+            this.contentWidth = this.content.width;
+         }
+         this.background.width = this.content.width + this.contentMargin.horizontal + this.bgShadowMargin.horizontal | 0;
+         this.background.height = this.content.height + this.contentMargin.vertical + this.bgShadowMargin.vertical | 0;
       }
 
       private function startShow(... rest) : void {
@@ -167,42 +197,12 @@ package net.wg.gui.components.tooltips
          }
       }
 
-      override public function dispose() : void {
-         var _loc1_:Separator = null;
-         if(this.separators)
-         {
-            while(this.separators.length > 0)
-            {
-               _loc1_ = this.separators.pop();
-               this.content.removeChild(_loc1_);
-               _loc1_ = null;
-            }
-            this.separators = null;
-         }
-         super.dispose();
-         this.clearDelayIntervalID();
-         this.tryClearTween();
-      }
-
       private function clearDelayIntervalID() : void {
          if(this.showDelayIntervalID != 0)
          {
             clearTimeout(this.showDelayIntervalID);
             this.showDelayIntervalID = 0;
          }
-      }
-
-      protected function updateSize() : void {
-         if(this.contentWidth == 0)
-         {
-            this.contentWidth = this.content.width;
-         }
-         this.background.width = this.content.width + this.contentMargin.horizontal + this.bgShadowMargin.horizontal | 0;
-         this.background.height = this.content.height + this.contentMargin.vertical + this.bgShadowMargin.vertical | 0;
-      }
-
-      override public function toString() : String {
-         return "[WG ToolTipBase " + name + "]";
       }
    }
 

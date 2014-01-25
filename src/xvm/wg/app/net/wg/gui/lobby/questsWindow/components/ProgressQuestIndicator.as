@@ -8,6 +8,7 @@ package net.wg.gui.lobby.questsWindow.components
    import flash.display.Sprite;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.data.constants.QuestsStates;
+   import net.wg.data.constants.Linkages;
    import net.wg.gui.utils.ComplexTooltipHelper;
 
 
@@ -20,6 +21,8 @@ package net.wg.gui.lobby.questsWindow.components
       }
 
       public static const MASK_WIDTH:Number = 64;
+
+      private static const DEFAULT_VALUE:int = 100;
 
       private static function hideTooltip(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
@@ -52,7 +55,7 @@ package net.wg.gui.lobby.questsWindow.components
          addEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          removeEventListener(MouseEvent.CLICK,hideTooltip);
          removeEventListener(MouseEvent.ROLL_OUT,hideTooltip);
          removeEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
@@ -74,12 +77,12 @@ package net.wg.gui.lobby.questsWindow.components
          this.lineMC = null;
          this.dotsMC = null;
          this.bgMC = null;
-         super.dispose();
+         super.onDispose();
       }
 
       public function setValues(param1:String, param2:Number, param3:Number) : void {
          this._currentValue = param2;
-         this._totalValue = param3 > 0?param3:100;
+         this._totalValue = param3 > 0?param3:DEFAULT_VALUE;
          this._type = param1;
          invalidateData();
       }
@@ -96,6 +99,7 @@ package net.wg.gui.lobby.questsWindow.components
          super.draw();
          if(isInvalid(InvalidationType.DATA))
          {
+            this.textField.visible = true;
             this.maskMC.width = this._currentValue / this._totalValue * MASK_WIDTH;
             this.textField.text = App.utils.locale.integer(this._currentValue) + " / " + App.utils.locale.integer(this._totalValue);
             if(this.bgMC.contains(this.container))
@@ -105,6 +109,11 @@ package net.wg.gui.lobby.questsWindow.components
             if(this._type == QuestsStates.CURRENT)
             {
                this.lineMC.gotoAndStop(QuestsStates.CURRENT);
+            }
+            if(this._type == QuestsStates.COMMON)
+            {
+               this.lineMC.gotoAndStop(QuestsStates.STRATEGIC);
+               this.textField.visible = false;
             }
             if(this._type == QuestsStates.STRATEGIC)
             {
@@ -118,7 +127,7 @@ package net.wg.gui.lobby.questsWindow.components
                _loc3_ = 0;
                while(_loc3_ < _loc1_)
                {
-                  _loc4_ = App.utils.classFactory.getComponent("Delimeter_UI",MovieClip);
+                  _loc4_ = App.utils.classFactory.getComponent(Linkages.DELIMETER_UI,MovieClip);
                   _loc4_.x = Math.round(_loc2_ + _loc2_ * _loc3_);
                   this.container.addChild(_loc4_);
                   _loc3_++;

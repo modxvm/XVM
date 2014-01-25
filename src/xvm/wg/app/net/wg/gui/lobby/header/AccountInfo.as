@@ -55,8 +55,8 @@ package net.wg.gui.lobby.header
          this.expGatheringBtn.addEventListener(ButtonEvent.CLICK,this.onGatheringXPBtnClick);
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this.premiumBtn.removeEventListener(ButtonEvent.CLICK,this.onPremiumBtnClickHndlr);
          this.goldExchangeBtn.removeEventListener(ButtonEvent.CLICK,this.showExchange);
          this.accountRefillBtn.removeEventListener(ButtonEvent.CLICK,this.onPaymentBtnClick);
@@ -103,7 +103,7 @@ package net.wg.gui.lobby.header
 
       public function setExp(param1:String, param2:Boolean) : void {
          this.experience.text = param1;
-         this.experience.toolTip = param2?"#tooltips:useFreeXP":"#tooltips:freeXP";
+         this.experience.toolTip = param2?TOOLTIPS.USEFREEXP:TOOLTIPS.FREEXP;
       }
 
       public function setCredits(param1:String) : void {

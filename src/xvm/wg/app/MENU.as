@@ -145,6 +145,12 @@ package
 
       public static const LOGIN_STATUS_ACCOUNTNOTREADY:String = "#menu:login/status/accountNotReady";
 
+      public static const LOGIN_STATUS_VERSIONMISMATCH:String = "#menu:login/status/versionMismatch";
+
+      public static const LOGIN_STATUS_CENTERRESTART:String = "#menu:login/status/centerRestart";
+
+      public static const LOGIN_STATUS_CLIENT_SERVER_VERSIONS_ARE_DIFFERENT:String = "#menu:login/status/CLIENT_SERVER_VERSIONS_ARE_DIFFERENT";
+
       public static const LOADING_GAME:String = "#menu:loading/game";
 
       public static const LOADING_GAMEINFO:String = "#menu:loading/gameInfo";
@@ -233,7 +239,17 @@ package
 
       public static const TANKMANPERSONALCASE_USINGLEVEL:String = "#menu:tankmanPersonalCase/usingLevel";
 
-      public static const TANKMANPERSONALCASE_MODIFIERS:String = "#menu:tankmanPersonalCase/modifiers";
+      public static const TANKMANPERSONALCASE_MODIFIERS_FROMCOMMANDER:String = "#menu:tankmanPersonalCase/modifiers/fromCommander";
+
+      public static const TANKMANPERSONALCASE_MODIFIERS_FROMEQUIPMENT:String = "#menu:tankmanPersonalCase/modifiers/fromEquipment";
+
+      public static const TANKMANPERSONALCASE_MODIFIERS_FROMSKILLS:String = "#menu:tankmanPersonalCase/modifiers/fromSkills";
+
+      public static const TANKMANPERSONALCASE_MODIFIERS_PENALTY:String = "#menu:tankmanPersonalCase/modifiers/penalty";
+
+      public static const TANKMANPERSONALCASE_MODIFIERSHEADER:String = "#menu:tankmanPersonalCase/modifiersHeader";
+
+      public static const TANKMANPERSONALCASE_MODIFIERSRESULT:String = "#menu:tankmanPersonalCase/modifiersResult";
 
       public static const TANKMANPERSONALCASE_SPECIALIZATION:String = "#menu:tankmanPersonalCase/specialization";
 
@@ -523,6 +539,28 @@ package
 
       public static const NATIONS_ALL:String = "#menu:nations/all";
 
+      public static const LEVELS_1:String = "#menu:levels/1";
+
+      public static const LEVELS_2:String = "#menu:levels/2";
+
+      public static const LEVELS_3:String = "#menu:levels/3";
+
+      public static const LEVELS_4:String = "#menu:levels/4";
+
+      public static const LEVELS_5:String = "#menu:levels/5";
+
+      public static const LEVELS_6:String = "#menu:levels/6";
+
+      public static const LEVELS_7:String = "#menu:levels/7";
+
+      public static const LEVELS_8:String = "#menu:levels/8";
+
+      public static const LEVELS_9:String = "#menu:levels/9";
+
+      public static const LEVELS_10:String = "#menu:levels/10";
+
+      public static const LEVELS_ALL:String = "#menu:levels/all";
+
       public static const NATION_TREE_TITLE_USSR:String = "#menu:nation_tree/title/ussr";
 
       public static const NATION_TREE_TITLE_GERMANY:String = "#menu:nation_tree/title/germany";
@@ -755,7 +793,7 @@ package
 
       public static const MODULEFITS_TOO_HEAVY:String = "#menu:moduleFits/too_heavy";
 
-      public static const MODULEFITS_TOO_HEAVY_CHASSI:String = "#menu:moduleFits/too_heavy_chassi";
+      public static const MODULEFITS_TOO_HEAVY_CHASSIS:String = "#menu:moduleFits/too_heavy_chassis";
 
       public static const MODULEFITS_REMOVE_TOO_HEAVY:String = "#menu:moduleFits/remove_too_heavy";
 
@@ -1009,6 +1047,8 @@ package
 
       public static const MODULEINFO_PARAMS_PIERCINGPOWER:String = "#menu:moduleInfo/params/piercingPower";
 
+      public static const MODULEINFO_ADDITIONALINFO:String = "#menu:moduleInfo/additionalInfo";
+
       public static const MODULEINFO_PARAMS_DAMAGE:String = "#menu:moduleInfo/params/damage";
 
       public static const MODULEINFO_PARAMS_AVGPIERCINGPOWER:String = "#menu:moduleInfo/params/avgPiercingPower";
@@ -1110,6 +1150,8 @@ package
       public static const RESEARCH_PREMIUM_BENEFITS_FIFTH:String = "#menu:research/premium/benefits/fifth";
 
       public static const RESEARCH_PREMIUM_DESCRIPTION_TITTE:String = "#menu:research/premium/description/titte";
+
+      public static const RESEARCH_LABELS_BUTTON_SHOWINHANGAR:String = "#menu:research/labels/button/showInHangar";
 
       public static const RESEARCH_LABELS_VEHXP:String = "#menu:research/labels/vehXP";
 
@@ -1587,33 +1629,39 @@ package
 
       public static const CUSTOMIZATION_REMOVE_CAMOUFLAGE_SIDE_01:String = "#menu:customization/remove/camouflage/side-01";
 
+      public static const CUSTOMIZATION_REMOVE_CAMOUFLAGE0_SIDE_01:String = "#menu:customization/remove/camouflage0/side-01";
+
+      public static const CUSTOMIZATION_REMOVE_CAMOUFLAGE1_SIDE_01:String = "#menu:customization/remove/camouflage1/side-01";
+
+      public static const CUSTOMIZATION_REMOVE_CAMOUFLAGE2_SIDE_01:String = "#menu:customization/remove/camouflage2/side-01";
+
       public static const CUSTOMIZATION_REMOVE_CAMOUFLAGE_SIDE_02:String = "#menu:customization/remove/camouflage/side-02";
 
-      public static const CUSTOMIZATION_REMOVE_CAMOUFLAGE_SIDE_03:String = "#menu:customization/remove/camouflage/side-03";
+      public static const CUSTOMIZATION_STORE_CAMOUFLAGE_SIDE_02:String = "#menu:customization/store/camouflage/side-02";
 
       public static const CUSTOMIZATION_REMOVE_EMBLEMLEFT_SIDE_01:String = "#menu:customization/remove/emblemLeft/side-01";
 
       public static const CUSTOMIZATION_REMOVE_EMBLEMLEFT_SIDE_02:String = "#menu:customization/remove/emblemLeft/side-02";
 
-      public static const CUSTOMIZATION_REMOVE_EMBLEMLEFT_SIDE_03:String = "#menu:customization/remove/emblemLeft/side-03";
+      public static const CUSTOMIZATION_STORE_EMBLEMLEFT_SIDE_02:String = "#menu:customization/store/emblemLeft/side-02";
 
       public static const CUSTOMIZATION_REMOVE_EMBLEMRIGHT_SIDE_01:String = "#menu:customization/remove/emblemRight/side-01";
 
       public static const CUSTOMIZATION_REMOVE_EMBLEMRIGHT_SIDE_02:String = "#menu:customization/remove/emblemRight/side-02";
 
-      public static const CUSTOMIZATION_REMOVE_EMBLEMRIGHT_SIDE_03:String = "#menu:customization/remove/emblemRight/side-03";
+      public static const CUSTOMIZATION_STORE_EMBLEMRIGHT_SIDE_02:String = "#menu:customization/store/emblemRight/side-02";
 
       public static const CUSTOMIZATION_REMOVE_INSCRIPTIONLEFT_SIDE_01:String = "#menu:customization/remove/inscriptionLeft/side-01";
 
       public static const CUSTOMIZATION_REMOVE_INSCRIPTIONLEFT_SIDE_02:String = "#menu:customization/remove/inscriptionLeft/side-02";
 
-      public static const CUSTOMIZATION_REMOVE_INSCRIPTIONLEFT_SIDE_03:String = "#menu:customization/remove/inscriptionLeft/side-03";
+      public static const CUSTOMIZATION_STORE_INSCRIPTIONLEFT_SIDE_02:String = "#menu:customization/store/inscriptionLeft/side-02";
 
       public static const CUSTOMIZATION_REMOVE_INSCRIPTIONRIGHT_SIDE_01:String = "#menu:customization/remove/inscriptionRight/side-01";
 
       public static const CUSTOMIZATION_REMOVE_INSCRIPTIONRIGHT_SIDE_02:String = "#menu:customization/remove/inscriptionRight/side-02";
 
-      public static const CUSTOMIZATION_REMOVE_INSCRIPTIONRIGHT_SIDE_03:String = "#menu:customization/remove/inscriptionRight/side-03";
+      public static const CUSTOMIZATION_STORE_INSCRIPTIONRIGHT_SIDE_02:String = "#menu:customization/store/inscriptionRight/side-02";
 
       public static const CUSTOMIZATION_REMOVE_HORN_SIDE_01:String = "#menu:customization/remove/horn/side-01";
 
@@ -1743,6 +1791,10 @@ package
 
       public static const CONTEXTMENU_SELLFROMINVENTORY:String = "#menu:contextMenu/sellFromInventory";
 
+      public static const CONTEXTMENU_SELECTVEHICLEINHANGAR:String = "#menu:contextMenu/selectVehicleInHangar";
+
+      public static const CONTEXTMENU_SHOWVEHICLESTATISTICS:String = "#menu:contextMenu/showVehicleStatistics";
+
       public static const CONTEXTMENU_BUY:String = "#menu:contextMenu/buy";
 
       public static const CONTEXTMENU_UNLOAD:String = "#menu:contextMenu/unload";
@@ -1869,7 +1921,39 @@ package
 
       public static const IGR_INFO:String = "#menu:igr/info";
 
+      public static const BONUSTYPE_0:String = "#menu:bonusType/0";
+
+      public static const BONUSTYPE_1:String = "#menu:bonusType/1";
+
+      public static const BONUSTYPE_2:String = "#menu:bonusType/2";
+
+      public static const BONUSTYPE_3:String = "#menu:bonusType/3";
+
+      public static const BONUSTYPE_4:String = "#menu:bonusType/4";
+
+      public static const BONUSTYPE_5:String = "#menu:bonusType/5";
+
+      public static const BONUSTYPE_6:String = "#menu:bonusType/6";
+
+      public static const BONUSTYPE_7:String = "#menu:bonusType/7";
+
+      public static const DAY_1:String = "#menu:day/1";
+
+      public static const DAY_2:String = "#menu:day/2";
+
+      public static const DAY_3:String = "#menu:day/3";
+
+      public static const DAY_4:String = "#menu:day/4";
+
+      public static const DAY_5:String = "#menu:day/5";
+
+      public static const DAY_6:String = "#menu:day/6";
+
+      public static const DAY_7:String = "#menu:day/7";
+
       public static const NATION_TREE_TITLE_ENUM:Array = [NATION_TREE_TITLE_USSR,NATION_TREE_TITLE_GERMANY,NATION_TREE_TITLE_USA,NATION_TREE_TITLE_FRANCE,NATION_TREE_TITLE_UK,NATION_TREE_TITLE_CHINA,NATION_TREE_TITLE_JAPAN];
+
+      public static const TANKMANPERSONALCASE_MODIFIERS_ENUM:Array = [TANKMANPERSONALCASE_MODIFIERS_FROMCOMMANDER,TANKMANPERSONALCASE_MODIFIERS_FROMEQUIPMENT,TANKMANPERSONALCASE_MODIFIERS_FROMSKILLS,TANKMANPERSONALCASE_MODIFIERS_PENALTY,TANKMANPERSONALCASE_MODIFIERSHEADER,TANKMANPERSONALCASE_MODIFIERSRESULT];
 
       public static const TANKMANTRAININGWINDOW_ENUM:Array = [TANKMANTRAININGWINDOW_TITLE,TANKMANTRAININGWINDOW_ACADEMY,TANKMANTRAININGWINDOW_SCOOL,TANKMANTRAININGWINDOW_FREE,TANKMANTRAININGWINDOW_TRAININGTO,TANKMANTRAININGWINDOW_CLOSEBTN];
 
@@ -1901,13 +1985,13 @@ package
 
       public static const PROFILE_STATS_ITEMS_ENUM:Array = [PROFILE_STATS_ITEMS_READYTOLEARN,PROFILE_STATS_ITEMS_NEXTSKILLXPLEFT,PROFILE_STATS_ITEMS_NEXTSKILLBATTLESLEFT,PROFILE_STATS_ITEMS_XP,PROFILE_STATS_ITEMS_FRAGS,PROFILE_STATS_ITEMS_UNKNOWN,PROFILE_STATS_ITEMS_READY,PROFILE_STATS_ITEMS_FRAGSBEAST,PROFILE_STATS_ITEMS_AVGEXPERIENCE,PROFILE_STATS_ITEMS_MAXXP,PROFILE_STATS_ITEMS_MAXFRAGS,PROFILE_STATS_ITEMS_BATTLESCOUNT,PROFILE_STATS_ITEMS_WINS,PROFILE_STATS_ITEMS_LOSSES,PROFILE_STATS_ITEMS_SURVIVEDBATTLES,PROFILE_STATS_ITEMS_LASTBATTLETIME,PROFILE_STATS_ITEMS_EFFECTIVESHOTS,PROFILE_STATS_ITEMS_DAMAGEDEALT,PROFILE_STATS_ITEMS_HEROES,PROFILE_STATS_ITEMS_WARRIOR,PROFILE_STATS_ITEMS_INVADER,PROFILE_STATS_ITEMS_SNIPER,PROFILE_STATS_ITEMS_DEFENDER,PROFILE_STATS_ITEMS_STEELWALL,PROFILE_STATS_ITEMS_SUPPORTER,PROFILE_STATS_ITEMS_SCOUT,PROFILE_STATS_ITEMS_MEDALKAY];
 
-      public static const LOGIN_STATUS_ENUM:Array = [LOGIN_STATUS_EMPTY_LOGIN,LOGIN_STATUS_INVALID_LOGIN_LENGTH,LOGIN_STATUS_INVALID_NICKNAME,LOGIN_STATUS_INVALID_LOGIN,LOGIN_STATUS_EMPTY_PASSWORD,LOGIN_STATUS_INVALID_PASSWORD,LOGIN_STATUS_EMPTY_SERVER,LOGIN_STATUS_CONNECTING,LOGIN_STATUS_DISCONNECTED,LOGIN_STATUS_UNAVAILABLE,LOGIN_STATUS_LOGIN_REJECTED_ALREADY_LOGGED_IN,LOGIN_STATUS_CONNECTION_FAILED,LOGIN_STATUS_DNS_LOOKUP_FAILED,LOGIN_STATUS_UNKNOWN_ERROR,LOGIN_STATUS_CANCELLED,LOGIN_STATUS_LOGIN_REJECTED_NO_SUCH_USER,LOGIN_STATUS_LOGIN_REJECTED_ACTIVATING,LOGIN_STATUS_LOGIN_REJECTED_INVALID_PASSWORD,LOGIN_STATUS_LOGIN_REJECTED_NO_BASEAPP_RESPONSE,LOGIN_STATUS_LOGIN_REJECTED_ILLEGAL_CHARACTERS,LOGIN_STATUS_LOGIN_BAD_PROTOCOL_VERSION,LOGIN_STATUS_LOGIN_REJECTED_BAD_DIGEST,LOGIN_STATUS_LOGIN_REJECTED_SERVER_NOT_READY,LOGIN_STATUS_LOGIN_REJECTED_BASEAPP_OVERLOAD,LOGIN_STATUS_LOGIN_REJECTED_CELLAPP_OVERLOAD,LOGIN_STATUS_LOGIN_REJECTED_DBMGR_OVERLOAD,LOGIN_STATUS_LOGIN_REJECTED_LOGINS_NOT_ALLOWED,LOGIN_STATUS_LOGIN_REJECTED_REGISTRATION_NOT_CONFIRMED,LOGIN_STATUS_LOGIN_REJECTED_RATE_LIMITED,LOGIN_STATUS_LOGIN_REJECTED_USERS_LIMIT,LOGIN_STATUS_LOGIN_REJECTED_DB_GENERAL_FAILURE,LOGIN_STATUS_LOGIN_REJECTED_DB_NOT_READY,LOGIN_STATUS_LOGIN_REJECTED_NO_BASEAPPS,LOGIN_STATUS_LOGIN_REJECTED_NO_LOGINAPP_RESPONSE,LOGIN_STATUS_LOGIN_REJECTED_BASEAPP_TIMEOUT,LOGIN_STATUS_LOGIN_REJECTED_BASEAPPMGR_TIMEOUT,LOGIN_STATUS_LOGIN_MALFORMED_REQUEST,LOGIN_STATUS_PUBLIC_KEY_LOOKUP_FAILED,LOGIN_STATUS_ALREADY_ONLINE_LOCALLY,LOGIN_STATUS_LOGIN_REJECTED_BAN,LOGIN_STATUS_LOGIN_REJECTED_BAN_UNLIMITED,LOGIN_STATUS_LOGIN_CUSTOM_DEFINED_ERROR,LOGIN_STATUS_LOGIN_REJECTED_LOGIN_QUEUE,LOGIN_STATUS_LOGIN_REJECTED_NICKNAME_ALREADY_EXIST,LOGIN_STATUS_LOGIN_REJECTED_UNABLE_TO_PARSE_JSON,LOGIN_STATUS_LOGIN_REJECTED_REGISTRATION_NOT_ALLOWED,LOGIN_STATUS_LOGIN_REJECTED_INACCESSIBLE_REALM,LOGIN_STATUS_LAUNCHERNOTFOUND,LOGIN_STATUS_SESSION_END,LOGIN_STATUS_ACCOUNTNOTREADY];
+      public static const LOGIN_STATUS_ENUM:Array = [LOGIN_STATUS_EMPTY_LOGIN,LOGIN_STATUS_INVALID_LOGIN_LENGTH,LOGIN_STATUS_INVALID_NICKNAME,LOGIN_STATUS_INVALID_LOGIN,LOGIN_STATUS_EMPTY_PASSWORD,LOGIN_STATUS_INVALID_PASSWORD,LOGIN_STATUS_EMPTY_SERVER,LOGIN_STATUS_CONNECTING,LOGIN_STATUS_DISCONNECTED,LOGIN_STATUS_UNAVAILABLE,LOGIN_STATUS_LOGIN_REJECTED_ALREADY_LOGGED_IN,LOGIN_STATUS_CONNECTION_FAILED,LOGIN_STATUS_DNS_LOOKUP_FAILED,LOGIN_STATUS_UNKNOWN_ERROR,LOGIN_STATUS_CANCELLED,LOGIN_STATUS_LOGIN_REJECTED_NO_SUCH_USER,LOGIN_STATUS_LOGIN_REJECTED_ACTIVATING,LOGIN_STATUS_LOGIN_REJECTED_INVALID_PASSWORD,LOGIN_STATUS_LOGIN_REJECTED_NO_BASEAPP_RESPONSE,LOGIN_STATUS_LOGIN_REJECTED_ILLEGAL_CHARACTERS,LOGIN_STATUS_LOGIN_BAD_PROTOCOL_VERSION,LOGIN_STATUS_LOGIN_REJECTED_BAD_DIGEST,LOGIN_STATUS_LOGIN_REJECTED_SERVER_NOT_READY,LOGIN_STATUS_LOGIN_REJECTED_BASEAPP_OVERLOAD,LOGIN_STATUS_LOGIN_REJECTED_CELLAPP_OVERLOAD,LOGIN_STATUS_LOGIN_REJECTED_DBMGR_OVERLOAD,LOGIN_STATUS_LOGIN_REJECTED_LOGINS_NOT_ALLOWED,LOGIN_STATUS_LOGIN_REJECTED_REGISTRATION_NOT_CONFIRMED,LOGIN_STATUS_LOGIN_REJECTED_RATE_LIMITED,LOGIN_STATUS_LOGIN_REJECTED_USERS_LIMIT,LOGIN_STATUS_LOGIN_REJECTED_DB_GENERAL_FAILURE,LOGIN_STATUS_LOGIN_REJECTED_DB_NOT_READY,LOGIN_STATUS_LOGIN_REJECTED_NO_BASEAPPS,LOGIN_STATUS_LOGIN_REJECTED_NO_LOGINAPP_RESPONSE,LOGIN_STATUS_LOGIN_REJECTED_BASEAPP_TIMEOUT,LOGIN_STATUS_LOGIN_REJECTED_BASEAPPMGR_TIMEOUT,LOGIN_STATUS_LOGIN_MALFORMED_REQUEST,LOGIN_STATUS_PUBLIC_KEY_LOOKUP_FAILED,LOGIN_STATUS_ALREADY_ONLINE_LOCALLY,LOGIN_STATUS_LOGIN_REJECTED_BAN,LOGIN_STATUS_LOGIN_REJECTED_BAN_UNLIMITED,LOGIN_STATUS_LOGIN_CUSTOM_DEFINED_ERROR,LOGIN_STATUS_LOGIN_REJECTED_LOGIN_QUEUE,LOGIN_STATUS_LOGIN_REJECTED_NICKNAME_ALREADY_EXIST,LOGIN_STATUS_LOGIN_REJECTED_UNABLE_TO_PARSE_JSON,LOGIN_STATUS_LOGIN_REJECTED_REGISTRATION_NOT_ALLOWED,LOGIN_STATUS_LOGIN_REJECTED_INACCESSIBLE_REALM,LOGIN_STATUS_LAUNCHERNOTFOUND,LOGIN_STATUS_SESSION_END,LOGIN_STATUS_ACCOUNTNOTREADY,LOGIN_STATUS_VERSIONMISMATCH,LOGIN_STATUS_CENTERRESTART,LOGIN_STATUS_CLIENT_SERVER_VERSIONS_ARE_DIFFERENT];
 
       public static const TRAINING_INFO_ENUM:Array = [TRAINING_INFO_TITLE,TRAINING_INFO_STARTBUTTON,TRAINING_INFO_SETTINGSBUTTON,TRAINING_INFO_INVITEBUTTON,TRAINING_INFO_EXITBUTTON,TRAINING_INFO_DELETEBUTTON,TRAINING_INFO_TEAM1LABEL,TRAINING_INFO_TEAM2LABEL,TRAINING_INFO_OTHERLABEL,TRAINING_INFO_SETTINGS_TITLE,TRAINING_INFO_SETTINGS_OKBUTTON,TRAINING_INFO_MAP,TRAINING_INFO_TIMEOUT_LABEL,TRAINING_INFO_TIMEOUT_VALUE,TRAINING_INFO_MAXPLAYERS,TRAINING_INFO_OWNER,TRAINING_INFO_VOICECHAT,TRAINING_INFO_STATES_STATE0,TRAINING_INFO_STATES_STATE1,TRAINING_INFO_STATES_STATE2,TRAINING_INFO_STATES_STATE4,TRAINING_INFO_STATES_STATE8,TRAINING_INFO_STATES_STATE17,TRAINING_INFO_STATES_STATE20,TRAINING_INFO_STATES_STATE24,TRAINING_INFO_USECOMMONVOICECHAT,TRAINING_INFO_USESEPARATEVOIPCHAT,TRAINING_INFO_NOTUSECHAT];
 
       public static const PREMIUM_PERIODS_ENUM:Array = [PREMIUM_PERIODS_DAYS1,PREMIUM_PERIODS_DAYS3,PREMIUM_PERIODS_DAYS7,PREMIUM_PERIODS_DAYS30,PREMIUM_PERIODS_DAYS180,PREMIUM_PERIODS_DAYS360];
 
-      public static const CONTEXTMENU_ENUM:Array = [CONTEXTMENU_VEHICLEINFO,CONTEXTMENU_VEHICLEINFOEX,CONTEXTMENU_GOTONATIONTREE,CONTEXTMENU_GOTONEXTVEHICLE,CONTEXTMENU_VEHICLESELL,CONTEXTMENU_VEHICLERESEARCH,CONTEXTMENU_VEHICLECHECK,CONTEXTMENU_VEHICLEUNCHECK,CONTEXTMENU_USERINFO,CONTEXTMENU_MONEYTRANSFER,CONTEXTMENU_CREATEPRIVATECHANNEL,CONTEXTMENU_ADDTOFRIENDS,CONTEXTMENU_REMOVEFROMFRIENDS,CONTEXTMENU_ADDTOIGNORED,CONTEXTMENU_REMOVEFROMIGNORED,CONTEXTMENU_COPYTOCLIPBOARD,CONTEXTMENU_SETMUTED,CONTEXTMENU_UNSETMUTED,CONTEXTMENU_MODULEINFO,CONTEXTMENU_SELL,CONTEXTMENU_SELLFROMINVENTORY,CONTEXTMENU_BUY,CONTEXTMENU_UNLOAD,CONTEXTMENU_CANCELBUY,CONTEXTMENU_BUYANDEQUIP,CONTEXTMENU_EQUIP,CONTEXTMENU_UNLOCK,CONTEXTMENU_KICKPLAYER,CONTEXTMENU_APPEAL,CONTEXTMENU_OFFEND,CONTEXTMENU_FLOOD,CONTEXTMENU_OPENINGOFALLYPOS,CONTEXTMENU_ALLYEJECTION,CONTEXTMENU_NOTFAIRPLAY,CONTEXTMENU_TEAMKILL,CONTEXTMENU_BOT,CONTEXTMENU_PERSONALCASE,CONTEXTMENU_TANKMANUNLOAD,CONTEXTMENU_TANKMANUNLOADALL,CONTEXTMENU_DISMISS,CONTEXTMENU_LOCKSLOT,CONTEXTMENU_UNLOCKSLOT];
+      public static const CONTEXTMENU_ENUM:Array = [CONTEXTMENU_VEHICLEINFO,CONTEXTMENU_VEHICLEINFOEX,CONTEXTMENU_GOTONATIONTREE,CONTEXTMENU_GOTONEXTVEHICLE,CONTEXTMENU_VEHICLESELL,CONTEXTMENU_VEHICLERESEARCH,CONTEXTMENU_VEHICLECHECK,CONTEXTMENU_VEHICLEUNCHECK,CONTEXTMENU_USERINFO,CONTEXTMENU_MONEYTRANSFER,CONTEXTMENU_CREATEPRIVATECHANNEL,CONTEXTMENU_ADDTOFRIENDS,CONTEXTMENU_REMOVEFROMFRIENDS,CONTEXTMENU_ADDTOIGNORED,CONTEXTMENU_REMOVEFROMIGNORED,CONTEXTMENU_COPYTOCLIPBOARD,CONTEXTMENU_SETMUTED,CONTEXTMENU_UNSETMUTED,CONTEXTMENU_MODULEINFO,CONTEXTMENU_SELL,CONTEXTMENU_SELLFROMINVENTORY,CONTEXTMENU_SELECTVEHICLEINHANGAR,CONTEXTMENU_SHOWVEHICLESTATISTICS,CONTEXTMENU_BUY,CONTEXTMENU_UNLOAD,CONTEXTMENU_CANCELBUY,CONTEXTMENU_BUYANDEQUIP,CONTEXTMENU_EQUIP,CONTEXTMENU_UNLOCK,CONTEXTMENU_KICKPLAYER,CONTEXTMENU_APPEAL,CONTEXTMENU_OFFEND,CONTEXTMENU_FLOOD,CONTEXTMENU_OPENINGOFALLYPOS,CONTEXTMENU_ALLYEJECTION,CONTEXTMENU_NOTFAIRPLAY,CONTEXTMENU_TEAMKILL,CONTEXTMENU_BOT,CONTEXTMENU_PERSONALCASE,CONTEXTMENU_TANKMANUNLOAD,CONTEXTMENU_TANKMANUNLOADALL,CONTEXTMENU_DISMISS,CONTEXTMENU_LOCKSLOT,CONTEXTMENU_UNLOCKSLOT];
 
       public static const NATIONS_ENUM:Array = [NATIONS_TITLE,NATIONS_USSR,NATIONS_GERMANY,NATIONS_USA,NATIONS_FRANCE,NATIONS_CHINA,NATIONS_JAPAN,NATIONS_UK,NATIONS_ALL];
 
@@ -1925,6 +2009,12 @@ package
          return _loc2_;
       }
 
+      public static function tankmanpersonalcase_modifiers(param1:String) : String {
+         var _loc2_:String = "#menu:tankmanPersonalCase/modifiers/" + param1;
+         App.utils.asserter.assert(!(TANKMANPERSONALCASE_MODIFIERS_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
+         return _loc2_;
+      }
+
       public static function tankmantrainingwindow(param1:String) : String {
          var _loc2_:String = "#menu:tankmanTrainingWindow/" + param1;
          App.utils.asserter.assert(!(TANKMANTRAININGWINDOW_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
@@ -1938,121 +2028,141 @@ package
       }
 
       public static function moduleinfo_params(param1:String) : String {
-         var _loc2_:String = "#menu:moduleInfo/params/" + param1;
+         var _loc2_:String = null;
+         _loc2_ = "#menu:moduleInfo/params/" + param1;
          App.utils.asserter.assert(!(MODULEINFO_PARAMS_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
          return _loc2_;
       }
 
       public static function skilldropwindow_study(param1:String) : String {
-         var _loc2_:String = "#menu:skillDropWindow/study/" + param1;
+         var _loc2_:String = null;
+         _loc2_ = "#menu:skillDropWindow/study/" + param1;
          App.utils.asserter.assert(!(SKILLDROPWINDOW_STUDY_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
          return _loc2_;
       }
 
       public static function inventory_menu(param1:String) : String {
-         var _loc2_:String = "#menu:inventory/menu/" + param1;
+         var _loc2_:String = null;
+         _loc2_ = "#menu:inventory/menu/" + param1;
          App.utils.asserter.assert(!(INVENTORY_MENU_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
          return _loc2_;
       }
 
       public static function tank_params(param1:String) : String {
-         var _loc2_:String = "#menu:tank_params/" + param1;
+         var _loc2_:String = null;
+         _loc2_ = "#menu:tank_params/" + param1;
          App.utils.asserter.assert(!(TANK_PARAMS_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
          return _loc2_;
       }
 
       public static function loading_battletypes(param1:String) : String {
-         var _loc2_:String = "#menu:loading/battleTypes/" + param1;
+         var _loc2_:String = null;
+         _loc2_ = "#menu:loading/battleTypes/" + param1;
          App.utils.asserter.assert(!(LOADING_BATTLETYPES_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
          return _loc2_;
       }
 
       public static function tankcarousel_vehiclestates(param1:String) : String {
-         var _loc2_:String = "#menu:tankCarousel/vehicleStates/" + param1;
+         var _loc2_:String = null;
+         _loc2_ = "#menu:tankCarousel/vehicleStates/" + param1;
          App.utils.asserter.assert(!(TANKCAROUSEL_VEHICLESTATES_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
          return _loc2_;
       }
 
       public static function shop_table_header_count(param1:String) : String {
-         var _loc2_:String = "#menu:shop/table/header/count/" + param1;
+         var _loc2_:String = null;
+         _loc2_ = "#menu:shop/table/header/count/" + param1;
          App.utils.asserter.assert(!(SHOP_TABLE_HEADER_COUNT_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
          return _loc2_;
       }
 
       public static function tankmen(param1:String) : String {
-         var _loc2_:String = "#menu:tankmen/" + param1;
+         var _loc2_:String = null;
+         _loc2_ = "#menu:tankmen/" + param1;
          App.utils.asserter.assert(!(TANKMEN_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
          return _loc2_;
       }
 
       public static function denunciation(param1:String) : String {
-         var _loc2_:String = "#menu:denunciation/" + param1;
+         var _loc2_:String = null;
+         _loc2_ = "#menu:denunciation/" + param1;
          App.utils.asserter.assert(!(DENUNCIATION_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
          return _loc2_;
       }
 
       public static function vehicleinfo_params(param1:String) : String {
-         var _loc2_:String = "#menu:vehicleInfo/params/" + param1;
+         var _loc2_:String = null;
+         _loc2_ = "#menu:vehicleInfo/params/" + param1;
          App.utils.asserter.assert(!(VEHICLEINFO_PARAMS_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
          return _loc2_;
       }
 
       public static function loading_battletypes_desc(param1:String) : String {
-         var _loc2_:String = "#menu:loading/battleTypes/desc/" + param1;
+         var _loc2_:String = null;
+         _loc2_ = "#menu:loading/battleTypes/desc/" + param1;
          App.utils.asserter.assert(!(LOADING_BATTLETYPES_DESC_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
          return _loc2_;
       }
 
       public static function profile_stats_blocks(param1:String) : String {
-         var _loc2_:String = "#menu:profile/stats/blocks/" + param1;
+         var _loc2_:String = null;
+         _loc2_ = "#menu:profile/stats/blocks/" + param1;
          App.utils.asserter.assert(!(PROFILE_STATS_BLOCKS_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
          return _loc2_;
       }
 
       public static function profile_stats_items(param1:String) : String {
-         var _loc2_:String = "#menu:profile/stats/items/" + param1;
+         var _loc2_:String = null;
+         _loc2_ = "#menu:profile/stats/items/" + param1;
          App.utils.asserter.assert(!(PROFILE_STATS_ITEMS_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
          return _loc2_;
       }
 
       public static function login_status(param1:String) : String {
-         var _loc2_:String = "#menu:login/status/" + param1;
+         var _loc2_:String = null;
+         _loc2_ = "#menu:login/status/" + param1;
          App.utils.asserter.assert(!(LOGIN_STATUS_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
          return _loc2_;
       }
 
       public static function training_info(param1:String) : String {
-         var _loc2_:String = "#menu:training/info/" + param1;
+         var _loc2_:String = null;
+         _loc2_ = "#menu:training/info/" + param1;
          App.utils.asserter.assert(!(TRAINING_INFO_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
          return _loc2_;
       }
 
       public static function premium_periods(param1:String) : String {
-         var _loc2_:String = "#menu:premium/periods/" + param1;
+         var _loc2_:String = null;
+         _loc2_ = "#menu:premium/periods/" + param1;
          App.utils.asserter.assert(!(PREMIUM_PERIODS_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
          return _loc2_;
       }
 
       public static function contextmenu(param1:String) : String {
-         var _loc2_:String = "#menu:contextMenu/" + param1;
+         var _loc2_:String = null;
+         _loc2_ = "#menu:contextMenu/" + param1;
          App.utils.asserter.assert(!(CONTEXTMENU_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
          return _loc2_;
       }
 
       public static function nations(param1:String) : String {
-         var _loc2_:String = "#menu:nations/" + param1;
+         var _loc2_:String = null;
+         _loc2_ = "#menu:nations/" + param1;
          App.utils.asserter.assert(!(NATIONS_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
          return _loc2_;
       }
 
       public static function tankmanrecruitrenderer(param1:String) : String {
-         var _loc2_:String = "#menu:tankmanRecruitRenderer/" + param1;
+         var _loc2_:String = null;
+         _loc2_ = "#menu:tankmanRecruitRenderer/" + param1;
          App.utils.asserter.assert(!(TANKMANRECRUITRENDERER_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
          return _loc2_;
       }
 
       public static function moduleinfo_compatible(param1:String) : String {
-         var _loc2_:String = "#menu:moduleInfo/compatible/" + param1;
+         var _loc2_:String = null;
+         _loc2_ = "#menu:moduleInfo/compatible/" + param1;
          App.utils.asserter.assert(!(MODULEINFO_COMPATIBLE_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
          return _loc2_;
       }

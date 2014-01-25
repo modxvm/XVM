@@ -2,7 +2,6 @@ package net.wg.gui.lobby.training
 {
    import scaleform.clik.controls.ListItemRenderer;
    import net.wg.gui.components.controls.UILoaderAlt;
-   import net.wg.gui.components.controls.TextFieldShort;
    import flash.text.TextField;
    import net.wg.data.VO.TrainingFormRendererVO;
    import scaleform.clik.utils.Constraints;
@@ -20,7 +19,7 @@ package net.wg.gui.lobby.training
 
       public var iconLoader:UILoaderAlt;
 
-      public var textOwner:TextFieldShort;
+      public var textOwner:TextField;
 
       public var textArena:TextField;
 
@@ -39,7 +38,6 @@ package net.wg.gui.lobby.training
          constraints.addElement("textArena",this.textArena,Constraints.ALL);
          constraints.addElement("textCount",this.textCount,Constraints.RIGHT);
          constraints.addElement("textOwner",this.textOwner,Constraints.RIGHT);
-         this.textOwner.validateNow();
          this.iconLoader.hideLoader = true;
          this.addEventListener(ButtonEvent.CLICK,this.onSelectItem);
       }
@@ -54,11 +52,10 @@ package net.wg.gui.lobby.training
          invalidate(InvalidationType.DATA);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.removeEventListener(ButtonEvent.CLICK,this.onSelectItem);
          this.iconLoader.dispose();
          this.iconLoader = null;
-         this.textOwner.dispose();
          this.textOwner = null;
          this.textArena = null;
          this.textComment = null;
@@ -69,7 +66,7 @@ package net.wg.gui.lobby.training
             this.dataVO = null;
          }
          data = null;
-         super.dispose();
+         super.onDispose();
       }
 
       public function onSelectItem(param1:ButtonEvent) : void {
@@ -86,7 +83,7 @@ package net.wg.gui.lobby.training
             this.textComment.text = this.dataVO.comment;
             this.textArena.text = this.dataVO.arena;
             this.textCount.text = this.dataVO.count + "/" + 2 * this.dataVO.total;
-            this.textOwner.label = this.dataVO.owner;
+            App.utils.commons.formatPlayerName(this.textOwner,App.utils.commons.getUserProps(this.dataVO.creatorName,this.dataVO.creatorClan,this.dataVO.creatorRegion,this.dataVO.creatorIgrType));
             this.iconLoader.visible = true;
             if(this.iconLoader.source != this.dataVO.icon)
             {

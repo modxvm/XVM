@@ -143,10 +143,6 @@ package net.wg.gui.lobby.settings.vo
       }
 
       public function set prevVal(param1:*) : void {
-         if(this._prevVal == param1)
-         {
-            return;
-         }
          this._prevVal = param1;
       }
 
@@ -155,7 +151,7 @@ package net.wg.gui.lobby.settings.vo
       }
 
       public function set changedVal(param1:*) : void {
-         if(this._changedVal == param1)
+         if(this._changedVal === param1)
          {
             return;
          }

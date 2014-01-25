@@ -5,14 +5,14 @@ package net.wg.gui.lobby.dialogs
    import scaleform.clik.controls.Button;
    import flash.text.TextField;
    import net.wg.gui.components.controls.SoundButtonEx;
-   import scaleform.clik.core.UIComponent;
-   import flash.text.TextFieldAutoSize;
-   import __AS3__.vec.Vector;
-   import net.wg.utils.IFocusHandler;
-   import net.wg.data.constants.SoundTypes;
    import net.wg.infrastructure.interfaces.IWindow;
    import scaleform.clik.utils.Padding;
+   import flash.display.InteractiveObject;
+   import flash.text.TextFieldAutoSize;
+   import __AS3__.vec.Vector;
+   import net.wg.data.constants.SoundTypes;
    import scaleform.clik.events.ButtonEvent;
+   import scaleform.clik.core.UIComponent;
    import net.wg.gui.components.windows.Window;
    import flash.events.EventPhase;
 
@@ -65,7 +65,7 @@ package net.wg.gui.lobby.dialogs
 
       private var _btnFocusCandidateId:String;
 
-      private var lastFocusedObject:UIComponent;
+      private var _lastFocusedBtn:SoundButtonEx = null;
 
       protected const BTN_MARGIN:Number = 9;
 
@@ -73,9 +73,20 @@ package net.wg.gui.lobby.dialogs
 
       private const MIN_HEIGHT:Number = 115;
 
-      override public function setFocus() : void {
-         super.setFocus();
-         this.setFocusToLastFocusedObject();
+      override public function setWindow(param1:IWindow) : void {
+         var _loc2_:Padding = null;
+         super.setWindow(param1);
+         if(window)
+         {
+            _loc2_ = window.contentPadding as Padding;
+            _loc2_.right = WINDOW_PADDING.right;
+            _loc2_.bottom = WINDOW_PADDING.bottom;
+         }
+      }
+
+      override protected function onSetModalFocus(param1:InteractiveObject) : void {
+         super.onSetModalFocus(param1);
+         setFocus(this._lastFocusedBtn);
       }
 
       public function as_setText(param1:String) : void {
@@ -89,51 +100,50 @@ package net.wg.gui.lobby.dialogs
       }
 
       public function as_setButtons(param1:Array) : void {
-         var _loc6_:SoundButtonEx = null;
-         var _loc7_:String = null;
+         var _loc5_:SoundButtonEx = null;
+         var _loc6_:String = null;
          var _loc2_:Vector.<Button> = this.getButtonsOrder();
          var _loc3_:Number = _loc2_.length - param1.length;
          assert(_loc3_ >= 0,"buttonNames too much");
-         var _loc4_:IFocusHandler = App.utils.focusHandler;
-         var _loc5_:Number = param1.length-1;
-         while(_loc5_ >= 0)
+         var _loc4_:Number = param1.length-1;
+         while(_loc4_ >= 0)
          {
-            _loc6_ = _loc2_[_loc5_ + _loc3_] as SoundButtonEx;
-            _loc7_ = param1[_loc5_].id;
-            if(_loc7_ == CLOSE_BUTTON)
+            _loc5_ = _loc2_[_loc4_ + _loc3_] as SoundButtonEx;
+            _loc6_ = param1[_loc4_].id;
+            if(_loc6_ == CLOSE_BUTTON)
             {
-               this.dynamicWhiteButton.x = _loc6_.x;
-               this.dynamicWhiteButton.y = _loc6_.y;
-               this.dynamicWhiteButton.data = param1[_loc5_];
-               this.dynamicWhiteButton.label = param1[_loc5_].label;
-               if(param1[_loc5_].focused)
+               this.dynamicWhiteButton.x = _loc5_.x;
+               this.dynamicWhiteButton.y = _loc5_.y;
+               this.dynamicWhiteButton.data = param1[_loc4_];
+               this.dynamicWhiteButton.label = param1[_loc4_].label;
+               if(param1[_loc4_].focused)
                {
-                  this.setFocusToButton(this.dynamicWhiteButton);
+                  this._lastFocusedBtn = this.dynamicWhiteButton;
                }
                this.dynamicWhiteButton.visible = true;
                this.dynamicWhiteButton.soundType = SoundTypes.CANCEL_BTN;
                this.addListenerButtonProcessor(this.dynamicWhiteButton);
-               _loc6_.visible = false;
+               _loc5_.visible = false;
             }
             else
             {
-               _loc6_.data = param1[_loc5_];
-               _loc6_.label = param1[_loc5_].label;
-               if(param1[_loc5_].focused)
+               _loc5_.data = param1[_loc4_];
+               _loc5_.label = param1[_loc4_].label;
+               if(param1[_loc4_].focused)
                {
-                  this.setFocusToButton(_loc6_);
+                  this._lastFocusedBtn = _loc5_;
                }
-               _loc6_.visible = true;
-               if(_loc7_ == SUBMIT_BUTTON)
+               _loc5_.visible = true;
+               if(_loc6_ == SUBMIT_BUTTON)
                {
-                  _loc6_.soundType = SoundTypes.OK_BTN;
+                  _loc5_.soundType = SoundTypes.OK_BTN;
                }
                else
                {
-                  _loc6_.soundType = SoundTypes.NORMAL_BTN;
+                  _loc5_.soundType = SoundTypes.NORMAL_BTN;
                }
             }
-            _loc5_--;
+            _loc4_--;
          }
       }
 
@@ -155,17 +165,6 @@ package net.wg.gui.lobby.dialogs
       override public function get height() : Number {
          var _loc1_:Number = this.thirdBtn.height;
          return this.getBackgroundActualHeight() + TEXT_HEIGHT_PADDING + _loc1_;
-      }
-
-      override public function set window(param1:IWindow) : void {
-         var _loc2_:Padding = null;
-         super.window = param1;
-         if(window)
-         {
-            _loc2_ = window.contentPadding as Padding;
-            _loc2_.right = WINDOW_PADDING.right;
-            _loc2_.bottom = WINDOW_PADDING.bottom;
-         }
       }
 
       public function get minWidth() : Number {
@@ -203,9 +202,9 @@ package net.wg.gui.lobby.dialogs
       }
 
       override protected function onDispose() : void {
-         App.utils.scheduler.cancelTask(this.setFocusToLastFocusedObject);
          this.processButtons(this.removeListenerButtonProcessor);
          this.dynamicWhiteButton.removeEventListener(ButtonEvent.CLICK,this.onButtonClickHdlr);
+         this._lastFocusedBtn = null;
          if(this.textField)
          {
             this.textField.text = "";
@@ -215,43 +214,37 @@ package net.wg.gui.lobby.dialogs
             }
             this.textField = null;
          }
-         if(this.lastFocusedObject)
-         {
-            this.lastFocusedObject.dispose();
-            this.lastFocusedObject = null;
-         }
          super.onDispose();
       }
 
       override protected function draw() : void {
-         var _loc1_:String = null;
-         var _loc2_:* = false;
-         var _loc3_:Vector.<Button> = null;
+         var _loc2_:String = null;
+         var _loc3_:* = false;
          var _loc4_:Button = null;
          var _loc5_:uint = 0;
          var _loc6_:* = 0;
-         var _loc7_:Vector.<Button> = null;
-         var _loc8_:Button = null;
+         var _loc7_:SoundButtonEx = null;
          super.draw();
          if(isInvalid(LAYOUT_INVALID))
          {
             this.applyLayout();
          }
+         var _loc1_:Vector.<SoundButtonEx> = null;
          if((isInvalid(BUTTON_ENABLE_INVALID)) && (this._btnEnableCandidate))
          {
-            _loc1_ = this._btnEnableCandidate.id;
-            _loc2_ = this._btnEnableCandidate.status;
-            _loc3_ = this.getAllButtons();
-            _loc5_ = _loc3_.length;
+            _loc2_ = this._btnEnableCandidate.id;
+            _loc3_ = this._btnEnableCandidate.status;
+            _loc1_ = this.getAllButtons();
+            _loc5_ = _loc1_.length;
             _loc6_ = 0;
             while(_loc6_ < _loc5_)
             {
-               _loc4_ = _loc3_[_loc6_];
+               _loc4_ = _loc1_[_loc6_];
                if((_loc4_.data) && (_loc4_.data.hasOwnProperty("id")))
                {
-                  if(_loc1_ == _loc4_.data.id)
+                  if(_loc2_ == _loc4_.data.id)
                   {
-                     _loc4_.enabled = _loc2_;
+                     _loc4_.enabled = _loc3_;
                      break;
                   }
                }
@@ -260,14 +253,14 @@ package net.wg.gui.lobby.dialogs
          }
          if((isInvalid(BUTTON_FOCUS_INVALID)) && (this._btnFocusCandidateId))
          {
-            _loc7_ = this.getAllButtons();
-            for each (_loc8_ in _loc7_)
+            _loc1_ = this.getAllButtons();
+            for each (_loc7_ in _loc1_)
             {
-               if((_loc8_.data) && (_loc8_.data.hasOwnProperty("id")) && this._btnFocusCandidateId == _loc8_.data.id)
+               if((_loc7_.data) && (_loc7_.data.hasOwnProperty("id")) && this._btnFocusCandidateId == _loc7_.data.id)
                {
-                  if(_loc8_.enabled)
+                  if(_loc7_.enabled)
                   {
-                     this.setFocusToButton(_loc8_);
+                     this._lastFocusedBtn = _loc7_;
                   }
                   break;
                }
@@ -298,7 +291,7 @@ package net.wg.gui.lobby.dialogs
       }
 
       protected function layoutButtons(param1:Number) : void {
-         var _loc2_:Vector.<Button> = this.getAllButtons();
+         var _loc2_:Vector.<SoundButtonEx> = this.getAllButtons();
          var _loc3_:uint = _loc2_.length;
          var _loc4_:* = 0;
          while(_loc4_ < _loc3_)
@@ -312,8 +305,8 @@ package net.wg.gui.lobby.dialogs
          return Vector.<Button>([this.firstBtn,this.secondBtn,this.thirdBtn]);
       }
 
-      protected function getAllButtons() : Vector.<Button> {
-         return Vector.<Button>([this.firstBtn,this.secondBtn,this.thirdBtn,this.dynamicWhiteButton]);
+      protected function getAllButtons() : Vector.<SoundButtonEx> {
+         return Vector.<SoundButtonEx>([this.firstBtn,this.secondBtn,this.thirdBtn,this.dynamicWhiteButton]);
       }
 
       protected function updateActualSize() : void {
@@ -321,28 +314,6 @@ package net.wg.gui.lobby.dialogs
          var _loc1_:Number = this.getBackgroundActualHeight();
          window.setMinHeight(_loc1_);
          window.setSize(actualWidth,_loc1_);
-      }
-
-      private function setFocusToLastFocusedObject() : void {
-         if(initialized)
-         {
-            if((this.lastFocusedObject) && !this.lastFocusedObject.focused)
-            {
-               App.utils.focusHandler.setFocus(this.lastFocusedObject);
-            }
-         }
-         else
-         {
-            App.utils.scheduler.envokeInNextFrame(this.setFocusToLastFocusedObject);
-         }
-      }
-
-      private function setFocusToButton(param1:Button) : void {
-         if(hasFocus)
-         {
-            App.utils.focusHandler.setFocus(param1);
-         }
-         this.lastFocusedObject = param1;
       }
 
       private function reflowDialogToCtrl() : void {

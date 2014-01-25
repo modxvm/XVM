@@ -25,11 +25,11 @@ package net.wg.gui.lobby.training
          this.focusIndicator.gotoAndStop("dragOver");
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          removeEventListener(MouseEvent.ROLL_OVER,this.onMouseOver,false);
          removeEventListener(MouseEvent.ROLL_OUT,this.onMouseOut,false);
          this.focusIndicator = null;
-         super.dispose();
+         super.onDispose();
       }
 
       private function onMouseOut(param1:MouseEvent) : void {

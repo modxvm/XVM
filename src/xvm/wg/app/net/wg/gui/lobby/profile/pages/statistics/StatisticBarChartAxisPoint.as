@@ -135,9 +135,9 @@ package net.wg.gui.lobby.profile.pages.statistics
           
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.disposeHandlers();
-         super.dispose();
+         super.onDispose();
       }
 
       public function get initialized() : Boolean {

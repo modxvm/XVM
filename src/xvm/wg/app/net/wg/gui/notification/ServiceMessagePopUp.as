@@ -64,14 +64,14 @@ package net.wg.gui.notification
          return this._animationSpeed;
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          App.utils.scheduler.cancelTask(this.startMessageHiding);
          if(this.tweenManager)
          {
             this.tweenManager.dispose();
             this.tweenManager = null;
          }
-         super.dispose();
+         super.onDispose();
       }
    }
 

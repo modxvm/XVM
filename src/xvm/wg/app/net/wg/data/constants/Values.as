@@ -12,6 +12,8 @@ package net.wg.data.constants
       public static const DIGIT:String = "0123456789";
 
       public static const EMPTY_STR:String = "";
+
+      public static const SPACE_STR:String = " ";
    }
 
 }

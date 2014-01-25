@@ -469,7 +469,12 @@ package net.wg.gui.lobby.hangar.maintenance
          }
          for each (_loc2_ in this.maintenanceData.shells)
          {
-            _loc2_.userCredits = [this.maintenanceData.credits,this.maintenanceData.gold];
+            _loc2_.userCredits =
+               {
+                  "credits":this.maintenanceData.credits,
+                  "gold":this.maintenanceData.gold
+               }
+            ;
          }
          if(this.shells.dataProvider != this.maintenanceData.shells)
          {
@@ -531,7 +536,7 @@ package net.wg.gui.lobby.hangar.maintenance
                _loc10_ = param3.slice(0);
             }
             _loc8_.setData(_loc10_,_loc5_,param2,param1.slice(),this.maintenanceData.credits,this.maintenanceData.gold);
-            if(param1[_loc5_] != 0)
+            if(!(param1[_loc5_] == undefined) && !(param1[_loc5_] == 0))
             {
                _loc13_ = _loc13_ + 1;
             }

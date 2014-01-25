@@ -121,7 +121,7 @@ package net.wg.gui.lobby
          {
             if(this.previousFocus)
             {
-               App.utils.focusHandler.setFocus(this.previousFocus);
+               setFocus(this.previousFocus);
                this.previousFocus = null;
             }
             this._isShowHelpLayout = false;
@@ -139,6 +139,14 @@ package net.wg.gui.lobby
          this.messagePopupTemplate.dispose();
          this.messagePopupTemplate.parent.removeChild(this.messagePopupTemplate);
          this.messagePopupTemplate = null;
+      }
+
+      override protected function onSetModalFocus(param1:InteractiveObject) : void {
+         super.onSetModalFocus(param1);
+         if(param1 == null)
+         {
+            setFocus(this.header.buttonsBlock.bar);
+         }
       }
 
       override protected function draw() : void {
@@ -169,7 +177,6 @@ package net.wg.gui.lobby
          App.stage.removeEventListener(LobbyEvent.UNREGISTER_DRAGGING,this.handleUnregisterDragging,true);
          removeChild(this.notificationPopupViewer);
          this.vehicleHitArea = null;
-         this.subViewContainer.dispose();
          this.subViewContainer = null;
          this.header = null;
          this.notificationPopupViewer = null;

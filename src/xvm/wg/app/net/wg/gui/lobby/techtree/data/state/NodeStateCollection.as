@@ -8,7 +8,7 @@ package net.wg.gui.lobby.techtree.data.state
 
    public class NodeStateCollection extends Object
    {
-
+          
       public function NodeStateCollection() {
          super();
       }

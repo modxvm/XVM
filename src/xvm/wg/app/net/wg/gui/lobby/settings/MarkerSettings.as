@@ -170,7 +170,7 @@ package net.wg.gui.lobby.settings
          this.updateShowContent();
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.tabs.removeEventListener(IndexEvent.INDEX_CHANGE,this.onTabChange);
          if(this.enemyForm.hasEventListener(SettingsSubVewEvent.ON_CONTROL_CHANGE))
          {
@@ -188,7 +188,7 @@ package net.wg.gui.lobby.settings
          this.allyForm.dispose();
          this.deadForm.dispose();
          this._dynamicMarkersData = null;
-         super.dispose();
+         super.onDispose();
       }
 
       override public function toString() : String {

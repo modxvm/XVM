@@ -27,8 +27,8 @@ package net.wg.gui.lobby.tankman
 
       private var paddingY:int = 17;
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this.removeElements();
       }
 

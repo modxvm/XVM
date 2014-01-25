@@ -1,6 +1,7 @@
 package net.wg.gui.components.controls
 {
    import scaleform.clik.controls.ScrollBar;
+   import scaleform.clik.constants.ScrollBarTrackMode;
    import flash.events.Event;
    import scaleform.gfx.MouseEventEx;
    import flash.events.MouseEvent;
@@ -11,6 +12,7 @@ package net.wg.gui.components.controls
    {
           
       public function ScrollBar() {
+         _trackMode = ScrollBarTrackMode.SCROLL_TO_CURSOR;
          super();
       }
 
@@ -20,6 +22,26 @@ package net.wg.gui.components.controls
 
       public var thumbWg:SoundButton;
 
+      override protected function configUI() : void {
+         super.configUI();
+      }
+
+      override public function get trackMode() : String {
+         return _trackMode;
+      }
+
+      override public function set trackMode(param1:String) : void {
+         if(param1 == _trackMode)
+         {
+            return;
+         }
+         _trackMode = param1;
+         if(initialized)
+         {
+            track.autoRepeat = this.trackMode == ScrollBarTrackMode.SCROLL_PAGE;
+         }
+      }
+
       override protected function initialize() : void {
          upArrow = this.upArrowWg;
          downArrow = this.downArrowWg;
@@ -27,8 +49,8 @@ package net.wg.gui.components.controls
          super.initialize();
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
       }
 
       override protected function handleThumbPress(param1:Event) : void {

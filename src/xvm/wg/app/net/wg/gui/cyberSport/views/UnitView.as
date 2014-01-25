@@ -247,9 +247,13 @@ package net.wg.gui.cyberSport.views
          App.utils.scheduler.cancelTask(this.readyButtonCoolDown);
          App.utils.scheduler.cancelTask(this.mainCoolDownHandler);
          this.waitingListSection.dispose();
+         this.waitingListSection = null;
          this.teamSection.dispose();
+         this.teamSection = null;
          this.chatSection.dispose();
+         this.chatSection = null;
          this.rosterTeamSection.dispose();
+         this.rosterTeamSection = null;
          if(this._dragDropListDelegateCtrlr)
          {
             this._dragDropListDelegateCtrlr.dispose();
@@ -420,6 +424,10 @@ package net.wg.gui.cyberSport.views
          this.waitingListSection.enableCloseButton(param1);
          this.teamSection.enableFreezeButton(param1);
          this.chatSection.enableEditCommitButton(param1);
+      }
+
+      public function getComponentForFocus() : InteractiveObject {
+         return null;
       }
    }
 

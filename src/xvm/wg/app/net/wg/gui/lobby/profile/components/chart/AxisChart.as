@@ -72,13 +72,13 @@ package net.wg.gui.lobby.profile.components.chart
          }
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          if(this._horizontalAxis)
          {
             this._horizontalAxis.dispose();
             this._horizontalAxis = null;
          }
-         super.dispose();
+         super.onDispose();
       }
    }
 

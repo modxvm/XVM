@@ -6,6 +6,12 @@ package net.wg.infrastructure.interfaces
    public interface ISaleItemBlockRenderer extends IListItemRenderer
    {
           
+      function hideLine() : void;
+
+      function setColor(param1:Number) : void;
+
+      function setSize(param1:Number, param2:Number) : void;
+
       function get inInventory() : Boolean;
 
       function get isRemovable() : Boolean;
@@ -17,12 +23,6 @@ package net.wg.infrastructure.interfaces
       function get dataInfo() : Object;
 
       function get itemInInventory() : Boolean;
-
-      function hideLine() : void;
-
-      function setColor(param1:Number) : void;
-
-      function setSize(param1:Number, param2:Number) : void;
    }
 
 }

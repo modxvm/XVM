@@ -486,7 +486,7 @@ package net.wg.gui.lobby.hangar.crew
          {
             _loc1_ = RecruitRendererVO(this.data);
             this.tankmenName.textfield.text = _loc1_.rank + " " + _loc1_.firstname + " " + _loc1_.lastname;
-            if(_state == "up" || _state == "disabled" || _state == "out" && !selected)
+            if(_state == "up" || _state == "disabled" || ["out","toggle","kb_release"].indexOf(_state) > -1 && !selected)
             {
                this.tankmenName.textfield.text = _loc1_.rank + " " + _loc1_.lastname;
             }
@@ -600,7 +600,7 @@ package net.wg.gui.lobby.hangar.crew
          {
             if(_loc3_.tankmanID > 0 && (this.enabled))
             {
-               App.contextMenuMgr.show(Vector.<IContextItem>([new UserContextItem("personalCase"),new SeparateItem(),new UserContextItem("tankmanUnload"),new UserContextItem("tankmanUnloadAll")]),this,this.onContextMenuAction);
+               App.contextMenuMgr.show(Vector.<IContextItem>([new UserContextItem("personalCase"),new SeparateItem(),new UserContextItem("tankmanUnload")]),this,this.onContextMenuAction);
                App.toolTipMgr.hide();
             }
          }
@@ -651,13 +651,10 @@ package net.wg.gui.lobby.hangar.crew
             case "tankmanUnload":
                dispatchEvent(new CrewEvent(CrewEvent.UNLOAD_TANKMAN,this.data));
                break;
-            case "tankmanUnloadAll":
-               dispatchEvent(new CrewEvent(CrewEvent.UNLOAD_ALL_TANKMAN,this.data));
-               break;
          }
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          removeEventListener(Event.ADDED,addToAutoGroup,false);
          removeEventListener(Event.REMOVED,addToAutoGroup,false);
          removeEventListener(MouseEvent.ROLL_OVER,this.handleMouseRollOver,false);
@@ -738,7 +735,7 @@ package net.wg.gui.lobby.hangar.crew
          this.role = null;
          this.vehicleType = null;
          this.lastSkillLevel = null;
-         super.dispose();
+         super.onDispose();
       }
    }
 

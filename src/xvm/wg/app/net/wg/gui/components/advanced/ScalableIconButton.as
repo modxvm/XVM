@@ -23,11 +23,11 @@ package net.wg.gui.components.advanced
 
       private var inv:Boolean;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.loader.removeEventListener(UILoaderEvent.COMPLETE,this.iconLoadingCompleteHandler);
          this.loader.dispose();
          this.loader = null;
-         super.dispose();
+         super.onDispose();
       }
 
       override protected function configUI() : void {

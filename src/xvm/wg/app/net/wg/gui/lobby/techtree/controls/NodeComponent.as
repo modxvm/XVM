@@ -40,9 +40,9 @@ package net.wg.gui.lobby.techtree.controls
          }
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this._owner = null;
-         super.dispose();
+         super.onDispose();
       }
    }
 

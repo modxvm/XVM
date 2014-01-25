@@ -17,6 +17,10 @@ package net.wg.infrastructure.base.meta.impl
 
       public var request4Sell:Function = null;
 
+      public var request4SelectInHangar:Function = null;
+
+      public var request4ShowVehicleStatistics:Function = null;
+
       public var requestVehicleInfo:Function = null;
 
       public var showSystemMessage:Function = null;
@@ -36,7 +40,17 @@ package net.wg.infrastructure.base.meta.impl
          this.request4Sell(param1);
       }
 
-      public function requestVehicleInfoS(param1:String) : void {
+      public function request4SelectInHangarS(param1:Number) : void {
+         App.utils.asserter.assertNotNull(this.request4SelectInHangar,"request4SelectInHangar" + Errors.CANT_NULL);
+         this.request4SelectInHangar(param1);
+      }
+
+      public function request4ShowVehicleStatisticsS(param1:Number) : void {
+         App.utils.asserter.assertNotNull(this.request4ShowVehicleStatistics,"request4ShowVehicleStatistics" + Errors.CANT_NULL);
+         this.request4ShowVehicleStatistics(param1);
+      }
+
+      public function requestVehicleInfoS(param1:Number) : void {
          App.utils.asserter.assertNotNull(this.requestVehicleInfo,"requestVehicleInfo" + Errors.CANT_NULL);
          this.requestVehicleInfo(param1);
       }

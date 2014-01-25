@@ -5,6 +5,8 @@ package net.wg.gui.prebattle.squad
    import flash.display.MovieClip;
    import net.wg.gui.components.controls.VoiceWave;
    import net.wg.gui.prebattle.data.PlayerPrbInfoVO;
+   import net.wg.data.constants.Values;
+   import flash.text.TextFormat;
    import net.wg.infrastructure.events.VoiceChatEvent;
    import scaleform.clik.utils.Constraints;
    import net.wg.gui.prebattle.constants.PrebattleStateString;
@@ -31,26 +33,6 @@ package net.wg.gui.prebattle.squad
 
       protected var statusString:String = null;
 
-      override public function set label(param1:String) : void {
-         var param1:String = this.cutText(param1);
-         super.label = param1;
-      }
-
-      private function cutText(param1:String) : String {
-         var _loc2_:String = null;
-         var _loc3_:* = 0;
-         textField.text = param1;
-         if(textField.getLineLength(1) != -1)
-         {
-            _loc2_ = param1;
-            _loc3_ = textField.getLineLength(0);
-            _loc2_ = _loc2_.substr(0,_loc3_ - 2);
-            _loc2_ = _loc2_ + "..";
-            textField.text = _loc2_;
-         }
-         return textField.text;
-      }
-
       public function get model() : PlayerPrbInfoVO {
          return data as PlayerPrbInfoVO;
       }
@@ -58,9 +40,9 @@ package net.wg.gui.prebattle.squad
       override public function setData(param1:Object) : void {
          if(param1 == null)
          {
+            this.setSpeakers(false,true);
             visible = false;
             this.data = null;
-            return;
          }
          if(!visible)
          {
@@ -70,8 +52,40 @@ package net.wg.gui.prebattle.squad
          invalidate(UPDATE_STATUS);
       }
 
+      protected var playerNameStr:String = "";
+
+      protected function updatePlayerName() : void {
+         if((this.model) && !(this.model.uid == -1))
+         {
+            App.utils.commons.formatPlayerName(textField,App.utils.commons.getUserProps(this.model.userName,this.model.clanAbbrev,this.model.region,this.model.igrType));
+         }
+         else
+         {
+            if(this.model)
+            {
+               textField.text = this.model.fullName;
+            }
+            else
+            {
+               textField.text = Values.EMPTY_STR;
+            }
+         }
+         this.playerNameStr = textField.htmlText;
+      }
+
+      override protected function updateText() : void {
+         var _loc1_:TextFormat = textField.getTextFormat();
+         var _loc2_:Object = _loc1_.size;
+         var _loc3_:String = _loc1_.font;
+         var _loc4_:String = _loc1_.align;
+         textField.htmlText = this.playerNameStr;
+         _loc1_.size = _loc2_;
+         _loc1_.font = _loc3_;
+         _loc1_.align = _loc4_;
+         textField.setTextFormat(_loc1_);
+      }
+
       override protected function configUI() : void {
-         textField.wordWrap = true;
          super.configUI();
          this.voiceWave.visible = App.voiceChatMgr.isVOIPEnabledS();
          App.voiceChatMgr.addEventListener(VoiceChatEvent.START_SPEAKING,this.speakHandler);
@@ -80,8 +94,8 @@ package net.wg.gui.prebattle.squad
          constraints.addElement("vehicleNameField",this.vehicleNameField,Constraints.ALL);
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          App.voiceChatMgr.removeEventListener(VoiceChatEvent.START_SPEAKING,this.speakHandler);
          App.voiceChatMgr.removeEventListener(VoiceChatEvent.STOP_SPEAKING,this.speakHandler);
          this.voiceWave.dispose();
@@ -89,14 +103,14 @@ package net.wg.gui.prebattle.squad
 
       override protected function draw() : void {
          super.draw();
-         if((isInvalid(UPDATE_STATUS)) && (this.model))
+         if(isInvalid(UPDATE_STATUS))
          {
             this.afterSetData();
-            this.setSpeakers(this.model.isPlayerSpeaking,true);
          }
       }
 
       protected function afterSetData() : void {
+         this.updatePlayerName();
          if(this.status)
          {
             this.status.visible = false;
@@ -104,6 +118,7 @@ package net.wg.gui.prebattle.squad
             {
                return;
             }
+            this.setSpeakers(this.model.isPlayerSpeaking,true);
             textField.alpha = this.vehicleNameField.alpha = 1;
             var _loc1_:* = this.model.getStateString();
             if(_loc1_ != PrebattleStateString.UNKNOWN)
@@ -123,7 +138,6 @@ package net.wg.gui.prebattle.squad
             var _loc2_:* = 4.290295975E9;
             var _loc3_:* = _loc2_;
             this.updateVoiceWave();
-            this.label = this.model.fullName;
             _loc3_ = this.model.getCurrentColor();
             if(!isNaN(_loc3_))
             {
@@ -131,13 +145,13 @@ package net.wg.gui.prebattle.squad
                this.vehicleNameField.textColor = _loc3_;
                this.vehicleLevelField.textColor = _loc3_;
             }
-            if(!(this.model.vLevel == null) && !(this.model.vLevel == ""))
+            if(!(this.model.vLevel == null) && !(this.model.vLevel == Values.EMPTY_STR))
             {
                this.vehicleLevelField.text = this.model.vLevel;
             }
             else
             {
-               this.vehicleLevelField.text = "";
+               this.vehicleLevelField.text = Values.EMPTY_STR;
             }
             this.updateAfterStateChange();
             return;
@@ -146,21 +160,21 @@ package net.wg.gui.prebattle.squad
 
       override protected function updateAfterStateChange() : void {
          super.updateAfterStateChange();
-         if(!initialized || this.model == null)
+         if(!initialized)
          {
             return;
          }
-         if(!(this.model.vLevel == null) && !(this.model.vLevel == ""))
+         if((this.model) && (!(this.model.vLevel == null)) && !(this.model.vLevel == Values.EMPTY_STR))
          {
             this.vehicleLevelField.text = this.model.vLevel;
          }
          else
          {
-            this.vehicleLevelField.text = "";
+            this.vehicleLevelField.text = Values.EMPTY_STR;
          }
-         this.vehicleNameField.text = this.model.vShortName;
+         this.vehicleNameField.text = (this.model) && (this.model.vShortName)?this.model.vShortName:Values.EMPTY_STR;
          this.updateVoiceWave();
-         var _loc1_:Number = this.model.getCurrentColor();
+         var _loc1_:Number = this.model?this.model.getCurrentColor():Number.NaN;
          if(!isNaN(_loc1_))
          {
             textField.textColor = _loc1_;
@@ -208,7 +222,7 @@ package net.wg.gui.prebattle.squad
 
       protected function updateVoiceWave() : void {
          this.voiceWave.visible = App.voiceChatMgr.isVOIPEnabledS();
-         this.voiceWave.setMuted(MessengerUtils.isMuted(this.model));
+         this.voiceWave.setMuted(this.model?MessengerUtils.isMuted(this.model):false);
       }
 
       protected function setSpeakers(param1:Boolean, param2:Boolean=false) : void {

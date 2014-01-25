@@ -1,15 +1,16 @@
 package net.wg.gui.lobby.store.shop.base
 {
    import net.wg.gui.lobby.store.StoreListItemRenderer;
+   import net.wg.data.VO.StoreTableData;
    import net.wg.gui.lobby.store.StoreTooltipMapVO;
    import net.wg.data.constants.Tooltips;
-   import net.wg.data.VO.StoreTableData;
    import net.wg.data.constants.Currencies;
    import net.wg.data.constants.FittingTypes;
    import net.wg.gui.lobby.store.STORE_STATUS_COLOR;
    import net.wg.utils.ILocale;
+   import net.wg.gui.components.controls.VO.ActionPriceVO;
    import net.wg.gui.components.controls.ActionPrice;
-   import net.wg.gui.components.controls.IconText;
+   import net.wg.data.constants.IconsTypes;
    import net.wg.gui.lobby.store.StoreEvent;
    import net.wg.data.constants.SoundManagerStates;
 
@@ -25,10 +26,6 @@ package net.wg.gui.lobby.store.shop.base
 
       private var _isUseGoldAndCredits:Boolean = false;
 
-      override protected function getTooltipMapping() : StoreTooltipMapVO {
-         return new StoreTooltipMapVO(Tooltips.SHOP_VEHICLE,Tooltips.SHOP_SHELL,Tooltips.SHOP_MODULE);
-      }
-
       override public function setData(param1:Object) : void {
          super.setData(param1);
          if((App.instance) && (param1))
@@ -36,6 +33,10 @@ package net.wg.gui.lobby.store.shop.base
             App.utils.asserter.assert(param1  is  StoreTableData,"data must extends a StoreTableData class.");
          }
          invalidateData();
+      }
+
+      override protected function getTooltipMapping() : StoreTooltipMapVO {
+         return new StoreTooltipMapVO(Tooltips.SHOP_VEHICLE,Tooltips.SHOP_SHELL,Tooltips.SHOP_MODULE);
       }
 
       override protected function updateText() : void {
@@ -111,6 +112,7 @@ package net.wg.gui.lobby.store.shop.base
 
       protected function updateCreditPriceForAction(param1:Number, param2:Number, param3:Number, param4:Number, param5:StoreTableData) : void {
          var _loc6_:ILocale = null;
+         var _loc7_:ActionPriceVO = null;
          if(App.instance)
          {
             _loc6_ = App.utils.locale;
@@ -128,7 +130,8 @@ package net.wg.gui.lobby.store.shop.base
             }
             if(actionPrice)
             {
-               actionPrice.setData(param5.actionPrc,param1,param2,IconText.CREDITS);
+               _loc7_ = new ActionPriceVO(param5.actionPrc,param1,param2,IconsTypes.CREDITS);
+               actionPrice.setData(_loc7_);
                credits.visible = !actionPrice.visible;
             }
          }
@@ -143,6 +146,7 @@ package net.wg.gui.lobby.store.shop.base
          var _loc8_:* = NaN;
          var _loc9_:* = NaN;
          var _loc10_:String = null;
+         var _loc11_:ActionPriceVO = null;
          if(App.instance)
          {
             _loc7_ = App.utils.locale;
@@ -160,18 +164,19 @@ package net.wg.gui.lobby.store.shop.base
             if(param2.currency == Currencies.GOLD)
             {
                credits.price.text = _loc7_.gold(param1);
-               _loc10_ = IconText.GOLD;
+               _loc10_ = IconsTypes.GOLD;
                _loc8_ = param1;
                _loc9_ = param6;
             }
             else
             {
                credits.price.text = _loc7_.integer(param3);
-               _loc10_ = IconText.CREDITS;
+               _loc10_ = IconsTypes.CREDITS;
                _loc8_ = param3;
                _loc9_ = param5;
             }
-            actionPrice.setData(param2.actionPrc,_loc8_,_loc9_,_loc10_);
+            _loc11_ = new ActionPriceVO(param2.actionPrc,_loc8_,_loc9_,_loc10_);
+            actionPrice.setData(_loc11_);
             credits.visible = !actionPrice.visible;
          }
       }

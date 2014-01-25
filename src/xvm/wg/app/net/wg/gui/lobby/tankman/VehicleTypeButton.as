@@ -19,9 +19,9 @@ package net.wg.gui.lobby.tankman
 
       public var inspectableGroupName:String;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.typeSwitcher = null;
-         super.dispose();
+         super.onDispose();
       }
 
       public function get type() : String {

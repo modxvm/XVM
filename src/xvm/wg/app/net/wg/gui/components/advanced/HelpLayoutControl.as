@@ -33,11 +33,11 @@ package net.wg.gui.components.advanced
 
       private var _connectorLength:Number = 12;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.textField = null;
          this.connector = null;
          this.border = null;
-         super.dispose();
+         super.onDispose();
       }
 
       public function get connectorLength() : Number {

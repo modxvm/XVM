@@ -8,6 +8,7 @@ package net.wg.gui.lobby.window
    import flash.events.MouseEvent;
    import flash.text.TextFieldAutoSize;
    import net.wg.utils.ILocale;
+   import net.wg.data.constants.IconsTypes;
    import net.wg.gui.utils.ComplexTooltipHelper;
 
 
@@ -27,9 +28,9 @@ package net.wg.gui.lobby.window
 
       private static const DISCOUNT_MC_PADDING:int = -5;
 
-      public var rate_part_1:IconText;
+      public var rateFrom:IconText;
 
-      public var rate_part_2:IconText;
+      public var rateTo:IconText;
 
       public var sign_mc:MovieClip;
 
@@ -61,23 +62,36 @@ package net.wg.gui.lobby.window
 
       private var isLayoutChanged:Boolean;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.actionHitMc.removeEventListener(MouseEvent.MOUSE_OVER,this.onOverHandler);
          this.actionHitMc.removeEventListener(MouseEvent.MOUSE_OUT,this.onOutHandler);
          this.actionHitMc.removeEventListener(MouseEvent.MOUSE_DOWN,this.onPressHandler);
+      }
+
+      public function setRates(param1:uint, param2:uint) : void {
+         this.actionRate = param2;
+         this.rate = param1;
+         this.isRatesDataChanged = true;
+         invalidate();
+      }
+
+      public function set rateLabelFunction(param1:Function) : void {
+         this._rateLabelFunction = param1;
+         this.isApplyRates = true;
+         invalidate();
       }
 
       override protected function configUI() : void {
          super.configUI();
          this.rateLabel.autoSize = TextFieldAutoSize.LEFT;
          this.rateLabel.text = App.utils.locale.makeString(MENU.EXCHANGE_RATE);
-         this.rate_part_2.textField.autoSize = this.rate_part_1.textField.autoSize = TextFieldAutoSize.LEFT;
-         this.rate_part_1.text = "1";
-         this.rate_part_1.validateNow();
+         this.rateTo.textField.autoSize = this.rateFrom.textField.autoSize = TextFieldAutoSize.LEFT;
+         this.rateFrom.text = "1";
+         this.rateFrom.validateNow();
          this.infoContainer.addChild(this.rateLabel);
-         this.infoContainer.addChild(this.rate_part_1);
+         this.infoContainer.addChild(this.rateFrom);
          this.infoContainer.addChild(this.sign_mc);
-         this.infoContainer.addChild(this.rate_part_2);
+         this.infoContainer.addChild(this.rateTo);
          this.isLayoutChanged = true;
          addChild(this.infoContainer);
          this.actionHitMc.addEventListener(MouseEvent.MOUSE_OVER,this.onOverHandler);
@@ -86,16 +100,48 @@ package net.wg.gui.lobby.window
          this.setChildIndex(this.actionHitMc,this.numChildren-1);
       }
 
-      private function onOverHandler(param1:MouseEvent) : void {
-         this.showTooltip();
-      }
-
-      private function onOutHandler(param1:MouseEvent) : void {
-         this.hideTooltip();
-      }
-
-      private function onPressHandler(param1:MouseEvent) : void {
-         this.hideTooltip();
+      override protected function draw() : void {
+         var _loc1_:* = false;
+         var _loc2_:* = NaN;
+         super.draw();
+         if(this.isRatesDataChanged)
+         {
+            this.isRatesDataChanged = false;
+            _loc1_ = !(this.rate == this.actionRate) && !(this.actionRate == 0);
+            this.rateFrom.filters = this.rateTo.filters = null;
+            this.rateFrom.filters = ExchangeUtils.getGlow(this.rateFrom.icon);
+            this.rateTo.filters = ExchangeUtils.getGlow(this.rateTo.icon);
+            this.actionPrc = _loc1_?100 * (this.actionRate - this.rate) / this.rate:0;
+            this.discountMc.text = "%";
+            this.actualRate = _loc1_?this.actionRate:this.rate;
+            this.discountMc.visible = _loc1_;
+            this.action_decor.visible = _loc1_;
+            this.usual_decor.visible = !_loc1_;
+            this.sign_mc.gotoAndStop(_loc1_?2:1);
+            this.isApplyRates = true;
+            this.isLayoutChanged = true;
+            this.actionHitMc.visible = _loc1_;
+         }
+         if(this.isApplyRates)
+         {
+            this.isApplyRates = false;
+            this.applyRateText();
+            this.isLayoutChanged = true;
+         }
+         if(this.isLayoutChanged)
+         {
+            this.isLayoutChanged = false;
+            this.rateFrom.x = Math.round(this.rateLabel.width + CENTER_PADDING);
+            this.sign_mc.x = Math.round(this.rateFrom.x + this.rateFrom.actualWidth + EQUALS_SIGN_PADDING);
+            this.rateTo.x = Math.round(this.sign_mc.x + this.sign_mc.width + EQUALS_SIGN_PADDING);
+            _loc2_ = this.rateTo.x + this.rateTo.actualWidth;
+            this.infoContainer.x = width - _loc2_ >> 1;
+            if(_loc1_)
+            {
+               this.infoContainer.x = this.infoContainer.x + ACTION_CENTER_OFFSET;
+               this.discountMc.x = this.infoContainer.x + _loc2_ + DISCOUNT_MC_PADDING;
+            }
+         }
       }
 
       private function hideTooltip() : void {
@@ -115,13 +161,13 @@ package net.wg.gui.lobby.window
          var _loc3_:Number = this.actionRate;
          if(this.actionPrc > 0 && !(_loc2_ == 0))
          {
-            _loc4_ = this.rate_part_1.icon;
-            _loc5_ = this.rate_part_2.icon;
+            _loc4_ = this.rateFrom.icon;
+            _loc5_ = this.rateTo.icon;
             _loc6_ = App.utils.locale;
             _loc7_ = App.utils.icons.getIcon16StrPath(_loc4_);
             _loc8_ = App.utils.icons.getIcon16StrPath(_loc5_);
-            _loc9_ = _loc5_ == IconText.GOLD?_loc6_.gold(Math.abs(_loc3_)):_loc6_.integer(Math.abs(_loc3_));
-            _loc10_ = _loc5_ == IconText.GOLD?_loc6_.gold(Math.abs(_loc2_)):_loc6_.integer(Math.abs(_loc2_));
+            _loc9_ = _loc5_ == IconsTypes.GOLD?_loc6_.gold(Math.abs(_loc3_)):_loc6_.integer(Math.abs(_loc3_));
+            _loc10_ = _loc5_ == IconsTypes.GOLD?_loc6_.gold(Math.abs(_loc2_)):_loc6_.integer(Math.abs(_loc2_));
             _loc9_ = " 1" + _loc7_ + "= " + _loc9_ + " " + _loc8_;
             _loc10_ = " 1" + _loc7_ + "= " + _loc10_ + " " + _loc8_;
             _loc1_ = new ComplexTooltipHelper().addHeader(_loc6_.makeString(TOOLTIPS.ACTIONPRICE_EXCHANGE_HEADER,{})).addBody(_loc6_.makeString(TOOLTIPS.ACTIONPRICE_EXCHANGE_BODY,
@@ -143,74 +189,29 @@ package net.wg.gui.lobby.window
          }
       }
 
-      override protected function draw() : void {
-         var _loc1_:* = false;
-         var _loc2_:* = NaN;
-         super.draw();
-         if(this.isRatesDataChanged)
-         {
-            this.isRatesDataChanged = false;
-            _loc1_ = !(this.rate == this.actionRate) && !(this.actionRate == 0);
-            this.rate_part_1.filters = this.rate_part_2.filters = null;
-            this.rate_part_1.filters = ExchangeUtils.getGlow(this.rate_part_1.icon);
-            this.rate_part_2.filters = ExchangeUtils.getGlow(this.rate_part_2.icon);
-            this.actionPrc = _loc1_?100 * (this.actionRate - this.rate) / this.rate:0;
-            this.discountMc.text = "%";
-            this.actualRate = _loc1_?this.actionRate:this.rate;
-            this.discountMc.visible = _loc1_;
-            this.action_decor.visible = _loc1_;
-            this.usual_decor.visible = !_loc1_;
-            this.sign_mc.gotoAndStop(_loc1_?2:1);
-            this.isApplyRates = true;
-            this.isLayoutChanged = true;
-            this.actionHitMc.visible = _loc1_;
-         }
-         if(this.isApplyRates)
-         {
-            this.isApplyRates = false;
-            this.applyRateText();
-            this.isLayoutChanged = true;
-         }
-         if(this.isLayoutChanged)
-         {
-            this.isLayoutChanged = false;
-            this.rate_part_1.x = Math.round(this.rateLabel.width + CENTER_PADDING);
-            this.sign_mc.x = Math.round(this.rate_part_1.x + this.rate_part_1.actualWidth + EQUALS_SIGN_PADDING);
-            this.rate_part_2.x = Math.round(this.sign_mc.x + this.sign_mc.width + EQUALS_SIGN_PADDING);
-            _loc2_ = this.rate_part_2.x + this.rate_part_2.actualWidth;
-            this.infoContainer.x = width - _loc2_ >> 1;
-            if(_loc1_)
-            {
-               this.infoContainer.x = this.infoContainer.x + ACTION_CENTER_OFFSET;
-               this.discountMc.x = this.infoContainer.x + _loc2_ + DISCOUNT_MC_PADDING;
-            }
-         }
-      }
-
       private function applyRateText() : void {
          var _loc1_:ILocale = App.utils.locale;
          if(this._rateLabelFunction != null)
          {
-            this.rate_part_2.text = this._rateLabelFunction(this.actualRate);
+            this.rateTo.text = this._rateLabelFunction(this.actualRate);
          }
          else
          {
-            this.rate_part_2.text = _loc1_.gold(this.actualRate);
+            this.rateTo.text = _loc1_.gold(this.actualRate);
          }
-         this.rate_part_2.validateNow();
+         this.rateTo.validateNow();
       }
 
-      public function setRates(param1:uint, param2:uint) : void {
-         this.actionRate = param2;
-         this.rate = param1;
-         this.isRatesDataChanged = true;
-         invalidate();
+      private function onOverHandler(param1:MouseEvent) : void {
+         this.showTooltip();
       }
 
-      public function set rateLabelFunction(param1:Function) : void {
-         this._rateLabelFunction = param1;
-         this.isApplyRates = true;
-         invalidate();
+      private function onOutHandler(param1:MouseEvent) : void {
+         this.hideTooltip();
+      }
+
+      private function onPressHandler(param1:MouseEvent) : void {
+         this.hideTooltip();
       }
    }
 

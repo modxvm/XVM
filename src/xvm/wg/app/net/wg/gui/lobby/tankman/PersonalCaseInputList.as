@@ -36,8 +36,8 @@ package net.wg.gui.lobby.tankman
 
       private const UPDATE_DATA:String = "updateData";
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this.list.removeEventListener(ListEvent.INDEX_CHANGE,this.list_listIndexChangeHandler);
          this.list.removeEventListener(ListEvent.ITEM_PRESS,this.list_itemPressHandler);
          this.list.disposeRenderers();

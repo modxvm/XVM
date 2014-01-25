@@ -10,6 +10,7 @@ package net.wg.gui.prebattle.invites
    import org.idmedia.as3commons.util.StringUtils;
    import flash.utils.setTimeout;
    import flash.utils.clearTimeout;
+   import net.wg.data.constants.Errors;
 
 
    public class PrbInviteSearchUsersForm extends InviteStackContainerBase
@@ -87,17 +88,18 @@ package net.wg.gui.prebattle.invites
       private function setDefaultFocus() : void {
          if(!this.nameInput.hasFocus)
          {
+            DebugUtils.LOG_WARNING(Errors.INVALID_FOCUS_USING);
             App.utils.focusHandler.setFocus(this.nameInput);
          }
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          if(this.searchButton != null)
          {
             this.searchButton.removeEventListener(ButtonEvent.CLICK,this.handleSearchUsers);
             this.nameInput.removeEventListener(InputEvent.INPUT,this.handleInput);
          }
-         super.dispose();
+         super.onDispose();
       }
    }
 

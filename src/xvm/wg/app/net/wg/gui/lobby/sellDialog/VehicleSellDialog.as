@@ -14,7 +14,7 @@ package net.wg.gui.lobby.sellDialog
    import scaleform.clik.constants.InvalidationType;
    import net.wg.utils.ILocale;
    import fl.transitions.easing.Strong;
-   import flash.display.InteractiveObject;
+   import net.wg.data.constants.FittingTypes;
 
 
    public class VehicleSellDialog extends VehicleSellDialogMeta implements IVehicleSellDialogMeta
@@ -106,7 +106,7 @@ package net.wg.gui.lobby.sellDialog
             this.submitBtn.enabled = (this.controlQuestion.isValidControlInput) && (param1) && this.accGold >= this.isHasGold();
             if((this.submitBtn.enabled) && !_loc2_)
             {
-               App.utils.scheduler.envokeInNextFrame(this.updateFocus,this.submitBtn);
+               App.utils.scheduler.envokeInNextFrame(setFocus,this.submitBtn);
             }
          }
       }
@@ -139,17 +139,6 @@ package net.wg.gui.lobby.sellDialog
             this.controlQuestion.formattedControlText = _loc3_;
             this.controlQuestion.invalidateData();
          }
-      }
-
-      private function enabledSubmitBtn(param1:Boolean) : void {
-         if(this.submitBtn.enabled != param1)
-         {
-            this.submitBtn.enabled = param1;
-         }
-      }
-
-      private function isHasGold() : Number {
-         return this.goldCommon - this.headerComponent.tankGoldPrice;
       }
 
       public function as_checkGold(param1:Number) : void {
@@ -196,6 +185,14 @@ package net.wg.gui.lobby.sellDialog
          invalidateData();
       }
 
+      public function motionCallBack(param1:Tween) : void {
+         this.countCallBack++;
+      }
+
+      public function compCompletedTween() : Boolean {
+         return this.countTweenObjects == this.countCallBack;
+      }
+
       override protected function configUI() : void {
          super.configUI();
          this.updateOpenedState();
@@ -208,18 +205,18 @@ package net.wg.gui.lobby.sellDialog
          this.submitBtn.addEventListener(ButtonEvent.CLICK,this.handleSubmit);
          if(this.controlQuestion.visible)
          {
-            App.utils.scheduler.envokeInNextFrame(this.updateFocus,this.controlQuestion.userInput);
+            App.utils.scheduler.envokeInNextFrame(setFocus,this.controlQuestion.userInput);
          }
          else
          {
-            App.utils.scheduler.envokeInNextFrame(this.updateFocus,this.submitBtn);
+            App.utils.scheduler.envokeInNextFrame(setFocus,this.submitBtn);
          }
       }
 
       override protected function onDispose() : void {
          var _loc1_:Tween = null;
          super.onDispose();
-         App.utils.scheduler.cancelTask(this.updateFocus);
+         App.utils.scheduler.cancelTask(setFocus);
          this.slidingComponent.slidingScrList.removeEventListener(VehicleSellDialogEvent.LIST_WAS_DRAWN,this.wasDrawnHandler);
          this.removeEventListener(VehicleSellDialogEvent.UPDATE_RESULT,this.updateMoneyResult);
          this.slidingComponent.settingsBtn.setingsDropBtn.removeEventListener(Event.SELECT,this.playSlidingAnimation);
@@ -260,6 +257,17 @@ package net.wg.gui.lobby.sellDialog
          }
       }
 
+      private function enabledSubmitBtn(param1:Boolean) : void {
+         if(this.submitBtn.enabled != param1)
+         {
+            this.submitBtn.enabled = param1;
+         }
+      }
+
+      private function isHasGold() : Number {
+         return this.goldCommon - this.headerComponent.tankGoldPrice;
+      }
+
       private function updateWindowPosition() : void {
          var _loc1_:* = 0;
          var _loc2_:* = 0;
@@ -284,6 +292,8 @@ package net.wg.gui.lobby.sellDialog
       }
 
       private function setGoldText(param1:Number, param2:Number) : void {
+         var _loc9_:* = false;
+         var _loc10_:* = 0;
          var _loc3_:ILocale = App.utils.locale;
          var _loc4_:String = _loc3_.gold(param1);
          var _loc5_:* = true;
@@ -318,10 +328,12 @@ package net.wg.gui.lobby.sellDialog
          if((this.controlQuestion) && (this.controlQuestion.visible))
          {
             this.controlQuestion.cleanField();
-            setResultCreditS(Boolean(_loc8_ == 0),_loc8_ == 0?_loc6_:_loc8_);
+            _loc9_ = _loc8_ == 0;
+            _loc10_ = _loc9_?_loc6_:_loc8_;
+            setResultCreditS(_loc9_,_loc10_);
             if(this.controlQuestion.userInput.focused == false)
             {
-               App.utils.scheduler.envokeInNextFrame(this.updateFocus,this.controlQuestion.userInput);
+               App.utils.scheduler.envokeInNextFrame(setFocus,this.controlQuestion.userInput);
             }
          }
          if(param1 - this.headerComponent.tankPrice > 0)
@@ -369,70 +381,6 @@ package net.wg.gui.lobby.sellDialog
          this.slidingComponent.setInventory(param1,param2);
       }
 
-      private function handleSubmit(param1:ButtonEvent) : void {
-         var _loc9_:uint = 0;
-         this.renderersArr = this.slidingComponent.slidingScrList.getRenderers();
-         this.complexDeviceRenderers = this.devicesComponent.deviceItemRenderer;
-         var _loc2_:Array = [];
-         var _loc3_:Array = [];
-         var _loc4_:Array = [];
-         var _loc5_:Array = [];
-         var _loc6_:Array = [];
-         var _loc7_:* = false;
-         var _loc8_:uint = 0;
-         _loc8_ = 0;
-         while(_loc8_ < this.renderersArr.length)
-         {
-            if(!this.renderersArr[_loc8_].inInventory)
-            {
-               switch(this.renderersArr[_loc8_].type)
-               {
-                  case SaleItemBlockRenderer.ITEM_TYPE_OPTIONAL_DEVICE:
-                     _loc2_.push(this.renderersArr[_loc8_].dataInfo);
-                     break;
-                  case SaleItemBlockRenderer.ITEM_TYPE_SHELL:
-                     if(this.renderersArr[_loc8_].itemInInventory)
-                     {
-                        _loc6_.push(this.renderersArr[_loc8_].dataInfo);
-                     }
-                     else
-                     {
-                        _loc3_.push(this.renderersArr[_loc8_].dataInfo);
-                     }
-                     break;
-                  case SaleItemBlockRenderer.ITEM_TYPE_EQUIPMENT:
-                     _loc4_.push(this.renderersArr[_loc8_].dataInfo);
-                     break;
-                  case SaleItemBlockRenderer.ITEM_TYPE_MODULE:
-                     _loc9_ = 0;
-                     while(_loc9_ < this.modulesData.length)
-                     {
-                        _loc6_.push(this.modulesData[_loc9_][0]);
-                        _loc9_++;
-                     }
-                     break;
-               }
-            }
-            _loc8_++;
-         }
-         _loc8_ = 0;
-         while(_loc8_ < this.complexDeviceRenderers.length)
-         {
-            if(!this.complexDeviceRenderers[_loc8_].inInventory)
-            {
-               _loc2_.push(this.complexDeviceRenderers[_loc8_].dataInfo);
-            }
-            _loc8_++;
-         }
-         if(this.headerComponent.inBarracsDrop.selectedIndex == 1)
-         {
-            _loc7_ = true;
-         }
-         setDialogSettingsS(this.slidingComponent.settingsBtn.setingsDropBtn.selected);
-         sellS(this.vehicleData,_loc3_,_loc4_,_loc2_,_loc6_,_loc7_);
-         onWindowCloseS();
-      }
-
       private function updateComponentsPosition() : void {
          this.slidingComponent.visible = !(this.listVisibleHight == 0);
          if(this.listVisibleHight != 0)
@@ -469,46 +417,6 @@ package net.wg.gui.lobby.sellDialog
          window.x = App.appWidth - window.width >> 1;
          window.y = App.appHeight - window.height >> 1;
          this.setGoldText(this.headerComponent.creditsCommon,this.goldCommon);
-      }
-
-      private function wasDrawnHandler(param1:VehicleSellDialogEvent) : void {
-         this.listVisibleHight = param1.listVisibleHight;
-         this.updateComponentsPosition();
-      }
-
-      private function updateMoneyResult(param1:VehicleSellDialogEvent) : void {
-         this.headerComponent.creditsCommon = this.headerComponent.tankPrice;
-         this.creditsComplDev = 0;
-         this.goldCommon = 0;
-         this.renderersArr = this.slidingComponent.slidingScrList.getRenderers();
-         var _loc2_:uint = 0;
-         while(_loc2_ < this.renderersArr.length)
-         {
-            if(!this.renderersArr[_loc2_].inInventory)
-            {
-               this.headerComponent.creditsCommon = this.headerComponent.creditsCommon + this.renderersArr[_loc2_].moneyValue;
-            }
-            _loc2_++;
-         }
-         this.complexDeviceRenderers = this.devicesComponent.deviceItemRenderer;
-         var _loc3_:uint = 0;
-         while(_loc3_ < this.complexDeviceRenderers.length)
-         {
-            if(this.complexDeviceRenderers[_loc3_].inInventory)
-            {
-               if(!this.complexDeviceRenderers[_loc3_].isRemovable)
-               {
-                  this.goldCommon = this.goldCommon + this.devicesComponent.removePrice;
-               }
-            }
-            else
-            {
-               this.creditsComplDev = this.creditsComplDev + this.complexDeviceRenderers[_loc3_].moneyValue;
-            }
-            _loc3_++;
-         }
-         this.setGoldText(this.headerComponent.creditsCommon,this.goldCommon);
-         this.as_checkGold(this.accGold);
       }
 
       private function playSlidingAnimation() : void {
@@ -634,18 +542,119 @@ package net.wg.gui.lobby.sellDialog
          this.updateElements();
       }
 
-      public function motionCallBack(param1:Tween) : void {
-         this.countCallBack++;
-      }
-
-      public function compCompletedTween() : Boolean {
-         return this.countTweenObjects == this.countCallBack;
-      }
-
       private function updateElements() : void {
          this.slidingComponent.slidingScrList.y = this.slidingComponent.settingsBtn.y + this.slidingComponent.settingsBtn.height;
          this.slidingComponent.settingsBtn.creditsIT.visible = true;
          this.slidingComponent.slidingScrList.visible = this.slidingComponent.isOpened;
+      }
+
+      private function updateOpenedState() : void {
+         var _loc1_:Object = getDialogSettingsS();
+         this.slidingComponent.isOpened = this.isOpen = _loc1_.isOpened;
+      }
+
+      private function handleSubmit(param1:ButtonEvent) : void {
+         var _loc9_:uint = 0;
+         this.renderersArr = this.slidingComponent.slidingScrList.getRenderers();
+         this.complexDeviceRenderers = this.devicesComponent.deviceItemRenderer;
+         var _loc2_:Array = [];
+         var _loc3_:Array = [];
+         var _loc4_:Array = [];
+         var _loc5_:Array = [];
+         var _loc6_:Array = [];
+         var _loc7_:* = false;
+         var _loc8_:uint = 0;
+         _loc8_ = 0;
+         while(_loc8_ < this.renderersArr.length)
+         {
+            if(!this.renderersArr[_loc8_].inInventory)
+            {
+               switch(this.renderersArr[_loc8_].type)
+               {
+                  case FittingTypes.OPTIONAL_DEVICE:
+                     _loc2_.push(this.renderersArr[_loc8_].dataInfo);
+                     break;
+                  case FittingTypes.SHELL:
+                     if(this.renderersArr[_loc8_].itemInInventory)
+                     {
+                        _loc6_.push(this.renderersArr[_loc8_].dataInfo);
+                     }
+                     else
+                     {
+                        _loc3_.push(this.renderersArr[_loc8_].dataInfo);
+                     }
+                     break;
+                  case FittingTypes.EQUIPMENT:
+                     _loc4_.push(this.renderersArr[_loc8_].dataInfo);
+                     break;
+                  case FittingTypes.MODULE:
+                     _loc9_ = 0;
+                     while(_loc9_ < this.modulesData.length)
+                     {
+                        _loc6_.push(this.modulesData[_loc9_][0]);
+                        _loc9_++;
+                     }
+                     break;
+               }
+            }
+            _loc8_++;
+         }
+         _loc8_ = 0;
+         while(_loc8_ < this.complexDeviceRenderers.length)
+         {
+            if(!this.complexDeviceRenderers[_loc8_].inInventory)
+            {
+               _loc2_.push(this.complexDeviceRenderers[_loc8_].dataInfo);
+            }
+            _loc8_++;
+         }
+         if(this.headerComponent.inBarracsDrop.selectedIndex == 1)
+         {
+            _loc7_ = true;
+         }
+         setDialogSettingsS(this.slidingComponent.settingsBtn.setingsDropBtn.selected);
+         sellS(this.vehicleData,_loc3_,_loc4_,_loc2_,_loc6_,_loc7_);
+         onWindowCloseS();
+      }
+
+      private function wasDrawnHandler(param1:VehicleSellDialogEvent) : void {
+         this.listVisibleHight = param1.listVisibleHight;
+         this.updateComponentsPosition();
+      }
+
+      private function updateMoneyResult(param1:VehicleSellDialogEvent) : void {
+         this.headerComponent.creditsCommon = this.headerComponent.tankPrice;
+         this.creditsComplDev = 0;
+         this.goldCommon = 0;
+         this.renderersArr = this.slidingComponent.slidingScrList.getRenderers();
+         var _loc2_:uint = 0;
+         while(_loc2_ < this.renderersArr.length)
+         {
+            if(!this.renderersArr[_loc2_].inInventory)
+            {
+               this.headerComponent.creditsCommon = this.headerComponent.creditsCommon + this.renderersArr[_loc2_].moneyValue;
+            }
+            _loc2_++;
+         }
+         this.complexDeviceRenderers = this.devicesComponent.deviceItemRenderer;
+         var _loc3_:uint = 0;
+         while(_loc3_ < this.complexDeviceRenderers.length)
+         {
+            if(this.complexDeviceRenderers[_loc3_].inInventory)
+            {
+               if(!this.complexDeviceRenderers[_loc3_].isRemovable)
+               {
+                  this.goldCommon = this.goldCommon + this.devicesComponent.removePrice;
+               }
+            }
+            else
+            {
+               this.creditsComplDev = this.creditsComplDev + this.complexDeviceRenderers[_loc3_].moneyValue;
+            }
+            _loc3_++;
+         }
+         this.setGoldText(this.headerComponent.creditsCommon,this.goldCommon);
+         this.as_checkGold(this.accGold);
       }
 
       private function handleClose(param1:ButtonEvent) : void {
@@ -654,15 +663,6 @@ package net.wg.gui.lobby.sellDialog
 
       private function userInputHandler(param1:Event) : void {
          setUserInputS(this.controlQuestion.getUserText());
-      }
-
-      private function updateFocus(param1:InteractiveObject) : void {
-         App.utils.focusHandler.setFocus(param1);
-      }
-
-      private function updateOpenedState() : void {
-         var _loc1_:Object = getDialogSettingsS();
-         this.slidingComponent.isOpened = this.isOpen = _loc1_.isOpened;
       }
    }
 

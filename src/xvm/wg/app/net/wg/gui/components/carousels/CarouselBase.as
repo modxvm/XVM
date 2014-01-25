@@ -107,8 +107,8 @@ package net.wg.gui.components.carousels
 
       private var showEmptyItems:Boolean = false;
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this.leftArrow.removeEventListener(MouseEvent.MOUSE_UP,this.arrowUp);
          this.rightArrow.removeEventListener(MouseEvent.MOUSE_UP,this.arrowUp);
          this.leftArrow.removeEventListener(ButtonEvent.PRESS,this.arrowPress);
@@ -626,7 +626,7 @@ package net.wg.gui.components.carousels
          }
          else
          {
-            _loc3_.countFactor = this.countFactor+1;
+            this.countFactor++;
             container.x = container.x + this.lastDx;
             if(this.getCurrentFirstRendererOnAnim() == 0 && this.courceFactor == 1)
             {

@@ -27,6 +27,10 @@ package net.wg.gui.lobby.techtree
 
       public static const CLICK_2_SELL:String = "sell";
 
+      public static const CLICK_2_SELECT_IN_HANGAR:String = "selectInHangar";
+
+      public static const CLICK_2_SHOW_VEHICLE_STATS:String = "showVehicleStats";
+
       public static const CLICK_2_INSTALL:String = "install";
 
       public static const CLICK_2_MODULE_INFO:String = "moduleInfo";

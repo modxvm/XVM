@@ -21,7 +21,7 @@ package net.wg.gui.components.advanced
 
       public var moduleLevel:MovieClip;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.moduleType.dispose();
          this.moduleType = null;
          this.artefact.dispose();
@@ -29,7 +29,7 @@ package net.wg.gui.components.advanced
          this.shell.dispose();
          this.shell = null;
          this.moduleLevel = null;
-         super.dispose();
+         super.onDispose();
       }
 
       public function setValues(param1:String, param2:String) : void {

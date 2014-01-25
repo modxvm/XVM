@@ -58,14 +58,14 @@ package net.wg.gui.components.advanced
          addEventListener(MouseEvent.MOUSE_OUT,this.onOut);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          removeEventListener(MouseEvent.MOUSE_OVER,this.onOver);
          removeEventListener(MouseEvent.MOUSE_OUT,this.onOut);
          this.count_txt = null;
          this.countBg = null;
          this.iconLoader.dispose();
          this.iconLoader = null;
-         super.dispose();
+         super.onDispose();
       }
 
       override protected function draw() : void {

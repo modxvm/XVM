@@ -2,7 +2,10 @@ package net.wg.gui.prebattle.meta.abstract
 {
    import net.wg.gui.prebattle.meta.impl.PrebattleWindowMeta;
    import net.wg.gui.prebattle.meta.IPrebattleWindowMeta;
+   import net.wg.gui.messenger.ChannelComponent;
    import net.wg.infrastructure.exceptions.AbstractException;
+   import net.wg.infrastructure.events.FocusRequestEvent;
+   import flash.display.InteractiveObject;
    import scaleform.clik.events.InputEvent;
    import flash.ui.Keyboard;
    import scaleform.clik.constants.InputValue;
@@ -15,6 +18,8 @@ package net.wg.gui.prebattle.meta.abstract
          super();
          isSourceTracked = true;
       }
+
+      public var channelComponent:ChannelComponent;
 
       public function as_enableLeaveBtn(param1:Boolean) : void {
          throw new AbstractException("This method should be overriden");
@@ -42,6 +47,25 @@ package net.wg.gui.prebattle.meta.abstract
 
       public function as_refreshPermissions() : void {
          throw new AbstractException("This method should be overriden");
+      }
+
+      override protected function onPopulate() : void {
+         super.onPopulate();
+         addEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler);
+      }
+
+      override protected function onDispose() : void {
+         super.onDispose();
+         removeEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler);
+      }
+
+      override protected function onInitModalFocus(param1:InteractiveObject) : void {
+         super.onInitModalFocus(param1);
+         setFocus(this.channelComponent.getComponentForFocus());
+      }
+
+      private function onRequestFocusHandler(param1:FocusRequestEvent) : void {
+         setFocus(param1.focusContainer.getComponentForFocus());
       }
 
       override public function handleInput(param1:InputEvent) : void {

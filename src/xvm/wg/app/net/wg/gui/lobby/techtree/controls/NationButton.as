@@ -26,11 +26,11 @@ package net.wg.gui.lobby.techtree.controls
 
       public var icoAdd:MovieClip;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          removeEventListener(MouseEvent.ROLL_OVER,this.showTooltip,false);
          removeEventListener(MouseEvent.ROLL_OUT,hideTooltip,false);
          removeEventListener(MouseEvent.CLICK,hideTooltip,false);
-         super.dispose();
+         super.onDispose();
       }
 
       protected function defineSoundProps() : void {

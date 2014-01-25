@@ -13,7 +13,7 @@ package net.wg.gui.lobby.customization.renderers
       public function CamoDemoRenderer() {
          super();
          soundId = SoundTypes.CAMOUFLAGE_DEMO_RENDERER;
-         useHandCursorForse = true;
+         useHandCursorForce = true;
       }
 
       public static const WINTER:String = "winter";
@@ -23,8 +23,6 @@ package net.wg.gui.lobby.customization.renderers
       public static const DESERT:String = "desert";
 
       public static const OFF:String = "off";
-
-      public static const KIND_DIRTY:String = "kindDirty";
 
       public static var KINDS:Array = [WINTER,SUMMER,DESERT];
 
@@ -69,7 +67,6 @@ package net.wg.gui.lobby.customization.renderers
             else
             {
                this.showKind(!data || !data.id);
-               _loc1_ = 0;
                _loc1_ = 0;
                while(_loc1_ < KINDS.length)
                {
@@ -121,6 +118,17 @@ package net.wg.gui.lobby.customization.renderers
          super.configUI();
          this.timeLeftFld.mouseEnabled = false;
          freeTF.text = VEHICLE_CUSTOMIZATION.IGR_FREE_CUT;
+      }
+
+      override protected function onDispose() : void {
+         this.kindMc = null;
+         this.timeLeftFld = null;
+         if(this.costFieldNew)
+         {
+            this.costFieldNew.dispose();
+            this.costFieldNew = null;
+         }
+         super.onDispose();
       }
 
       override protected function setState(param1:String) : void {

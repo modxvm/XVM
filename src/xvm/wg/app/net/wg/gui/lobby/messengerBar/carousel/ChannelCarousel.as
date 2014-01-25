@@ -176,7 +176,7 @@ package net.wg.gui.lobby.messengerBar.carousel
             if(_loc4_)
             {
                this.updateWindowVisibleProperty(_loc4_,true);
-               _loc5_ = _loc4_.window;
+               _loc5_ = IWindow(_loc4_.window);
                _loc6_ = _loc5_.width;
                _loc7_ = App.appWidth - x;
                _loc8_ = App.appHeight - height;

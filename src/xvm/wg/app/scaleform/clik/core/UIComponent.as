@@ -13,6 +13,7 @@ package scaleform.clik.core
    import flash.utils.getQualifiedClassName;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.utils.IUtils;
+   import net.wg.infrastructure.events.LifeCycleEvent;
    import net.wg.infrastructure.exceptions.AssertionException;
    import net.wg.infrastructure.exceptions.LifecycleException;
 
@@ -229,6 +230,7 @@ package scaleform.clik.core
          var _loc6_:* = NaN;
          var _loc7_:* = NaN;
          var _loc8_:* = false;
+         this.throwLifeCycleException();
          if(param1 == this._focused || !this._focusable)
          {
             return;
@@ -442,6 +444,13 @@ package scaleform.clik.core
          }
       }
 
+      protected final function cancelValidation(param1:String) : void {
+         if(this._invalidHash != null)
+         {
+            delete this._invalidHash[[param1]];
+         }
+      }
+
       public function validateNow(param1:Event=null) : void {
          if(!this.initialized)
          {
@@ -563,7 +572,22 @@ package scaleform.clik.core
 
       protected var _baseDisposed:Boolean = false;
 
-      public function dispose() : void {
+      public final function dispose() : void {
+         this.simpleAssert(!this._baseDisposed,name + "(" + getQualifiedClassName(this) + ") already disposed!");
+         if(App.utils.focusHandler.getFocus(0) == this)
+         {
+            this.forcedResetFocus();
+         }
+         dispatchEvent(new LifeCycleEvent(LifeCycleEvent.ON_BEFORE_DISPOSE));
+         this.onDispose();
+         dispatchEvent(new LifeCycleEvent(LifeCycleEvent.ON_AFTER_DISPOSE));
+         while(numChildren > 0)
+         {
+            removeChildAt(0);
+         }
+      }
+
+      protected function onDispose() : void {
          var _loc1_:String = null;
          this._baseDisposed = true;
          if(this.constraints)
@@ -571,10 +595,6 @@ package scaleform.clik.core
             this.constraints.removeAllElements();
             this.constraints.dispose();
             this.constraints = null;
-         }
-         while(numChildren > 0)
-         {
-            removeChildAt(0);
          }
          this._focusTarget = null;
          for (_loc1_ in this._invalidHash)
@@ -594,6 +614,13 @@ package scaleform.clik.core
          this.removeEventListener(Event.RENDER,this.validateNow,false);
       }
 
+      private function forcedResetFocus() : void {
+         var _loc1_:Boolean = CLIK.disableNullFocusMoves;
+         CLIK.disableNullFocusMoves = false;
+         App.utils.focusHandler.setFocus(null);
+         CLIK.disableNullFocusMoves = _loc1_;
+      }
+
       private function simpleAssert(param1:Boolean, param2:String, param3:Class=null) : void {
          if(!param1)
          {
@@ -611,7 +638,7 @@ package scaleform.clik.core
 
       private function throwLifeCycleException() : void {
          var _loc1_:* = "\nMay be you can find a custom override method Draw and place after each gotoAnd... " + "method next code block:if (_baseDisposed){return;}";
-         this.simpleAssert(!this._baseDisposed,"invalidation after dispose!" + _loc1_,LifecycleException);
+         this.simpleAssert(!this._baseDisposed,"invoking after dispose!" + _loc1_,LifecycleException);
       }
    }
 

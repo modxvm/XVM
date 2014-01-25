@@ -38,11 +38,11 @@ package net.wg.gui.components.controls
 
       public var startPos:String = "TL";
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.tempBg = null;
          this.myBitmapData = null;
          this.pos = null;
-         super.dispose();
+         super.onDispose();
       }
 
       private function createPos() : void {

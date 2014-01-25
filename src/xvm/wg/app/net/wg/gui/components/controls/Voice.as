@@ -14,12 +14,12 @@ package net.wg.gui.components.controls
 
       public var voiceWave:VoiceWave;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.voiceWaveFx.dispose();
          this.voiceWaveFx = null;
          this.voiceWave.dispose();
          this.voiceWave = null;
-         super.dispose();
+         super.onDispose();
       }
 
       override protected function configUI() : void {

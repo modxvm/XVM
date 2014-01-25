@@ -2,7 +2,6 @@ package net.wg.gui.prebattle.squad
 {
    import net.wg.gui.prebattle.meta.abstract.PrebattleWindowAbstract;
    import net.wg.gui.prebattle.meta.IPrebattleWindowMeta;
-   import net.wg.gui.messenger.ChannelComponent;
    import net.wg.gui.components.controls.SoundButtonEx;
    import net.wg.gui.components.controls.ScrollingListEx;
    import scaleform.clik.data.DataProvider;
@@ -17,10 +16,10 @@ package net.wg.gui.prebattle.squad
    import scaleform.clik.utils.Padding;
    import net.wg.gui.lobby.messengerBar.WindowGeometryInBar;
    import net.wg.gui.events.MessengerBarEvent;
-   import net.wg.infrastructure.interfaces.IUserContextMenuGenerator;
-   import scaleform.gfx.MouseEventEx;
    import flash.utils.setTimeout;
    import flash.utils.clearTimeout;
+   import net.wg.infrastructure.interfaces.IUserContextMenuGenerator;
+   import scaleform.gfx.MouseEventEx;
 
 
    public class SquadWindow extends PrebattleWindowAbstract implements IPrebattleWindowMeta
@@ -29,8 +28,6 @@ package net.wg.gui.prebattle.squad
       public function SquadWindow() {
          super();
       }
-
-      public var squadChannelComponent:ChannelComponent;
 
       public var leaveButton:SoundButtonEx;
 
@@ -48,8 +45,6 @@ package net.wg.gui.prebattle.squad
 
       private var _canSendInvites:Boolean = false;
 
-      private var chatFocusCounter:int = 0;
-
       override public function as_enableLeaveBtn(param1:Boolean) : void {
          this.leaveButton.enabled = param1;
       }
@@ -60,15 +55,6 @@ package net.wg.gui.prebattle.squad
 
       override public function as_toggleReadyBtn(param1:Boolean) : void {
          this.readyButton.label = param1?MESSENGER.DIALOGS_SQUADCHANNEL_BUTTONS_READY:MESSENGER.DIALOGS_SQUADCHANNEL_BUTTONS_NOTREADY;
-      }
-
-      override public function setFocus() : void {
-         super.setFocus();
-         if((this.squadChannelComponent) && this.chatFocusCounter < 2)
-         {
-            this.squadChannelComponent.setFocusToInput();
-            this.chatFocusCounter++;
-         }
       }
 
       override public function as_setPlayerState(param1:int, param2:Boolean, param3:Object) : void {
@@ -88,6 +74,7 @@ package net.wg.gui.prebattle.squad
                   _loc7_.model.state = _loc4_.state;
                   _loc7_.model.vShortName = _loc4_.vShortName;
                   _loc7_.model.vLevel = _loc4_.vLevel;
+                  _loc7_.model.igrType = _loc4_.igrType;
                   this.memberList.dataProvider.invalidate();
                }
                _loc5_++;
@@ -108,16 +95,6 @@ package net.wg.gui.prebattle.squad
          this.updatePermissions();
       }
 
-      private function updatePermissions() : void {
-         this._isReadyBtnEnabled = isReadyBtnEnabledS();
-         this._isLeaveBtnEnabled = isLeaveBtnEnabledS();
-         this._canSendInvites = canSendInviteS();
-         this.leaveButton.enabled = this._isLeaveBtnEnabled;
-         this.readyButton.enabled = this._isReadyBtnEnabled;
-         this.updateInviteButton(this._canSendInvites);
-         this.updateMainButtons();
-      }
-
       override protected function draw() : void {
          var _loc1_:* = 0;
          var _loc2_:* = 0;
@@ -133,7 +110,7 @@ package net.wg.gui.prebattle.squad
             {
                this.memberList.x = _loc1_ - this.memberList.width;
             }
-            this.squadChannelComponent.invalidate(InvalidationType.SIZE);
+            channelComponent.invalidate(InvalidationType.SIZE);
          }
       }
 
@@ -142,11 +119,11 @@ package net.wg.gui.prebattle.squad
          constraints = new Constraints(this,ConstrainMode.REFLOW);
          constraints.addElement("readyButton",this.readyButton,Constraints.TOP | Constraints.RIGHT);
          constraints.addElement("leaveButton",this.leaveButton,Constraints.TOP | Constraints.LEFT | Constraints.RIGHT);
-         constraints.addElement("messageArea",this.squadChannelComponent.messageArea,Constraints.ALL);
-         constraints.addElement("messageAreaScrollBar",this.squadChannelComponent.messageAreaScrollBar,Constraints.RIGHT | Constraints.TOP | Constraints.BOTTOM);
+         constraints.addElement("messageArea",channelComponent.messageArea,Constraints.ALL);
+         constraints.addElement("messageAreaScrollBar",channelComponent.messageAreaScrollBar,Constraints.RIGHT | Constraints.TOP | Constraints.BOTTOM);
          constraints.addElement("memberList",this.memberList,Constraints.TOP | Constraints.BOTTOM);
-         constraints.addElement("messageInput",this.squadChannelComponent.messageInput,Constraints.LEFT | Constraints.RIGHT | Constraints.BOTTOM);
-         constraints.addElement("sendButton",this.squadChannelComponent.sendButton,Constraints.RIGHT | Constraints.BOTTOM);
+         constraints.addElement("messageInput",channelComponent.messageInput,Constraints.LEFT | Constraints.RIGHT | Constraints.BOTTOM);
+         constraints.addElement("sendButton",channelComponent.sendButton,Constraints.RIGHT | Constraints.BOTTOM);
          if(this.memberList)
          {
             this.memberList.addEventListener(ListEventEx.ITEM_CLICK,this.onMemberItemClickHandler);
@@ -159,13 +136,9 @@ package net.wg.gui.prebattle.squad
          {
             this.leaveButton.addEventListener(ButtonEvent.CLICK,this.handleLeaveClick);
          }
-         this.squadChannelComponent.invalidate(InvalidationType.SIZE);
+         channelComponent.invalidate(InvalidationType.SIZE);
          this.updateMemberList();
          this.updatePermissions();
-      }
-
-      private function updateWindowProperties() : void {
-         Window(window).visible = true;
       }
 
       override protected function onDispose() : void {
@@ -182,7 +155,7 @@ package net.wg.gui.prebattle.squad
       override protected function onPopulate() : void {
          Window(window).visible = false;
          super.onPopulate();
-         registerComponent(this.squadChannelComponent,Aliases.CHANNEL_COMPONENT);
+         registerComponent(channelComponent,Aliases.CHANNEL_COMPONENT);
          window.useBottomBtns = true;
          canClose = true;
          enabledCloseBtn = false;
@@ -200,6 +173,20 @@ package net.wg.gui.prebattle.squad
          geometry = new WindowGeometryInBar(MessengerBarEvent.PIN_CAROUSEL_WINDOW,getClientIDS());
       }
 
+      private function updatePermissions() : void {
+         this._isReadyBtnEnabled = isReadyBtnEnabledS();
+         this._isLeaveBtnEnabled = isLeaveBtnEnabledS();
+         this._canSendInvites = canSendInviteS();
+         this.leaveButton.enabled = this._isLeaveBtnEnabled;
+         this.readyButton.enabled = this._isReadyBtnEnabled;
+         this.updateInviteButton(this._canSendInvites);
+         this.updateMainButtons();
+      }
+
+      private function updateWindowProperties() : void {
+         Window(window).visible = true;
+      }
+
       private function updateMainButtons() : void {
          if(this.leaveButton != null)
          {
@@ -208,43 +195,6 @@ package net.wg.gui.prebattle.squad
          if(this.readyButton != null)
          {
             this.readyButton.label = isPlayerReadyS()?MESSENGER.DIALOGS_SQUADCHANNEL_BUTTONS_NOTREADY:MESSENGER.DIALOGS_SQUADCHANNEL_BUTTONS_READY;
-         }
-      }
-
-      private function handleLeaveClick(param1:ButtonEvent) : void {
-         requestToLeaveS();
-      }
-
-      private function handleReadyClick(param1:ButtonEvent) : void {
-         requestToReadyS(this.readyButton.label == MESSENGER.DIALOGS_SQUADCHANNEL_BUTTONS_READY);
-      }
-
-      private function onMemberItemClickHandler(param1:ListEventEx) : void {
-         var _loc2_:PlayerPrbInfoVO = null;
-         var _loc3_:* = false;
-         var _loc4_:IUserContextMenuGenerator = null;
-         var _loc5_:Object = null;
-         if(param1.buttonIdx == MouseEventEx.RIGHT_BUTTON)
-         {
-            _loc2_ = PlayerPrbInfoVO(param1.itemData);
-            if(_loc2_.accID > -1)
-            {
-               _loc3_ = _loc2_.uid > -1;
-               _loc4_ = new SquadWindowCIGenerator(_loc3_,canKickPlayerS());
-               App.contextMenuMgr.showUserContextMenu(this,_loc2_,_loc4_);
-            }
-            else
-            {
-               App.contextMenuMgr.hide();
-            }
-         }
-         else
-         {
-            _loc5_ = SquadItemRenderer(param1.itemRenderer).data;
-            if((_loc5_) && (_loc5_.hasOwnProperty("dummy")) && (_loc5_.dummy))
-            {
-               showPrebattleSendInvitesWindowS();
-            }
          }
       }
 
@@ -357,6 +307,43 @@ package net.wg.gui.prebattle.squad
          _loc1_.userName = "";
          _loc1_.dummy = true;
          return _loc1_;
+      }
+
+      private function handleLeaveClick(param1:ButtonEvent) : void {
+         requestToLeaveS();
+      }
+
+      private function handleReadyClick(param1:ButtonEvent) : void {
+         requestToReadyS(this.readyButton.label == MESSENGER.DIALOGS_SQUADCHANNEL_BUTTONS_READY);
+      }
+
+      private function onMemberItemClickHandler(param1:ListEventEx) : void {
+         var _loc2_:PlayerPrbInfoVO = null;
+         var _loc3_:* = false;
+         var _loc4_:IUserContextMenuGenerator = null;
+         var _loc5_:Object = null;
+         if(param1.buttonIdx == MouseEventEx.RIGHT_BUTTON)
+         {
+            _loc2_ = PlayerPrbInfoVO(param1.itemData);
+            if(_loc2_.accID > -1)
+            {
+               _loc3_ = _loc2_.uid > -1;
+               _loc4_ = new SquadWindowCIGenerator(_loc3_,canKickPlayerS());
+               App.contextMenuMgr.showUserContextMenu(this,_loc2_,_loc4_);
+            }
+            else
+            {
+               App.contextMenuMgr.hide();
+            }
+         }
+         else
+         {
+            _loc5_ = SquadItemRenderer(param1.itemRenderer).data;
+            if((_loc5_) && (_loc5_.hasOwnProperty("dummy")) && (_loc5_.dummy))
+            {
+               showPrebattleSendInvitesWindowS();
+            }
+         }
       }
    }
 

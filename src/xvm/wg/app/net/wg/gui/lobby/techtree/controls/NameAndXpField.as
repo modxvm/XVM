@@ -7,7 +7,7 @@ package net.wg.gui.lobby.techtree.controls
 
    public class NameAndXpField extends NodeComponent
    {
-
+          
       public function NameAndXpField() {
          super();
       }

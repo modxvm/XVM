@@ -29,7 +29,9 @@ package net.wg.data.constants
 
       public static const ABSTRACT_INVOKE:String = " abstract method can`t be invoked.";
 
-      public static const HDLR_CORRUPT_INVOKE:String = "handler invoking after manager destruction";
+      public static const MTHD_CORRUPT_INVOKE:String = "method invoking after object destruction";
+
+      public static const INVALID_FOCUS_USING:String = "Unsafe using App.utils.focusHandler.setFocus. \n\"" + "It can damage the focus system functionality. Please, use in view, as like as:\n" + "\tthis.setFocus(form.header.closeButton). ";
    }
 
 }

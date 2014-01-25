@@ -108,14 +108,14 @@ package net.wg.gui.components.controls
          addEventListener(MouseEvent.MOUSE_DOWN,hideTooltip,false,0,true);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          removeEventListener(MouseEvent.ROLL_OVER,showTooltip,false);
          removeEventListener(MouseEvent.ROLL_OUT,hideTooltip,false);
          removeEventListener(MouseEvent.MOUSE_DOWN,hideTooltip,false);
          App.stage.removeEventListener(MouseEvent.MOUSE_DOWN,this.handleStageClick,false);
          App.stage.removeEventListener(Event.RESIZE,this.updateDDPosition);
          this.iconText.dispose();
-         super.dispose();
+         super.onDispose();
       }
 
       override public function get selectedIndex() : int {

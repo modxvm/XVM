@@ -19,9 +19,10 @@ package net.wg.gui.lobby.messengerBar
    import net.wg.gui.events.MessengerBarEvent;
    import flash.events.MouseEvent;
    import scaleform.clik.constants.InvalidationType;
-   import net.wg.infrastructure.interfaces.IWindow;
+   import net.wg.infrastructure.interfaces.IManagedContent;
    import flash.events.EventPhase;
    import net.wg.infrastructure.interfaces.IAbstractWindowView;
+   import scaleform.clik.interfaces.IUIComponent;
 
 
    public class MessengerBar extends MessengerBarMeta implements IMessengerBarMeta, IDAAPIModule, IHelpLayoutComponent
@@ -194,7 +195,7 @@ package net.wg.gui.lobby.messengerBar
       }
 
       private function handlePinWindow(param1:MessengerBarEvent, param2:DisplayObject) : void {
-         var _loc4_:IWindow = null;
+         var _loc4_:IManagedContent = null;
          var _loc5_:Point = null;
          if(param1.eventPhase != EventPhase.BUBBLING_PHASE)
          {
@@ -210,7 +211,7 @@ package net.wg.gui.lobby.messengerBar
          }
       }
 
-      private function getPosition(param1:IWindow, param2:DisplayObject) : Point {
+      private function getPosition(param1:IUIComponent, param2:DisplayObject) : Point {
          var _loc3_:Point = null;
          if(param2 == this.notificationInvitesBtn)
          {

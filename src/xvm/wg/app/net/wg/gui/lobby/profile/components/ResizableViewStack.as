@@ -78,9 +78,9 @@ package net.wg.gui.lobby.profile.components
          return _loc3_;
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this._dataForUpdate = null;
-         super.dispose();
+         super.onDispose();
       }
 
       public function setAvailableSize(param1:Number, param2:Number) : void {

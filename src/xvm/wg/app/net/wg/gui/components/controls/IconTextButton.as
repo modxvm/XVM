@@ -56,10 +56,10 @@ package net.wg.gui.components.controls
          invalidate();
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.alertMC.dispose();
          this.alertMC = null;
-         super.dispose();
+         super.onDispose();
       }
 
       override protected function updateText() : void {

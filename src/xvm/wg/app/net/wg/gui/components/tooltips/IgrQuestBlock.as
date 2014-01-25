@@ -15,7 +15,7 @@ package net.wg.gui.components.tooltips
 
       public function setText(param1:String) : void {
          this.questText.htmlText = param1;
-         this.questText.width = this.questText.textWidth;
+         this.questText.height = this.questText.textHeight + 4;
       }
    }
 

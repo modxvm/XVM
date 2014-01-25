@@ -15,9 +15,9 @@ package net.wg.gui.lobby.hangar.tcarousel
 
       private var _timer:Number;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.textField = null;
-         super.dispose();
+         super.onDispose();
       }
 
       override protected function draw() : void {

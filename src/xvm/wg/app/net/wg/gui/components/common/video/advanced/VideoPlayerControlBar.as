@@ -112,8 +112,8 @@ package net.wg.gui.components.common.video.advanced
          invalidate();
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          disposeObj(this.playButton);
          disposeObj(this.repeatButton);
          disposeObj(this.soundSlider);

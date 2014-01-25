@@ -1,26 +1,31 @@
 package net.wg.gui.components.controls
 {
    import scaleform.clik.core.UIComponent;
+   import net.wg.infrastructure.interfaces.ITextContainer;
    import flash.text.TextField;
    import flash.display.Sprite;
    import flash.display.MovieClip;
-   import flash.display.DisplayObject;
+   import net.wg.gui.components.controls.VO.ActionPriceVO;
    import flash.events.MouseEvent;
-   import flash.display.InteractiveObject;
-   import flash.geom.Point;
    import net.wg.utils.ILocale;
+   import net.wg.data.constants.IconsTypes;
    import net.wg.gui.utils.ComplexTooltipHelper;
-   import scaleform.clik.constants.InvalidationType;
-   import flash.text.TextFormat;
    import scaleform.clik.controls.ListItemRenderer;
+   import net.wg.infrastructure.exceptions.AbstractException;
+   import net.wg.data.constants.Errors;
+   import flash.display.DisplayObject;
+   import flash.display.InteractiveObject;
+   import scaleform.clik.constants.InvalidationType;
+   import flash.geom.Point;
+   import flash.text.TextFormat;
    import scaleform.clik.controls.Button;
 
 
-   public class ActionPrice extends UIComponent
+   public class ActionPrice extends UIComponent implements ITextContainer
    {
           
       public function ActionPrice() {
-         this.alertVisibleInNextStates = [STATE_ALIGN_MIDDLE,STATE_ALIGN_TOP,STATE_ALIGN_MIDDLE_SMALL];
+         this.alertVisibleInNextStates = [];
          this._textColorType = TEXT_COLOR_TYPE_ICON;
          this.textColors =
             {
@@ -29,7 +34,15 @@ package net.wg.gui.components.controls
             }
          ;
          super();
+         this._vo = new ActionPriceVO();
+         this.alertVisibleInNextStates = [STATE_ALIGN_MIDDLE,STATE_ALIGN_TOP,STATE_ALIGN_MIDDLE_SMALL];
       }
+
+      public static var TEXT_COLOR_TYPE_ICON:String = "iconColor";
+
+      public static var TEXT_COLOR_TYPE_DISABLE:String = "disable";
+
+      public static var TEXT_COLOR_TYPE_ERROR:String = "error";
 
       public static const STATE_ALIGN_MIDDLE:String = "alignMiddle";
 
@@ -47,22 +60,6 @@ package net.wg.gui.components.controls
 
       public static const ALERT_ICO_MARGIN:Number = 5;
 
-      public static var TEXT_COLOR_TYPE_ICON:String = "iconColor";
-
-      public static var TEXT_COLOR_TYPE_DISABLE:String = "disable";
-
-      public static var TEXT_COLOR_TYPE_ERROR:String = "error";
-
-      public static var ITEM_TYPE_VEHICLE:String = "vehicle";
-
-      public static var ITEM_TYPE_MODULE:String = "module";
-
-      public static var ITEM_TYPE_EQUIPMENT:String = "equipment";
-
-      public static var ITEM_TYPE_SHELL:String = "shell";
-
-      public static var ITEM_TYPE_OPTIONAL_DEVICE:String = "optionalDevice";
-
       public var iconText:IconText = null;
 
       public var textField:TextField = null;
@@ -72,6 +69,8 @@ package net.wg.gui.components.controls
       public var hitMc:Sprite = null;
 
       public var bg:MovieClip = null;
+
+      protected var _textFont:String = "$FieldFont";
 
       private var _owner:UIComponent;
 
@@ -99,19 +98,11 @@ package net.wg.gui.components.controls
 
       private var _state:String = "camouflage";
 
-      private var _ico:String = "";
-
       private var _iconPosition:String = "right";
 
-      protected var _textFont:String = "$FieldFont";
-
-      private var _price:Number = 0;
-
-      private var _defPrice:Number = 0;
+      private var _vo:ActionPriceVO = null;
 
       private var _tooltipEnabled:Boolean = true;
-
-      private var _actionPrc:Number = 0;
 
       private var _textColorType:String;
 
@@ -119,15 +110,196 @@ package net.wg.gui.components.controls
 
       private var _textYOffset:Number = 0;
 
-      private var _useSign:Boolean = false;
-
-      private var _itemType:String = "";
-
-      private var _externalSign:String = "";
-
       private var textFieldYStartPos:Number = -1;
 
       private var textColors:Object;
+
+      override protected function onDispose() : void {
+         removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
+         removeEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
+         removeEventListener(MouseEvent.MOUSE_DOWN,this.onPressHandler);
+         this._owner = null;
+      }
+
+      override public function toString() : String {
+         return "[WG ActionPrice " + name + "]";
+      }
+
+      public function showTooltip() : void {
+         var _loc3_:String = null;
+         var _loc4_:String = null;
+         var _loc5_:String = null;
+         var _loc6_:String = null;
+         var _loc1_:* = "";
+         var _loc2_:ILocale = App.utils.locale;
+         if(this._vo.actionPrc > 0 && !(this._vo.price == 0))
+         {
+            _loc3_ = App.utils.icons.getIcon16StrPath(this._vo.ico);
+            _loc4_ = this._vo.ico == IconsTypes.GOLD?_loc2_.gold(Math.abs(this._vo.price)):_loc2_.integer(Math.abs(this._vo.price));
+            _loc5_ = this._vo.ico == IconsTypes.GOLD?_loc2_.gold(Math.abs(this._vo.defPrice)):_loc2_.integer(Math.abs(this._vo.defPrice));
+            _loc4_ = _loc4_ + (" " + _loc3_);
+            _loc5_ = _loc5_ + (" " + _loc3_);
+            _loc1_ = new ComplexTooltipHelper().addHeader(_loc2_.makeString(TOOLTIPS.ACTIONPRICE_HEADER)).addBody(_loc2_.makeString(TOOLTIPS.ACTIONPRICE_BODY,
+               {
+                  "oldPrice":_loc5_,
+                  "newPrice":_loc4_
+               }
+            )).make();
+         }
+         else
+         {
+            if(this._vo.actionPrc < 0 && !(this._vo.itemType == ""))
+            {
+               _loc6_ = _loc2_.makeString(TOOLTIPS.actionprice_sell_type(this._vo.itemType));
+               _loc1_ = new ComplexTooltipHelper().addHeader(_loc2_.makeString(TOOLTIPS.ACTIONPRICE_SELL_HEADER)).addBody(_loc2_.makeString(TOOLTIPS.ACTIONPRICE_SELL_BODY,{"deviceName":_loc6_})).make();
+            }
+         }
+         if(_loc1_.length > 0)
+         {
+            App.toolTipMgr.showComplex(_loc1_);
+         }
+      }
+
+      public function hideTooltip() : void {
+         App.toolTipMgr.hide();
+      }
+
+      public function setup(param1:UIComponent) : void {
+         this._owner = param1;
+         this._owner.mouseChildren = true;
+         if(param1  is  ListItemRenderer)
+         {
+            focusable = false;
+            focusTarget = param1;
+         }
+         this.updateEnabledMode();
+      }
+
+      public function setData(param1:ActionPriceVO) : void {
+         if(param1 == null)
+         {
+            return;
+         }
+         this._vo = param1;
+         this.visible = !(this._vo.actionPrc == 0) && !(this._vo.price == this._vo.defPrice);
+         if(this.visible)
+         {
+            invalidateData();
+         }
+      }
+
+      public function getData() : ActionPriceVO {
+         return this._vo;
+      }
+
+      override public function set enabled(param1:Boolean) : void {
+         if(param1 == super.enabled)
+         {
+            return;
+         }
+         super.enabled = param1;
+         this.alpha = param1?1:0.8;
+         this.updateEnabledMode();
+         tabEnabled = !enabled?false:_focusable;
+         invalidateData();
+      }
+
+      public function get textAlign() : String {
+         return this.textField.getTextFormat().align;
+      }
+
+      public function set textAlign(param1:String) : void {
+         throw new AbstractException("setter CheckBox::textAlign" + Errors.ABSTRACT_INVOKE);
+      }
+
+      public function get state() : String {
+         return this._state;
+      }
+
+      public function set state(param1:String) : void {
+         this._state = param1;
+         this.textFieldYStartPos = -1;
+         invalidateState();
+      }
+
+      public function get tooltipEnabled() : Boolean {
+         return this._tooltipEnabled;
+      }
+
+      public function set tooltipEnabled(param1:Boolean) : void {
+         if(param1 == this._tooltipEnabled)
+         {
+            return;
+         }
+         this._tooltipEnabled = param1;
+         invalidateData();
+      }
+
+      public function get textFont() : String {
+         return this._textFont;
+      }
+
+      public function set textFont(param1:String) : void {
+         if(this._textFont == param1)
+         {
+            return;
+         }
+         this._textFont = param1;
+         invalidateData();
+      }
+
+      public function get ico() : String {
+         return this._vo.ico;
+      }
+
+      public function set ico(param1:String) : void {
+         if(this._vo.ico == param1)
+         {
+            return;
+         }
+         this._vo.ico = param1;
+         invalidateData();
+      }
+
+      public function get iconPosition() : String {
+         return this._iconPosition;
+      }
+
+      public function set iconPosition(param1:String) : void {
+         if(param1 == this._iconPosition)
+         {
+            return;
+         }
+         this._iconPosition = param1;
+         invalidate(INVALID_POSITION);
+      }
+
+      public function get textColorType() : String {
+         return this._textColorType;
+      }
+
+      public function set textColorType(param1:String) : void {
+         this._textColorType = param1;
+         invalidateData();
+      }
+
+      public function get textSize() : Number {
+         return this._textSize;
+      }
+
+      public function set textSize(param1:Number) : void {
+         this._textSize = param1;
+         invalidateData();
+      }
+
+      public function get textYOffset() : Number {
+         return this._textYOffset;
+      }
+
+      public function set textYOffset(param1:Number) : void {
+         this._textYOffset = param1;
+         invalidateData();
+      }
 
       override protected function configUI() : void {
          var _loc2_:DisplayObject = null;
@@ -148,104 +320,6 @@ package net.wg.gui.components.controls
          this.hitMc.mouseEnabled = true;
          this.hitArea = this.hitMc;
          this.updateEnabledMode();
-      }
-
-      override public function dispose() : void {
-         removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
-         removeEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
-         removeEventListener(MouseEvent.MOUSE_DOWN,this.onPressHandler);
-         this._owner = null;
-      }
-
-      private function onRollOverHandler(param1:MouseEvent) : void {
-         if((this._owner) && (this.checkHitTest(this._owner)))
-         {
-            this._owner.dispatchEvent(new MouseEvent(MouseEvent.ROLL_OUT));
-         }
-         this.showTooltip();
-      }
-
-      private function onRollOutHandler(param1:MouseEvent) : void {
-         this.hideTooltip();
-         if((this._owner) && (this.checkHitTest(this._owner)))
-         {
-            this._owner.dispatchEvent(new MouseEvent(MouseEvent.ROLL_OVER));
-         }
-      }
-
-      private function checkHitTest(param1:InteractiveObject) : Boolean {
-         var _loc3_:Point = null;
-         var _loc2_:* = false;
-         if(param1)
-         {
-            _loc3_ = new Point(param1.mouseX,param1.mouseY);
-            _loc3_ = param1.localToGlobal(_loc3_);
-            _loc2_ = param1.hitTestPoint(_loc3_.x,_loc3_.y);
-         }
-         return _loc2_;
-      }
-
-      private function onPressHandler(param1:MouseEvent) : void {
-         this.hideTooltip();
-      }
-
-      public function showTooltip() : void {
-         var _loc3_:String = null;
-         var _loc4_:String = null;
-         var _loc5_:String = null;
-         var _loc6_:String = null;
-         var _loc1_:* = "";
-         var _loc2_:ILocale = App.utils.locale;
-         if(this._actionPrc > 0 && !(this._price == 0))
-         {
-            _loc3_ = App.utils.icons.getIcon16StrPath(this.ico);
-            _loc4_ = this._ico == IconText.GOLD?_loc2_.gold(Math.abs(this._price)):_loc2_.integer(Math.abs(this._price));
-            _loc5_ = this._ico == IconText.GOLD?_loc2_.gold(Math.abs(this._defPrice)):_loc2_.integer(Math.abs(this._defPrice));
-            _loc4_ = _loc4_ + (" " + _loc3_);
-            _loc5_ = _loc5_ + (" " + _loc3_);
-            _loc1_ = new ComplexTooltipHelper().addHeader(_loc2_.makeString(TOOLTIPS.ACTIONPRICE_HEADER)).addBody(_loc2_.makeString(TOOLTIPS.ACTIONPRICE_BODY,
-               {
-                  "oldPrice":_loc5_,
-                  "newPrice":_loc4_
-               }
-            )).make();
-         }
-         else
-         {
-            if(this._actionPrc < 0 && !(this._itemType == ""))
-            {
-               _loc6_ = _loc2_.makeString(TOOLTIPS.actionprice_sell_type(this._itemType));
-               _loc1_ = new ComplexTooltipHelper().addHeader(_loc2_.makeString(TOOLTIPS.ACTIONPRICE_SELL_HEADER)).addBody(_loc2_.makeString(TOOLTIPS.ACTIONPRICE_SELL_BODY,{"deviceName":_loc6_})).make();
-            }
-         }
-         if(_loc1_.length > 0)
-         {
-            App.toolTipMgr.showComplex(_loc1_);
-         }
-      }
-
-      private function getTextColor(param1:String) : uint {
-         var _loc2_:uint = 16777215;
-         switch(param1)
-         {
-            case IconText.GOLD:
-               _loc2_ = this.COLOR_GOLD;
-               break;
-            case IconText.CREDITS:
-               _loc2_ = this.COLOR_CREDITS;
-               break;
-            case IconText.ELITE_XP:
-               _loc2_ = this.COLOR_ELITE_XP;
-               break;
-            case IconText.FREE_XP:
-               _loc2_ = this.COLOR_FREE_XP;
-               break;
-         }
-         return _loc2_;
-      }
-
-      public function hideTooltip() : void {
-         App.toolTipMgr.hide();
       }
 
       override protected function draw() : void {
@@ -269,6 +343,38 @@ package net.wg.gui.components.controls
          {
             this.updatePositions();
          }
+      }
+
+      private function checkHitTest(param1:InteractiveObject) : Boolean {
+         var _loc3_:Point = null;
+         var _loc2_:* = false;
+         if(param1)
+         {
+            _loc3_ = new Point(param1.mouseX,param1.mouseY);
+            _loc3_ = param1.localToGlobal(_loc3_);
+            _loc2_ = param1.hitTestPoint(_loc3_.x,_loc3_.y);
+         }
+         return _loc2_;
+      }
+
+      private function getTextColor(param1:String) : uint {
+         var _loc2_:uint = 16777215;
+         switch(param1)
+         {
+            case IconsTypes.GOLD:
+               _loc2_ = this.COLOR_GOLD;
+               break;
+            case IconsTypes.CREDITS:
+               _loc2_ = this.COLOR_CREDITS;
+               break;
+            case IconsTypes.ELITE_XP:
+               _loc2_ = this.COLOR_ELITE_XP;
+               break;
+            case IconsTypes.FREE_XP:
+               _loc2_ = this.COLOR_FREE_XP;
+               break;
+         }
+         return _loc2_;
       }
 
       private function updateState() : void {
@@ -305,7 +411,7 @@ package net.wg.gui.components.controls
          {
             this.defBgPos = this.bg.x;
          }
-         var _loc1_:Boolean = this._actionPrc < 0 && !(this.alertVisibleInNextStates.indexOf(this._state) == -1);
+         var _loc1_:Boolean = this._vo.actionPrc < 0 && !(this.alertVisibleInNextStates.indexOf(this._state) == -1);
          if(this._iconPosition == "left")
          {
             this.iconText.x = 0;
@@ -347,15 +453,15 @@ package net.wg.gui.components.controls
          var _loc2_:ILocale = null;
          var _loc3_:String = null;
          var _loc4_:TextFormat = null;
-         if(!(this._ico == "") && (this.iconText))
+         if(!(this._vo.ico == "") && (this.iconText))
          {
-            this.iconText.icon = this._ico;
+            this.iconText.icon = this._vo.ico;
             this.iconText.validateNow();
          }
          var _loc1_:uint = 0;
          if(this._textColorType == TEXT_COLOR_TYPE_ICON)
          {
-            _loc1_ = this.getTextColor(this._ico);
+            _loc1_ = this.getTextColor(this._vo.ico);
          }
          else
          {
@@ -368,17 +474,24 @@ package net.wg.gui.components.controls
          else
          {
             _loc2_ = App.utils.locale;
-            this.textField.textColor = _loc1_;
             _loc3_ = "";
-            if(this._useSign)
+            if(this._vo.useSign)
             {
-               _loc3_ = this._externalSign != ""?this._externalSign:this._price == 0?"":this._price > 0?"+":"";
+               if(this._vo.externalSign == "")
+               {
+                  _loc3_ = this._vo.price > 0?"+":"";
+               }
+               else
+               {
+                  _loc3_ = this._vo.externalSign;
+               }
             }
-            this.textField.text = _loc3_ + (this._ico == IconText.GOLD?_loc2_.gold(this._price):_loc2_.integer(this._price));
+            this.textField.text = _loc3_ + (this._vo.ico == IconsTypes.GOLD?_loc2_.gold(this._vo.price):_loc2_.integer(this._vo.price));
             _loc4_ = this.textField.getTextFormat();
             _loc4_.font = this._textFont;
             _loc4_.size = this._textSize;
             this.textField.setTextFormat(_loc4_);
+            this.textField.textColor = _loc1_;
             this.textField.width = this.textField.textWidth + 3;
             if(this.textFieldYStartPos != -1)
             {
@@ -446,136 +559,6 @@ package net.wg.gui.components.controls
          this.updateEnabledMode();
       }
 
-      public function setup(param1:UIComponent) : void {
-         this._owner = param1;
-         this._owner.mouseChildren = true;
-         if(param1  is  ListItemRenderer)
-         {
-            focusable = false;
-            focusTarget = param1;
-         }
-         this.updateEnabledMode();
-      }
-
-      public function set state(param1:String) : void {
-         this._state = param1;
-         this.textFieldYStartPos = -1;
-         invalidateState();
-      }
-
-      public function get state() : String {
-         return this._state;
-      }
-
-      public function set tooltipEnabled(param1:Boolean) : void {
-         if(param1 == this._tooltipEnabled)
-         {
-            return;
-         }
-         this._tooltipEnabled = param1;
-         invalidateData();
-      }
-
-      public function get tooltipEnabled() : Boolean {
-         return this._tooltipEnabled;
-      }
-
-      public function setData(param1:Number, param2:Number, param3:Number, param4:String="", param5:Boolean=false, param6:String="", param7:String="") : void {
-         this._actionPrc = isNaN(param1)?0:param1;
-         this._price = param2;
-         this._defPrice = param3;
-         if(param4 != "")
-         {
-            this._ico = param4;
-         }
-         this._useSign = param5;
-         this._itemType = param6;
-         this._externalSign = param7;
-         this.visible = !(this._actionPrc == 0) && !(this._price == this._defPrice);
-         if(this.visible)
-         {
-            invalidateData();
-         }
-      }
-
-      public function set ico(param1:String) : void {
-         if(param1 == this._ico || param1 == "")
-         {
-            return;
-         }
-         this._ico = param1;
-         invalidateData();
-      }
-
-      public function get ico() : String {
-         return this._ico;
-      }
-
-      public function get textFont() : String {
-         return this._textFont;
-      }
-
-      public function set textFont(param1:String) : void {
-         if(this._textFont == param1)
-         {
-            return;
-         }
-         this._textFont = param1;
-         invalidateData();
-      }
-
-      public function set iconPosition(param1:String) : void {
-         if(param1 == this._iconPosition)
-         {
-            return;
-         }
-         this._iconPosition = param1;
-         invalidate(INVALID_POSITION);
-      }
-
-      public function get iconPosition() : String {
-         return this._iconPosition;
-      }
-
-      public function set textColorType(param1:String) : void {
-         this._textColorType = param1;
-         invalidateData();
-      }
-
-      public function get textColorType() : String {
-         return this._textColorType;
-      }
-
-      public function set textSize(param1:Number) : void {
-         this._textSize = param1;
-         invalidateData();
-      }
-
-      public function get textSize() : Number {
-         return this._textSize;
-      }
-
-      public function set textYOffset(param1:Number) : void {
-         this._textYOffset = param1;
-         invalidateData();
-      }
-
-      public function get textYOffset() : Number {
-         return this._textYOffset;
-      }
-
-      override public function set enabled(param1:Boolean) : void {
-         if(param1 == super.enabled)
-         {
-            return;
-         }
-         super.enabled = param1;
-         this.alpha = param1?1:0.8;
-         this.updateEnabledMode();
-         tabEnabled = !enabled?false:_focusable;
-         invalidateData();
-      }
-
       private function updateEnabledMode() : void {
          var _loc1_:* = false;
          if(((this._owner) && (this._owner.enabled)) && (this.enabled) && this._owner  is  Button)
@@ -587,8 +570,24 @@ package net.wg.gui.components.controls
          this.hitMc.buttonMode = _loc1_;
       }
 
-      override public function toString() : String {
-         return "[WG ActionPrice " + name + "]";
+      private function onRollOverHandler(param1:MouseEvent) : void {
+         if((this._owner) && (this.checkHitTest(this._owner)))
+         {
+            this._owner.dispatchEvent(new MouseEvent(MouseEvent.ROLL_OUT));
+         }
+         this.showTooltip();
+      }
+
+      private function onRollOutHandler(param1:MouseEvent) : void {
+         this.hideTooltip();
+         if((this._owner) && (this.checkHitTest(this._owner)))
+         {
+            this._owner.dispatchEvent(new MouseEvent(MouseEvent.ROLL_OVER));
+         }
+      }
+
+      private function onPressHandler(param1:MouseEvent) : void {
+         this.hideTooltip();
       }
    }
 

@@ -72,7 +72,7 @@ package net.wg.gui.components.controls
 
       private var isTextFilterChanged:Boolean;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          nextBtn.removeEventListener(ButtonEvent.DRAG_OUT,this.onNextBtnOut);
          prevBtn.removeEventListener(ButtonEvent.DRAG_OUT,this.onPrevBtnOut);
          nextBtn.removeEventListener(ButtonEvent.DRAG_OVER,this.onNextBtnOver);
@@ -87,7 +87,7 @@ package net.wg.gui.components.controls
          this.border = null;
          this._textFilter.splice(0,this._textFilter.length);
          this._textFilter = null;
-         super.dispose();
+         super.onDispose();
       }
 
       override protected function initialize() : void {
@@ -275,6 +275,7 @@ package net.wg.gui.components.controls
          prevBtn.addEventListener(ButtonEvent.DRAG_OUT,this.onPrevBtnOut);
          nextBtn.addEventListener(ButtonEvent.DRAG_OVER,this.onNextBtnOver);
          prevBtn.addEventListener(ButtonEvent.DRAG_OVER,this.onPrevBtnOver);
+         prevBtn.mouseEnabled = nextBtn.mouseEnabled = this.enabled;
          textField.selectable = this.enabled;
          nextBtn.repeatInterval = prevBtn.repeatInterval = 40;
          nextBtn.repeatDelay = prevBtn.repeatDelay = 200;
@@ -321,6 +322,7 @@ package net.wg.gui.components.controls
 
       override protected function updateAfterStateChange() : void {
          invalidateSize();
+         this.updateLabel();
          if(!(constraints == null) && !constraintsDisabled)
          {
             constraints.updateElement("textField",textField);

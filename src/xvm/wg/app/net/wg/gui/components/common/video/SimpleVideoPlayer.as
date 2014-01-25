@@ -306,8 +306,8 @@ package net.wg.gui.components.common.video
          return this._currentSubtitle;
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          App.utils.scheduler.cancelTask(invalidate);
          if(this.ncConnection)
          {

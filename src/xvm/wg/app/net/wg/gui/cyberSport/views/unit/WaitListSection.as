@@ -12,6 +12,7 @@ package net.wg.gui.cyberSport.views.unit
    import net.wg.gui.events.ListEventEx;
    import flash.events.MouseEvent;
    import net.wg.data.constants.Values;
+   import scaleform.gfx.TextFieldEx;
    import scaleform.clik.utils.Padding;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.gui.cyberSport.controls.events.CSComponentEvent;
@@ -33,6 +34,8 @@ package net.wg.gui.cyberSport.views.unit
 
       private static const CANDIDATE_STATE:Object;
 
+      private static const BOTTOM:String = "bottom";
+
       public var lblCandidatesHeader:TextField;
 
       public var btnInviteFriend:SoundButtonEx;
@@ -49,7 +52,7 @@ package net.wg.gui.cyberSport.views.unit
 
       private var candidatesDP:CandidatesDataProvider;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.btnCloseRoom.removeEventListener(ButtonEvent.CLICK,this.onChangeStateClick);
          this.btnInviteFriend.removeEventListener(ButtonEvent.CLICK,this.onInviteFriendClick);
          this.candidates.removeEventListener(ListEventEx.ITEM_CLICK,this.onListItemClick);
@@ -65,7 +68,7 @@ package net.wg.gui.cyberSport.views.unit
             this._unitData.dispose();
             this._unitData = null;
          }
-         super.dispose();
+         super.onDispose();
       }
 
       public function updateUnitStatus(param1:Boolean, param2:String) : void {
@@ -102,6 +105,7 @@ package net.wg.gui.cyberSport.views.unit
          this.lblTeamAvailability.addEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
          this.btnCloseRoom.addEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
          this.btnCloseRoom.addEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
+         TextFieldEx.setVerticalAlign(this.lblTeamAvailability,BOTTOM);
       }
 
       override protected function draw() : void {

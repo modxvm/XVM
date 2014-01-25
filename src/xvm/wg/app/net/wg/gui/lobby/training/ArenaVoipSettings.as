@@ -35,14 +35,14 @@ package net.wg.gui.lobby.training
          this.voiceChatDD.addEventListener(ListEvent.INDEX_CHANGE,this.handleChange,false,0,true);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          App.utils.scheduler.cancelTask(this.stopCoolDownUseCommonVoiceChat);
          this.voiceChatDD.removeEventListener(ListEvent.INDEX_CHANGE,this.handleChange,false);
          this.voiceChatDD.dispose();
          this.voiceChatDD = null;
          this.textField.dispose();
          this.textField = null;
-         super.dispose();
+         super.onDispose();
       }
 
       override public function set enabled(param1:Boolean) : void {

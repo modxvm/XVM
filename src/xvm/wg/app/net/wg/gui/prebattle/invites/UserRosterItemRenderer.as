@@ -97,7 +97,7 @@ package net.wg.gui.prebattle.invites
             return;
          }
          this.label = data.displayName;
-         if((data.hasOwnProperty("chatRoster")) && (MessengerUtils.isIgnored(data)))
+         if((data.hasOwnProperty("chatRoster")) && ((MessengerUtils.isIgnored(data)) || (MessengerUtils.isMuted(data))))
          {
             this.status.gotoAndPlay("ignored");
             this.status.visible = true;
@@ -163,7 +163,7 @@ package net.wg.gui.prebattle.invites
          this.updateVoiceWave();
          if((data.hasOwnProperty("colors")) && (data.hasOwnProperty("online")))
          {
-            if(_loc2_)
+            if((_loc2_) || (_loc1_))
             {
                if(data.colors[1] != null)
                {

@@ -8,22 +8,28 @@ package net.wg.gui.lobby.hangar.tcarousel
    import net.wg.gui.components.controls.SoundButton;
    import net.wg.gui.components.controls.DropDownImageText;
    import net.wg.gui.components.controls.CheckBox;
+   import __AS3__.vec.Vector;
+   import scaleform.clik.interfaces.IListItemRenderer;
+   import net.wg.gui.lobby.hangar.tcarousel.helper.VehicleCarouselVOManager;
    import flash.display.DisplayObject;
-   import net.wg.utils.IHelpLayout;
-   import net.wg.data.constants.Directions;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
    import scaleform.clik.events.ListEvent;
    import flash.events.Event;
-   import scaleform.clik.data.ListData;
-   import scaleform.clik.interfaces.IListItemRenderer;
-   import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import net.wg.gui.lobby.hangar.tcarousel.data.VehicleCarouselVO;
+   import scaleform.clik.constants.InvalidationType;
+   import net.wg.utils.IHelpLayout;
+   import net.wg.data.constants.Directions;
    import flash.events.MouseEvent;
    import net.wg.gui.events.ListEventEx;
    import net.wg.data.constants.Tooltips;
    import scaleform.clik.events.ButtonEvent;
+   import net.wg.gui.lobby.hangar.tcarousel.helper.VehicleCarouselVOBuilder;
    import scaleform.clik.data.DataProvider;
    import net.wg.utils.INations;
    import net.wg.infrastructure.interfaces.IContextItem;
    import net.wg.data.components.UserContextItem;
+   import net.wg.data.VO.SeparateItem;
+   import scaleform.clik.data.ListData;
    import net.wg.gui.events.ContextMenuEvent;
 
 
@@ -53,9 +59,14 @@ package net.wg.gui.lobby.hangar.tcarousel
          this.tankFilter = this.vehicleFilters.tankFilter;
          this.checkBoxToMain = this.vehicleFilters.checkBoxToMain;
          bg = this.bg1;
+         this._currentShowByCompactDescription = [];
       }
 
       public static const FILTERS_CAROUSEL_OFFSET:Number = 15;
+
+      public static const SHOW_VEHICLE_STATS:String = "showVehicleStatistics";
+
+      public static const VO_VEHICLES_IS_INVALID:String = "vo_vehicles_is_invalid";
 
       public var vehicleFilters:TankCarouselFilters;
 
@@ -79,28 +90,227 @@ package net.wg.gui.lobby.hangar.tcarousel
 
       private var checkBoxToMain:CheckBox;
 
-      private var slotPricePrc:Number = 0;
+      private var _slotPriceActionPrc:Number = 0;
 
-      private var slotPrice:Number = 0;
+      private var _slotPrice:Number = 0;
 
-      private var defSlotPrice:Number = 0;
+      private var _defSlotPrice:Number = 0;
 
-      private var selectedTankID:String = "";
+      private var _selectedVehicleCompactID:Number = -1;
 
-      private var __availableTanksCount:Number = 0;
+      private var _availableSlotsForBuyVehicle:Number = 0;
 
-      private var __allTanksCount:Number = 0;
+      private var _updateShowByCompactDescription:Array = null;
 
-      private var __emptySlotsCountForByTank:Number = 0;
+      private var _currentShowByCompactDescription:Array = null;
 
-      private var firstRun:Boolean = true;
+      private var _currentShowRendersByIndex:Vector.<IListItemRenderer> = null;
+
+      private var _createdRendersListByCompDescr:Object = null;
+
+      private var _createdRendersListByCompDescrLength:Number = 0;
+
+      private var _vehiclesVOManager:VehicleCarouselVOManager = null;
+
+      private var _slotForBuySlot:IListItemRenderer = null;
+
+      private var _slotForBuyVehicle:IListItemRenderer = null;
+
+      private var _updateInProgress:Boolean = false;
 
       private var _rendererHelpLayout:DisplayObject;
 
       private var _isShowHelpLayout:Boolean = false;
 
-      public function onFilterChanged() : void {
-         setVehiclesFilterS(this.filterData.nation,this.filterData.tankType,this.filterData.ready);
+      private var skipScrollToIndex:Boolean = false;
+
+      override public function scrollToIndex(param1:uint) : void {
+         var _loc2_:uint = 0;
+         if((container) && (_renderers))
+         {
+            _loc2_ = Math.floor(_visibleSlots / 2);
+            _loc2_ = _visibleSlots % 2 == 1?_loc2_:_loc2_-1;
+            currentFirstRenderer = Math.min(_renderers.length - _visibleSlots,Math.max(0,param1 - _loc2_));
+            goToFirstRenderer();
+         }
+      }
+
+      public function as_populate() : void {
+          
+      }
+
+      public function as_dispose() : void {
+         var _loc1_:String = null;
+         var _loc2_:IListItemRenderer = null;
+         var _loc3_:IDisposable = null;
+         this.tankFilter.removeEventListener(ListEvent.INDEX_CHANGE,this.onVehicleTypeFilterChanged);
+         this.checkBoxToMain.removeEventListener(Event.SELECT,this.onFilterCheckBoxChanged);
+         this.nationFilter.removeEventListener(ListEvent.INDEX_CHANGE,this.onNationFilterChanged);
+         App.contextMenuMgr.hide();
+         this.vehicleFilters.dispose();
+         this.vehicleFilters = null;
+         this.dragHitArea1 = null;
+         this.leftArrow1 = null;
+         this.rightArrow1 = null;
+         this.renderersMask1 = null;
+         this.bg1 = null;
+         for (_loc1_ in this.filterData)
+         {
+            delete this.filterData[[_loc1_]];
+         }
+         this.filterData = null;
+         this.nationFilter = null;
+         this.tankFilter = null;
+         this.checkBoxToMain = null;
+         this._rendererHelpLayout = null;
+         this._vehiclesVOManager.clear();
+         this._vehiclesVOManager = null;
+         while(container.numChildren > 0)
+         {
+            _loc2_ = IListItemRenderer(container.getChildAt(container.numChildren-1));
+            cleanUpRenderer(_loc2_);
+            _loc3_ = _loc2_ as IDisposable;
+            _loc3_.dispose();
+            container.removeChild(_loc2_ as DisplayObject);
+         }
+         if(this._createdRendersListByCompDescr)
+         {
+            this._createdRendersListByCompDescr = null;
+         }
+         this._createdRendersListByCompDescrLength = 0;
+         this.clearArrays();
+         if(this._slotForBuySlot)
+         {
+            this._slotForBuySlot = null;
+         }
+         if(this._slotForBuyVehicle)
+         {
+            this._slotForBuyVehicle = null;
+         }
+         this._currentShowByCompactDescription = null;
+         this._currentShowRendersByIndex = null;
+         super.onDispose();
+      }
+
+      public function as_setCarouselFilter(param1:Object) : void {
+         this.filterData = param1;
+         this.filterDataInvalid = true;
+         this.updateFiltersData();
+      }
+
+      public function as_setParams(param1:Object) : void {
+         var _loc4_:IListItemRenderer = null;
+         var _loc5_:VehicleCarouselVO = null;
+         var _loc6_:DisplayObject = null;
+         this._slotPrice = param1.slotPrice;
+         this._defSlotPrice = param1.defSlotPrice;
+         this._slotPriceActionPrc = param1.slotPriceActionPrc;
+         this._selectedVehicleCompactID = param1.selectedTankID;
+         var _loc2_:Number = param1.freeSlots;
+         if(this._slotForBuySlot != null)
+         {
+            this.updateSlotForBuySlot(true);
+         }
+         var _loc3_:* = !(_loc2_ == this._availableSlotsForBuyVehicle);
+         if(this._slotForBuyVehicle != null)
+         {
+            this._availableSlotsForBuyVehicle = _loc2_;
+            _totalRenderers = this._availableSlotsForBuyVehicle > 0?this._currentShowRendersByIndex.length + 2:this._currentShowRendersByIndex.length + 1;
+            _loc3_ = (_loc3_) && (this._availableSlotsForBuyVehicle <= 0 || _loc2_ <= 0);
+            if(_loc3_)
+            {
+               this.removeEmptySlots();
+               _loc4_ = getRendererAt(_renderers.length-1,0);
+               _loc5_ = (_loc4_ as TankCarouselItemRenderer).dataVO;
+               if(_loc5_.buySlot)
+               {
+                  _renderers.splice(_renderers.length-1,1);
+               }
+               if(this._availableSlotsForBuyVehicle <= 0)
+               {
+                  _loc4_ = getRendererAt(_renderers.length-1,0);
+                  _loc5_ = (_loc4_ as TankCarouselItemRenderer).dataVO;
+                  if(_loc5_.buyTank)
+                  {
+                     _renderers.splice(_renderers.length-1,1);
+                     _loc4_.x = 0;
+                     _loc6_ = _loc4_ as DisplayObject;
+                     _loc6_.visible = false;
+                  }
+               }
+               else
+               {
+                  this._slotForBuyVehicle.x = padding.horizontal + _renderers.length * slotWidth;
+                  _renderers.push(this._slotForBuyVehicle);
+                  _loc6_ = this._slotForBuyVehicle as DisplayObject;
+                  _loc6_.visible = true;
+               }
+               this._slotForBuySlot.x = padding.horizontal + _renderers.length * slotWidth;
+               _renderers.push(this._slotForBuySlot);
+               this.addEmptySlots();
+               invalidateSize();
+            }
+            else
+            {
+               this.updateSlotForBuyVehicle(true);
+            }
+         }
+         else
+         {
+            this._availableSlotsForBuyVehicle = _loc2_;
+            if(!_renderers)
+            {
+               return;
+            }
+            this.removeEmptySlots();
+            this.removeAdvancedSlots();
+            this.addAdvancedSlots();
+            this.addEmptySlots();
+            invalidateSize();
+         }
+         if(this._currentShowByCompactDescription)
+         {
+            this.selectedIndex = this._currentShowByCompactDescription.indexOf(this._selectedVehicleCompactID);
+            if(!this.skipScrollToIndex)
+            {
+               this.scrollToIndex(this.selectedIndex);
+            }
+            this.skipScrollToIndex = false;
+         }
+         if(this._createdRendersListByCompDescr)
+         {
+            _loc4_ = this._createdRendersListByCompDescr[this._selectedVehicleCompactID] as IListItemRenderer;
+            if(_loc4_)
+            {
+               _loc4_.selected = true;
+               selectedItemRenderer = _loc4_;
+            }
+         }
+      }
+
+      public function as_updateVehicles(param1:Object, param2:Boolean) : void {
+         this._updateInProgress = true;
+         if(!this._vehiclesVOManager)
+         {
+            this._vehiclesVOManager = new VehicleCarouselVOManager();
+         }
+         if(param2)
+         {
+            this._vehiclesVOManager.setData(param1);
+         }
+         else
+         {
+            this._vehiclesVOManager.updateData(param1);
+         }
+         invalidate(VO_VEHICLES_IS_INVALID);
+      }
+
+      public function as_showVehicles(param1:Array) : void {
+         this._updateShowByCompactDescription = param1;
+         if(!this._updateInProgress)
+         {
+            invalidate(InvalidationType.RENDERERS);
+         }
       }
 
       public function showHelpLayout() : void {
@@ -121,114 +331,55 @@ package net.wg.gui.lobby.hangar.tcarousel
          _loc1_.destroy(this._rendererHelpLayout);
       }
 
-      public function normalizeData(param1:Object) : Object {
-         var _loc2_:uint = 0;
-         var _loc3_:Object = null;
-         if(param1)
+      public function onFilterChanged() : void {
+         setVehiclesFilterS(this.filterData.nation,this.filterData.tankType,this.filterData.ready);
+      }
+
+      override public function get selectedIndex() : int {
+         return _selectedIndex;
+      }
+
+      override public function set selectedIndex(param1:int) : void {
+         var _loc2_:IListItemRenderer = null;
+         if(selectedItemRenderer)
          {
-            if(param1.slots)
+            selectedItemRenderer.selected = false;
+         }
+         if(param1 >= 0)
+         {
+            _loc2_ = this._currentShowRendersByIndex[param1];
+            if(_loc2_)
             {
-               _loc2_ = 0;
-               while(_loc2_ < param1.slots.length)
+               _loc2_.selected = true;
+               selectedItemRenderer = _loc2_;
+            }
+            else
+            {
+               selectedItemRenderer = null;
+            }
+         }
+         else
+         {
+            selectedItemRenderer = null;
+         }
+         _selectedIndex = param1;
+      }
+
+      override public function set enabled(param1:Boolean) : void {
+         var _loc2_:String = null;
+         var _loc3_:IListItemRenderer = null;
+         super.enabled = param1;
+         if(this._createdRendersListByCompDescr != null)
+         {
+            for (_loc2_ in this._createdRendersListByCompDescr)
+            {
+               _loc3_ = this._createdRendersListByCompDescr[_loc2_];
+               if(_loc3_ != null)
                {
-                  _loc3_ = param1.slots[_loc2_];
-                  _loc3_.data = _loc3_.data != undefined?_loc3_.data:0;
-                  _loc3_.id = _loc3_.id != undefined?_loc3_.id:"id_" + _loc2_;
-                  _loc3_.inventoryId = _loc3_.inventoryId != undefined?_loc3_.inventoryId:_loc2_;
-                  _loc3_.label = _loc3_.label != undefined?_loc3_.label:"";
-                  _loc3_.image = _loc3_.image != undefined?_loc3_.image:"";
-                  _loc3_.nation = _loc3_.nation != undefined?_loc3_.nation:1;
-                  _loc3_.level = _loc3_.level != undefined?_loc3_.level:1;
-                  _loc3_.stat = _loc3_.stat != undefined?_loc3_.stat:"";
-                  _loc3_.stateLevel = _loc3_.stateLevel != undefined?_loc3_.stateLevel:"";
-                  _loc3_.doubleXPReceived = _loc3_.doubleXPReceived != undefined?_loc3_.doubleXPReceived:0;
-                  _loc3_.compactDescr = _loc3_.compactDescr != undefined?_loc3_.compactDescr:0;
-                  _loc3_.favorite = _loc3_.favorite != undefined?_loc3_.favorite:false;
-                  _loc3_.canSell = _loc3_.canSell != undefined?_loc3_.canSell:false;
-                  _loc3_.clanLock = _loc3_.clanLock != undefined?_loc3_.clanLock:-1;
-                  _loc3_.elite = _loc3_.elite != undefined?_loc3_.elite:false;
-                  _loc3_.premium = _loc3_.premium != undefined?_loc3_.premium:false;
-                  _loc3_.tankType = _loc3_.tankType != undefined?_loc3_.tankType:"";
-                  _loc3_.exp = _loc3_.exp != undefined?_loc3_.exp:0;
-                  _loc3_.current = _loc3_.current != undefined?_loc3_.current:_loc2_;
-                  _loc3_.enabled = _loc3_.enabled != undefined?_loc3_.enabled:false;
-                  _loc3_.empty = _loc3_.empty != undefined?_loc3_.empty:null;
-                  _loc3_.buyTank = _loc3_.buyTank != undefined?_loc3_.buyTank:false;
-                  _loc3_.buySlot = _loc3_.buySlot != undefined?_loc3_.buySlot:false;
-                  _loc3_.availableSlots = _loc3_.avalibleSlots != undefined?_loc3_.avalibleSlots:0;
-                  _loc2_++;
+                  _loc3_.enabled = enabled;
                }
             }
          }
-         return param1;
-      }
-
-      public function as_vehiclesResponse(param1:Object) : void {
-         var _loc2_:Object = this.normalizeData(param1);
-         this.setData(_loc2_);
-      }
-
-      public function as_setCarouselFilter(param1:Object) : void {
-         this.filterData = param1;
-         this.filterDataInvalid = true;
-         this.updateFiltersData();
-      }
-
-      public function as_changeVehicleByCompDescr(param1:Number) : void {
-          
-      }
-
-      public function as_populate() : void {
-          
-      }
-
-      public function as_dispose() : void {
-         var _loc1_:String = null;
-         this.tankFilter.removeEventListener(ListEvent.INDEX_CHANGE,this.onTankDropDownFilterChanged);
-         this.checkBoxToMain.removeEventListener(Event.SELECT,this.onFilterCheckBoxChanged);
-         this.nationFilter.removeEventListener(ListEvent.INDEX_CHANGE,this.onNatiDropDownFilterChanged);
-         App.contextMenuMgr.hide();
-         this.vehicleFilters.dispose();
-         this.vehicleFilters = null;
-         this.dragHitArea1 = null;
-         this.leftArrow1 = null;
-         this.rightArrow1 = null;
-         this.renderersMask1 = null;
-         this.bg1 = null;
-         for (_loc1_ in this.filterData)
-         {
-            delete this.filterData[[_loc1_]];
-         }
-         this.filterData = null;
-         this.nationFilter = null;
-         this.tankFilter = null;
-         this.checkBoxToMain = null;
-         this._rendererHelpLayout = null;
-         super.dispose();
-      }
-
-      public function get availableTanksCount() : Number {
-         return this.__availableTanksCount;
-      }
-
-      public function set availableTanksCount(param1:Number) : void {
-         this.__availableTanksCount = param1;
-      }
-
-      public function get allTanksCount() : Number {
-         return this.__allTanksCount;
-      }
-
-      public function set allTanksCount(param1:Number) : void {
-         this.__allTanksCount = param1;
-      }
-
-      public function get emptySlotsCountForByTank() : Number {
-         return this.__emptySlotsCountForByTank;
-      }
-
-      public function set emptySlotsCountForByTank(param1:Number) : void {
-         this.__emptySlotsCountForByTank = param1;
       }
 
       public function get disposed() : Boolean {
@@ -240,183 +391,95 @@ package net.wg.gui.lobby.hangar.tcarousel
          super.configUI();
       }
 
+      override protected function draw() : void {
+         var _loc1_:* = NaN;
+         var _loc2_:* = NaN;
+         var _loc3_:* = NaN;
+         if(isInvalid(VO_VEHICLES_IS_INVALID))
+         {
+            this.rebuildRenderers();
+            this._updateInProgress = false;
+         }
+         if((isInvalid(InvalidationType.RENDERERS)) && !(this._updateShowByCompactDescription == null))
+         {
+            clearAllAnimIntervals();
+            _loc1_ = 0;
+            _loc2_ = 0;
+            _loc3_ = 0;
+            _loc1_ = 0;
+            while(_loc1_ < this._currentShowByCompactDescription.length)
+            {
+               _loc3_ = this._currentShowByCompactDescription[_loc1_];
+               _loc2_ = this._updateShowByCompactDescription.indexOf(_loc3_);
+               if(_loc2_ == -1)
+               {
+                  this._currentShowByCompactDescription.splice(_loc1_,1);
+                  this.removeRendererFromShowByCompactDescr(_loc3_);
+               }
+               else
+               {
+                  _loc1_++;
+               }
+            }
+            if(!this._currentShowByCompactDescription)
+            {
+               this._currentShowByCompactDescription = [];
+            }
+            if(!this._currentShowRendersByIndex)
+            {
+               this._currentShowRendersByIndex = new Vector.<IListItemRenderer>();
+            }
+            if(!_renderers)
+            {
+               _renderers = new Vector.<IListItemRenderer>();
+            }
+            this.removeEmptySlots();
+            this.removeAdvancedSlots();
+            this.clearArrays();
+            _loc1_ = 0;
+            while(_loc1_ < this._updateShowByCompactDescription.length)
+            {
+               _loc3_ = this._updateShowByCompactDescription[_loc1_];
+               this._currentShowByCompactDescription[_loc1_] = _loc3_;
+               this.insertRendererToShowByNum(_loc1_,_loc3_);
+               _loc1_++;
+            }
+            while(this._updateShowByCompactDescription.length)
+            {
+               this._updateShowByCompactDescription.pop();
+            }
+            this._updateShowByCompactDescription = null;
+            this.showHideFilters();
+            this.addAdvancedSlots();
+            this.addEmptySlots();
+            this.repositionRenderers();
+            invalidateSize();
+         }
+         if(isInvalid(InvalidationType.SIZE))
+         {
+            this.showHideFilters();
+            this.updateEmptySlots();
+            updateLayout();
+         }
+         super.draw();
+      }
+
       override protected function initUIStartPosition() : void {
          this.vehicleFilters.x = contentMargin;
          this.vehicleFilters.y = contentMargin;
          super.initUIStartPosition();
       }
 
-      override protected function updateVisibleSlots() : Number {
-         var _loc1_:Number = 0;
-         if(this.availableTanksCount != this.allTanksCount)
-         {
-            _loc1_ = this.vehicleFilters.x + this.vehicleFilters.width + FILTERS_CAROUSEL_OFFSET ^ 0;
-         }
-         else
-         {
-            _loc1_ = this.vehicleFilters.x;
-            _visibleSlots = (_allowW - (_loc1_ + leftArrow.width + rightArrow.width + CAROUSEL_BUTTON_ARROW_OFFSET * 2 + contentMargin + padding.horizontal)) / slotWidth ^ 0;
-            if(_visibleSlots < _totalRenderers)
-            {
-               _loc1_ = this.vehicleFilters.x + this.vehicleFilters.width + FILTERS_CAROUSEL_OFFSET ^ 0;
-            }
-         }
-         _visibleSlots = (_allowW - (_loc1_ + leftArrow.width + rightArrow.width + CAROUSEL_BUTTON_ARROW_OFFSET * 2 + contentMargin + padding.horizontal)) / slotWidth ^ 0;
-         return _visibleSlots;
+      override protected function updateArrowsState() : void {
+         super.updateArrowsState();
       }
 
-      override protected function calculateRendererTotal(param1:Number, param2:Number) : uint {
-         var _loc3_:Number = 0;
-         _loc3_ = this.emptySlotsCountForByTank > 0?this.availableTanksCount + 2:this.availableTanksCount + 1;
-         return _loc3_;
-      }
-
-      override protected function updateLayout() : void {
-         if((initialized) && (_renderers))
-         {
-            this.showHideFilters(_visibleSlots < _totalRenderers || !(this.availableTanksCount == this.allTanksCount));
-            super.updateLayout();
-            if(this._isShowHelpLayout)
-            {
-               this.closeHelpLayout();
-               this.showHelpLayout();
-            }
-         }
-      }
-
-      override protected function draw() : void {
-         super.draw();
-      }
-
-      override protected function refreshData() : void {
-         super.refreshData();
-         if(this.firstRun)
-         {
-            scrollToIndex(Math.max(selectedIndex,0));
-            this.firstRun = false;
-         }
-      }
-
-      override protected function populateData(param1:Array) : void {
-         var _loc5_:TankCarouselItemRenderer = null;
-         var _loc6_:uint = 0;
-         var _loc7_:ListData = null;
-         var _loc2_:uint = param1.length;
-         var _loc3_:uint = _renderers.length;
-         var _loc4_:uint = 0;
-         while(_loc4_ < _loc3_)
-         {
-            _loc5_ = getRendererAt(_loc4_) as TankCarouselItemRenderer;
-            _loc6_ = _loc4_;
-            _loc7_ = new ListData(_loc6_,itemToLabel(param1[_loc4_]),_selectedIndex == _loc6_);
-            _loc5_.enabled = _loc4_ < _loc2_ && (enabled);
-            _loc5_.dragEnabled = dragEnabled;
-            _loc5_.setListData(_loc7_);
-            _loc5_.setData(_loc4_ >= _loc2_?this.getEmptyRendererData():param1[_loc4_]);
-            _loc5_.validateNow();
-            _loc4_++;
-         }
-         this.updateArrowsState();
-      }
-
-      override protected function createdEmptyRenderers() : void {
-         var _loc1_:uint = 0;
-         var _loc2_:TankCarouselItemRenderer = null;
-         var _loc3_:uint = 0;
-         var _loc4_:* = NaN;
-         var _loc5_:* = 0;
-         if(_renderers)
-         {
-            _loc3_ = getEmptySlotsNumForShow();
-            _loc4_ = padding.left + padding.right;
-            _loc1_ = _renderers.length;
-            _loc5_ = _loc1_;
-            while(_loc5_ < _loc1_ + _loc3_)
-            {
-               _loc2_ = createRenderer(_loc5_) as TankCarouselItemRenderer;
-               if(_loc2_ == null)
-               {
-                  break;
-               }
-               _loc2_.x = _loc4_ + _loc5_ * (slotImageWidth + _loc4_);
-               _loc2_.dragEnabled = dragEnabled;
-               _loc2_.setListData(new ListData(_loc5_));
-               _loc2_.setData(this.getEmptyRendererData());
-               _renderers.push(_loc2_);
-               container.addChild(_loc2_ as DisplayObject);
-               _loc2_.validateNow();
-               _loc5_++;
-            }
-         }
-      }
-
-      override protected function clearEmptyRenderers() : void {
-         var _loc1_:IListItemRenderer = null;
-         var _loc2_:uint = 0;
-         var _loc3_:DisplayObject = null;
-         var _loc4_:IDisposable = null;
-         var _loc5_:* = 0;
-         if(_renderers)
-         {
-            _loc2_ = _renderers.length;
-            _loc5_ = _loc2_-1;
-            while(_loc5_ >= 0)
-            {
-               _loc1_ = getRendererAt(_loc5_);
-               if(!(_loc1_ == null) && (TankCarouselItemRenderer(_loc1_).empty))
-               {
-                  cleanUpRenderer(_loc1_);
-                  _loc4_ = _loc1_ as IDisposable;
-                  _loc4_.dispose();
-                  _loc3_ = _loc1_ as DisplayObject;
-                  if(container.contains(_loc3_))
-                  {
-                     container.removeChild(_loc3_);
-                  }
-                  _loc1_ = null;
-                  _loc3_ = null;
-                  _loc4_ = null;
-                  _renderers.splice(_loc5_,1);
-               }
-               _loc5_--;
-            }
-         }
-      }
-
-      override protected function getEmptyRendererData() : Object {
-         var _loc1_:Object =
-            {
-               "data":-1,
-               "id":"",
-               "inventoryId":-1,
-               "label":"",
-               "image":"",
-               "nation":0,
-               "level":0,
-               "stat":"",
-               "stateLevel":"",
-               "doubleXPReceived":0,
-               "compactDescr":0,
-               "favorite":false,
-               "canSell":false,
-               "clanLock":-1,
-               "elite":false,
-               "premium":false,
-               "tankType":"",
-               "exp":0,
-               "current":0,
-               "enabled":true,
-               "empty":true,
-               "buyTank":false,
-               "buySlot":false,
-               "avalibleSlots":0
-            }
-         ;
-         return _loc1_;
+      override protected function setupRenderer(param1:IListItemRenderer) : void {
+         super.setupRenderer(param1);
       }
 
       override protected function handleMouseWheel(param1:MouseEvent) : void {
-         if((enabled) && (dragHitArea.hitTestPoint(stage.mouseX,stage.mouseY)) && !isPreDragging)
+         if((enabled) && (allowDrag) && (dragHitArea.hitTestPoint(stage.mouseX,stage.mouseY)) && !isPreDragging)
          {
             super.handleMouseWheel(param1);
          }
@@ -428,8 +491,8 @@ package net.wg.gui.lobby.hangar.tcarousel
          {
             return;
          }
-         var _loc2_:Object = param1.itemData;
-         if(TankCarouselItemRenderer(param1.itemRenderer).empty)
+         var _loc2_:VehicleCarouselVO = param1.itemData as VehicleCarouselVO;
+         if(_loc2_.empty)
          {
             return;
          }
@@ -463,29 +526,25 @@ package net.wg.gui.lobby.hangar.tcarousel
             isMoving = false;
             return;
          }
-         var _loc2_:IListItemRenderer = param1.currentTarget as IListItemRenderer;
-         var _loc3_:Number = _loc2_.index;
-         if(_loc3_ > dataProvider.length-1)
-         {
-            return;
-         }
-         var _loc4_:Object = dataProvider[_loc2_.index];
+         var _loc2_:TankCarouselItemRenderer = param1.currentTarget as TankCarouselItemRenderer;
+         var _loc3_:VehicleCarouselVO = _loc2_.dataVO;
+         var _loc4_:Number = _loc2_.index;
          var _loc5_:uint = (param1 as ButtonEvent).buttonIdx;
-         if(isNaN(_loc3_))
+         if(isNaN(_loc4_))
          {
             return;
          }
          if(dispatchItemEvent(param1))
          {
-            if(((useRightButton) && (useRightButtonForSelect) || _loc5_ == 0) && !_loc4_.buyTank && !_loc4_.buySlot)
+            if(((useRightButton) && (useRightButtonForSelect) || _loc5_ == 0) && !_loc3_.buyTank && !_loc3_.buySlot)
             {
-               selectedIndex = _loc3_;
+               this.selectedIndex = this._currentShowByCompactDescription.indexOf(_loc3_.compactDescr);
             }
          }
       }
 
       override protected function onItemClick(param1:ListEventEx) : void {
-         var _loc2_:Object = param1.itemData;
+         var _loc2_:VehicleCarouselVO = param1.itemData as VehicleCarouselVO;
          if(_loc2_.empty)
          {
             return;
@@ -495,15 +554,18 @@ package net.wg.gui.lobby.hangar.tcarousel
             (param1.itemRenderer as MovieClip).mouseEnabled = false;
             (param1.itemRenderer as MovieClip).mouseChildren = false;
             this.tryBuyTank(_loc2_);
+            this.skipScrollToIndex = true;
             return;
          }
          if((_loc2_.buySlot) && param1.buttonIdx == 0)
          {
+            this.skipScrollToIndex = true;
             this.tryBuySlot(_loc2_);
             return;
          }
          if(param1.buttonIdx == 0)
          {
+            this.skipScrollToIndex = true;
             this.selectItem(_loc2_.id);
          }
          else
@@ -515,13 +577,47 @@ package net.wg.gui.lobby.hangar.tcarousel
          }
       }
 
-      override protected function updateArrowsState() : void {
-         super.updateArrowsState();
-         if(_totalRenderers <= _visibleSlots || !enabled)
+      private function updateSlotForBuyVehicle(param1:Boolean) : void {
+         this.populateRendererData(this._currentShowRendersByIndex.length,this._slotForBuyVehicle,VehicleCarouselVOBuilder.instance.getDataVoForBuyVehicle(this._availableSlotsForBuyVehicle),param1,true);
+      }
+
+      private function updateSlotForBuySlot(param1:Boolean) : void {
+         this.populateRendererData(this._currentShowRendersByIndex.length,this._slotForBuySlot,VehicleCarouselVOBuilder.instance.getDataVoForBuySlot(this._slotPrice,this._defSlotPrice,this._slotPriceActionPrc),param1,true);
+      }
+
+      private function tryBuyTank(param1:VehicleCarouselVO) : void {
+         buyTankClickS();
+      }
+
+      private function tryBuySlot(param1:VehicleCarouselVO) : void {
+         buySlotS();
+      }
+
+      private function selectItem(param1:Number) : void {
+         vehicleChangeS(param1.toString());
+      }
+
+      private function clearArrays() : void {
+         if(this._currentShowByCompactDescription)
          {
-            allowDrag = true;
-            leftArrow.enabled = false;
-            rightArrow.enabled = false;
+            while(this._currentShowByCompactDescription.length)
+            {
+               this._currentShowByCompactDescription.pop();
+            }
+         }
+         if(this._currentShowRendersByIndex)
+         {
+            while(this._currentShowRendersByIndex.length)
+            {
+               this._currentShowRendersByIndex.pop();
+            }
+         }
+         if(_renderers)
+         {
+            while(_renderers.length)
+            {
+               _renderers.pop();
+            }
          }
       }
 
@@ -554,13 +650,15 @@ package net.wg.gui.lobby.hangar.tcarousel
             this.nationFilter.selectedIndex = 0;
          }
          this.updateFiltersData();
-         this.tankFilter.addEventListener(ListEvent.INDEX_CHANGE,this.onTankDropDownFilterChanged);
-         this.nationFilter.addEventListener(ListEvent.INDEX_CHANGE,this.onNatiDropDownFilterChanged);
+         this.tankFilter.addEventListener(ListEvent.INDEX_CHANGE,this.onVehicleTypeFilterChanged);
+         this.nationFilter.addEventListener(ListEvent.INDEX_CHANGE,this.onNationFilterChanged);
          this.checkBoxToMain.addEventListener(Event.SELECT,this.onFilterCheckBoxChanged);
       }
 
-      private function showHideFilters(param1:Boolean) : void {
-         if(!param1)
+      private function showHideFilters() : void {
+         updateVisibleSlotsCount();
+         var _loc1_:Boolean = _visibleSlots < this._createdRendersListByCompDescrLength || !(this._createdRendersListByCompDescrLength == this._currentShowByCompactDescription.length);
+         if(!_loc1_)
          {
             leftArrow.x = this.vehicleFilters.x;
             this.vehicleFilters.visible = false;
@@ -568,7 +666,7 @@ package net.wg.gui.lobby.hangar.tcarousel
          }
          else
          {
-            if(param1)
+            if(_loc1_)
             {
                leftArrow.x = this.vehicleFilters.x + this.vehicleFilters.width + FILTERS_CAROUSEL_OFFSET ^ 0;
                this.vehicleFilters.visible = true;
@@ -581,6 +679,7 @@ package net.wg.gui.lobby.hangar.tcarousel
             renderersMask.x = leftArrow.x + leftArrow.width;
             dragHitArea.x = renderersMask.x;
          }
+         updateVisibleSlotsCount();
       }
 
       private function updateFiltersData() : void {
@@ -618,103 +717,288 @@ package net.wg.gui.lobby.hangar.tcarousel
          }
       }
 
-      private function tryBuyTank(param1:Object) : void {
-         buyTankClickS();
-      }
-
-      private function tryBuySlot(param1:Object) : void {
-         buySlotS();
-      }
-
-      private function showContextMenu(param1:Object) : void {
+      private function showContextMenu(param1:VehicleCarouselVO) : void {
          var _loc2_:String = !param1.favorite?"vehicleCheck":"vehicleUncheck";
-         App.contextMenuMgr.show(Vector.<IContextItem>([new UserContextItem("vehicleInfo"),new UserContextItem("vehicleSell",{"enabled":param1.canSell}),new UserContextItem("vehicleResearch"),new UserContextItem(_loc2_)]),this,this.onContectMenuItemSelect,param1);
+         App.contextMenuMgr.show(Vector.<IContextItem>([new UserContextItem("vehicleInfo"),new UserContextItem(SHOW_VEHICLE_STATS,{"enabled":param1.wasInBattle}),new SeparateItem(),new UserContextItem("vehicleSell",{"enabled":param1.canSell}),new SeparateItem(),new UserContextItem(_loc2_),new UserContextItem("vehicleResearch")]),this,this.onContectMenuItemSelect,param1);
       }
 
-      private function selectItem(param1:String) : void {
-         vehicleChangeS(param1);
-      }
-
-      private function setData(param1:Object) : void {
-         if(this.availableTanksCount != param1.slots.length)
+      private function rebuildRenderers() : void {
+         var _loc1_:* = 0;
+         var _loc2_:* = 0;
+         var _loc3_:IListItemRenderer = null;
+         var _loc4_:IDisposable = null;
+         var _loc5_:Vector.<VehicleCarouselVO> = null;
+         if(this._createdRendersListByCompDescr == null)
          {
-            tryClearTween();
+            this._createdRendersListByCompDescr = {};
          }
-         this.slotPrice = param1.slotPrice;
-         this.defSlotPrice = param1.hasOwnProperty("defSlotPrice")?param1.defSlotPrice:0;
-         this.slotPricePrc = param1.hasOwnProperty("actionPrc")?param1.actionPrc:0;
-         this.selectedTankID = param1.selectedTankID;
-         this.availableTanksCount = param1.slots.length;
-         this.emptySlotsCountForByTank = param1.availableSlotsForBuy;
-         this.allTanksCount = param1.allTanksCount;
-         if(this.allTanksCount == 0)
+         _loc5_ = this._vehiclesVOManager.getRemoved();
+         _loc2_ = _loc5_.length;
+         var _loc6_:VehicleCarouselVO = null;
+         _loc1_ = 0;
+         while(_loc1_ < _loc2_)
          {
-            visible = false;
-            return;
-         }
-         visible = true;
-         var _loc2_:Number = -1;
-         var _loc3_:uint = 0;
-         while(_loc3_ < param1.slots.length)
-         {
-            if(param1.slots[_loc3_].id == this.selectedTankID)
+            _loc6_ = _loc5_[_loc1_];
+            if(this._createdRendersListByCompDescr[_loc6_.compactDescr])
             {
-               _loc2_ = _loc3_;
+               _loc3_ = this._createdRendersListByCompDescr[_loc6_.compactDescr];
+               cleanUpRenderer(_loc3_);
+               _loc4_ = _loc3_ as IDisposable;
+               _loc4_.dispose();
+               container.removeChild(_loc3_ as DisplayObject);
+               delete this._createdRendersListByCompDescr[[_loc6_.compactDescr]];
+            }
+            _loc1_++;
+         }
+         _loc5_ = this._vehiclesVOManager.getAdded();
+         _loc2_ = _loc5_.length;
+         _loc1_ = 0;
+         while(_loc1_ < _loc2_)
+         {
+            _loc3_ = createRenderer(_loc1_);
+            if(_loc3_ == null)
+            {
                break;
             }
-            _loc3_++;
+            _loc6_ = _loc5_[_loc1_];
+            if(!this._createdRendersListByCompDescr[_loc6_.compactDescr])
+            {
+               this._createdRendersListByCompDescr[_loc6_.compactDescr] = _loc3_;
+               container.addChild(_loc3_ as DisplayObject);
+               this.populateRendererData(_loc1_,_loc3_,_loc6_);
+            }
+            _loc1_++;
          }
-         this.firstRun = selectedIndex != _loc2_?true:false;
-         selectedIndex = _loc2_;
-         if(this.emptySlotsCountForByTank > 0)
+         _loc5_ = this._vehiclesVOManager.getUpdated();
+         _loc2_ = _loc5_.length;
+         _loc1_ = 0;
+         while(_loc1_ < _loc2_)
          {
-            param1.slots.push(this.getSlotDataForBuyTank());
+            _loc6_ = _loc5_[_loc1_];
+            if(this._createdRendersListByCompDescr[_loc6_.compactDescr])
+            {
+               _loc3_ = this._createdRendersListByCompDescr[_loc6_.compactDescr];
+               this.populateRendererData(_loc1_,_loc3_,_loc6_,true);
+            }
+            _loc1_++;
          }
-         param1.slots.push(this.getSlotDataForBuySlot());
-         dataProvider = new DataProvider(param1.slots);
-         _totalRenderers = this.calculateRendererTotal(0,0);
+         this.updateCreatedRenderersLength();
+         invalidate(InvalidationType.RENDERERS);
       }
 
-      private function getSlotDataForBuyTank() : Object {
-         var _loc1_:Object =
+      private function updateCreatedRenderersLength() : void {
+         var _loc2_:String = null;
+         var _loc1_:Number = 0;
+         if(this._createdRendersListByCompDescr)
+         {
+            for (_loc2_ in this._createdRendersListByCompDescr)
             {
-               "stat":"buyTank",
-               "favorite":false,
-               "canSell":false,
-               "clanLock":-1,
-               "elite":false,
-               "premium":false,
-               "enabled":true,
-               "empty":false,
-               "buyTank":true,
-               "buySlot":false,
-               "availableSlots":this.emptySlotsCountForByTank,
-               "slotPrice":this.slotPrice
+               _loc1_++;
             }
-         ;
-         return _loc1_;
+         }
+         this._createdRendersListByCompDescrLength = _loc1_;
       }
 
-      private function getSlotDataForBuySlot() : Object {
-         var _loc1_:Object =
+      private function populateRendererData(param1:Number, param2:IListItemRenderer, param3:VehicleCarouselVO, param4:Boolean=false, param5:Boolean=false) : void {
+         var _loc8_:ListData = null;
+         var _loc6_:DisplayObject = param2 as DisplayObject;
+         var _loc7_:TankCarouselItemRenderer = param2 as TankCarouselItemRenderer;
+         _loc7_.enabled = enabled;
+         _loc7_.dragEnabled = dragEnabled;
+         _loc7_.setDataVO(param3);
+         if(!param4)
+         {
+            _loc8_ = new ListData(param1,param3.label,param3.compactDescr == this._selectedVehicleCompactID);
+            _loc7_.setListData(_loc8_);
+            _loc7_.validateNow();
+            _loc6_.visible = false;
+            if(param3.compactDescr == this._selectedVehicleCompactID)
             {
-               "stat":"buySlot",
-               "favorite":false,
-               "canSell":false,
-               "clanLock":-1,
-               "elite":false,
-               "premium":false,
-               "enabled":true,
-               "empty":false,
-               "buyTank":false,
-               "buySlot":true,
-               "availableSlots":this.emptySlotsCountForByTank,
-               "slotPrice":this.slotPrice,
-               "defSlotPrice":this.defSlotPrice,
-               "slotPricePrc":this.slotPricePrc
+               selectedItemRenderer = param2;
             }
-         ;
-         return _loc1_;
+         }
+         else
+         {
+            if(param5)
+            {
+               _loc6_.visible = true;
+            }
+         }
+      }
+
+      private function getRendererByCompactDescr(param1:Number) : IListItemRenderer {
+         var _loc2_:IListItemRenderer = this._createdRendersListByCompDescr[param1];
+         return _loc2_;
+      }
+
+      private function removeRendererFromShowByCompactDescr(param1:Number) : void {
+         var _loc3_:DisplayObject = null;
+         var _loc2_:IListItemRenderer = this.getRendererByCompactDescr(param1);
+         if(_loc2_)
+         {
+            _loc3_ = _loc2_ as DisplayObject;
+            _loc3_.visible = false;
+         }
+      }
+
+      private function insertRendererToShowByNum(param1:Number, param2:Number) : void {
+         var _loc3_:IListItemRenderer = this.getRendererByCompactDescr(param2);
+         if(_loc3_)
+         {
+            this._currentShowRendersByIndex[param1] = _loc3_;
+            _renderers.push(_loc3_);
+         }
+      }
+
+      private function updateEmptySlots() : void {
+         if(!_renderers)
+         {
+            return;
+         }
+         this.removeEmptySlots();
+         this.addEmptySlots();
+      }
+
+      private function removeEmptySlots() : void {
+         var _loc1_:IDisposable = null;
+         var _loc2_:DisplayObject = null;
+         var _loc3_:IListItemRenderer = null;
+         var _loc4_:VehicleCarouselVO = null;
+         while(_renderers.length)
+         {
+            _loc3_ = getRendererAt(_renderers.length-1,0);
+            _loc4_ = (_loc3_ as TankCarouselItemRenderer).dataVO;
+            if(_loc4_.empty)
+            {
+               _renderers.splice(_renderers.length-1,1);
+               _loc2_ = _loc3_ as DisplayObject;
+               container.removeChild(_loc2_);
+               _loc1_ = _loc3_ as IDisposable;
+               _loc1_.dispose();
+               continue;
+            }
+            break;
+         }
+      }
+
+      private function addEmptySlots() : void {
+         var _loc1_:DisplayObject = null;
+         var _loc2_:IListItemRenderer = null;
+         while(_visibleSlots > _renderers.length)
+         {
+            _loc2_ = createRenderer(_renderers.length);
+            if(_loc2_ == null)
+            {
+               break;
+            }
+            this.populateRendererData(_renderers.length,_loc2_,VehicleCarouselVOBuilder.instance.getDataVoForEmptySlot());
+            _loc2_.x = padding.horizontal + _renderers.length * slotWidth;
+            _renderers.push(_loc2_);
+            _loc1_ = _loc2_ as DisplayObject;
+            container.addChild(_loc1_);
+            _loc1_.visible = true;
+         }
+      }
+
+      private function removeAdvancedSlots() : void {
+         var _loc1_:IDisposable = null;
+         var _loc2_:DisplayObject = null;
+         var _loc3_:IListItemRenderer = null;
+         var _loc4_:VehicleCarouselVO = null;
+         while(_renderers.length)
+         {
+            _loc3_ = getRendererAt(_renderers.length-1,0);
+            if(!_loc3_)
+            {
+               break;
+            }
+            _loc4_ = (_loc3_ as TankCarouselItemRenderer).dataVO;
+            if((_loc4_.buySlot) || (_loc4_.buyTank))
+            {
+               _renderers.splice(_renderers.length-1,1);
+               if(this._availableSlotsForBuyVehicle <= 0 && (_loc4_.buyTank))
+               {
+                  _loc2_ = _loc3_ as DisplayObject;
+                  _loc1_ = _loc3_ as IDisposable;
+                  _loc1_.dispose();
+                  container.removeChild(_loc2_);
+                  if(this._slotForBuyVehicle)
+                  {
+                     this._slotForBuyVehicle = null;
+                  }
+               }
+               continue;
+            }
+            break;
+         }
+      }
+
+      private function addAdvancedSlots() : void {
+         var _loc1_:DisplayObject = null;
+         if(this._availableSlotsForBuyVehicle > 0)
+         {
+            if(!this._slotForBuyVehicle)
+            {
+               this._slotForBuyVehicle = createRenderer(_renderers.length);
+               if(this._slotForBuyVehicle != null)
+               {
+                  this.updateSlotForBuyVehicle(false);
+                  this._slotForBuyVehicle.x = padding.horizontal + _renderers.length * slotWidth;
+                  _renderers.push(this._slotForBuyVehicle);
+                  _loc1_ = this._slotForBuyVehicle as DisplayObject;
+                  container.addChild(_loc1_);
+               }
+            }
+            else
+            {
+               this._slotForBuyVehicle.x = padding.horizontal + _renderers.length * slotWidth;
+               _renderers.push(this._slotForBuyVehicle);
+               _loc1_ = this._slotForBuyVehicle as DisplayObject;
+            }
+            _loc1_.visible = true;
+         }
+         if(this._slotForBuySlot == null)
+         {
+            this._slotForBuySlot = createRenderer(_renderers.length);
+            if(this._slotForBuySlot != null)
+            {
+               this.updateSlotForBuySlot(false);
+               this._slotForBuySlot.x = padding.horizontal + _renderers.length * slotWidth;
+               _renderers.push(this._slotForBuySlot);
+               _loc1_ = this._slotForBuySlot as DisplayObject;
+               container.addChild(_loc1_);
+            }
+         }
+         else
+         {
+            this._slotForBuySlot.x = padding.horizontal + _renderers.length * slotWidth;
+            _renderers.push(this._slotForBuySlot);
+            _loc1_ = this._slotForBuySlot as DisplayObject;
+         }
+         _loc1_.visible = true;
+      }
+
+      private function repositionRenderers() : void {
+         var _loc2_:IListItemRenderer = null;
+         var _loc3_:DisplayObject = null;
+         var _loc1_:Number = 0;
+         var _loc4_:Number = -1;
+         _loc1_ = 0;
+         while(_loc1_ < this._currentShowRendersByIndex.length)
+         {
+            _loc2_ = this._currentShowRendersByIndex[_loc1_];
+            _loc2_.x = padding.horizontal + _loc1_ * slotWidth;
+            _loc3_ = _loc2_ as DisplayObject;
+            _loc3_.visible = true;
+            if((_loc2_.selected) && _loc4_ == -1)
+            {
+               _loc4_ = _loc1_;
+            }
+            _loc1_++;
+         }
+         _totalRenderers = this._availableSlotsForBuyVehicle > 0?this._currentShowRendersByIndex.length + 2:this._currentShowRendersByIndex.length + 1;
+         _loc4_ = _loc4_ == -1?0:_loc4_;
+         this.scrollToIndex(_loc4_);
       }
 
       private function onFilterCheckBoxChanged(param1:Event) : void {
@@ -722,12 +1006,12 @@ package net.wg.gui.lobby.hangar.tcarousel
          this.onFilterChanged();
       }
 
-      private function onTankDropDownFilterChanged(param1:ListEvent) : void {
+      private function onVehicleTypeFilterChanged(param1:ListEvent) : void {
          this.filterData.tankType = param1.itemData.data;
          this.onFilterChanged();
       }
 
-      private function onNatiDropDownFilterChanged(param1:ListEvent) : void {
+      private function onNationFilterChanged(param1:ListEvent) : void {
          this.filterData.nation = param1.itemData.data;
          this.onFilterChanged();
       }
@@ -750,6 +1034,9 @@ package net.wg.gui.lobby.hangar.tcarousel
                break;
             case "vehicleUncheck":
                favoriteVehicleS(_loc2_.id,false);
+               break;
+            case SHOW_VEHICLE_STATS:
+               showVehicleStatsS(_loc2_.compactDescr);
                break;
          }
       }

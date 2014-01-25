@@ -220,7 +220,7 @@ package net.wg.gui.lobby.battleloading
 
       override protected function onDispose() : void {
          super.onDispose();
-         this.form.onDispose();
+         this.form.dispose();
       }
 
       override public function toString() : String {

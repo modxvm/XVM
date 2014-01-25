@@ -122,7 +122,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
          _loc1_.addEvent(this,MouseEvent.MOUSE_DOWN,this.onMouseDown,false,0,true);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          var _loc1_:IEventCollector = App.utils.events;
          _loc1_.removeEvent(this.select,MouseEvent.ROLL_OVER,this.onOver);
          _loc1_.removeEvent(this.select,MouseEvent.ROLL_OUT,this.onOut);
@@ -140,7 +140,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
          this.select.dispose();
          this.dataValues.splice(0);
          this.dataValues = null;
-         super.dispose();
+         super.onDispose();
       }
 
       override protected function draw() : void {

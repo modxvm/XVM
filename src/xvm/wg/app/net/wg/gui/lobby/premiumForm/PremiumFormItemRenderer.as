@@ -66,8 +66,8 @@ package net.wg.gui.lobby.premiumForm
          this.updateData();
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this.removeEventListener(MouseEvent.CLICK,this.onClickHandler);
          this.removeEventListener(MouseEvent.ROLL_OVER,this.onMouseOverHandler);
          this.removeEventListener(MouseEvent.ROLL_OUT,this.onMouseOutHandler);

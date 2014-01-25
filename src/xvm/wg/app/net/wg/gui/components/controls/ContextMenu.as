@@ -339,10 +339,10 @@ package net.wg.gui.components.controls
          this._padding = new Padding(param1.top,param1.right,param1.bottom,param1.left);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          var _loc3_:uint = 0;
          var _loc4_:uint = 0;
-         super.dispose();
+         super.onDispose();
          if(App.instance.stage.hasEventListener(MouseEvent.MOUSE_DOWN))
          {
             App.instance.stage.removeEventListener(MouseEvent.MOUSE_DOWN,this.mouseDownHandler);

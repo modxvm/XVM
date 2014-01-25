@@ -119,8 +119,8 @@ package net.wg.gui.lobby.header
          this.serverStats.tooltipFullData = param2;
       }
 
-      public function as_nameResponse(param1:String, param2:Boolean, param3:Boolean) : void {
-         this.tankPanel.setAccountName(param1,param2,param3);
+      public function as_nameResponse(param1:String, param2:String, param3:String, param4:Boolean, param5:Boolean) : void {
+         this.tankPanel.setAccountName(param1,param2,param3,param4,param5);
          this._isAccountNameSet = true;
          this.visible = true;
       }
@@ -217,10 +217,9 @@ package net.wg.gui.lobby.header
       }
 
       private function checkRoaming() : void {
-         var _loc3_:* = false;
          var _loc1_:Boolean = App.globalVarsMgr.isRoamingEnabledS();
          var _loc2_:Array = getServersS();
-         _loc3_ = (_loc1_) && _loc2_.length > 1;
+         var _loc3_:Boolean = (_loc1_) && _loc2_.length > 1;
          this.regionDD.visible = _loc3_;
          this.serverInfo.visible = !_loc3_;
          if(_loc3_)
@@ -285,6 +284,7 @@ package net.wg.gui.lobby.header
          this.fightBtn = null;
          this.ticker = null;
          this.tutorialControl = null;
+         this.regionDD = null;
          this.questsControl = null;
          for (_loc1_ in this._serverStats)
          {

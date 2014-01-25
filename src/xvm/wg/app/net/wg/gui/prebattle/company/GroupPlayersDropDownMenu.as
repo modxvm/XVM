@@ -18,8 +18,8 @@ package net.wg.gui.prebattle.company
          this._prbID = param1;
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          if(_dropdownRef)
          {
             _dropdownRef.removeEventListener(MouseEvent.MOUSE_DOWN,this.onClickDropDownMenu,false);

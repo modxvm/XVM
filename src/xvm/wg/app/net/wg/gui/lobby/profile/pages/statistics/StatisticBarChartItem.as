@@ -100,11 +100,11 @@ package net.wg.gui.lobby.profile.pages.statistics
          }
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.tweenManager.dispose();
          this.animationClient.dispose();
          this.disposeHandlers();
-         super.dispose();
+         super.onDispose();
       }
    }
 

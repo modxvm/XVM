@@ -121,11 +121,11 @@ package net.wg.gui.lobby.profile.pages.summary
          this.textField.removeEventListener(MouseEvent.ROLL_OUT,this.mouseRollOutHandler);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this._dataProvider = null;
          this.medalsList.dispose();
          this.disposeHandlers();
-         super.dispose();
+         super.onDispose();
       }
    }
 

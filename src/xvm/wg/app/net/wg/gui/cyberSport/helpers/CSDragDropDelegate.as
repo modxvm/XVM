@@ -98,11 +98,11 @@ package net.wg.gui.cyberSport.helpers
          }
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this._highlightingHandler = null;
          this._onEndDropHandler = null;
          this._leaveSlotHandler = null;
-         super.dispose();
+         super.onDispose();
       }
 
       public function setHandlers(param1:Function, param2:Function, param3:Function) : void {

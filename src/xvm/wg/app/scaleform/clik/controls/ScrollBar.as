@@ -292,7 +292,7 @@ package scaleform.clik.controls
          thumb.displayFocus = (_focused) || (_displayFocus);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          removeEventListener(MouseEvent.MOUSE_WHEEL,this.handleMouseWheel,false);
          removeEventListener(InputEvent.INPUT,handleInput,false);
          if(this.upArrow)
@@ -333,7 +333,7 @@ package scaleform.clik.controls
          }
          track = null;
          this._dragOffset = null;
-         super.dispose();
+         super.onDispose();
       }
    }
 

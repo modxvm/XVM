@@ -28,10 +28,10 @@ package net.wg.gui.components.common.waiting
          addEventListener(Event.ENTER_FRAME,this.onEnterFrameHandler);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.textField = null;
          removeEventListener(Event.ENTER_FRAME,this.onEnterFrameHandler);
-         super.dispose();
+         super.onDispose();
       }
 
       override public function stop() : void {

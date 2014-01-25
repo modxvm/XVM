@@ -14,6 +14,7 @@ package net.wg.gui.lobby.vehicleInfo
    import net.wg.gui.events.ViewStackEvent;
    import scaleform.clik.events.ButtonEvent;
    import scaleform.clik.data.DataProvider;
+   import flash.display.InteractiveObject;
    import net.wg.infrastructure.interfaces.IViewStackContent;
 
 
@@ -116,10 +117,14 @@ package net.wg.gui.lobby.vehicleInfo
                "linkage":"VehicleInfoCrew"
             }
          ]);
-         App.utils.focusHandler.setFocus(this.closeBtn);
          this.closeBtn.addEventListener(ButtonEvent.CLICK,this.onClose);
          this.uiInited = true;
          invalidate();
+      }
+
+      override protected function onInitModalFocus(param1:InteractiveObject) : void {
+         super.onInitModalFocus(param1);
+         setFocus(this.closeBtn);
       }
 
       private function onViewNeedUpdate(param1:ViewStackEvent) : void {

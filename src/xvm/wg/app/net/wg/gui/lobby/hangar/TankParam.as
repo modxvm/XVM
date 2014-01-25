@@ -49,7 +49,7 @@ package net.wg.gui.lobby.hangar
          index = param1.index;
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          removeEventListener(Event.ADDED,addToAutoGroup,false);
          removeEventListener(Event.REMOVED,addToAutoGroup,false);
          removeEventListener(MouseEvent.ROLL_OVER,handleMouseRollOver,false);
@@ -74,7 +74,7 @@ package net.wg.gui.lobby.hangar
          this._value = null;
          this.paramField = null;
          this.tfField = null;
-         super.dispose();
+         super.onDispose();
       }
 
       override public function get selected() : Boolean {

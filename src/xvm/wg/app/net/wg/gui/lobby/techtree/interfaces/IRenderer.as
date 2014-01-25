@@ -73,6 +73,8 @@ package net.wg.gui.lobby.techtree.interfaces
 
       function inInventory() : Boolean;
 
+      function isWasInBattle() : Boolean;
+
       function isAvailable4Unlock() : Boolean;
 
       function isAvailable4Buy() : Boolean;

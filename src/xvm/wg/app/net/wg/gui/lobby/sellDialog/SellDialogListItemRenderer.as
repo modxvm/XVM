@@ -41,8 +41,8 @@ package net.wg.gui.lobby.sellDialog
 
       public var scrollingRenderrBg:MovieClip;
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this.elements.splice(0,this.elements.length);
          var _loc1_:int = this.renderers.length;
          var _loc2_:* = 0;

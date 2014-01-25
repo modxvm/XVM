@@ -13,12 +13,14 @@ package net.wg.gui.messenger.forms
    import scaleform.clik.events.InputEvent;
    import scaleform.clik.utils.Constraints;
    import scaleform.clik.constants.ConstrainMode;
+   import net.wg.data.constants.Errors;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.gui.messenger.evnts.ChannelsFormEvent;
    import scaleform.clik.ui.InputDetails;
    import flash.ui.Keyboard;
    import scaleform.clik.constants.InputValue;
    import scaleform.clik.constants.NavigationCode;
+   import flash.display.InteractiveObject;
 
 
    public class ChannelsSearchForm extends UIComponent implements IViewStackContent
@@ -71,6 +73,7 @@ package net.wg.gui.messenger.forms
          if(this.searchNameInput.enabled)
          {
             this.searchNameInput.validateNow();
+            DebugUtils.LOG_WARNING(Errors.INVALID_FOCUS_USING);
             App.utils.focusHandler.setFocus(this.searchNameInput);
          }
       }
@@ -87,8 +90,8 @@ package net.wg.gui.messenger.forms
          }
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this.searchButton.removeEventListener(ButtonEvent.CLICK,this.onSearchClick);
          this.joinButton.removeEventListener(ButtonEvent.CLICK,this.onJoinButtonClick);
          this.searchResultList.removeEventListener(ListEventEx.ITEM_DOUBLE_CLICK,this.onItemDoobleClick);
@@ -173,6 +176,10 @@ package net.wg.gui.messenger.forms
 
       override public function toString() : String {
          return "[WG ChannelsSearchForm " + name + "]";
+      }
+
+      public function getComponentForFocus() : InteractiveObject {
+         return null;
       }
    }
 

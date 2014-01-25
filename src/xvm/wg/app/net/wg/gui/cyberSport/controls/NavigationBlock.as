@@ -65,19 +65,18 @@ package net.wg.gui.cyberSport.controls
          dispatchEvent(new CSComponentEvent(CSComponentEvent.LOAD_PREVIOUS_REQUEST));
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.previousButton.removeEventListener(ButtonEvent.CLICK,this.onPreviousClick);
          this.nextButton.removeEventListener(ButtonEvent.CLICK,this.onNextClick);
          this.removeListeners(this.nextButton);
          this.removeListeners(this.previousButton);
          this.previousButton.dispose();
          this.nextButton.dispose();
-         super.dispose();
+         super.onDispose();
       }
 
       private function onRollOverHandler(param1:MouseEvent) : void {
-         var _loc2_:String = param1.target == this.nextButton?TOOLTIPS.CYBERSPORT_UNITLIST_PAGINGDOWN:TOOLTIPS.CYBERSPORT_UNITLIST_PAGINGUP;
-         App.toolTipMgr.showComplex(_loc2_);
+          
       }
 
       private function onRollOutHandler(param1:MouseEvent) : void {

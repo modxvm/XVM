@@ -61,13 +61,12 @@ package net.wg.gui.lobby.questsWindow
          }
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
       }
 
       override protected function updateSelectedIndex() : void {
          super.updateSelectedIndex();
-         App.utils.focusHandler.setFocus(this);
       }
    }
 

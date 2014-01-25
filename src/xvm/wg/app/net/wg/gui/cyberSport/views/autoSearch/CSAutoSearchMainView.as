@@ -5,9 +5,10 @@ package net.wg.gui.cyberSport.views.autoSearch
    import net.wg.gui.components.common.waiting.WaitingMc;
    import net.wg.gui.cyberSport.vo.AutoSearchVO;
    import flash.events.Event;
+   import flash.display.InteractiveObject;
+   import net.wg.infrastructure.interfaces.entity.IFocusContainer;
    import scaleform.clik.events.InputEvent;
    import net.wg.data.constants.generated.CYBER_SPORT_ALIASES;
-   import flash.display.InteractiveObject;
    import scaleform.clik.constants.InvalidationType;
 
 
@@ -73,13 +74,20 @@ package net.wg.gui.cyberSport.views.autoSearch
          this.initWheelBehaviour();
       }
 
-      public function updateFocus() : void {
-         var _loc1_:* = 0;
-         while(_loc1_ < this.viewsLength)
+      public function getComponentForFocus() : InteractiveObject {
+         var _loc1_:InteractiveObject = null;
+         var _loc2_:InteractiveObject = null;
+         var _loc3_:* = 0;
+         while(_loc3_ < this.viewsLength)
          {
-            ICSAutoSearchMainView(this.views[_loc1_]).updateFocus();
-            _loc1_++;
+            _loc1_ = IFocusContainer(this.views[_loc3_]).getComponentForFocus();
+            if(_loc1_ != null)
+            {
+               _loc2_ = _loc1_;
+            }
+            _loc3_++;
          }
+         return _loc2_;
       }
 
       override public function handleInput(param1:InputEvent) : void {
@@ -147,7 +155,7 @@ package net.wg.gui.cyberSport.views.autoSearch
          }
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          var _loc1_:* = 0;
          while(_loc1_ < this.viewsLength)
          {
@@ -155,7 +163,7 @@ package net.wg.gui.cyberSport.views.autoSearch
             InteractiveObject(this.views[_loc1_]).removeEventListener(StateViewBase.UPDATE_TIMER,this.csUpdateTimerHandler);
             _loc1_++;
          }
-         super.dispose();
+         super.onDispose();
       }
 
       override protected function draw() : void {

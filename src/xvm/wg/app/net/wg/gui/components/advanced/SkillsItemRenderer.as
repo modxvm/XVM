@@ -60,7 +60,7 @@ package net.wg.gui.components.advanced
 
       public var role_ico_path:String = "";
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          removeEventListener(MouseEvent.ROLL_OVER,this.onRollOver);
          removeEventListener(MouseEvent.ROLL_OUT,this.onRollOut);
          removeEventListener(ButtonEvent.CLICK,this.onShowSkillTab);
@@ -76,7 +76,7 @@ package net.wg.gui.components.advanced
          this.level_mc = null;
          this.notActive = null;
          this._titleLabel = null;
-         super.dispose();
+         super.onDispose();
       }
 
       override protected function draw() : void {

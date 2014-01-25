@@ -5,6 +5,7 @@ package net.wg.gui.lobby.questsWindow
    import flash.events.Event;
    import __AS3__.vec.Vector;
    import scaleform.clik.constants.InvalidationType;
+   import net.wg.data.constants.QuestsStates;
 
 
    public class QuestBlock extends UIComponent
@@ -14,86 +15,88 @@ package net.wg.gui.lobby.questsWindow
          super();
       }
 
-      public var infoBlock:MiddleInfoBlock;
+      public var requirementsView:RequirementBlock;
 
-      private var _showNextTasks:Boolean = false;
+      public var conditionsView:ConditionBlock;
 
       private var questData:QuestDataVO = null;
 
-      public var nextTasksList:SubtasksList;
-
-      private var infoBlockResized:Boolean = false;
-
-      private var nextTasksListResized:Boolean = false;
+      private var currentView:String = "conditions";
 
       override protected function configUI() : void {
          super.configUI();
-         this.infoBlock.visible = false;
-         this.nextTasksList.visible = false;
-         this.infoBlock.addEventListener(Event.RESIZE,this.layoutBlocks);
-         this.nextTasksList.addEventListener(Event.RESIZE,this.layoutBlocks);
+         this.requirementsView.addEventListener(Event.RESIZE,this.layoutBlocks);
+         this.conditionsView.addEventListener(Event.RESIZE,this.layoutBlocks);
       }
 
       public function setData(param1:QuestDataVO) : void {
          this.questData = param1;
+         this.requirementsView.isReadyForLayout = false;
+         this.conditionsView.isReadyForLayout = false;
          invalidateData();
       }
 
       public function setAvailableQuests(param1:Vector.<String>) : void {
-         this.nextTasksList.checkDisabledQuests(param1);
-         this.infoBlock.subtasksList.checkDisabledQuests(param1);
+          
       }
 
       override protected function draw() : void {
          super.draw();
          if((isInvalid(InvalidationType.DATA)) && (this.questData))
          {
-            this._showNextTasks = Boolean(this.questData.nextTasks.length);
-            this.infoBlock.setData(this.questData.info);
-            this.nextTasksList.setData(this.questData.nextTasks);
+            this.requirementsView.setData(this.questData.requirements);
+            this.conditionsView.setData(this.questData.conditions);
          }
       }
 
       private function layoutBlocks(param1:Event) : void {
-         var _loc2_:* = NaN;
-         var _loc3_:* = NaN;
-         var _loc4_:* = NaN;
-         if(param1.target == this.infoBlock)
+         if((this.conditionsView.isReadyForLayout) && (this.requirementsView.isReadyForLayout))
          {
-            this.infoBlockResized = true;
-         }
-         if(param1.target == this.nextTasksList)
-         {
-            this.nextTasksListResized = true;
-         }
-         if((this.infoBlockResized) && (this.nextTasksListResized))
-         {
-            _loc2_ = Math.round(this.infoBlock.y + this.infoBlock.height);
-            _loc3_ = Math.round(this._showNextTasks?this.nextTasksList.height + 10:0);
-            _loc4_ = _loc2_ + _loc3_;
-            this.nextTasksList.y = _loc2_;
-            this.infoBlock.visible = true;
-            this.nextTasksList.visible = this._showNextTasks;
-            setSize(this.width,_loc4_);
-            dispatchEvent(new Event(Event.RESIZE));
-            this.infoBlockResized = false;
-            this.nextTasksListResized = false;
+            this.layoutCurrentView(this.currentView);
          }
       }
 
-      override public function dispose() : void {
-         this.infoBlock.removeEventListener(Event.RESIZE,this.layoutBlocks);
-         this.nextTasksList.removeEventListener(Event.RESIZE,this.layoutBlocks);
-         this.infoBlock.dispose();
-         this.nextTasksList.dispose();
+      public function changeView(param1:Object) : void {
+         this.currentView = String(param1);
+         if((this.conditionsView.isReadyForLayout) && (this.requirementsView.isReadyForLayout))
+         {
+            this.layoutCurrentView(this.currentView);
+         }
+      }
+
+      private function layoutCurrentView(param1:String) : void {
+         if(param1 == QuestsStates.REQUIREMENTS)
+         {
+            this.requirementsView.visible = true;
+            setSize(this.width,Math.round(this.requirementsView.height));
+            this.conditionsView.visible = false;
+            dispatchEvent(new Event(Event.RESIZE));
+         }
+         else
+         {
+            if(param1 == QuestsStates.CONDITIONS)
+            {
+               this.requirementsView.visible = false;
+               setSize(this.width,Math.round(this.conditionsView.height));
+               this.conditionsView.visible = true;
+               dispatchEvent(new Event(Event.RESIZE));
+            }
+         }
+      }
+
+      override protected function onDispose() : void {
+         this.requirementsView.removeEventListener(Event.RESIZE,this.layoutBlocks);
+         this.conditionsView.removeEventListener(Event.RESIZE,this.layoutBlocks);
+         this.requirementsView.dispose();
+         this.conditionsView.dispose();
          if(this.questData)
          {
             this.questData.dispose();
             this.questData = null;
          }
-         this.infoBlock = null;
-         this.nextTasksList = null;
-         super.dispose();
+         this.requirementsView = null;
+         this.conditionsView = null;
+         super.onDispose();
       }
    }
 

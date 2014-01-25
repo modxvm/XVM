@@ -1,12 +1,13 @@
 package net.wg.gui.components.controls
 {
    import scaleform.clik.controls.ListItemRenderer;
+   import net.wg.infrastructure.interfaces.ITextContainer;
    import flash.text.TextFormat;
    import flash.events.MouseEvent;
    import flash.filters.DropShadowFilter;
 
 
-   public class TextFieldShort extends ListItemRenderer
+   public class TextFieldShort extends ListItemRenderer implements ITextContainer
    {
           
       public function TextFieldShort() {
@@ -68,8 +69,8 @@ package net.wg.gui.components.controls
          super.configUI();
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
       }
 
       override protected function handleMouseRollOver(param1:MouseEvent) : void {

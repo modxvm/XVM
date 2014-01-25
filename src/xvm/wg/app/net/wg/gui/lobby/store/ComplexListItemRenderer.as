@@ -79,12 +79,12 @@ package net.wg.gui.lobby.store
          return SoundManagerStates.SND_PRESS;
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          if(App.soundMgr)
          {
             App.soundMgr.addSoundsHdlrs(this);
          }
-         super.dispose();
+         super.onDispose();
       }
    }
 

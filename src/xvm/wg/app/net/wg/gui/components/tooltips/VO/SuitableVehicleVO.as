@@ -103,7 +103,7 @@ package net.wg.gui.components.tooltips.VO
          }
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          var _loc1_:net.wg.gui.cyberSport.vo.VehicleVO = null;
          if((this.vehiclesList) && this.vehiclesList.length > 0)
          {

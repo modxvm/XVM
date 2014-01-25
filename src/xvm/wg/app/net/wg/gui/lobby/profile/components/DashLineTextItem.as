@@ -125,10 +125,10 @@ package net.wg.gui.lobby.profile.components
          removeEventListener(MouseEvent.ROLL_OUT,this.mouseRollOutHandler);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.dashLine.dispose();
          this.disposeListeners();
-         super.dispose();
+         super.onDispose();
       }
 
       override public function set enabled(param1:Boolean) : void {

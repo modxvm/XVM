@@ -54,8 +54,8 @@ package scaleform.clik.controls
 
       public var hit:MovieClip;
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this._content = null;
          this._contentPadding = null;
          this._dragProps = null;

@@ -26,7 +26,7 @@ package net.wg.gui.components.advanced
 
       private var _showLabel:Boolean = true;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          var _loc1_:String = null;
          this.textField = null;
          this.bg = null;
@@ -36,7 +36,7 @@ package net.wg.gui.components.advanced
             delete this.startScale[[_loc1_]];
          }
          this.startScale = null;
-         super.dispose();
+         super.onDispose();
       }
 
       override public function toString() : String {

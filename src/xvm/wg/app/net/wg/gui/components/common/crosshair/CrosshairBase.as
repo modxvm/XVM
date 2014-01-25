@@ -50,7 +50,11 @@ package net.wg.gui.components.common.crosshair
           
       }
 
-      public function dispose() : void {
+      public final function dispose() : void {
+         this.onDispose();
+      }
+
+      protected function onDispose() : void {
          removeEventListener(Event.ADDED_TO_STAGE,this.initStage);
       }
    }

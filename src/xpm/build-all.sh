@@ -1,16 +1,16 @@
 #!/bin/sh
 
 ### Path vars can be assigned at .bashrc
-[ "$GAME_VER" = "" ] && GAME_VER="0.8.10"
-#[ "$GAME_VER" = "" ] && GAME_VER="0.8.10 Common Test"
-[ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/work/games/WoT
+#[ "$GAME_VER" = "" ] && GAME_VER="0.8.10"
+[ "$GAME_VER" = "" ] && GAME_VER="0.8.11 Common Test"
+[ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/work/games/WoT-CT
 
 cd $(dirname $0)
 
 ### Find Python executable
-  PY_EXEC="/cygdrive/c/Python26/python.exe"
+  PY_EXEC="/cygdrive/c/Python27/python.exe"
   if [ ! -f $PY_EXEC ]; then
-    PY_EXEC="python2.6" # Installed by cygwin or *nix
+    PY_EXEC="python2.7" # Installed by cygwin or *nix
   fi
 ###
 

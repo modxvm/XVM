@@ -36,7 +36,7 @@ package net.wg.data.constants
          ;
          __mapping[MouseEventEx.LEFT_BUTTON] =
             {
-               "command":"LEFTMOUSE",
+               "command":"MOUSE0",
                "to_show":"#controls:mouse/key_left"
             }
          ;

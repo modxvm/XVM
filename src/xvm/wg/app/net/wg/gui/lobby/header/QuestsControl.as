@@ -51,15 +51,14 @@ package net.wg.gui.lobby.header
          addEventListener(MouseEvent.MOUSE_DOWN,this.onPress);
          addEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
          addEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
-         this.visible = !App.globalVarsMgr.isInRoamingS();
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          removeEventListener(MouseEvent.MOUSE_DOWN,this.onPress);
          removeEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
          removeEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
          this.anim = null;
-         super.dispose();
+         super.onDispose();
       }
 
       override protected function draw() : void {
@@ -99,8 +98,11 @@ package net.wg.gui.lobby.header
 
       private function onPress(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
-         this.anim.gotoAndStop(PAUSE);
-         showQuestsWindowS();
+         if(App.utils.commons.isLeftButton(param1))
+         {
+            this.anim.gotoAndStop(PAUSE);
+            showQuestsWindowS();
+         }
       }
 
       override protected function getStatePrefixes() : Vector.<String> {
@@ -116,7 +118,7 @@ package net.wg.gui.lobby.header
          try
          {
             dispatchEvent(new LifeCycleEvent(LifeCycleEvent.ON_BEFORE_DISPOSE));
-            this.dispose();
+            dispose();
             this._disposed = true;
             dispatchEvent(new LifeCycleEvent(LifeCycleEvent.ON_AFTER_DISPOSE));
          }

@@ -31,12 +31,12 @@ package net.wg.gui.components.controls
 
       private var _pastSelectionEnd:Number = 0;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.highlightMc.dispose();
          this.highlightMc = null;
          removeEventListener(MouseEvent.MOUSE_UP,this.handleMouseUp,false);
          textField.removeEventListener(FocusEvent.FOCUS_OUT,this.handleTextFieldFocusOut,false);
-         super.dispose();
+         super.onDispose();
       }
 
       override public function set focusable(param1:Boolean) : void {
@@ -177,15 +177,18 @@ package net.wg.gui.components.controls
       }
 
       protected function handleTextFieldFocusOut(param1:FocusEvent) : void {
-         this._focusOutByWaiting = App.waiting.visible;
-         if(this._focusOutByWaiting)
+         if(App.instance)
          {
-            if(this._pastSelectionStart == this._pastSelectionEnd)
+            this._focusOutByWaiting = App.waiting.visible;
+            if(this._focusOutByWaiting)
             {
-               this._pastSelectionStart = this._pastSelectionEnd = textField.caretIndex;
+               if(this._pastSelectionStart == this._pastSelectionEnd)
+               {
+                  this._pastSelectionStart = this._pastSelectionEnd = textField.caretIndex;
+               }
             }
+            App.utils.IME.setVisible(false);
          }
-         App.utils.IME.setVisible(false);
       }
 
       override public function handleInput(param1:InputEvent) : void {

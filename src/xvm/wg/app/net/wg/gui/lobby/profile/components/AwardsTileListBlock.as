@@ -81,7 +81,7 @@ package net.wg.gui.lobby.profile.components
          invalidate(DATA_PROVIDER_INV);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          if(this.tileList)
          {
             this.tileList.dispose();
@@ -91,7 +91,7 @@ package net.wg.gui.lobby.profile.components
          {
             this.dataProvider = null;
          }
-         super.dispose();
+         super.onDispose();
       }
 
       public function get labelText() : String {

@@ -14,6 +14,10 @@ package net.wg.gui.lobby.questsWindow
          questContent.hideDoneCheckbox(true);
          questContent.setNodataLabel(QUESTS.QUESTS_FUTURE_NODATA);
       }
+
+      override protected function onDispose() : void {
+         super.onDispose();
+      }
    }
 
 }

@@ -51,12 +51,12 @@ package net.wg.gui.components.tooltips
          super.build(param1,param2);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          if(this.vehicleIco.hasEventListener(UILoaderEvent.COMPLETE))
          {
             this.vehicleIco.removeEventListener(UILoaderEvent.COMPLETE,this.onIcoLoaded);
          }
-         super.dispose();
+         super.onDispose();
       }
 
       override public function toString() : String {

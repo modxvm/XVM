@@ -11,6 +11,8 @@ package net.wg.gui.lobby.profile
       }
 
       public var sectionsData:Array;
+
+      public var selectedAlias:String = "";
    }
 
 }

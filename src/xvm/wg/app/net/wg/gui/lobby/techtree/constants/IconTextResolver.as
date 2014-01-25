@@ -2,12 +2,12 @@ package net.wg.gui.lobby.techtree.constants
 {
    import __AS3__.vec.Vector;
    import net.wg.data.constants.Values;
-   import net.wg.gui.components.controls.IconText;
+   import net.wg.data.constants.IconsTypes;
 
 
    public class IconTextResolver extends Object
    {
-
+          
       public function IconTextResolver() {
          super();
       }

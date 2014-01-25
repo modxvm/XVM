@@ -7,6 +7,7 @@ package net.wg.gui.lobby.hangar
    import net.wg.gui.components.controls.IconTextButton;
    import scaleform.clik.events.ButtonEvent;
    import scaleform.clik.constants.InvalidationType;
+   import net.wg.data.constants.IconsTypes;
 
 
    public class ResearchPanel extends ResearchPanelMeta implements IResearchPanelMeta, IHelpLayoutComponent
@@ -16,35 +17,13 @@ package net.wg.gui.lobby.hangar
          super();
       }
 
-      private var _earnedXP:Number = 0;
-
-      private var _isElite:Boolean = false;
-
       public var xpText:IconText;
 
       public var button:IconTextButton;
 
-      override protected function onPopulate() : void {
-         super.onPopulate();
-         this.xpText.focusable = false;
-         this.xpText.mouseChildren = false;
-         if(this.button != null)
-         {
-            this.button.addEventListener(ButtonEvent.CLICK,this.handleButtonClick,false,0,true);
-         }
-      }
+      private var _earnedXP:Number = 0;
 
-      override protected function onDispose() : void {
-         super.onDispose();
-         if(this.button != null)
-         {
-            this.button.removeEventListener(ButtonEvent.CLICK,this.handleButtonClick);
-         }
-         this.xpText.dispose();
-         this.xpText = null;
-         this.button.dispose();
-         this.button = null;
-      }
+      private var _isElite:Boolean = false;
 
       public function as_setEarnedXP(param1:Number) : void {
          if(this._earnedXP == param1)
@@ -72,12 +51,34 @@ package net.wg.gui.lobby.hangar
          this.button.closeHelpLayout();
       }
 
+      override protected function onPopulate() : void {
+         super.onPopulate();
+         this.xpText.focusable = false;
+         this.xpText.mouseChildren = false;
+         if(this.button != null)
+         {
+            this.button.addEventListener(ButtonEvent.CLICK,this.handleButtonClick,false,0,true);
+         }
+      }
+
+      override protected function onDispose() : void {
+         super.onDispose();
+         if(this.button != null)
+         {
+            this.button.removeEventListener(ButtonEvent.CLICK,this.handleButtonClick);
+         }
+         this.xpText.dispose();
+         this.xpText = null;
+         this.button.dispose();
+         this.button = null;
+      }
+
       override protected function draw() : void {
          super.draw();
          if((isInvalid(InvalidationType.DATA)) && !(this.xpText == null))
          {
             this.xpText.text = App.utils != null?App.utils.locale.integer(this._earnedXP):this._earnedXP.toString();
-            this.xpText.icon = this._isElite?IconText.ELITE_XP:IconText.XP;
+            this.xpText.icon = this._isElite?IconsTypes.ELITE_XP:IconsTypes.XP;
          }
       }
 

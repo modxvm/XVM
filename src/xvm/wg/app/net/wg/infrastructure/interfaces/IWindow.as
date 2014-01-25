@@ -1,20 +1,19 @@
 package net.wg.infrastructure.interfaces
 {
    import net.wg.infrastructure.interfaces.entity.IDraggable;
-   import flash.events.IEventDispatcher;
    import net.wg.infrastructure.interfaces.entity.IDisposable;
-   import scaleform.clik.interfaces.IUIComponent;
-   import net.wg.gui.components.controls.TextFieldShort;
    import scaleform.clik.controls.Button;
    import scaleform.clik.utils.Constraints;
    import flash.display.MovieClip;
    import scaleform.clik.utils.Padding;
 
 
-   public interface IWindow extends IDraggable, IEventDispatcher, IDisposable, IUIComponent
+   public interface IWindow extends IWrapper, IDraggable, IDisposable
    {
           
-      function getTitleBtnEx() : TextFieldShort;
+      function get windowContent() : IAbstractWindowView;
+
+      function getTitleBtnEx() : ITextContainer;
 
       function getTitleBtn() : Button;
 
@@ -44,9 +43,7 @@ package net.wg.infrastructure.interfaces
 
       function setSize(param1:Number, param2:Number) : void;
 
-      function get sourceView() : IAbstractWindowView;
-
-      function set sourceView(param1:IAbstractWindowView) : void;
+      function setWindowContent(param1:IAbstractWindowView) : void;
 
       function get useBottomBtns() : Boolean;
 

@@ -2,6 +2,7 @@ package net.wg.gui.components.controls
 {
    import flash.display.MovieClip;
    import flash.text.TextField;
+   import net.wg.gui.components.controls.VO.ActionPriceVO;
    import net.wg.utils.ILocale;
    import flash.events.Event;
    import __AS3__.vec.Vector;
@@ -68,11 +69,11 @@ package net.wg.gui.components.controls
 
       public var _scopeType:String = "";
 
-      private var model:Object;
+      protected var model:Object;
 
       private var currentMoney:int;
 
-      private var hasMoney:Boolean = false;
+      protected var hasMoney:Boolean = false;
 
       private var credits:Number;
 
@@ -82,7 +83,7 @@ package net.wg.gui.components.controls
 
       private var isNativeVehicle:Boolean = false;
 
-      private var _specializationLevel:int = 0;
+      protected var _specializationLevel:int = 0;
 
       private var levelText:Number = 0;
 
@@ -101,7 +102,8 @@ package net.wg.gui.components.controls
          var _loc5_:String = !param2?"disabled":"normal";
          this.priceLabel.textColor = this._priceColors[_loc5_];
          this.actionPrice.textColorType = param2?ActionPrice.TEXT_COLOR_TYPE_ICON:ActionPrice.TEXT_COLOR_TYPE_ERROR;
-         this.actionPrice.setData(param3,param1,param4,this.getIcoOfButtonType());
+         var _loc6_:ActionPriceVO = new ActionPriceVO(param3,param1,param4,this.getIcoOfButtonType());
+         this.actionPrice.setData(_loc6_);
          this.actionPrice.setup(this);
          this.priceLabel.visible = !this.actionPrice.visible;
       }
@@ -192,7 +194,6 @@ package net.wg.gui.components.controls
 
       public function set buy(param1:Boolean) : void {
          this._buy = param1;
-         var _loc2_:String = this._buy?"buy":"up";
          if(this.isNativeVehicle)
          {
             if(this._buy)
@@ -205,10 +206,6 @@ package net.wg.gui.components.controls
             if(currentLabel == "buy")
             {
                this.setState(this.hasMoney?"up":"disabled");
-            }
-            else
-            {
-               return;
             }
          }
       }
@@ -227,7 +224,7 @@ package net.wg.gui.components.controls
          this.currentMoney = this.isPremium?param2:param3;
          this._specializationLevel = param4;
          this.hasMoney = this.model.isPremium?param2 >= this.model.gold:param3 >= this.model.credits;
-         this.levelText = this.calculateCurrentLevel(param6,param4);
+         this.levelText = this.calculateCurrentLevel(param6,param4,this.model.baseRoleLoss,this.model.classChangeRoleLoss,this.model.roleLevel);
          this.level = this.levelText;
          this.setEnabled();
          this.setBUY();
@@ -236,7 +233,8 @@ package net.wg.gui.components.controls
          var _loc9_:Number = this.model.isPremium?this.model.gold:this.model.credits != 0?this.model.credits:null;
          var _loc10_:Number = this.model.isPremium?this.model.defGold:this.model.defCredits != 0?this.model.defCredits:null;
          this.price = _loc9_.toString();
-         this.actionPrice.setData(param8,_loc9_,_loc10_,this.getIcoOfButtonType());
+         var _loc11_:ActionPriceVO = new ActionPriceVO(param8,_loc9_,_loc10_,this.getIcoOfButtonType());
+         this.actionPrice.setData(_loc11_);
          this.actionPrice.textColorType = this.hasMoney?ActionPrice.TEXT_COLOR_TYPE_ICON:ActionPrice.TEXT_COLOR_TYPE_ERROR;
          this.actionPrice.setup(this);
          this.priceLabel.visible = !this.actionPrice.visible;
@@ -343,7 +341,7 @@ package net.wg.gui.components.controls
          }
       }
 
-      private function setEnabled() : void {
+      protected function setEnabled() : void {
          if(this.isNativeVehicle)
          {
             this.enabled = this._specializationLevel < this.level && (this.hasMoney);
@@ -362,7 +360,7 @@ package net.wg.gui.components.controls
          }
       }
 
-      private function setBUY() : void {
+      protected function setBUY() : void {
          if(this.isNativeVehicle)
          {
             this.buy = this._specializationLevel >= this.level;
@@ -373,22 +371,20 @@ package net.wg.gui.components.controls
          }
       }
 
-      private function calculateCurrentLevel(param1:Boolean, param2:Number) : Number {
-         var _loc3_:* = NaN;
+      protected function calculateCurrentLevel(param1:Boolean, param2:Number, param3:Number, param4:Number, param5:Number) : Number {
          var _loc6_:* = NaN;
-         var _loc4_:Number = this.model.baseRoleLoss;
-         var _loc5_:Number = this.model.classChangeRoleLoss;
+         var _loc7_:* = NaN;
          if(param1)
          {
-            _loc3_ = param2 - Math.floor(param2 * _loc4_);
+            _loc6_ = param2 - Math.floor(param2 * param3);
          }
          else
          {
-            _loc6_ = _loc4_ + _loc5_;
-            _loc3_ = param2 - Math.floor(param2 * _loc6_);
+            _loc7_ = param3 + param4;
+            _loc6_ = param2 - Math.floor(param2 * _loc7_);
          }
-         _loc3_ = _loc3_ < this.model.roleLevel?this.model.roleLevel:_loc3_;
-         return _loc3_;
+         _loc6_ = _loc6_ < param5?param5:_loc6_;
+         return _loc6_;
       }
 
       override public function set selected(param1:Boolean) : void {
@@ -483,8 +479,8 @@ package net.wg.gui.components.controls
          this.model = null;
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this.disposeComponent();
       }
    }

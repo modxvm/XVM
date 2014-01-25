@@ -29,7 +29,7 @@ package net.wg.infrastructure.base
       public function setPosition(param1:IWindow) : Boolean {
          var _loc3_:* = NaN;
          var _loc4_:* = NaN;
-         var _loc2_:IAbstractWindowView = param1.sourceView;
+         var _loc2_:IAbstractWindowView = param1.windowContent;
          if((_loc2_) && (_loc2_.isCentered))
          {
             _loc3_ = Math.round(App.appWidth - param1.width >> 1);

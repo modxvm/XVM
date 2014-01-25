@@ -67,9 +67,23 @@ package
 
       public static const BATTLE_RECEIVERS_SQUAD:String = "#messenger:battle/receivers/squad";
 
+      public static const BATTLE_RECEIVERS_CHATISLOCKED:String = "#messenger:battle/receivers/chatIsLocked";
+
+      public static const BATTLE_RECEIVERS_CHATISLOCKEDTOOLTIP:String = "#messenger:battle/receivers/chatIsLockedToolTip";
+
       public static const BATTLE_UNKNOWN_ALLY:String = "#messenger:battle/unknown/ally";
 
       public static const BATTLE_UNKNOWN_ENEMY:String = "#messenger:battle/unknown/enemy";
+
+      public static const BATTLE_HISTORY_HEADER:String = "#messenger:battle/history/header";
+
+      public static const BATTLE_HISTORY_TITLE:String = "#messenger:battle/history/title";
+
+      public static const BATTLE_HISTORY_UPMESSAGE:String = "#messenger:battle/history/upMessage";
+
+      public static const BATTLE_HISTORY_DOWNMESSAGE:String = "#messenger:battle/history/downMessage";
+
+      public static const BATTLE_HISTORY_LATESTMESSAGE:String = "#messenger:battle/history/latestMessage";
 
       public static const DIALOGS_USERINFO_TITLE:String = "#messenger:dialogs/userInfo/title";
 

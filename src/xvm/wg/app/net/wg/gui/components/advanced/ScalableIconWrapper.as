@@ -13,10 +13,10 @@ package net.wg.gui.components.advanced
 
       public var loader:UILoaderAlt;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.loader.dispose();
          this.loader = null;
-         super.dispose();
+         super.onDispose();
       }
    }
 

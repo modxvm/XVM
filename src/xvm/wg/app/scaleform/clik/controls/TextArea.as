@@ -410,7 +410,7 @@ package scaleform.clik.controls
          this._resetScrollPosition = false;
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          textField.removeEventListener(Event.SCROLL,this.onScroller,false);
          if(this._scrollBar)
          {
@@ -439,7 +439,7 @@ package scaleform.clik.controls
          this._scrollBar = null;
          this._scrollBarValue = null;
          this._thumbOffset = null;
-         super.dispose();
+         super.onDispose();
       }
    }
 

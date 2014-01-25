@@ -1,16 +1,15 @@
 package net.wg.gui.lobby.questsWindow
 {
    import scaleform.clik.core.UIComponent;
-   import net.wg.gui.components.controls.DropdownMenu;
-   import net.wg.gui.components.controls.CheckBox;
-   import flash.text.TextField;
+   import net.wg.gui.lobby.questsWindow.components.SortingPanel;
+   import net.wg.gui.lobby.questsWindow.components.AlertMessage;
    import net.wg.gui.components.controls.ScrollBar;
    import flash.display.MovieClip;
    import net.wg.gui.components.common.waiting.Waiting;
    import net.wg.gui.lobby.questsWindow.data.QuestDataVO;
    import __AS3__.vec.Vector;
    import scaleform.clik.motion.Tween;
-   import scaleform.clik.data.DataProvider;
+   import scaleform.clik.events.IndexEvent;
    import flash.events.Event;
    import net.wg.gui.events.ListEventEx;
    import scaleform.clik.events.ListEvent;
@@ -20,6 +19,7 @@ package net.wg.gui.lobby.questsWindow
    import fl.transitions.easing.Strong;
    import scaleform.clik.interfaces.IDataProvider;
    import net.wg.gui.lobby.questsWindow.data.QuestRendererVO;
+   import scaleform.clik.data.DataProvider;
    import net.wg.infrastructure.base.meta.IQuestsCurrentTabMeta;
 
 
@@ -36,6 +36,8 @@ package net.wg.gui.lobby.questsWindow
 
       private static const INVALIDATE_QUEST_ID:String = "invQuestID";
 
+      private static const INVALIDATE_SORTING_FUNC:String = "invSortFunc";
+
       private static const INVALIDATE_NODATA_LABEL:String = "invNodataLabel";
 
       private static const AVAILABLE_HEIGHT:int = 583;
@@ -46,11 +48,9 @@ package net.wg.gui.lobby.questsWindow
 
       private static const WAITING_TOP_PADDING:int = 10;
 
-      public var sortingDD:DropdownMenu;
+      public var sortingPanel:SortingPanel;
 
-      public var doneCB:CheckBox;
-
-      public var sortTF:TextField;
+      public var alertMsg:AlertMessage;
 
       public var scrollBar:ScrollBar;
 
@@ -86,6 +86,8 @@ package net.wg.gui.lobby.questsWindow
 
       private var _allTasks:Vector.<String> = null;
 
+      private var _sortingFunction:Function = null;
+
       private var _hideDoneCB:Boolean = false;
 
       private var _noDataLael:String = "";
@@ -98,6 +100,8 @@ package net.wg.gui.lobby.questsWindow
 
       private var headerResized:Boolean = false;
 
+      private var _isInRoaming:Boolean = false;
+
       private var questInFade:Boolean = false;
 
       private var tweens:Vector.<Tween>;
@@ -109,7 +113,7 @@ package net.wg.gui.lobby.questsWindow
       }
 
       public function setSelectedQuest(param1:String) : void {
-         this.doneCB.selected = false;
+         this.sortingPanel.doneCB.selected = false;
          this.currentQuest = param1;
          invalidateData();
       }
@@ -117,43 +121,44 @@ package net.wg.gui.lobby.questsWindow
       override protected function configUI() : void {
          super.configUI();
          this.questInfo = QuestBlock(this.scrollPane.target);
-         this.sortTF.mouseEnabled = false;
-         this.sortTF.text = QUESTS.QUESTS_CURRENTTAB_HEADER_SORT;
-         this.doneCB.label = QUESTS.QUESTS_CURRENTTAB_HEADER_CHECKBOX_TEXT;
-         this.sortingDD.dataProvider = new DataProvider([{"label":QUESTS.QUESTS_CURRENTTAB_HEADER_DROPDOWN_DATE},{"label":QUESTS.QUESTS_CURRENTTAB_HEADER_DROPDOWN_TIME}]);
          this.notSelected.textField.text = QUESTS.QUESTS_TABS_NOSELECTED_TEXT;
-         this.sortingDD.selectedIndex = 0;
          this.addListeners();
          this.listHidingBG.mouseEnabled = false;
          this.listHidingBG.mouseChildren = false;
          this.scrollPane.visible = false;
          this.awards.visible = false;
          this.header.visible = false;
+         this.alertMsg.visible = false;
+         this._isInRoaming = App.globalVarsMgr.isInRoamingS();
       }
 
       private function addListeners() : void {
+         this.header.contentTabs.addEventListener(IndexEvent.INDEX_CHANGE,this.onChangeViewHandler);
          this.header.addEventListener(Event.RESIZE,this.layoutBlocks);
          this.awards.addEventListener(Event.RESIZE,this.layoutBlocks);
          this.questInfo.addEventListener(Event.RESIZE,this.layoutBlocks);
          this.questsList.addEventListener(ListEventEx.ITEM_CLICK,this.handleItemClick);
          this.questsList.addEventListener(ListEvent.INDEX_CHANGE,this.handleItemClick);
-         this.doneCB.addEventListener(Event.SELECT,this.handleCheckBox);
-         this.sortingDD.addEventListener(ListEvent.INDEX_CHANGE,this.handleSortingDD);
+         this.sortingPanel.doneCB.addEventListener(Event.SELECT,this.handleCheckBox);
+         this.sortingPanel.sortingDD.addEventListener(ListEvent.INDEX_CHANGE,this.handleSortingDD);
          this.questInfo.addEventListener(QuestEvent.SELECT_QUEST,this.changeQuest);
+         this.awards.addEventListener(QuestEvent.SELECT_QUEST,this.changeQuest);
       }
 
       private function removeListeners() : void {
+         this.header.contentTabs.removeEventListener(IndexEvent.INDEX_CHANGE,this.onChangeViewHandler);
+         this.awards.removeEventListener(QuestEvent.SELECT_QUEST,this.changeQuest);
          this.awards.removeEventListener(Event.RESIZE,this.layoutBlocks);
          this.header.removeEventListener(Event.RESIZE,this.layoutBlocks);
          this.questInfo.removeEventListener(Event.RESIZE,this.layoutBlocks);
          this.questsList.removeEventListener(ListEventEx.ITEM_CLICK,this.handleItemClick);
          this.questsList.removeEventListener(ListEvent.INDEX_CHANGE,this.handleItemClick);
-         this.doneCB.removeEventListener(Event.SELECT,this.handleCheckBox);
-         this.sortingDD.removeEventListener(ListEvent.INDEX_CHANGE,this.handleSortingDD);
+         this.sortingPanel.doneCB.removeEventListener(Event.SELECT,this.handleCheckBox);
+         this.sortingPanel.sortingDD.removeEventListener(ListEvent.INDEX_CHANGE,this.handleSortingDD);
          this.questInfo.removeEventListener(QuestEvent.SELECT_QUEST,this.changeQuest);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          var _loc1_:Tween = null;
          this.removeListeners();
          if(this._allTasks)
@@ -184,10 +189,10 @@ package net.wg.gui.lobby.questsWindow
          this.header = null;
          this.awards.dispose();
          this.awards = null;
-         this.sortingDD.dispose();
-         this.sortingDD = null;
-         this.doneCB.dispose();
-         this.doneCB = null;
+         this.sortingPanel.dispose();
+         this.sortingPanel = null;
+         this.alertMsg.dispose();
+         this.alertMsg = null;
          this.scrollBar.dispose();
          this.scrollBar = null;
          this.questsList.dispose();
@@ -195,42 +200,26 @@ package net.wg.gui.lobby.questsWindow
          this.scrollPane.dispose();
          this.scrollPane = null;
          this.questInfo = null;
-         this.sortTF = null;
          this.notSelected = null;
          this.noQuestsMC = null;
          this.listHidingBG = null;
          this.questBG = null;
+         this._sortingFunction = null;
          super.dispose();
+         super.onDispose();
+         this.sortingFunction = null;
       }
 
       override protected function draw() : void {
-         var _loc1_:* = false;
          super.draw();
-         this.sortingDD.x = this.sortTF.x + this.sortTF.textWidth + 3;
-         this.doneCB.x = this.sortingDD.x + this.sortingDD.width + 13;
          if(isInvalid(InvalidationType.DATA))
          {
-            this.questInfo.setAvailableQuests(this._allTasks);
-            _loc1_ = this.totalTasks > 0;
-            this.sortingDD.visible = _loc1_;
-            this.doneCB.visible = !this._hideDoneCB && (_loc1_);
-            this.sortTF.visible = _loc1_;
-            this.scrollBar.visible = _loc1_;
-            this.questsList.visible = _loc1_;
-            this.listHidingBG.visible = _loc1_;
-            this.questBG.visible = _loc1_;
-            this.notSelected.visible = _loc1_;
-            this.noQuestsMC.visible = !_loc1_;
-            if(_loc1_)
-            {
-               this.checkSelectedQuest();
-            }
-            else
-            {
-               this.scrollPane.visible = false;
-               this.header.visible = false;
-               this.awards.visible = false;
-            }
+            this.invalidateCommonData();
+         }
+         if((isInvalid(INVALIDATE_SORTING_FUNC)) && !(this._sortingFunction == null))
+         {
+            this.questInfo.conditionsView.blocksContainer.sortingFunction = this._sortingFunction;
+            this.questInfo.requirementsView.blocksContainer.sortingFunction = this._sortingFunction;
          }
          if(isInvalid(INVALIDATE_NODATA_LABEL))
          {
@@ -238,32 +227,7 @@ package net.wg.gui.lobby.questsWindow
          }
          if(isInvalid(WindowViewInvalidationType.WAITING_INVALID))
          {
-            if(!this._waiting)
-            {
-               this._waiting = new Waiting();
-               addChild(this._waiting);
-               this._waiting.x = Math.round(this.notSelected.x + (this.notSelected.width - WAITING_SIZE) / 2);
-               this._waiting.y = Math.round((AVAILABLE_HEIGHT - WAITING_SIZE) / 2) - WAITING_TOP_PADDING;
-               this._waiting.setSize(WAITING_SIZE,WAITING_SIZE);
-               this._waiting.setMessage("");
-               this._waiting.show();
-               this._waiting.hide();
-               this._waiting.validateNow();
-               this._waiting.backgroundAlpha = 0;
-            }
-            if(this._waiting)
-            {
-               if(this._showWaiting)
-               {
-                  this._waiting.show();
-                  this.playFadeAnimation(0,150,this.tweenFadeOutCallback);
-               }
-               else
-               {
-                  this._waiting.hide();
-                  this.playFadeAnimation(1,500,null);
-               }
-            }
+            this.invalidateWaiting();
          }
          if(isInvalid(INVALIDATE_QUEST_ID))
          {
@@ -287,8 +251,64 @@ package net.wg.gui.lobby.questsWindow
                this.scrollPane.scrollPosition = 0;
                this.questInfo.setData(this.questData);
                this.header.setData(this.questData.header);
-               this.awards.setAwards(this.questData.award);
+               this.awards.setAwards(this.questData.award.awardsStr);
+               this.awards.setOpenedQuests(this.questData.award.openedQuests);
             }
+         }
+      }
+
+      private function invalidateWaiting() : void {
+         if(!this._waiting)
+         {
+            this._waiting = new Waiting();
+            addChild(this._waiting);
+            this._waiting.x = Math.round(this.notSelected.x + (this.notSelected.width - WAITING_SIZE) / 2);
+            this._waiting.y = Math.round((AVAILABLE_HEIGHT - WAITING_SIZE) / 2) - WAITING_TOP_PADDING;
+            this._waiting.setSize(WAITING_SIZE,WAITING_SIZE);
+            this._waiting.setMessage("");
+            this._waiting.show();
+            this._waiting.hide();
+            this._waiting.validateNow();
+            this._waiting.backgroundAlpha = 0;
+         }
+         if(this._waiting)
+         {
+            if(this._showWaiting)
+            {
+               this._waiting.show();
+               this.playFadeAnimation(0,150,this.tweenFadeOutCallback);
+            }
+            else
+            {
+               this._waiting.hide();
+               this.playFadeAnimation(1,600,null);
+            }
+         }
+      }
+
+      private function invalidateCommonData() : void {
+         this.questInfo.setAvailableQuests(this._allTasks);
+         var _loc1_:* = this.totalTasks > 0;
+         this.sortingPanel.sortingDD.visible = _loc1_;
+         this.sortingPanel.doneCB.visible = !this._hideDoneCB && (_loc1_);
+         this.sortingPanel.sortTF.visible = _loc1_;
+         this.scrollBar.visible = _loc1_;
+         this.questsList.visible = _loc1_;
+         this.listHidingBG.visible = _loc1_;
+         this.questBG.visible = _loc1_;
+         this.notSelected.visible = _loc1_;
+         this.noQuestsMC.visible = !_loc1_;
+         this.sortingPanel.visible = (_loc1_) && !this._isInRoaming;
+         this.alertMsg.visible = (_loc1_) && (this._isInRoaming);
+         if(_loc1_)
+         {
+            this.checkSelectedQuest();
+         }
+         else
+         {
+            this.scrollPane.visible = false;
+            this.header.visible = false;
+            this.awards.visible = false;
          }
       }
 
@@ -310,25 +330,25 @@ package net.wg.gui.lobby.questsWindow
          this.tweens = Vector.<Tween>([new Tween(param2,this.header,{"alpha":param1},
             {
                "paused":false,
-               "ease":Strong.easeOut,
+               "ease":Strong.easeInOut,
                "onComplete":null
             }
          ),new Tween(param2,this.awards,{"alpha":param1},
             {
                "paused":false,
-               "ease":Strong.easeOut,
+               "ease":Strong.easeInOut,
                "onComplete":null
             }
          ),new Tween(param2,this.notSelected,{"alpha":param1},
             {
                "paused":false,
-               "ease":Strong.easeOut,
+               "ease":Strong.easeInOut,
                "onComplete":null
             }
          ),new Tween(param2,this.scrollPane,{"alpha":param1},
             {
                "paused":false,
-               "ease":Strong.easeOut,
+               "ease":Strong.easeInOut,
                "onComplete":param3
             }
          )]);
@@ -447,11 +467,11 @@ package net.wg.gui.lobby.questsWindow
       }
 
       private function handleCheckBox(param1:Event) : void {
-         this.myParent.sortS(this.sortingDD.selectedIndex,this.doneCB.selected);
+         this.myParent.sortS(this.sortingPanel.sortingDD.selectedIndex,this.sortingPanel.doneCB.selected);
       }
 
       private function handleSortingDD(param1:ListEvent) : void {
-         this.myParent.sortS(param1.index,this.doneCB.selected);
+         this.myParent.sortS(param1.index,this.sortingPanel.doneCB.selected);
       }
 
       private function changeQuest(param1:QuestEvent) : void {
@@ -504,10 +524,10 @@ package net.wg.gui.lobby.questsWindow
             if((this.awardsResized) && (this.headerResized) && (this.questInfoResized))
             {
                this.awardsResized = this.headerResized = this.questInfoResized = false;
-               this.awards.visible = Boolean((this.questData) && (this.questData.award));
-               this.awards.y = AVAILABLE_HEIGHT - this.awards.height - AWARDS_PADDING;
-               this.scrollPane.y = this.header.height;
-               this.scrollPane.height = AVAILABLE_HEIGHT - this.header.height - this.awards.height - AWARDS_PADDING;
+               this.awards.visible = Boolean((this.questData.award) && ((this.questData.award.awardsStr) || (this.questData.award.openedQuests.length)));
+               this.awards.y = Math.round(AVAILABLE_HEIGHT - this.awards.height - AWARDS_PADDING);
+               this.scrollPane.y = Math.round(this.header.height);
+               this.scrollPane.height = Math.round(AVAILABLE_HEIGHT - this.header.height - this.awards.height - AWARDS_PADDING);
                this.scrollPane.validateNow();
                if(this.lastUpdatedQuest != this.questForUpdate)
                {
@@ -531,29 +551,43 @@ package net.wg.gui.lobby.questsWindow
       }
 
       private function getQuestData() : void {
-         var _loc5_:QuestRenderer = null;
-         this.questData = new QuestDataVO(this.myParent.getQuestInfoS(this.questForUpdate));
+         var _loc6_:QuestRenderer = null;
+         var _loc1_:Object = this.myParent.getQuestInfoS(this.questForUpdate);
+         this.questData = _loc1_?new QuestDataVO(_loc1_):null;
          this.lastUpdatedQuest = this.questForUpdate;
-         var _loc1_:IDataProvider = this.questsList.dataProvider;
-         var _loc2_:Number = _loc1_.length;
-         var _loc3_:QuestRendererVO = null;
-         var _loc4_:* = 0;
-         while(_loc4_ < _loc2_)
+         var _loc2_:IDataProvider = this.questsList.dataProvider;
+         var _loc3_:Number = _loc2_.length;
+         var _loc4_:QuestRendererVO = null;
+         var _loc5_:* = 0;
+         while(_loc5_ < _loc3_)
          {
-            _loc3_ = _loc1_[_loc4_];
-            if(_loc3_.questID == this.questForUpdate)
+            _loc4_ = _loc2_[_loc5_];
+            if(_loc4_.questID == this.questForUpdate)
             {
-               _loc3_.isNew = false;
-               if(this.questsList.selectedIndex == _loc4_)
+               _loc4_.isNew = false;
+               if(this.questsList.selectedIndex == _loc5_)
                {
-                  _loc5_ = QuestRenderer(this.questsList.getRendererAt(_loc4_,this.questsList.scrollPosition));
-                  _loc5_.hideNew();
+                  _loc6_ = QuestRenderer(this.questsList.getRendererAt(_loc5_,this.questsList.scrollPosition));
+                  _loc6_.hideNew();
                   break;
                }
             }
-            _loc4_++;
+            _loc5_++;
          }
          invalidate(INVALIDATE_QUEST_INFO);
+      }
+
+      private function onChangeViewHandler(param1:IndexEvent) : void {
+         this.questInfo.changeView(this.header.contentTabs.selectedItem.data);
+      }
+
+      public function get sortingFunction() : Function {
+         return this._sortingFunction;
+      }
+
+      public function set sortingFunction(param1:Function) : void {
+         this._sortingFunction = param1;
+         invalidate(INVALIDATE_SORTING_FUNC);
       }
    }
 

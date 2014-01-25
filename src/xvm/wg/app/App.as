@@ -8,6 +8,7 @@ package
    import net.wg.infrastructure.managers.IWaitingView;
    import net.wg.infrastructure.managers.IEnvironmentManager;
    import net.wg.infrastructure.managers.IContextMenuManager;
+   import net.wg.infrastructure.managers.IPopoverManager;
    import net.wg.infrastructure.managers.IColorSchemeManager;
    import net.wg.infrastructure.managers.IGuiItemsManager;
    import net.wg.infrastructure.managers.IVoiceChatManager;
@@ -68,6 +69,10 @@ package
 
       public static function get contextMenuMgr() : IContextMenuManager {
          return instance.contextMenuMgr;
+      }
+
+      public static function get popoverMgr() : IPopoverManager {
+         return instance.popoverMgr;
       }
 
       public static function get colorSchemeMgr() : IColorSchemeManager {

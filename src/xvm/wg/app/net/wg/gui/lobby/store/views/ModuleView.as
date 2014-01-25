@@ -37,9 +37,9 @@ package net.wg.gui.lobby.store.views
          this.lockedChkBx.enableDynamicFrameUpdating();
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          var _loc1_:ViewUIElementVO = null;
-         super.dispose();
+         super.onDispose();
          if(this._kindsArr != null)
          {
             for each (_loc1_ in this._kindsArr)

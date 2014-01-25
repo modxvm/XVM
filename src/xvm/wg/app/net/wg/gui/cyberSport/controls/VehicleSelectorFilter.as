@@ -144,8 +144,8 @@ package net.wg.gui.cyberSport.controls
          this.nationDD.selectedIndex = 0;
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this.nationDD.removeEventListener(ListEvent.INDEX_CHANGE,this.onFiltersChanged);
          this.vehicleTypeDD.removeEventListener(ListEvent.INDEX_CHANGE,this.onFiltersChanged);
          this.levelDD.removeEventListener(ListEvent.INDEX_CHANGE,this.onFiltersChanged);

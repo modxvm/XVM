@@ -73,14 +73,14 @@ package net.wg.gui.cyberSport.views.autoSearch
          startTimer();
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.fieldSet.dispose();
          if(this.players)
          {
             this.players.splice(0,this.players.length);
             this.players = null;
          }
-         super.dispose();
+         super.onDispose();
       }
 
       override protected function cancelButtonOnClick(param1:ButtonEvent=null) : void {

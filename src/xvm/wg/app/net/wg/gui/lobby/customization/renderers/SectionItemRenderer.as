@@ -57,10 +57,10 @@ package net.wg.gui.lobby.customization.renderers
          super.draw();
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          removeEventListener(MouseEvent.ROLL_OVER,this.onRollOver);
          removeEventListener(MouseEvent.ROLL_OUT,this.onRollOut);
-         super.dispose();
+         super.onDispose();
       }
 
       override protected function updateAfterStateChange() : void {

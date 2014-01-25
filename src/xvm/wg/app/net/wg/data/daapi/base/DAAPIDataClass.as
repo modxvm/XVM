@@ -117,10 +117,11 @@ package net.wg.data.daapi.base
          }
       }
 
-      public function dispose() : void {
+      public final function dispose() : void {
          var _loc1_:String = null;
          var _loc2_:* = undefined;
          var _loc3_:String = null;
+         this.onDispose();
          for (_loc1_ in this._hash)
          {
             _loc2_ = this._hash[_loc1_];
@@ -128,6 +129,10 @@ package net.wg.data.daapi.base
             delete this[[_loc1_]];
          }
          this._hash = null;
+      }
+
+      protected function onDispose() : void {
+          
       }
 
       public function toHash() : Object {

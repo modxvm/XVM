@@ -56,7 +56,7 @@ package net.wg.gui.login.impl
          super.onPopulate();
          this.cancelBtn.addEventListener(ButtonEvent.CLICK,this.onCancelBtnClickHandler,false,0,true);
          window.getBackground().alpha = 0;
-         App.utils.focusHandler.setFocus(this.cancelBtn);
+         setFocus(this.cancelBtn);
       }
 
       override protected function onDispose() : void {

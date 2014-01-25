@@ -6,6 +6,7 @@ package net.wg.gui.lobby.settings
    import net.wg.gui.components.controls.LabelControl;
    import flash.text.TextField;
    import net.wg.gui.components.controls.CheckBox;
+   import flash.display.InteractiveObject;
 
 
    public class SettingsBaseView extends UIComponent implements IViewStackContent, ISettingsBase
@@ -80,10 +81,14 @@ package net.wg.gui.lobby.settings
           
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this._data = null;
          this._viewId = null;
+      }
+
+      public function getComponentForFocus() : InteractiveObject {
+         return null;
       }
    }
 

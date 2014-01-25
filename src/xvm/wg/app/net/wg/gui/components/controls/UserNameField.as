@@ -1,6 +1,7 @@
 package net.wg.gui.components.controls
 {
    import scaleform.clik.core.UIComponent;
+   import net.wg.infrastructure.interfaces.ITextContainer;
    import flash.text.TextField;
    import net.wg.data.VO.UserVO;
    import flash.text.TextFormat;
@@ -12,7 +13,7 @@ package net.wg.gui.components.controls
    import net.wg.data.constants.Values;
 
 
-   public class UserNameField extends UIComponent
+   public class UserNameField extends UIComponent implements ITextContainer
    {
           
       public function UserNameField() {
@@ -37,6 +38,7 @@ package net.wg.gui.components.controls
             }
          ;
          super();
+         this.textField.text = " ";
          this._textFormat = this.textField.getTextFormat();
       }
 
@@ -79,13 +81,14 @@ package net.wg.gui.components.controls
       override protected function configUI() : void {
          constraints.addElement("textField",this.textField,Constraints.ALL);
          constraints.update(width,height);
+         initSize();
          super.configUI();
          addEventListener(MouseEvent.ROLL_OVER,this.handleMouseRollOver);
          addEventListener(MouseEvent.ROLL_OUT,this.handleMouseRollOut);
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
       }
 
       protected function handleMouseRollOver(param1:MouseEvent) : void {
@@ -128,7 +131,7 @@ package net.wg.gui.components.controls
          {
             if(this.userVO)
             {
-               _loc2_ = App.utils.commons.formatPlayerName(this.textField,this.userVO.userName,this.userVO.clanAbbrev,this.userVO.region,this.userVO.igrType > 0);
+               _loc2_ = App.utils.commons.formatPlayerName(this.textField,App.utils.commons.getUserProps(this.userVO.userName,this.userVO.clanAbbrev,this.userVO.region,this.userVO.igrType));
                this._showToolTip = _loc2_;
                if(_loc2_)
                {

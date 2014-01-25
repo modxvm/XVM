@@ -29,7 +29,7 @@ package net.wg.gui.lobby.tankman
 
       public var currentVehicle:PersonalCaseCurrentVehicle = null;
 
-      public var specializationLevel:String;
+      public var specializationLevel:Number;
 
       public var inTank:Boolean = false;
 
@@ -46,6 +46,8 @@ package net.wg.gui.lobby.tankman
       public var lastNewSkillExp:int = 0;
 
       public var lastSkillLevel:int = 99;
+
+      public var modifiers:Array = null;
    }
 
 }

@@ -5,6 +5,7 @@ package net.wg.gui.lobby.customization.renderers
    import net.wg.gui.components.controls.IconText;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.gui.lobby.customization.CustomizationEvent;
+   import net.wg.data.constants.IconsTypes;
    import net.wg.data.constants.SoundTypes;
 
 
@@ -28,6 +29,15 @@ package net.wg.gui.lobby.customization.renderers
          invalidateData();
       }
 
+      override public function set enabled(param1:Boolean) : void {
+         if(this.lock)
+         {
+            return;
+         }
+         super.enabled = param1;
+         invalidateData();
+      }
+
       public function get lock() : Boolean {
          return this._lock;
       }
@@ -39,15 +49,6 @@ package net.wg.gui.lobby.customization.renderers
          }
          this._lock = param1;
          this.enabled = !param1;
-      }
-
-      override public function set enabled(param1:Boolean) : void {
-         if(this.lock)
-         {
-            return;
-         }
-         super.enabled = param1;
-         invalidateData();
       }
 
       override protected function configUI() : void {
@@ -99,12 +100,12 @@ package net.wg.gui.lobby.customization.renderers
             if(_loc1_.isGold)
             {
                this.costField.text = App.utils.locale.gold(_loc1_.cost);
-               this.costField.icon = IconText.GOLD;
+               this.costField.icon = IconsTypes.GOLD;
             }
             else
             {
                this.costField.text = App.utils.locale.integer(_loc1_.cost);
-               this.costField.icon = IconText.CREDITS;
+               this.costField.icon = IconsTypes.CREDITS;
             }
             this.costField.validateNow();
          }

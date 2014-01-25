@@ -12,6 +12,7 @@ package net.wg.gui.cyberSport.views
    import net.wg.infrastructure.interfaces.entity.IDisposable;
    import scaleform.clik.controls.Button;
    import net.wg.gui.cyberSport.views.events.RosterSettingsEvent;
+   import flash.display.InteractiveObject;
 
 
    public class RangeRosterSettingsView extends UIComponent implements IViewStackContent
@@ -116,8 +117,8 @@ package net.wg.gui.cyberSport.views
          this.addListeners();
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this.removeListeners();
          this.doubleSlider.dispose();
          this.nationButtonGroup.dispose();
@@ -295,6 +296,10 @@ package net.wg.gui.cyberSport.views
       private function dispatchChangeRoster() : void {
          this.checkSliderValues();
          dispatchEvent(new RosterSettingsEvent(RosterSettingsEvent.RANGE_ROSTER_CHANGED,this.model));
+      }
+
+      public function getComponentForFocus() : InteractiveObject {
+         return null;
       }
    }
 

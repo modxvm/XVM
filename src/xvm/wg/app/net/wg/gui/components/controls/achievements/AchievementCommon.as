@@ -1,7 +1,7 @@
 package net.wg.gui.components.controls.achievements
 {
-   import net.wg.data.constants.AchievementSection;
    import net.wg.data.constants.AchievementType;
+   import net.wg.data.constants.AchievementSection;
    import net.wg.gui.events.UILoaderEvent;
 
 
@@ -12,126 +12,149 @@ package net.wg.gui.components.controls.achievements
          super();
       }
 
+      private static const MIN_PROGRESS_PERCENT:Number = 0.9;
+
       override protected function applyData() : void {
-         var _loc8_:* = 0;
-         var _loc9_:* = false;
+         var _loc1_:String = null;
          if(data == null)
          {
             return;
          }
-         var _loc1_:String = getDataOwnValue("type","");
-         var _loc2_:String = getDataOwnValue("section","");
-         var _loc3_:Number = getDataOwnValue("value",NaN);
-         var _loc4_:uint = getDataOwnValue("lvlUpTotalValue",0);
-         var _loc5_:uint = getDataOwnValue("lvlUpValue",0);
+         _loc1_ = getDataOwnValue(data,"type","");
+         var _loc2_:String = getDataOwnValue(data,"section","");
+         var _loc3_:Number = getDataOwnValue(data,"value",NaN);
+         var _loc4_:uint = getDataOwnValue(data,"lvlUpTotalValue",0);
+         var _loc5_:uint = getDataOwnValue(data,"lvlUpValue",0);
          var _loc6_:uint = _loc4_ - _loc5_;
-         var _loc7_:Boolean = getDataOwnValue("isRare",false);
          loader.alpha = 1;
-         if(_loc7_)
+         if(_loc1_)
          {
-            hideProgress();
-            counterType = AchievementCounter.NONE;
-         }
-         else
-         {
-            if(_loc1_)
+            switch(_loc1_)
             {
-               switch(_loc1_)
-               {
-                  case AchievementType.REPEATABLE:
-                     switch(_loc2_)
-                     {
-                        case AchievementSection.SPECIAL:
-                           this.checkReceived(_loc3_,AchievementCounter.RED);
-                           if(_loc4_ > 0)
-                           {
-                              this.showProgress();
-                           }
-                           else
-                           {
-                              hideProgress();
-                           }
-                           break;
-                        default:
-                           this.checkReceived(_loc3_,AchievementCounter.RED);
-                           hideProgress();
-                     }
-                     break;
-                  case AchievementType.SERIES:
-                     switch(_loc2_)
-                     {
-                        case AchievementSection.SPECIAL:
-                           counterType = AchievementCounter.NONE;
-                           this.setRecordRepeatable(AchievementCounter.YELLOW);
-                           _loc8_ = getDataOwnValue("minValueForRecord",-1);
-                           if(!isNaN(_loc3_) && (_loc6_ / _loc4_ >= 0.9 || !(_loc6_ == 0) && _loc5_ < _loc8_))
-                           {
-                              this.showProgress();
-                           }
-                           else
-                           {
-                              hideProgress();
-                           }
-                           break;
-                        default:
-                           this.setRecordRepeatable(AchievementCounter.YELLOW);
-                           hideProgress();
-                     }
-                     break;
-                  case AchievementType.CUSTOM:
-                     switch(_loc2_)
-                     {
-                        case AchievementSection.SPECIAL:
-                           counterType = AchievementCounter.NONE;
-                           _loc9_ = getDataOwnValue("isInDossier",false);
-                           if(_loc9_)
-                           {
-                              this.showIcon();
-                           }
-                           else
-                           {
-                              this.hideIcon();
-                           }
-                           if(_loc6_ != _loc4_)
-                           {
-                              this.showProgress();
-                           }
-                           else
-                           {
-                              hideProgress();
-                           }
-                           break;
-                        default:
-                           this.showProgress();
-                     }
-                     break;
-                  case AchievementType.CLASS:
-                     switch(_loc2_)
-                     {
-                        case AchievementSection.CLASS:
-                           this.checkReceived(_loc3_,AchievementCounter.BEIGE);
-                           counterType = AchievementCounter.BEIGE;
-                           if(_loc6_ != _loc4_)
-                           {
-                              this.showProgress();
-                           }
-                           else
-                           {
-                              hideProgress();
-                           }
-                           break;
-                     }
-                     break;
-                  default:
-                     this.showProgress();
-               }
+               case AchievementType.REPEATABLE:
+                  this.adjustRepeatableType(_loc2_,_loc3_,_loc4_);
+                  break;
+               case AchievementType.SERIES:
+                  this.adjustSpecialType(_loc2_,_loc3_,_loc4_,_loc6_,_loc5_);
+                  break;
+               case AchievementType.CUSTOM:
+                  this.adjustCustomType(_loc2_,_loc4_,_loc6_);
+                  break;
+               case AchievementType.CLASS:
+                  this.adjustClassType(_loc2_,_loc3_,_loc4_,_loc6_);
+                  break;
+               case AchievementType.SINGLE:
+                  this.adjustSingleType(_loc3_);
+                  break;
+               default:
+                  this.checkReceived(_loc3_,AchievementCounter.NONE);
+                  hideProgress();
             }
          }
          super.applyData();
       }
 
+      private function adjustClassType(param1:String, param2:Number, param3:Number, param4:Number) : void {
+         switch(param1)
+         {
+            case AchievementSection.CLASS:
+               this.checkReceived(param2,AchievementCounter.BEIGE);
+               counterType = AchievementCounter.BEIGE;
+               if(param4 != param3)
+               {
+                  this.showProgress();
+               }
+               else
+               {
+                  hideProgress();
+               }
+               break;
+         }
+      }
+
+      private function adjustSingleType(param1:Number) : void {
+         this.checkReceived(param1,AchievementCounter.NONE);
+         hideProgress();
+      }
+
+      private function adjustCustomType(param1:String, param2:Number, param3:Number) : void {
+         var _loc4_:* = false;
+         switch(param1)
+         {
+            case AchievementSection.SPECIAL:
+               counterType = AchievementCounter.NONE;
+               _loc4_ = getDataOwnValue(data,"isInDossier",false);
+               if(_loc4_)
+               {
+                  this.showIcon();
+               }
+               else
+               {
+                  this.hideIcon();
+               }
+               if(param3 != param2)
+               {
+                  this.showProgress();
+               }
+               else
+               {
+                  hideProgress();
+               }
+               break;
+            default:
+               this.showProgress();
+         }
+      }
+
+      private function adjustRepeatableType(param1:String, param2:Number, param3:Number) : void {
+         switch(param1)
+         {
+            case AchievementSection.SPECIAL:
+               this.checkReceived(param2,AchievementCounter.RED);
+               if(param3 > 0)
+               {
+                  this.showProgress();
+               }
+               else
+               {
+                  hideProgress();
+               }
+               break;
+            case AchievementSection.ACTION:
+               this.checkReceived(param2,AchievementCounter.RED);
+               hideProgress();
+               break;
+            default:
+               this.checkReceived(param2,AchievementCounter.RED);
+               hideProgress();
+         }
+      }
+
+      private function adjustSpecialType(param1:String, param2:Number, param3:Number, param4:Number, param5:Number) : void {
+         var _loc6_:* = 0;
+         switch(param1)
+         {
+            case AchievementSection.SPECIAL:
+               counterType = AchievementCounter.NONE;
+               this.setRecordRepeatable(AchievementCounter.YELLOW);
+               _loc6_ = getDataOwnValue(data,"minValueForRecord",-1);
+               if(!isNaN(param2) && (param4 / param3 >= MIN_PROGRESS_PERCENT || !(param4 == 0) && param5 < _loc6_))
+               {
+                  this.showProgress();
+               }
+               else
+               {
+                  hideProgress();
+               }
+               break;
+            default:
+               this.setRecordRepeatable(AchievementCounter.YELLOW);
+               hideProgress();
+         }
+      }
+
       override protected function showProgress() : void {
-         if(!getDataOwnValue("showProgress",null))
+         if(!getDataOwnValue(data,"showProgress",null))
          {
             return;
          }
@@ -139,7 +162,7 @@ package net.wg.gui.components.controls.achievements
       }
 
       override protected function tryToLoadRareAchievement() : void {
-         var _loc1_:* = getDataOwnValue("rareIconId",null);
+         var _loc1_:* = getDataOwnValue(data,"rareIconId",null);
          if(_loc1_)
          {
             loader.source = "img://" + _loc1_;
@@ -157,7 +180,7 @@ package net.wg.gui.components.controls.achievements
       }
 
       protected function setRecordRepeatable(param1:String) : void {
-         if(getDataOwnValue("isInDossier",false))
+         if(getDataOwnValue(data,"isInDossier",false))
          {
             this.showIcon();
          }
@@ -176,7 +199,7 @@ package net.wg.gui.components.controls.achievements
          }
          else
          {
-            this.counterType = param2;
+            counterType = param2;
             this.showIcon();
          }
          hideProgress();
@@ -190,12 +213,12 @@ package net.wg.gui.components.controls.achievements
          loader.alpha = 1;
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          if((counter) && (contains(counter)))
          {
             removeChild(counter);
          }
-         super.dispose();
+         super.onDispose();
       }
    }
 

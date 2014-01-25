@@ -30,10 +30,10 @@ package net.wg.gui.lobby.vehicleBuyWindow
 
       public var descriptionScrollBar:ScrollBar;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.tankActionPrice.dispose();
          this.tankActionPrice = null;
-         super.dispose();
+         super.onDispose();
       }
    }
 

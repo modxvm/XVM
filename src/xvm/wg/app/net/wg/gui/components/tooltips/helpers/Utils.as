@@ -1,12 +1,13 @@
 package net.wg.gui.components.tooltips.helpers
 {
-   import net.wg.gui.components.controls.IconText;
+   import net.wg.data.constants.IconsTypes;
    import net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO;
    import net.wg.gui.components.tooltips.VO.ToolTipBlockVO;
    import flash.text.TextFormat;
-   import flash.text.TextField;
+   import net.wg.gui.components.controls.IconText;
    import net.wg.gui.components.tooltips.VO.ToolTipBlockRightListItemVO;
    import __AS3__.vec.Vector;
+   import flash.text.TextField;
    import flash.text.TextFormatAlign;
    import net.wg.gui.components.tooltips.VO.ToolTipStatusColorsVO;
    import flash.filters.DropShadowFilter;
@@ -60,8 +61,6 @@ package net.wg.gui.components.tooltips.helpers
 
       public const STATUS_INFO:String = "info";
 
-      private const LEFT_TEXTFIELD_MIN_WIDTH:Number = 54;
-
       public const MARGIN_AFTER_BLOCK:Number = 15;
 
       public const MARGIN_BEETWEEN_LEFT_AND_RIGHT_BLOCKS:Number = 3;
@@ -70,41 +69,41 @@ package net.wg.gui.components.tooltips.helpers
 
       public const MARGIN_AFTER_SUBHEADER:Number = 12;
 
+      private const LEFT_TEXTFIELD_MIN_WIDTH:Number = 54;
+
       public function getIcon(param1:String, param2:String="", param3:Boolean=false, param4:Boolean=false) : String {
-         var _loc5_:String = IconText.EMPTY;
+         var _loc5_:String = IconsTypes.EMPTY;
          switch(param1)
          {
             case "xp":
-               _loc5_ = param4?IconText.ELITE_XP:IconText.XP;
+               _loc5_ = param4?IconsTypes.ELITE_XP:IconsTypes.XP;
                break;
             case "doubleXPFactor":
-               _loc5_ = IconText.DOUBLE_XP_FACTOR;
+               _loc5_ = IconsTypes.DOUBLE_XP_FACTOR;
                break;
             case "actionXPFactor":
-               _loc5_ = IconText.ACTION_XP_FACTOR;
+               _loc5_ = IconsTypes.ACTION_XP_FACTOR;
                break;
             case "unlock_price":
-               _loc5_ = IconText.XP_PRICE;
+               _loc5_ = IconsTypes.XP_PRICE;
                break;
             case "buy_price_action":
-               _loc5_ = param3?IconText.CREDITS:IconText.GOLD;
+               _loc5_ = param3?IconsTypes.CREDITS:IconsTypes.GOLD;
                break;
             case "buy_price":
             case "sell_price":
                if(param3)
                {
-                  _loc5_ = IconText.GOLD;
+                  _loc5_ = IconsTypes.GOLD;
                }
                else
                {
-                  _loc5_ = IconText.CREDITS;
+                  _loc5_ = IconsTypes.CREDITS;
                }
                break;
             default:
-               _loc5_ = IconText.EMPTY;
+               _loc5_ = IconsTypes.EMPTY;
          }
-         trace("getIcon","res=",_loc5_);
-         trace(" ");
          return _loc5_;
       }
 
@@ -128,7 +127,6 @@ package net.wg.gui.components.tooltips.helpers
       public function createBlock(param1:ToolTipBlockVO, param2:Number) : ToolTipBlockResultVO {
          var _loc4_:TextFormat = null;
          var _loc6_:String = null;
-         var _loc11_:TextField = null;
          var _loc16_:IconText = null;
          var _loc17_:ToolTipBlockRightListItemVO = null;
          var _loc18_:IconText = null;
@@ -140,7 +138,7 @@ package net.wg.gui.components.tooltips.helpers
          var _loc8_:Number = 0;
          var _loc9_:Vector.<IconText> = new Vector.<IconText>();
          var _loc10_:Array = [];
-         _loc11_ = null;
+         var _loc11_:TextField = null;
          var _loc12_:TextField = null;
          if(param1.header)
          {
@@ -154,12 +152,11 @@ package net.wg.gui.components.tooltips.helpers
          _loc4_.align = TextFormatAlign.RIGHT;
          _loc4_.size = 11;
          _loc4_.font = _loc6_;
-         var _loc13_:Number = 0;
-         var _loc14_:Number = param1.startYPos;
+         var _loc13_:Number = param1.startYPos;
          _loc11_ = new TextField();
          _loc11_.name = param1.childrenNamePrefix + "_left";
          _loc11_.x = param2;
-         _loc11_.y = _loc14_;
+         _loc11_.y = _loc13_;
          _loc11_.width = 300;
          _loc11_.height = 10;
          _loc11_.autoSize = TextFormatAlign.RIGHT;
@@ -171,16 +168,16 @@ package net.wg.gui.components.tooltips.helpers
          _loc11_.width = _loc11_.textWidth + 5 > this.LEFT_TEXTFIELD_MIN_WIDTH?_loc11_.textWidth + 5:this.LEFT_TEXTFIELD_MIN_WIDTH;
          _loc3_ = Math.max(_loc11_.width,_loc3_);
          _loc8_ = Math.max(_loc8_,_loc3_);
-         _loc13_ = _loc11_.getLineMetrics(0).height + _loc4_.leading + 0.3;
          param1.contener.addChild(_loc11_);
-         var _loc15_:uint = param1.rightTextList.length;
+         var _loc14_:uint = param1.rightTextList.length;
+         var _loc15_:Number = _loc11_.getLineMetrics(0).height + _loc4_.leading + 0.333;
          _loc5_ = 0;
-         while(_loc5_ < _loc15_)
+         while(_loc5_ < _loc14_)
          {
             _loc16_ = App.utils.classFactory.getComponent("IconText",IconText);
             _loc16_.name = param1.childrenNamePrefix + "_iconText_" + _loc5_;
             _loc16_.x = param2 + this.LEFT_TEXTFIELD_MIN_WIDTH + this.MARGIN_BEETWEEN_LEFT_AND_RIGHT_BLOCKS;
-            _loc16_.y = Math.round(_loc14_);
+            _loc16_.y = Math.round(_loc13_);
             _loc16_.textAlign = TextFormatAlign.LEFT;
             _loc16_.textColor = param1.rightTextColor;
             _loc16_.iconPosition = TextFormatAlign.LEFT;
@@ -203,16 +200,16 @@ package net.wg.gui.components.tooltips.helpers
             {
                _loc7_ = true;
             }
-            _loc14_ = _loc14_ + _loc13_;
+            _loc13_ = _loc13_ + _loc15_;
             param1.contener.addChild(_loc16_);
             _loc9_.push(_loc16_);
             _loc5_++;
          }
          if(!_loc7_)
          {
-            _loc15_ = _loc9_.length;
+            _loc14_ = _loc9_.length;
             _loc5_ = 0;
-            while(_loc5_ < _loc15_)
+            while(_loc5_ < _loc14_)
             {
                _loc18_ = _loc9_[_loc5_];
                _loc18_.xCorrect = -17;
@@ -221,7 +218,7 @@ package net.wg.gui.components.tooltips.helpers
                _loc5_++;
             }
          }
-         param1.startYPos = Math.round(_loc14_) + this.MARGIN_AFTER_BLOCK;
+         param1.startYPos = Math.round(_loc13_) + this.MARGIN_AFTER_BLOCK;
          return new ToolTipBlockResultVO(param1.startYPos,_loc11_,_loc9_,_loc10_,_loc12_,_loc7_,_loc3_,_loc8_);
       }
 

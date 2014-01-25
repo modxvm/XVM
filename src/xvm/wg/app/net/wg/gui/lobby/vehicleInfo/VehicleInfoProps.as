@@ -2,6 +2,7 @@ package net.wg.gui.lobby.vehicleInfo
 {
    import scaleform.clik.core.UIComponent;
    import net.wg.infrastructure.interfaces.IViewStackContent;
+   import flash.display.InteractiveObject;
 
 
    public class VehicleInfoProps extends UIComponent implements IViewStackContent
@@ -34,8 +35,8 @@ package net.wg.gui.lobby.vehicleInfo
          }
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          while(this.numChildren > 0)
          {
             this.removeChildAt(0);
@@ -44,6 +45,10 @@ package net.wg.gui.lobby.vehicleInfo
 
       override public function toString() : String {
          return "[WG VehicleInfoProps " + name + "]";
+      }
+
+      public function getComponentForFocus() : InteractiveObject {
+         return null;
       }
    }
 

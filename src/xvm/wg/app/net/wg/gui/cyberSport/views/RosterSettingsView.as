@@ -157,8 +157,8 @@ package net.wg.gui.cyberSport.views
          }
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this.submitBtn.removeEventListener(ButtonEvent.CLICK,this.submitBtn_buttonClickHandler);
          this.cancelBtn.removeEventListener(ButtonEvent.CLICK,this.cancelBtn_buttonClickHandler);
          this.submitBtn.dispose();

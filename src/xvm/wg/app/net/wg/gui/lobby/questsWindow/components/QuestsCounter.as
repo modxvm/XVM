@@ -29,12 +29,12 @@ package net.wg.gui.lobby.questsWindow.components
          addEventListener(MouseEvent.ROLL_OVER,showCounterTooltip);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          removeEventListener(MouseEvent.CLICK,hideTooltip);
          removeEventListener(MouseEvent.ROLL_OUT,hideTooltip);
          removeEventListener(MouseEvent.ROLL_OVER,showCounterTooltip);
          this.textField = null;
-         super.dispose();
+         super.onDispose();
       }
    }
 

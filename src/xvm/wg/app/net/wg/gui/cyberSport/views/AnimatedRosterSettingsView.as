@@ -53,8 +53,8 @@ package net.wg.gui.cyberSport.views
          return [this.leftBtn.getModel(),this.rightBtn.getModel()];
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this.leftBtn.addEventListener(ButtonEvent.CLICK,this.leftBtn_buttonClickHandler);
          this.rightBtn.addEventListener(ButtonEvent.CLICK,this.rightBtn_buttonClickHandler);
          this.leftBtn.dispose();

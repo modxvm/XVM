@@ -15,6 +15,7 @@ package net.wg.gui.cyberSport.views
    import net.wg.gui.cyberSport.controls.events.CSComponentEvent;
    import net.wg.data.constants.generated.CYBER_SPORT_ALIASES;
    import net.wg.gui.cyberSport.views.events.CyberSportEvent;
+   import flash.display.InteractiveObject;
 
 
    public class IntroView extends CyberSportIntroMeta implements ICyberSportIntroMeta, ICyberSportBaseViewMeta, IViewStackContent
@@ -177,9 +178,13 @@ package net.wg.gui.cyberSport.views
          this.selectedVehiclesInfo.removeEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
          this.selectedVehiclesInfo.removeEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
          this.searchBtn.dispose();
+         this.searchBtn = null;
          this.createBtn.dispose();
+         this.createBtn = null;
          this.autoMatchBtn.dispose();
+         this.autoMatchBtn = null;
          this.chooseVehiclesButton.dispose();
+         this.chooseVehiclesButton = null;
          super.onDispose();
       }
 
@@ -193,6 +198,10 @@ package net.wg.gui.cyberSport.views
 
       private function csVehicleBtnOnClick(param1:ButtonEvent) : void {
          showSelectorPopupS();
+      }
+
+      public function getComponentForFocus() : InteractiveObject {
+         return null;
       }
    }
 

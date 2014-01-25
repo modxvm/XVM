@@ -3,20 +3,21 @@ package net.wg.gui.components.common
    import scaleform.clik.core.UIComponent;
    import net.wg.infrastructure.interfaces.IManagedContainer;
    import flash.display.DisplayObject;
-   import net.wg.infrastructure.interfaces.IWindow;
-   import net.wg.infrastructure.base.AbstractView;
-   import net.wg.infrastructure.interfaces.IAbstractWindowView;
-   import net.wg.data.constants.Linkages;
+   import net.wg.infrastructure.interfaces.IAbstractWrapperView;
+   import net.wg.infrastructure.interfaces.IWrapper;
+   import net.wg.infrastructure.interfaces.IManagedContent;
+   import net.wg.infrastructure.interfaces.IView;
+   import net.wg.infrastructure.events.LifeCycleEvent;
    import net.wg.data.constants.ContainerTypes;
    import flash.events.MouseEvent;
    import net.wg.utils.IAssertable;
    import net.wg.data.constants.Errors;
-   import flash.display.Sprite;
-   import net.wg.infrastructure.interfaces.IView;
-   import scaleform.gfx.FocusManager;
    import flash.events.FocusEvent;
+   import net.wg.infrastructure.base.AbstractView;
+   import net.wg.infrastructure.interfaces.IWindow;
    import scaleform.clik.motion.Tween;
    import flash.display.MovieClip;
+   import net.wg.data.constants.Linkages;
    import net.wg.infrastructure.exceptions.InfrastructureException;
    import net.wg.gui.events.ManagedContainerEvent;
    import flash.events.Event;
@@ -50,67 +51,57 @@ package net.wg.gui.components.common
       private const GROUP_Y_OFFSET:int = 20;
 
       override public function addChild(param1:DisplayObject) : DisplayObject {
-         var _loc3_:IWindow = null;
-         var _loc4_:String = null;
-         var _loc2_:AbstractView = param1 as AbstractView;
-         if(param1  is  IAbstractWindowView)
+         var _loc3_:IAbstractWrapperView = null;
+         var _loc4_:IWrapper = null;
+         var _loc5_:DisplayObject = null;
+         var _loc6_:String = null;
+         this.assertContent(param1);
+         var _loc2_:IView = IManagedContent(param1).sourceView;
+         if(param1  is  IAbstractWrapperView)
          {
-            _loc3_ = IWindow(App.utils.classFactory.getComponent(Linkages.WINDOW,IWindow));
-            _loc3_.sourceView = _loc2_ as IAbstractWindowView;
-            _loc3_.sourceView.window = _loc3_;
-            param1 = DisplayObject(_loc3_);
+            _loc3_ = IAbstractWrapperView(param1);
+            _loc4_ = IWrapper(App.utils.classFactory.getComponent(_loc3_.wrapperLinkage,IWrapper));
+            _loc4_.wrapperContent = _loc3_;
+            _loc4_.wrapperContent.wrapper = _loc4_;
          }
+         _loc2_.addEventListener(LifeCycleEvent.ON_BEFORE_DISPOSE,this.onAfterManagedContentDisposeHandler);
          if((_loc2_) && (_loc2_.as_config) && (_loc2_.as_config.hasOwnProperty("type")))
          {
-            super.addChild(param1);
-            _loc2_.playShowTween(param1);
-            if(_loc2_.as_config.type == ContainerTypes.WINDOW || _loc2_.as_config.type == ContainerTypes.DIALOG)
+            _loc5_ = DisplayObject(_loc2_.containerContent);
+            super.addChild(_loc5_);
+            _loc2_.playShowTween(_loc5_);
+            if(_loc2_.as_config.type == ContainerTypes.WINDOW || _loc2_.as_config.type == ContainerTypes.TOP_WINDOW)
             {
-               _loc4_ = null;
+               _loc6_ = null;
                if(_loc2_.as_config.hasOwnProperty("group"))
                {
-                  _loc4_ = _loc2_.as_config.group;
-                  _loc4_ = _loc4_.length?_loc4_:null;
+                  _loc6_ = _loc2_.as_config.group;
+                  _loc6_ = _loc6_.length?_loc6_:null;
                }
-               if(_loc4_)
+               if(_loc6_)
                {
-                  this.addGroupCounter(_loc4_,_loc2_.as_token);
-                  this.movieViewToVector(param1,_loc4_);
+                  this.addGroupCounter(_loc6_,_loc2_.as_token);
+                  this.movieViewToVector(_loc5_,_loc6_);
                }
             }
             if(this.manageFocus)
             {
-               param1.addEventListener(MouseEvent.MOUSE_DOWN,this.onViewClick,false,0,true);
+               _loc5_.addEventListener(MouseEvent.MOUSE_DOWN,this.onViewClickHandler,false,0,true);
             }
-            if(param1  is  AbstractView)
-            {
-               (param1 as AbstractView).updateStage(width,height);
-            }
-            else
-            {
-               if(param1  is  IWindow)
-               {
-                  (param1 as IWindow).sourceView.updateStage(width,height);
-               }
-            }
-            return _loc2_;
+            _loc2_.sourceView.updateStage(width,height);
+            return DisplayObject(_loc2_);
          }
          throw new Error(this.ADD_CHILD_ERROR_STR);
       }
 
       override public function removeChild(param1:DisplayObject) : DisplayObject {
-         var _loc4_:IAbstractWindowView = null;
          var _loc5_:String = null;
          var _loc6_:GroupCounter = null;
          var _loc2_:IAssertable = App.utils.asserter;
          _loc2_.assertNotNull(param1,"child" + Errors.CANT_NULL);
-         var _loc3_:AbstractView = param1 as AbstractView;
-         if(param1  is  IAbstractWindowView)
-         {
-            _loc4_ = IAbstractWindowView(_loc3_);
-            param1 = DisplayObject(_loc4_.window);
-            _loc2_.assertNotNull(param1,"abstractWindowView.window" + Errors.CANT_NULL);
-         }
+         this.assertContent(param1);
+         var _loc3_:IView = IManagedContent(param1).sourceView;
+         var _loc4_:DisplayObject = DisplayObject(_loc3_.containerContent);
          if((_loc3_) && (_loc3_.as_config) && (_loc3_.as_config.hasOwnProperty("type")))
          {
             if(_loc3_.as_config.type != ContainerTypes.VIEW)
@@ -131,19 +122,19 @@ package net.wg.gui.components.common
                   }
                }
             }
-            if(!_loc3_.playHideTween(param1,this.onTweenEnd))
+            if(!_loc3_.playHideTween(_loc4_,this.onTweenEnd))
             {
-               this.performRemoveChild(param1);
+               this.performRemoveChild(IManagedContent(_loc4_));
             }
-            return _loc3_;
+            return _loc4_;
          }
          throw new Error(this.REMOVE_CHILD_ERROR_STR);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          var _loc1_:String = null;
          var _loc2_:GroupCounter = null;
-         super.dispose();
+         super.onDispose();
          this.removeAllChildren();
          for (_loc1_ in this.groupCounters)
          {
@@ -155,40 +146,34 @@ package net.wg.gui.components.common
          this._modalBg = null;
       }
 
-      public function getTopmostView() : Sprite {
-         var _loc1_:Sprite = null;
+      public function getTopmostView() : IManagedContent {
          if(numChildren)
          {
-            _loc1_ = Sprite(getChildAt(numChildren-1));
-            if(_loc1_ == this._modalBg)
-            {
-               _loc1_ = null;
-            }
+            return IManagedContent(getChildAt(numChildren-1));
          }
-         return _loc1_;
+         return null;
       }
 
-      public function setFocusedView(param1:Sprite) : void {
-         var _loc2_:IAbstractWindowView = null;
-         var _loc3_:IView = null;
-         if(contains(param1))
+      public function setFocusedView(param1:IManagedContent) : void {
+         if((contains(DisplayObject(param1))) && !(param1.sourceView == App.containerMgr.lastFocusedView))
          {
-            this.setModalFocusToView(param1);
-            App.utils.focusHandler.setFocus(param1);
-            _loc2_ = this.getWindowContentFromObject(param1,false);
-            if((_loc2_) && (_loc2_.isModal))
+            if(App.containerMgr.lastFocusedView != null)
+            {
+               App.containerMgr.lastFocusedView.leaveModalFocus();
+            }
+            App.utils.focusHandler.setModalFocus(param1);
+            if(param1.isModal)
             {
                this.updateOrCreateModalBg();
             }
-            setChildIndex(param1,numChildren-1);
-            _loc3_ = this.getViewContentFromObject(param1);
-            _loc3_.setFocus();
-            App.containerMgr.lastFocusedView = _loc3_;
+            setChildIndex(DisplayObject(param1.containerContent),numChildren-1);
+            param1.sourceView.setModalFocus();
+            App.containerMgr.lastFocusedView = param1.sourceView;
          }
       }
 
-      public function setFocused(param1:Boolean=false) : Boolean {
-         var _loc2_:Sprite = null;
+      public function tryToSetFocus(param1:Boolean=false) : Boolean {
+         var _loc2_:IManagedContent = null;
          if(this.manageFocus)
          {
             _loc2_ = this.getTopmostView();
@@ -198,8 +183,7 @@ package net.wg.gui.components.common
             }
             else
             {
-               App.utils.focusHandler.setFocus(null);
-               FocusManager.setModalClip(null);
+               App.utils.focusHandler.setModalFocus(null);
                if(!param1)
                {
                   dispatchEvent(new FocusEvent(FocusEvent.FOCUS_OUT));
@@ -242,7 +226,7 @@ package net.wg.gui.components.common
       public function onTweenEnd(param1:Tween=null) : void {
          if(super.getChildByName(DisplayObject(param1.target).name) != null)
          {
-            this.performRemoveChild(DisplayObject(param1.target));
+            this.performRemoveChild(IManagedContent(param1.target));
          }
       }
 
@@ -270,7 +254,7 @@ package net.wg.gui.components.common
       protected function updateOrCreateModalBg() : void {
          if(this._modalBg == null)
          {
-            this._modalBg = MovieClip(App.utils.classFactory.getComponent(Linkages.POPUP_MODAL,MovieClip));
+            this._modalBg = MovieClip(App.utils.classFactory.getComponent(this.getModalBgLinkage(),MovieClip));
             if(this._modalBg == null)
             {
                DebugUtils.LOG_DEBUG("Error until getting ");
@@ -287,6 +271,10 @@ package net.wg.gui.components.common
          this._modalBg.height = App.appHeight;
       }
 
+      protected function getModalBgLinkage() : String {
+         return Linkages.POPUP_MODAL;
+      }
+
       protected function removeAllChildren() : void {
          while(numChildren)
          {
@@ -298,11 +286,6 @@ package net.wg.gui.components.common
          return super.removeChild(param1);
       }
 
-      private function assertNumberChildrenForModalBg() : void {
-         var _loc1_:* = "If modalBg is not null, the container must have more then 1 children.";
-         App.utils.asserter.assert(numChildren > 1,_loc1_);
-      }
-
       protected function get manageFocus() : Boolean {
          return this._manageFocus;
       }
@@ -311,78 +294,16 @@ package net.wg.gui.components.common
          this._manageFocus = param1;
       }
 
-      private function setModalFocusToView(param1:Sprite) : void {
-         var _loc3_:String = null;
-         var _loc2_:Sprite = null;
-         if(param1  is  IAbstractWindowView)
-         {
-            _loc2_ = Sprite(IAbstractWindowView(param1).window);
-         }
-         else
-         {
-            if(param1  is  IView || param1  is  IWindow)
-            {
-               _loc2_ = Sprite(param1);
-            }
-            else
-            {
-               _loc3_ = "view must implements once from interfaces: IView, IWindow, IAbstractWindowView";
-               throw new InfrastructureException(_loc3_);
-            }
-         }
-         FocusManager.setModalClip(_loc2_);
+      private function assertNumberChildrenForModalBg() : void {
+         var _loc1_:* = "If modalBg is not null, the container must have more then 1 children.";
+         App.utils.asserter.assert(numChildren > 1,_loc1_);
       }
 
-      private function getWindowFromObject(param1:DisplayObject) : IWindow {
-         var _loc2_:String = null;
-         if(param1  is  IAbstractWindowView)
-         {
-            return IAbstractWindowView(param1).window;
-         }
-         if(param1  is  IWindow)
-         {
-            return IWindow(param1);
-         }
-         _loc2_ = "can not extract window from " + param1;
-         throw new InfrastructureException(_loc2_);
-      }
-
-      private function getViewContentFromObject(param1:DisplayObject) : IView {
-         var _loc2_:String = null;
-         if(param1  is  IWindow)
-         {
-            return IWindow(param1).sourceView;
-         }
-         if(param1  is  IView)
-         {
-            return IView(param1);
-         }
-         _loc2_ = "can not extract view content from " + param1;
-         throw new InfrastructureException(_loc2_);
-      }
-
-      private function getWindowContentFromObject(param1:DisplayObject, param2:Boolean) : IAbstractWindowView {
-         if(param1  is  IWindow)
-         {
-            return IWindow(param1).sourceView;
-         }
-         if(param1  is  IAbstractWindowView)
-         {
-            return IAbstractWindowView(param1);
-         }
-         if(!param2)
-         {
-            return null;
-         }
-         var _loc3_:String = "can not extract window content from " + param1;
-         throw new InfrastructureException(_loc3_);
-      }
-
-      private function performRemoveChild(param1:DisplayObject) : void {
-         var _loc2_:* = "for performRemoveChild " + param1 + " must implements IView or IWindow";
-         App.utils.asserter.assert(param1  is  IWindow || param1  is  IView,_loc2_,InfrastructureException);
-         this.superRemoveChild(param1);
-         if(this.canRemoveModalBGAfterRemoveCHild(param1))
+      private function performRemoveChild(param1:IManagedContent) : void {
+         var _loc2_:* = "for performRemoveChild " + param1 + " must implements IView or IWrapper";
+         App.utils.asserter.assert(param1  is  IWrapper || param1  is  IView,_loc2_,InfrastructureException);
+         this.superRemoveChild(DisplayObject(param1));
+         if(!(this._modalBg == null) && (param1.sourceView.isModal) && !this.isModalViewsIsExisting())
          {
             this.superRemoveChild(this._modalBg);
             this._modalBg = null;
@@ -397,29 +318,10 @@ package net.wg.gui.components.common
          }
          if(this.manageFocus)
          {
-            param1.removeEventListener(MouseEvent.MOUSE_DOWN,this.onViewClick,false);
+            param1.containerContent.removeEventListener(MouseEvent.MOUSE_DOWN,this.onViewClickHandler,false);
          }
+         param1.sourceView.removeEventListener(LifeCycleEvent.ON_AFTER_DISPOSE,this.onAfterManagedContentDisposeHandler);
          dispatchEvent(new ManagedContainerEvent(ManagedContainerEvent.CHILD_REMOVED));
-      }
-
-      private function canRemoveModalBGAfterRemoveCHild(param1:DisplayObject) : Boolean {
-         var _loc2_:* = !(this._modalBg == null);
-         if(_loc2_)
-         {
-            if(param1  is  IWindow)
-            {
-               _loc2_ = IWindow(param1).sourceView.isModal;
-            }
-            else
-            {
-               if(param1  is  IAbstractWindowView)
-               {
-                  _loc2_ = IAbstractWindowView(param1).isModal;
-               }
-            }
-         }
-         _loc2_ = (_loc2_) && !this.isModalViewsIsExisting();
-         return _loc2_;
       }
 
       private function isModalViewsIsExisting() : Boolean {
@@ -428,9 +330,10 @@ package net.wg.gui.components.common
          while(_loc1_ < numChildren)
          {
             _loc2_ = getChildAt(_loc1_);
+            this.assertContent(_loc2_);
             if(_loc2_ != this._modalBg)
             {
-               if(this.getWindowContentFromObject(_loc2_,false).isModal)
+               if(IManagedContent(_loc2_).isModal)
                {
                   return true;
                }
@@ -438,6 +341,11 @@ package net.wg.gui.components.common
             _loc1_++;
          }
          return false;
+      }
+
+      private function assertContent(param1:Object) : void {
+         var _loc2_:* = "if element of managedContainer is not a ModalBG, that must implements IManagedContent";
+         App.utils.asserter.assert(param1  is  IManagedContent || param1 == this._modalBg,_loc2_,InfrastructureException);
       }
 
       private function addGroupCounter(param1:String, param2:String) : void {
@@ -493,35 +401,45 @@ package net.wg.gui.components.common
          param1.y = _loc5_;
       }
 
-      private function onViewClick(param1:Event) : void {
-         var _loc2_:Sprite = Sprite(param1.currentTarget);
-         var _loc3_:IView = null;
-         if(contains(_loc2_))
+      private function onAfterManagedContentDisposeHandler(param1:LifeCycleEvent) : void {
+         var _loc2_:IManagedContent = IManagedContent(param1.target);
+         _loc2_.containerContent.removeEventListener(MouseEvent.MOUSE_DOWN,this.onViewClickHandler,false);
+         _loc2_.removeEventListener(LifeCycleEvent.ON_BEFORE_DISPOSE,this.onAfterManagedContentDisposeHandler);
+      }
+
+      private function onViewClickHandler(param1:Event) : void {
+         var _loc2_:IManagedContent = null;
+         var _loc3_:String = null;
+         if((contains(DisplayObject(param1.currentTarget))) && (this.isOwnedByMe(DisplayObject(param1.target))))
          {
-            if(_loc2_  is  IWindow)
+            _loc2_ = null;
+            if(param1.currentTarget == this._modalBg)
             {
-               _loc3_ = IWindow(_loc2_).sourceView;
-            }
-            if(_loc3_)
-            {
-               if(_loc3_ != App.containerMgr.lastFocusedView)
-               {
-                  this.setFocusedView(_loc2_);
-               }
+               _loc2_ = this.getTopmostView();
             }
             else
             {
-               _loc3_ = this.getTopmostView() as IView;
-               if(_loc3_)
-               {
-                  App.containerMgr.lastFocusedView = _loc3_;
-               }
-               else
-               {
-                  DebugUtils.LOG_WARNING(_loc2_ + " is Not IView!");
-               }
+               _loc2_ = IManagedContent(param1.currentTarget);
+            }
+            _loc3_ = "sourceView in " + _loc2_ + Errors.CANT_NULL;
+            App.utils.asserter.assertNotNull(_loc2_.sourceView,_loc3_,InfrastructureException);
+            if(_loc2_.sourceView != App.containerMgr.lastFocusedView)
+            {
+               this.setFocusedView(_loc2_.sourceView);
             }
          }
+      }
+
+      private function isOwnedByMe(param1:DisplayObject) : Boolean {
+         while(!(param1 == null) && !(param1 == this))
+         {
+            if(param1  is  IManagedContainer)
+            {
+               return param1 == this;
+            }
+            param1 = param1.parent;
+         }
+         return true;
       }
    }
 

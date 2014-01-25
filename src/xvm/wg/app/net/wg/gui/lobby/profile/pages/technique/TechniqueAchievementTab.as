@@ -84,13 +84,13 @@ package net.wg.gui.lobby.profile.pages.technique
          return AwardsMainContainer(this.scrollPane.target);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          if(this.scrollPane)
          {
             this.scrollPane.dispose();
             this.scrollPane = null;
          }
-         super.dispose();
+         super.onDispose();
       }
    }
 

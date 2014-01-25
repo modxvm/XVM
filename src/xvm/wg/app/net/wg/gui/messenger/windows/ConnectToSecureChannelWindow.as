@@ -8,6 +8,7 @@ package net.wg.gui.messenger.windows
    import scaleform.clik.utils.Padding;
    import scaleform.clik.events.ButtonEvent;
    import scaleform.clik.events.InputEvent;
+   import flash.display.InteractiveObject;
    import scaleform.clik.ui.InputDetails;
    import flash.ui.Keyboard;
    import scaleform.clik.constants.InputValue;
@@ -72,12 +73,12 @@ package net.wg.gui.messenger.windows
          this.titleLabel.text = MESSENGER.DIALOGS_CONNECTINGTOSECURECHANNEL_LABELS_WARRNING;
          this.passwordLabel.text = MESSENGER.DIALOGS_CONNECTINGTOSECURECHANNEL_LABELS_PASSWORD;
          this.passwordInput.addEventListener(InputEvent.INPUT,this.passwordInputHandler);
-         App.utils.scheduler.envokeInNextFrame(this.setFocus);
+         App.utils.scheduler.envokeInNextFrame(this.onSetModalFocus);
       }
 
-      override public function setFocus() : void {
+      override protected function onSetModalFocus(param1:InteractiveObject) : void {
          this.passwordInput.validateNow();
-         App.utils.focusHandler.setFocus(this.passwordInput);
+         setFocus(this.passwordInput);
       }
 
       override protected function onDispose() : void {

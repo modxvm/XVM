@@ -35,7 +35,7 @@ package net.wg.gui.lobby.tankman
 
       private var _nation:String;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.roleIcon.dispose();
          this.roleIcon = null;
          this.nameField = null;
@@ -50,7 +50,7 @@ package net.wg.gui.lobby.tankman
          this.tankmanPic = null;
          this.backgroundSwitcher.dispose();
          this.backgroundSwitcher = null;
-         super.dispose();
+         super.onDispose();
       }
 
       override protected function configUI() : void {

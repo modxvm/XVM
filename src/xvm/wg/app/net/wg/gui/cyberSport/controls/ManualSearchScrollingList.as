@@ -44,9 +44,9 @@ package net.wg.gui.cyberSport.controls
          invalidateData();
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this._asserter = null;
-         super.dispose();
+         super.onDispose();
       }
 
       public function getSelectedVO() : CSCommandVO {

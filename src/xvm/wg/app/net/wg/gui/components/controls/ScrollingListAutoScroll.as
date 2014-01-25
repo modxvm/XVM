@@ -5,6 +5,12 @@ package net.wg.gui.components.controls
    import scaleform.clik.constants.InvalidationType;
    import flash.display.DisplayObject;
    import scaleform.clik.data.ListData;
+   import scaleform.clik.events.InputEvent;
+   import scaleform.clik.ui.InputDetails;
+   import scaleform.clik.constants.InputValue;
+   import scaleform.clik.constants.WrappingMode;
+   import scaleform.clik.constants.NavigationCode;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
 
 
    public class ScrollingListAutoScroll extends ScrollingList
@@ -92,6 +98,222 @@ package net.wg.gui.components.controls
             _loc5_.validateNow();
             _loc4_++;
          }
+      }
+
+      override public function handleInput(param1:InputEvent) : void {
+         var _loc3_:* = 0;
+         if(param1.handled)
+         {
+            return;
+         }
+         var _loc2_:IListItemRenderer = getRendererAt(_selectedIndex,_scrollPosition);
+         if(_loc2_ != null)
+         {
+            _loc2_.handleInput(param1);
+            if(param1.handled)
+            {
+               return;
+            }
+         }
+         var _loc4_:InputDetails = param1.details;
+         var _loc5_:Boolean = _loc4_.value == InputValue.KEY_DOWN || _loc4_.value == InputValue.KEY_HOLD;
+         switch(_loc4_.navEquivalent)
+         {
+            case NavigationCode.UP:
+               if(selectedIndex == -1)
+               {
+                  if((_loc5_) && (this.canMoveSelectionTo(scrollPosition + _totalRenderers-1)))
+                  {
+                     selectedIndex = scrollPosition + _totalRenderers-1;
+                  }
+               }
+               else
+               {
+                  if(_selectedIndex > 0)
+                  {
+                     if((_loc5_) && (this.canMoveSelectionTo(selectedIndex-1)))
+                     {
+                        selectedIndex--;
+                     }
+                  }
+                  else
+                  {
+                     if(wrapping != WrappingMode.STICK)
+                     {
+                        if(wrapping == WrappingMode.WRAP)
+                        {
+                           if((_loc5_) && (this.canMoveSelectionTo(_dataProvider.length-1)))
+                           {
+                              selectedIndex = _dataProvider.length-1;
+                           }
+                        }
+                        else
+                        {
+                           return;
+                        }
+                     }
+                  }
+               }
+               break;
+            case NavigationCode.DOWN:
+               if(_selectedIndex == -1)
+               {
+                  if((_loc5_) && (this.canMoveSelectionTo(_scrollPosition)))
+                  {
+                     selectedIndex = _scrollPosition;
+                  }
+               }
+               else
+               {
+                  if(_selectedIndex < _dataProvider.length-1)
+                  {
+                     if((_loc5_) && (this.canMoveSelectionTo(selectedIndex + 1)))
+                     {
+                        selectedIndex++;
+                     }
+                  }
+                  else
+                  {
+                     if(wrapping != WrappingMode.STICK)
+                     {
+                        if(wrapping == WrappingMode.WRAP)
+                        {
+                           if((_loc5_) && (this.canMoveSelectionTo(0)))
+                           {
+                              selectedIndex = 0;
+                           }
+                        }
+                        else
+                        {
+                           return;
+                        }
+                     }
+                  }
+               }
+               break;
+            case NavigationCode.END:
+               if(!_loc5_)
+               {
+                  _loc3_ = _dataProvider.length-1;
+                  while(_loc3_ > selectedIndex)
+                  {
+                     if(this.canMoveSelectionTo(_loc3_))
+                     {
+                        selectedIndex = _loc3_;
+                        break;
+                     }
+                     _loc3_--;
+                  }
+               }
+               break;
+            case NavigationCode.HOME:
+               if(!_loc5_)
+               {
+                  _loc3_ = 0;
+                  while(_loc3_ < selectedIndex)
+                  {
+                     if(this.canMoveSelectionTo(_loc3_))
+                     {
+                        selectedIndex = _loc3_;
+                        break;
+                     }
+                     _loc3_++;
+                  }
+               }
+               break;
+            case NavigationCode.PAGE_UP:
+               if(_loc5_)
+               {
+                  _loc3_ = _totalRenderers;
+                  while(_loc3_ > 0)
+                  {
+                     if(this.canMoveSelectionTo(Math.max(0,selectedIndex - _loc3_)))
+                     {
+                        selectedIndex = Math.max(0,selectedIndex - _loc3_);
+                        break;
+                     }
+                     _loc3_--;
+                  }
+               }
+               break;
+            case NavigationCode.PAGE_DOWN:
+               if(_loc5_)
+               {
+                  _loc3_ = _totalRenderers;
+                  while(_loc3_ > 0)
+                  {
+                     if(this.canMoveSelectionTo(Math.min(_dataProvider.length-1,selectedIndex + _loc3_)))
+                     {
+                        selectedIndex = Math.min(_dataProvider.length-1,selectedIndex + _loc3_);
+                        break;
+                     }
+                     _loc3_--;
+                  }
+               }
+               break;
+            default:
+               return;
+         }
+         param1.handled = true;
+      }
+
+      override protected function onDispose() : void {
+         this.disposeRenderers();
+         if(_dataProvider)
+         {
+            _dataProvider.cleanUp();
+            _dataProvider = null;
+         }
+         if(_scrollBar)
+         {
+            _scrollBar.dispose();
+            _scrollBar = null;
+         }
+         thumbOffset = null;
+         _padding = null;
+         super.onDispose();
+      }
+
+      public function disposeRenderers() : void {
+         var _loc1_:* = NaN;
+         var _loc2_:* = NaN;
+         var _loc3_:IListItemRenderer = null;
+         var _loc4_:IDisposable = null;
+         var _loc5_:DisplayObject = null;
+         if(_renderers != null)
+         {
+            _loc1_ = _renderers.length;
+            _loc2_ = _loc1_-1;
+            while(_loc2_ >= 0)
+            {
+               _loc3_ = getRendererAt(_loc2_);
+               if(_loc3_ != null)
+               {
+                  cleanUpRenderer(_loc3_);
+                  _loc4_ = _loc3_ as IDisposable;
+                  if(_loc4_)
+                  {
+                     _loc4_.dispose();
+                  }
+                  _loc5_ = _loc3_ as DisplayObject;
+                  if(container.contains(_loc5_))
+                  {
+                     container.removeChild(_loc5_);
+                  }
+               }
+               _renderers.splice(_loc2_,1);
+               _loc2_--;
+            }
+         }
+      }
+
+      private function canMoveSelectionTo(param1:int) : Boolean {
+         var _loc2_:Object = dataProvider.requestItemAt(param1);
+         if((_loc2_) && (_loc2_.hasOwnProperty("enabled")))
+         {
+            return _loc2_.enabled;
+         }
+         return true;
       }
    }
 

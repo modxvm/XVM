@@ -64,7 +64,7 @@ package net.wg.gui.components.controls
          }
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          removeEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
          removeEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
          removeEventListener(MouseEvent.MOUSE_DOWN,this.handleMouseDown);
@@ -78,7 +78,7 @@ package net.wg.gui.components.controls
          }
          this.bgMc = null;
          this.filtersMC = null;
-         super.dispose();
+         super.onDispose();
       }
 
       public function showTooltip(param1:MouseEvent) : void {
@@ -201,7 +201,7 @@ package net.wg.gui.components.controls
          dispatchEvent(new StateManagerEvent(ComponentEvent.STATE_CHANGE,state));
       }
 
-      private function updateDisable() : void {
+      protected function updateDisable() : void {
          if(this.disableMc != null)
          {
             this.disableMc.visible = !enabled;
@@ -254,6 +254,10 @@ package net.wg.gui.components.controls
             {
                gotoAndPlay(_newFrame);
                _newFrame = null;
+            }
+            if(_baseDisposed)
+            {
+               return;
             }
             if((focusIndicator) && (_newFocusIndicatorFrame))
             {

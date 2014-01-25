@@ -85,9 +85,9 @@ package net.wg.gui.cyberSport.controls
          DebugUtils.LOG_ERROR(this + " can\'t find source file : ",this._iconSource);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.loaderDispose();
-         super.dispose();
+         super.onDispose();
       }
    }
 

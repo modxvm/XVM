@@ -93,7 +93,7 @@ package net.wg.gui.components.advanced
 
       private var DIRTY_FLAGS:Array;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.flag = null;
          this.iconLoader.dispose();
          this.iconLoader = null;
@@ -105,7 +105,7 @@ package net.wg.gui.components.advanced
          this.tankNameField = null;
          this.tankNameBg = null;
          this.favoriteMc = null;
-         super.dispose();
+         super.onDispose();
       }
 
       public function get favorite() : Boolean {

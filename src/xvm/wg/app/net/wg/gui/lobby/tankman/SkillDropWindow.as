@@ -177,7 +177,7 @@ package net.wg.gui.lobby.tankman
          var _loc1_:Object = this.getSelectedDropCostInfo();
          var _loc2_:Array = calcDropSkillsParamsS(this.model.compactDescriptor,_loc1_.xpReuseFraction);
          var _loc3_:Number = _loc2_[0];
-         var _loc4_:int = _loc2_[1];
+         var _loc4_:int = _loc3_ >= 100?_loc2_[1]:-1;
          var _loc5_:Number = _loc2_[2];
          this.beforeBlock.setSkills(this.model.skillsCount,this.model.preLastSkill,this.model.lastSkill,this.model.lastSkillLevel,this.model.hasNewSkill,this.model.newSkillsCount,this.model.lastNewSkillLevel);
          var _loc6_:String = _loc4_ > 1?SkillItemViewMini.TYPE_NEW_SKILL:null;

@@ -337,7 +337,7 @@ package net.wg.gui.components.controls
          }
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          removeEventListener(Event.ADDED,addToAutoGroup,false);
          removeEventListener(Event.REMOVED,addToAutoGroup,false);
          removeEventListener(MouseEvent.ROLL_OVER,handleMouseRollOver,false);
@@ -378,7 +378,7 @@ package net.wg.gui.components.controls
          }
          scrollBar = null;
          this.hitMc = null;
-         super.dispose();
+         super.onDispose();
       }
    }
 

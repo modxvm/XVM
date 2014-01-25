@@ -10,6 +10,7 @@ package net.wg.gui.prebattle.invites
    import scaleform.clik.interfaces.IDataProvider;
    import scaleform.clik.constants.InvalidationType;
    import scaleform.gfx.MouseEventEx;
+   import flash.display.InteractiveObject;
 
 
    public class InviteStackContainerBase extends UIComponent implements IViewStackContent
@@ -24,8 +25,8 @@ package net.wg.gui.prebattle.invites
 
       public var dataProvider:DAAPIDataProvider;
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this.rosterList.removeEventListener(ListEventEx.ITEM_CLICK,this.showContextMenu);
          this.rosterList.removeEventListener(ListEventEx.ITEM_DOUBLE_CLICK,this.rosterList_itemDoubleClickHandler);
          this.rosterList.disposeRenderers();
@@ -86,6 +87,10 @@ package net.wg.gui.prebattle.invites
                this.initDispatcher(SendInvitesEvent.LIST_DOUBLE_CLICK,param1.itemData);
             }
          }
+      }
+
+      public function getComponentForFocus() : InteractiveObject {
+         return null;
       }
    }
 

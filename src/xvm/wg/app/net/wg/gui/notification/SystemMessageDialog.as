@@ -48,6 +48,15 @@ package net.wg.gui.notification
 
       private var dimensionsInitialized:Boolean;
 
+      override public function setWindow(param1:IWindow) : void {
+         super.setWindow(param1);
+         if(param1)
+         {
+            invalidate(DIMENSIONS_INVALID);
+            invalidate(INIT_DATA_INVALID);
+         }
+      }
+
       public function as_setMessageData(param1:Object) : void {
          this.messageData = new NotificationInfoVO(param1);
          invalidate(DATA_INVALID);
@@ -60,15 +69,6 @@ package net.wg.gui.notification
 
       override public function set visible(param1:Boolean) : void {
          super.visible = this.dimensionsInitialized;
-      }
-
-      override public function set window(param1:IWindow) : void {
-         super.window = param1;
-         if(param1)
-         {
-            invalidate(DIMENSIONS_INVALID);
-            invalidate(INIT_DATA_INVALID);
-         }
       }
 
       override protected function configUI() : void {

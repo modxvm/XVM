@@ -2,9 +2,9 @@
 
 # TODO - refactor
 
-[ "$GAME_VER" = "" ] && GAME_VER="0.8.10"
-#[ "$GAME_VER" = "" ] && GAME_VER="0.8.10 Common Test"
-[ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/work/games/WoT
+#[ "$GAME_VER" = "" ] && GAME_VER="0.8.10"
+[ "$GAME_VER" = "" ] && GAME_VER="0.8.11 Common Test"
+[ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/work/games/WoT-CT
 
 FILES_FLASH="
   Application.swf
@@ -69,9 +69,9 @@ copy_xvm_dir()
   }
 }
 
-#for n in $FILES_FLASH; do
-#  copy_file_flash $n
-#done
+for n in $FILES_FLASH; do
+  copy_file_flash $n
+done
 
 for n in $FILES_SCALEFORM; do
   copy_file_scaleform $n

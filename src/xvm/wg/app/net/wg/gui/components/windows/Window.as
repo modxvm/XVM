@@ -13,9 +13,13 @@ package net.wg.gui.components.windows
    import flash.events.MouseEvent;
    import net.wg.data.constants.DragType;
    import flash.display.InteractiveObject;
+   import net.wg.infrastructure.interfaces.ITextContainer;
    import scaleform.clik.controls.Button;
    import scaleform.clik.utils.Constraints;
+   import net.wg.infrastructure.interfaces.IAbstractWrapperView;
    import flash.display.DisplayObject;
+   import net.wg.infrastructure.interfaces.IManagedContent;
+   import net.wg.infrastructure.interfaces.IView;
    import scaleform.clik.constants.InvalidationType;
    import scaleform.clik.utils.ConstrainedElement;
 
@@ -33,9 +37,10 @@ package net.wg.gui.components.windows
          titleBtn = this.titleBtnEx;
          closeBtn = this.closeBtnEx;
          resizeBtn = this.resizeBtnEx;
+         resizeBtn.lockDragStateChange = true;
       }
 
-      public static const INVALID_SRC_VIEW:String = "sourceView";
+      public static const INVALID_SRC_VIEW:String = "windowContent";
 
       private static const INVALID_TITLE:String = "titleInv";
 
@@ -63,7 +68,7 @@ package net.wg.gui.components.windows
 
       private var draggingRegistered:Boolean = false;
 
-      private var _sourceView:IAbstractWindowView = null;
+      private var _windowContent:IAbstractWindowView = null;
 
       public const BG_FORM_DEF_PADDING:Padding = new Padding(33,11,16,10);
 
@@ -73,25 +78,13 @@ package net.wg.gui.components.windows
 
       private var CONTENT_DEF_PADDING:Padding;
 
-      override public function set scaleX(param1:Number) : void {
-         var _loc2_:Number = width;
-         super.scaleX = param1;
-         dispatchEvent(new WindowEvent(WindowEvent.SCALE_X_CHANGED,_loc2_));
-      }
-
-      override public function set scaleY(param1:Number) : void {
-         var _loc2_:Number = height;
-         super.scaleY = param1;
-         dispatchEvent(new WindowEvent(WindowEvent.SCALE_Y_CHANGED,_loc2_));
-      }
-
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          if((_content) && (contains(_content)))
          {
             removeChild(_content);
          }
-         if(this.sourceView.canDrag)
+         if(this.windowContent.canDrag)
          {
             App.cursor.unRegisterDragging(this);
          }
@@ -112,6 +105,10 @@ package net.wg.gui.components.windows
          titleBtn = null;
          closeBtn = null;
          resizeBtn = null;
+      }
+
+      public function setWindow(param1:IWindow) : void {
+          
       }
 
       public function setTitleIcon(param1:String) : void {
@@ -151,7 +148,7 @@ package net.wg.gui.components.windows
          setActualScale(1,1);
       }
 
-      public function getTitleBtnEx() : TextFieldShort {
+      public function getTitleBtnEx() : ITextContainer {
          return this.titleBtnEx;
       }
 
@@ -199,28 +196,64 @@ package net.wg.gui.components.windows
          return this.iconMovie;
       }
 
-      override public function set title(param1:String) : void {
-         _title = param1;
-         invalidate(INVALID_TITLE);
+      public function set wrapperContent(param1:IAbstractWrapperView) : void {
+         this.setWindowContent(IAbstractWindowView(param1));
       }
 
-      public function get sourceView() : IAbstractWindowView {
-         return this._sourceView;
+      public function get wrapperContent() : IAbstractWrapperView {
+         return this._windowContent;
       }
 
-      public function set sourceView(param1:IAbstractWindowView) : void {
-         this._sourceView = param1;
+      public function setWindowContent(param1:IAbstractWindowView) : void {
+         this._windowContent = param1;
          if(_content)
          {
             constraints.removeElement("content");
             removeChild(_content);
          }
-         if(this._sourceView)
+         if(this._windowContent)
          {
-            _content = DisplayObject(this.sourceView);
+            _content = DisplayObject(this.windowContent);
             addChild(_content);
             invalidate(INVALID_SRC_VIEW);
          }
+      }
+
+      override public function set scaleX(param1:Number) : void {
+         var _loc2_:Number = width;
+         super.scaleX = param1;
+         dispatchEvent(new WindowEvent(WindowEvent.SCALE_X_CHANGED,_loc2_));
+      }
+
+      override public function set scaleY(param1:Number) : void {
+         var _loc2_:Number = height;
+         super.scaleY = param1;
+         dispatchEvent(new WindowEvent(WindowEvent.SCALE_Y_CHANGED,_loc2_));
+      }
+
+      override public function set title(param1:String) : void {
+         _title = param1;
+         invalidate(INVALID_TITLE);
+      }
+
+      public function get isModal() : Boolean {
+         return this._windowContent.isModal;
+      }
+
+      public function get window() : IManagedContent {
+         return this;
+      }
+
+      public function get sourceView() : IView {
+         return this._windowContent;
+      }
+
+      public function get windowContent() : IAbstractWindowView {
+         return this._windowContent;
+      }
+
+      public function get containerContent() : IManagedContent {
+         return this;
       }
 
       public function get formBgPadding() : Padding {
@@ -311,15 +344,15 @@ package net.wg.gui.components.windows
       }
 
       override protected function draw() : void {
-         if((isInvalid(INVALID_SRC_VIEW)) && (this.sourceView))
+         if((isInvalid(INVALID_SRC_VIEW)) && (this.windowContent))
          {
             this.updateSource();
-            this.showBgForm = this.sourceView.showWindowBg;
-            this.minimizeBtn.visible = this.sourceView.canMinimize;
-            resizeBtn.visible = this.sourceView.canResize;
-            closeBtn.visible = this.sourceView.canClose;
-            closeBtn.enabled = this.sourceView.enabledCloseBtn;
-            if((this.sourceView.canDrag) && !this.draggingRegistered)
+            this.showBgForm = this.windowContent.showWindowBg;
+            this.minimizeBtn.visible = this.windowContent.canMinimize;
+            resizeBtn.visible = this.windowContent.canResize;
+            closeBtn.visible = this.windowContent.canClose;
+            closeBtn.enabled = this.windowContent.enabledCloseBtn;
+            if((this.windowContent.canDrag) && !this.draggingRegistered)
             {
                try
                {
@@ -331,9 +364,9 @@ package net.wg.gui.components.windows
                   trace(e);
                }
             }
-            if(this.sourceView.isSourceTracked)
+            if(this.windowContent.isSourceTracked)
             {
-               this.sourceView.onSourceLoadedS();
+               this.windowContent.onSourceLoadedS();
             }
          }
          if(isInvalid("padding",INVALID_SRC_VIEW))
@@ -374,19 +407,19 @@ package net.wg.gui.components.windows
       }
 
       protected function updateSource() : void {
-         if(this.sourceView != null)
+         if(this.windowContent != null)
          {
             minWidth = _content.width + contentPadding.horizontal;
             minHeight = _content.height + contentPadding.vertical;
-            this.sourceView.geometry.setSize(this);
+            this.windowContent.geometry.setSize(this);
             constraints.addElement("content",_content,Constraints.ALL);
          }
       }
 
       override protected function onCloseButtonClick(param1:MouseEvent) : void {
-         if(this.sourceView)
+         if(this.windowContent)
          {
-            this.sourceView.onWindowCloseS();
+            this.windowContent.onWindowCloseS();
          }
       }
 
@@ -395,9 +428,9 @@ package net.wg.gui.components.windows
       }
 
       protected function onMinimizeButtonClick(param1:ButtonEvent) : void {
-         if((this.sourceView) && (this.sourceView.canMinimize))
+         if((this.windowContent) && (this.windowContent.canMinimize))
          {
-            this.sourceView.handleWindowMinimize();
+            this.windowContent.handleWindowMinimize();
          }
       }
    }

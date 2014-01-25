@@ -146,7 +146,7 @@ package net.wg.gui.lobby.settings
          this.markerAltDamageCheckbox.enabled = false;
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          var _loc1_:String = null;
          var _loc2_:SettingsControlProp = null;
          var _loc3_:CheckBox = null;
@@ -185,7 +185,7 @@ package net.wg.gui.lobby.settings
             }
             this._data = null;
          }
-         super.dispose();
+         super.onDispose();
       }
    }
 

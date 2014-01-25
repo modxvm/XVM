@@ -143,9 +143,9 @@ package net.wg.gui.lobby.profile.components
          return this._myEnabled;
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.disposeHandlers();
-         super.dispose();
+         super.onDispose();
       }
    }
 

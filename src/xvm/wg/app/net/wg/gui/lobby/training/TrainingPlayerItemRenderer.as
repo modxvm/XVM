@@ -2,17 +2,18 @@ package net.wg.gui.lobby.training
 {
    import scaleform.clik.controls.ListItemRenderer;
    import net.wg.infrastructure.interfaces.entity.IDropItem;
-   import flash.events.MouseEvent;
    import net.wg.gui.components.controls.UserNameField;
    import flash.text.TextField;
    import flash.geom.ColorTransform;
    import net.wg.gui.components.controls.UILoaderAlt;
    import net.wg.gui.components.controls.VoiceWave;
    import scaleform.clik.utils.Constraints;
+   import flash.events.MouseEvent;
    import net.wg.infrastructure.interfaces.entity.IDisposable;
    import net.wg.data.VO.TrainingRoomRendererVO;
    import net.wg.data.components.BattleResultsCIGenerator;
    import scaleform.clik.constants.InvalidationType;
+   import flash.geom.Point;
    import net.wg.gui.prebattle.squad.MessengerUtils;
    import net.wg.data.VO.UserVO;
    import scaleform.clik.data.ListData;
@@ -31,10 +32,6 @@ package net.wg.gui.lobby.training
 
       private static const VEHICLE_COLOR:Number = 8092009;
 
-      private static function hideToolTip(param1:MouseEvent) : void {
-         App.toolTipMgr.hide();
-      }
-
       public var nameField:UserNameField;
 
       public var vehicleField:TextField;
@@ -49,6 +46,8 @@ package net.wg.gui.lobby.training
 
       public var voiceWave:VoiceWave;
 
+      private var _isMouseOver:Boolean = false;
+
       override protected function configUI() : void {
          super.configUI();
          if(!constraintsDisabled)
@@ -58,14 +57,14 @@ package net.wg.gui.lobby.training
          this.defColorTrans = this.iconLoader.transform.colorTransform;
          this.voiceWave.visible = App.voiceChatMgr.isVOIPEnabledS();
          selectable = false;
-         addEventListener(MouseEvent.MOUSE_DOWN,hideToolTip,false,0,true);
-         addEventListener(MouseEvent.ROLL_OUT,hideToolTip,false,0,true);
+         addEventListener(MouseEvent.MOUSE_DOWN,this.hideToolTip,false,0,true);
+         addEventListener(MouseEvent.ROLL_OUT,this.hideToolTip,false,0,true);
          addEventListener(MouseEvent.ROLL_OVER,this.showToolTip,false,0,true);
       }
 
-      override public function dispose() : void {
-         removeEventListener(MouseEvent.MOUSE_DOWN,hideToolTip,false);
-         removeEventListener(MouseEvent.ROLL_OUT,hideToolTip,false);
+      override protected function onDispose() : void {
+         removeEventListener(MouseEvent.MOUSE_DOWN,this.hideToolTip,false);
+         removeEventListener(MouseEvent.ROLL_OUT,this.hideToolTip,false);
          removeEventListener(MouseEvent.ROLL_OVER,this.showToolTip,false);
          if(this.nameField)
          {
@@ -91,14 +90,23 @@ package net.wg.gui.lobby.training
             IDisposable(_data).dispose();
          }
          _data = null;
-         super.dispose();
+         super.onDispose();
       }
 
       private function showToolTip(param1:MouseEvent) : void {
+         this._isMouseOver = true;
          if(data)
          {
             App.toolTipMgr.show(TrainingRoomRendererVO(data).fullName);
          }
+      }
+
+      private function hideToolTip(param1:MouseEvent) : void {
+         if(param1.type == MouseEvent.ROLL_OUT)
+         {
+            this._isMouseOver = false;
+         }
+         App.toolTipMgr.hide();
       }
 
       public function speak(param1:Boolean, param2:Boolean) : void {
@@ -145,7 +153,8 @@ package net.wg.gui.lobby.training
 
       override protected function draw() : void {
          var _loc1_:TrainingRoomRendererVO = null;
-         var _loc2_:ColorTransform = null;
+         var _loc2_:Point = null;
+         var _loc3_:ColorTransform = null;
          super.draw();
          if(_baseDisposed)
          {
@@ -164,12 +173,12 @@ package net.wg.gui.lobby.training
                {
                   this.nameField.textColor = GOLD_COLOR;
                   this.vehicleField.textColor = GOLD_COLOR;
-                  _loc2_ = new ColorTransform();
-                  _loc2_.redOffset = 21;
-                  _loc2_.greenOffset = 9;
-                  _loc2_.blueMultiplier = 0.51;
-                  _loc2_.greenMultiplier = 0.87;
-                  this.iconLoader.transform.colorTransform = _loc2_;
+                  _loc3_ = new ColorTransform();
+                  _loc3_.redOffset = 21;
+                  _loc3_.greenOffset = 9;
+                  _loc3_.blueMultiplier = 0.51;
+                  _loc3_.greenMultiplier = 0.87;
+                  this.iconLoader.transform.colorTransform = _loc3_;
                }
                else
                {
@@ -193,6 +202,12 @@ package net.wg.gui.lobby.training
                      "igrType":_loc1_.igrType
                   }
                );
+               _loc2_ = new Point(mouseX,mouseY);
+               _loc2_ = this.localToGlobal(_loc2_);
+               if((this.hitTestPoint(_loc2_.x,_loc2_.y,true)) && (this._isMouseOver))
+               {
+                  App.toolTipMgr.show(TrainingRoomRendererVO(data).fullName);
+               }
             }
             else
             {

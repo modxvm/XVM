@@ -19,6 +19,10 @@ package net.wg.gui.lobby.techtree.constants
 
       public static const SELL:String = "sell";
 
+      public static const SELECT_VEHICLE:String = "selectVehicle";
+
+      public static const SHOW_VEHICLE_STATS:String = "showVehicleStatistics";
+
       public static const EQUIP:String = "equip";
 
       public static const BUY_AND_EQUIP:String = "buyAndEquip";

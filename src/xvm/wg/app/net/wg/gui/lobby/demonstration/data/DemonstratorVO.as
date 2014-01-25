@@ -17,6 +17,8 @@ package net.wg.gui.lobby.demonstration.data
 
       private var _encounter:DataProvider;
 
+      private var _nations:DataProvider;
+
       public function get standard() : DataProvider {
          return this._standard;
       }
@@ -41,8 +43,16 @@ package net.wg.gui.lobby.demonstration.data
          this._encounter = param1;
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      public function get nations() : DataProvider {
+         return this._nations;
+      }
+
+      public function set nations(param1:DataProvider) : void {
+         this._nations = param1;
+      }
+
+      override protected function onDispose() : void {
+         super.onDispose();
          this._standard.cleanUp();
          this._assault.cleanUp();
          this._encounter.cleanUp();
@@ -57,6 +67,7 @@ package net.wg.gui.lobby.demonstration.data
             case "standard":
             case "assault":
             case "encounter":
+            case "nations":
                this[param1] = this.convertToDataProvider(param2 as Array);
                return false;
             default:

@@ -22,10 +22,6 @@ package net.wg.gui.components.advanced
 
       public static const SORT_DIRECTION_CHANGED:String = "sortDirectionChanged";
 
-      public static const ASCENDING_ICON_CONSTRAINT_NAME:String = "mcAscendingIcon";
-
-      public static const DESCENDING_ICON_CONSTRAINT_NAME:String = "mcDescendingIcon";
-
       private static const ASCENDING_ICON_INVALID:String = "ascIcon";
 
       private static const DESCENDING_ICON_INVALID:String = "descIcon";
@@ -52,7 +48,7 @@ package net.wg.gui.components.advanced
 
       private var _id:String;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.bg = null;
          this.upperBg = null;
          this.mcAscendingIcon.removeEventListener(UILoaderEvent.COMPLETE,this.sortingIconLoadingCompleteHandler);
@@ -60,7 +56,7 @@ package net.wg.gui.components.advanced
          this.mcAscendingIcon = null;
          this.mcDescendingIcon.dispose();
          this.mcDescendingIcon = null;
-         super.dispose();
+         super.onDispose();
       }
 
       override public function set data(param1:Object) : void {

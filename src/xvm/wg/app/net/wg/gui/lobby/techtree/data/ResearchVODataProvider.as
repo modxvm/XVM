@@ -147,16 +147,6 @@ package net.wg.gui.lobby.techtree.data
          }
       }
 
-      public function setTopLevelDump(param1:Number, param2:String) : Boolean {
-         var _loc3_:* = false;
-         if(param1 < this.topData.length && !(this.topData[param1] == null))
-         {
-            this.topData[param1].pickleDump = param2;
-            _loc3_ = true;
-         }
-         return _loc3_;
-      }
-
       public function setTopLevelState(param1:Number, param2:Number, param3:Number) : Boolean {
          return findAndSetState(this.topData,param1,param2,param3);
       }
@@ -186,9 +176,6 @@ package net.wg.gui.lobby.techtree.data
          var _loc4_:* = false;
          switch(param1)
          {
-            case NodeData.NODE_DUMP_FIELD:
-               _loc4_ = this.setTopLevelDump(param2,String(param3));
-               break;
             case NodeData.UNLOCK_PROPS_FIELD:
                _loc5_ = new UnlockProps();
                _loc5_.fromArray(param3 as Array,App.utils.locale);

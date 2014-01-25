@@ -44,7 +44,7 @@ package net.wg.infrastructure.base.meta.impl
          this.request4Install(param1);
       }
 
-      public function requestModuleInfoS(param1:String) : void {
+      public function requestModuleInfoS(param1:Number) : void {
          App.utils.asserter.assertNotNull(this.requestModuleInfo,"requestModuleInfo" + Errors.CANT_NULL);
          this.requestModuleInfo(param1);
       }

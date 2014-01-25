@@ -102,7 +102,7 @@ package net.wg.gui.lobby.profile.pages.statistics
          }
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          var _loc1_:Object = null;
          while(_points.length > 0)
          {

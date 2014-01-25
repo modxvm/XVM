@@ -17,9 +17,11 @@ package net.wg.gui.lobby.hangar.maintenance
    import net.wg.gui.events.ShellRendererEvent;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.utils.ILocale;
+   import net.wg.gui.components.controls.VO.ActionPriceVO;
    import scaleform.clik.data.DataProvider;
    import net.wg.data.constants.Currencies;
    import net.wg.gui.lobby.hangar.maintenance.data.ShellVO;
+   import net.wg.data.constants.IconsTypes;
    import net.wg.data.constants.Tooltips;
    import scaleform.gfx.MouseEventEx;
    import net.wg.gui.events.ModuleInfoEvent;
@@ -72,7 +74,7 @@ package net.wg.gui.lobby.hangar.maintenance
 
       public var actionPrice:ActionPrice;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          var _loc1_:IEventCollector = App.utils.events;
          _loc1_.removeEvent(this.countSlider,SliderEvent.VALUE_CHANGE,this.onSliderValueChange);
          _loc1_.removeEvent(this.countSlider,MouseEvent.ROLL_OVER,this.onRollOut);
@@ -103,7 +105,7 @@ package net.wg.gui.lobby.hangar.maintenance
          this.descrLbl = null;
          this.icon.dispose();
          this.icon = null;
-         super.dispose();
+         super.onDispose();
       }
 
       override public function setData(param1:Object) : void {
@@ -145,6 +147,7 @@ package net.wg.gui.lobby.hangar.maintenance
 
       override protected function draw() : void {
          var _loc1_:ILocale = null;
+         var _loc2_:ActionPriceVO = null;
          super.draw();
          if(isInvalid(InvalidationType.DATA))
          {
@@ -171,7 +174,8 @@ package net.wg.gui.lobby.hangar.maintenance
                   this.toBuyDropdown.dataProvider = new DataProvider([_loc1_.htmlTextWithIcon(_loc1_.integer(this.shell.prices[0]),Currencies.CREDITS),_loc1_.htmlTextWithIcon(_loc1_.gold(this.shell.prices[1]),Currencies.GOLD)]);
                   this.toBuyDropdown.selectedIndex = this.shell.currency == Currencies.CREDITS?0:1;
                   this.price.icon = this.shell.currency;
-                  this.actionPrice.setData(this.shell.actionPrc,0,0,this.shell.currency);
+                  _loc2_ = new ActionPriceVO(this.shell.actionPrc,0,0,this.shell.currency);
+                  this.actionPrice.setData(_loc2_);
                   this.actionPrice.setup(this);
                   this.price.visible = !this.actionPrice.visible;
                }
@@ -206,6 +210,43 @@ package net.wg.gui.lobby.hangar.maintenance
          }
       }
 
+      private function updateShellsPrice() : void {
+         var _loc1_:int = this.shell.buyShellsCount;
+         var _loc2_:* = 0;
+         var _loc3_:* = 0;
+         var _loc4_:* = "";
+         var _loc5_:ILocale = App.utils.locale;
+         if(this.toBuyDropdown.visible)
+         {
+            _loc2_ = this.shell.prices[this.toBuyDropdown.selectedIndex];
+            _loc3_ = this.shell.defPrices[this.toBuyDropdown.selectedIndex];
+         }
+         else
+         {
+            _loc2_ = this.shell.prices[this.shell.currency == Currencies.CREDITS?0:1];
+            _loc3_ = this.shell.defPrices[this.shell.currency == Currencies.CREDITS?0:1];
+            _loc4_ = this.shell.currency == Currencies.CREDITS?_loc5_.integer(_loc2_):_loc5_.gold(_loc2_);
+         }
+         var _loc6_:Number = _loc2_ * _loc1_;
+         this.toBuy.icon = this.shell.currency;
+         this.price.icon = this.shell.currency;
+         this.toBuy.textColor = Currencies.TEXT_COLORS[this.shell.currency];
+         this.price.textColor = Currencies.TEXT_COLORS[_loc6_ > this.shell.userCredits[this.shell.currency]?Currencies.ERROR:this.shell.currency];
+         this.toBuyTf.text = _loc1_ + MULTY_CHARS;
+         this.toBuy.text = _loc1_ + MULTY_CHARS + _loc4_;
+         var _loc7_:Number = _loc3_ * _loc1_;
+         this.price.text = this.shell.currency == Currencies.CREDITS?_loc5_.integer(_loc6_):_loc5_.gold(_loc6_);
+         var _loc8_:ActionPriceVO = new ActionPriceVO(this.shell.actionPrc,_loc6_,_loc7_,this.shell.currency);
+         this.actionPrice.setData(_loc8_);
+         this.price.visible = !this.actionPrice.visible;
+         this.toBuy.enabled = this.price.enabled = !(_loc1_ == 0);
+         this.toBuy.mouseEnabled = this.price.mouseEnabled = false;
+         this.toBuyTf.alpha = _loc1_ == 0?0.3:1;
+         this.toBuy.validateNow();
+         this.toBuy.x = Math.round(TO_BUY_POS - this.toBuy.width + this.toBuy.textField.textWidth / 2 + 10);
+         dispatchEvent(new ShellRendererEvent(ShellRendererEvent.TOTAL_PRICE_CHANGED));
+      }
+
       private function get shell() : ShellVO {
          return data as ShellVO;
       }
@@ -227,7 +268,7 @@ package net.wg.gui.lobby.hangar.maintenance
 
       private function onShellCurrencyChanged(param1:ListEvent) : void {
          this.price.icon = this.toBuyDropdown.selectedIndex == 0?Currencies.CREDITS:Currencies.GOLD;
-         this.actionPrice.ico = this.toBuyDropdown.selectedIndex == 0?IconText.CREDITS:IconText.GOLD;
+         this.actionPrice.ico = this.toBuyDropdown.selectedIndex == 0?IconsTypes.CREDITS:IconsTypes.GOLD;
          this.shell.currency = this.toBuyDropdown.selectedIndex == 0?Currencies.CREDITS:Currencies.GOLD;
          this.onUserCountChange();
       }
@@ -238,41 +279,6 @@ package net.wg.gui.lobby.hangar.maintenance
             return;
          }
          dispatchEvent(new ShellRendererEvent(ShellRendererEvent.CHANGE_ORDER,this.shell,this.shell.list[this.select.selectedIndex]));
-      }
-
-      private function updateShellsPrice() : void {
-         var _loc1_:int = this.shell.buyShellsCount;
-         var _loc2_:* = 0;
-         var _loc3_:* = 0;
-         var _loc4_:* = "";
-         var _loc5_:ILocale = App.utils.locale;
-         if(this.toBuyDropdown.visible)
-         {
-            _loc2_ = this.shell.prices[this.toBuyDropdown.selectedIndex];
-            _loc3_ = this.shell.defPrices[this.toBuyDropdown.selectedIndex];
-         }
-         else
-         {
-            _loc2_ = this.shell.prices[this.shell.currency == Currencies.CREDITS?0:1];
-            _loc3_ = this.shell.defPrices[this.shell.currency == Currencies.CREDITS?0:1];
-            _loc4_ = this.shell.currency == Currencies.CREDITS?_loc5_.integer(_loc2_):_loc5_.gold(_loc2_);
-         }
-         this.toBuy.icon = this.shell.currency;
-         this.price.icon = this.shell.currency;
-         this.toBuy.textColor = this.price.textColor = Currencies.TEXT_COLORS[this.shell.currency];
-         this.toBuyTf.text = _loc1_ + MULTY_CHARS;
-         this.toBuy.text = _loc1_ + MULTY_CHARS + _loc4_;
-         var _loc6_:Number = _loc2_ * _loc1_;
-         var _loc7_:Number = _loc3_ * _loc1_;
-         this.price.text = this.shell.currency == Currencies.CREDITS?_loc5_.integer(_loc6_):_loc5_.gold(_loc6_);
-         this.actionPrice.setData(this.shell.actionPrc,_loc6_,_loc7_,this.shell.currency);
-         this.price.visible = !this.actionPrice.visible;
-         this.toBuy.enabled = this.price.enabled = !(_loc1_ == 0);
-         this.toBuy.mouseEnabled = this.price.mouseEnabled = false;
-         this.toBuyTf.alpha = _loc1_ == 0?0.3:1;
-         this.toBuy.validateNow();
-         this.toBuy.x = Math.round(TO_BUY_POS - this.toBuy.width + this.toBuy.textField.textWidth / 2 + 10);
-         dispatchEvent(new ShellRendererEvent(ShellRendererEvent.TOTAL_PRICE_CHANGED));
       }
 
       private function onUserCountChange(param1:ShellRendererEvent=null) : void {

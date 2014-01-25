@@ -35,8 +35,8 @@ package net.wg.gui.tutorial.controls
          invalidateData();
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this.removeItems();
          this._dataProvider = this._dataProvider.splice(0,this._dataProvider.length);
       }

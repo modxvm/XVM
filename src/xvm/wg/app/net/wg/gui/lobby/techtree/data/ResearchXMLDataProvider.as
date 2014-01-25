@@ -83,7 +83,6 @@ package net.wg.gui.lobby.techtree.data
          _loc2_.iconPath = param1.child("iconPath").text();
          _loc2_.smallIconPath = param1.child("smallIconPath").text();
          _loc2_.longName = param1.child("longName").text();
-         _loc2_.pickleDump = param1.child("dump").text();
          _loc2_.shopPrice = new ShopPrice(param1.child("shopPrice").child("credits").text(),param1.child("shopPrice").child("gold").text(),param1.child("shopPrice").child("defCredits").text(),param1.child("shopPrice").child("defGold").text(),param1.child("shopPrice").child("actionPrc").text());
          _loc2_.displayInfo = this.getNodeDisplayInfo(param1.child("display")[0]);
          return _loc2_;

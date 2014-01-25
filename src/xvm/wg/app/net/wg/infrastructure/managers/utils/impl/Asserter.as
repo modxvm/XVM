@@ -10,15 +10,12 @@ package net.wg.infrastructure.managers.utils.impl
           
       public function Asserter() {
          super();
-         ms_instance = this;
          this.assertProcessing = this.startingAssertProcessing;
       }
 
-      private static var ms_instance:Asserter = null;
-
-      private var isDebug:Boolean = true;
-
       private var assertProcessing:Function = null;
+
+      private var _errorLoggingEnabled:Boolean = true;
 
       public final function assert(param1:Boolean, param2:String, param3:Class=null) : void {
          this.assertProcessing(param1,param2,param3);
@@ -30,6 +27,10 @@ package net.wg.infrastructure.managers.utils.impl
 
       public final function assertNull(param1:Object, param2:String, param3:Class=null) : void {
          this.assert(param1 == null,param2);
+      }
+
+      public final function enableErrorLogging(param1:Boolean) : void {
+         this._errorLoggingEnabled = param1;
       }
 
       private function throwException(param1:String, param2:Class=null) : void {
@@ -44,8 +45,7 @@ package net.wg.infrastructure.managers.utils.impl
             this.assertNotNull(_loc3_,"ex argument must be Error object class");
          }
          _loc3_.message = param1;
-         DebugUtils.LOG_DEBUG((!Extensions.isGFxPlayer) && (Extensions.isScaleform));
-         if(!Extensions.isGFxPlayer && (Extensions.isScaleform))
+         if(!Extensions.isGFxPlayer && (Extensions.isScaleform) && (this._errorLoggingEnabled))
          {
             DebugUtils.LOG_ERROR(param1);
             DebugUtils.LOG_ERROR(_loc3_.getStackTrace());

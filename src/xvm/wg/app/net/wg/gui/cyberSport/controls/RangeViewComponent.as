@@ -28,8 +28,8 @@ package net.wg.gui.cyberSport.controls
 
       private var lastPadding:int = 0;
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this.removeChild(this.container);
          if(this.model)
          {

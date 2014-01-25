@@ -85,7 +85,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
          var _loc1_:FooterMc = this.animTarget.footerMc;
          this.footerOpenedY = _loc1_.y;
          this.footerClosedY = this.animTarget.bodyMc.y;
-         var _loc2_:IWindow = this.animTarget.window;
+         var _loc2_:IWindow = IWindow(this.animTarget.window);
          this.darkBackgroundOpenHeight = this.animTarget.backgroundMc.height;
          this.darkBackgroundCloseHeight = this.footerClosedY + _loc1_.submitBtn.y - this.margin;
          this.windowOpenedHeight = _loc2_.getBackground().height;

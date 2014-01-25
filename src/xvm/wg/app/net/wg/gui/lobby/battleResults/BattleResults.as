@@ -89,7 +89,7 @@ package net.wg.gui.lobby.battleResults
             ]);
             this.tabs_mc.selectedIndex = 0;
             this.tabs_mc.validateNow();
-            App.utils.focusHandler.setFocus(this.tabs_mc);
+            setFocus(this.tabs_mc);
          }
          this._wasPopulated = true;
          as_hideWaiting();

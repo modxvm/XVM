@@ -51,7 +51,7 @@ package net.wg.gui.messenger.controls
          invalidateData();
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          if(this.model)
          {
             this.model.dispose();
@@ -59,7 +59,7 @@ package net.wg.gui.messenger.controls
          }
          App.voiceChatMgr.removeEventListener(VoiceChatEvent.START_SPEAKING,this.speakHandler);
          App.voiceChatMgr.removeEventListener(VoiceChatEvent.STOP_SPEAKING,this.speakHandler);
-         super.dispose();
+         super.onDispose();
       }
 
       override protected function configUI() : void {

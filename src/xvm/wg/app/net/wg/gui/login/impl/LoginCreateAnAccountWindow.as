@@ -59,7 +59,7 @@ package net.wg.gui.login.impl
          else
          {
             this.enableInputs(true);
-            App.utils.scheduler.envokeInNextFrame(App.utils.focusHandler.setFocus,this.inputNick);
+            setFocus(this.inputNick);
             this.errorField.text = param2;
          }
       }
@@ -69,7 +69,7 @@ package net.wg.gui.login.impl
          window.getBackground().alpha = 0;
          this.noteField.htmlText = DIALOGS.CREATEANACCOUNT_NOTE;
          this.createBtn.addEventListener(ButtonEvent.CLICK,this.onCreateBtnClickHandler);
-         App.utils.scheduler.envokeInNextFrame(App.utils.focusHandler.setFocus,this.inputNick);
+         setFocus(this.inputNick);
          this.enableInputs(true);
       }
 

@@ -18,6 +18,12 @@ package net.wg.gui.lobby.hangar.maintenance
 
       private var _label:String = "";
 
+      private var _divisorValueLoaded:Number = 0;
+
+      private var _divisorValueTotal:Number = 0;
+
+      private var _divisorEnabled:Boolean = true;
+
       public var alert_mc:MovieClip;
 
       public var divisor_mc:MovieClip;
@@ -25,7 +31,9 @@ package net.wg.gui.lobby.hangar.maintenance
       public var textField:TextField;
 
       public function setDivisor(param1:Number, param2:Number) : void {
-         this.divisor_mc.visible = (param1) && (param2);
+         this._divisorValueLoaded = param1;
+         this._divisorValueTotal = param2;
+         this.updateDivisorVisibility();
          var _loc3_:Number = (width - 8) * param1 / param2;
          this.divisor_mc.x = Math.round(_loc3_ / scaleX);
       }
@@ -46,6 +54,19 @@ package net.wg.gui.lobby.hangar.maintenance
       public function set label(param1:String) : void {
          this._label = param1;
          this.textField.text = this._label;
+      }
+
+      public function get divisorEnabled() : Boolean {
+         return this._divisorEnabled;
+      }
+
+      public function set divisorEnabled(param1:Boolean) : void {
+         this._divisorEnabled = param1;
+         this.updateDivisorVisibility();
+      }
+
+      private function updateDivisorVisibility() : void {
+         this.divisor_mc.visible = (this._divisorEnabled) && (this._divisorValueLoaded) && (this._divisorValueTotal);
       }
 
       override public function toString() : String {

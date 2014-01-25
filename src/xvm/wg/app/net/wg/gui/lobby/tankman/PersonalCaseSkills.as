@@ -12,6 +12,7 @@ package net.wg.gui.lobby.tankman
    import scaleform.clik.data.DataProvider;
    import flash.events.Event;
    import net.wg.gui.events.PersonalCaseEvent;
+   import flash.display.InteractiveObject;
 
 
    public class PersonalCaseSkills extends UIComponent implements IViewStackContent
@@ -43,8 +44,8 @@ package net.wg.gui.lobby.tankman
 
       private var lastSelectedIndex:int = -1;
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          if(this.modifiers)
          {
             this.modifiers.removeEventListener(ListEvent.INDEX_CHANGE,this.modifiers_listIndexChangeHandler);
@@ -185,6 +186,10 @@ package net.wg.gui.lobby.tankman
          dispatchEvent(_loc1_);
          this.selectedSkillName = null;
          this.updateSelectBtn();
+      }
+
+      public function getComponentForFocus() : InteractiveObject {
+         return null;
       }
    }
 

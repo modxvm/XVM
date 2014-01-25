@@ -21,10 +21,10 @@ package net.wg.gui.cyberSport.views
    import scaleform.clik.events.ListEvent;
    import net.wg.gui.cyberSport.vo.UnitShortVO;
    import scaleform.gfx.MouseEventEx;
-   import net.wg.gui.cyberSport.vo.UnitVO;
    import net.wg.data.constants.Tooltips;
    import flash.events.Event;
    import net.wg.gui.utils.ComplexTooltipHelper;
+   import flash.display.InteractiveObject;
 
 
    public class UnitsListView extends CyberSportUnitsListMeta implements ICyberSportUnitsListMeta, ICyberSportBaseViewMeta, IViewStackContent
@@ -122,7 +122,6 @@ package net.wg.gui.cyberSport.views
          this.refreshBtn.addEventListener(MouseEvent.ROLL_OUT,this.onItemRollOut);
          this.joinUnitSection.addEventListener(CSComponentEvent.JOIN_UNIT_REQUEST,this.onJoinRequest);
          this.joinUnitSection.addEventListener(CSComponentEvent.ASSIGN_SLOT_REQUEST,this.onJoinRequest);
-         App.utils.focusHandler.setFocus(this.unitsList);
       }
 
       private function onJoinRequest(param1:CSComponentEvent) : void {
@@ -198,10 +197,6 @@ package net.wg.gui.cyberSport.views
          loadPreviousS();
       }
 
-      public function as_setSelectedUnit(param1:Object) : void {
-         this.joinUnitSection.setData(new UnitVO(param1));
-      }
-
       public function as_selectUnitInList(param1:Number) : void {
          var _loc2_:CSCommandVO = null;
          for each (_loc2_ in this.unitsList.dataProvider)
@@ -275,6 +270,10 @@ package net.wg.gui.cyberSport.views
          {
             App.toolTipMgr.showComplex(_loc3_);
          }
+      }
+
+      public function getComponentForFocus() : InteractiveObject {
+         return null;
       }
    }
 

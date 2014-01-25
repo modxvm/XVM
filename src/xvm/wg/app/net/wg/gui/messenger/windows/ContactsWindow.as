@@ -6,6 +6,7 @@ package net.wg.gui.messenger.windows
    import flash.display.Sprite;
    import net.wg.gui.components.advanced.ViewStack;
    import net.wg.data.daapi.base.DAAPIDataProvider;
+   import flash.display.InteractiveObject;
    import scaleform.clik.events.IndexEvent;
    import net.wg.gui.messenger.evnts.ContactsFormEvent;
    import scaleform.clik.utils.Constraints;
@@ -62,8 +63,8 @@ package net.wg.gui.messenger.windows
 
       protected var freezeSearch:Boolean;
 
-      override public function setFocus() : void {
-         super.setFocus();
+      override protected function onInitModalFocus(param1:InteractiveObject) : void {
+         super.onInitModalFocus(param1);
          this.updateFocusInViewContainer();
       }
 

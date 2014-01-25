@@ -10,12 +10,13 @@ package net.wg.gui.lobby.training
    import net.wg.gui.components.advanced.TextAreaSimple;
    import net.wg.gui.components.controls.SoundButtonEx;
    import net.wg.data.VO.TrainingWindowVO;
+   import scaleform.clik.data.DataProvider;
    import scaleform.clik.events.ButtonEvent;
    import scaleform.clik.events.ListEvent;
    import scaleform.clik.constants.WrappingMode;
+   import flash.display.InteractiveObject;
    import net.wg.data.Aliases;
    import scaleform.clik.constants.InvalidationType;
-   import scaleform.clik.data.DataProvider;
 
 
    public class TrainingWindow extends TrainingWindowMeta implements ITrainingWindowMeta
@@ -59,6 +60,39 @@ package net.wg.gui.lobby.training
 
       private var _dataWasSetted:Boolean = false;
 
+      public function populateMaps(param1:Array) : void {
+         this.mapsData = param1;
+         this.maps.dataProvider = new DataProvider(param1);
+      }
+
+      public function setInfo(param1:Object) : void {
+         var _loc2_:* = NaN;
+         this.paramsVO = new TrainingWindowVO(param1);
+         if(this.paramsVO.create)
+         {
+            window.title = MENU.TRAINING_CREATE_TITLE;
+            this.maps.selectedIndex = Math.floor(Math.random() * this.mapsData.length);
+            this.isPrivate.selected = false;
+         }
+         else
+         {
+            window.title = MENU.TRAINING_INFO_SETTINGS_TITLE;
+            this.createButon.label = MENU.TRAINING_INFO_SETTINGS_OKBUTTON;
+            _loc2_ = 0;
+            while(_loc2_ < this.mapsData.length)
+            {
+               if(this.paramsVO.arena == this.mapsData[_loc2_].key)
+               {
+                  this.maps.selectedIndex = _loc2_;
+                  this._dataWasSetted = true;
+                  break;
+               }
+               _loc2_++;
+            }
+            invalidateData();
+         }
+      }
+
       override protected function configUI() : void {
          super.configUI();
          this.createButon.addEventListener(ButtonEvent.CLICK,this.createTraining);
@@ -68,8 +102,12 @@ package net.wg.gui.lobby.training
          this.isPrivate.addEventListener(MouseEvent.CLICK,hideTooltip);
          this.maps.addEventListener(ListEvent.INDEX_CHANGE,this.onMapChange);
          this.maps.wrapping = WrappingMode.STICK;
-         App.utils.focusHandler.setFocus(this.createButon);
          this.description.text = "";
+      }
+
+      override protected function onInitModalFocus(param1:InteractiveObject) : void {
+         super.onInitModalFocus(param1);
+         setFocus(this.createButon);
       }
 
       override protected function onPopulate() : void {
@@ -115,44 +153,16 @@ package net.wg.gui.lobby.training
       }
 
       override protected function draw() : void {
+         super.draw();
          if((isInvalid(InvalidationType.DATA)) && (this.paramsVO))
          {
             this.isPrivate.selected = this.paramsVO.privacy;
             this.description.text = this.paramsVO.description;
             this.description.validateNow();
-         }
-      }
-
-      public function populateMaps(param1:Array) : void {
-         this.mapsData = param1;
-         this.maps.dataProvider = new DataProvider(param1);
-      }
-
-      public function setInfo(param1:Object) : void {
-         var _loc2_:* = NaN;
-         this.paramsVO = new TrainingWindowVO(param1);
-         if(this.paramsVO.create)
-         {
-            window.title = MENU.TRAINING_CREATE_TITLE;
-            this.maps.selectedIndex = Math.floor(Math.random() * this.mapsData.length);
-            this.isPrivate.selected = false;
-         }
-         else
-         {
-            window.title = MENU.TRAINING_INFO_SETTINGS_TITLE;
-            this.createButon.label = MENU.TRAINING_INFO_SETTINGS_OKBUTTON;
-            _loc2_ = 0;
-            while(_loc2_ < this.mapsData.length)
-            {
-               if(this.paramsVO.arena == this.mapsData[_loc2_].key)
-               {
-                  this.maps.selectedIndex = _loc2_;
-                  this._dataWasSetted = true;
-                  break;
-               }
-               _loc2_++;
-            }
-            invalidateData();
+            this.battleTime.enabled = this.maps.mouseEnabled = this.maps.mouseChildren = this.paramsVO.canChangeArena;
+            this.maps.alpha = this.paramsVO.canChangeArena?1:0.6;
+            this.isPrivate.enabled = this.paramsVO.canMakeOpenedClosed;
+            this.description.enabled = this.paramsVO.canChangeComment;
          }
       }
 

@@ -21,7 +21,7 @@ package net.wg.gui.cyberSport.vo
 
       public var isPlayerSpeaking:Boolean = false;
 
-      public var isIgr:Boolean = false;
+      public var igrType:int = 0;
 
       private var _isCommander:Boolean = false;
 

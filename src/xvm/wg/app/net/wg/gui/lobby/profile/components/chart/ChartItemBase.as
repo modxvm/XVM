@@ -57,8 +57,8 @@ package net.wg.gui.lobby.profile.components.chart
          return this._data;
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
       }
    }
 

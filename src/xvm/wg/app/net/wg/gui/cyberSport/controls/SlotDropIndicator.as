@@ -31,12 +31,12 @@ package net.wg.gui.cyberSport.controls
 
       private var _isHighlighted:Boolean = false;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this._data = null;
          removeEventListener(MouseEvent.CLICK,this.onClickHandler);
          removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
          removeEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
-         super.dispose();
+         super.onDispose();
       }
 
       public function setHighlightState(param1:Boolean) : void {

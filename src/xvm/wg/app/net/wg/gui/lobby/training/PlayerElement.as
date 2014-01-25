@@ -53,7 +53,7 @@ package net.wg.gui.lobby.training
          }
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.iconLoader.dispose();
          this.iconLoader = null;
          this.nameField.dispose();
@@ -67,7 +67,7 @@ package net.wg.gui.lobby.training
             this.data = null;
          }
          this.defColorTrans = null;
-         super.dispose();
+         super.onDispose();
       }
 
       override protected function draw() : void {

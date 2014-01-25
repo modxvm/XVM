@@ -5,7 +5,6 @@ package net.wg.gui.lobby.hangar.crew
    import net.wg.gui.components.controls.TileList;
    import flash.display.MovieClip;
    import flash.text.TextField;
-   import net.wg.data.constants.Tooltips;
    import scaleform.clik.events.InputEvent;
    import scaleform.clik.ui.InputDetails;
    import scaleform.clik.constants.InputValue;
@@ -16,6 +15,7 @@ package net.wg.gui.lobby.hangar.crew
    import flash.geom.Point;
    import scaleform.clik.data.ListData;
    import scaleform.clik.constants.InvalidationType;
+   import net.wg.data.constants.Tooltips;
    import __AS3__.vec.Vector;
 
 
@@ -106,7 +106,7 @@ package net.wg.gui.lobby.hangar.crew
          super.configUI();
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          removeEventListener(MouseEvent.CLICK,this.onItemClick);
          removeEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
          removeEventListener(MouseEvent.ROLL_OUT,hideTooltip);
@@ -146,14 +146,11 @@ package net.wg.gui.lobby.hangar.crew
          focusIndicator = null;
          this.goups_icons_prop = null;
          _data = null;
-         super.dispose();
+         super.onDispose();
       }
 
       private function showTooltip(param1:MouseEvent) : void {
-         if(owner.visible)
-         {
-            App.toolTipMgr.showSpecial(Tooltips.TANKMAN,null,data.tankmanID,true);
-         }
+         this.checkToolTipData(data);
       }
 
       public function onItemClick(param1:MouseEvent) : void {
@@ -349,10 +346,7 @@ package net.wg.gui.lobby.hangar.crew
          _loc5_ = this.localToGlobal(_loc5_);
          if(this.hitTestPoint(_loc5_.x,_loc5_.y,true))
          {
-            if(owner.visible)
-            {
-               App.toolTipMgr.showSpecial(Tooltips.TANKMAN,null,_loc2_.tankmanID,true);
-            }
+            this.checkToolTipData(_loc2_);
          }
       }
 
@@ -408,10 +402,21 @@ package net.wg.gui.lobby.hangar.crew
             _loc2_ = this.localToGlobal(_loc2_);
             if(this.hitTestPoint(_loc2_.x,_loc2_.y,true))
             {
-               if(owner.visible)
-               {
-                  App.toolTipMgr.showSpecial(Tooltips.TANKMAN,null,_loc1_.tankmanID,true);
-               }
+               this.checkToolTipData(_loc1_);
+            }
+         }
+      }
+
+      private function checkToolTipData(param1:Object) : void {
+         if(owner.visible)
+         {
+            if((param1) && (param1.tankmanID))
+            {
+               App.toolTipMgr.showSpecial(Tooltips.TANKMAN,null,param1.tankmanID,true);
+            }
+            else
+            {
+               App.toolTipMgr.hide();
             }
          }
       }

@@ -59,7 +59,11 @@ package net.wg.gui.lobby.profile.components
          }
       }
 
-      public function dispose() : void {
+      public final function dispose() : void {
+         this.onDispose();
+      }
+
+      protected function onDispose() : void {
          this.disposeLoader();
       }
 

@@ -14,6 +14,10 @@ package net.wg.gui.cyberSport.controls
 
       public var droppingHit:MovieClip = null;
 
+      override public function set selectedIndex(param1:int) : void {
+          
+      }
+
       override protected function configUI() : void {
          super.configUI();
          hitArea = this.droppingHit;

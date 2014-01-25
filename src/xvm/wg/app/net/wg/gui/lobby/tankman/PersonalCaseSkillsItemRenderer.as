@@ -40,7 +40,7 @@ package net.wg.gui.lobby.tankman
 
       public var focusIndicatorUI:MovieClip;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          removeEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
          removeEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
          if(this.icon)
@@ -51,7 +51,7 @@ package net.wg.gui.lobby.tankman
          {
             this.rank.dispose();
          }
-         super.dispose();
+         super.onDispose();
       }
 
       override protected function configUI() : void {

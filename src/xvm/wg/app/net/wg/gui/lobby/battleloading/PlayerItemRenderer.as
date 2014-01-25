@@ -80,10 +80,10 @@ package net.wg.gui.lobby.battleloading
          }
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          App.voiceChatMgr.removeEventListener(VoiceChatEvent.START_SPEAKING,this.speakHandler);
          App.voiceChatMgr.removeEventListener(VoiceChatEvent.STOP_SPEAKING,this.speakHandler);
-         super.dispose();
+         super.onDispose();
       }
 
       override protected function draw() : void {
@@ -100,11 +100,7 @@ package net.wg.gui.lobby.battleloading
          if((data) && (initialized))
          {
             this.selfBg.visible = _selected;
-            if(data.label)
-            {
-               App.utils.commons.formatPlayerName(textField,data.label,data.clanAbbrev,null,data.isIGR);
-               label = textField.htmlText;
-            }
+            App.utils.commons.formatPlayerName(textField,App.utils.commons.getUserProps(data.label,data.clanAbbrev,data.region,data.igrType));
             if(!(this.vehicleField == null) && !(data.vehicle == null))
             {
                this.vehicleField.text = data.vehicle;
@@ -173,10 +169,7 @@ package net.wg.gui.lobby.battleloading
       }
 
       override protected function updateText() : void {
-         if(!(_label == null) && !(textField == null))
-         {
-            textField.htmlText = _label;
-         }
+          
       }
 
       private function updateState() : void {
@@ -204,11 +197,7 @@ package net.wg.gui.lobby.battleloading
          }
          if(_loc1_)
          {
-            if(data)
-            {
-               App.utils.commons.formatPlayerName(textField,data.label,null,null,data.isIGR,"","",_loc1_.rgb);
-               label = textField.htmlText;
-            }
+            textField.textColor = _loc1_.rgb;
             this.vehicleField.textColor = _loc1_.rgb;
             if(_loc2_)
             {

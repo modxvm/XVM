@@ -85,11 +85,11 @@ package net.wg.gui.lobby.profile.components
          invalidate(REDRAW_INV);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.background.mask = null;
          this.background = null;
          this.maskObj = null;
-         super.dispose();
+         super.onDispose();
       }
    }
 

@@ -23,8 +23,8 @@ package net.wg.gui.cyberSport.controls
          this.updateLeftThumb();
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          App.stage.removeEventListener(MouseEvent.MOUSE_MOVE,this.doDragLeft,false);
          App.stage.removeEventListener(MouseEvent.MOUSE_UP,this.endLeftDrag,false);
          this.leftThumb.removeEventListener(MouseEvent.MOUSE_DOWN,this.beginDragLeft,false);

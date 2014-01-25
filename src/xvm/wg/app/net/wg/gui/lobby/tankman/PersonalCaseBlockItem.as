@@ -35,8 +35,8 @@ package net.wg.gui.lobby.tankman
 
       private var _skillName:String = null;
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this.skills.removeEventListener(MouseEvent.MOUSE_OUT,this.onMouseOut);
          this.skills.removeEventListener(MouseEvent.MOUSE_MOVE,this.onMouseOver);
          this.skills.removeEventListener(MouseEvent.CLICK,this.skills_mouseClickHandler);

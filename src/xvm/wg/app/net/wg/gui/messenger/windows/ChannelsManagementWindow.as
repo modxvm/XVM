@@ -5,6 +5,7 @@ package net.wg.gui.messenger.windows
    import flash.display.Sprite;
    import net.wg.gui.components.advanced.ViewStack;
    import net.wg.data.daapi.base.DAAPIDataProvider;
+   import flash.display.InteractiveObject;
    import scaleform.clik.constants.InvalidationType;
    import scaleform.clik.core.UIComponent;
    import scaleform.clik.utils.Padding;
@@ -64,8 +65,8 @@ package net.wg.gui.messenger.windows
 
       protected var _searchResDataProvider:DAAPIDataProvider;
 
-      override public function setFocus() : void {
-         super.setFocus();
+      override protected function onSetModalFocus(param1:InteractiveObject) : void {
+         super.onSetModalFocus(param1);
          this.onViewChangeHandler();
       }
 
@@ -102,7 +103,7 @@ package net.wg.gui.messenger.windows
       override protected function onPopulate() : void {
          window.useBottomBtns = false;
          window.title = MESSENGER.LOBBY_BUTTONS_CHANNELS;
-         window.contentPadding = new Padding(40,12,17,9);
+         window.contentPadding = new Padding(40,10,17,9);
          window.setMaxWidth(650);
          window.setMaxHeight(400);
          constraints = new Constraints(this,ConstrainMode.REFLOW);

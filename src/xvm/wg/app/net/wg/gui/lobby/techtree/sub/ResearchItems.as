@@ -152,7 +152,7 @@ package net.wg.gui.lobby.techtree.sub
          }
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          visible = false;
          this.removeItemRenderers();
          this.view = null;
@@ -181,7 +181,7 @@ package net.wg.gui.lobby.techtree.sub
             this._dataProvider.clearUp();
             this._dataProvider = null;
          }
-         super.dispose();
+         super.onDispose();
       }
 
       public function invalidateNodesData(param1:String, param2:Object) : void {
@@ -396,6 +396,8 @@ package net.wg.gui.lobby.techtree.sub
          param1.removeEventListener(TechTreeEvent.CLICK_2_UNLOCK,this.handleUnlockItem);
          param1.removeEventListener(TechTreeEvent.CLICK_2_BUY,this.handleBuyItem);
          param1.removeEventListener(TechTreeEvent.CLICK_2_SELL,this.handleSellItem);
+         param1.removeEventListener(TechTreeEvent.CLICK_2_SELECT_IN_HANGAR,this.handleSelectVehicleInHangar);
+         param1.removeEventListener(TechTreeEvent.CLICK_2_SHOW_VEHICLE_STATS,this.handleShowVehicleInStats);
          param1.removeEventListener(TechTreeEvent.CLICK_2_OPEN,this.handleOpenVehicle);
          param1.removeEventListener(TechTreeEvent.CLICK_2_INSTALL,this.handleInstallItem);
          param1.removeEventListener(TechTreeEvent.CLICK_2_VEHICLE_INFO,this.handleRequestVehicleInfo);
@@ -613,6 +615,8 @@ package net.wg.gui.lobby.techtree.sub
          param1.addEventListener(TechTreeEvent.CLICK_2_UNLOCK,this.handleUnlockItem,false,0,true);
          param1.addEventListener(TechTreeEvent.CLICK_2_BUY,this.handleBuyItem,false,0,true);
          param1.addEventListener(TechTreeEvent.CLICK_2_SELL,this.handleSellItem,false,0,true);
+         param1.addEventListener(TechTreeEvent.CLICK_2_SELECT_IN_HANGAR,this.handleSelectVehicleInHangar,false,0,true);
+         param1.addEventListener(TechTreeEvent.CLICK_2_SHOW_VEHICLE_STATS,this.handleShowVehicleInStats,false,0,true);
          param1.addEventListener(TechTreeEvent.CLICK_2_VEHICLE_INFO,this.handleRequestVehicleInfo,false,0,true);
          if(!param2)
          {
@@ -963,7 +967,7 @@ package net.wg.gui.lobby.techtree.sub
          if(this.view != null)
          {
             App.utils.asserter.assert(NodeEntityType.isModuleType(param1.entityType),"Node is not module");
-            this.view.requestModuleInfoS(this.getNodeDataByEvent(param1).pickleDump);
+            this.view.requestModuleInfoS(this.getNodeDataByEvent(param1).id);
          }
       }
 
@@ -971,11 +975,12 @@ package net.wg.gui.lobby.techtree.sub
          if(this.view != null)
          {
             App.utils.asserter.assert(NodeEntityType.isVehicleType(param1.entityType),"Node is not vehicle");
-            this.view.requestVehicleInfoS(this.getNodeDataByEvent(param1).pickleDump);
+            this.view.requestVehicleInfoS(this.getNodeDataByEvent(param1).id);
          }
       }
 
       private function handleOpenVehicle(param1:TechTreeEvent) : void {
+         App.utils.focusHandler.setFocus(this);
          if(this.view != null)
          {
             App.utils.asserter.assert(NodeEntityType.isVehicleType(param1.entityType),"Node is not vehicle");
@@ -1008,6 +1013,22 @@ package net.wg.gui.lobby.techtree.sub
          if(!this.requestInCoolDown && !(this.view == null))
          {
             this.view.request4SellS(this.getNodeDataByEvent(param1).id);
+            this.activateCoolDown();
+         }
+      }
+
+      private function handleSelectVehicleInHangar(param1:TechTreeEvent) : void {
+         if(!this.requestInCoolDown && !(this.view == null) && param1.index > -1)
+         {
+            this.view.request4SelectInHangarS(this.getNodeDataByEvent(param1).id);
+            this.activateCoolDown();
+         }
+      }
+
+      private function handleShowVehicleInStats(param1:TechTreeEvent) : void {
+         if(!this.requestInCoolDown && !(this.view == null) && param1.index > -1)
+         {
+            this.view.request4ShowVehicleStatisticsS(this.getNodeDataByEvent(param1).id);
             this.activateCoolDown();
          }
       }

@@ -202,7 +202,7 @@ package net.wg.gui.components.common.video.advanced
          return this._progressBar;
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.disposeProgressBar();
          this.cancelHideDelay();
          this.animationManager.dispose();
@@ -242,7 +242,7 @@ package net.wg.gui.components.common.video.advanced
          }
          this.removeEventListener(VideoPlayerEvent.SUBTITLE_CHANGED,this.subtitleChangeHandler);
          removeEventListener(MouseEvent.MOUSE_MOVE,this.mouseMoveHandler);
-         super.dispose();
+         super.onDispose();
       }
    }
 

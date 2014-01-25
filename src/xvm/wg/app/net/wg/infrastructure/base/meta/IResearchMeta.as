@@ -14,7 +14,7 @@ package net.wg.infrastructure.base.meta
 
       function request4InstallS(param1:Number) : void;
 
-      function requestModuleInfoS(param1:String) : void;
+      function requestModuleInfoS(param1:Number) : void;
 
       function goToTechTreeS(param1:String) : void;
 

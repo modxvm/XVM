@@ -44,7 +44,7 @@ package net.wg.gui.components.controls
          }
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.disposeRenderers();
          if(_dataProvider)
          {
@@ -54,10 +54,11 @@ package net.wg.gui.components.controls
          if(_scrollBar)
          {
             _scrollBar.dispose();
+            _scrollBar = null;
          }
          thumbOffset = null;
          _padding = null;
-         super.dispose();
+         super.onDispose();
       }
 
       public function disposeRenderers() : void {

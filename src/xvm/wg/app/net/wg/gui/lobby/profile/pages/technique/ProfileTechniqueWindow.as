@@ -84,8 +84,11 @@ package net.wg.gui.lobby.profile.pages.technique
       override protected function onDispose() : void {
          this.tweenManager.dispose();
          this.tweenManager = null;
-         this._waiting.dispose();
-         this._waiting = null;
+         if(this._waiting)
+         {
+            this._waiting.dispose();
+            this._waiting = null;
+         }
          super.onDispose();
       }
 

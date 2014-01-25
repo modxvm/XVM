@@ -31,8 +31,8 @@ package net.wg.gui.cyberSport.controls
 
       public var vTypeRange:Array = null;
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this.nationIDRange.splice(0,this.nationIDRange.length);
          this.vLevelRange.splice(0,this.vLevelRange.length);
          this.vTypeRange.splice(0,this.vTypeRange.length);

@@ -12,6 +12,7 @@ package net.wg.gui.cyberSport.controls
    import net.wg.gui.cyberSport.controls.events.VehicleSelectorItemEvent;
    import net.wg.gui.cyberSport.controls.events.VehicleSelectorEvent;
    import scaleform.clik.constants.InvalidationType;
+   import flash.display.InteractiveObject;
 
 
    public class VehicleSelector extends UIComponent implements IViewStackContent
@@ -247,18 +248,18 @@ package net.wg.gui.cyberSport.controls
          this.dispatchUpdate();
       }
 
-      override public function dispose() : void {
-         super.dispose();
-         if(this._selectedItemVO)
-         {
-            this._selectedItemVO.dispose();
-            this._selectedItemVO = null;
-         }
+      override protected function onDispose() : void {
+         super.onDispose();
          this.allCheckBox.removeEventListener(Event.SELECT,this.onAllCheckBoxChanged);
          this.list.removeEventListener(VehicleSelectorItemEvent.SELECT_VEHICLE,this.dispatchUpdate);
          this.allCheckBox.dispose();
          this.filtersView.dispose();
          this.list.dispose();
+         if(this._selectedItemVO)
+         {
+            this._selectedItemVO.dispose();
+            this._selectedItemVO = null;
+         }
       }
 
       public function get multiSelection() : Boolean {
@@ -281,6 +282,10 @@ package net.wg.gui.cyberSport.controls
 
       public function get isUserVehiclesMode() : Boolean {
          return this._filtersMode == VehicleSelectorFilter.MODE_USER_VEHICLES;
+      }
+
+      public function getComponentForFocus() : InteractiveObject {
+         return null;
       }
    }
 

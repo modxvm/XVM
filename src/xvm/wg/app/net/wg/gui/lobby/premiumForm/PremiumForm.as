@@ -289,7 +289,7 @@ package net.wg.gui.lobby.premiumForm
 
       private function changeButtonsFocus(param1:Boolean=false) : void {
          this.applyButton.enabled = param1;
-         App.utils.focusHandler.setFocus(param1?this.applyButton:this.closeButton);
+         setFocus(param1?this.applyButton:this.closeButton);
       }
 
       private function clearPreviousCostControls() : void {

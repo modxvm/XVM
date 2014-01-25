@@ -28,10 +28,10 @@ package net.wg.gui.components.controls
 
       private var _speakVisible:Boolean;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.mutedClip = null;
          removeEventListener(Event.ENTER_FRAME,this.frameHandler);
-         super.dispose();
+         super.onDispose();
       }
 
       override protected function configUI() : void {

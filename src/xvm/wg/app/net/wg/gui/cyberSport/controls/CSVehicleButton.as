@@ -249,7 +249,7 @@ package net.wg.gui.cyberSport.controls
          this.nationTypeEff.gotoAndStop(_loc1_);
          this.cutVehicleIcon.vehicleIcon.cutRect = this.cutVehicleIconEff.vehicleIcon.cutRect = CUT_RECTANGLE;
          this.cutVehicleIcon.vehicleIcon.source = this.cutVehicleIconEff.vehicleIcon.source = this.vehicleModel.smallIconPath;
-         App.utils.commons.formatPlayerName(this.vehicleName.textField,this.vehicleModel.shortUserName);
+         App.utils.commons.formatPlayerName(this.vehicleName.textField,App.utils.commons.getUserProps(this.vehicleModel.shortUserName));
          this.vehicleNameEff.textField.text = this.vehicleName.textField.text;
          this.vehicleLevel.setData(this.vehicleModel.level);
          this.vehicleType.gotoAndStop(this.vehicleModel.type);
@@ -438,8 +438,8 @@ package net.wg.gui.cyberSport.controls
          App.soundMgr.playControlsSnd(param1,soundType,soundId);
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          if(this.rangeModel)
          {
             this.rangeModel.dispose();

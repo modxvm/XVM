@@ -17,6 +17,9 @@ package net.wg.infrastructure.managers.utils.impl
    import __AS3__.vec.Vector;
    import flash.display.Sprite;
    import flash.filters.ColorMatrixFilter;
+   import net.wg.infrastructure.interfaces.IUserProps;
+   import flash.text.TextFormat;
+   import net.wg.data.constants.Values;
    import net.wg.infrastructure.interfaces.IDAAPIModule;
    import net.wg.utils.IAssertable;
    import net.wg.data.constants.Errors;
@@ -32,6 +35,16 @@ package net.wg.infrastructure.managers.utils.impl
       public function Commons() {
          super();
       }
+
+      private static const IMG_TAG_OPEN:String = "<IMG SRC=\"img://gui/maps/icons/library/igr_32x13.png\" width=\"32\" height=\"13\" vspace=\"";
+
+      private static const IMG_TAG_CLOSE:String = "\"/>";
+
+      private static const CLAN_TAG_OPEN:String = "[";
+
+      private static const CLAN_TAG_CLOSE:String = "]";
+
+      private static const CUT_SYMBOLS_STR:String = "..";
 
       private static var s_found:Array;
 
@@ -218,30 +231,51 @@ package net.wg.infrastructure.managers.utils.impl
          object.filters = [colorFilter];
       }
 
-      public function formatPlayerName(param1:TextField, param2:String, param3:String=null, param4:String=null, param5:Boolean=false, param6:String="", param7:String="", param8:Number=NaN, param9:int=-4) : Boolean {
-         var _loc13_:* = 0;
-         var _loc10_:* = "<IMG SRC=\"img://gui/maps/icons/library/igr_32x13.png\" width=\"32\" height=\"13\" vspace=\"" + param9 + "\"/>";
-         var _loc11_:String = param6 + param2 + (param3?"[" + param3 + "]":"") + (param4?" " + param4:"") + (param5?" " + _loc10_:"") + param7;
-         var _loc12_:* = false;
-         param1.htmlText = _loc11_;
+      public function getUserProps(param1:String, param2:String=null, param3:String=null, param4:int=0) : IUserProps {
+         return new UserProps(param1,param2,param3,param4);
+      }
+
+      public function formatPlayerName(param1:TextField, param2:IUserProps) : Boolean {
+         var _loc10_:* = 0;
+         var _loc3_:TextFormat = param1.getTextFormat();
+         var _loc4_:Object = _loc3_.size;
+         var _loc5_:String = _loc3_.font;
+         var _loc6_:String = _loc3_.align;
+         var _loc7_:String = IMG_TAG_OPEN + param2.igrVspace + IMG_TAG_CLOSE;
+         var _loc8_:String = param2.prefix + param2.userName + (param2.clanAbbrev?CLAN_TAG_OPEN + param2.clanAbbrev + CLAN_TAG_CLOSE:Values.EMPTY_STR) + (param2.region?Values.SPACE_STR + param2.region:Values.EMPTY_STR) + (param2.igrType > 0?Values.SPACE_STR + _loc7_:Values.EMPTY_STR) + param2.suffix;
+         var _loc9_:* = false;
+         this.applyTextProps(param1,_loc8_,_loc3_,_loc4_,_loc5_,_loc6_);
          if(param1.width < param1.textWidth)
          {
-            _loc12_ = true;
-            _loc11_ = param6 + param2 + (param3?"..":"") + (param4?" " + param4:"") + (param5?" " + _loc10_:"") + param7;
-            param1.htmlText = _loc11_;
-            _loc13_ = param2.length-1;
-            while(param1.width < param1.textWidth && _loc13_ > 0)
+            _loc9_ = true;
+            _loc8_ = param2.prefix + param2.userName + (param2.clanAbbrev?CUT_SYMBOLS_STR:Values.EMPTY_STR) + (param2.region?Values.SPACE_STR + param2.region:Values.EMPTY_STR) + (param2.igrType > 0?Values.SPACE_STR + _loc7_:Values.EMPTY_STR) + param2.suffix;
+            this.applyTextProps(param1,_loc8_,_loc3_,_loc4_,_loc5_,_loc6_);
+            _loc10_ = param2.userName.length-1;
+            while(param1.width < param1.textWidth && _loc10_ > 0)
             {
-               _loc11_ = param6 + param2.substr(0,_loc13_) + ".." + (param4?" " + param4:"") + (param5?" " + _loc10_:"") + param7;
-               param1.htmlText = _loc11_;
-               _loc13_--;
+               _loc8_ = param2.prefix + param2.userName.substr(0,_loc10_) + CUT_SYMBOLS_STR + (param2.region?Values.SPACE_STR + param2.region:Values.EMPTY_STR) + (param2.igrType > 0?Values.SPACE_STR + _loc7_:Values.EMPTY_STR) + param2.suffix;
+               this.applyTextProps(param1,_loc8_,_loc3_,_loc4_,_loc5_,_loc6_);
+               _loc10_--;
             }
          }
-         if(!isNaN(param8))
+         if(!isNaN(param2.rgb))
          {
-            param1.textColor = param8;
+            param1.textColor = param2.rgb;
          }
-         return _loc12_;
+         return _loc9_;
+      }
+
+      private function applyTextProps(param1:TextField, param2:String, param3:TextFormat, param4:Object, param5:String, param6:String) : void {
+         param1.htmlText = param2;
+         param3.size = param4;
+         param3.font = param5;
+         param3.align = param6;
+         param1.setTextFormat(param3);
+      }
+
+      public function getFullPlayerName(param1:IUserProps) : String {
+         var _loc2_:String = IMG_TAG_OPEN + param1.igrVspace + IMG_TAG_CLOSE;
+         return param1.prefix + param1.userName + (param1.clanAbbrev?CLAN_TAG_OPEN + param1.clanAbbrev + CLAN_TAG_CLOSE:Values.EMPTY_STR) + (param1.region?Values.SPACE_STR + param1.region:Values.EMPTY_STR) + (param1.igrType > 0?Values.SPACE_STR + _loc2_:Values.EMPTY_STR) + param1.suffix;
       }
 
       private function canToDestroying(param1:Object) : Boolean {
@@ -277,4 +311,97 @@ package net.wg.infrastructure.managers.utils.impl
       }
    }
 
-}
+}   import net.wg.infrastructure.interfaces.IUserProps;
+
+
+   class UserProps extends Object implements IUserProps
+   {
+          
+      function UserProps(param1:String, param2:String, param3:String, param4:int) {
+         super();
+         this._userName = param1;
+         this._clanAbbrev = param2;
+         this._region = param3;
+         this._igrType = param4;
+      }
+
+      private var _userName:String;
+
+      private var _clanAbbrev:String;
+
+      private var _region:String;
+
+      private var _igrType:int = 0;
+
+      private var _prefix:String = "";
+
+      private var _suffix:String = "";
+
+      private var _igrVspace:int = -4;
+
+      private var _rgb:Number = NaN;
+
+      public function get userName() : String {
+         return this._userName;
+      }
+
+      public function set userName(param1:String) : void {
+         this._userName = param1;
+      }
+
+      public function get clanAbbrev() : String {
+         return this._clanAbbrev;
+      }
+
+      public function set clanAbbrev(param1:String) : void {
+         this._clanAbbrev = param1;
+      }
+
+      public function get region() : String {
+         return this._region;
+      }
+
+      public function set region(param1:String) : void {
+         this._region = param1;
+      }
+
+      public function get igrType() : int {
+         return this._igrType;
+      }
+
+      public function set igrType(param1:int) : void {
+         this._igrType = param1;
+      }
+
+      public function get prefix() : String {
+         return this._prefix;
+      }
+
+      public function set prefix(param1:String) : void {
+         this._prefix = param1;
+      }
+
+      public function get suffix() : String {
+         return this._suffix;
+      }
+
+      public function set suffix(param1:String) : void {
+         this._suffix = param1;
+      }
+
+      public function get igrVspace() : int {
+         return this._igrVspace;
+      }
+
+      public function set igrVspace(param1:int) : void {
+         this._igrVspace = param1;
+      }
+
+      public function get rgb() : Number {
+         return this._rgb;
+      }
+
+      public function set rgb(param1:Number) : void {
+         this._rgb = param1;
+      }
+   }

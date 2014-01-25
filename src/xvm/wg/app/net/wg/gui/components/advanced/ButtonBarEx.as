@@ -91,7 +91,7 @@ package net.wg.gui.components.advanced
          _dataProvider = null;
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          removeEventListener(InputEvent.INPUT,handleInput,false);
          if(_dataProvider)
          {
@@ -104,7 +104,7 @@ package net.wg.gui.components.advanced
             _group.dispose();
             _group = null;
          }
-         super.dispose();
+         super.onDispose();
       }
 
       override protected function populateRendererData(param1:Button, param2:uint) : void {

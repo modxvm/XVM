@@ -58,12 +58,12 @@ package net.wg.gui.cyberSport.controls
          }
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.flake.removeEventListener(MouseEvent.ROLL_OVER,this.onRollOver);
          this.flake.removeEventListener(MouseEvent.ROLL_OUT,this.onRollOut);
          this.gear.removeEventListener(MouseEvent.ROLL_OVER,this.onRollOver);
          this.gear.removeEventListener(MouseEvent.ROLL_OUT,this.onRollOut);
-         super.dispose();
+         super.onDispose();
       }
 
       private function onRollOver(param1:MouseEvent) : void {

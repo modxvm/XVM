@@ -99,8 +99,8 @@ package net.wg.gui.lobby.profile.pages.statistics
          invalidate(LAYOUT_INV);
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          removeEventListener(Event.RESIZE,this.resizeMainHandler);
          this.typeChart.dispose();
          this.nationChart.dispose();

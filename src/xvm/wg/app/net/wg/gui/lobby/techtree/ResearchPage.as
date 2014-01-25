@@ -11,6 +11,7 @@ package net.wg.gui.lobby.techtree
    import flash.ui.Keyboard;
    import flash.events.KeyboardEvent;
    import scaleform.clik.constants.InvalidationType;
+   import flash.display.InteractiveObject;
    import net.wg.data.constants.LobbyMetrics;
 
 
@@ -77,14 +78,14 @@ package net.wg.gui.lobby.techtree
       public function as_setInventoryItems(param1:Array) : void {
          if(this.researchItems != null)
          {
-            this.researchItems.setNodesStates(NodeState.IN_INVENTORY,param1,NodeData.NODE_DUMP_FIELD);
+            this.researchItems.setNodesStates(NodeState.IN_INVENTORY,param1);
          }
       }
 
       public function as_setInstalledItems(param1:Array) : void {
          if(this.researchItems != null)
          {
-            this.researchItems.setNodesStates(NodeState.INSTALLED,param1,NodeData.NODE_DUMP_FIELD);
+            this.researchItems.setNodesStates(NodeState.INSTALLED,param1);
          }
       }
 
@@ -130,6 +131,11 @@ package net.wg.gui.lobby.techtree
          }
       }
 
+      override protected function onInitModalFocus(param1:InteractiveObject) : void {
+         super.onInitModalFocus(param1);
+         setFocus(this.researchItems);
+      }
+
       protected function updateLayouts() : void {
          if(this.background != null)
          {
@@ -142,6 +148,10 @@ package net.wg.gui.lobby.techtree
             this.researchItems.x = _width - LobbyMetrics.MIN_STAGE_WIDTH >> 1;
             this.researchItems.height = _height;
          }
+      }
+
+      override public function get isModal() : Boolean {
+         return true;
       }
    }
 

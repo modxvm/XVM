@@ -7,11 +7,11 @@ package net.wg.gui.lobby.window
    import net.wg.gui.components.controls.SoundButtonEx;
    import net.wg.gui.components.advanced.TabButton;
    import flash.display.Sprite;
+   import net.wg.infrastructure.interfaces.IWindow;
    import net.wg.utils.ILocale;
    import net.wg.data.Aliases;
    import net.wg.gui.lobby.profile.ProfileConstants;
    import flash.events.MouseEvent;
-   import net.wg.infrastructure.interfaces.IWindow;
    import flash.display.Graphics;
    import net.wg.gui.components.windows.Window;
    import scaleform.clik.constants.InvalidationType;
@@ -43,14 +43,6 @@ package net.wg.gui.lobby.window
 
       public var maskObj:MovieClip;
 
-      private var initData:ProfileWindowInitVO;
-
-      private var isAddFriendAvailable:Boolean;
-
-      private var isSetIgnoreAvailable:Boolean;
-
-      private var isCreateChannelAvailable:Boolean;
-
       public var btnAddToFriends:SoundButtonEx;
 
       public var btnAddToIgnore:SoundButtonEx;
@@ -60,6 +52,46 @@ package net.wg.gui.lobby.window
       public var btnTemplate:TabButton;
 
       public var background:Sprite;
+
+      private var initData:ProfileWindowInitVO;
+
+      private var isAddFriendAvailable:Boolean;
+
+      private var isSetIgnoreAvailable:Boolean;
+
+      private var isCreateChannelAvailable:Boolean;
+
+      override public function setWindow(param1:IWindow) : void {
+         super.setWindow(param1);
+         if(param1)
+         {
+            invalidate(INIT_DATA_INV);
+         }
+      }
+
+      public function as_setInitData(param1:Object) : void {
+         this.initData = new ProfileWindowInitVO(param1);
+         invalidate(INIT_DATA_INV);
+      }
+
+      public function as_update(param1:Object) : void {
+          
+      }
+
+      public function as_addFriendAvailable(param1:Boolean) : void {
+         this.isAddFriendAvailable = param1;
+         invalidate(ADDFRIENDAVAILABLE);
+      }
+
+      public function as_setIgnoredAvailable(param1:Boolean) : void {
+         this.isSetIgnoreAvailable = param1;
+         invalidate(SETIGNOREDAVAILABLE);
+      }
+
+      public function as_setCreateChannelAvailable(param1:Boolean) : void {
+         this.isCreateChannelAvailable = param1;
+         invalidate(CREATEPRIVATECHANNELAVAILABLE);
+      }
 
       override protected function configUI() : void {
          super.configUI();
@@ -80,44 +112,6 @@ package net.wg.gui.lobby.window
          this.btnAddToFriends.addEventListener(MouseEvent.CLICK,this.addToFriendBtnHandler,false,0,true);
          this.btnAddToIgnore.addEventListener(MouseEvent.CLICK,this.addToIgnoreBtnHandler,false,0,true);
          this.btnCreatePrivateChannel.addEventListener(MouseEvent.CLICK,this.createPrivateChannelBtnHandler,false,0,true);
-      }
-
-      private function removeTemplateButton() : void {
-         if(this.btnTemplate)
-         {
-            this.btnTemplate.parent.removeChild(this.btnTemplate);
-            this.btnTemplate.dispose();
-            this.btnTemplate = null;
-         }
-      }
-
-      private function createPrivateChannelBtnHandler(param1:MouseEvent) : void {
-         this.userCreatePrivateChannelS();
-      }
-
-      private function addToIgnoreBtnHandler(param1:MouseEvent) : void {
-         this.userSetIgnoredS();
-      }
-
-      private function addToFriendBtnHandler(param1:MouseEvent) : void {
-         this.userAddFriendS();
-      }
-
-      public function as_setInitData(param1:Object) : void {
-         this.initData = new ProfileWindowInitVO(param1);
-         invalidate(INIT_DATA_INV);
-      }
-
-      public function as_update(param1:Object) : void {
-          
-      }
-
-      override public function set window(param1:IWindow) : void {
-         super.window = param1;
-         if(param1)
-         {
-            invalidate(INIT_DATA_INV);
-         }
       }
 
       override protected function draw() : void {
@@ -174,7 +168,7 @@ package net.wg.gui.lobby.window
             this.initData.dispose();
             this.initData = null;
          }
-         this.tabNavigator.dispose();
+         this.tabNavigator = null;
          this.btnAddToFriends.removeEventListener(MouseEvent.CLICK,this.addToFriendBtnHandler);
          this.btnAddToIgnore.removeEventListener(MouseEvent.CLICK,this.addToIgnoreBtnHandler);
          this.btnCreatePrivateChannel.removeEventListener(MouseEvent.CLICK,this.createPrivateChannelBtnHandler);
@@ -184,19 +178,25 @@ package net.wg.gui.lobby.window
          super.onDispose();
       }
 
-      public function as_addFriendAvailable(param1:Boolean) : void {
-         this.isAddFriendAvailable = param1;
-         invalidate(ADDFRIENDAVAILABLE);
+      private function removeTemplateButton() : void {
+         if(this.btnTemplate)
+         {
+            this.btnTemplate.parent.removeChild(this.btnTemplate);
+            this.btnTemplate.dispose();
+            this.btnTemplate = null;
+         }
       }
 
-      public function as_setIgnoredAvailable(param1:Boolean) : void {
-         this.isSetIgnoreAvailable = param1;
-         invalidate(SETIGNOREDAVAILABLE);
+      private function createPrivateChannelBtnHandler(param1:MouseEvent) : void {
+         this.userCreatePrivateChannelS();
       }
 
-      public function as_setCreateChannelAvailable(param1:Boolean) : void {
-         this.isCreateChannelAvailable = param1;
-         invalidate(CREATEPRIVATECHANNELAVAILABLE);
+      private function addToIgnoreBtnHandler(param1:MouseEvent) : void {
+         this.userSetIgnoredS();
+      }
+
+      private function addToFriendBtnHandler(param1:MouseEvent) : void {
+         this.userAddFriendS();
       }
    }
 

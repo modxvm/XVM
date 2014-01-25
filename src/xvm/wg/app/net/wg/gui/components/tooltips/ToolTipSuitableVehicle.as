@@ -59,7 +59,7 @@ package net.wg.gui.components.tooltips
          }
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          var _loc1_:CSVehicleButton = null;
          if(this.conditionCSVehicleButtonList)
          {
@@ -71,7 +71,7 @@ package net.wg.gui.components.tooltips
                _loc1_ = null;
             }
          }
-         super.dispose();
+         super.onDispose();
       }
 
       override public function build(param1:Object, param2:ITooltipProps) : void {
@@ -87,12 +87,10 @@ package net.wg.gui.components.tooltips
       }
 
       override protected function redraw() : void {
-         var _loc1_:ILocale = null;
-         var _loc2_:SuitableVehicleVO = null;
          var _loc5_:TextField = null;
          var _loc6_:TextField = null;
-         _loc1_ = App.utils.locale;
-         _loc2_ = new SuitableVehicleVO(_data);
+         var _loc1_:ILocale = App.utils.locale;
+         var _loc2_:SuitableVehicleVO = new SuitableVehicleVO(_data);
          var _loc3_:Number = 300;
          var _loc4_:Separator = null;
          separators = new Vector.<Separator>();

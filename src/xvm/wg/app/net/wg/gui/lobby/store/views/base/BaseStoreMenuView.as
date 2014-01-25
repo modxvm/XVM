@@ -14,6 +14,7 @@ package net.wg.gui.lobby.store.views.base
    import flash.events.Event;
    import net.wg.gui.lobby.store.StoreViewsEvent;
    import net.wg.infrastructure.exceptions.AbstractException;
+   import flash.display.InteractiveObject;
 
 
    public class BaseStoreMenuView extends UIComponent implements IStoreMenuView
@@ -83,10 +84,10 @@ package net.wg.gui.lobby.store.views.base
 
       private var _localizator:Function = null;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          var _loc1_:IDisposable = null;
          var _loc2_:IDisposable = null;
-         super.dispose();
+         super.onDispose();
          if(this._tagsArr != null)
          {
             for each (_loc1_ in this._tagsArr)
@@ -323,6 +324,10 @@ package net.wg.gui.lobby.store.views.base
 
       private function onFilterChangeHandler(param1:Event) : void {
          this.dispatchViewChange();
+      }
+
+      public function getComponentForFocus() : InteractiveObject {
+         return null;
       }
    }
 

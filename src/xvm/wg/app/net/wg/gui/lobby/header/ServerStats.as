@@ -29,8 +29,8 @@ package net.wg.gui.lobby.header
 
       private var locale:ILocale;
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this.players_online.removeEventListener(MouseEvent.ROLL_OVER,this.showPlayersTooltip);
          this.players_online.removeEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
       }

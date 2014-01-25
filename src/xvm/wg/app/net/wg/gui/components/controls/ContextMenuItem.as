@@ -131,7 +131,7 @@ package net.wg.gui.components.controls
          return this._isOpened;
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
           
       }
 

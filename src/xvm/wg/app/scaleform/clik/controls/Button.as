@@ -665,6 +665,10 @@ package scaleform.clik.controls
             this._repeatTimer = null;
          }
          this.setState("release");
+         if(_baseDisposed)
+         {
+            return;
+         }
          this.handleClick(_loc3_);
          if(!this._isRepeating)
          {
@@ -838,7 +842,7 @@ package scaleform.clik.controls
          }
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          var _loc1_:String = null;
          this.clearRepeatInterval();
          removeEventListener(Event.ADDED,this.addToAutoGroup,false);
@@ -866,7 +870,7 @@ package scaleform.clik.controls
          }
          this._stateMap = null;
          this._data = null;
-         super.dispose();
+         super.onDispose();
       }
    }
 

@@ -1,21 +1,21 @@
 package net.wg.gui.messenger
 {
    import net.wg.gui.messenger.meta.impl.ChannelComponentMeta;
-   import net.wg.gui.messenger.meta.IChannelComponentMeta;
-   import scaleform.clik.interfaces.IUIComponent;
    import net.wg.gui.components.controls.ScrollBar;
    import net.wg.gui.components.advanced.TextAreaSimple;
-   import net.wg.gui.components.controls.SoundButtonEx;
    import net.wg.gui.components.controls.TextInput;
+   import net.wg.gui.components.controls.SoundButtonEx;
+   import flash.display.InteractiveObject;
    import scaleform.clik.events.ButtonEvent;
    import scaleform.clik.events.InputEvent;
    import net.wg.data.constants.SoundTypes;
+   import net.wg.infrastructure.events.FocusRequestEvent;
    import scaleform.clik.ui.InputDetails;
    import flash.ui.Keyboard;
    import scaleform.clik.constants.InputValue;
 
 
-   public class ChannelComponent extends ChannelComponentMeta implements IChannelComponentMeta, IUIComponent
+   public class ChannelComponent extends ChannelComponentMeta implements IChannelComponent
    {
           
       public function ChannelComponent() {
@@ -30,11 +30,43 @@ package net.wg.gui.messenger
 
       public var messageArea:TextAreaSimple = null;
 
-      public var sendButton:SoundButtonEx = null;
-
       public var messageInput:TextInput = null;
 
+      private var _sendButton:SoundButtonEx = null;
+
       private var _isJoined:Boolean = false;
+
+      public function getComponentForFocus() : InteractiveObject {
+         return this.messageInput;
+      }
+
+      public function as_setJoined(param1:Boolean) : void {
+         this._isJoined = param1;
+         this.enableControls(this._isJoined);
+         if(this._isJoined)
+         {
+            this.setHistory();
+         }
+      }
+
+      public function as_addMessage(param1:String) : void {
+         if(param1)
+         {
+            this.messageArea.appendHtmlResetPosition(param1 + "\n");
+            if(this.messageArea.textField.scrollV < this.messageArea.textField.maxScrollV)
+            {
+               this.messageArea.safePosition = true;
+            }
+         }
+      }
+
+      public function get sendButton() : SoundButtonEx {
+         return this._sendButton;
+      }
+
+      public function set sendButton(param1:SoundButtonEx) : void {
+         this._sendButton = param1;
+      }
 
       override protected function onPopulate() : void {
          super.onPopulate();
@@ -50,7 +82,7 @@ package net.wg.gui.messenger
       override protected function configUI() : void {
          super.configUI();
          var _loc1_:SmileyMap = new SmileyMap();
-         this.sendButton.addEventListener(ButtonEvent.CLICK,this.onSendBtnClick,false,0,true);
+         this._sendButton.addEventListener(ButtonEvent.CLICK,this.onSendBtnClick,false,0,true);
          this.messageInput.addEventListener(InputEvent.INPUT,this.handleTextInput);
          this.messageArea.autoScroll = true;
          this.messageArea.htmlText = "";
@@ -59,73 +91,18 @@ package net.wg.gui.messenger
          this.messageArea.textField.selectable = true;
          this.setFocusToInput();
          _loc1_.mapText(this.messageArea.textField);
-         this.sendButton.soundType = SoundTypes.NORMAL_BTN;
-      }
-
-      public function setFocusToInput() : void {
-         if((initialized) && (isJoinedS()))
-         {
-            this.updateFocus();
-         }
-      }
-
-      private function updateFocus() : void {
-         if((this.messageInput) && (this.messageInput.enabled) && this.messageInput.focused == 0)
-         {
-            this.messageInput.validateNow();
-            App.utils.focusHandler.setFocus(this.messageInput);
-         }
-      }
-
-      public function as_setJoined(param1:Boolean) : void {
-         this._isJoined = param1;
-         this.enableControls(this._isJoined);
-         if(this._isJoined)
-         {
-            this.setHistory();
-         }
-      }
-
-      private function enableControls(param1:Boolean) : void {
-         this.messageInput.enabled = param1;
-         this.sendButton.enabled = param1;
-      }
-
-      public function as_addMessage(param1:String) : void {
-         if(param1)
-         {
-            this.messageArea.appendHtmlResetPosition(param1 + "\n");
-            if(this.messageArea.textField.scrollV < this.messageArea.textField.maxScrollV)
-            {
-               this.messageArea.safePosition = true;
-            }
-         }
+         this._sendButton.soundType = SoundTypes.NORMAL_BTN;
       }
 
       override protected function onDispose() : void {
          super.onDispose();
-         this.sendButton.removeEventListener(ButtonEvent.CLICK,this.onSendBtnClick);
-         this.sendButton.dispose();
+         this._sendButton.removeEventListener(ButtonEvent.CLICK,this.onSendBtnClick);
+         this._sendButton = null;
          this.messageInput.removeEventListener(InputEvent.INPUT,this.handleTextInput);
          this.messageArea.dispose();
          if(this.messageAreaScrollBar)
          {
             this.messageAreaScrollBar.dispose();
-         }
-      }
-
-      private function onSendBtnClick(param1:ButtonEvent) : void {
-         this.doMessage();
-         this.setFocusToInput();
-      }
-
-      private function doMessage() : void {
-         if(this.messageInput.text)
-         {
-            if(sendMessageS(this.messageInput.text))
-            {
-               this.messageInput.text = "";
-            }
          }
       }
 
@@ -141,6 +118,36 @@ package net.wg.gui.messenger
          }
       }
 
+      private function setFocusToInput() : void {
+         if((initialized) && (isJoinedS()))
+         {
+            this.updateFocus();
+         }
+      }
+
+      private function updateFocus() : void {
+         if((this.messageInput) && (this.messageInput.enabled) && this.messageInput.focused == 0)
+         {
+            this.messageInput.validateNow();
+            dispatchEvent(new FocusRequestEvent(FocusRequestEvent.REQUEST_FOCUS,this));
+         }
+      }
+
+      private function enableControls(param1:Boolean) : void {
+         this.messageInput.enabled = param1;
+         this._sendButton.enabled = param1;
+      }
+
+      private function doMessage() : void {
+         if(this.messageInput.text)
+         {
+            if(sendMessageS(this.messageInput.text))
+            {
+               this.messageInput.text = "";
+            }
+         }
+      }
+
       private function setHistory() : void {
          if(getHistoryS())
          {
@@ -151,6 +158,11 @@ package net.wg.gui.messenger
             this.messageArea.htmlText = "";
          }
          this.updateFocus();
+      }
+
+      private function onSendBtnClick(param1:ButtonEvent) : void {
+         this.doMessage();
+         this.setFocusToInput();
       }
 
       private function handleTextInput(param1:InputEvent) : void {

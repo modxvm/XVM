@@ -5,7 +5,7 @@ package net.wg.gui.lobby.messengerBar.carousel.data
 
    public class ChannelListItemVO extends DAAPIDataClass
    {
-
+          
       public function ChannelListItemVO(param1:Object) {
          super(param1);
       }

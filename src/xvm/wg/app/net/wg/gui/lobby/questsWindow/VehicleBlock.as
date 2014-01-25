@@ -17,6 +17,8 @@ package net.wg.gui.lobby.questsWindow
          this.nations = App.utils.getNationNamesS();
       }
 
+      private static const DEFAULT_WIDTH:int = 205;
+
       public var nationIcon:UILoaderAlt;
 
       public var typeIcon:UILoaderAlt;
@@ -33,7 +35,7 @@ package net.wg.gui.lobby.questsWindow
 
       override protected function configUI() : void {
          super.configUI();
-         this.discountDL.width = 205;
+         this.discountDL.width = DEFAULT_WIDTH;
          this.nationIcon.hideLoader = false;
          this.typeIcon.hideLoader = false;
          this.tankSmallIcon.hideLoader = false;
@@ -47,7 +49,7 @@ package net.wg.gui.lobby.questsWindow
       override protected function draw() : void {
          var _loc1_:String = null;
          var _loc2_:String = null;
-         if(isInvalid(InvalidationType.DATA))
+         if((isInvalid(InvalidationType.DATA)) && (this.data))
          {
             _loc1_ = this.getNationIconPath(this.data.nationID);
             _loc2_ = this.getTypeIconPath(this.data.vType);
@@ -78,7 +80,7 @@ package net.wg.gui.lobby.questsWindow
          return "../maps/icons/filters/tanks/" + param1 + ".png";
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          if(this.nationIcon)
          {
             this.nationIcon.dispose();
@@ -111,7 +113,7 @@ package net.wg.gui.lobby.questsWindow
             this.discountDL = null;
          }
          this.data = null;
-         super.dispose();
+         super.onDispose();
       }
    }
 

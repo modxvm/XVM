@@ -17,8 +17,9 @@ package net.wg.gui.messenger.forms
    import scaleform.clik.constants.InputValue;
    import scaleform.clik.constants.NavigationCode;
    import net.wg.gui.messenger.evnts.ChannelsFormEvent;
-   import scaleform.clik.managers.FocusHandler;
+   import net.wg.data.constants.Errors;
    import scaleform.clik.constants.InvalidationType;
+   import flash.display.InteractiveObject;
 
 
    public class ChannelsCreateForm extends UIComponent implements IViewStackContent
@@ -125,7 +126,8 @@ package net.wg.gui.messenger.forms
          if(this.channelNameInput.enabled)
          {
             this.channelNameInput.validateNow();
-            FocusHandler.getInstance().setFocus(this.channelNameInput);
+            DebugUtils.LOG_WARNING(Errors.INVALID_FOCUS_USING);
+            App.utils.focusHandler.setFocus(this.channelNameInput);
          }
       }
 
@@ -147,8 +149,8 @@ package net.wg.gui.messenger.forms
          }
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this.channelPasswordCheckBox.removeEventListener(Event.SELECT,this.onChannelPasswordCheckBox);
          this.channelNameInput.removeEventListener(InputEvent.INPUT,this.handleInput,false);
          this.channelPasswordInput.removeEventListener(InputEvent.INPUT,this.handleInput,false);
@@ -167,6 +169,10 @@ package net.wg.gui.messenger.forms
 
       override public function toString() : String {
          return "[WG ChannelsCreateForm " + name + "]";
+      }
+
+      public function getComponentForFocus() : InteractiveObject {
+         return null;
       }
    }
 

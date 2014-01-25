@@ -10,9 +10,11 @@ package net.wg.gui.lobby.confirmModuleWindow
    import net.wg.gui.components.advanced.ExtraModuleIcon;
    import net.wg.gui.components.controls.DropdownMenu;
    import net.wg.infrastructure.interfaces.IWindow;
+   import flash.display.InteractiveObject;
    import scaleform.clik.events.ButtonEvent;
    import net.wg.utils.ILocale;
    import scaleform.clik.events.IndexEvent;
+   import net.wg.gui.components.controls.VO.ActionPriceVO;
    import scaleform.clik.data.DataProvider;
    import net.wg.data.constants.Currencies;
    import scaleform.clik.events.ListEvent;
@@ -83,6 +85,14 @@ package net.wg.gui.lobby.confirmModuleWindow
 
       private var dataInitialized:Boolean;
 
+      override public function setWindow(param1:IWindow) : void {
+         super.setWindow(param1);
+         if(param1)
+         {
+            invalidate(SETTINGS_INVALID);
+         }
+      }
+
       public function as_setData(param1:Object) : void {
          this.moduleInfo = new ModuleInfoVo(param1);
          invalidate(DATA_INVALID);
@@ -93,12 +103,13 @@ package net.wg.gui.lobby.confirmModuleWindow
          invalidate(SETTINGS_INVALID);
       }
 
-      override public function set window(param1:IWindow) : void {
-         super.window = param1;
-         if(param1)
-         {
-            invalidate(SETTINGS_INVALID);
-         }
+      public function moveFocusToSubmitButton() : void {
+         setFocus(this.submitBtn);
+      }
+
+      override protected function onInitModalFocus(param1:InteractiveObject) : void {
+         super.onInitModalFocus(param1);
+         this.moveFocusToSubmitButton();
       }
 
       override protected function configUI() : void {
@@ -131,6 +142,7 @@ package net.wg.gui.lobby.confirmModuleWindow
          var _loc14_:String = null;
          var _loc15_:* = NaN;
          var _loc16_:* = NaN;
+         var _loc17_:ActionPriceVO = null;
          super.draw();
          if(isInvalid(DATA_INVALID))
          {
@@ -274,7 +286,8 @@ package net.wg.gui.lobby.confirmModuleWindow
                this.total.textColor = Currencies.TEXT_COLORS[this.currency];
                this.total.text = _loc14_;
                this.actionPrice.textColorType = ActionPrice.TEXT_COLOR_TYPE_ICON;
-               this.actionPrice.setData(this.moduleInfo.actionPrc,_loc15_,_loc16_,this.currency,false,this.moduleInfo.type);
+               _loc17_ = new ActionPriceVO(this.moduleInfo.actionPrc,_loc15_,_loc16_,this.currency,false,this.moduleInfo.type);
+               this.actionPrice.setData(_loc17_);
                this.total.visible = !this.actionPrice.visible;
             }
          }
@@ -287,15 +300,6 @@ package net.wg.gui.lobby.confirmModuleWindow
                this.cancelBtn.label = this.settings.cancelBtnLabel;
             }
          }
-      }
-
-      override public function setFocus() : void {
-         super.setFocus();
-         this.moveFocusToSubmitButton();
-      }
-
-      public function moveFocusToSubmitButton() : void {
-         App.utils.focusHandler.setFocus(this.submitBtn);
       }
 
       override protected function onDispose() : void {

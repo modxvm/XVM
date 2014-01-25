@@ -1,6 +1,7 @@
 package net.wg.infrastructure.managers.utils.impl
 {
    import net.wg.utils.IIcons;
+   import net.wg.data.constants.IconsTypes;
 
 
    public class Icons extends Object implements IIcons
@@ -10,68 +11,32 @@ package net.wg.infrastructure.managers.utils.impl
          super();
       }
 
-      public static const EMPTY:String = "empty";
-
-      public static const CREDITS:String = "credits";
-
-      public static const GOLD:String = "gold";
-
-      public static const GOLD_DISCOUNT:String = "goldDiscount";
-
-      public static const XP:String = "xp";
-
-      public static const ELITE_XP:String = "eliteXp";
-
-      public static const elite:String = "elite";
-
-      public static const ARROW_DOWN:String = "arrowDown";
-
-      public static const ARROW_UP:String = "arrowUp";
-
-      public static const ARROW_DOWN_DISABLED:String = "arrowDownDisabled";
-
-      public static const ELITE_TANK_XP:String = "elite_tank_xp";
-
-      public static const FREE_XP:String = "freeXp";
-
-      public static const TANK_DAILYXPFACTOR:String = "tank_dailyXPFactor";
-
-      public static const TANK_UNLOCK_PRICE:String = "tank_unlock_price";
-
-      public static const DOUBLE_XP_FACTOR:String = "doubleXPFactor";
-
-      public static const ACTION_XP_FACTOR:String = "actionXPFactor";
-
-      public static const VCOIN:String = "vcoin";
-
-      public static const CLASS1:String = "class1";
-
-      public static const CLASS2:String = "class2";
-
-      public static const CLASS3:String = "class3";
-
-      public static const CLASS4:String = "class4";
-
-      public static const XP_PRICE:String = "xp_price";
-
       public function getIcon16StrPath(param1:String) : String {
+         if(IconsTypes.ALLOW_ICONS.indexOf(param1) < 0)
+         {
+            DebugUtils.LOG_WARNING("Invalid icon ID: " + param1);
+            return "";
+         }
          var _loc2_:* = "";
          var _loc3_:uint = 16;
          var _loc4_:uint = 16;
          switch(param1)
          {
-            case GOLD:
+            case IconsTypes.GOLD:
                _loc2_ = "GoldIcon-2.png";
                break;
-            case CREDITS:
+            case IconsTypes.CREDITS:
                _loc2_ = "CreditsIcon-2.png";
                break;
-            case ELITE_XP:
+            case IconsTypes.ELITE_XP:
                _loc2_ = "EliteXpIcon-2.png";
                break;
-            case FREE_XP:
+            case IconsTypes.FREE_XP:
                _loc2_ = "FreeXpIcon-2.png";
                _loc3_ = _loc4_ = 18;
+               break;
+            case IconsTypes.XP_PRICE:
+               _loc2_ = "UnlockPrice.png";
                break;
          }
          if(_loc2_ == "")

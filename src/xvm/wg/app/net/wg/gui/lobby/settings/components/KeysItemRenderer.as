@@ -32,7 +32,7 @@ package net.wg.gui.lobby.settings.components
          invalidate(this.INVALID_DATA);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          if(data)
          {
             data = null;
@@ -42,7 +42,7 @@ package net.wg.gui.lobby.settings.components
             this.keyInput.removeEventListener(KeyInputEvents.CHANGE,this.onKeyChange);
             this.keyInput.dispose();
          }
-         super.dispose();
+         super.onDispose();
       }
 
       override public function toString() : String {

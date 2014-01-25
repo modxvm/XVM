@@ -7,7 +7,9 @@ package net.wg.gui.prebattle.battleSession
    import net.wg.gui.components.controls.ScrollingListEx;
    import flash.display.MovieClip;
    import scaleform.clik.data.DataProvider;
+   import flash.display.InteractiveObject;
    import net.wg.gui.events.ListEventEx;
+   import net.wg.infrastructure.events.FocusRequestEvent;
    import net.wg.data.Aliases;
    import net.wg.gui.lobby.messengerBar.WindowGeometryInBar;
    import net.wg.gui.events.MessengerBarEvent;
@@ -35,16 +37,13 @@ package net.wg.gui.prebattle.battleSession
 
       public var groupListBG:MovieClip;
 
-      override public function setFocus() : void {
-         super.setFocus();
-         if(this.channelComponent)
-         {
-            this.channelComponent.setFocusToInput();
-         }
-      }
-
       public function as_refreshList(param1:Array) : void {
          this.groupsList.dataProvider = new DataProvider(param1);
+      }
+
+      override protected function onInitModalFocus(param1:InteractiveObject) : void {
+         super.onInitModalFocus(param1);
+         setFocus(this.channelComponent.getComponentForFocus());
       }
 
       override protected function configUI() : void {
@@ -56,11 +55,17 @@ package net.wg.gui.prebattle.battleSession
       override protected function onDispose() : void {
          super.onDispose();
          this.groupsList.removeEventListener(ListEventEx.ITEM_CLICK,this.handleTeamItemClick);
+         removeEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler);
+      }
+
+      private function onRequestFocusHandler(param1:FocusRequestEvent) : void {
+         setFocus(param1.focusContainer.getComponentForFocus());
       }
 
       override protected function onPopulate() : void {
          super.onPopulate();
          registerComponent(this.channelComponent,Aliases.CHANNEL_COMPONENT);
+         addEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler);
          window.setTitleIcon("teamList");
          window.title = CHAT.CHANNELS_SPECIAL_BATTLES;
          geometry = new WindowGeometryInBar(MessengerBarEvent.PIN_CAROUSEL_WINDOW,getClientIDS());

@@ -154,7 +154,7 @@ package net.wg.gui.lobby.techtree.nodes
 
       override protected function handleMousePress(param1:MouseEvent) : void {
          super.handleMousePress(param1);
-         this.startDragNode();
+         this.startDragNode(param1);
       }
 
       override protected function handleReleaseOutside(param1:MouseEvent) : void {
@@ -183,8 +183,8 @@ package net.wg.gui.lobby.techtree.nodes
          this.stopDragNode();
       }
 
-      private function startDragNode() : void {
-         if(container  is  IDraggable)
+      private function startDragNode(param1:MouseEvent) : void {
+         if(container  is  IDraggable && (App.utils.commons.isLeftButton(param1)))
          {
             addEventListener(MouseEvent.MOUSE_MOVE,this.handleMouseMove,false,0,true);
          }
@@ -206,7 +206,7 @@ package net.wg.gui.lobby.techtree.nodes
       private function handleMouseMove(param1:MouseEvent) : void {
          var _loc2_:IDraggable = null;
          var _loc3_:InteractiveObject = null;
-         if(container as IDraggable)
+         if((container as IDraggable) && (App.utils.commons.isLeftButton(param1)))
          {
             _loc2_ = IDraggable(container);
             _loc3_ = _loc2_.getHitArea();

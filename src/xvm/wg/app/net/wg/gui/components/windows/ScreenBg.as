@@ -59,8 +59,8 @@ package net.wg.gui.components.windows
          return this._isShowHeaderBg;
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
       }
    }
 

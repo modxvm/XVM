@@ -2,6 +2,7 @@ package net.wg.gui.lobby.profile.components
 {
    import scaleform.clik.core.UIComponent;
    import flash.geom.Point;
+   import flash.display.InteractiveObject;
 
 
    public class ResizableContent extends UIComponent implements IResizableContent
@@ -67,6 +68,10 @@ package net.wg.gui.lobby.profile.components
 
       public function update(param1:Object) : void {
           
+      }
+
+      public function getComponentForFocus() : InteractiveObject {
+         return null;
       }
    }
 

@@ -20,6 +20,46 @@ package net.wg.data.daapi
 
       private var _isEnabledInRoaming:Boolean = true;
 
+      private var _canAddToFriend:Boolean = false;
+
+      private var _canAddToIgnore:Boolean = false;
+
+      private var _canDoDenunciations:Boolean = false;
+
+      private var _canCreateChannel:Boolean = false;
+
+      public function get canAddToFriend() : Boolean {
+         return this._canAddToFriend;
+      }
+
+      public function set canAddToFriend(param1:Boolean) : void {
+         this._canAddToFriend = param1;
+      }
+
+      public function get canAddToIgnore() : Boolean {
+         return this._canAddToIgnore;
+      }
+
+      public function set canAddToIgnore(param1:Boolean) : void {
+         this._canAddToIgnore = param1;
+      }
+
+      public function get canDoDenunciations() : Boolean {
+         return this._canDoDenunciations;
+      }
+
+      public function set canDoDenunciations(param1:Boolean) : void {
+         this._canDoDenunciations = param1;
+      }
+
+      public function get canCreateChannel() : Boolean {
+         return this._canCreateChannel;
+      }
+
+      public function set canCreateChannel(param1:Boolean) : void {
+         this._canCreateChannel = param1;
+      }
+
       public function get displayName() : String {
          return this._displayName;
       }

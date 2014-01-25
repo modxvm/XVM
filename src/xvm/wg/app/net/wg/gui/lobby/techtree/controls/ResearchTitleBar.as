@@ -45,13 +45,13 @@ package net.wg.gui.lobby.techtree.controls
          invalidate(TTInvalidationType.NATION);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          if(this.returnButton != null)
          {
             this.returnButton.removeEventListener(ButtonEvent.CLICK,this.handleClickReturnButton,false);
             this.returnButton.dispose();
          }
-         super.dispose();
+         super.onDispose();
       }
 
       override protected function configUI() : void {

@@ -22,6 +22,20 @@ package net.wg.infrastructure.base.meta
 
       function onEscapeS() : void;
 
+      function canSendInviteS() : Boolean;
+
+      function canChangeSettingS() : Boolean;
+
+      function canChangePlayerTeamS() : Boolean;
+
+      function canStartBattleS() : Boolean;
+
+      function canAssignToTeamS(param1:int) : Boolean;
+
+      function canDestroyRoomS() : Boolean;
+
+      function getPlayerTeamS(param1:int) : int;
+
       function as_updateComment(param1:String) : void;
 
       function as_updateMap(param1:Number, param2:Number, param3:String, param4:String, param5:String, param6:String) : void;
@@ -48,11 +62,11 @@ package net.wg.infrastructure.base.meta
 
       function as_startCoolDownSwapButton(param1:Number) : void;
 
-      function as_setPlayerStateInTeam1(param1:Number, param2:String, param3:String, param4:String, param5:String) : void;
+      function as_setPlayerStateInTeam1(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int) : void;
 
-      function as_setPlayerStateInTeam2(param1:Number, param2:String, param3:String, param4:String, param5:String) : void;
+      function as_setPlayerStateInTeam2(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int) : void;
 
-      function as_setPlayerStateInOther(param1:Number, param2:String, param3:String, param4:String, param5:String) : void;
+      function as_setPlayerStateInOther(param1:Number, param2:String, param3:String, param4:String, param5:String, param6:int) : void;
 
       function as_setPlayerChatRosterInTeam1(param1:Number, param2:Number) : void;
 

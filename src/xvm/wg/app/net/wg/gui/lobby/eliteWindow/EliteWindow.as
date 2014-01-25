@@ -9,6 +9,7 @@ package net.wg.gui.lobby.eliteWindow
    import scaleform.clik.utils.Constraints;
    import net.wg.data.constants.SoundTypes;
    import net.wg.gui.cyberSport.vo.VehicleVO;
+   import flash.display.InteractiveObject;
 
 
    public class EliteWindow extends EliteWindowMeta implements IEliteWindowMeta
@@ -85,9 +86,9 @@ package net.wg.gui.lobby.eliteWindow
          }
       }
 
-      override public function setFocus() : void {
-         super.setFocus();
-         App.utils.focusHandler.setFocus(this.closeBtn);
+      override protected function onInitModalFocus(param1:InteractiveObject) : void {
+         super.onInitModalFocus(param1);
+         setFocus(this.closeBtn);
       }
 
       private function onClose(param1:ButtonEvent) : void {

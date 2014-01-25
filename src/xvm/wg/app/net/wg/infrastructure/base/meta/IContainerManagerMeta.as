@@ -8,8 +8,6 @@ package net.wg.infrastructure.base.meta
           
       function isModalViewsIsExistsS() : Boolean;
 
-      function removeLoadingTokensS(param1:Array) : void;
-
       function canCancelPreviousLoadingS(param1:String) : Boolean;
 
       function as_getView(param1:String) : Boolean;

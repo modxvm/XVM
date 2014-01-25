@@ -3,6 +3,7 @@ package net.wg.gui.lobby.store
    import net.wg.gui.components.controls.ActionPrice;
    import flash.text.TextField;
    import flash.display.Sprite;
+   import scaleform.gfx.TextFieldEx;
    import scaleform.clik.utils.Constraints;
    import flash.events.MouseEvent;
    import flash.geom.Point;
@@ -31,19 +32,21 @@ package net.wg.gui.lobby.store
 
       public var hitMc:Sprite;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.actionPrice.dispose();
          this.actionPrice = null;
          this.credits.dispose();
          this.credits = null;
-         super.dispose();
+         super.onDispose();
       }
 
       override protected function configUI() : void {
          super.configUI();
+         TextFieldEx.setVerticalAlign(this.errorField,TextFieldEx.VALIGN_CENTER);
          constraints.addElement(textField.name,textField,Constraints.ALL);
          constraints.addElement(descField.name,descField,Constraints.ALL);
          constraints.addElement(this.credits.name,this.credits,Constraints.RIGHT);
+         constraints.addElement(this.errorField.name,this.errorField,Constraints.ALL);
          addEventListener(MouseEvent.MOUSE_DOWN,this.onMouseClickHandler);
          hitArea = this.hitMc;
       }
@@ -80,6 +83,8 @@ package net.wg.gui.lobby.store
          var _loc6_:* = NaN;
          var _loc7_:* = NaN;
          var _loc8_:String = null;
+         var _loc9_:* = 0;
+         var _loc10_:String = null;
          if(data)
          {
             if(App.instance)
@@ -97,7 +102,21 @@ package net.wg.gui.lobby.store
             visible = true;
             this.onPricesCalculated(_loc5_,_loc4_,_loc1_);
             textField.text = _loc1_.name;
-            descField.text = _loc1_.desc;
+            descField.text = data.desc;
+            if(descField.getLineLength(2) != -1)
+            {
+               _loc9_ = 0;
+               _loc10_ = data.desc.substr(descField.getLineLength(0) + descField.getLineLength(1)-1,1);
+               if(_loc10_ == "\n")
+               {
+                  _loc9_ = -1;
+               }
+               else
+               {
+                  _loc9_ = -3;
+               }
+               descField.text = descField.text.substr(0,descField.getLineLength(0) + descField.getLineLength(1) + _loc9_) + "...";
+            }
             this.updateTexts(_loc1_,_loc5_,_loc4_,_loc6_,_loc7_);
             if(hitTestPoint(App.stage.mouseX,App.stage.mouseY,true))
             {

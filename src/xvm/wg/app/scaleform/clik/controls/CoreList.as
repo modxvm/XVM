@@ -318,6 +318,10 @@ package scaleform.clik.controls
                gotoAndPlay(this._newFrame);
                this._newFrame = null;
             }
+            if(_baseDisposed)
+            {
+               return;
+            }
          }
          if(!this._usingExternalRenderers && (isInvalid(InvalidationType.RENDERERS)))
          {

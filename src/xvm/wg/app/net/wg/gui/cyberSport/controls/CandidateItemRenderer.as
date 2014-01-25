@@ -9,6 +9,7 @@ package net.wg.gui.cyberSport.controls
    import net.wg.infrastructure.events.VoiceChatEvent;
    import flash.events.MouseEvent;
    import net.wg.gui.cyberSport.vo.UnitCandidateVO;
+   import net.wg.infrastructure.interfaces.IUserProps;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.gui.prebattle.squad.MessengerUtils;
 
@@ -37,7 +38,7 @@ package net.wg.gui.cyberSport.controls
          addEventListener(MouseEvent.ROLL_OUT,this.onRollOutHandler);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          App.voiceChatMgr.removeEventListener(VoiceChatEvent.START_SPEAKING,this.speakHandler);
          App.voiceChatMgr.removeEventListener(VoiceChatEvent.STOP_SPEAKING,this.speakHandler);
          removeEventListener(MouseEvent.ROLL_OVER,this.onRollOverHandler);
@@ -46,11 +47,12 @@ package net.wg.gui.cyberSport.controls
          this.voiceWave = null;
          this.inviteIndicator = null;
          this.candidateName = null;
-         super.dispose();
+         super.onDispose();
       }
 
       override protected function draw() : void {
          var _loc1_:UnitCandidateVO = null;
+         var _loc2_:IUserProps = null;
          super.draw();
          if(isInvalid(InvalidationType.DATA))
          {
@@ -69,7 +71,9 @@ package net.wg.gui.cyberSport.controls
                   this.candidateRating.visible = false;
                }
                this.candidateName.width = this.candidateRating.x + this.candidateRating.width - this.candidateName.x - this.candidateRating.textWidth - 10;
-               App.utils.commons.formatPlayerName(this.candidateName,_loc1_.name,_loc1_.clan,_loc1_.region,_loc1_.isIgr,"","",_loc1_.color);
+               _loc2_ = App.utils.commons.getUserProps(_loc1_.name,_loc1_.clan,_loc1_.region,_loc1_.igrType);
+               _loc2_.rgb = _loc1_.color;
+               App.utils.commons.formatPlayerName(this.candidateName,_loc2_);
                this.setSpeakers(_loc1_.isPlayerSpeaking,true);
             }
             else

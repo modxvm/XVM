@@ -17,10 +17,7 @@ package net.wg.data.components
          super();
       }
 
-      private var _isEnabledInRoaming:Boolean = true;
-
       public function generateData(param1:PlayerInfo, param2:Number=NaN) : Vector.<IContextItem> {
-         this.isEnabledInRoaming = param1.isEnabledInRoaming;
          return this.getContextItems(param1,this.getSimpleDataIDs);
       }
 
@@ -60,19 +57,11 @@ package net.wg.data.components
          {
             _loc5_ = param1.isMuted?"unsetMuted":"setMuted";
          }
-         return this.createSimpleDataIDs(_loc4_,_loc2_,_loc3_,_loc5_);
+         return this.createSimpleDataIDs(param1,_loc4_,_loc2_,_loc3_,_loc5_);
       }
 
-      protected function createSimpleDataIDs(param1:String, param2:String, param3:String, param4:String) : Map {
+      protected function createSimpleDataIDs(param1:PlayerInfo, param2:String, param3:String, param4:String, param5:String) : Map {
          throw new AbstractException("createSimpleDataIDs" + Errors.ABSTRACT_INVOKE);
-      }
-
-      public function get isEnabledInRoaming() : Boolean {
-         return this._isEnabledInRoaming;
-      }
-
-      public function set isEnabledInRoaming(param1:Boolean) : void {
-         this._isEnabledInRoaming = param1;
       }
    }
 

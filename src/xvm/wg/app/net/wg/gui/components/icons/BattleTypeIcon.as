@@ -55,13 +55,13 @@ package net.wg.gui.components.icons
          return "[WG BattleTypeIcon " + name + "]";
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          if(this._allTypes)
          {
             this._allTypes.splice(0,this._allTypes.length);
          }
          this._allTypes = null;
-         super.dispose();
+         super.onDispose();
       }
    }
 

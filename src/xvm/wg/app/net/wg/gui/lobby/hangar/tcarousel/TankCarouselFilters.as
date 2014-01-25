@@ -28,14 +28,14 @@ package net.wg.gui.lobby.hangar.tcarousel
 
       public var checkBoxToMain:CheckBox;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.nationFilter.dispose();
          this.nationFilter = null;
          this.tankFilter.dispose();
          this.tankFilter = null;
          this.checkBoxToMain.dispose();
          this.checkBoxToMain = null;
-         super.dispose();
+         super.onDispose();
       }
 
       public function close() : void {

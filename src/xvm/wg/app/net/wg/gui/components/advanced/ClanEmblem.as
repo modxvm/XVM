@@ -20,14 +20,14 @@ package net.wg.gui.components.advanced
 
       public var loader:UILoaderAlt = null;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          if(this.loader)
          {
             this.loader.dispose();
             this.loader = null;
          }
          this.default_icon_mc = null;
-         super.dispose();
+         super.onDispose();
       }
 
       public function setImage(param1:String) : void {

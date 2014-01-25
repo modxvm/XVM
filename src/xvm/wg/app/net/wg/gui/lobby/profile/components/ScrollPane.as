@@ -316,9 +316,9 @@ package net.wg.gui.lobby.profile.components
          param1.stopPropagation();
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          var _loc1_:DisplayObject = null;
-         super.dispose();
+         super.onDispose();
          this.thumbOffset = null;
          if(this._scrollBar)
          {

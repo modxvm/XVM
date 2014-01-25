@@ -51,9 +51,9 @@ package net.wg.gui.components.common.video.advanced
          }
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          videoPlayer.removeEventListener(InputEvent.INPUT,this.handleInput);
-         super.dispose();
+         super.onDispose();
       }
    }
 

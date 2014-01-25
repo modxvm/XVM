@@ -75,7 +75,7 @@ package net.wg.gui.components.controls
          return SoundManagerStates.SND_PRESS;
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          removeEventListener(Event.ADDED,addToAutoGroup,false);
          removeEventListener(Event.REMOVED,addToAutoGroup,false);
          removeEventListener(MouseEvent.ROLL_OVER,handleMouseRollOver,false);
@@ -93,7 +93,7 @@ package net.wg.gui.components.controls
          {
             App.soundMgr.removeSoundHdlrs(this);
          }
-         super.dispose();
+         super.onDispose();
       }
    }
 

@@ -116,9 +116,10 @@ package net.wg.gui.lobby.battleloading
          return _loc5_;
       }
 
-      public function onDispose() : void {
+      override protected function onDispose() : void {
          this.team1List.disposeRenderers();
          this.team2List.disposeRenderers();
+         super.onDispose();
       }
 
       override public function toString() : String {

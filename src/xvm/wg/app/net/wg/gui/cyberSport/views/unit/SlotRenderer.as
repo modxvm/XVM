@@ -44,7 +44,7 @@ package net.wg.gui.cyberSport.views.unit
 
       public var voiceWave:VoiceWave = null;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.removeBtn.removeEventListener(ButtonEvent.CLICK,this.onRemoveClick);
          this.removeBtn.removeEventListener(MouseEvent.ROLL_OVER,this.onRemoveRollOver);
          this.removeBtn.removeEventListener(MouseEvent.ROLL_OUT,this.onRemoveRollOut);
@@ -54,7 +54,7 @@ package net.wg.gui.cyberSport.views.unit
          App.voiceChatMgr.removeEventListener(VoiceChatEvent.STOP_SPEAKING,this.speakHandler);
          this.voiceWave.dispose();
          this.voiceWave = null;
-         super.dispose();
+         super.onDispose();
       }
 
       public function highlightSlot(param1:Boolean) : void {

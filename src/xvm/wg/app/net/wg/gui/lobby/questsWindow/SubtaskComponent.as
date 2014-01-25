@@ -29,6 +29,8 @@ package net.wg.gui.lobby.questsWindow
 
       private static const LINKBTN_PADDING:int = 10;
 
+      private static const DEFAULT_LINKBTN_Y:int = 2;
+
       private static function hideTooltip(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
       }
@@ -86,7 +88,7 @@ package net.wg.gui.lobby.questsWindow
          this.linkBtn.mouseEnabled = true;
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.removeListeners();
          this.linkBtn.dispose();
          this.progressIndicator.dispose();
@@ -103,7 +105,7 @@ package net.wg.gui.lobby.questsWindow
          this.statusMC = null;
          this.lineMC = null;
          this.progressIndicator = null;
-         super.dispose();
+         super.onDispose();
       }
 
       private function removeListeners() : void {
@@ -137,6 +139,7 @@ package net.wg.gui.lobby.questsWindow
       }
 
       private function checkLabels() : void {
+         var _loc1_:* = NaN;
          if(this.typeTF.text != this.data.title)
          {
             this.typeTF.text = this.data.title;
@@ -144,8 +147,17 @@ package net.wg.gui.lobby.questsWindow
          if(this.taskTF.text != this.data.questInfo.description)
          {
             this.taskTF.text = this.data.questInfo.description;
-            this.linkBtn.y = (this.taskTF.text?this.taskTF.textHeight + this.taskTF.y - this.linkBtn.height:this.taskTF.y) + 2;
-            this.linkBtn.x = this.taskTF.text?this.taskTF.x + this.taskTF.getLineMetrics(this.taskTF.numLines-1).width + LINKBTN_PADDING:this.taskTF.x;
+            if(this.taskTF.text)
+            {
+               _loc1_ = this.taskTF.getLineMetrics(this.taskTF.numLines-1).width;
+               this.linkBtn.y = Math.round(this.taskTF.textHeight + this.taskTF.y - this.linkBtn.height + DEFAULT_LINKBTN_Y);
+               this.linkBtn.x = Math.round(this.taskTF.x + _loc1_ + LINKBTN_PADDING);
+            }
+            else
+            {
+               this.linkBtn.y = Math.round(this.taskTF.y + DEFAULT_LINKBTN_Y);
+               this.linkBtn.x = Math.round(this.taskTF.x);
+            }
             this.taskTF.mouseEnabled = false;
          }
       }

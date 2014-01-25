@@ -14,18 +14,31 @@ package net.wg.gui.lobby.battleResults
          this.loader.hideLoader = false;
       }
 
+      public static function getDataOwnValue(param1:Object, param2:String, param3:*) : * {
+         var _loc4_:* = undefined;
+         if(param1)
+         {
+            _loc4_ = param1.hasOwnProperty(param2)?param1[param2]:param3;
+            if(_loc4_  is  Function)
+            {
+               return _loc4_();
+            }
+         }
+         return _loc4_;
+      }
+
       public var loader:UILoaderAlt;
 
       protected var _dataDirty:Boolean = false;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          if(this.loader)
          {
             this.loader.dispose();
             this.loader.removeEventListener(UILoaderEvent.COMPLETE,this.onComplete);
             this.loader = null;
          }
-         super.dispose();
+         super.onDispose();
       }
 
       override public function setData(param1:Object) : void {
@@ -45,7 +58,7 @@ package net.wg.gui.lobby.battleResults
             {
                return;
             }
-            if(this.getDataOwnValue("isRare",false))
+            if(getDataOwnValue(data,"isRare",false))
             {
                this.tryToLoadRareAchievement();
             }
@@ -56,7 +69,7 @@ package net.wg.gui.lobby.battleResults
                   this.loader.addEventListener(UILoaderEvent.COMPLETE,this.onComplete);
                   if(data.icon  is  IconVO)
                   {
-                     this.loader.source = data.icon.big;
+                     this.loader.source = data.icon.small;
                   }
                   else
                   {
@@ -69,24 +82,11 @@ package net.wg.gui.lobby.battleResults
       }
 
       protected function tryToLoadRareAchievement() : void {
-         if(this.getDataOwnValue("rareIconId",null))
+         if(getDataOwnValue(data,"rareIconId",null))
          {
             this.loader.source = "img://" + data.rareIconId;
             this.loader.addEventListener(UILoaderEvent.COMPLETE,this.onComplete);
          }
-      }
-
-      protected function getDataOwnValue(param1:String, param2:*) : * {
-         var _loc3_:* = undefined;
-         if(data)
-         {
-            _loc3_ = data.hasOwnProperty(param1)?data[param1]:param2;
-            if(_loc3_  is  Function)
-            {
-               return _loc3_();
-            }
-         }
-         return _loc3_;
       }
 
       private function changeSaturation() : void {

@@ -1,61 +1,57 @@
 package net.wg.gui.lobby.questsWindow
 {
-   import scaleform.clik.core.UIComponent;
-   import net.wg.gui.lobby.questsWindow.components.QuestsDashlineItem;
-   import __AS3__.vec.Vector;
+   import net.wg.gui.lobby.questsWindow.components.AbstractResizableContent;
+   import flash.text.TextField;
+   import net.wg.gui.lobby.questsWindow.components.ResizableContainer;
    import net.wg.gui.lobby.questsWindow.data.ConditionElementVO;
    import scaleform.clik.constants.InvalidationType;
+   import flash.text.TextFieldAutoSize;
 
 
-   public class ConditionElement extends UIComponent
+   public class ConditionElement extends AbstractResizableContent
    {
           
       public function ConditionElement() {
          super();
-         this._tanks = new Vector.<VehicleBlock>();
       }
-
-      private static const PADDING:int = 30;
 
       private static const TEXT_PADDING:int = 5;
 
-      private static const ONLY_TEXT_PADDING:int = 8;
+      private static const LEFT_POSITION:int = 140;
 
-      private static const AFTER_TANKS_PADDING:int = 17;
+      private static const VERTICAL_PADDING:int = 10;
 
-      private static const TANK_HEIGHT:int = 35;
+      public var leftLabelTF:TextField;
 
-      public var conditionDL:QuestsDashlineItem;
+      public var rightLabelTF:TextField;
 
-      private var _tanks:Vector.<VehicleBlock> = null;
+      public var container:ResizableContainer;
 
-      private var _data:ConditionElementVO = null;
+      public var indexTF:TextField;
 
-      private var totalTanks:int = 0;
+      public var data:ConditionElementVO = null;
 
       override protected function configUI() : void {
          super.configUI();
-         this.conditionDL.width = 375;
+         this.container.verticalPadding = VERTICAL_PADDING;
+         this.indexTF.visible = false;
       }
 
-      override public function dispose() : void {
-         if(this._data)
+      override protected function onDispose() : void {
+         this.leftLabelTF = null;
+         this.rightLabelTF = null;
+         this.container.dispose();
+         this.container = null;
+         if(this.data)
          {
-            this._data.dispose();
-            this._data = null;
+            this.data.dispose();
+            this.data = null;
          }
-         if(this._tanks)
-         {
-            this.clearTanks();
-            this._tanks = null;
-         }
-         this.conditionDL.dispose();
-         this.conditionDL = null;
-         super.dispose();
+         super.onDispose();
       }
 
-      public function setData(param1:Object) : void {
-         this._data = new ConditionElementVO(param1);
+      override public function setData(param1:Object) : void {
+         this.data = new ConditionElementVO(param1);
          invalidateData();
       }
 
@@ -63,90 +59,46 @@ package net.wg.gui.lobby.questsWindow
          super.draw();
          if(isInvalid(InvalidationType.DATA))
          {
-            if(this._data)
+            if(this.data)
             {
-               this.conditionDL.label = this._data.descr;
-               this.conditionDL.value = this._data.discountVal;
-               this.conditionDL.validateNow();
-            }
-            this.createTanks();
-            this.layoutTanks();
-         }
-      }
-
-      private function clearTanks() : void {
-         var _loc1_:VehicleBlock = null;
-         while(this._tanks.length)
-         {
-            _loc1_ = this._tanks.pop();
-            _loc1_.dispose();
-            removeChild(_loc1_);
-         }
-      }
-
-      private function createTanks() : void {
-         var _loc1_:* = 0;
-         var _loc2_:* = 0;
-         var _loc3_:* = 0;
-         var _loc4_:VehicleBlock = null;
-         var _loc5_:* = 0;
-         if(this._data)
-         {
-            this.totalTanks = this._data.vehicles.length;
-            if(this._tanks.length < this.totalTanks)
-            {
-               _loc2_ = this.totalTanks - this._tanks.length;
-               _loc3_ = 0;
-               while(_loc3_ < _loc2_)
+               if(contentAlign == TextFieldAutoSize.LEFT)
                {
-                  _loc4_ = App.utils.classFactory.getComponent("VehicleBlock_UI",VehicleBlock);
-                  this._tanks.push(_loc4_);
-                  addChild(_loc4_);
-                  _loc3_++;
+                  this.leftLabelTF.htmlText = this.data.conditionType;
+                  this.rightLabelTF.visible = false;
                }
-            }
-            else
-            {
-               if(this._tanks.length > this.totalTanks)
+               else
                {
-                  _loc5_ = this.totalTanks;
-                  while(_loc5_ < this._tanks.length)
-                  {
-                     this._tanks[_loc5_].visible = false;
-                     _loc5_++;
-                  }
+                  this.leftLabelTF.visible = false;
+                  this.rightLabelTF.htmlText = this.data.conditionType;
                }
+               this.container.setData(this.data.iconElements);
+               this.container.validateNow();
             }
-            _loc1_ = 0;
-            while(_loc1_ < this.totalTanks)
+            if(this.data.progrIndex)
             {
-               this._tanks[_loc1_].setData(this._data.vehicles[_loc1_]);
-               this._tanks[_loc1_].visible = true;
-               _loc1_++;
+               this.indexTF.text = this.data.progrIndex.toString();
+               this.indexTF.visible = true;
+               this.rightLabelTF.x = this.leftLabelTF.x = Math.round(this.indexTF.width);
+            }
+            this.layoutComponents();
+         }
+      }
+
+      private function layoutComponents() : void {
+         if(contentAlign == TextFieldAutoSize.LEFT)
+         {
+            this.container.x = LEFT_POSITION;
+            this.leftLabelTF.width = availableWidth - this.leftLabelTF.x;
+            if(this.leftLabelTF.x + this.leftLabelTF.textWidth > this.container.x)
+            {
+               this.container.y = Math.round(this.leftLabelTF.height + TEXT_PADDING);
             }
          }
-         else
-         {
-            this.clearTanks();
-         }
-      }
-
-      private function layoutTanks() : void {
-         var _loc1_:Number = this.getDiscountHeight();
-         var _loc2_:* = 0;
-         while(_loc2_ < this._tanks.length)
-         {
-            this._tanks[_loc2_].y = _loc1_ + _loc2_ * TANK_HEIGHT;
-            this._tanks[_loc2_].x = PADDING;
-            _loc2_++;
-         }
-         var _loc3_:Number = this.totalTanks * TANK_HEIGHT;
-         var _loc4_:Number = _loc1_ + (_loc3_ > 0?_loc3_ + AFTER_TANKS_PADDING:ONLY_TEXT_PADDING);
-         setSize(this.width,_loc4_);
-      }
-
-      private function getDiscountHeight() : Number {
-         return Math.round(this.conditionDL.y + this.conditionDL.labelTextField.textHeight + TEXT_PADDING);
+         var _loc1_:Number = this.container.y + this.container.height;
+         var _loc2_:Number = Math.round(Math.max(this.leftLabelTF.height,this.rightLabelTF.height));
+         var _loc3_:Number = this.data?Math.round(Math.max(_loc2_,_loc1_)):0;
+         setSize(this.width,_loc3_);
+         isReadyForLayout = true;
       }
    }
 

@@ -9,7 +9,6 @@ package net.wg.gui.lobby.profile.pages.technique
    import net.wg.gui.utils.ExcludeTweenManager;
    import flash.events.Event;
    import scaleform.clik.controls.ScrollIndicator;
-   import scaleform.clik.constants.InvalidationType;
    import fl.transitions.easing.Strong;
    import scaleform.clik.motion.Tween;
    import net.wg.gui.lobby.profile.pages.technique.data.TechniqueListVehicleVO;
@@ -47,6 +46,8 @@ package net.wg.gui.lobby.profile.pages.technique
       private static const LIST_DATA_INVALIDATED:String = "ldInv";
 
       private static const ANIM_SPEED:uint = 1000;
+
+      private static const MASTERY_TAB_ENABLING_CHANGED:String = "mTabEnablingChanged";
 
       private static function getHeadersProvider() : DataProvider {
          var _loc13_:ProfileSortingBtnInfo = null;
@@ -131,8 +132,6 @@ package net.wg.gui.lobby.profile.pages.technique
 
       private var sortFunctions:Object;
 
-      private var _pendingDataProvider:Array;
-
       private var isMarkOfMasteryBtnEnabled:Boolean = true;
 
       private var tweenManager:ExcludeTweenManager;
@@ -157,10 +156,6 @@ package net.wg.gui.lobby.profile.pages.technique
          var _loc4_:ScrollIndicator = null;
          var _loc5_:* = NaN;
          super.draw();
-         if(isInvalid(InvalidationType.DATA))
-         {
-            this.techniqueList.dataProvider = new DataProvider(this._pendingDataProvider);
-         }
          if(isInvalid(LIST_DATA_INVALIDATED))
          {
             _loc1_ = this.techniqueList.dataProvider.length;
@@ -179,17 +174,17 @@ package net.wg.gui.lobby.profile.pages.technique
                this.tweenManager.registerAndLaunch(ANIM_SPEED,this.lowerShadow,{"alpha":1},this.getAnimTweenSet());
             }
          }
+         if(isInvalid(MASTERY_TAB_ENABLING_CHANGED))
+         {
+            this.sortableButtonBar.enableButtonAt(this.isMarkOfMasteryBtnEnabled,this.sortableButtonBar.dataProvider.length-1);
+         }
       }
 
       public function enableMarkOfMasteryBtn(param1:Boolean) : void {
          if(this.isMarkOfMasteryBtnEnabled != param1)
          {
             this.isMarkOfMasteryBtnEnabled = param1;
-            if(this.sortableButtonBar.getRenderers().length == 0 && !param1)
-            {
-               this.sortableButtonBar.validateNow();
-            }
-            this.sortableButtonBar.getButtonAt(this.sortableButtonBar.dataProvider.length-1).enabled = param1;
+            invalidate(MASTERY_TAB_ENABLING_CHANGED);
          }
       }
 
@@ -254,15 +249,9 @@ package net.wg.gui.lobby.profile.pages.technique
          this.lowerShadow.y = _loc5_ - this.lowerShadow.height;
       }
 
-      public function set dataProvider(param1:Array) : void {
-         this._pendingDataProvider = param1;
-         invalidateData();
-      }
-
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.tweenManager.dispose();
          this.tweenManager = null;
-         this._pendingDataProvider = null;
          this.sortableButtonBar.removeEventListener(SortingButton.SORT_DIRECTION_CHANGED,this.sortingChangedHandler);
          if(this.techniqueList)
          {
@@ -282,7 +271,7 @@ package net.wg.gui.lobby.profile.pages.technique
          }
          this.sortFunctions = null;
          this.lowerShadow = null;
-         super.dispose();
+         super.onDispose();
       }
    }
 

@@ -7,6 +7,7 @@ package net.wg.gui.lobby.battleResults
    import net.wg.utils.IUtils;
    import net.wg.utils.ICommons;
    import net.wg.utils.IClassFactory;
+   import flash.display.InteractiveObject;
 
 
    public class DetailsStats extends UIComponent implements IViewStackContent
@@ -175,12 +176,16 @@ package net.wg.gui.lobby.battleResults
          return BattleResults(parent.parent.parent);
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
       }
 
       public function update(param1:Object) : void {
           
+      }
+
+      public function getComponentForFocus() : InteractiveObject {
+         return null;
       }
    }
 

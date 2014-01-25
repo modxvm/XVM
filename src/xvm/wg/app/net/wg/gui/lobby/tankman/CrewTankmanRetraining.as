@@ -13,6 +13,7 @@ package net.wg.gui.lobby.tankman
    import scaleform.clik.data.DataProvider;
    import net.wg.data.constants.VehicleTypes;
    import net.wg.gui.events.PersonalCaseEvent;
+   import flash.display.InteractiveObject;
 
 
    public class CrewTankmanRetraining extends UIComponent implements IViewStackContent
@@ -69,12 +70,12 @@ package net.wg.gui.lobby.tankman
 
       private const UPDATE_DATA:String = "updateData";
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          var _loc1_:* = 0;
          var _loc2_:VehicleTypeButton = null;
          var _loc3_:* = 0;
          var _loc4_:TankmanTrainingSmallButton = null;
-         super.dispose();
+         super.onDispose();
          this.model = null;
          if(this.vehicleButtons)
          {
@@ -369,6 +370,10 @@ package net.wg.gui.lobby.tankman
          _loc3_.tankmanCostTypeIndex = this.currentSelectedCostIndex;
          _loc2_.retrainingTankmanData = _loc3_;
          dispatchEvent(_loc2_);
+      }
+
+      public function getComponentForFocus() : InteractiveObject {
+         return null;
       }
    }
 

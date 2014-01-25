@@ -37,7 +37,7 @@ package net.wg.infrastructure.base.meta
 
       function as_setFreeXP(param1:String, param2:Boolean) : void;
 
-      function as_nameResponse(param1:String, param2:Boolean, param3:Boolean) : void;
+      function as_nameResponse(param1:String, param2:String, param3:String, param4:Boolean, param5:Boolean) : void;
 
       function as_setClanEmblem(param1:String) : void;
 

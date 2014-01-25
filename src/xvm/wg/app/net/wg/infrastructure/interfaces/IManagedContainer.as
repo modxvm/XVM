@@ -1,7 +1,6 @@
 package net.wg.infrastructure.interfaces
 {
    import flash.events.IEventDispatcher;
-   import flash.display.Sprite;
    import flash.display.DisplayObject;
 
 
@@ -10,11 +9,11 @@ package net.wg.infrastructure.interfaces
           
       function updateStage(param1:Number, param2:Number) : void;
 
-      function setFocused(param1:Boolean=false) : Boolean;
+      function tryToSetFocus(param1:Boolean=false) : Boolean;
 
-      function setFocusedView(param1:Sprite) : void;
+      function setFocusedView(param1:IManagedContent) : void;
 
-      function getTopmostView() : Sprite;
+      function getTopmostView() : IManagedContent;
 
       function addChild(param1:DisplayObject) : DisplayObject;
 

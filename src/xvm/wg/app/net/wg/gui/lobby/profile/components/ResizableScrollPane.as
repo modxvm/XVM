@@ -24,12 +24,12 @@ package net.wg.gui.lobby.profile.components
          invalidateSize();
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          if(target)
          {
             target.removeEventListener(Event.RESIZE,this.resizeHandler);
          }
-         super.dispose();
+         super.onDispose();
       }
    }
 

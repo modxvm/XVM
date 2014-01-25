@@ -8,7 +8,6 @@ package net.wg.gui.lobby.hangar.maintenance.data
    {
           
       public function ShellVO(param1:Object) {
-         this.userCredits = [];
          super(param1);
       }
 
@@ -52,7 +51,7 @@ package net.wg.gui.lobby.hangar.maintenance.data
 
       private var _userCount:int;
 
-      public var userCredits:Array;
+      public var userCredits:Object = null;
 
       public function get userCount() : int {
          return this._userCount;
@@ -112,7 +111,7 @@ package net.wg.gui.lobby.hangar.maintenance.data
          return _loc1_ < 0?-_loc1_:0;
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          if(this.prices)
          {
             this.prices.splice(0);
@@ -123,7 +122,7 @@ package net.wg.gui.lobby.hangar.maintenance.data
             this.list.splice(0);
             this.list = null;
          }
-         super.dispose();
+         super.onDispose();
       }
    }
 

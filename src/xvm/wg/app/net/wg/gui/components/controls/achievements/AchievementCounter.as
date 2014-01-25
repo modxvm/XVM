@@ -203,12 +203,12 @@ package net.wg.gui.components.controls.achievements
          App.toolTipMgr.hide();
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          if((this.counter) && (contains(this.counter)))
          {
             removeChild(this.counter);
          }
-         super.dispose();
+         super.onDispose();
       }
    }
 

@@ -12,6 +12,7 @@ package net.wg.gui.messenger.forms
    import scaleform.clik.data.DataProvider;
    import net.wg.gui.prebattle.invites.PrbSendInviteCIGenerator;
    import flash.utils.getQualifiedClassName;
+   import flash.display.InteractiveObject;
 
 
    public class ContactsListForm extends UIComponent implements IViewStackContent
@@ -52,8 +53,8 @@ package net.wg.gui.messenger.forms
          }
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this.accordion.removeEventListener(SendInvitesEvent.SHOW_CONTEXT_MENU,this.showContextMenu);
          this.accordion.removeEventListener(IndexEvent.INDEX_CHANGE,this.onViewChanged);
          if(this.friendsDP)
@@ -189,6 +190,10 @@ package net.wg.gui.messenger.forms
                _loc2_.validateNow();
             }
          }
+      }
+
+      public function getComponentForFocus() : InteractiveObject {
+         return null;
       }
    }
 

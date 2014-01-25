@@ -2,13 +2,13 @@ package net.wg.gui.lobby.techtree.nodes
 {
    import net.wg.gui.components.controls.SoundListItemRenderer;
    import net.wg.gui.lobby.techtree.interfaces.IRenderer;
+   import net.wg.gui.components.controls.ActionPrice;
+   import flash.display.MovieClip;
+   import net.wg.gui.lobby.techtree.controls.ActionButton;
    import net.wg.gui.lobby.techtree.data.vo.NodeData;
    import net.wg.gui.lobby.techtree.math.MatrixPosition;
    import net.wg.gui.lobby.techtree.data.state.StateProperties;
    import net.wg.gui.lobby.techtree.interfaces.INodesContainer;
-   import net.wg.gui.components.controls.ActionPrice;
-   import flash.display.MovieClip;
-   import net.wg.gui.lobby.techtree.controls.ActionButton;
    import flash.geom.Point;
    import net.wg.gui.lobby.techtree.data.vo.NTDisplayInfo;
    import flash.events.MouseEvent;
@@ -17,6 +17,7 @@ package net.wg.gui.lobby.techtree.nodes
    import net.wg.gui.lobby.techtree.TechTreeEvent;
    import net.wg.gui.lobby.techtree.constants.ColorIndex;
    import net.wg.gui.lobby.techtree.data.vo.ActionData;
+   import net.wg.gui.components.controls.VO.ActionPriceVO;
    import net.wg.gui.lobby.techtree.constants.IconTextResolver;
    import net.wg.gui.lobby.techtree.constants.TTSoundID;
    import scaleform.clik.constants.InvalidationType;
@@ -44,6 +45,12 @@ package net.wg.gui.lobby.techtree.nodes
 
       public static const LINES_AND_ARROWS_NAME:String = "linesAndArrows";
 
+      public var actionPrice:ActionPrice;
+
+      public var hit:MovieClip;
+
+      public var button:ActionButton;
+
       protected var _valueObject:NodeData;
 
       protected var _matrixPosition:MatrixPosition;
@@ -61,24 +68,6 @@ package net.wg.gui.lobby.techtree.nodes
       protected var _tooltipID:String = null;
 
       protected var _doValidateNow:Boolean = false;
-
-      public var actionPrice:ActionPrice;
-
-      public var hit:MovieClip;
-
-      public var button:ActionButton;
-
-      public function get container() : INodesContainer {
-         return this._container;
-      }
-
-      public function set container(param1:INodesContainer) : void {
-         this._container = param1;
-      }
-
-      public function get matrixPosition() : MatrixPosition {
-         return this._matrixPosition;
-      }
 
       public function setup(param1:uint, param2:NodeData, param3:uint=0, param4:MatrixPosition=null) : void {
          var _loc6_:Point = null;
@@ -125,7 +114,7 @@ package net.wg.gui.lobby.techtree.nodes
          }
          this.dataInited = false;
          this._valueObject = null;
-         super.dispose();
+         super.onDispose();
       }
 
       public function getEntityType() : uint {
@@ -178,6 +167,10 @@ package net.wg.gui.lobby.techtree.nodes
 
       public function inInventory() : Boolean {
          return (this.dataInited) && (this._valueObject.state & NodeState.IN_INVENTORY) > 0;
+      }
+
+      public function isWasInBattle() : Boolean {
+         return (this.dataInited) && (this._valueObject.state & NodeState.WAS_IN_BATTLE) > 0;
       }
 
       public function isAvailable4Unlock() : Boolean {
@@ -321,6 +314,14 @@ package net.wg.gui.lobby.techtree.nodes
          dispatchEvent(new TechTreeEvent(TechTreeEvent.CLICK_2_SELL,0,_index,this._entityType));
       }
 
+      public function click2SelectInHangar() : void {
+         dispatchEvent(new TechTreeEvent(TechTreeEvent.CLICK_2_SELECT_IN_HANGAR,0,_index,this._entityType));
+      }
+
+      public function click2ShowVehicleStats() : void {
+         dispatchEvent(new TechTreeEvent(TechTreeEvent.CLICK_2_SHOW_VEHICLE_STATS,0,_index,this._entityType));
+      }
+
       public function click2Info() : void {
          dispatchEvent(new TechTreeEvent(TechTreeEvent.CLICK_2_MODULE_INFO,0,_index,this._entityType));
       }
@@ -372,11 +373,13 @@ package net.wg.gui.lobby.techtree.nodes
 
       public function populateUI() : void {
          var _loc1_:ActionData = null;
+         var _loc2_:ActionPriceVO = null;
          if(!(this.actionPrice == null) && (this.dataInited))
          {
             _loc1_ = this._valueObject.getActionData(this.stateProps.label);
             this.actionPrice.visible = this.isInAction();
-            this.actionPrice.setData(_loc1_.actionPrice,_loc1_.price,_loc1_.defaultPrice,IconTextResolver.getFromNamedLabel(this.stateProps.label));
+            _loc2_ = new ActionPriceVO(_loc1_.actionPrice,_loc1_.price,_loc1_.defaultPrice,IconTextResolver.getFromNamedLabel(this.stateProps.label));
+            this.actionPrice.setData(_loc2_);
             if(this._doValidateNow)
             {
                this.actionPrice.validateNow();
@@ -390,18 +393,16 @@ package net.wg.gui.lobby.techtree.nodes
          }
       }
 
-      private function buttonOut(param1:MouseEvent) : void {
-         if(this.actionPrice != null)
-         {
-            this.actionPrice.hideTooltip();
-         }
+      public function get container() : INodesContainer {
+         return this._container;
       }
 
-      private function buttonOver(param1:MouseEvent) : void {
-         if(!(this.actionPrice == null) && (this.actionPrice.visible))
-         {
-            this.actionPrice.showTooltip();
-         }
+      public function set container(param1:INodesContainer) : void {
+         this._container = param1;
+      }
+
+      public function get matrixPosition() : MatrixPosition {
+         return this._matrixPosition;
       }
 
       override protected function preInitialize() : void {
@@ -451,6 +452,14 @@ package net.wg.gui.lobby.techtree.nodes
                }
             }
          }
+      }
+
+      override protected function updateAfterStateChange() : void {
+         if(this.isDelegateEvents)
+         {
+            this.disableMouseChildren();
+         }
+         super.updateAfterStateChange();
       }
 
       protected function getMouseEnabledChildren() : Vector.<DisplayObjectContainer> {
@@ -504,14 +513,6 @@ package net.wg.gui.lobby.techtree.nodes
          this.hit.removeEventListener(InputEvent.INPUT,handleInput,false);
       }
 
-      override protected function updateAfterStateChange() : void {
-         if(this.isDelegateEvents)
-         {
-            this.disableMouseChildren();
-         }
-         super.updateAfterStateChange();
-      }
-
       override protected function handleMouseRollOver(param1:MouseEvent) : void {
          if((this._tooltipID) && !(App.toolTipMgr == null))
          {
@@ -549,6 +550,20 @@ package net.wg.gui.lobby.techtree.nodes
          var _loc1_:String = NodeStateCollection.getStatePrefix(this.stateProps.index);
          statesSelected = Vector.<String>(["selected_",_loc1_]);
          statesDefault = Vector.<String>([_loc1_]);
+      }
+
+      private function buttonOut(param1:MouseEvent) : void {
+         if(this.actionPrice != null)
+         {
+            this.actionPrice.hideTooltip();
+         }
+      }
+
+      private function buttonOver(param1:MouseEvent) : void {
+         if(!(this.actionPrice == null) && (this.actionPrice.visible))
+         {
+            this.actionPrice.showTooltip();
+         }
       }
    }
 

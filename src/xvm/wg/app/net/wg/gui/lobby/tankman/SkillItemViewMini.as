@@ -40,10 +40,10 @@ package net.wg.gui.lobby.tankman
 
       private var _type:String;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.icon.dispose();
          this.icon = null;
-         super.dispose();
+         super.onDispose();
       }
 
       public function get text() : String {

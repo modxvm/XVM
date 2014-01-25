@@ -8,14 +8,15 @@ package net.wg.gui.lobby.window
    import net.wg.gui.components.controls.NumericStepper;
    import net.wg.gui.components.controls.SoundButtonEx;
    import net.wg.gui.components.controls.WalletResourcesStatus;
-   import net.wg.utils.ILocale;
    import net.wg.infrastructure.interfaces.IWindow;
    import scaleform.clik.utils.Padding;
+   import net.wg.utils.ILocale;
    import flash.text.TextFieldAutoSize;
    import scaleform.clik.events.IndexEvent;
    import scaleform.clik.events.ButtonEvent;
    import flash.events.Event;
    import net.wg.gui.components.advanced.SortingButton;
+   import net.wg.data.constants.IconsTypes;
    import net.wg.data.constants.ColorSchemeNames;
    import scaleform.clik.data.DataProvider;
 
@@ -71,6 +72,14 @@ package net.wg.gui.lobby.window
 
       public var headerMC:ExchangeHeader;
 
+      public var onHandHaveNotMoney:WalletResourcesStatus = null;
+
+      public var resultHaveNotMoney:WalletResourcesStatus = null;
+
+      public var onHandHaveNotFreeXp:WalletResourcesStatus = null;
+
+      public var resultHaveNotFreeXp:WalletResourcesStatus = null;
+
       private var scrollListProvider:Array;
 
       private var isHaveEliteVehicles:Boolean;
@@ -79,13 +88,20 @@ package net.wg.gui.lobby.window
 
       private var selectedGold:int;
 
-      public var onHandHaveNotMoney:WalletResourcesStatus = null;
-
-      public var resultHaveNotMoney:WalletResourcesStatus = null;
-
-      public var onHandHaveNotFreeXp:WalletResourcesStatus = null;
-
-      public var resultHaveNotFreeXp:WalletResourcesStatus = null;
+      override public function setWindow(param1:IWindow) : void {
+         var _loc2_:Padding = null;
+         super.setWindow(param1);
+         if(window)
+         {
+            window.title = MENU.EXCHANGEXP_TITLE;
+            _loc2_ = new Padding();
+            _loc2_.top = 33;
+            _loc2_.bottom = this.cancelBtn.height + 20;
+            _loc2_.right = 11;
+            _loc2_.left = 10;
+            window.formBgPadding = _loc2_;
+         }
+      }
 
       public function as_totalExperienceChanged(param1:Number) : void {
          this.totalXP = param1;
@@ -125,22 +141,24 @@ package net.wg.gui.lobby.window
          }
       }
 
-      override public function set window(param1:IWindow) : void {
-         var _loc2_:Padding = null;
-         super.window = param1;
-         if(window)
-         {
-            window.title = MENU.EXCHANGEXP_TITLE;
-            _loc2_ = new Padding();
-            _loc2_.top = 33;
-            _loc2_.bottom = this.cancelBtn.height + 20;
-            _loc2_.right = 11;
-            _loc2_.left = 10;
-            window.formBgPadding = _loc2_;
-         }
+      public function as_setWalletStatus(param1:Object) : void {
+         var _loc2_:* = false;
+         var _loc3_:* = false;
+         App.utils.voMgr.walletStatusVO.update(param1);
+         _loc2_ = !this.onHandHaveNotMoney.updateStatus(App.utils.voMgr.walletStatusVO.goldStatus);
+         this.resultHaveNotMoney.updateStatus(App.utils.voMgr.walletStatusVO.goldStatus);
+         _loc3_ = !this.onHandHaveNotFreeXp.updateStatus(App.utils.voMgr.walletStatusVO.freeXpStatus);
+         this.resultHaveNotFreeXp.updateStatus(App.utils.voMgr.walletStatusVO.freeXpStatus);
+         var _loc4_:Boolean = (_loc2_) && (_loc3_);
+         this.itGoldBefore.visible = _loc2_;
+         this.itGoldResult.visible = _loc2_;
+         this.itExperienceBefore.visible = _loc3_;
+         this.itExperienceResult.visible = _loc3_;
+         this.submitBtn.enabled = _loc4_;
       }
 
       override protected function configUI() : void {
+         var _loc2_:* = NaN;
          super.configUI();
          this.lblTotalAvailableXp.autoSize = TextFieldAutoSize.RIGHT;
          this.nsXpExchange.minimum = 0;
@@ -158,16 +176,16 @@ package net.wg.gui.lobby.window
          this.scrollList.sortByVehicleName(true);
          this.itGoldBefore.filters = ExchangeUtils.getGlow(this.itGoldBefore.icon);
          this.itGoldResult.filters = ExchangeUtils.getGlow(this.itGoldResult.icon);
-         this.headerMC.rate_part_2.icon = IconText.ELITE_XP;
-         this.headerMC.rate_part_2.filters = ExchangeUtils.getGlow(this.headerMC.rate_part_2.icon);
+         this.headerMC.rateTo.icon = IconsTypes.ELITE_XP;
+         this.headerMC.rateTo.filters = ExchangeUtils.getGlow(this.headerMC.rateTo.icon);
          var _loc1_:Number = App.colorSchemeMgr.getRGB(ColorSchemeNames.TEXT_COLOR_FREE_XP);
-         this.headerMC.rate_part_2.textColor = _loc1_;
+         this.headerMC.rateTo.textColor = _loc1_;
          this.itExperienceResult.textColor = _loc1_;
          this.itExperienceBefore.textColor = _loc1_;
          this.nsXpExchange.textColor = _loc1_;
-         var _loc2_:Number = App.colorSchemeMgr.getRGB(ColorSchemeNames.TEXT_COLOR_GOLD);
-         this.headerMC.rate_part_1.textColor = _loc2_;
-         this.headerMC.rate_part_1.filters = ExchangeUtils.getGlow(this.headerMC.rate_part_1.icon);
+         _loc2_ = App.colorSchemeMgr.getRGB(ColorSchemeNames.TEXT_COLOR_GOLD);
+         this.headerMC.rateFrom.textColor = _loc2_;
+         this.headerMC.rateFrom.filters = ExchangeUtils.getGlow(this.headerMC.rateFrom.icon);
          this.itGoldResult.textColor = _loc2_;
          this.itGoldBefore.textColor = _loc2_;
          this.nsGoldExchange.textColor = _loc2_;
@@ -375,20 +393,6 @@ package net.wg.gui.lobby.window
             }
          ;
          exchangeS(_loc7_);
-      }
-
-      public function as_setWalletStatus(param1:Object) : void {
-         App.utils.voMgr.walletStatusVO.update(param1);
-         var _loc2_:* = !this.onHandHaveNotMoney.updateStatus(App.utils.voMgr.walletStatusVO.goldStatus);
-         this.resultHaveNotMoney.updateStatus(App.utils.voMgr.walletStatusVO.goldStatus);
-         var _loc3_:* = !this.onHandHaveNotFreeXp.updateStatus(App.utils.voMgr.walletStatusVO.freeXpStatus);
-         this.resultHaveNotFreeXp.updateStatus(App.utils.voMgr.walletStatusVO.freeXpStatus);
-         var _loc4_:Boolean = (_loc2_) && (_loc3_);
-         this.itGoldBefore.visible = _loc2_;
-         this.itGoldResult.visible = _loc2_;
-         this.itExperienceBefore.visible = _loc3_;
-         this.itExperienceResult.visible = _loc3_;
-         this.submitBtn.enabled = _loc4_;
       }
    }
 

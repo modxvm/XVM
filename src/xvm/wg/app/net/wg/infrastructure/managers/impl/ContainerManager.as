@@ -3,6 +3,7 @@ package net.wg.infrastructure.managers.impl
    import net.wg.infrastructure.base.meta.impl.ContainerManagerMeta;
    import net.wg.infrastructure.managers.IContainerManager;
    import net.wg.infrastructure.base.meta.IContainerManagerMeta;
+   import net.wg.infrastructure.interfaces.IManagedContent;
    import flash.utils.Dictionary;
    import net.wg.infrastructure.interfaces.IView;
    import net.wg.infrastructure.managers.ILoaderManager;
@@ -10,13 +11,7 @@ package net.wg.infrastructure.managers.impl
    import flash.events.FocusEvent;
    import net.wg.data.constants.ContainerTypes;
    import net.wg.infrastructure.events.LoaderEvent;
-   import flash.display.DisplayObject;
-   import flash.display.Sprite;
    import flash.display.DisplayObjectContainer;
-   import net.wg.infrastructure.interfaces.entity.IDisposable;
-   import net.wg.infrastructure.interfaces.IAbstractWindowView;
-   import net.wg.infrastructure.interfaces.IWindow;
-   import net.wg.infrastructure.base.AbstractView;
 
 
    public class ContainerManager extends ContainerManagerMeta implements IContainerManager, IContainerManagerMeta
@@ -28,6 +23,10 @@ package net.wg.infrastructure.managers.impl
          super();
          this._containersMap = new Dictionary();
          this._containersForLoadingViews = new Dictionary();
+      }
+
+      private static function getViewName(param1:IManagedContent) : String {
+         return param1.sourceView.as_name;
       }
 
       private var tokenToView:Object;
@@ -169,27 +168,27 @@ package net.wg.infrastructure.managers.impl
       }
 
       public function as_isOnTop(param1:String, param2:String) : Boolean {
-         var obj:DisplayObject = null;
+         var obj:IManagedContent = null;
          var cType:String = param1;
          var vName:String = param2;
          var result:Boolean = false;
          try
          {
             obj = IManagedContainer(this._containersMap[cType]).getTopmostView();
-            result = (obj) && vName == this.getViewName(obj);
+            result = (obj) && vName == getViewName(obj);
          }
          catch(e:Error)
          {
             DebugUtils.LOG_ERROR(e.message,e.getStackTrace());
          }
          return result;
-         result = (obj) && vName == this.getViewName(obj);
+         result = (obj) && vName == getViewName(obj);
          return result;
       }
 
       public function as_bringToFront(param1:String, param2:String) : void {
          var container:IManagedContainer = null;
-         var currentView:Sprite = null;
+         var currentView:IManagedContent = null;
          var childrenCount:int = 0;
          var i:int = 0;
          var cType:String = param1;
@@ -202,8 +201,8 @@ package net.wg.infrastructure.managers.impl
             i = 0;
             while(i < childrenCount)
             {
-               currentView = Sprite(DisplayObjectContainer(container).getChildAt(i));
-               if(this.getViewName(currentView) == vName)
+               currentView = IManagedContent(DisplayObjectContainer(container).getChildAt(i));
+               if(getViewName(currentView) == vName)
                {
                   container.setFocusedView(currentView);
                   return;
@@ -223,7 +222,7 @@ package net.wg.infrastructure.managers.impl
          for each (_loc2_ in ContainerTypes.CTNR_ORDER)
          {
             _loc3_ = this.getContainer(_loc2_);
-            if((_loc3_) && (!(_loc3_ == param1)) && (_loc3_.setFocused(true)))
+            if((_loc3_) && (!(_loc3_ == param1)) && (_loc3_.tryToSetFocus(true)))
             {
                break;
             }
@@ -268,10 +267,6 @@ package net.wg.infrastructure.managers.impl
       }
 
       public function set lastFocusedView(param1:IView) : void {
-         if((this._lastFocusedView) && !(this._lastFocusedView == param1))
-         {
-            this.lastFocusedView.removeFocus();
-         }
          this._lastFocusedView = param1;
       }
 
@@ -297,7 +292,6 @@ package net.wg.infrastructure.managers.impl
                container = this.getContainer(key);
                assert(!(container == null),"ContainerManager.onDispose container is null for type " + key);
                container.removeEventListener(FocusEvent.FOCUS_OUT,this.onContainerFocusOut);
-               (container as IDisposable).dispose();
                delete this.containersMap[[key]];
             }
             this.clearContainersForViewsDict();
@@ -317,12 +311,10 @@ package net.wg.infrastructure.managers.impl
       }
 
       private function cancelLoadingsForContainer(param1:String) : void {
-         var _loc3_:Array = null;
          var _loc2_:Array = this._containersForLoadingViews[param1];
          if(_loc2_)
          {
-            _loc3_ = this._loader.stopLoadingByAliases(_loc2_);
-            removeLoadingTokensS(_loc3_);
+            this._loader.stopLoadingByAliases(_loc2_);
             _loc2_.splice(0,_loc2_.length);
          }
          delete this._containersForLoadingViews[[param1]];
@@ -348,10 +340,6 @@ package net.wg.infrastructure.managers.impl
          return _loc2_;
       }
 
-      private function getViewName(param1:DisplayObject) : String {
-         return param1  is  IAbstractWindowView?IAbstractWindowView(param1).as_name:IWindow(param1).sourceView.as_name;
-      }
-
       private function handleViewLoaded(param1:LoaderEvent) : void {
          var viewType:String = null;
          var alias:String = null;
@@ -364,9 +352,9 @@ package net.wg.infrastructure.managers.impl
             alias = e.view.as_alias;
             container = this.getContainer(viewType);
             assert(!(container == null),"container is null for type " + e.view.as_config.type + " of " + alias + " view.");
-            this.tokenToView[e.token] = new ViewInfo(container,AbstractView(e.view as AbstractView));
+            this.tokenToView[e.token] = new ViewInfo(container,IView(e.view));
             viewIndex = this._containersForLoadingViews[viewType].indexOf(alias);
-            assert(!(viewIndex == -1),"view " + alias + "has been loaded, but it not exists in loading views.");
+            assert(!(viewIndex == -1),"view " + alias + " has been loaded, but it not exists in loading views.");
             this._containersForLoadingViews[viewType].splice(viewIndex,1);
          }
          catch(err:Error)
@@ -406,18 +394,17 @@ package net.wg.infrastructure.managers.impl
    }
 
 }   import net.wg.infrastructure.interfaces.entity.IDisposable;
-   import net.wg.infrastructure.base.AbstractView;
+   import net.wg.infrastructure.interfaces.IView;
    import net.wg.infrastructure.interfaces.IManagedContainer;
+   import flash.display.DisplayObject;
    import net.wg.utils.IAssertable;
    import net.wg.data.constants.Errors;
-   import net.wg.infrastructure.interfaces.IAbstractWindowView;
-   import flash.display.DisplayObject;
 
 
    class ViewInfo extends Object implements IDisposable
    {
           
-      function ViewInfo(param1:IManagedContainer, param2:AbstractView) {
+      function ViewInfo(param1:IManagedContainer, param2:IView) {
          super();
          App.utils.asserter.assertNotNull(param1,"container " + Errors.CANT_NULL);
          App.utils.asserter.assertNotNull(param2,"view " + Errors.CANT_NULL);
@@ -425,7 +412,7 @@ package net.wg.infrastructure.managers.impl
          this._view = param2;
       }
 
-      private var _view:AbstractView = null;
+      private var _view:IView = null;
 
       private var _container:IManagedContainer = null;
 
@@ -435,7 +422,7 @@ package net.wg.infrastructure.managers.impl
       }
 
       public function addView() : void {
-         this._container.addChild(this._view);
+         this._container.addChild(DisplayObject(this._view));
       }
 
       public function setFocused() : void {
@@ -446,17 +433,17 @@ package net.wg.infrastructure.managers.impl
          var _loc1_:IAssertable = App.utils.asserter;
          _loc1_.assertNotNull(this._container,"_container " + Errors.CANT_NULL);
          _loc1_.assertNotNull(this._view,"_view " + Errors.CANT_NULL);
-         var _loc2_:DisplayObject = this._view  is  IAbstractWindowView?DisplayObject((this._view as IAbstractWindowView).window):this._view;
+         var _loc2_:DisplayObject = DisplayObject(this._view.containerContent);
          if(_loc2_)
          {
             if(this._container.contains(_loc2_))
             {
-               this._container.removeChild(this._view);
+               this._container.removeChild(DisplayObject(this._view));
             }
          }
       }
 
-      public function get view() : AbstractView {
+      public function get view() : IView {
          return this._view;
       }
 

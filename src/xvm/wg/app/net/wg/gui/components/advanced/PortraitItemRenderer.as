@@ -23,8 +23,8 @@ package net.wg.gui.components.advanced
 
       public var emptyFocusIndicator:MovieClip;
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          if(this.loader)
          {
             this.loader.dispose();

@@ -49,14 +49,13 @@ package net.wg.gui.components.tooltips
 
       private function setData() : void {
          var _loc1_:ToolTipFinalStatsVO = null;
-         var _loc2_:Separator = null;
          var _loc6_:ILocale = null;
          _loc1_ = new ToolTipFinalStatsVO(_data);
          this.disabled = _loc1_.disabled;
          contentMargin.top = 17;
          contentMargin.bottom = 17;
          topPosition = bgShadowMargin.top + contentMargin.top;
-         _loc2_ = null;
+         var _loc2_:Separator = null;
          separators = new Vector.<Separator>();
          this.critBlocks = new Vector.<EfficiencyCritsBlock>();
          var _loc3_:Number = 18;
@@ -171,6 +170,8 @@ package net.wg.gui.components.tooltips
             _loc2_ = null;
          }
          _loc1_ = null;
+         updatePositions();
+         super.redraw();
       }
 
       private function hideInfo() : void {
@@ -205,7 +206,7 @@ package net.wg.gui.components.tooltips
          updateSize();
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          var _loc1_:EfficiencyCritsBlock = null;
          if(this.efficiencyBlock)
          {
@@ -221,7 +222,7 @@ package net.wg.gui.components.tooltips
                _loc1_ = null;
             }
          }
-         super.dispose();
+         super.onDispose();
       }
    }
 

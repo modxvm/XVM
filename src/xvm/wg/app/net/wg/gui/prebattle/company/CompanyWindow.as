@@ -5,7 +5,6 @@ package net.wg.gui.prebattle.company
    import net.wg.gui.prebattle.controls.TeamMemberRenderer;
    import net.wg.gui.components.controls.IconButton;
    import flash.text.TextField;
-   import net.wg.gui.messenger.ChannelComponent;
    import flash.display.MovieClip;
    import net.wg.gui.components.controls.TextInput;
    import net.wg.gui.components.controls.SoundButtonEx;
@@ -13,28 +12,27 @@ package net.wg.gui.prebattle.company
    import net.wg.gui.components.controls.ScrollingListEx;
    import scaleform.clik.data.DataProvider;
    import net.wg.gui.components.controls.CheckBox;
+   import org.idmedia.as3commons.util.StringUtils;
+   import scaleform.clik.events.ButtonEvent;
+   import net.wg.data.constants.VehicleTypes;
    import net.wg.data.Aliases;
    import net.wg.gui.lobby.messengerBar.WindowGeometryInBar;
    import net.wg.gui.events.MessengerBarEvent;
-   import scaleform.clik.events.InputEvent;
-   import flash.ui.Keyboard;
-   import scaleform.clik.constants.InputValue;
    import net.wg.gui.events.ListEventEx;
-   import scaleform.clik.events.ButtonEvent;
+   import scaleform.clik.events.InputEvent;
    import scaleform.clik.events.FocusHandlerEvent;
    import scaleform.clik.events.ListEvent;
-   import org.idmedia.as3commons.util.StringUtils;
    import flash.text.TextFormat;
    import flash.text.TextFormatAlign;
-   import net.wg.data.constants.VehicleTypes;
-   import flash.display.InteractiveObject;
+   import scaleform.clik.utils.Padding;
    import flash.events.Event;
    import net.wg.gui.prebattle.data.PlayerPrbInfoVO;
    import net.wg.infrastructure.interfaces.IUserContextMenuGenerator;
    import scaleform.gfx.MouseEventEx;
    import net.wg.gui.prebattle.squad.SquadWindowCIGenerator;
    import net.wg.data.components.BattleSessionCIGenerator;
-   import scaleform.clik.utils.Padding;
+   import flash.ui.Keyboard;
+   import scaleform.clik.constants.InputValue;
 
 
    public class CompanyWindow extends CompanyWindowMeta implements ICompanyWindowMeta
@@ -56,8 +54,6 @@ package net.wg.gui.prebattle.company
       public var downAllButton:IconButton;
 
       public var limitsLabel:TextField;
-
-      public var channelComponent:ChannelComponent;
 
       public var levelSPGTooltip:String;
 
@@ -153,180 +149,12 @@ package net.wg.gui.prebattle.company
 
       private var buttonsUpdated:Boolean = false;
 
-      private var chatFocusCounter:int = 0;
-
-      override protected function onPopulate() : void {
-         super.onPopulate();
-         registerComponent(this.channelComponent,Aliases.CHANNEL_COMPONENT);
-         showWindowBg = false;
-         window.useBottomBtns = true;
-         canMinimize = true;
-         canClose = true;
-         enabledCloseBtn = false;
-         isCentered = false;
-         window.title = getCompanyName();
-         this.updateWindowProperties();
-         this.initComponentProperties();
-         this.updatePermissions();
-         geometry = new WindowGeometryInBar(MessengerBarEvent.PIN_CAROUSEL_WINDOW,getClientIDS());
-      }
-
-      override public function handleInput(param1:InputEvent) : void {
-         if(param1.details.code == Keyboard.F1 && param1.details.value == InputValue.KEY_UP && (this.editState) && (this.commentInput.focused))
-         {
-            return;
-         }
-         super.handleInput(param1);
-      }
-
-      override protected function configUI() : void {
-         super.configUI();
-         this.hiddenItemRenderer.visible = false;
-         this.assignedList.labelField = "fullName";
-         this.unassignedList.labelField = "fullName";
-         this.unassignedList.dataProvider = this.unassignedDataProvider;
-         this.unassignedList.selectedIndex = -1;
-         this.unassignedList.addEventListener(ListEventEx.ITEM_CLICK,this.showAssignContextMenu);
-         this.assignedList.addEventListener(ListEventEx.ITEM_CLICK,this.showAssignContextMenu);
-         this.readyButton.addEventListener(ButtonEvent.CLICK,this.handleReadyClick);
-         this.leaveButton.addEventListener(ButtonEvent.CLICK,this.handleLeaveClick);
-         this._commentNormalTextColor = this.commentInput.textField.textColor;
-         this.commentInput.defaultTextFormat.color = this._commentDefaultTextColor;
-         this.commentInput.textField.textColor = this._commentDefaultTextColor;
-         this.commentInput.defaultTextFormat.italic = false;
-         this.commentInput.defaultText = PREBATTLE.LABELS_COMPANY_DEFAULTTEXT;
-         this.commentInput.addEventListener(InputEvent.INPUT,this.commentInput_inputHandler);
-         this.commentInput.addEventListener(FocusHandlerEvent.FOCUS_IN,this.handleFocusInCommentInput);
-         if(this.listTitle)
-         {
-            this.listTitle.player.text = PREBATTLE.LABELS_PLAYER;
-            this.listTitle.vehicle.text = PREBATTLE.LABELS_VEHICLE;
-            this.listTitle.level.text = PREBATTLE.LABELS_LEVEL;
-         }
-         this.queueLabel.text = PREBATTLE.LABELS_COMPANY_QUEUE;
-         this.limitsLabel.text = PREBATTLE.LABELS_COMPANY_LIMITS;
-         this.addEventListener(InputEvent.INPUT,this.escInputHandler);
-      }
-
-      override public function setFocus() : void {
-         super.setFocus();
-         if((this.channelComponent) && this.chatFocusCounter < 2)
-         {
-            this.channelComponent.setFocusToInput();
-            this.chatFocusCounter++;
-         }
-      }
-
       override public function as_refreshPermissions() : void {
          this.updatePermissions();
       }
 
-      override protected function onDispose() : void {
-         this.removeEventListener(InputEvent.INPUT,this.escInputHandler);
-         this.commentInput.removeEventListener(FocusHandlerEvent.FOCUS_IN,this.handleFocusInCommentInput);
-         this.commentInput.removeEventListener(InputEvent.INPUT,this.commentInput_inputHandler);
-         this.commentInput.dispose();
-         this.commitEditButton.removeEventListener(ButtonEvent.PRESS,this.handleCommitEditClick);
-         this.commitEditButton.dispose();
-         this.editButton.removeEventListener(ButtonEvent.PRESS,this.handleCommitEditClick);
-         this.editButton.dispose();
-         this.readyButton.removeEventListener(ButtonEvent.CLICK,this.handleReadyClick);
-         this.readyButton.dispose();
-         this.leaveButton.removeEventListener(ButtonEvent.CLICK,this.handleLeaveClick);
-         this.leaveButton.dispose();
-         this.inviteButton.removeEventListener(ButtonEvent.CLICK,this.onInviteBtnClick);
-         this.inviteButton.dispose();
-         if(this._canUnassignPlayer)
-         {
-            this.assignedList.removeEventListener(ListEventEx.ITEM_DOUBLE_CLICK,this.assignedList_itemDoubleClickHandler);
-            this.removeFromAssignBtn.removeEventListener(ButtonEvent.CLICK,this.handleDownClick);
-         }
-         if(this._canAssignPlayer)
-         {
-            this.unassignedList.removeEventListener(ListEventEx.ITEM_DOUBLE_CLICK,this.handleMember17ItemDoubleClick);
-            this.addToAssignBtn.removeEventListener(ButtonEvent.CLICK,this.handleUpClick);
-         }
-         this.unassignedList.removeEventListener(ListEventEx.ITEM_CLICK,this.showAssignContextMenu);
-         this.unassignedList.dispose();
-         this.unassignedDataProvider.cleanUp();
-         this.unassignedDataProvider = null;
-         this.assignedList.removeEventListener(ListEventEx.ITEM_CLICK,this.showAssignContextMenu);
-         this.assignedList.dispose();
-         this.assignedDataProvider.cleanUp();
-         this.assignedDataProvider = null;
-         if(this.division.hasEventListener(ListEvent.INDEX_CHANGE))
-         {
-            this.division.removeEventListener(ListEvent.INDEX_CHANGE,this.handleDivisionChange);
-         }
-         this.division.dispose();
-         if(this.isOpenCheckbox.hasEventListener(ButtonEvent.CLICK))
-         {
-            this.isOpenCheckbox.removeEventListener(ButtonEvent.CLICK,this.handleIsOpenChange);
-         }
-         this.isOpenCheckbox.dispose();
-         App.utils.scheduler.cancelTask(this.enableReadyButton);
-         App.utils.scheduler.cancelTask(this.enableChangeSettings);
-         App.utils.scheduler.cancelTask(this.updateFocus);
-         App.utils.scheduler.cancelTask(this.changeVisibleState);
-         super.onDispose();
-      }
-
-      public function as_setComment(param1:String) : void {
-         var param1:String = StringUtils.trim(param1);
-         this.lastComment = param1;
-         if(!param1)
-         {
-            if(canChangeCommentS())
-            {
-               this.commentText.visible = true;
-               this.commentText.text = PREBATTLE.LABELS_COMPANY_DEFAULTCOMMENT;
-               this.isDefaultComment = true;
-               this.changeAlign(this.isDefaultComment);
-            }
-            else
-            {
-               this.commentText.text = "";
-               this.commentText.visible = false;
-            }
-            return;
-         }
-         var _loc2_:Boolean = canChangeCommentS();
-         if(param1 == "" && !_loc2_)
-         {
-            this.commentText.text = "";
-            this.commentText.visible = false;
-         }
-         else
-         {
-            if(param1 != "")
-            {
-               this.commentText.visible = true;
-            }
-         }
-         if(param1 == "")
-         {
-            param1 = PREBATTLE.LABELS_COMPANY_DEFAULTCOMMENT;
-            this.isDefaultComment = true;
-         }
-         else
-         {
-            this.isDefaultComment = false;
-         }
-         this.commentText.text = param1;
-         this.changeAlign(this.isDefaultComment);
-         if((this.commentInput) && !this.isDefaultComment)
-         {
-            this.commentInput.text = param1;
-            this.commentInput.enabled = _loc2_;
-         }
-      }
-
       override public function as_enableLeaveBtn(param1:Boolean) : void {
          this.updateLeaveBtn(param1);
-      }
-
-      private function updateLeaveBtn(param1:Boolean) : void {
-         this.leaveButton.enabled = param1;
       }
 
       override public function as_enableReadyBtn(param1:Boolean) : void {
@@ -400,6 +228,56 @@ package net.wg.gui.prebattle.company
          this.updateMoveButtons();
       }
 
+      public function as_setComment(param1:String) : void {
+         var param1:String = StringUtils.trim(param1);
+         this.lastComment = param1;
+         if(!param1)
+         {
+            if(canChangeCommentS())
+            {
+               this.commentText.visible = true;
+               this.commentText.text = PREBATTLE.LABELS_COMPANY_DEFAULTCOMMENT;
+               this.isDefaultComment = true;
+               this.changeAlign(this.isDefaultComment);
+            }
+            else
+            {
+               this.commentText.text = "";
+               this.commentText.visible = false;
+            }
+            return;
+         }
+         var _loc2_:Boolean = canChangeCommentS();
+         if(param1 == "" && !_loc2_)
+         {
+            this.commentText.text = "";
+            this.commentText.visible = false;
+         }
+         else
+         {
+            if(param1 != "")
+            {
+               this.commentText.visible = true;
+            }
+         }
+         if(param1 == "")
+         {
+            param1 = PREBATTLE.LABELS_COMPANY_DEFAULTCOMMENT;
+            this.isDefaultComment = true;
+         }
+         else
+         {
+            this.isDefaultComment = false;
+         }
+         this.commentText.text = param1;
+         this.changeAlign(this.isDefaultComment);
+         if((this.commentInput) && !this.isDefaultComment)
+         {
+            this.commentInput.text = param1;
+            this.commentInput.enabled = _loc2_;
+         }
+      }
+
       public function as_setDivisionsList(param1:Array, param2:uint) : void {
          if(!this.division)
          {
@@ -411,10 +289,6 @@ package net.wg.gui.prebattle.company
          this.updateDivision();
          this.leaveButton.label = isPlayerCreatorS()?MESSENGER.DIALOGS_TEAMCHANNEL_BUTTONS_DISMISS:MESSENGER.DIALOGS_TEAMCHANNEL_BUTTONS_LEAVE;
          this.updateReadyButton();
-      }
-
-      private function updateDivision() : void {
-         this.division.enabled = this._canChangeDivision;
       }
 
       public function as_setDivision(param1:uint) : void {
@@ -429,12 +303,6 @@ package net.wg.gui.prebattle.company
             this.isOpenCheckbox.enabled = canMakeOpenedClosedS();
             this.isOpenCheckbox.addEventListener(ButtonEvent.CLICK,this.handleIsOpenChange);
          }
-      }
-
-      private function changeAlign(param1:Boolean) : void {
-         var _loc2_:TextFormat = this.commentText.getTextFormat();
-         _loc2_.align = param1?TextFormatAlign.RIGHT:TextFormatAlign.CENTER;
-         this.commentText.setTextFormat(_loc2_);
       }
 
       public function as_setTotalLimitLabels(param1:String, param2:String) : void {
@@ -501,16 +369,117 @@ package net.wg.gui.prebattle.company
          this.disableSettings(param1 * 1000);
       }
 
+      override protected function onPopulate() : void {
+         super.onPopulate();
+         registerComponent(channelComponent,Aliases.CHANNEL_COMPONENT);
+         showWindowBg = false;
+         window.useBottomBtns = true;
+         canMinimize = true;
+         canClose = true;
+         enabledCloseBtn = false;
+         isCentered = false;
+         window.title = getCompanyNameS();
+         this.updateWindowProperties();
+         this.initComponentProperties();
+         this.updatePermissions();
+         geometry = new WindowGeometryInBar(MessengerBarEvent.PIN_CAROUSEL_WINDOW,getClientIDS());
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.hiddenItemRenderer.visible = false;
+         this.assignedList.labelField = "fullName";
+         this.unassignedList.labelField = "fullName";
+         this.unassignedList.dataProvider = this.unassignedDataProvider;
+         this.unassignedList.selectedIndex = -1;
+         this.unassignedList.addEventListener(ListEventEx.ITEM_CLICK,this.showAssignContextMenu);
+         this.assignedList.addEventListener(ListEventEx.ITEM_CLICK,this.showAssignContextMenu);
+         this.readyButton.addEventListener(ButtonEvent.CLICK,this.handleReadyClick);
+         this.leaveButton.addEventListener(ButtonEvent.CLICK,this.handleLeaveClick);
+         this._commentNormalTextColor = this.commentInput.textField.textColor;
+         this.commentInput.defaultTextFormat.color = this._commentDefaultTextColor;
+         this.commentInput.textField.textColor = this._commentDefaultTextColor;
+         this.commentInput.defaultTextFormat.italic = false;
+         this.commentInput.defaultText = PREBATTLE.LABELS_COMPANY_DEFAULTTEXT;
+         this.commentInput.addEventListener(InputEvent.INPUT,this.commentInput_inputHandler);
+         this.commentInput.addEventListener(FocusHandlerEvent.FOCUS_IN,this.handleFocusInCommentInput);
+         if(this.listTitle)
+         {
+            this.listTitle.player.text = PREBATTLE.LABELS_PLAYER;
+            this.listTitle.vehicle.text = PREBATTLE.LABELS_VEHICLE;
+            this.listTitle.level.text = PREBATTLE.LABELS_LEVEL;
+         }
+         this.queueLabel.text = PREBATTLE.LABELS_COMPANY_QUEUE;
+         this.limitsLabel.text = PREBATTLE.LABELS_COMPANY_LIMITS;
+         this.addEventListener(InputEvent.INPUT,this.escInputHandler);
+      }
+
+      override protected function onDispose() : void {
+         this.removeEventListener(InputEvent.INPUT,this.escInputHandler);
+         this.commentInput.removeEventListener(FocusHandlerEvent.FOCUS_IN,this.handleFocusInCommentInput);
+         this.commentInput.removeEventListener(InputEvent.INPUT,this.commentInput_inputHandler);
+         this.commentInput.dispose();
+         this.commitEditButton.removeEventListener(ButtonEvent.PRESS,this.handleCommitEditClick);
+         this.commitEditButton.dispose();
+         this.editButton.removeEventListener(ButtonEvent.PRESS,this.handleCommitEditClick);
+         this.editButton.dispose();
+         this.readyButton.removeEventListener(ButtonEvent.CLICK,this.handleReadyClick);
+         this.readyButton.dispose();
+         this.leaveButton.removeEventListener(ButtonEvent.CLICK,this.handleLeaveClick);
+         this.leaveButton.dispose();
+         this.inviteButton.removeEventListener(ButtonEvent.CLICK,this.onInviteBtnClick);
+         this.inviteButton.dispose();
+         if(this._canUnassignPlayer)
+         {
+            this.assignedList.removeEventListener(ListEventEx.ITEM_DOUBLE_CLICK,this.assignedList_itemDoubleClickHandler);
+            this.removeFromAssignBtn.removeEventListener(ButtonEvent.CLICK,this.handleDownClick);
+         }
+         if(this._canAssignPlayer)
+         {
+            this.unassignedList.removeEventListener(ListEventEx.ITEM_DOUBLE_CLICK,this.handleMember17ItemDoubleClick);
+            this.addToAssignBtn.removeEventListener(ButtonEvent.CLICK,this.handleUpClick);
+         }
+         this.unassignedList.removeEventListener(ListEventEx.ITEM_CLICK,this.showAssignContextMenu);
+         this.unassignedList.dispose();
+         this.unassignedDataProvider.cleanUp();
+         this.unassignedDataProvider = null;
+         this.assignedList.removeEventListener(ListEventEx.ITEM_CLICK,this.showAssignContextMenu);
+         this.assignedList.dispose();
+         this.assignedDataProvider.cleanUp();
+         this.assignedDataProvider = null;
+         if(this.division.hasEventListener(ListEvent.INDEX_CHANGE))
+         {
+            this.division.removeEventListener(ListEvent.INDEX_CHANGE,this.handleDivisionChange);
+         }
+         this.division.dispose();
+         if(this.isOpenCheckbox.hasEventListener(ButtonEvent.CLICK))
+         {
+            this.isOpenCheckbox.removeEventListener(ButtonEvent.CLICK,this.handleIsOpenChange);
+         }
+         this.isOpenCheckbox.dispose();
+         App.utils.scheduler.cancelTask(this.enableReadyButton);
+         App.utils.scheduler.cancelTask(this.enableChangeSettings);
+         App.utils.scheduler.cancelTask(setFocus);
+         App.utils.scheduler.cancelTask(this.changeVisibleState);
+         super.onDispose();
+      }
+
       override protected function draw() : void {
          super.draw();
       }
 
-      private function updateFocus(param1:InteractiveObject) : void {
-         App.utils.focusHandler.setFocus(param1);
+      private function updateLeaveBtn(param1:Boolean) : void {
+         this.leaveButton.enabled = param1;
       }
 
-      private function handleCommitEditClick(param1:ButtonEvent=null) : void {
-         this.updateCommentedStates();
+      private function updateDivision() : void {
+         this.division.enabled = this._canChangeDivision;
+      }
+
+      private function changeAlign(param1:Boolean) : void {
+         var _loc2_:TextFormat = this.commentText.getTextFormat();
+         _loc2_.align = param1?TextFormatAlign.RIGHT:TextFormatAlign.CENTER;
+         this.commentText.setTextFormat(_loc2_);
       }
 
       private function updateCommentedStates(param1:Boolean=true) : void {
@@ -523,7 +492,7 @@ package net.wg.gui.prebattle.company
             this.forseSetTextToTextInput(this.lastComment);
             if(!this.commentInput.focused)
             {
-               App.utils.scheduler.envokeInNextFrame(this.updateFocus,this.commentInput);
+               App.utils.scheduler.envokeInNextFrame(setFocus,this.commentInput);
             }
             App.utils.scheduler.envokeInNextFrame(this.changeVisibleState);
          }
@@ -560,10 +529,6 @@ package net.wg.gui.prebattle.company
          {
             this.commentInput.visible = this.editState;
          }
-      }
-
-      private function handleFocusInCommentInput(param1:FocusHandlerEvent=null) : void {
-         this.forseSetTextToTextInput();
       }
 
       private function forseSetTextToTextInput(param1:String="") : void {
@@ -628,48 +593,6 @@ package net.wg.gui.prebattle.company
          }
       }
 
-      private function handleUpClick(param1:ButtonEvent=null) : void {
-         var _loc2_:Object = null;
-         if(this.unassignedList.dataProvider.length > 0)
-         {
-            if(this.unassignedList.selectedIndex > -1)
-            {
-               _loc2_ = this.unassignedList.dataProvider[this.unassignedList.selectedIndex];
-               this.requestToAssignImp(_loc2_);
-               this.clearCommentEditState();
-            }
-         }
-      }
-
-      private function handleDownClick(param1:Event=null) : void {
-         var _loc2_:Object = null;
-         if(this.assignedList.dataProvider.length > 0)
-         {
-            if(this.assignedList.selectedIndex > -1)
-            {
-               _loc2_ = this.assignedList.dataProvider[this.assignedList.selectedIndex];
-               this.requestToUnassignImp(_loc2_);
-               this.clearCommentEditState();
-            }
-         }
-      }
-
-      private function handleMember17ItemDoubleClick(param1:ListEventEx) : void {
-         if(this.unassignedList.useRightButtonForSelect == false && param1.buttonIdx == 1)
-         {
-            return;
-         }
-         this.handleUpClick();
-      }
-
-      private function assignedList_itemDoubleClickHandler(param1:ListEventEx) : void {
-         if(this.assignedList.useRightButtonForSelect == false && param1.buttonIdx == 1)
-         {
-            return;
-         }
-         this.handleDownClick();
-      }
-
       private function requestToAssignImp(param1:Object) : void {
          if(this._canAssignPlayer)
          {
@@ -681,59 +604,6 @@ package net.wg.gui.prebattle.company
          if(this._canUnassignPlayer)
          {
             requestToUnassignS(param1.accID);
-         }
-      }
-
-      private function showUnassignContextMenu(param1:ListEventEx) : void {
-         var _loc2_:PlayerPrbInfoVO = null;
-         var _loc3_:* = false;
-         var _loc4_:IUserContextMenuGenerator = null;
-         if(param1.buttonIdx == MouseEventEx.RIGHT_BUTTON)
-         {
-            _loc2_ = PlayerPrbInfoVO(param1.itemData);
-            if(_loc2_.accID > -1)
-            {
-               _loc3_ = _loc2_.uid > -1;
-               _loc4_ = new SquadWindowCIGenerator(_loc3_,canKickPlayerS());
-               App.contextMenuMgr.showUserContextMenu(this,_loc2_,_loc4_);
-            }
-            else
-            {
-               App.contextMenuMgr.hide();
-            }
-         }
-      }
-
-      private function showAssignContextMenu(param1:ListEventEx) : void {
-         var _loc2_:* = false;
-         var _loc3_:Object = null;
-         var _loc4_:* = false;
-         var _loc5_:IUserContextMenuGenerator = null;
-         if(!param1.itemData)
-         {
-            return;
-         }
-         if(param1.buttonIdx == MouseEventEx.RIGHT_BUTTON)
-         {
-            _loc2_ = isPlayerCreatorS();
-            _loc3_ = param1.itemData;
-            if(_loc3_.accID > -1)
-            {
-               _loc4_ = _loc3_.uid > -1;
-               if(!_loc2_)
-               {
-                  _loc5_ = new SquadWindowCIGenerator(_loc4_,canKickPlayerS(),true);
-               }
-               else
-               {
-                  _loc5_ = new BattleSessionCIGenerator(_loc4_,canKickPlayerS());
-               }
-               App.contextMenuMgr.showUserContextMenu(this,_loc3_,_loc5_);
-            }
-            else
-            {
-               App.contextMenuMgr.hide();
-            }
          }
       }
 
@@ -758,32 +628,6 @@ package net.wg.gui.prebattle.company
          this._canAssignPlayer = false;
          this._canChangeComment = false;
          this._canMakeOpenedClosed = false;
-      }
-
-      private function handleDivisionChange(param1:ListEvent) : void {
-         if((this.division.enabled) && (param1.itemData))
-         {
-            requestToChangeDivisionS(param1.itemData.data);
-            this.clearCommentEditState();
-         }
-      }
-
-      private function handleLeaveClick(param1:ButtonEvent) : void {
-         requestToLeaveS();
-      }
-
-      private function handleReadyClick(param1:ButtonEvent) : void {
-         requestToReadyS(this.readyButton.label == PREBATTLE.DIALOGS_BUTTONS_READY);
-         this.clearCommentEditState();
-      }
-
-      private function handleIsOpenChange(param1:ButtonEvent) : void {
-         requestToChangeOpenedS(param1.target.selected);
-         this.clearCommentEditState();
-      }
-
-      private function onInviteBtnClick(param1:ButtonEvent) : void {
-         showPrebattleSendInvitesWindowS();
       }
 
       private function handleOverVehicleStats() : void {
@@ -858,20 +702,6 @@ package net.wg.gui.prebattle.company
             this.unassignedList.selectedIndex = 0;
          }
          this.unassignedList.validateNow();
-      }
-
-      private function commentInput_inputHandler(param1:InputEvent) : void {
-         if(param1.details.code == Keyboard.ESCAPE && param1.details.value == InputValue.KEY_DOWN && (this.editState))
-         {
-            param1.preventDefault();
-            param1.stopImmediatePropagation();
-            this.updateCommentedStates(false);
-         }
-         if(param1.details.code == Keyboard.ENTER && param1.details.value == InputValue.KEY_DOWN)
-         {
-            param1.handled = true;
-            this.updateCommentedStates(true);
-         }
       }
 
       private function udpateOpenedCompany() : void {
@@ -986,6 +816,149 @@ package net.wg.gui.prebattle.company
          this.readyButton.label = this._isPlayerReady?PREBATTLE.DIALOGS_BUTTONS_NOTREADY:PREBATTLE.DIALOGS_BUTTONS_READY;
       }
 
+      private function handleCommitEditClick(param1:ButtonEvent=null) : void {
+         this.updateCommentedStates();
+      }
+
+      private function handleFocusInCommentInput(param1:FocusHandlerEvent=null) : void {
+         this.forseSetTextToTextInput();
+      }
+
+      private function handleUpClick(param1:ButtonEvent=null) : void {
+         var _loc2_:Object = null;
+         if(this.unassignedList.dataProvider.length > 0)
+         {
+            if(this.unassignedList.selectedIndex > -1)
+            {
+               _loc2_ = this.unassignedList.dataProvider[this.unassignedList.selectedIndex];
+               this.requestToAssignImp(_loc2_);
+               this.clearCommentEditState();
+            }
+         }
+      }
+
+      private function handleDownClick(param1:Event=null) : void {
+         var _loc2_:Object = null;
+         if(this.assignedList.dataProvider.length > 0)
+         {
+            if(this.assignedList.selectedIndex > -1)
+            {
+               _loc2_ = this.assignedList.dataProvider[this.assignedList.selectedIndex];
+               this.requestToUnassignImp(_loc2_);
+               this.clearCommentEditState();
+            }
+         }
+      }
+
+      private function handleMember17ItemDoubleClick(param1:ListEventEx) : void {
+         if(this.unassignedList.useRightButtonForSelect == false && param1.buttonIdx == 1)
+         {
+            return;
+         }
+         this.handleUpClick();
+      }
+
+      private function assignedList_itemDoubleClickHandler(param1:ListEventEx) : void {
+         if(this.assignedList.useRightButtonForSelect == false && param1.buttonIdx == 1)
+         {
+            return;
+         }
+         this.handleDownClick();
+      }
+
+      private function showUnassignContextMenu(param1:ListEventEx) : void {
+         var _loc2_:PlayerPrbInfoVO = null;
+         var _loc3_:* = false;
+         var _loc4_:IUserContextMenuGenerator = null;
+         if(param1.buttonIdx == MouseEventEx.RIGHT_BUTTON)
+         {
+            _loc2_ = PlayerPrbInfoVO(param1.itemData);
+            if(_loc2_.accID > -1)
+            {
+               _loc3_ = _loc2_.uid > -1;
+               _loc4_ = new SquadWindowCIGenerator(_loc3_,canKickPlayerS());
+               App.contextMenuMgr.showUserContextMenu(this,_loc2_,_loc4_);
+            }
+            else
+            {
+               App.contextMenuMgr.hide();
+            }
+         }
+      }
+
+      private function showAssignContextMenu(param1:ListEventEx) : void {
+         var _loc2_:* = false;
+         var _loc3_:Object = null;
+         var _loc4_:* = false;
+         var _loc5_:IUserContextMenuGenerator = null;
+         if(!param1.itemData)
+         {
+            return;
+         }
+         if(param1.buttonIdx == MouseEventEx.RIGHT_BUTTON)
+         {
+            _loc2_ = isPlayerCreatorS();
+            _loc3_ = param1.itemData;
+            if(_loc3_.accID > -1)
+            {
+               _loc4_ = _loc3_.uid > -1;
+               if(!_loc2_)
+               {
+                  _loc5_ = new SquadWindowCIGenerator(_loc4_,canKickPlayerS(),true);
+               }
+               else
+               {
+                  _loc5_ = new BattleSessionCIGenerator(_loc4_,canKickPlayerS());
+               }
+               App.contextMenuMgr.showUserContextMenu(this,_loc3_,_loc5_);
+            }
+            else
+            {
+               App.contextMenuMgr.hide();
+            }
+         }
+      }
+
+      private function handleDivisionChange(param1:ListEvent) : void {
+         if((this.division.enabled) && (param1.itemData))
+         {
+            requestToChangeDivisionS(param1.itemData.data);
+            this.clearCommentEditState();
+         }
+      }
+
+      private function handleLeaveClick(param1:ButtonEvent) : void {
+         requestToLeaveS();
+      }
+
+      private function handleReadyClick(param1:ButtonEvent) : void {
+         requestToReadyS(this.readyButton.label == PREBATTLE.DIALOGS_BUTTONS_READY);
+         this.clearCommentEditState();
+      }
+
+      private function handleIsOpenChange(param1:ButtonEvent) : void {
+         requestToChangeOpenedS(param1.target.selected);
+         this.clearCommentEditState();
+      }
+
+      private function onInviteBtnClick(param1:ButtonEvent) : void {
+         showPrebattleSendInvitesWindowS();
+      }
+
+      private function commentInput_inputHandler(param1:InputEvent) : void {
+         if(param1.details.code == Keyboard.ESCAPE && param1.details.value == InputValue.KEY_DOWN && (this.editState))
+         {
+            param1.preventDefault();
+            param1.stopImmediatePropagation();
+            this.updateCommentedStates(false);
+         }
+         if(param1.details.code == Keyboard.ENTER && param1.details.value == InputValue.KEY_DOWN)
+         {
+            param1.handled = true;
+            this.updateCommentedStates(true);
+         }
+      }
+
       private function escInputHandler(param1:InputEvent) : void {
          if(param1.details.code == Keyboard.ESCAPE && param1.details.value == InputValue.KEY_DOWN && (this.editState) && (this.commentInput.focused))
          {
@@ -993,6 +966,14 @@ package net.wg.gui.prebattle.company
             param1.stopImmediatePropagation();
             this.updateCommentedStates(false);
          }
+      }
+
+      override public function handleInput(param1:InputEvent) : void {
+         if(param1.details.code == Keyboard.F1 && param1.details.value == InputValue.KEY_UP && (this.editState) && (this.commentInput.focused))
+         {
+            return;
+         }
+         super.handleInput(param1);
       }
    }
 

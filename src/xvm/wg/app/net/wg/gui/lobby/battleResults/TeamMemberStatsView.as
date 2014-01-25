@@ -7,7 +7,9 @@ package net.wg.gui.lobby.battleResults
    import net.wg.gui.components.controls.SoundButtonEx;
    import flash.display.MovieClip;
    import scaleform.clik.events.ButtonEvent;
+   import net.wg.infrastructure.interfaces.IUserProps;
    import scaleform.clik.data.DataProvider;
+   import net.wg.data.constants.Errors;
 
 
    public class TeamMemberStatsView extends UIComponent
@@ -67,6 +69,7 @@ package net.wg.gui.lobby.battleResults
       }
 
       override protected function draw() : void {
+         var _loc1_:IUserProps = null;
          super.draw();
          if(this._dataDirty)
          {
@@ -77,16 +80,22 @@ package net.wg.gui.lobby.battleResults
             if(this.data)
             {
                this.tankIcon.source = this.data.bigTankIcon;
-               App.utils.commons.formatPlayerName(this.playerName,this.data.playerName,this.data.playerClan,this.data.playerRegion);
+               App.utils.commons.formatPlayerName(this.playerName,App.utils.commons.getUserProps(this.data.playerName,this.data.playerClan,this.data.playerRegion));
                this.vehicleName.text = this.data.vehicleFullName;
                this.vehicleStateLbl.text = this.data.vehicleStateStr;
-               if(this.data.killerID > 0)
+               if((this.data.isPrematureLeave) || this.data.killerID <= 0)
                {
-                  App.utils.commons.formatPlayerName(this.vehicleStateLbl,this.data.killerNameStr,this.data.killerClanNameStr,this.data.killerRegionNameStr,false,this.data.vehicleStatePrefixStr,this.data.vehicleStateSuffixStr);
+                  this.vehicleStateLbl.text = this.data.vehicleStateStr;
                }
                else
                {
-                  this.vehicleStateLbl.text = this.data.vehicleStateStr;
+                  if(this.data.killerID > 0)
+                  {
+                     _loc1_ = App.utils.commons.getUserProps(this.data.killerNameStr,this.data.killerClanNameStr,this.data.killerRegionNameStr);
+                     _loc1_.prefix = this.data.vehicleStatePrefixStr;
+                     _loc1_.suffix = this.data.vehicleStateSuffixStr;
+                     App.utils.commons.formatPlayerName(this.vehicleStateLbl,_loc1_);
+                  }
                }
                this.vehicleStats.data = this.data.statValues;
                this.deadBg.visible = this.data.killerID > 0;
@@ -117,6 +126,7 @@ package net.wg.gui.lobby.battleResults
       private function onCloseClick(param1:ButtonEvent) : void {
          TeamStats(this.parent).changeIndexOnFocus = false;
          this.list.selectedIndex = -1;
+         DebugUtils.LOG_WARNING(Errors.INVALID_FOCUS_USING);
          App.utils.focusHandler.setFocus(this.list);
       }
    }

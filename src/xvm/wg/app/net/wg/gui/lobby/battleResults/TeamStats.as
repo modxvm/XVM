@@ -11,6 +11,7 @@ package net.wg.gui.lobby.battleResults
    import scaleform.clik.data.DataProvider;
    import net.wg.gui.components.advanced.InteractiveSortingButton;
    import net.wg.gui.components.controls.ScrollingListEx;
+   import net.wg.data.constants.Errors;
    import flash.display.InteractiveObject;
    import net.wg.gui.components.advanced.SortingButton;
    import net.wg.gui.components.advanced.SortingButtonInfo;
@@ -59,7 +60,7 @@ package net.wg.gui.lobby.battleResults
                ,
                "xp":
                   {
-                     "key":"xpSort",
+                     "key":["xpSort","damageDealt","vehicleId"],
                      "isNumeric":true,
                      "index":5
                   }
@@ -162,6 +163,7 @@ package net.wg.gui.lobby.battleResults
             }
             if(App.stage.focus != param1.target)
             {
+               DebugUtils.LOG_WARNING(Errors.INVALID_FOCUS_USING);
                App.utils.focusHandler.setFocus(InteractiveObject(param1.target));
             }
          }
@@ -232,8 +234,8 @@ package net.wg.gui.lobby.battleResults
          this.myParent.saveSortingS(param1,param2);
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this.header1.removeEventListener(ButtonEvent.CLICK,this.onHeaderClick);
          this.header2.removeEventListener(ButtonEvent.CLICK,this.onHeaderClick);
          this.team1List.removeEventListener(ListEvent.INDEX_CHANGE,this.onItemSelect);
@@ -329,6 +331,10 @@ package net.wg.gui.lobby.battleResults
 
       public function set changeIndexOnFocus(param1:Boolean) : void {
          this._changeIndexOnFocus = param1;
+      }
+
+      public function getComponentForFocus() : InteractiveObject {
+         return null;
       }
    }
 

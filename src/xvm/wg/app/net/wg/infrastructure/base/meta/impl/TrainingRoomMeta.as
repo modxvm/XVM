@@ -27,6 +27,20 @@ package net.wg.infrastructure.base.meta.impl
 
       public var onEscape:Function = null;
 
+      public var canSendInvite:Function = null;
+
+      public var canChangeSetting:Function = null;
+
+      public var canChangePlayerTeam:Function = null;
+
+      public var canStartBattle:Function = null;
+
+      public var canAssignToTeam:Function = null;
+
+      public var canDestroyRoom:Function = null;
+
+      public var getPlayerTeam:Function = null;
+
       public function showTrainingSettingsS() : void {
          App.utils.asserter.assertNotNull(this.showTrainingSettings,"showTrainingSettings" + Errors.CANT_NULL);
          this.showTrainingSettings();
@@ -65,6 +79,41 @@ package net.wg.infrastructure.base.meta.impl
       public function onEscapeS() : void {
          App.utils.asserter.assertNotNull(this.onEscape,"onEscape" + Errors.CANT_NULL);
          this.onEscape();
+      }
+
+      public function canSendInviteS() : Boolean {
+         App.utils.asserter.assertNotNull(this.canSendInvite,"canSendInvite" + Errors.CANT_NULL);
+         return this.canSendInvite();
+      }
+
+      public function canChangeSettingS() : Boolean {
+         App.utils.asserter.assertNotNull(this.canChangeSetting,"canChangeSetting" + Errors.CANT_NULL);
+         return this.canChangeSetting();
+      }
+
+      public function canChangePlayerTeamS() : Boolean {
+         App.utils.asserter.assertNotNull(this.canChangePlayerTeam,"canChangePlayerTeam" + Errors.CANT_NULL);
+         return this.canChangePlayerTeam();
+      }
+
+      public function canStartBattleS() : Boolean {
+         App.utils.asserter.assertNotNull(this.canStartBattle,"canStartBattle" + Errors.CANT_NULL);
+         return this.canStartBattle();
+      }
+
+      public function canAssignToTeamS(param1:int) : Boolean {
+         App.utils.asserter.assertNotNull(this.canAssignToTeam,"canAssignToTeam" + Errors.CANT_NULL);
+         return this.canAssignToTeam(param1);
+      }
+
+      public function canDestroyRoomS() : Boolean {
+         App.utils.asserter.assertNotNull(this.canDestroyRoom,"canDestroyRoom" + Errors.CANT_NULL);
+         return this.canDestroyRoom();
+      }
+
+      public function getPlayerTeamS(param1:int) : int {
+         App.utils.asserter.assertNotNull(this.getPlayerTeam,"getPlayerTeam" + Errors.CANT_NULL);
+         return this.getPlayerTeam(param1);
       }
    }
 

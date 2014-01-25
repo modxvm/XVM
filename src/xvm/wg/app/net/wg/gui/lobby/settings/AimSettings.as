@@ -196,7 +196,7 @@ package net.wg.gui.lobby.settings
          this.crosshairMC.markerMC.tag.gotoAndStop("normal");
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this._dynamicCursorsData = null;
          if((this.cassete) && (this.arcadeCursor))
          {
@@ -215,7 +215,7 @@ package net.wg.gui.lobby.settings
          {
             this.sniperForm.removeEventListener(SettingsSubVewEvent.ON_CONTROL_CHANGE,this.onControlChange);
          }
-         super.dispose();
+         super.onDispose();
       }
 
       override public function toString() : String {

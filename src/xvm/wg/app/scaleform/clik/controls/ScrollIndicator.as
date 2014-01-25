@@ -291,7 +291,7 @@ package scaleform.clik.controls
          }
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          if(this._scrollTarget)
          {
             this._scrollTarget.removeEventListener(Event.SCROLL,this.handleTargetScroll,false);
@@ -307,7 +307,7 @@ package scaleform.clik.controls
             IDisposable(this.track).dispose();
          }
          this.track = null;
-         super.dispose();
+         super.onDispose();
       }
    }
 

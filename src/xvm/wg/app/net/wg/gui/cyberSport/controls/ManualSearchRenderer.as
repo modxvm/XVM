@@ -8,6 +8,7 @@ package net.wg.gui.cyberSport.controls
    import flash.events.MouseEvent;
    import net.wg.gui.cyberSport.vo.CSCommandVO;
    import scaleform.clik.constants.InvalidationType;
+   import net.wg.infrastructure.interfaces.IUserProps;
 
 
    public class ManualSearchRenderer extends SoundListItemRenderer implements IManualSearchRenderer
@@ -81,7 +82,7 @@ package net.wg.gui.cyberSport.controls
          this.restrictionIcon.addEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.freezeIcon.removeEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
          this.freezeIcon.removeEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
          this.restrictionIcon.removeEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
@@ -90,7 +91,7 @@ package net.wg.gui.cyberSport.controls
          this.commandSize = null;
          this.commandMaxSize = null;
          this.effency = null;
-         super.dispose();
+         super.onDispose();
       }
 
       private function onControlRollOver(param1:MouseEvent) : void {
@@ -140,9 +141,12 @@ package net.wg.gui.cyberSport.controls
 
       protected function populateUI(param1:CSCommandVO) : void {
          var _loc2_:String = null;
+         var _loc3_:IUserProps = null;
          if(param1.creator)
          {
-            App.utils.commons.formatPlayerName(this.commander,param1.creator.name,param1.creator.clan,param1.creator.region,param1.creator.isIgr,"","",param1.creator.color);
+            _loc3_ = App.utils.commons.getUserProps(param1.creator.name,param1.creator.clan,param1.creator.region,param1.creator.igrType);
+            _loc3_.rgb = param1.creator.color;
+            App.utils.commons.formatPlayerName(this.commander,_loc3_);
             _loc2_ = this.commander.htmlText;
          }
          else

@@ -25,8 +25,8 @@ package net.wg.data.components
          return _loc3_;
       }
 
-      override protected function createSimpleDataIDs(param1:String, param2:String, param3:String, param4:String) : Map {
-         return App.utils.commons.createMap(["userInfo",{},param1,{"enabled":(isEnabledInRoaming?this._isOnline:isEnabledInRoaming)},param2,{"enabled":(isEnabledInRoaming?this._isOnline:isEnabledInRoaming)},param3,{"enabled":(isEnabledInRoaming?this._isOnline:isEnabledInRoaming)},"copyToClipBoard",{},param4,{"enabled":(isEnabledInRoaming?this._isOnline:isEnabledInRoaming)},"kickPlayer",{"enabled":this._canKickPlayer}]);
+      override protected function createSimpleDataIDs(param1:PlayerInfo, param2:String, param3:String, param4:String, param5:String) : Map {
+         return App.utils.commons.createMap(["userInfo",{},param2,{"enabled":(param1.canCreateChannel?this._isOnline:param1.canCreateChannel)},param3,{"enabled":(param1.canAddToFriend?this._isOnline:param1.canAddToFriend)},param4,{"enabled":param1.canAddToIgnore},"copyToClipBoard",{},param5,{"enabled":this._isOnline},"kickPlayer",{"enabled":this._canKickPlayer}]);
       }
    }
 

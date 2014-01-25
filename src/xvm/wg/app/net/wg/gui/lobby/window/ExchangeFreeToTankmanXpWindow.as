@@ -6,6 +6,7 @@ package net.wg.gui.lobby.window
    import flash.display.MovieClip;
    import net.wg.gui.components.controls.IconText;
    import net.wg.gui.components.controls.ActionPrice;
+   import net.wg.gui.components.controls.WalletResourcesStatus;
    import flash.display.Sprite;
    import net.wg.gui.components.controls.SoundButtonEx;
    import net.wg.gui.components.advanced.SkillsItemRenderer;
@@ -16,6 +17,8 @@ package net.wg.gui.lobby.window
    import scaleform.clik.constants.ConstrainMode;
    import scaleform.clik.events.ButtonEvent;
    import scaleform.clik.events.IndexEvent;
+   import net.wg.gui.components.controls.VO.ActionPriceVO;
+   import net.wg.data.constants.IconsTypes;
 
 
    public class ExchangeFreeToTankmanXpWindow extends ExchangeFreeToTankmanXpWindowMeta implements IExchangeFreeToTankmanXpWindowMeta
@@ -34,6 +37,10 @@ package net.wg.gui.lobby.window
 
       public static const SELECTED_VALUE_INVALID:String = "selValInvalid";
 
+      public static const RECALC_VALUE_INVALID:String = "recalcValueInvalid";
+
+      public static const WALLET_STATE_INVALID:String = "walletStateInvalid";
+
       public static const WARNING_INVALID:String = "warningInvalid";
 
       private static const MOVINGCONTAINER_NAME:String = "movingContainer";
@@ -45,6 +52,8 @@ package net.wg.gui.lobby.window
       public var itToPay:IconText;
 
       public var actionPrice:ActionPrice;
+
+      public var walletStatus:WalletResourcesStatus;
 
       public var background:Sprite;
 
@@ -70,27 +79,38 @@ package net.wg.gui.lobby.window
 
       private var expandedWindowHeight:Number = NaN;
 
+      private var isAlertWalletVisible:Boolean = false;
+
+      private var _price:Number = 0;
+
+      private var _defPrice:Number = 0;
+
+      private var _actionPrc:Number = 0;
+
+      override public function setWindow(param1:IWindow) : void {
+         super.setWindow(param1);
+         if(param1)
+         {
+            window.title = MENU.TEACHINGSKILL_TITLE;
+            addEventListener(Event.ENTER_FRAME,this.calcHeightInNextFrame,false,0,true);
+         }
+      }
+
       public function as_setInitData(param1:Object) : void {
          this.initData = new ExchangeFreeToTankmanInitVO(param1);
          invalidate(INIT_DATA_INVALID);
       }
 
       public function as_setCalcValueResponse(param1:Number, param2:Number, param3:Number) : void {
-         this.actionPrice.setData(param3,param1,param2,IconText.FREE_XP);
-         this.itToPay.visible = !this.actionPrice.visible;
-         this.itToPay.text = App.utils.locale.integer(param1);
-         this.submitBtn.enabled = param1 > 0;
-         this.initData.afterSkill.level = this.selectedValue;
-         this.skillAfter.data = this.initData.afterSkill;
+         this._price = param1;
+         this._defPrice = param2;
+         this._actionPrc = param3;
+         invalidate(RECALC_VALUE_INVALID);
       }
 
-      override public function set window(param1:IWindow) : void {
-         super.window = param1;
-         if(param1)
-         {
-            window.title = MENU.TEACHINGSKILL_TITLE;
-            addEventListener(Event.ENTER_FRAME,this.calcHeightInNextFrame,false,0,true);
-         }
+      public function as_setWalletStatus(param1:Object) : void {
+         App.utils.voMgr.walletStatusVO.update(param1);
+         this.updateWalletStatus();
       }
 
       override protected function preInitialize() : void {
@@ -126,6 +146,7 @@ package net.wg.gui.lobby.window
 
       override protected function draw() : void {
          var _loc1_:* = false;
+         var _loc2_:ActionPriceVO = null;
          super.draw();
          if(isInvalid(INIT_DATA_INVALID))
          {
@@ -134,8 +155,7 @@ package net.wg.gui.lobby.window
                this.nsLevel.minimum = this.initData.lastSkillLevel;
                this.nsLevel.maximum = this.initData.nextSkillLevel;
                this.nsLevel.value = this.nsLevel.maximum;
-               this.nsLevel.enabled = !(this.initData.lastSkillLevel == this.initData.nextSkillLevel);
-               this.blockMc.visible = !this.nsLevel.enabled;
+               this.nsLevel.enabled = !this.isAlertWalletVisible && !(this.initData.lastSkillLevel == this.initData.nextSkillLevel);
                this.skillBefore.data = this.initData.beforeSkill;
                this.skillAfter.data = this.initData.afterSkill;
                this.selectedValue = this.nsLevel.value;
@@ -152,7 +172,7 @@ package net.wg.gui.lobby.window
          }
          if((isInvalid(WARNING_INVALID)) && !isNaN(this.originalWindowHeight))
          {
-            _loc1_ = !this.nsLevel.enabled;
+            _loc1_ = !this.nsLevel.enabled && !this.isAlertWalletVisible;
             if(_loc1_ != this.warningMc.visible)
             {
                this.warningMc.visible = _loc1_;
@@ -164,6 +184,45 @@ package net.wg.gui.lobby.window
                {
                   window.height = this.originalWindowHeight;
                }
+            }
+         }
+         if(isInvalid(WALLET_STATE_INVALID))
+         {
+            if(!this.isAlertWalletVisible && (this.initData))
+            {
+               this.nsLevel.enabled = !(this.initData.lastSkillLevel == this.initData.nextSkillLevel);
+            }
+            else
+            {
+               this.nsLevel.enabled = false;
+            }
+            invalidate(WARNING_INVALID);
+         }
+         if(isInvalid(RECALC_VALUE_INVALID))
+         {
+            if(this.initData)
+            {
+               this.nsLevel.enabled = !this.isAlertWalletVisible && !(this.initData.lastSkillLevel == this.initData.nextSkillLevel);
+            }
+            else
+            {
+               this.nsLevel.enabled = !this.isAlertWalletVisible;
+            }
+            if(!this.isAlertWalletVisible)
+            {
+               _loc2_ = new ActionPriceVO(this._actionPrc,this._price,this._defPrice,IconsTypes.FREE_XP);
+               this.actionPrice.setData(_loc2_);
+               this.itToPay.visible = !this.actionPrice.visible;
+               this.itToPay.text = App.utils.locale.integer(this._price);
+               this.submitBtn.enabled = this._price > 0;
+               this.initData.afterSkill.level = this.selectedValue;
+               this.skillAfter.data = this.initData.afterSkill;
+            }
+            else
+            {
+               this.actionPrice.visible = false;
+               this.itToPay.visible = false;
+               this.submitBtn.enabled = false;
             }
          }
       }
@@ -183,6 +242,19 @@ package net.wg.gui.lobby.window
          this.skillAfter = null;
          this.skillBefore.dispose();
          this.skillBefore = null;
+         if(this.walletStatus)
+         {
+            this.walletStatus.dispose();
+            this.walletStatus = null;
+         }
+      }
+
+      private function updateWalletStatus() : void {
+         if(App.utils)
+         {
+            this.isAlertWalletVisible = this.walletStatus.updateStatus(App.utils.voMgr.walletStatusVO.freeXpStatus);
+            invalidate(WALLET_STATE_INVALID,RECALC_VALUE_INVALID);
+         }
       }
 
       private function nsFirstCurrencyChangeHandler(param1:IndexEvent) : void {

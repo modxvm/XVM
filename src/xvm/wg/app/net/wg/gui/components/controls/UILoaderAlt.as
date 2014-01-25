@@ -69,7 +69,11 @@ package net.wg.gui.components.controls
          this.loader.scaleX = this.loader.scaleY = Math.min(this._height / param2,this._width / param1);
       }
 
-      public function dispose() : void {
+      public final function dispose() : void {
+         this.onDispose();
+      }
+
+      protected function onDispose() : void {
          if(this.loader)
          {
             this.removeLoaderListener();

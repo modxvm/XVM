@@ -4,7 +4,7 @@ package net.wg.gui.lobby.window
    import net.wg.infrastructure.interfaces.IWindow;
    import flash.filters.DropShadowFilter;
    import net.wg.data.constants.ColorSchemeNames;
-   import net.wg.gui.components.controls.IconText;
+   import net.wg.data.constants.IconsTypes;
 
 
    public class ExchangeWindow extends ExchangeCurrencyWindow
@@ -16,8 +16,8 @@ package net.wg.gui.lobby.window
 
       public var errorLabel:TextField;
 
-      override public function set window(param1:IWindow) : void {
-         super.window = param1;
+      override public function setWindow(param1:IWindow) : void {
+         super.setWindow(param1);
          if(param1)
          {
             window.title = MENU.EXCHANGE_TITLE;
@@ -42,12 +42,12 @@ package net.wg.gui.lobby.window
          toExchangePrimaryCurrencyIco.filters = ExchangeUtils.getGlow(toExchangePrimaryCurrencyIco.icon);
          toExchangeSecondaryCurrencyIco.filters = ExchangeUtils.getGlow(toExchangeSecondaryCurrencyIco.icon);
          var _loc2_:Number = App.colorSchemeMgr.getRGB(ColorSchemeNames.TEXT_COLOR_GOLD);
-         headerMC.rate_part_1.icon = IconText.GOLD;
-         headerMC.rate_part_1.textColor = _loc2_;
-         headerMC.rate_part_1.filters = ExchangeUtils.getGlow(IconText.GOLD);
-         headerMC.rate_part_2.icon = IconText.CREDITS;
-         headerMC.rate_part_2.textColor = App.colorSchemeMgr.getRGB(ColorSchemeNames.TEXT_COLOR_CREDITS);
-         headerMC.rate_part_2.filters = ExchangeUtils.getGlow(IconText.CREDITS);
+         headerMC.rateFrom.icon = IconsTypes.GOLD;
+         headerMC.rateFrom.textColor = _loc2_;
+         headerMC.rateFrom.filters = ExchangeUtils.getGlow(IconsTypes.GOLD);
+         headerMC.rateTo.icon = IconsTypes.CREDITS;
+         headerMC.rateTo.textColor = App.colorSchemeMgr.getRGB(ColorSchemeNames.TEXT_COLOR_CREDITS);
+         headerMC.rateTo.filters = ExchangeUtils.getGlow(IconsTypes.CREDITS);
       }
 
       override protected function applyResultUpdating() : void {

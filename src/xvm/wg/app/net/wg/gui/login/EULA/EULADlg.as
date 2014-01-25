@@ -4,6 +4,7 @@ package net.wg.gui.login.EULA
    import net.wg.infrastructure.base.meta.IEULAMeta;
    import net.wg.gui.components.controls.SoundButtonEx;
    import net.wg.gui.components.advanced.TextAreaSimple;
+   import flash.display.InteractiveObject;
    import net.wg.utils.IAssertable;
    import net.wg.data.constants.Errors;
    import scaleform.clik.utils.Constraints;
@@ -32,6 +33,11 @@ package net.wg.gui.login.EULA
       private var _myHeight:Number = 0;
 
       private var _myWidth:Number = 0;
+
+      override protected function onInitModalFocus(param1:InteractiveObject) : void {
+         super.onInitModalFocus(param1);
+         setFocus(this.applyButton);
+      }
 
       override public final function setViewSize(param1:Number, param2:Number) : void {
          _originalWidth = width;

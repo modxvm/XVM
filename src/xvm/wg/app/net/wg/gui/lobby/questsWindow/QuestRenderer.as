@@ -107,7 +107,7 @@ package net.wg.gui.lobby.questsWindow
          this.lockDownMC.addEventListener(MouseEvent.ROLL_OVER,showLockTooltip);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.hitArea = null;
          this.newIndicator.hitArea = null;
          this.removeListeners();
@@ -127,7 +127,7 @@ package net.wg.gui.lobby.questsWindow
          this.statusMC.dispose();
          this.statusMC = null;
          this.progressIndicator.dispose();
-         super.dispose();
+         super.onDispose();
       }
 
       private function removeListeners() : void {

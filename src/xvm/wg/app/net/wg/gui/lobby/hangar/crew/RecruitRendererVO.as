@@ -79,14 +79,14 @@ package net.wg.gui.lobby.hangar.crew
 
       private var _efficiencyLevel:Number;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this._roles.splice(0,this._roles.length);
          this._roles = null;
          this._skills.splice(0,this._skills.length);
          this._roles = null;
          this._recruitList.splice(0,this._recruitList.length);
          this._recruitList = null;
-         super.dispose();
+         super.onDispose();
       }
 
       override protected function onDataWrite(param1:String, param2:Object) : Boolean {

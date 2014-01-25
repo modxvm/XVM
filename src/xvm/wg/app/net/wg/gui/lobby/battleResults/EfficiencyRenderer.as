@@ -142,7 +142,7 @@ package net.wg.gui.lobby.battleResults
                this.critsIcon.visible = !this.data.isFake && !this.data.isAlly;
                this.evilIcon.visible = !this.data.isFake && !this.data.isAlly;
                this.spottedIcon.visible = !this.data.isFake && !this.data.isAlly;
-               this.playerName.text = this.data.playerName;
+               App.utils.commons.formatPlayerName(this.playerName,App.utils.commons.getUserProps(this.data.playerName,this.data.playerClan,this.data.playerRegion));
                _loc1_ = this.playerName.getTextFormat();
                if(this.data.isFake)
                {

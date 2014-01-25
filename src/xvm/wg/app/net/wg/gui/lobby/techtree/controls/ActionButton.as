@@ -61,6 +61,7 @@ package net.wg.gui.lobby.techtree.controls
          if(_owner != param1)
          {
             _owner = param1;
+            this.focusTarget = _owner;
          }
          if(param2)
          {
@@ -164,9 +165,9 @@ package net.wg.gui.lobby.techtree.controls
          }
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          owner = null;
-         super.dispose();
+         super.onDispose();
       }
 
       override protected function preInitialize() : void {

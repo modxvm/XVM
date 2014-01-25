@@ -48,6 +48,7 @@ package net.wg.infrastructure.base
          {
             param1.x = this._x;
             param1.y = this._y;
+            this.doPositionOnce = true;
             _loc2_ = true;
          }
          return _loc2_;

@@ -94,7 +94,7 @@ package net.wg.gui.cyberSport.views.unit
          {
             if(this.model)
             {
-               App.utils.commons.formatPlayerName(this.headerTF,App.utils.locale.makeString(CYBERSPORT.WINDOW_UNITLISTVIEW_SELECTEDTEAM) + " " + this.model.commander.name,this.model.commander.clan,this.model.commander.region,this.model.commander.isIgr);
+               App.utils.commons.formatPlayerName(this.headerTF,App.utils.commons.getUserProps(App.utils.locale.makeString(CYBERSPORT.WINDOW_UNITLISTVIEW_SELECTEDTEAM) + " " + this.model.commander.name,this.model.commander.clan,this.model.commander.region));
                this.descriptionTF.text = this.model.description;
                this.freezeIcon.visible = this.model.isFreezed;
                this.restrictionIcon.visible = this.model.hasRestrictions;
@@ -138,7 +138,7 @@ package net.wg.gui.cyberSport.views.unit
          dispatchEvent(new CSComponentEvent(CSComponentEvent.JOIN_UNIT_REQUEST));
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          var _loc1_:SimpleSlotRenderer = null;
          this.joinButton.removeEventListener(ButtonEvent.CLICK,this.onJoinClick);
          this.joinButton.removeEventListener(MouseEvent.ROLL_OVER,this.onControlRollOver);
@@ -157,7 +157,7 @@ package net.wg.gui.cyberSport.views.unit
          this.joinButton.dispose();
          this.joinButton = null;
          this.model = null;
-         super.dispose();
+         super.onDispose();
       }
    }
 

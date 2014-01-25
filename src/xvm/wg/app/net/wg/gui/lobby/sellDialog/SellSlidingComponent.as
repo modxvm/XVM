@@ -2,11 +2,12 @@ package net.wg.gui.lobby.sellDialog
 {
    import scaleform.clik.core.UIComponent;
    import flash.display.MovieClip;
-   import net.wg.gui.events.VehicleSellDialogEvent;
    import net.wg.data.VO.SellDialogElement;
    import net.wg.data.VO.SellDialogItem;
    import net.wg.utils.ILocale;
+   import net.wg.data.constants.FittingTypes;
    import scaleform.clik.data.DataProvider;
+   import net.wg.gui.events.VehicleSellDialogEvent;
    import flash.geom.Rectangle;
 
 
@@ -41,27 +42,6 @@ package net.wg.gui.lobby.sellDialog
          return this.expandBg.y + this.expandBg.height + PADDING_FOR_NEXT_ELEMENT;
       }
 
-      public function get isOpened() : Boolean {
-         return this._isOpened;
-      }
-
-      public function set isOpened(param1:Boolean) : void {
-         this._isOpened = param1;
-         this.settingsBtn.setingsDropBtn.selected = this.isOpened;
-      }
-
-      override protected function configUI() : void {
-         super.configUI();
-         this.settingsBtn.visible = false;
-         this.expandBg.visible = false;
-         this.slidingScrList.addEventListener(VehicleSellDialogEvent.LIST_WAS_DRAWN,this.wasDrawnHandler,false,5);
-      }
-
-      private function wasDrawnHandler(param1:VehicleSellDialogEvent) : void {
-         this.listHeight = param1.listVisibleHight;
-         this.updateElements();
-      }
-
       public function setShells(param1:Object) : void {
          var _loc5_:SellDialogElement = null;
          var _loc2_:SellDialogItem = new SellDialogItem();
@@ -76,7 +56,7 @@ package net.wg.gui.lobby.sellDialog
                   _loc5_ = new SellDialogElement();
                   _loc5_.id = param1.shells[_loc4_].userName + " (" + param1.shells[_loc4_].count + " " + _loc3_.makeString(DIALOGS.VEHICLESELLDIALOG_COUNT) + ")";
                   _loc5_.isRemovable = true;
-                  _loc5_.type = SaleItemBlockRenderer.ITEM_TYPE_SHELL;
+                  _loc5_.type = FittingTypes.SHELL;
                   _loc5_.data = param1.shells[_loc4_];
                   if(param1.shells[_loc4_].buyPrice[1] > 0)
                   {
@@ -111,7 +91,7 @@ package net.wg.gui.lobby.sellDialog
             {
                _loc4_ = new SellDialogElement();
                _loc4_.id = param1.eqs[_loc3_].userName;
-               _loc4_.type = SaleItemBlockRenderer.ITEM_TYPE_EQUIPMENT;
+               _loc4_.type = FittingTypes.EQUIPMENT;
                _loc4_.moneyValue = param1.eqs[_loc3_].sellPrice[0];
                _loc4_.defMoneyValue = param1.eqs[_loc3_].defSellPrice[0];
                _loc4_.actionPrc = param1.eqs[_loc3_].sellActionPrc;
@@ -174,7 +154,7 @@ package net.wg.gui.lobby.sellDialog
             _loc6_.actionPrc = 0;
             _loc6_.id = _loc9_.makeString(DIALOGS.VEHICLESELLDIALOG_NOTINSTALLED_MODULES) + " (" + _loc7_ + " " + _loc9_.makeString(DIALOGS.VEHICLESELLDIALOG_COUNT) + ")";
             _loc6_.isRemovable = true;
-            _loc6_.type = SaleItemBlockRenderer.ITEM_TYPE_MODULE;
+            _loc6_.type = FittingTypes.MODULE;
             _loc6_.data = param1;
             _loc3_.elements.push(_loc6_);
          }
@@ -189,7 +169,7 @@ package net.wg.gui.lobby.sellDialog
                   _loc11_.id = param2[_loc10_][0].userName + " (" + param2[_loc10_][0].inventoryCount + " " + _loc9_.makeString(DIALOGS.VEHICLESELLDIALOG_COUNT) + ")";
                   _loc11_.isRemovable = true;
                   _loc11_.data = param2[_loc10_][0];
-                  _loc11_.type = SaleItemBlockRenderer.ITEM_TYPE_SHELL;
+                  _loc11_.type = FittingTypes.SHELL;
                   _loc11_.itemInInventory = true;
                   if(param2[_loc10_][0].buyPrice[1] > 0 || (param2[_loc10_][1]))
                   {
@@ -215,6 +195,26 @@ package net.wg.gui.lobby.sellDialog
          this.slidingScrList.dataProvider = new DataProvider(this.sellData);
       }
 
+      public function preInitStates() : void {
+         this.resultExpand = this.settingsBtn.height + this.listHeight-1 - this.expandBg.height;
+      }
+
+      public function get isOpened() : Boolean {
+         return this._isOpened;
+      }
+
+      public function set isOpened(param1:Boolean) : void {
+         this._isOpened = param1;
+         this.settingsBtn.setingsDropBtn.selected = this.isOpened;
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.settingsBtn.visible = false;
+         this.expandBg.visible = false;
+         this.slidingScrList.addEventListener(VehicleSellDialogEvent.LIST_WAS_DRAWN,this.wasDrawnHandler,false,5);
+      }
+
       private function updateElements() : void {
          this.preInitStates();
          if(this.isOpened)
@@ -235,8 +235,9 @@ package net.wg.gui.lobby.sellDialog
          }
       }
 
-      public function preInitStates() : void {
-         this.resultExpand = this.settingsBtn.height + this.listHeight-1 - this.expandBg.height;
+      private function wasDrawnHandler(param1:VehicleSellDialogEvent) : void {
+         this.listHeight = param1.listVisibleHight;
+         this.updateElements();
       }
    }
 

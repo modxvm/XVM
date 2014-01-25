@@ -49,7 +49,7 @@ package net.wg.gui.lobby.profile.pages.technique
          this.buttonBar.validateNow();
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          if(this.buttonBar)
          {
             this.buttonBar.dispose();
@@ -66,7 +66,7 @@ package net.wg.gui.lobby.profile.pages.technique
             this.typeIcon = null;
          }
          this.tabsBg = null;
-         super.dispose();
+         super.onDispose();
       }
 
       public function setViewSize(param1:Number, param2:Number) : void {

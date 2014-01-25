@@ -27,8 +27,8 @@ package net.wg.gui.components.common.crosshair
 
       private var isReloaded:Boolean = false;
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          if(this.radiusFW)
          {
             this.radiusFW.dispose();

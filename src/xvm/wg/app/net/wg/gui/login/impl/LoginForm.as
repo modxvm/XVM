@@ -9,6 +9,7 @@ package net.wg.gui.login.impl
    import net.wg.gui.components.controls.HyperLink;
    import net.wg.gui.components.controls.SoundButton;
    import net.wg.gui.components.controls.TextInput;
+   import scaleform.clik.events.InputEvent;
    import flash.events.Event;
    import scaleform.clik.events.ListEvent;
    import net.wg.data.constants.Linkages;
@@ -16,7 +17,6 @@ package net.wg.gui.login.impl
    import scaleform.clik.data.DataProvider;
    import flash.text.StyleSheet;
    import net.wg.data.constants.SoundTypes;
-   import scaleform.clik.events.InputEvent;
    import scaleform.clik.constants.InputValue;
 
 
@@ -31,7 +31,7 @@ package net.wg.gui.login.impl
 
       private static const MAX_SERVER_ROW_COUNT:Number = 10;
 
-      private static const MULTI_SYMBOL_CODE:Number = 106;
+      private static const MULTI_SYMBOL:String = "*";
 
       public var server:DropdownMenu = null;
 
@@ -61,10 +61,12 @@ package net.wg.gui.login.impl
 
       private var _lastDownKeyCode:Number = -1;
 
+      private var _lastPressUsedCtrl:Boolean = false;
+
       private var _isIgrCredentialsReset:Boolean = false;
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         addEventListener(InputEvent.INPUT,this.handleInput);
          this.server.dispose();
          this.loginField = null;
          this.passwordField = null;
@@ -81,22 +83,26 @@ package net.wg.gui.login.impl
          this.igrWarning = null;
          this._message.styleSheet = null;
          this._message = null;
+         super.onDispose();
       }
 
       public function update(param1:Object, param2:Boolean) : void {
          var _loc3_:String = null;
          if((param1 == this._login || param1 == this._pass) && (param2))
          {
-            _loc3_ = "";
-            if(param1 == this._pass)
+            if(!this._lastPressUsedCtrl)
             {
-               _loc3_ = this._pass.text.slice(-1);
-               if(_loc3_ == "*" && !(this._lastDownKeyCode == MULTI_SYMBOL_CODE))
+               _loc3_ = "";
+               if(param1 == this._pass)
                {
-                  _loc3_ = "";
+                  _loc3_ = this._pass.text.slice(-1);
+                  if(_loc3_ == MULTI_SYMBOL && !(this._lastDownKeyCode == MULTI_SYMBOL.charCodeAt()))
+                  {
+                     _loc3_ = "";
+                  }
                }
+               this._pass.text = _loc3_;
             }
-            this._pass.text = _loc3_;
             dispatchEvent(new LoginEvent(LoginEvent.TOKEN_RESET));
          }
          this.setErrorMessage(MENU.LOGIN_STATUS_CONNECTING,ErrorStates.NONE);
@@ -267,19 +273,21 @@ package net.wg.gui.login.impl
          this.capsLockIndicator.visible = false;
          this.capsLockIndicator.alpha = 1;
          LoginUtils.instance.initTabIndex([this._login.textField,this._pass.textField,this._submit,this._registerLink,this._recoveryLink,this._rememberPwdCheckbox,this.server]);
-      }
-
-      override public function handleInput(param1:InputEvent) : void {
-         if(param1.details.value == InputValue.KEY_DOWN)
-         {
-            this._lastDownKeyCode = param1.details.code;
-         }
+         addEventListener(InputEvent.INPUT,this.handleInput);
       }
 
       private function onRememberPwdCheckboxToggle(param1:Event) : void {
          if(this._isIgrCredentialsReset)
          {
             this.igrWarning.visible = this.rememberPwdCheckbox.selected;
+         }
+      }
+
+      override public function handleInput(param1:InputEvent) : void {
+         if(param1.details.value == InputValue.KEY_DOWN)
+         {
+            this._lastDownKeyCode = param1.details.code;
+            this._lastPressUsedCtrl = param1.details.ctrlKey;
          }
       }
    }

@@ -217,7 +217,8 @@ package net.wg.gui.lobby.customization
                         }
                      ,
                      "selected":false,
-                     "enabled":false
+                     "enabled":false,
+                     "type":_loc4_.type
                   }
                );
                _loc2_++;
@@ -256,7 +257,7 @@ package net.wg.gui.lobby.customization
 
       public function as_onResetNewItem() : void {
          this.as_onServerResponsesReceived();
-         dispatchEvent(new CustomizationEvent(CustomizationEvent.RESET_NEW_ITEM));
+         this.accordion.view.currentView.dispatchEvent(new CustomizationEvent(CustomizationEvent.RESET_NEW_ITEM));
       }
 
       public function as_setCredits(param1:Number) : void {
@@ -281,7 +282,16 @@ package net.wg.gui.lobby.customization
          this.emblemRightGroupsDataProvider.invalidate();
          this.inscriptionLeftGroupsDataProvider.invalidate();
          this.inscriptionRightGroupsDataProvider.invalidate();
+         this.as_refreshItemsData();
          this.accordion.view.currentView.refreshSelection(true);
+      }
+
+      public function as_refreshItemsData() : void {
+         this.camouflageDP.invalidateRemote(true);
+         this.emblemLeftDP.invalidateRemote(true);
+         this.emblemRightDP.invalidateRemote(true);
+         this.inscriptionLeftDP.invalidateRemote(true);
+         this.inscriptionRightDP.invalidateRemote(true);
       }
 
       public function isActionsLocked() : Boolean {
@@ -302,8 +312,8 @@ package net.wg.gui.lobby.customization
          var _loc8_:* = 0;
          var _loc9_:* = 0;
          var _loc10_:Object = null;
-         var _loc11_:Object = null;
-         var _loc12_:* = false;
+         var _loc13_:Object = null;
+         var _loc14_:* = false;
          this._sectionsData[param1] = param3;
          var _loc6_:Array = [];
          var _loc7_:Array = [];
@@ -323,10 +333,37 @@ package net.wg.gui.lobby.customization
             this._priceDataProvider.splice(_loc8_,1);
             _loc5_ = null;
          }
+         var _loc11_:Object = {};
+         var _loc12_:Object = null;
          _loc8_ = 0;
          while(_loc8_ < this._priceDataProvider.length)
          {
             _loc10_ = this._priceDataProvider[_loc8_];
+            if(_loc10_.section != param1)
+            {
+               if(this._sectionsData[_loc10_.section])
+               {
+                  _loc12_ = this._sectionsData[_loc10_.section]._new;
+               }
+               if(!(_loc10_.type  in  _loc11_))
+               {
+                  _loc11_[_loc10_.type] = [];
+               }
+               if((_loc12_) && (_loc12_.price.isGold))
+               {
+                  _loc11_[_loc10_.type].push(_loc12_.id);
+               }
+            }
+            _loc8_++;
+         }
+         _loc8_ = 0;
+         while(_loc8_ < this._priceDataProvider.length)
+         {
+            _loc10_ = this._priceDataProvider[_loc8_];
+            if(this._sectionsData[_loc10_.section])
+            {
+               _loc12_ = this._sectionsData[_loc10_.section]._new;
+            }
             if(_loc10_.section == param1)
             {
                if(param3.price  is  Array && param3.price.length > 0)
@@ -351,39 +388,51 @@ package net.wg.gui.lobby.customization
                         {
                            "label":_loc10_.label,
                            "section":_loc10_.section,
-                           "price":this.getSummCost(_loc7_),
+                           "price":this.getSumCost(_loc7_),
                            "selected":true,
                            "enabled":true,
                            "fake":true
                         }
                      ;
-                     _loc10_.price = this.getSummCost(_loc6_);
+                     _loc10_.price = this.getSumCost(_loc6_);
                   }
                   else
                   {
-                     _loc10_.price = this.getSummCost(param3.price);
+                     _loc10_.price = this.getSumCost(param3.price);
                   }
                }
                else
                {
-                  _loc10_.price = param3.price;
+                  if((_loc12_) && (param3.price.isGold) && _loc11_[_loc10_.type].indexOf(_loc12_.id) > -1)
+                  {
+                     _loc10_.price =
+                        {
+                           "isGold":true,
+                           "cost":0
+                        }
+                     ;
+                  }
+                  else
+                  {
+                     _loc10_.price = param3.price;
+                  }
                }
                _loc10_.selected = param2;
                if(param3.hasOwnProperty("selectedItems"))
                {
-                  _loc12_ = false;
-                  for each (_loc11_ in param3.selectedItems)
+                  _loc14_ = false;
+                  for each (_loc13_ in param3.selectedItems)
                   {
-                     if(_loc11_)
+                     if(_loc13_)
                      {
-                        _loc12_ = _loc11_.id > 0;
+                        _loc14_ = _loc13_.id > 0;
                      }
-                     if(_loc12_)
+                     if(_loc14_)
                      {
                         break;
                      }
                   }
-                  _loc10_.enabled = _loc12_;
+                  _loc10_.enabled = _loc14_;
                }
                else
                {
@@ -417,7 +466,7 @@ package net.wg.gui.lobby.customization
          this.priceList.addEventListener(ListEvent.ITEM_CLICK,this.handleClickPriceItem);
          this.applyButton.enabled = false;
          this.applyButton.addEventListener(ButtonEvent.CLICK,this.onClickApplyButton);
-         App.utils.focusHandler.setFocus(this.closeButton);
+         setFocus(this.closeButton);
       }
 
       override protected function onDispose() : void {
@@ -429,11 +478,13 @@ package net.wg.gui.lobby.customization
          this.accordion.addEventListener(MouseEvent.CLICK,hideToolTip);
          this.accordion.removeEventListener(MouseEvent.ROLL_OVER,showToolTip);
          this.accordion.removeEventListener(MouseEvent.ROLL_OUT,hideToolTip);
-         this.priceList.removeEventListener(ListEvent.ITEM_CLICK,this.handleClickPriceItem);
          this.accordion.dispose();
+         this.accordion = null;
+         this.priceList.removeEventListener(ListEvent.ITEM_CLICK,this.handleClickPriceItem);
+         this.priceList.dispose();
+         this.priceList = null;
          this.currentView.dispose();
-         this.priceList.dataProvider = null;
-         this.priceList.invalidateRenderers();
+         this.currentView = null;
          _instance = null;
          this._sectionsDataProvider.cleanUp();
          this._sectionsDataProvider = null;
@@ -503,7 +554,8 @@ package net.wg.gui.lobby.customization
          applyCustomizationS(this._selectedSections);
       }
 
-      private function getSummCost(param1:Array) : Object {
+      private function getSumCost(param1:Array) : Object {
+         var _loc3_:* = 0;
          var _loc4_:Object = null;
          var _loc2_:Object =
             {
@@ -511,7 +563,6 @@ package net.wg.gui.lobby.customization
                "cost":0
             }
          ;
-         var _loc3_:* = 0;
          _loc3_ = 0;
          while(_loc3_ < param1.length)
          {

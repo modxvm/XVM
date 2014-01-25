@@ -31,7 +31,7 @@ package net.wg.gui.components.controls
 
       private var updateNestedChild:Boolean = false;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          if(this.loader)
          {
             this.removeIconListeners(this.loader.contentLoaderInfo);
@@ -40,7 +40,7 @@ package net.wg.gui.components.controls
             removeChild(this.loader);
             this.loader = null;
          }
-         super.dispose();
+         super.onDispose();
       }
 
       override public function set enabled(param1:Boolean) : void {

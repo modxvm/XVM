@@ -107,7 +107,7 @@ package net.wg.gui.lobby.header
          try
          {
             dispatchEvent(new LifeCycleEvent(LifeCycleEvent.ON_BEFORE_DISPOSE));
-            this.dispose();
+            dispose();
             this._disposed = true;
             dispatchEvent(new LifeCycleEvent(LifeCycleEvent.ON_AFTER_DISPOSE));
          }
@@ -122,7 +122,6 @@ package net.wg.gui.lobby.header
          preventAutosizing = true;
          addEventListener(MouseEvent.ROLL_OVER,this.onRollOver);
          addEventListener(MouseEvent.ROLL_OUT,this.onRollOut);
-         addEventListener(MouseEvent.MOUSE_UP,this.onRelease);
          addEventListener(MouseEvent.MOUSE_DOWN,this.onPress);
          setState("out");
       }
@@ -153,14 +152,13 @@ package net.wg.gui.lobby.header
          return this._level == PlayerXPLevel.NORMAL?PREFIX_NORMAL:PREFIX_NEWBIE;
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          removeEventListener(MouseEvent.ROLL_OVER,this.onRollOver);
          removeEventListener(MouseEvent.ROLL_OUT,this.onRollOut);
-         removeEventListener(MouseEvent.MOUSE_UP,this.onRelease);
          removeEventListener(MouseEvent.MOUSE_DOWN,this.onPress);
          this.titleField = null;
          this.stateField = null;
-         super.dispose();
+         super.onDispose();
       }
 
       private function onRollOver(param1:MouseEvent) : void {
@@ -171,7 +169,8 @@ package net.wg.gui.lobby.header
          this.hideToolTip();
       }
 
-      private function onRelease(param1:MouseEvent) : void {
+      private function onPress(param1:MouseEvent) : void {
+         this.hideToolTip();
          if(App.utils.commons.isLeftButton(param1))
          {
             this.hideToolTip();
@@ -184,10 +183,6 @@ package net.wg.gui.lobby.header
                restartS();
             }
          }
-      }
-
-      private function onPress(param1:MouseEvent) : void {
-         this.hideToolTip();
       }
 
       private function showToolTip() : void {

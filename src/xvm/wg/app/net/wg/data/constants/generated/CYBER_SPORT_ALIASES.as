@@ -17,6 +17,10 @@ package net.wg.data.constants.generated
 
       public static const ROSTER_SLOT_SETTINGS_WINDOW_PY:String = "cyberSport/rosterSlotSettings";
 
+      public static const CYBER_SPORT_DIALOG_UI:String = "simpleDialog.swf";
+
+      public static const CYBER_SPORT_DIALOG_PY:String = "cyberSport/dialog";
+
       public static const INTRO_VIEW_UI:String = "IntroViewUI";
 
       public static const INTRO_VIEW_PY:String = "cyberSport/unitWindow/intro";

@@ -139,7 +139,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
          dispatchEvent(new Event(BUTTONS_GROUP_SELECTION_CHANGED));
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.slotActionPrice.dispose();
          this.slotActionPrice = null;
          this.ammoActionPrice.dispose();
@@ -147,7 +147,7 @@ package net.wg.gui.lobby.vehicleBuyWindow
          this.academyBtn.dispose();
          this.scoolBtn.dispose();
          this.freeBtn.dispose();
-         super.dispose();
+         super.onDispose();
       }
    }
 

@@ -31,6 +31,8 @@ package net.wg.infrastructure.base.meta
       function as_updateVideoSettings(param1:Object) : void;
 
       function as_confirmWarningDialog(param1:Boolean, param2:String) : void;
+
+      function as_ConfirmationOfApplication(param1:Boolean) : void;
    }
 
 }

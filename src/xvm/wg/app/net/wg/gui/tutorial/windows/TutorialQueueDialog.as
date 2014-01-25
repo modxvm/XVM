@@ -2,6 +2,7 @@ package net.wg.gui.tutorial.windows
 {
    import flash.text.TextField;
    import flash.text.TextFieldAutoSize;
+   import flash.display.InteractiveObject;
    import net.wg.utils.ILocale;
 
 
@@ -40,7 +41,11 @@ package net.wg.gui.tutorial.windows
          messageField.autoSize = TextFieldAutoSize.LEFT;
          this.updateMessageText();
          App.utils.scheduler.scheduleTask(this.updateWaitingTime,1000 * 60);
-         App.utils.focusHandler.setFocus(submitBtn);
+      }
+
+      override protected function onInitModalFocus(param1:InteractiveObject) : void {
+         super.onInitModalFocus(param1);
+         setFocus(submitBtn);
       }
 
       override protected function draw() : void {

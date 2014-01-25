@@ -59,12 +59,12 @@ package net.wg.gui.lobby.settings
          super.update(param1);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          var _loc1_:String = null;
          var _loc2_:SettingsControlProp = null;
          var _loc3_:CheckBox = null;
          var _loc4_:Slider = null;
-         super.dispose();
+         super.onDispose();
          if(this.defaultBtn.hasEventListener(ButtonEvent.CLICK))
          {
             this.defaultBtn.removeEventListener(ButtonEvent.CLICK,this.onSetDefaultClick);

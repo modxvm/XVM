@@ -25,7 +25,7 @@ package net.wg.gui.lobby.tankman
 
       public var isPerk:Boolean = false;
 
-      public var level:int = -1;
+      private var _level:int = -1;
 
       public var userName:String = null;
 
@@ -38,6 +38,14 @@ package net.wg.gui.lobby.tankman
       public var roleType:String = null;
 
       public var tankmanID:int = -1;
+
+      public function get level() : int {
+         return this._level;
+      }
+
+      public function set level(param1:int) : void {
+         this._level = param1;
+      }
    }
 
 }

@@ -96,8 +96,8 @@ package net.wg.gui.lobby.header
          }
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          App.utils.scheduler.cancelTask(this.updateLabels);
       }
    }

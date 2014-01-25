@@ -36,10 +36,10 @@ package net.wg.gui.lobby.techtree.controls
 
       public var haveNotFreeXp:WalletResourcesStatus;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.haveNotFreeXp.dispose();
          this.haveNotFreeXp = null;
-         super.dispose();
+         super.onDispose();
       }
 
       override public function setOwner(param1:IRenderer, param2:Boolean=false) : void {

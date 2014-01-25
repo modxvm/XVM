@@ -2,6 +2,7 @@ package net.wg.gui.lobby.browser
 {
    import net.wg.infrastructure.base.meta.impl.BrowserMeta;
    import net.wg.infrastructure.base.meta.IBrowserMeta;
+   import net.wg.infrastructure.interfaces.IWindow;
    import scaleform.clik.utils.Padding;
 
 
@@ -19,6 +20,7 @@ package net.wg.gui.lobby.browser
 
       public function as_loadingStart() : void {
          this.actionBtn.action = BrowserActionBtn.ACTION_LOADING;
+         this.updateFocus();
       }
 
       public function as_loadingStop() : void {
@@ -27,10 +29,11 @@ package net.wg.gui.lobby.browser
 
       override protected function onPopulate() : void {
          super.onPopulate();
+         var _loc1_:IWindow = IWindow(window);
          window.title = MENU.BROWSER_WINDOW_TITLE;
-         var _loc1_:Padding = window.contentPadding as Padding;
-         _loc1_.bottom = -8;
-         window.contentPadding = _loc1_;
+         var _loc2_:Padding = window.contentPadding as Padding;
+         _loc2_.bottom = -8;
+         window.contentPadding = _loc2_;
       }
 
       override protected function onDispose() : void {
@@ -79,6 +82,13 @@ package net.wg.gui.lobby.browser
 
       private function onBrowserFocusOut(param1:BrowserEvent) : void {
          browserFocusOut();
+      }
+
+      private function updateFocus() : void {
+         if(!this.actionBtn.isMouseOver)
+         {
+            setFocus(this);
+         }
       }
    }
 

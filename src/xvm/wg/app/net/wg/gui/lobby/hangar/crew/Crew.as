@@ -36,7 +36,10 @@ package net.wg.gui.lobby.hangar.crew
       }
 
       private static function showTooltip(param1:ListEventEx) : void {
-         App.toolTipMgr.showSpecial(Tooltips.TANKMAN,null,param1.itemData.tankmanID,true);
+         if(param1.itemData.tankmanID)
+         {
+            App.toolTipMgr.showSpecial(Tooltips.TANKMAN,null,param1.itemData.tankmanID,true);
+         }
       }
 
       private static function hideTooltip(param1:ListEventEx) : void {
@@ -188,7 +191,6 @@ package net.wg.gui.lobby.hangar.crew
          App.stage.removeEventListener(CrewEvent.SHOW_RECRUIT_WINDOW,this.onShowRecruitWindow);
          App.stage.removeEventListener(CrewEvent.EQUIP_TANKMAN,this.onEquipTankman);
          removeEventListener(CrewEvent.UNLOAD_TANKMAN,this.onUnloadTankman);
-         removeEventListener(CrewEvent.UNLOAD_ALL_TANKMAN,this.onUnloadAllTankman);
          removeEventListener(CrewEvent.OPEN_PERSONAL_CASE,this.openPersonalCaseHandler);
          this.list.dispose();
          this.list = null;
@@ -206,7 +208,6 @@ package net.wg.gui.lobby.hangar.crew
          super.configUI();
          mouseEnabled = false;
          addEventListener(CrewEvent.UNLOAD_TANKMAN,this.onUnloadTankman);
-         addEventListener(CrewEvent.UNLOAD_ALL_TANKMAN,this.onUnloadAllTankman);
          addEventListener(CrewEvent.OPEN_PERSONAL_CASE,this.openPersonalCaseHandler);
          App.stage.addEventListener(CrewEvent.EQUIP_TANKMAN,this.onEquipTankman);
          App.stage.addEventListener(CrewEvent.SHOW_RECRUIT_WINDOW,this.onShowRecruitWindow);
@@ -244,10 +245,6 @@ package net.wg.gui.lobby.hangar.crew
 
       private function onUnloadTankman(param1:CrewEvent) : void {
          unloadTankmanS(param1.initProp.tankmanID);
-      }
-
-      private function onUnloadAllTankman(param1:CrewEvent) : void {
-         unloadAllTankmanS();
       }
 
       private function onShowRecruitWindow(param1:CrewEvent) : void {

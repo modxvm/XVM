@@ -39,7 +39,7 @@ package net.wg.gui.lobby.battleResults
          this.progressDiff.addEventListener(MouseEvent.ROLL_OVER,this.showDiffTooltip);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.progressDiff.removeEventListener(MouseEvent.CLICK,hideTooltip);
          this.progressDiff.removeEventListener(MouseEvent.ROLL_OUT,hideTooltip);
          this.progressDiff.removeEventListener(MouseEvent.ROLL_OVER,this.showDiffTooltip);
@@ -53,7 +53,7 @@ package net.wg.gui.lobby.battleResults
             this.data.dispose();
             this.data = null;
          }
-         super.dispose();
+         super.onDispose();
       }
 
       public function setData(param1:Object) : void {

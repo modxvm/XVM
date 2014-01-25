@@ -26,7 +26,7 @@ package net.wg.gui.lobby.battleResults
 
       public var areaIcon:UILoaderAlt;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.tankIcon.dispose();
          this.bgOverlay.dispose();
          this.areaIcon.dispose();

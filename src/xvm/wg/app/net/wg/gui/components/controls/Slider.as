@@ -43,7 +43,7 @@ package net.wg.gui.components.controls
 
       private var _fillPadding:Padding;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          removeEventListener(MouseEvent.MOUSE_WHEEL,this.onScrollWheel,false);
          this.progress_mask = null;
          if(this.patternMc)
@@ -51,7 +51,7 @@ package net.wg.gui.components.controls
             this.patternMc.dispose();
             this.patternMc = null;
          }
-         super.dispose();
+         super.onDispose();
       }
 
       override protected function scrollWheel(param1:Number) : void {

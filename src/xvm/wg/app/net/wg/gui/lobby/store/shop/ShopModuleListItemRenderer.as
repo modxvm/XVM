@@ -8,8 +8,9 @@ package net.wg.gui.lobby.store.shop
    import scaleform.clik.utils.Constraints;
    import net.wg.data.VO.StoreTableData;
    import net.wg.utils.ILocale;
+   import net.wg.gui.components.controls.VO.ActionPriceVO;
    import net.wg.gui.lobby.store.shop.base.ACTION_CREDITS_STATES;
-   import net.wg.gui.components.controls.IconText;
+   import net.wg.data.constants.IconsTypes;
    import net.wg.utils.IAssertable;
    import flash.display.DisplayObject;
    import net.wg.data.constants.Errors;
@@ -35,9 +36,9 @@ package net.wg.gui.lobby.store.shop
 
       public var count:TextField = null;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.actionPriceLeft.dispose();
-         super.dispose();
+         super.onDispose();
       }
 
       override protected function configUI() : void {
@@ -70,6 +71,7 @@ package net.wg.gui.lobby.store.shop
 
       override protected function updateCreditPriceForAction(param1:Number, param2:Number, param3:Number, param4:Number, param5:StoreTableData) : void {
          var _loc6_:ILocale = null;
+         var _loc7_:ActionPriceVO = null;
          if(App.instance)
          {
             super.updateCreditPriceForAction(param1,param2,param3,param4,param5);
@@ -87,7 +89,8 @@ package net.wg.gui.lobby.store.shop
             this.actionCredits.price.text = _loc6_.gold(param3);
             if(this.actionPriceLeft)
             {
-               this.actionPriceLeft.setData(param5.actionPrc,param3,param4,IconText.GOLD);
+               _loc7_ = new ActionPriceVO(param5.actionPrc,param3,param4,IconsTypes.GOLD);
+               this.actionPriceLeft.setData(_loc7_);
                this.actionPriceLeft.visible = (isUseGoldAndCredits) && (this.actionPriceLeft.visible);
                this.actionCredits.visible = (isUseGoldAndCredits) && !this.actionPriceLeft.visible;
             }
@@ -98,13 +101,15 @@ package net.wg.gui.lobby.store.shop
          var _loc2_:* = 0;
          var _loc3_:* = NaN;
          var _loc4_:* = NaN;
+         var _loc5_:ActionPriceVO = null;
          this.orTextField.visible = isUseGoldAndCredits;
          if(param1)
          {
             _loc2_ = 1;
             _loc3_ = param1.price[_loc2_];
             _loc4_ = param1.defPrice[_loc2_];
-            this.actionPriceLeft.setData(param1.actionPrc,_loc3_,_loc4_,IconText.GOLD);
+            _loc5_ = new ActionPriceVO(param1.actionPrc,_loc3_,_loc4_,IconsTypes.GOLD);
+            this.actionPriceLeft.setData(_loc5_);
          }
          else
          {

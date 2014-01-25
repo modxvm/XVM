@@ -7,45 +7,58 @@ package net.wg.gui.lobby.questsWindow.data
    {
           
       public function ConditionElementVO(param1:Object) {
-         this._vehicles = [];
+         this._iconElements = [];
          super(param1);
       }
 
-      private var _descr:String = "";
+      private var _conditionType:String = "";
 
-      private var _discountVal:String = "";
+      private var _contentAlign:String = "left";
 
-      private var _vehicles:Array;
+      private var _iconElements:Array;
 
-      public function get descr() : String {
-         return this._descr;
+      private var _progrIndex:int = 0;
+
+      private var _linkage:String = "ConditionElement_UI";
+
+      public function get conditionType() : String {
+         return this._conditionType;
       }
 
-      public function set descr(param1:String) : void {
-         this._descr = param1;
+      public function set conditionType(param1:String) : void {
+         this._conditionType = param1;
       }
 
-      public function get vehicles() : Array {
-         return this._vehicles;
+      public function get iconElements() : Array {
+         return this._iconElements;
       }
 
-      public function set vehicles(param1:Array) : void {
-         this._vehicles = param1;
+      public function set iconElements(param1:Array) : void {
+         this._iconElements = param1;
       }
 
-      override public function dispose() : void {
-         this._descr = null;
-         this._vehicles.splice(0,this._vehicles.length);
-         this._vehicles = null;
-         super.dispose();
+      public function get linkage() : String {
+         return this._linkage;
       }
 
-      public function get discountVal() : String {
-         return this._discountVal;
+      public function set linkage(param1:String) : void {
+         this._linkage = param1;
       }
 
-      public function set discountVal(param1:String) : void {
-         this._discountVal = param1;
+      public function get contentAlign() : String {
+         return this._contentAlign;
+      }
+
+      public function set contentAlign(param1:String) : void {
+         this._contentAlign = param1;
+      }
+
+      public function get progrIndex() : int {
+         return this._progrIndex;
+      }
+
+      public function set progrIndex(param1:int) : void {
+         this._progrIndex = param1;
       }
    }
 

@@ -91,7 +91,7 @@ package net.wg.gui.lobby.battleResults
          this.linkBtn.mouseEnabled = true;
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.removeListeners();
          this.linkBtn.dispose();
          this.taskTF = null;
@@ -111,7 +111,7 @@ package net.wg.gui.lobby.battleResults
          this.alert = null;
          this.progressList.dispose();
          this.progressList = null;
-         super.dispose();
+         super.onDispose();
       }
 
       private function removeListeners() : void {
@@ -157,9 +157,19 @@ package net.wg.gui.lobby.battleResults
       }
 
       private function checkAwards(param1:Number) : Number {
-         this.awards.visible = Boolean(this.data.awards);
          this.awards.setActualWidth(this.progressList.width);
-         this.awards.setAwards(this.data.awards);
+         if(this.data.awards)
+         {
+            DebugUtils.LOG_DEBUG("data.awards.awardsStr",this.data.awards.awardsStr,this.data.awards.openedQuests);
+            this.awards.visible = Boolean((Boolean(this.data.awards.awardsStr)) || (this.data.awards.openedQuests.length > 0));
+            this.awards.setAwards(this.data.awards.awardsStr);
+            this.awards.setOpenedQuests(this.data.awards.openedQuests);
+         }
+         else
+         {
+            this.awards.visible = false;
+            this.awards.setAwards("");
+         }
          this.awards.validateNow();
          this.awards.y = Math.round(param1);
          return Math.round(this.awards.height);

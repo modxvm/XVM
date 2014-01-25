@@ -32,8 +32,8 @@ package net.wg.gui.components.tooltips
          super.build(param1,param2);
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          if(this.progressBlock)
          {
             content.removeChild(this.progressBlock);
@@ -103,8 +103,8 @@ package net.wg.gui.components.tooltips
             {
                _loc9_ = new _loc10_();
                content.addChild(_loc9_);
-               _loc9_.setText(_loc5_.quests[_loc2_]);
                _loc9_.questText.width = _loc4_ != 0?_loc4_ - bgShadowMargin.left - contentMargin.left:_loc9_.questText.textWidth + 5;
+               _loc9_.setText(_loc5_.quests[_loc2_]);
                _loc9_.x = bgShadowMargin.left + contentMargin.left;
                _loc9_.y = topPosition;
                topPosition = topPosition + _loc9_.height;

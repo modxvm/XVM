@@ -1,7 +1,7 @@
 package net.wg.gui.lobby.window
 {
    import flash.filters.DropShadowFilter;
-   import net.wg.gui.components.controls.IconText;
+   import net.wg.data.constants.IconsTypes;
 
 
    public class ExchangeUtils extends Object
@@ -26,20 +26,20 @@ package net.wg.gui.lobby.window
          _loc4_.quality = 2;
          switch(param1)
          {
-            case IconText.GOLD:
+            case IconsTypes.GOLD:
                _loc3_ = 16736256;
                param2 = isNaN(param2)?0.8:param2;
                break;
-            case IconText.CREDITS:
+            case IconsTypes.CREDITS:
                _loc3_ = 13556185;
                param2 = isNaN(param2)?0.3:param2;
                break;
-            case IconText.FREE_XP:
-            case IconText.ELITE_XP:
+            case IconsTypes.FREE_XP:
+            case IconsTypes.ELITE_XP:
                _loc3_ = 14570496;
                param2 = isNaN(param2)?0.6:param2;
                break;
-            case IconText.VCOIN:
+            case IconsTypes.VCOIN:
                _loc3_ = 16736256;
                param2 = isNaN(param2)?0.6:param2;
                break;

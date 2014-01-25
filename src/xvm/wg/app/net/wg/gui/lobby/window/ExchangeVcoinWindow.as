@@ -4,12 +4,12 @@ package net.wg.gui.lobby.window
    import flash.display.MovieClip;
    import net.wg.gui.components.controls.SoundButtonEx;
    import net.wg.gui.utils.ExcludeTweenManager;
-   import net.wg.data.constants.Errors;
    import net.wg.infrastructure.interfaces.IWindow;
+   import net.wg.data.constants.Errors;
    import scaleform.clik.utils.Constraints;
    import scaleform.clik.constants.ConstrainMode;
    import flash.display.Sprite;
-   import net.wg.gui.components.controls.IconText;
+   import net.wg.data.constants.IconsTypes;
    import net.wg.data.constants.ColorSchemeNames;
    import scaleform.clik.events.ButtonEvent;
    import flash.display.DisplayObject;
@@ -53,6 +53,16 @@ package net.wg.gui.lobby.window
 
       private var exchangeData:VcoinExchangeDataVO;
 
+      override public function setWindow(param1:IWindow) : void {
+         super.setWindow(param1);
+         if(param1)
+         {
+            window.title = MENU.EXCHANGEVCOIN_TITLE;
+            this.windowOriginalHeight = window.sourceView.height + window.contentPadding.vertical;
+            invalidate(TOTAL_PRIMARY_CURRENCY_INVALID);
+         }
+      }
+
       public function buyVcoinS() : void {
          App.utils.asserter.assertNotNull(this.buyVcoin,"exchange" + Errors.CANT_NULL);
          this.buyVcoin();
@@ -62,16 +72,6 @@ package net.wg.gui.lobby.window
          this.exchangeData = new VcoinExchangeDataVO(param1);
          selectedPrimaryCurrency = this.exchangeData.minTransactVal;
          exchangeStep = this.exchangeData.countStep;
-      }
-
-      override public function set window(param1:IWindow) : void {
-         super.window = param1;
-         if(param1)
-         {
-            window.title = MENU.EXCHANGEVCOIN_TITLE;
-            this.windowOriginalHeight = window.sourceView.height + window.contentPadding.vertical;
-            invalidate(TOTAL_PRIMARY_CURRENCY_INVALID);
-         }
       }
 
       override protected function preInitialize() : void {
@@ -100,34 +100,34 @@ package net.wg.gui.lobby.window
          _loc2_.addChild(nsSecondaryCurrency);
          constraints.addElement(this.mainBackgroundMc.name,this.mainBackgroundMc,Constraints.ALL);
          constraints.addElement(_loc2_.name,_loc2_,Constraints.BOTTOM);
-         onHandPrimaryCurrencyText.filters = ExchangeUtils.getGlow(IconText.VCOIN);
-         onHandSecondaryCurrencyText.filters = ExchangeUtils.getGlow(IconText.GOLD);
-         resultPrimaryCurrencyText.filters = ExchangeUtils.getGlow(IconText.VCOIN);
-         resultSecondaryCurrencyText.filters = ExchangeUtils.getGlow(IconText.GOLD);
-         toExchangePrimaryCurrencyIco.filters = ExchangeUtils.getGlow(IconText.VCOIN);
-         toExchangeSecondaryCurrencyIco.filters = ExchangeUtils.getGlow(IconText.GOLD);
-         resultPrimaryCurrencyText.icon = IconText.VCOIN;
-         resultSecondaryCurrencyText.icon = IconText.GOLD;
-         toExchangePrimaryCurrencyIco.icon = IconText.VCOIN;
-         toExchangeSecondaryCurrencyIco.icon = IconText.GOLD;
-         onHandPrimaryCurrencyText.icon = IconText.VCOIN;
-         onHandSecondaryCurrencyText.icon = IconText.GOLD;
+         onHandPrimaryCurrencyText.filters = ExchangeUtils.getGlow(IconsTypes.VCOIN);
+         onHandSecondaryCurrencyText.filters = ExchangeUtils.getGlow(IconsTypes.GOLD);
+         resultPrimaryCurrencyText.filters = ExchangeUtils.getGlow(IconsTypes.VCOIN);
+         resultSecondaryCurrencyText.filters = ExchangeUtils.getGlow(IconsTypes.GOLD);
+         toExchangePrimaryCurrencyIco.filters = ExchangeUtils.getGlow(IconsTypes.VCOIN);
+         toExchangeSecondaryCurrencyIco.filters = ExchangeUtils.getGlow(IconsTypes.GOLD);
+         resultPrimaryCurrencyText.icon = IconsTypes.VCOIN;
+         resultSecondaryCurrencyText.icon = IconsTypes.GOLD;
+         toExchangePrimaryCurrencyIco.icon = IconsTypes.VCOIN;
+         toExchangeSecondaryCurrencyIco.icon = IconsTypes.GOLD;
+         onHandPrimaryCurrencyText.icon = IconsTypes.VCOIN;
+         onHandSecondaryCurrencyText.icon = IconsTypes.GOLD;
          var _loc3_:uint = App.colorSchemeMgr.getRGB(ColorSchemeNames.TEXT_COLOR_VCOIN);
          var _loc4_:uint = App.colorSchemeMgr.getRGB(ColorSchemeNames.TEXT_COLOR_GOLD);
          onHandPrimaryCurrencyText.textColor = _loc3_;
          onHandSecondaryCurrencyText.textColor = _loc4_;
-         resultPrimaryCurrencyText.icon = IconText.VCOIN;
-         resultSecondaryCurrencyText.icon = IconText.GOLD;
+         resultPrimaryCurrencyText.icon = IconsTypes.VCOIN;
+         resultSecondaryCurrencyText.icon = IconsTypes.GOLD;
          resultPrimaryCurrencyText.textColor = _loc3_;
          resultSecondaryCurrencyText.textColor = _loc4_;
          nsPrimaryCurrency.textColor = _loc3_;
          nsSecondaryCurrency.textColor = _loc4_;
-         headerMC.rate_part_1.icon = IconText.VCOIN;
-         headerMC.rate_part_1.textColor = _loc3_;
-         headerMC.rate_part_1.filters = ExchangeUtils.getGlow(IconText.VCOIN);
-         headerMC.rate_part_2.icon = IconText.GOLD;
-         headerMC.rate_part_2.textColor = _loc4_;
-         headerMC.rate_part_2.filters = ExchangeUtils.getGlow(IconText.GOLD);
+         headerMC.rateFrom.icon = IconsTypes.VCOIN;
+         headerMC.rateFrom.textColor = _loc3_;
+         headerMC.rateFrom.filters = ExchangeUtils.getGlow(IconsTypes.VCOIN);
+         headerMC.rateTo.icon = IconsTypes.GOLD;
+         headerMC.rateTo.textColor = _loc4_;
+         headerMC.rateTo.filters = ExchangeUtils.getGlow(IconsTypes.GOLD);
          this.buyVcoinBtn.addEventListener(ButtonEvent.CLICK,this.buyVcoinBtnHandler,false,0,true);
          this.warningMc.buyVcoinBtn.addEventListener(ButtonEvent.CLICK,this.buyVcoinBtnHandler,false,0,true);
          headerMC.rateLabelFunction = rateLabelFunction;

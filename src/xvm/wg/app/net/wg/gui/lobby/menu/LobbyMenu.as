@@ -5,6 +5,7 @@ package net.wg.gui.lobby.menu
    import flash.display.MovieClip;
    import scaleform.clik.events.ButtonEvent;
    import flash.text.TextFieldAutoSize;
+   import flash.display.InteractiveObject;
 
 
    public class LobbyMenu extends LobbyMenuMeta implements ILobbyMenuMeta
@@ -20,6 +21,10 @@ package net.wg.gui.lobby.menu
       }
 
       public var content:LobbyMenuForm = null;
+
+      override public function updateStage(param1:Number, param2:Number) : void {
+         super.updateStage(param1,param2);
+      }
 
       override protected function onPopulate() : void {
          MovieClip(window.getBackground()).tabEnabled = false;
@@ -51,8 +56,9 @@ package net.wg.gui.lobby.menu
          super.onDispose();
       }
 
-      override public function updateStage(param1:Number, param2:Number) : void {
-         super.updateStage(param1,param2);
+      override protected function onInitModalFocus(param1:InteractiveObject) : void {
+         super.onInitModalFocus(param1);
+         setFocus(this.content.cancelBtn);
       }
 
       private function onLogoffClick(param1:ButtonEvent) : void {
@@ -76,11 +82,6 @@ package net.wg.gui.lobby.menu
 
       private function onCancelClick(param1:ButtonEvent=null) : void {
          cancelClickS();
-      }
-
-      override public function setFocus() : void {
-         super.setFocus();
-         App.utils.focusHandler.setFocus(this.content.cancelBtn);
       }
    }
 

@@ -9,7 +9,6 @@ package net.wg.gui.lobby.profile.components
    import flash.events.MouseEvent;
    import scaleform.clik.interfaces.IDataProvider;
    import scaleform.clik.constants.InvalidationType;
-   import net.wg.data.managers.IToolTipParams;
    import flash.events.Event;
 
 
@@ -27,8 +26,6 @@ package net.wg.gui.lobby.profile.components
       public var txtLabel:TextField;
 
       public var dropdownMenu:DropdownMenu;
-
-      private var _padding:int = 1;
 
       private var _selectedItem:String;
 
@@ -75,7 +72,7 @@ package net.wg.gui.lobby.profile.components
          if(this._isToolTipShowing)
          {
             hideToolTip();
-            this.showToolTip(null);
+            this.showToolTip();
          }
          if(this._tooltip)
          {
@@ -121,7 +118,7 @@ package net.wg.gui.lobby.profile.components
 
       protected function mouseRollOverHandler(param1:MouseEvent) : void {
          this._isToolTipShowing = true;
-         this.showToolTip(null);
+         this.showToolTip();
       }
 
       protected function mouseRollOutHandler(param1:MouseEvent) : void {
@@ -129,7 +126,7 @@ package net.wg.gui.lobby.profile.components
          hideToolTip();
       }
 
-      protected function showToolTip(param1:IToolTipParams) : void {
+      private function showToolTip() : void {
          if(this._tooltip)
          {
             App.toolTipMgr.showComplex(this._tooltip);
@@ -151,9 +148,9 @@ package net.wg.gui.lobby.profile.components
          invalidateData();
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.disposeHandlers();
-         super.dispose();
+         super.onDispose();
       }
    }
 

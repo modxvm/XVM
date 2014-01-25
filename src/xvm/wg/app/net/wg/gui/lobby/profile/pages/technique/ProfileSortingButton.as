@@ -18,6 +18,8 @@ package net.wg.gui.lobby.profile.pages.technique
 
       public var labelField:TextField;
 
+      private var showSeparator:Boolean = true;
+
       override protected function configUI() : void {
          super.configUI();
          mcDescendingIcon.addEventListener(UILoaderEvent.COMPLETE,this.sortingIconLoadingCompleteHandler);
@@ -41,7 +43,8 @@ package net.wg.gui.lobby.profile.pages.technique
          if(param1  is  ProfileSortingBtnInfo)
          {
             _loc2_ = ProfileSortingBtnInfo(param1);
-            bg.visible = _loc2_.showSeparator;
+            this.showSeparator = _loc2_.showSeparator;
+            bg.gotoAndStop(this.showSeparator?"separator":"empty");
             if(_loc2_.label)
             {
                _label = _loc2_.label;
@@ -56,7 +59,7 @@ package net.wg.gui.lobby.profile.pages.technique
          {
             if(upperBg)
             {
-               upperBg.width = bg.visible?_width - 2:_width;
+               upperBg.width = this.showSeparator?_width - 2:_width;
                upperBg.height = _height;
             }
             this.labelField.width = _width;

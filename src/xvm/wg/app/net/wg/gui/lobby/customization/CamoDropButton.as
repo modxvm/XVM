@@ -18,8 +18,8 @@ package net.wg.gui.lobby.customization
          addEventListener(ButtonEvent.CLICK,this.onClick,false,0,true);
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          removeEventListener(ButtonEvent.CLICK,this.onClick);
       }
 

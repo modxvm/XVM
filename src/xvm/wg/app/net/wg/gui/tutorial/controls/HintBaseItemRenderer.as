@@ -22,8 +22,8 @@ package net.wg.gui.tutorial.controls
          invalidate(InvalidationType.DATA);
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this._data = null;
       }
 

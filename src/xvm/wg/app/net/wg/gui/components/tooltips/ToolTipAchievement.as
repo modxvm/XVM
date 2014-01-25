@@ -7,9 +7,9 @@ package net.wg.gui.components.tooltips
    import __AS3__.vec.Vector;
    import net.wg.data.managers.ITooltipProps;
    import flash.display.DisplayObject;
+   import net.wg.utils.ILocale;
    import net.wg.gui.components.tooltips.VO.AchievementVO;
    import net.wg.gui.components.tooltips.VO.ToolTipBlockVO;
-   import net.wg.utils.ILocale;
    import net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO;
    import flash.text.TextFieldAutoSize;
    import net.wg.gui.components.tooltips.helpers.Utils;
@@ -90,7 +90,7 @@ package net.wg.gui.components.tooltips
          super.build(param1,param2);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          var _loc1_:AchievementsCustomBlockItem = null;
          if(content)
          {
@@ -105,7 +105,7 @@ package net.wg.gui.components.tooltips
                this.historyHeaderTF = null;
             }
          }
-         super.dispose();
+         super.onDispose();
          if(this.flagsBlocks)
          {
             while(this.flagsBlocks.length > 0)
@@ -127,23 +127,22 @@ package net.wg.gui.components.tooltips
       }
 
       override protected function redraw() : void {
-         var _loc4_:* = NaN;
+         var _loc1_:ILocale = null;
          var _loc5_:AchievementVO = null;
-         var _loc7_:* = NaN;
          var _loc10_:ToolTipBlockVO = null;
          var _loc11_:String = null;
          var _loc12_:String = null;
          var _loc13_:String = null;
-         var _loc1_:ILocale = App.utils.locale;
+         _loc1_ = App.utils.locale;
          var _loc2_:uint = 0;
          var _loc3_:uint = 0;
-         _loc4_ = 300;
+         var _loc4_:Number = 300;
          _loc5_ = new AchievementVO(_data);
          var _loc6_:ToolTipBlockResultVO = null;
          blockResults = new Vector.<ToolTipBlockResultVO>();
          this.flagsBlocks = new Vector.<AchievementsCustomBlockItem>();
          topPosition = bgShadowMargin.top + contentMargin.top;
-         _loc7_ = bgShadowMargin.left + contentMargin.left;
+         var _loc7_:Number = bgShadowMargin.left + contentMargin.left;
          var _loc8_:Separator = null;
          separators = new Vector.<Separator>();
          this.headerTF.autoSize = TextFieldAutoSize.LEFT;

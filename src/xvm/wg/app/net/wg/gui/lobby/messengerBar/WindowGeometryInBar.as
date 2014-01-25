@@ -22,7 +22,7 @@ package net.wg.gui.lobby.messengerBar
       private var doPositionOnce:Boolean = true;
 
       override public function setPosition(param1:IWindow) : Boolean {
-         var _loc2_:IAbstractWindowView = param1.sourceView;
+         var _loc2_:IAbstractWindowView = param1.windowContent;
          if((_loc2_) && (this.doPositionOnce))
          {
             _loc2_.dispatchEvent(new MessengerBarEvent(this.eventType,this.clientID));

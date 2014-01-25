@@ -38,8 +38,8 @@ package net.wg.gui.lobby.profile.components
          this._draws = param3;
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
       }
    }
 

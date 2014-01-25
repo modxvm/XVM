@@ -31,6 +31,8 @@ package net.wg.gui.cyberSport.views.unit
          this.btnFreeze.externalSource = true;
       }
 
+      private static const LABEL_ICON_GAP:Number = 15;
+
       public var lblTeamHeader:TextField;
 
       public var lblTeamMembers:TextField;
@@ -87,7 +89,7 @@ package net.wg.gui.cyberSport.views.unit
 
       private var _isFightBtnInCoolDown:Boolean = false;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          var _loc1_:SlotRenderer = null;
          var _loc2_:SlotDropIndicator = null;
          this.settingsIcons.dispose();
@@ -106,7 +108,7 @@ package net.wg.gui.cyberSport.views.unit
          this._slotsUi = null;
          this._indicatorsUI.splice();
          this._indicatorsUI = null;
-         super.dispose();
+         super.onDispose();
       }
 
       public function setMemberVehicle(param1:uint, param2:uint, param3:VehicleVO) : void {
@@ -270,9 +272,9 @@ package net.wg.gui.cyberSport.views.unit
          this.lblTeamMembers.text = CYBERSPORT.WINDOW_UNIT_TEAMMEMBERS;
          this.lblTeamVehicles.text = CYBERSPORT.WINDOW_UNIT_TEAMVEHICLES;
          this.lblTeamPoints.text = CYBERSPORT.WINDOW_UNIT_TEAMPOINTS;
-         this.btnFreeze.x = this.lblTeamMembers.x + this.lblTeamMembers.textWidth + 15;
-         this.btnConfigure.x = this.lblTeamVehicles.x + this.lblTeamVehicles.textWidth + 15;
-         this.settingsIcons.x = this.lblTeamHeader.x + this.lblTeamHeader.textWidth + 15;
+         this.btnFreeze.x = this.lblTeamMembers.x + this.lblTeamMembers.textWidth + LABEL_ICON_GAP;
+         this.btnConfigure.x = this.lblTeamVehicles.x + this.lblTeamVehicles.textWidth + LABEL_ICON_GAP;
+         this.settingsIcons.x = this.lblTeamHeader.x + this.lblTeamHeader.textWidth + LABEL_ICON_GAP;
          this._slotsUi = [this.slot0,this.slot1,this.slot2,this.slot3,this.slot4,this.slot5,this.slot6];
          this._indicatorsUI = [this.dropTargerIndicator0,this.dropTargerIndicator1,this.dropTargerIndicator2,this.dropTargerIndicator3,this.dropTargerIndicator4,this.dropTargerIndicator5,this.dropTargerIndicator6];
          this.btnFreeze.addEventListener(ButtonEvent.CLICK,this.onStatusToggle);

@@ -15,8 +15,8 @@ package net.wg.gui.components.advanced
 
       public var backBar:StatusIndicator;
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this.frontBar.dispose();
          this.frontBar = null;
          this.backBar.dispose();

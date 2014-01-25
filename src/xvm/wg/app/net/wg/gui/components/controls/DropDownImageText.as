@@ -15,13 +15,13 @@ package net.wg.gui.components.controls
          super.configUI();
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          if(this.icon)
          {
             this.icon.dispose();
             this.icon = null;
          }
-         super.dispose();
+         super.onDispose();
       }
 
       override protected function populateText(param1:Object) : void {

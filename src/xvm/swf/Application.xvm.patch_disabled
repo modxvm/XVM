@@ -4,7 +4,7 @@ diff -Naur Application.orig-0.orig/net/wg/app/impl/Application.class.asasm Appli
 @@ -28,7 +28,8 @@
       getglobalscope
       pushstring          "windows.swf"
-      pushstring          "toolTips.swf"
+      pushstring          "popovers.swf"
 -     newarray            2
 +     pushstring          "../../../xvm/mods/xvm.swf"
 +     newarray            3

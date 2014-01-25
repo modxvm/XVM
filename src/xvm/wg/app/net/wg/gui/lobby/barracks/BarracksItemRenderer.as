@@ -10,12 +10,14 @@ package net.wg.gui.lobby.barracks
    import flash.events.MouseEvent;
    import scaleform.clik.events.ButtonEvent;
    import net.wg.data.constants.SoundTypes;
-   import net.wg.gui.events.CrewEvent;
-   import net.wg.utils.ICommons;
-   import scaleform.clik.events.ListEvent;
    import __AS3__.vec.Vector;
    import flash.geom.Point;
+   import net.wg.gui.components.controls.VO.ActionPriceVO;
    import scaleform.clik.constants.InvalidationType;
+   import scaleform.clik.events.ListEvent;
+   import net.wg.data.constants.IconsTypes;
+   import net.wg.gui.events.CrewEvent;
+   import net.wg.utils.ICommons;
 
 
    public class BarracksItemRenderer extends SoundListItemRenderer
@@ -78,15 +80,7 @@ package net.wg.gui.lobby.barracks
 
       private var _isMouseOver:Boolean = false;
 
-      public function set useHandCursorOnClickArea(param1:Boolean) : void {
-         if(this.clickArea)
-         {
-            this.useHandCursor = param1;
-            this.tabEnabled = param1;
-         }
-      }
-
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          removeEventListener(MouseEvent.CLICK,this.onBarracksItemRendererClick,false);
          this.btnDissmiss.removeEventListener(ButtonEvent.CLICK,this.onBtnDissmissClick);
          this.btnDissmiss.removeEventListener(MouseEvent.ROLL_OVER,this.showTooltip,false);
@@ -130,34 +124,7 @@ package net.wg.gui.lobby.barracks
             this.actionPrice.dispose();
          }
          this.descrField = null;
-         super.dispose();
-      }
-
-      override protected function configUI() : void {
-         super.configUI();
-         tabChildren = false;
-         this.btnDissmiss.focusTarget = this;
-         this.btnDissmiss.addEventListener(ButtonEvent.CLICK,this.onBtnDissmissClick);
-         this.icon.mouseEnabled = this.iconRole.mouseEnabled = this.iconRank.mouseEnabled = false;
-         this.icon.mouseChildren = this.iconRole.mouseChildren = this.iconRank.mouseChildren = false;
-         addEventListener(MouseEvent.CLICK,this.onBarracksItemRendererClick,false,0,true);
-         this.addEventListener(MouseEvent.ROLL_OVER,this.rendererRollOver);
-         this.addEventListener(MouseEvent.ROLL_OUT,this.rendererRollOut);
-         this.btnDissmiss.addEventListener(MouseEvent.ROLL_OVER,this.showTooltip,false,0,true);
-         this.btnDissmiss.addEventListener(MouseEvent.ROLL_OUT,this.hideTooltip,false,0,true);
-         this.btnDissmiss.addEventListener(MouseEvent.CLICK,this.hideTooltip,false,0,true);
-         mouseChildren = true;
-         this.clickArea.buttonMode = true;
-      }
-
-      override protected function handleMouseRollOver(param1:MouseEvent) : void {
-         super.handleMouseRollOver(param1);
-         this._isMouseOver = true;
-      }
-
-      override protected function handleMouseRollOut(param1:MouseEvent) : void {
-         super.handleMouseRollOut(param1);
-         this._isMouseOver = false;
+         super.onDispose();
       }
 
       override public function setData(param1:Object) : void {
@@ -201,83 +168,25 @@ package net.wg.gui.lobby.barracks
          validateNow();
       }
 
-      public function onBtnDissmissClick(param1:ButtonEvent) : void {
-         if((this._inTank) || (this._inCurrentTank))
-         {
-            dispatchEvent(new CrewEvent(CrewEvent.UNLOAD_TANKMAN,data));
-         }
-         else
-         {
-            dispatchEvent(new CrewEvent(CrewEvent.DISMISS_TANKMAN,data));
-         }
+      override public function toString() : String {
+         return "[Scaleform BarracksItemRenderer " + name + "]";
       }
 
-      public function onBarracksItemRendererClick(param1:MouseEvent) : void {
-         if(param1.target == this.btnDissmiss)
-         {
-            return;
-         }
-         var _loc2_:ICommons = App.utils.commons;
-         if(_loc2_.isLeftButton(param1))
-         {
-            if(this._empty)
-            {
-               dispatchEvent(new CrewEvent(CrewEvent.SHOW_RECRUIT_WINDOW,null,true));
-            }
-            else
-            {
-               if(this._buy)
-               {
-                  dispatchEvent(new CrewEvent(CrewEvent.SHOW_BERTH_BUY_DIALOG));
-               }
-            }
-         }
-         if((_loc2_.isRightButton(param1)) && !this._buy && !this._empty)
-         {
-            dispatchEvent(new CrewEvent(CrewEvent.OPEN_PERSONAL_CASE,data,false,0));
-         }
+      override public function get enabled() : Boolean {
+         return super.enabled;
       }
 
-      private function showTooltip(param1:MouseEvent) : void {
-         setState("out");
-         if((this._inTank) || (this._inCurrentTank))
-         {
-            App.toolTipMgr.showComplex(TOOLTIPS.BARRACKS_TANKMEN_UNLOAD);
-         }
-         else
-         {
-            App.toolTipMgr.showComplex(TOOLTIPS.BARRACKS_TANKMEN_DISMISS);
-         }
+      override public function set enabled(param1:Boolean) : void {
+         super.enabled = param1;
+         mouseChildren = param1;
       }
 
-      private function hideTooltip(param1:MouseEvent) : void {
-         setState("over");
-         App.toolTipMgr.hide();
-         dispatchEvent(new ListEvent(ListEvent.ITEM_ROLL_OVER,true,true,-1,-1,-1,null,data));
-      }
-
-      private function rendererRollOver(param1:MouseEvent) : void {
-         dispatchEvent(new ListEvent(ListEvent.ITEM_ROLL_OVER,true,true,-1,-1,-1,null,data));
-      }
-
-      private function rendererRollOut(param1:MouseEvent) : void {
-         dispatchEvent(new ListEvent(ListEvent.ITEM_ROLL_OUT,true,true,-1,-1,-1,null,data));
-      }
-
-      override protected function getStatePrefixes() : Vector.<String> {
-         if(this._empty)
+      public function set useHandCursorOnClickArea(param1:Boolean) : void {
+         if(this.clickArea)
          {
-            return Vector.<String>(["empty_"]);
+            this.useHandCursor = param1;
+            this.tabEnabled = param1;
          }
-         if(this._buy)
-         {
-            return Vector.<String>(["buy_"]);
-         }
-         if(_selected)
-         {
-            return Vector.<String>(["selected_",""]);
-         }
-         return Vector.<String>([""]);
       }
 
       public function get inTank() : Boolean {
@@ -326,45 +235,45 @@ package net.wg.gui.lobby.barracks
          setState("up");
       }
 
-      private function updateControlsState() : void {
-         var _loc1_:* = !((this._buy) || (this._empty));
-         this.icon.visible = this.iconRank.visible = this.iconRole.visible = _loc1_;
-         this.btnDissmiss.visible = _loc1_;
-         if(this.buy)
+      override protected function configUI() : void {
+         super.configUI();
+         tabChildren = false;
+         this.btnDissmiss.focusTarget = this;
+         this.btnDissmiss.addEventListener(ButtonEvent.CLICK,this.onBtnDissmissClick);
+         this.icon.mouseEnabled = this.iconRole.mouseEnabled = this.iconRank.mouseEnabled = false;
+         this.icon.mouseChildren = this.iconRole.mouseChildren = this.iconRank.mouseChildren = false;
+         addEventListener(MouseEvent.CLICK,this.onBarracksItemRendererClick,false,0,true);
+         this.addEventListener(MouseEvent.ROLL_OVER,this.rendererRollOver);
+         this.addEventListener(MouseEvent.ROLL_OUT,this.rendererRollOut);
+         this.btnDissmiss.addEventListener(MouseEvent.ROLL_OVER,this.showTooltip,false,0,true);
+         this.btnDissmiss.addEventListener(MouseEvent.ROLL_OUT,this.hideTooltip,false,0,true);
+         this.btnDissmiss.addEventListener(MouseEvent.CLICK,this.hideTooltip,false,0,true);
+         mouseChildren = true;
+         this.clickArea.buttonMode = true;
+      }
+
+      override protected function getStatePrefixes() : Vector.<String> {
+         if(this._empty)
          {
-            soundType = SoundTypes.BARRACKS_BUY_SOUND_TYPE;
+            return Vector.<String>(["empty_"]);
          }
-         else
+         if(this._buy)
          {
-            if(this.empty)
-            {
-               soundType = SoundTypes.BARRACKS_EMPTY_SOUND_TYPE;
-            }
-            else
-            {
-               soundType = SoundTypes.BARRACKS_TANKMAN_SOUND_TYPE;
-            }
+            return Vector.<String>(["buy_"]);
          }
-      }
-
-      override public function toString() : String {
-         return "[Scaleform BarracksItemRenderer " + name + "]";
-      }
-
-      override public function get enabled() : Boolean {
-         return super.enabled;
-      }
-
-      override public function set enabled(param1:Boolean) : void {
-         super.enabled = param1;
-         mouseChildren = param1;
+         if(_selected)
+         {
+            return Vector.<String>(["selected_",""]);
+         }
+         return Vector.<String>([""]);
       }
 
       override protected function draw() : void {
          var _loc1_:String = null;
          var _loc2_:Point = null;
-         var _loc3_:String = null;
+         var _loc3_:ActionPriceVO = null;
          var _loc4_:String = null;
+         var _loc5_:String = null;
          super.draw();
          if(isInvalid(InvalidationType.STATE))
          {
@@ -415,7 +324,8 @@ package net.wg.gui.lobby.barracks
                   {
                      if(data.hasOwnProperty("actionPrc"))
                      {
-                        this.actionPrice.setData(data.actionPrc,data.price,data.defPrice,IconText.GOLD);
+                        _loc3_ = new ActionPriceVO(data.actionPrc,data.price,data.defPrice,IconsTypes.GOLD);
+                        this.actionPrice.setData(_loc3_);
                      }
                      else
                      {
@@ -440,24 +350,24 @@ package net.wg.gui.lobby.barracks
                }
                if(!((this._buy) || (this.empty)))
                {
-                  _loc3_ = data.specializationLevel + "%";
-                  _loc4_ = App.utils.locale.makeString(MENU.tankmen(data.tankType));
+                  _loc4_ = data.specializationLevel + "%";
+                  _loc5_ = App.utils.locale.makeString(MENU.tankmen(data.tankType));
                   if(!data.isInSelfVehicleClass)
                   {
-                     this.levelSpecializationMain.htmlText = " <font color=\'" + DEBUFF + "\'>" + _loc3_ + "</font>";
-                     this.role.htmlText = this.role.htmlText + (", <font color=\'" + DEBUFF + "\'>" + _loc4_ + " " + data.vehicleType + "</font>");
+                     this.levelSpecializationMain.htmlText = " <font color=\'" + DEBUFF + "\'>" + _loc4_ + "</font>";
+                     this.role.htmlText = this.role.htmlText + (", <font color=\'" + DEBUFF + "\'>" + _loc5_ + " " + data.vehicleType + "</font>");
                   }
                   else
                   {
                      if(!data.isInSelfVehicleType)
                      {
-                        this.levelSpecializationMain.htmlText = " <font color=\'" + DEBUFF + "\'>" + _loc3_ + "</font>";
-                        this.role.htmlText = this.role.htmlText + (", " + _loc4_ + " <font color=\'" + DEBUFF + "\'> " + data.vehicleType + "</font>");
+                        this.levelSpecializationMain.htmlText = " <font color=\'" + DEBUFF + "\'>" + _loc4_ + "</font>";
+                        this.role.htmlText = this.role.htmlText + (", " + _loc5_ + " <font color=\'" + DEBUFF + "\'> " + data.vehicleType + "</font>");
                      }
                      else
                      {
-                        this.levelSpecializationMain.htmlText = _loc3_;
-                        this.role.htmlText = this.role.htmlText + (", " + _loc4_ + " " + data.vehicleType);
+                        this.levelSpecializationMain.htmlText = _loc4_;
+                        this.role.htmlText = this.role.htmlText + (", " + _loc5_ + " " + data.vehicleType);
                      }
                   }
                   this.tankmanName.text = data.firstname + " " + data.lastname;
@@ -465,6 +375,100 @@ package net.wg.gui.lobby.barracks
                   this.lockMsg.text = data.lockMessage;
                }
             }
+         }
+      }
+
+      override protected function handleMouseRollOver(param1:MouseEvent) : void {
+         super.handleMouseRollOver(param1);
+         this._isMouseOver = true;
+      }
+
+      override protected function handleMouseRollOut(param1:MouseEvent) : void {
+         super.handleMouseRollOut(param1);
+         this._isMouseOver = false;
+      }
+
+      private function updateControlsState() : void {
+         var _loc1_:* = !((this._buy) || (this._empty));
+         this.icon.visible = this.iconRank.visible = this.iconRole.visible = _loc1_;
+         this.btnDissmiss.visible = _loc1_;
+         if(this.buy)
+         {
+            soundType = SoundTypes.BARRACKS_BUY_SOUND_TYPE;
+         }
+         else
+         {
+            if(this.empty)
+            {
+               soundType = SoundTypes.BARRACKS_EMPTY_SOUND_TYPE;
+            }
+            else
+            {
+               soundType = SoundTypes.BARRACKS_TANKMAN_SOUND_TYPE;
+            }
+         }
+      }
+
+      private function showTooltip(param1:MouseEvent) : void {
+         setState("out");
+         if((this._inTank) || (this._inCurrentTank))
+         {
+            App.toolTipMgr.showComplex(TOOLTIPS.BARRACKS_TANKMEN_UNLOAD);
+         }
+         else
+         {
+            App.toolTipMgr.showComplex(TOOLTIPS.BARRACKS_TANKMEN_DISMISS);
+         }
+      }
+
+      private function hideTooltip(param1:MouseEvent) : void {
+         setState("over");
+         App.toolTipMgr.hide();
+         dispatchEvent(new ListEvent(ListEvent.ITEM_ROLL_OVER,true,true,-1,-1,-1,null,data));
+      }
+
+      private function rendererRollOver(param1:MouseEvent) : void {
+         dispatchEvent(new ListEvent(ListEvent.ITEM_ROLL_OVER,true,true,-1,-1,-1,null,data));
+      }
+
+      private function rendererRollOut(param1:MouseEvent) : void {
+         dispatchEvent(new ListEvent(ListEvent.ITEM_ROLL_OUT,true,true,-1,-1,-1,null,data));
+      }
+
+      public function onBtnDissmissClick(param1:ButtonEvent) : void {
+         if((this._inTank) || (this._inCurrentTank))
+         {
+            dispatchEvent(new CrewEvent(CrewEvent.UNLOAD_TANKMAN,data));
+         }
+         else
+         {
+            dispatchEvent(new CrewEvent(CrewEvent.DISMISS_TANKMAN,data));
+         }
+      }
+
+      public function onBarracksItemRendererClick(param1:MouseEvent) : void {
+         if(param1.target == this.btnDissmiss)
+         {
+            return;
+         }
+         var _loc2_:ICommons = App.utils.commons;
+         if(_loc2_.isLeftButton(param1))
+         {
+            if(this._empty)
+            {
+               dispatchEvent(new CrewEvent(CrewEvent.SHOW_RECRUIT_WINDOW,null,true));
+            }
+            else
+            {
+               if(this._buy)
+               {
+                  dispatchEvent(new CrewEvent(CrewEvent.SHOW_BERTH_BUY_DIALOG));
+               }
+            }
+         }
+         if((_loc2_.isRightButton(param1)) && !this._buy && !this._empty)
+         {
+            dispatchEvent(new CrewEvent(CrewEvent.OPEN_PERSONAL_CASE,data,false,0));
          }
       }
    }

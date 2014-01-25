@@ -53,7 +53,7 @@ package net.wg.gui.lobby.questsWindow.data
          this._conditions = param1;
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          if(this._descr)
          {
             this._descr.dispose();
@@ -69,7 +69,7 @@ package net.wg.gui.lobby.questsWindow.data
             this._conditions.splice(0,this._conditions.length);
             this._conditions = null;
          }
-         super.dispose();
+         super.onDispose();
       }
    }
 

@@ -1,17 +1,20 @@
 package net.wg.gui.components.advanced
 {
    import scaleform.clik.core.UIComponent;
+   import flash.display.Sprite;
    import net.wg.infrastructure.interfaces.IGroupedControl;
    import flash.display.MovieClip;
-   import flash.display.Sprite;
-   import scaleform.clik.constants.InvalidationType;
    import scaleform.clik.events.IndexEvent;
+   import scaleform.clik.constants.InvalidationType;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import net.wg.infrastructure.events.LifeCycleEvent;
+   import net.wg.infrastructure.interfaces.entity.IDAAPIEntity;
    import net.wg.utils.IAssertable;
    import net.wg.infrastructure.exceptions.ArgumentException;
-   import net.wg.infrastructure.interfaces.entity.IDisposable;
    import net.wg.infrastructure.interfaces.IViewStackContent;
    import flash.utils.getDefinitionByName;
    import net.wg.gui.events.ViewStackEvent;
+   import net.wg.infrastructure.exceptions.InfrastructureException;
 
 
    public class ViewStack extends UIComponent
@@ -28,15 +31,64 @@ package net.wg.gui.components.advanced
 
       public var cachedViews:Object;
 
-      private var depth:Number = 0;
+      protected var container:Sprite;
 
       private var _targetGroup:IGroupedControl = null;
 
-      public var currentView:MovieClip;
+      private var _currentView:MovieClip;
 
       private var _currentLinkage:String;
 
-      protected var container:Sprite;
+      override public function toString() : String {
+         return "[WG ViewStack " + name + "]";
+      }
+
+      public function show(param1:String) : MovieClip {
+         var _loc2_:MovieClip = this.createView(param1);
+         this.setCurrentView(_loc2_,param1,true);
+         if(_loc2_ != null)
+         {
+            _loc2_.visible = true;
+         }
+         invalidate();
+         return _loc2_;
+      }
+
+      public function get targetGroup() : String {
+         return this._targetGroup.name;
+      }
+
+      public function set targetGroup(param1:String) : void {
+         if(param1 != "")
+         {
+            this.assertTargetGroup(param1);
+            this.groupRef = IGroupedControl(parent[param1]);
+         }
+      }
+
+      public function set groupRef(param1:IGroupedControl) : void {
+         if(this._targetGroup != param1)
+         {
+            if(this._targetGroup != null)
+            {
+               this._targetGroup.removeEventListener(IndexEvent.INDEX_CHANGE,this.onChangeViewHandler);
+            }
+            this._targetGroup = param1;
+            if(this._targetGroup != null)
+            {
+               this._targetGroup.addEventListener(IndexEvent.INDEX_CHANGE,this.onChangeViewHandler);
+               this.changeView();
+            }
+         }
+      }
+
+      public function get currentLinkage() : String {
+         return this._currentLinkage;
+      }
+
+      public function get currentView() : MovieClip {
+         return this._currentView;
+      }
 
       override protected function configUI() : void {
          super.configUI();
@@ -54,35 +106,43 @@ package net.wg.gui.components.advanced
          this.container.scaleY = 1 / scaleY;
       }
 
-      public function get targetGroup() : String {
-         return this._targetGroup.name;
-      }
-
-      public function set targetGroup(param1:String) : void {
-         var _loc2_:IGroupedControl = null;
-         if(param1 != "")
+      override protected function onDispose() : void {
+         var _loc1_:IDisposable = null;
+         var _loc2_:String = null;
+         var _loc3_:uint = 0;
+         if(this._targetGroup != null)
          {
-            this.assertTargetGroup(param1);
-            _loc2_ = IGroupedControl(parent[param1]);
-            this.groupRef = _loc2_;
+            this._targetGroup.removeEventListener(IndexEvent.INDEX_CHANGE,this.onChangeViewHandler);
+            this._targetGroup = null;
          }
-      }
-
-      public function set groupRef(param1:IGroupedControl) : void {
-         var _loc2_:IGroupedControl = param1;
-         if(this._targetGroup != _loc2_)
+         if(this.container)
          {
-            if(this._targetGroup != null)
+            if(this.cache)
             {
-               this._targetGroup.removeEventListener(IndexEvent.INDEX_CHANGE,this.onChangeViewHandler);
+               for (_loc2_ in this.cachedViews)
+               {
+                  this.cachedViews[_loc2_].removeEventListener(LifeCycleEvent.ON_AFTER_DISPOSE,this.onDisposeSubViewHandler);
+                  this.disposeSubView(this.cachedViews[_loc2_]);
+               }
+               this.cachedViews = null;
             }
-            this._targetGroup = _loc2_;
-            if(this._targetGroup != null)
+            if(this.container.numChildren > 0)
             {
-               this._targetGroup.addEventListener(IndexEvent.INDEX_CHANGE,this.onChangeViewHandler);
-               this.changeView();
+               _loc3_ = this.container.numChildren-1;
+               while(_loc3_ > 0)
+               {
+                  _loc1_ = IDisposable(this.container.getChildAt(_loc3_));
+                  if(!(_loc1_  is  IDAAPIEntity))
+                  {
+                     _loc1_.dispose();
+                  }
+                  _loc3_--;
+               }
             }
+            removeChild(this.container);
+            this.container = null;
          }
+         super.onDispose();
       }
 
       private function assertTargetGroup(param1:String) : void {
@@ -94,11 +154,6 @@ package net.wg.gui.components.advanced
          var _loc3_:IAssertable = App.utils.asserter;
          _loc3_.assert(parent.hasOwnProperty(param1),"container \'" + parent + "\' has no " + _loc2_,ArgumentException);
          _loc3_.assert(parent[param1]  is  IGroupedControl,"container \'" + parent + "\'  must implements IGroupController interface");
-         var _loc4_:IGroupedControl = IGroupedControl(parent[param1]);
-      }
-
-      private function onChangeViewHandler(param1:IndexEvent) : void {
-         this.changeView();
       }
 
       private function changeView() : void {
@@ -125,29 +180,30 @@ package net.wg.gui.components.advanced
          }
       }
 
-      public function show(param1:String) : MovieClip {
-         if(this.currentView != null)
+      private function setCurrentView(param1:MovieClip, param2:String, param3:Boolean) : void {
+         if(this._currentView != null)
          {
-            if(this.currentView["__cached__"] == true)
+            this._currentView.removeEventListener(LifeCycleEvent.ON_AFTER_DISPOSE,this.onDisposeSubViewHandler);
+            if(this._currentView["__cached__"] == true)
             {
-               this.currentView.visible = false;
+               this._currentView.visible = false;
             }
             else
             {
-               this.container.removeChild(this.currentView);
-               (this.currentView as IDisposable).dispose();
-               this.currentView = null;
+               this.container.removeChild(this._currentView);
+               if((param3) && !(param1  is  IDAAPIEntity))
+               {
+                  (this._currentView as IDisposable).dispose();
+               }
+               this._currentView = null;
             }
          }
-         var _loc2_:MovieClip = this.createView(param1);
-         this.currentView = _loc2_;
-         this._currentLinkage = param1;
-         if(_loc2_ != null)
+         this._currentView = param1;
+         if(this._currentView != null)
          {
-            _loc2_.visible = true;
+            this._currentView.addEventListener(LifeCycleEvent.ON_AFTER_DISPOSE,this.onDisposeSubViewHandler);
          }
-         invalidate();
-         return _loc2_;
+         this._currentLinkage = param2;
       }
 
       private function createView(param1:String) : UIComponent {
@@ -170,6 +226,7 @@ package net.wg.gui.components.advanced
                _loc2_ = new _loc3_() as UIComponent;
             }
             _loc2_.visible = false;
+            _loc2_.addEventListener(LifeCycleEvent.ON_AFTER_DISPOSE,this.onDisposeSubViewHandler);
             this.container.addChild(_loc2_);
             _loc2_.validateNow();
             dispatchEvent(new ViewStackEvent(ViewStackEvent.NEED_UPDATE,IViewStackContent(_loc2_),param1));
@@ -177,49 +234,52 @@ package net.wg.gui.components.advanced
             {
                _loc2_["__cached__"] = true;
                this.cachedViews[param1] = _loc2_;
-               _loc2_ = _loc2_;
             }
          }
          dispatchEvent(new ViewStackEvent(ViewStackEvent.VIEW_CHANGED,IViewStackContent(_loc2_),param1));
          return _loc2_;
       }
 
-      override public function dispose() : void {
-         var _loc1_:IDisposable = null;
-         var _loc2_:String = null;
-         if(this._targetGroup != null)
-         {
-            this._targetGroup.removeEventListener(IndexEvent.INDEX_CHANGE,this.onChangeViewHandler);
-            this._targetGroup = null;
-         }
-         if(this.container)
-         {
-            if(this.cache)
-            {
-               for (_loc2_ in this.cachedViews)
-               {
-                  delete this.cachedViews[[_loc2_]];
-               }
-               this.cachedViews = null;
-            }
-            while(this.container.numChildren > 0)
-            {
-               _loc1_ = IDisposable(this.container.getChildAt(0));
-               _loc1_.dispose();
-               this.container.removeChildAt(0);
-            }
-            this.removeChild(this.container);
-            this.container = null;
-         }
-         super.dispose();
+      private function onChangeViewHandler(param1:IndexEvent) : void {
+         this.changeView();
       }
 
-      override public function toString() : String {
-         return "[WG ViewStack " + name + "]";
+      private function onDisposeSubViewHandler(param1:LifeCycleEvent) : void {
+         var _loc2_:MovieClip = MovieClip(param1.target);
+         if(_loc2_)
+         {
+            this.disposeSubView(_loc2_);
+         }
       }
 
-      public function get currentLinkage() : String {
-         return this._currentLinkage;
+      private function disposeSubView(param1:MovieClip) : void {
+         var _loc3_:String = null;
+         param1.removeEventListener(LifeCycleEvent.ON_AFTER_DISPOSE,this.onDisposeSubViewHandler);
+         var _loc2_:* = false;
+         if(this.container.contains(param1))
+         {
+            this.container.removeChild(param1);
+         }
+         if(this._currentView == param1)
+         {
+            this.setCurrentView(null,null,false);
+            _loc2_ = true;
+         }
+         for (_loc3_ in this.cachedViews)
+         {
+            if(this.cachedViews[_loc3_] == param1)
+            {
+               delete this.cachedViews[[_loc3_]];
+               _loc2_ = true;
+               break;
+            }
+         }
+         if(param1  is  IDisposable)
+         {
+            IDisposable(param1).dispose();
+         }
+         var _loc4_:* = "View \' " + param1.name + "\'is disposed, but was not removed from viewStack \'" + name + "\'!";
+         App.utils.asserter.assert(_loc2_,_loc4_,InfrastructureException);
       }
    }
 

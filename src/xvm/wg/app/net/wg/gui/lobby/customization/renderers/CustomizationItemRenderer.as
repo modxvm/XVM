@@ -7,12 +7,14 @@ package net.wg.gui.lobby.customization.renderers
    import net.wg.gui.components.controls.IconText;
    import flash.display.Sprite;
    import flash.text.TextField;
+   import __AS3__.vec.Vector;
    import flash.events.MouseEvent;
    import scaleform.clik.events.InputEvent;
    import net.wg.gui.events.UILoaderEvent;
+   import net.wg.gui.components.controls.VO.ActionPriceVO;
    import scaleform.clik.constants.InvalidationType;
+   import net.wg.data.constants.IconsTypes;
    import flash.geom.Point;
-   import __AS3__.vec.Vector;
    import flash.events.Event;
    import net.wg.data.constants.SoundTypes;
 
@@ -61,9 +63,9 @@ package net.wg.gui.lobby.customization.renderers
 
       protected var actionPrc:Number = 0;
 
-      private var costVisible:Boolean = false;
+      protected var prefixesVector:Vector.<String> = null;
 
-      private var texturePath:String;
+      private var costVisible:Boolean = false;
 
       private var _current:Boolean = false;
 
@@ -71,45 +73,7 @@ package net.wg.gui.lobby.customization.renderers
 
       private var _demoMode:String = "off";
 
-      private var _useHandCursorForse:Boolean = false;
-
-      public function get current() : Boolean {
-         return this._current;
-      }
-
-      public function set current(param1:Boolean) : void {
-         if(this._current == param1)
-         {
-            return;
-         }
-         this._current = param1;
-         setState(state);
-      }
-
-      public function get demoMode() : String {
-         return this._demoMode;
-      }
-
-      public function set demoMode(param1:String) : void {
-         var _loc2_:* = false;
-         if(this._demoMode == param1)
-         {
-            return;
-         }
-         this._demoMode = param1;
-         _loc2_ = (this._useHandCursorForse) || this._demoMode == DEMO_OFF;
-         super.enabled = _loc2_;
-         useHandCursor = _loc2_;
-         setState(state);
-      }
-
-      public function get useHandCursorForse() : Boolean {
-         return this._useHandCursorForse;
-      }
-
-      public function set useHandCursorForse(param1:Boolean) : void {
-         this._useHandCursorForse = param1;
-      }
+      private var _useHandCursorForce:Boolean = false;
 
       override public function setData(param1:Object) : void {
          var _loc2_:Boolean = this.isNew;
@@ -145,8 +109,8 @@ package net.wg.gui.lobby.customization.renderers
          invalidateData();
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          removeEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
          removeEventListener(MouseEvent.ROLL_OUT,this.hideTooltip);
          removeEventListener(MouseEvent.ROLL_OVER,handleMouseRollOver);
@@ -157,20 +121,73 @@ package net.wg.gui.lobby.customization.renderers
          removeEventListener(InputEvent.INPUT,handleInput);
          this.uiLoader.dispose();
          this.uiLoader.removeEventListener(UILoaderEvent.COMPLETE,this.onImageLoadComplete);
+         this.uiLoader = null;
          if((this.newMarker) && (contains(this.newMarker)))
          {
             removeChild(this.newMarker);
+            this.newMarker = null;
          }
          if(this.actionPrice)
          {
             this.actionPrice.dispose();
+            this.actionPrice = null;
          }
+         this.costField.dispose();
+         this.costField = null;
+         this.costFrame = null;
+         this.border = null;
+         this.hitMc = null;
+         this.targetIcon = null;
+         this.freeTF = null;
          data = null;
       }
 
+      override public function set enabled(param1:Boolean) : void {
+         super.enabled = param1;
+         mouseChildren = true;
+      }
+
+      public function get current() : Boolean {
+         return this._current;
+      }
+
+      public function set current(param1:Boolean) : void {
+         if(this._current == param1)
+         {
+            return;
+         }
+         this._current = param1;
+         setState(state);
+      }
+
+      public function get demoMode() : String {
+         return this._demoMode;
+      }
+
+      public function set demoMode(param1:String) : void {
+         if(this._demoMode == param1)
+         {
+            return;
+         }
+         this._demoMode = param1;
+         var _loc2_:Boolean = (this._useHandCursorForce) || this._demoMode == DEMO_OFF;
+         super.enabled = _loc2_;
+         useHandCursor = _loc2_;
+         setState(state);
+      }
+
+      public function get useHandCursorForce() : Boolean {
+         return this._useHandCursorForce;
+      }
+
+      public function set useHandCursorForce(param1:Boolean) : void {
+         this._useHandCursorForce = param1;
+      }
+
       override protected function configUI() : void {
+         var _loc1_:* = false;
          super.configUI();
-         var _loc1_:Boolean = (this._useHandCursorForse) || this._demoMode == DEMO_OFF;
+         _loc1_ = (this._useHandCursorForce) || this._demoMode == DEMO_OFF;
          super.enabled = _loc1_;
          useHandCursor = _loc1_;
          this.uiLoader.addEventListener(UILoaderEvent.COMPLETE,this.onImageLoadComplete);
@@ -194,13 +211,9 @@ package net.wg.gui.lobby.customization.renderers
          }
       }
 
-      override public function set enabled(param1:Boolean) : void {
-         super.enabled = param1;
-         mouseChildren = true;
-      }
-
       override protected function draw() : void {
          var _loc1_:* = false;
+         var _loc2_:ActionPriceVO = null;
          super.draw();
          if(isInvalid(InvalidationType.DATA))
          {
@@ -211,7 +224,8 @@ package net.wg.gui.lobby.customization.renderers
             {
                if(this.costVisible)
                {
-                  this.actionPrice.setData(this.actionPrc,this.priceVal,this.defPriceVal,this.isGold?IconText.GOLD:IconText.CREDITS);
+                  _loc2_ = new ActionPriceVO(this.actionPrc,this.priceVal,this.defPriceVal,this.isGold?IconsTypes.GOLD:IconsTypes.CREDITS);
+                  this.actionPrice.setData(_loc2_);
                   this.costField.visible = !this.actionPrice.visible && !_loc1_;
                }
                else
@@ -239,7 +253,7 @@ package net.wg.gui.lobby.customization.renderers
                   this.freeTF.visible = false;
                }
                this.costField.text = this.costVal;
-               this.costField.icon = this.isGold?IconText.GOLD:IconText.CREDITS;
+               this.costField.icon = this.isGold?IconsTypes.GOLD:IconsTypes.CREDITS;
             }
             if(this.targetIcon)
             {
@@ -252,21 +266,6 @@ package net.wg.gui.lobby.customization.renderers
             this.checkTooltip();
          }
       }
-
-      protected function checkTooltip() : void {
-         if(this.demoMode == DEMO_NEW || this.demoMode == DEMO_CURRENT)
-         {
-            return;
-         }
-         var _loc1_:Point = new Point(mouseX,mouseY);
-         _loc1_ = this.localToGlobal(_loc1_);
-         if((this.hitTestPoint(_loc1_.x,_loc1_.y,true)) && (this._isMouseOver))
-         {
-            this.showTooltip();
-         }
-      }
-
-      protected var prefixesVector:Vector.<String> = null;
 
       override protected function getStatePrefixes() : Vector.<String> {
          if(this.prefixesVector)
@@ -295,6 +294,19 @@ package net.wg.gui.lobby.customization.renderers
          return this.prefixesVector;
       }
 
+      protected function checkTooltip() : void {
+         if(this.demoMode == DEMO_NEW || this.demoMode == DEMO_CURRENT)
+         {
+            return;
+         }
+         var _loc1_:Point = new Point(mouseX,mouseY);
+         _loc1_ = this.localToGlobal(_loc1_);
+         if((this.hitTestPoint(_loc1_.x,_loc1_.y,true)) && (this._isMouseOver))
+         {
+            this.showTooltip();
+         }
+      }
+
       protected function showIsNew(param1:Boolean) : void {
          this.isNew = param1;
          if(param1)
@@ -316,14 +328,8 @@ package net.wg.gui.lobby.customization.renderers
          }
       }
 
-      protected function onImageLoadComplete(param1:Event) : void {
-         invalidateSize();
-         validateNow();
-      }
-
       private function loadTexture(param1:String) : void {
-         this.texturePath = param1;
-         if(!(this.texturePath == null) && !(this.texturePath.length == 0))
+         if(!(param1 == null) && !(param1.length == 0))
          {
             this.uiLoader.source = param1;
          }
@@ -344,6 +350,11 @@ package net.wg.gui.lobby.customization.renderers
       private function hideTooltip(param1:MouseEvent=null) : void {
          this._isMouseOver = false;
          App.toolTipMgr.hide();
+      }
+
+      protected function onImageLoadComplete(param1:Event) : void {
+         invalidateSize();
+         validateNow();
       }
    }
 

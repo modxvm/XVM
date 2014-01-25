@@ -57,9 +57,13 @@ package net.wg.gui.lobby.profile
             this.screenBg.dispose();
             this.screenBg = null;
          }
-         this.tabNavigator.dispose();
+         this.tabNavigator = null;
          App.gameInputMgr.clearKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN);
          super.onDispose();
+      }
+
+      override public function get isModal() : Boolean {
+         return true;
       }
    }
 

@@ -28,11 +28,11 @@ package net.wg.gui.lobby.questsWindow.components
          addEventListener(MouseEvent.ROLL_OVER,this.showStatusTooltip);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          removeEventListener(MouseEvent.CLICK,hideTooltip);
          removeEventListener(MouseEvent.ROLL_OUT,hideTooltip);
          removeEventListener(MouseEvent.ROLL_OVER,this.showStatusTooltip);
-         super.dispose();
+         super.onDispose();
       }
 
       public function setStatus(param1:String) : void {

@@ -18,6 +18,7 @@ package net.wg.gui.lobby.techtree
    import scaleform.clik.events.IndexEvent;
    import scaleform.gfx.TextFieldEx;
    import scaleform.clik.constants.InvalidationType;
+   import flash.display.InteractiveObject;
    import net.wg.data.constants.LobbyMetrics;
 
 
@@ -106,7 +107,7 @@ package net.wg.gui.lobby.techtree
       public function as_setInventoryItems(param1:Array) : void {
          if(this.nationTree != null)
          {
-            this.nationTree.setNodesStates(NodeState.IN_INVENTORY,param1,NodeData.NODE_DUMP_FIELD);
+            this.nationTree.setNodesStates(NodeState.IN_INVENTORY,param1);
          }
       }
 
@@ -184,6 +185,11 @@ package net.wg.gui.lobby.techtree
          }
       }
 
+      override protected function onInitModalFocus(param1:InteractiveObject) : void {
+         super.onInitModalFocus(param1);
+         setFocus(this.nationsBar);
+      }
+
       protected function updateLayouts() : void {
          if(this.nationsBar != null)
          {
@@ -204,6 +210,10 @@ package net.wg.gui.lobby.techtree
             this.background.width = _width;
             this.background.height = _height + LobbyMetrics.LOBBY_MESSENGER_HEIGHT;
          }
+      }
+
+      override public function get isModal() : Boolean {
+         return true;
       }
 
       private function handleIndexChange(param1:IndexEvent) : void {

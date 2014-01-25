@@ -11,6 +11,10 @@ package net.wg.data.constants
 
       public static const WINDOW:String = "WindowUI";
 
+      public static const POPOVER:String = "PopOverUI";
+
+      public static const SMART_POPOVER:String = "SmartPopOverUI";
+
       public static const POPUP_MODAL:String = "PopUpModal";
 
       public static const VIEW_LOAD_CURTAIN:String = "ViewLoadCurtain";
@@ -92,6 +96,16 @@ package net.wg.data.constants
       public static const CANDIDATE_LIST_ITEM_RENDERER_UI:String = "CandidateListItemRendererDragUI";
 
       public static const CS_DRAG_DROP_DELEGATE:String = "net.wg.gui.cyberSport.helpers.CSDragDropDelegate";
+
+      public static const DELIMETER_UI:String = "Delimeter_UI";
+
+      public static const SUBTASK_COMPONENT_UI:String = "SubtaskComponent_UI";
+
+      public static const CURRENT_TAB_UI:String = "CurrentTab_UI";
+
+      public static const FUTURE_TAB_UI:String = "FutureTab_UI";
+
+      public static const BR_SUBTASK_COMPONENT_UI:String = "BR_SubtaskComponent_UI";
    }
 
 }

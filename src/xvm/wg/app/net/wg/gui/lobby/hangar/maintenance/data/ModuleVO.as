@@ -8,7 +8,6 @@ package net.wg.gui.lobby.hangar.maintenance.data
    {
           
       public function ModuleVO(param1:Object) {
-         this.userCredits = [];
          super(param1);
          this._originalHash = param1;
       }
@@ -49,7 +48,7 @@ package net.wg.gui.lobby.hangar.maintenance.data
 
       public var goldEqsForCredits:Boolean;
 
-      public var userCredits:Array;
+      public var userCredits:Object = null;
 
       public function clone(param1:int) : ModuleVO {
          var _loc2_:ModuleVO = new ModuleVO(this._originalHash);
@@ -69,11 +68,11 @@ package net.wg.gui.lobby.hangar.maintenance.data
          return this.defPrices[this.currency == Currencies.CREDITS?0:1];
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.prices.splice(0);
          this.fits.splice(0);
          this._originalHash = null;
-         super.dispose();
+         super.onDispose();
       }
    }
 

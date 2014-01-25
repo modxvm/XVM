@@ -4,8 +4,9 @@ package net.wg.gui.lobby.header
    import flash.events.MouseEvent;
    import flash.display.MovieClip;
    import flash.text.TextField;
+   import net.wg.gui.components.controls.UserNameField;
    import net.wg.gui.components.advanced.ClanEmblem;
-   import flash.text.TextFormat;
+   import net.wg.data.VO.UserVO;
 
 
    public class TankPanel extends UIComponent
@@ -18,6 +19,8 @@ package net.wg.gui.lobby.header
       private static const INVALIDATE_CLAN_EMBLEM:String = "ClanEmblem";
 
       private static const INVALIDATE_TANK_ELITE:String = "TankElite";
+
+      private static const TEAM_KILLER_COLOR:int = 60159;
 
       private static function showTooltip(param1:MouseEvent) : void {
          App.toolTipMgr.showComplex(TOOLTIPS.HEADER_ELITEICON);
@@ -33,7 +36,7 @@ package net.wg.gui.lobby.header
 
       public var tank_type:TextField;
 
-      public var account_name:TextField;
+      public var account_name:UserNameField;
 
       public var clan_name:TextField;
 
@@ -54,7 +57,7 @@ package net.wg.gui.lobby.header
          this.elite.addEventListener(MouseEvent.ROLL_OUT,hideTooltip);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.elite.removeEventListener(MouseEvent.ROLL_OVER,showTooltip);
          this.elite.removeEventListener(MouseEvent.ROLL_OUT,hideTooltip);
          this.elite = null;
@@ -64,7 +67,7 @@ package net.wg.gui.lobby.header
          this.clan_name = null;
          this.clanEmblem.dispose();
          this.clanEmblem = null;
-         super.dispose();
+         super.onDispose();
       }
 
       public function setClanEmblem(param1:String) : void {
@@ -85,15 +88,19 @@ package net.wg.gui.lobby.header
          }
       }
 
-      public function setAccountName(param1:String, param2:Boolean, param3:Boolean) : void {
-         this.account_name.text = param1;
-         var _loc4_:TextFormat = this.account_name.getTextFormat();
-         if(param2)
+      public function setAccountName(param1:String, param2:String, param3:String, param4:Boolean, param5:Boolean) : void {
+         if(param4)
          {
-            _loc4_.color = 60159;
-            this.account_name.setTextFormat(_loc4_);
+            this.account_name.textColor = TEAM_KILLER_COLOR;
          }
-         this._clanEmblemVisible = param3;
+         this.account_name.userVO = new UserVO(
+            {
+               "fullName":param1,
+               "userName":param2,
+               "clanAbbrev":param3
+            }
+         );
+         this._clanEmblemVisible = param5;
          invalidate(INVALIDATE_CLAN_EMBLEM);
       }
 

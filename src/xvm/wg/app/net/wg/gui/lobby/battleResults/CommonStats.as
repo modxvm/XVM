@@ -13,9 +13,12 @@ package net.wg.gui.lobby.battleResults
    import net.wg.gui.lobby.questsWindow.SubtasksList;
    import scaleform.clik.events.ButtonEvent;
    import net.wg.gui.events.QuestEvent;
+   import net.wg.infrastructure.interfaces.IUserProps;
    import net.wg.utils.ILocale;
    import net.wg.infrastructure.interfaces.IFormattedInt;
    import scaleform.clik.data.DataProvider;
+   import net.wg.data.constants.Linkages;
+   import flash.display.InteractiveObject;
 
 
    public class CommonStats extends UIComponent implements IViewStackContent
@@ -119,7 +122,7 @@ package net.wg.gui.lobby.battleResults
 
       public var noProgressTF:TextField;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.detailsMc.detailedReportBtn.removeEventListener(ButtonEvent.CLICK,this.onDetailsClick);
          this.efficiencyList.removeEventListener(FinalStatisticEvent.EFFENSY_ICON_ROLL_OVER,onIconRollOver);
          this.efficiencyList.removeEventListener(FinalStatisticEvent.EFFENSY_ICON_ROLL_OUT,onIconRollOut);
@@ -138,7 +141,7 @@ package net.wg.gui.lobby.battleResults
             this.questList.dispose();
             this.questList = null;
          }
-         super.dispose();
+         super.onDispose();
       }
 
       public function update(param1:Object) : void {
@@ -151,6 +154,7 @@ package net.wg.gui.lobby.battleResults
       }
 
       override protected function configUI() : void {
+         var _loc8_:IUserProps = null;
          this.width = Math.round(this.width);
          this.height = Math.round(this.height);
          this.upperShadow.mouseEnabled = false;
@@ -165,7 +169,7 @@ package net.wg.gui.lobby.battleResults
          var _loc4_:Array = _loc1_.quests as Array;
          var _loc5_:ILocale = App.utils.locale;
          var _loc6_:IFormattedInt = _loc5_.parseFormattedInteger(_loc2_.creditsStr);
-         this.creditsCounter.formattedNumber = _loc5_.cutCharsBeforeNumber(_loc2_.creditsStr);
+         this.creditsCounter.formattedNumber = _loc2_.creditsStr;
          this.creditsCounter.localizationSymbol = _loc6_.delimiter;
          this.creditsCounter.playAnim = !(this.creditsCounterNumber == _loc6_.value);
          this.creditsCounterNumber = _loc6_.value;
@@ -184,16 +188,22 @@ package net.wg.gui.lobby.battleResults
          this.arenaNameLbl.text = _loc3_.arenaStr;
          this.tankSlot.areaIcon.source = _loc3_.arenaIcon;
          this.tankSlot.tankIcon.source = _loc3_.tankIcon;
-         App.utils.commons.formatPlayerName(this.tankSlot.playerNameLbl,_loc3_.playerNameStr,_loc3_.clanNameStr,_loc3_.regionNameStr);
+         App.utils.commons.formatPlayerName(this.tankSlot.playerNameLbl,App.utils.commons.getUserProps(_loc3_.playerNameStr,_loc3_.clanNameStr,_loc3_.regionNameStr));
          this.tankSlot.tankNameLbl.text = _loc3_.vehicleName;
          this.tankSlot.arenaCreateDateLbl.text = _loc3_.arenaCreateTimeStr;
-         if(_loc2_.killerID > 0)
+         if((_loc2_.isPrematureLeave) || _loc2_.killerID <= 0)
          {
-            App.utils.commons.formatPlayerName(this.tankSlot.vehicleStateLbl,_loc3_.killerNameStr,_loc3_.killerClanNameStr,_loc3_.killerRegionNameStr,false,_loc3_.vehicleStatePrefixStr,_loc3_.vehicleStateSuffixStr);
+            this.tankSlot.vehicleStateLbl.text = _loc3_.vehicleStateStr;
          }
          else
          {
-            this.tankSlot.vehicleStateLbl.text = _loc3_.vehicleStateStr;
+            if(_loc2_.killerID > 0)
+            {
+               _loc8_ = App.utils.commons.getUserProps(_loc3_.killerNameStr,_loc3_.killerClanNameStr,_loc3_.killerRegionNameStr);
+               _loc8_.prefix = _loc3_.vehicleStatePrefixStr;
+               _loc8_.suffix = _loc3_.vehicleStateSuffixStr;
+               App.utils.commons.formatPlayerName(this.tankSlot.vehicleStateLbl,_loc8_);
+            }
          }
          this.tankSlot.vehicleStateLbl.textColor = _loc2_.killerID == 0?13224374:8684674;
          this.detailsMc.data = _loc2_;
@@ -215,7 +225,7 @@ package net.wg.gui.lobby.battleResults
             this.efficiencyList.visible = false;
          }
          this.questList = SubtasksList(this.scrollPane.target);
-         this.questList.linkage = "BR_SubtaskComponent_UI";
+         this.questList.linkage = Linkages.BR_SUBTASK_COMPONENT_UI;
          this.questList.addEventListener(QuestEvent.SELECT_QUEST,this.showQuest);
          if((_loc4_) && _loc4_.length > 0)
          {
@@ -250,6 +260,10 @@ package net.wg.gui.lobby.battleResults
 
       private function showQuest(param1:QuestEvent) : void {
          this.myParent.showEventsWindow(param1.questID);
+      }
+
+      public function getComponentForFocus() : InteractiveObject {
+         return null;
       }
    }
 

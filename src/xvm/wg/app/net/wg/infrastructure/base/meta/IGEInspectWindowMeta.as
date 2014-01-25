@@ -6,7 +6,7 @@ package net.wg.infrastructure.base.meta
    public interface IGEInspectWindowMeta extends IEventDispatcher
    {
           
-
+      function showDesignerS() : void;
    }
 
 }

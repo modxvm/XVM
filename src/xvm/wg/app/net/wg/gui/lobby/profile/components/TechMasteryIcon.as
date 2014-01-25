@@ -31,10 +31,10 @@ package net.wg.gui.lobby.profile.components
          this._data = param1;
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.removeEventListener(MouseEvent.ROLL_OVER,this.rollOverHandler);
          this.removeEventListener(MouseEvent.ROLL_OUT,this.rollOutHandler);
-         super.dispose();
+         super.onDispose();
       }
    }
 

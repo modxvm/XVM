@@ -7,6 +7,7 @@ package net.wg.gui.messenger.forms
    import net.wg.gui.components.controls.TextInput;
    import net.wg.gui.components.controls.ScrollingListEx;
    import flash.events.Event;
+   import net.wg.data.constants.Errors;
    import scaleform.clik.events.ButtonEvent;
    import net.wg.gui.events.ListEventEx;
    import scaleform.clik.events.ListEvent;
@@ -21,6 +22,7 @@ package net.wg.gui.messenger.forms
    import net.wg.data.components.ContextItemGenerator;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.gui.messenger.meta.IContactsWindowMeta;
+   import flash.display.InteractiveObject;
 
 
    public class ContactsSearchForm extends UIComponent implements IViewStackContent
@@ -52,11 +54,12 @@ package net.wg.gui.messenger.forms
             this.resultsLabel.text = param1.resultText;
             this.searchButton.enabled = !param1.freezeSearch;
          }
+         DebugUtils.LOG_WARNING(Errors.INVALID_FOCUS_USING);
          App.utils.focusHandler.setFocus(this.textInput);
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this.searchButton.removeEventListener(ButtonEvent.CLICK,this.onSearchClick);
          this.addToFriendsButton.removeEventListener(ButtonEvent.CLICK,this.onAddToFriendsClick);
          this.addToIgnoredButton.removeEventListener(ButtonEvent.CLICK,this.onAddToIgnoredClick);
@@ -170,6 +173,10 @@ package net.wg.gui.messenger.forms
 
       private function getParent() : IContactsWindowMeta {
          return IContactsWindowMeta(parent.parent.parent);
+      }
+
+      public function getComponentForFocus() : InteractiveObject {
+         return null;
       }
    }
 

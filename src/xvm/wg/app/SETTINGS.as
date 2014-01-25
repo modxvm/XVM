@@ -11,6 +11,10 @@ package
 
       public static const LANGUAGE_CODE:String = "#settings:LANGUAGE_CODE";
 
+      public static const WRONG_UPPER:String = "#settings:WRONG_UPPER";
+
+      public static const RIGHT_UPPER:String = "#settings:RIGHT_UPPER";
+
       public static const WINDOWTITLE:String = "#settings:windowTitle";
 
       public static const TITLE:String = "#settings:title";
@@ -289,11 +293,15 @@ package
 
       public static const CHAT_STORERECEIVERINBATTLE:String = "#settings:chat/storeReceiverInBattle";
 
+      public static const CHAT_DISABLEBATTLECHAT:String = "#settings:chat/disableBattleChat";
+
       public static const GAME_SHOWLANGUAGEBAR:String = "#settings:game/showLanguageBar";
 
       public static const GAME_ENABLEVOIP:String = "#settings:game/enableVoIP";
 
       public static const GAME_ENABLEMORTALPOSTEFFECT:String = "#settings:game/enableMortalPostEffect";
+
+      public static const GAME_ENABLEDELAYPOSTEFFECT:String = "#settings:game/enableDelayPostEffect";
 
       public static const GAME_SHOWVEHICLESCOUNTER:String = "#settings:game/showVehiclesCounter";
 
@@ -306,6 +314,8 @@ package
       public static const GAMEPLAY_DOMINATION:String = "#settings:gameplay/domination";
 
       public static const GAMEPLAY_ASSAULT:String = "#settings:gameplay/assault";
+
+      public static const GAMEPLAY_NATIONS:String = "#settings:gameplay/nations";
 
       public static const GAME_FIELDSET_HEADERVEHICLEMARKER:String = "#settings:game/fieldset/headerVehicleMarker";
 
@@ -365,6 +375,24 @@ package
 
       public static const ARCADE_GUNTAG_TYPE5:String = "#settings:arcade/gunTag/type5";
 
+      public static const ARCADE_GUNTAG_TYPE6:String = "#settings:arcade/gunTag/type6";
+
+      public static const ARCADE_GUNTAG_TYPE7:String = "#settings:arcade/gunTag/type7";
+
+      public static const ARCADE_GUNTAG_TYPE8:String = "#settings:arcade/gunTag/type8";
+
+      public static const ARCADE_GUNTAG_TYPE9:String = "#settings:arcade/gunTag/type9";
+
+      public static const ARCADE_GUNTAG_TYPE10:String = "#settings:arcade/gunTag/type10";
+
+      public static const ARCADE_GUNTAG_TYPE11:String = "#settings:arcade/gunTag/type11";
+
+      public static const ARCADE_GUNTAG_TYPE12:String = "#settings:arcade/gunTag/type12";
+
+      public static const ARCADE_GUNTAG_TYPE13:String = "#settings:arcade/gunTag/type13";
+
+      public static const ARCADE_GUNTAG_TYPE14:String = "#settings:arcade/gunTag/type14";
+
       public static const ARCADE_CENTRALTAG:String = "#settings:arcade/centralTag";
 
       public static const ARCADE_CENTRALTAG_TYPE0:String = "#settings:arcade/centralTag/type0";
@@ -383,6 +411,18 @@ package
 
       public static const ARCADE_CENTRALTAG_TYPE7:String = "#settings:arcade/centralTag/type7";
 
+      public static const ARCADE_CENTRALTAG_TYPE8:String = "#settings:arcade/centralTag/type8";
+
+      public static const ARCADE_CENTRALTAG_TYPE9:String = "#settings:arcade/centralTag/type9";
+
+      public static const ARCADE_CENTRALTAG_TYPE10:String = "#settings:arcade/centralTag/type10";
+
+      public static const ARCADE_CENTRALTAG_TYPE11:String = "#settings:arcade/centralTag/type11";
+
+      public static const ARCADE_CENTRALTAG_TYPE12:String = "#settings:arcade/centralTag/type12";
+
+      public static const ARCADE_CENTRALTAG_TYPE13:String = "#settings:arcade/centralTag/type13";
+
       public static const ARCADE_NET:String = "#settings:arcade/net";
 
       public static const ARCADE_NET_TYPE0:String = "#settings:arcade/net/type0";
@@ -390,6 +430,8 @@ package
       public static const ARCADE_NET_TYPE1:String = "#settings:arcade/net/type1";
 
       public static const ARCADE_NET_TYPE2:String = "#settings:arcade/net/type2";
+
+      public static const ARCADE_NET_TYPE3:String = "#settings:arcade/net/type3";
 
       public static const ARCADE_RELOADER:String = "#settings:arcade/reloader";
 
@@ -406,6 +448,8 @@ package
       public static const SNIPER_NET_TYPE1:String = "#settings:sniper/net/type1";
 
       public static const SNIPER_NET_TYPE2:String = "#settings:sniper/net/type2";
+
+      public static const SNIPER_NET_TYPE3:String = "#settings:sniper/net/type3";
 
       public static const SNIPER_CENTRALTAG:String = "#settings:sniper/centralTag";
 
@@ -424,6 +468,18 @@ package
       public static const SNIPER_CENTRALTAG_TYPE6:String = "#settings:sniper/centralTag/type6";
 
       public static const SNIPER_CENTRALTAG_TYPE7:String = "#settings:sniper/centralTag/type7";
+
+      public static const SNIPER_CENTRALTAG_TYPE8:String = "#settings:sniper/centralTag/type8";
+
+      public static const SNIPER_CENTRALTAG_TYPE9:String = "#settings:sniper/centralTag/type9";
+
+      public static const SNIPER_CENTRALTAG_TYPE10:String = "#settings:sniper/centralTag/type10";
+
+      public static const SNIPER_CENTRALTAG_TYPE11:String = "#settings:sniper/centralTag/type11";
+
+      public static const SNIPER_CENTRALTAG_TYPE12:String = "#settings:sniper/centralTag/type12";
+
+      public static const SNIPER_CENTRALTAG_TYPE13:String = "#settings:sniper/centralTag/type13";
 
       public static const SNIPER_RELOADER:String = "#settings:sniper/reloader";
 
@@ -452,6 +508,24 @@ package
       public static const SNIPER_GUNTAG_TYPE4:String = "#settings:sniper/gunTag/type4";
 
       public static const SNIPER_GUNTAG_TYPE5:String = "#settings:sniper/gunTag/type5";
+
+      public static const SNIPER_GUNTAG_TYPE6:String = "#settings:sniper/gunTag/type6";
+
+      public static const SNIPER_GUNTAG_TYPE7:String = "#settings:sniper/gunTag/type7";
+
+      public static const SNIPER_GUNTAG_TYPE8:String = "#settings:sniper/gunTag/type8";
+
+      public static const SNIPER_GUNTAG_TYPE9:String = "#settings:sniper/gunTag/type9";
+
+      public static const SNIPER_GUNTAG_TYPE10:String = "#settings:sniper/gunTag/type10";
+
+      public static const SNIPER_GUNTAG_TYPE11:String = "#settings:sniper/gunTag/type11";
+
+      public static const SNIPER_GUNTAG_TYPE12:String = "#settings:sniper/gunTag/type12";
+
+      public static const SNIPER_GUNTAG_TYPE13:String = "#settings:sniper/gunTag/type13";
+
+      public static const SNIPER_GUNTAG_TYPE14:String = "#settings:sniper/gunTag/type14";
 
       public static const SNIPER_CASSETTE:String = "#settings:sniper/cassette";
 
@@ -673,7 +747,7 @@ package
 
       public static const ALTERNATIVEVOICES_LABELS_VOICEBATTLE:String = "#settings:alternativeVoices/labels/voiceBattle";
 
-      public static const ARCADE_ENUM:Array = [ARCADE_MIXING,ARCADE_MIXING_TYPE0,ARCADE_MIXING_TYPE1,ARCADE_MIXING_TYPE2,ARCADE_MIXING_TYPE3,ARCADE_MIXING_TYPE4,ARCADE_MIXING_TYPE5,ARCADE_GUNTAG,ARCADE_GUNTAG_TYPE0,ARCADE_GUNTAG_TYPE1,ARCADE_GUNTAG_TYPE2,ARCADE_GUNTAG_TYPE3,ARCADE_GUNTAG_TYPE4,ARCADE_GUNTAG_TYPE5,ARCADE_CENTRALTAG,ARCADE_CENTRALTAG_TYPE0,ARCADE_CENTRALTAG_TYPE1,ARCADE_CENTRALTAG_TYPE2,ARCADE_CENTRALTAG_TYPE3,ARCADE_CENTRALTAG_TYPE4,ARCADE_CENTRALTAG_TYPE5,ARCADE_CENTRALTAG_TYPE6,ARCADE_CENTRALTAG_TYPE7,ARCADE_NET,ARCADE_NET_TYPE0,ARCADE_NET_TYPE1,ARCADE_NET_TYPE2,ARCADE_RELOADER,ARCADE_RELOADERTIMER,ARCADE_CONDITION,ARCADE_CASSETTE];
+      public static const ARCADE_ENUM:Array = [ARCADE_MIXING,ARCADE_MIXING_TYPE0,ARCADE_MIXING_TYPE1,ARCADE_MIXING_TYPE2,ARCADE_MIXING_TYPE3,ARCADE_MIXING_TYPE4,ARCADE_MIXING_TYPE5,ARCADE_GUNTAG,ARCADE_GUNTAG_TYPE0,ARCADE_GUNTAG_TYPE1,ARCADE_GUNTAG_TYPE2,ARCADE_GUNTAG_TYPE3,ARCADE_GUNTAG_TYPE4,ARCADE_GUNTAG_TYPE5,ARCADE_GUNTAG_TYPE6,ARCADE_GUNTAG_TYPE7,ARCADE_GUNTAG_TYPE8,ARCADE_GUNTAG_TYPE9,ARCADE_GUNTAG_TYPE10,ARCADE_GUNTAG_TYPE11,ARCADE_GUNTAG_TYPE12,ARCADE_GUNTAG_TYPE13,ARCADE_GUNTAG_TYPE14,ARCADE_CENTRALTAG,ARCADE_CENTRALTAG_TYPE0,ARCADE_CENTRALTAG_TYPE1,ARCADE_CENTRALTAG_TYPE2,ARCADE_CENTRALTAG_TYPE3,ARCADE_CENTRALTAG_TYPE4,ARCADE_CENTRALTAG_TYPE5,ARCADE_CENTRALTAG_TYPE6,ARCADE_CENTRALTAG_TYPE7,ARCADE_CENTRALTAG_TYPE8,ARCADE_CENTRALTAG_TYPE9,ARCADE_CENTRALTAG_TYPE10,ARCADE_CENTRALTAG_TYPE11,ARCADE_CENTRALTAG_TYPE12,ARCADE_CENTRALTAG_TYPE13,ARCADE_NET,ARCADE_NET_TYPE0,ARCADE_NET_TYPE1,ARCADE_NET_TYPE2,ARCADE_NET_TYPE3,ARCADE_RELOADER,ARCADE_RELOADERTIMER,ARCADE_CONDITION,ARCADE_CASSETTE];
 
       public static const GRAPHICSQUALITY_ENUM:Array = [GRAPHICSQUALITY_DEFERRED,GRAPHICSQUALITY_FORWARD,GRAPHICSQUALITY_ON,GRAPHICSQUALITY_OFF,GRAPHICSQUALITY_ANISOTROPIC_16X,GRAPHICSQUALITY_ANISOTROPIC_8X,GRAPHICSQUALITY_ANISOTROPIC_4X,GRAPHICSQUALITY_ANISOTROPIC_2X,GRAPHICSQUALITY_TRILINEAR,GRAPHICSQUALITY_BILINEAR,GRAPHICSQUALITY_POINT,GRAPHICSQUALITY_CUSTOM,GRAPHICSQUALITY_VERY_HIGH,GRAPHICSQUALITY_MAX,GRAPHICSQUALITY_VERYHIGH,GRAPHICSQUALITY_HIGH,GRAPHICSQUALITY_MEDIUM,GRAPHICSQUALITY_FAR,GRAPHICSQUALITY_NEAR,GRAPHICSQUALITY_LOW,GRAPHICSQUALITY_LOWEST,GRAPHICSQUALITY_MIN,GRAPHICSQUALITY_SHADER_MODEL_3,GRAPHICSQUALITY_SHADER_MODEL_2,GRAPHICSQUALITY_SHADER_MODEL_1,GRAPHICSQUALITY_SHADER_MODEL_0,GRAPHICSQUALITY_NONE,GRAPHICSQUALITY_COLORIZATION,GRAPHICSQUALITY_MUTED,GRAPHICSQUALITY_CONTRASTY,GRAPHICSQUALITY_SOFT_COLORS,GRAPHICSQUALITY_PHOTOCHROMATIC,GRAPHICSQUALITY_SOFT];
 

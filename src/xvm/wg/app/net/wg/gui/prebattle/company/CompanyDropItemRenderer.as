@@ -4,6 +4,8 @@ package net.wg.gui.prebattle.company
    import flash.text.TextField;
    import flash.display.MovieClip;
    import scaleform.clik.utils.Constraints;
+   import scaleform.clik.constants.InvalidationType;
+   import net.wg.data.constants.Values;
 
 
    public class CompanyDropItemRenderer extends ListItemRenderer
@@ -31,7 +33,7 @@ package net.wg.gui.prebattle.company
             return;
          }
          super.setData(param1);
-         invalidate("invalidateWindow");
+         invalidateData();
       }
 
       override protected function configUI() : void {
@@ -42,44 +44,31 @@ package net.wg.gui.prebattle.company
 
       override protected function draw() : void {
          super.draw();
-         if((isInvalid("invalidateWindow")) && (data) && !this.isUpdated)
+         if((isInvalid(InvalidationType.DATA)) && !this.isUpdated)
          {
             this.isUpdated = true;
             this.afterSetData();
          }
       }
 
-      private function afterSetData() : void {
-         if(data != null)
+      override protected function updateText() : void {
+         if((data) && (data.userName))
          {
-            this.label = String(data["label"]);
+            App.utils.commons.formatPlayerName(textField,App.utils.commons.getUserProps(data.userName,data.clanAbbrev,data.region,data.igrType));
             if(data["color"] != null)
             {
                textField.textColor = data["color"];
             }
          }
+         else
+         {
+            textField.text = Values.EMPTY_STR;
+         }
+      }
+
+      private function afterSetData() : void {
          this.numberField.text = String(index + 1);
          this.bg.visible = !Boolean(index % 2);
-      }
-
-      private function cutText(param1:String) : String {
-         var _loc2_:String = null;
-         var _loc3_:* = 0;
-         textField.text = param1;
-         if(textField.getLineLength(1) != -1)
-         {
-            _loc2_ = param1;
-            _loc3_ = textField.getLineLength(0);
-            _loc2_ = _loc2_.substr(0,_loc3_ - 2);
-            _loc2_ = _loc2_ + "..";
-            textField.text = _loc2_;
-         }
-         return textField.text;
-      }
-
-      override public function set label(param1:String) : void {
-         var param1:String = this.cutText(param1);
-         super.label = param1;
       }
    }
 

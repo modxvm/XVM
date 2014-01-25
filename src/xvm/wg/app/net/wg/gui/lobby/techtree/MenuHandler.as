@@ -46,7 +46,7 @@ package net.wg.gui.lobby.techtree
       }
 
       public function showNationTreeMenu(param1:Renderer) : void {
-         var _loc2_:Vector.<IContextItem> = Vector.<IContextItem>([new ContextItem(ActionName.VEHICLE_INFO,MENU.CONTEXTMENU_VEHICLEINFOEX),new SeparateItem(),new ContextItem(ActionName.UNLOCK,MENU.CONTEXTMENU_UNLOCK,{"enabled":(!param1.isPremium()) && (param1.isAvailable4Unlock())}),new ContextItem(ActionName.BUY,MENU.CONTEXTMENU_BUY,{"enabled":param1.isAvailable4Buy()}),new SeparateItem(),new ContextItem(ActionName.SELL,MENU.CONTEXTMENU_SELL,{"enabled":param1.isAvailable4Sell()})]);
+         var _loc2_:Vector.<IContextItem> = Vector.<IContextItem>([new ContextItem(ActionName.VEHICLE_INFO,MENU.CONTEXTMENU_VEHICLEINFOEX),new ContextItem(ActionName.SHOW_VEHICLE_STATS,MENU.CONTEXTMENU_SHOWVEHICLESTATISTICS,{"enabled":param1.isWasInBattle()}),new SeparateItem(),new ContextItem(ActionName.UNLOCK,MENU.CONTEXTMENU_UNLOCK,{"enabled":(!param1.isPremium()) && (param1.isAvailable4Unlock())}),new ContextItem(ActionName.BUY,MENU.CONTEXTMENU_BUY,{"enabled":param1.isAvailable4Buy()}),new ContextItem(ActionName.SELL,MENU.CONTEXTMENU_SELL,{"enabled":param1.isAvailable4Sell()}),new SeparateItem(),new ContextItem(ActionName.SELECT_VEHICLE,MENU.CONTEXTMENU_SELECTVEHICLEINHANGAR,{"enabled":param1.inInventory()})]);
          var _loc3_:ContextMenu = this.showMenu(param1,_loc2_);
          if(_loc3_ != null)
          {
@@ -113,6 +113,12 @@ package net.wg.gui.lobby.techtree
                   break;
                case ActionName.SELL:
                   _loc3_.click2Sell();
+                  break;
+               case ActionName.SELECT_VEHICLE:
+                  _loc3_.click2SelectInHangar();
+                  break;
+               case ActionName.SHOW_VEHICLE_STATS:
+                  _loc3_.click2ShowVehicleStats();
                   break;
             }
          }

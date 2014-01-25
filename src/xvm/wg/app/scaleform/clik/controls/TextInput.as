@@ -472,7 +472,7 @@ package scaleform.clik.controls
          dispatchEvent(new Event(Event.CHANGE));
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          removeEventListener(MouseEvent.MOUSE_DOWN,this.handleMouseDown,false);
          removeEventListener(MouseEvent.ROLL_OVER,this.handleRollOver,false);
          removeEventListener(MouseEvent.ROLL_OUT,this.handleRollOut,false);
@@ -481,8 +481,7 @@ package scaleform.clik.controls
          this.textField.removeEventListener(FocusEvent.FOCUS_IN,this.handleTextFieldFocusIn,false);
          this.defaultTextFormat = null;
          this._textFormat = null;
-         this.textField = null;
-         super.dispose();
+         super.onDispose();
       }
    }
 

@@ -138,6 +138,7 @@ package net.wg.gui.components.controls
       }
 
       protected function handleMouseReleaseEx(param1:MouseEvent) : void {
+         var _loc4_:uint = 0;
          var _loc5_:ButtonEvent = null;
          _autoRepeatEvent = null;
          if(!enabled)
@@ -146,7 +147,7 @@ package net.wg.gui.components.controls
          }
          var _loc2_:MouseEventEx = param1 as MouseEventEx;
          var _loc3_:uint = _loc2_ == null?0:_loc2_.mouseIdx;
-         var _loc4_:uint = _loc2_ == null?0:_loc2_.buttonIdx;
+         _loc4_ = _loc2_ == null?0:_loc2_.buttonIdx;
          _mouseDown = _mouseDown ^ 1 << _loc3_;
          if(_mouseDown == 0 && (_repeatTimer))
          {
@@ -198,12 +199,12 @@ package net.wg.gui.components.controls
          }
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          if(App.soundMgr != null)
          {
             App.soundMgr.removeSoundHdlrs(this);
          }
-         super.dispose();
+         super.onDispose();
       }
    }
 

@@ -193,9 +193,9 @@ package net.wg.gui.lobby.profile.components.chart
          invalidate(LAYOUT_INV);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          var _loc1_:Object = null;
-         super.dispose();
+         super.onDispose();
          while(this._renderers.length > 0)
          {
             _loc1_ = this._renderers.splice(this._renderers.length-1,1)[0];

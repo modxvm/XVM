@@ -47,8 +47,8 @@ package net.wg.gui.lobby.profile.pages.technique
          tileList.itemRenderer = getClass(Linkages.ACHIEVEMENT_COMMON_VEHICLE);
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
       }
    }
 

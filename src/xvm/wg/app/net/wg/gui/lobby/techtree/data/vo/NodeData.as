@@ -46,8 +46,6 @@ package net.wg.gui.lobby.techtree.data.vo
 
       public var longName:String = "";
 
-      public var pickleDump:String = "";
-
       public var shopPrice:ShopPrice = null;
 
       public var displayInfo:Object = null;
@@ -138,10 +136,6 @@ package net.wg.gui.lobby.techtree.data.vo
          {
             this.longName = param1.longName;
          }
-         if(param1.pickleDump != null)
-         {
-            this.pickleDump = param1.pickleDump;
-         }
          this.shopPrice = new ShopPrice();
          if(param1.shopPrice != null)
          {
@@ -168,7 +162,6 @@ package net.wg.gui.lobby.techtree.data.vo
          this.state = 0;
          this.iconPath = "";
          this.longName = "";
-         this.pickleDump = "";
          this.shopPrice = null;
          this.extraInfo = null;
          if(this.unlockProps != null)
@@ -254,7 +247,7 @@ package net.wg.gui.lobby.techtree.data.vo
       }
 
       public function toString() : String {
-         return "[\nNodeData:\n id = " + this.id + ",\n nameString = " + this.nameString + ",\n primaryClass = " + this.primaryClass + ",\n level = " + this.level + ",\n earnedXP = " + this.earnedXP + ",\n state = " + this.state + ",\n unlockProps = " + this.unlockProps + ",\n iconPath = " + this.iconPath + ",\n longName = " + this.longName + ",\n extraInfo = " + this.extraInfo + ",\n pickleDump = " + this.pickleDump + ",\n shopPrice = " + this.shopPrice + "\n displayInfo = " + this.displayInfo + "\n defEarnedXP = " + this._defEarnedXP + "\n]";
+         return "[\nNodeData:\n id = " + this.id + ",\n nameString = " + this.nameString + ",\n primaryClass = " + this.primaryClass + ",\n level = " + this.level + ",\n earnedXP = " + this.earnedXP + ",\n state = " + this.state + ",\n unlockProps = " + this.unlockProps + ",\n iconPath = " + this.iconPath + ",\n longName = " + this.longName + ",\n extraInfo = " + this.extraInfo + ",\n shopPrice = " + this.shopPrice + "\n displayInfo = " + this.displayInfo + "\n defEarnedXP = " + this._defEarnedXP + "\n]";
       }
    }
 

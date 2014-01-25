@@ -3,7 +3,6 @@ package net.wg.app.impl.base
    import net.wg.infrastructure.base.meta.impl.ApplicationMeta;
    import net.wg.app.IApplication;
    import net.wg.infrastructure.managers.ILoaderManager;
-   import flash.display.Sprite;
    import net.wg.infrastructure.managers.GlobalVarsManager;
    import net.wg.infrastructure.managers.ITooltipMgr;
    import net.wg.infrastructure.managers.IEnvironmentManager;
@@ -14,6 +13,7 @@ package net.wg.app.impl.base
    import net.wg.utils.IUtils;
    import net.wg.infrastructure.managers.ISoundManager;
    import net.wg.infrastructure.managers.IContextMenuManager;
+   import net.wg.infrastructure.managers.IPopoverManager;
    import net.wg.infrastructure.managers.IColorSchemeManager;
    import net.wg.infrastructure.managers.IVoiceChatManager;
    import net.wg.infrastructure.interfaces.ICursor;
@@ -62,7 +62,7 @@ package net.wg.app.impl.base
 
       private var _loaderMgr:ILoaderManager = null;
 
-      private var _classLoaderMgr:Sprite = null;
+      private var _classLoaderMgr:Object = null;
 
       private var _varsMgr:GlobalVarsManager = null;
 
@@ -83,6 +83,8 @@ package net.wg.app.impl.base
       private var _soundMgr:ISoundManager = null;
 
       private var _contextMenuMgr:IContextMenuManager = null;
+
+      private var _popoverMgr:IPopoverManager = null;
 
       private var _colorSchemeMgr:IColorSchemeManager = null;
 
@@ -150,6 +152,10 @@ package net.wg.app.impl.base
 
       public function get soundMgr() : ISoundManager {
          return this._soundMgr;
+      }
+
+      public function get popoverMgr() : IPopoverManager {
+         return this._popoverMgr;
       }
 
       public function get contextMenuMgr() : IContextMenuManager {
@@ -252,6 +258,10 @@ package net.wg.app.impl.base
          throw new AbstractException("BaseApp.getNewContextMenuManager" + Errors.ABSTRACT_INVOKE);
       }
 
+      protected function getNewPopoverManager() : IPopoverManager {
+         throw new AbstractException("BaseApp.getNewContextMenuManager" + Errors.ABSTRACT_INVOKE);
+      }
+
       protected function getNewContainerManager() : IContainerManager {
          throw new AbstractException("BaseApp.getNewContainerManager" + Errors.ABSTRACT_INVOKE);
       }
@@ -260,7 +270,7 @@ package net.wg.app.impl.base
          throw new AbstractException("BaseApp.getNewColorSchemeManager" + Errors.ABSTRACT_INVOKE);
       }
 
-      protected function getNewClassManager() : Sprite {
+      protected function getNewClassManager() : Object {
          throw new AbstractException("BaseApp.getNewClassManager" + Errors.ABSTRACT_INVOKE);
       }
 
@@ -306,6 +316,7 @@ package net.wg.app.impl.base
          setLoaderMgrS(this._loaderMgr);
          setContainerMgrS(this._containersMgr);
          setContextMenuMgrS(this._contextMenuMgr);
+         setPopoverMgrS(this._popoverMgr);
          setSoundMgrS(this._soundMgr);
          setTooltipMgrS(this._tooltipMgr);
          setColorSchemeMgrS(this._colorSchemeMgr);
@@ -332,13 +343,13 @@ package net.wg.app.impl.base
       private function createManagers() : void {
          this._containersMgr = this.getNewContainerManager();
          this._classLoaderMgr = this.getNewClassManager();
-         addChild(this._classLoaderMgr);
          this._loaderMgr = new LoaderManager();
          this._varsMgr = new GlobalVarsManager();
          this._soundMgr = this.getNewSoundManager();
          this._tooltipMgr = this.getNewTooltipManager();
          this._environmentMgr = this.getNewEnvironment();
          this._contextMenuMgr = this.getNewContextMenuManager();
+         this._popoverMgr = this.getNewPopoverManager();
          this._colorSchemeMgr = this.getNewColorSchemeManager();
          this._guiItemsMgr = this.getNewGuiItemsManager();
          this._voiceChatMgr = this.getNewVoiceChatManager();
@@ -348,13 +359,14 @@ package net.wg.app.impl.base
       }
 
       private function disposeManagers() : void {
-         removeChild(this._classLoaderMgr);
          this._classLoaderMgr = null;
          this._contextMenuMgr.dispose();
          this._contextMenuMgr = null;
          this._containersMgr.removeEventListener(LoaderEvent.CURSOR_LOADED,this.onCursorLoadedHandler);
          this._containersMgr.removeEventListener(LoaderEvent.WAITING_LOADED,this.onWaitingLoadedHandler);
          this._containersMgr = null;
+         this._popoverMgr.dispose();
+         this._popoverMgr = null;
          this._soundMgr = null;
          this._loaderMgr = null;
          this._varsMgr = null;

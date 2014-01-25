@@ -12,7 +12,11 @@ package net.wg.infrastructure.base.meta
 
       function request4SellS(param1:Number) : void;
 
-      function requestVehicleInfoS(param1:String) : void;
+      function request4SelectInHangarS(param1:Number) : void;
+
+      function request4ShowVehicleStatisticsS(param1:Number) : void;
+
+      function requestVehicleInfoS(param1:Number) : void;
 
       function showSystemMessageS(param1:String, param2:String) : void;
 

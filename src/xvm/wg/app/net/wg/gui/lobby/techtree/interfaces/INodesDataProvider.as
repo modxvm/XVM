@@ -32,8 +32,6 @@ package net.wg.gui.lobby.techtree.interfaces
 
       function setUnlockProps(param1:Number, param2:UnlockProps) : Boolean;
 
-      function setDump(param1:Number, param2:String) : Boolean;
-
       function setItemField(param1:String, param2:Number, param3:Object) : Boolean;
    }
 

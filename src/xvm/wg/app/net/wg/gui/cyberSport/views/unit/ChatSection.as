@@ -1,28 +1,31 @@
 package net.wg.gui.cyberSport.views.unit
 {
    import scaleform.clik.core.UIComponent;
+   import net.wg.infrastructure.interfaces.entity.IFocusContainer;
    import flash.text.TextField;
    import net.wg.gui.cyberSport.controls.ButtonDnmIcon;
    import net.wg.gui.messenger.ChannelComponent;
    import net.wg.gui.components.advanced.TextAreaSimple;
    import net.wg.gui.cyberSport.vo.UnitVO;
+   import flash.display.InteractiveObject;
    import scaleform.clik.constants.InvalidationType;
    import scaleform.clik.events.ButtonEvent;
    import scaleform.clik.events.InputEvent;
-   import flash.display.InteractiveObject;
-   import flash.ui.Keyboard;
-   import scaleform.clik.constants.InputValue;
+   import net.wg.infrastructure.events.FocusRequestEvent;
    import org.idmedia.as3commons.util.StringUtils;
    import net.wg.gui.cyberSport.controls.events.CSComponentEvent;
+   import flash.ui.Keyboard;
+   import scaleform.clik.constants.InputValue;
    import scaleform.clik.ui.InputDetails;
    import net.wg.gui.components.controls.SoundButtonEx;
 
 
-   public class ChatSection extends UIComponent
+   public class ChatSection extends UIComponent implements IFocusContainer
    {
           
       public function ChatSection() {
          super();
+         DebugUtils.LOG_WARNING("Incapsulation waas broken. unitChannelComponent.sendButton can be not disposed!");
          this.unitChannelComponent.sendButton = this.chatSubmitButton as SoundButtonEx;
          this.unitChannelComponent.messageArea.bgForm.alpha = 0;
          this.unitChannelComponent.messageArea.bgForm.visible = false;
@@ -48,6 +51,22 @@ package net.wg.gui.cyberSport.views.unit
 
       private var _previousComment:String = "";
 
+      public function enableEditCommitButton(param1:Boolean) : void {
+         if((this.editCommitButton) && (this.editDescriptionButton))
+         {
+            this.editDescriptionButton.enabled = param1;
+            this.editCommitButton.enabled = param1;
+         }
+      }
+
+      public function getComponentForFocus() : InteractiveObject {
+         return this.descriptionInput;
+      }
+
+      public function setDescription(param1:String) : void {
+         this.descriptionInput.text = param1;
+      }
+
       public function get unitData() : UnitVO {
          return this._unitData;
       }
@@ -59,14 +78,6 @@ package net.wg.gui.cyberSport.views.unit
          }
          this._unitData = param1;
          invalidate(InvalidationType.DATA,INVALID_EDIT_MODE);
-      }
-
-      public function enableEditCommitButton(param1:Boolean) : void {
-         if((this.editCommitButton) && (this.editDescriptionButton))
-         {
-            this.editDescriptionButton.enabled = param1;
-            this.editCommitButton.enabled = param1;
-         }
       }
 
       override protected function draw() : void {
@@ -105,32 +116,25 @@ package net.wg.gui.cyberSport.views.unit
          this.unitChannelComponent.messageArea.bgForm.visible = false;
       }
 
-      private function onEditCommitClick(param1:ButtonEvent) : void {
-         this.updateDescription(true);
+      override protected function onDispose() : void {
+         this.editDescriptionButton.removeEventListener(ButtonEvent.CLICK,this.onEditClick);
+         this.editCommitButton.removeEventListener(ButtonEvent.CLICK,this.onEditClick);
+         this.descriptionInput.removeEventListener(InputEvent.INPUT,this.descriptionInputHandler);
+         removeEventListener(InputEvent.INPUT,this.handleInput,false);
+         this.editDescriptionButton.dispose();
+         this.editDescriptionButton = null;
+         this.editCommitButton.dispose();
+         this.editCommitButton = null;
+         this.chatSubmitButton.dispose();
+         this.chatSubmitButton = null;
+         this.unitChannelComponent = null;
+         this.descriptionInput.dispose();
+         this.descriptionInput = null;
+         super.onDispose();
       }
 
-      private function onEditClick(param1:ButtonEvent) : void {
-         this._inEditMode = true;
-         invalidate(INVALID_EDIT_MODE);
-         App.utils.scheduler.envokeInNextFrame(this.updateFocus,this.descriptionInput);
-      }
-
-      private function updateFocus(param1:InteractiveObject) : void {
-         App.utils.focusHandler.setFocus(param1);
-      }
-
-      private function descriptionInputHandler(param1:InputEvent) : void {
-         if(param1.details.code == Keyboard.ESCAPE && param1.details.value == InputValue.KEY_DOWN && (this._inEditMode))
-         {
-            param1.preventDefault();
-            param1.stopImmediatePropagation();
-            this.updateDescription(false);
-         }
-         if(param1.details.code == Keyboard.ENTER && param1.details.value == InputValue.KEY_DOWN)
-         {
-            param1.handled = true;
-            this.updateDescription(true);
-         }
+      private function updateFocus() : void {
+         dispatchEvent(new FocusRequestEvent(FocusRequestEvent.REQUEST_FOCUS,this));
       }
 
       private function updateDescription(param1:Boolean=false) : void {
@@ -147,6 +151,30 @@ package net.wg.gui.cyberSport.views.unit
          invalidate(INVALID_EDIT_MODE);
       }
 
+      private function onEditCommitClick(param1:ButtonEvent) : void {
+         this.updateDescription(true);
+      }
+
+      private function onEditClick(param1:ButtonEvent) : void {
+         this._inEditMode = true;
+         invalidate(INVALID_EDIT_MODE);
+         App.utils.scheduler.envokeInNextFrame(this.updateFocus);
+      }
+
+      private function descriptionInputHandler(param1:InputEvent) : void {
+         if(param1.details.code == Keyboard.ESCAPE && param1.details.value == InputValue.KEY_DOWN && (this._inEditMode))
+         {
+            param1.preventDefault();
+            param1.stopImmediatePropagation();
+            this.updateDescription(false);
+         }
+         if(param1.details.code == Keyboard.ENTER && param1.details.value == InputValue.KEY_DOWN)
+         {
+            param1.handled = true;
+            this.updateDescription(true);
+         }
+      }
+
       override public function handleInput(param1:InputEvent) : void {
          var _loc2_:InputDetails = param1.details;
          if(_loc2_.code == Keyboard.F1 && _loc2_.value == InputValue.KEY_UP)
@@ -158,23 +186,6 @@ package net.wg.gui.cyberSport.views.unit
             }
          }
          super.handleInput(param1);
-      }
-
-      override public function dispose() : void {
-         this.editDescriptionButton.removeEventListener(ButtonEvent.CLICK,this.onEditClick);
-         this.editCommitButton.removeEventListener(ButtonEvent.CLICK,this.onEditClick);
-         this.descriptionInput.removeEventListener(InputEvent.INPUT,this.descriptionInputHandler);
-         removeEventListener(InputEvent.INPUT,this.handleInput,false);
-         this.editDescriptionButton.dispose();
-         this.editCommitButton.dispose();
-         this.chatSubmitButton.dispose();
-         this.unitChannelComponent.dispose();
-         this.descriptionInput.dispose();
-         super.dispose();
-      }
-
-      public function setDescription(param1:String) : void {
-         this.descriptionInput.text = param1;
       }
    }
 

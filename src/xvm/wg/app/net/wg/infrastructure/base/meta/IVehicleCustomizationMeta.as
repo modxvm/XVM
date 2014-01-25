@@ -37,6 +37,8 @@ package net.wg.infrastructure.base.meta
       function as_setGold(param1:Number) : void;
 
       function as_refreshData() : void;
+
+      function as_refreshItemsData() : void;
    }
 
 }

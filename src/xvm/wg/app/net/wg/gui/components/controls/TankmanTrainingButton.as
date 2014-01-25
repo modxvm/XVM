@@ -2,6 +2,8 @@ package net.wg.gui.components.controls
 {
    import flash.display.MovieClip;
    import flash.text.TextField;
+   import net.wg.gui.components.controls.VO.ActionPriceVO;
+   import net.wg.data.constants.IconsTypes;
    import flash.events.MouseEvent;
    import net.wg.data.constants.SoundTypes;
 
@@ -55,10 +57,34 @@ package net.wg.gui.components.controls
 
       private var _priceColors:Object;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.actionPrice.dispose();
          this.actionPrice = null;
-         super.dispose();
+         super.onDispose();
+      }
+
+      override public function toString() : String {
+         return "[Wargaming TankmanTrainingButton " + name + "]";
+      }
+
+      public function updatePrice(param1:Number, param2:Number, param3:Number, param4:String) : void {
+         var _loc5_:String = null;
+         var _loc6_:ActionPriceVO = null;
+         if(!this._buy && !(this._type == "free") && !(param2 == 0))
+         {
+            _loc5_ = !enabled?"disabled":"normal";
+            this.priceLabel.textColor = this._priceColors[_loc5_];
+            this.priceLabel.text = this._type == "academy"?App.utils.locale.gold(param2):App.utils.locale.integer(param2);
+            this.priceLabel.icon = this._type == "academy"?IconsTypes.GOLD:IconsTypes.CREDITS;
+            _loc6_ = new ActionPriceVO(param1,param2,param3,param4);
+            this.actionPrice.setData(_loc6_);
+            this.priceLabel.visible = !this.actionPrice.visible;
+         }
+         else
+         {
+            this.priceLabel.visible = false;
+            this.actionPrice.visible = false;
+         }
       }
 
       public function get buy() : Boolean {
@@ -78,68 +104,6 @@ package net.wg.gui.components.controls
          }
          clearRepeatInterval();
          setState(this._buy?"buy":"up");
-      }
-
-      override protected function handleMouseRollOver(param1:MouseEvent) : void {
-         if(this._buy == true)
-         {
-            return;
-         }
-         super.handleMouseRollOver(param1);
-      }
-
-      override protected function handleMouseRollOut(param1:MouseEvent) : void {
-         if(this._buy == true)
-         {
-            return;
-         }
-         super.handleMouseRollOut(param1);
-      }
-
-      override protected function handleMousePress(param1:MouseEvent) : void {
-         if(this._buy == true)
-         {
-            return;
-         }
-         super.handleMousePress(param1);
-      }
-
-      override protected function handlePress(param1:uint=0) : void {
-         if(this._buy == true)
-         {
-            return;
-         }
-         super.handlePress(param1);
-      }
-
-      override protected function handleMouseRelease(param1:MouseEvent) : void {
-         if(this._buy == true)
-         {
-            return;
-         }
-         super.handleMouseRelease(param1);
-      }
-
-      override protected function handleRelease(param1:uint=0) : void {
-         if(this._buy == true)
-         {
-            return;
-         }
-         super.handleRelease(param1);
-      }
-
-      override protected function handleReleaseOutside(param1:MouseEvent) : void {
-         if(this._buy == true)
-         {
-            return;
-         }
-         super.handleReleaseOutside(param1);
-      }
-
-      override protected function configUI() : void {
-         super.configUI();
-         this.hitArea = hitMc;
-         this.actionPrice.setup(this);
       }
 
       public function get nation() : Number {
@@ -163,26 +127,26 @@ package net.wg.gui.components.controls
          }
       }
 
-      public function updatePrice(param1:Number, param2:Number, param3:Number, param4:String) : void {
-         var _loc5_:String = null;
-         if(!this._buy && !(this._type == "free") && !(param2 == 0))
+      override protected function handlePress(param1:uint=0) : void {
+         if(this._buy == true)
          {
-            _loc5_ = !enabled?"disabled":"normal";
-            this.priceLabel.textColor = this._priceColors[_loc5_];
-            this.priceLabel.text = this._type == "academy"?App.utils.locale.gold(param2):App.utils.locale.integer(param2);
-            this.priceLabel.icon = this._type == "academy"?IconText.GOLD:IconText.CREDITS;
-            this.actionPrice.setData(param1,param2,param3,param4);
-            this.priceLabel.visible = !this.actionPrice.visible;
+            return;
          }
-         else
-         {
-            this.priceLabel.visible = false;
-            this.actionPrice.visible = false;
-         }
+         super.handlePress(param1);
       }
 
-      override public function toString() : String {
-         return "[Wargaming TankmanTrainingButton " + name + "]";
+      override protected function handleRelease(param1:uint=0) : void {
+         if(this._buy == true)
+         {
+            return;
+         }
+         super.handleRelease(param1);
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.hitArea = hitMc;
+         this.actionPrice.setup(this);
       }
 
       override protected function draw() : void {
@@ -215,6 +179,46 @@ package net.wg.gui.components.controls
             this.typeLabel.text = MENU.tankmantrainingwindow(this._type);
             this.typeSwitcher.gotoAndPlay(this._type);
          }
+      }
+
+      override protected function handleMouseRollOver(param1:MouseEvent) : void {
+         if(this._buy == true)
+         {
+            return;
+         }
+         super.handleMouseRollOver(param1);
+      }
+
+      override protected function handleMouseRollOut(param1:MouseEvent) : void {
+         if(this._buy == true)
+         {
+            return;
+         }
+         super.handleMouseRollOut(param1);
+      }
+
+      override protected function handleMousePress(param1:MouseEvent) : void {
+         if(this._buy == true)
+         {
+            return;
+         }
+         super.handleMousePress(param1);
+      }
+
+      override protected function handleMouseRelease(param1:MouseEvent) : void {
+         if(this._buy == true)
+         {
+            return;
+         }
+         super.handleMouseRelease(param1);
+      }
+
+      override protected function handleReleaseOutside(param1:MouseEvent) : void {
+         if(this._buy == true)
+         {
+            return;
+         }
+         super.handleReleaseOutside(param1);
       }
    }
 

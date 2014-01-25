@@ -17,11 +17,11 @@ package net.wg.gui.components.advanced
       public function Accordion() {
          super();
          tabEnabled = focusable = true;
-         itemRendererName = DEFAUILT_ITEM_RNDR;
+         itemRendererName = DEFAULT_ITEM_RNDR;
          _direction = DIRECTION_VERTICAL;
       }
 
-      private static const DEFAUILT_ITEM_RNDR:String = "AccrodionSoundRendererUI";
+      private static const DEFAULT_ITEM_RNDR:String = "AccrodionSoundRendererUI";
 
       private static const INVALID_BORDER:String = "border";
 
@@ -49,8 +49,6 @@ package net.wg.gui.components.advanced
 
       private var _backgroundType:String = "gray";
 
-      private var _backgroundAlpha:String = "0.75";
-
       private var _actualViewWidth:Number;
 
       private var _actualViewHeight:Number;
@@ -72,8 +70,8 @@ package net.wg.gui.components.advanced
          }
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this.view.groupRef = null;
          this.view.dispose();
          this.view = null;
@@ -86,6 +84,7 @@ package net.wg.gui.components.advanced
             dataProvider = null;
          }
          removeChild(container);
+         container = null;
       }
 
       override protected function draw() : void {

@@ -8,6 +8,7 @@ package net.wg.gui.prebattle.company
    import scaleform.clik.utils.Constraints;
    import scaleform.clik.constants.InvalidationType;
    import scaleform.clik.data.DataProvider;
+   import net.wg.data.constants.Errors;
 
 
    public class CompanyListItemRenderer extends SoundListItemRenderer
@@ -45,8 +46,8 @@ package net.wg.gui.prebattle.company
          this._showPlayers = param1;
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
          this.removeEventListener(ButtonEvent.CLICK,this.clickHandler);
          if(this.dd)
          {
@@ -81,7 +82,7 @@ package net.wg.gui.prebattle.company
          this.pCountField.text = data.playersCount;
          this.divisionField.text = data.division;
          this.cutText(this.descriptionField,data.comment);
-         this.cutText(this.mainTextField,data.creatorName);
+         App.utils.commons.formatPlayerName(this.mainTextField,App.utils.commons.getUserProps(data.creatorName,data.creatorClan,data.creatorRegion,data.creatorIgrType));
          this.updateTextFieldWidth();
       }
 
@@ -147,6 +148,7 @@ package net.wg.gui.prebattle.company
          {
             return;
          }
+         DebugUtils.LOG_WARNING(Errors.INVALID_FOCUS_USING);
          App.utils.focusHandler.setFocus(this);
          this.dispatchIsSelectedItem(selected);
          if(this._showPlayers)
@@ -206,7 +208,7 @@ package net.wg.gui.prebattle.company
 
       override protected function handleMouseRollOver(param1:MouseEvent) : void {
          super.handleMouseRollOver(param1);
-         App.toolTipMgr.show(data.creatorName);
+         App.toolTipMgr.show(App.utils.commons.getFullPlayerName(App.utils.commons.getUserProps(data.creatorName,data.creatorClan,data.creatorRegion,data.creatorIgrType)));
       }
 
       override protected function handleMouseRollOut(param1:MouseEvent) : void {

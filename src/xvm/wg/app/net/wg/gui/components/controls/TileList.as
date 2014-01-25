@@ -68,32 +68,30 @@ package net.wg.gui.components.controls
       }
 
       override protected function drawLayout() : void {
-         var _loc8_:IListItemRenderer = null;
+         var _loc6_:IListItemRenderer = null;
          var _loc1_:uint = _renderers.length;
          var _loc2_:Number = rowHeight;
          var _loc3_:Number = columnWidth;
-         var _loc4_:Number = margin + padding.left;
-         var _loc5_:Number = margin + padding.top;
-         var _loc6_:Boolean = isInvalid(InvalidationType.DATA);
-         var _loc7_:uint = 0;
-         while(_loc7_ < _loc1_)
+         var _loc4_:Boolean = isInvalid(InvalidationType.DATA);
+         var _loc5_:uint = 0;
+         while(_loc5_ < _loc1_)
          {
-            _loc8_ = getRendererAt(_loc7_);
+            _loc6_ = getRendererAt(_loc5_);
             if(direction == DirectionMode.HORIZONTAL)
             {
-               _loc8_.y = _loc7_ % _totalRows * (_loc2_ + this.paddingBottom + padding.bottom) + margin + padding.top;
-               _loc8_.x = (_loc7_ / _totalRows >> 0) * (_loc3_ + this.paddingRight + padding.right) + margin + padding.left;
+               _loc6_.y = _loc5_ % _totalRows * (_loc2_ + this.paddingBottom + padding.bottom) + margin + padding.top;
+               _loc6_.x = (_loc5_ / _totalRows >> 0) * (_loc3_ + this.paddingRight + padding.right) + margin + padding.left;
             }
             else
             {
-               _loc8_.x = _loc7_ % _totalColumns * (_loc3_ + this.paddingRight + padding.right) + margin + padding.left;
-               _loc8_.y = (_loc7_ / _totalColumns >> 0) * (_loc2_ + this.paddingBottom + padding.bottom) + margin + padding.top;
+               _loc6_.x = _loc5_ % _totalColumns * (_loc3_ + this.paddingRight + padding.right) + margin + padding.left;
+               _loc6_.y = (_loc5_ / _totalColumns >> 0) * (_loc2_ + this.paddingBottom + padding.bottom) + margin + padding.top;
             }
-            if(!_loc6_)
+            if(!_loc4_)
             {
-               _loc8_.validateNow();
+               _loc6_.validateNow();
             }
-            _loc7_++;
+            _loc5_++;
          }
          drawScrollBar();
       }
@@ -102,7 +100,7 @@ package net.wg.gui.components.controls
          super.cleanUpRenderer(param1);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          removeEventListener(MouseEvent.MOUSE_WHEEL,handleMouseWheel,false);
          removeEventListener(InputEvent.INPUT,handleInput,false);
          this.disposeRenderers();
@@ -132,10 +130,10 @@ package net.wg.gui.components.controls
          }
          thumbOffset = null;
          _padding = null;
-         super.dispose();
+         super.onDispose();
       }
 
-      public function disposeRenderers() : void {
+      protected function disposeRenderers() : void {
          var _loc3_:* = NaN;
          var _loc4_:IListItemRenderer = null;
          var _loc5_:IDisposable = null;

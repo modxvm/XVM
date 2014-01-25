@@ -18,8 +18,8 @@ package net.wg.gui.cyberSport.controls
          this.alpha = param1?1:0.5;
       }
 
-      override public function dispose() : void {
-         super.dispose();
+      override protected function onDispose() : void {
+         super.onDispose();
       }
    }
 

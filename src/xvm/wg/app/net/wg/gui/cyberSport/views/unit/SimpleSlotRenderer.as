@@ -9,6 +9,7 @@ package net.wg.gui.cyberSport.views.unit
    import net.wg.gui.cyberSport.vo.UnitSlotVO;
    import flash.events.MouseEvent;
    import scaleform.clik.events.ButtonEvent;
+   import net.wg.infrastructure.interfaces.IUserProps;
    import flash.display.DisplayObject;
    import net.wg.data.constants.Tooltips;
    import net.wg.gui.cyberSport.controls.events.CSComponentEvent;
@@ -85,6 +86,7 @@ package net.wg.gui.cyberSport.views.unit
       }
 
       protected function updateComponents() : void {
+         var _loc1_:IUserProps = null;
          this.initControlsState();
          if(this.slotData)
          {
@@ -142,7 +144,9 @@ package net.wg.gui.cyberSport.views.unit
                {
                   this.contextMenuArea.width = this.slotLabel.width;
                }
-               App.utils.commons.formatPlayerName(this.slotLabel,this.slotData.player.name,this.slotData.player.clan,this.slotData.player.region,this.slotData.player.isIgr,"","",this.slotData.player.color);
+               _loc1_ = App.utils.commons.getUserProps(this.slotData.player.name,this.slotData.player.clan,this.slotData.player.region,this.slotData.player.igrType);
+               _loc1_.rgb = this.slotData.player.color;
+               App.utils.commons.formatPlayerName(this.slotLabel,_loc1_);
             }
             else
             {
@@ -223,13 +227,12 @@ package net.wg.gui.cyberSport.views.unit
       }
 
       private function updateTakePlaceButtonView() : void {
-         var _loc1_:* = false;
-         _loc1_ = this.takePlaceBtn.visible;
+         var _loc1_:Boolean = this.takePlaceBtn.visible;
          this.takePlaceFirstTimeBtn.visible = (_loc1_) && !this.slotData.isCurrentUserInSlot;
          this.takePlaceBtn.visible = (_loc1_) && (this.slotData.isCurrentUserInSlot);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.vehicleBtn.removeEventListener(MouseEvent.ROLL_OVER,this.onMedallionRollOver);
          this.vehicleBtn.removeEventListener(MouseEvent.ROLL_OUT,this.onMedallionRollOut);
          this.takePlaceBtn.removeEventListener(ButtonEvent.CLICK,this.onTakePlaceClick);
@@ -246,7 +249,7 @@ package net.wg.gui.cyberSport.views.unit
          }
          this.vehicleBtn.dispose();
          this.takePlaceBtn.dispose();
-         super.dispose();
+         super.onDispose();
       }
 
       private function onMedallionRollOver(param1:MouseEvent) : void {

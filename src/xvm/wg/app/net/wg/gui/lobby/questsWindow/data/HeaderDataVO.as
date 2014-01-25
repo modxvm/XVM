@@ -20,6 +20,8 @@ package net.wg.gui.lobby.questsWindow.data
 
       private var _status:String = "";
 
+      private var _statusDescription:String = "";
+
       private var _progrBarType:String = "";
 
       private var _eventType:int = 0;
@@ -32,9 +34,9 @@ package net.wg.gui.lobby.questsWindow.data
 
       private var _progrTooltip:Object = null;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this._progrTooltip = null;
-         super.dispose();
+         super.onDispose();
       }
 
       public function get title() : String {
@@ -123,6 +125,14 @@ package net.wg.gui.lobby.questsWindow.data
 
       public function set eventType(param1:int) : void {
          this._eventType = param1;
+      }
+
+      public function get statusDescription() : String {
+         return this._statusDescription;
+      }
+
+      public function set statusDescription(param1:String) : void {
+         this._statusDescription = param1;
       }
    }
 

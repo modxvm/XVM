@@ -38,10 +38,10 @@ package net.wg.gui.lobby.battleResults
 
       private var _dataDirty:Boolean = false;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this._data = null;
          this.detailedReportBtn.dispose();
-         super.dispose();
+         super.onDispose();
       }
 
       public function get data() : Object {

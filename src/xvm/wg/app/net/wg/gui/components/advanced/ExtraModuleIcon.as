@@ -32,9 +32,9 @@ package net.wg.gui.components.advanced
          this.extraIcon.setSource(this._extraIconSource);
       }
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          this.extraIcon.dispose();
-         super.dispose();
+         super.onDispose();
       }
 
       private function onExtraIconLoaded(param1:Event) : void {

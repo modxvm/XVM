@@ -15,7 +15,9 @@ package net.wg.gui.lobby.hangar.maintenance
    import net.wg.data.constants.SoundTypes;
    import net.wg.utils.ILocale;
    import net.wg.data.constants.Currencies;
+   import net.wg.gui.components.controls.VO.ActionPriceVO;
    import __AS3__.vec.Vector;
+   import net.wg.data.constants.IconsTypes;
    import net.wg.data.constants.Values;
    import net.wg.gui.events.ContextMenuEvent;
    import net.wg.gui.events.ModuleInfoEvent;
@@ -93,14 +95,14 @@ package net.wg.gui.lobby.hangar.maintenance
 
       private var actionPrc:Number = 0;
 
-      override public function dispose() : void {
+      override protected function onDispose() : void {
          var _loc1_:IEventCollector = App.utils.events;
          _loc1_.removeEvent(this.toBuyDropdown,ListEvent.INDEX_CHANGE,this.onModuleCurrencyChanged);
          _loc1_.removeEvent(this.select,ListEvent.INDEX_CHANGE,this.onItemRendererClick);
          this.cleanupData();
          this.actionPrice.dispose();
          this.actionPrice = null;
-         super.dispose();
+         super.onDispose();
       }
 
       public function setData(param1:Array, param2:int, param3:Array, param4:Array, param5:Number, param6:Number) : void {
@@ -124,7 +126,12 @@ package net.wg.gui.lobby.hangar.maintenance
          while(_loc9_ < _loc10_)
          {
             _loc8_ = param1[_loc9_];
-            _loc8_.userCredits = [param5,param6];
+            _loc8_.userCredits =
+               {
+                  "credits":param5,
+                  "gold":param6
+               }
+            ;
             if(_loc8_.target == 1 && param2 == _loc8_.index)
             {
                this.selectedIndexOld = _loc9_;
@@ -226,6 +233,7 @@ package net.wg.gui.lobby.hangar.maintenance
       }
 
       private function update() : void {
+         var _loc2_:ILocale = null;
          var _loc3_:IEventCollector = null;
          var _loc1_:ModuleVO = this.artifactsData[this.select.selectedIndex];
          this.toBuyDropdown.visible = false;
@@ -237,7 +245,7 @@ package net.wg.gui.lobby.hangar.maintenance
          this.actionPrice.setup(this);
          this.price.visible = !this.actionPrice.visible;
          this.countLabel.alpha = _loc1_.count > 0?1:0.3;
-         var _loc2_:ILocale = App.utils.locale;
+         _loc2_ = App.utils.locale;
          this.countLabel.text = _loc2_.integer(_loc1_.count);
          if(_loc1_.prices[1] > 0 && _loc1_.prices[0] > 0 && (_loc1_.goldEqsForCredits))
          {
@@ -294,10 +302,30 @@ package net.wg.gui.lobby.hangar.maintenance
          var _loc7_:Number = _loc3_ * _loc2_;
          var _loc8_:Number = _loc4_ * _loc2_;
          _loc5_ = _loc1_.currency == Currencies.CREDITS?_loc6_.integer(_loc7_):_loc6_.gold(_loc7_);
-         this.toBuy.textColor = this.price.textColor = Currencies.TEXT_COLORS[_loc1_.currency];
+         this.toBuy.textColor = Currencies.TEXT_COLORS[_loc1_.currency];
+         this.price.textColor = Currencies.TEXT_COLORS[_loc7_ > _loc1_.userCredits[_loc1_.currency]?Currencies.ERROR:_loc1_.currency];
          this.price.text = _loc5_;
-         this.actionPrice.setData(this.actionPrc,_loc7_,_loc8_,_loc1_.currency);
+         var _loc9_:ActionPriceVO = new ActionPriceVO(this.actionPrc,_loc7_,_loc8_,_loc1_.currency);
+         this.actionPrice.setData(_loc9_);
          this.price.visible = !this.actionPrice.visible;
+         if(this.actionPrice.visible)
+         {
+            if(_loc1_.status == MENU.MODULEFITS_NOT_WITH_INSTALLED_EQUIPMENT)
+            {
+               this.actionPrice.textColorType = ActionPrice.TEXT_COLOR_TYPE_DISABLE;
+            }
+            else
+            {
+               if(_loc1_.price < _loc1_.userCredits[_loc1_.currency])
+               {
+                  this.actionPrice.textColorType = ActionPrice.TEXT_COLOR_TYPE_ICON;
+               }
+               else
+               {
+                  this.actionPrice.textColorType = ActionPrice.TEXT_COLOR_TYPE_ERROR;
+               }
+            }
+         }
          this.toBuy.text = _loc2_ + MULTY_CHARS + this.price.text;
          this.toBuyTf.text = _loc2_ + MULTY_CHARS;
          this.toBuy.enabled = this.price.enabled = !(_loc2_ == 0);
@@ -319,7 +347,7 @@ package net.wg.gui.lobby.hangar.maintenance
 
       private function onModuleCurrencyChanged(param1:ListEvent) : void {
          this.price.icon = this.toBuyDropdown.selectedIndex == 0?Currencies.CREDITS:Currencies.GOLD;
-         this.actionPrice.ico = this.toBuyDropdown.selectedIndex == 0?IconText.CREDITS:IconText.GOLD;
+         this.actionPrice.ico = this.toBuyDropdown.selectedIndex == 0?IconsTypes.CREDITS:IconsTypes.GOLD;
          this.selectedItem.currency = this.toBuyDropdown.selectedIndex == 0?Currencies.CREDITS:Currencies.GOLD;
          this.update();
          dispatchEvent(new EquipmentEvent(EquipmentEvent.TOTAL_PRICE_CHANGED));
