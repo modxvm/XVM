@@ -297,7 +297,7 @@
   Полный архив со всеми кланами можно скачать отдельно:
     http://code.google.com/p/wot-xvm/downloads/list
     Файлы: clanicons-full-ru-XXX.zip (RU), clanicons-full-eu-XXX.zip (EU), clanicons-full-na-XXX.zip (NA),
-    clanicons-full-sg-XXX.zip (SG), clanicons-full-kr-XXX.zip (KR), clanicons-full-vn-XXX.zip (VN)
+    clanicons-full-ASIA-XXX.zip (ASIA), clanicons-full-kr-XXX.zip (KR), clanicons-full-vn-XXX.zip (VN)
 
   Изображение 6-ого чувства.
   Для замены изображения индикатора 6-ого чувства поместите альтернативное изображение PNG формата в
