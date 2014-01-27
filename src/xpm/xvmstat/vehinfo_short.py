@@ -76,7 +76,7 @@ _data = {
     'uk:GB69_Cruiser_Mk_II':             'Crui2',
     'japan:Ke_Ni':                       'KeNi',
     'japan:Ke_Ni_B':                     'KeNiB',
-    'germany:G100_Gtraktor_Krupp'        'Gtrak',
+    'germany:G100_Gtraktor_Krupp':        'Gtrak',
     'germany:S35_captured':              'S35',
     'usa:M2_med':                        'M2MT',
     'france:D2':                         'D2',
