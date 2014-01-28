@@ -8,7 +8,8 @@ interface wot.VehicleMarkersManager.IVehicleMarker
      * called by Battle.pyc
      */
 
-    function init(vClass:String, vIconSource:String, vType:String, vLevel:Number, pFullName:String,
+    function init(vClass:String, vIconSource:String, vType:String, vLevel:Number,
+        pFullName:String, pName:String, pClan:String, pRegion:String,
         curHealth:Number, maxHealth:Number, entityName:String, speaking:Boolean, hunt:Boolean, entityType:String):Void;
     function update():Void;
     function updateMarkerSettings():Void;
@@ -18,8 +19,8 @@ interface wot.VehicleMarkersManager.IVehicleMarker
     function updateState(newState:String, isImmediate:Boolean):Void;
     function showExInfo(show:Boolean):Void;
     function showActionMarker(actionState):Void;
-    
-    
+
+
     /**
      * MovieClip
      */

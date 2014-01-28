@@ -43,6 +43,9 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
     // Private members
     private var m_vehicleName:String;
     private var m_level:Number;
+    private var m_playerName:String;
+    private var m_playerClan:String;
+    private var m_playerRegion:String;
     private var m_playerFullName:String;
     private var m_curHealth:Number;
     private var m_defaultIconSource:String;
@@ -257,7 +260,8 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
     /**
      * called by Battle.pyc
      */
-    public function init(vClass:String, vIconSource:String, vType:String, vLevel:Number, pFullName:String,
+    public function init(vClass:String, vIconSource:String, vType:String, vLevel:Number,
+        pFullName:String, pName:String, pClan:String, pRegion:String,
         curHealth:Number, maxHealth:Number, entityName:String, speaking:Boolean, hunt:Boolean, entityType:String):Void
     {
         /**
@@ -266,6 +270,9 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
          */
         m_vehicleName = vType;
         m_level = vLevel;
+        m_playerName = pName;
+        m_playerClan = pClan;
+        m_playerRegion = pRegion;
         m_playerFullName = pFullName;
         m_defaultIconSource = vIconSource;
         m_vehicleClass = vClass;
@@ -276,9 +283,9 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
             initializeSubject();
         if (wrapper.m_team == "enemy")
         {
-            logLists.onNewMarkerCreated(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth);
+            logLists.onNewMarkerCreated(vClass, vIconSource, vType, vLevel, pFullName, pName, pClan, pRegion, curHealth, maxHealth);
         }
-        call("init", [ vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt, entityType ]);
+        call("init", [ vClass, vIconSource, vType, vLevel, pFullName, pName, pClan, pRegion, curHealth, maxHealth, entityName, speaking, hunt, entityType ]);
     }
 
     public function update():Void { return call("update", arguments); }

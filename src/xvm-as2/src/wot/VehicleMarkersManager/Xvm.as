@@ -76,9 +76,13 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
     /**
      * @see IVehicleMarker
      */
-    function init(vClass:String, vIconSource:String, vType:String, vLevel:Number, pFullName:String,
+    function init(vClass:String, vIconSource:String, vType:String, vLevel:Number,
+        pFullName:String, pName:String, pClan:String, pRegion:String,
         curHealth:Number, maxHealth:Number, entityName:String, speaking:Boolean, hunt:Boolean, entityType:String)
     {
+        m_playerName = pName; // alex
+        m_playerClan = pClan; // "" || ALX
+        m_playerRegion = pRegion; // null || ?
         m_playerFullName = pFullName; // alex[ALX]
 
         //trace("Xvm::init(): " + entityName + ", " + entityType);

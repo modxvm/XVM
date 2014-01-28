@@ -9,9 +9,9 @@ package xvm.autologin
     import flash.display.*;
     import flash.ui.*;
     import net.wg.gui.components.controls.*;
-    import net.wg.gui.components.windows.Window;
+    import net.wg.gui.components.windows.*;
     import net.wg.gui.intro.*;
-    import net.wg.gui.lobby.dialogs.SimpleDialog;
+    import net.wg.gui.lobby.dialogs.*;
     import net.wg.gui.login.impl.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
@@ -77,24 +77,20 @@ package xvm.autologin
 
         private function confirmOldReplays(page:LoginPage):void
         {
-            var wnd:Window = page.stage.focus as Window;
-            if (wnd == null)
-                return;
+            App.utils.scheduler.envokeInNextFrame(function():void {
+                App.utils.scheduler.envokeInNextFrame(function():void {
+                    var submit:SoundButton = page.stage.focus as SoundButton;
+                    if (submit == null)
+                        return;
 
-            var dlg:SimpleDialog = wnd.sourceView as SimpleDialog;
-            if (dlg == null)
-                return;
+                    if (submit.label != DIALOGS.REPLAYNOTIFICATION_SUBMIT)
+                        return;
 
-            var submit:SoundButton = dlg.secondBtn as SoundButton;
-            if (submit == null)
-                return;
+                    (page.form as UIComponent).visible = false;
 
-            if (submit.label != DIALOGS.REPLAYNOTIFICATION_SUBMIT)
-                return;
-
-            (page.form as UIComponent).visible = false;
-
-            submit.dispatchEvent(new ButtonEvent(ButtonEvent.CLICK));
+                    submit.dispatchEvent(new ButtonEvent(ButtonEvent.CLICK));
+                });
+            });
         }
     }
 }

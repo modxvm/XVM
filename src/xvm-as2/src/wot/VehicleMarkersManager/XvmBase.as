@@ -37,44 +37,47 @@ class wot.VehicleMarkersManager.XvmBase
     private static var s_showExInfo:Boolean = false; // Saved "Extended Info State" for markers that appeared when Alt pressed.
     private static var s_blowedUp:Object = {}; // List of members that was ammoracked.
 
-    // Private members
-    var m_entityName;
-    var m_playerFullName;
-    var m_curHealth;
-    var m_maxHealth;
-    var m_source;
-    var m_vname;
-    var m_level;
-    var m_speaking;
-    var m_entityType; // TODO: is the same as proxy.m_team?
+    // Private (?) members
+    public var m_entityName:String;
+    private var m_playerName:String;
+    private var m_playerClan:String;
+    private var m_playerRegion:String;
+    public var m_playerFullName:String;
+    public var m_curHealth:Number;
+    public var m_maxHealth:Number;
+    public var m_source:String;
+    private var m_vname:String;
+    public var m_level:Number;
+    public var m_speaking:Boolean;
+    private var m_entityType:String; // TODO: is the same as proxy.m_team?
 
-    // Private members
-    var m_showExInfo: Boolean;
-    var m_isDead: Boolean;
-    var m_defaultIconSource: String;
+    // Private (?) members
+    public var m_showExInfo: Boolean;
+    public var m_isDead: Boolean;
+    public var m_defaultIconSource: String;
 
     // TextFields
-    var textFields: Object;
+    private var textFields: Object;
 
     // Vehicle State
-    var vehicleState: VehicleState;
+    public var vehicleState: VehicleState;
 
     // UI Controls
-    var actionMarkerComponent: ActionMarkerComponent;
-    var clanIconComponent:ClanIconComponent;
-    var contourIconComponent: ContourIconComponent;
-    var damageTextComponent: DamageTextComponent;
-    var healthBarComponent: HealthBarComponent;
-    var levelIconComponent: LevelIconComponent;
-    var turretStatusComponent: TurretStatusComponent;
-    var vehicleTypeComponent: VehicleTypeComponent;
+    private var actionMarkerComponent: ActionMarkerComponent;
+    private var clanIconComponent:ClanIconComponent;
+    private var contourIconComponent: ContourIconComponent;
+    private var damageTextComponent: DamageTextComponent;
+    private var healthBarComponent: HealthBarComponent;
+    private var levelIconComponent: LevelIconComponent;
+    private var turretStatusComponent: TurretStatusComponent;
+    private var vehicleTypeComponent: VehicleTypeComponent;
 
     // Parent proxy instance (assigned from proxy)
     private var _proxy:VehicleMarkerProxy;
     public function get proxy():VehicleMarkerProxy { return _proxy; }
 
     public function get wrapper():net.wargaming.ingame.VehicleMarker { return proxy.wrapper; }
-    
+
     public function get isBlowedUp():Boolean { return s_blowedUp[m_playerFullName] != undefined; }
 
     private function getCurrentSystemColor():Number

@@ -100,7 +100,6 @@
   },
   "battleLoading": {
     "showChances": true,
-    "showChancesLive": true,
     "removeSquadIcon": false,
     "clanIcon": { "show": true, "x": -345, "xr": -345, "y": 4, "h": 16, "w": 16, "alpha": 90 },
     //"clanIcon": { "show": true, "x": 4, "xr": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },

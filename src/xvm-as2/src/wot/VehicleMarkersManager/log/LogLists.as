@@ -13,10 +13,10 @@ class wot.VehicleMarkersManager.log.LogLists
     private var cfg:Object;
     private var hitLog:HitLog;
     private var hpLeft:HpLeft;
-    
+
     private var altPressed:Boolean = false;
-    
-    public function LogLists(cfg:Object) 
+
+    public function LogLists(cfg:Object)
     {
         this.cfg = cfg;
 
@@ -38,18 +38,19 @@ class wot.VehicleMarkersManager.log.LogLists
         updateText();
         GlobalEventDispatcher.addEventListener(VMMEvent.ALT_STATE_INFORM, this, onAltStateInform);
     }
-    
+
     /** Invoked by VMM */
-    public function onNewMarkerCreated(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth):Void
+    public function onNewMarkerCreated(vClass, vIconSource, vType, vLevel, pFullName, pName, pClan, pRegion, curHealth, maxHealth):Void
     {
         var player:Object = {
             vClass: vClass, vIconSource: vIconSource, vType: vType, vLevel: vLevel,
-            pFullName: pFullName, curHealth: curHealth, maxHealth: maxHealth };
+            pFullName: pFullName, pName: pName, pClan: pClan, pRegion: pRegion,
+            curHealth: curHealth, maxHealth: maxHealth };
         hpLeft.onNewMarkerCreated(player);
-        
+
         updateText();
     }
-    
+
     /** Invoked by VMM */
     public function onHpUpdate(flag:Number, delta:Number, curHealth:Number, vehicleName:String, icon:String, playerName:String,
         level:Number, damageType:String, vtype:String, vtypeColor:String, dead:Boolean, curAbsoluteHealth:Number)
@@ -63,13 +64,13 @@ class wot.VehicleMarkersManager.log.LogLists
                 level, damageType, vtype, vtypeColor, dead);
             }
         }
-        
+
         /** Update HP log */
         hpLeft.onHealthUpdate(playerName, curAbsoluteHealth);
-        
+
         updateText();
     }
-    
+
     /** Show prepared Hitlog or HP log text depending on cfg and Alt button */
     private function updateText():Void
     {
@@ -82,7 +83,7 @@ class wot.VehicleMarkersManager.log.LogLists
             hitLog.setHitText();
         }
     }
-    
+
     /** Catches Alt press event from VMM */
     private function onAltStateInform(event:VMMEvent):Void
     {

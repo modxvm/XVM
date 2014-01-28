@@ -29,7 +29,8 @@
     static var V_NAME_LBL;
     static var DAMAGE_PANEL;
 
-    function init(vClass:String, vIconSource:String, vType:String, vLevel:Number, pFullName:String,
+    function init(vClass:String, vIconSource:String, vType:String, vLevel:Number,
+        pFullName:String, pName:String, pClan:String, pRegion:String,
         curHealth:Number, maxHealth:Number, entityName:String, speaking:Boolean, hunt:Boolean, entityType:String):Void;
     function update():Void;
     function updateMarkerSettings():Void;
@@ -53,7 +54,7 @@
     function set exInfo(value);
     function get markerSettings();
     function set markerSettings(value);
-    
+
     function get colorsManager():net.wargaming.managers.ColorSchemeManager;
     function get colorSchemeName();
 }
