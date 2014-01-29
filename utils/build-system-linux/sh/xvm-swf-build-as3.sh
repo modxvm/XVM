@@ -25,12 +25,15 @@ pushd ../../../src/xvm/ > /dev/null
 export PLAYERGLOBAL_HOME=$FLEX_HOME/frameworks/libs/player 
 export PATH=$PATH:../../utils/build-system-linux/bin/:$FLEX_HOME/bin/
 
+echo "Building AS3 files"
 for (( i=0; i<${#projects[@]}; i++ ));
   do
-    mono ../../utils/build-system-linux/bin/fdbuild-as3.exe -compiler:"$FLEX_HOME" -cp:"" "${projects[$i]}.as3proj"
+    echo "building ${projects[$i]}.as3proj"
+    mono ../../utils/build-system-linux/bin/fdbuild.exe -compiler:"$FLEX_HOME" -cp:"" "${projects[$i]}.as3proj" > /dev/null
   done
+echo ""
 
-rm -rf lib/*
+rm -rf lib
 rm -rf obj
 
 popd > /dev/null

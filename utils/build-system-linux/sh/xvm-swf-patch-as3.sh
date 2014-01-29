@@ -18,8 +18,11 @@ do
  mv "$file" "${file%.swf}.orig.swf"
 done
 
+echo "Patching AS3 files"
 for (( i=0; i<${#files[@]}; i++ ));
   do
+    echo "patching ${files[$i]}.swf"
+
     abcexport ${files[$i]}.orig.swf
     rabcdasm ${files[$i]}.orig-0.abc
 
@@ -46,4 +49,7 @@ rm -f *.swf
 rm -f *.orig
 rm -f *.rej
 
+echo ""
+
 popd > /dev/null
+

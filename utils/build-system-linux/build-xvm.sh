@@ -40,18 +40,21 @@ find . -name "readme-*.txt" -exec cp {} ../../../ \;
 popd > /dev/null
 
 rm -rf ../../release/*.swf
-rm -rf ../../release/mods/*.swf
+rm -rf ../../release/mods
 rm -rf ../../bin/*
 
-#6. Build xvm-py
+#6. Build XPM
+echo "Building XPM"
 pushd ../../src/xpm/ > /dev/null
 ./build-all.sh
 popd > /dev/null
 
 cp -rf ../../bin/xpm/* ../../temp/res_mods/"$wot_version"/
 rm -rf ../../bin/*
+echo ""
 
 #7. Build archive
+echo "Packing build"
 echo "$revision" >> ../../temp/"$revision"
 pushd ../../temp/ > /dev/null && zip -9 -r -q "$revision"_xvm"$archive_postfix".zip ./ && popd > /dev/null
 
