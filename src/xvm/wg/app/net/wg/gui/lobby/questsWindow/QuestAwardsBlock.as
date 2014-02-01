@@ -4,6 +4,7 @@ package net.wg.gui.lobby.questsWindow
    import flash.text.TextField;
    import flash.display.MovieClip;
    import net.wg.gui.lobby.questsWindow.components.ResizableContainer;
+   import flash.text.TextFieldAutoSize;
    import scaleform.clik.constants.InvalidationType;
    import flash.events.Event;
 
@@ -18,11 +19,15 @@ package net.wg.gui.lobby.questsWindow
 
       private static const INVALIDATE_MASK_WIDTH:String = "invMaskWidth";
 
+      private static const INVALIDATE_ALIGN:String = "invAlign";
+
       private static const TEXT_TOP:int = 4;
 
-      public static const DOWN_PADDING:int = 10;
+      public static const TEXT_PADDING:int = 10;
 
       private static const RIGHT_PADDING:int = 40;
+
+      private static const BOTTOM_PADDING:int = 13;
 
       private static const PIXEL_PADDING:int = 1;
 
@@ -46,17 +51,18 @@ package net.wg.gui.lobby.questsWindow
 
       private var _maskWidth:Number = NaN;
 
+      private var _contentAlign:String = "left";
+
       override protected function onDispose() : void {
          this.awardTF = null;
          this.awardDescrTF = null;
          this.flagBottom = null;
          this.flagBody = null;
          this.maskMC = null;
-         super.onDispose();
          this.bobyBg = null;
          this.container.dispose();
          this.container = null;
-         super.dispose();
+         super.onDispose();
       }
 
       override protected function configUI() : void {
@@ -66,7 +72,6 @@ package net.wg.gui.lobby.questsWindow
          this.awardTF.text = QUESTS.QUESTS_TABS_AWARD_TEXT;
          this.awardTF.mouseEnabled = false;
          this.awardDescrTF.mouseEnabled = false;
-         this.flagBottom.mouseEnabled = false;
          this.flagBody.mouseEnabled = false;
          this.maskMC.mouseEnabled = false;
          if(this.bobyBg)
@@ -102,10 +107,14 @@ package net.wg.gui.lobby.questsWindow
                {
                   this.flagBottom.width = this._maskWidth + PIXEL_PADDING;
                }
-               if(this.container)
-               {
-                  this.container.availableWidth = this.awardDescrTF.width = this._maskWidth - this.awardDescrTF.x - RIGHT_PADDING;
-               }
+               this.container.availableWidth = this.awardDescrTF.width = this._maskWidth - this.awardDescrTF.x - RIGHT_PADDING;
+            }
+         }
+         if(isInvalid(INVALIDATE_ALIGN))
+         {
+            if(this._contentAlign == TextFieldAutoSize.RIGHT)
+            {
+               this.container.x = this.awardDescrTF.x = Math.round(this.awardTF.x + this.awardTF.textWidth + TEXT_PADDING);
             }
          }
          if(isInvalid(InvalidationType.DATA))
@@ -114,25 +123,26 @@ package net.wg.gui.lobby.questsWindow
             this.container.setData(this._quests);
             this.container.validateNow();
             this.awardDescrTF.htmlText = this._awardsStr;
+            this.awardDescrTF.height = this.awardDescrTF.textHeight + 4;
             if((this._awardsStr) || this._quests.length > 0)
             {
-               this.awardTF.y = Math.round(TEXT_TOP + DOWN_PADDING);
-               this.awardDescrTF.y = Math.round(TEXT_TOP + DOWN_PADDING);
                _loc2_ = Math.round(this.container.height);
-               this.container.y = Math.round(this.awardTF.y);
+               this.container.y = Math.round(this.awardDescrTF.y);
                if(this._awardsStr)
                {
                   this.container.y = Math.round(this.awardDescrTF.y + this.awardDescrTF.textHeight + TEXT_TOP);
                   _loc2_ = _loc2_ + TEXT_TOP;
                }
-               this.maskMC.height = Math.round(this.awardDescrTF.y + this.awardDescrTF.textHeight + _loc2_ + DOWN_PADDING);
+               this.maskMC.height = Math.round(this.awardDescrTF.y + this.awardDescrTF.textHeight + _loc2_ + BOTTOM_PADDING);
                if(this.flagBottom)
                {
                   this.flagBottom.y = Math.round(this.maskMC.height + PIXEL_PADDING);
+                  this.flagBottom.scaleY = 1;
+                  this.flagBottom.height = Math.min(this.maskMC.height,this.flagBottom.height);
                }
                if(this.bobyBg)
                {
-                  this.bobyBg.height = Math.round(this.maskMC.height + DOWN_PADDING * 2);
+                  this.bobyBg.height = Math.round(this.maskMC.height + TEXT_PADDING * 2);
                }
                _loc1_ = Math.round(this.maskMC.height);
             }
@@ -144,6 +154,15 @@ package net.wg.gui.lobby.questsWindow
       public function setActualWidth(param1:Number) : void {
          this._maskWidth = param1;
          invalidate(INVALIDATE_MASK_WIDTH);
+      }
+
+      public function get contentAlign() : String {
+         return this._contentAlign;
+      }
+
+      public function set contentAlign(param1:String) : void {
+         invalidate(INVALIDATE_ALIGN);
+         this._contentAlign = param1;
       }
    }
 

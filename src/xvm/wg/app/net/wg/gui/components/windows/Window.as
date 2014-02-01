@@ -18,6 +18,7 @@ package net.wg.gui.components.windows
    import scaleform.clik.utils.Constraints;
    import net.wg.infrastructure.interfaces.IAbstractWrapperView;
    import flash.display.DisplayObject;
+   import net.wg.data.constants.Values;
    import net.wg.infrastructure.interfaces.IManagedContent;
    import net.wg.infrastructure.interfaces.IView;
    import scaleform.clik.constants.InvalidationType;
@@ -238,6 +239,10 @@ package net.wg.gui.components.windows
 
       public function get isModal() : Boolean {
          return this._windowContent.isModal;
+      }
+
+      public function get modalAlpha() : Number {
+         return Values.DEFAULT_ALPHA;
       }
 
       public function get window() : IManagedContent {

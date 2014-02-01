@@ -3,6 +3,7 @@ package net.wg.gui.lobby.training
    import net.wg.infrastructure.base.meta.impl.TrainingFormMeta;
    import net.wg.infrastructure.base.meta.ITrainingFormMeta;
    import net.wg.gui.components.controls.WgScrollingList;
+   import scaleform.clik.interfaces.IScrollBar;
    import net.wg.gui.components.icons.BattleTypeIcon;
    import net.wg.gui.components.controls.SoundButtonEx;
    import flash.text.TextField;
@@ -13,6 +14,7 @@ package net.wg.gui.lobby.training
    import flash.ui.Keyboard;
    import flash.events.KeyboardEvent;
    import scaleform.clik.constants.InvalidationType;
+   import flash.display.InteractiveObject;
    import scaleform.clik.data.DataProvider;
    import scaleform.clik.events.InputEvent;
 
@@ -28,6 +30,8 @@ package net.wg.gui.lobby.training
       private static const SUB_VIEW_MARGIN:Number = 120;
 
       public var list:WgScrollingList;
+
+      public var sb:IScrollBar;
 
       public var battleIcon:BattleTypeIcon;
 
@@ -73,7 +77,6 @@ package net.wg.gui.lobby.training
          this.descriptionLabel.text = MENU.TRAINING_DESCRIPTION;
          constraints = new Constraints(this,ConstrainMode.COUNTER_SCALE);
          this.createButon.addEventListener(ButtonEvent.CLICK,this.showCreateTraining);
-         App.utils.focusHandler.setFocus(this.createButon);
          addEventListener(TrainingEvent.OPEN_TRAINING_ROOM,this.onOpenRoom);
          App.gameInputMgr.setKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN,this.handleEscape,true);
       }
@@ -100,6 +103,8 @@ package net.wg.gui.lobby.training
          App.gameInputMgr.clearKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN);
          this.createButon.removeEventListener(ButtonEvent.CLICK,this.showCreateTraining);
          removeEventListener(TrainingEvent.OPEN_TRAINING_ROOM,this.onOpenRoom);
+         this.sb.dispose();
+         this.sb = null;
          this.list.dispose();
          this.list = null;
          this.battleIcon.dispose();
@@ -121,6 +126,11 @@ package net.wg.gui.lobby.training
             this.provider = null;
          }
          super.onDispose();
+      }
+
+      override protected function onInitModalFocus(param1:InteractiveObject) : void {
+         super.onInitModalFocus(param1);
+         setFocus(this.createButon);
       }
 
       public function as_setList(param1:Array, param2:Number) : void {

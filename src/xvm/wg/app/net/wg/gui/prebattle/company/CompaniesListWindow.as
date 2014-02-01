@@ -11,7 +11,6 @@ package net.wg.gui.prebattle.company
    import net.wg.gui.components.controls.CheckBox;
    import net.wg.gui.components.controls.DropdownMenu;
    import net.wg.data.daapi.base.DAAPIDataProvider;
-   import flash.display.InteractiveObject;
    import scaleform.clik.utils.Padding;
    import net.wg.gui.lobby.messengerBar.WindowGeometryInBar;
    import net.wg.gui.events.MessengerBarEvent;
@@ -26,6 +25,8 @@ package net.wg.gui.prebattle.company
    import flash.events.FocusEvent;
    import flash.events.Event;
    import scaleform.clik.events.InputEvent;
+   import net.wg.infrastructure.events.FocusRequestEvent;
+   import net.wg.infrastructure.interfaces.entity.IFocusContainer;
    import flash.ui.Keyboard;
    import flash.geom.Point;
    import net.wg.utils.IEventCollector;
@@ -99,11 +100,6 @@ package net.wg.gui.prebattle.company
          this.defaultSelectedIndex = param3;
       }
 
-      override protected function onInitModalFocus(param1:InteractiveObject) : void {
-         super.onInitModalFocus(param1);
-         setFocus(this.channelComponent.getComponentForFocus());
-      }
-
       override protected function onPopulate() : void {
          canClose = true;
          enabledCloseBtn = false;
@@ -173,9 +169,17 @@ package net.wg.gui.prebattle.company
          this.filterInBattleCheckbox.selected = this.selectedFilterInBattleCheckbox;
          this.filterTextField.text = this.defaultFilterText;
          addEventListener(CompanyDropDownEvent.SHOW_DROP_DOWN,this.onShowDropwDownHandler);
+         this.channelComponent.addEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler);
+         this.cmpList.addEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler);
+      }
+
+      private function onRequestFocusHandler(param1:FocusRequestEvent) : void {
+         setFocus(IFocusContainer(param1.target).getComponentForFocus());
       }
 
       override protected function onDispose() : void {
+         this.channelComponent.removeEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler);
+         this.cmpList.removeEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler);
          this.refreshButton.removeEventListener(ButtonEvent.CLICK,this.refreshButton_buttonClickHandler);
          this.refreshButton.dispose();
          this.cmpList.removeEventListener(CompanyEvent.DROP_LIST_CLICK,this.groupsList_listClickHandler);

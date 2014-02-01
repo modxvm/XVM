@@ -122,9 +122,9 @@ package net.wg.gui.lobby.settings
             {
                _loc2_ = false;
                _loc7_ = SettingsConfig.liveUpdateVideoSettingsOrderData[_loc6_];
+               _loc8_ = new SettingsControlProp();
                if(param1[_loc7_] != null)
                {
-                  _loc8_ = new SettingsControlProp();
                   if(param1[_loc7_]  is  Boolean || param1[_loc7_]  is  String || param1[_loc7_]  is  Number)
                   {
                      _loc8_.current = param1[_loc7_];

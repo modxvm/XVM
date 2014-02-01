@@ -6,6 +6,7 @@
     xmlns:c="components.*"
     title="{_('PBattleLoading')}">
     <c:LabeledTextInput label="{_('clockFormat')}" toolTip="{_('clockFormatToolTip')}" id="v_clockFormat" config="battleLoading.clockFormat" change="onChange(event)"/>
-    <c:LabeledCheckBox label="{_('ShowChances')}" id="v_showChances" config="battleLoading.showChances" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{_('showChances')}" id="v_showChances" config="battleLoading.showChances" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{_('showBattleTier')}" id="v_showBattleTier" config="battleLoading.showBattleTier" change="onChange(event)"/>
     <c:LabeledCheckBox label="{_('RemoveSquadIcon')}" id="v_removeSquadIcon" config="battleLoading.removeSquadIcon" change="onChange(event)"/>
 </c:PanelComponent>

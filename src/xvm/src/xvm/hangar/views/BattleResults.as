@@ -80,13 +80,7 @@ package xvm.hangar.views
                 Logger.add("battleResults: startPage \"" + startPage + "\" is out of range.");
 
             // display win chance
-            if (Config.config.rating.showPlayersStatistics && Config.config.battleResults.showChances)
-            {
-                // Components
-                new WinChances(page); // Winning chance info above players list.
-            }
+            new WinChances(page); // Winning chance info above players list.
         }
-
     }
-
 }

@@ -5,8 +5,6 @@ package net.wg.gui.components.controls
    import scaleform.clik.interfaces.IListItemRenderer;
    import scaleform.clik.data.ListData;
    import scaleform.clik.core.UIComponent;
-   import net.wg.infrastructure.interfaces.entity.IDisposable;
-   import flash.display.DisplayObject;
 
 
    public class WgScrollingList extends ScrollingList
@@ -41,56 +39,6 @@ package net.wg.gui.components.controls
             }
             _loc5_.validateNow();
             _loc4_++;
-         }
-      }
-
-      override protected function onDispose() : void {
-         this.disposeRenderers();
-         if(_dataProvider)
-         {
-            _dataProvider.cleanUp();
-            _dataProvider = null;
-         }
-         if(_scrollBar)
-         {
-            _scrollBar.dispose();
-            _scrollBar = null;
-         }
-         thumbOffset = null;
-         _padding = null;
-         super.onDispose();
-      }
-
-      public function disposeRenderers() : void {
-         var _loc1_:* = NaN;
-         var _loc2_:* = NaN;
-         var _loc3_:IListItemRenderer = null;
-         var _loc4_:IDisposable = null;
-         var _loc5_:DisplayObject = null;
-         if(_renderers != null)
-         {
-            _loc1_ = _renderers.length;
-            _loc2_ = _loc1_-1;
-            while(_loc2_ >= 0)
-            {
-               _loc3_ = getRendererAt(_loc2_);
-               if(_loc3_ != null)
-               {
-                  cleanUpRenderer(_loc3_);
-                  _loc4_ = _loc3_ as IDisposable;
-                  if(_loc4_)
-                  {
-                     _loc4_.dispose();
-                  }
-                  _loc5_ = _loc3_ as DisplayObject;
-                  if(container.contains(_loc5_))
-                  {
-                     container.removeChild(_loc5_);
-                  }
-               }
-               _renderers.splice(_loc2_,1);
-               _loc2_--;
-            }
          }
       }
    }

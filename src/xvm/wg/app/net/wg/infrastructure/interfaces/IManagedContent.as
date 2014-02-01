@@ -9,6 +9,8 @@ package net.wg.infrastructure.interfaces
           
       function get isModal() : Boolean;
 
+      function get modalAlpha() : Number;
+
       function get sourceView() : IView;
 
       function get containerContent() : IManagedContent;

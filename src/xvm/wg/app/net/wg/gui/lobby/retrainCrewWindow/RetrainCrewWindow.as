@@ -33,6 +33,10 @@ package net.wg.gui.lobby.retrainCrewWindow
 
       private static const VEHICLE_BLOCK_INVALID:String = "vehBlockInv";
 
+      private static const CREW_BLOCK_INVALID:String = "crewBlockInv";
+
+      private static const PRICE_INVALID:String = "priceInv";
+
       private static const SIDE_PADDING:uint = 12;
 
       private static const RESULT_ICON_PADDING:uint = 19;
@@ -63,14 +67,17 @@ package net.wg.gui.lobby.retrainCrewWindow
 
       public var vehicleBlock:VehicleBlock;
 
-      private var initVO:RetrainCrewVO;
+      private var initVehicleVO:RetrainCrewVehicleVO;
+
+      private var initCrewVO:RetrainCrewBlockVO;
+
+      private var initCrewOperationVO:RetrainCrewOperationVO;
 
       private var enough_money_color:uint = 16777215;
 
       public var rolesGroup:GroupEx;
 
       override protected function configUI() : void {
-         var _loc2_:* = NaN;
          super.configUI();
          this.enough_money_color = this.result.valueTextField.textColor;
          this.rolesGroup.layout = new HorizontalGroupLayout();
@@ -85,41 +92,60 @@ package net.wg.gui.lobby.retrainCrewWindow
          this.txtPercent.text = _loc1_.makeString(RETRAIN_CREW.LABEL_EXPERIENCERETENTION);
          this.result.label = _loc1_.makeString(RETRAIN_CREW.LABEL_RESULT);
          this.separator.x = this.result.x = SIDE_PADDING;
-         _loc2_ = _width - SIDE_PADDING * 2;
+         var _loc2_:Number = _width - SIDE_PADDING * 2;
          this.separator.width = _loc2_;
          this.result.width = _loc2_ - RESULT_ICON_PADDING;
          this.btnsGroup.addEventListener(IndexEvent.INDEX_CHANGE,this.btnsGroupChangeHandler,false,0,true);
       }
 
       override protected function draw() : void {
+         var _loc1_:SelPriceInfo = null;
+         var _loc2_:uint = 0;
+         var _loc3_:* = NaN;
+         var _loc4_:* = NaN;
+         var _loc5_:* = false;
          super.draw();
-         if(isInvalid(VEHICLE_BLOCK_INVALID))
+         if((isInvalid(VEHICLE_BLOCK_INVALID)) && (this.initVehicleVO))
          {
             this.vehicleBlock.validateNow();
             this.vehicleBlock.discountDL.validateNow();
             this.vehicleBlock.x = Math.round(_width - (this.vehicleBlock.discountDL.x + this.vehicleBlock.discountDL.labelTextField.x + this.vehicleBlock.discountDL.labelTextField.textWidth + RESULT_ICON_PADDING));
          }
+         if((isInvalid(CREW_BLOCK_INVALID)) && (this.initCrewVO))
+         {
+            this.rolesGroup.dataProvider = this.initCrewVO.crewInfoVO;
+            this.txtCrewMembers.htmlText = App.utils.locale.makeString(RETRAIN_CREW.LABEL_CREWMEMBERS) + " <font color=\'#E9E2BF\' size=\'15\'>" + this.initCrewVO.crewInfoVO.length.toString() + "</font>";
+            invalidate(PRICE_INVALID);
+         }
+         if((isInvalid(PRICE_INVALID)) && (this.initCrewVO.priceInfo))
+         {
+            _loc1_ = this.initCrewVO.priceInfo;
+            _loc2_ = this.rolesGroup.dataProvider.length;
+            _loc3_ = 0;
+            this.resultIcon.icon = this.summIconText.icon = _loc1_.isGold?IconsTypes.GOLD:IconsTypes.CREDITS;
+            _loc4_ = _loc1_.price;
+            this.result.value = _loc4_.toString();
+            if(_loc1_.currency == IconsTypes.GOLD)
+            {
+               _loc5_ = this.btnsGroup.operationData.gold >= _loc4_;
+               _loc3_ = this.initCrewOperationVO.tankmanCost[this.btnsGroup.selectedId].gold;
+            }
+            else
+            {
+               _loc5_ = this.btnsGroup.operationData.credits >= _loc4_;
+               _loc3_ = this.initCrewOperationVO.tankmanCost[this.btnsGroup.selectedId].credits;
+            }
+            this.summIconText.text = _loc2_ + " x " + _loc3_;
+            this.result.valueTextColor = _loc5_?this.enough_money_color:NOT_ENOUGH_MONEY_COLOR;
+            this.result.value = _loc4_.toString();
+            this.submitBtn.enabled = _loc5_;
+         }
       }
 
       private function btnsGroupChangeHandler(param1:IndexEvent) : void {
-         var _loc5_:* = false;
-         var _loc2_:SelPriceInfo = SelPriceInfo(param1.data);
-         var _loc3_:uint = this.rolesGroup.dataProvider.length;
-         this.summIconText.text = _loc3_ + " x " + _loc2_.price;
-         this.resultIcon.icon = this.summIconText.icon = _loc2_.currency != IconsTypes.GOLD?IconsTypes.CREDITS:IconsTypes.GOLD;
-         var _loc4_:Number = _loc3_ * _loc2_.price;
-         this.result.value = _loc4_.toString();
-         if(_loc2_.currency == IconsTypes.GOLD)
-         {
-            _loc5_ = this.btnsGroup.operationData.gold >= _loc4_;
-         }
-         else
-         {
-            _loc5_ = this.btnsGroup.operationData.credits >= _loc4_;
-         }
-         this.result.valueTextColor = _loc5_?this.enough_money_color:NOT_ENOUGH_MONEY_COLOR;
-         this.result.value = _loc4_.toString();
-         this.submitBtn.enabled = _loc5_;
+         var _loc2_:Object = changeRetrainTypeS(param1.index);
+         this.initCrewVO = new RetrainCrewBlockVO(_loc2_);
+         invalidate(CREW_BLOCK_INVALID);
       }
 
       private function groupResizeHandler(param1:Event) : void {
@@ -147,10 +173,15 @@ package net.wg.gui.lobby.retrainCrewWindow
       }
 
       override protected function onDispose() : void {
-         if(this.initVO)
+         if(this.initVehicleVO)
          {
-            this.initVO.dispose();
-            this.initVO = null;
+            this.initVehicleVO.dispose();
+            this.initVehicleVO = null;
+         }
+         if(this.initCrewVO)
+         {
+            this.initCrewVO.dispose();
+            this.initCrewVO = null;
          }
          this.submitBtn.removeEventListener(ButtonEvent.CLICK,this.submitClickHandler);
          this.cancelBtn.removeEventListener(ButtonEvent.CLICK,this.cancelClickHandler);
@@ -170,18 +201,20 @@ package net.wg.gui.lobby.retrainCrewWindow
       }
 
       public function as_setCommonData(param1:Object) : void {
-         this.initVO = new RetrainCrewVO(param1);
-         this.vehicleBlock.setData(this.initVO.vehicleBlockVO);
-         this.rolesGroup.dataProvider = this.initVO.crewInfoVO;
-         this.btnsGroup.crewInfo = this.initVO.crewInfoVO;
-         this.btnsGroup.currentVehicleType = this.initVO.vehicleBlockVO.vType;
-         this.btnsGroup.currentVehicleIntCD = this.initVO.vehicleBlockVO.vIntCD;
-         this.txtCrewMembers.htmlText = App.utils.locale.makeString(RETRAIN_CREW.LABEL_CREWMEMBERS) + " <font color=\'#E9E2BF\' size=\'15\'>" + this.initVO.crewInfoVO.length.toString() + "</font>";
+         this.initVehicleVO = new RetrainCrewVehicleVO(param1);
+         this.vehicleBlock.setData(this.initVehicleVO.vehicleBlockVO);
+         this.initCrewVO = new RetrainCrewBlockVO(param1);
+         this.rolesGroup.dataProvider = this.initCrewVO.crewInfoVO;
+         this.btnsGroup.crewInfo = this.initCrewVO.crewInfoVO;
+         this.btnsGroup.currentVehicleType = this.initVehicleVO.vehicleBlockVO.vType;
+         this.btnsGroup.currentVehicleIntCD = this.initVehicleVO.vehicleBlockVO.vIntCD;
+         this.txtCrewMembers.htmlText = App.utils.locale.makeString(RETRAIN_CREW.LABEL_CREWMEMBERS) + " <font color=\'#E9E2BF\' size=\'15\'>" + this.initCrewVO.crewInfoVO.length.toString() + "</font>";
          invalidate(VEHICLE_BLOCK_INVALID);
       }
 
       public function as_updateData(param1:Object) : void {
-         this.btnsGroup.operationData = new RetrainCrewOperationVO(param1);
+         this.initCrewOperationVO = new RetrainCrewOperationVO(param1);
+         this.btnsGroup.operationData = this.initCrewOperationVO;
       }
    }
 

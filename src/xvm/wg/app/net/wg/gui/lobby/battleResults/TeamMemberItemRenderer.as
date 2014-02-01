@@ -2,13 +2,14 @@ package net.wg.gui.lobby.battleResults
 {
    import net.wg.gui.components.controls.SoundListItemRenderer;
    import flash.display.MovieClip;
+   import net.wg.gui.components.controls.UserNameField;
    import flash.text.TextField;
    import net.wg.gui.components.controls.UILoaderAlt;
    import flash.events.MouseEvent;
    import net.wg.data.components.BattleResultsCIGenerator;
    import flash.filters.ColorMatrixFilter;
    import net.wg.infrastructure.interfaces.IColorScheme;
-   import net.wg.infrastructure.interfaces.IUserProps;
+   import net.wg.data.VO.UserVO;
 
 
    public class TeamMemberItemRenderer extends SoundListItemRenderer
@@ -26,7 +27,7 @@ package net.wg.gui.lobby.battleResults
 
       public var selectionBg:MovieClip;
 
-      public var playerName:TextField;
+      public var playerName:UserNameField;
 
       public var vehicleName:TextField;
 
@@ -136,8 +137,7 @@ package net.wg.gui.lobby.battleResults
 
       override protected function draw() : void {
          var _loc1_:IColorScheme = null;
-         var _loc2_:IUserProps = null;
-         var _loc3_:* = NaN;
+         var _loc2_:* = NaN;
          super.draw();
          if(this._dataDirty)
          {
@@ -162,10 +162,16 @@ package net.wg.gui.lobby.battleResults
                      _loc1_ = App.colorSchemeMgr.getScheme(data.killerID > 0?"normal_dead":"normal");
                   }
                }
-               _loc2_ = App.utils.commons.getUserProps(data.playerName,data.playerClan,data.playerRegion,data.playerIgrType);
-               _loc2_.rgb = _loc1_.rgb;
-               _loc2_.igrVspace = -5;
-               App.utils.commons.formatPlayerName(this.playerName,_loc2_);
+               this.playerName.userVO = new UserVO(
+                  {
+                     "fullName":data.playerFullName,
+                     "userName":data.playerName,
+                     "clanAbbrev":data.playerClan,
+                     "region":data.playerRegion,
+                     "igrType":data.playerIgrType
+                  }
+               );
+               this.playerName.textColor = _loc1_.rgb;
                this.vehicleIcon.source = data.tankIcon?data.tankIcon:this.vehicleIcon.sourceAlt;
                this.vehicleName.text = data.vehicleName;
                this.xpLbl.text = App.utils.locale.integer(data.xp - data.achievementXP);
@@ -205,8 +211,8 @@ package net.wg.gui.lobby.battleResults
                }
                if(data.tkills > 0)
                {
-                  _loc3_ = this.getColorForAlias("teamkiller",65535);
-                  this.fragsLbl.htmlText = this.fragsLbl.htmlText + ("(<FONT color=\"#" + _loc3_.toString(16) + "\">" + data.tkills + "</FONT>)");
+                  _loc2_ = this.getColorForAlias("teamkiller",65535);
+                  this.fragsLbl.htmlText = this.fragsLbl.htmlText + ("(<FONT color=\"#" + _loc2_.toString(16) + "\">" + data.tkills + "</FONT>)");
                }
                if(data.medalsCount > 0)
                {

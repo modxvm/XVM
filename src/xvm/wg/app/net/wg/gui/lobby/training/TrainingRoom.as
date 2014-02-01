@@ -244,18 +244,6 @@ package net.wg.gui.lobby.training
          {
             this.isCreator = _loc2_.isCreator;
          }
-         if((canAssignToTeamS(1)) || (canAssignToTeamS(2)) || (canChangePlayerTeamS()))
-         {
-            this.createDragController();
-         }
-         else
-         {
-            if(this._dragDropListDelegateCtrlr)
-            {
-               this._dragDropListDelegateCtrlr.dispose();
-               this._dragDropListDelegateCtrlr = null;
-            }
-         }
          this.comment.text = _loc2_.comment;
          this.timeout.label = _loc2_.roundLenString;
          this.maxPlayersCount = _loc2_.maxPlayersCount;
@@ -336,6 +324,18 @@ package net.wg.gui.lobby.training
 
       override protected function onPopulate() : void {
          super.onPopulate();
+         if((canAssignToTeamS(1)) || (canAssignToTeamS(2)) || (canChangePlayerTeamS()))
+         {
+            this.createDragController();
+         }
+         else
+         {
+            if(this._dragDropListDelegateCtrlr)
+            {
+               this._dragDropListDelegateCtrlr.dispose();
+               this._dragDropListDelegateCtrlr = null;
+            }
+         }
          registerComponent(this.minimap,Aliases.LOBBY_MINIMAP);
          this.setTeamsInfo();
          var _loc1_:Boolean = App.voiceChatMgr.isYYS();

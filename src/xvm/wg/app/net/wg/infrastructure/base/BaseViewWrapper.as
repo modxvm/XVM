@@ -5,6 +5,7 @@ package net.wg.infrastructure.base
    import net.wg.infrastructure.interfaces.IAbstractWrapperView;
    import net.wg.infrastructure.interfaces.IBaseLayout;
    import flash.display.DisplayObject;
+   import net.wg.data.constants.Values;
    import net.wg.infrastructure.interfaces.IManagedContent;
    import net.wg.infrastructure.interfaces.IView;
 
@@ -88,6 +89,10 @@ package net.wg.infrastructure.base
 
       public function get isModal() : Boolean {
          return false;
+      }
+
+      public function get modalAlpha() : Number {
+         return Values.DEFAULT_ALPHA;
       }
 
       public function get window() : IManagedContent {

@@ -22,7 +22,7 @@ package com.xvm.misc
             return "<font color='#FFBBBB'>" + Locale.get("Chance error") + ": " + text + "</font>";
         }
 
-        public static function GetChanceText(playerNames:Vector.<String>, showLive:Boolean = false):String
+        public static function GetChanceText(playerNames:Vector.<String>, showChance:Boolean, showTier:Boolean, showLive:Boolean = false):String
         {
             Logger.add("========== begin chance calculation ===========");
             try
@@ -51,18 +51,26 @@ package com.xvm.misc
                 //    return ChanceError("[T] " + chT.error);
 
                 //lastChances = { g: chG.percentF, t: chT.percentF };
-                text += Locale.get("Chance to win") + ": " +
-                    FormatChangeText(""/*Locale.get("global")*/, chG)// + ", " +
-                    //FormatChangeText(Locale.get("per-vehicle"), chT);
-                if (showLive)
+                if (showChance)
                 {
-                    var chX1:Object = GetChance(playerNames, ChanceFuncX1);
-                    //var chX2:Object = GetChance(playerNames, ChanceFuncX2);
-                    text += " | " + Locale.get("chanceLive") + ": " + FormatChangeText("", chX1) +
-                    //    ", " + FormatChangeText("", chX2) +
-                        ". " + Locale.get("chanceBattleTier") + ": " + battleTier;
-                    //lastChances.X1 = chX1.percentF;
-                    //lastChances.X2 = chX2.percentF;
+                    text = Locale.get("Chance to win") + ": " +
+                        FormatChangeText(""/*Locale.get("global")*/, chG)// + ", " +
+                        //FormatChangeText(Locale.get("per-vehicle"), chT);
+                    if (showLive)
+                    {
+                        var chX1:Object = GetChance(playerNames, ChanceFuncX1);
+                        //var chX2:Object = GetChance(playerNames, ChanceFuncX2);
+                        text += " | " + Locale.get("chanceLive") + ": " + FormatChangeText("", chX1);
+                        //    ", " + FormatChangeText("", chX2);
+                        //lastChances.X1 = chX1.percentF;
+                        //lastChances.X2 = chX2.percentF;
+                    }
+                }
+                if (showTier)
+                {
+                    if (text != "")
+                        text += ". ";
+                    text += Locale.get("chanceBattleTier") + ": " + battleTier;
                 }
                 Logger.add("RESULT=" + text);
                 return text;

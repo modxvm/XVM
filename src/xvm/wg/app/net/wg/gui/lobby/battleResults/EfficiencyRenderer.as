@@ -3,13 +3,15 @@ package net.wg.gui.lobby.battleResults
    import scaleform.clik.core.UIComponent;
    import scaleform.clik.interfaces.IListItemRenderer;
    import flash.display.MovieClip;
-   import flash.text.TextField;
+   import net.wg.gui.components.controls.UserNameField;
    import net.wg.gui.components.controls.UILoaderAlt;
+   import flash.text.TextField;
    import scaleform.clik.data.ListData;
    import flash.events.MouseEvent;
    import net.wg.gui.events.FinalStatisticEvent;
    import flash.filters.ColorMatrixFilter;
    import flash.text.TextFormat;
+   import net.wg.data.VO.UserVO;
 
 
    public class EfficiencyRenderer extends UIComponent implements IListItemRenderer
@@ -29,7 +31,7 @@ package net.wg.gui.lobby.battleResults
 
       protected var _owner:UIComponent = null;
 
-      public var playerName:TextField;
+      public var playerName:UserNameField;
 
       public var vehicleIcon:UILoaderAlt;
 
@@ -142,19 +144,26 @@ package net.wg.gui.lobby.battleResults
                this.critsIcon.visible = !this.data.isFake && !this.data.isAlly;
                this.evilIcon.visible = !this.data.isFake && !this.data.isAlly;
                this.spottedIcon.visible = !this.data.isFake && !this.data.isAlly;
-               App.utils.commons.formatPlayerName(this.playerName,App.utils.commons.getUserProps(this.data.playerName,this.data.playerClan,this.data.playerRegion));
-               _loc1_ = this.playerName.getTextFormat();
+               this.playerName.userVO = new UserVO(
+                  {
+                     "fullName":this.data.playerFullName,
+                     "userName":this.data.playerName,
+                     "clanAbbrev":this.data.playerClan,
+                     "region":this.data.playerRegion
+                  }
+               );
+               _loc1_ = this.playerName.textField.getTextFormat();
                if(this.data.isFake)
                {
                   _loc1_.align = "left";
                   _loc1_.leftMargin = 15;
-                  this.playerName.setTextFormat(_loc1_);
+                  this.playerName.textField.setTextFormat(_loc1_);
                }
                else
                {
                   _loc1_.align = "right";
                   _loc1_.leftMargin = 0;
-                  this.playerName.setTextFormat(_loc1_);
+                  this.playerName.textField.setTextFormat(_loc1_);
                   this.vehicleIcon.source = this.data.tankIcon;
                   this.vehicleName.text = this.data.vehicleName;
                   this.damageIcon.enabled = false;

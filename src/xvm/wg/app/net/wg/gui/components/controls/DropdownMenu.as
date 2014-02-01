@@ -5,13 +5,14 @@ package net.wg.gui.components.controls
    import flash.display.MovieClip;
    import net.wg.data.constants.SoundManagerStates;
    import flash.events.MouseEvent;
+   import net.wg.gui.components.controls.events.ScrollBarEvent;
    import flash.utils.getDefinitionByName;
    import scaleform.clik.controls.CoreList;
    import scaleform.clik.events.ListEvent;
    import scaleform.clik.managers.PopUpManager;
    import flash.events.Event;
-   import scaleform.clik.controls.ScrollingList;
    import flash.geom.Point;
+   import scaleform.clik.controls.ScrollingList;
    import flash.display.DisplayObject;
    import scaleform.clik.interfaces.IDataProvider;
    import scaleform.clik.events.InputEvent;
@@ -98,6 +99,20 @@ package net.wg.gui.components.controls
          }
       }
 
+      override public function open() : void {
+         super.open();
+         App.stage.addEventListener(MouseEvent.MOUSE_WHEEL,this.mouseWheelHandlerGlobal,false,0,true);
+         App.stage.addEventListener(ScrollBarEvent.ON_MOUSE_WHEEL_INSIDE,this.onMouseWheelInside,false);
+      }
+
+      override public function close() : void {
+         selected = false;
+         App.stage.removeEventListener(MouseEvent.MOUSE_DOWN,this.handleStageClick,false);
+         App.stage.removeEventListener(MouseEvent.MOUSE_WHEEL,this.mouseWheelHandlerGlobal,false);
+         App.stage.removeEventListener(ScrollBarEvent.ON_MOUSE_WHEEL_INSIDE,this.onMouseWheelInside,false);
+         this.hideDropdown();
+      }
+
       override protected function showDropdown() : void {
          var _loc1_:MovieClip = null;
          var _loc2_:Class = null;
@@ -167,8 +182,36 @@ package net.wg.gui.components.controls
          stage.addEventListener(Event.RESIZE,this.updateDDPosition);
       }
 
+      private function mouseWheelHandlerGlobal(param1:MouseEvent) : void {
+         this.tryClosedDropDown();
+      }
+
+      private function onMouseWheelInside(param1:ScrollBarEvent) : void {
+         this.tryClosedDropDown();
+      }
+
+      private function tryClosedDropDown() : void {
+         var _loc1_:Point = null;
+         var _loc2_:* = false;
+         if(isOpen())
+         {
+            _loc1_ = new Point(_dropdownRef.mouseX,_dropdownRef.mouseY);
+            _loc1_ = _dropdownRef.localToGlobal(_loc1_);
+            _loc2_ = _dropdownRef.hitTestPoint(_loc1_.x,_loc1_.y);
+            if(!_loc2_)
+            {
+               this.close();
+            }
+         }
+      }
+
       private function mouseWheelHandler(param1:MouseEvent) : void {
          var _loc4_:ScrollingList = null;
+         param1.stopPropagation();
+         if(App.stage)
+         {
+            App.stage.dispatchEvent(new ScrollBarEvent(ScrollBarEvent.ON_MOUSE_WHEEL_INSIDE));
+         }
          var _loc2_:int = param1.delta > 0?-1:1;
          var _loc3_:int = _selectedIndex + _loc2_;
          if(_loc3_ < 0)
@@ -259,7 +302,7 @@ package net.wg.gui.components.controls
          {
             return;
          }
-         close();
+         this.close();
       }
 
       override public function set dataProvider(param1:IDataProvider) : void {
@@ -274,7 +317,7 @@ package net.wg.gui.components.controls
          _dataProvider = param1;
          if(isOpen())
          {
-            close();
+            this.close();
          }
          if(_dataProvider == null)
          {
@@ -347,6 +390,8 @@ package net.wg.gui.components.controls
          removeEventListener(MouseEvent.DOUBLE_CLICK,handleMouseRelease,false);
          removeEventListener(InputEvent.INPUT,handleInput,false);
          removeEventListener(MouseEvent.MOUSE_WHEEL,this.mouseWheelHandler,false);
+         App.stage.removeEventListener(MouseEvent.MOUSE_WHEEL,this.mouseWheelHandlerGlobal,false);
+         App.stage.removeEventListener(ScrollBarEvent.ON_MOUSE_WHEEL_INSIDE,this.onMouseWheelInside,false);
          if(_repeatTimer)
          {
             _repeatTimer.removeEventListener(TimerEvent.TIMER_COMPLETE,beginRepeat,false);

@@ -35,9 +35,10 @@ package net.wg.gui.lobby.vehicleInfo
       }
 
       public function update(param1:Object) : void {
+         var _loc2_:uint = 0;
          var _loc3_:BaseBlock = null;
          this._data = param1 as Array;
-         var _loc2_:uint = 0;
+         _loc2_ = 0;
          while(_loc2_ < this._data.length)
          {
             _loc3_ = new BaseBlock();

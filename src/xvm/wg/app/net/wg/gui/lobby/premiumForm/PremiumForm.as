@@ -83,7 +83,6 @@ package net.wg.gui.lobby.premiumForm
 
       override protected function onDispose() : void {
          var _loc1_:IDisposable = null;
-         super.onDispose();
          this.applyButton.removeEventListener(ButtonEvent.PRESS,this.applyButtonClickHandler);
          this.applyButton.dispose();
          this.applyButton = null;
@@ -106,7 +105,6 @@ package net.wg.gui.lobby.premiumForm
          }
          this.dataProvider.cleanUp();
          this.dataProvider = null;
-         this.selectedItem.dispose();
          this.selectedItem = null;
          this.listHeight = NaN;
          this._userGold = NaN;
@@ -119,6 +117,7 @@ package net.wg.gui.lobby.premiumForm
          this.percents = null;
          this.removeChild(this.vs);
          this.vs = null;
+         super.onDispose();
       }
 
       override protected function onPopulate() : void {

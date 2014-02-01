@@ -13,6 +13,18 @@ package net.wg.gui.components.controls
 
       public var isUnderline:Boolean = true;
 
+      override protected function changeFocus() : void {
+         if(!enabled)
+         {
+            return;
+         }
+         setState((_focused) || (_displayFocus)?"over":"out");
+         if((_pressedByKeyboard) && !_focused)
+         {
+            _pressedByKeyboard = false;
+         }
+      }
+
       override protected function updateText() : void {
          if(!(_label == null) && !(textField == null))
          {

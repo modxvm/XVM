@@ -237,7 +237,6 @@ package net.wg.gui.lobby.profile.components
                      _loc3_.offsetTop = this.thumbOffset.top;
                      _loc3_.offsetBottom = this.thumbOffset.bottom;
                   }
-                  _loc1_.addEventListener(MouseEvent.MOUSE_WHEEL,this.blockMouseWheel,false,0,true);
                   this.addChild(_loc1_ as DisplayObject);
                }
             }
@@ -247,7 +246,6 @@ package net.wg.gui.lobby.profile.components
             if(this._scrollBarValue  is  Class)
             {
                _loc1_ = new (this._scrollBarValue as Class)() as IScrollBar;
-               _loc1_.addEventListener(MouseEvent.MOUSE_WHEEL,this.blockMouseWheel,false,0,true);
                if(_loc1_ != null)
                {
                   this._autoScrollBar = true;
@@ -312,10 +310,6 @@ package net.wg.gui.lobby.profile.components
          invalidate(SCROLL_UPDATE_INV);
       }
 
-      protected function blockMouseWheel(param1:MouseEvent) : void {
-         param1.stopPropagation();
-      }
-
       override protected function onDispose() : void {
          var _loc1_:DisplayObject = null;
          super.onDispose();
@@ -327,7 +321,6 @@ package net.wg.gui.lobby.profile.components
             {
                _loc1_.parent.removeChild(_loc1_);
             }
-            this._scrollBar.removeEventListener(MouseEvent.MOUSE_WHEEL,this.blockMouseWheel);
             this._scrollBar.removeEventListener(Event.SCROLL,this.handleScroll);
             this._scrollBar.removeEventListener(Event.CHANGE,this.handleScroll);
             this._scrollBar = null;

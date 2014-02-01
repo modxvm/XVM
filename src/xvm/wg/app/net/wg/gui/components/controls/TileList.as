@@ -6,12 +6,7 @@ package net.wg.gui.components.controls
    import scaleform.clik.constants.DirectionMode;
    import scaleform.clik.core.UIComponent;
    import scaleform.clik.constants.InvalidationType;
-   import flash.events.MouseEvent;
-   import scaleform.clik.events.InputEvent;
-   import flash.events.Event;
    import flash.display.DisplayObject;
-   import net.wg.infrastructure.interfaces.entity.IDisposable;
-   import net.wg.utils.ICommons;
    import net.wg.utils.IEventCollector;
 
 
@@ -101,71 +96,7 @@ package net.wg.gui.components.controls
       }
 
       override protected function onDispose() : void {
-         removeEventListener(MouseEvent.MOUSE_WHEEL,handleMouseWheel,false);
-         removeEventListener(InputEvent.INPUT,handleInput,false);
-         this.disposeRenderers();
-         if(_scrollBar)
-         {
-            _scrollBar.removeEventListener(MouseEvent.MOUSE_WHEEL,blockMouseWheel,false);
-            _scrollBar.removeEventListener(Event.SCROLL,handleScroll,false);
-            _scrollBar.removeEventListener(Event.CHANGE,handleScroll,false);
-            _scrollBar.focusTarget = null;
-            _scrollBar.dispose();
-            if(container.contains(DisplayObject(_scrollBar)))
-            {
-               container.removeChild(DisplayObject(_scrollBar));
-            }
-            _scrollBar = null;
-         }
-         if(_dataProvider)
-         {
-            _dataProvider.removeEventListener(Event.CHANGE,handleDataChange,false);
-            _dataProvider.cleanUp();
-            _dataProvider = null;
-         }
-         if((container) && (contains(container)))
-         {
-            removeChild(container);
-            container = null;
-         }
-         thumbOffset = null;
-         _padding = null;
          super.onDispose();
-      }
-
-      protected function disposeRenderers() : void {
-         var _loc3_:* = NaN;
-         var _loc4_:IListItemRenderer = null;
-         var _loc5_:IDisposable = null;
-         var _loc6_:DisplayObject = null;
-         if(!_renderers)
-         {
-            return;
-         }
-         var _loc1_:ICommons = App.utils.commons;
-         var _loc2_:Number = _renderers.length;
-         _loc3_ = _loc2_-1;
-         while(_loc3_ >= 0)
-         {
-            _loc4_ = getRendererAt(_loc3_);
-            if(_loc4_ != null)
-            {
-               this.cleanUpRenderer(_loc4_);
-               _loc5_ = _loc4_ as IDisposable;
-               if(_loc5_)
-               {
-                  _loc5_.dispose();
-               }
-               _loc6_ = _loc4_ as DisplayObject;
-               _loc1_.releaseReferences(_loc6_);
-               if(container.contains(_loc6_))
-               {
-                  container.removeChild(_loc6_);
-               }
-            }
-            _renderers.splice(_loc3_,1);
-            _loc3_--;
-         }
       }
 
       override protected function draw() : void {

@@ -1,17 +1,19 @@
 package net.wg.gui.prebattle.company
 {
    import net.wg.gui.components.controls.SoundListItemRenderer;
+   import net.wg.infrastructure.interfaces.entity.IFocusContainer;
    import flash.text.TextField;
    import flash.display.MovieClip;
    import flash.events.MouseEvent;
+   import flash.display.InteractiveObject;
    import scaleform.clik.events.ButtonEvent;
    import scaleform.clik.utils.Constraints;
    import scaleform.clik.constants.InvalidationType;
    import scaleform.clik.data.DataProvider;
-   import net.wg.data.constants.Errors;
+   import net.wg.infrastructure.events.FocusRequestEvent;
 
 
-   public class CompanyListItemRenderer extends SoundListItemRenderer
+   public class CompanyListItemRenderer extends SoundListItemRenderer implements IFocusContainer
    {
           
       public function CompanyListItemRenderer() {
@@ -44,6 +46,10 @@ package net.wg.gui.prebattle.company
 
       public function showPlayersList(param1:Boolean) : void {
          this._showPlayers = param1;
+      }
+
+      public function getComponentForFocus() : InteractiveObject {
+         return this;
       }
 
       override protected function onDispose() : void {
@@ -148,8 +154,7 @@ package net.wg.gui.prebattle.company
          {
             return;
          }
-         DebugUtils.LOG_WARNING(Errors.INVALID_FOCUS_USING);
-         App.utils.focusHandler.setFocus(this);
+         dispatchEvent(new FocusRequestEvent(FocusRequestEvent.REQUEST_FOCUS,this));
          this.dispatchIsSelectedItem(selected);
          if(this._showPlayers)
          {

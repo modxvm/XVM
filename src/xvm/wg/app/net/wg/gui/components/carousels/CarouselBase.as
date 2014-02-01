@@ -6,10 +6,10 @@ package net.wg.gui.components.carousels
    import scaleform.clik.utils.Padding;
    import flash.events.MouseEvent;
    import scaleform.clik.events.ButtonEvent;
-   import flash.events.Event;
    import flash.display.Stage;
    import scaleform.gfx.MouseCursorEvent;
    import scaleform.clik.interfaces.IDataProvider;
+   import flash.events.Event;
    import scaleform.clik.constants.InvalidationType;
    import scaleform.clik.interfaces.IListItemRenderer;
    import flash.display.DisplayObject;
@@ -19,7 +19,6 @@ package net.wg.gui.components.carousels
    import scaleform.clik.motion.Tween;
    import flash.utils.setInterval;
    import flash.utils.clearInterval;
-   import net.wg.infrastructure.interfaces.entity.IDisposable;
    import net.wg.data.constants.Cursors;
    import net.wg.infrastructure.interfaces.ICursor;
 
@@ -29,6 +28,7 @@ package net.wg.gui.components.carousels
           
       public function CarouselBase() {
          this._padding = new Padding(0);
+         this.lastCursor = Cursors.ARROW;
          super();
          this.visible = false;
       }
@@ -85,7 +85,7 @@ package net.wg.gui.components.carousels
 
       private var mouseIn:Boolean = false;
 
-      private var lastCursor:String = "arrow";
+      private var lastCursor:String;
 
       private var countFactor:int = 0;
 
@@ -117,13 +117,11 @@ package net.wg.gui.components.carousels
          this.rightArrow.removeEventListener(ButtonEvent.CLICK,this.arrowClick);
          this.leftArrow.removeEventListener(ButtonEvent.RELEASE_OUTSIDE,this.arrowRelease);
          this.rightArrow.removeEventListener(ButtonEvent.RELEASE_OUTSIDE,this.arrowRelease);
-         _dataProvider.removeEventListener(Event.CHANGE,handleDataChange);
          this.removeEventListener(MouseEvent.MOUSE_DOWN,this.startDragging);
          var _loc1_:Stage = App.stage;
          _loc1_.removeEventListener(MouseEvent.MOUSE_UP,this.stopDragging);
          _loc1_.removeEventListener(MouseCursorEvent.CURSOR_CHANGE,this.onChangeCursorHandler);
          _loc1_.removeEventListener(MouseEvent.MOUSE_MOVE,this.carouselMouseMoveHandler);
-         this.disposeRenderers();
       }
 
       override public function set dataProvider(param1:IDataProvider) : void {
@@ -676,40 +674,6 @@ package net.wg.gui.components.carousels
             this.slidingIntervalId = 0;
             this.lastDx = 0;
          }
-      }
-
-      private function disposeRenderers() : void {
-         var _loc2_:* = NaN;
-         var _loc3_:IListItemRenderer = null;
-         var _loc4_:IDisposable = null;
-         var _loc5_:DisplayObject = null;
-         if(_renderers == null || _dataProvider == null)
-         {
-            return;
-         }
-         var _loc1_:Number = _renderers.length;
-         _loc2_ = _loc1_-1;
-         while(_loc2_ >= 0)
-         {
-            _loc3_ = getRendererAt(_loc2_);
-            if(_loc3_ != null)
-            {
-               cleanUpRenderer(_loc3_);
-               _loc4_ = _loc3_ as IDisposable;
-               if(_loc4_)
-               {
-                  _loc4_.dispose();
-               }
-               _loc5_ = _loc3_ as DisplayObject;
-               if(container.contains(_loc5_))
-               {
-                  container.removeChild(_loc5_);
-               }
-            }
-            _renderers.splice(_loc2_,1);
-            _loc2_--;
-         }
-         _dataProvider = null;
       }
 
       private function carouselMouseMoveHandler(param1:MouseEvent) : void {

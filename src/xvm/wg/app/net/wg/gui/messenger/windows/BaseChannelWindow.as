@@ -3,9 +3,9 @@ package net.wg.gui.messenger.windows
    import net.wg.gui.messenger.meta.impl.BaseChannelWindowMeta;
    import net.wg.gui.messenger.meta.IBaseChannelWindowMeta;
    import net.wg.gui.messenger.ChannelComponent;
-   import flash.display.InteractiveObject;
    import scaleform.clik.utils.Constraints;
    import scaleform.clik.constants.ConstrainMode;
+   import net.wg.infrastructure.events.FocusRequestEvent;
    import net.wg.data.Aliases;
    import scaleform.clik.utils.Padding;
    import net.wg.gui.lobby.messengerBar.WindowGeometryInBar;
@@ -38,17 +38,13 @@ package net.wg.gui.messenger.windows
          enabledCloseBtn = param1;
       }
 
-      override protected function onInitModalFocus(param1:InteractiveObject) : void {
-         super.onInitModalFocus(param1);
-         setFocus(this.channelComponent.getComponentForFocus());
-      }
-
       override protected function configUI() : void {
          super.configUI();
          constraints = new Constraints(this,ConstrainMode.REFLOW);
          constraints.addElement("messageArea",this.channelComponent.messageArea,Constraints.ALL);
          constraints.addElement("messageInput",this.channelComponent.messageInput,Constraints.LEFT | Constraints.RIGHT | Constraints.BOTTOM);
          constraints.addElement("sendButton",this.channelComponent.sendButton,Constraints.RIGHT | Constraints.BOTTOM);
+         this.channelComponent.addEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler);
       }
 
       override protected function onPopulate() : void {
@@ -75,6 +71,15 @@ package net.wg.gui.messenger.windows
             onWindowMinimizeS();
          }
          super.handleInput(param1);
+      }
+
+      override protected function onDispose() : void {
+         super.onDispose();
+         this.channelComponent.removeEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler);
+      }
+
+      private function onRequestFocusHandler(param1:FocusRequestEvent) : void {
+         setFocus(this.channelComponent.getComponentForFocus());
       }
    }
 

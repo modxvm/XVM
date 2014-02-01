@@ -231,6 +231,7 @@ package com.xvm.misc
 
             c.clockFormat = "H:i:s";   // Format: http://php.net/date
             c.showChances = false;     // Show game round win chances percentage.
+            c.showBattleTier = false;  // Show battle tier.
             c.removeSquadIcon = false; // Hide squad icon.
             // Playes/clan icon parameters.
             c.clanIcon = new CClanIcon();
@@ -255,6 +256,7 @@ package com.xvm.misc
             var c:CStatisticForm = new CStatisticForm();
             c.showChances = false;     // Show game round win chances percentage.
             c.showChancesLive = false; // Show "chance to win" only for live tanks.
+            c.showBattleTier = false;  // Show battle tier.
             c.removeSquadIcon = false; // Hide squad icon.
             // Playes/clan icon parameters.
             c.clanIcon = new CClanIcon();
@@ -337,6 +339,7 @@ package com.xvm.misc
             c.showExtendedInfo = true;
             c.showTotals = true;
             c.showChances = false;
+            c.showBattleTier = false;
             return c;
         }
 

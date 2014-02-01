@@ -2,9 +2,9 @@ package net.wg.gui.components.controls
 {
    import scaleform.clik.controls.ScrollBar;
    import scaleform.clik.constants.ScrollBarTrackMode;
+   import flash.events.MouseEvent;
    import flash.events.Event;
    import scaleform.gfx.MouseEventEx;
-   import flash.events.MouseEvent;
    import scaleform.clik.events.ButtonEvent;
 
 
@@ -51,6 +51,11 @@ package net.wg.gui.components.controls
 
       override protected function onDispose() : void {
          super.onDispose();
+      }
+
+      override protected function handleMouseWheel(param1:MouseEvent) : void {
+         super.handleMouseWheel(param1);
+         param1.stopPropagation();
       }
 
       override protected function handleThumbPress(param1:Event) : void {

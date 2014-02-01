@@ -164,7 +164,7 @@ package net.wg.gui.components.common
             App.utils.focusHandler.setModalFocus(param1);
             if(param1.isModal)
             {
-               this.updateOrCreateModalBg();
+               this.updateOrCreateModalBg(param1.modalAlpha);
             }
             setChildIndex(DisplayObject(param1.containerContent),numChildren-1);
             param1.sourceView.setModalFocus();
@@ -193,13 +193,17 @@ package net.wg.gui.components.common
          return !(_loc2_ == null);
       }
 
+      public function tryToUpdateContent() : void {
+          
+      }
+
       public function updateStage(param1:Number, param2:Number) : void {
          var _loc3_:* = 0;
          var _loc4_:DisplayObject = null;
          if(this._modalBg != null)
          {
-            this._modalBg.width = param1;
-            this._modalBg.height = param2;
+            this._modalBg.width = App.appWidth;
+            this._modalBg.height = App.appHeight;
          }
          _originalWidth = param1;
          _originalHeight = param2;
@@ -251,7 +255,7 @@ package net.wg.gui.components.common
          initSize();
       }
 
-      protected function updateOrCreateModalBg() : void {
+      protected function updateOrCreateModalBg(param1:Number=1.0) : void {
          if(this._modalBg == null)
          {
             this._modalBg = MovieClip(App.utils.classFactory.getComponent(this.getModalBgLinkage(),MovieClip));
@@ -269,6 +273,7 @@ package net.wg.gui.components.common
          }
          this._modalBg.width = App.appWidth;
          this._modalBg.height = App.appHeight;
+         this._modalBg.alpha = param1;
       }
 
       protected function getModalBgLinkage() : String {

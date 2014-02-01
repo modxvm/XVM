@@ -79,6 +79,7 @@ package net.wg.gui.components.controls
       }
 
       override protected function configUI() : void {
+         this._textFormat = this.textField.getTextFormat();
          constraints.addElement("textField",this.textField,Constraints.ALL);
          constraints.update(width,height);
          initSize();
@@ -116,6 +117,10 @@ package net.wg.gui.components.controls
          var _loc1_:DropShadowFilter = null;
          var _loc2_:* = false;
          super.draw();
+         if(isInvalid(InvalidationType.SIZE))
+         {
+            constraints.update(_width,_height);
+         }
          if(isInvalid(InvalidationType.STATE))
          {
             this._textFormat.size = this._textSize;
@@ -144,7 +149,7 @@ package net.wg.gui.components.controls
             }
             else
             {
-               this.textField.text = Values.EMPTY_STR;
+               this.textField.text = Values.SPACE_STR;
             }
             this.textField.setTextFormat(this._textFormat);
             this.textField.textColor = this._textColor;

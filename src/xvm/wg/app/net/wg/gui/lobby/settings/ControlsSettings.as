@@ -76,6 +76,7 @@ package net.wg.gui.lobby.settings
             {
                this.keys.removeEventListener(ListEventEx.ITEM_TEXT_CHANGE,this.onKeyChange);
             }
+            this.keys = null;
          }
          if(_data)
          {

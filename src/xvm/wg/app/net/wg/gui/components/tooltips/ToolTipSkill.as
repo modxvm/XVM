@@ -38,6 +38,8 @@ package net.wg.gui.components.tooltips
       private var maxWidth:Number = 270;
 
       override protected function redraw() : void {
+         var _loc2_:Separator = null;
+         var _loc3_:String = null;
          var _loc4_:TextFormat = null;
          var _loc1_:ToolTipSkillVO = new ToolTipSkillVO(_data);
          contentMargin.bottom = 2;
@@ -51,7 +53,7 @@ package net.wg.gui.components.tooltips
          this.headerTF.y = topPosition;
          topPosition = topPosition + (this.headerTF.textHeight + Utils.instance.MARGIN_AFTER_BLOCK);
          this.maxWidth = Math.max(this.maxWidth,this.headerTF.width + bgShadowMargin.horizontal + contentMargin.horizontal);
-         var _loc2_:Separator = Utils.instance.createSeparate(content);
+         _loc2_ = Utils.instance.createSeparate(content);
          _loc2_.y = topPosition | 0;
          separators.push(_loc2_);
          topPosition = topPosition + Utils.instance.MARGIN_AFTER_SEPARATE;
@@ -73,7 +75,7 @@ package net.wg.gui.components.tooltips
             this.discrTF.width = 10;
             this.discrTF.visible = false;
          }
-         var _loc3_:String = getInfoText(_loc1_.type);
+         _loc3_ = getInfoText(_loc1_.type);
          if(_loc3_ != "")
          {
             this.whiteBg.height = topPosition - this.whiteBg.y;

@@ -12,5 +12,6 @@ package com.xvm.types.cfg
         public var showTotals:Boolean;
 
         public var showChances:Boolean;
+        public var showBattleTier:Boolean;
     }
 }

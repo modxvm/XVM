@@ -8,11 +8,13 @@ package net.wg.gui.lobby.techtree
    import net.wg.gui.lobby.techtree.constants.NodeState;
    import net.wg.gui.lobby.techtree.data.vo.NodeData;
    import net.wg.gui.lobby.techtree.data.ResearchXMLDataProvider;
+   import net.wg.infrastructure.events.FocusRequestEvent;
    import flash.ui.Keyboard;
    import flash.events.KeyboardEvent;
    import scaleform.clik.constants.InvalidationType;
    import flash.display.InteractiveObject;
    import net.wg.data.constants.LobbyMetrics;
+   import net.wg.infrastructure.interfaces.entity.IFocusContainer;
 
 
    public class ResearchPage extends ResearchMeta implements IResearchPage
@@ -21,6 +23,8 @@ package net.wg.gui.lobby.techtree
       public function ResearchPage() {
          super();
       }
+
+      public static const BACKGROUND_ALPHA:Number = 0.9;
 
       public var researchItems:ResearchItems;
 
@@ -102,6 +106,10 @@ package net.wg.gui.lobby.techtree
          {
             validateNow();
          }
+         if(this.researchItems != null)
+         {
+            this.researchItems.addEventListener(FocusRequestEvent.REQUEST_FOCUS,this.handleRequestFocus,false,0,true);
+         }
          requestNationDataS();
       }
 
@@ -110,6 +118,7 @@ package net.wg.gui.lobby.techtree
          super.onDispose();
          if(this.researchItems != null)
          {
+            this.researchItems.removeEventListener(FocusRequestEvent.REQUEST_FOCUS,this.handleRequestFocus,false);
             this.researchItems.dispose();
          }
       }
@@ -152,6 +161,14 @@ package net.wg.gui.lobby.techtree
 
       override public function get isModal() : Boolean {
          return true;
+      }
+
+      override public function get modalAlpha() : Number {
+         return BACKGROUND_ALPHA;
+      }
+
+      private function handleRequestFocus(param1:FocusRequestEvent) : void {
+         setFocus(IFocusContainer(param1.focusContainer).getComponentForFocus());
       }
    }
 

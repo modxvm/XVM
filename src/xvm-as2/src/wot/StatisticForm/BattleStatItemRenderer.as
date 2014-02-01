@@ -99,6 +99,7 @@ class wot.StatisticForm.BattleStatItemRenderer
             s_state = 1;
             s_winChances.showChances = Config.s_config.statisticForm.showChances;
             s_winChances.showLive = Config.s_config.statisticForm.showChancesLive;
+            s_winChances.showBattleTier = Config.s_config.statisticForm.showBattleTier;
             StatLoader.LoadData();
         }
 
@@ -134,7 +135,7 @@ class wot.StatisticForm.BattleStatItemRenderer
                 Stat.s_data[name].stat.alive = (wrapper.data.vehicleState & 1) != 0;
         }
         // Chance
-        if (!Stat.s_empty && Config.s_config.statisticForm.showChances && wrapper.selected == true)
+        if (!Stat.s_empty && (Config.s_config.statisticForm.showChances || Config.s_config.statisticForm.showBattleTier) && wrapper.selected == true)
             s_winChances.showWinChances();
 
         // Alternative icon set

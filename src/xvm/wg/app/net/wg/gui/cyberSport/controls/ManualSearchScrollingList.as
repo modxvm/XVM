@@ -71,12 +71,12 @@ package net.wg.gui.cyberSport.controls
          return _renderers[_loc3_] as IManualSearchRenderer;
       }
 
-      override protected function cleanData() : void {
+      override protected function cleanUpDataProvider() : void {
          if(_dataProvider)
          {
             _dataProvider.removeEventListener(ManualSearchEvent.DATA_UPDATED,this.handleDataUpdated,false);
          }
-         super.cleanData();
+         super.cleanUpDataProvider();
       }
 
       override protected function updateSelectedIndex() : void {

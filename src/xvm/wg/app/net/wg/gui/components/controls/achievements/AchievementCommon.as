@@ -110,6 +110,7 @@ package net.wg.gui.components.controls.achievements
          switch(param1)
          {
             case AchievementSection.SPECIAL:
+            case AchievementSection.BATTLE:
                this.checkReceived(param2,AchievementCounter.RED);
                if(param3 > 0)
                {

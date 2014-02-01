@@ -2,6 +2,7 @@ package net.wg.gui.lobby.techtree.sub
 {
    import scaleform.clik.core.UIComponent;
    import net.wg.gui.lobby.techtree.interfaces.IResearchContainer;
+   import net.wg.infrastructure.interfaces.entity.IFocusContainer;
    import flash.utils.getDefinitionByName;
    import net.wg.gui.lobby.techtree.helpers.TitleAppearance;
    import net.wg.gui.lobby.techtree.interfaces.IResearchDataProvider;
@@ -16,6 +17,7 @@ package net.wg.gui.lobby.techtree.sub
    import net.wg.gui.lobby.techtree.nodes.ResearchRoot;
    import net.wg.gui.lobby.techtree.controls.ExperienceInformation;
    import net.wg.gui.lobby.techtree.TechTreeEvent;
+   import flash.display.InteractiveObject;
    import net.wg.gui.lobby.techtree.data.vo.NodeData;
    import net.wg.gui.lobby.techtree.constants.NodeState;
    import net.wg.gui.lobby.techtree.math.MatrixPosition;
@@ -28,10 +30,11 @@ package net.wg.gui.lobby.techtree.sub
    import net.wg.gui.lobby.techtree.nodes.FakeNode;
    import flash.geom.Point;
    import net.wg.gui.lobby.techtree.data.vo.ResearchDisplayInfo;
+   import net.wg.infrastructure.events.FocusRequestEvent;
    import net.wg.gui.lobby.techtree.data.vo.UnlockProps;
 
 
-   public class ResearchItems extends UIComponent implements IResearchContainer
+   public class ResearchItems extends UIComponent implements IResearchContainer, IFocusContainer
    {
           
       public function ResearchItems() {
@@ -150,6 +153,10 @@ package net.wg.gui.lobby.techtree.sub
          {
             this._dataProvider.addEventListener(TechTreeEvent.DATA_BUILD_COMPLETE,this.handleDataComplete,false,0,true);
          }
+      }
+
+      public function getComponentForFocus() : InteractiveObject {
+         return this;
       }
 
       override protected function onDispose() : void {
@@ -508,7 +515,7 @@ package net.wg.gui.lobby.techtree.sub
                this.positionByID[_loc2_.id] = new MatrixPosition(0,0);
                this.rootRenderer.setup(0,_loc2_,0,_loc5_);
                this.rootRenderer.setupEx(_loc3_.statusString);
-               this.rootRenderer.validateNow();
+               this.rootRenderer.validateNowEx();
                _loc6_ = this.rootRenderer.isPremium();
                if(this.titleBar != null)
                {
@@ -684,9 +691,9 @@ package net.wg.gui.lobby.techtree.sub
                _loc4_ = this._dataProvider.getTopLevelAt(_loc6_);
                this.positionByID[_loc4_.id] = _loc3_;
                _loc2_.setup(_loc6_,_loc4_,NodeEntityType.TOP_VEHICLE,_loc3_);
+               _loc2_.validateNowEx();
                if(_loc5_)
                {
-                  _loc2_.validateNowEx();
                   this.topRenderers.push(_loc2_);
                   this.rGraphics.addChild(DisplayObject(_loc2_));
                }
@@ -753,9 +760,9 @@ package net.wg.gui.lobby.techtree.sub
                      {
                         _loc8_.push(_loc2_ as FakeNode);
                      }
+                     _loc2_.validateNowEx();
                      if(_loc13_)
                      {
-                        _loc2_.validateNowEx();
                         this.rGraphics.addChild(DisplayObject(_loc2_));
                      }
                   }
@@ -980,7 +987,7 @@ package net.wg.gui.lobby.techtree.sub
       }
 
       private function handleOpenVehicle(param1:TechTreeEvent) : void {
-         App.utils.focusHandler.setFocus(this);
+         dispatchEvent(new FocusRequestEvent(FocusRequestEvent.REQUEST_FOCUS,this));
          if(this.view != null)
          {
             App.utils.asserter.assert(NodeEntityType.isVehicleType(param1.entityType),"Node is not vehicle");

@@ -21,90 +21,6 @@ class com.xvm.DefaultConfig
                 modMinVersion: Defines.XVM_VERSION
             },
             language: Defines.LOCALE_AUTO_DETECTION,
-            login: {
-                // Show ping to the servers
-                pingServers: {
-                    enabled: false,
-                    updateInterval: 10000, // msec
-                    x: 15,
-                    y: 35,
-                    alpha: 80,
-                    delimiter: ": ",
-                    maxRows: 4,
-                    columnGap: 10,
-                    fontStyle: {
-                        name: "$FieldFont",
-                        size: 12,
-                        bold: false,
-                        italic: false,
-                        color: {
-                            great: "0xFFCC66",
-                            good: "0xE5E4E1",
-                            poor: "0x96948F",
-                            bad: "0xD64D4D"
-                        }
-                    },
-                    threshold: {
-                        great: 35,
-                        good: 60,
-                        poor: 100
-                    },
-                    shadow: {
-                        enabled: true,
-                        color: "0x000000",
-                        distance: 0,
-                        angle: 0,
-                        alpha: 70,
-                        blur: 4,
-                        strength: 2
-                    }
-                }
-            },
-            hangar: {
-                hideTutorial: false,
-                xwnInCompany: true,
-                masteryMarkInTankCarousel: true,
-                masteryMarkInTechTree: true,
-                hidePricesInTechTree: false,
-                widgetsEnabled: false,
-                // Show ping to the servers
-                pingServers: {
-                    enabled: false,
-                    updateInterval: 10000, // msec
-                    x: 170,
-                    y: 35,
-                    alpha: 80,
-                    delimiter: ": ",
-                    maxRows: 4,
-                    columnGap: 10,
-                    fontStyle: {
-                        name: "$FieldFont",
-                        size: 12,
-                        bold: false,
-                        italic: false,
-                        color: {
-                            great: "0xFFCC66",
-                            good: "0xE5E4E1",
-                            poor: "0x96948F",
-                            bad: "0xD64D4D"
-                        }
-                    },
-                    threshold: {
-                        great: 35,
-                        good: 60,
-                        poor: 100
-                    },
-                    shadow: {
-                        enabled: true,
-                        color: "0x000000",
-                        distance: 0,
-                        angle: 0,
-                        alpha: 70,
-                        blur: 4,
-                        strength: 2
-                    }
-                }
-            },
             battle: {
                 mirroredVehicleIcons: true,      // Set false for alternative tank icon mirroring.
                 showPostmortemTips: true,        // Popup tooltip panel after death.
@@ -121,21 +37,7 @@ class com.xvm.DefaultConfig
             rating: {
                 showPlayersStatistics: false,   // Global switch. Handles whole statisctics module.
                 loadEnemyStatsInFogOfWar: true, // Load players data in "fog of war".
-                enableStatisticsLog: false,     // Enable saving statistics to "xvm-stat.log" file
-                enableUserInfoStatistics: true, // Enable statistics in the user info window
-                enableCompanyStatistics: true   // Enable statistics in the company window
-            },
-            squad: {
-                enabled: true,                  // Global switch
-                showClan: true,                 // Show player clan
-                formatInfoField: "{{rlevel}}"   // Format of vehicle info field
-            },
-            userInfo: {
-                showExtraDataInProfile: false,
-                showFilters: true,              // Show tank filters
-                filterFocused: true,            // Set the default focus to the filter text input
-                inHangarFilterEnabled: false,   // Enable In hangar radio button by default
-                sortColumn: 5                   // Number of column for sorting
+                enableStatisticsLog: false      // Enable saving statistics to "xvm-stat.log" file
             },
             fragCorrelation: {
                 hideTeamTextFields: true
@@ -150,26 +52,10 @@ class com.xvm.DefaultConfig
                 ]
                 */
             },
-            battleLoading: {
-                // Show clock at Battle Loading Screen.
-                // ### Is there a clock:on\off switch variable supposed to be? ###
-                // A: No, it is possible to set clockFormat: "" to disable clock.
-
-                // Format: http://php.net/date
-                clockFormat: "H:i:s",
-                showChances: false,     // Show game round win chances percentage.
-                removeSquadIcon: false, // Hide squad icon.
-                // Playes/clan icon parameters.
-                clanIcon: { show: true, x: 0, y: 6, xr: 0, yr: 6, h: 16, w: 16, alpha: 90 },
-                // Dispay format. Macro-substitutiones allowed.
-                formatLeftNick: "{{name}}{{clan}}",
-                formatRightNick: "{{name}}{{clan}}",
-                formatLeftVehicle: "{{vehicle}}<font face='Lucida Console' size='12'> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>",
-                formatRightVehicle: "<font face='Lucida Console' size='12'><font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> </font>{{vehicle}}"
-            },
             statisticForm: {
                 showChances: false,     // Show game round win chances percentage.
                 showChancesLive: false, // Show "chance to win" only for live tanks.
+                showBattleTier: false,  // Show battle tier.
                 removeSquadIcon: false, // Hide squad icon.
                 // Playes/clan icon parameters.
                 clanIcon: { show: true, x: 0, y: 6, xr: 0, yr: 6, h: 16, w: 16, alpha: 90 },
@@ -229,11 +115,6 @@ class com.xvm.DefaultConfig
                     vehicleFormatLeft: "<font color='{{c:xwn8}}'>{{vehicle}}</font>",
                     vehicleFormatRight: "<font color='{{c:xwn8}}'>{{vehicle}}</font>"
                 }
-            },
-            finalStatistic: {
-                startPage: 1,
-                sortColumn: 6, // XP
-                showChances: false
             },
             turretMarkers: {
                 highVulnerability: "*",

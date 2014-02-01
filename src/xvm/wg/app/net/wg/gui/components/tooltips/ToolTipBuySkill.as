@@ -61,7 +61,8 @@ package net.wg.gui.components.tooltips
       }
 
       private function setContent() : void {
-         var _loc1_:Number = this._topMargin;
+         var _loc1_:* = NaN;
+         _loc1_ = this._topMargin;
          this.header.x = this._leftMargin;
          this.header.y = _loc1_;
          this.header.autoSize = TextAlign.LEFT;

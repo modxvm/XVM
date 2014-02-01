@@ -49,13 +49,14 @@ package net.wg.gui.components.tooltips
 
       private function setData() : void {
          var _loc1_:ToolTipFinalStatsVO = null;
+         var _loc2_:Separator = null;
          var _loc6_:ILocale = null;
          _loc1_ = new ToolTipFinalStatsVO(_data);
          this.disabled = _loc1_.disabled;
          contentMargin.top = 17;
          contentMargin.bottom = 17;
          topPosition = bgShadowMargin.top + contentMargin.top;
-         var _loc2_:Separator = null;
+         _loc2_ = null;
          separators = new Vector.<Separator>();
          this.critBlocks = new Vector.<EfficiencyCritsBlock>();
          var _loc3_:Number = 18;

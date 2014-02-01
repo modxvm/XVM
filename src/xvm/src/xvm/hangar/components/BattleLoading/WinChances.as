@@ -15,7 +15,7 @@ package xvm.hangar.components.BattleLoading
         {
             if (Config.config.rating.showPlayersStatistics == false)
                 return;
-            if (Config.config.battleLoading.showChances == false)
+            if (Config.config.battleLoading.showChances == false && Config.config.battleLoading.showBattleTier == false)
                 return;
             this.page = page;
 
@@ -39,7 +39,7 @@ package xvm.hangar.components.BattleLoading
             for (var name:String in Stat.stat)
                 playerNames.push(name);
 
-            var chanceText:String = Chance.GetChanceText(playerNames);
+            var chanceText:String = Chance.GetChanceText(playerNames, Config.config.battleLoading.showChances, Config.config.battleLoading.showBattleTier);
             if (chanceText)
             {
                 chanceText = '<span class="chances">' + chanceText + '</span>';

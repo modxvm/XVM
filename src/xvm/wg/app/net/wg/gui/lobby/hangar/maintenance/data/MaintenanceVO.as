@@ -30,6 +30,8 @@ package net.wg.gui.lobby.hangar.maintenance.data
 
       public var maxAmmo:int;
 
+      public var gunIntCD:int;
+
       public var casseteFieldText:String = "";
 
       public var shells:Array = null;

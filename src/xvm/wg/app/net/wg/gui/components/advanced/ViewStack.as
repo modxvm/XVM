@@ -7,10 +7,10 @@ package net.wg.gui.components.advanced
    import scaleform.clik.events.IndexEvent;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.infrastructure.interfaces.entity.IDisposable;
-   import net.wg.infrastructure.events.LifeCycleEvent;
    import net.wg.infrastructure.interfaces.entity.IDAAPIEntity;
    import net.wg.utils.IAssertable;
    import net.wg.infrastructure.exceptions.ArgumentException;
+   import net.wg.infrastructure.events.LifeCycleEvent;
    import net.wg.infrastructure.interfaces.IViewStackContent;
    import flash.utils.getDefinitionByName;
    import net.wg.gui.events.ViewStackEvent;
@@ -121,8 +121,14 @@ package net.wg.gui.components.advanced
             {
                for (_loc2_ in this.cachedViews)
                {
-                  this.cachedViews[_loc2_].removeEventListener(LifeCycleEvent.ON_AFTER_DISPOSE,this.onDisposeSubViewHandler);
-                  this.disposeSubView(this.cachedViews[_loc2_]);
+                  if(this.cachedViews[_loc2_]  is  IDisposable)
+                  {
+                     IDisposable(this.cachedViews[_loc2_]).dispose();
+                  }
+                  else
+                  {
+                     this.clearSubView(this.cachedViews[_loc2_]);
+                  }
                }
                this.cachedViews = null;
             }
@@ -183,7 +189,6 @@ package net.wg.gui.components.advanced
       private function setCurrentView(param1:MovieClip, param2:String, param3:Boolean) : void {
          if(this._currentView != null)
          {
-            this._currentView.removeEventListener(LifeCycleEvent.ON_AFTER_DISPOSE,this.onDisposeSubViewHandler);
             if(this._currentView["__cached__"] == true)
             {
                this._currentView.visible = false;
@@ -191,9 +196,16 @@ package net.wg.gui.components.advanced
             else
             {
                this.container.removeChild(this._currentView);
-               if((param3) && !(param1  is  IDAAPIEntity))
+               if(param3)
                {
-                  (this._currentView as IDisposable).dispose();
+                  if(!(param1  is  IDAAPIEntity))
+                  {
+                     (this._currentView as IDisposable).dispose();
+                  }
+                  else
+                  {
+                     this.clearSubView(this._currentView);
+                  }
                }
                this._currentView = null;
             }
@@ -248,12 +260,13 @@ package net.wg.gui.components.advanced
          var _loc2_:MovieClip = MovieClip(param1.target);
          if(_loc2_)
          {
-            this.disposeSubView(_loc2_);
+            this.clearSubView(_loc2_);
          }
       }
 
-      private function disposeSubView(param1:MovieClip) : void {
+      private function clearSubView(param1:MovieClip) : void {
          var _loc3_:String = null;
+         var _loc4_:String = null;
          param1.removeEventListener(LifeCycleEvent.ON_AFTER_DISPOSE,this.onDisposeSubViewHandler);
          var _loc2_:* = false;
          if(this.container.contains(param1))
@@ -274,11 +287,7 @@ package net.wg.gui.components.advanced
                break;
             }
          }
-         if(param1  is  IDisposable)
-         {
-            IDisposable(param1).dispose();
-         }
-         var _loc4_:* = "View \' " + param1.name + "\'is disposed, but was not removed from viewStack \'" + name + "\'!";
+         _loc4_ = "View \' " + param1.name + "\'is disposed, but was not removed from viewStack \'" + name + "\'!";
          App.utils.asserter.assert(_loc2_,_loc4_,InfrastructureException);
       }
    }

@@ -181,6 +181,7 @@ package net.wg.gui.prebattle.company
                _loc8_.vLevel = param3.vLevel;
                _loc8_.icon = param3.icon;
                _loc8_.vType = param3.vType;
+               _loc8_.igrType = param3.igrType;
             }
             _loc4_.push(_loc8_);
             _loc7_++;

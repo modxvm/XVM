@@ -245,13 +245,13 @@ package net.wg.infrastructure.managers.utils.impl
          var _loc8_:String = param2.prefix + param2.userName + (param2.clanAbbrev?CLAN_TAG_OPEN + param2.clanAbbrev + CLAN_TAG_CLOSE:Values.EMPTY_STR) + (param2.region?Values.SPACE_STR + param2.region:Values.EMPTY_STR) + (param2.igrType > 0?Values.SPACE_STR + _loc7_:Values.EMPTY_STR) + param2.suffix;
          var _loc9_:* = false;
          this.applyTextProps(param1,_loc8_,_loc3_,_loc4_,_loc5_,_loc6_);
-         if(param1.width < param1.textWidth)
+         if(param1.width < param1.textWidth + 4)
          {
             _loc9_ = true;
             _loc8_ = param2.prefix + param2.userName + (param2.clanAbbrev?CUT_SYMBOLS_STR:Values.EMPTY_STR) + (param2.region?Values.SPACE_STR + param2.region:Values.EMPTY_STR) + (param2.igrType > 0?Values.SPACE_STR + _loc7_:Values.EMPTY_STR) + param2.suffix;
             this.applyTextProps(param1,_loc8_,_loc3_,_loc4_,_loc5_,_loc6_);
             _loc10_ = param2.userName.length-1;
-            while(param1.width < param1.textWidth && _loc10_ > 0)
+            while(param1.width < param1.textWidth + 4 && _loc10_ > 0)
             {
                _loc8_ = param2.prefix + param2.userName.substr(0,_loc10_) + CUT_SYMBOLS_STR + (param2.region?Values.SPACE_STR + param2.region:Values.EMPTY_STR) + (param2.igrType > 0?Values.SPACE_STR + _loc7_:Values.EMPTY_STR) + param2.suffix;
                this.applyTextProps(param1,_loc8_,_loc3_,_loc4_,_loc5_,_loc6_);

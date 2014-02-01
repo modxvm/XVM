@@ -11,6 +11,7 @@ package net.wg.infrastructure.base
    import net.wg.infrastructure.interfaces.IManagedContainer;
    import flash.display.DisplayObject;
    import net.wg.infrastructure.interfaces.IDAAPIModule;
+   import net.wg.data.constants.Values;
    import net.wg.infrastructure.interfaces.IManagedContent;
    import scaleform.clik.events.InputEvent;
    import scaleform.clik.constants.InvalidationType;
@@ -132,6 +133,10 @@ package net.wg.infrastructure.base
 
       public function get isModal() : Boolean {
          return false;
+      }
+
+      public function get modalAlpha() : Number {
+         return Values.DEFAULT_ALPHA;
       }
 
       public function get sourceView() : IView {

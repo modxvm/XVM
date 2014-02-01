@@ -49,7 +49,7 @@ package net.wg.gui.components.common
 
       private function onWaitingHiddenHandler(param1:WaitingChangeVisibilityEvent) : void {
          App.utils.asserter.assertNotNull(this._waiting,"_waiting" + Errors.CANT_NULL);
-         removeChild(DisplayObject(this._waiting));
+         removeChild(this._waiting);
       }
 
       override protected function onDispose() : void {

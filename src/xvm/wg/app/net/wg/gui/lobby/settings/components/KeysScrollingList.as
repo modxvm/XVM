@@ -154,7 +154,6 @@ package net.wg.gui.lobby.settings.components
          param1.removeEventListener(MouseEvent.ROLL_OUT,this.dispatchItemEvent);
          param1.removeEventListener(MouseEvent.MOUSE_WHEEL,handleMouseWheel);
          param1.removeEventListener(KeyInputEvents.CHANGE,this.dispatchItemEvent);
-         KeysItemRenderer(param1).dispose();
       }
 
       override protected function dispatchItemEvent(param1:Event) : Boolean {
@@ -289,27 +288,7 @@ package net.wg.gui.lobby.settings.components
       }
 
       override protected function onDispose() : void {
-         var _loc1_:* = 0;
-         var _loc2_:* = 0;
-         var _loc3_:IListItemRenderer = null;
-         var _loc4_:DisplayObject = null;
          super.onDispose();
-         if(_renderers != null)
-         {
-            _loc1_ = _renderers.length;
-            _loc2_ = 0;
-            while(_loc2_ < _loc1_)
-            {
-               _loc3_ = getRendererAt(_loc2_);
-               this.cleanUpRenderer(_loc3_);
-               _loc4_ = _loc3_ as DisplayObject;
-               if(container.contains(_loc4_))
-               {
-                  container.removeChild(_loc4_);
-               }
-               _loc2_++;
-            }
-         }
          _renderers = new Vector.<IListItemRenderer>();
       }
 

@@ -719,7 +719,7 @@ package net.wg.gui.lobby.hangar.tcarousel
 
       private function showContextMenu(param1:VehicleCarouselVO) : void {
          var _loc2_:String = !param1.favorite?"vehicleCheck":"vehicleUncheck";
-         App.contextMenuMgr.show(Vector.<IContextItem>([new UserContextItem("vehicleInfo"),new UserContextItem(SHOW_VEHICLE_STATS,{"enabled":param1.wasInBattle}),new SeparateItem(),new UserContextItem("vehicleSell",{"enabled":param1.canSell}),new SeparateItem(),new UserContextItem(_loc2_),new UserContextItem("vehicleResearch")]),this,this.onContectMenuItemSelect,param1);
+         App.contextMenuMgr.show(Vector.<IContextItem>([new UserContextItem("vehicleInfo"),new UserContextItem(SHOW_VEHICLE_STATS,{"enabled":param1.wasInBattle}),new SeparateItem(),new UserContextItem("vehicleSell",{"enabled":param1.canSell}),new SeparateItem(),new UserContextItem("vehicleResearch"),new UserContextItem(_loc2_)]),this,this.onContectMenuItemSelect,param1);
       }
 
       private function rebuildRenderers() : void {

@@ -129,6 +129,10 @@ package net.wg.gui.messenger.controls
          if(!(_label == null) && !(textField == null))
          {
             textField.text = _label;
+            if(this.model)
+            {
+               textField.textColor = this.model.color;
+            }
             this.truncateText();
          }
       }

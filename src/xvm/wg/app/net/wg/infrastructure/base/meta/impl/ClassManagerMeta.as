@@ -253,6 +253,7 @@ package net.wg.infrastructure.base.meta.impl
    import net.wg.gui.components.controls.achievements.RedCounter;
    import net.wg.gui.components.controls.achievements.SmallCounter;
    import net.wg.gui.components.controls.achievements.YellowRibbonCounter;
+   import net.wg.gui.components.controls.events.ScrollBarEvent;
    import net.wg.gui.components.icons.BattleTypeIcon;
    import net.wg.gui.components.icons.PlayerActionMarker;
    import net.wg.gui.components.icons.PlayerActionMarkerController;
@@ -771,10 +772,11 @@ package net.wg.infrastructure.base.meta.impl
    import net.wg.gui.lobby.questsWindow.data.VehicleBlockVO;
    import net.wg.gui.lobby.questsWindow.data.VehiclesSortingBlockVO;
    import net.wg.gui.lobby.recruitWindow.RecruitWindow;
+   import net.wg.gui.lobby.retrainCrewWindow.RetrainCrewBlockVO;
    import net.wg.gui.lobby.retrainCrewWindow.RetrainCrewMainButtons;
    import net.wg.gui.lobby.retrainCrewWindow.RetrainCrewOperationVO;
    import net.wg.gui.lobby.retrainCrewWindow.RetrainCrewRoleIR;
-   import net.wg.gui.lobby.retrainCrewWindow.RetrainCrewVO;
+   import net.wg.gui.lobby.retrainCrewWindow.RetrainCrewVehicleVO;
    import net.wg.gui.lobby.retrainCrewWindow.RetrainCrewWindow;
    import net.wg.gui.lobby.retrainCrewWindow.RetrainTankmanVO;
    import net.wg.gui.lobby.retrainCrewWindow.RetrainVehicleBlockVO;
@@ -1796,6 +1798,8 @@ package net.wg.infrastructure.base.meta.impl
       public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_SMALLCOUNTER:Class = SmallCounter;
 
       public static const NET_WG_GUI_COMPONENTS_CONTROLS_ACHIEVEMENTS_YELLOWRIBBONCOUNTER:Class = YellowRibbonCounter;
+
+      public static const NET_WG_GUI_COMPONENTS_CONTROLS_EVENTS_SCROLLBAREVENT:Class = ScrollBarEvent;
 
       public static const NET_WG_GUI_COMPONENTS_ICONS_BATTLETYPEICON:Class = BattleTypeIcon;
 
@@ -2833,13 +2837,15 @@ package net.wg.infrastructure.base.meta.impl
 
       public static const NET_WG_GUI_LOBBY_RECRUITWINDOW_RECRUITWINDOW:Class = RecruitWindow;
 
+      public static const NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINCREWBLOCKVO:Class = RetrainCrewBlockVO;
+
       public static const NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINCREWMAINBUTTONS:Class = RetrainCrewMainButtons;
 
       public static const NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINCREWOPERATIONVO:Class = RetrainCrewOperationVO;
 
       public static const NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINCREWROLEIR:Class = RetrainCrewRoleIR;
 
-      public static const NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINCREWVO:Class = RetrainCrewVO;
+      public static const NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINCREWVEHICLEVO:Class = RetrainCrewVehicleVO;
 
       public static const NET_WG_GUI_LOBBY_RETRAINCREWWINDOW_RETRAINCREWWINDOW:Class = RetrainCrewWindow;
 

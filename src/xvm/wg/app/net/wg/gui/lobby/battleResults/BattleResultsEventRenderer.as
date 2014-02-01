@@ -13,6 +13,7 @@ package net.wg.gui.lobby.battleResults
    import net.wg.data.VO.BattleResultsQuestVO;
    import net.wg.data.constants.Linkages;
    import net.wg.data.constants.QuestsStates;
+   import flash.text.TextFieldAutoSize;
    import scaleform.clik.events.ButtonEvent;
    import __AS3__.vec.Vector;
    import scaleform.clik.constants.InvalidationType;
@@ -27,15 +28,17 @@ package net.wg.gui.lobby.battleResults
          super();
       }
 
-      private static const BOTTOM_PADDING:int = 15;
+      private static const BOTTOM_PADDING:int = 14;
 
       private static const LINKBTN_PADDING:int = 10;
 
-      private static const AlERT_ICON_PADDING:int = 5;
+      private static const AWARDS_PADDING:int = 5;
 
       private static function hideTooltip(param1:MouseEvent) : void {
          App.toolTipMgr.hide();
       }
+
+      private static const PIXEL_PADDING:int = 1;
 
       public var taskTF:TextField;
 
@@ -68,6 +71,7 @@ package net.wg.gui.lobby.battleResults
          this.taskTF.mouseEnabled = false;
          this.progressList.linkage = Linkages.PROGRESS_ELEMENT;
          this.taskTF.textColor = QuestsStates.CLR_TASK_TF_NORMAL;
+         this.awards.contentAlign = TextFieldAutoSize.RIGHT;
          this.addListeners();
       }
 
@@ -139,9 +143,9 @@ package net.wg.gui.lobby.battleResults
                _loc2_ = this.checkLabels();
                _loc1_ = _loc2_ + BOTTOM_PADDING;
                _loc3_ = this.checkAlertMsg(_loc1_);
-               _loc1_ = _loc1_ + (_loc3_?_loc3_ + AlERT_ICON_PADDING:_loc3_);
+               _loc1_ = _loc1_ + (_loc3_?_loc3_ + BOTTOM_PADDING:0);
                _loc4_ = this.checkProgressList(_loc1_);
-               _loc1_ = _loc1_ + (_loc4_?_loc4_ + BOTTOM_PADDING:_loc4_);
+               _loc1_ = _loc1_ + (_loc4_?_loc4_ + BOTTOM_PADDING:0);
                _loc5_ = this.checkAwards(_loc1_);
                _loc1_ = _loc1_ + _loc5_;
                this.lineMC.y = Math.round(_loc1_);
@@ -160,7 +164,6 @@ package net.wg.gui.lobby.battleResults
          this.awards.setActualWidth(this.progressList.width);
          if(this.data.awards)
          {
-            DebugUtils.LOG_DEBUG("data.awards.awardsStr",this.data.awards.awardsStr,this.data.awards.openedQuests);
             this.awards.visible = Boolean((Boolean(this.data.awards.awardsStr)) || (this.data.awards.openedQuests.length > 0));
             this.awards.setAwards(this.data.awards.awardsStr);
             this.awards.setOpenedQuests(this.data.awards.openedQuests);
@@ -171,8 +174,9 @@ package net.wg.gui.lobby.battleResults
             this.awards.setAwards("");
          }
          this.awards.validateNow();
-         this.awards.y = Math.round(param1);
-         return Math.round(this.awards.height);
+         this.awards.y = Math.round(param1 + AWARDS_PADDING);
+         var _loc2_:Number = this.awards.height > 0?this.awards.height + AWARDS_PADDING:0;
+         return Math.round(_loc2_);
       }
 
       private function checkProgressList(param1:Number) : Number {
@@ -185,19 +189,19 @@ package net.wg.gui.lobby.battleResults
       private function checkAlertMsg(param1:Number) : Number {
          this.alert.visible = Boolean(this.data.alertMsg);
          this.alert.msgTF.text = this.data.alertMsg;
-         this.alert.y = param1 - AlERT_ICON_PADDING;
-         return this.data.alertMsg?Math.round(this.alert.height):0;
+         this.alert.y = param1;
+         return this.data.alertMsg?Math.round(TextField(this.alert.msgTF).textHeight):0;
       }
 
       private function checkLabels() : Number {
          if(this.taskTF.text != this.data.questInfo.description)
          {
             this.taskTF.text = this.data.questInfo.description;
-            this.linkBtn.y = (this.taskTF.text?this.taskTF.textHeight + this.taskTF.y - this.linkBtn.height:this.taskTF.y) + 1;
+            this.linkBtn.y = (this.taskTF.text?this.taskTF.textHeight + this.taskTF.y - this.linkBtn.height:this.taskTF.y) + PIXEL_PADDING;
             this.linkBtn.x = this.taskTF.text?this.taskTF.x + this.taskTF.getLineMetrics(this.taskTF.numLines-1).width + LINKBTN_PADDING:this.taskTF.x;
             this.taskTF.mouseEnabled = false;
          }
-         return Math.round(this.linkBtn.y + this.linkBtn.height);
+         return Math.round(this.linkBtn.y + this.linkBtn.height - PIXEL_PADDING * 2);
       }
 
       private function checkCounter() : void {

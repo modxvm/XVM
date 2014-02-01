@@ -3,11 +3,14 @@ package net.wg.gui.lobby.battleResults
    import scaleform.clik.core.UIComponent;
    import net.wg.gui.components.controls.ScrollingListEx;
    import net.wg.gui.components.controls.UILoaderAlt;
+   import net.wg.gui.components.controls.UserNameField;
    import flash.text.TextField;
    import net.wg.gui.components.controls.SoundButtonEx;
    import flash.display.MovieClip;
    import scaleform.clik.events.ButtonEvent;
+   import flash.events.MouseEvent;
    import net.wg.infrastructure.interfaces.IUserProps;
+   import net.wg.data.VO.UserVO;
    import scaleform.clik.data.DataProvider;
    import net.wg.data.constants.Errors;
 
@@ -23,7 +26,7 @@ package net.wg.gui.lobby.battleResults
 
       public var tankIcon:UILoaderAlt;
 
-      public var playerName:TextField;
+      public var playerNameLbl:UserNameField;
 
       public var vehicleName:TextField;
 
@@ -51,6 +54,8 @@ package net.wg.gui.lobby.battleResults
 
       private var _dataDirty:Boolean;
 
+      private var _toolTip:String = null;
+
       public function get data() : Object {
          return this._data;
       }
@@ -68,8 +73,15 @@ package net.wg.gui.lobby.battleResults
          this.closeBtn.addEventListener(ButtonEvent.CLICK,this.onCloseClick);
       }
 
+      override protected function onDispose() : void {
+         this.vehicleStateLbl.removeEventListener(MouseEvent.ROLL_OVER,this.handleMouseRollOver);
+         this.vehicleStateLbl.removeEventListener(MouseEvent.ROLL_OUT,this.handleMouseRollOut);
+         super.onDispose();
+      }
+
       override protected function draw() : void {
          var _loc1_:IUserProps = null;
+         var _loc2_:* = false;
          super.draw();
          if(this._dataDirty)
          {
@@ -80,7 +92,14 @@ package net.wg.gui.lobby.battleResults
             if(this.data)
             {
                this.tankIcon.source = this.data.bigTankIcon;
-               App.utils.commons.formatPlayerName(this.playerName,App.utils.commons.getUserProps(this.data.playerName,this.data.playerClan,this.data.playerRegion));
+               this.playerNameLbl.userVO = new UserVO(
+                  {
+                     "fullName":this.data.playerFullName,
+                     "userName":this.data.playerName,
+                     "clanAbbrev":this.data.playerClan,
+                     "region":this.data.playerRegion
+                  }
+               );
                this.vehicleName.text = this.data.vehicleFullName;
                this.vehicleStateLbl.text = this.data.vehicleStateStr;
                if((this.data.isPrematureLeave) || this.data.killerID <= 0)
@@ -94,6 +113,13 @@ package net.wg.gui.lobby.battleResults
                      _loc1_ = App.utils.commons.getUserProps(this.data.killerNameStr,this.data.killerClanNameStr,this.data.killerRegionNameStr);
                      _loc1_.prefix = this.data.vehicleStatePrefixStr;
                      _loc1_.suffix = this.data.vehicleStateSuffixStr;
+                     _loc2_ = App.utils.commons.formatPlayerName(this.vehicleStateLbl,_loc1_);
+                     if(_loc2_)
+                     {
+                        this.vehicleStateLbl.addEventListener(MouseEvent.ROLL_OVER,this.handleMouseRollOver);
+                        this.vehicleStateLbl.addEventListener(MouseEvent.ROLL_OUT,this.handleMouseRollOut);
+                        this._toolTip = _loc1_.prefix + this.data.killerFullNameStr + _loc1_.suffix;
+                     }
                      App.utils.commons.formatPlayerName(this.vehicleStateLbl,_loc1_);
                   }
                }
@@ -112,7 +138,7 @@ package net.wg.gui.lobby.battleResults
             else
             {
                this.tankIcon.source = "";
-               this.playerName.text = "";
+               this.playerNameLbl.userVO = null;
                this.vehicleName.text = "";
                this.vehicleStateLbl.text = "";
                this.vehicleStats.data = [];
@@ -128,6 +154,14 @@ package net.wg.gui.lobby.battleResults
          this.list.selectedIndex = -1;
          DebugUtils.LOG_WARNING(Errors.INVALID_FOCUS_USING);
          App.utils.focusHandler.setFocus(this.list);
+      }
+
+      protected function handleMouseRollOver(param1:MouseEvent) : void {
+         App.toolTipMgr.show(this._toolTip);
+      }
+
+      protected function handleMouseRollOut(param1:MouseEvent) : void {
+         App.toolTipMgr.hide();
       }
    }
 

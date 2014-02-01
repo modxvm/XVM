@@ -27,7 +27,7 @@ class com.xvm.Chance
         return "<font color='#FFBBBB'>" + Locale.get("Chance error") + ": " + text + "</font>";
     }
 
-    public static function GetChanceText(showLive:Boolean):String
+    public static function GetChanceText(showChances:Boolean, showBattleTier:Boolean, showLive:Boolean):String
     {
         var teamsCount:Object = CalculateTeamPlayersCount();
         //Logger.addObject(teamsCount);
@@ -51,16 +51,27 @@ class com.xvm.Chance
         //    return ChanceError("[T] " + chT.error);
 
         //lastChances = { g: chG.percentF/*, t: chT.percentF*/ };
-        text += Locale.get("Chance to win") + ": " +
-            FormatChangeText(""/*Locale.get("global")*/, chG)// + ", " +
-            //FormatChangeText(Locale.get("per-vehicle"), chT);
-        if (showLive)
+
+        if (showChances)
         {
-            var chX1 = GetChance(ChanceFuncX1);
-            //var chX2 = GetChance(ChanceFuncX2);
-            text += " | " + Locale.get("chanceLive") + ": " + FormatChangeText("", chX1) +
-            //    ", " + FormatChangeText("", chX2) +
-                ". " + Locale.get("chanceBattleTier") + ": " + battleTier;
+            text += Locale.get("Chance to win") + ": " +
+                FormatChangeText(""/*Locale.get("global")*/, chG)// + ", " +
+                //FormatChangeText(Locale.get("per-vehicle"), chT);
+            if (showLive)
+            {
+                var chX1 = GetChance(ChanceFuncX1);
+                //var chX2 = GetChance(ChanceFuncX2);
+                text += " | " + Locale.get("chanceLive") + ": " + FormatChangeText("", chX1);
+                //    ", " + FormatChangeText("", chX2);
+                //lastChances.X1 = chX1.percentF;
+                //lastChances.X2 = chX2.percentF;
+            }
+        }
+        if (showBattleTier)
+        {
+            if (text !== "")
+                text += ". ";
+            text += Locale.get("chanceBattleTier") + ": " + battleTier;
             //lastChances.X1 = chX1.percentF;
             //lastChances.X2 = chX2.percentF;
         }

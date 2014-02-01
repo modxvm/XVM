@@ -1,5 +1,7 @@
 XVM-dev:
   * default WN rating changed to WN8
+  * new options:
+      (battleLoading|battleResults|statisticForm)/showBattleTier - show battle tier
 
 XVM-5.0.2:
   * adaptation to WoT 0.8.10

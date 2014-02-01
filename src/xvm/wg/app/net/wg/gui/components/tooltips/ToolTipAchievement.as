@@ -128,7 +128,9 @@ package net.wg.gui.components.tooltips
 
       override protected function redraw() : void {
          var _loc1_:ILocale = null;
+         var _loc4_:* = NaN;
          var _loc5_:AchievementVO = null;
+         var _loc7_:* = NaN;
          var _loc10_:ToolTipBlockVO = null;
          var _loc11_:String = null;
          var _loc12_:String = null;
@@ -136,13 +138,13 @@ package net.wg.gui.components.tooltips
          _loc1_ = App.utils.locale;
          var _loc2_:uint = 0;
          var _loc3_:uint = 0;
-         var _loc4_:Number = 300;
+         _loc4_ = 300;
          _loc5_ = new AchievementVO(_data);
          var _loc6_:ToolTipBlockResultVO = null;
          blockResults = new Vector.<ToolTipBlockResultVO>();
          this.flagsBlocks = new Vector.<AchievementsCustomBlockItem>();
          topPosition = bgShadowMargin.top + contentMargin.top;
-         var _loc7_:Number = bgShadowMargin.left + contentMargin.left;
+         _loc7_ = bgShadowMargin.left + contentMargin.left;
          var _loc8_:Separator = null;
          separators = new Vector.<Separator>();
          this.headerTF.autoSize = TextFieldAutoSize.LEFT;

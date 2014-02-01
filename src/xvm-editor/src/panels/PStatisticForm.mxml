@@ -5,7 +5,8 @@
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:c="components.*"
     title="{_('PStatisticForm')}">
-    <c:LabeledCheckBox label="{_('ShowChances')}" id="v_showChances" config="statisticForm.showChances" change="onChange(event)"/>
-    <c:LabeledCheckBox label="{_('ShowChancesLive')}" id="v_showChancesLive" config="statisticForm.showChancesLive" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{_('showChances')}" id="v_showChances" config="statisticForm.showChances" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{_('showChancesLive')}" id="v_showChancesLive" config="statisticForm.showChancesLive" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{_('showBattleTier')}" id="v_showBattleTier" config="statisticForm.showBattleTier" change="onChange(event)"/>
     <c:LabeledCheckBox label="{_('RemoveSquadIcon')}" id="v_removeSquadIcon" config="statisticForm.removeSquadIcon" change="onChange(event)"/>
 </c:PanelComponent>

@@ -11,9 +11,8 @@ package net.wg.gui.components.common.waiting
           
       public function WaitingView() {
          super();
+         focusRect = false;
       }
-
-      private static const VISIBLE_INVALID:String = "visibleInv";
 
       public var waitingComponent:WaitingComponent;
 
@@ -23,6 +22,7 @@ package net.wg.gui.components.common.waiting
       }
 
       public function show(param1:Object) : void {
+         App.utils.scheduler.cancelTask(this.performHide);
          addEventListener(InputEvent.INPUT,this.handleInput,false,0,true);
          assertNotNull(this.waitingComponent,"waitingComponent");
          this.waitingComponent.setMessage(param1.toString());
@@ -31,7 +31,7 @@ package net.wg.gui.components.common.waiting
 
       public function hide(param1:Object) : void {
          removeEventListener(InputEvent.INPUT,this.handleInput);
-         this.visible = false;
+         App.utils.scheduler.envokeInNextFrame(this.performHide);
       }
 
       override public function set visible(param1:Boolean) : void {
@@ -56,6 +56,7 @@ package net.wg.gui.components.common.waiting
       }
 
       override protected function onDispose() : void {
+         App.utils.scheduler.cancelTask(this.performHide);
          if(this.waitingComponent)
          {
             this.waitingComponent.parent.removeChild(this.waitingComponent);
@@ -74,6 +75,10 @@ package net.wg.gui.components.common.waiting
       override public function handleInput(param1:InputEvent) : void {
          param1.handled = true;
          super.handleInput(param1);
+      }
+
+      private function performHide() : void {
+         this.visible = false;
       }
    }
 

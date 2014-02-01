@@ -93,6 +93,7 @@ protected function onSetDefaultValue(event:SetDefaultValueEvent):void
             case "battleLoading":
                 ConfigUtilsEditor.SetDefaultValue("battleLoading.showClock");
                 ConfigUtilsEditor.SetDefaultValue("battleLoading.showChances");
+                ConfigUtilsEditor.SetDefaultValue("battleLoading.showBattleTier");
                 ConfigUtilsEditor.SetDefaultValue("battleLoading.removeSquadIcon");
                 break;
 
@@ -106,6 +107,7 @@ protected function onSetDefaultValue(event:SetDefaultValueEvent):void
             case "statisticForm":
                 ConfigUtilsEditor.SetDefaultValue("statisticForm.showChances");
                 ConfigUtilsEditor.SetDefaultValue("statisticForm.showChancesLive");
+                ConfigUtilsEditor.SetDefaultValue("statisticForm.showBattleTier");
                 ConfigUtilsEditor.SetDefaultValue("statisticForm.removeSquadIcon");
                 break;
 
@@ -128,6 +130,7 @@ protected function onSetDefaultValue(event:SetDefaultValueEvent):void
                 ConfigUtilsEditor.SetDefaultValue("battleResults.showExtendedInfo");
                 ConfigUtilsEditor.SetDefaultValue("battleResults.showTotals");
                 ConfigUtilsEditor.SetDefaultValue("battleResults.showChances");
+                ConfigUtilsEditor.SetDefaultValue("battleResults.showBattleTier");
                 break;
 
             default:

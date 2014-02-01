@@ -110,7 +110,7 @@ package net.wg.gui.lobby.hangar.maintenance
 
       private var maintenanceData:MaintenanceVO;
 
-      private var vehicleIdOld:String;
+      private var oldMD:MaintenanceVO;
 
       private var totalPrice:Prices;
 
@@ -134,28 +134,19 @@ package net.wg.gui.lobby.hangar.maintenance
 
       public function isResetWindow() : Boolean {
          var _loc1_:* = true;
-         if((this.vehicleIdOld) && (this.maintenanceData))
+         if((this.oldMD) && (this.maintenanceData))
          {
-            _loc1_ = !(this.vehicleIdOld == this.maintenanceData.vehicleId);
+            _loc1_ = !(this.oldMD.vehicleId == this.maintenanceData.vehicleId) || !(this.oldMD.gunIntCD == this.maintenanceData.gunIntCD);
          }
          return _loc1_;
       }
 
       public function as_setData(param1:Object) : void {
-         var _loc2_:MaintenanceVO = null;
-         if(this.maintenanceData)
-         {
-            this.vehicleIdOld = this.maintenanceData.vehicleId;
-            _loc2_ = this.maintenanceData;
-         }
+         this.oldMD = this.maintenanceData;
          this.maintenanceData = new MaintenanceVO(param1);
          this.updateRepairBlock();
          this.updateShellsBlock();
          this.updateTotalPrice();
-         if(_loc2_)
-         {
-            _loc2_.dispose();
-         }
       }
 
       public function as_setEquipment(param1:Array, param2:Array, param3:Array) : void {
@@ -262,8 +253,16 @@ package net.wg.gui.lobby.hangar.maintenance
 
       override protected function onDispose() : void {
          super.onDispose();
-         this.maintenanceData.dispose();
-         this.maintenanceData = null;
+         if(this.maintenanceData)
+         {
+            this.maintenanceData.dispose();
+            this.maintenanceData = null;
+         }
+         if(this.oldMD)
+         {
+            this.oldMD.dispose();
+            this.oldMD = null;
+         }
          var _loc1_:IEventCollector = App.utils.events;
          _loc1_.removeEvent(App.stage,ModuleInfoEvent.SHOW_INFO,this.onShowModuleInfo);
          _loc1_.removeEvent(App.stage,ShellRendererEvent.CHANGE_ORDER,this.onChangeOrder);

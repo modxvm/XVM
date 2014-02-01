@@ -19,7 +19,7 @@ package xvm.hangar.components.BattleResults
         {
             if (Config.config.rating.showPlayersStatistics == false)
                 return;
-            if (Config.config.battleResults.showChances == false)
+            if (Config.config.battleResults.showChances == false && Config.config.battleResults.showBattleTier == false)
                 return;
             this.page = page;
 
@@ -63,7 +63,7 @@ package xvm.hangar.components.BattleResults
                 }
             }
 
-            var chanceText:String = Chance.GetChanceText(playerNames);
+            var chanceText:String = Chance.GetChanceText(playerNames, Config.config.battleResults.showChances, Config.config.battleResults.showBattleTier);
             if (chanceText)
             {
                 chanceText = "<p class='txt' align='right'>" + chanceText + '</p>';

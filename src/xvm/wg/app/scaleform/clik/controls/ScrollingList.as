@@ -45,6 +45,8 @@ package scaleform.clik.controls
 
       protected var _padding:Padding;
 
+      private var isScrollBarCreated:Boolean = false;
+
       protected var _scrollBar:IScrollBar;
 
       override protected function initialize() : void {
@@ -292,6 +294,17 @@ package scaleform.clik.controls
          return "[CLIK ScrollingList " + name + "]";
       }
 
+      override protected function onDispose() : void {
+         super.onDispose();
+         if(!(this._scrollBar == null) && (this.isScrollBarCreated))
+         {
+            this._scrollBar.dispose();
+            this._scrollBar = null;
+         }
+         this.thumbOffset = null;
+         this._padding = null;
+      }
+
       override protected function configUI() : void {
          super.configUI();
          if(this.padding == null)
@@ -358,7 +371,12 @@ package scaleform.clik.controls
             {
                container.removeChild(this._scrollBar as DisplayObject);
             }
+            if(this.isScrollBarCreated)
+            {
+               this._scrollBar.dispose();
+            }
             this._scrollBar = null;
+            this.isScrollBarCreated = false;
          }
          if(!this._scrollBarValue || this._scrollBarValue == "")
          {
@@ -381,6 +399,7 @@ package scaleform.clik.controls
                if(_loc1_)
                {
                   this._autoScrollBar = true;
+                  this.isScrollBarCreated = true;
                   _loc3_ = _loc1_ as Object;
                   if((_loc3_) && (this.thumbOffset))
                   {
@@ -397,10 +416,11 @@ package scaleform.clik.controls
             if(this._scrollBarValue  is  Class)
             {
                _loc1_ = new (this._scrollBarValue as Class)() as IScrollBar;
-               _loc1_.addEventListener(MouseEvent.MOUSE_WHEEL,this.blockMouseWheel,false,0,true);
                if(_loc1_ != null)
                {
                   this._autoScrollBar = true;
+                  this.isScrollBarCreated = true;
+                  _loc1_.addEventListener(MouseEvent.MOUSE_WHEEL,this.blockMouseWheel,false,0,true);
                   (_loc1_ as Object).offsetTop = this.thumbOffset.top;
                   (_loc1_ as Object).offsetBottom = this.thumbOffset.bottom;
                   container.addChild(_loc1_ as DisplayObject);

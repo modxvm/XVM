@@ -389,6 +389,7 @@ package net.wg.gui.components.controls
 
       override public function set selected(param1:Boolean) : void {
          var _loc2_:* = false;
+         var _loc3_:* = false;
          if(_selected == param1)
          {
             return;
@@ -420,7 +421,8 @@ package net.wg.gui.components.controls
          }
          else
          {
-            if(this._specializationLevel >= this.level)
+            _loc3_ = this._specializationLevel >= this.level;
+            if((this.isNativeVehicle) && (_loc3_) || !this.isNativeVehicle && (_loc3_) && (this.hasMoney))
             {
                this.setState("buy");
             }

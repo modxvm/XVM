@@ -31,6 +31,8 @@ package net.wg.gui.lobby.questsWindow.components
 
       private static const VEHICLE_RENDERER_HEIGHT:int = 35;
 
+      private static const MAX_VEHICLE_RENDERERS:int = 6;
+
       private static const DEFAULT_WIDTH:int = 375;
 
       private static const BOTTOM_PADDING:int = 10;
@@ -105,7 +107,6 @@ package net.wg.gui.lobby.questsWindow.components
       override protected function configUI() : void {
          super.configUI();
          this.sortCheckBox.label = QUESTS.QUESTS_TABLE_INHANGAR;
-         this.tankFilter.handleScroll = this.levelFilter.handleScroll = this.nationFilter.handleScroll = false;
       }
 
       override protected function onDispose() : void {
@@ -161,7 +162,7 @@ package net.wg.gui.lobby.questsWindow.components
             this.vehiclesList.y = this.buttonBar.y + this.buttonBar.height;
             _loc1_ = this._sortingFunction(this.getSortingObject());
             _loc2_ = _loc1_.length > 0?_loc1_.length:1;
-            this.vehiclesList.height = _loc2_ * VEHICLE_RENDERER_HEIGHT;
+            this.vehiclesList.height = VEHICLE_RENDERER_HEIGHT * Math.min(MAX_VEHICLE_RENDERERS,_loc2_);
             this.vehiclesList.dataProvider = setupDataProvider(_loc1_);
             this.isReadyForLayout = true;
             _loc3_ = Math.round(this.vehiclesList.y + this.vehiclesList.height);
@@ -237,7 +238,7 @@ package net.wg.gui.lobby.questsWindow.components
 
       private function setSortedData(param1:Array) : void {
          var _loc2_:int = param1.length > 0?param1.length:1;
-         var _loc3_:Number = _loc2_ * VEHICLE_RENDERER_HEIGHT;
+         var _loc3_:Number = VEHICLE_RENDERER_HEIGHT * Math.min(MAX_VEHICLE_RENDERERS,_loc2_);
          var _loc4_:Number = _loc3_ - this.vehiclesList.height;
          this.vehiclesList.dataProvider = setupDataProvider(param1);
          this.vehiclesList.height = _loc3_;

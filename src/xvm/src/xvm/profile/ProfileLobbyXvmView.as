@@ -26,7 +26,7 @@ package xvm.profile
 
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
-            Globals[Globals.NAME] = WGUtils.GetPlayerName(page.header.tankPanel.account_name.text);
+            Globals[Globals.NAME] = page.header.tankPanel.account_name.userVO.userName;
         }
     }
 

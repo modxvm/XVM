@@ -1,14 +1,14 @@
 package net.wg.gui.lobby.settings
 {
    import net.wg.gui.lobby.settings.vo.SettingsControlProp;
+   import net.wg.gui.components.controls.DropdownMenu;
+   import scaleform.clik.data.DataProvider;
    import net.wg.gui.components.controls.CheckBox;
    import net.wg.gui.components.controls.Slider;
-   import net.wg.gui.components.controls.DropdownMenu;
    import flash.events.Event;
    import scaleform.clik.events.SliderEvent;
    import scaleform.clik.events.ListEvent;
    import scaleform.clik.events.ButtonEvent;
-   import scaleform.clik.data.DataProvider;
    import net.wg.gui.lobby.settings.evnts.SettingViewEvent;
    import net.wg.utils.ICommons;
 
@@ -42,11 +42,11 @@ package net.wg.gui.lobby.settings
 
       private var _extendAdvancedControlsIds:Array;
 
-      private const _imaginaryIdList:Array;
-
       private var _skipIdList:Array;
 
       private var skipDispatchPresetEvent:Boolean = false;
+
+      private const _imaginaryIdList:Array;
 
       override public function update(param1:Object) : void {
          var _loc3_:uint = 0;
@@ -71,6 +71,28 @@ package net.wg.gui.lobby.settings
          }
          this._presets = param1.data.presets;
          super.update(param1);
+      }
+
+      override public function toString() : String {
+         return "[WG GraphicSettings " + name + "]";
+      }
+
+      override public function updateDependentData() : void {
+         if((SettingsConfig.liveUpdateVideoSettingsData) && (this._isInited))
+         {
+            this.updateLiveVideoData();
+         }
+      }
+
+      public function setPresetAfterAutoDetect(param1:Number) : void {
+         var _loc2_:String = SettingsConfig.GRAPHIC_QUALITY;
+         var _loc3_:SettingsControlProp = SettingsControlProp(_data[_loc2_]);
+         var _loc4_:DropdownMenu = this[_loc2_ + _loc3_.type];
+         this._presets.current = param1;
+         _loc3_.changedVal = this._presets.current;
+         _loc4_.dataProvider = new DataProvider(_loc3_.options);
+         _loc4_.selectedIndex = _loc3_.changedVal;
+         autodetectQuality.enabled = true;
       }
 
       override protected function onDispose() : void {
@@ -154,28 +176,6 @@ package net.wg.gui.lobby.settings
          this._presets = null;
          autodetectQuality.removeEventListener(ButtonEvent.CLICK,this.onAutodetectPress);
          super.onDispose();
-      }
-
-      override public function toString() : String {
-         return "[WG GraphicSettings " + name + "]";
-      }
-
-      override public function updateDependentData() : void {
-         if((SettingsConfig.liveUpdateVideoSettingsData) && (this._isInited))
-         {
-            this.updateLiveVideoData();
-         }
-      }
-
-      public function setPresetAfterAutoDetect(param1:Number) : void {
-         var _loc2_:String = SettingsConfig.GRAPHIC_QUALITY;
-         var _loc3_:SettingsControlProp = SettingsControlProp(_data[_loc2_]);
-         var _loc4_:DropdownMenu = this[_loc2_ + _loc3_.type];
-         this._presets.current = param1;
-         _loc3_.changedVal = this._presets.current;
-         _loc4_.dataProvider = new DataProvider(_loc3_.options);
-         _loc4_.selectedIndex = _loc3_.changedVal;
-         autodetectQuality.enabled = true;
       }
 
       override protected function configUI() : void {
@@ -592,6 +592,7 @@ package net.wg.gui.lobby.settings
             {
                _loc8_ = SettingsControlProp(SettingsConfig.liveUpdateVideoSettingsData[_loc6_]);
                _loc7_.options = _loc4_.cloneObject(_loc8_.options);
+               _loc7_.current = _loc8_.current;
             }
             if((_loc7_) && (this[_loc6_ + _loc7_.type]))
             {
@@ -732,6 +733,9 @@ package net.wg.gui.lobby.settings
          var _loc6_:Number = _loc5_.options[_loc2_].data;
          var _loc7_:Boolean = this._isAdvanced;
          this._isAdvanced = _loc3_.selectedIndex == 0;
+         var _loc8_:Number = _loc5_.changedVal;
+         _loc5_.prevVal = _loc8_;
+         _loc5_.changedVal = _loc6_;
          if(this._isAdvanced != _loc7_)
          {
             dispatchEvent(new SettingViewEvent(SettingViewEvent.ON_CONTROL_CHANGED,_viewId,_loc4_,_loc6_));

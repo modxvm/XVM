@@ -5,6 +5,7 @@ class wot.StatisticForm.WinChances
 {
     public var showChances = false;
     public var showLive = false;
+    public var showBattleTier = false;
 
     private static var s_chanceField: TextField = null;
     private static var s_chanceText: String;
@@ -22,7 +23,7 @@ class wot.StatisticForm.WinChances
         }
 
         s_chanceText = "<span class='xvm_battleText'><b><font size='16'>" +
-            (Chance.GetChanceText(showLive) || "") +
+            (Chance.GetChanceText(showChances, showBattleTier, showLive) || "") +
             "</font></b></span>";
         //com.xvm.Logger.add(s_chanceText);
         if (s_chanceField.htmlText != s_chanceText)

@@ -18,6 +18,9 @@
     "showTotals": true,
     // true - Enable display of "chance to win"
     // true - включить отображение шансов на победу
-    "showChances": false
+    "showChances": false,
+    // true - Enable display of battle tier.
+    // true - включить отображение уровня боя.
+    "showBattleTier": false
   }
 }

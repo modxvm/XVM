@@ -35,10 +35,12 @@ package net.wg.gui.components.common.video.advanced
       }
 
       private function applyAnimation(param1:Number, param2:Number, param3:Function) : void {
+         var _loc5_:VideoPlayerControlBar = null;
+         var _loc6_:AbstractPlayerProgressBar = null;
          var _loc7_:* = false;
          var _loc4_:VideoPlayerTitleBar = this.advancedVideoPlayer.titleBar;
-         var _loc5_:VideoPlayerControlBar = this.advancedVideoPlayer.controlBar;
-         var _loc6_:AbstractPlayerProgressBar = this.advancedVideoPlayer.progressBar;
+         _loc5_ = this.advancedVideoPlayer.controlBar;
+         _loc6_ = this.advancedVideoPlayer.progressBar;
          if(param1 > 0)
          {
             animationTweenObect.alpha = param2;

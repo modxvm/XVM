@@ -1725,6 +1725,8 @@ package
 
       public static const CUSTOMIZATION_LABELS_TIMELEFT_HOURS:String = "#menu:customization/labels/timeLeft/hours";
 
+      public static const CUSTOMIZATION_LABELS_TIMELEFT_LASTMINUTE:String = "#menu:customization/labels/timeLeft/lastMinute";
+
       public static const CUSTOMIZATION_LABELS_TIMELEFT_TITLE:String = "#menu:customization/labels/timeLeft/title";
 
       public static const CUSTOMIZATION_LABELS_CAMOUFLAGE_TIMELEFT_DAYS:String = "#menu:customization/labels/camouflage/timeLeft/days";
@@ -2022,7 +2024,8 @@ package
       }
 
       public static function shop_menu(param1:String) : String {
-         var _loc2_:String = "#menu:shop/menu/" + param1;
+         var _loc2_:String = null;
+         _loc2_ = "#menu:shop/menu/" + param1;
          App.utils.asserter.assert(!(SHOP_MENU_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
          return _loc2_;
       }

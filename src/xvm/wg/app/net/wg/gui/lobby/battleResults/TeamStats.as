@@ -235,14 +235,26 @@ package net.wg.gui.lobby.battleResults
       }
 
       override protected function onDispose() : void {
-         super.onDispose();
          this.header1.removeEventListener(ButtonEvent.CLICK,this.onHeaderClick);
+         this.header1.dispose();
+         this.header1 = null;
          this.header2.removeEventListener(ButtonEvent.CLICK,this.onHeaderClick);
+         this.header2.dispose();
+         this.header2 = null;
          this.team1List.removeEventListener(ListEvent.INDEX_CHANGE,this.onItemSelect);
-         this.team2List.removeEventListener(ListEvent.INDEX_CHANGE,this.onItemSelect);
          this.team1List.removeEventListener(ListEventEx.ITEM_CLICK,this.onItemSelect);
+         this.team1List.dispose();
+         this.team1List = null;
+         this.team2List.removeEventListener(ListEvent.INDEX_CHANGE,this.onItemSelect);
          this.team2List.removeEventListener(ListEventEx.ITEM_CLICK,this.onItemSelect);
+         this.team2List.dispose();
+         this.team2List = null;
          this.myParent.removeEventListener(FinalStatisticEvent.HIDE_STATS_VIEW,this.hideStatsView);
+         this.team1Stats.dispose();
+         this.team1Stats = null;
+         this.team2Stats.dispose();
+         this.team2Stats = null;
+         super.onDispose();
       }
 
       private function getHeadersProvider() : DataProvider {

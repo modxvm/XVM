@@ -29,6 +29,8 @@ package net.wg.gui.lobby.techtree
          super();
       }
 
+      public static const BACKGROUND_ALPHA:Number = 0.9;
+
       private var titleAppearance:TitleAppearance = null;
 
       public var titleField:TextField;
@@ -214,6 +216,10 @@ package net.wg.gui.lobby.techtree
 
       override public function get isModal() : Boolean {
          return true;
+      }
+
+      override public function get modalAlpha() : Number {
+         return BACKGROUND_ALPHA;
       }
 
       private function handleIndexChange(param1:IndexEvent) : void {

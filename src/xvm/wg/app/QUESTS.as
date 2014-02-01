@@ -103,6 +103,8 @@ package
 
       public static const QUESTS_TABLE_NOTINHANGAR:String = "#quests:quests/table/notInHangar";
 
+      public static const QUESTS_TABLE_NOTINHANGARBUTUNLOCKED:String = "#quests:quests/table/notInHangarButUnlocked";
+
       public static const QUESTS_CURRENTTAB_HEADER_SORT:String = "#quests:quests/currentTab/header/sort";
 
       public static const QUESTS_CURRENTTAB_HEADER_CHECKBOX_TEXT:String = "#quests:quests/currentTab/header/checkBox/text";
@@ -429,6 +431,8 @@ package
 
       public static const DETAILS_CONDITIONS_CUMULATIVE_DAMAGEDEALT:String = "#quests:details/conditions/cumulative/damageDealt";
 
+      public static const DETAILS_CONDITIONS_CUMULATIVE_MAXDAMAGE:String = "#quests:details/conditions/cumulative/maxDamage";
+
       public static const DETAILS_CONDITIONS_CUMULATIVE_DAMAGEASSISTED:String = "#quests:details/conditions/cumulative/damageAssisted";
 
       public static const DETAILS_CONDITIONS_CUMULATIVE_DAMAGERECEIVED:String = "#quests:details/conditions/cumulative/damageReceived";
@@ -458,6 +462,8 @@ package
       public static const DETAILS_CONDITIONS_CUMULATIVE_ACHIEVEMENTS:String = "#quests:details/conditions/cumulative/achievements";
 
       public static const DETAILS_CONDITIONS_CUMULATIVE_POTENTIALDAMAGERECEIVED:String = "#quests:details/conditions/cumulative/potentialDamageReceived";
+
+      public static const DETAILS_CONDITIONS_CUMULATIVE_DAMAGEBLOCKEDBYARMOR:String = "#quests:details/conditions/cumulative/damageBlockedByArmor";
 
       public static const DETAILS_CONDITIONS_CUMULATIVE_FREEXP:String = "#quests:details/conditions/cumulative/freeXP";
 
@@ -493,6 +499,8 @@ package
 
       public static const DETAILS_DOSSIER_MAXFRAGS:String = "#quests:details/dossier/maxFrags";
 
+      public static const DETAILS_DOSSIER_MAXDAMAGE:String = "#quests:details/dossier/maxDamage";
+
       public static const DETAILS_DOSSIER_FRAGS8P:String = "#quests:details/dossier/frags8p";
 
       public static const DETAILS_DOSSIER_FRAGSBEAST:String = "#quests:details/dossier/fragsBeast";
@@ -505,9 +513,21 @@ package
 
       public static const DETAILS_DOSSIER_DAMAGERECEIVED:String = "#quests:details/dossier/damageReceived";
 
+      public static const DETAILS_DOSSIER_DIRECTHITSRECEIVED:String = "#quests:details/dossier/directHitsReceived";
+
       public static const DETAILS_DOSSIER_CAPTUREPOINTS:String = "#quests:details/dossier/capturePoints";
 
       public static const DETAILS_DOSSIER_DROPPEDCAPTUREPOINTS:String = "#quests:details/dossier/droppedCapturePoints";
+
+      public static const DETAILS_DOSSIER_PIERCINGS:String = "#quests:details/dossier/piercings";
+
+      public static const DETAILS_DOSSIER_NODAMAGEDIRECTHITSRECEIVED:String = "#quests:details/dossier/noDamageDirectHitsReceived";
+
+      public static const DETAILS_DOSSIER_PIERCINGSRECEIVED:String = "#quests:details/dossier/piercingsReceived";
+
+      public static const DETAILS_DOSSIER_POTENTIALDAMAGERECEIVED:String = "#quests:details/dossier/potentialDamageReceived";
+
+      public static const DETAILS_DOSSIER_DAMAGEBLOCKEDBYARMOR:String = "#quests:details/dossier/damageBlockedByArmor";
 
       public static const DETAILS_DOSSIER_SNIPERSERIES:String = "#quests:details/dossier/sniperSeries";
 
@@ -529,11 +549,11 @@ package
 
       public static const DETAILS_DOSSIER_MAXPIERCINGSERIES:String = "#quests:details/dossier/maxPiercingSeries";
 
-      public static const DETAILS_DOSSIER_CUMULATIVE_ORIGINALXP:String = "#quests:details/dossier/cumulative/originalXP";
+      public static const DETAILS_DOSSIER_ORIGINALXP:String = "#quests:details/dossier/originalXP";
 
-      public static const DETAILS_DOSSIER_CUMULATIVE_DAMAGEASSISTEDTRACK:String = "#quests:details/dossier/cumulative/damageAssistedTrack";
+      public static const DETAILS_DOSSIER_DAMAGEASSISTEDTRACK:String = "#quests:details/dossier/damageAssistedTrack";
 
-      public static const DETAILS_DOSSIER_CUMULATIVE_DAMAGEASSISTEDRADIO:String = "#quests:details/dossier/cumulative/damageAssistedRadio";
+      public static const DETAILS_DOSSIER_DAMAGEASSISTEDRADIO:String = "#quests:details/dossier/damageAssistedRadio";
 
       public static const DETAILS_DOSSIER_WARRIOR:String = "#quests:details/dossier/warrior";
 
@@ -675,6 +695,8 @@ package
 
       public static const DETAILS_DOSSIER_COMPANY_DAMAGEDEALT:String = "#quests:details/dossier/company/damageDealt";
 
+      public static const DETAILS_DOSSIER_COMPANY_MAXDAMAGE:String = "#quests:details/dossier/company/maxDamage";
+
       public static const DETAILS_DOSSIER_COMPANY_DAMAGERECEIVED:String = "#quests:details/dossier/company/damageReceived";
 
       public static const DETAILS_DOSSIER_COMPANY_CAPTUREPOINTS:String = "#quests:details/dossier/company/capturePoints";
@@ -698,6 +720,8 @@ package
       public static const DETAILS_DOSSIER_CLAN_SPOTTED:String = "#quests:details/dossier/clan/spotted";
 
       public static const DETAILS_DOSSIER_CLAN_DAMAGEDEALT:String = "#quests:details/dossier/clan/damageDealt";
+
+      public static const DETAILS_DOSSIER_CLAN_MAXDAMAGE:String = "#quests:details/dossier/clan/maxDamage";
 
       public static const DETAILS_DOSSIER_CLAN_DAMAGERECEIVED:String = "#quests:details/dossier/clan/damageReceived";
 

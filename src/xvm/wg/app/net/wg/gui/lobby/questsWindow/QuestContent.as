@@ -205,9 +205,7 @@ package net.wg.gui.lobby.questsWindow
          this.listHidingBG = null;
          this.questBG = null;
          this._sortingFunction = null;
-         super.dispose();
          super.onDispose();
-         this.sortingFunction = null;
       }
 
       override protected function draw() : void {

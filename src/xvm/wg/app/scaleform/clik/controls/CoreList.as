@@ -10,9 +10,10 @@ package scaleform.clik.controls
    import scaleform.clik.events.ListEvent;
    import flash.events.Event;
    import scaleform.clik.constants.InvalidationType;
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import flash.display.DisplayObject;
    import flash.events.MouseEvent;
    import scaleform.clik.events.InputEvent;
-   import flash.display.DisplayObject;
    import net.wg.utils.IEventCollector;
    import scaleform.clik.events.ButtonEvent;
    import scaleform.gfx.MouseEventEx;
@@ -284,8 +285,57 @@ package scaleform.clik.controls
          invalidate(InvalidationType.SELECTED_INDEX);
       }
 
+      public function disposeRenderers() : void {
+         var _loc1_:* = NaN;
+         var _loc2_:* = NaN;
+         var _loc3_:IListItemRenderer = null;
+         var _loc4_:IDisposable = null;
+         var _loc5_:DisplayObject = null;
+         if(this._renderers != null)
+         {
+            _loc1_ = this._renderers.length;
+            _loc2_ = _loc1_-1;
+            while(_loc2_ >= 0)
+            {
+               _loc3_ = this.getRendererAt(_loc2_);
+               if(_loc3_ != null)
+               {
+                  this.cleanUpRenderer(_loc3_);
+                  _loc4_ = _loc3_ as IDisposable;
+                  if(_loc4_)
+                  {
+                     _loc4_.dispose();
+                  }
+                  _loc5_ = _loc3_ as DisplayObject;
+                  if(this.container.contains(_loc5_))
+                  {
+                     this.container.removeChild(_loc5_);
+                  }
+               }
+               this._renderers.splice(_loc2_,1);
+               _loc2_--;
+            }
+         }
+         if(this.container != null)
+         {
+            if(contains(this.container))
+            {
+               removeChild(this.container);
+            }
+            this.container = null;
+         }
+      }
+
       override public function toString() : String {
          return "[CLIK CoreList " + name + "]";
+      }
+
+      override protected function onDispose() : void {
+         removeEventListener(MouseEvent.MOUSE_WHEEL,this.handleMouseWheel,false);
+         removeEventListener(InputEvent.INPUT,handleInput,false);
+         this.disposeRenderers();
+         this.cleanUpDataProvider();
+         super.onDispose();
       }
 
       override protected function configUI() : void {
@@ -473,6 +523,15 @@ package scaleform.clik.controls
          param1.removeEventListener(MouseEvent.ROLL_OVER,this.dispatchItemEvent);
          param1.removeEventListener(MouseEvent.ROLL_OUT,this.dispatchItemEvent);
          param1.removeEventListener(MouseEvent.MOUSE_WHEEL,this.handleMouseWheel);
+      }
+
+      protected function cleanUpDataProvider() : void {
+         if(this._dataProvider)
+         {
+            this._dataProvider.cleanUp();
+            this._dataProvider.removeEventListener(Event.CHANGE,this.handleDataChange);
+            this._dataProvider = null;
+         }
       }
 
       protected function dispatchItemEvent(param1:Event) : Boolean {

@@ -16,6 +16,7 @@ package net.wg.gui.lobby.battleResults
    import net.wg.infrastructure.interfaces.IUserProps;
    import net.wg.utils.ILocale;
    import net.wg.infrastructure.interfaces.IFormattedInt;
+   import net.wg.data.VO.UserVO;
    import scaleform.clik.data.DataProvider;
    import net.wg.data.constants.Linkages;
    import flash.display.InteractiveObject;
@@ -134,13 +135,20 @@ package net.wg.gui.lobby.battleResults
          this.medalsListRight.dispose();
          this.creditsCounter.dispose();
          this.xpCounter.dispose();
-         this.scrollPane.dispose();
-         this.subtasksScrollBar.dispose();
-         if(this.questList)
+         if(this.scrollPane.target == this.questList)
          {
-            this.questList.dispose();
-            this.questList = null;
+            this.scrollPane.dispose();
          }
+         else
+         {
+            this.scrollPane.dispose();
+            if(this.questList)
+            {
+               this.questList.dispose();
+               this.questList = null;
+            }
+         }
+         this.subtasksScrollBar.dispose();
          super.onDispose();
       }
 
@@ -155,6 +163,7 @@ package net.wg.gui.lobby.battleResults
 
       override protected function configUI() : void {
          var _loc8_:IUserProps = null;
+         var _loc9_:* = false;
          this.width = Math.round(this.width);
          this.height = Math.round(this.height);
          this.upperShadow.mouseEnabled = false;
@@ -188,7 +197,14 @@ package net.wg.gui.lobby.battleResults
          this.arenaNameLbl.text = _loc3_.arenaStr;
          this.tankSlot.areaIcon.source = _loc3_.arenaIcon;
          this.tankSlot.tankIcon.source = _loc3_.tankIcon;
-         App.utils.commons.formatPlayerName(this.tankSlot.playerNameLbl,App.utils.commons.getUserProps(_loc3_.playerNameStr,_loc3_.clanNameStr,_loc3_.regionNameStr));
+         this.tankSlot.playerNameLbl.userVO = new UserVO(
+            {
+               "fullName":_loc3_.playerFullNameStr,
+               "userName":_loc3_.playerNameStr,
+               "clanAbbrev":_loc3_.clanNameStr,
+               "region":_loc3_.regionNameStr
+            }
+         );
          this.tankSlot.tankNameLbl.text = _loc3_.vehicleName;
          this.tankSlot.arenaCreateDateLbl.text = _loc3_.arenaCreateTimeStr;
          if((_loc2_.isPrematureLeave) || _loc2_.killerID <= 0)
@@ -202,7 +218,11 @@ package net.wg.gui.lobby.battleResults
                _loc8_ = App.utils.commons.getUserProps(_loc3_.killerNameStr,_loc3_.killerClanNameStr,_loc3_.killerRegionNameStr);
                _loc8_.prefix = _loc3_.vehicleStatePrefixStr;
                _loc8_.suffix = _loc3_.vehicleStateSuffixStr;
-               App.utils.commons.formatPlayerName(this.tankSlot.vehicleStateLbl,_loc8_);
+               _loc9_ = App.utils.commons.formatPlayerName(this.tankSlot.vehicleStateLbl,_loc8_);
+               if(_loc9_)
+               {
+                  this.tankSlot.toolTip = _loc3_.vehicleStatePrefixStr + _loc3_.killerFullNameStr + _loc3_.vehicleStateSuffixStr;
+               }
             }
          }
          this.tankSlot.vehicleStateLbl.textColor = _loc2_.killerID == 0?13224374:8684674;

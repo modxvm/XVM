@@ -14,6 +14,8 @@ package net.wg.data.constants
       public static const EMPTY_STR:String = "";
 
       public static const SPACE_STR:String = " ";
+
+      public static const DEFAULT_ALPHA:Number = 1;
    }
 
 }

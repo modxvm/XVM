@@ -1,5 +1,7 @@
 XVM-dev:
   * рейтинг WN по умолчанию изменен на WN8
+  * новые опции:
+      (battleLoading|battleResults|statisticForm)/showBattleTier - показывать уровень боя
 
 XVM-5.0.2:
   * адаптация к WoT 0.8.10

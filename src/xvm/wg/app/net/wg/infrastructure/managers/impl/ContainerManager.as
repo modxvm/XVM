@@ -219,12 +219,20 @@ package net.wg.infrastructure.managers.impl
       public function updateFocus(param1:Object=null) : void {
          var _loc2_:String = null;
          var _loc3_:IManagedContainer = null;
+         var _loc4_:* = false;
          for each (_loc2_ in ContainerTypes.CTNR_ORDER)
          {
             _loc3_ = this.getContainer(_loc2_);
-            if((_loc3_) && (!(_loc3_ == param1)) && (_loc3_.tryToSetFocus(true)))
+            if(!(!_loc3_ || _loc3_ == param1))
             {
-               break;
+               if(!_loc4_)
+               {
+                  _loc4_ = _loc3_.tryToSetFocus(true);
+               }
+               else
+               {
+                  _loc3_.tryToUpdateContent();
+               }
             }
          }
       }
