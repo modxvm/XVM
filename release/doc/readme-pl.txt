@@ -45,6 +45,7 @@ Zawartość:
 
   // Od wersji 5.0.0 XVM nie wymaga xvm-stat.exe do wyświetlania statystyk, grę należy uruchamiać normalnie z launchera
   // Ponadto od wersji 5.0.0 nie są potrzebne biblioteki Dokana, ani .NET Framework
+  // Standardowo statystyki graczy są wyłączone, aby je włączyć należy zmienić odpowiednie wartości w pliku rating.xc
 
   1. Wypakuj paczkę do głównego katalogu gry:
      Prawy klik na paczkę -> "Wypakuj wszystko..." -> wybierz folder gry -> "Wypakuj"
@@ -59,14 +60,14 @@ Zawartość:
       \res_mods\xvm\configs\@Default\
     lub możesz użyć edytora: http://www.koreanrandom.com/forum/topic/1422-/#entry11316
 
-    WAŻNE: Jeśli konfigurujesz manualnie, używaj programów typu notatnik, NIGDY nie używaj edytorów typu Word/Wordpad. Opcjonalnie możesz również użyć edytora XCPad(podświetla on tagi xvm): http://www.koreanrandom.com/forum/index.php?app=core&module=attach&section=attach&attach_id=22620
+    WAŻNE: Jeśli konfigurujesz manualnie, używaj programów typu notatnik(czy innego edytora, który nie modyfikuje kodowania pliku - przykładowo notepad++), NIGDY nie używaj edytorów typu Word/Wordpad. Opcjonalnie możesz również użyć edytora XCPad(podświetla on tagi xvm): http://www.koreanrandom.com/forum/index.php?app=core&module=attach&section=attach&attach_id=22620
 
   3. Jeśli XVM nie wykrywa prawidłowo języka gry,
    to w pliku konfiguracji (standardowo\res_mods\xvm\configs\@default\@xvm.xc)
     zmień wartość "language" z "auto" na kod języka(np. pl).
 
   4. Jest też możliwość instalacji tzw. "Nightly builds"(wersje testowe).
-    Możesz je pobrać na http://wargaming.by-reservation.com/xvm/
+    Możesz je pobrać na http://nightly.modxvm.com/
 
 -----------------------------------------------------------
 3. AKTUALIZACJA
@@ -210,9 +211,11 @@ Zawartość:
       {{eff}}         - Wartość "efficiency" gracza: http://wot-news.com/index.php/stat/calc/en/
       {{eff:4}}       - Zaokrąglona wartość "efficiency" gracza
       {{teff}}, {{e}} - Wartość "efficiency" gracza dla danego pojazdu: http://www.koreanrandom.com/forum/topic/1643-
-      {{wn}}          - WN6 : http://www.koreanrandom.com/forum/topic/2575-
+      {{wn6}}         - WN6 : http://www.koreanrandom.com/forum/topic/2575-
+	  {{wn8}}		  - WN8 : http://www.koreanrandom.com/forum/topic/2575-
       {{xeff}}        - Skala XVM dla "efficiency" (wartości 00-99)
-      {{xwn}}         - Skala XVM dla WN6 (wartości 00-99)
+      {{xwn6}}        - Skala XVM dla WN6 (wartości 00-99)
+	  {{xwn8}}        - Skala XVM dla WN8 (wartości 00-99)
       {{rating}}      - GWR (Global Win Ratio)
       {{rating:3}}    - GWR zaokrąglone do 3 liczb z lewej
       {{battles}}     - Całkowita liczba bitw
@@ -236,9 +239,11 @@ Zawartość:
       {{c:tdb}}, {{c:tdv}}, {{c:tfb}}, {{c:tsb}} - dynamiczne kolory dla podanych makr
       {{c:eff}}       - Kolor zależny od wartości "efficiency" gracza
       {{c:e}}         - Kolor zależny od wartości "efficiency" dla danego pojazdu gracza
-      {{c:wn}}        - Kolor zależny od WN6 
+      {{c:wn6}}       - Kolor zależny od WN6 
+	  {{c:wn8}}       - Kolor zależny od WN8 
       {{c:xeff}}      - Kolor zależny od skali XVM dla "efficiency"
-      {{c:xwn}}       - Kolor zależny od skali XVM dla WN6
+      {{c:xwn6}}      - Kolor zależny od skali XVM dla WN6
+      {{c:xwn8}}      - Kolor zależny od skali XVM dla WN8	  
       {{c:rating}}    - Kolor zależny od GWR
       {{c:kb}}        - Kolor zależny od kilo-bitw
       {{c:t-rating}}  - Kolor zależny od aktualnej wartości wygranych
@@ -297,7 +302,6 @@ Zawartość:
 
   Hit Log.
   Współczynniki x, y pozwalają ustalić ułożenie panelu, w zależności od rozdzielczości.
-  Działa tylko z xvm-stat!
 
   Zegar w czasie ładowania bitwy.
   Format: Y:rok, M:miesiąc, D:dzień, H:godzina, N:minuta, S:sekunda. "" - usuwa zegar.
@@ -306,7 +310,9 @@ Zawartość:
   "clockFormat": "Y.M.D H:N:S"  => 2013.05.20 01:23:45
   Jest możliwość ustawienia tagów HTML dla zegara.
 
-  Wartości Efficiency {{teff}}, {{e}}.
+_______________________________________________________________
+  
+  Wartości Efficiency per-pojazd {{teff}}, {{e}}.
     TEFF       E
     0..299     1 - bardzo słaby gracz
     300..499   2 - słaby gracz
@@ -319,3 +325,34 @@ Zawartość:
     1800..1999 9 - mistrz
     2000+      E - Expert (top-100 graczy na danym pojeździe)
 	
+  Wartości Efficiency {{eff}}.
+    0..549     1 - bardzo słaby gracz
+    550..629   2 - słaby gracz
+    630..859   3 - poniżej przeciętnej
+    860..1139  4 - powyżej przeciętnej
+    1140..1459 5 - dobry
+    1460..1549 6 - bardzo dobry
+    1550..1734 7 - doskonały
+    1735..1899 8 - unikalny(unicum)
+    1900+      9 - super unikalny(super unicum)
+
+  Wartości WN6 {{wn6}}.
+    0..424     1 - słaby gracz
+    425..794   2 - poniżej przeciętnej
+    795..1174  3 - przeciętny gracz
+    1175..1569 4 - dobry gracz
+    1570..1884 5 - bardzo dobry gracz
+    1885+      6 - unikalny(unicum)
+	
+  Wartości WN8 {{wn8}}.
+    0..299     1 - bardzo słaby gracz
+    300..599   2 - słaby gracz
+    600..899   3 - poniżej przeciętnej
+    900..1199  4 - powyżej przeciętnej
+    1200..1499 5 - dobry
+    1500..1749 6 - bardzo dobry
+    1750..2299 7 - doskonały
+    2300..2899 8 - unikalny(unicum)
+    2900+      9 - super unikalny(super unicum)	
+
+_______________________________________________________________

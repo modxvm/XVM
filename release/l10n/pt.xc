@@ -17,7 +17,7 @@
     "Chance to win": "Probabilidade de vitória",
     //"global": "global",
     //"per-vehicle": "por veículo",
-    "chanceLive": "Live",
+    "chanceLive": "Em combate",
     "chanceBattleTier": "nível",
 
     // Hitlog
@@ -67,8 +67,8 @@
     "draws": "empates",
     "Maximum damage": "Dano máximo",
     "Specific damage (Avg dmg / HP)": "Dano específico (méd / HP)",
-    "Capture points": "Pontos captura",
-    "Defence points": "Pontos defesa",
+    "Capture points": "Pontos de captura",
+    "Defence points": "Pontos de defesa",
     "Filter": "Filtro",
     "Extra data (WoT 0.8.8+)": "Dados adicionais (WoT 0.8.8+)",
     "Average battle time": "Tempo médio de batalha",

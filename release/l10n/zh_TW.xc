@@ -79,7 +79,7 @@
     "Average battle time per day": "平均每日戰鬥時間",
     "Battles after 0.8.8": "更新0.8.8版後戰鬥數",
     "Average experience": "平均每場獲得經驗",
-    "Average experience without premium": "平均每場獲得經驗 (不含加值帳號加成)",
+    "Average experience without premium": "平均每場獲得經驗 (不含加值帳號)",
     "Average distance driven per battle": "平均每場行駛距離",
     "Average woodcuts per battle": "平均每場撞倒樹木數",
     "Average damage assisted": "平均協助傷害",
