@@ -26,45 +26,18 @@ from logger import *
 
 class _Dossier(object):
 
+    #@process
     def getDossier(self, proxy, args):
         (self.playerId, self.vehId) = args
 
-        #pprint(args)
+        #log(str(args))
 
         from gui.shared import g_itemsCache
-
         if self.vehId is None:
-            if self.playerId is None:
-                dossier = g_itemsCache.items.getAccountDossier()
-            else:
-                plid = int(self.playerId)
-                container = g_itemsCache.items._ItemsRequester__itemsCache[GUI_ITEM_TYPE.ACCOUNT_DOSSIER]
-                ddescr = container.get(plid)
-                if ddescr is None:
-                    (ddescr, hidden) = yield g_itemsCache.items.requestUserDossier(plid)
-                from gui import game_control
-                if game_control.g_instance.roaming.isInRoaming():
-                    isInRoaming = game_control.g_instance.roaming.isPlayerInRoaming(plid)
-                else:
-                    isInRoaming = False
-                from gui.shared.gui_items.dossier import AccountDossier
-                dossier = AccountDossier(ddescr, False, isInRoaming)
-
+            dossier = g_itemsCache.items.getAccountDossier(self.playerId)
             res = self.prepareAccountResult(dossier)
-
         else:
-            vid = int(self.vehId)
-            if self.playerId is None:
-                dossier = g_itemsCache.items.getVehicleDossier(vid)
-            else:
-                plid = int(self.playerId)
-                container = g_itemsCache.items._ItemsRequester__itemsCache[GUI_ITEM_TYPE.VEHICLE_DOSSIER]
-                ddescr = container.get((plid, vid))
-                if ddescr is None:
-                    ddescr = yield g_itemsCache.items.requestUserVehicleDossier(plid, vid)
-                from gui.shared.gui_items.dossier import VehicleDossier
-                dossier = VehicleDossier(ddescr)
-
+            dossier = g_itemsCache.items.getVehicleDossier(int(self.vehId), self.playerId)
             res = self.prepareVehicleResult(dossier)
 
         # respond
@@ -72,9 +45,7 @@ class _Dossier(object):
             strdata = json.dumps(res)
             proxy.movie.invoke((RESPOND_DOSSIER, [self.playerId, self.vehId, strdata]))
 
-        #print(str(args) + " done")
-
-    getDossier = process(getDossier)
+        #log(str(args) + " done")
 
 
     def prepareCommonResult(self, dossier):

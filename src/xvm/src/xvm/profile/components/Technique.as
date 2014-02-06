@@ -125,9 +125,14 @@ package xvm.profile.components
                 // userInfo.sortColumn
                 var bb:SortableHeaderButtonBar = page.listComponent.sortableButtonBar;
                 var btnIndex:int = Math.abs(Config.config.userInfo.sortColumn) - 1;
+                var b:SortingButton = bb.getButtonAt(btnIndex) as SortingButton;
+                if (b == null)
+                {
+                    App.utils.scheduler.envokeInNextFrame(delayedInit);
+                    return;
+                }
                 bb.selectedIndex = -1;
                 bb.selectedIndex = btnIndex;
-                var b:SortingButton = bb.getButtonAt(btnIndex) as SortingButton;
                 b.sortDirection = Config.config.userInfo.sortColumn < 0 ? SortingButton.DESCENDING_SORT : SortingButton.ASCENDING_SORT;
                 list.selectedIndex = 0;
 

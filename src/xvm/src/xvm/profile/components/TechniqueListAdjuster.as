@@ -162,6 +162,8 @@ package xvm.profile.components
         {
             if (btn == null)
                 btn = page.listComponent.sortableButtonBar.getButtonAt(page.listComponent.sortableButtonBar.selectedIndex) as SortingButton;
+            if (btn == null)
+                return;
             if (btn.sortDirection == SortingButton.WITHOUT_SORT)
                 return;
             if (sortingActive)

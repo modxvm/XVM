@@ -234,9 +234,11 @@ class _Stat(object):
         else:
             if reg == "CT":
                 suf = value[-3:]
-                if suf in ('_RU', '_EU', '_NA', '_SG'):
+                if suf in ('_RU', '_EU', '_NA', '_US', '_SG'):
                     reg = value[-2:]
                     value = value[:-3]
+                    if reg == 'US':
+                        reg = 'NA'
                 else:
                     reg = "RU"
         cacheKey = "%s/%s" % ("ID" if isId else reg, value)
