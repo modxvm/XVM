@@ -35,7 +35,7 @@ package xvm.hangar.UI.battleResults
                 {
                     var offsetTop:Number = 10;
                     var offsetMiddle:Number = 20;
-                    var offsetBottom:Number = 30;
+                    var offsetBottom:Number = 20;
 
                     // move elements up
                     this.taskTF.y -= offsetTop;

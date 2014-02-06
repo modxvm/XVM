@@ -74,7 +74,6 @@ package xvm.hangar.views
         {
             try
             {
-                Stat.clearStatCache();
                 // Components
                 new WinChances(page); // Winning chance info above players list.
                 new TipField(page);   // Information field below players list.

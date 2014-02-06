@@ -5,6 +5,7 @@
 package com.xvm.misc
 {
     import com.xvm.*;
+    import com.xvm.io.*;
     import com.xvm.utils.*;
     import com.xvm.types.stat.*;
     import com.xvm.types.veh.*;
@@ -22,13 +23,16 @@ package com.xvm.misc
             return "<font color='#FFBBBB'>" + Locale.get("Chance error") + ": " + text + "</font>";
         }
 
+        private static var chanceLog:Array;
         public static function GetChanceText(playerNames:Vector.<String>, showChance:Boolean, showTier:Boolean, showLive:Boolean = false):String
         {
+            chanceLog = [];
+            var teamsCount:Object = null;
             Logger.add("========== begin chance calculation ===========");
             try
             {
                 Logger.add("playerNames: " + playerNames.join(", "));
-                var teamsCount:Object = CalculateTeamPlayersCount(playerNames);
+                teamsCount = CalculateTeamPlayersCount(playerNames);
                 Logger.add("teamsCount=" + teamsCount.ally + "/" + teamsCount.enemy);
                 // only equal and non empty team supported
                 if (teamsCount.ally == 0 || teamsCount.enemy == 0)
@@ -77,6 +81,8 @@ package com.xvm.misc
             }
             finally
             {
+                if (teamsCount != null && teamsCount.ally != teamsCount.enemy)
+                    Logger.addObject(chanceLog, 3);
                 Logger.add("========== end chance calculation ===========");
             }
             return null;
@@ -118,7 +124,8 @@ package com.xvm.misc
             var Tmin:Number = vdata.tierLo;
             var Tmax:Number = vdata.tierHi;
             var T:Number = battleTier;
-            Logger.addObject(stat);
+            //Logger.addObject(stat);
+            chanceLog.push(stat);
             var Ea:Number = isNaN(stat.xwn8) ? Config.config.consts.AVG_XVMSCALE : stat.xwn8;
             var Ean:Number = Ea + (Ea * (((stat.lvl || T) - T) * 0.05));
             var Ra:Number = stat.r || Config.config.consts.AVG_GWR;

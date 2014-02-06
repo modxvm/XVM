@@ -28,10 +28,10 @@ package xvm.tcarousel
                 var masteryStr:String = "";
                 try
                 {
-                    if (!data || !data.hasOwnProperty("compactDescr"))
+                    if (dataVO == null)
                         return;
 
-                    var id:Number = data.compactDescr;
+                    var id:Number = dataVO.compactDescr;
                     var dossier:AccountDossier = Dossier.getAccountDossier();
                     if (dossier != null && dossier.vehicles.hasOwnProperty(id))
                     {

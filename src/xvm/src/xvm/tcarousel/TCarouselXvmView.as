@@ -27,7 +27,14 @@ package xvm.tcarousel
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
             //Logger.addObject("onAfterPopulate: " + view.as_alias);
-            init();
+            try
+            {
+                init();
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
         }
 
         private function init():void

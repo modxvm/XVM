@@ -49,11 +49,6 @@ package com.xvm
             return instance.statCache;
         }
 
-        public static function clearStatCache():void
-        {
-            instance.statCache = new Dictionary();
-        }
-
         public static function getData(name:String):StatData
         {
             return stat.hasOwnProperty(name) ? stat[name] : null;
@@ -164,6 +159,9 @@ package com.xvm
 
                 if (response.info)
                     info = response.info;
+
+                // clear cache, because it is also used for current battle players list
+                statCache = new Dictionary();
 
                 if (response.players)
                 {
