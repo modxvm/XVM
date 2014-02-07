@@ -11,8 +11,8 @@ package xvm.hangar.UI.battleResults
             //Logger.add("UI_BattleResultsAwards");
         }
 
-        private static const TEXT_TOP:int = 5;
-        private static const MARGIN:int = 0;
+        private static const TEXT_TOP:int = 3;
+        private static const TEXT_Y_OFFSET:int = -3;
         override protected function draw():void
         {
             super.draw();
@@ -21,9 +21,9 @@ package xvm.hangar.UI.battleResults
             {
                 if (_height > 0)
                 {
-                    this.awardTF.y = TEXT_TOP + MARGIN;
-                    this.awardDescrTF.y = TEXT_TOP + MARGIN + 1;
-                    this.maskMC.height = this.awardDescrTF.y + Math.min(this.awardDescrTF.textHeight, this.awardDescrTF.height) + MARGIN + TEXT_TOP * 2;
+                    this.awardTF.y = TEXT_TOP + TEXT_Y_OFFSET;
+                    this.awardDescrTF.y = TEXT_TOP + TEXT_Y_OFFSET;
+                    this.maskMC.height = this.awardDescrTF.y + Math.min(this.awardDescrTF.textHeight, this.awardDescrTF.height) + TEXT_TOP * 2;
                     _height = this.maskMC.height;
                     dispatchEvent(new Event(Event.RESIZE));
                 }
