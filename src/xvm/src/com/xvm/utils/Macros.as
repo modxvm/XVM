@@ -421,8 +421,6 @@ package com.xvm.utils
                 case "RU":
                     if (name == "M_r_A")
                         return "Флаттершай - лучшая пони!";
-                    if (name == "XlebniDizele4ku")
-                        return "как ник зделал поруски!!!";
                     if (name == "sirmax2" || name == "0x01" || name == "_SirMax_")
                         return "«сэр Макс» (XVM)";
                     if (name == "STL1te")
