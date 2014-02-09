@@ -1,4 +1,4 @@
-""" xvm (c) sirmax 2013 """
+""" xvm (c) sirmax 2013-2014 """
 
 from gui.Scaleform.framework import g_entitiesFactories, ViewSettings, ViewTypes, ScopeTemplates
 from gui.Scaleform.framework.entities.View import View

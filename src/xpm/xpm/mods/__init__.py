@@ -1,4 +1,4 @@
-""" Mods loader (c) sirmax 2013 """
+""" XPM mods loader (c) sirmax 2013-2014 """
 
 import gui.mods.xpm
 

@@ -1,4 +1,4 @@
-""" Misc functions (c) sirmax 2013 """
+""" XPM misc functions (c) sirmax 2013-2014 """
 
 import datetime
 import json
@@ -10,7 +10,6 @@ import random
 
 #IS_DEVELOPMENT = False
 IS_DEVELOPMENT = True
-
 
 
 #####################################################################
