@@ -5,7 +5,9 @@ package xvm.hangar.components.BattleLoading
     import com.xvm.types.cfg.*;
     import com.xvm.types.veh.*;
     import flash.events.*;
+    import flash.geom.*;
     import flash.text.*;
+    import flash.utils.*;
     import scaleform.gfx.*;
     import net.wg.gui.events.*;
     import net.wg.gui.lobby.battleloading.*;
@@ -21,6 +23,8 @@ package xvm.hangar.components.BattleLoading
         public function BattleLoadingItemRenderer(proxy:PlayerItemRenderer)
         {
             this.proxy = proxy;
+
+            //setInterval(function():void { proxy.setData(proxy.data) }, 1000); // DEBUG
 
             proxy.iconLoader.addEventListener(UILoaderEvent.COMPLETE, onVehicleIconLoadComplete);
 
@@ -43,15 +47,12 @@ package xvm.hangar.components.BattleLoading
 
             // Add stat loading handler
             Stat.loadBattleStat(this, onStatLoaded);
-
-            //setInterval(function() { proxy.setData(proxy.data) }, 10); // DEBUG
         }
 
         public function setData(data:Object):void
         {
             //Logger.add("setData: " + (data == null ? "(null)" : data.label));
             //Logger.addObject(data, "data", 2);
-
             try
             {
                 if (data == null)
@@ -157,16 +158,23 @@ package xvm.hangar.components.BattleLoading
         private function onVehicleIconLoadComplete(e:UILoaderEvent):void
         {
             //Logger.add("onVehicleIconLoadComplete: " + playerName);
-            if (/*proxy.iconLoader.width > 84 ||*/ proxy.iconLoader.height > 24)
+            // resize icons to avoid invalid resizing of item
+            //if (proxy.iconLoader.width > 84 || proxy.iconLoader.height > 24)
+            /*if (proxy.iconLoader.height > 24)
             {
                 //var c:Number = Math.min(84 / proxy.iconLoader.width, 24 / proxy.iconLoader.height);
                 var c:Number = 24 / proxy.iconLoader.height;
                 proxy.iconLoader.scaleX = c;
                 proxy.iconLoader.scaleY = c;
-            }
+            }*/
+
+            // crop large icons to avoid invalid resizing of item
+            proxy.iconLoader.scrollRect = new Rectangle(0, 0, 84, 24);
+
+            // disable icons mirroring (for alternative icons)
             if (Config.config.battle.mirroredVehicleIcons == false && team == Defines.TEAM_ENEMY)
             {
-                proxy.iconLoader.scaleX = -1;
+                proxy.iconLoader.scaleX = -Math.abs(proxy.iconLoader.scaleX);
                 proxy.iconLoader.x = 4;
                 //Logger.add(proxy.iconLoader.width + "x" + proxy.iconLoader.height);
             }
