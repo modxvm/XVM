@@ -46,7 +46,7 @@ _special = {
     'uk:GB51_Excelsior':            [ 5, 6 ],
     'uk:GB68_Matilda_Black_Prince': [ 5, 6 ],
     'uk:GB20_Crusader':             [ 5, 7 ],
-    'usa:M24_Chaffee':              [ 7, 12 ],
+    'usa:M24_Chaffee':              [ 7, 11 ],
 
     # level 6
     'germany:PzV_PzIV':             [ 6, 7 ],
@@ -75,13 +75,13 @@ def _getTiers(level, cls, key):
     if key in _special:
         return _special[key]
 
-    # T4 HT max+1
+    # HT: (=T4 max+1)
     if level == 4 and cls == 'heavyTank':
         return (4, 5)
 
-    # LT: =T4 max+4  & >T4  min+1 max+4
+    # LT: (=T4 max+4) & (>T4 min+1 max+4) & (>T7 min+1 max=11)
     if level >= 4 and cls == 'lightTank':
-        return (level if level == 4 else level + 1, level + 4)
+        return (level if level == 4 else level + 1, 11 if level > 7 else level + 4)
 
-    # default: <T3 max+1 & >T3 max+2
-    return (level, level + 1 if level < 3 else level + 2)
+    # default: (<T3 max+1) & (>=T3 max+2) & (>T9 max=11)
+    return (level, level + 1 if level < 3 else 11 if level > 9 else level + 2)
