@@ -1,8 +1,13 @@
 XVM-5.1.0:
   * adaptation to WoT 0.8.11
-  * default WN rating changed to WN8
+
+  [NEW FUNCTIONS]
   * new options:
       (battleLoading|battleResults|statisticForm)/showBattleTier - show battle tier
+
+  [OTHER]
+  * default WN rating changed to WN8
+  * renamed option statisticForm/showChancesExp to showChancesLive
 
 XVM-5.0.2:
   * adaptation to WoT 0.8.10

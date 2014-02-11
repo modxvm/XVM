@@ -76,6 +76,7 @@ package
             d['uk-GB69_Cruiser_Mk_II'] = { name: null, short: 'Crui2' };
             d['japan-Ke_Ni'] = { name: null, short: 'KeNi' };
             d['japan-Ke_Ni_B'] = { name: null, short: 'KeNiB' };
+            d['germany-G100_Gtraktor_Krupp'] = { name: null, short: 'Gtrak' };
             d['germany-S35_captured'] = { name: null, short: 'S35' };
             d['usa-M2_med'] = { name: null, short: 'M2MT' };
             d['france-D2'] = { name: null, short: 'D2' };
@@ -213,6 +214,7 @@ package
             d['germany-PzV'] = { name: null, short: 'Pant' };
             d['germany-VK3002DB'] = { name: null, short: '3002D' };
             d['usa-T20'] = { name: null, short: 'T20' };
+            d['usa-T23E3'] = { name: null, short: 'T23E' };
             d['china-Ch04_T34_1'] = { name: null, short: '34/1' };
             d['uk-GB22_Comet'] = { name: null, short: 'Comet' };
             d['japan-Chi_Ri'] = { name: null, short: 'ChiRi' };
@@ -323,6 +325,7 @@ package
             d['germany-Leopard1'] = { name: null, short: 'Leo' };
             d['usa-M48A1'] = { name: null, short: 'M48' };
             d['usa-M60'] = { name: null, short: 'M60' };
+            d['usa-T95_E6'] = { name: null, short: 'T95E' };
             d['china-Ch19_121'] = { name: null, short: '121' };
             d['france-Bat_Chatillon25t'] = { name: null, short: 'Bat' };
             d['uk-GB70_FV4202_105'] = { name: null, short: '4202' };
