@@ -318,6 +318,7 @@
         <KEY_9>	9	</KEY_9>
         <KEY_0>	10	</KEY_0>
       </predefinedVerticalVelocities>
+      <keyShowGunMarker>KEY_APOSTROPHE</keyShowGunMarker>
     </camera>
   </videoMode>
 </avatar_input_handler.xml>
