@@ -18,7 +18,7 @@ package xvm.hangar.components.BattleLoading
     {
         private var proxy:PlayerItemRenderer;
 
-        private var playerName:String = null;
+        private var fullPlayerName:String = null;
 
         public function BattleLoadingItemRenderer(proxy:PlayerItemRenderer)
         {
@@ -52,18 +52,22 @@ package xvm.hangar.components.BattleLoading
         public function setData(data:Object):void
         {
             //Logger.add("setData: " + (data == null ? "(null)" : data.label));
-            //Logger.addObject(data, "data", 2);
+            //Logger.addObject(data);
             try
             {
                 if (data == null)
                     return;
 
-                if (playerName == null)
-                    playerName = data.label;
+                if (fullPlayerName == null)
+                {
+                    fullPlayerName = App.utils.commons.getFullPlayerName(
+                        App.utils.commons.getUserProps(data.label, data.clanAbbrev, data.region, data.igrType));
+                }
 
                 var vdata:VehicleData = VehicleInfo.getByIcon(data.icon);
-                Macros.RegisterMinimalMacrosData(playerName, vdata.vid);
-                data.label = Macros.Format(playerName, "{{nick}}");
+                Macros.RegisterMinimalMacrosData(fullPlayerName, vdata.vid);
+                data.label = Macros.Format(fullPlayerName, "{{name}}");
+                data.clanAbbrev = Macros.Format(fullPlayerName, "{{clannb}}");
 
                 // ClanIcon
                 attachClanIconToPlayer(data);
@@ -104,10 +108,10 @@ package xvm.hangar.components.BattleLoading
                 // Set Text Fields
                 if (_savedTextFieldColor == null)
                     _savedTextFieldColor = proxy.textField.htmlText.match(/ COLOR="(#[0-9A-F]{6})"/)[1];
-                var a:String = Macros.Format(playerName, team == Defines.TEAM_ALLY
+                var a:String = Macros.Format(fullPlayerName, team == Defines.TEAM_ALLY
                     ? Config.config.battleLoading.formatLeftNick
                     : Config.config.battleLoading.formatRightNick);
-                var b:String = Macros.Format(playerName, team == Defines.TEAM_ALLY
+                var b:String = Macros.Format(fullPlayerName, team == Defines.TEAM_ALLY
                     ? Config.config.battleLoading.formatLeftVehicle
                     : Config.config.battleLoading.formatRightVehicle);
                 proxy.textField.htmlText = "<font color='" + _savedTextFieldColor + "'>" + a + "</font>";
@@ -140,7 +144,7 @@ package xvm.hangar.components.BattleLoading
             if (!cfg.show)
                 return;
             var icon:ClanIcon = new ClanIcon(cfg, proxy.iconLoader.x, proxy.iconLoader.y, team,
-                WGUtils.GetPlayerName(playerName), WGUtils.GetClanNameWithoutBrackets(playerName));
+                WGUtils.GetPlayerName(fullPlayerName), WGUtils.GetClanNameWithoutBrackets(fullPlayerName));
             icon.addEventListener(Event.COMPLETE, function():void
             {
                 // don't add empty icons to the form
@@ -157,7 +161,7 @@ package xvm.hangar.components.BattleLoading
 
         private function onVehicleIconLoadComplete(e:UILoaderEvent):void
         {
-            //Logger.add("onVehicleIconLoadComplete: " + playerName);
+            //Logger.add("onVehicleIconLoadComplete: " + fullPlayerName);
             // resize icons to avoid invalid resizing of item
             //if (proxy.iconLoader.width > 84 || proxy.iconLoader.height > 24)
             /*if (proxy.iconLoader.height > 24)
@@ -182,11 +186,11 @@ package xvm.hangar.components.BattleLoading
 
         private function onStatLoaded():void
         {
-            //Logger.add("onStatLoaded: " + playerName);
+            //Logger.add("onStatLoaded: " + fullPlayerName);
             proxy.vehicleField.condenseWhite = false; // TODO StatData.s_empty;
             draw();
 
-            //Macros.TestMacros(playerName);
+            //Macros.TestMacros(fullPlayerName);
         }
     }
 

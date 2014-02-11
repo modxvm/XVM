@@ -64,12 +64,12 @@ package com.xvm.utils
             return res;
         }
 
-        public static function RegisterMinimalMacrosData(playerName:String, vid:int):void
+        public static function RegisterMinimalMacrosData(fullPlayerName:String, vid:int):void
         {
-            if (playerName == null)
+            if (fullPlayerName == null)
                 throw new Error("empty name");
 
-            var name:String = WGUtils.GetPlayerName(playerName);
+            var name:String = WGUtils.GetPlayerName(fullPlayerName);
 
             // check if already registered
             if (dict.hasOwnProperty(name))
@@ -85,8 +85,8 @@ package com.xvm.utils
             var pdata:Dictionary = dict[name];
 
             var nick:String = modXvmDevLabel(name);
-            var clanWithoutBrackets:String = WGUtils.GetClanNameWithoutBrackets(playerName);
-            var clanWithBrackets:String = WGUtils.GetClanNameWithBrackets(playerName);
+            var clanWithoutBrackets:String = WGUtils.GetClanNameWithoutBrackets(fullPlayerName);
+            var clanWithBrackets:String = WGUtils.GetClanNameWithBrackets(fullPlayerName);
 
             // {{nick}}
             pdata["nick"] = nick + clanWithBrackets;
