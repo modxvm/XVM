@@ -1,9 +1,9 @@
 #!/bin/sh
 
 ### Path vars can be assigned at .bashrc
-#[ "$GAME_VER" = "" ] && GAME_VER="0.8.10"
-[ "$GAME_VER" = "" ] && GAME_VER="0.8.11 Common Test"
-[ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/work/games/WoT-CT
+[ "$GAME_VER" = "" ] && GAME_VER="0.8.11"
+#[ "$GAME_VER" = "" ] && GAME_VER="0.8.11 Common Test"
+[ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/work/games/WoT
 
 cd $(dirname $0)
 

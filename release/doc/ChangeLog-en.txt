@@ -1,4 +1,5 @@
-XVM-dev:
+XVM-5.1.0:
+  * adaptation to WoT 0.8.11
   * default WN rating changed to WN8
   * new options:
       (battleLoading|battleResults|statisticForm)/showBattleTier - show battle tier

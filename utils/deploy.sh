@@ -2,9 +2,9 @@
 
 # TODO - refactor
 
-#[ "$GAME_VER" = "" ] && GAME_VER="0.8.10"
-[ "$GAME_VER" = "" ] && GAME_VER="0.8.11 Common Test"
-[ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/work/games/WoT-CT
+[ "$GAME_VER" = "" ] && GAME_VER="0.8.11"
+#[ "$GAME_VER" = "" ] && GAME_VER="0.8.11 Common Test"
+[ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/work/games/WoT
 
 FILES_FLASH="
   Application.swf
