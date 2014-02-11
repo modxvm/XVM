@@ -1,4 +1,9 @@
 <avatar_input_handler.xml>
+  <fovCommon>
+    <horizontalFov>90.0</horizontalFov>
+    <horizontalFovBigAspect>180.0</horizontalFovBigAspect>
+    <verticalFov>60.0</verticalFov>
+  </fovCommon>
   <dynamicCameraCommon>
     <caliberImpulses>
       <range>0 0.01</range>
@@ -39,6 +44,8 @@
       <scrollSensitivity>	15	</scrollSensitivity>
       <angleRange>10 110</angleRange>
       <distRange>2 500</distRange>
+      <fovMultMinDist>1.0</fovMultMinDist>
+      <fovMultMaxDist>1.0</fovMultMaxDist>
       <dynamics>
         <impulseOscillator>
           <mass>1.0</mass>
@@ -100,6 +107,8 @@
       <distRange>2 500</distRange>
       <minStartDist>	15	</minStartDist>
       <optimalStartDist>	20	</optimalStartDist>
+      <fovMultMinDist>1.0</fovMultMinDist>
+      <fovMultMaxDist>1.0</fovMultMaxDist>
       <dynamics>
         <impulseOscillator>
           <mass>1.0</mass>
@@ -157,6 +166,7 @@
       <sensitivity>0.05</sensitivity>
       <scrollSensitivity>1</scrollSensitivity>
       <distRange>2 1000</distRange>
+      <fovMult>1.0</fovMult>
       <dynamics>
         <oscillator>
           <mass>1.5</mass>
