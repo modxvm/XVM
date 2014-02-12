@@ -14,4 +14,5 @@ g_entitiesFactories.addSettings(_settings)
 
 def AppStarted(self, event):
     #debug('AppStarted')
-    self.loadView(_alias)
+    import BigWorld
+    BigWorld.callback(0.001, lambda: self.loadView(_alias))
