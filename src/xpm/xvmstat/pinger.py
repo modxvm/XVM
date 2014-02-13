@@ -69,7 +69,7 @@ class _Ping(object):
             try:
                 self._respond()
             except Exception, ex:
-                err('_checkResult() exception: ' + traceback.format_exc(ex))
+                err('_checkResult() exception: ' + traceback.format_exc())
             finally:
                 self.thread = None
 
@@ -115,7 +115,7 @@ class _Ping(object):
                 self.resp = res
 
         except Exception, ex:
-            err('_pingAsync() exception: ' + traceback.format_exc(ex))
+            err('_pingAsync() exception: ' + traceback.format_exc())
             with self.lock:
                 self.resp = {"Error":ex}
 

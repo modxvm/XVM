@@ -80,7 +80,7 @@ class Xvm(object):
                 err("unknown command: " + str(cmd))
             proxy.movie.invoke(('xvm.respond', [id, res]))
         except Exception, ex:
-            err(traceback.format_exc(ex))
+            err(traceback.format_exc())
 
     def onKeyDown(self, event):
         # do not handle keys when chat is active
@@ -115,4 +115,4 @@ if IS_DEVELOPMENT:
         from __version__ import __revision__
         log("Revision: " + __revision__)
     except Exception, ex:
-        err(traceback.format_exc(ex))
+        err(traceback.format_exc())

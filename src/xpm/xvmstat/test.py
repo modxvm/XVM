@@ -40,5 +40,5 @@ def _getBattleResults(base, arenaUniqueID, callback):
                 callback(AccountCommands.RES_CACHE, convertToFullForm(battleResults))
         return
     except Exception, ex:
-        err('_getBattleResults() exception: ' + traceback.format_exc(ex))
+        err('_getBattleResults() exception: ' + traceback.format_exc())
         base(arenaUniqueID, callback)

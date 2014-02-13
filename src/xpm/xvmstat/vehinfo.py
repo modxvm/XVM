@@ -72,7 +72,7 @@ def _init():
             ResMgr.purge(_VEHICLE_TYPE_XML_PATH + nation + '/components/guns.xml', True)
 
     except Exception, ex:
-        print traceback.format_exc(ex)
+        print traceback.format_exc()
 
     #pprint(res[0])
     #pprint(res)

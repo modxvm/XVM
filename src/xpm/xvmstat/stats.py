@@ -98,7 +98,7 @@ class _Stat(object):
             try:
                 self._respond()
             except Exception, ex:
-                err('_checkResult() exception: ' + traceback.format_exc(ex))
+                err('_checkResult() exception: ' + traceback.format_exc())
             finally:
                 self.thread = None
                 self.processQueue()
@@ -216,9 +216,9 @@ class _Stat(object):
                 self.resp = {'arenaUniqueId': value['arenaUniqueID'], 'players': players, 'info': self.info}
 
         except Exception, ex:
-            err('_battleResultsCallback() exception: ' + traceback.format_exc(ex))
+            err('_battleResultsCallback() exception: ' + traceback.format_exc())
             print('=================================')
-            print('_battleResultsCallback() exception: ' + traceback.format_exc(ex))
+            print('_battleResultsCallback() exception: ' + traceback.format_exc())
             pprint(value)
             print('=================================')
             with self.lock:
@@ -266,7 +266,7 @@ class _Stat(object):
                         self.cacheUser[cacheKey] = {}
 
             except Exception, ex:
-                err('_get_user() exception: ' + traceback.format_exc(ex))
+                err('_get_user() exception: ' + traceback.format_exc())
 
         with self.lock:
             self.resp = self.cacheUser[cacheKey] if cacheKey in self.cacheUser else {}
@@ -312,7 +312,7 @@ class _Stat(object):
                 server = XVM_STAT_SERVERS[randint(0, len(XVM_STAT_SERVERS) - 1)]
                 (response, duration) = self.loadUrl(server, updateRequest)
 
-                if len(response) <= 0:
+                if not response:
                     err('Empty response or parsing error')
                     return
 
@@ -342,7 +342,7 @@ class _Stat(object):
                 self.cache[cacheKey] = stat
 
         except Exception, ex:
-            err('_load_stat() exception: ' + traceback.format_exc(ex))
+            err('_load_stat() exception: ' + traceback.format_exc())
 
 
     def loadUrl(self, url, req):
@@ -352,7 +352,7 @@ class _Stat(object):
         #time.sleep(5)
 
         duration = None
-        response = ''
+        response = None
         responseSize = 0
         startTime = datetime.datetime.now()
         conn = None
@@ -374,25 +374,25 @@ class _Stat(object):
                 if encoding == 'gzip':
                     response = gzip.GzipFile(fileobj=StringIO.StringIO(response)).read()
                 else:
-                    raise Exception('Encoding not supported %s' % encoding)
+                    raise Exception('Encoding not supported: %s' % encoding)
             else:
                 raise Exception('HTTP Error: [%i] %s' % (resp.status, resp.reason) )
             conn.close()
-
         except Exception, ex:
-            err('loadUrl failed: ' + traceback.format_exc(ex))
-            #err('loadUrl failed: ' + str(ex))
+            response = None
+            tb = traceback.format_exc(1).split('\n')
+            err('loadUrl failed: %s %s' % (tb[2], tb[1]))
         finally:
             if conn is not None:
                 conn.close()
 
         elapsed = datetime.datetime.now() - startTime
         msec = elapsed.seconds * 1000 + elapsed.microseconds / 1000
-        log("  Time: %d ms, Size: %d (%d) bytes" % (msec, responseSize, len(response)), '[INFO]  ')
-        #debug('response: ' + response)
-
-        if not response.lower().startswith('onexception'):
-            duration = msec
+        if response:
+            log("  Time: %d ms, Size: %d (%d) bytes" % (msec, responseSize, len(response)), '[INFO]  ')
+            #debug('response: ' + response)
+            if not response.lower().startswith('onexception'):
+                duration = msec
 
         return (response, duration)
 
