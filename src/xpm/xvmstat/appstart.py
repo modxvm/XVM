@@ -14,5 +14,12 @@ g_entitiesFactories.addSettings(_settings)
 
 def AppStarted(self, event):
     #debug('AppStarted')
+
     import BigWorld
-    BigWorld.callback(0.001, lambda: self.loadView(_alias))
+    import BattleReplay
+    from ConnectionManager import connectionManager
+
+    if BattleReplay.g_replayCtrl.autoStartBattleReplay() or connectionManager.isConnected():
+        self.loadView(_alias)
+    else:
+        BigWorld.callback(0.001, lambda: self.loadView(_alias))

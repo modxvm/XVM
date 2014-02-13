@@ -187,8 +187,10 @@ package xvm.hangar.components.BattleLoading
         private function onStatLoaded():void
         {
             //Logger.add("onStatLoaded: " + fullPlayerName);
-            proxy.vehicleField.condenseWhite = false; // TODO StatData.s_empty;
-            draw();
+            if (Config.config.rating.showPlayersStatistics)
+                proxy.vehicleField.condenseWhite = false; // TODO StatData.s_empty;
+            //draw();
+            proxy.invalidateData();
 
             //Macros.TestMacros(fullPlayerName);
         }
