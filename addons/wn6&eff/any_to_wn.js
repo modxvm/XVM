@@ -4,6 +4,7 @@
 var text_replace1="{{wn}}";
 var text_replace2="{{c:wn}}";
 var text_replace3="{{a:wn}}";
+var text_replace4="\"xwnInCompany\": true";
 
 var text_samples1 = [    // заменяемый текст
                         "{{wn}}",
@@ -35,6 +36,12 @@ var text_samples3 = [    // заменяемый текст
                         "{{a:xwn}}",
                         "{{a:xwn6}}",
                         "{{a:xwn8}}"
+                    ];
+var text_samples4 = [    // заменяемый текст
+                        "\"xwnInCompany\": true",
+                        "\"xwnInCompany\":\ttrue",
+                        "\"xwnInCompany\": false",
+                        "\"xwnInCompany\":\tfalse"
                     ];
 
 var i=0;
@@ -79,6 +86,12 @@ do {
           re=new RegExp(text_samples3[j]);
           line_replace=line_replace.replace(re,text_replace3);
           line_replace=line_replace.replace(re,text_replace3);
+      }
+      // меняем четвертый макрос
+      for ( j = 0; j < text_samples4.length; j++) {
+          re=new RegExp(text_samples4[j]);
+          line_replace=line_replace.replace(re,text_replace4);
+          line_replace=line_replace.replace(re,text_replace4);
       }
       fr.WriteLine(line_replace);
     }
