@@ -374,7 +374,7 @@ class _Stat(object):
                 if encoding == 'gzip':
                     response = gzip.GzipFile(fileobj=StringIO.StringIO(response)).read()
                 else:
-                    raise Exception('Encoding not supported: %s' % encoding)
+                    raise Exception('Encoding not supported: %s\nResponse: %s\n' % (encoding, response))
             else:
                 raise Exception('HTTP Error: [%i] %s' % (resp.status, resp.reason) )
             conn.close()
