@@ -770,7 +770,7 @@ private function RefreshColorsPage2():void
             p_colors_kb.RefreshSource();
         else if (accColors2.selectedChild == nc_colors_tbattles && p_colors_tbattles != null)
             p_colors_tbattles.RefreshSource();
-        else if (accColors2.selectedChild == nc_colors_e && p_colors_e != null)
+        /*else if (accColors2.selectedChild == nc_colors_e && p_colors_e != null)
             p_colors_e.RefreshSource();
         else if (accColors2.selectedChild == nc_colors_tdb && p_colors_tdb != null)
             p_colors_tdb.RefreshSource();
@@ -779,7 +779,7 @@ private function RefreshColorsPage2():void
         else if (accColors2.selectedChild == nc_colors_tfb && p_colors_tfb != null)
             p_colors_tfb.RefreshSource();
         else if (accColors2.selectedChild == nc_colors_tsb && p_colors_tsb != null)
-            p_colors_tsb.RefreshSource();
+            p_colors_tsb.RefreshSource();*/
     }
     catch (ex:Error)
     {
@@ -810,7 +810,7 @@ private function RefreshTransparencyPage():void
             p_alpha_kb.RefreshSource();
         else if (accTransparency.selectedChild == nc_alpha_tbattles && p_alpha_tbattles != null)
             p_alpha_tbattles.RefreshSource();
-        else if (accTransparency.selectedChild == nc_alpha_e && p_alpha_e != null)
+        /*else if (accTransparency.selectedChild == nc_alpha_e && p_alpha_e != null)
             p_alpha_e.RefreshSource();
         else if (accTransparency.selectedChild == nc_alpha_tdb && p_alpha_tdb != null)
             p_alpha_tdb.RefreshSource();
@@ -819,7 +819,7 @@ private function RefreshTransparencyPage():void
         else if (accTransparency.selectedChild == nc_alpha_tfb && p_alpha_tfb != null)
             p_alpha_tfb.RefreshSource();
         else if (accTransparency.selectedChild == nc_alpha_tsb && p_alpha_tsb != null)
-            p_alpha_tsb.RefreshSource();
+            p_alpha_tsb.RefreshSource();*/
     }
     catch (ex:Error)
     {

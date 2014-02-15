@@ -1,10 +1,14 @@
 package utils
 {
+    import mx.controls.Image;
+
     public final class Macros
     {
-		import com.xvm.*;
-		
+        import com.xvm.*;
+        import flash.display.*;
+        import flash.text.*;
         import utils.Embed;
+        import mx.core.*;
 
         public static function get(m:String):Array
         {
@@ -16,7 +20,38 @@ package utils
                     res.push({ type: "separator" });
                 res = res.concat(MACROS[a]);
             }
+
+            for (var i:int = 0; i < res.length; ++i)
+            {
+                var v:* = res[i];
+                if (v is String)
+                {
+                    res[i] = {
+                        value: v,
+                        label: v.replace("{{", "").replace("}}", "").replace(/:/g, "_").replace(/-/g, "_"),
+                        bitmap: getMacroIcon(v)
+                    }
+                }
+            }
+
             return res;
+        }
+
+        public static function getMacroIcon(m:String):BitmapData
+        {
+            var sprite:SpriteAsset = new SpriteAsset();
+
+            var field:TextField = new TextField();
+            field.y = -1;
+            field.embedFonts = true;
+            field.antiAliasType = AntiAliasType.NORMAL;
+            field.htmlText = "<font face='Cuprum' size='12'>" + m + "</font>";
+            sprite.addChild(field);
+
+            var bitmapData:BitmapData = new BitmapData(64, 16, true, 0x000000);
+            bitmapData.draw(sprite);
+
+            return bitmapData;
         }
 
         public static function format(format:String):String
@@ -145,161 +180,156 @@ package utils
             ],
             // In players panel, battle loading screen and statistic form:
             panels: [
-                { value: "{{nick}}", label: "nick", icon: Embed.nick },
-                { value: "{{name}}", label: "name", icon: Embed.name },
-                { value: "{{clan}}", label: "clan", icon: Embed.clan },
-                { value: "{{clannb}}", label: "clannb", icon: Embed.clannb },
-                { value: "{{vehicle}}", label: "vehicle", icon: Embed.vehicle },
-                { value: "{{vtype}}", label: "vtype", icon: Embed.vtype },
+                "{{nick}}",
+                "{{name}}",
+                "{{clan}}",
+                "{{clannb}}",
+                "{{vehicle}}",
+                "{{vtype}}",
             ],
             colors_panels: [
-                { value: "{{c:vtype}}", label: "c_vtype", icon: Embed.c_vtype }
+                "{{c:vtype}}"
             ],
             // In hit log:
             hitlog: [
-                { value: "{{nick}}", label: "nick", icon: Embed.nick },
-                { value: "{{name}}", label: "name", icon: Embed.name },
-                { value: "{{clan}}", label: "clan", icon: Embed.clan },
-                { value: "{{clannb}}", label: "clannb", icon: Embed.clannb },
-                { value: "{{vehicle}}", label: "vehicle", icon: Embed.vehicle },
-                { value: "{{vtype}}", label: "vtype", icon: Embed.vtype },
-                { value: "{{level}}", label: "level", icon: Embed.level },
-                { value: "{{rlevel}}", label: "rlevel", icon: Embed.rlevel },
-                { value: "{{n}}", label: "n", icon: Embed.n },
-                { value: "{{n-player}}", label: "n_player", icon: Embed.n_player },
-                { value: "{{dmg}}", label: "dmg", icon: Embed.dmg },
-                { value: "{{dmg-total}}", label: "dmg_total", icon: Embed.dmg_total },
-                { value: "{{dmg-avg}}", label: "dmg_avg", icon: Embed.dmg_avg },
-                { value: "{{dmg-player}}", label: "dmg_player", icon: Embed.dmg_player },
-                { value: "{{dmg-kind}}", label: "dmg_kind", icon: Embed.dmg_kind }
+                "{{nick}}",
+                "{{name}}",
+                "{{clan}}",
+                "{{clannb}}",
+                "{{vehicle}}",
+                "{{vtype}}",
+                "{{level}}",
+                "{{rlevel}}",
+                "{{n}}",
+                "{{n-player}}",
+                "{{dmg}}",
+                "{{dmg-total}}",
+                "{{dmg-avg}}",
+                "{{dmg-player}}",
+                "{{dmg-kind}}"
             ],
             captureBar: [
-                { value: "{{points}}", label: "cb_points", icon: Embed.points },
-                { value: "{{extra}}", label: "cb_extra", icon: Embed.extra }
+                "{{points}}",
+                "{{extra}}"
             ],
             captureBarExtra: [
-                { value: "{{points}}", label: "cb_points", icon: Embed.points },
-                { value: "{{tanks}}", label: "cb_tanks", icon: Embed.tanks },
-                { value: "{{time}}", label: "cb_time", icon: Embed.time },
-                { value: "{{time-sec}}", label: "cb_time_sec", icon: Embed.time_sec },
-                { value: "{{speed}}", label: "cb_speed", icon: Embed.speed }
+                "{{points}}",
+                "{{tanks}}",
+                "{{time}}",
+                "{{time-sec}}",
+                "{{speed}}"
             ],
             minimap: [
-                { value: "{{short-nick}}", label: "short_nick", icon: Embed.short_nick },
-                { value: "{{short-vehicle}}", label: "short_vehicle", icon: Embed.short_vehicle },
-                { value: "{{vehicle}}", label: "vehicle", icon: Embed.vehicle },
-                { value: "{{level}}", label: "level", icon: Embed.level }
+                "{{short-nick}}",
+                "{{short-vehicle}}",
+                "{{vehicle}}",
+                "{{level}}"
             ],
             dead: [
-                { value: "{{dead}}", label: "dead", icon: Embed.dead }
+                "{{dead}}"
             ],
             colors_hitlog: [
-                { value: "{{c:dmg-kind}}", label: "c_dmg_kind", icon: Embed.c_dmg_kind },
-                { value: "{{c:vtype}}", label: "c_vtype", icon: Embed.c_vtype }
+                "{{c:dmg-kind}}",
+                "{{c:vtype}}"
             ],
             // In tank markers:
             markers: [
-                { value: "{{nick}}", label: "nick", icon: Embed.nick },
-                { value: "{{name}}", label: "name", icon: Embed.name },
-                { value: "{{clan}}", label: "clan", icon: Embed.clan },
-                { value: "{{clannb}}", label: "clannb", icon: Embed.clannb },
-                { value: "{{squad}}", label: "squad", icon: Embed.squad },
-                { value: "{{vehicle}}", label: "vehicle", icon: Embed.vehicle },
-                { value: "{{vtype}}", label: "vtype", icon: Embed.vtype },
-                { value: "{{level}}", label: "level", icon: Embed.level },
-                { value: "{{rlevel}}", label: "rlevel", icon: Embed.rlevel },
-                { value: "{{turret}}", label: "turret", icon: Embed.turret },
-                { value: "{{hp}}", label: "hp", icon: Embed.hp },
-                { value: "{{hp-ratio}}", label: "hp_ratio", icon: Embed.hp_ratio },
-                { value: "{{hp-max}}", label: "hp_max", icon: Embed.hp_max }
+                "{{nick}}",
+                "{{name}}",
+                "{{clan}}",
+                "{{clannb}}",
+                "{{squad}}",
+                "{{vehicle}}",
+                "{{vtype}}",
+                "{{level}}",
+                "{{rlevel}}",
+                "{{turret}}",
+                "{{hp}}",
+                "{{hp-ratio}}",
+                "{{hp-max}}"
             ],
             colors_markers: [
-                { value: "{{c:hp}}", label: "c_hp", icon: Embed.c_hp },
-                { value: "{{c:hp-ratio}}", label: "c_hp_ratio", icon: Embed.c_hp_ratio },
-                { value: "{{c:vtype}}", label: "c_vtype", icon: Embed.c_vtype },
-                { value: "{{c:system}}", label: "c_system", icon: Embed.c_system }
+                "{{c:hp}}",
+                "{{c:hp-ratio}}",
+                "{{c:vtype}}",
+                "{{c:system}}"
             ],
             // In floating damage text:
             markers_damage: [
-                { value: "{{nick}}", label: "nick", icon: Embed.nick },
-                { value: "{{name}}", label: "name", icon: Embed.name },
-                { value: "{{clan}}", label: "clan", icon: Embed.clan },
-                { value: "{{clannb}}", label: "clannb", icon: Embed.clannb },
-                { value: "{{squad}}", label: "squad", icon: Embed.squad },
-                { value: "{{vehicle}}", label: "vehicle", icon: Embed.vehicle },
-                { value: "{{vtype}}", label: "vtype", icon: Embed.vtype },
-                { value: "{{level}}", label: "level", icon: Embed.level },
-                { value: "{{rlevel}}", label: "rlevel", icon: Embed.rlevel },
-                { value: "{{turret}}", label: "turret", icon: Embed.turret },
-                { value: "{{hp}}", label: "hp", icon: Embed.hp },
-                { value: "{{hp-ratio}}", label: "hp_ratio", icon: Embed.hp_ratio },
-                { value: "{{hp-max}}", label: "hp_max", icon: Embed.hp_max },
-                { value: "{{dmg}}", label: "dmg", icon: Embed.dmg },
-                { value: "{{dmg-ratio}}", label: "dmg_ratio", icon: Embed.dmg_ratio },
-                { value: "{{dmg-kind}}", label: "dmg_kind", icon: Embed.dmg_kind }
+                "{{nick}}",
+                "{{name}}",
+                "{{clan}}",
+                "{{clannb}}",
+                "{{squad}}",
+                "{{vehicle}}",
+                "{{vtype}}",
+                "{{level}}",
+                "{{rlevel}}",
+                "{{turret}}",
+                "{{hp}}",
+                "{{hp-ratio}}",
+                "{{hp-max}}",
+                "{{dmg}}",
+                "{{dmg-ratio}}",
+                "{{dmg-kind}}"
             ],
             colors_markers_damage: [
-                { value: "{{c:hp}}", label: "c_hp", icon: Embed.c_hp },
-                { value: "{{c:hp-ratio}}", label: "c_hp_ratio", icon: Embed.c_hp_ratio },
-                { value: "{{c:dmg}}", label: "c_dmg", icon: Embed.c_dmg },
-                { value: "{{c:dmg-kind}}", label: "c_dmg_kind", icon: Embed.c_dmg_kind },
-                { value: "{{c:vtype}}", label: "c_vtype", icon: Embed.c_vtype },
-                { value: "{{c:system}}", label: "c_system", icon: Embed.c_system }
+                "{{c:hp}}",
+                "{{c:hp-ratio}}",
+                "{{c:dmg}}",
+                "{{c:dmg-kind}}",
+                "{{c:vtype}}",
+                "{{c:system}}"
             ],
             // Statistics
             stats: [
-                { value: "{{avglvl}}", label: "avglvl", icon: Embed.avglvl },
-                { value: "{{rating}}", label: "rating", icon: Embed.rating },
-                { value: "{{xeff}}", label: "xeff", icon: Embed.xeff },
-                { value: "{{xwn6}}", label: "xwn6", icon: Embed.xwn6 },
-                { value: "{{xwn8}}", label: "xwn8", icon: Embed.xwn8 },
-                { value: "{{eff}}", label: "eff", icon: Embed.eff },
-                { value: "{{wn6}}", label: "wn6", icon: Embed.wn6 },
-                { value: "{{wn8}}", label: "wn8", icon: Embed.wn8 },
-                { value: "{{e}}", label: "e", icon: Embed.e },
-                { value: "{{teff}}", label: "teff", icon: Embed.teff },
-                { value: "{{tdb}}", label: "tdb", icon: Embed.tdb },
-                { value: "{{tdv}}", label: "tdv", icon: Embed.tdv },
-                { value: "{{tfb}}", label: "tfb", icon: Embed.tfb },
-                { value: "{{tsb}}", label: "tsb", icon: Embed.tsb },
-                { value: "{{kb}}", label: "kb", icon: Embed.kb },
-                { value: "{{battles}}", label: "battles", icon: Embed.battles },
-                { value: "{{wins}}", label: "wins", icon: Embed.wins },
-                { value: "{{rating:3}}", label: "rating_3", icon: Embed.rating_3 },
-                { value: "{{eff:4}}", label: "eff_4", icon: Embed.eff_4 },
-                { value: "{{kb:3}}", label: "kb_3", icon: Embed.kb_3 },
-                { value: "{{t-rating}}", label: "t_rating", icon: Embed.t_rating },
-                { value: "{{t-kb}}", label: "t_kb", icon: Embed.t_kb },
-                { value: "{{t-kb-0}}", label: "t_kb_0", icon: Embed.t_kb_0 },
-                { value: "{{t-hb}}", label: "t_hb", icon: Embed.t_hb },
-                { value: "{{t-battles}}", label: "t_battles", icon: Embed.t_battles },
-                { value: "{{t-wins}}", label: "t_wins", icon: Embed.t_wins },
-                { value: "{{t-rating:3}}", label: "t_rating_3", icon: Embed.t_rating_3 },
-                { value: "{{t-kb:4}}", label: "t_kb_4", icon: Embed.t_kb_4 },
-                { value: "{{t-hb:3}}", label: "t_hb_3", icon: Embed.t_hb_3 },
-                { value: "{{t-battles:4}}", label: "t_battles_4", icon: Embed.t_battles_4 }
+                "{{avglvl}}",
+                "{{rating}}",
+                "{{xeff}}",
+                "{{xwn6}}",
+                "{{xwn8}}",
+                "{{eff}}",
+                "{{wn6}}",
+                "{{wn8}}",
+                //"{{e}}",
+                //"{{teff}}",
+                //"{{tdb}}",
+                //"{{tdv}}",
+                //"{{tfb}}",
+                //"{{tsb}}",
+                "{{kb}}",
+                "{{battles}}",
+                "{{wins}}",
+                "{{rating:3}}",
+                "{{eff:4}}",
+                "{{kb:3}}",
+                "{{t-rating}}",
+                "{{t-kb}}",
+                "{{t-kb-0}}",
+                "{{t-hb}}",
+                "{{t-battles}}",
+                "{{t-wins}}",
+                "{{t-rating:3}}",
+                "{{t-kb:4}}",
+                "{{t-hb:3}}",
+                "{{t-battles:4}}"
             ],
             colors_stat: [
-                { value: "{{c:xeff}}", label: "c_xeff", icon: Embed.c_xeff },
-                { value: "{{c:xwn6}}", label: "c_xwn6", icon: Embed.c_xwn6 },
-                { value: "{{c:xwn8}}", label: "c_xwn8", icon: Embed.c_xwn8 },
-                { value: "{{c:eff}}", label: "c_eff", icon: Embed.c_eff },
-                { value: "{{c:wn6}}", label: "c_wn6", icon: Embed.c_wn6 },
-                { value: "{{c:wn8}}", label: "c_wn8", icon: Embed.c_wn8 },
-                { value: "{{c:e}}", label: "c_e", icon: Embed.c_e },
-                { value: "{{c:rating}}", label: "c_rating", icon: Embed.c_rating },
-                { value: "{{c:t-rating}}", label: "c_t_rating", icon: Embed.c_t_rating },
-                { value: "{{c:t-battles}}", label: "c_t_battles", icon: Embed.c_t_battles },
-                { value: "{{c:tdb}}", label: "c_tdb", icon: Embed.c_tdb },
-                { value: "{{c:tdv}}", label: "c_tdv", icon: Embed.c_tdv },
-                { value: "{{c:tfb}}", label: "c_tfb", icon: Embed.c_tfb },
-                { value: "{{c:tsb}}", label: "c_tsb", icon: Embed.c_tsb },
-                { value: "{{c:kb}}", label: "c_kb", icon: Embed.c_kb }
+                "{{c:xeff}}",
+                "{{c:xwn6}}",
+                "{{c:xwn8}}",
+                "{{c:eff}}",
+                "{{c:wn6}}",
+                "{{c:wn8}}",
+                "{{c:rating}}",
+                "{{c:t-rating}}",
+                "{{c:t-battles}}",
+                "{{c:kb}}"
             ],
             // Dynamic transparency macros:
             transparency: [
-                { value: "{{a:hp}}", label: "a_hp", icon: Embed.a_hp },
-                { value: "{{a:hp-ratio}}", label: "a_hp_ratio", icon: Embed.a_hp_ratio }
+                "{{a:hp}}",
+                "{{a:hp-ratio}}"
             ]
         };
     }

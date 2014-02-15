@@ -1,8 +1,10 @@
 package controls
 {
-    import flash.display.DisplayObject;
-    import mx.controls.listClasses.ListItemRenderer;
+    import flash.display.*;
+    
     import mx.controls.Alert;
+    import mx.controls.listClasses.ListItemRenderer;
+    import mx.core.*;
 
     public class ComboBoxItemRenderer extends ListItemRenderer
     {
@@ -16,7 +18,7 @@ package controls
             var type:String = super.data.type;
             if (type)
             {
-                if(type.toLowerCase() == "separator")
+                if (type.toLowerCase() == "separator")
                 {
                     label.text = "";
                     label.visible = false;
@@ -29,6 +31,11 @@ package controls
             else
             {
                 label.visible = true;
+                if (data.bitmap != null && icon == null)
+                {
+                    icon = new BitmapAsset(data.bitmap);
+                    addChild(DisplayObject(icon));
+                }
             }
         }
 
