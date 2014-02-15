@@ -1,7 +1,7 @@
 """ xvm (c) sirmax 2013-2014 """
 
 XVM_STAT_API_VERSION = "2.0"
-XVM_STAT_SERVERS = [ "http://proxy2.bulychev.net:80/{API}/{REQ}" ] # TODO - config
+XVM_STAT_SERVERS = [ "http://stat.modxvm.com:80/{API}/{REQ}" ] # TODO - config
 XVM_STAT_TIMEOUT = 30000 # TODO - config
 
 COMMAND_LOG = "log"
