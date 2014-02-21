@@ -371,13 +371,14 @@ class _Stat(object):
 
                 encoding = resp.getheader('content-encoding')
 
-                if encoding == 'gzip':
+                if encoding is None:
+                    pass # leave response as is
+                elif encoding == 'gzip':
                     response = gzip.GzipFile(fileobj=StringIO.StringIO(response)).read()
                 else:
-                    raise Exception('Encoding not supported: %s\nResponse: %s\n' % (encoding, response))
+                    raise Exception('Encoding not supported: %s' % (encoding))
             else:
-                raise Exception('HTTP Error: [%i] %s' % (resp.status, resp.reason) )
-            conn.close()
+                raise Exception('HTTP Error: [%i] %s' % (resp.status, resp.reason))
         except Exception, ex:
             response = None
             tb = traceback.format_exc(1).split('\n')
