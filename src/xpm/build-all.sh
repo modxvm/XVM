@@ -28,7 +28,7 @@ build()
 
   "$PY_EXEC" -c "import py_compile; py_compile.compile('$1')"
   [ ! -f $1c ] && exit
-  
+
   if [ -z "$2" ]; then
     mkdir -p "../../bin/xpm/scripts/client/gui/$d"
     cp $1c "../../bin/xpm/scripts/client/gui/${f}c"
@@ -39,9 +39,9 @@ build()
   rm -f $1c
 }
 
-clear                       
+clear
 
-for dir in $(find . -type "d" ! -path "./xpm*" ! -path "."); do
+for dir in $(find . -maxdepth 1 -type "d" ! -path "./xpm*" ! -path "."); do
   echo "# This file was created automatically from build script" > $dir/__version__.py
   echo "__revision__ = '`cd $dir && svnversion -n .`'" >> $dir/__version__.py
 done
@@ -50,7 +50,7 @@ for fn in $(find . -type "f" -name "*.py"); do
   f=${fn#./}
   m=${f%%/*}
   if [ "$m" = "xpm" ]; then
-    build $f 
+    build $f
   else
     build $f mods/$m
   fi

@@ -10,6 +10,9 @@ XPM_GAME_VERSIONS  = ["0.8.11"]
 
 #####################################################################
 
+import sys
+sys.path.append('scripts/client/gui/mods/xvmstat') # for tlslite
+
 import BigWorld
 import GUI
 from gui.shared import events

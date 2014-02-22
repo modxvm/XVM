@@ -1,7 +1,8 @@
 """ xvm (c) sirmax 2013-2014 """
 
 XVM_STAT_API_VERSION = "2.0"
-XVM_STAT_SERVERS = [ "http://stat.modxvm.com:80/{API}/{REQ}" ] # TODO - config
+XVM_STAT_SERVERS = [ "https://stat.modxvm.com:443/{API}/{REQ}" ] # TODO - config
+XVM_STAT_FINGERPRINT = "46169f8bd6f743733b23066f5cce2cd3d0392af8"
 XVM_STAT_TIMEOUT = 30000 # TODO - config
 
 COMMAND_LOG = "log"

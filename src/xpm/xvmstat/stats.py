@@ -36,11 +36,8 @@ import datetime
 import json
 import traceback
 import time
-import StringIO
-import gzip
 from random import randint
 from urlparse import urlparse
-import httplib
 from threading import Thread, RLock
 from Queue import Queue
 
@@ -51,6 +48,7 @@ from gui.mods.xpm import *
 from constants import *
 from logger import *
 from gameregion import region
+from loadurl import LoadUrl
 
 #############################
 
@@ -345,55 +343,27 @@ class _Stat(object):
             err('_load_stat() exception: ' + traceback.format_exc())
 
 
+    # result: (response, duration)
     def loadUrl(self, url, req):
         url = url.replace("{API}", XVM_STAT_API_VERSION).replace("{REQ}", req)
         u = urlparse(url)
-        log('  HTTP: ' + u.path, '[INFO]  ')
+        ssl = url.lower().startswith('https://')
+        log('  HTTP%s: %s' % ('S' if ssl else '', u.path), '[INFO]  ')
         #time.sleep(5)
 
-        duration = None
-        response = None
-        responseSize = 0
         startTime = datetime.datetime.now()
-        conn = None
-        try:
-            #log(u)
-            conn = httplib.HTTPConnection(u.netloc, timeout=XVM_STAT_TIMEOUT/1000)
-            conn.request("GET", u.path, None, {"Accept-Encoding":"gzip"}) # deflate
-            resp = conn.getresponse()
-            #log(resp.status)
 
-            if resp.status in [200, 202]:
-                # 200 OK, 202 Accepted
-
-                response = resp.read()
-                responseSize = len(response)
-
-                encoding = resp.getheader('content-encoding')
-
-                if encoding is None:
-                    pass # leave response as is
-                elif encoding == 'gzip':
-                    response = gzip.GzipFile(fileobj=StringIO.StringIO(response)).read()
-                else:
-                    raise Exception('Encoding not supported: %s' % (encoding))
-            else:
-                raise Exception('HTTP Error: [%i] %s' % (resp.status, resp.reason))
-        except Exception, ex:
-            response = None
-            tb = traceback.format_exc(1).split('\n')
-            err('loadUrl failed: %s %s' % (tb[2], tb[1]))
-        finally:
-            if conn is not None:
-                conn.close()
+        (response, compressedSize) = LoadUrl(u, XVM_STAT_TIMEOUT, XVM_STAT_FINGERPRINT)
 
         elapsed = datetime.datetime.now() - startTime
         msec = elapsed.seconds * 1000 + elapsed.microseconds / 1000
         if response:
-            log("  Time: %d ms, Size: %d (%d) bytes" % (msec, responseSize, len(response)), '[INFO]  ')
+            log("  Time: %d ms, Size: %d (%d) bytes" % (msec, compressedSize, len(response)), '[INFO]  ')
             #debug('response: ' + response)
             if not response.lower().startswith('onexception'):
                 duration = msec
+        else:
+            duration = None
 
         return (response, duration)
 
