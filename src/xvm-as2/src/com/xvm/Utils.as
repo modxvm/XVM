@@ -377,31 +377,33 @@ class com.xvm.Utils
     }
 
     // http://www.koreanrandom.com/forum/topic/2625-/
-    public static function XEFF(value:Number):Number
+    public static function XEFF(EFF:Number):Number
     {
-        return value < 420 ? 0 :
+        return EFF < 350 ? 0 :
             Math.round(Math.max(0, Math.min(100,
-                value * (value * (value * (value * (value * (value *
-                0.000000000000000045254
-                - 0.00000000000033131)
-                + 0.00000000094164)
-                - 0.0000013227)
-                + 0.00095664)
-                - 0.2598)
-                + 13.23
+                EFF*(EFF*(EFF*(EFF*(EFF*(EFF*
+                0.00000000000000003388
+                - 0.0000000000002469)
+                + 0.00000000069335)
+                - 0.00000095342)
+                + 0.0006656)
+                - 0.1485)
+                - 0.85
             )));
     }
 
     public static function XWN6(WN6:Number):Number
     {
-        return WN6 > 2160 ? 100 :
+        return WN6 > 2300 ? 100 :
             Math.round(Math.max(0, Math.min(100,
-                WN6*(WN6*(WN6*(WN6*
-                - 0.00000000001268
-                + 0.00000005147)
-                - 0.00006418)
-                + 0.07576)
-                - 7.25
+                WN6*(WN6*(WN6*(WN6*(WN6*(WN6*
+                0.00000000000000000466
+                - 0.000000000000032413)
+                + 0.00000000007524)
+                - 0.00000006516)
+                + 0.00001307)
+                + 0.05153)
+                - 3.9
             )));
     }
 
@@ -410,13 +412,13 @@ class com.xvm.Utils
         return WN8 > 3250 ? 100 :
             Math.round(Math.max(0, Math.min(100,
                 WN8*(WN8*(WN8*(WN8*(WN8*(WN8*
-                0.00000000000000000007119
-                + 0.0000000000000002334)
-                - 0.000000000006963)
-                + 0.00000002845)
-                - 0.00004558)
-                + 0.06565)
-                - 0.18
+                0.0000000000000000000812
+                + 0.0000000000000001616)
+                - 0.000000000006736)
+                + 0.000000028057)
+                - 0.00004536)
+                + 0.06563)
+                - 0.01
             )));
     }
 
