@@ -6,27 +6,30 @@ package xvm.hangar.UI.battleResults
 
     public dynamic class UI_BattleResultsAwards extends BattleResultsAwards_UI
     {
-        public function UI_BattleResultsAwards() {
-            super();
-            //Logger.add("UI_BattleResultsAwards");
-        }
-
-        private static const TEXT_TOP:int = 3;
-        private static const TEXT_Y_OFFSET:int = -3;
         override protected function draw():void
         {
             super.draw();
 
-            if (isInvalid(InvalidationType.DATA))
+            if (isInvalid(InvalidationType.DATA) && this.height > 0)
             {
-                if (_height > 0)
+
+                var offsetTop:Number = 10;
+                var offsetBottom:Number = 20;
+
+                this.awardTF.y -= offsetTop;
+                this.awardDescrTF.y -= offsetTop;
+                this.container.y -= offsetTop;
+
+                if (this.flagBottom)
                 {
-                    this.awardTF.y = TEXT_TOP + TEXT_Y_OFFSET;
-                    this.awardDescrTF.y = TEXT_TOP + TEXT_Y_OFFSET;
-                    this.maskMC.height = this.awardDescrTF.y + Math.min(this.awardDescrTF.textHeight, this.awardDescrTF.height) + TEXT_TOP * 2;
-                    _height = this.maskMC.height;
-                    dispatchEvent(new Event(Event.RESIZE));
+                    this.flagBottom.y -= offsetTop;
                 }
+
+                this.maskMC.height -= offsetBottom;
+
+                _height = this.maskMC.height;
+                setSize(this.width, _height);
+                dispatchEvent(new Event(Event.RESIZE));
             }
         }
     }

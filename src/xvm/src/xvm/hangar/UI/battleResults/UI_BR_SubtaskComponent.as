@@ -44,12 +44,19 @@ package xvm.hangar.UI.battleResults
                     this.counter.y -= offsetTop;
                     this.alert.y -= offsetTop;
                     this.progressList.y -= offsetMiddle;
-                    this.awards.y -= offsetBottom;
-                    this.awards.setSize(awards.width, 30);
+                    this.awards.y -= offsetMiddle;
+
+                    // set bottom line
+                    if (this.awards.height > 0)
+                    {
+                        this.lineMC.y = this.awards.y + this.awards.height;
+                    }
+                    else
+                    {
+                        this.lineMC.y -= offsetBottom;
+                    }
 
                     // resize
-                    this.lineMC.y -= offsetBottom;
-
                     setSize(this.width, Math.round(this.lineMC.y));
                     dispatchEvent(new Event(Event.RESIZE));
                 }
