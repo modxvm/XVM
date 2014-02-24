@@ -590,27 +590,27 @@ class com.xvm.DefaultConfig
                     { value: 999, color: ColorPalette.purple }    // 92.5 - XX   - unique     (better then 99.9% of players)
                 ],
                 eff: [
-                    { value: 630,  color: ColorPalette.red },     // very bad
-                    { value: 860,  color: ColorPalette.orange },  // bad
-                    { value: 1140, color: ColorPalette.yellow },  // normal
-                    { value: 1460, color: ColorPalette.green },   // good
-                    { value: 1735, color: ColorPalette.blue },    // very good
+                    { value: 610,  color: ColorPalette.red },     // very bad
+                    { value: 850,  color: ColorPalette.orange },  // bad
+                    { value: 1145, color: ColorPalette.yellow },  // normal
+                    { value: 1475, color: ColorPalette.green },   // good
+                    { value: 1775, color: ColorPalette.blue },    // very good
                     { value: 9999, color: ColorPalette.purple }   // unique
                 ],
                 wn6: [
-                    { value: 425,  color: ColorPalette.red },     // very bad
+                    { value: 410,  color: ColorPalette.red },     // very bad
                     { value: 795,  color: ColorPalette.orange },  // bad
-                    { value: 1175, color: ColorPalette.yellow },  // normal
-                    { value: 1570, color: ColorPalette.green },   // good
-                    { value: 1885, color: ColorPalette.blue },    // very good
+                    { value: 1185, color: ColorPalette.yellow },  // normal
+                    { value: 1585, color: ColorPalette.green },   // good
+                    { value: 1925, color: ColorPalette.blue },    // very good
                     { value: 9999, color: ColorPalette.purple }   // unique
                 ],
                 wn8: [
-                    { value: 315,  color: ColorPalette.red },     // very bad
-                    { value: 755,  color: ColorPalette.orange },  // bad
-                    { value: 1315, color: ColorPalette.yellow },  // normal
+                    { value: 310,  color: ColorPalette.red },     // very bad
+                    { value: 750,  color: ColorPalette.orange },  // bad
+                    { value: 1310, color: ColorPalette.yellow },  // normal
                     { value: 1965, color: ColorPalette.green },   // good
-                    { value: 2525, color: ColorPalette.blue },    // very good
+                    { value: 2540, color: ColorPalette.blue },    // very good
                     { value: 9999, color: ColorPalette.purple }   // unique
                 ],
                 rating: [
@@ -618,7 +618,7 @@ class com.xvm.DefaultConfig
                     { value: 49,  color: ColorPalette.orange },   // bad
                     { value: 52,  color: ColorPalette.yellow },   // normal
                     { value: 57,  color: ColorPalette.green },    // good
-                    { value: 64,  color: ColorPalette.blue },     // very good
+                    { value: 65,  color: ColorPalette.blue },     // very good
                     { value: 101, color: ColorPalette.purple }    // unique
                 ],
                 e: [
@@ -704,20 +704,20 @@ class com.xvm.DefaultConfig
                     { value: 9999, alpha: 40 }
                 ],
                 eff: [
-                    { value: 860,  alpha: 100 },
-                    { value: 1140, alpha: 80 },
-                    { value: 1460, alpha: 60 },
+                    { value: 850,  alpha: 100 },
+                    { value: 1145, alpha: 80 },
+                    { value: 1475, alpha: 60 },
                     { value: 9999, alpha: 40 }
                 ],
                 wn6: [
                     { value: 795,  alpha: 100 },
-                    { value: 1175, alpha: 80 },
-                    { value: 1570, alpha: 60 },
+                    { value: 1185, alpha: 80 },
+                    { value: 1585, alpha: 60 },
                     { value: 9999, alpha: 40 }
                 ],
                 wn8: [
-                    { value: 755,  alpha: 100 },
-                    { value: 1315, alpha: 80 },
+                    { value: 750,  alpha: 100 },
+                    { value: 1310, alpha: 80 },
                     { value: 1965, alpha: 60 },
                     { value: 9999, alpha: 40 }
                 ],

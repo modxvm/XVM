@@ -843,27 +843,27 @@ package com.xvm.misc
                 { value: 999, color: Defines.C_PURPLE }    // 92.5 - XX   - unique     (better then 99.9% of players)
             ];
             c.eff = [
-                { value: 630,  color: Defines.C_RED },     // very bad
-                { value: 860,  color: Defines.C_ORANGE },  // bad
-                { value: 1140, color: Defines.C_YELLOW },  // normal
-                { value: 1460, color: Defines.C_GREEN },   // good
-                { value: 1735, color: Defines.C_BLUE },    // very good
+                { value: 610,  color: Defines.C_RED },     // very bad
+                { value: 850,  color: Defines.C_ORANGE },  // bad
+                { value: 1145, color: Defines.C_YELLOW },  // normal
+                { value: 1475, color: Defines.C_GREEN },   // good
+                { value: 1775, color: Defines.C_BLUE },    // very good
                 { value: 9999, color: Defines.C_PURPLE }   // unique
             ];
             c.wn6 = [
-                { value: 425,  color: Defines.C_RED },     // very bad
+                { value: 410,  color: Defines.C_RED },     // very bad
                 { value: 795,  color: Defines.C_ORANGE },  // bad
-                { value: 1175, color: Defines.C_YELLOW },  // normal
-                { value: 1570, color: Defines.C_GREEN },   // good
-                { value: 1885, color: Defines.C_BLUE },    // very good
+                { value: 1185, color: Defines.C_YELLOW },  // normal
+                { value: 1585, color: Defines.C_GREEN },   // good
+                { value: 1925, color: Defines.C_BLUE },    // very good
                 { value: 9999, color: Defines.C_PURPLE }   // unique
             ];
             c.wn8 = [
-                { value: 315,  color: Defines.C_RED },     // very bad
-                { value: 755,  color: Defines.C_ORANGE },  // bad
-                { value: 1315, color: Defines.C_YELLOW },  // normal
+                { value: 310,  color: Defines.C_RED },     // very bad
+                { value: 750,  color: Defines.C_ORANGE },  // bad
+                { value: 1310, color: Defines.C_YELLOW },  // normal
                 { value: 1965, color: Defines.C_GREEN },   // good
-                { value: 2525, color: Defines.C_BLUE },    // very good
+                { value: 2540, color: Defines.C_BLUE },    // very good
                 { value: 9999, color: Defines.C_PURPLE }   // unique
             ];
             c.rating = [
@@ -871,7 +871,7 @@ package com.xvm.misc
                 { value: 49,  color: Defines.C_ORANGE },   // bad
                 { value: 52,  color: Defines.C_YELLOW },   // normal
                 { value: 57,  color: Defines.C_GREEN },    // good
-                { value: 64,  color: Defines.C_BLUE },     // very good
+                { value: 65,  color: Defines.C_BLUE },     // very good
                 { value: 101, color: Defines.C_PURPLE }    // unique
             ];
             c.e = [
@@ -963,20 +963,20 @@ package com.xvm.misc
                 { value: 9999, alpha: 40 }
             ];
             c.eff = [
-                { value: 860,  alpha: 100 },
-                { value: 1140, alpha: 80 },
-                { value: 1460, alpha: 60 },
+                { value: 850,  alpha: 100 },
+                { value: 1145, alpha: 80 },
+                { value: 1475, alpha: 60 },
                 { value: 9999, alpha: 40 }
             ];
             c.wn6 = [
                 { value: 795,  alpha: 100 },
-                { value: 1175, alpha: 80 },
-                { value: 1570, alpha: 60 },
+                { value: 1185, alpha: 80 },
+                { value: 1585, alpha: 60 },
                 { value: 9999, alpha: 40 }
             ];
             c.wn8 = [
-                { value: 755,  alpha: 100 },
-                { value: 1315, alpha: 80 },
+                { value: 750,  alpha: 100 },
+                { value: 1310, alpha: 80 },
                 { value: 1965, alpha: 60 },
                 { value: 9999, alpha: 40 }
             ];

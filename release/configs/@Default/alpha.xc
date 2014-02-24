@@ -51,31 +51,31 @@
     // Dynamic transparency by efficiency
     // Динамическая прозрачность по эффективности
     "eff": [
-      { "value": 630,  "alpha": ${"alphaRating.very_bad" } },
-      { "value": 860,  "alpha": ${"alphaRating.bad"      } },
-      { "value": 1140, "alpha": ${"alphaRating.normal"   } },
-      { "value": 1460, "alpha": ${"alphaRating.good"     } },
-      { "value": 1735, "alpha": ${"alphaRating.very_good"} },
+      { "value": 610,  "alpha": ${"alphaRating.very_bad" } },
+      { "value": 850,  "alpha": ${"alphaRating.bad"      } },
+      { "value": 1145, "alpha": ${"alphaRating.normal"   } },
+      { "value": 1475, "alpha": ${"alphaRating.good"     } },
+      { "value": 1775, "alpha": ${"alphaRating.very_good"} },
       { "value": 9999, "alpha": ${"alphaRating.unique"   } }
     ],
     // Dynamic transparency by WN6 rating
     // Динамическая прозрачность по рейтингу WN6
     "wn6": [
-      { "value": 425,  "alpha": ${"alphaRating.very_bad" } },
+      { "value": 410,  "alpha": ${"alphaRating.very_bad" } },
       { "value": 795,  "alpha": ${"alphaRating.bad"      } },
-      { "value": 1175, "alpha": ${"alphaRating.normal"   } },
-      { "value": 1570, "alpha": ${"alphaRating.good"     } },
-      { "value": 1885, "alpha": ${"alphaRating.very_good"} },
+      { "value": 1185, "alpha": ${"alphaRating.normal"   } },
+      { "value": 1585, "alpha": ${"alphaRating.good"     } },
+      { "value": 1925, "alpha": ${"alphaRating.very_good"} },
       { "value": 9999, "alpha": ${"alphaRating.unique"   } }
     ],
     // Dynamic transparency by WN8 rating
     // Динамическая прозрачность по рейтингу WN8
     "wn8": [
-      { "value": 315,  "alpha": ${"alphaRating.very_bad" } },
-      { "value": 755,  "alpha": ${"alphaRating.bad"      } },
-      { "value": 1315, "alpha": ${"alphaRating.normal"   } },
+      { "value": 310,  "alpha": ${"alphaRating.very_bad" } },
+      { "value": 750,  "alpha": ${"alphaRating.bad"      } },
+      { "value": 1310, "alpha": ${"alphaRating.normal"   } },
       { "value": 1965, "alpha": ${"alphaRating.good"     } },
-      { "value": 2525, "alpha": ${"alphaRating.very_good"} },
+      { "value": 2540, "alpha": ${"alphaRating.very_good"} },
       { "value": 9999, "alpha": ${"alphaRating.unique"   } }
     ],
     // Dynamic transparency by TEFF (E) rating
@@ -95,7 +95,7 @@
       { "value": 49,  "alpha": ${"alphaRating.bad"      } },
       { "value": 52,  "alpha": ${"alphaRating.normal"   } },
       { "value": 57,  "alpha": ${"alphaRating.good"     } },
-      { "value": 64,  "alpha": ${"alphaRating.very_good"} },
+      { "value": 65,  "alpha": ${"alphaRating.very_good"} },
       { "value": 101, "alpha": ${"alphaRating.unique"   } }
     ],
     // Dynamic transparency by kilo-battles
