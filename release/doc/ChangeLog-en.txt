@@ -1,3 +1,11 @@
+XVM-dev:
+   [NEW FUNCTIONS]
+   * localization: added Chinese(Simplified)
+   * stat: use an encrypted connection.
+
+   [OTHER]
+   * stat: changed address of the stats server (now https://stat.modxvm.com/ )
+
 XVM-5.1.0:
   * adaptation to WoT 0.8.11
 
