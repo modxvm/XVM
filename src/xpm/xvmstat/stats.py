@@ -37,7 +37,6 @@ import json
 import traceback
 import time
 from random import randint
-from urlparse import urlparse
 from threading import Thread, RLock
 from Queue import Queue
 
@@ -48,7 +47,7 @@ from gui.mods.xpm import *
 from constants import *
 from logger import *
 from gameregion import region
-from loadurl import LoadUrl
+from loadurl import loadUrl
 
 #############################
 
@@ -245,7 +244,7 @@ class _Stat(object):
             try:
                 req = "INFO/" + cacheKey
                 server = XVM_STAT_SERVERS[randint(0, len(XVM_STAT_SERVERS) - 1)]
-                (response, duration) = self.loadUrl(server, req)
+                (response, duration) = loadUrl(server, req)
 
                 if not response:
                     err('Empty response or parsing error')
@@ -308,7 +307,7 @@ class _Stat(object):
         try:
             if allowNetwork:
                 server = XVM_STAT_SERVERS[randint(0, len(XVM_STAT_SERVERS) - 1)]
-                (response, duration) = self.loadUrl(server, updateRequest)
+                (response, duration) = loadUrl(server, updateRequest)
 
                 if not response:
                     err('Empty response or parsing error')
@@ -341,32 +340,6 @@ class _Stat(object):
 
         except Exception, ex:
             err('_load_stat() exception: ' + traceback.format_exc())
-
-
-    # result: (response, duration)
-    def loadUrl(self, url, req):
-        url = url.replace("{API}", XVM_STAT_API_VERSION).replace("{REQ}", req)
-        u = urlparse(url)
-        ssl = url.lower().startswith('https://')
-        log('  HTTP%s: %s' % ('S' if ssl else '', u.path), '[INFO]  ')
-        #time.sleep(5)
-
-        startTime = datetime.datetime.now()
-
-        (response, compressedSize) = LoadUrl(u, XVM_STAT_TIMEOUT, XVM_STAT_FINGERPRINT)
-
-        elapsed = datetime.datetime.now() - startTime
-        msec = elapsed.seconds * 1000 + elapsed.microseconds / 1000
-        if response:
-            log("  Time: %d ms, Size: %d (%d) bytes" % (msec, compressedSize, len(response)), '[INFO]  ')
-            #debug('response: ' + response)
-            if not response.lower().startswith('onexception'):
-                duration = msec
-        else:
-            duration = None
-
-        return (response, duration)
-
 
     def _fix(self, stat, orig_name):
         #self._r(stat, 'id', '_id')

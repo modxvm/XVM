@@ -2,14 +2,42 @@
 
 from pprint import pprint
 import httplib
+from urlparse import urlparse
 import tlslite
 import traceback
 import gzip
 import StringIO
 
+from constants import *
 from logger import *
 
-def LoadUrl(u, timeout, fingerprint): # timeout in msec
+# result: (response, duration)
+def loadUrl(url, req=None):
+    url = url.replace("{API}", XVM_STAT_API_VERSION)
+    if req is not None:
+        url = url.replace("{REQ}", req)
+    u = urlparse(url)
+    ssl = url.lower().startswith('https://')
+    log('  HTTP%s: %s' % ('S' if ssl else '', u.path), '[INFO]  ')
+    #time.sleep(5)
+
+    startTime = datetime.datetime.now()
+
+    (response, compressedSize) = _loadUrl(u, XVM_STAT_TIMEOUT, XVM_STAT_FINGERPRINT)
+
+    elapsed = datetime.datetime.now() - startTime
+    msec = elapsed.seconds * 1000 + elapsed.microseconds / 1000
+    if response:
+        log("  Time: %d ms, Size: %d (%d) bytes" % (msec, compressedSize, len(response)), '[INFO]  ')
+        #debug('response: ' + response)
+        if not response.lower().startswith('onexception'):
+            duration = msec
+    else:
+        duration = None
+
+    return (response, duration)
+
+def _loadUrl(u, timeout, fingerprint): # timeout in msec
     response = None
 
     response = None
@@ -22,7 +50,6 @@ def LoadUrl(u, timeout, fingerprint): # timeout in msec
             conn = tlslite.HTTPTLSConnection(u.netloc, timeout=timeout/1000, checker=checker)
         else:
             conn = httplib.HTTPConnection(u.netloc, timeout=timeout/1000)
-        #conn.request("GET", u.path, None, {"Connection":"Keep-Alive","Accept-Encoding":"gzip"}) # deflate
         headers = {
             "Connection":"Keep-Alive",
             "Accept-Encoding":"gzip"} # deflate

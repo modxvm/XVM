@@ -33,7 +33,6 @@ package xvm.hangar.views
             //Cmd.runTest("battleResults", "69889899666055611");
         }
 
-
         public override function onBeforeDispose(e:LifeCycleEvent):void
         {
             //Logger.add("onBeforeDispose: " + view.as_alias);

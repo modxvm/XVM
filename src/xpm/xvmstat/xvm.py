@@ -17,6 +17,7 @@ from pinger import *
 from stats import getBattleStat, getBattleResultsStat, getUserData
 from dossier import getDossier
 from vehinfo import getVehicleInfoData
+from wn8 import getWN8ExpectedData
 from test import runTest
 
 NO_LOG_COMMANDS = (
@@ -24,6 +25,7 @@ NO_LOG_COMMANDS = (
   COMMAND_PING,
   COMMAND_GETMODS,
   COMMAND_GETVEHICLEINFODATA,
+  COMMAND_GETWN8EXPECTEDDATA,
   COMMAND_GETSCREENSIZE,
   COMMAND_GETGAMEREGION,
   COMMAND_GETLANGUAGE,
@@ -61,6 +63,8 @@ class Xvm(object):
             elif cmd == COMMAND_GETVEHICLEINFODATA:
                 #return
                 res = getVehicleInfoData()
+            elif cmd == COMMAND_GETWN8EXPECTEDDATA:
+                res = getWN8ExpectedData()
             elif cmd == COMMAND_LOADBATTLESTAT:
                 #return
                 getBattleStat(proxy, args)

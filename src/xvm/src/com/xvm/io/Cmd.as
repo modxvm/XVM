@@ -18,6 +18,7 @@ package com.xvm.io
         private static const COMMAND_GETLANGUAGE:String = "getLanguage";
         private static const COMMAND_GETMODS:String = "getMods";
         private static const COMMAND_GETVEHICLEINFODATA:String = "getVehicleInfoData";
+        private static const COMMAND_GETWN8EXPECTEDDATA:String = "getWN8ExpectedData";
         private static const COMMAND_LOADBATTLESTAT:String = "loadBattleStat";
         private static const COMMAND_LOADBATTLERESULTSSTAT:String = "loadBattleResultsStat";
         private static const COMMAND_LOADUSERDATA:String = "loadUserData";
@@ -66,6 +67,11 @@ package com.xvm.io
         public static function getVehicleInfoData(target:Object, callback:Function):void
         {
             _call(target, callback, [COMMAND_GETVEHICLEINFODATA]);
+        }
+
+        public static function getWN8ExpectedData(target:Object, callback:Function):void
+        {
+            _call(target, callback, [COMMAND_GETWN8EXPECTEDDATA]);
         }
 
         public static function loadBattleStat(players:Array = null):void
