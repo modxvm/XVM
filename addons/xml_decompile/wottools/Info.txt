@@ -1,0 +1,4 @@
+Name: World Of Tanks Mod Tools
+Author: KatzSmile
+Version: 0.5
+URL: https://github.com/katzsmile/WoTModTools

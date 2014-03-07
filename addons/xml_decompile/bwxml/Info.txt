@@ -1,0 +1,4 @@
+Name: BWXML
+Author: Hedger
+Version: 1.03
+URL: https://github.com/hedger/BWXML
