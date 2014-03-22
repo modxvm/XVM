@@ -66,6 +66,7 @@ package
             d['germany-Pz38t'] = { name: null, short: 'Pz38t' };
             d['germany-PzI_ausf_C'] = { name: null, short: 'Pz2C' };
             d['germany-PzIII_A'] = { name: null, short: 'Pz3A' };
+            d['germany-Pz_IV_AusfA'] = { name: null, short: 'Pz4A' };
             d['germany-T-15'] = { name: null, short: 'T-15' };
             d['usa-M22_Locust'] = { name: null, short: 'Locus' };
             d['usa-M3_Stuart'] = { name: null, short: 'M3Stu' };
@@ -108,6 +109,8 @@ package
             d['japan-Ke_Ho'] = { name: null, short: 'KeHo' };
             d['ussr-T-28'] = { name: null, short: 'T-28' };
             d['germany-PzIII'] = { name: null, short: 'Pz3' };
+            d['germany-PzIII_AusfJ'] = { name: null, short: 'Pz3' };
+            d['germany-Pz_IV_AusfD'] = { name: null, short: 'Pz4D' };
             d['germany-VK2001DB'] = { name: null, short: '2001' };
             d['usa-M3_Grant'] = { name: null, short: 'M3Lee' };
             d['uk-GB07_Matilda'] = { name: null, short: 'Matil' };
@@ -115,6 +118,7 @@ package
             d['germany-DW_II'] = { name: null, short: 'DWII' };
             d['france-B1'] = { name: null, short: 'B1' };
             d['ussr-GAZ-74b'] = { name: null, short: 'Su85b' };
+            d['germany-G101_StuG_III'] = { name: null, short: 'StuGB' };
             d['germany-Hetzer'] = { name: null, short: 'Hetz' };
             d['germany-Marder_III'] = { name: null, short: 'Mard3' };
             d['usa-M8A1'] = { name: null, short: 'M8A1' };
@@ -135,6 +139,7 @@ package
             d['ussr-T-34'] = { name: null, short: '34' };
             d['germany-PzIII_IV'] = { name: null, short: 'Pz3/4' };
             d['germany-PzIV'] = { name: null, short: 'Pz4' };
+            d['germany-Pz_IV_AusfH'] = { name: null, short: 'Pz4' };
             d['germany-T-25'] = { name: null, short: 'T-25' };
             d['usa-M4_Sherman'] = { name: null, short: 'Sherm' };
             d['usa-M7_med'] = { name: null, short: 'M7' };
@@ -149,7 +154,7 @@ package
             d['uk-GB08_Churchill_I'] = { name: null, short: 'Chur1' };
             d['ussr-SU-85'] = { name: null, short: 'Su85' };
             d['germany-Pz_Sfl_IVc'] = { name: null, short: 'PzS4c' };
-            d['germany-StuGIII'] = { name: null, short: 'StuG' };
+            d['germany-StuG_40_AusfG'] = { name: null, short: 'StuG' };
             d['usa-M10_Wolverine'] = { name: null, short: 'Wolv' };
             d['usa-T49'] = { name: null, short: 'T49' };
             d['france-S_35CA'] = { name: null, short: 'S35' };
