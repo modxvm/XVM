@@ -17,7 +17,7 @@ do
         sed -i 's/ *$//' $file
 
         # delete comments
-        sed -i 's/\/\/.*$//' $file
+        sed -i 's/^\/\/.*$//' $file
 
         #delete blank lines
         sed -i '/^$/d' $file
@@ -38,5 +38,5 @@ do
         mv $file $file.csv
         csv2po --progress=none --columnorder=source,target $file.csv $file.po
         rename 's/\.xc.po$/\.po/' $file.po
-        #rm $file.csv
+        rm $file.csv
 done

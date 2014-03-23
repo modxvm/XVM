@@ -11,13 +11,17 @@ do
         dos2unix --quiet $file    
         sed -i 's/\r$//' $file  
 
+        # escape \n
+        sed -i 's/\\/\\\\/g' $file        
+
         # blank and trailing
+        sed -i 's/^[ \t]*//' $file
         sed -i 's/[ \t]*$//' $file
         sed -i 's/^ *//' $file
         sed -i 's/ *$//' $file
 
         # delete comments
-        sed -i 's/\/\/.*$//' $file
+        sed -i 's/^\/\/.*$//' $file
 
         #delete blank lines
         sed -i '/^$/d' $file

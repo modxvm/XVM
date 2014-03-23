@@ -18,6 +18,9 @@ do
         #add trailing ,
         sed -i 's/.$/,/' $file.xc
         sed -i '$s/,$//' $file.xc
+        
+        # unescape \n
+        sed -i 's/\\\\/\\/g' $file   
 
         #add file header
         ed -s $file.xc << 'EOF'

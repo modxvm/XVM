@@ -17,7 +17,7 @@ do
         sed -i 's/ *$//' $file
 
         # delete comments
-        sed -i 's/\/\/.*$//' $file
+        sed -i 's/^\/\/.*$//' $file
 
         #delete blank lines
         sed -i '/^$/d' $file
