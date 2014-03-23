@@ -1,0 +1,9 @@
+Different scripts for XVM localization files json<-->gettext conversion
+
+Requires:
+ * Bash https://www.gnu.org/software/bash/bash.html
+ * Mono http://mono-project.com/
+ * Sed http://sed.sourceforge.net/
+ * Translate Toolkit http://toolkit.translatehouse.org/
+
+XVM.langmerger source code: https://bitbucket.org/xvm/xvm.langmerger
