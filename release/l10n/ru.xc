@@ -112,6 +112,18 @@
     "SPG": "САУ",
 
     // VehicleMarkersManager
-    "blownUp": "Взрыв БК!"
+    "blownUp": "Взрыв БК!",
+
+    //Token
+    "token/network_error": "Ошибка сети.\nСтатистика XVM недоступна, попробуйте позже.",
+    "token/bad_token": "Неверный токен.\n{{l10n:token/notify_xvm_site}}",
+    "token/blocked": "Статус: <font color='#FF0000'>Заблокирован</font>\n{{l10n:token/notify_xvm_site}}",
+    "token/inactive": "Статус: <font color='#FFFF00'>Неактивен</font>\n{{l10n:token/notify_xvm_site}}",
+    "token/active": "Статус:<tab><font color='#00FF00'>Активен</font>",
+    "token/days_left": "Осталось дней",
+    "token/hours_left": "Осталось часов",
+    "token/cnt": "Количество запросов",
+    "token/unknown_status": "Неизвестный статус",
+    "token/notify_xvm_site": "Пожалуйста, перейдите на <a href='event:http://www.modxvm.com/'>сайт XVM</a> и активируйте статистику в персональном кабинете."
   }
 }
