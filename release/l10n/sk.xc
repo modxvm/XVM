@@ -124,6 +124,6 @@
     "token/hours_left": "Zostávajú hodiny",
     "token/cnt": "Počet prístupov",
     "token/unknown_status": "Neznámy status",
-    "token/notify_xvm_site": "Prosím choďte na <a href='event:http://www.modxvm.com/'>XVM stránku</a> a aktivujte štatistiky."
+    "token/notify_xvm_site": "Prosím choďte na <a href='#XVM_SITE#'>XVM stránku</a> a aktivujte štatistiky."
   }
 }
