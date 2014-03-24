@@ -14,6 +14,12 @@ package net.wg.gui.lobby.techtree.controls
 
       private static const statesMap:Object = null;
 
+      private static const FIRST_COLUMN:int = 0;
+
+      private static const SECOND_COLUMN:int = 1;
+
+      private static const THIRD_COLUMN:int = 2;
+
       public var xpLabel:String = "earnedXPLabel";
 
       public var changeXpIconToElite:Boolean = false;
@@ -37,14 +43,20 @@ package net.wg.gui.lobby.techtree.controls
 
       override protected function draw() : void {
          var _loc1_:String = null;
-         var _loc2_:String = null;
+         var _loc2_:* = 0;
+         var _loc3_:String = null;
          if(!(_owner == null) && (isInvalid(InvalidationType.DATA)))
          {
             _loc1_ = this.xpLabel.length > 0?_owner.getNamedLabel(this.xpLabel):"";
-            _loc2_ = statesMap[state][_loc1_.length > 0?this._isInAction?2:1:0];
-            if(!(currentFrameLabel == _loc2_) && (_labelHash[_loc2_]))
+            _loc2_ = FIRST_COLUMN;
+            if(_loc1_.length > 0)
             {
-               gotoAndStop(_loc2_);
+               _loc2_ = this._isInAction?THIRD_COLUMN:SECOND_COLUMN;
+            }
+            _loc3_ = statesMap[state][_loc2_];
+            if(!(currentFrameLabel == _loc3_) && (_labelHash[_loc3_]))
+            {
+               gotoAndStop(_loc3_);
             }
             this.setNameField(_owner.getItemName());
             this.setXpField(_loc1_);

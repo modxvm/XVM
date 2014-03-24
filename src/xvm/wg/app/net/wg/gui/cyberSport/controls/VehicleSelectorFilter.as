@@ -5,9 +5,9 @@ package net.wg.gui.cyberSport.controls
    import net.wg.gui.components.controls.CheckBox;
    import net.wg.gui.cyberSport.vo.VehicleSelectorFilterVO;
    import scaleform.clik.constants.InvalidationType;
+   import scaleform.clik.data.DataProvider;
    import scaleform.clik.events.ListEvent;
    import flash.events.Event;
-   import scaleform.clik.data.DataProvider;
    import net.wg.gui.cyberSport.controls.events.VehicleSelectorFilterEvent;
    import net.wg.utils.INations;
 
@@ -39,6 +39,8 @@ package net.wg.gui.cyberSport.controls
 
       private var _mode:String = "allVehicles";
 
+      private var _changeHandlersInited:Boolean = false;
+
       public function setData(param1:VehicleSelectorFilterVO) : void {
          this._model = param1;
          invalidate(InvalidationType.DATA);
@@ -46,10 +48,6 @@ package net.wg.gui.cyberSport.controls
 
       override protected function configUI() : void {
          super.configUI();
-         this.nationDD.addEventListener(ListEvent.INDEX_CHANGE,this.onFiltersChanged);
-         this.vehicleTypeDD.addEventListener(ListEvent.INDEX_CHANGE,this.onFiltersChanged);
-         this.levelDD.addEventListener(ListEvent.INDEX_CHANGE,this.onFiltersChanged);
-         this.mainCheckBox.addEventListener(Event.SELECT,this.onFiltersChanged);
          this.initFilters();
       }
 
@@ -72,7 +70,20 @@ package net.wg.gui.cyberSport.controls
             {
                this.mainCheckBox.selected = this._model.isMain;
             }
+            if(!this._changeHandlersInited)
+            {
+               this.initChangeHandlers();
+               this._changeHandlersInited = true;
+               this.onFiltersChanged();
+            }
          }
+      }
+
+      private function initChangeHandlers() : void {
+         this.nationDD.addEventListener(ListEvent.INDEX_CHANGE,this.onFiltersChanged);
+         this.vehicleTypeDD.addEventListener(ListEvent.INDEX_CHANGE,this.onFiltersChanged);
+         this.levelDD.addEventListener(ListEvent.INDEX_CHANGE,this.onFiltersChanged);
+         this.mainCheckBox.addEventListener(Event.SELECT,this.onFiltersChanged);
       }
 
       private function selectNation(param1:int) : void {
@@ -111,7 +122,7 @@ package net.wg.gui.cyberSport.controls
          }
       }
 
-      private function onFiltersChanged(param1:Event) : void {
+      private function onFiltersChanged(param1:Event=null) : void {
          var _loc2_:Object = this.nationDD.dataProvider.requestItemAt(this.nationDD.selectedIndex);
          var _loc3_:Object = this.vehicleTypeDD.dataProvider.requestItemAt(this.vehicleTypeDD.selectedIndex);
          var _loc4_:Object = this.levelDD.dataProvider.requestItemAt(this.levelDD.selectedIndex);

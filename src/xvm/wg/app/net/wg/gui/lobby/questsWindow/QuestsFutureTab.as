@@ -1,5 +1,6 @@
 package net.wg.gui.lobby.questsWindow
 {
+   import net.wg.data.constants.QuestsStates;
 
 
    public class QuestsFutureTab extends QuestsCurrentTab
@@ -10,13 +11,10 @@ package net.wg.gui.lobby.questsWindow
       }
 
       override protected function configUI() : void {
-         super.configUI();
-         questContent.hideDoneCheckbox(true);
+         questContent.hideSortPanel(true);
          questContent.setNodataLabel(QUESTS.QUESTS_FUTURE_NODATA);
-      }
-
-      override protected function onDispose() : void {
-         super.onDispose();
+         questContent.questsList.questsState = QuestsStates.FUTURE_STATE;
+         questContent.validateNow();
       }
    }
 

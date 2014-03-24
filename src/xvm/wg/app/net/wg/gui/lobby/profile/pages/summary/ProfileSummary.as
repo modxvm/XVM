@@ -101,10 +101,42 @@ package net.wg.gui.lobby.profile.pages.summary
 
       override protected function applyData(param1:Object) : Object {
          var _loc2_:ProfileSummaryVO = new ProfileSummaryVO(param1);
-         this.tfWins.text = _loc2_.getWinsEfficiencyStr() + "%";
-         this.tfHits.text = _loc2_.getHitsEfficiencyStr() + "%";
-         this.tfAvgExperience.text = _loc2_.getAvgExperienceStr();
-         this.tfAvgDamage.text = _loc2_.getAvgDamageStr();
+         if(_loc2_.battlesCount != 0)
+         {
+            this.tfWins.text = _loc2_.getWinsEfficiencyStr() + "%";
+            this.tfWins.enabled = true;
+         }
+         else
+         {
+            this.tfWins.enabled = false;
+         }
+         if(_loc2_.hitsEfficiency != -1)
+         {
+            this.tfHits.enabled = true;
+            this.tfHits.text = _loc2_.getHitsEfficiencyStr() + "%";
+         }
+         else
+         {
+            this.tfHits.enabled = false;
+         }
+         if(_loc2_.avgXP != -1)
+         {
+            this.tfAvgExperience.enabled = true;
+            this.tfAvgExperience.text = _loc2_.getAvgExperienceStr();
+         }
+         else
+         {
+            this.tfAvgExperience.enabled = false;
+         }
+         if(_loc2_.avgDamage != -1)
+         {
+            this.tfAvgDamage.enabled = true;
+            this.tfAvgDamage.text = _loc2_.getAvgDamageStr();
+         }
+         else
+         {
+            this.tfAvgDamage.enabled = false;
+         }
          this.tfMaxDestroyed.text = _loc2_.getMaxDestroyedStr();
          var _loc3_:String = _loc2_.maxDestroyed > 0?_loc2_.maxDestroyedByVehicle:null;
          this.tfMaxDestroyed.value = _loc3_;

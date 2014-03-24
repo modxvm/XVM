@@ -10,43 +10,6 @@ package net.wg.gui.lobby.window
          super();
       }
 
-      override protected function configUI() : void {
-         super.configUI();
-      }
-
-      public function sortSelection(param1:Boolean) : void {
-         if(dataProvider)
-         {
-            sortMask = Array.NUMERIC;
-            setSortMask(param1);
-            sortPropName = "isSelectCandidate";
-            invalidate(SORTING_INVALID);
-         }
-      }
-
-      public function sortByVehicleName(param1:Boolean) : void {
-         if(dataProvider)
-         {
-            sortMask = Array.CASEINSENSITIVE;
-            if(!param1)
-            {
-               sortMask = sortMask | Array.DESCENDING;
-            }
-            sortPropName = "vehicleName";
-            invalidate(SORTING_INVALID);
-         }
-      }
-
-      public function sortByExperience(param1:Boolean) : void {
-         if(dataProvider)
-         {
-            sortMask = Array.NUMERIC;
-            setSortMask(param1);
-            sortPropName = "xp";
-            invalidate(SORTING_INVALID);
-         }
-      }
-
       public function applySelection(param1:Boolean) : void {
          var _loc2_:ExchangeXPVehicleVO = null;
          var _loc3_:* = 0;

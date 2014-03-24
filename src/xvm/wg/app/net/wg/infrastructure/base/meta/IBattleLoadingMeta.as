@@ -26,7 +26,17 @@ package net.wg.infrastructure.base.meta
 
       function as_setTip(param1:String) : void;
 
-      function as_setTeamValues(param1:Object) : void;
+      function as_setPlayerData(param1:Number, param2:Number) : void;
+
+      function as_setVehiclesData(param1:Boolean, param2:Array) : void;
+
+      function as_addVehicleInfo(param1:Boolean, param2:Object, param3:Array) : void;
+
+      function as_updateVehicleInfo(param1:Boolean, param2:Object, param3:Array) : void;
+
+      function as_setVehicleStatus(param1:Boolean, param2:Number, param3:uint, param4:Array) : void;
+
+      function as_setPlayerStatus(param1:Boolean, param2:Number, param3:uint) : void;
    }
 
 }

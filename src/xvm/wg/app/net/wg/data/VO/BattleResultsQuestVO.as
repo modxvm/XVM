@@ -1,7 +1,6 @@
 package net.wg.data.VO
 {
    import net.wg.gui.lobby.questsWindow.data.SubtaskVO;
-   import net.wg.gui.lobby.questsWindow.data.AwardsVO;
    import net.wg.gui.lobby.questsWindow.data.QuestRendererVO;
 
 
@@ -9,11 +8,12 @@ package net.wg.data.VO
    {
           
       public function BattleResultsQuestVO(param1:Object) {
+         this._awards = [];
          this._progressList = [];
          super(param1);
       }
 
-      private var _awards:AwardsVO = null;
+      private var _awards:Array;
 
       private var _progressList:Array;
 
@@ -24,9 +24,6 @@ package net.wg.data.VO
          {
             case "questInfo":
                questInfo = new QuestRendererVO(param2?param2:{});
-               return false;
-            case "awards":
-               this._awards = param2?new AwardsVO(param2):null;
                return false;
             default:
                return true;
@@ -49,11 +46,11 @@ package net.wg.data.VO
          this._alertMsg = param1;
       }
 
-      public function get awards() : AwardsVO {
+      public function get awards() : Array {
          return this._awards;
       }
 
-      public function set awards(param1:AwardsVO) : void {
+      public function set awards(param1:Array) : void {
          this._awards = param1;
       }
    }

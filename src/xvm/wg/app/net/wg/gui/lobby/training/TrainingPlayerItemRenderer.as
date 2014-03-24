@@ -15,7 +15,6 @@ package net.wg.gui.lobby.training
    import scaleform.clik.constants.InvalidationType;
    import flash.geom.Point;
    import net.wg.gui.prebattle.squad.MessengerUtils;
-   import net.wg.data.VO.UserVO;
    import scaleform.clik.data.ListData;
 
 
@@ -191,17 +190,7 @@ package net.wg.gui.lobby.training
                {
                   this.voiceWave.setMuted(MessengerUtils.isMuted(data));
                }
-               this.nameField.userVO = new UserVO(
-                  {
-                     "accID":_loc1_.accID,
-                     "uid":_loc1_.uid,
-                     "fullName":_loc1_.fullName,
-                     "userName":_loc1_.userName,
-                     "clanAbbrev":_loc1_.clanAbbrev,
-                     "region":_loc1_.region,
-                     "igrType":_loc1_.igrType
-                  }
-               );
+               this.nameField.userVO = _loc1_;
                _loc2_ = new Point(mouseX,mouseY);
                _loc2_ = this.localToGlobal(_loc2_);
                if((this.hitTestPoint(_loc2_.x,_loc2_.y,true)) && (this._isMouseOver))

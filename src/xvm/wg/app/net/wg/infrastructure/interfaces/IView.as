@@ -1,11 +1,10 @@
 package net.wg.infrastructure.interfaces
 {
-   import scaleform.clik.interfaces.IUIComponent;
    import flash.display.DisplayObject;
    import flash.display.Loader;
 
 
-   public interface IView extends IDAAPIModule, IManagedContent, IUIComponent
+   public interface IView extends IDAAPIModule, IManagedContent, IUIComponentEx
    {
           
       function getSubContainer() : IManagedContainer;

@@ -1,7 +1,6 @@
 package net.wg.gui.cyberSport.vo
 {
    import net.wg.infrastructure.interfaces.entity.IDisposable;
-   import net.wg.gui.cyberSport.CSConstants;
 
 
    public class VehicleSelectorItemVO extends Object implements IDisposable
@@ -21,7 +20,9 @@ package net.wg.gui.cyberSport.vo
                   "level":this._vehicle.level,
                   "nationID":this._vehicle.nationID,
                   "smallIconPath":this._vehicle.smallIconPath,
-                  "isReadyToFight":this._vehicle.isReadyToFight
+                  "isReadyToFight":this._vehicle.isReadyToFight,
+                  "enabled":this._vehicle.enabled,
+                  "tooltip":this._vehicle.tooltip
                }
             ;
          }
@@ -57,7 +58,7 @@ package net.wg.gui.cyberSport.vo
       }
 
       public function get enabled() : Boolean {
-         return this.level <= CSConstants.MAX_VEHICLE_LEVEL;
+         return this.getDataSource().enabled;
       }
 
       public function get shortUserName() : String {
@@ -86,6 +87,10 @@ package net.wg.gui.cyberSport.vo
 
       public function get vehicle() : VehicleVO {
          return this._vehicle;
+      }
+
+      public function get tooltip() : String {
+         return this.getDataSource().tooltip;
       }
    }
 

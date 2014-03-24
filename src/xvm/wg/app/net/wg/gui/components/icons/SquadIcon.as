@@ -14,29 +14,33 @@ package net.wg.gui.components.icons
 
       public var numTf:TextField;
 
-      public function setSquad(param1:Number) : void {
-         if(param1 > 10)
+      public function show(param1:Boolean, param2:uint) : void {
+         if(param1)
          {
-            this.numTf.text = String(param1 - 10);
-            gotoAndStop("gold");
+            this.numTf.text = param2.toString();
+            this.setLabel("gold");
          }
          else
          {
-            if(param1 > 0)
-            {
-               this.numTf.text = String(param1);
-               gotoAndStop("silver");
-            }
-            else
-            {
-               this.numTf.text = "";
-               gotoAndStop("empty");
-            }
+            this.numTf.text = param2.toString();
+            this.setLabel("silver");
          }
+      }
+
+      public function hide() : void {
+         this.numTf.text = "";
+         this.setLabel("empty");
       }
 
       override public function toString() : String {
          return "[WG SquadIcon " + name + "]";
+      }
+
+      private function setLabel(param1:String) : void {
+         if(param1 != currentFrameLabel)
+         {
+            gotoAndStop(param1);
+         }
       }
    }
 

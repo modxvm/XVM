@@ -12,6 +12,7 @@ package net.wg.gui.prebattle.invites
    import scaleform.clik.data.DataProvider;
    import flash.utils.setTimeout;
    import scaleform.clik.utils.Padding;
+   import net.wg.gui.events.ViewStackEvent;
    import scaleform.clik.events.ButtonEvent;
    import scaleform.clik.events.FocusHandlerEvent;
    import net.wg.gui.events.ListEventEx;
@@ -158,6 +159,7 @@ package net.wg.gui.prebattle.invites
 
       override protected function configUI() : void {
          super.configUI();
+         this.usersAccordion.view.addEventListener(ViewStackEvent.VIEW_CHANGED,this.onViewChange);
          this.usersAccordion.view.cache = true;
          this.usersAccordion.addEventListener(SendInvitesEvent.SHOW_CONTEXT_MENU,this.showContextMenu);
          this.usersAccordion.addEventListener(SendInvitesEvent.INIT_COMPONENT,this.usersAccordion_initComponentHandler);
@@ -185,6 +187,14 @@ package net.wg.gui.prebattle.invites
          invalidate(UPDATE_DEFAULT_POSITION);
       }
 
+      private function onViewChange(param1:ViewStackEvent) : void {
+         var _loc2_:InteractiveObject = param1.view.getComponentForFocus();
+         if(_loc2_)
+         {
+            setFocus(_loc2_);
+         }
+      }
+
       override protected function onInitModalFocus(param1:InteractiveObject) : void {
          super.onInitModalFocus(param1);
          this.updateFocus();
@@ -199,8 +209,9 @@ package net.wg.gui.prebattle.invites
          this.addUserButton.removeEventListener(ButtonEvent.CLICK,this.handleClickAddUserButton);
          this.removeUserButton.removeEventListener(ButtonEvent.CLICK,this.handleClickRemoveUserButton);
          this.removeAllUsersButton.removeEventListener(ButtonEvent.CLICK,this.handleClickRemoveAllUsersButton);
-         this.usersAccordion.removeEventListener(SendInvitesEvent.SEARCH_TOKEN,this.usersAccordion_searchTokenHandler);
          this.onlineCheckBox.removeEventListener(ButtonEvent.CLICK,this.handleSelectOnlineCheckBox);
+         this.usersAccordion.view.removeEventListener(ViewStackEvent.VIEW_CHANGED,this.onViewChange);
+         this.usersAccordion.removeEventListener(SendInvitesEvent.SEARCH_TOKEN,this.usersAccordion_searchTokenHandler);
          this.usersAccordion.removeEventListener(SendInvitesEvent.SHOW_CONTEXT_MENU,this.showContextMenu);
          this.usersAccordion.removeEventListener(SendInvitesEvent.INIT_COMPONENT,this.usersAccordion_initComponentHandler);
          this.usersAccordion.removeEventListener(SendInvitesEvent.LIST_DOUBLE_CLICK,this.usersAccordion_listItemDoubleClickHandler);

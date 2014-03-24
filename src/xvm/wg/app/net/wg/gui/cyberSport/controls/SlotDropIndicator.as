@@ -57,7 +57,7 @@ package net.wg.gui.cyberSport.controls
          }
          else
          {
-            mouseEnabled = (this._data) && !this._data.isSelf;
+            mouseEnabled = (this._data) && !this._data.himself;
          }
          buttonMode = useHandCursor = mouseEnabled;
       }
@@ -87,7 +87,7 @@ package net.wg.gui.cyberSport.controls
          var _loc3_:CSPlayerCIGenerator = null;
          if(App.utils.commons.isRightButton(param1))
          {
-            _loc2_ = this._data?this._data.isSelf?null:this._data:null;
+            _loc2_ = this._data?this._data.himself?null:this._data:null;
             _loc3_ = new CSPlayerCIGenerator(this._isCurrentUserCommander);
             if(_loc2_)
             {
@@ -100,7 +100,7 @@ package net.wg.gui.cyberSport.controls
          switch(param1.id)
          {
             case "addToIgnored":
-               dispatchEvent(new CSComponentEvent(CSComponentEvent.IGNORE_USER_REQUEST,this._data.databaseID));
+               dispatchEvent(new CSComponentEvent(CSComponentEvent.IGNORE_USER_REQUEST,this._data.dbID));
                break;
          }
       }

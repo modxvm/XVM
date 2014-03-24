@@ -4,6 +4,7 @@ package net.wg.gui.lobby.barracks
    import net.wg.infrastructure.base.meta.IBarracksMeta;
    import net.wg.gui.components.controls.CloseButton;
    import net.wg.gui.events.CrewEvent;
+   import scaleform.clik.events.ListEvent;
    import scaleform.clik.events.ButtonEvent;
    import flash.ui.Keyboard;
    import flash.events.KeyboardEvent;
@@ -12,6 +13,7 @@ package net.wg.gui.lobby.barracks
    import net.wg.gui.components.controls.DropdownMenu;
    import net.wg.infrastructure.exceptions.TypeCastException;
    import scaleform.clik.events.InputEvent;
+   import flash.display.InteractiveObject;
 
 
    public class Barracks extends BarracksMeta implements IBarracksMeta
@@ -60,6 +62,7 @@ package net.wg.gui.lobby.barracks
          this.form.addEventListener(CrewEvent.UNLOAD_TANKMAN,this.onUnloadTankman);
          this.form.addEventListener(CrewEvent.SHOW_RECRUIT_WINDOW,this.onShowRecruitWindow);
          this.form.addEventListener(CrewEvent.ON_CHANGE_BARRACKS_FILTER,this.setFilters);
+         this.form.tankmenTileList.addEventListener(ListEvent.INDEX_CHANGE,this.setFocusToControl);
          this.closeButton = this.form.closeButton;
          this.closeButton.addEventListener(ButtonEvent.CLICK,this.onBarracksClose);
          App.gameInputMgr.setKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN,this.handleEscape,true);
@@ -74,6 +77,7 @@ package net.wg.gui.lobby.barracks
          this.form.removeEventListener(CrewEvent.UNLOAD_TANKMAN,this.onUnloadTankman);
          this.form.removeEventListener(CrewEvent.SHOW_RECRUIT_WINDOW,this.onShowRecruitWindow);
          this.form.removeEventListener(CrewEvent.ON_CHANGE_BARRACKS_FILTER,this.setFilters);
+         this.form.tankmenTileList.removeEventListener(ListEvent.INDEX_CHANGE,this.setFocusToControl);
          this.closeButton.removeEventListener(ButtonEvent.CLICK,this.onBarracksClose);
          this.closeButton = null;
          App.gameInputMgr.clearKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN);
@@ -145,6 +149,10 @@ package net.wg.gui.lobby.barracks
 
       private function onInvalidateTanksList(param1:CrewEvent) : void {
          invalidateTanksListS();
+      }
+
+      private function setFocusToControl(param1:ListEvent) : void {
+         setFocus(InteractiveObject(param1.target));
       }
    }
 

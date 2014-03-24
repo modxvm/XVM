@@ -105,7 +105,6 @@ package net.wg.gui.components.tooltips
                this.historyHeaderTF = null;
             }
          }
-         super.onDispose();
          if(this.flagsBlocks)
          {
             while(this.flagsBlocks.length > 0)
@@ -116,6 +115,7 @@ package net.wg.gui.components.tooltips
                _loc1_ = null;
             }
          }
+         super.onDispose();
       }
 
       override public function toString() : String {
@@ -211,7 +211,7 @@ package net.wg.gui.components.tooltips
             hasIcon = _loc6_.hasIcons?true:hasIcon;
             leftPartMaxW = _loc6_.leftPartMaxW > leftPartMaxW?_loc6_.leftPartMaxW:leftPartMaxW;
          }
-         if((_loc5_.type == this.TYPE_CUSTOM) && (_loc5_.vehicleToKill) && _loc5_.vehicleToKill.length > 0)
+         if((_loc5_.vehicles) && _loc5_.vehicles.length > 0)
          {
             _loc8_ = Utils.instance.createSeparate(content);
             _loc8_.y = topPosition;
@@ -231,17 +231,17 @@ package net.wg.gui.components.tooltips
             this.vLeftTF.x = _loc7_;
             this.vLeftTF.y = topPosition;
             topPosition = topPosition + (this.vLeftTF.textHeight + Utils.instance.MARGIN_AFTER_BLOCK | 0);
-            _loc3_ = _loc5_.vehicleToKill?_loc5_.vehicleToKill.length:0;
+            _loc3_ = _loc5_.vehicles.length;
             _loc2_ = 0;
             while(_loc2_ < _loc3_)
             {
-               topPosition = this.addCustomBlock(content,_loc5_.vehicleToKill[_loc2_],topPosition);
+               topPosition = this.addCustomBlock(content,_loc5_.vehicles[_loc2_],topPosition);
                _loc2_++;
             }
             topPosition = topPosition + Utils.instance.MARGIN_AFTER_BLOCK;
-            if(_loc5_.vehicleToKillLeft)
+            if(_loc5_.vehiclesLeft)
             {
-               _loc12_ = Utils.instance.htmlWrapper(_loc1_.makeString(TOOLTIPS.SUITABLEVEHICLE_MORE),Utils.instance.COLOR_ADD_INFO,14,"$TitleFont") + " " + Utils.instance.htmlWrapper(_loc5_.vehicleToKillLeft.toString(),Utils.instance.COLOR_NUMBER,14,"$TitleFont");
+               _loc12_ = Utils.instance.htmlWrapper(_loc1_.makeString(TOOLTIPS.SUITABLEVEHICLE_MORE),Utils.instance.COLOR_ADD_INFO,14,"$TitleFont") + " " + Utils.instance.htmlWrapper(_loc5_.vehiclesLeft.toString(),Utils.instance.COLOR_NUMBER,14,"$TitleFont");
                this.notEnoughTF.htmlText = _loc12_;
                this.notEnoughTF.width = this.notEnoughTF.textWidth + 5;
                this.notEnoughTF.x = _loc7_;

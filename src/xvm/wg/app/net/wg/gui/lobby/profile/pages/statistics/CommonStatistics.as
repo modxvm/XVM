@@ -2,6 +2,7 @@ package net.wg.gui.lobby.profile.pages.statistics
 {
    import scaleform.clik.core.UIComponent;
    import net.wg.gui.lobby.profile.components.ProfileDashLineTextItem;
+   import net.wg.gui.lobby.profile.pages.statistics.body.ProfileStatisticsDetailedVO;
 
 
    public class CommonStatistics extends UIComponent
@@ -73,7 +74,7 @@ package net.wg.gui.lobby.profile.pages.statistics
       }
 
       public function setDossierData(param1:Object) : void {
-         var _loc2_:ProfileStatisticsDetailVO = new ProfileStatisticsDetailVO(param1);
+         var _loc2_:ProfileStatisticsDetailedVO = new ProfileStatisticsDetailedVO(param1);
          this.ltKilled.receiveAndSetValue(_loc2_.fragsCount,DEFAULT_COLOR,_loc2_.getFragsCountStr);
          this.ltDestroyed.receiveAndSetValue(_loc2_.deathsCount,DEFAULT_COLOR,_loc2_.getDeathsCountStr);
          var _loc3_:Number = _loc2_.fragsEfficiency > 0?_loc2_.fragsEfficiency:-1;

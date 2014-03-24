@@ -30,6 +30,8 @@ package net.wg.gui.components.controls
 
       protected var keyboardHandlingLocked:Boolean = false;
 
+      protected var useFocusedAsSelect:Boolean = false;
+
       public function get soundType() : String {
          return this._soundType;
       }
@@ -100,6 +102,10 @@ package net.wg.gui.components.controls
             this.focused = 0;
          }
          super.enabled = param1;
+         if(!this.hitArea)
+         {
+            mouseChildren = !enabled;
+         }
       }
 
       override protected function configUI() : void {
@@ -109,6 +115,10 @@ package net.wg.gui.components.controls
             this.hitArea = this.hitMc;
          }
          buttonMode = true;
+         if(!this.hitArea)
+         {
+            mouseChildren = !enabled;
+         }
          if(App.soundMgr != null)
          {
             App.soundMgr.addSoundsHdlrs(this);
@@ -191,6 +201,57 @@ package net.wg.gui.components.controls
 
       private function unlockKeyboardHandling() : void {
          this.keyboardHandlingLocked = false;
+      }
+
+      override protected function changeFocus() : void {
+         var _loc1_:String = null;
+         if(!enabled)
+         {
+            return;
+         }
+         if(_focusIndicator == null)
+         {
+            if((group) && (groupName))
+            {
+               if((this.useFocusedAsSelect) && ((_focused) || (_displayFocus)) && !this.selected)
+               {
+                  this.selected = true;
+               }
+            }
+            else
+            {
+               setState((_focused) || (_displayFocus)?"over":"out");
+            }
+            if((_pressedByKeyboard) && !_focused)
+            {
+               _pressedByKeyboard = false;
+            }
+         }
+         else
+         {
+            if(_focusIndicator.totalframes == 1)
+            {
+               _focusIndicator.visible = _focused > 0;
+            }
+            else
+            {
+               _loc1_ = "state" + _focused;
+               if(_focusIndicatorLabelHash[_loc1_])
+               {
+                  _newFocusIndicatorFrame = "state" + _focused;
+               }
+               else
+               {
+                  _newFocusIndicatorFrame = (_focused) || (_displayFocus)?"show":"hide";
+               }
+               invalidateState();
+            }
+            if((_pressedByKeyboard) && !_focused)
+            {
+               setState("kb_release");
+               _pressedByKeyboard = false;
+            }
+         }
       }
    }
 

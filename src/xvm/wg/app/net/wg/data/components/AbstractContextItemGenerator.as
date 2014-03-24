@@ -51,7 +51,7 @@ package net.wg.data.components
       protected function getSimpleDataIDs(param1:PlayerInfo) : Map {
          var _loc2_:String = param1.isFriend?"removeFromFriends":"addToFriends";
          var _loc3_:String = param1.isIgnored?"removeFromIgnored":"addToIgnored";
-         var _loc4_:String = param1.isFriend?"createPrivateChannel":Values.EMPTY_STR;
+         var _loc4_:* = "createPrivateChannel";
          var _loc5_:String = Values.EMPTY_STR;
          if(App.voiceChatMgr.isVOIPEnabledS())
          {

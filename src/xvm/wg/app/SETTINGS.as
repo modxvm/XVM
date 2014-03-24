@@ -31,119 +31,175 @@ package
 
       public static const KEYBOARDTITLE:String = "#settings:keyboardTitle";
 
-      public static const GRAPHICS_DETAILS:String = "#settings:graphics_details";
+      public static const GRAPHICSQUALITY:String = "#settings:graphicsQuality";
+
+      public static const GRAPHICSQUALITY_DESCRIPTION:String = "#settings:graphicsQuality/description";
 
       public static const AUTODETECTBUTTON:String = "#settings:autodetectButton";
 
-      public static const GRAPHICSQUALITY_DEFERRED:String = "#settings:graphicsQuality/DEFERRED";
+      public static const AUTODETECTBUTTON_DESCRIPTION:String = "#settings:autodetectButton/description";
 
-      public static const GRAPHICSQUALITY_FORWARD:String = "#settings:graphicsQuality/FORWARD";
+      public static const GRAPHICS_TABSCREEN:String = "#settings:graphics/tabScreen";
 
-      public static const GRAPHICSQUALITY_ON:String = "#settings:graphicsQuality/ON";
+      public static const GRAPHICS_TABADVANCED:String = "#settings:graphics/tabAdvanced";
 
-      public static const GRAPHICSQUALITY_OFF:String = "#settings:graphicsQuality/OFF";
+      public static const GRAPHICS_SIGNIFICANTLYAFFECTING:String = "#settings:graphics/significantlyAffecting";
 
-      public static const GRAPHICSQUALITY_ANISOTROPIC_16X:String = "#settings:graphicsQuality/ANISOTROPIC_16X";
+      public static const GRAPHICSSETTINGSOPTIONS_DEFERRED:String = "#settings:graphicsSettingsOptions/DEFERRED";
 
-      public static const GRAPHICSQUALITY_ANISOTROPIC_8X:String = "#settings:graphicsQuality/ANISOTROPIC_8X";
+      public static const GRAPHICSSETTINGSOPTIONS_FORWARD:String = "#settings:graphicsSettingsOptions/FORWARD";
 
-      public static const GRAPHICSQUALITY_ANISOTROPIC_4X:String = "#settings:graphicsQuality/ANISOTROPIC_4X";
+      public static const GRAPHICSSETTINGSOPTIONS_ON:String = "#settings:graphicsSettingsOptions/ON";
 
-      public static const GRAPHICSQUALITY_ANISOTROPIC_2X:String = "#settings:graphicsQuality/ANISOTROPIC_2X";
+      public static const GRAPHICSSETTINGSOPTIONS_OFF:String = "#settings:graphicsSettingsOptions/OFF";
 
-      public static const GRAPHICSQUALITY_TRILINEAR:String = "#settings:graphicsQuality/TRILINEAR";
+      public static const GRAPHICSSETTINGSOPTIONS_ANISOTROPIC_16X:String = "#settings:graphicsSettingsOptions/ANISOTROPIC_16X";
 
-      public static const GRAPHICSQUALITY_BILINEAR:String = "#settings:graphicsQuality/BILINEAR";
+      public static const GRAPHICSSETTINGSOPTIONS_ANISOTROPIC_8X:String = "#settings:graphicsSettingsOptions/ANISOTROPIC_8X";
 
-      public static const GRAPHICSQUALITY_POINT:String = "#settings:graphicsQuality/POINT";
+      public static const GRAPHICSSETTINGSOPTIONS_ANISOTROPIC_4X:String = "#settings:graphicsSettingsOptions/ANISOTROPIC_4X";
 
-      public static const GRAPHICSQUALITY_CUSTOM:String = "#settings:graphicsQuality/CUSTOM";
+      public static const GRAPHICSSETTINGSOPTIONS_ANISOTROPIC_2X:String = "#settings:graphicsSettingsOptions/ANISOTROPIC_2X";
 
-      public static const GRAPHICSQUALITY_VERY_HIGH:String = "#settings:graphicsQuality/VERY_HIGH";
+      public static const GRAPHICSSETTINGSOPTIONS_TRILINEAR:String = "#settings:graphicsSettingsOptions/TRILINEAR";
 
-      public static const GRAPHICSQUALITY_MAX:String = "#settings:graphicsQuality/MAX";
+      public static const GRAPHICSSETTINGSOPTIONS_BILINEAR:String = "#settings:graphicsSettingsOptions/BILINEAR";
 
-      public static const GRAPHICSQUALITY_VERYHIGH:String = "#settings:graphicsQuality/VERYHIGH";
+      public static const GRAPHICSSETTINGSOPTIONS_POINT:String = "#settings:graphicsSettingsOptions/POINT";
 
-      public static const GRAPHICSQUALITY_HIGH:String = "#settings:graphicsQuality/HIGH";
+      public static const GRAPHICSSETTINGSOPTIONS_CUSTOM:String = "#settings:graphicsSettingsOptions/CUSTOM";
 
-      public static const GRAPHICSQUALITY_MEDIUM:String = "#settings:graphicsQuality/MEDIUM";
+      public static const GRAPHICSSETTINGSOPTIONS_VERY_HIGH:String = "#settings:graphicsSettingsOptions/VERY_HIGH";
 
-      public static const GRAPHICSQUALITY_FAR:String = "#settings:graphicsQuality/FAR";
+      public static const GRAPHICSSETTINGSOPTIONS_MAX:String = "#settings:graphicsSettingsOptions/MAX";
 
-      public static const GRAPHICSQUALITY_NEAR:String = "#settings:graphicsQuality/NEAR";
+      public static const GRAPHICSSETTINGSOPTIONS_VERYHIGH:String = "#settings:graphicsSettingsOptions/VERYHIGH";
 
-      public static const GRAPHICSQUALITY_LOW:String = "#settings:graphicsQuality/LOW";
+      public static const GRAPHICSSETTINGSOPTIONS_HIGH:String = "#settings:graphicsSettingsOptions/HIGH";
 
-      public static const GRAPHICSQUALITY_LOWEST:String = "#settings:graphicsQuality/LOWEST";
+      public static const GRAPHICSSETTINGSOPTIONS_MEDIUM:String = "#settings:graphicsSettingsOptions/MEDIUM";
 
-      public static const GRAPHICSQUALITY_MIN:String = "#settings:graphicsQuality/MIN";
+      public static const GRAPHICSSETTINGSOPTIONS_FAR:String = "#settings:graphicsSettingsOptions/FAR";
 
-      public static const GRAPHICSQUALITY_SHADER_MODEL_3:String = "#settings:graphicsQuality/SHADER_MODEL_3";
+      public static const GRAPHICSSETTINGSOPTIONS_NEAR:String = "#settings:graphicsSettingsOptions/NEAR";
 
-      public static const GRAPHICSQUALITY_SHADER_MODEL_2:String = "#settings:graphicsQuality/SHADER_MODEL_2";
+      public static const GRAPHICSSETTINGSOPTIONS_LOW:String = "#settings:graphicsSettingsOptions/LOW";
 
-      public static const GRAPHICSQUALITY_SHADER_MODEL_1:String = "#settings:graphicsQuality/SHADER_MODEL_1";
+      public static const GRAPHICSSETTINGSOPTIONS_LOWEST:String = "#settings:graphicsSettingsOptions/LOWEST";
 
-      public static const GRAPHICSQUALITY_SHADER_MODEL_0:String = "#settings:graphicsQuality/SHADER_MODEL_0";
+      public static const GRAPHICSSETTINGSOPTIONS_MIN:String = "#settings:graphicsSettingsOptions/MIN";
 
-      public static const GRAPHICSQUALITY_NONE:String = "#settings:graphicsQuality/NONE";
+      public static const GRAPHICSSETTINGSOPTIONS_SHADER_MODEL_3:String = "#settings:graphicsSettingsOptions/SHADER_MODEL_3";
 
-      public static const GRAPHICSQUALITY_COLORIZATION:String = "#settings:graphicsQuality/Colorization";
+      public static const GRAPHICSSETTINGSOPTIONS_SHADER_MODEL_2:String = "#settings:graphicsSettingsOptions/SHADER_MODEL_2";
 
-      public static const GRAPHICSQUALITY_MUTED:String = "#settings:graphicsQuality/Muted";
+      public static const GRAPHICSSETTINGSOPTIONS_SHADER_MODEL_1:String = "#settings:graphicsSettingsOptions/SHADER_MODEL_1";
 
-      public static const GRAPHICSQUALITY_CONTRASTY:String = "#settings:graphicsQuality/Contrasty";
+      public static const GRAPHICSSETTINGSOPTIONS_SHADER_MODEL_0:String = "#settings:graphicsSettingsOptions/SHADER_MODEL_0";
 
-      public static const GRAPHICSQUALITY_SOFT_COLORS:String = "#settings:graphicsQuality/Soft Colors";
+      public static const GRAPHICSSETTINGSOPTIONS_NONE:String = "#settings:graphicsSettingsOptions/NONE";
 
-      public static const GRAPHICSQUALITY_PHOTOCHROMATIC:String = "#settings:graphicsQuality/Photochromatic";
+      public static const GRAPHICSSETTINGSOPTIONS_COLORIZATION:String = "#settings:graphicsSettingsOptions/Colorization";
 
-      public static const GRAPHICSQUALITY_SOFT:String = "#settings:graphicsQuality/Soft";
+      public static const GRAPHICSSETTINGSOPTIONS_MUTED:String = "#settings:graphicsSettingsOptions/Muted";
+
+      public static const GRAPHICSSETTINGSOPTIONS_CONTRASTY:String = "#settings:graphicsSettingsOptions/Contrasty";
+
+      public static const GRAPHICSSETTINGSOPTIONS_SOFT_COLORS:String = "#settings:graphicsSettingsOptions/Soft Colors";
+
+      public static const GRAPHICSSETTINGSOPTIONS_PHOTOCHROMATIC:String = "#settings:graphicsSettingsOptions/Photochromatic";
+
+      public static const GRAPHICSSETTINGSOPTIONS_SOFT:String = "#settings:graphicsSettingsOptions/Soft";
 
       public static const FPSPERFOMANCER:String = "#settings:fpsPerfomancer";
+
+      public static const FPSPERFOMANCER_DESCRIPTION:String = "#settings:fpsPerfomancer/description";
 
       public static const TRIPLEBUFFERED:String = "#settings:tripleBuffered";
 
       public static const RENDER_PIPELINE:String = "#settings:RENDER_PIPELINE";
 
+      public static const RENDER_PIPELINE_LABEL:String = "#settings:RENDER_PIPELINE/label";
+
+      public static const RENDER_PIPELINE_DESCRIPTION:String = "#settings:RENDER_PIPELINE/description";
+
+      public static const RENDER_PIPELINE_WARNING:String = "#settings:RENDER_PIPELINE/warning";
+
       public static const DECALS_QUALITY:String = "#settings:DECALS_QUALITY";
+
+      public static const DECALS_QUALITY_DESCRIPTION:String = "#settings:DECALS_QUALITY/description";
 
       public static const TEXTURE_QUALITY:String = "#settings:TEXTURE_QUALITY";
 
+      public static const TEXTURE_QUALITY_DESCRIPTION:String = "#settings:TEXTURE_QUALITY/description";
+
+      public static const TEXTURE_QUALITY_WARNING:String = "#settings:TEXTURE_QUALITY/warning";
+
       public static const TERRAIN_QUALITY:String = "#settings:TERRAIN_QUALITY";
+
+      public static const TERRAIN_QUALITY_DESCRIPTION:String = "#settings:TERRAIN_QUALITY/description";
+
+      public static const TERRAIN_QUALITY_WARNING:String = "#settings:TERRAIN_QUALITY/warning";
 
       public static const SHADOWS_QUALITY:String = "#settings:SHADOWS_QUALITY";
 
+      public static const SHADOWS_QUALITY_DESCRIPTION:String = "#settings:SHADOWS_QUALITY/description";
+
       public static const LIGHTING_QUALITY:String = "#settings:LIGHTING_QUALITY";
+
+      public static const LIGHTING_QUALITY_DESCRIPTION:String = "#settings:LIGHTING_QUALITY/description";
 
       public static const SPEEDTREE_QUALITY:String = "#settings:SPEEDTREE_QUALITY";
 
+      public static const SPEEDTREE_QUALITY_DESCRIPTION:String = "#settings:SPEEDTREE_QUALITY/description";
+
       public static const WATER_QUALITY:String = "#settings:WATER_QUALITY";
+
+      public static const WATER_QUALITY_DESCRIPTION:String = "#settings:WATER_QUALITY/description";
 
       public static const FAR_PLANE:String = "#settings:FAR_PLANE";
 
+      public static const FAR_PLANE_DESCRIPTION:String = "#settings:FAR_PLANE/description";
+
       public static const FLORA_QUALITY:String = "#settings:FLORA_QUALITY";
 
+      public static const FLORA_QUALITY_DESCRIPTION:String = "#settings:FLORA_QUALITY/description";
+
       public static const OBJECT_LOD:String = "#settings:OBJECT_LOD";
+
+      public static const OBJECT_LOD_DESCRIPTION:String = "#settings:OBJECT_LOD/description";
 
       public static const SHADER_VERSION_CAP:String = "#settings:SHADER_VERSION_CAP";
 
       public static const VEHICLE_DUST_ENABLED:String = "#settings:VEHICLE_DUST_ENABLED";
 
+      public static const VEHICLE_DUST_ENABLED_DESCRIPTION:String = "#settings:VEHICLE_DUST_ENABLED/description";
+
       public static const SMOKE_ENABLED:String = "#settings:SMOKE_ENABLED";
 
       public static const SNIPER_MODE_GRASS_ENABLED:String = "#settings:SNIPER_MODE_GRASS_ENABLED";
 
+      public static const SNIPER_MODE_GRASS_ENABLED_DESCRIPTION:String = "#settings:SNIPER_MODE_GRASS_ENABLED/description";
+
       public static const SNIPER_MODE_EFFECTS_QUALITY:String = "#settings:SNIPER_MODE_EFFECTS_QUALITY";
+
+      public static const SNIPER_MODE_EFFECTS_QUALITY_DESCRIPTION:String = "#settings:SNIPER_MODE_EFFECTS_QUALITY/description";
 
       public static const COLOR_GRADING_TECHNIQUE:String = "#settings:COLOR_GRADING_TECHNIQUE";
 
+      public static const COLOR_GRADING_TECHNIQUE_DESCRIPTION:String = "#settings:COLOR_GRADING_TECHNIQUE/description";
+
       public static const MOTION_BLUR_QUALITY:String = "#settings:MOTION_BLUR_QUALITY";
+
+      public static const MOTION_BLUR_QUALITY_DESCRIPTION:String = "#settings:MOTION_BLUR_QUALITY/description";
 
       public static const EFFECTS_QUALITY:String = "#settings:EFFECTS_QUALITY";
 
+      public static const EFFECTS_QUALITY_DESCRIPTION:String = "#settings:EFFECTS_QUALITY/description";
+
       public static const VEHICLE_TRACES_ENABLED:String = "#settings:VEHICLE_TRACES_ENABLED";
+
+      public static const VEHICLE_TRACES_ENABLED_DESCRIPTION:String = "#settings:VEHICLE_TRACES_ENABLED/description";
 
       public static const DYNAMICCAMERA:String = "#settings:dynamicCamera";
 
@@ -151,7 +207,29 @@ package
 
       public static const POST_PROCESSING_QUALITY:String = "#settings:POST_PROCESSING_QUALITY";
 
+      public static const POST_PROCESSING_QUALITY_DESCRIPTION:String = "#settings:POST_PROCESSING_QUALITY/description";
+
       public static const RESOLUTION:String = "#settings:resolution";
+
+      public static const RESOLUTION_DESCRIPTION:String = "#settings:resolution/description";
+
+      public static const DYNAMICRENDERER:String = "#settings:dynamicRenderer";
+
+      public static const DYNAMICRENDERER_DESCRIPTION:String = "#settings:dynamicRenderer/description";
+
+      public static const REFRESHRATE:String = "#settings:refreshRate";
+
+      public static const REFRESHRATE_DESCRIPTION:String = "#settings:refreshRate/description";
+
+      public static const REFRESHRATE_DEFAULT:String = "#settings:refreshRate/default";
+
+      public static const COLORFILTERINTENSITY:String = "#settings:colorFilterIntensity";
+
+      public static const COLORFILTERINTENSITY_DESCRIPTION:String = "#settings:colorFilterIntensity/description";
+
+      public static const FOV:String = "#settings:fov";
+
+      public static const FOV_DESCRIPTION:String = "#settings:fov/description";
 
       public static const GAME_REPLAYENABLED:String = "#settings:game/replayEnabled";
 
@@ -165,21 +243,41 @@ package
 
       public static const MONITOR:String = "#settings:monitor";
 
+      public static const MONITOR_DESCRIPTION:String = "#settings:monitor/description";
+
       public static const WINDOWSIZE:String = "#settings:windowSize";
+
+      public static const WINDOWSIZE_DESCRIPTION:String = "#settings:windowSize/description";
 
       public static const ASPECTRATIO:String = "#settings:aspectRatio";
 
-      public static const FULLSCREENMODE:String = "#settings:fullScreenMode";
+      public static const ASPECTRATIO_DESCRIPTION:String = "#settings:aspectRatio/description";
+
+      public static const FULLSCREEN:String = "#settings:fullScreen";
+
+      public static const FULLSCREEN_DESCRIPTION:String = "#settings:fullScreen/description";
 
       public static const GAMMA:String = "#settings:gamma";
 
-      public static const ASPECT_RATIO:String = "#settings:aspect_ratio";
+      public static const GAMMA_DESCRIPTION:String = "#settings:gamma/description";
 
-      public static const MULTISAMPLINGTYPE:String = "#settings:multisamplingType";
+      public static const SMOOTHING:String = "#settings:smoothing";
+
+      public static const SMOOTHING_DESCRIPTION:String = "#settings:smoothing/description";
 
       public static const EDGEDETECTAA:String = "#settings:edgeDetectAA";
 
       public static const ISCOLORBLIND:String = "#settings:isColorBlind";
+
+      public static const ISCOLORBLIND_DESCRIPTION:String = "#settings:isColorBlind/description";
+
+      public static const VERTSYNC:String = "#settings:vertSync";
+
+      public static const VERTSYNC_DESCRIPTION:String = "#settings:vertSync/description";
+
+      public static const VERTSYNC_ON:String = "#settings:vertSync/On";
+
+      public static const VERTSYNC_OFF:String = "#settings:vertSync/Off";
 
       public static const MULTISAMPLINGTYPE_TYPE0:String = "#settings:multisamplingType/type0";
 
@@ -206,12 +304,6 @@ package
       public static const CUSTOMAAMODE_MODE0:String = "#settings:customAAMode/mode0";
 
       public static const CUSTOMAAMODE_MODE1:String = "#settings:customAAMode/mode1";
-
-      public static const VERTICAL_SYNC:String = "#settings:vertical_sync";
-
-      public static const VERTICAL_SYNC_ON:String = "#settings:vertical_sync/On";
-
-      public static const VERTICAL_SYNC_OFF:String = "#settings:vertical_sync/Off";
 
       public static const SOUNDS_MASTERVOLUME:String = "#settings:sounds/masterVolume";
 
@@ -749,9 +841,9 @@ package
 
       public static const ARCADE_ENUM:Array = [ARCADE_MIXING,ARCADE_MIXING_TYPE0,ARCADE_MIXING_TYPE1,ARCADE_MIXING_TYPE2,ARCADE_MIXING_TYPE3,ARCADE_MIXING_TYPE4,ARCADE_MIXING_TYPE5,ARCADE_GUNTAG,ARCADE_GUNTAG_TYPE0,ARCADE_GUNTAG_TYPE1,ARCADE_GUNTAG_TYPE2,ARCADE_GUNTAG_TYPE3,ARCADE_GUNTAG_TYPE4,ARCADE_GUNTAG_TYPE5,ARCADE_GUNTAG_TYPE6,ARCADE_GUNTAG_TYPE7,ARCADE_GUNTAG_TYPE8,ARCADE_GUNTAG_TYPE9,ARCADE_GUNTAG_TYPE10,ARCADE_GUNTAG_TYPE11,ARCADE_GUNTAG_TYPE12,ARCADE_GUNTAG_TYPE13,ARCADE_GUNTAG_TYPE14,ARCADE_CENTRALTAG,ARCADE_CENTRALTAG_TYPE0,ARCADE_CENTRALTAG_TYPE1,ARCADE_CENTRALTAG_TYPE2,ARCADE_CENTRALTAG_TYPE3,ARCADE_CENTRALTAG_TYPE4,ARCADE_CENTRALTAG_TYPE5,ARCADE_CENTRALTAG_TYPE6,ARCADE_CENTRALTAG_TYPE7,ARCADE_CENTRALTAG_TYPE8,ARCADE_CENTRALTAG_TYPE9,ARCADE_CENTRALTAG_TYPE10,ARCADE_CENTRALTAG_TYPE11,ARCADE_CENTRALTAG_TYPE12,ARCADE_CENTRALTAG_TYPE13,ARCADE_NET,ARCADE_NET_TYPE0,ARCADE_NET_TYPE1,ARCADE_NET_TYPE2,ARCADE_NET_TYPE3,ARCADE_RELOADER,ARCADE_RELOADERTIMER,ARCADE_CONDITION,ARCADE_CASSETTE];
 
-      public static const GRAPHICSQUALITY_ENUM:Array = [GRAPHICSQUALITY_DEFERRED,GRAPHICSQUALITY_FORWARD,GRAPHICSQUALITY_ON,GRAPHICSQUALITY_OFF,GRAPHICSQUALITY_ANISOTROPIC_16X,GRAPHICSQUALITY_ANISOTROPIC_8X,GRAPHICSQUALITY_ANISOTROPIC_4X,GRAPHICSQUALITY_ANISOTROPIC_2X,GRAPHICSQUALITY_TRILINEAR,GRAPHICSQUALITY_BILINEAR,GRAPHICSQUALITY_POINT,GRAPHICSQUALITY_CUSTOM,GRAPHICSQUALITY_VERY_HIGH,GRAPHICSQUALITY_MAX,GRAPHICSQUALITY_VERYHIGH,GRAPHICSQUALITY_HIGH,GRAPHICSQUALITY_MEDIUM,GRAPHICSQUALITY_FAR,GRAPHICSQUALITY_NEAR,GRAPHICSQUALITY_LOW,GRAPHICSQUALITY_LOWEST,GRAPHICSQUALITY_MIN,GRAPHICSQUALITY_SHADER_MODEL_3,GRAPHICSQUALITY_SHADER_MODEL_2,GRAPHICSQUALITY_SHADER_MODEL_1,GRAPHICSQUALITY_SHADER_MODEL_0,GRAPHICSQUALITY_NONE,GRAPHICSQUALITY_COLORIZATION,GRAPHICSQUALITY_MUTED,GRAPHICSQUALITY_CONTRASTY,GRAPHICSQUALITY_SOFT_COLORS,GRAPHICSQUALITY_PHOTOCHROMATIC,GRAPHICSQUALITY_SOFT];
-
       public static const KEYBOARD_KEYSBLOCKS_COMMAND_ENUM:Array = [KEYBOARD_KEYSBLOCKS_COMMAND_FORWARD,KEYBOARD_KEYSBLOCKS_COMMAND_FORWARD_CRUISE,KEYBOARD_KEYSBLOCKS_COMMAND_BACKWARD,KEYBOARD_KEYSBLOCKS_COMMAND_BACKWARD_CRUISE,KEYBOARD_KEYSBLOCKS_COMMAND_LEFT,KEYBOARD_KEYSBLOCKS_COMMAND_RIGHT,KEYBOARD_KEYSBLOCKS_COMMAND_AUTO_ROTATION,KEYBOARD_KEYSBLOCKS_COMMAND_STOP_FIRE,KEYBOARD_KEYSBLOCKS_COMMAND_FIRE,KEYBOARD_KEYSBLOCKS_COMMAND_LOCK_TARGET,KEYBOARD_KEYSBLOCKS_COMMAND_LOCK_TARGET_OFF,KEYBOARD_KEYSBLOCKS_COMMAND_ALTERNATE_MODE,KEYBOARD_KEYSBLOCKS_COMMAND_RELOADPARTIALCLIP,KEYBOARD_KEYSBLOCKS_COMMAND_ITEM01,KEYBOARD_KEYSBLOCKS_COMMAND_ITEM02,KEYBOARD_KEYSBLOCKS_COMMAND_ITEM03,KEYBOARD_KEYSBLOCKS_COMMAND_ITEM04,KEYBOARD_KEYSBLOCKS_COMMAND_ITEM05,KEYBOARD_KEYSBLOCKS_COMMAND_ITEM06,KEYBOARD_KEYSBLOCKS_COMMAND_ITEM07,KEYBOARD_KEYSBLOCKS_COMMAND_ITEM08,KEYBOARD_KEYSBLOCKS_COMMAND_MY_TARGET,KEYBOARD_KEYSBLOCKS_COMMAND_MY_TARGET_EXT,KEYBOARD_KEYSBLOCKS_COMMAND_ATTACK,KEYBOARD_KEYSBLOCKS_COMMAND_ATTACK_EXT,KEYBOARD_KEYSBLOCKS_COMMAND_TO_BASE,KEYBOARD_KEYSBLOCKS_COMMAND_TO_BACK,KEYBOARD_KEYSBLOCKS_COMMAND_TO_BACK_EXT,KEYBOARD_KEYSBLOCKS_COMMAND_FOLLOW_ME,KEYBOARD_KEYSBLOCKS_COMMAND_FOLLOW_ME_EXT,KEYBOARD_KEYSBLOCKS_COMMAND_POSITIVE,KEYBOARD_KEYSBLOCKS_COMMAND_NEGATIVE,KEYBOARD_KEYSBLOCKS_COMMAND_HELP_ME,KEYBOARD_KEYSBLOCKS_COMMAND_HELP_ME_TEMP,KEYBOARD_KEYSBLOCKS_COMMAND_HELP_ME_TEMP_EXT,KEYBOARD_KEYSBLOCKS_COMMAND_HELP_ME_TEMP2,KEYBOARD_KEYSBLOCKS_COMMAND_STOP,KEYBOARD_KEYSBLOCKS_COMMAND_STOP_EXT,KEYBOARD_KEYSBLOCKS_COMMAND_RELOAD,KEYBOARD_KEYSBLOCKS_COMMAND_CAMERA_UP,KEYBOARD_KEYSBLOCKS_COMMAND_CAMERA_DOWN,KEYBOARD_KEYSBLOCKS_COMMAND_CAMERA_LEFT,KEYBOARD_KEYSBLOCKS_COMMAND_CAMERA_RIGHT,KEYBOARD_KEYSBLOCKS_COMMAND_PUSHTOTALK,KEYBOARD_KEYSBLOCKS_COMMAND_USEHORN,KEYBOARD_KEYSBLOCKS_COMMAND_SHOWHUD,KEYBOARD_KEYSBLOCKS_COMMAND_SHOWRADIALMENU,KEYBOARD_KEYSBLOCKS_COMMAND_SWITCH_VIEW,KEYBOARD_KEYSBLOCKS_COMMAND_SIZEUP,KEYBOARD_KEYSBLOCKS_COMMAND_SIZEDOWN,KEYBOARD_KEYSBLOCKS_COMMAND_VISIBLE];
+
+      public static const GRAPHICSSETTINGSOPTIONS_ENUM:Array = [GRAPHICSSETTINGSOPTIONS_DEFERRED,GRAPHICSSETTINGSOPTIONS_FORWARD,GRAPHICSSETTINGSOPTIONS_ON,GRAPHICSSETTINGSOPTIONS_OFF,GRAPHICSSETTINGSOPTIONS_ANISOTROPIC_16X,GRAPHICSSETTINGSOPTIONS_ANISOTROPIC_8X,GRAPHICSSETTINGSOPTIONS_ANISOTROPIC_4X,GRAPHICSSETTINGSOPTIONS_ANISOTROPIC_2X,GRAPHICSSETTINGSOPTIONS_TRILINEAR,GRAPHICSSETTINGSOPTIONS_BILINEAR,GRAPHICSSETTINGSOPTIONS_POINT,GRAPHICSSETTINGSOPTIONS_CUSTOM,GRAPHICSSETTINGSOPTIONS_VERY_HIGH,GRAPHICSSETTINGSOPTIONS_MAX,GRAPHICSSETTINGSOPTIONS_VERYHIGH,GRAPHICSSETTINGSOPTIONS_HIGH,GRAPHICSSETTINGSOPTIONS_MEDIUM,GRAPHICSSETTINGSOPTIONS_FAR,GRAPHICSSETTINGSOPTIONS_NEAR,GRAPHICSSETTINGSOPTIONS_LOW,GRAPHICSSETTINGSOPTIONS_LOWEST,GRAPHICSSETTINGSOPTIONS_MIN,GRAPHICSSETTINGSOPTIONS_SHADER_MODEL_3,GRAPHICSSETTINGSOPTIONS_SHADER_MODEL_2,GRAPHICSSETTINGSOPTIONS_SHADER_MODEL_1,GRAPHICSSETTINGSOPTIONS_SHADER_MODEL_0,GRAPHICSSETTINGSOPTIONS_NONE,GRAPHICSSETTINGSOPTIONS_COLORIZATION,GRAPHICSSETTINGSOPTIONS_MUTED,GRAPHICSSETTINGSOPTIONS_CONTRASTY,GRAPHICSSETTINGSOPTIONS_SOFT_COLORS,GRAPHICSSETTINGSOPTIONS_PHOTOCHROMATIC,GRAPHICSSETTINGSOPTIONS_SOFT];
 
       public static const KEYBOARD_KEYSBLOCKS_GROUP_ENUM:Array = [KEYBOARD_KEYSBLOCKS_GROUP_MOVEMENT,KEYBOARD_KEYSBLOCKS_GROUP_CRUIS_CONTROL,KEYBOARD_KEYSBLOCKS_GROUP_FIRING,KEYBOARD_KEYSBLOCKS_GROUP_EQUIPMENT,KEYBOARD_KEYSBLOCKS_GROUP_SHORTCUTS,KEYBOARD_KEYSBLOCKS_GROUP_CAMERA,KEYBOARD_KEYSBLOCKS_GROUP_VOICECHAT,KEYBOARD_KEYSBLOCKS_GROUP_LOGITECH_KEYBOARD,KEYBOARD_KEYSBLOCKS_GROUP_VEHICLE_OTHER,KEYBOARD_KEYSBLOCKS_GROUP_MINIMAP];
 
@@ -761,15 +853,15 @@ package
          return _loc2_;
       }
 
-      public static function graphicsquality(param1:String) : String {
-         var _loc2_:String = "#settings:graphicsQuality/" + param1;
-         App.utils.asserter.assert(!(GRAPHICSQUALITY_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
-         return _loc2_;
-      }
-
       public static function keyboard_keysblocks_command(param1:String) : String {
          var _loc2_:String = "#settings:keyboard/keysBlocks/command/" + param1;
          App.utils.asserter.assert(!(KEYBOARD_KEYSBLOCKS_COMMAND_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
+         return _loc2_;
+      }
+
+      public static function graphicssettingsoptions(param1:String) : String {
+         var _loc2_:String = "#settings:graphicsSettingsOptions/" + param1;
+         App.utils.asserter.assert(!(GRAPHICSSETTINGSOPTIONS_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
          return _loc2_;
       }
 

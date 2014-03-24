@@ -74,6 +74,8 @@ package net.wg.gui.lobby.hangar.maintenance
 
       public var shells:DynamicScrollingListEx;
 
+      public var ammoBlockView:AmmoBlockOverlay;
+
       public var eqTextfield:TextField;
 
       public var eqIndicator:MaintenanceStatusIndicator;
@@ -146,6 +148,7 @@ package net.wg.gui.lobby.hangar.maintenance
          this.maintenanceData = new MaintenanceVO(param1);
          this.updateRepairBlock();
          this.updateShellsBlock();
+         this.updateAmmoBlockView();
          this.updateTotalPrice();
       }
 
@@ -262,6 +265,11 @@ package net.wg.gui.lobby.hangar.maintenance
          {
             this.oldMD.dispose();
             this.oldMD = null;
+         }
+         if(this.ammoBlockView)
+         {
+            this.ammoBlockView.dispose();
+            this.ammoBlockView = null;
          }
          var _loc1_:IEventCollector = App.utils.events;
          _loc1_.removeEvent(App.stage,ModuleInfoEvent.SHOW_INFO,this.onShowModuleInfo);
@@ -545,6 +553,18 @@ package net.wg.gui.lobby.hangar.maintenance
          this.eqIndicator.value = _loc13_;
          this.eqIndicator.setDivisor(_loc13_,_loc7_.length);
          this.eqIndicator.textField.text = _loc13_ + SPLITTER_CHAR + _loc7_.length;
+      }
+
+      private function updateAmmoBlockView() : void {
+         if((this.maintenanceData) && (this.maintenanceData.historicalBattle))
+         {
+            this.ammoBlockView.visible = true;
+            this.ammoBlockView.setData(this.maintenanceData.historicalBattle);
+         }
+         else
+         {
+            this.ammoBlockView.visible = false;
+         }
       }
 
       private function onShowModuleInfo(param1:ModuleInfoEvent) : void {

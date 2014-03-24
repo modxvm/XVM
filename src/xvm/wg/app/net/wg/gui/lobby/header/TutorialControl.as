@@ -29,6 +29,8 @@ package net.wg.gui.lobby.header
 
       private static const PREFIX_PAUSE:String = "pause_";
 
+      private static const LEFT_PADDING:int = 40;
+
       private var _title:String = "";
 
       private var _description:String = "";
@@ -136,6 +138,7 @@ package net.wg.gui.lobby.header
          if(this.stateField)
          {
             this.stateField.text = this._isRunning?this._refuseStatus:this._restartStatus;
+            hitMc.width = Math.round(LEFT_PADDING + this.stateField.textWidth);
          }
       }
 
@@ -180,7 +183,10 @@ package net.wg.gui.lobby.header
             }
             else
             {
-               restartS();
+               if(enabled)
+               {
+                  restartS();
+               }
             }
          }
       }

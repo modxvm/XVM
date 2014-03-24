@@ -39,25 +39,6 @@ package net.wg.gui.components.carousels
          if(_renderers.length <= countVisibleSlots)
          {
             Button(param1).buttonMode = true;
-            if(this.isSetListeners)
-            {
-               removeCursorListeners();
-               this.isSetListeners = false;
-            }
-         }
-         else
-         {
-            this.setCursorListeners();
-         }
-      }
-
-      private var isSetListeners:Boolean = false;
-
-      override protected function setCursorListeners() : void {
-         if(!this.isSetListeners)
-         {
-            super.setCursorListeners();
-            this.isSetListeners = true;
          }
       }
    }

@@ -12,7 +12,7 @@ package net.wg.gui.components.common.cursor.base
           
       public function BaseInfo(param1:IDragDropHitArea, param2:String, param3:String) {
          super();
-         var _loc4_:* = "drag or drop object must be InteractiveObject";
+         var _loc4_:* = "drag or drop object \'" + param1 + "\' must be InteractiveObject";
          var _loc5_:IAssertable = App.utils.asserter;
          _loc5_.assertNotNull(param1,"dragDropObject" + Errors.CANT_NULL);
          _loc5_.assert(param1  is  InteractiveObject,_loc4_);

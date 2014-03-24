@@ -103,8 +103,6 @@ package
 
       public static const QUESTS_TABLE_NOTINHANGAR:String = "#quests:quests/table/notInHangar";
 
-      public static const QUESTS_TABLE_NOTINHANGARBUTUNLOCKED:String = "#quests:quests/table/notInHangarButUnlocked";
-
       public static const QUESTS_CURRENTTAB_HEADER_SORT:String = "#quests:quests/currentTab/header/sort";
 
       public static const QUESTS_CURRENTTAB_HEADER_CHECKBOX_TEXT:String = "#quests:quests/currentTab/header/checkBox/text";
@@ -120,6 +118,18 @@ package
       public static const QUESTS_CURRENTTAB_HEADER_DROPDOWN_QUESTS:String = "#quests:quests/currentTab/header/dropdown/quests";
 
       public static const QUESTS_LIST_COMPLETE:String = "#quests:quests/list/complete";
+
+      public static const QUESTS_LIST_CURRENT_NOALL:String = "#quests:quests/list/current/noAll";
+
+      public static const QUESTS_LIST_CURRENT_NOQUESTS:String = "#quests:quests/list/current/noQuests";
+
+      public static const QUESTS_LIST_CURRENT_NOACTIONS:String = "#quests:quests/list/current/noActions";
+
+      public static const QUESTS_LIST_FUTURE_NOALL:String = "#quests:quests/list/future/noAll";
+
+      public static const QUESTS_LIST_FUTURE_NOQUESTS:String = "#quests:quests/list/future/noQuests";
+
+      public static const QUESTS_LIST_FUTURE_NOACTIONS:String = "#quests:quests/list/future/noActions";
 
       public static const QUESTS_LIST_CLICKCHECKBOX:String = "#quests:quests/list/clickCheckbox";
 
@@ -151,6 +161,10 @@ package
 
       public static const ITEM_TIMER_TILLFINISH_LONGFORMAT:String = "#quests:item/timer/tillFinish/longFormat";
 
+      public static const ITEM_TIMER_TILLFINISH_ONLYHOURS:String = "#quests:item/timer/tillFinish/onlyHours";
+
+      public static const ITEM_TIMER_TILLFINISH_LESSTHANHOUR:String = "#quests:item/timer/tillFinish/lessThanHour";
+
       public static const ITEM_TIMER_TILLFINISH_SHORTFORMAT:String = "#quests:item/timer/tillFinish/shortFormat";
 
       public static const DETAILS_HEADER_INFO_TITLE:String = "#quests:details/header/info/title";
@@ -174,6 +188,12 @@ package
       public static const DETAILS_HEADER_ACTIVEDURATIONDAYS:String = "#quests:details/header/activeDurationDays";
 
       public static const DETAILS_HEADER_ACTIVEDURATIONDAYSTIMES:String = "#quests:details/header/activeDurationDaysTimes";
+
+      public static const DETAILS_HEADER_SCHEDULEDAYS:String = "#quests:details/header/scheduleDays";
+
+      public static const DETAILS_HEADER_SCHEDULETIMES:String = "#quests:details/header/scheduleTimes";
+
+      public static const DETAILS_HEADER_SCHEDULEDAYSTIMES:String = "#quests:details/header/scheduleDaysTimes";
 
       public static const DETAILS_HEADER_HASNOVEHICLES:String = "#quests:details/header/hasNoVehicles";
 
@@ -281,39 +301,71 @@ package
 
       public static const DETAILS_REQUIREMENTS_VEHICLESUNLOCKED:String = "#quests:details/requirements/vehiclesUnlocked";
 
+      public static const DETAILS_REQUIREMENTS_VEHICLESUNLOCKED_NOT:String = "#quests:details/requirements/vehiclesUnlocked/not";
+
       public static const DETAILS_REQUIREMENTS_VEHICLESUNLOCKED_ALL:String = "#quests:details/requirements/vehiclesUnlocked/all";
 
       public static const DETAILS_REQUIREMENTS_VEHICLESUNLOCKED_NATION:String = "#quests:details/requirements/vehiclesUnlocked/nation";
 
+      public static const DETAILS_REQUIREMENTS_VEHICLESUNLOCKED_NATION_NOT:String = "#quests:details/requirements/vehiclesUnlocked/nation/not";
+
       public static const DETAILS_REQUIREMENTS_VEHICLESUNLOCKED_TYPE:String = "#quests:details/requirements/vehiclesUnlocked/type";
+
+      public static const DETAILS_REQUIREMENTS_VEHICLESUNLOCKED_TYPE_NOT:String = "#quests:details/requirements/vehiclesUnlocked/type/not";
 
       public static const DETAILS_REQUIREMENTS_VEHICLESUNLOCKED_LEVEL:String = "#quests:details/requirements/vehiclesUnlocked/level";
 
+      public static const DETAILS_REQUIREMENTS_VEHICLESUNLOCKED_LEVEL_NOT:String = "#quests:details/requirements/vehiclesUnlocked/level/not";
+
       public static const DETAILS_REQUIREMENTS_VEHICLESUNLOCKED_NATION_TYPE:String = "#quests:details/requirements/vehiclesUnlocked/nation_type";
+
+      public static const DETAILS_REQUIREMENTS_VEHICLESUNLOCKED_NATION_TYPE_NOT:String = "#quests:details/requirements/vehiclesUnlocked/nation_type/not";
 
       public static const DETAILS_REQUIREMENTS_VEHICLESUNLOCKED_NATION_LEVEL:String = "#quests:details/requirements/vehiclesUnlocked/nation_level";
 
+      public static const DETAILS_REQUIREMENTS_VEHICLESUNLOCKED_NATION_LEVEL_NOT:String = "#quests:details/requirements/vehiclesUnlocked/nation_level/not";
+
       public static const DETAILS_REQUIREMENTS_VEHICLESUNLOCKED_TYPE_LEVEL:String = "#quests:details/requirements/vehiclesUnlocked/type_level";
+
+      public static const DETAILS_REQUIREMENTS_VEHICLESUNLOCKED_TYPE_LEVEL_NOT:String = "#quests:details/requirements/vehiclesUnlocked/type_level/not";
 
       public static const DETAILS_REQUIREMENTS_VEHICLESUNLOCKED_NATION_TYPE_LEVEL:String = "#quests:details/requirements/vehiclesUnlocked/nation_type_level";
 
+      public static const DETAILS_REQUIREMENTS_VEHICLESUNLOCKED_NATION_TYPE_LEVEL_NOT:String = "#quests:details/requirements/vehiclesUnlocked/nation_type_level/not";
+
       public static const DETAILS_REQUIREMENTS_VEHICLESOWNED:String = "#quests:details/requirements/vehiclesOwned";
+
+      public static const DETAILS_REQUIREMENTS_VEHICLESOWNED_NOT:String = "#quests:details/requirements/vehiclesOwned/not";
 
       public static const DETAILS_REQUIREMENTS_VEHICLESOWNED_ALL:String = "#quests:details/requirements/vehiclesOwned/all";
 
       public static const DETAILS_REQUIREMENTS_VEHICLESOWNED_NATION:String = "#quests:details/requirements/vehiclesOwned/nation";
 
+      public static const DETAILS_REQUIREMENTS_VEHICLESOWNED_NATION_NOT:String = "#quests:details/requirements/vehiclesOwned/nation/not";
+
       public static const DETAILS_REQUIREMENTS_VEHICLESOWNED_TYPE:String = "#quests:details/requirements/vehiclesOwned/type";
+
+      public static const DETAILS_REQUIREMENTS_VEHICLESOWNED_TYPE_NOT:String = "#quests:details/requirements/vehiclesOwned/type/not";
 
       public static const DETAILS_REQUIREMENTS_VEHICLESOWNED_LEVEL:String = "#quests:details/requirements/vehiclesOwned/level";
 
+      public static const DETAILS_REQUIREMENTS_VEHICLESOWNED_LEVEL_NOT:String = "#quests:details/requirements/vehiclesOwned/level/not";
+
       public static const DETAILS_REQUIREMENTS_VEHICLESOWNED_NATION_TYPE:String = "#quests:details/requirements/vehiclesOwned/nation_type";
+
+      public static const DETAILS_REQUIREMENTS_VEHICLESOWNED_NATION_TYPE_NOT:String = "#quests:details/requirements/vehiclesOwned/nation_type/not";
 
       public static const DETAILS_REQUIREMENTS_VEHICLESOWNED_NATION_LEVEL:String = "#quests:details/requirements/vehiclesOwned/nation_level";
 
+      public static const DETAILS_REQUIREMENTS_VEHICLESOWNED_NATION_LEVEL_NOT:String = "#quests:details/requirements/vehiclesOwned/nation_level/not";
+
       public static const DETAILS_REQUIREMENTS_VEHICLESOWNED_TYPE_LEVEL:String = "#quests:details/requirements/vehiclesOwned/type_level";
 
+      public static const DETAILS_REQUIREMENTS_VEHICLESOWNED_TYPE_LEVEL_NOT:String = "#quests:details/requirements/vehiclesOwned/type_level/not";
+
       public static const DETAILS_REQUIREMENTS_VEHICLESOWNED_NATION_TYPE_LEVEL:String = "#quests:details/requirements/vehiclesOwned/nation_type_level";
+
+      public static const DETAILS_REQUIREMENTS_VEHICLESOWNED_NATION_TYPE_LEVEL_NOT:String = "#quests:details/requirements/vehiclesOwned/nation_type_level/not";
 
       public static const DETAILS_REQUIREMENTS_VEHICLE_RECEIVEDMULTXP:String = "#quests:details/requirements/vehicle/receivedMultXp";
 
@@ -339,7 +391,11 @@ package
 
       public static const DETAILS_CONDITIONS_MAP:String = "#quests:details/conditions/map";
 
+      public static const DETAILS_CONDITIONS_MAP_NOT:String = "#quests:details/conditions/map/not";
+
       public static const DETAILS_CONDITIONS_MAPS:String = "#quests:details/conditions/maps";
+
+      public static const DETAILS_CONDITIONS_MAPS_NOT:String = "#quests:details/conditions/maps/not";
 
       public static const DETAILS_CONDITIONS_MAPSTYPE:String = "#quests:details/conditions/mapsType";
 
@@ -355,25 +411,71 @@ package
 
       public static const DETAILS_CONDITIONS_FORMATION_CLAN:String = "#quests:details/conditions/formation/clan";
 
+      public static const DETAILS_CONDITIONS_HISTORICALBATTLES:String = "#quests:details/conditions/historicalBattles";
+
       public static const DETAILS_CONDITIONS_BATTLES:String = "#quests:details/conditions/battles";
 
       public static const DETAILS_CONDITIONS_BATTLESINROW:String = "#quests:details/conditions/battlesInRow";
 
       public static const DETAILS_CONDITIONS_ACHIEVEMENTS:String = "#quests:details/conditions/achievements";
 
+      public static const DETAILS_CONDITIONS_ACHIEVEMENTS_NOT:String = "#quests:details/conditions/achievements/not";
+
+      public static const DETAILS_CONDITIONS_CLANKILLS:String = "#quests:details/conditions/clanKills";
+
+      public static const DETAILS_CONDITIONS_CLANKILLS_NOT:String = "#quests:details/conditions/clanKills/not";
+
+      public static const DETAILS_CONDITIONS_CLANKILLS_CAMO_RED:String = "#quests:details/conditions/clanKills/camo/red";
+
+      public static const DETAILS_CONDITIONS_CLANKILLS_CAMO_SILVER:String = "#quests:details/conditions/clanKills/camo/silver";
+
+      public static const DETAILS_CONDITIONS_CLANKILLS_CAMO_GOLD:String = "#quests:details/conditions/clanKills/camo/gold";
+
+      public static const DETAILS_CONDITIONS_CLANKILLS_CAMO_BLACK:String = "#quests:details/conditions/clanKills/camo/black";
+
+      public static const DETAILS_CONDITIONS_ONEACHIEVEMENT:String = "#quests:details/conditions/oneAchievement";
+
+      public static const DETAILS_CONDITIONS_ONEACHIEVEMENT_NOT:String = "#quests:details/conditions/oneAchievement/not";
+
       public static const DETAILS_CONDITIONS_WIN:String = "#quests:details/conditions/win";
 
+      public static const DETAILS_CONDITIONS_NOTWIN:String = "#quests:details/conditions/notWin";
+
       public static const DETAILS_CONDITIONS_SURVIVE:String = "#quests:details/conditions/survive";
+
+      public static const DETAILS_CONDITIONS_NOTSURVIVE:String = "#quests:details/conditions/notSurvive";
 
       public static const DETAILS_CONDITIONS_RESULTS_SINGLE_SIMPLE:String = "#quests:details/conditions/results/single/simple";
 
       public static const DETAILS_CONDITIONS_RESULTS_SINGLE_AVG:String = "#quests:details/conditions/results/single/avg";
 
-      public static const DETAILS_CONDITIONS_RESULTS_SINGLE_HALFTEAM:String = "#quests:details/conditions/results/single/halfTeam";
+      public static const DETAILS_CONDITIONS_RESULTS_SINGLE_HALFTEAM_TOP:String = "#quests:details/conditions/results/single/halfTeam/top";
 
-      public static const DETAILS_CONDITIONS_RESULTS_SINGLE_BOTHTEAMS:String = "#quests:details/conditions/results/single/bothTeams";
+      public static const DETAILS_CONDITIONS_RESULTS_SINGLE_HALFTEAM_TOP_NOT:String = "#quests:details/conditions/results/single/halfTeam/top/not";
+
+      public static const DETAILS_CONDITIONS_RESULTS_SINGLE_BOTHTEAMS_TOP:String = "#quests:details/conditions/results/single/bothTeams/top";
+
+      public static const DETAILS_CONDITIONS_RESULTS_SINGLE_BOTHTEAMS_TOP_NOT:String = "#quests:details/conditions/results/single/bothTeams/top/not";
+
+      public static const DETAILS_CONDITIONS_RESULTS_SINGLE_HALFTEAM_RANGE:String = "#quests:details/conditions/results/single/halfTeam/range";
+
+      public static const DETAILS_CONDITIONS_RESULTS_SINGLE_HALFTEAM_RANGE_NOT:String = "#quests:details/conditions/results/single/halfTeam/range/not";
+
+      public static const DETAILS_CONDITIONS_RESULTS_SINGLE_BOTHTEAMS_RANGE:String = "#quests:details/conditions/results/single/bothTeams/range";
+
+      public static const DETAILS_CONDITIONS_RESULTS_SINGLE_BOTHTEAMS_RANGE_NOT:String = "#quests:details/conditions/results/single/bothTeams/range/not";
+
+      public static const DETAILS_CONDITIONS_RESULTS_SINGLE_HALFTEAM_POSITION:String = "#quests:details/conditions/results/single/halfTeam/position";
+
+      public static const DETAILS_CONDITIONS_RESULTS_SINGLE_HALFTEAM_POSITION_NOT:String = "#quests:details/conditions/results/single/halfTeam/position/not";
+
+      public static const DETAILS_CONDITIONS_RESULTS_SINGLE_BOTHTEAMS_POSITION:String = "#quests:details/conditions/results/single/bothTeams/position";
+
+      public static const DETAILS_CONDITIONS_RESULTS_SINGLE_BOTHTEAMS_POSITION_NOT:String = "#quests:details/conditions/results/single/bothTeams/position/not";
 
       public static const DETAILS_CONDITIONS_RESULTS_UNIT_ALIVE:String = "#quests:details/conditions/results/unit/alive";
+
+      public static const DETAILS_CONDITIONS_RESULTS_UNIT_ALIVE_NOT:String = "#quests:details/conditions/results/unit/alive/not";
 
       public static const DETAILS_CONDITIONS_RESULTS_UNIT_SIMPLE:String = "#quests:details/conditions/results/unit/simple";
 
@@ -385,21 +487,37 @@ package
 
       public static const DETAILS_CONDITIONS_VEHICLESKILLS:String = "#quests:details/conditions/vehiclesKills";
 
+      public static const DETAILS_CONDITIONS_VEHICLESKILLS_NOT:String = "#quests:details/conditions/vehiclesKills/not";
+
       public static const DETAILS_CONDITIONS_VEHICLESKILLS_ALL:String = "#quests:details/conditions/vehiclesKills/all";
 
       public static const DETAILS_CONDITIONS_VEHICLESKILLS_NATION:String = "#quests:details/conditions/vehiclesKills/nation";
 
+      public static const DETAILS_CONDITIONS_VEHICLESKILLS_NATION_NOT:String = "#quests:details/conditions/vehiclesKills/nation/not";
+
       public static const DETAILS_CONDITIONS_VEHICLESKILLS_TYPE:String = "#quests:details/conditions/vehiclesKills/type";
+
+      public static const DETAILS_CONDITIONS_VEHICLESKILLS_TYPE_NOT:String = "#quests:details/conditions/vehiclesKills/type/not";
 
       public static const DETAILS_CONDITIONS_VEHICLESKILLS_LEVEL:String = "#quests:details/conditions/vehiclesKills/level";
 
+      public static const DETAILS_CONDITIONS_VEHICLESKILLS_LEVEL_NOT:String = "#quests:details/conditions/vehiclesKills/level/not";
+
       public static const DETAILS_CONDITIONS_VEHICLESKILLS_NATION_TYPE:String = "#quests:details/conditions/vehiclesKills/nation_type";
+
+      public static const DETAILS_CONDITIONS_VEHICLESKILLS_NATION_TYPE_NOT:String = "#quests:details/conditions/vehiclesKills/nation_type/not";
 
       public static const DETAILS_CONDITIONS_VEHICLESKILLS_NATION_LEVEL:String = "#quests:details/conditions/vehiclesKills/nation_level";
 
+      public static const DETAILS_CONDITIONS_VEHICLESKILLS_NATION_LEVEL_NOT:String = "#quests:details/conditions/vehiclesKills/nation_level/not";
+
       public static const DETAILS_CONDITIONS_VEHICLESKILLS_TYPE_LEVEL:String = "#quests:details/conditions/vehiclesKills/type_level";
 
+      public static const DETAILS_CONDITIONS_VEHICLESKILLS_TYPE_LEVEL_NOT:String = "#quests:details/conditions/vehiclesKills/type_level/not";
+
       public static const DETAILS_CONDITIONS_VEHICLESKILLS_NATION_TYPE_LEVEL:String = "#quests:details/conditions/vehiclesKills/nation_type_level";
+
+      public static const DETAILS_CONDITIONS_VEHICLESKILLS_NATION_TYPE_LEVEL_NOT:String = "#quests:details/conditions/vehiclesKills/nation_type_level/not";
 
       public static const DETAILS_CONDITIONS_GROUPBY_NATION:String = "#quests:details/conditions/groupBy/nation";
 
@@ -419,13 +537,13 @@ package
 
       public static const DETAILS_CONDITIONS_CUMULATIVE_XP:String = "#quests:details/conditions/cumulative/xp";
 
-      public static const DETAILS_CONDITIONS_CUMULATIVE_HITS:String = "#quests:details/conditions/cumulative/hits";
+      public static const DETAILS_CONDITIONS_CUMULATIVE_DIRECTHITS:String = "#quests:details/conditions/cumulative/directHits";
 
-      public static const DETAILS_CONDITIONS_CUMULATIVE_THITS:String = "#quests:details/conditions/cumulative/thits";
+      public static const DETAILS_CONDITIONS_CUMULATIVE_DIRECTTEAMHITS:String = "#quests:details/conditions/cumulative/directTeamHits";
 
-      public static const DETAILS_CONDITIONS_CUMULATIVE_HE_HITS:String = "#quests:details/conditions/cumulative/he_hits";
+      public static const DETAILS_CONDITIONS_CUMULATIVE_EXPLOSIONHITS:String = "#quests:details/conditions/cumulative/explosionHits";
 
-      public static const DETAILS_CONDITIONS_CUMULATIVE_PIERCED:String = "#quests:details/conditions/cumulative/pierced";
+      public static const DETAILS_CONDITIONS_CUMULATIVE_PIERCINGS:String = "#quests:details/conditions/cumulative/piercings";
 
       public static const DETAILS_CONDITIONS_CUMULATIVE_SHOTS:String = "#quests:details/conditions/cumulative/shots";
 
@@ -437,13 +555,13 @@ package
 
       public static const DETAILS_CONDITIONS_CUMULATIVE_DAMAGERECEIVED:String = "#quests:details/conditions/cumulative/damageReceived";
 
-      public static const DETAILS_CONDITIONS_CUMULATIVE_SHOTSRECEIVED:String = "#quests:details/conditions/cumulative/shotsReceived";
+      public static const DETAILS_CONDITIONS_CUMULATIVE_DIRECTHITSRECEIVED:String = "#quests:details/conditions/cumulative/directHitsReceived";
 
-      public static const DETAILS_CONDITIONS_CUMULATIVE_NODAMAGESHOTSRECEIVED:String = "#quests:details/conditions/cumulative/noDamageShotsReceived";
+      public static const DETAILS_CONDITIONS_CUMULATIVE_NODAMAGEDIRECTHITSRECEIVED:String = "#quests:details/conditions/cumulative/noDamageDirectHitsReceived";
 
-      public static const DETAILS_CONDITIONS_CUMULATIVE_HEHITSRECEIVED:String = "#quests:details/conditions/cumulative/heHitsReceived";
+      public static const DETAILS_CONDITIONS_CUMULATIVE_EXPLOSIONHITSRECEIVED:String = "#quests:details/conditions/cumulative/explosionHitsReceived";
 
-      public static const DETAILS_CONDITIONS_CUMULATIVE_PIERCEDRECEIVED:String = "#quests:details/conditions/cumulative/piercedReceived";
+      public static const DETAILS_CONDITIONS_CUMULATIVE_PIERCINGSRECEIVED:String = "#quests:details/conditions/cumulative/piercingsReceived";
 
       public static const DETAILS_CONDITIONS_CUMULATIVE_SPOTTED:String = "#quests:details/conditions/cumulative/spotted";
 
@@ -477,58 +595,6 @@ package
 
       public static const DETAILS_CONDITIONS_CUMULATIVE_DAMAGEASSISTEDRADIO:String = "#quests:details/conditions/cumulative/damageAssistedRadio";
 
-      public static const DETAILS_DOSSIER_XP:String = "#quests:details/dossier/xp";
-
-      public static const DETAILS_DOSSIER_MAXXP:String = "#quests:details/dossier/maxXP";
-
-      public static const DETAILS_DOSSIER_BATTLESCOUNT:String = "#quests:details/dossier/battlesCount";
-
-      public static const DETAILS_DOSSIER_WINS:String = "#quests:details/dossier/wins";
-
-      public static const DETAILS_DOSSIER_LOSSES:String = "#quests:details/dossier/losses";
-
-      public static const DETAILS_DOSSIER_SURVIVEDBATTLES:String = "#quests:details/dossier/survivedBattles";
-
-      public static const DETAILS_DOSSIER_LASTBATTLETIME:String = "#quests:details/dossier/lastBattleTime";
-
-      public static const DETAILS_DOSSIER_WINANDSURVIVED:String = "#quests:details/dossier/winAndSurvived";
-
-      public static const DETAILS_DOSSIER_BATTLEHEROES:String = "#quests:details/dossier/battleHeroes";
-
-      public static const DETAILS_DOSSIER_FRAGS:String = "#quests:details/dossier/frags";
-
-      public static const DETAILS_DOSSIER_MAXFRAGS:String = "#quests:details/dossier/maxFrags";
-
-      public static const DETAILS_DOSSIER_MAXDAMAGE:String = "#quests:details/dossier/maxDamage";
-
-      public static const DETAILS_DOSSIER_FRAGS8P:String = "#quests:details/dossier/frags8p";
-
-      public static const DETAILS_DOSSIER_FRAGSBEAST:String = "#quests:details/dossier/fragsBeast";
-
-      public static const DETAILS_DOSSIER_HITS:String = "#quests:details/dossier/hits";
-
-      public static const DETAILS_DOSSIER_SPOTTED:String = "#quests:details/dossier/spotted";
-
-      public static const DETAILS_DOSSIER_DAMAGEDEALT:String = "#quests:details/dossier/damageDealt";
-
-      public static const DETAILS_DOSSIER_DAMAGERECEIVED:String = "#quests:details/dossier/damageReceived";
-
-      public static const DETAILS_DOSSIER_DIRECTHITSRECEIVED:String = "#quests:details/dossier/directHitsReceived";
-
-      public static const DETAILS_DOSSIER_CAPTUREPOINTS:String = "#quests:details/dossier/capturePoints";
-
-      public static const DETAILS_DOSSIER_DROPPEDCAPTUREPOINTS:String = "#quests:details/dossier/droppedCapturePoints";
-
-      public static const DETAILS_DOSSIER_PIERCINGS:String = "#quests:details/dossier/piercings";
-
-      public static const DETAILS_DOSSIER_NODAMAGEDIRECTHITSRECEIVED:String = "#quests:details/dossier/noDamageDirectHitsReceived";
-
-      public static const DETAILS_DOSSIER_PIERCINGSRECEIVED:String = "#quests:details/dossier/piercingsReceived";
-
-      public static const DETAILS_DOSSIER_POTENTIALDAMAGERECEIVED:String = "#quests:details/dossier/potentialDamageReceived";
-
-      public static const DETAILS_DOSSIER_DAMAGEBLOCKEDBYARMOR:String = "#quests:details/dossier/damageBlockedByArmor";
-
       public static const DETAILS_DOSSIER_SNIPERSERIES:String = "#quests:details/dossier/sniperSeries";
 
       public static const DETAILS_DOSSIER_MAXSNIPERSERIES:String = "#quests:details/dossier/maxSniperSeries";
@@ -549,11 +615,7 @@ package
 
       public static const DETAILS_DOSSIER_MAXPIERCINGSERIES:String = "#quests:details/dossier/maxPiercingSeries";
 
-      public static const DETAILS_DOSSIER_ORIGINALXP:String = "#quests:details/dossier/originalXP";
-
-      public static const DETAILS_DOSSIER_DAMAGEASSISTEDTRACK:String = "#quests:details/dossier/damageAssistedTrack";
-
-      public static const DETAILS_DOSSIER_DAMAGEASSISTEDRADIO:String = "#quests:details/dossier/damageAssistedRadio";
+      public static const DETAILS_DOSSIER_MARKOFMASTERY:String = "#quests:details/dossier/markOfMastery";
 
       public static const DETAILS_DOSSIER_WARRIOR:String = "#quests:details/dossier/warrior";
 
@@ -677,6 +739,64 @@ package
 
       public static const DETAILS_DOSSIER_PATTONVALLEY:String = "#quests:details/dossier/pattonValley";
 
+      public static const DETAILS_DOSSIER_RANDOM_XP:String = "#quests:details/dossier/random/xp";
+
+      public static const DETAILS_DOSSIER_RANDOM_MAXXP:String = "#quests:details/dossier/random/maxXP";
+
+      public static const DETAILS_DOSSIER_RANDOM_BATTLESCOUNT:String = "#quests:details/dossier/random/battlesCount";
+
+      public static const DETAILS_DOSSIER_RANDOM_WINS:String = "#quests:details/dossier/random/wins";
+
+      public static const DETAILS_DOSSIER_RANDOM_LOSSES:String = "#quests:details/dossier/random/losses";
+
+      public static const DETAILS_DOSSIER_RANDOM_SURVIVEDBATTLES:String = "#quests:details/dossier/random/survivedBattles";
+
+      public static const DETAILS_DOSSIER_RANDOM_LASTBATTLETIME:String = "#quests:details/dossier/random/lastBattleTime";
+
+      public static const DETAILS_DOSSIER_RANDOM_WINANDSURVIVED:String = "#quests:details/dossier/random/winAndSurvived";
+
+      public static const DETAILS_DOSSIER_RANDOM_BATTLEHEROES:String = "#quests:details/dossier/random/battleHeroes";
+
+      public static const DETAILS_DOSSIER_RANDOM_FRAGS:String = "#quests:details/dossier/random/frags";
+
+      public static const DETAILS_DOSSIER_RANDOM_MAXFRAGS:String = "#quests:details/dossier/random/maxFrags";
+
+      public static const DETAILS_DOSSIER_RANDOM_MAXDAMAGE:String = "#quests:details/dossier/random/maxDamage";
+
+      public static const DETAILS_DOSSIER_RANDOM_FRAGS8P:String = "#quests:details/dossier/random/frags8p";
+
+      public static const DETAILS_DOSSIER_RANDOM_FRAGSBEAST:String = "#quests:details/dossier/random/fragsBeast";
+
+      public static const DETAILS_DOSSIER_RANDOM_DIRECTHITS:String = "#quests:details/dossier/random/directHits";
+
+      public static const DETAILS_DOSSIER_RANDOM_SPOTTED:String = "#quests:details/dossier/random/spotted";
+
+      public static const DETAILS_DOSSIER_RANDOM_DAMAGEDEALT:String = "#quests:details/dossier/random/damageDealt";
+
+      public static const DETAILS_DOSSIER_RANDOM_DAMAGERECEIVED:String = "#quests:details/dossier/random/damageReceived";
+
+      public static const DETAILS_DOSSIER_RANDOM_DIRECTHITSRECEIVED:String = "#quests:details/dossier/random/directHitsReceived";
+
+      public static const DETAILS_DOSSIER_RANDOM_CAPTUREPOINTS:String = "#quests:details/dossier/random/capturePoints";
+
+      public static const DETAILS_DOSSIER_RANDOM_DROPPEDCAPTUREPOINTS:String = "#quests:details/dossier/random/droppedCapturePoints";
+
+      public static const DETAILS_DOSSIER_RANDOM_PIERCINGS:String = "#quests:details/dossier/random/piercings";
+
+      public static const DETAILS_DOSSIER_RANDOM_NODAMAGEDIRECTHITSRECEIVED:String = "#quests:details/dossier/random/noDamageDirectHitsReceived";
+
+      public static const DETAILS_DOSSIER_RANDOM_PIERCINGSRECEIVED:String = "#quests:details/dossier/random/piercingsReceived";
+
+      public static const DETAILS_DOSSIER_RANDOM_POTENTIALDAMAGERECEIVED:String = "#quests:details/dossier/random/potentialDamageReceived";
+
+      public static const DETAILS_DOSSIER_RANDOM_DAMAGEBLOCKEDBYARMOR:String = "#quests:details/dossier/random/damageBlockedByArmor";
+
+      public static const DETAILS_DOSSIER_RANDOM_ORIGINALXP:String = "#quests:details/dossier/random/originalXP";
+
+      public static const DETAILS_DOSSIER_RANDOM_DAMAGEASSISTEDTRACK:String = "#quests:details/dossier/random/damageAssistedTrack";
+
+      public static const DETAILS_DOSSIER_RANDOM_DAMAGEASSISTEDRADIO:String = "#quests:details/dossier/random/damageAssistedRadio";
+
       public static const DETAILS_DOSSIER_COMPANY_XP:String = "#quests:details/dossier/company/xp";
 
       public static const DETAILS_DOSSIER_COMPANY_BATTLESCOUNT:String = "#quests:details/dossier/company/battlesCount";
@@ -703,6 +823,22 @@ package
 
       public static const DETAILS_DOSSIER_COMPANY_DROPPEDCAPTUREPOINTS:String = "#quests:details/dossier/company/droppedCapturePoints";
 
+      public static const DETAILS_DOSSIER_COMPANY_PIERCINGS:String = "#quests:details/dossier/company/piercings";
+
+      public static const DETAILS_DOSSIER_COMPANY_NODAMAGEDIRECTHITSRECEIVED:String = "#quests:details/dossier/company/noDamageDirectHitsReceived";
+
+      public static const DETAILS_DOSSIER_COMPANY_PIERCINGSRECEIVED:String = "#quests:details/dossier/company/piercingsReceived";
+
+      public static const DETAILS_DOSSIER_COMPANY_POTENTIALDAMAGERECEIVED:String = "#quests:details/dossier/company/potentialDamageReceived";
+
+      public static const DETAILS_DOSSIER_COMPANY_DAMAGEBLOCKEDBYARMOR:String = "#quests:details/dossier/company/damageBlockedByArmor";
+
+      public static const DETAILS_DOSSIER_COMPANY_ORIGINALXP:String = "#quests:details/dossier/company/originalXP";
+
+      public static const DETAILS_DOSSIER_COMPANY_DAMAGEASSISTEDTRACK:String = "#quests:details/dossier/company/damageAssistedTrack";
+
+      public static const DETAILS_DOSSIER_COMPANY_DAMAGEASSISTEDRADIO:String = "#quests:details/dossier/company/damageAssistedRadio";
+
       public static const DETAILS_DOSSIER_CLAN_XP:String = "#quests:details/dossier/clan/xp";
 
       public static const DETAILS_DOSSIER_CLAN_BATTLESCOUNT:String = "#quests:details/dossier/clan/battlesCount";
@@ -715,7 +851,7 @@ package
 
       public static const DETAILS_DOSSIER_CLAN_FRAGS:String = "#quests:details/dossier/clan/frags";
 
-      public static const DETAILS_DOSSIER_CLAN_HITS:String = "#quests:details/dossier/clan/hits";
+      public static const DETAILS_DOSSIER_CLAN_DIRECTHITS:String = "#quests:details/dossier/clan/directHits";
 
       public static const DETAILS_DOSSIER_CLAN_SPOTTED:String = "#quests:details/dossier/clan/spotted";
 
@@ -728,6 +864,106 @@ package
       public static const DETAILS_DOSSIER_CLAN_CAPTUREPOINTS:String = "#quests:details/dossier/clan/capturePoints";
 
       public static const DETAILS_DOSSIER_CLAN_DROPPEDCAPTUREPOINTS:String = "#quests:details/dossier/clan/droppedCapturePoints";
+
+      public static const DETAILS_DOSSIER_CLAN_PIERCINGS:String = "#quests:details/dossier/clan/piercings";
+
+      public static const DETAILS_DOSSIER_CLAN_NODAMAGEDIRECTHITSRECEIVED:String = "#quests:details/dossier/clan/noDamageDirectHitsReceived";
+
+      public static const DETAILS_DOSSIER_CLAN_PIERCINGSRECEIVED:String = "#quests:details/dossier/clan/piercingsReceived";
+
+      public static const DETAILS_DOSSIER_CLAN_POTENTIALDAMAGERECEIVED:String = "#quests:details/dossier/clan/potentialDamageReceived";
+
+      public static const DETAILS_DOSSIER_CLAN_DAMAGEBLOCKEDBYARMOR:String = "#quests:details/dossier/clan/damageBlockedByArmor";
+
+      public static const DETAILS_DOSSIER_CLAN_ORIGINALXP:String = "#quests:details/dossier/clan/originalXP";
+
+      public static const DETAILS_DOSSIER_CLAN_DAMAGEASSISTEDTRACK:String = "#quests:details/dossier/clan/damageAssistedTrack";
+
+      public static const DETAILS_DOSSIER_CLAN_DAMAGEASSISTEDRADIO:String = "#quests:details/dossier/clan/damageAssistedRadio";
+
+      public static const DETAILS_DOSSIER_HISTORICAL_XP:String = "#quests:details/dossier/historical/xp";
+
+      public static const DETAILS_DOSSIER_HISTORICAL_BATTLESCOUNT:String = "#quests:details/dossier/historical/battlesCount";
+
+      public static const DETAILS_DOSSIER_HISTORICAL_WINS:String = "#quests:details/dossier/historical/wins";
+
+      public static const DETAILS_DOSSIER_HISTORICAL_LOSSES:String = "#quests:details/dossier/historical/losses";
+
+      public static const DETAILS_DOSSIER_HISTORICAL_SURVIVEDBATTLES:String = "#quests:details/dossier/historical/survivedBattles";
+
+      public static const DETAILS_DOSSIER_HISTORICAL_FRAGS:String = "#quests:details/dossier/historical/frags";
+
+      public static const DETAILS_DOSSIER_HISTORICAL_DIRECTHITS:String = "#quests:details/dossier/historical/directHits";
+
+      public static const DETAILS_DOSSIER_HISTORICAL_SPOTTED:String = "#quests:details/dossier/historical/spotted";
+
+      public static const DETAILS_DOSSIER_HISTORICAL_DAMAGEDEALT:String = "#quests:details/dossier/historical/damageDealt";
+
+      public static const DETAILS_DOSSIER_HISTORICAL_MAXDAMAGE:String = "#quests:details/dossier/historical/maxDamage";
+
+      public static const DETAILS_DOSSIER_HISTORICAL_DAMAGERECEIVED:String = "#quests:details/dossier/historical/damageReceived";
+
+      public static const DETAILS_DOSSIER_HISTORICAL_CAPTUREPOINTS:String = "#quests:details/dossier/historical/capturePoints";
+
+      public static const DETAILS_DOSSIER_HISTORICAL_DROPPEDCAPTUREPOINTS:String = "#quests:details/dossier/historical/droppedCapturePoints";
+
+      public static const DETAILS_DOSSIER_HISTORICAL_PIERCINGS:String = "#quests:details/dossier/historical/piercings";
+
+      public static const DETAILS_DOSSIER_HISTORICAL_NODAMAGEDIRECTHITSRECEIVED:String = "#quests:details/dossier/historical/noDamageDirectHitsReceived";
+
+      public static const DETAILS_DOSSIER_HISTORICAL_PIERCINGSRECEIVED:String = "#quests:details/dossier/historical/piercingsReceived";
+
+      public static const DETAILS_DOSSIER_HISTORICAL_POTENTIALDAMAGERECEIVED:String = "#quests:details/dossier/historical/potentialDamageReceived";
+
+      public static const DETAILS_DOSSIER_HISTORICAL_DAMAGEBLOCKEDBYARMOR:String = "#quests:details/dossier/historical/damageBlockedByArmor";
+
+      public static const DETAILS_DOSSIER_HISTORICAL_ORIGINALXP:String = "#quests:details/dossier/historical/originalXP";
+
+      public static const DETAILS_DOSSIER_HISTORICAL_DAMAGEASSISTEDTRACK:String = "#quests:details/dossier/historical/damageAssistedTrack";
+
+      public static const DETAILS_DOSSIER_HISTORICAL_DAMAGEASSISTEDRADIO:String = "#quests:details/dossier/historical/damageAssistedRadio";
+
+      public static const DETAILS_DOSSIER_TEAM_XP:String = "#quests:details/dossier/team/xp";
+
+      public static const DETAILS_DOSSIER_TEAM_BATTLESCOUNT:String = "#quests:details/dossier/team/battlesCount";
+
+      public static const DETAILS_DOSSIER_TEAM_WINS:String = "#quests:details/dossier/team/wins";
+
+      public static const DETAILS_DOSSIER_TEAM_LOSSES:String = "#quests:details/dossier/team/losses";
+
+      public static const DETAILS_DOSSIER_TEAM_SURVIVEDBATTLES:String = "#quests:details/dossier/team/survivedBattles";
+
+      public static const DETAILS_DOSSIER_TEAM_FRAGS:String = "#quests:details/dossier/team/frags";
+
+      public static const DETAILS_DOSSIER_TEAM_DIRECTHITS:String = "#quests:details/dossier/team/directHits";
+
+      public static const DETAILS_DOSSIER_TEAM_SPOTTED:String = "#quests:details/dossier/team/spotted";
+
+      public static const DETAILS_DOSSIER_TEAM_DAMAGEDEALT:String = "#quests:details/dossier/team/damageDealt";
+
+      public static const DETAILS_DOSSIER_TEAM_MAXDAMAGE:String = "#quests:details/dossier/team/maxDamage";
+
+      public static const DETAILS_DOSSIER_TEAM_DAMAGERECEIVED:String = "#quests:details/dossier/team/damageReceived";
+
+      public static const DETAILS_DOSSIER_TEAM_CAPTUREPOINTS:String = "#quests:details/dossier/team/capturePoints";
+
+      public static const DETAILS_DOSSIER_TEAM_DROPPEDCAPTUREPOINTS:String = "#quests:details/dossier/team/droppedCapturePoints";
+
+      public static const DETAILS_DOSSIER_TEAM_PIERCINGS:String = "#quests:details/dossier/team/piercings";
+
+      public static const DETAILS_DOSSIER_TEAM_NODAMAGEDIRECTHITSRECEIVED:String = "#quests:details/dossier/team/noDamageDirectHitsReceived";
+
+      public static const DETAILS_DOSSIER_TEAM_PIERCINGSRECEIVED:String = "#quests:details/dossier/team/piercingsReceived";
+
+      public static const DETAILS_DOSSIER_TEAM_POTENTIALDAMAGERECEIVED:String = "#quests:details/dossier/team/potentialDamageReceived";
+
+      public static const DETAILS_DOSSIER_TEAM_DAMAGEBLOCKEDBYARMOR:String = "#quests:details/dossier/team/damageBlockedByArmor";
+
+      public static const DETAILS_DOSSIER_TEAM_ORIGINALXP:String = "#quests:details/dossier/team/originalXP";
+
+      public static const DETAILS_DOSSIER_TEAM_DAMAGEASSISTEDTRACK:String = "#quests:details/dossier/team/damageAssistedTrack";
+
+      public static const DETAILS_DOSSIER_TEAM_DAMAGEASSISTEDRADIO:String = "#quests:details/dossier/team/damageAssistedRadio";
 
       public static const DETAILS_MODIFIERS_TITLE_DISCOUNT:String = "#quests:details/modifiers/title/discount";
 

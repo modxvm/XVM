@@ -187,7 +187,7 @@ package net.wg.gui.cyberSport
                }
                else
                {
-                  setFocus(this.currentView as InteractiveObject);
+                  setFocus(lastFocusedElement);
                }
             }
          }

@@ -15,6 +15,8 @@ package net.wg.gui.lobby.questsWindow
 
       private static const BOTTOM_PADDING:int = 18;
 
+      private static const TITLE_PADDING:int = 3;
+
       public var lableTF:TextField;
 
       public var descrTF:TextField;
@@ -43,7 +45,7 @@ package net.wg.gui.lobby.questsWindow
          {
             this.lableTF.htmlText = this._title;
             this.descrTF.htmlText = this._descr;
-            this.descrTF.y = this._title?Math.round(this.lableTF.y + this.lableTF.textHeight + 3):this.lableTF.y;
+            this.descrTF.y = this._title?Math.round(this.lableTF.y + this.lableTF.textHeight + TITLE_PADDING):this.lableTF.y;
             _loc1_ = 0;
             if(this._descr)
             {

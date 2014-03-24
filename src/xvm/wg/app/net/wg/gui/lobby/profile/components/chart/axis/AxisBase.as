@@ -93,12 +93,26 @@ package net.wg.gui.lobby.profile.components.chart.axis
          return _loc2_;
       }
 
+      public function get pointClass() : Class {
+         return this._pointClass;
+      }
+
+      public function set pointClass(param1:Class) : void {
+         this._pointClass = param1;
+         invalidateData();
+      }
+
+      public function getData() : Object {
+         return this._dataProvider;
+      }
+
       override protected function onDispose() : void {
          var _loc1_:Object = null;
-         super.onDispose();
          this._dataProvider = null;
+         this.currentLayout.dispose();
          this.currentLayout = null;
          this.renderers = null;
+         this._pointClass = null;
          while(this._points.length > 0)
          {
             _loc1_ = this._points.splice(this._points.length-1,1)[0];
@@ -111,19 +125,7 @@ package net.wg.gui.lobby.profile.components.chart.axis
             }
             _loc1_ = null;
          }
-      }
-
-      public function get pointClass() : Class {
-         return this._pointClass;
-      }
-
-      public function set pointClass(param1:Class) : void {
-         this._pointClass = param1;
-         invalidateData();
-      }
-
-      public function getData() : Object {
-         return this._dataProvider;
+         super.onDispose();
       }
    }
 

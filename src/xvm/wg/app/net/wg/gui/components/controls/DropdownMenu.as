@@ -9,7 +9,6 @@ package net.wg.gui.components.controls
    import flash.utils.getDefinitionByName;
    import scaleform.clik.controls.CoreList;
    import scaleform.clik.events.ListEvent;
-   import scaleform.clik.managers.PopUpManager;
    import flash.events.Event;
    import flash.geom.Point;
    import scaleform.clik.controls.ScrollingList;
@@ -177,7 +176,7 @@ package net.wg.gui.components.controls
             _loc1_.labelFunction = _labelFunction;
             _loc1_.addEventListener(ListEvent.ITEM_CLICK,handleMenuItemClick,false,0,true);
             _dropdownRef = _loc1_;
-            PopUpManager.show(_loc1_,x + menuOffset.left,menuDirection == "down"?y + height + menuOffset.top:y - _dropdownRef.height + menuOffset.bottom,parent);
+            App.utils.popupMgr.show(_loc1_,x + menuOffset.left,menuDirection == "down"?y + height + menuOffset.top:y - _dropdownRef.height + menuOffset.bottom,parent);
          }
          stage.addEventListener(Event.RESIZE,this.updateDDPosition);
       }
@@ -259,7 +258,7 @@ package net.wg.gui.components.controls
 
       override protected function hideDropdown() : void {
          super.hideDropdown();
-         stage.removeEventListener(Event.RESIZE,this.updateDDPosition);
+         App.stage.removeEventListener(Event.RESIZE,this.updateDDPosition);
       }
 
       protected function updateDDPosition(param1:Event) : void {

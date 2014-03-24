@@ -107,6 +107,7 @@ package net.wg.gui.components.controls.achievements
       }
 
       private function adjustRepeatableType(param1:String, param2:Number, param3:Number) : void {
+         var _loc4_:* = false;
          switch(param1)
          {
             case AchievementSection.SPECIAL:
@@ -122,7 +123,15 @@ package net.wg.gui.components.controls.achievements
                }
                break;
             case AchievementSection.ACTION:
-               this.checkReceived(param2,AchievementCounter.RED);
+               _loc4_ = getDataOwnValue(data,"hasCounter",false);
+               if(_loc4_)
+               {
+                  this.checkReceived(param2,AchievementCounter.RED);
+               }
+               else
+               {
+                  this.checkReceived(param2,AchievementCounter.NONE);
+               }
                hideProgress();
                break;
             default:

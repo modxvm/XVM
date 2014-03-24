@@ -19,7 +19,7 @@ package net.wg.gui.lobby.profile.components
          {
             if(this._value)
             {
-               _loc2_ = {"value":"<b>" + this._value + "</b>"};
+               _loc2_ = {"value_0":"<b>" + this._value + "</b>"};
             }
             App.toolTipMgr.showComplexWithParams(tooltip,new ToolTipParams({},_loc2_));
          }

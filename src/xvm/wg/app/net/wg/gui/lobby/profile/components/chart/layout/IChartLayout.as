@@ -1,8 +1,9 @@
 package net.wg.gui.lobby.profile.components.chart.layout
 {
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
 
 
-   public interface IChartLayout
+   public interface IChartLayout extends IDisposable
    {
           
       function set gap(param1:Number) : void;

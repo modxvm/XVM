@@ -61,10 +61,6 @@ package net.wg.gui.tutorial
           
       }
 
-      public function as_setTeamValues(param1:Object) : void {
-          
-      }
-
       public function as_setTip(param1:String) : void {
           
       }
@@ -74,6 +70,30 @@ package net.wg.gui.tutorial
       }
 
       public function as_setBattleTypeFrameName(param1:String) : void {
+          
+      }
+
+      public function as_setPlayerData(param1:Number, param2:Number) : void {
+          
+      }
+
+      public function as_setVehiclesData(param1:Boolean, param2:Array) : void {
+          
+      }
+
+      public function as_addVehicleInfo(param1:Boolean, param2:Object, param3:Array) : void {
+          
+      }
+
+      public function as_updateVehicleInfo(param1:Boolean, param2:Object, param3:Array) : void {
+          
+      }
+
+      public function as_setVehicleStatus(param1:Boolean, param2:Number, param3:uint, param4:Array) : void {
+          
+      }
+
+      public function as_setPlayerStatus(param1:Boolean, param2:Number, param3:uint) : void {
           
       }
 

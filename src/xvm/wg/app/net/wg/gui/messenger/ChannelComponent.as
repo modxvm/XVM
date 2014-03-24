@@ -32,9 +32,11 @@ package net.wg.gui.messenger
 
       public var messageInput:TextInput = null;
 
-      private var _sendButton:SoundButtonEx = null;
+      public var sendButton:SoundButtonEx = null;
 
       private var _isJoined:Boolean = false;
+
+      private var needDispose:Boolean = true;
 
       public function getComponentForFocus() : InteractiveObject {
          return this.messageInput;
@@ -60,12 +62,17 @@ package net.wg.gui.messenger
          }
       }
 
-      public function get sendButton() : SoundButtonEx {
-         return this._sendButton;
+      public function get externalButton() : SoundButtonEx {
+         return this.sendButton;
       }
 
-      public function set sendButton(param1:SoundButtonEx) : void {
-         this._sendButton = param1;
+      public function set externalButton(param1:SoundButtonEx) : void {
+         if(!param1)
+         {
+            return;
+         }
+         this.needDispose = false;
+         this.sendButton = param1;
       }
 
       override protected function onPopulate() : void {
@@ -82,7 +89,7 @@ package net.wg.gui.messenger
       override protected function configUI() : void {
          super.configUI();
          var _loc1_:SmileyMap = new SmileyMap();
-         this._sendButton.addEventListener(ButtonEvent.CLICK,this.onSendBtnClick,false,0,true);
+         this.sendButton.addEventListener(ButtonEvent.CLICK,this.onSendBtnClick,false,0,true);
          this.messageInput.addEventListener(InputEvent.INPUT,this.handleTextInput);
          this.messageArea.autoScroll = true;
          this.messageArea.htmlText = "";
@@ -91,14 +98,18 @@ package net.wg.gui.messenger
          this.messageArea.textField.selectable = true;
          this.setFocusToInput();
          _loc1_.mapText(this.messageArea.textField);
-         this._sendButton.soundType = SoundTypes.NORMAL_BTN;
+         this.sendButton.soundType = SoundTypes.NORMAL_BTN;
       }
 
       override protected function onDispose() : void {
          super.onDispose();
-         this._sendButton.removeEventListener(ButtonEvent.CLICK,this.onSendBtnClick);
-         this._sendButton = null;
+         this.sendButton.removeEventListener(ButtonEvent.CLICK,this.onSendBtnClick);
+         if(this.needDispose)
+         {
+            this.sendButton.dispose();
+         }
          this.messageInput.removeEventListener(InputEvent.INPUT,this.handleTextInput);
+         this.messageInput.dispose();
          this.messageArea.dispose();
          if(this.messageAreaScrollBar)
          {
@@ -135,7 +146,7 @@ package net.wg.gui.messenger
 
       private function enableControls(param1:Boolean) : void {
          this.messageInput.enabled = param1;
-         this._sendButton.enabled = param1;
+         this.sendButton.enabled = param1;
       }
 
       private function doMessage() : void {

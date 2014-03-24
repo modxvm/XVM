@@ -124,7 +124,7 @@ package net.wg.infrastructure.managers.utils.impl
       }
 
       public function toUpperOrLowerCase(param1:String, param2:Boolean, param3:IStrCaseProperties=null) : String {
-         return changeStringCasing(param1,param2,param3);
+         return changeStringCasingS(param1,param2,param3);
       }
 
       public function getStrCaseProperties() : IStrCaseProperties {

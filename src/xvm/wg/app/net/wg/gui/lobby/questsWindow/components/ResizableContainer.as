@@ -6,6 +6,8 @@ package net.wg.gui.lobby.questsWindow.components
    import net.wg.gui.events.ResizableBlockEvent;
    import scaleform.clik.constants.InvalidationType;
    import flash.display.DisplayObject;
+   import net.wg.utils.IAssertable;
+   import net.wg.data.constants.Errors;
    import flash.events.Event;
 
 
@@ -17,6 +19,8 @@ package net.wg.gui.lobby.questsWindow.components
          super();
          this._blocks = new Vector.<IResizableContent>();
       }
+
+      private static const INV_AVAILABLE_HEIGHT:String = "invAvHeight";
 
       protected var _blocks:Vector.<IResizableContent> = null;
 
@@ -31,6 +35,8 @@ package net.wg.gui.lobby.questsWindow.components
       private var _verticalPadding:int = 0;
 
       private var _availableWidth:Number = 375;
+
+      private var _availableHeight:Number = NaN;
 
       private var _bottomPadding:int = 0;
 
@@ -128,6 +134,38 @@ package net.wg.gui.lobby.questsWindow.components
          {
             this.createBlocks();
          }
+         if((isInvalid(INV_AVAILABLE_HEIGHT)) && (this._availableHeight))
+         {
+            this.invalidateAvailableHeight();
+         }
+      }
+
+      private function invalidateAvailableHeight() : void {
+         var _loc4_:IResizableContent = null;
+         var _loc1_:* = -1;
+         this.totalBlocks = this._blocks.length;
+         var _loc2_:* = 0;
+         while(_loc2_ < this.totalBlocks)
+         {
+            if(this._availableHeight < Math.round(this._blocks[_loc2_].y + this._blocks[_loc2_].height))
+            {
+               _loc1_ = _loc2_;
+               break;
+            }
+            _loc2_++;
+         }
+         if(_loc1_ != -1)
+         {
+            while(this._blocks.length > _loc1_)
+            {
+               _loc4_ = this._blocks.pop();
+               _loc4_.dispose();
+               removeChild(_loc4_ as DisplayObject);
+            }
+         }
+         this.totalBlocks = this._blocks.length;
+         var _loc3_:Number = Math.round(this.totalBlocks > 0?this._blocks[this.totalBlocks-1].height + this._blocks[this.totalBlocks-1].y + this.bottomPadding:0);
+         setSize(this.width,_loc3_);
       }
 
       protected function clearBlocks() : void {
@@ -142,28 +180,19 @@ package net.wg.gui.lobby.questsWindow.components
       }
 
       protected function createBlocks() : void {
-         var _loc1_:* = 0;
-         var _loc2_:String = null;
+         var _loc2_:* = 0;
+         var _loc1_:IAssertable = App.utils.asserter;
          if((this._data) && (this._data.length))
          {
             this.totalBlocks = this._data.length;
             this.clearBlocks();
-            _loc1_ = 0;
-            while(_loc1_ < this.totalBlocks)
+            _loc2_ = 0;
+            while(_loc2_ < this.totalBlocks)
             {
-               if(this._data[_loc1_].hasOwnProperty("linkage"))
-               {
-                  this.addBlock(this._data[_loc1_]);
-               }
-               else
-               {
-                  DebugUtils.LOG_ERROR("data must have linkage",this._data[_loc1_]);
-                  for (_loc2_ in this._data[_loc1_])
-                  {
-                     DebugUtils.LOG_DEBUG(_loc2_,this._data[_loc1_][_loc2_]);
-                  }
-               }
-               _loc1_++;
+               _loc1_.assertNotNull(this._data[_loc2_],"ResizableContainer data element" + Errors.CANT_NULL);
+               _loc1_.assert(this._data[_loc2_].hasOwnProperty("linkage"),"Data must have linkage");
+               this.addBlock(this._data[_loc2_]);
+               _loc2_++;
             }
             this.layoutBlocks();
          }
@@ -203,6 +232,15 @@ package net.wg.gui.lobby.questsWindow.components
          {
             this.layoutBlocks();
          }
+      }
+
+      public function get availableHeight() : Number {
+         return this._availableHeight;
+      }
+
+      public function set availableHeight(param1:Number) : void {
+         this._availableHeight = param1;
+         invalidate(INV_AVAILABLE_HEIGHT);
       }
    }
 

@@ -8,6 +8,7 @@ package net.wg.gui.lobby.questsWindow.components
    import net.wg.gui.lobby.questsWindow.data.QuestVehicleRendererVO;
    import net.wg.data.VO.ProgressElementVO;
    import scaleform.clik.constants.InvalidationType;
+   import scaleform.clik.events.ComponentEvent;
 
 
    public class VehicleItemRenderer extends ListItemRenderer
@@ -67,7 +68,26 @@ package net.wg.gui.lobby.questsWindow.components
          var _loc2_:String = null;
          var _loc3_:String = null;
          var _loc4_:ProgressElementVO = null;
-         super.draw();
+         if(isInvalid(InvalidationType.STATE))
+         {
+            if(_newFrame)
+            {
+               gotoAndPlay(_newFrame);
+               if(_baseDisposed)
+               {
+                  return;
+               }
+               _newFrame = null;
+            }
+            if((focusIndicator) && (_newFocusIndicatorFrame))
+            {
+               focusIndicator.gotoAndPlay(_newFocusIndicatorFrame);
+               _newFocusIndicatorFrame = null;
+            }
+            updateAfterStateChange();
+            dispatchEvent(new ComponentEvent(ComponentEvent.STATE_CHANGE));
+            invalidate(InvalidationType.DATA,InvalidationType.SIZE);
+         }
          if(isInvalid(InvalidationType.DATA))
          {
             if(data)

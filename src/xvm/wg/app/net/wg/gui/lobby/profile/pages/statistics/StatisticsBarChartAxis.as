@@ -104,19 +104,23 @@ package net.wg.gui.lobby.profile.pages.statistics
 
       override protected function onDispose() : void {
          var _loc1_:Object = null;
+         this.background = null;
+         this.lineText.dispose();
+         this.lineText = null;
          while(_points.length > 0)
          {
             _loc1_ = _points.splice(_points.length-1,1)[0];
             try
             {
                _loc1_.dispose();
-               _loc1_.removeEventListener(SimpleLoader.LOADED,this.iconLoadingCompleteHandler);
             }
             catch(e:Error)
             {
             }
+            _loc1_.removeEventListener(SimpleLoader.LOADED,this.iconLoadingCompleteHandler);
             _loc1_ = null;
          }
+         super.onDispose();
       }
    }
 

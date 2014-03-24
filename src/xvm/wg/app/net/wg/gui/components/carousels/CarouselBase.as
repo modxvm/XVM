@@ -1,37 +1,35 @@
 package net.wg.gui.components.carousels
 {
    import scaleform.clik.controls.CoreList;
+   import net.wg.infrastructure.interfaces.entity.IDraggable;
    import flash.display.MovieClip;
    import scaleform.clik.controls.Button;
    import scaleform.clik.utils.Padding;
    import flash.events.MouseEvent;
    import scaleform.clik.events.ButtonEvent;
-   import flash.display.Stage;
-   import scaleform.gfx.MouseCursorEvent;
    import scaleform.clik.interfaces.IDataProvider;
    import flash.events.Event;
    import scaleform.clik.constants.InvalidationType;
+   import net.wg.data.constants.Cursors;
    import scaleform.clik.interfaces.IListItemRenderer;
    import flash.display.DisplayObject;
    import scaleform.clik.data.ListData;
    import scaleform.clik.core.UIComponent;
-   import net.wg.infrastructure.interfaces.IPersonalCaseItemRenderer;
    import scaleform.clik.motion.Tween;
-   import flash.utils.setInterval;
-   import flash.utils.clearInterval;
-   import net.wg.data.constants.Cursors;
-   import net.wg.infrastructure.interfaces.ICursor;
+   import flash.display.InteractiveObject;
+   import net.wg.data.constants.DragType;
 
 
-   public class CarouselBase extends CoreList
+   public class CarouselBase extends CoreList implements IDraggable
    {
           
       public function CarouselBase() {
          this._padding = new Padding(0);
-         this.lastCursor = Cursors.ARROW;
          super();
          this.visible = false;
       }
+
+      private static const SHOW_EMPTY_ITEMS:Boolean = false;
 
       public static const INIT_CAROUSEL:String = "initCarousel";
 
@@ -43,9 +41,13 @@ package net.wg.gui.components.carousels
 
       private static const SLIDE_TO_POS_ACCELERATOR:Number = 7;
 
-      private static const MAX_DRAG_ODDSET:Number = 100;
+      private static const MAX_DRAG_OFFSET:Number = 100;
 
       private static const MAX_DX:Number = 30;
+
+      private static const ARROW_LEFT:String = "left";
+
+      private static const ARROW_RIGHT:String = "right";
 
       public var margin:uint = 3;
 
@@ -67,15 +69,11 @@ package net.wg.gui.components.carousels
 
       public var shadow:MovieClip;
 
-      public var dragHitArea:MovieClip;
-
-      protected var isDragging:Boolean = false;
-
       protected var allowDrag:Boolean;
 
       protected var skippCall:Boolean = false;
 
-      protected var _currentFirstRenederer:uint = 0;
+      protected var _currentFirstRenderer:uint = 0;
 
       protected var isInitSize:Boolean = false;
 
@@ -83,32 +81,21 @@ package net.wg.gui.components.carousels
 
       private var _carouselType:String = "horizontal";
 
-      private var mouseIn:Boolean = false;
-
-      private var lastCursor:String;
-
       private var countFactor:int = 0;
 
-      private var draggingIntervalId:uint = 0;
+      private var slidingScheduled:Boolean = false;
 
-      private var slidingIntervalId:uint = 0;
+      private var arrowSlideScheduled:Boolean = false;
 
-      private var arrowSlideIntervaId:uint = 0;
-
-      private var courceFactor:Number = 0;
+      private var sourceFactor:Number = 0;
 
       private var slideSelfAcceleratorDynamic:Number = 7;
 
-      private var lastContenerXPos:Number = 0;
+      private var lastContainerXPos:Number = 0;
 
       private var lastDx:Number = 0;
 
-      private var isUpdated:Boolean = false;
-
-      private var showEmptyItems:Boolean = false;
-
       override protected function onDispose() : void {
-         super.onDispose();
          this.leftArrow.removeEventListener(MouseEvent.MOUSE_UP,this.arrowUp);
          this.rightArrow.removeEventListener(MouseEvent.MOUSE_UP,this.arrowUp);
          this.leftArrow.removeEventListener(ButtonEvent.PRESS,this.arrowPress);
@@ -117,11 +104,18 @@ package net.wg.gui.components.carousels
          this.rightArrow.removeEventListener(ButtonEvent.CLICK,this.arrowClick);
          this.leftArrow.removeEventListener(ButtonEvent.RELEASE_OUTSIDE,this.arrowRelease);
          this.rightArrow.removeEventListener(ButtonEvent.RELEASE_OUTSIDE,this.arrowRelease);
-         this.removeEventListener(MouseEvent.MOUSE_DOWN,this.startDragging);
-         var _loc1_:Stage = App.stage;
-         _loc1_.removeEventListener(MouseEvent.MOUSE_UP,this.stopDragging);
-         _loc1_.removeEventListener(MouseCursorEvent.CURSOR_CHANGE,this.onChangeCursorHandler);
-         _loc1_.removeEventListener(MouseEvent.MOUSE_MOVE,this.carouselMouseMoveHandler);
+         this.leftArrow.dispose();
+         this.leftArrow = null;
+         this.rightArrow.dispose();
+         this.rightArrow = null;
+         if((DRAG_ENABLE) && (initialized))
+         {
+            App.cursor.unRegisterDragging(this);
+         }
+         App.utils.scheduler.cancelTask(this.updateDragPosition);
+         this.startOrStopSlidingFn(false,null);
+         this.startOrStopInvokingArrowSlide(false);
+         super.onDispose();
       }
 
       override public function set dataProvider(param1:IDataProvider) : void {
@@ -169,7 +163,6 @@ package net.wg.gui.components.carousels
          }
          if((isInvalid(INIT_CAROUSEL)) && !(dataProvider == null) && dataProvider.length > 0)
          {
-            this.isUpdated = true;
             this.drawRenderers(dataProvider.length);
             this.drawLayout();
             this.refreshData();
@@ -182,25 +175,22 @@ package net.wg.gui.components.carousels
          this.rightArrow.width = 21;
          this.leftArrow.width = 21;
          this.shadow.visible = false;
+         this.shadow.mouseEnabled = false;
          this.shadow.tabEnabled = this.shadow.tabChildren = this.shadow.mouseChildren = this.shadow.mouseEnabled = false;
-         if(this.dragHitArea)
+         if(DRAG_ENABLE)
          {
-            this.addEventListener(MouseEvent.MOUSE_DOWN,this.startDragging);
+            App.cursor.registerDragging(this,Cursors.MOVE);
          }
-         if((this.leftArrow) && (this.rightArrow))
-         {
-            this.leftArrow.autoRepeat = true;
-            this.rightArrow.autoRepeat = true;
-            this.leftArrow.addEventListener(MouseEvent.MOUSE_UP,this.arrowUp);
-            this.rightArrow.addEventListener(MouseEvent.MOUSE_UP,this.arrowUp);
-            this.leftArrow.addEventListener(ButtonEvent.PRESS,this.arrowPress);
-            this.rightArrow.addEventListener(ButtonEvent.PRESS,this.arrowPress);
-            this.leftArrow.addEventListener(ButtonEvent.CLICK,this.arrowClick);
-            this.rightArrow.addEventListener(ButtonEvent.CLICK,this.arrowClick);
-            this.leftArrow.addEventListener(ButtonEvent.RELEASE_OUTSIDE,this.arrowRelease);
-            this.rightArrow.addEventListener(ButtonEvent.RELEASE_OUTSIDE,this.arrowRelease);
-         }
-         this.setCursorListeners();
+         this.leftArrow.autoRepeat = true;
+         this.rightArrow.autoRepeat = true;
+         this.leftArrow.addEventListener(MouseEvent.MOUSE_UP,this.arrowUp);
+         this.rightArrow.addEventListener(MouseEvent.MOUSE_UP,this.arrowUp);
+         this.leftArrow.addEventListener(ButtonEvent.PRESS,this.arrowPress);
+         this.rightArrow.addEventListener(ButtonEvent.PRESS,this.arrowPress);
+         this.leftArrow.addEventListener(ButtonEvent.CLICK,this.arrowClick);
+         this.rightArrow.addEventListener(ButtonEvent.CLICK,this.arrowClick);
+         this.leftArrow.addEventListener(ButtonEvent.RELEASE_OUTSIDE,this.arrowRelease);
+         this.rightArrow.addEventListener(ButtonEvent.RELEASE_OUTSIDE,this.arrowRelease);
       }
 
       override protected function drawRenderers(param1:Number) : void {
@@ -220,6 +210,7 @@ package net.wg.gui.components.carousels
             {
                break;
             }
+            this.tryToDisableHandCursorForRenderer(_loc4_);
             _renderers.push(_loc4_);
             container.addChild(_loc4_ as DisplayObject);
             _loc2_++;
@@ -250,26 +241,22 @@ package net.wg.gui.components.carousels
       override protected function drawLayout() : void {
          var _loc1_:uint = 0;
          var _loc2_:* = NaN;
-         var _loc3_:* = false;
-         var _loc4_:* = 0;
-         var _loc5_:uint = 0;
-         var _loc6_:IListItemRenderer = null;
+         var _loc3_:* = 0;
+         var _loc4_:uint = 0;
+         var _loc5_:IListItemRenderer = null;
          if(_renderers)
          {
             _loc1_ = _renderers.length;
             _loc2_ = this._padding.left + this._padding.right;
-            _loc3_ = isInvalid(InvalidationType.DATA);
+            _loc3_ = 0;
             _loc4_ = 0;
-            _loc5_ = 0;
-            while(_loc5_ < _loc1_)
+            while(_loc4_ < _loc1_)
             {
-               _loc6_ = getRendererAt(_loc5_);
-               this.updateRenderPosition(_loc6_,_loc5_,_loc4_,_loc2_);
-               _loc4_ = _loc6_.x;
-               if(_loc3_)
-               {
-               }
-               _loc5_++;
+               _loc5_ = getRendererAt(_loc4_);
+               this.tryToDisableHandCursorForRenderer(_loc5_);
+               this.updateRenderPosition(_loc5_,_loc4_,_loc3_,_loc2_);
+               _loc3_ = _loc5_.x;
+               _loc4_++;
             }
             if(!this.isInitSize)
             {
@@ -286,18 +273,17 @@ package net.wg.gui.components.carousels
          }
       }
 
+      private function tryToDisableHandCursorForRenderer(param1:IListItemRenderer) : void {
+         var _loc2_:Button = null;
+         if(param1  is  Button)
+         {
+            _loc2_ = Button(param1);
+            _loc2_.useHandCursor = _loc2_.buttonMode = false;
+         }
+      }
+
       override protected function calculateRendererTotal(param1:Number, param2:Number) : uint {
          return dataProvider.length;
-      }
-
-      protected function setCursorListeners() : void {
-         this.addEventListener(MouseEvent.MOUSE_OUT,this.mouseOutHandler);
-         this.addEventListener(MouseEvent.MOUSE_OVER,this.mouseOverHandler);
-      }
-
-      protected function removeCursorListeners() : void {
-         this.removeEventListener(MouseEvent.MOUSE_OUT,this.mouseOutHandler);
-         this.removeEventListener(MouseEvent.MOUSE_OVER,this.mouseOverHandler);
       }
 
       protected function getScopeWidth() : Number {
@@ -322,11 +308,11 @@ package net.wg.gui.components.carousels
             _loc5_ = getRendererAt(_loc4_);
             _loc6_ = _loc4_;
             _loc7_ = new ListData(_loc6_,itemToLabel(param1[_loc4_]),_selectedIndex == _loc6_);
-            _loc5_.enabled = _loc4_ >= _loc2_?false:true;
+            _loc5_.enabled = _loc4_ < _loc2_;
             _loc5_.setListData(_loc7_);
             _loc5_.setData(param1[_loc4_]);
             _loc5_.validateNow();
-            if(!this.showEmptyItems)
+            if(!SHOW_EMPTY_ITEMS)
             {
                UIComponent(_loc5_).visible = !(param1[_loc4_] == null);
             }
@@ -357,10 +343,10 @@ package net.wg.gui.components.carousels
       protected function initPosition() : void {
          this.isInitSize = true;
          container.x = this.getDefContainerPos();
-         this.renderersMask.x = this.dragHitArea.x = this.leftArrow.x + this.leftArrow.width;
-         this.renderersMask.y = this.dragHitArea.y = 0;
-         this.renderersMask.width = this.dragHitArea.width = this.countVisibleSlots * (this.slotImageWidth + this._padding.left + this._padding.right);
-         this.renderersMask.height = this.dragHitArea.height = this.slotImageHeight + 2;
+         this.renderersMask.x = this.leftArrow.x + this.leftArrow.width;
+         this.renderersMask.y = 0;
+         this.renderersMask.width = this.countVisibleSlots * (this.slotImageWidth + this._padding.left + this._padding.right);
+         this.renderersMask.height = this.slotImageHeight + 2;
          this.shadow.x = this.renderersMask.x;
          this.shadow.width = this.renderersMask.width;
          this.shadow.height = this.leftArrow.height;
@@ -397,7 +383,7 @@ package net.wg.gui.components.carousels
          }
          else
          {
-            if(this.currentFirstRenederer == 0)
+            if(this.currentFirstRenderer == 0)
             {
                this.enableLeftArrow(false);
                this.enableRightArrow(true);
@@ -406,7 +392,7 @@ package net.wg.gui.components.carousels
             }
             else
             {
-               if(this.currentFirstRenederer >= _loc1_ - this.countVisibleSlots)
+               if(this.currentFirstRenderer >= _loc1_ - this.countVisibleSlots)
                {
                   this.enableLeftArrow(true);
                   this.enableRightArrow(false);
@@ -439,35 +425,35 @@ package net.wg.gui.components.carousels
          }
       }
 
-      protected function get currentFirstRenederer() : uint {
-         return this._currentFirstRenederer;
+      private function get currentFirstRenderer() : uint {
+         return this._currentFirstRenderer;
       }
 
-      protected function set currentFirstRenederer(param1:uint) : void {
-         if(param1 == this._currentFirstRenederer)
+      private function set currentFirstRenderer(param1:uint) : void {
+         if(param1 == this._currentFirstRenderer)
          {
             return;
          }
-         this._currentFirstRenederer = param1;
+         this._currentFirstRenderer = param1;
          this.updateArrowsState();
       }
 
       override protected function handleMouseWheel(param1:MouseEvent) : void {
          if(_renderers.length > this.countVisibleSlots)
          {
-            this.startSlideByArrow(param1.delta > 0?"left":"right",false);
-            this.stopSlideByArrow(param1.delta > 0?"left":"right");
+            this.startSlideByArrow(param1.delta > 0?ARROW_LEFT:ARROW_RIGHT,false);
+            this.stopSlideByArrow(param1.delta > 0?ARROW_LEFT:ARROW_RIGHT);
          }
       }
 
       private function renderersMouseEnabled(param1:Boolean=false) : void {
-         var _loc2_:int = _renderers.length;
+         var _loc2_:int = _renderers?_renderers.length:0;
          var _loc3_:* = 0;
          while(_loc3_ < _loc2_)
          {
-            if(_renderers[_loc3_]  is  IPersonalCaseItemRenderer)
+            if(_renderers[_loc3_]  is  ICarouselItemRenderer)
             {
-               IPersonalCaseItemRenderer(_renderers[_loc3_]).canSelected = param1;
+               ICarouselItemRenderer(_renderers[_loc3_]).canBeSelected = param1;
                _loc3_++;
                continue;
             }
@@ -475,33 +461,45 @@ package net.wg.gui.components.carousels
          }
       }
 
-      private function updateDrugPosition(param1:DisplayObject, param2:Object) : void {
-         var _loc3_:* = NaN;
-         if(this.isDragging)
+      private function updateDragPosition(param1:DisplayObject, param2:Object) : void {
+         var _loc3_:Number = param2.scopeStartX + (param1.mouseX - param2.startMouseX);
+         if(_loc3_ > param2.scopeDefPosition + MAX_DRAG_OFFSET)
          {
-            _loc3_ = param2.scopeStartX + (param1.mouseX - param2.startMouseX);
-            if(_loc3_ > param2.scopeDefPosition + MAX_DRAG_ODDSET)
-            {
-               _loc3_ = param2.scopeDefPosition + MAX_DRAG_ODDSET;
-            }
-            else
-            {
-               if(_loc3_ < param2.scopeDefPosition - param2.allowDragDistance - MAX_DRAG_ODDSET)
-               {
-                  _loc3_ = param2.scopeDefPosition - param2.allowDragDistance - MAX_DRAG_ODDSET;
-               }
-            }
-            container.x = container.x + (_loc3_ - container.x) / DRAG_ACCELERATOR;
-            container.x = container.x ^ 0;
-            this.lastDx = container.x - this.lastContenerXPos;
-            this.lastContenerXPos = container.x;
+            _loc3_ = param2.scopeDefPosition + MAX_DRAG_OFFSET;
          }
+         else
+         {
+            if(_loc3_ < param2.scopeDefPosition - param2.allowDragDistance - MAX_DRAG_OFFSET)
+            {
+               _loc3_ = param2.scopeDefPosition - param2.allowDragDistance - MAX_DRAG_OFFSET;
+            }
+         }
+         container.x = container.x + (_loc3_ - container.x) / DRAG_ACCELERATOR;
+         container.x = container.x ^ 0;
+         this.lastDx = container.x - this.lastContainerXPos;
+         this.lastContainerXPos = container.x;
+         App.utils.scheduler.scheduleTask(this.updateDragPosition,30,this,param2);
+      }
+
+      private function startOrStopSlidingFn(param1:Boolean, param2:Object) : void {
+         if(param1)
+         {
+            App.utils.scheduler.scheduleTask(this.slidingFn,30,param2);
+         }
+         else
+         {
+            App.utils.scheduler.cancelTask(this.slidingFn);
+            this.renderersMouseEnabled(true);
+            this.lastDx = 0;
+         }
+         this.slidingScheduled = param1;
       }
 
       private function slidingFn(param1:Object) : void {
+         this.startOrStopSlidingFn(true,param1);
          var _loc2_:Number = container.x + this.lastDx;
          this.lastDx = this.lastDx + -this.lastDx / this.slideSelfAcceleratorDynamic;
-         this.currentFirstRenederer = this.getCurrentFirstRendererOnAnim();
+         this.currentFirstRenderer = this.getCurrentFirstRendererOnAnim();
          if(_loc2_ > param1.scopeDefPosition)
          {
             container.x = container.x + (param1.scopeDefPosition - container.x + this.lastDx) / SLIDE_TO_POS_ACCELERATOR;
@@ -509,8 +507,8 @@ package net.wg.gui.components.carousels
             if(container.x - param1.scopeDefPosition + this.lastDx < 1 && Math.abs(this.lastDx) < 1)
             {
                container.x = param1.scopeDefPosition;
-               this.clearSlidingIntervalId();
-               this.currentFirstRenederer = 0;
+               this.startOrStopSlidingFn(false,null);
+               this.currentFirstRenderer = 0;
             }
          }
          else
@@ -522,7 +520,7 @@ package net.wg.gui.components.carousels
                if(Math.abs(param1.scopeDefPosition - param1.allowDragDistance - container.x + this.lastDx) < 1 && Math.abs(this.lastDx) < 1)
                {
                   container.x = param1.scopeDefPosition - param1.allowDragDistance;
-                  this.clearSlidingIntervalId();
+                  this.startOrStopSlidingFn(false,null);
                }
             }
             else
@@ -531,7 +529,7 @@ package net.wg.gui.components.carousels
                if(Math.abs(this.lastDx) < 1)
                {
                   container.x = container.x ^ 0;
-                  this.clearSlidingIntervalId();
+                  this.startOrStopSlidingFn(false,null);
                   this.beginSlideToPos();
                }
             }
@@ -544,23 +542,23 @@ package net.wg.gui.components.carousels
       }
 
       private function slideToRenderer(param1:Number) : void {
-         this.currentFirstRenederer = param1;
+         this.currentFirstRenderer = param1;
          var _loc2_:Number = -param1 * this.getSlotWidth() + this.getDefContainerPos();
       }
 
       private function stopSlideByArrow(param1:String) : void {
-         var _loc2_:Number = -this.currentFirstRenederer * this.getSlotWidth() - (container.x - this.getDefContainerPos());
+         var _loc2_:Number = -this.currentFirstRenderer * this.getSlotWidth() - (container.x - this.getDefContainerPos());
          var _loc3_:Number = this._padding.left + this._padding.right + 10;
-         var _loc4_:Number = this.currentFirstRenederer;
-         if(param1 == "right" && _loc2_ > _loc3_)
+         var _loc4_:Number = this.currentFirstRenderer;
+         if(param1 == ARROW_RIGHT && _loc2_ > _loc3_)
          {
-            _loc4_ = this.currentFirstRenederer + Math.round(_loc2_ / this.getSlotWidth()) + 1;
+            _loc4_ = this.currentFirstRenderer + Math.round(_loc2_ / this.getSlotWidth()) + 1;
          }
          else
          {
-            if(param1 == "left" && _loc2_ < -_loc3_)
+            if(param1 == ARROW_LEFT && _loc2_ < -_loc3_)
             {
-               _loc4_ = this.currentFirstRenederer - Math.floor(-_loc2_ / this.getSlotWidth())-1;
+               _loc4_ = this.currentFirstRenderer - Math.floor(-_loc2_ / this.getSlotWidth())-1;
             }
          }
          if(_loc4_ < 0)
@@ -574,28 +572,28 @@ package net.wg.gui.components.carousels
                _loc4_ = _renderers.length - this.countVisibleSlots;
             }
          }
-         this.currentFirstRenederer = _loc4_;
-         this.courceFactor = 0;
+         this.currentFirstRenderer = _loc4_;
+         this.sourceFactor = 0;
       }
 
       private function startSlideByArrow(param1:String, param2:Boolean) : void {
-         this.clearSlidingIntervalId();
+         this.startOrStopSlidingFn(false,null);
          if(!this.skippCall)
          {
             this.skippCall = param2;
-            this.currentFirstRenederer = param1 == "left"?Math.max(0,this.currentFirstRenederer-1):Math.min(_renderers.length - this.countVisibleSlots,this.currentFirstRenederer + 1);
-            if(this.currentFirstRenederer == 0 || this.currentFirstRenederer == _renderers.length - this.countVisibleSlots)
+            this.currentFirstRenderer = param1 == ARROW_LEFT?Math.max(0,this.currentFirstRenderer-1):Math.min(_renderers.length - this.countVisibleSlots,this.currentFirstRenderer + 1);
+            if(this.currentFirstRenderer == 0 || this.currentFirstRenderer == _renderers.length - this.countVisibleSlots)
             {
-               this.courceFactor = 0;
+               this.sourceFactor = 0;
             }
             else
             {
-               this.courceFactor = param1 == "left"?1:-1;
+               this.sourceFactor = param1 == ARROW_LEFT?1:-1;
             }
-            if(this.arrowSlideIntervaId == 0 && (container))
+            if(!this.arrowSlideScheduled && (container))
             {
                this.slideSelfAcceleratorDynamic = SLIDE_SELF_ACCELERATOR;
-               this.arrowSlideIntervaId = setInterval(this.arrowSlide,30);
+               this.startOrStopInvokingArrowSlide(true);
             }
          }
          else
@@ -607,47 +605,52 @@ package net.wg.gui.components.carousels
       private function arrowSlide() : void {
          var _loc1_:* = NaN;
          var _loc2_:* = NaN;
-         this.lastDx = this.lastDx + (MAX_DX * this.courceFactor - this.lastDx) / SLIDE_SELF_ACCELERATOR;
-         if(this.courceFactor == 0)
+         this.startOrStopInvokingArrowSlide(true);
+         this.lastDx = this.lastDx + (MAX_DX * this.sourceFactor - this.lastDx) / SLIDE_SELF_ACCELERATOR;
+         if(this.sourceFactor == 0)
          {
             this.slideSelfAcceleratorDynamic = SLIDE_TO_POS_ACCELERATOR;
             this.lastDx = this.lastDx + -this.lastDx / this.slideSelfAcceleratorDynamic;
-            _loc1_ = this.getDefContainerPos() - this.currentFirstRenederer * this.getSlotWidth();
+            _loc1_ = this.getDefContainerPos() - this.currentFirstRenderer * this.getSlotWidth();
             _loc2_ = (_loc1_ - container.x) / SLIDE_SELF_ACCELERATOR + this.lastDx;
             _loc2_ = _loc2_ >= 0?Math.min(MAX_DX,_loc2_):-Math.min(-_loc2_,MAX_DX);
             container.x = container.x + _loc2_;
             if(Math.abs(container.x + this.lastDx - _loc1_) < 1)
             {
                container.x = _loc1_;
-               this.clearArrowSlide();
+               this.startOrStopInvokingArrowSlide(false);
             }
          }
          else
          {
             this.countFactor++;
             container.x = container.x + this.lastDx;
-            if(this.getCurrentFirstRendererOnAnim() == 0 && this.courceFactor == 1)
+            if(this.getCurrentFirstRendererOnAnim() == 0 && this.sourceFactor == 1)
             {
-               this.currentFirstRenederer = 0;
-               this.courceFactor = 0;
+               this.currentFirstRenderer = 0;
+               this.sourceFactor = 0;
             }
             else
             {
-               if(this.getCurrentFirstRendererOnAnim() == _renderers.length - this.countVisibleSlots && this.courceFactor == -1)
+               if(this.getCurrentFirstRendererOnAnim() == _renderers.length - this.countVisibleSlots && this.sourceFactor == -1)
                {
-                  this.currentFirstRenederer = _renderers.length - this.countVisibleSlots;
-                  this.courceFactor = 0;
+                  this.currentFirstRenderer = _renderers.length - this.countVisibleSlots;
+                  this.sourceFactor = 0;
                }
             }
          }
       }
 
-      private function clearArrowSlide() : void {
-         if(this.arrowSlideIntervaId)
+      private function startOrStopInvokingArrowSlide(param1:Boolean) : void {
+         if(param1)
          {
-            clearInterval(this.arrowSlideIntervaId);
-            this.arrowSlideIntervaId = 0;
+            App.utils.scheduler.scheduleTask(this.arrowSlide,30);
          }
+         else
+         {
+            App.utils.scheduler.cancelTask(this.arrowSlide);
+         }
+         this.arrowSlideScheduled = param1;
       }
 
       private function getCurrentFirstRendererOnAnim() : Number {
@@ -666,160 +669,74 @@ package net.wg.gui.components.carousels
          return _loc1_;
       }
 
-      private function clearSlidingIntervalId() : void {
-         if(this.slidingIntervalId)
-         {
-            this.renderersMouseEnabled(true);
-            clearInterval(this.slidingIntervalId);
-            this.slidingIntervalId = 0;
-            this.lastDx = 0;
-         }
-      }
-
-      private function carouselMouseMoveHandler(param1:MouseEvent) : void {
-         if(this.isDragging)
-         {
-            this.renderersMouseEnabled(false);
-            App.cursor.setCursor(Cursors.MOVE);
-         }
-      }
-
-      private function isMouseOnDragArea(param1:MouseEvent) : Boolean {
-         var _loc2_:Boolean = this.mouseX > this.dragHitArea.x && this.mouseX < this.dragHitArea.x + this.dragHitArea.width;
-         if(param1.target == this.leftArrow || param1.target == this.rightArrow || _loc2_ == false)
-         {
-            return false;
-         }
-         return true;
-      }
-
       private function arrowRelease(param1:ButtonEvent) : void {
-         this.stopSlideByArrow(param1.target == this.leftArrow?"left":"right");
+         this.stopSlideByArrow(param1.target == this.leftArrow?ARROW_LEFT:ARROW_RIGHT);
       }
 
       private function arrowClick(param1:ButtonEvent) : void {
-         this.startSlideByArrow(param1.target == this.leftArrow?"left":"right",false);
+         this.startSlideByArrow(param1.target == this.leftArrow?ARROW_LEFT:ARROW_RIGHT,false);
       }
 
       private function arrowPress(param1:ButtonEvent) : void {
-         this.startSlideByArrow(param1.target == this.leftArrow?"left":"right",true);
+         this.startSlideByArrow(param1.target == this.leftArrow?ARROW_LEFT:ARROW_RIGHT,true);
       }
 
       private function arrowUp(param1:MouseEvent) : void {
          param1.target.dispatchEvent(new ButtonEvent(ButtonEvent.RELEASE_OUTSIDE));
       }
 
-      private function startDragging(param1:MouseEvent) : void {
-         var _loc3_:Stage = null;
-         var _loc4_:Object = null;
-         var _loc2_:Boolean = this.mouseX > this.dragHitArea.x && this.mouseX < this.dragHitArea.x + this.dragHitArea.width;
-         if(param1.target == this.leftArrow || param1.target == this.rightArrow || _loc2_ == false)
-         {
-            return;
-         }
-         if((DRAG_ENABLE) && (this.allowDrag))
-         {
-            this.mouseIn = true;
-            if(App.cursor)
-            {
-               App.cursor.setCursor(Cursors.MOVE);
-            }
-            _loc3_ = App.stage;
-            _loc3_.addEventListener(MouseEvent.MOUSE_UP,this.stopDragging);
-            _loc3_.addEventListener(MouseCursorEvent.CURSOR_CHANGE,this.onChangeCursorHandler);
-            _loc3_.addEventListener(MouseEvent.MOUSE_MOVE,this.carouselMouseMoveHandler);
-            this.clearSlidingIntervalId();
-            if(!this.isDragging)
-            {
-               _loc4_ =
-                  {
-                     "scopeStartX":container.x,
-                     "startMouseX":mouseX,
-                     "allowDragDistance":this.getScopeWidth() - this.renderersMask.width,
-                     "scopeDefPosition":this.getDefContainerPos()
-                  }
-               ;
-               this.isDragging = true;
-               this.lastContenerXPos = container.x;
-               this.clearArrowSlide();
-               this.draggingIntervalId = setInterval(this.updateDrugPosition,30,this,_loc4_);
-            }
-         }
+      public function getHitArea() : InteractiveObject {
+         return container;
       }
 
-      private function onChangeCursorHandler(param1:MouseCursorEvent) : void {
-         this.lastCursor = param1.cursor;
-         param1.stopImmediatePropagation();
-      }
-
-      protected function mouseOverHandler(param1:MouseEvent) : void {
-         if(!this.isDragging)
+      public function onStartDrag() : void {
+         var _loc1_:Object = null;
+         if(this.allowDrag)
          {
-            if((this.isMouseOnDragArea(param1)) && (App.cursor))
-            {
-               App.cursor.setCursor(Cursors.DRAG_OPEN);
-            }
-            else
-            {
-               if(App.cursor)
+            this.startOrStopSlidingFn(false,null);
+            _loc1_ =
                {
-                  App.cursor.setCursor(Cursors.BUTTON);
-               }
-            }
-         }
-         else
-         {
-            App.cursor.setCursor(Cursors.MOVE);
-            App.stage.addEventListener(MouseEvent.MOUSE_MOVE,this.carouselMouseMoveHandler);
-         }
-      }
-
-      protected function stopDragging(param1:MouseEvent=null) : void {
-         var _loc4_:Object = null;
-         var _loc2_:Stage = App.stage;
-         _loc2_.removeEventListener(MouseEvent.MOUSE_UP,this.stopDragging);
-         _loc2_.removeEventListener(MouseCursorEvent.CURSOR_CHANGE,this.onChangeCursorHandler);
-         _loc2_.removeEventListener(MouseEvent.MOUSE_MOVE,this.carouselMouseMoveHandler);
-         clearInterval(this.draggingIntervalId);
-         this.slideSelfAcceleratorDynamic = SLIDE_SELF_ACCELERATOR;
-         if(this.slidingIntervalId == 0)
-         {
-            _loc4_ =
-               {
-                  "scopeDefPosition":this.getDefContainerPos(),
-                  "allowDragDistance":this.getScopeWidth() - this.renderersMask.width
+                  "scopeStartX":container.x,
+                  "startMouseX":mouseX,
+                  "allowDragDistance":this.getScopeWidth() - this.renderersMask.width,
+                  "scopeDefPosition":this.getDefContainerPos()
                }
             ;
-            this.slidingIntervalId = setInterval(this.slidingFn,30,_loc4_);
-         }
-         this.isDragging = false;
-         var _loc3_:ICursor = App.cursor;
-         if(!this.mouseIn)
-         {
-            _loc3_.setCursor(this.lastCursor);
-         }
-         else
-         {
-            if(_loc3_)
-            {
-               if(this.isMouseOnDragArea(param1))
-               {
-                  _loc3_.setCursor(Cursors.DRAG_OPEN);
-               }
-               else
-               {
-                  _loc3_.setCursor(Cursors.BUTTON);
-               }
-            }
+            this.lastContainerXPos = container.x;
+            this.startOrStopInvokingArrowSlide(false);
+            App.utils.scheduler.scheduleTask(this.updateDragPosition,30,this,_loc1_);
          }
       }
 
-      protected function mouseOutHandler(param1:MouseEvent) : void {
-         this.mouseIn = false;
-         if(!this.isDragging && (App.cursor))
+      public function onDragging(param1:Number, param2:Number) : void {
+         this.renderersMouseEnabled(false);
+      }
+
+      public function onEndDrag() : void {
+         var _loc1_:Object = null;
+         if(this.allowDrag)
          {
-            App.cursor.setCursor(Cursors.ARROW);
+            this.slideSelfAcceleratorDynamic = SLIDE_SELF_ACCELERATOR;
+            if(!this.slidingScheduled)
+            {
+               _loc1_ =
+                  {
+                     "scopeDefPosition":this.getDefContainerPos(),
+                     "allowDragDistance":this.getScopeWidth() - this.renderersMask.width
+                  }
+               ;
+               this.startOrStopSlidingFn(true,_loc1_);
+            }
          }
+         else
+         {
+            this.renderersMouseEnabled(true);
+         }
+         App.utils.scheduler.cancelTask(this.updateDragPosition);
+      }
+
+      public function getDragType() : String {
+         return DragType.SOFT;
       }
    }
 

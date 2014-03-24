@@ -50,8 +50,11 @@ package net.wg.gui.lobby.profile.components
       }
 
       public function set description(param1:String) : void {
-         this._description = param1;
-         invalidate(DESCRIPTION_TEXT_INVALID);
+         if(this._description != param1)
+         {
+            this._description = param1;
+            invalidate(DESCRIPTION_TEXT_INVALID);
+         }
       }
 
       override public function get width() : Number {
@@ -75,16 +78,16 @@ package net.wg.gui.lobby.profile.components
          }
       }
 
-      override protected function applyText() : void {
+      override protected function applyText(param1:String) : void {
          if(this._myEnabled)
          {
             gotoAndPlay("up");
-            super.applyText();
+            super.applyText(param1);
          }
          else
          {
             gotoAndPlay("disabled");
-            textComponent.text = "--";
+            super.applyText("--");
          }
          invalidateSize();
          invalidate(DESCRIPTION_TEXT_INVALID);

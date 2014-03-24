@@ -2,7 +2,6 @@ package net.wg.gui.components.common.waiting
 {
    import scaleform.clik.core.UIComponent;
    import flash.text.TextField;
-   import flash.events.Event;
 
 
    public class WaitingMc extends UIComponent
@@ -24,27 +23,9 @@ package net.wg.gui.components.common.waiting
 
       private var _text:String = "";
 
-      override public function play() : void {
-         addEventListener(Event.ENTER_FRAME,this.onEnterFrameHandler);
-      }
-
       override protected function onDispose() : void {
          this.textField = null;
-         removeEventListener(Event.ENTER_FRAME,this.onEnterFrameHandler);
          super.onDispose();
-      }
-
-      override public function stop() : void {
-         super.stop();
-         removeEventListener(Event.ENTER_FRAME,this.onEnterFrameHandler);
-      }
-
-      override public function nextFrame() : void {
-         super.nextFrame();
-         if(currentFrame == totalFrames)
-         {
-            gotoAndStop(1);
-         }
       }
 
       public function setMessage(param1:String) : void {
@@ -58,10 +39,6 @@ package net.wg.gui.components.common.waiting
          {
             this.textField.text = this._text;
          }
-      }
-
-      private function onEnterFrameHandler(param1:Event) : void {
-         this.nextFrame();
       }
    }
 

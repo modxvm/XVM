@@ -15,6 +15,7 @@ package net.wg.gui.lobby.retrainCrewWindow
    import net.wg.utils.ILocale;
    import scaleform.clik.events.ButtonEvent;
    import scaleform.clik.events.IndexEvent;
+   import net.wg.gui.lobby.questsWindow.components.QuestsDashlineItem;
    import net.wg.data.constants.IconsTypes;
    import net.wg.infrastructure.interfaces.IWindow;
    import scaleform.clik.utils.Padding;
@@ -99,53 +100,69 @@ package net.wg.gui.lobby.retrainCrewWindow
       }
 
       override protected function draw() : void {
-         var _loc1_:SelPriceInfo = null;
-         var _loc2_:uint = 0;
-         var _loc3_:* = NaN;
-         var _loc4_:* = NaN;
-         var _loc5_:* = false;
+         var _loc2_:QuestsDashlineItem = null;
+         var _loc3_:SelPriceInfo = null;
+         var _loc4_:uint = 0;
+         var _loc5_:* = NaN;
+         var _loc6_:* = NaN;
+         var _loc7_:* = false;
          super.draw();
          if((isInvalid(VEHICLE_BLOCK_INVALID)) && (this.initVehicleVO))
          {
             this.vehicleBlock.validateNow();
-            this.vehicleBlock.discountDL.validateNow();
-            this.vehicleBlock.x = Math.round(_width - (this.vehicleBlock.discountDL.x + this.vehicleBlock.discountDL.labelTextField.x + this.vehicleBlock.discountDL.labelTextField.textWidth + RESULT_ICON_PADDING));
+            _loc2_ = this.vehicleBlock.discountDL;
+            _loc2_.validateNow();
+            this.vehicleBlock.x = Math.round(_width - (_loc2_.x + _loc2_.labelTextField.x + _loc2_.labelTextField.textWidth + RESULT_ICON_PADDING));
          }
+         var _loc1_:ILocale = App.utils.locale;
          if((isInvalid(CREW_BLOCK_INVALID)) && (this.initCrewVO))
          {
             this.rolesGroup.dataProvider = this.initCrewVO.crewInfoVO;
-            this.txtCrewMembers.htmlText = App.utils.locale.makeString(RETRAIN_CREW.LABEL_CREWMEMBERS) + " <font color=\'#E9E2BF\' size=\'15\'>" + this.initCrewVO.crewInfoVO.length.toString() + "</font>";
+            this.txtCrewMembers.htmlText = _loc1_.makeString(RETRAIN_CREW.LABEL_CREWMEMBERS) + " <font color=\'#E9E2BF\' size=\'15\'>" + this.initCrewVO.crewInfoVO.length.toString() + "</font>";
             invalidate(PRICE_INVALID);
          }
          if((isInvalid(PRICE_INVALID)) && (this.initCrewVO.priceInfo))
          {
-            _loc1_ = this.initCrewVO.priceInfo;
-            _loc2_ = this.rolesGroup.dataProvider.length;
-            _loc3_ = 0;
-            this.resultIcon.icon = this.summIconText.icon = _loc1_.isGold?IconsTypes.GOLD:IconsTypes.CREDITS;
-            _loc4_ = _loc1_.price;
-            this.result.value = _loc4_.toString();
-            if(_loc1_.currency == IconsTypes.GOLD)
+            _loc3_ = this.initCrewVO.priceInfo;
+            _loc4_ = this.rolesGroup.dataProvider.length;
+            _loc5_ = 0;
+            this.resultIcon.icon = this.summIconText.icon = _loc3_.isGold?IconsTypes.GOLD:IconsTypes.CREDITS;
+            _loc6_ = _loc3_.price;
+            if(this.btnsGroup.selectedId != -1)
             {
-               _loc5_ = this.btnsGroup.operationData.gold >= _loc4_;
-               _loc3_ = this.initCrewOperationVO.tankmanCost[this.btnsGroup.selectedId].gold;
+               if(_loc3_.currency == IconsTypes.GOLD)
+               {
+                  _loc7_ = this.btnsGroup.operationData.gold >= _loc6_;
+                  _loc5_ = this.initCrewOperationVO.tankmanCost[this.btnsGroup.selectedId].gold;
+               }
+               else
+               {
+                  _loc7_ = this.btnsGroup.operationData.credits >= _loc6_;
+                  _loc5_ = this.initCrewOperationVO.tankmanCost[this.btnsGroup.selectedId].credits;
+               }
+               this.summIconText.text = _loc4_ + " x " + _loc1_.integer(_loc5_);
+               this.result.valueTextColor = _loc7_?this.enough_money_color:NOT_ENOUGH_MONEY_COLOR;
+               this.submitBtn.enabled = _loc7_;
             }
-            else
-            {
-               _loc5_ = this.btnsGroup.operationData.credits >= _loc4_;
-               _loc3_ = this.initCrewOperationVO.tankmanCost[this.btnsGroup.selectedId].credits;
-            }
-            this.summIconText.text = _loc2_ + " x " + _loc3_;
-            this.result.valueTextColor = _loc5_?this.enough_money_color:NOT_ENOUGH_MONEY_COLOR;
-            this.result.value = _loc4_.toString();
-            this.submitBtn.enabled = _loc5_;
+            this.result.value = _loc1_.integer(_loc6_);
          }
       }
 
       private function btnsGroupChangeHandler(param1:IndexEvent) : void {
-         var _loc2_:Object = changeRetrainTypeS(param1.index);
-         this.initCrewVO = new RetrainCrewBlockVO(_loc2_);
-         invalidate(CREW_BLOCK_INVALID);
+         var _loc2_:Object = null;
+         if(param1.index != -1)
+         {
+            _loc2_ = changeRetrainTypeS(param1.index);
+            this.initCrewVO = new RetrainCrewBlockVO(_loc2_);
+            invalidate(CREW_BLOCK_INVALID);
+         }
+         else
+         {
+            this.summIconText.text = "0 x 0";
+            this.result.valueTextColor = this.enough_money_color;
+            this.result.value = "0";
+            this.submitBtn.enabled = false;
+         }
       }
 
       private function groupResizeHandler(param1:Event) : void {

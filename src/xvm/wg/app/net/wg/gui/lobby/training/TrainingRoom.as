@@ -26,7 +26,7 @@ package net.wg.gui.lobby.training
    import flash.events.KeyboardEvent;
    import scaleform.clik.events.InputEvent;
    import scaleform.clik.events.ButtonEvent;
-   import net.wg.infrastructure.events.DragDropEvent;
+   import net.wg.infrastructure.events.DropEvent;
    import net.wg.gui.events.ArenaVoipSettingsEvent;
    import net.wg.infrastructure.events.VoiceChatEvent;
    import net.wg.data.Aliases;
@@ -51,7 +51,7 @@ package net.wg.gui.lobby.training
          var _loc8_:IDataProvider = param1.dataProvider;
          for each (_loc9_ in _loc8_)
          {
-            if(_loc9_.uid == param2)
+            if(_loc9_.dbID == param2)
             {
                _loc9_.stateString = param3;
                _loc9_.icon = param4;
@@ -69,7 +69,7 @@ package net.wg.gui.lobby.training
          var _loc4_:IDataProvider = param1.dataProvider;
          for each (_loc5_ in _loc4_)
          {
-            if(_loc5_.uid == param2)
+            if(_loc5_.dbID == param2)
             {
                _loc5_.chatRoster = param3;
                param1.invalidateData();
@@ -192,7 +192,8 @@ package net.wg.gui.lobby.training
       }
 
       public function as_startCoolDownSetting(param1:Number) : void {
-         var _loc2_:IScheduler = App.utils.scheduler;
+         var _loc2_:IScheduler = null;
+         _loc2_ = App.utils.scheduler;
          _loc2_.cancelTask(this.stopCoolDownSetting);
          this.settingsButton.enabled = false;
          _loc2_.scheduleTask(this.stopCoolDownSetting,param1 * 1000);
@@ -254,7 +255,7 @@ package net.wg.gui.lobby.training
          this.owner.userVO = new UserVO(
             {
                "accID":-1,
-               "uid":-1,
+               "dbID":-1,
                "fullName":_loc2_.creatorFullName,
                "userName":_loc2_.creator,
                "clanAbbrev":_loc2_.creatorClan,
@@ -314,9 +315,9 @@ package net.wg.gui.lobby.training
          this.closeButton.addEventListener(ButtonEvent.CLICK,this.closeTraining);
          this.inviteButton.addEventListener(ButtonEvent.CLICK,this.showTrainingInvitations);
          this.swapButton.addEventListener(ButtonEvent.CLICK,this.onSwapBtnClick);
-         this.other.addEventListener(DragDropEvent.END_DROP,this.onDrop);
-         this.team1.addEventListener(DragDropEvent.END_DROP,this.onDrop);
-         this.team2.addEventListener(DragDropEvent.END_DROP,this.onDrop);
+         this.other.addEventListener(DropEvent.END_DROP,this.onDrop);
+         this.team1.addEventListener(DropEvent.END_DROP,this.onDrop);
+         this.team2.addEventListener(DropEvent.END_DROP,this.onDrop);
          this.arenaVoipSettings.addEventListener(ArenaVoipSettingsEvent.SELECT_USE_COMMON_VOICE_CHAT,this.selectCommonVoiceChatHandler);
          App.voiceChatMgr.addEventListener(VoiceChatEvent.START_SPEAKING,this.startSpeak);
          App.voiceChatMgr.addEventListener(VoiceChatEvent.STOP_SPEAKING,this.stoptSpeak);
@@ -425,9 +426,9 @@ package net.wg.gui.lobby.training
       }
 
       private function removeListeners() : void {
-         this.other.removeEventListener(DragDropEvent.END_DROP,this.onDrop);
-         this.team1.removeEventListener(DragDropEvent.END_DROP,this.onDrop);
-         this.team2.removeEventListener(DragDropEvent.END_DROP,this.onDrop);
+         this.other.removeEventListener(DropEvent.END_DROP,this.onDrop);
+         this.team1.removeEventListener(DropEvent.END_DROP,this.onDrop);
+         this.team2.removeEventListener(DropEvent.END_DROP,this.onDrop);
          this.settingsButton.removeEventListener(ButtonEvent.CLICK,this.onSettingsButtonClick);
          this.startButton.removeEventListener(ButtonEvent.CLICK,this.onStartButtonClick);
          this.closeButton.removeEventListener(ButtonEvent.CLICK,this.closeTraining);
@@ -447,7 +448,7 @@ package net.wg.gui.lobby.training
             _loc4_ = _loc3_.dataProvider;
             for each (_loc5_ in _loc4_)
             {
-               if(_loc5_.uid == param2)
+               if(_loc5_.dbID == param2)
                {
                   _loc5_.isPlayerSpeaking = param1;
                   _loc3_.invalidateData();
@@ -534,7 +535,7 @@ package net.wg.gui.lobby.training
          this.setSpeaking(false,param1.getAccountDBID());
       }
 
-      private function onDrop(param1:DragDropEvent) : void {
+      private function onDrop(param1:DropEvent) : void {
          var _loc2_:* = NaN;
          var _loc3_:* = NaN;
          if(param1.sender != param1.receiver)

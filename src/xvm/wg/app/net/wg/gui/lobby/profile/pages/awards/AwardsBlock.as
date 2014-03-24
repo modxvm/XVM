@@ -12,7 +12,7 @@ package net.wg.gui.lobby.profile.pages.awards
          super();
       }
 
-      private static const BG_PADDING:uint = 28;
+      private static const BG_PADDING:uint = 75;
 
       public var background:MovieClip;
 

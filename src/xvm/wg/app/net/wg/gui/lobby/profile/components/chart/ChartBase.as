@@ -195,6 +195,12 @@ package net.wg.gui.lobby.profile.components.chart
 
       override protected function onDispose() : void {
          var _loc1_:Object = null;
+         if(this._currentLayout)
+         {
+            this._currentLayout.dispose();
+            this._currentLayout = null;
+         }
+         this._itemRenderer = null;
          super.onDispose();
          while(this._renderers.length > 0)
          {

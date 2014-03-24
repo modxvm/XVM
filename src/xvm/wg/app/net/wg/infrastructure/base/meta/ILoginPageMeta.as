@@ -40,6 +40,8 @@ package net.wg.infrastructure.base.meta
 
       function as_setCapsLockState(param1:Boolean) : void;
 
+      function as_setKeyboardLang(param1:String) : void;
+
       function as_cancelLoginQueue() : void;
 
       function as_doAutoLogin() : void;

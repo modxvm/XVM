@@ -11,6 +11,8 @@ package net.wg.data.constants
 
       public static const WINDOW:String = "WindowUI";
 
+      public static const NOTIFICATION_TIME_COMPONENT:String = "NotificationTimeComponentUI";
+
       public static const POPOVER:String = "PopOverUI";
 
       public static const SMART_POPOVER:String = "SmartPopOverUI";
@@ -31,6 +33,10 @@ package net.wg.data.constants
 
       public static const BUTTON_BAR:String = "ButtonBarEx";
 
+      public static const BUTTON_NORMAL:String = "ButtonNormal";
+
+      public static const BUTTON_BLACK:String = "ButtonBlack";
+
       public static const SCROLL_BAR:String = "ScrollBar";
 
       public static const SHOP_MODULE_ITEM_RENDERER:String = "ShopModuleListItemRendererUI";
@@ -49,6 +55,8 @@ package net.wg.data.constants
 
       public static const TRAINING_DRAG_DELEGATE:String = "net.wg.gui.lobby.training.TrainingDragDelegate";
 
+      public static const TWEEN:String = "net.wg.data.managers.impl.Tween";
+
       public static const SALE_ITEM_BLOCK_RENDERER:String = "saleItemBlockUI";
 
       public static const SPARKS_MGR:String = "net.wg.gui.login.impl.SparksManager";
@@ -58,6 +66,16 @@ package net.wg.data.constants
       public static const TICKER_ITEM:String = "TickerItemUI";
 
       public static const PROGRESS_ELEMENT:String = "ProgressElement_UI";
+
+      public static const SHELL_BUTTON:String = "ShellButtonUI";
+
+      public static const MODULE_ITEM:String = "ModuleItemUI";
+
+      public static const SLIDER_KEY_POINT:String = "SliderKeyPointUI";
+
+      public static const TRANSPORTING_RESOURCE:String = "NutMCUI";
+
+      public static const TRANSPORTING_HELPER:String = "net.wg.gui.lobby.fortifications.utils.impl.TransportingHelper";
 
       public static const PERSONAL_CASE_STATS:String = "crewTankmanStats";
 
@@ -93,6 +111,8 @@ package net.wg.data.constants
 
       public static const ACHIEVEMENT_SMALL:String = "AchievementCounterSmall_UI";
 
+      public static const DETAILED_STATISTICS_UNIT:String = "DetailedStatisticsUnit_UI";
+
       public static const CANDIDATE_LIST_ITEM_RENDERER_UI:String = "CandidateListItemRendererDragUI";
 
       public static const CS_DRAG_DROP_DELEGATE:String = "net.wg.gui.cyberSport.helpers.CSDragDropDelegate";
@@ -106,6 +126,8 @@ package net.wg.data.constants
       public static const FUTURE_TAB_UI:String = "FutureTab_UI";
 
       public static const BR_SUBTASK_COMPONENT_UI:String = "BR_SubtaskComponent_UI";
+
+      public static const ADVANCED_LINE_DESCR_ICON_TEXT_UI:String = "AdvancedLineDescrIconText_UI";
    }
 
 }

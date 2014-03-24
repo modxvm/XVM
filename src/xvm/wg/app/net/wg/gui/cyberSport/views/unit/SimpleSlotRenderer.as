@@ -117,11 +117,11 @@ package net.wg.gui.cyberSport.views.unit
                      }
                   }
                }
-               this.vehicleBtn.selectState(!this.slotData.selectedVehicle && (this.slotData.player) && (this.slotData.player.isSelf));
+               this.vehicleBtn.selectState(!this.slotData.selectedVehicle && (this.slotData.player) && (this.slotData.player.himself));
                this.lockBackground.visible = false;
                if((this.slotData) && (this.slotData.player))
                {
-                  this.vehicleBtn.enabled = (this.slotData.player.isSelf) && !(this.slotData.playerStatus == 2);
+                  this.vehicleBtn.enabled = (this.slotData.player.himself) && !(this.slotData.playerStatus == 2);
                }
             }
             else
@@ -133,7 +133,7 @@ package net.wg.gui.cyberSport.views.unit
             this.slotLabel.visible = !this.takePlaceBtn.visible;
             if(this.contextMenuArea)
             {
-               this.contextMenuArea.visible = (this.slotData) && (this.slotData.player) && !this.slotData.player.isSelf;
+               this.contextMenuArea.visible = (this.slotData) && (this.slotData.player) && !this.slotData.player.himself;
             }
             if(this.slotData.player)
             {
@@ -144,7 +144,7 @@ package net.wg.gui.cyberSport.views.unit
                {
                   this.contextMenuArea.width = this.slotLabel.width;
                }
-               _loc1_ = App.utils.commons.getUserProps(this.slotData.player.name,this.slotData.player.clan,this.slotData.player.region,this.slotData.player.igrType);
+               _loc1_ = App.utils.commons.getUserProps(this.slotData.player.userName,this.slotData.player.clanAbbrev,this.slotData.player.region,this.slotData.player.igrType);
                _loc1_.rgb = this.slotData.player.color;
                App.utils.commons.formatPlayerName(this.slotLabel,_loc1_);
             }
@@ -227,7 +227,8 @@ package net.wg.gui.cyberSport.views.unit
       }
 
       private function updateTakePlaceButtonView() : void {
-         var _loc1_:Boolean = this.takePlaceBtn.visible;
+         var _loc1_:* = false;
+         _loc1_ = this.takePlaceBtn.visible;
          this.takePlaceFirstTimeBtn.visible = (_loc1_) && !this.slotData.isCurrentUserInSlot;
          this.takePlaceBtn.visible = (_loc1_) && (this.slotData.isCurrentUserInSlot);
       }
@@ -301,7 +302,7 @@ package net.wg.gui.cyberSport.views.unit
          if(App.utils.commons.isRightButton(param1))
          {
             _loc2_ = this._slotData?this._slotData.player:null;
-            if((_loc2_) && !_loc2_.isSelf)
+            if((_loc2_) && !_loc2_.himself)
             {
                _loc3_ = new CSPlayerCIGenerator(false);
                App.contextMenuMgr.showUserContextMenu(this,this._slotData.player,_loc3_);

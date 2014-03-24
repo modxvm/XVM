@@ -56,7 +56,7 @@ package net.wg.gui.prebattle.battleSession
          while(_loc7_ < _loc4_)
          {
             _loc8_ = _loc6_.requestItemAt(_loc7_);
-            if(_loc8_.uid == _loc3_.uid)
+            if(_loc8_.dbID == _loc3_.dbID)
             {
                for (_loc9_ in param2)
                {
@@ -423,7 +423,7 @@ package net.wg.gui.prebattle.battleSession
             _loc2_ = new PlayerPrbInfoVO(param1.itemData);
             if(_loc2_.accID > -1)
             {
-               _loc3_ = _loc2_.uid > -1;
+               _loc3_ = _loc2_.dbID > -1;
                _loc4_ = new BattleSessionCIGenerator(_loc3_,this._canKickPlayer);
                App.contextMenuMgr.showUserContextMenu(this,_loc2_,_loc4_);
             }

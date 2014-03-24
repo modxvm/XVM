@@ -55,8 +55,6 @@ package net.wg.gui.lobby.hangar.tcarousel.data
 
       public var buySlot:Boolean = false;
 
-      public var wasInBattle:Boolean = false;
-
       public var slotPrice:Number = 0;
 
       public var defSlotPrice:Number = 0;

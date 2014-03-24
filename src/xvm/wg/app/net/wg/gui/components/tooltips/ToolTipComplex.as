@@ -63,6 +63,23 @@ package net.wg.gui.components.tooltips
 
       private var contentList:Vector.<TextField>;
 
+      override protected function onDispose() : void {
+         var _loc1_:TextField = null;
+         if(this.contentList)
+         {
+            while(this.contentList.length)
+            {
+               _loc1_ = this.contentList.pop();
+               _loc1_.text = "";
+               _loc1_.htmlText = "";
+               removeChild(_loc1_);
+               _loc1_ = null;
+            }
+            this.contentList = null;
+         }
+         super.onDispose();
+      }
+
       override public function build(param1:Object, param2:ITooltipProps) : void {
          this.setProp(param2);
          this.setContent(param1);
@@ -128,31 +145,27 @@ package net.wg.gui.components.tooltips
       }
 
       private function setContent(param1:Object) : void {
-         var _loc7_:TextField = null;
+         var _loc5_:TextFormat = null;
          this._leftMargin = 10;
          this._rightMargin = 10;
          this._topMargin = 6;
          this._bottomMargin = 11;
-         var _loc2_:Number = this.contTopMargin;
-         var _loc3_:Number = 0;
-         var _loc4_:TextFormat = new TextFormat();
-         var _loc5_:Number = 10;
-         var _loc6_:Number = this._minWidth == 0?500:this._minWidth;
-         switch(typeof param1)
-         {
-            case "string":
-               _loc7_ = new TextField();
-               _loc7_.x = this.contLeftMargin;
-               _loc7_.y = _loc2_;
-               _loc7_.width = _loc6_;
-               _loc7_.height = _loc5_;
-               setTextProp(_loc7_,String(param1),_loc4_,"left");
-               _loc7_.width = _loc7_.textWidth + 4;
-               _loc3_ = _loc7_.textHeight;
-               this.contentList.push(_loc7_);
-               addChild(_loc7_);
-               break;
-         }
+         var _loc2_:String = param1.toString();
+         var _loc3_:Number = this.contTopMargin;
+         var _loc4_:Number = 0;
+         _loc5_ = new TextFormat();
+         var _loc6_:Number = 10;
+         var _loc7_:Number = this._minWidth == 0?500:this._minWidth;
+         var _loc8_:TextField = new TextField();
+         _loc8_.x = this.contLeftMargin;
+         _loc8_.y = _loc3_;
+         _loc8_.width = _loc7_;
+         _loc8_.height = _loc6_;
+         setTextProp(_loc8_,_loc2_,_loc5_,"left");
+         _loc8_.width = _loc8_.textWidth + 4;
+         _loc4_ = _loc8_.textHeight;
+         this.contentList.push(_loc8_);
+         addChild(_loc8_);
       }
    }
 

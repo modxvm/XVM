@@ -1,6 +1,6 @@
 package net.wg.gui.cyberSport.helpers
 {
-   import net.wg.infrastructure.helpers.DragDropListDelegateCtrlr;
+   import net.wg.infrastructure.helpers.DropListDelegateCtrlr;
    import flash.display.InteractiveObject;
    import net.wg.infrastructure.interfaces.entity.IDroppable;
    import net.wg.infrastructure.interfaces.entity.IDropItem;
@@ -8,7 +8,7 @@ package net.wg.gui.cyberSport.helpers
    import __AS3__.vec.Vector;
 
 
-   public class CSDragDropListDelegateController extends DragDropListDelegateCtrlr
+   public class CSDragDropListDelegateController extends DropListDelegateCtrlr
    {
           
       public function CSDragDropListDelegateController(param1:Vector.<InteractiveObject>, param2:Class, param3:String, param4:Function, param5:Function, param6:Function) {

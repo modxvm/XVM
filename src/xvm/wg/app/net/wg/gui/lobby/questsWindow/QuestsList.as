@@ -5,6 +5,7 @@ package net.wg.gui.lobby.questsWindow
    import scaleform.clik.interfaces.IListItemRenderer;
    import scaleform.clik.constants.InvalidationType;
    import scaleform.clik.interfaces.IDataProvider;
+   import net.wg.data.constants.QuestsStates;
 
 
    public class QuestsList extends ScrollingListEx
@@ -14,9 +15,15 @@ package net.wg.gui.lobby.questsWindow
          super();
       }
 
+      private static const INV_DP:String = "invDp";
+
       public var allQuestsDoneTF:TextField;
 
       public var clickCheckboxTF:TextField;
+
+      private var _questsState:int = 1;
+
+      private var _questsType:int = 0;
 
       override protected function configUI() : void {
          super.configUI();
@@ -49,24 +56,54 @@ package net.wg.gui.lobby.questsWindow
 
       override public function set dataProvider(param1:IDataProvider) : void {
          super.dataProvider = param1;
-         if((dataProvider) && dataProvider.length > 0)
+         invalidate(INV_DP);
+      }
+
+      override protected function draw() : void {
+         var _loc1_:* = false;
+         super.draw();
+         if(isInvalid(INV_DP))
          {
-            this.allQuestsDoneTF.visible = false;
-            this.clickCheckboxTF.visible = false;
-         }
-         else
-         {
-            this.allQuestsDoneTF.visible = true;
-            this.clickCheckboxTF.visible = true;
+            if((dataProvider) && dataProvider.length > 0)
+            {
+               this.allQuestsDoneTF.visible = false;
+               this.clickCheckboxTF.visible = false;
+            }
+            else
+            {
+               _loc1_ = this.questsState == QuestsStates.CURRENT_STATE;
+               this.allQuestsDoneTF.visible = true;
+               this.clickCheckboxTF.visible = (_loc1_) && !(this.questsType == QuestsStates.ACTION);
+               switch(this.questsType)
+               {
+                  case QuestsStates.ALL:
+                     this.allQuestsDoneTF.text = _loc1_?QUESTS.QUESTS_LIST_CURRENT_NOALL:QUESTS.QUESTS_LIST_FUTURE_NOALL;
+                     break;
+                  case QuestsStates.ACTION:
+                     this.allQuestsDoneTF.text = _loc1_?QUESTS.QUESTS_LIST_CURRENT_NOACTIONS:QUESTS.QUESTS_LIST_FUTURE_NOACTIONS;
+                     break;
+                  case QuestsStates.BATTLE_QUEST:
+                     this.allQuestsDoneTF.text = _loc1_?QUESTS.QUESTS_LIST_CURRENT_NOQUESTS:QUESTS.QUESTS_LIST_CURRENT_NOQUESTS;
+                     break;
+               }
+            }
          }
       }
 
-      override protected function onDispose() : void {
-         super.onDispose();
+      public function get questsState() : int {
+         return this._questsState;
       }
 
-      override protected function updateSelectedIndex() : void {
-         super.updateSelectedIndex();
+      public function set questsState(param1:int) : void {
+         this._questsState = param1;
+      }
+
+      public function get questsType() : int {
+         return this._questsType;
+      }
+
+      public function set questsType(param1:int) : void {
+         this._questsType = param1;
       }
    }
 

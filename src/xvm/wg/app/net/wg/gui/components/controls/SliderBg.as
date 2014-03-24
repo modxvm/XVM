@@ -11,6 +11,8 @@ package net.wg.gui.components.controls
       }
 
       public var patternMc:BitmapFill = null;
+
+      public var disablePatternMc:BitmapFill = null;
    }
 
 }

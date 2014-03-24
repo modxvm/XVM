@@ -80,12 +80,11 @@ package net.wg.gui.components.windows
       private var CONTENT_DEF_PADDING:Padding;
 
       override protected function onDispose() : void {
-         super.onDispose();
          if((_content) && (contains(_content)))
          {
             removeChild(_content);
          }
-         if(this.windowContent.canDrag)
+         if((this.windowContent.canDrag) && (initialized))
          {
             App.cursor.unRegisterDragging(this);
          }
@@ -106,6 +105,7 @@ package net.wg.gui.components.windows
          titleBtn = null;
          closeBtn = null;
          resizeBtn = null;
+         super.onDispose();
       }
 
       public function setWindow(param1:IWindow) : void {

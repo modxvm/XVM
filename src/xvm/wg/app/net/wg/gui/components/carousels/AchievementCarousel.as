@@ -51,30 +51,11 @@ package net.wg.gui.components.carousels
          updateArrowsState();
       }
 
-      private var isSetListeners:Boolean = false;
-
       override protected function updateRenderPosition(param1:IListItemRenderer, param2:uint, param3:int, param4:Number) : void {
          super.updateRenderPosition(param1,param2,param3,param4);
          if(_renderers.length <= countVisibleSlots)
          {
             Button(param1).buttonMode = true;
-            if(this.isSetListeners)
-            {
-               removeCursorListeners();
-               this.isSetListeners = false;
-            }
-         }
-         else
-         {
-            this.setCursorListeners();
-         }
-      }
-
-      override protected function setCursorListeners() : void {
-         if(!this.isSetListeners)
-         {
-            super.setCursorListeners();
-            this.isSetListeners = true;
          }
       }
 

@@ -23,9 +23,9 @@ package net.wg.gui.lobby.profile.components
          {
             _loc2_ =
                {
-                  "wins":"<b>" + this._wins + "</b>",
-                  "losses":"<b>" + this._losses + "</b>",
-                  "draws":"<b>" + this._draws + "</b>"
+                  "value_0":"<b>" + this._wins + "</b>",
+                  "value_1":"<b>" + this._losses + "</b>",
+                  "value_2":"<b>" + this._draws + "</b>"
                }
             ;
             App.toolTipMgr.showComplexWithParams(tooltip,new ToolTipParams({},_loc2_));

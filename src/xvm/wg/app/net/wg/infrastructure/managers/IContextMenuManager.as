@@ -16,6 +16,10 @@ package net.wg.infrastructure.managers
       function showUserContextMenu(param1:DisplayObject, param2:Object, param3:IUserContextMenuGenerator, param4:Function=null) : IContextMenu;
 
       function hide() : void;
+
+      function vehicleWasInBattle(param1:Number) : Boolean;
+
+      function showFortificationCtxMenu(param1:DisplayObject, param2:Vector.<IContextItem>) : IContextMenu;
    }
 
 }

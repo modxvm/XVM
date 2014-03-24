@@ -4,6 +4,7 @@ package net.wg.infrastructure.managers.utils.impl
    import flash.display.DisplayObject;
    import flash.display.DisplayObjectContainer;
    import scaleform.clik.managers.PopUpManager;
+   import flash.display.MovieClip;
    import net.wg.utils.IUtils;
 
 
@@ -15,7 +16,7 @@ package net.wg.infrastructure.managers.utils.impl
       }
 
       public function show(param1:DisplayObject, param2:Number=0, param3:Number=0, param4:DisplayObjectContainer=null) : void {
-         PopUpManager.show(param1,param2,param3,param4);
+         PopUpManager.show(param1,param2 - MovieClip(App.instance).x,param3 - MovieClip(App.instance).y,param4);
       }
 
       public function create(param1:String, param2:Object, param3:DisplayObjectContainer=null) : DisplayObject {

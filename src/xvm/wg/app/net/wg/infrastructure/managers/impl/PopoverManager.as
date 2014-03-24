@@ -7,6 +7,7 @@ package net.wg.infrastructure.managers.impl
    import flash.display.DisplayObject;
    import net.wg.gui.components.popOvers.PopOver;
    import net.wg.infrastructure.interfaces.IAbstractPopOverView;
+   import flash.display.MovieClip;
 
 
    public class PopoverManager extends PopoverManagerMeta implements IPopoverManager
@@ -39,7 +40,7 @@ package net.wg.infrastructure.managers.impl
          this.hide();
       }
 
-      public function show(param1:Object, param2:String, param3:int, param4:int) : void {
+      public function show(param1:Object, param2:String, param3:int, param4:int, param5:Object=null) : void {
          if(this._lastPopoverCaller == param1)
          {
             this.hide();
@@ -47,7 +48,7 @@ package net.wg.infrastructure.managers.impl
          }
          this._stage.addEventListener(MouseEvent.MOUSE_DOWN,this.stageMouseDownHandler,false,0,true);
          this._lastPopoverCaller = param1;
-         requestShowPopoverS(param2,param3,param4);
+         requestShowPopoverS(param2,param3 - MovieClip(App.instance).x,param4 - MovieClip(App.instance).y,param5);
       }
 
       public function hide() : void {

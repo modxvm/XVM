@@ -8,10 +8,10 @@ package net.wg.gui.lobby.questsWindow
    import net.wg.gui.lobby.questsWindow.components.ProgressQuestIndicator;
    import flash.text.TextField;
    import net.wg.gui.components.controls.TextFieldShort;
+   import net.wg.data.constants.QuestsStates;
    import net.wg.gui.lobby.questsWindow.data.QuestRendererVO;
    import scaleform.clik.constants.InvalidationType;
    import scaleform.clik.events.ComponentEvent;
-   import net.wg.data.constants.QuestsStates;
 
 
    public class QuestRenderer extends SoundListItemRenderer
@@ -87,6 +87,8 @@ package net.wg.gui.lobby.questsWindow
          this.hitTooltipMc.buttonMode = true;
          this.buttonMode = true;
          this.newIndicator.mouseChildren = false;
+         this.descrTF.textColor = QuestsStates.CLR_TASK_TF_NORMAL;
+         this.descrTF.validateNow();
       }
 
       private function addListeners() : void {
@@ -290,6 +292,7 @@ package net.wg.gui.lobby.questsWindow
             this._status = param1.status;
             this.statusMC.setStatus(this._status);
             this.descrTF.textColor = this._status?QuestsStates.CLR_TASK_TF_WITH_STATUS:QuestsStates.CLR_TASK_TF_NORMAL;
+            this.descrTF.validateNow();
          }
       }
 

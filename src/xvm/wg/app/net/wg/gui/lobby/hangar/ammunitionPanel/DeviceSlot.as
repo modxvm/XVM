@@ -1,6 +1,6 @@
 package net.wg.gui.lobby.hangar.ammunitionPanel
 {
-   import scaleform.clik.core.UIComponent;
+   import net.wg.gui.components.advanced.AmmunitionButton;
    import flash.display.MovieClip;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.utils.IEventCollector;
@@ -18,7 +18,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
    import scaleform.gfx.MouseEventEx;
 
 
-   public class DeviceSlot extends UIComponent
+   public class DeviceSlot extends AmmunitionButton
    {
           
       public function DeviceSlot() {
@@ -76,6 +76,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
       override public function set enabled(param1:Boolean) : void {
          super.enabled = param1;
          this.select.enabled = param1;
+         mouseChildren = enabled;
       }
 
       public function get type() : String {
@@ -105,6 +106,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
       override protected function configUI() : void {
          super.configUI();
          buttonMode = true;
+         mouseChildren = enabled;
          if(this.levelMC)
          {
             this.levelMC.mouseEnabled = this.levelMC.mouseChildren = false;
@@ -216,8 +218,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
       }
 
       private function onExtraIconLoaded(param1:Event) : void {
-         var _loc2_:uint = 0;
-         _loc2_ = 2;
+         var _loc2_:uint = 2;
          this.extraIcon.x = width - this.extraIcon.width - _loc2_;
          this.extraIcon.y = height - this.extraIcon.height - _loc2_;
       }

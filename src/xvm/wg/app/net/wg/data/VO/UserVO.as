@@ -12,7 +12,7 @@ package net.wg.data.VO
 
       public var accID:Number = 0;
 
-      public var uid:Number = 0;
+      public var dbID:Number = 0;
 
       public var fullName:String = "";
 
@@ -23,6 +23,14 @@ package net.wg.data.VO
       public var region:String = "";
 
       public var igrType:int = 0;
+
+      public function get uid() : Number {
+         return this.dbID;
+      }
+
+      public function get kickId() : Number {
+         return this.dbID;
+      }
    }
 
 }

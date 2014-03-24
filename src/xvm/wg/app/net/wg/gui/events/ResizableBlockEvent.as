@@ -12,7 +12,7 @@ package net.wg.gui.events
          this.heightDiff = param3;
       }
 
-      public static const READY_FOR_LAYOUT:String = "readyForLayout";
+      public static const VALIDATE_SCROLL_BAR:String = "validateScrollBar";
 
       public static const CONTETNT_WAS_CHANGED:String = "contentWasChanged";
 

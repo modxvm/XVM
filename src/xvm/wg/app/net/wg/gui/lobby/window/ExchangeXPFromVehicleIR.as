@@ -28,6 +28,10 @@ package net.wg.gui.lobby.window
          super();
       }
 
+      private static const SELECTION_INVALIDATE:String = "selInv";
+
+      private static const DATA_INVALIDATE:String = "dataInv";
+
       public static const SELECTION_CHANGED:String = "IrSelectionChanged";
 
       private static const MY_STATE_PREFIXES:Vector.<String>;
@@ -52,10 +56,6 @@ package net.wg.gui.lobby.window
 
       private var vehicleData:ExchangeXPVehicleVO;
 
-      private var SELECTION_INVALIDATE:String = "selInv";
-
-      private var DATA_INVALIDATE:String = "dataInv";
-
       override protected function preInitialize() : void {
          super.preInitialize();
          constraints = new Constraints(this,ConstrainMode.COUNTER_SCALE);
@@ -68,7 +68,7 @@ package net.wg.gui.lobby.window
          constraints.addElement(this.background.name,this.background,Constraints.ALL);
          constraints.addElement(this.xpLabel.name,this.xpLabel,Constraints.RIGHT);
          constraints.addElement(this.mcGreyAssets.name,this.mcGreyAssets,Constraints.LEFT);
-         constraints.addElement(this.checkboxVehicle.name,this.checkboxVehicle,Constraints.CENTER_V);
+         constraints.addElement(this.checkboxVehicle.name,this.checkboxVehicle,Constraints.LEFT);
          this.vehicleNation.addEventListener(UILoaderEvent.IOERROR,this.nationIconLoadingError,false,0,true);
          setState("up");
       }
@@ -102,14 +102,14 @@ package net.wg.gui.lobby.window
 
       private function toggleSelection() : void {
          this.vehicleData.isSelectCandidate = !this.vehicleData.isSelectCandidate;
-         invalidate(this.SELECTION_INVALIDATE);
+         invalidate(SELECTION_INVALIDATE);
          dispatchEvent(new Event(SELECTION_CHANGED,true));
       }
 
       override public function setData(param1:Object) : void {
          super.setData(param1);
          this.vehicleData = ExchangeXPVehicleVO(param1);
-         invalidate(this.DATA_INVALIDATE);
+         invalidate(DATA_INVALIDATE);
       }
 
       override public function get data() : Object {
@@ -117,7 +117,7 @@ package net.wg.gui.lobby.window
       }
 
       override protected function draw() : void {
-         if(isInvalid(this.DATA_INVALIDATE))
+         if(isInvalid(DATA_INVALIDATE))
          {
             if(this.vehicleData)
             {
@@ -133,7 +133,7 @@ package net.wg.gui.lobby.window
                buttonMode = true;
                this.vehicleTypeIcon.source = this.vehicleData.vehicleType;
                this.vehicleNation.source = this.vehicleData.nationIco;
-               invalidate(this.SELECTION_INVALIDATE);
+               invalidate(SELECTION_INVALIDATE);
             }
             else
             {
@@ -147,7 +147,7 @@ package net.wg.gui.lobby.window
                this.vehicleNation.source = null;
             }
          }
-         if(isInvalid(this.SELECTION_INVALIDATE))
+         if(isInvalid(SELECTION_INVALIDATE))
          {
             if(this.vehicleData)
             {

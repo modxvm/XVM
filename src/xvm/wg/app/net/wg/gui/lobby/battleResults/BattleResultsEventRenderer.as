@@ -72,6 +72,7 @@ package net.wg.gui.lobby.battleResults
          this.progressList.linkage = Linkages.PROGRESS_ELEMENT;
          this.taskTF.textColor = QuestsStates.CLR_TASK_TF_NORMAL;
          this.awards.contentAlign = TextFieldAutoSize.RIGHT;
+         this.awards.hasFixedHeight = false;
          this.addListeners();
       }
 
@@ -162,17 +163,8 @@ package net.wg.gui.lobby.battleResults
 
       private function checkAwards(param1:Number) : Number {
          this.awards.setActualWidth(this.progressList.width);
-         if(this.data.awards)
-         {
-            this.awards.visible = Boolean((Boolean(this.data.awards.awardsStr)) || (this.data.awards.openedQuests.length > 0));
-            this.awards.setAwards(this.data.awards.awardsStr);
-            this.awards.setOpenedQuests(this.data.awards.openedQuests);
-         }
-         else
-         {
-            this.awards.visible = false;
-            this.awards.setAwards("");
-         }
+         this.awards.setData(this.data.awards);
+         this.awards.visible = (this.data.awards) && (this.data.awards.length);
          this.awards.validateNow();
          this.awards.y = Math.round(param1 + AWARDS_PADDING);
          var _loc2_:Number = this.awards.height > 0?this.awards.height + AWARDS_PADDING:0;

@@ -2,13 +2,14 @@ package net.wg.gui.notification
 {
    import net.wg.infrastructure.base.meta.impl.NotificationsListMeta;
    import net.wg.infrastructure.base.meta.INotificationsListMeta;
-   import flash.geom.Point;
-   import flash.events.MouseEvent;
-   import scaleform.clik.events.InputEvent;
-   import flash.ui.Keyboard;
-   import scaleform.clik.constants.InputValue;
-   import flash.display.DisplayObject;
+   import net.wg.gui.notification.vo.LayoutInfoVO;
+   import net.wg.gui.notification.events.ServiceMessageEvent;
+   import net.wg.gui.notification.vo.NotificationInfoVO;
+   import net.wg.infrastructure.interfaces.IWrapper;
+   import net.wg.gui.components.popOvers.PopOver;
    import scaleform.clik.data.DataProvider;
+   import net.wg.data.constants.Values;
+   import flash.events.Event;
 
 
    public class NotificationListView extends NotificationsListMeta implements INotificationsListMeta
@@ -21,25 +22,19 @@ package net.wg.gui.notification
                "paddingBottom":0
             }
          );
-         this.stageDimensions = new Point();
          super();
       }
 
-      private static const LAYOUT_INV:String = "layoutInv";
-
       private var layoutInfo:LayoutInfoVO;
-
-      private var stageDimensions:Point;
 
       public var list:NotificationsList;
 
       public var rendererTemplate:ServiceMessageItemRenderer;
 
+      private var TIME_UPDATE_INTERVAL:uint = 300000.0;
+
       override protected function configUI() : void {
          super.configUI();
-         stage.addEventListener(MouseEvent.CLICK,this.stageClickHandler,false,0,true);
-         this.stageDimensions.x = stage.stageWidth;
-         this.stageDimensions.y = stage.stageHeight;
          this.list.addEventListener(ServiceMessageEvent.MESSAGE_BUTTON_CLICKED,this.messageButtonClickHandler,false,0,true);
          this.list.addEventListener(ServiceMessageEvent.MESSAGE_LINK_CLICKED,this.messageLinkClickHandler,false,0,true);
          if(this.rendererTemplate)
@@ -50,11 +45,27 @@ package net.wg.gui.notification
                this.rendererTemplate = null;
             }
          }
+         App.utils.scheduler.scheduleTask(this.updateTimestamps,this.TIME_UPDATE_INTERVAL);
+      }
+
+      private function updateTimestamps() : void {
+         var _loc1_:NotificationInfoVO = null;
+         App.utils.scheduler.cancelTask(this.updateTimestamps);
+         if(this.list.dataProvider)
+         {
+            for each (_loc1_ in this.list.dataProvider)
+            {
+               this.updateTimestamp(_loc1_);
+            }
+            this.list.invalidateData();
+         }
+         App.utils.scheduler.scheduleTask(this.updateTimestamps,this.TIME_UPDATE_INTERVAL);
       }
 
       private function messageButtonClickHandler(param1:ServiceMessageEvent) : void {
          param1.stopImmediatePropagation();
-         onMessageShowMoreS(NotificationInfoVO(ServiceMessage(param1.target).data).messageVO.showMore);
+         onClickActionS(param1.typeID,param1.entityID,param1.action);
+         App.popoverMgr.hide();
       }
 
       private function messageLinkClickHandler(param1:ServiceMessageEvent) : void {
@@ -67,50 +78,9 @@ package net.wg.gui.notification
          }
       }
 
-      override public function handleInput(param1:InputEvent) : void {
-         super.handleInput(param1);
-         if(param1.details.code == Keyboard.ESCAPE && param1.details.value == InputValue.KEY_DOWN)
-         {
-            param1.handled = true;
-            onWindowCloseS();
-         }
-      }
-
-      private function stageClickHandler(param1:MouseEvent) : void {
-         var _loc2_:DisplayObject = param1.target as DisplayObject;
-         if(!_loc2_)
-         {
-            return;
-         }
-         while(_loc2_)
-         {
-            if(_loc2_ == this)
-            {
-               return;
-            }
-            _loc2_ = _loc2_.parent;
-         }
-         onWindowCloseS();
-      }
-
-      override protected function draw() : void {
-         super.draw();
-         if(isInvalid(LAYOUT_INV))
-         {
-            this.x = this.stageDimensions.x - this.width - this.layoutInfo.paddingRight;
-            this.y = this.stageDimensions.y - this.height - this.layoutInfo.paddingBottom;
-         }
-      }
-
-      override public function updateStage(param1:Number, param2:Number) : void {
-         super.updateStage(param1,param2);
-         this.stageDimensions.x = param1;
-         this.stageDimensions.y = param2;
-         invalidate(LAYOUT_INV);
-      }
-
-      override protected function onPopulate() : void {
-         super.onPopulate();
+      override public function set wrapper(param1:IWrapper) : void {
+         super.wrapper = param1;
+         PopOver(wrapper).title = App.utils.locale.makeString(MESSENGER.LISTVIEW_TITLE);
       }
 
       public function as_setInitData(param1:Object) : void {
@@ -122,6 +92,7 @@ package net.wg.gui.notification
       }
 
       public function as_setMessagesList(param1:Array) : void {
+         var _loc5_:NotificationInfoVO = null;
          if(param1 == null)
          {
             return;
@@ -131,26 +102,48 @@ package net.wg.gui.notification
          var _loc4_:* = 0;
          while(_loc4_ < _loc3_)
          {
-            _loc2_.push(new NotificationInfoVO(param1[_loc4_]));
+            _loc5_ = new NotificationInfoVO(param1[_loc4_]);
+            this.updateTimestamp(_loc5_);
+            _loc2_.push(_loc5_);
             _loc4_++;
          }
          this.list.dataProvider = new DataProvider(_loc2_);
       }
 
+      private function updateTimestamp(param1:NotificationInfoVO) : void {
+         var _loc2_:Number = param1.messageVO.timestamp;
+         if(_loc2_ != Values.DEFAULT_INT)
+         {
+            param1.messageVO.timestampStr = getMessageActualTimeS(_loc2_);
+         }
+      }
+
       public function as_appendMessage(param1:Object) : void {
-         this.list.appendData(new NotificationInfoVO(param1));
+         var _loc2_:NotificationInfoVO = new NotificationInfoVO(param1);
+         this.updateTimestamp(_loc2_);
+         this.list.appendData(_loc2_);
+      }
+
+      public function as_updateMessage(param1:Object) : void {
+         this.list.updateData(new NotificationInfoVO(param1));
       }
 
       public function as_layoutInfo(param1:Object) : void {
          this.layoutInfo = new LayoutInfoVO(param1);
-         invalidate(LAYOUT_INV);
+         this.calcKeyPointPosition();
+      }
+
+      override protected function stageResizeHandler(param1:Event) : void {
+         this.calcKeyPointPosition();
+         super.stageResizeHandler(param1);
+      }
+
+      private function calcKeyPointPosition() : void {
+         as_setPositionKeyPoint(stage.stageWidth - this.layoutInfo.paddingRight,stage.stageHeight - this.layoutInfo.paddingBottom);
       }
 
       override protected function onDispose() : void {
-         if(stage)
-         {
-            stage.removeEventListener(MouseEvent.CLICK,this.stageClickHandler);
-         }
+         App.utils.scheduler.cancelTask(this.updateTimestamps);
          this.list.removeEventListener(ServiceMessageEvent.MESSAGE_BUTTON_CLICKED,this.messageButtonClickHandler);
          this.list.removeEventListener(ServiceMessageEvent.MESSAGE_LINK_CLICKED,this.messageLinkClickHandler);
          super.onDispose();

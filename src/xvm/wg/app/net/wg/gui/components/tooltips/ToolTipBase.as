@@ -97,9 +97,14 @@ package net.wg.gui.components.tooltips
             }
             this.separators = null;
          }
-         super.onDispose();
+         this.background = null;
+         this.content = null;
+         this._data = null;
+         this.res = null;
+         this._props = null;
          this.clearDelayIntervalID();
          this.tryClearTween();
+         super.onDispose();
       }
 
       override public function toString() : String {

@@ -1,5 +1,6 @@
 package net.wg.gui.lobby.profile.pages.statistics
 {
+   import net.wg.infrastructure.interfaces.entity.IDisposable;
    import net.wg.gui.lobby.profile.components.chart.AxisChart;
    import net.wg.gui.utils.ExcludeTweenManager;
    import flash.events.Event;
@@ -8,7 +9,7 @@ package net.wg.gui.lobby.profile.pages.statistics
    import scaleform.clik.motion.Tween;
 
 
-   public class StatisticBarChartInitializer extends Object
+   public class StatisticBarChartInitializer extends Object implements IDisposable
    {
           
       public function StatisticBarChartInitializer(param1:AxisChart) {
@@ -19,14 +20,12 @@ package net.wg.gui.lobby.profile.pages.statistics
          DisplayObject(param1.horizontalAxis).addEventListener(StatisticsBarChartAxis.INITIALIZED,this.initializedHandler,false,0,true);
       }
 
-      private static var ANIM_SPEED:Number = 500;
-
       public var chartRef:AxisChart;
 
       private var tweenManager:ExcludeTweenManager;
 
       private function initializedHandler(param1:Event) : void {
-         this.tweenManager.registerAndLaunch(ANIM_SPEED,this.chartRef,{"alpha":1},
+         this.tweenManager.registerAndLaunch(500,this.chartRef,{"alpha":1},
             {
                "ease":Strong.easeOut,
                "onComplete":this.onTweenComplete

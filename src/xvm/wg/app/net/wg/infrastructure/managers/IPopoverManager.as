@@ -6,7 +6,7 @@ package net.wg.infrastructure.managers
    public interface IPopoverManager extends IDisposable
    {
           
-      function show(param1:Object, param2:String, param3:int, param4:int) : void;
+      function show(param1:Object, param2:String, param3:int, param4:int, param5:Object=null) : void;
 
       function hide() : void;
    }

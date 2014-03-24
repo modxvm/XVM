@@ -5,11 +5,11 @@ package net.wg.gui.lobby.GUIEditor
    import flash.utils.getQualifiedClassName;
    import flash.text.TextField;
    import flash.display.InteractiveObject;
+   import net.wg.gui.lobby.GUIEditor.data.ComponentProperties;
    import flash.display.Sprite;
    import flash.display.MovieClip;
    import scaleform.clik.core.UIComponent;
    import scaleform.clik.controls.Button;
-   import scaleform.clik.controls.CoreList;
    import scaleform.clik.controls.ScrollingList;
    import __AS3__.vec.Vector;
 
@@ -105,43 +105,42 @@ package net.wg.gui.lobby.GUIEditor
          var _loc2_:Array = [];
          if(param1  is  InteractiveObject)
          {
-            _loc2_ = _loc2_.concat(["tabEnabled","tabIndex","mouseEnabled","doubleClickEnabled"]);
+            _loc2_ = _loc2_.concat([ComponentProperties.TAB_ENABLED,ComponentProperties.MOUSE_ENABLED,ComponentProperties.DOUBLE_CLICK_ENABLED,ComponentProperties.TAB_INDEX]);
          }
          if(param1  is  DisplayObject)
          {
-            _loc2_ = _loc2_.concat(["x","y","width","height","alpha","name","rotation","scaleX","scaleY","visible"]);
+            _loc2_ = _loc2_.concat([ComponentProperties.VISIBLE,ComponentProperties.X,ComponentProperties.Y,ComponentProperties.WIDTH,ComponentProperties.HEIGHT,ComponentProperties.ROTATION,ComponentProperties.ALPHA,ComponentProperties.SCALE_X,ComponentProperties.SCALE_Y]);
          }
          if(param1  is  DisplayObjectContainer)
          {
-            _loc2_ = _loc2_.concat(["numChildren","tabChildren","mouseChildren"]);
+            _loc2_ = _loc2_.concat([ComponentProperties.TAB_CHILDREN,ComponentProperties.MOUSE_CHILDREN,ComponentProperties.NUM_CHILDREN]);
          }
          if(param1  is  Sprite)
          {
-            _loc2_ = _loc2_.concat(["hitArea","buttonMode","useHandCursor"]);
+            if(param1  is  DisplayObjectContainer)
+            {
+               _loc2_ = _loc2_.concat([ComponentProperties.USE_HAND_CURSOR,ComponentProperties.BUTTON_MODE]);
+            }
          }
          if(param1  is  MovieClip)
          {
-            _loc2_ = _loc2_.concat(["currentFrame","framesLoaded","totalFrames","currentLabel","currentFrameLabel","currentLabels","enabled"]);
+            _loc2_ = _loc2_.concat([ComponentProperties.CURRENT_LABEL,ComponentProperties.CURRENT_FRAME_LABEL,ComponentProperties.ENABLED,ComponentProperties.CURRENT_FRAME,ComponentProperties.FRAMES_LOADED,ComponentProperties.TOTAL_FRAMES]);
          }
          if(param1  is  TextField)
          {
-            _loc2_ = _loc2_.concat(["antiAliasType","autoSize","background","backgroundColor","border","borderColor","bottomScrollV","condenseWhite","embedFonts","htmlText","length","textInteractionMode","maxChars","maxScrollH","maxScrollV","mouseWheelEnabled","multiline","numLines","restrict","scrollH","scrollV","selectable","selectedText","selectionBeginIndex","selectionEndIndex","text","textColor","textHeight","textWidth","type"]);
+            _loc2_ = _loc2_.concat([ComponentProperties.HTML_TEXT,ComponentProperties.TEXT,ComponentProperties.SELECTED_TEXT,ComponentProperties.MULTILINE,ComponentProperties.SELECTABLE,ComponentProperties.HAS_FOCUS,ComponentProperties.TEXT_WIDTH,ComponentProperties.TEXT_HEIGHT,ComponentProperties.BACKGROUND,ComponentProperties.BORDER,ComponentProperties.CONDENSE_WHITE,ComponentProperties.NUMLINES,ComponentProperties.SCROLL_H,ComponentProperties.SCROLL_V,ComponentProperties.MAX_SCROLL_H,ComponentProperties.MAX_SCROLL_V,ComponentProperties.LENGTH,ComponentProperties.MAX_CHARS,ComponentProperties.SELECTION_BEGIN_INDEX,ComponentProperties.SELECTION_END_INDEX,ComponentProperties.MOUSE_WHEEL_ENABLED,ComponentProperties.AUTOSIZE]);
          }
          if(param1  is  UIComponent)
          {
-            _loc2_ = _loc2_.concat(["componentInspectorSetting","hasFocus","focused","focusTarget","actualWidth","actualHeight","actualScaleX","actualScaleY"]);
+            _loc2_ = _loc2_.concat([ComponentProperties.FOCUSED]);
          }
          if(param1  is  Button)
          {
-            _loc2_ = _loc2_.concat(["autoRepeat","owner","selected","groupName","label","autoSize","focusIndicator"]);
-         }
-         if(param1  is  CoreList)
-         {
-            _loc2_ = _loc2_.concat(["itemRendererName","itemRenderer","labelField"]);
+            _loc2_ = _loc2_.concat([ComponentProperties.SELECTED,ComponentProperties.AUTOREPEAT]);
          }
          if(param1  is  ScrollingList)
          {
-            _loc2_ = _loc2_.concat(["margin","scrollBar","scrollPosition","rowCount","rowHeight"]);
+            _loc2_ = _loc2_.concat([ComponentProperties.ROW_COUNT,ComponentProperties.ROW_HEIGHT]);
          }
          return _loc2_;
       }
@@ -163,6 +162,7 @@ package net.wg.gui.lobby.GUIEditor
 
 }   import __AS3__.vec.Vector;
    import net.wg.gui.lobby.GUIEditor.ComponentInfoVo;
+   import net.wg.gui.lobby.GUIEditor.GUIEditorHelper;
    import net.wg.infrastructure.exceptions.ArgumentException;
    import flash.display.DisplayObjectContainer;
    import flash.display.DisplayObject;
@@ -180,11 +180,11 @@ package net.wg.gui.lobby.GUIEditor
          this._ADVANCED_CONTROLS_LINKAGES = ["AccordionUI","ViewStack","AccrodionSoundRendererUI","BigAccrodionSoundRenderer","ButtonBarEx","ClanEmblem","CounterEx","DashLine_UI","DashLine","DoubleProgressBar","FieldSet","HelpLayout","InteractiveSortingButton_UI","ModuleIconUI","moduleIconExtra","PortraitsItemRendererUI","ScalableIconButton_UI","ScalableIconWrapper_UI","ShellButton","SkillItemViewMiniUI","SkillsItemRendererUI","SmallTabButton","SortableHeaderButtonBar_UI","SortingIconLoader","TabButton","TankIcon","TextAreaSimple","vehicleTypeButtonUI"];
          this.LINKAGES = {};
          super();
-         this.LINKAGES[ComponentsInfoContainer.TYPE_SIMPLE] = this._SIMPLE_CONTROLS_LINKAGES;
-         this.LINKAGES[ComponentsInfoContainer.TYPE_STANDART] = this._CONTROLS_LINKAGES;
-         this.LINKAGES[ComponentsInfoContainer.TYPE_ADVANCED] = this._ADVANCED_CONTROLS_LINKAGES;
-         this.LINKAGES[ComponentsInfoContainer.TYPE_NON_SMART] = this._SIMPLE_CONTROLS_LINKAGES.concat(this._CONTROLS_LINKAGES).concat(this._ADVANCED_CONTROLS_LINKAGES);
-         this.LINKAGES[ComponentsInfoContainer.TYPE_SMART] = [];
+         this.LINKAGES[GUIEditorHelper.TYPE_SIMPLE] = this._SIMPLE_CONTROLS_LINKAGES;
+         this.LINKAGES[GUIEditorHelper.TYPE_STANDART] = this._CONTROLS_LINKAGES;
+         this.LINKAGES[GUIEditorHelper.TYPE_ADVANCED] = this._ADVANCED_CONTROLS_LINKAGES;
+         this.LINKAGES[GUIEditorHelper.TYPE_NON_SMART] = this._SIMPLE_CONTROLS_LINKAGES.concat(this._CONTROLS_LINKAGES).concat(this._ADVANCED_CONTROLS_LINKAGES);
+         this.LINKAGES[GUIEditorHelper.TYPE_SMART] = [];
          for (_loc1_ in this.LINKAGES)
          {
             this._information[_loc1_] = this.createComponentsInfoByType(_loc1_);
@@ -215,16 +215,16 @@ package net.wg.gui.lobby.GUIEditor
       public function getComponentsList(param1:String) : Vector.<ComponentInfoVo> {
          switch(param1)
          {
-            case ComponentsInfoContainer.TYPE_ALL:
+            case GUIEditorHelper.TYPE_ALL:
                this.updateSmartControls(App.stage);
-               return this._information[ComponentsInfoContainer.TYPE_NON_SMART].concat(this._information[ComponentsInfoContainer.TYPE_SMART]);
-            case ComponentsInfoContainer.TYPE_SMART:
+               return this._information[GUIEditorHelper.TYPE_NON_SMART].concat(this._information[GUIEditorHelper.TYPE_SMART]);
+            case GUIEditorHelper.TYPE_SMART:
                this.updateSmartControls(App.stage);
-               return this._information[ComponentsInfoContainer.TYPE_SMART];
-            case ComponentsInfoContainer.TYPE_SIMPLE:
-            case ComponentsInfoContainer.TYPE_STANDART:
-            case ComponentsInfoContainer.TYPE_ADVANCED:
-            case ComponentsInfoContainer.TYPE_NON_SMART:
+               return this._information[GUIEditorHelper.TYPE_SMART];
+            case GUIEditorHelper.TYPE_SIMPLE:
+            case GUIEditorHelper.TYPE_STANDART:
+            case GUIEditorHelper.TYPE_ADVANCED:
+            case GUIEditorHelper.TYPE_NON_SMART:
                return this._information[param1];
             default:
                throw new ArgumentException("Unknown components type: " + param1);
@@ -241,10 +241,10 @@ package net.wg.gui.lobby.GUIEditor
             _loc4_ = getQualifiedClassName(_loc3_);
             if(_loc4_.indexOf(".app.") == -1)
             {
-               if(this.LINKAGES[ComponentsInfoContainer.TYPE_NON_SMART].indexOf(_loc4_) == -1 && this.LINKAGES[ComponentsInfoContainer.TYPE_SMART].indexOf(_loc4_) == -1)
+               if(this.LINKAGES[GUIEditorHelper.TYPE_NON_SMART].indexOf(_loc4_) == -1 && this.LINKAGES[GUIEditorHelper.TYPE_SMART].indexOf(_loc4_) == -1)
                {
-                  this._information[ComponentsInfoContainer.TYPE_SMART].push(new ComponentInfoVo(_loc4_));
-                  this.LINKAGES[ComponentsInfoContainer.TYPE_SMART].push(_loc4_);
+                  this._information[GUIEditorHelper.TYPE_SMART].push(new ComponentInfoVo(_loc4_));
+                  this.LINKAGES[GUIEditorHelper.TYPE_SMART].push(_loc4_);
                }
             }
             if(_loc3_  is  DisplayObjectContainer)

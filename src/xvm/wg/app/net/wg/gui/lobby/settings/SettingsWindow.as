@@ -66,6 +66,8 @@ package net.wg.gui.lobby.settings
 
       private var changesData:SettingsChangesMap = null;
 
+      private var needToUpdateGraphicSettings:Boolean = false;
+
       private const CONTROLS_WARNING:String = "controlsWrongNotification";
 
       private const SOUND_MODE_WARNING:String = "soundModeInvalid";
@@ -158,6 +160,11 @@ package net.wg.gui.lobby.settings
          if(_loc3_)
          {
             _loc3_.updateDependentData();
+            this.needToUpdateGraphicSettings = false;
+         }
+         else
+         {
+            this.needToUpdateGraphicSettings = true;
          }
       }
 
@@ -374,7 +381,7 @@ package net.wg.gui.lobby.settings
          {
             if(param1[param3][_loc5_] != undefined)
             {
-               if(_loc5_ == SettingsConfig.PRESETS || _loc5_ == SettingsConfig.QUALITY_ORDER)
+               if(_loc5_ == SettingsConfig.PRESETS || _loc5_ == SettingsConfig.QUALITY_ORDER || _loc5_ == SettingsConfig.COLOR_FILTER_IMAGES)
                {
                   param2[_loc5_] = _loc4_.cloneObject(param1[param3][_loc5_]);
                }
@@ -655,12 +662,24 @@ package net.wg.gui.lobby.settings
                "data":this._settingsData[param1.linkage]
             }
          );
+         trace("onViewNeedUpdateHandler: ",_loc2_);
       }
 
       private function onViewChangeHandler(param1:ViewStackEvent) : void {
          var _loc2_:IViewStackContent = param1.view;
          var _loc3_:ISettingsBase = _loc2_ as ISettingsBase;
-         _loc3_.updateDependentData();
+         if(_loc3_  is  GraphicSettings)
+         {
+            if(this.needToUpdateGraphicSettings)
+            {
+               _loc3_.updateDependentData();
+               this.needToUpdateGraphicSettings = false;
+            }
+         }
+         else
+         {
+            _loc3_.updateDependentData();
+         }
       }
 
       private function onPTTControlChanged(param1:SettingViewEvent) : void {

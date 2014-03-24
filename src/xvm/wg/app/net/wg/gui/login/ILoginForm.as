@@ -26,6 +26,8 @@ package net.wg.gui.login
 
       function setCapsLockState(param1:Boolean) : void;
 
+      function setKeyboardLang(param1:String) : void;
+
       function getSelectedServerName() : String;
 
       function get submit() : SoundButton;

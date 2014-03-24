@@ -178,6 +178,20 @@ package net.wg.gui.lobby.settings.vo
          return new SettingsControlProp(this.current,this.options,this.type,this.hasLabel,this.hasValue,this.isDependOn,this.readOnly,this.advanced,this.prevVal,this.isDataAsSelectedIndex,this._default);
       }
 
+      public function traceValues() : void {
+         trace("current :",this.current);
+         trace("options :",this.options);
+         trace("type :",this.type);
+         trace("hasLabel :",this.hasLabel);
+         trace("hasValue :",this.hasValue);
+         trace("isDependOn :",this.isDependOn);
+         trace("readOnly :",this.readOnly);
+         trace("advanced :",this.advanced);
+         trace("prevVal :",this.prevVal);
+         trace("isDataAsSelectedIndex :",this.isDataAsSelectedIndex);
+         trace("_default :",this._default);
+      }
+
       public function clear() : void {
          if(this._options)
          {

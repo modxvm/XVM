@@ -33,6 +33,8 @@ package net.wg.gui.components.controls
 
       protected var totalHeight:uint;
 
+      public var padding:int = 0;
+
       private var _scrollStepFactor:Number = 1.0;
 
       public var wrapping:String = "normal";
@@ -203,7 +205,7 @@ package net.wg.gui.components.controls
          _loc2_.owner = this;
          _loc2_.validateNow();
          _loc2_.y = this.totalHeight;
-         this.totalHeight = this.totalHeight + Math.round(_loc2_.height);
+         this.totalHeight = this.totalHeight + (Math.round(_loc2_.height) + this.padding);
       }
 
       public function get maxScroll() : Number {
@@ -269,7 +271,7 @@ package net.wg.gui.components.controls
          {
             if(this._scrollBarValue  is  Class)
             {
-               _loc1_ = new this._scrollBarValue as Class() as IScrollBar;
+               _loc1_ = new (this._scrollBarValue as Class)() as IScrollBar;
                _loc1_.addEventListener(MouseEvent.MOUSE_WHEEL,this.blockMouseWheel,false,0,true);
                if(_loc1_ != null)
                {

@@ -213,9 +213,11 @@ package net.wg.gui.components.common.cursor.base
             _loc2_ = this.getDropInfoByHit(InteractiveObject(param1.currentTarget));
             _loc3_ = InteractiveObject(param1.target);
             _loc4_ = _loc2_.container.getHitArea();
+            trace("mouseDn!");
             _loc5_ = _loc2_.container.onBeforeDrop(_loc4_,_loc3_);
             if(_loc5_)
             {
+               trace("canStartDrop!");
                this.setDropping(true);
                forceSetCursor(_loc2_.cursor);
                assertNull(this._dropSenderInfo,"_dropSenderInfo");
@@ -253,9 +255,11 @@ package net.wg.gui.components.common.cursor.base
          assertLifeCycle();
          assertNotNull(this._dropSenderInfo,"_dropSenderInfo");
          var _loc2_:DropInfo = this.getDropInfoByHit(InteractiveObject(param1.currentTarget));
+         trace("droppingHandler!" + _loc2_.state);
          if(_loc2_.state != BaseInfo.STATE_STARTED)
          {
             _loc2_.state = BaseInfo.STATE_STARTED;
+            trace(param1.target + (param1.target  is  IDropItem));
             if(param1.target  is  IDropItem)
             {
                _loc3_ = InteractiveObject(this._dropSenderInfo.container.getHitArea());

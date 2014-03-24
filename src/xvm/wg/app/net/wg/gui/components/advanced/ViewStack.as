@@ -109,7 +109,9 @@ package net.wg.gui.components.advanced
       override protected function onDispose() : void {
          var _loc1_:IDisposable = null;
          var _loc2_:String = null;
-         var _loc3_:uint = 0;
+         var _loc3_:Array = null;
+         var _loc4_:Object = null;
+         var _loc5_:* = 0;
          if(this._targetGroup != null)
          {
             this._targetGroup.removeEventListener(IndexEvent.INDEX_CHANGE,this.onChangeViewHandler);
@@ -119,7 +121,12 @@ package net.wg.gui.components.advanced
          {
             if(this.cache)
             {
-               for (_loc2_ in this.cachedViews)
+               _loc3_ = [];
+               for (_loc4_ in this.cachedViews)
+               {
+                  _loc3_.push(_loc4_);
+               }
+               for each (_loc2_ in _loc3_)
                {
                   if(this.cachedViews[_loc2_]  is  IDisposable)
                   {
@@ -131,18 +138,20 @@ package net.wg.gui.components.advanced
                   }
                }
                this.cachedViews = null;
+               _loc3_.splice(0,_loc3_.length);
+               _loc3_ = null;
             }
             if(this.container.numChildren > 0)
             {
-               _loc3_ = this.container.numChildren-1;
-               while(_loc3_ > 0)
+               _loc5_ = this.container.numChildren-1;
+               while(_loc5_ >= 0)
                {
-                  _loc1_ = IDisposable(this.container.getChildAt(_loc3_));
+                  _loc1_ = IDisposable(this.container.getChildAt(_loc5_));
                   if(!(_loc1_  is  IDAAPIEntity))
                   {
                      _loc1_.dispose();
                   }
-                  _loc3_--;
+                  _loc5_--;
                }
             }
             removeChild(this.container);

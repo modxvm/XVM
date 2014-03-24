@@ -43,7 +43,7 @@ package net.wg.gui.lobby.profile.components
          }
          this.dropdownMenu.addEventListener(ListEvent.INDEX_CHANGE,this.menuIndexChangeHandler,false,0,true);
          var _loc1_:Array = [];
-         var _loc2_:Array = [PROFILE.PROFILE_DROPDOWN_LABELS_ALL,PROFILE.PROFILE_DROPDOWN_LABELS_TEAM];
+         var _loc2_:Array = [PROFILE.PROFILE_DROPDOWN_LABELS_ALL,PROFILE.PROFILE_DROPDOWN_LABELS_TEAM,PROFILE.PROFILE_DROPDOWN_LABELS_HISTORICAL];
          var _loc3_:uint = _loc2_.length;
          var _loc5_:* = 0;
          while(_loc5_ < _loc3_)

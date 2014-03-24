@@ -75,8 +75,17 @@ package net.wg.gui.components.common.containers
       }
 
       public function set itemRendererClass(param1:Class) : void {
-         this._itemRendererClass = param1;
-         invalidateData();
+         if(this._itemRendererClass != param1)
+         {
+            this._itemRendererClass = param1;
+            invalidateData();
+         }
+      }
+
+      override protected function onDispose() : void {
+         this._dataProvider = null;
+         this._itemRendererClass = null;
+         super.onDispose();
       }
    }
 

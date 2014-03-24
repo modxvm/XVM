@@ -143,10 +143,18 @@ package net.wg.gui.lobby.questsWindow
          this.statusMC.y = Math.round(this.timeTF.text?_loc2_ + TIME_TF_PADDING:this.timeTF.y);
          var _loc3_:Number = Math.round(TextField(this.statusMC.textField).textHeight + this.statusMC.y);
          var _loc4_:* = true;
-         if(this.headerData.eventType == QuestsStates.ACTION)
+         if(this.headerData.eventType == QuestsStates.ACTION || !this.headerData.hasRequirements)
          {
             _loc4_ = false;
             this.contentTabs.selectedIndex = 0;
+         }
+         else
+         {
+            if(!this.headerData.hasConditions)
+            {
+               _loc4_ = false;
+               this.contentTabs.selectedIndex = 1;
+            }
          }
          this.contentTabs.visible = _loc4_;
          this.contentTabs.y = Math.round(_loc3_ + CONTENT_TABS_PADDING);

@@ -29,83 +29,65 @@ package
 
       public static const INVITES_PREBATTLE_ACCEPTNOTALLOWED_OTHERPERIPHERY:String = "#invites:invites/prebattle/acceptNotAllowed/otherPeriphery";
 
-      public static const INVITES_PREBATTLE_ACCEPTNOTALLOWED_SQUADALREADYJOINED:String = "#invites:invites/prebattle/acceptNotAllowed/squadAlreadyJoined";
+      public static const INVITES_PREBATTLE_ALREADYJOINED_SQUAD:String = "#invites:invites/prebattle/alreadyJoined/SQUAD";
 
-      public static const INVITES_PREBATTLE_ACCEPTNOTALLOWED_COMPANYALREADYJOINED:String = "#invites:invites/prebattle/acceptNotAllowed/companyAlreadyJoined";
+      public static const INVITES_PREBATTLE_ALREADYJOINED_COMPANY:String = "#invites:invites/prebattle/alreadyJoined/COMPANY";
 
-      public static const INVITES_PREBATTLE_ACCEPTNOTALLOWED_TRAININGALREADYJOINED:String = "#invites:invites/prebattle/acceptNotAllowed/trainingAlreadyJoined";
+      public static const INVITES_PREBATTLE_ALREADYJOINED_TRAINING:String = "#invites:invites/prebattle/alreadyJoined/TRAINING";
 
-      public static const INVITES_PREBATTLE_ACCEPTNOTALLOWED_CLANALREADYJOINED:String = "#invites:invites/prebattle/acceptNotAllowed/clanAlreadyJoined";
+      public static const INVITES_PREBATTLE_ALREADYJOINED_CLAN:String = "#invites:invites/prebattle/alreadyJoined/CLAN";
 
-      public static const INVITES_PREBATTLE_ACCEPTNOTALLOWED_TOURNAMENTALREADYJOINED:String = "#invites:invites/prebattle/acceptNotAllowed/tournamentAlreadyJoined";
+      public static const INVITES_PREBATTLE_ALREADYJOINED_TOURNAMENT:String = "#invites:invites/prebattle/alreadyJoined/TOURNAMENT";
 
-      public static const INVITES_PREBATTLE_ACCEPTNOTALLOWED_UNITALREADYJOINED:String = "#invites:invites/prebattle/acceptNotAllowed/unitAlreadyJoined";
+      public static const INVITES_PREBATTLE_ALREADYJOINED_UNIT:String = "#invites:invites/prebattle/alreadyJoined/UNIT";
 
-      public static const INVITES_SQUAD_INVITE:String = "#invites:invites/squad/invite";
+      public static const INVITES_TEXT_SQUAD:String = "#invites:invites/text/SQUAD";
 
-      public static const INVITES_SQUAD_ACCEPT:String = "#invites:invites/squad/accept";
+      public static const INVITES_TEXT_COMPANY:String = "#invites:invites/text/COMPANY";
 
-      public static const INVITES_SQUAD_REJECT:String = "#invites:invites/squad/reject";
+      public static const INVITES_TEXT_TRAINING:String = "#invites:invites/text/TRAINING";
 
-      public static const INVITES_SQUAD_INVALIDINVITE_SENDER_SIDE:String = "#invites:invites/squad/invalidInvite/sender-side";
+      public static const INVITES_TEXT_UNIT:String = "#invites:invites/text/UNIT";
 
-      public static const INVITES_SQUAD_INVALIDINVITE_RECEIVER_SIDE:String = "#invites:invites/squad/invalidInvite/receiver-side";
+      public static const INVITES_COMMENT:String = "#invites:invites/comment";
 
-      public static const INVITES_COMPANY_INVITE:String = "#invites:invites/company/invite";
+      public static const INVITES_STATE_ACTIVE:String = "#invites:invites/state/ACTIVE";
 
-      public static const INVITES_COMPANY_ACCEPT:String = "#invites:invites/company/accept";
+      public static const INVITES_STATE_ACCEPTED:String = "#invites:invites/state/ACCEPTED";
 
-      public static const INVITES_COMPANY_REJECT:String = "#invites:invites/company/reject";
+      public static const INVITES_STATE_DECLINED:String = "#invites:invites/state/DECLINED";
 
-      public static const INVITES_COMPANY_INVALIDINVITE_SENDER_SIDE:String = "#invites:invites/company/invalidInvite/sender-side";
-
-      public static const INVITES_COMPANY_INVALIDINVITE_RECEIVER_SIDE:String = "#invites:invites/company/invalidInvite/receiver-side";
-
-      public static const INVITES_TRAINING_INVITE:String = "#invites:invites/training/invite";
-
-      public static const INVITES_TRAINING_ACCEPT:String = "#invites:invites/training/accept";
-
-      public static const INVITES_TRAINING_REJECT:String = "#invites:invites/training/reject";
-
-      public static const INVITES_TRAINING_INVALIDINVITE_SENDER_SIDE:String = "#invites:invites/training/invalidInvite/sender-side";
-
-      public static const INVITES_TRAINING_INVALIDINVITE_RECEIVER_SIDE:String = "#invites:invites/training/invalidInvite/receiver-side";
-
-      public static const INVITES_UNIT_INVITE:String = "#invites:invites/unit/invite";
-
-      public static const INVITES_UNIT_ACCEPT:String = "#invites:invites/unit/accept";
-
-      public static const INVITES_UNIT_REJECT:String = "#invites:invites/unit/reject";
-
-      public static const INVITES_UNIT_INVALIDINVITE_SENDER_SIDE:String = "#invites:invites/unit/invalidInvite/sender-side";
-
-      public static const INVITES_UNIT_INVALIDINVITE_RECEIVER_SIDE:String = "#invites:invites/unit/invalidInvite/receiver-side";
+      public static const INVITES_STATE_EXPIRED:String = "#invites:invites/state/EXPIRED";
 
       public static const INVITES_NOTE_SERVER_CHANGE:String = "#invites:invites/note/server_change";
 
-      public static const INVITES_NOTE_COMPANY_LEAVE:String = "#invites:invites/note/company/leave";
+      public static const INVITES_NOTE_LEAVE_COMPANY:String = "#invites:invites/note/leave/COMPANY";
 
-      public static const INVITES_NOTE_COMPANY_LEAVE_AND_CHANGE:String = "#invites:invites/note/company/leave_and_change";
+      public static const INVITES_NOTE_CHANGE_AND_LEAVE_COMPANY:String = "#invites:invites/note/change_and_leave/COMPANY";
 
-      public static const INVITES_NOTE_SQUAD_LEAVE:String = "#invites:invites/note/squad/leave";
+      public static const INVITES_NOTE_LEAVE_SQUAD:String = "#invites:invites/note/leave/SQUAD";
 
-      public static const INVITES_NOTE_SQUAD_LEAVE_AND_CHANGE:String = "#invites:invites/note/squad/leave_and_change";
+      public static const INVITES_NOTE_CHANGE_AND_LEAVE_SQUAD:String = "#invites:invites/note/change_and_leave/SQUAD";
 
-      public static const INVITES_NOTE_TRAINING_LEAVE:String = "#invites:invites/note/training/leave";
+      public static const INVITES_NOTE_LEAVE_TRAINING:String = "#invites:invites/note/leave/TRAINING";
 
-      public static const INVITES_NOTE_TRAINING_LEAVE_AND_CHANGE:String = "#invites:invites/note/training/leave_and_change";
+      public static const INVITES_NOTE_CHANGE_AND_LEAVE_TRAINING:String = "#invites:invites/note/change_and_leave/TRAINING";
 
-      public static const INVITES_NOTE_UNIT_LEAVE:String = "#invites:invites/note/unit/leave";
+      public static const INVITES_NOTE_LEAVE_UNIT:String = "#invites:invites/note/leave/UNIT";
 
-      public static const INVITES_NOTE_UNIT_LEAVE_AND_CHANGE:String = "#invites:invites/note/unit/leave_and_change";
+      public static const INVITES_NOTE_CHANGE_AND_LEAVE_UNIT:String = "#invites:invites/note/change_and_leave/UNIT";
 
-      public static const INVITES_NOTE_CLAN_LEAVE:String = "#invites:invites/note/clan/leave";
+      public static const INVITES_NOTE_LEAVE_CLAN:String = "#invites:invites/note/leave/CLAN";
 
-      public static const INVITES_NOTE_CLAN_LEAVE_AND_CHANGE:String = "#invites:invites/note/clan/leave_and_change";
+      public static const INVITES_NOTE_CHANGE_AND_LEAVE_CLAN:String = "#invites:invites/note/change_and_leave/CLAN";
 
-      public static const INVITES_NOTE_TOURNAMENT_LEAVE:String = "#invites:invites/note/tournament/leave";
+      public static const INVITES_NOTE_LEAVE_TOURNAMENT:String = "#invites:invites/note/leave/TOURNAMENT";
 
-      public static const INVITES_NOTE_TOURNAMENT_LEAVE_AND_CHANGE:String = "#invites:invites/note/tournament/leave_and_change";
+      public static const INVITES_NOTE_CHANGE_AND_LEAVE_TOURNAMENT:String = "#invites:invites/note/change_and_leave/TOURNAMENT";
+
+      public static const INVITES_NOTE_LEAVE_HISTORICAL:String = "#invites:invites/note/leave/HISTORICAL";
+
+      public static const INVITES_NOTE_CHANGE_AND_LEAVE_HISTORICAL:String = "#invites:invites/note/change_and_leave/HISTORICAL";
 
       public static const GUI_TITLES_RECEIVEDINVITES:String = "#invites:gui/titles/receivedInvites";
 
@@ -128,6 +110,78 @@ package
       public static const GUI_BUTTONS_REJECT:String = "#invites:gui/buttons/reject";
 
       public static const GUI_BUTTONS_CANCEL:String = "#invites:gui/buttons/cancel";
+
+      public static const INVITES_STATE_ENUM:Array = [INVITES_STATE_ACTIVE,INVITES_STATE_ACCEPTED,INVITES_STATE_DECLINED,INVITES_STATE_EXPIRED];
+
+      public static const INVITES_PREBATTLE_ALREADYJOINED_ENUM:Array = [INVITES_PREBATTLE_ALREADYJOINED_SQUAD,INVITES_PREBATTLE_ALREADYJOINED_COMPANY,INVITES_PREBATTLE_ALREADYJOINED_TRAINING,INVITES_PREBATTLE_ALREADYJOINED_CLAN,INVITES_PREBATTLE_ALREADYJOINED_TOURNAMENT,INVITES_PREBATTLE_ALREADYJOINED_UNIT];
+
+      public static const INVITES_PREBATTLE_ACCEPTNOTALLOWED_ENUM:Array = [INVITES_PREBATTLE_ACCEPTNOTALLOWED_UNDEFINEDPERIPHERY,INVITES_PREBATTLE_ACCEPTNOTALLOWED_OTHERPERIPHERY];
+
+      public static const INVITES_TEXT_ENUM:Array = [INVITES_TEXT_SQUAD,INVITES_TEXT_COMPANY,INVITES_TEXT_TRAINING,INVITES_TEXT_UNIT];
+
+      public static const INVITES_NOTE_CHANGE_AND_LEAVE_ENUM:Array = [INVITES_NOTE_CHANGE_AND_LEAVE_COMPANY,INVITES_NOTE_CHANGE_AND_LEAVE_SQUAD,INVITES_NOTE_CHANGE_AND_LEAVE_TRAINING,INVITES_NOTE_CHANGE_AND_LEAVE_UNIT,INVITES_NOTE_CHANGE_AND_LEAVE_CLAN,INVITES_NOTE_CHANGE_AND_LEAVE_TOURNAMENT,INVITES_NOTE_CHANGE_AND_LEAVE_HISTORICAL];
+
+      public static const INVITES_NOTE_LEAVE_ENUM:Array = [INVITES_NOTE_LEAVE_COMPANY,INVITES_NOTE_LEAVE_SQUAD,INVITES_NOTE_LEAVE_TRAINING,INVITES_NOTE_LEAVE_UNIT,INVITES_NOTE_LEAVE_CLAN,INVITES_NOTE_LEAVE_TOURNAMENT,INVITES_NOTE_LEAVE_HISTORICAL];
+
+      public static function invites_state(param1:String) : String {
+         var _loc2_:String = "#invites:invites/state/" + param1;
+         if(INVITES_STATE_ENUM.indexOf(_loc2_) == -1)
+         {
+            DebugUtils.LOG_WARNING("[invites_state]:locale key \"" + _loc2_ + "\" was not found");
+            return null;
+         }
+         return _loc2_;
+      }
+
+      public static function invites_prebattle_alreadyjoined(param1:String) : String {
+         var _loc2_:String = "#invites:invites/prebattle/alreadyJoined/" + param1;
+         if(INVITES_PREBATTLE_ALREADYJOINED_ENUM.indexOf(_loc2_) == -1)
+         {
+            DebugUtils.LOG_WARNING("[invites_prebattle_alreadyjoined]:locale key \"" + _loc2_ + "\" was not found");
+            return null;
+         }
+         return _loc2_;
+      }
+
+      public static function invites_prebattle_acceptnotallowed(param1:String) : String {
+         var _loc2_:String = "#invites:invites/prebattle/acceptNotAllowed/" + param1;
+         if(INVITES_PREBATTLE_ACCEPTNOTALLOWED_ENUM.indexOf(_loc2_) == -1)
+         {
+            DebugUtils.LOG_WARNING("[invites_prebattle_acceptnotallowed]:locale key \"" + _loc2_ + "\" was not found");
+            return null;
+         }
+         return _loc2_;
+      }
+
+      public static function invites_text(param1:String) : String {
+         var _loc2_:String = "#invites:invites/text/" + param1;
+         if(INVITES_TEXT_ENUM.indexOf(_loc2_) == -1)
+         {
+            DebugUtils.LOG_WARNING("[invites_text]:locale key \"" + _loc2_ + "\" was not found");
+            return null;
+         }
+         return _loc2_;
+      }
+
+      public static function invites_note_change_and_leave(param1:String) : String {
+         var _loc2_:String = "#invites:invites/note/change_and_leave/" + param1;
+         if(INVITES_NOTE_CHANGE_AND_LEAVE_ENUM.indexOf(_loc2_) == -1)
+         {
+            DebugUtils.LOG_WARNING("[invites_note_change_and_leave]:locale key \"" + _loc2_ + "\" was not found");
+            return null;
+         }
+         return _loc2_;
+      }
+
+      public static function invites_note_leave(param1:String) : String {
+         var _loc2_:String = "#invites:invites/note/leave/" + param1;
+         if(INVITES_NOTE_LEAVE_ENUM.indexOf(_loc2_) == -1)
+         {
+            DebugUtils.LOG_WARNING("[invites_note_leave]:locale key \"" + _loc2_ + "\" was not found");
+            return null;
+         }
+         return _loc2_;
+      }
    }
 
 }

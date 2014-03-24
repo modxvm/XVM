@@ -34,6 +34,10 @@ package net.wg.gui.components.common.containers
 
       override protected function draw() : void {
          var _loc1_:Point = null;
+         if(_baseDisposed)
+         {
+            return;
+         }
          super.draw();
          if((isInvalid(LAYOUT_INVALID)) && (this._layout))
          {
@@ -48,6 +52,10 @@ package net.wg.gui.components.common.containers
          this._layout = param1;
          this._layout.target = this;
          invalidate(LAYOUT_INVALID);
+      }
+
+      public function get layout() : IBaseLayout {
+         return this._layout;
       }
 
       override public function addChild(param1:DisplayObject) : DisplayObject {
@@ -83,12 +91,25 @@ package net.wg.gui.components.common.containers
          return super.removeChildAt(param1);
       }
 
+      public function removeAllChildren(param1:Boolean=false) : void {
+         var _loc2_:DisplayObject = null;
+         while(numChildren > 0)
+         {
+            _loc2_ = this.removeChildAt(0);
+            if((param1) && _loc2_  is  IDisposable)
+            {
+               IDisposable(_loc2_).dispose();
+            }
+         }
+      }
+
       override protected function onDispose() : void {
          if(this._layout)
          {
             this._layout.dispose();
             this._layout = null;
          }
+         this.removeAllChildren(true);
          removeEventListener(Event.RESIZE,this.resizeHandler);
          super.onDispose();
       }

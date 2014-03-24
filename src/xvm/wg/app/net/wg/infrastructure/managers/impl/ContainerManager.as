@@ -235,6 +235,10 @@ package net.wg.infrastructure.managers.impl
                }
             }
          }
+         if(!_loc4_)
+         {
+            App.utils.focusHandler.setModalFocus(null);
+         }
       }
 
       public function isModalViewsExisting() : Boolean {

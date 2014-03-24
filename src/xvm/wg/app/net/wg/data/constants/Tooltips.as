@@ -25,6 +25,8 @@ package net.wg.data.constants
 
       public static const TECHTREE_VEHICLE:String = "techtreeVehicle";
 
+      public static const HISTORICAL_VEHICLE:String = "historicalVehicle";
+
       public static const INVENTORY_SHELL:String = "inventoryShell";
 
       public static const INVENTORY_MODULE:String = "inventoryModule";
@@ -55,6 +57,14 @@ package net.wg.data.constants
 
       public static const RSS_NEWS:String = "rssNews";
 
+      public static const MAP:String = "map";
+
+      public static const HISTORICAL_AMMO:String = "historicalAmmo";
+
+      public static const HISTORICAL_MODULES:String = "historicalModules";
+
+      public static const SETTINGS_CONTROL:String = "control";
+
       public static const TYPE_WARNING:String = "WARNING";
 
       public static const TYPE_INFO:String = "INFO";
@@ -68,6 +78,10 @@ package net.wg.data.constants
       public static const CYBER_SPORT_SLOT_SELECTED:String = "cyberSportSlotSelected";
 
       public static const CYBER_SPORT_TEAM:String = "cyberSportTeam";
+
+      public static const SIMPLE:String = "simple";
+
+      public static const COMPLEX:String = "complex";
    }
 
 }

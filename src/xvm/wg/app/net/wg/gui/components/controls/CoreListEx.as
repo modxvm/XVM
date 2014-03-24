@@ -55,20 +55,13 @@ package net.wg.gui.components.controls
       }
 
       override protected function cleanUpRenderer(param1:IListItemRenderer) : void {
-         param1.owner = null;
-         param1.focusTarget = null;
          param1.doubleClickEnabled = false;
-         param1.removeEventListener(ButtonEvent.PRESS,this.dispatchItemEvent,false);
-         param1.removeEventListener(ButtonEvent.CLICK,this.handleItemClick,false);
          param1.removeEventListener(ButtonEvent.DRAG_OVER,this.dispatchItemEvent,false);
          param1.removeEventListener(ButtonEvent.DRAG_OUT,this.dispatchItemEvent,false);
          param1.removeEventListener(ButtonEvent.RELEASE_OUTSIDE,this.dispatchItemEvent,false);
-         param1.removeEventListener(MouseEvent.DOUBLE_CLICK,this.dispatchItemEvent,false);
-         param1.removeEventListener(MouseEvent.ROLL_OVER,this.dispatchItemEvent,false);
-         param1.removeEventListener(MouseEvent.ROLL_OUT,this.dispatchItemEvent,false);
-         param1.removeEventListener(MouseEvent.MOUSE_WHEEL,handleMouseWheel,false);
          param1.removeEventListener(ListEventEx.ITEM_DRAG_START,this.onItemStartDrag,false);
          param1.removeEventListener(ListEventEx.ITEM_DRAG_STOP,this.onItemStopDrag,false);
+         super.cleanUpRenderer(param1);
       }
 
       override protected function dispatchItemEvent(param1:Event) : Boolean {

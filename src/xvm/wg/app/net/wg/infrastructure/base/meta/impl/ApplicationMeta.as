@@ -14,6 +14,7 @@ package net.wg.infrastructure.base.meta.impl
    import net.wg.infrastructure.base.meta.IGuiItemsManagerMeta;
    import net.wg.infrastructure.managers.IVoiceChatManager;
    import net.wg.infrastructure.base.meta.IUtilsManagerMeta;
+   import net.wg.utils.ITweenManager;
    import net.wg.infrastructure.base.meta.IGameInputManagerMeta;
 
 
@@ -47,6 +48,8 @@ package net.wg.infrastructure.base.meta.impl
       public var setVoiceChatMgr:Function = null;
 
       public var setUtilsMgr:Function = null;
+
+      public var setTweenMgr:Function = null;
 
       public var setGameInputMgr:Function = null;
 
@@ -112,6 +115,11 @@ package net.wg.infrastructure.base.meta.impl
       public function setUtilsMgrS(param1:IUtilsManagerMeta) : void {
          App.utils.asserter.assertNotNull(this.setUtilsMgr,"setUtilsMgr" + Errors.CANT_NULL);
          this.setUtilsMgr(param1);
+      }
+
+      public function setTweenMgrS(param1:ITweenManager) : void {
+         App.utils.asserter.assertNotNull(this.setTweenMgr,"setTweenMgr" + Errors.CANT_NULL);
+         this.setTweenMgr(param1);
       }
 
       public function setGameInputMgrS(param1:IGameInputManagerMeta) : void {

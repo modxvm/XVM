@@ -8,6 +8,7 @@ package net.wg.infrastructure.base.meta
    import net.wg.infrastructure.managers.IColorSchemeManager;
    import net.wg.infrastructure.managers.ITooltipMgr;
    import net.wg.infrastructure.managers.IVoiceChatManager;
+   import net.wg.utils.ITweenManager;
 
 
    public interface IApplicationMeta extends IEventDispatcher
@@ -36,6 +37,8 @@ package net.wg.infrastructure.base.meta
       function setVoiceChatMgrS(param1:IVoiceChatManager) : void;
 
       function setUtilsMgrS(param1:IUtilsManagerMeta) : void;
+
+      function setTweenMgrS(param1:ITweenManager) : void;
 
       function setGameInputMgrS(param1:IGameInputManagerMeta) : void;
 

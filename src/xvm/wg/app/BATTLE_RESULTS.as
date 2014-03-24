@@ -187,23 +187,23 @@ package
 
       public static const TEAM_STATS_LABELS_SHOTS:String = "#battle_results:team/stats/labels_shots";
 
-      public static const TEAM_STATS_LABELS_HITS:String = "#battle_results:team/stats/labels_hits";
+      public static const TEAM_STATS_LABELS_DIRECTHITS:String = "#battle_results:team/stats/labels_directHits";
 
-      public static const TEAM_STATS_LABELS_HE_HITS:String = "#battle_results:team/stats/labels_he_hits";
+      public static const TEAM_STATS_LABELS_EXPLOSIONHITS:String = "#battle_results:team/stats/labels_explosionHits";
 
-      public static const TEAM_STATS_LABELS_PIERCED:String = "#battle_results:team/stats/labels_pierced";
+      public static const TEAM_STATS_LABELS_PIERCINGS:String = "#battle_results:team/stats/labels_piercings";
 
       public static const TEAM_STATS_LABELS_DAMAGEDEALT:String = "#battle_results:team/stats/labels_damageDealt";
 
-      public static const TEAM_STATS_LABELS_SHOTSRECEIVED:String = "#battle_results:team/stats/labels_shotsReceived";
+      public static const TEAM_STATS_LABELS_DIRECTHITSRECEIVED:String = "#battle_results:team/stats/labels_directHitsReceived";
 
-      public static const TEAM_STATS_LABELS_PIERCEDRECEIVED:String = "#battle_results:team/stats/labels_piercedReceived";
+      public static const TEAM_STATS_LABELS_PIERCINGSRECEIVED:String = "#battle_results:team/stats/labels_piercingsReceived";
 
-      public static const TEAM_STATS_LABELS_NODAMAGESHOTSRECEIVED:String = "#battle_results:team/stats/labels_noDamageShotsReceived";
+      public static const TEAM_STATS_LABELS_NODAMAGEDIRECTHITSRECEIVED:String = "#battle_results:team/stats/labels_noDamageDirectHitsReceived";
 
-      public static const TEAM_STATS_LABELS_HEHITSRECEIVED:String = "#battle_results:team/stats/labels_heHitsReceived";
+      public static const TEAM_STATS_LABELS_EXPLOSIONHITSRECEIVED:String = "#battle_results:team/stats/labels_explosionHitsReceived";
 
-      public static const TEAM_STATS_LABELS_POTENTIALDAMAGERECEIVED:String = "#battle_results:team/stats/labels_potentialDamageReceived";
+      public static const TEAM_STATS_LABELS_DAMAGEBLOCKEDBYARMOR:String = "#battle_results:team/stats/labels_damageBlockedByArmor";
 
       public static const TEAM_STATS_LABELS_TEAMHITSDAMAGE:String = "#battle_results:team/stats/labels_teamHitsDamage";
 

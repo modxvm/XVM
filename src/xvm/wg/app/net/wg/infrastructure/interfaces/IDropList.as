@@ -1,18 +1,17 @@
 package net.wg.infrastructure.interfaces
 {
-   import scaleform.clik.interfaces.IUIComponent;
 
 
-   public interface IDropList extends IUIComponent
+   public interface IDropList extends IUIComponentEx
    {
           
-      function get selectable() : Boolean;
-
-      function set selectable(param1:Boolean) : void;
-
       function highlightList() : void;
 
       function hideHighLight() : void;
+
+      function get selectable() : Boolean;
+
+      function set selectable(param1:Boolean) : void;
    }
 
 }

@@ -105,6 +105,8 @@ package net.wg.gui.lobby.questsWindow.components
             this.tweens.push(_loc6_);
             _loc4_++;
          }
+         setSize(width,Math.round(this.height + param1.heightDiff));
+         dispatchEvent(new ResizableBlockEvent(ResizableBlockEvent.VALIDATE_SCROLL_BAR));
       }
    }
 

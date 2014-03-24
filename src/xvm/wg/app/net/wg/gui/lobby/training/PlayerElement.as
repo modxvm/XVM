@@ -8,7 +8,6 @@ package net.wg.gui.lobby.training
    import net.wg.data.VO.TrainingRoomRendererVO;
    import flash.geom.ColorTransform;
    import scaleform.clik.constants.InvalidationType;
-   import net.wg.data.VO.UserVO;
 
 
    public class PlayerElement extends UIComponent implements IUpdatable
@@ -33,8 +32,6 @@ package net.wg.gui.lobby.training
       public var vehicleLevelField:TextField;
 
       public var stateField:TextField;
-
-      private var _himself:Boolean = false;
 
       private var data:TrainingRoomRendererVO;
 
@@ -76,17 +73,7 @@ package net.wg.gui.lobby.training
          {
             if(this.data)
             {
-               this.nameField.userVO = new UserVO(
-                  {
-                     "accID":this.data.accID,
-                     "uid":this.data.uid,
-                     "fullName":this.data.fullName,
-                     "userName":this.data.userName,
-                     "clanAbbrev":this.data.clanAbbrev,
-                     "region":this.data.region,
-                     "igrType":this.data.igrType
-                  }
-               );
+               this.nameField.userVO = this.data;
                this.vehicleField.text = this.data.vShortName;
                this.stateField.text = this.data.stateString;
                this.vehicleLevelField.text = this.data.vLevel;

@@ -11,6 +11,7 @@ package net.wg.app.impl.base
    import net.wg.utils.IGameInputManager;
    import net.wg.infrastructure.managers.IWaitingView;
    import net.wg.utils.IUtils;
+   import net.wg.utils.ITweenManager;
    import net.wg.infrastructure.managers.ISoundManager;
    import net.wg.infrastructure.managers.IContextMenuManager;
    import net.wg.infrastructure.managers.IPopoverManager;
@@ -43,6 +44,7 @@ package net.wg.app.impl.base
          super();
          App.instance = this;
          this._utils = this.getNewUtils();
+         this._tweenMgr = this.getNewTweenManager();
          this._loader = new LibraryLoader();
          this.createContainers();
          this.createManagers();
@@ -79,6 +81,8 @@ package net.wg.app.impl.base
       private var _waiting:IWaitingView = null;
 
       private var _utils:IUtils = null;
+
+      private var _tweenMgr:ITweenManager = null;
 
       private var _soundMgr:ISoundManager = null;
 
@@ -144,6 +148,10 @@ package net.wg.app.impl.base
 
       public final function get utils() : IUtils {
          return this._utils;
+      }
+
+      public final function get tweenMgr() : ITweenManager {
+         return this._tweenMgr;
       }
 
       public function get libraryLoader() : ILibraryLoader {
@@ -231,6 +239,10 @@ package net.wg.app.impl.base
 
       protected function getNewUtils() : IUtils {
          throw new AbstractException("BaseApp.getNewUtils" + Errors.ABSTRACT_INVOKE);
+      }
+
+      protected function getNewTweenManager() : ITweenManager {
+         throw new AbstractException("BaseApp.getNewTween" + Errors.ABSTRACT_INVOKE);
       }
 
       protected function createContainers() : void {
@@ -324,6 +336,7 @@ package net.wg.app.impl.base
          setVoiceChatMgrS(this._voiceChatMgr);
          setGameInputMgrS(this._gameInputMgr);
          setUtilsMgrS(this._utils);
+         setTweenMgrS(this._tweenMgr);
       }
 
       private function populateContainers() : void {

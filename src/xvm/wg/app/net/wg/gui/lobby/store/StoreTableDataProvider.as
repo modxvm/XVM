@@ -17,14 +17,23 @@ package net.wg.gui.lobby.store
       private var _type:String = "";
 
       override public function requestItemAt(param1:uint, param2:Function=null) : Object {
-         var _loc3_:StoreTableData = new StoreTableData(requestItemAtHandler(param1));
-         _loc3_.requestType = this._type;
-         _loc3_.tableVO = this._tableVO;
+         var _loc4_:StoreTableData = null;
+         var _loc3_:Object = requestItemAtHandler(param1);
+         if(_loc3_ != null)
+         {
+            _loc4_ = new StoreTableData(_loc3_);
+            _loc4_.requestType = this._type;
+            _loc4_.tableVO = this._tableVO;
+         }
+         else
+         {
+            _loc4_ = null;
+         }
          if(param2 != null)
          {
-            param2(_loc3_);
+            param2(_loc4_);
          }
-         return _loc3_;
+         return _loc4_;
       }
 
       override public function requestItemRange(param1:int, param2:int, param3:Function=null) : Array {

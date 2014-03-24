@@ -43,7 +43,7 @@ package net.wg.gui.cyberSport.helpers
                {
                   App.utils.asserter.assertNotNull(_loc6_,"cursor.attachedSprite" + Errors.CANT_NULL);
                   IUpdatable(_loc6_).update(IDropItem(param2).data);
-                  this._playerID = IDropItem(param2).data.databaseID;
+                  this._playerID = IDropItem(param2).data.dbID;
                }
                else
                {
@@ -60,7 +60,7 @@ package net.wg.gui.cyberSport.helpers
          {
             if(!(_loc3_.data == null) && !_loc3_.data.isCommander)
             {
-               s_lastFreeSlots = [].concat(this._highlightingHandler(UnitCandidateVO(_loc3_.data).databaseID));
+               s_lastFreeSlots = [].concat(this._highlightingHandler(UnitCandidateVO(_loc3_.data).dbID));
                App.utils.asserter.assertNotNull(s_lastFreeSlots,"_lastFreeSlots" + Errors.CANT_NULL);
                return super.onBeforeDrop(param1,param2);
             }
@@ -76,7 +76,7 @@ package net.wg.gui.cyberSport.helpers
          trace(param1,param2,param3,param4.parent,param4);
          App.utils.asserter.assertNotNull(s_lastFreeSlots,"_lastFreeSlots" + Errors.CANT_NULL);
          var _loc5_:IDropItem = IDropItem(param3);
-         var _loc6_:Number = _loc5_.data?_loc5_.data.databaseID:this._playerID;
+         var _loc6_:Number = _loc5_.data?_loc5_.data.dbID:this._playerID;
          if(param4  is  SlotDropIndicator)
          {
             _loc7_ = SlotDropIndicator(param4).index;

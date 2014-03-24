@@ -73,7 +73,7 @@ package net.wg.gui.lobby.profile.pages.technique
             }
             else
             {
-               this.warningTextField.visible = false;
+               this.warningTextField.visible = true;
                this.scrollPane.visible = false;
             }
             this.getPaneContent().data = _loc3_;

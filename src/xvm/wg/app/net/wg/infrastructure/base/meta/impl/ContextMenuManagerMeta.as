@@ -19,6 +19,8 @@ package net.wg.infrastructure.base.meta.impl
 
       public var _isMoneyTransfer:Function = null;
 
+      public var isVehicleWasInBattle:Function = null;
+
       public var showUserInfo:Function = null;
 
       public var showMoneyTransfer:Function = null;
@@ -43,6 +45,16 @@ package net.wg.infrastructure.base.meta.impl
 
       public var kickPlayer:Function = null;
 
+      public var fortDirection:Function = null;
+
+      public var fortAssignPlayers:Function = null;
+
+      public var fortModernization:Function = null;
+
+      public var fortDestroy:Function = null;
+
+      public var fortPrepareOrder:Function = null;
+
       public function getOptionsS(param1:String, param2:String, param3:Number, param4:Object) : Array {
          App.utils.asserter.assertNotNull(this.getOptions,"getOptions" + Errors.CANT_NULL);
          return this.getOptions(param1,param2,param3,param4);
@@ -61,6 +73,11 @@ package net.wg.infrastructure.base.meta.impl
       public function _isMoneyTransferS() : Boolean {
          App.utils.asserter.assertNotNull(this._isMoneyTransfer,"_isMoneyTransfer" + Errors.CANT_NULL);
          return this._isMoneyTransfer();
+      }
+
+      public function isVehicleWasInBattleS(param1:Number) : Boolean {
+         App.utils.asserter.assertNotNull(this.isVehicleWasInBattle,"isVehicleWasInBattle" + Errors.CANT_NULL);
+         return this.isVehicleWasInBattle(param1);
       }
 
       public function showUserInfoS(param1:Number, param2:String) : void {
@@ -121,6 +138,31 @@ package net.wg.infrastructure.base.meta.impl
       public function kickPlayerS(param1:Number) : void {
          App.utils.asserter.assertNotNull(this.kickPlayer,"kickPlayer" + Errors.CANT_NULL);
          this.kickPlayer(param1);
+      }
+
+      public function fortDirectionS() : void {
+         App.utils.asserter.assertNotNull(this.fortDirection,"fortDirection" + Errors.CANT_NULL);
+         this.fortDirection();
+      }
+
+      public function fortAssignPlayersS() : void {
+         App.utils.asserter.assertNotNull(this.fortAssignPlayers,"fortAssignPlayers" + Errors.CANT_NULL);
+         this.fortAssignPlayers();
+      }
+
+      public function fortModernizationS() : void {
+         App.utils.asserter.assertNotNull(this.fortModernization,"fortModernization" + Errors.CANT_NULL);
+         this.fortModernization();
+      }
+
+      public function fortDestroyS() : void {
+         App.utils.asserter.assertNotNull(this.fortDestroy,"fortDestroy" + Errors.CANT_NULL);
+         this.fortDestroy();
+      }
+
+      public function fortPrepareOrderS() : void {
+         App.utils.asserter.assertNotNull(this.fortPrepareOrder,"fortPrepareOrder" + Errors.CANT_NULL);
+         this.fortPrepareOrder();
       }
    }
 

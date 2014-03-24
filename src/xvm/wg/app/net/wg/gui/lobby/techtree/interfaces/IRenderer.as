@@ -75,6 +75,8 @@ package net.wg.gui.lobby.techtree.interfaces
 
       function isWasInBattle() : Boolean;
 
+      function isVehicleCanBeChanged() : Boolean;
+
       function isAvailable4Unlock() : Boolean;
 
       function isAvailable4Buy() : Boolean;

@@ -9,11 +9,11 @@ package net.wg.data.constants.generated
          super();
       }
 
-      public static const CAMOUFLAGE:String = "0";
+      public static const CAMOUFLAGE:Number = 0;
 
-      public static const EMBLEM:String = "1";
+      public static const EMBLEM:Number = 1;
 
-      public static const INSCRIPTION:String = "2";
+      public static const INSCRIPTION:Number = 2;
    }
 
 }

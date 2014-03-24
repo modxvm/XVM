@@ -71,13 +71,14 @@ package net.wg.gui.lobby.hangar.crew
          var _loc5_:* = 0;
          while(_loc5_ < _loc4_)
          {
+            _loc7_ = {};
             if(param1[_loc5_].tankmanID)
             {
                for each (_loc10_ in param2)
                {
                   if(_loc10_.tankmanID == param1[_loc5_].tankmanID)
                   {
-                     _loc7_ = _loc10_;
+                     _loc7_ = App.utils.commons.cloneObject(_loc10_);
                      break;
                   }
                }

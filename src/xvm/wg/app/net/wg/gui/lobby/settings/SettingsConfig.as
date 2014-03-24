@@ -107,6 +107,10 @@ package net.wg.gui.lobby.settings
 
       public static var TYPE_DROPDOWN:String = "DropDown";
 
+      public static var TYPE_STEP_SLIDER:String = "StepSlider";
+
+      public static var TYPE_BUTTON_BAR:String = "ButtonBar";
+
       public static var TYPE_LABEL:String = "Label";
 
       public static var TYPE_VALUE:String = "Value";
@@ -114,6 +118,10 @@ package net.wg.gui.lobby.settings
       public static var TYPE_KEYINPUT:String = "KeyInput";
 
       public static var LOCALIZATION:String = "#settings:";
+
+      public static var NO_COLOR_FILTER_DATA:int = 0;
+
+      public static var ADVANCED_GRAPHICS_DATA:int = 0;
 
       public static var KEYS_LAYOUT:String = "keysLayout";
 
@@ -135,15 +143,25 @@ package net.wg.gui.lobby.settings
 
       public static var DEF_ALTERNATIVE_VOICE:String = "default";
 
+      public static var AUTODETECT_BUTTON:String = "autodetectButton";
+
       public static var QUALITY_ORDER:String = "qualityOrder";
 
       public static var PRESETS:String = "presets";
 
       public static var SIZE:String = "sizes";
 
+      public static var REFRESH_RATE:String = "refreshRate";
+
+      public static var DYNAMIC_RENDERER:String = "dynamicRenderer";
+
       public static var ASPECTRATIO:String = "aspectRatio";
 
       public static var GAMMA:String = "gamma";
+
+      public static var VERTICAL_SYNC:String = "vertSync";
+
+      public static var FOV:String = "fov";
 
       public static var FULL_SCREEN:String = "fullScreen";
 
@@ -163,6 +181,48 @@ package net.wg.gui.lobby.settings
 
       public static var COLOR_GRADING_TECHNIQUE:String = "COLOR_GRADING_TECHNIQUE";
 
+      public static var COLOR_FILTER_INTENSITY:String = "colorFilterIntensity";
+
+      public static var COLOR_FILTER_IMAGES:String = "colorFilterImages";
+
+      public static var IS_COLOR_BLIND:String = "isColorBlind";
+
+      public static var TEXTURE_QUALITY:String = "TEXTURE_QUALITY";
+
+      public static var DECALS_QUALITY:String = "DECALS_QUALITY";
+
+      public static var SHADOWS_QUALITY:String = "SHADOWS_QUALITY";
+
+      public static var TERRAIN_QUALITY:String = "TERRAIN_QUALITY";
+
+      public static var WATER_QUALITY:String = "WATER_QUALITY";
+
+      public static var LIGHTING_QUALITY:String = "LIGHTING_QUALITY";
+
+      public static var SPEEDTREE_QUALITY:String = "SPEEDTREE_QUALITY";
+
+      public static var FLORA_QUALITY:String = "FLORA_QUALITY";
+
+      public static var EFFECTS_QUALITY:String = "EFFECTS_QUALITY";
+
+      public static var POST_PROCESSING_QUALITY:String = "POST_PROCESSING_QUALITY";
+
+      public static var MOTION_BLUR_QUALITY:String = "MOTION_BLUR_QUALITY";
+
+      public static var FAR_PLANE:String = "FAR_PLANE";
+
+      public static var OBJECT_LOD:String = "OBJECT_LOD";
+
+      public static var SNIPER_MODE_EFFECTS_QUALITY:String = "SNIPER_MODE_EFFECTS_QUALITY";
+
+      public static var SNIPER_MODE_GRASS_ENABLED:String = "SNIPER_MODE_GRASS_ENABLED";
+
+      public static var VEHICLE_TRACES_ENABLED:String = "VEHICLE_TRACES_ENABLED";
+
+      public static var VEHICLE_DUST_ENABLED:String = "VEHICLE_DUST_ENABLED";
+
+      public static var FPS_PERFORMANCER:String = "fpsPerfomancer";
+
       public static var RENDER_PIPELINE:String = "RENDER_PIPELINE";
 
       public static var CUSTOM:String = "CUSTOM";
@@ -176,8 +236,6 @@ package net.wg.gui.lobby.settings
       public static var DYNAMIC_CAMERA:String = "dynamicCamera";
 
       public static var HOR_STABILIZATION_SNP:String = "horStabilizationSnp";
-
-      public static var POST_PROCESSING_QUALITY:String = "POST_PROCESSING_QUALITY";
 
       public static var KEY_RANGE:Object = {
                                               "defaultRange":["APOSTROPHE","SEMICOLON","LBRACKET","STOP","COMMA","SLASH","BACKSLASH","RBRACKET","SPACE","LSHIFT","LALT","1","2","3","4","5","6","7","8","9","0","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","W","V","X","Y","Z","UPARROW","DOWNARROW","LEFTARROW","RIGHTARROW","MOUSE0","MOUSE1","MOUSE2","MOUSE3","MOUSE4","MOUSE5","MOUSE6","MOUSE7","F2","F3","F4","F5","F6","F7","F8","F9","F10","F11","F12","INSERT","DELETE","HOME","END","NUMPAD0","NUMPAD1","NUMPAD2","NUMPAD3","NUMPAD4","NUMPAD5","NUMPAD6","NUMPAD7","NUMPAD8","NUMPAD9","NAMPADSLASH","NAMPADSTAR","NUMPADMINUS","ADD","NUMPADPERIOD"],
@@ -206,7 +264,6 @@ package net.wg.gui.lobby.settings
                                                        "gameplay_ctf":new SettingsControlProp(null,null,TYPE_CHECKBOX,false,false,null,true),
                                                        "gameplay_domination":new SettingsControlProp(null,null,TYPE_CHECKBOX),
                                                        "gameplay_assault":new SettingsControlProp(null,null,TYPE_CHECKBOX),
-                                                       "gameplay_nations":new SettingsControlProp(null,null,TYPE_CHECKBOX),
                                                        "minimapAlpha":new SettingsControlProp(null,null,TYPE_SLIDER),
                                                        "enablePostMortemEffect":new SettingsControlProp(null,null,TYPE_CHECKBOX),
                                                        "enablePostMortemDelay":new SettingsControlProp(null,null,TYPE_CHECKBOX),
@@ -235,26 +292,30 @@ package net.wg.gui.lobby.settings
                                                        "sizes":new SettingsControlProp(null,null,TYPE_DROPDOWN),
                                                        "windowSize":new SettingsControlProp(null,null,TYPE_DROPDOWN,false,false,null,true),
                                                        "resolution":new SettingsControlProp(null,null,TYPE_DROPDOWN,false,false,null,true),
+                                                       "refreshRate":new SettingsControlProp(null,null,TYPE_DROPDOWN),
+                                                       "dynamicRenderer":new SettingsControlProp(null,null,TYPE_SLIDER,false,true),
+                                                       "fov":new SettingsControlProp(null,null,TYPE_SLIDER,false,true),
+                                                       "colorFilterIntensity":new SettingsControlProp(null,null,TYPE_SLIDER,false,true),
+                                                       "colorFilterImages":null,
                                                        "fullScreen":new SettingsControlProp(null,null,TYPE_CHECKBOX),
                                                        "vertSync":new SettingsControlProp(null,null,TYPE_CHECKBOX),
-                                                       "tripleBuffered":new SettingsControlProp(null,null,TYPE_CHECKBOX),
                                                        "isColorBlind":new SettingsControlProp(null,null,TYPE_CHECKBOX),
                                                        "graphicsQuality":new SettingsControlProp(null,null,TYPE_DROPDOWN),
-                                                       "RENDER_PIPELINE":new SettingsControlProp(null,null,TYPE_DROPDOWN,true),
-                                                       "TEXTURE_QUALITY":new SettingsControlProp(null,null,TYPE_DROPDOWN,true),
-                                                       "DECALS_QUALITY":new SettingsControlProp(null,null,TYPE_DROPDOWN,true),
-                                                       "SHADOWS_QUALITY":new SettingsControlProp(null,null,TYPE_DROPDOWN,true),
-                                                       "TERRAIN_QUALITY":new SettingsControlProp(null,null,TYPE_DROPDOWN,true),
-                                                       "WATER_QUALITY":new SettingsControlProp(null,null,TYPE_DROPDOWN,true),
-                                                       "LIGHTING_QUALITY":new SettingsControlProp(null,null,TYPE_DROPDOWN,true),
-                                                       "SPEEDTREE_QUALITY":new SettingsControlProp(null,null,TYPE_DROPDOWN,true),
-                                                       "FLORA_QUALITY":new SettingsControlProp(null,null,TYPE_DROPDOWN,true),
-                                                       "EFFECTS_QUALITY":new SettingsControlProp(null,null,TYPE_DROPDOWN,true),
-                                                       "POST_PROCESSING_QUALITY":new SettingsControlProp(null,null,TYPE_DROPDOWN,true),
-                                                       "MOTION_BLUR_QUALITY":new SettingsControlProp(null,null,TYPE_DROPDOWN,true),
-                                                       "FAR_PLANE":new SettingsControlProp(null,null,TYPE_DROPDOWN,true),
-                                                       "OBJECT_LOD":new SettingsControlProp(null,null,TYPE_DROPDOWN,true),
-                                                       "SNIPER_MODE_EFFECTS_QUALITY":new SettingsControlProp(null,null,TYPE_DROPDOWN,true),
+                                                       "RENDER_PIPELINE":new SettingsControlProp(null,null,TYPE_BUTTON_BAR,false),
+                                                       "TEXTURE_QUALITY":new SettingsControlProp(null,null,TYPE_STEP_SLIDER,true),
+                                                       "DECALS_QUALITY":new SettingsControlProp(null,null,TYPE_STEP_SLIDER,true),
+                                                       "SHADOWS_QUALITY":new SettingsControlProp(null,null,TYPE_STEP_SLIDER,true),
+                                                       "TERRAIN_QUALITY":new SettingsControlProp(null,null,TYPE_STEP_SLIDER,true),
+                                                       "WATER_QUALITY":new SettingsControlProp(null,null,TYPE_STEP_SLIDER,true),
+                                                       "LIGHTING_QUALITY":new SettingsControlProp(null,null,TYPE_STEP_SLIDER,true),
+                                                       "SPEEDTREE_QUALITY":new SettingsControlProp(null,null,TYPE_STEP_SLIDER,true),
+                                                       "FLORA_QUALITY":new SettingsControlProp(null,null,TYPE_STEP_SLIDER,true),
+                                                       "EFFECTS_QUALITY":new SettingsControlProp(null,null,TYPE_STEP_SLIDER,true),
+                                                       "POST_PROCESSING_QUALITY":new SettingsControlProp(null,null,TYPE_STEP_SLIDER,true),
+                                                       "MOTION_BLUR_QUALITY":new SettingsControlProp(null,null,TYPE_STEP_SLIDER,true),
+                                                       "FAR_PLANE":new SettingsControlProp(null,null,TYPE_STEP_SLIDER,true),
+                                                       "OBJECT_LOD":new SettingsControlProp(null,null,TYPE_STEP_SLIDER,true),
+                                                       "SNIPER_MODE_EFFECTS_QUALITY":new SettingsControlProp(null,null,TYPE_STEP_SLIDER,true),
                                                        "COLOR_GRADING_TECHNIQUE":new SettingsControlProp(null,null,TYPE_DROPDOWN,true),
                                                        "fpsPerfomancer":new SettingsControlProp(null,null,TYPE_CHECKBOX),
                                                        "SNIPER_MODE_GRASS_ENABLED":new SettingsControlProp(null,null,TYPE_CHECKBOX),
@@ -389,13 +450,14 @@ package net.wg.gui.lobby.settings
                                                     }
                                               };
 
-      public static var liveUpdateVideoSettingsOrderData:Array = [MONITOR,FULL_SCREEN,WINDOW_SIZE,RESOLUTION,SIZE];
+      public static var liveUpdateVideoSettingsOrderData:Array = [MONITOR,FULL_SCREEN,WINDOW_SIZE,RESOLUTION,SIZE,REFRESH_RATE];
 
       public static var liveUpdateVideoSettingsData:Object = {
                                                                 "monitor":null,
                                                                 "fullScreen":null,
                                                                 "windowSize":null,
-                                                                "resolution":null
+                                                                "resolution":null,
+                                                                "refreshRate":null
                                                              };
 
       public static function getControlId(param1:String, param2:String) : String {

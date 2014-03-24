@@ -30,8 +30,6 @@ package net.wg.gui.lobby.battleloading
 
       private static const TIP_IS_INVALID:String = "tip_is_invalid";
 
-      private static const TEAM_VALUES_IS_INVALID:String = "team_value_is_invalid";
-
       public var mapBG:UILoaderAlt;
 
       public var form:BattleLoadingForm;
@@ -56,10 +54,9 @@ package net.wg.gui.lobby.battleloading
 
       private var tip:String = "";
 
-      private var teamValues:Object = null;
-
       override protected function configUI() : void {
          super.configUI();
+         setFocus(this);
       }
 
       override protected function draw() : void {
@@ -99,10 +96,6 @@ package net.wg.gui.lobby.battleloading
          if((isInvalid(TIP_IS_INVALID)) && (this.form))
          {
             this.form.updateTip(this.tip);
-         }
-         if((isInvalid(TEAM_VALUES_IS_INVALID)) && (this.form) && (this.teamValues))
-         {
-            this.form.updateTeamValues(this.teamValues);
          }
       }
 
@@ -192,9 +185,28 @@ package net.wg.gui.lobby.battleloading
          invalidate(TIP_IS_INVALID);
       }
 
-      public function as_setTeamValues(param1:Object) : void {
-         this.teamValues = param1;
-         invalidate(TEAM_VALUES_IS_INVALID);
+      public function as_setPlayerData(param1:Number, param2:Number) : void {
+         this.form.setPlayerInfo(param1,param2);
+      }
+
+      public function as_setVehiclesData(param1:Boolean, param2:Array) : void {
+         this.form.setVehiclesData(param1,param2);
+      }
+
+      public function as_addVehicleInfo(param1:Boolean, param2:Object, param3:Array) : void {
+         this.form.addVehicleInfo(param1,param2,param3);
+      }
+
+      public function as_updateVehicleInfo(param1:Boolean, param2:Object, param3:Array) : void {
+         this.form.updateVehicleInfo(param1,param2,param3);
+      }
+
+      public function as_setVehicleStatus(param1:Boolean, param2:Number, param3:uint, param4:Array) : void {
+         this.form.setVehicleStatus(param1,param2,param3,param4);
+      }
+
+      public function as_setPlayerStatus(param1:Boolean, param2:Number, param3:uint) : void {
+         this.form.setPlayerStatus(param1,param2,param3);
       }
 
       override public function updateStage(param1:Number, param2:Number) : void {
@@ -229,7 +241,6 @@ package net.wg.gui.lobby.battleloading
 
       override protected function onPopulate() : void {
          super.onPopulate();
-         getDataS();
          App.contextMenuMgr.hide();
          this.updateStage(App.appWidth,App.appHeight);
       }

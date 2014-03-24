@@ -31,9 +31,9 @@ package net.wg.gui.components.tooltips.VO
 
       public var stats:Object = null;
 
-      public var vehicleToKill:Array = null;
+      public var vehicles:Array = null;
 
-      public var vehicleToKillLeft:Number = 0;
+      public var vehiclesLeft:Number = 0;
 
       public var isInDossier:Boolean = false;
 
@@ -80,14 +80,14 @@ package net.wg.gui.components.tooltips.VO
                {
                   _loc9_ = _loc4_[_loc8_];
                   _loc6_ = _loc9_[0];
-                  if((_loc6_ == "vehiclesToKill" || _loc6_ == "vehiclesToResearch") && _loc9_[1]  is  Array)
+                  if(_loc9_[1]  is  Array)
                   {
-                     this.vehicleToKill = _loc9_[1];
+                     this.vehicles = _loc9_[1];
                      _loc7_ = _loc9_[2];
-                     this.vehicleToKillLeft = _loc7_ - this.vehicleToKill.length;
-                     if(this.vehicleToKillLeft < 0)
+                     this.vehiclesLeft = _loc7_ - this.vehicles.length;
+                     if(this.vehiclesLeft < 0)
                      {
-                        this.vehicleToKillLeft = 0;
+                        this.vehiclesLeft = 0;
                      }
                   }
                   else

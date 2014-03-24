@@ -17,7 +17,6 @@ package net.wg.gui.messenger.forms
    import scaleform.clik.constants.InputValue;
    import scaleform.clik.constants.NavigationCode;
    import net.wg.gui.messenger.evnts.ChannelsFormEvent;
-   import net.wg.data.constants.Errors;
    import scaleform.clik.constants.InvalidationType;
    import flash.display.InteractiveObject;
 
@@ -74,7 +73,6 @@ package net.wg.gui.messenger.forms
          constraints.addElement("channelRetypePasswordInput",this.channelRetypePasswordInput,Constraints.LEFT | Constraints.RIGHT | Constraints.TOP);
          constraints.addElement("channelCreateButton",this.channelCreateButton,Constraints.LEFT | Constraints.BOTTOM);
          constraints.addElement("bg",this.bg,Constraints.ALL);
-         App.utils.scheduler.envokeInNextFrame(this.setFocusToInput);
       }
 
       override public function handleInput(param1:InputEvent) : void {
@@ -122,15 +120,6 @@ package net.wg.gui.messenger.forms
          dispatchEvent(new ChannelsFormEvent(ChannelsFormEvent.ON_CREATE_CHANNEL,true,false,_loc2_,_loc4_,_loc5_));
       }
 
-      private function setFocusToInput() : void {
-         if(this.channelNameInput.enabled)
-         {
-            this.channelNameInput.validateNow();
-            DebugUtils.LOG_WARNING(Errors.INVALID_FOCUS_USING);
-            App.utils.focusHandler.setFocus(this.channelNameInput);
-         }
-      }
-
       private function onChannelPasswordCheckBox(param1:Event=null) : void {
          this.usePassword = this.channelPasswordCheckBox.selected;
          this.channelFillPasswordLabel.enabled = this.channelRetypePasswordLabel.enabled = this.channelPasswordInput.enabled = this.channelRetypePasswordInput.enabled = this.usePassword;
@@ -159,7 +148,6 @@ package net.wg.gui.messenger.forms
 
       public function update(param1:Object) : void {
          this._data = param1;
-         this.setFocusToInput();
          invalidate(InvalidationType.DATA);
       }
 
@@ -172,7 +160,7 @@ package net.wg.gui.messenger.forms
       }
 
       public function getComponentForFocus() : InteractiveObject {
-         return null;
+         return this.channelNameInput;
       }
    }
 

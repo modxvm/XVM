@@ -144,12 +144,13 @@ package net.wg.gui.lobby.window
       public function as_setWalletStatus(param1:Object) : void {
          var _loc2_:* = false;
          var _loc3_:* = false;
+         var _loc4_:* = false;
          App.utils.voMgr.walletStatusVO.update(param1);
          _loc2_ = !this.onHandHaveNotMoney.updateStatus(App.utils.voMgr.walletStatusVO.goldStatus);
          this.resultHaveNotMoney.updateStatus(App.utils.voMgr.walletStatusVO.goldStatus);
          _loc3_ = !this.onHandHaveNotFreeXp.updateStatus(App.utils.voMgr.walletStatusVO.freeXpStatus);
          this.resultHaveNotFreeXp.updateStatus(App.utils.voMgr.walletStatusVO.freeXpStatus);
-         var _loc4_:Boolean = (_loc2_) && (_loc3_);
+         _loc4_ = (_loc2_) && (_loc3_);
          this.itGoldBefore.visible = _loc2_;
          this.itGoldResult.visible = _loc2_;
          this.itExperienceBefore.visible = _loc3_;
@@ -158,7 +159,6 @@ package net.wg.gui.lobby.window
       }
 
       override protected function configUI() : void {
-         var _loc2_:* = NaN;
          super.configUI();
          this.lblTotalAvailableXp.autoSize = TextFieldAutoSize.RIGHT;
          this.nsXpExchange.minimum = 0;
@@ -170,10 +170,11 @@ package net.wg.gui.lobby.window
          this.submitBtn.addEventListener(ButtonEvent.CLICK,this.submitBtnClickHandler,false,0,true);
          addEventListener(ExchangeXPFromVehicleIR.SELECTION_CHANGED,this.selectionIRChanged,false,0,true);
          this.scrollList.rowCount = 7;
+         this.scrollList.columnsData = this.buttonBar.dataProvider;
          this.cbSelectAll.addEventListener(Event.SELECT,this.checkBoxSelectHandler,false,0,true);
          this.buttonBar.addEventListener(SortingButton.SORT_DIRECTION_CHANGED,this.sortingDirectionChanged,false,0,true);
          this.buttonBar.selectedIndex = 1;
-         this.scrollList.sortByVehicleName(true);
+         this.scrollList.sortByField("vehicleName",true);
          this.itGoldBefore.filters = ExchangeUtils.getGlow(this.itGoldBefore.icon);
          this.itGoldResult.filters = ExchangeUtils.getGlow(this.itGoldResult.icon);
          this.headerMC.rateTo.icon = IconsTypes.ELITE_XP;
@@ -183,7 +184,7 @@ package net.wg.gui.lobby.window
          this.itExperienceResult.textColor = _loc1_;
          this.itExperienceBefore.textColor = _loc1_;
          this.nsXpExchange.textColor = _loc1_;
-         _loc2_ = App.colorSchemeMgr.getRGB(ColorSchemeNames.TEXT_COLOR_GOLD);
+         var _loc2_:Number = App.colorSchemeMgr.getRGB(ColorSchemeNames.TEXT_COLOR_GOLD);
          this.headerMC.rateFrom.textColor = _loc2_;
          this.headerMC.rateFrom.filters = ExchangeUtils.getGlow(this.headerMC.rateFrom.icon);
          this.itGoldResult.textColor = _loc2_;
@@ -322,36 +323,13 @@ package net.wg.gui.lobby.window
       }
 
       private function sortingDirectionChanged(param1:Event) : void {
-         var _loc4_:String = null;
+         var _loc3_:* = false;
          param1.stopImmediatePropagation();
          var _loc2_:SortingButton = SortingButton(param1.target);
-         var _loc3_:* = _loc2_.sortDirection == SortingButton.ASCENDING_SORT;
          if(_loc2_.sortDirection != SortingButton.WITHOUT_SORT)
          {
-            if("btnOk" == _loc2_.id)
-            {
-               this.scrollList.sortSelection(_loc3_);
-            }
-            else
-            {
-               if("btnTank" == _loc2_.id)
-               {
-                  this.scrollList.sortByVehicleName(_loc3_);
-               }
-               else
-               {
-                  if("btnStar" == _loc2_.id)
-                  {
-                     this.scrollList.sortByExperience(_loc3_);
-                  }
-                  else
-                  {
-                     _loc4_ = "FLASH::Unexpected sorting button id! " + this;
-                     DebugUtils.LOG_ERROR(_loc4_);
-                     throw new Error(_loc4_);
-                  }
-               }
-            }
+            _loc3_ = _loc2_.sortDirection == SortingButton.ASCENDING_SORT;
+            this.scrollList.sortByField(_loc2_.id,_loc3_);
          }
       }
 

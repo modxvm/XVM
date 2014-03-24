@@ -1,36 +1,20 @@
 package net.wg.gui.prebattle.data
 {
-   import net.wg.data.daapi.base.DAAPIDataClass;
+   import net.wg.data.VO.ExtendedUserVO;
    import net.wg.gui.prebattle.constants.PrebattleStateFlags;
    import net.wg.gui.prebattle.constants.PrebattleStateString;
    import net.wg.infrastructure.interfaces.IColorScheme;
    import net.wg.data.constants.ColorSchemeNames;
 
 
-   public class PlayerPrbInfoVO extends DAAPIDataClass
+   public class PlayerPrbInfoVO extends ExtendedUserVO
    {
           
       public function PlayerPrbInfoVO(param1:Object) {
          super(param1);
       }
 
-      public var igrType:int = 0;
-
-      public var clanAbbrev:String = "";
-
-      public var region:String = "";
-
-      private var _accID:Number;
-
-      private var _uid:Number;
-
-      private var _userName:String = "";
-
-      private var _fullName:String = "";
-
       private var _time:Number;
-
-      private var _himself:Boolean;
 
       private var _state:Number;
 
@@ -40,12 +24,6 @@ package net.wg.gui.prebattle.data
 
       private var _vLevel:String = "";
 
-      private var _chatRoster:Number;
-
-      private var _isPlayerSpeaking:Boolean = false;
-
-      private var _colors:Array;
-
       private var _dummy:Boolean = false;
 
       private var _vType:String = "";
@@ -54,36 +32,8 @@ package net.wg.gui.prebattle.data
 
       private var _isCreator:Boolean;
 
-      public function get accID() : Number {
-         return this._accID;
-      }
-
-      public function set accID(param1:Number) : void {
-         this._accID = param1;
-      }
-
-      public function get uid() : Number {
-         return this._uid;
-      }
-
-      public function set uid(param1:Number) : void {
-         this._uid = param1;
-      }
-
-      public function get userName() : String {
-         return this._userName;
-      }
-
-      public function set userName(param1:String) : void {
-         this._userName = param1;
-      }
-
-      public function get fullName() : String {
-         return this._fullName;
-      }
-
-      public function set fullName(param1:String) : void {
-         this._fullName = param1;
+      override public function get kickId() : Number {
+         return accID;
       }
 
       public function get time() : Number {
@@ -92,14 +42,6 @@ package net.wg.gui.prebattle.data
 
       public function set time(param1:Number) : void {
          this._time = param1;
-      }
-
-      public function get himself() : Boolean {
-         return this._himself;
-      }
-
-      public function set himself(param1:Boolean) : void {
-         this._himself = param1;
       }
 
       public function get state() : Number {
@@ -132,30 +74,6 @@ package net.wg.gui.prebattle.data
 
       public function set vLevel(param1:String) : void {
          this._vLevel = param1;
-      }
-
-      public function get chatRoster() : Number {
-         return this._chatRoster;
-      }
-
-      public function set chatRoster(param1:Number) : void {
-         this._chatRoster = param1;
-      }
-
-      public function get isPlayerSpeaking() : Boolean {
-         return this._isPlayerSpeaking;
-      }
-
-      public function set isPlayerSpeaking(param1:Boolean) : void {
-         this._isPlayerSpeaking = param1;
-      }
-
-      public function get colors() : Array {
-         return this._colors;
-      }
-
-      public function set colors(param1:Array) : void {
-         this._colors = param1;
       }
 
       public function get dummy() : Boolean {
@@ -236,12 +154,12 @@ package net.wg.gui.prebattle.data
 
       public function getCurrentColor() : Number {
          var _loc1_:IColorScheme = null;
-         if((this.isCreator) && !this.himself)
+         if((this.isCreator) && !himself)
          {
             _loc1_ = App.colorSchemeMgr.getScheme(ColorSchemeNames.TEAM_COMMANDER);
             return _loc1_.rgb;
          }
-         return this._colors?this._colors[this.isOffline()?1:0]:NaN;
+         return _colors?_colors[this.isOffline()?1:0]:NaN;
       }
    }
 

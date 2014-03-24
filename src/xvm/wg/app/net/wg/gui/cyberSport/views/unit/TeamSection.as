@@ -3,7 +3,7 @@ package net.wg.gui.cyberSport.views.unit
    import scaleform.clik.core.UIComponent;
    import net.wg.infrastructure.interfaces.IDropList;
    import flash.text.TextField;
-   import net.wg.gui.cyberSport.controls.CSRosterToggleButton;
+   import net.wg.gui.components.advanced.ToggleButton;
    import net.wg.gui.cyberSport.controls.ButtonDnmIcon;
    import net.wg.gui.cyberSport.controls.ReadyMsg;
    import net.wg.gui.components.controls.SoundButtonEx;
@@ -39,7 +39,7 @@ package net.wg.gui.cyberSport.views.unit
 
       public var lblTeamVehicles:TextField;
 
-      public var btnFreeze:CSRosterToggleButton;
+      public var btnFreeze:ToggleButton;
 
       public var btnConfigure:ButtonDnmIcon;
 

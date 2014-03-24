@@ -7,8 +7,8 @@ package net.wg.gui.lobby.barracks
    import flash.display.MovieClip;
    import net.wg.gui.components.controls.IconText;
    import net.wg.gui.components.controls.ActionPrice;
-   import flash.events.MouseEvent;
    import scaleform.clik.events.ButtonEvent;
+   import flash.events.MouseEvent;
    import net.wg.data.constants.SoundTypes;
    import __AS3__.vec.Vector;
    import flash.geom.Point;
@@ -17,7 +17,6 @@ package net.wg.gui.lobby.barracks
    import scaleform.clik.events.ListEvent;
    import net.wg.data.constants.IconsTypes;
    import net.wg.gui.events.CrewEvent;
-   import net.wg.utils.ICommons;
 
 
    public class BarracksItemRenderer extends SoundListItemRenderer
@@ -81,7 +80,8 @@ package net.wg.gui.lobby.barracks
       private var _isMouseOver:Boolean = false;
 
       override protected function onDispose() : void {
-         removeEventListener(MouseEvent.CLICK,this.onBarracksItemRendererClick,false);
+         removeEventListener(ButtonEvent.CLICK,this.onBarracksItemRendererClick,false);
+         removeEventListener(MouseEvent.CLICK,this.onBarracksItemRendererRightClick,false);
          this.btnDissmiss.removeEventListener(ButtonEvent.CLICK,this.onBtnDissmissClick);
          this.btnDissmiss.removeEventListener(MouseEvent.ROLL_OVER,this.showTooltip,false);
          this.btnDissmiss.removeEventListener(MouseEvent.ROLL_OUT,this.hideTooltip,false);
@@ -242,7 +242,8 @@ package net.wg.gui.lobby.barracks
          this.btnDissmiss.addEventListener(ButtonEvent.CLICK,this.onBtnDissmissClick);
          this.icon.mouseEnabled = this.iconRole.mouseEnabled = this.iconRank.mouseEnabled = false;
          this.icon.mouseChildren = this.iconRole.mouseChildren = this.iconRank.mouseChildren = false;
-         addEventListener(MouseEvent.CLICK,this.onBarracksItemRendererClick,false,0,true);
+         addEventListener(ButtonEvent.CLICK,this.onBarracksItemRendererClick,false,0,true);
+         addEventListener(MouseEvent.CLICK,this.onBarracksItemRendererRightClick,false);
          this.addEventListener(MouseEvent.ROLL_OVER,this.rendererRollOver);
          this.addEventListener(MouseEvent.ROLL_OUT,this.rendererRollOut);
          this.btnDissmiss.addEventListener(MouseEvent.ROLL_OVER,this.showTooltip,false,0,true);
@@ -446,27 +447,30 @@ package net.wg.gui.lobby.barracks
          }
       }
 
-      public function onBarracksItemRendererClick(param1:MouseEvent) : void {
+      public function onBarracksItemRendererClick(param1:ButtonEvent) : void {
          if(param1.target == this.btnDissmiss)
          {
             return;
          }
-         var _loc2_:ICommons = App.utils.commons;
-         if(_loc2_.isLeftButton(param1))
+         if(this._empty)
          {
-            if(this._empty)
+            dispatchEvent(new CrewEvent(CrewEvent.SHOW_RECRUIT_WINDOW,null,true));
+         }
+         else
+         {
+            if(this._buy)
             {
-               dispatchEvent(new CrewEvent(CrewEvent.SHOW_RECRUIT_WINDOW,null,true));
-            }
-            else
-            {
-               if(this._buy)
-               {
-                  dispatchEvent(new CrewEvent(CrewEvent.SHOW_BERTH_BUY_DIALOG));
-               }
+               dispatchEvent(new CrewEvent(CrewEvent.SHOW_BERTH_BUY_DIALOG));
             }
          }
-         if((_loc2_.isRightButton(param1)) && !this._buy && !this._empty)
+      }
+
+      private function onBarracksItemRendererRightClick(param1:MouseEvent) : void {
+         if(param1.target == this.btnDissmiss)
+         {
+            return;
+         }
+         if((App.utils.commons.isRightButton(param1)) && !this._buy && !this._empty)
          {
             dispatchEvent(new CrewEvent(CrewEvent.OPEN_PERSONAL_CASE,data,false,0));
          }

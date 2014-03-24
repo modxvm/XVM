@@ -4,8 +4,8 @@ package scaleform.clik.controls
    import scaleform.clik.interfaces.IDataProvider;
    import flash.display.MovieClip;
    import scaleform.clik.data.DataProvider;
-   import scaleform.clik.events.ListEvent;
    import flash.events.Event;
+   import scaleform.clik.events.ListEvent;
    import flash.events.MouseEvent;
    import scaleform.clik.constants.InvalidationType;
    import scaleform.clik.events.InputEvent;
@@ -140,6 +140,16 @@ package scaleform.clik.controls
 
       override public function set focusable(param1:Boolean) : void {
          super.focusable = param1;
+      }
+
+      override protected function onDispose() : void {
+         if(this._dataProvider)
+         {
+            this._dataProvider.removeEventListener(Event.CHANGE,this.handleDataChange,false);
+            this._dataProvider.cleanUp();
+            this._dataProvider = null;
+         }
+         super.onDispose();
       }
 
       public function get selectedIndex() : int {

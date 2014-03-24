@@ -144,7 +144,7 @@ package net.wg.gui.cyberSport.controls
          var _loc3_:IUserProps = null;
          if(param1.creator)
          {
-            _loc3_ = App.utils.commons.getUserProps(param1.creator.name,param1.creator.clan,param1.creator.region,param1.creator.igrType);
+            _loc3_ = App.utils.commons.getUserProps(param1.creator.userName,param1.creator.clanAbbrev,param1.creator.region,param1.creator.igrType);
             _loc3_.rgb = param1.creator.color;
             App.utils.commons.formatPlayerName(this.commander,_loc3_);
             _loc2_ = this.commander.htmlText;

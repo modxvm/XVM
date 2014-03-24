@@ -3,8 +3,8 @@ package net.wg.gui.components.tooltips
    import flash.text.TextField;
    import flash.display.Sprite;
    import net.wg.data.managers.ITooltipProps;
-   import net.wg.utils.ILocale;
    import net.wg.gui.components.tooltips.VO.IgrVO;
+   import net.wg.utils.ILocale;
    import net.wg.gui.components.tooltips.VO.ToolTipBlockResultVO;
    import flash.text.TextFieldAutoSize;
    import net.wg.gui.components.tooltips.helpers.Utils;
@@ -33,12 +33,12 @@ package net.wg.gui.components.tooltips
       }
 
       override protected function onDispose() : void {
-         super.onDispose();
          if(this.progressBlock)
          {
             content.removeChild(this.progressBlock);
             this.progressBlock = null;
          }
+         super.onDispose();
       }
 
       override public function toString() : String {
@@ -51,12 +51,13 @@ package net.wg.gui.components.tooltips
 
       override protected function redraw() : void {
          var _loc4_:* = NaN;
+         var _loc5_:IgrVO = null;
          var _loc9_:IgrQuestBlock = null;
          var _loc1_:ILocale = App.utils.locale;
          var _loc2_:uint = 0;
          var _loc3_:uint = 0;
          _loc4_ = 300;
-         var _loc5_:IgrVO = new IgrVO(_data);
+         _loc5_ = new IgrVO(_data);
          var _loc6_:Separator = null;
          separators = new Vector.<Separator>();
          contentMargin.bottom = 2;

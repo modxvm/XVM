@@ -27,6 +27,7 @@ package net.wg.infrastructure.managers.utils.impl
    import net.wg.infrastructure.exceptions.ArgumentException;
    import flash.events.MouseEvent;
    import scaleform.gfx.MouseEventEx;
+   import flash.events.IEventDispatcher;
 
 
    public class Commons extends Object implements ICommons
@@ -308,6 +309,22 @@ package net.wg.infrastructure.managers.utils.impl
             return MouseEventEx(param1).buttonIdx == MouseEventEx.RIGHT_BUTTON;
          }
          return false;
+      }
+
+      public function addMultipleHandlers(param1:Vector.<IEventDispatcher>, param2:String, param3:Function) : void {
+         var _loc4_:IEventDispatcher = null;
+         for each (_loc4_ in param1)
+         {
+            _loc4_.addEventListener(param2,param3);
+         }
+      }
+
+      public function removeMultipleHandlers(param1:Vector.<IEventDispatcher>, param2:String, param3:Function) : void {
+         var _loc4_:IEventDispatcher = null;
+         for each (_loc4_ in param1)
+         {
+            _loc4_.removeEventListener(param2,param3);
+         }
       }
    }
 

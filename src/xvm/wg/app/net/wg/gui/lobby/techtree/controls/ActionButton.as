@@ -142,14 +142,6 @@ package net.wg.gui.lobby.techtree.controls
          }
       }
 
-      private function resetTween() : void {
-         if(this.animTween)
-         {
-            this.animTween.paused = true;
-            this.animTween = null;
-         }
-      }
-
       override public function hitTestPoint(param1:Number, param2:Number, param3:Boolean=false) : Boolean {
          return hitArea != null?hitArea.hitTestPoint(param1,param2,param3):super.hitTestPoint(param1,param2,param3);
       }
@@ -220,6 +212,14 @@ package net.wg.gui.lobby.techtree.controls
       override protected function handleReleaseOutside(param1:MouseEvent) : void {
          super.handleReleaseOutside(param1);
          this.endAnimation(false);
+      }
+
+      private function resetTween() : void {
+         if(this.animTween)
+         {
+            this.animTween.paused = true;
+            this.animTween = null;
+         }
       }
 
       private function doAction() : void {

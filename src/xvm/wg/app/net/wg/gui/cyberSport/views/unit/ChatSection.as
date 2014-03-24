@@ -25,8 +25,7 @@ package net.wg.gui.cyberSport.views.unit
           
       public function ChatSection() {
          super();
-         DebugUtils.LOG_WARNING("Incapsulation waas broken. unitChannelComponent.sendButton can be not disposed!");
-         this.unitChannelComponent.sendButton = this.chatSubmitButton as SoundButtonEx;
+         this.unitChannelComponent.externalButton = this.chatSubmitButton as SoundButtonEx;
          this.unitChannelComponent.messageArea.bgForm.alpha = 0;
          this.unitChannelComponent.messageArea.bgForm.visible = false;
       }
@@ -118,7 +117,7 @@ package net.wg.gui.cyberSport.views.unit
 
       override protected function onDispose() : void {
          this.editDescriptionButton.removeEventListener(ButtonEvent.CLICK,this.onEditClick);
-         this.editCommitButton.removeEventListener(ButtonEvent.CLICK,this.onEditClick);
+         this.editCommitButton.removeEventListener(ButtonEvent.CLICK,this.onEditCommitClick);
          this.descriptionInput.removeEventListener(InputEvent.INPUT,this.descriptionInputHandler);
          removeEventListener(InputEvent.INPUT,this.handleInput,false);
          this.editDescriptionButton.dispose();

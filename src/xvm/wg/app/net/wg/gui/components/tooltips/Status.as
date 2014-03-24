@@ -63,7 +63,7 @@ package net.wg.gui.components.tooltips
             this.textField.x = this.icon.width;
          }
          this.textFieldHeader.text = this._header;
-         this.textField.text = this._text;
+         this.textField.htmlText = this._text;
          this.textFormat.color = this._textColor;
          if(param2)
          {

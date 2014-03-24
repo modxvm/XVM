@@ -12,6 +12,7 @@ package net.wg.gui.lobby.questsWindow.components
    import net.wg.gui.components.controls.ScrollingListEx;
    import net.wg.gui.components.advanced.SortableHeaderButtonBar;
    import net.wg.gui.lobby.questsWindow.data.VehiclesSortingBlockVO;
+   import scaleform.clik.utils.Padding;
    import scaleform.clik.constants.InvalidationType;
    import scaleform.clik.events.ListEvent;
    import flash.events.Event;
@@ -70,7 +71,7 @@ package net.wg.gui.lobby.questsWindow.components
             _loc8_.descendingIconSource = _loc3_;
             _loc8_.buttonHeight = _loc4_;
             _loc8_.enabled = true;
-            _loc8_.defaultSortDirection = SortingButton.WITHOUT_SORT;
+            _loc8_.defaultSortDirection = SortingButton.DESCENDING_SORT;
             if(_loc6_ == param1.length-1)
             {
                _loc8_.showSeparator = false;
@@ -107,6 +108,7 @@ package net.wg.gui.lobby.questsWindow.components
       override protected function configUI() : void {
          super.configUI();
          this.sortCheckBox.label = QUESTS.QUESTS_TABLE_INHANGAR;
+         this.vehiclesList.sbPadding = new Padding(5,4,5,1);
       }
 
       override protected function onDispose() : void {

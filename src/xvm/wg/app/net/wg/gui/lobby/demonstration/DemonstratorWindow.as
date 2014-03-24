@@ -24,15 +24,11 @@ package net.wg.gui.lobby.demonstration
 
       public var listEncounter:TileList;
 
-      public var listNations:TileList;
-
       public var scrollStandard:ScrollBar;
 
       public var scrollAssault:ScrollBar;
 
       public var scrollEncounter:ScrollBar;
-
-      public var scrollNations:ScrollBar;
 
       private var model:DemonstratorVO;
 
@@ -46,11 +42,9 @@ package net.wg.gui.lobby.demonstration
          this.scrollStandard.visible = false;
          this.scrollAssault.visible = false;
          this.scrollEncounter.visible = false;
-         this.scrollNations.visible = false;
          this.listStandard.addEventListener(ListEvent.ITEM_CLICK,this.onMapItemClick);
          this.listAssault.addEventListener(ListEvent.ITEM_CLICK,this.onMapItemClick);
          this.listEncounter.addEventListener(ListEvent.ITEM_CLICK,this.onMapItemClick);
-         this.listNations.addEventListener(ListEvent.ITEM_CLICK,this.onMapItemClick);
       }
 
       private function onStageClick(param1:MouseEvent) : void {
@@ -64,7 +58,6 @@ package net.wg.gui.lobby.demonstration
             this.listStandard.dataProvider = this.model.standard;
             this.listAssault.dataProvider = this.model.assault;
             this.listEncounter.dataProvider = this.model.encounter;
-            this.listNations.dataProvider = this.model.nations;
             App.utils.scheduler.envokeInNextFrame(this.updateScrollBars);
          }
       }
@@ -82,15 +75,12 @@ package net.wg.gui.lobby.demonstration
          this.listStandard.removeEventListener(ListEvent.ITEM_CLICK,this.onMapItemClick);
          this.listAssault.removeEventListener(ListEvent.ITEM_CLICK,this.onMapItemClick);
          this.listEncounter.removeEventListener(ListEvent.ITEM_CLICK,this.onMapItemClick);
-         this.listNations.removeEventListener(ListEvent.ITEM_CLICK,this.onMapItemClick);
          this.listStandard.dataProvider.cleanUp();
          this.listStandard.dataProvider = null;
          this.listAssault.dataProvider.cleanUp();
          this.listAssault.dataProvider = null;
          this.listEncounter.dataProvider.cleanUp();
          this.listEncounter.dataProvider = null;
-         this.listNations.dataProvider.cleanUp();
-         this.listNations.dataProvider = null;
       }
 
       private function onMapItemClick(param1:ListEvent) : void {
@@ -101,7 +91,6 @@ package net.wg.gui.lobby.demonstration
          this.scrollStandard.visible = this.scrollStandard.thumb.visible;
          this.scrollAssault.visible = this.scrollAssault.thumb.visible;
          this.scrollEncounter.visible = this.scrollEncounter.thumb.visible;
-         this.scrollNations.visible = this.scrollNations.thumb.visible;
       }
    }
 

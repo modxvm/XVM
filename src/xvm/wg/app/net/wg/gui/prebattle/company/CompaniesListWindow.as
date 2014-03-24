@@ -25,6 +25,7 @@ package net.wg.gui.prebattle.company
    import flash.events.FocusEvent;
    import flash.events.Event;
    import scaleform.clik.events.InputEvent;
+   import flash.events.MouseEvent;
    import net.wg.infrastructure.events.FocusRequestEvent;
    import net.wg.infrastructure.interfaces.entity.IFocusContainer;
    import flash.ui.Keyboard;
@@ -69,8 +70,6 @@ package net.wg.gui.prebattle.company
       private var selectedFilterInBattleCheckbox:Boolean = false;
 
       private var defaultSelectedIndex:int = 0;
-
-      private var isFirstDraw:Boolean = true;
 
       public function as_getCompaniesListDP() : Object {
          return this.companiesDP;
@@ -166,11 +165,21 @@ package net.wg.gui.prebattle.company
          this.filterTextField.addEventListener(Event.CHANGE,this.filterTextField_changeHandler);
          this.filterTextField.addEventListener(InputEvent.INPUT,this.filterTextField_inputHandler);
          this.filterButton.addEventListener(ButtonEvent.CLICK,this.onFilterButtonPress);
+         this.filterButton.addEventListener(MouseEvent.MOUSE_OVER,this.onFilterButtonOver);
+         this.filterButton.addEventListener(MouseEvent.MOUSE_OUT,this.onFilterButtonOut);
          this.filterInBattleCheckbox.selected = this.selectedFilterInBattleCheckbox;
          this.filterTextField.text = this.defaultFilterText;
          addEventListener(CompanyDropDownEvent.SHOW_DROP_DOWN,this.onShowDropwDownHandler);
          this.channelComponent.addEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler);
          this.cmpList.addEventListener(FocusRequestEvent.REQUEST_FOCUS,this.onRequestFocusHandler);
+      }
+
+      private function onFilterButtonOut(param1:MouseEvent) : void {
+         App.toolTipMgr.hide();
+      }
+
+      private function onFilterButtonOver(param1:MouseEvent) : void {
+         App.toolTipMgr.showComplex(TOOLTIPS.PREBATTLE_NAMEFILTERBUTTON);
       }
 
       private function onRequestFocusHandler(param1:FocusRequestEvent) : void {
@@ -195,6 +204,8 @@ package net.wg.gui.prebattle.company
          this.filterTextField.removeEventListener(InputEvent.INPUT,this.filterTextField_inputHandler);
          this.filterTextField.dispose();
          this.filterButton.removeEventListener(ButtonEvent.CLICK,this.onFilterButtonPress);
+         this.filterButton.removeEventListener(MouseEvent.MOUSE_OVER,this.onFilterButtonOver);
+         this.filterButton.removeEventListener(MouseEvent.MOUSE_OUT,this.onFilterButtonOut);
          this.filterButton.dispose();
          this.groupsScrollBar.dispose();
          App.utils.scheduler.cancelTask(this.enableFilterButtons);
@@ -219,13 +230,27 @@ package net.wg.gui.prebattle.company
          {
             this.filterTextField.addEventListener(InputEvent.INPUT,this.filterTextField_inputHandler);
          }
+         var _loc2_:Number = this.getSelectedDivisionData();
          this.refreshButton.enabled = param1;
-         this.filterButton.enabled = param1 == false?false:!(this.filterTextField.text == "");
+         this.filterButton.enabled = (param1) && _loc2_ == 0?!(this.filterTextField.text == ""):false;
          this.division.enabled = param1;
+      }
+
+      private function getSelectedDivisionData() : Number {
+         var _loc2_:Object = null;
+         var _loc1_:Number = -1;
+         if((this.division.dataProvider) && this.division.selectedIndex >= 0)
+         {
+            _loc2_ = this.division.dataProvider.requestItemAt(this.division.selectedIndex);
+            _loc1_ = _loc2_.hasOwnProperty("data")?_loc2_["data"]:-1;
+         }
+         return _loc1_;
       }
 
       private function handleDivisionsChange(param1:ListEvent) : void {
          refreshCompaniesListS(this.filterTextField.text,this.filterInBattleCheckbox.selected,this.division.selectedIndex);
+         var _loc2_:Number = this.getSelectedDivisionData();
+         this.filterButton.enabled = (this.refreshButton.enabled) && _loc2_ == 0?!(this.filterTextField.text == ""):false;
       }
 
       private function refreshButton_buttonClickHandler(param1:ButtonEvent) : void {
@@ -242,7 +267,8 @@ package net.wg.gui.prebattle.company
       }
 
       private function filterTextField_changeHandler(param1:Event) : void {
-         this.filterButton.enabled = this.filterTextField.text == ""?true:this.refreshButton.enabled;
+         var _loc2_:Number = this.getSelectedDivisionData();
+         this.filterButton.enabled = (this.refreshButton.enabled) && _loc2_ == 0?!(this.filterTextField.text == ""):false;
       }
 
       private function onFilterButtonPress(param1:ButtonEvent) : void {

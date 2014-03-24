@@ -22,6 +22,8 @@ package net.wg.app.impl
    import net.wg.infrastructure.managers.utils.impl.VOManager;
    import net.wg.infrastructure.managers.utils.impl.Icons;
    import net.wg.infrastructure.managers.utils.impl.Nations;
+   import net.wg.utils.ITweenManager;
+   import net.wg.infrastructure.managers.utils.impl.TweenManager;
    import net.wg.data.constants.ContainerTypes;
    import net.wg.gui.components.common.CursorManagedContainer;
    import net.wg.gui.components.common.WaitingManagedContainer;
@@ -105,6 +107,10 @@ package net.wg.app.impl
          var _loc1_:IUtils = new Utils(new Asserter(),new Scheduler(),new Locale(),new WGJSON(),new HelpLayout(),new ClassFactory(),new PopupManager(),new Commons(),new FocusHandlerEx(),new EventCollector(),new IME(),new VOManager(),new Icons());
          _loc1_.setNations(new Nations(_loc1_));
          return _loc1_;
+      }
+
+      override protected function getNewTweenManager() : ITweenManager {
+         return new TweenManager();
       }
 
       override protected function createContainers() : void {

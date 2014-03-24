@@ -31,12 +31,6 @@ package net.wg.gui.lobby.questsWindow
 
       public var data:ConditionElementVO = null;
 
-      override protected function configUI() : void {
-         super.configUI();
-         this.container.verticalPadding = VERTICAL_PADDING;
-         this.indexTF.visible = false;
-      }
-
       override protected function onDispose() : void {
          this.leftLabelTF = null;
          this.rightLabelTF = null;
@@ -53,6 +47,12 @@ package net.wg.gui.lobby.questsWindow
       override public function setData(param1:Object) : void {
          this.data = new ConditionElementVO(param1);
          invalidateData();
+      }
+
+      override protected function configUI() : void {
+         super.configUI();
+         this.container.verticalPadding = VERTICAL_PADDING;
+         this.indexTF.visible = false;
       }
 
       override protected function draw() : void {

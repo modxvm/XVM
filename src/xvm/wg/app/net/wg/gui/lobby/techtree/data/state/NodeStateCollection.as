@@ -113,6 +113,10 @@ package net.wg.gui.lobby.techtree.data.state
          {
             _loc2_ = _loc2_ ^ NodeState.SHOP_ACTION;
          }
+         if((param1 & NodeState.VEHICLE_CAN_BE_CHANGED) > 0)
+         {
+            _loc2_ = _loc2_ ^ NodeState.VEHICLE_CAN_BE_CHANGED;
+         }
          return _loc2_;
       }
 
@@ -137,6 +141,10 @@ package net.wg.gui.lobby.techtree.data.state
          if((param1 & NodeState.SHOP_ACTION) > 0)
          {
             _loc2_ = _loc2_ ^ NodeState.SHOP_ACTION;
+         }
+         if((param1 & NodeState.VEHICLE_CAN_BE_CHANGED) > 0)
+         {
+            _loc2_ = _loc2_ ^ NodeState.VEHICLE_CAN_BE_CHANGED;
          }
          return _loc2_;
       }

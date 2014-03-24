@@ -121,9 +121,8 @@ package net.wg.gui.lobby.retrainCrewWindow
       }
 
       private function groupChangeHandler(param1:Event=null) : void {
-         var _loc2_:TankmanTrainingSmallButton = TankmanTrainingSmallButton(this.btnGroup.selectedButton);
          this._selectedId = this.btnGroup.selectedIndex;
-         dispatchEvent(new IndexEvent(IndexEvent.INDEX_CHANGE,false,true,this.btnGroup.selectedIndex,-1,new SelPriceInfo(_loc2_.actionPrice.ico,_loc2_.actionPrice.getData().price)));
+         dispatchEvent(new IndexEvent(IndexEvent.INDEX_CHANGE,false,true,this._selectedId));
       }
 
       public function set crewInfo(param1:Array) : void {

@@ -12,6 +12,7 @@ package net.wg.gui.prebattle.company
    import net.wg.gui.components.controls.ScrollingListEx;
    import scaleform.clik.data.DataProvider;
    import net.wg.gui.components.controls.CheckBox;
+   import net.wg.gui.prebattle.data.PlayerPrbInfoVO;
    import org.idmedia.as3commons.util.StringUtils;
    import scaleform.clik.events.ButtonEvent;
    import net.wg.data.constants.VehicleTypes;
@@ -26,7 +27,6 @@ package net.wg.gui.prebattle.company
    import flash.text.TextFormatAlign;
    import scaleform.clik.utils.Padding;
    import flash.events.Event;
-   import net.wg.gui.prebattle.data.PlayerPrbInfoVO;
    import net.wg.infrastructure.interfaces.IUserContextMenuGenerator;
    import scaleform.gfx.MouseEventEx;
    import net.wg.gui.prebattle.squad.SquadWindowCIGenerator;
@@ -174,7 +174,7 @@ package net.wg.gui.prebattle.company
          while(_loc7_ < _loc6_)
          {
             _loc8_ = _loc5_.requestItemAt(_loc7_);
-            if(_loc8_.uid == param3.uid)
+            if(_loc8_.dbID == param3.dbID)
             {
                _loc8_.state = param3.state;
                _loc8_.vShortName = param3.vShortName;
@@ -203,19 +203,19 @@ package net.wg.gui.prebattle.company
 
       override public function as_setRosterList(param1:int, param2:Boolean, param3:Array) : void {
          var _loc5_:* = 0;
-         var _loc6_:* = 0;
-         var _loc7_:Object = null;
+         var _loc6_:Object = null;
+         var _loc7_:* = 0;
          var _loc4_:Array = [];
          if(param3.length > 0)
          {
             _loc5_ = param3.length;
-            _loc6_ = 0;
-            while(_loc6_ < _loc5_)
+            _loc7_ = 0;
+            while(_loc7_ < _loc5_)
             {
-               _loc7_ = param3[_loc6_] as Object;
-               _loc7_["orderNumber"] = _loc6_ + 1;
-               _loc4_.push(_loc7_);
-               _loc6_++;
+               _loc6_ = param3[_loc7_] as Object;
+               _loc6_["orderNumber"] = _loc7_ + 1;
+               _loc4_.push(new PlayerPrbInfoVO(_loc6_));
+               _loc7_++;
             }
          }
          if(param2)
@@ -876,7 +876,7 @@ package net.wg.gui.prebattle.company
             _loc2_ = PlayerPrbInfoVO(param1.itemData);
             if(_loc2_.accID > -1)
             {
-               _loc3_ = _loc2_.uid > -1;
+               _loc3_ = _loc2_.dbID > -1;
                _loc4_ = new SquadWindowCIGenerator(_loc3_,canKickPlayerS());
                App.contextMenuMgr.showUserContextMenu(this,_loc2_,_loc4_);
             }
@@ -902,7 +902,7 @@ package net.wg.gui.prebattle.company
             _loc3_ = param1.itemData;
             if(_loc3_.accID > -1)
             {
-               _loc4_ = _loc3_.uid > -1;
+               _loc4_ = _loc3_.dbID > -1;
                if(!_loc2_)
                {
                   _loc5_ = new SquadWindowCIGenerator(_loc4_,canKickPlayerS(),true);

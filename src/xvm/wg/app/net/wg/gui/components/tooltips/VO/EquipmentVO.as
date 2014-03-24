@@ -1,6 +1,8 @@
 package net.wg.gui.components.tooltips.VO
 {
+   import net.wg.utils.ILocale;
    import net.wg.data.constants.ValObject;
+   import net.wg.gui.components.tooltips.helpers.Utils;
 
 
    public class EquipmentVO extends Object
@@ -66,6 +68,7 @@ package net.wg.gui.components.tooltips.VO
       public var effectRestriction:String = "";
 
       private function parsHash(param1:Object) : void {
+         var _loc2_:ILocale = null;
          this.eName = (param1.hasOwnProperty("name")) && !(param1["name"] == undefined)?param1["name"]:"";
          this.type = (param1.hasOwnProperty("type")) && !(param1["type"] == undefined)?param1["type"]:"";
          this.icon = (param1.hasOwnProperty("icon")) && !(param1["icon"] == undefined)?param1["icon"]:"";
@@ -128,6 +131,11 @@ package net.wg.gui.components.tooltips.VO
          {
             this.statusHeader = (param1["status"].hasOwnProperty("header")) && !(param1["status"]["header"] == undefined)?param1["status"]["header"]:"";
             this.statusText = (param1["status"].hasOwnProperty("text")) && !(param1["status"]["text"] == undefined)?param1["status"]["text"]:"";
+            if((this.stats.hasOwnProperty("hiddenVehicleCount")) && !(this.statusText == ""))
+            {
+               _loc2_ = App.utils.locale;
+               this.statusText = this.statusText + ("<br/>" + Utils.instance.htmlWrapper(_loc2_.makeString(TOOLTIPS.SUITABLEVEHICLE_HIDDENVEHICLECOUNT),Utils.instance.COLOR_ADD_INFO,14,"$TitleFont") + " " + Utils.instance.htmlWrapper(this.stats["hiddenVehicleCount"].toString(),Utils.instance.COLOR_NUMBER,14,"$TitleFont"));
+            }
             this.statusLevel = (param1["status"].hasOwnProperty("level")) && !(param1["status"]["level"] == undefined)?param1["status"]["level"]:"";
             this.status = !(this.statusHeader == "") || !(this.statusText == "");
          }

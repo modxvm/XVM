@@ -1,35 +1,35 @@
 package net.wg.infrastructure.base.meta.impl
 {
-   import net.wg.infrastructure.base.AbstractView;
+   import net.wg.infrastructure.base.SmartPopOverView;
    import net.wg.data.constants.Errors;
 
 
-   public class NotificationsListMeta extends AbstractView
+   public class NotificationsListMeta extends SmartPopOverView
    {
           
       public function NotificationsListMeta() {
          super();
       }
 
-      public var onWindowClose:Function = null;
-
-      public var onMessageShowMore:Function = null;
+      public var onClickAction:Function = null;
 
       public var onSecuritySettingsLinkClick:Function = null;
 
-      public function onWindowCloseS() : void {
-         App.utils.asserter.assertNotNull(this.onWindowClose,"onWindowClose" + Errors.CANT_NULL);
-         this.onWindowClose();
-      }
+      public var getMessageActualTime:Function = null;
 
-      public function onMessageShowMoreS(param1:Object) : void {
-         App.utils.asserter.assertNotNull(this.onMessageShowMore,"onMessageShowMore" + Errors.CANT_NULL);
-         this.onMessageShowMore(param1);
+      public function onClickActionS(param1:uint, param2:Number, param3:String) : void {
+         App.utils.asserter.assertNotNull(this.onClickAction,"onClickAction" + Errors.CANT_NULL);
+         this.onClickAction(param1,param2,param3);
       }
 
       public function onSecuritySettingsLinkClickS() : void {
          App.utils.asserter.assertNotNull(this.onSecuritySettingsLinkClick,"onSecuritySettingsLinkClick" + Errors.CANT_NULL);
          this.onSecuritySettingsLinkClick();
+      }
+
+      public function getMessageActualTimeS(param1:Number) : String {
+         App.utils.asserter.assertNotNull(this.getMessageActualTime,"getMessageActualTime" + Errors.CANT_NULL);
+         return this.getMessageActualTime(param1);
       }
    }
 

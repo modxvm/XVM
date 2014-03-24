@@ -36,6 +36,8 @@ package net.wg.gui.lobby.techtree.constants
       public static const SHOP_ACTION:uint = 4096;
 
       public static const CAN_SELL:uint = 8192;
+
+      public static const VEHICLE_CAN_BE_CHANGED:uint = 16384;
    }
 
 }

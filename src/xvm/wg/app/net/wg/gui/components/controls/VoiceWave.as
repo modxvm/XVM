@@ -48,6 +48,7 @@ package net.wg.gui.components.controls
          this._speakVisible = App.voiceChatMgr.isVOIPEnabledS();
          if(param1 == this._speak || (this._muted))
          {
+            invalidate(INVALIDATE_SPEAKING);
             return;
          }
          this._farcedStop = param2;

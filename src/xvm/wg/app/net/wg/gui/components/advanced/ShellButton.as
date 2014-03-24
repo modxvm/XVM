@@ -1,14 +1,14 @@
 package net.wg.gui.components.advanced
 {
-   import net.wg.gui.components.controls.SoundButton;
+   import flash.events.MouseEvent;
    import flash.text.TextField;
    import flash.display.MovieClip;
    import net.wg.gui.components.controls.UILoaderAlt;
-   import flash.events.MouseEvent;
+   import net.wg.data.constants.Tooltips;
    import net.wg.data.constants.SoundTypes;
 
 
-   public class ShellButton extends SoundButton
+   public class ShellButton extends AmmunitionButton
    {
           
       public function ShellButton() {
@@ -18,15 +18,35 @@ package net.wg.gui.components.advanced
          this.count = "";
       }
 
-      public var id:String;
+      private static const INV_AMMUN_ICON:String = "invAmmunIcon";
 
-      private var _shellType:String;
+      private static const INV_COUNTER:String = "invCounter";
 
-      private var _shellIcon:String = "";
+      private static const INV_LEVEL:String = "invLevel";
+
+      private static const INV_COUNTER_INDICATOR:String = "invCounterIndicator";
+
+      private static function onOut(param1:MouseEvent) : void {
+         App.toolTipMgr.hide();
+      }
+
+      private var _id:String;
+
+      private var _historicalBattleID:int = -1;
+
+      private var _ammunitionType:String;
+
+      private var _ammunitionIcon:String = "";
 
       private var _count:String;
 
       private var _inventoryCount:String;
+
+      private var _level:int = -1;
+
+      private var _tooltipType:String = "hangarShell";
+
+      private var _tooltip:String = "";
 
       public var count_txt:TextField;
 
@@ -34,33 +54,33 @@ package net.wg.gui.components.advanced
 
       public var iconLoader:UILoaderAlt;
 
+      public var levelMc:MovieClip;
+
+      public var counterIndicator:MovieClip;
+
+      private var _showCounterIndicator:Boolean = false;
+
+      private var _isDischarging:Boolean = false;
+
+      private var _isReloading:Boolean = false;
+
       override protected function configUI() : void {
          super.configUI();
-         _stateMap =
-            {
-               "up":["up"],
-               "over":["over"],
-               "down":["down"],
-               "release":["release","over"],
-               "out":["out","up"],
-               "disabled":["disabled"],
-               "selecting":["selecting","over"],
-               "kb_selecting":["kb_selecting","up"],
-               "kb_release":["kb_release","out","up"],
-               "kb_down":["kb_down","down"]
-            }
-         ;
+         mouseEnabled = enabled;
          if(hitMc != null)
          {
             this.hitArea = hitMc;
          }
+         this.levelMc.visible = false;
          addEventListener(MouseEvent.MOUSE_OVER,this.onOver);
-         addEventListener(MouseEvent.MOUSE_OUT,this.onOut);
+         addEventListener(MouseEvent.MOUSE_OUT,onOut);
+         addEventListener(MouseEvent.CLICK,onOut);
       }
 
       override protected function onDispose() : void {
          removeEventListener(MouseEvent.MOUSE_OVER,this.onOver);
-         removeEventListener(MouseEvent.MOUSE_OUT,this.onOut);
+         removeEventListener(MouseEvent.MOUSE_OUT,onOut);
+         removeEventListener(MouseEvent.CLICK,onOut);
          this.count_txt = null;
          this.countBg = null;
          this.iconLoader.dispose();
@@ -70,36 +90,80 @@ package net.wg.gui.components.advanced
 
       override protected function draw() : void {
          super.draw();
-         if(this.iconLoader)
+         if(isInvalid(INV_AMMUN_ICON))
          {
-            this.iconLoader.visible = !(this.shellIcon == "");
-            if(this.shellIcon != "")
+            if(this.iconLoader)
             {
-               this.iconLoader.source = this.shellIcon;
+               this.iconLoader.visible = !(this.ammunitionIcon == "");
+               if(this.ammunitionIcon != "")
+               {
+                  this.iconLoader.source = this.ammunitionIcon;
+               }
             }
          }
-         if(this.count_txt)
+         if(isInvalid(INV_COUNTER))
          {
-            this.count_txt.text = this._count;
-            this.countBg.visible = !(this._count == "");
+            if(this.count_txt)
+            {
+               this.count_txt.text = this._count;
+               this.countBg.visible = !(this._count == "");
+            }
+         }
+         if(isInvalid(INV_LEVEL))
+         {
+            if(this.levelMc)
+            {
+               if(this._level > 0 && this._level <= 10)
+               {
+                  this.levelMc.visible = true;
+                  this.levelMc.gotoAndStop(this._level);
+               }
+               else
+               {
+                  this.levelMc.visible = false;
+               }
+            }
+         }
+         if(isInvalid(INV_COUNTER_INDICATOR))
+         {
+            if(this.counterIndicator)
+            {
+               if(this._showCounterIndicator)
+               {
+                  this.counterIndicator.visible = true;
+                  this.counterIndicator.gotoAndPlay("showAnim");
+               }
+               else
+               {
+                  this.counterIndicator.visible = false;
+               }
+            }
          }
       }
 
-      public function get shellIcon() : String {
-         return this._shellIcon;
+      public function highlightCounter(param1:Boolean) : void {
+         if(this._showCounterIndicator != param1)
+         {
+            this._showCounterIndicator = param1;
+            invalidate(INV_COUNTER_INDICATOR);
+         }
       }
 
-      public function set shellIcon(param1:String) : void {
-         this._shellIcon = param1;
-         invalidate();
+      public function get ammunitionIcon() : String {
+         return this._ammunitionIcon;
       }
 
-      public function get shellType() : String {
-         return this._shellType;
+      public function set ammunitionIcon(param1:String) : void {
+         this._ammunitionIcon = param1;
+         invalidate(INV_AMMUN_ICON);
       }
 
-      public function set shellType(param1:String) : void {
-         this._shellType = param1;
+      public function get ammunitionType() : String {
+         return this._ammunitionType;
+      }
+
+      public function set ammunitionType(param1:String) : void {
+         this._ammunitionType = param1;
       }
 
       public function get inventoryCount() : String {
@@ -116,21 +180,92 @@ package net.wg.gui.components.advanced
 
       public function set count(param1:String) : void {
          this._count = param1;
+         invalidate(INV_COUNTER);
       }
 
       public function clear() : void {
          this.id = null;
          this.count = "";
-         this.shellIcon = "";
+         this.ammunitionIcon = "";
          label = "";
+         this.level = -1;
+         this._showCounterIndicator = false;
       }
 
       private function onOver(param1:MouseEvent) : void {
-         App.toolTipMgr.showSpecial("hangarShell",null,this.id,this.inventoryCount,this.count);
+         switch(this.tooltipType)
+         {
+            case Tooltips.HANGAR_SHELL:
+               App.toolTipMgr.showSpecial(Tooltips.HANGAR_SHELL,null,this.id,this.historicalBattleID);
+               break;
+            case Tooltips.SIMPLE:
+               if(this._tooltip)
+               {
+                  App.toolTipMgr.show(this._tooltip);
+               }
+               break;
+            case Tooltips.COMPLEX:
+               if(this._tooltip)
+               {
+                  App.toolTipMgr.showComplex(this._tooltip);
+               }
+               break;
+         }
       }
 
-      public function onOut(param1:MouseEvent) : void {
-         App.toolTipMgr.hide();
+      public function get level() : int {
+         return this._level;
+      }
+
+      public function set level(param1:int) : void {
+         this._level = param1;
+         invalidate(INV_LEVEL);
+      }
+
+      public function get tooltipType() : String {
+         return this._tooltipType;
+      }
+
+      public function set tooltipType(param1:String) : void {
+         this._tooltipType = param1;
+      }
+
+      public function get id() : String {
+         return this._id;
+      }
+
+      public function set id(param1:String) : void {
+         this._id = param1;
+      }
+
+      public function get historicalBattleID() : int {
+         return this._historicalBattleID;
+      }
+
+      public function set historicalBattleID(param1:int) : void {
+         this._historicalBattleID = param1;
+      }
+
+      public function get tooltip() : String {
+         return this._tooltip;
+      }
+
+      public function set tooltip(param1:String) : void {
+         this._tooltip = param1;
+      }
+
+      override public function set enabled(param1:Boolean) : void {
+         if(param1 == enabled)
+         {
+            return;
+         }
+         if((this.focusable) && (this.focused) && !param1)
+         {
+            this.focused = 0;
+         }
+         super.enabled = param1;
+         buttonMode = enabled;
+         mouseEnabled = enabled;
       }
    }
 

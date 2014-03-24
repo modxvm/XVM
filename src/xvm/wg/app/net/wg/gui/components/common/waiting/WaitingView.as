@@ -16,29 +16,45 @@ package net.wg.gui.components.common.waiting
 
       public var waitingComponent:WaitingComponent;
 
+      private var frameOnShow:uint = 0;
+
       override public function updateStage(param1:Number, param2:Number) : void {
          super.updateStage(param1,param2);
          this.waitingComponent.setSize(param1,param2);
       }
 
+      public function get isOnStage() : Boolean {
+         return !(stage == null);
+      }
+
       public function show(param1:Object) : void {
+         this.frameOnShow = this.waitingComponent.waitingMc.currentFrame;
          App.utils.scheduler.cancelTask(this.performHide);
          addEventListener(InputEvent.INPUT,this.handleInput,false,0,true);
          assertNotNull(this.waitingComponent,"waitingComponent");
          this.waitingComponent.setMessage(param1.toString());
-         this.visible = true;
+         this.setAnimationStatus(true);
       }
 
       public function hide(param1:Object) : void {
          removeEventListener(InputEvent.INPUT,this.handleInput);
-         App.utils.scheduler.envokeInNextFrame(this.performHide);
+         if(this.frameOnShow == this.waitingComponent.waitingMc.currentFrame)
+         {
+            this.performHide();
+         }
+         else
+         {
+            App.utils.scheduler.envokeInNextFrame(this.performHide);
+         }
       }
 
-      override public function set visible(param1:Boolean) : void {
-         if(!(param1 == visible) && (initialized))
+      public function setAnimationStatus(param1:Boolean) : void {
+         var _loc2_:String = null;
+         if(!(param1 == this.isOnStage) && (initialized))
          {
-            super.visible = param1;
-            this.onWaitingStateChanged();
+            _loc2_ = param1?WaitingChangeVisibilityEvent.WAITING_SHOWN:WaitingChangeVisibilityEvent.WAITING_HIDDEN;
+            dispatchEvent(new WaitingChangeVisibilityEvent(_loc2_));
+            App.containerMgr.updateFocus();
             assertNotNull(this.waitingComponent,"waitingComponent");
             this.waitingComponent.setAnimationStatus(!param1);
             this.waitingComponent.validateNow();
@@ -52,7 +68,8 @@ package net.wg.gui.components.common.waiting
       }
 
       override protected function nextFrameAfterPopulateHandler() : void {
-         super.visible = false;
+         super.nextFrameAfterPopulateHandler();
+         this.setAnimationStatus(false);
       }
 
       override protected function onDispose() : void {
@@ -66,19 +83,13 @@ package net.wg.gui.components.common.waiting
          super.onDispose();
       }
 
-      private function onWaitingStateChanged() : void {
-         var _loc1_:String = visible?WaitingChangeVisibilityEvent.WAITING_SHOWN:WaitingChangeVisibilityEvent.WAITING_HIDDEN;
-         dispatchEvent(new WaitingChangeVisibilityEvent(_loc1_));
-         App.containerMgr.updateFocus();
-      }
-
       override public function handleInput(param1:InputEvent) : void {
          param1.handled = true;
          super.handleInput(param1);
       }
 
       private function performHide() : void {
-         this.visible = false;
+         this.setAnimationStatus(false);
       }
    }
 

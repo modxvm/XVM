@@ -8,6 +8,7 @@ package net.wg.gui.cyberSport.views.unit
    import net.wg.gui.cyberSport.vo.UnitShortVO;
    import scaleform.clik.events.ButtonEvent;
    import flash.events.MouseEvent;
+   import net.wg.gui.cyberSport.vo.UnitCandidateVO;
    import __AS3__.vec.Vector;
    import net.wg.gui.cyberSport.vo.UnitSlotVO;
    import scaleform.clik.constants.InvalidationType;
@@ -87,21 +88,30 @@ package net.wg.gui.cyberSport.views.unit
       }
 
       override protected function draw() : void {
-         var _loc1_:Vector.<UnitSlotVO> = null;
-         var _loc2_:SimpleSlotRenderer = null;
+         var _loc1_:UnitCandidateVO = null;
+         var _loc2_:Vector.<UnitSlotVO> = null;
+         var _loc3_:SimpleSlotRenderer = null;
          super.draw();
          if(isInvalid(InvalidationType.DATA))
          {
-            if(this.model)
+            if((this.model) && (this.model.isAvailable()))
             {
-               App.utils.commons.formatPlayerName(this.headerTF,App.utils.commons.getUserProps(App.utils.locale.makeString(CYBERSPORT.WINDOW_UNITLISTVIEW_SELECTEDTEAM) + " " + this.model.commander.name,this.model.commander.clan,this.model.commander.region));
+               _loc1_ = this.model.commander;
+               if(_loc1_)
+               {
+                  App.utils.commons.formatPlayerName(this.headerTF,App.utils.commons.getUserProps(App.utils.locale.makeString(CYBERSPORT.WINDOW_UNITLISTVIEW_SELECTEDTEAM) + " " + _loc1_.userName,_loc1_.clanAbbrev,_loc1_.region));
+               }
+               else
+               {
+                  this.headerTF.text = "";
+               }
                this.descriptionTF.text = this.model.description;
                this.freezeIcon.visible = this.model.isFreezed;
                this.restrictionIcon.visible = this.model.hasRestrictions;
-               _loc1_ = this.model.slots;
-               for each (_loc2_ in this.slots)
+               _loc2_ = this.model.slots;
+               for each (_loc3_ in this.slots)
                {
-                  _loc2_.slotData = _loc1_[this.slots.indexOf(_loc2_)];
+                  _loc3_.slotData = _loc2_[this.slots.indexOf(_loc3_)];
                }
                this.noUnitScreen.visible = false;
             }

@@ -50,8 +50,6 @@ package net.wg.gui.lobby.settings
 
       public var gameplay_assaultCheckbox:CheckBox = null;
 
-      public var gameplay_nationsCheckbox:CheckBox = null;
-
       public var vibroDeviceConnectionStateField:TextField = null;
 
       public var vibroGainLabel:TextField = null;
@@ -142,7 +140,6 @@ package net.wg.gui.lobby.settings
          this.gameplay_ctfCheckbox.label = SETTINGS.GAMEPLAY_CTF;
          this.gameplay_dominationCheckbox.label = SETTINGS.GAMEPLAY_DOMINATION;
          this.gameplay_assaultCheckbox.label = SETTINGS.GAMEPLAY_ASSAULT;
-         this.gameplay_nationsCheckbox.label = SETTINGS.GAMEPLAY_NATIONS;
          this.vibroDeviceConnectionStateField.text = SETTINGS.VIBRO_DEVICE_STATE_NOTCONNECTED;
          this.vibroGainLabel.text = SETTINGS.VIBRO_LABELS_GAIN;
          this.vibroEngineLabel.text = SETTINGS.VIBRO_LABELS_ENGINE;

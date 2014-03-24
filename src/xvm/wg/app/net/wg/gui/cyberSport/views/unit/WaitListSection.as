@@ -163,7 +163,7 @@ package net.wg.gui.cyberSport.views.unit
 
       private function onListItemClick(param1:ListEventEx) : void {
          var _loc2_:UnitCandidateVO = param1.itemData as UnitCandidateVO;
-         if((param1.buttonIdx == MouseEventEx.RIGHT_BUTTON) && (_loc2_) && !_loc2_.isSelf)
+         if((param1.buttonIdx == MouseEventEx.RIGHT_BUTTON) && (_loc2_) && !_loc2_.himself)
          {
             App.contextMenuMgr.showUserContextMenu(this,_loc2_,new CSPlayerCIGenerator(this._unitData.isCommander));
          }

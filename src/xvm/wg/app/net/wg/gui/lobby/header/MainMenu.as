@@ -63,22 +63,13 @@ package net.wg.gui.lobby.header
             }
          ]);
          super();
-         this.originalWidth = this.width;
       }
-
-      private var originalWidth:Number;
 
       public var bar:HeaderButtonBar;
 
       protected var current:String = "hangar";
 
       protected var buttonsArr:DataProvider;
-
-      override protected function onDispose() : void {
-         super.onDispose();
-         this.bar.removeEventListener(IndexEvent.INDEX_CHANGE,this.buttonClickHandler);
-         this.buttonsArr = null;
-      }
 
       public function setCurrent(param1:String) : void {
          this.current = param1;
@@ -93,6 +84,12 @@ package net.wg.gui.lobby.header
             }
             _loc2_++;
          }
+      }
+
+      override protected function onDispose() : void {
+         super.onDispose();
+         this.bar.removeEventListener(IndexEvent.INDEX_CHANGE,this.buttonClickHandler);
+         this.buttonsArr = null;
       }
 
       override protected function configUI() : void {

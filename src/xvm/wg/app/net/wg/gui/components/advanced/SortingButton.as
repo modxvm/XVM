@@ -193,41 +193,19 @@ package net.wg.gui.components.advanced
       }
 
       protected function applySortDirection() : void {
-         if(this._sortDirection == ASCENDING_SORT)
+         var _loc1_:SortingButtonInfo = SortingButtonInfo(data);
+         var _loc2_:String = this._sortDirection;
+         if((_loc1_.inverted) && (_loc2_ == ASCENDING_SORT || _loc2_ == DESCENDING_SORT))
          {
-            if(this.mcAscendingIcon)
-            {
-               this.mcAscendingIcon.visible = true;
-            }
-            if(this.mcDescendingIcon)
-            {
-               this.mcDescendingIcon.visible = false;
-            }
+            _loc2_ = _loc2_ == ASCENDING_SORT?DESCENDING_SORT:ASCENDING_SORT;
          }
-         else
+         if(this.mcAscendingIcon)
          {
-            if(this._sortDirection == DESCENDING_SORT)
-            {
-               if(this.mcAscendingIcon)
-               {
-                  this.mcAscendingIcon.visible = false;
-               }
-               if(this.mcDescendingIcon)
-               {
-                  this.mcDescendingIcon.visible = true;
-               }
-            }
-            else
-            {
-               if(this.mcAscendingIcon)
-               {
-                  this.mcAscendingIcon.visible = false;
-               }
-               if(this.mcDescendingIcon)
-               {
-                  this.mcDescendingIcon.visible = false;
-               }
-            }
+            this.mcAscendingIcon.visible = _loc2_ == ASCENDING_SORT;
+         }
+         if(this.mcDescendingIcon)
+         {
+            this.mcDescendingIcon.visible = _loc2_ == DESCENDING_SORT;
          }
       }
 

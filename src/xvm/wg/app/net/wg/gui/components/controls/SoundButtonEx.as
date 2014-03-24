@@ -1,6 +1,7 @@
 package net.wg.gui.components.controls
 {
    import net.wg.infrastructure.interfaces.IHelpLayoutComponent;
+   import net.wg.infrastructure.interfaces.IUIComponentEx;
    import flash.display.DisplayObject;
    import flash.text.TextField;
    import flash.display.MovieClip;
@@ -13,7 +14,7 @@ package net.wg.gui.components.controls
    import flash.text.TextFieldAutoSize;
 
 
-   public class SoundButtonEx extends SoundButton implements IHelpLayoutComponent
+   public class SoundButtonEx extends SoundButton implements IHelpLayoutComponent, IUIComponentEx
    {
           
       public function SoundButtonEx() {

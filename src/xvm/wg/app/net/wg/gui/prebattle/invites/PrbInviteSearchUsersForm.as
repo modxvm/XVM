@@ -2,7 +2,6 @@ package net.wg.gui.prebattle.invites
 {
    import net.wg.gui.components.controls.TextInput;
    import net.wg.gui.components.controls.SoundButtonEx;
-   import scaleform.clik.events.ComponentEvent;
    import scaleform.clik.events.ButtonEvent;
    import scaleform.clik.events.InputEvent;
    import flash.ui.Keyboard;
@@ -10,7 +9,7 @@ package net.wg.gui.prebattle.invites
    import org.idmedia.as3commons.util.StringUtils;
    import flash.utils.setTimeout;
    import flash.utils.clearTimeout;
-   import net.wg.data.constants.Errors;
+   import flash.display.InteractiveObject;
 
 
    public class PrbInviteSearchUsersForm extends InviteStackContainerBase
@@ -27,7 +26,6 @@ package net.wg.gui.prebattle.invites
       private var searchButtonIntervalID:uint = 0;
 
       override protected function configUI() : void {
-         this.addEventListener(ComponentEvent.SHOW,this.showHandler);
          this.nameInput.focusable = true;
          if(this.searchButton != null)
          {
@@ -53,7 +51,8 @@ package net.wg.gui.prebattle.invites
       }
 
       private function handleSearchUsers(param1:ButtonEvent=null) : void {
-         var _loc2_:String = StringUtils.trim(this.nameInput.text);
+         var _loc2_:String = null;
+         _loc2_ = StringUtils.trim(this.nameInput.text);
          if(_loc2_ == null)
          {
             return;
@@ -78,19 +77,8 @@ package net.wg.gui.prebattle.invites
          }
       }
 
-      private function showHandler(param1:ComponentEvent) : void {
-         if(visible)
-         {
-            setTimeout(this.setDefaultFocus,50);
-         }
-      }
-
-      private function setDefaultFocus() : void {
-         if(!this.nameInput.hasFocus)
-         {
-            DebugUtils.LOG_WARNING(Errors.INVALID_FOCUS_USING);
-            App.utils.focusHandler.setFocus(this.nameInput);
-         }
+      override public function getComponentForFocus() : InteractiveObject {
+         return this.nameInput;
       }
 
       override protected function onDispose() : void {

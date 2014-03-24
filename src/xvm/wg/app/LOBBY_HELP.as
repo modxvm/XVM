@@ -33,8 +33,6 @@ package
 
       public static const CHAT_CHANNELS:String = "#lobby_help:chat/channels";
 
-      public static const CHAT_INVITES:String = "#lobby_help:chat/invites";
-
       public static const CHAT_SERVICE_CHANNEL:String = "#lobby_help:chat/service-channel";
 
       public static const CHAT_CHANNEL_CAROUSEL:String = "#lobby_help:chat/channel-carousel";

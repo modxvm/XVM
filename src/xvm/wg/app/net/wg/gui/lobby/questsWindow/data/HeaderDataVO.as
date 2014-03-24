@@ -34,6 +34,10 @@ package net.wg.gui.lobby.questsWindow.data
 
       private var _progrTooltip:Object = null;
 
+      public var hasConditions:Boolean = true;
+
+      public var hasRequirements:Boolean = true;
+
       override protected function onDispose() : void {
          this._progrTooltip = null;
          super.onDispose();

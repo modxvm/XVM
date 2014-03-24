@@ -72,11 +72,17 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
 
       public var shell3:ShellButton;
 
+      public var historicalOverlay:HistoricalModulesOverlay;
+
       private var _modulesHL:DisplayObject;
 
       private var _devicesHL:DisplayObject;
 
       private var _hasTurret:Boolean;
+
+      private var _inHistoricalMode:Boolean = false;
+
+      private var _panelEnabled:Boolean = true;
 
       private var storeData:Object;
 
@@ -101,24 +107,14 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
       }
 
       public function disableAmmunitionPanel(param1:Boolean) : void {
-         var _loc2_:DeviceSlot = null;
+         this._panelEnabled = !param1;
          this.maitenanceBtn.enabled = !param1;
          if(this.storeData)
          {
             this.as_setAmmo(this.storeData);
          }
-         var _loc3_:Array = [this.gun,this.turret,this.engine,this.chassis,this.radio,this.optionalDevice1,this.optionalDevice2,this.optionalDevice3,this.equipment1,this.equipment2,this.equipment3];
-         for each (_loc2_ in _loc3_)
-         {
-            if(_loc2_ != this.turret)
-            {
-               _loc2_.enabled = !param1;
-            }
-            else
-            {
-               _loc2_.enabled = !param1 && (this._hasTurret);
-            }
-         }
+         var _loc2_:Array = [this.gun,this.turret,this.engine,this.chassis,this.radio,this.optionalDevice1,this.optionalDevice2,this.optionalDevice3,this.equipment1,this.equipment2,this.equipment3];
+         this.setItemsEnabled(_loc2_,!param1);
       }
 
       public function disableTuningButton(param1:Boolean) : void {
@@ -160,10 +156,12 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
          _loc3_ = [this.shell1,this.shell2,this.shell3];
          for each (_loc2_ in _loc3_)
          {
-            this.events.removeEvent(_loc2_,MouseEvent.CLICK,this.onModuleClick);
+            this.events.removeEvent(_loc2_,ButtonEvent.CLICK,this.onModuleClick);
             _loc2_.dispose();
          }
          this.events = null;
+         this.historicalOverlay.dispose();
+         this.historicalOverlay = null;
       }
 
       public function as_setData(param1:Array, param2:String) : void {
@@ -225,18 +223,19 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
             while(i < SHELLS_COUNT)
             {
                shell = shells[i] as ShellButton;
-               shell.onOut(null);
+               App.toolTipMgr.hide();
                shell.clear();
                shell.enabled = false;
                if(shells.indexOf(shell) < shellsCount)
                {
                   shell.enabled = !data.vehicleLocked;
                   shell.id = data.shells[i].id;
-                  shell.shellType = data.shells[i].type;
-                  shell.shellIcon = data.shells[i].icon;
+                  shell.ammunitionType = data.shells[i].type;
+                  shell.ammunitionIcon = data.shells[i].icon;
                   shell.count = data.shells[i].count;
                   shell.inventoryCount = data.shells[i].inventoryCount;
                   shell.label = data.shells[i].label;
+                  shell.historicalBattleID = data.shells[i].historicalBattleID;
                   loaded = loaded + int(data.shells[i].count);
                }
                i++;
@@ -251,7 +250,18 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
 
       public function as_setVehicleHasTurret(param1:Boolean) : void {
          this._hasTurret = param1;
-         this.turret.enabled = param1;
+         this.turret.enabled = (this._hasTurret) && (this._panelEnabled);
+      }
+
+      public function as_setHistoricalBattle(param1:Number) : void {
+         this._inHistoricalMode = !(param1 == -1);
+         this.historicalOverlay.historicalBattleID = param1;
+         this.historicalOverlay.visible = this._inHistoricalMode;
+      }
+
+      public function as_setModulesEnabled(param1:Boolean) : void {
+         var _loc2_:Array = [this.gun,this.turret,this.engine,this.chassis,this.radio];
+         this.setItemsEnabled(_loc2_,(param1) && (this._panelEnabled));
       }
 
       public function setVehicleStatus(param1:String, param2:String) : void {
@@ -267,6 +277,7 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
          var _loc2_:ShellButton = null;
          super.configUI();
          this.vehicleStateMsg.mouseEnabled = false;
+         this.historicalOverlay.visible = this._inHistoricalMode;
          this.events.addEvent(this,ParamsEvent.HIGHLIGHT_PARAMS,this.onHighlightParams);
          this.events.addEvent(this.maitenanceBtn,ButtonEvent.CLICK,this.onMaintenanceClick);
          this.events.addEvent(this.maitenanceBtn,MouseEvent.ROLL_OVER,this.showTooltip);
@@ -296,19 +307,19 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
          _loc3_ = [this.shell1,this.shell2,this.shell3];
          for each (_loc2_ in _loc3_)
          {
-            this.events.addEvent(_loc2_,MouseEvent.CLICK,this.onModuleClick);
+            this.events.addEvent(_loc2_,ButtonEvent.CLICK,this.onModuleClick);
          }
          this.events.addEvent(App.stage,ModuleInfoEvent.SHOW_INFO,this.onShowModuleInfo);
          this.events.addEvent(App.stage,DeviceEvent.DEVICE_REMOVE,this.onDeviceRemove);
       }
 
       private function subscribeSlot(param1:DeviceSlot) : void {
-         this.events.addEvent(param1,MouseEvent.CLICK,this.onModuleClick);
+         this.events.addEvent(param1,ButtonEvent.CLICK,this.onModuleClick);
          this.events.addEvent(param1,DeviceEvent.DEVICE_CHANGE,this.onDeviceChange);
       }
 
       private function unsubscribeSlot(param1:DeviceSlot) : void {
-         this.events.removeEvent(param1,MouseEvent.CLICK,this.onModuleClick);
+         this.events.removeEvent(param1,ButtonEvent.CLICK,this.onModuleClick);
          this.events.removeEvent(param1,DeviceEvent.DEVICE_CHANGE,this.onDeviceChange);
       }
 
@@ -322,33 +333,28 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
          setVehicleModuleS(param1.newDevice.id,param1.newDevice.slotIndex,_loc2_,true);
       }
 
-      public function onModuleClick(param1:MouseEvent) : void {
-         var _loc2_:MouseEventEx = null;
-         var _loc3_:Array = null;
-         var _loc4_:* = 0;
+      public function onModuleClick(param1:ButtonEvent) : void {
+         var _loc2_:Array = null;
+         var _loc3_:* = 0;
          App.toolTipMgr.hide();
-         if(param1  is  MouseEventEx)
+         if(param1.buttonIdx == MouseEventEx.RIGHT_BUTTON)
          {
-            _loc2_ = param1 as MouseEventEx;
-            if(_loc2_.buttonIdx == MouseEventEx.RIGHT_BUTTON)
+            if(param1.currentTarget.id)
             {
-               if(_loc2_.currentTarget.id)
-               {
-                  showModuleInfoS(param1.currentTarget.id);
-               }
+               showModuleInfoS(param1.currentTarget.id);
             }
-            else
+         }
+         else
+         {
+            if(param1.buttonIdx == MouseEventEx.LEFT_BUTTON && !([this.shell1,this.shell2,this.shell3,this.equipment1,this.equipment2,this.equipment3].indexOf(param1.currentTarget) == -1))
             {
-               if(_loc2_.buttonIdx == MouseEventEx.LEFT_BUTTON && !([this.shell1,this.shell2,this.shell3,this.equipment1,this.equipment2,this.equipment3].indexOf(param1.currentTarget) == -1))
+               _loc2_ = [this.equipment1,this.equipment2,this.equipment3];
+               _loc3_ = _loc2_.indexOf(param1.currentTarget);
+               if(_loc3_ != -1)
                {
-                  _loc3_ = [this.equipment1,this.equipment2,this.equipment3];
-                  _loc4_ = _loc3_.indexOf(param1.currentTarget);
-                  if(_loc4_ != -1)
-                  {
-                     EquipmentSlot(_loc3_[_loc4_]).select.selected = false;
-                  }
-                  showTechnicalMaintenanceS();
+                  EquipmentSlot(_loc2_[_loc3_]).select.selected = false;
                }
+               showTechnicalMaintenanceS();
             }
          }
       }
@@ -416,6 +422,21 @@ package net.wg.gui.lobby.hangar.ammunitionPanel
                return RED_COLOR;
             default:
                return GREEN_COLOR;
+         }
+      }
+
+      public function setItemsEnabled(param1:Array, param2:Boolean) : void {
+         var _loc3_:DeviceSlot = null;
+         for each (_loc3_ in param1)
+         {
+            if(_loc3_ != this.turret)
+            {
+               _loc3_.enabled = param2;
+            }
+            else
+            {
+               _loc3_.enabled = (param2) && (this._hasTurret);
+            }
          }
       }
    }

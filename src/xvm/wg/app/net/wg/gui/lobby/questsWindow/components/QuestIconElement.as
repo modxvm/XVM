@@ -38,6 +38,11 @@ package net.wg.gui.lobby.questsWindow.components
          this.icon.removeEventListener(MouseEvent.CLICK,hideTooltip);
          this.icon.removeEventListener(MouseEvent.ROLL_OVER,this.showTooltip);
          this.icon.dispose();
+         if(this.dataVO)
+         {
+            this.dataVO.dispose();
+            this.dataVO = null;
+         }
          super.onDispose();
       }
 

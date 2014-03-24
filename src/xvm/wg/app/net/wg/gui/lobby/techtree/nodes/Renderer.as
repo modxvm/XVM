@@ -173,6 +173,10 @@ package net.wg.gui.lobby.techtree.nodes
          return (this.dataInited) && (this._valueObject.state & NodeState.WAS_IN_BATTLE) > 0;
       }
 
+      public function isVehicleCanBeChanged() : Boolean {
+         return (this.dataInited) && (this._valueObject.state & NodeState.VEHICLE_CAN_BE_CHANGED) > 0;
+      }
+
       public function isAvailable4Unlock() : Boolean {
          if(!this.dataInited)
          {

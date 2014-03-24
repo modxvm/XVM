@@ -9,6 +9,7 @@ package net.wg.utils
    import flash.display.BitmapData;
    import flash.geom.Rectangle;
    import net.wg.infrastructure.interfaces.IUserProps;
+   import flash.events.IEventDispatcher;
    import flash.events.MouseEvent;
 
 
@@ -36,6 +37,10 @@ package net.wg.utils
       function formatPlayerName(param1:TextField, param2:IUserProps) : Boolean;
 
       function getFullPlayerName(param1:IUserProps) : String;
+
+      function addMultipleHandlers(param1:Vector.<IEventDispatcher>, param2:String, param3:Function) : void;
+
+      function removeMultipleHandlers(param1:Vector.<IEventDispatcher>, param2:String, param3:Function) : void;
 
       function isLeftButton(param1:MouseEvent) : Boolean;
 

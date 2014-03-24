@@ -20,8 +20,6 @@ package net.wg.gui.lobby.battlequeue
          super();
       }
 
-      public var battleIconBig:BattleTypeIcon;
-
       public var battleIcon:BattleTypeIcon;
 
       public var titleField:TextField;
@@ -32,21 +30,15 @@ package net.wg.gui.lobby.battlequeue
 
       public var playersLabel:TextField;
 
-      public var titleFieldLevel:TextField;
-
       public var titleFieldType:TextField;
 
       public var exitButton:SoundButtonEx;
 
       public var startButton:SoundButtonEx;
 
-      public var listByLevel:ScrollingListEx;
-
       public var listByType:ScrollingListEx;
 
       override protected function configUI() : void {
-         this.titleFieldLevel.visible = false;
-         this.listByLevel.visible = false;
          this.titleFieldType.visible = false;
          this.startButton.addEventListener(ButtonEvent.CLICK,this.onStartClick);
          this.exitButton.addEventListener(ButtonEvent.CLICK,this.onExitButton);
@@ -72,38 +64,17 @@ package net.wg.gui.lobby.battlequeue
 
       public function as_setType(param1:Number) : void {
          this.battleIcon.typeByNumber = param1 + 1;
-         this.battleIconBig.typeByNumber = param1 + 1;
          this.titleField.text = MENU.loading_battletypes(param1.toString());
          this.descriptionLabel.text = MENU.loading_battletypes_desc(param1.toString());
       }
 
-      public function as_setPlayers(param1:String, param2:Number) : void {
-         this.playersLabel.htmlText = param1 + " <font color=\"#FFFFFF\">" + param2.toString() + "</font>";
-      }
-
-      public function as_setListByLevel(param1:Object) : void {
-         var _loc2_:Array = null;
-         _loc2_ = new Array();
-         var _loc3_:uint = 0;
-         while(_loc3_ < param1.data.length)
-         {
-            _loc2_.push(
-               {
-                  "type":param1.data.length - _loc3_,
-                  "count":param1.data[_loc3_]
-               }
-            );
-            _loc3_++;
-         }
-         this.titleFieldLevel.text = param1.title;
-         this.titleFieldLevel.visible = true;
-         this.listByLevel.visible = true;
-         this.listByLevel.dataProvider = new DataProvider(_loc2_);
+      public function as_setPlayers(param1:String) : void {
+         this.playersLabel.htmlText = param1;
       }
 
       public function as_setListByType(param1:Object) : void {
          var _loc2_:Array = null;
-         _loc2_ = new Array();
+         _loc2_ = [];
          var _loc3_:uint = 0;
          while(_loc3_ < param1.data.length)
          {
@@ -136,7 +107,6 @@ package net.wg.gui.lobby.battlequeue
 
       override protected function onDispose() : void {
          App.gameInputMgr.clearKeyHandler(Keyboard.ESCAPE,KeyboardEvent.KEY_DOWN);
-         this.listByLevel.disposeRenderers();
          this.listByType.disposeRenderers();
          if(this.startButton.hasEventListener(ButtonEvent.CLICK))
          {

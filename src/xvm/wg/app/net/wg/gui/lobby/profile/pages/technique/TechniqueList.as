@@ -19,21 +19,21 @@ package net.wg.gui.lobby.profile.pages.technique
          super();
       }
 
-      private static const NATION_INDEX:String = "nationIndex";
+      public static const NATION_INDEX:String = "nationIndex";
 
-      private static const TYPE_INDEX:String = "typeIndex";
+      public static const TYPE_INDEX:String = "typeIndex";
 
-      private static const SHORT_USER_NAME:String = "shortUserName";
+      public static const SHORT_USER_NAME:String = "shortUserName";
 
-      private static const BATTLES_COUNT:String = "battlesCount";
+      public static const BATTLES_COUNT:String = "battlesCount";
 
-      private static const WINS_EFFICIENCY:String = "winsEfficiency";
+      public static const WINS_EFFICIENCY:String = "winsEfficiency";
 
-      private static const AVG_EXPERIENCE:String = "avgExperience";
+      public static const AVG_EXPERIENCE:String = "avgExperience";
 
-      private static const MARK_OF_MASTERY:String = "markOfMastery";
+      public static const MARK_OF_MASTERY:String = "markOfMastery";
 
-      private static const LEVEL:String = "level";
+      public static const LEVEL:String = "level";
 
       public static const SELECTED_DATA_CHANGED:String = "selDataChanged";
 
@@ -68,7 +68,6 @@ package net.wg.gui.lobby.profile.pages.technique
          var _loc4_:String = null;
          this.isSortingTheLastActivity = false;
          this.isDataProviderReceived = true;
-         this.invalidateSorting(sortPropName);
          super.dataProvider = param1;
          if(!this.isValidationChecked)
          {
@@ -93,27 +92,27 @@ package net.wg.gui.lobby.profile.pages.technique
          }
       }
 
-      override protected function sortWithMask(param1:String, param2:uint) : void {
-         var _loc5_:TechniqueListVehicleVO = null;
-         super.sortWithMask(param1,param2);
-         var _loc3_:* = -1;
-         var _loc4_:uint = dataProvider.length;
-         if(_loc4_ > 0)
+      override protected function applySorting(param1:Array) : void {
+         var _loc4_:TechniqueListVehicleVO = null;
+         super.applySorting(param1);
+         var _loc2_:* = -1;
+         var _loc3_:uint = dataProvider.length;
+         if(_loc3_ > 0)
          {
-            _loc3_ = 0;
+            _loc2_ = 0;
          }
-         var _loc6_:* = 0;
-         while(_loc6_ < _loc4_)
+         var _loc5_:* = 0;
+         while(_loc5_ < _loc3_)
          {
-            _loc5_ = dataProvider[_loc6_];
-            if(this.oldSelectedItemId == _loc5_.id)
+            _loc4_ = dataProvider[_loc5_];
+            if(this.oldSelectedItemId == _loc4_.id)
             {
-               _loc3_ = _loc6_;
+               _loc2_ = _loc5_;
                break;
             }
-            _loc6_++;
+            _loc5_++;
          }
-         _newSelectedIndex = _loc3_;
+         _newSelectedIndex = _loc2_;
          invalidateSelectedIndex();
       }
 
@@ -135,9 +134,9 @@ package net.wg.gui.lobby.profile.pages.technique
          return null;
       }
 
-      private function invalidateSorting(param1:String) : void {
+      override protected function invalidateSorting(param1:Object) : void {
          this.updateOldSelected(_selectedIndex);
-         sortPropName = param1;
+         super.invalidateSorting(param1);
          this.isSortingTheLastActivity = true;
          invalidate(SORTING_INVALID);
       }
@@ -148,82 +147,14 @@ package net.wg.gui.lobby.profile.pages.technique
          if(_loc2_)
          {
             _loc3_ = TechniqueListVehicleVO(_dataProvider[param1]);
-            this.oldSelectedItemId = _loc3_.id;
-         }
-      }
-
-      public function sortByNation(param1:Boolean) : void {
-         if(dataProvider)
-         {
-            sortMask = Array.NUMERIC;
-            setSortMask(param1);
-            this.invalidateSorting(NATION_INDEX);
-         }
-      }
-
-      public function sortByType(param1:Boolean) : void {
-         if(dataProvider)
-         {
-            sortMask = Array.CASEINSENSITIVE;
-            setSortMask(param1);
-            this.invalidateSorting(TYPE_INDEX);
-         }
-      }
-
-      public function sortByLevel(param1:Boolean) : void {
-         if(dataProvider)
-         {
-            sortMask = Array.NUMERIC;
-            setSortMask(param1);
-            this.invalidateSorting(LEVEL);
-         }
-      }
-
-      public function sortByVehicleName(param1:Boolean) : void {
-         if(dataProvider)
-         {
-            sortMask = Array.CASEINSENSITIVE;
-            if(!param1)
+            if(_loc3_)
             {
-               sortMask = sortMask | Array.DESCENDING;
+               this.oldSelectedItemId = _loc3_.id;
             }
-            this.invalidateSorting(SHORT_USER_NAME);
-         }
-      }
-
-      public function sortByBattlesCount(param1:Boolean) : void {
-         if(dataProvider)
-         {
-            sortMask = Array.NUMERIC;
-            setSortMask(param1);
-            this.invalidateSorting(BATTLES_COUNT);
-         }
-      }
-
-      public function sortByWins(param1:Boolean) : void {
-         if(dataProvider)
-         {
-            sortMask = Array.NUMERIC;
-            setSortMask(param1);
-            this.invalidateSorting(WINS_EFFICIENCY);
-         }
-      }
-
-      public function sortByAvgExp(param1:Boolean) : void {
-         if(dataProvider)
-         {
-            sortMask = Array.NUMERIC;
-            setSortMask(param1);
-            this.invalidateSorting(AVG_EXPERIENCE);
-         }
-      }
-
-      public function sortByMarkOfMastery(param1:Boolean) : void {
-         if(dataProvider)
-         {
-            sortMask = Array.NUMERIC;
-            setSortMask(param1);
-            this.invalidateSorting(MARK_OF_MASTERY);
+            else
+            {
+               this.oldSelectedItemId = -100;
+            }
          }
       }
 

@@ -115,6 +115,7 @@ package net.wg.gui.lobby.techtree.nodes
          if(this.btnShowInHangar)
          {
             this.btnShowInHangar.label = App.utils.locale.makeString(MENU.RESEARCH_LABELS_BUTTON_SHOWINHANGAR);
+            this.btnShowInHangar.enabled = isVehicleCanBeChanged();
             this.btnShowInHangar.addEventListener(ButtonEvent.CLICK,this.btnShowInHangarClickHandler,false,0,true);
          }
          super.populateUI();

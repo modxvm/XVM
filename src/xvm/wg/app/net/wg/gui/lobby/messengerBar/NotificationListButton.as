@@ -5,6 +5,7 @@ package net.wg.gui.lobby.messengerBar
    import net.wg.gui.components.advanced.BlinkingButton;
    import scaleform.clik.events.ButtonEvent;
    import net.wg.data.constants.SoundTypes;
+   import net.wg.data.Aliases;
 
 
    public class NotificationListButton extends NotificationListButtonMeta implements INotificationListButtonMeta
@@ -29,6 +30,7 @@ package net.wg.gui.lobby.messengerBar
 
       private function btnClickHandler(param1:ButtonEvent) : void {
          handleClickS();
+         App.popoverMgr.show(this.button,Aliases.NOTIFICATIONS_LIST,0,0);
       }
 
       public function as_setState(param1:Boolean) : void {

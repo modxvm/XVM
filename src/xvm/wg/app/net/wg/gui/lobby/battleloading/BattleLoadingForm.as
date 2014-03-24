@@ -5,7 +5,9 @@ package net.wg.gui.lobby.battleloading
    import scaleform.clik.controls.StatusIndicator;
    import net.wg.gui.components.icons.BattleTypeIcon;
    import net.wg.gui.components.controls.ReadOnlyScrollingList;
-   import scaleform.clik.data.DataProvider;
+   import net.wg.gui.lobby.battleloading.data.TeamVehiclesDataProvider;
+   import net.wg.gui.lobby.battleloading.data.EnemyVehiclesDataProvider;
+   import net.wg.gui.lobby.battleloading.interfaces.IVehiclesDataProvider;
 
 
    public class BattleLoadingForm extends UIComponent
@@ -13,6 +15,8 @@ package net.wg.gui.lobby.battleloading
           
       public function BattleLoadingForm() {
          super();
+         this.teamDP = new TeamVehiclesDataProvider();
+         this.enemyDP = new EnemyVehiclesDataProvider();
       }
 
       public var mapText:TextField;
@@ -37,11 +41,20 @@ package net.wg.gui.lobby.battleloading
 
       public var team2List:ReadOnlyScrollingList;
 
-      private const TEAM1:String = "team1";
+      private var teamDP:TeamVehiclesDataProvider;
 
-      private const TEAM2:String = "team2";
+      private var enemyDP:EnemyVehiclesDataProvider;
 
       override protected function configUI() : void {
+         this.battleIcon.visible = false;
+         if(this.team1List != null)
+         {
+            this.team1List.dataProvider = this.teamDP;
+         }
+         if(this.team2List != null)
+         {
+            this.team2List.dataProvider = this.enemyDP;
+         }
          super.configUI();
       }
 
@@ -59,10 +72,12 @@ package net.wg.gui.lobby.battleloading
       }
 
       public function setBattleTypeFrameNum(param1:Number) : void {
+         this.battleIcon.visible = true;
          this.battleIcon.typeByNumber = param1;
       }
 
       public function setBattleTypeFrameName(param1:String) : void {
+         this.battleIcon.visible = true;
          this.battleIcon.type = param1;
       }
 
@@ -81,44 +96,58 @@ package net.wg.gui.lobby.battleloading
          this.tipText.htmlText = param1;
       }
 
-      public function updateTeamValues(param1:Object) : void {
-         var _loc4_:Object = null;
-         var _loc2_:Number = param1.playerID;
-         var _loc3_:Number = param1.squadID;
-         var _loc5_:uint = 0;
-         _loc4_ = this.normalizeData(param1.team1,_loc2_,_loc3_,this.TEAM1);
-         this.team1List.dataProvider = new DataProvider(_loc4_.team);
-         this.team1List.selectedIndex = _loc4_.selected;
-         _loc4_ = this.normalizeData(param1.team2,_loc2_,_loc3_,this.TEAM2);
-         this.team2List.dataProvider = new DataProvider(_loc4_.team);
-         this.team2List.selectedIndex = _loc4_.selected;
+      public function setPlayerInfo(param1:Number, param2:Number) : void {
+         this.teamDP.setPlayerVehicleID(param1);
+         this.teamDP.setPrebattleID(param2);
       }
 
-      private function normalizeData(param1:Array, param2:Number, param3:Number, param4:String) : Object {
-         var _loc5_:Object = new Object();
-         _loc5_.selected = -1;
-         var _loc6_:uint = 0;
-         while(_loc6_ < param1.length)
+      public function setVehiclesData(param1:Boolean, param2:Array) : void {
+         var _loc3_:IVehiclesDataProvider = param1?this.enemyDP:this.teamDP;
+         _loc3_.setSource(param2);
+         _loc3_.invalidate(_loc3_.length);
+      }
+
+      public function addVehicleInfo(param1:Boolean, param2:Object, param3:Array) : void {
+         var _loc4_:IVehiclesDataProvider = param1?this.enemyDP:this.teamDP;
+         if(_loc4_.addVehicleInfo(param2,param3))
          {
-            param1[_loc6_].position = _loc6_ + 1;
-            if(param1[_loc6_].playerID == param2)
-            {
-               _loc5_.selected = _loc6_;
-            }
-            if(param3 > 0 && param1[_loc6_].squad == param3 && param4 == this.TEAM1)
-            {
-               param1[_loc6_].squad = param1[_loc6_].squad + 10;
-            }
-            param1[_loc6_].team = param4;
-            _loc6_++;
+            _loc4_.invalidate(_loc4_.length);
          }
-         _loc5_.team = param1;
-         return _loc5_;
+      }
+
+      public function updateVehicleInfo(param1:Boolean, param2:Object, param3:Array) : void {
+         var _loc4_:IVehiclesDataProvider = param1?this.enemyDP:this.teamDP;
+         var _loc5_:Boolean = _loc4_.updateVehicleInfo(param2);
+         _loc5_ = (_loc4_.setSorting(param3)) || (_loc5_);
+         if(_loc5_)
+         {
+            _loc4_.invalidate(_loc4_.length);
+         }
+      }
+
+      public function setVehicleStatus(param1:Boolean, param2:Number, param3:uint, param4:Array) : void {
+         var _loc5_:IVehiclesDataProvider = param1?this.enemyDP:this.teamDP;
+         var _loc6_:Boolean = _loc5_.setVehicleStatus(param2,param3);
+         _loc6_ = (_loc5_.setSorting(param4)) || (_loc6_);
+         if(_loc6_)
+         {
+            _loc5_.invalidate(_loc5_.length);
+         }
+      }
+
+      public function setPlayerStatus(param1:Boolean, param2:Number, param3:uint) : void {
+         var _loc4_:IVehiclesDataProvider = param1?this.enemyDP:this.teamDP;
+         if(_loc4_.setPlayerStatus(param2,param3))
+         {
+            _loc4_.invalidate(_loc4_.length);
+         }
       }
 
       override protected function onDispose() : void {
          this.team1List.disposeRenderers();
          this.team2List.disposeRenderers();
+         this.teamDP.cleanUp();
+         this.enemyDP.cleanUp();
          super.onDispose();
       }
 

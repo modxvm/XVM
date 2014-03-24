@@ -168,7 +168,7 @@ package net.wg.gui.lobby.questsWindow.components
                   this.naMc.x = 0;
                   this.naMc.y = Math.round(_loc5_ + (this.naTF.textHeight - this.naMc.height));
                   this.naTF.x = Math.round(this.naMc.x + this.naMc.width + TEXT_PADDING);
-                  this.naTF.y = _loc5_;
+                  this.naTF.y = _loc5_ + dashLinePadding * 2;
                   _loc3_ = Math.round(this.naTF.x + this.naTF.textWidth);
                   _loc5_ = Math.round(this.naTF.y + this.naTF.textHeight);
                }

@@ -2,7 +2,6 @@ package net.wg.gui.cyberSport.data
 {
    import net.wg.data.VoDAAPIDataProvider;
    import net.wg.gui.cyberSport.interfaces.IManualSearchDataProvider;
-   import flash.system.fscommand;
    import net.wg.gui.cyberSport.controls.events.ManualSearchEvent;
    import net.wg.gui.cyberSport.vo.CSCommandVO;
 
@@ -46,7 +45,6 @@ package net.wg.gui.cyberSport.data
          var _loc5_:uint = 0;
          var _loc7_:Object = null;
          var _loc9_:Object = null;
-         fscommand("requestItemRange",param1 + "-" + param2);
          if(!Boolean(requestItemRangeHandler))
          {
             return [];

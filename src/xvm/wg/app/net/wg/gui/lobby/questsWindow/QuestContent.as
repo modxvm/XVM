@@ -30,6 +30,7 @@ package net.wg.gui.lobby.questsWindow
          this.tweens = new Vector.<Tween>();
          super();
          this._allTasks = new Vector.<String>();
+         this.noQuestsMC.visible = false;
       }
 
       private static const INVALIDATE_QUEST_INFO:String = "invQuestInfo";
@@ -88,7 +89,7 @@ package net.wg.gui.lobby.questsWindow
 
       private var _sortingFunction:Function = null;
 
-      private var _hideDoneCB:Boolean = false;
+      private var _hideSortPanel:Boolean = false;
 
       private var _noDataLael:String = "";
 
@@ -122,7 +123,6 @@ package net.wg.gui.lobby.questsWindow
          super.configUI();
          this.questInfo = QuestBlock(this.scrollPane.target);
          this.notSelected.textField.text = QUESTS.QUESTS_TABS_NOSELECTED_TEXT;
-         this.addListeners();
          this.listHidingBG.mouseEnabled = false;
          this.listHidingBG.mouseChildren = false;
          this.scrollPane.visible = false;
@@ -130,6 +130,9 @@ package net.wg.gui.lobby.questsWindow
          this.header.visible = false;
          this.alertMsg.visible = false;
          this._isInRoaming = App.globalVarsMgr.isInRoamingS();
+         this.questsList.smartScrollBar = true;
+         this.sortingPanel.validateNow();
+         this.addListeners();
       }
 
       private function addListeners() : void {
@@ -249,8 +252,7 @@ package net.wg.gui.lobby.questsWindow
                this.scrollPane.scrollPosition = 0;
                this.questInfo.setData(this.questData);
                this.header.setData(this.questData.header);
-               this.awards.setAwards(this.questData.award.awardsStr);
-               this.awards.setOpenedQuests(this.questData.award.openedQuests);
+               this.awards.setData(this.questData.award);
             }
          }
       }
@@ -287,16 +289,13 @@ package net.wg.gui.lobby.questsWindow
       private function invalidateCommonData() : void {
          this.questInfo.setAvailableQuests(this._allTasks);
          var _loc1_:* = this.totalTasks > 0;
-         this.sortingPanel.sortingDD.visible = _loc1_;
-         this.sortingPanel.doneCB.visible = !this._hideDoneCB && (_loc1_);
-         this.sortingPanel.sortTF.visible = _loc1_;
+         this.sortingPanel.visible = !this._hideSortPanel && (_loc1_) && !this._isInRoaming;
          this.scrollBar.visible = _loc1_;
          this.questsList.visible = _loc1_;
          this.listHidingBG.visible = _loc1_;
          this.questBG.visible = _loc1_;
          this.notSelected.visible = _loc1_;
          this.noQuestsMC.visible = !_loc1_;
-         this.sortingPanel.visible = (_loc1_) && !this._isInRoaming;
          this.alertMsg.visible = (_loc1_) && (this._isInRoaming);
          if(_loc1_)
          {
@@ -381,8 +380,8 @@ package net.wg.gui.lobby.questsWindow
          return _loc2_;
       }
 
-      public function hideDoneCheckbox(param1:Boolean) : void {
-         this._hideDoneCB = param1;
+      public function hideSortPanel(param1:Boolean) : void {
+         this._hideSortPanel = param1;
       }
 
       public function setNodataLabel(param1:String) : void {
@@ -469,6 +468,7 @@ package net.wg.gui.lobby.questsWindow
       }
 
       private function handleSortingDD(param1:ListEvent) : void {
+         this.questsList.questsType = param1.index;
          this.myParent.sortS(param1.index,this.sortingPanel.doneCB.selected);
       }
 
@@ -522,7 +522,7 @@ package net.wg.gui.lobby.questsWindow
             if((this.awardsResized) && (this.headerResized) && (this.questInfoResized))
             {
                this.awardsResized = this.headerResized = this.questInfoResized = false;
-               this.awards.visible = Boolean((this.questData.award) && ((this.questData.award.awardsStr) || (this.questData.award.openedQuests.length)));
+               this.awards.visible = Boolean((this.questData.award) && (this.questData.award.length));
                this.awards.y = Math.round(AVAILABLE_HEIGHT - this.awards.height - AWARDS_PADDING);
                this.scrollPane.y = Math.round(this.header.height);
                this.scrollPane.height = Math.round(AVAILABLE_HEIGHT - this.header.height - this.awards.height - AWARDS_PADDING);

@@ -105,7 +105,6 @@ package net.wg.gui.components.controls.VO
          this.allowTypes = [FittingTypes.VEHICLE,FittingTypes.MODULE,FittingTypes.EQUIPMENT,FittingTypes.SHELL,FittingTypes.OPTIONAL_DEVICE];
          if(this.allowTypes.indexOf(param1) == -1)
          {
-            DebugUtils.LOG_ERROR("itemType in ActionPriceVO is invalid");
             return;
          }
          this._itemType = param1;

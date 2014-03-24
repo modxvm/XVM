@@ -2,6 +2,7 @@ package net.wg.gui.lobby.profile.pages.statistics
 {
    import scaleform.clik.core.UIComponent;
    import net.wg.infrastructure.interfaces.entity.IDisposable;
+   import net.wg.gui.components.controls.UILoaderAlt;
    import net.wg.gui.lobby.profile.components.LditBattles;
    import net.wg.gui.lobby.profile.components.LineDescrIconText;
    import net.wg.gui.lobby.profile.components.LditValued;
@@ -20,6 +21,8 @@ package net.wg.gui.lobby.profile.pages.statistics
       }
 
       public static const LAYOUT_INVALID:String = "layoutInv";
+
+      public var icon:UILoaderAlt;
 
       public var tfTotalBattles:LditBattles;
 

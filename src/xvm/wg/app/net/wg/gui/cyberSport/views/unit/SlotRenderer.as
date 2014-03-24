@@ -97,7 +97,7 @@ package net.wg.gui.cyberSport.views.unit
                }
                else
                {
-                  _loc1_ = (slotData.player) && (slotData.player.isSelf);
+                  _loc1_ = (slotData.player) && (slotData.player.himself);
                   this.removeBtn.visible = _loc1_;
                   if(_loc1_)
                   {
@@ -156,7 +156,7 @@ package net.wg.gui.cyberSport.views.unit
          {
             if(slotData.player)
             {
-               dispatchEvent(new CSComponentEvent(CSComponentEvent.LEAVE_SLOT_REQUEST,slotData.player.databaseID));
+               dispatchEvent(new CSComponentEvent(CSComponentEvent.LEAVE_SLOT_REQUEST,slotData.player.dbID));
             }
             else
             {
@@ -171,9 +171,9 @@ package net.wg.gui.cyberSport.views.unit
       private function onChooseVehicleClick(param1:CSComponentEvent) : void {
          param1.preventDefault();
          param1.stopImmediatePropagation();
-         if((slotData) && (slotData.player) && (slotData.player.isSelf))
+         if((slotData) && (slotData.player) && (slotData.player.himself))
          {
-            dispatchEvent(new CSComponentEvent(CSComponentEvent.CHOOSE_VEHICLE,slotData.player.databaseID));
+            dispatchEvent(new CSComponentEvent(CSComponentEvent.CHOOSE_VEHICLE,slotData.player.dbID));
          }
       }
 
@@ -182,7 +182,7 @@ package net.wg.gui.cyberSport.views.unit
       }
 
       public function onPlayerSpeak(param1:Number, param2:Boolean) : void {
-         if((slotData) && (slotData.player) && param1 == slotData.player.databaseID)
+         if((slotData) && (slotData.player) && param1 == slotData.player.dbID)
          {
             this.setSpeakers(param2);
          }

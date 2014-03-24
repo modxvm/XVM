@@ -201,39 +201,50 @@ package net.wg.gui.messenger.windows
             return;
          }
          var _loc1_:IViewStackContent = this.viewStack.currentView as IViewStackContent;
-         _loc1_.update(null);
+         this.updateView(_loc1_);
+      }
+
+      private function updateView(param1:IViewStackContent, param2:Object=null) : void {
+         param1.update(param2);
+         if(param1.getComponentForFocus())
+         {
+            this.setFocus(param1.getComponentForFocus());
+         }
       }
 
       private function updateViewData() : void {
          var _loc2_:String = null;
+         var _loc3_:Object = null;
          var _loc1_:IViewStackContent = this.viewStack.currentView as IViewStackContent;
          if(_loc1_ != null)
          {
             _loc2_ = getQualifiedClassName(_loc1_);
+            _loc3_ = null;
             if(_loc2_ == VIEW_LIST)
             {
-               _loc1_.update(
+               _loc3_ =
                   {
                      "friendsDP":this.friendsDP,
                      "clanDP":this.clanDP,
                      "ignoredDP":this.ignoredDP,
                      "mutedDP":this.mutedDP
                   }
-               );
+               ;
             }
             else
             {
                if(_loc2_ == VIEW_SEARCH)
                {
-                  _loc1_.update(
+                  _loc3_ =
                      {
                         "searchDP":this.searchDP,
                         "resultText":this.searchResultText,
                         "freezeSearch":this.freezeSearch
                      }
-                  );
+                  ;
                }
             }
+            this.updateView(_loc1_,_loc3_);
          }
       }
 

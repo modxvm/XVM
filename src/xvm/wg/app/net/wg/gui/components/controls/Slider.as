@@ -6,8 +6,8 @@ package net.wg.gui.components.controls
    import flash.events.MouseEvent;
    import flash.events.Event;
    import scaleform.clik.constants.InvalidationType;
-   import flash.geom.Point;
    import scaleform.clik.events.SliderEvent;
+   import flash.geom.Point;
 
 
    public class Slider extends scaleform.clik.controls.Slider
@@ -21,6 +21,10 @@ package net.wg.gui.components.controls
          if((track) && (track["bg"]) && (track["bg"]["patternMc"]))
          {
             this.patternMc = track["bg"]["patternMc"];
+         }
+         if((track) && (track["bg"]) && (track["bg"]["disablePatternMc"]))
+         {
+            this.disablePatternMc = track["bg"]["disablePatternMc"];
          }
          if((track) && (track["hitMc"]))
          {
@@ -37,11 +41,15 @@ package net.wg.gui.components.controls
 
       public var patternMc:BitmapFill = null;
 
+      public var disablePatternMc:BitmapFill = null;
+
       private var _fillPaddingX:Number = 11;
 
       private var _fillPaddingY:Number = 4;
 
       private var _fillPadding:Padding;
+
+      private var _maxAvailableValue:Number = NaN;
 
       override protected function onDispose() : void {
          removeEventListener(MouseEvent.MOUSE_WHEEL,this.onScrollWheel,false);
@@ -51,6 +59,11 @@ package net.wg.gui.components.controls
             this.patternMc.dispose();
             this.patternMc = null;
          }
+         if(this.disablePatternMc)
+         {
+            this.disablePatternMc.dispose();
+            this.disablePatternMc = null;
+         }
          super.onDispose();
       }
 
@@ -59,7 +72,7 @@ package net.wg.gui.components.controls
          {
             return;
          }
-         value = value + _snapInterval * (param1 > 0?1:-1);
+         this.value = value + _snapInterval * (param1 > 0?1:-1);
          dispatchEvent(new Event(Event.CHANGE));
       }
 
@@ -85,11 +98,12 @@ package net.wg.gui.components.controls
 
       protected function onScrollWheel(param1:MouseEvent) : void {
          this.scrollWheel(param1.delta);
+         param1.stopPropagation();
       }
 
       override protected function draw() : void {
          super.draw();
-         this.updatePattern();
+         this.updatePatterns();
       }
 
       public function get undefinedDisabled() : Boolean {
@@ -127,11 +141,34 @@ package net.wg.gui.components.controls
          invalidate(InvalidationType.STATE);
       }
 
+      override public function set value(param1:Number) : void {
+         _value = this.lockValue(param1);
+         dispatchEvent(new SliderEvent(SliderEvent.VALUE_CHANGE,false,true,_value));
+         this.updateThumb();
+      }
+
+      public function get maxAvailableValue() : Number {
+         return this._maxAvailableValue;
+      }
+
+      public function set maxAvailableValue(param1:Number) : void {
+         if((isNaN(this._maxAvailableValue)) && (isNaN(param1)) || param1 == this._maxAvailableValue)
+         {
+            return;
+         }
+         this._maxAvailableValue = param1;
+         if(!isNaN(this._maxAvailableValue) && value > this._maxAvailableValue)
+         {
+            this.value = this._maxAvailableValue;
+         }
+         invalidate();
+      }
+
       override protected function doDrag(param1:MouseEvent) : void {
          var _loc2_:Point = globalToLocal(new Point(param1.stageX,param1.stageY));
          var _loc3_:Number = _loc2_.x - _dragOffset.x;
          var _loc4_:Number = track.width - offsetLeft - offsetRight;
-         var _loc5_:Number = lockValue((_loc3_ - offsetLeft) / _loc4_ * (_maximum - _minimum) + _minimum);
+         var _loc5_:Number = this.lockValue((_loc3_ - offsetLeft) / _loc4_ * (_maximum - _minimum) + _minimum);
          if(value == _loc5_)
          {
             return;
@@ -164,14 +201,56 @@ package net.wg.gui.components.controls
          }
       }
 
-      private function updatePattern() : void {
+      override protected function lockValue(param1:Number) : Number {
+         var _loc2_:* = NaN;
+         if(!isNaN(this._maxAvailableValue))
+         {
+            _loc2_ = super.lockValue(Math.min(param1,this._maxAvailableValue));
+         }
+         else
+         {
+            _loc2_ = super.lockValue(param1);
+         }
+         return _loc2_;
+      }
+
+      protected function updatePatterns() : void {
+         var _loc1_:* = NaN;
+         var _loc3_:* = NaN;
+         if(!this.patternMc && !this.disablePatternMc)
+         {
+            return;
+         }
+         _loc1_ = this.hitMc.width;
+         var _loc2_:Number = Math.abs(_maximum - _minimum);
+         _loc3_ = _loc1_;
+         if(!isNaN(this._maxAvailableValue))
+         {
+            _loc3_ = _loc1_ * Math.abs(this._maxAvailableValue - _minimum) / _loc2_;
+         }
          if(this.patternMc)
          {
             this.patternMc.x = this._fillPadding.left;
             this.patternMc.y = this._fillPadding.top;
             this.patternMc.setActualScale(1 / this.track.actualScaleX,1 / this.track.actualScaleY);
-            this.patternMc.widthFill = Math.round(this.hitMc.width * this.track.actualScaleX);
+            this.patternMc.widthFill = Math.round(_loc3_ * this.track.actualScaleX);
             this.patternMc.heightFill = Math.round(this.hitMc.height * this.track.actualScaleY);
+         }
+         if(this.disablePatternMc)
+         {
+            if(isNaN(this._maxAvailableValue))
+            {
+               this.disablePatternMc.visible = false;
+            }
+            else
+            {
+               this.disablePatternMc.x = this._fillPadding.left + _loc3_;
+               this.disablePatternMc.y = this._fillPadding.top;
+               this.disablePatternMc.setActualScale(1 / this.track.actualScaleX,1 / this.track.actualScaleY);
+               this.disablePatternMc.widthFill = Math.round((_loc1_ - _loc3_) * this.track.actualScaleX);
+               this.disablePatternMc.heightFill = Math.round(this.hitMc.height * this.track.actualScaleY);
+               this.disablePatternMc.visible = true;
+            }
          }
       }
    }

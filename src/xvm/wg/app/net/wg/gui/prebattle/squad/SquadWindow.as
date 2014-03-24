@@ -68,7 +68,7 @@ package net.wg.gui.prebattle.squad
             while(_loc5_ < this.memberList.dataProvider.length)
             {
                _loc6_ = this.memberList.dataProvider.requestItemAt(_loc5_) as PlayerPrbInfoVO;
-               if(_loc6_.uid == _loc4_.uid)
+               if(_loc6_.dbID == _loc4_.dbID)
                {
                   _loc7_ = this.memberList.getRendererAt(_loc5_) as SquadItemRenderer;
                   _loc7_.model.state = _loc4_.state;
@@ -301,7 +301,7 @@ package net.wg.gui.prebattle.squad
 
       private function getInviteRoster() : Object {
          var _loc1_:Object = {};
-         _loc1_.uid = -1;
+         _loc1_.dbID = -1;
          _loc1_.accID = -1;
          _loc1_.fullName = MESSENGER.DIALOGS_SQUADCHANNEL_BUTTONS_INVITE;
          _loc1_.userName = "";
@@ -327,7 +327,7 @@ package net.wg.gui.prebattle.squad
             _loc2_ = PlayerPrbInfoVO(param1.itemData);
             if(_loc2_.accID > -1)
             {
-               _loc3_ = _loc2_.uid > -1;
+               _loc3_ = _loc2_.dbID > -1;
                _loc4_ = new SquadWindowCIGenerator(_loc3_,canKickPlayerS());
                App.contextMenuMgr.showUserContextMenu(this,_loc2_,_loc4_);
             }

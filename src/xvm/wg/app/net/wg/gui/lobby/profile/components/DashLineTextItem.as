@@ -2,8 +2,8 @@ package net.wg.gui.lobby.profile.components
 {
    import scaleform.clik.core.UIComponent;
    import flash.text.TextField;
-   import flash.events.MouseEvent;
    import net.wg.data.managers.IToolTipParams;
+   import flash.events.MouseEvent;
    import flash.text.TextFieldAutoSize;
    import scaleform.clik.constants.InvalidationType;
 
@@ -16,8 +16,6 @@ package net.wg.gui.lobby.profile.components
       }
 
       public static const LABEL_INV:String = "lblInv";
-
-      private static const HTML_VALUE_INV:String = "htmlValInv";
 
       public static const VALUE_INV:String = "valInv";
 
@@ -41,6 +39,8 @@ package net.wg.gui.lobby.profile.components
 
       protected var _myEnabled:Boolean = true;
 
+      private var _toolTipParams:IToolTipParams;
+
       protected function mouseRollOutHandler(param1:MouseEvent) : void {
          hideToolTip();
       }
@@ -52,8 +52,19 @@ package net.wg.gui.lobby.profile.components
       protected function showToolTip(param1:IToolTipParams) : void {
          if(this._tooltip)
          {
-            App.toolTipMgr.showComplex(this._tooltip);
+            if(this._toolTipParams)
+            {
+               App.toolTipMgr.showComplexWithParams(this._tooltip,this._toolTipParams);
+            }
+            else
+            {
+               App.toolTipMgr.showComplex(this._tooltip);
+            }
          }
+      }
+
+      public function set toolTipParams(param1:IToolTipParams) : void {
+         this._toolTipParams = param1;
       }
 
       override protected function draw() : void {
@@ -82,10 +93,14 @@ package net.wg.gui.lobby.profile.components
          }
          if(isInvalid(InvalidationType.SIZE))
          {
-            this.dashLine.width = Math.round(_width - this.labelTextField.width - this.valueTextField.width - dashLinePadding * 2);
-            this.dashLine.x = Math.round(this.labelTextField.width + dashLinePadding);
-            this.valueTextField.x = Math.round(_width - this.valueTextField.width);
+            this.applySizeChanges();
          }
+      }
+
+      protected function applySizeChanges() : void {
+         this.dashLine.width = Math.round(_width - this.labelTextField.width - this.valueTextField.width - dashLinePadding * 2);
+         this.dashLine.x = Math.round(this.labelTextField.width + dashLinePadding);
+         this.valueTextField.x = Math.round(_width - this.valueTextField.width);
       }
 
       public function get label() : String {
@@ -125,12 +140,6 @@ package net.wg.gui.lobby.profile.components
          removeEventListener(MouseEvent.ROLL_OUT,this.mouseRollOutHandler);
       }
 
-      override protected function onDispose() : void {
-         this.dashLine.dispose();
-         this.disposeListeners();
-         super.onDispose();
-      }
-
       override public function set enabled(param1:Boolean) : void {
          if(param1 != this._myEnabled)
          {
@@ -142,6 +151,20 @@ package net.wg.gui.lobby.profile.components
 
       override public function get enabled() : Boolean {
          return this._myEnabled;
+      }
+
+      override protected function onDispose() : void {
+         this.dashLine.dispose();
+         this.dashLine = null;
+         this.disposeListeners();
+         this.labelTextField = null;
+         this.valueTextField = null;
+         if(this._toolTipParams)
+         {
+            this._toolTipParams.dispose();
+         }
+         this._toolTipParams = null;
+         super.onDispose();
       }
    }
 

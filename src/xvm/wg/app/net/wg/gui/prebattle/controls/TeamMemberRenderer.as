@@ -42,14 +42,14 @@ package net.wg.gui.prebattle.controls
       }
 
       override public function setData(param1:Object) : void {
-         if(param1 != null)
+         if(!(param1 == null) && !(param1  is  PlayerPrbInfoVO))
          {
             param1 = new PlayerPrbInfoVO(param1);
          }
          super.setData(param1);
-         if(param1)
+         if(model)
          {
-            setSpeakers(PlayerPrbInfoVO(param1).isPlayerSpeaking,true);
+            setSpeakers(model.isPlayerSpeaking,true);
          }
       }
 

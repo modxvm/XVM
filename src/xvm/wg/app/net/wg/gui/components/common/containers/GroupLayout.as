@@ -12,6 +12,8 @@ package net.wg.gui.components.common.containers
 
       protected var _target:Group;
 
+      public var gap:int = 0;
+
       public function set target(param1:Object) : void {
          this._target = Group(param1);
       }

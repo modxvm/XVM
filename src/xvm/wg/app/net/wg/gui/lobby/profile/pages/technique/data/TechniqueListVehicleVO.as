@@ -44,7 +44,7 @@ package net.wg.gui.lobby.profile.pages.technique.data
       public var level:int;
 
       public function get winsEfficiencyStr() : String {
-         return ItemsUtils.formatIntegerStr(this.winsEfficiency) + "%";
+         return ItemsUtils.formatIntegerStr(Math.round(this.winsEfficiency)) + "%";
       }
 
       public function set winsEfficiencyStr(param1:String) : void {

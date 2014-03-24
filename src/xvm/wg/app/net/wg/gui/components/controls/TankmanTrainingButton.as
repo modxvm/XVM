@@ -5,6 +5,7 @@ package net.wg.gui.components.controls
    import net.wg.gui.components.controls.VO.ActionPriceVO;
    import net.wg.data.constants.IconsTypes;
    import flash.events.MouseEvent;
+   import flash.events.Event;
    import net.wg.data.constants.SoundTypes;
 
 
@@ -18,6 +19,7 @@ package net.wg.gui.components.controls
                "disabled":16711680
             }
          ;
+         useFocusedAsSelect = true;
          _stateMap =
             {
                "up":["up"],
@@ -26,7 +28,8 @@ package net.wg.gui.components.controls
                "release":["release","over"],
                "out":["out","up"],
                "disabled":["disabled"],
-               "selecting":["selecting","out"],
+               "selecting":["selecting","over"],
+               "toggle":["toggle","up"],
                "kb_selecting":["kb_selecting","up"],
                "kb_release":["kb_release","out","up"],
                "kb_down":["kb_down","down"],
@@ -219,6 +222,45 @@ package net.wg.gui.components.controls
             return;
          }
          super.handleReleaseOutside(param1);
+      }
+
+      override public function set selected(param1:Boolean) : void {
+         var _loc2_:* = false;
+         if(_selected == param1)
+         {
+            return;
+         }
+         _selected = param1;
+         if(enabled)
+         {
+            if(!_focused)
+            {
+               setState("toggle");
+            }
+            else
+            {
+               if((_pressedByKeyboard) && !(_focusIndicator == null))
+               {
+                  setState("kb_selecting");
+               }
+               else
+               {
+                  setState("over");
+               }
+            }
+            if(owner)
+            {
+               _loc2_ = (_selected) && !(owner == null) && (checkOwnerFocused());
+               setState((_loc2_) && _focusIndicator == null?"selecting":"toggle");
+               displayFocus = _loc2_;
+            }
+         }
+         else
+         {
+            setState("disabled");
+         }
+         validateNow();
+         dispatchEvent(new Event(Event.SELECT));
       }
    }
 

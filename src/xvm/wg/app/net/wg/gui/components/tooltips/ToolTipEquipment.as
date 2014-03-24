@@ -57,12 +57,12 @@ package net.wg.gui.components.tooltips
          super.build(param1,param2);
       }
 
-      override protected function onDispose() : void {
-         super.onDispose();
-      }
-
       override public function toString() : String {
          return "[WG ToolTipEquipment " + name + "]";
+      }
+
+      override protected function onDispose() : void {
+         super.onDispose();
       }
 
       override protected function configUI() : void {
@@ -200,7 +200,7 @@ package net.wg.gui.components.tooltips
             _loc29_ = "";
             for (_loc30_ in _loc3_.stats)
             {
-               if(SKIP_FIELDS.indexOf(_loc30_) == -1)
+               if(!(!(SKIP_FIELDS.indexOf(_loc30_) == -1) || _loc30_ == ID_HIDDEN_VEHICLE_COUNT))
                {
                   _loc29_ = Utils.instance.COLOR_NUMBER;
                   _loc28_ = _loc7_.makeString(TOOLTIPS.vehicle(_loc30_),{});

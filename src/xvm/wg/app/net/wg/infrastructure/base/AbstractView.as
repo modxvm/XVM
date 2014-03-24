@@ -255,8 +255,8 @@ package net.wg.infrastructure.base
       }
 
       protected final function setFocus(param1:InteractiveObject) : void {
-         this.assertNotNull(param1,"you can`t remove focus from the view.");
-         this.assertNotNull(param1.stage,"focus must be set to object in display list only.");
+         this.assertNotNull(param1,"element");
+         this.assert(!(param1.stage == null),"focus must be set to object in display list only.");
          App.utils.scheduler.cancelTask(this.setFocus);
          this._waitingFocusToInitialization = false;
          if(this.hasFocus)
@@ -321,6 +321,10 @@ package net.wg.infrastructure.base
          }
       }
 
+      protected function get lastFocusedElement() : InteractiveObject {
+         return this._lastFocusedElement;
+      }
+
       private function getManualFocus() : InteractiveObject {
          var _loc2_:InteractiveObject = null;
          var _loc1_:InteractiveObject = App.utils.focusHandler.getFocus(0);
@@ -359,12 +363,18 @@ package net.wg.infrastructure.base
       }
 
       private function onFocusOutFromLastFocusedElementHandler(param1:FocusHandlerEvent) : void {
-         var _loc3_:String = null;
+         var _loc5_:String = null;
          var _loc2_:InteractiveObject = this.getManualFocus();
-         if(this.hasFocus)
+         var _loc3_:* = false;
+         var _loc4_:InteractiveObject = App.utils.focusHandler.getFocus(0);
+         if(_loc4_ != null)
          {
-            _loc3_ = "modal-focused view \'" + this + "\' has lost a component focus!";
-            this.assert(!(_loc2_ == null),_loc3_,InfrastructureException);
+            _loc3_ = _loc4_.stage == null;
+         }
+         if((this.hasFocus) && !_loc3_)
+         {
+            _loc5_ = "modal-focused view \'" + this + "\' has lost a component focus!";
+            this.assert(!(_loc2_ == null),_loc5_,InfrastructureException);
          }
          this.setLastFocusedElement(_loc2_);
       }

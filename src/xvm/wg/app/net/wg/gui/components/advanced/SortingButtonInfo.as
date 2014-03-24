@@ -6,8 +6,13 @@ package net.wg.gui.components.advanced
    {
           
       public function SortingButtonInfo() {
+         this.defaultSortDirection = SortingButton.WITHOUT_SORT;
          super();
       }
+
+      public static const NUMERIC:String = "numeric";
+
+      public static const CASEINSENSITIVE:String = "string";
 
       public var iconId:String;
 
@@ -25,9 +30,27 @@ package net.wg.gui.components.advanced
 
       public var enabled:Boolean = true;
 
-      public var defaultSortDirection:String = "none";
+      public var inverted:Boolean = false;
+
+      public var defaultSortDirection:String;
+
+      public var sortOrder:int = -1;
+
+      public var sortType:String = "numeric";
 
       public var label:String = "";
+
+      public function get defaultSortDir() : uint {
+         return this.defaultSortDirection == SortingButton.DESCENDING_SORT?Array.DESCENDING:0;
+      }
+
+      public function get dataSortType() : uint {
+         return this.sortType == NUMERIC?Array.NUMERIC:Array.CASEINSENSITIVE;
+      }
+
+      public function set dataSortType(param1:uint) : void {
+         this.sortType = param1 == Array.NUMERIC?NUMERIC:CASEINSENSITIVE;
+      }
    }
 
 }

@@ -16,9 +16,7 @@ package net.wg.infrastructure.base.meta
 
       function as_setType(param1:Number) : void;
 
-      function as_setPlayers(param1:String, param2:Number) : void;
-
-      function as_setListByLevel(param1:Object) : void;
+      function as_setPlayers(param1:String) : void;
 
       function as_setListByType(param1:Object) : void;
 

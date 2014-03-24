@@ -42,6 +42,12 @@ package net.wg.data.managers.impl
       public function set note(param1:Object) : void {
          this._note = this.note;
       }
+
+      public function dispose() : void {
+         this._header = null;
+         this._body = null;
+         this._note = null;
+      }
    }
 
 }

@@ -6,6 +6,7 @@ package net.wg.gui.lobby.profile
    import net.wg.gui.lobby.profile.components.ResizableViewStack;
    import scaleform.clik.events.IndexEvent;
    import net.wg.gui.events.ViewStackEvent;
+   import flash.display.DisplayObject;
    import net.wg.infrastructure.interfaces.IDAAPIModule;
    import scaleform.clik.data.DataProvider;
    import scaleform.clik.constants.InvalidationType;
@@ -23,8 +24,6 @@ package net.wg.gui.lobby.profile
 
       private static const INIT_DATA_INV:String = "initDataInv";
 
-      public var importer:ProfileSectionsImporter;
-
       public var bar:ButtonBarEx;
 
       public var viewStack:ResizableViewStack;
@@ -37,21 +36,27 @@ package net.wg.gui.lobby.profile
 
       override protected function configUI() : void {
          super.configUI();
-         App.utils.scheduler.envokeInNextFrame(this.disposeTemplates);
+         App.utils.scheduler.envokeInNextFrame(this.disposeImporters);
          this.viewStack.cache = true;
          this.bar.addEventListener(IndexEvent.INDEX_CHANGE,this.onTabBarIndexChanged,false,0,true);
          this.viewStack.addEventListener(ViewStackEvent.VIEW_CHANGED,this.onSectionViewShowed,false,0,true);
       }
 
-      private function disposeTemplates() : void {
-         if(this.importer)
+      private function disposeImporters() : void {
+         var _loc1_:DisplayObject = null;
+         var _loc3_:ProfileSectionsImporter = null;
+         var _loc2_:int = numChildren-1;
+         while(_loc2_ >= 0)
          {
-            if(this.importer.parent)
+            _loc1_ = getChildAt(_loc2_);
+            if(_loc1_  is  ProfileSectionsImporter)
             {
-               this.importer.dispose();
-               this.importer.parent.removeChild(this.importer);
+               _loc3_ = ProfileSectionsImporter(_loc1_);
+               _loc3_.dispose();
+               removeChild(_loc3_);
+               _loc3_ = null;
             }
-            this.importer = null;
+            _loc2_--;
          }
       }
 

@@ -29,6 +29,8 @@ package net.wg.gui.components.tooltips
 
       public static var ID_UNLOCK_PRICE:String = "unlock_price";
 
+      public static var ID_HIDDEN_VEHICLE_COUNT:String = "hiddenVehicleCount";
+
       public static var SKIP_FIELDS:Array = [VehicleBaseVO.DEF_BUY_PRICE,VehicleBaseVO.DEF_SELL_PRICE,VehicleBaseVO.ACTION_PRC];
 
       protected var blockResults:Vector.<ToolTipBlockResultVO> = null;

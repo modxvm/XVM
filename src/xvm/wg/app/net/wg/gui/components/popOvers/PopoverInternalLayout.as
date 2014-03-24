@@ -113,6 +113,14 @@ package net.wg.gui.components.popOvers
       public function get bgInternalPadding() : Padding {
          return this._bgInternalPadding;
       }
+
+      public function get bgFormInternalPadding() : Padding {
+         return this._bgFormInternalPadding;
+      }
+
+      public function set bgFormInternalPadding(param1:Padding) : void {
+         this._bgFormInternalPadding = param1;
+      }
    }
 
 }

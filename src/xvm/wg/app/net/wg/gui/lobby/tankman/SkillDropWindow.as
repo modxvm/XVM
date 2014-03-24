@@ -15,6 +15,7 @@ package net.wg.gui.lobby.tankman
           
       public function SkillDropWindow() {
          super();
+         isModal = true;
       }
 
       private static const INVALID_DATA:String = "invalidData";
@@ -47,7 +48,11 @@ package net.wg.gui.lobby.tankman
 
       override protected function configUI() : void {
          super.configUI();
+         var _loc1_:* = "savingModeGroup";
          this.savingModeGroup = new ButtonGroup("savingModeGroup",this);
+         this.goldButton.groupName = _loc1_;
+         this.creditsButton.groupName = _loc1_;
+         this.freeButton.groupName = _loc1_;
          this.savingModeGroup.addButton(this.goldButton);
          this.savingModeGroup.addButton(this.creditsButton);
          this.savingModeGroup.addButton(this.freeButton);

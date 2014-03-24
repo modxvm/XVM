@@ -279,6 +279,10 @@ package net.wg.gui.lobby.hangar
       }
 
       private function showLayoutHandler(param1:InputEvent) : void {
+         if((param1.details.altKey) || (param1.details.ctrlKey) || (param1.details.shiftKey))
+         {
+            return;
+         }
          showHelpLayoutS();
       }
 

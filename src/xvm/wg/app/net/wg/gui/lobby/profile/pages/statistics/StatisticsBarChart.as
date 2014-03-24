@@ -63,8 +63,14 @@ package net.wg.gui.lobby.profile.pages.statistics
       }
 
       override protected function onDispose() : void {
+         this.mainHorizontalAxis = null;
          this.initializer.dispose();
+         this.initializer = null;
          super.onDispose();
+      }
+
+      override public function get width() : Number {
+         return this.actualWidth;
       }
    }
 

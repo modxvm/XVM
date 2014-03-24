@@ -18,6 +18,10 @@ package net.wg.gui.cyberSport.controls
 
       private var _leftValue:int = 0;
 
+      private var snapToLeft:Boolean = false;
+
+      private var snapToRight:Boolean = false;
+
       override protected function draw() : void {
          super.draw();
          this.updateLeftThumb();
@@ -28,8 +32,10 @@ package net.wg.gui.cyberSport.controls
          App.stage.removeEventListener(MouseEvent.MOUSE_MOVE,this.doDragLeft,false);
          App.stage.removeEventListener(MouseEvent.MOUSE_UP,this.endLeftDrag,false);
          this.leftThumb.removeEventListener(MouseEvent.MOUSE_DOWN,this.beginDragLeft,false);
+         this.leftThumb.removeEventListener(MouseEvent.MOUSE_UP,this.leftThumbOnMouseUpHandler);
          this.leftThumb.dispose();
-         thumb.removeEventListener(MouseEvent.MOUSE_DOWN,beginDrag,false);
+         thumb.removeEventListener(MouseEvent.MOUSE_DOWN,this.beginDrag,false);
+         thumb.removeEventListener(MouseEvent.MOUSE_UP,this.thumbOnMouseUpHandler);
          thumb.dispose();
          track.removeEventListener(MouseEvent.MOUSE_DOWN,this.trackPress,false);
          track.dispose();
@@ -39,10 +45,36 @@ package net.wg.gui.cyberSport.controls
          super.configUI();
          track["left_progress_mask"].gotoAndStop(0);
          this.leftThumb.addEventListener(MouseEvent.MOUSE_DOWN,this.beginDragLeft,false,0,true);
+         this.leftThumb.addEventListener(MouseEvent.MOUSE_UP,this.leftThumbOnMouseUpHandler);
+         thumb.addEventListener(MouseEvent.MOUSE_UP,this.thumbOnMouseUpHandler);
+      }
+
+      override protected function beginDrag(param1:MouseEvent) : void {
+         if(App.utils.commons.isLeftButton(param1))
+         {
+            this.snapToRight = true;
+            super.beginDrag(param1);
+         }
       }
 
       private function beginDragLeft(param1:MouseEvent) : void {
+         var _loc3_:Point = null;
+         var _loc4_:* = false;
+         var _loc5_:* = false;
+         if(value == this.leftValue)
+         {
+            _loc3_ = new Point(mouseX,mouseY);
+            _loc3_ = this.localToGlobal(_loc3_);
+            _loc4_ = thumb.hitTestPoint(_loc3_.x,_loc3_.y,true);
+            _loc5_ = this.leftThumb.hitTestPoint(_loc3_.x,_loc3_.y,true);
+            if((_loc4_) && (_loc5_))
+            {
+               this.beginDrag(param1);
+               return;
+            }
+         }
          _thumbPressed = true;
+         this.snapToLeft = true;
          var _loc2_:Point = globalToLocal(new Point(param1.stageX,param1.stageY));
          _dragOffset = {"x":_loc2_.x - this.leftThumb.x - this.leftThumb.width / 2};
          App.stage.addEventListener(MouseEvent.MOUSE_MOVE,this.doDragLeft,false,0,true);
@@ -80,18 +112,30 @@ package net.wg.gui.cyberSport.controls
       private function updateBothThumbs(param1:MouseEvent) : void {
          var _loc2_:Number = _width - offsetLeft - offsetRight;
          var _loc3_:Number = lockValue((param1.localX * scaleX - offsetLeft) / _loc2_ * (_maximum - _minimum) + _minimum);
-         if(value == _loc3_ || this.leftValue == _loc3_)
+         if(_loc3_ > value && _loc3_ < this.leftValue)
          {
             return;
          }
-         this.leftValue = value = _loc3_;
+         if(value == _loc3_ && this.leftValue < _loc3_)
+         {
+            this.thumbOnMouseUpHandler();
+         }
+         if(this.leftValue == _loc3_ && value > _loc3_)
+         {
+            this.leftThumbOnMouseUpHandler();
+         }
+         this.updateBothValues(_loc3_);
+         _trackDragMouseIndex = 0;
+         _dragOffset = {"x":0};
+      }
+
+      private function updateBothValues(param1:Number) : void {
+         this.leftValue = this.value = param1;
          if(!liveDragging)
          {
             dispatchEvent(new SliderEvent(SliderEvent.VALUE_CHANGE,false,true,_value));
             dispatchEvent(new SliderEvent(SliderEvent.FIRST_VALUE_CHANGE,false,true,this._leftValue));
          }
-         _trackDragMouseIndex = 0;
-         _dragOffset = {"x":0};
       }
 
       public function get leftValue() : int {
@@ -110,6 +154,11 @@ package net.wg.gui.cyberSport.controls
          {
             return;
          }
+         if(this.leftValue > value && this.leftValue == _loc2_)
+         {
+            this.snapToLeft = true;
+            this.leftThumbOnMouseUpHandler();
+         }
          this.leftValue = _loc2_;
          if(!liveDragging)
          {
@@ -124,6 +173,11 @@ package net.wg.gui.cyberSport.controls
          if(value == _loc2_ && _loc2_ < this._leftValue)
          {
             return;
+         }
+         if(this.leftValue < value && value == _loc2_)
+         {
+            this.snapToRight = true;
+            this.thumbOnMouseUpHandler();
          }
          value = _loc2_;
          if(!liveDragging)
@@ -140,6 +194,7 @@ package net.wg.gui.cyberSport.controls
       }
 
       protected function doDragLeft(param1:MouseEvent) : void {
+         this.snapToLeft = false;
          var _loc2_:Number = this.getNewValue(param1);
          if(this._leftValue == _loc2_ || _loc2_ > _value)
          {
@@ -154,6 +209,7 @@ package net.wg.gui.cyberSport.controls
       }
 
       override protected function doDrag(param1:MouseEvent) : void {
+         this.snapToRight = false;
          var _loc2_:Number = this.getNewValue(param1);
          if(value == _loc2_ || _loc2_ < this._leftValue)
          {
@@ -228,6 +284,22 @@ package net.wg.gui.cyberSport.controls
          _trackDragMouseIndex = undefined;
          _thumbPressed = false;
          _trackPressed = false;
+      }
+
+      private function leftThumbOnMouseUpHandler(param1:MouseEvent=null) : void {
+         if(this.snapToLeft)
+         {
+            this.updateBothValues(this.leftValue);
+            this.snapToLeft = false;
+         }
+      }
+
+      private function thumbOnMouseUpHandler(param1:MouseEvent=null) : void {
+         if(this.snapToRight)
+         {
+            this.updateBothValues(value);
+            this.snapToRight = false;
+         }
       }
    }
 

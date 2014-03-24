@@ -16,10 +16,6 @@ package net.wg.gui.components.common
          return Linkages.VIEW_LOAD_CURTAIN;
       }
 
-      override protected function onDispose() : void {
-         super.onDispose();
-      }
-
       override public function tryToUpdateContent() : void {
          var _loc1_:IManagedContent = getTopmostView();
          if(_loc1_)

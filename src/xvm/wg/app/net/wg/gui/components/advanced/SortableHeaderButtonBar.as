@@ -1,10 +1,9 @@
 package net.wg.gui.components.advanced
 {
-   import scaleform.clik.controls.ButtonBar;
    import scaleform.clik.interfaces.IDataProvider;
 
 
-   public class SortableHeaderButtonBar extends ButtonBar
+   public class SortableHeaderButtonBar extends ButtonBarEx
    {
           
       public function SortableHeaderButtonBar() {

@@ -9,6 +9,8 @@ package
          super();
       }
 
+      public static const LISTVIEW_TITLE:String = "#messenger:listView/title";
+
       public static const STATUS_ONLINE:String = "#messenger:status/online";
 
       public static const STATUS_OFFLINE:String = "#messenger:status/offline";
@@ -473,6 +475,16 @@ package
 
       public static const COMMAND_FOLLOWME_ARG0:String = "#messenger:command/FOLLOWME/arg0";
 
+      public static const COMMAND_RELOADING_READY_CASSETE_RTIME:String = "#messenger:command/RELOADING_READY_CASSETE/rTime";
+
+      public static const COMMAND_RELOADING_READY_CASSETE_AMMOINCASSETE:String = "#messenger:command/RELOADING_READY_CASSETE/ammoInCassete";
+
+      public static const COMMAND_RELOADINGGUN_RTIME:String = "#messenger:command/RELOADINGGUN/rTime";
+
+      public static const COMMAND_RELOADING_CASSETE_RTIME:String = "#messenger:command/RELOADING_CASSETE/rTime";
+
+      public static const COMMAND_RELOADING_CASSETE_AMMOQUANTITYLEFT:String = "#messenger:command/RELOADING_CASSETE/ammoQuantityLeft";
+
       public static const EVENTS_ENTERCHANNEL:String = "#messenger:events/enterChannel";
 
       public static const EVENTS_LEAVECHANNEL:String = "#messenger:events/leaveChannel";
@@ -774,6 +786,16 @@ package
       public static const SERVICECHANNELMESSAGES_SYSMSG_CONVERTER_VEHICLESWITHDRAWN:String = "#messenger:serviceChannelMessages/sysMsg/converter/vehiclesWithdrawn";
 
       public static const KEYBOARDCHAT:String = "#messenger:keyboardChat";
+
+      public static const SERVICECHANNELMESSAGES_SYSMSG_TITLES_HISTORICALCOSTSRESERVED:String = "#messenger:serviceChannelMessages/sysMsg/titles/historicalCostsReserved";
+
+      public static const SERVICECHANNELMESSAGES_HISTORICALCOSTSRESERVED_GOLDRETURN:String = "#messenger:serviceChannelMessages/historicalCostsReserved/goldReturn";
+
+      public static const SERVICECHANNELMESSAGES_HISTORICALCOSTSRESERVED_GOLDDEBITED:String = "#messenger:serviceChannelMessages/historicalCostsReserved/goldDebited";
+
+      public static const SERVICECHANNELMESSAGES_HISTORICALCOSTSRESERVED_CREDITSRETURN:String = "#messenger:serviceChannelMessages/historicalCostsReserved/creditsReturn";
+
+      public static const SERVICECHANNELMESSAGES_HISTORICALCOSTSRESERVED_CREDITSDEBITED:String = "#messenger:serviceChannelMessages/historicalCostsReserved/creditsDebited";
    }
 
 }

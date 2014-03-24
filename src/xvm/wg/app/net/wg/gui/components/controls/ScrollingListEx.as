@@ -23,6 +23,7 @@ package net.wg.gui.components.controls
           
       public function ScrollingListEx() {
          super();
+         this._sbPadding = new Padding(0,0,0,0);
       }
 
       public var wrapping:String = "normal";
@@ -48,6 +49,8 @@ package net.wg.gui.components.controls
       protected var _margin:Number = 0;
 
       protected var _padding:Padding;
+
+      private var _sbPadding:Padding;
 
       protected var _buttonModeEnabled:Boolean = true;
 
@@ -88,7 +91,7 @@ package net.wg.gui.components.controls
       }
 
       override public function get availableWidth() : Number {
-         return Math.round(_width) - this.margin * 2 - (this._autoScrollBar?Math.round(this._scrollBar.width):0);
+         return Math.round(_width) - this.margin * 2 - (this._autoScrollBar?Math.round(this._scrollBar.width) + this.sbPadding.horizontal:0);
       }
 
       override public function get availableHeight() : Number {
@@ -141,6 +144,9 @@ package net.wg.gui.components.controls
 
       private function updateVisibleScrollBar() : void {
          var _loc1_:DisplayObject = null;
+         var _loc2_:* = false;
+         var _loc3_:* = NaN;
+         var _loc4_:IListItemRenderer = null;
          if(this._scrollBar)
          {
             _loc1_ = this._scrollBar as DisplayObject;
@@ -153,6 +159,23 @@ package net.wg.gui.components.controls
                else
                {
                   _loc1_.visible = false;
+               }
+               if(!_loc1_.visible)
+               {
+                  _loc2_ = isInvalid(InvalidationType.DATA);
+                  _loc3_ = Math.round(_width) - this.margin * 2 - this.padding.horizontal;
+                  for each (_loc4_ in _renderers)
+                  {
+                     _loc4_.width = _loc3_;
+                     if(!_loc2_)
+                     {
+                        _loc4_.validateNow();
+                     }
+                  }
+               }
+               if((_loc1_) && (container.contains(_loc1_)))
+               {
+                  container.setChildIndex(_loc1_,container.numChildren-1);
                }
             }
             else
@@ -362,8 +385,16 @@ package net.wg.gui.components.controls
       }
 
       override protected function handleMouseWheel(param1:MouseEvent) : void {
+         var _loc2_:DisplayObject = null;
          super.handleMouseWheel(param1);
-         param1.stopPropagation();
+         if(this._scrollBar)
+         {
+            _loc2_ = this._scrollBar as DisplayObject;
+            if(_loc2_.visible)
+            {
+               param1.stopPropagation();
+            }
+         }
       }
 
       override protected function scrollList(param1:int) : void {
@@ -372,6 +403,7 @@ package net.wg.gui.components.controls
 
       override protected function onDispose() : void {
          this._scrollBarValue = null;
+         this._sbPadding = null;
          super.onDispose();
       }
 
@@ -458,9 +490,9 @@ package net.wg.gui.components.controls
          {
             return;
          }
-         this._scrollBar.x = _width - this._scrollBar.width - this.margin;
-         this._scrollBar.y = this.margin;
-         this._scrollBar.height = this.availableHeight;
+         this._scrollBar.x = _width - this._scrollBar.width - this.margin - this.sbPadding.left;
+         this._scrollBar.y = this.margin + this.sbPadding.top;
+         this._scrollBar.height = this.availableHeight - this.sbPadding.vertical;
          this._scrollBar.validateNow();
          this.updateVisibleScrollBar();
       }
@@ -642,6 +674,14 @@ package net.wg.gui.components.controls
 
       protected function blockMouseWheel(param1:MouseEvent) : void {
          param1.stopPropagation();
+      }
+
+      public function get sbPadding() : Padding {
+         return this._sbPadding;
+      }
+
+      public function set sbPadding(param1:Padding) : void {
+         this._sbPadding = param1;
       }
    }
 

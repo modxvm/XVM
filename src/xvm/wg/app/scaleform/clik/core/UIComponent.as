@@ -473,12 +473,12 @@ package scaleform.clik.core
       override public function addEventListener(param1:String, param2:Function, param3:Boolean=false, param4:int=0, param5:Boolean=false) : void {
          this.throwLifeCycleException();
          var _loc6_:IUtils = App.instance?App.utils:null;
-         super.addEventListener(param1,param2,param3,param4,param5);
+         this.addSuperEventListener(param1,param2,param3,param4,param5);
       }
 
       override public function removeEventListener(param1:String, param2:Function, param3:Boolean=false) : void {
          var _loc4_:IUtils = App.instance?App.utils:null;
-         super.removeEventListener(param1,param2,param3);
+         this.removeSuperEventListener(param1,param2,param3);
       }
 
       public function removeSuperEventListener(param1:String, param2:Function, param3:Boolean=false) : void {

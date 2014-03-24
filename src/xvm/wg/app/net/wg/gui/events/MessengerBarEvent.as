@@ -17,8 +17,6 @@ package net.wg.gui.events
 
       public static const PIN_CONTACTS_WINDOW:String = "pinContactsWidow";
 
-      public static const PIN_RECEIVED_INVITES_WINDOW:String = "pinReceivedInvitesWindow";
-
       public var clientID:Number = 0;
 
       override public function clone() : Event {

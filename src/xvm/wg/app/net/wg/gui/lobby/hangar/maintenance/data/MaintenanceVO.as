@@ -12,6 +12,8 @@ package net.wg.gui.lobby.hangar.maintenance.data
 
       private static const SHELLS_FIELD:String = "shells";
 
+      private static const HISTORICAL_BATTLE_FIELD:String = "historicalBattle";
+
       public var gold:Number;
 
       public var credits:Number;
@@ -36,6 +38,8 @@ package net.wg.gui.lobby.hangar.maintenance.data
 
       public var shells:Array = null;
 
+      public var historicalBattle:HistoricalAmmoVO;
+
       public function disposeShells() : void {
          var _loc1_:ShellVO = null;
          if(this.shells)
@@ -54,6 +58,10 @@ package net.wg.gui.lobby.hangar.maintenance.data
 
       override protected function onDispose() : void {
          this.disposeShells();
+         if(this.historicalBattle)
+         {
+            this.historicalBattle.dispose();
+         }
          super.onDispose();
       }
 
@@ -86,6 +94,11 @@ package net.wg.gui.lobby.hangar.maintenance.data
                _loc5_.list = this.shells.slice();
                _loc5_.list.splice(this.shells.indexOf(_loc5_),1);
             }
+            return false;
+         }
+         if(param1 == HISTORICAL_BATTLE_FIELD)
+         {
+            this.historicalBattle = param2?new HistoricalAmmoVO(param2):null;
             return false;
          }
          return true;

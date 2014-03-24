@@ -13,6 +13,8 @@ package
 
       public static const COPY:String = "#menu:copy";
 
+      public static const LOGIN_SERVER:String = "#menu:login/server";
+
       public static const LOGIN_LOGIN:String = "#menu:login/login";
 
       public static const LOGIN_VERSION:String = "#menu:login/version";
@@ -178,6 +180,10 @@ package
       public static const LOADING_BATTLETYPES_5:String = "#menu:loading/battleTypes/5";
 
       public static const LOADING_BATTLETYPES_DESC_5:String = "#menu:loading/battleTypes/desc/5";
+
+      public static const LOADING_BATTLETYPES_6:String = "#menu:loading/battleTypes/6";
+
+      public static const LOADING_BATTLETYPES_DESC_6:String = "#menu:loading/battleTypes/desc/6";
 
       public static const LOADING_TEAM1:String = "#menu:loading/team1";
 
@@ -353,6 +359,8 @@ package
 
       public static const TANKCAROUSEL_VEHICLESTATES_UNDAMAGED:String = "#menu:tankCarousel/vehicleStates/undamaged";
 
+      public static const TANKCAROUSEL_VEHICLESTATES_NOT_SUITABLE:String = "#menu:tankCarousel/vehicleStates/not_suitable";
+
       public static const TANKCAROUSEL_VEHICLESTATES_SERVERRESTRICTION:String = "#menu:tankCarousel/vehicleStates/serverRestriction";
 
       public static const TANKCAROUSEL_VEHICLESTATES_CREWNOTFULL:String = "#menu:tankCarousel/vehicleStates/crewNotFull";
@@ -467,6 +475,10 @@ package
 
       public static const PREBATTLE_GROUPSLABEL:String = "#menu:prebattle/groupsLabel";
 
+      public static const PREBATTLE_SIDEA:String = "#menu:prebattle/sideA";
+
+      public static const PREBATTLE_SIDEB:String = "#menu:prebattle/sideB";
+
       public static const PREBATTLE_TIMERLABEL:String = "#menu:prebattle/timerLabel";
 
       public static const PREBATTLE_EXITBUTTON:String = "#menu:prebattle/exitButton";
@@ -478,8 +490,6 @@ package
       public static const PREBATTLE_TITLE:String = "#menu:prebattle/title";
 
       public static const PREBATTLE_DESCRIPTION:String = "#menu:prebattle/description";
-
-      public static const PREBATTLE_LEVELSTITLE:String = "#menu:prebattle/levelsTitle";
 
       public static const PREBATTLE_TYPESTITLE:String = "#menu:prebattle/typesTitle";
 
@@ -727,6 +737,14 @@ package
 
       public static const HEADERBUTTONS_BATTLE_TYPES_UNITLEAVE:String = "#menu:headerButtons/battle/types/unitLeave";
 
+      public static const HEADERBUTTONS_BATTLE_TYPES_HISTORICALBATTLES:String = "#menu:headerButtons/battle/types/historicalBattles";
+
+      public static const HEADERBUTTONS_BATTLE_TYPES_HISTORICALBATTLES_DESCR:String = "#menu:headerButtons/battle/types/historicalBattles/descr";
+
+      public static const HEADERBUTTONS_BATTLE_TYPES_HISTORICALBATTLESLEAVE_DESCR:String = "#menu:headerButtons/battle/types/historicalBattlesLeave/descr";
+
+      public static const HEADERBUTTONS_BATTLE_TYPES_HISTORICALBATTLESLEAVE:String = "#menu:headerButtons/battle/types/historicalBattlesLeave";
+
       public static const HEADERBUTTONS_BATTLE_MENU_STANDART:String = "#menu:headerButtons/battle/menu/standart";
 
       public static const HEADERBUTTONS_BATTLE_MENU_SQUAD:String = "#menu:headerButtons/battle/menu/squad";
@@ -738,6 +756,8 @@ package
       public static const HEADERBUTTONS_BATTLE_MENU_BATTLE_SESSION:String = "#menu:headerButtons/battle/menu/battle_session";
 
       public static const HEADERBUTTONS_BATTLE_MENU_UNIT:String = "#menu:headerButtons/battle/menu/unit";
+
+      public static const HEADERBUTTONS_BATTLE_MENU_HISTORICAL:String = "#menu:headerButtons/battle/menu/historical";
 
       public static const HEADERBUTTONS_HANGAR:String = "#menu:headerButtons/hangar";
 
@@ -758,6 +778,8 @@ package
       public static const HEADERBUTTONS_TECHTREE:String = "#menu:headerButtons/techtree";
 
       public static const HEADERBUTTONS_BARRACKS:String = "#menu:headerButtons/barracks";
+
+      public static const HEADERBUTTONS_FORTS:String = "#menu:headerButtons/forts";
 
       public static const HEADERBUTTONS_BROWSER:String = "#menu:headerButtons/browser";
 
@@ -1939,6 +1961,10 @@ package
 
       public static const BONUSTYPE_7:String = "#menu:bonusType/7";
 
+      public static const BONUSTYPE_8:String = "#menu:bonusType/8";
+
+      public static const BONUSTYPE_9:String = "#menu:bonusType/9";
+
       public static const DAY_1:String = "#menu:day/1";
 
       public static const DAY_2:String = "#menu:day/2";
@@ -1952,6 +1978,16 @@ package
       public static const DAY_6:String = "#menu:day/6";
 
       public static const DAY_7:String = "#menu:day/7";
+
+      public static const FORTIFICATIONCTX_DIRECTIONCONTROL:String = "#menu:fortificationCtx/directionControl";
+
+      public static const FORTIFICATIONCTX_ASSIGNEDPLAYERS:String = "#menu:fortificationCtx/assignedPlayers";
+
+      public static const FORTIFICATIONCTX_MODERNIZATION:String = "#menu:fortificationCtx/modernization";
+
+      public static const FORTIFICATIONCTX_PREPAREORDER:String = "#menu:fortificationCtx/prepareOrder";
+
+      public static const FORTIFICATIONCTX_DESTROY:String = "#menu:fortificationCtx/destroy";
 
       public static const NATION_TREE_TITLE_ENUM:Array = [NATION_TREE_TITLE_USSR,NATION_TREE_TITLE_GERMANY,NATION_TREE_TITLE_USA,NATION_TREE_TITLE_FRANCE,NATION_TREE_TITLE_UK,NATION_TREE_TITLE_CHINA,NATION_TREE_TITLE_JAPAN];
 
@@ -1969,9 +2005,9 @@ package
 
       public static const TANK_PARAMS_ENUM:Array = [TANK_PARAMS_MAXHEALTH,TANK_PARAMS_WEIGHT,TANK_PARAMS_ENGINEPOWER,TANK_PARAMS_ENGINEPOWERPERTON,TANK_PARAMS_SPEEDLIMITS,TANK_PARAMS_CHASSISROTATIONSPEED,TANK_PARAMS_HULLARMOR,TANK_PARAMS_TURRETARMOR,TANK_PARAMS_RELOADTIME,TANK_PARAMS_RELOADTIMESECS,TANK_PARAMS_PIERCINGPOWER,TANK_PARAMS_DAMAGE,TANK_PARAMS_DAMAGEAVG,TANK_PARAMS_DAMAGEAVGPERMINUTE,TANK_PARAMS_TURRETROTATIONSPEED,TANK_PARAMS_GUNROTATIONSPEED,TANK_PARAMS_CIRCULARVISIONRADIUS,TANK_PARAMS_RADIODISTANCE,TANK_PARAMS_PARAM12,TANK_PARAMS_SHOTDISPERSIONANGLE,TANK_PARAMS_AIMINGTIME,TANK_PARAMS_MAXAMMO,TANK_PARAMS_VALUES_PARAM12_VALUE0,TANK_PARAMS_VALUES_PARAM12_VALUE1,TANK_PARAMS_VALUES_PARAM12_VALUE2,TANK_PARAMS_VALUES_PARAM12_VALUE3,TANK_PARAMS_VALUES_PARAM10_VALUE0,TANK_PARAMS_VALUES_PARAM10_VALUE1,TANK_PARAMS_VALUES_PARAM10_VALUE2,TANK_PARAMS_VALUES_PARAM10_VALUE3,TANK_PARAMS_VALUES_PARAM11_VALUE0,TANK_PARAMS_VALUES_PARAM11_VALUE1,TANK_PARAMS_VALUES_PARAM11_VALUE2,TANK_PARAMS_VALUES_PARAM11_VALUE3,TANK_PARAMS_EXPLOSIONRADIUS];
 
-      public static const LOADING_BATTLETYPES_ENUM:Array = [LOADING_BATTLETYPES_0,LOADING_BATTLETYPES_1,LOADING_BATTLETYPES_2,LOADING_BATTLETYPES_3,LOADING_BATTLETYPES_4,LOADING_BATTLETYPES_5];
+      public static const LOADING_BATTLETYPES_ENUM:Array = [LOADING_BATTLETYPES_0,LOADING_BATTLETYPES_1,LOADING_BATTLETYPES_2,LOADING_BATTLETYPES_3,LOADING_BATTLETYPES_4,LOADING_BATTLETYPES_5,LOADING_BATTLETYPES_6];
 
-      public static const TANKCAROUSEL_VEHICLESTATES_ENUM:Array = [TANKCAROUSEL_VEHICLESTATES_BATTLE,TANKCAROUSEL_VEHICLESTATES_LOCKED,TANKCAROUSEL_VEHICLESTATES_CLANLOCKED,TANKCAROUSEL_VEHICLESTATES_INPREBATTLE,TANKCAROUSEL_VEHICLESTATES_AMMONOTFULL,TANKCAROUSEL_VEHICLESTATES_DAMAGED,TANKCAROUSEL_VEHICLESTATES_DESTROYED,TANKCAROUSEL_VEHICLESTATES_EXPLODED,TANKCAROUSEL_VEHICLESTATES_NOTPRESENT,TANKCAROUSEL_VEHICLESTATES_UNDAMAGED,TANKCAROUSEL_VEHICLESTATES_SERVERRESTRICTION,TANKCAROUSEL_VEHICLESTATES_CREWNOTFULL,TANKCAROUSEL_VEHICLESTATES_BUYTANK,TANKCAROUSEL_VEHICLESTATES_BUYTANKEMPTYCOUNT,TANKCAROUSEL_VEHICLESTATES_BUYSLOT];
+      public static const TANKCAROUSEL_VEHICLESTATES_ENUM:Array = [TANKCAROUSEL_VEHICLESTATES_BATTLE,TANKCAROUSEL_VEHICLESTATES_LOCKED,TANKCAROUSEL_VEHICLESTATES_CLANLOCKED,TANKCAROUSEL_VEHICLESTATES_INPREBATTLE,TANKCAROUSEL_VEHICLESTATES_AMMONOTFULL,TANKCAROUSEL_VEHICLESTATES_DAMAGED,TANKCAROUSEL_VEHICLESTATES_DESTROYED,TANKCAROUSEL_VEHICLESTATES_EXPLODED,TANKCAROUSEL_VEHICLESTATES_NOTPRESENT,TANKCAROUSEL_VEHICLESTATES_UNDAMAGED,TANKCAROUSEL_VEHICLESTATES_NOT_SUITABLE,TANKCAROUSEL_VEHICLESTATES_SERVERRESTRICTION,TANKCAROUSEL_VEHICLESTATES_CREWNOTFULL,TANKCAROUSEL_VEHICLESTATES_BUYTANK,TANKCAROUSEL_VEHICLESTATES_BUYTANKEMPTYCOUNT,TANKCAROUSEL_VEHICLESTATES_BUYSLOT];
 
       public static const SHOP_TABLE_HEADER_COUNT_ENUM:Array = [SHOP_TABLE_HEADER_COUNT_VEHICLE,SHOP_TABLE_HEADER_COUNT_MODULE,SHOP_TABLE_HEADER_COUNT_SHELL,SHOP_TABLE_HEADER_COUNT_OPTIONALDEVICE,SHOP_TABLE_HEADER_COUNT_EQUIPMENT];
 
@@ -1981,7 +2017,7 @@ package
 
       public static const VEHICLEINFO_PARAMS_ENUM:Array = [VEHICLEINFO_PARAMS_MAXHEALTH,VEHICLEINFO_PARAMS_WEIGHT,VEHICLEINFO_PARAMS_ENGINEPOWER,VEHICLEINFO_PARAMS_SPEEDLIMITS,VEHICLEINFO_PARAMS_CHASSISROTATIONSPEED,VEHICLEINFO_PARAMS_HULLARMOR,VEHICLEINFO_PARAMS_TURRETARMOR,VEHICLEINFO_PARAMS_RELOADTIME,VEHICLEINFO_PARAMS_PIERCINGPOWER,VEHICLEINFO_PARAMS_DAMAGE,VEHICLEINFO_PARAMS_TURRETROTATIONSPEED,VEHICLEINFO_PARAMS_GUNROTATIONSPEED,VEHICLEINFO_PARAMS_CIRCULARVISIONRADIUS,VEHICLEINFO_PARAMS_RADIODISTANCE];
 
-      public static const LOADING_BATTLETYPES_DESC_ENUM:Array = [LOADING_BATTLETYPES_DESC_0,LOADING_BATTLETYPES_DESC_1,LOADING_BATTLETYPES_DESC_2,LOADING_BATTLETYPES_DESC_3,LOADING_BATTLETYPES_DESC_4,LOADING_BATTLETYPES_DESC_5];
+      public static const LOADING_BATTLETYPES_DESC_ENUM:Array = [LOADING_BATTLETYPES_DESC_0,LOADING_BATTLETYPES_DESC_1,LOADING_BATTLETYPES_DESC_2,LOADING_BATTLETYPES_DESC_3,LOADING_BATTLETYPES_DESC_4,LOADING_BATTLETYPES_DESC_5,LOADING_BATTLETYPES_DESC_6];
 
       public static const PROFILE_STATS_BLOCKS_ENUM:Array = [PROFILE_STATS_BLOCKS_COMMON,PROFILE_STATS_BLOCKS_BATTLEEFFECT,PROFILE_STATS_BLOCKS_CREDITS,PROFILE_STATS_BLOCKS_STUDYING];
 
@@ -2002,7 +2038,8 @@ package
       public static const MODULEINFO_COMPATIBLE_ENUM:Array = [MODULEINFO_COMPATIBLE_TURRETS,MODULEINFO_COMPATIBLE_SHELLS,MODULEINFO_COMPATIBLE_GUNS,MODULEINFO_COMPATIBLE_SHELLGUNS,MODULEINFO_COMPATIBLE_VEHICLES,MODULEINFO_COMPATIBLE_UNICHARGEDVEHICLES,MODULEINFO_COMPATIBLE_CLIPVEHICLES];
 
       public static function nation_tree_title(param1:String) : String {
-         var _loc2_:String = "#menu:nation_tree/title/" + param1;
+         var _loc2_:String = null;
+         _loc2_ = "#menu:nation_tree/title/" + param1;
          if(NATION_TREE_TITLE_ENUM.indexOf(_loc2_) == -1)
          {
             DebugUtils.LOG_WARNING("[nation_tree_title]:locale key \"" + _loc2_ + "\" was not found");
@@ -2012,13 +2049,15 @@ package
       }
 
       public static function tankmanpersonalcase_modifiers(param1:String) : String {
-         var _loc2_:String = "#menu:tankmanPersonalCase/modifiers/" + param1;
+         var _loc2_:String = null;
+         _loc2_ = "#menu:tankmanPersonalCase/modifiers/" + param1;
          App.utils.asserter.assert(!(TANKMANPERSONALCASE_MODIFIERS_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
          return _loc2_;
       }
 
       public static function tankmantrainingwindow(param1:String) : String {
-         var _loc2_:String = "#menu:tankmanTrainingWindow/" + param1;
+         var _loc2_:String = null;
+         _loc2_ = "#menu:tankmanTrainingWindow/" + param1;
          App.utils.asserter.assert(!(TANKMANTRAININGWINDOW_ENUM.indexOf(_loc2_) == -1),"locale key \"" + _loc2_ + "\" was not found");
          return _loc2_;
       }

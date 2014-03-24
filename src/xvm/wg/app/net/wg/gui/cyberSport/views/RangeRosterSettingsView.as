@@ -3,7 +3,7 @@ package net.wg.gui.cyberSport.views
    import scaleform.clik.core.UIComponent;
    import net.wg.infrastructure.interfaces.IViewStackContent;
    import net.wg.gui.components.advanced.FieldSet;
-   import net.wg.gui.cyberSport.controls.CSRosterToggleButton;
+   import net.wg.gui.components.advanced.ToggleButton;
    import net.wg.gui.cyberSport.controls.DoubleSlider;
    import net.wg.gui.cyberSport.controls.RosterButtonGroup;
    import net.wg.gui.cyberSport.controls.SettingRosterVO;
@@ -38,29 +38,29 @@ package net.wg.gui.cyberSport.views
 
       public var sliderField:FieldSet;
 
-      public var usaFlag:CSRosterToggleButton;
+      public var usaFlag:ToggleButton;
 
-      public var japanFlag:CSRosterToggleButton;
+      public var japanFlag:ToggleButton;
 
-      public var germanyFlag:CSRosterToggleButton;
+      public var germanyFlag:ToggleButton;
 
-      public var ukFlag:CSRosterToggleButton;
+      public var ukFlag:ToggleButton;
 
-      public var franceFlag:CSRosterToggleButton;
+      public var franceFlag:ToggleButton;
 
-      public var chinaFlag:CSRosterToggleButton;
+      public var chinaFlag:ToggleButton;
 
-      public var ussrFlag:CSRosterToggleButton;
+      public var ussrFlag:ToggleButton;
 
-      public var heavyBtn:CSRosterToggleButton;
+      public var heavyBtn:ToggleButton;
 
-      public var mediumBtn:CSRosterToggleButton;
+      public var mediumBtn:ToggleButton;
 
-      public var lightBtn:CSRosterToggleButton;
+      public var lightBtn:ToggleButton;
 
-      public var atSpgBtn:CSRosterToggleButton;
+      public var atSpgBtn:ToggleButton;
 
-      public var spgBtn:CSRosterToggleButton;
+      public var spgBtn:ToggleButton;
 
       public var doubleSlider:DoubleSlider;
 
@@ -159,18 +159,19 @@ package net.wg.gui.cyberSport.views
             Button(param1[_loc4_]).groupName = param2;
             if(param2 == NATION_TYPE_GROUP)
             {
-               CSRosterToggleButton(param1[_loc4_]).nationFlag = this.guiNations[_loc4_];
+               ToggleButton(param1[_loc4_]).nationFlag = this.guiNations[_loc4_];
             }
             _loc4_++;
          }
       }
 
       private function autoSelect() : void {
+         var _loc3_:Array = null;
          var _loc8_:* = 0;
          var _loc9_:* = 0;
          var _loc1_:Array = this.model.nationIDRange;
          var _loc2_:Array = this.model.vTypeRange;
-         var _loc3_:Array = this.model.vLevelRange;
+         _loc3_ = this.model.vLevelRange;
          if(_loc1_.length == 0 && _loc2_.length == 0 && _loc3_.length == 0)
          {
             this.setDefaultState();

@@ -183,7 +183,6 @@ package net.wg.gui.components.common
             }
             else
             {
-               App.utils.focusHandler.setModalFocus(null);
                if(!param1)
                {
                   dispatchEvent(new FocusEvent(FocusEvent.FOCUS_OUT));

@@ -417,6 +417,11 @@ package net.wg.gui.lobby.tankman
                   }
                   this.modifiersValues.htmlText = this.modifiersValues.htmlText + ("<font color=\"" + _loc5_ + "\">" + _loc3_ + data.modifiers[_loc7_].val + "%</font><br/>");
                   this.modifiersNames.htmlText = this.modifiersNames.htmlText + (_loc1_.makeString(MENU.tankmanpersonalcase_modifiers(data.modifiers[_loc7_].id)) + "<br/>");
+                  while(this.modifiersNames.numLines > this.modifiersValues.numLines)
+                  {
+                     this.modifiersHeaders.htmlText = this.modifiersHeaders.htmlText + "<br/>";
+                     this.modifiersValues.htmlText = this.modifiersValues.htmlText + "<br/>";
+                  }
                }
                _loc7_++;
             }
