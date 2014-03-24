@@ -112,6 +112,18 @@
     "SPG": "Delostrelectvo",
 
     // VehicleMarkersManager
-    "blownUp": "Munícia!"
+    "blownUp": "Munícia!",
+
+    // Token
+    "token/network_error": "Chyba siete. Štatistiky xvm nie sú k dispozícii, skúste to neskôr.",
+    "token/bad_token": "Zlý token.\n{{l10n:token/notify_xvm_site}}",
+    "token/blocked": "Status: <font color='#FF0000'>Blokovaný</font><br>{{l10n:token/notify_xvm_site}}",
+    "token/inactive": "Status: <font color='#FFFF00'>Neaktívny</font><br>{{l10n:token/notify_xvm_site}}",
+    "token/active": "Status: <font color='#00FF00'>Aktívny</font>",
+    "token/days_left": "Zostávajú dní",
+    "token/hours_left": "Zostávajú hodiny",
+    "token/cnt": "Počet prístupov",
+    "token/unknown_status": "Neznámy status",
+    "token/notify_xvm_site": "Prosím choďte na <a href='event:http://www.modxvm.com/'>XVM stránku</a> a aktivujte štatistiky."
   }
 }

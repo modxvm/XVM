@@ -112,6 +112,18 @@
     "SPG": "SPG",
 
     // VehicleMarkersManager
-    "blownUp": "Zniszczony!"
+    "blownUp": "Zniszczony!",
+
+    // Token
+    "token/network_error": "Błąd sieci. Statystyki XVM sa niedostępne, spróbuj ponownie później.",
+    "token/bad_token": "Błędny token.\n{{l10n:token/notify_xvm_site}}",
+    "token/blocked": "Stan: <font color='#FF0000'>Zablokowany</font><br>{{l10n:token/notify_xvm_site}}",
+    "token/inactive": "Stan: <font color='#FFFF00'>Nieaktywny</font><br>{{l10n:token/notify_xvm_site}}",
+    "token/active": "Stan: <font color='#00FF00'>Aktywny</font>",
+    "token/days_left": "Pozostało dni",
+    "token/hours_left": "Pozostało godzin",
+    "token/cnt": "Liczba zapytań",
+    "token/unknown_status": "Stan nieznany",
+    "token/notify_xvm_site": "Proszę odwiedzić <a href='#XVM_SITE#'>stronę XVM</a> i aktywować statystyki w profilu."
   }
 }
