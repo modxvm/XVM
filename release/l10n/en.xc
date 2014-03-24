@@ -124,6 +124,6 @@
     "token/hours_left": "Hours left",
     "token/cnt": "Requests count",
     "token/unknown_status": "Unknown status",
-    "token/notify_xvm_site": "Please go to the <a href='event:http://www.modxvm.com/'>XVM site</a> and activate statistics in the personal cabinet."
+    "token/notify_xvm_site": "Please go to the <a href='#XVM_SITE#'>XVM site</a> and activate statistics in the personal cabinet."
   }
 }
