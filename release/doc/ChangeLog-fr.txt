@@ -1,8 +1,21 @@
-﻿XVM-5.1.0:
+﻿XVM-dev:
+   [NOUVEAUTÉS]
+   * traduction : added Chinois (Simplifié)
+   * stats : utilisation d'une connexion cryptée
+
+   [AUTRES]
+   * stats : changement de l'adresse du serveur (désormais https://stat.modxvm.com/)
+
+
+XVM-5.1.0:
   * adaptation pour WoT 0.8.11
-  * classement WN par défaut changé en WN8
+
+  [NOUVEAUTÉS]
   * nouvelles options :
       (battleLoading|battleResults|statisticForm)/showBattleTier - affiche le tier de la bataille
+
+  [AUTRES]
+  * classement WN par défaut changé en WN8
 
 
 XVM-5.0.2:
@@ -15,9 +28,9 @@ XVM-5.0.2:
       hangar/masteryMarkInTankCarousel - affiche l'insigne de maîtrise dans le carrousel
       hangar/masteryMarkInTechTree - affiche l'insigne de maitrise dans l'arbre technologique
       userInfo/showExtraDataInProfile - affiche des détails supplémentaires dans le profil (expérimental)
-  * nouveaux macros : {{wn6}}, {{wn8}, {{c:wn6}}, {{c:wn8}}, {{a:wn6}}, {{a:wn8}},
+  * nouvelles macros : {{wn6}}, {{wn8}, {{c:wn6}}, {{c:wn8}}, {{a:wn6}}, {{a:wn8}},
       {{xwn6}}, {{xwn8}}, {{c:xwn6}}, {{c:xwn8}}, {{a:xwn6}}, {{a:xwn8}},
-  * macros dépréciés : {{wn}}, {{c:wn}}, {{a:wn}}, {{xwn}}, {{c:xwn}}, {{a:xwn}}
+  * macros dépréciées : {{wn}}, {{c:wn}}, {{a:wn}}, {{xwn}}, {{c:xwn}}, {{a:xwn}}
   * écran de connexion : les champs de texte n'acceptent désormais que les caractères requis
   * traduction : ajout du Chinois (Taïwanais), Malaisien et du Portugais
 
