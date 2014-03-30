@@ -115,7 +115,8 @@ def _getXvmStatActiveTokenData():
     return token
 
 def _get_current_unix_time():
-    return int(time.mktime(datetime.datetime.utcnow().timetuple()))
+    #return int(time.mktime(datetime.datetime.utcnow().timetuple()))
+    return time.time()
 
 def _getPlayerId():
     player = BigWorld.player()
