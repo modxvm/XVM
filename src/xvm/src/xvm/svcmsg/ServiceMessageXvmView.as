@@ -11,6 +11,7 @@ package xvm.svcmsg
     import net.wg.data.*;
     import net.wg.gui.lobby.*;
     import net.wg.gui.notification.*;
+    import net.wg.gui.notification.vo.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
     import org.idmedia.as3commons.util.*;

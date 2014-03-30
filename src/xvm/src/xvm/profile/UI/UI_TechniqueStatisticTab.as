@@ -44,9 +44,9 @@ package xvm.profile.UI
                 worker.specDamageDL.visible = false;
                 worker.avgCaptureDL.visible = false;
                 worker.avgDefenceDL.visible = false;
-                winsPercentSign.visible = true;
-                defeatsPercentSign.visible = true;
-                survivePercentSign.visible = true;
+                //TODO:0.9.0 winsPercentSign.visible = true;
+                //TODO:0.9.0 defeatsPercentSign.visible = true;
+                //TODO:0.9.0 survivePercentSign.visible = true;
                 worker.clearTextFields();
                 super.update(arg1);
                 return;

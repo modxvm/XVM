@@ -7,6 +7,7 @@ package xvm.svcmsg.UI
     import com.xvm.*;
     import flash.events.*;
     import net.wg.gui.notification.*;
+    import net.wg.gui.notification.vo.*;
     import xvm.svcmsg.*;
 
     public dynamic class UI_ServiceMessageIR extends ServiceMessageIR_UI

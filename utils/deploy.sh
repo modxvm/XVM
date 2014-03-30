@@ -21,7 +21,7 @@ FILES_SCALEFORM="
   VehicleMarkersManager.swf
   xvm.swf"
 
-CUSTOM_TESTER_FILES="xvm.xc"
+CUSTOM_TESTER_FILES="configs/xvm.xc"
 XVM_DIRS="configs l10n mods"
 
 cd $(dirname $(realpath $(cygpath --unix $0)))
@@ -77,12 +77,12 @@ for n in $FILES_SCALEFORM; do
   copy_file_scaleform $n
 done
 
+for n in $XVM_DIRS; do
+  copy_xvm_dir $n
+done
+
 if [ "$KEEP_OLD_CUSTOM_FILES" = "" ]; then
   for n in $CUSTOM_TESTER_FILES; do
     copy_custom_tester_files $n
   done
 fi
-
-for n in $XVM_DIRS; do
-  copy_xvm_dir $n
-done
