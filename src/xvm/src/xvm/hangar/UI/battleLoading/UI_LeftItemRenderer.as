@@ -1,5 +1,6 @@
 package xvm.hangar.UI.battleLoading
 {
+    import net.wg.gui.lobby.battleloading.vo.*;
     import xvm.hangar.components.BattleLoading.*;
 
     public dynamic class UI_LeftItemRenderer extends LeftItemRendererUI
@@ -15,7 +16,7 @@ package xvm.hangar.UI.battleLoading
         override public function setData(data:Object):void
         {
             super.setData(data);
-            worker.setData(data);
+            worker.setData(data as VehicleInfoVO);
         }
 
         override protected function draw():void

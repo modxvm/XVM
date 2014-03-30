@@ -8,6 +8,7 @@ package xvm.hangar.components.BattleLoading
     import flash.geom.*;
     import flash.text.*;
     import flash.utils.*;
+    import net.wg.gui.lobby.battleloading.vo.*;
     import scaleform.gfx.*;
     import net.wg.gui.events.*;
     import net.wg.gui.lobby.battleloading.*;
@@ -49,7 +50,7 @@ package xvm.hangar.components.BattleLoading
             Stat.loadBattleStat(this, onStatLoaded);
         }
 
-        public function setData(data:Object):void
+        public function setData(data:VehicleInfoVO):void
         {
             //Logger.add("setData: " + (data == null ? "(null)" : data.label));
             //Logger.addObject(data);
@@ -61,12 +62,12 @@ package xvm.hangar.components.BattleLoading
                 if (fullPlayerName == null)
                 {
                     fullPlayerName = App.utils.commons.getFullPlayerName(
-                        App.utils.commons.getUserProps(data.label, data.clanAbbrev, data.region, data.igrType));
+                        App.utils.commons.getUserProps(data.playerName, data.clanAbbrev, data.region, data.igrType));
                 }
 
-                var vdata:VehicleData = VehicleInfo.getByIcon(data.icon);
+                var vdata:VehicleData = VehicleInfo.getByIcon(data.vehicleIcon);
                 Macros.RegisterMinimalMacrosData(fullPlayerName, vdata.vid);
-                data.label = Macros.Format(fullPlayerName, "{{name}}");
+                data.playerName = Macros.Format(fullPlayerName, "{{name}}");
                 data.clanAbbrev = Macros.Format(fullPlayerName, "{{clannb}}");
 
                 // ClanIcon
@@ -75,15 +76,15 @@ package xvm.hangar.components.BattleLoading
                 // Alternative icon set
                 if (proxy.iconLoader.sourceAlt == Defines.WG_CONTOUR_ICON_NOIMAGE)
                 {
-                    proxy.iconLoader.sourceAlt = data.icon;
-                    data.icon = data.icon.replace(Defines.WG_CONTOUR_ICON_PATH,
+                    proxy.iconLoader.sourceAlt = data.vehicleIcon;
+                    data.vehicleIcon = data.vehicleIcon.replace(Defines.WG_CONTOUR_ICON_PATH,
                         Defines.XVMRES_ROOT + ((team == Defines.TEAM_ALLY)
                         ? Config.config.iconset.battleLoadingAlly
                         : Config.config.iconset.battleLoadingEnemy));
                 }
                 else
                 {
-                    data.icon = proxy.iconLoader.source;
+                    data.vehicleIcon = proxy.iconLoader.source;
                 }
             }
             catch (ex:Error)
