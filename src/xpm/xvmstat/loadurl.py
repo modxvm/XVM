@@ -7,6 +7,7 @@ import tlslite
 import traceback
 import gzip
 import StringIO
+import re
 
 from constants import *
 from logger import *
@@ -18,7 +19,10 @@ def loadUrl(url, req=None):
         url = url.replace("{REQ}", req)
     u = urlparse(url)
     ssl = url.lower().startswith('https://')
-    log('  HTTP%s: %s' % ('S' if ssl else '', u.path), '[INFO]  ')
+    # hide some chars of token in the log
+    path_log = re.sub('([0-9A-Fa-f]{8}-)[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}(-[0-9A-Fa-f]{12})', \
+        '\\1****-****-****\\2', u.path)
+    log('  HTTP%s: %s' % ('S' if ssl else '', path_log), '[INFO]  ')
     #time.sleep(5)
 
     startTime = datetime.datetime.now()
@@ -57,28 +61,29 @@ def _loadUrl(u, timeout, fingerprint): # timeout in msec
         resp = conn.getresponse()
         #log(resp.status)
 
-        if resp.status in [200, 202]:
-            # 200 OK, 202 Accepted
+        response = resp.read()
+        compressedSize = len(response)
 
-            response = resp.read()
-            compressedSize = len(response)
+        encoding = resp.getheader('content-encoding')
 
-            encoding = resp.getheader('content-encoding')
-
-            if encoding is None:
-                pass # leave response as is
-            elif encoding == 'gzip':
-                response = gzip.GzipFile(fileobj=StringIO.StringIO(response)).read()
-            else:
-                raise Exception('Encoding not supported: %s' % (encoding))
+        if encoding is None:
+            pass # leave response as is
+        elif encoding == 'gzip':
+            response = gzip.GzipFile(fileobj=StringIO.StringIO(response)).read()
         else:
-            raise Exception('HTTP Error: [%i] %s' % (resp.status, resp.reason))
+            raise Exception('Encoding not supported: %s' % (encoding))
+
+        if not resp.status in [200, 202]: # 200 OK, 202 Accepted
+            raise Exception('HTTP Error: [%i] %s. Response: %s' % (resp.status, resp.reason, response[:100]))
+
     except tlslite.TLSLocalAlert:
         err('loadUrl failed: %s' % traceback.format_exc())
+    
     except Exception:
         response = None
         tb = traceback.format_exc(1).split('\n')
         err('loadUrl failed: %s %s' % (tb[2], tb[1]))
+    
     #finally:
         #if conn is not None:
         #    conn.close()

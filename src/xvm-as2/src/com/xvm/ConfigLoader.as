@@ -54,7 +54,7 @@ class com.xvm.ConfigLoader
 
         ConfigLoader.s_loading = true;
         Config.s_config = DefaultConfig.config;
-        JSONxLoader.LoadAndParse(Defines.XVM_ROOT + Defines.CONFIG_FILE_NAME, this, ReloadConfigCallback);
+        JSONxLoader.LoadAndParse(Defines.XVMCONF_ROOT + Defines.CONFIG_FILE_NAME, this, ReloadConfigCallback);
     }
 
     private function ReloadConfigCallback(event)

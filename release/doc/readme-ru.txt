@@ -29,8 +29,7 @@
 
   Как написать в поддержку: http://www.koreanrandom.com/forum/topic/1644-readme/
   Поддержка:    http://www.koreanrandom.com/forum/forum/43-xvm/
-  FAQ:          http://www.koreanrandom.com/forum/topic/1381-faq/
-                http://www.koreanrandom.com/forum/topic/1644-readme/
+  FAQ:          http://www.modxvm.com/faq/
   Конфиги:      http://www.koreanrandom.com/forum/forum/50-custom-configurations/
   Редактор:     http://www.koreanrandom.com/forum/topic/1422-/#entry11316
 
@@ -44,7 +43,7 @@
   2. По умолчанию ничего настраивать не надо.
 
     Если нужны нестандартные настройки, необходимо переименовать загрузочный файл:
-      \res_mods\xvm\xvm.xc.sample в xvm.xc
+      \res_mods\xvm\configs\xvm.xc.sample в xvm.xc
     Инструкции по его настройке находятся внутри.
 
     Увидеть все возможные настройки можно в папке
@@ -295,7 +294,7 @@
     nick/<player>.png -> clan/<clan>.png -> clan/default.png -> nick/default.png
   По умолчанию в архив мода добавлены топ 150 кланов.
   Полный архив со всеми кланами можно скачать отдельно:
-    http://code.google.com/p/wot-xvm/downloads/list
+    http://www.modxvm.com/%d1%81%d0%ba%d0%b0%d1%87%d0%b0%d1%82%d1%8c-xvm/
     Файлы: clanicons-full-ru-XXX.zip (RU), clanicons-full-eu-XXX.zip (EU), clanicons-full-na-XXX.zip (NA),
     clanicons-full-ASIA-XXX.zip (ASIA), clanicons-full-kr-XXX.zip (KR), clanicons-full-vn-XXX.zip (VN)
 

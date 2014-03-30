@@ -34,12 +34,12 @@ package xvm.ping.PingServers
         {
             try
             {
-                var responceTimeList:Array = e.result as Array;
-                if (responceTimeList.length == 0)
+                var responseTimeList:Array = e.result as Array;
+                if (responseTimeList.length == 0)
                     return;
                 clearAllFields();
-                for (var i:int = 0; i < responceTimeList.length; ++i)
-                    appendRowToFields(makeStyledRow(responceTimeList[i]));
+                for (var i:int = 0; i < responseTimeList.length; ++i)
+                    appendRowToFields(makeStyledRow(responseTimeList[i]));
             }
             catch (ex:Error)
             {

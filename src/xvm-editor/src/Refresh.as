@@ -223,11 +223,12 @@ private function RefreshBattlePage():void
         section = Config.config.battle;
         this.p_battle.v_mirroredVehicleIcons.value = section.mirroredVehicleIcons;
         this.p_battle.v_showPostmortemTips.value = section.showPostmortemTips;
-        this.p_battle.v_removePanelsModeSwitcher.value = section.removePanelsModeSwitcher;
         this.p_battle.v_highlightVehicleIcon.value = section.highlightVehicleIcon;
-        this.p_battle.v_useStandardMarkers.value = section.useStandardMarkers;
         this.p_battle.v_clockFormat.value = section.clockFormat;
         this.p_battle.v_clanIconsFolder.value = section.clanIconsFolder;
+
+        section = Config.config.markers;
+        this.p_battle.v_useStandardMarkers.value = section.useStandardMarkers;
 
         section = Config.config.fragCorrelation;
         this.p_fragCorrelation.v_hideTeamTextFields.value = section.hideTeamTextFields;
@@ -438,6 +439,7 @@ private function RefreshPlayersPanel1Page():void
         this.p_playersPanel.v_alpha.value = section.alpha;
         this.p_playersPanel.v_iconAlpha.value = section.iconAlpha;
         this.p_playersPanel.v_removeSquadIcon.value = section.removeSquadIcon;
+        this.p_playersPanel.v_removePanelsModeSwitcher.value = section.removePanelsModeSwitcher;
 
         section = Config.config.playersPanel.clanIcon;
         this.p_playersPanel_icons.v_show.value = section.show;

@@ -13,4 +13,5 @@
     <c:LabeledNumberSelector label="{_('ppAlpha')}" id="v_alpha" config="playersPanel.alpha" minimum="0" maximum="100" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{_('ppIconAlpha')}" id="v_iconAlpha" config="playersPanel.iconAlpha" minimum="0" maximum="100" change="onChange(event)"/>
     <c:LabeledCheckBox label="{_('RemoveSquadIcon')}" id="v_removeSquadIcon" config="playersPanel.removeSquadIcon" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{_('removePanelsModeSwitcher')}" id="v_removePanelsModeSwitcher" config="playersPanel.removePanelsModeSwitcher" change="onChange(event)"/>
 </c:PanelComponent>

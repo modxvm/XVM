@@ -44,7 +44,7 @@ Content:
   2. You do not need to setup anything by default.
 
     If you want special settings, you need to rename boot config file:
-      \res_mods\xvm\xvm.xc.sample to xvm.xc
+      \res_mods\xvm\configs\xvm.xc.sample to xvm.xc
     Instructions for setting it up are inside.
 
     All possible config options you can see in
@@ -295,7 +295,7 @@ Content:
     nick/<player>.png -> clan/<clan>.png -> clan/default.png -> nick/default.png
   TOP 150 clans are added to mod archive by default.
   Full archive with all clans can be downloaded separately:
-    http://code.google.com/p/wot-xvm/downloads/list
+    http://www.modxvm.com/en/download-xvm/
     Files: clanicons-full-ru-XXX.zip (RU), clanicons-full-eu-XXX.zip (EU), clanicons-full-na-XXX.zip (NA),
     clanicons-full-ASIA-XXX.zip (ASIA), clanicons-full-kr-XXX.zip (KR), clanicons-full-vn-XXX.zip (VN)
 

@@ -1,10 +1,22 @@
-XVM-dev:
-   [NEW FUNCTIONS]
-   * localization: added Chinese(Simplified)
-   * stat: use an encrypted connection.
+XVM-5.2.1-dev:
+  * adaptation to WoT 0.9.0.CT1
 
-   [OTHER]
-   * stat: changed address of the stats server (now https://stat.modxvm.com/ )
+XVM-5.2.0-test1:
+  [MAYOR UPDATE]
+  * Statistics must be enabled in the personal cabinet on the http://www.modxvm.com/ site
+
+  [NEW FUNCTIONS]
+  * localization: added Chinese(Simplified)
+  * stat: use an encrypted connection.
+  * added new special scheme name for <img> tag: xvm:// - path relative to res_mods/xvm folder
+      for example: <img src='xvm://configs/my/icons/foo.png'>
+
+  [OTHER]
+  * stat: changed address of the stats server (now https://stat.modxvm.com/)
+  * main config file (xvm.xc) moved to res_mods/xvm/configs
+  * option battle/useStandardMarkers moved to markers/useStandardMarkers
+  * option battle/removePanelsModeSwitcher moved to playersPanel/removePanelsModeSwitcher
+  * config version increased to 5.0.2
 
 XVM-5.1.0:
   * adaptation to WoT 0.8.11
@@ -163,7 +175,7 @@ XVM-4.0.0:
   * new option: userInfo/inHangarFilterEnabled - enable "In hangar" check box by default
   * switch in user info window: [show] in hangar, player tanks, all tanks
   * expertPanel mod; see battle.xc
-  * cluster responce time table at login and hangar (ping);
+  * cluster response time table at login and hangar (ping);
     "pingServers" section at login.xc and  hangar.xc config files
   * hitlog: shows enemy HP left (markers which were visible) on Alt press;
     hitlog.xc: "hpLeft": "true"

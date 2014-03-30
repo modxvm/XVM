@@ -14,7 +14,7 @@ class com.xvm.DefaultConfig
             definition: {
                 author: "XVM team",
                 description: "Default settings for XVM",
-                url: "http://code.google.com/p/wot-xvm/",
+                url: "http://www.modxvm.com/",
                 date: (d.getDate() < 10 ? "0" : "") + d.getDate() + "." +
                     (d.getMonth() < 9 ? "0" : "") + (d.getMonth() + 1) + "." + d.getFullYear(),
                 gameVersion: Defines.WOT_VERSION,
@@ -24,9 +24,7 @@ class com.xvm.DefaultConfig
             battle: {
                 mirroredVehicleIcons: true,      // Set false for alternative tank icon mirroring.
                 showPostmortemTips: true,        // Popup tooltip panel after death.
-                removePanelsModeSwitcher: false, // Set true to hide mouse modes switcher.
                 highlightVehicleIcon: true,      // False - disable highlighting of selected vehicle icon and squad.
-                useStandardMarkers: false,       // Use original wot markers.
                 // Show the clock on the Debug Panel (near FPS).
                 // Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds.
                 clockFormat: "H:N",
@@ -69,6 +67,7 @@ class com.xvm.DefaultConfig
                 alpha: 60,              // Side panel transparency. 0 - transparent, 100 - opaque.
                 iconAlpha: 100,         // Side panel icons transparency. 0 - transparent, 100 - opaque.
                 removeSquadIcon: false, // Hide squad icon.
+                removePanelsModeSwitcher: false, // Set true to hide mouse modes switcher.
                 // Playes/clan icon parameters.
                 clanIcon: { show: true, x: 0, y: 6, xr: 0, yr: 6, h: 16, w: 16, alpha: 90 },
                 // Display options for icons of never seen enemies
@@ -348,6 +347,7 @@ class com.xvm.DefaultConfig
                 }
             },
             markers: {
+                useStandardMarkers: false,       // Use original WoT markers.
                 ally: {
                     alive: {
                         normal: {

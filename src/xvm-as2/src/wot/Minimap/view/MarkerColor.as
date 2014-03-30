@@ -21,7 +21,7 @@ class wot.Minimap.view.MarkerColor
             return;
 
         var color = null;
-        if (Config.s_config.battle.useStandardMarkers)
+        if (Config.s_config.markers.useStandardMarkers)
         {
             if (wrapper.entryName == MinimapEntry.STATIC_ICON_BASE)
                 return;

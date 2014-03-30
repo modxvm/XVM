@@ -18,6 +18,7 @@ from stats import getBattleStat, getBattleResultsStat, getUserData
 from dossier import getDossier
 from vehinfo import getVehicleInfoData
 from wn8 import getWN8ExpectedData
+from token import getXvmStatTokenData
 from test import runTest
 
 NO_LOG_COMMANDS = (
@@ -26,11 +27,13 @@ NO_LOG_COMMANDS = (
   COMMAND_GETMODS,
   COMMAND_GETVEHICLEINFODATA,
   COMMAND_GETWN8EXPECTEDDATA,
+  COMMAND_GETXVMSTATTOKENDATA,
   COMMAND_GETSCREENSIZE,
   COMMAND_GETGAMEREGION,
   COMMAND_GETLANGUAGE,
   COMMAND_LOADUSERDATA,
   COMMAND_GETDOSSIER,
+  COMMAND_OPEN_URL,
   )
 
 class Xvm(object):
@@ -65,6 +68,8 @@ class Xvm(object):
                 res = getVehicleInfoData()
             elif cmd == COMMAND_GETWN8EXPECTEDDATA:
                 res = getWN8ExpectedData()
+            elif cmd == COMMAND_GETXVMSTATTOKENDATA:
+                res = json.dumps(getXvmStatTokenData())
             elif cmd == COMMAND_LOADBATTLESTAT:
                 #return
                 getBattleStat(proxy, args)
@@ -74,6 +79,9 @@ class Xvm(object):
                 getUserData(proxy, args)
             elif cmd == COMMAND_GETDOSSIER:
                 getDossier(proxy, args)
+            elif cmd == COMMAND_OPEN_URL:
+                if len(args[0]) and args[0].lower().startswith('http://www.modxvm.com'):
+                    BigWorld.wg_openWebBrowser(args[0])
             elif cmd == COMMAND_LOAD_SETTINGS:
                 pass # TODO
             elif cmd == COMMAND_SAVE_SETTINGS:
@@ -111,6 +119,7 @@ class Xvm(object):
 
 
 g_xvm = Xvm()
+
 
 from . import XPM_MOD_VERSION, XPM_MOD_URL, XPM_GAME_VERSIONS
 log("xvm %s (%s) for WoT %s" % (XPM_MOD_VERSION, XPM_MOD_URL, ", ".join(XPM_GAME_VERSIONS)))

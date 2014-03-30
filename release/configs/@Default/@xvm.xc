@@ -23,7 +23,7 @@
 {
   // Version of the config. Do not remove or change it unnecessarily.
   // Версия конфига. Не удаляйте и не изменяйте её без необходимости.
-  "configVersion": "5.0.0",
+  "configVersion": "5.0.2",
 
   // Version of the editor.
   // Версия редактора.
@@ -58,15 +58,15 @@
 
     // Address to config updates.
     // Адрес, где выкладываются обновления конфига.
-    "url": "http://code.google.com/p/wot-xvm/",
+    "url": "http://www.modxvm.com/",
 
     // Config last modified.
     // Дата последней модификации конфига.
-    "date": "22.03.2014",
+    "date": "19.12.2013",
 
     // Supported version of the game.
     // Поддерживаемая версия игры.
-    "gameVersion": "0.9.0",
+    "gameVersion": "0.8.10",
 
     // The minimum required version of the XVM mod.
     // Минимально необходимая версия мода XVM.

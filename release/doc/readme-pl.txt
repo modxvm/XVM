@@ -53,7 +53,7 @@ Zawartość:
   2. Standardowo nie musisz niczego zmieniać.
 
     Jeśli chcesz używać innej konfiguracji, to musisz zmienić nazwę w pliku startowym:
-      \res_mods\xvm\xvm.xc.sample do xvm.xc
+      \res_mods\xvm\configs\xvm.xc.sample do xvm.xc
     Instrukcje znajdują sie w środku pliku.
 
     Wszystkie możliwe opcje konfiguracji możesz znaleźć w:
@@ -292,7 +292,7 @@ Zawartość:
     nick/<player>.png -> clan/<clan>.png -> clan/default.png -> nick/default.png
   150 najlepszych klanów jest dodane standardowo.
   Pełne archiwum ze wszystkimi klanami może być pobrane oddzielnie:
-    http://code.google.com/p/wot-xvm/downloads/list
+    http://www.modxvm.com/en/download-xvm/
     Files: clanicons-full-ru-XXX.zip (RU), clanicons-full-eu-XXX.zip (EU),
     clanicons-full-us-XXX.zip (US), clanicons-full-sea-XXX.zip (SEA)
 

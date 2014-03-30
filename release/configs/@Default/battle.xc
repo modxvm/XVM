@@ -10,9 +10,6 @@
     // false - Disable pop-up panel at the bottom after death.
     // false - отключить всплывающую внизу панель после смерти.
     "showPostmortemTips": true,
-    // true - Remove the Players Panel mode switcher (buttons for changing size).
-    // true - убрать переключатель режимов ушей мышкой.
-    "removePanelsModeSwitcher": false,
     // false - disable highlighting of own vehicle icon and squad.
     // false - отключить подсветку иконки своего танка и взвода.
     "highlightVehicleIcon": true,
@@ -20,9 +17,6 @@
     // Формат часов на экране панели отладки (возле FPS).
     //
     "clockFormat": "H:N", // TODO: "H:i"
-    // true - use standard client vehicle markers.
-    // true - использовать стандартные маркеры клиента.
-    "useStandardMarkers": false,
     // Path to clan icons folder relative to res_mods/xvm/res.
     // Путь к папке иконок кланов относительно res_mods/xvm/res.
     "clanIconsFolder": "clanicons/",

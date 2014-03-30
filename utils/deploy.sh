@@ -4,7 +4,7 @@
 
 #[ "$GAME_VER" = "" ] && GAME_VER="0.9.0"
 [ "$GAME_VER" = "" ] && GAME_VER="0.9.0 Common Test"
-[ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/work/games/WoT
+[ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/work/games/WoT-CT
 
 FILES_FLASH="
   Application.swf

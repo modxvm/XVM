@@ -115,7 +115,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
 
         GlobalEventDispatcher.removeEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
 
-        //Config.s_config.battle.useStandardMarkers = true;
+        //Config.s_config.markers.useStandardMarkers = true;
 
         initialize();
     }
@@ -143,10 +143,10 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
      */
     private function initializeSubject():Void
     {
-        trace("initializeSubject() standard=" + Config.s_config.battle.useStandardMarkers + " " + m_playerFullName);
+        trace("initializeSubject() standard=" + Config.s_config.markers.useStandardMarkers + " " + m_playerFullName);
 
         // Create marker class depending on config setting
-        if (Config.s_config.battle.useStandardMarkers == true)
+        if (Config.s_config.markers.useStandardMarkers == true)
             createStandardMarker();
         else
             createXvmMarker();
@@ -249,12 +249,12 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
 
     private function get IsStandardMarker()
     {
-        return subject != null && Config.s_config.battle.useStandardMarkers == true;
+        return subject != null && Config.s_config.markers.useStandardMarkers == true;
     }
 
     private function get IsXvmMarker()
     {
-        return subject != null && Config.s_config.battle.useStandardMarkers != true;
+        return subject != null && Config.s_config.markers.useStandardMarkers != true;
     }
 
     /**

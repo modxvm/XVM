@@ -7,11 +7,11 @@ package com.xvm
     public class Defines
     {
         // Global versions
-        public static const XVM_VERSION:String = "5.1.0-dev";
+        public static const XVM_VERSION:String = "5.2.1-dev";
         public static const XVM_INTRO:String = "www.modxvm.com";
         public static const WOT_VERSION:String = "0.9.0";
-        public static const CONFIG_VERSION:String = "5.0.1";
-        public static const EDITOR_VERSION:String = "0.73";
+        public static const CONFIG_VERSION:String = "5.0.2";
+        public static const EDITOR_VERSION:String = "0.75";
 
         // Locale
         public static const LOCALE_AUTO_DETECTION:String = "auto";
@@ -22,11 +22,17 @@ package com.xvm
         // res_mods/xvm/
         public static const XVM_ROOT:String = "../../../xvm/";
 
+        // res_mods/xvm/
+        public static const XVMCONF_ROOT:String = XVM_ROOT + "configs/";
+
         // res_mods/xvm/res/
         public static const XVMRES_ROOT:String = XVM_ROOT + "res/";
 
         // res_mods/xvm/mods/
         public static const XVMMODS_ROOT:String = XVM_ROOT + "mods/";
+
+        // res_mods/xvm/ (for <img> tag)
+        public static const XVM_IMG_ROOT:String = "../";
 
         // res_mods/xvm/res/ (for <img> tag)
         public static const XVMRES_IMG_ROOT:String = "../res/";
@@ -34,7 +40,7 @@ package com.xvm
         // res_mods/xvm/res/SixthSense.png
         public static const SIXTH_SENSE_IMG:String = XVMRES_ROOT + "SixthSense.png";
 
-        // res_mods/xvm/xvm.xc
+        // res_mods/xvm/configs/xvm.xc
         public static const CONFIG_FILE_NAME:String = "xvm.xc";
 
         // Settings keys

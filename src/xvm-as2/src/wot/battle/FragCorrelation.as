@@ -65,7 +65,7 @@ class wot.battle.FragCorrelation
         var renderer = markers.$createItemRenderer.apply(markers, arguments);
 
         var type = ally ? "ally" : "enemy";
-        var color = Config.s_config.battle.useStandardMarkers
+        var color = Config.s_config.markers.useStandardMarkers
             ? net.wargaming.managers.ColorSchemeManager.instance.getRGB("vm_" + type)
             : ColorsManager.getSystemColor(type, dead);
 

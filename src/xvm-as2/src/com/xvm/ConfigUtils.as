@@ -365,6 +365,23 @@ class com.xvm.ConfigUtils
             v = "5.0.0";
         }
 
+        if (v == "5.0.0" || v == "5.0.1")
+        {
+            var s = config.battle;
+            var s2 = config.markers;
+            if (s2 != null && s != null)
+            {
+                if (s2.useStandardMarkers == null && s.useStandardMarkers != null)
+                    s2.useStandardMarkers = s.useStandardMarkers;
+            }
+            s2 = config.playersPanel;
+            if (s2 != null && s != null)
+            {
+                if (s2.removePanelsModeSwitcher == null && s.removePanelsModeSwitcher != null)
+                    s2.removePanelsModeSwitcher = s.removePanelsModeSwitcher;
+            }
+            v = "5.0.2";
+        }
 
         config.configVersion = v;
         return config;

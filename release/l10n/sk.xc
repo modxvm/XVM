@@ -120,9 +120,9 @@
     "token/blocked": "Status: <font color='#FF0000'>Blokovaný</font><br>{{l10n:token/notify_xvm_site}}",
     "token/inactive": "Status: <font color='#FFFF00'>Neaktívny</font><br>{{l10n:token/notify_xvm_site}}",
     "token/active": "Status: <font color='#00FF00'>Aktívny</font>",
-    "token/days_left": "Zostávajú dní",
-    "token/hours_left": "Zostávajú hodiny",
-    "token/cnt": "Počet prístupov",
+    "token/days_left": "Zostávajú dní:<tab/><font color='#eeeeee'>{0}</font>",
+    "token/hours_left": "Zostávajú hodiny:<tab/><font color='#ffff00'>{0}</font>",
+    "token/cnt": "Počet prístupov:<tab/><font color='#eeeeee'>{0}</font>",
     "token/unknown_status": "Neznámy status",
     "token/notify_xvm_site": "Prosím choďte na <a href='#XVM_SITE#'>XVM stránku</a> a aktivujte štatistiky."
   }

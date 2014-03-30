@@ -18,13 +18,13 @@ class com.xvm.Components.PingServers.PingServersView
         tfProxy = new PingFieldProxy(cfg, holder);
     }
     
-    public function update(responceTimeList:Array)
+    public function update(responseTimeList:Array)
     {
         tfProxy.clearAllFields();
         
-        for (var i:Number = 0; i < responceTimeList.length; i++)
+        for (var i:Number = 0; i < responseTimeList.length; i++)
         {
-            appendRowToFields(makeStyledRow(responceTimeList[i]));
+            appendRowToFields(makeStyledRow(responseTimeList[i]));
         }
     }
     

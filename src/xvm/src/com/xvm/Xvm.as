@@ -63,15 +63,16 @@ package com.xvm
                 var ctx:LoaderContext = new LoaderContext(false, ApplicationDomain.currentDomain);
 
                 var preload:Array = [ // TODO make configurable dependencies
-                    "prebattleComponents.swf",  // xvm-company
-                    "companiesListWindow.swf",  // xvm-company
-                    "companyWindow.swf",        // xvm-company
-                    "squadWindow.swf",          // xvm-squad
-                    "profileSections.swf",      // xvm-profile
+                    "prebattleComponents.swf",      // xvm-company
+                    "companiesListWindow.swf",      // xvm-company
+                    "companyWindow.swf",            // xvm-company
+                    "squadWindow.swf",              // xvm-squad
+                    "profileSections.swf",          // xvm-profile
                     "battleResults.swf",
                     "battleLoading.swf",
-                    "TankCarousel.swf",         // xvm-tcarousel
-                    "nodesLib.swf"              // xvm-treeview
+                    "TankCarousel.swf",             // xvm-tcarousel
+                    "nodesLib.swf",                 // xvm-treeview
+                    "serviceMessageComponents.swf"  // xvm-svcmsg
                 ];
                 for (var x:int = 0; x < preload.length; ++x)
                 {

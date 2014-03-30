@@ -19,10 +19,12 @@ package com.xvm.io
         private static const COMMAND_GETMODS:String = "getMods";
         private static const COMMAND_GETVEHICLEINFODATA:String = "getVehicleInfoData";
         private static const COMMAND_GETWN8EXPECTEDDATA:String = "getWN8ExpectedData";
+        private static const COMMAND_GETXVMSTATTOKENDATA:String = "getXvmStatTokenData";
         private static const COMMAND_LOADBATTLESTAT:String = "loadBattleStat";
         private static const COMMAND_LOADBATTLERESULTSSTAT:String = "loadBattleResultsStat";
         private static const COMMAND_LOADUSERDATA:String = "loadUserData";
         private static const COMMAND_GETDOSSIER:String = "getDossier";
+        private static const COMMAND_OPEN_URL:String = "openUrl";
         private static const COMMAND_LOGSTAT:String = "logstat";
         private static const COMMAND_SAVE_SETTINGS:String = "save_settings";
         private static const COMMAND_LOAD_SETTINGS:String = "load_settings";
@@ -74,6 +76,11 @@ package com.xvm.io
             _call(target, callback, [COMMAND_GETWN8EXPECTEDDATA]);
         }
 
+        public static function getXvmStatTokenData(target:Object, callback:Function):void
+        {
+            _call(target, callback, [COMMAND_GETXVMSTATTOKENDATA]);
+        }
+
         public static function loadBattleStat(players:Array = null):void
         {
             _call(null, null, [COMMAND_LOADBATTLESTAT, Config.config.rating.showPlayersStatistics, players]);
@@ -92,6 +99,11 @@ package com.xvm.io
         public static function getDossier(playerId:String, vehId:String = null):void
         {
             _call(null, null, [COMMAND_GETDOSSIER, playerId, vehId]);
+        }
+
+        public static function openUrl(url:String):void
+        {
+            _call(null, null, [COMMAND_OPEN_URL, url]);
         }
 
         public static function logStat():void

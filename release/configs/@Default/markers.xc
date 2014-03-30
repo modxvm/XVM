@@ -4,6 +4,11 @@
  */
 {
   "markers": {
+    // true - use standard client vehicle markers.
+    // true - использовать стандартные маркеры клиента.
+    "useStandardMarkers": false,
+    // ally
+    // союзники
     "ally": {
       "alive": {
         "normal": ${"markersAliveNormal.xc":"ally"},
@@ -14,6 +19,8 @@
         "extended": ${"markersDeadExtended.xc":"ally"}
       }
     },
+    // enemy
+    // противники
     "enemy": {
       "alive": {
         "normal": ${"markersAliveNormal.xc":"enemy"},

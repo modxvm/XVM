@@ -5,11 +5,11 @@
 class com.xvm.Defines
 {
     // Global versions
-    public static var XVM_VERSION:String = "5.1.0-dev";
+    public static var XVM_VERSION:String = "5.2.1-dev";
     public static var XVM_INTRO:String = "www.modxvm.com";
     public static var WOT_VERSION:String = "0.9.0";
-    public static var CONFIG_VERSION:String = "5.0.1";
-    public static var EDITOR_VERSION:String = "0.73";
+    public static var CONFIG_VERSION:String = "5.0.2";
+    public static var EDITOR_VERSION:String = "0.75";
 
     // Locale
     public static var LOCALE_AUTO_DETECTION:String = "auto";
@@ -17,8 +17,14 @@ class com.xvm.Defines
     // res_mods/xvm/
     public static var XVM_ROOT:String = "../../../xvm/";
 
+    // res_mods/xvm/configs/
+    public static var XVMCONF_ROOT:String = XVM_ROOT + "configs/";
+
     // res_mods/xvm/res/
     public static var XVMRES_ROOT:String = XVM_ROOT + "res/";
+
+    // res_mods/xvm/ (for <img> tag)
+    public static var XVM_IMG_ROOT:String = "../xvm/";
 
     // res_mods/xvm/res/ (for <img> tag)
     public static var XVMRES_IMG_ROOT:String = "../xvm/res/";
@@ -26,7 +32,7 @@ class com.xvm.Defines
     // res_mods/xvm/res/SixthSense.png
     public static var SIXTH_SENSE_IMG:String = XVMRES_ROOT + "SixthSense.png";
 
-    // res_mods/xvm/xvm.xc
+    // res_mods/xvm/configs/xvm.xc
     public static var CONFIG_FILE_NAME:String = "xvm.xc";
     // res_mods/x.x.x/gui/flash/XVM.xvmconf
     public static var CONFIG_FILE_NAME_XVMCONF:String = "XVM.xvmconf";

@@ -179,10 +179,13 @@ package com.xvm.utils
             return style;
         }
 
+        // Fix <img src='xvm://...'> to <img src='img://XVM_ROOT/...'> (res_mods/xvm)
         // Fix <img src='xvmres://...'> to <img src='img://XVMRES_ROOT/...'> (res_mods/xvm/res)
         public static function fixImgTag(str:String):String
         {
-            return str.split("xvmres://").join("img://" + Defines.XVMRES_IMG_ROOT);
+            str = str.split("xvm://").join("img://" + Defines.XVM_IMG_ROOT);
+            str = str.split("xvmres://").join("img://" + Defines.XVMRES_IMG_ROOT);
+            return str;
         }
 
 /*

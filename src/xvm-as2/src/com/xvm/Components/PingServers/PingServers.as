@@ -55,14 +55,14 @@ class com.xvm.Components.PingServers.PingServers
     private function parseAnswer(answer:String):Array
     {
         var parsedAnswerObj:Object = JSONx.parse(answer);
-        var responceTimeList:Array = [];
+        var responseTimeList:Array = [];
         for (var i in parsedAnswerObj)
         {
             var cluster:String = Strings.startsWith("WOT ", i) ? i.substring(4) : i;
-            responceTimeList.push({ cluster: cluster, time: parsedAnswerObj[i] });
+            responseTimeList.push({ cluster: cluster, time: parsedAnswerObj[i] });
         }
-        responceTimeList.sortOn(["cluster"]);
+        responseTimeList.sortOn(["cluster"]);
 
-        return responceTimeList;
+        return responseTimeList;
     }
 }

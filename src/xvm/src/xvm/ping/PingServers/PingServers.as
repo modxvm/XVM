@@ -84,15 +84,15 @@ package xvm.ping.PingServers
                 return;
 
             var parsedAnswerObj:Object = JSONx.parse(answer);
-            var responceTimeList:Array = [];
+            var responseTimeList:Array = [];
             for (var name:String in parsedAnswerObj)
             {
                 var cluster:String = StringUtils.startsWith(name, "WOT ") ? name.substring(4) : name;
-                responceTimeList.push({ cluster: cluster, time: parsedAnswerObj[name] });
+                responseTimeList.push({ cluster: cluster, time: parsedAnswerObj[name] });
             }
-            responceTimeList.sortOn(["cluster"]);
+            responseTimeList.sortOn(["cluster"]);
 
-            dispatchEvent(new ObjectEvent(Event.COMPLETE, responceTimeList));
+            dispatchEvent(new ObjectEvent(Event.COMPLETE, responseTimeList));
         }
     }
 }

@@ -13,6 +13,9 @@
     // true - Disable Platoon icons.
     // true - убрать отображение иконки взвода.
     "removeSquadIcon": false,
+    // true - Remove the Players Panel mode switcher (buttons for changing size).
+    // true - убрать переключатель режимов ушей мышкой.
+    "removePanelsModeSwitcher": false,
     // Display options for Team/Clan logos (see battleLoading.xc).
     // Параметры отображения иконки игрока/клана (см. battleLoading.xc).
     "clanIcon": {

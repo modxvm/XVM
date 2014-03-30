@@ -50,7 +50,7 @@ package com.xvm.misc
             var c:CDefinition = new CDefinition();
             c.author = "XVM";
             c.description = "Default settings for XVM";
-            c.url = "http://code.google.com/p/wot-xvm/";
+            c.url = "http://www.modxvm.com/";
             var d:Date = new Date();
             c.date = (d.getDate() < 10 ? "0" : "") + d.getDate() + "." +
                 (d.getMonth() < 9 ? "0" : "") + (d.getMonth() + 1) + "." + d.getFullYear();
@@ -157,9 +157,7 @@ package com.xvm.misc
             var c:CBattle = new CBattle();
             c.mirroredVehicleIcons = true;      // Set false for alternative tank icon mirroring.
             c.showPostmortemTips = true;        // Popup tooltip panel after death.
-            c.removePanelsModeSwitcher = false; // Set true to hide mouse modes switcher.
             c.highlightVehicleIcon = true;      // False - disable highlighting of selected vehicle icon and squad.
-            c.useStandardMarkers = false;       // Use original wot markers.
             // Show the clock on the Debug Panel (near FPS).
             c.clockFormat = "H:N"; // TODO "H:i:s";   // Format: http://php.net/date
             c.clanIconsFolder = "clanicons/";   // Folder with clan icons
@@ -282,6 +280,7 @@ package com.xvm.misc
             c.alpha = 60;              // Side panel transparency. 0 - transparent, 100 - opaque.
             c.iconAlpha = 100;         // Side panel icons transparency. 0 - transparent, 100 - opaque.
             c.removeSquadIcon = false; // Hide squad icon.
+            c.removePanelsModeSwitcher = false; // Set true to hide mouse modes switcher.
             // Playes/clan icon parameters.
             c.clanIcon = { show: true, x: 0, y: 6, xr: 0, yr: 6, h: 16, w: 16, alpha: 90 };
             // Display options for icons of never seen enemies
@@ -597,6 +596,7 @@ package com.xvm.misc
         private static function getMarkersSection():CMarkers
         {
             var c:CMarkers = new CMarkers();
+            c.useStandardMarkers = false;       // Use original WoT markers.
             c.ally = {
                 alive: {
                     normal: {

@@ -112,6 +112,18 @@
     "SPG": "AAP",
 
     // VehicleMarkersManager
-    "blownUp": "Detonado!"
-  }
+    "blownUp": "Detonado!",
+	
+	// Token
+    "token/network_error": "Error de red. Estadísticas XVM no está disponible, inténtelo de nuevo más tarde.",
+    "token/bad_token": "Mala Señal.\n{{l10n:token/notify_xvm_site}}",
+    "token/blocked": "Estado: <font color='#FF0000'>Obstruido</font><br>{{l10n:token/notify_xvm_site}}",
+    "token/inactive": "Estado: <font color='#FFFF00'>Inactivo</font><br>{{l10n:token/notify_xvm_site}}",
+    "token/active": "Estado: <font color='#00FF00'>Activo</font>",
+    "token/days_left": "Dias restantes:<tab/><font color='#eeeeee'>{0}</font>",
+    "token/hours_left": "Horas Restantes:<tab/><font color='#ffff00'>{0}</font>",
+    "token/cnt": "Cantidad de solicitudes:<tab/><font color='#eeeeee'>{0}</font>",
+    "token/unknown_status": "Estado desconocido",
+    "token/notify_xvm_site": "Por favor visite <a href='#XVM_SITE#'>la pagina de XVM</a> y active las estadisticas en el gabinete personal."
+	  }
 }

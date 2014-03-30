@@ -78,7 +78,7 @@ class _Ping(object):
         try:
             strdata = json.dumps(self.resp)
             for proxy in self.listeners:
-                if proxy and proxy.component and proxy.movie:
+                if proxy and hasattr(proxy, 'component') and hasattr(proxy, 'movie') and proxy.movie:
                     proxy.movie.invoke((RESPOND_PINGDATA, [strdata]))
         finally:
             self.listeners = []

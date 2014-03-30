@@ -6,6 +6,7 @@ package com.xvm.types.cfg
 {
     public dynamic class CMarkers extends Object
     {
+        public var useStandardMarkers:Boolean;        // Use original wot markers.
         //markers: {
             //ally: {
                 //alive: {

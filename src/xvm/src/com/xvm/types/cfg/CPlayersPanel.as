@@ -6,6 +6,7 @@ package com.xvm.types.cfg
 {
     public dynamic class CPlayersPanel extends Object
     {
+        public var removePanelsModeSwitcher:Boolean;  // Set true to hide mouse modes switcher.
         //playersPanel: {
             //alpha: 60,              // Side panel transparency. 0 - transparent, 100 - opaque.
             //iconAlpha: 100,         // Side panel icons transparency. 0 - transparent, 100 - opaque.

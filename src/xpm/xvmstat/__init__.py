@@ -3,7 +3,7 @@
 #####################################################################
 # MOD INFO (mandatory)
 
-XPM_MOD_VERSION    = "1.0.6"
+XPM_MOD_VERSION    = "1.2.1"
 XPM_MOD_URL        = "http://www.modxvm.com/"
 XPM_MOD_UPDATE_URL = "http://www.modxvm.com/en/download-xvm/"
 XPM_GAME_VERSIONS  = ["0.9.0"]
@@ -12,6 +12,8 @@ XPM_GAME_VERSIONS  = ["0.9.0"]
 
 import sys
 sys.path.append('scripts/client/gui/mods/xvmstat') # for tlslite
+
+from pprint import pprint
 
 import BigWorld
 import GUI

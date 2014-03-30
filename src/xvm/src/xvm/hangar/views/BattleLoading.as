@@ -67,7 +67,7 @@ package xvm.hangar.views
                 "                               configVersion=" + Config.config.configVersion + "\n" +
                 "                               showPlayersStatistics=" + Config.config.rating.showPlayersStatistics + "\n" +
                 // TODO "                               loadEnemyStatsInFogOfWar=" + Config.config.rating.loadEnemyStatsInFogOfWar + "\n" +
-                "                               useStandardMarkers=" + Config.config.battle.useStandardMarkers);
+                "                               useStandardMarkers=" + Config.config.markers.useStandardMarkers);
         }
 
         private function init():void

@@ -6,16 +6,12 @@
  */
 package com.xvm
 {
-    import com.xvm.events.ObjectEvent;
-    import flash.events.DataEvent;
-    import flash.events.Event;
-    import flash.events.EventDispatcher;
-    import com.xvm.Config;
-    import com.xvm.Defines;
-    import com.xvm.Logger;
-    import com.xvm.io.JSONxLoader;
-    import com.xvm.misc.ConfigUtils;
-    import flash.events.SampleDataEvent;
+    import com.xvm.*;
+    import com.xvm.events.*;
+    import com.xvm.io.*;
+    import com.xvm.misc.*;
+    import com.xvm.utils.*;
+    import flash.events.*;
 
     public class Locale extends EventDispatcher
     {
@@ -37,7 +33,7 @@ package com.xvm
 
         public static function get(format:String):String
         {
-            //Logger.add("Locale[get]: string: " + text + " | string: " + s_lang.locale[text] + " | fallback string: " + s_lang_fallback[text] + " | language: " + _language );
+            //Logger.add("Locale[get]: string: " + format + " | string: " + s_lang.locale[format] + " | fallback string: " + s_lang_fallback[format]);
             if (s_lang.locale && s_lang.locale.hasOwnProperty(format))
                 format = s_lang.locale[format];
             else if (s_lang_fallback.hasOwnProperty(format))
@@ -63,11 +59,18 @@ package com.xvm
                 }
 
                 var macro:String = part.slice(0, macroEnd);
-                res += Locale.get(macro);
+                var stringParts:Array = macro.split(":");
+                macro = stringParts[0];
+                stringParts.shift();
+                macro = Locale.get(macro);
+                if (stringParts.length > 0)
+                    macro = Utils.substitute(macro, stringParts);
+                res += macro;
 
                 /** write rest of text after macro, without }} */
                 res += part.slice(macroEnd + 2, part.length);
             }
+
             return res;
         }
 
@@ -188,7 +191,19 @@ package com.xvm
             "SPG": "САУ",
 
             // VehicleMarkersManager
-            "blownUp": "Взрыв БК!"
+            "blownUp": "Взрыв БК!",
+
+            // token
+            "token/network_error": "Ошибка сети.\nСтатистика XVM недоступна, попробуйте позже.",
+            "token/bad_token": "Неверный токен.\n{{l10n:token/notify_xvm_site}}",
+            "token/blocked": "Статус: <font color='#FF0000'>Заблокирован</font>\n{{l10n:token/notify_xvm_site}}",
+            "token/inactive": "Статус: <font color='#FFFF00'>Неактивен</font>\n{{l10n:token/notify_xvm_site}}",
+            "token/active": "Статус:<tab/><font color='#00FF00'>Активен</font>",
+            "token/days_left": "Осталось дней:<tab/><font color='#eeeeee'>{0}</font>",
+            "token/hours_left": "Осталось часов:<tab/><font color='#ffff00'>{0}</font>",
+            "token/cnt": "Количество запросов:<tab/><font color='#eeeeee'>{0}</font>",
+            "token/unknown_status": "Неизвестный статус",
+            "token/notify_xvm_site": "Пожалуйста, перейдите на <a href='#XVM_SITE#'>сайт XVM</a> и активируйте статистику в личном кабинете."
         };
 
         /** Hardcoded EN language */
@@ -228,7 +243,19 @@ package com.xvm
             "japan": "Japan",
 
             // VehicleMarkersManager
-            "blownUp": "Blown-up!"
+            "blownUp": "Blown-up!",
+
+            // token
+            "token/network_error": "Network error. XVM statistics is unavailable, try again later.",
+            "token/bad_token": "Bad token.\n{{l10n:token/notify_xvm_site}}",
+            "token/blocked": "Status: <font color='#FF0000'>Blocked</font><br>{{l10n:token/notify_xvm_site}}",
+            "token/inactive": "Status: <font color='#FFFF00'>Inactive</font><br>{{l10n:token/notify_xvm_site}}",
+            "token/active": "Status: <font color='#00FF00'>Active</font>",
+            "token/days_left": "Days left:<tab/><font color='#eeeeee'>{0}</font>",
+            "token/hours_left": "Hours left:<tab/><font color='#ffff00'>{0}</font>",
+            "token/cnt": "Requests count:<tab/><font color='#eeeeee'>{0}</font>",
+            "token/unknown_status": "Unknown status",
+            "token/notify_xvm_site": "Please go to the <a href='#XVM_SITE#'>XVM site</a> and activate statistics in the personal cabinet."
         };
 
         private static var s_lang:Object = { };

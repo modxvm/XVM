@@ -26,7 +26,8 @@ def _load():
     try:
         (response, duration) = loadUrl(__WN8_EXPECTED_DATA_URL)
         if not response:
-            err('Empty response or parsing error')
+            #err('Empty response or parsing error')
+            pass
         else:
             try:
                 data = None if response in ('', '[]') else json.loads(response)
@@ -35,7 +36,7 @@ def _load():
                 err('  Bad answer: ' + response)
                 res = None
     except Exception, ex:
-        err('[wn8] init() exception: ' + traceback.format_exc())
+        err(traceback.format_exc())
 
     return res
 

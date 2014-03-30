@@ -45,7 +45,7 @@
 
   2.  Nemusíte nic nastavovat.
     Pokud chcete nějaké jiné, než výchozí nastavení, musíte přejmenovat výchozí soubor s nastavením
-    "\res_mods\xvm\xvm.xc.sample" na "xvm.xc" v adresáři hry.
+    "\res_mods\xvm\configs\xvm.xc.sample" na "xvm.xc" v adresáři hry.
 
     Můžete použít online editor:
       http://www.koreanrandom.com/forum/topic/1422-/#entry11316
@@ -309,7 +309,7 @@
       Ikony nejlepších 150 klanů jsou součástí balíčku.
 
       Archivy se všemi ikonami klanů je možné stáhnout zvlášť:
-        http://code.google.com/p/wot-xvm/downloads/list
+        http://www.modxvm.com/en/download-xvm/
         Soubory: clanicons-full-ru-XXX.zip (RU), clanicons-full-eu-XXX.zip (EU), clanicons-full-na-XXX.zip (NA),
         clanicons-full-sea-XXX.zip (SEA), clanicons-full-kr-XXX.zip (KR), clanicons-full-vn-XXX.zip (VN)
 

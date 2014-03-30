@@ -56,7 +56,7 @@ class wot.battle.BattleMain
 
         // TODO: remove (replace by setup elements)
         // Panels Mode Switcher
-        if (Config.s_config.battle.removePanelsModeSwitcher)
+        if (Config.s_config.playersPanel.removePanelsModeSwitcher)
             _root.switcher_mc._visible = false;
 
         // Show Clocks
