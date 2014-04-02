@@ -15,6 +15,7 @@ export PLAYERGLOBAL_HOME="$FLEX_HOME/frameworks/libs/player"
 export PATH="$PATH:$FLEX_HOME/bin"
 
 #3. del content of doc folder
+mkdir -p ../../doc/
 rm -rf ../../doc/*
 
 #4. Build swc

@@ -1,6 +1,9 @@
 XVM-5.2.1-dev:
   * adaptation to WoT 0.9.0.CT1
 
+  [NEW FUNCTIONS]
+  * localization: New rules for localization submission. Details: https://code.google.com/p/wot-xvm/wiki/LocalizingXVM
+
 XVM-5.2.0-test1:
   [MAYOR UPDATE]
   * Statistics must be enabled in the personal cabinet on the http://www.modxvm.com/ site

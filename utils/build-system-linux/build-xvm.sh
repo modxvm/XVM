@@ -8,6 +8,7 @@
 pushd config/ > /dev/null
 flex_version=$(cat flex_version)
 wot_version=$(cat wot_version)
+l10n_url=$(cat l10n_url)
 popd > /dev/null
 
 #2. Detect revision
@@ -53,7 +54,19 @@ cp -rf ../../bin/xpm/* ../../temp/res_mods/"$wot_version"/
 rm -rf ../../bin/*
 echo ""
 
-#7. Build archive
+#7. Update l10n files from translation server
+pushd ../../temp/res_mods/xvm/l10n/ >/dev/null
+mkdir -p temp
+cd temp
+wget --quiet --output-document=l10n.zip $l10n_url
+unzip -o l10n.zip >/dev/null
+rm l10n.zip en.xc ru.xc
+cd ..
+mv temp/* ./
+rm -rf temp/
+popd >/dev/null
+
+#8. Build archive
 echo "Packing build"
 echo "$revision" >> ../../temp/"$revision"
 pushd ../../temp/ > /dev/null && zip -9 -r -q "$revision"_xvm"$archive_postfix".zip ./ && popd > /dev/null
