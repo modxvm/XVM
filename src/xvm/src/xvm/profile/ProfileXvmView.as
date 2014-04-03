@@ -34,6 +34,7 @@ package xvm.profile
 
         public function ProfileXvmView(view:IView)
         {
+            //Logger.add("ProfileXvmView");
             super(view);
             _summaryPageInitialized = false;
         }
@@ -51,32 +52,46 @@ package xvm.profile
 
         public override function onBeforePopulate(e:LifeCycleEvent):void
         {
-            var pw:ProfileWindow = view as ProfileWindow;
-            if (pw != null)
+            try
             {
-                if (Config.config.userInfo.showExtraDataInProfile)
+                var pw:ProfileWindow = view as ProfileWindow;
+                if (pw != null)
                 {
-                    pw.btnAddToFriends.y += WINDOW_EXTRA_HEIGHT;
-                    pw.btnAddToIgnore.y += WINDOW_EXTRA_HEIGHT;
-                    pw.btnCreatePrivateChannel.y += WINDOW_EXTRA_HEIGHT;
-                    pw.background.width += WINDOW_EXTRA_WIDTH;
-                    pw.background.height += WINDOW_EXTRA_HEIGHT;
-                    pw.setSize(pw.width + WINDOW_EXTRA_WIDTH, pw.height + WINDOW_EXTRA_HEIGHT);
-                    App.utils.scheduler.envokeInNextFrame(function():void
+                    if (Config.config.userInfo.showExtraDataInProfile)
                     {
-                        var co:int = ProfileConstants.WINDOW_CENTER_OFFSET + WINDOW_EXTRA_WIDTH / 2;
-                        pw.tabNavigator.centerOffset = co;
-                        var sw:ProfileSummaryWindow = pw.tabNavigator.viewStack.currentView as ProfileSummaryWindow;
-                        if (sw != null)
-                            sw.centerOffset = co;
-                    });
+                        pw.btnAddToFriends.y += WINDOW_EXTRA_HEIGHT;
+                        pw.btnAddToIgnore.y += WINDOW_EXTRA_HEIGHT;
+                        pw.btnCreatePrivateChannel.y += WINDOW_EXTRA_HEIGHT;
+                        pw.background.width += WINDOW_EXTRA_WIDTH;
+                        pw.background.height += WINDOW_EXTRA_HEIGHT;
+                        pw.setSize(pw.width + WINDOW_EXTRA_WIDTH, pw.height + WINDOW_EXTRA_HEIGHT);
+                        App.utils.scheduler.envokeInNextFrame(function():void
+                        {
+                            var co:int = ProfileConstants.WINDOW_CENTER_OFFSET + WINDOW_EXTRA_WIDTH / 2;
+                            pw.tabNavigator.centerOffset = co;
+                            var sw:ProfileSummaryWindow = pw.tabNavigator.viewStack.currentView as ProfileSummaryWindow;
+                            if (sw != null)
+                                sw.centerOffset = co;
+                        });
+                    }
                 }
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
             }
         }
 
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
-            init();
+            try
+            {
+                init();
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
         }
 
         // PRIVATE
@@ -89,52 +104,60 @@ package xvm.profile
 
         private function onSectionViewShowed(e:ViewStackEvent):void
         {
-            //Logger.addObject("onSectionViewShowed: " + e.view);
+            Logger.add("onSectionViewShowed: " + e.view);
 
-            var profileWindow:ProfileWindow = view as ProfileWindow;
-
-            if (e.view is ProfileSummary)
+            try
             {
-                summaryPage = e.view as ProfileSummary;
-                if (!_summaryPageInitialized)
-                {
-                    _summaryPageInitialized = true;
+return;
+                var profileWindow:ProfileWindow = view as ProfileWindow;
 
-                    App.utils.scheduler.envokeInNextFrame(initializeStartPage);
+                if (e.view is ProfileSummary)
+                {
+                    summaryPage = e.view as ProfileSummary;
+                    if (!_summaryPageInitialized)
+                    {
+                        _summaryPageInitialized = true;
+
+                        App.utils.scheduler.envokeInNextFrame(initializeStartPage);
+                    }
+                    return;
                 }
-                return;
+
+                var page:ProfileTechniquePage = e.view as ProfileTechniquePage;
+                if (page != null)
+                {
+                    if (page.getChildByName("xvm_extension") == null)
+                    {
+                        page.listComponent.techniqueList.rowHeight = 32;
+
+                        var tp:TechniquePage = new TechniquePage(page, summaryPage, Globals[Globals.NAME]);
+                        page.addChild(tp);
+                    }
+                    return;
+                }
+
+                var window:ProfileTechniqueWindow = e.view as ProfileTechniqueWindow;
+                if (window != null)
+                {
+                    if (window.getChildByName("xvm_extension") == null)
+                    {
+                        window.listComponent.techniqueList.rowHeight = 32;
+
+                        // get player name from window title
+                        var playerName:String = WGUtils.GetPlayerName((profileWindow.window as Window).title);
+
+                        // get player id from the view name.
+                        var playerId:int = parseInt(view.as_name.replace("window_", ""));
+
+                        var tw:TechniqueWindow = new TechniqueWindow(window, summaryPage, playerName, playerId);
+                        window.addChild(tw);
+                    }
+                    return;
+                }
             }
-
-            var page:ProfileTechniquePage = e.view as ProfileTechniquePage;
-            if (page != null)
+            catch (ex:Error)
             {
-                if (page.getChildByName("xvm_extension") == null)
-                {
-                    page.listComponent.techniqueList.rowHeight = 32;
-
-                    var tp:TechniquePage = new TechniquePage(page, summaryPage, Globals[Globals.NAME]);
-                    page.addChild(tp);
-                }
-                return;
-            }
-
-            var window:ProfileTechniqueWindow = e.view as ProfileTechniqueWindow;
-            if (window != null)
-            {
-                if (window.getChildByName("xvm_extension") == null)
-                {
-                    window.listComponent.techniqueList.rowHeight = 32;
-
-                    // get player name from window title
-                    var playerName:String = WGUtils.GetPlayerName((profileWindow.window as Window).title);
-
-                    // get player id from the view name.
-                    var playerId:int = parseInt(view.as_name.replace("window_", ""));
-
-                    var tw:TechniqueWindow = new TechniqueWindow(window, summaryPage, playerName, playerId);
-                    window.addChild(tw);
-                }
-                return;
+                Logger.add(ex.getStackTrace());
             }
         }
 
@@ -142,12 +165,21 @@ package xvm.profile
 
         public function initializeStartPage():void
         {
-            if (!summaryPage)
-                return;
+            Logger.add("initializeStartPage");
 
-            var index:int = Config.config.userInfo.startPage - 1;
-            if (index > 0)
-                tabNavigator.bar.selectedIndex = index;
+            try
+            {
+                if (!summaryPage)
+                    return;
+
+                var index:int = Config.config.userInfo.startPage - 1;
+                if (index > 0)
+                    tabNavigator.bar.selectedIndex = index;
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
         }
     }
 }

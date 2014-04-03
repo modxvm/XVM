@@ -37,7 +37,7 @@ import json
 import traceback
 import time
 from random import randint
-from threading import Thread, RLock
+import threading
 from Queue import Queue
 
 import BigWorld
@@ -60,7 +60,7 @@ class _Stat(object):
     def __init__(self):
         player = BigWorld.player()
         self.queue = Queue()
-        self.lock = RLock()
+        self.lock = threading.RLock()
         self.thread = None
         self.req = None
         self.resp = None
@@ -83,7 +83,8 @@ class _Stat(object):
             return
         self.req = self.queue.get()
         self.resp = None
-        self.thread = Thread(target=self.req['func'])
+        self.thread = threading.Thread(target=self.req['func'])
+        self.thread.daemon = True
         self.thread.start()
         self._checkResult()
 
@@ -244,11 +245,11 @@ class _Stat(object):
         data = None
         if cacheKey not in self.cacheUser:
             try:
-                token = getXvmStatActiveTokenData()
-                if token is None or not 'token' in token:
+                tdata = getXvmStatActiveTokenData()
+                if tdata is None or not 'token' in tdata:
                     err('No valid token for XVM statistics (key=%s)' % cacheKey)
                 else:
-                    tok = token['token'].encode('ascii')
+                    tok = tdata['token'].encode('ascii')
                     if isId:
                         req = "user/%s/%s" % (tok, value)
                     else:
@@ -292,8 +293,8 @@ class _Stat(object):
     def _load_stat(self, playerVehicleID, allowNetwork=True):
         requestList = []
 
-        token = getXvmStatActiveTokenData()
-        if token is None or not 'token' in token:
+        tdata = getXvmStatActiveTokenData()
+        if tdata is None or not 'token' in tdata:
             err('No valid token for XVM statistics (id=%s)' % playerVehicleID)
             return
 
@@ -316,7 +317,7 @@ class _Stat(object):
 
         if not requestList:
             return
-        updateRequest = 'stat/%s/%s' % (token['token'].encode('ascii'), ','.join(requestList))
+        updateRequest = 'stat/%s/%s' % (tdata['token'].encode('ascii'), ','.join(requestList))
 
         if XVM_STAT_SERVERS is None or len(XVM_STAT_SERVERS) <= 0:
             err('Cannot read statistics: no suitable server was found.')

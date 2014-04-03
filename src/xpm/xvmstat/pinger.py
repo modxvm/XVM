@@ -56,6 +56,7 @@ class _Ping(object):
     def _ping(self):
         # create thread
         self.thread = threading.Thread(target=self._pingAsync)
+        self.thread.daemon = True
         self.thread.start()
         # timer for result check
         BigWorld.callback(0.05, self._checkResult)

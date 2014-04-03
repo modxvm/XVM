@@ -2,11 +2,12 @@
 
 # PUBLIC
 
+def getXvmStatActiveTokenData():
+    return _getXvmStatActiveTokenData()
+
 def getXvmStatTokenData():
     return _getXvmStatTokenData()
 
-def getXvmStatActiveTokenData():
-    return _getXvmStatActiveTokenData()
 
 # PRIVATE
 
@@ -26,97 +27,88 @@ from logger import *
 from loadurl import loadUrl
 import utils
 
-_tokens = db.get('tokens', 'tokens') or dict()
-_tdata2 = None
+_tdataPrev = None
+
+def _getXvmStatActiveTokenData():
+    playerId = _getPlayerId()
+    if playerId is None:
+        return None
+
+    tdata = db.get('tokens', playerId)
+    if tdata is None:
+        # fallback to the last player id if replay is running
+        if utils.is_replay():
+            playerId = db.get('tokens', 'lastPlayerId')
+            if playerId is None:
+                return None
+            tdata = db.get('tokens', playerId)
+
+    return tdata
+
+#    token = None
+#    if tdata is None:
+#    try:
+#        if tdata['status'] == 'active':
+#            if long(tdata['expires_at'])/1000 > time.time():
+#                token = tdata
+#    except:
+#        token = None
+#
+#    #log(token)
+#    return token
 
 def _getXvmStatTokenData():
-    global _tokens
-    global _tdata2
+    global _tdataPrev
 
     playerId = _getPlayerId()
     if playerId is None:
         return None
 
-    tdata = _getXvmStatActiveTokenData()
-    tdata2 = _checkToken(playerId, None if tdata is None else tdata['token'])
-    if tdata2 is None:
-        tdata2 = _tdata2
+    tdataActive = _getXvmStatActiveTokenData()
+    tdata = _checkToken(playerId, None if tdataActive is None else tdataActive['token'])
+    if tdata is None:
+        tdata = _tdataPrev
 
     type = SystemMessages.SM_TYPE.Warning
     msg = '<textformat tabstops="[120]"><a href="#XVM_SITE#">www.modxvm.com</a>\n\n'
-    if tdata2 is None:
+    if tdata is None:
         msg += '{{l10n:token/network_error}}'
-    elif tdata2['status'] == 'badToken':
+    elif tdata['status'] == 'badToken':
         msg += '{{l10n:token/bad_token}}'
-    elif tdata2['status'] == 'blocked':
+    elif tdata['status'] == 'blocked':
         msg += '{{l10n:token/blocked}}'
-    elif tdata2['status'] == 'inactive':
+    elif tdata['status'] == 'inactive':
         msg += '{{l10n:token/inactive}}'
-    elif tdata2['status'] == 'active':
+    elif tdata['status'] == 'active':
         type = SystemMessages.SM_TYPE.Information
         msg += '{{l10n:token/active}}\n'
-        s = _get_current_unix_time()
-        e = tdata2['expires_at']/1000
+        s = time.time()
+        e = tdata['expires_at']/1000
         days_left = int((e - s) / 86400)
         if days_left > 0:
             msg += '{{l10n:token/days_left:%d}}\n' % days_left
         else:
             hours_left = int((e - s) / 3600)
             msg += '{{l10n:token/hours_left:%d}}\n' % hours_left
-        msg += '{{l10n:token/cnt:%d}}' % tdata2['cnt']
+        msg += '{{l10n:token/cnt:%d}}' % tdata['cnt']
     else:
         type = SystemMessages.SM_TYPE.Error
-        msg += '{{l10n:token/unknown_status}}\n%s' % json.dumps(tdata2)
+        msg += '{{l10n:token/unknown_status}}\n%s' % json.dumps(tdata)
     msg += '</textformat>'
 
-    if _tdata2 is None or _tdata2['status'] != 'active' or tdata2 is None or tdata2['status'] != 'active':
+    if _tdataPrev is None or _tdataPrev['status'] != 'active' or tdata is None or tdata['status'] != 'active':
         SystemMessages.pushMessage(msg, type)
 
-    if tdata2 is not None:
-        _tdata2 = tdata2
-
-    if tdata2 is not None:
-        if 'token' in tdata2:
-            _tokens[playerId] = tdata2
-            db.set('tokens', 'tokens', _tokens)
-        elif tdata is not None:
-            tdata2['token'] = tdata['token']
+    if tdata is not None:
+        _tdataPrev = tdata
+        if 'token' in tdata:
+            db.set('tokens', playerId, tdata)
+        elif tdataActive is not None:
+            tdata['token'] = tdataActive['token']
         db.set('tokens', 'lastPlayerId', playerId)
 
-    return tdata2
+    return tdata
 
-
-def _getXvmStatActiveTokenData():
-    global _tokens
-
-    playerId = _getPlayerId()
-    #log(playerId)
-    if playerId is None:
-        return None
-
-    if playerId not in _tokens:
-        # fallback to the last player id if replay is running
-        if utils.is_replay():
-            playerId = db.get('tokens', 'lastPlayerId') or None
-
-    if playerId is None:
-        return None
-
-    token = None
-    try:
-        if playerId in _tokens:
-            if _tokens[playerId]['status'] == 'active':
-                if long(_tokens[playerId]['expires_at'])/1000 > _get_current_unix_time():
-                    token = _tokens[playerId]
-    except:
-        token = None
-
-    #log(token)
-    return token
-
-def _get_current_unix_time():
-    #return int(time.mktime(datetime.datetime.utcnow().timetuple()))
-    return time.time()
 
 def _getPlayerId():
     player = BigWorld.player()

@@ -12,14 +12,17 @@ _scopeTemplate = ScopeTemplates.GLOBAL_SCOPE
 _settings = ViewSettings(_alias, View, _url, _viewType, None, _scopeTemplate)
 g_entitiesFactories.addSettings(_settings)
 
-def AppStarted(self, event):
+app = None
+
+def AppStarted(event):
     #debug('AppStarted')
 
     import BigWorld
     import BattleReplay
     from ConnectionManager import connectionManager
 
+    global app
     if BattleReplay.g_replayCtrl.autoStartBattleReplay() or connectionManager.isConnected():
-        self.loadView(_alias)
+        app.loadView(_alias)
     else:
-        BigWorld.callback(0.001, lambda: self.loadView(_alias))
+        BigWorld.callback(0.001, lambda: app.loadView(_alias))

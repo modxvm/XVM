@@ -2,6 +2,8 @@
 
 XVM_STAT_API_VERSION = "3.0"
 XVM_STAT_SERVERS = [ "https://stat.modxvm.com:443/{API}/{REQ}" ] # TODO - config
+XVM_WS_URL = "ws://echo.websocket.org/"
+#XVM_WS_URL = "wss://echo.websocket.org/"
 XVM_STAT_FINGERPRINT = "46169f8bd6f743733b23066f5cce2cd3d0392af8" # fingerprint for SSL certificate
 XVM_STAT_TIMEOUT = 30000 # TODO - config
 

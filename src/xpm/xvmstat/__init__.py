@@ -18,10 +18,12 @@ from pprint import pprint
 import BigWorld
 import GUI
 from gui.shared import events
+from gui.shared.event_bus import EVENT_BUS_SCOPE
 
 from gui.mods.xpm import *
 from logger import *
 from xvm import g_xvm
+from websock import g_webSock
 
 _SWFS = [
     'Application.swf',
@@ -46,13 +48,24 @@ def FlashInit(self, swf, className = 'Flash', args = None, path = None):
     self.addExternalCallback('xvm.cmd', lambda *args: g_xvm.onXvmCommand(self, *args))
     if self.swf == _APP_SWF:
         import appstart
-        self.addListener(events.GUICommonEvent.APP_STARTED, lambda e: appstart.AppStarted(self, e))
+        appstart.app = self
+        self.addListener(events.GUICommonEvent.APP_STARTED, appstart.AppStarted, EVENT_BUS_SCOPE.GLOBAL)
+        self.addListener(events.ShowViewEvent.SHOW_LOBBY, g_webSock.init, EVENT_BUS_SCOPE.GLOBAL)
+        self.addListener(events.ShowViewEvent.SHOW_LOGIN, g_webSock.stop, EVENT_BUS_SCOPE.GLOBAL)
+        self.addListener(events.LoadEvent.LOAD_BATTLE_LOADING, g_webSock.start, EVENT_BUS_SCOPE.GLOBAL)
 
 
 def FlashBeforeDelete(self):
     if self.swf not in _SWFS:
         return
     debug("FlashBeforeDelete: " + self.swf)
+    self.removeExternalCallback('xvm.cmd')
+    if self.swf == _APP_SWF:
+        import appstart
+        self.removeListener(events.GUICommonEvent.APP_STARTED, appstart.AppStarted, EVENT_BUS_SCOPE.GLOBAL)
+        self.removeListener(events.ShowViewEvent.SHOW_LOBBY, g_webSock.init, EVENT_BUS_SCOPE.GLOBAL)
+        self.removeListener(events.ShowViewEvent.SHOW_LOGIN, g_webSock.stop, EVENT_BUS_SCOPE.GLOBAL)
+        self.removeListener(events.LoadEvent.LOAD_BATTLE_LOADING, g_webSock.start, EVENT_BUS_SCOPE.GLOBAL)
 
 
 def ProfileTechniqueWindowRequestData(base, self, data):
