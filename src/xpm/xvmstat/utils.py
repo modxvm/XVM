@@ -6,6 +6,10 @@ def is_replay():
     import BattleReplay
     return BattleReplay.g_replayCtrl.isPlaying
 
-def rm(filename):
-    if os.path.isfile(filename):
-        os.remove(filename)
+def touch(fname, times=None):
+    with open(fname, 'a'):
+        os.utime(fname, times)
+
+def rm(fname):
+    if os.path.isfile(fname):
+        os.remove(fname)

@@ -1,5 +1,6 @@
 import websocket
 import threading
+import traceback
 
 from gui import SystemMessages
 
@@ -17,7 +18,7 @@ class _WebSock(object):
         self.start(e)
 
     def start(self, e):
-        #debug('start')
+        debug('start')
         if not self._ws:
             self._ws = websocket.WebSocketApp(
                 XVM_WS_URL,
@@ -30,20 +31,21 @@ class _WebSock(object):
             self._thread.start()
 
     def stop(self, e):
-        #debug('stop')
+        debug('stop')
         if self._ws:
+            self._ws.on_error = None
             self._ws.close()
-            self._ws = None
         if self._thread:
             self._thread.join()
             self._thread = None
+        self._ws = None
 
     # PRIVATE
 
     def _on_open(self, ws):
         msg = '<a href="#XVM_SITE#">www.modxvm.com</a>\n\nWebSocket opened'
         type = SystemMessages.SM_TYPE.Information
-        SystemMessages.pushMessage(msg, type)
+        #SystemMessages.pushMessage(msg, type)
         log('WebSocket opened')
 
     def _on_close(self, ws):
@@ -55,13 +57,13 @@ class _WebSock(object):
     def _on_message(self, ws, message):
         msg = '<a href="#XVM_SITE#">www.modxvm.com</a>\n\n&gt; ' + message
         type = SystemMessages.SM_TYPE.Information
-        SystemMessages.pushMessage(msg, type)
+        #SystemMessages.pushMessage(msg, type)
         log('WebSocket recv: ' + message)
 
     def _on_error(self, ws, error):
-        msg = '<a href="#XVM_SITE#">www.modxvm.com</a>\n\nError: ' + error
+        msg = '<a href="#XVM_SITE#">www.modxvm.com</a>\n\nError: ' + str(error)
         type = SystemMessages.SM_TYPE.Error
-        SystemMessages.pushMessage(msg, type)
-        log('WebSocket err: ' + error)
+        #SystemMessages.pushMessage(msg, type)
+        err('WebSocket err: ' + traceback.format_exc())
 
 g_webSock = _WebSock()

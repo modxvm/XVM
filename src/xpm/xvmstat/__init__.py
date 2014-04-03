@@ -50,9 +50,9 @@ def FlashInit(self, swf, className = 'Flash', args = None, path = None):
         import appstart
         appstart.app = self
         self.addListener(events.GUICommonEvent.APP_STARTED, appstart.AppStarted, EVENT_BUS_SCOPE.GLOBAL)
-        self.addListener(events.ShowViewEvent.SHOW_LOBBY, g_webSock.init, EVENT_BUS_SCOPE.GLOBAL)
-        self.addListener(events.ShowViewEvent.SHOW_LOGIN, g_webSock.stop, EVENT_BUS_SCOPE.GLOBAL)
-        self.addListener(events.LoadEvent.LOAD_BATTLE_LOADING, g_webSock.start, EVENT_BUS_SCOPE.GLOBAL)
+#        self.addListener(events.ShowViewEvent.SHOW_LOBBY, g_webSock.init, EVENT_BUS_SCOPE.GLOBAL)
+#        self.addListener(events.ShowViewEvent.SHOW_LOGIN, g_webSock.stop, EVENT_BUS_SCOPE.GLOBAL)
+#        self.addListener(events.LoadEvent.LOAD_BATTLE_LOADING, g_webSock.start, EVENT_BUS_SCOPE.GLOBAL)
 
 
 def FlashBeforeDelete(self):
@@ -63,9 +63,9 @@ def FlashBeforeDelete(self):
     if self.swf == _APP_SWF:
         import appstart
         self.removeListener(events.GUICommonEvent.APP_STARTED, appstart.AppStarted, EVENT_BUS_SCOPE.GLOBAL)
-        self.removeListener(events.ShowViewEvent.SHOW_LOBBY, g_webSock.init, EVENT_BUS_SCOPE.GLOBAL)
-        self.removeListener(events.ShowViewEvent.SHOW_LOGIN, g_webSock.stop, EVENT_BUS_SCOPE.GLOBAL)
-        self.removeListener(events.LoadEvent.LOAD_BATTLE_LOADING, g_webSock.start, EVENT_BUS_SCOPE.GLOBAL)
+#        self.removeListener(events.ShowViewEvent.SHOW_LOBBY, g_webSock.init, EVENT_BUS_SCOPE.GLOBAL)
+#        self.removeListener(events.ShowViewEvent.SHOW_LOGIN, g_webSock.stop, EVENT_BUS_SCOPE.GLOBAL)
+#        self.removeListener(events.LoadEvent.LOAD_BATTLE_LOADING, g_webSock.start, EVENT_BUS_SCOPE.GLOBAL)
 
 
 def ProfileTechniqueWindowRequestData(base, self, data):
