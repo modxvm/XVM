@@ -16,6 +16,8 @@ package net.wg.gui.lobby.hangar.maintenance.data
 
       public var shells:Array = null;
 
+      public var battleID:int = -1;
+
       override protected function onDataWrite(param1:String, param2:Object) : Boolean {
          var _loc3_:Array = null;
          var _loc4_:Object = null;

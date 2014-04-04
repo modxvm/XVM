@@ -210,6 +210,7 @@ package net.wg.gui.lobby.settings
       }
 
       override protected function configUI() : void {
+         super.configUI();
          graphicsQualityLabel.text = SETTINGS.GRAPHICSQUALITY;
          autodetectQuality.label = SETTINGS.AUTODETECTBUTTON;
          dynamicRendererLabel.text = SETTINGS.DYNAMICRENDERER;
@@ -217,11 +218,13 @@ package net.wg.gui.lobby.settings
          tabs.dataProvider = new DataProvider([{"label":SETTINGS.GRAPHICS_TABSCREEN},{"label":SETTINGS.GRAPHICS_TABADVANCED}]);
          this.updateCurrentTab();
          autodetectQuality.addEventListener(ButtonEvent.CLICK,this.onAutodetectPress);
-         super.configUI();
       }
 
       private function onTabChange(param1:IndexEvent) : void {
-         this.updateCurrentTab();
+         if(initialized)
+         {
+            this.updateCurrentTab();
+         }
       }
 
       private function updateCurrentTab() : void {
@@ -411,42 +414,67 @@ package net.wg.gui.lobby.settings
          }
       }
 
-      private function updateRefreshRate() : void {
-         var _loc6_:SettingsControlProp = null;
-         var _loc7_:* = 0;
+      private function updateRefreshRate(param1:Boolean=false) : void {
+         var _loc7_:SettingsControlProp = null;
          var _loc8_:* = 0;
-         var _loc9_:Array = null;
-         var _loc1_:String = SettingsConfig.REFRESH_RATE;
-         var _loc2_:SettingsControlProp = SettingsControlProp(_data[_loc1_]);
-         var _loc3_:DropdownMenu = this[_loc1_ + _loc2_.type];
-         if(SettingsConfig.liveUpdateVideoSettingsData[_loc1_])
+         var _loc9_:* = 0;
+         var _loc10_:Array = null;
+         var _loc11_:* = NaN;
+         var _loc2_:String = SettingsConfig.REFRESH_RATE;
+         var _loc3_:SettingsControlProp = SettingsControlProp(_data[_loc2_]);
+         var _loc4_:DropdownMenu = this[_loc2_ + _loc3_.type];
+         if((SettingsConfig.liveUpdateVideoSettingsData[_loc2_]) && (param1))
          {
-            _loc6_ = SettingsControlProp(SettingsConfig.liveUpdateVideoSettingsData[_loc1_]);
-            _loc2_.options = App.utils.commons.cloneObject(_loc6_.options);
-            _loc2_.current = _loc6_.current;
+            _loc7_ = SettingsControlProp(SettingsConfig.liveUpdateVideoSettingsData[_loc2_]);
+            _loc3_.options = App.utils.commons.cloneObject(_loc7_.options);
+            _loc3_.current = _loc7_.current;
          }
-         var _loc4_:* = _loc2_.changedVal;
+         var _loc5_:* = _loc3_.changedVal;
          if(_isFullScreen)
          {
-            _loc7_ = monitorDropDown.selectedIndex;
-            _loc8_ = sizesDropDown.selectedIndex;
-            _loc9_ = _loc2_.options[_loc7_][_loc8_];
-            _loc3_.dataProvider = new DataProvider(_loc9_);
+            _loc8_ = monitorDropDown.selectedIndex;
+            _loc9_ = sizesDropDown.selectedIndex;
+            _loc10_ = _loc3_.options[_loc8_][_loc9_];
+            _loc4_.dataProvider = new DataProvider(_loc10_);
          }
          else
          {
-            _loc3_.dataProvider = new DataProvider([SETTINGS.REFRESHRATE_DEFAULT]);
+            _loc4_.dataProvider = new DataProvider([SETTINGS.REFRESHRATE_DEFAULT]);
          }
-         var _loc5_:int = _loc3_.dataProvider.indexOf(_loc4_);
-         if(_loc5_ == -1)
+         var _loc6_:int = _loc4_.dataProvider.indexOf(_loc5_);
+         if(_loc6_ == -1)
          {
-            _loc3_.selectedIndex = _loc3_.dataProvider.length-1;
+            _loc11_ = this.getClosestRefreshRate(_loc5_,_loc4_.dataProvider);
+            if(isNaN(_loc11_))
+            {
+               _loc4_.selectedIndex = _loc4_.dataProvider.length-1;
+            }
+            else
+            {
+               _loc4_.selectedIndex = _loc4_.dataProvider.indexOf(_loc11_);
+            }
          }
          else
          {
-            _loc3_.selectedIndex = _loc5_;
+            _loc4_.selectedIndex = _loc6_;
          }
          this.onRefreshRateDDChange();
+      }
+
+      private function getClosestRefreshRate(param1:int, param2:IDataProvider) : Number {
+         var _loc5_:* = NaN;
+         var _loc3_:Number = NaN;
+         var _loc4_:* = 0;
+         while(_loc4_ < param2.length)
+         {
+            _loc5_ = param2.requestItemAt(_loc4_) as Number;
+            if(_loc5_ > param1 && (isNaN(_loc3_)?true:_loc5_ < _loc3_))
+            {
+               _loc3_ = _loc5_;
+            }
+            _loc4_++;
+         }
+         return _loc3_;
       }
 
       private function setPresets() : void {
@@ -744,21 +772,24 @@ package net.wg.gui.lobby.settings
          var _loc3_:SettingsControlProp = null;
          for (_loc2_ in param1)
          {
-            if(this._qualityOrderIdList.indexOf(_loc2_) >= 0)
+            if(_loc2_ != SettingsConfig.RENDER_PIPELINE)
             {
-               _loc3_ = SettingsControlProp(this._graphicsQualityDataProv[_loc2_]);
-               _loc3_.changedVal = _loc3_.type == SettingsConfig.TYPE_CHECKBOX?Boolean(param1[_loc2_]):Number(param1[_loc2_]);
-            }
-            else
-            {
-               DebugUtils.LOG_WARNING("TRY SET DATA USE PRESET FOR CONTROL:",_loc2_);
+               if(this._qualityOrderIdList.indexOf(_loc2_) >= 0)
+               {
+                  _loc3_ = SettingsControlProp(this._graphicsQualityDataProv[_loc2_]);
+                  _loc3_.changedVal = _loc3_.type == SettingsConfig.TYPE_CHECKBOX?Boolean(param1[_loc2_]):Number(param1[_loc2_]);
+               }
+               else
+               {
+                  DebugUtils.LOG_WARNING("TRY SET DATA USE PRESET FOR CONTROL:",_loc2_);
+               }
             }
          }
       }
 
       private function updateLiveVideoData() : void {
-         var _loc6_:String = null;
-         var _loc7_:SettingsControlProp = null;
+         var _loc5_:String = null;
+         var _loc6_:SettingsControlProp = null;
          var _loc8_:SettingsControlProp = null;
          var _loc9_:String = null;
          var _loc10_:SettingsControlProp = null;
@@ -768,28 +799,35 @@ package net.wg.gui.lobby.settings
          var _loc3_:uint = 0;
          _loc3_ = SettingsConfig.liveUpdateVideoSettingsOrderData.length;
          var _loc4_:ICommons = App.utils.commons;
-         var _loc5_:uint = 0;
-         while(_loc5_ < _loc3_)
+         var _loc7_:uint = 0;
+         while(_loc7_ < _loc3_)
          {
-            _loc6_ = SettingsConfig.liveUpdateVideoSettingsOrderData[_loc5_];
-            _loc7_ = SettingsControlProp(_data[_loc6_]);
-            if(SettingsConfig.liveUpdateVideoSettingsData[_loc6_])
+            _loc5_ = SettingsConfig.liveUpdateVideoSettingsOrderData[_loc7_];
+            _loc6_ = SettingsControlProp(_data[_loc5_]);
+            if(SettingsConfig.liveUpdateVideoSettingsData[_loc5_])
             {
-               _loc8_ = SettingsControlProp(SettingsConfig.liveUpdateVideoSettingsData[_loc6_]);
-               _loc7_.options = _loc4_.cloneObject(_loc8_.options);
-               _loc7_.current = _loc8_.current;
+               _loc8_ = SettingsControlProp(SettingsConfig.liveUpdateVideoSettingsData[_loc5_]);
+               _loc6_.options = _loc4_.cloneObject(_loc8_.options);
+               _loc6_.current = _loc8_.current;
             }
-            if((_loc7_) && (this[_loc6_ + _loc7_.type]))
+            _loc7_++;
+         }
+         _loc7_ = 0;
+         while(_loc7_ < _loc3_)
+         {
+            _loc5_ = SettingsConfig.liveUpdateVideoSettingsOrderData[_loc7_];
+            _loc6_ = SettingsControlProp(_data[_loc5_]);
+            if((_loc6_) && (this[_loc5_ + _loc6_.type]))
             {
-               switch(_loc7_.type)
+               switch(_loc6_.type)
                {
                   case SettingsConfig.TYPE_CHECKBOX:
-                     _loc1_ = CheckBox(this[_loc6_ + _loc7_.type]);
-                     _loc1_.selected = Boolean(_loc8_.changedVal);
+                     _loc1_ = CheckBox(this[_loc5_ + _loc6_.type]);
+                     _loc1_.selected = Boolean(_loc6_.changedVal);
                      break;
                   case SettingsConfig.TYPE_DROPDOWN:
-                     _loc2_ = DropdownMenu(this[_loc6_ + _loc7_.type]);
-                     if(_loc6_ == SettingsConfig.SIZE)
+                     _loc2_ = DropdownMenu(this[_loc5_ + _loc6_.type]);
+                     if(_loc5_ == SettingsConfig.SIZE)
                      {
                         _loc9_ = _isFullScreen?SettingsConfig.RESOLUTION:SettingsConfig.WINDOW_SIZE;
                         _loc10_ = SettingsControlProp(SettingsConfig.liveUpdateVideoSettingsData[_loc9_]);
@@ -803,20 +841,20 @@ package net.wg.gui.lobby.settings
                      }
                      else
                      {
-                        if(_loc6_ == SettingsConfig.REFRESH_RATE)
+                        if(_loc5_ == SettingsConfig.REFRESH_RATE)
                         {
-                           this.updateRefreshRate();
+                           this.updateRefreshRate(true);
                         }
                         else
                         {
-                           _loc2_.dataProvider = new DataProvider(_loc8_.options);
-                           _loc2_.selectedIndex = _loc8_.changedVal;
+                           _loc2_.dataProvider = new DataProvider(_loc6_.options);
+                           _loc2_.selectedIndex = _loc6_.changedVal;
                         }
                      }
                      break;
                }
             }
-            _loc5_++;
+            _loc7_++;
          }
       }
 
@@ -898,6 +936,8 @@ package net.wg.gui.lobby.settings
          var _loc7_:* = NaN;
          var _loc8_:* = NaN;
          var _loc9_:* = 0;
+         var _loc10_:Object = null;
+         var _loc11_:* = false;
          this._allowCheckPreset = false;
          var _loc2_:Object = param1.itemData;
          var _loc3_:String = _loc2_.key;
@@ -923,6 +963,8 @@ package net.wg.gui.lobby.settings
                _loc9_ = this.getDPItemIndex(_loc6_.dataProvider,_loc8_);
                if(_loc9_ != -1)
                {
+                  _loc10_ = _loc6_.dataProvider.requestItemAt(_loc9_);
+                  _loc11_ = _loc10_.hasOwnProperty("supported")?_loc10_["supported"]:true;
                   _loc6_.selectedIndex = _loc9_;
                }
             }

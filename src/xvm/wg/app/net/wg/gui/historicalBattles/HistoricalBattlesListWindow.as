@@ -18,6 +18,10 @@ package net.wg.gui.historicalBattles
    import flash.events.MouseEvent;
    import net.wg.gui.historicalBattles.data.BattleListItemVO;
    import scaleform.clik.constants.InvalidationType;
+   import scaleform.clik.events.InputEvent;
+   import scaleform.clik.ui.InputDetails;
+   import flash.ui.Keyboard;
+   import scaleform.clik.constants.InputValue;
    import net.wg.data.constants.Tooltips;
    import net.wg.gui.utils.ComplexTooltipHelper;
    import scaleform.clik.data.DataProvider;
@@ -162,6 +166,26 @@ package net.wg.gui.historicalBattles
          window.title = HISTORICAL_BATTLES.WINDOW_MAIN_TITLE;
       }
 
+      override public function handleInput(param1:InputEvent) : void {
+         if(param1.handled)
+         {
+            return;
+         }
+         var _loc2_:InputDetails = param1.details;
+         if(_loc2_.code == Keyboard.ESCAPE && _loc2_.value == InputValue.KEY_DOWN)
+         {
+            if(window.getCloseBtn().enabled)
+            {
+               param1.handled = true;
+               onWindowCloseS();
+            }
+         }
+         else
+         {
+            super.handleInput(param1);
+         }
+      }
+
       override protected function onDispose() : void {
          this.disposeModel();
          this.fightButton.removeEventListener(MouseEvent.ROLL_OUT,this.onControlRollOut);
@@ -281,6 +305,14 @@ package net.wg.gui.historicalBattles
             this.selectedBattleID = BattleListItemVO(this.carousel.dataProvider.requestItemAt(this.carousel.selectedIndex)).id;
             onBattleSelectedS(this.selectedBattleID);
          }
+      }
+
+      override public function as_getGeometry() : Array {
+         if(window)
+         {
+            return [window.x,window.y,-1,-1];
+         }
+         return null;
       }
 
       public function as_setCarouselData(param1:Array) : void {

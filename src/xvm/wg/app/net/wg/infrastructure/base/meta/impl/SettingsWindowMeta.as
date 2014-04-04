@@ -27,6 +27,8 @@ package net.wg.infrastructure.base.meta.impl
 
       public var showWarningDialog:Function = null;
 
+      public var onTabSelected:Function = null;
+
       public function applySettingsS(param1:Object, param2:Boolean) : void {
          App.utils.asserter.assertNotNull(this.applySettings,"applySettings" + Errors.CANT_NULL);
          this.applySettings(param1,param2);
@@ -65,6 +67,11 @@ package net.wg.infrastructure.base.meta.impl
       public function showWarningDialogS(param1:String, param2:Object, param3:Boolean) : void {
          App.utils.asserter.assertNotNull(this.showWarningDialog,"showWarningDialog" + Errors.CANT_NULL);
          this.showWarningDialog(param1,param2,param3);
+      }
+
+      public function onTabSelectedS(param1:String) : void {
+         App.utils.asserter.assertNotNull(this.onTabSelected,"onTabSelected" + Errors.CANT_NULL);
+         this.onTabSelected(param1);
       }
    }
 

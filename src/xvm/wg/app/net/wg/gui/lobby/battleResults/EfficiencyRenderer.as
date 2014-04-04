@@ -190,7 +190,7 @@ package net.wg.gui.lobby.battleResults
                   if(this.data.damageDealt > 0)
                   {
                      this.damageIcon.enabled = true;
-                     this.damageIcon.value = this.data.pierced;
+                     this.damageIcon.value = this.data.piercings;
                   }
                   if(this.data.critsCount > 0)
                   {

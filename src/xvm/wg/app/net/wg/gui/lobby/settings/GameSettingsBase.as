@@ -104,6 +104,8 @@ package net.wg.gui.lobby.settings
 
       public var minimapAlphaSlider:Slider = null;
 
+      public var enableOpticalSnpEffectCheckbox:CheckBox = null;
+
       public var enablePostMortemEffectCheckbox:CheckBox = null;
 
       public var enablePostMortemDelayCheckbox:CheckBox = null;
@@ -150,6 +152,7 @@ package net.wg.gui.lobby.settings
          this.vibroDamageLabel.text = SETTINGS.VIBRO_LABELS_DAMAGE;
          this.vibroGUILabel.text = SETTINGS.VIBRO_LABELS_GUI;
          this.minimapAlphaSliderLabel.text = SETTINGS.MINIMAP_LABELS_ALPHA;
+         this.enableOpticalSnpEffectCheckbox.label = SETTINGS.GAME_ENABLEOPTICALSNPEFFECT;
          this.enablePostMortemEffectCheckbox.label = SETTINGS.GAME_ENABLEMORTALPOSTEFFECT;
          this.enablePostMortemDelayCheckbox.label = SETTINGS.GAME_ENABLEDELAYPOSTEFFECT;
          this.dynamicCameraCheckbox.label = SETTINGS.GAME_DYNAMICCAMERA;

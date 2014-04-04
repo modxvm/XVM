@@ -19,9 +19,17 @@ package net.wg.gui.lobby.settings.components
 
       override protected function checkIsItemDisabled(param1:Object) : Boolean {
          var _loc2_:* = false;
-         if(!this._inAdvancedMode && (param1.hasOwnProperty("advanced")))
+         var _loc3_:Boolean = param1.hasOwnProperty("supported")?param1["supported"]:true;
+         if(_loc3_)
          {
-            _loc2_ = param1["advanced"];
+            if(!this._inAdvancedMode && (param1.hasOwnProperty("advanced")))
+            {
+               _loc2_ = param1["advanced"];
+            }
+         }
+         else
+         {
+            _loc2_ = true;
          }
          return _loc2_;
       }

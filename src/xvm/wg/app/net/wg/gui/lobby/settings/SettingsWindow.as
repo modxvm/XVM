@@ -68,6 +68,10 @@ package net.wg.gui.lobby.settings
 
       private var needToUpdateGraphicSettings:Boolean = false;
 
+      private var tabToSelect:int = 0;
+
+      private var graphicsPresetToSelect:int = -1;
+
       private const CONTROLS_WARNING:String = "controlsWrongNotification";
 
       private const SOUND_MODE_WARNING:String = "soundModeInvalid";
@@ -203,6 +207,24 @@ package net.wg.gui.lobby.settings
          this.initializeCommonData(param1);
       }
 
+      public function as_openTab(param1:Number) : void {
+         this.tabToSelect = param1;
+         if(initialized)
+         {
+            this.tabs.selectedIndex = param1;
+         }
+      }
+
+      public function as_setGraphicsPreset(param1:Number) : void {
+         this.graphicsPresetToSelect = param1;
+         var _loc2_:GraphicSettings = GraphicSettings(this.tryGetView(SettingsConfig.GRAPHIC_SETTINGS));
+         if(_loc2_)
+         {
+            _loc2_.setPresetAfterAutoDetect(this.graphicsPresetToSelect);
+            this.graphicsPresetToSelect = -1;
+         }
+      }
+
       private function initializeCommonData(param1:Object) : void {
          var _loc2_:String = null;
          var _loc3_:IViewStackContent = null;
@@ -246,6 +268,7 @@ package net.wg.gui.lobby.settings
             this.tabs.addEventListener(IndexEvent.INDEX_CHANGE,this.onTabChange);
             this.view.addEventListener(ViewStackEvent.NEED_UPDATE,this.onViewNeedUpdateHandler);
             this.view.addEventListener(ViewStackEvent.VIEW_CHANGED,this.onViewChangeHandler);
+            this.tabs.selectedIndex = this.tabToSelect;
          }
          this.addEventListener(SettingViewEvent.ON_CONTROL_CHANGED,this.onControlChanged);
          this.addEventListener(SettingViewEvent.ON_PTT_CONTROL_CHANGED,this.onPTTControlChanged);
@@ -652,6 +675,7 @@ package net.wg.gui.lobby.settings
          {
             _loc2_.onViewChanged();
          }
+         onTabSelectedS(SettingsConfig.tabsDataProviderWithOther[__currentTab].label);
       }
 
       private function onViewNeedUpdateHandler(param1:ViewStackEvent) : void {
@@ -662,7 +686,6 @@ package net.wg.gui.lobby.settings
                "data":this._settingsData[param1.linkage]
             }
          );
-         trace("onViewNeedUpdateHandler: ",_loc2_);
       }
 
       private function onViewChangeHandler(param1:ViewStackEvent) : void {
@@ -674,6 +697,11 @@ package net.wg.gui.lobby.settings
             {
                _loc3_.updateDependentData();
                this.needToUpdateGraphicSettings = false;
+            }
+            if(this.graphicsPresetToSelect != -1)
+            {
+               (_loc3_ as GraphicSettings).setPresetAfterAutoDetect(this.graphicsPresetToSelect);
+               this.graphicsPresetToSelect = -1;
             }
          }
          else

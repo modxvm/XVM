@@ -62,7 +62,7 @@ package net.wg.gui.lobby.hangar.maintenance
          if((isInvalid(InvalidationType.DATA)) && (this.model))
          {
             this.priceTF.htmlText = this.model.price;
-            this.shellsSet.setData(this.model.shells);
+            this.shellsSet.setData(this.model.shells,this.model.battleID);
             this.shellsSet.validateNow();
             this.priceNoteTF.x = this.priceLabelTF.x = this.shellsSet.actualWidth + TEXT_OFFSET;
             this.priceTF.x = this.priceLabelTF.x + this.priceLabelTF.width + TEXT_OFFSET;

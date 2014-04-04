@@ -391,6 +391,8 @@ package
 
       public static const GAME_ENABLEVOIP:String = "#settings:game/enableVoIP";
 
+      public static const GAME_ENABLEOPTICALSNPEFFECT:String = "#settings:game/enableOpticalSnpEffect";
+
       public static const GAME_ENABLEMORTALPOSTEFFECT:String = "#settings:game/enableMortalPostEffect";
 
       public static const GAME_ENABLEDELAYPOSTEFFECT:String = "#settings:game/enableDelayPostEffect";

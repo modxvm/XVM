@@ -585,6 +585,10 @@ package
 
       public static const EMBLEM_GROUP4_SIGNS_77:String = "#vehicle_customization:emblem/group4/signs_77";
 
+      public static const EMBLEM_GROUP4_SIGNS_88:String = "#vehicle_customization:emblem/group4/signs_88";
+
+      public static const EMBLEM_GROUP4_SIGNS_89:String = "#vehicle_customization:emblem/group4/signs_89";
+
       public static const EMBLEM_GROUP5_STICKER_01:String = "#vehicle_customization:emblem/group5/sticker_01";
 
       public static const EMBLEM_GROUP5_STICKER_02:String = "#vehicle_customization:emblem/group5/sticker_02";

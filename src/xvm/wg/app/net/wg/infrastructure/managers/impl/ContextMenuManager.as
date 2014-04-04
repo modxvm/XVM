@@ -80,10 +80,10 @@ package net.wg.infrastructure.managers.impl
                break;
             case "offend":
             case "flood":
-            case "openingOfAllyPos":
-            case "allyEjection":
+            case "blackmail":
+            case "swindle":
             case "notFairPlay":
-            case "teamKill":
+            case "forbiddenNick":
             case "bot":
                appealS(_loc2_.uid,_loc2_.userName,param1.id);
                break;

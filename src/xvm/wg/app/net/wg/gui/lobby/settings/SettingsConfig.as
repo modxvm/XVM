@@ -267,6 +267,7 @@ package net.wg.gui.lobby.settings
                                                        "minimapAlpha":new SettingsControlProp(null,null,TYPE_SLIDER),
                                                        "enablePostMortemEffect":new SettingsControlProp(null,null,TYPE_CHECKBOX),
                                                        "enablePostMortemDelay":new SettingsControlProp(null,null,TYPE_CHECKBOX),
+                                                       "enableOpticalSnpEffect":new SettingsControlProp(null,null,TYPE_CHECKBOX),
                                                        "replayEnabled":new SettingsControlProp(null,null,TYPE_DROPDOWN),
                                                        "useServerAim":new SettingsControlProp(null,null,TYPE_CHECKBOX),
                                                        "showVehiclesCounter":new SettingsControlProp(null,null,TYPE_CHECKBOX),
@@ -462,6 +463,11 @@ package net.wg.gui.lobby.settings
 
       public static function getControlId(param1:String, param2:String) : String {
          return param1.replace(param2,"");
+      }
+
+      public static function get tabsDataProviderWithOther() : Array {
+         var _loc1_:Array = tabsDataProvider.concat();
+         return _loc1_;
       }
    }
 

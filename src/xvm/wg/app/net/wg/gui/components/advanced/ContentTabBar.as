@@ -12,6 +12,7 @@ package net.wg.gui.components.advanced
           
       public function ContentTabBar() {
          super();
+         this.selectionIndicator.visible = false;
       }
 
       private static const INVALID_LAYOUT:String = "invalidLayout";

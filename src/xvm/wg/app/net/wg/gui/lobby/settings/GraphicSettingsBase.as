@@ -8,7 +8,7 @@ package net.wg.gui.lobby.settings
    import net.wg.gui.components.controls.Slider;
    import net.wg.gui.components.controls.CheckBox;
    import net.wg.gui.components.controls.UILoaderAlt;
-   import net.wg.gui.components.advanced.ButtonBarEx;
+   import net.wg.gui.lobby.settings.components.RadioButtonBar;
    import net.wg.gui.lobby.settings.components.SettingsStepSlider;
    import flash.utils.Dictionary;
    import flash.display.DisplayObject;
@@ -97,7 +97,7 @@ package net.wg.gui.lobby.settings
 
       public var RENDER_PIPELINELabel:LabelControl = null;
 
-      public var RENDER_PIPELINEButtonBar:ButtonBarEx = null;
+      public var RENDER_PIPELINEButtonBar:RadioButtonBar = null;
 
       public var TEXTURE_QUALITYLabel:LabelControl = null;
 

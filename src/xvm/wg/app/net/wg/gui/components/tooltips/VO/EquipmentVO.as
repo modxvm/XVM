@@ -2,6 +2,7 @@ package net.wg.gui.components.tooltips.VO
 {
    import net.wg.utils.ILocale;
    import net.wg.data.constants.ValObject;
+   import net.wg.gui.components.tooltips.ToolTipSpecial;
    import net.wg.gui.components.tooltips.helpers.Utils;
 
 
@@ -67,8 +68,24 @@ package net.wg.gui.components.tooltips.VO
 
       public var effectRestriction:String = "";
 
+      public var actionPrc:Number = NaN;
+
+      private var hiddenVehicleCount:Number = 0;
+
+      public var defSellPrice:Array = null;
+
+      public var defBuyPrice:Array = null;
+
       private function parsHash(param1:Object) : void {
-         var _loc2_:ILocale = null;
+         var _loc2_:* = NaN;
+         var _loc3_:* = NaN;
+         var _loc4_:Array = null;
+         var _loc5_:String = null;
+         var _loc6_:Array = null;
+         var _loc7_:* = NaN;
+         var _loc8_:* = NaN;
+         var _loc9_:* = NaN;
+         var _loc10_:ILocale = null;
          this.eName = (param1.hasOwnProperty("name")) && !(param1["name"] == undefined)?param1["name"]:"";
          this.type = (param1.hasOwnProperty("type")) && !(param1["type"] == undefined)?param1["type"]:"";
          this.icon = (param1.hasOwnProperty("icon")) && !(param1["icon"] == undefined)?param1["icon"]:"";
@@ -85,32 +102,61 @@ package net.wg.gui.components.tooltips.VO
          this.gold = (param1.hasOwnProperty("gold")) && !(param1["gold"] == undefined)?param1["gold"]:"";
          this.removeable = (param1.hasOwnProperty("removeable")) && !(param1["removeable"] == undefined)?param1["removeable"]:"";
          this.haveResearchXP = (param1.hasOwnProperty("haveResearchXP")) && !(param1["haveResearchXP"] == undefined)?param1["haveResearchXP"]:"";
-         this.stats = (param1.hasOwnProperty("stats")) && !(param1["stats"] == undefined) && !(param1["stats"]  is  Array)?param1["stats"]:null;
+         this.stats = (param1.hasOwnProperty("stats")) && !(param1["stats"] == undefined) && param1["stats"]  is  Array?param1["stats"]:null;
          if(this.stats)
          {
-            if((this.stats.hasOwnProperty("buy_price")) && this.stats["buy_price"][0]  is  Array)
+            _loc2_ = this.stats.length;
+            _loc3_ = 0;
+            while(_loc3_ < _loc2_)
             {
-               if(this.stats["buy_price"][0][0] > 0)
+               _loc4_ = this.stats[_loc3_];
+               _loc5_ = _loc4_[0];
+               if(_loc5_ == ToolTipSpecial.ID_BUY_PRICE || _loc5_ == ToolTipSpecial.ID_SELL_PRICE)
                {
-                  this.useCredits = true;
+                  _loc6_ = _loc4_[1];
+                  _loc7_ = _loc6_[0]  is  Array?_loc6_[0][0]:_loc6_[0];
+                  _loc8_ = _loc6_[0]  is  Array?_loc6_[0][1]:_loc6_[1];
+                  if(_loc7_ > 0)
+                  {
+                     this.useCredits = true;
+                  }
+                  if(_loc8_ > 0)
+                  {
+                     this.useGold = true;
+                  }
                }
-               if(this.stats["buy_price"][0][1] > 0)
+               else
                {
-                  this.useGold = true;
+                  if(_loc5_ == VehicleBaseVO.DEF_BUY_PRICE)
+                  {
+                     this.defBuyPrice = _loc4_[1];
+                  }
+                  else
+                  {
+                     if(_loc5_ == VehicleBaseVO.DEF_SELL_PRICE)
+                     {
+                        this.defSellPrice = _loc4_[1];
+                     }
+                     else
+                     {
+                        if(_loc5_ == VehicleBaseVO.ACTION_PRC)
+                        {
+                           _loc9_ = _loc4_[1];
+                           this.isAction = !(_loc9_ == 0);
+                           this.actionPrc = _loc9_;
+                        }
+                        else
+                        {
+                           if(_loc5_ == "hiddenVehicleCount")
+                           {
+                              this.hiddenVehicleCount = _loc4_[1];
+                           }
+                        }
+                     }
+                  }
                }
+               _loc3_++;
             }
-            if((this.stats.hasOwnProperty("sell_price")) && this.stats["sell_price"]  is  Array)
-            {
-               if(this.stats["sell_price"][0] > 0)
-               {
-                  this.useCredits = true;
-               }
-               if(this.stats["sell_price"][1] > 0)
-               {
-                  this.useGold = true;
-               }
-            }
-            this.isAction = (this.stats.hasOwnProperty("action_prc")) && !(this.stats["action_prc"] == 0);
          }
          if((param1.hasOwnProperty("params")) && !(param1["params"] == undefined))
          {
@@ -131,10 +177,10 @@ package net.wg.gui.components.tooltips.VO
          {
             this.statusHeader = (param1["status"].hasOwnProperty("header")) && !(param1["status"]["header"] == undefined)?param1["status"]["header"]:"";
             this.statusText = (param1["status"].hasOwnProperty("text")) && !(param1["status"]["text"] == undefined)?param1["status"]["text"]:"";
-            if((this.stats.hasOwnProperty("hiddenVehicleCount")) && !(this.statusText == ""))
+            if(this.hiddenVehicleCount > 0 && !(this.statusText == ""))
             {
-               _loc2_ = App.utils.locale;
-               this.statusText = this.statusText + ("<br/>" + Utils.instance.htmlWrapper(_loc2_.makeString(TOOLTIPS.SUITABLEVEHICLE_HIDDENVEHICLECOUNT),Utils.instance.COLOR_ADD_INFO,14,"$TitleFont") + " " + Utils.instance.htmlWrapper(this.stats["hiddenVehicleCount"].toString(),Utils.instance.COLOR_NUMBER,14,"$TitleFont"));
+               _loc10_ = App.utils.locale;
+               this.statusText = this.statusText + ("<br/>" + Utils.instance.htmlWrapper(_loc10_.makeString(TOOLTIPS.SUITABLEVEHICLE_HIDDENVEHICLECOUNT),Utils.instance.COLOR_ADD_INFO,14,"$TitleFont") + " " + Utils.instance.htmlWrapper(this.hiddenVehicleCount.toString(),Utils.instance.COLOR_NUMBER,14,"$TitleFont"));
             }
             this.statusLevel = (param1["status"].hasOwnProperty("level")) && !(param1["status"]["level"] == undefined)?param1["status"]["level"]:"";
             this.status = !(this.statusHeader == "") || !(this.statusText == "");

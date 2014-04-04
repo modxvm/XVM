@@ -350,7 +350,7 @@ package net.wg.gui.lobby.hangar.maintenance
          this.actionPrice.ico = this.toBuyDropdown.selectedIndex == 0?IconsTypes.CREDITS:IconsTypes.GOLD;
          this.selectedItem.currency = this.toBuyDropdown.selectedIndex == 0?Currencies.CREDITS:Currencies.GOLD;
          this.update();
-         dispatchEvent(new EquipmentEvent(EquipmentEvent.TOTAL_PRICE_CHANGED));
+         dispatchEvent(new EquipmentEvent(EquipmentEvent.TOTAL_PRICE_CHANGED,-1,-1,this.selectedItem.currency));
       }
 
       private function onItemRendererClick(param1:ListEvent) : void {

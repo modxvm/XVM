@@ -3,7 +3,7 @@ package net.wg.gui.lobby.settings
    import scaleform.clik.core.UIComponent;
    import net.wg.gui.components.advanced.FieldSet;
    import net.wg.gui.components.controls.LabelControl;
-   import net.wg.gui.components.advanced.ButtonBarEx;
+   import net.wg.gui.lobby.settings.components.RadioButtonBar;
    import net.wg.gui.lobby.settings.components.SettingsStepSlider;
    import net.wg.gui.components.controls.CheckBox;
    import flash.events.Event;
@@ -15,6 +15,7 @@ package net.wg.gui.lobby.settings
       public function AdvancedGraphicContentForm() {
          super();
          this.initTexts();
+         visible = false;
       }
 
       private static const RADIO_BAR_OFFSET:Number = 12;
@@ -23,7 +24,7 @@ package net.wg.gui.lobby.settings
 
       public var RENDER_PIPELINELabel:LabelControl = null;
 
-      public var RENDER_PIPELINEButtonBar:ButtonBarEx = null;
+      public var RENDER_PIPELINEButtonBar:RadioButtonBar = null;
 
       public var TEXTURE_QUALITYLabel:LabelControl = null;
 
@@ -146,6 +147,7 @@ package net.wg.gui.lobby.settings
          this.RENDER_PIPELINELabel.validateNow();
          this.RENDER_PIPELINEButtonBar.x = this.RENDER_PIPELINELabel.x + this.RENDER_PIPELINELabel.width + RADIO_BAR_OFFSET;
          dispatchEvent(new Event(Event.RESIZE));
+         visible = true;
       }
 
       override protected function onDispose() : void {

@@ -2,6 +2,7 @@ package net.wg.gui.components.tooltips.VO
 {
    import net.wg.utils.ILocale;
    import net.wg.gui.components.tooltips.helpers.Utils;
+   import net.wg.gui.components.tooltips.ToolTipSpecial;
 
 
    public class VehicleVO extends VehicleBaseVO
@@ -36,7 +37,7 @@ package net.wg.gui.components.tooltips.VO
 
       public var statusText:String = null;
 
-      public var stats:Object = null;
+      public var stats:Array = null;
 
       public var useGold:Boolean = false;
 
@@ -44,15 +45,29 @@ package net.wg.gui.components.tooltips.VO
 
       public var isAction:Boolean = false;
 
+      public var actionPrc:Number = NaN;
+
       public var characteristics:Array = null;
 
       public var equipments:Array = null;
+
+      public var defSellPrice:Array = null;
+
+      public var defBuyPrice:Array = null;
 
       private function parsHash(param1:Object) : void {
          var _loc3_:ILocale = null;
          var _loc4_:String = null;
          var _loc5_:* = NaN;
          var _loc6_:String = null;
+         var _loc7_:* = NaN;
+         var _loc8_:* = NaN;
+         var _loc9_:Array = null;
+         var _loc10_:String = null;
+         var _loc11_:Array = null;
+         var _loc12_:* = NaN;
+         var _loc13_:* = NaN;
+         var _loc14_:* = NaN;
          vName = (param1.hasOwnProperty("name")) && !(param1["name"] == undefined)?param1["name"]:"";
          vLevel = (param1.hasOwnProperty("level")) && !(param1["level"] == undefined)?param1["level"]:1;
          vType = (param1.hasOwnProperty("type")) && !(param1["type"] == undefined)?param1["type"]:"";
@@ -81,32 +96,54 @@ package net.wg.gui.components.tooltips.VO
                   break;
             }
          }
-         this.stats = (param1.hasOwnProperty("stats")) && !(param1["stats"] == undefined) && !(param1["stats"]  is  Array)?param1["stats"]:null;
-         if(this.stats)
+         this.stats = (param1.hasOwnProperty("stats")) && !(param1["stats"] == undefined) && param1["stats"]  is  Array?param1["stats"]:null;
+         if((this.stats) && this.stats.length > 0)
          {
-            if((this.stats.hasOwnProperty("buy_price")) && this.stats["buy_price"][0]  is  Array)
+            _loc7_ = this.stats.length;
+            _loc8_ = 0;
+            while(_loc8_ < _loc7_)
             {
-               if(this.stats["buy_price"][0][0] > 0)
+               _loc9_ = this.stats[_loc8_];
+               _loc10_ = _loc9_[0];
+               if(_loc10_ == ToolTipSpecial.ID_BUY_PRICE || _loc10_ == ToolTipSpecial.ID_SELL_PRICE)
                {
-                  this.useCredits = true;
+                  _loc11_ = _loc9_[1];
+                  _loc12_ = _loc11_[0]  is  Array?_loc11_[0][0]:_loc11_[0];
+                  _loc13_ = _loc11_[0]  is  Array?_loc11_[0][1]:_loc11_[1];
+                  if(_loc12_ > 0)
+                  {
+                     this.useCredits = true;
+                  }
+                  if(_loc13_ > 0)
+                  {
+                     this.useGold = true;
+                  }
                }
-               if(this.stats["buy_price"][0][1] > 0)
+               else
                {
-                  this.useGold = true;
+                  if(_loc10_ == VehicleBaseVO.DEF_BUY_PRICE)
+                  {
+                     this.defBuyPrice = _loc9_[1];
+                  }
+                  else
+                  {
+                     if(_loc10_ == VehicleBaseVO.DEF_SELL_PRICE)
+                     {
+                        this.defSellPrice = _loc9_[1];
+                     }
+                     else
+                     {
+                        if(_loc10_ == VehicleBaseVO.ACTION_PRC)
+                        {
+                           _loc14_ = _loc9_[1];
+                           this.isAction = !(_loc14_ == 0);
+                           this.actionPrc = _loc14_;
+                        }
+                     }
+                  }
                }
+               _loc8_++;
             }
-            if((this.stats.hasOwnProperty("sell_price")) && this.stats["sell_price"]  is  Array)
-            {
-               if(this.stats["sell_price"][0] > 0)
-               {
-                  this.useCredits = true;
-               }
-               if(this.stats["sell_price"][1] > 0)
-               {
-                  this.useGold = true;
-               }
-            }
-            this.isAction = (this.stats.hasOwnProperty("action_prc")) && !(this.stats["action_prc"] == 0);
          }
          var _loc2_:Array = (param1.hasOwnProperty("params")) && !(param1["params"] == undefined)?param1["params"]:null;
          if(_loc2_)

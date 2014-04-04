@@ -4,11 +4,11 @@ package net.wg.gui.messenger.controls
    import flash.display.MovieClip;
    import net.wg.gui.components.controls.VoiceWave;
    import net.wg.gui.messenger.data.ChannelMemberVO;
-   import net.wg.infrastructure.events.VoiceChatEvent;
    import flash.geom.Point;
    import scaleform.clik.constants.InvalidationType;
    import net.wg.gui.prebattle.squad.MessengerUtils;
    import flash.events.MouseEvent;
+   import net.wg.infrastructure.events.VoiceChatEvent;
 
 
    public class MemberItemRenderer extends SoundListItemRenderer
@@ -57,16 +57,12 @@ package net.wg.gui.messenger.controls
             this.model.dispose();
             this.model = null;
          }
-         App.voiceChatMgr.removeEventListener(VoiceChatEvent.START_SPEAKING,this.speakHandler);
-         App.voiceChatMgr.removeEventListener(VoiceChatEvent.STOP_SPEAKING,this.speakHandler);
          super.onDispose();
       }
 
       override protected function configUI() : void {
          super.configUI();
          this.voiceWave.visible = App.voiceChatMgr.isVOIPEnabledS();
-         App.voiceChatMgr.addEventListener(VoiceChatEvent.START_SPEAKING,this.speakHandler);
-         App.voiceChatMgr.addEventListener(VoiceChatEvent.STOP_SPEAKING,this.speakHandler);
          setState("out");
       }
 

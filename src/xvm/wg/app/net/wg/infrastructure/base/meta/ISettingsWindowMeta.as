@@ -22,6 +22,8 @@ package net.wg.infrastructure.base.meta
 
       function showWarningDialogS(param1:String, param2:Object, param3:Boolean) : void;
 
+      function onTabSelectedS(param1:String) : void;
+
       function as_setData(param1:Object) : void;
 
       function as_setCaptureDevices(param1:Number, param2:Array) : void;
@@ -33,6 +35,10 @@ package net.wg.infrastructure.base.meta
       function as_confirmWarningDialog(param1:Boolean, param2:String) : void;
 
       function as_ConfirmationOfApplication(param1:Boolean) : void;
+
+      function as_openTab(param1:Number) : void;
+
+      function as_setGraphicsPreset(param1:Number) : void;
    }
 
 }

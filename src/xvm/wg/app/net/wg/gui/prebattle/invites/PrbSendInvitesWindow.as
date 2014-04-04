@@ -16,10 +16,11 @@ package net.wg.gui.prebattle.invites
    import scaleform.clik.events.ButtonEvent;
    import scaleform.clik.events.FocusHandlerEvent;
    import net.wg.gui.events.ListEventEx;
+   import flash.events.Event;
+   import net.wg.gui.prebattle.squad.MessengerUtils;
    import flash.display.InteractiveObject;
    import net.wg.gui.components.windows.Window;
    import flash.utils.clearTimeout;
-   import net.wg.gui.prebattle.squad.MessengerUtils;
    import scaleform.clik.events.ListEvent;
    import scaleform.gfx.MouseEventEx;
    import org.idmedia.as3commons.util.StringUtils;
@@ -180,11 +181,48 @@ package net.wg.gui.prebattle.invites
          this.sendButton.addEventListener(ButtonEvent.CLICK,this.handleSendInvitations);
          this.sendButton.enabled = false;
          this.receiverList.addEventListener(ListEventEx.ITEM_DOUBLE_CLICK,this.receiverList_itemDoubleClickHandler);
+         this.receiverList.addEventListener(ListEventEx.ITEM_CLICK,this.receiverList_ClickHandler);
          this.receiverList.dataProvider = this.receiverData;
+         this.friendMemberDataProvider.addEventListener(Event.CHANGE,this.onUsersListChange);
+         this.clanMemberDataProvider.addEventListener(Event.CHANGE,this.onUsersListChange);
+         this.searchMemberDataProvider.addEventListener(Event.CHANGE,this.onUsersListChange);
          this.enableManagmentButtons(true);
          this.sendButton.enabled = false;
          App.utils.scheduler.envokeInNextFrame(this.updateFocus);
          invalidate(UPDATE_DEFAULT_POSITION);
+      }
+
+      private function onUsersListChange(param1:Event) : void {
+         var _loc2_:DAAPIDataProvider = param1.target as DAAPIDataProvider;
+         _loc2_.requestItemRange(0,_loc2_.length,this.updateReceiverList);
+      }
+
+      private function updateReceiverList(param1:Array) : void {
+         var _loc5_:* = NaN;
+         var _loc2_:int = param1.length;
+         var _loc3_:* = false;
+         var _loc4_:* = 0;
+         while(_loc4_ < _loc2_)
+         {
+            _loc5_ = this.hasUserInReceiverList(param1[_loc4_]);
+            if(_loc5_ >= 0)
+            {
+               _loc3_ = true;
+               if(MessengerUtils.isIgnored(param1[_loc4_]))
+               {
+                  this.receiverData.splice(_loc5_,1);
+               }
+               else
+               {
+                  this.receiverData[_loc5_] = param1[_loc4_];
+               }
+            }
+            _loc4_++;
+         }
+         if(_loc3_)
+         {
+            this.receiverData.invalidate();
+         }
       }
 
       private function onViewChange(param1:ViewStackEvent) : void {
@@ -202,8 +240,12 @@ package net.wg.gui.prebattle.invites
 
       override protected function onDispose() : void {
          App.utils.scheduler.cancelTask(this.updateFocus);
+         this.friendMemberDataProvider.removeEventListener(Event.CHANGE,this.onUsersListChange);
+         this.clanMemberDataProvider.removeEventListener(Event.CHANGE,this.onUsersListChange);
+         this.searchMemberDataProvider.removeEventListener(Event.CHANGE,this.onUsersListChange);
          this.sendButton.removeEventListener(ButtonEvent.CLICK,this.handleSendInvitations);
          this.receiverList.removeEventListener(ListEventEx.ITEM_DOUBLE_CLICK,this.receiverList_itemDoubleClickHandler);
+         this.receiverList.removeEventListener(ListEventEx.ITEM_CLICK,this.receiverList_ClickHandler);
          this.messageTextInput.removeEventListener(FocusHandlerEvent.FOCUS_IN,this.messageTextInput_CLIK_focusInHandler);
          this.addAllUsersButton.removeEventListener(ButtonEvent.CLICK,this.handleClickAddAllUsersButton);
          this.addUserButton.removeEventListener(ButtonEvent.CLICK,this.handleClickAddUserButton);
@@ -250,14 +292,14 @@ package net.wg.gui.prebattle.invites
          this.wait = false;
       }
 
-      private function hasUserInReceiverList(param1:Object) : Boolean {
-         var _loc2_:* = false;
+      private function hasUserInReceiverList(param1:Object) : Number {
+         var _loc2_:Number = -1;
          var _loc3_:Number = 0;
          while(_loc3_ < this.receiverData.length)
          {
             if(this.receiverData[_loc3_].uid == param1.uid)
             {
-               _loc2_ = true;
+               _loc2_ = _loc3_;
                break;
             }
             _loc3_++;
@@ -277,7 +319,7 @@ package net.wg.gui.prebattle.invites
             showErrorS(MENU.PREBATTLE_INVITATIONS_ERRORS_USEROFFLINE);
             return;
          }
-         if(!this.hasUserInReceiverList(_loc2_))
+         if(this.hasUserInReceiverList(_loc2_) < 0)
          {
             this.receiverData.push(_loc2_);
             this.receiverData.invalidate();
@@ -303,7 +345,7 @@ package net.wg.gui.prebattle.invites
             _loc5_ = makeRoster(param1[_loc3_]);
             if(!((MessengerUtils.isIgnored(_loc5_)) || !_loc5_.online))
             {
-               if(!this.hasUserInReceiverList(_loc5_))
+               if(this.hasUserInReceiverList(_loc5_) < 0)
                {
                   this.receiverData.push(_loc5_);
                }
@@ -358,6 +400,13 @@ package net.wg.gui.prebattle.invites
 
       private function usersAccordion_listItemDoubleClickHandler(param1:SendInvitesEvent) : void {
          this.onReceiveUserInfo(param1.initItem);
+      }
+
+      private function receiverList_ClickHandler(param1:ListEvent) : void {
+         if(param1.buttonIdx == MouseEventEx.RIGHT_BUTTON)
+         {
+            App.contextMenuMgr.showUserContextMenu(this,param1.itemData,new PrbSendInviteCIGenerator());
+         }
       }
 
       private function receiverList_itemDoubleClickHandler(param1:ListEvent) : void {

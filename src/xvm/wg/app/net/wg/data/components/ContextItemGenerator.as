@@ -12,7 +12,7 @@ package net.wg.data.components
       }
 
       override protected function getDenunciationsIDs(param1:PlayerInfo) : Map {
-         return App.utils.commons.createMap(["offend",{},"flood",{},"openingOfAllyPos",{},"allyEjection",{},"notFairPlay",{},"teamKill",{},"bot",{}]);
+         return App.utils.commons.createMap(["offend",{},"flood",{},"blackmail",{},"swindle",{},"notFairPlay",{},"forbiddenNick",{},"bot",{}]);
       }
 
       override protected function createSimpleDataIDs(param1:PlayerInfo, param2:String, param3:String, param4:String, param5:String) : Map {

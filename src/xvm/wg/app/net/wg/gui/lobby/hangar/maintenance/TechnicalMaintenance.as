@@ -704,6 +704,8 @@ package net.wg.gui.lobby.hangar.maintenance
       }
 
       private function onEquipmentPriceChanged(param1:EquipmentEvent) : void {
+         var _loc2_:EquipmentItem = param1.currentTarget as EquipmentItem;
+         updateEquipmentCurrencyS(_loc2_.index,param1.changeCurrency);
          invalidate(ShellRendererEvent.TOTAL_PRICE_CHANGED);
       }
 

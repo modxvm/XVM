@@ -879,6 +879,7 @@ package net.wg.infrastructure.base.meta.impl
    import net.wg.gui.lobby.settings.components.KeyInput;
    import net.wg.gui.lobby.settings.components.KeysItemRenderer;
    import net.wg.gui.lobby.settings.components.KeysScrollingList;
+   import net.wg.gui.lobby.settings.components.RadioButtonBar;
    import net.wg.gui.lobby.settings.components.SettingsScrollPane;
    import net.wg.gui.lobby.settings.components.SettingsStepSlider;
    import net.wg.gui.lobby.settings.components.SoundVoiceWaves;
@@ -3132,6 +3133,8 @@ package net.wg.infrastructure.base.meta.impl
       public static const NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_KEYSITEMRENDERER:Class = KeysItemRenderer;
 
       public static const NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_KEYSSCROLLINGLIST:Class = KeysScrollingList;
+
+      public static const NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_RADIOBUTTONBAR:Class = RadioButtonBar;
 
       public static const NET_WG_GUI_LOBBY_SETTINGS_COMPONENTS_SETTINGSSCROLLPANE:Class = SettingsScrollPane;
 

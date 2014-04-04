@@ -549,6 +549,8 @@ package
 
       public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_BERTHS:String = "#messenger:serviceChannelMessages/battleResults/quests/berths";
 
+      public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_ACHIEVEMENTS:String = "#messenger:serviceChannelMessages/battleResults/quests/achievements";
+
       public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_PREMIUM:String = "#messenger:serviceChannelMessages/battleResults/quests/premium";
 
       public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_ITEMS:String = "#messenger:serviceChannelMessages/battleResults/quests/items";

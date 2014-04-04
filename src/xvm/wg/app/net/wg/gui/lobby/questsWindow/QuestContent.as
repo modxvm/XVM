@@ -287,8 +287,9 @@ package net.wg.gui.lobby.questsWindow
       }
 
       private function invalidateCommonData() : void {
+         var _loc1_:* = false;
          this.questInfo.setAvailableQuests(this._allTasks);
-         var _loc1_:* = this.totalTasks > 0;
+         _loc1_ = this.totalTasks > 0;
          this.sortingPanel.visible = !this._hideSortPanel && (_loc1_) && !this._isInRoaming;
          this.scrollBar.visible = _loc1_;
          this.questsList.visible = _loc1_;

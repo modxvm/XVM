@@ -16,6 +16,8 @@ package net.wg.infrastructure.base.meta
 
       function fillVehicleS(param1:Boolean, param2:Boolean, param3:Boolean, param4:Boolean, param5:Boolean, param6:Boolean, param7:Array, param8:Array) : void;
 
+      function updateEquipmentCurrencyS(param1:Number, param2:String) : void;
+
       function as_setData(param1:Object) : void;
 
       function as_setEquipment(param1:Array, param2:Array, param3:Array) : void;
