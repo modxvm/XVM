@@ -62,7 +62,7 @@ TeamMemberRendererUI;
 // squadWindow.swf
 squadItemRendererUI;
 
-// profileSections.swf
+// profileTechnique.swf
 TechniqueRenderer_UI;
 TechniqueStatisticTab_UI;
 

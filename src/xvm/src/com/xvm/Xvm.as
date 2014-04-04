@@ -67,9 +67,9 @@ package com.xvm
                     "companiesListWindow.swf",      // xvm-company
                     "companyWindow.swf",            // xvm-company
                     "squadWindow.swf",              // xvm-squad
-                    "profileSections.swf",          // xvm-profile
-                    "battleResults.swf",
-                    "battleLoading.swf",
+                    "profileTechnique.swf",         // xvm-profile
+                    "battleResults.swf",            // xvm-hangar
+                    "battleLoading.swf",            // xvm-hangar
                     "TankCarousel.swf",             // xvm-tcarousel
                     "nodesLib.swf",                 // xvm-treeview
                     "serviceMessageComponents.swf"  // xvm-svcmsg
