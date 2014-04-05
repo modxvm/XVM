@@ -1,9 +1,10 @@
 """ xvm (c) sirmax 2013-2014 """
 
-import json
 import traceback
 import os
 import glob
+
+import simplejson as json
 
 import BigWorld
 import GUI

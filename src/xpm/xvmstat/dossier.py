@@ -14,6 +14,8 @@ from pprint import pprint
 import traceback
 from adisp import process
 
+import simplejson as json
+
 from gui.shared.gui_items import GUI_ITEM_TYPE
 from helpers.i18n import makeString
 from gui.Scaleform.locale.MENU import MENU

@@ -33,12 +33,12 @@ def getUserData(proxy, args):
 
 from pprint import pprint
 import datetime
-import json
 import traceback
 import time
 from random import randint
 import threading
-from Queue import Queue
+
+import simplejson as json
 
 import BigWorld
 from items.vehicles import VEHICLE_CLASS_TAGS

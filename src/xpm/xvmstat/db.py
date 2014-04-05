@@ -12,9 +12,10 @@ def set(dbname, key, value):
 # PRIVATE
 
 import os
-import json
 import traceback
 import threading
+
+import simplejson as json
 
 from constants import XVM_DB_DIR
 from logger import *

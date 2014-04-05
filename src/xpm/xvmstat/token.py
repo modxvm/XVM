@@ -13,10 +13,11 @@ def getXvmStatTokenData():
 
 from pprint import pprint
 from random import randint
-import json
 import traceback
 import datetime
 import time
+
+import simplejson as json
 
 import BigWorld
 from gui import SystemMessages
@@ -79,7 +80,8 @@ def _getXvmStatTokenData():
         msg += '{{l10n:token/blocked}}'
     elif tdata['status'] == 'inactive':
         msg += '{{l10n:token/inactive}}'
-    elif tdata['status'] == 'active':
+    elif tdata['status'] in [ 'active', 'requested' ]:
+        tdata['status'] = 'active'
         type = SystemMessages.SM_TYPE.Information
         msg += '{{l10n:token/active}}\n'
         s = time.time()

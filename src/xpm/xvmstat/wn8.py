@@ -13,8 +13,9 @@ def getWN8ExpectedData():
 __WN8_EXPECTED_DATA_URL = 'http://stat.modxvm.com/wn8.json'
 
 from pprint import pprint
-import json
 import traceback
+
+import simplejson as json
 
 from logger import *
 from loadurl import loadUrl

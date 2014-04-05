@@ -17,6 +17,8 @@ import os
 import re
 from subprocess import Popen, PIPE, STARTUPINFO, STARTF_USESHOWWINDOW, SW_HIDE
 
+import simplejson as json
+
 import BigWorld
 import ResMgr
 

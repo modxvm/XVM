@@ -12,9 +12,10 @@ def getVehicleInfoData():
 
 from pprint import pprint
 from math import sin, radians
-
-import json
 import traceback
+
+import simplejson as json
+
 import ResMgr
 import nations
 from items import vehicles
