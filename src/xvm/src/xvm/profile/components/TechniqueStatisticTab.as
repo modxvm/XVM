@@ -48,6 +48,8 @@ package xvm.profile.components
                 cache = new Dictionary();
                 controlsMap = new Dictionary(true);
 
+                //Logger.addObject(proxy);
+
                 controls = [
                     { y: 60,  width: DL_WIDTH, control: proxy.battlesDL },
                     { y: 77,  width: DL_WIDTH, control: proxy.winsDL },

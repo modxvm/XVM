@@ -104,11 +104,10 @@ package xvm.profile
 
         private function onSectionViewShowed(e:ViewStackEvent):void
         {
-            Logger.add("onSectionViewShowed: " + e.view);
+            //Logger.add("onSectionViewShowed: " + e.view);
 
             try
             {
-return;
                 var profileWindow:ProfileWindow = view as ProfileWindow;
 
                 if (e.view is ProfileSummary)
@@ -165,7 +164,7 @@ return;
 
         public function initializeStartPage():void
         {
-            Logger.add("initializeStartPage");
+            //Logger.add("initializeStartPage");
 
             try
             {

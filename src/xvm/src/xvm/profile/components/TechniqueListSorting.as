@@ -2,50 +2,40 @@ package xvm.profile.components
 {
     import com.xvm.*;
     import net.wg.gui.components.advanced.*;
+    import net.wg.gui.lobby.profile.pages.technique.*;
 
     // Add summary item to the first line of technique list
     public final class TechniqueListSorting
     {
-        private static const F_NATION:String = "nation";
-        private static const F_TYPE:String = "type";
-        private static const F_LEVEL:String = "level";
-        private static const F_VEHICLE_NAME:String = "vName";
-        private static const F_TOTAL_BATTLES:String = "totalBattles";
-        private static const F_TOTAL_WINS:String = "totalWins";
-        private static const F_AVG_EXP:String = "avgExperience";
-        private static const F_MASTERY:String = "mastery";
-
-        private static const NATION_INDEX:String = "nationIndex";
-        private static const TYPE_INDEX:String = "typeIndex";
-        private static const LEVEL:String = "level";
-        private static const SHORT_USER_NAME:String = "shortUserName";
-        private static const BATTLES_COUNT:String = "battlesCount";
-        private static const WINS_EFFICIENCY:String = "winsEfficiency";
-        private static const AVG_EXPERIENCE:String = "avgExperience";
-        private static const MARK_OF_MASTERY:String = "markOfMastery";
-
-        //private static var sortFunctions:Object = null;
+        private static const F_NATION_INDEX:String = TechniqueList.NATION_INDEX;
+        private static const F_TYPE_INDEX:String = TechniqueList.TYPE_INDEX;
+        private static const F_LEVEL:String = TechniqueList.LEVEL;
+        private static const F_SHORT_USER_NAME:String = TechniqueList.SHORT_USER_NAME;
+        private static const F_BATTLES_COUNT:String = TechniqueList.BATTLES_COUNT;
+        private static const F_WINS_EFFICIENCY:String = TechniqueList.WINS_EFFICIENCY;
+        private static const F_AVG_EXPERIENCE:String = TechniqueList.AVG_EXPERIENCE;
+        private static const F_MARK_OF_MASTERY:String = TechniqueList.MARK_OF_MASTERY;
 
         private static var SORT_FIELDS:Object = {
-            "nation":           { field: NATION_INDEX, options: Array.NUMERIC },
-            "type":             { field: TYPE_INDEX, options: Array.CASEINSENSITIVE },
-            "level":            { field: LEVEL, options: Array.NUMERIC | Array.DESCENDING },
-            "vName":            { field: SHORT_USER_NAME, options: Array.CASEINSENSITIVE },
-            "totalBattles":     { field: BATTLES_COUNT, options: Array.NUMERIC | Array.DESCENDING },
-            "totalWins":        { field: WINS_EFFICIENCY, options: Array.NUMERIC | Array.DESCENDING },
-            "avgExperience":    { field: AVG_EXPERIENCE, options: Array.NUMERIC | Array.DESCENDING },
-            "mastery":          { field: MARK_OF_MASTERY, options: Array.NUMERIC | Array.DESCENDING }
+            "nationIndex":    { field: TechniqueList.NATION_INDEX, options: Array.NUMERIC },
+            "typeIndex":      { field: TechniqueList.TYPE_INDEX, options: Array.CASEINSENSITIVE },
+            "level":          { field: TechniqueList.LEVEL, options: Array.NUMERIC | Array.DESCENDING },
+            "shortUserName":  { field: TechniqueList.SHORT_USER_NAME, options: Array.CASEINSENSITIVE },
+            "battlesCount":   { field: TechniqueList.BATTLES_COUNT, options: Array.NUMERIC | Array.DESCENDING },
+            "winsEfficiency": { field: TechniqueList.WINS_EFFICIENCY, options: Array.NUMERIC | Array.DESCENDING },
+            "avgExperience":  { field: TechniqueList.AVG_EXPERIENCE, options: Array.NUMERIC | Array.DESCENDING },
+            "markOfMastery":  { field: TechniqueList.MARK_OF_MASTERY, options: Array.NUMERIC | Array.DESCENDING }
         };
 
         private static var SORT_OPTIONS:Object = {
-            "nation":           [ F_NATION, F_LEVEL, F_TYPE, F_VEHICLE_NAME ],              // 1 - nation
-            "type":             [ F_TYPE, F_LEVEL, F_NATION, F_VEHICLE_NAME ],              // 2 - type
-            "level":            [ F_LEVEL, F_NATION, F_TYPE, F_VEHICLE_NAME ],              // 3 - level
-            "vName":            [ F_VEHICLE_NAME ],                                         // 4 - vName
-            "totalBattles":     [ F_TOTAL_BATTLES ],                                        // 5 - totalBattles
-            "totalWins":        [ F_TOTAL_WINS ],                                           // 6 - totalWins
-            "avgExperience":    [ F_AVG_EXP ],                                              // 7 - evgExperience
-            "mastery":          [ F_MASTERY, F_LEVEL, F_NATION, F_TYPE, F_VEHICLE_NAME ]    // 8 - mastery
+            "nationIndex":    [ F_NATION_INDEX, F_LEVEL, F_TYPE_INDEX, F_SHORT_USER_NAME ],                   // 1 - nationIndex
+            "typeIndex":      [ F_TYPE_INDEX, F_LEVEL, F_NATION_INDEX, F_SHORT_USER_NAME ],                   // 2 - typeIndex
+            "level":          [ F_LEVEL, F_NATION_INDEX, F_TYPE_INDEX, F_SHORT_USER_NAME ],                   // 3 - level
+            "shortUserName":  [ F_SHORT_USER_NAME ],                                                          // 4 - shortUserName
+            "battlesCount":   [ F_BATTLES_COUNT ],                                                            // 5 - battlesCount
+            "winsEfficiency": [ F_WINS_EFFICIENCY ],                                                          // 6 - winsEfficiency
+            "avgExperience":  [ F_AVG_EXPERIENCE ],                                                           // 7 - avgExperience
+            "markOfMastery":  [ F_MARK_OF_MASTERY, F_LEVEL, F_NATION_INDEX, F_TYPE_INDEX, F_SHORT_USER_NAME ] // 8 - markOfMastery
         };
 
         public static function sort(data:Array, btn:SortingButton):void
@@ -54,6 +44,12 @@ package xvm.profile.components
                 return;
 
             var opt:Array = SORT_OPTIONS[btn.id];
+            if (opt == null)
+            {
+                Logger.add((new Error("ERROR: unknown button id: " + btn.id)).getStackTrace());
+                return;
+            }
+
             var fields:Array = [];
             var options:Array = [];
             for (var i:int = 0; i < opt.length; ++i)
