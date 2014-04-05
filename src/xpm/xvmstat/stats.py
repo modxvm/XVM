@@ -90,6 +90,7 @@ class _Stat(object):
         self.thread = threading.Thread(target=self.req['func'])
         self.thread.daemon = True
         self.thread.start()
+        #debug('start')
         self._checkResult()
 
     def _checkResult(self):
@@ -104,6 +105,7 @@ class _Stat(object):
             except Exception, ex:
                 err('_checkResult() exception: ' + traceback.format_exc())
             finally:
+                #debug('done')
                 self.thread = None
                 self.processQueue()
 

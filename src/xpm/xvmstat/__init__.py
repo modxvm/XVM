@@ -24,6 +24,7 @@ from gui.mods.xpm import *
 from logger import *
 from xvm import g_xvm
 from websock import g_webSock
+import utils
 
 _SWFS = [
     'Application.swf',
@@ -61,11 +62,11 @@ def FlashBeforeDelete(self):
     debug("FlashBeforeDelete: " + self.swf)
     self.removeExternalCallback('xvm.cmd')
     if self.swf == _APP_SWF:
-        import appstart
-        self.removeListener(events.GUICommonEvent.APP_STARTED, appstart.AppStarted, EVENT_BUS_SCOPE.GLOBAL)
+        appstart.app = None
 #        self.removeListener(events.ShowViewEvent.SHOW_LOBBY, g_webSock.init, EVENT_BUS_SCOPE.GLOBAL)
 #        self.removeListener(events.ShowViewEvent.SHOW_LOGIN, g_webSock.stop, EVENT_BUS_SCOPE.GLOBAL)
 #        self.removeListener(events.LoadEvent.LOAD_BATTLE_LOADING, g_webSock.start, EVENT_BUS_SCOPE.GLOBAL)
+    #utils.stack_trace()
 
 
 def ProfileTechniqueWindowRequestData(base, self, data):

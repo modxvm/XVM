@@ -2,6 +2,8 @@
 
 from gui.Scaleform.framework import g_entitiesFactories, ViewSettings, ViewTypes, ScopeTemplates
 from gui.Scaleform.framework.entities.View import View
+from gui.shared import events
+from gui.shared.event_bus import EVENT_BUS_SCOPE
 
 from logger import *
 
@@ -22,6 +24,12 @@ def AppStarted(event):
     from ConnectionManager import connectionManager
 
     global app
+
+    if app is None:
+        return
+
+    app.removeListener(events.GUICommonEvent.APP_STARTED, AppStarted, EVENT_BUS_SCOPE.GLOBAL)
+    
     if BattleReplay.g_replayCtrl.autoStartBattleReplay() or connectionManager.isConnected():
         app.loadView(_alias)
     else:
