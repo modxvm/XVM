@@ -4,7 +4,7 @@
 # Command
 
 def getBattleStat(proxy, args):
-    _stat.queue.put({
+    _stat.enqueue({
         'func':_stat.getBattleStat,
         'proxy':proxy,
         'method':RESPOND_BATTLEDATA,
@@ -12,7 +12,7 @@ def getBattleStat(proxy, args):
     _stat.processQueue()
 
 def getBattleResultsStat(proxy, args):
-    _stat.queue.put({
+    _stat.enqueue({
         'func':_stat.getBattleResultsStat,
         'proxy':proxy,
         'method':RESPOND_BATTLERESULTSDATA,
@@ -20,7 +20,7 @@ def getBattleResultsStat(proxy, args):
     _stat.processQueue()
 
 def getUserData(proxy, args):
-    _stat.queue.put({
+    _stat.enqueue({
         'func':_stat.getUserData,
         'proxy':proxy,
         'method':RESPOND_USERDATA,
@@ -59,7 +59,7 @@ class _Stat(object):
 
     def __init__(self):
         player = BigWorld.player()
-        self.queue = Queue()
+        self.queue = [] # HINT: Since WoT 0.9.0 use Queue() leads to Access Violation after client closing
         self.lock = threading.RLock()
         self.thread = None
         self.req = None
@@ -71,17 +71,21 @@ class _Stat(object):
         self.cacheUser = {}
         self.info = None
 
-    def __del__(self):
-        pass
+    def enqueue(self, req):
+        with self.lock:
+            self.queue.append(req)
 
+    def dequeue(self):
+        with self.lock:
+            return self.queue.pop(0) if self.queue else None
 
     def processQueue(self):
         with self.lock:
             if self.thread is not None:
                 return
-        if self.queue.empty():
+        self.req = self.dequeue()
+        if self.req is None:
             return
-        self.req = self.queue.get()
         self.resp = None
         self.thread = threading.Thread(target=self.req['func'])
         self.thread.daemon = True

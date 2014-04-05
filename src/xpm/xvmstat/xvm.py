@@ -71,7 +71,6 @@ class Xvm(object):
             elif cmd == COMMAND_GETXVMSTATTOKENDATA:
                 res = json.dumps(getXvmStatTokenData())
             elif cmd == COMMAND_LOADBATTLESTAT:
-                #return
                 getBattleStat(proxy, args)
             elif cmd == COMMAND_LOADBATTLERESULTSSTAT:
                 getBattleResultsStat(proxy, args)
