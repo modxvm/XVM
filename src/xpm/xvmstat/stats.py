@@ -88,14 +88,14 @@ class _Stat(object):
             return
         self.resp = None
         self.thread = threading.Thread(target=self.req['func'])
-        self.thread.daemon = True
+        self.thread.daemon = False
         self.thread.start()
-        #debug('start')
+        debug('start')
         self._checkResult()
 
     def _checkResult(self):
         with self.lock:
-            #debug("checkResult: " + ("no" if self.resp is None else "yes"))
+            debug("checkResult: " + ("no" if self.resp is None else "yes"))
             self.thread.join(0.01) # 10 ms
             if self.resp is None:
                 BigWorld.callback(0.05, self._checkResult)
@@ -105,12 +105,12 @@ class _Stat(object):
             except Exception, ex:
                 err('_checkResult() exception: ' + traceback.format_exc())
             finally:
-                #debug('done')
+                debug('done')
                 self.thread = None
                 self.processQueue()
 
     def _respond(self):
-        #debug("respond: " + self.req['method'])
+        debug("respond: " + self.req['method'])
         if self.req['proxy'] and self.req['proxy'].component and self.req['proxy'].movie:
             strdata = json.dumps(self.resp)
             self.req['proxy'].movie.invoke((self.req['method'], [strdata]))

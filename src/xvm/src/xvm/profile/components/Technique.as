@@ -35,8 +35,6 @@ package xvm.profile.components
                 this._playerId = 0;
                 this._summary = summary;
 
-                //return;
-
                 // override renderer
                 list.itemRenderer = UI_TechniqueRenderer;
 

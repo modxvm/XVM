@@ -14,6 +14,7 @@ import sys
 sys.path.append('scripts/client/gui/mods/xvmstat') # for tlslite
 
 from pprint import pprint
+import time
 
 import BigWorld
 import GUI
@@ -66,7 +67,13 @@ def FlashBeforeDelete(self):
 #        self.removeListener(events.ShowViewEvent.SHOW_LOBBY, g_webSock.init, EVENT_BUS_SCOPE.GLOBAL)
 #        self.removeListener(events.ShowViewEvent.SHOW_LOGIN, g_webSock.stop, EVENT_BUS_SCOPE.GLOBAL)
 #        self.removeListener(events.LoadEvent.LOAD_BATTLE_LOADING, g_webSock.start, EVENT_BUS_SCOPE.GLOBAL)
-    #utils.stack_trace()
+#        import stats
+#        stats._stat.queue = []
+#        utils.show_threads()
+#        while stats._stat.thread is not None:
+#            log(str(stats._stat.thread))
+#            time.sleep(0.01)
+#        utils.show_threads()
 
 
 def ProfileTechniqueWindowRequestData(base, self, data):
