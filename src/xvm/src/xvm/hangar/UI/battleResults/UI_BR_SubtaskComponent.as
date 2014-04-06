@@ -13,6 +13,7 @@ package xvm.hangar.UI.battleResults
         public function UI_BR_SubtaskComponent()
         {
             super();
+            //return;
 
             var index:int = getChildIndex(awards);
             removeChild(awards);
@@ -23,12 +24,16 @@ package xvm.hangar.UI.battleResults
         override protected function configUI():void
         {
             super.configUI();
+            //return;
+
             progressList.linkage = getQualifiedClassName(UI_ProgressElement);
         }
 
         override protected function draw():void
         {
             super.draw();
+            //return;
+
             if (isInvalid(InvalidationType.DATA))
             {
                 if (this.data)

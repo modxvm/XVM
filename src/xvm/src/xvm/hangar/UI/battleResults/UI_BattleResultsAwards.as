@@ -9,15 +9,14 @@ package xvm.hangar.UI.battleResults
         override protected function draw():void
         {
             super.draw();
+            //return;
 
             if (isInvalid(InvalidationType.DATA) && this.height > 0)
             {
-
                 var offsetTop:Number = 10;
                 var offsetBottom:Number = 20;
 
                 this.awardTF.y -= offsetTop;
-                this.awardDescrTF.y -= offsetTop;
                 this.container.y -= offsetTop;
 
                 if (this.flagBottom)

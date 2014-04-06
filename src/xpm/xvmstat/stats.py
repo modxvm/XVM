@@ -90,13 +90,15 @@ class _Stat(object):
         self.thread = threading.Thread(target=self.req['func'])
         self.thread.daemon = False
         self.thread.start()
+        #self.req['func']()
         debug('start')
         self._checkResult()
 
     def _checkResult(self):
         with self.lock:
             debug("checkResult: " + ("no" if self.resp is None else "yes"))
-            self.thread.join(0.01) # 10 ms
+            if self.thread is not None:
+                self.thread.join(0.01) # 10 ms
             if self.resp is None:
                 BigWorld.callback(0.05, self._checkResult)
                 return
@@ -106,8 +108,10 @@ class _Stat(object):
                 err('_checkResult() exception: ' + traceback.format_exc())
             finally:
                 debug('done')
-                self.thread = None
-                self.processQueue()
+                if self.thread is not None:
+                    self.thread.join()
+                    self.thread = None
+                    self.processQueue()
 
     def _respond(self):
         debug("respond: " + self.req['method'])
