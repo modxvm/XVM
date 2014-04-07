@@ -13,11 +13,11 @@ class _WebSock(object):
         self._ws = None
         self._thread = None
 
-    def init(self, e):
+    def init(self, e=None):
         self.stop(e)
         self.start(e)
 
-    def start(self, e):
+    def start(self, e=None):
         debug('start')
         if not self._ws:
             self._ws = websocket.WebSocketApp(
@@ -30,7 +30,7 @@ class _WebSock(object):
             self._thread.daemon = True
             self._thread.start()
 
-    def stop(self, e):
+    def stop(self, e=None):
         debug('stop')
         if self._ws:
             self._ws.on_error = None

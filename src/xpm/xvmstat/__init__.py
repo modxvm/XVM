@@ -11,7 +11,7 @@ XPM_GAME_VERSIONS  = ["0.9.0"]
 #####################################################################
 
 import sys
-sys.path.append('scripts/client/gui/mods/xvmstat') # for tlslite
+sys.path.append('scripts/client/gui/mods/xvmstat') # for libs
 
 from pprint import pprint
 import time
@@ -38,9 +38,24 @@ _APP_SWF = 'Application.swf'
 #####################################################################
 # event handlers
 
+def start():
+    debug('start')
+    import appstart
+    from gui.shared import g_eventBus
+    g_eventBus.addListener(events.GUICommonEvent.APP_STARTED, appstart.AppStarted)
+    g_eventBus.addListener(events.ShowViewEvent.SHOW_LOBBY, g_webSock.init)
+    g_eventBus.addListener(events.ShowViewEvent.SHOW_LOGIN, g_webSock.stop)
+
+def fini():
+    debug('fini')
+    from gui.shared import g_eventBus
+    g_eventBus.removeListener(events.GUICommonEvent.APP_STARTED, appstart.AppStarted)
+    g_eventBus.removeListener(events.ShowViewEvent.SHOW_LOBBY, g_webSock.init)
+    g_eventBus.removeListener(events.ShowViewEvent.SHOW_LOGIN, g_webSock.stop)
+    g_webSock.stop()
+
 def handleKeyEvent(event):
     g_xvm.onKeyDown(event)
-
 
 def FlashInit(self, swf, className = 'Flash', args = None, path = None):
     self.swf = swf
@@ -48,13 +63,6 @@ def FlashInit(self, swf, className = 'Flash', args = None, path = None):
         return
     debug("FlashInit: " + self.swf)
     self.addExternalCallback('xvm.cmd', lambda *args: g_xvm.onXvmCommand(self, *args))
-    if self.swf == _APP_SWF:
-        import appstart
-        appstart.app = self
-        self.addListener(events.GUICommonEvent.APP_STARTED, appstart.AppStarted, EVENT_BUS_SCOPE.GLOBAL)
-#        self.addListener(events.ShowViewEvent.SHOW_LOBBY, g_webSock.init, EVENT_BUS_SCOPE.GLOBAL)
-#        self.addListener(events.ShowViewEvent.SHOW_LOGIN, g_webSock.stop, EVENT_BUS_SCOPE.GLOBAL)
-#        self.addListener(events.LoadEvent.LOAD_BATTLE_LOADING, g_webSock.start, EVENT_BUS_SCOPE.GLOBAL)
 
 
 def FlashBeforeDelete(self):
@@ -62,18 +70,6 @@ def FlashBeforeDelete(self):
         return
     debug("FlashBeforeDelete: " + self.swf)
     self.removeExternalCallback('xvm.cmd')
-    if self.swf == _APP_SWF:
-        appstart.app = None
-#        self.removeListener(events.ShowViewEvent.SHOW_LOBBY, g_webSock.init, EVENT_BUS_SCOPE.GLOBAL)
-#        self.removeListener(events.ShowViewEvent.SHOW_LOGIN, g_webSock.stop, EVENT_BUS_SCOPE.GLOBAL)
-#        self.removeListener(events.LoadEvent.LOAD_BATTLE_LOADING, g_webSock.start, EVENT_BUS_SCOPE.GLOBAL)
-#        import stats
-#        stats._stat.queue = []
-#        utils.show_threads()
-#        while stats._stat.thread is not None:
-#            log(str(stats._stat.thread))
-#            time.sleep(0.01)
-#        utils.show_threads()
 
 
 def ProfileTechniqueWindowRequestData(base, self, data):
@@ -94,6 +90,8 @@ RegisterEvent(Flash, 'beforeDelete', FlashBeforeDelete)
 # Delayed registration
 def _RegisterEvents():
     import game
+    start()
+    RegisterEvent(game, 'fini', fini)
     RegisterEvent(game, 'handleKeyEvent', handleKeyEvent)
 
     from gui.scaleform.daapi.view.lobby.profile import ProfileTechniqueWindow
