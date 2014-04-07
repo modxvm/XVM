@@ -24,4 +24,4 @@ def _Register():
     OverrideMethod(WaitingViewMeta, 'showS', WaitingViewMeta_fix)
     OverrideMethod(WaitingViewMeta, 'hideS', WaitingViewMeta_fix)
 
-BigWorld.callback(0.001, _Register)
+#BigWorld.callback(0.001, _Register)
