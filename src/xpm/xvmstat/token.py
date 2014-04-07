@@ -31,7 +31,7 @@ import utils
 _tdataPrev = None
 
 def _getXvmStatActiveTokenData():
-    playerId = _getPlayerId()
+    playerId = utils.getCurrentPlayerId()
     if playerId is None:
         return None
 
@@ -61,7 +61,7 @@ def _getXvmStatActiveTokenData():
 def _getXvmStatTokenData():
     global _tdataPrev
 
-    playerId = _getPlayerId()
+    playerId = utils.getCurrentPlayerId()
     if playerId is None:
         return None
 
@@ -110,23 +110,6 @@ def _getXvmStatTokenData():
         db.set('tokens', 'lastPlayerId', playerId)
 
     return tdata
-
-
-def _getPlayerId():
-    player = BigWorld.player()
-    if hasattr(player, 'databaseID'):
-        return player.databaseID
-
-    arena = getattr(player, 'arena', None)
-    if arena is not None:
-        vehID = getattr(player, 'playerVehicleID', None)
-        if vehID is not None and vehID in arena.vehicles:
-            return arena.vehicles[vehID]['accountDBID']
-
-    #print('===================')
-    #pprint(vars(player))
-    #print('===================')
-    return None
 
 
 def _checkToken(playerId, token):

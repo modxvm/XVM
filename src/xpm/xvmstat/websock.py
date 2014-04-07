@@ -6,20 +6,26 @@ from gui import SystemMessages
 
 from constants import *
 from logger import *
+import utils
 
 class _WebSock(object):
 
     def __init__(self):
+        self._playerId = None
         self._ws = None
         self._thread = None
 
     def init(self, e=None):
-        self.stop(e)
-        self.start(e)
+        if self._playerId == utils.getCurrentPlayerId():
+            return
+        if self._playerId is not None:
+            self.stop()
+        self.start()
 
     def start(self, e=None):
         debug('start')
         if not self._ws:
+            self._playerId = utils.getCurrentPlayerId()
             self._ws = websocket.WebSocketApp(
                 XVM_WS_URL,
                 on_open = self._on_open,
@@ -39,6 +45,7 @@ class _WebSock(object):
             self._thread.join()
             self._thread = None
         self._ws = None
+        self._playerId = None
 
     # PRIVATE
 

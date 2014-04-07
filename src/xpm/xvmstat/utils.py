@@ -5,6 +5,8 @@ import sys
 import traceback
 import threading
 
+import BigWorld
+
 from logger import *
 
 def is_replay():
@@ -22,3 +24,19 @@ def rm(fname):
 def show_threads():
     for t in threading.enumerate():
         debug('Thread: %s' % t.getName())
+
+def getCurrentPlayerId():
+    player = BigWorld.player()
+    if hasattr(player, 'databaseID'):
+        return player.databaseID
+
+    arena = getattr(player, 'arena', None)
+    if arena is not None:
+        vehID = getattr(player, 'playerVehicleID', None)
+        if vehID is not None and vehID in arena.vehicles:
+            return arena.vehicles[vehID]['accountDBID']
+
+    #print('===================')
+    #pprint(vars(player))
+    #print('===================')
+    return None
