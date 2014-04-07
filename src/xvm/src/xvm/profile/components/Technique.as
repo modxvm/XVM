@@ -39,8 +39,7 @@ package xvm.profile.components
                 list.itemRenderer = UI_TechniqueRenderer;
 
                 // Initialize TechniqueStatisticsTab
-                // TODO: FIXIT
-                //list.addEventListener(TechniqueList.SELECTED_DATA_CHANGED, listSelectedDataChanged);
+                list.addEventListener(TechniqueList.SELECTED_DATA_CHANGED, listSelectedDataChanged);
 
                 // Add summary item to the first line of technique list
                 techniqueListAdjuster = new TechniqueListAdjuster(page);

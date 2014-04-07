@@ -80,11 +80,19 @@ package xvm.profile.components
                 return;
             }
 
+
             try
             {
                 updatingActive = true;
 
-                addSummaryItem();
+                // Add Summary Item
+                if (getSummaryItemIndex() == -1)
+                {
+                    list.validateNow();
+                    setList();
+                    (list.dataProvider as Array).unshift(summaryItem);
+                    sortList();
+                }
 
                 if (!initialized)
                 {
@@ -130,21 +138,6 @@ package xvm.profile.components
         }
 
         // PRIVATE
-
-        private function addSummaryItem():void
-        {
-            //Logger.add("addSummaryItem");
-            var data:Array = list.dataProvider as Array;
-            if (data == null || data.length <= 0)
-                return;
-            if (getSummaryItemIndex() == -1)
-            {
-                list.validateNow();
-                setList();
-                data.unshift(summaryItem);
-                sortList();
-            }
-        }
 
         private function updateStackComponentButtonBar(isCommonInfo:Boolean):void
         {

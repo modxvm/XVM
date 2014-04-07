@@ -16,26 +16,29 @@ package xvm.profile.components
 
     public class TechniqueStatisticTab
     {
-        private static const DL_WIDTH:int = 210;
+        private static const COLUMN1_WIDTH:int = 210;
         private var proxy:UI_TechniqueStatisticTab;
 
         private var _raw_data:ProfileVehicleDossierVO;
 
-        private var cache:Dictionary;
-        private var controlsMap:Dictionary;
-        private var controls:Array;
+        //private var cache:Dictionary;
+        //private var controlsMap:Dictionary;
+        //private var controls:Array;
+
         public var lastBattleTimeTF:TextField;
         public var ratingTF:TextField;
-        public var maxDamageDL:DashLineTextItem;
-        public var maxDamageDLLabelTextFormat:TextFormat;
-        public var maxDamageDLValueTextFormat:TextFormat;
-        public var specDamageDL:DashLineTextItem;
-        public var avgCaptureDL:DashLineTextItem;
-        public var avgDefenceDL:DashLineTextItem;
-        public var bottomTF:TextField;
-        public var extraDataPanel:Sprite;
-        public var extraDataPanelHeader:TextField;
-        public var extraDataPanelLines:Array;
+
+        //public var maxDamageDL:DashLineTextItem;
+        //public var maxDamageDLLabelTextFormat:TextFormat;
+        //public var maxDamageDLValueTextFormat:TextFormat;
+        //public var specDamageDL:DashLineTextItem;
+        //public var avgCaptureDL:DashLineTextItem;
+        //public var avgDefenceDL:DashLineTextItem;
+        //public var bottomTF:TextField;
+
+        //public var extraDataPanel:Sprite;
+        //public var extraDataPanelHeader:TextField;
+        //public var extraDataPanelLines:Array;
 
         // ENTRY POINTS
 
@@ -45,11 +48,12 @@ package xvm.profile.components
             try
             {
                 this.proxy = proxy;
-                cache = new Dictionary();
-                controlsMap = new Dictionary(true);
+                //cache = new Dictionary();
+                //controlsMap = new Dictionary(true);
 
                 //Logger.addObject(proxy);
 
+                /*
                 controls = [
                     { y: 60,  width: DL_WIDTH, control: proxy.battlesDL },
                     { y: 77,  width: DL_WIDTH, control: proxy.winsDL },
@@ -74,9 +78,13 @@ package xvm.profile.components
                     { y: 422, width: DL_WIDTH, control: proxy.avgDetectedDL }
                     //{ y: 473, width: DL_WIDTH, control: proxy.avgScoutingDmgDL }
                 ];
+                */
 
-                createControls();
+                createLastBattleTimeTF();
+                createRatingTF();
+                //createControls();
 
+                /*
                 controls.push(
                     { y: 202, width: DL_WIDTH, control: maxDamageDL },
                     { y: 439, width: DL_WIDTH, control: specDamageDL },         // vehicle only
@@ -84,9 +92,10 @@ package xvm.profile.components
                     { y: 456, width: DL_WIDTH, control: avgDefenceDL },         // summary only
                     { y: 473, width: DL_WIDTH + 200, control: bottomTF }
                 );
+                */
 
                 setupControls();
-                createTextFields();
+                //createTextFields();
                 updateCommonData(null);
             }
             catch (ex:Error)
@@ -137,6 +146,8 @@ package xvm.profile.components
                 {
                     updateVehicleData(vehId);
                 }
+
+                proxy.updateBase(raw_data);
             }
             catch (ex:Error)
             {
@@ -160,11 +171,50 @@ package xvm.profile.components
 
         // PRIVATE
 
+        // utils
+
         private function get tech():Technique
         {
             return page ? page.getChildByName("xvm_extension") as Technique : null;
         }
 
+        private function parseNumber(str:String):Number
+        {
+            var s:String = "";
+            var a:Array = str.split('');
+            for (var i:int = 0; i < a.length; ++i)
+            {
+                var x:String = a[i];
+                if (x >= '0' && x <= '9')
+                    s += x;
+            }
+            return parseInt(s);
+        }
+
+        private function formatHtmlText(txt:String, color:uint=1):String
+        {
+            return this.color(size("<span class='txt'>" + (color == 1 ? txt : this.color(txt, color)) + "</span>"));
+        }
+
+        private function size(txt:String, sz:uint=12):String
+        {
+            return "<font size='" + sz.toString() + "'>" + txt + "</font>";
+        }
+
+        private function color(txt:String, color:uint=Defines.UICOLOR_LIGHT):String
+        {
+            return "<font color='#" + color.toString(16) + "'>" + txt + "</font>";
+        }
+
+        private function setStatData(data:DossierBase):void
+        {
+            var stat:StatData = Stat.getUserDataByName(tech.playerName);
+            if (stat == null)
+                return;
+            data.stat = stat;
+        }
+
+        /*
         private function TF(dl:DashLineTextItem):TextField
         {
             return controlsMap[dl];
@@ -174,41 +224,47 @@ package xvm.profile.components
         {
             return extraDataPanelLines[n];
         }
+        */
 
-        private function setupControls():void
+        // create controls
+
+        private function createLastBattleTimeTF():void
         {
-            var team:Boolean = page && page.battlesDropdown && (page.battlesDropdown.selectedItem == PROFILE.PROFILE_DROPDOWN_LABELS_TEAM);
+            // last battle time
+            lastBattleTimeTF = new TextField();
+            lastBattleTimeTF.antiAliasType = AntiAliasType.ADVANCED;
+            lastBattleTimeTF.selectable = false;
+            lastBattleTimeTF.wordWrap = false;
+            lastBattleTimeTF.x = 0;
+            if (!Config.config.userInfo.showExtraDataInProfile)
+                lastBattleTimeTF.x -= 40;
+            lastBattleTimeTF.y = -30;
+            lastBattleTimeTF.width = 450;
+            lastBattleTimeTF.height = 25;
+            lastBattleTimeTF.styleSheet = Utils.createTextStyleSheet("txt", new TextFormat("$FieldFont", 14, Defines.UICOLOR_LABEL));
+            proxy.addChild(lastBattleTimeTF);
+        }
 
-            for each (var c:Object in controls)
-            {
-                if (c.hasOwnProperty("y"))
-                    c.control.y = c.y;
-                if (c.hasOwnProperty("width"))
-                    c.control.width = c.width;
-            }
-
-            proxy.winsPercentSign.x = proxy.winsDL.x + proxy.winsDL.width;
-            proxy.winsPercentSign.y = proxy.winsDL.y;
-            proxy.winsPercentSign.antiAliasType = AntiAliasType.NORMAL;
-            proxy.winsPercentSign.visible = team;
-
-            proxy.defeatsPercentSign.x = proxy.defeatsDL.x + proxy.defeatsDL.width;
-            proxy.defeatsPercentSign.y = proxy.defeatsDL.y;
-            proxy.defeatsPercentSign.antiAliasType = AntiAliasType.NORMAL;
-            proxy.defeatsPercentSign.visible = team;
-
-            proxy.survivePercentSign.x = proxy.surviveDL.x + proxy.surviveDL.width;
-            proxy.survivePercentSign.y = proxy.surviveDL.y;
-            proxy.survivePercentSign.antiAliasType = AntiAliasType.NORMAL;
-            proxy.survivePercentSign.visible = team;
-
-            proxy.accuracyPercentSign.x = proxy.accuracyDL.x + proxy.accuracyDL.width;
-            proxy.accuracyPercentSign.y = proxy.accuracyDL.y;
-            proxy.accuracyPercentSign.antiAliasType = AntiAliasType.NORMAL;
+        private function createRatingTF():void
+        {
+            ratingTF = new TextField();
+            ratingTF.antiAliasType = AntiAliasType.ADVANCED;
+            ratingTF.multiline = true;
+            ratingTF.selectable = false;
+            ratingTF.wordWrap = false;
+            ratingTF.x = /*proxy.efficiencyTF.x +*/ COLUMN1_WIDTH + 5;
+            if (!Config.config.userInfo.showExtraDataInProfile)
+                ratingTF.x -= 20;
+            ratingTF.y = /*proxy.battlesDL.y - 62*/0;
+            ratingTF.width = 400;
+            ratingTF.height = 80;
+            ratingTF.styleSheet = Utils.createTextStyleSheet("txt", new TextFormat("$FieldFont", 16, Defines.UICOLOR_LABEL));
+            proxy.addChild(ratingTF);
         }
 
         private function createControls():void
         {
+            /*
             if (Config.config.userInfo.showExtraDataInProfile)
             {
                 for each (var c:Object in controls)
@@ -282,34 +338,6 @@ package xvm.profile.components
                 XDL(15).label = Locale.get("Average ricochets received");
             }
 
-            // last battle time
-            lastBattleTimeTF = new TextField();
-            lastBattleTimeTF.antiAliasType = AntiAliasType.ADVANCED;
-            lastBattleTimeTF.selectable = false;
-            lastBattleTimeTF.wordWrap = false;
-            lastBattleTimeTF.x = 0;
-            if (!Config.config.userInfo.showExtraDataInProfile)
-                lastBattleTimeTF.x -= 40;
-            lastBattleTimeTF.y = -30;
-            lastBattleTimeTF.width = 450;
-            lastBattleTimeTF.height = 25;
-            lastBattleTimeTF.styleSheet = Utils.createTextStyleSheet("txt", new TextFormat("$FieldFont", 14, Defines.UICOLOR_LABEL));
-            proxy.addChild(lastBattleTimeTF);
-
-            ratingTF = new TextField();
-            ratingTF.antiAliasType = AntiAliasType.ADVANCED;
-            ratingTF.multiline = true;
-            ratingTF.selectable = false;
-            ratingTF.wordWrap = false;
-            ratingTF.x = proxy.efficiencyTF.x + DL_WIDTH + 5;
-            if (!Config.config.userInfo.showExtraDataInProfile)
-                ratingTF.x -= 20;
-            ratingTF.y = proxy.battlesDL.y - 62;
-            ratingTF.width = 400;
-            ratingTF.height = 80;
-            ratingTF.styleSheet = Utils.createTextStyleSheet("txt", new TextFormat("$FieldFont", 16, Defines.UICOLOR_LABEL));
-            proxy.addChild(ratingTF);
-
             bottomTF = new TextField();
             bottomTF.antiAliasType = AntiAliasType.ADVANCED;
             bottomTF.selectable = false;
@@ -319,8 +347,11 @@ package xvm.profile.components
             bottomTF.height = 80;
             bottomTF.styleSheet = Utils.createTextStyleSheet("txt", new TextFormat("$FieldFont", 12, Defines.UICOLOR_LABEL));
             proxy.addChild(bottomTF);
+            */
         }
 
+
+        /*
         private function createTextFields():void
         {
             for each (var c:* in controls)
@@ -349,6 +380,32 @@ package xvm.profile.components
                     TF(dl).htmlText = "";
             }
         }
+        */
+
+        // update data
+
+        private function prepareData(dossier:DossierBase):void
+        {
+            try
+            {
+                if (dossier == null)
+                    return;
+
+                //Logger.addObject(dossier.getAllVehiclesList());
+                // skip empty result - data is not loaded yet
+                if (dossier.battles <= 0)
+                    return;
+
+                if (dossier.stat == null)
+                    setStatData(dossier);
+
+                //Logger.addObject(data);
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
+        }
 
         private function updateGlobalRatings(data:DossierBase):void
         {
@@ -375,6 +432,7 @@ package xvm.profile.components
 
         private function updateCommonData(data:DossierBase):void
         {
+            /*
             clearTextFields();
 
             if (data == null)
@@ -440,6 +498,7 @@ package xvm.profile.components
                 showExtraData(data);
 
             //bottomTF.htmlText = "<textformat leading='-2'>" + formatHtmlText(getBottomText(data)) + "</textformat>";
+            */
         }
 
         private function updateSummaryData():void
@@ -454,28 +513,62 @@ package xvm.profile.components
             lastBattleTimeTF.htmlText = "<p class='txt' align='right'>" + data.lastBattleTimeStr + "</p>";
 
             updateGlobalRatings(data);
-            updateCommonData(data);
+            //updateCommonData(data);
 
-            TF(proxy.maxExpDL).htmlText = formatHtmlText(data.maxXPVehicleName, Defines.UICOLOR_GOLD2);
-            TF(proxy.maxKillDL).htmlText = formatHtmlText(data.maxFragsVehicleName, Defines.UICOLOR_GOLD2);
-            TF(maxDamageDL).htmlText = formatHtmlText(size(data.maxDamageVehicleName), Defines.UICOLOR_GOLD2);
+            //TF(proxy.maxExpDL).htmlText = formatHtmlText(data.maxXPVehicleName, Defines.UICOLOR_GOLD2);
+            //TF(proxy.maxKillDL).htmlText = formatHtmlText(data.maxFragsVehicleName, Defines.UICOLOR_GOLD2);
+            //TF(maxDamageDL).htmlText = formatHtmlText(size(data.maxDamageVehicleName), Defines.UICOLOR_GOLD2);
 
-            specDamageDL.visible = false;
-            TF(specDamageDL).htmlText = "";
+            //specDamageDL.visible = false;
+            //TF(specDamageDL).htmlText = "";
 
-            avgCaptureDL.visible = data.stat != null;
-            avgDefenceDL.visible = data.stat != null;
-            if (data.stat != null)
+            //avgCaptureDL.visible = data.stat != null;
+            //avgDefenceDL.visible = data.stat != null;
+            //if (data.stat != null)
+            //{
+            //    avgCaptureDL.value = color(size(App.utils.locale.float(data.stat.cap / data.stat.b)));
+            //    avgDefenceDL.value = color(size(App.utils.locale.float(data.stat.def / data.stat.b)));
+            //}
+        }
+
+
+        private function setupControls():void
+        {
+            /*
+            var team:Boolean = page && page.battlesDropdown && (page.battlesDropdown.selectedItem == PROFILE.PROFILE_DROPDOWN_LABELS_TEAM);
+
+            for each (var c:Object in controls)
             {
-                avgCaptureDL.value = color(size(App.utils.locale.float(data.stat.cap / data.stat.b)));
-                avgDefenceDL.value = color(size(App.utils.locale.float(data.stat.def / data.stat.b)));
+                if (c.hasOwnProperty("y"))
+                    c.control.y = c.y;
+                if (c.hasOwnProperty("width"))
+                    c.control.width = c.width;
             }
+
+            proxy.winsPercentSign.x = proxy.winsDL.x + proxy.winsDL.width;
+            proxy.winsPercentSign.y = proxy.winsDL.y;
+            proxy.winsPercentSign.antiAliasType = AntiAliasType.NORMAL;
+            proxy.winsPercentSign.visible = team;
+
+            proxy.defeatsPercentSign.x = proxy.defeatsDL.x + proxy.defeatsDL.width;
+            proxy.defeatsPercentSign.y = proxy.defeatsDL.y;
+            proxy.defeatsPercentSign.antiAliasType = AntiAliasType.NORMAL;
+            proxy.defeatsPercentSign.visible = team;
+
+            proxy.survivePercentSign.x = proxy.surviveDL.x + proxy.surviveDL.width;
+            proxy.survivePercentSign.y = proxy.surviveDL.y;
+            proxy.survivePercentSign.antiAliasType = AntiAliasType.NORMAL;
+            proxy.survivePercentSign.visible = team;
+
+            proxy.accuracyPercentSign.x = proxy.accuracyDL.x + proxy.accuracyDL.width;
+            proxy.accuracyPercentSign.y = proxy.accuracyDL.y;
+            proxy.accuracyPercentSign.antiAliasType = AntiAliasType.NORMAL;
+            */
         }
 
         private function updateVehicleData(vehId:uint):void
         {
             lastBattleTimeTF.htmlText = "";
-
             Dossier.loadVehicleDossier(this, updateVehicleDataCallback, vehId, tech.playerId);
         }
 
@@ -488,7 +581,7 @@ package xvm.profile.components
             prepareData(data);
 
             updateGlobalRatings(data);
-            updateCommonData(data);
+            /*updateCommonData(data);
 
             var vdata:VehicleData = VehicleInfo.get(dossier.vehId);
             if (vdata == null)
@@ -560,31 +653,10 @@ package xvm.profile.components
 
             avgCaptureDL.visible = false;
             avgDefenceDL.visible = false;
+            */
         }
 
-        private function prepareData(dossier:DossierBase):void
-        {
-            try
-            {
-                if (dossier == null)
-                    return;
-
-                //Logger.addObject(dossier.getAllVehiclesList());
-                // skip empty result - data is not loaded yet
-                if (dossier.battles <= 0)
-                    return;
-
-                if (dossier.stat == null)
-                    setStatData(dossier);
-
-                //Logger.addObject(data);
-            }
-            catch (ex:Error)
-            {
-                Logger.add(ex.getStackTrace());
-            }
-        }
-
+        /*
         private function getWinsToNextPercentStr(data:DossierBase):String
         {
             // Wins to next percent
@@ -616,7 +688,9 @@ package xvm.profile.components
 
             return info;
         }
+        */
 
+        /*
         private function showExtraData(data:DossierBase):void
         {
             XDL(0).value = formatHtmlText(Utils.FormatDate("H:i:s", new Date(null, null, null, null, null, data.avgBattleLifeTime)));
@@ -649,41 +723,6 @@ package xvm.profile.components
             XDL(14).value = formatHtmlText(App.utils.locale.numberWithoutZeros(data.avgPiercedReceived_8_8));
             XDL(15).value = formatHtmlText(App.utils.locale.numberWithoutZeros(data.avgNoDamageShotsReceived_8_8));
         }
-
-        private function setStatData(data:DossierBase):void
-        {
-            var stat:StatData = Stat.getUserDataByName(tech.playerName);
-            if (stat == null)
-                return;
-            data.stat = stat;
-        }
-
-        private function parseNumber(str:String):Number
-        {
-            var s:String = "";
-            var a:Array = str.split('');
-            for (var i:int = 0; i < a.length; ++i)
-            {
-                var x:String = a[i];
-                if (x >= '0' && x <= '9')
-                    s += x;
-            }
-            return parseInt(s);
-        }
-
-        private function formatHtmlText(txt:String, color:uint=1):String
-        {
-            return this.color(size("<span class='txt'>" + (color == 1 ? txt : this.color(txt, color)) + "</span>"));
-        }
-
-        private function size(txt:String, sz:uint=12):String
-        {
-            return "<font size='" + sz.toString() + "'>" + txt + "</font>";
-        }
-
-        private function color(txt:String, color:uint=Defines.UICOLOR_LIGHT):String
-        {
-            return "<font color='#" + color.toString(16) + "'>" + txt + "</font>";
-        }
+        */
     }
 }

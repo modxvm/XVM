@@ -35,25 +35,25 @@ package xvm.profile.UI
 
             if (worker.page && worker.page.battlesDropdown && (worker.page.battlesDropdown.selectedItem == PROFILE.PROFILE_DROPDOWN_LABELS_TEAM))
             {
-                worker.extraDataPanel.visible = false;
+                //TODO:0.9.0 worker.extraDataPanel.visible = false;
                 worker.lastBattleTimeTF.htmlText = "";
                 worker.ratingTF.htmlText = "";
-                worker.bottomTF.htmlText = "";
-                worker.maxDamageDL.labelTextField.textColor = Defines.UICOLOR_DISABLED;
-                worker.maxDamageDL.value = "<font color='#" + Defines.UICOLOR_DISABLED.toString(16) + "' size='12'>--</font>";
-                worker.specDamageDL.visible = false;
-                worker.avgCaptureDL.visible = false;
-                worker.avgDefenceDL.visible = false;
+                //TODO:0.9.0 worker.bottomTF.htmlText = "";
+                //TODO:0.9.0 worker.maxDamageDL.labelTextField.textColor = Defines.UICOLOR_DISABLED;
+                //TODO:0.9.0 worker.maxDamageDL.value = "<font color='#" + Defines.UICOLOR_DISABLED.toString(16) + "' size='12'>--</font>";
+                //TODO:0.9.0 worker.specDamageDL.visible = false;
+                //TODO:0.9.0 worker.avgCaptureDL.visible = false;
+                //TODO:0.9.0 worker.avgDefenceDL.visible = false;
                 //TODO:0.9.0 winsPercentSign.visible = true;
                 //TODO:0.9.0 defeatsPercentSign.visible = true;
                 //TODO:0.9.0 survivePercentSign.visible = true;
-                worker.clearTextFields();
+                //TODO:0.9.0 worker.clearTextFields();
                 super.update(arg1);
                 return;
             }
 
-            worker.extraDataPanel.visible = true;
-            worker.maxDamageDL.labelTextField.textColor = Defines.UICOLOR_LABEL;
+            //TODO:0.9.0 worker.extraDataPanel.visible = true;
+            //TODO:0.9.0 worker.maxDamageDL.labelTextField.textColor = Defines.UICOLOR_LABEL;
 
             if(!isDataInitialized)
             {
@@ -67,6 +67,11 @@ package xvm.profile.UI
             }
 
             worker.update(arg1 as ProfileVehicleDossierVO);
+        }
+
+        public function updateBase(arg:Object):void
+        {
+            super.update(arg);
         }
 
         public function get baseDisposed():Boolean
