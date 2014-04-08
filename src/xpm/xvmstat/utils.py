@@ -4,6 +4,7 @@ import os
 import sys
 import traceback
 import threading
+from pprint import pprint
 
 import BigWorld
 
@@ -40,3 +41,12 @@ def getCurrentPlayerId():
     #pprint(vars(player))
     #print('===================')
     return None
+
+def openWebBrowser(url, allowInternalBrowser=True):
+    openBrowser = BigWorld.wg_openWebBrowser
+    if allowInternalBrowser:
+        from gui.WindowsManager import g_windowsManager
+        browser = g_windowsManager.window.browser
+        if browser is not None:
+            openBrowser = browser.openBrowser
+    openBrowser(url)
