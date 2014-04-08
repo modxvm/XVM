@@ -81,7 +81,12 @@ class Xvm(object):
                 getDossier(proxy, args)
             elif cmd == COMMAND_OPEN_URL:
                 if len(args[0]) and args[0].lower().startswith('http://www.modxvm.com'):
-                    BigWorld.wg_openWebBrowser(args[0])
+                    from gui.WindowsManager import g_windowsManager
+                    browser = g_windowsManager.window.browser
+                    if browser is not None:
+                        openBrowser = browser.openBrowser(args[0])
+                    else:
+                        BigWorld.wg_openWebBrowser(args[0])
             elif cmd == COMMAND_LOAD_SETTINGS:
                 pass # TODO
             elif cmd == COMMAND_SAVE_SETTINGS:
