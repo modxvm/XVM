@@ -20,7 +20,8 @@ from gui.shared.gui_items import GUI_ITEM_TYPE
 from helpers.i18n import makeString
 from gui.Scaleform.locale.MENU import MENU
 
-from gui.mods.xpm import *
+from xpm import *
+
 from constants import *
 from logger import *
 

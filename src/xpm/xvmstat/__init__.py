@@ -10,9 +10,6 @@ XPM_GAME_VERSIONS  = ["0.9.0"]
 
 #####################################################################
 
-import sys
-sys.path.append('scripts/client/gui/mods/xvmstat') # for libs
-
 from pprint import pprint
 import time
 
@@ -21,7 +18,8 @@ import GUI
 from gui.shared import events
 from gui.shared.event_bus import EVENT_BUS_SCOPE
 
-from gui.mods.xpm import *
+from xpm import *
+
 from logger import *
 from xvm import g_xvm
 from websock import g_webSock
@@ -61,14 +59,14 @@ def FlashInit(self, swf, className = 'Flash', args = None, path = None):
     self.swf = swf
     if self.swf not in _SWFS:
         return
-    debug("FlashInit: " + self.swf)
+    log("FlashInit: " + self.swf)
     self.addExternalCallback('xvm.cmd', lambda *args: g_xvm.onXvmCommand(self, *args))
 
 
 def FlashBeforeDelete(self):
     if self.swf not in _SWFS:
         return
-    debug("FlashBeforeDelete: " + self.swf)
+    log("FlashBeforeDelete: " + self.swf)
     self.removeExternalCallback('xvm.cmd')
 
 

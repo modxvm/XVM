@@ -10,7 +10,7 @@ XPM_GAME_VERSIONS  = ["0.8.11","0.9.0"]
 
 #####################################################################
 
-from gui.mods.xpm import *
+from xpm import *
 
 def WaitingViewMeta_fix(base, self, *args):
     try:

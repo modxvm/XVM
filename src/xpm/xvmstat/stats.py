@@ -43,7 +43,8 @@ import simplejson as json
 import BigWorld
 from items.vehicles import VEHICLE_CLASS_TAGS
 
-from gui.mods.xpm import *
+from xpm import *
+
 from constants import *
 from logger import *
 from gameregion import region

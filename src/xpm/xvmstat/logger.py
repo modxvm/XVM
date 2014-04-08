@@ -2,7 +2,8 @@
 
 import datetime
 
-from gui.mods.xpm import *
+from xpm import *
+
 from constants import XVM_LOG_FILE_NAME
 
 #############################
@@ -18,9 +19,6 @@ def debug(s):
     if IS_DEVELOPMENT:
         log(s, '[DEBUG] ')
 
-def trace(*args):
-    if IS_DEVELOPMENT:
-        log(s, '[TRACE] ')
 
 #############################
 # Private

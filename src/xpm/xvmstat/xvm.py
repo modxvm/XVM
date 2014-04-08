@@ -9,7 +9,7 @@ import simplejson as json
 import BigWorld
 import GUI
 
-from gui.mods.xpm import *
+from xpm import *
 
 from constants import *
 from logger import *

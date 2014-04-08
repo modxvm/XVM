@@ -1,5 +1,6 @@
 """ XPM misc functions (c) sirmax 2013-2014 """
 
+import os
 import datetime
 import json
 import codecs
@@ -8,9 +9,9 @@ import random
 #####################################################################
 # Global constants
 
-#IS_DEVELOPMENT = False
-IS_DEVELOPMENT = True
-
+IS_DEVELOPMENT = os.environ.get('XPM_DEVELOPMENT') != None
+if IS_DEVELOPMENT:
+    print '[XPM] Development mode'
 
 #####################################################################
 # Common methods
@@ -120,6 +121,7 @@ def __event_handler(prepend, e, m, *a, **k):
     except:
         logtrace(__file__)
 
+
 def OverrideMethod(cls, method, handler):
     i = 0
     while True:
@@ -129,7 +131,6 @@ def OverrideMethod(cls, method, handler):
         i += 1
     setattr(cls, newm, getattr(cls, method))
     setattr(cls, method, lambda *a, **k: handler(getattr(cls, newm), *a, **k))
-
 
 
 #####################################################################

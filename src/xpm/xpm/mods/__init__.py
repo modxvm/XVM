@@ -1,15 +1,15 @@
 """ XPM mods loader (c) sirmax 2013-2014 """
 
-import gui.mods.xpm
-
-import ResMgr
 import glob
 import os
+import ResMgr
 from gui import VERSION_FILE_PATH
 
+# get version
 ver = ResMgr.openSection(VERSION_FILE_PATH).readString('version')
 ver = ver[2:-5] # 'v.0.8.7 #512' or 'v.0.8.7 Common Test #499'
 
+# determine work dir
 try:
     wd = None
     sec = ResMgr.openSection('../paths.xml')
@@ -17,7 +17,7 @@ try:
     vals = subsec.values()
     for val in vals:
         path = val.asString + '/scripts/client/gui/mods'
-        if os.path.isdir(path) and os.path.isfile(path + '/xpm.pyc'):
+        if os.path.isdir(path) and os.path.isfile(path + '/lib/xpm.pyc'):
             wd = path
             break
     if not wd:
@@ -29,12 +29,19 @@ except Exception, err:
 
 print "[XPM] Working dir: " + wd
 
-for m in glob.iglob(wd + "/*"):
-    if os.path.isdir(m) and os.path.exists(m + "/__init__.pyc"):
+# add libs to path
+import sys
+sys.path.append('%s/lib' % wd)
+
+import xpm
+
+# load mods
+for m in glob.iglob('%s/*' % wd):
+    if os.path.isdir(m) and os.path.exists('%s/__init__.pyc' % m):
         try:
             m = m[m.replace("\\", "/").rfind("/")+1:]
             print("[XPM] Loading mod: " + m),
-            mod = __import__("gui.mods." + m, globals(), locals(),
+            mod = __import__("gui.mods.%s" % m, globals(), locals(),
                 ['XPM_MOD_VERSION',
                  'XPM_MOD_URL',
                  'XPM_MOD_UPDATE_URL',

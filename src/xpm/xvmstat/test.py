@@ -18,7 +18,7 @@ def runTest(args):
 import BigWorld
 import cPickle
 import traceback
-from gui.mods.xpm import *
+from xpm import *
 from logger import *
 
 def _showBattleResults(arenaUniqueID):

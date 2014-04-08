@@ -1,6 +1,6 @@
 """ xvm (c) sirmax 2013-2014 """
 
-from gui.mods.xpm import *
+from xpm import *
 from logger import *
 
 # PUBLIC

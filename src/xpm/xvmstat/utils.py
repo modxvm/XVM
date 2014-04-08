@@ -23,7 +23,7 @@ def rm(fname):
 
 def show_threads():
     for t in threading.enumerate():
-        debug('Thread: %s' % t.getName())
+        log('Thread: %s' % t.getName())
 
 def getCurrentPlayerId():
     player = BigWorld.player()
