@@ -41,15 +41,16 @@ def start():
     import appstart
     from gui.shared import g_eventBus
     g_eventBus.addListener(events.GUICommonEvent.APP_STARTED, appstart.AppStarted)
-    g_eventBus.addListener(events.ShowViewEvent.SHOW_LOBBY, g_webSock.init)
-    g_eventBus.addListener(events.ShowViewEvent.SHOW_LOGIN, g_webSock.stop)
+    #g_eventBus.addListener(events.ShowViewEvent.SHOW_LOBBY, g_webSock.init)
+    #g_eventBus.addListener(events.ShowViewEvent.SHOW_LOGIN, g_webSock.stop)
+    g_webSock.start()
 
 def fini():
     debug('fini')
     from gui.shared import g_eventBus
     g_eventBus.removeListener(events.GUICommonEvent.APP_STARTED, appstart.AppStarted)
-    g_eventBus.removeListener(events.ShowViewEvent.SHOW_LOBBY, g_webSock.init)
-    g_eventBus.removeListener(events.ShowViewEvent.SHOW_LOGIN, g_webSock.stop)
+    #g_eventBus.removeListener(events.ShowViewEvent.SHOW_LOBBY, g_webSock.init)
+    #g_eventBus.removeListener(events.ShowViewEvent.SHOW_LOGIN, g_webSock.stop)
     g_webSock.stop()
 
 def handleKeyEvent(event):
