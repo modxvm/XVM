@@ -22,6 +22,7 @@ from wn8 import getWN8ExpectedData
 from token import getXvmStatTokenData
 from test import runTest
 import utils
+from websock import g_websock
 
 NO_LOG_COMMANDS = (
   COMMAND_LOG,
@@ -40,7 +41,7 @@ NO_LOG_COMMANDS = (
 
 class Xvm(object):
     def __init__(self):
-        pass
+        self.currentPlayerId = None
 
     def onXvmCommand(self, proxy, id, cmd, *args):
         try:
@@ -118,6 +119,16 @@ class Xvm(object):
                 mods.append(m)
         return json.dumps(mods) if mods else None
 
+    def onShowLobby(self, e=None):
+        playerId = utils.getCurrentPlayerId()
+        if playerId is not None and self.currentPlayerId != playerId:
+            self.currentPlayerId = playerId
+            g_websock.send('id/%d' % playerId)
+
+    def onShowLogin(self, e=None):
+        if self.currentPlayerId is not None:
+            self.currentPlayerId = None
+            g_websock.send('id')
 
 g_xvm = Xvm()
 

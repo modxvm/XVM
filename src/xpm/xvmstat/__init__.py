@@ -22,7 +22,7 @@ from xpm import *
 
 from logger import *
 from xvm import g_xvm
-from websock import g_webSock
+from websock import g_websock
 import utils
 
 _SWFS = [
@@ -39,20 +39,17 @@ def start():
     import appstart
     from gui.shared import g_eventBus
     g_eventBus.addListener(events.GUICommonEvent.APP_STARTED, appstart.AppStarted)
-    #g_eventBus.addListener(events.ShowViewEvent.SHOW_LOBBY, g_webSock.init)
-    #g_eventBus.addListener(events.ShowViewEvent.SHOW_LOGIN, g_webSock.stop)
-    g_webSock.start()
+    g_eventBus.addListener(events.ShowViewEvent.SHOW_LOBBY, g_xvm.onShowLobby)
+    g_eventBus.addListener(events.ShowViewEvent.SHOW_LOGIN, g_xvm.onShowLogin)
+    g_websock.start()
 
 def fini():
     debug('fini')
     from gui.shared import g_eventBus
     g_eventBus.removeListener(events.GUICommonEvent.APP_STARTED, appstart.AppStarted)
-    #g_eventBus.removeListener(events.ShowViewEvent.SHOW_LOBBY, g_webSock.init)
-    #g_eventBus.removeListener(events.ShowViewEvent.SHOW_LOGIN, g_webSock.stop)
-    g_webSock.stop()
-
-def handleKeyEvent(event):
-    g_xvm.onKeyDown(event)
+    g_eventBus.removeListener(events.ShowViewEvent.SHOW_LOBBY, g_xvm.onShowLobby)
+    g_eventBus.removeListener(events.ShowViewEvent.SHOW_LOGIN, g_xvm.onShowLogin)
+    g_websock.stop()
 
 def FlashInit(self, swf, className = 'Flash', args = None, path = None):
     self.swf = swf
@@ -89,7 +86,7 @@ def _RegisterEvents():
     import game
     start()
     RegisterEvent(game, 'fini', fini)
-    RegisterEvent(game, 'handleKeyEvent', handleKeyEvent)
+    RegisterEvent(game, 'handleKeyEvent', g_xvm.onKeyDown)
 
     from gui.scaleform.daapi.view.lobby.profile import ProfileTechniqueWindow
     OverrideMethod(ProfileTechniqueWindow, 'requestData', ProfileTechniqueWindowRequestData)

@@ -42,6 +42,12 @@ class _WebSock(object):
         self._ws = None
         self._playerId = None
 
+    
+    def send(self, msg):
+        if self._ws is not None:
+            self._ws.send(msg)
+
+    
     # PRIVATE
 
     def _on_open(self, ws):
@@ -68,4 +74,4 @@ class _WebSock(object):
         #SystemMessages.pushMessage(msg, type)
         err('WebSocket err: ' + traceback.format_exc())
 
-g_webSock = _WebSock()
+g_websock = _WebSock()
