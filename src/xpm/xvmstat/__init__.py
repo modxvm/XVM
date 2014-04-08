@@ -31,8 +31,6 @@ _SWFS = [
     'VehicleMarkersManager.swf',
     ]
 
-_APP_SWF = 'Application.swf'
-
 #####################################################################
 # event handlers
 
