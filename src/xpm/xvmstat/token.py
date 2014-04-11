@@ -80,8 +80,7 @@ def _getXvmStatTokenData():
         msg += '{{l10n:token/blocked}}'
     elif tdata['status'] == 'inactive':
         msg += '{{l10n:token/inactive}}'
-    elif tdata['status'] in [ 'active', 'requested' ]:
-        tdata['status'] = 'active'
+    elif tdata['status'] == 'active':
         type = SystemMessages.SM_TYPE.Information
         msg += '{{l10n:token/active}}\n'
         s = time.time()
