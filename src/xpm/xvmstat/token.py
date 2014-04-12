@@ -129,7 +129,11 @@ def _checkToken(playerId, token):
             pass
         else:
             try:
+                if response is None:
+                    return None
+                response = response.strip()
                 data = None if response in ('', '[]') else json.loads(response)
+                log(utils.hide_guid(response))
             except Exception, ex:
                 err('  Bad answer: ' + response)
                 data = None

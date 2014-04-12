@@ -2,6 +2,7 @@
 
 import os
 import sys
+import re
 import traceback
 import threading
 from pprint import pprint
@@ -21,6 +22,10 @@ def touch(fname, times=None):
 def rm(fname):
     if os.path.isfile(fname):
         os.remove(fname)
+
+def hide_guid(txt):
+    return re.sub('([0-9A-Fa-f]{8}-)[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}(-[0-9A-Fa-f]{12})', \
+        '\\1****-****-****\\2', txt)
 
 def show_threads():
     for t in threading.enumerate():
