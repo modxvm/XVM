@@ -16,7 +16,6 @@ import time
 import BigWorld
 import GUI
 from gui.shared import events
-from gui.shared.event_bus import EVENT_BUS_SCOPE
 
 from xpm import *
 

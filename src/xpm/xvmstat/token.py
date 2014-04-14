@@ -31,14 +31,14 @@ import utils
 _tdataPrev = None
 
 def _getXvmStatActiveTokenData():
-    playerId = utils.getCurrentPlayerId()
+    playerId = getCurrentPlayerId()
     if playerId is None:
         return None
 
     tdata = db.get('tokens', playerId)
     if tdata is None:
         # fallback to the last player id if replay is running
-        if utils.is_replay():
+        if isReplay():
             playerId = db.get('tokens', 'lastPlayerId')
             if playerId is None:
                 return None
@@ -61,7 +61,7 @@ def _getXvmStatActiveTokenData():
 def _getXvmStatTokenData():
     global _tdataPrev
 
-    playerId = utils.getCurrentPlayerId()
+    playerId = getCurrentPlayerId()
     if playerId is None:
         return None
 

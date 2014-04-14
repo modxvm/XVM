@@ -19,6 +19,10 @@ if IS_DEVELOPMENT:
 def log(msg):
     print datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S:'), msg
 
+def debug(msg):
+    if IS_DEVELOPMENT:
+        log('[DEBUG] %s' % msg)
+
 def msec(start, end):
     td = end - start
     return int(td.microseconds / 1000 + td.seconds * 1000)
@@ -51,7 +55,6 @@ def uniq(seq):
         if e not in checked:
             checked.append(e)
     return checked
-
 
 #################################################################
 # Singleton
@@ -91,6 +94,32 @@ class EventHook(object):
         for theHandler in self.__handlers:
             if theHandler.im_self == inObject:
                 self -= theHandler
+
+
+#################################################################
+# WG-Specific
+
+import BigWorld
+
+def getCurrentPlayerId():
+    player = BigWorld.player()
+    if hasattr(player, 'databaseID'):
+        return player.databaseID
+
+    arena = getattr(player, 'arena', None)
+    if arena is not None:
+        vehID = getattr(player, 'playerVehicleID', None)
+        if vehID is not None and vehID in arena.vehicles:
+            return arena.vehicles[vehID]['accountDBID']
+
+    #print('===================')
+    #pprint(vars(player))
+    #print('===================')
+    return None
+
+def isReplay():
+    import BattleReplay
+    return BattleReplay.g_replayCtrl.isPlaying
 
 
 #####################################################################
@@ -136,7 +165,6 @@ def OverrideMethod(cls, method, handler):
 #####################################################################
 # Setup development environment
 
-import BigWorld
 def _autoFlushPythonLog():
     BigWorld.flushPythonLog()
     BigWorld.callback(0.1, _autoFlushPythonLog)

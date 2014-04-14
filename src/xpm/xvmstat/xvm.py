@@ -120,7 +120,7 @@ class Xvm(object):
         return json.dumps(mods) if mods else None
 
     def onShowLobby(self, e=None):
-        playerId = utils.getCurrentPlayerId()
+        playerId = getCurrentPlayerId()
         if playerId is not None and self.currentPlayerId != playerId:
             self.currentPlayerId = playerId
             g_websock.send('id/%d' % playerId)

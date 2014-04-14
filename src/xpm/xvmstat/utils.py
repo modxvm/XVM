@@ -11,10 +11,6 @@ import BigWorld
 
 from logger import *
 
-def is_replay():
-    import BattleReplay
-    return BattleReplay.g_replayCtrl.isPlaying
-
 def touch(fname, times=None):
     with open(fname, 'a'):
         os.utime(fname, times)
@@ -30,22 +26,6 @@ def hide_guid(txt):
 def show_threads():
     for t in threading.enumerate():
         log('Thread: %s' % t.getName())
-
-def getCurrentPlayerId():
-    player = BigWorld.player()
-    if hasattr(player, 'databaseID'):
-        return player.databaseID
-
-    arena = getattr(player, 'arena', None)
-    if arena is not None:
-        vehID = getattr(player, 'playerVehicleID', None)
-        if vehID is not None and vehID in arena.vehicles:
-            return arena.vehicles[vehID]['accountDBID']
-
-    #print('===================')
-    #pprint(vars(player))
-    #print('===================')
-    return None
 
 def openWebBrowser(url, allowInternalBrowser=True):
     openBrowser = BigWorld.wg_openWebBrowser
