@@ -5,8 +5,9 @@ XVM-5.2.1-dev:
   * localization: New rules for localization submission. Details: https://code.google.com/p/wot-xvm/wiki/LocalizingXVM
 
 XVM-5.2.0-test1:
-  [MAYOR UPDATE]
-  * Statistics must be enabled in the personal cabinet on the http://www.modxvm.com/ site
+  [MAYOR UPDATES]
+  * main config file (xvm.xc) moved to res_mods/xvm/configs
+  * statistics must be enabled in the personal cabinet on the http://www.modxvm.com/ site
 
   [NEW FUNCTIONS]
   * localization: added Chinese(Simplified)
@@ -16,7 +17,6 @@ XVM-5.2.0-test1:
 
   [OTHER]
   * stat: changed address of the stats server (now https://stat.modxvm.com/)
-  * main config file (xvm.xc) moved to res_mods/xvm/configs
   * option battle/useStandardMarkers moved to markers/useStandardMarkers
   * option battle/removePanelsModeSwitcher moved to playersPanel/removePanelsModeSwitcher
   * config version increased to 5.0.2

@@ -1,6 +1,23 @@
 ﻿XVM-5.2.1-dev:
   * adaptation to WoT 0.9.0.CT1
 
+XVM-5.2.0-test1:
+  [MAYOR UPDATES]
+  * main config file (xvm.xc) moved to res_mods/xvm/configs
+  * statistics must be enabled in the personal cabinet on the http://www.modxvm.com/ site
+
+  [NEW FUNCTIONS]
+  * localization: added Chinese(Simplified)
+  * stat: use an encrypted connection.
+  * added new special scheme name for <img> tag: xvm:// - path relative to res_mods/xvm folder
+      for example: <img src='xvm://configs/my/icons/foo.png'>
+
+  [OTHER]
+  * stat: changed address of the stats server (now https://stat.modxvm.com/)
+  * option battle/useStandardMarkers moved to markers/useStandardMarkers
+  * option battle/removePanelsModeSwitcher moved to playersPanel/removePanelsModeSwitcher
+  * config version increased to 5.0.2
+
 XVM-5.1.0:
   * adaptation pour WoT 0.8.11
   * classement WN par défaut changé en WN8

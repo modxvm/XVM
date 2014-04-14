@@ -5,8 +5,9 @@ XVM-5.2.1-dev:
   * локализация: Новая система отправки переводов в проект. Подробности: https://code.google.com/p/wot-xvm/wiki/LocalizingXVM
 
 XVM-5.2.0-test1:
-  [ВАЖНОЕ ИЗМЕНЕНИЕ]
-  * Статистика должна быть включена в личном кабинете на сайте http://www.modxvm.com/
+  [ВАЖНЫЕ ИЗМЕНЕНИЯ]
+  * основной файл конфига (xvm.xc) перемещен в res_mods/xvm/configs
+  * статистика должна быть включена в личном кабинете на сайте http://www.modxvm.com/
 
   [НОВЫЕ ФУНКЦИИ]
   * локализация: добавлен китайский(упрощенный)
@@ -16,7 +17,6 @@ XVM-5.2.0-test1:
 
   [ДРУГОЕ]
   * stat: изменен адрес сервера статистики (теперь https://stat.modxvm.com/ )
-  * основной файл конфига (xvm.xc) перемещен в res_mods/xvm/configs
   * опция battle/useStandardMarkers перенесена в markers/useStandardMarkers
   * опция battle/removePanelsModeSwitcher перенесена в playersPanel/removePanelsModeSwitcher
   * версия конфига увеличена до 5.0.2
