@@ -44,7 +44,7 @@ package xvm.svcmsg
         public static function fixData(value:NotificationInfoVO):NotificationInfoVO
         {
             if (value != null)
-                value.messageVO.message = Locale.get(value.messageVO.message).split("#XVM_SITE#").join('event:http://www.modxvm.com/');
+                value.messageVO.message = Locale.get(value.messageVO.message).split("#XVM_SITE#").join('event:http://www.modxvm.com/#wot-main');
             return value;
         }
 
