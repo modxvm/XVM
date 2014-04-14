@@ -109,7 +109,7 @@ class _Stat(object):
                 err('_checkResult() exception: ' + traceback.format_exc())
             finally:
                 debug('done')
-                if self.thread is not None:
+                if self.thread:
                     self.thread.join()
                     self.thread = None
                     self.processQueue()
