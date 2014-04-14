@@ -1,28 +1,27 @@
 ﻿XVM-5.2.1-dev:
-  * adaptation to WoT 0.9.0.CT1
+  * adaptation pour WoT 0.9.0.CT1
+
+  [NOUVEAUTÉS]
+  * traduction : changement de la manière d'envoyer les traductions. Plus de détails : https://code.google.com/p/wot-xvm/wiki/LocalizingXVM
+
 
 XVM-5.2.0-test1:
-  [MAYOR UPDATES]
-  * main config file (xvm.xc) moved to res_mods/xvm/configs
-  * statistics must be enabled in the personal cabinet on the http://www.modxvm.com/ site
+  [CHANGEMENTS MAJEURS]
+  * fichier de configuration principal (xvm.xc) déplacé dans res_mods/xvm/configs
+  * les statistiques doivent désormais être activées dans les paramètres personnels sur http://www.modxvm.com/
 
-  [NEW FUNCTIONS]
-  * localization: added Chinese(Simplified)
-  * stat: use an encrypted connection.
-  * added new special scheme name for <img> tag: xvm:// - path relative to res_mods/xvm folder
-      for example: <img src='xvm://configs/my/icons/foo.png'>
+  [NOUVEAUTÉS]
+  * traduction : ajout du Chinois (simplifié)
+  * statistiques : utilisation d'une connexion cryptée
+  * ajout d'une nouveau format pour spécifier le chemin d'une image pour le tag <img> : 
+    xvm:// - chemin relatif au dossier res_mods/xvm
+      par exemple : <img src='xvm://configs/perso/icones/exemple.png'>
 
-  [OTHER]
-  * stat: changed address of the stats server (now https://stat.modxvm.com/)
-  * option battle/useStandardMarkers moved to markers/useStandardMarkers
-  * option battle/removePanelsModeSwitcher moved to playersPanel/removePanelsModeSwitcher
-  * config version increased to 5.0.2
-
-XVM-5.1.0:
-  * adaptation pour WoT 0.8.11
-  * classement WN par défaut changé en WN8
-  * nouvelles options :
-      (battleLoading|battleResults|statisticForm)/showBattleTier - affiche le tier de la bataille
+  [AUTRES]
+  * statistiques : changement de l'adresse du serveur de stats (désormais https://stat.modxvm.com/)
+  * l'option battle/useStandardMarkers changée en markers/useStandardMarkers
+  * l'option battle/removePanelsModeSwitcher changée en playersPanel/removePanelsModeSwitcher
+  * version de la configuration augmentée en 5.0.2
 
 
 XVM-5.0.2:
