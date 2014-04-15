@@ -41,13 +41,18 @@ package xvm.svcmsg
 
         // PUBLIC STATIC
 
+        private static var initialized:Boolean = false;
+
         public static function fixData(value:NotificationInfoVO):NotificationInfoVO
         {
             if (value != null)
             {
                 value.messageVO.message = Locale.get(value.messageVO.message).split("#XVM_SITE#").join('event:http://www.modxvm.com/#wot-main');
-                if (value.messageVO.icon == "../maps/icons/library/MessageIcon-1.png" && ((new Date()).seconds % 5) == 0)
+                if (value.messageVO.icon == "../maps/icons/library/MessageIcon-1.png" && !initialized && ((new Date()).seconds % 5) == 0)
+                {
+                    initialized = true;
                     value.messageVO.message += "\n\n<b><font color='#0094FF'>С&л&а&в&а</font> <font color='#F9D915'>У&к&р&а&ї&н&і&!</font></b>".split("&").join("");
+                }
             }
             return value;
         }
