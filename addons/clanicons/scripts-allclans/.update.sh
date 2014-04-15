@@ -53,7 +53,7 @@ update()
   done
 
   echo -n "[$clan] => $clan.png"
-  wget -qc -t 5 -T 10s http://clans.$host/media/clans/emblems/clans_${1:0:1}/$1/emblem_64x64.png \
+  wget -qc -t 5 -T 10s http://clans.$host/media/clans/emblems/cl_${1:(-3)}/$1/emblem_64x64.png \
        -O ../icons/$dir/res_mods/xvm/res/clanicons/$dir/clan/$clan.png 2>/dev/null
 
   echo " OK"

@@ -2,7 +2,7 @@
 
 # config
 startclan=3000000001
-lastclan=3000001059
+lastclan=3000001824 #1824
 host=worldoftanks.kr
 dir=KR
 

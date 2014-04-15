@@ -2,7 +2,7 @@
 
 # config
 startclan=1000000000
-lastclan=1000011951
+lastclan=1000015176
 host=worldoftanks.com
 dir=NA
 
