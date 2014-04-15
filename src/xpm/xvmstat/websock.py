@@ -16,6 +16,7 @@ class _WebSock(object):
 
 
     def start(self, e=None):
+        return # TODO: temprorary disabled
         debug('WebSocket: start')
         if self._ws:
             raise Exception('WebSocket: already connected')
@@ -32,6 +33,7 @@ class _WebSock(object):
 
 
     def stop(self, e=None):
+        return # TODO: temprorary disabled
         debug('WebSocket: stop')
         if self._ws:
             self._ws.on_error = None

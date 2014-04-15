@@ -1,5 +1,5 @@
-﻿XVM-5.2.1-dev:
-  * adaptation pour WoT 0.9.0.CT1
+﻿XVM-5.2.1-test1:
+  * adaptation pour WoT 0.9.0
 
   [NOUVEAUTÉS]
   * traduction : changement de la manière d'envoyer les traductions. Plus de détails : https://code.google.com/p/wot-xvm/wiki/LocalizingXVM
