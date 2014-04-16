@@ -141,7 +141,7 @@
     "germany-Pz_IV_AusfH":              {"name": null, "short": null},
     "germany-RhB_Waffentrager":         {"name": null, "short": null},
     "germany-S35_captured":             {"name": null, "short": null},
-    "germany:StuG_40_AusfG":            {"name": null, "short": null},
+    "germany-StuG_40_AusfG":            {"name": null, "short": null},
     "germany-Sturer_Emil":              {"name": null, "short": null},
     "germany-Sturmpanzer_II":           {"name": null, "short": null},
     "germany-T-15":                     {"name": null, "short": null},
