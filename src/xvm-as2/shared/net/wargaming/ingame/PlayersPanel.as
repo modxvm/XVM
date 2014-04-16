@@ -13,6 +13,7 @@
     var m_frags: TextField;
     var m_vehicles: TextField;
     var m_list: MovieClip;
+    var m_type: String;
     var players_bg: MovieClip;
 
     function setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStr, vehiclesStr, namesStr);

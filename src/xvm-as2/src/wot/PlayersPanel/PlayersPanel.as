@@ -116,16 +116,10 @@ class wot.PlayersPanel.PlayersPanel
     private function setDataImpl(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStr, vehiclesStr, namesStr)
     {
         //Logger.add("PlayersPanel.setData()");
-        // fix WG bug - double redrawing panels on kill
-        var me = this;
-        wrapper.onEnterFrame = function()
-        {
-            var start = new Date();
-            delete this.onEnterFrame;
-            me.setData2(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStr, vehiclesStr, namesStr);
-            if (PlayersPanel.DEBUG_TIMES)
-                Logger.add("DEBUG TIME: PlayersPanel: setData2(" + this.m_type + "): " + Utils.elapsedMSec(start, new Date()) + " ms");
-        }
+        var start = new Date();
+        setData2(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStr, vehiclesStr, namesStr);
+        if (PlayersPanel.DEBUG_TIMES)
+            Logger.add("DEBUG TIME: PlayersPanel: setData2(" + this.base.m_type + "): " + Utils.elapsedMSec(start, new Date()) + " ms");
     }
 
     private var _init:Boolean = false;
