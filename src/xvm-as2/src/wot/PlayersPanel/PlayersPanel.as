@@ -116,10 +116,10 @@ class wot.PlayersPanel.PlayersPanel
     private function setDataImpl(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStr, vehiclesStr, namesStr)
     {
         //Logger.add("PlayersPanel.setData()");
-        var start = new Date();
+        //var start = new Date();
         setData2(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStr, vehiclesStr, namesStr);
-        if (PlayersPanel.DEBUG_TIMES)
-            Logger.add("DEBUG TIME: PlayersPanel: setData2(" + this.base.m_type + "): " + Utils.elapsedMSec(start, new Date()) + " ms");
+        //if (PlayersPanel.DEBUG_TIMES)
+        //    Logger.add("DEBUG TIME: PlayersPanel: setData2(" + this.base.m_type + "): " + Utils.elapsedMSec(start, new Date()) + " ms");
     }
 
     private var _init:Boolean = false;
@@ -147,7 +147,7 @@ class wot.PlayersPanel.PlayersPanel
         //Logger.add("PlayersPanel.setData2()");
         //Logger.add("_lastAdjustedState: " + _lastAdjustedState);
         //Logger.addObject(data, 3);
-        //Logger.add(vehiclesStr);
+        //Logger.add(vehiclesStrOrig);
         //Logger.add(namesStr);
         try
         {

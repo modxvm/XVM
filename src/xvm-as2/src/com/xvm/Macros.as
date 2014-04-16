@@ -40,13 +40,14 @@ class com.xvm.Macros
 
     public static function RegisterPlayerData(name:String, data:Object, team:Number)
     {
-        if (!data)
+        if (!data || !VehicleInfo.initialized)
             return;
 
         var pname = Utils.GetNormalizedPlayerName(name);
 
         Cache.Get("_m/" + pname + "/" + data.vehicle, function()
         {
+            //Logger.addObject(data);
             if (!Macros.data_provider.hasOwnProperty(pname))
                 Macros.data_provider[pname] = { };
             var pdata = Macros.data_provider[pname];
@@ -56,6 +57,7 @@ class com.xvm.Macros
                 (data.label.indexOf("[") >= 0 || !data.clanAbbrev ? "" : "[" + data.clanAbbrev + "]"));
 
             var vdata:VehicleData = VehicleInfo.getByIcon(data.icon);
+            //Logger.addObject(vdata);
 
             // {{nick}}
             pdata["nick"] = nick;

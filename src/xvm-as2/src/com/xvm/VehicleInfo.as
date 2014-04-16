@@ -53,6 +53,8 @@ class com.xvm.VehicleInfo
 
     // PRIVATE
 
+    public static var initialized:Boolean = false;
+
     private var vehicles:Object;
     private var vehiclesMapKey:Object;
     private var vehiclesMapName:Object;
@@ -79,6 +81,7 @@ class com.xvm.VehicleInfo
         //Logger.add("onVehicleInfoData(): " + json_str);
         try
         {
+            initialized = true;
             var data_array:Object = JSONx.parse(json_str);
             for (var n in data_array)
             {
