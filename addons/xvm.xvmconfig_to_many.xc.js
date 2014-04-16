@@ -7,7 +7,7 @@
 ******************************************************************************/
 
 // версия скрипта
-var script_version = "9.5";
+var script_version = "9.7";
 
 // массив названий секций
 var sections = [    // порядок секций лучше не менять
@@ -129,6 +129,10 @@ var sectionsComments = {
         ru: '  // Р‘Р»РѕРє СѓРїСЂР°РІР»РµРЅРёРµРј СЃС‚Р°С‚РёСЃС‚РёРєРѕР№ (С‚РѕР»СЊРєРѕ СЃ xvm-stat).',
         en: '  // Options for player statistics (only with xvm-stat).'
     },
+    elements: {
+        ru: '  // Р‘Р»РѕРє СѓРїСЂР°РІР»РµРЅРёРµРј СЃС‚Р°С‚РёСЃС‚РёРєРѕР№ (С‚РѕР»СЊРєРѕ СЃ xvm-stat).',
+        en: '  // Options for player statistics (only with xvm-stat).'
+    },
     minimapCircles: {
         ru: '  // РљСЂСѓРіРё РЅР° РјРёРЅРёРєР°СЂС‚Рµ.',
         en: '  // Minimap circles.'
@@ -143,6 +147,11 @@ var sectionsComments = {
     }
 }
 
+var regexpOpen = /{/g;
+var regexpClose = /}/g;
+var openBr = "{";
+var closeBr = "}";
+	
 // Определяем язык системы
 var reg = WScript.CreateObject('WScript.Shell');
 var Rus=reg.RegRead('HKLM\\SYSTEM\\CurrentControlSet\\Control\\Nls\\Language\\Default');
@@ -226,14 +235,21 @@ for ( var j = 0; j < sections.length; j++) {
     if (i == inputConfig.length) {
         inputConfig.splice(startIndex+1, 0, sectionsComments[section].en, sectionsComments[section].ru, "  "+sections[j]+": {", "    ", "  },");
         i = startIndex + 3;
-        // если миникарта-пустышка, запоминаем это
+        // если миникарта или battle пустышка, запоминаем это
         if (section == "minimap")
             var blankMinimap = true;
+        if (section == "battle")
+            var blankBattle = true;
     } else if (section == "minimap") {
         if ( diffBraces(inputConfig[i]) == 0)
             blankMinimap = true;
         else
             blankMinimap = false;
+    } else if (section == "battle") {
+        if ( diffBraces(inputConfig[i]) == 0)
+            blankBattle = true;
+        else
+            blankBattle = false;
     }
     // если перед секцией нет комментария, записываем дефолтный
     if (numberComments(i)==0) {
@@ -292,7 +308,7 @@ if (fso.FileExists(path+author+"\\minimap.xc")) {
                         '"circles"',
                         '"labels"',
                         '"lines"'
-                ];
+               ];
     // массив для хранения исходного конфига
     inputConfig = fileToArray(path+author+"\\minimap.xc");
 
@@ -432,17 +448,91 @@ if (fso.FileExists(path+author+"\\markers.xc")) {
     fout.Close();
 }
 
-// Прописываем созданный конфиг к загрузке, если конфиг скрипт лежал в res_mods/xvm/anyFolder/script.js
+/******************************************************************************/
+/**               Секция battle                                               */
+/******************************************************************************/
+if (fso.FileExists(path+author+"\\battle.xc")) {
+    // массив названий секций battle
+    sections = [    // порядок секций лучше не менять
+                        '"elements"'
+               ];
+    // массив для хранения исходного конфига
+    inputConfig = fileToArray(path+author+"\\battle.xc");
+
+    i = 0;
+    // ищем начало секции battle
+    while ( i < inputConfig.length && !isStart(inputConfig[i], '"battle"'))
+            i++;
+    if (i != inputConfig.length)
+        startIndex = i;
+		
+	regexpOpen = /\[/g;
+	regexpClose = /]/g;
+	openBr = "[";
+	closeBr = "]";
+	
+    // ищем вхождения всех секций
+    for ( j = 0; j < sections.length; j++) {
+        i = 0;
+        //ищем строку, содержащую секцию
+        while ( i < inputConfig.length && !isStart(inputConfig[i], sections[j]))
+            i++;
+        // получаем название секции без кавычек
+        section = sections[j].substring(0, sections[j].length-1);
+        section = section.substring(1);
+        // если не нашли, прописываем пустышку
+        if (i == inputConfig.length) {
+            inputConfig.splice(startIndex+1, 0, sectionsComments[section].en, sectionsComments[section].ru, "  "+sections[j]+": [", "    ", "  ],");
+            i = startIndex+3;
+            // фикс для не добавления запятой, если секция-пустышка завершает файл
+            var lastRef = false;
+            if (j == sections.length-1 && blankBattle)
+                lastRef = true;
+        }
+        // если перед секцией нет комментария, записываем дефолтный
+        if (numberComments(i)==0) {
+            inputConfig.splice(i, 0, sectionsComments[section].en, sectionsComments[section].ru);
+            i = i + 2;
+        }
+        startIndex = i;
+        // создаем файл для записи секции
+        file_out = path+author+"\\"+section+".xc";
+        fout=fso.OpenTextFile(file_out,2,true,false);
+        fout.WriteLine("{");
+        // копируем секцию в файл
+        writeSection();
+        // завершаем секцию и закрываем файл
+        fout.WriteLine("  ]");
+        fout.WriteLine("}");
+        fout.Close();
+        // создаем строку для записи в главный файл конфига подстановки вместо секции
+        input_string = "    "+sections[j]+": ${\""+section+".xc\""+":"+sections[j]+"}";
+        // если секция не последняя в конфиге, надо добавить запятую
+        if (inputConfig[i].indexOf(",") != -1 && !lastRef)
+            input_string = input_string + ",";
+        // записываем подстановку в главный файл конфига
+        inputConfig.splice(i, 1, input_string, "");
+    }
+
+    // переносим отстатки секции minimap из массива в файл minimap/minimap.xc
+    file_out = path+author+"\\battle.xc";
+    fout=fso.OpenTextFile(file_out,2,true,false);
+    for ( i = 0; i < inputConfig.length; i++)
+        fout.WriteLine(inputConfig[i]);
+    // закрываем файл
+    fout.Close();
+}
+
+// Прописываем созданный конфиг к загрузке, если скрипт лежал в res_mods/xvm/anyFolder/script.js
 var xvmFolder = path.substring(0, path.length-1);
-var scriptFolder = xvmFolder.substring(xvmFolder.lastIndexOf("\\")+1);
 xvmFolder = xvmFolder.substring(0, xvmFolder.lastIndexOf("\\")+1);
 var change = "";
 if (xvmFolder.substring(xvmFolder.length-14) == "\\res_mods\\xvm\\") {
-    file_out = xvmFolder+"xvm.xc";
+    file_out = xvmFolder+"configs\\xvm.xc";
     if (fso.FileExists(file_out))
-        fso.GetFile(file_out).copy(xvmFolder+"xvm.xc.old");
+        fso.GetFile(file_out).copy(xvmFolder+"configs\\xvm.xc.old");
     fout=fso.OpenTextFile(file_out,2,true,false);
-    fout.WriteLine('${"'+scriptFolder+'/'+author+'/@xvm.xc":"."}');
+    fout.WriteLine('${"'+author+'/@xvm.xc":"."}');
     if (Rus)
         change = '\nИ прописан к загрузке в:\n"'+xvmFolder+'xvm.xc"';
     else
@@ -465,14 +555,16 @@ WScript.Quit();
 
 // Функция подсчета разницы количества открывающих и закрывающих скобок в строке
 function diffBraces(line) {
+  //WScript.Echo(brace);
+  //WScript.Quit();
   var openBraces = 0;
   var closeBraces = 0;
   // Считаем открывающие
-  if (line.indexOf("{") != -1)
-    openBraces = line.match(/{/g).length;
+  if (line.indexOf(openBr) != -1)
+    openBraces = line.match(regexpOpen).length;
   // Считаем закрывающие
-  if (line.indexOf("}") != -1)
-    closeBraces = line.match(/}/g).length;
+  if (line.indexOf(closeBr) != -1)
+    closeBraces = line.match(regexpClose).length;
   // возвращаем разницу
   return openBraces-closeBraces
 }
@@ -481,7 +573,7 @@ function diffBraces(line) {
 function isStart(line, sect) {
   if ( line.substring(0, 3) == "п»ї")
     line = line.substring(3);
-  while (line.indexOf(" ") == 0 || line.indexOf("   ") == 0 )
+  while (line.indexOf(" ") == 0 || line.indexOf("\t") == 0 )
     line = line.substring(1);
   if (line.indexOf(sect) == 0)
     return true
