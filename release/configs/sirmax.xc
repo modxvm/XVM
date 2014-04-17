@@ -45,6 +45,7 @@
   },
   "login": {
     "skipIntro": true,
+    "saveLastServer": true,
     "autologin": true,
     "confirmOldReplays": true,
     "pingServers": ${"def.pingServers"}

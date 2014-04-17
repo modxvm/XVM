@@ -71,6 +71,19 @@ def ProfileTechniqueWindowRequestData(base, self, data):
 #    else:
 #        self.as_responseVehicleDossierS({})
 
+def LoginView_onSetOptions(base, self, optionsList, host):
+    if not g_xvm.config['login']['saveLastServer']:
+        base(self, optionsList, host)
+    else:
+        options = []
+        selectedId = 0
+        searchForHost = host
+        for idx, (key, name) in enumerate(optionsList):
+            if key == searchForHost:
+                selectedId = idx
+            options.append({'data': key, 'label': name})
+        self.as_setServersListS(options, selectedId)
+
 
 #####################################################################
 # Register events
@@ -87,7 +100,10 @@ def _RegisterEvents():
     RegisterEvent(game, 'fini', fini)
     RegisterEvent(game, 'handleKeyEvent', g_xvm.onKeyDown)
 
-    from gui.scaleform.daapi.view.lobby.profile import ProfileTechniqueWindow
+    from gui.Scaleform.daapi.view.lobby.profile import ProfileTechniqueWindow
     OverrideMethod(ProfileTechniqueWindow, 'requestData', ProfileTechniqueWindowRequestData)
+
+    from gui.Scaleform.daapi.view.login import LoginView
+    OverrideMethod(LoginView, 'onSetOptions', LoginView_onSetOptions)
 
 BigWorld.callback(0.001, _RegisterEvents)

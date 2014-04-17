@@ -5,7 +5,6 @@ import com.xvm.Config;
 class com.xvm.Cmd
 {
     private static var COMMAND_LOG:String = "log";
-    private static var COMMAND_PING:String = "ping";
     private static var COMMAND_GETSCREENSIZE:String = "getScreenSize";
     private static var COMMAND_GETGAMEREGION:String = "getGameRegion";
     private static var COMMAND_GETLANGUAGE:String = "getLanguage";
@@ -21,11 +20,6 @@ class com.xvm.Cmd
     public static function log(str:String)
     {
         _call(null, null, [COMMAND_LOG, str]);
-    }
-
-    public static function ping(target:Object, callback:Function)
-    {
-        _call(target, callback, [COMMAND_PING]);
     }
 
     public static function getScreenSize(target:Object, callback:Function)

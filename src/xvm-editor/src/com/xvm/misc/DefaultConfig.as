@@ -61,6 +61,7 @@ package com.xvm.misc
         {
             var c:Object = new Object();
             c.skipIntro = true;
+            c.saveLastServer = false;
             c.autologin = false;
             c.confirmOldReplays = false;
             // Show ping to the servers

@@ -67,12 +67,13 @@ package com.xvm
                     "companiesListWindow.swf",      // xvm-company
                     "companyWindow.swf",            // xvm-company
                     "squadWindow.swf",              // xvm-squad
-                    "profileTechnique.swf",         // xvm-profile
                     "battleResults.swf",            // xvm-hangar
                     "battleLoading.swf",            // xvm-hangar
                     "TankCarousel.swf",             // xvm-tcarousel
                     "nodesLib.swf",                 // xvm-treeview
-                    "serviceMessageComponents.swf"  // xvm-svcmsg
+                    "serviceMessageComponents.swf", // xvm-svcmsg
+                    "profileStatistics.swf",        // xvm-profile
+                    "profileTechnique.swf"          // xvm-profile
                 ];
                 for (var x:int = 0; x < preload.length; ++x)
                 {

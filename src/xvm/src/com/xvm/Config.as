@@ -211,6 +211,8 @@ package com.xvm
                 config.languageDetected ? "detected" : "config"));
             //Logger.addObject(config, "config", 10);
 
+            Cmd.setConfig();
+
             loaded = true;
             loading = false;
             for each (var l:Object in listeners)

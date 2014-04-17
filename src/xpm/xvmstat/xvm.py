@@ -26,6 +26,7 @@ from websock import g_websock
 
 NO_LOG_COMMANDS = (
   COMMAND_LOG,
+  COMMAND_SET_CONFIG,
   COMMAND_PING,
   COMMAND_GETMODS,
   COMMAND_GETVEHICLEINFODATA,
@@ -42,6 +43,7 @@ NO_LOG_COMMANDS = (
 class Xvm(object):
     def __init__(self):
         self.currentPlayerId = None
+        self.config = None
 
     def onXvmCommand(self, proxy, id, cmd, *args):
         try:
@@ -51,6 +53,8 @@ class Xvm(object):
             res = None
             if cmd == COMMAND_LOG:
                 log(*args)
+            elif cmd == COMMAND_SET_CONFIG:
+                self.config = json.loads(args[0])
             elif cmd == COMMAND_PING:
                 #return
                 ping(proxy)

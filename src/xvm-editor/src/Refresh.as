@@ -111,6 +111,7 @@ private function RefreshLoginPage():void
 
         section = Config.config.login;
         this.p_login.v_skipIntro.value = section.skipIntro;
+        this.p_login.v_saveLastServer = section.saveLastServer;
         this.p_login.v_autologin.value = section.autologin;
         this.p_login.v_confirmOldReplays.value = section.confirmOldReplays;
 

@@ -3,6 +3,9 @@
   * players panels was not shown after battle loading
   * fixed displaying of elements on minimap
 
+  [NEW FUNCTIONS]
+  * new option login/saveLastServer - save last server (disabled by default)
+
 XVM-5.2.1-test1:
   * adaptation pour WoT 0.9.0
 

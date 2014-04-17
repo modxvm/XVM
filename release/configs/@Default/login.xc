@@ -7,6 +7,9 @@
     // Skip intro movie
     // Пропустить вступительное видео
     "skipIntro": true,
+    // Save last server
+    // Сохранять последний сервер
+    "saveLastServer": false,
     // Auto enter to the game
     // Автоматический вход в игру
     "autologin": false,

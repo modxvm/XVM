@@ -6,6 +6,7 @@
     xmlns:c="components.*"
     title="{_('PLogin')}">
     <c:LabeledCheckBox label="{_('skipIntro')}" id="v_skipIntro" config="login.skipIntro" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{_('saveLastServer')}" id="v_saveLastServer" config="login.saveLastServer" change="onChange(event)"/>
     <c:LabeledCheckBox label="{_('autologin')}" id="v_autologin" config="login.autologin" change="onChange(event)"/>
     <c:LabeledCheckBox label="{_('confirmOldReplays')}" id="v_confirmOldReplays" config="login.confirmOldReplays" change="onChange(event)"/>
 </c:PanelComponent>
