@@ -142,8 +142,8 @@
       "nickFormatRight": "{{name}}<font color='#cccccc'>{{clan}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font>",
       "vehicleFormatLeft": "",
       "vehicleFormatRight": ""
-      //"vehicleFormatLeft": "<font color='{{c:rating}}'>{{rating}}</font>",
-      //"vehicleFormatRight": "<font color='{{c:rating}}'>{{rating}}</font>"
+      //"vehicleFormatLeft": "<font color='{{c:rating}}'>{{vehicle}}</font>",
+      //"vehicleFormatRight": "<font color='{{c:rating}}'>{{vehicle}}</font>"
     },
     "enemySpottedMarker": {
       "enabled": true,

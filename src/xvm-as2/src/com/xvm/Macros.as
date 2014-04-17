@@ -40,12 +40,12 @@ class com.xvm.Macros
 
     public static function RegisterPlayerData(name:String, data:Object, team:Number)
     {
-        if (!data || !VehicleInfo.initialized)
+        if (!data)
             return;
 
         var pname = Utils.GetNormalizedPlayerName(name);
 
-        Cache.Get("_m/" + pname + "/" + data.vehicle, function()
+        Cache.Get("_m/" + pname + "/" + data.vehicle + "/" + VehicleInfo.initialized, function()
         {
             //Logger.addObject(data);
             if (!Macros.data_provider.hasOwnProperty(pname))
