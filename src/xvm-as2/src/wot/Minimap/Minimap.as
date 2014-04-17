@@ -170,6 +170,6 @@ class wot.Minimap.Minimap
          */
         AutoUpdate.instance.startTimer();
 
-        Features.instance.applyMajorMods();
+        _global.setTimeout(function() { Features.instance.applyMajorMods(); }, 1);
     }
 }
