@@ -1,6 +1,7 @@
 import com.xvm.ColorsManager;
 import com.xvm.Config;
 import com.xvm.GraphicsUtil;
+import com.xvm.Logger;
 
 class wot.battle.FragCorrelation
 {
@@ -38,7 +39,7 @@ class wot.battle.FragCorrelation
     {
         setupMarkers(_root.fragCorrelationBar.alliedMarkers, true);
         setupMarkers(_root.fragCorrelationBar.enemyMarkers, false);
-    }            
+    }
 
     private static function setupMarkers(markers, ally)
     {
@@ -51,13 +52,14 @@ class wot.battle.FragCorrelation
                 arguments.unshift(markers);
                 return FragCorrelation.wrapper_createItemRenderer.apply(null, arguments);
             }
+            markers.drawRenderers(true);
         }
     }
 
     // CONTEXT: alliedMarkers, enemyMarkers
     private static function wrapper_createItemRenderer()
     {
-        //Logger.addObject(net.wargaming.managers.ColorSchemeManager._colors, "_colors", 1);
+        //Logger.addObject(net.wargaming.managers.ColorSchemeManager._colors, 1, "_colors");
         var markers = arguments.shift();
         var ally:Boolean = Boolean(arguments.shift());
         var dead:Boolean = !arguments[0].isAlive;
@@ -71,7 +73,7 @@ class wot.battle.FragCorrelation
 
         GraphicsUtil.colorize(dead ? renderer.markerDead : renderer.marker, color,
             Config.s_config.consts.VM_COEFF_FC / (dead ? 2 : 1)); // darker to improve appearance
-        //Logger.addObject(arguments[0], color, 1);
+        //Logger.addObject(arguments[0], 1, color);
         //Logger.addObject(renderer, "renderer", 1);
         return renderer;
     }
