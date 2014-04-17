@@ -45,7 +45,7 @@ class com.xvm.Macros
 
         var pname = Utils.GetNormalizedPlayerName(name);
 
-        Cache.Get("_m/" + pname + "/" + data.vehicle + "/" + VehicleInfo.initialized, function()
+        Cache.Get("_m/" + pname + "/" + data.vehicle + "/" + (VehicleInfo.initialized && Config.s_loaded), function()
         {
             //Logger.addObject(data);
             if (!Macros.data_provider.hasOwnProperty(pname))
