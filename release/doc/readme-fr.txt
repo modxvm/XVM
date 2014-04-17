@@ -1,4 +1,4 @@
-Contenu :
+﻿Contenu :
   1. Présentation
   2. Installation
   3. Mise à jour
