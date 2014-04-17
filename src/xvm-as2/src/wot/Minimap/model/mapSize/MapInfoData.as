@@ -17,7 +17,7 @@ class wot.Minimap.model.mapSize.MapInfoData
      */
     public static function SizeByLocalizedMapName(localizedMapName:String):Number
     {
-        return localizedData[localizedMapName] || undefined;
+        return localizedData[localizedMapName.toUpperCase()] || undefined;
     }
 
     /////////////////////////////////////////////////////////////////
@@ -88,7 +88,7 @@ class wot.Minimap.model.mapSize.MapInfoData
         for (var key:String in _systemMapnameList) {
             var systemMapName:String = key.substring(1);
             var localMapName:String = Localization.makeString("#arenas:" + systemMapName + "/name", {});
-            _localizedMapnameList[localMapName] = _systemMapnameList[key].size;
+            _localizedMapnameList[localMapName.toUpperCase()] = _systemMapnameList[key].size;
         }
         //Logger.add(com.xvm.Utils.elapsedMSec(start, new Date()).toString());
     }
