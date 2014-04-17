@@ -7,7 +7,7 @@
 ******************************************************************************/
 
 // версия скрипта
-var script_version = "9.7";
+var script_version = "9.8";
 
 // массив названий секций
 var sections = [    // порядок секций лучше не менять
@@ -257,8 +257,6 @@ for ( var j = 0; j < sections.length; j++) {
         i = i + 2;
     }
     // создаем файл для записи секции
-    if (section == "userInfo")
-        section = "hangar";
     if (section == "fragCorrelation" || section == "expertPanel")
         section = "battle";
     var file_out = path+author+"\\"+section+".xc";
