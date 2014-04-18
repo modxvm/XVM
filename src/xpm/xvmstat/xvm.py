@@ -54,6 +54,7 @@ class Xvm(object):
             if cmd == COMMAND_LOG:
                 log(*args)
             elif cmd == COMMAND_SET_CONFIG:
+                log('setConfig')
                 self.config = json.loads(args[0])
             elif cmd == COMMAND_PING:
                 #return
