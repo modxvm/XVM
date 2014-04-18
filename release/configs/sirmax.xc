@@ -63,7 +63,7 @@
   },
   "userInfo": {
     "inHangarFilterEnabled": true,
-    "startPage": 4,
+    "startPage": 2,
     //"sortColumn": 5,
     "sortColumn": -3,
     "showExtraDataInProfile": true,
@@ -83,8 +83,7 @@
     "elements": ${"elements"}
   },
   "rating": {
-    "showPlayersStatistics": true,
-    //"showPlayersStatistics": false,
+    //"showPlayersStatistics": true,
     "loadEnemyStatsInFogOfWar": true,
     "enableStatisticsLog": true,
     "enableUserInfoStatistics": true,
@@ -141,10 +140,10 @@
       "width": 120,
       "nickFormatLeft": "<font color='{{c:xwn8}}'>{{xwn8}}</font> {{name}}<font color='#cccccc'>{{clan}}</font>",
       "nickFormatRight": "{{name}}<font color='#cccccc'>{{clan}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font>",
-      "vehicleFormatLeft": "",
-      "vehicleFormatRight": ""
-      //"vehicleFormatLeft": "<font color='{{c:rating}}'>{{vehicle}}</font>",
-      //"vehicleFormatRight": "<font color='{{c:rating}}'>{{vehicle}}</font>"
+      //"vehicleFormatLeft": "",
+      //"vehicleFormatRight": ""
+      "vehicleFormatLeft": "<font color='{{c:rating}}'>{{vehicle}}</font>",
+      "vehicleFormatRight": "<font color='{{c:rating}}'>{{vehicle}}</font>"
     },
     "enemySpottedMarker": {
       "enabled": true,

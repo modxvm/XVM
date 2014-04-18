@@ -14,8 +14,6 @@ class com.xvm.StatLoader
 
     public static function LoadData()
     {
-        if (!Config.s_config.rating.showPlayersStatistics)
-            return;
         if (Stat.s_loaded == true)
             return;
         if (instance._loading)
@@ -41,7 +39,7 @@ class com.xvm.StatLoader
         try
         {
             var response = JSONx.parse(json_str);
-            //Logger.addObject(response, "response", 2);
+            //Logger.addObject(response, 2, "response");
 
             if (response.players)
             {
