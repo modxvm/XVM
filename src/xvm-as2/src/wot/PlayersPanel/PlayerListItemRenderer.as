@@ -33,6 +33,11 @@ class wot.PlayersPanel.PlayerListItemRenderer
         return this.updateImpl.apply(this, arguments);
     }
 
+    function lightPlayer()
+    {
+        return this.lightPlayerImpl.apply(this, arguments);
+    }
+
     // wrapped methods
     /////////////////////////////////////////////////////////////////
 
@@ -116,6 +121,12 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
         if (data != null)
             data.icon = saved_icon;
+    }
+
+    private function lightPlayerImpl(visibility)
+    {
+        wrapper.dispatchLightPlayer(visibility);
+        //setTimeout(wrapper, "checkLightState", 250); // disabled!
     }
 
     private function attachClanIconToPlayer(data:Object):Void
