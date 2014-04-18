@@ -16,15 +16,15 @@ parse_ivanerr()
   echo "Searching new top clans..."
   eflg=0
   i=0
-  cat "$tmpfn" | grep -E "^\s+<td><a " | while read line; do
-    clan=`echo $line | cut -d\> -f3 | cut -d\< -f1`
+  cat "$tmpfn" | grep -Eo "(href=\"/../clan/([0-9]+)\"([\>]+)([A-Z0-9_-]{2,5})([\<]+).............a)" | while read line; do
+    clan=`echo $line | cut -d\> -f2 | cut -d\< -f1`
     id=`echo $line | cut -d/ -f4 | cut -d\" -f1`
     l="$clan $id"
 
     i=$((i+1))
     [ $i -gt $top_count ] && return
 
-    if ! grep -E "^$l\$" $topfile $topfile_persist > /dev/null; then
+    if ! grep -E "^([A-Z0-9_-]{2,5}) $id\$" $topfile $topfile_persist > /dev/null; then
       [ $eflg -eq 1 ] && echo
       eflg=0
       echo "$i: $l"
@@ -32,6 +32,7 @@ parse_ivanerr()
     else
       eflg=1
       echo -n .
+      i=$((i-1))
       [ "$((i%10))" -eq 0 ] && echo -n $i
     fi
   done
@@ -84,7 +85,7 @@ update()
     clan=`echo $line | cut -d' ' -f1`
     id=`echo $line | cut -d' ' -f2`
     echo "$i: $clan $id"
-    wget -qc http://clans.$host/media/clans/emblems/clans_${id:0:1}/$id/emblem_64x64.png -O ../../../release/res/clanicons/$dir/clan/$clan.png 2>/dev/null
+    wget -qc http://clans.$host/media/clans/emblems/cl_${id:(-3)}/$id/emblem_64x64.png -O ../../../release/res/clanicons/$dir/clan/$clan.png 2>/dev/null
   done
 }
 
