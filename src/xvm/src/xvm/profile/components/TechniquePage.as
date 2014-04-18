@@ -10,9 +10,9 @@ package xvm.profile.components
 
     public class TechniquePage extends Technique
     {
-        public function TechniquePage(page:ProfileTechniquePage, summary:ProfileSummary, playerName:String):void
+        public function TechniquePage(page:ProfileTechniquePage, playerName:String):void
         {
-            super(page, summary, playerName);
+            super(page, playerName);
 
             _playerId = 0;
             Dossier.loadAccountDossier(this, dossierLoaded);

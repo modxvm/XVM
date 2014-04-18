@@ -57,7 +57,6 @@ def FlashInit(self, swf, className = 'Flash', args = None, path = None):
     log("FlashInit: " + self.swf)
     self.addExternalCallback('xvm.cmd', lambda *args: g_xvm.onXvmCommand(self, *args))
 
-
 def FlashBeforeDelete(self):
     if self.swf not in _SWFS:
         return
@@ -83,7 +82,6 @@ def LoginView_onSetOptions(base, self, optionsList, host):
                 selectedId = idx
             options.append({'data': key, 'label': name})
         self.as_setServersListS(options, selectedId)
-
 
 #####################################################################
 # Register events

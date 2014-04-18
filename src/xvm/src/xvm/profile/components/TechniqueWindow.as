@@ -8,9 +8,9 @@ package xvm.profile.components
 
     public class TechniqueWindow extends Technique
     {
-        public function TechniqueWindow(window:ProfileTechniqueWindow, summary:ProfileSummary, playerName:String, playerId:int):void
+        public function TechniqueWindow(window:ProfileTechniqueWindow, playerName:String, playerId:int):void
         {
-            super(window, summary, playerName);
+            super(window, playerName);
 
             _playerId = playerId;
             Dossier.loadAccountDossier(null, null, playerId);

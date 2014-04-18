@@ -6,7 +6,6 @@ package xvm.profile.components
     import flash.display.*;
     import flash.events.*;
     import flash.utils.*;
-    import net.wg.gui.lobby.profile.pages.summary.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
     import net.wg.gui.components.advanced.*;
     import scaleform.clik.events.*;
@@ -19,13 +18,12 @@ package xvm.profile.components
         protected var _page:ProfileTechnique;
         protected var _playerName:String;
         protected var _playerId:int;
-        protected var _summary:ProfileSummary;
 
         protected var filter:FilterControl;
 
         private var techniqueListAdjuster:TechniqueListAdjuster;
 
-        public function Technique(page:ProfileTechnique, summary:ProfileSummary, playerName:String):void
+        public function Technique(page:ProfileTechnique, playerName:String):void
         {
             try
             {
@@ -33,10 +31,11 @@ package xvm.profile.components
                 this._page = page;
                 this._playerName = playerName;
                 this._playerId = 0;
-                this._summary = summary;
 
                 // override renderer
                 list.itemRenderer = UI_TechniqueRenderer;
+
+                return;
 
                 // Initialize TechniqueStatisticsTab
                 list.addEventListener(TechniqueList.SELECTED_DATA_CHANGED, listSelectedDataChanged);
@@ -80,11 +79,6 @@ package xvm.profile.components
         public function get accountDossier():AccountDossier
         {
             return Dossier.getAccountDossier(playerId);
-        }
-
-        public function get summaryPage():ProfileSummary
-        {
-            return _summary;
         }
 
         private function listSelectedDataChanged():void

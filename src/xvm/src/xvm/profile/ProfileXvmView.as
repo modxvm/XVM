@@ -16,7 +16,6 @@ package xvm.profile
     import net.wg.gui.lobby.profile.components.*;
     import net.wg.gui.lobby.profile.data.SectionLayoutManager;
     import net.wg.gui.lobby.profile.pages.awards.ProfileAwards;
-    import net.wg.gui.lobby.profile.pages.summary.*;
     import net.wg.gui.lobby.profile.pages.technique.*;
     import net.wg.gui.lobby.window.*;
     import net.wg.infrastructure.events.*;
@@ -29,14 +28,10 @@ package xvm.profile
         private const WINDOW_EXTRA_WIDTH:int = 45;
         private const WINDOW_EXTRA_HEIGHT:int = 35;
 
-        private var summaryPage:ProfileSummary;
-        private var _summaryPageInitialized:Boolean;
-
         public function ProfileXvmView(view:IView)
         {
             //Logger.add("ProfileXvmView");
             super(view);
-            _summaryPageInitialized = false;
         }
 
         public function get tabNavigator():ProfileTabNavigator
@@ -52,8 +47,10 @@ package xvm.profile
 
         public override function onBeforePopulate(e:LifeCycleEvent):void
         {
+            /*
             try
             {
+                // resize window
                 var pw:ProfileWindow = view as ProfileWindow;
                 if (pw != null)
                 {
@@ -80,6 +77,7 @@ package xvm.profile
             {
                 Logger.add(ex.getStackTrace());
             }
+            */
         }
 
         public override function onAfterPopulate(e:LifeCycleEvent):void
@@ -98,30 +96,33 @@ package xvm.profile
 
         private function init():void
         {
-            //Logger.addObject(tabNavigator.bar.dataProvider, 2);
-            tabNavigator.viewStack.addEventListener(ViewStackEvent.VIEW_CHANGED, onSectionViewShowed);
+            tabNavigator.addEventListener(LifeCycleEvent.ON_AFTER_POPULATE, tabNavigator_onAfterPopulate);
+            tabNavigator.viewStack.addEventListener(ViewStackEvent.VIEW_CHANGED, viewStack_ViewShowed);
         }
 
-        private function onSectionViewShowed(e:ViewStackEvent):void
+        private function tabNavigator_onAfterPopulate():void
         {
-            //Logger.add("onSectionViewShowed: " + e.view);
+            //Logger.add("tabNavigator_onAfterPopulate");
+            tabNavigator.removeEventListener(LifeCycleEvent.ON_AFTER_POPULATE, tabNavigator_onAfterPopulate);
+
+            // initialize start page
+            var alias:String = tabNavigator.initData.selectedAlias;
+            if (alias == "profileSummaryPage" || alias == "")
+            {
+                var index:int = Config.config.userInfo.startPage - 1;
+                if (index > 0 && index < tabNavigator.initData.sectionsData.length)
+                    tabNavigator.initData.selectedAlias = tabNavigator.initData.sectionsData[index].alias;
+            }
+
+            //Logger.addObject(tabNavigator.initData, 3);
+        }
+
+        private function viewStack_ViewShowed(e:ViewStackEvent):void
+        {
+            //Logger.add("viewStack_ViewShowed: " + e.view);
 
             try
             {
-                var profileWindow:ProfileWindow = view as ProfileWindow;
-
-                if (e.view is ProfileSummary)
-                {
-                    summaryPage = e.view as ProfileSummary;
-                    if (!_summaryPageInitialized)
-                    {
-                        _summaryPageInitialized = true;
-
-                        App.utils.scheduler.envokeInNextFrame(initializeStartPage);
-                    }
-                    return;
-                }
-
                 var page:ProfileTechniquePage = e.view as ProfileTechniquePage;
                 if (page != null)
                 {
@@ -129,7 +130,7 @@ package xvm.profile
                     {
                         page.listComponent.techniqueList.rowHeight = 32;
 
-                        var tp:TechniquePage = new TechniquePage(page, summaryPage, Globals[Globals.NAME]);
+                        var tp:TechniquePage = new TechniquePage(page, Globals[Globals.NAME]);
                         page.addChild(tp);
                     }
                     return;
@@ -143,37 +144,16 @@ package xvm.profile
                         window.listComponent.techniqueList.rowHeight = 32;
 
                         // get player name from window title
-                        var playerName:String = WGUtils.GetPlayerName((profileWindow.window as Window).title);
+                        var playerName:String = WGUtils.GetPlayerName(((view as ProfileWindow).window as Window).title);
 
                         // get player id from the view name.
                         var playerId:int = parseInt(view.as_name.replace("window_", ""));
 
-                        var tw:TechniqueWindow = new TechniqueWindow(window, summaryPage, playerName, playerId);
+                        var tw:TechniqueWindow = new TechniqueWindow(window, playerName, playerId);
                         window.addChild(tw);
                     }
                     return;
                 }
-            }
-            catch (ex:Error)
-            {
-                Logger.add(ex.getStackTrace());
-            }
-        }
-
-        // start page workaround
-
-        public function initializeStartPage():void
-        {
-            //Logger.add("initializeStartPage");
-
-            try
-            {
-                if (!summaryPage)
-                    return;
-
-                var index:int = Config.config.userInfo.startPage - 1;
-                if (index > 0)
-                    tabNavigator.bar.selectedIndex = index;
             }
             catch (ex:Error)
             {
