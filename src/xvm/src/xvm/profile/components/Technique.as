@@ -32,28 +32,30 @@ package xvm.profile.components
                 this._playerName = playerName;
                 this._playerId = 0;
 
-                // override renderer
-                list.itemRenderer = UI_TechniqueRenderer;
-
-                return;
-
-                // Initialize TechniqueStatisticsTab
-                list.addEventListener(TechniqueList.SELECTED_DATA_CHANGED, listSelectedDataChanged);
-
-                // Add summary item to the first line of technique list
-                techniqueListAdjuster = new TechniqueListAdjuster(page);
-
                 // remove upper/lower shadow
                 page.listComponent.upperShadow.visible = false;
                 page.listComponent.lowerShadow.visible = false;
 
+                // override renderer
+                list.itemRenderer = UI_TechniqueRenderer;
+
+                // Initialize TechniqueStatisticsTab
+                list.addEventListener(TechniqueList.SELECTED_DATA_CHANGED, initializeTechniqueStatisticTab);
+
+                return;
+
+                // Add summary item to the first line of technique list
+                techniqueListAdjuster = new TechniqueListAdjuster(page);
+
+                // post init
+                techniqueListAdjuster.addEventListener(Event.INIT, delayedInit);
+
+                // TODO
                 // create filter controls
                 filter = null;
                 if (Config.config.userInfo.showFilters)
                     createFilters();
 
-                // post init
-                techniqueListAdjuster.addEventListener(Event.INIT, delayedInit);
             }
             catch (ex:Error)
             {
@@ -81,17 +83,10 @@ package xvm.profile.components
             return Dossier.getAccountDossier(playerId);
         }
 
-        private function listSelectedDataChanged():void
-        {
-            //Logger.add("listSelectedDataChanged: " + playerName);
-
-            list.removeEventListener(TechniqueList.SELECTED_DATA_CHANGED, listSelectedDataChanged);
-
-            initializeTechniqueStatisticTab();
-        }
-
         private function initializeTechniqueStatisticTab():void
         {
+            //Logger.add("initializeTechniqueStatisticTab: " + playerName);
+            list.removeEventListener(TechniqueList.SELECTED_DATA_CHANGED, initializeTechniqueStatisticTab);
             try
             {
                 var data:Array = page.stackComponent.buttonBar.dataProvider as Array;
