@@ -1,4 +1,4 @@
-﻿XVM-5.2.1-dev:
+﻿XVM-5.2.1-test2:
   [FIXES]
   * players panels was not shown after battle loading
   * fixed displaying of elements on minimap
