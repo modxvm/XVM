@@ -111,7 +111,7 @@ class com.xvm.Macros
         if (value == null)
             return def;
 
-        Logger.add("name:" + name + " fmt:" + fmt + " suf:" + suf + " def:" + def + " macro:" + macro);
+        //Logger.add("name:" + name + " fmt:" + fmt + " suf:" + suf + " def:" + def + " macro:" + macro);
 
         if (type == "number" && isNaN(value))
             return def;

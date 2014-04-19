@@ -4,7 +4,7 @@
     //"standardMarkers": true,
     "standardMarkers": false,
 
-    "formatNick":  "{{name%.20~..}}<font alpha='#A0'>{{clan}}</font>",
+    "formatNick":  "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>",
     "formatVehicle":  "<font face='Consolas' size='11'><font color='{{c:avglvl|#666666}}'>{{avglvl|-}}</font> <font color='{{c:xeff|#666666}}'>{{xeff|--}}</font>|<font color='{{c:xwn8|#666666}}'>{{xwn8|--}}</font> <font color='{{c:kb|#666666}}'>{{kb%2d~k|--}}</font></font>",
     //"formatVehicle":  "{{vehicle}}",
 
@@ -62,7 +62,7 @@
   },
   "userInfo": {
     "inHangarFilterEnabled": true,
-    "startPage": 2,
+    "startPage": 4,
     //"sortColumn": 5,
     "sortColumn": -3,
     "showExtraDataInProfile": true,
