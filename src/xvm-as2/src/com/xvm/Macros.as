@@ -111,7 +111,7 @@ class com.xvm.Macros
         if (value == null)
             return def;
 
-        //Logger.add("name:" + name + " fmt:" + fmt + " suf:" + suf + " def:" + def + " macro:" + macro);
+        Logger.add("name:" + name + " fmt:" + fmt + " suf:" + suf + " def:" + def + " macro:" + macro);
 
         if (type == "number" && isNaN(value))
             return def;
@@ -124,32 +124,35 @@ class com.xvm.Macros
         {
             res = Sprintf.format("%" + fmt, res);
             //Logger.add(value + "|" + res + "|");
-            if (type == "string")
+            if (suf != null)
             {
-                if (res.length - suf.length > 0)
+                if (type == "string")
                 {
-                    // search precision
-                    parts = fmt.split(".", 2);
-                    if (parts.length == 2)
+                    if (res.length - suf.length > 0)
                     {
-                        parts = parts[1].split('');
-                        len = parts.length;
-                        var precision:Number = 0;
-                        for (var i:Number = 0; i < len; ++i)
+                        // search precision
+                        parts = fmt.split(".", 2);
+                        if (parts.length == 2)
                         {
-                            var ch:String = parts[i];
-                            if (ch < '0' || ch > '9')
-                                break;
-                            precision = (precision * 10) + Number(ch);
+                            parts = parts[1].split('');
+                            len = parts.length;
+                            var precision:Number = 0;
+                            for (var i:Number = 0; i < len; ++i)
+                            {
+                                var ch:String = parts[i];
+                                if (ch < '0' || ch > '9')
+                                    break;
+                                precision = (precision * 10) + Number(ch);
+                            }
+                            if (res.length == precision)
+                                res = res.substr(0, res.length - suf.length - 1) + suf;
                         }
-                        if (res.length == precision)
-                            res = res.substr(0, res.length - suf.length - 1) + suf;
                     }
                 }
-            }
-            else
-            {
-                res += suf;
+                else
+                {
+                    res += suf;
+                }
             }
         }
 
