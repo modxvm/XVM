@@ -12,7 +12,9 @@ package com.xvm.io
     public class Cmd
     {
         private static const COMMAND_LOG:String = "log";
+        private static const COMMAND_LOAD_FILE:String = "loadFile";
         private static const COMMAND_SET_CONFIG:String = "setConfig";
+        private static const COMMAND_GET_CONFIG:String = "getConfig";
         private static const COMMAND_PING:String = "ping";
         private static const COMMAND_GETSCREENSIZE:String = "getScreenSize";
         private static const COMMAND_GETGAMEREGION:String = "getGameRegion";
@@ -42,9 +44,19 @@ package com.xvm.io
             _call(null, null, [COMMAND_LOG, str]);
         }
 
+        public static function loadFile(filename:String, target:Object, callback:Function):void
+        {
+            _call(target, callback, [COMMAND_LOAD_FILE, filename]);
+        }
+
         public static function setConfig():void
         {
             _call(null, null, [COMMAND_SET_CONFIG, JSONx.stringify(Config.config, '', true)]);
+        }
+
+        public static function getConfig(target:Object, callback:Function):void
+        {
+            _call(target, callback, [COMMAND_GET_CONFIG]);
         }
 
         public static function ping():void

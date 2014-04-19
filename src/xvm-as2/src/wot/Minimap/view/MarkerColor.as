@@ -1,8 +1,5 @@
+import com.xvm.*;
 import wot.Minimap.MinimapEntry
-import com.xvm.DefaultConfig;
-import com.xvm.ColorsManager;
-import com.xvm.Config;
-import com.xvm.GraphicsUtil;
 
 /**
  * @author sirmax
@@ -37,11 +34,11 @@ class wot.Minimap.view.MarkerColor
             if (wrapper.entryName == MinimapEntry.STATIC_ICON_BASE)
             {
                 var aa = Config.s_config.colors.system["ally_alive"];
-                var aad = DefaultConfig.config.colors.system["ally_alive"];
+                var aad = Defines.C_ALLY_ALIVE;
                 if (wrapper.vehicleClass == "blue" && aa == aad)
                     return;
                 var ea = Config.s_config.colors.system["enemy_alive"];
-                var ead = DefaultConfig.config.colors.system["enemy_alive"];
+                var ead = Defines.C_ENEMY_ALIVE;
                 if (wrapper.vehicleClass == "red" && ea == ead)
                     return;
             }

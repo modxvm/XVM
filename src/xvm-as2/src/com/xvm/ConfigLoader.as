@@ -2,16 +2,7 @@
  * ...
  * @author sirmax2
  */
-import com.xvm.Cmd;
-import com.xvm.Config;
-import com.xvm.ConfigUtils;
-import com.xvm.DefaultConfig;
-import com.xvm.Defines;
-import com.xvm.GlobalEventDispatcher;
-import com.xvm.JSONxLoader;
-import com.xvm.Locale;
-import com.xvm.Logger;
-import com.xvm.VehicleInfo;
+import com.xvm.*;
 
 class com.xvm.ConfigLoader
 {
@@ -53,76 +44,31 @@ class com.xvm.ConfigLoader
         VehicleInfo.populateData();
 
         ConfigLoader.s_loading = true;
-        Config.s_config = DefaultConfig.config;
-        JSONxLoader.LoadAndParse(Defines.XVMCONF_ROOT + Defines.CONFIG_FILE_NAME, this, ReloadConfigCallback);
+        Cmd.getConfig(this, GetConfigCallback);
     }
 
-    private function ReloadConfigCallback(event)
-    {
-        //Logger.add("TRACE: ReloadConfigCallback(): start");
-        if (event.error != null && event.error.type == "NO_FILE")
-        {
-            if (event.filename == Defines.CONFIG_FILE_NAME)
-            {
-                // xvm.xc not found, try to load legacy config XVM.xvmconf
-                JSONxLoader.LoadAndParse(Defines.CONFIG_FILE_NAME_XVMCONF, this, ReloadConfigCallback);
-                return;
-            }
-        }
+    // STAGE 1
 
-        var finallyBugWorkaround: Boolean = false; // Workaround: finally block have a bug - it can be called twice.
+    private function GetConfigCallback(config_str)
+    {
         try
         {
-            ProcessConfig(event);
-            ConfigUtils.TuneupConfig();
+            Config.s_config = JSONx.parse(config_str);
+            //Logger.addObject(Config.s_config);
         }
-        finally
+        catch (e:Error)
         {
-            //Logger.add("TRACE: ReloadConfigCallback(): finally:start");
-            if (finallyBugWorkaround)
-                return;
-            finallyBugWorkaround = true;
-            Cmd.getGameRegion(this, OnGameRegionReceived);
-
-            //Logger.add("TRACE: ReloadConfigCallback(): finally::end");
+            Logger.add(e.message);
         }
-        //Logger.add("TRACE: ReloadConfigCallback(): end");
+        Cmd.getGameRegion(this, OnGameRegionReceived);
     }
 
-    private function ProcessConfig(event)
-    {
-        if (event.error != null && event.error.type == "NO_FILE")
-        {
-            info_event = { type: Config.E_SET_INFO, warning: "" };
-            GlobalEventDispatcher.dispatchEvent(info_event);
-            return;
-        }
-
-        if (event.error != null)
-        {
-            var ex = event.error;
-
-            var text:String = "Error loading config file '" + event.filename + "': ";
-            text += ConfigUtils.parseErrorEvent(event);
-
-            info_event = { type: Config.E_SET_INFO, error: text };
-            GlobalEventDispatcher.dispatchEvent(info_event);
-            Logger.add(String(text).substr(0, 200));
-            return;
-        }
-
-        Config.s_config = ConfigUtils.MergeConfigs(ConfigUtils.FixConfig(event.data), Config.s_config);
-        //Logger.addObject(Config.s_config, "config", 2);
-        //Logger.addObject(Config.s_config.markers.enemy.alive.normal, "", 3);
-        info_event = { type: Config.E_SET_INFO };
-        GlobalEventDispatcher.dispatchEvent(info_event); // Just show version
-    }
+    // STAGE 2
 
     private function OnGameRegionReceived(region:String)
     {
         Config.s_game_region = region.toUpperCase();
         loadLanguage();  // run Stage 3
-
     }
 
     // STAGE 3
@@ -149,7 +95,7 @@ class com.xvm.ConfigLoader
 
     private function SetConfigLoaded()
     {
-        //Logger.add("Config: Loaded");
+        Logger.add("Config: Loaded");
         GlobalEventDispatcher.removeEventListener(Locale.EVENT_LOADED);
         Config.s_loaded = true;
         ConfigLoader.s_loading = false;

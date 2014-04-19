@@ -4,38 +4,157 @@ import com.xvm.DataTypes.*;
 
 class com.xvm.Macros
 {
-    private static var data_provider: Object = {}; //{ PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
+    private static var dict: Object = {}; //{ PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
 
-    public static function Format(playerName, format: String, options:Object): String
+    public static function Format(playerName:String, format:String, options:Object):String
     {
-        var formatArr:Array = format.split("{{");
+        //Logger.add("format:" + format + " player:" + playerName);
 
-        var len = formatArr.length;
-        if (len == 1)
-            return Utils.fixImgTag(format);
-
-        var res = formatArr[0];
-        var pdata: String = data_provider[Utils.GetNormalizedPlayerName(playerName)];
-        for (var i = 1; i < len; ++i)
+        var res:String = "";
+        try
         {
-            var arr2:Array = formatArr[i].split("}}", 2);
-            if (arr2.length == 1 || (options && options.skip && options.skip[arr2[0]]))
-                res += "{{" + formatArr[i];
+            var formatArr:Array = format.split("{{");
+
+            res = formatArr[0];
+            var len:Number = formatArr.length;
+            if (len > 1)
+            {
+                var name:String = Utils.GetNormalizedPlayerName(playerName);
+                for (var i:Number = 1; i < len; ++i)
+                {
+                    var part:String = formatArr[i];
+                    var arr2:Array = part.split("}}", 2);
+                    var macro:String = arr2[0];
+                    if (arr2.length == 1 || (options && options.skip && options.skip.hasOwnProperty[macro]))
+                    {
+                        res += "{{" + part;
+                    }
+                    else
+                    {
+                        if (dict.hasOwnProperty(name))
+                            res += FormatMacro(macro, dict[name], options);
+                        res += arr2[1];
+                    }
+                }
+            }
+
+            //Logger.add(playerName + "> " + format);
+            //Logger.add(playerName + "> " + res);
+            return Utils.fixImgTag(res);
+        }
+        catch (ex:Error)
+        {
+            Logger.add(ex.message);
+        }
+        return res;
+    }
+
+    private static function FormatMacro(macro:String, pdata:Object, options:Object):String
+    {
+        //Logger.addObject(pdata);
+        var name:String;
+        var fmt:String;
+        var suf:String;
+        var def:String;
+
+        var len:Number;
+        var rest:String;
+        var parts:Array;
+
+        // split parts: name[%fmt][~suf][|def]
+
+        parts = macro.split("%", 2);
+        len = parts.length;
+        rest = parts[len - 1];
+        name = parts[0];
+        fmt = len == 1 ? null : parts[1];
+
+        parts = rest.split("~", 2);
+        len = parts.length;
+        rest = parts[len - 1];
+        suf = len == 1 ? null : parts[1];
+        if (fmt == null)
+        {
+            name = parts[0];
+        }
+        else
+        {
+            fmt = parts[0];
+        }
+
+        parts = rest.split("|", 2);
+        len = parts.length;
+        def = len == 1 ? "" : parts[1];
+        if (fmt == null)
+        {
+            name = parts[0];
+        }
+        else if (suf == null)
+        {
+            fmt = parts[0];
+        }
+        else
+        {
+            suf = parts[0];
+        }
+
+        // substitute
+        //Logger.add("name:" + name + " fmt:" + fmt + " suf:" + suf + " def:" + def);
+
+        if (!pdata.hasOwnProperty(name))
+            return def;
+
+        var value = pdata[name];
+        var type:String = typeof value;
+        //Logger.add("type:" + type + " value:" + value);
+
+        if (value == null)
+            return def;
+
+        //Logger.add("name:" + name + " fmt:" + fmt + " suf:" + suf + " def:" + def + " macro:" + macro);
+
+        if (type == "number" && isNaN(value))
+            return def;
+
+        var res:String = value;
+        if (typeof value == "function")
+            res = options ? value(options) : "{{" + macro + "}}";
+
+        if (fmt != null)
+        {
+            res = Sprintf.format("%" + fmt, res);
+            //Logger.add(value + "|" + res + "|");
+            if (type == "string")
+            {
+                if (res.length - suf.length > 0)
+                {
+                    // search precision
+                    parts = fmt.split(".", 2);
+                    if (parts.length == 2)
+                    {
+                        parts = parts[1].split('');
+                        len = parts.length;
+                        var precision:Number = 0;
+                        for (var i:Number = 0; i < len; ++i)
+                        {
+                            var ch:String = parts[i];
+                            if (ch < '0' || ch > '9')
+                                break;
+                            precision = (precision * 10) + Number(ch);
+                        }
+                        if (res.length == precision)
+                            res = res.substr(0, res.length - suf.length - 1) + suf;
+                    }
+                }
+            }
             else
             {
-                var value = !pdata ? "" : pdata[arr2[0]] || "";
-                if (typeof value == "function")
-                    res += options ? value(options) : "{{" + arr2[0] + "}}";
-                else
-                    res += value;
-                res += arr2[1];
+                res += suf;
             }
         }
 
-        //Logger.add(playerName + "> " + format);
-        //Logger.add(playerName + "> " + res);
-
-        return Utils.fixImgTag(res);
+        //Logger.add(res);
+        return res;
     }
 
     public static function RegisterPlayerData(name:String, data:Object, team:Number)
@@ -48,9 +167,9 @@ class com.xvm.Macros
         Cache.Get("_m/" + pname + "/" + data.vehicle + "/" + (VehicleInfo.initialized && Config.s_loaded), function()
         {
             //Logger.addObject(data);
-            if (!Macros.data_provider.hasOwnProperty(pname))
-                Macros.data_provider[pname] = { };
-            var pdata = Macros.data_provider[pname];
+            if (!Macros.dict.hasOwnProperty(pname))
+                Macros.dict[pname] = { };
+            var pdata = Macros.dict[pname];
 
             // vars
             var nick = Macros.modXvmDevLabel(data.label +
@@ -63,7 +182,7 @@ class com.xvm.Macros
             pdata["nick"] = nick;
             // {{name}}
             var nm:String = Utils.GetPlayerName(nick);
-            pdata["name"] = (nm.length <= 16 ? nm : nm.substr(0, 14) + "..");
+            pdata["name"] = nm;
             // {{clan}}
             pdata["clan"] = Utils.GetClanNameWithBrackets(nick);
             // {{clannb}}
@@ -81,32 +200,31 @@ class com.xvm.Macros
             // {{squad}}
             pdata["squad"] = data.squad || "";
             // {{level}}
-            pdata["level"] = data.level ? String(data.level) : "";
+            pdata["level"] = data.level;
             // {{rlevel}}
             pdata["rlevel"] = data.level ? Defines.ROMAN_LEVEL[data.level - 1] : "";
             // {{hp-max}}
-            pdata["hp-max"] = data.maxHealth ? String(data.maxHealth) : "";
+            pdata["hp-max"] = data.maxHealth;
             // {{turret}}
             pdata["turret"] = data.turret || "";
 
             // VMM only - dynamic
             // {{hp}}
-            pdata["hp"] = function(o) { return o && o.curHealth != undefined ? String(o.curHealth) : ""; }
+            pdata["hp"] = function(o) { return o && o.curHealth != undefined ? o.curHealth : NaN; }
             // {{hp-ratio}}
-            pdata["hp-ratio"] = function(o) { return o && o.curHealth != undefined ? Math.round(o.curHealth / data.maxHealth * 100) : ""; }
+            pdata["hp-ratio"] = function(o) { return o && o.curHealth != undefined ? Math.round(o.curHealth / data.maxHealth * 100) : NaN; }
             // {{dmg}}
-            pdata["dmg"] = function(o) { return o && o.delta != undefined ? String(o.delta) : ""; }
+            pdata["dmg"] = function(o) { return o && o.delta != undefined ? String(o.delta) : NaN; }
             // {{dmg-ratio}}
-            pdata["dmg-ratio"] = function(o) { return o && o.delta != undefined ? Math.round(o.delta / data.maxHealth * 100) : ""; }
+            pdata["dmg-ratio"] = function(o) { return o && o.delta != undefined ? Math.round(o.delta / data.maxHealth * 100) : NaN; }
             // {{dmg-kind}}
             pdata["dmg-kind"] = function(o) { return o && o.delta != undefined ? Locale.get(o.damageType) : ""; }
 
             // Colors
             // {{c:hp}}
             pdata["c:hp"] = function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, o.curHealth); }
-            // {{c:hp-ratio}}, {{c:hp_ratio}}
+            // {{c:hp-ratio}}
             pdata["c:hp-ratio"] = function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, o.curHealth / data.maxHealth * 100); }
-            pdata["c:hp_ratio"] = pdata["c:hp-ratio"];
             // {{c:dmg}}
             pdata["c:dmg"] = function(o)
                 {
@@ -115,19 +233,17 @@ class com.xvm.Macros
                         o.entityName == 'teamKiller' ? (data.team + "tk") : o.entityName,
                         o.dead, o.blowedUp) : "";
                 }
-            // {{c:dmg-kind}}, {{c:dmg_kind}}
+            // {{c:dmg-kind}}
             pdata["c:dmg-kind"] = function(o) { return o.delta ? GraphicsUtil.GetDmgKindValue(o.damageType) : ""; }
-            pdata["c:dmg_kind"] = pdata["c:dmg-kind"];
             // {{c:system}}
             pdata["c:system"] = function(o) { return "#" + Strings.padLeft(o.getSystemColor(o).toString(16), 6, "0"); }
 
             // Alpha
             // {{a:hp}}
             pdata["a:hp"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, o.curHealth); }
-            // {{a:hp-ratio}}, {{a:hp_ratio}}
+            // {{a:hp-ratio}}
             pdata["a:hp-ratio"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO,
                 Math.round(o.curHealth / data.maxHealth * 100)); }
-            pdata["a:hp_ratio"] = pdata["a:hp-ratio"];
 
             return true;
         });
@@ -139,9 +255,9 @@ class com.xvm.Macros
             return;
 
         var pname:String = Utils.GetNormalizedPlayerName(playerName);
-        if (!data_provider.hasOwnProperty(pname))
-            data_provider[pname] = { };
-        var pdata = data_provider[pname];
+        if (!dict.hasOwnProperty(pname))
+            dict[pname] = { };
+        var pdata = dict[pname];
 
         // vars
         var r:Number = Utils.toInt(stat.r, 0);
@@ -151,11 +267,10 @@ class com.xvm.Macros
         var tr:Number = Utils.toInt(stat.v.r, 0);
         var tb:Number = Utils.toInt(stat.v.b, 0);
         var tw:Number = Utils.toInt(stat.v.w, 0);
-        var tbK:Number = Math.round(tb / 100) / 10;
 
         // {{avglvl}}
         var avglvl = Math.round(Utils.toFloat(stat.lvl, 0));
-        pdata["avglvl"] = avglvl < 1 ? "-" : avglvl == 10 ? "X" : avglvl;
+        pdata["avglvl"] = avglvl < 1 ? "-" : avglvl == 10 ? "X" : String(avglvl);
         // {{xeff}}
         pdata["xeff"] = stat.xeff == null ? "--" : stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff;
         // {{xwn6}}
@@ -164,55 +279,46 @@ class com.xvm.Macros
         pdata["xwn8"] = stat.xwn8 == null ? "--" : stat.xwn8 == 100 ? "XX" : (stat.xwn8 < 10 ? "0" : "") + stat.xwn8;
         // {{xwn}}
         pdata["xwn"] = pdata["xwn8"];
-        // {{eff}}, {{eff:4}}
-        pdata["eff"] = eff <= 0 ? "----" : String(eff);
-        pdata["eff:4"] = eff <= 0 ? "----" : Strings.padLeft(pdata["eff"], 4);
+        // {{eff}}
+        pdata["eff"] = eff <= 0 ? NaN : eff;
         // {{wn6}}
-        pdata["wn6"] = stat.wn6 <= 0 ? "----" : Strings.padLeft(String(stat.wn6), 4);
+        pdata["wn6"] = stat.wn6 <= 0 ? NaN : stat.wn6;
         // {{wn8}}
-        pdata["wn8"] = stat.wn8 <= 0 ? "----" : Strings.padLeft(String(stat.wn8), 4);
+        pdata["wn8"] = stat.wn8 <= 0 ? NaN : stat.wn8;
         // {{wn}}
         pdata["wn"] = pdata["wn8"];
         // {{e}}
         pdata["e"] = stat.v.te == null ? "-" : stat.v.te >= 10 ? "E" : String(stat.v.te);
         // {{teff}}
-        pdata["teff"] = stat.v.teff == null ? "----" : Strings.padLeft(String(stat.v.teff), 4);
+        pdata["teff"] = stat.v.teff == null ? NaN : stat.v.teff;
 
-        // {{rating}}, {{rating:3}}
-        pdata["rating"] = r <= 0 ? "--%" : String(r) + "%";
-        pdata["rating:3"] = Strings.padLeft(pdata["rating"], 3);
+        // {{rating}}
+        pdata["rating"] = r <= 0 ? NaN : r;
         // {{battles}}
-        pdata["battles"] = b <= 0 ? "---" : String(b);
+        pdata["battles"] = b <= 0 ? NaN : b;
         // {{wins}}
-        pdata["wins"] = b <= 0 ? "---" : String(w);
-        // {{kb}}, {{kb:3}}
-        pdata["kb"] = b <= 0 ? "--k" : String(Math.round(b / 1000)) + "k";
-        pdata["kb:3"] = Strings.padLeft(pdata["kb"], 3);
+        pdata["wins"] = b <= 0 ? NaN : w;
+        // {{kb}}
+        pdata["kb"] = b <= 0 ? NaN : b / 1000;
 
-        // {{t-rating}}, {{t-rating:3}}
-        pdata["t-rating"] = tr <= 0 ? "--%" : String(tr) + "%";
-        pdata["t-rating:3"] = Strings.padLeft(pdata["t-rating"], 3);
-        // {{t-battles}}, {{t-battles:4}}
-        pdata["t-battles"] = tb <= 0 ? "----" : String(tb);
-        pdata["t-battles:4"] = Strings.padLeft(pdata["t-battles"], 4);
+        // {{t-rating}}
+        pdata["t-rating"] = tr <= 0 ? NaN : tr;
+        // {{t-battles}}
+        pdata["t-battles"] = tb <= 0 ? NaN : tb;
         // {{t-wins}}
-        pdata["t-wins"] = tb <= 0 ? "----" : String(tw);
-        // {{t-kb}}, {{t-kb-0}}, {{t-kb:4}}
-        pdata["t-kb-0"] = tb <= 0 ? "-.-k" : Strings.padLeft(Sprintf.format("%.1fk", tbK, 4));
-        pdata["t-kb:4"] = tbK < 1 ? pdata["t-kb-0"].split("0.", 2).join(" .") : pdata["t-kb-0"]; // remove leading zero before dot
-        pdata["t-kb"] = Strings.trim(pdata["t-kb:4"]);
-        // {{t-hb}}, {{t-hb:3}}
-        pdata["t-hb"] = tb <= 0 ? "--h" : String(Math.round(tb / 100)) + "h";
-        pdata["t-hb:3"] = Strings.padLeft(pdata["t-hb"], 3);
-        // {{tdb}}, {{tdb:4}}
-        pdata["tdb"] = stat.v.db == null ? "----" : String(stat.v.db);
-        pdata["tdb:4"] = Strings.padLeft(pdata["tdb"], 4);
+        pdata["t-wins"] = tb <= 0 ? NaN : tw;
+        // {{t-kb}}
+        pdata["t-kb"] = tb <= 0 ? NaN : tb / 1000;
+        // {{t-hb}}
+        pdata["t-hb"] = tb <= 0 ? NaN : tb / 100;
+        // {{tdb}}
+        pdata["tdb"] = stat.v.db == null ? NaN : stat.v.db;
         // {{tdv}}
-        pdata["tdv"] = stat.v.dv == null ? "-.-" : Sprintf.format("%.1f", stat.v.dv);
+        pdata["tdv"] = stat.v.dv == null ? NaN : stat.v.dv;
         // {{tfb}}
-        pdata["tfb"] = stat.v.fb == null ? "-.-" : Sprintf.format("%.1f", stat.v.fb);
+        pdata["tfb"] = stat.v.fb == null ? NaN : stat.v.fb;
         // {{tsb}}
-        pdata["tsb"] = stat.v.sb == null ? "-.-" : Sprintf.format("%.1f", stat.v.sb);
+        pdata["tsb"] = stat.v.sb == null ? NaN : stat.v.sb;
 
         // Dynamic colors
         // {{c:xeff}}
@@ -249,14 +355,12 @@ class com.xvm.Macros
         // {{c:avglvl}}
         pdata["c:avglvl"] = stat.lvl <= 0 ? ""
             : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, Math.round(Utils.toFloat(stat.lvl, 0)), "#", o.darken); }
-        // {{c:t-rating}}, {{c:t_rating}}
+        // {{c:t-rating}}
         pdata["c:t-rating"] = tr <= 0 ? ""
             : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, tr, "#", o.darken); }
-        pdata["c:t_rating"] = pdata["c:t-rating"];
-        // {{c:t-battles}}, {{c:t_battles}}
+        // {{c:t-battles}}
         pdata["c:t-battles"] = tb <= 0 ? ""
             : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, tb, "#", o.darken); }
-        pdata["c:t_battles"] = pdata["c:t-battles"];
         // {{c:tdb}}
         pdata["c:tdb"] = stat.v.db <= 0 ? ""
             : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, stat.v.db, "#", o.darken); }

@@ -5,11 +5,11 @@
 class com.xvm.Defines
 {
     // Global versions
-    public static var XVM_VERSION:String = "5.2.1-test2";
+    public static var XVM_VERSION:String = "5.3.0-dev";
     public static var XVM_INTRO:String = "www.modxvm.com";
     public static var WOT_VERSION:String = "0.9.0";
-    public static var CONFIG_VERSION:String = "5.0.2";
-    public static var EDITOR_VERSION:String = "0.76";
+    public static var CONFIG_VERSION:String = "5.1.0";
+    public static var EDITOR_VERSION:String = "0.80";
 
     // Locale
     public static var LOCALE_AUTO_DETECTION:String = "auto";
@@ -127,9 +127,8 @@ class com.xvm.Defines
     public static var UICOLOR_BLUE = 0x408CCF;
 
     // Widgets
-    public static var WIDGET_MODE_HIDE =     0x01;
-    public static var WIDGET_MODE_1 =        0x02;
-    public static var WIDGET_MODE_2 =        0x04;
-    public static var WIDGET_MODE_DETAILED = 0x08;
-    public static var WIDGET_MODES_ALL = WIDGET_MODE_HIDE | WIDGET_MODE_1 | WIDGET_MODE_2 | WIDGET_MODE_DETAILED;
+    public static var C_ALLY_ALIVE = "0x96FF00";
+    public static var C_ENEMY_ALIVE = "0xF50800";
+
+
 }

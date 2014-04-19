@@ -4,12 +4,7 @@
  * @author Michael Pavlyshko
  * @author Pavel Máca
  */
-import com.xvm.Config;
-import com.xvm.ConfigUtils;
-import com.xvm.Defines;
-import com.xvm.GlobalEventDispatcher;
-import com.xvm.JSONxLoader;
-import com.xvm.Logger;
+import com.xvm.*;
 
 class com.xvm.Locale
 {
@@ -18,6 +13,7 @@ class com.xvm.Locale
     private static var MACRO_PREFIX:String = "l10n";
     private static var s_lang:Object;
     private static var s_lang_fallback:Object = {};
+    private static var s_filename:String;
 
     /////////////////////////////////////////////////////////////////
     // PUBLIC STATIC
@@ -25,9 +21,9 @@ class com.xvm.Locale
     public static function loadLocaleFile():Void
     {
         LoadLanguageFallback();
-        JSONxLoader.LoadAndParse(Defines.XVM_ROOT + "l10n/" + Config.s_config.language + ".xc", null, languageFileCallback);
+        s_filename = "l10n/" + Config.s_config.language + ".xc";
+        Cmd.loadFile(s_filename, null, languageFileCallback);
     }
-
 
     public static function get(format:String):String
     {
@@ -226,27 +222,46 @@ class com.xvm.Locale
         }
     }
 
-    private static function languageFileCallback(event):Void
+    private static function languageFileCallback(data_str):Void
     {
-        if (event.error == null) {
-            s_lang = event.data;
+        if (data_str == null)
+        {
+            Logger.add("Locale: Can not find language file. Filename: " + s_filename);
+            return;
+        }
+
+        try
+        {
+            s_lang = JSONx.parse(data_str);
             Logger.add("Locale: Loaded '" + Config.s_config.language + "' language by " + get("XVM_translator"));
         }
-        else {
-            if (event.error.type != "NO_FILE")
-            {
-                var ex = event.error;
-                var text:String = "Error loading language file '" + event.filename + "': ";
-                text += ConfigUtils.parseErrorEvent(event);
-
-                /** Show error message on battle loading */
-                var info_event = { type: Config.E_SET_INFO, error: text };
-                GlobalEventDispatcher.dispatchEvent(info_event);
-                Logger.add(String(text).substr(0, 200));
-            }else{
-                Logger.add("Locale: Can not find language file. Filename: " + event.filename );
-            }
+        catch (ex:Error)
+        {
+            var text:String = "Error loading language file '" + s_filename + "': ";
+            text += parseError(ex);
+            Logger.add(text.substr(0, 200));
         }
         GlobalEventDispatcher.dispatchEvent( { type: EVENT_LOADED } );
+    }
+
+    private static function parseError(ex):String {
+        if (ex.at == null)
+            return (ex.name != null ? Strings.trim(ex.name) + ": " : "") + Strings.trim(ex.message);
+        else
+        {
+            var head = ex.at > 0 ? ex.text.substring(0, ex.at) : "";
+            head = head.split("\r").join("").split("\n").join("");
+            while (head.indexOf("  ") != -1)
+                head = head.split("  ").join(" ");
+            head = head.substr(head.length - 75, 75);
+
+            var tail = (ex.at + 1 < ex.text.length) ? ex.text.substring(ex.at + 1, ex.text.length) : "";
+            tail = tail.split("\r").join("").split("\n").join("");
+            while (tail.indexOf("  ") != -1)
+            tail = tail.split("  ").join(" ");
+
+            return "[" + ex.at + "] " + Strings.trim(ex.name) + ": " + Strings.trim(ex.message) + "\n  " +
+                head + ">>>" + ex.text.charAt(ex.at) + "<<<" + tail;
+        }
     }
 }

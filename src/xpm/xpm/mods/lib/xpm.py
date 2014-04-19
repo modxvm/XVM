@@ -40,6 +40,13 @@ def logtrace(exc=None):
         traceback.print_stack()
     print "============================="
 
+def load_file(fn):
+    try:
+        return codecs.open(fn, 'r', 'utf-8-sig').read()
+    except:
+        logtrace(__file__)
+        return None
+
 def load_config(fn):
     try:
         return json.load(codecs.open(fn, 'r', 'utf-8-sig'))

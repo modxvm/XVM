@@ -26,7 +26,9 @@ from websock import g_websock
 
 NO_LOG_COMMANDS = (
   COMMAND_LOG,
+  COMMAND_LOAD_FILE,
   COMMAND_SET_CONFIG,
+  COMMAND_GET_CONFIG,
   COMMAND_PING,
   COMMAND_GETMODS,
   COMMAND_GETVEHICLEINFODATA,
@@ -43,6 +45,7 @@ NO_LOG_COMMANDS = (
 class Xvm(object):
     def __init__(self):
         self.currentPlayerId = None
+        self.config_str = None
         self.config = None
 
     def onXvmCommand(self, proxy, id, cmd, *args):
@@ -53,9 +56,14 @@ class Xvm(object):
             res = None
             if cmd == COMMAND_LOG:
                 log(*args)
+            elif cmd == COMMAND_LOAD_FILE:
+                res = load_file(os.path.join(XVM_DIR, args[0]))
             elif cmd == COMMAND_SET_CONFIG:
                 log('setConfig')
-                self.config = json.loads(args[0])
+                self.config_str = args[0]
+                self.config = json.loads(self.config_str)
+            elif cmd == COMMAND_GET_CONFIG:
+                res = self.config_str
             elif cmd == COMMAND_PING:
                 #return
                 ping(proxy)
@@ -114,7 +122,7 @@ class Xvm(object):
         return True
 
     def getMods(self):
-        mods_dir = "res_mods/xvm/mods"
+        mods_dir = XVM_MODS_DIR
         if not os.path.isdir(mods_dir):
             return None
         mods = []

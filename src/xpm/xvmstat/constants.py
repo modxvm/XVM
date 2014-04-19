@@ -8,7 +8,9 @@ XVM_STAT_FINGERPRINT = "46169f8bd6f743733b23066f5cce2cd3d0392af8" # fingerprint 
 XVM_STAT_TIMEOUT = 30000 # TODO - config
 
 COMMAND_LOG = "log"
+COMMAND_LOAD_FILE = "loadFile"
 COMMAND_SET_CONFIG = "setConfig"
+COMMAND_GET_CONFIG = "getConfig"
 COMMAND_PING = "ping"
 COMMAND_GETMODS = "getMods"
 COMMAND_GETVEHICLEINFODATA = "getVehicleInfoData"
@@ -42,4 +44,6 @@ XVM_STAT_LOG_FILE_NAME = 'xvm-stat.log'
 TEAM_ALLY = 1
 TEAM_ENEMY = 2
 
-XVM_DB_DIR = "res_mods/xvm/db"
+XVM_DIR = "res_mods/xvm"
+XVM_DB_DIR = XVM_DIR + "/db"
+XVM_MODS_DIR = XVM_DIR + "/mods"

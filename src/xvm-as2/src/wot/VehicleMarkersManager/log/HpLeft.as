@@ -1,11 +1,7 @@
 /**
  * @author ilitvinov87@gmail.com
  */
-import com.xvm.Defines;
-import com.xvm.GraphicsUtil;
-import com.xvm.Locale;
-import com.xvm.Utils;
-import com.xvm.VehicleInfo;
+import com.xvm.*;
 import com.xvm.DataTypes.VehicleData;
 import wot.VehicleMarkersManager.log.HitLog;
 
@@ -65,7 +61,7 @@ class wot.VehicleMarkersManager.log.HpLeft
                 continue;
             }
 
-            entries += (entries == "" ? "" : "<br/>") + formatText(format, player);
+            entries += (entries == "" ? "" : "<br/>") + Macros.Format(player, format, null);
         }
 
         text += (direction == Defines.DIRECTION_DOWN) ? header + "<br/>" + entries : entries + "<br/>" + header;
@@ -73,7 +69,7 @@ class wot.VehicleMarkersManager.log.HpLeft
         return text;
     }
 
-    private function formatText(format:String, player:Object):String
+/*    private function formatText(format:String, player:Object):String
     {
         // mostly copied 1:1 from HitLog.as, HitLog.formatText
         // TODO: Macros optimization - use com.xvm.Macros class
@@ -155,7 +151,7 @@ class wot.VehicleMarkersManager.log.HpLeft
         }
 
         return Utils.fixImgTag(format);
-    }
+    }*/
 
     private function getLoggedPlayer(pFullName:String):Object
     {

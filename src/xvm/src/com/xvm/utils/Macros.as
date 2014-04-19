@@ -14,10 +14,12 @@ package com.xvm.utils
     public class Macros
     {
         // { PlayerName: { macro1: func || value, macro2:... }, PlayerName: {...} }
-        private static var dict:Dictionary = new Dictionary();
+        private static var dict:Object = new Object();
 
         public static function Format(playerName:String, format:String, options:MacrosFormatOptions = null):String
         {
+            //Logger.add("format:" + format + " player:" + playerName);
+
             var res:String = "";
             try
             {
@@ -31,23 +33,19 @@ package com.xvm.utils
                 if (len > 1)
                 {
                     var name:String = WGUtils.GetPlayerName(playerName);
-                    var pdata:Object = dict[name];
                     for (var i:int = 1; i < len; ++i)
                     {
-                        var arr2:Array = formatArr[i].split("}}", 2);
-                        if (arr2.length == 1 || (options && options.skip && options.skip.hasOwnProperty[arr2[0]]))
-                            res += "{{" + formatArr[i];
+                        var part:String = formatArr[i];
+                        var arr2:Array = part.split("}}", 2);
+                        var macro:String = arr2[0];
+                        if (arr2.length == 1 || (options && options.skip && options.skip.hasOwnProperty[macro]))
+                        {
+                            res += "{{" + part;
+                        }
                         else
                         {
-                            var value:* = !pdata ? "" : pdata[arr2[0]] || "";
-                            if (typeof value == "function")
-                            {
-                                res += options ? value(options) : "{{" + arr2[0] + "}}";
-                            }
-                            else
-                            {
-                                res += value;
-                            }
+                            if (dict.hasOwnProperty(name))
+                                res += FormatMacro(macro, dict[name], options);
                             res += arr2[1];
                         }
                     }
@@ -61,6 +59,114 @@ package com.xvm.utils
             {
                 Logger.add(ex.getStackTrace());
             }
+            return res;
+        }
+
+        private static function FormatMacro(macro:String, pdata:Object, options:Object):String
+        {
+            //Logger.addObject(pdata);
+            var name:String;
+            var fmt:String;
+            var suf:String;
+            var def:String;
+
+            var len:Number;
+            var rest:String;
+            var parts:Array;
+
+            // split parts: name[%fmt][~suf][|def]
+
+            parts = macro.split("%", 2);
+            len = parts.length;
+            rest = parts[len - 1];
+            name = parts[0];
+            fmt = len == 1 ? null : parts[1];
+
+            parts = rest.split("~", 2);
+            len = parts.length;
+            rest = parts[len - 1];
+            suf = len == 1 ? null : parts[1];
+            if (fmt == null)
+            {
+                name = parts[0];
+            }
+            else
+            {
+                fmt = parts[0];
+            }
+
+            parts = rest.split("|", 2);
+            len = parts.length;
+            def = len == 1 ? "" : parts[1];
+            if (fmt == null)
+            {
+                name = parts[0];
+            }
+            else if (suf == null)
+            {
+                fmt = parts[0];
+            }
+            else
+            {
+                suf = parts[0];
+            }
+
+            // substitute
+            //Logger.add("name:" + name + " fmt:" + fmt + " suf:" + suf + " def:" + def);
+
+            if (!pdata.hasOwnProperty(name))
+                return def;
+
+            var value:* = pdata[name];
+            var type:String = typeof value;
+            //Logger.add("type:" + type + " value:" + value);
+
+            if (value == null)
+                return def;
+
+            //Logger.add("name:" + name + " fmt:" + fmt + " suf:" + suf + " def:" + def + " macro:" + macro);
+
+            if (type == "number" && isNaN(value))
+                return def;
+
+            var res:String = value;
+            if (typeof value == "function")
+                res = options ? value(options) : "{{" + macro + "}}";
+
+            if (fmt != null)
+            {
+                res = Sprintf.format("%" + fmt, res);
+                //Logger.add(value + "|" + res + "|");
+                if (type == "string")
+                {
+                    if (res.length - suf.length > 0)
+                    {
+                        // search precision
+                        parts = fmt.split(".", 2);
+                        if (parts.length == 2)
+                        {
+                            parts = parts[1].split('');
+                            len = parts.length;
+                            var precision:int = 0;
+                            for (var i:int = 0; i < len; ++i)
+                            {
+                                var ch:String = parts[i];
+                                if (ch < '0' || ch > '9')
+                                    break;
+                                precision = (precision * 10) + Number(ch);
+                            }
+                            if (res.length == precision)
+                                res = res.substr(0, res.length - suf.length - 1) + suf;
+                        }
+                    }
+                }
+                else
+                {
+                    res += suf;
+                }
+            }
+
+            //Logger.add(res);
             return res;
         }
 
@@ -79,10 +185,10 @@ package com.xvm.utils
             }
             else
             {
-                dict[name] = new Dictionary();
+                dict[name] = new Object();
             }
 
-            var pdata:Dictionary = dict[name];
+            var pdata:Object = dict[name];
 
             var nick:String = modXvmDevLabel(name);
             var clanWithoutBrackets:String = WGUtils.GetClanNameWithoutBrackets(fullPlayerName);
@@ -91,7 +197,7 @@ package com.xvm.utils
             // {{nick}}
             pdata["nick"] = nick + clanWithBrackets;
             // {{name}}
-            pdata["name"] = (nick.length <= 16 ? nick : StringUtils.left(nick, 14) + "..");
+            pdata["name"] = nick;
             // {{clan}}
             pdata["clan"] = clanWithBrackets;
             // {{clannb}}
@@ -106,9 +212,9 @@ package com.xvm.utils
             // {{vehiclename}} - ussr-T-34-85
             pdata["vehiclename"] = VehicleInfo.getVIconName(vdata.key);
             // {{level}}
-            pdata["level"] = vdata ? String(vdata.level) : "";
+            pdata["level"] = vdata.level;
             // {{rlevel}}
-            pdata["rlevel"] = vdata ? Defines.ROMAN_LEVEL[vdata.level - 1] : "";
+            pdata["rlevel"] = Defines.ROMAN_LEVEL[vdata.level - 1];
             // {{vtype}} - MT
             pdata["vtype"] = VehicleInfo.getVTypeText(vdata.vtype);
             // {{vtype-l}} - Medium Tank
@@ -130,7 +236,7 @@ package com.xvm.utils
 
             RegisterMinimalMacrosData(stat.name + (stat.clan == null || stat.clan == "" ? "" : "[" + stat.clan + "]"), stat.v.id);
 
-            var pdata:Dictionary = dict[pname];
+            var pdata:Object = dict[pname];
 
             var vdata:VehicleData = stat.v.data || new VehicleData({});
 
@@ -139,26 +245,26 @@ package com.xvm.utils
             //TODO pdata["squad"] = data.squad || "";
 
             // {{hp-max}}
-            pdata["hp-max"] = vdata ? String(stat.maxHealth) : "";
+            pdata["hp-max"] = stat.maxHealth;
             // {{turret}}
             //TODO pdata["turret"] = vdata ? String(vdata.turret) : "";
 
             // VMM only - dynamic
             // {{hp}}
-            pdata["hp"] = function(o:MacrosFormatOptions):String {
-                return !o || o.curHealth < 0 ? "" : String(o.curHealth);
+            pdata["hp"] = function(o:MacrosFormatOptions):Number {
+                return !o || o.curHealth < 0 ? NaN : o.curHealth;
             }
             // {{hp-ratio}}
-            pdata["hp-ratio"] = function(o:MacrosFormatOptions):String {
-                return !o || o.curHealth < 0 ? "" : Math.round(o.curHealth / stat.maxHealth * 100).toString();
+            pdata["hp-ratio"] = function(o:MacrosFormatOptions):Number {
+                return !o || o.curHealth < 0 ? NaN : o.curHealth / stat.maxHealth * 100;
             }
             // {{dmg}}
-            pdata["dmg"] = function(o:MacrosFormatOptions):String {
-                return !o || o.delta < 0 ? "" : String(o.delta);
+            pdata["dmg"] = function(o:MacrosFormatOptions):Number {
+                return !o || o.delta < 0 ? NaN : o.delta;
             }
             // {{dmg-ratio}}
-            pdata["dmg-ratio"] = function(o:MacrosFormatOptions):String {
-                return !o || o.delta < 0 ? "" : Math.round(o.delta / stat.maxHealth * 100).toString();
+            pdata["dmg-ratio"] = function(o:MacrosFormatOptions):Number {
+                return !o || o.delta < 0 ? NaN : Math.round(o.delta / stat.maxHealth * 100);
             }
             // {{dmg-kind}}
             pdata["dmg-kind"] = function(o:MacrosFormatOptions):String {
@@ -174,7 +280,6 @@ package com.xvm.utils
             pdata["c:hp-ratio"] = function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, o.curHealth / stat.maxHealth * 100);
             }
-            pdata["c:hp_ratio"] = pdata["c:hp-ratio"];
             // {{c:dmg}}
             //TODOpdata["c:dmg"] = function(o:MacrosFormatOptions):String {
             //TODO    return o.delta ? MacrosUtil.GetDmgSrcColorValue(
@@ -186,7 +291,6 @@ package com.xvm.utils
             pdata["c:dmg-kind"] = function(o:MacrosFormatOptions):String {
                 return o || o.delta < 0 || !o.damageType ? "" : MacrosUtil.GetDmgKindValue(o.damageType);
             }
-            pdata["c:dmg_kind"] = pdata["c:dmg-kind"];
             // {{c:system}}
             pdata["c:system"] = function(o:MacrosFormatOptions):String {
                 return "#" + StringUtils.leftPad(MacrosUtil.GetSystemColor(o.entityName, o.dead, o.blowedUp).toString(16), 6, "0");
@@ -201,7 +305,6 @@ package com.xvm.utils
             pdata["a:hp-ratio"] = function(o:MacrosFormatOptions):Number {
                 return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, Math.round(o.curHealth / stat.maxHealth * 100)) / 100.0;
             }
-            pdata["a:hp_ratio"] = pdata["a:hp-ratio"];
 
             // STAT
 
@@ -220,54 +323,45 @@ package com.xvm.utils
             // {{xwn}}
             pdata["xwn"] = pdata["xwn8"];
             // {{eff}}, {{eff:4}}
-            pdata["eff"] = isNaN(stat.e) ? "----" : String(stat.e);
-            pdata["eff:4"] = isNaN(stat.e) ? "----" : StringUtils.leftPad(pdata["eff"], 4, ' ');
+            pdata["eff"] = stat.e;
             // {{wn6}}
-            pdata["wn6"] = isNaN(stat.wn6) ? "----" : StringUtils.leftPad(String(stat.wn6), 4, ' ');
+            pdata["wn6"] = stat.wn6;
             // {{wn8}}
-            pdata["wn8"] = isNaN(stat.wn8) ? "----" : StringUtils.leftPad(String(stat.wn8), 4, ' ');
+            pdata["wn8"] = stat.wn8;
             // {{wn}}
             pdata["wn"] = pdata["wn8"];
             // {{e}}
             pdata["e"] = isNaN(stat.v.teff) ? "-" : stat.v.te >= 10 ? "E" : String(stat.v.te);
             // {{teff}}
-            pdata["teff"] = isNaN(stat.v.teff) ? "----" : StringUtils.leftPad(String(stat.v.teff), 4, ' ');
+            pdata["teff"] = stat.v.teff;
 
-            // {{rating}}, {{rating:3}}
-            pdata["rating"] = isNaN(stat.r) ? "--%" : String(stat.r) + "%";
-            pdata["rating:3"] = StringUtils.leftPad(pdata["rating"], 3, ' ');
+            // {{rating}}
+            pdata["rating"] = stat.r;
             // {{battles}}
-            pdata["battles"] = isNaN(stat.b) ? "---" : String(stat.b);
+            pdata["battles"] = stat.b;
             // {{wins}}
-            pdata["wins"] = isNaN(stat.b) ? "---" : String(stat.w);
-            // {{kb}}, {{kb:3}}
-            pdata["kb"] = isNaN(stat.b) ? "--k" : String(Math.round(stat.b / 1000)) + "k";
-            pdata["kb:3"] = StringUtils.leftPad(pdata["kb"], 3, ' ');
+            pdata["wins"] = stat.b;
+            // {{kb}}
+            pdata["kb"] = stat.b / 1000;
 
-            // {{t-rating}}, {{t-rating:3}}
-            pdata["t-rating"] = isNaN(stat.v.r) ? "--%" : String(stat.v.r) + "%";
-            pdata["t-rating:3"] = StringUtils.leftPad(pdata["t-rating"], 3, ' ');
-            // {{t-battles}}, {{t-battles:4}}
-            pdata["t-battles"] = isNaN(stat.v.b) ? "----" : String(stat.v.b);
-            pdata["t-battles:4"] = StringUtils.leftPad(pdata["t-battles"], 4, ' ');
+            // {{t-rating}}
+            pdata["t-rating"] = stat.v.r;
+            // {{t-battles}}
+            pdata["t-battles"] = stat.v.b;
             // {{t-wins}}
-            pdata["t-wins"] = isNaN(stat.v.b) ? "----" : String(stat.v.w);
-            // {{t-kb}}, {{t-kb-0}}, {{t-kb:4}}
-            pdata["t-kb-0"] = isNaN(stat.v.b) ? "-.-k" : StringUtils.leftPad(printf.format("%.1fk", stat.v.b / 1000.0), 4, ' ');
-            pdata["t-kb:4"] = isNaN(stat.v.b) ? "-.-k" : stat.v.b < 950 ? pdata["t-kb-0"].replace("0.", " .") : pdata["t-kb-0"]; // remove leading zero before dot
-            pdata["t-kb"] = StringUtils.trim(pdata["t-kb:4"]);
-            // {{t-hb}}, {{t-hb:3}}
-            pdata["t-hb"] = isNaN(stat.v.b) ? "--h" : String(Math.round(stat.v.b / 100.0)) + "h";
-            pdata["t-hb:3"] = StringUtils.leftPad(pdata["t-hb"], 3, ' ');
-            // {{tdb}}, {{tdb:4}}
-            pdata["tdb"] = isNaN(stat.v.db) ? "----" : String(stat.v.db);
-            pdata["tdb:4"] = StringUtils.leftPad(pdata["tdb"], 4, ' ');
+            pdata["t-wins"] = stat.v.w;
+            // {{t-kb}}
+            pdata["t-kb"] = stat.v.b / 1000;
+            // {{t-hb}}
+            pdata["t-hb"] = stat.v.b / 100.0;
+            // {{tdb}}
+            pdata["tdb"] = stat.v.db;
             // {{tdv}}
-            pdata["tdv"] = isNaN(stat.v.dv) ? "-.-" : printf.format("%.1f", stat.v.dv);
+            pdata["tdv"] = stat.v.dv;
             // {{tfb}}
-            pdata["tfb"] = isNaN(stat.v.fb) ? "-.-" : printf.format("%.1f", stat.v.fb);
+            pdata["tfb"] = stat.v.fb;
             // {{tsb}}
-            pdata["tsb"] = isNaN(stat.v.sb) ? "-.-" : printf.format("%.1f", stat.v.sb);
+            pdata["tsb"] = stat.v.sb;
 
             // Dynamic colors
             // {{c:xeff}}

@@ -84,7 +84,6 @@ Legend:
 ├─────────────────┼───┼───┼───┼───┼────────────────────────────────────────────────────────────────
 │ {{avglvl}}      │ X │ X │ X │ X │ average level (tier) of tanks
 │ {{eff}}         │ X │ X │ X │ X │  player efficiency: http://wot-news.com/index.php/stat/calc/en/
-│ {{eff:4}}       │ X │ X │ X │ X │ player efficiency aligned from left to 4 chars
 │ {{teff}}, {{e}} │ X │ X │ X │ X │ player per-vehicle efficiency: http://www.koreanrandom.com/forum/topic/1643-
 │ {{wn6}}         │ X │ X │ X │ X │ WN6 rating: http://www.koreanrandom.com/forum/topic/2575-
 │ {{wn8}}         │ X │ X │ X │ X │ WN8 rating: http://www.koreanrandom.com/forum/topic/2575-
@@ -92,23 +91,15 @@ Legend:
 │ {{xwn6}}        │ X │ X │ X │ X │ XVM Scale for WN6 (values 00-99, XX for Tops)
 │ {{xwn8}}        │ X │ X │ X │ X │ XVM Scale for WN8 (values 00-99, XX for Tops)
 │ {{rating}}      │ X │ X │ X │ X │ GWR (Global Win Ratio)
-│ {{rating:3}}    │ X │ X │ X │ X │ GWR aligned from left to 3 chars
 │ {{battles}}     │ X │ X │ X │ X │ total battles count
 │ {{wins}}        │ X │ X │ X │ X │ total wins count
 │ {{kb}}          │ X │ X │ X │ X │ number of kilo-battles (total battles count divided by 1000)
-│ {{kb:3}}        │ X │ X │ X │ X │ number of kilo-battles aligned from left to 3 chars
 │ {{t-rating}}    │ X │ X │ X │ X │ vehicle win ratio
-│ {{t-rating:3}}  │ X │ X │ X │ X │ vehicle win ratio aligned from left to 3 chars
 │ {{t-battles}}   │ X │ X │ X │ X │ total battles count for current vehicle
-│ {{t-battles:4}} │ X │ X │ X │ X │ number of battles for current vehicle aligned from left to 4 chars
 │ {{t-wins}}      │ X │ X │ X │ X │ total wins count for current vehicle
 │ {{t-kb}}        │ X │ X │ X │ X │ number of kilo-battles for current vehicle
-│ {{t-kb-0}}      │ X │ X │ X │ X │ number of kilo-battles for current vehicle with leading zero
-│ {{t-kb:4}}      │ X │ X │ X │ X │ number of kilo-battles for current vehicle aligned from left to 4 chars
 │ {{t-hb}}        │ X │ X │ X │ X │ number of hecto-battles for current vehicle (hecto = 100)
-│ {{t-hb:3}}      │ X │ X │ X │ X │ number of hecto-battles for current vehicle aligned from left to 3 chars
 │ {{tdb}}         │ X │ X │ X │ X │ average damage for current tank - damage/battles
-│ {{tdb:4}}       │ X │ X │ X │ X │ average damage for current tank - damage/battles
 │ {{tdv}}         │ X │ X │ X │ X │ average damage efficiency for tank - damage/(battles*maxHP)
 │ {{tfb}}         │ X │ X │ X │ X │ average frags per battle for current tank
 │ {{tsb}}         │ X │ X │ X │ X │ average number of spotted enemies per battle for current tank

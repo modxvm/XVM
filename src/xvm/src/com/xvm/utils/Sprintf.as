@@ -20,7 +20,7 @@
 	This file may be distributed and used in any projects (commercial or
 	not) as long as it is unaltered and this notice is intact. I'd love
 	to hear from you with feedback, about bugs, ideas for further
-	features, etc. Thanks!	
+	features, etc. Thanks!
 	
 	USAGE:
 	Sprintf.format(format, [args...])
@@ -42,47 +42,46 @@
 			http://www.5etdemi.com/blog/
 	v1.1	Changed file name, other changes for AS2.0 compatibility
 	v1.0	Initial release.
-  
+
 */
 
-class com.natecook.Sprintf
+package com.xvm.utils
+{
+
+public class Sprintf
 {
 	// -=-=-=-=-=-=-=-=-=-=-=-=-=-
 	// "constants"
 	// -=-=-=-=-=-=-=-=-=-=-=-=-=-
-	static var kPAD_ZEROES		= 0x01;
-	static var kLEFT_ALIGN		= 0x02;
-	static var kSHOW_SIGN		= 0x04;
-	static var kPAD_POS			= 0x08;
-	static var kALT_FORM		= 0x10;
-	static var kLONG_VALUE		= 0x20;
-	static var kUSE_SEPARATOR	= 0x40;
+	private static var kPAD_ZEROES:int	= 0x01;
+	private static var kLEFT_ALIGN:int	= 0x02;
+	private static var kSHOW_SIGN:int	= 0x04;
+	private static var kPAD_POS:int		= 0x08;
+	private static var kALT_FORM:int	= 0x10;
+	private static var kLONG_VALUE:int	= 0x20;
+	private static var kUSE_SEPARATOR:int	= 0x40;
 	
-	static var DEBUG:Boolean	= false;
-	static var TRACE:Boolean	= false;
+	private static var DEBUG:Boolean	= false;
+	private static var TRACE:Boolean	= false;
 	
-	static function trace():Void
-	{
-		trace(Sprintf.format.apply(null,arguments));
-	}
-	
-	static function format(format:String):String
+	public static function format(format:String, ...rest):String
 	{
 		if (format == null) return '';
 	
-		var destString	= '';
-		var argIndex	= 0;		// our place in arguments[] 
-		var formatIndex	= 0;		// our place in the format string
-		var percentIndex;			// the location of the next '%' delimiter
-		var ch;
                 var formatArr:Array = format.split(''); // Array is faster then charAt
+
+		var destString:String	= '';
+		var argIndex:int	= 0;		// our place in arguments[]
+		var formatIndex:int	= 0;		// our place in the format string
+		var percentIndex:int;			// the location of the next '%' delimiter
+		var ch:String;
 		
 		// -=-=-=-=-=-=-=-=-=-=-=-=-=- vars for dealing with each field
-		var value, length, precision;
-		var properties;				// options: left justified, zero padding, etc...
-		var fieldCount;				// tracks number of sections in field 
-		var fieldOutcome;			// when set to true, field parsed successfully
-									// when set to a string, error resulted
+		var value:*, length:int, precision:int;
+		var properties:*;			// options: left justified, zero padding, etc...
+		var fieldCount:int;			// tracks number of sections in field
+		var fieldOutcome:*;			// when set to true, field parsed successfully
+                                                        // when set to a string, error resulted
 		
 		while (formatIndex < format.length) {
 			percentIndex = format.indexOf('%',formatIndex);
@@ -96,7 +95,7 @@ class com.natecook.Sprintf
 				length = properties = fieldCount = 0;
 				precision = -1;
 				formatIndex = percentIndex + 1;
-				value = arguments[++argIndex];
+				value = rest[argIndex++];
 				
 				while (fieldOutcome != true && (formatIndex < format.length)) {
 					ch = formatArr[formatIndex++];
@@ -114,28 +113,28 @@ class com.natecook.Sprintf
 								fieldOutcome = '** sprintf: "#" came too late **';
 							}
 							break;
-						case '-': 
+						case '-':
 							if (fieldCount == 0) {
 								properties |= kLEFT_ALIGN;
 							} else {
 								fieldOutcome = '** sprintf: "-" came too late **';
 							}
 							break;
-						case '+': 
+						case '+':
 							if (fieldCount == 0) {
 								properties |= kSHOW_SIGN;
 							} else {
 								fieldOutcome = '** sprintf: "+" came too late **';
 							}
 							break;
-						case ' ': 
+						case ' ':
 							if (fieldCount == 0) {
 								properties |= kPAD_POS;
 							} else {
 								fieldOutcome = '** sprintf: " " came too late **';
 							}
 							break;
-						case '.': 
+						case '.':
 							if (fieldCount < 2) {
 								fieldCount = 2;
 								precision = 0;
@@ -144,7 +143,7 @@ class com.natecook.Sprintf
 							}
 							break;
 						/*
-						case 'h': 
+						case 'h':
 							if (fieldCount < 3) {
 								fieldCount = 3;
 							} else {
@@ -152,7 +151,7 @@ class com.natecook.Sprintf
 							}
 							break;
 						case 'l':
-						case 'L': 
+						case 'L':
 							if (fieldCount < 3) {
 								fieldCount = 3;
 								properties |= kLONG_VALUE;
@@ -169,12 +168,12 @@ class com.natecook.Sprintf
 						case '1':
 						case '2':
 						case '3':
-						case '4': 
-						case '5': 
-						case '6': 
-						case '7': 
-						case '8': 
-						case '9': 
+						case '4':
+						case '5':
+						case '6':
+						case '7':
+						case '8':
+						case '9':
 							if (fieldCount == 3) {
 								fieldOutcome = '** sprintf: shouldn\'t have a digit after h,l,L **';
 							} else if (fieldCount < 2) {
@@ -192,30 +191,30 @@ class com.natecook.Sprintf
 						case 'i':
 							fieldOutcome = true;
 							destString += Sprintf.formatD(value,properties,length,precision);
-							break;						
+							break;
 						case 'o':
 							fieldOutcome = true;
 							destString += Sprintf.formatO(value,properties,length,precision);
-							break;						
+							break;
 						case 'x':
 						case 'X':
 							fieldOutcome = true;
 							destString += Sprintf.formatX(value,properties,length,precision,(ch == 'X'));
-							break;						
+							break;
 						case 'e':
 						case 'E':
 							fieldOutcome = true;
 							destString += Sprintf.formatE(value,properties,length,precision,(ch == 'E'));
-							break;						
+							break;
 						case 'f':
 							fieldOutcome = true;
 							destString += Sprintf.formatF(value,properties,length,precision);
-							break;						
+							break;
 						case 'g':
 						case 'G':
 							fieldOutcome = true;
 							destString += Sprintf.formatG(value,properties,length,precision,(ch == 'G'));
-							break;						
+							break;
 						case 'c':
 						case 'C':
 							precision = 1;
@@ -223,7 +222,7 @@ class com.natecook.Sprintf
 						case 'S':
 							fieldOutcome = true;
 							destString += Sprintf.formatS(value,properties,length,precision);
-							break;					
+							break;
 						case '%':
 							fieldOutcome = true;
 							destString += '%';
@@ -231,9 +230,9 @@ class com.natecook.Sprintf
 							// we don't need a value for this, so back up
 							argIndex--;
 							break;
-						default: 
+						default:
 							fieldOutcome = '** sprintf: ' + ch + ' not supported **';
-							break;			
+							break;
 					}
 				}
 				
@@ -244,16 +243,14 @@ class com.natecook.Sprintf
 			}
 		}
 		
-		return destString;	
+		return destString;
 	}
 
 	// -=-=-=-=-=-=-=-=-=-=-=-=-=-
 	// formatting functions
 	// -=-=-=-=-=-=-=-=-=-=-=-=-=-
-	static function finish(output,value,properties,length,precision,prefix) 
+	private static function finish(output:*,value:int,properties:int,length:int,precision:int,prefix:String=''):String
 	{
-		if (prefix == null) prefix = '';
-		
 		// add sign to prefix
 		if (value < 0) {
 			prefix = '-' + prefix;
@@ -283,16 +280,16 @@ class com.natecook.Sprintf
 	}
 	
 	// integer
-	static function formatD(value,properties,length,precision) 
-	{ 
-		var output = '';
+	private static function formatD(value:*,properties:*,length:int,precision:int):String
+	{
+		var output:String = '';
 		value = Number(value);
 		
 		if ((precision != 0) || (value != 0)) {
 			output = String(Math.floor(Math.abs(value)));
 		}
 		
-		while (output.length < precision) 
+		while (output.length < precision)
 		{
 			output = '0' + output;
 		}
@@ -301,10 +298,10 @@ class com.natecook.Sprintf
 	}
 	
 	// octal
-	static function formatO(value,properties,length,precision) 
+	private static function formatO(value:*,properties:*,length:int,precision:int):String
 	{
-		var output = '';
-		var prefix = '';
+		var output:String = '';
+		var prefix:String = '';
 		value = Number(value);
 		
 		if ((precision != 0) && (value != 0)) {
@@ -323,9 +320,10 @@ class com.natecook.Sprintf
 	}
 	
 	// hexidecimal
-	static function formatX(value,properties,length,precision,upper) {
-		var output = '';
-		var prefix = '';
+	private static function formatX(value:*, properties:*, length:int, precision:int, upper:Boolean):String
+        {
+		var output:String = '';
+		var prefix:String = '';
 		value = Number(value);
 		
 		if ((precision != 0) && (value != 0)) {
@@ -344,7 +342,7 @@ class com.natecook.Sprintf
 			prefix = prefix.toUpperCase();
 			output = output.toUpperCase();
 		} else {
-			output = output.toLowerCase();	
+			output = output.toLowerCase();
 			// Flash documentation isn't clear about what case the Number.toString() method uses
 		}
 		
@@ -352,10 +350,10 @@ class com.natecook.Sprintf
 	}
 	
 	// scientific notation
-	static function formatE(value,properties,length,precision,upper) 
+	private static function formatE(value:*,properties:*,length:int,precision:int,upper:Boolean):String
 	{
-		var output = '';
-		var expCount = 0;
+		var output:String = '';
+		var expCount:int = 0;
 		value = Number(value);
 		
 		if (Math.abs(value) > 1) {
@@ -370,7 +368,7 @@ class com.natecook.Sprintf
 			}
 		}
 		
-		var expCountStr = Sprintf.format('%c%+.2d',(upper ? 'E' : 'e'),expCount);
+		var expCountStr:String = Sprintf.format('%c%+.2d',(upper ? 'E' : 'e'),expCount);
 	
 		if (properties & kLEFT_ALIGN) {
 			// give small length
@@ -386,7 +384,7 @@ class com.natecook.Sprintf
 	}
 	
 	// float (or real)
-	static function formatF(value,properties,length,precision) 
+	private static function formatF(value:*,properties:*,length:int,precision:int):String
 	{
 		var output:String = '';
 		var intPortion:String = '';
@@ -412,7 +410,7 @@ class com.natecook.Sprintf
 			while (decPortion.length < precision) decPortion += '0';
 		} else {
 			if (decPortion.length > precision) {
-				var dec = Math.round(Math.pow(10,precision) * Number('0.' + decPortion)) / Math.pow(10,precision);
+				var dec:Number = Math.round(Math.pow(10,precision) * Number('0.' + decPortion)) / Math.pow(10,precision);
 				if (dec == 1) {
 					decPortion = '0';
 					intPortion = ((Math.abs(Number(intPortion)) + 1) * (Number(intPortion) >= 0 ? 1 : -1)).toString();
@@ -438,29 +436,29 @@ class com.natecook.Sprintf
 			output = intPortion + '.' + decPortion;
 		}
 		
-		return Sprintf.finish(output,value,properties,length,precision,'');	
+		return Sprintf.finish(output,value,properties,length,precision,'');
 	}
 	
 	// shorter of float or scientific
-	static function formatG(value,properties,length,precision,upper) 
+	private static function formatG(value:*,properties:*,length:int,precision:int,upper:Boolean):String
 	{
 	
-		// use 1 as the length for the test because the 
+		// use 1 as the length for the test because the
 		// padded value will be the same -> not useful
-		var out1 = Sprintf.formatE(value,properties,1,precision,upper);
-		var out2 = Sprintf.formatF(value,properties,1,precision);
+		var out1:String = Sprintf.formatE(value,properties,1,precision,upper);
+		var out2:String = Sprintf.formatF(value,properties,1,precision);
 		
 		if (out1.length < out2.length) {
 			return Sprintf.formatE(value,properties,length,precision,upper);
 		} else {
 			return Sprintf.formatF(value,properties,length,precision);
-		}	
+		}
 	}
 	
 	// string
-	static function formatS(value,properties,length,precision) 
+	private static function formatS(value:*,properties:*,length:int,precision:int):String
 	{
-		var output = new String(value);
+		var output:String = new String(value);
 	
 		if ((precision > 0) && (precision < output.length)) {
 			output = output.substring(0,precision);
@@ -469,6 +467,8 @@ class com.natecook.Sprintf
 		// ignore unneeded flags
 		properties &= ~(kPAD_ZEROES | kSHOW_SIGN | kPAD_POS | kALT_FORM);
 		
-		return Sprintf.finish(output,value,properties,length,0/*was:precision*/,'');	
+		return Sprintf.finish(output,value,properties,length,0/*was:precision*/,'');
 	}
+}
+
 }

@@ -8,7 +8,6 @@ class com.xvm.Config
 {
     // Constants
     public static var E_CONFIG_LOADED = "config_loaded";
-    public static var E_SET_INFO = "set_info";
     
     // Public vars
     public static var s_config:Object;

@@ -2,16 +2,7 @@
  * ...
  * @author Maxim Schedriviy
  */
-import com.xvm.Cmd;
-import com.xvm.Config;
-import com.xvm.Defines;
-import com.xvm.GraphicsUtil;
-import com.xvm.JSONx;
-import com.xvm.Locale;
-import com.xvm.Logger;
-import com.xvm.Strings;
-import com.xvm.Utils;
-import com.xvm.VehicleInfo;
+import com.xvm.*;
 import com.xvm.DataTypes.VehicleData;
 
 class wot.VehicleMarkersManager.log.HitLog
@@ -117,12 +108,13 @@ class wot.VehicleMarkersManager.log.HitLog
             }
         }
 
-        players[playerName].total += delta;
+        var player:Object = players[playerName];
+        player.total += delta;
 
-        if (players[playerName].hits.length == 0 || players[playerName].hits[players[playerName].hits.length - 1] != id)
-            players[playerName].hits.push(id);
+        if (player.hits.length == 0 || player.hits[player.hits.length - 1] != id)
+            player.hits.push(id);
 
-        var header:String = formatText(formatHeader, playerName);
+        var header:String = Macros.Format(playerName, formatHeader, player); // TODO
 
         if (lines <= 0)
         {
@@ -130,7 +122,7 @@ class wot.VehicleMarkersManager.log.HitLog
             return;
         }
 
-        var hist:String = formatText(formatHistory, playerName);
+        var hist:String = Macros.Format(playerName, formatHistory, player);
         hits[hits.length - 1].hist = hist;
 
         var skip:Array = [ ];
@@ -188,7 +180,7 @@ class wot.VehicleMarkersManager.log.HitLog
         saveText(defaultHeader);
     }
 
-    private function formatText(format:String, playerName:String):String
+/*    private function formatText(format:String, playerName:String):String
     {
         // TODO: Macros optimization - use com.xvm.Macros class
 
@@ -304,5 +296,5 @@ class wot.VehicleMarkersManager.log.HitLog
         }
 
         return Utils.fixImgTag(format);
-    }
+    }*/
 }

@@ -5,6 +5,8 @@ import com.xvm.Config;
 class com.xvm.Cmd
 {
     private static var COMMAND_LOG:String = "log";
+    private static var COMMAND_LOAD_FILE:String = "loadFile";
+    private static var COMMAND_GET_CONFIG:String = "getConfig";
     private static var COMMAND_GETSCREENSIZE:String = "getScreenSize";
     private static var COMMAND_GETGAMEREGION:String = "getGameRegion";
     private static var COMMAND_GETLANGUAGE:String = "getLanguage";
@@ -20,6 +22,16 @@ class com.xvm.Cmd
     public static function log(str:String)
     {
         _call(null, null, [COMMAND_LOG, str]);
+    }
+
+    public static function loadFile(filename:String, target:Object, callback:Function)
+    {
+        _call(target, callback, [COMMAND_LOAD_FILE, filename]);
+    }
+
+    public static function getConfig(target:Object, callback:Function)
+    {
+        _call(target, callback, [COMMAND_GET_CONFIG]);
     }
 
     public static function getScreenSize(target:Object, callback:Function)

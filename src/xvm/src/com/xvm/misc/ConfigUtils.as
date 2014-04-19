@@ -227,6 +227,12 @@ package com.xvm.misc
                 v = "5.0.2";
             }
 
+            if (v == "5.0.2")
+            {
+                // TODO replace aligned macros with printf format
+                v = "5.1.0";
+            }
+
 /*
             if (v == "5.x.x")
             {

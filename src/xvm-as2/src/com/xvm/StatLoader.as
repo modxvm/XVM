@@ -61,9 +61,6 @@ class com.xvm.StatLoader
                     //Logger.addObject(StatData.s_data[nm], "s_data[" + nm + "]", 3);
                 }
             }
-
-            if (response.info)
-                GlobalEventDispatcher.dispatchEvent({ type: Config.E_SET_INFO, ver: response.info.ver, message: response.info.message });
         }
         catch (ex)
         {

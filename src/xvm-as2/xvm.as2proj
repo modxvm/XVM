@@ -65,6 +65,7 @@
   <hiddenPaths>
     <hidden path="wrapper" />
     <hidden path="swf" />
+    <hidden path="obj" />
   </hiddenPaths>
   <!-- Executed before build -->
   <preBuildCommand />

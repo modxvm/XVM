@@ -1,10 +1,16 @@
-﻿XVM-5.2.1-test2:
+﻿XVM-5.3.0-dev:
+  [MAJOR UPDATES]
+  * new macros formatting (see readme-en.txt)
+  * config version increased to 5.1.0
+
+XVM-5.2.1-test2:
   [FIXES]
   * players panels was not shown after battle loading
   * fixed displaying of elements on minimap
 
   [NEW FUNCTIONS]
   * new option login/saveLastServer - save last server (disabled by default)
+
 
 XVM-5.2.1-test1:
   * adaptation to WoT 0.9.0
