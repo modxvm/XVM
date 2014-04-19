@@ -1,9 +1,9 @@
-""" fix 0.8.11 waiting bug (c) sirmax 2014 """
+""" fix waiting bug (c) sirmax 2014 """
 
 #####################################################################
 # MOD INFO (mandatory)
 
-XPM_MOD_VERSION    = "0.2"
+XPM_MOD_VERSION    = "0.3"
 XPM_MOD_URL        = "http://www.koreanrandom.com/forum/topic/11630-/#entry151768"
 XPM_MOD_UPDATE_URL = ""
 XPM_GAME_VERSIONS  = ["0.8.11","0.9.0"]
