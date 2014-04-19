@@ -304,11 +304,6 @@ class _Stat(object):
     def _load_stat(self, playerVehicleID, allowNetwork=True):
         requestList = []
 
-        tdata = getXvmStatActiveTokenData()
-        if tdata is None or not 'token' in tdata:
-            err('No valid token for XVM statistics (id=%s)' % playerVehicleID)
-            return
-
         replay = isReplay()
         for vehId in self.players:
             pl = self.players[vehId]
@@ -327,14 +322,20 @@ class _Stat(object):
 
         if not requestList:
             return
-        updateRequest = 'stat/%s/%s' % (tdata['token'].encode('ascii'), ','.join(requestList))
-
-        if XVM_STAT_SERVERS is None or len(XVM_STAT_SERVERS) <= 0:
-            err('Cannot read statistics: no suitable server was found.')
-            return
 
         try:
             if allowNetwork:
+                tdata = getXvmStatActiveTokenData()
+                if tdata is None or not 'token' in tdata:
+                    err('No valid token for XVM statistics (id=%s)' % playerVehicleID)
+                    return
+
+                updateRequest = 'stat/%s/%s' % (tdata['token'].encode('ascii'), ','.join(requestList))
+
+                if XVM_STAT_SERVERS is None or len(XVM_STAT_SERVERS) <= 0:
+                    err('Cannot read statistics: no suitable server was found.')
+                    return
+
                 server = XVM_STAT_SERVERS[randint(0, len(XVM_STAT_SERVERS) - 1)]
                 (response, duration) = loadUrl(server, updateRequest)
 

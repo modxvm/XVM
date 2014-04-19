@@ -139,10 +139,10 @@
       "width": 120,
       "nickFormatLeft": "<font color='{{c:xwn8}}'>{{xwn8}}</font> {{name}}<font alpha='#A0'>{{clan}}</font>",
       "nickFormatRight": "{{name}}<font alpha='#A0'>{{clan}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font>",
-      //"vehicleFormatLeft": "",
-      //"vehicleFormatRight": ""
-      "vehicleFormatLeft": "<font color='{{c:rating}}'>{{vehicle}}</font>",
-      "vehicleFormatRight": "<font color='{{c:rating}}'>{{vehicle}}</font>"
+      "vehicleFormatLeft": "",
+      "vehicleFormatRight": ""
+      //"vehicleFormatLeft": "<font color='{{c:rating}}'>{{vehicle}}</font>",
+      //"vehicleFormatRight": "<font color='{{c:rating}}'>{{vehicle}}</font>"
     },
     "enemySpottedMarker": {
       "enabled": true,
