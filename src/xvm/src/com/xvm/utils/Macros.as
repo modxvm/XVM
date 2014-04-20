@@ -112,7 +112,7 @@ package com.xvm.utils
             var name:String = parts[0];
             var fmt:String = parts[1];
             var suf:String = parts[2];
-            var def:String = parts[3];
+            var def:String = parts[3] || "";
 
             // substitute
             //Logger.add("name:" + name + " fmt:" + fmt + " suf:" + suf + " def:" + def);
@@ -140,35 +140,36 @@ package com.xvm.utils
             {
                 res = Sprintf.format("%" + fmt, res);
                 //Logger.add(value + "|" + res + "|");
-                if (suf != null)
+            }
+
+            if (suf != null)
+            {
+                if (type == "string")
                 {
-                    if (type == "string")
+                    if (res.length - suf.length > 0)
                     {
-                        if (res.length - suf.length > 0)
+                        // search precision
+                        parts = fmt.split(".", 2);
+                        if (parts.length == 2)
                         {
-                            // search precision
-                            parts = fmt.split(".", 2);
-                            if (parts.length == 2)
+                            parts = parts[1].split('');
+                            len = parts.length;
+                            var precision:int = 0;
+                            for (i = 0; i < len; ++i)
                             {
-                                parts = parts[1].split('');
-                                len = parts.length;
-                                var precision:int = 0;
-                                for (i = 0; i < len; ++i)
-                                {
-                                    ch = parts[i];
-                                    if (ch < '0' || ch > '9')
-                                        break;
-                                    precision = (precision * 10) + Number(ch);
-                                }
-                                if (res.length == precision)
-                                    res = res.substr(0, res.length - suf.length - 1) + suf;
+                                ch = parts[i];
+                                if (ch < '0' || ch > '9')
+                                    break;
+                                precision = (precision * 10) + Number(ch);
                             }
+                            if (res.length == precision)
+                                res = res.substr(0, res.length - suf.length - 1) + suf;
                         }
                     }
-                    else
-                    {
-                        res += suf;
-                    }
+                }
+                else
+                {
+                    res += suf;
                 }
             }
 
