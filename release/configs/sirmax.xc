@@ -7,7 +7,7 @@
     "formatNick": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>",
     "formatVehicle": "<font face='Consolas' size='11'><font color='{{c:avglvl|#666666}}'>{{avglvl|-}}</font> <font color='{{c:xeff|#666666}}'>{{xeff|--}}</font>|<font color='{{c:xwn8|#666666}}'>{{xwn8|--}}</font> <font color='{{c:kb|#666666}}'>{{kb%2d~k|--}}</font></font>",
     //"formatVehicle": "{{vehicle}}",
-    //"formatVehicle": "{{kb~k}}",
+    //"formatVehicle": "|{{t-kb%4.2f~k|.-k}}|{{t-kb%4.1f~k|.-k}}|",
 
     "markersStat": "<b><font face='Symbol' color='#CCCCCC' size='11'><font color='{{c:t-battles}}'>·</font> <font color='{{c:xeff}}'>·</font> <font color='{{c:xwn8}}'>·</font></font></b>",
     "markersStatAlt": "<b><font face='$FieldFont' size='12'><font color='{{c:t-battles}}'>{{t-hb%d~h|-}}</font> <font color='{{c:xeff}}'>{{xeff|--}}</font> <font color='{{c:xwn8}}'>{{xwn8|--}}</font> <font color='{{c:rating}}'>{{rating~%|--}}</font></font></b>",
@@ -138,8 +138,8 @@
     },
     "large": {
       "width": 120,
-      "nickFormatLeft": "<font color='{{c:xwn8}}'>{{xwn8}}</font> {{name}}<font alpha='#A0'>{{clan}}</font>",
-      "nickFormatRight": "{{name}}<font alpha='#A0'>{{clan}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font>",
+      "nickFormatLeft": "<font color='{{c:xwn8}}'>{{xwn8|--}}</font> {{name}}<font alpha='#A0'>{{clan}}</font>",
+      "nickFormatRight": "{{name}}<font alpha='#A0'>{{clan}}</font> <font color='{{c:xwn8}}'>{{xwn8|--}}</font>",
       "vehicleFormatLeft": "",
       "vehicleFormatRight": ""
       //"vehicleFormatLeft": "<font color='{{c:rating}}'>{{vehicle}}</font>",
