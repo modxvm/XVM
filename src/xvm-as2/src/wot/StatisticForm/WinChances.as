@@ -22,9 +22,9 @@ class wot.StatisticForm.WinChances
             s_chanceField._x -= 150;
         }
 
-        s_chanceText = "<span class='xvm_battleText'><b><font size='16'>" +
+        s_chanceText = "<span class='xvm_battleText'>" +
             (Chance.GetChanceText(showChances, showBattleTier, showLive) || "") +
-            "</font></b></span>";
+            "</span>";
         //com.xvm.Logger.add(s_chanceText);
         if (s_chanceField.htmlText != s_chanceText)
         {
