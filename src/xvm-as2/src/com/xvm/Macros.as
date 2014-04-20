@@ -281,13 +281,13 @@ class com.xvm.Macros
 
         // {{avglvl}}
         var avglvl = Math.round(Utils.toFloat(stat.lvl, 0));
-        pdata["avglvl"] = avglvl < 1 ? "-" : avglvl == 10 ? "X" : String(avglvl);
+        pdata["avglvl"] = avglvl < 1 ? null : avglvl == 10 ? "X" : String(avglvl);
         // {{xeff}}
-        pdata["xeff"] = stat.xeff == null ? "--" : stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff;
+        pdata["xeff"] = stat.xeff == null ? null : stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff;
         // {{xwn6}}
-        pdata["xwn6"] = stat.xwn6 == null ? "--" : stat.xwn6 == 100 ? "XX" : (stat.xwn6 < 10 ? "0" : "") + stat.xwn6;
+        pdata["xwn6"] = stat.xwn6 == null ? null : stat.xwn6 == 100 ? "XX" : (stat.xwn6 < 10 ? "0" : "") + stat.xwn6;
         // {{xwn8}}
-        pdata["xwn8"] = stat.xwn8 == null ? "--" : stat.xwn8 == 100 ? "XX" : (stat.xwn8 < 10 ? "0" : "") + stat.xwn8;
+        pdata["xwn8"] = stat.xwn8 == null ? null : stat.xwn8 == 100 ? "XX" : (stat.xwn8 < 10 ? "0" : "") + stat.xwn8;
         // {{xwn}}
         pdata["xwn"] = pdata["xwn8"];
         // {{eff}}
@@ -299,7 +299,7 @@ class com.xvm.Macros
         // {{wn}}
         pdata["wn"] = pdata["wn8"];
         // {{e}}
-        pdata["e"] = stat.v.te == null ? "-" : stat.v.te >= 10 ? "E" : String(stat.v.te);
+        pdata["e"] = stat.v.te == null ? null : stat.v.te >= 10 ? "E" : String(stat.v.te);
         // {{teff}}
         pdata["teff"] = stat.v.teff == null ? NaN : stat.v.teff;
 

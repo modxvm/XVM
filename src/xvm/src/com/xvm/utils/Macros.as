@@ -320,16 +320,16 @@ package com.xvm.utils
 
             // {{avglvl}}
             var avglvl:Number = isNaN(stat.lvl) ? NaN : Math.round(stat.lvl);
-            pdata["avglvl"] = isNaN(avglvl) ? "-" : avglvl >= 10 ? "X" : avglvl.toString();
+            pdata["avglvl"] = isNaN(avglvl) ? null : avglvl >= 10 ? "X" : avglvl.toString();
             // {{xeff}}
-            pdata["xeff"] = isNaN(stat.xeff) ? "--" : stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff;
+            pdata["xeff"] = isNaN(stat.xeff) ? null : stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff;
             // {{xwn6}}
-            pdata["xwn6"] = isNaN(stat.xwn6) ? "--" : stat.xwn6 == 100 ? "XX" : (stat.xwn6 < 10 ? "0" : "") + stat.xwn6;
+            pdata["xwn6"] = isNaN(stat.xwn6) ? null : stat.xwn6 == 100 ? "XX" : (stat.xwn6 < 10 ? "0" : "") + stat.xwn6;
             // {{xwn8}}
-            pdata["xwn8"] = isNaN(stat.xwn8) ? "--" : stat.xwn8 == 100 ? "XX" : (stat.xwn8 < 10 ? "0" : "") + stat.xwn8;
+            pdata["xwn8"] = isNaN(stat.xwn8) ? null : stat.xwn8 == 100 ? "XX" : (stat.xwn8 < 10 ? "0" : "") + stat.xwn8;
             // {{xwn}}
             pdata["xwn"] = pdata["xwn8"];
-            // {{eff}}, {{eff:4}}
+            // {{eff}}
             pdata["eff"] = stat.e;
             // {{wn6}}
             pdata["wn6"] = stat.wn6;
@@ -338,7 +338,7 @@ package com.xvm.utils
             // {{wn}}
             pdata["wn"] = pdata["wn8"];
             // {{e}}
-            pdata["e"] = isNaN(stat.v.teff) ? "-" : stat.v.te >= 10 ? "E" : String(stat.v.te);
+            pdata["e"] = isNaN(stat.v.teff) ? null : stat.v.te >= 10 ? "E" : String(stat.v.te);
             // {{teff}}
             pdata["teff"] = stat.v.teff;
 
@@ -415,16 +415,14 @@ package com.xvm.utils
             pdata["c:avglvl"] = isNaN(stat.lvl) ? "" : function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, stat.lvl, "#", o.darken);
             }
-            // {{c:t-rating}}, {{c:t_rating}}
+            // {{c:t-rating}}
             pdata["c:t-rating"] = isNaN(stat.v.r) ? "" : function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, stat.v.r, "#", o.darken);
             }
-            pdata["c:t_rating"] = pdata["c:t-rating"];
-            // {{c:t-battles}}, {{c:t_battles}}
+            // {{c:t-battles}}
             pdata["c:t-battles"] = isNaN(stat.v.b) ? "" : function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, stat.v.b, "#", o.darken);
             }
-            pdata["c:t_battles"] = pdata["c:t-battles"];
             // {{c:tdb}}
             pdata["c:tdb"] = isNaN(stat.v.db) ? "" : function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, stat.v.db, "#", o.darken);
