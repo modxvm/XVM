@@ -17,6 +17,13 @@ class wot.Minimap.view.MarkerColor
         if (wrapper.m_type == "player" && wrapper.entryName == "postmortemCamera")
             return;
 
+        if (Config.s_config == null)
+        {
+            // wait for config
+            setTimeout(function() { MarkerColor.setColor(wrapper); }, 1);
+            return;
+        }
+
         var color = null;
         if (Config.s_config.markers.useStandardMarkers)
         {

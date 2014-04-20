@@ -1,6 +1,8 @@
 ﻿import com.natecook.Sprintf;
 import com.xvm.*;
 import com.xvm.DataTypes.*;
+import wot.Minimap.model.externalProxy.*;
+import wot.Minimap.dataTypes.*;
 
 class com.xvm.Macros
 {
@@ -414,6 +416,37 @@ class com.xvm.Macros
         pdata["a:tfb"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TFB, stat.v.fb); }
         // {{a:tsb}}
         pdata["a:tsb"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TSB, stat.v.sb); }
+    }
+
+    public static function RegisterMinimapMacros(player:Player, vehicleClassSymbol:String)
+    {
+        if (!player)
+            return;
+
+        var pname:String = Utils.GetNormalizedPlayerName(player.userName);
+        if (!dict.hasOwnProperty(pname))
+            dict[pname] = { };
+        var pdata = dict[pname];
+
+        var vdata:VehicleData = VehicleInfo.getByIcon(player.icon);
+
+        // {{level}}
+        pdata["level"] = vdata.level;
+
+        // {{short-nick}}
+        pdata["short-nick"] = player.userName.slice(0, MapConfig.nickShrink)
+
+        // {{vehicle-class}} - returns special symbol depending on class
+        pdata["vehicle-class"] = vehicleClassSymbol;
+
+        // {{vehicle}} - Vehicle type readable - Chaffee
+        pdata["vehicle"] = vdata.localizedName;
+
+        // {{vehicle-name}} - Vehicle system name - usa-M24_Chaffee
+        pdata["vehicle-name"] = VehicleInfo.getVIconName(vdata.key)
+
+        // {{vehicle-short}}
+        pdata["vehicle-short"] = vdata.shortName;
     }
 
     // PRIVATE

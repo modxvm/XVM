@@ -1,10 +1,7 @@
-import com.xvm.Logger;
-import com.xvm.AutoUpdate;
-import com.xvm.GlobalEventDispatcher;
+import com.xvm.*;
 import flash.geom.Point;
+import wot.Minimap.*;
 import wot.Minimap.dataTypes.Player;
-import wot.Minimap.MinimapEvent;
-import wot.Minimap.MinimapProxy;
 import wot.Minimap.model.externalProxy.IconsProxy;
 import wot.Minimap.view.LabelViewBuilder;
 import wot.PlayersPanel.PlayersPanelProxy;
@@ -78,6 +75,7 @@ class wot.Minimap.view.LabelsContainer
         labelMc[ENTRY_NAME_FIELD_NAME] = entryName;
         labelMc[VEHICLE_CLASS_FIELD_NAME] = vehicleClass;
         labelMc[STATUS_FIELD_NAME] = Player.PLAYER_REVEALED;
+        Macros.RegisterMinimapMacros(playerInfo, MinimapEntry.getVehicleClassSymbol(vehicleClass));
 
         /**
          * Label stays at creation point some time before first move.

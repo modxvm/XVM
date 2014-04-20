@@ -142,6 +142,27 @@ class wot.Minimap.MinimapEntry
         MarkerColor.setColor(wrapper);
     }
 
+    public static function getVehicleClassSymbol(vehicleClass:String):String
+    {
+        switch (vehicleClass)
+        {
+            case MINIMAP_ENTRY_VEH_CLASS_LIGHT:
+                return MapConfig.lightSymbol;
+            case MINIMAP_ENTRY_VEH_CLASS_MEDIUM:
+                return MapConfig.mediumSymbol;
+            case MINIMAP_ENTRY_VEH_CLASS_HEAVY:
+                return MapConfig.heavySymbol;
+            case MINIMAP_ENTRY_VEH_CLASS_TD:
+                return MapConfig.tdSymbol;
+            case MINIMAP_ENTRY_VEH_CLASS_SPG:
+                return MapConfig.spgSymbol;
+            case MINIMAP_ENTRY_VEH_CLASS_SUPER:
+                return MapConfig.superSymbol;
+            default:
+                return "";
+        }
+    }
+
     // -- Private
 
     private function initExtendedBehaviour():Void
