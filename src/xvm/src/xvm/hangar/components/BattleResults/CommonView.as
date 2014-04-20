@@ -188,11 +188,11 @@ package xvm.hangar.components.BattleResults
                     value: getTotalCritsCount(data),
                     tooltip: { value: getTotalCritsCount(data) } } ));
 
-                // pierced
+                // piercings
                 view.addChild(createTotalItem( { x: x + w * 3 - 1, y: y, kind: EfficiencyIconRenderer.DAMAGE,
-                    value: data.pierced,
+                    value: data.piercings,
                     tooltip: (data.details == null || data.details.length == 0) ? null : {
-                        values: data.damageDealt + "<br/>" + data.pierced,
+                        values: data.damageDealt + "<br/>" + data.piercings,
                         discript: data.details[0].damageDealtNames
                     } } ));
 
