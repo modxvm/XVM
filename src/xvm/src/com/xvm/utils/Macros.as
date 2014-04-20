@@ -163,7 +163,7 @@ package com.xvm.utils
                                 precision = (precision * 10) + Number(ch);
                             }
                             if (res.length == precision)
-                                res = res.substr(0, res.length - suf.length - 1) + suf;
+                                res = res.substr(0, res.length - suf.length) + suf;
                         }
                     }
                 }
