@@ -107,16 +107,18 @@ class com.xvm.Macros
         //Logger.add("name:" + name + " fmt:" + fmt + " suf:" + suf + " def:" + def);
 
         if (!pdata.hasOwnProperty(name))
+        {
+            //Logger.add("Warning: unknown macro: " + macro);
             return def;
+        }
 
         var value = pdata[name];
-        var type:String = typeof value;
-        //Logger.add("type:" + type + " value:" + value);
-
+        //Logger.add("value:" + value);
         if (value == null)
             return def;
 
-        //Logger.add("name:" + name + " fmt:" + fmt + " suf:" + suf + " def:" + def + " macro:" + macro);
+        var type:String = typeof value;
+        //Logger.add("type:" + type + " value:" + value + " name:" + name + " fmt:" + fmt + " suf:" + suf + " def:" + def + " macro:" + macro);
 
         if (type == "number" && isNaN(value))
             return def;
@@ -451,6 +453,40 @@ class com.xvm.Macros
 
         // {{vehicle-short}}
         pdata["vehicle-short"] = vdata.shortName;
+    }
+
+    public static function RegisterHitlogMacros(playerName:String, data:Object, hits:Array, total:Number)
+    {
+        if (!data)
+            return;
+
+        var pname:String = Utils.GetNormalizedPlayerName(playerName);
+        if (!dict.hasOwnProperty(pname))
+            dict[pname] = { };
+        var pdata = dict[pname];
+
+        // {{dead}}
+        pdata["dead"] = data.curHealth < 0
+            ? Config.s_config.hitLog.blowupMarker
+            : (data.curHealth == 0 || data.dead) ? Config.s_config.hitLog.deadMarker : "";
+
+        // {{n}}
+        pdata["n"] = hits.length;
+
+        // {{n-player}}
+        pdata["n-player"] = data.hits.length;
+
+        // {{dmg}}
+        pdata["dmg"] = data.dmg;
+
+        // {{dmg-total}}
+        pdata["dmg-total"] = total;
+
+        // {{dmg-avg}}
+        pdata["dmg-avg"] = hits.length == 0 ? 0 : Math.round(total / hits.length);
+
+        // {{dmg-player}}
+        pdata["dmg-player"] = data.total;
     }
 
     // PRIVATE

@@ -61,97 +61,14 @@ class wot.VehicleMarkersManager.log.HpLeft
                 continue;
             }
 
-            entries += (entries == "" ? "" : "<br/>") + Macros.Format(player, format, null);
+            //Logger.addObject(player);
+            entries += (entries == "" ? "" : "<br/>") + Macros.Format(player.pFullName, format, player);
         }
 
         text += (direction == Defines.DIRECTION_DOWN) ? header + "<br/>" + entries : entries + "<br/>" + header;
         text += "</span>";
         return text;
     }
-
-/*    private function formatText(format:String, player:Object):String
-    {
-        // mostly copied 1:1 from HitLog.as, HitLog.formatText
-        // TODO: Macros optimization - use com.xvm.Macros class
-
-        if (format.indexOf("{{") == -1)
-            return Utils.fixImgTag(format);
-
-        try
-        {
-            // available fields on "player": vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth
-
-            var vdata:VehicleData = VehicleInfo.getByIcon(player.vIconSource);
-
-            var formatArr:Array;
-            formatArr = format.split("{{nick}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(player.pFullName);
-            formatArr = format.split("{{name}}");
-            if (formatArr.length > 1)
-            {
-                var nm:String = Utils.GetPlayerName(player.pFullName);
-                format = formatArr.join(nm.length <= 16 ? nm : nm.substr(0, 14) + "..");
-            }
-            formatArr = format.split("{{clan}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(Utils.GetClanNameWithBrackets(player.pFullName));
-            formatArr = format.split("{{clannb}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(Utils.GetClanName(player.pFullName));
-
-            formatArr = format.split("{{vehicle}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(vdata.localizedName);
-            formatArr = format.split("{{vehiclename}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(VehicleInfo.getVIconName(vdata.key));
-            formatArr = format.split("{{vtype}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(VehicleInfo.getVTypeText(vdata.vtype));
-            formatArr = format.split("{{c:vtype}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(GraphicsUtil.GetVTypeColorValue(player.vIconSource));
-            formatArr = format.split("{{level}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(player.vLevel);
-            formatArr = format.split("{{rlevel}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(Defines.ROMAN_LEVEL[player.vLevel - 1]);
-
-
-            formatArr = format.split("{{hp}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(player.curHealth);
-            formatArr = format.split("{{c:hp}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, player.curHealth));
-            formatArr = format.split("{{a:hp}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_ALPHA_HP, player.curHealth));
-            formatArr = format.split("{{hp-max}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(player.maxHealth);
-            formatArr = format.split("{{hp-ratio}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(Math.round(player.curHealth / player.maxHealth * 100).toString());
-            formatArr = format.split("{{c:hp-ratio}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, player.curHealth / player.maxHealth * 100));
-            formatArr = format.split("{{a:hp-ratio}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO,
-                                        Math.round(player.curHealth / player.maxHealth * 100)).toString());
-
-            //format = Utils.trim(format);
-        }
-        catch (e)
-        {
-            format = "Error: " + String(e);
-        }
-
-        return Utils.fixImgTag(format);
-    }*/
 
     private function getLoggedPlayer(pFullName:String):Object
     {
