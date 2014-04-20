@@ -13,9 +13,9 @@ class com.xvm.VehicleInfo
 {
     // PUBLIC
 
-    public static function populateData()
+    public static function onVehicleInfoData(json_str:String)
     {
-        Cmd.getVehicleInfoData(instance, instance.onVehicleInfoData);
+        instance._onVehicleInfoData(json_str);
     }
 
     public static function get(vId:Number):VehicleData
@@ -76,7 +76,7 @@ class com.xvm.VehicleInfo
         this.vehiclesMapName = {};
     }
 
-    private function onVehicleInfoData(json_str:String)
+    private function _onVehicleInfoData(json_str:String)
     {
         //Logger.add("onVehicleInfoData(): " + json_str);
         try

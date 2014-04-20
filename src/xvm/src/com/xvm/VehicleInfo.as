@@ -85,7 +85,6 @@ package com.xvm
                 for each (var obj:Object in data_array)
                 {
                     var data:VehicleData = new VehicleData(obj);
-
                     var preferredNames:Object = Config.config.vehicleNames[data.key.split(':').join('-')];
                     if (preferredNames != null)
                     {

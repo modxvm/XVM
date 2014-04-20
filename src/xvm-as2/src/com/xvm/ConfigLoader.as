@@ -41,29 +41,36 @@ class com.xvm.ConfigLoader
         if (ConfigLoader.s_loading)
             return;
 
-        VehicleInfo.populateData();
-
         ConfigLoader.s_loading = true;
         Cmd.getConfig(this, GetConfigCallback);
     }
 
     // STAGE 1
 
-    private function GetConfigCallback(config_str)
+    private function GetConfigCallback(data:String)
     {
         try
         {
-            Config.s_config = JSONx.parse(config_str);
+            Config.s_config = JSONx.parse(data);
             //Logger.addObject(Config.s_config);
         }
         catch (e:Error)
         {
             Logger.add(e.message);
         }
-        Cmd.getGameRegion(this, OnGameRegionReceived);
+
+        Cmd.getVehicleInfoData(instance, OnVehicleInfoData);
     }
 
     // STAGE 2
+
+    private function OnVehicleInfoData(data:String)
+    {
+        VehicleInfo.onVehicleInfoData(data);
+        Cmd.getGameRegion(this, OnGameRegionReceived);
+    }
+
+    // STAGE 3
 
     private function OnGameRegionReceived(region:String)
     {
@@ -71,7 +78,7 @@ class com.xvm.ConfigLoader
         loadLanguage();  // run Stage 3
     }
 
-    // STAGE 3
+    // STAGE 4
 
     private function loadLanguage()
     {

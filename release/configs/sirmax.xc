@@ -553,10 +553,11 @@
     "vehicleMarker": "contour/Aslain/iconset2"
   },
   "vehicleNames": {
-    "ussr:T-34": { "name": "т-34.", "short": "т-34" },
-    "usa:T34_hvy": { "name": "т34.", "short": "т34" }
+    "ussr-T-34": { "name": "т-34.", "short": "т-34" },
+    "usa-T34_hvy": { "name": "т34.", "short": "т34" },
+    "ussr-KV-1s": { "name": "квас", "short": "квс" }
   },
   "texts": { "vtype": { "LT":  "ЛТ" } },
-//  "colors": ${"sirmax-colors.xc":"colors"},
+  //"colors": ${"sirmax-colors.xc":"colors"},
   "consts": { "VM_COEFF_VMM_DEAD": 0.75 }
 }
