@@ -71,7 +71,8 @@ def ProfileTechniqueWindowRequestData(base, self, data):
 #        self.as_responseVehicleDossierS({})
 
 def LoginView_onSetOptions(base, self, optionsList, host):
-    if not g_xvm.config['login']['saveLastServer']:
+    log('LoginView_onSetOptions')
+    if g_xvm.config os None or not g_xvm.config['login']['saveLastServer']:
         base(self, optionsList, host)
     else:
         options = []
