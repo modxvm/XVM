@@ -72,7 +72,7 @@ def ProfileTechniqueWindowRequestData(base, self, data):
 
 def LoginView_onSetOptions(base, self, optionsList, host):
     log('LoginView_onSetOptions')
-    if g_xvm.config os None or not g_xvm.config['login']['saveLastServer']:
+    if g_xvm.config is None or not g_xvm.config['login']['saveLastServer']:
         base(self, optionsList, host)
     else:
         options = []
