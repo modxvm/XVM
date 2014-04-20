@@ -4,7 +4,7 @@
  */
 package
 {
-    import com.xvm.io.JSONx;
+    import com.xvm.JSONx;
 
     import flash.utils.Dictionary;
 

@@ -116,10 +116,7 @@ class com.xvm.JSONx {
               if (c == '\\' || c == '"') {
                   s += '\\';
               }
-              if (c == '%')
-                  s += '\\u0025';
-              else
-                  s += c;
+              s += c;
           } else {
               switch (c) {
                   case '\b':

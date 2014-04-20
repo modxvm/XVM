@@ -169,10 +169,7 @@ package com.xvm.io
                             if (c >= ' ') {
                                 if (c == '\\' || c == '"')
                                     s += '\\';
-                                if (c == '%')
-                                    s += '\\u0025';
-                                else
-                                    s += c;
+                                s += c;
                             }
                             else
                             {

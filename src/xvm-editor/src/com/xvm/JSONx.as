@@ -131,10 +131,7 @@ package com.xvm
                             if (c == '\\' || c == '"') {
                                 s += '\\';
                             }
-                            if (c == '%')
-                                s += '\\u0025';
-                            else
-                                s += c;
+                            s += c;
                         } else {
                             switch (c) {
                                 case '\b':

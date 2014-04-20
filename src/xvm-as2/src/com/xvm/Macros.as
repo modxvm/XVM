@@ -54,51 +54,54 @@ class com.xvm.Macros
     private static function FormatMacro(macro:String, pdata:Object, options:Object):String
     {
         //Logger.addObject(pdata);
-        var name:String;
-        var fmt:String;
-        var suf:String;
-        var def:String;
-
-        var len:Number;
-        var rest:String;
-        var parts:Array;
+        var parts:Array = [null,null,null,null];
 
         // split parts: name[%fmt][~suf][|def]
+        var macroArr:Array = macro.split("");
+        var len:Number = macroArr.length;
+        var part:String = "";
+        var section:Number = 0;
+        for (var i:Number = 0; i < len; ++i)
+        {
+            var ch:String = macroArr[i];
+            switch (ch)
+            {
+                case "%":
+                    if (section < 1)
+                    {
+                        parts[section] = part;
+                        section = 1;
+                        part = "";
+                        continue;
+                    }
+                    break;
+                case "~":
+                    if (section < 2)
+                    {
+                        parts[section] = part;
+                        section = 2;
+                        part = "";
+                        continue;
+                    }
+                    break;
+                case "|":
+                    if (section < 3)
+                    {
+                        parts[section] = part;
+                        section = 3;
+                        part = "";
+                        continue;
+                    }
+                    break;
+            }
+            part += ch;
+        }
+        parts[section] = part;
 
-        parts = macro.split("%", 2);
-        len = parts.length;
-        rest = parts[len - 1];
-        name = parts[0];
-        fmt = len == 1 ? null : parts[1];
-
-        parts = rest.split("~", 2);
-        len = parts.length;
-        rest = parts[len - 1];
-        suf = len == 1 ? null : parts[1];
-        if (fmt == null)
-        {
-            name = parts[0];
-        }
-        else
-        {
-            fmt = parts[0];
-        }
-
-        parts = rest.split("|", 2);
-        len = parts.length;
-        def = len == 1 ? "" : parts[1];
-        if (fmt == null)
-        {
-            name = parts[0];
-        }
-        else if (suf == null)
-        {
-            fmt = parts[0];
-        }
-        else
-        {
-            suf = parts[0];
-        }
+        var name:String = parts[0];
+        var fmt:String = parts[1];
+        var suf:String = parts[2];
+        var def:String = parts[3];
 
         // substitute
         //Logger.add("name:" + name + " fmt:" + fmt + " suf:" + suf + " def:" + def);

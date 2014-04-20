@@ -57,7 +57,8 @@ class Xvm(object):
             if cmd == COMMAND_LOG:
                 log(*args)
             elif cmd == COMMAND_LOAD_FILE:
-                res = load_file(os.path.join(XVM_DIR, args[0]))
+                fn = os.path.join(XVM_DIR, args[0])
+                res = load_file(fn) if os.path.exists(fn) else None
             elif cmd == COMMAND_SET_CONFIG:
                 log('setConfig')
                 self.config_str = args[0]
