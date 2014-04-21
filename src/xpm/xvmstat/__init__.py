@@ -137,7 +137,7 @@ def _RegisterEvents():
     RegisterEvent(PlayerAvatar, 'vehicle_onLeaveWorld', PlayerAvatar_vehicle_onLeaveWorld)
 
     from Vehicle import Vehicle
-    RegisterEvent(Vehicle, 'set_health', Vehicle_set_health, True)
+    #RegisterEvent(Vehicle, 'set_health', Vehicle_set_health, True)
     RegisterEvent(Vehicle, 'onHealthChanged', Vehicle_onHealthChanged)
 
 BigWorld.callback(0, _RegisterEvents)
