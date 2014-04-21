@@ -1,12 +1,9 @@
-import com.xvm.GlobalEventDispatcher;
-import com.xvm.Logger;
-import com.xvm.Utils;
+import com.xvm.*;
 import wot.Minimap.dataTypes.Player;
 import wot.Minimap.MinimapEvent;
-import wot.Minimap.model.externalProxy.MapConfig;
 import wot.Minimap.model.SyncModel;
-import wot.Minimap.view.LabelsContainer;
-import wot.Minimap.view.MarkerColor;
+import wot.Minimap.model.externalProxy.MapConfig;
+import wot.Minimap.view.*;
 
 /**
  * MinimapEntry represent individual object on map.
@@ -138,8 +135,10 @@ class wot.Minimap.MinimapEntry
 
     function invalidateImpl()
     {
+        //Logger.add('invalidateImpl ' + Stat.s_loaded);
         base.invalidate();
         MarkerColor.setColor(wrapper);
+        LabelViewBuilder.updateTextField(labelMc);
     }
 
     public static function getVehicleClassSymbol(vehicleClass:String):String

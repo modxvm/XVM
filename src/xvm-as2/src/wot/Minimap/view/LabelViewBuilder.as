@@ -30,18 +30,6 @@ class wot.Minimap.view.LabelViewBuilder
         style.parseCSS(MapConfig.unitLabelCss(entryName, status));
         textField.styleSheet = style;
 
-        var format:String = MapConfig.unitLabelFormat(entryName, status);
-        var text:String = Macros.Format(playerInfo.userName, format, playerInfo);
-        if (text == "undefined" || !text)
-        {
-            /**
-             * Skip creation of textFields with "undefined" string.
-             * Happens for oneSelf icon at replay rewind.
-             */
-            text = "";
-        }
-        textField.htmlText = text;
-
         if (MapConfig.unitShadowEnabled(entryName, status))
         {
             textField.filters = [MapConfig.unitShadow(entryName, status)];
@@ -60,5 +48,30 @@ class wot.Minimap.view.LabelViewBuilder
              */
             textField._alpha = 0;
         }
+
+        updateTextField(label);
+    }
+
+    public static function updateTextField(label:MovieClip):Void
+    {
+        var textField:TextField = label[TEXT_FIELD_NAME];
+        if (textField == null)
+            return;
+
+        var status:Number = label[LabelsContainer.STATUS_FIELD_NAME];
+        var playerInfo:Player = label[LabelsContainer.PLAYER_INFO_FIELD_NAME];
+        var entryName:String = label[LabelsContainer.ENTRY_NAME_FIELD_NAME];
+
+        var format:String = MapConfig.unitLabelFormat(entryName, status);
+        var text:String = Macros.Format(playerInfo.userName, format, playerInfo);
+        if (text == "undefined" || !text)
+        {
+            /**
+             * Skip creation of textFields with "undefined" string.
+             * Happens for oneSelf icon at replay rewind.
+             */
+            text = "";
+        }
+        textField.htmlText = text;
     }
 }

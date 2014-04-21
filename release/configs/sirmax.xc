@@ -191,12 +191,14 @@
          { "enabled": true, "from": 50,  "to": 1463,  "inmeters": true, "thickness": 0.5,   "alpha": 65, "color": "0xFFFFFF"}
        ]
     },
-    "square" : {
-      "enabled": true,
-      "artilleryEnabled": false,
-      "thickness": 0.7,
-      "alpha": 40,
-      "color": "0xFFFFFF"
+    "labels": {
+      "units": {
+        "format": {
+          "ally":           "<span class='mm_a'><font color='{{c:xwn8}}'>*</font>{{vehicle}}</span>",
+          "teamkiller":     "<span class='mm_t'><font color='{{c:xwn8}}'>*</font>{{vehicle}}</span>",
+          "enemy":          "<span class='mm_e'><font color='{{c:xwn8}}'>*</font>{{vehicle}}</span>"
+        }
+      }
     }
   },
   "hitLog": {

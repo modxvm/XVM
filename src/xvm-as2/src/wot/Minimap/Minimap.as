@@ -1,8 +1,7 @@
 import com.xvm.*;
 import wot.Minimap.*;
-import wot.Minimap.model.externalProxy.MapConfig;
-import wot.Minimap.model.SyncModel;
-import com.xvm.AutoUpdate;
+import wot.Minimap.model.*;
+import wot.Minimap.model.externalProxy.*;
 
 /**
  * @author ilitvinov87@gmail.com
@@ -54,6 +53,7 @@ class wot.Minimap.Minimap
     {
         Utils.TraceXvmModule("Minimap");
 
+        GlobalEventDispatcher.addEventListener(Stat.E_STAT_LOADED, this, onStatLoaded);
         GlobalEventDispatcher.addEventListener(MinimapEvent.MINIMAP_READY, this, onReady);
         GlobalEventDispatcher.addEventListener(MinimapEvent.PANEL_READY, this, onReady);
 
@@ -159,6 +159,13 @@ class wot.Minimap.Minimap
             startExtendedProcedure();
             mapExtended = true;
         }
+    }
+
+    private function onStatLoaded():Void
+    {
+        var entries:Array = IconsProxy.allEntries;
+        for (var i in entries)
+            entries[i].invalidate();
     }
 
     private function startExtendedProcedure():Void
