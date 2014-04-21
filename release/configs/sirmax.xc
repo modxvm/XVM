@@ -194,9 +194,9 @@
     "labels": {
       "units": {
         "format": {
-          "ally":           "<span class='mm_a'><font color='{{c:xwn8}}'>{{hp}}</font> {{vehicle-short}}</span>",
-          "teamkiller":     "<span class='mm_t'><font color='{{c:xwn8}}'>{{hp}}</font> {{vehicle-short}}</span>",
-          "enemy":          "<span class='mm_e'><font color='{{c:xwn8}}'>{{hp}}</font> {{vehicle-short}}</span>"
+          "ally":           "<span class='mm_a'><font color='{{c:xwn8}}'>*</font> {{vehicle-short}}</span>",
+          "teamkiller":     "<span class='mm_t'><font color='{{c:xwn8}}'>*</font> {{vehicle-short}}</span>",
+          "enemy":          "<span class='mm_e'><font color='{{c:xwn8}}'>*</font> {{vehicle-short}}</span>"
         }
       }
     }
