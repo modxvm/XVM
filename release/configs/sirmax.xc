@@ -64,8 +64,8 @@
   "userInfo": {
     "inHangarFilterEnabled": true,
     "startPage": 4,
-    //"sortColumn": 5,
-    "sortColumn": -3,
+    //"sortColumn": -5,
+    "sortColumn": 3,
     "showExtraDataInProfile": true,
     "defaultFilterValue": "+all -premium -master -arty"
   },

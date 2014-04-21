@@ -11,8 +11,6 @@ package xvm.profile.components
     import scaleform.clik.events.*;
     import xvm.profile.UI.*;
 
-    UI_TechniqueStatisticTab;
-
     public class Technique extends Sprite
     {
         protected var _page:ProfileTechnique;
@@ -42,13 +40,12 @@ package xvm.profile.components
                 // Initialize TechniqueStatisticsTab
                 list.addEventListener(TechniqueList.SELECTED_DATA_CHANGED, initializeTechniqueStatisticTab);
 
+                delayedInit();
+
                 return;
 
                 // Add summary item to the first line of technique list
                 techniqueListAdjuster = new TechniqueListAdjuster(page);
-
-                // post init
-                techniqueListAdjuster.addEventListener(Event.INIT, delayedInit);
 
                 // TODO
                 // create filter controls

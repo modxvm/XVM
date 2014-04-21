@@ -191,7 +191,7 @@ package com.xvm.misc
         {
             var c:Object = new Object();
             c.startPage = 1;
-            c.sortColumn = 5;                  // Number of column for sorting
+            c.sortColumn = -5;                  // Number of column for sorting
             c.showExtraDataInProfile = false;
             c.inHangarFilterEnabled = false;   // Enable In hangar radio button by default
             c.showFilters = true;              // Show tank filters

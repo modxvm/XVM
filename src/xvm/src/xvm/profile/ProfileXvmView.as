@@ -105,16 +105,22 @@ package xvm.profile
             //Logger.add("tabNavigator_onAfterPopulate");
             tabNavigator.removeEventListener(LifeCycleEvent.ON_AFTER_POPULATE, tabNavigator_onAfterPopulate);
 
-            // initialize start page
-            var alias:String = tabNavigator.initData.selectedAlias;
-            if (alias == "profileSummaryPage" || alias == "")
+            try
             {
-                var index:int = Config.config.userInfo.startPage - 1;
-                if (index > 0 && index < tabNavigator.initData.sectionsData.length)
-                    tabNavigator.initData.selectedAlias = tabNavigator.initData.sectionsData[index].alias;
+                //Logger.addObject(tabNavigator.initData, 3);
+                // initialize start page
+                var alias:String = tabNavigator.initData.selectedAlias;
+                if (alias == "profileSummaryPage" || alias == "")
+                {
+                    var index:int = Config.config.userInfo.startPage - 1;
+                    if (index > 0 && index < tabNavigator.initData.sectionsData.length)
+                        tabNavigator.initData.selectedAlias = tabNavigator.initData.sectionsData[index].alias;
+                }
             }
-
-            //Logger.addObject(tabNavigator.initData, 3);
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
         }
 
         private function viewStack_ViewShowed(e:ViewStackEvent):void

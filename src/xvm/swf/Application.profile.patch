@@ -1,0 +1,66 @@
+diff -Naur Application.orig-0.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.class.asasm Application.orig-0/net/wg/gui/lobby/profile/ProfileTabNavigator.class.asasm
+--- Application.orig-0.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.class.asasm	2014-04-21 12:44:41.515804900 +0300
++++ Application.orig-0/net/wg/gui/lobby/profile/ProfileTabNavigator.class.asasm	2014-04-21 12:46:59.197998300 +0300
+@@ -31,7 +31,7 @@
+   end ; method
+   trait slot QName(PackageNamespace(""), "bar") type QName(PackageNamespace("net.wg.gui.components.advanced"), "ButtonBarEx") end
+   trait slot QName(PackageNamespace(""), "viewStack") type QName(PackageNamespace("net.wg.gui.lobby.profile.components"), "ResizableViewStack") end
+-  trait slot QName(PrivateNamespace(null, "net.wg.gui.lobby.profile:ProfileTabNavigator"), "initData") type QName(PackageNamespace("net.wg.gui.lobby.profile"), "ProfileMenuInfoVO") end
++  trait slot QName(PackageNamespace(""), "initData") type QName(PackageNamespace("net.wg.gui.lobby.profile"), "ProfileMenuInfoVO") end
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.lobby.profile:ProfileTabNavigator"), "_sectionsDataUtil") type QName(PackageNamespace("net.wg.gui.lobby.profile"), "SectionsDataUtil") end
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.lobby.profile:ProfileTabNavigator"), "_centerOffset") type QName(PackageNamespace(""), "int") value Integer(0) end
+   trait method QName(ProtectedNamespace("net.wg.gui.lobby.profile:ProfileTabNavigator"), "configUI") flag OVERRIDE
+@@ -256,13 +256,13 @@
+ 
+       pop
+       getlocal0
+-      getproperty         QName(PrivateNamespace(null, "net.wg.gui.lobby.profile:ProfileTabNavigator"), "initData")
++      getproperty         QName(PackageNamespace(""), "initData")
+       convert_b
+ L36:
+       iffalse             L106
+ 
+       getlocal0
+-      getproperty         QName(PrivateNamespace(null, "net.wg.gui.lobby.profile:ProfileTabNavigator"), "initData")
++      getproperty         QName(PackageNamespace(""), "initData")
+       getproperty         QName(PackageNamespace(""), "sectionsData")
+       coerce              QName(PackageNamespace(""), "Array")
+       setlocal1
+@@ -280,7 +280,7 @@
+       setlocal            5
+ 
+       getlocal0
+-      getproperty         QName(PrivateNamespace(null, "net.wg.gui.lobby.profile:ProfileTabNavigator"), "initData")
++      getproperty         QName(PackageNamespace(""), "initData")
+       getproperty         QName(PackageNamespace(""), "selectedAlias")
+       coerce_s
+       setlocal            6
+@@ -445,7 +445,7 @@
+       findpropstrict      QName(PackageNamespace("net.wg.gui.lobby.profile"), "ProfileMenuInfoVO")
+       getlocal1
+       constructprop       QName(PackageNamespace("net.wg.gui.lobby.profile"), "ProfileMenuInfoVO"), 1
+-      initproperty        QName(PrivateNamespace(null, "net.wg.gui.lobby.profile:ProfileTabNavigator"), "initData")
++      initproperty        QName(PackageNamespace(""), "initData")
+ 
+       findpropstrict      QName(PackageNamespace(""), "invalidate")
+       getlex              QName(PrivateNamespace(null, "net.wg.gui.lobby.profile:ProfileTabNavigator"), "INIT_DATA_INV")
+@@ -470,16 +470,16 @@
+       pushscope
+ 
+       getlocal0
+-      getproperty         QName(PrivateNamespace(null, "net.wg.gui.lobby.profile:ProfileTabNavigator"), "initData")
++      getproperty         QName(PackageNamespace(""), "initData")
+       iffalse             L11
+ 
+       getlocal0
+-      getproperty         QName(PrivateNamespace(null, "net.wg.gui.lobby.profile:ProfileTabNavigator"), "initData")
++      getproperty         QName(PackageNamespace(""), "initData")
+       callpropvoid        QName(PackageNamespace(""), "dispose"), 0
+ 
+       getlocal0
+       pushnull
+-      initproperty        QName(PrivateNamespace(null, "net.wg.gui.lobby.profile:ProfileTabNavigator"), "initData")
++      initproperty        QName(PackageNamespace(""), "initData")
+ 
+ L11:
+       getlocal0
