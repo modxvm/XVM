@@ -18,8 +18,10 @@ package com.xvm.misc
          */
         public static function MergeConfigs(config:*, def:*, prefix:String = "def"):*
         {
-            if (config == null)
+            if (config === undefined)
                 return def;
+            if (config === null)
+                return null;
             switch (typeof def)
             {
                 case 'object':

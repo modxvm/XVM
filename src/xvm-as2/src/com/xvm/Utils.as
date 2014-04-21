@@ -269,7 +269,7 @@ class com.xvm.Utils
     // Duplicate text field
     public static function duplicateTextField(mc:MovieClip, name:String, textField:TextField, yOffset:Number, align:String):TextField
     {
-        var res:TextField = mc.createTextField("name", mc.getNextHighestDepth(),
+        var res:TextField = mc.createTextField(name, mc.getNextHighestDepth(),
             textField._x, textField._y + yOffset, textField._width, textField._height);
         res.antiAliasType = "advanced";
         res.html = true;
