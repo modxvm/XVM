@@ -2,7 +2,6 @@ import com.xvm.*;
 import flash.geom.*;
 import wot.Minimap.dataTypes.Player;
 import wot.Minimap.model.externalProxy.MapConfig;
-import wot.Minimap.staticUtils.MinimapMacro;
 import wot.Minimap.view.LabelsContainer;
 
 class wot.Minimap.view.LabelViewBuilder
@@ -63,7 +62,11 @@ class wot.Minimap.view.LabelViewBuilder
         var entryName:String = label[LabelsContainer.ENTRY_NAME_FIELD_NAME];
 
         var format:String = MapConfig.unitLabelFormat(entryName, status);
-        var text:String = Macros.Format(playerInfo.userName, format, playerInfo);
+
+        var obj = Defines.battleStates[Utils.GetPlayerName(playerInfo.userName)] || { };
+        for (var i in playerInfo)
+            obj[i] = playerInfo[i];
+        var text:String = Macros.Format(playerInfo.userName, format, obj);
         if (text == "undefined" || !text)
         {
             /**

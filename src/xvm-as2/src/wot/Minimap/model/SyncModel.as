@@ -1,8 +1,6 @@
-import com.xvm.Logger;
-import com.xvm.Utils;
-import wot.PlayersPanel.PlayersPanelProxy;
-import wot.Minimap.model.externalProxy.IconsProxy;
-import wot.Minimap.model.externalProxy.MapConfig;
+import com.xvm.*;
+import wot.PlayersPanel.*;
+import wot.Minimap.model.externalProxy.*;
 
 /**
  * SyncModel class

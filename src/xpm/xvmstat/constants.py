@@ -34,6 +34,7 @@ RESPOND_BATTLEDATA = "xvm.battledata"
 RESPOND_BATTLERESULTSDATA = "xvm.battleresultsdata"
 RESPOND_USERDATA = "xvm.userdata"
 RESPOND_DOSSIER = "xvm.dossier"
+RESPOND_BATTLESTATE = "xvm.battleState"
 
 #COMMAND_GETSTAT = "getstat"
 #COMMAND_LOGSTAT = "logstat"

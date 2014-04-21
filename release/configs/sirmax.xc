@@ -140,8 +140,8 @@
       "width": 120,
       "nickFormatLeft": "<font color='{{c:xwn8}}'>{{xwn8|--}}</font> {{name}}<font alpha='#A0'>{{clan}}</font>",
       "nickFormatRight": "{{name}}<font alpha='#A0'>{{clan}}</font> <font color='{{c:xwn8}}'>{{xwn8|--}}</font>",
-      "vehicleFormatLeft": "",
-      "vehicleFormatRight": ""
+      "vehicleFormatLeft": "{{hp}} / {{hp-max}}",
+      "vehicleFormatRight": "{{hp}} / {{hp-max}}"
       //"vehicleFormatLeft": "<font color='{{c:rating}}'>{{vehicle}}</font>",
       //"vehicleFormatRight": "<font color='{{c:rating}}'>{{vehicle}}</font>"
     },
@@ -194,9 +194,9 @@
     "labels": {
       "units": {
         "format": {
-          "ally":           "<span class='mm_a'><font color='{{c:xwn8}}'>*</font>{{vehicle}}</span>",
-          "teamkiller":     "<span class='mm_t'><font color='{{c:xwn8}}'>*</font>{{vehicle}}</span>",
-          "enemy":          "<span class='mm_e'><font color='{{c:xwn8}}'>*</font>{{vehicle}}</span>"
+          "ally":           "<span class='mm_a'><font color='{{c:xwn8}}'>{{hp}}</font> {{vehicle-short}}</span>",
+          "teamkiller":     "<span class='mm_t'><font color='{{c:xwn8}}'>{{hp}}</font> {{vehicle-short}}</span>",
+          "enemy":          "<span class='mm_e'><font color='{{c:xwn8}}'>{{hp}}</font> {{vehicle-short}}</span>"
         }
       }
     }

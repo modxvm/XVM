@@ -1,21 +1,12 @@
 ﻿/**
  * @author sirmax2
  */
-import flash.external.ExternalInterface;
-import com.greensock.OverwriteManager;
-import com.greensock.plugins.TintPlugin;
-import com.greensock.plugins.TweenPlugin;
-import com.xvm.Config;
-import com.xvm.GlobalEventDispatcher;
-import com.xvm.Logger;
-import com.xvm.StatLoader;
-import com.xvm.Strings;
-import com.xvm.Utils;
-import wot.battle.BattleInputHandler;
-import wot.battle.Elements;
-import wot.battle.ExpertPanel;
-import wot.battle.FragCorrelation;
-import wot.battle.SixthSenseIndicator;
+import flash.external.*;
+import com.greensock.*;
+import com.greensock.plugins.*;
+import com.xvm.*;
+import com.xvm.DataTypes.*;
+import wot.battle.*;
 
 class wot.battle.BattleMain
 {
@@ -42,6 +33,7 @@ class wot.battle.BattleMain
 
         BattleInputHandler.upgrade();
 
+        ExternalInterface.addCallback(Cmd.RESPOND_BATTLESTATE, instance, instance.onBattleStateChanged);
         ExternalInterface.addCallback("xvm.debugtext", instance, instance.onDebugText);
     }
 
@@ -123,6 +115,15 @@ class wot.battle.BattleMain
         {
             _root.minimap.sizeUp();
         }
+    }
+
+    private function onBattleStateChanged(str:String):Void
+    {
+        var obj = JSONx.parse(str);
+        var data:BattleStateData = obj; // as2 type casting is strange
+        //Logger.addObject(data);
+        Defines.battleStates[data.playerName] = data;
+        GlobalEventDispatcher.dispatchEvent( { type: Defines.E_BATTLE_STATE_CHANGED } );
     }
 
     private var debugTextField:TextField = null;

@@ -53,7 +53,8 @@ class wot.Minimap.Minimap
     {
         Utils.TraceXvmModule("Minimap");
 
-        GlobalEventDispatcher.addEventListener(Stat.E_STAT_LOADED, this, onStatLoaded);
+        GlobalEventDispatcher.addEventListener(Stat.E_STAT_LOADED, this, updateEntries);
+        GlobalEventDispatcher.addEventListener(Defines.E_BATTLE_STATE_CHANGED, this, updateEntries);
         GlobalEventDispatcher.addEventListener(MinimapEvent.MINIMAP_READY, this, onReady);
         GlobalEventDispatcher.addEventListener(MinimapEvent.PANEL_READY, this, onReady);
 
@@ -161,7 +162,7 @@ class wot.Minimap.Minimap
         }
     }
 
-    private function onStatLoaded():Void
+    private function updateEntries():Void
     {
         var entries:Array = IconsProxy.allEntries;
         for (var i in entries)

@@ -130,5 +130,9 @@ class com.xvm.Defines
     public static var C_ALLY_ALIVE = "0x96FF00";
     public static var C_ENEMY_ALIVE = "0xF50800";
 
+    // Events
+    public static var E_BATTLE_STATE_CHANGED = "battle_state_changed";
 
+    // globals
+    public static var battleStates:Object = {};
 }

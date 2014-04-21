@@ -30,6 +30,8 @@ _SWFS = [
     'VehicleMarkersManager.swf',
     ]
 
+_BATTLE_SWF = 'battle.swf'
+
 #####################################################################
 # event handlers
 
@@ -56,12 +58,17 @@ def FlashInit(self, swf, className = 'Flash', args = None, path = None):
         return
     log("FlashInit: " + self.swf)
     self.addExternalCallback('xvm.cmd', lambda *args: g_xvm.onXvmCommand(self, *args))
+    if self.swf == _BATTLE_SWF:
+        g_xvm.battleFlashObject = self
+        BigWorld.callback(0, g_xvm.initBattle)
 
 def FlashBeforeDelete(self):
     if self.swf not in _SWFS:
         return
     log("FlashBeforeDelete: " + self.swf)
     self.removeExternalCallback('xvm.cmd')
+    if self.swf == _BATTLE_SWF:
+        g_xvm.battleFlashObject = None
 
 
 def ProfileTechniqueWindowRequestData(base, self, data):
@@ -84,6 +91,26 @@ def LoginView_onSetOptions(base, self, optionsList, host):
             options.append({'data': key, 'label': name})
         self.as_setServersListS(options, selectedId)
 
+# on any player marker appear (spectators only)
+def PlayerAvatar_vehicle_onEnterWorld(self, vehicle):
+    #debug("> PlayerAvatar_vehicle_onEnterWorld: hp=%i" % vehicle.health)
+    g_xvm.updateBattleState(vehicle)
+
+# on any player marker lost
+def PlayerAvatar_vehicle_onLeaveWorld(self, vehicle):
+    #debug("> PlayerAvatar_vehicle_onLeaveWorld: hp=%i" % vehicle.health)
+    g_xvm.updateBattleState(vehicle)
+
+# on any vehicle health update
+def Vehicle_set_health(self, prev):
+    #debug("> Vehicle_set_health: %i, %i" % (self.health, prev))
+    g_xvm.updateBattleState(self)
+
+# on any vehicle hit received
+def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
+    #debug("> Vehicle_onHealthChanged: %i, %i, %i" % (newHealth, attackerID, attackReasonID))
+    g_xvm.updateBattleState(self)
+
 #####################################################################
 # Register events
 
@@ -105,4 +132,12 @@ def _RegisterEvents():
     from gui.Scaleform.daapi.view.login import LoginView
     OverrideMethod(LoginView, 'onSetOptions', LoginView_onSetOptions)
 
-BigWorld.callback(0.001, _RegisterEvents)
+    from Avatar import PlayerAvatar
+    RegisterEvent(PlayerAvatar, 'vehicle_onEnterWorld', PlayerAvatar_vehicle_onEnterWorld)
+    RegisterEvent(PlayerAvatar, 'vehicle_onLeaveWorld', PlayerAvatar_vehicle_onLeaveWorld)
+
+    from Vehicle import Vehicle
+    RegisterEvent(Vehicle, 'set_health', Vehicle_set_health, True)
+    RegisterEvent(Vehicle, 'onHealthChanged', Vehicle_onHealthChanged)
+
+BigWorld.callback(0, _RegisterEvents)

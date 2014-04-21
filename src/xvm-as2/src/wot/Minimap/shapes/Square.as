@@ -1,11 +1,9 @@
-import com.xvm.DataTypes.VehicleData;
-import com.xvm.Logger;
-import com.xvm.VehicleInfo;
-import wot.Minimap.Minimap;
-import wot.PlayersPanel.PlayersPanelProxy;
-import wot.Minimap.model.externalProxy.IconsProxy;
-import wot.Minimap.shapes.ShapeAttach;
-import wot.Minimap.model.externalProxy.MapConfig;
+import com.xvm.*;
+import com.xvm.DataTypes.*;
+import wot.Minimap.*;
+import wot.Minimap.model.externalProxy.*;
+import wot.Minimap.shapes.*;
+import wot.PlayersPanel.*;
 
 class wot.Minimap.shapes.Square extends ShapeAttach
 {

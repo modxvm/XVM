@@ -23,4 +23,4 @@ def AppStarted(event):
         if BattleReplay.g_replayCtrl.autoStartBattleReplay() or connectionManager.isConnected():
             app.loadView(_alias)
         else:
-            BigWorld.callback(0.001, lambda: app.loadView(_alias))
+            BigWorld.callback(0, lambda: app.loadView(_alias))

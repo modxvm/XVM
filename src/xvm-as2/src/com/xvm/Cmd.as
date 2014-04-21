@@ -18,6 +18,7 @@ class com.xvm.Cmd
     private static var COMMAND_GETVEHICLEINFODATA:String = "getVehicleInfoData";
 
     public static var RESPOND_BATTLEDATA = "xvm.battledata";
+    public static var RESPOND_BATTLESTATE = "xvm.battleState";
 
     public static function log(str:String)
     {

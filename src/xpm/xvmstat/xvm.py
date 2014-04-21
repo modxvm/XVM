@@ -1,8 +1,8 @@
 """ xvm (c) sirmax 2013-2014 """
 
-import traceback
 import os
 import glob
+import traceback
 
 import simplejson as json
 
@@ -18,6 +18,7 @@ from pinger import *
 from stats import getBattleStat, getBattleResultsStat, getUserData
 from dossier import getDossier
 from vehinfo import getVehicleInfoData
+from vehstate import getVehicleStateData
 from wn8 import getWN8ExpectedData
 from token import getXvmStatTokenData
 from test import runTest
@@ -47,6 +48,7 @@ class Xvm(object):
         self.currentPlayerId = None
         self.config_str = None
         self.config = None
+        self.battleFlashObject = None
 
     def onXvmCommand(self, proxy, id, cmd, *args):
         try:
@@ -143,6 +145,23 @@ class Xvm(object):
         if self.currentPlayerId is not None:
             self.currentPlayerId = None
             g_websock.send('id')
+
+    def initBattle(self):
+        import Vehicle
+        for v in BigWorld.entities.values():
+            if isinstance(v, Vehicle.Vehicle) and v.isStarted:
+                self.updateBattleState(v)
+
+    def updateBattleState(self, vehicle):
+        #log(vehicle)
+        # TODO: enable/disable in config for performance?
+        if self.battleFlashObject is not None:
+            try:
+                movie = self.battleFlashObject.movie
+                if movie is not None:
+                    movie.invoke((RESPOND_BATTLESTATE, [json.dumps(getVehicleStateData(vehicle))]))
+            except Exception, ex:
+                err('updateBattleState(): ' + traceback.format_exc())
 
 g_xvm = Xvm()
 

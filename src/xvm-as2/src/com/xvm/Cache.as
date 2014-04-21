@@ -6,7 +6,7 @@ class com.xvm.Cache
     {
         return key && s_cache[key] != undefined;
     }
-    
+
     public static function Get(key:String, populateFunc:Function)
     {
         if (!Exist(key))

@@ -70,6 +70,7 @@ class wot.PlayersPanel.PlayersPanel
         GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, StatLoader.LoadData);
         GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
         GlobalEventDispatcher.addEventListener(Stat.E_STAT_LOADED, this, update);
+        GlobalEventDispatcher.addEventListener(Defines.E_BATTLE_STATE_CHANGED, this, update);
 
         Config.LoadConfig();
 
@@ -286,30 +287,31 @@ class wot.PlayersPanel.PlayersPanel
             var deadState = ((data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) == 0) ? Defines.DEADSTATE_DEAD : Defines.DEADSTATE_ALIVE;
             var state = wrapper.state;
             var field = state == "medium2" ? wrapper.m_vehicles : wrapper.m_names;
-            var nm = Utils.GetPlayerName(data.label);
-            var key = "PP/" + deadState + "/" + nm + "/" + state + "/" + fieldType + "/" +
-                (Stat.s_data[nm] ? Stat.s_data[nm].loadstate : "0");
+            //var nm = Utils.GetPlayerName(data.label);
+            //var key = "PP/" + deadState + "/" + nm + "/" + state + "/" + fieldType + "/" +
+            //    (Stat.s_data[nm] ? Stat.s_data[nm].loadstate : "0");
             //Logger.add(Stat.s_data[nm]);
             //Logger.add(key);
-            text = Cache.Get(key, function()
-            {
+            //text = Cache.Get(key, function()
+            //{
+                var obj = Defines.battleStates[Utils.GetPlayerName(data.label)] || { };
+                obj.darken = deadState == Defines.DEADSTATE_DEAD;
+
                 if ((state != "medium" && state != "medium2" && state != "large") ||
                     (format.indexOf("{{nick}}") == -1 && format.indexOf("{{name}}") == -1 && format.indexOf("{{clan}}") == -1))
                 {
-                    return Macros.Format(data.label, format, { darken: deadState == Defines.DEADSTATE_DEAD });
+                    return Macros.Format(data.label, format, obj);
                 }
 
-                var fmt = Macros.Format(data.label, format,
-                    {
-                        skip: { nick:1, name:1, clan:1 },
-                        darken: deadState == Defines.DEADSTATE_DEAD
-                    });
+                obj.skip = { nick:1, name:1, clan:1 };
+
+                var fmt = Macros.Format(data.label, format, obj);
                 return PlayersPanel.formatNamesForWidth(
                     fmt,
                     Macros.Format(data.label, "{{nick}}"),
                     Config.s_config.playersPanel[state].width,
                     field.getNewTextFormat());
-            });
+            //});
             //Logger.add("after: " + text);
         }
 

@@ -125,7 +125,11 @@ class com.xvm.Macros
 
         var res:String = value;
         if (typeof value == "function")
+        {
             res = options ? value(options) : "{{" + macro + "}}";
+            if (res == null)
+                return def;
+        }
 
         if (fmt != null)
         {
@@ -214,28 +218,28 @@ class com.xvm.Macros
             pdata["level"] = data.level;
             // {{rlevel}}
             pdata["rlevel"] = data.level ? Defines.ROMAN_LEVEL[data.level - 1] : "";
-            // {{hp-max}}
-            pdata["hp-max"] = data.maxHealth;
             // {{turret}}
             pdata["turret"] = data.turret || "";
 
             // VMM only - dynamic
             // {{hp}}
-            pdata["hp"] = function(o) { return o && o.curHealth != undefined ? o.curHealth : NaN; }
+            pdata["hp"] = function(o) { return o.curHealth != undefined ? o.curHealth : NaN; }
+            // {{hp-max}}
+            pdata["hp-max"] = function(o) { return o.maxHealth ? o.maxHealth : data.maxHealth; };
             // {{hp-ratio}}
-            pdata["hp-ratio"] = function(o) { return o && o.curHealth != undefined ? Math.round(o.curHealth / data.maxHealth * 100) : NaN; }
+            pdata["hp-ratio"] = function(o) { return o.curHealth != undefined ? Math.round(o.curHealth / (o.maxHealth ? o.maxHealth : data.maxHealth) * 100) : NaN; }
             // {{dmg}}
-            pdata["dmg"] = function(o) { return o && o.delta != undefined ? String(o.delta) : NaN; }
+            pdata["dmg"] = function(o) { return o.delta != undefined ? String(o.delta) : NaN; }
             // {{dmg-ratio}}
-            pdata["dmg-ratio"] = function(o) { return o && o.delta != undefined ? Math.round(o.delta / data.maxHealth * 100) : NaN; }
+            pdata["dmg-ratio"] = function(o) { return o.delta != undefined ? Math.round(o.delta / (o.maxHealth ? o.maxHealth : data.maxHealth) * 100) : NaN; }
             // {{dmg-kind}}
-            pdata["dmg-kind"] = function(o) { return o && o.delta != undefined ? Locale.get(o.damageType) : ""; }
+            pdata["dmg-kind"] = function(o) { return o.delta != undefined ? Locale.get(o.damageType) : ""; }
 
             // Colors
             // {{c:hp}}
             pdata["c:hp"] = function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, o.curHealth); }
             // {{c:hp-ratio}}
-            pdata["c:hp-ratio"] = function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, o.curHealth / data.maxHealth * 100); }
+            pdata["c:hp-ratio"] = function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, o.curHealth / (o.maxHealth ? o.maxHealth : data.maxHealth) * 100); }
             // {{c:dmg}}
             pdata["c:dmg"] = function(o)
                 {
@@ -254,7 +258,7 @@ class com.xvm.Macros
             pdata["a:hp"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, o.curHealth); }
             // {{a:hp-ratio}}
             pdata["a:hp-ratio"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO,
-                Math.round(o.curHealth / data.maxHealth * 100)); }
+                Math.round(o.curHealth / (o.maxHealth ? o.maxHealth : data.maxHealth) * 100)); }
 
             return true;
         });
