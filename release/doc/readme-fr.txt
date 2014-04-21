@@ -202,7 +202,6 @@
       {{level}}        - tier du tank
       {{short-nick}}   - pseudo raccourci du joueur
       {{vehicle}}      - nom complet du tank
-      {{vehicle-type}}  - nom complet du type de tank
       {{vehicle-class}} - symbole spécial en fonction du type de tank
       {{cellsize}}     - taille d'une cellule de la minimap
       {{vehicle-name}} - retourne le nom interne du tank - usa-M24_Chaffee

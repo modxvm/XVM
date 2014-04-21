@@ -192,7 +192,6 @@
       {{level}}         - subject level
       {{short-nick}}    - subject shortened nickname
       {{vehicle}}       - subject full vehicle type
-      {{vehicle-type}}  - subject full vehicle type
       {{vehicle-class}} - places special symbol depending on subject vehicle class
       {{cellsize}}      - minimap cell side size
       {{vehicle-name}}  - returns vehicle system name - usa-M24_Chaffee

@@ -579,7 +579,7 @@ package com.xvm.utils
             "{{c:hp}}", "{{c:hp-ratio}}", "{{c:dmg}}", "{{c:dmg-kind}}", "{{c:system}}", "{{a:hp}}",
             "{{a:hp-ratio}}", "{{n}}", "{{n-player}}", "{{dmg-total}}", "{{dmg-avg}}", "{{dmg-player}}",
             "{{dead}}", "{{points}}", "{{extra}}", "{{tanks}}", "{{time}}", "{{time-sec}}",
-            "{{speed}}", "{{short-nick}}", "{{vehicle-type}}", "{{vehicle-class}}", "{{cellsize}}",
+            "{{speed}}", "{{short-nick}}", "{{vehicle-class}}", "{{cellsize}}",
             "{{vehicle-name}}", "{{vehicle-short}}", "{{vtype-l}}", "{{battletier-min}}",
             "{{battletier-max}}", "{{avglvl}}", "{{eff}}", "{{eff:4}}", "{{teff}}, {{e}}",
             "{{wn6}}", "{{wn8}}", "{{xeff}}", "{{xwn6}}", "{{xwn8}}", "{{rating}}", "{{rating:3}}",

@@ -204,7 +204,6 @@
       {{level}}         - úroveň (tier) vozidla
       {{short-nick}}    - zkrácené jméno hráče
       {{vehicle}}       - název vozidla
-      {{vehicle-type}}  - název vozidla
       {{vehicle-class}} - umístí zvláštní symbol podle typu vozidla
       {{cellsize}}      - délka strany buňky (např. A1) na minimapě
       {{vehicle-name}}  - vrátí systémoví název vozidla - usa-M24_Chaffee

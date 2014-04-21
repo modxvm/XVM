@@ -199,7 +199,6 @@ Zawartość:
       {{level}}          - Poziom(tier)
       {{short-nick}}     - Skrócony nick
       {{vehicle}}        - Pełna nazwa pojazdu
-      {{vehicle-type}}   - Pełna nazwa typu pojazdu
       {{vehicle-class}}  - Specjalny symbol zależny od typu pojazdu
       {{cellsize}}       - Wielkość kwadratu na minimapie
       {{vehicle-name}}   - zwraca nazwę wewnętrzną według ustalenia - usa-M24_Chaffee

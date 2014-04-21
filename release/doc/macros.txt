@@ -57,7 +57,6 @@ Legend:
 │ {{time-sec}}               │   │   │   │   │   │   │ X │   │   │ time left to full capture; seconds only;
 │ {{speed}}                  │   │   │   │   │   │   │ X │   │   │ capture speed in points per second;
 │ {{short-nick}}             │   │   │   │   │   │   │   │ X │   │ subject shortened nickname
-│ {{vehicle-type}}           │   │   │   │   │   │   │   │ X │   │ subject full vehicle type
 │ {{vehicle-class}}          │   │   │   │   │   │   │   │ X │   │ places special symbol depending on subject vehicle class
 │ {{cellsize}}               │   │   │   │   │   │   │   │ X │   │ minimap cell side size
 │ {{vehicle-name}}           │   │   │   │   │   │   │   │ X │   │ returns vehicle system name - usa-M24_Chaffee
