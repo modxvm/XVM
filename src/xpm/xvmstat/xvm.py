@@ -169,7 +169,7 @@ g_xvm = Xvm()
 from . import XPM_MOD_VERSION, XPM_MOD_URL, XPM_GAME_VERSIONS
 log("xvm %s (%s) for WoT %s" % (XPM_MOD_VERSION, XPM_MOD_URL, ", ".join(XPM_GAME_VERSIONS)))
 try:
-    from __version__ import __revision__
-    log("Revision: " + __revision__)
+    from __version__ import __revision__, __branch__
+    log("Branch:" + __branch__ + ", Revision: " + __revision__)
 except Exception, ex:
     err(traceback.format_exc())
