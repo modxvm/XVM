@@ -210,7 +210,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
             var data = pendingCalls[i];
             if (data.func != "showExInfo")
                 trace("defered");
-            call(data.func, data.args);
+            call(data.func, data.args, data.pre);
             delete data;
         }
         pendingCalls = null;
@@ -221,18 +221,22 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
      * @param	func    Name of function
      * @param	args    Array of arguments
      */
-    private function call(func:String, args:Array)
+    private function call(func:String, args:Array, pre:Function)
     {
         if (func != "showExInfo")
             trace("call(): " + func + (args ? " [" + args.join(", ") + "]" : ""));
 
         if (subject != null)
+        {
+            if (pre)
+                pre();
             return subject[func].apply(subject, args);
+        }
         else
         {
             if (!pendingCalls)
                 pendingCalls = [];
-            pendingCalls.push( { func:func, args:args } );
+            pendingCalls.push( { func:func, args:args, pre: pre } );
         }
     }
 
@@ -273,16 +277,20 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         m_dead = m_curHealth <= 0;
 
         // for markers, hitlog and hpleft
-        Macros.RegisterPlayerData(Utils.GetNormalizedPlayerName(m_playerFullName),
+        var wr = wrapper;
+        var registerMacros = function()
         {
-            label: m_playerFullName,
-            vehicle: vType,
-            icon: m_defaultIconSource,
-            squad: entityName == "squadman" ? "1" : "",
-            level: m_level,
-            vtype: Utils.vehicleClassToVehicleType(vClass),
-            maxHealth: maxHealth
-        }, wrapper.m_team == "ally" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
+            Macros.RegisterPlayerData(Utils.GetNormalizedPlayerName(pFullName),
+            {
+                label: pFullName,
+                vehicle: vType,
+                icon: vIconSource,
+                squad: entityName == "squadman" ? "1" : "",
+                level: vLevel,
+                vtype: Utils.vehicleClassToVehicleType(vClass),
+                maxHealth: maxHealth
+            }, wr.m_team == "ally" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
+        };
 
         if (Config.s_loaded == true && !subject)
             initializeSubject();
@@ -290,7 +298,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         {
             logLists.onNewMarkerCreated(vClass, vIconSource, vType, vLevel, pFullName, pName, pClan, pRegion, curHealth, maxHealth);
         }
-        call("init", [ vClass, vIconSource, vType, vLevel, pFullName, pName, pClan, pRegion, curHealth, maxHealth, entityName, speaking, hunt, entityType ]);
+        call("init", [ vClass, vIconSource, vType, vLevel, pFullName, pName, pClan, pRegion, curHealth, maxHealth, entityName, speaking, hunt, entityType ], registerMacros);
     }
 
     public function update():Void { return call("update", arguments); }
