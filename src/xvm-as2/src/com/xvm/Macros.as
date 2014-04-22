@@ -486,9 +486,6 @@ class com.xvm.Macros
         // {{n-player}}
         pdata["n-player"] = data.hits.length;
 
-        // {{dmg}}
-        pdata["dmg"] = data.dmg;
-
         // {{dmg-total}}
         pdata["dmg-total"] = total;
 

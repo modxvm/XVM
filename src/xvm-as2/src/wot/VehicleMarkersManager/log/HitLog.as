@@ -83,13 +83,13 @@ class wot.VehicleMarkersManager.log.HitLog
         var lastHit:Object = hits.length == 0 ? { } : hits[hits.length - 1];
         if ((damageType == "fire" || damageType == "ramming") && lastHit.damageType == damageType && lastHit.playerName == playerName)
         {
-            dmg += lastHit.dmg;
+            dmg += lastHit.delta;
             hits.pop();
         }
 
         var id:Number = hits.push({
             playerName:playerName,
-            dmg:dmg,
+            delta:dmg,
             curHealth:curHealth,
             dead:dead,
             damageType:damageType
@@ -115,7 +115,7 @@ class wot.VehicleMarkersManager.log.HitLog
             player.hits.push(id);
 
         var last_player_hit_data = hits[player.hits[player.hits.length - 1]];
-        player.dmg = player.delta = last_player_hit_data.dmg;
+        player.delta = player.delta = last_player_hit_data.delta;
         player.curHealth = last_player_hit_data.curHealth;
         player.dead = last_player_hit_data.dead;
         player.damageType = last_player_hit_data.damageType;
