@@ -12,10 +12,10 @@ class wot.battle.Elements
 {
     public static var width, height;
 
-    public static var CMD_LOG:String = "@log";
-    public static var CMD_DELAY:String = "@delay";
-    public static var CMD_INTERVAL:String = "@interval";
-    public static var CMD_TEXT_FORMAT:String = "@textFormat";
+    public static var CMD_LOG:String = "$log";
+    public static var CMD_DELAY:String = "$delay";
+    public static var CMD_INTERVAL:String = "$interval";
+    public static var CMD_TEXT_FORMAT:String = "$textFormat";
 
     public static function SetupElements()
     {
@@ -27,7 +27,7 @@ class wot.battle.Elements
 
     private static function apply(obj, opt, name)
     {
-        //Logger.add(">> " + name);
+        //Logger.addObject(opt, 1, name);
         if (opt[CMD_LOG] != null)
         {
             Logger.addObject(obj, name, opt[CMD_LOG]);
