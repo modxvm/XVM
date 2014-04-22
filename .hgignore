@@ -1,0 +1,6 @@
+syntax: glob
+bin
+src/xvm-as2/swf/*.swf
+src/xvm/wg/app.orig
+src/xvm/swf/Application.swf
+src/xpm/*/__version__.py
