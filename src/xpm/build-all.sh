@@ -43,7 +43,7 @@ clear
 
 for dir in $(find . -maxdepth 1 -type "d" ! -path "./xpm*" ! -path "."); do
   echo "# This file was created automatically from build script" > $dir/__version__.py
-  echo "__revision__ = '`cd $dir && svnversion -n .`'" >> $dir/__version__.py
+  echo "__revision__ = '`cd $dir && hg parent --template "{rev}"`'" >> $dir/__version__.py
 done
 
 for fn in $(find . -type "f" -name "*.py"); do
