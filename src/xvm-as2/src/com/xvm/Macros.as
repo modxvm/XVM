@@ -218,8 +218,6 @@ class com.xvm.Macros
             pdata["level"] = data.level;
             // {{rlevel}}
             pdata["rlevel"] = data.level ? Defines.ROMAN_LEVEL[data.level - 1] : "";
-            // {{turret}}
-            pdata["turret"] = data.turret || "";
 
             // VMM only - dynamic
             // {{hp}}
@@ -262,6 +260,14 @@ class com.xvm.Macros
 
             return true;
         });
+    }
+
+    public static function RegisterMarkerData(name:String, data:Object, team:Number)
+    {
+        var pdata = Macros.dict[Utils.GetNormalizedPlayerName(name)];
+
+        // {{turret}}
+        pdata["turret"] = data.turret || "";
     }
 
     public static function RegisterStatMacros(playerName:String, stat:StatData)

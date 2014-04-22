@@ -110,17 +110,10 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         vehicleTypeComponent.init(vClass /*mediumTank*/, hunt);
         damageTextComponent.init();
 
-        Macros.RegisterPlayerData(Utils.GetNormalizedPlayerName(m_playerFullName),
-            {
-                label: m_playerFullName,
-                vehicle: m_vname,
-                icon: m_defaultIconSource,
-                squad: m_entityName == "squadman" ? "1" : "",
-                level: m_level,
-                turret: turretStatusComponent.getMarker(),
-                vtype: Utils.vehicleClassToVehicleType(vClass),
-                maxHealth: m_maxHealth
-            }, wrapper.m_team == "ally" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
+        Macros.RegisterMarkerData(Utils.GetNormalizedPlayerName(m_playerFullName),
+        {
+            turret: turretStatusComponent.getMarker()
+        }, wrapper.m_team == "ally" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
 
         // Create clan icon and place to mc.
         clanIconComponent.initialize(wrapper);

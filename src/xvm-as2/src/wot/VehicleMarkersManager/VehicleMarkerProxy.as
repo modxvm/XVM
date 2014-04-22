@@ -2,16 +2,9 @@
  * Proxy class for vehicle marker components
  * Dispatches event for config loading if it is not loaded
  */
-import com.xvm.Config;
-import com.xvm.GlobalEventDispatcher;
-import com.xvm.GraphicsUtil;
-import com.xvm.Sandbox;
-import com.xvm.Utils;
-import com.xvm.VehicleInfo;
-import wot.VehicleMarkersManager.IVehicleMarker;
-import wot.VehicleMarkersManager.log.LogLists;
-import wot.VehicleMarkersManager.UnitDestroyedAccounting;
-import wot.VehicleMarkersManager.VMMEvent;
+import com.xvm.*;
+import wot.VehicleMarkersManager.*;
+import wot.VehicleMarkersManager.log.*;
 
 /* TODO:
  * Check for performance boost with marker object caching
@@ -278,6 +271,18 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         m_vehicleClass = vClass;
         m_curHealth = curHealth;
         m_dead = m_curHealth <= 0;
+
+        // for markers, hitlog and hpleft
+        Macros.RegisterPlayerData(Utils.GetNormalizedPlayerName(m_playerFullName),
+        {
+            label: m_playerFullName,
+            vehicle: vType,
+            icon: m_defaultIconSource,
+            squad: entityName == "squadman" ? "1" : "",
+            level: m_level,
+            vtype: Utils.vehicleClassToVehicleType(vClass),
+            maxHealth: maxHealth
+        }, wrapper.m_team == "ally" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
 
         if (Config.s_loaded == true && !subject)
             initializeSubject();
