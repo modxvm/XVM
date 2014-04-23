@@ -204,7 +204,7 @@ package com.xvm
             if (e.result != null && e.result.error != null && stateInfo.error == null)
                 stateInfo = { error: e.result.error };
 
-            Logger.add(printf.format("Config loaded. Region: %s (%s), Language: %s (%s)",
+            Logger.add(Sprintf.format("Config loaded. Region: %s (%s), Language: %s (%s)",
                 config.region,
                 config.regionDetected ? "detected" : "config",
                 config.language,
