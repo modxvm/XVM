@@ -284,7 +284,7 @@ public class Sprintf
         value = Number(value);
 
         if ((precision != 0) || (value != 0)) {
-            output = String(Math.floor(Math.abs(value)));
+            output = String(Math.round(Math.abs(value)));
         }
 
         while (output.length < precision)

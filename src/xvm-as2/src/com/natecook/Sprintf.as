@@ -52,14 +52,14 @@ class com.natecook.Sprintf
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-
     static var kPAD_ZEROES        = 0x01;
     static var kLEFT_ALIGN        = 0x02;
-    static var kSHOW_SIGN        = 0x04;
-    static var kPAD_POS            = 0x08;
-    static var kALT_FORM        = 0x10;
+    static var kSHOW_SIGN         = 0x04;
+    static var kPAD_POS           = 0x08;
+    static var kALT_FORM          = 0x10;
     static var kLONG_VALUE        = 0x20;
-    static var kUSE_SEPARATOR    = 0x40;
+    static var kUSE_SEPARATOR     = 0x40;
 
-    static var DEBUG:Boolean    = false;
-    static var TRACE:Boolean    = false;
+    static var DEBUG:Boolean      = false;
+    static var TRACE:Boolean      = false;
 
     static function trace():Void
     {
@@ -288,7 +288,7 @@ class com.natecook.Sprintf
         value = Number(value);
 
         if ((precision != 0) || (value != 0)) {
-            output = String(Math.floor(Math.abs(value)));
+            output = String(Math.round(Math.abs(value)));
         }
 
         while (output.length < precision)
