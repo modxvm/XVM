@@ -526,6 +526,8 @@ package com.xvm.utils
                         return "О, СТЛайт!";
                     if (name == "Mixailos")
                         return "Михаил";
+                    if (name == "Yusha")
+                        return "Это же PROТанки!";
                     break;
 
                 case "CT":

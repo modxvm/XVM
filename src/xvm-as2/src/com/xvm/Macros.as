@@ -512,6 +512,8 @@ class com.xvm.Macros
                     return "Михаил";
                 if (label == "STL1te")
                     return "О, СТЛайт!";
+                if (label == "Yusha")
+                    return "Это же PROТанки!";
                 break;
 
             case "CT":
