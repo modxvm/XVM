@@ -4,12 +4,12 @@
  */
 package com.xvm.misc
 {
-    import com.xvm.types.cfg.CColors;
-    import flash.utils.*;
-    import org.idmedia.as3commons.util.StringUtils;
+    import com.xvm.*;
+    import com.xvm.io.*;
     import com.xvm.utils.*;
-    import com.xvm.Logger;
-    import com.xvm.types.cfg.CConfig;
+    import com.xvm.types.cfg.*;
+    import flash.utils.*;
+    import org.idmedia.as3commons.util.*;
 
     public class ConfigUtils extends Object
     {
@@ -232,6 +232,42 @@ package com.xvm.misc
             if (v == "5.0.2")
             {
                 // TODO replace aligned macros with printf format
+                var json:String = JSONx.stringify(config, '', true);
+                json = json
+                    .replace(/{{avglvl}}/g,         "{{avglvl%s|-}}")
+                    .replace(/{{name}}/g,           "{{name%.16s~..}}")
+                    .replace(/{{eff}}/g,            "{{eff%d}}")
+                    .replace(/{{eff:4}}/g,          "{{eff%4d}}")
+                    .replace(/{{teff}}/g,           "{{teff%4d}}")
+                    .replace(/{{e}}/g,              "{{e%d}}")
+                    .replace(/{{wn}}/g,             "{{wn8%4d}}")
+                    .replace(/{{wn6}}/g,            "{{wn6%4d}}")
+                    .replace(/{{wn8}}/g,            "{{wn8%4d}}")
+                    .replace(/{{xeff}}/g,           "{{xeff%2s}}")
+                    .replace(/{{xwn}}/g,            "{{xwn%2s}}")
+                    .replace(/{{xwn6}}/g,           "{{xwn6%2s}}")
+                    .replace(/{{xwn8}}/g,           "{{xwn8%2s}}")
+                    .replace(/{{rating}}/g,         "{{rating%d~%}}")
+                    .replace(/{{rating:3}}/g,       "{{rating%2d~%}}")
+                    .replace(/{{kb}}/g,             "{{kb%d~k}}")
+                    .replace(/{{kb:3}}/g,           "{{kb%2d~k}}")
+                    .replace(/{{t-rating}}/g,       "{{t-rating%d~%}}")
+                    .replace(/{{t-rating:3}}/g,     "{{t-rating%2d~%}}")
+                    .replace(/{{t-battles:4}}/g,    "{{t-battles%4d}}")
+                    .replace(/{{t-kb}}/g,           "{{t-kb%.1f~k}}")
+                    .replace(/{{t-kb-0}}/g,         "{{t-kb%0.1f~k}}")
+                    .replace(/{{t-kb:4}}/g,         "{{t-kb%3.01f~k}}")
+                    .replace(/{{t-hb}}/g,           "{{t-hb%d~h}}")
+                    .replace(/{{t-hb:3}}/g,         "{{t-hb%2d~h}}")
+                    .replace(/{{tdb:4}}/g,          "{{tdb%4d}}")
+                    .replace(/{{tdv}}/g,            "{{tdv%.1f}}")
+                    .replace(/{{tfb}}/g,            "{{tfb%.1f}}")
+                    .replace(/{{tsb}}/g,            "{{tsb%.1f}}")
+                    .replace(/<br>/g,               "\\n")
+                    .replace(/\\u0025/g,            "%")
+                    .replace(/{{vehicle-type}}/g,   "{{vehicle}}");
+                config = JSONx.parse(json);
+
                 v = "5.1.0";
             }
 

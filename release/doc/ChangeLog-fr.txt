@@ -3,7 +3,6 @@
   * nouvelle méthode de formattage des macros (cf. readme-fr.txt)
   * version de la configuration augmentée en 5.1.0
 
-
 XVM-5.2.1-test2:
   [CORRECTIONS]
   * les panneaux des joueurs n'étaient pas affichés après le chargement de la bataille

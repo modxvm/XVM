@@ -8,7 +8,7 @@
     players panels and minimap. WARNING: performance expensive
 
   [OTHER]
-  * removed macro {{vehicle-type}}
+  * removed macro {{vehicle-type}} as duplication of {{vehicle}}
 
 XVM-5.2.1-test2:
   [FIXES]
