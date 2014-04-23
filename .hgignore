@@ -12,3 +12,5 @@ release/mods
 src/xvm-as2/include
 src/xvm/lib
 src/xvm/obj
+*~
+*.*~

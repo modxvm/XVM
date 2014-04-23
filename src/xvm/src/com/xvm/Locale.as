@@ -268,7 +268,7 @@ package com.xvm
 
         function Locale()
         {
-            // This strings will be used if .xc not found
+            // This strings will be used if [langcode].xc not found
             s_lang_fallback = (Config.gameRegion == "RU") ? FALLBACK_RU : FALLBACK_EN;
         }
 
@@ -280,7 +280,7 @@ package com.xvm
                 if (event.error == null)
                 {
                     s_lang = event.data;
-                    Logger.add("Locale: Loaded '" + Config.language + "' language by " + get("XVM_translator"));
+                    Logger.add("Locale: Loaded " + Config.language);
                 }
                 else
                 {
