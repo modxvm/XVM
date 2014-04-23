@@ -154,15 +154,16 @@ class Xvm(object):
 
     def updateBattleState(self, vehicle):
         #log(vehicle)
-        return # disabled until performance issue will be fixed
-        # TODO: enable/disable in config for performance?
-        if self.battleFlashObject is not None:
-            try:
-                movie = self.battleFlashObject.movie
-                if movie is not None:
-                    movie.invoke((RESPOND_BATTLESTATE, [json.dumps(getVehicleStateData(vehicle))]))
-            except Exception, ex:
-                err('updateBattleState(): ' + traceback.format_exc())
+        if self.config is None or not self.config['battle']['allowHpInPanelsAndMinimap']:
+            return
+        if self.battleFlashObject is None:
+            return
+        try:
+            movie = self.battleFlashObject.movie
+            if movie is not None:
+                movie.invoke((RESPOND_BATTLESTATE, [json.dumps(getVehicleStateData(vehicle))]))
+        except Exception, ex:
+            err('updateBattleState(): ' + traceback.format_exc())
 
 g_xvm = Xvm()
 
@@ -170,7 +171,7 @@ g_xvm = Xvm()
 from . import XPM_MOD_VERSION, XPM_MOD_URL, XPM_GAME_VERSIONS
 log("xvm %s (%s) for WoT %s" % (XPM_MOD_VERSION, XPM_MOD_URL, ", ".join(XPM_GAME_VERSIONS)))
 try:
-    from __version__ import __revision__, __branch__
-    log("Branch:" + __branch__ + ", Revision: " + __revision__)
+    from __version__ import __branch__, __revision__
+    log("Branch: %s, Revision: %s" % (__branch__, __revision__))
 except Exception, ex:
     err(traceback.format_exc())

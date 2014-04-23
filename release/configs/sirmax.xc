@@ -79,6 +79,7 @@
     "mirroredVehicleIcons": false,
     "showPostmortemTips": false,
     "highlightVehicleIcon": false,
+    "allowHpInPanelsAndMinimap": true,
     "clanIconsFolder": "clanicons",
     "elements": ${"elements"}
   },

@@ -2,6 +2,13 @@
   [MAJOR UPDATES]
   * new macros formatting (see readme-en.txt)
   * config version increased to 5.1.0
+  
+  [NEW FUNCTIONS]
+  * new option battle/allowHpInPanelsAndMinimap - enable {{hp*}} macros in 
+    players panels and minimap. WARNING: performance expensive
+
+  [OTHER]
+  * removed macro {{vehicle-type}}
 
 XVM-5.2.1-test2:
   [FIXES]

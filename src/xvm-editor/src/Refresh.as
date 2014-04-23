@@ -225,6 +225,7 @@ private function RefreshBattlePage():void
         this.p_battle.v_mirroredVehicleIcons.value = section.mirroredVehicleIcons;
         this.p_battle.v_showPostmortemTips.value = section.showPostmortemTips;
         this.p_battle.v_highlightVehicleIcon.value = section.highlightVehicleIcon;
+        this.p_battle.v_allowHpInPanelsAndMinimap.value = section.allowHpInPanelsAndMinimap;
         this.p_battle.v_clockFormat.value = section.clockFormat;
         this.p_battle.v_clanIconsFolder.value = section.clanIconsFolder;
 

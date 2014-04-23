@@ -8,6 +8,7 @@
     <c:LabeledCheckBox label="{_('mirroredVehicleIcons')}" id="v_mirroredVehicleIcons" config="battle.mirroredVehicleIcons" change="onChange(event)"/>
     <c:LabeledCheckBox label="{_('showPostmortemTips')}" id="v_showPostmortemTips" config="battle.showPostmortemTips" change="onChange(event)"/>
     <c:LabeledCheckBox label="{_('highlightVehicleIcon')}" id="v_highlightVehicleIcon" config="battle.highlightVehicleIcon" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{_('allowHpInPanelsAndMinimap')}" id="v_allowHpInPanelsAndMinimap" config="battle.allowHpInPanelsAndMinimap" change="onChange(event)"/>
     <c:LabeledCheckBox label="{_('useStandardMarkers')}" id="v_useStandardMarkers" config="markers.useStandardMarkers" change="onChange(event)"/>
     <c:LabeledTextInput label="{_('clockFormat')}" toolTip="{_('clockFormatToolTip')}" id="v_clockFormat" config="battle.clockFormat" change="onChange(event)"/>
     <c:LabeledTextInput label="{_('clanIconsFolder')}" toolTip="{_('clanIconsFolderToolTip')}" id="v_clanIconsFolder" config="battle.clanIconsFolder" change="onChange(event)"/>

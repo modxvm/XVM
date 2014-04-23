@@ -9,3 +9,6 @@ addons/stat-utils/db/top.qvw
 addons/xvm-stat-log/*.xml
 addons/xvm-stat-log/work
 release/mods
+src/xvm-as2/include
+src/xvm/lib
+src/xvm/obj
