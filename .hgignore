@@ -4,3 +4,8 @@ src/xvm-as2/swf/*.swf
 src/xvm/wg/app.orig
 src/xvm/swf/Application.swf
 src/xpm/*/__version__.py
+addons/stat-utils/db/players-test.qvw
+addons/stat-utils/db/top.qvw
+addons/xvm-stat-log/*.xml
+addons/xvm-stat-log/work
+release/mods

@@ -126,6 +126,8 @@
     "removeSquadIcon": true,
     "removePanelsModeSwitcher": true,
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
+    "extraTextLeft": "<textformat leading='-24'><img src='xvm://configs/back.png' width='80' height='12'/>\n<img src='xvm://configs/front.png' width='80' height='12'/>\n{{hp}} / {{hp-max}}</textformat>",
+    "extraTextRight": "",
     "medium": {
       "width": 120,
       "formatLeft": "<font color='{{c:xwn8}}'>{{nick}}</font>",
@@ -169,7 +171,7 @@
   },
   "minimap": {
     "enabled": true,
-    "iconScale": 1,
+    "iconScale": 1.5,
     "circles": {
         "major": [
             { "enabled": true, "distance": 445, "thickness": 0.3, "alpha": 65, "color": "0xFF3333" },
@@ -197,6 +199,9 @@
           "ally":           "<span class='mm_a'><font color='{{c:xwn8}}'>*</font> {{vehicle-short}}</span>",
           "teamkiller":     "<span class='mm_t'><font color='{{c:xwn8}}'>*</font> {{vehicle-short}}</span>",
           "enemy":          "<span class='mm_e'><font color='{{c:xwn8}}'>*</font> {{vehicle-short}}</span>"
+        },
+        "alpha" : {
+          //"deadenemy": 50
         }
       }
     }
@@ -403,6 +408,7 @@
           },
           "damageText": {
             "y": -55,
+            //"shadow": { "color": null },
             "damageMessage": ${"def.damageMessageAlive"}
           },
           "actionMarker": {
