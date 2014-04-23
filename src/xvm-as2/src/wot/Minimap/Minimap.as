@@ -85,6 +85,13 @@ class wot.Minimap.Minimap
 
     function scaleMarkersImpl(factor:Number)
     {
+        if (!Config.s_loaded)
+        {
+            var me = this;
+            _global.setTimeout(function() { me.scaleMarkersImpl(factor); }, 1);
+            return;
+        }
+
         if (MapConfig.enabled)
         {
             Features.instance.scaleMarkers();

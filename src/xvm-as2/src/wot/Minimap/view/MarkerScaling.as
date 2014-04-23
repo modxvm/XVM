@@ -12,7 +12,6 @@ class wot.Minimap.view.MarkerScaling
         /**
          * TODO: Check if this is correctrly invoked right on battle start.
          */
-        scale();
     }
 
     public function scale():Void
