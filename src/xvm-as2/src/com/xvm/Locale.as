@@ -70,8 +70,6 @@ class com.xvm.Locale
         if (Config.s_config.gameRegion == "RU")
         {
             /** Hardcoded RU language */
-            tr["XVM_translator"] = "Maxim Schedriviy";
-
             // Win chance
             tr["Chance error"] = "Ошибка расчета шансов";
             tr["Chance to win"] = "Шансы на победу";
@@ -175,8 +173,6 @@ class com.xvm.Locale
         else
         {
             /** Hardcoded EN language */
-            tr["XVM_translator"] = "Maxim Schedriviy";
-
             // Win chance
             tr["chanceLive"] = "For alive";
             tr["chanceBattleTier"] = "Battle tier";
@@ -233,7 +229,7 @@ class com.xvm.Locale
         try
         {
             s_lang = JSONx.parse(data_str);
-            Logger.add("Locale: Loaded '" + Config.s_config.language + "' language by " + get("XVM_translator"));
+            Logger.add("Locale: Loaded " + Config.s_config.language);
         }
         catch (ex:Error)
         {

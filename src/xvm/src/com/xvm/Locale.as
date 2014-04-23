@@ -82,8 +82,6 @@ package com.xvm
 
         /** Hardcoded RU language */
         private static const FALLBACK_RU:Object = {
-            "XVM_translator": "XVM Team",
-
             // Ping
             "Initialization": "Инициализация",
 
@@ -208,8 +206,6 @@ package com.xvm
 
         /** Hardcoded EN language */
         private static const FALLBACK_EN:Object = {
-            "XVM_translator": "XVM Team",
-
             // Win chance
             "chanceLive": "For alive",
             "chanceBattleTier": "Battle tier",

@@ -3,9 +3,6 @@
  */
 {
   "locale": {
-    // Author of translation
-    "XVM_translator": "XVM Team",
-
     // Ping
     "Initialization": "Initialization",
 
