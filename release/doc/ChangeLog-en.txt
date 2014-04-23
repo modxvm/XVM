@@ -9,6 +9,7 @@
 
   [OTHER]
   * removed macro {{vehicle-type}} as duplication of {{vehicle}}
+  * source code now stored on http://dev.modxvm.com/
 
 XVM-5.2.1-test2:
   [FIXES]
