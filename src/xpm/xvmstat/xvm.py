@@ -154,6 +154,7 @@ class Xvm(object):
 
     def updateBattleState(self, vehicle):
         #log(vehicle)
+        return # disabled until performance issue will be fixed
         # TODO: enable/disable in config for performance?
         if self.battleFlashObject is not None:
             try:
