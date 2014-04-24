@@ -51,11 +51,6 @@ class com.xvm.Utils
         return _global.setInterval(function() { callback.call(target) }, timeout);
     }
 
-    public static function elapsedMSec(start:Date, end:Date):Number
-    {
-        return end.getTime() - start.getTime();
-    }
-
     public static function fixPath(path:String):String
     {
         path = path.split("\\").join("/");

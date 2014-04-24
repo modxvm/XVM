@@ -10,13 +10,11 @@ class com.xvm.Macros
     public static function Format(playerName:String, format:String, options:Object):String
     {
         //Logger.add("format:" + format + " player:" + playerName);
-
-        var res:String = "";
         try
         {
             var formatArr:Array = format.split("{{");
 
-            res = formatArr[0];
+            var res:String = formatArr[0];
             var len:Number = formatArr.length;
             if (len > 1)
             {
@@ -26,7 +24,7 @@ class com.xvm.Macros
                     var part:String = formatArr[i];
                     var arr2:Array = part.split("}}", 2);
                     var macro:String = arr2[0];
-                    if (arr2.length == 1 || (options && options.skip && options.skip.hasOwnProperty[macro]))
+                    if (arr2.length == 1)
                     {
                         res += "{{" + part;
                     }
@@ -47,7 +45,8 @@ class com.xvm.Macros
         {
             Logger.add(ex.message);
         }
-        return res;
+
+        return "";
     }
 
     private static function FormatMacro(macro:String, pdata:Object, options:Object):String

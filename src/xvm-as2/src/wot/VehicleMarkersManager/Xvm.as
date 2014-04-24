@@ -363,7 +363,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
 
     function initializeTextFields()
     {
-        var start = new Date();
+        //var start = (new Date()).getTime();
         //trace("Xvm::initializeTextFields()");
         try
         {
@@ -409,7 +409,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         {
             ErrorHandler.setText("ERROR: initializeTextFields():" + String(e));
         }
-        //Logger.add(Utils.elapsedMSec(start, new Date()) + " ms");
+        //Logger.add(((new Date()).getTime() - start).toString() + " ms");
     }
 
     function XVMUpdateStyle()

@@ -83,13 +83,13 @@ class wot.Minimap.model.mapSize.MapInfoData
 
     private static function setupData():Void
     {
-        //var start = new Date();
+        //var start = (new Date()).getTime();
         _localizedMapnameList = { };
         for (var key:String in _systemMapnameList) {
             var systemMapName:String = key.substring(1);
             var localMapName:String = Localization.makeString("#arenas:" + systemMapName + "/name", {});
             _localizedMapnameList[localMapName.toUpperCase()] = _systemMapnameList[key].size;
         }
-        //Logger.add(com.xvm.Utils.elapsedMSec(start, new Date()).toString());
+        //Logger.add(((new Date()).getTime() - start).toString());
     }
 }

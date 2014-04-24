@@ -52,8 +52,6 @@ class wot.PlayersPanel.PlayersPanel
      */
     public var m_uids:Array;
 
-    static var DEBUG_TIMES = false;
-
     private var m_data:Object;
 
     private var m_knownPlayersCount:Number = 0; // for Fog of War mode.
@@ -117,10 +115,7 @@ class wot.PlayersPanel.PlayersPanel
     private function setDataImpl(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStr, vehiclesStr, namesStr)
     {
         //Logger.add("PlayersPanel.setData()");
-        //var start = new Date();
         setData2(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStr, vehiclesStr, namesStr);
-        //if (PlayersPanel.DEBUG_TIMES)
-        //    Logger.add("DEBUG TIME: PlayersPanel: setData2(" + this.base.m_type + "): " + Utils.elapsedMSec(start, new Date()) + " ms");
     }
 
     private var _init:Boolean = false;
@@ -146,7 +141,6 @@ class wot.PlayersPanel.PlayersPanel
         fragsStrOrig, vehiclesStrOrig, namesStrOrig)
     {
         //Logger.add("PlayersPanel.setData2()");
-        //Logger.add("_lastAdjustedState: " + _lastAdjustedState);
         //Logger.addObject(data, 3);
         //Logger.add(vehiclesStrOrig);
         //Logger.add(namesStr);
@@ -192,7 +186,6 @@ class wot.PlayersPanel.PlayersPanel
                 vehiclesStr += value.split(item.vehicle).join(getTextValue(Defines.FIELDTYPE_VEHICLE, item, item.vehicle));
             }
 
-            //Logger.add("_lastAdjustedState: " + _lastAdjustedState);
             //Logger.add(vehiclesStr);
 
             // [2/3] fix WG bug - this function is slow, don't call it if not required.
@@ -246,7 +239,7 @@ class wot.PlayersPanel.PlayersPanel
     private function getTextValue(fieldType, data, text)
     {
         //Logger.add("getTextValue()");
-        var format: String = null;
+        var format:String = null;
         switch (wrapper.state)
         {
             case "medium":
@@ -281,98 +274,23 @@ class wot.PlayersPanel.PlayersPanel
                 break;
         }
 
-        if (format != null)
+        if (format == null)
+            return text;
+
+        //Logger.add("before: " + text);
+        var obj = Defines.battleStates[Utils.GetPlayerName(data.label)] || { };
+        var deadState = ((data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) == 0) ? Defines.DEADSTATE_DEAD : Defines.DEADSTATE_ALIVE;
+        if (deadState == Defines.DEADSTATE_DEAD && obj.dead == false)
         {
-            //Logger.add("before: " + text);
-            var deadState = ((data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) == 0) ? Defines.DEADSTATE_DEAD : Defines.DEADSTATE_ALIVE;
-            var state = wrapper.state;
-            var field = state == "medium2" ? wrapper.m_vehicles : wrapper.m_names;
-            //var nm = Utils.GetPlayerName(data.label);
-            //var key = "PP/" + deadState + "/" + nm + "/" + state + "/" + fieldType + "/" +
-            //    (Stat.s_data[nm] ? Stat.s_data[nm].loadstate : "0");
-            //Logger.add(Stat.s_data[nm]);
-            //Logger.add(key);
-            //text = Cache.Get(key, function()
-            //{
-                var obj = Defines.battleStates[Utils.GetPlayerName(data.label)] || { };
-                if (deadState == Defines.DEADSTATE_DEAD && obj.dead == false)
-                {
-                    obj.dead = true;
-                    if (obj.curHealth > 0)
-                        obj.curHealth = 0;
-                }
-                obj.darken = deadState == Defines.DEADSTATE_DEAD;
-
-                if ((state != "medium" && state != "medium2" && state != "large") ||
-                    (format.indexOf("{{nick}}") == -1 && format.indexOf("{{name}}") == -1 && format.indexOf("{{clan}}") == -1))
-                {
-                    return Macros.Format(data.label, format, obj);
-                }
-
-                obj.skip = { nick:1, name:1, clan:1 };
-
-                var fmt = Macros.Format(data.label, format, obj);
-                return PlayersPanel.formatNamesForWidth(
-                    fmt,
-                    Macros.Format(data.label, "{{nick}}"),
-                    Config.s_config.playersPanel[state].width,
-                    field.getNewTextFormat());
-            //});
-            //Logger.add("after: " + text);
+            obj.dead = true;
+            if (obj.curHealth > 0)
+                obj.curHealth = 0;
         }
+        obj.darken = deadState == Defines.DEADSTATE_DEAD;
 
-        return text;
-    }
-
-    private static var s_widthTester:TextField;
-    private static function createWidthTester(textFormat:TextFormat)
-    {
-        s_widthTester = _root.createTextField("widthTester", _root.getNextHighestDepth(), 0, 0, 268, 20);
-        s_widthTester.autoSize = false;
-        s_widthTester.html = true;
-        s_widthTester._visible = false;
-        s_widthTester.setNewTextFormat(textFormat);
-    }
-
-    private static function formatNamesForWidth(format:String, playerName: String, width:Number, textFormat:TextFormat):String
-    {
-        if (width < 0 || !textFormat)
-            return format;
-
-        var pname:String = "";
-        var cname:String = "";
-        if (width > 0)
-        {
-            // cut player name for field width
-            pname = Utils.GetPlayerName(playerName);
-            cname = Utils.GetClanNameWithBrackets(playerName);
-            {
-                if (s_widthTester == null)
-                    createWidthTester();
-                s_widthTester.condenseWhite = !Stat.s_loaded;
-                while (pname + cname != "")
-                {
-                    s_widthTester.htmlText = format
-                        .split("{{nick}}").join(pname + cname)
-                        .split("{{name}}").join(pname)
-                        .split("{{clan}}").join(cname);
-                    if (Math.round(s_widthTester.getLineMetrics(0).width) + 4 <= width) // 4 is a size of gutters
-                    {
-                        //Logger.add("width=" + width + " _width=" + s_widthTester._width + " lineWidth=" + Math.round(s_widthTester.getLineMetrics(0).width) + " " + str);
-                        break;
-                    }
-                    if (cname != "")
-                        cname = cname.substr(0, cname.length - 1);
-                    else
-                        pname = pname.substr(0, pname.length - 1);
-                }
-            }
-        }
-
-        format = format.split("{{nick}}").join(pname + cname);
-        format = format.split("{{name}}").join(pname);
-        format = format.split("{{clan}}").join(cname);
-        return format;
+        var fmt = Macros.Format(data.label, format, obj);
+        //Logger.add("after: " + fmt);
+        return fmt;
     }
 
     private function XVMAdjustPanelSize()

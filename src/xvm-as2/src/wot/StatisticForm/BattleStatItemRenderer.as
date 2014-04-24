@@ -34,8 +34,6 @@ class wot.StatisticForm.BattleStatItemRenderer
     // wrapped methods
     /////////////////////////////////////////////////////////////////
 
-    static var DEBUG_TIMES = false;
-
     private static var s_state:Number = 0;
     private static var s_winChances:WinChances = null;
 
@@ -116,8 +114,6 @@ class wot.StatisticForm.BattleStatItemRenderer
             return;
         }
 
-        var start = new Date();
-
         wrapper.col3.condenseWhite = Stat.s_empty;
 
         var name = Utils.GetPlayerName(wrapper.data.label);
@@ -170,12 +166,6 @@ class wot.StatisticForm.BattleStatItemRenderer
         wrapper.col3.htmlText = "<font color='" + c + "'>" + Cache.Get(key, function() { return Macros.Format(saved_label,
             (team == Defines.TEAM_ALLY) ? Config.s_config.statisticForm.formatLeftVehicle : Config.s_config.statisticForm.formatRightVehicle,
             { }) } ) + "</font>";
-
-        if (DEBUG_TIMES)
-        {
-            Logger.add("DEBUG TIME: BattleStatItemRenderer[" + wrapper.data.label + "]: updateDataImpl(): " +
-                Utils.elapsedMSec(start, new Date()) + " ms");
-        }
     }
 
     // override
