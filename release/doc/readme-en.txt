@@ -251,6 +251,22 @@
       {{c:t-battles}} - color depending on current vehicle battles
       Any color macro you can change to transparency macro (e.g. {{a:tdb}}).
 
+    Extended macros formatting rules:
+      {{name[%[flag][width][.prec]type][~suf][|def]}}
+      name  - macro name
+      flag  - "-" for left align, else right align
+              "0" for filling with leading zeros
+      width - minimum width
+      prec  - maximum width for lines or number of digits after comma for numbers
+      type  - type (s - string, d - decimal, f - float, ...)
+      suf   - suffix added at the end
+      def   - default value, set when value is absent:
+    Details: http://en.wikipedia.org/wiki/Printf
+    For example:
+      {{name%-16.16s}}      - cut names longer 10 chars, and fill names shorter 10 chars and align left
+      {{kb%4.01f~k|----}}   - width 4 chars, exactly 1 char after comma, align right
+                              if kb==null, display "----"
+
     Localization macros usage - {{l10n:localizationKey}}
       Macros are just links to translations in file res_mods/xvm/l10n/XX.xc file (XX means language code).
       If the translation is not found, "localizationKey" is displayed.

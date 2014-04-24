@@ -1,14 +1,29 @@
 ﻿XVM-5.3.0-dev:
   [MAJOR UPDATES]
   * new macros formatting (see readme-en.txt)
+      {{name[%[flag][width][.prec]type][~suf][|def]}}
+      name  - macro name
+      flag  - "-" for left align, else right align
+              "0" for filling with leading zeros
+      width - minimum width
+      prec  - maximum width for lines or number of digits after comma for numbers
+      type  - type (s - string, d - decimal, f - float, ...)
+      suf   - suffix added at the end
+      def   - default value, set when value is absent:
+    Details: http://en.wikipedia.org/wiki/Printf
+    For example:
+      {{name%-16.16s}}      - cut names longer 10 chars, and fill names shorter 10 chars and align left
+      {{kb%4.01f~k|----}}   - width 4 chars, exactly 1 char after comma, align right
+                              if kb==null, display "----"
   * config version increased to 5.1.0
-  
+
   [NEW FUNCTIONS]
-  * new option battle/allowHpInPanelsAndMinimap - enable {{hp*}} macros in 
+  * new option battle/allowHpInPanelsAndMinimap - enable {{hp*}} macros in
     players panels and minimap. WARNING: performance expensive
 
   [OTHER]
   * removed macro {{vehicle-type}} as duplication of {{vehicle}}
+  * removed macro {{short-nick}} and option minimap/nickShrink as replaceable by new macros formatting
   * source code now stored on http://dev.modxvm.com/
 
 XVM-5.2.1-test2:
