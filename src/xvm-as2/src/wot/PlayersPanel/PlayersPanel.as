@@ -295,6 +295,12 @@ class wot.PlayersPanel.PlayersPanel
             //text = Cache.Get(key, function()
             //{
                 var obj = Defines.battleStates[Utils.GetPlayerName(data.label)] || { };
+                if (deadState == Defines.DEADSTATE_DEAD && obj.dead == false)
+                {
+                    obj.dead = true;
+                    if (obj.curHealth > 0)
+                        obj.curHealth = 0;
+                }
                 obj.darken = deadState == Defines.DEADSTATE_DEAD;
 
                 if ((state != "medium" && state != "medium2" && state != "large") ||
