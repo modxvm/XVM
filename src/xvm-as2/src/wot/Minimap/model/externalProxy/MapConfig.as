@@ -30,8 +30,6 @@ class wot.Minimap.model.externalProxy.MapConfig
             return minimap.zoom.pixelsBack;        }
     
     /** Labels */
-        public static function get nickShrink():Number    {
-            return labels.nickShrink;    }
         /** Vehicle class macro */
             public static function get lightSymbol():String    {
                 return vehicleclassmacro.light; }

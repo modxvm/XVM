@@ -5,7 +5,7 @@ import wot.Minimap.dataTypes.*;
 
 class com.xvm.Macros
 {
-    private static var dict: Object = {}; //{ PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
+    private static var dict:Object = {}; //{ PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
 
     public static function Format(playerName:String, format:String, options:Object):String
     {
@@ -103,6 +103,9 @@ class com.xvm.Macros
 
         // substitute
         //Logger.add("name:" + name + " fmt:" + fmt + " suf:" + suf + " def:" + def);
+
+        if (options.darken && Strings.startsWith("c:", name))
+            name += "#d";
 
         if (!pdata.hasOwnProperty(name))
         {
@@ -240,7 +243,7 @@ class com.xvm.Macros
             pdata["c:dmg"] = function(o)
                 {
                     return o.delta ? GraphicsUtil.GetDmgSrcValue(
-                        Macros.damageFlagToDamageSource(o.damageFlag),
+                        Utils.damageFlagToDamageSource(o.damageFlag),
                         o.entityName == 'teamKiller' ? (data.team + "tk") : o.entityName,
                         o.dead, o.blowedUp) : "";
                 }
@@ -260,19 +263,10 @@ class com.xvm.Macros
         });
     }
 
-    public static function RegisterMarkerData(name:String, data:Object, team:Number)
-    {
-        var pdata = Macros.dict[Utils.GetPlayerName(name)];
-
-        // {{turret}}
-        pdata["turret"] = data.turret || "";
-    }
-
     public static function RegisterStatMacros(playerName:String, stat:StatData)
     {
         if (!stat)
             return;
-
         var pname:String = Utils.GetPlayerName(playerName);
         if (!dict.hasOwnProperty(pname))
             dict[pname] = { };
@@ -288,7 +282,7 @@ class com.xvm.Macros
         var tw:Number = Utils.toInt(stat.v.w, 0);
 
         // {{avglvl}}
-        var avglvl = Math.round(Utils.toFloat(stat.lvl, 0));
+        var avglvl:Number = Math.round(Utils.toFloat(stat.lvl, 0));
         pdata["avglvl"] = avglvl < 1 ? null : avglvl == 10 ? "X" : String(avglvl);
         // {{xeff}}
         pdata["xeff"] = stat.xeff == null ? null : stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff;
@@ -341,102 +335,103 @@ class com.xvm.Macros
 
         // Dynamic colors
         // {{c:xeff}}
-        pdata["c:xeff"] = stat.xeff == null ? ""
-            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#", o.darken); }
+        pdata["c:xeff"] = stat.xeff == null ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#", false);
+        pdata["c:xeff#d"] = stat.xeff == null ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#", true);
         // {{c:xwn6}}
-        pdata["c:xwn6"] = stat.xwn6 == null ? ""
-            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn6, "#", o.darken); }
+        pdata["c:xwn6"] = stat.xwn6 == null ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn6, "#", false);
+        pdata["c:xwn6#d"] = stat.xwn6 == null ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn6, "#", true);
         // {{c:xwn8}}
-        pdata["c:xwn8"] = stat.xwn8 == null ? ""
-            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8, "#", o.darken); }
+        pdata["c:xwn8"] = stat.xwn8 == null ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8, "#", false);
+        pdata["c:xwn8#d"] = stat.xwn8 == null ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8, "#", true);
         // {{c:xwn}}
         pdata["c:xwn"] = pdata["c:xwn8"];
+        pdata["c:xwn#d"] = pdata["c:xwn8#d"];
         // {{c:eff}}
-        pdata["c:eff"] = eff <= 0 ? ""
-            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff, "#", o.darken); }
+        pdata["c:eff"] = eff <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff, "#", false);
+        pdata["c:eff#d"] = eff <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff, "#", true);
         // {{c:wn6}}
-        pdata["c:wn6"] = !stat.wn6 ? ""
-            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN6, stat.wn6, "#", o.darken); }
+        pdata["c:wn6"] = !stat.wn6 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN6, stat.wn6, "#", false);
+        pdata["c:wn6#d"] = !stat.wn6 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN6, stat.wn6, "#", true);
         // {{c:wn8}}
-        pdata["c:wn8"] = !stat.wn8 ? ""
-            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, stat.wn8, "#", o.darken); }
+        pdata["c:wn8"] = !stat.wn8 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, stat.wn8, "#", false);
+        pdata["c:wn8#d"] = !stat.wn8 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, stat.wn8, "#", true);
         // {{c:wn}}
         pdata["c:wn"] = pdata["c:wn8"];
+        pdata["c:wn#d"] = pdata["c:wn8#d"];
         // {{c:e}}
-        pdata["c:e"] = stat.v.te == null ? ""
-            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.v.te, "#", o.darken); }
+        pdata["c:e"] = stat.v.te == null ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.v.te, "#", false);
+        pdata["c:e#d"] = stat.v.te == null ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.v.te, "#", true);
         // {{c:rating}}
-        pdata["c:rating"] = r <= 0 ? ""
-            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, r, "#", o.darken); }
+        pdata["c:rating"] = r <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, r, "#", false);
+        pdata["c:rating#d"] = r <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, r, "#", true);
         // {{c:kb}}
-        pdata["c:kb"] = b <= 0 ? ""
-            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, b / 1000, "#", o.darken); }
+        pdata["c:kb"] = b <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, b / 1000, "#", false);
+        pdata["c:kb#d"] = b <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, b / 1000, "#", true);
         // {{c:avglvl}}
-        pdata["c:avglvl"] = stat.lvl <= 0 ? ""
-            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, Math.round(Utils.toFloat(stat.lvl, 0)), "#", o.darken); }
+        pdata["c:avglvl"] = stat.lvl <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, avglvl, "#", false);
+        pdata["c:avglvl#d"] = stat.lvl <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, avglvl, "#", true);
         // {{c:t-rating}}
-        pdata["c:t-rating"] = tr <= 0 ? ""
-            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, tr, "#", o.darken); }
+        pdata["c:t-rating"] = tr <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, tr, "#", false);
+        pdata["c:t-rating#d"] = tr <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, tr, "#", true);
         // {{c:t-battles}}
-        pdata["c:t-battles"] = tb <= 0 ? ""
-            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, tb, "#", o.darken); }
+        pdata["c:t-battles"] = tb <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, tb, "#", false);
+        pdata["c:t-battles#d"] = tb <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, tb, "#", true);
         // {{c:tdb}}
-        pdata["c:tdb"] = stat.v.db <= 0 ? ""
-            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, stat.v.db, "#", o.darken); }
+        pdata["c:tdb"] = stat.v.db <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, stat.v.db, "#", false);
+        pdata["c:tdb#d"] = stat.v.db <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, stat.v.db, "#", true);
         // {{c:tdv}}
-        pdata["c:tdv"] = stat.v.dv <= 0 ? ""
-            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, stat.v.dv, "#", o.darken); }
+        pdata["c:tdv"] = stat.v.dv <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, stat.v.dv, "#", false);
+        pdata["c:tdv#d"] = stat.v.dv <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, stat.v.dv, "#", true);
         // {{c:tfb}}
-        pdata["c:tfb"] = stat.v.fb <= 0 ? ""
-            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, stat.v.fb, "#", o.darken); }
+        pdata["c:tfb"] = stat.v.fb <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, stat.v.fb, "#", false);
+        pdata["c:tfb#d"] = stat.v.fb <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, stat.v.fb, "#", true);
         // {{c:tsb}}
-        pdata["c:tsb"] = stat.v.sb <= 0 ? ""
-            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, stat.v.sb, "#", o.darken); }
+        pdata["c:tsb"] = stat.v.sb <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, stat.v.sb, "#", false);
+        pdata["c:tsb#d"] = stat.v.sb <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, stat.v.sb, "#", true);
 
         // Alpha
         // {{a:xeff}}
-        pdata["a:xeff"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xeff); }
+        pdata["a:xeff"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xeff);
         // {{a:xwn6}}
-        pdata["a:xwn6"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwn6); }
+        pdata["a:xwn6"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwn6)
         // {{a:xwn8}}
-        pdata["a:xwn8"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwn8); }
+        pdata["a:xwn8"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwn8);
         // {{a:xwn}}
         pdata["a:xwn"] = pdata["a:xwn8"];
         // {{a:eff}}
-        pdata["a:eff"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_EFF, eff); }
+        pdata["a:eff"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_EFF, eff);
         // {{a:wn6}}
-        pdata["a:wn6"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WN6, stat.wn6); }
+        pdata["a:wn6"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WN6, stat.wn6);
         // {{a:wn8}}
-        pdata["a:wn8"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WN8, stat.wn8); }
+        pdata["a:wn8"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WN8, stat.wn8);
         // {{a:wn}}
         pdata["a:wn"] = pdata["a:wn8"];
         // {{a:e}}
-        pdata["a:e"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_E, stat.v.te); }
+        pdata["a:e"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_E, stat.v.te);
         // {{a:rating}}
-        pdata["a:rating"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_RATING, r); }
+        pdata["a:rating"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_RATING, r);
         // {{a:kb}}
-        pdata["a:kb"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_KB, b / 1000); }
+        pdata["a:kb"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_KB, b / 1000);
         // {{a:avglvl}}
-        pdata["a:avglvl"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_AVGLVL, stat.lvl); }
+        pdata["a:avglvl"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_AVGLVL, stat.lvl);
         // {{a:t-rating}}
-        pdata["a:t-rating"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_RATING, tr); }
+        pdata["a:t-rating"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_RATING, tr);
         // {{a:t-battles}}
-        pdata["a:t-battles"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TBATTLES, tb); }
+        pdata["a:t-battles"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TBATTLES, tb);
         // {{a:tdb}}
-        pdata["a:tdb"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TDB, stat.v.db); }
+        pdata["a:tdb"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TDB, stat.v.db);
         // {{a:tdv}}
-        pdata["a:tdv"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TDV, stat.v.dv); }
+        pdata["a:tdv"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TDV, stat.v.dv);
         // {{a:tfb}}
-        pdata["a:tfb"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TFB, stat.v.fb); }
+        pdata["a:tfb"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TFB, stat.v.fb);
         // {{a:tsb}}
-        pdata["a:tsb"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TSB, stat.v.sb); }
+        pdata["a:tsb"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TSB, stat.v.sb);
     }
 
     public static function RegisterMinimapMacros(player:Player, vehicleClassSymbol:String)
     {
         if (!player)
             return;
-
         var pname:String = Utils.GetPlayerName(player.userName);
         if (!dict.hasOwnProperty(pname))
             dict[pname] = { };
@@ -447,27 +442,36 @@ class com.xvm.Macros
         // {{level}}
         pdata["level"] = vdata.level;
 
-        // {{short-nick}}
-        pdata["short-nick"] = player.userName.slice(0, MapConfig.nickShrink)
-
         // {{vehicle-class}} - returns special symbol depending on class
         pdata["vehicle-class"] = vehicleClassSymbol;
 
         // {{vehicle}} - Vehicle type readable - Chaffee
         pdata["vehicle"] = vdata.localizedName;
 
-        // {{vehicle-name}} - Vehicle system name - usa-M24_Chaffee
-        pdata["vehicle-name"] = VehicleInfo.getVIconName(vdata.key)
+        // {{vehiclename}} - Vehicle system name - usa-M24_Chaffee
+        pdata["vehiclename"] = VehicleInfo.getVIconName(vdata.key);
 
         // {{vehicle-short}}
         pdata["vehicle-short"] = vdata.shortName;
+    }
+
+    public static function RegisterMarkerData(playerName:String, data:Object)
+    {
+        if (!data)
+            return;
+        var pname:String = Utils.GetPlayerName(playerName);
+        if (!dict.hasOwnProperty(pname))
+            dict[pname] = { };
+        var pdata = dict[pname];
+
+        // {{turret}}
+        pdata["turret"] = data.turret || "";
     }
 
     public static function RegisterHitlogMacros(playerName:String, data:Object, hits:Array, total:Number)
     {
         if (!data)
             return;
-
         var pname:String = Utils.GetPlayerName(playerName);
         if (!dict.hasOwnProperty(pname))
             dict[pname] = { };
@@ -533,24 +537,5 @@ class com.xvm.Macros
         }
 
         return nick;
-    }
-
-    //   src: ally, squadman, enemy, unknown, player (allytk, enemytk - how to detect?)
-    public static function damageFlagToDamageSource(damageFlag:Number):String
-    {
-        switch (damageFlag)
-        {
-            case Defines.FROM_ALLY:
-                return "ally";
-            case Defines.FROM_ENEMY:
-                return "enemy";
-            case Defines.FROM_PLAYER:
-                return "player";
-            case Defines.FROM_SQUAD:
-                return "squadman";
-            case Defines.FROM_UNKNOWN:
-            default:
-                return "unknown";
-        }
     }
 }

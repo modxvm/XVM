@@ -263,7 +263,8 @@ package com.xvm.misc
                     .split("{{tdv}}")           .join("{{tdv%.1f}}")
                     .split("{{tfb}}")           .join("{{tfb%.1f}}")
                     .split("{{tsb}}")           .join("{{tsb%.1f}}")
-                    .split("{{vehicle-type}}")  .join("{{vehicle}}");
+                    .split("{{vehicle-type}}")  .join("{{vehicle}}")
+                    .split("{{short-nick}}")    .join("{{nick%.5s}}");
                 config = JSONx.parse(json);
                 v = "5.1.0";
             }

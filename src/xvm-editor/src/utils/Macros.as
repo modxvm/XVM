@@ -85,7 +85,6 @@ package utils
             var vnames:String = "t34";
             format = format.split("{{nick}}").join(name + "[CLAN]");
             format = format.split("{{name}}").join(name);
-            format = format.split("{{short-nick}}").join(name.slice(0, Config.config.minimap.nickShrink));
             format = format.split("{{clan}}").join("[CLAN]");
             format = format.split("{{clannb}}").join("CLAN");
             format = format.split("{{vehicle}}").join(vname);
@@ -220,7 +219,6 @@ package utils
                 "{{speed}}"
             ],
             minimap: [
-                "{{short-nick}}",
                 "{{short-vehicle}}",
                 "{{vehicle}}",
                 "{{level}}"
@@ -291,12 +289,12 @@ package utils
                 "{{eff}}",
                 "{{wn6}}",
                 "{{wn8}}",
-                //"{{e}}",
-                //"{{teff}}",
-                //"{{tdb}}",
-                //"{{tdv}}",
-                //"{{tfb}}",
-                //"{{tsb}}",
+                "{{e}}",
+                "{{teff}}",
+                "{{tdb}}",
+                "{{tdv}}",
+                "{{tfb}}",
+                "{{tsb}}",
                 "{{kb}}",
                 "{{battles}}",
                 "{{wins}}",

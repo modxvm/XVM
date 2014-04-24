@@ -113,7 +113,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         Macros.RegisterMarkerData(Utils.GetPlayerName(m_playerFullName),
         {
             turret: turretStatusComponent.getMarker()
-        }, wrapper.m_team == "ally" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
+        });
 
         // Create clan icon and place to mc.
         clanIconComponent.initialize(wrapper);

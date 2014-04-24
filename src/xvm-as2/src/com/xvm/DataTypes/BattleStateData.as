@@ -1,5 +1,3 @@
-import com.xvm.DataTypes.*;
-
 class com.xvm.DataTypes.BattleStateData
 {
     public var playerName:String = null;
