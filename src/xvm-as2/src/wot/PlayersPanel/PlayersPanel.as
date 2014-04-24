@@ -180,7 +180,7 @@ class wot.PlayersPanel.PlayersPanel
                 var item = data[i];
                 var value = values[i];
 
-                Macros.RegisterPlayerData(Utils.GetNormalizedPlayerName(item.label), item,
+                Macros.RegisterPlayerData(Utils.GetPlayerName(item.label), item,
                     wrapper.type == "left" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
 
                 if (i != 0)

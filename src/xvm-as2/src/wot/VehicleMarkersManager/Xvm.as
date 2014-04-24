@@ -110,7 +110,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         vehicleTypeComponent.init(vClass /*mediumTank*/, hunt);
         damageTextComponent.init();
 
-        Macros.RegisterMarkerData(Utils.GetNormalizedPlayerName(m_playerFullName),
+        Macros.RegisterMarkerData(Utils.GetPlayerName(m_playerFullName),
         {
             turret: turretStatusComponent.getMarker()
         }, wrapper.m_team == "ally" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);

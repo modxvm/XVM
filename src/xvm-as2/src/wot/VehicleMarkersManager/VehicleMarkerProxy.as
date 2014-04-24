@@ -280,7 +280,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         var wr = wrapper;
         var registerMacros = function()
         {
-            Macros.RegisterPlayerData(Utils.GetNormalizedPlayerName(pFullName),
+            Macros.RegisterPlayerData(Utils.GetPlayerName(pFullName),
             {
                 label: pFullName,
                 vehicle: vType,

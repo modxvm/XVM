@@ -1,5 +1,4 @@
-﻿import com.natecook.Sprintf;
-import com.xvm.*;
+﻿import com.xvm.*;
 import com.xvm.DataTypes.*;
 import wot.Minimap.model.externalProxy.*;
 import wot.Minimap.dataTypes.*;
@@ -21,7 +20,7 @@ class com.xvm.Macros
             var len:Number = formatArr.length;
             if (len > 1)
             {
-                var name:String = Utils.GetNormalizedPlayerName(playerName);
+                var name:String = Utils.GetPlayerName(playerName);
                 for (var i:Number = 1; i < len; ++i)
                 {
                     var part:String = formatArr[i];
@@ -177,7 +176,7 @@ class com.xvm.Macros
         if (!data)
             return;
 
-        var pname = Utils.GetNormalizedPlayerName(name);
+        var pname = Utils.GetPlayerName(name);
 
         Cache.Get("_m/" + pname + "/" + data.vehicle + "/" + (VehicleInfo.initialized && Config.s_loaded), function()
         {
@@ -264,7 +263,7 @@ class com.xvm.Macros
 
     public static function RegisterMarkerData(name:String, data:Object, team:Number)
     {
-        var pdata = Macros.dict[Utils.GetNormalizedPlayerName(name)];
+        var pdata = Macros.dict[Utils.GetPlayerName(name)];
 
         // {{turret}}
         pdata["turret"] = data.turret || "";
@@ -275,7 +274,7 @@ class com.xvm.Macros
         if (!stat)
             return;
 
-        var pname:String = Utils.GetNormalizedPlayerName(playerName);
+        var pname:String = Utils.GetPlayerName(playerName);
         if (!dict.hasOwnProperty(pname))
             dict[pname] = { };
         var pdata = dict[pname];
@@ -439,7 +438,7 @@ class com.xvm.Macros
         if (!player)
             return;
 
-        var pname:String = Utils.GetNormalizedPlayerName(player.userName);
+        var pname:String = Utils.GetPlayerName(player.userName);
         if (!dict.hasOwnProperty(pname))
             dict[pname] = { };
         var pdata = dict[pname];
@@ -470,7 +469,7 @@ class com.xvm.Macros
         if (!data)
             return;
 
-        var pname:String = Utils.GetNormalizedPlayerName(playerName);
+        var pname:String = Utils.GetPlayerName(playerName);
         if (!dict.hasOwnProperty(pname))
             dict[pname] = { };
         var pdata = dict[pname];
