@@ -39,14 +39,10 @@
   <compileTargets>
     <compile path="shared\Mouse.as" />
     <compile path="shared\MovieClip.as" />
-    <compile path="src\wot\battle" />
     <compile path="src\wot\battleloading" />
     <compile path="src\wot\crew\tankmen" />
     <compile path="src\wot\FinalStatistic" />
-    <compile path="src\wot\PlayersPanel" />
     <compile path="src\wot\SquadMemberRenderer" />
-    <compile path="src\wot\StatisticForm" />
-    <compile path="src\wot\TeamBasesPanel" />
     <compile path="src\wot\TeamMemberRenderer" />
     <compile path="src\wot\TeamRenderer" />
     <compile path="src\wot\UserInfo" />
@@ -56,6 +52,14 @@
     <compile path="src\wot\Minimap\Minimap.as" />
     <compile path="src\wot\Minimap\MinimapEntry.as" />
     <compile path="src\wot\VehicleMarkersManager" />
+    <compile path="src\wot\PlayersPanel\PlayerListItemRenderer.as" />
+    <compile path="src\wot\PlayersPanel\PlayersPanel.as" />
+    <compile path="src\wot\battle\BattleMain.as" />
+    <compile path="src\wot\StatisticForm\BattleStatItemRenderer.as" />
+    <compile path="src\wot\TeamBasesPanel\CaptureBar.as" />
+    <compile path="src\wot\TeamBasesPanel\TeamBasesPanel.as" />
+    <compile path="src\wot\VehicleMarkersManager\VehicleMarkersCanvas.as" />
+    <compile path="src\wot\VehicleMarkersManager\VehicleMarkerProxy.as" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->
   <library>

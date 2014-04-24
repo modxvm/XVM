@@ -36,13 +36,6 @@ class wot.PlayersPanel.PlayersPanel
         // stub
     }
 
-    function update()
-    {
-        _lastAdjustedState = "";
-        //Logger.add("update");
-        base.update();
-    }
-
     // wrapped methods
     /////////////////////////////////////////////////////////////////
 
@@ -67,27 +60,13 @@ class wot.PlayersPanel.PlayersPanel
 
         GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, StatLoader.LoadData);
         GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
-        GlobalEventDispatcher.addEventListener(Stat.E_STAT_LOADED, this, update);
-        GlobalEventDispatcher.addEventListener(Defines.E_BATTLE_STATE_CHANGED, this, update);
+        GlobalEventDispatcher.addEventListener(Stat.E_STAT_LOADED, wrapper, wrapper.update);
+        GlobalEventDispatcher.addEventListener(Defines.E_BATTLE_STATE_CHANGED, wrapper, wrapper.update);
 
         Config.LoadConfig();
 
         /** Minimap needs to know loaded status */
         checkLoading();
-    }
-
-    private function onConfigLoaded(event):Void
-    {
-        //Logger.add("PlayersPanel.onConfigLoaded()");
-
-        GlobalEventDispatcher.removeEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
-
-        // init enemy spotter markers
-        if (Config.s_config.playersPanel.enemySpottedMarker.enabled && isEnemyPanel)
-        {
-            GlobalEventDispatcher.addEventListener(AutoUpdate.UPDATE_BY_TIMER_EVENT, this, updateSpotStatusMarkers);
-            spotStatusModel = new SpotStatusModel();
-        }
     }
 
     /**
@@ -112,34 +91,32 @@ class wot.PlayersPanel.PlayersPanel
         }
     }
 
-    private function setDataImpl(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStr, vehiclesStr, namesStr)
+    // PRIVATE
+
+    private function onConfigLoaded(event):Void
     {
-        //Logger.add("PlayersPanel.setData()");
-        setData2(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStr, vehiclesStr, namesStr);
+        //Logger.add("PlayersPanel.onConfigLoaded()");
+
+        GlobalEventDispatcher.removeEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
+
+        // init enemy spotter markers
+        if (Config.s_config.playersPanel.enemySpottedMarker.enabled && isEnemyPanel)
+        {
+            GlobalEventDispatcher.addEventListener(AutoUpdate.UPDATE_BY_TIMER_EVENT, this, updateSpotStatusMarkers);
+            spotStatusModel = new SpotStatusModel();
+        }
     }
 
     private var _init:Boolean = false;
-    private var _lastAdjustedState = "";
 
     // Centered _y value of text field
     private var centeredTextY:Number;
     private var leadingNames:Number;
     private var leadingVehicles:Number;
 
-    private function selectPlayer(event):Void
+    private function setDataImpl(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStrOrig, vehiclesStrOrig, namesStrOrig)
     {
-        if (m_data == null)
-            return;
-        var pos:Number = event.details.code == 48 ? 9 : event.details.code - 49;
-        if (pos >= m_data.length)
-            return;
-        Logger.add("selectPlayer: " + m_data[pos].vehId);
-        gfx.io.GameDelegate.call("Battle.selectPlayer", [m_data[pos].vehId]);
-    }
-
-    private function setData2(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count,
-        fragsStrOrig, vehiclesStrOrig, namesStrOrig)
-    {
+        //Logger.add("PlayersPanel.setData()");
         //Logger.add("PlayersPanel.setData2()");
         //Logger.addObject(data, 3);
         //Logger.add(vehiclesStrOrig);
@@ -202,17 +179,9 @@ class wot.PlayersPanel.PlayersPanel
 
             // new player added in the FoW mode
             if (m_knownPlayersCount != data.length)
-            {
                 m_knownPlayersCount = data.length;
-                _lastAdjustedState = "";
-            }
 
-            // panel mode switched
-            if (wrapper.state != _lastAdjustedState)
-            {
-                XVMAdjustPanelSize();
-                _lastAdjustedState = wrapper.state;
-            }
+            XVMAdjustPanelSize();
 
             // FIXIT: this code is not optimal. Find how to set default leading for text fields and remove this code.
             wrapper.m_names.htmlText = wrapper.m_names.htmlText.split('LEADING="9"').join('LEADING="' + leadingNames + '"');
@@ -227,11 +196,22 @@ class wot.PlayersPanel.PlayersPanel
         }
     }
 
+    private function selectPlayer(event):Void
+    {
+        if (m_data == null)
+            return;
+        var pos:Number = event.details.code == 48 ? 9 : event.details.code - 49;
+        if (pos >= m_data.length)
+            return;
+        Logger.add("selectPlayer: " + m_data[pos].vehId);
+        gfx.io.GameDelegate.call("Battle.selectPlayer", [m_data[pos].vehId]);
+    }
+
     private function onRecreateDeviceImpl(width, height)
     {
         //Logger.add("PlayersPanel.onRecreateDevice()");
         base.onRecreateDevice(width, height);
-        XVMAdjustPanelSize();
+        wrapper.update();
     }
 
     // PRIVATE

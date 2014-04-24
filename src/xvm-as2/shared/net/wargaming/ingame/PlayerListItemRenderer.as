@@ -21,6 +21,7 @@ intrinsic class net.wargaming.ingame.PlayerListItemRenderer extends gfx.core.UIC
     function setState();
     function update();
     function invalidate();
-    
+    function lightPlayer(visibility);
+
     function dispatchLightPlayer(visibility);
 }

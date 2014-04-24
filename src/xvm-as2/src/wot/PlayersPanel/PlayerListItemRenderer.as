@@ -23,13 +23,11 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     function __getColorTransform()
     {
-        //Logger.add("PlayerListItemRenderer.__getColorTransform()");
         return this.__getColorTransformImpl.apply(this, arguments);
     }
 
     function update()
     {
-        //Logger.add("PlayerListItemRenderer.update()");
         return this.updateImpl.apply(this, arguments);
     }
 
