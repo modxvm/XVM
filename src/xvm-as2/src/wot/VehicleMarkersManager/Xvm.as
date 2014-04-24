@@ -128,7 +128,6 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         if (Config.s_config.rating.showPlayersStatistics && !Stat.s_loaded)
         {
             GlobalEventDispatcher.addEventListener(Stat.E_STAT_LOADED, this, onStatLoaded);
-            StatLoader.LoadData();
         }
     }
 

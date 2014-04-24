@@ -19,6 +19,10 @@ class wot.battle.BattleMain
     {
         Utils.TraceXvmModule("Battle");
 
+        // ScaleForm optimization
+        _global.gfxExtensions = true;
+        _global.noInvisibleAdvance = true;
+
         GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, BattleMainConfigLoaded);
         GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, StatLoader.LoadData);
         Config.LoadConfig();

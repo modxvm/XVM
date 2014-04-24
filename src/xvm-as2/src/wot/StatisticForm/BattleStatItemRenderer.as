@@ -56,8 +56,6 @@ class wot.StatisticForm.BattleStatItemRenderer
 
         GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
         GlobalEventDispatcher.addEventListener(Stat.E_STAT_LOADED, wrapper, updateData);
-
-        Config.LoadConfig();
     }
 
     private function get team(): Number
@@ -98,7 +96,6 @@ class wot.StatisticForm.BattleStatItemRenderer
             s_winChances.showChances = Config.s_config.statisticForm.showChances;
             s_winChances.showLive = Config.s_config.statisticForm.showChancesLive;
             s_winChances.showBattleTier = Config.s_config.statisticForm.showBattleTier;
-            StatLoader.LoadData();
         }
 
         wrapper.col3.condenseWhite = true;

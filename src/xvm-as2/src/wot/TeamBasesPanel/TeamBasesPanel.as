@@ -21,6 +21,7 @@ class wot.TeamBasesPanel.TeamBasesPanel
     {
         this.wrapper = wrapper;
         this.base = base;
+        wrapper.xvm_worker = this;
         TeamBasesPanelCtor();
     }
 

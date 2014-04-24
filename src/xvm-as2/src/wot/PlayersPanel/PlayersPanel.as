@@ -58,12 +58,9 @@ class wot.PlayersPanel.PlayersPanel
 
         spotStatusModel = null;
 
-        GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, StatLoader.LoadData);
         GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
         GlobalEventDispatcher.addEventListener(Stat.E_STAT_LOADED, wrapper, wrapper.update);
         GlobalEventDispatcher.addEventListener(Defines.E_BATTLE_STATE_CHANGED, wrapper, wrapper.update);
-
-        Config.LoadConfig();
 
         /** Minimap needs to know loaded status */
         checkLoading();
@@ -96,7 +93,6 @@ class wot.PlayersPanel.PlayersPanel
     private function onConfigLoaded(event):Void
     {
         //Logger.add("PlayersPanel.onConfigLoaded()");
-
         GlobalEventDispatcher.removeEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
 
         // init enemy spotter markers

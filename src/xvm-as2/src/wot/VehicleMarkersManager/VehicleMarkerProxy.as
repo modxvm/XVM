@@ -67,12 +67,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
     {
         Utils.TraceXvmModule("VehicleMarkersManager");
 
-        start = new Date();
         //trace("VehicleMarkerProxy::ctor()");
-
-        // ScaleForm optimization // FIXIT: is required?
-        if (!_global.noInvisibleAdvance)
-            _global.noInvisibleAdvance = true;
 
         subject = null;
 
@@ -88,8 +83,6 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
             wrapper.vNameField.text = "Loading...";
             //   register config load complete event
             GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
-            //   start config loading
-            Config.LoadConfig();
         }
         else
         {
