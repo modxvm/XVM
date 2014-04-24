@@ -114,8 +114,6 @@ class wot.StatisticForm.BattleStatItemRenderer
         wrapper.col3.condenseWhite = Stat.s_empty;
 
         var name = Utils.GetPlayerName(wrapper.data.label);
-        Macros.RegisterPlayerData(name, wrapper.data, team);
-
         var key = "SF/" + name + "/" + (Stat.s_data[name] ? Stat.s_data[name].loadstate : "0");
         var saved_icon = wrapper.data.icon;
         var saved_label = wrapper.data.label;

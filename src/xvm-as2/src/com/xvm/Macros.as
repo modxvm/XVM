@@ -173,72 +173,101 @@ class com.xvm.Macros
         return res;
     }
 
-    public static function RegisterPlayerData(name:String, data:Object, team:Number)
+    public static function RegisterPlayerData(playerName:String, data:Object, team:Number)
     {
         if (!data)
             return;
+        var pname:String = Utils.GetPlayerName(playerName);
+        if (!dict.hasOwnProperty(pname))
+            dict[pname] = { };
+        var pdata = dict[pname];
 
-        var pname = Utils.GetPlayerName(name);
+        //Logger.addObject(data);
 
-        Cache.Get("_m/" + pname + "/" + data.vehicle + "/" + (VehicleInfo.initialized && Config.s_loaded), function()
+        // Static macros
+
+        // player name
+        if (!pdata.hasOwnProperty("nick"))
         {
-            //Logger.addObject(data);
-            if (!Macros.dict.hasOwnProperty(pname))
-                Macros.dict[pname] = { };
-            var pdata = Macros.dict[pname];
-
-            // vars
-            var nick = Macros.modXvmDevLabel(data.label +
-                (data.label.indexOf("[") >= 0 || !data.clanAbbrev ? "" : "[" + data.clanAbbrev + "]"));
-
-            var vdata:VehicleData = VehicleInfo.getByIcon(data.icon);
-            //Logger.addObject(vdata);
+            var fname:String = data.label + (data.label.indexOf("[") >= 0 || !data.clanAbbrev ? "" : "[" + data.clanAbbrev + "]");
+            var name:String = Macros.modXvmDevLabel(pname);
+            var clan:String = Utils.GetClanNameWithBrackets(fname);
+            var nick:String = name + clan;
 
             // {{nick}}
             pdata["nick"] = nick;
             // {{name}}
-            var nm:String = Utils.GetPlayerName(nick);
-            pdata["name"] = nm;
+            pdata["name"] = name;
             // {{clan}}
-            pdata["clan"] = Utils.GetClanNameWithBrackets(nick);
+            pdata["clan"] = clan;
             // {{clannb}}
-            pdata["clannb"] = Utils.GetClanName(nick);
-            // {{vehicle}}
-            pdata["vehicle"] = vdata.localizedName;
-            // {{vehiclename}} - usa-M24_Chaffee
-            pdata["vehiclename"] = VehicleInfo.getVIconName(vdata.key);
-            // {{vtype}}
-            pdata["vtype"] = VehicleInfo.getVTypeText(vdata.vtype);
-            // {{c:vtype}}
-            pdata["c:vtype"] = GraphicsUtil.GetVTypeColorValue(data.icon);
+            pdata["clannb"] = Utils.GetClanName(fname);
+        }
 
-            // VMM only - static
+        // vehicle
+        if (!pdata.hasOwnProperty("vehicle"))
+        {
+            var vdata:VehicleData = VehicleInfo.getByIcon(data.icon);
+            //Logger.addObject(vdata);
+            if (vdata != null)
+            {
+                // {{vehicle}}
+                pdata["vehicle"] = vdata.localizedName;
+                // {{vehiclename}} - usa-M24_Chaffee
+                pdata["vehiclename"] = VehicleInfo.getVIconName(vdata.key);
+                // {{vtype}}
+                pdata["vtype"] = VehicleInfo.getVTypeText(vdata.vtype);
+                // {{c:vtype}}
+                pdata["c:vtype"] = GraphicsUtil.GetVTypeColorValue(data.icon);
+            }
+        }
+
+        // squad
+        if (!pdata.hasOwnProperty("squad") && data.hasOwnProperty("squad"))
+        {
             // {{squad}}
             pdata["squad"] = data.squad || "";
+        }
+
+        // level
+        if (!pdata.hasOwnProperty("level") && data.hasOwnProperty("level"))
+        {
             // {{level}}
             pdata["level"] = data.level;
             // {{rlevel}}
             pdata["rlevel"] = data.level ? Defines.ROMAN_LEVEL[data.level - 1] : "";
+        }
 
-            // VMM only - dynamic
+        // Dynamic macros
+
+        if (!pdata.hasOwnProperty("hp"))
+        {
+            // hp
+
             // {{hp}}
             pdata["hp"] = function(o) { return o.curHealth != undefined ? o.curHealth : NaN; }
             // {{hp-max}}
             pdata["hp-max"] = function(o) { return o.maxHealth ? o.maxHealth : data.maxHealth; };
             // {{hp-ratio}}
             pdata["hp-ratio"] = function(o) { return o.curHealth != undefined ? Math.round(o.curHealth / (o.maxHealth ? o.maxHealth : data.maxHealth) * 100) : NaN; }
+            // {{c:hp}}
+            pdata["c:hp"] = function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, o.curHealth); }
+            // {{c:hp-ratio}}
+            pdata["c:hp-ratio"] = function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, o.curHealth / (o.maxHealth ? o.maxHealth : data.maxHealth) * 100); }
+            // {{a:hp}}
+            pdata["a:hp"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, o.curHealth); }
+            // {{a:hp-ratio}}
+            pdata["a:hp-ratio"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO,
+                Math.round(o.curHealth / (o.maxHealth ? o.maxHealth : data.maxHealth) * 100)); }
+
+            // dmg
+
             // {{dmg}}
             pdata["dmg"] = function(o) { return o.delta != undefined ? String(o.delta) : NaN; }
             // {{dmg-ratio}}
             pdata["dmg-ratio"] = function(o) { return o.delta != undefined ? Math.round(o.delta / (o.maxHealth ? o.maxHealth : data.maxHealth) * 100) : NaN; }
             // {{dmg-kind}}
             pdata["dmg-kind"] = function(o) { return o.delta != undefined ? Locale.get(o.damageType) : ""; }
-
-            // Colors
-            // {{c:hp}}
-            pdata["c:hp"] = function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, o.curHealth); }
-            // {{c:hp-ratio}}
-            pdata["c:hp-ratio"] = function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, o.curHealth / (o.maxHealth ? o.maxHealth : data.maxHealth) * 100); }
             // {{c:dmg}}
             pdata["c:dmg"] = function(o)
                 {
@@ -249,18 +278,10 @@ class com.xvm.Macros
                 }
             // {{c:dmg-kind}}
             pdata["c:dmg-kind"] = function(o) { return o.delta ? GraphicsUtil.GetDmgKindValue(o.damageType) : ""; }
+
             // {{c:system}}
             pdata["c:system"] = function(o) { return "#" + Strings.padLeft(o.getSystemColor(o).toString(16), 6, "0"); }
-
-            // Alpha
-            // {{a:hp}}
-            pdata["a:hp"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, o.curHealth); }
-            // {{a:hp-ratio}}
-            pdata["a:hp-ratio"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO,
-                Math.round(o.curHealth / (o.maxHealth ? o.maxHealth : data.maxHealth) * 100)); }
-
-            return true;
-        });
+        }
     }
 
     public static function RegisterStatMacros(playerName:String, stat:StatData)
