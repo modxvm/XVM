@@ -326,10 +326,10 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
     function onStatLoaded(event)
     {
         //trace("Xvm::onStatLoaded()");
-        if (event)
-            GlobalEventDispatcher.removeEventListener(Stat.E_STAT_LOADED, this, onStatLoaded);
+        GlobalEventDispatcher.removeEventListener(Stat.E_STAT_LOADED, this, onStatLoaded);
 
         initializeTextFields();
+        vehicleTypeComponent.setVehicleClass();
         XVMUpdateStyle();
     }
 
