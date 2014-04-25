@@ -220,24 +220,30 @@ class com.xvm.Locale
 
     private static function languageFileCallback(data_str):Void
     {
-        if (data_str == null)
-        {
-            Logger.add("Locale: Can not find language file. Filename: " + s_filename);
-            return;
-        }
-
         try
         {
-            s_lang = JSONx.parse(data_str);
-            Logger.add("Locale: Loaded " + Config.s_config.language);
+            if (data_str == null)
+            {
+                Logger.add("Locale: Can not find language file. Filename: " + s_filename);
+                return;
+            }
+
+            try
+            {
+                s_lang = JSONx.parse(data_str);
+                Logger.add("Locale: Loaded " + Config.s_config.language);
+            }
+            catch (ex:Error)
+            {
+                var text:String = "Error loading language file '" + s_filename + "': ";
+                text += parseError(ex);
+                Logger.add(text.substr(0, 200));
+            }
         }
-        catch (ex:Error)
+        finally
         {
-            var text:String = "Error loading language file '" + s_filename + "': ";
-            text += parseError(ex);
-            Logger.add(text.substr(0, 200));
+            GlobalEventDispatcher.dispatchEvent( { type: EVENT_LOADED } );
         }
-        GlobalEventDispatcher.dispatchEvent( { type: EVENT_LOADED } );
     }
 
     private static function parseError(ex):String {
