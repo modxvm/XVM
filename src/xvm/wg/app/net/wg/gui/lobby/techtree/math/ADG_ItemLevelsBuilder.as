@@ -579,7 +579,7 @@ package net.wg.gui.lobby.techtree.math
                         _loc12_ = _loc7_[_loc17_];
                         if(!(_loc12_ == null) && _loc12_.index == _loc16_)
                         {
-                           _loc4_ = param2?ADG_ItemLevelsBuilder.makeByNext(_loc11_,_loc12_):ADG_ItemLevelsBuilder.makeByTop(_loc11_,_loc12_);
+                           _loc4_ = param2?LevelLine.makeByNext(_loc11_,_loc12_):LevelLine.makeByTop(_loc11_,_loc12_);
                            _loc3_.push(_loc4_);
                            break;
                         }
