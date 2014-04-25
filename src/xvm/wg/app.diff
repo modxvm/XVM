@@ -122,6 +122,18 @@ diff -Naur app.orig/net/wg/gui/lobby/messengerBar/carousel/data/ChannelListItemV
  
        private var _clientID:Number = 0;
  
+diff -Naur app.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.as app/net/wg/gui/lobby/profile/ProfileTabNavigator.as
+--- app.orig/net/wg/gui/lobby/profile/ProfileTabNavigator.as	2014-04-25 10:41:04.323922400 +0300
++++ app/net/wg/gui/lobby/profile/ProfileTabNavigator.as	2014-04-25 11:02:21.114658600 +0300
+@@ -28,7 +28,7 @@
+ 
+       public var viewStack:ResizableViewStack;
+ 
+-      private var initData:ProfileMenuInfoVO;
++      public var initData:ProfileMenuInfoVO;
+ 
+       private var _sectionsDataUtil:SectionsDataUtil;
+ 
 diff -Naur app.orig/net/wg/gui/lobby/profile/components/ScrollPane.as app/net/wg/gui/lobby/profile/components/ScrollPane.as
 --- app.orig/net/wg/gui/lobby/profile/components/ScrollPane.as	2014-04-25 10:42:55.189703200 +0300
 +++ app/net/wg/gui/lobby/profile/components/ScrollPane.as	2014-04-25 10:53:02.469664500 +0300

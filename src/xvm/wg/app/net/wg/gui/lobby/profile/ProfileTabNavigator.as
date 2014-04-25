@@ -28,7 +28,7 @@ package net.wg.gui.lobby.profile
 
       public var viewStack:ResizableViewStack;
 
-      private var initData:ProfileMenuInfoVO;
+      public var initData:ProfileMenuInfoVO;
 
       private var _sectionsDataUtil:SectionsDataUtil;
 
