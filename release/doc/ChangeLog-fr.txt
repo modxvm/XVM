@@ -1,4 +1,4 @@
-﻿XVM-5.3.0-dev:
+﻿XVM-5.3.0-test1:
   [CHANGEMENTS MAJEURS]
   * nouvelle méthode de formattage des macros (cf. readme-fr.txt)
   * version de la configuration augmentée en 5.1.0

@@ -1,4 +1,4 @@
-﻿XVM-5.3.0-dev:
+﻿XVM-5.3.0-test1:
   [MAJOR UPDATES]
   * new macros formatting (see readme-en.txt)
       {{name[%[flag][width][.prec]type][~suf][|def]}}
