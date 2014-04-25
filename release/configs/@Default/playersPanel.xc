@@ -67,8 +67,8 @@
     // Options for the "medium" panels - the first of the medium panels.
     // Режим ушей "medium" - первые средние уши в игре.
     "medium": {
-      // Width of the player's name column, 0-250. Default is 46.
-      // Ширина поля имени игрока, 0-250. По умолчанию: 46.
+      // Minimum width of the player's name column, 0-250. Default is 46.
+      // Минимальная ширина поля имени игрока, 0-250. По умолчанию: 46.
       "width": 46,
       // Display format for the left panel (macros allowed, see readme-en.txt).
       // Формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt).
@@ -80,8 +80,8 @@
     // Options for the "medium2" panels - the second of the medium panels.
     // Режим ушей "medium2" - вторые средние уши в игре.
     "medium2": {
-      // Width of the vehicle name column, 0-250. Default is 65.
-      // Ширина поля названия танка, 0-250. По умолчанию: 65.
+      // Minimum width of the vehicle name column, 0-250. Default is 65.
+      // Минимальная ширина названия танка, 0-250. По умолчанию: 65.
       "width": 65,
       // Display format for the left panel (macros allowed, see readme-en.txt).
       // Формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt).
@@ -93,8 +93,8 @@
     // Options for the "large" panels - the widest panels.
     // Режим ушей "large" - широкие уши в игре.
     "large": {
-      // Width of the player's name column, 0-250. Default is 170.
-      // Ширина поля имени игрока, 0-250. По умолчанию: 170.
+      // Minimum width of the player's name column, 0-250. Default is 170.
+      // Минимальная ширина имени игрока, 0-250. По умолчанию: 170.
       "width": 170,
       // Display format for player nickname (macros allowed, see readme-en.txt).
       // Формат отображения имени игрока (допускаются макроподстановки, см. readme-ru.txt).
