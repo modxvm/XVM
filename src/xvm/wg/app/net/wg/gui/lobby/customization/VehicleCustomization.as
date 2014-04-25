@@ -216,6 +216,7 @@ package net.wg.gui.lobby.customization
                            "cost":0
                         }
                      ,
+                     "priceOverride":null,
                      "selected":false,
                      "enabled":false,
                      "type":_loc4_.type
@@ -312,8 +313,8 @@ package net.wg.gui.lobby.customization
          var _loc8_:* = 0;
          var _loc9_:* = 0;
          var _loc10_:Object = null;
-         var _loc13_:Object = null;
-         var _loc14_:* = false;
+         var _loc12_:Object = null;
+         var _loc13_:* = false;
          this._sectionsData[param1] = param3;
          var _loc6_:Array = [];
          var _loc7_:Array = [];
@@ -333,8 +334,7 @@ package net.wg.gui.lobby.customization
             this._priceDataProvider.splice(_loc8_,1);
             _loc5_ = null;
          }
-         var _loc11_:Object = {};
-         var _loc12_:Object = null;
+         var _loc11_:Object = null;
          _loc8_ = 0;
          while(_loc8_ < this._priceDataProvider.length)
          {
@@ -343,15 +343,7 @@ package net.wg.gui.lobby.customization
             {
                if(this._sectionsData[_loc10_.section])
                {
-                  _loc12_ = this._sectionsData[_loc10_.section]._new;
-               }
-               if(!(_loc10_.type  in  _loc11_))
-               {
-                  _loc11_[_loc10_.type] = [];
-               }
-               if((_loc12_) && (_loc12_.price.isGold))
-               {
-                  _loc11_[_loc10_.type].push(_loc12_.id);
+                  _loc11_ = this._sectionsData[_loc10_.section]._new;
                }
             }
             _loc8_++;
@@ -362,7 +354,7 @@ package net.wg.gui.lobby.customization
             _loc10_ = this._priceDataProvider[_loc8_];
             if(this._sectionsData[_loc10_.section])
             {
-               _loc12_ = this._sectionsData[_loc10_.section]._new;
+               _loc11_ = this._sectionsData[_loc10_.section]._new;
             }
             if(_loc10_.section == param1)
             {
@@ -389,6 +381,7 @@ package net.wg.gui.lobby.customization
                            "label":_loc10_.label,
                            "section":_loc10_.section,
                            "price":this.getSumCost(_loc7_),
+                           "priceOverride":null,
                            "selected":true,
                            "enabled":true,
                            "fake":true
@@ -403,36 +396,24 @@ package net.wg.gui.lobby.customization
                }
                else
                {
-                  if((_loc12_) && (param3.price.isGold) && _loc11_[_loc10_.type].indexOf(_loc12_.id) > -1)
-                  {
-                     _loc10_.price =
-                        {
-                           "isGold":true,
-                           "cost":0
-                        }
-                     ;
-                  }
-                  else
-                  {
-                     _loc10_.price = param3.price;
-                  }
+                  _loc10_.price = param3.price;
                }
                _loc10_.selected = param2;
                if(param3.hasOwnProperty("selectedItems"))
                {
-                  _loc14_ = false;
-                  for each (_loc13_ in param3.selectedItems)
+                  _loc13_ = false;
+                  for each (_loc12_ in param3.selectedItems)
                   {
-                     if(_loc13_)
+                     if(_loc12_)
                      {
-                        _loc14_ = _loc13_.id > 0;
+                        _loc13_ = _loc12_.id > 0;
                      }
-                     if(_loc14_)
+                     if(_loc13_)
                      {
                         break;
                      }
                   }
-                  _loc10_.enabled = _loc14_;
+                  _loc10_.enabled = _loc13_;
                }
                else
                {
@@ -577,43 +558,78 @@ package net.wg.gui.lobby.customization
       private function calculateTotalPrice() : void {
          var _loc6_:Object = null;
          var _loc8_:Object = null;
-         var _loc9_:* = NaN;
-         var _loc10_:Object = null;
+         var _loc9_:Object = null;
+         var _loc10_:* = NaN;
+         var _loc11_:Object = null;
+         var _loc12_:* = NaN;
+         var _loc13_:Object = null;
          var _loc1_:Number = 0;
          var _loc2_:Number = 0;
          var _loc3_:* = false;
          var _loc4_:* = true;
          var _loc5_:* = true;
-         this._selectedSections = [];
-         var _loc7_:Number = 0;
-         while(_loc7_ < this._priceDataProvider.length)
+         var _loc7_:Object = {};
+         _loc10_ = 0;
+         while(_loc10_ < this._priceDataProvider.length)
          {
-            _loc8_ = this._priceDataProvider[_loc7_];
-            if(_loc8_.selected)
+            _loc8_ = this._priceDataProvider[_loc10_];
+            _loc8_.priceOverride = null;
+            if(!(_loc8_.type  in  _loc7_))
+            {
+               _loc7_[_loc8_.type] = [];
+            }
+            if((_loc8_) && (_loc8_.price.isGold))
+            {
+               _loc9_ = this._sectionsData[_loc8_.section]._new;
+               if((_loc9_) && _loc7_[_loc8_.type].indexOf(_loc9_.id) == -1)
+               {
+                  _loc7_[_loc8_.type].push(_loc9_.id);
+               }
+               else
+               {
+                  if(_loc9_)
+                  {
+                     _loc8_.priceOverride =
+                        {
+                           "isGold":true,
+                           "cost":0
+                        }
+                     ;
+                  }
+               }
+            }
+            _loc10_++;
+         }
+         this._selectedSections = [];
+         _loc10_ = 0;
+         while(_loc10_ < this._priceDataProvider.length)
+         {
+            _loc11_ = this._priceDataProvider[_loc10_];
+            if(_loc11_.selected)
             {
                _loc3_ = false;
-               _loc6_ = _loc8_.price;
+               _loc6_ = _loc11_.priceOverride?_loc11_.priceOverride:_loc11_.price;
                if(_loc6_ != null)
                {
                   if(_loc6_  is  Array)
                   {
-                     _loc9_ = 0;
-                     while(_loc9_ < _loc6_.lengh)
+                     _loc12_ = 0;
+                     while(_loc12_ < _loc6_.lengh)
                      {
-                        _loc10_ = _loc6_[_loc9_];
-                        if(_loc10_ != null)
+                        _loc13_ = _loc6_[_loc12_];
+                        if(_loc13_ != null)
                         {
                            if(_loc6_.isGold)
                            {
                               _loc3_ = true;
-                              _loc2_ = _loc2_ + _loc10_.cost;
+                              _loc2_ = _loc2_ + _loc13_.cost;
                            }
                            else
                            {
-                              _loc1_ = _loc1_ + _loc10_.cost;
+                              _loc1_ = _loc1_ + _loc13_.cost;
                            }
                         }
-                        _loc9_++;
+                        _loc12_++;
                      }
                   }
                   else
@@ -631,12 +647,12 @@ package net.wg.gui.lobby.customization
                }
                this._selectedSections.push(
                   {
-                     "sectionName":_loc8_.section,
+                     "sectionName":_loc11_.section,
                      "isGold":_loc3_
                   }
                );
             }
-            _loc7_++;
+            _loc10_++;
          }
          if(_loc1_ <= this._accountCredits)
          {

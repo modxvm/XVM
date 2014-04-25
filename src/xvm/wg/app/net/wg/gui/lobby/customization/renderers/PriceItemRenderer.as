@@ -94,9 +94,9 @@ package net.wg.gui.lobby.customization.renderers
             this.checkBox.selected = data.selected;
          }
          this.checkBox.validateNow();
-         if(!(this.costField == null) && !(data.price == null))
+         if(!(this.costField == null) && (!(data.price == null) || !(data.priceOverride == null)))
          {
-            _loc1_ = data.price;
+            _loc1_ = data.priceOverride?data.priceOverride:data.price;
             if(_loc1_.isGold)
             {
                this.costField.text = App.utils.locale.gold(_loc1_.cost);

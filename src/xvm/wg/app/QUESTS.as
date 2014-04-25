@@ -531,8 +531,6 @@ package
 
       public static const DETAILS_CONDITIONS_POSTBATTLE_SEPARATOR:String = "#quests:details/conditions/postBattle/separator";
 
-      public static const DETAILS_CONDITIONS_POSTBATTLE_DAILYRESET_TIMEFMT:String = "#quests:details/conditions/postBattle/dailyReset/timeFmt";
-
       public static const DETAILS_CONDITIONS_POSTBATTLE_DAILYRESET:String = "#quests:details/conditions/postBattle/dailyReset";
 
       public static const DETAILS_CONDITIONS_CUMULATIVE_HEALTH:String = "#quests:details/conditions/cumulative/health";

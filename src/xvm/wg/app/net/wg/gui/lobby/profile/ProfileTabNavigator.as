@@ -14,7 +14,7 @@ package net.wg.gui.lobby.profile
 
    public class ProfileTabNavigator extends ProfileTabNavigatorMeta implements IProfileTabNavigatorMeta
    {
-
+          
       public function ProfileTabNavigator() {
          this._sectionsDataUtil = new SectionsDataUtil();
          super();
@@ -28,7 +28,7 @@ package net.wg.gui.lobby.profile
 
       public var viewStack:ResizableViewStack;
 
-      public var initData:ProfileMenuInfoVO;
+      private var initData:ProfileMenuInfoVO;
 
       private var _sectionsDataUtil:SectionsDataUtil;
 

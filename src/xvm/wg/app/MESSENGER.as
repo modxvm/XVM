@@ -475,16 +475,6 @@ package
 
       public static const COMMAND_FOLLOWME_ARG0:String = "#messenger:command/FOLLOWME/arg0";
 
-      public static const COMMAND_RELOADING_READY_CASSETE_RTIME:String = "#messenger:command/RELOADING_READY_CASSETE/rTime";
-
-      public static const COMMAND_RELOADING_READY_CASSETE_AMMOINCASSETE:String = "#messenger:command/RELOADING_READY_CASSETE/ammoInCassete";
-
-      public static const COMMAND_RELOADINGGUN_RTIME:String = "#messenger:command/RELOADINGGUN/rTime";
-
-      public static const COMMAND_RELOADING_CASSETE_RTIME:String = "#messenger:command/RELOADING_CASSETE/rTime";
-
-      public static const COMMAND_RELOADING_CASSETE_AMMOQUANTITYLEFT:String = "#messenger:command/RELOADING_CASSETE/ammoQuantityLeft";
-
       public static const EVENTS_ENTERCHANNEL:String = "#messenger:events/enterChannel";
 
       public static const EVENTS_LEAVECHANNEL:String = "#messenger:events/leaveChannel";
@@ -548,8 +538,6 @@ package
       public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_GOLD:String = "#messenger:serviceChannelMessages/battleResults/quests/gold";
 
       public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_BERTHS:String = "#messenger:serviceChannelMessages/battleResults/quests/berths";
-
-      public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_ACHIEVEMENTS:String = "#messenger:serviceChannelMessages/battleResults/quests/achievements";
 
       public static const SERVICECHANNELMESSAGES_BATTLERESULTS_QUESTS_PREMIUM:String = "#messenger:serviceChannelMessages/battleResults/quests/premium";
 
