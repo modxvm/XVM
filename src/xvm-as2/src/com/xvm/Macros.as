@@ -128,7 +128,7 @@ class com.xvm.Macros
         if (typeof value == "function")
         {
             res = options ? value(options) : "{{" + macro + "}}";
-            if (res == null)
+            if (res == null || res == NaN)
                 return def;
         }
 
