@@ -356,59 +356,59 @@ class com.xvm.Macros
 
         // Dynamic colors
         // {{c:xeff}}
-        pdata["c:xeff"] = stat.xeff == null ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#", false);
-        pdata["c:xeff#d"] = stat.xeff == null ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#", true);
+        pdata["c:xeff"] = stat.xeff == null ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#", false);
+        pdata["c:xeff#d"] = stat.xeff == null ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#", true);
         // {{c:xwn6}}
-        pdata["c:xwn6"] = stat.xwn6 == null ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn6, "#", false);
-        pdata["c:xwn6#d"] = stat.xwn6 == null ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn6, "#", true);
+        pdata["c:xwn6"] = stat.xwn6 == null ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn6, "#", false);
+        pdata["c:xwn6#d"] = stat.xwn6 == null ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn6, "#", true);
         // {{c:xwn8}}
-        pdata["c:xwn8"] = stat.xwn8 == null ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8, "#", false);
-        pdata["c:xwn8#d"] = stat.xwn8 == null ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8, "#", true);
+        pdata["c:xwn8"] = stat.xwn8 == null ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8, "#", false);
+        pdata["c:xwn8#d"] = stat.xwn8 == null ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8, "#", true);
         // {{c:xwn}}
         pdata["c:xwn"] = pdata["c:xwn8"];
         pdata["c:xwn#d"] = pdata["c:xwn8#d"];
         // {{c:eff}}
-        pdata["c:eff"] = eff <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff, "#", false);
-        pdata["c:eff#d"] = eff <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff, "#", true);
+        pdata["c:eff"] = eff <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff, "#", false);
+        pdata["c:eff#d"] = eff <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff, "#", true);
         // {{c:wn6}}
-        pdata["c:wn6"] = !stat.wn6 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN6, stat.wn6, "#", false);
-        pdata["c:wn6#d"] = !stat.wn6 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN6, stat.wn6, "#", true);
+        pdata["c:wn6"] = !stat.wn6 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN6, stat.wn6, "#", false);
+        pdata["c:wn6#d"] = !stat.wn6 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN6, stat.wn6, "#", true);
         // {{c:wn8}}
-        pdata["c:wn8"] = !stat.wn8 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, stat.wn8, "#", false);
-        pdata["c:wn8#d"] = !stat.wn8 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, stat.wn8, "#", true);
+        pdata["c:wn8"] = !stat.wn8 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, stat.wn8, "#", false);
+        pdata["c:wn8#d"] = !stat.wn8 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, stat.wn8, "#", true);
         // {{c:wn}}
         pdata["c:wn"] = pdata["c:wn8"];
         pdata["c:wn#d"] = pdata["c:wn8#d"];
         // {{c:e}}
-        pdata["c:e"] = stat.v.te == null ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.v.te, "#", false);
-        pdata["c:e#d"] = stat.v.te == null ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.v.te, "#", true);
+        pdata["c:e"] = stat.v.te == null ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.v.te, "#", false);
+        pdata["c:e#d"] = stat.v.te == null ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.v.te, "#", true);
         // {{c:rating}}
-        pdata["c:rating"] = r <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, r, "#", false);
-        pdata["c:rating#d"] = r <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, r, "#", true);
+        pdata["c:rating"] = r <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, r, "#", false);
+        pdata["c:rating#d"] = r <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, r, "#", true);
         // {{c:kb}}
-        pdata["c:kb"] = b <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, b / 1000, "#", false);
-        pdata["c:kb#d"] = b <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, b / 1000, "#", true);
+        pdata["c:kb"] = b <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, b / 1000, "#", false);
+        pdata["c:kb#d"] = b <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, b / 1000, "#", true);
         // {{c:avglvl}}
-        pdata["c:avglvl"] = stat.lvl <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, avglvl, "#", false);
-        pdata["c:avglvl#d"] = stat.lvl <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, avglvl, "#", true);
+        pdata["c:avglvl"] = stat.lvl <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, avglvl, "#", false);
+        pdata["c:avglvl#d"] = stat.lvl <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, avglvl, "#", true);
         // {{c:t-rating}}
-        pdata["c:t-rating"] = tr <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, tr, "#", false);
-        pdata["c:t-rating#d"] = tr <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, tr, "#", true);
+        pdata["c:t-rating"] = tr <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, tr, "#", false);
+        pdata["c:t-rating#d"] = tr <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, tr, "#", true);
         // {{c:t-battles}}
-        pdata["c:t-battles"] = tb <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, tb, "#", false);
-        pdata["c:t-battles#d"] = tb <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, tb, "#", true);
+        pdata["c:t-battles"] = tb <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, tb, "#", false);
+        pdata["c:t-battles#d"] = tb <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, tb, "#", true);
         // {{c:tdb}}
-        pdata["c:tdb"] = stat.v.db <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, stat.v.db, "#", false);
-        pdata["c:tdb#d"] = stat.v.db <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, stat.v.db, "#", true);
+        pdata["c:tdb"] = stat.v.db <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, stat.v.db, "#", false);
+        pdata["c:tdb#d"] = stat.v.db <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, stat.v.db, "#", true);
         // {{c:tdv}}
-        pdata["c:tdv"] = stat.v.dv <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, stat.v.dv, "#", false);
-        pdata["c:tdv#d"] = stat.v.dv <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, stat.v.dv, "#", true);
+        pdata["c:tdv"] = stat.v.dv <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, stat.v.dv, "#", false);
+        pdata["c:tdv#d"] = stat.v.dv <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, stat.v.dv, "#", true);
         // {{c:tfb}}
-        pdata["c:tfb"] = stat.v.fb <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, stat.v.fb, "#", false);
-        pdata["c:tfb#d"] = stat.v.fb <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, stat.v.fb, "#", true);
+        pdata["c:tfb"] = stat.v.fb <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, stat.v.fb, "#", false);
+        pdata["c:tfb#d"] = stat.v.fb <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, stat.v.fb, "#", true);
         // {{c:tsb}}
-        pdata["c:tsb"] = stat.v.sb <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, stat.v.sb, "#", false);
-        pdata["c:tsb#d"] = stat.v.sb <= 0 ? "" : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, stat.v.sb, "#", true);
+        pdata["c:tsb"] = stat.v.sb <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, stat.v.sb, "#", false);
+        pdata["c:tsb#d"] = stat.v.sb <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, stat.v.sb, "#", true);
 
         // Alpha
         // {{a:xeff}}

@@ -32,7 +32,7 @@
   },
   "elements": [
     ${"sirmax-snippet-test.xc":"."},
-//    ${"sirmax-snippet-pp.xc":"."},  // players panels
+    //${"sirmax-snippet-pp.xc":"."},  // players panels
     ${"sirmax-snippet-bt.xc":"."} // battle timer
   ],
   "definition": {
@@ -123,7 +123,6 @@
   },
   "playersPanel": {
     "alpha": 50,
-    "initialMode": "short",
     "removeSquadIcon": true,
     "removePanelsModeSwitcher": true,
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },

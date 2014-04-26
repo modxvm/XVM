@@ -372,141 +372,141 @@ package com.xvm.utils
 
             // Dynamic colors
             // {{c:xeff}}
-            pdata["c:xeff"] = isNaN(stat.xeff) ? "" : function(o:MacrosFormatOptions):String {
+            pdata["c:xeff"] = isNaN(stat.xeff) ? null : function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#", o.darken);
             }
             // {{c:xwn6}}
-            pdata["c:xwn6"] = isNaN(stat.xwn6) ? "" : function(o:MacrosFormatOptions):String {
+            pdata["c:xwn6"] = isNaN(stat.xwn6) ? null : function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn6, "#", o.darken);
             }
             // {{c:xwn8}}
-            pdata["c:xwn8"] = isNaN(stat.xwn8) ? "" : function(o:MacrosFormatOptions):String {
+            pdata["c:xwn8"] = isNaN(stat.xwn8) ? null : function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8, "#", o.darken);
             }
             // {{c:xwn}}
             pdata["c:xwn"] = pdata["c:xwn8"]
             // {{c:eff}}
-            pdata["c:eff"] = isNaN(stat.e) ? "" : function(o:MacrosFormatOptions):String {
+            pdata["c:eff"] = isNaN(stat.e) ? null : function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, stat.e, "#", o.darken);
             }
             // {{c:wn6}}
-            pdata["c:wn6"] = isNaN(stat.wn6) ? "" : function(o:MacrosFormatOptions):String {
+            pdata["c:wn6"] = isNaN(stat.wn6) ? null : function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN6, stat.wn6, "#", o.darken);
             }
             // {{c:wn8}}
-            pdata["c:wn8"] = isNaN(stat.wn8) ? "" : function(o:MacrosFormatOptions):String {
+            pdata["c:wn8"] = isNaN(stat.wn8) ? null : function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, stat.wn8, "#", o.darken);
             }
             // {{c:wn}}
             pdata["c:wn"] = pdata["c:wn8"];
             // {{c:e}}
-            pdata["c:e"] = isNaN(stat.v.teff) ? "" : function(o:MacrosFormatOptions):String {
+            pdata["c:e"] = isNaN(stat.v.teff) ? null : function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.v.te, "#", o.darken);
             }
             // {{c:rating}}
-            pdata["c:rating"] = isNaN(stat.r) ? "" : function(o:MacrosFormatOptions):String {
+            pdata["c:rating"] = isNaN(stat.r) ? null : function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, stat.r, "#", o.darken);
             }
             // {{c:kb}}
-            pdata["c:kb"] = isNaN(stat.b) ? "" : function(o:MacrosFormatOptions):String {
+            pdata["c:kb"] = isNaN(stat.b) ? null : function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, stat.b / 1000.0, "#", o.darken);
             }
             // {{c:avglvl}}
-            pdata["c:avglvl"] = isNaN(stat.lvl) ? "" : function(o:MacrosFormatOptions):String {
+            pdata["c:avglvl"] = isNaN(stat.lvl) ? null : function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, stat.lvl, "#", o.darken);
             }
             // {{c:t-rating}}
-            pdata["c:t-rating"] = isNaN(stat.v.r) ? "" : function(o:MacrosFormatOptions):String {
+            pdata["c:t-rating"] = isNaN(stat.v.r) ? null : function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, stat.v.r, "#", o.darken);
             }
             // {{c:t-battles}}
-            pdata["c:t-battles"] = isNaN(stat.v.b) ? "" : function(o:MacrosFormatOptions):String {
+            pdata["c:t-battles"] = isNaN(stat.v.b) ? null : function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, stat.v.b, "#", o.darken);
             }
             // {{c:tdb}}
-            pdata["c:tdb"] = isNaN(stat.v.db) ? "" : function(o:MacrosFormatOptions):String {
+            pdata["c:tdb"] = isNaN(stat.v.db) ? null : function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, stat.v.db, "#", o.darken);
             }
             // {{c:tdv}}
-            pdata["c:tdv"] = isNaN(stat.v.dv) ? "" : function(o:MacrosFormatOptions):String {
+            pdata["c:tdv"] = isNaN(stat.v.dv) ? null : function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, stat.v.dv, "#", o.darken);
             }
             // {{c:tfb}}
-            pdata["c:tfb"] = isNaN(stat.v.fb) ? "" : function(o:MacrosFormatOptions):String {
+            pdata["c:tfb"] = isNaN(stat.v.fb) ? null : function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, stat.v.fb, "#", o.darken);
             }
             // {{c:tsb}}
-            pdata["c:tsb"] = isNaN(stat.v.sb) ? "" : function(o:MacrosFormatOptions):String {
+            pdata["c:tsb"] = isNaN(stat.v.sb) ? null : function(o:MacrosFormatOptions):String {
                 return MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, stat.v.sb, "#", o.darken);
             }
 
             // Alpha
             // {{a:xeff}}
-            pdata["a:xeff"] = isNaN(stat.xeff) ? "" : function(o:MacrosFormatOptions):Number {
+            pdata["a:xeff"] = isNaN(stat.xeff) ? null : function(o:MacrosFormatOptions):Number {
                 return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xeff);
             }
             // {{a:xwn6}}
-            pdata["a:xwn6"] = isNaN(stat.xwn6) ? "" : function(o:MacrosFormatOptions):Number {
+            pdata["a:xwn6"] = isNaN(stat.xwn6) ? null : function(o:MacrosFormatOptions):Number {
                 return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwn6);
             }
             // {{a:xwn8}}
-            pdata["a:xwn8"] = isNaN(stat.xwn8) ? "" : function(o:MacrosFormatOptions):Number {
+            pdata["a:xwn8"] = isNaN(stat.xwn8) ? null : function(o:MacrosFormatOptions):Number {
                 return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwn8);
             }
             // {{a:xwn}}
             pdata["a:xwn"] = pdata["a:xwn8"];
             // {{a:eff}}
-            pdata["a:eff"] = isNaN(stat.e) ? "" : function(o:MacrosFormatOptions):Number {
+            pdata["a:eff"] = isNaN(stat.e) ? null : function(o:MacrosFormatOptions):Number {
                 return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_EFF, stat.e);
             }
             // {{a:wn6}}
-            pdata["a:wn6"] = isNaN(stat.wn6) ? "" : function(o:MacrosFormatOptions):Number {
+            pdata["a:wn6"] = isNaN(stat.wn6) ? null : function(o:MacrosFormatOptions):Number {
                 return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WN6, stat.wn6);
             }
             // {{a:wn8}}
-            pdata["a:wn8"] = isNaN(stat.wn8) ? "" : function(o:MacrosFormatOptions):Number {
+            pdata["a:wn8"] = isNaN(stat.wn8) ? null : function(o:MacrosFormatOptions):Number {
                 return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WN8, stat.wn8);
             }
             // {{a:wn}}
             pdata["a:wn"] = pdata["a:wn8"];
             // {{a:e}}
-            pdata["a:e"] = isNaN(stat.v.teff) ? "" : function(o:MacrosFormatOptions):Number {
+            pdata["a:e"] = isNaN(stat.v.teff) ? null : function(o:MacrosFormatOptions):Number {
                 return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_E, stat.v.te);
             }
             // {{a:rating}}
-            pdata["a:rating"] = isNaN(stat.r) ? "" : function(o:MacrosFormatOptions):Number {
+            pdata["a:rating"] = isNaN(stat.r) ? null : function(o:MacrosFormatOptions):Number {
                 return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_RATING, stat.r);
             }
             // {{a:kb}}
-            pdata["a:kb"] = isNaN(stat.b) ? "" : function(o:MacrosFormatOptions):Number {
+            pdata["a:kb"] = isNaN(stat.b) ? null : function(o:MacrosFormatOptions):Number {
                 return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_KB, stat.b / 1000);
             }
             // {{a:avglvl}}
-            pdata["a:avglvl"] = isNaN(stat.lvl) ? "" : function(o:MacrosFormatOptions):Number {
+            pdata["a:avglvl"] = isNaN(stat.lvl) ? null : function(o:MacrosFormatOptions):Number {
                 return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_AVGLVL, stat.lvl);
             }
             // {{a:t-rating}}
-            pdata["a:t-rating"] = isNaN(stat.v.r) ? "" : function(o:MacrosFormatOptions):Number {
+            pdata["a:t-rating"] = isNaN(stat.v.r) ? null : function(o:MacrosFormatOptions):Number {
                 return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_RATING, stat.v.r);
             }
             // {{a:t-battles}}
-            pdata["a:t-battles"] = isNaN(stat.v.b) ? "" : function(o:MacrosFormatOptions):Number {
+            pdata["a:t-battles"] = isNaN(stat.v.b) ? null : function(o:MacrosFormatOptions):Number {
                 return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TBATTLES, stat.v.b);
             }
             // {{a:tdb}}
-            pdata["a:tdb"] = isNaN(stat.v.db) ? "" : function(o:MacrosFormatOptions):Number {
+            pdata["a:tdb"] = isNaN(stat.v.db) ? null : function(o:MacrosFormatOptions):Number {
                 return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TDB, stat.v.db);
             }
             // {{a:tdv}}
-            pdata["a:tdv"] = isNaN(stat.v.dv) ? "" : function(o:MacrosFormatOptions):Number {
+            pdata["a:tdv"] = isNaN(stat.v.dv) ? null : function(o:MacrosFormatOptions):Number {
                 return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TDV, stat.v.dv);
             }
             // {{a:tfb}}
-            pdata["a:tfb"] = isNaN(stat.v.fb) ? "" : function(o:MacrosFormatOptions):Number {
+            pdata["a:tfb"] = isNaN(stat.v.fb) ? null : function(o:MacrosFormatOptions):Number {
                 return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TFB, stat.v.fb);
             }
             // {{a:tsb}}
-            pdata["a:tsb"] = isNaN(stat.v.sb) ? "" : function(o:MacrosFormatOptions):Number {
+            pdata["a:tsb"] = isNaN(stat.v.sb) ? null : function(o:MacrosFormatOptions):Number {
                 return MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TSB, stat.v.sb);
             }
         }
