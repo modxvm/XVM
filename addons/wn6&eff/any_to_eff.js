@@ -1,5 +1,5 @@
 // Скрипт для замены одного представления рейтинга на другое в конфиге XVM 5.3.0+
-// http://www.koreanrandom.com/forum/topic/14583-
+// http://www.koreanrandom.com/forum/topic/3163-/#entry43725
 
 // нужный текст
 var text_rate   = "{{eff%4d|----}}";
