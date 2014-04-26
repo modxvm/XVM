@@ -1,104 +1,61 @@
-// Скрипт для замены одного представления рейтинга на другое
+// РЎРєСЂРёРїС‚ РґР»СЏ Р·Р°РјРµРЅС‹ РѕРґРЅРѕРіРѕ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёСЏ СЂРµР№С‚РёРЅРіР° РЅР° РґСЂСѓРіРѕРµ РІ РєРѕРЅС„РёРіРµ XVM 5.3.0+
+// http://www.koreanrandom.com/forum/topic/14583-
 
-// нужный текст
-var text_replace1="{{xeff}}";
-var text_replace2="{{c:xeff}}";
-var text_replace3="{{a:xeff}}";
-var text_replace4="\"xwnInCompany\": false";
+// РЅСѓР¶РЅС‹Р№ С‚РµРєСЃС‚
+var text_rate   = "{{xeff%2s|--}}";
+var text_color  = "{{c:xeff}}";
+var text_alpha  = "{{a:xeff}}";
+var text_option = "\"xwnInCompany\": false";
 
-var text_samples1 = [    // заменяемый текст
-                        "{{wn}}",
-                        "{{wn6}}",
-                        "{{wn8}}",
-                        "{{eff:4}}",
-                        "{{eff}}",
-                        "{{xeff}}",
-                        "{{xwn}}",
-                        "{{xwn6}}",
-                        "{{xwn8}}"
-                    ];
-var text_samples2 = [    // заменяемый текст
-                        "{{c:wn}}",
-                        "{{c:wn6}}",
-                        "{{c:wn8}}",
-                        "{{c:eff}}",
-                        "{{c:xeff}}",
-                        "{{c:xwn}}",
-                        "{{c:xwn6}}",
-                        "{{c:xwn8}}"
-                    ];
-var text_samples3 = [    // заменяемый текст
-                        "{{a:wn}}",
-                        "{{a:wn6}}",
-                        "{{a:wn8}}",
-                        "{{a:eff}}",
-                        "{{a:xeff}}",
-                        "{{a:xwn}}",
-                        "{{a:xwn6}}",
-                        "{{a:xwn8}}"
-                    ];
-var text_samples4 = [    // заменяемый текст
-                        "\"xwnInCompany\": true",
-                        "\"xwnInCompany\":\ttrue",
-                        "\"xwnInCompany\": false",
-                        "\"xwnInCompany\":\tfalse"
-                    ];
+// Р·Р°РјРµРЅСЏРµРјС‹Р№ С‚РµРєСЃС‚
+var find_rate   = /{{x?(wn|eff)[^}]*}}/g;
+var find_color  = /{{c:x?(wn|eff)[^}]*}}/g;
+var find_alpha  = /{{a:x?(wn|eff)[^}]*}}/g;
+var find_option = /"xwnInCompany"[\s\t]*:[\s\t]*(true|false)/g;
 
 var i=0;
 do {
-    // Имя файла берём из аргумента или задаем XVM.xc, если аргумент пуст
-    if (WScript.Arguments.length<1) {
-        var file_name="XVM.xc";
-    }
-    else {
-        file_name=WScript.Arguments(i);
-    }
+    // РРјСЏ С„Р°Р№Р»Р° Р±РµСЂС‘Рј РёР· Р°СЂРіСѓРјРµРЅС‚Р° РёР»Рё Р·Р°РґР°РµРј XVM.xc, РµСЃР»Рё Р°СЂРіСѓРјРµРЅС‚ РїСѓСЃС‚
+    var file_name = "xvm.xc";
+    if ( WScript.Arguments.length > 0 )
+        file_name = WScript.Arguments(i);
 
     var fso=WScript.CreateObject("Scripting.FileSystemObject");
-    if (!fso.FileExists(file_name))
-      break;
-    // Переносим исходный файл во временный
-    var file_name_tmp=file_name+".tmp";
-    if(fso.FileExists(file_name_tmp))
-      fso.DeleteFile(file_name_tmp);
-    fso.MoveFile(file_name,file_name_tmp);
+    // РµСЃР»Рё РЅРµ РЅР°Р№РґРµРЅ С„Р°Р№Р», РїРµСЂРµС…РѕРґРёРј Рє СЃР»РµРґСѓСЋС‰РµРјСѓ
+    if ( !fso.FileExists(file_name) )
+        break;
 
-    var fo=fso.OpenTextFile(file_name_tmp,1,false,false);
-    var fr=fso.OpenTextFile(file_name,2,true,false);
-    // читаем файл, пока не закончится
-    while(!fo.AtEndOfStream){
-      var line=fo.ReadLine();
-      var line_replace=line;
-      // меняем первый макрос
-      for ( var j = 0; j < text_samples1.length; j++) {
-          var re=new RegExp(text_samples1[j]);
-          line_replace=line_replace.replace(re,text_replace1);
-          line_replace=line_replace.replace(re,text_replace1);
-      }
-      // меняем второй макрос
-      for ( j = 0; j < text_samples2.length; j++) {
-          re=new RegExp(text_samples2[j]);
-          line_replace=line_replace.replace(re,text_replace2);
-          line_replace=line_replace.replace(re,text_replace2);
-      }
-      // меняем третий макрос
-      for ( j = 0; j < text_samples3.length; j++) {
-          re=new RegExp(text_samples3[j]);
-          line_replace=line_replace.replace(re,text_replace3);
-          line_replace=line_replace.replace(re,text_replace3);
-      }
-      // меняем четвертый макрос
-      for ( j = 0; j < text_samples4.length; j++) {
-          re=new RegExp(text_samples4[j]);
-          line_replace=line_replace.replace(re,text_replace4);
-          line_replace=line_replace.replace(re,text_replace4);
-      }
-      fr.WriteLine(line_replace);
+    // РџРµСЂРµРЅРѕСЃРёРј РёСЃС…РѕРґРЅС‹Р№ С„Р°Р№Р» РІРѕ РІСЂРµРјРµРЅРЅС‹Р№
+    var file_name_tmp = file_name+".tmp";
+    if ( fso.FileExists(file_name_tmp) )
+        fso.DeleteFile(file_name_tmp);
+    fso.MoveFile(file_name, file_name_tmp);
+
+    // СЃРѕР·РґР°РµРј РїРµСЂРµРјРµРЅРЅС‹Рµ РґР»СЏ РґРѕСЃС‚СѓРїР° Рє С„Р°Р№Р»Р°Рј
+    var fold = fso.OpenTextFile(file_name_tmp,1,false,false);
+    var fnew = fso.OpenTextFile(file_name,2,true,false);
+
+    // С‡РёС‚Р°РµРј СЃС‚Р°СЂС‹Р№ РєРѕРЅС„РёРі, РїРѕРєР° РЅРµ Р·Р°РєРѕРЅС‡РёС‚СЃСЏ
+    while ( !fold.AtEndOfStream ) {
+        var line = fold.ReadLine();
+
+        // РјРµРЅСЏРµРј РјР°РєСЂРѕСЃС‹, РµСЃР»Рё РѕРЅРё РµСЃС‚СЊ РІ СЃС‚СЂРѕРєРµ
+        line = line.replace(find_rate, text_rate);
+        line = line.replace(find_color, text_color);
+        line = line.replace(find_alpha, text_alpha);
+        line = line.replace(find_option, text_option);
+
+        // РїРёС€РµРј СЃС‚СЂРѕРєСѓ РІ РЅРѕРІС‹Р№ С„Р°Р№Р»
+        fnew.WriteLine(line);
     }
-    fo.Close();
-    fr.Close();
-    // Удаляем исходный файл
-    fso.DeleteFile(file_name_tmp);
+
+    // Р·Р°РєСЂС‹РІР°РµРј С„Р°Р№Р»С‹ Рё СѓРґР°Р»СЏРµРј РІСЂРµРјРµРЅРЅС‹Р№
+    fold.Close();
+    fnew.Close();
+    fso.DeleteFile(file_name_tmp);  // РґРѕР±Р°РІСЊС‚Рµ // РІРЅР°С‡Р°Р»Рµ СЃС‚СЂРѕРєРё, С‡С‚РѕР±С‹ РѕСЃС‚Р°РІР°Р»РёСЃСЊ СЂРµР·РµСЂРІРЅС‹Рµ РєРѕРїРёРё С„Р°Р№Р»РѕРІ *.old
 
     i++
 } while (i<WScript.Arguments.length);
+
+// РІС‹С…РѕРґРёРј РёР· РїСЂРѕРіСЂР°РјРјС‹
+WScript.Quit();
