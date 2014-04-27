@@ -251,13 +251,13 @@ class com.xvm.Macros
             // {{hp-ratio}}
             pdata["hp-ratio"] = function(o) { return o.curHealth != undefined ? Math.round(o.curHealth / (o.maxHealth ? o.maxHealth : data.maxHealth) * 100) : NaN; }
             // {{c:hp}}
-            pdata["c:hp"] = function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, o.curHealth); }
+            pdata["c:hp"] = function(o) { return o.curHealth == null ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, o.curHealth); }
             // {{c:hp-ratio}}
-            pdata["c:hp-ratio"] = function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, o.curHealth / (o.maxHealth ? o.maxHealth : data.maxHealth) * 100); }
+            pdata["c:hp-ratio"] = function(o) { return o.curHealth == null ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, o.curHealth / (o.maxHealth ? o.maxHealth : data.maxHealth) * 100); }
             // {{a:hp}}
-            pdata["a:hp"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, o.curHealth); }
+            pdata["a:hp"] = function(o) { return o.curHealth == null ? null : GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, o.curHealth); }
             // {{a:hp-ratio}}
-            pdata["a:hp-ratio"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO,
+            pdata["a:hp-ratio"] = function(o) { return o.curHealth == null ? null : GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO,
                 Math.round(o.curHealth / (o.maxHealth ? o.maxHealth : data.maxHealth) * 100)); }
 
             // dmg
@@ -274,10 +274,10 @@ class com.xvm.Macros
                     return o.delta ? GraphicsUtil.GetDmgSrcValue(
                         Utils.damageFlagToDamageSource(o.damageFlag),
                         o.entityName == 'teamKiller' ? (data.team + "tk") : o.entityName,
-                        o.dead, o.blowedUp) : "";
+                        o.dead, o.blowedUp) : null;
                 }
             // {{c:dmg-kind}}
-            pdata["c:dmg-kind"] = function(o) { return o.delta ? GraphicsUtil.GetDmgKindValue(o.damageType) : ""; }
+            pdata["c:dmg-kind"] = function(o) { return o.delta ? GraphicsUtil.GetDmgKindValue(o.damageType) : null; }
 
             // {{c:system}}
             pdata["c:system"] = function(o) { return "#" + Strings.padLeft(o.getSystemColor(o).toString(16), 6, "0"); }
