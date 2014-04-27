@@ -196,7 +196,7 @@ class com.xvm.GraphicsUtil
     public static function GetDynamicColorValue(type: Number, value: Number, prefix: String, darker: Boolean): String
     {
         if (value == null)
-            return "";
+            return null;
 
         if (!prefix)
             prefix = "#";
