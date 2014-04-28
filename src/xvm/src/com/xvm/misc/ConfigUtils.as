@@ -234,7 +234,7 @@ package com.xvm.misc
                 var json:String = JSONx.stringify(config, '', true);
                 // TIP: replace() is buggy
                 json = json
-                    .split("{{avglvl}}")        .join("{{avglvl%s|-}}")
+                    .split("{{avglvl}}")        .join("{{avglvl%d|-}}")
                     .split("{{name}}")          .join("{{name%.16s~..}}")
                     .split("{{eff}}")           .join("{{eff%d}}")
                     .split("{{eff:4}}")         .join("{{eff%4d}}")

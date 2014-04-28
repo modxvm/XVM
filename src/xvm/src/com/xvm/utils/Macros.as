@@ -319,8 +319,7 @@ package com.xvm.utils
                 return;
 
             // {{avglvl}}
-            var avglvl:Number = isNaN(stat.lvl) ? NaN : Math.round(stat.lvl);
-            pdata["avglvl"] = isNaN(avglvl) ? null : avglvl >= 10 ? "X" : avglvl.toString();
+            pdata["avglvl"] = stat.lvl;
             // {{xeff}}
             pdata["xeff"] = isNaN(stat.xeff) ? null : stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff;
             // {{xwn6}}

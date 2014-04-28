@@ -303,8 +303,7 @@ class com.xvm.Macros
         var tw:Number = Utils.toInt(stat.v.w, 0);
 
         // {{avglvl}}
-        var avglvl:Number = Math.round(Utils.toFloat(stat.lvl, 0));
-        pdata["avglvl"] = avglvl < 1 ? null : avglvl == 10 ? "X" : String(avglvl);
+        pdata["avglvl"] = stat.lvl <= 0 ? NaN : stat.lvl;
         // {{xeff}}
         pdata["xeff"] = stat.xeff == null ? null : stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff;
         // {{xwn6}}
