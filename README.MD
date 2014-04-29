@@ -20,7 +20,7 @@ If you can write code, [you can help us](https://confluence.atlassian.com/displa
 [Please read before posting](http://www.koreanrandom.com/forum/topic/14300-please-read-before-posting-how-to-describe-your-problem-correctly-and-get-help-faster/): How to describe your problem correctly and get help faster.
 
 On our forums most messages in Russian, but you can use [Google Translate](https://translate.google.com/), if you want to understand the essence.
-You can write in english in any topics of our forum. You can ask your questions in English, and get answers to them on English as well.
+You can write in english in any topics of our forum. You can ask your questions in English, and get answers to them in English as well.
 
 Also you can change the interface language to english for your convenience:
 
