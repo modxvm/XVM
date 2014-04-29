@@ -388,8 +388,8 @@ class com.xvm.Macros
         pdata["c:kb"] = b <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, b / 1000, "#", false);
         pdata["c:kb#d"] = b <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, b / 1000, "#", true);
         // {{c:avglvl}}
-        pdata["c:avglvl"] = stat.lvl <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, avglvl, "#", false);
-        pdata["c:avglvl#d"] = stat.lvl <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, avglvl, "#", true);
+        pdata["c:avglvl"] = stat.lvl <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, stat.lvl, "#", false);
+        pdata["c:avglvl#d"] = stat.lvl <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, stat.lvl, "#", true);
         // {{c:t-rating}}
         pdata["c:t-rating"] = tr <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, tr, "#", false);
         pdata["c:t-rating#d"] = tr <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, tr, "#", true);
