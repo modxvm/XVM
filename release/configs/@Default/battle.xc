@@ -13,8 +13,8 @@
     // false - disable highlighting of own vehicle icon and squad.
     // false - отключить подсветку иконки своего танка и взвода.
     "highlightVehicleIcon": true,
-    // true - enable {{hp*}} macros in players panels and minimap. WARNING: performance expensive
-    // true - включить {{hp*}} макросы в ушах и на миникарте. ВНИМАНИЕ: может понизить производительность
+    // true - enable {{hp*}} macros ability in players panels and minimap. WARNING: performance expensive
+    // true - включить возможность {{hp*}} макросов в ушах и на миникарте. ВНИМАНИЕ: может понизить производительность
     "allowHpInPanelsAndMinimap": false,
     // Format of clock on the Debug Panel (near FPS).
     // Формат часов на экране панели отладки (возле FPS).
