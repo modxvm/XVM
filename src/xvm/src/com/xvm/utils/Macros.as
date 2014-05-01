@@ -135,7 +135,7 @@ package com.xvm.utils
             var res:String = value;
             if (typeof value == "function")
             {
-                var v:* = value(options);
+                var v:* = options ? value(options) : "{{" + macro + "}}";
                 if (v == null || (typeof v == "number" && isNaN(v)))
                     return def;
                 res = v;

@@ -99,7 +99,6 @@ class wot.VehicleMarkersManager.XvmBase
         //var key = "VMM/" + m_playerFullName + "/" + format;
         var pn = m_playerFullName;
         return Strings.trim(Macros.Format(pn, format));
-        //return Utils.trim(Cache.Get(key, function() { return Macros.Format(pn, format) }));
     }
 
     /* Substitutes macroses with values
