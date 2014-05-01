@@ -216,8 +216,8 @@
     "direction": "down",
     "insertOrder": "end",
     "groupHitsByPlayer": true,
-    "deadMarker": "<font face='Wingdings'>N</font>",
-    "blowupMarker": "<font face='Wingdings'>M</font>",
+    "deadMarker": "<img src='xvm://res/icons/dead.png' width='12' height='12'>",
+    "blowupMarker": "<img src='xvm://res/icons/blowedup.png' width='12' height='12'>",
 //  TEST
 //    "formatHistory": "<textformat tabstops='[20,50,90,150]'><font size='12'>#19</font>:<tab>9999<tab>| 2222<tab>| ramming<tab>| {{n}} {{n-player}} {{nick}}</textformat>",
     "defaultHeader": "<textformat leading='-2'><font color='#CCCCCC'>Total:</font> <font size='13'>#0</font></textformat>",

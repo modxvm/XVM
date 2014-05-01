@@ -57,8 +57,8 @@
     "insertOrder": "end",
     // Substitution for {{dead}} macro when tank is dead.
     // Подстановка для макроса {{dead}}, когда танк умирает.
-    "deadMarker": "<font face='Wingdings'>N</font>",
-    "blowupMarker": "<font face='Wingdings'>M</font>",
+    "deadMarker": "<img src='xvm://res/icons/dead.png' width='12' height='12'>",
+    "blowupMarker": "<img src='xvm://res/icons/blowedup.png' width='12' height='12'>",
     // Default header format (before first hit). Only localization macros are allowed, see readme-en.txt.
     // Формат заголовка по умолчанию (до первого попадания). Допускаются только макросы перевода, см. readme-ru.txt.
     "defaultHeader":  "<font color='#FFFFFF'>{{l10n:Hits}}:</font> <font size='13'>#0</font>",
