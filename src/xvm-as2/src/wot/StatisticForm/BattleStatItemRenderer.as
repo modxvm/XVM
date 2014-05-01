@@ -3,8 +3,9 @@
  * @author sirmax2
  */
 import com.xvm.*;
-import net.wargaming.controls.UILoaderAlt;
-import wot.StatisticForm.WinChances;
+import net.wargaming.controls.*;
+import net.wargaming.ingame.*;
+import wot.StatisticForm.*;
 
 class wot.StatisticForm.BattleStatItemRenderer
 {
@@ -126,7 +127,7 @@ class wot.StatisticForm.BattleStatItemRenderer
         //Logger.addObject(wrapper.data);
         if (Config.s_config.rating.showPlayersStatistics) {
             if (Stat.s_data[name] && Stat.s_data[name].stat)
-                Stat.s_data[name].stat.alive = (wrapper.data.vehicleState & 1) != 0;
+                Stat.s_data[name].stat.alive = (wrapper.data.vehicleState & VehicleStateInBattle.IS_AVIVE) != 0;
         }
         // Chance
         if (!Stat.s_empty && (Config.s_config.statisticForm.showChances || Config.s_config.statisticForm.showBattleTier) && wrapper.selected == true)
@@ -159,13 +160,21 @@ class wot.StatisticForm.BattleStatItemRenderer
         // Set Text Fields
         var c:String = "#" + Strings.padLeft(wrapper.textField.textColor.toString(16), 6, '0');
 
-        wrapper.textField.htmlText = "<font color='" + c + "'>" +
-            Macros.Format(saved_label,
-                (team == Defines.TEAM_ALLY) ? Config.s_config.statisticForm.formatLeftNick : Config.s_config.statisticForm.formatRightNick, { } ) +
-            "</font>";
-        wrapper.col3.htmlText = "<font color='" + c + "'>" +
-            Macros.Format(saved_label,
-                (team == Defines.TEAM_ALLY) ? Config.s_config.statisticForm.formatLeftVehicle : Config.s_config.statisticForm.formatRightVehicle, { }) + "</font>";
+        var obj = Defines.battleStates[name] || { };
+        var deadState = ((wrapper.data.vehicleState & VehicleStateInBattle.IS_AVIVE) == 0) ? Defines.DEADSTATE_DEAD : Defines.DEADSTATE_ALIVE;
+        if (deadState == Defines.DEADSTATE_DEAD && obj.dead == false)
+        {
+            obj.dead = true;
+            if (obj.curHealth > 0)
+                obj.curHealth = 0;
+        }
+        obj.darken = deadState == Defines.DEADSTATE_DEAD;
+
+        var fmt:String = Macros.Format(saved_label, (team == Defines.TEAM_ALLY) ? Config.s_config.statisticForm.formatLeftNick : Config.s_config.statisticForm.formatRightNick, obj);
+        wrapper.textField.htmlText = "<font color='" + c + "'>" + fmt + "</font>";
+
+        fmt = Macros.Format(saved_label, (team == Defines.TEAM_ALLY) ? Config.s_config.statisticForm.formatLeftVehicle : Config.s_config.statisticForm.formatRightVehicle, obj);
+        wrapper.col3.htmlText = "<font color='" + c + "'>" + fmt + "</font>";
     }
 
     // override
