@@ -127,9 +127,10 @@ class com.xvm.Macros
         var res:String = value;
         if (typeof value == "function")
         {
-            res = options ? value(options) : "{{" + macro + "}}";
-            if (res == null || res == NaN)
+            var v = value(options);
+            if (v == null || (typeof v == "number" && isNaN(v)))
                 return def;
+            res = v;
         }
 
         if (fmt != null)
@@ -267,7 +268,7 @@ class com.xvm.Macros
             // {{dmg-ratio}}
             pdata["dmg-ratio"] = function(o) { return o.delta != undefined ? Math.round(o.delta / (o.maxHealth ? o.maxHealth : data.maxHealth) * 100) : NaN; }
             // {{dmg-kind}}
-            pdata["dmg-kind"] = function(o) { return o.delta != undefined ? Locale.get(o.damageType) : ""; }
+            pdata["dmg-kind"] = function(o) { return o.delta != undefined ? Locale.get(o.damageType) : null; }
             // {{c:dmg}}
             pdata["c:dmg"] = function(o)
                 {

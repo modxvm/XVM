@@ -111,15 +111,19 @@ class wot.StatisticForm.BattleStatItemRenderer
             return;
         }
 
+        var dlg = _root.statsDialog;
+        if (dlg == null)
+            return;
+
         wrapper.col3.condenseWhite = Stat.s_empty;
 
         var name = Utils.GetPlayerName(wrapper.data.label);
-        var key = "SF/" + name + "/" + (Stat.s_data[name] ? Stat.s_data[name].loadstate : "0");
         var saved_icon = wrapper.data.icon;
         var saved_label = wrapper.data.label;
 
         // Add data for Win Chance calculation
-        //Logger.addObject(data);
+        //Logger.add(dlg.visible);
+        //Logger.addObject(wrapper.data);
         if (Config.s_config.rating.showPlayersStatistics) {
             if (Stat.s_data[name] && Stat.s_data[name].stat)
                 Stat.s_data[name].stat.alive = (wrapper.data.vehicleState & 1) != 0;
@@ -155,12 +159,13 @@ class wot.StatisticForm.BattleStatItemRenderer
         // Set Text Fields
         var c:String = "#" + Strings.padLeft(wrapper.textField.textColor.toString(16), 6, '0');
 
-        wrapper.textField.htmlText = "<font color='" + c + "'>" + Cache.Get(key + "/n", function() { return Macros.Format(saved_label,
-            (team == Defines.TEAM_ALLY) ? Config.s_config.statisticForm.formatLeftNick : Config.s_config.statisticForm.formatRightNick,
-            { }) } ) + "</font>";
-        wrapper.col3.htmlText = "<font color='" + c + "'>" + Cache.Get(key, function() { return Macros.Format(saved_label,
-            (team == Defines.TEAM_ALLY) ? Config.s_config.statisticForm.formatLeftVehicle : Config.s_config.statisticForm.formatRightVehicle,
-            { }) } ) + "</font>";
+        wrapper.textField.htmlText = "<font color='" + c + "'>" +
+            Macros.Format(saved_label,
+                (team == Defines.TEAM_ALLY) ? Config.s_config.statisticForm.formatLeftNick : Config.s_config.statisticForm.formatRightNick, { } ) +
+            "</font>";
+        wrapper.col3.htmlText = "<font color='" + c + "'>" +
+            Macros.Format(saved_label,
+                (team == Defines.TEAM_ALLY) ? Config.s_config.statisticForm.formatLeftVehicle : Config.s_config.statisticForm.formatRightVehicle, { }) + "</font>";
     }
 
     // override

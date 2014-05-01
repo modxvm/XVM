@@ -134,7 +134,12 @@ package com.xvm.utils
 
             var res:String = value;
             if (typeof value == "function")
-                res = options ? value(options) : "{{" + macro + "}}";
+            {
+                var v:* = value(options);
+                if (v == null || (typeof v == "number" && isNaN(v)))
+                    return def;
+                res = v;
+            }
 
             if (fmt != null)
             {
@@ -275,7 +280,7 @@ package com.xvm.utils
             }
             // {{dmg-kind}}
             pdata["dmg-kind"] = function(o:MacrosFormatOptions):String {
-                return !o || o.delta < 0 || !o.damageType ? "" : Locale.get(o.damageType);
+                return !o || o.delta < 0 || !o.damageType ? null : Locale.get(o.damageType);
             }
 
             // Colors
