@@ -153,7 +153,7 @@ class Xvm(object):
                 self.updateBattleState(v)
 
     def updateBattleState(self, vehicle):
-        #log(vehicle)
+        #debug(vehicle)
         if self.config is None or not self.config['battle']['allowHpInPanelsAndMinimap']:
             return
         if self.battleFlashObject is None:

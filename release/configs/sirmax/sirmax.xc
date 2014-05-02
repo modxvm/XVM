@@ -140,8 +140,8 @@
     },
     "large": {
       "width": 120,
-      "nickFormatLeft": "<font color='{{c:xwn8}}'>{{xwn8|--}}</font> {{name}}<font alpha='#A0'>{{clan}}</font>",
-      "nickFormatRight": "{{name}}<font alpha='#A0'>{{clan}}</font> <font color='{{c:xwn8}}'>{{xwn8|--}}</font>",
+      "nickFormatLeft": "<font color='{{c:xwn8}}'>{{xwn8|--}}</font> {{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>",
+      "nickFormatRight": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font> <font color='{{c:xwn8}}'>{{xwn8|--}}</font>",
       "vehicleFormatLeft": "{{hp}} / {{hp-max}}",
       "vehicleFormatRight": "{{hp}} / {{hp-max}}"
       //"vehicleFormatLeft": "<font color='{{c:rating}}'>{{vehicle}}</font>",
