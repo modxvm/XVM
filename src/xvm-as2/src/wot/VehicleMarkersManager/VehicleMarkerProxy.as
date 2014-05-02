@@ -202,7 +202,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         {
             var data = pendingCalls[i];
             if (data.func != "showExInfo")
-                trace("defered");
+                trace("deferred");
             call(data.func, data.args, data.pre);
             delete data;
         }

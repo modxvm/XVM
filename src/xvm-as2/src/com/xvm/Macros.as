@@ -127,10 +127,13 @@ class com.xvm.Macros
         var res:String = value;
         if (typeof value == "function")
         {
-            var v = options ? value(options) : "{{" + macro + "}}";
-            if (v == null || (typeof v == "number" && isNaN(v)))
+            value = options ? value(options) : "{{" + macro + "}}";
+            if (value == null)
                 return def;
-            res = v;
+            type = typeof value;
+            if (type == "number" && isNaN(value))
+                return def;
+            res = value;
         }
 
         if (fmt != null)
@@ -159,7 +162,7 @@ class com.xvm.Macros
                                 break;
                             precision = (precision * 10) + Number(ch);
                         }
-                        if (res.length == precision)
+                        if (value.length > precision)
                             res = res.substr(0, res.length - suf.length) + suf;
                     }
                 }
@@ -176,6 +179,8 @@ class com.xvm.Macros
 
     public static function RegisterPlayerData(playerName:String, data:Object, team:Number)
     {
+        if (!Config.s_loaded)
+            return;
         if (!data)
             return;
         var pname:String = Utils.GetPlayerName(playerName);
