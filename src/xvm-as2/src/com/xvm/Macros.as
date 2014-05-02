@@ -251,42 +251,42 @@ class com.xvm.Macros
             // hp
 
             // {{hp}}
-            pdata["hp"] = function(o) { return o.curHealth != undefined ? o.curHealth : NaN; }
+            pdata["hp"] = function(o):Number { return isNaN(o.curHealth) ? NaN : o.curHealth; }
             // {{hp-max}}
-            pdata["hp-max"] = function(o) { return o.maxHealth ? o.maxHealth : data.maxHealth; };
+            pdata["hp-max"] = function(o):Number { return isNaN(o.maxHealth) ? data.maxHealth : o.maxHealth; };
             // {{hp-ratio}}
-            pdata["hp-ratio"] = function(o) { return o.curHealth != undefined ? Math.round(o.curHealth / (o.maxHealth ? o.maxHealth : data.maxHealth) * 100) : NaN; }
+            pdata["hp-ratio"] = function(o):Number { return isNaN(o.curHealth) ? NaN : Math.round(o.curHealth / (o.maxHealth ? o.maxHealth : data.maxHealth) * 100); }
             // {{c:hp}}
-            pdata["c:hp"] = function(o) { return o.curHealth == null ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, o.curHealth); }
+            pdata["c:hp"] = function(o):String { return isNaN(o.curHealth) ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, o.curHealth); }
             // {{c:hp-ratio}}
-            pdata["c:hp-ratio"] = function(o) { return o.curHealth == null ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, o.curHealth / (o.maxHealth ? o.maxHealth : data.maxHealth) * 100); }
+            pdata["c:hp-ratio"] = function(o):String { return isNaN(o.curHealth) ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, o.curHealth / (o.maxHealth ? o.maxHealth : data.maxHealth) * 100); }
             // {{a:hp}}
-            pdata["a:hp"] = function(o) { return o.curHealth == null ? null : GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, o.curHealth); }
+            pdata["a:hp"] = function(o):Number { return isNaN(o.curHealth) ? NaN : GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, o.curHealth); }
             // {{a:hp-ratio}}
-            pdata["a:hp-ratio"] = function(o) { return o.curHealth == null ? null : GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO,
+            pdata["a:hp-ratio"] = function(o):Number { return isNaN(o.curHealth) ? NaN : GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO,
                 Math.round(o.curHealth / (o.maxHealth ? o.maxHealth : data.maxHealth) * 100)); }
 
             // dmg
 
             // {{dmg}}
-            pdata["dmg"] = function(o) { return o.delta != undefined ? String(o.delta) : NaN; }
+            pdata["dmg"] = function(o):Number { return isNaN(o.delta) ? NaN : o.delta; }
             // {{dmg-ratio}}
-            pdata["dmg-ratio"] = function(o) { return o.delta != undefined ? Math.round(o.delta / (o.maxHealth ? o.maxHealth : data.maxHealth) * 100) : NaN; }
+            pdata["dmg-ratio"] = function(o):Number { return isNaN(o.delta) ? NaN : Math.round(o.delta / (o.maxHealth ? o.maxHealth : data.maxHealth) * 100); }
             // {{dmg-kind}}
-            pdata["dmg-kind"] = function(o) { return o.delta != undefined ? Locale.get(o.damageType) : null; }
+            pdata["dmg-kind"] = function(o):String { return isNaN(o.delta) || isNaN(o.damageType) ? null : Locale.get(o.damageType); }
             // {{c:dmg}}
-            pdata["c:dmg"] = function(o)
+            pdata["c:dmg"] = function(o):String
                 {
-                    return o.delta ? GraphicsUtil.GetDmgSrcValue(
+                    return isNaN(o.delta) ? null : GraphicsUtil.GetDmgSrcValue(
                         Utils.damageFlagToDamageSource(o.damageFlag),
                         o.entityName == 'teamKiller' ? (data.team + "tk") : o.entityName,
-                        o.dead, o.blowedUp) : null;
+                        o.dead, o.blowedUp);
                 }
             // {{c:dmg-kind}}
-            pdata["c:dmg-kind"] = function(o) { return o.delta ? GraphicsUtil.GetDmgKindValue(o.damageType) : null; }
+            pdata["c:dmg-kind"] = function(o):String { return isNaN(o.delta) || isNaN(o.damageType) ? null : GraphicsUtil.GetDmgKindValue(o.damageType); }
 
             // {{c:system}}
-            pdata["c:system"] = function(o) { return "#" + Strings.padLeft(o.getSystemColor(o).toString(16), 6, "0"); }
+            pdata["c:system"] = function(o):String { return "#" + Strings.padLeft(o.getSystemColor(o).toString(16), 6, "0"); }
         }
     }
 
@@ -300,120 +300,120 @@ class com.xvm.Macros
         var pdata = dict[pname];
 
         // vars
-        var r:Number = Utils.toInt(stat.r, 0);
-        var eff:Number = Utils.toInt(stat.e, 0);
-        var b:Number = Utils.toInt(stat.b, 0);
-        var w:Number = Utils.toInt(stat.w, 0);
-        var tr:Number = Utils.toInt(stat.v.r, 0);
-        var tb:Number = Utils.toInt(stat.v.b, 0);
-        var tw:Number = Utils.toInt(stat.v.w, 0);
+        var r:Number = Utils.toInt(stat.r);
+        var eff:Number = Utils.toInt(stat.e);
+        var b:Number = Utils.toInt(stat.b);
+        var w:Number = Utils.toInt(stat.w);
+        var tr:Number = Utils.toInt(stat.v.r);
+        var tb:Number = Utils.toInt(stat.v.b);
+        var tw:Number = Utils.toInt(stat.v.w);
 
         // {{avglvl}}
-        pdata["avglvl"] = stat.lvl <= 0 ? NaN : stat.lvl;
+        pdata["avglvl"] = Utils.toInt(stat.lvl);
         // {{xeff}}
-        pdata["xeff"] = stat.xeff == null ? null : stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff;
+        pdata["xeff"] = isNaN(stat.xeff) ? null : stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff;
         // {{xwn6}}
-        pdata["xwn6"] = stat.xwn6 == null ? null : stat.xwn6 == 100 ? "XX" : (stat.xwn6 < 10 ? "0" : "") + stat.xwn6;
+        pdata["xwn6"] = isNaN(stat.xwn6) ? null : stat.xwn6 == 100 ? "XX" : (stat.xwn6 < 10 ? "0" : "") + stat.xwn6;
         // {{xwn8}}
-        pdata["xwn8"] = stat.xwn8 == null ? null : stat.xwn8 == 100 ? "XX" : (stat.xwn8 < 10 ? "0" : "") + stat.xwn8;
+        pdata["xwn8"] = isNaN(stat.xwn8) ? null : stat.xwn8 == 100 ? "XX" : (stat.xwn8 < 10 ? "0" : "") + stat.xwn8;
         // {{xwn}}
         pdata["xwn"] = pdata["xwn8"];
         // {{eff}}
-        pdata["eff"] = eff <= 0 ? NaN : eff;
+        pdata["eff"] = eff;
         // {{wn6}}
-        pdata["wn6"] = stat.wn6 <= 0 ? NaN : stat.wn6;
+        pdata["wn6"] = Utils.toInt(stat.wn6);
         // {{wn8}}
-        pdata["wn8"] = stat.wn8 <= 0 ? NaN : stat.wn8;
+        pdata["wn8"] = Utils.toInt(stat.wn8);
         // {{wn}}
         pdata["wn"] = pdata["wn8"];
         // {{e}}
-        pdata["e"] = stat.v.te == null ? null : stat.v.te >= 10 ? "E" : String(stat.v.te);
+        pdata["e"] = isNaN(stat.v.te) ? NaN : stat.v.te >= 10 ? "E" : stat.v.te;
         // {{teff}}
-        pdata["teff"] = stat.v.teff == null ? NaN : stat.v.teff;
+        pdata["teff"] = Utils.toInt(stat.v.teff);
 
         // {{rating}}
-        pdata["rating"] = r <= 0 ? NaN : r;
+        pdata["rating"] = r;
         // {{battles}}
-        pdata["battles"] = b <= 0 ? NaN : b;
+        pdata["battles"] = b;
         // {{wins}}
-        pdata["wins"] = b <= 0 ? NaN : w;
+        pdata["wins"] = w;
         // {{kb}}
-        pdata["kb"] = b <= 0 ? NaN : b / 1000;
+        pdata["kb"] = isNaN(b) ? NaN : b / 1000;
 
         // {{t-rating}}
-        pdata["t-rating"] = tr <= 0 ? NaN : tr;
+        pdata["t-rating"] = tr;
         // {{t-battles}}
-        pdata["t-battles"] = tb <= 0 ? NaN : tb;
+        pdata["t-battles"] = tb;
         // {{t-wins}}
-        pdata["t-wins"] = tb <= 0 ? NaN : tw;
+        pdata["t-wins"] = tw;
         // {{t-kb}}
-        pdata["t-kb"] = tb <= 0 ? NaN : tb / 1000;
+        pdata["t-kb"] = isNaN(tb) ? NaN : tb / 1000;
         // {{t-hb}}
-        pdata["t-hb"] = tb <= 0 ? NaN : tb / 100;
+        pdata["t-hb"] = isNaN(tb) ? NaN : tb / 100;
         // {{tdb}}
-        pdata["tdb"] = stat.v.db == null ? NaN : stat.v.db;
+        pdata["tdb"] = Utils.toInt(stat.v.db);
         // {{tdv}}
-        pdata["tdv"] = stat.v.dv == null ? NaN : stat.v.dv;
+        pdata["tdv"] = Utils.toInt(stat.v.dv);
         // {{tfb}}
-        pdata["tfb"] = stat.v.fb == null ? NaN : stat.v.fb;
+        pdata["tfb"] = Utils.toInt(stat.v.fb);
         // {{tsb}}
-        pdata["tsb"] = stat.v.sb == null ? NaN : stat.v.sb;
+        pdata["tsb"] = Utils.toInt(stat.v.sb);
 
         // Dynamic colors
         // {{c:xeff}}
-        pdata["c:xeff"] = stat.xeff == null ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#", false);
-        pdata["c:xeff#d"] = stat.xeff == null ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#", true);
+        pdata["c:xeff"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#", false);
+        pdata["c:xeff#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#", true);
         // {{c:xwn6}}
-        pdata["c:xwn6"] = stat.xwn6 == null ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn6, "#", false);
-        pdata["c:xwn6#d"] = stat.xwn6 == null ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn6, "#", true);
+        pdata["c:xwn6"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn6, "#", false);
+        pdata["c:xwn6#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn6, "#", true);
         // {{c:xwn8}}
-        pdata["c:xwn8"] = stat.xwn8 == null ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8, "#", false);
-        pdata["c:xwn8#d"] = stat.xwn8 == null ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8, "#", true);
+        pdata["c:xwn8"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8, "#", false);
+        pdata["c:xwn8#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8, "#", true);
         // {{c:xwn}}
         pdata["c:xwn"] = pdata["c:xwn8"];
         pdata["c:xwn#d"] = pdata["c:xwn8#d"];
         // {{c:eff}}
-        pdata["c:eff"] = eff <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff, "#", false);
-        pdata["c:eff#d"] = eff <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff, "#", true);
+        pdata["c:eff"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff, "#", false);
+        pdata["c:eff#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff, "#", true);
         // {{c:wn6}}
-        pdata["c:wn6"] = !stat.wn6 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN6, stat.wn6, "#", false);
-        pdata["c:wn6#d"] = !stat.wn6 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN6, stat.wn6, "#", true);
+        pdata["c:wn6"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN6, stat.wn6, "#", false);
+        pdata["c:wn6#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN6, stat.wn6, "#", true);
         // {{c:wn8}}
-        pdata["c:wn8"] = !stat.wn8 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, stat.wn8, "#", false);
-        pdata["c:wn8#d"] = !stat.wn8 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, stat.wn8, "#", true);
+        pdata["c:wn8"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, stat.wn8, "#", false);
+        pdata["c:wn8#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, stat.wn8, "#", true);
         // {{c:wn}}
-        pdata["c:wn"] = pdata["c:wn8"];
+        pdata["c:wn"] =   pdata["c:wn8"];
         pdata["c:wn#d"] = pdata["c:wn8#d"];
         // {{c:e}}
-        pdata["c:e"] = stat.v.te == null ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.v.te, "#", false);
-        pdata["c:e#d"] = stat.v.te == null ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.v.te, "#", true);
+        pdata["c:e"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.v.te, "#", false);
+        pdata["c:e#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.v.te, "#", true);
         // {{c:rating}}
-        pdata["c:rating"] = r <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, r, "#", false);
-        pdata["c:rating#d"] = r <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, r, "#", true);
+        pdata["c:rating"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, r, "#", false);
+        pdata["c:rating#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, r, "#", true);
         // {{c:kb}}
-        pdata["c:kb"] = b <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, b / 1000, "#", false);
-        pdata["c:kb#d"] = b <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, b / 1000, "#", true);
+        pdata["c:kb"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, b / 1000, "#", false);
+        pdata["c:kb#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, b / 1000, "#", true);
         // {{c:avglvl}}
-        pdata["c:avglvl"] = stat.lvl <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, stat.lvl, "#", false);
-        pdata["c:avglvl#d"] = stat.lvl <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, stat.lvl, "#", true);
+        pdata["c:avglvl"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, stat.lvl, "#", false);
+        pdata["c:avglvl#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, stat.lvl, "#", true);
         // {{c:t-rating}}
-        pdata["c:t-rating"] = tr <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, tr, "#", false);
-        pdata["c:t-rating#d"] = tr <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, tr, "#", true);
+        pdata["c:t-rating"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, tr, "#", false);
+        pdata["c:t-rating#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, tr, "#", true);
         // {{c:t-battles}}
-        pdata["c:t-battles"] = tb <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, tb, "#", false);
-        pdata["c:t-battles#d"] = tb <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, tb, "#", true);
+        pdata["c:t-battles"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, tb, "#", false);
+        pdata["c:t-battles#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, tb, "#", true);
         // {{c:tdb}}
-        pdata["c:tdb"] = stat.v.db <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, stat.v.db, "#", false);
-        pdata["c:tdb#d"] = stat.v.db <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, stat.v.db, "#", true);
+        pdata["c:tdb"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, stat.v.db, "#", false);
+        pdata["c:tdb#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, stat.v.db, "#", true);
         // {{c:tdv}}
-        pdata["c:tdv"] = stat.v.dv <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, stat.v.dv, "#", false);
-        pdata["c:tdv#d"] = stat.v.dv <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, stat.v.dv, "#", true);
+        pdata["c:tdv"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, stat.v.dv, "#", false);
+        pdata["c:tdv#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, stat.v.dv, "#", true);
         // {{c:tfb}}
-        pdata["c:tfb"] = stat.v.fb <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, stat.v.fb, "#", false);
-        pdata["c:tfb#d"] = stat.v.fb <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, stat.v.fb, "#", true);
+        pdata["c:tfb"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, stat.v.fb, "#", false);
+        pdata["c:tfb#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, stat.v.fb, "#", true);
         // {{c:tsb}}
-        pdata["c:tsb"] = stat.v.sb <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, stat.v.sb, "#", false);
-        pdata["c:tsb#d"] = stat.v.sb <= 0 ? null : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, stat.v.sb, "#", true);
+        pdata["c:tsb"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, stat.v.sb, "#", false);
+        pdata["c:tsb#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, stat.v.sb, "#", true);
 
         // Alpha
         // {{a:xeff}}

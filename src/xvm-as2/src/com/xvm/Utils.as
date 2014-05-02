@@ -14,20 +14,20 @@ class com.xvm.Utils
     public static function toInt(value:Object, defaultValue:Number):Number
     {
         if (!defaultValue)
-            defaultValue = 0;
+            defaultValue = NaN;
         if (!value)
             return defaultValue;
-        var n: Number = parseInt(value.toString());
+        var n:Number = parseInt(value.toString());
         return isNaN(n) ? defaultValue : n;
     }
 
     public static function toFloat(value:Object, defaultValue:Number):Number
     {
         if (!defaultValue)
-            defaultValue = 0;
+            defaultValue = NaN;
         if (!value)
             return defaultValue;
-        var n: Number = parseFloat(value.toString());
+        var n:Number = parseFloat(value.toString());
         return isNaN(n) ? defaultValue : n;
     }
 

@@ -18,7 +18,7 @@ package com.xvm.utils
         public static function GetDynamicColorValue(type:Number, value:Number, prefix:String = '#', darker:Boolean = false):String
         {
             if (isNaN(value))
-                return "";
+                return null;
 
             var cfg_root:Object = Config.config.colors;
             var cfg:Array;
@@ -39,7 +39,7 @@ package com.xvm.utils
                 case Defines.DYNAMIC_COLOR_TDV:             cfg = cfg_root.tdv; break;
                 case Defines.DYNAMIC_COLOR_TFB:             cfg = cfg_root.tfb; break;
                 case Defines.DYNAMIC_COLOR_TSB:             cfg = cfg_root.tsb; break;
-                default: return "";
+                default: return null;
             }
 
             var color:int;
@@ -60,7 +60,7 @@ package com.xvm.utils
         public static function GetDynamicAlphaValue(type:Number, value:Number):Number
         {
             if (isNaN(value))
-                return 100;
+                return NaN;
 
             var cfg_root:Object = Config.config.alpha;
             var cfg:Array;
@@ -81,7 +81,7 @@ package com.xvm.utils
                 case Defines.DYNAMIC_ALPHA_TDV:             cfg = cfg_root.tdv; break;
                 case Defines.DYNAMIC_ALPHA_TFB:             cfg = cfg_root.tfb; break;
                 case Defines.DYNAMIC_ALPHA_TSB:             cfg = cfg_root.tsb; break;
-              default: return 100;
+                default: return NaN;
             }
 
             var cfg_len:int = cfg.length;
@@ -93,7 +93,7 @@ package com.xvm.utils
                     return alpha;
             }
 
-            return 100;
+            return NaN;
         }
 
         public static function GetVClassColorValue(vdata:VehicleData, prefix:String = '#', darker:Boolean = false):String
@@ -122,11 +122,11 @@ package com.xvm.utils
         {
             try
             {
-                if (!damageSource || !damageDest)
+                if (damageSource == null || damageDest == null)
                     return null;
                 var key:String = damageSource + "_" + damageDest + "_";
                 key += !isDead ? "hit" : isBlowedUp ? "blowup" : "kill";
-                if (!Config.config.colors.damage[key])
+                if (Config.config.colors.damage[key] == null)
                     return null;
                 var value:int = Utils.toInt(Config.config.colors.damage[key], -1);
                 if (value < 0)
@@ -144,7 +144,7 @@ package com.xvm.utils
         {
             try
             {
-                if (!dmg_kind || !Config.config.colors.dmg_kind[dmg_kind])
+                if (dmg_kind == null || !Config.config.colors.dmg_kind[dmg_kind])
                     return null;
                 var value:int = Utils.toInt(Config.config.colors.dmg_kind[dmg_kind], -1);
                 if (value < 0)

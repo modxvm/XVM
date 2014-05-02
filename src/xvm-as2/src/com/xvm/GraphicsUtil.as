@@ -66,7 +66,7 @@ class com.xvm.GraphicsUtil
         item.transform.colorTransform = tr;
     }
 
-    public static function brightenColor(hexColor: Number, percent: Number): Number
+    public static function brightenColor(hexColor:Number, percent:Number):Number
     {
         if (isNaN(percent))
             percent = 0;
@@ -104,20 +104,20 @@ class com.xvm.GraphicsUtil
         return rgbToHex(Math.round(rgb.r), Math.round(rgb.g), Math.round(rgb.b));
     }
 
-    public static function rgbToHex(r:Number, g:Number, b:Number): Number
+    public static function rgbToHex(r:Number, g:Number, b:Number):Number
     {
         return (r << 16 | g << 8 | b);
     }
 
-    public static function hexToRgb(hex:Number): Object
+    public static function hexToRgb(hex:Number):Object
     {
         return { r: (hex & 0xff0000) >> 16, g: (hex & 0x00ff00) >> 8, b: hex & 0x0000ff };
     }
 
-    public static function brightness(hex:Number): Number
+    public static function brightness(hex:Number):Number
     {
-        var max: Number = 0;
-        var rgb: Object = hexToRgb(hex);
+        var max:Number = 0;
+        var rgb:Object = hexToRgb(hex);
         if(rgb.r > max)
             max = rgb.r;
         if(rgb.g > max)
@@ -128,7 +128,7 @@ class com.xvm.GraphicsUtil
         return max;
     }
 
-    public static function GetVTypeColorValue(iconSource:String, prefix: String, darker: Boolean): String
+    public static function GetVTypeColorValue(iconSource:String, prefix:String, darker:Boolean):String
     {
         if (!prefix)
             prefix = "#";
@@ -143,12 +143,12 @@ class com.xvm.GraphicsUtil
         }
         catch (ex:Error)
         {
-            return prefix + "FFFEFE";
+            return null;
         }
-        return prefix + "FFFEFE";
+        return null;
     }
 
-    public static function GetDmgSrcValue(damageSource:String, damageDest:String, isDead:Boolean, isBlowedUp:Boolean, prefix: String): String
+    public static function GetDmgSrcValue(damageSource:String, damageDest:String, isDead:Boolean, isBlowedUp:Boolean, prefix:String):String
     {
         if (!prefix)
             prefix = "#";
@@ -156,7 +156,7 @@ class com.xvm.GraphicsUtil
         try
         {
             if (!damageSource || !damageDest)
-                return "";
+                return null;
             var key:String = damageSource + "_" + damageDest + "_";
             key += !isDead ? "hit" : isBlowedUp ? "blowup" : "kill";
             if (!Config.s_config.colors.damage[key])
@@ -165,9 +165,9 @@ class com.xvm.GraphicsUtil
         }
         catch (ex:Error)
         {
-            return prefix + "FFFEFE";
+            return null;
         }
-        return prefix + "FFFEFE";
+        return null;
     }
 
     public static function GetDmgKindValue(dmg_kind: String, prefix: String): String
@@ -178,31 +178,28 @@ class com.xvm.GraphicsUtil
         try
         {
             if (!dmg_kind || !Config.s_config.colors.dmg_kind[dmg_kind])
-                return "";
+                return null;
             return prefix + Strings.padLeft(Utils.toInt(Config.s_config.colors.dmg_kind[dmg_kind], 0xFFFFFE).toString(16), 6, "0");
         }
         catch (ex:Error)
         {
-            return prefix + "FFFEFE";
+            return null;
         }
-        return prefix + "FFFEFE";
+        return null;
     }
 
-    public static function GetDynamicColorValueInt(type: Number, value: Number, darker: Boolean): Number
+    public static function GetDynamicColorValueInt(type:Number, value:Number, darker:Boolean):Number
     {
         return Number(GetDynamicColorValue(type, value, "0x", darker));
     }
 
-    public static function GetDynamicColorValue(type: Number, value: Number, prefix: String, darker: Boolean): String
+    public static function GetDynamicColorValue(type:Number, value:Number, prefix:String, darker:Boolean):String
     {
-        if (value == null)
+        if (value == null || isNaN(value))
             return null;
 
         if (!prefix)
             prefix = "#";
-
-        if (isNaN(value))
-            return prefix + "FFFBFB";
 
         var cfg_root: Object = Config.s_config.colors;
         var cfg: Array;
@@ -223,7 +220,7 @@ class com.xvm.GraphicsUtil
             case Defines.DYNAMIC_COLOR_TDV:             cfg = cfg_root.tdv; break;
             case Defines.DYNAMIC_COLOR_TFB:             cfg = cfg_root.tfb; break;
             case Defines.DYNAMIC_COLOR_TSB:             cfg = cfg_root.tsb; break;
-            default: return prefix + "FFFEFE";
+            default: return null;
         }
 
         var cfg_len:Number = cfg.length;
@@ -239,13 +236,13 @@ class com.xvm.GraphicsUtil
             }
         }
 
-        return prefix + "FFFFFF";
+        return null;
     }
 
     public static function GetDynamicAlphaValue(type: Number, value: Number): Number
     {
-        if (isNaN(value) || value == null)
-            return 0;
+        if (value == null || isNaN(value))
+            return NaN;
 
         var cfg_root:Object = Config.s_config.alpha;
         var cfg: Array;
@@ -267,7 +264,7 @@ class com.xvm.GraphicsUtil
             case Defines.DYNAMIC_ALPHA_TFB:             cfg = cfg_root.tfb; break;
             case Defines.DYNAMIC_ALPHA_TSB:             cfg = cfg_root.tsb; break;
           default:
-              return 100;
+              return NaN;
         }
 
         var cfg_len:Number = cfg.length;
@@ -279,7 +276,7 @@ class com.xvm.GraphicsUtil
                 return alpha;
         }
 
-        return 100;
+        return NaN;
     }
 
     public static function fillRect(target:MovieClip, x:Number, y:Number,
