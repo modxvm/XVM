@@ -1,4 +1,4 @@
-﻿/**
+/**
  * XVM Macro substitutions
  * @author Maxim Schedriviy "m.schedriviy(at)gmail.com"
  */
@@ -274,7 +274,7 @@ package com.xvm.utils
             // {{dmg-ratio}}
             pdata["dmg-ratio"] = function(o:MacrosFormatOptions):Number { return isNaN(o.delta) ? NaN : Math.round(o.delta / stat.maxHealth * 100); }
             // {{dmg-kind}}
-            pdata["dmg-kind"] = function(o:MacrosFormatOptions):String { return isNaN(o.delta) || o.damageType == null ? null : Locale.get(o.damageType); }
+            pdata["dmg-kind"] = function(o:MacrosFormatOptions):String { return o.damageType == null ? null : Locale.get(o.damageType); }
 
             // Colors
             // {{c:hp}}

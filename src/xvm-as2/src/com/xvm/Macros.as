@@ -273,7 +273,7 @@ class com.xvm.Macros
             // {{dmg-ratio}}
             pdata["dmg-ratio"] = function(o):Number { return isNaN(o.delta) ? NaN : Math.round(o.delta / (o.maxHealth ? o.maxHealth : data.maxHealth) * 100); }
             // {{dmg-kind}}
-            pdata["dmg-kind"] = function(o):String { return isNaN(o.delta) || isNaN(o.damageType) ? null : Locale.get(o.damageType); }
+            pdata["dmg-kind"] = function(o):String { return o.damageType == null ? null : Locale.get(o.damageType); }
             // {{c:dmg}}
             pdata["c:dmg"] = function(o):String
                 {
@@ -283,7 +283,7 @@ class com.xvm.Macros
                         o.dead, o.blowedUp);
                 }
             // {{c:dmg-kind}}
-            pdata["c:dmg-kind"] = function(o):String { return isNaN(o.delta) || isNaN(o.damageType) ? null : GraphicsUtil.GetDmgKindValue(o.damageType); }
+            pdata["c:dmg-kind"] = function(o):String { return o.damageType == null ? null : GraphicsUtil.GetDmgKindValue(o.damageType); }
 
             // {{c:system}}
             pdata["c:system"] = function(o):String { return "#" + Strings.padLeft(o.getSystemColor(o).toString(16), 6, "0"); }
