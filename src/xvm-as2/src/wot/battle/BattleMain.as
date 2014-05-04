@@ -45,7 +45,7 @@ class wot.battle.BattleMain
     private static function BattleMainConfigLoaded()
     {
         //Logger.add("BattleMainConfigLoaded()");
-        GlobalEventDispatcher.removeEventListener(Config.E_CONFIG_LOADED, BattleMainConfigLoaded);
+        //GlobalEventDispatcher.removeEventListener(Config.E_CONFIG_LOADED, BattleMainConfigLoaded);
 
         // Initialize Sixth Sense Indicator
         instance.sixthSenseIndicator = new SixthSenseIndicator();

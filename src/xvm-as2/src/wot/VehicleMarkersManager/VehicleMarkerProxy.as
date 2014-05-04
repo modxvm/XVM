@@ -61,47 +61,8 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
     {
         Utils.TraceXvmModule("VehicleMarkersManager");
 
-        //trace("VehicleMarkerProxy::ctor()");
-
         subject = null;
 
-        // Check config
-        if (Config.config)
-        {
-            // if not loaded:
-            //   cleaning the marker until the configuration is loaded
-            wrapper.pNameField._visible = false;
-            wrapper.marker._visible = false;
-            wrapper.healthBar._visible = false;
-            wrapper.bgShadow._visible = false;
-            wrapper.vNameField.text = "Loading...";
-            //   register config load complete event
-            GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
-        }
-        else
-        {
-            // if already loaded, initialize immediately
-            initialize();
-        }
-    }
-
-    /**
-     * Config load callback
-     * Calls on config loading is complete. Calls always, even if config is missed or loading failed.
-     */
-    private function onConfigLoaded():Void
-    {
-        //Logger.add("onConfigLoaded()");
-
-        //GlobalEventDispatcher.removeEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
-
-        //Config.config.markers.useStandardMarkers = true;
-
-        initialize();
-    }
-
-    private function initialize():Void
-    {
         // Don't draw at hangar
         if (Sandbox.GetCurrentSandboxPrefix() == Sandbox.SANDBOX_VMM)
         {
@@ -279,7 +240,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
             }, wr.m_team == "ally" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
         };
 
-        if (Config.config && !subject)
+        if (!subject)
             initializeSubject();
         if (wrapper.m_team == "enemy")
         {

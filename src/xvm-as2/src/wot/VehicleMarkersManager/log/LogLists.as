@@ -1,9 +1,6 @@
-import com.xvm.Defines;
-import com.xvm.GlobalEventDispatcher;
-import wot.VehicleMarkersManager.log.HitLog;
-import wot.VehicleMarkersManager.log.HpLeft;
-import wot.VehicleMarkersManager.UnitDestroyedAccounting;
-import wot.VehicleMarkersManager.VMMEvent;
+import com.xvm.*;
+import wot.VehicleMarkersManager.*;
+import wot.VehicleMarkersManager.log.*;
 
 /**
  * @author ilitvinov87@gmail.com

@@ -89,7 +89,7 @@ class wot.StatisticForm.BattleStatItemRenderer
 
     public function onConfigLoaded(event)
     {
-        GlobalEventDispatcher.removeEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
+        //GlobalEventDispatcher.removeEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
 
         if (s_state <= 0)
         {

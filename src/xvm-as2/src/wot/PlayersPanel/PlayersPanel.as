@@ -93,7 +93,7 @@ class wot.PlayersPanel.PlayersPanel
     private function onConfigLoaded(event):Void
     {
         //Logger.add("PlayersPanel.onConfigLoaded()");
-        GlobalEventDispatcher.removeEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
+        //GlobalEventDispatcher.removeEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
 
         // init enemy spotter markers
         if (Config.config.playersPanel.enemySpottedMarker.enabled && isEnemyPanel)
