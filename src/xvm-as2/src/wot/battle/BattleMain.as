@@ -1,5 +1,6 @@
 ﻿/**
- * @author sirmax2
+ * XVM
+ * @author Maxim Schedriviy <m.schedriviy(at)gmail.com>
  */
 import flash.external.*;
 import com.greensock.*;
@@ -23,9 +24,9 @@ class wot.battle.BattleMain
         _global.gfxExtensions = true;
         _global.noInvisibleAdvance = true;
 
+        ExternalInterface.addCallback(Cmd.RESPOND_CONFIG, Config.instance, Config.instance.GetConfigCallback);
         GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, BattleMainConfigLoaded);
         GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, StatLoader.LoadData);
-        Config.LoadConfig();
 
         // initialize TweenLite
         OverwriteManager.init(OverwriteManager.AUTO);
@@ -51,11 +52,11 @@ class wot.battle.BattleMain
 
         // TODO: remove (replace by setup elements)
         // Panels Mode Switcher
-        if (Config.s_config.playersPanel.removePanelsModeSwitcher)
+        if (Config.config.playersPanel.removePanelsModeSwitcher)
             _root.switcher_mc._visible = false;
 
         // Show Clocks
-        ShowClock(Config.s_config.battle.clockFormat);
+        ShowClock(Config.config.battle.clockFormat);
 
         // Setup Visual Elements
         Elements.SetupElements();
@@ -92,7 +93,7 @@ class wot.battle.BattleMain
         GlobalEventDispatcher.dispatchEvent( { type: "self_dead" } );
 
         //Logger.add("Battle::showPostmortemTips");
-        if (Config.s_config.battle.showPostmortemTips)
+        if (Config.config.battle.showPostmortemTips)
             _root.showPostmortemTips(movingUpTime, showTime, movingDownTime);
     }
 

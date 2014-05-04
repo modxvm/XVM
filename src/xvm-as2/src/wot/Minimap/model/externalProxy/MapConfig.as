@@ -19,16 +19,16 @@ class wot.Minimap.model.externalProxy.MapConfig
 
     /** Zoom */
         public static function get zoomEnabled():Boolean    {
-            return Config.s_config.hotkeys.minimapZoom.enabled;        }
+            return Config.config.hotkeys.minimapZoom.enabled;        }
         public static function get zoomHold():Boolean    {
-            return Config.s_config.hotkeys.minimapZoom.onHold;        }
+            return Config.config.hotkeys.minimapZoom.onHold;        }
         public static function get zoomKey():Number    {
-            return Config.s_config.hotkeys.minimapZoom.keyCode;        }
+            return Config.config.hotkeys.minimapZoom.keyCode;        }
         public static function get zoomCentered():Boolean    {
             return minimap.zoom.centered;        }
         public static function get zoomPixelsBack():Number    {
             return minimap.zoom.pixelsBack;        }
-    
+
     /** Labels */
         /** Vehicle class macro */
             public static function get lightSymbol():String    {
@@ -156,36 +156,36 @@ class wot.Minimap.model.externalProxy.MapConfig
     {
 		/** Prefix: lost dead or alive */
 		var xvmPrefix:String;
-		
+
         if (Math.abs(status) == Player.PLAYER_LOST)
             xvmPrefix = "lost";
         else if (Math.abs(status) == Player.PLAYER_DEAD)
             xvmPrefix = "dead";
         else
             xvmPrefix = "";
-        
+
 		/** Postfix: ally, enemy, tk or squad */
 		var xvmPostfix:String;
-		
+
         if (wgEntryName == "squadman")
             xvmPostfix = "squad"; /** Translate squad WG entry name to squad XVM entry name */
 		else
 			xvmPostfix = wgEntryName;
-			
+
 		if (status <= Player.TEAM_KILLER_FLAG && wgEntryName == "ally") /** <- Skip enemy and squad TK */
             xvmPostfix = "teamkiller";
 
 		/** Result */
 		var xvmFullEntry:String;
-		
+
 		if (wgEntryName == "")
 			xvmFullEntry = "oneself";
 		else
 			xvmFullEntry = xvmPrefix + xvmPostfix;
-        
+
         if (xvmFullEntry == "lostenemy")
             xvmFullEntry = "lost"; /** Backwards config compatibility */
-        
+
         return xvmFullEntry;
     }
 
@@ -221,6 +221,6 @@ class wot.Minimap.model.externalProxy.MapConfig
 
     private static function get minimap():Object
     {
-        return Config.s_config.minimap;
+        return Config.config.minimap;
     }
 }

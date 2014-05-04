@@ -17,7 +17,7 @@ class wot.Minimap.view.MarkerColor
         if (wrapper.m_type == "player" && wrapper.entryName == "postmortemCamera")
             return;
 
-        if (Config.s_config == null)
+        if (Config.config == null)
         {
             // wait for config
             setTimeout(function() { MarkerColor.setColor(wrapper); }, 1);
@@ -25,7 +25,7 @@ class wot.Minimap.view.MarkerColor
         }
 
         var color = null;
-        if (Config.s_config.markers.useStandardMarkers)
+        if (Config.config.markers.useStandardMarkers)
         {
             if (wrapper.entryName == MinimapEntry.STATIC_ICON_BASE)
                 return;
@@ -40,11 +40,11 @@ class wot.Minimap.view.MarkerColor
             // use standard team bases if color is not changed
             if (wrapper.entryName == MinimapEntry.STATIC_ICON_BASE)
             {
-                var aa = Config.s_config.colors.system["ally_alive"];
+                var aa = Config.config.colors.system["ally_alive"];
                 var aad = Defines.C_ALLY_ALIVE;
                 if (wrapper.vehicleClass == "blue" && aa == aad)
                     return;
-                var ea = Config.s_config.colors.system["enemy_alive"];
+                var ea = Config.config.colors.system["enemy_alive"];
                 var ead = Defines.C_ENEMY_ALIVE;
                 if (wrapper.vehicleClass == "red" && ea == ead)
                     return;
@@ -62,7 +62,7 @@ class wot.Minimap.view.MarkerColor
         if (color != null)
         {
             GraphicsUtil.colorize(wrapper.teamPoint || wrapper.player/*.litIcon*/, color,
-                wrapper.player ? Config.s_config.consts.VM_COEFF_MM_PLAYER : Config.s_config.consts.VM_COEFF_MM_BASE);
+                wrapper.player ? Config.config.consts.VM_COEFF_MM_PLAYER : Config.config.consts.VM_COEFF_MM_BASE);
         }
     }
 }

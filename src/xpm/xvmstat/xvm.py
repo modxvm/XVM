@@ -17,19 +17,19 @@ from gameregion import *
 from pinger import *
 from stats import getBattleStat, getBattleResultsStat, getUserData
 from dossier import getDossier
-from vehinfo import getVehicleInfoData
+from vehinfo import getVehicleInfoDataStr
 from vehstate import getVehicleStateData
 from wn8 import getWN8ExpectedData
 from token import getXvmStatTokenData
 from test import runTest
 import utils
 from websock import g_websock
+#from config.default import g_default_config
 
 NO_LOG_COMMANDS = (
   COMMAND_LOG,
   COMMAND_LOAD_FILE,
   COMMAND_SET_CONFIG,
-  COMMAND_GET_CONFIG,
   COMMAND_PING,
   COMMAND_GETMODS,
   COMMAND_GETVEHICLEINFODATA,
@@ -48,7 +48,10 @@ class Xvm(object):
         self.currentPlayerId = None
         self.config_str = None
         self.config = None
+        self.lang_str = None
+        self.lang_data = None
         self.battleFlashObject = None
+        self.vmmFlashObject = None
 
     def onXvmCommand(self, proxy, id, cmd, *args):
         try:
@@ -65,8 +68,8 @@ class Xvm(object):
                 log('setConfig')
                 self.config_str = args[0]
                 self.config = json.loads(self.config_str)
-            elif cmd == COMMAND_GET_CONFIG:
-                res = self.config_str
+                self.lang_str = args[1]
+                self.lang_data = json.loads(self.lang_str)
             elif cmd == COMMAND_PING:
                 #return
                 ping(proxy)
@@ -84,7 +87,7 @@ class Xvm(object):
                 res = language
             elif cmd == COMMAND_GETVEHICLEINFODATA:
                 #return
-                res = getVehicleInfoData()
+                res = getVehicleInfoDataStr()
             elif cmd == COMMAND_GETWN8EXPECTEDDATA:
                 res = getWN8ExpectedData()
             elif cmd == COMMAND_GETXVMSTATTOKENDATA:
@@ -147,23 +150,42 @@ class Xvm(object):
             g_websock.send('id')
 
     def initBattle(self):
+        self.sendConfig(self.battleFlashObject)
+        BigWorld.callback(0, self.updateBattleStates)
+
+    def updateBattleStates(self):
         import Vehicle
         for v in BigWorld.entities.values():
             if isinstance(v, Vehicle.Vehicle) and v.isStarted:
                 self.updateBattleState(v)
 
+    def initVmm(self):
+        self.sendConfig(self.vmmFlashObject)
+
     def updateBattleState(self, vehicle):
         #debug(vehicle)
         if self.config is None or not self.config['battle']['allowHpInPanelsAndMinimap']:
             return
-        if self.battleFlashObject is None:
-            return
-        try:
-            movie = self.battleFlashObject.movie
-            if movie is not None:
-                movie.invoke((RESPOND_BATTLESTATE, [json.dumps(getVehicleStateData(vehicle))]))
-        except Exception, ex:
-            err('updateBattleState(): ' + traceback.format_exc())
+        if self.battleFlashObject is not None:
+            try:
+                movie = self.battleFlashObject.movie
+                if movie is not None:
+                    movie.invoke((RESPOND_BATTLESTATE, [json.dumps(getVehicleStateData(vehicle))]))
+            except Exception, ex:
+                err('updateBattleState(): ' + traceback.format_exc())
+
+    def sendConfig(self, flashObject):
+        #debug(vehicle)
+        if self.config is not None and flashObject is not None:
+            try:
+                movie = flashObject.movie
+                if movie is not None:
+                    movie.invoke((RESPOND_CONFIG, [
+                        self.config_str,
+                        self.lang_str,
+                        getVehicleInfoDataStr()]))
+            except Exception, ex:
+                err('sendConfig(): ' + traceback.format_exc())
 
 g_xvm = Xvm()
 

@@ -28,7 +28,7 @@ class wot.VehicleMarkersManager.VehicleState
 
     public function getCurrentConfig()
     {
-        var result = Config.s_config.markers;
+        var result = Config.config.markers;
         result = proxy.team == "ally" ? result.ally : result.enemy;
         result = proxy.isDead ? result.dead : result.alive;
         result = proxy.showExInfo ? result.extended : result.normal;
@@ -40,7 +40,7 @@ class wot.VehicleMarkersManager.VehicleState
         var path: Array = stateString.split("/");
         if (path.length != 3)
             return null;
-        var result = Config.s_config.markers;
+        var result = Config.config.markers;
         result = path[0] == "ally" ? result.ally : result.enemy;
         result = path[1] == "alive" ? result.alive : result.dead;
         result = path[2] == "normal" ? result.normal : result.extended;

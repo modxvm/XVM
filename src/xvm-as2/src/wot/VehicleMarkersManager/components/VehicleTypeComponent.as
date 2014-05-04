@@ -166,6 +166,6 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
 
         // filters are not applicable to the MovieClip in Scaleform. Only ColorTransform can be used.
         GraphicsUtil.colorize(proxy.marker.marker.icon, proxy.formatDynamicColor(proxy.formatStaticColorText(color)),
-            proxy.isDead ? Config.s_config.consts.VM_COEFF_VMM_DEAD : Config.s_config.consts.VM_COEFF_VMM); // darker to improve appearance
+            proxy.isDead ? Config.config.consts.VM_COEFF_VMM_DEAD : Config.config.consts.VM_COEFF_VMM); // darker to improve appearance
     }
 }

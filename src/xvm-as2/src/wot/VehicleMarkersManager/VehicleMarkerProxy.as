@@ -13,12 +13,6 @@ import wot.VehicleMarkersManager.log.*;
 
 class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
 {
-    //private function trace(str:String):Void
-    //{
-    //    //if (m_playerFullName == "...")
-    //    Logger.add(m_playerFullName + "> " + str);
-    //}
-
     /////////////////////////////////////////////////////////////////
 
     public var wrapper:net.wargaming.ingame.VehicleMarker;
@@ -72,7 +66,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         subject = null;
 
         // Check config
-        if (Config.s_loaded != true)
+        if (Config.config)
         {
             // if not loaded:
             //   cleaning the marker until the configuration is loaded
@@ -97,11 +91,11 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
      */
     private function onConfigLoaded():Void
     {
-        //trace("onConfigLoaded()");
+        //Logger.add("onConfigLoaded()");
 
-        GlobalEventDispatcher.removeEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
+        //GlobalEventDispatcher.removeEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
 
-        //Config.s_config.markers.useStandardMarkers = true;
+        //Config.config.markers.useStandardMarkers = true;
 
         initialize();
     }
@@ -113,7 +107,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         {
             if (logLists == null)
             {
-                logLists = new LogLists(Config.s_config.hitLog);
+                logLists = new LogLists(Config.config.hitLog);
             }
         }
 
@@ -129,10 +123,10 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
      */
     private function initializeSubject():Void
     {
-        trace("initializeSubject() standard=" + Config.s_config.markers.useStandardMarkers + " " + m_playerFullName);
+        trace("initializeSubject() standard=" + Config.config.markers.useStandardMarkers + " " + m_playerFullName);
 
         // Create marker class depending on config setting
-        if (Config.s_config.markers.useStandardMarkers == true)
+        if (Config.config.markers.useStandardMarkers == true)
             createStandardMarker();
         else
             createXvmMarker();
@@ -181,7 +175,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
             // WARNING: do not touch proxy.marker.marker - marker animation will be broken
             wrapper.marker.marker.icon["_xvm_colorized"] = true;
             GraphicsUtil.colorize(wrapper.marker.marker.icon, wrapper.colorsManager.getRGB(wrapper.colorSchemeName),
-                Config.s_config.consts.VM_COEFF_VMM); // darker to improve appearance
+                Config.config.consts.VM_COEFF_VMM); // darker to improve appearance
         }
 
         if (IsXvmMarker)
@@ -239,12 +233,12 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
 
     private function get IsStandardMarker()
     {
-        return subject != null && Config.s_config.markers.useStandardMarkers == true;
+        return subject != null && Config.config.markers.useStandardMarkers == true;
     }
 
     private function get IsXvmMarker()
     {
-        return subject != null && Config.s_config.markers.useStandardMarkers != true;
+        return subject != null && Config.config.markers.useStandardMarkers != true;
     }
 
     /**
@@ -285,7 +279,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
             }, wr.m_team == "ally" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
         };
 
-        if (Config.s_loaded == true && !subject)
+        if (Config.config && !subject)
             initializeSubject();
         if (wrapper.m_team == "enemy")
         {
@@ -316,7 +310,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
                     vdata.localizedName,
                     m_defaultIconSource,
                     m_playerFullName, m_level, damageType,
-                    Config.s_config.texts.vtype[vdata.vtype],
+                    Config.config.texts.vtype[vdata.vtype],
                     GraphicsUtil.GetVTypeColorValue(m_defaultIconSource),
                     m_dead, curHealthAbsolute);
             }

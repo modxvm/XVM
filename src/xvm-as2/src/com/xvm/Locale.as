@@ -18,13 +18,6 @@ class com.xvm.Locale
     /////////////////////////////////////////////////////////////////
     // PUBLIC STATIC
 
-    public static function loadLocaleFile():Void
-    {
-        LoadLanguageFallback();
-        s_filename = "l10n/" + Config.s_config.language + ".xc";
-        Cmd.loadFile(s_filename, null, languageFileCallback);
-    }
-
     public static function get(format:String):String
     {
         if (s_lang.locale && s_lang.locale.hasOwnProperty(format))
@@ -60,6 +53,36 @@ class com.xvm.Locale
         return res;
     }
 
+    public static function languageFileCallback(data_str:String):Void
+    {
+        try
+        {
+            LoadLanguageFallback();
+
+            if (data_str == null)
+            {
+                Logger.add("Locale: Can not find language file. Filename: " + s_filename);
+                return;
+            }
+
+            try
+            {
+                s_lang = JSONx.parse(data_str);
+                Logger.add("Locale: Loaded " + Config.config.language);
+            }
+            catch (ex:Error)
+            {
+                var text:String = "Error loading language file '" + s_filename + "': ";
+                text += parseError(ex);
+                Logger.add(text.substr(0, 200));
+            }
+        }
+        finally
+        {
+            GlobalEventDispatcher.dispatchEvent( { type: EVENT_LOADED } );
+        }
+    }
+
     /////////////////////////////////////////////////////////////////
     // PRIVATE
 
@@ -67,7 +90,8 @@ class com.xvm.Locale
     private static function LoadLanguageFallback():Void
     {
         var tr = s_lang_fallback;
-        if (Config.s_config.gameRegion == "RU")
+        //Logger.add(Config.config.region + " " + Config.config.language);
+        if (Config.config.region == "RU")
         {
             /** Hardcoded RU language */
             // Win chance
@@ -215,34 +239,6 @@ class com.xvm.Locale
 
             // VehicleMarkersManager
             tr["blownUp"] = "Blown-up!";
-        }
-    }
-
-    private static function languageFileCallback(data_str):Void
-    {
-        try
-        {
-            if (data_str == null)
-            {
-                Logger.add("Locale: Can not find language file. Filename: " + s_filename);
-                return;
-            }
-
-            try
-            {
-                s_lang = JSONx.parse(data_str);
-                Logger.add("Locale: Loaded " + Config.s_config.language);
-            }
-            catch (ex:Error)
-            {
-                var text:String = "Error loading language file '" + s_filename + "': ";
-                text += parseError(ex);
-                Logger.add(text.substr(0, 200));
-            }
-        }
-        finally
-        {
-            GlobalEventDispatcher.dispatchEvent( { type: EVENT_LOADED } );
         }
     }
 

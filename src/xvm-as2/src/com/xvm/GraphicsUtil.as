@@ -136,10 +136,10 @@ class com.xvm.GraphicsUtil
         try
         {
             var vdata:VehicleData = VehicleInfo.getByIcon(iconSource);
-            var vtype = (Config.s_config.colors.vtype.usePremiumColor == true && vdata.premium) ? "premium" : vdata.vtype;
-            if (!vtype || !Config.s_config.colors.vtype[vtype])
+            var vtype = (Config.config.colors.vtype.usePremiumColor == true && vdata.premium) ? "premium" : vdata.vtype;
+            if (!vtype || !Config.config.colors.vtype[vtype])
                 return "";
-            return prefix + Strings.padLeft(Utils.toInt(Config.s_config.colors.vtype[vtype], 0xFFFFFE).toString(16), 6, "0");
+            return prefix + Strings.padLeft(Utils.toInt(Config.config.colors.vtype[vtype], 0xFFFFFE).toString(16), 6, "0");
         }
         catch (ex:Error)
         {
@@ -159,9 +159,9 @@ class com.xvm.GraphicsUtil
                 return null;
             var key:String = damageSource + "_" + damageDest + "_";
             key += !isDead ? "hit" : isBlowedUp ? "blowup" : "kill";
-            if (!Config.s_config.colors.damage[key])
+            if (!Config.config.colors.damage[key])
                 return "";
-            return prefix + Strings.padLeft(Utils.toInt(Config.s_config.colors.damage[key], 0xFFFFFE).toString(16), 6, "0");
+            return prefix + Strings.padLeft(Utils.toInt(Config.config.colors.damage[key], 0xFFFFFE).toString(16), 6, "0");
         }
         catch (ex:Error)
         {
@@ -177,9 +177,9 @@ class com.xvm.GraphicsUtil
 
         try
         {
-            if (!dmg_kind || !Config.s_config.colors.dmg_kind[dmg_kind])
+            if (!dmg_kind || !Config.config.colors.dmg_kind[dmg_kind])
                 return null;
-            return prefix + Strings.padLeft(Utils.toInt(Config.s_config.colors.dmg_kind[dmg_kind], 0xFFFFFE).toString(16), 6, "0");
+            return prefix + Strings.padLeft(Utils.toInt(Config.config.colors.dmg_kind[dmg_kind], 0xFFFFFE).toString(16), 6, "0");
         }
         catch (ex:Error)
         {
@@ -201,7 +201,7 @@ class com.xvm.GraphicsUtil
         if (!prefix)
             prefix = "#";
 
-        var cfg_root: Object = Config.s_config.colors;
+        var cfg_root: Object = Config.config.colors;
         var cfg: Array;
         switch (type)
         {
@@ -244,7 +244,7 @@ class com.xvm.GraphicsUtil
         if (value == null || isNaN(value))
             return NaN;
 
-        var cfg_root:Object = Config.s_config.alpha;
+        var cfg_root:Object = Config.config.alpha;
         var cfg: Array;
         switch (type)
         {

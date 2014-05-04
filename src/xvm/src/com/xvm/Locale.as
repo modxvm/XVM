@@ -254,7 +254,7 @@ package com.xvm
             "token/notify_xvm_site": "Please go to the <a href='#XVM_SITE#'>XVM site</a> and activate statistics in the personal cabinet."
         };
 
-        private static var s_lang:Object = { };
+        public static var s_lang:Object = { };
         private static var s_lang_fallback:Object;
 
         //private var _initialized:Boolean = false;

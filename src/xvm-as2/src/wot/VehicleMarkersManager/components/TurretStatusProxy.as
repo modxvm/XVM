@@ -33,11 +33,11 @@ class wot.VehicleMarkersManager.components.TurretStatusProxy extends AbstractAcc
 
     public function getHighVulnDisplayMarker():String
     {
-        return Config.s_config.turretMarkers.highVulnerability;
+        return Config.config.turretMarkers.highVulnerability;
     }
 
     public function getLowVulnDisplayMarker():String
     {
-        return Config.s_config.turretMarkers.lowVulnerability;
+        return Config.config.turretMarkers.lowVulnerability;
     }
 }

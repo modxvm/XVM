@@ -1,22 +1,20 @@
-import flash.external.ExternalInterface;
-import com.xvm.Sandbox;
-import com.xvm.Config;
+/**
+ * XVM
+ * @author Maxim Schedriviy <m.schedriviy(at)gmail.com>
+ */
+import com.xvm.*;
+import flash.external.*;
 
 class com.xvm.Cmd
 {
     private static var COMMAND_LOG:String = "log";
-    private static var COMMAND_LOAD_FILE:String = "loadFile";
-    private static var COMMAND_GET_CONFIG:String = "getConfig";
+    private static var COMMAND_SET_CONFIG:String = "setConfig";
     private static var COMMAND_GETSCREENSIZE:String = "getScreenSize";
-    private static var COMMAND_GETGAMEREGION:String = "getGameRegion";
-    private static var COMMAND_GETLANGUAGE:String = "getLanguage";
     private static var COMMAND_LOADBATTLESTAT:String = "loadBattleStat";
     private static var COMMAND_LOADUSERDATA:String = "loadUserData";
     private static var COMMAND_LOGSTAT:String = "logstat";
-    private static var COMMAND_SAVE_SETTINGS:String = "save_settings";
-    private static var COMMAND_LOAD_SETTINGS:String = "load_settings";
-    private static var COMMAND_GETVEHICLEINFODATA:String = "getVehicleInfoData";
 
+    public static var RESPOND_CONFIG = "xvm.config";
     public static var RESPOND_BATTLEDATA = "xvm.battledata";
     public static var RESPOND_BATTLESTATE = "xvm.battleState";
 
@@ -25,14 +23,9 @@ class com.xvm.Cmd
         _call(null, null, [COMMAND_LOG, str]);
     }
 
-    public static function loadFile(filename:String, target:Object, callback:Function)
+    public static function setConfig()
     {
-        _call(target, callback, [COMMAND_LOAD_FILE, filename]);
-    }
-
-    public static function getConfig(target:Object, callback:Function)
-    {
-        _call(target, callback, [COMMAND_GET_CONFIG]);
+        _call(null, null, [COMMAND_SET_CONFIG, JSONx.stringify(Config.config, '', true)]);
     }
 
     public static function getScreenSize(target:Object, callback:Function)
@@ -40,41 +33,15 @@ class com.xvm.Cmd
         _call(target, callback, [COMMAND_GETSCREENSIZE]);
     }
 
-    public static function getGameRegion(target:Object, callback:Function)
-    {
-        _call(target, callback, [COMMAND_GETGAMEREGION]);
-    }
-
-    public static function getLanguage(target:Object, callback:Function)
-    {
-        _call(target, callback, [COMMAND_GETLANGUAGE]);
-    }
-
     public static function loadBattleStat(players:Array)
     {
-        _call(null, null, [COMMAND_LOADBATTLESTAT, Config.s_config.rating.showPlayersStatistics, players]);
+        _call(null, null, [COMMAND_LOADBATTLESTAT, Config.config.rating.showPlayersStatistics, players]);
     }
 
     public static function logStat()
     {
         _call(null, null, [COMMAND_LOGSTAT]);
     }
-
-    public static function loadSettings(target:Object, callback:Function)
-    {
-        _call(target, callback, [COMMAND_LOAD_SETTINGS]);
-    }
-
-    public static function saveSettings(settingsStr)
-    {
-        _call(null, null, [COMMAND_SAVE_SETTINGS, settingsStr]);
-    }
-
-    public static function getVehicleInfoData(target:Object, callback:Function)
-    {
-        _call(target, callback, [COMMAND_GETVEHICLEINFODATA]);
-    }
-
 
     /////////////////////////////////////////////////////////////////
 

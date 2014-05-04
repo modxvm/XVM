@@ -35,9 +35,9 @@ class com.xvm.VehicleInfo
     {
         // vtype = HT
         // return: HT text
-        if (!vtype || !Config.s_config.texts.vtype[vtype])
+        if (!vtype || !Config.config.texts.vtype[vtype])
             return "";
-        return Config.s_config.texts.vtype[vtype];
+        return Config.config.texts.vtype[vtype];
     }
 
     public static function getVIconName(vkey:String):String
@@ -86,7 +86,7 @@ class com.xvm.VehicleInfo
                 var obj:Object = data_array[n];
                 var data:VehicleData = new VehicleData(obj);
 
-                var preferredNames:Object = Config.s_config.vehicleNames[data.key.split(':').join('-')];
+                var preferredNames:Object = Config.config.vehicleNames[data.key.split(':').join('-')];
                 if (preferredNames != null)
                 {
                     if (preferredNames['name'] != null && preferredNames['name'] != '')

@@ -8,7 +8,7 @@ class wot.battle.FragCorrelation
     public static function modify():Void
     {
         disableSelection();
-        if (Config.s_config.fragCorrelation.hideTeamTextFields == true)
+        if (Config.config.fragCorrelation.hideTeamTextFields == true)
             hideFragCorellationBarTeamTextFields();
         colorizeMarkers();
     }
@@ -67,12 +67,12 @@ class wot.battle.FragCorrelation
         var renderer = markers.$createItemRenderer.apply(markers, arguments);
 
         var type = ally ? "ally" : "enemy";
-        var color = Config.s_config.markers.useStandardMarkers
+        var color = Config.config.markers.useStandardMarkers
             ? net.wargaming.managers.ColorSchemeManager.instance.getRGB("vm_" + type)
             : ColorsManager.getSystemColor(type, dead);
 
         GraphicsUtil.colorize(dead ? renderer.markerDead : renderer.marker, color,
-            Config.s_config.consts.VM_COEFF_FC / (dead ? 2 : 1)); // darker to improve appearance
+            Config.config.consts.VM_COEFF_FC / (dead ? 2 : 1)); // darker to improve appearance
         //Logger.addObject(arguments[0], 1, color);
         //Logger.addObject(renderer, "renderer", 1);
         return renderer;

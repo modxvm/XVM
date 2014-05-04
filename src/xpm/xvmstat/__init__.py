@@ -31,6 +31,7 @@ _SWFS = [
     ]
 
 _BATTLE_SWF = 'battle.swf'
+_VMM_SWF = 'VehicleMarkersManager.swf'
 
 #####################################################################
 # event handlers
@@ -60,7 +61,10 @@ def FlashInit(self, swf, className = 'Flash', args = None, path = None):
     self.addExternalCallback('xvm.cmd', lambda *args: g_xvm.onXvmCommand(self, *args))
     if self.swf == _BATTLE_SWF:
         g_xvm.battleFlashObject = self
-        BigWorld.callback(0, g_xvm.initBattle)
+        g_xvm.initBattle()
+    if self.swf == _VMM_SWF:
+        g_xvm.vmmFlashObject = self
+        g_xvm.initVmm()
 
 def FlashBeforeDelete(self):
     if self.swf not in _SWFS:
@@ -69,6 +73,8 @@ def FlashBeforeDelete(self):
     self.removeExternalCallback('xvm.cmd')
     if self.swf == _BATTLE_SWF:
         g_xvm.battleFlashObject = None
+    if self.swf == _VMM_SWF:
+        g_xvm.vmmFlashObject = None
 
 
 def ProfileTechniqueWindowRequestData(base, self, data):

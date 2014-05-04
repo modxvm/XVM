@@ -10,14 +10,14 @@ class wot.battle.ExpertPanel
         panel._yscale = cfg.scale;
         panel.configUI();
     }
-    
+
     private static function get panel():ExpertPanelWG
     {
         return _root.damageInfoPanel;
     }
-    
+
     private static function get cfg():Object
     {
-        return Config.s_config.expertPanel;
+        return Config.config.expertPanel;
     }
 }

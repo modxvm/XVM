@@ -44,8 +44,8 @@ class com.xvm.ColorsManager
     {
         var key: String = entityName + "_";
         key += !isDead ? "alive" : isBlowedUp ? "blowedup" : "dead";
-        //com.xvm.Logger.add("getSystemColor():" + key + " " + Config.s_config.colors.system[key]);
-        return parseInt(Config.s_config.colors.system[key]);
+        //com.xvm.Logger.add("getSystemColor():" + key + " " + Config.config.colors.system[key]);
+        return parseInt(Config.config.colors.system[key]);
     }
 
     public static function getDamageSystemColor(damageSource:String, damageDest:String, damageType:String,
@@ -56,7 +56,7 @@ class com.xvm.ColorsManager
             case "world_collision":
             case "death_zone":
             case "drowning":
-                return parseInt(Config.s_config.colors.dmg_kind[damageType]);
+                return parseInt(Config.config.colors.dmg_kind[damageType]);
 
             case "attack":
             case "fire":
@@ -64,7 +64,7 @@ class com.xvm.ColorsManager
             default:
                 var key:String = damageSource + "_" + damageDest + "_";
                 key += !isDead ? "hit" : isBlowedUp ? "blowup" : "kill";
-                return parseInt(Config.s_config.colors.damage[key]);
+                return parseInt(Config.config.colors.damage[key]);
         }
     }
 }

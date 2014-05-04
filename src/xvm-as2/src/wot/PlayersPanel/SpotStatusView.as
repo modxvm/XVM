@@ -28,12 +28,12 @@ class wot.PlayersPanel.SpotStatusView
 
     public function update(status:Number, isArty:Boolean):Void
     {
-        if (!Config.s_loaded)
+        if (!Config.config)
             return;
 
         if (cfg == null)
         {
-            cfg = Config.s_config.playersPanel.enemySpottedMarker;
+            cfg = Config.config.playersPanel.enemySpottedMarker;
 
             formatsCache = { };
             formatsCache[SpotStatusModel.DEAD] = [ Utils.fixImgTag(cfg.format.dead), Utils.fixImgTag(cfg.format.artillery.dead) ];

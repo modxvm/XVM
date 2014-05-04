@@ -85,7 +85,7 @@ class wot.Minimap.Minimap
 
     function scaleMarkersImpl(factor:Number)
     {
-        if (!Config.s_loaded)
+        if (!Config.config)
         {
             var me = this;
             _global.setTimeout(function() { me.scaleMarkersImpl(factor); }, 1);

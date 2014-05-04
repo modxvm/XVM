@@ -19,10 +19,10 @@ class wot.battle.Elements
 
     public static function SetupElements()
     {
-        if (!Config.s_loaded || !width || !height)
+        if (!Config.config || !width || !height)
             return;
-        for (var i = 0; i < Config.s_config.battle.elements.length; ++i)
-            apply(_root, Config.s_config.battle.elements[i], "_root");
+        for (var i = 0; i < Config.config.battle.elements.length; ++i)
+            apply(_root, Config.config.battle.elements[i], "_root");
     }
 
     private static function apply(obj, opt, name)
@@ -73,7 +73,7 @@ class wot.battle.Elements
                         { WIDTH:width, HEIGHT:height }, // globals
                         obj,                            // current object
                         _root,                          // _root
-                        Config.s_config,                // config
+                        Config.config,                  // config
                         Defines                         // global defines
                     ]);
                     //Logger.add(value + " => " + evaluator.eval(value));

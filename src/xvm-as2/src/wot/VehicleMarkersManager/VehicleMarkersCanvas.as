@@ -3,6 +3,7 @@
  * Used only for config preloading in the begin of the battle
  */
 import com.xvm.*;
+import flash.external.*;
 
 class wot.VehicleMarkersManager.VehicleMarkersCanvas
 {
@@ -27,6 +28,6 @@ class wot.VehicleMarkersManager.VehicleMarkersCanvas
         _global.noInvisibleAdvance = true;
 
         GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, StatLoader.LoadData);
-        Config.LoadConfig();
+        ExternalInterface.addCallback(Cmd.RESPOND_CONFIG, Config.instance, Config.instance.GetConfigCallback);
     }
 }

@@ -179,7 +179,7 @@ class com.xvm.Macros
 
     public static function RegisterPlayerData(playerName:String, data:Object, team:Number)
     {
-        if (!Config.s_loaded)
+        if (!Config.config)
             return;
         if (!data)
             return;
@@ -505,8 +505,8 @@ class com.xvm.Macros
 
         // {{dead}}
         pdata["dead"] = data.curHealth < 0
-            ? Config.s_config.hitLog.blowupMarker
-            : (data.curHealth == 0 || data.dead) ? Config.s_config.hitLog.deadMarker : "";
+            ? Config.config.hitLog.blowupMarker
+            : (data.curHealth == 0 || data.dead) ? Config.config.hitLog.deadMarker : "";
 
         // {{n}}
         pdata["n"] = hits.length;
@@ -529,7 +529,7 @@ class com.xvm.Macros
     private static function modXvmDevLabel(nick:String):String
     {
         var label = Utils.GetPlayerName(nick);
-        switch (Config.s_game_region)
+        switch (Config.config.region)
         {
             case "RU":
                 if (label == "M_r_A")

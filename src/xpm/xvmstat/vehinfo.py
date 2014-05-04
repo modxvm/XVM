@@ -2,11 +2,11 @@
 
 # PUBLIC
 
-def getVehicleInfoData():
-    global _vehicleInfoData
-    if _vehicleInfoData is None:
-        _vehicleInfoData = _init()
-    return _vehicleInfoData
+def getVehicleInfoDataStr():
+    global _vehicleInfoDataStr
+    if _vehicleInfoDataStr is None:
+        _vehicleInfoDataStr = _init()
+    return _vehicleInfoDataStr
 
 # PRIVATE
 
@@ -23,7 +23,7 @@ from items import vehicles
 from vehinfo_short import getShortName
 from vehinfo_tiers import getTiers
 
-_vehicleInfoData = None
+_vehicleInfoDataStr = None
 
 TURRET_TYPE_ONLY_ONE = 0
 TURRET_TYPE_TOP_GUN_POSSIBLE = 1

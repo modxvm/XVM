@@ -57,8 +57,8 @@ class wot.VehicleMarkersManager.components.ContourIconComponent
             m_iconset = new IconLoader(this, completeLoadContourIcon);
             m_iconset.init(proxy.iconLoader,
                 [ proxy.source.split(Defines.WG_CONTOUR_ICON_PATH).join(Defines.XVMRES_ROOT + ((team == "ally")
-                ? Config.s_config.iconset.vehicleMarkerAlly
-                : Config.s_config.iconset.vehicleMarkerEnemy)), proxy.source ]);
+                ? Config.config.iconset.vehicleMarkerAlly
+                : Config.config.iconset.vehicleMarkerEnemy)), proxy.source ]);
         }
 
         proxy.iconLoader.source = m_iconset.currentIcon;

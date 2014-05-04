@@ -58,7 +58,7 @@ class com.xvm.PlayerInfo extends MovieClip
         }
         else
         {
-            var prefix:String = Defines.XVMRES_ROOT + Config.s_config.battle.clanIconsFolder + Config.s_game_region + "/";
+            var prefix:String = Defines.XVMRES_ROOT + Config.config.battle.clanIconsFolder + Config.config.region + "/";
             paths.push(prefix + "nick/" + nick + ".png");
             if (clan)
             {

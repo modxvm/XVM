@@ -96,7 +96,7 @@ class wot.PlayersPanel.PlayersPanel
         GlobalEventDispatcher.removeEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
 
         // init enemy spotter markers
-        if (Config.s_config.playersPanel.enemySpottedMarker.enabled && isEnemyPanel)
+        if (Config.config.playersPanel.enemySpottedMarker.enabled && isEnemyPanel)
         {
             GlobalEventDispatcher.addEventListener(AutoUpdate.UPDATE_BY_TIMER_EVENT, this, updateSpotStatusMarkers);
             spotStatusModel = new SpotStatusModel();
@@ -170,8 +170,8 @@ class wot.PlayersPanel.PlayersPanel
             // [3/3] fix WG bug - this function is slow, don't call it if not required.
             wrapper.m_list["invalidateData"] = wrapper.m_list["invalidateData2"];
 
-            wrapper.players_bg._alpha = Config.s_config.playersPanel.alpha;
-            wrapper.m_list._alpha = Config.s_config.playersPanel.iconAlpha;
+            wrapper.players_bg._alpha = Config.config.playersPanel.alpha;
+            wrapper.m_list._alpha = Config.config.playersPanel.iconAlpha;
 
             // new player added in the FoW mode
             if (m_knownPlayersCount != data.length)
@@ -222,28 +222,28 @@ class wot.PlayersPanel.PlayersPanel
                 if (fieldType == Defines.FIELDTYPE_VEHICLE)
                     break;
                 format = (wrapper.type == "left")
-                    ? Config.s_config.playersPanel.medium.formatLeft
-                    : Config.s_config.playersPanel.medium.formatRight;
+                    ? Config.config.playersPanel.medium.formatLeft
+                    : Config.config.playersPanel.medium.formatRight;
                 break;
             case "medium2":
                 if (fieldType == Defines.FIELDTYPE_NICK)
                     break;
                 format = (wrapper.type == "left")
-                    ? Config.s_config.playersPanel.medium2.formatLeft
-                    : Config.s_config.playersPanel.medium2.formatRight;
+                    ? Config.config.playersPanel.medium2.formatLeft
+                    : Config.config.playersPanel.medium2.formatRight;
                 break;
             case "large":
                 if (fieldType == Defines.FIELDTYPE_NICK)
                 {
                     format = (wrapper.type == "left")
-                        ? Config.s_config.playersPanel.large.nickFormatLeft
-                        : Config.s_config.playersPanel.large.nickFormatRight;
+                        ? Config.config.playersPanel.large.nickFormatLeft
+                        : Config.config.playersPanel.large.nickFormatRight;
                 }
                 else if (fieldType == Defines.FIELDTYPE_VEHICLE)
                 {
                     format = (wrapper.type == "left")
-                        ? Config.s_config.playersPanel.large.vehicleFormatLeft
-                        : Config.s_config.playersPanel.large.vehicleFormatRight;
+                        ? Config.config.playersPanel.large.vehicleFormatLeft
+                        : Config.config.playersPanel.large.vehicleFormatRight;
                 }
                 break;
             default:
@@ -282,19 +282,19 @@ class wot.PlayersPanel.PlayersPanel
         switch (wrapper.state)
         {
             case "medium":
-                namesWidth = Math.max(XVMGetMaximumFieldWidth(wrapper.m_names), Config.s_config.playersPanel.medium.width);
+                namesWidth = Math.max(XVMGetMaximumFieldWidth(wrapper.m_names), Config.config.playersPanel.medium.width);
                 widthDelta = namesWidthDefault - namesWidth;
                 break;
             case "medium2":
-                vehiclesWidth = Config.s_config.playersPanel.medium2.width;
+                vehiclesWidth = Config.config.playersPanel.medium2.width;
                 widthDelta = vehiclesWidthDefault - vehiclesWidth;
                 break;
             case "large":
                 namesWidthDefault = 296;
-                namesWidth = Math.max(XVMGetMaximumFieldWidth(wrapper.m_names), Config.s_config.playersPanel.large.width);
+                namesWidth = Math.max(XVMGetMaximumFieldWidth(wrapper.m_names), Config.config.playersPanel.large.width);
                 vehiclesWidth = XVMGetMaximumFieldWidth(wrapper.m_vehicles);
                 //Logger.add("w: " + vehiclesWidth + " " + wrapper.m_vehicles.htmlText);
-                squadSize = Config.s_config.playersPanel.removeSquadIcon ? 0 : net.wargaming.ingame.PlayersPanel.SQUAD_SIZE;
+                squadSize = Config.config.playersPanel.removeSquadIcon ? 0 : net.wargaming.ingame.PlayersPanel.SQUAD_SIZE;
                 widthDelta = namesWidthDefault - namesWidth + vehiclesWidthDefault - vehiclesWidth - squadSize + net.wargaming.ingame.PlayersPanel.SQUAD_SIZE;
                 break;
             default:
