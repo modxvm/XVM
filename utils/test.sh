@@ -15,8 +15,8 @@ done
 [ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/work/games/WoT
 CURRENT_DIRECTORY=`pwd`
 
-SAMPLE_REPLAY=test.wotreplay
-#SAMPLE_REPLAY=test2.wotreplay
+#SAMPLE_REPLAY=test.wotreplay
+SAMPLE_REPLAY=test2.wotreplay
 #SAMPLE_REPLAY=test3.wotreplay
 #SAMPLE_REPLAY=cw.wotreplay
 

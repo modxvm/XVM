@@ -194,7 +194,7 @@ class com.xvm.StatLoader
             : (stat.v.teff < 1800) ? 8
             : (stat.v.teff < 2000) ? 9 : 10;
 
-//        Logger.add(stat.vn + " teff=" + stat.teff + " e:" + stat.te);
+        //Logger.add(stat.v.data.shortName + " teff=" + stat.v.teff + " e:" + stat.v.te);
 //        Logger.addObject(stat);
     }
 }
