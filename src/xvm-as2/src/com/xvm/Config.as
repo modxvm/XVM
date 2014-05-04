@@ -25,7 +25,7 @@ class com.xvm.Config
 
     public function GetConfigCallback(config_data:String, lang_str:String, vehInfoData:String)
     {
-        Logger.add("Config::GetConfigCallback()");
+        //Logger.add("Config::GetConfigCallback()");
         try
         {
             Config.config = JSONx.parse(config_data);

@@ -84,7 +84,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
      */
     private function initializeSubject():Void
     {
-        trace("initializeSubject() standard=" + Config.config.markers.useStandardMarkers + " " + m_playerFullName);
+        //trace("initializeSubject() standard=" + Config.config.markers.useStandardMarkers + " " + m_playerFullName);
 
         // Create marker class depending on config setting
         if (Config.config.markers.useStandardMarkers == true)
@@ -99,7 +99,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
 
     private function createStandardMarker()
     {
-        trace("createStandardMarker()");
+        //trace("createStandardMarker()");
 
         // re-enable vehicle type marker for standard marker
         wrapper.marker._visible = true;
@@ -156,8 +156,8 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         for (var i:Number = 0; i < len; ++i)
         {
             var data = pendingCalls[i];
-            if (data.func != "showExInfo")
-                trace("deferred");
+            //if (data.func != "showExInfo")
+            //    trace("deferred");
             call(data.func, data.args, data.pre);
             delete data;
         }
@@ -171,8 +171,8 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
      */
     private function call(func:String, args:Array, pre:Function)
     {
-        if (func != "showExInfo")
-            trace("call(): " + func + (args ? " [" + args.join(", ") + "]" : ""));
+        //if (func != "showExInfo")
+        //    trace("call(): " + func + (args ? " [" + args.join(", ") + "]" : ""));
 
         if (subject != null)
         {

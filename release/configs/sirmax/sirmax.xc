@@ -204,7 +204,8 @@
           //"deadenemy": 50
         }
       }
-    }
+    },
+    "square" : { "enabled": true }
   },
   "hitLog": {
     "visible": true,
@@ -549,6 +550,13 @@
       { "value": 350,  "alpha": 100 },
       { "value": 500,  "alpha": 50 },
       { "value": 9999, "alpha": 0 }
+    ],
+    "hp_ratio": [
+      { "value": 1, "alpha": "#00" },
+      { "value": 10, "alpha": "#FF" },
+      { "value": 20, "alpha": "#BB" },
+      { "value": 50, "alpha": "#00" },
+      { "value": 101, "alpha": "#00" }
     ]
   },
   "iconset": {
