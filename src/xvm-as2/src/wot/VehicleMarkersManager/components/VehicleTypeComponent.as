@@ -96,6 +96,13 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
             this.setVehicleClass();
     }
 
+    public function setMarkerLabel(markerLabel:String)
+    {
+        //Logger.add("setMarkerLabel: " + m_markerLabel + " " + m_markerState);
+        m_markerLabel = null;
+        updateMarkerLabel();
+    }
+
     public function updateMarkerLabel()
     {
         //Logger.add("updateMarkerLabel: " + m_markerLabel + " " + m_markerState);

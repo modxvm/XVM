@@ -128,7 +128,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
 
     function gotoAndStop(frame:Object):Void
     {
-        //trace("gotoAndStop(" + frame + ")");
+        //Logger.add("gotoAndStop(" + frame + ")");
         base.gotoAndStop(frame);
 
         if (IsStandardMarker && !wrapper.m_speaking && !wrapper.marker.marker.icon["_xvm_colorized"])

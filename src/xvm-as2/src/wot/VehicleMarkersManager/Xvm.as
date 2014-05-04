@@ -133,6 +133,8 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
 
     public function setupMarkerFrame()
     {
+        vehicleTypeComponent.setMarkerLabel();
+
         // Remove standard fields for XVM
         if (wrapper.pNameField)
         {

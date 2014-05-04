@@ -53,6 +53,7 @@ class wot.Minimap.Minimap
     {
         Utils.TraceXvmModule("Minimap");
 
+        GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, this, updateEntries);
         GlobalEventDispatcher.addEventListener(Stat.E_STAT_LOADED, this, updateEntries);
         GlobalEventDispatcher.addEventListener(Defines.E_BATTLE_STATE_CHANGED, this, updateEntries);
         GlobalEventDispatcher.addEventListener(MinimapEvent.MINIMAP_READY, this, onReady);

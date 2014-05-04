@@ -7,6 +7,7 @@
     /////////////////////////////////////////////////////////////////
 
     var m_entityName:String;
+    var m_markerLabel:String;
     var m_speaking:Boolean;
 
     var levelIcon:MovieClip;

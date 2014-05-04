@@ -51,7 +51,6 @@
     <compile path="src\com\xvm\Wrapper.as" />
     <compile path="src\wot\Minimap\Minimap.as" />
     <compile path="src\wot\Minimap\MinimapEntry.as" />
-    <compile path="src\wot\VehicleMarkersManager" />
     <compile path="src\wot\PlayersPanel\PlayerListItemRenderer.as" />
     <compile path="src\wot\PlayersPanel\PlayersPanel.as" />
     <compile path="src\wot\battle\BattleMain.as" />

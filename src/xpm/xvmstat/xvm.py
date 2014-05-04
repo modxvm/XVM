@@ -65,11 +65,14 @@ class Xvm(object):
                 fn = os.path.join(XVM_DIR, args[0])
                 res = load_file(fn) if os.path.exists(fn) else None
             elif cmd == COMMAND_SET_CONFIG:
-                log('setConfig')
+                #debug('setConfig')
                 self.config_str = args[0]
                 self.config = json.loads(self.config_str)
-                self.lang_str = args[1]
-                self.lang_data = json.loads(self.lang_str)
+                if len(args) >= 2:
+                    self.lang_str = args[1]
+                    self.lang_data = json.loads(self.lang_str)
+                self.sendConfig(self.battleFlashObject)
+                self.sendConfig(self.vmmFlashObject)
             elif cmd == COMMAND_PING:
                 #return
                 ping(proxy)
@@ -175,17 +178,18 @@ class Xvm(object):
                 err('updateBattleState(): ' + traceback.format_exc())
 
     def sendConfig(self, flashObject):
-        #debug(vehicle)
-        if self.config is not None and flashObject is not None:
-            try:
-                movie = flashObject.movie
-                if movie is not None:
-                    movie.invoke((RESPOND_CONFIG, [
-                        self.config_str,
-                        self.lang_str,
-                        getVehicleInfoDataStr()]))
-            except Exception, ex:
-                err('sendConfig(): ' + traceback.format_exc())
+        if self.config is None or flashObject is None:
+            return
+        #debug('sendConfig')
+        try:
+            movie = flashObject.movie
+            if movie is not None:
+                movie.invoke((RESPOND_CONFIG, [
+                    self.config_str,
+                    self.lang_str,
+                    getVehicleInfoDataStr()]))
+        except Exception, ex:
+            err('sendConfig(): ' + traceback.format_exc())
 
 g_xvm = Xvm()
 

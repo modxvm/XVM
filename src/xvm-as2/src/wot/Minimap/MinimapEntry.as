@@ -135,7 +135,7 @@ class wot.Minimap.MinimapEntry
 
     function invalidateImpl()
     {
-        //Logger.add('invalidateImpl ' + Stat.s_loaded);
+        //Logger.add('invalidateImpl ' + wrapper.entryName);
         base.invalidate();
         MarkerColor.setColor(wrapper);
         LabelViewBuilder.updateTextField(labelMc);
@@ -180,7 +180,11 @@ class wot.Minimap.MinimapEntry
     {
         labelMc = labelsContainer.getLabel(uid, wrapper.entryName, wrapper.vehicleClass);
         if (wrapper.entryName == STATIC_ICON_BASE)
+        {
+            if (wrapper.orig_entryName == null)
+                wrapper.orig_entryName = wrapper.entryName;
             wrapper.setEntryName(STATIC_ICON_CONTROL);
+        }
     }
 
     private function setLabelToMimicEntryMoves():Void

@@ -8,28 +8,22 @@ class wot.Minimap.view.MarkerColor
 {
     public static function setColor(wrapper:net.wargaming.ingame.MinimapEntry):Void
     {
-        if (wrapper.m_type == null || wrapper.vehicleClass == null || wrapper.entryName == null || wrapper.entryName == "")
+        var wr_entryName = wrapper.orig_entryName || wrapper.entryName;
+        if (wrapper.m_type == null || wrapper.vehicleClass == null || wr_entryName == null || wr_entryName == "")
             return;
 
-        if (wrapper.entryName == MinimapEntry.STATIC_ICON_CONTROL)
+        if (wr_entryName == MinimapEntry.STATIC_ICON_CONTROL)
             return;
 
-        if (wrapper.m_type == "player" && wrapper.entryName == "postmortemCamera")
+        if (wrapper.m_type == "player" && wr_entryName == "postmortemCamera")
             return;
-
-        if (Config.config == null)
-        {
-            // wait for config
-            setTimeout(function() { MarkerColor.setColor(wrapper); }, 1);
-            return;
-        }
 
         var color = null;
         if (Config.config.markers.useStandardMarkers)
         {
-            if (wrapper.entryName == MinimapEntry.STATIC_ICON_BASE)
+            if (wr_entryName == MinimapEntry.STATIC_ICON_BASE)
                 return;
-            var schemeName = wrapper.entryName != "spawn" ? wrapper.colorSchemeName
+            var schemeName = wr_entryName != MinimapEntry.STATIC_ICON_SPAWN ? wrapper.colorSchemeName
                 : (wrapper.vehicleClass == "red") ? "vm_enemy" : (wrapper.vehicleClass == "blue") ? "vm_ally" : null;
             if (!schemeName)
                 return;
@@ -38,7 +32,7 @@ class wot.Minimap.view.MarkerColor
         else
         {
             // use standard team bases if color is not changed
-            if (wrapper.entryName == MinimapEntry.STATIC_ICON_BASE)
+            if (wr_entryName == MinimapEntry.STATIC_ICON_BASE)
             {
                 var aa = Config.config.colors.system["ally_alive"];
                 var aad = Defines.C_ALLY_ALIVE;
@@ -49,14 +43,18 @@ class wot.Minimap.view.MarkerColor
                 if (wrapper.vehicleClass == "red" && ea == ead)
                     return;
             }
-            var entryName = (wrapper.entryName != MinimapEntry.STATIC_ICON_BASE && wrapper.entryName != "spawn") ? wrapper.entryName
+            var entryName = (wr_entryName != MinimapEntry.STATIC_ICON_BASE && wr_entryName != MinimapEntry.STATIC_ICON_SPAWN) ? wr_entryName
                 : (wrapper.vehicleClass == "red") ? "enemy" : (wrapper.vehicleClass == "blue") ? "ally" : null;
             if (entryName == "teamKiller" && wrapper.m_type == "enemy")
                 entryName = "enemy";
             if (entryName != null)
                 color = ColorsManager.getSystemColor(entryName, wrapper.isDead);
             if (wrapper.entryName == MinimapEntry.STATIC_ICON_BASE)
+            {
+                if (wrapper.orig_entryName == null)
+                    wrapper.orig_entryName = wrapper.entryName;
                 wrapper.setEntryName(MinimapEntry.STATIC_ICON_CONTROL);
+            }
         }
 
         if (color != null)

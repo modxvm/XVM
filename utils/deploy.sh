@@ -12,8 +12,6 @@ FILES_FLASH="
 
 FILES_SCALEFORM="
   battle.swf
-  battleloading.swf
-  LangBarPanel.swf
   Minimap.swf
   PlayersPanel.swf
   StatisticForm.swf

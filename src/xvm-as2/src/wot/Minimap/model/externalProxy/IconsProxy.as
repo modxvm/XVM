@@ -11,7 +11,7 @@ import com.xvm.Logger;
 
 import wot.Minimap.Minimap;
 import wot.Minimap.MinimapEntry;
- 
+
 class wot.Minimap.model.externalProxy.IconsProxy
 {
     /** Used by SyncModel to calculate unassigned uids for subsequent syncrinization */
@@ -82,12 +82,12 @@ class wot.Minimap.model.externalProxy.IconsProxy
     {
         return _icons.createEmptyMovieClip(name, depth);
     }
-    
+
     public static function setOnEnterFrame(func:Function):Void
     {
         _icons.onEnterFrame = func;
     }
-    
+
     public static function isIconIsPresentAtMinimap(uid:Number):Boolean
     {
         var presentUids:Array = syncedUids;
@@ -98,7 +98,7 @@ class wot.Minimap.model.externalProxy.IconsProxy
                 return true;
             }
         }
-        
+
         return false;
     }
 
@@ -111,7 +111,7 @@ class wot.Minimap.model.externalProxy.IconsProxy
         {
             Logger.add("## ERROR wot.Minimap.model.externalProxy.IconsProxy: _root.minimap.icons == null");
         }
-        
+
         return ret;
     }
 

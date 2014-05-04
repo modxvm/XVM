@@ -6,6 +6,7 @@ intrinsic class net.wargaming.ingame.MinimapEntry extends UIComponent
     // XVM
     var xvm_worker:wot.Minimap.MinimapEntry;
     var xvm_attachments:MovieClip;
+    var orig_entryName:String;
     /////////////////////////////////////////////////////////////////
 
     var markMC:MovieClip;
@@ -18,7 +19,7 @@ intrinsic class net.wargaming.ingame.MinimapEntry extends UIComponent
     var selfIcon:MovieClip;
     var m_type:String; /** ally enemy points*/
     var teamPoint:MovieClip; /** Clip is present if entry is capture base */
-    
+
     function configUI();
     function init(markerType, entryName, vehicleClass, markLabel);
     function showAction(markLabel);

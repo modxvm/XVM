@@ -11,7 +11,7 @@ class com.xvm.Locale
     public static var EVENT_LOADED:String = "locale_loaded";
 
     private static var MACRO_PREFIX:String = "l10n";
-    private static var s_lang:Object;
+    public static var s_lang:Object;
     private static var s_lang_fallback:Object = {};
     private static var s_filename:String;
 
