@@ -82,7 +82,7 @@ class com.xvm.StatLoader
     public function CalculateStatValues(stat:StatData, forceTeff:Boolean):Void
     {
         // rating (GWR)
-        stat.r = stat.b > 0 ? Math.round(stat.w / stat.b * 100) : 0;
+        stat.r = stat.b > 0 ? stat.w / stat.b * 100 : 0;
 
         if (stat.v == null)
         {
@@ -99,16 +99,16 @@ class com.xvm.StatLoader
 
         var vdata:VehicleData = stat.v.data;
 
-        if (!stat.v.b || stat.v.b <= 0)
+        if (stat.v.b == null || stat.v.b <= 0)
             stat.v.r = stat.r;
         else
         {
             var Or = stat.r;
-            var Tr = Math.round(stat.v.w / stat.v.b * 100);
+            var Tr = stat.v.w / stat.v.b * 100;
             var Tb = stat.v.b / 100;
             var Tl = Math.min(vdata.level, 4) / 4;
             if (stat.v.b < 100)
-                stat.v.r = Math.round(Or - (Or - Tr) * Tb * Tl);
+                stat.v.r = Or - (Or - Tr) * Tb * Tl;
             else
                 stat.v.r = Tr;
         }
@@ -140,18 +140,18 @@ class com.xvm.StatLoader
         // skip v.b less then 10, because of WG bug:
         // http://www.koreanrandom.com/forum/topic/1643-/page-19#entry26189
         // forceTeff used in UserInfo, there is not this bug there.
-        if (stat.v == null || stat.v.b == null || (forceTeff != true && stat.v.b < 10 + vdata.level * 2))
+        if (stat.v.b == null || (forceTeff != true && stat.v.b < 10 + vdata.level * 2))
             return;
 
-        stat.v.db = (stat.v.d == null || stat.v.d < 0) ? null : Math.round(stat.v.d / stat.v.b);
-        stat.v.fb = (stat.v.f == null || stat.v.f < 0) ? null : Math.round(stat.v.f / stat.v.b * 10) / 10;
-        stat.v.sb = (stat.v.s == null || stat.v.s < 0) ? null : Math.round(stat.v.s / stat.v.b * 10) / 10;
-        //Logger.addObject(stat);
+        stat.v.db = (stat.v.dmg == null || stat.v.dmg < 0) ? null : stat.v.dmg / stat.v.b;
+        stat.v.fb = (stat.v.frg == null || stat.v.frg < 0) ? null : stat.v.frg / stat.v.b;
+        stat.v.sb = (stat.v.spo == null || stat.v.spo < 0) ? null : stat.v.spo / stat.v.b;
+        //Logger.addObject(stat.v, 1, stat.name);
 
-        stat.v.dv = (stat.v.d == null || stat.v.d < 0) ? null : Math.round(stat.v.d / stat.v.b / vdata.hpTop * 10) / 10;
+        stat.v.dv = (stat.v.dmg == null || stat.v.dmg < 0) ? null : stat.v.dmg / stat.v.b / vdata.hpTop;
 
         var EC = { CD: 3, CF: 1 };
-//        Logger.addObject(stat);
+        //Logger.addObject(stat);
 //        Logger.addObject(EC);
         if (EC.CD != null && EC.CD > 0 && (stat.v.db == null || stat.v.db <= 0))
             return;
@@ -179,10 +179,10 @@ class com.xvm.StatLoader
 
         stat.v.te = (d * EC.CD + f * EC.CF) / (EC.CD + EC.CF);
         //stat.teff2 = (d2 * EC.CD + f2 * EC.CF) / (EC.CD + EC.CF);
-//        Logger.add(stat.vn + " D:" + d + " F:" + f + " S:" + s);
+        //Logger.add(stat.v.data.shortName + " D:" + d + " F:" + f);
 
-        stat.v.teff = Math.max(1, Math.round(stat.v.te * 1000));
-        //stat.teff2 = Math.max(1, Math.round(stat.teff2 * 1000));
+        stat.v.teff = Math.max(1, stat.v.te * 1000);
+        //stat.teff2 = Math.max(1, stat.teff2 * 1000);
         stat.v.te = (stat.v.teff == 0) ? 0 //can not be used
             : (stat.v.teff < 300) ? 1
             : (stat.v.teff < 500) ? 2

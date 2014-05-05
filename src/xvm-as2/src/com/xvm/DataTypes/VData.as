@@ -6,10 +6,11 @@ class com.xvm.DataTypes.VData
         public var id:Number = 0;        // vehicle id
         public var b:Number = NaN;       // battles (int)
         public var w:Number = NaN;       // wins (int)
-        public var d:Number = NaN;       // damageDealt (int)
-        public var f:Number = NaN;       // frags (int)
-        public var s:Number = NaN;       // spotted (int)
-        public var u:Number = NaN;       // survived (int)
+        public var dmg:Number = NaN;     // damageDealt (int)
+        public var frg:Number = NaN;     // frags (int)
+        public var spo:Number = NaN;     // spotted (int)
+        public var def:Number = NaN;     // defence (int)
+        public var sur:Number = NaN;     // survived (int)
 
         // calculated
         public var r:Number = NaN;       // current vehicle win rate (int)

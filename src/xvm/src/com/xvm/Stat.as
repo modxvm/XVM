@@ -405,7 +405,7 @@ package com.xvm
         {
             // rating (GWR)
             if (!isNaN(stat.b) && !isNaN(stat.w) && stat.b > 0)
-                stat.r = Math.round(stat.w / stat.b * 100);
+                stat.r = stat.w / stat.b * 100;
 
             // XVM Scale: http://www.koreanrandom.com/forum/topic/2625-xvm-scale
 
@@ -445,7 +445,7 @@ package com.xvm
                 stat.v.r = stat.r;
             else
             {
-                var Tr:Number = Math.round(stat.v.w / stat.v.b * 100);
+                var Tr:Number = stat.v.w / stat.v.b * 100;
                 if (stat.v.b > 100)
                     stat.v.r = Tr;
                 else
@@ -453,7 +453,7 @@ package com.xvm
                     var Or:Number = stat.r;
                     var Tb:Number = stat.v.b / 100.0;
                     var Tl:Number = Math.min(vdata.level, 4) / 4.0;
-                    stat.v.r = Math.round(Or - (Or - Tr) * Tb * Tl);
+                    stat.v.r = Or - (Or - Tr) * Tb * Tl;
                 }
             }
 
@@ -466,16 +466,16 @@ package com.xvm
             if (!forceTeff && stat.v.b < 10 + vdata.level * 2)
                 return;
 
-            if (!isNaN(stat.v.d) && stat.v.d > 0)
-                stat.v.db = Math.round(stat.v.d / stat.v.b);
-            if (!isNaN(stat.v.f) && stat.v.f > 0)
-                stat.v.fb = Math.round(stat.v.f / stat.v.b * 10) / 10.0;
-            if (!isNaN(stat.v.s) && stat.v.s > 0)
-                stat.v.sb = Math.round(stat.v.s / stat.v.b * 10) / 10.0;
+            if (!isNaN(stat.v.dmg) && stat.v.dmg > 0)
+                stat.v.db = stat.v.dmg / stat.v.b;
+            if (!isNaN(stat.v.frg) && stat.v.frg > 0)
+                stat.v.fb = stat.v.frg / stat.v.b;
+            if (!isNaN(stat.v.spo) && stat.v.spo > 0)
+                stat.v.sb = stat.v.spo / stat.v.b;
             //Logger.addObject(stat);
 
-            if (!isNaN(stat.v.d) && stat.v.d > 0)
-                stat.v.dv = Math.round(stat.v.d / stat.v.b / vdata.hpTop * 10) / 10.0;
+            if (!isNaN(stat.v.dmg) && stat.v.dmg > 0)
+                stat.v.dv = stat.v.dmg / stat.v.b / vdata.hpTop;
 
             if (isNaN(stat.v.db) || isNaN(stat.v.fb) || isNaN(stat.v.sb))
                 return;
@@ -507,10 +507,10 @@ package com.xvm
 
             stat.v.te = (d * EC.CD + f * EC.CF) / (EC.CD + EC.CF);
             //stat.teff2 = (d2 * EC.CD + f2 * EC.CF) / (EC.CD + EC.CF);
-    //        Logger.add(stat.vn + " D:" + d + " F:" + f + " S:" + s);
+            //Logger.add(stat.vn + " D:" + d + " F:" + f);
 
-            stat.v.teff = Math.max(1, Math.round(stat.v.te * 1000));
-            //stat.teff2 = Math.max(1, Math.round(stat.teff2 * 1000));
+            stat.v.teff = Math.max(1, stat.v.te * 1000);
+            //stat.teff2 = Math.max(1, stat.teff2 * 1000);
             stat.v.te = (stat.v.teff == 0) ? 0 //can not be used
                 : (stat.v.teff < 300) ? 1
                 : (stat.v.teff < 500) ? 2
@@ -522,7 +522,7 @@ package com.xvm
                 : (stat.v.teff < 1800) ? 8
                 : (stat.v.teff < 2000) ? 9 : 10;
 
-            //Logger.add(stat.vn + " teff=" + stat.teff + " e:" + stat.te);
+            //Logger.add(stat.v.data.shortName + " teff=" + stat.teff + " e:" + stat.te);
             //Logger.addObject(stat);
         }
     }

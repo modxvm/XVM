@@ -3,7 +3,6 @@ package com.xvm.types.stat
     import flash.utils.*;
 
     public dynamic class StatData
-    //public class StatData
     {
         // received
         public var _id:Number = NaN;           // player account id (long int)
@@ -39,10 +38,21 @@ package com.xvm.types.stat
         public var maxHealth:Number = NaN;     // max health
         public var turretType:Number = NaN;    // turret type
 
+        public var rnd:CommonStatData = null;
+        public var cw:CommonStatData = null;
+        public var cmp:CommonStatData = null;
+
         // calculated
         public var r:Number = NaN;             // global win rate (int)
         public var xeff:Number = NaN;          // Eff in XVM Scale (int)
         public var xwn6:Number = NaN;          // WN6 in XVM Scale (int)
         public var xwn8:Number = NaN;          // WN8 in XVM Scale (int)
+
+        // internal
+        public var __v:Number = NaN;
+
+        // obsolete
+        public var solo:CommonStatData = null;
+        public var clanstat:CommonStatData = null;
     }
 }

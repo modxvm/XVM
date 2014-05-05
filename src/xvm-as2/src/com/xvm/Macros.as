@@ -299,17 +299,8 @@ class com.xvm.Macros
             dict[pname] = { };
         var pdata = dict[pname];
 
-        // vars
-        var r:Number = Utils.toInt(stat.r);
-        var eff:Number = Utils.toInt(stat.e);
-        var b:Number = Utils.toInt(stat.b);
-        var w:Number = Utils.toInt(stat.w);
-        var tr:Number = Utils.toInt(stat.v.r);
-        var tb:Number = Utils.toInt(stat.v.b);
-        var tw:Number = Utils.toInt(stat.v.w);
-
         // {{avglvl}}
-        pdata["avglvl"] = Utils.toInt(stat.lvl);
+        pdata["avglvl"] = stat.lvl;
         // {{xeff}}
         pdata["xeff"] = isNaN(stat.xeff) ? null : stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff;
         // {{xwn6}}
@@ -319,45 +310,45 @@ class com.xvm.Macros
         // {{xwn}}
         pdata["xwn"] = pdata["xwn8"];
         // {{eff}}
-        pdata["eff"] = eff;
+        pdata["eff"] = stat.e;
         // {{wn6}}
-        pdata["wn6"] = Utils.toInt(stat.wn6);
+        pdata["wn6"] = stat.wn6;
         // {{wn8}}
-        pdata["wn8"] = Utils.toInt(stat.wn8);
+        pdata["wn8"] = stat.wn8;
         // {{wn}}
         pdata["wn"] = pdata["wn8"];
         // {{e}}
-        pdata["e"] = isNaN(stat.v.te) ? NaN : stat.v.te >= 10 ? "E" : stat.v.te;
+        pdata["e"] = isNaN(stat.v.teff) ? null : stat.v.te >= 10 ? "E" : String(stat.v.te);
         // {{teff}}
-        pdata["teff"] = Utils.toInt(stat.v.teff);
+        pdata["teff"] = stat.v.teff;
 
         // {{rating}}
-        pdata["rating"] = r;
+        pdata["rating"] = stat.r;
         // {{battles}}
-        pdata["battles"] = b;
+        pdata["battles"] = stat.b;
         // {{wins}}
-        pdata["wins"] = w;
+        pdata["wins"] = stat.b;
         // {{kb}}
-        pdata["kb"] = isNaN(b) ? NaN : b / 1000;
+        pdata["kb"] = stat.b / 1000;
 
         // {{t-rating}}
-        pdata["t-rating"] = tr;
+        pdata["t-rating"] = stat.v.r;
         // {{t-battles}}
-        pdata["t-battles"] = tb;
+        pdata["t-battles"] = stat.v.b;
         // {{t-wins}}
-        pdata["t-wins"] = tw;
+        pdata["t-wins"] = stat.v.w;
         // {{t-kb}}
-        pdata["t-kb"] = isNaN(tb) ? NaN : tb / 1000;
+        pdata["t-kb"] = stat.v.b / 1000;
         // {{t-hb}}
-        pdata["t-hb"] = isNaN(tb) ? NaN : tb / 100;
+        pdata["t-hb"] = stat.v.b / 100.0;
         // {{tdb}}
-        pdata["tdb"] = Utils.toInt(stat.v.db);
+        pdata["tdb"] = stat.v.db;
         // {{tdv}}
-        pdata["tdv"] = Utils.toInt(stat.v.dv);
+        pdata["tdv"] = stat.v.dv;
         // {{tfb}}
-        pdata["tfb"] = Utils.toInt(stat.v.fb);
+        pdata["tfb"] = stat.v.fb;
         // {{tsb}}
-        pdata["tsb"] = Utils.toInt(stat.v.sb);
+        pdata["tsb"] = stat.v.sb;
 
         // Dynamic colors
         // {{c:xeff}}
@@ -373,8 +364,8 @@ class com.xvm.Macros
         pdata["c:xwn"] = pdata["c:xwn8"];
         pdata["c:xwn#d"] = pdata["c:xwn8#d"];
         // {{c:eff}}
-        pdata["c:eff"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff, "#", false);
-        pdata["c:eff#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff, "#", true);
+        pdata["c:eff"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, stat.e, "#", false);
+        pdata["c:eff#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, stat.e, "#", true);
         // {{c:wn6}}
         pdata["c:wn6"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN6, stat.wn6, "#", false);
         pdata["c:wn6#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN6, stat.wn6, "#", true);
@@ -388,20 +379,20 @@ class com.xvm.Macros
         pdata["c:e"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.v.te, "#", false);
         pdata["c:e#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.v.te, "#", true);
         // {{c:rating}}
-        pdata["c:rating"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, r, "#", false);
-        pdata["c:rating#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, r, "#", true);
+        pdata["c:rating"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, stat.r, "#", false);
+        pdata["c:rating#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, stat.r, "#", true);
         // {{c:kb}}
-        pdata["c:kb"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, b / 1000, "#", false);
-        pdata["c:kb#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, b / 1000, "#", true);
+        pdata["c:kb"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, stat.b / 1000, "#", false);
+        pdata["c:kb#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, stat.b / 1000, "#", true);
         // {{c:avglvl}}
         pdata["c:avglvl"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, stat.lvl, "#", false);
         pdata["c:avglvl#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_AVGLVL, stat.lvl, "#", true);
         // {{c:t-rating}}
-        pdata["c:t-rating"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, tr, "#", false);
-        pdata["c:t-rating#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, tr, "#", true);
+        pdata["c:t-rating"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, stat.v.r, "#", false);
+        pdata["c:t-rating#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, stat.v.r, "#", true);
         // {{c:t-battles}}
-        pdata["c:t-battles"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, tb, "#", false);
-        pdata["c:t-battles#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, tb, "#", true);
+        pdata["c:t-battles"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, stat.v.b, "#", false);
+        pdata["c:t-battles#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, stat.v.b, "#", true);
         // {{c:tdb}}
         pdata["c:tdb"] =   GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, stat.v.db, "#", false);
         pdata["c:tdb#d"] = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, stat.v.db, "#", true);
@@ -419,13 +410,13 @@ class com.xvm.Macros
         // {{a:xeff}}
         pdata["a:xeff"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xeff);
         // {{a:xwn6}}
-        pdata["a:xwn6"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwn6)
+        pdata["a:xwn6"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwn6);
         // {{a:xwn8}}
         pdata["a:xwn8"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwn8);
         // {{a:xwn}}
         pdata["a:xwn"] = pdata["a:xwn8"];
         // {{a:eff}}
-        pdata["a:eff"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_EFF, eff);
+        pdata["a:eff"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_EFF, stat.e);
         // {{a:wn6}}
         pdata["a:wn6"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WN6, stat.wn6);
         // {{a:wn8}}
@@ -435,15 +426,15 @@ class com.xvm.Macros
         // {{a:e}}
         pdata["a:e"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_E, stat.v.te);
         // {{a:rating}}
-        pdata["a:rating"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_RATING, r);
+        pdata["a:rating"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_RATING, stat.r);
         // {{a:kb}}
-        pdata["a:kb"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_KB, b / 1000);
+        pdata["a:kb"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_KB, stat.b / 1000);
         // {{a:avglvl}}
         pdata["a:avglvl"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_AVGLVL, stat.lvl);
         // {{a:t-rating}}
-        pdata["a:t-rating"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_RATING, tr);
+        pdata["a:t-rating"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_RATING, stat.v.r);
         // {{a:t-battles}}
-        pdata["a:t-battles"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TBATTLES, tb);
+        pdata["a:t-battles"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TBATTLES, stat.v.b);
         // {{a:tdb}}
         pdata["a:tdb"] = GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TDB, stat.v.db);
         // {{a:tdv}}
@@ -518,7 +509,7 @@ class com.xvm.Macros
         pdata["dmg-total"] = total;
 
         // {{dmg-avg}}
-        pdata["dmg-avg"] = hits.length == 0 ? 0 : Math.round(total / hits.length);
+        pdata["dmg-avg"] = hits.length == 0 ? 0 : total / hits.length;
 
         // {{dmg-player}}
         pdata["dmg-player"] = data.total;
