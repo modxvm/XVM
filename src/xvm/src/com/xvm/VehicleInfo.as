@@ -41,7 +41,10 @@ package com.xvm
             // return: HT text
             if (!vtype || !Config.config.texts.vtype[vtype])
                 return "";
-            return Config.config.texts.vtype[vtype];
+            var v:String = Config.config.texts.vtype[vtype];
+            if (v.indexOf("{{l10n:") >= 0)
+                v = Locale.get(v);
+            return v;
         }
 
         public static function getVIconName(vkey:String):String

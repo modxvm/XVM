@@ -7,7 +7,6 @@
     "formatNick": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>",
     "formatVehicle": "<font face='Consolas' size='11'><font color='{{c:avglvl|#666666}}'>{{avglvl%d|-}}</font> <font color='{{c:tdv|#666666}}'>{{tdv%0.1f|---}}|<font color='{{c:e|#666666}}'>{{e|-}}</font>|<font color='{{c:xeff|#666666}}'>{{xeff|--}}</font>|<font color='{{c:xwn8|#666666}}'>{{xwn8|--}}</font> <font color='{{c:kb|#666666}}'>{{kb%2d~k|--k}}</font></font>",
     //"formatVehicle": "{{vehicle}}",
-    //"formatVehicle": "|{{kb%-2d~k|--k}}|{{t-hb%-2d~h|--h}}|",
 
     "markersStat": "<b><font face='Symbol' color='#CCCCCC' size='11'><font color='{{c:t-battles}}'>·</font> <font color='{{c:xeff}}'>·</font> <font color='{{c:xwn8}}'>·</font></font></b>",
     "markersStatAlt": "<b><font face='$FieldFont' size='12'><font color='{{c:t-battles}}'>{{t-hb%d~h|-}}</font> <font color='{{c:xeff}}'>{{xeff|--}}</font> <font color='{{c:xwn8}}'>{{xwn8|--}}</font> <font color='{{c:rating}}'>{{rating%d~%|--}}</font></font></b>",
@@ -573,7 +572,7 @@
     "usa-T34_hvy": { "name": "т34.", "short": "т34" },
     "ussr-KV-1s": { "name": "квас", "short": "квс" }
   },
-  "texts": { "vtype": { "LT":  "ЛТ" } },
+  //"texts": { "vtype": { "LT":  "ЛТ" } },
   //"colors": ${"sirmax-colors.xc":"colors"},
   "consts": { "VM_COEFF_VMM_DEAD": 0.75 }
 }

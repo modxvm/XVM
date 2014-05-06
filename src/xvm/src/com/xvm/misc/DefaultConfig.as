@@ -1040,11 +1040,11 @@ package com.xvm.misc
             var c:CTexts = new CTexts();
             // Text for {{vtype}} macro
             c.vtype = new CTextsVType();
-            c.vtype.LT =  "LT",        // Text for light tanks
-            c.vtype.MT =  "MT",        // Text for medium tanks
-            c.vtype.HT =  "HT",        // Text for heavy tanks
-            c.vtype.SPG = "SPG",       // Text for arty
-            c.vtype.TD =  "TD"         // Text for tank destroyers
+            c.vtype.LT =  "{{l10n:LT}}",   // Text for light tanks
+            c.vtype.MT =  "{{l10n:MT}}",   // Text for medium tanks
+            c.vtype.HT =  "{{l10n:HT}}",   // Text for heavy tanks
+            c.vtype.SPG = "{{l10n:SPG}}",  // Text for arty
+            c.vtype.TD =  "{{l10n:TD}}"    // Text for tank destroyers
             return c;
         }
 

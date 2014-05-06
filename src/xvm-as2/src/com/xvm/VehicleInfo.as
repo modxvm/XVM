@@ -2,10 +2,8 @@
  * XVM Config
  * @author Maxim Schedriviy <m.schedriviy@gmail.com>
  */
-import com.xvm.Config;
-import com.xvm.JSONx;
-import com.xvm.DataTypes.VehicleData;
-import com.xvm.Logger;
+import com.xvm.*;
+import com.xvm.DataTypes.*;
 
 class com.xvm.VehicleInfo
 {
@@ -37,7 +35,10 @@ class com.xvm.VehicleInfo
         // return: HT text
         if (!vtype || !Config.config.texts.vtype[vtype])
             return "";
-        return Config.config.texts.vtype[vtype];
+        var v:String = Config.config.texts.vtype[vtype];
+        if (v.indexOf("{{l10n:") >= 0)
+            v = Locale.get(v);
+        return v;
     }
 
     public static function getVIconName(vkey:String):String
