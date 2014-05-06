@@ -7,6 +7,7 @@ package xvm.company.renderers
     import com.xvm.types.stat.*;
     import com.xvm.utils.*;
     import net.wg.gui.prebattle.squad.MessengerUtils;
+    import net.wg.utils.ILocale;
 
     public class TeamRendererHelper
     {
@@ -50,19 +51,25 @@ package xvm.company.renderers
             s += "<br>";
             // line 2
             s += "WN8: " + (!stat.wn8 ? "--" :
-                "<font color='" + MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8) + "'>" + (stat.xwn8 == 100 ? "XX" : (stat.xwn8 < 10 ? "0" : "") + stat.xwn8) + "</font>") + " ";
+                "<font color='" + MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn8) + "'>" +
+                (stat.xwn8 == 100 ? "XX" : (stat.xwn8 < 10 ? "0" : "") + stat.xwn8) + "</font>") + " ";
             s += "(" + (!stat.wn8 ? "-" :
-                "<font color='" + MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, stat.wn8) + "'>" + stat.wn8 + "</font>") + ") ";
+                "<font color='" + MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN8, stat.wn8) + "'>" +
+                App.utils.locale.integer(stat.wn8) + "</font>") + ") ";
             s += Locale.get("EFF") + ": " + (!stat.e ? "--" :
-                "<font color='" + MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff) + "'>" + (stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff) + "</font>") + " ";
+                "<font color='" + MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff) + "'>" +
+                (stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff) + "</font>") + " ";
             s += "(" + (!stat.e ? "-" :
-                "<font color='" + MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, stat.e) + "'>" + stat.e + "</font>") + ")";
+                "<font color='" + MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, stat.e) + "'>" +
+                App.utils.locale.integer(stat.e) + "</font>") + ")";
             s += "<br>";
             // line 3
             s += Locale.get("Fights") + ": " + (!stat.b ? "-" :
-                "<font color='" + MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, stat.b / 1000) + "'>" + stat.b + "</font>") + " ";
+                "<font color='" + MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, stat.b / 1000) + "'>" +
+                App.utils.locale.integer(stat.b) + "</font>") + " ";
             s += Locale.get("Wins") + ": " + (!stat.r ? "-" :
-                "<font color='" + MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, stat.r) + "'>" + stat.r + "%</font>") + " ";
+                "<font color='" + MacrosUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, stat.r) + "'>" +
+                Math.round(stat.r) + "%</font>") + " ";
             s += "<br>";
             // line 4
             s += Locale.get("Data was updated at") + ": <font color='#CCCCCC'>" + dt + "</font>";
