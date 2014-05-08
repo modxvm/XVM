@@ -108,12 +108,13 @@ class _MinimapCircles(object):
         view_distance = ((view_distance / 0.875) * (0.00375 * self.commander_skill + 0.5)) * self.other_bonus
 
         # Binocular Distance
-        binocular_distance = min(445, view_distance * 1.25)
+        binocular_distance = view_distance * 1.25
+        #binocular_distance = min(445, binocular_distance)
 
         # View Distance with Coated Optics (Binoculars don't include Coated Optics)
         if self.coated_optics == True:
             view_distance = min(view_distance * 1.1, 500)
-        view_distance = min(445, view_distance);
+        #view_distance = min(445, view_distance);
 
         # Artillery Range
         artillery_range = 0
@@ -126,10 +127,11 @@ class _MinimapCircles(object):
         for shell in descr.gun["shots"]:
             shell_range = max(shell_range, shell["maxDistance"])
 
-        #view_distance = 400
-        #binocular_distance = 500
-        #artillery_range = 600
-        #shell_range = 300
+        #if IS_DEVELOPMENT:
+        #    view_distance = 400
+        #    binocular_distance = 500
+        #    artillery_range = 600
+        #    shell_range = 300
 
         # Set values
         cfg['_internal'] = {

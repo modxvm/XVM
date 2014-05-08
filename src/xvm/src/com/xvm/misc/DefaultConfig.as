@@ -382,21 +382,21 @@ package com.xvm.misc
 
             c.circles = new CMinimapCircles();
             c.circles.enabled = true;
-            c.circles.major = [ { enabled: true, distance: 445, thickness: 0.75, alpha: 45, color: 0xFFCC66 } ];
+            c.circles.major = [ { enabled: true, distance: 445, thickness: 0.75, alpha: 45, color: "0xFFCC66" } ];
             c.circles.artillery = new CMinimapCirclesRange();
             c.circles.artillery.enabled = true;
             c.circles.artillery.alpha = 50;
-            c.circles.artillery.color = 0xFF0000;
+            c.circles.artillery.color = "0xFF0000";
             c.circles.artillery.thickness = 0.5;
             c.circles.view =  new CMinimapCirclesRange();
             c.circles.view.enabled = true;
             c.circles.view.alpha = 50;
-            c.circles.view.color = 0xFFFFFF;
+            c.circles.view.color = "0xFFFFFF";
             c.circles.view.thickness = 0.5;
             c.circles.shell =  new CMinimapCirclesRange();
             c.circles.shell.enabled = true;
             c.circles.shell.alpha = 50;
-            c.circles.shell.color = 0xFF0000;
+            c.circles.shell.color = "0xFF0000";
             c.circles.shell.thickness = 0.5;
             c.circles.special = [ ];
             c.circles._internal = new CMinimapCirclesInternal();

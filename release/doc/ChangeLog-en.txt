@@ -21,7 +21,7 @@
   * new option battle/allowHpInPanelsAndMinimap - enable {{hp*}} macros in
     players panels and minimap. WARNING: performance expensive
   * dynamic circles on the minimap. Options:
-      minimap/circles/artillery - maximum range of fire for arlillery
+      minimap/circles/artillery - maximum range of fire for artillery
       minimap/circles/shell - maximum range of shooting for revolver gun
       minimap/circles/view - view distance (dynamically changes when switching stereoscope)
 

@@ -10,21 +10,24 @@
         "major": [
             // 445 meters - maximum reveal distance. / 445 метров - максимальная дистанция засвета.
             { "enabled": true,  "distance": 445, "thickness": 0.75, "alpha": 45, "color": "0xFFCC66" },
-            // TODO: description
+            // 50 meters - X-ray reveal distance. / 50 метров - дистанция засвета "рентгеном".
             { "enabled": false, "distance": 50,  "thickness": 1,    "alpha": 100, "color": "0xFFFFFF" }
         ],
-        // TODO: description
+        // Maximum range of fire for artillery
         // Artillery gun fire range may differ depending on vehicle angle relative to ground
         // and vehicle height positioning relative to target. These factors are not considered.
         // See pics at http://goo.gl/ZqlPa
         // ------------------------------------------------------------------------------------------------
+        // Максимальная дальность стрельбы для артиллерии
         // Дальнобойность арты может меняться в зависимости от углов постановки машины на склонах местности
         // и высоте расположения машины относительно цели. На миникарте эти факторы не учитываются.
         // Подробнее по ссылке: http://goo.gl/ZqlPa
         "artillery": { "enabled": true, "alpha": 50, "color": "0xFF0000", "thickness": 0.5 },
-        // TODO: description
+        // Maximum range of shooting for revolver gun
+        // Максимальная дальность полета снаряда для барабанных танков
         "shell":     { "enabled": true, "alpha": 50, "color": "0xFF0000", "thickness": 0.5 },
-        // TODO: description
+        // View distance (dynamically changes when switching stereoscope)
+        // Дальность обзора (динамически изменяется при включении стереотрубы)
         "view":      { "enabled": true, "alpha": 50, "color": "0xFFFFFF", "thickness": 0.5 },
         // Special circles dependent on vehicle type.
         // Many configuration lines for the same vehicle make many circles.
