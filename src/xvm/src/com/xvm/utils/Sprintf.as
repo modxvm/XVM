@@ -383,8 +383,8 @@ public class Sprintf
             intPortion = (Math.abs(Number(value))).toString();
             decPortion = "0";
         } else {
-            var intPortionNum:Number = Number(value.substring(0, value.indexOf('.')));
-            intPortion = (properties & kPAD_ZEROES || length > 0) ? (Math.abs(intPortionNum)).toString() : "";
+            var intPortionNum:Number = Math.abs(Number(value.substring(0, value.indexOf('.'))));
+            intPortion = (properties & kPAD_ZEROES || length > 0 || intPortionNum != 0) ? intPortionNum.toString() : "";
             decPortion = value.substr(value.indexOf('.') + 1);
         }
 
@@ -397,7 +397,7 @@ public class Sprintf
                 var dec:Number = Math.round(Math.pow(10,precision) * Number('0.' + decPortion)) / Math.pow(10,precision);
                 if (dec == 1) {
                     decPortion = '0';
-                    if (isNaN(intPortion))
+                    if (intPortion == '')
                         intPortion = '0';
                     intPortion = ((Math.abs(Number(intPortion)) + 1) * (Number(intPortion) >= 0 ? 1 : -1)).toString();
                 } else {
