@@ -25,18 +25,12 @@
     USAGE:
     Sprintf.format(format, [args...])
         implementation of c-style string formatting
-    Sprintf.trace(format, [args...])
-        shortcut to trace a formatted string
 
     ERRORS:
     By default all errors are silently ignored (since that's what makes sense to me).
-    To see error messages in trace output, use this line:
-        Sprintf.TRACE = true;
-    To see error messages in the result output, use this line:
-        Sprintf.DEBUG = true;
-
 
     VERSION HISTORY
+    v3.0    Modified for XVM
     v2.0    Wrapped into an AS2.0 class by Patrick Mineault (thanks!)
             http://www.5etdemi.com/
             http://www.5etdemi.com/blog/
@@ -61,27 +55,23 @@ public class Sprintf
     private static var kLONG_VALUE:int    = 0x20;
     private static var kUSE_SEPARATOR:int = 0x40;
 
-    private static var DEBUG:Boolean      = false;
-    private static var TRACE:Boolean      = false;
-
     public static function format(format:String, ...rest):String
     {
         if (format == null) return '';
 
-        var formatArr:Array = format.split(''); // Array is faster then charAt
-
         var destString:String    = '';
-        var argIndex:int         = 0;        // our place in arguments[]
-        var formatIndex:int      = 0;        // our place in the format string
-        var percentIndex:int;                // the location of the next '%' delimiter
+        var argIndex:int         = 0;  // our place in arguments[]
+        var formatIndex:int      = 0;  // our place in the format string
+        var percentIndex:int;          // the location of the next '%' delimiter
         var ch:String;
+
+        var formatArr:Array = format.split(''); // Array is faster then charAt
 
         // -=-=-=-=-=-=-=-=-=-=-=-=-=- vars for dealing with each field
         var value:*, length:int, precision:int;
-        var properties:*;               // options: left justified, zero padding, etc...
-        var fieldCount:int;             // tracks number of sections in field
-        var fieldOutcome:*;             // when set to true, field parsed successfully
-                                        // when set to a string, error resulted
+        var properties:int;  // options: left justified, zero padding, etc...
+        var fieldCount:int;  // tracks number of sections in field
+        var fieldOutcome:*;  // when set to true, field parsed successfully, when set to a string, error resulted
 
         while (formatIndex < format.length) {
             percentIndex = format.indexOf('%',formatIndex);
@@ -233,11 +223,6 @@ public class Sprintf
                             break;
                     }
                 }
-
-                if (fieldOutcome != true) {
-                    if (Sprintf.DEBUG) destString += fieldOutcome;
-                    if (Sprintf.TRACE) trace(fieldOutcome);
-                }
             }
         }
 
@@ -278,7 +263,7 @@ public class Sprintf
     }
 
     // integer
-    private static function formatD(value:*,properties:*,length:int,precision:int):String
+    private static function formatD(value:*,properties:int,length:int,precision:int):String
     {
         var output:String = '';
         value = Number(value);
@@ -296,7 +281,7 @@ public class Sprintf
     }
 
     // octal
-    private static function formatO(value:*,properties:*,length:int,precision:int):String
+    private static function formatO(value:*,properties:int,length:int,precision:int):String
     {
         var output:String = '';
         var prefix:String = '';
@@ -318,7 +303,7 @@ public class Sprintf
     }
 
     // hexidecimal
-    private static function formatX(value:*, properties:*, length:int, precision:int, upper:Boolean):String
+    private static function formatX(value:*, properties:int, length:int, precision:int, upper:Boolean):String
         {
         var output:String = '';
         var prefix:String = '';
@@ -348,7 +333,7 @@ public class Sprintf
     }
 
     // scientific notation
-    private static function formatE(value:*,properties:*,length:int,precision:int,upper:Boolean):String
+    private static function formatE(value:*,properties:int,length:int,precision:int,upper:Boolean):String
     {
         var output:String = '';
         var expCount:int = 0;
@@ -382,7 +367,7 @@ public class Sprintf
     }
 
     // float (or real)
-    private static function formatF(value:*,properties:*,length:int,precision:int):String
+    private static function formatF(value:*,properties:int,length:int,precision:int):String
     {
         var output:String = '';
         var intPortion:String = '';
@@ -412,6 +397,8 @@ public class Sprintf
                 var dec:Number = Math.round(Math.pow(10,precision) * Number('0.' + decPortion)) / Math.pow(10,precision);
                 if (dec == 1) {
                     decPortion = '0';
+                    if (isNaN(intPortion))
+                        intPortion = '0';
                     intPortion = ((Math.abs(Number(intPortion)) + 1) * (Number(intPortion) >= 0 ? 1 : -1)).toString();
                 } else {
                     decPortion = String(dec);
@@ -439,7 +426,7 @@ public class Sprintf
     }
 
     // shorter of float or scientific
-    private static function formatG(value:*,properties:*,length:int,precision:int,upper:Boolean):String
+    private static function formatG(value:*,properties:int,length:int,precision:int,upper:Boolean):String
     {
 
         // use 1 as the length for the test because the
@@ -455,7 +442,7 @@ public class Sprintf
     }
 
     // string
-    private static function formatS(value:*,properties:*,length:int,precision:int):String
+    private static function formatS(value:*,properties:int,length:int,precision:int):String
     {
         var output:String = new String(value);
 
