@@ -126,6 +126,9 @@ class _MinimapCircles(object):
         shell_range = 0
         for shell in descr.gun["shots"]:
             shell_range = max(shell_range, shell["maxDistance"])
+        # do not show for range more then 707m (maximum marker visibility range)
+        if shell_range >= 707:
+            shell_range = 0
 
         #if IS_DEVELOPMENT:
         #    view_distance = 400
