@@ -22,7 +22,7 @@ If you can write code, [you can help us](https://confluence.atlassian.com/displa
 On our forums most messages in Russian, but you can use [Google Translate](https://translate.google.com/), if you want to understand the essence.
 You can write in english in any topics of our forum. You can ask your questions in English, and get answers to them in English as well.
 
-Also you can change the interface language to english for your convenience:
+Also you can change the interface language to English for your convenience:
 
 ![Screenshot: How to change interface Language on forums](http://www.modxvm.com/assets/additional/kr.cm_lang_menu.png)
 
