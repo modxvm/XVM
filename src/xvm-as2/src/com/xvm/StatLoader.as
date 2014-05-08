@@ -82,7 +82,7 @@ class com.xvm.StatLoader
     public function CalculateStatValues(stat:StatData, forceTeff:Boolean):Void
     {
         // rating (GWR)
-        stat.r = stat.b > 0 ? stat.w / stat.b * 100 : 0;
+        stat.r = stat.b > 0 ? stat.w / stat.b * 100 : NaN;
 
         if (stat.v == null)
         {
