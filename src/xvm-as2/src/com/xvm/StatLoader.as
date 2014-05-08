@@ -75,7 +75,7 @@ class com.xvm.StatLoader
             Stat.s_loaded = true;
             _loading = false;
             //Logger.add("Stat Loaded");
-            GlobalEventDispatcher.dispatchEvent({type: Stat.E_STAT_LOADED});
+            GlobalEventDispatcher.dispatchEvent({type: Defines.E_STAT_LOADED});
         }
     }
 

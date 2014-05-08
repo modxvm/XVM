@@ -58,8 +58,8 @@ class wot.PlayersPanel.PlayersPanel
 
         spotStatusModel = null;
 
-        GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
-        GlobalEventDispatcher.addEventListener(Stat.E_STAT_LOADED, wrapper, wrapper.update);
+        GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, onConfigLoaded);
+        GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, wrapper, wrapper.update);
         GlobalEventDispatcher.addEventListener(Defines.E_BATTLE_STATE_CHANGED, wrapper, wrapper.update);
 
         /** Minimap needs to know loaded status */

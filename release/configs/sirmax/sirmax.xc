@@ -7,7 +7,7 @@
     "formatNick": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>",
     "formatVehicle": "<font face='Consolas' size='11'><font color='{{c:avglvl|#666666}}'>{{avglvl%d|-}}</font> <font color='{{c:tdv|#666666}}'>{{tdv%0.1f|---}}|<font color='{{c:e|#666666}}'>{{e|-}}</font>|<font color='{{c:xeff|#666666}}'>{{xeff|--}}</font>|<font color='{{c:xwn8|#666666}}'>{{xwn8|--}}</font> <font color='{{c:kb|#666666}}'>{{kb%2d~k|--k}}</font></font>",
     //"formatVehicle": "{{vehicle}}",
-    //"formatVehicle": "{{tfb%0.1f|-.-}} {{tfb%.1f|-.-}}",
+    //"formatVehicle": "<font color='{{c:rating}}'>{{rating%2d~%|--%}}</font>",
 
     "markersStat": "<b><font face='Symbol' color='#CCCCCC' size='11'><font color='{{c:t-battles}}'>·</font> <font color='{{c:xeff}}'>·</font> <font color='{{c:xwn8}}'>·</font></font></b>",
     "markersStatAlt": "<b><font face='$FieldFont' size='12'><font color='{{c:t-battles}}'>{{t-hb%d~h|-}}</font> <font color='{{c:xeff}}'>{{xeff|--}}</font> <font color='{{c:xwn8}}'>{{xwn8|--}}</font> <font color='{{c:rating}}'>{{rating%d~%|--}}</font></font></b>",
@@ -174,7 +174,7 @@
     //"iconScale": 2,
     "circles": {
         "major": [
-            { "enabled": true, "distance": 445, "thickness": 0.3, "alpha": 65, "color": "0xFF3333" },
+            { "enabled": true, "distance": 445, "thickness": 0.3, "alpha": 50, "color": "0xFFCC66" },
             { "enabled": true, "distance": 50, "thickness": 1, "alpha": 50, "color": "0xFFFFFF" }
         ]
     },

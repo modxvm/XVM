@@ -31,8 +31,8 @@ class wot.VehicleMarkersManager.VehicleMarkersCanvas
         _global.gfxExtensions = true;
         _global.noInvisibleAdvance = true;
 
-        GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, StatLoader.LoadData);
-        GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, onConfigLoaded);
+        GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, StatLoader.LoadData);
+        GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, onConfigLoaded);
         ExternalInterface.addCallback(Cmd.RESPOND_CONFIG, Config.instance, Config.instance.GetConfigCallback);
     }
 

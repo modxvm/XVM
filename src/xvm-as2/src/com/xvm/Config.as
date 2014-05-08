@@ -6,9 +6,6 @@ import com.xvm.*;
 
 class com.xvm.Config
 {
-    // Constants
-    public static var E_CONFIG_LOADED = "config_loaded";
-
     // Public vars
     public static var config:Object = null;
 
@@ -34,7 +31,7 @@ class com.xvm.Config
             VehicleInfo.onVehicleInfoData(vehInfoData);
 
             Logger.add("Config: Loaded");
-            GlobalEventDispatcher.dispatchEvent( { type: Config.E_CONFIG_LOADED } );
+            GlobalEventDispatcher.dispatchEvent( { type: Defines.E_CONFIG_LOADED } );
         }
         catch (e:Error)
         {

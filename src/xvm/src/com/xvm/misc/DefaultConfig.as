@@ -368,162 +368,162 @@ package com.xvm.misc
             c.selfIconAlpha = 100;
             c.cameraAlpha = 100;
             c.iconScale = 1;
-            c.zoom = {
-              pixelsBack: 160,
-              centered: true
-            };
-            c.labels = {
-              vehicleclassmacro: {
-                light: "\u2022",
-                medium: "\u2022",
-                heavy: "\u2022",
-                td: "\u2022",
-                spg: "\u25AA",
-                superh: "\u2022"
-              },
-              units: {
-                revealedEnabled: true,
-                lostEnemyEnabled: true,
-                format: {
-                  ally:           "<span class='mm_a'>{{vehicle}}</span>",
-                  teamkiller:     "<span class='mm_t'>{{vehicle}}</span>",
-                  enemy:          "<span class='mm_e'>{{vehicle}}</span>",
-                  squad:          "<textformat leading='-2'><span class='mm_s'><i>{{nick%.5s}}</i>\n{{vehicle}}</span><textformat>",
-                  oneself:        "",
-                  lostally:       "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_la'><i>{{vehicle}}</i></span>",
-                  lostteamkiller: "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_lt'><i>{{vehicle}}</i></span>",
-                  lost:           "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_l'><i>{{vehicle}}</i></span>",
-                  lostsquad:      "<textformat leading='-4'><span class='mm_dot'>{{vehicle-class}}</span><span class='mm_ls'><i>{{nick%.5s}}</i>\n   {{vehicle}}</span><textformat>",
-                  deadally:       "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_da'></span>",
-                  deadteamkiller: "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_dt'></span>",
-                  deadenemy:      "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_de'></span>",
-                  deadsquad:      "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_ds'><i>{{nick%.5s}}</i></span>"
-                },
-                css: {
-                  ally:            ".mm_a{font-family:$FieldFont; font-size:8px; color:#C8FFA6;}",
-                  teamkiller:      ".mm_t{font-family:$FieldFont; font-size:8px; color:#A6F8FF;}",
-                  enemy:           ".mm_e{font-family:$FieldFont; font-size:8px; color:#FCA9A4;}",
-                  squad:           ".mm_s{font-family:$FieldFont; font-size:8px; color:#FFC099;}",
-                  lost:            ".mm_l{font-family:$FieldFont; font-size:8px; color:#FCA9A4;} .mm_dot{font-family:Arial; font-size:17px; color:#FCA9A4;}",
-                  oneself:         ".mm_o{font-family:$FieldFont; font-size:8px; color:#FFFFFF;}",
-                  lostally:       ".mm_la{font-family:$FieldFont; font-size:8px; color:#C8FFA6;} .mm_dot{font-family:Arial; font-size:17px; color:#B4E595;}",
-                  lostteamkiller: ".mm_lt{font-family:$FieldFont; font-size:8px; color:#A6F8FF;} .mm_dot{font-family:Arial; font-size:17px; color:#00D2E5;}",
-                  lost:            ".mm_l{font-family:$FieldFont; font-size:8px; color:#FCA9A4;} .mm_dot{font-family:Arial; font-size:17px; color:#E59995;}",
-                  lostsquad:      ".mm_ls{font-family:$FieldFont; font-size:8px; color:#FFD099;} .mm_dot{font-family:Arial; font-size:17px; color:#E5BB8A;}",
-                  deadally:       ".mm_da{font-family:$FieldFont; font-size:8px; color:#6E8C5B;} .mm_dot{font-family:Arial; font-size:17px; color:#004D00;}",
-                  deadteamkiller: ".mm_dt{font-family:$FieldFont; font-size:8px; color:#5B898C;} .mm_dot{font-family:Arial; font-size:17px; color:#043A40;}",
-                  deadenemy:      ".mm_de{font-family:$FieldFont; font-size:8px; color:#996763;} .mm_dot{font-family:Arial; font-size:17px; color:#4D0300;}",
-                  deadsquad:      ".mm_ds{font-family:$FieldFont; font-size:8px; color:#997C5C;} .mm_dot{font-family:Arial; font-size:17px; color:#663800;}"
-                },
-                shadow: {
-                  ally:
-                   { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 4 },
-                  teamkiller:
-                   { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 4 },
-                  enemy:
-                   { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 4 },
-                  squad:
-                   { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 4 },
-                  oneself:
-                   { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 4 },
-                  lostally:
-                   { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 6, strength: 4 },
-                  lostteamkiller:
-                   { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 6, strength: 4 },
-                  lost:
-                   { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 6, strength: 4 },
-                  lostsquad:
-                   { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 6, strength: 4 },
-                  deadally:
-                   { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 3 },
-                  deadteamkiller:
-                   { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 3 },
-                  deadenemy:
-                   { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 3 },
-                  deadsquad:
-                   { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 3 }
-                },
-                offset: {
-                  ally:           {x: 3, y: -1},
-                  teamkiller:     {x: 3, y: -1},
-                  enemy:          {x: 3, y: -1},
-                  squad:          {x: 3, y: -2},
-                  oneself:        {x: 0, y: 0},
-                  lostally:       {x: -5, y: -11},
-                  lostteamkiller: {x: -5, y: -11},
-                  lost:           {x: -5, y: -11},
-                  lostsquad:      {x: -5, y: -11},
-                  deadally:       {x: -5, y: -11},
-                  deadteamkiller: {x: -5, y: -11},
-                  deadenemy:      {x: -5, y: -11},
-                  deadsquad:      {x: -5, y: -11}
-                },
-                alpha : {
-                  ally: 100,
-                  teamkiller: 100,
-                  enemy: 100,
-                  squad: 100,
-                  oneself: 100,
-                  lostally: 70,
-                  lostteamkiller: 70,
-                  lost: 70,
-                  lostsquad: 70,
-                  deadally: 50,
-                  deadteamkiller: 50,
-                  deadenemy: 0,
-                  deadsquad: 50
-                }
-              },
-              mapSize: {
-                enabled: true,
-                format: "<b>{{cellsize}}0 m</b>",
-                css: "font-size:10px; color:#FFCC66;",
-                alpha: 80,
-                offsetX: 0,
-                offsetY: 0,
-                shadow: {
-                  enabled: true,
-                  color: "0x000000",
-                  distance: 0,
-                  angle: 0,
-                  alpha: 80,
-                  blur: 2,
-                  strength: 3
-                },
-                width: 100,
-                height: 30
-              }
-            };
-            c.circles = {
-              enabled: true,
-              major: [
-                { enabled: true, distance: 445, thickness: 0.75, alpha: 45, color: 0xFFCC66 },
-                { enabled: false, distance: 50, thickness: 1, alpha: 100, color: 0xFFFFFF }
-              ],
-              special: [
-              ]
-            };
-            c.square = {
-              enabled: false,
-              artilleryEnabled: false,
-              thickness: 0.7,
-              alpha: 40,
-              color: "0xFFFFFF"
-            };
-            c.lines = {
-              enabled: true,
-              vehicle: [
+
+            c.zoom = new CMinimapZoom();
+            c.zoom.pixelsBack = 160;
+            c.zoom.centered = true;
+
+            c.square = new CMinimapSquare();
+            c.square.enabled = false;
+            c.square.artilleryEnabled = false;
+            c.square.thickness = 0.7;
+            c.square.alpha = 40;
+            c.square.color = "0xFFFFFF";
+
+            c.circles = new CMinimapCircles();
+            c.circles.enabled = true;
+            c.circles.major = [ { enabled: true, distance: 445, thickness: 0.75, alpha: 45, color: 0xFFCC66 } ];
+            c.circles.artillery = new CMinimapCirclesRange();
+            c.circles.artillery.enabled = true;
+            c.circles.artillery.alpha = 50;
+            c.circles.artillery.color = 0xFF0000;
+            c.circles.artillery.thickness = 0.5;
+            c.circles.view =  new CMinimapCirclesRange();
+            c.circles.view.enabled = true;
+            c.circles.view.alpha = 50;
+            c.circles.view.color = 0xFFFFFF;
+            c.circles.view.thickness = 0.5;
+            c.circles.shell =  new CMinimapCirclesRange();
+            c.circles.shell.enabled = true;
+            c.circles.shell.alpha = 50;
+            c.circles.shell.color = 0xFF0000;
+            c.circles.shell.thickness = 0.5;
+            c.circles.special = [ ];
+            c.circles._internal = new CMinimapCirclesInternal();
+            c.circles._internal.view_distance = 0;
+            c.circles._internal.binocular_distance = 0;
+            c.circles._internal.shell_range = 0;
+            c.circles._internal.artillery_range = 0;
+
+            c.lines = new CMinimapLines();
+            c.lines.enabled = true;
+            c.lines.vehicle = [
                 { enabled: false, from: 20,  to: 300, inmeters: false, thickness: 0.4, alpha: 35, color: 0xFFCC66 }
-              ],
-              camera: [
+            ];
+            c.lines.camera = [
                 { enabled: false, from: 50,  to: 100, inmeters: true, thickness: 2,   alpha: 60, color: 0xEE0044},
                 { enabled: false, from: 200, to: 300, inmeters: true, thickness: 1.5, alpha: 45, color: 0xEE0044},
                 { enabled: false, from: 350, to: 445, inmeters: true, thickness: 1,   alpha: 30, color: 0xEE0044}
-              ],
-              traverseAngle: [
-                { enabled: true, from: 20,  to: 300, inmeters: false, thickness: 0.4, alpha: 35, color: 0xFFCC66}
-              ]
+            ];
+            c.lines.traverseAngle = [
+                { enabled: true, from: 20,  to: 300, inmeters: false, thickness: 0.4, alpha: 35, color: 0xFFCC66 }
+            ];
+
+            c.labels = new CMinimapLabels();
+            c.labels.vehicleclassmacro = new CMinimapLabelsVehicleClassMacro();
+            c.labels.vehicleclassmacro.light = "\u2022";
+            c.labels.vehicleclassmacro.medium =  "\u2022";
+            c.labels.vehicleclassmacro.heavy = "\u2022";
+            c.labels.vehicleclassmacro.td = "\u2022";
+            c.labels.vehicleclassmacro.spg = "\u25AA";
+            c.labels.vehicleclassmacro.superh = "\u2022";
+            c.labels.units = new CMinimapLabelsUnits();
+            c.labels.units.revealedEnabled = true;
+            c.labels.units.lostEnemyEnabled = true;
+            c.labels.units.format = {
+                ally:           "<span class='mm_a'>{{vehicle}}</span>",
+                teamkiller:     "<span class='mm_t'>{{vehicle}}</span>",
+                enemy:          "<span class='mm_e'>{{vehicle}}</span>",
+                squad:          "<textformat leading='-2'><span class='mm_s'><i>{{nick%.5s}}</i>\n{{vehicle}}</span><textformat>",
+                oneself:        "",
+                lostally:       "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_la'><i>{{vehicle}}</i></span>",
+                lostteamkiller: "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_lt'><i>{{vehicle}}</i></span>",
+                lost:           "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_l'><i>{{vehicle}}</i></span>",
+                lostsquad:      "<textformat leading='-4'><span class='mm_dot'>{{vehicle-class}}</span><span class='mm_ls'><i>{{nick%.5s}}</i>\n   {{vehicle}}</span><textformat>",
+                deadally:       "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_da'></span>",
+                deadteamkiller: "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_dt'></span>",
+                deadenemy:      "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_de'></span>",
+                deadsquad:      "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_ds'><i>{{nick%.5s}}</i></span>"
             };
+            c.labels.units.css = {
+                ally:            ".mm_a{font-family:$FieldFont; font-size:8px; color:#C8FFA6;}",
+                teamkiller:      ".mm_t{font-family:$FieldFont; font-size:8px; color:#A6F8FF;}",
+                enemy:           ".mm_e{font-family:$FieldFont; font-size:8px; color:#FCA9A4;}",
+                squad:           ".mm_s{font-family:$FieldFont; font-size:8px; color:#FFC099;}",
+                lost:            ".mm_l{font-family:$FieldFont; font-size:8px; color:#FCA9A4;} .mm_dot{font-family:Arial; font-size:17px; color:#FCA9A4;}",
+                oneself:         ".mm_o{font-family:$FieldFont; font-size:8px; color:#FFFFFF;}",
+                lostally:       ".mm_la{font-family:$FieldFont; font-size:8px; color:#C8FFA6;} .mm_dot{font-family:Arial; font-size:17px; color:#B4E595;}",
+                lostteamkiller: ".mm_lt{font-family:$FieldFont; font-size:8px; color:#A6F8FF;} .mm_dot{font-family:Arial; font-size:17px; color:#00D2E5;}",
+                lost:            ".mm_l{font-family:$FieldFont; font-size:8px; color:#FCA9A4;} .mm_dot{font-family:Arial; font-size:17px; color:#E59995;}",
+                lostsquad:      ".mm_ls{font-family:$FieldFont; font-size:8px; color:#FFD099;} .mm_dot{font-family:Arial; font-size:17px; color:#E5BB8A;}",
+                deadally:       ".mm_da{font-family:$FieldFont; font-size:8px; color:#6E8C5B;} .mm_dot{font-family:Arial; font-size:17px; color:#004D00;}",
+                deadteamkiller: ".mm_dt{font-family:$FieldFont; font-size:8px; color:#5B898C;} .mm_dot{font-family:Arial; font-size:17px; color:#043A40;}",
+                deadenemy:      ".mm_de{font-family:$FieldFont; font-size:8px; color:#996763;} .mm_dot{font-family:Arial; font-size:17px; color:#4D0300;}",
+                deadsquad:      ".mm_ds{font-family:$FieldFont; font-size:8px; color:#997C5C;} .mm_dot{font-family:Arial; font-size:17px; color:#663800;}"
+            };
+            c.labels.units.shadow = {
+                ally:           { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 4 },
+                teamkiller:     { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 4 },
+                enemy:          { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 4 },
+                squad:          { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 4 },
+                oneself:        { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 4 },
+                lostally:       { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 6, strength: 4 },
+                lostteamkiller: { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 6, strength: 4 },
+                lost:           { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 6, strength: 4 },
+                lostsquad:      { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 6, strength: 4 },
+                deadally:       { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 3 },
+                deadteamkiller: { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 3 },
+                deadenemy:      { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 3 },
+                deadsquad:      { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 3 }
+            };
+            c.labels.units.offset = {
+                ally:           {x: 3, y: -1},
+                teamkiller:     {x: 3, y: -1},
+                enemy:          {x: 3, y: -1},
+                squad:          {x: 3, y: -2},
+                oneself:        {x: 0, y: 0},
+                lostally:       {x: -5, y: -11},
+                lostteamkiller: {x: -5, y: -11},
+                lost:           {x: -5, y: -11},
+                lostsquad:      {x: -5, y: -11},
+                deadally:       {x: -5, y: -11},
+                deadteamkiller: {x: -5, y: -11},
+                deadenemy:      {x: -5, y: -11},
+                deadsquad:      {x: -5, y: -11}
+            };
+            c.labels.units.alpha = {
+                ally: 100,
+                teamkiller: 100,
+                enemy: 100,
+                squad: 100,
+                oneself: 100,
+                lostally: 70,
+                lostteamkiller: 70,
+                lost: 70,
+                lostsquad: 70,
+                deadally: 50,
+                deadteamkiller: 50,
+                deadenemy: 0,
+                deadsquad: 50
+            };
+            c.labels.mapSize = new CMinimapLabelsMapSize();
+            c.labels.mapSize.enabled = true;
+            c.labels.mapSize.format = "<b>{{cellsize}}0 m</b>";
+            c.labels.mapSize.css = "font-size:10px; color:#FFCC66;";
+            c.labels.mapSize.alpha = 80;
+            c.labels.mapSize.offsetX = 0;
+            c.labels.mapSize.offsetY = 0;
+            c.labels.mapSize.shadow = {
+                enabled: true,
+                color: "0x000000",
+                distance: 0,
+                angle: 0,
+                alpha: 80,
+                blur: 2,
+                strength: 3
+            };
+            c.labels.mapSize.width = 100;
+            c.labels.mapSize.height = 30;
             return c;
         }
 

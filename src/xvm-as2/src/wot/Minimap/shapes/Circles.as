@@ -1,10 +1,10 @@
-import com.xvm.VehicleInfo;
-import wot.PlayersPanel.PlayersPanelProxy;
-import wot.Minimap.dataTypes.Player;
-import wot.Minimap.model.externalProxy.MapConfig;
-import wot.Minimap.dataTypes.cfg.CircleCfg;
-import wot.Minimap.shapes.ShapeAttach;
-import com.xvm.DataTypes.VehicleData;
+import com.xvm.*;
+import com.xvm.DataTypes.*;
+import wot.Minimap.dataTypes.*;
+import wot.Minimap.model.externalProxy.*;
+import wot.Minimap.dataTypes.cfg.*;
+import wot.Minimap.shapes.*;
+import wot.PlayersPanel.*;
 
 /**
  * Draws circles around player to indicate distances.
@@ -14,6 +14,9 @@ import com.xvm.DataTypes.VehicleData;
 class wot.Minimap.shapes.Circles extends ShapeAttach
 {
     private var CIRCLE_SIDES:Number = 350; /** Defines circle smoothness\angularity */
+
+    private var mc_view:MovieClip = null;
+    private var mc_binocular:MovieClip = null;
 
     public function Circles()
     {
@@ -33,6 +36,36 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
                 drawCircle(radius, circleCfg.thickness, circleCfg.color, circleCfg.alpha);
             }
         }
+
+        var cfg = MapConfig.circles;
+        //Logger.addObject(cfg, 2);
+
+        if (cfg.artillery.enabled)
+        {
+            var radius:Number =  scaleFactor * cfg._internal.artillery_range;
+            if (radius > 0)
+                drawCircle(radius, cfg.artillery.thickness, cfg.artillery.color, cfg.artillery.alpha);
+        }
+
+        if (cfg.shell.enabled)
+        {
+            var radius:Number =  scaleFactor * cfg._internal.shell_range;
+            if (radius > 0)
+                drawCircle(radius, cfg.shell.thickness, cfg.shell.color, cfg.shell.alpha);
+        }
+
+        if (cfg.view.enabled)
+        {
+            var radius:Number =  scaleFactor * cfg._internal.view_distance;
+            if (radius > 0)
+                mc_view = drawCircle(radius, cfg.view.thickness, cfg.view.color, cfg.view.alpha);
+            radius =  scaleFactor * cfg._internal.binocular_distance;
+            if (radius > 0)
+                mc_binocular = drawCircle(radius, cfg.view.thickness, cfg.view.color, cfg.view.alpha);
+            switchBinoculars(false);
+        }
+
+        GlobalEventDispatcher.addEventListener(Defines.E_BINOCULAR_TOGGLED, this, onBinocularToggled);
     }
 
     /** Private */
@@ -77,6 +110,8 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
             var pointY:Number = centerY + ySteps * radius;
             mc.lineTo(pointX, pointY);
         }
+
+        return mc;
     }
 
     private function magicTrigFunctionX(pointRatio):Number
@@ -87,5 +122,18 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
     private function magicTrigFunctionY(pointRatio):Number
     {
         return Math.sin(pointRatio*2*Math.PI);
+    }
+
+    private function onBinocularToggled(event)
+    {
+        switchBinoculars(event.value);
+    }
+
+    private function switchBinoculars(enable:Boolean)
+    {
+        if (mc_view)
+            mc_view._visible = !enable;
+        if (mc_binocular)
+            mc_binocular._visible = enable;
     }
 }

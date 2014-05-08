@@ -4,11 +4,9 @@
  */
 package com.xvm.types.cfg
 {
-    public dynamic class CExpertPanel extends Object
+    public class CExpertPanel extends Object
     {
-        //expertPanel: {
-          //delay: 15,
-          //scale: 150
-        //},
+        public var delay:Number;
+        public var scale:Number;
     }
 }

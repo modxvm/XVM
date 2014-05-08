@@ -84,7 +84,7 @@ def ProfileTechniqueWindowRequestData(base, self, data):
 #        self.as_responseVehicleDossierS({})
 
 def LoginView_onSetOptions(base, self, optionsList, host):
-    log('LoginView_onSetOptions')
+    #log('LoginView_onSetOptions')
     if g_xvm.config is None or not g_xvm.config['login']['saveLastServer']:
         base(self, optionsList, host)
     else:
@@ -117,6 +117,10 @@ def Vehicle_onHealthChanged(self, newHealth, attackerID, attackReasonID):
     #debug("> Vehicle_onHealthChanged: %i, %i, %i" % (newHealth, attackerID, attackReasonID))
     g_xvm.updateBattleState(self)
 
+def onArenaCreated():
+    #debug('> onArenaCreated')
+    g_xvm.updateCurrentVehicle()
+
 #####################################################################
 # Register events
 
@@ -141,6 +145,9 @@ def _RegisterEvents():
     from Avatar import PlayerAvatar
     RegisterEvent(PlayerAvatar, 'vehicle_onEnterWorld', PlayerAvatar_vehicle_onEnterWorld)
     RegisterEvent(PlayerAvatar, 'vehicle_onLeaveWorld', PlayerAvatar_vehicle_onLeaveWorld)
+
+    from PlayerEvents import g_playerEvents
+    g_playerEvents.onArenaCreated += onArenaCreated
 
     from Vehicle import Vehicle
     #RegisterEvent(Vehicle, 'set_health', Vehicle_set_health, True)

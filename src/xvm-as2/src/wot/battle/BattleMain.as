@@ -2,11 +2,11 @@
  * XVM
  * @author Maxim Schedriviy <m.schedriviy(at)gmail.com>
  */
-import flash.external.*;
 import com.greensock.*;
 import com.greensock.plugins.*;
 import com.xvm.*;
 import com.xvm.DataTypes.*;
+import flash.external.*;
 import wot.battle.*;
 
 class wot.battle.BattleMain
@@ -25,8 +25,8 @@ class wot.battle.BattleMain
         _global.noInvisibleAdvance = true;
 
         ExternalInterface.addCallback(Cmd.RESPOND_CONFIG, Config.instance, Config.instance.GetConfigCallback);
-        GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, BattleMainConfigLoaded);
-        GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, StatLoader.LoadData);
+        GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, BattleMainConfigLoaded);
+        GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, StatLoader.LoadData);
 
         // initialize TweenLite
         OverwriteManager.init(OverwriteManager.AUTO);
@@ -35,6 +35,7 @@ class wot.battle.BattleMain
         instance = new BattleMain();
         gfx.io.GameDelegate.addCallBack("battle.showPostmortemTips", instance, "showPostmortemTips");
         gfx.io.GameDelegate.addCallBack("Stage.Update", instance, "onUpdateStage");
+        gfx.io.GameDelegate.addCallBack("battle.consumablesPanel.setCoolDownTime", instance, "setCoolDownTime");
 
         BattleInputHandler.upgrade();
 
@@ -105,6 +106,14 @@ class wot.battle.BattleMain
         Elements.SetupElements();
 
         fixMinimapSize();
+    }
+
+    function setCoolDownTime(idx, timeRemaining)
+    {
+        _root.consumablesPanel.setCoolDownTime(idx, timeRemaining);
+        var renderer = _root.consumablesPanel.getRendererBySlotIdx(idx);
+        if (renderer.iconPath.indexOf("/stereoscope.") > 0)
+            GlobalEventDispatcher.dispatchEvent( { type: Defines.E_BINOCULAR_TOGGLED, value: timeRemaining != 0 } );
     }
 
     private function fixMinimapSize():Void

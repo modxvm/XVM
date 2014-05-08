@@ -24,6 +24,7 @@ from token import getXvmStatTokenData
 from test import runTest
 import utils
 from websock import g_websock
+from minimap_circles import g_minimap_circles
 #from config.default import g_default_config
 
 NO_LOG_COMMANDS = (
@@ -152,7 +153,12 @@ class Xvm(object):
             self.currentPlayerId = None
             g_websock.send('id')
 
+    def updateCurrentVehicle(self):
+        g_minimap_circles.updateCurrentVehicle(self.config)
+
     def initBattle(self):
+        g_minimap_circles.updateConfig(self.config)
+        self.config_str = json.dumps(self.config)
         self.sendConfig(self.battleFlashObject)
         BigWorld.callback(0, self.updateBattleStates)
 

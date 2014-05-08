@@ -131,7 +131,10 @@ class com.xvm.Defines
     public static var C_ENEMY_ALIVE = "0xF50800";
 
     // Events
+    public static var E_CONFIG_LOADED = "config_loaded";
+    public static var E_STAT_LOADED = "stat_loaded";
     public static var E_BATTLE_STATE_CHANGED = "battle_state_changed";
+    public static var E_BINOCULAR_TOGGLED = "binocular_toggled";
 
     // globals
     public static var battleStates:Object = {};

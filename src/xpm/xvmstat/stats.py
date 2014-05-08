@@ -392,7 +392,6 @@ class _Stat(object):
             stat['wn8'] = None
 
         player = BigWorld.player()
-        from avatar import PlayerAvatar
         team = player.team if hasattr(player, 'team') else 0
 
         if self.players is not None:
