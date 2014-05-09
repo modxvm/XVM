@@ -93,11 +93,7 @@ class _MinimapCircles(object):
         if not cfg['enabled']:
             return
 
-        player = BigWorld.player()
-        vehId = player.playerVehicleID
-        descr = player.vehicleTypeDescriptor
-        name = descr.name.replace(':','-')
-        #debug(name)
+        descr = BigWorld.player().vehicleTypeDescriptor
         #debug(vars(descr))
         #debug(vars(descr.type))
 
@@ -130,12 +126,6 @@ class _MinimapCircles(object):
         # do not show for range more then 707m (maximum marker visibility range)
         if shell_range >= 707:
             shell_range = 0
-
-        #if IS_DEVELOPMENT:
-        #    view_distance = 400
-        #    binocular_distance = 500
-        #    artillery_range = 600
-        #    shell_range = 300
 
         # Set values
         cfg['_internal'] = {
