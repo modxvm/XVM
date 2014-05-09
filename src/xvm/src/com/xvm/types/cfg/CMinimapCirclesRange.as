@@ -4,7 +4,7 @@
  */
 package com.xvm.types.cfg
 {
-    public class CMinimapCirclesRange extends Object
+    public dynamic class CMinimapCirclesRange extends Object
     {
         public var enabled:Boolean;
         public var alpha:Number;

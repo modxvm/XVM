@@ -80,8 +80,8 @@
     // Options for the "medium2" panels - the second of the medium panels.
     // Режим ушей "medium2" - вторые средние уши в игре.
     "medium2": {
-      // Minimum width of the vehicle name column, 0-250. Default is 65.
-      // Минимальная ширина названия танка, 0-250. По умолчанию: 65.
+      // Maximum width of the vehicle name column, 0-250. Default is 65.
+      // Максимальная ширина названия танка, 0-250. По умолчанию: 65.
       "width": 65,
       // Display format for the left panel (macros allowed, see readme-en.txt).
       // Формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt).

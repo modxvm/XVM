@@ -117,7 +117,7 @@
       {{name}}        - jméno hráče bez tagu klanu
       {{clan}}        - název klanu s tagem (prázdné, pokud není)
       {{clannb}}      - název klanu bez tagu
-      {{squad}}       - hodnota '1' pro vlastní četu, prázdné pro ostatní
+      {{squad}}       - hodnota 'sq' pro vlastní četu, prázdné pro ostatní
       {{vehicle}}     - název vozidla
       {{vehiclename}} - interní název vozidla (usa-M24_Chaffee)
       {{vtype}}       - typ vozidla

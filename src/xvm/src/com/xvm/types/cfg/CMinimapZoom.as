@@ -4,7 +4,7 @@
  */
 package com.xvm.types.cfg
 {
-    public class CMinimapZoom extends Object
+    public dynamic class CMinimapZoom extends Object
     {
         public var pixelsBack:Number;
         public var centered:Boolean;

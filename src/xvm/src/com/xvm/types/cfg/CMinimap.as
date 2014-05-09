@@ -4,7 +4,7 @@
  */
 package com.xvm.types.cfg
 {
-    public class CMinimap extends Object
+    public dynamic class CMinimap extends Object
     {
         public var enabled:Boolean;
         public var mapBackgroundImageAlpha:Number;

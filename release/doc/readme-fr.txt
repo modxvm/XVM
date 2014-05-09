@@ -115,7 +115,7 @@
       {{name}}        - pseudo du joueur sans tag du clan
       {{clan}}        - tag du clan avec crochets (vide si pas de clan)
       {{clannb}}      - tag du clan sans crochets
-      {{squad}}       - valeur '1' pour son propre peloton, vide pour les autres
+      {{squad}}       - valeur 'sq' pour son propre peloton, vide pour les autres
       {{vehicle}}     - nom du tank
       {{vehiclename}} - nom du tank interne (usa-M24_Chaffee)
       {{vtype}}       - type de tank

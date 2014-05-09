@@ -232,7 +232,7 @@ class com.xvm.Macros
         if (!pdata.hasOwnProperty("squad") && data.hasOwnProperty("squad"))
         {
             // {{squad}}
-            pdata["squad"] = data.squad || "";
+            pdata["squad"] = data.squad;
         }
 
         // level
@@ -298,6 +298,9 @@ class com.xvm.Macros
         if (!dict.hasOwnProperty(pname))
             dict[pname] = { };
         var pdata = dict[pname];
+
+        // {{squad-num}}
+        pdata["squad-num"] = stat.squadnum > 0 ? stat.squadnum : null;
 
         // {{avglvl}}
         pdata["avglvl"] = stat.lvl;

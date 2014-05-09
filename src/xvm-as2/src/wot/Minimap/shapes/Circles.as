@@ -13,7 +13,7 @@ import wot.PlayersPanel.*;
 
 class wot.Minimap.shapes.Circles extends ShapeAttach
 {
-    private var CIRCLE_SIDES:Number = 350; /** Defines circle smoothness\angularity */
+    private var CIRCLE_SIDES:Number = 350; /** Defines circle smoothness/angularity */
 
     private var mc_view:MovieClip = null;
     private var mc_binocular:MovieClip = null;
@@ -32,7 +32,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
 
             if (circleCfg.enabled)
             {
-                var radius:Number =  scaleFactor * circleCfg.distance;
+                var radius:Number = scaleFactor * circleCfg.distance;
                 drawCircle(radius, circleCfg.thickness, circleCfg.color, circleCfg.alpha);
             }
         }
@@ -42,24 +42,24 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
 
         if (cfg.artillery.enabled)
         {
-            var radius:Number =  scaleFactor * cfg._internal.artillery_range;
+            var radius:Number = scaleFactor * cfg._internal.artillery_range;
             if (radius > 0)
                 drawCircle(radius, cfg.artillery.thickness, cfg.artillery.color, cfg.artillery.alpha);
         }
 
         if (cfg.shell.enabled)
         {
-            var radius:Number =  scaleFactor * cfg._internal.shell_range;
+            var radius:Number = scaleFactor * cfg._internal.shell_range;
             if (radius > 0)
                 drawCircle(radius, cfg.shell.thickness, cfg.shell.color, cfg.shell.alpha);
         }
 
         if (cfg.view.enabled)
         {
-            var radius:Number =  scaleFactor * cfg._internal.view_distance;
+            var radius:Number = scaleFactor * cfg._internal.view_distance;
             if (radius > 0)
                 mc_view = drawCircle(radius, cfg.view.thickness, cfg.view.color, cfg.view.alpha);
-            radius =  scaleFactor * cfg._internal.binocular_distance;
+            radius = scaleFactor * cfg._internal.binocular_distance;
             if (radius > 0)
                 mc_binocular = drawCircle(radius, cfg.view.thickness, cfg.view.color, cfg.view.alpha);
             switchBinoculars(false);

@@ -4,7 +4,7 @@
  */
 package com.xvm.types.cfg
 {
-    public class CMinimapLabelsVehicleClassMacro extends Object
+    public dynamic class CMinimapLabelsVehicleClassMacro extends Object
     {
         public var light:String;
         public var medium:String;

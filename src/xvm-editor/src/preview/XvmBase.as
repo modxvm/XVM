@@ -71,6 +71,9 @@ public class XvmBase
             format = formatArr.join(Utils.GetClanName(m_playerFullName));
         formatArr = format.split("{{squad}}");
         if (formatArr.length > 1)
+            format = formatArr.join("sq");
+        formatArr = format.split("{{squad-num}}");
+        if (formatArr.length > 1)
             format = formatArr.join("1");
         formatArr = format.split("{{vehicle}}");
         if (formatArr.length > 1)

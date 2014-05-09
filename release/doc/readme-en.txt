@@ -105,7 +105,8 @@
       {{name}}        - player nickname without clan name
       {{clan}}        - clan name with brackets (empty if no clan)
       {{clannb}}      - clan name without brackets
-      {{squad}}       - value '1' for own squad, empty for others
+      {{squad}}       - value 'sq' for own squad, empty for others
+      {{squad-num}}   - number of squad, empty if not in squad
       {{vehicle}}     - vehicle name
       {{vehiclename}} - internal vehicle name (usa-M24_Chaffee)
       {{vtype}}       - vehicle type

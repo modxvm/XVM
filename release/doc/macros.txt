@@ -29,7 +29,8 @@ Legend:
 │ {{c:vtype}}                │ X │ X │ X │ X │ X │ X │   │ X │   │ color depending on vehicle type
 │ {{level}}                  │ X │   │   │ X │ X │ X │   │   │ X │ vehicle level (Arabic numerals)
 │ {{rlevel}}                 │ X │   │   │ X │ X │ X │   │   │ X │ vehicle level (Roman numerals)
-│ {{squad}}                  │   │   │   │ X │   │   │   │   │   │ value '1' for own squad, empty for others
+│ {{squad}}                  │   │   │   │ X │   │   │   │   │   │ value 'sq' for own squad, empty for others
+│ {{squad-num}}              │   │ X │ X │ X │ X │ X │   │ X │   │ number of squad (1,2,...), empty if not in squad
 │ {{turret}}                 │   │   │   │ X │   │   │   │   │   │ stock turret marker:
 │ {{hp}}                     │   │ X │   │ X │   │ X │   │ X │   │ current health points
 │ {{hp-ratio}}               │   │ X │   │ X │   │ X │   │ X │   │ current health ratio (without '%' sign)

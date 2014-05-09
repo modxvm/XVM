@@ -4,7 +4,7 @@
  */
 package com.xvm.types.cfg
 {
-    public class CMinimapSquare extends Object
+    public dynamic class CMinimapSquare extends Object
     {
         public var enabled:Boolean;
         public var artilleryEnabled:Boolean;

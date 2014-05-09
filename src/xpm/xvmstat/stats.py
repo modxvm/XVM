@@ -330,7 +330,8 @@ class _Stat(object):
                     err('No valid token for XVM statistics (id=%s)' % playerVehicleID)
                     return
 
-                updateRequest = 'stat/%s/%s' % (tdata['token'].encode('ascii'), ','.join(requestList))
+                cmd = 'rplstat' if isReplay() else 'stat'
+                updateRequest = '%s/%s/%s' % (cmd, tdata['token'].encode('ascii'), ','.join(requestList))
 
                 if XVM_STAT_SERVERS is None or len(XVM_STAT_SERVERS) <= 0:
                     err('Cannot read statistics: no suitable server was found.')
@@ -403,6 +404,7 @@ class _Stat(object):
                         stat['clan'] = pl.clan
                     stat['name'] = pl.name
                     stat['team'] = TEAM_ALLY if team == pl.team else TEAM_ENEMY
+                    stat['squadnum'] = pl.squadnum
                     if hasattr(pl, 'alive'):
                         stat['alive'] = pl.alive
                     if hasattr(pl, 'ready'):
@@ -445,6 +447,9 @@ class _Player(object):
         else:
             self.vId = 0
         self.team = vData['team']
+        from gui.BattleContext import g_battleContext
+        vInfo = g_battleContext.arenaDP.getVehicleInfo(vID=vehId)
+        self.squadnum = vInfo.squadIndex
 
     def update(self, vData):
         self.vId = vData['vehicleType'].type.compactDescr

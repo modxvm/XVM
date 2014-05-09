@@ -4,7 +4,7 @@
  */
 package com.xvm.types.cfg
 {
-    public class CMinimapLines extends Object
+    public dynamic class CMinimapLines extends Object
     {
        public var enabled:Boolean;
        public var vehicle:Array;

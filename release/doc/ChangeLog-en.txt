@@ -24,6 +24,8 @@
       minimap/circles/artillery - maximum range of fire for artillery
       minimap/circles/shell - maximum range of shooting for revolver gun
       minimap/circles/view - view distance (dynamically changes when switching stereoscope)
+  * added macro {{squad-num}} - squad number or null if not in squad
+  * changed value of macro {{squad}} from '1' to 'sq'
 
   [OTHER]
   * removed macro {{vehicle-type}} as duplication of {{vehicle}}

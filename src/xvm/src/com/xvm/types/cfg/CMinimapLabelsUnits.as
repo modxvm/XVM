@@ -4,7 +4,7 @@
  */
 package com.xvm.types.cfg
 {
-    public class CMinimapLabelsUnits extends Object
+    public dynamic class CMinimapLabelsUnits extends Object
     {
         public var revealedEnabled:Boolean;
         public var lostEnemyEnabled:Boolean;

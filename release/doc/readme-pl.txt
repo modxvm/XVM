@@ -112,7 +112,7 @@ Zawartość:
       {{name}}        - Nick gracza bez nazwy klanu
       {{clan}}        - Nazwa klanu z nawiasami (puste, jeśli nie ma klanu)
       {{clannb}}      - Nazwa klanu bez nawiasów
-      {{squad}}       - wartość '1' dla własnego plutonu, pusty dla innych
+      {{squad}}       - wartość 'sq' dla własnego plutonu, pusty dla innych
       {{vehicle}}     - Nazwa pojazdu
       {{vehiclename}} - Wewnętrzna nazwa pojazdu (usa-M24_Chaffee)
       {{vtype}}       - Typ pojazdu

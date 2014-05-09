@@ -258,6 +258,8 @@ package com.xvm.utils
             // VMM only - static
             // {{squad}}
             //TODO pdata["squad"] = data.squad || "";
+            // {{squad-num}}
+            //TODO pdata["squad-num"] = data.squadnum || "";
 
             // {{hp-max}}
             pdata["hp-max"] = stat.maxHealth;

@@ -4,7 +4,7 @@
  */
 package com.xvm.types.cfg
 {
-    public class CMinimapCirclesInternal extends Object
+    public dynamic class CMinimapCirclesInternal extends Object
     {
         public var view_distance:Number;
         public var binocular_distance:Number;
