@@ -105,7 +105,8 @@ class _MinimapCircles(object):
 
         # View Distance
         view_distance = descr.turret["circularVisionRadius"]
-        view_distance = ((view_distance / 0.875) * (0.00375 * self.commander_skill + 0.5)) * self.other_bonus
+        if not isReplay():
+            view_distance = ((view_distance / 0.875) * (0.00375 * self.commander_skill + 0.5)) * self.other_bonus
 
         # Binocular Distance
         binocular_distance = view_distance * 1.25

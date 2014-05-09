@@ -448,8 +448,10 @@ class _Player(object):
             self.vId = 0
         self.team = vData['team']
         from gui.BattleContext import g_battleContext
-        vInfo = g_battleContext.arenaDP.getVehicleInfo(vID=vehId)
-        self.squadnum = vInfo.squadIndex
+        self.squadnum = 0
+        if g_battleContext.arenaDP is not None:
+            vInfo = g_battleContext.arenaDP.getVehicleInfo(vID=vehId)
+            self.squadnum = vInfo.squadIndex
 
     def update(self, vData):
         self.vId = vData['vehicleType'].type.compactDescr
