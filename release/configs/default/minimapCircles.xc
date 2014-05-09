@@ -23,8 +23,8 @@
         // и высоте расположения машины относительно цели. На миникарте эти факторы не учитываются.
         // Подробнее по ссылке: http://goo.gl/ZqlPa
         "artillery": { "enabled": true, "alpha": 50, "color": "0xFF0000", "thickness": 0.5 },
-        // Maximum range of shooting for revolver gun
-        // Максимальная дальность полета снаряда для барабанных танков
+        // Maximum range of shooting for machine gun
+        // Максимальная дальность полета снаряда для пулеметных танков
         "shell":     { "enabled": true, "alpha": 50, "color": "0xFF0000", "thickness": 0.5 },
         // View distance (dynamically changes when switching stereoscope)
         // Дальность обзора (динамически изменяется при включении стереотрубы)

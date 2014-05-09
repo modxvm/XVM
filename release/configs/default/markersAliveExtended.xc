@@ -253,7 +253,7 @@
           "size": 6,
           "strength": 200
         },
-        "format": "{{rating~%}}"
+        "format": "{{rating%2d~%}}"
       }
     ]
   },
@@ -430,7 +430,7 @@
           "size": 6,
           "strength": 200
         },
-        "format": "{{rating~%}}"
+        "format": "{{rating%2d~%}}"
       }
     ]
   }

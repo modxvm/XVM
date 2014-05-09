@@ -246,8 +246,8 @@ package com.xvm.misc
             // Dispay format. Macro-substitutiones allowed.
             c.formatLeftNick = "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>";
             c.formatRightNick = "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>";
-            c.formatLeftVehicle = "{{vehicle}}<font face='Lucida Console' size='12'> <font color='{{c:kb}}'>{{kb%2d~k}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:rating}}'>{{rating~%}}</font></font>";
-            c.formatRightVehicle = "<font face='Lucida Console' size='12'><font color='{{c:rating}}'>{{rating~%}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:kb}}'>{{kb%2d~k}}</font> </font>{{vehicle}}";
+            c.formatLeftVehicle = "{{vehicle}}<font face='Lucida Console' size='12'> <font color='{{c:kb}}'>{{kb%2d~k}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:rating}}'>{{rating%2d~%}}</font></font>";
+            c.formatRightVehicle = "<font face='Lucida Console' size='12'><font color='{{c:rating}}'>{{rating%2d~%}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:kb}}'>{{kb%2d~k}}</font> </font>{{vehicle}}";
             return c;
         }
 
@@ -271,8 +271,8 @@ package com.xvm.misc
             // Dispay format.
             c.formatLeftNick = "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>";
             c.formatRightNick = "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>";
-            c.formatLeftVehicle = "{{vehicle}}<font face='Lucida Console' size='12'> <font color='{{c:kb}}'>{{kb%2d~k}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:rating}}'>{{rating~%}}</font></font>";
-            c.formatRightVehicle = "<font face='Lucida Console' size='12'><font color='{{c:rating}}'>{{rating~%}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:kb}}'>{{kb%2d~k}}</font> </font>{{vehicle}}";
+            c.formatLeftVehicle = "{{vehicle}}<font face='Lucida Console' size='12'> <font color='{{c:kb}}'>{{kb%2d~k}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:rating}}'>{{rating%2d~%}}</font></font>";
+            c.formatRightVehicle = "<font face='Lucida Console' size='12'><font color='{{c:rating}}'>{{rating%2d~%}}</font> <font color='{{c:xwn8}}'>{{xwn8}}</font> <font color='{{c:kb}}'>{{kb%2d~k}}</font> </font>{{vehicle}}";
             return c;
         }
 
@@ -1364,7 +1364,7 @@ package com.xvm.misc
                 color: "{{c:rating}}",
                 font: font_11b,
                 shadow: shadow_150,
-                format: "{{rating~%}}"
+                format: "{{rating%2d~%}}"
             }
         }
     }
