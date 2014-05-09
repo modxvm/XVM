@@ -1,7 +1,5 @@
-import com.xvm.Config;
-import com.xvm.Utils;
-import wot.PlayersPanel.PlayerListItemRenderer;
-import wot.PlayersPanel.SpotStatusModel;
+import com.xvm.*;
+import wot.PlayersPanel.*;
 
 /**
  * @author ilitvinov87@gmail.com
@@ -51,7 +49,21 @@ class wot.PlayersPanel.SpotStatusView
         if (lastText != txt)
         {
             lastText = txt;
-            spotStatusMarker.htmlText = txt;
+
+            var data:Object = renderer.wrapper.data;
+            var name:String = Utils.GetPlayerName(data.label);
+
+            var obj = Defines.battleStates[name] || { };
+            var deadState = ((data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) == 0) ? Defines.DEADSTATE_DEAD : Defines.DEADSTATE_ALIVE;
+            if (deadState == Defines.DEADSTATE_DEAD && obj.dead == false)
+            {
+                obj.dead = true;
+                if (obj.curHealth > 0)
+                    obj.curHealth = 0;
+            }
+            obj.darken = deadState == Defines.DEADSTATE_DEAD;
+
+            spotStatusMarker.htmlText = Macros.Format(name, txt, obj);
         }
     }
 
