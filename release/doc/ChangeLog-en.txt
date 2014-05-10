@@ -2,8 +2,8 @@
   [NEW FUNCTIONS]
   * dynamic circles on the minimap. Options:
       minimap/circles/artillery - maximum range of fire for artillery
-      minimap/circles/shell - maximum range of shooting for revolver gun
-      minimap/circles/view - view distance (dynamically changes when switching stereoscope)
+      minimap/circles/shell - maximum range of shooting for autocannon and semi-automatic cannon
+      minimap/circles/view - view distance (dynamically changes when switching binocular telescope)
   * added macro {{squad-num}} - squad number or null if not in squad
   * changed value of macro {{squad}} from '1' to 'sq'
 
