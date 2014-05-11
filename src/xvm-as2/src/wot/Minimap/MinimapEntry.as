@@ -87,10 +87,12 @@ class wot.Minimap.MinimapEntry
     {
         Utils.TraceXvmModule("Minimap");
         var $this = this;
+        wrapper["$removeMovieClip"] = wrapper.removeMovieClip;
         wrapper.removeMovieClip = function()
         {
             if ($this.uid != null)
                 GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_LOST, $this.uid));
+            this["$removeMovieClip"]()
         }
     }
 
