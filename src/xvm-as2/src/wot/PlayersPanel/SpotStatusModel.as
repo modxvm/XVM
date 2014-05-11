@@ -1,11 +1,12 @@
+/**
+ * @author ilitvinov87(at)gmail.com
+ * @author m.schedriviy(at)gmail.com
+ */
 import com.xvm.*;
 import wot.Minimap.MinimapEvent;
 import wot.Minimap.model.externalProxy.IconsProxy;
 import wot.PlayersPanel.PlayersPanelProxy;
 
-/**
- * @author ilitvinov87@gmail.com
- */
 class wot.PlayersPanel.SpotStatusModel
 {
     public static var DEAD:Number = 0;

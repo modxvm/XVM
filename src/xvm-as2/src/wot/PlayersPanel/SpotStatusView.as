@@ -1,13 +1,15 @@
-import com.xvm.*;
-import wot.Minimap.*;
-import wot.PlayersPanel.*;
-
 /**
- * @author ilitvinov87@gmail.com
+ * @author ilitvinov87(at)gmail.com
+ * @author m.schedriviy(at)gmail.com
  *
  * Handles Enemy Spotted presentation level (View)
  */
-class wot.PlayersPanel.SpotStatusView
+import com.xvm.*;
+import wot.Minimap.*;
+import wot.PlayersPanel.*;
+import gfx.core.*;
+
+class wot.PlayersPanel.SpotStatusView extends XvmComponent
 {
     private static var SPOT_STATUS_TF_NAME:String = "spotStatusTF";
     private static var formatsCache:Object = null;
@@ -18,6 +20,8 @@ class wot.PlayersPanel.SpotStatusView
 
     public function SpotStatusView(renderer:PlayerListItemRenderer, cfg:Object)
     {
+        super();
+
         this.renderer = renderer;
         this.cfg = cfg;
 
@@ -34,7 +38,7 @@ class wot.PlayersPanel.SpotStatusView
 
         spotStatusMarker = createMarker(renderer);
 
-        update();
+        invalidate();
     }
 
     public function updateStatus(e):Void
@@ -42,10 +46,11 @@ class wot.PlayersPanel.SpotStatusView
         if (renderer.wrapper.data.uid != e.data)
             return;
         //Logger.addObject(e);
-        update();
+        invalidate();
     }
 
-    public function update():Void
+    // override
+    public function draw()
     {
         // Define point relative to which marker is set
         // Set every update for correct position in the fog of war mode.
@@ -62,14 +67,13 @@ class wot.PlayersPanel.SpotStatusView
         var name:String = Utils.GetPlayerName(data.label);
 
         var obj = Defines.battleStates[name] || { };
-        var deadState = ((data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) == 0) ? Defines.DEADSTATE_DEAD : Defines.DEADSTATE_ALIVE;
-        if (deadState == Defines.DEADSTATE_DEAD && obj.dead == false)
+        if (status == SpotStatusModel.DEAD && obj.dead == false)
         {
             obj.dead = true;
             if (obj.curHealth > 0)
                 obj.curHealth = 0;
         }
-        obj.darken = deadState == Defines.DEADSTATE_DEAD;
+        obj.darken = status == SpotStatusModel.DEAD;
 
         txt = Macros.Format(name, txt, obj);
         //Logger.add(txt);
@@ -80,7 +84,7 @@ class wot.PlayersPanel.SpotStatusView
 
     private static function createMarker(renderer:PlayerListItemRenderer):TextField
     {
-        var marker:TextField = renderer.wrapper.createTextField(SPOT_STATUS_TF_NAME, renderer.wrapper.getNextHighestDepth(), 0, 0, 100, 25);
+        var marker:TextField = renderer.wrapper.createTextField(SPOT_STATUS_TF_NAME, renderer.wrapper.getNextHighestDepth(), 0, 0, 250, 25);
         marker.antiAliasType = "advanced";
         marker.selectable = false;
         marker.html = true;

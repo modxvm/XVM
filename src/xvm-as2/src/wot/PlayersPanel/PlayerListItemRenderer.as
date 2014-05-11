@@ -67,7 +67,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
     public function updateSpotStatusView()
     {
         if (spotStatusView != null)
-            spotStatusView.update();
+            spotStatusView.invalidate();
     }
 
     function completeLoad()

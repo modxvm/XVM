@@ -341,11 +341,8 @@ class wot.PlayersPanel.PlayersPanel
     // Refreshes spot status markers.
     private function updateSpotStatusMarkers():Void
     {
-        if (wrapper.type == "right")
-        {
-            var len:Number = wrapper.m_list.renderers.length;
-            for (var i:Number = 0; i < len; ++i)
-                wrapper.m_list.renderers[i].xvm_worker.updateSpotStatusView();
-        }
+        var len:Number = wrapper.m_list.renderers.length;
+        for (var i:Number = 0; i < len; ++i)
+            wrapper.m_list.renderers[i].xvm_worker.updateSpotStatusView();
     }
 }
