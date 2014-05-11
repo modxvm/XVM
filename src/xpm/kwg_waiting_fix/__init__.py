@@ -1,4 +1,4 @@
-""" fix waiting bug (c) sirmax 2014 """
+""" fix waiting bug (c) www.modxvm.com 2014 """
 
 #####################################################################
 # MOD INFO (mandatory)

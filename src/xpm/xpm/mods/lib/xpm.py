@@ -1,4 +1,4 @@
-""" XPM misc functions (c) sirmax 2013-2014 """
+""" XPM misc functions (c) www.modxvm.com 2013-2014 """
 
 import os
 import datetime

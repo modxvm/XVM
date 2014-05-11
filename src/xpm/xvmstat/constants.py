@@ -1,4 +1,4 @@
-""" xvm (c) sirmax 2013-2014 """
+""" XVM (c) www.modxvm.com 2013-2014 """
 
 XVM_STAT_API_VERSION = "3.0"
 XVM_STAT_SERVERS = [ "https://stat.modxvm.com:443/{API}/{REQ}" ] # TODO - config

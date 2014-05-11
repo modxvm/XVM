@@ -1,4 +1,4 @@
-""" XPM mods loader (c) sirmax 2013-2014 """
+""" XPM mods loader (c) www.modxvm.com 2013-2014 """
 
 import glob
 import os

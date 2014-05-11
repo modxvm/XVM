@@ -1,4 +1,4 @@
-""" xvm (c) sirmax 2013-2014 """
+""" XVM (c) www.modxvm.com 2013-2014 """
 
 def get(dbname, key):
     #debug('db.get: ' + str(key))
