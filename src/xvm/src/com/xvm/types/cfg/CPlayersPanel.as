@@ -14,23 +14,8 @@ package com.xvm.types.cfg
             // Playes/clan icon parameters.
             //clanIcon: { show: true, x: 0, y: 6, xr: 0, yr: 6, h: 16, w: 16, alpha: 90 },
             // Display options for icons of never seen enemies
-            //enemySpottedMarker: {
-              //enabled: false,
-              //Xoffset: -22,
-              //Yoffset: -2,
-              //format: {
-                //neverSeen: "<FONT FACE=\"$FieldFont\" SIZE=\"24\" COLOR=\"#DDDDDD\">*</FONT>",
-                //lost: "",
-                //revealed: "",
-                //dead: "",
-                //artillery: {
-                  //neverSeen: "",
-                  //lost: "",
-                  //revealed: "",
-                  //dead: ""
-                //}
-              //}
-            //},
+            //enemySpottedMarker: {...}
+            //allySpottedMarker: {...}
             // Medium1 mode.
             //medium: {
                 // 0..250 - player name field width.

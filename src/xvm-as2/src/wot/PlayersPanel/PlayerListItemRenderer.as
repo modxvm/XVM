@@ -57,10 +57,15 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     private function onConfigLoaded()
     {
-        if (Config.config.playersPanel.enemySpottedMarker.enabled && team == Defines.TEAM_ENEMY)
+        if (team == Defines.TEAM_ENEMY)
         {
-            if (spotStatusView == null)
+            if (Config.config.playersPanel.enemySpottedMarker.enabled && spotStatusView == null)
                 spotStatusView = new SpotStatusView(this, Config.config.playersPanel.enemySpottedMarker);
+        }
+        else
+        {
+            if (Config.config.playersPanel.allySpottedMarker.enabled && spotStatusView == null)
+                spotStatusView = new SpotStatusView(this, Config.config.playersPanel.allySpottedMarker);
         }
     }
 

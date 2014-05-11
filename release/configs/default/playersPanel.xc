@@ -64,6 +64,31 @@
         }
       }
     },
+    // Ally spotted status marker at left side panel.
+    // This feature depends on enabled XVM minimap mod
+    // Маркер статуса засвета в левой боковой панели списка игроков.
+    // Фича зависит от включенного XVM мода миникарты
+    "allySpottedMarker": {
+      // false - Disable.
+      // false - отключить.
+      "enabled": false,
+      // Offset relative to level icon (by X, Y).
+      // Смещение относительно иконки уровня танка (по X, Y).
+      "Xoffset": 15,
+      "Yoffset": 0,
+      // Формат.
+      "format": {
+        // This ally was lost at minimap.
+        // Этот союзник отмечен на миникарте как потерянный.
+        "lost": "",
+        // Ally currently revealed at minimap.
+        // Союзник виден на миникарте прямо сейчас.
+        "revealed": "",
+        // Dead ally.
+        // Уничтоженный союзник.
+        "dead": ""
+      }
+    },
     // Options for the "medium" panels - the first of the medium panels.
     // Режим ушей "medium" - первые средние уши в игре.
     "medium": {

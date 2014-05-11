@@ -161,6 +161,14 @@
           "dead": "<font face='$FieldFont' size='24' color='#222222'>*</font>"
         }
       }
+    },
+    "allySpottedMarker": {
+      "enabled": true,
+      "format": {
+        "lost": "<font face='$FieldFont' size='24' color='#DDDDDD'>*</font>",
+        "revealed": "",
+        "dead": ""
+      }
     }
   },
   "battleResults": {

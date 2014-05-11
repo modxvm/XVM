@@ -276,6 +276,16 @@ class _DefaultConfig(object):
                     }
                 }
             },
+            'allySpottedMarker': {
+                'enabled': False,
+                'Xoffset': -22,
+                'Yoffset': -2,
+                'format': {
+                    'lost': "",
+                    'revealed': "",
+                    'dead': ""
+                }
+            },
             # Medium1 mode.
             'medium': {
                 # 0..250 - player name field width.

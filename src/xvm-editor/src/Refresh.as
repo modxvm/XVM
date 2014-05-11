@@ -465,6 +465,14 @@ private function RefreshPlayersPanel1Page():void
         this.p_playersPanel_enemySpotted.v_format_artillery_lost.value = section.format.artillery.lost;
         this.p_playersPanel_enemySpotted.v_format_artillery_revealed.value = section.format.artillery.revealed;
         this.p_playersPanel_enemySpotted.v_format_artillery_dead.value = section.format.artillery.dead;
+
+        section = Config.config.playersPanel.allySpottedMarker;
+        this.p_playersPanel_allySpotted.v_enabled.value = section.enabled;
+        this.p_playersPanel_allySpotted.v_Xoffset.value = section.Xoffset;
+        this.p_playersPanel_allySpotted.v_Yoffset.value = section.Yoffset;
+        this.p_playersPanel_allySpotted.v_format_lost.value = section.format.lost;
+        this.p_playersPanel_allySpotted.v_format_revealed.value = section.format.revealed;
+        this.p_playersPanel_allySpotted.v_format_dead.value = section.format.dead;
     }
     catch (ex:Error)
     {

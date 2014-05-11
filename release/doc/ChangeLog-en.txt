@@ -1,4 +1,8 @@
-﻿XVM-5.3.0-test2:
+﻿XVM-5.3.0-dev:
+  [NEW FUNCTIONS]
+  * new section playersPanel/allySpottedMarker - like enemySpottedMarker, but for ally team
+
+XVM-5.3.0-test2:
   [NEW FUNCTIONS]
   * dynamic circles on the minimap. Options:
       minimap/circles/artillery - maximum range of fire for artillery

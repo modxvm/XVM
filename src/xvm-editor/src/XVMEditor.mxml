@@ -326,6 +326,7 @@
                             <p:PPlayersPanel id="p_playersPanel" config="playersPanel" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
                             <p:PPlayersPanelIcons id="p_playersPanel_icons" config="playersPanel.clanIcon" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
                             <p:PEnemySpotted id="p_playersPanel_enemySpotted" config="playersPanel.enemySpottedMarker" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
+                            <p:PAllySpotted id="p_playersPanel_allySpotted" config="playersPanel.allySpottedMarker" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
                         </s:VGroup>
                     </s:Scroller>
                 </s:NavigatorContent>

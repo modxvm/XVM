@@ -303,6 +303,16 @@ package com.xvm.misc
                 }
               }
             };
+            c.allySpottedMarker = {
+              enabled: false,
+              Xoffset: -22,
+              Yoffset: -2,
+              format: {
+                lost: "",
+                revealed: "",
+                dead: ""
+              }
+            };
             // Medium1 mode.
             c.medium = {
                 // 0..250 - player name field width.

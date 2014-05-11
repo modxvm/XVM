@@ -1,4 +1,8 @@
-﻿XVM-5.3.0-test2:
+﻿XVM-5.3.0-dev:
+  [NEW FUNCTIONS]
+  * новая секция playersPanel/allySpottedMarker - как enemySpottedMarker, но для союзников
+
+XVM-5.3.0-test2:
   [НОВЫЕ ФУНКЦИИ]
   * динамические круги на миникарте. Опции:
       minimap/circles/artillery - максимальная дальность стрельбы для артиллерии
