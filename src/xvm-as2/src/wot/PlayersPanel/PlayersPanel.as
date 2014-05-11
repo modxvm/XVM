@@ -50,15 +50,10 @@ class wot.PlayersPanel.PlayersPanel
     private var m_knownPlayersCount:Number = 0; // for Fog of War mode.
     private var m_postmortemIndex:Number = 0;
 
-    private var spotStatusModel:SpotStatusModel;
-
     public function PlayersPanelCtor()
     {
         Utils.TraceXvmModule("PlayersPanel");
 
-        spotStatusModel = null;
-
-        GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, onConfigLoaded);
         GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, wrapper, wrapper.update);
         GlobalEventDispatcher.addEventListener(Defines.E_BATTLE_STATE_CHANGED, wrapper, wrapper.update);
 
@@ -66,42 +61,7 @@ class wot.PlayersPanel.PlayersPanel
         checkLoading();
     }
 
-    /**
-     * Refreshes Enemy spot status marker.
-     * Invoked by AutoUpdate event each 300ms.
-     */
-    public function updateSpotStatusMarkers():Void
-    {
-        //Logger.add("PlayersPanel.updateSpotStatusMarkers()");
-
-        /** Redraw every renderer */
-        var len:Number = wrapper.m_list.renderers.length;
-        for (var i:Number = 0; i < len; ++i)
-        {
-            var renderer:net.wargaming.ingame.PlayerListItemRenderer = net.wargaming.ingame.PlayerListItemRenderer(wrapper.m_list.renderers[i]);
-            var uid:Number = renderer.data.uid;
-            var status:Number = spotStatusModel.defineStatus(uid, renderer.data.vehicleState);
-            var subjectIsArtillery:Boolean = spotStatusModel.isArty(uid);
-            var worker:PlayerListItemRenderer = renderer.xvm_worker;
-            if (worker.spotStatusView != null)
-                worker.spotStatusView.update(status, subjectIsArtillery);
-        }
-    }
-
     // PRIVATE
-
-    private function onConfigLoaded(event):Void
-    {
-        //Logger.add("PlayersPanel.onConfigLoaded()");
-        //GlobalEventDispatcher.removeEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
-
-        // init enemy spotter markers
-        if (Config.config.playersPanel.enemySpottedMarker.enabled && isEnemyPanel)
-        {
-            GlobalEventDispatcher.addEventListener(AutoUpdate.UPDATE_BY_TIMER_EVENT, this, updateSpotStatusMarkers);
-            spotStatusModel = new SpotStatusModel();
-        }
-    }
 
     private var _init:Boolean = false;
 
@@ -185,6 +145,8 @@ class wot.PlayersPanel.PlayersPanel
 
             wrapper.m_vehicles.htmlText = wrapper.m_vehicles.htmlText.split('LEADING="9"').join('LEADING="' + leadingVehicles + '"');
             wrapper.m_vehicles._y = centeredTextY + leadingVehicles / 2.0; // centering on cell, because of align=top
+
+            updateSpotStatusMarkers();
         }
         catch (e:Error)
         {
@@ -376,8 +338,14 @@ class wot.PlayersPanel.PlayersPanel
         }
     }
 
-    private function get isEnemyPanel():Boolean
+    // Refreshes spot status markers.
+    private function updateSpotStatusMarkers():Void
     {
-        return wrapper.type == "right";
+        if (wrapper.type == "right")
+        {
+            var len:Number = wrapper.m_list.renderers.length;
+            for (var i:Number = 0; i < len; ++i)
+                wrapper.m_list.renderers[i].xvm_worker.updateSpotStatusView();
+        }
     }
 }

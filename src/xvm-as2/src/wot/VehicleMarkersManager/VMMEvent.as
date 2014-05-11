@@ -3,13 +3,12 @@ class wot.VehicleMarkersManager.VMMEvent
     public static var ALT_STATE_INFORM:String = "ALT_STATE_INFORM";
 
     private var _type:String;
-    private var _payload:Object;
+    private var _value:Object;
 
-    public function VMMEvent(type:String, payload:Object)
+    public function VMMEvent(type:String, value:Object)
     {
         _type = type;
-        if (payload)
-            _payload = payload;
+        _value = value;
     }
 
     public function get type():String
@@ -17,8 +16,8 @@ class wot.VehicleMarkersManager.VMMEvent
         return _type;
     }
 
-    public function get payload():Object
+    public function get value():Object
     {
-        return _payload;
+        return _value;
     }
 }

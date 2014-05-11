@@ -46,7 +46,6 @@ class wot.battle.BattleMain
     private static function BattleMainConfigLoaded()
     {
         //Logger.add("BattleMainConfigLoaded()");
-        //GlobalEventDispatcher.removeEventListener(Config.E_CONFIG_LOADED, BattleMainConfigLoaded);
 
         // Initialize Sixth Sense Indicator
         instance.sixthSenseIndicator = new SixthSenseIndicator();
@@ -137,7 +136,7 @@ class wot.battle.BattleMain
         var data:BattleStateData = obj; // as2 type casting is strange
         //Logger.addObject(data);
         Defines.battleStates[data.playerName] = data;
-        GlobalEventDispatcher.dispatchEvent( { type: Defines.E_BATTLE_STATE_CHANGED } );
+        GlobalEventDispatcher.dispatchEvent( { type: Defines.E_BATTLE_STATE_CHANGED, playerName:data.playerName } );
     }
 
     private var debugTextField:TextField = null;

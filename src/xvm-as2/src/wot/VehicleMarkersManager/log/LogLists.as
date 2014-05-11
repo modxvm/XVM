@@ -84,7 +84,7 @@ class wot.VehicleMarkersManager.log.LogLists
     /** Catches Alt press event from VMM */
     private function onAltStateInform(event:VMMEvent):Void
     {
-        var eventAltPressed:Boolean = Boolean(event.payload);
+        var eventAltPressed:Boolean = Boolean(event.value);
         if (altPressed != eventAltPressed)
         {
             altPressed = eventAltPressed;

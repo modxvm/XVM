@@ -86,6 +86,12 @@ class wot.Minimap.MinimapEntry
     function MinimapEntryCtor()
     {
         Utils.TraceXvmModule("Minimap");
+        var $this = this;
+        wrapper.removeMovieClip = function()
+        {
+            if ($this.uid != null)
+                GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_LOST, $this.uid));
+        }
     }
 
     /**
@@ -167,8 +173,9 @@ class wot.Minimap.MinimapEntry
     private function initExtendedBehaviour():Void
     {
         uid = SyncModel.instance.getTestUid();
-        /** Inform PlayersPanel */
-        GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENEMY_REVEALED, uid));
+        // Inform PlayersPanel
+        if (uid != null)
+            GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_REVEALED, uid));
 
         if (MapConfig.revealedEnabled)
         {

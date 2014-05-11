@@ -13,33 +13,55 @@ class wot.PlayersPanel.SpotStatusModel
     public static var LOST:Number = 2;
     public static var REVEALED:Number = 3;
 
-    private var seen:Object;
-    private var artyCache:Object;
-
-    public function SpotStatusModel()
+    public static function defineStatus(uid:Number, vehicleState:Number):Number
     {
-        seen = { };
-        artyCache = { };
-        GlobalEventDispatcher.addEventListener(MinimapEvent.ENEMY_REVEALED, this, onRevealed)
+        return instance._defineStatus(uid, vehicleState);
     }
 
-    public function defineStatus(uid:Number, vehicleState:Number):Number
+    public static function isArty(uid:Number):Boolean
+    {
+        return instance._isArty(uid);
+    }
+
+    // PRIVATE
+
+    private var revealed:Object;
+    private var artyCache:Object;
+
+    private static var _instance:SpotStatusModel = null;
+    private static function get instance()
+    {
+        if (_instance == null)
+            _instance = new SpotStatusModel();
+        return _instance;
+    }
+
+    private function SpotStatusModel()
+    {
+        revealed = { };
+        artyCache = { };
+        GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_REVEALED, this, onRevealed)
+        GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_LOST, this, onLost)
+    }
+
+    private function _defineStatus(uid:Number, vehicleState:Number):Number
     {
         //Logger.add("SpotStatusModel.defineStatus()");
 
         if ((vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) == 0)
             return DEAD;
 
-        if (isRevealedRightNow(uid))
+        var status = revealed[uid.toString()];
+        if (status == null)
+            return NEVER_SEEN;
+
+        if (status == true)
             return REVEALED;
 
-        if (seen.hasOwnProperty(uid.toString()))
-            return LOST;
-
-        return NEVER_SEEN;
+        return LOST;
     }
 
-    public function isArty(uid:Number):Boolean
+    private function _isArty(uid:Number):Boolean
     {
         //Logger.add("SpotStatusModel.isArty()");
 
@@ -58,25 +80,17 @@ class wot.PlayersPanel.SpotStatusModel
         return artyCache[uid_str];
     }
 
-    // -- Private
-
-    private function isRevealedRightNow(subjUid):Boolean
+    private function onRevealed(e:MinimapEvent)
     {
-        //Logger.add("SpotStatusModel.isRevealedRightNow()");
-        var uids:Array = IconsProxy.syncedUids;
-        var len:Number = uids.length;
-        for (var i:Number = 0; i < len; ++i)
-        {
-            if (uids[i] == subjUid)
-                return true;
-        }
-        return false;
+        //Logger.add("SpotStatusModel.onRevealed(" + e.value + ")");
+        revealed[e.value] = true;
+        GlobalEventDispatcher.dispatchEvent( { type: Defines.E_SPOT_STATUS_UPDATED, data: e.value } );
     }
 
-    private function onRevealed(mmevent:MinimapEvent)
+    private function onLost(e:MinimapEvent)
     {
-        //Logger.add("SpotStatusModel.onRevealed()");
-        /** Save a guy to revealed enemies list */
-        seen[mmevent.payload] = true;
+        //Logger.add("SpotStatusModel.onLost(" + e.value + ")");
+        revealed[e.value] = false;
+        GlobalEventDispatcher.dispatchEvent( { type: Defines.E_SPOT_STATUS_UPDATED, data: e.value } );
     }
 }

@@ -18,6 +18,7 @@ def _getVehicleStateData(vehicle):
     #self.maxHealth = vData['vehicleType'].maxHealth
     return {
         'playerName': vehicle.publicInfo.name,
+        'playerId': BigWorld.player().arena.vehicles[vehicle.id]['accountDBID'],
         'vehId': vehicle.id,
         'dead': not vehicle.isAlive(),
         'curHealth': vehicle.health,

@@ -2,8 +2,9 @@
  * @author sirmax2
  */
 import com.xvm.*;
-import net.wargaming.controls.UILoaderAlt;
-import wot.PlayersPanel.SpotStatusView;
+import net.wargaming.controls.*;
+import wot.Minimap.*;
+import wot.PlayersPanel.*;
 
 class wot.PlayersPanel.PlayerListItemRenderer
 {
@@ -41,17 +42,32 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     private static var IS_ALIVE:Number = 1;
 
-    var m_clanIcon: UILoaderAlt = null;
-    var m_iconset: IconLoader = null;
-    var m_iconLoaded: Boolean = false;
+    private var m_clanIcon: UILoaderAlt = null;
+    private var m_iconset: IconLoader = null;
+    private var m_iconLoaded: Boolean = false;
 
-    public var spotStatusView:SpotStatusView;
+    private var spotStatusView:SpotStatusView = null;
 
     public function PlayerListItemRendererCtor()
     {
         Utils.TraceXvmModule("PlayersPanel");
 
-        spotStatusView = new SpotStatusView(this);
+        GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, onConfigLoaded)
+    }
+
+    private function onConfigLoaded()
+    {
+        if (Config.config.playersPanel.enemySpottedMarker.enabled && team == Defines.TEAM_ENEMY)
+        {
+            if (spotStatusView == null)
+                spotStatusView = new SpotStatusView(this, Config.config.playersPanel.enemySpottedMarker);
+        }
+    }
+
+    public function updateSpotStatusView()
+    {
+        if (spotStatusView != null)
+            spotStatusView.update();
     }
 
     function completeLoad()
@@ -147,6 +163,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
     {
         return (wrapper._parent._parent._itemRenderer == "LeftItemRendererIcon") ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY;
     }
+
 }
 /*data: {
   "igrLabel": "",
