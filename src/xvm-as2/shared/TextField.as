@@ -2,10 +2,10 @@
  Copyright (c) 2009 Scaleform Corporation. All Rights Reserved.
  Portions of the integration code is from Epic Games as identified by Perforce annotations.
  Copyright © 2010 Epic Games, Inc. All rights reserved.
- 
+
  Licensees may use this file in accordance with the valid Scaleform
- License Agreement provided with the software. This file is provided 
- AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY 
+ License Agreement provided with the software. This file is provided
+ AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY
  OF DESIGN, MERCHANTABILITY AND FITNESS FOR ANY PURPOSE.
 **********************************************************************/
 
@@ -15,7 +15,7 @@
 import flash.geom.Rectangle;
 
 dynamic intrinsic class TextField {
-	
+
 	var _alpha:Number;
 	var _height:Number;
 	var _highquality:Number;
@@ -88,7 +88,7 @@ dynamic intrinsic class TextField {
 	function onKillFocus(newFocus:Object):Void;
 	function onScroller(scrolledField:TextField):Void;
 	function onSetFocus(oldFocus:Object):Void;
-	
+
 	//GFx Extensions;
 	var autoFit:Boolean;
 	var caretIndex:Number;
@@ -124,5 +124,5 @@ dynamic intrinsic class TextField {
 	function copyToClipboard(richClipboard:Boolean, startIndex:Number, endIndex:Number):Void;
 	function cutToClipboard(richClipboard:Boolean, startIndex:Number, endIndex:Number):Void;
 	function pasteFromClipboard(richClipboard:Boolean, startIndex:Number, endIndex:Number):Void
-	
+
 }
