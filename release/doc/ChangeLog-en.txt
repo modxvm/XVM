@@ -1,4 +1,4 @@
-﻿XVM-5.3.0-dev:
+﻿XVM-5.3.0-test3:
   [NEW FUNCTIONS]
   * new section playersPanel/allySpottedMarker - like enemySpottedMarker, but for ally team
 
