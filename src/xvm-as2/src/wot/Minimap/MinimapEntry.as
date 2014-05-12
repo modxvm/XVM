@@ -91,7 +91,10 @@ class wot.Minimap.MinimapEntry
         wrapper.removeMovieClip = function()
         {
             if ($this.uid != null)
+            {
+                //Logger.add("remove: " + $this.uid);
                 GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_LOST, $this.uid));
+            }
             this["$removeMovieClip"]()
         }
     }
@@ -177,22 +180,21 @@ class wot.Minimap.MinimapEntry
         uid = SyncModel.instance.getTestUid();
         // Inform PlayersPanel
         if (uid != null)
+        {
+            //Logger.add("add:   " + uid);
             GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENTRY_REVEALED, uid));
+        }
 
         if (MapConfig.revealedEnabled)
         {
-            getLabel();
+            labelMc = LabelsContainer.getLabel(uid);
+            if (wrapper.entryName == STATIC_ICON_BASE)
+            {
+                if (wrapper.orig_entryName == null)
+                    wrapper.orig_entryName = wrapper.entryName;
+                wrapper.setEntryName(STATIC_ICON_CONTROL);
+            }
             setLabelToMimicEntryMoves();
-        }
-    }
-    private function getLabel():Void
-    {
-        labelMc = labelsContainer.getLabel(uid, wrapper.entryName, wrapper.vehicleClass);
-        if (wrapper.entryName == STATIC_ICON_BASE)
-        {
-            if (wrapper.orig_entryName == null)
-                wrapper.orig_entryName = wrapper.entryName;
-            wrapper.setEntryName(STATIC_ICON_CONTROL);
         }
     }
 
@@ -228,10 +230,5 @@ class wot.Minimap.MinimapEntry
         }
 
         return ret;
-    }
-
-    private function get labelsContainer():LabelsContainer
-    {
-        return LabelsContainer.instance;
     }
 }

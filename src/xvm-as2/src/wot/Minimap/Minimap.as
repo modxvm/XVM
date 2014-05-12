@@ -15,8 +15,6 @@ class wot.Minimap.Minimap
     public var wrapper:net.wargaming.ingame.Minimap;
     public var base:net.wargaming.ingame.Minimap;
 
-    private var autoUpdate:AutoUpdate;
-
     public function Minimap(wrapper:net.wargaming.ingame.Minimap, base:net.wargaming.ingame.Minimap)
     {
         this.wrapper = wrapper;
@@ -180,11 +178,6 @@ class wot.Minimap.Minimap
     private function startExtendedProcedure():Void
     {
         SyncModel.instance.updateIconUids();
-
-        /**
-         * Utility model for some features
-         */
-        AutoUpdate.instance.startTimer();
 
         _global.setTimeout(function() { Features.instance.applyMajorMods(); }, 1);
     }

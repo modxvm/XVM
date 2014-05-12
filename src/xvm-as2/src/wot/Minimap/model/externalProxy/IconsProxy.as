@@ -50,7 +50,7 @@ class wot.Minimap.model.externalProxy.IconsProxy
     }
 
     /** Used by VehiclePositionTracking to get vehicle positions */
-    public static function get entry(uid:Number):MinimapEntry
+    public static function entry(uid:Number):MinimapEntry
     {
         var minimapEntries:Array = _allEntries;
         var assigned:Array = [];

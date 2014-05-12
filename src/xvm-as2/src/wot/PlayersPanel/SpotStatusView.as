@@ -66,6 +66,7 @@ class wot.PlayersPanel.SpotStatusView extends XvmComponent
     // override
     public function draw()
     {
+        //Logger.add("draw");
         // Define point relative to which marker is set
         // Set every update for correct position in the fog of war mode.
         spotStatusMarker._x = renderer.wrapper.vehicleLevel._x + cfg.Xoffset; // vehicleLevel._x is 8 for example

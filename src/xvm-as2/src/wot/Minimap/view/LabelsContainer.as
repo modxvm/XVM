@@ -1,12 +1,12 @@
 import com.xvm.*;
-import flash.geom.Point;
+import flash.geom.*;
 import wot.Minimap.*;
-import wot.Minimap.dataTypes.Player;
-import wot.Minimap.model.externalProxy.IconsProxy;
-import wot.Minimap.view.LabelViewBuilder;
-import wot.PlayersPanel.PlayersPanelProxy;
+import wot.Minimap.dataTypes.*;
+import wot.Minimap.model.externalProxy.*;
+import wot.Minimap.view.*;
+import wot.PlayersPanel.*;
 
-class wot.Minimap.view.LabelsContainer
+class wot.Minimap.view.LabelsContainer extends XvmComponent
 {
     private static var _instance:LabelsContainer;
 
@@ -19,49 +19,82 @@ class wot.Minimap.view.LabelsContainer
     public static var ENTRY_NAME_FIELD_NAME:String = "entryName";
     public static var VEHICLE_CLASS_FIELD_NAME:String = "vehicleClass";
 
+    // MinimapEntry requests a label
+    public static function getLabel(uid:Number):MovieClip
+    {
+        //Logger.add("LabelsContainer.getLabel()");
+        return instance._getLabel(uid);
+    }
+
+    // PRIVATE
+
     private static var CONTAINER_NAME:String = "labelsContainer";
     private static var OFFMAP_COORDINATE:Number = 500;
     private static var DEAD_DEPTH_START:Number = 100;
     private static var LOST_DEPTH_START:Number = 200;
-	private static var ALIVE_DEPTH_START:Number = 300;
+    private static var ALIVE_DEPTH_START:Number = 300;
 
-    public var holderMc:MovieClip;
+    private var holderMc:MovieClip;
 
-    public static function get instance():LabelsContainer
+    private var invalidateList:Object = {};
+
+    private static function get instance():LabelsContainer
     {
         if (!_instance)
-        {
             _instance = new LabelsContainer();
-        }
-
         return _instance;
     }
 
-    public function LabelsContainer()
+    private function LabelsContainer()
     {
         var icons:MovieClip = MinimapProxy.wrapper.icons;
         holderMc = icons.createEmptyMovieClip(CONTAINER_NAME, wot.Minimap.Minimap.LABELS);
-        GlobalEventDispatcher.addEventListener(AutoUpdate.UPDATE_BY_TIMER_EVENT, this, onTimerTick);
+
+        GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_REVEALED, this, onMinimapEvent)
+        GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_LOST, this, onMinimapEvent)
     }
 
-	/** MinimapEntry requests a label */
-    public function getLabel(uid:Number, entryName:String, vehicleClass:String):MovieClip
+    private function onMinimapEvent(e:MinimapEvent)
     {
-        //Logger.add("LabelsContainer.getLabel()");
+        invalidateList[e.value] = true;
+        invalidate();
+    }
 
-        if (!holderMc[uid])
+    // override
+    function draw()
+    {
+        //Logger.add("LabelsContainer.updateLabelsStyle()");
+        for (var uidStr:String in invalidateList)
         {
-            createLabel(uid, entryName, vehicleClass);
-        }
+            var uid:Number = Number(uidStr);
+            var labelMc:MovieClip = _getLabel(uid);
+            var previousStatus:Number = labelMc[STATUS_FIELD_NAME];
+            var actualStatus:Number = getPresenceStatus(uid);
 
+            if (previousStatus != actualStatus)
+            {
+                labelMc[STATUS_FIELD_NAME] = actualStatus;
+                recreateTextField(labelMc);
+                updateLabelDepth(labelMc);
+            }
+        }
+        invalidateList = { };
+    }
+
+    private function _getLabel(uid:Number):MovieClip
+    {
+        if (holderMc[uid] == null)
+            createLabel(uid);
         return holderMc[uid];
     }
 
-    // -- Private
-
-    private function createLabel(uid:Number, entryName:String, vehicleClass:String):Void
+    private function createLabel(uid:Number):Void
     {
         //Logger.add("LabelsContainer.createLabel()");
+
+        var entry:MinimapEntry = IconsProxy.entry(uid);
+        var entryName = entry.wrapper.entryName;
+        var vehicleClass = entry.wrapper.vehicleClass;
 
         var depth:Number = getFreeDepth(ALIVE_DEPTH_START);
         var labelMc:MovieClip = holderMc.createEmptyMovieClip("" + uid, depth);
@@ -97,40 +130,6 @@ class wot.Minimap.view.LabelsContainer
         tf.removeTextField();
 
         LabelViewBuilder.createTextField(labelMc);
-    }
-
-    private function onTimerTick(event:MinimapEvent):Void
-    {
-        //Logger.add("LabelsContainer.onTimerTick()");
-        updateLabelsStyle();
-    }
-
-    private function updateLabelsStyle():Void
-    {
-        //Logger.add("LabelsContainer.updateLabelsStyle()");
-        for (var uidStr:String in holderMc)
-        {
-            var uid:Number = Number(uidStr);
-            /**
-             * Have to check for uid value consistency
-             * because we are iterating through MovieClip props not Array.
-             * There are four keys except movie clips named by uid:
-             * enabled, tweenFrom, tweenEnd, tweenTo.
-             */
-            if (uid)
-            {
-                var labelMc:MovieClip = holderMc[uidStr];
-                var previousStatus:Number = labelMc[STATUS_FIELD_NAME];
-                var actualStatus:Number = getPresenceStatus(uid);
-
-                if (previousStatus != actualStatus)
-                {
-                    labelMc[STATUS_FIELD_NAME] = actualStatus;
-                    recreateTextField(labelMc);
-                    updateLabelDepth(labelMc);
-                }
-            }
-        }
     }
 
     private function updateLabelDepth(labelMc:MovieClip):Void
