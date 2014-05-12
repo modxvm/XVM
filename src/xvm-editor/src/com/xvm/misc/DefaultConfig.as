@@ -288,8 +288,8 @@ package com.xvm.misc
             // Display options for icons of never seen enemies
             c.enemySpottedMarker = {
               enabled: false,
-              Xoffset: -22,
-              Yoffset: -2,
+              Xoffset: 15,
+              Yoffset: 0,
               format: {
                 neverSeen: "<FONT FACE=\"$FieldFont\" SIZE=\"24\" COLOR=\"#DDDDDD\">*</FONT>",
                 lost: "",
@@ -305,8 +305,8 @@ package com.xvm.misc
             };
             c.allySpottedMarker = {
               enabled: false,
-              Xoffset: -22,
-              Yoffset: -2,
+              Xoffset: -15,
+              Yoffset: 0,
               format: {
                 lost: "",
                 revealed: "",

@@ -74,7 +74,7 @@
       "enabled": false,
       // Offset relative to level icon (by X, Y).
       // Смещение относительно иконки уровня танка (по X, Y).
-      "Xoffset": 15,
+      "Xoffset": -15,
       "Yoffset": 0,
       // Формат.
       "format": {

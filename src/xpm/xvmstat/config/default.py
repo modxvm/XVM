@@ -261,8 +261,8 @@ class _DefaultConfig(object):
             # Display options for icons of never seen enemies
             'enemySpottedMarker': {
                 'enabled': False,
-                'Xoffset': -22,
-                'Yoffset': -2,
+                'Xoffset': 15,
+                'Yoffset': 0,
                 'format': {
                     'neverSeen': "<FONT FACE=\"$FieldFont\" SIZE=\"24\" COLOR=\"#DDDDDD\">*</FONT>",
                     'lost': "",
@@ -278,8 +278,8 @@ class _DefaultConfig(object):
             },
             'allySpottedMarker': {
                 'enabled': False,
-                'Xoffset': -22,
-                'Yoffset': -2,
+                'Xoffset': -15,
+                'Yoffset': 0,
                 'format': {
                     'lost': "",
                     'revealed': "",
