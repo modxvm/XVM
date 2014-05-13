@@ -6,6 +6,7 @@ import wot.Minimap.dataTypes.*;
 class com.xvm.Macros
 {
     private static var dict:Object = {}; //{ PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
+    public static var globals:Object = {};
 
     public static function Format(playerName:String, format:String, options:Object):String
     {
@@ -107,13 +108,13 @@ class com.xvm.Macros
         if (options.darken && Strings.startsWith("c:", name))
             name += "#d";
 
-        if (!pdata.hasOwnProperty(name))
+        if (!pdata.hasOwnProperty(name) && !globals.hasOwnProperty(name))
         {
             //Logger.add("Warning: unknown macro: " + macro);
             return def;
         }
 
-        var value = pdata[name];
+        var value = pdata.hasOwnProperty(name) ? pdata[name] : globals[name];
         //Logger.add("value:" + value);
         if (value == null)
             return def;
@@ -176,6 +177,8 @@ class com.xvm.Macros
         //Logger.add(res);
         return res;
     }
+
+    // Macros registration
 
     public static function RegisterPlayerData(playerName:String, data:Object, team:Number)
     {
@@ -288,6 +291,12 @@ class com.xvm.Macros
             // {{c:system}}
             pdata["c:system"] = function(o):String { return "#" + Strings.padLeft(o.getSystemColor(o).toString(16), 6, "0"); }
         }
+    }
+
+    public static function RegisterBattleTierData(battletier:Number)
+    {
+        // {{battletier}}
+        globals["battletier"] = battletier;
     }
 
     public static function RegisterStatMacros(playerName:String, stat:StatData)

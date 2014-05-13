@@ -89,18 +89,7 @@
     http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextField.html#htmlText
 
   Macros available:
-    In players panel, battle loading screen and statistic form:
-      {{nick}}        - player nickname with clan name
-      {{name}}        - player nickname without clan name
-      {{clan}}        - clan name with brackets (empty if no clan)
-      {{clannb}}      - clan name without brackets
-      {{vehicle}}     - vehicle name
-      {{vehiclename}} - internal vehicle name (usa-M24_Chaffee)
-      {{vtype}}       - vehicle type
-      {{c:vtype}}     - color depending on vehicle type
-      + statistics macros (see below)
-
-    In tank markers:
+    In players panel, battle loading screen, statistic form and vehicle markers:
       {{nick}}        - player nickname with clan name
       {{name}}        - player nickname without clan name
       {{clan}}        - clan name with brackets (empty if no clan)
@@ -112,26 +101,29 @@
       {{vtype}}       - vehicle type
       {{level}}       - vehicle level (Arabic numerals)
       {{rlevel}}      - vehicle level (Roman numerals)
-      {{turret}}      - stock turret marker:
-                          "*" symbol - stock turret, cannot mount top gun
-                          "'" symbol - stock turret, top gun is possible
-                          empty - top turret
       {{hp}}          - current health points
       {{hp-ratio}}    - current health ratio (without '%' sign)
       {{hp-max}}      - maximum health points
-      {{dmg}}         - damage health points
-      {{dmg-ratio}}   - damage health ratio (without '%' sign)
-      {{dmg-kind}}    - damage kind (attack, fire, ramming, ...)
       {{c:hp}}        - color depending on current health points (only in vehicle markers)
       {{c:hp-ratio}}  - color depending on current health ratio (only in vehicle markers)
-      {{c:dmg}}       - color depending on damage source
-      {{c:dmg-kind}}  - color depending on damage kind
       {{c:vtype}}     - color depending on vehicle type
       {{c:system}}    - system color (disable override color)
       {{a:hp}}        - transparency depending on current health points (only in vehicle markers)
       {{a:hp-ratio}}  - transparency depending on current health ratio (only in vehicle markers)
-      {{l10n:blownUp}}  - localizated text "Blown-up!", only in "blowupMessage"
+      {{l10n:blownUp}} - localizated text "Blown-up!", only in "blowupMessage"
+      {{battletier}}  - guessed current battle tier
       + statistics macros (see below)
+
+    In vehicle markers only:
+      {{turret}}      - stock turret marker:
+                          "*" symbol - stock turret, cannot mount top gun
+                          "'" symbol - stock turret, top gun is possible
+                          empty - top turret
+      {{dmg}}         - damage health points
+      {{dmg-ratio}}   - damage health ratio (without '%' sign)
+      {{dmg-kind}}    - damage kind (attack, fire, ramming, ...)
+      {{c:dmg}}       - color depending on damage source
+      {{c:dmg-kind}}  - color depending on damage kind
 
     In Hits Log:
       {{n}}           - total number of hits

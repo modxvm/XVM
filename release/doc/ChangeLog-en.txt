@@ -1,4 +1,7 @@
-﻿XVM-5.3.0-test3:
+﻿XVM-5.3.0-dev:
+  * added in-battle macro {{battletier}} - guessed current battle tier
+
+XVM-5.3.0-test3:
   [NEW FUNCTIONS]
   * new section playersPanel/allySpottedMarker - like enemySpottedMarker, but for ally team
 

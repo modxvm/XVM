@@ -15,6 +15,7 @@ package com.xvm.utils
     {
         // { PlayerName: { macro1: func || value, macro2:... }, PlayerName: {...} }
         private static var dict:Object = new Object();
+        public static var globals:Object = new Object();
 
         public static function Format(playerName:String, format:String, options:MacrosFormatOptions = null):String
         {
@@ -117,10 +118,10 @@ package com.xvm.utils
             // substitute
             //Logger.add("name:" + name + " fmt:" + fmt + " suf:" + suf + " def:" + def);
 
-            if (!pdata.hasOwnProperty(name))
+            if (!pdata.hasOwnProperty(name) && !globals.hasOwnProperty(name))
                 return def;
 
-            var value:* = pdata[name];
+            var value:* = pdata.hasOwnProperty(name) ? pdata[name] : globals[name];
             var type:String = typeof value;
             //Logger.add("type:" + type + " value:" + value);
 
@@ -184,6 +185,8 @@ package com.xvm.utils
             //Logger.add(res);
             return res;
         }
+
+        // Macros registration
 
         public static function RegisterMinimalMacrosData(fullPlayerName:String, vid:int):void
         {
@@ -436,6 +439,12 @@ package com.xvm.utils
             pdata["a:tfb"] = MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TFB, stat.v.fb);
             // {{a:tsb}}
             pdata["a:tsb"] = MacrosUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TSB, stat.v.sb);
+        }
+
+        public static function RegisterBattleTierData(battletier:Number):void
+        {
+            // {{battletier}}
+            globals["battletier"] = battletier;
         }
 
         // PRIVATE

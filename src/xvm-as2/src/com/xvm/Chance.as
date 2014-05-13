@@ -37,7 +37,7 @@ class com.xvm.Chance
         //if (Math.abs(teamsCount.ally - teamsCount.enemy) > 2)
         //    return "";
 
-        Chance.battleTier = Chance.GuessBattleTier();
+        Chance.battleTier = Macros.globals["battletier"];
 
         var chG = GetChance(ChanceFuncG);
         //var chT = GetChance(ChanceFuncT);
@@ -315,50 +315,6 @@ class com.xvm.Chance
             raw: Ea / (Ea + Ee) * 100,
             percentF: Math.round(1000 * p) / 1000
         };
-    }
-
-    private static function GuessBattleTier(): Number
-    {
-        // 1. Collect all vehicles info
-        var vis: Array = [];
-        for (var pname:String in Stat.s_data)
-        {
-            var stat:StatData = Stat.s_data[pname].stat;
-            var vdata:VehicleData = stat.v.data;
-            if (vdata == null || vdata.key == "ussr:Observer")
-                continue;
-            vis.push( {
-                level: vdata.level,
-                Tmin: vdata.tierLo,
-                Tmax: vdata.tierHi
-            });
-        }
-
-        // 2. Sort vehicles info by top tiers descending
-        vis.sortOn("Tmax", Array.NUMERIC | Array.DESCENDING);
-
-        // 3. Find minimum Tmax and maximum Tmin
-        var Tmin = vis[0].Tmin;
-        var Tmax = vis[0].Tmax;
-        //Logger.add("T before=" + Tmin + ".." + Tmax);
-        var vis_length = vis.length;
-        for (var i = 1; i < vis_length; ++i)
-        {
-            var vi = vis[i];
-            //Logger.add("l=" + vi.level + " Tmin=" + vi.Tmin + " Tmax=" + vi.Tmax);
-            if (vi.Tmax < Tmin) // Skip "trinkets"
-                continue;
-            if (vi.Tmin > Tmin)
-                Tmin = vi.Tmin;
-            if (vi.Tmax < Tmax)
-                Tmax = vi.Tmax;
-        }
-        //Logger.add("T after=" + Tmin + ".." + Tmax);
-
-        //// 4. Calculate average tier
-        //return (Tmax + Tmin) / 2.0;
-        // 4. Return max tier
-        return Tmax;
     }
 
     private static function FormatChangeText(txt, chance)

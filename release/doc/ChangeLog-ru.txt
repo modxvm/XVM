@@ -1,4 +1,7 @@
-﻿XVM-5.3.0-test3:
+﻿XVM-5.3.0-dev:
+  * добавлен макрос {{battletier}} - угаданный уровень текущего боя
+
+XVM-5.3.0-test3:
   [NEW FUNCTIONS]
   * новая секция playersPanel/allySpottedMarker - как enemySpottedMarker, но для союзников
 
