@@ -18,6 +18,7 @@ class wot.PlayersPanel.SpotStatusView extends XvmComponent
     private var renderer:PlayerListItemRenderer;
     private var cfg:Object;
     private var spotStatusMarker:TextField;
+    private var m_name:String;
 
     public function SpotStatusView(renderer:PlayerListItemRenderer, cfg:Object)
     {
@@ -55,24 +56,23 @@ class wot.PlayersPanel.SpotStatusView extends XvmComponent
         invalidate();
     }
 
-    public function updateStatus(e):Void
+    public function invalidateData(data)
     {
-        if (renderer.wrapper.data.uid != e.data)
-            return;
-        //Logger.addObject(e);
-        invalidate();
+        if (m_name != Utils.GetPlayerName(data.label))
+            invalidate();
     }
 
     // override
     public function draw()
     {
-        //Logger.add("draw");
+        //Logger.add("draw: " + renderer.wrapper.data.label);
         // Define point relative to which marker is set
         // Set every update for correct position in the fog of war mode.
         spotStatusMarker._x = renderer.wrapper.vehicleLevel._x + cfg.Xoffset; // vehicleLevel._x is 8 for example
         spotStatusMarker._y = renderer.wrapper.vehicleLevel._y + cfg.Yoffset; // vehicleLevel._y is -445.05 for example
 
         var data = renderer.wrapper.data;
+        m_name = Utils.GetPlayerName(data.label);
         var uid:Number = data.uid;
         var txt:String;
         var status:Number = SpotStatusModel.defineStatus(uid, data.vehicleState);
@@ -88,9 +88,7 @@ class wot.PlayersPanel.SpotStatusView extends XvmComponent
             txt = formatsCacheEnemy[status][isArty ? 1 : 0];
         }
 
-        var name:String = Utils.GetPlayerName(data.label);
-
-        var obj = Defines.battleStates[name] || { };
+        var obj = Defines.battleStates[m_name] || { };
         if (status == SpotStatusModel.DEAD && obj.dead == false)
         {
             obj.dead = true;
@@ -99,12 +97,20 @@ class wot.PlayersPanel.SpotStatusView extends XvmComponent
         }
         obj.darken = status == SpotStatusModel.DEAD;
 
-        txt = Macros.Format(name, txt, obj);
+        txt = Macros.Format(m_name, txt, obj);
         //Logger.add(txt);
         spotStatusMarker.htmlText = txt;
     }
 
-    // -- Private
+    // PRIVATE
+
+    private function updateStatus(e):Void
+    {
+        if (renderer.wrapper.data.uid != e.data)
+            return;
+        //Logger.addObject(e);
+        invalidate();
+    }
 
     private function get isAlly():Boolean
     {

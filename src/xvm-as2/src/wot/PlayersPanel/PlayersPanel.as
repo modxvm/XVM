@@ -39,13 +39,8 @@ class wot.PlayersPanel.PlayersPanel
     // wrapped methods
     /////////////////////////////////////////////////////////////////
 
-    /**
-     * Sorted list of all UIDs in panel.
-     * Used for Minimap syncronization.
-     */
-    public var m_uids:Array;
-
     private var m_data:Object;
+    private var m_dead_noticed:Object = { };
 
     private var m_knownPlayersCount:Number = 0; // for Fog of War mode.
     private var m_postmortemIndex:Number = 0;
@@ -73,7 +68,6 @@ class wot.PlayersPanel.PlayersPanel
     private function setDataImpl(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStrOrig, vehiclesStrOrig, namesStrOrig)
     {
         //Logger.add("PlayersPanel.setData()");
-        //Logger.add("PlayersPanel.setData2()");
         //Logger.addObject(data, 3);
         //Logger.add(vehiclesStrOrig);
         //Logger.add(namesStr);
@@ -121,6 +115,8 @@ class wot.PlayersPanel.PlayersPanel
 
             //Logger.add(vehiclesStr);
 
+            var deadCountPrev:Number = wrapper.saved_params[wrapper.m_type].dPC;
+
             // [2/3] fix WG bug - this function is slow, don't call it if not required.
             wrapper.m_list["invalidateData"] = function() {}
 
@@ -146,7 +142,21 @@ class wot.PlayersPanel.PlayersPanel
             wrapper.m_vehicles.htmlText = wrapper.m_vehicles.htmlText.split('LEADING="9"').join('LEADING="' + leadingVehicles + '"');
             wrapper.m_vehicles._y = centeredTextY + leadingVehicles / 2.0; // centering on cell, because of align=top
 
-            updateSpotStatusMarkers();
+            // notice about dead players
+            if (dead_players_count != deadCountPrev)
+            {
+                for (var i = len - dead_players_count; i < len; ++i)
+                {
+                    var item = data[i];
+                    var uid:Number = item.uid;
+                    if (!m_dead_noticed.hasOwnProperty(uid.toString()))
+                    {
+                        m_dead_noticed[uid] = true;
+                        //Logger.add("dead: " + item.uid);
+                        GlobalEventDispatcher.dispatchEvent( { type: Defines.E_PLAYER_DEAD, value: item.uid } );
+                    }
+                }
+            }
         }
         catch (e:Error)
         {
@@ -327,22 +337,12 @@ class wot.PlayersPanel.PlayersPanel
         wrapper.m_list.onEnterFrame = function()
         {
             //Logger.add("PlayersPanel.checkLoading(): frame");
-            if (this._dataProvider.length > 0)
+            if (this._dataProvider != null && this._dataProvider.length > 0)
             {
                 delete this.onEnterFrame;
-
-                this._parent.updateUids();
 
                 GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.PANEL_READY));
             }
         }
-    }
-
-    // Refreshes spot status markers.
-    private function updateSpotStatusMarkers():Void
-    {
-        var len:Number = wrapper.m_list.renderers.length;
-        for (var i:Number = 0; i < len; ++i)
-            wrapper.m_list.renderers[i].xvm_worker.updateSpotStatusView();
     }
 }

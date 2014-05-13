@@ -43,6 +43,7 @@ class wot.PlayersPanel.SpotStatusModel
         artyCache = { };
         GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_REVEALED, this, onRevealed)
         GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_LOST, this, onLost)
+        GlobalEventDispatcher.addEventListener(Defines.E_PLAYER_DEAD, this, onDead);
     }
 
     private function _defineStatus(uid:Number, vehicleState:Number):Number
@@ -92,6 +93,12 @@ class wot.PlayersPanel.SpotStatusModel
     {
         //Logger.add("SpotStatusModel.onLost(" + e.value + ")");
         revealed[e.value] = false;
+        GlobalEventDispatcher.dispatchEvent( { type: Defines.E_SPOT_STATUS_UPDATED, data: e.value } );
+    }
+
+    private function onDead(e)
+    {
+        //Logger.add("SpotStatusModel.onDead(" + e.value + ")");
         GlobalEventDispatcher.dispatchEvent( { type: Defines.E_SPOT_STATUS_UPDATED, data: e.value } );
     }
 }

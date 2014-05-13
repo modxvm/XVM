@@ -149,6 +149,8 @@
     },
     "enemySpottedMarker": {
       "enabled": true,
+      "Xoffset": -15,
+      "Yoffset": 0,
       "format": {
         "neverSeen": "<font face='$FieldFont' size='24' color='#999999'>*</font>",
         "lost": "<font face='$FieldFont' size='24' color='#DDDDDD'>*</font>",
@@ -164,6 +166,8 @@
     },
     "allySpottedMarker": {
       "enabled": true,
+      "Xoffset": -15,
+      "Yoffset": 0,
       "format": {
         "lost": "<font face='$FieldFont' size='24' color='#DDDDDD'>*</font>",
         "revealed": "",

@@ -69,12 +69,6 @@ class wot.PlayersPanel.PlayerListItemRenderer
         }
     }
 
-    public function updateSpotStatusView()
-    {
-        if (spotStatusView != null)
-            spotStatusView.invalidate();
-    }
-
     function completeLoad()
     {
         if (m_iconLoaded)
@@ -114,7 +108,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
     function updateImpl()
     {
         var data:Object = wrapper.data;
-        //com.xvm.Logger.add("update: " + (data ? data.label : "(null)"))
+        //Logger.add("update: " + (data ? data.label : "(null)"))
         var saved_icon:String;
         if (data != null)
         {
@@ -131,6 +125,9 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
             // Player/clan icons
             attachClanIconToPlayer(data);
+
+            // Spot Status View
+            updateSpotStatusView(data);
         }
 
         if (Config.config.playersPanel.removeSquadIcon && (wrapper.squadIcon != null))
@@ -162,6 +159,12 @@ class wot.PlayersPanel.PlayerListItemRenderer
         }
         PlayerInfo.setSource(m_clanIcon, Utils.GetPlayerName(data.userName), data.clanAbbrev);
         m_clanIcon["holder"]._alpha = ((data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) != 0) ? 100 : 50;
+    }
+
+    private function updateSpotStatusView(data:Object):Void
+    {
+        if (spotStatusView != null)
+            spotStatusView.invalidateData(data);
     }
 
     private function get team(): Number

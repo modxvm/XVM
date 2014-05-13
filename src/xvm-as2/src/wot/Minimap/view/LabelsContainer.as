@@ -50,11 +50,12 @@ class wot.Minimap.view.LabelsContainer extends XvmComponent
         var icons:MovieClip = MinimapProxy.wrapper.icons;
         holderMc = icons.createEmptyMovieClip(CONTAINER_NAME, wot.Minimap.Minimap.LABELS);
 
-        GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_REVEALED, this, onMinimapEvent)
-        GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_LOST, this, onMinimapEvent)
+        GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_REVEALED, this, onMinimapEvent);
+        GlobalEventDispatcher.addEventListener(MinimapEvent.ENTRY_LOST, this, onMinimapEvent);
+        GlobalEventDispatcher.addEventListener(Defines.E_PLAYER_DEAD, this, onMinimapEvent);
     }
 
-    private function onMinimapEvent(e:MinimapEvent)
+    private function onMinimapEvent(e)
     {
         invalidateList[e.value] = true;
         invalidate();

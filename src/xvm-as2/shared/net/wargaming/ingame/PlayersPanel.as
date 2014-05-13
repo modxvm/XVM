@@ -15,6 +15,7 @@
     var m_list: MovieClip;
     var m_type: String;
     var players_bg: MovieClip;
+    var saved_params:Object;
 
     function setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStr, vehiclesStr, namesStr);
     function saveData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStr, vehiclesStr, namesStr);

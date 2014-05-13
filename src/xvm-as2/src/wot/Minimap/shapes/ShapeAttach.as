@@ -1,7 +1,7 @@
-import com.xvm.GlobalEventDispatcher;
-import wot.Minimap.model.externalProxy.IconsProxy;
-import wot.Minimap.MinimapEntry;
-import wot.Minimap.model.mapSize.MapSizeModel;
+import com.xvm.*;
+import wot.Minimap.*;
+import wot.Minimap.model.externalProxy.*;
+import wot.Minimap.model.mapSize.*;
 
 /**
  * Handles circles and lines scaling aspect.
@@ -35,18 +35,18 @@ class wot.Minimap.shapes.ShapeAttach
 
         var metersPerPoint:Number = MAP_SIZE_IN_POINTS / mapSizeInMeters;
         scaleFactor = metersPerPoint;
-        
+
         /** Hide sphapes on players dead event (postmortem mod) */
-        GlobalEventDispatcher.addEventListener("self_dead", this, postmortemMod);
+        GlobalEventDispatcher.addEventListener(Defines.E_SELF_DEAD, this, postmortemMod);
     }
 
     // -- Private
-    
+
     private function get mapSizeInMeters():Number
     {
         return MapSizeModel.instance.getFullSide();
     }
-    
+
     private function postmortemMod(event) {
         selfAttachments._visible = false;
     }
