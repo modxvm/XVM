@@ -51,14 +51,14 @@
     <compile path="src\com\xvm\Wrapper.as" />
     <compile path="src\wot\Minimap\Minimap.as" />
     <compile path="src\wot\Minimap\MinimapEntry.as" />
-    <compile path="src\wot\PlayersPanel\PlayerListItemRenderer.as" />
-    <compile path="src\wot\PlayersPanel\PlayersPanel.as" />
     <compile path="src\wot\battle\BattleMain.as" />
     <compile path="src\wot\StatisticForm\BattleStatItemRenderer.as" />
     <compile path="src\wot\TeamBasesPanel\CaptureBar.as" />
     <compile path="src\wot\TeamBasesPanel\TeamBasesPanel.as" />
     <compile path="src\wot\VehicleMarkersManager\VehicleMarkersCanvas.as" />
     <compile path="src\wot\VehicleMarkersManager\VehicleMarkerProxy.as" />
+    <compile path="src\wot\PlayersPanel\PlayersPanel.as" />
+    <compile path="src\wot\PlayersPanel\PlayerListItemRenderer.as" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->
   <library>

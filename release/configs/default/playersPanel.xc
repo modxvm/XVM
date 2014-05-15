@@ -64,30 +64,43 @@
         }
       }
     },
-    // Ally spotted status marker at left side panel.
-    // This feature depends on enabled XVM minimap mod
-    // Маркер статуса засвета в левой боковой панели списка игроков.
-    // Фича зависит от включенного XVM мода миникарты
-    "allySpottedMarker": {
-      // false - Disable.
-      // false - отключить.
-      "enabled": false,
-      // Offset relative to level icon (by X, Y).
-      // Смещение относительно иконки уровня танка (по X, Y).
-      "Xoffset": -15,
-      "Yoffset": 0,
-      // Формат.
-      "format": {
-        // This ally was lost at minimap.
-        // Этот союзник отмечен на миникарте как потерянный.
-        "lost": "",
-        // Ally currently revealed at minimap.
-        // Союзник виден на миникарте прямо сейчас.
-        "revealed": "",
-        // Dead ally.
-        // Уничтоженный союзник.
-        "dead": ""
+    // Options for the "none" panels - empty panels.
+    // Режим ушей "none" - пустые уши.
+    "none": {
+      // Extra text fields.
+      // Дополнительные текстовые поля.
+      "extraTextFields": {
+        "leftPanel": {
+          "x": 0, // from left side of screen
+          "y": 65,
+          "width": 350,
+          "height": 25,
+          // Set of formats for left panel
+          // Набор форматов для левой панели
+          "formats": []
+        },
+        "rightPanel": {
+          "x": 0, // from right side of screen
+          "y": 65,
+          "width": 350,
+          "height": 25,
+          // Set of formats for right panel
+          // Набор форматов для правой панели
+          "formats": []
+        }
       }
+    },
+    // Options for the "short" panels - panels with frags and vehicle icon.
+    // Режим ушей "short" - короткие уши (фраги и иконка танка).
+    "short": {
+      // Extra text fields. Each text field have size 350x25. Fields are placed one above the other.
+      // Дополнительные текстовые поля. Каждое поле имеет размер 350x25. Поля располагаются друг над другом.
+      // Set of formats for left panel
+      // Набор форматов для левой панели
+      "extraTextFieldsLeft": [],
+      // Set of formats for right panel
+      // Набор форматов для правой панели
+      "extraTextFieldsRight": []
     },
     // Options for the "medium" panels - the first of the medium panels.
     // Режим ушей "medium" - первые средние уши в игре.
@@ -100,7 +113,15 @@
       "formatLeft": "<font color='{{c:xwn8}}'>{{nick}}</font>",
       // Display format for the right panel (macros allowed, see readme-en.txt).
       // Формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt).
-      "formatRight": "<font color='{{c:xwn8}}'>{{nick}}</font>"
+      "formatRight": "<font color='{{c:xwn8}}'>{{nick}}</font>",
+      // Extra text fields. Each text field have size 350x25. Fields are placed one above the other.
+      // Дополнительные текстовые поля. Каждое поле имеет размер 350x25. Поля располагаются друг над другом.
+      // Set of formats for left panel
+      // Набор форматов для левой панели
+      "extraTextFieldsLeft": [],
+      // Set of formats for right panel
+      // Набор форматов для правой панели
+      "extraTextFieldsRight": []
     },
     // Options for the "medium2" panels - the second of the medium panels.
     // Режим ушей "medium2" - вторые средние уши в игре.
@@ -113,7 +134,15 @@
       "formatLeft": "<font color='{{c:xwn8}}'>{{vehicle}}</font>",
       // Display format for the right panel (macros allowed, see readme-en.txt).
       // Формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt).
-      "formatRight": "<font color='{{c:xwn8}}'>{{vehicle}}</font>"
+      "formatRight": "<font color='{{c:xwn8}}'>{{vehicle}}</font>",
+      // Extra text fields. Each text field have size 350x25. Fields are placed one above the other.
+      // Дополнительные текстовые поля. Каждое поле имеет размер 350x25. Поля располагаются друг над другом.
+      // Set of formats for left panel
+      // Набор форматов для левой панели
+      "extraTextFieldsLeft": [],
+      // Set of formats for right panel
+      // Набор форматов для правой панели
+      "extraTextFieldsRight": []
     },
     // Options for the "large" panels - the widest panels.
     // Режим ушей "large" - широкие уши в игре.
@@ -128,7 +157,15 @@
       // Display format for vehicle name (macros allowed, see readme-en.txt).
       // Формат отображения названия танка (допускаются макроподстановки, см. readme-ru.txt).
       "vehicleFormatLeft": "{{vehicle}}",
-      "vehicleFormatRight": "{{vehicle}}"
+      "vehicleFormatRight": "{{vehicle}}",
+      // Extra text fields. Each text field have size 350x25. Fields are placed one above the other.
+      // Дополнительные текстовые поля. Каждое поле имеет размер 350x25. Поля располагаются друг над другом.
+      // Set of formats for left panel
+      // Набор форматов для левой панели
+      "extraTextFieldsLeft": [],
+      // Set of formats for right panel
+      // Набор форматов для правой панели
+      "extraTextFieldsRight": []
     }
   }
 }

@@ -38,7 +38,9 @@
     // Minimap lines.
     // Линии на миникарте.
     "lines": ${"minimapLines.xc":"lines"},
-    "square" : { // Квадрат со стороной 1000m. Показывает границы максимальной отрисовка юнитов.
+    // Square of the maximum units appearance (1000 m).
+    // Квадрат границы максимальной отрисовки юнитов (1000 м).
+    "square" : {
       "enabled": false,
       // Show square if using artillery\SPG vehicle.
       // Показывать ли квадрат в случае артиллерии.

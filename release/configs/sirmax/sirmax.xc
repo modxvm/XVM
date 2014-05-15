@@ -126,26 +126,60 @@
     "removeSquadIcon": true,
     "removePanelsModeSwitcher": true,
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
-    "extraTextLeft": "<textformat leading='-24'><img src='xvm://configs/back.png' width='80' height='12'/>\n<img src='xvm://configs/front.png' width='80' height='12'/>\n{{hp}} / {{hp-max}}</textformat>",
-    "extraTextRight": "",
     "medium": {
       "width": 120,
       "formatLeft": "<font color='{{c:xwn8}}'>{{nick}}</font>",
-      "formatRight": "<font color='{{c:xwn8}}'>{{nick}}</font>"
+      "formatRight": "<font color='{{c:xwn8}}'>{{nick}}</font>",
+      "extraTextFieldsLeft": [],
+      "extraTextFieldsRight": []
     },
     "medium2": {
       "width": 120,
       "formatLeft": "<font color='{{c:xwn8}}'>{{vehicle}}</font>",
-      "formatRight": "<font color='{{c:xwn8}}'>{{vehicle}}</font>"
+      "formatRight": "<font color='{{c:xwn8}}'>{{vehicle}}</font>",
+      "extraTextFieldsLeft": [],
+      "extraTextFieldsRight": []
     },
     "large": {
       "width": 120,
       "nickFormatLeft": "<font color='{{c:xwn8}}'>{{xwn8|--}}</font> {{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>",
       "nickFormatRight": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font> <font color='{{c:xwn8}}'>{{xwn8|--}}</font>",
       "vehicleFormatLeft": "{{hp}} / {{hp-max}}",
-      "vehicleFormatRight": "{{hp}} / {{hp-max}}"
+      "vehicleFormatRight": "{{hp}} / {{hp-max}}",
       //"vehicleFormatLeft": "<font color='{{c:rating}}'>{{vehicle}}</font>",
-      //"vehicleFormatRight": "<font color='{{c:rating}}'>{{vehicle}}</font>"
+      //"vehicleFormatRight": "<font color='{{c:rating}}'>{{vehicle}}</font>",
+      "extraTextFieldsLeft": [],
+      "extraTextFieldsRight": []
+    },
+    "none": {
+      "extraTextFields": {
+        "leftPanel": {
+          "x": 0,
+          "y": 65,
+          "width": 350,
+          "height": 28,
+          "formats": [
+            "<img src='xvm://configs/sirmax/img/panel-bg-l.png' width='300' height='28'>",
+            "<img src='xvm://configs/sirmax/img/_bg.png' width='{{hp-max:300}}' height='25'>",
+            "<img src='xvm://configs/sirmax/img/_ally_50.png' width='{{hp:300}}' height='25'>",
+            "<font color='{{c:xwn8}}'>{{xwn8|--}}</font> {{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>",
+            "<textformat tabstops='[200]'><tab>{{ vehicle}}</tabstops>"
+          ]
+        },
+        "rightPanel": {
+          "x": 0,
+          "y": 65,
+          "width": 350,
+          "height": 28,
+          "formats": [
+            "<img src='xvm://configs/sirmax/img/panel-bg-r.png' width='300' height='28'>",
+            "<img src='xvm://configs/sirmax/img/_bg.png' width='{{hp-max:300}}' height='25'>",
+            "<img src='xvm://configs/sirmax/img/_enemy_50.png' width='{{hp:300}}' height='25'>",
+            "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font> <font color='{{c:xwn8}}'>{{xwn8|--}}</font>",
+            "<textformat tabstops='[200]'>{{ vehicle}}<tab></tabstops>"
+          ]
+        }
+      }
     },
     "enemySpottedMarker": {
       "enabled": true,
@@ -162,16 +196,6 @@
           "revealed": "<font face='$FieldFont' size='24' color='#DE0000'>*</font>",
           "dead": "<font face='$FieldFont' size='24' color='#222222'>*</font>"
         }
-      }
-    },
-    "allySpottedMarker": {
-      "enabled": true,
-      "Xoffset": -15,
-      "Yoffset": 0,
-      "format": {
-        "lost": "<font face='$FieldFont' size='24' color='#DDDDDD'>*</font>",
-        "revealed": "",
-        "dead": ""
       }
     }
   },

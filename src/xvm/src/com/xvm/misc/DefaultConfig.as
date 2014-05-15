@@ -303,15 +303,27 @@ package com.xvm.misc
                 }
               }
             };
-            c.allySpottedMarker = {
-              enabled: false,
-              Xoffset: -15,
-              Yoffset: 0,
-              format: {
-                lost: "",
-                revealed: "",
-                dead: ""
+            c.none = {
+              extraTextFields: {
+                leftPanel: {
+                  x: 0,
+                  y: 65,
+                  width: 250,
+                  height: 25,
+                  formats: []
+                },
+                rightPanel: {
+                  x: 0,
+                  y: 65,
+                  width: 250,
+                  height: 25,
+                  formats: []
+                }
               }
+            };
+            c.short = {
+                extraTextFieldsLeft: [],
+                extraTextFieldsRight: []
             };
             // Medium1 mode.
             c.medium = {
@@ -319,7 +331,9 @@ package com.xvm.misc
                 width: 46,
                 // Dispay format.
                 formatLeft: "<font color='{{c:xwn8}}'>{{nick}}</font>",
-                formatRight: "<font color='{{c:xwn8}}'>{{nick}}</font>"
+                formatRight: "<font color='{{c:xwn8}}'>{{nick}}</font>",
+                extraTextFieldsLeft: [],
+                extraTextFieldsRight: []
             };
             // Medium2 mode.
             c.medium2 = {
@@ -327,7 +341,9 @@ package com.xvm.misc
                 width: 65,
                 // Dispay format.
                 formatLeft: "<font color='{{c:xwn8}}'>{{vehicle}}</font>",
-                formatRight: "<font color='{{c:xwn8}}'>{{vehicle}}</font>"
+                formatRight: "<font color='{{c:xwn8}}'>{{vehicle}}</font>",
+                extraTextFieldsLeft: [],
+                extraTextFieldsRight: []
             };
             // Large mode.
             c.large = {
@@ -337,8 +353,11 @@ package com.xvm.misc
                 nickFormatLeft: "<font color='{{c:xwn8}}'>{{xwn8}}</font> {{nick}}",
                 nickFormatRight: "{{nick}} <font color='{{c:xwn8}}'>{{xwn8}}</font>",
                 vehicleFormatLeft: "{{vehicle}}",
-                vehicleFormatRight: "{{vehicle}}"
+                vehicleFormatRight: "{{vehicle}}",
+                extraTextFieldsLeft: [],
+                extraTextFieldsRight: []
             };
+
             return c;
         }
 

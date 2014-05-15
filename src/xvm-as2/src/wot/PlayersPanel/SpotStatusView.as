@@ -12,7 +12,6 @@ import gfx.core.*;
 class wot.PlayersPanel.SpotStatusView extends XvmComponent
 {
     private static var SPOT_STATUS_TF_NAME:String = "spotStatusTF";
-    private static var formatsCacheAlly:Object = null;
     private static var formatsCacheEnemy:Object = null;
 
     private var renderer:PlayerListItemRenderer;
@@ -29,26 +28,13 @@ class wot.PlayersPanel.SpotStatusView extends XvmComponent
 
         GlobalEventDispatcher.addEventListener(Defines.E_SPOT_STATUS_UPDATED, this, updateStatus);
 
-        if (isAlly)
+        if (formatsCacheEnemy == null)
         {
-            if (formatsCacheAlly == null)
-            {
-                formatsCacheAlly = { };
-                formatsCacheAlly[SpotStatusModel.DEAD] = Utils.fixImgTag(cfg.format.dead);
-                formatsCacheAlly[SpotStatusModel.LOST] = Utils.fixImgTag(cfg.format.lost);
-                formatsCacheAlly[SpotStatusModel.REVEALED] = Utils.fixImgTag(cfg.format.revealed);
-            }
-        }
-        else
-        {
-            if (formatsCacheEnemy == null)
-            {
-                formatsCacheEnemy = { };
-                formatsCacheEnemy[SpotStatusModel.DEAD] = [ Utils.fixImgTag(cfg.format.dead), Utils.fixImgTag(cfg.format.artillery.dead) ];
-                formatsCacheEnemy[SpotStatusModel.NEVER_SEEN] = [ Utils.fixImgTag(cfg.format.neverSeen), Utils.fixImgTag(cfg.format.artillery.neverSeen) ];
-                formatsCacheEnemy[SpotStatusModel.LOST] = [ Utils.fixImgTag(cfg.format.lost), Utils.fixImgTag(cfg.format.artillery.lost) ];
-                formatsCacheEnemy[SpotStatusModel.REVEALED] = [ Utils.fixImgTag(cfg.format.revealed), Utils.fixImgTag(cfg.format.artillery.revealed) ];
-            }
+            formatsCacheEnemy = { };
+            formatsCacheEnemy[SpotStatusModel.DEAD] = [ Utils.fixImgTag(cfg.format.dead), Utils.fixImgTag(cfg.format.artillery.dead) ];
+            formatsCacheEnemy[SpotStatusModel.NEVER_SEEN] = [ Utils.fixImgTag(cfg.format.neverSeen), Utils.fixImgTag(cfg.format.artillery.neverSeen) ];
+            formatsCacheEnemy[SpotStatusModel.LOST] = [ Utils.fixImgTag(cfg.format.lost), Utils.fixImgTag(cfg.format.artillery.lost) ];
+            formatsCacheEnemy[SpotStatusModel.REVEALED] = [ Utils.fixImgTag(cfg.format.revealed), Utils.fixImgTag(cfg.format.artillery.revealed) ];
         }
 
         spotStatusMarker = createMarker(renderer);
@@ -56,16 +42,16 @@ class wot.PlayersPanel.SpotStatusView extends XvmComponent
         invalidate();
     }
 
-    public function invalidateData(data)
+    public function invalidateData(playerName:String)
     {
-        if (m_name != Utils.GetPlayerName(data.label))
+        if (m_name != Utils.GetPlayerName(playerName))
             invalidate();
     }
 
     // override
     public function draw()
     {
-        //Logger.add("draw: " + renderer.wrapper.data.label);
+        //Logger.add("draw: " + renderer.wrapper.data.userName);
         // Define point relative to which marker is set
         // Set every update for correct position in the fog of war mode.
         spotStatusMarker._x = renderer.wrapper.vehicleLevel._x + cfg.Xoffset; // vehicleLevel._x is 8 for example
@@ -76,28 +62,13 @@ class wot.PlayersPanel.SpotStatusView extends XvmComponent
         var uid:Number = data.uid;
         var txt:String;
         var status:Number = SpotStatusModel.defineStatus(uid, data.vehicleState);
-        if (isAlly)
-        {
-            if (status == SpotStatusModel.NEVER_SEEN)
-                status = SpotStatusModel.REVEALED;
-            txt = formatsCacheAlly[status];
-        }
-        else
-        {
-            var isArty:Boolean = SpotStatusModel.isArty(uid);
-            txt = formatsCacheEnemy[status][isArty ? 1 : 0];
-        }
+        var isArty:Boolean = SpotStatusModel.isArty(uid);
+        txt = formatsCacheEnemy[status][isArty ? 1 : 0];
 
-        var obj = Defines.battleStates[m_name] || { };
-        if (status == SpotStatusModel.DEAD && obj.dead == false)
-        {
-            obj.dead = true;
-            if (obj.curHealth > 0)
-                obj.curHealth = 0;
-        }
-        obj.darken = status == SpotStatusModel.DEAD;
+        /*var obj = Defines.battleStates[m_name] || { };
+        obj.darken = obj.dead;*/
+        txt = Macros.Format(m_name, txt/*, obj*/);
 
-        txt = Macros.Format(m_name, txt, obj);
         //Logger.add(txt);
         spotStatusMarker.htmlText = txt;
     }
@@ -110,11 +81,6 @@ class wot.PlayersPanel.SpotStatusView extends XvmComponent
             return;
         //Logger.addObject(e);
         invalidate();
-    }
-
-    private function get isAlly():Boolean
-    {
-        return cfg.format.neverSeen == undefined;
     }
 
     private static function createMarker(renderer:PlayerListItemRenderer):TextField

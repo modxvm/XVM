@@ -3,7 +3,7 @@
  */
 import com.xvm.*;
 import wot.Minimap.*;
-import wot.PlayersPanel.*;
+//import wot.PlayersPanel.*;
 
 class wot.PlayersPanel.PlayersPanel
 {
@@ -67,7 +67,7 @@ class wot.PlayersPanel.PlayersPanel
 
     private function setDataImpl(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStrOrig, vehiclesStrOrig, namesStrOrig)
     {
-        //Logger.add("PlayersPanel.setData()");
+        //Logger.add("PlayersPanel.setData(): " + wrapper.state);
         //Logger.addObject(data, 3);
         //Logger.add(vehiclesStrOrig);
         //Logger.add(namesStr);
@@ -78,6 +78,7 @@ class wot.PlayersPanel.PlayersPanel
             if (data == null)
                 return;
 
+            //wrapper.m_list._visible = true; // _visible == false for "none" mode
             wrapper.m_names.condenseWhite = !Stat.s_loaded;
             wrapper.m_vehicles.condenseWhite = !Stat.s_loaded;
 
@@ -87,9 +88,6 @@ class wot.PlayersPanel.PlayersPanel
                 centeredTextY = wrapper.m_names._y - 5;
                 wrapper.m_names.verticalAlign = "top"; // for incomplete team - cannot set to "center"
                 wrapper.m_vehicles.verticalAlign = "top"; // for incomplete team - cannot set to "center"
-
-                // [1/3] fix WG bug - this function is slow, don't call it if not required.
-                wrapper.m_list["invalidateData2"] = wrapper.m_list["invalidateData"];
             }
 
             var namesStr:String = "";
@@ -101,8 +99,16 @@ class wot.PlayersPanel.PlayersPanel
                 var item = data[i];
                 var value = values[i];
 
-                Macros.RegisterPlayerData(Utils.GetPlayerName(item.label), item,
-                    wrapper.type == "left" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
+                var obj = Defines.battleStates[item.userName] || { };
+                var dead:Boolean = (item.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) == 0;
+                if (dead && obj.dead == false)
+                {
+                    obj.dead = true;
+                    if (obj.curHealth > 0)
+                        obj.curHealth = 0;
+                }
+
+                Macros.RegisterPlayerData(item.userName, item, wrapper.type == "left" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
 
                 if (i != 0)
                 {
@@ -117,14 +123,8 @@ class wot.PlayersPanel.PlayersPanel
 
             var deadCountPrev:Number = wrapper.saved_params[wrapper.m_type].dPC;
 
-            // [2/3] fix WG bug - this function is slow, don't call it if not required.
-            wrapper.m_list["invalidateData"] = function() {}
-
             base.setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStrOrig, vehiclesStr, namesStr);
             base.saveData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStrOrig, vehiclesStrOrig, namesStrOrig);
-
-            // [3/3] fix WG bug - this function is slow, don't call it if not required.
-            wrapper.m_list["invalidateData"] = wrapper.m_list["invalidateData2"];
 
             wrapper.players_bg._alpha = Config.config.playersPanel.alpha;
             wrapper.m_list._alpha = Config.config.playersPanel.iconAlpha;
@@ -226,17 +226,9 @@ class wot.PlayersPanel.PlayersPanel
             return text;
 
         //Logger.add("before: " + text);
-        var obj = Defines.battleStates[Utils.GetPlayerName(data.label)] || { };
-        var deadState = ((data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) == 0) ? Defines.DEADSTATE_DEAD : Defines.DEADSTATE_ALIVE;
-        if (deadState == Defines.DEADSTATE_DEAD && obj.dead == false)
-        {
-            obj.dead = true;
-            if (obj.curHealth > 0)
-                obj.curHealth = 0;
-        }
-        obj.darken = deadState == Defines.DEADSTATE_DEAD;
-
-        var fmt = Macros.Format(data.label, format, obj);
+        var obj:Object = Defines.battleStates[data.userName] || { };
+        obj.darken = obj.dead;
+        var fmt:String = Macros.Format(data.userName, format, obj);
         //Logger.add("after: " + fmt);
         return fmt;
     }
@@ -273,6 +265,10 @@ class wot.PlayersPanel.PlayersPanel
                 wrapper.m_list._x = wrapper.players_bg._x = (wrapper.type == "left")
                     ? net.wargaming.ingame.PlayersPanel.STATES[wrapper.state].bg_x
                     : wrapper.players_bg._width - net.wargaming.ingame.PlayersPanel.STATES[wrapper.state].bg_x;
+                GlobalEventDispatcher.dispatchEvent( {
+                    type: wrapper.type == "left" ? Defines.E_LEFT_PANEL_SIZE_ADJUSTED : Defines.E_RIGHT_PANEL_SIZE_ADJUSTED,
+                    state: wrapper.state
+                } );
                 return;
         }
 
@@ -303,9 +299,14 @@ class wot.PlayersPanel.PlayersPanel
             if (squadSize > 0)
                 wrapper.m_list.updateSquadIconPosition(-440 + wrapper.m_frags._width + wrapper.m_names._width + wrapper.m_vehicles._width + squadSize);
         }
+
+        GlobalEventDispatcher.dispatchEvent( {
+            type: wrapper.type == "left" ? Defines.E_LEFT_PANEL_SIZE_ADJUSTED : Defines.E_RIGHT_PANEL_SIZE_ADJUSTED,
+            state: wrapper.state
+        } );
     }
 
-    private function XVMGetMaximumFieldWidth(field: TextField)
+    private function XVMGetMaximumFieldWidth(field:TextField)
     {
         var max_width = 0;
         for (var i = 0; i < field.numLines; ++i)
@@ -317,7 +318,7 @@ class wot.PlayersPanel.PlayersPanel
         return max_width;
     }
 
-    private function XVMGetMaximumFieldHeight(field: TextField)
+    private function XVMGetMaximumFieldHeight(field:TextField)
     {
         var max_height = 0;
         for (var i = 0; i < field.numLines; ++i)

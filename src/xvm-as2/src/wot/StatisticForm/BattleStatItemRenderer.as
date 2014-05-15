@@ -159,14 +159,7 @@ class wot.StatisticForm.BattleStatItemRenderer
         var c:String = "#" + Strings.padLeft(wrapper.textField.textColor.toString(16), 6, '0');
 
         var obj = Defines.battleStates[name] || { };
-        var deadState = ((wrapper.data.vehicleState & VehicleStateInBattle.IS_AVIVE) == 0) ? Defines.DEADSTATE_DEAD : Defines.DEADSTATE_ALIVE;
-        if (deadState == Defines.DEADSTATE_DEAD && obj.dead == false)
-        {
-            obj.dead = true;
-            if (obj.curHealth > 0)
-                obj.curHealth = 0;
-        }
-        obj.darken = deadState == Defines.DEADSTATE_DEAD;
+        obj.darken = obj.dead;
 
         var fmt:String = Macros.Format(saved_label, (team == Defines.TEAM_ALLY) ? Config.config.statisticForm.formatLeftNick : Config.config.statisticForm.formatRightNick, obj);
         wrapper.textField.htmlText = "<font color='" + c + "'>" + fmt + "</font>";

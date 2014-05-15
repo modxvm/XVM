@@ -48,6 +48,8 @@ class com.xvm.Defines
     // Default path to vehicle icons (relative)
     public static var WG_CONTOUR_ICON_PATH:String = "../maps/icons/vehicle/contour/";
 
+    public static var MAX_BATTLETIER_HPS = [140, 190, 320, 420, 700, 1400, 1500, 1780, 2000, 3000, 3000];
+
     // Team
     public static var TEAM_ALLY:Number = 1;
     public static var TEAM_ENEMY:Number = 2;
@@ -138,7 +140,11 @@ class com.xvm.Defines
     public static var E_SPOT_STATUS_UPDATED = "spot_status_updated";
     public static var E_PLAYER_DEAD = "player_dead";
     public static var E_SELF_DEAD = "self_dead";
+    public static var E_UPDATE_STAGE = "update_stage";
+    public static var E_LEFT_PANEL_SIZE_ADJUSTED = "left_panel_size_adjusted";
+    public static var E_RIGHT_PANEL_SIZE_ADJUSTED = "right_panel_size_adjusted";
 
     // globals
-    public static var battleStates:Object = {};
+    public static var battleStates:Object = { };
+    public static var screenSize:Object = { };
 }

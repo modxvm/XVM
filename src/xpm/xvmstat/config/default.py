@@ -276,42 +276,11 @@ class _DefaultConfig(object):
                     }
                 }
             },
-            'allySpottedMarker': {
-                'enabled': False,
-                'Xoffset': -15,
-                'Yoffset': 0,
-                'format': {
-                    'lost': "",
-                    'revealed': "",
-                    'dead': ""
-                }
-            },
-            # Medium1 mode.
-            'medium': {
-                # 0..250 - player name field width.
-                'width': 46,
-                # Dispay format.
-                'formatLeft': "<font color='{{c:xwn8}}'>{{nick}}</font>",
-                'formatRight': "<font color='{{c:xwn8}}'>{{nick}}</font>"
-            },
-            # Medium2 mode.
-            'medium2': {
-                # 0..250 - player name field width.
-                'width': 65,
-                # Dispay format.
-                'formatLeft': "<font color='{{c:xwn8}}'>{{vehicle}}</font>",
-                'formatRight': "<font color='{{c:xwn8}}'>{{vehicle}}</font>"
-            },
-            # Large mode.
-            'large': {
-                # 0..250 - player name field width.
-                'width': 170,
-                # Dispay format.
-                'nickFormatLeft': "<font color='{{c:xwn8}}'>{{xwn8}}</font> {{nick}}",
-                'nickFormatRight': "{{nick}} <font color='{{c:xwn8}}'>{{xwn8}}</font>",
-                'vehicleFormatLeft': "{{vehicle}}",
-                'vehicleFormatRight': "{{vehicle}}"
-            }
+            'none': {},
+            'short': {},
+            'medium': {},
+            'medium2': {},
+            'large': {}
         }
 
     def getBattleResultsSection(self):

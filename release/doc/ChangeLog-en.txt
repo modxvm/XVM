@@ -1,9 +1,9 @@
 ﻿XVM-5.3.0-dev:
-  * added in-battle macro {{battletier}} - guessed current battle tier
-
-XVM-5.3.0-test3:
   [NEW FUNCTIONS]
-  * new section playersPanel/allySpottedMarker - like enemySpottedMarker, but for ally team
+  * added in-battle macro {{battletier}} - guessed current battle tier
+  * new options in playersPanel for extra text fields
+  * macros extended: {{hp:XX}} and {{hp-max:XX}} return value normalized to XX for current battle tier
+    ex.: {{hp:300}} - will return 300 for HP=700 at tier-5 battle, and for HP=3000 at tier-11 battle.
 
 XVM-5.3.0-test2:
   [NEW FUNCTIONS]
@@ -35,8 +35,8 @@ XVM-5.3.0-test1:
   * config version increased to 5.1.0
 
   [NEW FUNCTIONS]
-  * new option battle/allowHpInPanelsAndMinimap - enable {{hp*}} macros in
-    players panels and minimap. WARNING: performance expensive
+  * new option battle/allowHpInPanelsAndMinimap - enable {{hp}}, {{hp-ratio}}, {{hp-max}}
+    macros in players panels and minimap. WARNING: performance expensive
 
   [OTHER]
   * removed macro {{vehicle-type}} as duplication of {{vehicle}}

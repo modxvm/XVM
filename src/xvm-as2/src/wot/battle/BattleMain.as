@@ -105,6 +105,10 @@ class wot.battle.BattleMain
         Elements.SetupElements();
 
         fixMinimapSize();
+
+        Defines.screenSize.width = width;
+        Defines.screenSize.height = height;
+        GlobalEventDispatcher.dispatchEvent( { type: Defines.E_UPDATE_STAGE, width: width, height: height });
     }
 
     function setCoolDownTime(idx, timeRemaining)

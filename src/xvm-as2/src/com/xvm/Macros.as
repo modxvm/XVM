@@ -53,9 +53,9 @@ class com.xvm.Macros
     private static function FormatMacro(macro:String, pdata:Object, options:Object):String
     {
         //Logger.addObject(pdata);
-        var parts:Array = [null,null,null,null];
+        var parts:Array = [null,null,null,null,null];
 
-        // split parts: name[%fmt][~suf][|def]
+        // split parts: name[:norm][%fmt][~suf][|def]
         var macroArr:Array = macro.split("");
         var len:Number = macroArr.length;
         var part:String = "";
@@ -65,7 +65,7 @@ class com.xvm.Macros
             var ch:String = macroArr[i];
             switch (ch)
             {
-                case "%":
+                case ":":
                     if (section < 1)
                     {
                         parts[section] = part;
@@ -74,7 +74,7 @@ class com.xvm.Macros
                         continue;
                     }
                     break;
-                case "~":
+                case "%":
                     if (section < 2)
                     {
                         parts[section] = part;
@@ -83,11 +83,20 @@ class com.xvm.Macros
                         continue;
                     }
                     break;
-                case "|":
+                case "~":
                     if (section < 3)
                     {
                         parts[section] = part;
                         section = 3;
+                        part = "";
+                        continue;
+                    }
+                    break;
+                case "|":
+                    if (section < 4)
+                    {
+                        parts[section] = part;
+                        section = 4;
                         part = "";
                         continue;
                     }
@@ -98,12 +107,13 @@ class com.xvm.Macros
         parts[section] = part;
 
         var name:String = parts[0];
-        var fmt:String = parts[1];
-        var suf:String = parts[2];
-        var def:String = parts[3] || "";
+        var norm:String = parts[1];
+        var fmt:String = parts[2];
+        var suf:String = parts[3];
+        var def:String = parts[4] || "";
 
         // substitute
-        //Logger.add("name:" + name + " fmt:" + fmt + " suf:" + suf + " def:" + def);
+        //Logger.add("name:" + name + " norm:" + norm + " fmt:" + fmt + " suf:" + suf + " def:" + def);
 
         if (options.darken && Strings.startsWith("c:", name))
             name += "#d";
@@ -135,6 +145,15 @@ class com.xvm.Macros
             if (type == "number" && isNaN(value))
                 return def;
             res = value;
+        }
+
+        if (norm != null && type == "number")
+        {
+            if (name == "hp" || name == "hp-max")
+            {
+                res = Math.round(value * parseInt(norm) / Defines.MAX_BATTLETIER_HPS[globals["battletier"] - 1]).toString();
+                //Logger.add("res: " + res);
+            }
         }
 
         if (fmt != null)
