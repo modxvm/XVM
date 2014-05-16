@@ -241,6 +241,9 @@ class com.xvm.StatLoader
         //return (Tmax + Tmin) / 2.0;
         // 4. Return max tier
         //return Tmax;
+        // 4. Return max tier if tier 11
+        if (Tmax == 11)
+            return Tmax;
         // 4. Return min tier
         return Tmin;
     }
