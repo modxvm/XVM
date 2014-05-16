@@ -240,7 +240,9 @@ class com.xvm.StatLoader
         //// 4. Calculate average tier
         //return (Tmax + Tmin) / 2.0;
         // 4. Return max tier
-        return Tmax;
+        //return Tmax;
+        // 4. Return min tier
+        return Tmin;
     }
 
 }
