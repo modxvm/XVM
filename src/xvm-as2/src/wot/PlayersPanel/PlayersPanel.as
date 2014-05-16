@@ -99,7 +99,9 @@ class wot.PlayersPanel.PlayersPanel
                 var item = data[i];
                 var value = values[i];
 
+                // fix battlestate
                 var obj = Defines.battleStates[item.userName] || { };
+                obj.frags = item.frags;
                 var dead:Boolean = (item.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) == 0;
                 if (dead && obj.dead == false)
                 {

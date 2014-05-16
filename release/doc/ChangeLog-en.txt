@@ -4,6 +4,7 @@
   * new options in playersPanel for extra text fields
   * macros extended: {{hp:XX}} and {{hp-max:XX}} return value normalized to XX for current battle tier
     ex.: {{hp:300}} - will return 300 for HP=700 at tier-5 battle, and for HP=3000 at tier-11 battle.
+  * new macro {{frags}}
 
 XVM-5.3.0-test2:
   [NEW FUNCTIONS]

@@ -269,7 +269,7 @@ package com.xvm.utils
             // {{turret}}
             //TODO pdata["turret"] = vdata ? String(vdata.turret) : "";
 
-            // VMM only - dynamic
+            // dynamic
             // {{hp}}
             pdata["hp"] = function(o:MacrosFormatOptions):Number { return isNaN(o.curHealth) ? NaN : o.curHealth; }
             // {{hp-ratio}}

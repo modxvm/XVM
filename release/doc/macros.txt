@@ -32,9 +32,10 @@ Legend:
 │ {{squad}}                  │   │   │   │ X │   │   │   │   │   │ value 'sq' for own squad, empty for others
 │ {{squad-num}}              │   │ X │ X │ X │ X │ X │   │ X │   │ number of squad (1,2,...), empty if not in squad
 │ {{turret}}                 │   │   │   │ X │   │   │   │   │   │ stock turret marker:
-│ {{hp}}                     │   │ X │   │ X │   │ X │   │ X │   │ current health points
-│ {{hp-ratio}}               │   │ X │   │ X │   │ X │   │ X │   │ current health ratio (without '%' sign)
-│ {{hp-max}}                 │   │ X │   │ X │   │ X │   │ X │   │ maximum health points
+│ {{frags}}                  │   │ X │ X │   │   │   │   │ X │   │ current frags
+│ {{hp}}                     │   │ X │ X │ X │ X │ X │   │ X │   │ current health points
+│ {{hp-ratio}}               │   │ X │ X │ X │ X │ X │   │ X │   │ current health ratio (without '%' sign)
+│ {{hp-max}}                 │   │ X │ X │ X │ X │ X │   │ X │   │ maximum health points
 │ {{dmg}}                    │   │   │   │ X │ X │   │   │   │   │ damage health points / last hit value
 │ {{dmg-ratio}}              │   │   │   │ X │   │   │   │   │   │ damage health ratio (without '%' sign)
 │ {{dmg-kind}}               │   │   │   │ X │ X │   │   │   │   │ damage kind (attack, fire, ramming, ...)

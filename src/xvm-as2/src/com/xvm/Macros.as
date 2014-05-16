@@ -268,6 +268,12 @@ class com.xvm.Macros
 
         // Dynamic macros
 
+        if (!pdata.hasOwnProperty("frags"))
+        {
+            // {{frags}}
+            pdata["frags"] = function(o):Number { return isNaN(o.frags) ? NaN : o.frags; }
+        }
+
         if (!pdata.hasOwnProperty("hp"))
         {
             // hp
