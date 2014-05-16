@@ -81,8 +81,8 @@ package com.xvm.misc
             }
             finally
             {
-                if (teamsCount != null && teamsCount.ally != teamsCount.enemy)
-                    Logger.addObject(chanceLog, 3);
+                //if (teamsCount != null && teamsCount.ally != teamsCount.enemy)
+                //    Logger.addObject(chanceLog, 3);
                 Logger.add("========== end chance calculation ===========");
             }
             return null;

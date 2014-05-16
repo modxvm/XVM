@@ -273,6 +273,7 @@ package com.xvm
                         statCache[name] = sd;
                         Macros.RegisterMacrosData(name);
                     }
+                    Macros.RegisterBattleTierData(guessBattleTier());
                 }
             }
             catch (e:Error)
