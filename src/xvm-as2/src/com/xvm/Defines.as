@@ -143,8 +143,4 @@ class com.xvm.Defines
     public static var E_UPDATE_STAGE = "update_stage";
     public static var E_LEFT_PANEL_SIZE_ADJUSTED = "left_panel_size_adjusted";
     public static var E_RIGHT_PANEL_SIZE_ADJUSTED = "right_panel_size_adjusted";
-
-    // globals
-    public static var battleStates:Object = { };
-    public static var screenSize:Object = { };
 }

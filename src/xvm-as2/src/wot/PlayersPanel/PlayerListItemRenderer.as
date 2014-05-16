@@ -45,6 +45,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     private var m_name:String = null;
     private var m_clan:String = null;
+    private var m_vehicleState:Number = 0;
     private var m_dead:Boolean = null;
 
     private var m_clanIcon: UILoaderAlt = null;
@@ -130,12 +131,14 @@ class wot.PlayersPanel.PlayerListItemRenderer
         {
             m_name = null;
             m_clan = null;
+            m_vehicleState = 0;
             m_dead = true;
         }
         else
         {
             m_name = data.userName;
             m_clan = data.clanAbbrev;
+            m_vehicleState = data.vehicleState;
             m_dead = (data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) == 0;
 
             saved_icon = data.icon;
@@ -206,6 +209,8 @@ class wot.PlayersPanel.PlayerListItemRenderer
             wrapper.iconLoader._xscale = -wrapper.iconLoader._xscale;
             wrapper.iconLoader._x -= 80;
             wrapper.vehicleLevel._x = wrapper.iconLoader._x + 15;
+            if (spotStatusView != null)
+                spotStatusView.draw();
         }
     }
 
@@ -281,7 +286,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
     private function updateSpotStatusView():Void
     {
         if (spotStatusView != null)
-            spotStatusView.invalidateData(m_name);
+            spotStatusView.invalidateData(m_name, m_vehicleState);
     }
 
     private function updateTextFields():Void
@@ -299,9 +304,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         if (mc == null)
             return;
 
-        var obj = Defines.battleStates[m_name] || { };
-        obj.darken = m_dead;
-
+        var obj = BattleState.getUserData(m_name);
         var formats:Array = mc.formats;
         var len:Number = formats.length;
         for (var i:Number = 0; i < len; ++i)
@@ -348,7 +351,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         if (cfg != null)
         {
             // none mode
-            mc._x = Defines.screenSize.width - cfg.width - cfg.x;
+            mc._x = BattleState.screenSize.width - cfg.width - cfg.x;
             mc._y = cfg.y + mc.idx * cfg.height;
         }
         else

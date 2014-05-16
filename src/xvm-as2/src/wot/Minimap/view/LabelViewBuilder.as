@@ -63,7 +63,7 @@ class wot.Minimap.view.LabelViewBuilder
 
         var format:String = MapConfig.unitLabelFormat(entryName, status);
 
-        var obj = Defines.battleStates[Utils.GetPlayerName(playerInfo.userName)] || { };
+        var obj = BattleState.getUserData(playerInfo.userName);
         for (var i in playerInfo)
             obj[i] = playerInfo[i];
         var text:String = Macros.Format(playerInfo.userName, format, obj);

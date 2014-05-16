@@ -18,6 +18,7 @@ class wot.PlayersPanel.SpotStatusView extends XvmComponent
     private var cfg:Object;
     private var spotStatusMarker:TextField;
     private var m_name:String;
+    private var m_vehicleState:Number;
 
     public function SpotStatusView(renderer:PlayerListItemRenderer, cfg:Object)
     {
@@ -42,9 +43,9 @@ class wot.PlayersPanel.SpotStatusView extends XvmComponent
         invalidate();
     }
 
-    public function invalidateData(playerName:String)
+    public function invalidateData(userName:String, vehicleState:Number)
     {
-        if (m_name != Utils.GetPlayerName(playerName))
+        if (m_name != userName || m_vehicleState != vehicleState)
             invalidate();
     }
 
@@ -58,16 +59,16 @@ class wot.PlayersPanel.SpotStatusView extends XvmComponent
         spotStatusMarker._y = renderer.wrapper.vehicleLevel._y + cfg.Yoffset; // vehicleLevel._y is -445.05 for example
 
         var data = renderer.wrapper.data;
-        m_name = Utils.GetPlayerName(data.label);
+        m_name = data.userName;
+        m_vehicleState = data.vehicleState;
         var uid:Number = data.uid;
         var txt:String;
-        var status:Number = SpotStatusModel.defineStatus(uid, data.vehicleState);
+        var status:Number = SpotStatusModel.defineStatus(uid, m_vehicleState);
         var isArty:Boolean = SpotStatusModel.isArty(uid);
         txt = formatsCacheEnemy[status][isArty ? 1 : 0];
 
-        /*var obj = Defines.battleStates[m_name] || { };
-        obj.darken = obj.dead;*/
-        txt = Macros.Format(m_name, txt/*, obj*/);
+        var obj = BattleState.getUserData(m_name);
+        txt = Macros.Format(m_name, txt, obj);
 
         //Logger.add(txt);
         spotStatusMarker.htmlText = txt;

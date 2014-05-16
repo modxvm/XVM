@@ -100,8 +100,8 @@ class wot.PlayersPanel.PlayersPanel
                 var value = values[i];
 
                 // fix battlestate
-                var obj = Defines.battleStates[item.userName] || { };
-                obj.frags = item.frags;
+                var obj = BattleState.getUserData(item.userName);
+                obj.frags = item.frags || NaN;
                 var dead:Boolean = (item.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) == 0;
                 if (dead && obj.dead == false)
                 {
@@ -228,8 +228,7 @@ class wot.PlayersPanel.PlayersPanel
             return text;
 
         //Logger.add("before: " + text);
-        var obj:Object = Defines.battleStates[data.userName] || { };
-        obj.darken = obj.dead;
+        var obj:Object = BattleState.getUserData(data.userName);
         var fmt:String = Macros.Format(data.userName, format, obj);
         //Logger.add("after: " + fmt);
         return fmt;
