@@ -154,6 +154,10 @@ class com.xvm.Macros
                 res = Math.round(value * parseInt(norm) / Defines.MAX_BATTLETIER_HPS[globals["battletier"] - 1]).toString();
                 //Logger.add("res: " + res);
             }
+			else if (name == "hp-ratio")
+			{
+				res = Math.round(parseInt(norm) * value / 100);
+			}
         }
 
         if (fmt != null)
