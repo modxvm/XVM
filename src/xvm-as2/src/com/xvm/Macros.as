@@ -149,15 +149,17 @@ class com.xvm.Macros
 
         if (norm != null && type == "number")
         {
-            if (name == "hp" || name == "hp-max")
+            switch (name)
             {
-                res = Math.round(value * parseInt(norm) / Defines.MAX_BATTLETIER_HPS[globals["battletier"] - 1]).toString();
-                //Logger.add("res: " + res);
+                case "hp":
+                case "hp-max":
+                    res = Math.round(parseInt(norm) * value / Defines.MAX_BATTLETIER_HPS[globals["battletier"] - 1]).toString();
+                    //Logger.add("res: " + res);
+                    break;
+                case "hp-ratio":
+                    res = Math.round(parseInt(norm) * value / 100).toString();
+                    break;
             }
-			else if (name == "hp-ratio")
-			{
-				res = Math.round(parseInt(norm) * value / 100);
-			}
         }
 
         if (fmt != null)
