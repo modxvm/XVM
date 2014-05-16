@@ -105,6 +105,8 @@ class wot.PlayersPanel.PlayersPanel
                 obj.dead = (item.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) == 0;
                 if (obj.dead == true && obj.curHealth > 0)
                     obj.curHealth = 0;
+                if (item.himself)
+                    BattleState.setSelfUserName(item.userName);
 
                 Macros.RegisterPlayerData(item.userName, item, wrapper.type == "left" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
 

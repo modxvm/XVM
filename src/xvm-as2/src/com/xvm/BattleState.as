@@ -6,6 +6,7 @@ class com.xvm.BattleState
 {
     private static var _userData:Object = { };
     private static var _screenSize:Object = { };
+    private static var _selfUserName:String = null;
 
     public static function getUserData(userName:String)
     {
@@ -14,11 +15,23 @@ class com.xvm.BattleState
         return _userData[userName];
     }
 
+    public static function getSelfUserData()
+    {
+        if (_selfUserName == null)
+            return null;
+        return getUserData(_selfUserName);
+    }
+
     public static function setUserData(userName:String, data:Object)
     {
         var ud = getUserData(userName);
         for (var i in data)
             ud[i] = data[i];
+    }
+
+    public static function setSelfUserName(userName:String)
+    {
+        _selfUserName = userName;
     }
 
     public static function get screenSize()
