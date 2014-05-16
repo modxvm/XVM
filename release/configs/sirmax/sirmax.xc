@@ -121,14 +121,22 @@
     },
     "large": {
       "width": 120,
-      "nickFormatLeft": "<font color='{{c:xwn8}}'>{{xwn8|--}}</font> {{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>",
-      "nickFormatRight": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font> <font color='{{c:xwn8}}'>{{xwn8|--}}</font>",
+      "nickFormatLeft": "  <font color='{{c:xwn8}}'>{{xwn8|--}}</font>  {{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>",
+      "nickFormatRight": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>  <font color='{{c:xwn8}}'>{{xwn8|--}}</font>&nbsp;&nbsp;",
       "vehicleFormatLeft": "{{hp}} / {{hp-max}}",
-      "vehicleFormatRight": "{{hp}} / {{hp-max}}",
+      "vehicleFormatRight": "{{hp}} / {{hp-max}} / {{alive|dead}}",
       //"vehicleFormatLeft": "<font color='{{c:rating}}'>{{vehicle}}</font>",
       //"vehicleFormatRight": "<font color='{{c:rating}}'>{{vehicle}}</font>",
-      "extraTextFieldsLeft": [],
-      "extraTextFieldsRight": []
+      "extraTextFieldsLeft": [
+        "       <img src='xvm://configs/sirmax/img/_bg.png' width='{{hp-max:150}}' height='22'>",
+        "       <img src='xvm://configs/sirmax/img/_ally_50-{{alive}}.png' width='{{hp:150}}' height='22'>",
+        "<img src='xvm://configs/sirmax/img/_ally_50-{{alive}}.png' width='3' height='22'>"
+      ],
+      "extraTextFieldsRight": [
+        "<img src='xvm://configs/sirmax/img/_bg.png' width='{{hp-max:150}}' height='22'>      ",
+        "<img src='xvm://configs/sirmax/img/_enemy_50-{{alive}}.png' width='{{hp:150}}' height='22'>      ",
+        "<img src='xvm://configs/sirmax/img/_enemy_50-{{alive}}.png' width='3' height='22'>"
+      ]
     },
     "none": {
       "extraTextFields": ${"sirmax-panels.xc":"."}

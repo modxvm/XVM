@@ -102,13 +102,9 @@ class wot.PlayersPanel.PlayersPanel
                 // fix battlestate
                 var obj = BattleState.getUserData(item.userName);
                 obj.frags = item.frags || NaN;
-                var dead:Boolean = (item.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) == 0;
-                if (dead && obj.dead == false)
-                {
-                    obj.dead = true;
-                    if (obj.curHealth > 0)
-                        obj.curHealth = 0;
-                }
+                obj.dead = (item.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) == 0;
+                if (obj.dead == true && obj.curHealth > 0)
+                    obj.curHealth = 0;
 
                 Macros.RegisterPlayerData(item.userName, item, wrapper.type == "left" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
 

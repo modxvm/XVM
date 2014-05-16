@@ -127,40 +127,28 @@ class com.xvm.Macros
         var value = pdata.hasOwnProperty(name) ? pdata[name] : globals[name];
         //Logger.add("value:" + value);
         if (value == null)
-            return def;
+            return normalizeValue(NaN, name, norm, def, pdata);
 
         var type:String = typeof value;
         //Logger.add("type:" + type + " value:" + value + " name:" + name + " fmt:" + fmt + " suf:" + suf + " def:" + def + " macro:" + macro);
 
         if (type == "number" && isNaN(value))
-            return def;
+            return normalizeValue(NaN, name, norm, def, pdata);
 
         var res:String = value;
         if (typeof value == "function")
         {
             value = options ? value(options) : "{{" + macro + "}}";
             if (value == null)
-                return def;
+                return normalizeValue(NaN, name, norm, def, pdata);
             type = typeof value;
             if (type == "number" && isNaN(value))
-                return def;
+                return normalizeValue(NaN, name, norm, def, pdata);
             res = value;
         }
 
         if (norm != null && type == "number")
-        {
-            switch (name)
-            {
-                case "hp":
-                case "hp-max":
-                    res = Math.round(parseInt(norm) * value / Defines.MAX_BATTLETIER_HPS[globals["battletier"] - 1]).toString();
-                    //Logger.add("res: " + res);
-                    break;
-                case "hp-ratio":
-                    res = Math.round(parseInt(norm) * value / 100).toString();
-                    break;
-            }
-        }
+            res = normalizeValue(value, name, norm, def, pdata);
 
         if (fmt != null)
         {
@@ -200,6 +188,35 @@ class com.xvm.Macros
         }
 
         //Logger.add(res);
+        return res;
+    }
+
+    private static function normalizeValue(value:Number, name:String, norm:String, def:String, pdata:Object):String
+    {
+        if (norm == null)
+            return def;
+
+        var res:String = def;
+        switch (name)
+        {
+            case "hp":
+            case "hp-max":
+                if (isNaN(value))
+                {
+                    var vdata:VehicleData = VehicleInfo.get(pdata["veh-id"]);
+                    if (vdata != null)
+                        value = vdata.hpTop;
+                }
+                res = Math.round(parseInt(norm) * value / Defines.MAX_BATTLETIER_HPS[globals["battletier"] - 1]).toString();
+                //Logger.add("res: " + res);
+                break;
+            case "hp-ratio":
+                if (isNaN(value))
+                    value = 100;
+                res = Math.round(parseInt(norm) * value / 100).toString();
+                break;
+        }
+
         return res;
     }
 
@@ -245,6 +262,8 @@ class com.xvm.Macros
             //Logger.addObject(vdata);
             if (vdata != null)
             {
+                // {{veh-id}}
+                pdata["veh-id"] = vdata.vid;
                 // {{vehicle}}
                 pdata["vehicle"] = vdata.localizedName;
                 // {{vehiclename}} - usa-M24_Chaffee
@@ -274,14 +293,13 @@ class com.xvm.Macros
 
         // Dynamic macros
 
-        if (!pdata.hasOwnProperty("frags"))
+        if (!pdata.hasOwnProperty("hp"))
         {
             // {{frags}}
             pdata["frags"] = function(o):Number { return isNaN(o.frags) ? NaN : o.frags; }
-        }
+            // {{alive}}
+            pdata["alive"] = function(o):String { return o.dead == true ? null : 'alive'; }
 
-        if (!pdata.hasOwnProperty("hp"))
-        {
             // hp
 
             // {{hp}}
