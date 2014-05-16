@@ -66,7 +66,7 @@ class com.xvm.Macros
             switch (ch)
             {
                 case ":":
-                    if (section < 1)
+                    if (section < 1 && pdata.hasOwnProperty(part))
                     {
                         parts[section] = part;
                         section = 1;

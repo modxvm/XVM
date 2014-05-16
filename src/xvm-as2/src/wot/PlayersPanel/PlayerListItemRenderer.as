@@ -136,7 +136,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         {
             m_name = data.userName;
             m_clan = data.clanAbbrev;
-            m_dead = (data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) != 0;
+            m_dead = (data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) == 0;
 
             saved_icon = data.icon;
 
