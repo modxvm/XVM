@@ -237,15 +237,7 @@ class com.xvm.StatLoader
         }
         //Logger.add("T after=" + Tmin + ".." + Tmax);
 
-        //// 4. Calculate average tier
-        //return (Tmax + Tmin) / 2.0;
-        // 4. Return max tier
-        //return Tmax;
-        // 4. Return max tier if tier 11
-        if (Tmax == 11)
-            return Tmax;
-        // 4. Return min tier
-        return Tmin;
+        // 4. Return battle tier
+        return (Tmax > 10) ? Tmax : Tmin;
     }
-
 }
