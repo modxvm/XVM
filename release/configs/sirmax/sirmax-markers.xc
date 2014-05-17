@@ -1,9 +1,9 @@
-{
+ï»¿{
   "def": {
     //"standardMarkers": true,
     "standardMarkers": false,
 
-    "markersStat": "<b><font face='Symbol' color='#CCCCCC' size='11'><font color='{{c:t-battles}}'>·</font> <font color='{{c:xeff}}'>·</font> <font color='{{c:xwn8}}'>·</font></font></b>",
+    "markersStat": "<b><font face='Symbol' color='#CCCCCC' size='11'><font color='{{c:t-battles}}'>Â·</font> <font color='{{c:xeff}}'>Â·</font> <font color='{{c:xwn8}}'>Â·</font></font></b>",
     "markersStatAlt": "<b><font face='$FieldFont' size='12'><font color='{{c:t-battles}}'>{{t-hb%d~h|-}}</font> <font color='{{c:xeff}}'>{{xeff|--}}</font> <font color='{{c:xwn8}}'>{{xwn8|--}}</font> <font color='{{c:rating}}'>{{rating%d~%|--}}</font></font></b>",
 
     "damageMessageAlive": "{{dmg}}",
