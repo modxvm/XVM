@@ -570,7 +570,7 @@ class com.xvm.Macros
         pdata["dmg-total"] = total;
 
         // {{dmg-avg}}
-        pdata["dmg-avg"] = hits.length == 0 ? 0 : total / hits.length;
+        pdata["dmg-avg"] = hits.length == 0 ? 0 : Math.round(total / hits.length);
 
         // {{dmg-player}}
         pdata["dmg-player"] = data.total;
