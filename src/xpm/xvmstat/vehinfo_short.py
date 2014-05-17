@@ -15,6 +15,7 @@ def getShortName(key):
 
 _data = {
     'ussr:Observer':                     '',
+    'germany:Karl':                      'Karl',
 
     # level 1
     'ussr:MS-1':                         'MS',

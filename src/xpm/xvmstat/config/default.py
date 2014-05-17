@@ -256,6 +256,7 @@ class _DefaultConfig(object):
             'iconAlpha': 100,                  # Side panel icons transparency. 0 - transparent, 100 - opaque
             'removeSquadIcon': False,          # Hide squad icon
             'removePanelsModeSwitcher': False, # Set true to hide mouse modes switcher
+            'startMode': 'large',
             # Playes/clan icon parameters
             'clanIcon': { 'show': True, 'x': 0, 'y': 6, 'xr': 0, 'yr': 6, 'h': 16, 'w': 16, 'alpha': 90 },
             # Display options for icons of never seen enemies

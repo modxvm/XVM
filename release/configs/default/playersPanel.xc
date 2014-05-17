@@ -16,6 +16,9 @@
     // true - Remove the Players Panel mode switcher (buttons for changing size).
     // true - убрать переключатель режимов ушей мышкой.
     "removePanelsModeSwitcher": false,
+    // Start panels mode. Possible values: "none", "short", "medium", "medium2", "large".
+    // Начальный режим ушей. Возможные значения: "none", "short", "medium", "medium2", "large".
+    "startMode": "large",
     // Display options for Team/Clan logos (see battleLoading.xc).
     // Параметры отображения иконки игрока/клана (см. battleLoading.xc).
     "clanIcon": {

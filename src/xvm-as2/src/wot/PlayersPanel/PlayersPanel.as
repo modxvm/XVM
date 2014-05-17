@@ -49,6 +49,7 @@ class wot.PlayersPanel.PlayersPanel
     {
         Utils.TraceXvmModule("PlayersPanel");
 
+        GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, onConfigLoaded);
         GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, wrapper, wrapper.update);
         GlobalEventDispatcher.addEventListener(Defines.E_BATTLE_STATE_CHANGED, wrapper, wrapper.update);
 
@@ -64,6 +65,23 @@ class wot.PlayersPanel.PlayersPanel
     private var centeredTextY:Number;
     private var leadingNames:Number;
     private var leadingVehicles:Number;
+
+    private function onConfigLoaded()
+    {
+        setStartMode(Config.config.playersPanel.startMode, wrapper);
+    }
+
+    private function setStartMode(mode:String, wrapper:net.wargaming.ingame.PlayersPanel)
+    {
+        if (wrapper.state == "none")
+        {
+            var $this = this;
+            setTimeout(function() { $this.setStartMode(mode, wrapper); }, 1);
+            return;
+        }
+
+        wrapper.state = mode;
+    }
 
     private function setDataImpl(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStrOrig, vehiclesStrOrig, namesStrOrig)
     {

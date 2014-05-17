@@ -108,6 +108,7 @@
     "alpha": 50,
     "removeSquadIcon": true,
     "removePanelsModeSwitcher": true,
+    //"startMode": "none",
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
     "medium": {
       "width": 120,
