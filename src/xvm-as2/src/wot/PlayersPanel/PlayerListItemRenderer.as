@@ -357,7 +357,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         else
         {
             // other modes
-            mc._x = 150 - panel.m_list._x; // magic number
+            mc._x = 153 - panel.m_list._x; // magic number
             mc._y = 0;
         }
     }

@@ -133,8 +133,8 @@
         "<img src='xvm://configs/sirmax/img/_ally_50-{{alive}}.png' width='3' height='22'>"
       ],
       "extraTextFieldsRight": [
-        "<img src='xvm://configs/sirmax/img/_bg.png' width='{{hp-max:150}}' height='22'>      ",
-        "<img src='xvm://configs/sirmax/img/_enemy_50-{{alive}}.png' width='{{hp:150}}' height='22'>      ",
+        "<img src='xvm://configs/sirmax/img/_bg.png' width='{{hp-max:150}}' height='22'>       ",
+        "<img src='xvm://configs/sirmax/img/_enemy_50-{{alive}}.png' width='{{hp:150}}' height='22'>       ",
         "<img src='xvm://configs/sirmax/img/_enemy_50-{{alive}}.png' width='3' height='22'>"
       ]
     },
