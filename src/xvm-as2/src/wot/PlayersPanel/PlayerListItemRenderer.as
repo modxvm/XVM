@@ -227,7 +227,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
             m_clanIcon = PlayerInfo.createIcon(wrapper, "clanicon", cfg, x, wrapper.iconLoader._y, isLeftPanel ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
         }
         PlayerInfo.setSource(m_clanIcon, m_name, m_clan);
-        m_clanIcon["holder"]._alpha = m_dead ? 100 : 50;
+        m_clanIcon["holder"]._alpha = m_dead ? 50 : 100;
     }
 
     private function createFieldsForNoneMode():MovieClip
