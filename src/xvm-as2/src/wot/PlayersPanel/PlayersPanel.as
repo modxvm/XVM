@@ -52,14 +52,9 @@ class wot.PlayersPanel.PlayersPanel
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, onConfigLoaded);
         GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, wrapper, wrapper.update);
         GlobalEventDispatcher.addEventListener(Defines.E_BATTLE_STATE_CHANGED, wrapper, wrapper.update);
-
-        /** Minimap needs to know loaded status */
-        checkLoading();
     }
 
     // PRIVATE
-
-    private var _init:Boolean = false;
 
     // Centered _y value of text field
     private var centeredTextY:Number;
@@ -81,6 +76,14 @@ class wot.PlayersPanel.PlayersPanel
         }
 
         wrapper.state = mode;
+
+        // initialize
+
+        centeredTextY = wrapper.m_names._y - 5;
+        wrapper.m_names.verticalAlign = "top"; // for incomplete team - cannot set to "center"
+        wrapper.m_vehicles.verticalAlign = "top"; // for incomplete team - cannot set to "center"
+
+        GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.PANEL_READY));
     }
 
     private function setDataImpl(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStrOrig, vehiclesStrOrig, namesStrOrig)
@@ -99,14 +102,6 @@ class wot.PlayersPanel.PlayersPanel
             //wrapper.m_list._visible = true; // _visible == false for "none" mode
             wrapper.m_names.condenseWhite = !Stat.s_loaded;
             wrapper.m_vehicles.condenseWhite = !Stat.s_loaded;
-
-            if (!_init)
-            {
-                _init = true;
-                centeredTextY = wrapper.m_names._y - 5;
-                wrapper.m_names.verticalAlign = "top"; // for incomplete team - cannot set to "center"
-                wrapper.m_vehicles.verticalAlign = "top"; // for incomplete team - cannot set to "center"
-            }
 
             var namesStr:String = "";
             var vehiclesStr:String = "";
@@ -350,22 +345,5 @@ class wot.PlayersPanel.PlayersPanel
                 max_height = w;
         }
         return max_height;
-    }
-
-    /** Informs Minimap when PlayersPanel is loaded */
-    private function checkLoading():Void
-    {
-        //Logger.add("PlayersPanel.checkLoading()");
-
-        wrapper.m_list.onEnterFrame = function()
-        {
-            //Logger.add("PlayersPanel.checkLoading(): frame");
-            if (this._dataProvider != null && this._dataProvider.length > 0)
-            {
-                delete this.onEnterFrame;
-
-                GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.PANEL_READY));
-            }
-        }
     }
 }
