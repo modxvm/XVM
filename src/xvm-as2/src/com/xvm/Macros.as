@@ -279,7 +279,7 @@ class com.xvm.Macros
         if (!pdata.hasOwnProperty("squad") && data.hasOwnProperty("squad"))
         {
             // {{squad}}
-            pdata["squad"] = data.squad;
+            pdata["squad"] = data.squad > 10 ? "sq" : null;
         }
 
         // level

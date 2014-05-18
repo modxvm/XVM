@@ -117,14 +117,7 @@ class wot.PlayersPanel.PlayersPanel
                 var item = data[i];
                 var value = values[i];
 
-                // fix battlestate
-                var obj = BattleState.getUserData(item.userName);
-                obj.frags = item.frags || NaN;
-                obj.dead = (item.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) == 0;
-                if (obj.dead == true && obj.curHealth > 0)
-                    obj.curHealth = 0;
-                if (item.himself)
-                    BattleState.setSelfUserName(item.userName);
+                fixBattleState(item);
 
                 Macros.RegisterPlayerData(item.userName, item, wrapper.type == "left" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
 
@@ -180,6 +173,18 @@ class wot.PlayersPanel.PlayersPanel
         {
             Logger.add(e.toString());
         }
+    }
+
+    private function fixBattleState(data)
+    {
+        // fix battlestate
+        var obj = BattleState.getUserData(data.userName);
+        obj.frags = data.frags || NaN;
+        obj.dead = (data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) == 0;
+        if (obj.dead == true && obj.curHealth > 0)
+            obj.curHealth = 0;
+        if (data.himself)
+            BattleState.setSelfUserName(data.userName);
     }
 
     private function selectPlayer(event):Void
