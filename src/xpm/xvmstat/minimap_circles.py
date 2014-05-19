@@ -17,7 +17,7 @@ class _MinimapCircles(object):
     def clear(self):
         self.item = None
         self.crew = {}
-        self.base_commander_skill = 1.0
+        self.base_commander_skill = 100.0
         self.brothers_in_arms = False
         self.ventilation = False
         self.consumable = False

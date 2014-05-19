@@ -135,8 +135,6 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
         if (!cfg.view.enabled)
             return;
 
-        //Logger.addObject(cfg._internal);
-
         var ci = cfg._internal;
 
         var view_distance_vehicle:Number = ci.view_distance_vehicle;
@@ -162,21 +160,24 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
         var Kn1 = broken ? 10 : 1; // приборы наблюдения
         var Kn2 = broken ? 0.5 : 1; // приборы наблюдения
 
-        // TODO
         var view_distance:Number = view_distance_vehicle * (K * 0.0043 + 0.57) *
             (1 + Kn1 * 0.0002 * Kee) * (1 + 0.0003 * Krf) * Kn2;
 
         var binocular_distance:Number = view_distance * 1.25;
 
         if (ci.view_coated_optics == true)
-            view_distance = Math.min(view_distance * 1.1, 500)
+            view_distance = view_distance * 1.1
 
-        if (cfg.limit445m) {
+        if (cfg.limit445m)
+        {
             if (view_distance > 445)
                 view_distance = 445;
             if (binocular_distance > 445)
                 binocular_distance = 445;
         }
+
+        Logger.addObject(cfg._internal, 2);
+        Logger.add("K=" + K + " view_distance=" + view_distance);
 
         // view
         var radius:Number = scaleFactor * view_distance;
