@@ -17,11 +17,14 @@ class _MinimapCircles(object):
     def clear(self):
         self.item = None
         self.crew = {}
+        self.base_commander_skill = 1.0
+        self.brothers_in_arms = False
         self.ventilation = False
         self.consumable = False
-        self.brothers_in_arms = False
-        self.commander_skill = 0.0
-        self.other_bonus = 0.0
+        self.commander_eagleEye = 0.0
+        self.radioman_finder = 0.0
+        self.is_commander_radioman = False
+        self.camouflage = []
         self.coated_optics = False
 
     def updateCurrentVehicle(self, config):
@@ -61,26 +64,30 @@ class _MinimapCircles(object):
                 self.brothers_in_arms = False
                 break
 
-        # Calculate commander bonus
-        self.commander_skill = self.crew["commander"]["level"]
-        if self.brothers_in_arms == True:
-            self.commander_skill += 5.0
-        if self.ventilation == True:
-            self.commander_skill += 5.0
-        if self.consumable == True:
-            self.commander_skill += 10.0
-        debug("Commander Skill: %f" % self.commander_skill)
+        # Base commander skill
+        self.base_commander_skill = self.crew["commander"]["level"]
+        # TODO: penalty for wrong vehicle
+        debug("Commander Skill: %f" % self.base_commander_skill)
 
-        # Calculate other bonuses
-        self.other_bonus = 1.0
+        # Search other skills
+        self.camouflage = []
         for name, data in self.crew.iteritems():
-            # Calculate recon skills
             if "commander_eagleEye" in data["skill"]:
-                self.other_bonus *= 1.0 + ( 0.0002 * data["skill"]["commander_eagleEye"] )
-            # Calculate Situational Awareness Skill
+                ee_skill = data["skill"]["commander_eagleEye"]
+                if self.commander_eagleEye < ee_skill:
+                    self.commander_eagleEye = ee_skill
             if "radioman_finder" in data["skill"]:
-                self.other_bonus *= 1.0 + ( 0.0003 * data["skill"]["radioman_finder"] )
-        debug("other_bonus: %f" % self.other_bonus)
+                rf_skill = data["skill"]["radioman_finder"]
+                if self.radioman_finder < rf_skill:
+                    self.radioman_finder = rf_skill
+                    self.is_commander_radioman = name == "commander"
+            self.camouflage.append({
+                'name':name,
+                'skill':data["skill"]["camouflage"] if "camouflage" in data["skill"] else 0})
+
+        debug("commander_eagleEye: %f" % self.commander_eagleEye)
+        debug("radioman_finder: %f" % self.radioman_finder)
+        debug("camouflage: %f" % self.camouflage)
 
         # Check for Coated Optics
         self.coated_optics = self._isOptionalEquipped("coatedOptics")
@@ -96,22 +103,8 @@ class _MinimapCircles(object):
         #debug(vars(descr))
         #debug(vars(descr.type))
 
-        # Calculate final values
-
         # View Distance
         view_distance = descr.turret["circularVisionRadius"]
-        if not isReplay():
-            view_distance = ((view_distance / 0.875) * (0.00375 * self.commander_skill + 0.5)) * self.other_bonus
-
-        # Binocular Distance
-        binocular_distance = view_distance * 1.25
-        if cfg['view']['limit445m'] == True:
-            binocular_distance = min(445, binocular_distance)
-
-        # View Distance with Coated Optics (Binoculars don't include Coated Optics)
-        if self.coated_optics == True:
-            view_distance = min(view_distance * 1.1, 500)
-        #view_distance = min(445, view_distance);
 
         # Artillery Range
         artillery_range = 0
@@ -129,8 +122,16 @@ class _MinimapCircles(object):
 
         # Set values
         cfg['_internal'] = {
-            'view_distance': view_distance,
-            'binocular_distance': binocular_distance,
+            'view_distance_vehicle': view_distance,
+            'view_base_commander_skill': self.base_commander_skill,
+            'view_brothers_in_arms': self.brothers_in_arms,
+            'view_ventilation': self.ventilation,
+            'view_consumable': self.consumable,
+            'view_commander_eagleEye': self.commander_eagleEye,
+            'view_radioman_finder': self.radioman_finder,
+            'view_is_commander_radioman': self.is_commander_radioman,
+            'view_camouflage': self.camouflage,
+            'view_coated_optics': self.coated_optics,
             'artillery_range': artillery_range,
             'shell_range': shell_range,
         }

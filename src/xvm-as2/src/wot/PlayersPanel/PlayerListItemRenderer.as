@@ -278,7 +278,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         tf.multiline = true;
         tf.wordWrap = false;
         tf.autoSize = isLeftPanel ? "left" : "right";
-        tf.verticalAlign = "center";
+        //tf.verticalAlign = "center";
         tf.styleSheet = Utils.createStyleSheet(Utils.createCSS("extraTF", 0xFFFFFF, "$FieldFont", 14, "center", false, false));
         //tf.border = true; tf.borderColor = 0xCCCCCC;
         return tf;

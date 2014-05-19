@@ -128,6 +128,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
         onViewRangeChanged(event.value);
     }
 
+    // http://forum.worldoftanks.ru/index.php?/topic/1047590-/page__pid__25639867#entry25639867
     private function onViewRangeChanged(binoculars_enabled:Boolean)
     {
         var cfg = MapConfig.circles;
@@ -136,8 +137,49 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
 
         //Logger.addObject(cfg._internal);
 
+        var ci = cfg._internal;
+
+        var view_distance_vehicle:Number = ci.view_distance_vehicle;
+        var bia:Number = ci.view_brothers_in_arms ? 5 : 0;
+        var vent:Number = ci.view_ventilation ? 5 : 0;
+        var cons:Number = ci.view_consumable ? 10 : 0;
+
+        var K:Number = ci.view_base_commander_skill + bia + vent + cons;
+        var Kcom:Number = K / 10.0;
+        var Kee = ci.view_commander_eagleEye <= 0 ? 0 : ci.view_commander_eagleEye + bia + vent + cons;
+        var Krf = ci.view_radioman_finder <= 0 ? 0 : ci.view_radioman_finder + bia + vent + cons + (ci.view_is_commander_radioman == true ? 0 : Kcom);
+        //var M = ci.view_camouflage <= 0 ? 0 : ci.view_camouflage + bia + vent + cons + (ci.view_is_commander_camouflage == true ? 0 : Kcom);
+
+        /*
+         * TODO
+         * Если любой член экипажа контужен, то уровень его эффективного умения = 0. На примере командира, переменная К = 0%.
+         * дополнительные (второстепенные) умения (например, Маскировка, Орлиный глаз и т. п.) продолжают работать,
+         * переменные ОГб, РПб и Мб остаются неизменны. (*необходимо уточнить*)
+         **/
+
+        var broken = false; // TODO
+
+        var Kn1 = broken ? 10 : 1; // приборы наблюдения
+        var Kn2 = broken ? 0.5 : 1; // приборы наблюдения
+
+        // TODO
+        var view_distance:Number = view_distance_vehicle * (K * 0.0043 + 0.57) *
+            (1 + Kn1 * 0.0002 * Kee) * (1 + 0.0003 * Krf) * Kn2;
+
+        var binocular_distance:Number = view_distance * 1.25;
+
+        if (ci.view_coated_optics == true)
+            view_distance = Math.min(view_distance * 1.1, 500)
+
+        if (cfg.limit445m) {
+            if (view_distance > 445)
+                view_distance = 445;
+            if (binocular_distance > 445)
+                binocular_distance = 445;
+        }
+
         // view
-        var radius:Number = scaleFactor * cfg._internal.view_distance;
+        var radius:Number = scaleFactor * view_distance;
         if (radius > 0 && (mc_view == null || mc_view["$raduis"] != radius || mc_view["$active"] != !binoculars_enabled))
         {
             var c = binoculars_enabled ? cfg.view.passive : cfg.view.active;
@@ -147,7 +189,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
         }
 
         // binocular
-        radius = binoculars_exists ? scaleFactor * cfg._internal.binocular_distance : 0;
+        radius = binoculars_exists ? scaleFactor * binocular_distance : 0;
         if (radius > 0 && (mc_binocular == null || mc_binocular["$raduis"] != radius || mc_binocular["$active"] != binoculars_enabled))
         {
             var c = binoculars_enabled ? cfg.view.active : cfg.view.passive;
