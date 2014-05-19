@@ -28,7 +28,16 @@
         "shell":     { "enabled": true, "alpha": 50, "color": "0xFF0000", "thickness": 0.5 },
         // View distance (dynamically changes when switching stereoscope)
         // Дальность обзора (динамически изменяется при включении стереотрубы)
-        "view":      { "enabled": true, "alpha": 50, "color": "0xFFFFFF", "thickness": 0.5 },
+        "view": {
+          "enabled": true,
+          "limit445m": false, // do not draw view range more than 445m (maximum reveal distance)
+          // Active circle - current view range
+          // Активный круг - текущая дальность обзора
+          "active":  { "alpha": 50, "color": "0xFFFFFF", "thickness": 0.5 },
+          // Passive circle - view range with or without binoculars (depending from current state)
+          // Пассивный круг - с рогами или без них, в зависимости от текущего состояния
+          "passive": { "alpha": 0, "color": "0xFFFFFF", "thickness": 0.25 }
+        }
         // Special circles dependent on vehicle type.
         // Many configuration lines for the same vehicle make many circles.
         // See other vehicle types at (replace : symbol with -):

@@ -110,7 +110,8 @@ class _MinimapCircles(object):
 
         # Binocular Distance
         binocular_distance = view_distance * 1.25
-        #binocular_distance = min(445, binocular_distance)
+        if cfg['view']['limit445m'] == True:
+            binocular_distance = min(445, binocular_distance)
 
         # View Distance with Coated Optics (Binoculars don't include Coated Optics)
         if self.coated_optics == True:

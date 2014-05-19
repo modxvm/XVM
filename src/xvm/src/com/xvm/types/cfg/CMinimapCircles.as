@@ -9,7 +9,7 @@ package com.xvm.types.cfg
         public var enabled:Boolean;
         public var major:Array;
         public var artillery:CMinimapCirclesRange;
-        public var view:CMinimapCirclesRange;
+        public var view:CMinimapCirclesView;
         public var shell:CMinimapCirclesRange;
         public var special:Array;
         public var _internal:CMinimapCirclesInternal;

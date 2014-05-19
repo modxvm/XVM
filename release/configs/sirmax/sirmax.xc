@@ -164,7 +164,13 @@
         "major": [
             { "enabled": true, "distance": 445, "thickness": 0.3, "alpha": 50, "color": "0xFFCC66" },
             { "enabled": true, "distance": 50, "thickness": 1, "alpha": 50, "color": "0xFFFFFF" }
-        ]
+        ],
+        "view": {
+          "enabled": true,
+          "limit445m": true,
+          "active":  { "alpha": 50, "color": "0xFFFFFF", "thickness": 0.5 },
+          "passive": { "alpha": 50, "color": "0xFFFFFF", "thickness": 0.25 }
+        }
     },
     "lines": {
       "vehicle": [

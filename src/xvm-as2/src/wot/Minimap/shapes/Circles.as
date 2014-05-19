@@ -56,6 +56,9 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
 
         if (cfg.view.enabled)
         {
+          "limit445m": false, // do not draw view range more than 445m (maximum reveal distance)
+          "active":  { "alpha": 50, "color": "0xFFFFFF", "thickness": 1 },
+          "passive": { "alpha": 50, "color": "0xFFFFFF", "thickness": 0.5 }
             var radius:Number = scaleFactor * cfg._internal.view_distance;
             if (radius > 0)
                 mc_view = drawCircle(radius, cfg.view.thickness, cfg.view.color, cfg.view.alpha);

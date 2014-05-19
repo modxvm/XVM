@@ -417,8 +417,18 @@ package com.xvm.misc
             c.circles.artillery.alpha = 50;
             c.circles.artillery.color = "0xFF0000";
             c.circles.artillery.thickness = 0.5;
-            c.circles.view =  new CMinimapCirclesRange();
+            c.circles.view =  new CMinimapCirclesView();
             c.circles.view.enabled = true;
+            c.circles.view.limit445m = false;
+            c.circles.view.active = new CMinimapCirclesViewRange();
+            c.circles.view.active.alpha = 50;
+            c.circles.view.active.color = "0xFFFFFF";
+            c.circles.view.active.thickness = 0.5;
+            c.circles.view.passive = new CMinimapCirclesViewRange();
+            c.circles.view.passive.alpha = 0;
+            c.circles.view.passive.color = "0xFFFFFF";
+            c.circles.view.passive.thickness = 0.25;
+
             c.circles.view.alpha = 50;
             c.circles.view.color = "0xFFFFFF";
             c.circles.view.thickness = 0.5;
