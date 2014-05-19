@@ -115,7 +115,7 @@ class com.xvm.Macros
         // substitute
         //Logger.add("name:" + name + " norm:" + norm + " fmt:" + fmt + " suf:" + suf + " def:" + def);
 
-        if (options.dead && Strings.startsWith("c:", name) && pdata.hasOwnProprty(name + "#d"))
+        if (options.dead == true && Strings.startsWith("c:", name) && pdata[name + "#d"] != null)
             name += "#d";
 
         if (!pdata.hasOwnProperty(name) && !globals.hasOwnProperty(name))
