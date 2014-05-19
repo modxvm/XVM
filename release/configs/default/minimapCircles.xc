@@ -37,7 +37,7 @@
           // Passive circle - view range with or without binoculars (depending from current state)
           // Пассивный круг - с рогами или без них, в зависимости от текущего состояния
           "passive": { "alpha": 0, "color": "0x8888FF", "thickness": 0.5 }
-        }
+        },
         // Special circles dependent on vehicle type.
         // Many configuration lines for the same vehicle make many circles.
         // See other vehicle types at (replace : symbol with -):
