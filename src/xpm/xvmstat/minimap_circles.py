@@ -22,7 +22,6 @@ class _MinimapCircles(object):
         self.brothers_in_arms = False
         self.commander_skill = 0.0
         self.other_bonus = 0.0
-        self.binoculars = False
         self.coated_optics = False
 
     def updateCurrentVehicle(self, config):
@@ -82,10 +81,6 @@ class _MinimapCircles(object):
             if "radioman_finder" in data["skill"]:
                 self.other_bonus *= 1.0 + ( 0.0003 * data["skill"]["radioman_finder"] )
         debug("other_bonus: %f" % self.other_bonus)
-
-        # Check for Binoculars
-        self.binoculars = self._isOptionalEquipped("stereoscope")
-        debug("Binoculars: " + str(self.binoculars))
 
         # Check for Coated Optics
         self.coated_optics = self._isOptionalEquipped("coatedOptics")

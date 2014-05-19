@@ -18,6 +18,8 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
     private var mc_view:MovieClip = null;
     private var mc_binocular:MovieClip = null;
 
+    private var binoculars_exists:Boolean = false;
+
     public function Circles()
     {
         super();
@@ -119,6 +121,10 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
 
     private function onBinocularToggled(event)
     {
+        // workaround for binoculars
+        if (binoculars_exists == false && event.value == true)
+            binoculars_exists = true;
+
         onViewRangeChanged(event.value);
     }
 
@@ -128,7 +134,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
         if (!cfg.view.enabled)
             return;
 
-        Logger.addObject(cfg._internal);
+        //Logger.addObject(cfg._internal);
 
         // view
         var radius:Number = scaleFactor * cfg._internal.view_distance;
@@ -141,7 +147,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
         }
 
         // binocular
-        radius = scaleFactor * cfg._internal.binocular_distance;
+        radius = binoculars_exists ? scaleFactor * cfg._internal.binocular_distance : 0;
         if (radius > 0 && (mc_binocular == null || mc_binocular["$raduis"] != radius || mc_binocular["$active"] != binoculars_enabled))
         {
             var c = binoculars_enabled ? cfg.view.active : cfg.view.passive;
