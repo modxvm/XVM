@@ -168,14 +168,6 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
         if (ci.view_coated_optics == true)
             view_distance = view_distance * 1.1
 
-        if (cfg.limit445m)
-        {
-            if (view_distance > 445)
-                view_distance = 445;
-            if (binocular_distance > 445)
-                binocular_distance = 445;
-        }
-
         Logger.addObject(cfg._internal, 2);
         Logger.add("K=" + K + " view_distance=" + view_distance);
 

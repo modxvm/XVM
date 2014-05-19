@@ -420,7 +420,6 @@ package com.xvm.misc
             c.circles.artillery.thickness = 0.5;
             c.circles.view =  new CMinimapCirclesView();
             c.circles.view.enabled = true;
-            c.circles.view.limit445m = false;
             c.circles.view.active = new CMinimapCirclesViewRange();
             c.circles.view.active.alpha = 50;
             c.circles.view.active.color = "0xAAAAFF";

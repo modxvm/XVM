@@ -30,7 +30,6 @@
         // Дальность обзора (динамически изменяется при включении стереотрубы)
         "view": {
           "enabled": true,
-          "limit445m": false, // do not draw view range more than 445m (maximum reveal distance)
           // Active circle - current view range
           // Активный круг - текущая дальность обзора
           "active":  { "alpha": 50, "color": "0xAAAAFF", "thickness": 1 },
