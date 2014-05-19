@@ -56,19 +56,9 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
 
         if (cfg.view.enabled)
         {
-          "limit445m": false, // do not draw view range more than 445m (maximum reveal distance)
-          "active":  { "alpha": 50, "color": "0xFFFFFF", "thickness": 1 },
-          "passive": { "alpha": 50, "color": "0xFFFFFF", "thickness": 0.5 }
-            var radius:Number = scaleFactor * cfg._internal.view_distance;
-            if (radius > 0)
-                mc_view = drawCircle(radius, cfg.view.thickness, cfg.view.color, cfg.view.alpha);
-            radius = scaleFactor * cfg._internal.binocular_distance;
-            if (radius > 0)
-                mc_binocular = drawCircle(radius, cfg.view.thickness, cfg.view.color, cfg.view.alpha);
-            switchBinoculars(false);
+            onViewRangeChanged(false);
+            GlobalEventDispatcher.addEventListener(Defines.E_BINOCULAR_TOGGLED, this, onBinocularToggled);
         }
-
-        GlobalEventDispatcher.addEventListener(Defines.E_BINOCULAR_TOGGLED, this, onBinocularToggled);
     }
 
     /** Private */
@@ -129,14 +119,35 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
 
     private function onBinocularToggled(event)
     {
-        switchBinoculars(event.value);
+        onViewRangeChanged(event.value);
     }
 
-    private function switchBinoculars(enable:Boolean)
+    private function onViewRangeChanged(binoculars_enabled:Boolean)
     {
-        if (mc_view)
-            mc_view._visible = !enable;
-        if (mc_binocular)
-            mc_binocular._visible = enable;
+        var cfg = MapConfig.circles;
+        if (!cfg.view.enabled)
+            return;
+
+        Logger.addObject(cfg._internal);
+
+        // view
+        var radius:Number = scaleFactor * cfg._internal.view_distance;
+        if (radius > 0 && (mc_view == null || mc_view["$raduis"] != radius || mc_view["$active"] != !binoculars_enabled))
+        {
+            var c = binoculars_enabled ? cfg.view.passive : cfg.view.active;
+            if (mc_view != null)
+                mc_view.removeMovieClip();
+            mc_view = drawCircle(radius, c.thickness, c.color, c.alpha);
+        }
+
+        // binocular
+        radius = scaleFactor * cfg._internal.binocular_distance;
+        if (radius > 0 && (mc_binocular == null || mc_binocular["$raduis"] != radius || mc_binocular["$active"] != binoculars_enabled))
+        {
+            var c = binoculars_enabled ? cfg.view.active : cfg.view.passive;
+            if (mc_binocular != null)
+                mc_binocular.removeMovieClip();
+            mc_binocular = drawCircle(radius, c.thickness, c.color, c.alpha);
+        }
     }
 }

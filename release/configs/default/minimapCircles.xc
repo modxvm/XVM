@@ -33,10 +33,10 @@
           "limit445m": false, // do not draw view range more than 445m (maximum reveal distance)
           // Active circle - current view range
           // Активный круг - текущая дальность обзора
-          "active":  { "alpha": 50, "color": "0xFFFFFF", "thickness": 0.5 },
+          "active":  { "alpha": 50, "color": "0xAAAAFF", "thickness": 1 },
           // Passive circle - view range with or without binoculars (depending from current state)
           // Пассивный круг - с рогами или без них, в зависимости от текущего состояния
-          "passive": { "alpha": 0, "color": "0xFFFFFF", "thickness": 0.25 }
+          "passive": { "alpha": 0, "color": "0x8888FF", "thickness": 0.5 }
         }
         // Special circles dependent on vehicle type.
         // Many configuration lines for the same vehicle make many circles.

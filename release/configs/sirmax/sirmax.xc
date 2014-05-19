@@ -176,9 +176,9 @@
         ],
         "view": {
           "enabled": true,
-          "limit445m": true,
-          "active":  { "alpha": 50, "color": "0xFFFFFF", "thickness": 0.5 },
-          "passive": { "alpha": 50, "color": "0xFFFFFF", "thickness": 0.25 }
+          "limit445m": false,
+          "active":  { "alpha": 50, "color": "0xAAAAFF", "thickness": 1 },
+          "passive": { "alpha": 35, "color": "0x8888FF", "thickness": 0.5 }
         }
     },
     "lines": {
