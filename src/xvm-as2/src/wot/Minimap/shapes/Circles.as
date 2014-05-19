@@ -128,7 +128,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
         onViewRangeChanged(event.value);
     }
 
-    // http://forum.worldoftanks.ru/index.php?/topic/1047590-/page__pid__25639867#entry25639867
+    // http://forum.worldoftanks.ru/index.php?/topic/1047590-/
     private function onViewRangeChanged(binoculars_enabled:Boolean)
     {
         var cfg = MapConfig.circles;
