@@ -45,6 +45,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     private var m_name:String = null;
     private var m_clan:String = null;
+    private var m_vehicleState:Number = 0;
     private var m_dead:Boolean = null;
 
     private var m_clanIcon: UILoaderAlt = null;
@@ -130,12 +131,14 @@ class wot.PlayersPanel.PlayerListItemRenderer
         {
             m_name = null;
             m_clan = null;
+            m_vehicleState = 0;
             m_dead = true;
         }
         else
         {
             m_name = data.userName;
             m_clan = data.clanAbbrev;
+            m_vehicleState = data.vehicleState;
             m_dead = (data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) == 0;
 
             saved_icon = data.icon;
@@ -206,6 +209,8 @@ class wot.PlayersPanel.PlayerListItemRenderer
             wrapper.iconLoader._xscale = -wrapper.iconLoader._xscale;
             wrapper.iconLoader._x -= 80;
             wrapper.vehicleLevel._x = wrapper.iconLoader._x + 15;
+            if (spotStatusView != null)
+                spotStatusView.draw();
         }
     }
 
@@ -222,7 +227,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
             m_clanIcon = PlayerInfo.createIcon(wrapper, "clanicon", cfg, x, wrapper.iconLoader._y, isLeftPanel ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
         }
         PlayerInfo.setSource(m_clanIcon, m_name, m_clan);
-        m_clanIcon["holder"]._alpha = m_dead ? 100 : 50;
+        m_clanIcon["holder"]._alpha = m_dead ? 50 : 100;
     }
 
     private function createFieldsForNoneMode():MovieClip
@@ -273,6 +278,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         tf.multiline = true;
         tf.wordWrap = false;
         tf.autoSize = isLeftPanel ? "left" : "right";
+        tf.verticalAlign = "center";
         tf.styleSheet = Utils.createStyleSheet(Utils.createCSS("extraTF", 0xFFFFFF, "$FieldFont", 14, "center", false, false));
         //tf.border = true; tf.borderColor = 0xCCCCCC;
         return tf;
@@ -281,7 +287,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
     private function updateSpotStatusView():Void
     {
         if (spotStatusView != null)
-            spotStatusView.invalidateData(m_name);
+            spotStatusView.invalidateData(m_name, m_vehicleState);
     }
 
     private function updateTextFields():Void
@@ -299,9 +305,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         if (mc == null)
             return;
 
-        var obj = Defines.battleStates[m_name] || { };
-        obj.darken = m_dead;
-
+        var obj = BattleState.getUserData(m_name);
         var formats:Array = mc.formats;
         var len:Number = formats.length;
         for (var i:Number = 0; i < len; ++i)
@@ -348,13 +352,13 @@ class wot.PlayersPanel.PlayerListItemRenderer
         if (cfg != null)
         {
             // none mode
-            mc._x = Defines.screenSize.width - cfg.width - cfg.x;
+            mc._x = BattleState.screenSize.width - cfg.width - cfg.x;
             mc._y = cfg.y + mc.idx * cfg.height;
         }
         else
         {
             // other modes
-            mc._x = 150 - panel.m_list._x; // magic number
+            mc._x = 153 - panel.m_list._x; // magic number
             mc._y = 0;
         }
     }

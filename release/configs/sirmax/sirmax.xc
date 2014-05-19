@@ -7,7 +7,7 @@
     "formatNick": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>",
     "formatVehicle": "<font face='Consolas' size='11'><font color='{{c:avglvl|#666666}}'>{{avglvl%d|-}}</font> <font color='{{c:tdv|#666666}}'>{{tdv%0.1f|---}}|<font color='{{c:e|#666666}}'>{{e|-}}</font>|<font color='{{c:xeff|#666666}}'>{{xeff|--}}</font>|<font color='{{c:xwn8|#666666}}'>{{xwn8|--}}</font> <font color='{{c:kb|#666666}}'>{{kb%2d~k|--k}}</font></font>",
     //"formatVehicle": "{{vehicle}}",
-    //"formatVehicle": "<font color='{{c:rating}}'>{{rating%2d~%|--%}}</font>",
+    //"formatVehicle": "<font color='{{c:teff|#666666}}'>{{teff%4d|----}}</font>",
 
     "pingServers": { "enabled": true, "updateInterval": 5000 },
 
@@ -108,6 +108,7 @@
     "alpha": 50,
     "removeSquadIcon": true,
     "removePanelsModeSwitcher": true,
+    //"startMode": "none",
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
     "medium": {
       "width": 120,
@@ -121,14 +122,22 @@
     },
     "large": {
       "width": 120,
-      "nickFormatLeft": "<font color='{{c:xwn8}}'>{{xwn8|--}}</font> {{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>",
-      "nickFormatRight": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font> <font color='{{c:xwn8}}'>{{xwn8|--}}</font>",
+      "nickFormatLeft": "  <font color='{{c:xwn8}}'>{{xwn8|--}}</font>  {{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>",
+      "nickFormatRight": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>  <font color='{{c:xwn8}}'>{{xwn8|--}}</font>&nbsp;&nbsp;",
       "vehicleFormatLeft": "{{hp}} / {{hp-max}}",
       "vehicleFormatRight": "{{hp}} / {{hp-max}}",
       //"vehicleFormatLeft": "<font color='{{c:rating}}'>{{vehicle}}</font>",
       //"vehicleFormatRight": "<font color='{{c:rating}}'>{{vehicle}}</font>",
-      "extraTextFieldsLeft": [],
-      "extraTextFieldsRight": []
+      "extraTextFieldsLeft": [
+        "       <img src='xvm://configs/sirmax/img/_bg.png' width='{{hp-max:150}}' height='22'>",
+        "       <img src='xvm://configs/sirmax/img/_ally_50-{{alive}}.png' width='{{hp:150}}' height='22'>",
+        "<img src='xvm://configs/sirmax/img/_ally_50-{{alive}}.png' width='3' height='22'>"
+      ],
+      "extraTextFieldsRight": [
+        "<img src='xvm://configs/sirmax/img/_bg.png' width='{{hp-max:150}}' height='22'>       ",
+        "<img src='xvm://configs/sirmax/img/_enemy_50-{{alive}}.png' width='{{hp:150}}' height='22'>       ",
+        "<img src='xvm://configs/sirmax/img/_enemy_50-{{alive}}.png' width='3' height='22'>"
+      ]
     },
     "none": {
       "extraTextFields": ${"sirmax-panels.xc":"."}

@@ -158,9 +158,7 @@ class wot.StatisticForm.BattleStatItemRenderer
         // Set Text Fields
         var c:String = "#" + Strings.padLeft(wrapper.textField.textColor.toString(16), 6, '0');
 
-        var obj = Defines.battleStates[name] || { };
-        obj.darken = obj.dead;
-
+        var obj = BattleState.getUserData(name);
         var fmt:String = Macros.Format(saved_label, (team == Defines.TEAM_ALLY) ? Config.config.statisticForm.formatLeftNick : Config.config.statisticForm.formatRightNick, obj);
         wrapper.textField.htmlText = "<font color='" + c + "'>" + fmt + "</font>";
 

@@ -233,7 +233,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
                 label: pFullName,
                 vehicle: vType,
                 icon: vIconSource,
-                squad: entityName == "squadman" ? "sq" : null,
+                squad: entityName == "squadman" ? 11 : 0,
                 level: vLevel,
                 vtype: Utils.vehicleClassToVehicleType(vClass),
                 maxHealth: maxHealth

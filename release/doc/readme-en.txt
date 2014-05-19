@@ -116,6 +116,7 @@
 
     In players panel, battle loading screen, statistic form only:
       {{frags}}       - current frags
+      {{alive}}       - 'alive' for alive, '' for dead
 
     In vehicle markers only:
       {{turret}}      - stock turret marker:

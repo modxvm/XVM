@@ -38,6 +38,10 @@ class wot.Minimap.shapes.ShapeAttach
 
         /** Hide sphapes on players dead event (postmortem mod) */
         GlobalEventDispatcher.addEventListener(Defines.E_SELF_DEAD, this, postmortemMod);
+
+        var ud = BattleState.getSelfUserData();
+        if (ud != null && ud.dead == true)
+            postmortemMod();
     }
 
     // -- Private

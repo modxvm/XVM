@@ -106,8 +106,7 @@ class wot.battle.BattleMain
 
         fixMinimapSize();
 
-        Defines.screenSize.width = width;
-        Defines.screenSize.height = height;
+        BattleState.setScreenSize(width, height);
         GlobalEventDispatcher.dispatchEvent( { type: Defines.E_UPDATE_STAGE, width: width, height: height });
     }
 
@@ -139,7 +138,7 @@ class wot.battle.BattleMain
         var obj = JSONx.parse(str);
         var data:BattleStateData = obj; // as2 type casting is strange
         //Logger.addObject(data);
-        Defines.battleStates[data.playerName] = data;
+        BattleState.setUserData(data.playerName, data);
         GlobalEventDispatcher.dispatchEvent( { type: Defines.E_BATTLE_STATE_CHANGED, playerName:data.playerName } );
     }
 

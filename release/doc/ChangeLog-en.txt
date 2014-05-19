@@ -2,9 +2,12 @@
   [NEW FUNCTIONS]
   * added in-battle macro {{battletier}} - guessed current battle tier
   * new options in playersPanel for extra text fields
+  * new option playersPanel/startMode for initial players panels mode
   * macros extended: {{hp:XX}} and {{hp-max:XX}} return value normalized to XX for current battle tier
     ex.: {{hp:300}} - will return 300 for HP=700 at tier-5 battle, and for HP=3000 at tier-11 battle.
-  * new macro {{frags}}
+  * new macros:
+      {{frags}} - current frags
+      {{alive}} - 'alive' for alive, '' for dead
 
 XVM-5.3.0-test2:
   [NEW FUNCTIONS]

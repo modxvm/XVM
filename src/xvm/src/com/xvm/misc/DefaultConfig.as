@@ -283,6 +283,7 @@ package com.xvm.misc
             c.iconAlpha = 100;         // Side panel icons transparency. 0 - transparent, 100 - opaque.
             c.removeSquadIcon = false; // Hide squad icon.
             c.removePanelsModeSwitcher = false; // Set true to hide mouse modes switcher.
+            c.startMode = "large";
             // Playes/clan icon parameters.
             c.clanIcon = { show: true, x: 0, y: 6, xr: 0, yr: 6, h: 16, w: 16, alpha: 90 };
             // Display options for icons of never seen enemies
