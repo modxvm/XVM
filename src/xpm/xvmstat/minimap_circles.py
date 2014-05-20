@@ -114,7 +114,7 @@ class _MinimapCircles(object):
 
         # View Distance
         if isReplay():
-            view_distance_vehicle = descr.turret['circularVisionRadius']
+            self.view_distance_vehicle = descr.turret['circularVisionRadius']
 
         # Shell Range & Artillery Range
         isArty = 'SPG' in descr.type.tags
@@ -131,7 +131,7 @@ class _MinimapCircles(object):
 
         # Set values
         cfg['_internal'] = {
-            'view_distance_vehicle': view_distance_vehicle,
+            'view_distance_vehicle': self.view_distance_vehicle,
             'view_base_commander_skill': self.base_commander_skill,
             'view_brothers_in_arms': self.brothers_in_arms,
             'view_ventilation': self.ventilation,
