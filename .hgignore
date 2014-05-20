@@ -12,6 +12,6 @@ release/mods
 src/xvm-as2/include
 src/xvm/lib
 src/xvm/obj
-utils/replays/test*.wotreplay 
+utils/replays/*.wotreplay 
 *~
 *.*~

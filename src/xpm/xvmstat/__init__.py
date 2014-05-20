@@ -125,9 +125,6 @@ def CurrentVehicle_selectVehicle(self, vehInvID = 0):
     #debug('> CurrentVehicle_selectVehicle')
     g_xvm.updateCurrentVehicle()
 
-def Inventory_equipSomething(self, *args):
-    debug('> Inventory_equipSomething')
-    g_xvm.updateCurrentVehicle()
 
 #####################################################################
 # Register events
@@ -163,15 +160,5 @@ def _RegisterEvents():
 
     from CurrentVehicle import g_currentVehicle
     RegisterEvent(g_currentVehicle, 'selectVehicle', CurrentVehicle_selectVehicle)
-
-    from account_helpers.inventory import Inventory
-    RegisterEvent(Inventory, 'equip', Inventory_equipSomething)
-    RegisterEvent(Inventory, 'equipTurret', Inventory_equipSomething)
-    RegisterEvent(Inventory, 'equipOptionalDevice', Inventory_equipSomething)
-    RegisterEvent(Inventory, 'equipShells', Inventory_equipSomething)
-    RegisterEvent(Inventory, 'equipEquipments', Inventory_equipSomething)
-    RegisterEvent(Inventory, 'equipTankman', Inventory_equipSomething)
-    RegisterEvent(Inventory, 'returnCrew', Inventory_equipSomething)
-    RegisterEvent(Inventory, 'addTankmanSkill', Inventory_equipSomething)
 
 BigWorld.callback(0, _RegisterEvents)

@@ -18,7 +18,10 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
     private var mc_view:MovieClip = null;
     private var mc_binocular:MovieClip = null;
 
+    private var destroyedCrew:Object = {};
+    private var surveyingDeviceDestroyed:Boolean = false;
     private var binoculars_exists:Boolean = false;
+    private var binoculars_enabled:Boolean = false;
 
     public function Circles()
     {
@@ -56,10 +59,15 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
                 drawCircle(radius, cfg.shell.thickness, cfg.shell.color, cfg.shell.alpha);
         }
 
-        if (cfg.view.enabled)
+        if (cfg.view.enabled || cfg.camouflage.enabled)
         {
             onViewRangeChanged(false);
-            GlobalEventDispatcher.addEventListener(Defines.E_BINOCULAR_TOGGLED, this, onBinocularToggled);
+            GlobalEventDispatcher.addEventListener(Defines.E_MODULE_DESTROYED, this, onModuleDestroyed);
+            GlobalEventDispatcher.addEventListener(Defines.E_MODULE_REPAIRED, this, onModuleRepaired);
+            if (cfg.view.enabled)
+                GlobalEventDispatcher.addEventListener(Defines.E_BINOCULAR_TOGGLED, this, onBinocularToggled);
+            if (cfg.camouflage.enabled)
+                GlobalEventDispatcher.addEventListener(Defines.E_MOVING_STATE_CHANGED, this, onMovingStateChanged);
         }
     }
 
@@ -111,12 +119,60 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
 
     private function magicTrigFunctionX(pointRatio):Number
     {
-        return Math.cos(pointRatio*2*Math.PI);
+        return Math.cos(pointRatio * 2 * Math.PI);
     }
 
     private function magicTrigFunctionY(pointRatio):Number
     {
-        return Math.sin(pointRatio*2*Math.PI);
+        return Math.sin(pointRatio * 2 * Math.PI);
+    }
+
+    private function onModuleDestroyed(event)
+    {
+        Logger.add("onModuleDestroyed: " + event.value);
+
+        switch (event.value)
+        {
+            case "surveyingDevice":
+                surveyingDeviceDestroyed = true;
+                onViewRangeChanged();
+                break;
+
+            case "commander":
+            case "radioman1":
+            case "radioman2":
+                destroyedCrew[event.value] = true;
+                onViewRangeChanged();
+                break;
+        }
+    }
+
+    private function onModuleRepaired(event)
+    {
+        Logger.add("onModuleRepaired: " + event.value);
+
+        switch (event.value)
+        {
+            case "surveyingDevice":
+                surveyingDeviceDestroyed = false;
+                onViewRangeChanged();
+                break;
+
+            case "commander":
+            case "radioman1":
+            case "radioman2":
+                delete destroyedCrew[event.value];
+                onViewRangeChanged();
+                break;
+        }
+    }
+
+    private function onMovingStateChanged(event)
+    {
+        Logger.add("onModuleDestroyed: " + event.value);
+
+        if (event.value == "surveyingDevice")
+            onViewRangeChanged();
     }
 
     private function onBinocularToggled(event)
@@ -125,17 +181,20 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
         if (binoculars_exists == false && event.value == true)
             binoculars_exists = true;
 
-        onViewRangeChanged(event.value);
+        binoculars_enabled = event.value;
+        onViewRangeChanged();
     }
 
     // http://forum.worldoftanks.ru/index.php?/topic/1047590-/
-    private function onViewRangeChanged(binoculars_enabled:Boolean)
+    private function onViewRangeChanged()
     {
         var cfg = MapConfig.circles;
         if (!cfg.view.enabled)
             return;
 
         var ci = cfg._internal;
+
+        ci.view_radioman_finder = 100;
 
         var view_distance_vehicle:Number = ci.view_distance_vehicle;
         var bia:Number = ci.view_brothers_in_arms ? 5 : 0;
@@ -148,17 +207,15 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
         var Krf = ci.view_radioman_finder <= 0 ? 0 : ci.view_radioman_finder + bia + vent + cons + (ci.view_is_commander_radioman == true ? 0 : Kcom);
         //var M = ci.view_camouflage <= 0 ? 0 : ci.view_camouflage + bia + vent + cons + (ci.view_is_commander_camouflage == true ? 0 : Kcom);
 
-        /*
-         * TODO
-         * Если любой член экипажа контужен, то уровень его эффективного умения = 0. На примере командира, переменная К = 0%.
-         * дополнительные (второстепенные) умения (например, Маскировка, Орлиный глаз и т. п.) продолжают работать,
-         * переменные ОГб, РПб и Мб остаются неизменны. (*необходимо уточнить*)
-         **/
+        if (destroyedCrew["commander"])
+            K = 0;
+            break;
+        if (destroyedCrew["radioman1"])
+            Krf = 0;
+        // TODO radioman2, gunner1, gunner2
 
-        var broken = false; // TODO
-
-        var Kn1 = broken ? 10 : 1; // приборы наблюдения
-        var Kn2 = broken ? 0.5 : 1; // приборы наблюдения
+        var Kn1 = surveyingDeviceDestroyed ? 10 : 1;
+        var Kn2 = surveyingDeviceDestroyed ? 0.5 : 1;
 
         var view_distance:Number = view_distance_vehicle * (K * 0.0043 + 0.57) *
             (1 + Kn1 * 0.0002 * Kee) * (1 + 0.0003 * Krf) * Kn2;
