@@ -194,8 +194,6 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
 
         var ci = cfg._internal;
 
-        ci.view_radioman_finder = 100;
-
         var view_distance_vehicle:Number = ci.view_distance_vehicle;
         var bia:Number = ci.view_brothers_in_arms ? 5 : 0;
         var vent:Number = ci.view_ventilation ? 5 : 0;
