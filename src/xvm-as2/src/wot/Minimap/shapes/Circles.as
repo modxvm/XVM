@@ -129,7 +129,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
 
     private function onModuleDestroyed(event)
     {
-        Logger.add("onModuleDestroyed: " + event.value);
+        //Logger.add("onModuleDestroyed: " + event.value);
 
         switch (event.value)
         {
@@ -149,7 +149,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
 
     private function onModuleRepaired(event)
     {
-        Logger.add("onModuleRepaired: " + event.value);
+        //Logger.add("onModuleRepaired: " + event.value);
 
         switch (event.value)
         {
@@ -169,7 +169,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
 
     private function onMovingStateChanged(event)
     {
-        Logger.add("onModuleDestroyed: " + event.value);
+        //Logger.add("onMovingStateChanged: " + event.value);
 
         if (event.value == "surveyingDevice")
             onViewRangeChanged();
@@ -223,8 +223,8 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
         if (ci.view_coated_optics == true)
             view_distance = view_distance * 1.1
 
-        Logger.addObject(cfg._internal, 2);
-        Logger.add("K=" + K + " view_distance=" + view_distance);
+        //Logger.addObject(cfg._internal, 2);
+        //Logger.add("K=" + K + " view_distance=" + view_distance);
 
         // view
         var radius:Number = scaleFactor * view_distance;
