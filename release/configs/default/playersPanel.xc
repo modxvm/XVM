@@ -80,6 +80,36 @@
           "height": 25,
           // Set of formats for left panel
           // Набор форматов для левой панели
+          // example:
+          // "format": [
+          //   // simple format (just a text)
+          //   "{{nick}}",
+          //   // extended format
+          //   { "x": 20, "y": 10, "border": 1, "borderColor": "0xFFFFFF", "format": "{{nick}}" }
+          //   // fields available for extended format (all fields are optional):
+          //   // "format"
+          //   // "x" (macros allowed)
+          //   // "y" (macros allowed)
+          //   // "width" (macros allowed)
+          //   // "height" (macros allowed)
+          //   // "align"
+          //   // "valign" (none (or top that is the same as none), bottom and center)
+          //   // "border"
+          //   // "borderColor" (macros allowed)
+          //   // "background"
+          //   // "backgroundColor" (macros allowed)
+          //   // "alpha" (0..100) (macros allowed)
+          //   // "antiAliasType"
+          //   // "rotation" (0..360) (macros allowed)
+          //   // "shadow": {
+          //   //   "distance" (in pixels)
+          //   //   "angle"    (0.0 .. 360.0)
+          //   //   "color"
+          //   //   "alpha"    (0.0 .. 1.0)
+          //   //   "blur"     (0.0 .. 255.0)
+          //   //   "strength" (0.0 .. 255.0)
+          //   //  }
+          // ]
           "formats": []
         },
         "rightPanel": {
@@ -87,8 +117,8 @@
           "y": 65,
           "width": 350,
           "height": 25,
-          // Set of formats for right panel
-          // Набор форматов для правой панели
+          // Set of formats for right panel (extended format supported, see above)
+          // Набор форматов для правой панели (поддерживается расширенный формат, см. выше)
           "formats": []
         }
       }
@@ -98,11 +128,11 @@
     "short": {
       // Extra text fields. Each text field have size 350x25. Fields are placed one above the other.
       // Дополнительные текстовые поля. Каждое поле имеет размер 350x25. Поля располагаются друг над другом.
-      // Set of formats for left panel
-      // Набор форматов для левой панели
+      // Set of formats for left panel (extended format supported, see above)
+      // Набор форматов для левой панели (поддерживается расширенный формат, см. выше)
       "extraTextFieldsLeft": [],
-      // Set of formats for right panel
-      // Набор форматов для правой панели
+      // Set of formats for right panel (extended format supported, see above)
+      // Набор форматов для правой панели (поддерживается расширенный формат, см. выше)
       "extraTextFieldsRight": []
     },
     // Options for the "medium" panels - the first of the medium panels.
@@ -119,11 +149,11 @@
       "formatRight": "<font color='{{c:xwn8}}'>{{nick}}</font>",
       // Extra text fields. Each text field have size 350x25. Fields are placed one above the other.
       // Дополнительные текстовые поля. Каждое поле имеет размер 350x25. Поля располагаются друг над другом.
-      // Set of formats for left panel
-      // Набор форматов для левой панели
+      // Set of formats for left panel (extended format supported, see above)
+      // Набор форматов для левой панели (поддерживается расширенный формат, см. выше)
       "extraTextFieldsLeft": [],
-      // Set of formats for right panel
-      // Набор форматов для правой панели
+      // Set of formats for right panel (extended format supported, see above)
+      // Набор форматов для правой панели (поддерживается расширенный формат, см. выше)
       "extraTextFieldsRight": []
     },
     // Options for the "medium2" panels - the second of the medium panels.
@@ -140,11 +170,11 @@
       "formatRight": "<font color='{{c:xwn8}}'>{{vehicle}}</font>",
       // Extra text fields. Each text field have size 350x25. Fields are placed one above the other.
       // Дополнительные текстовые поля. Каждое поле имеет размер 350x25. Поля располагаются друг над другом.
-      // Set of formats for left panel
-      // Набор форматов для левой панели
+      // Set of formats for left panel (extended format supported, see above)
+      // Набор форматов для левой панели (поддерживается расширенный формат, см. выше)
       "extraTextFieldsLeft": [],
-      // Set of formats for right panel
-      // Набор форматов для правой панели
+      // Set of formats for right panel (extended format supported, see above)
+      // Набор форматов для правой панели (поддерживается расширенный формат, см. выше)
       "extraTextFieldsRight": []
     },
     // Options for the "large" panels - the widest panels.
@@ -163,11 +193,11 @@
       "vehicleFormatRight": "{{vehicle}}",
       // Extra text fields. Each text field have size 350x25. Fields are placed one above the other.
       // Дополнительные текстовые поля. Каждое поле имеет размер 350x25. Поля располагаются друг над другом.
-      // Set of formats for left panel
-      // Набор форматов для левой панели
+      // Set of formats for left panel (extended format supported, see above)
+      // Набор форматов для левой панели (поддерживается расширенный формат, см. выше)
       "extraTextFieldsLeft": [],
-      // Set of formats for right panel
-      // Набор форматов для правой панели
+      // Set of formats for right panel (extended format supported, see above)
+      // Набор форматов для правой панели (поддерживается расширенный формат, см. выше)
       "extraTextFieldsRight": []
     }
   }

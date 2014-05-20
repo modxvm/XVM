@@ -2,10 +2,10 @@
 {
     private var invalidationIntervalID;
 
-    public function invalidate()
+    public function invalidate(interval:Number)
     {
         if (!invalidationIntervalID)
-            invalidationIntervalID = setInterval(this, "validateNow", 1);
+            invalidationIntervalID = setInterval(this, "validateNow", (!interval || interval < 0) ? 1 : interval);
     }
 
     public function validateNow()

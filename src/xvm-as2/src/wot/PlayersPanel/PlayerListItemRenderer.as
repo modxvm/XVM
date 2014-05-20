@@ -2,6 +2,7 @@
  * @author sirmax2
  */
 import com.xvm.*;
+import flash.filters.*;
 import net.wargaming.controls.*;
 import wot.Minimap.*;
 import wot.PlayersPanel.*;
@@ -81,26 +82,33 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     private function onConfigLoaded()
     {
-        if (!isLeftPanel)
+        try
         {
-            if (Config.config.playersPanel.enemySpottedMarker.enabled && spotStatusView == null)
-                spotStatusView = new SpotStatusView(this, Config.config.playersPanel.enemySpottedMarker);
+            if (!isLeftPanel)
+            {
+                if (Config.config.playersPanel.enemySpottedMarker.enabled && spotStatusView == null)
+                    spotStatusView = new SpotStatusView(this, Config.config.playersPanel.enemySpottedMarker);
+            }
+
+            // remove old text fields
+            // TODO: is all children will be deleted?
+            if (extraTFs.none != null)    extraTFs.none.removeMovieClip();
+            if (extraTFs.short != null)   extraTFs.short.removeMovieClip();
+            if (extraTFs.medium != null)  extraTFs.medium.removeMovieClip();
+            if (extraTFs.medium2 != null) extraTFs.medium2.removeMovieClip();
+            if (extraTFs.large != null)   extraTFs.large.removeMovieClip();
+
+            extraTFs.none = createFieldsForNoneMode();
+            extraTFs.short = createExtraTextFields("short");
+            extraTFs.medium = createExtraTextFields("medium");
+            extraTFs.medium2 = createExtraTextFields("medium2");
+            extraTFs.large = createExtraTextFields("large");
+            //Logger.addObject(extraTFs, 2);
         }
-
-        // remove old text fields
-        // TODO: is all children will be deleted?
-        if (extraTFs.none != null)    extraTFs.none.removeMovieClip();
-        if (extraTFs.short != null)   extraTFs.short.removeMovieClip();
-        if (extraTFs.medium != null)  extraTFs.medium.removeMovieClip();
-        if (extraTFs.medium2 != null) extraTFs.medium2.removeMovieClip();
-        if (extraTFs.large != null)   extraTFs.large.removeMovieClip();
-
-        extraTFs.none = createFieldsForNoneMode();
-        extraTFs.short = createExtraTextFields("short");
-        extraTFs.medium = createExtraTextFields("medium");
-        extraTFs.medium2 = createExtraTextFields("medium2");
-        extraTFs.large = createExtraTextFields("large");
-        //Logger.addObject(extraTFs, 2);
+        catch (ex:Error)
+        {
+            Logger.add(ex.toString());
+        }
     }
 
     // IMPL
@@ -241,16 +249,8 @@ class wot.PlayersPanel.PlayerListItemRenderer
             var depth:Number = -16384;//_root.getNextHighestDepth(); // TODO: find suitable depth
             _root["extraPanels"] = _root.createEmptyMovieClip("extraPanels", depth);
         }
-        var mc_root:MovieClip = _root["extraPanels"];
 
-        var idx = parseInt(wrapper._name.split("renderer").join(""));
-        var mc:MovieClip = mc_root.createEmptyMovieClip("extraTF_" + (isLeftPanel ? "l" : "r") + "_" + idx, mc_root.getNextHighestDepth());
-        mc.idx = idx;
-        mc.cfg = cfg;
-        mc.formats = cfg.formats;
-        for (var i:Number = 0; i < cfg.formats.length; ++i)
-            createTextField(mc, i, cfg.width, cfg.height);
-        return mc;
+        return _internal_createExtraTextFields(_root["extraPanels"], "none", cfg.formats, cfg.width, cfg.height, cfg);
     }
 
     private function createExtraTextFields(mode:String):MovieClip
@@ -259,28 +259,95 @@ class wot.PlayersPanel.PlayerListItemRenderer
         if (formats == null || formats.length <= 0)
             return null;
 
+        return _internal_createExtraTextFields(wrapper, mode, formats, TF_WIDTH, TF_HEIGHT, null);
+    }
+
+    private function _internal_createExtraTextFields(owner:MovieClip, mode:String, formats:Array, width:Number, height:Number, cfg:Object):MovieClip
+    {
         var idx = parseInt(wrapper._name.split("renderer").join(""));
-        var depth:Number = wrapper.getNextHighestDepth();
-        var mc:MovieClip = wrapper.createEmptyMovieClip("extraTFs_" + mode + "_" + (isLeftPanel ? "l" : "r") + "_" + idx, depth);
+        var mc:MovieClip = owner.createEmptyMovieClip("extraTF_" + (isLeftPanel ? "l" : "r") + "_" + idx, owner.getNextHighestDepth());
         mc.idx = idx;
-        mc.formats = formats;
-        for (var i:Number = 0; i < formats.length; ++i)
-            createTextField(mc, i, TF_WIDTH, TF_HEIGHT);
+        if (cfg != null)
+            mc.cfg = cfg;
+        var len = formats.length;
+        mc.formats = [];
+        for (var i:Number = 0; i < len; ++i)
+        {
+            var format = formats[i];
+            if (format == null)
+                continue;
+            if (typeof format == "string")
+                format = formats[i] = { format: format };
+            if (typeof format != "object")
+                continue;
+            var fmt = { };
+            for (var n in format)
+                fmt[n] = format[n];
+            mc.formats.push(fmt);
+            createTextField(mc, fmt, i, width, height);
+        }
         return mc;
     }
 
-    private function createTextField(mc:MovieClip, n:Number, w:Number, h:Number):TextField
+    private function createTextField(mc:MovieClip, format:Object, n:Number, w:Number, h:Number):TextField
     {
-        var tf:TextField = mc.createTextField("tf" + n, n, 0, 0, w, h);
-        tf.antiAliasType = "advanced";
+        //Logger.addObject(format);
+        var tf:TextField = mc.createTextField("tf" + n, n,
+            format.x != null && !isNaN(format.x) ? format.x : 0,
+            format.y != null && !isNaN(format.y) ? format.x : 0,
+            format.width != null && !isNaN(format.width) ? format.width : w,
+            format.height != null  && !isNaN(format.height) ? format.height : h);
         tf.selectable = false;
         tf.html = true;
         tf.multiline = true;
         tf.wordWrap = false;
-        tf.autoSize = isLeftPanel ? "left" : "right";
-        //tf.verticalAlign = "center";
+        tf.antiAliasType = format.antiAliasType != null ? format.antiAliasType : "advanced";
+        tf.autoSize = format.align != null ? format.align : (isLeftPanel ? "left" : "right");
+        tf.verticalAlign = format.valign != null ? format.valign : "none";
         tf.styleSheet = Utils.createStyleSheet(Utils.createCSS("extraTF", 0xFFFFFF, "$FieldFont", 14, "center", false, false));
-        //tf.border = true; tf.borderColor = 0xCCCCCC;
+        tf.border = format.border != null ? format.border : false;
+        tf.borderColor = format.borderColor != null && !isNaN(format.borderColor) ? format.borderColor : 0xCCCCCC;
+        tf.background = format.background != null ? format.background : false;
+        tf.backgroundColor = format.backgroundColor != null && !isNaN(format.backgroundColor) ? format.backgroundColor : 0x000000;
+        tf._alpha = format.alpha != null && !isNaN(format.alpha) ? format.alpha : 100;
+        tf._rotation = format.rotation != null && !isNaN(format.rotation) ? format.rotation : 0;
+        if (format.shadow != null)
+        {
+            tf.filters = [
+                new DropShadowFilter(
+                    format.shadow.distance != null ? format.shadow.distance : 0,
+                    format.shadow.angle != null ? format.shadow.angle : 45,
+                    format.shadow.alpha != null ? format.shadow.alpha : 1,
+                    format.shadow.blur != null ? format.shadow.blur : 4,
+                    format.shadow.blur != null ? format.shadow.blur : 4,
+                    format.shadow.strength != null ? format.shadow.strength : 1)
+            ];
+        }
+
+        // cleanup formats without macros to remove extra checks
+        if (format.x != null && (typeof format.x != "string" || format.x.indexOf("{{") < 0))
+            delete format.x;
+        if (format.y != null && (typeof format.y != "string" || format.y.indexOf("{{") < 0))
+            delete format.y;
+        if (format.width != null && (typeof format.width != "string" || format.width.indexOf("{{") < 0))
+            delete format.width;
+        if (format.height != null && (typeof format.height != "string" || format.height.indexOf("{{") < 0))
+            delete format.height;
+        if (format.borderColor != null && (typeof format.borderColor != "string" || format.borderColor.indexOf("{{") < 0))
+            delete format.borderColor;
+        if (format.backgroundColor != null && (typeof format.backgroundColor != "string" || format.backgroundColor.indexOf("{{") < 0))
+            delete format.backgroundColor;
+        if (format.alpha != null && (typeof format.alpha != "string" || format.alpha.indexOf("{{") < 0))
+            delete format.alpha;
+        if (format.rotation != null && (typeof format.rotation != "string" || format.rotation.indexOf("{{") < 0))
+            delete format.rotation;
+        if (format.format != null && (typeof format.format != "string" || format.format.indexOf("{{") < 0))
+        {
+            if (format.format != null)
+                tf.htmlText = "<span class='extraTF'>" + format.format + "</span>";
+            delete format.format;
+        }
+
         return tf;
     }
 
@@ -311,9 +378,34 @@ class wot.PlayersPanel.PlayerListItemRenderer
         for (var i:Number = 0; i < len; ++i)
         {
             var tf:TextField = mc["tf" + i];
-            var txt:String = Macros.Format(m_name, formats[i], obj);
-            //Logger.add(m_name + " " + txt);
-            tf.htmlText = "<span class='extraTF'>" + txt + "</span>";
+            if (tf == null)
+                continue;
+
+            var format:Object = formats[i];
+
+            if (format.x != null)
+                tf._x = parseFloat(Macros.Format(m_name, format.x, obj));
+            if (format.y != null)
+                tf._y = parseFloat(Macros.Format(m_name, format.y, obj));
+            if (format.width != null)
+                tf._width = parseFloat(Macros.Format(m_name, format.width, obj));
+            if (format.height != null)
+                tf._height = parseFloat(Macros.Format(m_name, format.height, obj));
+            if (format.borderColor != null)
+                tf.borderColor = parseInt(Macros.Format(m_name, format.borderColor, obj));
+            if (format.backgroundColor != null)
+                tf.backgroundColor = parseInt(Macros.Format(m_name, format.backgroundColor, obj));
+            if (format.alpha != null)
+                tf._alpha = parseFloat(Macros.Format(m_name, format.alpha, obj));
+            if (format.rotation != null)
+                tf._rotation = parseFloat(Macros.Format(m_name, format.rotation, obj));
+
+            if (format.format != null)
+            {
+                var txt:String = Macros.Format(m_name, format.format, obj);
+                //Logger.add(m_name + " " + txt);
+                tf.htmlText = "<span class='extraTF'>" + txt + "</span>";
+            }
         }
     }
 
