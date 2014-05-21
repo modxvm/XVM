@@ -3,7 +3,7 @@
   "leftPanel": {
     "x": 0,
     "y": 65,
-    "width": 350,
+    "width": 300,
     "height": 28,
     "formats": [
       "<img src='xvm://configs/sirmax/img/panel-bg-l.png' width='300' height='28'>",
@@ -17,7 +17,7 @@
   "rightPanel": {
     "x": 0,
     "y": 65,
-    "width": 350,
+    "width": 300,
     "height": 28,
     "formats": [
       "<img src='xvm://configs/sirmax/img/panel-bg-r.png' width='300' height='28'>",

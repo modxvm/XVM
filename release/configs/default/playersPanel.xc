@@ -87,30 +87,28 @@
           //   // extended format
           //   { "x": 20, "y": 10, "border": 1, "borderColor": "0xFFFFFF", "format": "{{nick}}" }
           //   // fields available for extended format (all fields are optional):
-          //   // "format" - creates text field (default)
-          //   // "src" - creates MovieClip from source file (png or swf)
-          //   // 
-          //   // "x" (macros allowed)
-          //   // "y" (macros allowed)
-          //   // "width" (macros allowed)
-          //   // "height" (macros allowed)
-          //   // "align"
-          //   // "valign" (none (or top that is the same as none), bottom and center)
-          //   // "border"
-          //   // "borderColor" (macros allowed)
-          //   // "background"
-          //   // "backgroundColor" (macros allowed)
-          //   // "alpha" (0..100) (macros allowed)
-          //   // "antiAliasType"
-          //   // "rotation" (0..360) (macros allowed)
-          //   // "shadow": {
-          //   //   "distance" (in pixels)
-          //   //   "angle"    (0.0 .. 360.0)
-          //   //   "color"
-          //   //   "alpha"    (0.0 .. 1.0)
-          //   //   "blur"     (0.0 .. 255.0)
-          //   //   "strength" (0.0 .. 255.0)
-          //   //  }
+          //   //   "format"
+          //   //
+          //   //   "x" (macros allowed)
+          //   //   "y" (macros allowed)
+          //   //   "width" (macros allowed)
+          //   //   "height" (macros allowed)
+          //   //   "alpha" (0..100) (macros allowed)
+          //   //   "rotation" (0..360) (macros allowed)
+          //   //
+          //   //   "align"
+          //   //   "valign" (none (or top that is the same as none), bottom and center)
+          //   //   "borderColor" (macros allowed)
+          //   //   "backgroundColor" (macros allowed)
+          //   //   "antiAliasType"
+          //   //   "shadow": {
+          //   //     "distance" (in pixels)
+          //   //     "angle"    (0.0 .. 360.0)
+          //   //     "color"
+          //   //     "alpha"    (0.0 .. 1.0)
+          //   //     "blur"     (0.0 .. 255.0)
+          //   //     "strength" (0.0 .. 255.0)
+          //   //    }
           // ]
           "formats": []
         },
