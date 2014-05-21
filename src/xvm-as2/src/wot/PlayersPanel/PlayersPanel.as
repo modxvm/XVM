@@ -5,7 +5,7 @@ import com.xvm.*;
 import wot.Minimap.*;
 //import wot.PlayersPanel.*;
 
-class wot.PlayersPanel.PlayersPanel
+class wot.PlayersPanel.PlayersPanel extends XvmComponent
 {
     /////////////////////////////////////////////////////////////////
     // wrapped methods
@@ -39,6 +39,7 @@ class wot.PlayersPanel.PlayersPanel
     // wrapped methods
     /////////////////////////////////////////////////////////////////
 
+    private var m_data_arguments:Array;
     private var m_data:Object;
     private var m_dead_noticed:Object = { };
 
@@ -86,8 +87,20 @@ class wot.PlayersPanel.PlayersPanel
         GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.PANEL_READY));
     }
 
-    private function setDataImpl(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStrOrig, vehiclesStrOrig, namesStrOrig)
+    private function setDataImpl()
     {
+        m_data_arguments = arguments;
+        validateNow(); // TODO: invalidate(100)
+    }
+
+    private function draw()
+    {
+        setDataInternal.apply(this, m_data_arguments);
+    }
+
+    private function setDataInternal(data, sel, postmortemIndex, isColorBlind, knownPlayersCount, dead_players_count, fragsStrOrig, vehiclesStrOrig, namesStrOrig)
+    {
+        var startingTime:Number = getTimer();
         //Logger.add("PlayersPanel.setData(): " + wrapper.state);
         //Logger.addObject(data, 3);
         //Logger.add(vehiclesStrOrig);
@@ -164,10 +177,11 @@ class wot.PlayersPanel.PlayersPanel
                 }
             }
         }
-        catch (e:Error)
+        catch (ex:Error)
         {
-            Logger.add(e.toString());
+            Logger.add(ex.toString());
         }
+        //Logger.add("PP Elapsed time: " + (getTimer() - startingTime));
     }
 
     private function fixBattleState(data)
