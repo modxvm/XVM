@@ -497,8 +497,8 @@ class wot.PlayersPanel.PlayerListItemRenderer
                 break;
 
             case "right":
-                //x = data.w - data.x;
-                x = tf.textWidth - data.x;
+                x = - data.w - data.x;
+                //x = - tf.textWidth - data.x;
                 w = data.w;
                 break;
 
@@ -564,9 +564,10 @@ class wot.PlayersPanel.PlayerListItemRenderer
         else
         {
             // other modes
-            mc._x = -panel.m_list._x; // magic number
+            mc._x = panel.m_list.width - panel.m_list._x;
             mc._y = 0;
         }
+        //Logger.add(BattleState.screenSize.width + " " + panel.m_list.width + " " + panel.m_list._x);
     }
 }
 /*
