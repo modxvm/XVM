@@ -41,8 +41,8 @@ class wot.PlayersPanel.PlayerListItemRenderer
     // wrapped methods
     /////////////////////////////////////////////////////////////////
 
-    private static var TF_WIDTH = 350;
-    private static var TF_HEIGHT = 25;
+    private static var TF_DEFAULT_WIDTH = 300;
+    private static var TF_DEFAULT_HEIGHT = 25;
 
     private var m_name:String = null;
     private var m_clan:String = null;
@@ -217,6 +217,16 @@ class wot.PlayersPanel.PlayerListItemRenderer
         return _panel;
     }
 
+    private function get extraPanelsHolder():MovieClip
+    {
+        if (_root["extraPanels"] == null)
+        {
+            var depth:Number = -16384;//_root.getNextHighestDepth(); // TODO: find suitable depth
+            _root["extraPanels"] = _root.createEmptyMovieClip("extraPanels", depth);
+        }
+        return _root["extraPanels"];
+    }
+
     // misc
 
     private function completeLoad()
@@ -271,14 +281,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         var cfg:Object = Config.config.playersPanel.none.extraFields[isLeftPanel ? "leftPanel" : "rightPanel"];
         if (cfg.formats == null || cfg.formats.length <= 0)
             return null;
-
-        if (_root["extraPanels"] == null)
-        {
-            var depth:Number = -16384;//_root.getNextHighestDepth(); // TODO: find suitable depth
-            _root["extraPanels"] = _root.createEmptyMovieClip("extraPanels", depth);
-        }
-
-        return _internal_createExtraFields(_root["extraPanels"], "none", cfg.formats, cfg.width, cfg.height, cfg);
+        return _internal_createExtraFields(extraPanelsHolder, "none", cfg.formats, cfg.width, cfg.height, cfg);
     }
 
     private function createExtraFields(mode:String):MovieClip
@@ -286,59 +289,83 @@ class wot.PlayersPanel.PlayerListItemRenderer
         var formats:Array = Config.config.playersPanel[mode]["extraFields" + (isLeftPanel ? "Left" : "Right")];
         if (formats == null || formats.length <= 0)
             return null;
-
-        return _internal_createExtraFields(wrapper, mode, formats, TF_WIDTH, TF_HEIGHT, null);
+        return _internal_createExtraFields(wrapper, mode, formats, TF_DEFAULT_WIDTH, TF_DEFAULT_HEIGHT, null);
     }
 
     private function _internal_createExtraFields(owner:MovieClip, mode:String, formats:Array, width:Number, height:Number, cfg:Object):MovieClip
     {
         var idx = parseInt(wrapper._name.split("renderer").join(""));
-        var mc:MovieClip = owner.createEmptyMovieClip("extraField_" + (isLeftPanel ? "l" : "r") + "_" + idx, owner.getNextHighestDepth());
+        var mc:MovieClip = owner.createEmptyMovieClip("extraField_" + team + "_" + idx, owner.getNextHighestDepth());
         mc.idx = idx;
         if (cfg != null)
             mc.cfg = cfg;
+
         var len = formats.length;
         mc.formats = [];
         for (var i:Number = 0; i < len; ++i)
         {
             var format = formats[i];
+
             if (format == null)
                 continue;
+
             if (typeof format == "string")
-                format = formats[i] = { format: format };
+                format = { format: format };
+                formats[i] = format;
+
             if (typeof format != "object")
                 continue;
-            var fmt = { };
+
+            var isEmpty:Boolean = true;
+            for (var n in format)
+            {
+                isEmpty = false;
+                break;
+            }
+            if (isEmpty)
+                continue;
+
+            // make a copy of format, because it will be changed
+            var fmt:Object = { };
             for (var n in format)
                 fmt[n] = format[n];
             mc.formats.push(fmt);
-            createExtraField(mc, fmt, i, width, height);
+
+            createExtraTextField(mc, fmt, mc.formats.length - 1, width, height)
         }
+
         return mc;
     }
 
-    private function createExtraField(mc:MovieClip, format:Object, n:Number, w:Number, h:Number)
+    private function createExtraTextField(mc:MovieClip, format:Object, n:Number, defW:Number, defH:Number)
     {
         //Logger.addObject(format);
-        var tf:TextField = mc.createTextField("tf" + n, n,
-            format.x != null && !isNaN(format.x) ? format.x : 0,
-            format.y != null && !isNaN(format.y) ? format.x : 0,
-            format.width != null && !isNaN(format.width) ? format.width : w,
-            format.height != null  && !isNaN(format.height) ? format.height : h);
+        var x:Number = format.x != null && !isNaN(format.x) ? format.x : 0;
+        var y:Number = format.y != null && !isNaN(format.y) ? format.x : 0;
+        var w:Number = format.width != null && !isNaN(format.width) ? format.width : defW;
+        var h:Number = format.height != null  && !isNaN(format.height) ? format.height : defH;
+        var tf:TextField = mc.createTextField("f" + n, n, 0, 0, 300, 25);
+        tf.data = { x: x, y: y, w: w, h: h };
+        alignTextField(tf);
+
+        tf._alpha = format.alpha != null && !isNaN(format.alpha) ? format.alpha : 100;
+        tf._rotation = format.rotation != null && !isNaN(format.rotation) ? format.rotation : 0;
+
         tf.selectable = false;
         tf.html = true;
         tf.multiline = true;
         tf.wordWrap = false;
         tf.antiAliasType = format.antiAliasType != null ? format.antiAliasType : "advanced";
-        tf.autoSize = format.align != null ? format.align : (isLeftPanel ? "left" : "right");
+        tf.align = format.align != null ? format.align : (isLeftPanel ? "left" : "right");
+        tf.autoSize = "none";
         tf.verticalAlign = format.valign != null ? format.valign : "none";
         tf.styleSheet = Utils.createStyleSheet(Utils.createCSS("extraField", 0xFFFFFF, "$FieldFont", 14, "center", false, false));
-        tf.border = format.border != null ? format.border : false;
+
+        tf.border = format.borderColor != null;
         tf.borderColor = format.borderColor != null && !isNaN(format.borderColor) ? format.borderColor : 0xCCCCCC;
-        tf.background = format.background != null ? format.background : false;
+        tf.background = format.backgroundColor != null;
         tf.backgroundColor = format.backgroundColor != null && !isNaN(format.backgroundColor) ? format.backgroundColor : 0x000000;
-        tf._alpha = format.alpha != null && !isNaN(format.alpha) ? format.alpha : 100;
-        tf._rotation = format.rotation != null && !isNaN(format.rotation) ? format.rotation : 0;
+
         if (format.shadow != null)
         {
             tf.filters = [
@@ -352,7 +379,14 @@ class wot.PlayersPanel.PlayerListItemRenderer
             ];
         }
 
-        // cleanup formats without macros to remove extra checks
+        cleanupFormat(tf, format);
+
+        return tf;
+    }
+
+    // cleanup formats without macros to remove extra checks
+    private function cleanupFormat(field, format:Object)
+    {
         if (format.x != null && (typeof format.x != "string" || format.x.indexOf("{{") < 0))
             delete format.x;
         if (format.y != null && (typeof format.y != "string" || format.y.indexOf("{{") < 0))
@@ -361,22 +395,25 @@ class wot.PlayersPanel.PlayerListItemRenderer
             delete format.width;
         if (format.height != null && (typeof format.height != "string" || format.height.indexOf("{{") < 0))
             delete format.height;
-        if (format.borderColor != null && (typeof format.borderColor != "string" || format.borderColor.indexOf("{{") < 0))
-            delete format.borderColor;
-        if (format.backgroundColor != null && (typeof format.backgroundColor != "string" || format.backgroundColor.indexOf("{{") < 0))
-            delete format.backgroundColor;
         if (format.alpha != null && (typeof format.alpha != "string" || format.alpha.indexOf("{{") < 0))
             delete format.alpha;
         if (format.rotation != null && (typeof format.rotation != "string" || format.rotation.indexOf("{{") < 0))
             delete format.rotation;
+
+        if (format.borderColor != null && (typeof format.borderColor != "string" || format.borderColor.indexOf("{{") < 0))
+            delete format.borderColor;
+        if (format.backgroundColor != null && (typeof format.backgroundColor != "string" || format.backgroundColor.indexOf("{{") < 0))
+            delete format.backgroundColor;
+
         if (format.format != null && (typeof format.format != "string" || format.format.indexOf("{{") < 0))
         {
             if (format.format != null)
-                tf.htmlText = "<span class='extraField'>" + format.format + "</span>";
+            {
+                field.htmlText = "<span class='extraField'>" + format.format + "</span>";
+                alignTextField(field);
+            }
             delete format.format;
         }
-
-        return tf;
     }
 
     private function updateExtraFields():Void
@@ -398,37 +435,92 @@ class wot.PlayersPanel.PlayerListItemRenderer
         var formats:Array = mc.formats;
         var len:Number = formats.length;
         for (var i:Number = 0; i < len; ++i)
+            _internal_update(mc["f" + i], formats[i], obj);
+    }
+
+    private function _internal_update(f, format, obj)
+    {
+        var needAlign:Boolean = false;
+        if (format.x != null)
         {
-            var tf:TextField = mc["tf" + i];
-            if (tf == null)
-                continue;
-
-            var format:Object = formats[i];
-
-            if (format.x != null)
-                tf._x = parseFloat(Macros.Format(m_name, format.x, obj));
-            if (format.y != null)
-                tf._y = parseFloat(Macros.Format(m_name, format.y, obj));
-            if (format.width != null)
-                tf._width = parseFloat(Macros.Format(m_name, format.width, obj));
-            if (format.height != null)
-                tf._height = parseFloat(Macros.Format(m_name, format.height, obj));
-            if (format.borderColor != null)
-                tf.borderColor = parseInt(Macros.Format(m_name, format.borderColor, obj));
-            if (format.backgroundColor != null)
-                tf.backgroundColor = parseInt(Macros.Format(m_name, format.backgroundColor, obj));
-            if (format.alpha != null)
-                tf._alpha = parseFloat(Macros.Format(m_name, format.alpha, obj));
-            if (format.rotation != null)
-                tf._rotation = parseFloat(Macros.Format(m_name, format.rotation, obj));
-
-            if (format.format != null)
-            {
-                var txt:String = Macros.Format(m_name, format.format, obj);
-                //Logger.add(m_name + " " + txt);
-                tf.htmlText = "<span class='extraField'>" + txt + "</span>";
-            }
+            f.data.x = parseFloat(Macros.Format(m_name, format.x, obj));
+            needAlign = true;
         }
+        if (format.y != null)
+        {
+            f.data.y = parseFloat(Macros.Format(m_name, format.y, obj));
+            needAlign = true;
+        }
+        if (format.width != null)
+        {
+            f.data.w = parseFloat(Macros.Format(m_name, format.width, obj));
+            needAlign = true;
+        }
+        if (format.height != null)
+        {
+            f.data.h = parseFloat(Macros.Format(m_name, format.height, obj));
+            needAlign = true;
+        }
+        if (format.alpha != null)
+            f._alpha = parseFloat(Macros.Format(m_name, format.alpha, obj));
+        if (format.rotation != null)
+            f._rotation = parseFloat(Macros.Format(m_name, format.rotation, obj));
+        if (format.borderColor != null)
+            f.borderColor = parseInt(Macros.Format(m_name, format.borderColor, obj));
+        if (format.backgroundColor != null)
+            f.backgroundColor = parseInt(Macros.Format(m_name, format.backgroundColor, obj));
+
+        if (format.format != null)
+        {
+            var txt:String = Macros.Format(m_name, format.format, obj);
+            //Logger.add(m_name + " " + txt);
+            f.htmlText = "<span class='extraField'>" + txt + "</span>";
+            needAlign = true;
+        }
+
+        if (needAlign)
+            alignTextField(f);
+    }
+
+    private function alignTextField(tf:TextField)
+    {
+        var data:Object = tf["data"];
+        var x:Number;
+        var w:Number;
+        var h:Number;
+
+        switch (tf.align)
+        {
+            case "center":
+                x = data.x;
+                w = data.w;
+                break;
+
+            case "right":
+                //x = data.w - data.x;
+                x = tf.textWidth - data.x;
+                w = data.w;
+                break;
+
+            default:
+                x = data.x;
+                w = data.w;
+                break;
+        }
+
+        //Logger.add("x: " + x + " y: " + data.y + " w: " + w + " h: " + data.h);
+
+        w += 2; // 2-pixel gutter
+        h = data.h + 2; // 2-pixel gutter
+
+        if (tf._x != x)
+            tf._x = x;
+        if (tf._width != w)
+            tf._width = w;
+        if (tf._y != data.y)
+            tf._y = data.y;
+        if (tf._height != h)
+            tf._height = h;
     }
 
     private function adjustExtraFieldsLeft(e)
@@ -472,7 +564,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         else
         {
             // other modes
-            mc._x = 153 - panel.m_list._x; // magic number
+            mc._x = -panel.m_list._x; // magic number
             mc._y = 0;
         }
     }
