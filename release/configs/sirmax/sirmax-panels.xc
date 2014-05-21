@@ -1,5 +1,9 @@
 ﻿{
   //"startMode": "none",
+  "def": {
+    "c1": "0x13C313",
+    "c2": "0xFF0F0F"
+  },
   "large": {
     "nickFormatLeft": "        {{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>",
     "nickFormatRight": "{{name%.20s~..}}<font alpha='#A0'>{{clan}}</font>       &nbsp;",
@@ -8,26 +12,26 @@
     //"vehicleFormatLeft": "<font color='{{c:rating}}'>{{vehicle}}</font>",
     //"vehicleFormatRight": "<font color='{{c:rating}}'>{{vehicle}}</font>",
     "extraFieldsLeft": [
-      { "x": 22, "height": 22, "width": "{{hp-max:120}}", "backgroundColor": 0, "alpha": 40 },
-      { "x": 22, "height": 22, "width": "{{hp:120}}", "backgroundColor": "0x13C313", "alpha": 50 },
-      { "width": 3, "height": 22, "backgroundColor": "0x13C313", "alpha": "{{alive?80|0}}" },
-      { "x": 5, "valign": "center", "format": "<font color='{{c:xwn8}}'>{{xwn8|--}}</font>", "shadow": {} },
+      // for tests
+      //{ "w": 1, "h": 23, "bgColor": "0xFFFFFF" },
+
+      { "x": 22, "valign": "center", "w": "{{hp-max:120}}", "bgColor": 0, "alpha": 40 },
+      { "x": 22, "valign": "center", "w": "{{hp:120}}", "bgColor": ${"def.c1"}, "alpha": 50 },
+      { "w": 3,  "valign": "center", "bgColor": ${"def.c1"}, "alpha": "{{alive?75|0}}" },
+      { "x": 13, "align": "center", "valign": "center", "format": "<font color='{{c:xwn8}}'>{{xwn8|--}}</font>", "shadow": {} },
       {}
     ],
     "extraFieldsRight": [
-      { "x": 22, "height": 22, "width": "{{hp-max:120}}", "backgroundColor": 0, "alpha": 40 },
-      { "x": 22, "height": 22, "width": "{{hp:120}}", "backgroundColor": "0xFF0F0F", "alpha": 50 },
-      { "width": 3, "height": 22, "backgroundColor": "0xFF0F0F", "alpha": "{{alive?80|0}}" },
-      { "x": 5, "valign": "center", "format": "<font color='{{c:xwn8}}'>{{xwn8|--}}</font>", "shadow": {} },
-      //{ "x": 22, "format": "<img src='xvm://configs/sirmax/img/_bg.png' width='{{hp-max:150}}' height='22'>" },
-      //{ "x": 22, "width": 200, "format": "<img src='xvm://configs/sirmax/img/_enemy_50-{{alive}}.png' width='{{hp:150}}' height='22'>" },
-      //"<img src='xvm://configs/sirmax/img/_bg.png' width='{{hp-max:150}}' height='22'>       ",
-      //"<img src='xvm://configs/sirmax/img/_enemy_50-{{alive}}.png' width='{{hp:150}}' height='22'>       ",
-      //"<img src='xvm://configs/sirmax/img/_enemy_50-{{alive}}.png' width='3' height='22'>",
-      //{ "format": "YYY", "x": 22, "width": "{{hp:100}}", "height": 22,
-      //  "align": "right", "background": 1, "backgroundColor": "0xFFFF00", "alpha": 50,
-      //  "shadow": { "color": "0xFFCCAA", "distance": 1, "angle": 45, "alpha": 70, "blur": 5, "strength": 10 }
-      //},
+      // for tests
+      //{ "w": 1, "h": 23, "bgColor": "0xFFFFFF" },
+      //{ "x": "25", "y": 0,  "align": "left",   "w": 20, "h": 5, "bgColor": "0xFF0F0F", "alpha": 50 },
+      //{ "x": "15", "y": 5,  "align": "center", "w": 20, "h": 5, "bgColor": "0x0FFF0F", "alpha": 50 },
+      //{ "x": "5",  "y": 10, "align": "right",  "w": 20, "h": 5, "bgColor": "0x0F0FFF", "alpha": 50 },
+
+      { "x": 22, "valign": "center", "w": "{{hp-max:120}}", "bgColor": 0, "alpha": 40 },
+      { "x": 22, "valign": "center", "w": "{{hp:120}}", "bgColor": ${"def.c2"}, "alpha": 50 },
+      { "w": 3,  "valign": "center", "bgColor": ${"def.c2"}, "alpha": "{{alive?75|0}}" },
+      { "x": 13, "align": "center", "valign": "center", "format": "<font color='{{c:xwn8}}'>{{xwn8|--}}</font>", "shadow": {} },
       {}
     ],
     "width": 120

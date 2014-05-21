@@ -91,16 +91,16 @@
           //   //
           //   //   "x" (macros allowed)
           //   //   "y" (macros allowed)
-          //   //   "width" (macros allowed)
-          //   //   "height" (macros allowed)
+          //   //   "w" (macros allowed)
+          //   //   "h" (macros allowed)
           //   //   "alpha" (0..100) (macros allowed)
           //   //   "rotation" (0..360) (macros allowed)
           //   //
-          //   //   "align"
-          //   //   "valign" (none (or top that is the same as none), bottom and center)
+          //   //   "align" (left(*default for left panel), center, right(*default for right panel))
+          //   //   "valign" (top(*), bottom, center)
           //   //   "borderColor" (macros allowed)
-          //   //   "backgroundColor" (macros allowed)
-          //   //   "antiAliasType"
+          //   //   "bgColor" (macros allowed)
+          //   //   "antiAliasType" (advanced(*) or normal
           //   //   "shadow": {
           //   //     "distance" (in pixels)
           //   //     "angle"    (0.0 .. 360.0)

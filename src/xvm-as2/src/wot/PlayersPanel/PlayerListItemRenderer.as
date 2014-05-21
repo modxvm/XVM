@@ -341,12 +341,12 @@ class wot.PlayersPanel.PlayerListItemRenderer
     {
         //Logger.addObject(format);
         var x:Number = format.x != null && !isNaN(format.x) ? format.x : 0;
-        var y:Number = format.y != null && !isNaN(format.y) ? format.x : 0;
-        var w:Number = format.width != null && !isNaN(format.width) ? format.width : defW;
-        var h:Number = format.height != null  && !isNaN(format.height) ? format.height : defH;
-        var tf:TextField = mc.createTextField("f" + n, n, 0, 0, 300, 25);
+        var y:Number = format.y != null && !isNaN(format.y) ? format.y : 0;
+        var w:Number = format.w != null && !isNaN(format.w) ? format.w : defW;
+        var h:Number = format.h != null  && !isNaN(format.h) ? format.h : defH;
+        var tf:TextField = mc.createTextField("f" + n, n, 0, 0, 0, 0);
         tf.data = { x: x, y: y, w: w, h: h };
-        alignTextField(tf);
+        tf.data.align = format.align != null ? format.align : (isLeftPanel ? "left" : "right");
 
         tf._alpha = format.alpha != null && !isNaN(format.alpha) ? format.alpha : 100;
         tf._rotation = format.rotation != null && !isNaN(format.rotation) ? format.rotation : 0;
@@ -356,15 +356,14 @@ class wot.PlayersPanel.PlayerListItemRenderer
         tf.multiline = true;
         tf.wordWrap = false;
         tf.antiAliasType = format.antiAliasType != null ? format.antiAliasType : "advanced";
-        tf.align = format.align != null ? format.align : (isLeftPanel ? "left" : "right");
         tf.autoSize = "none";
         tf.verticalAlign = format.valign != null ? format.valign : "none";
         tf.styleSheet = Utils.createStyleSheet(Utils.createCSS("extraField", 0xFFFFFF, "$FieldFont", 14, "center", false, false));
 
         tf.border = format.borderColor != null;
         tf.borderColor = format.borderColor != null && !isNaN(format.borderColor) ? format.borderColor : 0xCCCCCC;
-        tf.background = format.backgroundColor != null;
-        tf.backgroundColor = format.backgroundColor != null && !isNaN(format.backgroundColor) ? format.backgroundColor : 0x000000;
+        tf.background = format.bgColor != null;
+        tf.backgroundColor = format.bgColor != null && !isNaN(format.bgColor) ? format.bgColor : 0x000000;
 
         if (format.shadow != null)
         {
@@ -381,6 +380,8 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
         cleanupFormat(tf, format);
 
+        alignTextField(tf);
+
         return tf;
     }
 
@@ -391,10 +392,10 @@ class wot.PlayersPanel.PlayerListItemRenderer
             delete format.x;
         if (format.y != null && (typeof format.y != "string" || format.y.indexOf("{{") < 0))
             delete format.y;
-        if (format.width != null && (typeof format.width != "string" || format.width.indexOf("{{") < 0))
-            delete format.width;
-        if (format.height != null && (typeof format.height != "string" || format.height.indexOf("{{") < 0))
-            delete format.height;
+        if (format.w != null && (typeof format.w != "string" || format.w.indexOf("{{") < 0))
+            delete format.w;
+        if (format.h != null && (typeof format.h != "string" || format.h.indexOf("{{") < 0))
+            delete format.h;
         if (format.alpha != null && (typeof format.alpha != "string" || format.alpha.indexOf("{{") < 0))
             delete format.alpha;
         if (format.rotation != null && (typeof format.rotation != "string" || format.rotation.indexOf("{{") < 0))
@@ -402,8 +403,8 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
         if (format.borderColor != null && (typeof format.borderColor != "string" || format.borderColor.indexOf("{{") < 0))
             delete format.borderColor;
-        if (format.backgroundColor != null && (typeof format.backgroundColor != "string" || format.backgroundColor.indexOf("{{") < 0))
-            delete format.backgroundColor;
+        if (format.bgColor != null && (typeof format.bgColor != "string" || format.bgColor.indexOf("{{") < 0))
+            delete format.bgColor;
 
         if (format.format != null && (typeof format.format != "string" || format.format.indexOf("{{") < 0))
         {
@@ -451,14 +452,14 @@ class wot.PlayersPanel.PlayerListItemRenderer
             f.data.y = parseFloat(Macros.Format(m_name, format.y, obj));
             needAlign = true;
         }
-        if (format.width != null)
+        if (format.w != null)
         {
-            f.data.w = parseFloat(Macros.Format(m_name, format.width, obj));
+            f.data.w = parseFloat(Macros.Format(m_name, format.w, obj));
             needAlign = true;
         }
-        if (format.height != null)
+        if (format.h != null)
         {
-            f.data.h = parseFloat(Macros.Format(m_name, format.height, obj));
+            f.data.h = parseFloat(Macros.Format(m_name, format.h, obj));
             needAlign = true;
         }
         if (format.alpha != null)
@@ -467,8 +468,8 @@ class wot.PlayersPanel.PlayerListItemRenderer
             f._rotation = parseFloat(Macros.Format(m_name, format.rotation, obj));
         if (format.borderColor != null)
             f.borderColor = parseInt(Macros.Format(m_name, format.borderColor, obj));
-        if (format.backgroundColor != null)
-            f.backgroundColor = parseInt(Macros.Format(m_name, format.backgroundColor, obj));
+        if (format.bgColor != null)
+            f.backgroundColor = parseInt(Macros.Format(m_name, format.bgColor, obj));
 
         if (format.format != null)
         {
@@ -485,33 +486,18 @@ class wot.PlayersPanel.PlayerListItemRenderer
     private function alignTextField(tf:TextField)
     {
         var data:Object = tf["data"];
-        var x:Number;
-        var w:Number;
-        var h:Number;
 
-        switch (tf.align)
-        {
-            case "center":
-                x = data.x;
-                w = data.w;
-                break;
+        var x:Number = (isLeftPanel ? data.x : -data.x);
+        var y:Number = data.y;
+        var w:Number = (tf.textWidth > 0 ? tf.textWidth + (isLeftPanel ? 0 : 2) : data.w) + 2; // 2-pixel gutter
+        var h:Number = data.h;
 
-            case "right":
-                x = - data.w - data.x;
-                //x = - tf.textWidth - data.x;
-                w = data.w;
-                break;
+        if (tf.data.align == "right")
+            x -= w;
+        else if (tf.data.align == "center")
+            x -= w / 2;
 
-            default:
-                x = data.x;
-                w = data.w;
-                break;
-        }
-
-        //Logger.add("x: " + x + " y: " + data.y + " w: " + w + " h: " + data.h);
-
-        w += 2; // 2-pixel gutter
-        h = data.h + 2; // 2-pixel gutter
+        //Logger.add("x:" + x + " y:" + data.y + " w:" + w + " h:" + data.h + " align:" + tf.data.align + " textWidth:" + tf.textWidth);
 
         if (tf._x != x)
             tf._x = x;
