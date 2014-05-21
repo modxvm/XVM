@@ -1,9 +1,9 @@
 /**
  * ...
- * @author Maxim Schedriviy
+ * @author sirmax2
  */
-import net.wargaming.controls.UILoaderAlt;
-import com.xvm.Utils;
+import com.xvm.*;
+import net.wargaming.controls.*;
 
 class com.xvm.IconLoader
 {
@@ -76,7 +76,7 @@ class com.xvm.IconLoader
 
   private function completeLoad(event)
   {
-    //com.xvm.Logger.add("completeLoad(): " + event.target.source);
+    //Logger.add("completeLoad(): " + event.target.source);
     if (m_owner && m_completeFunc)
       m_completeFunc.call(m_owner, event);
   }

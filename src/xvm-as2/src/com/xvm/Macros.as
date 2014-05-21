@@ -53,9 +53,9 @@ class com.xvm.Macros
     private static function FormatMacro(macro:String, pdata:Object, options:Object):String
     {
         //Logger.addObject(pdata);
-        var parts:Array = [null,null,null,null,null];
+        var parts:Array = [null,null,null,null,null,null];
 
-        // split parts: name[:norm][%fmt][~suf][|def]
+        // split parts: name[:norm][%[flag][width][.prec]type][~suf][?rep][|def]
         var macroArr:Array = macro.split("");
         var len:Number = macroArr.length;
         var part:String = "";
@@ -92,11 +92,20 @@ class com.xvm.Macros
                         continue;
                     }
                     break;
-                case "|":
+                case "?":
                     if (section < 4)
                     {
                         parts[section] = part;
                         section = 4;
+                        part = "";
+                        continue;
+                    }
+                    break;
+                case "|":
+                    if (section < 5)
+                    {
+                        parts[section] = part;
+                        section = 5;
                         part = "";
                         continue;
                     }
@@ -110,10 +119,11 @@ class com.xvm.Macros
         var norm:String = parts[1];
         var fmt:String = parts[2];
         var suf:String = parts[3];
-        var def:String = parts[4] || "";
+        var rep:String = parts[4];
+        var def:String = parts[5] || "";
 
         // substitute
-        //Logger.add("name:" + name + " norm:" + norm + " fmt:" + fmt + " suf:" + suf + " def:" + def);
+        //Logger.add("name:" + name + " norm:" + norm + " fmt:" + fmt + " suf:" + suf + " rep:" + rep + " def:" + def);
 
         if (options.dead == true && Strings.startsWith("c:", name) && pdata[name + "#d"] != null)
             name += "#d";
@@ -127,28 +137,31 @@ class com.xvm.Macros
         var value = pdata.hasOwnProperty(name) ? pdata[name] : globals[name];
         //Logger.add("value:" + value);
         if (value == null)
-            return normalizeValue(NaN, name, norm, def, pdata);
+            return prepareValue(NaN, name, norm, def, pdata);
 
         var type:String = typeof value;
         //Logger.add("type:" + type + " value:" + value + " name:" + name + " fmt:" + fmt + " suf:" + suf + " def:" + def + " macro:" + macro);
 
         if (type == "number" && isNaN(value))
-            return normalizeValue(NaN, name, norm, def, pdata);
+            return prepareValue(NaN, name, norm, def, pdata);
 
         var res:String = value;
         if (typeof value == "function")
         {
             value = options ? value(options) : "{{" + macro + "}}";
             if (value == null)
-                return normalizeValue(NaN, name, norm, def, pdata);
+                return prepareValue(NaN, name, norm, def, pdata);
             type = typeof value;
             if (type == "number" && isNaN(value))
-                return normalizeValue(NaN, name, norm, def, pdata);
+                return prepareValue(NaN, name, norm, def, pdata);
             res = value;
         }
 
+        if (rep != null)
+            return rep;
+
         if (norm != null && type == "number")
-            res = normalizeValue(value, name, norm, def, pdata);
+            res = prepareValue(value, name, norm, def, pdata);
 
         if (fmt != null)
         {
@@ -191,7 +204,7 @@ class com.xvm.Macros
         return res;
     }
 
-    private static function normalizeValue(value:Number, name:String, norm:String, def:String, pdata:Object):String
+    private static function prepareValue(value:Number, name:String, norm:String, def:String, pdata:Object):String
     {
         if (norm == null)
             return def;

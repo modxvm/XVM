@@ -246,16 +246,22 @@
       {{c:t-battles}} - color depending on current vehicle battles
       Any color macro you can change to transparency macro (e.g. {{a:tdb}}).
 
-    Extended macros formatting rules:
-      {{name[%[flag][width][.prec]type][~suf][|def]}}
-      name  - macro name
-      flag  - "-" for left align, else right align
-              "0" for filling with leading zeros
-      width - minimum width
-      prec  - maximum width for lines or number of digits after comma for numbers
-      type  - type (s - string, d - decimal, f - float, ...)
-      suf   - suffix added at the end
-      def   - default value, set when value is absent:
+      Extended macros formatting rules:
+        {{name[:norm][%[flag][width][.prec]type][~suf][?rep][|def]}}
+        name  - macro name
+
+        :norm - value normalization, for example {{hp-ratio:300}} returns values in range 0..300
+
+        flag  - "-" for left align, else right align
+                "0" for filling with leading zeros
+        width - minimum width
+        prec  - maximum width for lines or number of digits after comma for numbers
+        type  - type (s - string, d - decimal, f - float, ...)
+
+        suf   - suffix added at the end
+        rep   - value replacement, returns instead of regilar value if value is present
+        def   - default value, set when value is absent:
+
     Details: http://en.wikipedia.org/wiki/Printf
     For example:
       {{name%-16.16s}}      - cut names longer 10 chars, and fill names shorter 10 chars and align left
