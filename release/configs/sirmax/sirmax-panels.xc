@@ -7,24 +7,26 @@
     "vehicleFormatRight": "{{hp}} / {{hp-max}}",
     //"vehicleFormatLeft": "<font color='{{c:rating}}'>{{vehicle}}</font>",
     //"vehicleFormatRight": "<font color='{{c:rating}}'>{{vehicle}}</font>",
-    "extraTextFieldsLeft": [
+    "extraFieldsLeft": [
       "       <img src='xvm://configs/sirmax/img/_bg.png' width='{{hp-max:150}}' height='22'>",
-      "       <img src='xvm://configs/sirmax/img/_ally_50-{{alive}}.png' width='{{hp:150}}' height='22'>",
-      "<img src='xvm://configs/sirmax/img/_ally_50-{{alive}}.png' width='3' height='22'>",
-      { "format": "XXX", "x": 50, "width": "{{hp:100}}", "height": 20,
-        "align": "none", "background": 1, "backgroundColor": "0xFFFF00", "alpha": 50,
-        "shadow": { "color": "0xFFCCAA", "distance": 1, "angle": 45, "alpha": 70, "blur": 5, "strength": 10 }
-      },
+      //"       <img src='xvm://configs/sirmax/img/_ally_50-{{alive}}.png' width='{{hp:150}}' height='22'>",
+      //"<img src='xvm://configs/sirmax/img/_ally_50-{{alive}}.png' width='3' height='22'>",
+      { "x": 20, "width": "{{hp:150}}", "height": 22, "src": "xvm://configs/sirmax/img/_enemy_50-{{alive}}.png" },
+      //{ "format": "XXX", "x": 50, "width": "{{hp:100}}", "height": 20,
+      //  "align": "none", "background": 1, "backgroundColor": "0xFFFF00", "alpha": 50,
+      //  "shadow": { "color": "0xFFCCAA", "distance": 1, "angle": 45, "alpha": 70, "blur": 5, "strength": 10 }
+      //},
       {}
     ],
-    "extraTextFieldsRight": [
+    "extraFieldsRight": [
       "<img src='xvm://configs/sirmax/img/_bg.png' width='{{hp-max:150}}' height='22'>       ",
-      "<img src='xvm://configs/sirmax/img/_enemy_50-{{alive}}.png' width='{{hp:150}}' height='22'>       ",
-      "<img src='xvm://configs/sirmax/img/_enemy_50-{{alive}}.png' width='3' height='22'>",
-      { "format": "YYY", "x": 50, "width": "{{hp:100}}", "height": 20,
-        "align": "right", "background": 1, "backgroundColor": "0xFFFF00", "alpha": 50,
-        "shadow": { "color": "0xFFCCAA", "distance": 1, "angle": 45, "alpha": 70, "blur": 5, "strength": 10 }
-      },
+      //"<img src='xvm://configs/sirmax/img/_enemy_50-{{alive}}.png' width='{{hp:150}}' height='22'>       ",
+      //"<img src='xvm://configs/sirmax/img/_enemy_50-{{alive}}.png' width='3' height='22'>",
+      { "x": 20, "width": "{{hp:150}}", "height": 22, "src": "xvm://configs/sirmax/img/_enemy_50-{{alive}}.png" },
+      //{ "format": "YYY", "x": 50, "width": "{{hp:100}}", "height": 20,
+      //  "align": "right", "background": 1, "backgroundColor": "0xFFFF00", "alpha": 50,
+      //  "shadow": { "color": "0xFFCCAA", "distance": 1, "angle": 45, "alpha": 70, "blur": 5, "strength": 10 }
+      //},
       {}
     ],
     "width": 120
@@ -40,7 +42,7 @@
     "formatRight": "<font color='{{c:xwn8}}'>{{vehicle}}</font>"
   },
   "none": {
-    "extraTextFields": ${"sirmax-panels-none.xc":"."}
+    "extraFields": ${"sirmax-panels-none.xc":"."}
   },
   "alpha": 50,
   "removeSquadIcon": true,

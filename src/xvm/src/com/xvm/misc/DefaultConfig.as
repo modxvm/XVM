@@ -305,7 +305,7 @@ package com.xvm.misc
               }
             };
             c.none = {
-              extraTextFields: {
+              extraFields: {
                 leftPanel: {
                   x: 0,
                   y: 65,
@@ -323,8 +323,8 @@ package com.xvm.misc
               }
             };
             c.short = {
-                extraTextFieldsLeft: [],
-                extraTextFieldsRight: []
+                extraFieldsLeft: [],
+                extraFieldsRight: []
             };
             // Medium1 mode.
             c.medium = {
@@ -333,8 +333,8 @@ package com.xvm.misc
                 // Dispay format.
                 formatLeft: "<font color='{{c:xwn8}}'>{{nick}}</font>",
                 formatRight: "<font color='{{c:xwn8}}'>{{nick}}</font>",
-                extraTextFieldsLeft: [],
-                extraTextFieldsRight: []
+                extraFieldsLeft: [],
+                extraFieldsRight: []
             };
             // Medium2 mode.
             c.medium2 = {
@@ -343,8 +343,8 @@ package com.xvm.misc
                 // Dispay format.
                 formatLeft: "<font color='{{c:xwn8}}'>{{vehicle}}</font>",
                 formatRight: "<font color='{{c:xwn8}}'>{{vehicle}}</font>",
-                extraTextFieldsLeft: [],
-                extraTextFieldsRight: []
+                extraFieldsLeft: [],
+                extraFieldsRight: []
             };
             // Large mode.
             c.large = {
@@ -355,8 +355,8 @@ package com.xvm.misc
                 nickFormatRight: "{{nick}} <font color='{{c:xwn8}}'>{{xwn8}}</font>",
                 vehicleFormatLeft: "{{vehicle}}",
                 vehicleFormatRight: "{{vehicle}}",
-                extraTextFieldsLeft: [],
-                extraTextFieldsRight: []
+                extraFieldsLeft: [],
+                extraFieldsRight: []
             };
 
             return c;

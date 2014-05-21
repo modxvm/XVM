@@ -54,7 +54,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
     private var m_iconLoaded: Boolean = false;
 
     private var spotStatusView:SpotStatusView = null;
-    private var extraTFs:Object;
+    private var extraFields:Object;
 
     public function PlayerListItemRendererCtor()
     {
@@ -63,7 +63,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         if (wrapper._name == "renderer99")
             return;
 
-        extraTFs = {
+        extraFields = {
             none: null,
             short:null,
             medium: null,
@@ -72,12 +72,16 @@ class wot.PlayersPanel.PlayerListItemRenderer
         };
 
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, onConfigLoaded);
-        GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, this, adjustExtraTextFieldsLeft);
-        GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, this, adjustExtraTextFieldsRight);
         if (isLeftPanel)
-            GlobalEventDispatcher.addEventListener(Defines.E_LEFT_PANEL_SIZE_ADJUSTED, this, adjustExtraTextFieldsLeft);
+        {
+            GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, this, adjustExtraFieldsLeft);
+            GlobalEventDispatcher.addEventListener(Defines.E_LEFT_PANEL_SIZE_ADJUSTED, this, adjustExtraFieldsLeft);
+        }
         else
-            GlobalEventDispatcher.addEventListener(Defines.E_RIGHT_PANEL_SIZE_ADJUSTED, this, adjustExtraTextFieldsRight);
+        {
+            GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, this, adjustExtraFieldsRight);
+            GlobalEventDispatcher.addEventListener(Defines.E_RIGHT_PANEL_SIZE_ADJUSTED, this, adjustExtraFieldsRight);
+        }
     }
 
     private function onConfigLoaded()
@@ -92,18 +96,18 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
             // remove old text fields
             // TODO: is all children will be deleted?
-            if (extraTFs.none != null)    extraTFs.none.removeMovieClip();
-            if (extraTFs.short != null)   extraTFs.short.removeMovieClip();
-            if (extraTFs.medium != null)  extraTFs.medium.removeMovieClip();
-            if (extraTFs.medium2 != null) extraTFs.medium2.removeMovieClip();
-            if (extraTFs.large != null)   extraTFs.large.removeMovieClip();
+            if (extraFields.none != null)    extraFields.none.removeMovieClip();
+            if (extraFields.short != null)   extraFields.short.removeMovieClip();
+            if (extraFields.medium != null)  extraFields.medium.removeMovieClip();
+            if (extraFields.medium2 != null) extraFields.medium2.removeMovieClip();
+            if (extraFields.large != null)   extraFields.large.removeMovieClip();
 
-            extraTFs.none = createFieldsForNoneMode();
-            extraTFs.short = createExtraTextFields("short");
-            extraTFs.medium = createExtraTextFields("medium");
-            extraTFs.medium2 = createExtraTextFields("medium2");
-            extraTFs.large = createExtraTextFields("large");
-            //Logger.addObject(extraTFs, 2);
+            extraFields.none = createFieldsForNoneMode();
+            extraFields.short = createExtraFields("short");
+            extraFields.medium = createExtraFields("medium");
+            extraFields.medium2 = createExtraFields("medium2");
+            extraFields.large = createExtraFields("large");
+            //Logger.addObject(extraFields, 2);
         }
         catch (ex:Error)
         {
@@ -169,7 +173,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
             updateSpotStatusView();
 
             // Extra Text Fields
-            updateTextFields();
+            updateExtraFields();
         }
 
         if (Config.config.playersPanel.removeSquadIcon && (wrapper.squadIcon != null))
@@ -189,17 +193,33 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     // PRIVATE
 
+    // properties
+
+    private var _team:Number = 0;
+
+    private function get team():Number
+    {
+        if (_team == 0)
+            _team = wrapper._parent._parent._itemRenderer == "LeftItemRendererIcon" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY
+        return _team;
+    }
+
     private function get isLeftPanel():Boolean
     {
-        return wrapper._parent._parent._itemRenderer == "LeftItemRendererIcon";
+        return team == Defines.TEAM_ALLY;
     }
 
+    private var _panel:net.wargaming.ingame.PlayersPanel = null;
     private function get panel():net.wargaming.ingame.PlayersPanel
     {
-        return net.wargaming.ingame.PlayersPanel(wrapper._parent._parent._parent);
+        if (_panel == null)
+            _panel = net.wargaming.ingame.PlayersPanel(wrapper._parent._parent._parent);
+        return _panel;
     }
 
-    function completeLoad()
+    // misc
+
+    private function completeLoad()
     {
         if (m_iconLoaded)
             return;
@@ -232,15 +252,23 @@ class wot.PlayersPanel.PlayerListItemRenderer
         {
             var x = (!m_iconLoaded || Config.config.battle.mirroredVehicleIcons || isLeftPanel)
                 ? wrapper.iconLoader._x : wrapper.iconLoader._x + 80;
-            m_clanIcon = PlayerInfo.createIcon(wrapper, "clanicon", cfg, x, wrapper.iconLoader._y, isLeftPanel ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
+            m_clanIcon = PlayerInfo.createIcon(wrapper, "clanicon", cfg, x, wrapper.iconLoader._y, team);
         }
         PlayerInfo.setSource(m_clanIcon, m_name, m_clan);
         m_clanIcon["holder"]._alpha = m_dead ? 50 : 100;
     }
 
+    private function updateSpotStatusView():Void
+    {
+        if (spotStatusView != null)
+            spotStatusView.invalidateData(m_name, m_vehicleState);
+    }
+
+    // Extra fields
+
     private function createFieldsForNoneMode():MovieClip
     {
-        var cfg:Object = Config.config.playersPanel.none.extraTextFields[isLeftPanel ? "leftPanel" : "rightPanel"];
+        var cfg:Object = Config.config.playersPanel.none.extraFields[isLeftPanel ? "leftPanel" : "rightPanel"];
         if (cfg.formats == null || cfg.formats.length <= 0)
             return null;
 
@@ -250,22 +278,22 @@ class wot.PlayersPanel.PlayerListItemRenderer
             _root["extraPanels"] = _root.createEmptyMovieClip("extraPanels", depth);
         }
 
-        return _internal_createExtraTextFields(_root["extraPanels"], "none", cfg.formats, cfg.width, cfg.height, cfg);
+        return _internal_createExtraFields(_root["extraPanels"], "none", cfg.formats, cfg.width, cfg.height, cfg);
     }
 
-    private function createExtraTextFields(mode:String):MovieClip
+    private function createExtraFields(mode:String):MovieClip
     {
-        var formats:Array = Config.config.playersPanel[mode]["extraTextFields" + (isLeftPanel ? "Left" : "Right")];
+        var formats:Array = Config.config.playersPanel[mode]["extraFields" + (isLeftPanel ? "Left" : "Right")];
         if (formats == null || formats.length <= 0)
             return null;
 
-        return _internal_createExtraTextFields(wrapper, mode, formats, TF_WIDTH, TF_HEIGHT, null);
+        return _internal_createExtraFields(wrapper, mode, formats, TF_WIDTH, TF_HEIGHT, null);
     }
 
-    private function _internal_createExtraTextFields(owner:MovieClip, mode:String, formats:Array, width:Number, height:Number, cfg:Object):MovieClip
+    private function _internal_createExtraFields(owner:MovieClip, mode:String, formats:Array, width:Number, height:Number, cfg:Object):MovieClip
     {
         var idx = parseInt(wrapper._name.split("renderer").join(""));
-        var mc:MovieClip = owner.createEmptyMovieClip("extraTF_" + (isLeftPanel ? "l" : "r") + "_" + idx, owner.getNextHighestDepth());
+        var mc:MovieClip = owner.createEmptyMovieClip("extraField_" + (isLeftPanel ? "l" : "r") + "_" + idx, owner.getNextHighestDepth());
         mc.idx = idx;
         if (cfg != null)
             mc.cfg = cfg;
@@ -284,12 +312,12 @@ class wot.PlayersPanel.PlayerListItemRenderer
             for (var n in format)
                 fmt[n] = format[n];
             mc.formats.push(fmt);
-            createTextField(mc, fmt, i, width, height);
+            createExtraField(mc, fmt, i, width, height);
         }
         return mc;
     }
 
-    private function createTextField(mc:MovieClip, format:Object, n:Number, w:Number, h:Number):TextField
+    private function createExtraField(mc:MovieClip, format:Object, n:Number, w:Number, h:Number)
     {
         //Logger.addObject(format);
         var tf:TextField = mc.createTextField("tf" + n, n,
@@ -304,7 +332,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         tf.antiAliasType = format.antiAliasType != null ? format.antiAliasType : "advanced";
         tf.autoSize = format.align != null ? format.align : (isLeftPanel ? "left" : "right");
         tf.verticalAlign = format.valign != null ? format.valign : "none";
-        tf.styleSheet = Utils.createStyleSheet(Utils.createCSS("extraTF", 0xFFFFFF, "$FieldFont", 14, "center", false, false));
+        tf.styleSheet = Utils.createStyleSheet(Utils.createCSS("extraField", 0xFFFFFF, "$FieldFont", 14, "center", false, false));
         tf.border = format.border != null ? format.border : false;
         tf.borderColor = format.borderColor != null && !isNaN(format.borderColor) ? format.borderColor : 0xCCCCCC;
         tf.background = format.background != null ? format.background : false;
@@ -344,31 +372,25 @@ class wot.PlayersPanel.PlayerListItemRenderer
         if (format.format != null && (typeof format.format != "string" || format.format.indexOf("{{") < 0))
         {
             if (format.format != null)
-                tf.htmlText = "<span class='extraTF'>" + format.format + "</span>";
+                tf.htmlText = "<span class='extraField'>" + format.format + "</span>";
             delete format.format;
         }
 
         return tf;
     }
 
-    private function updateSpotStatusView():Void
+    private function updateExtraFields():Void
     {
-        if (spotStatusView != null)
-            spotStatusView.invalidateData(m_name, m_vehicleState);
-    }
-
-    private function updateTextFields():Void
-    {
-        //Logger.add("updateTextFields");
+        //Logger.add("updateExtraFields");
         var state:String = panel.state;
 
-        if (extraTFs.none != null )      extraTFs.none._visible = state == "none";
-        if (extraTFs.short != null )     extraTFs.short._visible = state == "short";
-        if (extraTFs.medium != null )    extraTFs.medium._visible = state == "medium";
-        if (extraTFs.medium2 != null )   extraTFs.medium2._visible = state == "medium2";
-        if (extraTFs.large != null )     extraTFs.large._visible = state == "large";
+        if (extraFields.none != null )      extraFields.none._visible = state == "none";
+        if (extraFields.short != null )     extraFields.short._visible = state == "short";
+        if (extraFields.medium != null )    extraFields.medium._visible = state == "medium";
+        if (extraFields.medium2 != null )   extraFields.medium2._visible = state == "medium2";
+        if (extraFields.large != null )     extraFields.large._visible = state == "large";
 
-        var mc:MovieClip = extraTFs[state];
+        var mc:MovieClip = extraFields[state];
         if (mc == null)
             return;
 
@@ -404,16 +426,16 @@ class wot.PlayersPanel.PlayerListItemRenderer
             {
                 var txt:String = Macros.Format(m_name, format.format, obj);
                 //Logger.add(m_name + " " + txt);
-                tf.htmlText = "<span class='extraTF'>" + txt + "</span>";
+                tf.htmlText = "<span class='extraField'>" + txt + "</span>";
             }
         }
     }
 
-    private function adjustExtraTextFieldsLeft(e)
+    private function adjustExtraFieldsLeft(e)
     {
-        //Logger.add("adjustExtraTextFieldsLeft: " + e.state);
+        //Logger.add("adjustExtraFieldsLeft: " + e.state);
         var state:String = e.state;
-        var mc:MovieClip = extraTFs[state];
+        var mc:MovieClip = extraFields[state];
         if (mc == null)
             return;
 
@@ -432,11 +454,11 @@ class wot.PlayersPanel.PlayerListItemRenderer
         }
     }
 
-    private function adjustExtraTextFieldsRight(e)
+    private function adjustExtraFieldsRight(e)
     {
-        //Logger.add("adjustExtraTextFieldsRight: " + e.state);
+        //Logger.add("adjustExtraFieldsRight: " + e.state);
         var state:String = e.state;
-        var mc:MovieClip = extraTFs[state];
+        var mc:MovieClip = extraFields[state];
         if (mc == null)
             return;
 
