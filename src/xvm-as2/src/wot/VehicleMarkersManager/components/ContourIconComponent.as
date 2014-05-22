@@ -104,8 +104,8 @@ class wot.VehicleMarkersManager.components.ContourIconComponent
             var visible = cfg.visible;
             if (visible)
             {
-                proxy.iconLoader._x = cfg.x - (proxy.iconLoader.contentHolder._width / 2.0);
-                proxy.iconLoader._y = cfg.y - (proxy.iconLoader.contentHolder._height / 2.0);
+                proxy.iconLoader._x = cfg.x - (proxy.iconLoader.content._width / 2.0);
+                proxy.iconLoader._y = cfg.y - (proxy.iconLoader.content._height / 2.0);
                 proxy.iconLoader._alpha = proxy.formatDynamicAlpha(cfg.alpha);
             }
             proxy.iconLoader._visible = visible;

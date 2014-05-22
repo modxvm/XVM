@@ -23,7 +23,7 @@ class wot.battle.SixthSenseIndicator
         _root.sixthSenseIndicator.gotoAndPlay2 = _root.sixthSenseIndicator.gotoAndPlay;
         _root.sixthSenseIndicator.gotoAndPlay = sixthSenseIndicator_gotoAndPlay;
 
-        icon["onLoadInit"] = icon_onLoadInit;
+        icon.onLoadInit = icon_onLoadInit;
     }
 
     function icon_onLoadInit(mc:MovieClip)

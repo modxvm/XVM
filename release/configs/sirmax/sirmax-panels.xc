@@ -15,10 +15,10 @@
       // for tests
       //{ "w": 1, "h": 23, "bgColor": "0xFFFFFF" },
 
-      { "x": 22, "valign": "center", "w": "{{hp-max:120}}", "bgColor": 0, "alpha": 40 },
-      { "x": 22, "valign": "center", "w": "{{hp:120}}", "bgColor": ${"def.c1"}, "alpha": 50 },
-      { "w": 3,  "valign": "center", "bgColor": ${"def.c1"}, "alpha": "{{alive?75|0}}" },
-      { "x": 13, "align": "center", "valign": "center", "format": "<font color='{{c:xwn8}}'>{{xwn8|--}}</font>", "shadow": {} },
+      { "x": 23, "y": 2, "valign": "center", "h": 21, "w": "{{hp-max:120}}", "bgColor": 0, "alpha": 40 },
+      { "x": 23, "y": 2, "valign": "center", "h": 21, "w": "{{hp:120}}", "bgColor": ${"def.c1"}, "alpha": 50 },
+      { "w": 3,  "y": 2, "valign": "center", "h": 21, "bgColor": ${"def.c1"}, "alpha": "{{alive?75|0}}" },
+      { "x": 13, "y": 2, "valign": "center", "align": "center", "format": "<font color='{{c:xwn8}}'>{{xwn8|--}}</font>", "shadow": {} },
       {}
     ],
     "extraFieldsRight": [
@@ -28,10 +28,10 @@
       //{ "x": "15", "y": 5,  "align": "center", "w": 20, "h": 5, "bgColor": "0x0FFF0F", "alpha": 50 },
       //{ "x": "5",  "y": 10, "align": "right",  "w": 20, "h": 5, "bgColor": "0x0F0FFF", "alpha": 50 },
 
-      { "x": 22, "valign": "center", "w": "{{hp-max:120}}", "bgColor": 0, "alpha": 40 },
-      { "x": 22, "valign": "center", "w": "{{hp:120}}", "bgColor": ${"def.c2"}, "alpha": 50 },
-      { "w": 3,  "valign": "center", "bgColor": ${"def.c2"}, "alpha": "{{alive?75|0}}" },
-      { "x": 13, "align": "center", "valign": "center", "format": "<font color='{{c:xwn8}}'>{{xwn8|--}}</font>", "shadow": {} },
+      { "x": 23, "y": 2, "valign": "center", "h": 21, "w": "{{hp-max:120}}", "bgColor": 0, "alpha": 40 },
+      { "x": 23, "y": 2, "valign": "center", "h": 21, "w": "{{hp:120}}", "bgColor": ${"def.c2"}, "alpha": 50 },
+      { "w": 3,  "y": 2, "valign": "center", "h": 21, "bgColor": ${"def.c2"}, "alpha": "{{alive?75|0}}" },
+      { "x": 13, "y": 2, "valign": "center", "align": "center", "format": "<font color='{{c:xwn8}}'>{{xwn8|--}}</font>", "shadow": {} },
       {}
     ],
     "width": 120
