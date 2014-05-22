@@ -521,7 +521,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         if (cfg != null)
         {
             // none mode
-            mc._x = cfg.x - 1;
+            mc._x = cfg.x;
             mc._y = cfg.y + mc.idx * cfg.height;
         }
         else
@@ -544,7 +544,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         if (cfg != null)
         {
             // none mode
-            mc._x = BattleState.screenSize.width - cfg.x + 4;
+            mc._x = BattleState.screenSize.width - cfg.x;
             mc._y = cfg.y + mc.idx * cfg.height;
         }
         else
