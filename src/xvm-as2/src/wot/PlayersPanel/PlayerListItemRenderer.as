@@ -134,55 +134,62 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     function updateImpl()
     {
-        var data:Object = wrapper.data;
-        //Logger.addObject(data);
-        //Logger.add("update: " + (data ? data.userName : "(null)"))
-
-        var saved_icon:String;
-        if (data == null)
+        try
         {
-            m_name = null;
-            m_clan = null;
-            m_vehicleState = 0;
-            m_dead = true;
+            var data:Object = wrapper.data;
+            //Logger.addObject(data);
+            //Logger.add("update: " + (data ? data.userName : "(null)"))
+
+            var saved_icon:String;
+            if (data == null)
+            {
+                m_name = null;
+                m_clan = null;
+                m_vehicleState = 0;
+                m_dead = true;
+            }
+            else
+            {
+                m_name = data.userName;
+                m_clan = data.clanAbbrev;
+                m_vehicleState = data.vehicleState;
+                m_dead = (data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) == 0;
+
+                saved_icon = data.icon;
+
+                // Alternative icon set
+                if (!m_iconset)
+                    m_iconset = new IconLoader(this, completeLoad);
+                m_iconset.init(wrapper.iconLoader,
+                    [ wrapper.data.icon.split(Defines.WG_CONTOUR_ICON_PATH).join(Defines.XVMRES_ROOT +
+                    (isLeftPanel
+                        ? Config.config.iconset.playersPanelAlly
+                        : Config.config.iconset.playersPanelEnemy)),
+                    saved_icon ]);
+                data.icon = m_iconset.currentIcon;
+
+                // Player/clan icons
+                attachClanIconToPlayer();
+
+                // Spot Status View
+                updateSpotStatusView();
+
+                // Extra Text Fields
+                updateExtraFields();
+            }
+
+            if (Config.config.playersPanel.removeSquadIcon && (wrapper.squadIcon != null))
+                wrapper.squadIcon._visible = false;
+
+            base.update();
+
+            if (data != null)
+                data.icon = saved_icon;
         }
-        else
+        catch (ex:Error)
         {
-            m_name = data.userName;
-            m_clan = data.clanAbbrev;
-            m_vehicleState = data.vehicleState;
-            m_dead = (data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) == 0;
-
-            saved_icon = data.icon;
-
-            // Alternative icon set
-            if (!m_iconset)
-                m_iconset = new IconLoader(this, completeLoad);
-            m_iconset.init(wrapper.iconLoader,
-                [ wrapper.data.icon.split(Defines.WG_CONTOUR_ICON_PATH).join(Defines.XVMRES_ROOT +
-                (isLeftPanel
-                    ? Config.config.iconset.playersPanelAlly
-                    : Config.config.iconset.playersPanelEnemy)),
-                saved_icon ]);
-            data.icon = m_iconset.currentIcon;
-
-            // Player/clan icons
-            attachClanIconToPlayer();
-
-            // Spot Status View
-            updateSpotStatusView();
-
-            // Extra Text Fields
-            updateExtraFields();
+            Logger.addObject(ex.toString());
         }
-
-        if (Config.config.playersPanel.removeSquadIcon && (wrapper.squadIcon != null))
-            wrapper.squadIcon._visible = false;
-
-        base.update();
-
-        if (data != null)
-            data.icon = saved_icon;
     }
 
     private function lightPlayerImpl(visibility)
@@ -331,10 +338,57 @@ class wot.PlayersPanel.PlayerListItemRenderer
                 fmt[n] = format[n];
             mc.formats.push(fmt);
 
-            createExtraTextField(mc, fmt, mc.formats.length - 1, width, height)
+            if (fmt.src != null)
+                createExtraMovieClip(mc, fmt, mc.formats.length - 1);
+            else
+                createExtraTextField(mc, fmt, mc.formats.length - 1, width, height);
         }
 
         return mc;
+    }
+
+    private function createExtraMovieClip(mc:MovieClip, format:Object, n:Number)
+    {
+        //Logger.addObject(format);
+        var x:Number = format.x != null && !isNaN(format.x) ? format.x : 0;
+        var y:Number = format.y != null && !isNaN(format.y) ? format.y : 0;
+        var w:Number = format.w != null && !isNaN(format.w) ? format.w : NaN;
+        var h:Number = format.h != null  && !isNaN(format.h) ? format.h : NaN;
+
+        var img:UILoaderAlt = (UILoaderAlt)(mc.attachMovie("UILoaderAlt", "f" + n, mc.getNextHighestDepth()));
+        img["data"] = {
+            x: x, y: y, w: w, h: h, format: format,
+            align: format.align != null ? format.align : (isLeftPanel ? "left" : "right")
+        };
+
+        img._alpha = format.alpha != null && !isNaN(format.alpha) ? format.alpha : 100;
+        img._rotation = format.rotation != null && !isNaN(format.rotation) ? format.rotation : 0;
+
+        img.autoSize = true;
+        img.maintainAspectRatio = false;
+        var me = this;
+        img.visible = false;
+        img.onLoadInit = function() { me.onExtraMovieClipLoadInit(img); }
+
+        cleanupFormat(img, format);
+
+        return img;
+    }
+
+    private function onExtraMovieClipLoadInit(img:UILoaderAlt)
+    {
+        //Logger.add("onExtraMovieClipLoadInit");
+
+        var data = img["data"];
+        if (isNaN(data.w))
+            data.w = img.content._width;
+        if (isNaN(data.h))
+            data.h = img.content._height;
+        //Logger.addObject(data);
+
+        alignField(img);
+
+        setTimeout(function() { img.visible = true; }, 1);
     }
 
     private function createExtraTextField(mc:MovieClip, format:Object, n:Number, defW:Number, defH:Number)
@@ -345,8 +399,10 @@ class wot.PlayersPanel.PlayerListItemRenderer
         var w:Number = format.w != null && !isNaN(format.w) ? format.w : defW;
         var h:Number = format.h != null  && !isNaN(format.h) ? format.h : defH;
         var tf:TextField = mc.createTextField("f" + n, n, 0, 0, 0, 0);
-        tf.data = { x: x, y: y, w: w, h: h };
-        tf.data.align = format.align != null ? format.align : (isLeftPanel ? "left" : "right");
+        tf.data = {
+            x: x, y: y, w: w, h: h,
+            align: format.align != null ? format.align : (isLeftPanel ? "left" : "right")
+        };
 
         tf._alpha = format.alpha != null && !isNaN(format.alpha) ? format.alpha : 100;
         tf._rotation = format.rotation != null && !isNaN(format.rotation) ? format.rotation : 0;
@@ -380,7 +436,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
         cleanupFormat(tf, format);
 
-        alignTextField(tf);
+        alignField(tf);
 
         return tf;
     }
@@ -400,21 +456,10 @@ class wot.PlayersPanel.PlayerListItemRenderer
             delete format.alpha;
         if (format.rotation != null && (typeof format.rotation != "string" || format.rotation.indexOf("{{") < 0))
             delete format.rotation;
-
         if (format.borderColor != null && (typeof format.borderColor != "string" || format.borderColor.indexOf("{{") < 0))
             delete format.borderColor;
         if (format.bgColor != null && (typeof format.bgColor != "string" || format.bgColor.indexOf("{{") < 0))
             delete format.bgColor;
-
-        if (format.format != null && (typeof format.format != "string" || format.format.indexOf("{{") < 0))
-        {
-            if (format.format != null)
-            {
-                field.htmlText = "<span class='extraField'>" + format.format + "</span>";
-                alignTextField(field);
-            }
-            delete format.format;
-        }
     }
 
     private function updateExtraFields():Void
@@ -476,37 +521,64 @@ class wot.PlayersPanel.PlayerListItemRenderer
             var txt:String = Macros.Format(m_name, format.format, obj);
             //Logger.add(m_name + " " + txt);
             f.htmlText = "<span class='extraField'>" + txt + "</span>";
+            //if (format.format.indexOf("{{") < 0) // TODO
+            //    delete format.format;
             needAlign = true;
         }
 
+        if (format.src != null)
+        {
+            var src:String = Macros.Format(m_name, format.src, obj);
+            src = "../../" + Utils.fixImgTag(src).split("img://").join("");
+            //Logger.add(m_name + " " + src);
+            f.source = src;
+        }
+
         if (needAlign)
-            alignTextField(f);
+            alignField(f);
     }
 
-    private function alignTextField(tf:TextField)
+    private function alignField(field)
     {
-        var data:Object = tf["data"];
+        var tf:TextField = TextField(field);
+        var img:UILoaderAlt = UILoaderAlt(field);
+
+        var data:Object = field["data"];
 
         var x:Number = (isLeftPanel ? data.x : -data.x);
         var y:Number = data.y;
-        var w:Number = (tf.textWidth > 0 ? tf.textWidth + (isLeftPanel ? 0 : 2) : data.w) + 2; // 2-pixel gutter
+        var w:Number = data.w;
         var h:Number = data.h;
 
-        if (tf.data.align == "right")
+        if (tf != null)
+        {
+            if (tf.textWidth > 0)
+                w = tf.textWidth;
+        }
+
+        if (data.align == "right")
             x -= w;
-        else if (tf.data.align == "center")
+        else if (data.align == "center")
             x -= w / 2;
 
-        //Logger.add("x:" + x + " y:" + data.y + " w:" + w + " h:" + data.h + " align:" + tf.data.align + " textWidth:" + tf.textWidth);
+        //Logger.add("x:" + x + " y:" + y + " w:" + w + " h:" + h + " align:" + data.align + " textWidth:" + tf.textWidth);
 
-        if (tf._x != x)
-            tf._x = x;
-        if (tf._width != w)
-            tf._width = w;
-        if (tf._y != data.y)
-            tf._y = data.y;
-        if (tf._height != h)
-            tf._height = h;
+        if (field._x != x)
+            field._x = x;
+        if (field._y != data.y)
+            field._y = data.y;
+        if (tf != null)
+        {
+            if (tf._width != w)
+                tf._width = w;
+            if (tf._height != h)
+                tf._height = h;
+        }
+        else
+        {
+            if (img.width != w || img.height != h)
+                field.setSize(w, h);
+        }
     }
 
     private function adjustExtraFieldsLeft(e)
@@ -544,7 +616,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         if (cfg != null)
         {
             // none mode
-            mc._x = BattleState.screenSize.width - cfg.width - cfg.x;
+            mc._x = BattleState.screenSize.width - cfg.x;
             mc._y = cfg.y + mc.idx * cfg.height;
         }
         else

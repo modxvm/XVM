@@ -52,6 +52,7 @@ class wot.PlayersPanel.PlayersPanel extends XvmComponent
 
         GlobalEventDispatcher.addEventListener(Defines.E_CONFIG_LOADED, this, onConfigLoaded);
         GlobalEventDispatcher.addEventListener(Defines.E_STAT_LOADED, wrapper, wrapper.update);
+        GlobalEventDispatcher.addEventListener(Defines.E_UPDATE_STAGE, wrapper, wrapper.update);
         GlobalEventDispatcher.addEventListener(Defines.E_BATTLE_STATE_CHANGED, wrapper, wrapper.update);
     }
 

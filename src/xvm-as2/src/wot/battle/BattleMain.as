@@ -90,6 +90,7 @@ class wot.battle.BattleMain
         fixMinimapSize();
 
         BattleState.setScreenSize(width, height);
+        //Logger.add("update stage: " + width + "," + height);
         GlobalEventDispatcher.dispatchEvent( { type: Defines.E_UPDATE_STAGE, width: width, height: height });
     }
 

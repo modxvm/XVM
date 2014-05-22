@@ -6,7 +6,7 @@
   * macros extended: {{hp:XX}} and {{hp-max:XX}} return value normalized to XX for current battle tier
     ex.: {{hp:300}} - will return 300 for HP=700 at tier-5 battle, and for HP=3000 at tier-11 battle.
   * macros extended: value replacement - {{macro?rep}}
-    ex.: "alpha": "{{alive?80:0}}" - set alpha to 80 for alive and 0 for dead
+    ex.: "alpha": "{{alive?80|0}}" - set alpha to 80 for alive and 0 for dead
   * new macros:
       {{frags}} - current frags
       {{alive}} - 'alive' for alive, '' for dead
