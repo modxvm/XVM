@@ -305,6 +305,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
     {
         var idx = parseInt(wrapper._name.split("renderer").join(""));
         var mc:MovieClip = owner.createEmptyMovieClip("extraField_" + team + "_" + idx, owner.getNextHighestDepth());
+        mc._visible = false;
         mc.idx = idx;
         if (cfg != null)
             mc.cfg = cfg;
