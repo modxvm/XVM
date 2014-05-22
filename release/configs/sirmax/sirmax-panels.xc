@@ -47,6 +47,7 @@
     "formatRight": "<font color='{{c:xwn8}}'>{{vehicle}}</font>"
   },
   "none": {
+    //"layout": "horizontal", 
     "extraFields": ${"sirmax-panels-none.xc":"."}
   },
   "alpha": 50,

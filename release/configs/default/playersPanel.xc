@@ -70,6 +70,9 @@
     // Options for the "none" panels - empty panels.
     // Режим ушей "none" - пустые уши.
     "none": {
+      // Layout ("vertical" or "horizontal")
+      // Размещение ("vertical" - вертикально, или "horizontal" - горизонтально)
+      "layout": "vertical", 
       // Extra fields.
       // Дополнительные поля.
       "extraFields": {
@@ -112,7 +115,7 @@
           //      for right panel default value is "right"
           //
           // fields available for both TextField format only:
-          //   "valign" - horizontal alignment ("top", "center", "bottom")
+          //   "valign" - vertical alignment ("top", "center", "bottom")
           //      default value is "top"
           //   "borderColor" - if set, draw border with specified color (macros allowed)
           //   "bgColor" - if set, draw background with specified color (macros allowed)

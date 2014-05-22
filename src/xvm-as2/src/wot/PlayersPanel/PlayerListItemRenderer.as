@@ -55,6 +55,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     private var spotStatusView:SpotStatusView = null;
     private var extraFields:Object;
+    private var extraFieldsLayout:String;
 
     public function PlayerListItemRendererCtor()
     {
@@ -285,6 +286,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     private function createFieldsForNoneMode():MovieClip
     {
+        extraFieldsLayout = Config.config.playersPanel.none.layout;
         var cfg:Object = Config.config.playersPanel.none.extraFields[isLeftPanel ? "leftPanel" : "rightPanel"];
         if (cfg.formats == null || cfg.formats.length <= 0)
             return null;
@@ -605,8 +607,17 @@ class wot.PlayersPanel.PlayerListItemRenderer
         if (cfg != null)
         {
             // none mode
-            mc._x = cfg.x;
-            mc._y = cfg.y + mc.idx * cfg.height;
+            switch (extraFieldsLayout)
+            {
+                case "horizontal":
+                    mc._x = cfg.x + mc.idx * cfg.width;
+                    mc._y = cfg.y;
+                    break;
+                default:
+                    mc._x = cfg.x;
+                    mc._y = cfg.y + mc.idx * cfg.height;
+                    break;
+            }
         }
         else
         {
@@ -628,8 +639,17 @@ class wot.PlayersPanel.PlayerListItemRenderer
         if (cfg != null)
         {
             // none mode
-            mc._x = BattleState.screenSize.width - cfg.x;
-            mc._y = cfg.y + mc.idx * cfg.height;
+            switch (extraFieldsLayout)
+            {
+                case "horizontal":
+                    mc._x = BattleState.screenSize.width - cfg.x - mc.idx * cfg.width;
+                    mc._y = cfg.y;
+                    break;
+                default:
+                    mc._x = BattleState.screenSize.width - cfg.x;
+                    mc._y = cfg.y + mc.idx * cfg.height;
+                    break;
+            }
         }
         else
         {

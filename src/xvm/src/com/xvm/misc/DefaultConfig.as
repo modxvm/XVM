@@ -305,6 +305,7 @@ package com.xvm.misc
               }
             };
             c.none = {
+              layout: "vertical", 
               extraFields: {
                 leftPanel: {
                   x: 0,
