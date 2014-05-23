@@ -35,7 +35,16 @@
       { "x": 0, "w": 3, "y": 2, "h": 24, "bgColor": ${"def.c1"}, "alpha": "{{alive?80|0}}" },
       { "x": 14, "align": "center", "valign": "center", "format": "<font size='17' color='#E5E4E4'><b>{{frags|0}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
       { "x": 31, "valign": "center", "format": "<font size='15' color='#E5E4E4'><b>{{name%.20s~..}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
-      { "x": 261, "valign": "center", "format": "<font size='15' color='#E5E4E4'><b>{{hp%4s|----}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
+      { "x": 275, "align": "center", "valign": "center", "format": "<font size='15' color='#E5E4E4'><b>{{hp|----}}</b></font>", "alpha": "{{alive?100|50}}", "shadow":
+        {
+          "distance": 5,
+          "angle": 90,
+          "color": "0xFF00FF",
+          "alpha": 1,
+          "blur": 10,
+          "strength": 20
+        }
+      },
       { "x": 300, "src": "xvm://res/contour/HARDicons/{{vehiclename}}.png" },
       {}
     ]
@@ -61,9 +70,9 @@
       { "x": 25, "y": 2, "h": 24, "w": "{{hp-max:230}}", "bgColor": 0, "alpha": "{{alive?50|0}}" },
       { "x": 25, "y": 2, "h": 24, "w": "{{hp:230}}", "bgColor": ${"def.c2"}, "alpha": 60 },
       { "x": 0, "w": 3, "y": 2, "h": 24, "bgColor": ${"def.c2"}, "alpha": "{{alive?80|0}}" },
-      { "x": 14, "align": "center","valign": "center", "format": "<font size='17' color='#E5E4E4'><b>{{frags|0}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
+      { "x": 14, "align": "center", "valign": "center", "format": "<font size='17' color='#E5E4E4'><b>{{frags|0}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
       { "x": 31, "valign": "center", "format": "<font size='15' color='#E5E4E4'><b>{{name%.20s~..}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
-      { "x": 261, "valign": "center", "format": "<font size='15' color='#E5E4E4'><b>{{hp%4s|----}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
+      { "x": 275, "align": "center", "valign": "center", "format": "<font size='15' color='#E5E4E4'><b>{{hp|----}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
       { "x": 300, "src": "xvm://res/contour/HARDicons/{{vehiclename}}.png" },
       {}
     ]
