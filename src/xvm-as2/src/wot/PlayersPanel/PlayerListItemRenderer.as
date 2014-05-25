@@ -382,7 +382,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     private function onExtraMovieClipLoadInit(img:UILoaderAlt)
     {
-        //Logger.add("onExtraMovieClipLoadInit");
+        //Logger.add("onExtraMovieClipLoadInit: " + m_name + " " + img.source);
 
         var data = img["data"];
         if (isNaN(data.w) && data.format.w == null)
@@ -391,6 +391,11 @@ class wot.PlayersPanel.PlayerListItemRenderer
             data.h = img.content._height;
         //Logger.addObject(data, 2, m_name);
 
+        img.visible = false;
+        img._x = 0;
+        img._y = 0;
+        img.width = 0;
+        img.height = 0;
         alignField(img);
 
         setTimeout(function() { img.visible = true; }, 1);
@@ -546,15 +551,29 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
         if (format.src != null)
         {
-            var src:String = Macros.Format(m_name, format.src, obj);
-            src = "../../" + Utils.fixImgTag(src).split("img://").join("");
-            //Logger.add(m_name + " " + src);
-            f.source = src;
-            //needAlign = false;
+            if (f.timerId)
+                clearTimeout(f.timerId);
+            var $this = this;
+            //f.timerId = setTimeout(function() {
+                $this.setImgSource(f, format, obj);
+            //}, 10);
         }
 
         if (needAlign)
             alignField(f);
+    }
+
+    private function setImgSource(f, format, obj)
+    {
+        delete f.timerId;
+        var src:String = Macros.Format(m_name, format.src, obj);
+        src = "../../" + Utils.fixImgTag(src).split("img://").join("");
+        if (f.source != src)
+        {
+            //Logger.add(m_name + " " + f.source + " => " + src);
+            f._visible = false;
+            f.source = src;
+        }
     }
 
     private function alignField(field)
@@ -582,12 +601,12 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
         //Logger.add("x:" + x + " y:" + y + " w:" + w + " h:" + h + " align:" + data.align + " textWidth:" + tf.textWidth);
 
-        if (field._x != x)
-            field._x = x;
-        if (field._y != data.y)
-            field._y = data.y;
         if (tf != null)
         {
+            if (tf._x != x)
+                tf._x = x;
+            if (tf._y != y)
+                tf._y = y;
             if (tf._width != w)
                 tf._width = w;
             if (tf._height != h)
@@ -595,11 +614,16 @@ class wot.PlayersPanel.PlayerListItemRenderer
         }
         else
         {
+            if (img._x != x)
+                img._x = x;
+            if (img._y != y)
+                img._y = y;
             if (img.width != w || img.height != h)
             {
                 //Logger.addObject(img["data"]);
                 //Logger.add(img.width + "->" + w + " " + x + " " + y + " " + m_name + " " + wrapper._name);
                 img.setSize(w, h);
+                //img.validateNow();
             }
         }
     }

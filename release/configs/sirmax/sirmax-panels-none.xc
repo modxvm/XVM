@@ -35,16 +35,7 @@
       { "x": 0, "w": 3, "y": 2, "h": 24, "bgColor": ${"def.c1"}, "alpha": "{{alive?80|0}}" },
       { "x": 14, "align": "center", "valign": "center", "format": "<font size='17' color='#E5E4E4'><b>{{frags|0}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
       { "x": 31, "valign": "center", "format": "<font size='15' color='#E5E4E4'><b>{{name%.20s~..}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
-      { "x": 275, "align": "center", "valign": "center", "format": "<font size='15' color='#E5E4E4'><b>{{hp|----}}</b></font>", "alpha": "{{alive?100|50}}", "shadow":
-        {
-          "distance": 5,
-          "angle": 90,
-          "color": "0xFF00FF",
-          "alpha": 1,
-          "blur": 10,
-          "strength": 20
-        }
-      },
+      { "x": 275, "align": "center", "valign": "center", "format": "<font size='15' color='#E5E4E4'><b>{{hp|----}}</b></font>", "alpha": "{{alive?100|50}}", "shadow": {} },
       { "x": 300, "src": "xvm://res/contour/HARDicons/{{vehiclename}}.png" },
       {}
     ]
@@ -65,6 +56,10 @@
       //{ "x": 450, "y": 5,  "w": 5, "h": 2, "bgColor": "0xFFFFFF" },
       //{ "x": 450, "y": 10, "w": 5, "h": 3, "bgColor": "0xFFFFFF" },
       //{ "x": 450, "y": 15, "w": 5, "h": 4, "bgColor": "0xFFFFFF" },
+
+      //{ "x": 400, "y": 5, "h": 14, "w": 100, "src": "xvmres://icons2/hp_bg.png" },
+      //{ "x": 400, "y": 10, "h": 14, "w": "{{hp-ratio:100}}", "src": "xvmres://icons2/enemy/hp_{{alive|dead}}.png" },
+      //{ "x": 500, "y": 5, "format": "{{hp-ratio}}" },
 
       { "src": "xvm://configs/sirmax/img/panel-bg-r-{{alive|dead}}.png" },
       { "x": 25, "y": 2, "h": 24, "w": "{{hp-max:230}}", "bgColor": 0, "alpha": "{{alive?50|0}}" },
